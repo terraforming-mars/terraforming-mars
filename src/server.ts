@@ -7,12 +7,9 @@ require('console-stamp')(
 import * as https from 'https';
 import * as http from 'http';
 import * as fs from 'fs';
-import * as path from 'path';
 import * as querystring from 'querystring';
-import * as zlib from 'zlib';
 
 import {BoardName} from './boards/BoardName';
-import {BufferCache} from './server/BufferCache';
 import {Game, GameId} from './Game';
 import {GameLoader} from './database/GameLoader';
 import {GameLogs} from './routes/GameLogs';
@@ -21,26 +18,24 @@ import {Player} from './Player';
 import {Database} from './database/Database';
 import {Server} from './server/ServerModel';
 import {Cloner} from './database/Cloner';
+import {IHandler} from './server/handlers/IHandler';
+import {ServeAsset} from './server/handlers/ServeAsset';
 
 const serverId = process.env.SERVER_ID || generateRandomId();
 const route = new Route();
 const gameLogs = new GameLogs();
-const assetCacheMaxAge = process.env.ASSET_CACHE_MAX_AGE || 0;
-const fileCache = new BufferCache();
 
-const isProduction = process.env.NODE_ENV === 'production';
-
-// prime the cache and compress styles.css
-const styles = fs.readFileSync('build/styles.css');
-fileCache.set('styles.css', styles);
-zlib.gzip(styles, function(err, compressed) {
-  if (err !== null) {
-    console.warn('error compressing styles', err);
-    return;
-  }
-  fileCache.set('styles.css.gz', compressed);
-});
-
+type Method = 'GET' | 'POST' | 'THING';
+const assetHandler = ServeAsset.newInstance();
+const handlers: Map<[Method, string], IHandler> = new Map(
+  [
+    [['GET', '/games-overview'], undefined],
+    [['GET', '/styles.css'], assetHandler],
+    [['GET', '/favicon.ico'], assetHandler],
+    [['GET', '/main.js'], assetHandler],
+    [['GET', '/main.js.map'], assetHandler],
+  ]
+);
 function processRequest(req: http.IncomingMessage, res: http.ServerResponse): void {
   if (req.url === undefined) {
     route.notFound(req, res);
@@ -79,14 +74,6 @@ function processRequest(req: http.IncomingMessage, res: http.ServerResponse): vo
 
     case '/api/waitingfor':
       apiGetWaitingFor(req, res);
-      break;
-
-    case '/styles.css':
-    case '/styles.css':
-    case '/favicon.ico':
-    case '/main.js':
-    case '/main.js.map':
-      serveAsset(req, res);
       break;
 
     case '/api/games':
@@ -128,7 +115,8 @@ function processRequest(req: http.IncomingMessage, res: http.ServerResponse): vo
     break;
 
   case 'POST':
-    if (req.url.indexOf('/player/input?id=') === 0) {
+    switch (url.pathname) {
+    case '/player/input':
       const playerId: string = req.url.substring(
         '/player/input?id='.length,
       );
@@ -150,7 +138,8 @@ function processRequest(req: http.IncomingMessage, res: http.ServerResponse): vo
         processInput(req, res, player, game);
       });
       break;
-    } else {
+
+    default:
       route.notFound(req, res);
     }
     break;
@@ -512,103 +501,6 @@ function isServerIdValid(req: http.IncomingMessage): boolean {
 function serveApp(req: http.IncomingMessage, res: http.ServerResponse): void {
   req.url = '/assets/index.html';
   serveAsset(req, res);
-}
-
-function serveAsset(req: http.IncomingMessage, res: http.ServerResponse): void {
-  if (req.url === undefined) {
-    route.internalServerError(req, res, new Error('no url on request'));
-    return;
-  }
-
-  let contentEncoding: string | undefined;
-  let contentType: string | undefined;
-  let file: string | undefined;
-
-  if (req.url === '/styles.css') {
-    const compressed = fileCache.get('styles.css.gz');
-    contentType = 'text/css';
-    file = 'styles.css';
-    if (compressed !== undefined && supportsEncoding(req, 'gzip')) {
-      contentEncoding = 'gzip';
-      file += '.gz';
-    }
-  } else if (req.url === '/assets/index.html') {
-    contentType = 'text/html; charset=utf-8';
-    file = req.url.substring(1);
-  } else if (req.url === '/favicon.ico') {
-    contentType = 'image/x-icon';
-    file = 'assets/favicon.ico';
-  } else if (req.url === '/main.js' || req.url === '/main.js.map') {
-    contentType = 'text/javascript';
-    file = `build${req.url}`;
-    if (supportsEncoding(req, 'br')) {
-      contentEncoding = 'br';
-      file += '.br';
-    } else if (supportsEncoding(req, 'gzip')) {
-      contentEncoding = 'gzip';
-      file += '.gz';
-    }
-  } else if (req.url === '/assets/Prototype.ttf' || req.url === '/assets/futureforces.ttf') {
-    contentType = 'font/ttf';
-    file = req.url.substring(1);
-  } else if (req.url.endsWith('.png') || req.url.endsWith('.jpg')) {
-    const assetsRoot = path.resolve('./assets');
-    const reqFile = path.resolve(path.normalize(req.url).slice(1));
-
-    // Disallow to go outside of assets directory
-    if (reqFile.startsWith(assetsRoot) === false) {
-      return route.notFound(req, res);
-    }
-    contentType = req.url.endsWith('.jpg') ? 'image/jpeg' : 'image/png';
-    file = reqFile;
-  } else {
-    return route.notFound(req, res);
-  }
-  // asset caching
-  const buffer = fileCache.get(file);
-  if (buffer !== undefined) {
-    if (req.headers['if-none-match'] === buffer.hash) {
-      route.notModified(res);
-      return;
-    }
-    res.setHeader('Cache-Control', 'must-revalidate');
-    res.setHeader('ETag', buffer.hash);
-  } else if (isProduction === false && req.url !== '/main.js' && req.url !== '/main.js.map') {
-    res.setHeader('Cache-Control', 'max-age=' + assetCacheMaxAge);
-  }
-
-  if (contentType !== undefined) {
-    res.setHeader('Content-Type', contentType);
-  }
-
-  if (contentEncoding !== undefined) {
-    res.setHeader('Content-Encoding', contentEncoding);
-  }
-
-  if (buffer !== undefined) {
-    res.setHeader('Content-Length', buffer.buffer.length);
-    res.end(buffer.buffer);
-    return;
-  }
-
-  const finalFile = file;
-
-  fs.readFile(finalFile, function(err, data) {
-    if (err) {
-      return route.internalServerError(req, res, err);
-    }
-    res.setHeader('Content-Length', data.length);
-    res.end(data);
-    // only production caches resources
-    if (isProduction === true) {
-      fileCache.set(finalFile, data);
-    }
-  });
-}
-
-function supportsEncoding(req: http.IncomingMessage, encoding: 'gzip' | 'br'): boolean {
-  return req.headers['accept-encoding'] !== undefined &&
-         req.headers['accept-encoding'].includes(encoding);
 }
 
 console.log('Starting server on port ' + (process.env.PORT || 8080));

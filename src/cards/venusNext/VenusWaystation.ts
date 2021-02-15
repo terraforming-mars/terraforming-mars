@@ -29,6 +29,7 @@ export class VenusWaystation extends Card {
   public play() {
     return undefined;
   }
+  public cardDiscount = {tag: Tags.VENUS, amount: 2};
   public getCardDiscount(_player: Player, card: IProjectCard) {
     return card.tags.filter((tag) => tag === Tags.VENUS).length * 2;
   }

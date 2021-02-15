@@ -24,6 +24,7 @@ export class EarthCatapult extends Card implements IProjectCard {
       },
     });
   }
+  public cardDiscount = {amount: 2};
 
   public getCardDiscount() {
     return 2;

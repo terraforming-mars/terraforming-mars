@@ -32,6 +32,9 @@ export class Thorgate extends Card implements CorporationCard {
       },
     });
   }
+
+  public cardDiscount = {tag: Tags.ENERGY, amount: 3};
+
   public getCardDiscount(_player: Player, card: IProjectCard) {
     if (card.tags.includes(Tags.ENERGY)) {
       return 3;

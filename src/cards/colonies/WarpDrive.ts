@@ -29,6 +29,8 @@ export class WarpDrive extends Card implements IProjectCard {
     });
   }
 
+  public cardDiscount = {tag: Tags.SPACE, amount: 4};
+
   public getCardDiscount(_player: Player, card: IProjectCard) {
     if (card.tags.includes(Tags.SPACE)) {
       return 4;

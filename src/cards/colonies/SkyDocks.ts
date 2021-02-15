@@ -39,6 +39,8 @@ export class SkyDocks extends Card implements IProjectCard {
     return undefined;
   }
 
+  public cardDiscount = {amount: 1};
+
   public getCardDiscount() {
     return 1;
   }

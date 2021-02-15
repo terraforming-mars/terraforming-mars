@@ -30,6 +30,9 @@ export class Teractor extends Card implements CorporationCard {
       },
     });
   }
+
+  public cardDiscount = {tag: Tags.EARTH, amount: 3};
+
   public getCardDiscount(_player: Player, card: IProjectCard) {
     return card.tags.filter((tag) => tag === Tags.EARTH).length * 3;
   }

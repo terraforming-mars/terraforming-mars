@@ -39,6 +39,9 @@ export class ResearchOutpost extends Card implements IProjectCard {
   public canPlay(player: Player): boolean {
     return this.getAvailableSpaces(player).length > 0;
   }
+
+  public cardDiscount = {amount: 1};
+
   public getCardDiscount() {
     return 1;
   }

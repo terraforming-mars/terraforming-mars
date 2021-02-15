@@ -6,6 +6,7 @@ import {CardName} from '../../CardName';
 import {CardRenderer} from '../render/CardRenderer';
 import {CardRequirements} from '../CardRequirements';
 
+export const ALL = 'all';
 export class AntiGravityTechnology extends Card implements IProjectCard {
   constructor() {
     super({
@@ -25,6 +26,8 @@ export class AntiGravityTechnology extends Card implements IProjectCard {
       },
     });
   }
+  public cardDiscount = {amount: 2};
+
   public getCardDiscount() {
     return 2;
   }

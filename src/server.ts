@@ -81,14 +81,6 @@ function processRequest(req: http.IncomingMessage, res: http.ServerResponse): vo
       apiGetWaitingFor(req, res);
       break;
 
-    // TODO(kberg): move to serveAsset.
-    case '/assets/translations.json':
-      res.setHeader('Content-Type', 'application/json');
-      res.setHeader('Cache-Control', 'max-age=' + assetCacheMaxAge);
-      res.write(fs.readFileSync('build/genfiles/translations.json'));
-      res.end();
-      break;
-
     case '/styles.css':
     case '/styles.css':
     case '/favicon.ico':

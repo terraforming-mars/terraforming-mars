@@ -16,6 +16,7 @@ import {Color} from './Color';
 import {AresSetup} from './ares/AresSetup';
 import {TileType} from './TileType';
 import {Random} from './Random';
+import {TurmoilTerraformer} from './milestones/TurmoilTerraformer';
 
 export class GameSetup {
   public static chooseMilestonesAndAwards = function(gameOptions: GameOptions): IDrawnMilestonesAndAwards {
@@ -60,6 +61,12 @@ export class GameSetup {
     if (gameOptions.aresExtension) {
       AresSetup.setupMilestonesAwards(drawnMilestonesAndAwards);
     };
+    if (gameOptions.turmoilExtension) {
+      const idx = drawnMilestonesAndAwards.milestones.findIndex((m) => m.name === 'Terraformer');
+      if (idx !== -1) {
+        drawnMilestonesAndAwards.milestones[idx] = new TurmoilTerraformer();
+      }
+    }
     return drawnMilestonesAndAwards;
   };
 

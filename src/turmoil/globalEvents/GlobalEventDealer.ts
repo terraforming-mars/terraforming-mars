@@ -180,28 +180,14 @@ export class GlobalEventDealer implements ISerializable<SerializedGlobalEventDea
     };
   }
 
-  public static deserialize(d: GlobalEventDealer | SerializedGlobalEventDealer): GlobalEventDealer {
-    function instanceOfGlobalEventDealer(object: any): object is GlobalEventDealer {
-      return 'discardedGlobalEvents' in object;
-    }
-    if (instanceOfGlobalEventDealer(d)) {
-      const deck = d.globalEventsDeck.map((element: IGlobalEvent) => {
-        return getGlobalEventByName(element.name)!;
-      });
+  public static deserialize(d: SerializedGlobalEventDealer): GlobalEventDealer {
+    const deck = d.deck.map((element: GlobalEventName) => {
+      return getGlobalEventByName(element)!;
+    });
 
-      const discardPile = d.discardedGlobalEvents.map((element: IGlobalEvent) => {
-        return getGlobalEventByName(element.name)!;
-      });
-      return new GlobalEventDealer(deck, discardPile);
-    } else {
-      const deck = d.deck.map((element: GlobalEventName) => {
-        return getGlobalEventByName(element)!;
-      });
-
-      const discardPile = d.discarded.map((element: GlobalEventName) => {
-        return getGlobalEventByName(element)!;
-      });
-      return new GlobalEventDealer(deck, discardPile);
-    }
+    const discardPile = d.discarded.map((element: GlobalEventName) => {
+      return getGlobalEventByName(element)!;
+    });
+    return new GlobalEventDealer(deck, discardPile);
   }
 }

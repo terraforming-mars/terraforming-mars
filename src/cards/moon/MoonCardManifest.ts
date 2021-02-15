@@ -72,7 +72,7 @@ import {MooncrateBlockFactory} from './MooncrateBlockFactory';
 import {MoonMineStandardProject} from './MoonMineStandardProject';
 import {MoonRoadStandardProject} from './MoonRoadStandardProject';
 import {MoonTether} from './MoonTether';
-// import {NanotechIndustries} from './NanotechIndustries';
+import {NanotechIndustries} from './NanotechIndustries';
 import {NewColonyPlanningInitiaitives} from './NewColonyPlanningInitiaitives';
 import {OffWorldCityLiving} from './OffWorldCityLiving';
 import {PreliminaryDarkside} from './PreliminaryDarkside';
@@ -198,7 +198,7 @@ export const MOON_CARD_MANIFEST = new CardManifest({
     {cardName: CardName.MOON_TETHER, Factory: MoonTether},
   ],
   corporationCards: [
-    // {cardName: CardName.NANOTECH_INDUSTRIES, Factory: NanotechIndustries},
+    {cardName: CardName.NANOTECH_INDUSTRIES, Factory: NanotechIndustries},
     // {cardName: CardName.TEMPEST_CONSULTANCY, Factory: TempestConsultancy, compatibility: GameModule.Turmoil},
     // {cardName: CardName.THE_DARKSIDE_OF_THE_MOON_SYNDICATE, Factory: TheDarksideofTheMoonSyndicate},
     // {cardName: CardName.LUNA_HYPERLOOP_CORPORATION, Factory: LunaHyperloopCorporation},

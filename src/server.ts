@@ -42,63 +42,93 @@ zlib.gzip(styles, function(err, compressed) {
 });
 
 function processRequest(req: http.IncomingMessage, res: http.ServerResponse): void {
-  if (req.url !== undefined) {
-    if (req.method === 'GET') {
-      if (req.url.replace(/\?.*$/, '').startsWith('/games-overview')) {
-        if (!isServerIdValid(req)) {
-          route.notAuthorized(req, res);
-          return;
-        } else {
-          serveApp(req, res);
-        }
-      } else if (
-        req.url === '/' ||
-        req.url.startsWith('/new-game') ||
-        req.url.startsWith('/solo') ||
-        req.url.startsWith('/game?id=') ||
-        req.url.startsWith('/player?id=') ||
-        req.url.startsWith('/the-end?id=') ||
-        req.url.startsWith('/load') ||
-        req.url.startsWith('/debug-ui') ||
-        req.url.startsWith('/help-iconology')
-      ) {
+  if (req.url === undefined) {
+    route.notFound(req, res);
+    return;
+  }
+
+  const url = new URL(req.url, `http://${req.headers.host}`);
+
+  switch (req.method) {
+  case 'GET':
+    switch (url.pathname) {
+    case '/games-overview':
+      if (!isServerIdValid(req)) {
+        route.notAuthorized(req, res);
+        return;
+      } else {
         serveApp(req, res);
-      } else if (req.url.startsWith('/api/player?id=')) {
-        apiGetPlayer(req, res);
-      } else if (req.url.startsWith('/api/waitingfor?id=')) {
-        apiGetWaitingFor(req, res);
-      } else if (req.url.startsWith('/assets/translations.json')) {
-        res.setHeader('Content-Type', 'application/json');
-        res.setHeader('Cache-Control', 'max-age=' + assetCacheMaxAge);
-        res.write(fs.readFileSync('build/genfiles/translations.json'));
-        res.end();
-      } else if (
-        req.url.startsWith('/assets/') ||
-        req.url === '/styles.css' ||
-        req.url === '/favicon.ico' ||
-        req.url === '/main.js' ||
-        req.url === '/main.js.map'
-      ) {
+      }
+      break;
+
+    case '/':
+    case '/new-game':
+    case '/solo':
+    case '/game':
+    case '/player':
+    case '/the-end':
+    case '/load':
+    case '/debug-ui':
+    case '/help-iconology':
+      serveApp(req, res);
+      break;
+
+    case '/api/player':
+      apiGetPlayer(req, res);
+      break;
+
+    case '/api/waitingfor':
+      apiGetWaitingFor(req, res);
+      break;
+
+    case '/styles.css':
+    case '/styles.css':
+    case '/favicon.ico':
+    case '/main.js':
+    case '/main.js.map':
+      serveAsset(req, res);
+      break;
+
+    case '/api/games':
+      apiGetGames(req, res);
+      break;
+
+    case '/api/game':
+      apiGetGame(req, res);
+      break;
+
+    case '/api/clonablegames':
+      getClonableGames(res);
+      break;
+
+    default:
+      if (url.pathname.startsWith('/assets/')) {
         serveAsset(req, res);
-      } else if (req.url.startsWith('/api/games')) {
-        apiGetGames(req, res);
-      } else if (req.url.indexOf('/api/game?id=') === 0) {
-        apiGetGame(req, res);
       } else if (gameLogs.canHandle(req.url)) {
         gameLogs.handle(req, res);
-      } else if (req.url.startsWith('/api/clonablegames')) {
-        getClonableGames(res);
       } else {
         route.notFound(req, res);
       }
-    } else if (req.method === 'PUT' && req.url.indexOf('/game') === 0) {
+    }
+    break;
+
+  case 'PUT':
+    switch (url.pathname) {
+    case '/game':
       createGame(req, res);
-    } else if (req.method === 'PUT' && req.url.indexOf('/load') === 0) {
+      break;
+
+    case '/load':
       loadGame(req, res);
-    } else if (
-      req.method === 'POST' &&
-      req.url.indexOf('/player/input?id=') === 0
-    ) {
+      break;
+
+    default:
+      route.notFound(req, res);
+    }
+    break;
+
+  case 'POST':
+    if (req.url.indexOf('/player/input?id=') === 0) {
       const playerId: string = req.url.substring(
         '/player/input?id='.length,
       );
@@ -119,10 +149,13 @@ function processRequest(req: http.IncomingMessage, res: http.ServerResponse): vo
         }
         processInput(req, res, player, game);
       });
+      break;
     } else {
       route.notFound(req, res);
     }
-  } else {
+    break;
+
+  default:
     route.notFound(req, res);
   }
 }

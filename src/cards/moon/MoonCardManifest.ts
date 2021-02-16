@@ -12,7 +12,7 @@ import {CopernicusSolarArrays} from './CopernicusSolarArrays';
 import {CopernicusTower} from './CopernicusTower';
 import {CoreMine} from './CoreMine';
 import {CosmicRadiation} from './CosmicRadiation';
-// import {CrescentResearchAssociation} from './CrescentResearchAssociation';
+import {CrescentResearchAssociation} from './CrescentResearchAssociation';
 import {DarksideIncubationPlant} from './DarksideIncubationPlant';
 import {DarksideMeteorBombardment} from './DarksideMeteorBombardment';
 import {DarksideMiningSyndicate} from './DarksideMiningSyndicate';
@@ -203,7 +203,7 @@ export const MOON_CARD_MANIFEST = new CardManifest({
     {cardName: CardName.NANOTECH_INDUSTRIES, Factory: NanotechIndustries},
     // {cardName: CardName.THE_DARKSIDE_OF_THE_MOON_SYNDICATE, Factory: TheDarksideofTheMoonSyndicate},
     // {cardName: CardName.LUNA_HYPERLOOP_CORPORATION, Factory: LunaHyperloopCorporation},
-    // {cardName: CardName.CRESCENT_RESEARCH_ASSOCIATION, Factory: CrescentResearchAssociation},
+    {cardName: CardName.CRESCENT_RESEARCH_ASSOCIATION, Factory: CrescentResearchAssociation},
     // {cardName: CardName.LUNA_FIRST_INCORPORATED, Factory: LunaFirstIncorporated},
     // {cardName: CardName.THE_GRAND_LUNA_CAPITAL_GROUP, Factory: TheGrandLunaCapitalGroup},
     {cardName: CardName.INTRAGEN_SANCTUARY_HEADQUARTERS, Factory: IntragenSanctuaryHeadquarters},

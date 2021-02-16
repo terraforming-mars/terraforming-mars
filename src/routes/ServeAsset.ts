@@ -2,29 +2,36 @@ import * as http from 'http';
 import * as path from 'path';
 import * as fs from 'fs';
 import * as zlib from 'zlib';
-import {IContext, IHandler} from './IHandler';
-import {BufferCache} from '../BufferCache';
+import {IContext} from './IHandler';
+import {BufferCache} from '../server/BufferCache';
+import {Handler} from './Handler';
 
-export class ServeAsset implements IHandler {
+export class ServeAsset extends Handler {
   private readonly cache = new BufferCache();
 
-  private constructor(public assetCacheMaxAge = process.env.ASSET_CACHE_MAX_AGE || 0,
-    public isProduction = process.env.NODE_ENV === 'production') {
+  private constructor(private assetCacheMaxAge: number, private isProduction: boolean) {
+    super();
   }
 
-  public static newInstance() {
+  public static newInstance(): ServeAsset {
+    const handler = new ServeAsset(
+      +(process.env.ASSET_CACHE_MAX_AGE || 0), // +(string | number) coverts the string to a number.
+      process.env.NODE_ENV === 'production');
+
     // prime the cache and compress styles.css
     const styles = fs.readFileSync('build/styles.css');
-    this.cache.set('styles.css', styles);
+    handler.cache.set('styles.css', styles);
     zlib.gzip(styles, (err, compressed) => {
       if (err !== null) {
         console.warn('error compressing styles', err);
-        return;
+      } else {
+        handler.cache.set('styles.css.gz', compressed);
       }
-      this.cache.set('styles.css.gz', compressed);
     });
+    return handler;
   }
-  public processRequest(req: http.IncomingMessage, res: http.ServerResponse, ctx: IContext): void {
+
+  public get(req: http.IncomingMessage, res: http.ServerResponse, ctx: IContext): void {
     if (req.url === undefined) {
       ctx.route.internalServerError(req, res, new Error('no url on request'));
       return;

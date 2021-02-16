@@ -6,9 +6,6 @@ import {GameLoader} from '../database/GameLoader';
 import {Route} from './Route';
 
 export class GameLogs extends Route {
-  public canHandle(url: string): boolean {
-    return url.startsWith('/api/game/logs?');
-  }
   public handle(req: http.IncomingMessage, res: http.ServerResponse): void {
     if (req.url === undefined) {
       console.warn('url not defined');

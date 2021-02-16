@@ -92,7 +92,7 @@ import {StagingStationBehemoth} from './StagingStationBehemoth';
 import {SteelMarketMonopolists} from './SteelMarketMonopolists';
 import {SubterraneanHabitats} from './SubterraneanHabitats';
 import {TempestConsultancy} from './TempestConsultancy';
-// import {TheArchaicFoundationInstitute} from './TheArchaicFoundationInstitute';
+import {TheArchaicFoundationInstitute} from './TheArchaicFoundationInstitute';
 import {TheDarksideofTheMoonSyndicate} from './TheDarksideofTheMoonSyndicate';
 import {TheWomb} from './TheWomb';
 import {ThoriumRush} from './ThoriumRush';
@@ -208,7 +208,7 @@ export const MOON_CARD_MANIFEST = new CardManifest({
     // {cardName: CardName.THE_GRAND_LUNA_CAPITAL_GROUP, Factory: TheGrandLunaCapitalGroup},
     {cardName: CardName.INTRAGEN_SANCTUARY_HEADQUARTERS, Factory: IntragenSanctuaryHeadquarters},
     // {cardName: CardName.LUNA_TRADE_FEDERATION, Factory: LunaTradeFederation},
-    // {cardName: CardName.THE_ARCHAIC_FOUNDATION_INSTITUTE, Factory: TheArchaicFoundationInstitute},
+    {cardName: CardName.THE_ARCHAIC_FOUNDATION_INSTITUTE, Factory: TheArchaicFoundationInstitute},
   ],
   standardProjects: [
     {cardName: CardName.MOON_COLONY_STANDARD_PROJECT, Factory: MoonColonyStandardProject},

@@ -13,7 +13,7 @@ Join us on Discord [here](https://discord.gg/VR8TbrD).
 
 We're not going to teach you the mechanics of the game, there's far too much good material out there that's easy to find.
 
-However, check out this excellent4 [YouTube playlist](: https://youtube.com/playlist?list=PLCGE78n9vCqhhmRe9YCrRh2GLNMPB_3j1) video tutorials custom for this app. (Thanks [@leggup](https://www.twitch.tv/leggup)!)
+However, check out this excellent [YouTube playlist](https://youtube.com/playlist?list=PLCGE78n9vCqhhmRe9YCrRh2GLNMPB_3j1) video tutorials custom for this app. (Thanks [@leggup](https://www.twitch.tv/leggup)!)
 
 ## Demo
 

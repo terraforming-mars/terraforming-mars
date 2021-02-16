@@ -101,6 +101,16 @@ export class MoonExpansion {
       space.player = player;
       // TODO(kberg): indicate that it's a moon space.
       LogHelper.logTilePlacement(player, space, tile.tileType);
+
+      // Ideally, this should be part of game.addTile, but since it isn't it's convenient enough to
+      // hard-code onTilePlaced here. I wouldn't be surprised if this introduces a problem, but for now
+      // it's not a problem until it is.
+      if (player.corporationCard !== undefined && player.corporationCard.name === CardName.THE_DARKSIDE_OF_THE_MOON_SYNDICATE) {
+        if (player.corporationCard.onTilePlaced === undefined) {
+          throw new Error('The Darkside Of The Moon Syndicate card has no onTilePlaced.');
+        }
+        player.corporationCard.onTilePlaced(player, player, space);
+      }
     });
   }
 

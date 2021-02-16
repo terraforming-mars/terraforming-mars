@@ -12,7 +12,7 @@ import {CopernicusSolarArrays} from './CopernicusSolarArrays';
 import {CopernicusTower} from './CopernicusTower';
 import {CoreMine} from './CoreMine';
 import {CosmicRadiation} from './CosmicRadiation';
-// import {CrescentResearchAssociation} from './CrescentResearchAssociation';
+import {CrescentResearchAssociation} from './CrescentResearchAssociation';
 import {DarksideIncubationPlant} from './DarksideIncubationPlant';
 import {DarksideMeteorBombardment} from './DarksideMeteorBombardment';
 import {DarksideMiningSyndicate} from './DarksideMiningSyndicate';
@@ -38,7 +38,8 @@ import {IronExtractionCenter} from './IronExtractionCenter';
 import {LTFHeadquarters} from './LTFHeadquarters';
 import {LTFPrivileges} from './LTFPrivileges';
 import {LunaConference} from './LunaConference';
-// import {LunaHyperloopCorporation} from './LunaHyperloopCorporation';
+import {LunaFirstIncorporated} from './LunaFirstIncorporated';
+import {LunaHyperloopCorporation} from './LunaHyperloopCorporation';
 import {LunaMiningHub} from './LunaMiningHub';
 import {LunaPoliticalInstitute} from './LunaPoliticalInstitute';
 import {LunaProjectOffice} from './LunaProjectOffice';
@@ -92,7 +93,7 @@ import {StagingStationBehemoth} from './StagingStationBehemoth';
 import {SteelMarketMonopolists} from './SteelMarketMonopolists';
 import {SubterraneanHabitats} from './SubterraneanHabitats';
 import {TempestConsultancy} from './TempestConsultancy';
-// import {TheArchaicFoundationInstitute} from './TheArchaicFoundationInstitute';
+import {TheArchaicFoundationInstitute} from './TheArchaicFoundationInstitute';
 import {TheDarksideofTheMoonSyndicate} from './TheDarksideofTheMoonSyndicate';
 import {TheGrandLunaCapitalGroup} from './TheGrandLunaCapitalGroup';
 import {TheWomb} from './TheWomb';
@@ -200,16 +201,16 @@ export const MOON_CARD_MANIFEST = new CardManifest({
     {cardName: CardName.MOON_TETHER, Factory: MoonTether},
   ],
   corporationCards: [
-    {cardName: CardName.TEMPEST_CONSULTANCY, Factory: TempestConsultancy, compatibility: GameModule.Turmoil},
     {cardName: CardName.NANOTECH_INDUSTRIES, Factory: NanotechIndustries},
+    {cardName: CardName.TEMPEST_CONSULTANCY, Factory: TempestConsultancy, compatibility: GameModule.Turmoil},
     {cardName: CardName.THE_DARKSIDE_OF_THE_MOON_SYNDICATE, Factory: TheDarksideofTheMoonSyndicate},
-    // {cardName: CardName.LUNA_HYPERLOOP_CORPORATION, Factory: LunaHyperloopCorporation},
-    // {cardName: CardName.CRESCENT_RESEARCH_ASSOCIATION, Factory: CrescentResearchAssociation},
-    // {cardName: CardName.LUNA_FIRST_INCORPORATED, Factory: LunaFirstIncorporated},
+    {cardName: CardName.LUNA_HYPERLOOP_CORPORATION, Factory: LunaHyperloopCorporation},
+    {cardName: CardName.CRESCENT_RESEARCH_ASSOCIATION, Factory: CrescentResearchAssociation},
+    {cardName: CardName.LUNA_FIRST_INCORPORATED, Factory: LunaFirstIncorporated},
     {cardName: CardName.THE_GRAND_LUNA_CAPITAL_GROUP, Factory: TheGrandLunaCapitalGroup},
     {cardName: CardName.INTRAGEN_SANCTUARY_HEADQUARTERS, Factory: IntragenSanctuaryHeadquarters},
     // {cardName: CardName.LUNA_TRADE_FEDERATION, Factory: LunaTradeFederation},
-    // {cardName: CardName.THE_ARCHAIC_FOUNDATION_INSTITUTE, Factory: TheArchaicFoundationInstitute},
+    {cardName: CardName.THE_ARCHAIC_FOUNDATION_INSTITUTE, Factory: TheArchaicFoundationInstitute},
   ],
   standardProjects: [
     {cardName: CardName.MOON_COLONY_STANDARD_PROJECT, Factory: MoonColonyStandardProject},

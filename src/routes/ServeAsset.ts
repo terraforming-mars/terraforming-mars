@@ -41,7 +41,8 @@ export class ServeAsset extends Handler {
     let contentType: string | undefined;
     let file: string | undefined;
 
-    if (req.url === '/styles.css') {
+    switch (req.url) {
+    case '/styles.css':
       const compressed = this.cache.get('styles.css.gz');
       contentType = 'text/css';
       file = 'styles.css';
@@ -49,13 +50,20 @@ export class ServeAsset extends Handler {
         contentEncoding = 'gzip';
         file += '.gz';
       }
-    } else if (req.url === '/assets/index.html') {
+      break;
+
+    case '/assets/index.html':
       contentType = 'text/html; charset=utf-8';
       file = req.url.substring(1);
-    } else if (req.url === '/favicon.ico') {
+      break;
+
+    case '/favicon.ico':
       contentType = 'image/x-icon';
       file = 'assets/favicon.ico';
-    } else if (req.url === '/main.js' || req.url === '/main.js.map') {
+      break;
+
+    case '/main.js':
+    case '/main.js.map':
       contentType = 'text/javascript';
       file = `build${req.url}`;
       if (this.supportsEncoding(req, 'br')) {
@@ -65,22 +73,31 @@ export class ServeAsset extends Handler {
         contentEncoding = 'gzip';
         file += '.gz';
       }
-    } else if (req.url === '/assets/Prototype.ttf' || req.url === '/assets/futureforces.ttf') {
+      break;
+
+
+    case '/assets/Prototype.ttf':
+    case '/assets/futureforces.ttf':
       contentType = 'font/ttf';
       file = req.url.substring(1);
-    } else if (req.url.endsWith('.png') || req.url.endsWith('.jpg')) {
-      const assetsRoot = path.resolve('./assets');
-      const reqFile = path.resolve(path.normalize(req.url).slice(1));
+      break;
 
-      // Disallow to go outside of assets directory
-      if (reqFile.startsWith(assetsRoot) === false) {
+    default:
+      if (req.url.endsWith('.png') || req.url.endsWith('.jpg')) {
+        const assetsRoot = path.resolve('./assets');
+        const reqFile = path.resolve(path.normalize(req.url).slice(1));
+
+        // Disallow to go outside of assets directory
+        if (reqFile.startsWith(assetsRoot) === false) {
+          return ctx.route.notFound(req, res);
+        }
+        contentType = req.url.endsWith('.jpg') ? 'image/jpeg' : 'image/png';
+        file = reqFile;
+      } else {
         return ctx.route.notFound(req, res);
       }
-      contentType = req.url.endsWith('.jpg') ? 'image/jpeg' : 'image/png';
-      file = reqFile;
-    } else {
-      return ctx.route.notFound(req, res);
     }
+
     // asset caching
     const buffer = this.cache.get(file);
     if (buffer !== undefined) {

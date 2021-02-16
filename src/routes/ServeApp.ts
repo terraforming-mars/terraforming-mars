@@ -1,19 +1,16 @@
 import * as http from 'http';
 import {Handler} from './Handler';
 import {IContext} from './IHandler';
+import {ServeAsset} from './ServeAsset';
 
 export class ServeApp extends Handler {
+  public static readonly INSTANCE = new ServeApp();
   private constructor() {
     super();
   }
 
-  public static newInstance(): ServeApp {
-    const handler = new ServeApp();
-    return handler;
-  }
-
-  public get(req: http.IncomingMessage, res: http.ServerResponse, _ctx: IContext): void {
+  public get(req: http.IncomingMessage, res: http.ServerResponse, ctx: IContext): void {
     req.url = '/assets/index.html';
-    serveAsset(req, res);
+    ServeAsset.INSTANCE.get(req, res, ctx);
   }
 }

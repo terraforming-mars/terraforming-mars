@@ -5,13 +5,9 @@ import {Handler} from './Handler';
 import {IContext} from './IHandler';
 
 export class PlayerInput extends Handler {
+  public static readonly INSTANCE = new PlayerInput();
   private constructor() {
     super();
-  }
-
-  public static newInstance(): PlayerInput {
-    const handler = new PlayerInput();
-    return handler;
   }
 
   public post(req: http.IncomingMessage, res: http.ServerResponse, ctx: IContext): void {

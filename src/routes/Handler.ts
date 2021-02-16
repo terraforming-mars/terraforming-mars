@@ -5,9 +5,15 @@ import {Player} from '../Player';
 import {Server} from '../server/ServerModel';
 import {IHandler, IContext} from './IHandler';
 
+export namespace Handler {
+  export interface Options {
+    serverId?: boolean;
+  }
+}
+
 export abstract class Handler implements IHandler {
   private validateServerId: boolean = false;
-  constructor(options?: {serverId?: boolean}) {
+  constructor(options?: Handler.Options) {
     this.validateServerId = options?.serverId === true;
   }
 

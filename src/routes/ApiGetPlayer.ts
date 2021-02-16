@@ -6,13 +6,10 @@ import {Handler} from './Handler';
 import {IContext} from './IHandler';
 
 export class ApiGetPlayer extends Handler {
+  public static readonly INSTANCE = new ApiGetPlayer();
+
   private constructor() {
     super();
-  }
-
-  public static newInstance(): ApiGetPlayer {
-    const handler = new ApiGetPlayer();
-    return handler;
   }
 
   public get(req: http.IncomingMessage, res: http.ServerResponse, ctx: IContext): void {

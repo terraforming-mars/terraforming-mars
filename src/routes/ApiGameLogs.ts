@@ -4,13 +4,9 @@ import {IContext} from './IHandler';
 import {GameLogs} from './GameLogs';
 
 export class ApiGameLogs extends Handler {
+  public static readonly INSTANCE = new ApiGameLogs();
   private constructor(private gameLogs = new GameLogs()) {
     super();
-  }
-
-  public static newInstance(): ApiGameLogs {
-    const handler = new ApiGameLogs();
-    return handler;
   }
 
   public get(req: http.IncomingMessage, res: http.ServerResponse, _ctx: IContext): void {

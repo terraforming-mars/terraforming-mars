@@ -28,34 +28,31 @@ import {Database} from './database/Database';
 const serverId = process.env.SERVER_ID || generateRandomId();
 const route = new Route();
 
-const serveAsset: IHandler = ServeAsset.newInstance();
-const gamesOverview = GamesOverview.newInstance();
-const serveApp = ServeApp.newInstance();
 const handlers: Map<string, IHandler> = new Map(
   [
-    ['/games-overview', gamesOverview],
-    ['/', serveApp],
-    ['/new-game', serveApp],
-    ['/solo', serveApp],
-    ['/game', serveApp],
-    ['/player', serveApp],
-    ['/the-end', serveApp],
-    ['/load', serveApp],
-    ['/debug-ui', serveApp],
-    ['/help-iconology', serveApp],
-    ['/styles.css', serveAsset],
-    ['/favicon.ico', serveAsset],
-    ['/main.js', serveAsset],
-    ['/main.js.map', serveAsset],
-    ['/api/player', ApiGetPlayer.newInstance()],
-    ['/api/waitingfor', ApiGetWaitingFor.newInstance()],
-    ['/api/games', ApiGetGames.newInstance()],
-    ['/api/game', ApiGetGame.newInstance()],
-    ['/api/clonablegames', ApiCloneableGames.newInstance()],
-    ['/api/game/logs', ApiGameLogs.newInstance()],
-    ['/game/', CreateGame.newInstance()],
-    ['/load/', LoadGame.newInstance()],
-    ['/player/input', PlayerInput.newInstance()],
+    ['/games-overview', GamesOverview.INSTANCE],
+    ['/', ServeApp.INSTANCE],
+    ['/new-game', ServeApp.INSTANCE],
+    ['/solo', ServeApp.INSTANCE],
+    ['/game', ServeApp.INSTANCE],
+    ['/player', ServeApp.INSTANCE],
+    ['/the-end', ServeApp.INSTANCE],
+    ['/load', ServeApp.INSTANCE],
+    ['/debug-ui', ServeApp.INSTANCE],
+    ['/help-iconology', ServeApp.INSTANCE],
+    ['/styles.css', ServeAsset.INSTANCE],
+    ['/favicon.ico', ServeAsset.INSTANCE],
+    ['/main.js', ServeAsset.INSTANCE],
+    ['/main.js.map', ServeAsset.INSTANCE],
+    ['/api/player', ApiGetPlayer.INSTANCE],
+    ['/api/waitingfor', ApiGetWaitingFor.INSTANCE],
+    ['/api/games', ApiGetGames.INSTANCE],
+    ['/api/game', ApiGetGame.INSTANCE],
+    ['/api/clonablegames', ApiCloneableGames.INSTANCE],
+    ['/api/game/logs', ApiGameLogs.INSTANCE],
+    ['/game/', CreateGame.INSTANCE],
+    ['/load/', LoadGame.INSTANCE],
+    ['/player/input', PlayerInput.INSTANCE],
   ],
 );
 
@@ -70,7 +67,7 @@ function processRequest(req: http.IncomingMessage, res: http.ServerResponse): vo
 
   // Shortcut for all assets.
   if (url.pathname.startsWith('/assets/')) {
-    serveAsset.processRequest(req, res, ctx);
+    ServeApp.INSTANCE.processRequest(req, res, ctx);
   }
 
   const handler: IHandler | undefined = handlers.get(url.pathname);

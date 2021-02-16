@@ -7,13 +7,15 @@ import {BufferCache} from '../server/BufferCache';
 import {Handler} from './Handler';
 
 export class ServeAsset extends Handler {
+  public static readonly INSTANCE = ServeAsset.newInstance();
+
   private readonly cache = new BufferCache();
 
   private constructor(private assetCacheMaxAge: number, private isProduction: boolean) {
     super();
   }
 
-  public static newInstance(): ServeAsset {
+  private static newInstance(): ServeAsset {
     const handler = new ServeAsset(
       +(process.env.ASSET_CACHE_MAX_AGE || 0), // +(string | number) coverts the string to a number.
       process.env.NODE_ENV === 'production');

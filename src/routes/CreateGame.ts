@@ -15,13 +15,9 @@ function generateRandomId(): GameId {
 }
 
 export class CreateGame extends Handler {
+  public static readonly INSTANCE = new CreateGame();
   private constructor() {
     super();
-  }
-
-  public static newInstance(): CreateGame {
-    const handler = new CreateGame();
-    return handler;
   }
 
   public put(req: http.IncomingMessage, res: http.ServerResponse, ctx: IContext): void {

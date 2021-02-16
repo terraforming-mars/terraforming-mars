@@ -7,14 +7,11 @@ import {IContext} from './IHandler';
 import {Server} from '../server/ServerModel';
 
 export class ApiGetWaitingFor extends Handler {
+  public static readonly INSTANCE = new ApiGetWaitingFor();
   private constructor() {
     super();
   }
 
-  public static newInstance(): ApiGetWaitingFor {
-    const handler = new ApiGetWaitingFor();
-    return handler;
-  }
 
   public get(req: http.IncomingMessage, res: http.ServerResponse, ctx: IContext): void {
     const qs: string = req.url!.substring('/api/waitingfor?'.length);

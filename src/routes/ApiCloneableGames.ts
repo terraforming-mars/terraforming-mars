@@ -4,13 +4,9 @@ import {IContext} from './IHandler';
 import {Database} from '../database/Database';
 
 export class ApiCloneableGames extends Handler {
+  public static readonly INSTANCE = new ApiCloneableGames();
   private constructor() {
     super();
-  }
-
-  public static newInstance(): ApiCloneableGames {
-    const handler = new ApiCloneableGames();
-    return handler;
   }
 
   public get(_req: http.IncomingMessage, res: http.ServerResponse, _ctx: IContext): void {

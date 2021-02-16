@@ -6,13 +6,9 @@ import {IContext} from './IHandler';
 import {Server} from '../server/ServerModel';
 
 export class ApiGetGame extends Handler {
+  public static readonly INSTANCE = new ApiGetGame();
   private constructor() {
     super();
-  }
-
-  public static newInstance(): ApiGetGame {
-    const handler = new ApiGetGame();
-    return handler;
   }
 
   public get(req: http.IncomingMessage, res: http.ServerResponse, ctx: IContext): void {

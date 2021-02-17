@@ -48,9 +48,9 @@ export class CulturalMetropolis extends Card implements IProjectCard {
     const title = 'Select where to send two delegates';
 
     if (player.game.turmoil!.getDelegates(player.id) > 1) {
-      player.game.defer(new SendDelegateToArea(player, title, 2, undefined, undefined, false));
+      player.game.defer(new SendDelegateToArea(player, title, {count: 2, source: 'reserve'}));
     } else if (player.game.turmoil!.getDelegates(player.id) === 1 && player.game.turmoil!.lobby.has(player.id)) {
-      player.game.defer(new SendDelegateToArea(player, title, 2, undefined, undefined, true));
+      player.game.defer(new SendDelegateToArea(player, title, {count: 2, source: 'lobby'}));
     }
     return undefined;
   }

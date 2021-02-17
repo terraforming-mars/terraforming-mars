@@ -187,13 +187,14 @@ export class SQLite implements IDatabase {
   }
 
   saveGame(game: Game): void {
+    const gameJSON = game.toJSON();
     // Insert
     this.db.run(
-      'INSERT INTO games(game_id, save_id, game, players) VALUES(?, ?, ?, ?)',
-      [game.id, game.lastSaveId, game.toJSON(), game.getPlayers().length],
+      'INSERT INTO games (game_id, save_id, game, players) VALUES (?, ?, ?, ?) ON CONFLICT (game_id, save_id) DO UPDATE SET game = ?',
+      [game.id, game.lastSaveId, gameJSON, game.getPlayers().length, gameJSON],
       (err: Error | null) => {
         if (err) {
-          // Should be a duplicate, does not matter
+          console.error(err.message);
           return;
         }
       },

@@ -312,7 +312,7 @@ export class Player implements ISerializable<SerializedPlayer> {
     const modifier = amount > 0 ? 'increased' : 'decreased';
 
     if (game !== undefined && fromPlayer !== undefined && amount < 0) {
-      if (fromPlayer !== this && this.removingPlayers.indexOf(fromPlayer.id) === -1) {
+      if (fromPlayer !== this && this.removingPlayers.includes(fromPlayer.id) === false) {
         this.removingPlayers.push(fromPlayer.id);
       }
 
@@ -355,7 +355,7 @@ export class Player implements ISerializable<SerializedPlayer> {
     const modifier = amount > 0 ? 'increased' : 'decreased';
 
     if (game !== undefined && fromPlayer !== undefined && amount < 0) {
-      if (fromPlayer !== this && this.removingPlayers.indexOf(fromPlayer.id) === -1) {
+      if (fromPlayer !== this && this.removingPlayers.includes(fromPlayer.id) === false) {
         this.removingPlayers.push(fromPlayer.id);
       }
       game.log('${0}\'s ${1} production ${2} by ${3} by ${4}', (b) =>
@@ -454,6 +454,8 @@ export class Player implements ISerializable<SerializedPlayer> {
       this.victoryPointsBreakdown.setVictoryPoints('victoryPoints', this.colonyVictoryPoints, 'Colony VP');
     }
 
+    MoonExpansion.calculateVictoryPoints(this);
+
     this.victoryPointsBreakdown.updateTotal();
     return this.victoryPointsBreakdown;
   }
@@ -484,6 +486,8 @@ export class Player implements ISerializable<SerializedPlayer> {
         game.getSpaceCount(TileType.OCEAN_CITY, this);
   }
 
+  // Return the number of cards in the player's hand without tags.
+  // Wildcard tags are ignored in this computation. (why?)
   public getNoTagsCount() {
     let noTagsCount: number = 0;
 
@@ -566,7 +570,7 @@ export class Player implements ISerializable<SerializedPlayer> {
         }
       }
       // Lawsuit hook
-      if (removingPlayer !== undefined && removingPlayer !== this && this.removingPlayers.indexOf(removingPlayer.id) === -1) {
+      if (removingPlayer !== undefined && removingPlayer !== this && this.removingPlayers.includes(removingPlayer.id) === false) {
         this.removingPlayers.push(removingPlayer.id);
       }
     }
@@ -648,7 +652,7 @@ export class Player implements ISerializable<SerializedPlayer> {
     ].filter((tag) => tag.count > 0);
   }
 
-  public getTagCount(tag: Tags, includeEventsTags:boolean = false, includeWildcardTags:boolean = true): number {
+  public getTagCount(tag: Tags, includeEventsTags:boolean = false, includeTagSubstitutions:boolean = true): number {
     let tagCount = 0;
 
     this.playedCards.forEach((card: IProjectCard) => {
@@ -672,16 +676,21 @@ export class Player implements ISerializable<SerializedPlayer> {
       tagCount += 1;
     }
 
-    if (tag === Tags.WILDCARD) {
-      return tagCount;
-    }
-    if (includeWildcardTags) {
-      return tagCount + this.getTagCount(Tags.WILDCARD);
+    if (includeTagSubstitutions) {
+      // Earth Embassy hook
+      if (tag === Tags.EARTH && this.playedCards.some((c) => c.name === CardName.EARTH_EMBASSY)) {
+        tagCount += this.getTagCount(Tags.MOON, includeEventsTags, false);
+      }
+      if (tag !== Tags.WILDCARD) {
+        tagCount += this.getTagCount(Tags.WILDCARD, includeEventsTags, false);
+      }
     } else {
-      return tagCount;
     }
+    return tagCount;
   }
 
+  // Return the total number of tags assocaited with these types.
+  // Wild tags are included.
   public getMultipleTagCount(tags: Array<Tags>): number {
     let tagCount = 0;
     tags.forEach((tag) => {
@@ -690,6 +699,7 @@ export class Player implements ISerializable<SerializedPlayer> {
     return tagCount + this.getTagCount(Tags.WILDCARD);
   }
 
+  // TODO(kberg): Describe this function.
   public getDistinctTagCount(countWild: boolean, extraTag?: Tags): number {
     const allTags: Tags[] = [];
     let wildcardCount: number = 0;
@@ -722,6 +732,7 @@ export class Player implements ISerializable<SerializedPlayer> {
     }
   }
 
+  // Return true if this player has all the tags in `tags` showing.
   public checkMultipleTagPresence(tags: Array<Tags>): boolean {
     let distinctCount = 0;
     tags.forEach((tag) => {
@@ -778,7 +789,9 @@ export class Player implements ISerializable<SerializedPlayer> {
     }
   }
 
-  private runInput(input: ReadonlyArray<ReadonlyArray<string>>, pi: PlayerInput): void {
+  // This is only public for a test. It's not great.
+  // TODO(kberg): Fix taht.
+  public runInput(input: ReadonlyArray<ReadonlyArray<string>>, pi: PlayerInput): void {
     if (pi instanceof AndOptions) {
       this.checkInputLength(input, pi.options.length);
       for (let i = 0; i < input.length; i++) {
@@ -832,6 +845,9 @@ export class Player implements ISerializable<SerializedPlayer> {
       const mappedCards: Array<ICard> = [];
       for (const cardName of input[0]) {
         mappedCards.push(this.getCard(pi.cards, cardName));
+        if (pi.enabled?.[pi.cards.findIndex((card) => card.name === cardName)] === false) {
+          throw new Error('Selected unavailable card');
+        }
       }
       this.runInputCb(pi.cb(mappedCards));
     } else if (pi instanceof SelectAmount) {
@@ -1028,6 +1044,7 @@ export class Player implements ISerializable<SerializedPlayer> {
         this.game.playerIsFinishedWithDraftingPhase(initialDraft, this, cards);
         return undefined;
       }, cardsToKeep, cardsToKeep,
+      false, undefined, false,
       ), () => { },
     );
   }
@@ -1634,26 +1651,24 @@ export class Player implements ISerializable<SerializedPlayer> {
       (canUseMicrobes ? this.getMicrobesCanSpend() * 2 : 0);
   }
 
-  // Public for testing
-  public getPlayableStandardProjects(): Array<StandardProjectCard> {
-    // TODO(kberg): Filter playability based on the project's reserve units.
+  private getStandardProjects(): Array<StandardProjectCard> {
     return new CardLoader(this.game.gameOptions)
       .getStandardProjects()
-      .filter((card) => card.name !== CardName.SELL_PATENTS_STANDARD_PROJECT && card.canAct(this))
+      .filter((card) => card.name !== CardName.SELL_PATENTS_STANDARD_PROJECT)
       .sort((a, b) => a.cost - b.cost);
   }
 
-  private getPlayableStandardProjectOption(): PlayerInput | undefined {
-    const standardProjects: Array<StandardProjectCard> = this.getPlayableStandardProjects();
-    if (standardProjects.length === 0) {
-      return undefined;
-    }
+  // Public for testing. TODO: make protected using the TestPlayer class.
+  public getStandardProjectOption(): SelectCard<StandardProjectCard> {
+    const standardProjects: Array<StandardProjectCard> = this.getStandardProjects();
 
     return new SelectCard(
       'Standard projects',
       'Confirm',
       standardProjects,
       (card) => card[0].action(this),
+      1, 1, false,
+      standardProjects.map((card) => card.canAct(this)),
     );
   }
 
@@ -1811,15 +1826,15 @@ export class Player implements ISerializable<SerializedPlayer> {
       }
     }
 
-    // If you can pay to send some in the Ara
-    if (this.game.gameOptions.turmoilExtension) {
+    // If you can pay to add a delegate to a party.
+    if (this.game.gameOptions.turmoilExtension && this.game.turmoil !== undefined) {
       let sendDelegate;
       if (this.game.turmoil?.lobby.has(this.id)) {
         sendDelegate = new SendDelegateToArea(this, 'Send a delegate in an area (from lobby)');
-      } else if (this.isCorporation(CardName.INCITE) && this.canAfford(3) && this.game.turmoil!.getDelegates(this.id) > 0) {
-        sendDelegate = new SendDelegateToArea(this, 'Send a delegate in an area (3 MC)', 1, undefined, 3, false);
+      } else if (this.isCorporation(CardName.INCITE) && this.canAfford(3) && this.game.turmoil.getDelegates(this.id) > 0) {
+        sendDelegate = new SendDelegateToArea(this, 'Send a delegate in an area (3 MC)', {cost: 3});
       } else if (this.canAfford(5) && this.game.turmoil!.getDelegates(this.id) > 0) {
-        sendDelegate = new SendDelegateToArea(this, 'Send a delegate in an area (5 MC)', 1, undefined, 5, false);
+        sendDelegate = new SendDelegateToArea(this, 'Send a delegate in an area (5 MC)', {cost: 5});
       }
       if (sendDelegate) {
         const input = sendDelegate.execute();
@@ -1848,14 +1863,9 @@ export class Player implements ISerializable<SerializedPlayer> {
       action.options.push(remainingAwards);
     }
 
-    const standardProjectsOption = this.getPlayableStandardProjectOption();
-    if (standardProjectsOption !== undefined) {
-      action.options.push(standardProjectsOption);
-    }
+    action.options.push(this.getStandardProjectOption());
 
-    action.options.push(
-      this.passOption(),
-    );
+    action.options.push(this.passOption());
 
     // Sell patents
     const sellPatents = new SellPatentsStandardProject();

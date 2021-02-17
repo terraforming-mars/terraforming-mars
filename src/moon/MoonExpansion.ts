@@ -13,6 +13,7 @@ import {IMoonCard} from '../cards/moon/IMoonCard';
 import {Tags} from '../cards/Tags';
 import {ISpace} from '../boards/ISpace';
 import {MAXIMUM_COLONY_RATE, MAXIMUM_LOGISTICS_RATE, MAXIMUM_MINING_RATE} from '../constants';
+import {Resources} from '../Resources';
 
 // export interface CoOwnedSpace {
 //   spaceId: string;
@@ -100,6 +101,16 @@ export class MoonExpansion {
       space.player = player;
       // TODO(kberg): indicate that it's a moon space.
       LogHelper.logTilePlacement(player, space, tile.tileType);
+
+      // Ideally, this should be part of game.addTile, but since it isn't it's convenient enough to
+      // hard-code onTilePlaced here. I wouldn't be surprised if this introduces a problem, but for now
+      // it's not a problem until it is.
+      if (player.corporationCard !== undefined && player.corporationCard.name === CardName.THE_DARKSIDE_OF_THE_MOON_SYNDICATE) {
+        if (player.corporationCard.onTilePlaced === undefined) {
+          throw new Error('The Darkside Of The Moon Syndicate card has no onTilePlaced.');
+        }
+        player.corporationCard.onTilePlaced(player, player, space);
+      }
     });
   }
 
@@ -142,16 +153,15 @@ export class MoonExpansion {
     });
   }
 
-  private static activateLunaFirst(_sourcePlayer: Player | undefined, _game: Game, _count: number) {
-    // const lunaFirstPlayer = MoonExpansion.moonData(game).lunaFirstPlayer;
-    // // TODO(kberg): Have raiseXRate accept a qty parameter so this doesn't log countless times.
-    // if (lunaFirstPlayer !== undefined) {
-    //   lunaFirstPlayer.megaCredits += 1;
-    //   LogHelper.logGainStandardResource(game, lunaFirstPlayer, Resources.MEGACREDITS, 1);
-    //   if (lunaFirstPlayer.id === sourcePlayer?.id) {
-    //     lunaFirstPlayer.addProduction(Resources.MEGACREDITS, 1, game);
-    //   }
-    // }
+  private static activateLunaFirst(sourcePlayer: Player | undefined, game: Game, count: number) {
+    const lunaFirstPlayer = MoonExpansion.moonData(game).lunaFirstPlayer;
+    if (lunaFirstPlayer !== undefined) {
+      lunaFirstPlayer.megaCredits += count;
+      LogHelper.logGainStandardResource(lunaFirstPlayer, Resources.MEGACREDITS, count);
+      if (lunaFirstPlayer.id === sourcePlayer?.id) {
+        lunaFirstPlayer.addProduction(Resources.MEGACREDITS, count, game);
+      }
+    }
   }
 
   /*
@@ -201,7 +211,7 @@ export class MoonExpansion {
     let steel = reserveUnits.steel || 0;
     let titanium = reserveUnits.titanium || 0;
 
-    const tilesBuilt: Array<TileType> = card.hasOwnProperty('tilesBuilt') ? ((card as unknown as IMoonCard).tilesBuilt || []) : [];
+    const tilesBuilt: Array<TileType> = (card as unknown as IMoonCard).tilesBuilt || [];
 
     if (tilesBuilt.includes(TileType.MOON_COLONY) && player.cardIsInEffect(CardName.SUBTERRANEAN_HABITATS)) {
       titanium -= 1;
@@ -218,5 +228,32 @@ export class MoonExpansion {
     steel = Math.max(steel, 0);
     titanium = Math.max(titanium, 0);
     return Units.of({steel, titanium});
+  }
+
+  public static calculateVictoryPoints(player: Player): void {
+    MoonExpansion.ifMoon(player.game, (moonData) => {
+      // Each road tile on the map awards 1VP to the player owning it.
+      // Each mine and colony (habitat) tile on the map awards 1VP per road tile touching them.
+      const moon = moonData.moon;
+      const mySpaces = moon.spaces.filter((space) => space.player?.id === player.id);
+      mySpaces.forEach((space) => {
+        if (space.tile !== undefined) {
+          switch (space.tile.tileType) {
+          case TileType.MOON_ROAD:
+            player.victoryPointsBreakdown.setVictoryPoints('moon road', 1);
+            break;
+          case TileType.MOON_MINE:
+          case TileType.MOON_COLONY:
+            const points = moon.getAdjacentSpaces(space).filter((adj) => adj.tile?.tileType === TileType.MOON_ROAD).length;
+            if (space.tile.tileType === TileType.MOON_MINE) {
+              player.victoryPointsBreakdown.setVictoryPoints('moon mine', points);
+            } else {
+              player.victoryPointsBreakdown.setVictoryPoints('moon colony', points);
+            }
+            break;
+          }
+        }
+      });
+    });
   }
 }

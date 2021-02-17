@@ -119,6 +119,10 @@ export namespace DrawCards {
       cards,
       cb,
       max,
-      min);
+      min,
+      false,
+      undefined,
+      false,
+    );
   }
 }

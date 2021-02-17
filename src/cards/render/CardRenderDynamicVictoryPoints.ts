@@ -71,6 +71,9 @@ export class CardRenderDynamicVictoryPoints {
   public static data(points: number, target: number): CardRenderDynamicVictoryPoints {
     return new CardRenderDynamicVictoryPoints(new CardRenderItem(CardRenderItemType.DATA_RESOURCE), points, target);
   }
+  public static moon(points: number, target: number): CardRenderDynamicVictoryPoints {
+    return new CardRenderDynamicVictoryPoints(new CardRenderItem(CardRenderItemType.MOON), points, target);
+  }
   public static questionmark(): CardRenderDynamicVictoryPoints {
     return new CardRenderDynamicVictoryPoints(undefined, 0, 0);
   }

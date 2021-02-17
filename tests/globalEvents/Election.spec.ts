@@ -4,7 +4,7 @@ import {Game} from '../../src/Game';
 import {Election} from '../../src/turmoil/globalEvents/Election';
 import {Kelvinists} from '../../src/turmoil/parties/Kelvinists';
 import {Turmoil} from '../../src/turmoil/Turmoil';
-import {TestPlayers} from '../TestingUtils';
+import {TestPlayers} from '../TestPlayers';
 
 describe('Election', function() {
   it('resolve play', function() {

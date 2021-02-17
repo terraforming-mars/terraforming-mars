@@ -44,13 +44,13 @@ export class LunaMiningHub extends MoonCard {
   }
 
   public play(player: Player) {
-    Units.deductUnits(this.reserveUnits, player);
-    Units.adjustProduction(this.productionBox, player);
-    player.game.defer(new PlaceSpecialMoonTile(player, {
-      tileType: TileType.LUNA_MINING_HUB,
-      card: this.name,
-    },
-    'Select a space for Luna Mining Hub.'));
+    super.play(player);
+    player.game.defer(new PlaceSpecialMoonTile(
+      player, {
+        tileType: TileType.LUNA_MINING_HUB,
+        card: this.name,
+      },
+      'Select a space for Luna Mining Hub.'));
     MoonExpansion.raiseMiningRate(player);
     return undefined;
   }

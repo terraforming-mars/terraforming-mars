@@ -1,4 +1,4 @@
-import {TestPlayers} from '../TestingUtils';
+import {TestPlayers} from '../TestPlayers';
 import {expect} from 'chai';
 import {Luna} from '../../src/colonies/Luna';
 import {Pluto} from '../../src/colonies/Pluto';

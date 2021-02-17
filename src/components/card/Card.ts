@@ -30,7 +30,7 @@ export const Card = Vue.component('card', {
   },
   props: {
     'card': {
-      type: Object as () => ICard,
+      type: Object as () => CardModel,
       required: true,
     },
     'actionUsed': {
@@ -96,6 +96,11 @@ export const Card = Vue.component('card', {
       const type = this.getCardType();
       return cost === undefined || type === CardType.PRELUDE || type === CardType.CORPORATION ? undefined : cost;
     },
+    getReducedCost: function(): number | undefined {
+      const cost = this.card.calculatedCost;
+      const type = this.getCardType();
+      return cost === undefined || type === CardType.PRELUDE || type === CardType.CORPORATION ? undefined : cost;
+    },
     getCardType: function(): CardType | undefined {
       return this.getCard()?.cardType;
     },
@@ -106,8 +111,8 @@ export const Card = Vue.component('card', {
       const classes = ['card-container', 'filterDiv', 'hover-hide-res'];
       classes.push('card-' + card.name.toLowerCase().replace(/ /g, '-'));
 
-      if (this.actionUsed) {
-        classes.push('cards-action-was-used');
+      if (this.actionUsed || card.isDisabled) {
+        classes.push('card-unavailable');
       }
       if (this.isStandardProject()) {
         classes.push('card-standard-project');
@@ -134,7 +139,7 @@ export const Card = Vue.component('card', {
         <div :class="getCardClasses(card)">
             <div class="card-content-wrapper" v-i18n>
                 <div v-if="!isStandardProject()" class="card-cost-and-tags">
-                    <CardCost :amount="getCost()" />
+                    <CardCost :amount="getCost()" :newCost="getReducedCost()" />
                     <CardTags :tags="getTags()" />
                 </div>
                 <CardTitle :title="card.name" :type="getCardType()"/>

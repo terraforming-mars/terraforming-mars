@@ -15,7 +15,10 @@ import {RandomMAOptionType} from '../RandomMAOptionType';
 import {GameId} from '../Game';
 import {AgendaStyle} from '../turmoil/PoliticalAgendas';
 
+import * as constants from '../constants';
+
 export interface CreateGameModel {
+    constants: typeof constants;
     allOfficialExpansions: boolean;
     firstIndex: number;
     playersCount: number;
@@ -58,6 +61,7 @@ export interface CreateGameModel {
     clonedGameData: IGameData | undefined;
     cloneGameData: Array<IGameData>;
     requiresVenusTrackCompletion: boolean;
+    requiresMoonTrackCompletion: boolean;
     seededGame: boolean;
 }
 
@@ -73,6 +77,7 @@ export interface NewPlayerModel {
 export const CreateGameForm = Vue.component('create-game-form', {
   data: function(): CreateGameModel {
     return {
+      constants,
       firstIndex: 1,
       playersCount: 1,
       players: [
@@ -130,6 +135,7 @@ export const CreateGameForm = Vue.component('create-game-form', {
       cloneGameData: [],
       allOfficialExpansions: false,
       requiresVenusTrackCompletion: false,
+      requiresMoonTrackCompletion: false,
     };
   },
   components: {
@@ -302,6 +308,11 @@ export const CreateGameForm = Vue.component('create-game-form', {
         this.requiresVenusTrackCompletion = false;
       }
     },
+    deselectMoonCompletion: function() {
+      if (this.$data.moonExpansion === false) {
+        this.requiresMoonTrackCompletion = false;
+      }
+    },
     getBoardColorClass: function(boardName: string): string {
       if (boardName === BoardName.ORIGINAL) {
         return 'create-game-board-hexagon create-game-tharsis';
@@ -395,6 +406,7 @@ export const CreateGameForm = Vue.component('create-game-form', {
       const beginnerOption = component.beginnerOption;
       const randomFirstPlayer = component.randomFirstPlayer;
       const requiresVenusTrackCompletion = component.requiresVenusTrackCompletion;
+      const requiresMoonTrackCompletion = component.requiresMoonTrackCompletion;
       let clonedGamedId: undefined | GameId = undefined;
 
       if (customColoniesList.length > 0) {
@@ -458,6 +470,7 @@ export const CreateGameForm = Vue.component('create-game-form', {
         beginnerOption,
         randomFirstPlayer,
         requiresVenusTrackCompletion,
+        requiresMoonTrackCompletion,
       }, undefined, 4);
       return dataToSend;
     },
@@ -470,7 +483,7 @@ export const CreateGameForm = Vue.component('create-game-form', {
           window.location.href = '/player?id=' + response.players[0].id;
           return;
         } else {
-          window.history.replaceState(response, 'Teraforming Mars - Game', '/game?id=' + response.id);
+          window.history.replaceState(response, `${constants.APP_NAME} - Game`, '/game?id=' + response.id);
           (this as any).$root.$data.game = response;
           (this as any).$root.$data.screen = 'game-home';
         }
@@ -485,7 +498,10 @@ export const CreateGameForm = Vue.component('create-game-form', {
 
   template: `
         <div id="create-game">
-            <h1><span v-i18n>Terraforming Mars</span> — <span v-i18n>Create New Game</span></h1>
+            <h1><span v-i18n>{{ constants.APP_NAME }}</span> — <span v-i18n>Create New Game</span></h1>
+            <div class="create-game-discord-invite" v-if="playersCount===1" v-i18n>
+                (Looking for people to play with? <a href="https://discord.gg/VR8TbrD" class="tooltip" target="_blank"><u>Join us on Discord</u></a>.)
+            </div>
 
             <div class="create-game-form create-game--block">
 
@@ -587,6 +603,13 @@ export const CreateGameForm = Vue.component('create-game-form', {
                                 <span v-i18n>The Moon</span>&nbsp;<a href="https://github.com/bafolts/terraforming-mars/wiki/The-Moon" class="tooltip" target="_blank">&#9432;</a>
                                 &nbsp;<span style="font-size: smaller;">α: alpha</span>
                             </label>
+
+                            <template v-if="moonExpansion">
+                              <input type="checkbox" v-model="requiresMoonTrackCompletion" id="requiresMoonTrackCompletion-checkbox">
+                              <label for="requiresMoonTrackCompletion-checkbox">
+                                  <span v-i18n>Mandatory Moon Terraforming</span>
+                              </label>
+                            </template>
 
                             <template v-if="turmoil">
                                 <input type="checkbox" name="politicalAgendas" id="politicalAgendas-checkbox" v-on:change="politicalAgendasExtensionToggle()">

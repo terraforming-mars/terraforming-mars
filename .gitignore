@@ -13,6 +13,7 @@ dist/
 .vscode/
 pid
 *.log
+.eslintcache
 
 # Local Packages
 node_modules/

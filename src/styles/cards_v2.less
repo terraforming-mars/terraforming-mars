@@ -1578,7 +1578,7 @@
             margin-left: -10px;
             margin-top: -10px;
             justify-content: space-between;
-            .card-cost {
+            .card-cost, .card-old-cost {
                 float: left;
                 font-family: Prototype;
                 font-size: 26px;
@@ -1590,8 +1590,23 @@
                 background-image: url(./assets/resources/megacredit.png);
                 background-size: 50px;
                 filter: drop-shadow(0px 0px 1px black);
-                font-family: Prototype;
                 color: #000;
+            }
+            .card-cost-transition {
+                position: absolute;
+                background-image: url(./assets/misc/cost-transition-arrow.png);
+                width: 14px;
+                height: 21px;
+                left: 9px;
+                top: 40px;
+                z-index: 2;
+            }
+            .card-old-cost {
+                transform: scale(0.6);
+                filter: grayscale(60%);
+                left: -8px;
+                top: 45px;
+                position: absolute;
             }
             .card-tags {
                 display: flex;

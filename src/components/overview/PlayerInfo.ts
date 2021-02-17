@@ -107,9 +107,9 @@ export const PlayerInfo = Vue.component('player-info', {
           <div class="player-played-cards">
             <div class="player-played-cards-top">
               <div class="played-cards-elements">
-                <div class="played-cards-icon"></div>
-                <div class="played-cards-icon"></div>
-                <div class="played-cards-icon"></div>
+                <div class="played-cards-icon hiding-card-button active"></div>
+                <div class="played-cards-icon hiding-card-button automated"></div>
+                <div class="played-cards-icon hiding-card-button event"></div>
                 <div class="played-cards-count"> 
                   {{ 
                     parseInt(getCardsByType(player.playedCards, [getActiveCardType()]).length.toString()) + 

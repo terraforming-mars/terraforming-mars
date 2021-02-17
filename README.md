@@ -7,12 +7,10 @@ with FryxGames, Asmodee Digital or Steam in any way.**
 
 The board game is great and this repository highly recommends [purchasing it](https://www.amazon.com/Stronghold-Games-6005SG-Terraforming-Board/dp/B01GSYA4K2) for personal use.
 
-## What do you want?
-
-### I want to join the community!
+## ⬤ I want to join the community!
 [Join us over on Discord!](https://discord.gg/VR8TbrD).
 
-### I want to play!
+## ⬤ I want to play!
 There's a demo instance at https://terraforming-mars.herokuapp.com/. It's generally reliable, but read more below.
 
 There's also this excellent 
@@ -22,25 +20,28 @@ NOTE: This demo site is restarted daily. A multiplayer game will remain availabl
 Unfinished solo games are flushed after one day. We continue to make stability and scalability improvements as in step with growth and popularity,
 but to make sure your game remains, we highly recommended to host your own web server.
 
-### I want to learn how to play
+## ⬤ I want to learn how to play
 There are far too many good tutorials online.
 
-### I want to run a copy of the server locally
+## ⬤ I want to run a copy of the server locally
 Check out our [Local setup wiki page](https://github.com/bafolts/terraforming-mars/wiki/Local-Setup)
 
 Honestly, it's really simple.
 
-### I want to run a copy of the server on Heroku
+## ⬤ I want to run a copy of the server on Heroku
 Check out our [Heroku setup wiki page](https://github.com/bafolts/terraforming-mars/wiki/Heroku-Setup)
 
 (Good choice. A free Heroku account will satisfy most needs, and will take five minutes to set up. This is
 our preferred recommendation for online hosting.)
 
-### I want to run a copy of the server on Docker
+## ⬤ I want to run a copy of the server on Docker
 Check out our [Docker setup wiki page](https://github.com/bafolts/terraforming-mars/wiki/Docker-Setup)
 
-### I want to report a bug or feature request
+## ⬤ I want to report a bug or feature request
 Add it to our [issues tab](https://github.com/bafolts/terraforming-mars/issues/new).
+
+## ⬤ I want to win!
+Me too, pal. Me too.
 
 ## ✨ Contributors ✨
 

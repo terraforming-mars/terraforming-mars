@@ -3,6 +3,7 @@ import {DEFAULT_STEEL_VALUE, DEFAULT_TITANIUM_VALUE} from '../../constants';
 import {Resources} from '../../Resources';
 import {TurmoilModel} from '../../models/TurmoilModel';
 import {PartyName} from '../../turmoil/parties/PartyName';
+import {PreferencesManager} from '../PreferencesManager';
 
 export const PlayerResource = Vue.component('player-resource', {
   props: {
@@ -56,12 +57,25 @@ export const PlayerResource = Vue.component('player-resource', {
     displayPlantsProtectedIcon: function(): boolean {
       return this.type === Resources.PLANTS && this.plantsAreProtected;
     },
+    showResourceValue: function(): boolean {
+      const tutorialModeOn = PreferencesManager.loadValue('tutorial_mode') === '1';
+      switch (this.type) {
+      case Resources.STEEL:
+        return tutorialModeOn || this.steelValue > DEFAULT_STEEL_VALUE;
+      case Resources.TITANIUM:
+        return tutorialModeOn || this.titaniumValue > DEFAULT_TITANIUM_VALUE;
+      case Resources.HEAT:
+        return this.canUseHeatAsMegaCredits;
+      default:
+        return false;
+      }
+    },
     isResourceUpgraded: function(): boolean {
       return (this.type === Resources.STEEL && this.steelValue > DEFAULT_STEEL_VALUE) ||
         (this.type === Resources.TITANIUM && this.titaniumValue > DEFAULT_TITANIUM_VALUE) ||
         (this.type === Resources.HEAT && this.canUseHeatAsMegaCredits);
     },
-    getResourceBonus: function(): string {
+    getResourceValue: function(): string {
       if (this.type === Resources.STEEL) {
         return `${this.steelValue}`;
       } else if (this.type === Resources.TITANIUM) {
@@ -82,7 +96,7 @@ export const PlayerResource = Vue.component('player-resource', {
             <div class="resource_item_prod">
                 <span class="resource_item_prod_count">{{ productionSign() }}{{ production }}</span>
                 <div v-if="displayPlantsProtectedIcon()" class="shield_icon"></div>
-                <div v-if="isResourceUpgraded()" class="resource_icon--metalbonus" v-html="getResourceBonus()"></div>
+                <div v-if="showResourceValue()" class="resource_icon--metalbonus" v-html="getResourceValue()"></div>
             </div>
         </div>
     `,

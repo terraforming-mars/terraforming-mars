@@ -117,6 +117,7 @@ export const PLAYER_INTERFACE_TAGS_ORDER: Array<InterfaceTagsType> = [
   Tags.CITY,
   Tags.MOON,
   'separator',
+  Tags.EVENT,
   SpecialTags.NONE,
   Tags.WILDCARD,
   SpecialTags.INFLUENCE,

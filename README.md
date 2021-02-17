@@ -13,8 +13,7 @@ Join us on Discord [here](https://discord.gg/VR8TbrD).
 
 We're not going to teach you the mechanics of the game, there's far too much good material out there that's easy to find.
 
-However, check out this excellent [YouTube playlist](https://youtube.com/playlist?list=PLCGE78n9vCqhhmRe9YCrRh2GLNMPB_3j1) video tutorials custom for this app. (Thanks [@leggup](https://www.twitch.tv/leggup)!)
-
+However, check out this excellent [YouTube playlist](https://youtube.com/playlist?list=PLCGE78n9vCqhhmRe9YCrRh2GLNMPB_3j1) video tutorials custom for this app.
 ## Demo
 
 You can demo this web app online [here](https://terraforming-mars.herokuapp.com/). If you find a bug or have a feature request, please add it as one in [issues tab](https://github.com/bafolts/terraforming-mars/issues/new). If you plan on playing long-running games, it is recommended that you host the game locally. This demo site is currently not stable and gets restarted daily. A multiplayer game will remain available for 10 days, after which it will be flushed from the database. Unfinished solo games are flushed after one day. As this repository is gaining in popularity, we will attempt to make this demo page stable but cannot guarantee that your game will not be lost. It is highly recommended to host your own web server.

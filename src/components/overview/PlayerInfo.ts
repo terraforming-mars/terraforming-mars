@@ -78,9 +78,6 @@ export const PlayerInfo = Vue.component('player-info', {
     buttonLabel: function(): string {
       return isPinned(this.$root, this.playerIndex) ? 'hide' : 'show';
     },
-    getNrPlayedCards: function(): number {
-      return (this.player.corporationCard !== undefined ? 1 : 0) + this.player.playedCards.length;
-    },
     togglePlayerDetails: function() {
       // for active player => scroll to cards UI
       if (this.player.color === this.activePlayer.color) {
@@ -109,10 +106,17 @@ export const PlayerInfo = Vue.component('player-info', {
           <player-resources :player="player" v-trim-whitespace />
           <div class="player-played-cards">
             <div class="player-played-cards-top">
-              <div class="played-cards-icons">
-                <div class="played-cards-icon hiding-card-button active"> {{ getCardsByType(player.playedCards, [getActiveCardType()]).length.toString() }} </div>
-                <div class="played-cards-icon hiding-card-button automated"> {{ getCardsByType(player.playedCards, [getAutomatedCardType()]).length.toString() }} </div>
-                <div class="played-cards-icon hiding-card-button event"> {{ getCardsByType(player.playedCards, [getEventCardType()]).length.toString() }} </div>
+              <div class="played-cards-elements">
+                <div class="played-cards-icon"></div>
+                <div class="played-cards-icon"></div>
+                <div class="played-cards-icon"></div>
+                <div class="played-cards-count"> 
+                  {{ 
+                    parseInt(getCardsByType(player.playedCards, [getActiveCardType()]).length.toString()) + 
+                    parseInt(getCardsByType(player.playedCards, [getAutomatedCardType()]).length.toString()) + 
+                    parseInt(getCardsByType(player.playedCards, [getEventCardType()]).length.toString())
+                  }}
+                </div>
               </div>
             </div>
             <Button class="played-cards-button" size="tiny" :onClick="togglePlayerDetails" :title="buttonLabel()" />

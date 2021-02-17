@@ -500,7 +500,7 @@ export const CreateGameForm = Vue.component('create-game-form', {
         <div id="create-game">
             <h1><span v-i18n>{{ constants.APP_NAME }}</span> — <span v-i18n>Create New Game</span></h1>
             <div class="create-game-discord-invite" v-if="playersCount===1" v-i18n>
-                (Looking for people to play with? <a href="https://discord.gg/fWXE53K" class="tooltip" target="_blank"><u>Join us on Discord</u></a>.)
+                (Looking for people to play with? <a href="https://discord.gg/VR8TbrD" class="tooltip" target="_blank"><u>Join us on Discord</u></a>.)
             </div>
 
             <div class="create-game-form create-game--block">

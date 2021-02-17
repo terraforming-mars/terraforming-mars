@@ -24,7 +24,7 @@ export class Recruitment implements IProjectCard {
     }
 
     public play(player: Player) {
-      player.game.defer(new SendDelegateToArea(player, 'Select which Neutral delegate to remove', 1, 'NEUTRAL', undefined, false));
+      player.game.defer(new SendDelegateToArea(player, 'Select which Neutral delegate to remove', {replace: 'NEUTRAL', source: 'reserve'}));
       return undefined;
     }
 

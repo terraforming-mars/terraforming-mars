@@ -95,6 +95,7 @@ import {SubterraneanHabitats} from './SubterraneanHabitats';
 import {TempestConsultancy} from './TempestConsultancy';
 import {TheArchaicFoundationInstitute} from './TheArchaicFoundationInstitute';
 import {TheDarksideofTheMoonSyndicate} from './TheDarksideofTheMoonSyndicate';
+import {TheGrandLunaCapitalGroup} from './TheGrandLunaCapitalGroup';
 import {TheWomb} from './TheWomb';
 import {ThoriumRush} from './ThoriumRush';
 import {TitaniumExtractionCenter} from './TitaniumExtractionCenter';
@@ -206,7 +207,7 @@ export const MOON_CARD_MANIFEST = new CardManifest({
     {cardName: CardName.LUNA_HYPERLOOP_CORPORATION, Factory: LunaHyperloopCorporation},
     {cardName: CardName.CRESCENT_RESEARCH_ASSOCIATION, Factory: CrescentResearchAssociation},
     {cardName: CardName.LUNA_FIRST_INCORPORATED, Factory: LunaFirstIncorporated},
-    // {cardName: CardName.THE_GRAND_LUNA_CAPITAL_GROUP, Factory: TheGrandLunaCapitalGroup},
+    {cardName: CardName.THE_GRAND_LUNA_CAPITAL_GROUP, Factory: TheGrandLunaCapitalGroup},
     {cardName: CardName.INTRAGEN_SANCTUARY_HEADQUARTERS, Factory: IntragenSanctuaryHeadquarters},
     // {cardName: CardName.LUNA_TRADE_FEDERATION, Factory: LunaTradeFederation},
     {cardName: CardName.THE_ARCHAIC_FOUNDATION_INSTITUTE, Factory: TheArchaicFoundationInstitute},

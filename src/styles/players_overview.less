@@ -19,7 +19,7 @@
 
 .player-played-cards {
     margin: 7px 15px 0 15px;
-    width: 98px;
+    width: 85px;
     margin-top: 7px;
 
     .player-played-cards-top {
@@ -29,32 +29,29 @@
         font-family: 'Prototype';
         height: 36px;
         line-height: 36px;
+        padding-left: 2px;
     } 
-    .played-cards-icons {
+    .played-cards-elements {
         display: flex;
         .played-cards-icon {
-            width: 26px;
-            height: 26px;
-            line-height: 26px;
-            border-radius: 3px;
-            display: inline-block;
-            line-height: 26px;
-            font-size: 20px;
-            color: #ccc;
+            width: 10px;
+            height: 20px;
+            border-radius: 2px;
+            margin-top: 8px;
+            margin-left: 5px;
+            background: #fff8;
+        }
+        .played-cards-count {
+            width: 36px;
             text-align: center;
-            padding: 0;
-            margin: 5px 0px 0px 5px;
-            cursor: default;
+            color: #fff8;
         }
     }
-    .played-cards-count {
-        width: 38px;
-        text-align: center;
-    }
+
     .played-cards-button {
         width: 100%;
         border-radius: 5px;
-        margin-top: 6px;
+        margin-top: 7px;
         &:hover {
             filter: brightness(120%);
         }
@@ -89,7 +86,7 @@
             letter-spacing: 1px;
             font-size: 16px;
             font-weight: bold;
-            color: #ffcc64;
+            color: #e6e1e1;
             text-transform: uppercase;
             background: #303030;
             padding: 1px 5px 1px 10px;
@@ -112,7 +109,7 @@
     letter-spacing: 1px;
     line-height: 19px;
     width: 118px;
-    color: #ccc;
+    color: #e6e1e1;
     font-family: 'Prototype';
     .player-info-name {
         text-shadow: 0px 1px 1px #000;
@@ -257,12 +254,12 @@
                     } 
                 }
                 .player-action-status-container--active {
-                    background: #ccc;
+                    background: #e6e1e1;
                     color: #000;
                 }
                 .player-action-status-container--passed {
                     background: #000;
-                    color: #ccc;
+                    color: #e6e1e1;
                     opacity: 0.3;
                 }
             }

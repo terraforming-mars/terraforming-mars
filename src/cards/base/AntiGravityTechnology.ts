@@ -6,7 +6,6 @@ import {CardName} from '../../CardName';
 import {CardRenderer} from '../render/CardRenderer';
 import {CardRequirements} from '../CardRequirements';
 
-export const ALL = 'all';
 export class AntiGravityTechnology extends Card implements IProjectCard {
   constructor() {
     super({

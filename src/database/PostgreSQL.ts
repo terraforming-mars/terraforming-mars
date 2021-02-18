@@ -36,7 +36,7 @@ export class PostgreSQL implements IDatabase {
         throw err;
       }
     });
-    this.client.query('CREATE INDEX IF NOT EXISTS games_i2 on games(created_time )', (err) => {
+    this.client.query('CREATE INDEX IF NOT EXISTS games_i2 on games(created_time)', (err) => {
       if (err) {
         throw err;
       }
@@ -145,18 +145,26 @@ export class PostgreSQL implements IDatabase {
     });
   }
 
-  // cleanSaves(game_id: GameId, save_id: number): void {
-  //   // DELETE all saves except initial and last one
-  //   this.client.query('DELETE FROM games WHERE game_id = $1 AND save_id < $2 AND save_id > 0', [game_id, save_id], (err) => {
-  //     if (err) {
-  //       console.error('PostgreSQL:cleanSaves', err);
-  //       throw err;
-  //     }
-  //   });
-  // }
-
   pruneFinishedGames(): void {
-    // TODO
+    const envHours = parseInt(process.env.PRUNE_FINISHED_GAME_HOURS || '');
+    const hours = Number.isInteger(envHours) ? envHours : 1;
+
+    this.client.query('SELECT game_id, save_id FROM games WHERE status=\'finished\' AND created_time < now() - interval \'1 hour\' * $1', [hours],
+      (err?: Error, res?: QueryResult<any>) => {
+        if (err) {
+          console.error('PostgreSQL:pruneFinishedGames', err);
+          throw err;
+        }
+        res?.rows.forEach((row) => {
+          // DELETE all saves except initial and last one
+          this.client.query('DELETE FROM games WHERE game_id = $1 AND save_id < $2 AND save_id > 0', [row.game_id, row.save_id], (err) => {
+            if (err) {
+              console.error('PostgreSQL:cleanSaves', err);
+              throw err;
+            }
+          });
+        });
+      });
   }
 
   // Purge unfinished games older than MAX_GAME_DAYS days. If this environment variable is absent, it uses the default of 10 days.

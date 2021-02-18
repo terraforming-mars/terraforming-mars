@@ -132,10 +132,16 @@ export const PlayerHome = Vue.component('player-home', {
     },
     getGenerationText: function(): string {
       if (this.player.players.length === 1) {
-        const MAX_GEN = this.player.gameOptions.preludeExtension ? 12 : 14;
+        let maxGen = 14;
+        if (this.player.gameOptions.preludeExtension) {
+          maxGen -= 2;
+        }
+        if (this.player.gameOptions.moonExpansion) {
+          maxGen += 2;
+        }
         let retText =
-                    'generation ' + this.player.generation + ' of ' + MAX_GEN;
-        if (MAX_GEN === this.player.generation) {
+                    'generation ' + this.player.generation + ' of ' + maxGen;
+        if (maxGen === this.player.generation) {
           retText =
                         '<span class=\'last-generation blink-animation\'>' +
                         retText +

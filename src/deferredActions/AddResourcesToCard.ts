@@ -30,32 +30,32 @@ export class AddResourcesToCard implements DeferredAction {
     const count = this.options.count || 1;
     const title = this.options.title ||
       'Select card to add ' + count + ' ' + (this.resourceType || 'resources') + '(s)';
-    let resourceCards = this.player.getResourceCards(this.resourceType);
+    let cards = this.player.getResourceCards(this.resourceType);
 
     if (this.options.restrictedTag !== undefined) {
-      resourceCards = resourceCards.filter((card) => card.tags.includes(this.options.restrictedTag!));
+      cards = cards.filter((card) => card.tags.includes(this.options.restrictedTag!));
     }
     if (this.options.filter !== undefined) {
-      resourceCards = resourceCards.filter(this.options.filter);
+      cards = cards.filter(this.options.filter);
     }
 
-    if (resourceCards.length === 0) {
+    if (cards.length === 0) {
       return undefined;
     }
 
-    if (resourceCards.length === 1) {
-      this.player.addResourceTo(resourceCards[0], count);
-      LogHelper.logAddResource(this.player, resourceCards[0], count);
+    if (cards.length === 1) {
+      this.player.addResourceTo(cards[0], count);
+      LogHelper.logAddResource(this.player, cards[0], count);
       return undefined;
     }
 
     return new SelectCard(
       title,
-      'Add resource(s)',
-      resourceCards,
-      (foundCards: Array<ICard>) => {
-        this.player.addResourceTo(foundCards[0], count);
-        LogHelper.logAddResource(this.player, foundCards[0], count);
+      count === 1 ? 'Add resource' : 'Add resources',
+      cards,
+      (selected: Array<ICard>) => {
+        this.player.addResourceTo(selected[0], count);
+        LogHelper.logAddResource(this.player, selected[0], count);
         return undefined;
       },
     );

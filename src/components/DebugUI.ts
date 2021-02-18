@@ -246,7 +246,7 @@ export const DebugUI = Vue.component('debug-ui', {
               <input type="checkbox" name="moon" id="moon-checkbox" v-model="moon"></input>
               <label for="moon-checkbox" class="expansion-button">
                 <div class="create-game-expansion-icon expansion-icon-themoon"></div>
-                <span v-i18n>The Moon (under development)</span>
+                <span v-i18n>The Moon</span>
               </label><span/>
             </div>
 

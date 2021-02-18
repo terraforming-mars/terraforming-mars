@@ -1,7 +1,7 @@
 import {CardName} from '../CardName';
 
 export class MoonCards {
-  public static scienceCardsWith2VPorLess: Set<CardName> = new Set([
+  public static scienceCardsWithLessThan2VP: Set<CardName> = new Set([
     CardName.OLYMPUS_CONFERENCE,
     CardName.COPERNICUS_TOWER,
     CardName.LUNA_ARCHIVES,

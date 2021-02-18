@@ -1,6 +1,8 @@
 // Base constants
 export const CARD_COST: number = 3;
 export const MILESTONE_COST: number = 8;
+export const AWARD_COSTS: Array<number> = [8, 14, 20];
+
 export const DEFAULT_STEEL_VALUE: number = 2;
 export const DEFAULT_TITANIUM_VALUE: number = 3;
 export const DEFAULT_FLOATERS_VALUE: number = 3;

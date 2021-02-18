@@ -486,6 +486,8 @@ export class Player implements ISerializable<SerializedPlayer> {
         game.getSpaceCount(TileType.OCEAN_CITY, this);
   }
 
+  // Return the number of cards in the player's hand without tags.
+  // Wildcard tags are ignored in this computation. (why?)
   public getNoTagsCount() {
     let noTagsCount: number = 0;
 
@@ -650,7 +652,7 @@ export class Player implements ISerializable<SerializedPlayer> {
     ].filter((tag) => tag.count > 0);
   }
 
-  public getTagCount(tag: Tags, includeEventsTags:boolean = false, includeWildcardTags:boolean = true): number {
+  public getTagCount(tag: Tags, includeEventsTags:boolean = false, includeTagSubstitutions:boolean = true): number {
     let tagCount = 0;
 
     this.playedCards.forEach((card: IProjectCard) => {
@@ -674,16 +676,21 @@ export class Player implements ISerializable<SerializedPlayer> {
       tagCount += 1;
     }
 
-    if (tag === Tags.WILDCARD) {
-      return tagCount;
-    }
-    if (includeWildcardTags) {
-      return tagCount + this.getTagCount(Tags.WILDCARD);
+    if (includeTagSubstitutions) {
+      // Earth Embassy hook
+      if (tag === Tags.EARTH && this.playedCards.some((c) => c.name === CardName.EARTH_EMBASSY)) {
+        tagCount += this.getTagCount(Tags.MOON, includeEventsTags, false);
+      }
+      if (tag !== Tags.WILDCARD) {
+        tagCount += this.getTagCount(Tags.WILDCARD, includeEventsTags, false);
+      }
     } else {
-      return tagCount;
     }
+    return tagCount;
   }
 
+  // Return the total number of tags assocaited with these types.
+  // Wild tags are included.
   public getMultipleTagCount(tags: Array<Tags>): number {
     let tagCount = 0;
     tags.forEach((tag) => {
@@ -692,6 +699,7 @@ export class Player implements ISerializable<SerializedPlayer> {
     return tagCount + this.getTagCount(Tags.WILDCARD);
   }
 
+  // TODO(kberg): Describe this function.
   public getDistinctTagCount(countWild: boolean, extraTag?: Tags): number {
     const allTags: Tags[] = [];
     let wildcardCount: number = 0;
@@ -724,6 +732,7 @@ export class Player implements ISerializable<SerializedPlayer> {
     }
   }
 
+  // Return true if this player has all the tags in `tags` showing.
   public checkMultipleTagPresence(tags: Array<Tags>): boolean {
     let distinctCount = 0;
     tags.forEach((tag) => {
@@ -1817,15 +1826,15 @@ export class Player implements ISerializable<SerializedPlayer> {
       }
     }
 
-    // If you can pay to send some in the Ara
-    if (this.game.gameOptions.turmoilExtension) {
+    // If you can pay to add a delegate to a party.
+    if (this.game.gameOptions.turmoilExtension && this.game.turmoil !== undefined) {
       let sendDelegate;
       if (this.game.turmoil?.lobby.has(this.id)) {
         sendDelegate = new SendDelegateToArea(this, 'Send a delegate in an area (from lobby)');
-      } else if (this.isCorporation(CardName.INCITE) && this.canAfford(3) && this.game.turmoil!.getDelegates(this.id) > 0) {
-        sendDelegate = new SendDelegateToArea(this, 'Send a delegate in an area (3 MC)', 1, undefined, 3, false);
+      } else if (this.isCorporation(CardName.INCITE) && this.canAfford(3) && this.game.turmoil.getDelegates(this.id) > 0) {
+        sendDelegate = new SendDelegateToArea(this, 'Send a delegate in an area (3 MC)', {cost: 3});
       } else if (this.canAfford(5) && this.game.turmoil!.getDelegates(this.id) > 0) {
-        sendDelegate = new SendDelegateToArea(this, 'Send a delegate in an area (5 MC)', 1, undefined, 5, false);
+        sendDelegate = new SendDelegateToArea(this, 'Send a delegate in an area (5 MC)', {cost: 5});
       }
       if (sendDelegate) {
         const input = sendDelegate.execute();

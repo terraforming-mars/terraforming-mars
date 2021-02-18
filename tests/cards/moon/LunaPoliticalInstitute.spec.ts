@@ -39,7 +39,7 @@ describe('LunaPoliticalInstitute', () => {
   });
 
   it('action', () => {
-    const marsFirst = game.turmoil!.getPartyByName(PartyName.MARS)!;
+    const marsFirst = turmoil.getPartyByName(PartyName.MARS)!;
 
     card.action(player);
     expect(game.deferredActions).has.lengthOf(1);

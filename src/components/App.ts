@@ -50,7 +50,6 @@ export const mainAppSettings = {
       'millestones_list': true,
       'awards_list': true,
       'tags_concise': false,
-      'log_paused': false,
       'pinned_player_0': false,
       'pinned_player_1': false,
       'pinned_player_2': false,
@@ -75,6 +74,9 @@ export const mainAppSettings = {
   'methods': {
     changeLogPaused: function(value: boolean) {
       (this as unknown as typeof mainAppSettings.data).logPaused = value;
+      if (value === false) {
+        this.updatePlayer();
+      }
     },
     setVisibilityState: function(targetVar: string, isVisible: boolean) {
       if (isVisible === this.getVisibilityState(targetVar)) return;

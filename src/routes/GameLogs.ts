@@ -11,19 +11,22 @@ export class GameLogs extends Route {
     return url.startsWith('/api/game/logs?');
   }
 
-  public static getLogMessageIndexByGen(data: Array<LogMessage>, generation: number): number | undefined {
-    let result = undefined;
-    for (let i = 0; i < data.length; i++) {
+  public static getLogMessageIndexByGen(data: Array<LogMessage>, generation: number, startIndex: number = 0): number | undefined {
+    let counter = 0;
+    for (let i = startIndex; i < data.length; i++) {
       const logMsg: LogMessage = data[i];
-      const isGen = logMsg.message.startsWith('Generation');
-      if (isGen) {
-        if (parseInt(logMsg.data[0].value) === generation) {
-          result = i;
-          break;
+      if (logMsg.data.length > 0) {
+        if (data[i].message === 'Generation ${0}') {
+          counter++;
+          if (counter === generation) {
+            return i;
+          }
         }
+      } else {
+        return undefined;
       }
     }
-    return result;
+    return undefined;
   }
 
   public handle(req: http.IncomingMessage, res: http.ServerResponse): void {
@@ -51,16 +54,19 @@ export class GameLogs extends Route {
         return;
       }
 
-      let log = [...game.gameLog];
+      let log = game.gameLog;
 
       if (generation !== undefined && !Array.isArray(generation)) {
         const theGen = parseInt(generation);
 
         // find the index of the selected generation message
-        const startIndex = GameLogs.getLogMessageIndexByGen(log, theGen) || 0;
+        const startIndex = GameLogs.getLogMessageIndexByGen(log, theGen);
+        if (startIndex === undefined) {
+          this.badRequest(req, res);
+        }
 
         // find the next gen index
-        const endIndex = GameLogs.getLogMessageIndexByGen(log, theGen + 1);
+        const endIndex = GameLogs.getLogMessageIndexByGen(log, theGen + 1, startIndex);
 
         // if no end, return all
         if (endIndex !== undefined) {

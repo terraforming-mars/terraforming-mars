@@ -1,5 +1,5 @@
 import Vue from 'vue';
-
+import {mainAppSettings} from './App';
 import {CardType} from '../cards/CardType';
 import {LogMessage} from '../LogMessage';
 import {LogMessageType} from '../LogMessageType';
@@ -180,7 +180,7 @@ export const LogPanel = Vue.component('log-panel', {
     selectGeneration: function(gen: number): void {
       this.selectedGeneration = gen;
       // pause logging globally
-      (this.$root as any).changeLogPaused(true);
+      (this.$root as unknown as typeof mainAppSettings.methods).changeLogPaused(true);
 
       fetch(`/api/game/logs?id=${this.id}&generation=${gen}`)
         .then((response) => response.json())
@@ -190,8 +190,7 @@ export const LogPanel = Vue.component('log-panel', {
           // if it's current gen go to default behavior
           if (gen === this.generation) {
             // resume logging globally
-            (this.$root as any).changeLogPaused(false);
-            (this.$root as any).updatePlayer();
+            (this.$root as unknown as typeof mainAppSettings.methods).changeLogPaused(false);
           }
         })
         .catch((error) => {
@@ -206,11 +205,10 @@ export const LogPanel = Vue.component('log-panel', {
       return classes.join(' ');
     },
     pauseButtonText: function(): string {
-      return (this.$root as any).logPaused ? 'resume' : 'pause';
+      return (this.$root as unknown as typeof mainAppSettings.data).logPaused ? 'resume' : 'pause';
     },
     togglePause: function() {
-      (this.$root as any).changeLogPaused(!(this.$root as any).logPaused);
-      (this.$root as any).updatePlayer();
+      (this.$root as unknown as typeof mainAppSettings.methods).changeLogPaused(!(this.$root as unknown as typeof mainAppSettings.data).logPaused);
     },
     getGenerationsRange: function(): Array<number> {
       const result = range(this.generation + 1);
@@ -223,7 +221,7 @@ export const LogPanel = Vue.component('log-panel', {
       return classes.join(' ');
     },
     getIconClass: function(): string {
-      return (this.$root as any).logPaused ? 'icon-play' : 'icon-pause';
+      return (this.$root as unknown as typeof mainAppSettings.data).logPaused ? 'icon-play' : 'icon-pause';
     },
     getGenerationText: function(): string {
       let retText = '';
@@ -242,8 +240,7 @@ export const LogPanel = Vue.component('log-panel', {
     fetch(`/api/game/logs?id=${this.id}&limit=${raw_settings.logLength}&generation=${this.selectedGeneration}`)
       .then((response) => response.json())
       .then((messages) => {
-        this.messages.splice(0, this.messages.length);
-        this.messages.push(...messages);
+        this.messages.splice(0, this.messages.length, ...messages);
         this.$nextTick(this.scrollToEnd);
       })
       .catch((error) => {
@@ -283,3 +280,4 @@ export const LogPanel = Vue.component('log-panel', {
       </div>
     `,
 });
+

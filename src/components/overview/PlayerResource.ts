@@ -70,11 +70,6 @@ export const PlayerResource = Vue.component('player-resource', {
         return false;
       }
     },
-    isResourceUpgraded: function(): boolean {
-      return (this.type === Resources.STEEL && this.steelValue > DEFAULT_STEEL_VALUE) ||
-        (this.type === Resources.TITANIUM && this.titaniumValue > DEFAULT_TITANIUM_VALUE) ||
-        (this.type === Resources.HEAT && this.canUseHeatAsMegaCredits);
-    },
     getResourceValue: function(): string {
       if (this.type === Resources.STEEL) {
         return `${this.steelValue}`;

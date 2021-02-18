@@ -1,5 +1,5 @@
 import Vue from 'vue';
-import {MILESTONE_COST} from '../constants';
+import {MILESTONE_COST, MAX_MILESTONES} from '../constants';
 import {ClaimedMilestoneModel} from '../models/ClaimedMilestoneModel';
 import {PreferencesManager} from './PreferencesManager';
 
@@ -39,7 +39,7 @@ export const Milestone = Vue.component('milestone', {
     },
     getAvailableMilestoneSpots: function(): Array<number> {
       const count = this.milestones_list.filter((milestone) => milestone.player_name).length;
-      return Array(3 - count).fill(MILESTONE_COST);
+      return Array(MAX_MILESTONES - count).fill(MILESTONE_COST);
     },
     isTutorialModeOn: function(): boolean {
       return PreferencesManager.loadValue('tutorial_mode') === '1';

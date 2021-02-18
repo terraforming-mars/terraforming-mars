@@ -25,6 +25,7 @@ export class PreferencesManager {
       'hide_tile_confirmation',
       'show_card_number',
       'show_discount_on_cards',
+      'tutorial_mode',
     ];
 
     static preferencesValues: Map<string, boolean | string> = new Map<string, boolean | string>();

@@ -31,7 +31,7 @@ export interface IResourceCard {
 export interface CardDiscount {
   tag?: Tags, // When absent, discount applies to all cards.
   amount: number
-}
+ }
 
 export interface ICard {
     name: CardName;

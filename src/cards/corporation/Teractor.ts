@@ -15,6 +15,7 @@ export class Teractor extends Card implements CorporationCard {
       tags: [Tags.EARTH],
       startingMegaCredits: 60,
 
+      cardDiscount: {tag: Tags.EARTH, amount: 3},
       metadata: {
         cardNumber: 'R30',
         description: 'You start with 60 MC.',
@@ -30,8 +31,6 @@ export class Teractor extends Card implements CorporationCard {
       },
     });
   }
-
-  public cardDiscount = {tag: Tags.EARTH, amount: 3};
 
   public getCardDiscount(_player: Player, card: IProjectCard) {
     return card.tags.filter((tag) => tag === Tags.EARTH).length * 3;

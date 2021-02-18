@@ -16,6 +16,7 @@ export class SkyDocks extends Card implements IProjectCard {
       cardType: CardType.ACTIVE,
 
       requirements: CardRequirements.builder((b) => b.tag(Tags.EARTH, 2)),
+      cardDiscount: {amount: 1},
       metadata: {
         cardNumber: 'C36',
         renderData: CardRenderer.builder((b) => {
@@ -38,8 +39,6 @@ export class SkyDocks extends Card implements IProjectCard {
     player.increaseFleetSize();
     return undefined;
   }
-
-  public cardDiscount = {amount: 1};
 
   public getCardDiscount() {
     return 1;

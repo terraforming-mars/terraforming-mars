@@ -14,6 +14,7 @@ export class EarthOffice extends Card implements IProjectCard {
       tags: [Tags.EARTH],
       cost: 1,
 
+      cardDiscount: {tag: Tags.EARTH, amount: 3},
       metadata: {
         cardNumber: '105',
         renderData: CardRenderer.builder((b) => {
@@ -24,7 +25,6 @@ export class EarthOffice extends Card implements IProjectCard {
       },
     });
   }
-  public cardDiscount = {tag: Tags.EARTH, amount: 2};
 
   public getCardDiscount(_player: Player, card: IProjectCard) {
     return card.tags.filter((tag) => tag === Tags.EARTH).length * 3;

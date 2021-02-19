@@ -230,6 +230,7 @@ import {AsteroidStandardProject} from './base/standardProjects/AsteroidStandardP
 import {SellPatentsStandardProject} from './base/standardProjects/SellPatentsStandardProject';
 import {ConvertPlants} from './base/standardActions/ConvertPlants';
 import {ConvertHeat} from './base/standardActions/ConvertHeat';
+import {BufferGasStandardProject} from './prelude/BufferGasStandardProject';
 
 export const BASE_CARD_MANIFEST = new CardManifest({
   module: GameModule.Base,
@@ -392,6 +393,7 @@ export const BASE_CARD_MANIFEST = new CardManifest({
     {cardName: CardName.GREENERY_STANDARD_PROJECT, Factory: GreeneryStandardProject},
     {cardName: CardName.ASTEROID_STANDARD_PROJECT, Factory: AsteroidStandardProject},
     {cardName: CardName.SELL_PATENTS_STANDARD_PROJECT, Factory: SellPatentsStandardProject},
+    {cardName: CardName.BUFFER_GAS_STANDARD_PROJECT, Factory: BufferGasStandardProject},
   ],
   standardActions: [
     {cardName: CardName.CONVERT_PLANTS, Factory: ConvertPlants},

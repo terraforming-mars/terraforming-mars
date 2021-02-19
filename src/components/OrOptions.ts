@@ -131,7 +131,7 @@ export const OrOptions = Vue.component('or-options', {
           }
         }
       }
-      
+
       // Only push this orOption element if we are not skipping standard projects
       if (!skippedStandardProject) {
         children.push(createElement('div', subchildren));

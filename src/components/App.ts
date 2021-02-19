@@ -36,7 +36,6 @@ interface MainAppData {
     isServerSideRequestInProgress: boolean;
     componentsVisibility: {[x: string]: boolean};
     game: GameHomeModel | undefined;
-    logPaused: boolean;
 }
 
 export const mainAppSettings = {
@@ -72,12 +71,6 @@ export const mainAppSettings = {
     'help-iconology': HelpIconology,
   },
   'methods': {
-    changeLogPaused: function(value: boolean) {
-      (this as unknown as typeof mainAppSettings.data).logPaused = value;
-      if (value === false) {
-        this.updatePlayer();
-      }
-    },
     setVisibilityState: function(targetVar: string, isVisible: boolean) {
       if (isVisible === this.getVisibilityState(targetVar)) return;
       (this as unknown as typeof mainAppSettings.data).componentsVisibility[targetVar] = isVisible;
@@ -89,9 +82,6 @@ export const mainAppSettings = {
       const currentPathname: string = window.location.pathname;
       const xhr = new XMLHttpRequest();
       const app = this as unknown as typeof mainAppSettings.data;
-
-      // fetching player data is ignored when the log data stream is paused
-      if (app.logPaused === true) return;
 
       xhr.open(
         'GET',

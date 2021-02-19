@@ -171,9 +171,7 @@ export const Board = Vue.component('board', {
   template: `
     <div :class="getGameBoardClassName()">
         <div class="hide-tile-button-container">
-        <div class="seasonal-cupid"></div>
-        <div class="seasonal-ox"></div>
-        <div class="seasonal-lantern"></div>
+        <div class="seasonal-perseverance" title="Mars Preserverance landing"></div>
           <div class="hide-tile-button" v-on:click.prevent="toggleHideTile()">{{ toggleHideTileLabel() }}</div>
         </div>
         <div class="board-outer-spaces">

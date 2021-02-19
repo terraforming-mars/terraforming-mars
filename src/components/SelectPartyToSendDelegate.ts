@@ -25,10 +25,7 @@ export const SelectPartyToSendDelegate = Vue.component('select-party-to-send-del
       selectedParty: undefined as string | undefined,
     };
   },
-  components: {
-    'Button': Button,
-    'Party': Party,
-  },
+  components: {Button, Party},
   mixins: [TranslateMixin],
   methods: {
     saveData: function() {

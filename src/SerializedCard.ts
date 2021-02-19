@@ -1,6 +1,7 @@
 import {CardName} from './CardName';
 import {Resources} from './Resources';
 import {Tags} from './cards/Tags';
+import {OwnerModel} from './models/PlayerModel';
 
 export interface SerializedCard {
   allTags?: Array<Tags>;
@@ -9,6 +10,7 @@ export interface SerializedCard {
   name: CardName;
   resourceCount?: number;
   targetCards?: Array<SerializedRobotCard>;
+  owner?: OwnerModel;
 }
 
 export interface SerializedRobotCard {

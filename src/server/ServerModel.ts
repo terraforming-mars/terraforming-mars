@@ -241,6 +241,7 @@ function getWaitingFor(
     payProduction: undefined,
     aresData: undefined,
     selectBlueCardAction: false,
+    showOwner: false,
   };
   switch (waitingFor.inputType) {
   case PlayerInputTypes.AND_OPTIONS:
@@ -275,6 +276,7 @@ function getWaitingFor(
     playerInputModel.maxCardsToSelect = selectCard.maxCardsToSelect;
     playerInputModel.minCardsToSelect = selectCard.minCardsToSelect;
     playerInputModel.selectBlueCardAction = selectCard.selectBlueCardAction;
+    playerInputModel.showOwner = selectCard.showOwner;
     break;
   case PlayerInputTypes.SELECT_COLONY:
     playerInputModel.coloniesModel = (waitingFor as SelectColony).coloniesModel;
@@ -351,6 +353,7 @@ function getCards(
     warning: card.warning,
     reserveUnits: options.reserveUnitMap?.get(card.name) || Units.EMPTY,
     discount: card.cardDiscount,
+    owner: card.owner,
   }));
 }
 

@@ -8,6 +8,7 @@ import {IResourceCard} from '../ICard';
 import {Player} from '../../Player';
 import {CardRenderer} from '../render/CardRenderer';
 import {CardRenderDynamicVictoryPoints} from '../render/CardRenderDynamicVictoryPoints';
+import {getOwnerModel, OwnerModel} from '../../models/PlayerModel';
 
 export class Tardigrades extends Card implements IProjectCard, IResourceCard {
   constructor() {
@@ -31,10 +32,13 @@ export class Tardigrades extends Card implements IProjectCard, IResourceCard {
     });
   }
     public resourceCount = 0;
+    public owner: OwnerModel | undefined = undefined;
+
     public getVictoryPoints(): number {
       return Math.floor(this.resourceCount / 4);
     }
-    public play() {
+    public play(player: Player) {
+      this.owner = getOwnerModel(player);
       return undefined;
     }
     public action(player: Player) {

@@ -18,6 +18,7 @@ import {CardName} from '../CardName';
 import {CardMetadata} from './CardMetadata';
 import {StandardProjectCard} from './StandardProjectCard';
 import {CardRequirements} from './CardRequirements';
+import {OwnerModel} from '../models/PlayerModel';
 
 export interface IActionCard {
     action: (player: Player) => OrOptions | SelectOption | AndOptions | SelectAmount | SelectCard<ICard> | SelectCard<IProjectCard> | SelectHowToPay | SelectPlayer | SelectSpace | undefined;
@@ -26,6 +27,7 @@ export interface IActionCard {
 
 export interface IResourceCard {
     resourceCount: number;
+    owner?: OwnerModel | undefined;
 }
 
 export interface CardDiscount {
@@ -54,5 +56,6 @@ export interface ICard {
     requirements?: CardRequirements;
     metadata: CardMetadata;
     warning?: string | Message;
+    owner?: OwnerModel | undefined;
 }
 

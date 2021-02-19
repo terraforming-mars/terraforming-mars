@@ -4,6 +4,7 @@ import {ResourceType} from '../ResourceType';
 import {Units} from '../Units';
 import {CardName} from '../CardName';
 import {CardDiscount} from '../cards/ICard';
+import {OwnerModel} from './PlayerModel';
 
 export interface CardModel {
     name: CardName;
@@ -15,4 +16,5 @@ export interface CardModel {
     isDisabled: boolean;
     warning?: string | Message;
     reserveUnits: Readonly<Units>;
+    owner?: OwnerModel;
 }

@@ -13,6 +13,7 @@ import {SpaceModel} from './SpaceModel';
 import {IAresData} from '../ares/IAresData';
 import {SerializedTimer} from '../SerializedTimer';
 import {MoonModel} from './MoonModel';
+import {Player} from '../Player';
 
 export interface PlayerModel {
     actionsTakenThisRound: number;
@@ -80,4 +81,16 @@ export interface PlayerModel {
     venusScaleLevel: number;
     victoryPointsBreakdown: VictoryPointsBreakdown;
     waitingFor: PlayerInputModel | undefined;
+}
+
+export interface OwnerModel {
+    name: string;
+    color: Color;
+}
+
+export function getOwnerModel(player: Player): OwnerModel {
+  return {
+    name: player.name,
+    color: player.color,
+  };
 }

@@ -11,6 +11,7 @@ import {RemoveResourcesFromCard} from '../../deferredActions/RemoveResourcesFrom
 import {CardRequirements} from '../CardRequirements';
 import {CardRenderer} from '../render/CardRenderer';
 import {CardRenderDynamicVictoryPoints} from '../render/CardRenderDynamicVictoryPoints';
+import {getOwnerModel, OwnerModel} from '../../models/PlayerModel';
 
 export class Ants extends Card implements IActionCard, IProjectCard, IResourceCard {
   constructor() {
@@ -37,12 +38,14 @@ export class Ants extends Card implements IActionCard, IProjectCard, IResourceCa
   }
 
   public resourceCount = 0;
+  public owner: OwnerModel | undefined = undefined;
 
   public getVictoryPoints(): number {
     return Math.floor(this.resourceCount / 2);
   }
 
-  public play() {
+  public play(player: Player) {
+    this.owner = getOwnerModel(player);
     return undefined;
   }
 

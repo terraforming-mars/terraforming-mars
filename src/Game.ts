@@ -63,6 +63,9 @@ import {IMoonData} from './moon/IMoonData';
 import {MoonExpansion} from './moon/MoonExpansion';
 import {TurmoilHandler} from './turmoil/TurmoilHandler';
 import {Random} from './Random';
+import {Ants} from './cards/base/Ants';
+import {Tardigrades} from './cards/base/Tardigrades';
+import {RegolithEaters} from './cards/base/RegolithEaters';
 
 export type GameId = string;
 
@@ -351,6 +354,9 @@ export class Game implements ISerializable<SerializedGame> {
           for (let i = 0; i < 10; i++) {
             player.dealtProjectCards.push(dealer.dealCard(game));
           }
+          player.dealtProjectCards.push(new Ants);
+          player.dealtProjectCards.push(new Tardigrades);
+          player.dealtProjectCards.push(new RegolithEaters);
         }
         if (gameOptions.preludeExtension) {
           for (let i = 0; i < 4; i++) {

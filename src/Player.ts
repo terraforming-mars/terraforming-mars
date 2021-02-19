@@ -1928,6 +1928,10 @@ export class Player implements ISerializable<SerializedPlayer> {
       if (c.resourceCount !== undefined) {
         result.resourceCount = c.resourceCount;
       }
+
+      if (c.owner !== undefined) {
+        result.owner = c.owner;
+      }
       if (c instanceof SelfReplicatingRobots) {
         result.targetCards = c.targetCards.map((t) => {
           return {
@@ -2118,6 +2122,9 @@ export class Player implements ISerializable<SerializedPlayer> {
       const card = cardFinder.getProjectCardByName(element.name)!;
       if (element.resourceCount !== undefined) {
         card.resourceCount = element.resourceCount;
+      }
+      if (element.owner !== undefined) {
+        card.owner = element.owner;
       }
       if (card instanceof SelfReplicatingRobots && element.targetCards !== undefined) {
         card.targetCards = [];

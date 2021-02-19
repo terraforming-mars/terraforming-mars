@@ -102,6 +102,7 @@ export const SelectCard = Vue.component('select-card', {
             <input v-else type="checkbox" v-model="cards" :value="card" :disabled="playerinput.maxCardsToSelect !== undefined && Array.isArray(cards) && cards.length >= playerinput.maxCardsToSelect && cards.includes(card) === false" />
           </template>
             <Card :card="card" />
+            <span v-if="playerinput.showOwner && card.owner !== undefined && card.owner.name !== player.name ">{{ card.owner.name }}</span>
         </label>
         <div v-if="hasCardWarning()" class="card-warning">{{ $t(warning) }}</div>
         <div v-if="showsave === true" class="nofloat">

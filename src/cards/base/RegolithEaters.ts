@@ -13,6 +13,7 @@ import {PartyHooks} from '../../turmoil/parties/PartyHooks';
 import {PartyName} from '../../turmoil/parties/PartyName';
 import {REDS_RULING_POLICY_COST} from '../../constants';
 import {CardRenderer} from '../render/CardRenderer';
+import {getOwnerModel, OwnerModel} from '../../models/PlayerModel';
 
 export class RegolithEaters extends Card implements IActionCard, IProjectCard, IResourceCard {
   constructor() {
@@ -39,8 +40,10 @@ export class RegolithEaters extends Card implements IActionCard, IProjectCard, I
   }
 
     public resourceCount = 0;
+    public owner: OwnerModel | undefined = undefined;
 
-    public play(_player: Player) {
+    public play(player: Player) {
+      this.owner = getOwnerModel(player);
       return undefined;
     }
     public canAct(): boolean {

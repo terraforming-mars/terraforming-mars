@@ -17,9 +17,9 @@ export const CardExtraContent = Vue.component('CardExtraContent', {
     isMiningTileOnMetal: function(card: CardModel, metal: string): boolean {
       const miningCard = [CardName.MINING_RIGHTS, CardName.MINING_AREA, CardName.MINING_RIGHTS_ARES, CardName.MINING_AREA_ARES];
       if (miningCard.includes(card.name)) {
-        if (metal === 'titanium') {
+        if (metal === Resources.TITANIUM) {
           return card.bonusResource === Resources.TITANIUM;
-        } else if (metal === 'steel') {
+        } else if (metal === Resources.STEEL) {
           return card.bonusResource === Resources.STEEL;
         }
       }

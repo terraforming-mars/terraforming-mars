@@ -63,6 +63,7 @@ export class GameLogs extends Route {
         const startIndex = GameLogs.getLogMessageIndexByGen(log, theGen);
         if (startIndex === undefined) {
           this.badRequest(req, res);
+          return;
         }
 
         // find the next gen index

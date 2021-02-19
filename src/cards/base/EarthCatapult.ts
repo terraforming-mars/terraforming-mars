@@ -13,6 +13,7 @@ export class EarthCatapult extends Card implements IProjectCard {
       tags: [Tags.EARTH],
       cost: 23,
 
+      cardDiscount: {amount: 2},
       metadata: {
         cardNumber: '070',
         renderData: CardRenderer.builder((b) => {

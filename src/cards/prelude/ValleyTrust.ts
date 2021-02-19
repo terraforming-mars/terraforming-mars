@@ -17,6 +17,7 @@ export class ValleyTrust extends Card implements CorporationCard {
       startingMegaCredits: 37,
       initialActionText: 'Draw 3 Prelude cards, and play one of them',
 
+      cardDiscount: {tag: Tags.SCIENCE, amount: 2},
       metadata: {
         cardNumber: 'R34',
         description: 'You start with 37 MC. As your first action, draw 3 Prelude cards, and play one of them. Discard the other two.',
@@ -32,6 +33,7 @@ export class ValleyTrust extends Card implements CorporationCard {
       },
     });
   }
+
 
   public getCardDiscount(_player: Player, card: IProjectCard) {
     // TODO(chosta) -> improve once the discounts property is given a go

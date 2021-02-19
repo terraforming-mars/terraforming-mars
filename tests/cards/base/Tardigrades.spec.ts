@@ -13,7 +13,7 @@ describe('Tardigrades', function() {
 
   it('Should play', function() {
     player.playedCards.push(card);
-    card.play();
+    card.play(player);
     player.addResourceTo(card, 7);
     expect(card.getVictoryPoints()).to.eq(1);
   });

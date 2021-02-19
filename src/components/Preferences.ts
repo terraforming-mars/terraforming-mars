@@ -75,7 +75,7 @@ export const Preferences = Vue.component('preferences', {
       'hide_tile_confirmation': false as boolean | unknown[],
       'show_card_number': false as boolean | unknown[],
       'show_discount_on_cards': true as boolean | unknown[],
-      'tutorial_mode': true as boolean | unknown[],
+      'learner_mode': true as boolean | unknown[],
     };
   },
   methods: {
@@ -387,8 +387,10 @@ export const Preferences = Vue.component('preferences', {
                     </div>
                     <div class="preferences_panel_item">
                         <label class="form-switch">
-                            <input type="checkbox" v-on:change="updatePreferences" v-model="tutorial_mode" />
-                            <i class="form-icon"></i> <span v-i18n>Tutorial Mode (req. refresh)</span>
+                            <input type="checkbox" v-on:change="updatePreferences" v-model="learner_mode" />
+                            <i class="form-icon"></i> 
+                            <span v-i18n>Learner Mode (req. refresh)</span>
+                            <span class="tooltip tooltip-left" data-tooltip="Show information that can be helpful\n to players who are still learning the games">&#9432;</span>
                         </label>
                     </div>
                     <div class="preferences_panel_item form-group">

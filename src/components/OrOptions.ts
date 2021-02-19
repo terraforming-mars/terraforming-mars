@@ -4,6 +4,7 @@ import {$t} from '../directives/i18n';
 import {Button} from '../components/common/Button';
 import {PlayerModel} from '../models/PlayerModel';
 import {PlayerInputModel} from '../models/PlayerInputModel';
+import {PreferencesManager} from './PreferencesManager';
 
 let unique: number = 0;
 
@@ -119,29 +120,45 @@ export const OrOptions = Vue.component('or-options', {
         ),
       );
       optionElements.push(subchildren[subchildren.length - 1]);
-      children.push(createElement('div', subchildren));
-      if (this.showsave && this.$data.selectedOption === idx) {
-        children.push(
-          createElement(
-            'div',
-            {
-              'style': {'margin': '5px 30px 10px'},
-              'class': 'wf-action',
-            },
-            [
-              createElement(Button, {
-                props: {
-                  title: $t(option.buttonLabel),
-                  type: 'submit',
-                  size: 'normal',
-                  onClick: () => {
-                    this.saveData();
+
+      // Label with title standard project will be skipped if no suboption is available and learner mode is off.
+      let skippedStandardProject = false;
+      if (option.title === 'Standard projects' && option.enabled !== undefined ) {
+        if (option.enabled.every((p: boolean) => p === false)) {
+          const learnerModeOff = PreferencesManager.loadValue('learner_mode') === '0';
+          if (learnerModeOff) {
+            skippedStandardProject = true;
+          }
+        }
+      }
+      
+      // Only push this orOption element if we are not skipping standard projects
+      if (!skippedStandardProject) {
+        children.push(createElement('div', subchildren));
+
+        if (this.showsave && this.$data.selectedOption === idx) {
+          children.push(
+            createElement(
+              'div',
+              {
+                'style': {'margin': '5px 30px 10px'},
+                'class': 'wf-action',
+              },
+              [
+                createElement(Button, {
+                  props: {
+                    title: $t(option.buttonLabel),
+                    type: 'submit',
+                    size: 'normal',
+                    onClick: () => {
+                      this.saveData();
+                    },
                   },
-                },
-              }),
-            ],
-          ),
-        );
+                }),
+              ],
+            ),
+          );
+        }
       }
     });
     return createElement('div', {'class': 'wf-options'}, children);

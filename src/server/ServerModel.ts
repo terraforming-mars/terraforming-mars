@@ -274,6 +274,7 @@ function getWaitingFor(
     });
     playerInputModel.maxCardsToSelect = selectCard.maxCardsToSelect;
     playerInputModel.minCardsToSelect = selectCard.minCardsToSelect;
+    playerInputModel.enabled = selectCard.enabled;
     playerInputModel.selectBlueCardAction = selectCard.selectBlueCardAction;
     break;
   case PlayerInputTypes.SELECT_COLONY:

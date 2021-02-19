@@ -14,6 +14,7 @@ export interface PlayerInputModel {
     canUseSteel: boolean | undefined;
     canUseTitanium: boolean | undefined;
     cards: Array<CardModel> | undefined;
+    enabled?: Array<boolean>;
     inputType: PlayerInputTypes;
     options: Array<PlayerInputModel> | undefined;
     min: number | undefined;

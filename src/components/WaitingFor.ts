@@ -86,7 +86,8 @@ export const WaitingFor = Vue.component('waiting-for', {
         const xhr = new XMLHttpRequest();
         xhr.open('GET', '/api/waitingfor' + window.location.search + '&prev-game-age=' + this.player.gameAge.toString());
         xhr.onerror = function() {
-          alert('Error getting waitingfor data');
+          console.warn('unable to reach server waiting for');
+          vueApp.waitForUpdate();
         };
         xhr.onload = () => {
           if (xhr.status === 200) {
@@ -114,10 +115,10 @@ export const WaitingFor = Vue.component('waiting-for', {
 
               return;
             }
-            vueApp.waitForUpdate();
           } else {
-            alert('Unexpected server response');
+            console.warn(`unexpected response waiting for: ${xhr.status}`);
           }
+          vueApp.waitForUpdate();
         };
         xhr.responseType = 'json';
         xhr.send();

@@ -30,7 +30,7 @@ export class LoadGame extends Handler {
         GameLoader.getInstance().getByGameId(game_id, true, (game) => {
           if (game === undefined) {
             console.warn(`unable to find ${game_id} in database`);
-            ctx.route.notFound(req, res);
+            ctx.route.notFound(req, res, 'game_id not found');
             return;
           }
           ctx.route.writeJson(res, Server.getGameModel(game));

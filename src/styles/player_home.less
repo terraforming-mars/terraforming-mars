@@ -865,20 +865,34 @@
 
 .hiding-card-button-row {
     display: flex;
-    flex-flow: row;   
+    flex-flow: row;
+
+    .played-cards-filters {
+        display: flex;
+    }
+
+    .text-overview {
+        text-transform: uppercase;
+        margin-left: 5px;
+        color: #303030;
+        font-weight: bold;
+        margin-top: 12px;
+        font-size: 16px;
+    } 
+
 }
 
 .hiding-card-button {
     display: flex;
-    width: fit-content;
-    padding: 2px 4px;
     text-transform: uppercase;
     border-radius: 4px;
-    color: black;
+    font-size: 23px;
+    line-height: 30px;
+    margin: 10px 0px 0 10px;
+    width: 100px;
+    height: 30px;
+    text-align: center;
     cursor: pointer;
-    font-size: 16px;
-    margin: 5px;
-    padding: 0px 8px;
 
     &.active {
         background-color: rgba(47,146,225, 0.75);
@@ -891,12 +905,24 @@
     }
     &.active-transparent {
         background-color: rgba(47,146,225, 0.5);
+        color: #fff8;
     }
     &.automated-transparent {
         background-color: rgba(13,176,11, 0.5);
+        color: #fff8;
     }
     &.event-transparent {
         background-color: rgba(237,106,21,0.5);
+        color: #fff8;
+    }
+
+    .played-cards-count {
+        font-family: "Prototype";
+        width: 80px;
+        padding-left: 18px;
+    }
+    .played-cards-selection {
+        font-size: 16px;
     }
 }
 

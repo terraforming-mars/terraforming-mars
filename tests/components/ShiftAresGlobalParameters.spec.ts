@@ -50,6 +50,7 @@ describe('ShiftAresGlobalParameters', function() {
       milestoneResults: [],
     },
     selectBlueCardAction: false,
+    showOwner: false,
   };
   function getLocalVue() {
     const localVue = createLocalVue();

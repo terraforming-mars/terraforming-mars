@@ -270,6 +270,26 @@ checkComponent(
   require('./build/src/components/Turmoil').Turmoil,
   [],
 );
+checkComponent(
+  'src/components/help/Help',
+  require('./build/src/components/help/Help').Help,
+  [],
+);
+checkComponent(
+  'src/components/help/HelpIconology',
+  require('./build/src/components/help/HelpIconology').HelpIconology,
+  [],
+);
+checkComponent(
+  'src/components/help/HelpPhases',
+  require('./build/src/components/help/HelpPhases').HelpPhases,
+  [],
+);
+checkComponent(
+  'src/components/help/HelpStandardProjects',
+  require('./build/src/components/help/HelpStandardProjects').HelpStandardProjects,
+  [],
+);
 
 function checkComponent(name, component, dataProperties) {
   const methodNames = component.methods === undefined ? [] : Object.keys(component.methods);

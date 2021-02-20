@@ -61,6 +61,7 @@ export class GameLoader {
   }
 
   public getLoadedGameIds(): Array<string> {
+    this.loadAllGameIds();
     return Array.from(this.games.keys());
   }
 
@@ -185,6 +186,7 @@ export class GameLoader {
     this.loadNextGame();
   }
 
+  // This method is re-entrant.
   private loadAllGameIds(): void {
     if (this.state !== State.WAITING) {
       return;

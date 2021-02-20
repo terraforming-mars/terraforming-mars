@@ -351,6 +351,7 @@ function getCards(
     isDisabled: options.enabled?.[index] === false,
     warning: card.warning,
     reserveUnits: options.reserveUnitMap?.get(card.name) || Units.EMPTY,
+    bonusResource: (card as IProjectCard).bonusResource,
     discount: card.cardDiscount,
   }));
 }

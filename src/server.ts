@@ -69,7 +69,7 @@ function processRequest(req: http.IncomingMessage, res: http.ServerResponse): vo
     case '/the-end':
     case '/load':
     case '/cards':
-    case '/help-iconology':
+    case '/help':
       serveApp(req, res);
       break;
 

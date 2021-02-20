@@ -8,12 +8,16 @@ export class Route {
     res.write('Bad request');
     res.end();
   }
-  public notFound(req: http.IncomingMessage, res: http.ServerResponse): void {
+  public notFound(req: http.IncomingMessage, res: http.ServerResponse, err?: string): void {
     if (!process.argv.includes('hide-not-found-warnings')) {
       console.warn('Not found', req.method, req.url);
     }
     res.writeHead(404);
     res.write('Not found');
+    if (err) {
+      res.write(': ');
+      res.write(err);
+    }
     res.end();
   }
   public notModified(res: http.ServerResponse): void {

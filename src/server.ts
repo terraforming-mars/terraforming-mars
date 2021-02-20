@@ -17,6 +17,7 @@ import {Game, GameId} from './Game';
 import {GameLoader} from './database/GameLoader';
 import {GameLogs} from './routes/GameLogs';
 import {ApiGames} from './routes/ApiGames';
+import {ApiGame} from './routes/ApiGame';
 import {IHandler} from './routes/IHandler';
 import {Route} from './routes/Route';
 import {Player} from './Player';
@@ -62,7 +63,7 @@ const handlers: Map<string, IHandler> = new Map(
     // ['/api/player', ApiGetPlayer.INSTANCE],
     // ['/api/waitingfor', ApiGetWaitingFor.INSTANCE],
     ['/api/games', ApiGames.INSTANCE],
-    // ['/api/game', ApiGetGame.INSTANCE],
+    ['/api/game', ApiGame.INSTANCE],
     // ['/api/clonablegames', ApiCloneableGames.INSTANCE],
     // ['/api/game/logs', ApiGameLogs.INSTANCE],
     // ['/game/', CreateGame.INSTANCE],
@@ -124,10 +125,6 @@ function processRequest(req: http.IncomingMessage, res: http.ServerResponse): vo
     case '/main.js':
     case '/main.js.map':
       serveAsset(req, res);
-      break;
-
-    case '/api/game':
-      apiGetGame(req, res);
       break;
 
     case '/api/clonablegames':
@@ -305,44 +302,6 @@ function loadGame(req: http.IncomingMessage, res: http.ServerResponse): void {
     } catch (error) {
       route.internalServerError(req, res, error);
     }
-  });
-}
-
-function apiGetGame(req: http.IncomingMessage, res: http.ServerResponse): void {
-  const routeRegExp: RegExp = /^\/api\/game\?id\=([0-9a-z_]+)$/i;
-
-  if (req.url === undefined) {
-    console.warn('url not defined');
-    route.notFound(req, res);
-    return;
-  }
-
-  if (!routeRegExp.test(req.url)) {
-    console.warn('no match with regexp');
-    route.notFound(req, res);
-    return;
-  }
-
-  const matches = req.url.match(routeRegExp);
-
-  if (matches === null || matches[1] === undefined) {
-    console.warn('didn\'t find game id');
-    route.notFound(req, res);
-    return;
-  }
-
-  const gameId: GameId = matches[1];
-
-  GameLoader.getInstance().getByGameId(gameId, false, (game: Game | undefined) => {
-    if (game === undefined) {
-      console.warn('game is undefined');
-      route.notFound(req, res);
-      return;
-    }
-
-    res.setHeader('Content-Type', 'application/json');
-    res.write(getGameModelJSON(game));
-    res.end();
   });
 }
 

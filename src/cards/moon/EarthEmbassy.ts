@@ -9,7 +9,7 @@ export class EarthEmbassy extends Card implements IProjectCard {
   constructor() {
     super({
       name: CardName.EARTH_EMBASSY,
-      cardType: CardType.AUTOMATED,
+      cardType: CardType.ACTIVE,
       tags: [Tags.MOON, Tags.EARTH],
       cost: 16,
 

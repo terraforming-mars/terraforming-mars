@@ -23,6 +23,7 @@ interface MainAppData {
             'load' |
             'player-home' |
             'start-screen' |
+            'load-game-form' |
             'the-end';
     /**
      * We set player once the app component has loaded. Vue only

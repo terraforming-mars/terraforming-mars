@@ -4,13 +4,9 @@ import * as querystring from 'querystring';
 
 import {GameLoader} from '../database/GameLoader';
 import {LogMessage} from '../LogMessage';
-import {Route} from './Route';
+import {IContext} from './IHandler';
 
-export class GameLogs extends Route {
-  public canHandle(url: string): boolean {
-    return url.startsWith('/api/game/logs?');
-  }
-
+export class GameLogs {
   public static getLogMessageIndexByGen(data: Array<LogMessage>, generation: number, startIndex: number = 0): number | undefined {
     let counter = 0;
     for (let i = startIndex; i < data.length; i++) {
@@ -29,10 +25,9 @@ export class GameLogs extends Route {
     return undefined;
   }
 
-  public handle(req: http.IncomingMessage, res: http.ServerResponse): void {
+  public handle(req: http.IncomingMessage, res: http.ServerResponse, ctx: IContext): void {
     if (req.url === undefined) {
-      console.warn('url not defined');
-      this.notFound(req, res);
+      ctx.route.notFound(req, res, 'url not defined');
       return;
     }
 
@@ -43,14 +38,13 @@ export class GameLogs extends Route {
     const generation = params.generation;
 
     if (id === undefined || Array.isArray(id)) {
-      this.badRequest(req, res);
+      ctx.route.badRequest(req, res, 'invalid playerid');
       return;
     }
 
     GameLoader.getInstance().getByPlayerId(id, (game) => {
       if (game === undefined) {
-        console.warn('game not found');
-        this.notFound(req, res);
+        ctx.route.notFound(req, res, 'game not found');
         return;
       }
 
@@ -62,7 +56,7 @@ export class GameLogs extends Route {
         // find the index of the selected generation message
         const startIndex = GameLogs.getLogMessageIndexByGen(log, theGen);
         if (startIndex === undefined) {
-          this.badRequest(req, res);
+          ctx.route.badRequest(req, res, 'cannot find specified generation');
           return;
         }
 
@@ -78,7 +72,7 @@ export class GameLogs extends Route {
         if (limit !== undefined && !Array.isArray(limit)) {
           const theLimit = parseInt(limit);
           if (isNaN(theLimit)) {
-            this.badRequest(req, res);
+            ctx.route.badRequest(req, res);
             return;
           }
           if (log.length > theLimit) {
@@ -87,9 +81,7 @@ export class GameLogs extends Route {
         }
       }
 
-      res.setHeader('Content-Type', 'application/json');
-      res.write(JSON.stringify(log));
-      res.end();
+      ctx.route.writeJson(res, log);
     });
   }
 }

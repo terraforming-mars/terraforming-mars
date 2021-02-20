@@ -15,10 +15,12 @@ import {BoardName} from './boards/BoardName';
 import {BufferCache} from './server/BufferCache';
 import {Game, GameId} from './Game';
 import {GameLoader} from './database/GameLoader';
-import {GameLogs} from './routes/GameLogs';
-import {ApiWaitingFor} from './routes/ApiWaitingFor';
+import {ApiCloneableGames} from './routes/ApiCloneableGames';
+import {ApiGameLogs} from './routes/ApiGameLogs';
 import {ApiGames} from './routes/ApiGames';
 import {ApiGame} from './routes/ApiGame';
+import {ApiPlayer} from './routes/ApiPlayer';
+import {ApiWaitingFor} from './routes/ApiWaitingFor';
 import {IHandler} from './routes/IHandler';
 import {Route} from './routes/Route';
 import {Player} from './Player';
@@ -28,7 +30,6 @@ import {Cloner} from './database/Cloner';
 
 const serverId = process.env.SERVER_ID || generateRandomId();
 const route = new Route();
-const gameLogs = new GameLogs();
 const assetCacheMaxAge = process.env.ASSET_CACHE_MAX_AGE || 0;
 const fileCache = new BufferCache();
 
@@ -61,12 +62,13 @@ const handlers: Map<string, IHandler> = new Map(
     // ['/favicon.ico', ServeAsset.INSTANCE],
     // ['/main.js', ServeAsset.INSTANCE],
     // ['/main.js.map', ServeAsset.INSTANCE],
-    // ['/api/player', ApiGetPlayer.INSTANCE],
+    ['/api/player', ApiPlayer.INSTANCE],
     ['/api/waitingfor', ApiWaitingFor.INSTANCE],
     ['/api/games', ApiGames.INSTANCE],
     ['/api/game', ApiGame.INSTANCE],
-    // ['/api/clonablegames', ApiCloneableGames.INSTANCE],
-    // ['/api/game/logs', ApiGameLogs.INSTANCE],
+    ['/api/clonablegames', ApiCloneableGames.INSTANCE],
+    ['/api/cloneablegames', ApiCloneableGames.INSTANCE],
+    ['/api/game/logs', ApiGameLogs.INSTANCE],
     // ['/game/', CreateGame.INSTANCE],
     // ['/load/', LoadGame.INSTANCE],
     // ['/player/input', PlayerInput.INSTANCE],
@@ -112,10 +114,6 @@ function processRequest(req: http.IncomingMessage, res: http.ServerResponse): vo
       serveApp(req, res);
       break;
 
-    case '/api/player':
-      apiGetPlayer(req, res);
-      break;
-
     case '/styles.css':
     case '/styles.css':
     case '/favicon.ico':
@@ -124,15 +122,9 @@ function processRequest(req: http.IncomingMessage, res: http.ServerResponse): vo
       serveAsset(req, res);
       break;
 
-    case '/api/clonablegames':
-      getClonableGames(res);
-      break;
-
     default:
       if (url.pathname.startsWith('/assets/')) {
         serveAsset(req, res);
-      } else if (gameLogs.canHandle(req.url)) {
-        gameLogs.handle(req, res);
       } else {
         route.notFound(req, res);
       }
@@ -174,7 +166,7 @@ function processRequest(req: http.IncomingMessage, res: http.ServerResponse): vo
           route.notFound(req, res);
           return;
         }
-        processInput(req, res, player, game);
+        processInput(req, res, player);
       });
       break;
     } else {
@@ -233,7 +225,6 @@ function processInput(
   req: http.IncomingMessage,
   res: http.ServerResponse,
   player: Player,
-  game: Game,
 ): void {
   let body = '';
   req.on('data', function(data) {
@@ -244,7 +235,7 @@ function processInput(
       const entity = JSON.parse(body);
       player.process(entity);
       res.setHeader('Content-Type', 'application/json');
-      res.write(getPlayerModelJSON(player, game));
+      res.write(getPlayerModelJSON(player));
       res.end();
     } catch (err) {
       res.writeHead(400, {
@@ -258,17 +249,6 @@ function processInput(
       );
       res.end();
     }
-  });
-}
-
-function getClonableGames(res: http.ServerResponse): void {
-  Database.getInstance().getClonableGames(function(err, allGames) {
-    if (err) {
-      return;
-    }
-    res.setHeader('Content-Type', 'application/json');
-    res.write(JSON.stringify(allGames));
-    res.end();
   });
 }
 
@@ -299,40 +279,6 @@ function loadGame(req: http.IncomingMessage, res: http.ServerResponse): void {
     } catch (error) {
       route.internalServerError(req, res, error);
     }
-  });
-}
-
-function apiGetPlayer(
-  req: http.IncomingMessage,
-  res: http.ServerResponse,
-): void {
-  const qs = req.url!.substring('/api/player?'.length);
-  const queryParams = querystring.parse(qs);
-  let playerId = queryParams['id'] as string | Array<string> | undefined;
-  if (Array.isArray(playerId)) {
-    playerId = playerId[0];
-  }
-  if (playerId === undefined) {
-    playerId = '';
-  }
-  GameLoader.getInstance().getByPlayerId(playerId as string, (game) => {
-    if (game === undefined) {
-      route.notFound(req, res);
-      return;
-    }
-    let player: Player | undefined;
-    try {
-      player = game.getPlayerById(playerId as string);
-    } catch (err) {
-      console.warn(`unable to find player ${playerId}`, err);
-    }
-    if (player === undefined) {
-      route.notFound(req, res);
-      return;
-    }
-    res.setHeader('Content-Type', 'application/json');
-    res.write(getPlayerModelJSON(player, game));
-    res.end();
   });
 }
 
@@ -434,8 +380,8 @@ function createGame(req: http.IncomingMessage, res: http.ServerResponse): void {
   });
 }
 
-function getPlayerModelJSON(player: Player, game: Game): string {
-  const model = Server.getPlayerModel(player, game);
+function getPlayerModelJSON(player: Player): string {
+  const model = Server.getPlayerModel(player);
   return JSON.stringify(model);
 }
 

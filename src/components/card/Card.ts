@@ -155,7 +155,7 @@ export const Card = Vue.component('card', {
             <CardExtraContent :card="card" />
             <template v-if="owner !== undefined">
               <div :class="'card-owner-label player_translucent_bg_color_'+ owner?.color">
-                <div class="card-owner-name"> {{owner?.name}} </div>
+                {{owner?.name}}
               </div>
             </template>
         </div>

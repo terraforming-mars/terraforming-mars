@@ -2083,7 +2083,26 @@ input[type="radio"]:checked + .filterDiv::after {
     z-index: 1000;
     top: 100px;
     left: 70px;
+    background: url(./assets/martian.png);
+    width: 100px;
+    height: 123px;
 }
+
+.mined-metal {
+    position: absolute;
+    top: 147px;
+    width: 57px;
+    height: 38px;
+    background: url(./assets/misc/production.png);
+    background-size: 72px;
+    &.mined-steel {
+        left: 105px;
+    }
+    &.mined-titanium {
+        left: 69px;
+    }
+}
+
 
 .card-domed-crater {
     .content {

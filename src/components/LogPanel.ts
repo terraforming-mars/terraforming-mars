@@ -1,5 +1,4 @@
 import Vue from 'vue';
-import {mainAppSettings} from './App';
 import {CardType} from '../cards/CardType';
 import {LogMessage} from '../LogMessage';
 import {LogMessageType} from '../LogMessageType';
@@ -12,10 +11,8 @@ import {CardFinder} from './../CardFinder';
 import {ICard} from '../cards/ICard';
 import {CardName} from '../CardName';
 import {TileType} from '../TileType';
-import {range, playerColorClass} from '../utils/utils';
+import {playerColorClass} from '../utils/utils';
 import {Color} from '../Color';
-
-import * as raw_settings from '../genfiles/settings.json';
 
 export const LogPanel = Vue.component('log-panel', {
   props: {
@@ -175,27 +172,37 @@ export const LogPanel = Vue.component('log-panel', {
       this.cards = [];
     },
     getCrossHtml: function() {
-      return '<i class=\'icon icon-cross\' /i>';
+      return '<i class=\'icon icon-cross\' />';
     },
     selectGeneration: function(gen: number): void {
       this.selectedGeneration = gen;
-      // pause logging globally
-      (this.$root as unknown as typeof mainAppSettings.methods).changeLogPaused(true);
-
-      fetch(`/api/game/logs?id=${this.id}&generation=${gen}`)
-        .then((response) => response.json())
-        .then((messages) => {
-          this.messages.splice(0, this.messages.length);
-          this.messages.push(...messages);
-          // if it's current gen go to default behavior
-          if (gen === this.generation) {
-            // resume logging globally
-            (this.$root as unknown as typeof mainAppSettings.methods).changeLogPaused(false);
+    },
+    getMessagesForGeneration: function(generation: number) {
+      let foundStart = false;
+      const newMessages: Array<LogMessage> = [];
+      for (const message of this.messages) {
+        if (message.message === 'Generation ${0}') {
+          const value = Number(message.data[0]?.value);
+          if (value === generation) {
+            foundStart = true;
+          } else if (value === generation + 1) {
+            break;
           }
-        })
-        .catch((error) => {
-          console.error('error updating messages', error);
-        });
+        }
+        if (foundStart === true) {
+          newMessages.push(message);
+        }
+      }
+      return newMessages;
+    },
+    getMessages: function() {
+      // return all messages for current generation
+      if (this.selectedGeneration === this.generation) {
+        this.$nextTick(this.scrollToEnd);
+        return this.messages;
+      }
+      // limit to selected generation
+      return this.getMessagesForGeneration(this.selectedGeneration);
     },
     getClassesGenIndicator: function(gen: number): string {
       const classes = ['log-gen-indicator'];
@@ -204,24 +211,19 @@ export const LogPanel = Vue.component('log-panel', {
       }
       return classes.join(' ');
     },
-    pauseButtonText: function(): string {
-      return (this.$root as unknown as typeof mainAppSettings.data).logPaused ? 'resume' : 'pause';
-    },
-    togglePause: function() {
-      (this.$root as unknown as typeof mainAppSettings.methods).changeLogPaused(!(this.$root as unknown as typeof mainAppSettings.data).logPaused);
-    },
     getGenerationsRange: function(): Array<number> {
-      const result = range(this.generation + 1);
-      result.shift();
-      return result;
+      const generations: Array<number> = [];
+      for (const message of this.messages) {
+        if (message.message === 'Generation ${0}') {
+          generations.push(Number(message.data[0]?.value));
+        }
+      }
+      return generations;
     },
     getTitleClasses: function(): string {
       const classes = ['log-title'];
       classes.push(playerColorClass(this.color.toLowerCase(), 'shadow'));
       return classes.join(' ');
-    },
-    getIconClass: function(): string {
-      return (this.$root as unknown as typeof mainAppSettings.data).logPaused ? 'icon-play' : 'icon-pause';
     },
     getGenerationText: function(): string {
       let retText = '';
@@ -237,11 +239,10 @@ export const LogPanel = Vue.component('log-panel', {
     },
   },
   mounted: function() {
-    fetch(`/api/game/logs?id=${this.id}&limit=${raw_settings.logLength}&generation=${this.selectedGeneration}`)
+    fetch(`/api/game/logs?id=${this.id}`)
       .then((response) => response.json())
       .then((messages) => {
         this.messages.splice(0, this.messages.length, ...messages);
-        this.$nextTick(this.scrollToEnd);
       })
       .catch((error) => {
         console.error('error updating messages', error);
@@ -263,11 +264,8 @@ export const LogPanel = Vue.component('log-panel', {
         </div>
         <div class="panel log-panel">
           <div id="logpanel-scrollable" class="panel-body">
-            <div class="log-panel-actions">
-              <div class="pause-resume-button" v-on:click="togglePause">{{ pauseButtonText() }}<span :class="getIconClass()"></span></div>
-            </div>
             <ul v-if="messages">
-              <li v-for="message in messages" v-on:click.prevent="cardClicked(message)" v-html="parseMessage(message)"></li>
+              <li v-for="message in getMessages()" v-on:click.prevent="cardClicked(message)" v-html="parseMessage(message)"></li>
             </ul>
           </div>
         </div>

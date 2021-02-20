@@ -173,7 +173,7 @@ export const DebugUI = Vue.component('debug-ui', {
   template: `
         <div class="debug-ui-container" :class="getLanguageCssClass()">
             <h1>Cards List</h1>
-            <div style="position: absolute; top: 0; right: 0; margin: 12px">
+            <div class="legacy-anchor">
               <a href="https://ssimeonoff.github.io/cards-list" target="_blank">legacy card UI</a>
             </div>
             <div class="form-group">

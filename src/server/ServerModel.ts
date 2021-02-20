@@ -128,6 +128,7 @@ export class Server {
     };
   }
 
+  // This is only ever used in ApiWaitingFor, and could be isolated from ServerModel.
   public static getWaitingForModel(player: Player, prevGameAge: number): WaitingForModel {
     const result: WaitingForModel = {
       result: 'WAIT',

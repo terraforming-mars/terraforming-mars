@@ -1,7 +1,7 @@
 import {expect} from 'chai';
 import {PoliticalUprising} from '../../../src/cards/community/PoliticalUprising';
 import {Game} from '../../../src/Game';
-import {OrOptions} from '../../../src/inputs/OrOptions';
+import {SelectPartyToSendDelegate} from '../../../src/inputs/SelectPartyToSendDelegate';
 import {Player} from '../../../src/Player';
 import {PartyName} from '../../../src/turmoil/parties/PartyName';
 import {setCustomGameOptions} from '../../TestingUtils';
@@ -23,8 +23,8 @@ describe('PoliticalUprising', function() {
     expect(game.deferredActions).has.lengthOf(4);
 
     while (game.deferredActions.length) {
-      const orOptions = game.deferredActions.peek()!.execute() as OrOptions;
-      orOptions.options[0].cb();
+      const selectParty = game.deferredActions.peek()!.execute() as SelectPartyToSendDelegate;
+      selectParty.cb(PartyName.MARS);
       game.deferredActions.pop();
     }
 

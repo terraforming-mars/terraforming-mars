@@ -68,6 +68,7 @@ function processRequest(req: http.IncomingMessage, res: http.ServerResponse): vo
   // Shortcut for all assets.
   if (url.pathname.startsWith('/assets/')) {
     ServeApp.INSTANCE.processRequest(req, res, ctx);
+    return;
   }
 
   const handler: IHandler | undefined = handlers.get(url.pathname);
@@ -75,6 +76,7 @@ function processRequest(req: http.IncomingMessage, res: http.ServerResponse): vo
     route.notFound(req, res);
     return;
   }
+  handler.processRequest(req, res, ctx);
 }
 
 function requestHandler(

@@ -75,6 +75,7 @@ export const Preferences = Vue.component('preferences', {
       'hide_tile_confirmation': false as boolean | unknown[],
       'show_card_number': false as boolean | unknown[],
       'show_discount_on_cards': true as boolean | unknown[],
+      'tutorial_mode': true as boolean | unknown[],
     };
   },
   methods: {
@@ -384,7 +385,12 @@ export const Preferences = Vue.component('preferences', {
                             <i class="form-icon"></i> <span v-i18n>Show card numbers (req. refresh)</span>
                         </label>
                     </div>
-
+                    <div class="preferences_panel_item">
+                        <label class="form-switch">
+                            <input type="checkbox" v-on:change="updatePreferences" v-model="tutorial_mode" />
+                            <i class="form-icon"></i> <span v-i18n>Tutorial Mode (req. refresh)</span>
+                        </label>
+                    </div>
                     <div class="preferences_panel_item form-group">
                         <label class="form-label"><span v-i18n>Language</span> (<a href="javascript:document.location.reload(true);" v-i18n>refresh page</a> <span v-i18n>to see changes</span>)</label>
                         <div class="preferences_panel_langs">

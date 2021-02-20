@@ -1,5 +1,5 @@
 import Vue from 'vue';
-
+import {mainAppSettings} from './App';
 import {CardType} from '../cards/CardType';
 import {LogMessage} from '../LogMessage';
 import {LogMessageType} from '../LogMessageType';
@@ -12,6 +12,8 @@ import {CardFinder} from './../CardFinder';
 import {ICard} from '../cards/ICard';
 import {CardName} from '../CardName';
 import {TileType} from '../TileType';
+import {range, playerColorClass} from '../utils/utils';
+import {Color} from '../Color';
 
 import * as raw_settings from '../genfiles/settings.json';
 
@@ -20,14 +22,21 @@ export const LogPanel = Vue.component('log-panel', {
     id: {
       type: String,
     },
+    generation: {
+      type: Number,
+    },
     players: {
       type: Array as () => Array<PlayerModel>,
+    },
+    color: {
+      type: String as () => Color,
     },
   },
   data: function() {
     return {
       cards: [] as Array<string>,
       messages: [] as Array<LogMessage>,
+      selectedGeneration: this.generation,
     };
   },
   components: {
@@ -168,13 +177,70 @@ export const LogPanel = Vue.component('log-panel', {
     getCrossHtml: function() {
       return '<i class=\'icon icon-cross\' /i>';
     },
+    selectGeneration: function(gen: number): void {
+      this.selectedGeneration = gen;
+      // pause logging globally
+      (this.$root as unknown as typeof mainAppSettings.methods).changeLogPaused(true);
+
+      fetch(`/api/game/logs?id=${this.id}&generation=${gen}`)
+        .then((response) => response.json())
+        .then((messages) => {
+          this.messages.splice(0, this.messages.length);
+          this.messages.push(...messages);
+          // if it's current gen go to default behavior
+          if (gen === this.generation) {
+            // resume logging globally
+            (this.$root as unknown as typeof mainAppSettings.methods).changeLogPaused(false);
+          }
+        })
+        .catch((error) => {
+          console.error('error updating messages', error);
+        });
+    },
+    getClassesGenIndicator: function(gen: number): string {
+      const classes = ['log-gen-indicator'];
+      if (gen === this.selectedGeneration) {
+        classes.push('log-gen-indicator--selected');
+      }
+      return classes.join(' ');
+    },
+    pauseButtonText: function(): string {
+      return (this.$root as unknown as typeof mainAppSettings.data).logPaused ? 'resume' : 'pause';
+    },
+    togglePause: function() {
+      (this.$root as unknown as typeof mainAppSettings.methods).changeLogPaused(!(this.$root as unknown as typeof mainAppSettings.data).logPaused);
+    },
+    getGenerationsRange: function(): Array<number> {
+      const result = range(this.generation + 1);
+      result.shift();
+      return result;
+    },
+    getTitleClasses: function(): string {
+      const classes = ['log-title'];
+      classes.push(playerColorClass(this.color.toLowerCase(), 'shadow'));
+      return classes.join(' ');
+    },
+    getIconClass: function(): string {
+      return (this.$root as unknown as typeof mainAppSettings.data).logPaused ? 'icon-play' : 'icon-pause';
+    },
+    getGenerationText: function(): string {
+      let retText = '';
+      if (this.players.length === 1) {
+        const MAX_GEN = this.players[0].gameOptions.preludeExtension ? 12 : 14;
+        retText += 'of ' + MAX_GEN;
+        if (MAX_GEN === this.generation) {
+          retText = '<span class=\'last-generation blink-animation\'>' + retText + '</span>';
+        }
+      }
+
+      return retText;
+    },
   },
   mounted: function() {
-    fetch(`/api/game/logs?id=${this.id}&limit=${raw_settings.logLength}`)
+    fetch(`/api/game/logs?id=${this.id}&limit=${raw_settings.logLength}&generation=${this.selectedGeneration}`)
       .then((response) => response.json())
       .then((messages) => {
-        this.messages.splice(0, this.messages.length);
-        this.messages.push(...messages);
+        this.messages.splice(0, this.messages.length, ...messages);
         this.$nextTick(this.scrollToEnd);
       })
       .catch((error) => {
@@ -182,20 +248,36 @@ export const LogPanel = Vue.component('log-panel', {
       });
   },
   template: `
-    <div>
-        <div class="panel log-panel">
-            <div id="logpanel-scrollable" class="panel-body">
-                <ul v-if="messages">
-                    <li v-for="message in messages" v-on:click.prevent="cardClicked(message)" v-html="parseMessage(message)"></li>
-                </ul>
+      <div class="log-container"> 
+        <div class="log-generations">
+          <h2 :class="getTitleClasses()">
+              <span v-i18n>Game log</span>
+          </h2>
+          <div class="log-gen-title">Gen: </div>
+          <div class="log-gen-numbers">
+            <div v-for="n in getGenerationsRange()" :class="getClassesGenIndicator(n)" v-on:click.prevent="selectGeneration(n)">
+              {{ n }}
             </div>
+          </div>
+          <span class="label-additional" v-html="getGenerationText()"></span>
+        </div>
+        <div class="panel log-panel">
+          <div id="logpanel-scrollable" class="panel-body">
+            <div class="log-panel-actions">
+              <div class="pause-resume-button" v-on:click="togglePause">{{ pauseButtonText() }}<span :class="getIconClass()"></span></div>
+            </div>
+            <ul v-if="messages">
+              <li v-for="message in messages" v-on:click.prevent="cardClicked(message)" v-html="parseMessage(message)"></li>
+            </ul>
+          </div>
         </div>
         <div class="card-panel" v-if="cards.length > 0">
-            <Button size="big" type="close" :disableOnServerBusy="false" :onClick="hideMe" align="right"/>
-            <div id="log_panel_card" class="cardbox" v-for="(card, index) in cards" :key="index">
-                <Card :card="{name: card}"/>
-            </div>
+          <Button size="big" type="close" :disableOnServerBusy="false" :onClick="hideMe" align="right"/>
+          <div id="log_panel_card" class="cardbox" v-for="(card, index) in cards" :key="index">
+            <Card :card="{name: card}"/>
+          </div>
         </div>
-    </div>
+      </div>
     `,
 });
+

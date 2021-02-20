@@ -251,6 +251,9 @@ export class Game implements ISerializable<SerializedGame> {
       gameOptions.draftVariant = false;
       gameOptions.initialDraftVariant = false;
       gameOptions.randomMA = RandomMAOptionType.NONE;
+      if (gameOptions.moonExpansion) {
+        gameOptions.requiresMoonTrackCompletion = true;
+      }
 
       players[0].setTerraformRating(14);
       players[0].terraformRatingAtGenerationStart = 14;
@@ -554,14 +557,14 @@ export class Game implements ISerializable<SerializedGame> {
     // Awards are disabled for 1 player games
     if (this.players.length === 1) return true;
 
-    return this.fundedAwards.length > 2;
+    return this.fundedAwards.length >= constants.MAX_AWARDS;
   }
 
   public allMilestonesClaimed(): boolean {
     // Milestones are disabled for 1 player games
     if (this.players.length === 1) return true;
 
-    return this.claimedMilestones.length > 2;
+    return this.claimedMilestones.length >= constants.MAX_MILESTONES;
   }
 
   private playerHasPickedCorporationCard(player: Player, corporationCard: CorporationCard) {
@@ -706,8 +709,15 @@ export class Game implements ISerializable<SerializedGame> {
   public gameIsOver(): boolean {
     // Single player game is done after generation 14 or 12 with prelude
     if (this.isSoloMode()) {
-      // Solo mode must go on until 14 or 12 generation even if Mars is already terraformed
-      return this.generation === 14 || (this.generation === 12 && this.gameOptions.preludeExtension);
+      let lastGeneration = 14;
+      if (this.gameOptions.preludeExtension) {
+        lastGeneration -= 2;
+      }
+      if (this.gameOptions.moonExpansion && this.gameOptions.requiresMoonTrackCompletion) {
+        lastGeneration += 2;
+      }
+      // Solo mode must go on until the designated generation end even if Mars is already terraformed
+      return this.generation === lastGeneration;
     }
     return this.marsIsTerraformed();
   }
@@ -723,12 +733,6 @@ export class Game implements ISerializable<SerializedGame> {
 
     if (this.gameIsOver()) {
       this.gotoFinalGreeneryPlacement();
-      // Log id or cloned game id
-      if (this.clonedGamedId !== undefined && this.clonedGamedId.startsWith('#')) {
-        this.log('This game was a clone from game ' + this.clonedGamedId);
-      } else {
-        this.log('This game id was ' + this.id);
-      }
       return;
     }
 
@@ -988,6 +992,13 @@ export class Game implements ISerializable<SerializedGame> {
   }
 
   private gotoEndGame(): void {
+    // Log id or cloned game id
+    if (this.clonedGamedId !== undefined && this.clonedGamedId.startsWith('#')) {
+      this.log('This game was a clone from game ' + this.clonedGamedId);
+    } else {
+      this.log('This game id was ' + this.id);
+    }
+
     Database.getInstance().cleanSaves(this.id, this.lastSaveId);
     const scores: Array<Score> = [];
     this.players.forEach((player) => {
@@ -1623,4 +1634,3 @@ export class Game implements ISerializable<SerializedGame> {
     return game;
   }
 }
-

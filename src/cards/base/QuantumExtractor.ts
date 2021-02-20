@@ -17,6 +17,7 @@ export class QuantumExtractor extends Card implements IProjectCard {
       cost: 13,
 
       requirements: CardRequirements.builder((b) => b.tag(Tags.SCIENCE, 4)),
+      cardDiscount: {tag: Tags.SPACE, amount: 2},
       metadata: {
         cardNumber: '079',
         renderData: CardRenderer.builder((b) => {
@@ -29,6 +30,8 @@ export class QuantumExtractor extends Card implements IProjectCard {
       },
     });
   }
+
+
   public getCardDiscount(_player: Player, card: IProjectCard) {
     if (card.tags.includes(Tags.SPACE)) {
       return 2;

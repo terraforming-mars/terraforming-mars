@@ -5,6 +5,7 @@ import {GlobalEventDealer, getGlobalEventByName} from '../src/turmoil/globalEven
 import {GlobalEventName} from '../src/turmoil/globalEvents/GlobalEventName';
 import {IGlobalEvent} from '../src/turmoil/globalEvents/IGlobalEvent';
 import {ScientificCommunity} from '../src/turmoil/globalEvents/ScientificCommunity';
+import {SerializedGlobalEventDealer} from '../src/turmoil/globalEvents/SerializedGlobalEventDealer';
 import {SponsoredProjects} from '../src/turmoil/globalEvents/SponsoredProjects';
 import {SuccessfulOrganisms} from '../src/turmoil/globalEvents/SuccessfulOrganisms';
 import {WarOnEarth} from '../src/turmoil/globalEvents/WarOnEarth';
@@ -15,7 +16,7 @@ describe('GlobalEventsDealer', () => {
     const dealer = new GlobalEventDealer([], []);
 
     const jsonString = JSON.stringify(dealer.serialize());
-    const json = JSON.parse(jsonString) as GlobalEventDealer;
+    const json = JSON.parse(jsonString) as SerializedGlobalEventDealer;
     const newDealer = GlobalEventDealer.deserialize(json);
 
     expect(newDealer.globalEventsDeck).is.empty;
@@ -28,7 +29,7 @@ describe('GlobalEventsDealer', () => {
       [new GlobalDustStorm(), new WarOnEarth()]);
 
     const jsonString = JSON.stringify(dealer.serialize());
-    const json = JSON.parse(jsonString) as GlobalEventDealer;
+    const json = JSON.parse(jsonString) as SerializedGlobalEventDealer;
     const newDealer = GlobalEventDealer.deserialize(json);
 
     const cardName = (e: IGlobalEvent) => e.name;

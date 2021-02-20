@@ -14,6 +14,7 @@ export class VenusWaystation extends Card {
       tags: [Tags.VENUS, Tags.SPACE],
       cost: 9,
 
+      cardDiscount: {tag: Tags.VENUS, amount: 2},
       metadata: {
         cardNumber: '258',
         renderData: CardRenderer.builder((b) => {

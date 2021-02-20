@@ -350,6 +350,7 @@ function getCards(
     isDisabled: options.enabled?.[index] === false,
     warning: card.warning,
     reserveUnits: options.reserveUnitMap?.get(card.name) || Units.EMPTY,
+    discount: card.cardDiscount,
   }));
 }
 
@@ -492,5 +493,6 @@ function getGameOptionsAsModel(options: GameOptions): GameOptionsModel {
     randomMA: options.randomMA,
     turmoilExtension: options.turmoilExtension,
     venusNextExtension: options.venusNextExtension,
+    requiresVenusTrackCompletion: options.requiresVenusTrackCompletion,
   };
 }

@@ -16,6 +16,7 @@ export class Thorgate extends Card implements CorporationCard {
       tags: [Tags.ENERGY],
       startingMegaCredits: 48,
 
+      cardDiscount: {tag: Tags.ENERGY, amount: 3},
       metadata: {
         cardNumber: 'R13',
         description: 'You start with 1 energy production and 48 MC.',
@@ -32,6 +33,7 @@ export class Thorgate extends Card implements CorporationCard {
       },
     });
   }
+
   public getCardDiscount(_player: Player, card: IProjectCard) {
     if (card.tags.includes(Tags.ENERGY)) {
       return 3;

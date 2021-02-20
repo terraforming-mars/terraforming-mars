@@ -557,14 +557,14 @@ export class Game implements ISerializable<SerializedGame> {
     // Awards are disabled for 1 player games
     if (this.players.length === 1) return true;
 
-    return this.fundedAwards.length > 2;
+    return this.fundedAwards.length >= constants.MAX_AWARDS;
   }
 
   public allMilestonesClaimed(): boolean {
     // Milestones are disabled for 1 player games
     if (this.players.length === 1) return true;
 
-    return this.claimedMilestones.length > 2;
+    return this.claimedMilestones.length >= constants.MAX_MILESTONES;
   }
 
   private playerHasPickedCorporationCard(player: Player, corporationCard: CorporationCard) {

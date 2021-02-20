@@ -110,7 +110,7 @@ function processRequest(req: http.IncomingMessage, res: http.ServerResponse): vo
     case '/the-end':
     case '/load':
     case '/debug-ui':
-    case '/help-iconology':
+    case '/help':
       serveApp(req, res);
       break;
 
@@ -273,7 +273,7 @@ function serveAsset(req: http.IncomingMessage, res: http.ServerResponse): void {
     const compressed = fileCache.get('styles.css.gz');
     contentType = 'text/css';
     file = 'styles.css';
-    if (compressed !== undefined && supportsEncoding(req, 'gzip')) {
+    if (compressed !== undefined && Route.supportsEncoding(req, 'gzip')) {
       contentEncoding = 'gzip';
       file += '.gz';
     }
@@ -286,10 +286,10 @@ function serveAsset(req: http.IncomingMessage, res: http.ServerResponse): void {
   } else if (req.url === '/main.js' || req.url === '/main.js.map') {
     contentType = 'text/javascript';
     file = `build${req.url}`;
-    if (supportsEncoding(req, 'br')) {
+    if (Route.supportsEncoding(req, 'br')) {
       contentEncoding = 'br';
       file += '.br';
-    } else if (supportsEncoding(req, 'gzip')) {
+    } else if (Route.supportsEncoding(req, 'gzip')) {
       contentEncoding = 'gzip';
       file += '.gz';
     }
@@ -349,11 +349,6 @@ function serveAsset(req: http.IncomingMessage, res: http.ServerResponse): void {
       fileCache.set(finalFile, data);
     }
   });
-}
-
-function supportsEncoding(req: http.IncomingMessage, encoding: 'gzip' | 'br'): boolean {
-  return req.headers['accept-encoding'] !== undefined &&
-         req.headers['accept-encoding'].includes(encoding);
 }
 
 console.log('Starting server on port ' + (process.env.PORT || 8080));

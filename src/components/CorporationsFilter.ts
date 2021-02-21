@@ -157,19 +157,19 @@ export const CorporationsFilter = Vue.component('corporations-filter', {
   template: `
     <div class="corporations-filter">
         <div class="corporations-filter-toolbox-cont">
-            <h2>Corporations</h2>
+            <h2 v-i18n>Corporations</h2>
             <div class="corporations-filter-toolbox corporations-filter-toolbox--topmost">
-                <a href="#" v-on:click.prevent="selectAll('All')">All</a> |
-                <a href="#" v-on:click.prevent="selectNone('All')">None</a> |
-                <a href="#" v-on:click.prevent="invertSelection('All')">Invert</a>
+                <a href="#" v-i18n v-on:click.prevent="selectAll('All')">All</a> |
+                <a href="#" v-i18n v-on:click.prevent="selectNone('All')">None</a> |
+                <a href="#" v-i18n v-on:click.prevent="invertSelection('All')">Invert</a>
             </div>
         </div>
         <div class="corporations-filter-group" v-for="entry in corpsByModule" v-if="entry[1].length > 0">
             <div class="corporations-filter-toolbox-cont">
                 <div class="corporations-filter-toolbox">
-                    <a href="#" v-on:click.prevent="selectAll(entry[0])">All</a> |
-                    <a href="#" v-on:click.prevent="selectNone(entry[0])">None</a> |
-                    <a href="#" v-on:click.prevent="invertSelection(entry[0])">Invert</a>
+                    <a href="#" v-i18n v-on:click.prevent="selectAll(entry[0])">All</a> |
+                    <a href="#" v-i18n v-on:click.prevent="selectNone(entry[0])">None</a> |
+                    <a href="#" v-i18n v-on:click.prevent="invertSelection(entry[0])">Invert</a>
                 </div>
             </div>
             <div v-for="corporation in entry[1]">

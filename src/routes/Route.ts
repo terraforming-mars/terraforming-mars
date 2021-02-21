@@ -39,4 +39,9 @@ export class Route {
     res.write('Not authorized');
     res.end();
   }
+  public writeJson(res: http.ServerResponse, json: any) {
+    res.setHeader('Content-Type', 'application/json');
+    res.write(JSON.stringify(json));
+    res.end();
+  }
 }

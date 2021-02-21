@@ -40,6 +40,7 @@ import {MoonModel} from '../models/MoonModel';
 import {CardName} from '../CardName';
 import {Units} from '../Units';
 import {WaitingForModel} from '../models/WaitingForModel';
+import {SelectPartyToSendDelegate} from '../inputs/SelectPartyToSendDelegate';
 
 export class Server {
   public static getGameModel(game: Game): GameHomeModel {
@@ -241,6 +242,8 @@ function getWaitingFor(
     payProduction: undefined,
     aresData: undefined,
     selectBlueCardAction: false,
+    availableParties: undefined,
+    turmoil: undefined,
   };
   switch (waitingFor.inputType) {
   case PlayerInputTypes.AND_OPTIONS:
@@ -310,6 +313,12 @@ function getWaitingFor(
       },
     );
     break;
+  case PlayerInputTypes.SELECT_PARTY_TO_SEND_DELEGATE:
+    playerInputModel.availableParties = (waitingFor as SelectPartyToSendDelegate).availableParties;
+    if (player.game !== undefined) {
+      playerInputModel.turmoil = getTurmoil(player.game);
+    }
+    break;
   case PlayerInputTypes.SELECT_PRODUCTION_TO_LOSE:
     const _player = (waitingFor as SelectProductionToLose).player;
     playerInputModel.payProduction = {
@@ -350,6 +359,8 @@ function getCards(
     isDisabled: options.enabled?.[index] === false,
     warning: card.warning,
     reserveUnits: options.reserveUnitMap?.get(card.name) || Units.EMPTY,
+    bonusResource: (card as IProjectCard).bonusResource,
+    discount: card.cardDiscount,
   }));
 }
 
@@ -492,5 +503,6 @@ function getGameOptionsAsModel(options: GameOptions): GameOptionsModel {
     randomMA: options.randomMA,
     turmoilExtension: options.turmoilExtension,
     venusNextExtension: options.venusNextExtension,
+    requiresVenusTrackCompletion: options.requiresVenusTrackCompletion,
   };
 }

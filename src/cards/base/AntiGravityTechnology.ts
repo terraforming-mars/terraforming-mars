@@ -15,6 +15,7 @@ export class AntiGravityTechnology extends Card implements IProjectCard {
       cost: 14,
 
       requirements: CardRequirements.builder((b) => b.tag(Tags.SCIENCE, 7)),
+      cardDiscount: {amount: 2},
       metadata: {
         description: 'Requires 7 science tags.',
         cardNumber: '150',
@@ -25,6 +26,7 @@ export class AntiGravityTechnology extends Card implements IProjectCard {
       },
     });
   }
+
   public getCardDiscount() {
     return 2;
   }

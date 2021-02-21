@@ -28,9 +28,6 @@ export const GameSetupDetail = Vue.component('game-setup-detail', {
         return 'game-config board-other map';
       }
     },
-    includeUnOfficialExpansions: function(): boolean {
-      return (this.gameOptions.aresExtension || this.gameOptions.communityCardsOption || this.isPoliticalAgendasOn());
-    },
     isRandomMANone: function(): boolean {
       return this.gameOptions.randomMA === RandomMAOptionType.NONE;
     },
@@ -50,10 +47,8 @@ export const GameSetupDetail = Vue.component('game-setup-detail', {
               <div v-if="gameOptions.coloniesExtension" class="create-game-expansion-icon expansion-icon-colony"></div>
               <div v-if="gameOptions.turmoilExtension" class="create-game-expansion-icon expansion-icon-turmoil"></div>
               <div v-if="gameOptions.promoCardsOption" class="create-game-expansion-icon expansion-icon-promo"></div>
-            </li>
-            
-            <li v-if="includeUnOfficialExpansions()"><div class="setup-item" v-i18n>Fanmade expansion:</div>
               <div v-if="gameOptions.aresExtension" class="create-game-expansion-icon expansion-icon-ares"></div>
+              <div v-if="gameOptions.moonExpansion" class="create-game-expansion-icon expansion-icon-themoon"></div>
               <div v-if="gameOptions.communityCardsOption" class="create-game-expansion-icon expansion-icon-community"></div>
               <div v-if="isPoliticalAgendasOn()" class="create-game-expansion-icon expansion-icon-agendas"></div>
             </li>
@@ -63,12 +58,13 @@ export const GameSetupDetail = Vue.component('game-setup-detail', {
               &nbsp;
               <span v-if="gameOptions.shuffleMapOption" class="game-config generic" v-i18n>(randomized tiles)</span>
             </li>
-            
+
             <li><div class="setup-item" v-i18n>WGT:</div>
               <div v-if="gameOptions.solarPhaseOption" class="game-config generic" v-i18n>On</div>
               <div v-else class="game-config generic" v-i18n>Off</div>
             </li>
             <li v-if="gameOptions.requiresVenusTrackCompletion">Require Terraforming Venus to end the game</li>
+            <li v-if="gameOptions.requiresMoonTrackCompletion">Require Terraforming The Moon to end the game</li>
 
             <li v-if="playerNumber > 1">
               <div class="setup-item" v-i18n>Milestones and Awards:</div>
@@ -79,7 +75,7 @@ export const GameSetupDetail = Vue.component('game-setup-detail', {
               <div v-if="!isRandomMANone() && !gameOptions.includeVenusMA" class="game-config generic" v-i18n>(5 each)</div>
               <div v-if="!isRandomMANone() && gameOptions.includeVenusMA" class="game-config generic" v-i18n>(6 each)</div>
             </li>
-            
+
             <li v-if="playerNumber > 1">
               <div class="setup-item" v-i18n>Draft:</div>
               <div v-if="gameOptions.initialDraftVariant" class="game-config generic" v-i18n>Initial</div>

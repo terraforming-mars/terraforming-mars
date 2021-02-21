@@ -130,23 +130,6 @@ export const PlayerHome = Vue.component('player-home', {
       }
       return fleetsRange;
     },
-    getGenerationText: function(): string {
-      if (this.player.players.length === 1) {
-        const MAX_GEN = this.player.gameOptions.preludeExtension ? 12 : 14;
-        let retText =
-                    'generation ' + this.player.generation + ' of ' + MAX_GEN;
-        if (MAX_GEN === this.player.generation) {
-          retText =
-                        '<span class=\'last-generation blink-animation\'>' +
-                        retText +
-                        '</span>';
-        }
-
-        return retText;
-      }
-
-      return 'generation ' + this.player.generation;
-    },
     toggleActiveCardsHiding() {
       this.hide_active_cards = this.isActiveCardShown() ? '1': '';
     },
@@ -268,12 +251,7 @@ export const PlayerHome = Vue.component('player-home', {
                 <players-overview class="player_home_block player_home_block--players nofloat:" :player="player" v-trim-whitespace id="shortkey-playersoverview"/>
 
                 <div class="player_home_block player_home_block--log player_home_block--hide_log nofloat">
-                    <dynamic-title v-if="player.players.length > 1" title="Game log" :color="player.color" :withAdditional="true" :additional="'generation ' + player.generation"/>
-                    <h2 v-else :class="'player_color_'+ player.color">
-                        <span v-i18n>Game log</span>
-                        <span class="label-additional" v-html="getGenerationText()"></span>
-                    </h2>
-                    <log-panel :id="player.id" :players="player.players"></log-panel>
+                    <log-panel :id="player.id" :players="player.players" :generation="player.generation" :color="player.color"></log-panel>
                 </div>
 
                 <div class="player_home_block player_home_block--actions nofloat">

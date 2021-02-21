@@ -2,7 +2,7 @@ import {expect} from 'chai';
 import {Incite} from '../../../src/cards/community/Incite';
 import {EventAnalysts} from '../../../src/cards/turmoil/EventAnalysts';
 import {Game} from '../../../src/Game';
-import {OrOptions} from '../../../src/inputs/OrOptions';
+import {SelectPartyToSendDelegate} from '../../../src/inputs/SelectPartyToSendDelegate';
 import {Player} from '../../../src/Player';
 import {PartyName} from '../../../src/turmoil/parties/PartyName';
 import {setCustomGameOptions} from '../../TestingUtils';
@@ -36,8 +36,8 @@ describe('Incite', function() {
     card.initialAction(player);
     expect(game.deferredActions).has.lengthOf(1);
 
-    const orOptions = game.deferredActions.peek()!.execute() as OrOptions;
-    orOptions.options[0].cb();
+    const sendDelegate = game.deferredActions.peek()!.execute() as SelectPartyToSendDelegate;
+    sendDelegate.cb(PartyName.MARS);
 
     const marsFirst = game.turmoil!.getPartyByName(PartyName.MARS);
     expect(marsFirst!.delegates.filter((d) => d === player.id)).has.lengthOf(2);

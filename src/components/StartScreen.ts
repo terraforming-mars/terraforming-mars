@@ -42,8 +42,8 @@ export const StartScreen = Vue.component('start-screen', {
     <div class="start-screen-header start-screen-link--languages">
       <language-switcher />
       <div class="start-screen-version-cont">
-        <div class="nowrap start-screen-date">deployed: {{getAppDate()}}</div>
-        <div class="nowrap start-screen-version">version: {{getAppVersion()}}</div>
+        <div class="nowrap start-screen-date"><span v-i18n>deployed</span>: {{getAppDate()}}</div>
+        <div class="nowrap start-screen-version"><span v-i18n>version</span>: {{getAppVersion()}}</div>
       </div>
     </div>
   </div>

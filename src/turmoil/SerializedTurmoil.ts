@@ -25,5 +25,5 @@ export interface SerializedTurmoil {
     comingGlobalEvent: GlobalEventName | undefined;
     // TODO(kberg): By 2021-03-01, IGlobalEvent.
     currentGlobalEvent?: IGlobalEvent | GlobalEventName;
-    politicalAgendasData: SerializedPoliticalAgendasData | undefined;
+    politicalAgendasData: SerializedPoliticalAgendasData;
 }

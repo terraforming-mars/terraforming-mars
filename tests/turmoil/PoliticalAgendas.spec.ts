@@ -22,71 +22,88 @@ describe('PoliticalAgendas', function() {
     PoliticalAgendas.randomElement = randomElement;
   });
 
-  it('Standard', () => {
-    const game = Game.newInstance('foobar', [player1, player2], player1, setCustomGameOptions({politicalAgendasExtension: AgendaStyle.STANDARD}));
-    const turmoil = game.turmoil!;
+  const deserialized = [false, true];
 
-    expect(turmoil.politicalAgendasData.currentAgenda.bonusId).eq('gb01');
-    expect(turmoil.politicalAgendasData.currentAgenda.policyId).eq('gp01');
+  deserialized.forEach((deserialize) => {
+    const suffix = deserialize ? ', but deserialized' : '';
+    it('Standard' + suffix, () => {
+      let game = Game.newInstance('foobar', [player1, player2], player1, setCustomGameOptions({politicalAgendasExtension: AgendaStyle.STANDARD}));
+      if (deserialize) {
+        game = Game.deserialize(game.serialize());
+      }
+      const turmoil = game.turmoil!;
 
-    const newParty = turmoil.getPartyByName(PartyName.KELVINISTS)!;
-    turmoil.rulingParty = newParty;
-    turmoil.chairman = player2.id;
-    PoliticalAgendas.setNextAgenda(turmoil, game);
-    TestingUtils.runAllActions(game);
+      expect(turmoil.politicalAgendasData.currentAgenda.bonusId).eq('gb01');
+      expect(turmoil.politicalAgendasData.currentAgenda.policyId).eq('gp01');
 
-    expect(turmoil.politicalAgendasData.currentAgenda.bonusId).eq('kb01');
-    expect(turmoil.politicalAgendasData.currentAgenda.policyId).eq('kp01');
-  });
+      const newParty = turmoil.getPartyByName(PartyName.KELVINISTS)!;
+      turmoil.rulingParty = newParty;
+      turmoil.chairman = player2.id;
+      PoliticalAgendas.setNextAgenda(turmoil, game);
+      TestingUtils.runAllActions(game);
 
-  it('Chairman mode, human chairman', () => {
-    // For the neutral chairman to always pick the second item in the list.
-    PoliticalAgendas.randomElement = (list: Array<any>) => list[1];
+      expect(turmoil.politicalAgendasData.currentAgenda.bonusId).eq('kb01');
+      expect(turmoil.politicalAgendasData.currentAgenda.policyId).eq('kp01');
+    });
 
-    const game = Game.newInstance('foobar', [player1, player2], player1, setCustomGameOptions({politicalAgendasExtension: AgendaStyle.CHAIRMAN}));
-    const turmoil = game.turmoil!;
+    it('Chairman mode, human chairperson' + suffix, () => {
+      // For the neutral chairman to always pick the second item in the list.
+      PoliticalAgendas.randomElement = (list: Array<any>) => list[1];
 
-    expect(turmoil.politicalAgendasData.currentAgenda.bonusId).eq('gb02');
-    expect(turmoil.politicalAgendasData.currentAgenda.policyId).eq('gp02');
+      let game = Game.newInstance('foobar', [player1, player2], player1, setCustomGameOptions({politicalAgendasExtension: AgendaStyle.CHAIRMAN}));
+      if (deserialize) {
+        game = Game.deserialize(game.serialize());
+        // Get a new copy of player2 who will have a different set of waitingFor.
+        player2 = game.getPlayerById(player2.id);
+      }
+      const turmoil = game.turmoil!;
 
-    const newParty = turmoil.getPartyByName(PartyName.KELVINISTS)!;
-    turmoil.rulingParty = newParty;
-    turmoil.chairman = player2.id;
-    PoliticalAgendas.setNextAgenda(turmoil, game);
-    TestingUtils.runAllActions(game);
+      expect(turmoil.politicalAgendasData.currentAgenda.bonusId).eq('gb02');
+      expect(turmoil.politicalAgendasData.currentAgenda.policyId).eq('gp02');
 
-    // Nothing's changed yet.
-    expect(turmoil.politicalAgendasData.currentAgenda.bonusId).eq('gb02');
-    expect(turmoil.politicalAgendasData.currentAgenda.policyId).eq('gp02');
+      const newParty = turmoil.getPartyByName(PartyName.KELVINISTS)!;
+      turmoil.rulingParty = newParty;
+      turmoil.chairman = player2.id;
 
-    const waitingFor = player2.getWaitingFor() as AndOptions;
-    const bonusOptions = waitingFor.options[0] as OrOptions;
-    bonusOptions.options[0].cb();
-    const policyOptions = waitingFor.options[1] as OrOptions;
-    policyOptions.options[3].cb();
-    waitingFor.cb();
+      PoliticalAgendas.setNextAgenda(turmoil, game);
+      TestingUtils.runAllActions(game);
 
-    expect(turmoil.politicalAgendasData.currentAgenda.bonusId).eq('kb01');
-    expect(turmoil.politicalAgendasData.currentAgenda.policyId).eq('kp04');
-  });
+      // Nothing's changed yet.
+      expect(turmoil.politicalAgendasData.currentAgenda.bonusId).eq('gb02');
+      expect(turmoil.politicalAgendasData.currentAgenda.policyId).eq('gp02');
 
-  it('Chairman mode, neutral chairperson', () => {
-    // For the neutral chairperson to always pick the second item.
-    PoliticalAgendas.randomElement = (list: Array<any>) => list[1];
+      const waitingFor = player2.getWaitingFor() as AndOptions;
+      const bonusOptions = waitingFor.options[0] as OrOptions;
+      bonusOptions.options[0].cb();
+      const policyOptions = waitingFor.options[1] as OrOptions;
+      policyOptions.options[3].cb();
+      waitingFor.cb();
 
-    const game = Game.newInstance('foobar', [player1, player2], player1, setCustomGameOptions({politicalAgendasExtension: AgendaStyle.CHAIRMAN}));
-    const turmoil = game.turmoil!;
+      expect(turmoil.politicalAgendasData.currentAgenda.bonusId).eq('kb01');
+      expect(turmoil.politicalAgendasData.currentAgenda.policyId).eq('kp04');
+    });
 
-    expect(turmoil.politicalAgendasData.currentAgenda.bonusId).eq('gb02');
-    expect(turmoil.politicalAgendasData.currentAgenda.policyId).eq('gp02');
+    it('Chairman mode, neutral chairperson' + suffix, () => {
+      // For the neutral chairperson to always pick the second item.
+      PoliticalAgendas.randomElement = (list: Array<any>) => list[1];
 
-    const newParty = turmoil.getPartyByName(PartyName.KELVINISTS)!;
-    turmoil.rulingParty = newParty;
-    turmoil.chairman = 'NEUTRAL';
-    PoliticalAgendas.setNextAgenda(turmoil, game);
-    TestingUtils.runAllActions(game);
+      let game = Game.newInstance('foobar', [player1, player2], player1, setCustomGameOptions({politicalAgendasExtension: AgendaStyle.CHAIRMAN}));
+      if (deserialize) {
+        game = Game.deserialize(game.serialize());
+      }
+      const turmoil = game.turmoil!;
 
-    expect(turmoil.politicalAgendasData.currentAgenda.bonusId).eq('kb02');
-    expect(turmoil.politicalAgendasData.currentAgenda.policyId).eq('kp02');
+      expect(turmoil.politicalAgendasData.currentAgenda.bonusId).eq('gb02');
+      expect(turmoil.politicalAgendasData.currentAgenda.policyId).eq('gp02');
+
+      const newParty = turmoil.getPartyByName(PartyName.KELVINISTS)!;
+      turmoil.rulingParty = newParty;
+      turmoil.chairman = 'NEUTRAL';
+      PoliticalAgendas.setNextAgenda(turmoil, game);
+      TestingUtils.runAllActions(game);
+
+      expect(turmoil.politicalAgendasData.currentAgenda.bonusId).eq('kb02');
+      expect(turmoil.politicalAgendasData.currentAgenda.policyId).eq('kp02');
+    });
   });
 });

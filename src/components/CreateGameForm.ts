@@ -16,6 +16,7 @@ import {GameId} from '../Game';
 import {AgendaStyle} from '../turmoil/PoliticalAgendas';
 
 import * as constants from '../constants';
+import {$t} from '../directives/i18n';
 
 export interface CreateGameModel {
     constants: typeof constants;
@@ -409,6 +410,7 @@ export const CreateGameForm = Vue.component('create-game-form', {
       const requiresMoonTrackCompletion = component.requiresMoonTrackCompletion;
       let clonedGamedId: undefined | GameId = undefined;
 
+      // Check custom colony count
       if (customColoniesList.length > 0) {
         const playersCount = players.length;
         let neededColoniesCount = playersCount + 2;
@@ -419,7 +421,17 @@ export const CreateGameForm = Vue.component('create-game-form', {
         }
 
         if (customColoniesList.length < neededColoniesCount) {
-          window.alert('Must select at least ' + neededColoniesCount + ' colonies');
+          window.alert($t('Must select at least ') + neededColoniesCount + $t(' colonies'));
+          return;
+        }
+      }
+
+      // Check custom corp count
+      if (customCorporationsList.length > 0) {
+        const neededCorpsCount = players.length * startingCorporations;
+
+        if (customCorporationsList.length < neededCorpsCount) {
+          window.alert($t('Must select at least ') + neededCorpsCount + $t(' corporations'));
           return;
         }
       }

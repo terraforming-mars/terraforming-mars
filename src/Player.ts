@@ -37,6 +37,7 @@ import {SendDelegateToArea} from './deferredActions/SendDelegateToArea';
 import {DeferredAction} from './deferredActions/DeferredAction';
 import {SelectHowToPayDeferred} from './deferredActions/SelectHowToPayDeferred';
 import {SelectColony} from './inputs/SelectColony';
+import {SelectPartyToSendDelegate} from './inputs/SelectPartyToSendDelegate';
 import {SelectDelegate} from './inputs/SelectDelegate';
 import {SelectHowToPay} from './inputs/SelectHowToPay';
 import {SelectHowToPayForProjectCard} from './inputs/SelectHowToPayForProjectCard';
@@ -897,6 +898,13 @@ export class Player implements ISerializable<SerializedPlayer> {
       // TODO(kberg): I'm sure there's some input validation required.
       const response: IAresGlobalParametersResponse = JSON.parse(input[0][0]);
       pi.cb(response);
+    } else if (pi instanceof SelectPartyToSendDelegate) {
+      this.checkInputLength(input, 1, 1);
+      const party: PartyName = (input[0][0]) as PartyName;
+      if (party === undefined) {
+        throw new Error('No party selected');
+      }
+      this.runInputCb(pi.cb(party));
     } else {
       throw new Error('Unsupported waitingFor');
     }

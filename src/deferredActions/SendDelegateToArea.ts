@@ -1,9 +1,9 @@
 import {Player, PlayerId} from '../Player';
-import {OrOptions} from '../inputs/OrOptions';
-import {SelectOption} from '../inputs/SelectOption';
+import {SelectPartyToSendDelegate} from '../inputs/SelectPartyToSendDelegate';
 import {DeferredAction, Priority} from './DeferredAction';
 import {SelectHowToPayDeferred} from './SelectHowToPayDeferred';
 import {NeutralPlayer} from '../turmoil/Turmoil';
+import {PartyName} from '../turmoil/parties/PartyName';
 
 export class SendDelegateToArea implements DeferredAction {
   public priority = Priority.DEFAULT;
@@ -18,9 +18,6 @@ export class SendDelegateToArea implements DeferredAction {
     if (turmoil === undefined) {
       throw new Error(`Turmoil not defined in game ${this.player.game.id}`);
     }
-    const sendDelegate = new OrOptions();
-    sendDelegate.title = this.title;
-    sendDelegate.buttonLabel = 'Send delegate';
 
     // All parties are eligible, unless this action is used to replace a delegate.
     let parties = turmoil.parties;
@@ -39,35 +36,34 @@ export class SendDelegateToArea implements DeferredAction {
       parties = turmoil.parties;
     }
 
-    const count = this.options.count || 1;
+    // How many delegate to send
+    const numDelegateToSend = this.options.count || 1;
 
-    sendDelegate.options = parties.map((party) => new SelectOption(
-      party.name + ' (' + party.description + ')',
-      'Send delegate',
-      () => {
-        if (this.options.cost) {
-          this.player.game.defer(new SelectHowToPayDeferred(this.player, this.options.cost, {title: 'Select how to pay for send delegate action'}));
+    const availableParties = parties.map((party) => party.name);
+
+    const sendDelegate = new SelectPartyToSendDelegate(this.title, 'Send delegate', availableParties, (partyName: PartyName) => {
+      if (this.options.cost) {
+        this.player.game.defer(new SelectHowToPayDeferred(this.player, this.options.cost, {title: 'Select how to pay for send delegate action'}));
+      }
+
+      const source = this.options.source || 'lobby';
+      if (numDelegateToSend > 1 && source === 'lobby') { // For card: Cultural Metropolis
+        turmoil.sendDelegateToParty(this.player.id, partyName, this.player.game, 'lobby');
+        for (let i = 0; i < numDelegateToSend - 1; i++) {
+          turmoil.sendDelegateToParty(this.player.id, partyName, this.player.game, 'reserve');
         }
-
-        const source = this.options.source || 'lobby';
-        if (count > 1 && source === 'lobby') { // For card: Cultural Metropolis
-          turmoil.sendDelegateToParty(this.player.id, party.name, this.player.game, 'lobby');
-          for (let i = 0; i < count - 1; i++) {
-            turmoil.sendDelegateToParty(this.player.id, party.name, this.player.game, 'reserve');
+      } else {
+        for (let i = 0; i < numDelegateToSend; i++) {
+          if (this.options.replace) {
+            turmoil.removeDelegateFromParty(this.options.replace, partyName, this.player.game);
           }
-        } else {
-          for (let i = 0; i < count; i++) {
-            if (this.options.replace) {
-              turmoil.removeDelegateFromParty(this.options.replace, party.name, this.player.game);
-            }
-            turmoil.sendDelegateToParty(this.player.id, party.name, this.player.game, source);
-          }
+          turmoil.sendDelegateToParty(this.player.id, partyName, this.player.game, source);
         }
+      }
 
-        this.player.game.log('${0} sent ${1} delegate(s) in ${2} area', (b) => b.player(this.player).number(count).party(party));
-        return undefined;
-      },
-    ));
+      this.player.game.log('${0} sent ${1} delegate(s) in ${2} area', (b) => b.player(this.player).number(numDelegateToSend).party(turmoil.getPartyByName(partyName)));
+      return undefined;
+    });
 
     return sendDelegate;
   }

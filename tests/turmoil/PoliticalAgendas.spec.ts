@@ -1,8 +1,8 @@
 import {expect} from 'chai';
-import {Game} from '../src/Game';
-import {setCustomGameOptions, TestPlayers} from './TestingUtils';
-import {PoliticalAgendas} from '../src/turmoil/PoliticalAgendas';
-import {PartyName} from '../src/turmoil/parties/PartyName';
+import {Game} from '../../src/Game';
+import {setCustomGameOptions, TestPlayers} from '../TestingUtils';
+import {PoliticalAgendas} from '../../src/turmoil/PoliticalAgendas';
+import {PartyName} from '../../src/turmoil/parties/PartyName';
 
 describe('PoliticalAgendas', () => {
   it('deserialize legacy', () => {

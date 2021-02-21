@@ -40,7 +40,7 @@ export interface SerializedPoliticalAgendasData {
 }
 
 export class PoliticalAgendas {
-  public static randomElement: (list: Array<any>) => any = PoliticalAgendas.defaultRandomElement;
+  public static randomElement = PoliticalAgendas.defaultRandomElement;
 
   public static newInstance(
     agendaStyle: AgendaStyle,

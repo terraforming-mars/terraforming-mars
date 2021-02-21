@@ -33,19 +33,16 @@ export const HelpStandardProjects = Vue.component('help-standard-projects', {
       <div class="cardbox" v-for="card in getBasicStandardProjects()">
         <Card :card="{'name': card}" />
       </div>
-      <br>
 
       <h2 v-i18n>Standard Projects from Expansions and Solo Mode</h2>
       <div class="cardbox" v-for="card in getExpansionStandardProjects()">
         <Card :card="{'name': card}" />
       </div>
-      <br>
 
       <h2 v-i18n>Standard Project from Fan-made Expansions</h2>
       <div class="cardbox" v-for="card in getFanMadeStandardProjects()">
         <Card :card="{'name': card}" />
       </div>
-      <br>
 
     </div>
     `,

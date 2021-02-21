@@ -14,10 +14,9 @@ export class EarthEmbassy extends Card implements IProjectCard {
       cost: 16,
 
       metadata: {
-        description: 'This does not count your Earth tags as Moon tags.',
         cardNumber: 'M77',
         renderData: CardRenderer.builder((b) => {
-          b.effect('When you perform an action, your Moon tags count as Earth tags, even here.', (eb) => {
+          b.effect('When you perform an action, your Moon tags count as Earth tags but not vice versa.', (eb) => {
             // TODO(kberg): fix this viz. .earth() doesn't work.
             eb.empty().startEffect.moon().nbsp.text(' = ').nbsp.text('earth');
           });

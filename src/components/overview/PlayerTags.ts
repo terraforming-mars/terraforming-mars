@@ -11,11 +11,8 @@ import {JovianMultiplier} from './JovianMultiplier';
 import {PartyName} from '../../turmoil/parties/PartyName';
 import {TurmoilPolicy} from '../../turmoil/TurmoilPolicy';
 import {ColonyName} from '../../colonies/ColonyName';
+import {CardModel} from '../../models/CardModel';
 
-interface CardTagDiscount {
-  tag: InterfaceTagsType,
-  amount: number
-}
 type InterfaceTagsType = Tags | SpecialTags | 'all' | 'separator';
 
 const JOVIAN_MULTIPLIERS: Array<CardName> = [
@@ -24,81 +21,20 @@ const JOVIAN_MULTIPLIERS: Array<CardName> = [
   CardName.WATER_IMPORT_FROM_EUROPA,
 ];
 
-const DISCOUNTS_MAP: Map<CardName, CardTagDiscount> = new Map([
-  [CardName.ANTI_GRAVITY_TECHNOLOGY, {
-    tag: 'all',
-    amount: 2,
-  }],
-  [CardName.EARTH_CATAPULT, {
-    tag: 'all',
-    amount: 2,
-  }],
-  [CardName.EARTH_OFFICE, {
-    tag: Tags.EARTH,
-    amount: 3,
-  }],
-  [CardName.MASS_CONVERTER, {
-    tag: Tags.SPACE,
-    amount: 2,
-  }],
-  [CardName.QUANTUM_EXTRACTOR, {
-    tag: Tags.SPACE,
-    amount: 2,
-  }],
-  [CardName.RESEARCH_OUTPOST, {
-    tag: 'all',
-    amount: 1,
-  }],
-  [CardName.SHUTTLES, {
-    tag: Tags.SPACE,
-    amount: 2,
-  }],
-  [CardName.SPACE_STATION, {
-    tag: Tags.SPACE,
-    amount: 2,
-  }],
-  [CardName.SKY_DOCKS, {
-    tag: 'all',
-    amount: 1,
-  }],
-  [CardName.WARP_DRIVE, {
-    tag: Tags.SPACE,
-    amount: 4,
-  }],
-  [CardName.TERACTOR, {
-    tag: Tags.EARTH,
-    amount: 3,
-  }],
-  [CardName.THORGATE, {
-    tag: Tags.ENERGY,
-    amount: 3,
-  }],
-  [CardName.CHEUNG_SHING_MARS, {
-    tag: Tags.BUILDING,
-    amount: 2,
-  }],
-  [CardName.VALLEY_TRUST, {
-    tag: Tags.SCIENCE,
-    amount: 2,
-  }],
-  [CardName.VENUS_WAYSTATION, {
-    tag: Tags.VENUS,
-    amount: 2,
-  }],
-]);
-
-const hasDiscount = (tag: InterfaceTagsType, cardName: CardName): boolean => {
+const hasDiscount = (tag: InterfaceTagsType, card: CardModel): boolean => {
   if (tag === SpecialTags.COLONY_COUNT || tag === SpecialTags.CITY_COUNT) return false;
-  const cardDiscount: CardTagDiscount | undefined = DISCOUNTS_MAP.get(cardName);
-  if (cardDiscount !== undefined) {
-    return cardDiscount.tag === tag;
+  if (card.discount === undefined) {
+    return false;
   }
-  return false;
+  if (tag === 'all') {
+    return card.discount.tag === undefined;
+  }
+  return card.discount.tag === tag;
 };
 
-const getDiscountAmount = (tag: InterfaceTagsType, cardName: CardName): number => {
-  if (hasDiscount(tag, cardName)) {
-    return DISCOUNTS_MAP.get(cardName)?.amount || 0;
+const getDiscountAmount = (tag: InterfaceTagsType, card: CardModel): number => {
+  if (hasDiscount(tag, card)) {
+    return card?.discount?.amount || 0;
   }
   return 0;
 };
@@ -200,7 +136,7 @@ export const PlayerTags = Vue.component('player-tags', {
     hasTagDiscount: function(tag: InterfaceTagsType): boolean {
       for (const card of [...this.player.playedCards, this.player.corporationCard]) {
         if (card !== undefined) {
-          if (hasDiscount(tag, card.name as CardName)) {
+          if (hasDiscount(tag, card)) {
             return true;
           }
         }
@@ -227,7 +163,7 @@ export const PlayerTags = Vue.component('player-tags', {
       let discount = 0;
       for (const card of [...this.player.playedCards, this.player.corporationCard]) {
         if (card !== undefined) {
-          discount += getDiscountAmount(tag, card.name as CardName);
+          discount += getDiscountAmount(tag, card);
         }
       }
 

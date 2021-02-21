@@ -14,6 +14,7 @@ export class SpaceStation extends Card implements IProjectCard {
       tags: [Tags.SPACE],
       cost: 10,
 
+      cardDiscount: {tag: Tags.SPACE, amount: 2},
       metadata: {
         cardNumber: '025',
         renderData: CardRenderer.builder((b) => {
@@ -25,6 +26,7 @@ export class SpaceStation extends Card implements IProjectCard {
       },
     });
   }
+
   public getCardDiscount(_player: Player, card: IProjectCard) {
     if (card.tags.includes(Tags.SPACE)) {
       return 2;

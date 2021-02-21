@@ -14,6 +14,7 @@ import {SelectPlayer} from './SelectPlayer';
 import {SelectSpace} from './SelectSpace';
 import {$t} from '../directives/i18n';
 import {SelectPartyPlayer} from './SelectPartyPlayer';
+import {SelectPartyToSendDelegate} from './SelectPartyToSendDelegate';
 import {PlayerInputModel} from '../models/PlayerInputModel';
 import {PlayerModel} from '../models/PlayerModel';
 import {PreferencesManager} from './PreferencesManager';
@@ -61,6 +62,7 @@ export const WaitingFor = Vue.component('waiting-for', {
     'select-player': SelectPlayer,
     'select-space': SelectSpace,
     'select-party-player': SelectPartyPlayer,
+    'select-party-to-send-delegate': SelectPartyToSendDelegate,
     'select-colony': SelectColony,
     'select-production-to-lose': SelectProductionToLose,
     'shift-ares-global-parameters': ShiftAresGlobalParameters,

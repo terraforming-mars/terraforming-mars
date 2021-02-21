@@ -190,14 +190,14 @@
 }
 
 .tag-cards {
-    background-image: url("./assets/sidebar/preferences_cards.png"); 
+    background-image: url("./assets/sidebar/preferences_cards.png");
     background-color: black !important;
     background-position: 0px;
 }
 .tag-vp {
     background: linear-gradient(#cc8b00, #805700, #805700) !important;
     background-position: 0px !important;
-} 
+}
 .tag-vp::after {
     position: absolute;
     content: "VP";
@@ -229,14 +229,14 @@
     height: 34px !important;
     background-position: 0px;
 }
-  
+
 .tag-colony-count {
     background: url(assets/tiles/colony.png) no-repeat;
     background-size: 34px;
     border-radius: 0px;
     box-shadow: none;
 }
-  
+
   .tag-influence-count {
     background-image: url(assets/misc/influence.png);
     border: none !important;
@@ -625,7 +625,7 @@
             font-size: 14px;
             line-height: 15px;
             text-align: center;
-            
+
         }
     }
 
@@ -647,7 +647,7 @@
     margin: 0 0 0 5px;
 }
 
-.claimed-milestone-inline {
+.milestone-award-inline {
     white-space: nowrap;
     color: #000;
     text-transform: uppercase;
@@ -662,23 +662,28 @@
     margin: 0 5px 0 5px;
     border-radius: 2px;
     display: inline-block;
+    &.paid{
+        background: linear-gradient(to right, #e28c22, #ffcc64, #e28c22);
+    }
+    &.unpaid {
+        background: #303030;
+    }
 }
-.funded-award-inline {
-    white-space: nowrap;
-    color: #000;
-    text-transform: uppercase;
-    background: linear-gradient(135deg, #e28c22, #ffcc64, #e28c22);
-    padding: 1px 33px 1px 10px;
-    width: 190px;
-    letter-spacing: 1px;
+.milestone-award-price {
+    background-image: url(./assets/resources/megacredit.png);
+    width: 30px;
+    height: 30px;
+    line-height: 30px;
+    background-size: 30px;
+    margin-top: -3px;
+    margin-left: 70px;
+    transform: scale(0.8);
+
+    font-family: Prototype;
+    color: black;
+    font-weight: normal;
+    font-size: 18px;
     text-align: center;
-    font-size: 16px;
-    line-height: 23px;
-    font-weight: bold;
-    margin: 0 5px 0 5px;
-    border-radius: 20px;
-    font-style: italic;
-    display: inline-block;
 }
 
 .active-award-or-milestone {
@@ -765,7 +770,7 @@
     &.colonies-fleet-orange {
         background-position: -416px 0;
     }
-    
+
     &.colonies-fleet-pink {
         background-position: -490px 0;
     }
@@ -790,7 +795,7 @@
     text-shadow: none;
     margin-left: 12px;
 }
- 
+
 .last-generation {
     color: red;
 }
@@ -832,7 +837,7 @@
         display: none !important;
     }
     .player-info-bottom {
-        background: #303030 !important; 
+        background: #303030 !important;
     }
 
     .player-info {
@@ -865,7 +870,7 @@
 
 .hiding-card-button-row {
     display: flex;
-    flex-flow: row;   
+    flex-flow: row;
 }
 
 .hiding-card-button {

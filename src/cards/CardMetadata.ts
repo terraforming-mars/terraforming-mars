@@ -5,6 +5,6 @@ import {ICardRenderDescription} from './render/ICardRenderDescription';
 export interface CardMetadata {
   cardNumber: string;
   description?: string | ICardRenderDescription;
-  victoryPoints?: number | CardRenderDynamicVictoryPoints;
   renderData?: CardRenderer;
+  victoryPoints?: number | CardRenderDynamicVictoryPoints;
 }

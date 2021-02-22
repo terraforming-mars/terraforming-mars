@@ -8,18 +8,18 @@ import {StartScreen} from './StartScreen';
 import {LoadGameForm} from './LoadGameForm';
 import {DebugUI} from './DebugUI';
 import {GameHomeModel} from '../models/GameHomeModel';
-import {HelpIconology} from './HelpIconology';
+import {Help} from './help/Help';
 
 import * as constants from '../constants';
 import * as raw_settings from '../genfiles/settings.json';
 
 interface MainAppData {
     screen: 'create-game-form' |
-            'debug-ui' |
+            'cards' |
             'empty' |
             'game-home' |
             'games-overview' |
-            'help-iconology' |
+            'help' |
             'load' |
             'player-home' |
             'start-screen' |
@@ -36,7 +36,6 @@ interface MainAppData {
     isServerSideRequestInProgress: boolean;
     componentsVisibility: {[x: string]: boolean};
     game: GameHomeModel | undefined;
-    logPaused: boolean;
 }
 
 export const mainAppSettings = {
@@ -69,15 +68,9 @@ export const mainAppSettings = {
     'player-end': GameEnd,
     'games-overview': GamesOverview,
     'debug-ui': DebugUI,
-    'help-iconology': HelpIconology,
+    'help': Help,
   },
   'methods': {
-    changeLogPaused: function(value: boolean) {
-      (this as unknown as typeof mainAppSettings.data).logPaused = value;
-      if (value === false) {
-        this.updatePlayer();
-      }
-    },
     setVisibilityState: function(targetVar: string, isVisible: boolean) {
       if (isVisible === this.getVisibilityState(targetVar)) return;
       (this as unknown as typeof mainAppSettings.data).componentsVisibility[targetVar] = isVisible;
@@ -89,9 +82,6 @@ export const mainAppSettings = {
       const currentPathname: string = window.location.pathname;
       const xhr = new XMLHttpRequest();
       const app = this as unknown as typeof mainAppSettings.data;
-
-      // fetching player data is ignored when the log data stream is paused
-      if (app.logPaused === true) return;
 
       xhr.open(
         'GET',
@@ -165,16 +155,15 @@ export const mainAppSettings = {
     } else if (currentPathname === '/games-overview') {
       app.screen = 'games-overview';
     } else if (
-      currentPathname === '/new-game' ||
-            currentPathname === '/solo'
+      currentPathname === '/new-game' || currentPathname === '/solo'
     ) {
       app.screen = 'create-game-form';
     } else if (currentPathname === '/load') {
       app.screen = 'load';
-    } else if (currentPathname === '/debug-ui') {
-      app.screen = 'debug-ui';
-    } else if (currentPathname === '/help-iconology') {
-      app.screen = 'help-iconology';
+    } else if (currentPathname === '/debug-ui' || currentPathname === '/cards') {
+      app.screen = 'cards';
+    } else if (currentPathname === '/help') {
+      app.screen = 'help';
     } else {
       app.screen = 'start-screen';
     }

@@ -1,0 +1,305 @@
+.help-container {
+    .help-tabs {
+        padding-top: 10px;
+        display: flex;
+        flex-direction: row;
+        flex-wrap: nowrap;
+        padding-bottom: 10px;
+    }
+
+    input[type="radio"] {
+        opacity: 0;
+        position: fixed;
+        width: 0;
+    }
+
+    label {
+        color: #ccc;
+        display: inline-block;
+        background-color: #444;
+        padding: 3px 20px 3px 20px;
+        font-family: Ubuntu, Sans;
+        font-size: 23px;
+        border-radius: 8px 8px 0px 0px;
+        text-align: center;
+        margin: 4px;
+        width: auto;
+        display: flex;
+        justify-content: center;
+    }
+
+    label:hover {
+        background-color: rgb(104, 104, 104);
+        cursor: pointer;
+    }
+
+    input[type="radio"]:checked + label {
+        background-color: rgb(199, 199, 199);
+        color: black;
+    }
+}
+
+.help-iconology-container {
+    padding: 20px;
+    display : flex;
+    flex-flow: row wrap;
+}
+
+.help-phases-container {
+    padding-bottom: 40px;
+}
+
+.help-standard-projects-container {
+    padding-bottom: 40px;
+    h2 {
+        padding-top: 25px;
+        margin-bottom: 0px;
+    }
+}
+
+.help-icons-column {
+    display: flex;
+    flex-flow: column nowrap;
+    padding:10px;
+    justify-content: flex-start;
+    padding-right: 60px;
+}
+
+.help-icon-column > div {
+    margin-top: 0px;
+    margin-bottom: 5px;
+}
+
+.help-icon-label{
+    padding-left: 15px;
+    display: inline-block;
+}
+
+.help-icon-sublabel{
+    font: 15px;
+    color: gray;
+    display: inline-block;
+}
+
+.help-icon-mc-font{
+    color: rgba(0, 0, 0, 0.3);
+    font-style: normal;
+    font-family: Arial;
+    font-weight: bold;
+    text-align: center;
+}
+
+.help-icons-section-heading{
+    font-size: 25px;
+    font-style: normal;
+    font-family: Arial;
+    font-weight: bold;
+    text-align: center;
+    padding-bottom: 15px;
+}
+
+.help-icon-resource {
+    font-family: Prototype;
+    position: relative;
+    display: inline-block;
+    margin-bottom: 5px;
+    width: 30px;
+    height: 30px;
+    font-size: 22px;
+    line-height: 30px;
+    background-size: 30px;
+    filter: drop-shadow(0px 0px 1px black);
+    vertical-align: middle;
+}
+
+.help-other-symbols {
+    display: inline-block;
+    width: 60px;
+}
+
+.help-icon-param-box-temperature {
+    display: inline-block;
+    margin-bottom: 5px;
+    width: 40px;
+    height: 40px;
+    background-image: url(./assets/global-parameters/temperature.png);
+    background-size: 12px 40px;
+    background-position: 13px -1px;
+    filter: drop-shadow(0px 0px 1px black);
+    background-repeat: no-repeat;
+}
+
+.help-icon-param-box-oxygen {
+    display: inline-block;
+    margin-bottom: 5px;
+    width: 40px;
+    height: 40px;
+    background-image: url(./assets/global-parameters/oxygen.png);
+    background-size: 40px 40px;
+    background-position: 0px -1px;
+    filter: drop-shadow(0px 0px 1px black);
+    background-repeat: no-repeat;
+}
+
+.help-icon-param-box-ocean {
+    display: inline-block;
+    margin-bottom: 5px;
+    width: 40px;
+    height: 40px;
+    background-image: url(./assets/tiles/ocean.png);
+    background-size: 35px 40px;
+    background-position: 3px -1px;
+    filter: drop-shadow(0px 0px 1px black);
+    background-repeat: no-repeat;
+}
+
+.help-icon-param-box-venus {
+    display: inline-block;
+    margin-bottom: 5px;
+    width: 40px;
+    height: 40px;
+    background-image: url(./assets/global-parameters/venus.png);
+    background-size: 40px 22px;
+    background-position: 0px 7px;
+    filter: drop-shadow(0px 0px 1px black);
+    background-repeat: no-repeat;
+}
+
+.help-icon-card{
+    display: inline-block;
+    margin-left: 15px;
+}
+
+.help-icon-delegate{
+    display: inline-block;
+    background: url(assets/turmoil_ui.png);
+    width: 50px;
+    height: 60px;
+    margin-left: 6px;
+    background-position: -919px 850px;
+    vertical-align: middle;
+    margin-bottom: 5px;
+    transform: scale(0.7);
+}
+
+.help-icon-influence{
+    transform:scale(1.2);
+    margin-left: 10px;
+}
+
+.help-icon-victory-point {
+    display: inline-block;
+    color: black;
+    font-family: Prototype;
+    font-weight: normal;
+    width: 80px;
+    height: 42px;
+    margin-left: -7px;
+    line-height: 35px;
+    font-size: 28px;
+    text-align: center;
+    border-radius: 12px;
+    border-top: 2px solid rgb(221,221,221);
+    border-left: 2px solid rgb(221,221,221);
+    border-bottom: 2px solid rgb(137,137,137);
+    border-right: 2px solid rgb(137,137,137);
+    background-color: rgb(205,162, 130);
+    background: linear-gradient(#cc8b00, rgb(128, 87, 0),rgb(128, 87, 0));
+    box-shadow: 0 0 0 1px rgba(0,0,0,0.6), 0 0 0 2px rgba(0,0,0,0.3);
+    transform: scale(0.8);
+  }
+
+.help-phases-container {
+    ul{
+        list-style: none;
+        margin: 0;
+        padding: 0;
+    }
+
+    label{
+        display: block;
+        cursor: pointer;
+        width: fit-content;
+        border-radius: 8px;
+        border: none;
+        background-color: rgb(104, 37, 37);
+    }
+
+    label:hover{
+        background: #9b524d;
+    }
+
+    input[type="checkbox"]:checked + label{
+        background: #8d615e;
+    }
+
+    ul li ul {
+        label{
+            margin-top: 10px;
+            background: #805c0f;
+        }
+
+        label:hover{
+            background: #caaa64;
+        }
+
+        input[type="checkbox"]:checked + label{
+            background: #9c7e3b;
+        }
+        li {
+            margin-left: 25px;
+        }
+    }
+
+    ul ul li{
+        margin-left: 25px;
+    }
+
+    input[type="checkbox"]{
+        opacity: 0;
+        position: fixed;
+        width: 0;
+    }
+
+    input[type="checkbox"] ~ ul{
+        height: 0;
+        transform: scaleY(0);
+    }
+
+    input[type="checkbox"]:checked ~ ul{
+        height: 100%;
+        transform-origin: top;
+        transition: transform .2s ease-out;
+        transform: scaleY(1);
+    }
+}
+
+.help-hotkeys {
+    display: inline-block;
+    vertical-align: middle;
+    background: url(assets/help/hotkeys.png);
+    width: 608px;
+    height: 436px;
+    background-size: 608px 436px;
+    color: white;
+    font-family: Prototype;
+    font-weight: normal;
+    text-align: left;
+    margin-left: 250px;
+    line-height: 38px;
+    .keys{
+        position: relative;
+        left: -245px;
+        margin-top: 263px;
+    }
+}
+
+.help-hotkeys-example {
+    display: inline-block;
+    vertical-align: middle;
+    background: url(assets/help/hotkey-mapping-example.png);
+    width: 568px;
+    height: 749px;
+    background-size: 568px 749px;
+    margin: 25px;
+}

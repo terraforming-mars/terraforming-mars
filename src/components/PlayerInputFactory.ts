@@ -29,6 +29,8 @@ export class PlayerInputFactory {
       return 'select-amount';
     case PlayerInputTypes.SELECT_DELEGATE:
       return 'select-party-player';
+    case PlayerInputTypes.SELECT_PARTY_TO_SEND_DELEGATE:
+      return 'select-party-to-send-delegate';
     case PlayerInputTypes.SELECT_COLONY:
       return 'select-colony';
     case PlayerInputTypes.SELECT_PRODUCTION_TO_LOSE:

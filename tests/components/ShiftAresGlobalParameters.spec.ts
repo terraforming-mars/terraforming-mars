@@ -4,6 +4,7 @@ import {expect} from 'chai';
 import {ShiftAresGlobalParameters} from '../../src/components/ShiftAresGlobalParameters';
 import {PlayerInputModel} from '../../src/models/PlayerInputModel';
 import {PlayerInputTypes} from '../../src/PlayerInputTypes';
+import {PartyName} from '../../src/turmoil/parties/PartyName';
 
 describe('ShiftAresGlobalParameters', function() {
   const mockPlayerModel: PlayerInputModel = {
@@ -20,6 +21,7 @@ describe('ShiftAresGlobalParameters', function() {
     canUseHeat: undefined,
     players: undefined,
     availableSpaces: undefined,
+    availableParties: [PartyName.MARS, PartyName.SCIENTISTS, PartyName.UNITY, PartyName.GREENS, PartyName.REDS, PartyName.KELVINISTS],
     min: undefined,
     max: undefined,
     microbes: undefined,

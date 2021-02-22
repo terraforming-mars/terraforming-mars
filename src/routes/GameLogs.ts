@@ -55,7 +55,23 @@ export class GameLogs extends Route {
 
       const data = Buffer.from(JSON.stringify(game.gameLog));
 
-      if (Route.supportsEncoding(req, 'gzip')) {
+      if (Route.supportsEncoding(req, 'br')) {
+        zlib.brotliCompress(data, {
+          params: {
+            [zlib.constants.BROTLI_PARAM_MODE]: zlib.constants.BROTLI_MODE_TEXT,
+            [zlib.constants.BROTLI_PARAM_QUALITY]: zlib.constants.BROTLI_MAX_QUALITY,
+            [zlib.constants.BROTLI_PARAM_SIZE_HINT]: data.length,
+          },
+        }, (err, compressed) => {
+          if (err !== null) {
+            this.internalServerError(req, res, err);
+            return;
+          }
+          res.setHeader('Content-Encoding', 'br');
+          res.setHeader('Content-Type', 'application/json');
+          res.end(compressed);
+        });
+      } else if (Route.supportsEncoding(req, 'gzip')) {
         zlib.gzip(data, (err, compressed) => {
           if (err !== null) {
             this.internalServerError(req, res, err);

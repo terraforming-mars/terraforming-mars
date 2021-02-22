@@ -172,7 +172,10 @@ export const DebugUI = Vue.component('debug-ui', {
   },
   template: `
         <div class="debug-ui-container" :class="getLanguageCssClass()">
-            <h1>Debug UI</h1>
+            <h1>Cards List</h1>
+            <div class="legacy-anchor">
+              <a href="https://ssimeonoff.github.io/cards-list" target="_blank">legacy card UI</a>
+            </div>
             <div class="form-group">
               <input class="form-input form-input-line" placeholder="filter" v-model="filterText"></input>
               <input type="checkbox" name="filterDescription" id="filterDescription-checkbox" v-model="filterDescription"></input>

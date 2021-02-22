@@ -16,6 +16,8 @@ import {BufferCache} from './server/BufferCache';
 import {Game, GameId} from './Game';
 import {GameLoader} from './database/GameLoader';
 import {GameLogs} from './routes/GameLogs';
+import {ApiGames} from './routes/ApiGames';
+import {IHandler} from './routes/IHandler';
 import {Route} from './routes/Route';
 import {Player} from './Player';
 import {Database} from './database/Database';
@@ -41,6 +43,34 @@ zlib.gzip(styles, function(err, compressed) {
   fileCache.set('styles.css.gz', compressed);
 });
 
+const handlers: Map<string, IHandler> = new Map(
+  [
+    // ['/games-overview', GamesOverview.INSTANCE],
+    // ['/', ServeApp.INSTANCE],
+    // ['/new-game', ServeApp.INSTANCE],
+    // ['/solo', ServeApp.INSTANCE],
+    // ['/game', ServeApp.INSTANCE],
+    // ['/player', ServeApp.INSTANCE],
+    // ['/the-end', ServeApp.INSTANCE],
+    // ['/load', ServeApp.INSTANCE],
+    // ['/debug-ui', ServeApp.INSTANCE],
+    // ['/help-iconology', ServeApp.INSTANCE],
+    // ['/styles.css', ServeAsset.INSTANCE],
+    // ['/favicon.ico', ServeAsset.INSTANCE],
+    // ['/main.js', ServeAsset.INSTANCE],
+    // ['/main.js.map', ServeAsset.INSTANCE],
+    // ['/api/player', ApiGetPlayer.INSTANCE],
+    // ['/api/waitingfor', ApiGetWaitingFor.INSTANCE],
+    ['/api/games', ApiGames.INSTANCE],
+    // ['/api/game', ApiGetGame.INSTANCE],
+    // ['/api/clonablegames', ApiCloneableGames.INSTANCE],
+    // ['/api/game/logs', ApiGameLogs.INSTANCE],
+    // ['/game/', CreateGame.INSTANCE],
+    // ['/load/', LoadGame.INSTANCE],
+    // ['/player/input', PlayerInput.INSTANCE],
+  ],
+);
+
 function processRequest(req: http.IncomingMessage, res: http.ServerResponse): void {
   if (req.url === undefined) {
     route.notFound(req, res);
@@ -48,6 +78,13 @@ function processRequest(req: http.IncomingMessage, res: http.ServerResponse): vo
   }
 
   const url = new URL(req.url, `http://${req.headers.host}`);
+  const ctx = {url, route, serverId};
+
+  const handler: IHandler | undefined = handlers.get(url.pathname);
+  if (handler !== undefined) {
+    handler.processRequest(req, res, ctx);
+    return;
+  }
 
   switch (req.method) {
   case 'GET':
@@ -68,7 +105,7 @@ function processRequest(req: http.IncomingMessage, res: http.ServerResponse): vo
     case '/player':
     case '/the-end':
     case '/load':
-    case '/debug-ui':
+    case '/cards':
     case '/help':
       serveApp(req, res);
       break;
@@ -87,10 +124,6 @@ function processRequest(req: http.IncomingMessage, res: http.ServerResponse): vo
     case '/main.js':
     case '/main.js.map':
       serveAsset(req, res);
-      break;
-
-    case '/api/games':
-      apiGetGames(req, res);
       break;
 
     case '/api/game':
@@ -243,19 +276,6 @@ function getClonableGames(res: http.ServerResponse): void {
     res.write(JSON.stringify(allGames));
     res.end();
   });
-}
-
-function apiGetGames(
-  req: http.IncomingMessage,
-  res: http.ServerResponse,
-): void {
-  if (!isServerIdValid(req)) {
-    route.notAuthorized(req, res);
-    return;
-  }
-  res.setHeader('Content-Type', 'application/json');
-  res.write(JSON.stringify(GameLoader.getInstance().getLoadedGameIds()));
-  res.end();
 }
 
 function loadGame(req: http.IncomingMessage, res: http.ServerResponse): void {

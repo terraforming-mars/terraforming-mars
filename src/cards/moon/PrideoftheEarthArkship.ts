@@ -8,6 +8,7 @@ import {CardRenderer} from '../render/CardRenderer';
 import {CardRenderDynamicVictoryPoints} from '../render/CardRenderDynamicVictoryPoints';
 import {Units} from '../../Units';
 import {MoonCard} from './MoonCard';
+import {CardRequirements} from '../CardRequirements';
 
 export class PrideoftheEarthArkship extends MoonCard implements IActionCard {
   constructor() {
@@ -17,6 +18,7 @@ export class PrideoftheEarthArkship extends MoonCard implements IActionCard {
       tags: [Tags.SCIENCE, Tags.SCIENCE, Tags.SPACE],
       cost: 22,
       resourceType: ResourceType.SCIENCE,
+      requirements: CardRequirements.builder((b) => b.tag(Tags.SCIENCE).tag(Tags.SPACE, 2)),
 
       metadata: {
         description: 'Requires 1 science and 2 space tags. Spend 2 titanium. 1 VP per science resource here.',

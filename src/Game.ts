@@ -108,6 +108,7 @@ export interface GameOptions {
   cardsBlackList: Array<CardName>;
   customColoniesList: Array<ColonyName>;
   requiresVenusTrackCompletion: boolean; // Venus must be completed to end the game
+  requiresMoonTrackCompletion: boolean; // Moon must be completed to end the game
 }
 
 const DEFAULT_GAME_OPTIONS: GameOptions = {
@@ -130,6 +131,7 @@ const DEFAULT_GAME_OPTIONS: GameOptions = {
   preludeExtension: false,
   promoCardsOption: false,
   randomMA: RandomMAOptionType.NONE,
+  requiresMoonTrackCompletion: false,
   removeNegativeGlobalEventsOption: false,
   requiresVenusTrackCompletion: false,
   showOtherPlayersVP: false,
@@ -249,6 +251,9 @@ export class Game implements ISerializable<SerializedGame> {
       gameOptions.draftVariant = false;
       gameOptions.initialDraftVariant = false;
       gameOptions.randomMA = RandomMAOptionType.NONE;
+      if (gameOptions.moonExpansion) {
+        gameOptions.requiresMoonTrackCompletion = true;
+      }
 
       players[0].setTerraformRating(14);
       players[0].terraformRatingAtGenerationStart = 14;
@@ -492,8 +497,18 @@ export class Game implements ISerializable<SerializedGame> {
     const oxygenMaxed = this.oxygenLevel >= constants.MAX_OXYGEN_LEVEL;
     const temperatureMaxed = this.temperature >= constants.MAX_TEMPERATURE;
     const oceansMaxed = this.board.getOceansOnBoard() === constants.MAX_OCEAN_TILES;
-    const globalParametersMaxed = oxygenMaxed && temperatureMaxed && oceansMaxed;
+    let globalParametersMaxed = oxygenMaxed && temperatureMaxed && oceansMaxed;
     const venusMaxed = this.getVenusScaleLevel() === constants.MAX_VENUS_SCALE;
+
+    MoonExpansion.ifMoon(this, (moonData) => {
+      if (this.gameOptions.requiresMoonTrackCompletion) {
+        const moonMaxed =
+          moonData.colonyRate === constants.MAXIMUM_COLONY_RATE &&
+          moonData.miningRate === constants.MAXIMUM_MINING_RATE &&
+          moonData.logisticRate === constants.MAXIMUM_LOGISTICS_RATE;
+        globalParametersMaxed = globalParametersMaxed && moonMaxed;
+      }
+    });
 
     // Solo games with Venus needs Venus maxed to end the game.
     if (this.players.length === 1 && this.gameOptions.venusNextExtension) {
@@ -542,14 +557,14 @@ export class Game implements ISerializable<SerializedGame> {
     // Awards are disabled for 1 player games
     if (this.players.length === 1) return true;
 
-    return this.fundedAwards.length > 2;
+    return this.fundedAwards.length >= constants.MAX_AWARDS;
   }
 
   public allMilestonesClaimed(): boolean {
     // Milestones are disabled for 1 player games
     if (this.players.length === 1) return true;
 
-    return this.claimedMilestones.length > 2;
+    return this.claimedMilestones.length >= constants.MAX_MILESTONES;
   }
 
   private playerHasPickedCorporationCard(player: Player, corporationCard: CorporationCard) {
@@ -694,8 +709,15 @@ export class Game implements ISerializable<SerializedGame> {
   public gameIsOver(): boolean {
     // Single player game is done after generation 14 or 12 with prelude
     if (this.isSoloMode()) {
-      // Solo mode must go on until 14 or 12 generation even if Mars is already terraformed
-      return this.generation === 14 || (this.generation === 12 && this.gameOptions.preludeExtension);
+      let lastGeneration = 14;
+      if (this.gameOptions.preludeExtension) {
+        lastGeneration -= 2;
+      }
+      if (this.gameOptions.moonExpansion && this.gameOptions.requiresMoonTrackCompletion) {
+        lastGeneration += 2;
+      }
+      // Solo mode must go on until the designated generation end even if Mars is already terraformed
+      return this.generation === lastGeneration;
     }
     return this.marsIsTerraformed();
   }
@@ -711,12 +733,6 @@ export class Game implements ISerializable<SerializedGame> {
 
     if (this.gameIsOver()) {
       this.gotoFinalGreeneryPlacement();
-      // Log id or cloned game id
-      if (this.clonedGamedId !== undefined && this.clonedGamedId.startsWith('#')) {
-        this.log('This game was a clone from game ' + this.clonedGamedId);
-      } else {
-        this.log('This game id was ' + this.id);
-      }
       return;
     }
 
@@ -793,7 +809,7 @@ export class Game implements ISerializable<SerializedGame> {
     this.passedPlayers.add(player.id);
   }
 
-  private hasResearched(player: Player): boolean {
+  public hasResearched(player: Player): boolean {
     return this.researchedPlayers.has(player.id);
   }
 
@@ -976,6 +992,13 @@ export class Game implements ISerializable<SerializedGame> {
   }
 
   private gotoEndGame(): void {
+    // Log id or cloned game id
+    if (this.clonedGamedId !== undefined && this.clonedGamedId.startsWith('#')) {
+      this.log('This game was a clone from game ' + this.clonedGamedId);
+    } else {
+      this.log('This game id was ' + this.id);
+    }
+
     Database.getInstance().cleanSaves(this.id, this.lastSaveId);
     const scores: Array<Score> = [];
     this.players.forEach((player) => {
@@ -1024,7 +1047,7 @@ export class Game implements ISerializable<SerializedGame> {
     // greenery and the player needs enough plants
     let firstPlayer: Player | undefined = this.first;
     while (
-      firstPlayer !== undefined && players.indexOf(firstPlayer) === -1
+      firstPlayer !== undefined && players.includes(firstPlayer) === false
     ) {
       firstPlayer = this.getNextPlayer(this.players, firstPlayer);
     }
@@ -1611,4 +1634,3 @@ export class Game implements ISerializable<SerializedGame> {
     return game;
   }
 }
-

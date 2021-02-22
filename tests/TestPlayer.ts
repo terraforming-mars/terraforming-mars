@@ -1,6 +1,7 @@
 import {Player} from '../src/Player';
 import {Color} from '../src/Color';
 import {Units} from '../src/Units';
+import {Tags} from '../src/cards/Tags';
 
 export class TestPlayer extends Player {
   constructor(color: Color) {
@@ -27,4 +28,30 @@ export class TestPlayer extends Player {
       this.heatProduction = units.heat;
     }
   }
+
+  public tagsForTest: Partial<TagsForTest> | undefined = undefined;
+
+  public getTagCount(tag: Tags, includeEventsTags:boolean = false, includeWildcardTags:boolean = true): number {
+    if (this.tagsForTest !== undefined) {
+      return this.tagsForTest[tag] || 0;
+    }
+    return super.getTagCount(tag, includeEventsTags, includeWildcardTags);
+  }
+}
+
+export interface TagsForTest {
+  building: number;
+  space: number;
+  science: number;
+  power: number;
+  earth: number;
+  jovian: number;
+  venus: number;
+  plant: number;
+  microbe: number;
+  animal: number;
+  city: number;
+  wild: number;
+  moon: number;
+  event: number;
 }

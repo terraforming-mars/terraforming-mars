@@ -16,6 +16,7 @@ export class WarpDrive extends Card implements IProjectCard {
       cardType: CardType.ACTIVE,
 
       requirements: CardRequirements.builder((b) => b.tag(Tags.SCIENCE, 5)),
+      cardDiscount: {tag: Tags.SPACE, amount: 4},
       metadata: {
         cardNumber: 'C49',
         renderData: CardRenderer.builder((b) => {
@@ -30,7 +31,7 @@ export class WarpDrive extends Card implements IProjectCard {
   }
 
   public getCardDiscount(_player: Player, card: IProjectCard) {
-    if (card.tags.indexOf(Tags.SPACE) !== -1) {
+    if (card.tags.includes(Tags.SPACE)) {
       return 4;
     }
     return 0;

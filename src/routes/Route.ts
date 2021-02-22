@@ -2,6 +2,10 @@
 import * as http from 'http';
 
 export class Route {
+  public static supportsEncoding(req: http.IncomingMessage, encoding: 'gzip' | 'br'): boolean {
+    return req.headers['accept-encoding'] !== undefined &&
+           req.headers['accept-encoding'].includes(encoding);
+  }
   public badRequest(req: http.IncomingMessage, res: http.ServerResponse): void {
     console.warn('bad request', req.url);
     res.writeHead(400);
@@ -14,6 +18,10 @@ export class Route {
     }
     res.writeHead(404);
     res.write('Not found');
+    res.end();
+  }
+  public notModified(res: http.ServerResponse): void {
+    res.writeHead(304);
     res.end();
   }
   public internalServerError(
@@ -29,6 +37,11 @@ export class Route {
     console.warn('Not authorized', req.method, req.url);
     res.writeHead(403);
     res.write('Not authorized');
+    res.end();
+  }
+  public writeJson(res: http.ServerResponse, json: any) {
+    res.setHeader('Content-Type', 'application/json');
+    res.write(JSON.stringify(json));
     res.end();
   }
 }

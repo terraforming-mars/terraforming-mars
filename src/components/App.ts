@@ -8,17 +8,18 @@ import {StartScreen} from './StartScreen';
 import {LoadGameForm} from './LoadGameForm';
 import {DebugUI} from './DebugUI';
 import {GameHomeModel} from '../models/GameHomeModel';
-import {HelpIconology} from './HelpIconology';
+import {Help} from './help/Help';
 
+import * as constants from '../constants';
 import * as raw_settings from '../genfiles/settings.json';
 
 interface MainAppData {
     screen: 'create-game-form' |
-            'debug-ui' |
+            'cards' |
             'empty' |
             'game-home' |
             'games-overview' |
-            'help-iconology' |
+            'help' |
             'load' |
             'player-home' |
             'start-screen' |
@@ -56,6 +57,7 @@ export const mainAppSettings = {
       'turmoil_parties': false,
     } as {[x: string]: boolean},
     game: undefined as GameHomeModel | undefined,
+    logPaused: false,
   } as MainAppData,
   'components': {
     'start-screen': StartScreen,
@@ -66,7 +68,7 @@ export const mainAppSettings = {
     'player-end': GameEnd,
     'games-overview': GamesOverview,
     'debug-ui': DebugUI,
-    'help-iconology': HelpIconology,
+    'help': Help,
   },
   'methods': {
     setVisibilityState: function(targetVar: string, isVisible: boolean) {
@@ -80,6 +82,7 @@ export const mainAppSettings = {
       const currentPathname: string = window.location.pathname;
       const xhr = new XMLHttpRequest();
       const app = this as unknown as typeof mainAppSettings.data;
+
       xhr.open(
         'GET',
         '/api/player' +
@@ -94,13 +97,13 @@ export const mainAppSettings = {
           app.playerkey++;
           if (
             app.player.phase === 'end' &&
-                        window.location.search.indexOf('&noredirect') === -1
+                        window.location.search.includes('&noredirect') === false
           ) {
             app.screen = 'the-end';
             if (currentPathname !== '/the-end') {
               window.history.replaceState(
                 xhr.response,
-                'Teraforming Mars - Player',
+                `${constants.APP_NAME} - Player`,
                 '/the-end?id=' + app.player.id,
               );
             }
@@ -109,7 +112,7 @@ export const mainAppSettings = {
             if (currentPathname !== '/player') {
               window.history.replaceState(
                 xhr.response,
-                'Teraforming Mars - Game',
+                `${constants.APP_NAME} - Game`,
                 '/player?id=' + app.player.id,
               );
             }
@@ -123,6 +126,7 @@ export const mainAppSettings = {
     },
   },
   'mounted': function() {
+    document.title = constants.APP_NAME;
     const currentPathname: string = window.location.pathname;
     const app = this as unknown as (typeof mainAppSettings.data) & (typeof mainAppSettings.methods);
     if (currentPathname === '/player' || currentPathname === '/the-end') {
@@ -138,7 +142,7 @@ export const mainAppSettings = {
         if (xhr.status === 200) {
           window.history.replaceState(
             xhr.response,
-            'Teraforming Mars - Game',
+            `${constants.APP_NAME} - Game`,
             '/game?id=' + xhr.response.id,
           );
           app.game = xhr.response as GameHomeModel;
@@ -151,16 +155,15 @@ export const mainAppSettings = {
     } else if (currentPathname === '/games-overview') {
       app.screen = 'games-overview';
     } else if (
-      currentPathname === '/new-game' ||
-            currentPathname === '/solo'
+      currentPathname === '/new-game' || currentPathname === '/solo'
     ) {
       app.screen = 'create-game-form';
     } else if (currentPathname === '/load') {
       app.screen = 'load';
-    } else if (currentPathname === '/debug-ui') {
-      app.screen = 'debug-ui';
-    } else if (currentPathname === '/help-iconology') {
-      app.screen = 'help-iconology';
+    } else if (currentPathname === '/debug-ui' || currentPathname === '/cards') {
+      app.screen = 'cards';
+    } else if (currentPathname === '/help') {
+      app.screen = 'help';
     } else {
       app.screen = 'start-screen';
     }

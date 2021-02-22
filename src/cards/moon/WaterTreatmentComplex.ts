@@ -27,11 +27,11 @@ export class WaterTreatmentComplex extends MoonCard {
   };
 
   public canPlay(player: Player): boolean {
-    return MoonExpansion.tiles(player.game, TileType.MOON_COLONY, true).length >= 1;
+    return super.canPlay(player) && MoonExpansion.tiles(player.game, TileType.MOON_COLONY, true).length >= 1;
   }
 
   public play(player: Player) {
-    Units.deductUnits(this.reserveUnits, player);
+    super.play(player);
     player.addProduction(Resources.PLANTS, -1, player.game);
     MoonExpansion.raiseColonyRate(player, 2);
     return undefined;

@@ -409,8 +409,8 @@ class Builder {
     return this;
   }
 
-  public data() {
-    this._addRowItem(new CardRenderItem(CardRenderItemType.DATA_RESOURCE));
+  public data(amount: number = 1) {
+    this._addRowItem(new CardRenderItem(CardRenderItemType.DATA_RESOURCE, amount));
     return this;
   }
 
@@ -425,8 +425,8 @@ class Builder {
     return this;
   }
 
-  public moon(): Builder {
-    this._addRowItem(new CardRenderItem(CardRenderItemType.MOON));
+  public moon(amount: number = -1): Builder {
+    this._addRowItem(new CardRenderItem(CardRenderItemType.MOON, amount));
     return this;
   }
 

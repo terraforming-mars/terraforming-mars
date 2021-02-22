@@ -15,7 +15,9 @@ export class Shuttles extends Card implements IProjectCard {
       name: CardName.SHUTTLES,
       tags: [Tags.SPACE],
       cost: 10,
+
       requirements: CardRequirements.builder((b) => b.oxygen(5)),
+      cardDiscount: {tag: Tags.SPACE, amount: 2},
       metadata: {
         cardNumber: '166',
         renderData: CardRenderer.builder((b) => {
@@ -38,8 +40,10 @@ export class Shuttles extends Card implements IProjectCard {
   public canPlay(player: Player): boolean {
     return super.canPlay(player) && player.getProduction(Resources.ENERGY) >= 1;
   }
+
+
   public getCardDiscount(_player: Player, card: IProjectCard) {
-    if (card.tags.indexOf(Tags.SPACE) !== -1) {
+    if (card.tags.includes(Tags.SPACE)) {
       return 2;
     }
     return 0;

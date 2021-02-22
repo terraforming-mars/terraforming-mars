@@ -6,7 +6,7 @@ import {OrOptions} from '../../../src/inputs/OrOptions';
 import {SelectSpace} from '../../../src/inputs/SelectSpace';
 import {Player} from '../../../src/Player';
 import {TestPlayers} from '../../TestingUtils';
-import {maxOutOceans} from './../../TestingUtils';
+import {TestingUtils} from './../../TestingUtils';
 
 describe('CometAiming', function() {
   let card : CometAiming; let player : Player;
@@ -59,7 +59,7 @@ describe('CometAiming', function() {
   it('Cannot spend resource to place ocean if oceans are maxed', function() {
     player.playedCards.push(card);
     card.resourceCount = 1;
-    maxOutOceans(player);
+    TestingUtils.maxOutOceans(player);
     expect(card.canAct(player)).is.not.true;
 
     player.titanium = 1;

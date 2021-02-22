@@ -4,12 +4,15 @@ import {Button} from '../components/common/Button';
 import {GameHomeModel} from '../models/GameHomeModel';
 import {mainAppSettings} from './App';
 
+import * as constants from '../constants';
+
 export const LoadGameForm = Vue.component('load-game-form', {
   components: {
     'Button': Button,
   },
   data: function() {
     return {
+      constants,
       gameId: '',
       rollbackCount: '0',
     };
@@ -30,7 +33,7 @@ export const LoadGameForm = Vue.component('load-game-form', {
             window.location.href = '/player?id=' + response.players[0].id;
             return;
           } else {
-            window.history.replaceState(response, 'Teraforming Mars - Game', '/game?id=' + response.id);
+            window.history.replaceState(response, `${constants.APP_NAME} - Game`, '/game?id=' + response.id);
             (this.$root.$data as unknown as typeof mainAppSettings.data).game = response;
             (this.$root.$data as unknown as typeof mainAppSettings.data).screen = 'game-home';
           }
@@ -47,7 +50,7 @@ export const LoadGameForm = Vue.component('load-game-form', {
   },
   template: `
         <div id="load-game">
-            <h1><span v-i18n>Terraforming Mars</span> — <span v-i18n>Load Game</span></h1>
+            <h1><span v-i18n>{{ constants.APP_NAME }}</span> — <span v-i18n>Load Game</span></h1>
 
             <div class="load-game-form load-game--block">
                 <div class="container load-game-options">

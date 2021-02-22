@@ -3,7 +3,7 @@ import {WaterImportFromEuropa} from '../../../src/cards/base/WaterImportFromEuro
 import {Game} from '../../../src/Game';
 import {SelectSpace} from '../../../src/inputs/SelectSpace';
 import {Player} from '../../../src/Player';
-import {maxOutOceans, TestPlayers} from '../../TestingUtils';
+import {TestingUtils, TestPlayers} from '../../TestingUtils';
 
 describe('WaterImportFromEuropa', function() {
   let card : WaterImportFromEuropa; let player : Player; let game : Game;
@@ -41,7 +41,7 @@ describe('WaterImportFromEuropa', function() {
   });
 
   it('Can act if can pay even after oceans are maxed', function() {
-    maxOutOceans(player);
+    TestingUtils.maxOutOceans(player);
     player.megaCredits = 12;
 
     expect(card.canAct(player)).is.true;

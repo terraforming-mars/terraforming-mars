@@ -1,5 +1,3 @@
-import {IParty} from './parties/IParty';
-import {GlobalEventDealer} from './globalEvents/GlobalEventDealer';
 import {IGlobalEvent} from './globalEvents/IGlobalEvent';
 import {GlobalEventName} from './globalEvents/GlobalEventName';
 import {PartyName} from './parties/PartyName';
@@ -14,21 +12,18 @@ export interface SerializedParty {
     partyLeader: undefined | PlayerId | NeutralPlayer;
 }
 
-// TODO(kberg): By 2021-01-15, remove delegeate_reserve, commingGlobalEvent, and uses
-// of IParty, GlobalEventDealer, and IGlobalEvent.
 export interface SerializedTurmoil {
     chairman: undefined | PlayerId | NeutralPlayer;
-    rulingParty: IParty | PartyName;
-    dominantParty: IParty | PartyName;
+    rulingParty: PartyName;
+    dominantParty: PartyName;
     lobby: Array<string>;
-    delegate_reserve: Array<PlayerId | NeutralPlayer>; // eslint-disable-line camelcase
-    delegateReserve: Array<PlayerId | NeutralPlayer> | undefined;
-    parties: Array<IParty | SerializedParty>;
+    delegateReserve: Array<PlayerId | NeutralPlayer>;
+    parties: Array<SerializedParty>;
     playersInfluenceBonus: Array<[string, number]>;
-    globalEventDealer: GlobalEventDealer | SerializedGlobalEventDealer;
-    distantGlobalEvent: IGlobalEvent | GlobalEventName | undefined;
-    commingGlobalEvent: IGlobalEvent | undefined;
+    globalEventDealer: SerializedGlobalEventDealer;
+    distantGlobalEvent: GlobalEventName | undefined;
     comingGlobalEvent: GlobalEventName | undefined;
+    // TODO(kberg): By 2021-03-01, IGlobalEvent.
     currentGlobalEvent?: IGlobalEvent | GlobalEventName;
-    politicalAgendasData: SerializedPoliticalAgendasData | undefined;
+    politicalAgendasData: SerializedPoliticalAgendasData;
 }

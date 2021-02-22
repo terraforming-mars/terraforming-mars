@@ -7,7 +7,7 @@
 
     "Deep Well Heating": "Tiefbrunnen-Heizung",
     "Increase your Energy production 1 step. Increase temperature 1 step.": "Erhöhe deine Energie-Produktion um 1. Erhöhe die Temperatur um 2 °C.",
-    
+
     "Cloud Seeding": "Wolkenimpfung",
     "Requires 3 ocean tiles. Decrease your MC production 1 step and any heat production 1 step. Increase your Plant production 2 steps.": "Benötigt 3 oder mehr Ozeanplättchen im Spiel. Senke deine M€-Produktion um 1 und eine beliebige Wärme-Produktion um 1. Erhöhe deine Pflanzen-Produktion um 2.",
 
@@ -101,7 +101,7 @@
     "Effect: When you play a Space Event, you gain 3 MC and 3 heat.": "EFFEKT: Wenn du ein Weltraumereignis spielst, erhältst du 3 M€ und 3 Wärme.",
 
     "Underground City": "Unterirdische Stadt",
-    "Place a City tile. Decrease your Energy production 2 steps and increase your steel production 2 steps.": "Platziere eine Staadtplättchen. Senke deine Energie-Produktion um 2 und erhöhe deine Stahl-Produktion um 2.",    
+    "Place a City tile. Decrease your Energy production 2 steps and increase your steel production 2 steps.": "Platziere eine Staadtplättchen. Senke deine Energie-Produktion um 2 und erhöhe deine Stahl-Produktion um 2.",
 
     "Regolith Eaters": "Regolith-Fresser",
     "Action: Add 1 Microbe to this card, or remove 2 Microbes from this card to raise oxygen level 1 step.": "AKTION: Füge dieser Karte eine Mikrobe hinzu ODER entferne 2 Mikroben von dieser Karte, um den Sauerstoffgehalt um 1% zu erhöhen.",
@@ -445,7 +445,7 @@
 
     "Mohole Area": "Mohole-Bohrung",
     "Increase your heat production 4 steps. Place this tile ON AN AREA RESERVED FOR OCEAN.": "Erhöhe deine Wärme-Produktion um 4. Platzeire dieses Plättchen auf einem für Ozeane reserviertem Gebiet.",
-    
+
     "Large Convoy": "Riesiger Konvoi",
     "Place an ocean tile and draw 2 cards. Gain 5 Plants or add 4 Animals to ANOTHER card.": "Platziere 1 Ozeanplättchen. Ziehe 2 Karten. Erhalte 5 Pflanzen ODER füge einer Karte 4 Tiere hinzu.",
 
@@ -464,7 +464,7 @@
     "Insects": "Fluginsekten",
     "Requires 6% oxygen. Increase your Plant production 1 step for each plant tag you have.": "Benötigt Sauerstoffgehalt von 6% oder mehr. Erhöhe deine Pflanzen-Produktion um 1 je eigenes Pflanzensymbol.",
 
-    "CEOs Favorite Project": "Dein Lieblingsprojekt",
+    "CEO's Favorite Project": "Dein Lieblingsprojekt",
     "ADD 1 RESOURCE TO A CARD WITH AT LEAST 1 RESOURCE ON IT": "Füge einer Karte, auf der bereits mindestens 1 Ressource ist, 1 Ressource hinzu.",
 
     "Anti-Gravity Technology": "Antischwerkraft-Technologie",
@@ -545,7 +545,7 @@
 
     "Protected Valley": "Geschütztes Tal",
     "Increase your MC production 2 steps. Place a greenery tile ON AN AREA RESERVED FOR OCEAN, disregarding normal placement restrictions, and increase oxygen 1 step.": "Erhöhe deine M€-Produktion um 2. Platziere ein Grünflächenplättchen auf einem für Ozeane reserviertem Gebiet (ignoriere die normalen Platzierungsregeln) und erhöhe den Sauerstoffgehalt um 1%.",
-    
+
     "Satellites": "Satelliten",
     "Increase your MC production 1 step for each space tag you have, including this one.": "Erhöhe deine M€-Produktion um 1 je eigenes Weltraumsymbol (einschließlich dieses).",
 
@@ -612,7 +612,7 @@
 
     "Lagrange Observatory": "Lagrange-Observatorium",
     "Draw 1 card.": "Ziehe 1 Karte.",
-    
+
     "Terraforming Ganymede": "Terraforming Ganymed",
     "Raise your TR 1 step for each Jovian tag you have, including this.": "Erhöhe deinen Terraformwert um 1 je eigenes Jupitersymbol (einschließlich dieses).",
 
@@ -639,7 +639,7 @@
     "Technology Demonstration": "Technologie-Demonstration",
     "Draw two cards.": "Ziehe 2 Karten.",
 
-    "Rad-chem Factory": "Strahlenchemie-Fabrik",
+    "Rad-Chem Factory": "Strahlenchemie-Fabrik",
     "Decrease your Energy production 1 step. Raise your TR 2 steps.": "Senke deine Energie-Produktion um 1. Erhöhe deinen Terraformwert um 2.",
 
     "Special Design": "Spezielles Design",
@@ -655,13 +655,13 @@
     "Penguins": "Pinguine",
     "Action: Add 1 Animal to this card.": "AKTION: Füge dieser Karte 1 Tier hinzu.",
     "Requires 8 oceans. 1 VP for each animal on this card.": "Benötigt 8 Ozeane. 1 SP je Tier auf dieser Karte.",
-    
+
     "3 Oceans": "3 Ozeane",
     "4 Oceans": "4 Ozeane",
     "8 Oceans": "8 Ozeane",
-    
+
     "2 Cities": "2 Städte",
-    
+
     "2 Science": "2 Wissenschaft",
     "3 Science": "3 Wissenschaft",
     "4 Science": "4 Wissenschaft",
@@ -737,7 +737,7 @@
     "Spin-off Department": "Zweigstelle",
     "Sub-zero Salt Fish": "Eis-Salzwasserfisch",
     "Titan Air-scrapping": "Titan Luft-Recycling",
-    "Titan Floater Launch-pad": "Titan Schweber Startplattform",
+    "Titan Floating Launch-pad": "Titan Schweber Startplattform",
     "Titan Shuttles": "Titan Shuttles",
     "Towing A Comet": "Kometen Abschleppen",
     "Trade Envoys": "Handelsbeauftragte",

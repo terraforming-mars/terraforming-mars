@@ -14,6 +14,7 @@ import {ISerializable} from '../ISerializable';
 import {SerializedTurmoil} from './SerializedTurmoil';
 import {PLAYER_DELEGATES_COUNT} from '../constants';
 import {AgendaStyle, PoliticalAgendasData, PoliticalAgendas} from './PoliticalAgendas';
+import {CardName} from '../CardName';
 
 export type NeutralPlayer = 'NEUTRAL';
 
@@ -37,6 +38,8 @@ const UNINITIALIZED_POLITICAL_AGENDAS_DATA: PoliticalAgendasData = {
     policyId: 'none',
   },
   staticAgendas: undefined,
+  agendas: new Map(),
+  agendaStyle: AgendaStyle.CHAIRMAN,
 };
 
 export class Turmoil implements ISerializable<SerializedTurmoil> {
@@ -123,10 +126,10 @@ export class Turmoil implements ISerializable<SerializedTurmoil> {
       playerId: PlayerId | NeutralPlayer,
       partyName: PartyName,
       game: Game,
-      fromLobby: boolean = true): void {
+      source: 'lobby' | 'reserve' = 'lobby'): void {
       const party = this.getPartyByName(partyName);
       if (party) {
-        if (playerId !== 'NEUTRAL' && this.lobby.has(playerId) && fromLobby) {
+        if (playerId !== 'NEUTRAL' && this.lobby.has(playerId) && source === 'lobby') {
           this.lobby.delete(playerId);
         } else {
           const index = this.delegateReserve.indexOf(playerId);
@@ -289,8 +292,10 @@ export class Turmoil implements ISerializable<SerializedTurmoil> {
         // Finally, award Chairman TR
         if (this.chairman !== 'NEUTRAL') {
           const player = game.getPlayerById(this.chairman);
-          player.increaseTerraformRating();
-          game.log('${0} is the new chairman and got 1 TR increase', (b) => b.player(player));
+          // Tempest Consultancy Hook (gains an additional TR when they become chairman)
+          const steps = player.corporationCard?.name === CardName.TEMPEST_CONSULTANCY ? 2 :1;
+          player.increaseTerraformRatingSteps(steps);
+          game.log('${0} is the new chairman and gained ${1} TR', (b) => b.player(player).number(steps));
         } else {
           game.log('A neutral delegate is the new chairman.');
         }
@@ -377,7 +382,8 @@ export class Turmoil implements ISerializable<SerializedTurmoil> {
       return Array.from(new Set(this.delegateReserve));
     }
 
-    // Return number of delegate
+    // Return number of delegates in reserve
+    // TODO(kberg): rename to getDelegatesInReserve()
     public getDelegates(playerId: PlayerId | NeutralPlayer): number {
       const delegates = this.delegateReserve.filter((p) => p === playerId).length;
       return delegates;
@@ -406,7 +412,6 @@ export class Turmoil implements ISerializable<SerializedTurmoil> {
         rulingParty: this.rulingParty.name,
         dominantParty: this.dominantParty.name,
         lobby: Array.from(this.lobby),
-        delegate_reserve: this.delegateReserve,
         delegateReserve: this.delegateReserve,
         parties: this.parties.map((p) => {
           return {
@@ -418,50 +423,25 @@ export class Turmoil implements ISerializable<SerializedTurmoil> {
         playersInfluenceBonus: Array.from(this.playersInfluenceBonus.entries()),
         globalEventDealer: this.globalEventDealer.serialize(),
         distantGlobalEvent: this.distantGlobalEvent?.name,
-        commingGlobalEvent: this.comingGlobalEvent,
         comingGlobalEvent: this.comingGlobalEvent?.name,
         politicalAgendasData: PoliticalAgendas.serialize(this.politicalAgendasData),
       };
       if (this.currentGlobalEvent !== undefined) {
-        result.currentGlobalEvent = this.currentGlobalEvent;
+        result.currentGlobalEvent = this.currentGlobalEvent.name;
       }
       return result;
     }
 
     public static deserialize(d: SerializedTurmoil): Turmoil {
-      function partyName(object: any): PartyName {
-        function instanceOfIParty(object: any): object is IParty {
-          try {
-            return 'delegates' in object;
-          } catch (typeError) {
-            return false;
-          }
-        }
-        if (instanceOfIParty(object)) {
-          return object.name;
-        } else {
-          return object;
-        }
-      }
       const dealer = GlobalEventDealer.deserialize(d.globalEventDealer);
-      const turmoil =
-        new Turmoil(
-          partyName(d.rulingParty),
-          d.chairman || 'NEUTRAL',
-          partyName(d.dominantParty),
-          dealer);
+      const turmoil = new Turmoil(d.rulingParty, d.chairman || 'NEUTRAL', d.dominantParty, dealer);
 
       turmoil.lobby = new Set(d.lobby);
-      turmoil.delegateReserve = d.delegate_reserve;
 
-      if (d.delegateReserve !== undefined) {
-        turmoil.delegateReserve = d.delegateReserve;
-      } else {
-        turmoil.delegateReserve = d.delegate_reserve;
-      }
+      turmoil.delegateReserve = d.delegateReserve;
 
       // TODO(kberg): remove this test by 2021-02-01
-      turmoil.politicalAgendasData = PoliticalAgendas.deserialize(d.politicalAgendasData, turmoil);
+      turmoil.politicalAgendasData = PoliticalAgendas.deserialize(d.politicalAgendasData);
 
       d.parties.forEach((sp) => {
         const tp = turmoil.getPartyByName(sp.name);
@@ -492,12 +472,10 @@ export class Turmoil implements ISerializable<SerializedTurmoil> {
       turmoil.playersInfluenceBonus = new Map<string, number>(d.playersInfluenceBonus);
 
       if (d.distantGlobalEvent) {
-        turmoil.distantGlobalEvent = getGlobalEventByName(globalEventName(d.distantGlobalEvent));
+        turmoil.distantGlobalEvent = getGlobalEventByName(d.distantGlobalEvent);
       }
       if (d.comingGlobalEvent) {
         turmoil.comingGlobalEvent = getGlobalEventByName(d.comingGlobalEvent);
-      } else if (d.commingGlobalEvent) {
-        turmoil.comingGlobalEvent = getGlobalEventByName(d.commingGlobalEvent.name);
       }
       if (d.currentGlobalEvent) {
         turmoil.currentGlobalEvent = getGlobalEventByName(globalEventName(d.currentGlobalEvent));

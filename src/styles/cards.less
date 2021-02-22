@@ -34,8 +34,8 @@
     }
 }
 
-.cards-action-was-used {
-    filter: grayscale(1);
+.card-unavailable {
+    filter: brightness(0.55);
 }
 
 .nofloat {
@@ -73,11 +73,6 @@
     border-right: 4px solid rgb(137, 137, 137);
     border-radius: 20px;
     box-shadow: 0 0 2px 1px black;
-}
-
-.clicked-card {
-    box-shadow: 0 0 1px 1px #444, 0 0 15px 5px white !important;
-    filter: grayscale(1);
 }
 
 input[type="checkbox"]:checked + .filterDiv,
@@ -2088,7 +2083,26 @@ input[type="radio"]:checked + .filterDiv::after {
     z-index: 1000;
     top: 100px;
     left: 70px;
+    background: url(./assets/martian.png);
+    width: 100px;
+    height: 123px;
 }
+
+.mined-metal {
+    position: absolute;
+    top: 147px;
+    width: 57px;
+    height: 38px;
+    background: url(./assets/misc/production.png);
+    background-size: 72px;
+    &.mined-steel {
+        left: 105px;
+    }
+    &.mined-titanium {
+        left: 69px;
+    }
+}
+
 
 .card-domed-crater {
     .content {

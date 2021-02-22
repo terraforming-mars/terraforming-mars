@@ -11,7 +11,7 @@ import {Tags} from '../Tags';
 export class CrescentResearchAssociation implements CorporationCard {
   public name = CardName.CRESCENT_RESEARCH_ASSOCIATION;
   public tags = [Tags.SCIENCE, Tags.MOON];
-  public startingMegaCredits: number = 42;
+  public startingMegaCredits: number = 50;
   public cardType = CardType.CORPORATION;
   public requirements: undefined;
 

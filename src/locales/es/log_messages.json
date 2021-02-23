@@ -10,6 +10,7 @@
     "${0} converted plants into a greenery": "${0} hat Pflanzen in eine Grünfläche umgewandelt",
     "${0} traded with ${1}": "${0} comerció con ${1}",
     "${0} used ${1} standard project": "${0} usó el proyecto estándar ${1}",
+    "${0} used ${1} standard project,sold ${2} card(s)": "${0} 执行了标准行动 - ${1}, 出售了 ${2} 张卡",
     "${0} built a colony on ${1}": "${0} construyó una colonia en ${1}",
     "${0} bought ${1} card(s)": "${0} compró ${1} carta(s)",
     "${0} acted as World Government and increased Venus scale": "${0} handelte als Weltregierung und erhöhte die Venus-Skala",
@@ -23,4 +24,25 @@
     "${0} copied ${1} production with ${2}": "${0} hat die Produktion von ${1} mit ${2} kopiert",
     "${0} used ${1} action with ${2}": "${0} usó la acción ${1} con ${2}",
     "${0} sold ${1} patents": "${0} vendió la patente ${1}"
+    "Turmoil phase has been resolved" : "动荡阶段结算完毕",
+
+
+    "${0} drew ${1}":"${0} 摸了 ${1}",
+    "${0} drew ${1} and ${2}":"${0} 摸了 ${1} 和 ${2}",
+    "${0} drew ${1}, ${2} and ${3}": "${0} 摸了 ${1}, ${2} et ${3}",
+    "${0} sold ${1} patents":"${0} 卖了 ${1} 张专利(牌)",
+    "${0}'s ${1} production increased by ${2}":"${0}的 ${1}产能 增加 ${2}",
+    "${0} ${1} ${2} on row ${3} position ${4}": "${0} ${1} ${2} 在第 ${3} 排的第 ${4} 个位置上",
+    "placed":"放置",
+    "greenery tile":"绿化板块",
+    "ocean tile":"海洋板块",
+    "city tile":"城市版块",
+    "special tile":"特殊板块",
+    "${0} ${1} ${2} card(s)":"${0} ${1} ${2} 张牌",
+    "drew":"摸了",
+    "bought":"买了",
+    "sold":"卖了",
+    "${0} card(s) were discarded": "1 张卡片被丢弃"
+}
+
 }

@@ -107,7 +107,7 @@ function processRequest(req: http.IncomingMessage, res: http.ServerResponse): vo
     case '/player':
     case '/the-end':
     case '/load':
-    case '/debug-ui':
+    case '/cards':
     case '/help':
       serveApp(req, res);
       break;

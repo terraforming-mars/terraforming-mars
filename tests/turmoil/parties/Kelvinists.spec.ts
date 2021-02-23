@@ -1,12 +1,12 @@
 import {expect} from 'chai';
-import {Player} from '../../src/Player';
-import {Game} from '../../src/Game';
-import {Turmoil} from '../../src/turmoil/Turmoil';
-import {ISpace} from '../../src/boards/ISpace';
-import {TestingUtils, setCustomGameOptions, TestPlayers} from '../TestingUtils';
-import {Kelvinists, KELVINISTS_BONUS_1, KELVINISTS_BONUS_2, KELVINISTS_POLICY_1, KELVINISTS_POLICY_3} from '../../src/turmoil/parties/Kelvinists';
-import {TileType} from '../../src/TileType';
-import {Resources} from '../../src/Resources';
+import {Player} from '../../../src/Player';
+import {Game} from '../../../src/Game';
+import {Turmoil} from '../../../src/turmoil/Turmoil';
+import {ISpace} from '../../../src/boards/ISpace';
+import {TestingUtils, setCustomGameOptions, TestPlayers} from '../../TestingUtils';
+import {Kelvinists, KELVINISTS_BONUS_1, KELVINISTS_BONUS_2, KELVINISTS_POLICY_1, KELVINISTS_POLICY_3} from '../../../src/turmoil/parties/Kelvinists';
+import {TileType} from '../../../src/TileType';
+import {Resources} from '../../../src/Resources';
 
 describe('Kelvinists', function() {
   let player : Player; let game : Game; let turmoil: Turmoil; let kelvinists: Kelvinists;

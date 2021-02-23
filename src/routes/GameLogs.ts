@@ -59,7 +59,7 @@ export class GameLogs {
           },
         }, (err, compressed) => {
           if (err !== null) {
-            this.internalServerError(req, res, err);
+            ctx.route.internalServerError(req, res, err);
             return;
           }
           res.setHeader('Content-Encoding', 'br');

@@ -467,6 +467,7 @@ export enum CardName {
     PROJECT_WORKSHOP = 'Project Workshop',
     INCITE = 'Incite',
     PLAYWRIGHTS = 'Playwrights',
+    CURIOSITY_II = 'Curiosity II',
     MIDAS = 'Midas',
 
     // Community preludes

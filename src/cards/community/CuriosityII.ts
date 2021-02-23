@@ -14,6 +14,10 @@ import {SelectOption} from '../../inputs/SelectOption';
 import {SelectHowToPayDeferred} from '../../deferredActions/SelectHowToPayDeferred';
 import {DrawCards} from '../../deferredActions/DrawCards';
 import {SpaceType} from '../../SpaceType';
+import {SpaceBonus} from '../../SpaceBonus';
+import {TileType} from '../../TileType';
+import {ITile} from '../../ITile';
+import {Phase} from '../../Phase';
 
 export class CuriosityII extends Card implements CorporationCard {
   constructor() {
@@ -30,8 +34,8 @@ export class CuriosityII extends Card implements CorporationCard {
           b.br.br;
           b.megacredits(40).nbsp.production((pb) => pb.steel(2));
           b.corpBox('effect', (ce) => {
-            ce.effect('When you place a tile on a non-empty space ON MARS, you may pay 3 MC to draw a card.', (eb) => {
-              eb.emptyTile('normal', CardRenderItemSize.SMALL).startEffect.megacredits(3).arrow().cards(1);
+            ce.effect('When you place a tile on an area ON MARS that has a resource placement bonus, you may pay 3 MC to draw a card.', (eb) => {
+              eb.emptyTile('normal', CardRenderItemSize.SMALL).nbsp.asterix().startEffect.megacredits(-3).cards(1);
             });
           });
         }),
@@ -40,7 +44,16 @@ export class CuriosityII extends Card implements CorporationCard {
   }
 
   public onTilePlaced(cardOwner: Player, activePlayer: Player, space: ISpace) {
-    if (cardOwner.id === activePlayer.id && space.bonus.length > 0 && space.spaceType !== SpaceType.COLONY) {
+    const eligibleBonuses = [SpaceBonus.STEEL, SpaceBonus.TITANIUM, SpaceBonus.HEAT, SpaceBonus.PLANT, SpaceBonus.MEGACREDITS, SpaceBonus.ANIMAL, SpaceBonus.MICROBE];
+    const moonTileTypes = [TileType.MOON_COLONY, TileType.MOON_MINE, TileType.MOON_ROAD];
+    const tile = space.tile as ITile;
+
+    if (cardOwner.id !== activePlayer.id) return;
+    if (cardOwner.game.phase !== Phase.ACTION) return;
+    if (space.spaceType === SpaceType.COLONY) return;
+    if (moonTileTypes.includes(tile.tileType)) return;
+
+    if (space.bonus.some((bonus) => eligibleBonuses.includes(bonus))) {
       cardOwner.game.defer(new DeferredAction(cardOwner, () => this.corpAction(cardOwner)));
     }
   }

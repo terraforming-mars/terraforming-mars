@@ -28,7 +28,7 @@ describe('CuriosityII', function() {
     const orOptions = game.deferredActions.pop()!.execute() as OrOptions;
 
     orOptions.options[1].cb(); // Do nothing
-    expect(player.cardsInHand).has.lengthOf(0);
+    expect(player.cardsInHand).is.empty;
     expect(player.megaCredits).to.eq(3);
 
     orOptions.options[0].cb(); // Pay 3 MC to draw a card
@@ -42,7 +42,7 @@ describe('CuriosityII', function() {
     game.addCityTile(player, emptySpace.id);
     TestingUtils.runAllActions(game);
 
-    expect(player.cardsInHand).has.lengthOf(0);
+    expect(player.cardsInHand).is.empty;
     expect(player.megaCredits).to.eq(3);
   });
 
@@ -51,7 +51,7 @@ describe('CuriosityII', function() {
     game.addCityTile(player2, nonEmptySpace.id);
     TestingUtils.runAllActions(game);
 
-    expect(player.cardsInHand).has.lengthOf(0);
+    expect(player.cardsInHand).is.empty;
     expect(player.megaCredits).to.eq(3);
   });
 });

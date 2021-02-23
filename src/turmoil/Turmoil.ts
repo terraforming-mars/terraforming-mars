@@ -38,6 +38,8 @@ const UNINITIALIZED_POLITICAL_AGENDAS_DATA: PoliticalAgendasData = {
     policyId: 'none',
   },
   staticAgendas: undefined,
+  agendas: new Map(),
+  agendaStyle: AgendaStyle.CHAIRMAN,
 };
 
 export class Turmoil implements ISerializable<SerializedTurmoil> {
@@ -439,7 +441,7 @@ export class Turmoil implements ISerializable<SerializedTurmoil> {
       turmoil.delegateReserve = d.delegateReserve;
 
       // TODO(kberg): remove this test by 2021-02-01
-      turmoil.politicalAgendasData = PoliticalAgendas.deserialize(d.politicalAgendasData, turmoil);
+      turmoil.politicalAgendasData = PoliticalAgendas.deserialize(d.politicalAgendasData);
 
       d.parties.forEach((sp) => {
         const tp = turmoil.getPartyByName(sp.name);

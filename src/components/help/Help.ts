@@ -30,6 +30,7 @@ export const Help = Vue.component('help', {
   },
   template: `
     <div class="help-container">
+
         <div class="help-tabs">
             <input type="radio" name="help-tab" id="radio-symbols" checked>
             <label for="radio-symbols" v-on:click="setTab('iconology')">
@@ -48,9 +49,13 @@ export const Help = Vue.component('help', {
                 <span v-i18n>Hot Keys</span>
             </label>
         </div>
+
         <help-iconology v-if="isOpen('iconology')"></help-iconology>
+
         <help-standard-projects v-if="isOpen('standard projects')"></help-standard-projects>
+
         <help-phases v-if="isOpen('phases')"></help-phases>
+
         <div v-if="isOpen('hotkeys')">
           <div class="help-hotkeys">
             <div class="keys">
@@ -62,6 +67,7 @@ export const Help = Vue.component('help', {
           </div>
           <div class="help-hotkeys-example"></div>
         </div>
+        
     </div>
     `,
 });

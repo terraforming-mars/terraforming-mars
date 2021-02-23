@@ -3,6 +3,7 @@ import {LogMessageDataType} from '../LogMessageDataType';
 import {Message} from '../Message';
 import {PreferencesManager} from '../components/PreferencesManager';
 import * as raw_translations from '../genfiles/translations.json';
+import {LogMessageData} from '../LogMessageData';
 
 const TM_translations: {[x: string]: {[x: string]: string}} = raw_translations;
 
@@ -38,6 +39,22 @@ export function translateText(englishText: string): string {
     }
   }
   return translatedText;
+}
+
+export function translateTextWithParams(englishText: string, params: Array<string>): string {
+  const data = params.map((p) => {
+    return {
+      type: LogMessageDataType.RAW_STRING,
+      value: p,
+    } as LogMessageData;
+  });
+
+  const message: Message = {
+    message: englishText,
+    data: data,
+  };
+
+  return translateMessage(message);
 }
 
 function normalizeText(text: string): string {

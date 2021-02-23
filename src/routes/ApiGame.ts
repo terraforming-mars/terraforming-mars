@@ -1,5 +1,4 @@
 import * as http from 'http';
-import {GameLoader} from '../database/GameLoader';
 import {Game, GameId} from '../Game';
 import {Handler} from './Handler';
 import {IContext} from './IHandler';
@@ -34,9 +33,9 @@ export class ApiGame extends Handler {
 
     const gameId: GameId = matches[1];
 
-    GameLoader.getInstance().getByGameId(gameId, false, (game: Game | undefined) => {
+    ctx.gameLoader.getByGameId(gameId, false, (game: Game | undefined) => {
       if (game === undefined) {
-        ctx.route.notFound(req, res, 'game is undefined');
+        ctx.route.notFound(req, res, 'game not found');
         return;
       }
       const model = Server.getGameModel(game);

@@ -79,7 +79,7 @@ function processRequest(req: http.IncomingMessage, res: http.ServerResponse): vo
   }
 
   const url = new URL(req.url, `http://${req.headers.host}`);
-  const ctx = {url, route, serverId};
+  const ctx = {url, route, serverId, gameLoader: GameLoader.getInstance()};
 
   const handler: IHandler | undefined = handlers.get(url.pathname);
   if (handler !== undefined) {

@@ -122,7 +122,8 @@
 
     "Ants": "Hormigas",
     "Action: Remove 1 Microbe from any card to add 1 to this card.": "Acción: elimina 1 microbio de cualquier carta para añadir 1 a esta carta.",
-    "Requires 4% oxygen. 1 VP per 2 Microbes on this card.": "Requiere 4% de oxígeno. 1 PV por cada 2 microbios en esta carta.",
+    "1 VP per 2 Microbes on this card.": "1 PV por cada 2 microbios en esta carta.",
+    "Requires 4% oxygen.": "Requiere 4% de oxígeno.",
 
     "Release of Inert Gases": "Liberación de Gases Inertes",
     "(Raise your terraforming rating 2 steps.)": "Aumenta tu valor de terraformación 2 niveles.",
@@ -274,7 +275,7 @@
     "Increase your MC production 3 steps.": "Aumenta tu producción de M€ 3 niveles.",
 
     "Giant Space Mirror": "Espejo Espacial Gigante",
-    "Increase your energy production 3 steps.": "Aumenta tu producción de energía 3 niveles.",
+    "(Increase your energy production 3 steps.)": "Aumenta tu producción de energía 3 niveles.",
 
     "Trans-Neptune Probe": "Sonda Trans-Neptuno",
 
@@ -286,7 +287,7 @@
     "Duplicate only the production box of one of your building cards.": "Duplica solo el recuadro de producción de una de tus cartas tipo edificio.",
 
     "Grass": "Hierba",
-    "(Requires -16 C or warmer. Increase your plant production 1 step. Gain 3 plants.)": "Requiere -16°C o más cálido. Aumenta tu producción de plantas 1 nivel. Obtén 3 plantas.",
+    "(Requires -16° C or warmer. Increase your plant production 1 step. Gain 3 plants.)": "Requiere -16°C o más cálido. Aumenta tu producción de plantas 1 nivel. Obtén 3 plantas.",
 
     "Heather": "Brezo",
     "(Requires -14 C° or warmer. Increase your plant production 1 step. Gain 1 plant.)": "Requiere -14°C o más cálido. Aumenta tu producción de plantas 1 nivel. Obtén 1 planta.",
@@ -430,7 +431,7 @@
 
     "Symbiotic Fungus": "Hongos Simbióticos",
     "Action: Add a microbe to ANOTHER card.": "Acción: añade un microbio a OTRA carta.",
-    "Requires -14 C or warmer.": "Requiere -14°C o más cálido.",
+    "(Requires -14 C° or warmer.)": "Requiere -14°C o más cálido.",
 
     "Extreme-Cold Fungus": "Hongos de Frío Extremo",
     "(Action: Gain 1 plant.)": "Acción: obtén 1 planta",
@@ -490,7 +491,7 @@
     "Decrease your MC production 1 step. Gain 10 MC.": "Reduce tu producción de M€ 1 nivel. Obtén 10 M€.",
 
     "Insulation": "Aislamiento",
-    "Decrease your heat production any number of steps and increase your MC production the same number of steps.": "Reduce tu producción de calor cualquier úmero de niveles y aumenta tu producción de M€ ese mismo número.",
+    "Decrease your heat production any number of steps and increase your MC production the same number of steps.": "Reduce tu producción de calor cualquier número de niveles y aumenta tu producción de M€ ese mismo número.",
 
     "Adaptation Technology": "Modificador de Tecnología",
     "Global requirements": "Requisitos globales",

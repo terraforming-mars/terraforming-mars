@@ -24,7 +24,7 @@
   "Effect: You may always pay 7 plants, instead of 8, to place greenery.":"Efecto: siempre pagas 7 plantas, en lugar de 8, para colocar 1 loseta de vegetación.",
 
   "You start with 3 heat production and 42 MC.":"Comienza con 3 en producción de calor y 42 M€.",
-  "Effect: Your may use heat as MC. You may not use MC as heat.":"Efecto: puedes usar calor como M€. No puedes usar M€ como calor.",
+  "Effect: You may use heat as MC. You may not use MC as heat.":"Efecto: puedes usar calor como M€. No puedes usar M€ como calor.",
 
   "You start with 45 MC. As your first action, fund an award for free.":"起始获得45MC。作为你的起始行动,你可以免费资助一个奖项",
   "Effect: When you play a card with a NON-NEGATIVE VP icon, including this, gain 3MC.":"效果:当你打出一张有非负分图标的牌(包括本牌)时,获得3MC",
@@ -32,8 +32,7 @@
   "You start with 50MC. Increase your MC production 5 steps. Gain 5 titanium.":"起始获得50MC。提升你的MC产能5级,获得5个钛合金",
   "Effect: When you buy a card to hand, pay 5MC instead of 3, including the starting hand.":"效果:当你购买手牌时,你需要支付5MC而非原本的3MC,包括起始的手牌",
 
-
-  "You start with 30 MC, 5 steel, and 1 steel production":"Comienza con 30 M€, 5 de acero y 1 en producción de acero.",
+  "You start with 30 MC, 5 steel and 1 steel production":"Comienza con 30 M€, 5 de acero y 1 en producción de acero.",
   "Effect: Each time you get any steel or titanium as a placement bonus on the map, increase your steel production 1 step.":"Efecto: cada vez que obtengas acero o titanio como bonificación por colocación, aumenta tu producción de acero en 1.",
 
   "You start with 40MC. As your first action add a colony tile.":"起始获得40MC。作为你的第一个行动,将一个殖民地板块加入游戏",
@@ -54,7 +53,7 @@
   "Action: Add a floater to ANY card.":"行动:放置1个云资源到任意卡牌",
   "1 VP per 3 floaters on this card.":"本牌上每3个云资源获得1分",
 
-  "As you first action in the game, draw 3 cards. Start with 45MC.":"Como primera acción en el juego roba 3 cartas. Comienza con 45 M€.",
+  "As your first action in the game, draw 3 cards. Start with 45MC.":"Como primera acción en el juego roba 3 cartas. Comienza con 45 M€.",
   "Effect: Your temperature, oxygen, ocean, and Venus requirements are +2 or -2 steps, your choice in each case.":"Efecto: tus requisitos de temperatura, oxígeno y océano son +2 o -2, a tu elección en cada caso.",
 
   "You start with 20 steel and 30 MC.":"Comienza con 20 de acero y 30 M€.",
@@ -78,7 +77,7 @@
   "You start with 37 MC. As your first action, draw 3 Prelude cards, and play one of them. Discard the other two.":"你起始拥有37元，作为游戏中的你的第一个行动，你必须抽三张前序卡，打出其中一张，然后弃掉剩余两张。",
 
   "You start with 40 MC.":"Comienza con 40 M€.",
-  "Action:If your Terraform Rating was raised this generation, you may pay 3 MC to raise it 1 step more.":"Acción: si tu valor de terraformación aumentó en esta generación, puedes pagar 3 M€ para incrementarlo en 1 más.",
+  "Action: If your Terraform Rating was raised this generation, you may pay 3 MC to raise it 1 step more.":"Acción: si tu valor de terraformación aumentó en esta generación, puedes pagar 3 M€ para incrementarlo en 1 más.",
 
   "ACTION: PLACE A COMMUNITY (PLAYER MARKER) ON A NON-RESERVED AREA ADJACENT TO ONE OF YOUR TILES OR MARKED AREAS":"行动：将你的一个玩家标记放置在一个非保留区，并且和你的至少一个板块或者玩家标记相邻。",
   "EFFECT: MARKED AREAS ARE RESERVED FOR YOU. WHEN YOU PLACE A TILE THERE, GAIN 3 MC":"效果：只有你能在拥有你的玩家标记的位置放置板块，当你如此做后，获得3元，",

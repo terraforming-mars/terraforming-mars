@@ -1,5 +1,5 @@
 import * as http from 'http';
-import {Game, GameId} from '../Game';
+import {Game} from '../Game';
 import {Handler} from './Handler';
 import {IContext} from './IHandler';
 import {Server} from '../server/ServerModel';
@@ -11,27 +11,11 @@ export class ApiGame extends Handler {
   }
 
   public get(req: http.IncomingMessage, res: http.ServerResponse, ctx: IContext): void {
-    // TODO(kberg): replace this regexp with ctx.url, which has already parsed the URL.
-    const routeRegExp: RegExp = /^\/api\/game\?id\=([0-9a-z_]+)$/i;
-
-    if (req.url === undefined) {
-      ctx.route.notFound(req, res, 'url not defined');
-      return;
-    }
-
-    if (!routeRegExp.test(req.url)) {
+    const gameId = ctx.url.searchParams.get('id');
+    if (!gameId) {
       ctx.route.notFound(req, res, 'id parameter missing');
       return;
     }
-
-    const matches = req.url.match(routeRegExp);
-
-    if (matches === null || matches[1] === undefined) {
-      ctx.route.notFound(req, res, 'id parameter missing');
-      return;
-    }
-
-    const gameId: GameId = matches[1];
 
     ctx.gameLoader.getByGameId(gameId, false, (game: Game | undefined) => {
       if (game === undefined) {

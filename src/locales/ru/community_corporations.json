@@ -10,5 +10,9 @@
     "You start with 38 MC and 1 Energy production.": "Вы начинаете с 38 МС и 1 производством энергии",
     "Select event card to replay at cost in MC and remove from play": "Выберите карту-событие, чтобы разыграть за полную стоимость в МС, а потом удалить ее из игры",
     "You start with 40 MC and 2 steel production.": "Вы начинаете с 40 МС и 2 дополнительными уровнями производства стали",
-    "Effect: When you place a tile on an area ON MARS that has a resource placement bonus, you may pay 3 MC to draw a card.": "Когда вы размещаете тайл НА МАРСЕ где есть бонус с ресурсами можете заплатить 3 МС, чтобы добрать карту"
+    "Effect: When you place a tile on an area ON MARS that has a resource placement bonus, you may pay 3 MC to draw a card.": "Когда вы размещаете тайл НА МАРСЕ где есть бонус с ресурсами можете заплатить 3 МС, чтобы добрать карту",
+    "Pay 3 MC to draw a card": "Заплатите 3 МС, чтобы добрать карту",
+    "Confirm": "Ok",
+    "Select how to pay for action": "Как оплатить действие?",
+    "Do nothing": "Ничего не делать"
 }

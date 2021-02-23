@@ -26,7 +26,7 @@
     "Custom Corporation list": "Lista personalizada de corporaciones",
     "World Government Terraforming": "Terraformando con gobierno mundial",
     "Draft variant": "Variante por descartes",
-    "Initial Draft variant": "Variante por descartes al inicio",
+    "Initial Draft variant": "Variante por descartes desde el inicio",
     "Initial Draft rounds:": "初始轮抽次数",
     "Random first player": "Jugador inicial aleatorio",
     "Show real-time VP": "Mostrar PV en tiempo real",
@@ -125,6 +125,7 @@
     "Save": "Guardar",
 
     "Select which cards to take into hand": "选择保留到手牌的牌(每张3MC)",
+    "Not enough cards selected": "No hay suficientes cartas seleccionadas",
 
     "Convert 7 heat into temperature": "7热升温",
     "Convert 8 heat into temperature": "8热升温",
@@ -133,7 +134,7 @@
     "Colonies": "Colonias",
     "funded by": "fundado por",
     "claimed by": "reclamado por",
-    "Error with input": "Error con entrada",
+    "Error with input": "Error de entrada",
     "This game is over!": "¡Esta partida ha terminado!",
     "Not your turn to take any actions": "No es tu turno",
     "Please Login with right user": "请登录该用户以继续操作",

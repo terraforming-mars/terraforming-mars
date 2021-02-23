@@ -119,14 +119,14 @@ export const ColoniesFilter = Vue.component('colonies-filter', {
             <h2 v-i18n>Colonies</h2>
         </div>
         <div class="colonies-filter-list">
-            <h2>Official</h2>
+            <h2 v-i18n>Official</h2>
             <label class="form-checkbox" v-for="colony in officialColonies">
                 <input type="checkbox" v-model="selectedColonies" :value="colony"/>
                 <i class="form-icon"></i><span v-i18n>{{ colony.name }} - ({{ colony.description }})</span>
             </label> 
         </div>
         <div class="colonies-filter-list">
-            <h2>Community</h2>
+            <h2 v-i18n>Community</h2>
             <label class="form-checkbox" v-for="colony in communityColonies">
                 <input type="checkbox" v-model="selectedColonies" :value="colony"/>
                 <i class="form-icon"></i><span v-i18n>{{ colony.name }} - ({{ colony.description }})</span>

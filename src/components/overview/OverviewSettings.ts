@@ -18,7 +18,7 @@ export const OverviewSettings = Vue.component('overview-settings', {
   },
   template: `
         <div class="players-overview-settings">
-            <div class="setting-label">toggle tags view:</div>
+            <div class="setting-label" v-i18n>toggle tags view:</div>
             <div class="setting-button" v-on:click.prevent="toggleTagsView()">{{ getTagToggleLabel() }}</div>
         </div>
     `,

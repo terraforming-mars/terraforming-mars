@@ -5,7 +5,7 @@ import {OrOptions} from '../../../src/inputs/OrOptions';
 import {Player} from '../../../src/Player';
 import {TestingUtils} from '../../TestingUtils';
 import {TestPlayers} from '../../TestPlayers';
- 
+
 describe('CuriosityII', function() {
   let card : CuriosityII; let player : Player; let player2 : Player; let game : Game;
 

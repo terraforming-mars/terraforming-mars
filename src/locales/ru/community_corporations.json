@@ -8,5 +8,7 @@
     "Effect: You have influence +1. When you send a delegate from the reserve, you pay 2 MC less for it.": "Эффект: Ваше влияние 1. Когда вы отправляете делегата из резерва платите на 2 MC меньше",
     "Action: Replay a played event from any player by paying its cost ONLY in MC (discounts and rebates apply), then REMOVE IT FROM PLAY.)": "Действие: Разыграйте уже сыгранную любым игроком карту-событие оплатив ее стоимость только в МC (скидки работают). Затем удалите ее из игры",
     "You start with 38 MC and 1 Energy production.": "Вы начинаете с 38 МС и 1 производством энергии",
-    "Select event card to replay at cost in MC and remove from play": "Выберите карту-событие, чтобы разыграть за полную стоимость в МС, а потом удалить ее из игры"
+    "Select event card to replay at cost in MC and remove from play": "Выберите карту-событие, чтобы разыграть за полную стоимость в МС, а потом удалить ее из игры",
+    "You start with 40 MC and 2 steel production.": "Вы начинаете с 40 МС и 2 дополнительными уровнями производства стали",
+    "Effect: When you place a tile on an area ON MARS that has a resource placement bonus, you may pay 3 MC to draw a card.": "Когда вы размещаете тайл НА МАРСЕ где есть бонус с ресурсами можете заплатить 3 МС, чтобы добрать карту"
 }

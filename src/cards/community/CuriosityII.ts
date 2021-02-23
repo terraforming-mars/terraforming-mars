@@ -49,7 +49,7 @@ export class CuriosityII extends Card implements CorporationCard {
     const tile = space.tile as ITile;
 
     if (cardOwner.id !== activePlayer.id) return;
-    if (cardOwner.game.phase !== Phase.ACTION) return;
+    if (cardOwner.game.phase === Phase.SOLAR) return;
     if (space.spaceType === SpaceType.COLONY) return;
     if (moonTileTypes.includes(tile.tileType)) return;
 

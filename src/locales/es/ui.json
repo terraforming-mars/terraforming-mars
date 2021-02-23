@@ -118,12 +118,12 @@
     "Game Home": "Spielübersicht",
     "Send players their links below. As game administrator pick your link to use.": "Sende den Spielern ihre untenstehenden, persönlichen Links. Als Administrator kannst du dir deinen Link auswählen.",
 
-    "Select corporation": "Konzern auswählen",
-    "Select initial cards to buy": "Zu kaufende Startkarten auswählen",
-    "Select initial cards:": "Startkarten auswählen:",
-    "Drafted Cards": "Gedraftete Karten",
+    "Select corporation": "Selecciona corporación",
+    "Select initial cards to buy": "Selecciona las cartas iniciales a comprar",
+    "Select initial cards:": "Selecciona cartas iniciales",
+    "Drafted Cards": "Cartas seleccionadas",
 
-    "Turn order": "Orden de turnos",
+    "Turn order": "Orden del turno",
     "Actions": "Acciones",
     "Last Actions": "Últimas acciones",
     "Game Log": "Registro de juego",
@@ -138,7 +138,7 @@
     "Game details": "Detalles de la partida",
     "Milestones and awards": "Hitos y recompensas",
     "(click on player name to see details)": "(für Details auf einen Spielernamen klicken)",
-    "Go to game results": "Zum Spielergebnis",
+    "Go to game results": "Ir a resultados de la partida",
 
     "funded by": "fundado por",
     "claimed by": "reclamado por",

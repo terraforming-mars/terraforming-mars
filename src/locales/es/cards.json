@@ -436,7 +436,7 @@
     "It must be -10 C or colder.": "La temperatura debe ser -10°C o más fría.",
 
     "Advanced Ecosystems": "Ecosistemas Avanzados",
-    "Plant Animal Microbe": "植物 动物 微生物",
+    "Plant Animal Microbe": "Planta Animal Microbio",
     "Requires a Plant tag, a Microbe tag, and an Animal tag.": "Requiere un símbolo de planta, uno de microbio y uno de animal.",
 
     "Great Dam": "Presa Gigante",
@@ -491,7 +491,7 @@
     "Decrease your heat production any number of steps and increase your MC production the same number of steps.": "Reduce tu producción de calor cualquier úmero de niveles y aumenta tu producción de M€ ese mismo número.",
 
     "Adaptation Technology": "Modificador de Tecnología",
-    "Global requirements": "全球需求",
+    "Global requirements": "Requisitos globales",
     "Effect: Your global requirements are +2 or -2 steps, your choice in each case.": "Efecto: tus requisitos globales son +2 o -2 niveles, a tu elección en cada caso.",
 
     "Caretaker Contract": "Contrato de Supervisión",
@@ -546,7 +546,7 @@
     "Requires -6 C or warmer. Increase your Plant production 1 step and your MC production 2 steps. Gain 1 Plant.": "Requiere -6°C o más cálido. Aumenta tu producción de plantas 1 nivel y tu producción de M€ 2 niveles. Obtén 1 planta.",
 
     "Aerobraked Ammonia Asteroid": "Asteroide Aerofrenado de Amoníaco",
-    "Add 2 Microbes to ANOTHER card. Increase your heat production 3 steps and your Plant productions 1 step.": "Añade 2 microbios a OTRA carta. Aumenta tu producción de calor 3 niveles y tu producción de plantas 1 nivel.",
+    "(Increase your heat production 3 steps and your Plant productions 1 step. Add 2 Microbes to ANOTHER card.)": "(Aumenta tu producción de calor 3 niveles y tu producción de plantas 1 nivel. Añade 2 microbios a OTRA carta.)",
 
     "Magnetic Field Dome": "Bóveda de Campo Magnético",
     "Decrease your Energy production 2 steps and increase your Plant production 1 step. Raise your TR 1 step.": "Reduce tu producción de energía 2 niveles e incrementa tu producción de plantas en 1. Aumenta tu valor de terraformación 1 nivel.",

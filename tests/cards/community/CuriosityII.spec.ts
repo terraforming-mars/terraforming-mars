@@ -2,6 +2,7 @@ import {expect} from 'chai';
 import {CuriosityII} from '../../../src/cards/community/CuriosityII';
 import {Game} from '../../../src/Game';
 import {OrOptions} from '../../../src/inputs/OrOptions';
+import {Phase} from '../../../src/Phase';
 import {Player} from '../../../src/Player';
 import {TestingUtils} from '../../TestingUtils';
 import {TestPlayers} from '../../TestPlayers';
@@ -14,6 +15,7 @@ describe('CuriosityII', function() {
     player = TestPlayers.BLUE.newPlayer();
     player2 = TestPlayers.RED.newPlayer();
     game = Game.newInstance('foobar', [player, player2], player);
+    game.phase = Phase.ACTION;
 
     player.corporationCard = card;
     player.megaCredits = 3;

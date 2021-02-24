@@ -15,7 +15,13 @@ import {BoardName} from './boards/BoardName';
 import {BufferCache} from './server/BufferCache';
 import {Game, GameId} from './Game';
 import {GameLoader} from './database/GameLoader';
-import {GameLogs} from './routes/GameLogs';
+import {ApiCloneableGames} from './routes/ApiCloneableGames';
+import {ApiGameLogs} from './routes/ApiGameLogs';
+import {ApiGames} from './routes/ApiGames';
+import {ApiGame} from './routes/ApiGame';
+import {ApiPlayer} from './routes/ApiPlayer';
+import {ApiWaitingFor} from './routes/ApiWaitingFor';
+import {IHandler} from './routes/IHandler';
 import {Route} from './routes/Route';
 import {Player} from './Player';
 import {Database} from './database/Database';
@@ -24,7 +30,6 @@ import {Cloner} from './database/Cloner';
 
 const serverId = process.env.SERVER_ID || generateRandomId();
 const route = new Route();
-const gameLogs = new GameLogs();
 const assetCacheMaxAge = process.env.ASSET_CACHE_MAX_AGE || 0;
 const fileCache = new BufferCache();
 
@@ -41,6 +46,35 @@ zlib.gzip(styles, function(err, compressed) {
   fileCache.set('styles.css.gz', compressed);
 });
 
+const handlers: Map<string, IHandler> = new Map(
+  [
+    // ['/games-overview', GamesOverview.INSTANCE],
+    // ['/', ServeApp.INSTANCE],
+    // ['/new-game', ServeApp.INSTANCE],
+    // ['/solo', ServeApp.INSTANCE],
+    // ['/game', ServeApp.INSTANCE],
+    // ['/player', ServeApp.INSTANCE],
+    // ['/the-end', ServeApp.INSTANCE],
+    // ['/load', ServeApp.INSTANCE],
+    // ['/debug-ui', ServeApp.INSTANCE],
+    // ['/help-iconology', ServeApp.INSTANCE],
+    // ['/styles.css', ServeAsset.INSTANCE],
+    // ['/favicon.ico', ServeAsset.INSTANCE],
+    // ['/main.js', ServeAsset.INSTANCE],
+    // ['/main.js.map', ServeAsset.INSTANCE],
+    ['/api/player', ApiPlayer.INSTANCE],
+    ['/api/waitingfor', ApiWaitingFor.INSTANCE],
+    ['/api/games', ApiGames.INSTANCE],
+    ['/api/game', ApiGame.INSTANCE],
+    ['/api/clonablegames', ApiCloneableGames.INSTANCE],
+    ['/api/cloneablegames', ApiCloneableGames.INSTANCE],
+    ['/api/game/logs', ApiGameLogs.INSTANCE],
+    // ['/game/', CreateGame.INSTANCE],
+    // ['/load/', LoadGame.INSTANCE],
+    // ['/player/input', PlayerInput.INSTANCE],
+  ],
+);
+
 function processRequest(req: http.IncomingMessage, res: http.ServerResponse): void {
   if (req.url === undefined) {
     route.notFound(req, res);
@@ -48,6 +82,13 @@ function processRequest(req: http.IncomingMessage, res: http.ServerResponse): vo
   }
 
   const url = new URL(req.url, `http://${req.headers.host}`);
+  const ctx = {url, route, serverId};
+
+  const handler: IHandler | undefined = handlers.get(url.pathname);
+  if (handler !== undefined) {
+    handler.processRequest(req, res, ctx);
+    return;
+  }
 
   switch (req.method) {
   case 'GET':
@@ -68,17 +109,9 @@ function processRequest(req: http.IncomingMessage, res: http.ServerResponse): vo
     case '/player':
     case '/the-end':
     case '/load':
-    case '/debug-ui':
+    case '/cards':
     case '/help':
       serveApp(req, res);
-      break;
-
-    case '/api/player':
-      apiGetPlayer(req, res);
-      break;
-
-    case '/api/waitingfor':
-      apiGetWaitingFor(req, res);
       break;
 
     case '/styles.css':
@@ -89,23 +122,9 @@ function processRequest(req: http.IncomingMessage, res: http.ServerResponse): vo
       serveAsset(req, res);
       break;
 
-    case '/api/games':
-      apiGetGames(req, res);
-      break;
-
-    case '/api/game':
-      apiGetGame(req, res);
-      break;
-
-    case '/api/clonablegames':
-      getClonableGames(res);
-      break;
-
     default:
       if (url.pathname.startsWith('/assets/')) {
         serveAsset(req, res);
-      } else if (gameLogs.canHandle(req.url)) {
-        gameLogs.handle(req, res);
       } else {
         route.notFound(req, res);
       }
@@ -147,7 +166,7 @@ function processRequest(req: http.IncomingMessage, res: http.ServerResponse): vo
           route.notFound(req, res);
           return;
         }
-        processInput(req, res, player, game);
+        processInput(req, res, player);
       });
       break;
     } else {
@@ -206,7 +225,6 @@ function processInput(
   req: http.IncomingMessage,
   res: http.ServerResponse,
   player: Player,
-  game: Game,
 ): void {
   let body = '';
   req.on('data', function(data) {
@@ -217,7 +235,7 @@ function processInput(
       const entity = JSON.parse(body);
       player.process(entity);
       res.setHeader('Content-Type', 'application/json');
-      res.write(getPlayerModelJSON(player, game));
+      res.write(getPlayerModelJSON(player));
       res.end();
     } catch (err) {
       res.writeHead(400, {
@@ -232,30 +250,6 @@ function processInput(
       res.end();
     }
   });
-}
-
-function getClonableGames(res: http.ServerResponse): void {
-  Database.getInstance().getClonableGames(function(err, allGames) {
-    if (err) {
-      return;
-    }
-    res.setHeader('Content-Type', 'application/json');
-    res.write(JSON.stringify(allGames));
-    res.end();
-  });
-}
-
-function apiGetGames(
-  req: http.IncomingMessage,
-  res: http.ServerResponse,
-): void {
-  if (!isServerIdValid(req)) {
-    route.notAuthorized(req, res);
-    return;
-  }
-  res.setHeader('Content-Type', 'application/json');
-  res.write(JSON.stringify(GameLoader.getInstance().getLoadedGameIds()));
-  res.end();
 }
 
 function loadGame(req: http.IncomingMessage, res: http.ServerResponse): void {
@@ -285,107 +279,6 @@ function loadGame(req: http.IncomingMessage, res: http.ServerResponse): void {
     } catch (error) {
       route.internalServerError(req, res, error);
     }
-  });
-}
-
-function apiGetGame(req: http.IncomingMessage, res: http.ServerResponse): void {
-  const routeRegExp: RegExp = /^\/api\/game\?id\=([0-9a-z_]+)$/i;
-
-  if (req.url === undefined) {
-    console.warn('url not defined');
-    route.notFound(req, res);
-    return;
-  }
-
-  if (!routeRegExp.test(req.url)) {
-    console.warn('no match with regexp');
-    route.notFound(req, res);
-    return;
-  }
-
-  const matches = req.url.match(routeRegExp);
-
-  if (matches === null || matches[1] === undefined) {
-    console.warn('didn\'t find game id');
-    route.notFound(req, res);
-    return;
-  }
-
-  const gameId: GameId = matches[1];
-
-  GameLoader.getInstance().getByGameId(gameId, false, (game: Game | undefined) => {
-    if (game === undefined) {
-      console.warn('game is undefined');
-      route.notFound(req, res);
-      return;
-    }
-
-    res.setHeader('Content-Type', 'application/json');
-    res.write(getGameModelJSON(game));
-    res.end();
-  });
-}
-
-function apiGetWaitingFor(
-  req: http.IncomingMessage,
-  res: http.ServerResponse,
-): void {
-  const qs: string = req.url!.substring('/api/waitingfor?'.length);
-  const queryParams = querystring.parse(qs);
-  const playerId = (queryParams as any)['id'];
-  const prevGameAge = parseInt((queryParams as any)['prev-game-age']);
-  GameLoader.getInstance().getByPlayerId(playerId, (game) => {
-    if (game === undefined) {
-      route.notFound(req, res);
-      return;
-    }
-    let player: Player | undefined;
-    try {
-      player = game.getPlayerById(playerId);
-    } catch (err) {
-      console.warn(`unable to find player ${playerId}`, err);
-    }
-    if (player === undefined) {
-      route.notFound(req, res);
-      return;
-    }
-
-    res.setHeader('Content-Type', 'application/json');
-    res.end(JSON.stringify(Server.getWaitingForModel(player, prevGameAge)));
-  });
-}
-
-function apiGetPlayer(
-  req: http.IncomingMessage,
-  res: http.ServerResponse,
-): void {
-  const qs = req.url!.substring('/api/player?'.length);
-  const queryParams = querystring.parse(qs);
-  let playerId = queryParams['id'] as string | Array<string> | undefined;
-  if (Array.isArray(playerId)) {
-    playerId = playerId[0];
-  }
-  if (playerId === undefined) {
-    playerId = '';
-  }
-  GameLoader.getInstance().getByPlayerId(playerId as string, (game) => {
-    if (game === undefined) {
-      route.notFound(req, res);
-      return;
-    }
-    let player: Player | undefined;
-    try {
-      player = game.getPlayerById(playerId as string);
-    } catch (err) {
-      console.warn(`unable to find player ${playerId}`, err);
-    }
-    if (player === undefined) {
-      route.notFound(req, res);
-      return;
-    }
-    res.setHeader('Content-Type', 'application/json');
-    res.write(getPlayerModelJSON(player, game));
-    res.end();
   });
 }
 
@@ -487,8 +380,8 @@ function createGame(req: http.IncomingMessage, res: http.ServerResponse): void {
   });
 }
 
-function getPlayerModelJSON(player: Player, game: Game): string {
-  const model = Server.getPlayerModel(player, game);
+function getPlayerModelJSON(player: Player): string {
+  const model = Server.getPlayerModel(player);
   return JSON.stringify(model);
 }
 

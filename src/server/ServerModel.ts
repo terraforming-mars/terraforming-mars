@@ -57,7 +57,8 @@ export class Server {
     };
   }
 
-  public static getPlayerModel(player: Player, game: Game): PlayerModel {
+  public static getPlayerModel(player: Player): PlayerModel {
+    const game = player.game;
     const turmoil = getTurmoil(game);
 
     return {

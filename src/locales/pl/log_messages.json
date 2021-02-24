@@ -25,6 +25,7 @@
     "${0} sold ${1} patents": "${0} sprzedał/a ${1} patent/y/ów",
     "${0} card(s) were discarded": "Odrzucono kart: ${0}",
     "${0} placed ocean tile on row ${1} position ${2}": "${0} umieścił/a obszar oceanu na polu ${2} w rzędzie ${1}",
+    "Drew and discarded ${0} (cost ${1}) to place a ${2}": "Dobrano i odrzucono kartę ${0} (koszt ${1}) aby umieścić obszar: ${2}",
     "Dealt and discarded ${0} (cost ${1}) to place a tile": "Dobrano i odrzucono kartę ${0} (koszt ${1}) aby umieścić pole na planszy",
     "Dealt and discarded ${0} (cost ${1}) to place a hazard": "Dobrano i odrzucono kartę ${0} (koszt ${1}) aby umieścić kafel niebezpieczeństwa na planszy"
 }

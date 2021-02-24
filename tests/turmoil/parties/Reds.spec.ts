@@ -1,10 +1,10 @@
 import {expect} from 'chai';
-import {Player} from '../../src/Player';
-import {Game} from '../../src/Game';
-import {Turmoil} from '../../src/turmoil/Turmoil';
-import {TestingUtils, setCustomGameOptions, TestPlayers} from '../TestingUtils';
-import {Reds, REDS_BONUS_1, REDS_BONUS_2, REDS_POLICY_3} from '../../src/turmoil/parties/Reds';
-import {Resources} from '../../src/Resources';
+import {Player} from '../../../src/Player';
+import {Game} from '../../../src/Game';
+import {Turmoil} from '../../../src/turmoil/Turmoil';
+import {TestingUtils, setCustomGameOptions, TestPlayers} from '../../TestingUtils';
+import {Reds, REDS_BONUS_1, REDS_BONUS_2, REDS_POLICY_3} from '../../../src/turmoil/parties/Reds';
+import {Resources} from '../../../src/Resources';
 
 describe('Reds', function() {
   let player : Player; let secondPlayer : Player; let game : Game; let turmoil: Turmoil; let reds: Reds;

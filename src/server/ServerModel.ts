@@ -57,7 +57,8 @@ export class Server {
     };
   }
 
-  public static getPlayerModel(player: Player, game: Game): PlayerModel {
+  public static getPlayerModel(player: Player): PlayerModel {
+    const game = player.game;
     const turmoil = getTurmoil(game);
 
     return {
@@ -129,6 +130,7 @@ export class Server {
     };
   }
 
+  // This is only ever used in ApiWaitingFor, and could be isolated from ServerModel.
   public static getWaitingForModel(player: Player, prevGameAge: number): WaitingForModel {
     const result: WaitingForModel = {
       result: 'WAIT',
@@ -210,6 +212,7 @@ function getCorporationCard(player: Player): CardModel | undefined {
     cardType: CardType.CORPORATION,
     isDisabled: player.corporationCard.isDisabled,
     warning: player.corporationCard.warning,
+    discount: player.corporationCard.cardDiscount,
   } as CardModel;
 }
 
@@ -278,6 +281,9 @@ function getWaitingFor(
     playerInputModel.maxCardsToSelect = selectCard.maxCardsToSelect;
     playerInputModel.minCardsToSelect = selectCard.minCardsToSelect;
     playerInputModel.selectBlueCardAction = selectCard.selectBlueCardAction;
+    if (selectCard.showOwner) {
+      playerInputModel.showOwner = true;
+    }
     break;
   case PlayerInputTypes.SELECT_COLONY:
     playerInputModel.coloniesModel = (waitingFor as SelectColony).coloniesModel;

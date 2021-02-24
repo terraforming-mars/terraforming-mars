@@ -15,7 +15,6 @@ import {SelectHowToPayDeferred} from '../../deferredActions/SelectHowToPayDeferr
 import {DrawCards} from '../../deferredActions/DrawCards';
 import {SpaceType} from '../../SpaceType';
 import {SpaceBonus} from '../../SpaceBonus';
-import {ITile} from '../../ITile';
 import {Phase} from '../../Phase';
 
 export class CuriosityII extends Card implements CorporationCard {
@@ -36,8 +35,8 @@ export class CuriosityII extends Card implements CorporationCard {
             ce.effect(
               'When you place a tile on an area that has a RESOURCE placement bonus*, you may pay 3 MC to draw a card. ' +
               '(or place a tile on top of another tile with a RESOURCE placement bonus underneath)', (eb) => {
-              eb.emptyTile('normal', CardRenderItemSize.SMALL).nbsp.asterix().startEffect.megacredits(-3).cards(1);
-            });
+                eb.emptyTile('normal', CardRenderItemSize.SMALL).nbsp.asterix().startEffect.megacredits(-3).cards(1);
+              });
           });
         }),
       },

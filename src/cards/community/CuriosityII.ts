@@ -34,7 +34,9 @@ export class CuriosityII extends Card implements CorporationCard {
           b.br.br;
           b.megacredits(40).nbsp.production((pb) => pb.steel(2));
           b.corpBox('effect', (ce) => {
-            ce.effect('When you place a tile on an area ON MARS that has a resource placement bonus, you may pay 3 MC to draw a card.', (eb) => {
+            ce.effect(
+              'When you place a tile on an area that has a RESOURCE placement bonus*, you may pay 3 MC to draw a card. ' +
+              '(or place a tile on top of another tile with a RESOURCE placement bonus underneath)', (eb) => {
               eb.emptyTile('normal', CardRenderItemSize.SMALL).nbsp.asterix().startEffect.megacredits(-3).cards(1);
             });
           });
@@ -45,13 +47,11 @@ export class CuriosityII extends Card implements CorporationCard {
 
   public onTilePlaced(cardOwner: Player, activePlayer: Player, space: ISpace) {
     const eligibleBonuses = [SpaceBonus.STEEL, SpaceBonus.TITANIUM, SpaceBonus.HEAT, SpaceBonus.PLANT, SpaceBonus.MEGACREDITS, SpaceBonus.ANIMAL, SpaceBonus.MICROBE];
-    const moonTileTypes = [TileType.MOON_COLONY, TileType.MOON_MINE, TileType.MOON_ROAD];
     const tile = space.tile as ITile;
 
     if (cardOwner.id !== activePlayer.id) return;
     if (cardOwner.game.phase === Phase.SOLAR) return;
     if (space.spaceType === SpaceType.COLONY) return;
-    if (moonTileTypes.includes(tile.tileType)) return;
 
     if (space.bonus.some((bonus) => eligibleBonuses.includes(bonus))) {
       cardOwner.game.defer(new DeferredAction(cardOwner, () => this.corpAction(cardOwner)));

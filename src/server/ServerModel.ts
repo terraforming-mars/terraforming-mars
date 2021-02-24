@@ -242,7 +242,6 @@ function getWaitingFor(
     payProduction: undefined,
     aresData: undefined,
     selectBlueCardAction: false,
-    showOwner: false,
     availableParties: undefined,
     turmoil: undefined,
   };
@@ -279,7 +278,9 @@ function getWaitingFor(
     playerInputModel.maxCardsToSelect = selectCard.maxCardsToSelect;
     playerInputModel.minCardsToSelect = selectCard.minCardsToSelect;
     playerInputModel.selectBlueCardAction = selectCard.selectBlueCardAction;
-    playerInputModel.showOwner = selectCard.showOwner;
+    if (selectCard.showOwner) {
+      playerInputModel.showOwner = true;
+    }
     break;
   case PlayerInputTypes.SELECT_COLONY:
     playerInputModel.coloniesModel = (waitingFor as SelectColony).coloniesModel;

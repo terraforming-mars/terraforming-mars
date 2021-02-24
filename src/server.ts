@@ -16,6 +16,7 @@ import {BufferCache} from './server/BufferCache';
 import {Game, GameId} from './Game';
 import {GameLoader} from './database/GameLoader';
 import {GameLogs} from './routes/GameLogs';
+import {ApiWaitingFor} from './routes/ApiWaitingFor';
 import {ApiGames} from './routes/ApiGames';
 import {ApiGame} from './routes/ApiGame';
 import {IHandler} from './routes/IHandler';
@@ -61,7 +62,7 @@ const handlers: Map<string, IHandler> = new Map(
     // ['/main.js', ServeAsset.INSTANCE],
     // ['/main.js.map', ServeAsset.INSTANCE],
     // ['/api/player', ApiGetPlayer.INSTANCE],
-    // ['/api/waitingfor', ApiGetWaitingFor.INSTANCE],
+    ['/api/waitingfor', ApiWaitingFor.INSTANCE],
     ['/api/games', ApiGames.INSTANCE],
     ['/api/game', ApiGame.INSTANCE],
     // ['/api/clonablegames', ApiCloneableGames.INSTANCE],
@@ -113,10 +114,6 @@ function processRequest(req: http.IncomingMessage, res: http.ServerResponse): vo
 
     case '/api/player':
       apiGetPlayer(req, res);
-      break;
-
-    case '/api/waitingfor':
-      apiGetWaitingFor(req, res);
       break;
 
     case '/styles.css':
@@ -302,35 +299,6 @@ function loadGame(req: http.IncomingMessage, res: http.ServerResponse): void {
     } catch (error) {
       route.internalServerError(req, res, error);
     }
-  });
-}
-
-function apiGetWaitingFor(
-  req: http.IncomingMessage,
-  res: http.ServerResponse,
-): void {
-  const qs: string = req.url!.substring('/api/waitingfor?'.length);
-  const queryParams = querystring.parse(qs);
-  const playerId = (queryParams as any)['id'];
-  const prevGameAge = parseInt((queryParams as any)['prev-game-age']);
-  GameLoader.getInstance().getByPlayerId(playerId, (game) => {
-    if (game === undefined) {
-      route.notFound(req, res);
-      return;
-    }
-    let player: Player | undefined;
-    try {
-      player = game.getPlayerById(playerId);
-    } catch (err) {
-      console.warn(`unable to find player ${playerId}`, err);
-    }
-    if (player === undefined) {
-      route.notFound(req, res);
-      return;
-    }
-
-    res.setHeader('Content-Type', 'application/json');
-    res.end(JSON.stringify(Server.getWaitingForModel(player, prevGameAge)));
   });
 }
 

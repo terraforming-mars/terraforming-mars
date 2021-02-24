@@ -91,6 +91,9 @@ export const PlayerInfo = Vue.component('player-info', {
       // any other player show cards container and hide all other
       this.pinPlayer();
     },
+    getNrPlayedCards: function(): number {
+      return this.player.playedCards.length;
+    },
   },
   template: ` 
       <div :class="getClasses()">
@@ -112,9 +115,7 @@ export const PlayerInfo = Vue.component('player-info', {
                 <div class="played-cards-icon hiding-card-button event"></div>
                 <div class="played-cards-count"> 
                   {{ 
-                    parseInt(getCardsByType(player.playedCards, [getActiveCardType()]).length.toString()) + 
-                    parseInt(getCardsByType(player.playedCards, [getAutomatedCardType()]).length.toString()) + 
-                    parseInt(getCardsByType(player.playedCards, [getEventCardType()]).length.toString())
+                    getNrPlayedCards()
                   }}
                 </div>
               </div>

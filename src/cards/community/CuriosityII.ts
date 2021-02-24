@@ -15,7 +15,6 @@ import {SelectHowToPayDeferred} from '../../deferredActions/SelectHowToPayDeferr
 import {DrawCards} from '../../deferredActions/DrawCards';
 import {SpaceType} from '../../SpaceType';
 import {SpaceBonus} from '../../SpaceBonus';
-import {TileType} from '../../TileType';
 import {ITile} from '../../ITile';
 import {Phase} from '../../Phase';
 
@@ -47,7 +46,6 @@ export class CuriosityII extends Card implements CorporationCard {
 
   public onTilePlaced(cardOwner: Player, activePlayer: Player, space: ISpace) {
     const eligibleBonuses = [SpaceBonus.STEEL, SpaceBonus.TITANIUM, SpaceBonus.HEAT, SpaceBonus.PLANT, SpaceBonus.MEGACREDITS, SpaceBonus.ANIMAL, SpaceBonus.MICROBE];
-    const tile = space.tile as ITile;
 
     if (cardOwner.id !== activePlayer.id) return;
     if (cardOwner.game.phase === Phase.SOLAR) return;

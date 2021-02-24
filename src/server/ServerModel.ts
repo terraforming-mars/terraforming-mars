@@ -281,6 +281,9 @@ function getWaitingFor(
     playerInputModel.maxCardsToSelect = selectCard.maxCardsToSelect;
     playerInputModel.minCardsToSelect = selectCard.minCardsToSelect;
     playerInputModel.selectBlueCardAction = selectCard.selectBlueCardAction;
+    if (selectCard.showOwner) {
+      playerInputModel.showOwner = true;
+    }
     break;
   case PlayerInputTypes.SELECT_COLONY:
     playerInputModel.coloniesModel = (waitingFor as SelectColony).coloniesModel;

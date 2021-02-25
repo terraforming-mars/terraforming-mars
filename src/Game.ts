@@ -531,7 +531,7 @@ export class Game implements ISerializable<SerializedGame> {
     // Only add 2 more generations when using the track completion option
     // and not the solo TR option.
     //
-    // isSoloModeWin backs thsi up.
+    // isSoloModeWin backs this up.
     if (options.moonExpansion) {
       if (!options.soloTR && options.requiresMoonTrackCompletion) {
         lastGeneration += 2;

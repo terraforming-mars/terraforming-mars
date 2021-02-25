@@ -1,15 +1,15 @@
 {
-    "Allied Banks": "联合银行",
-    "Increase your MC production 4 steps. Gain 3 MC.": "提升4格MC产量,获得3MC",
+    "Allied Banks": "Banco aliado",
+    "Increase your MC production 4 steps. Gain 3 MC.": "Aumenta tu producción de М€ 4 niveles. Obtén 3 М€.",
 
-    "Aquifer Turbines": "含水层涡轮机",
-    "Place an Ocean tile. Increase your energy production 2 steps. Pay 3 MC.": "放置一个海洋。提升你的电力产能2格,支付3MC",
+    "Aquifer Turbines": "Turbinas acuíferas",
+    "Place an Ocean tile. Increase your energy production 2 steps. Pay 3 MC.": "Coloca una loseta de océano. Aumenta tu producción de energía 2 niveles. Pierde 3 М€.",
 
-    "Biofuels": "生物燃料",
-    "Increase your energy and plant production 1 step. Gain 2 plants.": "提升你的电力和植物产能1级,获得2植物资源",
+    "Biofuels": "Biocombustibles",
+    "Increase your energy and plant production 1 step. Gain 2 plants.": "Aumenta tu producción de plantas y de energía 1 nivel cada una. Obtén 2 plantas.",
 
-    "Biolab": "生物实验室",
-    "Increase your plant production 1 step. Draw 3 cards.": "提升你的植物产能1格,抽3张牌",
+    "Biolab": "Laboratorio biológico",
+    "Increase your plant production 1 step. Draw 3 cards.": "Aumenta tu producción de plantas 1 nivel. Roba 3 cartas.",
 
     "Biosphere Support": "Ayuda a la biosfera",
     "Increase your plant production 2 steps. Decrease your MC production 1 step.": "Reduce tu producción de М€ 1 nivel. Aumenta tu producción de plantas 2 niveles.",
@@ -17,90 +17,90 @@
     "Business Empire": "Imperio empresarial",
     "Increase your MC production 6 steps. Pay 6 MC.": "Aumenta tu producción de М€ 6 niveles. Pierde 6 М€",
 
-    "Dome Farming": "圆顶农业",
-    "Increase your MC production 2 steps and plant production 1 step.": "提升你的MC产量2格和植物产量1格",
+    "Dome Farming": "Cultivos en domos",
+    "Increase your MC production 2 steps and plant production 1 step.": "Aumenta tu producción de plantas 1 nivel. Aumenta tu producción de М€ 2 niveles",
 
-    "Donation": "捐赠",
-    "Gain 21 MC.": "获得 21 MC.",
+    "Donation": "Donación",
+    "Gain 21 MC.": "Obtén 21 М€.",
 
-    "Early Settlement": "前期据点",
-    "Increase your plant production 1 step. Place a city tile.": "提升你的植物产能1级,放置1个城市板块",
+    "Early Settlement": "Asentamiento inicial",
+    "Increase your plant production 1 step. Place a city tile.": "Coloca una loseta de ciudad. Aumenta tu producción de plantas 1 nivel.",
 
-    "Ecology Experts": "生态学专家",
-    "Increase your plant production 1 step. Play a card from hand, ignoring global requirements.": "提升你的植物产能1级,并从手中打出一张牌,无视它的全球参数需求条件（温度、氧气、海洋、金星）",
+    "Ecology Experts": "Expertos en ecología",
+    "Increase your plant production 1 step. Play a card from hand, ignoring global requirements.": "Aumenta tu producción de plantas 1 nivel. Juega 1 carta de tu mano ignorando los requisitos de parámetros globales",
 
-    "Eccentric Sponsor": "奇特的赞助者",
-    "Play 1 card from hand with a 25 MC reduction.": "以降低 25MC 的价格打出一张手牌",
+    "Eccentric Sponsor": "Patrocinador excéntrico",
+    "Play 1 card from hand with a 25 MC reduction.": "Juega una carta de tu mano reduciendo su coste en 25М€.",
 
     "Experimental Forest": "Boque Experimental",
     "Place 1 Greenery Tile and raise oxygen 1 step. Reveal cards until you reveal two cards with plant tags on them. Take them into your hand and discard the rest.": "Coloca una loseta de vegetación e incrementa el oxígeno 1 nivel. Revela cartas del mazo hasta que hayas descubierto 2 cartas con símolos de planta. Toma estas dos cartas para tu mano y descarta el resto.",
 
-    "Galilean Mining": "伽利略矿业",
-    "Increase your titanium production 2 steps. Pay 5 MC.": "提升钛合金产量2格,支付5MC",
+    "Galilean Mining": "Mineria galileana",
+    "Increase your titanium production 2 steps. Pay 5 MC.": "Aumenta tu producción de titanio 2 niveles. Pierde 5 М€.",
 
-    "Great Aquifer": "大型含水层",
-    "Place 2 Ocean tiles.": "放置2块海洋版块",
+    "Great Aquifer": "Gran acuífero",
+    "Place 2 Ocean tiles.": "Coloca 2 losetas de océano.",
 
-    "Huge Asteroid": "巨型小行星",
-    "Increase Temperature 3 steps. Pay 5 MC.": "提升火星温度3格,支付 5MC.",
+    "Huge Asteroid": "Asteroide gigante",
+    "Increase Temperature 3 steps. Pay 5 MC.": "Aumenta la temperatura 3 niveles. Pierde 5 М€.",
 
-    "IO Research Outpost": "木卫一研究前哨",
-    "Increase your titanium production 1 step. Draw a card.": "提升钛合金产量1级,抽1张卡",
+    "IO Research Outpost": "Puesto de investigación en IO",
+    "Increase your titanium production 1 step. Draw a card.": "Aumenta tu producción de titanio 1 nivel. Roba 1 carta.",
 
-    "Loan": "贷款",
-    "Gain 30 MC. Decrease your MC production 2 steps.": "获得30MC,降低MC产能2格",
+    "Loan": "Préstamo",
+    "Gain 30 MC. Decrease your MC production 2 steps.": "Reduce tu producción de М€ 2 niveles. Obtén 30 М€.",
 
     "Martian Industries": "Industrias Marcianas",
     "Increase your energy and steel production 1 step. Gain 6 MC.": "Aumenta tu producción de energía y acero un nivel. Obtén 6 М€.",
 
-    "Metal-Rich Asteroid": "富含金属的小行星",
-    "Increase temperature 1 step. Gain 4 titanium and 4 steel.": "提升温度1格,获得4个钛合金资源和4个钢铁资源",
+    "Metal-Rich Asteroid": "Asteroide rico en metales",
+    "Increase temperature 1 step. Gain 4 titanium and 4 steel.": "Aumenta la temperatura 1 nivel. Obtén 4 de titanio y 4 de acero.",
 
-    "Metals Company": "金属公司",
-    "Increase your MC, steel and titanium production 1 step.": "提升你的MC、钢铁和钛合金产能1格",
+    "Metals Company": "Compañía de metal",
+    "Increase your MC, steel and titanium production 1 step.": "Aumenta tu producción de М€, acero y titanio 1 nivel cada una.",
 
-    "Mining Operations": "采矿作业",
-    "Increase your steel production 2 steps. Gain 4 steel.": "提升钢铁产能2级,获得4个钢铁资源",
+    "Mining Operations": "Operaciones mineras",
+    "Increase your steel production 2 steps. Gain 4 steel.": "Aumenta tu producción de acero 2 niveles. Obtén 4 de acero.",
 
-    "Mohole": "超深钻探",
-    "Increase your heat production 3 steps. Gain 3 heat.": "提升你的热能产量3级,获得3个热能资源",
+    "Mohole": "Mohole",
+    "Increase your heat production 3 steps. Gain 3 heat.": "Aumenta tu producción de calor 3 niveles. Obtén 3 de calor-",
 
-    "Mohole Excavation": "超深钻探挖掘工程",
-    "Increase your steel production 1 step and heat production 2 steps. Gain 2 heat.": "提升1格钢铁产能和2格热能产能,获得2个热能资源",
+    "Mohole Excavation": "Excavación Mohole",
+    "Increase your steel production 1 step and heat production 2 steps. Gain 2 heat.": "Aumenta tu producción de acero 1 nivel y tu producción de calor 2 niveles. Obtén 2 de calor.",
 
-    "Nitrogen Shipment": "氮气运输",
-    "Increase your plant production 1 step. Increase your TR 1 step. Gain 5 MC.": "提升你的1级植物产能和1改造度(TR),获得5MC",
+    "Nitrogen Shipment": "Cargamento de nitrógeno",
+    "Increase your plant production 1 step. Increase your TR 1 step. Gain 5 MC.": "Aumenta tu valor de terraformación 1 nivel. Incrementa tu producción de plantas 1 nivel. Obtén 5 М€.",
 
-    "Orbital Construction Yard": "轨道建造场",
-    "Increase your titanium production 1 step. Gain 4 titanium.": "提升你的钛合金产能1级,获得4个钛合金资源",
+    "Orbital Construction Yard": "Zona de construcción orbital",
+    "Increase your titanium production 1 step. Gain 4 titanium.": "Aumenta tu producción de titanio 1 nivel. Gana 4 de titanio.",
 
-    "Polar Industries": "极地工业",
-    "Increase your heat production 2 steps. Place an Ocean tile.": "提升你的热能产能2格,放置1个海洋版块",
+    "Polar Industries": "Industrias polares",
+    "Increase your heat production 2 steps. Place an Ocean tile.": "Coloca 1 loseta de océano. Aumenta tu producción de calor 2 niveles.",
 
-    "Power Generation": "发电",
-    "Increase your energy production 3 steps.": "提升你的电力产能3格",
+    "Power Generation": "Generación de energía",
+    "Increase your energy production 3 steps.": "Aumenta tu producción de energía 3 niveles.",
 
-    "Research Network": "研究网络",
-    "Increase your MC production 1 step. Draw 3 cards. After being played, when you perform an action, the wild tag counts as any tag of your choice.": "提升你的MC产量1格,抽3张牌",
+    "Research Network": "Red de investigación",
+    "Increase your MC production 1 step. Draw 3 cards. After being played, when you perform an action, the wild tag counts as any tag of your choice.": "Roba 3 cartas y aumenta tu producción de М€ 1 nivel. Tras jugar esta carta, al realizar una acción, el símbolo sin definir es un símbolo a tu elección.",
 
-    "Self-Sufficient Settlement": "自给自足的据点",
-    "Increase your money production 2 steps. Place a City tile.": "提升你的MC产量2级,放置1个城市版块",
+    "Self-Sufficient Settlement": "Asentamiento autosuficiente",
+    "Increase your money production 2 steps. Place a City tile.": "Coloca una loseta de ciudad. Aumenta tu producción de М€ 2 niveles.",
 
-    "Smelting Plant": "冶炼厂",
-    "Raise oxygen 2 steps. Gain 5 steel.": "提升火星的氧气浓度2格,获得5个钢铁资源",
+    "Smelting Plant": "Planta de fundición",
+    "Raise oxygen 2 steps. Gain 5 steel.": "Aumenta el oxígeno 2 niveles. Obtén 5 de acero.",
 
-    "Society Support": "社会支援",
-    "Increase your plant, energy and heat production 1 step. Decrease money production 1 step.": "提升你的植物产能、电力产能和热能产能1格,降低你的MC产能1格",
+    "Society Support": "Apoyo social",
+    "Increase your plant, energy and heat production 1 step. Decrease money production 1 step.": "Reduce tu producción de М€ 1 nivel. Incrementa tu producción de plantas, energía y calor 1 nivel cada una.",
 
-    "Supplier": "供应商",
-    "Increase your energy production 2 steps. Gain 4 steel.": "提升你的电力产能2级,获得4个钢铁资源",
+    "Supplier": "Proveedor",
+    "Increase your energy production 2 steps. Gain 4 steel.": "Aumenta tu producción de energía 2 niveles. Obtén 4 de acero.",
 
-    "Supply Drop": "空投补给",
-    "Gain 3 titanium, 8 steel and 3 plants.": "获得3个钛合金资源、8个钢铁资源和3个植物资源",
+    "Supply Drop": "Envío de provisiones",
+    "Gain 3 titanium, 8 steel and 3 plants.": "Obtén 3de titanio, 8 de acero y 3 plantas.",
 
-    "UNMI Contractor": "UNMI 承包商",
-    "Increase your TR 3 steps. Draw a card.": "提升你的改造度3格,抽一张牌",
+    "UNMI Contractor": "Contratista de UNMI",
+    "Increase your TR 3 steps. Draw a card.": "Incrementa tu valor de terraformación 3 niveles. Roba 1 carta.",
 
-    "Acquired Space Agency": "收购太空总署",
-    "Gain 6 titanium. Reveal cards until you reveal two cards with Space Tags. Take them into your hand, discard the rest.": "获得6个钛合金资源。从牌库顶开始展示卡牌,直到有2张带有空间标志的牌,将这两张牌加入手牌,并丢弃其余的牌"
+    "Acquired Space Agency": "Compra de agencia espacial",
+    "Gain 6 titanium. Reveal cards until you reveal two cards with Space Tags. Take them into your hand, discard the rest.": "Obtén 6 de titanio. Revela cartas del mazo hasta que hayas descubierto 2 cartas tipo espacio. Toma estas dos cartas para tu mano y descarta el resto."
 }

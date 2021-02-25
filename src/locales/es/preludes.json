@@ -11,11 +11,11 @@
     "Biolab": "生物实验室",
     "Increase your plant production 1 step. Draw 3 cards.": "提升你的植物产能1格,抽3张牌",
 
-    "Biosphere Support": "生物圈支援载体",
-    "Increase your plant production 2 steps. Decrease your MC production 1 step.": "提升你的植物产能2格,降低你的MC产能1格",
+    "Biosphere Support": "Ayuda a la biosfera",
+    "Increase your plant production 2 steps. Decrease your MC production 1 step.": "Reduce tu producción de М€ 1 nivel. Aumenta tu producción de plantas 2 niveles.",
 
-    "Business Empire": "商业帝国",
-    "Increase your MC production 6 steps. Pay 6 MC.": "提升你的MC产能6格,支付6MC",
+    "Business Empire": "Imperio empresarial",
+    "Increase your MC production 6 steps. Pay 6 MC.": "Aumenta tu producción de М€ 6 niveles. Pierde 6 М€",
 
     "Dome Farming": "圆顶农业",
     "Increase your MC production 2 steps and plant production 1 step.": "提升你的MC产量2格和植物产量1格",
@@ -32,8 +32,8 @@
     "Eccentric Sponsor": "奇特的赞助者",
     "Play 1 card from hand with a 25 MC reduction.": "以降低 25MC 的价格打出一张手牌",
 
-    "Experimental Forest": "实验林场",
-    "Place 1 Greenery Tile and raise oxygen 1 step. Reveal cards until you reveal two cards with plant tags on them. Take them into your hand and discard the rest.": "放置1个绿化版块。不断展示牌库顶的牌,直到有两张带有植物标志的牌。把这两张牌加入你的手牌,并弃掉剩余的牌",
+    "Experimental Forest": "Boque Experimental",
+    "Place 1 Greenery Tile and raise oxygen 1 step. Reveal cards until you reveal two cards with plant tags on them. Take them into your hand and discard the rest.": "Coloca una loseta de vegetación e incrementa el oxígeno 1 nivel. Revela cartas del mazo hasta que hayas descubierto 2 cartas con símolos de planta. Toma estas dos cartas para tu mano y descarta el resto.",
 
     "Galilean Mining": "伽利略矿业",
     "Increase your titanium production 2 steps. Pay 5 MC.": "提升钛合金产量2格,支付5MC",
@@ -50,8 +50,8 @@
     "Loan": "贷款",
     "Gain 30 MC. Decrease your MC production 2 steps.": "获得30MC,降低MC产能2格",
 
-    "Martian Industries": "火星工业",
-    "Increase your energy and steel production 1 step. Gain 6 MC.": "提升你的电力和钢铁产能1格,获得6MC",
+    "Martian Industries": "Industrias Marcianas",
+    "Increase your energy and steel production 1 step. Gain 6 MC.": "Aumenta tu producción de energía y acero un nivel. Obtén 6 М€.",
 
     "Metal-Rich Asteroid": "富含金属的小行星",
     "Increase temperature 1 step. Gain 4 titanium and 4 steel.": "提升温度1格,获得4个钛合金资源和4个钢铁资源",

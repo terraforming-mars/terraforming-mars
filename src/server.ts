@@ -441,7 +441,7 @@ function serveAsset(req: http.IncomingMessage, res: http.ServerResponse): void {
       contentEncoding = 'gzip';
       file += '.gz';
     }
-  } else if (req.url === '/assets/Prototype.ttf' || req.url === '/assets/futureforces.ttf') {
+  } else if (req.url === '/assets/Prototype.ttf' || req.url === '/assets/futureforces.ttf' || req.url === '/assets/Ubuntu.ttf') {
     contentType = 'font/ttf';
     file = req.url.substring(1);
   } else if (req.url.endsWith('.png') || req.url.endsWith('.jpg')) {

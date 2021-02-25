@@ -65,6 +65,7 @@ import {TurmoilHandler} from './turmoil/TurmoilHandler';
 import {Random} from './Random';
 
 export type GameId = string;
+export type SpectatorId = string;
 
 export interface Score {
   corporation: String;
@@ -203,7 +204,8 @@ export class Game implements ISerializable<SerializedGame> {
     public gameOptions: GameOptions,
     seed: number,
     board: Board,
-    dealer: Dealer) {
+    dealer: Dealer,
+    public spectatorId: SpectatorId) {
     const playerIds = players.map((p) => p.id);
     if (playerIds.includes(first.id) === false) {
       throw new Error('Cannot find first player ' + first.id + ' in ' + playerIds);
@@ -233,7 +235,7 @@ export class Game implements ISerializable<SerializedGame> {
     players: Array<Player>,
     firstPlayer: Player,
     gameOptions: GameOptions = {...DEFAULT_GAME_OPTIONS},
-    seed: number = 0): Game {
+    seed: number = 0, spectatorId: SpectatorId = '000000000000'): Game {
     if (gameOptions.clonedGamedId !== undefined) {
       throw new Error('Cloning should not come through this execution path.');
     }
@@ -259,7 +261,7 @@ export class Game implements ISerializable<SerializedGame> {
       players[0].terraformRatingAtGenerationStart = 14;
     }
 
-    const game: Game = new Game(id, players, firstPlayer, activePlayer, gameOptions, seed, board, dealer);
+    const game: Game = new Game(id, players, firstPlayer, activePlayer, gameOptions, seed, board, dealer, spectatorId);
 
     // Initialize Ares data
     if (gameOptions.aresExtension) {
@@ -420,6 +422,7 @@ export class Game implements ISerializable<SerializedGame> {
       researchedPlayers: Array.from(this.researchedPlayers),
       seed: this.seed,
       someoneHasRemovedOtherPlayersPlants: this.someoneHasRemovedOtherPlayersPlants,
+      spectatorId: this.spectatorId,
       temperature: this.temperature,
       unDraftedCards: Array.from(this.unDraftedCards.entries()).map((a) => {
         return [
@@ -1534,7 +1537,7 @@ export class Game implements ISerializable<SerializedGame> {
     // Rebuild dealer object to be sure that we will have cards in the same order
     const dealer = Dealer.deserialize(d.dealer);
 
-    const game: Game = new Game(d.id, players, first, d.activePlayer, gameOptions, d.seed, board, dealer);
+    const game: Game = new Game(d.id, players, first, d.activePlayer, gameOptions, d.seed, board, dealer, d.spectatorId);
 
     const milestones: Array<IMilestone> = [];
     d.milestones.forEach((element: IMilestone) => {

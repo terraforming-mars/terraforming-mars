@@ -3,6 +3,7 @@ import {CreateGameForm} from './CreateGameForm';
 import {GameHome} from './GameHome';
 import {GamesOverview} from './GamesOverview';
 import {PlayerHome} from './PlayerHome';
+import {SpectatorHome} from './SpectatorHome';
 import {PlayerModel} from '../models/PlayerModel';
 import {StartScreen} from './StartScreen';
 import {LoadGameForm} from './LoadGameForm';
@@ -65,6 +66,7 @@ export const mainAppSettings = {
     'load-game-form': LoadGameForm,
     'game-home': GameHome,
     'player-home': PlayerHome,
+    'spectator-home': SpectatorHome,
     'player-end': GameEnd,
     'games-overview': GamesOverview,
     'debug-ui': DebugUI,

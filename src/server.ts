@@ -107,6 +107,7 @@ function processRequest(req: http.IncomingMessage, res: http.ServerResponse): vo
     case '/solo':
     case '/game':
     case '/player':
+    case '/spectator':
     case '/the-end':
     case '/load':
     case '/cards':
@@ -291,6 +292,8 @@ function createGame(req: http.IncomingMessage, res: http.ServerResponse): void {
     try {
       const gameReq = JSON.parse(body);
       const gameId = generateRandomId();
+      const spectatorId = generateRandomId();
+      console.log(`gameId: ${gameId} | spectatorId: ${spectatorId}`);
       const players = gameReq.players.map((obj: any) => {
         return new Player(
           obj.name,
@@ -368,7 +371,7 @@ function createGame(req: http.IncomingMessage, res: http.ServerResponse): void {
         });
       } else {
         const seed = Math.random();
-        const game = Game.newInstance(gameId, players, players[firstPlayerIdx], gameOptions, seed);
+        const game = Game.newInstance(gameId, players, players[firstPlayerIdx], gameOptions, seed, spectatorId);
         GameLoader.getInstance().add(game);
         res.setHeader('Content-Type', 'application/json');
         res.write(getGameModelJSON(game));

@@ -672,11 +672,6 @@ export class Player implements ISerializable<SerializedPlayer> {
       tagCount += this.scienceTagCount;
     }
 
-    // PoliticalAgendas Scientists P4 hook
-    if (tag === Tags.SCIENCE && this.hasTurmoilScienceTagBonus) {
-      tagCount += 1;
-    }
-
     if (includeTagSubstitutions) {
       // Earth Embassy hook
       if (tag === Tags.EARTH && this.playedCards.some((c) => c.name === CardName.EARTH_EMBASSY)) {

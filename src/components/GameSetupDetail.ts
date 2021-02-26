@@ -12,6 +12,9 @@ export const GameSetupDetail = Vue.component('game-setup-detail', {
     gameOptions: {
       type: Object as () => GameOptionsModel,
     },
+    lastSoloGeneration: {
+      type: Number,
+    },
   },
   methods: {
     isPoliticalAgendasOn: function(): boolean {
@@ -91,8 +94,7 @@ export const GameSetupDetail = Vue.component('game-setup-detail', {
 
             <li v-if="playerNumber === 1">
               <div class="setup-item" v-i18n>Solo:</div>
-              <div v-if="gameOptions.preludeExtension" class="game-config generic" v-i18n>12 Gens</div>
-              <div v-else class="game-config generic" v-i18n>14 Gens</div>
+              <div class="game-config generic" v-i18n>{{ this.lastSoloGeneration }} Gens</div>
               <div v-if="gameOptions.soloTR" class="game-config generic" v-i18n>63 TR</div>
               <div v-else class="game-config generic" v-i18n>TR all</div>
             </li>

@@ -14,6 +14,7 @@ export class ApiCloneableGames extends Handler {
       if (err) {
         console.warn('Could not load cloneable games: ', err);
         ctx.route.internalServerError(req, res, err);
+        return;
       }
       ctx.route.writeJson(res, allGames);
     });

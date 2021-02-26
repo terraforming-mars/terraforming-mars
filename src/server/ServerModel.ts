@@ -54,6 +54,7 @@ export class Server {
         name: player.name,
       })),
       gameOptions: getGameOptionsAsModel(game.gameOptions),
+      lastSoloGeneration: game.lastSoloGeneration(),
     };
   }
 
@@ -91,6 +92,7 @@ export class Server {
       influence: turmoil ? game.turmoil!.getPlayerInfluence(player) : 0,
       isActive: player.id === game.activePlayer,
       isSoloModeWin: game.isSoloModeWin(),
+      lastSoloGeneration: game.lastSoloGeneration(),
       megaCredits: player.megaCredits,
       megaCreditProduction: player.getProduction(Resources.MEGACREDITS),
       milestones: getMilestones(game),
@@ -281,6 +283,9 @@ function getWaitingFor(
     playerInputModel.maxCardsToSelect = selectCard.maxCardsToSelect;
     playerInputModel.minCardsToSelect = selectCard.minCardsToSelect;
     playerInputModel.selectBlueCardAction = selectCard.selectBlueCardAction;
+    if (selectCard.showOwner) {
+      playerInputModel.showOwner = true;
+    }
     break;
   case PlayerInputTypes.SELECT_COLONY:
     playerInputModel.coloniesModel = (waitingFor as SelectColony).coloniesModel;

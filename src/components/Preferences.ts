@@ -41,6 +41,9 @@ export const Preferences = Vue.component('preferences', {
     turmoil: {
       type: Object as () => TurmoilModel || undefined,
     },
+    lastSoloGeneration: {
+      type: Number,
+    },
   },
   components: {
     'game-setup-detail': GameSetupDetail,
@@ -241,7 +244,7 @@ export const Preferences = Vue.component('preferences', {
                     <div class="info_panel" v-if="ui.gamesetup_detail_open">
                       <div class="info_panel-spacing"></div>
                       <div class="info-panel-title" v-i18n>Game Setup Details</div>
-                      <game-setup-detail :gameOptions="gameOptions" :playerNumber="playerNumber"></game-setup-detail>
+                      <game-setup-detail :gameOptions="gameOptions" :playerNumber="playerNumber" :lastSoloGeneration="lastSoloGeneration"></game-setup-detail>
 
                       <div class="info_panel_actions">
                         <button class="btn btn-lg btn-primary" v-on:click="ui.gamesetup_detail_open=false">Ok</button>

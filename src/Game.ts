@@ -1358,7 +1358,6 @@ export class Game implements ISerializable<SerializedGame> {
   }
 
   public simpleAddTile(player: Player, space: ISpace, tile: ITile) {
-    tile.covers = space.tile;
     space.tile = tile;
     space.player = tile.tileType !== TileType.OCEAN ? player : undefined;
     LogHelper.logTilePlacement(player, space, tile.tileType);

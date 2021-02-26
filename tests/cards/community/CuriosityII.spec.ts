@@ -1,9 +1,11 @@
 import {expect} from 'chai';
+import {OceanSanctuary} from '../../../src/cards/ares/OceanSanctuary';
 import {CuriosityII} from '../../../src/cards/community/CuriosityII';
 import {Game} from '../../../src/Game';
 import {OrOptions} from '../../../src/inputs/OrOptions';
 import {Phase} from '../../../src/Phase';
 import {Player} from '../../../src/Player';
+import {TileType} from '../../../src/TileType';
 import {TestingUtils} from '../../TestingUtils';
 import {TestPlayers} from '../../TestPlayers';
 
@@ -55,5 +57,22 @@ describe('CuriosityII', function() {
 
     expect(player.cardsInHand).is.empty;
     expect(player.megaCredits).to.eq(3);
+  });
+
+  it('Placing a tile on top of antoher one triggers the bonus', () => {
+    // particularly when the space bonus is empty.
+    const oceanSpace = game.board.getAvailableSpacesForOcean(player2).find((space) => space.bonus.length === 0)!;
+    game.board.getSpace(oceanSpace.id).tile = {tileType: TileType.OCEAN};
+
+    const oceanCity = new OceanSanctuary();
+    const action = oceanCity.play(player);
+    action.cb(oceanSpace);
+
+    const orOptions = game.deferredActions.pop()!.execute() as OrOptions;
+    orOptions.options[0].cb(); // Pay 3 MC to draw a card
+    TestingUtils.runAllActions(game);
+
+    expect(player.cardsInHand).has.lengthOf(1);
+    expect(player.megaCredits).to.eq(0);
   });
 });

@@ -34,7 +34,7 @@ export class CuriosityII extends Card implements CorporationCard {
           b.corpBox('effect', (ce) => {
             ce.effect(
               'When you place a tile on an area that has a RESOURCE placement bonus, ' +
-              'or place a tile on top of another tile, you may pay 3 MC to draw a card. ',
+              'or on top of another tile, you may pay 3 MC to draw a card. ',
               (eb) => {
                 eb.emptyTile('normal', CardRenderItemSize.SMALL).nbsp.asterix().startEffect.megacredits(-3).cards(1);
               });
@@ -51,7 +51,7 @@ export class CuriosityII extends Card implements CorporationCard {
     if (cardOwner.game.phase === Phase.SOLAR) return;
     if (space.spaceType === SpaceType.COLONY) return;
 
-    if (space.bonus.some((bonus) => eligibleBonuses.includes(bonus)) || space?.tile?.covers !== undefined) {
+    if (space.bonus.some((bonus) => eligibleBonuses.includes(bonus)) || space.tile?.covers !== undefined) {
       cardOwner.game.defer(new DeferredAction(cardOwner, () => this.corpAction(cardOwner)));
     }
   }

@@ -11,9 +11,8 @@ import * as path from 'path';
 import * as querystring from 'querystring';
 import * as zlib from 'zlib';
 
-import {BoardName} from './boards/BoardName';
 import {BufferCache} from './server/BufferCache';
-import {Game, GameId} from './Game';
+import {GameId} from './Game';
 import {GameLoader} from './database/GameLoader';
 import {ApiCloneableGames} from './routes/ApiCloneableGames';
 import {ApiGameLogs} from './routes/ApiGameLogs';
@@ -21,12 +20,13 @@ import {ApiGames} from './routes/ApiGames';
 import {ApiGame} from './routes/ApiGame';
 import {ApiPlayer} from './routes/ApiPlayer';
 import {ApiWaitingFor} from './routes/ApiWaitingFor';
+import {CreateGame} from './routes/CreateGame';
+import {LoadGame} from './routes/LoadGame';
 import {IHandler} from './routes/IHandler';
 import {Route} from './routes/Route';
 import {Player} from './Player';
 import {Database} from './database/Database';
 import {Server} from './server/ServerModel';
-import {Cloner} from './database/Cloner';
 
 const serverId = process.env.SERVER_ID || generateRandomId();
 const route = new Route();
@@ -69,8 +69,8 @@ const handlers: Map<string, IHandler> = new Map(
     ['/api/clonablegames', ApiCloneableGames.INSTANCE],
     ['/api/cloneablegames', ApiCloneableGames.INSTANCE],
     ['/api/game/logs', ApiGameLogs.INSTANCE],
-    // ['/game/', CreateGame.INSTANCE],
-    // ['/load/', LoadGame.INSTANCE],
+    ['/game', CreateGame.INSTANCE],
+    ['/load', LoadGame.INSTANCE],
     // ['/player/input', PlayerInput.INSTANCE],
   ],
 );
@@ -128,21 +128,6 @@ function processRequest(req: http.IncomingMessage, res: http.ServerResponse): vo
       } else {
         route.notFound(req, res);
       }
-    }
-    break;
-
-  case 'PUT':
-    switch (url.pathname) {
-    case '/game':
-      createGame(req, res);
-      break;
-
-    case '/load':
-      loadGame(req, res);
-      break;
-
-    default:
-      route.notFound(req, res);
     }
     break;
 
@@ -252,141 +237,8 @@ function processInput(
   });
 }
 
-function loadGame(req: http.IncomingMessage, res: http.ServerResponse): void {
-  let body = '';
-  req.on('data', function(data) {
-    body += data.toString();
-  });
-  req.once('end', function() {
-    try {
-      const gameReq = JSON.parse(body);
-
-      const game_id = gameReq.game_id;
-      const rollbackCount = gameReq.rollbackCount;
-      if (rollbackCount > 0) {
-        Database.getInstance().deleteGameNbrSaves(game_id, rollbackCount);
-      }
-      GameLoader.getInstance().getByGameId(game_id, true, (game) => {
-        if (game === undefined) {
-          console.warn(`unable to find ${game_id} in database`);
-          route.notFound(req, res);
-          return;
-        }
-        res.setHeader('Content-Type', 'application/json');
-        res.write(getGameModelJSON(game));
-        res.end();
-      });
-    } catch (error) {
-      route.internalServerError(req, res, error);
-    }
-  });
-}
-
-function createGame(req: http.IncomingMessage, res: http.ServerResponse): void {
-  let body = '';
-  req.on('data', function(data) {
-    body += data.toString();
-  });
-  req.once('end', function() {
-    try {
-      const gameReq = JSON.parse(body);
-      const gameId = generateRandomId();
-      const players = gameReq.players.map((obj: any) => {
-        return new Player(
-          obj.name,
-          obj.color,
-          obj.beginner,
-          Number(obj.handicap), // For some reason handicap is coming up a string.
-          generateRandomId(),
-        );
-      });
-      let firstPlayerIdx: number = 0;
-      for (let i = 0; i < gameReq.players.length; i++) {
-        if (gameReq.players[i].first === true) {
-          firstPlayerIdx = i;
-          break;
-        }
-      }
-
-      if (gameReq.board === 'random') {
-        const boards = Object.values(BoardName);
-        gameReq.board = boards[Math.floor(Math.random() * boards.length)];
-      }
-
-      const gameOptions = {
-        boardName: gameReq.board,
-        clonedGamedId: gameReq.clonedGamedId,
-
-        undoOption: gameReq.undoOption,
-        showTimers: gameReq.showTimers,
-        fastModeOption: gameReq.fastModeOption,
-        showOtherPlayersVP: gameReq.showOtherPlayersVP,
-
-        corporateEra: gameReq.corporateEra,
-        venusNextExtension: gameReq.venusNext,
-        coloniesExtension: gameReq.colonies,
-        preludeExtension: gameReq.prelude,
-        turmoilExtension: gameReq.turmoil,
-        aresExtension: gameReq.aresExtension,
-        aresHazards: true, // Not a runtime option.
-        politicalAgendasExtension: gameReq.politicalAgendasExtension,
-        moonExpansion: gameReq.moonExpansion,
-        promoCardsOption: gameReq.promoCardsOption,
-        communityCardsOption: gameReq.communityCardsOption,
-        solarPhaseOption: gameReq.solarPhaseOption,
-        removeNegativeGlobalEventsOption:
-          gameReq.removeNegativeGlobalEventsOption,
-        includeVenusMA: gameReq.includeVenusMA,
-
-        draftVariant: gameReq.draftVariant,
-        initialDraftVariant: gameReq.initialDraft,
-        startingCorporations: gameReq.startingCorporations,
-        shuffleMapOption: gameReq.shuffleMapOption,
-        randomMA: gameReq.randomMA,
-        soloTR: gameReq.soloTR,
-        customCorporationsList: gameReq.customCorporationsList,
-        cardsBlackList: gameReq.cardsBlackList,
-        customColoniesList: gameReq.customColoniesList,
-        requiresVenusTrackCompletion: gameReq.requiresVenusTrackCompletion,
-        requiresMoonTrackCompletion: gameReq.requiresMoonTrackCompletion,
-      };
-
-      if (gameOptions.clonedGamedId !== undefined && !gameOptions.clonedGamedId.startsWith('#')) {
-        Database.getInstance().loadCloneableGame(gameOptions.clonedGamedId, (err, serialized) => {
-          Cloner.clone(gameId, players, firstPlayerIdx, err, serialized, (err, game) => {
-            if (err) {
-              throw err;
-            }
-            if (game === undefined) {
-              throw new Error(`game ${gameOptions.clonedGamedId} not cloned`); // how to nest errs in the way Java nests exceptions?
-            }
-            GameLoader.getInstance().add(game);
-            res.setHeader('Content-Type', 'application/json');
-            res.write(getGameModelJSON(game));
-            res.end();
-          });
-        });
-      } else {
-        const seed = Math.random();
-        const game = Game.newInstance(gameId, players, players[firstPlayerIdx], gameOptions, seed);
-        GameLoader.getInstance().add(game);
-        res.setHeader('Content-Type', 'application/json');
-        res.write(getGameModelJSON(game));
-        res.end();
-      }
-    } catch (error) {
-      route.internalServerError(req, res, error);
-    }
-  });
-}
-
 function getPlayerModelJSON(player: Player): string {
   const model = Server.getPlayerModel(player);
-  return JSON.stringify(model);
-}
-
-function getGameModelJSON(game: Game): string {
-  const model = Server.getGameModel(game);
   return JSON.stringify(model);
 }
 

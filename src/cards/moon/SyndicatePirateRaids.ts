@@ -26,10 +26,11 @@ export class SyndicatePirateRaids extends Card implements IProjectCard {
 
   public play(player: Player) {
     const game = player.game;
-    game.getPlayers().forEach((player) => {
-      player.tradesThisTurn = 1000;
-    });
-    game.log('All players may not retrieve their trade fleets for the rest of this generation.');
+    game.syndicatePirateRaider = player.id;
+
+    game.log(
+      'All players except ${0} may not retrieve their trade fleets this generation.',
+      (b) => b.player(player));
     return undefined;
   }
 }

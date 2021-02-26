@@ -194,6 +194,8 @@ export class Game implements ISerializable<SerializedGame> {
   public monsInsuranceOwner: PlayerId | undefined = undefined;
   // Crash Site promo project
   public someoneHasRemovedOtherPlayersPlants: boolean = false;
+  // Syndicate Pirate Raids
+  public syndicatePirateRaider: PlayerId | undefined = undefined;
 
   private constructor(
     public id: GameId,
@@ -730,6 +732,8 @@ export class Game implements ISerializable<SerializedGame> {
       player.cardDiscount = 0; // Iapetus reset hook
       player.runProductionPhase();
     });
+    // Syndicate Pirate Raids hook. Also see Colony.ts and Player.ts
+    this.syndicatePirateRaider = undefined;
 
     if (this.gameIsOver()) {
       this.gotoFinalGreeneryPlacement();
@@ -748,7 +752,7 @@ export class Game implements ISerializable<SerializedGame> {
   private gotoEndGeneration() {
     if (this.gameOptions.coloniesExtension) {
       this.colonies.forEach((colony) => {
-        colony.endGeneration();
+        colony.endGeneration(this);
       });
     }
 

@@ -936,7 +936,13 @@ export class Player implements ISerializable<SerializedPlayer> {
   public runProductionPhase(): void {
     this.actionsThisGeneration.clear();
     this.removingPlayers = [];
-    this.tradesThisTurn = 0;
+    // Syndicate Pirate Raids hook. If it is in effect, then only the syndicate pirate raider will
+    // retrieve their fleets.
+    // See Colony.ts for the other half of this effect, and Game.ts which disables it.
+    if (this.game.syndicatePirateRaider !== undefined && this.game.syndicatePirateRaider !== this.id) {
+    } else {
+      this.tradesThisTurn = 0;
+    }
     this.turmoilPolicyActionUsed = false;
     this.politicalAgendasActionUsedCount = 0;
     this.megaCredits += this.megaCreditProduction + this.terraformRating;

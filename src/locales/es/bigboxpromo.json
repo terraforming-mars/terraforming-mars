@@ -1,73 +1,73 @@
 {
-  "Action: Add an asteroid resource to ANY card and gain any standard resource, OR remove an asteroid resource from this card to gain 3 titanium.":"行动：在任意一张卡牌上增加一个小行星资源并且获得一个标准资源，或者移除本卡上的一个小行星并获得3个钛金属。",
-  "Astrodrill":"天体钻井",
-  "You start with 38 MC and 3 asteroid resources.":"游戏开始时，你获得38MC和3个小行星资源。",
-  "Asteroid Hollowing":"行星挖掘",
+  "Action: Add an asteroid resource to ANY card or gain any standard resource, OR remove an asteroid resource from this card to gain 3 titanium.":"Añade un asteroide a CUALQUIER CARTA o gana un recurso estándar cualquiera O elimina un asteroide de esta carta y obtén 3 de titanio.",
+  "Astrodrill":"Astrodrill",
+  "You start with 38 MC and 3 asteroid resources.":"Comienza con 38 M€ y 3 recursos de asteroide.",
+  "Asteroid Hollowing":"Vaciado de Asteroides",
   
-  "Action: Spend 1 titanium to add 1 asteroid resource here and increase MC production 1 step.":"行动：花费1个钛金属，在本卡上增加一个小行星资源并提升1点金钱产能。",
-  "1 VP per 2 asteroid resources on this card.":"本卡每两个小行星值1分。",
-  "Advertising":"广告业",
-  "Effect: When you play a card with a basic cost of 20 MC or more, increase your MC production 1 step.":"效果：每当你打出一张20元以上的卡牌时，提升1点金钱产能。",
+  "Action: Spend 1 titanium to add 1 asteroid resource here and increase MC production 1 step.":"Acción: gasta 1 de titanio para añadir 1 asteroide aquí e incrementar 1 nivel tu producción de M€.",
+  "1 VP per 2 asteroid resources on this card.":"1 PV por cada 2 asteorides sobre esta carta.",
+  "Advertising":"Propapanga",
+  "Effect: When you play a card with a basic cost of 20 MC or more, increase your MC production 1 step.":"Cuando juegues una carta con coste 20 M€ o más, aumenta 1 nivel tu producción de M€.",
   
   
-  "You start with 54 MC. When this corporation is revealed, draw a Science card.":"游戏开始时，你获得54点金钱。作为你的第一个行动，抽取一张有科学标志的卡牌。",
+  "You start with 54 MC. When this corporation is revealed, draw a Science card.":"Comienza con 54 M€. Cuando reveles esta corporación, roba una carta con símbolo de ciencia.",
   
-  "Effect: When ANY microbe tag is played, add a disease here and lose 4 MC. When you play a science tag, remove a disease here and gain 1 TR OR if there are no diseases here, you may turn this card face down to gain 3 TR":"效果：当任何玩家打出一个微生物标志，包括这两个，在本卡上增加一个疾病资源并失去4点金钱（如果不足则失去所有）。当你打出一个科学标志时，你可以移除一个疾病资源并提升1点改造度，或者如果此时已经没有疾病资源你可以提升3点改造度并将本卡翻面（失去所有效果及标志）。",
+  "Effect: When ANY microbe tag is played, add a disease here and lose 4 MC. When you play a science tag, remove a disease here and gain 1 TR OR if there are no diseases here, you may turn this card face down to gain 3 TR":"Efecto: cuando se juegue CUALQUIER símbolo de microbio, añade un recurso de enfermedad a esta carta y pierde 4 M€. Cuando juegues un símbolo de ciencia, elimina una enfermedad de esta carta y gana 1 VT O si no hay enfermedades sobre esta carta,, puedes ponerla bocabajo y obtener 3 VT.",
   
-  "Comet Aiming":"彗星瞄准",
-  "(Action: Spend 1 titanium to add 1 asteroid resource to ANY CARD.)":"行动：花费1个钛金属在本卡上增加一个小行星资源",
-  "(Action: Remove 1 asteroid here to place an ocean.)":"，花费1个小行星资源并放置一片海洋板块。",
+  "Comet Aiming":"Apuntado de Cometas",
+  "(Action: Spend 1 titanium to add 1 asteroid resource to ANY CARD.)":"Acción: asta 1 titanio para añadir un recurso de asteroide a CUALQUIER CARTA.",
+  "(Action: Remove 1 asteroid here to place an ocean.)":"Acción: elimina un recurso de asteroide de esta carta para colocar una loseta de océano.",
   
-  "Cutting Edge Technology":"前沿科技",
-  "Effect: When playing a card with a requirement, you pay 2 MC less for it.":"效果：有打出限制的卡牌打出费用减2。",
-  "Crash Site Cleanup":"陨石坑清洁",
-  "Requires that a player removed ANOTHER PLAYER's plants this generation. Gain 1 titanium or 2 steel.":"需要本时代有一名玩家减少了另一名玩家植物。获得1个钛金属或者2个铁。",
+  "Cutting Edge Technology":"Tecnología Punta",
+  "Effect: When playing a card with a requirement, you pay 2 MC less for it.":"Efecto: cuando juegues una carta con requisitos, paga 2 M€ menos por ella.",
+  "Crash Site Cleanup":"#Limpieza de Cráter#",
+  "Requires that a player removed ANOTHER PLAYER's plants this generation. Gain 1 titanium or 2 steel.":"Requiere que un jugador haya eliminado plantas DE OTRO JUGADOR esta generación. Gana 1 de titanio o 2 de acero.",
   
-  "Directed Impactors":"定向冲撞器",
-  "(Action: Spend 6 MC to add 1 asteroid to ANY CARD (titanium may be used to pay for this).)":"行动：花费6点金钱（可用钛金属支付）在任意卡牌上增加一个小行星资源",
-  "(Action: Remove 1 asteroid here to raise temperature 1 step.)":"，花费本卡的1个小行星资源并提升1点温度。",
+  "Directed Impactors":"Impactos dirigidos",
+  "(Action: Spend 6 MC to add 1 asteroid to ANY CARD (titanium may be used to pay for this).)":"Acción: gasta 6 M€ para añadir un asteroide a CUALQUIER CARTA (puedes usar titanio para esto).",
+  "(Action: Remove 1 asteroid here to raise temperature 1 step.)":"Acción: elimina un asteroide de esta carta para aumentar la temperatura 1 nivel.",
   
-  "Field-Capped City":"磁场穹顶城市",
-  "(Increase your MC production 2 steps, increase your energy production 1 step, gain 3 plants, and place a city tile.)":"提升2点金钱产能，提升1点电力产能。获得3个植物，放置1片城市。",
+  "Field-Capped City":"#Ciudad con Cúpula Energética#",
+  "(Increase your MC production 2 steps, increase your energy production 1 step, gain 3 plants, and place a city tile.)":"Coloca una ciudad. Aumenta 2 niveles tu producción de M€ y 1 nivel la producción de energía. Obtén 3 plantas.",
   
-  "Magnetic Shield":"磁屏",
-  "2 Power":"2个电力标志",
-  "(Requires 2 power tags. Raise your TR 4 steps.)":"需要你有2个电力标志。提升4点改造度。",
+  "Magnetic Shield":"Escudo magnético",
+  "2 Power":"2 Símbolos de energía",
+  "(Requires 2 power tags. Raise your TR 4 steps.)":"Requiere que tengas 2 símbolos de energía. Aumenta tu VT 4 niveles.",
   
-  "Meltworks":"熔融工厂",
-  "Action: Spend 5 heat to gain 3 steel.":"行动：花费5点热能 ，获得3个钢铁。",
+  "Meltworks":"#Fundición#",
+  "Action: Spend 5 heat to gain 3 steel.":"Acción: gasta 5 de calor para obtener 3 de acero.",
   
-  "Mohole Lake":"莫霍湖",
-  "Action: Add a microbe or animal to ANOTHER card.":"行动：在任意一张卡牌上增加1个微生物或者动物资源。",
-  "(Gain 3 plants. Raise temperature 1 step, and place 1 ocean tile.)":"放置1片海洋并提升1点温度。获得3个植物。",
+  "Mohole Lake":"Lago Mohole",
+  "Action: Add a microbe or animal to ANOTHER card.":"Acción: añade 1 microbio o 1 animal a OTRA carta.",
+  "(Gain 3 plants. Raise temperature 1 step, and place 1 ocean tile.)":"Aumenta 1 nivel la temperatura y coloca una loseta de océano. Obtén 3 plantas.",
   
-  "Diversity Support":"多样性扶持",
-  "9 Resource types":"9种资源类型",
-  "(Requires that you have 9 different types of resources. Gain 1 TR.)":"需要你拥有9种不一样的资源。提升1点改造度。",
+  "Diversity Support":"Apoyo a la Diversidad",
+  "9 Resource types":"9 tipos de recursos",
+  "(Requires that you have 9 different types of resources. Gain 1 TR.)":"Requiere que tengas 9 tipos de recursos diferentes. Obtén 1 VT.",
   
-  "Jovian Embassy":"木星大使馆",
-  "(Raise your TR 1 step.)":"提升1点改造度。",
+  "Jovian Embassy":"Embajada Joviana",
+  "(Raise your TR 1 step.)":"Obtén 1 VT.",
   
-  "Topsoil Contract":"表土合约",
-  "(Effect: When you gain a microbe to ANY CARD, also gain 1MC.)":"效果：每当你在任意卡上增加了1个微生物，获得1点金钱。",
-  "Gain 3 plants.":"获得3个植物。",
+  "Topsoil Contract":"Contrato de Mantillo",
+  "(Effect: When you gain a microbe to ANY CARD, also gain 1MC.)":"Efecto: cuando añadas un microbio a CUALQUIER CARTA, gana también 1 M€.",
+  "Gain 3 plants.":"Obtén 3 plantas.",
   
-  "Imported Nutrients":"营养物输入",
-  "(Gain 4 plants and add 4 microbes to ANOTHER CARD.)":"获得4个植物并在1张卡牌上增加4个微生物资源。",
+  "Imported Nutrients":"Importación de Nutrientes",
+  "(Gain 4 plants and add 4 microbes to ANOTHER CARD.)":"Obtén 4 plantas y añade 4 microbios a OTRA CARTA.",
   
-  "Asteroid Deflection System":"小行星防卫系统",
-  "(Action: REVEAL AND DISCARD the top card of the deck. If it has a space tag, add an asteroid here.)":"行动：展示并弃置牌库顶的一张牌，如果该卡有太空标志则在本卡上增加一个小行星资源。",
-  "OPPONENTS MAY NOT REMOVE YOUR PLANTS":"你的对手不能移除你的植物。",
-  "(Decrease your energy production 1 step. 1VP per asteroid on this card.)":"降低1点电力产能。本卡上每个小行星资源值1分。",
+  "Asteroid Deflection System":"Sistema de Desvio de Asteroides",
+  "(Action: REVEAL AND DISCARD the top card of the deck. If it has a space tag, add an asteroid here.)":"Acción: REVELA Y DESCARTA la primera carta del mazo. Si tiene un símbolo de espacio, añade un recurso de asteroide a esta carta.",
+  "OPPONENTS MAY NOT REMOVE YOUR PLANTS":"LOS OPONENTES NO PUEDEN ELIMINAR TUS CARTAS",
+  "(Decrease your energy production 1 step. 1VP per asteroid on this card.)":"Disminuye tu producción de energía 1 nivel. 1 PV por asteroide en esta carta.",
   
-  "Asteroid Rights":"小行星权力",
-  "(Action: Spend 1 MC to add 1 asteroid to ANY card.)": "(行动:花费1 MC在任意卡片上添加1颗小行星。)",
-  "(Action: Spend 1 asteroid here to increase MC production 1 step OR gain 2 titanium.)": "(行动:在这里花费1个小行星增加MC产量1步或获得2个钛。)",
-  "(Add 2 asteroids to this card.)": "(在此卡上添加2颗小行星)",
+  "Asteroid Rights":"Derechos de Asteroides",
+  "(Action: Spend 1 MC to add 1 asteroid to ANY card.)": "Acción: gasta 1 M€ para ñadir un asteroide a CUALQUIER carta.",
+  "(Action: Spend 1 asteroid here to increase MC production 1 step OR gain 2 titanium.)": "Acción: elimina un asteroide sobre esta carta para aumentar 1 nivele tu producción de M€ U obtener 2 de titanio.",
+  "(Add 2 asteroids to this card.)": "Añade 2 asteroides a esta carta.",
   
-  "Energy Market":"能源市场",
-  "(Action: Spend 2X MC to gain X energy.)":"(行动:花费2X MC获得X能量)",
-  "(Action: Decrease energy production 1 step to gain 8 MC.)":"(行动:减少能量生产1步获得8 MC。)",
+  "Energy Market":"Mercado Energético",
+  "(Action: Spend 2X MC to gain X energy.)":"Acción: gasta 2X M€ para obtener X recursos de energía.",
+  "(Action: Decrease energy production 1 step to gain 8 MC.)":"Acción: disminuye 1 nivel tu producción de energía para ganar 8 M€.",
   
   "Penguin":"企鹅",
   "(Requires 8 oceans.)":"(需要8海洋。)",
@@ -78,15 +78,15 @@
   "Action: Draw a card.":"行动：抽1张牌。",
   "(Requires 2 science tags.)":"需要2个科学标志。",
   
-  "Potatoes":"土豆",
-  "(Lose 2 plants. Increase your MC production 2 steps.)":"需要你失去2个植物。提升2点金钱产能。",
+  "Potatoes":"Patatas",
+  "(Lose 2 plants. Increase your MC production 2 steps.)":"Pierde 2 plantas y aumenta 2 niveles tu producción de M€.",
   
-  "Meat Industry":"肉类工业",
-  "(Effect: When you gain an animal to ANY CARD, gain 2MC.)":"效果：每当你在任意卡上增加1个动物，获得2点金钱。",
+  "Meat Industry":"Industria Cárnica",
+  "(Effect: When you gain an animal to ANY CARD, gain 2MC.)":"Efecto: cuando añadas un recurso de animal a CUALQUIER CARTA, obtén 2 M€.",
   
-  "Raise temperature 3 steps and gain 4 steel. Place this tile ADJACENT TO no other city tile. Remove up to 6 Plants from any player.":"提升3点温度并获得4个钢铁。在不与任何城市相邻的位置放置一个板块。",
-  "Decrease your Energy production 4 steps and increase your Plant production 2 steps. Raise your TR 3 steps and place this tile.":"降低4点电力产能并提升2点植物产能。提升3点改造度并放置本板块。",
-  "Requires 4 ocean tiles. Increase your Energy production 2 steps. Place this tile ADJACENT TO an ocean tile.":"需要4片海洋。提升2点电力产能，在于海洋相邻的位置放置本版块。"
+  "Raise temperature 3 steps and gain 4 steel. Place this tile ADJACENT TO no other city tile. Remove up to 6 Plants from any player.":"Aumenta la temperatura 3 niveles y obtén 4 de acero. Coloca esta loseta NO ADYACENTE a una ciudad. Elimina hasta 6 plantas de un jugador. ",
+  "Decrease your Energy production 4 steps and increase your Plant production 2 steps. Raise your TR 3 steps and place this tile.":"Disminuye tu producción de energía 3 niveles y aumenta tu producción de plantas 2 niveles. Obtén 3 VT. Coloca esta loseta.",
+  "Requires 4 ocean tiles. Increase your Energy production 2 steps. Place this tile ADJACENT TO an ocean tile.":"Requiere 4 losetas de océano. Aumenta tu producción de energía 2 niveles. Coloca esta loseta ADYACENTE a una loseta de oceáno."
   
 
 }

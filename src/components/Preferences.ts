@@ -63,6 +63,7 @@ export const Preferences = Vue.component('preferences', {
       'hide_turnorder': false as boolean | unknown[],
       'hide_corporation_names': false as boolean | unknown[],
       'hide_top_bar': false as boolean | unknown[],
+      'hide_select_cards_confirmation': false as boolean | unknown[],
       'small_cards': false as boolean | unknown[],
       'remove_background': false as boolean | unknown[],
       'magnify_cards': true as boolean | unknown[],
@@ -311,6 +312,12 @@ export const Preferences = Vue.component('preferences', {
                         <label class="form-switch">
                             <input type="checkbox" v-on:change="updatePreferences" v-model="hide_top_bar" />
                             <i class="form-icon"></i> <span v-i18n>Hide sticky top bar</span>
+                        </label>
+                    </div>
+                    <div class="preferences_panel_item">
+                        <label class="form-switch">
+                            <input type="checkbox" v-on:change="updatePreferences" v-model="hide_select_cards_confirmation" />
+                            <i class="form-icon"></i> <span v-i18n>Hide no cards selected confirmation</span>
                         </label>
                     </div>
                     <div class="preferences_panel_item">

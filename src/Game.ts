@@ -521,13 +521,41 @@ export class Game implements ISerializable<SerializedGame> {
     return globalParametersMaxed;
   }
 
+  public lastSoloGeneration(): number {
+    let lastGeneration = 14;
+    const options = this.gameOptions;
+    if (options.preludeExtension) {
+      lastGeneration -= 2;
+    }
+
+    // Only add 2 more generations when using the track completion option
+    // and not the solo TR option.
+    //
+    // isSoloModeWin backs this up.
+    if (options.moonExpansion) {
+      if (!options.soloTR && options.requiresMoonTrackCompletion) {
+        lastGeneration += 2;
+      }
+    }
+    return lastGeneration;
+  }
+
   public isSoloModeWin(): boolean {
-    // Solo TR
+    // Solo TR victory condition
     if (this.gameOptions.soloTR) {
       return this.players[0].getTerraformRating() >= 63;
     }
-    if ( ! this.marsIsTerraformed()) return false;
-    return this.gameOptions.preludeExtension ? this.generation <= 12 : this.generation <= 14;
+
+    // Complete terraforing victory condition.
+    if (!this.marsIsTerraformed()) {
+      return false;
+    }
+
+    // This last conditional doesn't make much sense to me. It's only ever really used
+    // on the client at components/GameEnd.ts. Which is probably why it doesn't make
+    // obvious sense why when this generation is earlier than the last generation
+    // of the game means "true, is solo mode win."
+    return this.generation <= this.lastSoloGeneration();
   }
 
   public getAwardFundingCost(): number {
@@ -707,17 +735,9 @@ export class Game implements ISerializable<SerializedGame> {
   }
 
   public gameIsOver(): boolean {
-    // Single player game is done after generation 14 or 12 with prelude
     if (this.isSoloMode()) {
-      let lastGeneration = 14;
-      if (this.gameOptions.preludeExtension) {
-        lastGeneration -= 2;
-      }
-      if (this.gameOptions.moonExpansion && this.gameOptions.requiresMoonTrackCompletion) {
-        lastGeneration += 2;
-      }
-      // Solo mode must go on until the designated generation end even if Mars is already terraformed
-      return this.generation === lastGeneration;
+      // Solo games continue until the designated generation end even if Mars is already terraformed
+      return this.generation === this.lastSoloGeneration();
     }
     return this.marsIsTerraformed();
   }

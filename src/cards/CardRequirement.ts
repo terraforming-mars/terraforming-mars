@@ -175,7 +175,11 @@ export class TagCardRequirement extends CardRequirement {
     return firstLetterUpperCase(this.tag);
   }
   public satisfies(player: Player): boolean {
-    return this.satisfiesInequality(player.getTagCount(this.tag));
+    let tagCount = player.getTagCount(this.tag);
+    // PoliticalAgendas Scientists P4 hook
+    if (this.tag === Tags.SCIENCE && player.hasTurmoilScienceTagBonus) tagCount += 1;
+
+    return this.satisfiesInequality(tagCount);
   }
 }
 

@@ -93,8 +93,12 @@ export const HelpPhases = Vue.component('help-phases', {
                 <li><span v-i18n>i. Game end check</span>
                   <ul>
                     <li v-i18n>If temperature, oxygen, and oceans are maxed, skip the rest of solar phase to the end game phase. </li>
-                    <li v-i18n>(If playing solo, the game is ended after 14 generations or 12 generations if Prelude expansion is used. </li>
-                    <li v-i18n>(If Venus Next is in use, the Venus track must be completed as well for solo mode victory.) </li>
+                    <li v-i18n>(If playing solo, the game ends after 14 generations.)</li>
+                    <li v-i18n>Solo mode adjustments for expansions:</li>
+                    <li v-i18n>• Prelude: The game ends 2 generations earlier.</li>
+                    <li v-i18n>• Venus Next: The Venus track must be completed for solo mode victory.</li>
+                    <li v-i18n>• The Moon (63TR condition): No changes.</li>
+                    <li v-i18n>• The Moon (Terraforming condition): The game ends 2 generations later. The Moon must tracks must be completed for solo mode victory.</li>
                   </ul>
                 <li>
                   <span v-i18n>ii. World Government Terraforming (start player chooses)</span>

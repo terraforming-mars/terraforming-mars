@@ -1,16 +1,16 @@
 import {expect} from 'chai';
-import {Player} from '../../src/Player';
-import {Game} from '../../src/Game';
-import {Turmoil} from '../../src/turmoil/Turmoil';
-import {ISpace} from '../../src/boards/ISpace';
-import {TestingUtils, setCustomGameOptions, TestPlayers} from '../TestingUtils';
-import {Greens, GREENS_BONUS_1, GREENS_BONUS_2, GREENS_POLICY_4} from '../../src/turmoil/parties/Greens';
-import {Lichen} from '../../src/cards/base/Lichen';
-import {Fish} from '../../src/cards/base/Fish';
-import {Tardigrades} from '../../src/cards/base/Tardigrades';
-import {TileType} from '../../src/TileType';
-import {SpaceType} from '../../src/SpaceType';
-import {OrOptions} from '../../src/inputs/OrOptions';
+import {Player} from '../../../src/Player';
+import {Game} from '../../../src/Game';
+import {Turmoil} from '../../../src/turmoil/Turmoil';
+import {ISpace} from '../../../src/boards/ISpace';
+import {TestingUtils, setCustomGameOptions, TestPlayers} from '../../TestingUtils';
+import {Greens, GREENS_BONUS_1, GREENS_BONUS_2, GREENS_POLICY_4} from '../../../src/turmoil/parties/Greens';
+import {Lichen} from '../../../src/cards/base/Lichen';
+import {Fish} from '../../../src/cards/base/Fish';
+import {Tardigrades} from '../../../src/cards/base/Tardigrades';
+import {TileType} from '../../../src/TileType';
+import {SpaceType} from '../../../src/SpaceType';
+import {OrOptions} from '../../../src/inputs/OrOptions';
 
 describe('Greens', function() {
   let player : Player; let game : Game; let turmoil: Turmoil; let greens: Greens;

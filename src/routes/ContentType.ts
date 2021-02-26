@@ -1,51 +1,26 @@
-interface IContentType {
-  contentType: string;
-  extensions: Array<string>;
-}
-const CONTENT_TYPES: Array<IContentType> = [
-  {
-    contentType: 'image/x-icon',
-    extensions: ['.ico'],
-  },
-  {
-    contentType: 'text/css',
-    extensions: ['.css'],
-  },
-  {
-    contentType: 'text/html; charset=utf-8',
-    extensions: ['.html'],
-  },
-  {
-    contentType: 'text/javascript',
-    extensions: ['.js', '.js.map'],
-  },
-  {
-    contentType: 'font/ttf',
-    extensions: ['.ttf'],
-  },
-  {
-    contentType: 'image/jpeg',
-    extensions: ['.jpg', '.jpeg'],
-  },
-  {
-    contentType: 'image/png',
-    extensions: ['.png'],
-  },
-];
+const CONTENT_TYPES: Map<string /* file extension */, string /* content type*/> = new Map([
+  ['ico', 'image/x-icon'],
+  ['css', 'text/css'],
+  ['html', 'text/html; charset=utf-8'],
+  ['js', 'text/javascript'],
+  ['map', 'text/javascript'],
+  ['ttf', 'font/ttf'],
+  ['jpg', 'image/jpeg'],
+  ['jpeg', 'image/jpeg'],
+  ['png', 'image/png'],
+]);
 
 export class ContentType {
   public static getContentType(filename: string): string | undefined {
-    const uncompressedName = this.removeCompressionSuffix(filename);
-    for (const entry of CONTENT_TYPES) {
-      if (entry.extensions.find((extension) => uncompressedName.endsWith(extension))) {
-        return entry.contentType;
-      };
+    const parts = filename.split('.');
+    let idx = parts.length - 1;
+    if (parts[idx] === 'br' || parts[idx] === 'gzip') {
+      idx--;
     }
-    console.log('Content type not found for: ' + filename);
-    return undefined;
-  }
-
-  private static removeCompressionSuffix(filename: string): string {
-    return filename.replace(/\.(br|gz)$/, '');
+    if (idx < 0) {
+      return undefined;
+    }
+    const suffix = parts[idx];
+    return CONTENT_TYPES.get(suffix);
   }
 }

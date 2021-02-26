@@ -84,8 +84,13 @@ function processRequest(req: http.IncomingMessage, res: http.ServerResponse): vo
 
   const url = new URL(req.url, `http://${req.headers.host}`);
   const ctx = {url, route, serverId, gameLoader: GameLoader.getInstance()};
+  let handler: IHandler | undefined = handlers.get(url.pathname);
 
-  const handler: IHandler | undefined = handlers.get(url.pathname);
+  // TODO bafolts or kberg fix this bug with collision of POST and GET for /game
+  if (req.method === 'GET' && handler !== undefined && url.pathname === '/game') {
+    handler = undefined;
+  }
+
   if (handler !== undefined) {
     handler.processRequest(req, res, ctx);
     return;

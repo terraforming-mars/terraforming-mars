@@ -27,6 +27,7 @@ import {Route} from './routes/Route';
 import {Player} from './Player';
 import {Database} from './database/Database';
 import {Server} from './server/ServerModel';
+import {ContentType} from './routes/ContentType';
 
 const serverId = process.env.SERVER_ID || generateRandomId();
 const route = new Route();
@@ -266,25 +267,20 @@ function serveAsset(req: http.IncomingMessage, res: http.ServerResponse): void {
   }
 
   let contentEncoding: string | undefined;
-  let contentType: string | undefined;
   let file: string | undefined;
 
   if (req.url === '/styles.css') {
     const compressed = fileCache.get('styles.css.gz');
-    contentType = 'text/css';
     file = 'styles.css';
     if (compressed !== undefined && Route.supportsEncoding(req, 'gzip')) {
       contentEncoding = 'gzip';
       file += '.gz';
     }
   } else if (req.url === '/assets/index.html') {
-    contentType = 'text/html; charset=utf-8';
     file = req.url.substring(1);
   } else if (req.url === '/favicon.ico') {
-    contentType = 'image/x-icon';
     file = 'assets/favicon.ico';
   } else if (req.url === '/main.js' || req.url === '/main.js.map') {
-    contentType = 'text/javascript';
     file = `build${req.url}`;
     if (Route.supportsEncoding(req, 'br')) {
       contentEncoding = 'br';
@@ -294,7 +290,6 @@ function serveAsset(req: http.IncomingMessage, res: http.ServerResponse): void {
       file += '.gz';
     }
   } else if (req.url === '/assets/Prototype.ttf' || req.url === '/assets/futureforces.ttf') {
-    contentType = 'font/ttf';
     file = req.url.substring(1);
   } else if (req.url.endsWith('.png') || req.url.endsWith('.jpg')) {
     const assetsRoot = path.resolve('./assets');
@@ -304,7 +299,6 @@ function serveAsset(req: http.IncomingMessage, res: http.ServerResponse): void {
     if (reqFile.startsWith(assetsRoot) === false) {
       return route.notFound(req, res);
     }
-    contentType = req.url.endsWith('.jpg') ? 'image/jpeg' : 'image/png';
     file = reqFile;
   } else {
     return route.notFound(req, res);
@@ -322,6 +316,7 @@ function serveAsset(req: http.IncomingMessage, res: http.ServerResponse): void {
     res.setHeader('Cache-Control', 'max-age=' + assetCacheMaxAge);
   }
 
+  const contentType = ContentType.getContentType(file);
   if (contentType !== undefined) {
     res.setHeader('Content-Type', contentType);
   }

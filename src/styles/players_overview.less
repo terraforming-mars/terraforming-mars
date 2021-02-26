@@ -101,9 +101,7 @@
 
 
 .player-info-details {
-    overflow: hidden;
     white-space: nowrap;
-    text-align: center;
     letter-spacing: 1px;
     line-height: 19px;
     width: 118px;
@@ -113,10 +111,14 @@
         text-shadow: 0px 1px 1px #000;
         font-size: 20px;
         font-family: 'Prototype';
+        overflow: hidden;
+        text-overflow: ellipsis;
     } 
     .player-info-corp { 
         font-size: 16px;
         margin-bottom: 5px;
+        overflow: hidden;
+        text-overflow: ellipsis;
     }
 }
 

@@ -277,10 +277,6 @@ export class Game implements ISerializable<SerializedGame> {
       const allowCommunityColonies = gameOptions.communityCardsOption || communityColoniesSelected;
 
       game.colonies = game.colonyDealer.drawColonies(players.length, gameOptions.customColoniesList, gameOptions.venusNextExtension, gameOptions.turmoilExtension, allowCommunityColonies);
-      if (players.length === 1) {
-        players[0].addProduction(Resources.MEGACREDITS, -2);
-        game.defer(new RemoveColonyFromGame(players[0]));
-      }
     }
 
     // Add Turmoil stuff
@@ -716,6 +712,10 @@ export class Game implements ISerializable<SerializedGame> {
       if (player.pickedCorporationCard === undefined && player.dealtCorporationCards.length > 0) {
         player.setWaitingFor(this.pickCorporationCard(player), () => {});
       }
+    }
+    if (this.players.length === 1 && this.gameOptions.coloniesExtension) {
+      this.players[0].addProduction(Resources.MEGACREDITS, -2);
+      this.defer(new RemoveColonyFromGame(this.players[0]));
     }
   }
 

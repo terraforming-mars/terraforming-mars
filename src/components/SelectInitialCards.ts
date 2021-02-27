@@ -10,6 +10,7 @@ import {PlayerInputModel} from '../models/PlayerInputModel';
 import {PlayerModel} from '../models/PlayerModel';
 import {SelectCard} from './SelectCard';
 import {ConfirmDialog} from './common/ConfirmDialog';
+import {PreferencesManager} from './PreferencesManager';
 
 export const SelectInitialCards = Vue.component('select-initial-cards', {
   props: {
@@ -151,7 +152,7 @@ export const SelectInitialCards = Vue.component('select-initial-cards', {
       return starting;
     },
     saveIfConfirmed: function() {
-      if (this.selectedCards.length === 0) {
+      if (PreferencesManager.loadValue('show_alerts') === '1' && this.selectedCards.length === 0) {
         (this.$refs['confirmation'] as any).show();
       } else {
         this.saveData();

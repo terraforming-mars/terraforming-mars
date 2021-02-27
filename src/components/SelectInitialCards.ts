@@ -10,7 +10,6 @@ import {PlayerInputModel} from '../models/PlayerInputModel';
 import {PlayerModel} from '../models/PlayerModel';
 import {SelectCard} from './SelectCard';
 import {ConfirmDialog} from './common/ConfirmDialog';
-import {PreferencesManager} from './PreferencesManager';
 
 export const SelectInitialCards = Vue.component('select-initial-cards', {
   props: {
@@ -152,7 +151,7 @@ export const SelectInitialCards = Vue.component('select-initial-cards', {
       return starting;
     },
     saveIfConfirmed: function() {
-      if (this.selectedCards.length === 0 && PreferencesManager.loadValue('hide_select_cards_confirmation') === '0') {
+      if (this.selectedCards.length === 0) {
         (this.$refs['confirmation'] as any).show();
       } else {
         this.saveData();
@@ -185,19 +184,13 @@ export const SelectInitialCards = Vue.component('select-initial-cards', {
     confirmSelection: function() {
       this.saveData();
     },
-    cancelSelection: function() {},
-    hideDialog: function(hide: boolean) {
-      PreferencesManager.saveValue('hide_select_cards_confirmation', hide === true ? '1' : '0');
-    },
   },
   template: `
   <div class="select-initial-cards">
     <confirm-dialog
-      message="Continue without buying initial cards?\n(This confirmation can be disabled in preferences)."
+      message="Continue without buying initial cards?"
       ref="confirmation"
-      v-on:accept="confirmSelection"
-      v-on:dismiss="cancelSelection"
-      v-on:hide="hideDialog" />
+      v-on:accept="confirmSelection" />
     <select-card :player="player" :playerinput="getOption(0)" :showtitle="true" v-on:cardschanged="corporationChanged" />
     <select-card v-if="hasPrelude()" :player="player" :playerinput="getOption(1)" :showtitle="true" v-on:cardschanged="preludesChanged" />
     <select-card :player="player" :playerinput="getOption(hasPrelude() ? 2 : 1)" :showtitle="true" v-on:cardschanged="cardsChanged" />

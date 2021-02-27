@@ -13,7 +13,6 @@ import * as zlib from 'zlib';
 
 import {BufferCache} from './server/BufferCache';
 import {GameId} from './Game';
-import {GameLoader} from './database/GameLoader';
 import {ApiCloneableGames} from './routes/ApiCloneableGames';
 import {ApiGameLogs} from './routes/ApiGameLogs';
 import {ApiGames} from './routes/ApiGames';
@@ -24,9 +23,9 @@ import {CreateGame} from './routes/CreateGame';
 import {LoadGame} from './routes/LoadGame';
 import {IHandler} from './routes/IHandler';
 import {Route} from './routes/Route';
-import {Player} from './Player';
 import {Database} from './database/Database';
-import {Server} from './server/ServerModel';
+import {PlayerInput} from './routes/PlayerInput';
+import {GameLoader} from './database/GameLoader';
 import {ContentType} from './routes/ContentType';
 
 const serverId = process.env.SERVER_ID || generateRandomId();
@@ -72,7 +71,7 @@ const handlers: Map<string, IHandler> = new Map(
     ['/api/game/logs', ApiGameLogs.INSTANCE],
     ['/game', CreateGame.INSTANCE],
     ['/load', LoadGame.INSTANCE],
-    // ['/player/input', PlayerInput.INSTANCE],
+    ['/player/input', PlayerInput.INSTANCE],
   ],
 );
 
@@ -137,34 +136,6 @@ function processRequest(req: http.IncomingMessage, res: http.ServerResponse): vo
     }
     break;
 
-  case 'POST':
-    if (req.url.indexOf('/player/input?id=') === 0) {
-      const playerId: string = req.url.substring(
-        '/player/input?id='.length,
-      );
-      GameLoader.getInstance().getByPlayerId(playerId, (game) => {
-        if (game === undefined) {
-          route.notFound(req, res);
-          return;
-        }
-        let player: Player | undefined;
-        try {
-          player = game.getPlayerById(playerId);
-        } catch (err) {
-          console.warn(`unable to find player ${playerId}`, err);
-        }
-        if (player === undefined) {
-          route.notFound(req, res);
-          return;
-        }
-        processInput(req, res, player);
-      });
-      break;
-    } else {
-      route.notFound(req, res);
-    }
-    break;
-
   default:
     route.notFound(req, res);
   }
@@ -210,42 +181,6 @@ if (process.env.KEY_PATH && process.env.CERT_PATH) {
 function generateRandomId(): GameId {
   // 281474976710656 possible values.
   return Math.floor(Math.random() * Math.pow(16, 12)).toString(16);
-}
-
-function processInput(
-  req: http.IncomingMessage,
-  res: http.ServerResponse,
-  player: Player,
-): void {
-  let body = '';
-  req.on('data', function(data) {
-    body += data.toString();
-  });
-  req.once('end', function() {
-    try {
-      const entity = JSON.parse(body);
-      player.process(entity);
-      res.setHeader('Content-Type', 'application/json');
-      res.write(getPlayerModelJSON(player));
-      res.end();
-    } catch (err) {
-      res.writeHead(400, {
-        'Content-Type': 'application/json',
-      });
-      console.warn('Error processing input from player', err);
-      res.write(
-        JSON.stringify({
-          message: err.message,
-        }),
-      );
-      res.end();
-    }
-  });
-}
-
-function getPlayerModelJSON(player: Player): string {
-  const model = Server.getPlayerModel(player);
-  return JSON.stringify(model);
 }
 
 function isServerIdValid(req: http.IncomingMessage): boolean {

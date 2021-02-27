@@ -24,6 +24,7 @@ describe('TheArchaicFoundationInstitute', () => {
   });
 
   it('effect', () => {
+    player.corporationCard = card;
     card.resourceCount = 0;
     expect(player.getTerraformRating()).eq(14);
 

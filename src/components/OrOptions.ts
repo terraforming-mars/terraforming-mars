@@ -123,8 +123,8 @@ export const OrOptions = Vue.component('or-options', {
 
       // Label with title standard project will be skipped if no suboption is available and learner mode is off.
       let skippedStandardProject = false;
-      if (option.title === 'Standard projects' && option.enabled !== undefined ) {
-        if (option.enabled.every((p: boolean) => p === false)) {
+      if (option.title === 'Standard projects') {
+        if (option.showOnlyInLearnerMode) {
           const learnerModeOff = PreferencesManager.loadValue('learner_mode') === '0';
           if (learnerModeOff) {
             skippedStandardProject = true;

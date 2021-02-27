@@ -26,7 +26,7 @@ class Space implements ISpace {
   }
 }
 
-export class MoonBoardv2 extends Board {
+export class MoonBoard extends Board {
   public getNoctisCitySpaceIds() {
     return [];
   }
@@ -52,7 +52,7 @@ export class MoonBoardv2 extends Board {
     return this.spaces.filter((space) => space.tile?.tileType === tileType);
   }
 
-  public static newInstance(): MoonBoardv2 {
+  public static newInstance(): MoonBoard {
     const STEEL = SpaceBonus.STEEL;
     const DRAW_CARD = SpaceBonus.DRAW_CARD;
     const TITANIUM = SpaceBonus.TITANIUM;
@@ -68,12 +68,12 @@ export class MoonBoardv2 extends Board {
     b.row(1).land().land(STEEL).land(STEEL).land(DRAW_CARD, DRAW_CARD).land(STEEL);
     b.row(2).land(DRAW_CARD, DRAW_CARD).mine(TITANIUM).mine(TITANIUM, TITANIUM).land();
     b.colony();
-    return new MoonBoardv2(b.spaces);
+    return new MoonBoard(b.spaces);
   }
 
-  public static deserialize(board: SerializedBoard, players: Array<Player>): MoonBoardv2 {
+  public static deserialize(board: SerializedBoard, players: Array<Player>): MoonBoard {
     const spaces = Board.deserializeSpaces(board.spaces, players);
-    return new MoonBoardv2(spaces);
+    return new MoonBoard(spaces);
   }
 }
 
@@ -92,11 +92,11 @@ class Builder {
     this.spaces.push(Space.colony(this.nextId()));
   }
   public nextId(): string {
+    this.idx++;
     let strId = this.idx.toString();
     if (this.idx < 10) {
       strId = '0'+strId;
     }
-    this.idx++;
     return 'm' + strId;
   }
 }

@@ -84,6 +84,7 @@
 
     "Predators": "Depredadores",
     "Action: Remove 1 Animal from any card and add it to this card.": "Acción: elimina 1 animal de cualquier carta y añádelo a esta carta.",
+    "1 VP per Animal on this card.": "1 PV por cada animal en esta carta.",
     "(Requires 11% oxygen.)": "Requiere 11% de oxígeno.",
 
     "Space Station": "Estación Espacial",
@@ -117,7 +118,7 @@
 
     "GHG Producing Bacteria": "Bacteria Productora de GEI",
     "Action: Add 1 Microbe to this card, or remove 2 Microbes to raise temperature 1 step.": "Acción: añade 1 microbio a esta carta, o elimina 2 microbios de esta carta para aumentar la temperatura en 1.",
-    "(Action: Remove 2 Microbes to raise temperature 1 step.)":"或移除本卡上的2个微生物来提升火星温度1级",
+    "(Action: Remove 2 Microbes to raise temperature 1 step.)":"Acción: quita 2 microbios para aumentar la temperatura 1 nivel",
     "Requires 4% oxygen.": "Requiere 4% de oxígeno.",
 
     "Ants": "Hormigas",
@@ -220,7 +221,7 @@
     "Decrease your Energy production 1 step and increase your steel production 2 steps.": "Reduce tu producción de energía 1 nivel e incrementa tu producción de acero en 2.",
 
     "Land Claim": "Reclamar Territorio",
-    "PLACE YOUR MARKER ON A NON-RESERVED AREA. ONLY YOU MAY PLACE A TILE HERE.": "COLOCA UN MARCADOR TUYO EN UN ÁREA NO RESERVADA. SOLO TÚ PUEDES COLOCAR UNA LOSETA AQUÍ.",
+    "Place your marker on a non-reserved area. Only you may place a tile there.": "COLOCA UN MARCADOR TUYO EN UN ÁREA NO RESERVADA. SOLO TÚ PUEDES COLOCAR UNA LOSETA AQUÍ.",
 
     "Mining Rights": "Licencia de Minería",
     "Place this tile on an area with a steel or titanium placement bonus. Increase that production 1 step.": "Coloca esta loseta en un área con bonificación por colocación de acero o titanio. Aumenta tu producción en dicho recurso 1 nivel.",
@@ -280,9 +281,9 @@
     "Trans-Neptune Probe": "Sonda Trans-Neptuno",
 
     "Commercial District": "Distrito Comercial",
-    "Decrease your energy production 1 step and increase your MC production 4 steps.": "Reduce tu producción de energía en 1 e incrementa tu producción de M€ 4 niveles.",
-    "Place this tile. 1 VP PER ADJACENT CITY TILE.": "Coloca esta loseta. 1 PV POR LOSETA DE CIUDAD ADYACENTE.",
-
+    "Place this tile. Decrease your energy production 1 step and increase your MC production 4 steps.": "Coloca esta loseta. Reduce tu producción de energía en 1 e incrementa tu producción de M€ 4 niveles.",
+    "1 VP per adjacent city tile.": "1 PV por loseta de ciudad adyacente.",
+    
     "Robotic Workforce": "Mano de Obra Robótica",
     "Duplicate only the production box of one of your building cards.": "Duplica solo el recuadro de producción de una de tus cartas tipo edificio.",
 
@@ -342,7 +343,8 @@
     "Action: Spend 4 energy to gain 1 titanium and increase oxygen 1 step.": "Acción: gasta 4 de energía para obtener 1 de titanio e incrementar el oxígeno 1 nivel.",
 
     "Earth Office": "Sucursal en la Tierra",
-    "Effect: When you play an Earth tag, you pay 3 MC less for it.": "Efecto: al jugar una carta tipo Tierra, paga 3 M€ menos por ella.",
+    "Effect: When you play an Earth card, you pay 3 MC less for it.": "Efecto: al jugar una carta tipo Tierra, paga 3 M€ menos por ella.",
+    "When you play an Earth card, you pay 3 MC less for it.": "al jugar una carta tipo Tierra, paga 3 M€ menos por ella.",
 
     "Acquired Company": "Adquisición de Empresa",
 
@@ -482,7 +484,7 @@
     "Requires 6% oxygen. Increase your Plant production 1 step for each plant tag you have.": "Requiere 6% de oxígeno. Aumenta tu producción de plantas 1 nivel por cada símbolo de planta que poseas.",
 
     "CEO's Favorite Project": "Proyecto Favorito del Director",
-    "ADD 1 RESOURCE TO A CARD WITH AT LEAST 1 RESOURCE ON IT": "AÑADE 1 RECURSO A UNA CARTA CON AL MENOS 1 RECURSO SOBRE ELLA.",
+    "Add 1 resource to a card with at least 1 resource on it": "AÑADE 1 RECURSO A UNA CARTA CON AL MENOS 1 RECURSO SOBRE ELLA.",
 
     "Anti-Gravity Technology": "Tecnología Anti-Gravedad",
     "Requires 7 science tags.": "Requiere 7 símbolos ded ciencia.",
@@ -499,7 +501,7 @@
 
     "Caretaker Contract": "Contrato de Supervisión",
     "Action: Spend 8 heat to increase your terraform rating 1 step.": "Acción: gasta 8 de calor para aumentar tu valor de terraformación 1 nivel.",
-    "Requires 0 C or warmer.": "Requiere 0°C o más cálido.",
+    "Requires 0° C or warmer.": "Requiere 0°C o más cálido.",
 
     "Designed Micro-organisms": "Microorganismos de Diseño",
     "It must be -14 C or colder. Increase your Plant production 2 steps.": "La temperatura debe ser -14°C o más fría. Aumenta tu producción de plantas 2 niveles.",
@@ -561,7 +563,7 @@
     "1 VP per 2 Animals here.": "1 PV por cada 2 animales aquí.",
 
     "Protected Habitats": "Hábitats Protegidos",
-    "OPPONENTS MAY NOT REMOVE YOUR": "LOS OPONENTES NO PUEDEN ELIMINAR TUS",
+    "Opponents may not remove your": "LOS OPONENTES NO PUEDEN ELIMINAR TUS",
 
     "Protected Valley": "Valle Protegido",
     "(Increase your MC production 2 steps. Place on a greenery tile ON AN AREA RESERVED FOR OCEAN, disregarding normal placement restrictions, and increase oxygen 1 step.)": "Aumenta tu producción de M€ 2 niveles. Coloca una loseta de vegetación en UN ÁREA RESERVADA PARA OCÉANO, sin tener en cuenta las restricciones normales de colocación, e incrementa el oxígeno 1 nivel.",
@@ -620,7 +622,7 @@
     "Requires -8 C or warmer. Place 1 ocean tile.": "Requiere -8°C o más cálido. Coloca 1 loseta de océano.",
 
     "Invention Contest": "Concurso de Inventos",
-    "LOOK AT THE TOP 3 CARDS FROM THE DECK. TAKE 1 OF THEM INTO HAND AND DISCARD THE OTHER 2": "MIRA LAS 3 PRIMERAS CARTAS DEL MAZO. TOMA 1 DE ELLAS PARA TU MANO Y DESCARTA LAS OTRAS 2.",
+    "Look at the top 3 cards from the deck. Take 1 of them into hand and discard the other two": "MIRA LAS 3 PRIMERAS CARTAS DEL MAZO. TOMA 1 DE ELLAS PARA TU MANO Y DESCARTA LAS OTRAS 2",
 
     "Plantation": "Plantación",
     "Requires 2 Science tags. Place a greenery tile and raise oxygen 1 step.": "Requiere 2 símbolos de ciencia. Coloca una loseta de vegetación (incrementa el oxígeno en 1 como siempre).",
@@ -673,6 +675,7 @@
     "Increase your MC production 1 step for every 2 Building tags you have, including this.": "Aumenta tu producción de M€ 1 nivel por cada 2 símbolos de edificio que poseas, incluyendo este.",
 
     "AI Central": "Central IA",
+    "Action: Draw 2 cards.": "Acción: Roba 2 cartas.",
     "2 Science": "2 Ciencia",
     "3 Science": "3 Ciencia",
     "5 Science": "5 Ciencia",

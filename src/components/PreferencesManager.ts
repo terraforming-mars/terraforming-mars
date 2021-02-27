@@ -44,4 +44,9 @@ export class PreferencesManager {
       if (value === null) return '';
       return value;
     }
+
+    static loadBooleanValue(name: string): boolean {
+      if ( ! PreferencesManager.localStorageSupported()) return false;
+      return localStorage.getItem(name) === '1';
+    }
 }

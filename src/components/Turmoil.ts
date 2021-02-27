@@ -305,6 +305,14 @@ export const Turmoil = Vue.component('turmoil', {
             </div>
           </div>
         </div>
+
+        <div class="turmoil-party-transition-arrow-grid">
+          <div class="turmoil-party-transition-arrow"></div>
+          <div class="turmoil-party-transition-arrow"></div>
+          <div class="turmoil-party-transition-arrow"></div>
+          <div class="turmoil-party-transition-arrow"></div>
+          <div class="turmoil-party-transition-arrow"></div>
+        </div>
       </div>
     </div>
     `,

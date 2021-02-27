@@ -17,6 +17,8 @@ import {ALL_CARD_MANIFESTS} from '../../cards/AllCards';
 import {GameModule} from '../../GameModule';
 import {CardRequirements} from '../../cards/CardRequirements';
 import {PreferencesManager} from '../PreferencesManager';
+import {OwnerModel} from '../../components/SelectCard';
+
 
 export const Card = Vue.component('card', {
   components: {
@@ -36,6 +38,9 @@ export const Card = Vue.component('card', {
     },
     'actionUsed': {
       type: Boolean,
+    },
+    'owner': {
+      type: Object as () => OwnerModel | undefined,
     },
   },
   data: function() {
@@ -154,6 +159,11 @@ export const Card = Vue.component('card', {
             <CardExpansion :expansion="getCardExpansion()" :isCorporation="isCorporationCard()"/>
             <CardResourceCounter v-if="card.resources !== undefined" :amount="getResourceAmount(card)" />
             <CardExtraContent :card="card" />
+            <template v-if="owner !== undefined">
+              <div :class="'card-owner-label player_translucent_bg_color_'+ owner?.color">
+                {{owner?.name}}
+              </div>
+            </template>
         </div>
     `,
 });

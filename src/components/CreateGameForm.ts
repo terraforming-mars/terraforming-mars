@@ -3,19 +3,19 @@ import {Color} from '../Color';
 import {BoardName} from '../boards/BoardName';
 import {CardName} from '../CardName';
 import {CorporationsFilter} from './CorporationsFilter';
-import {translateMessage} from '../directives/i18n';
+import {translateTextWithParams} from '../directives/i18n';
 import {IGameData} from '../database/IDatabase';
 import {ColoniesFilter} from './ColoniesFilter';
 import {ColonyName} from '../colonies/ColonyName';
 import {CardsFilter} from './CardsFilter';
 import {Button} from '../components/common/Button';
 import {playerColorClass} from '../utils/utils';
-import {LogMessageDataType} from '../LogMessageDataType';
 import {RandomMAOptionType} from '../RandomMAOptionType';
 import {GameId} from '../Game';
 import {AgendaStyle} from '../turmoil/PoliticalAgendas';
 
 import * as constants from '../constants';
+import {$t} from '../directives/i18n';
 
 export interface CreateGameModel {
     constants: typeof constants;
@@ -217,13 +217,10 @@ export const CreateGameForm = Vue.component('create-game-form', {
       }
     },
     getPlayerNamePlaceholder: function(player: NewPlayerModel): string {
-      return translateMessage({
-        message: 'Player ${0} name',
-        data: [{
-          type: LogMessageDataType.RAW_STRING,
-          value: String(player.index),
-        }],
-      });
+      return translateTextWithParams(
+        'Player ${0} name',
+        [String(player.index)],
+      );
     },
     updateCustomCorporationsList: function(newCustomCorporationsList: Array<CardName>) {
       const component = (this as any) as CreateGameModel;
@@ -409,6 +406,7 @@ export const CreateGameForm = Vue.component('create-game-form', {
       const requiresMoonTrackCompletion = component.requiresMoonTrackCompletion;
       let clonedGamedId: undefined | GameId = undefined;
 
+      // Check custom colony count
       if (customColoniesList.length > 0) {
         const playersCount = players.length;
         let neededColoniesCount = playersCount + 2;
@@ -419,7 +417,17 @@ export const CreateGameForm = Vue.component('create-game-form', {
         }
 
         if (customColoniesList.length < neededColoniesCount) {
-          window.alert('Must select at least ' + neededColoniesCount + ' colonies');
+          window.alert(translateTextWithParams('Must select at least ${0} colonies', [neededColoniesCount.toString()]));
+          return;
+        }
+      }
+
+      // Check custom corp count
+      if (customCorporationsList.length > 0) {
+        const neededCorpsCount = players.length * startingCorporations;
+
+        if (customCorporationsList.length < neededCorpsCount) {
+          window.alert(translateTextWithParams('Must select at least ${0} corporations', [neededCorpsCount.toString()]));
           return;
         }
       }
@@ -428,7 +436,7 @@ export const CreateGameForm = Vue.component('create-game-form', {
       if (component.clonedGameData !== undefined && component.seededGame) {
         clonedGamedId = component.clonedGameData.gameId;
         if (component.clonedGameData.playerCount !== players.length) {
-          alert('Player count mismatch ');
+          window.alert($t('Player count mismatch'));
           this.$data.playersCount = component.clonedGameData.playerCount;
           return;
         }
@@ -500,7 +508,7 @@ export const CreateGameForm = Vue.component('create-game-form', {
         <div id="create-game">
             <h1><span v-i18n>{{ constants.APP_NAME }}</span> — <span v-i18n>Create New Game</span></h1>
             <div class="create-game-discord-invite" v-if="playersCount===1" v-i18n>
-                (Looking for people to play with? <a href="https://discord.gg/VR8TbrD" class="tooltip" target="_blank"><u>Join us on Discord</u></a>.)
+              (<span v-i18n>Looking for people to play with</span>? <a href="https://discord.gg/VR8TbrD" class="tooltip" target="_blank"><u>Join us on Discord</u></a>.)
             </div>
 
             <div class="create-game-form create-game--block">
@@ -866,6 +874,7 @@ export const CreateGameForm = Vue.component('create-game-form', {
                 v-bind:turmoil="turmoil"
                 v-bind:promoCardsOption="promoCardsOption"
                 v-bind:communityCardsOption="communityCardsOption"
+                v-bind:moonExpansion="moonExpansion"
             ></corporations-filter>
 
             <colonies-filter

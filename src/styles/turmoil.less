@@ -202,13 +202,44 @@
     padding: 10px 7px 7px 9px;
     gap:0px;
     min-height: 118px;
+
+    &.grid-in-send-delegate {
+        padding-top: 15px;
+    }
 }
 
 .delegate-spot {
     width: 40px;
     height:40px;
-    /*background: linear-gradient(transparent, rgba(0,0,0,.1));*/
+}
 
+.party-container {
+    display: inline-block;
+    width: 164px;
+    height: 307px;
+    margin: 15px 10px 10px 0px;
+    border: none;
+    box-shadow: none;
+    border-radius: 0px;
+    background: url(assets/turmoil_ui.png);
+    &.party-background--mars_first {
+        background-position: -23px 316px;
+    }
+    &.party-background--scientists {
+        background-position: -193px 316px;
+    }
+    &.party-background--unity {
+        background-position: -363px 316px;
+    }
+    &.party-background--greens {
+        background-position: -533px 316px;
+    }
+    &.party-background--reds {
+        background-position: -703px 316px;
+    }
+    &.party-background--kelvinists {
+        background-position: -873px 316px;
+    }
 }
 
 .party-name {
@@ -280,6 +311,11 @@
     }
 }
 
+.send-delegate-leader-spot {
+    transform: scale(0.8);
+    padding-top: 12px;
+    padding-left: 58px;
+}
 
 .turmoil-lobby {
     position: absolute;
@@ -319,6 +355,10 @@
 .label-5mc {
     width: 110px;
     margin: auto;
+}
+
+.count-in-send-delegate {
+    font-size: 22px;
 }
 
 .player-token {
@@ -373,6 +413,17 @@
 .player-token-new-leader {
     background: url(assets/turmoil_ui.png);
     background-position: -486px 861px;
+}
+
+.select-party-leader-spot {
+    width: 125px;
+    height: 85px;
+    margin-left: 5px;
+    margin-top: 5px;
+    &.dominance-marker {
+        background: url(assets/turmoil_ui.png);
+        background-position: -486px 861px;
+    }
 }
 
 .dominant-party-bonus {
@@ -555,6 +606,21 @@
     margin-bottom: -10px;
 }
 
+.turmoil-party-transition-arrow-grid {
+    position: absolute;
+    left: 130px;
+    top: 400px;
+
+    .turmoil-party-transition-arrow {
+        display: inline-block;
+        width: 70px;
+        height: 15px;
+        background-color: #444;
+        clip-path: polygon(30% 15%, 30% 40%, 100% 40%, 100% 60%, 30% 60%, 30% 85%, 0% 50%);
+        margin-right: 96px;
+    }
+}
+
 .red-arrow-3x {
     background-image: url(./assets/misc/arrow_3x.png);
     background-size: 30px;
@@ -577,4 +643,30 @@
     margin-bottom: 15px;
     background-repeat: no-repeat;
     background-position: 0px;
+}
+
+.selectable-party-name {
+    position: absolute;
+    top: 220px;
+    left: 3px;
+    transform: scale(0.9);
+    text-align: center;
+}
+
+input[type="radio"]:checked + .party-container.filterDiv {
+    box-shadow: none;
+}
+
+input[type="radio"]:checked + .party-container::after {
+    top: 253px;
+    left: 8px;
+    width: 149px;
+    background: #e28c22;
+    height: 47px;
+    border-bottom: none;
+}
+
+.unavailable-party {
+    filter: brightness(0.4);
+    cursor: default;
 }

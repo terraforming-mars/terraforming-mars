@@ -28,14 +28,14 @@ export class PharmacyUnion extends Card implements CorporationCard {
         renderData: CardRenderer.builder((b) => {
           b.megacredits(54).cards(1).secondaryTag(Tags.SCIENCE);
           // blank space after MC is on purpose
-          b.text('(You start with 54 MC . When this corporation is revealed, draw a Science card.)', CardRenderItemSize.TINY, false, false);
+          b.text('(You start with 54 MC . Draw a Science card.)', CardRenderItemSize.TINY, false, false);
           b.corpBox('effect', (ce) => {
             ce.vSpace(CardRenderItemSize.LARGE);
             ce.effect(undefined, (eb) => {
               eb.microbes(1).any.played.startEffect.disease().megacredits(-4);
             });
             ce.vSpace();
-            ce.effect('When ANY microbe tag is played, add a disease here and lose 4 MC. When you play a science tag, remove a disease here and gain 1 TR OR if there are no diseases here, you may turn this card face down to gain 3 TR', (eb) => {
+            ce.effect('When ANY microbe tag is played, add a disease here and lose 4 MC or as much as possible. When you play a science tag, remove a disease here and gain 1 TR OR if there are no diseases here, you MAY put this card face down in your EVENTS PILE to gain 3 TR.', (eb) => {
               eb.science(1).played.startEffect.minus().disease();
               eb.tr(1, CardRenderItemSize.SMALL).slash().tr(3, CardRenderItemSize.SMALL).digit;
             });

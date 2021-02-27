@@ -41,7 +41,7 @@ describe('TempestConsultancy', () => {
     card.action(player);
     const action = player.game.deferredActions.pop() as SendDelegateToArea;
     const options = action.execute();
-    options.options[0].cb();
+    options.cb(marsFirst.name);
 
     expect(turmoil.getDelegates(player.id)).eq(5);
     expect(marsFirst.getDelegates(player.id)).eq(1);
@@ -56,7 +56,7 @@ describe('TempestConsultancy', () => {
     card.action(player);
     const action = player.game.deferredActions.pop() as SendDelegateToArea;
     const options = action.execute();
-    options.options[0].cb();
+    options.cb(marsFirst.name);
 
     expect(turmoil.getDelegates(player.id)).eq(3);
     expect(marsFirst.getDelegates(player.id)).eq(3);

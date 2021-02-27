@@ -3,7 +3,7 @@ import {Player} from '../../../src/Player';
 import {setCustomGameOptions, TestPlayers} from '../../TestingUtils';
 import {LunaPoliticalInstitute} from '../../../src/cards/moon/LunaPoliticalInstitute';
 import {expect} from 'chai';
-import {OrOptions} from '../../../src/inputs/OrOptions';
+import {SelectPartyToSendDelegate} from '../../../src/inputs/SelectPartyToSendDelegate';
 import {PartyName} from '../../../src/turmoil/parties/PartyName';
 import {Turmoil} from '../../../src/turmoil/Turmoil';
 
@@ -46,8 +46,8 @@ describe('LunaPoliticalInstitute', () => {
 
     expect(marsFirst.delegates.filter((d) => d === player.id)).has.lengthOf(0);
 
-    const orOptions = game.deferredActions.peek()!.execute() as OrOptions;
-    orOptions.options[0].cb();
+    const selectParty = game.deferredActions.peek()!.execute() as SelectPartyToSendDelegate;
+    selectParty.cb(PartyName.MARS);
 
     expect(marsFirst.delegates.filter((d) => d === player.id)).has.lengthOf(1);
   });

@@ -17,6 +17,7 @@ export class ResearchOutpost extends Card implements IProjectCard {
       tags: [Tags.SCIENCE, Tags.CITY, Tags.BUILDING],
       cost: 18,
 
+      cardDiscount: {amount: 1},
       metadata: {
         cardNumber: '020',
         renderData: CardRenderer.builder((b) => {
@@ -39,6 +40,8 @@ export class ResearchOutpost extends Card implements IProjectCard {
   public canPlay(player: Player): boolean {
     return this.getAvailableSpaces(player).length > 0;
   }
+
+
   public getCardDiscount() {
     return 1;
   }

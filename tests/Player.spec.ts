@@ -178,7 +178,7 @@ describe('Player', function() {
       cardCost: 3,
       cardDiscount: 7,
       fleetSize: 99,
-      tradesThisGeneration: 100,
+      tradesThisTurn: 100,
       colonyTradeOffset: 101,
       colonyTradeDiscount: 102,
       colonyVictoryPoints: 104,

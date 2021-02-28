@@ -20,7 +20,7 @@ export class AIControlledMineNetwork extends Card {
         description: 'Requires Logistic Rate to be 2 or higher. Raise Logistic Rate 1 step',
         cardNumber: 'M32',
         renderData: CardRenderer.builder((b) => {
-          b.moonLogisticsRate(1);
+          b.moonLogisticsRate();
         }),
       },
     });

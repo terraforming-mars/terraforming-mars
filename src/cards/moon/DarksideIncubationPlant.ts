@@ -31,7 +31,7 @@ export class DarksideIncubationPlant extends MoonCard implements IActionCard, IP
           }).br;
           b.or().br;
           b.action('Spend 2 microbes to raise Colony Rate 1 step.', (eb) => {
-            eb.microbes(2).startAction.moonColonyRate(1);
+            eb.microbes(2).startAction.moonColonyRate();
           });
 
           b.br;

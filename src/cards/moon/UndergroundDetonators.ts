@@ -20,7 +20,7 @@ export class UndergroundDetonators extends Card {
         renderData: CardRenderer.builder((b) => {
           b.steel(1).titanium(1);
           b.br;
-          b.moonMiningRate(1);
+          b.moonMiningRate();
         }),
       },
     });

@@ -23,7 +23,7 @@ export class UndermoonDrugLordsNetwork extends Card implements IProjectCard {
         renderData: CardRenderer.builder((b) => {
           b.production((pb) => {
             pb.megacredits(1);
-          }).slash().moonColonyRate(2);
+          }).slash().moonColonyRate({amount: 2});
         }),
       },
     });

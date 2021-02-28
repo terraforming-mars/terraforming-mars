@@ -141,23 +141,23 @@ export const CardCorporationLogo = Vue.component('CardCorporationLogo', {
         <div class="mons2">INSURANCE</div>
         </div>`;
       case CardName.NANOTECH_INDUSTRIES:
-        return '<div class="card-nanotech-industries-logo">NANOTECH INDUSTRIES</div>';
+        return '<div class="card-nanotech-industries-logo"></div>';
       case CardName.TEMPEST_CONSULTANCY:
-        return '<div class="card-tempest-consultancy-logo">TEMPEST CONSULTANCY</div>';
+        return '<div class="card-tempest-consultancy-logo"></div>';
       case CardName.THE_DARKSIDE_OF_THE_MOON_SYNDICATE:
         return '<div class="card-the-darkside-of-the-moon-syndicate-logo">The Darkside of the Moon Syndicate</div>';
       case CardName.LUNA_HYPERLOOP_CORPORATION:
-        return '<div class="card-luna-hyperloop-corporation-logo">Luna Hyperloop Corporation</div>';
+        return '<div class="card-luna-hyperloop-corporation-logo"></div>';
       case CardName.CRESCENT_RESEARCH_ASSOCIATION:
-        return '<div class="card-crescent-research-association-logo">Crescent Research Association</div>';
+        return '<div class="card-crescent-research-association-logo"></div>';
       case CardName.LUNA_FIRST_INCORPORATED:
-        return '<div class="card-luna-first-incorporated-logo">Luna First Incorporated</div>';
+        return '<div class="card-luna-first-incorporated-logo"></div>';
       case CardName.THE_GRAND_LUNA_CAPITAL_GROUP:
-        return '<div class="card-the-grand-luna-capital-group-logo">The Grand Luna Capital Group</div>';
+        return '<div class="card-the-grand-luna-capital-group-logo"></div>';
       case CardName.INTRAGEN_SANCTUARY_HEADQUARTERS:
-        return '<div class="card-intragen-sanctuary-headquarters-logo">Intragen Sanctuary Headquarters</div>';
+        return '<div class="card-intragen-sanctuary-headquarters-logo"></div>';
       case CardName.THE_ARCHAIC_FOUNDATION_INSTITUTE:
-        return '<div class="card-the-archaic-foundation-institute-logo">The Archaic Foundation Institute</div>';
+        return '<div class="card-the-archaic-foundation-institute-logo"></div>';
       }
       return '';
     },

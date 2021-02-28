@@ -27,7 +27,7 @@ export class HE3ProductionQuotas extends Card implements IProjectCard {
         renderData: CardRenderer.builder((b) => {
           b.minus().steel(1).slash().tile(TileType.MOON_MINE, false).asterix().br;
           b.text('=>').heat(4).br;
-          b.moonMiningRate(1);
+          b.moonMiningRate();
         }),
       },
     });

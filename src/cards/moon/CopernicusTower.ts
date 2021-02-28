@@ -32,7 +32,7 @@ export class CopernicusTower extends Card implements IActionCard, IProjectCard {
             eb.empty().startAction.science(1);
           }).br;
           b.or().br;
-          b.action('Action: Spend 1 Science resource here to raise your TR 1 step.', (eb) => {
+          b.action('Spend 1 Science resource here to raise your TR 1 step.', (eb) => {
             eb.science(1).startAction.production((pb) => pb.megacredits(1));
           });
         }),

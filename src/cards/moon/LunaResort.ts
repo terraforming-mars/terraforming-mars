@@ -27,7 +27,7 @@ export class LunaResort extends MoonCard {
           b.minus().titanium(2).production((pb) => {
             pb.minus().energy(1).nbsp.megacredits(3);
           }).br;
-          b.moonColonyRate(1);
+          b.moonColonyRate();
         }),
       },
     }, {

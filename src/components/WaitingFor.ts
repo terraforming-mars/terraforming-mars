@@ -86,8 +86,7 @@ export const WaitingFor = Vue.component('waiting-for', {
         const xhr = new XMLHttpRequest();
         xhr.open('GET', '/api/waitingfor' + window.location.search + '&prev-game-age=' + this.player.gameAge.toString());
         xhr.onerror = function() {
-          console.warn('unable to reach server waiting for');
-          vueApp.waitForUpdate();
+          root.showAlert('Unable to reach the server. The server may be restarting or down for maintenance.', () => vueApp.waitForUpdate());
         };
         xhr.onload = () => {
           if (xhr.status === 200) {
@@ -116,7 +115,8 @@ export const WaitingFor = Vue.component('waiting-for', {
               return;
             }
           } else {
-            console.warn(`unexpected response waiting for: ${xhr.status}`);
+            root.showAlert(`Received unexpected response from server (${xhr.status}). Server is most likely restarting.`, () => vueApp.waitForUpdate());
+            return;
           }
           vueApp.waitForUpdate();
         };
@@ -139,6 +139,7 @@ export const WaitingFor = Vue.component('waiting-for', {
     const input = new PlayerInputFactory().getPlayerInput(createElement, this.players, this.player, this.waitingfor, (out: Array<Array<string>>) => {
       const xhr = new XMLHttpRequest();
       const root = this.$root as unknown as typeof mainAppSettings.data;
+      const showAlert = (this.$root as unknown as typeof mainAppSettings.methods).showAlert;
       if (root.isServerSideRequestInProgress) {
         console.warn('Server request in progress');
         return;
@@ -157,16 +158,9 @@ export const WaitingFor = Vue.component('waiting-for', {
             (window).location = (window).location;
           }
         } else if (xhr.status === 400 && xhr.responseType === 'json') {
-          const element: HTMLElement | null = document.getElementById('dialog-default');
-          const message: HTMLElement | null = document.getElementById('dialog-default-message');
-          if (message !== null && element !== null && (element as HTMLDialogElement).showModal !== undefined) {
-            message.innerHTML = xhr.response.message;
-            (element as HTMLDialogElement).showModal();
-          } else {
-            alert(xhr.response.message);
-          }
+          showAlert(xhr.response.message);
         } else {
-          alert('Error sending input');
+          showAlert('Unexpected response from server. Please try again.');
         }
         root.isServerSideRequestInProgress = false;
       };

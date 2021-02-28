@@ -1,4 +1,5 @@
 {
+
   "You start with 1 titanium production and 42 MC.":"Comienza con 1 en producción de titanio y 42 M€.",
   "Effect: Each time any Jovian tag is put into play, including this, increase your MC production 1 step.":"Efecto: cada vez que se juegue una carta Joviana, incluyendo esta, aumenta tu producción de M€ en 1.",
 
@@ -41,6 +42,9 @@
   "You start with 45MC. As your first action, place a colony.":"Comienza con 45 M€. Como primera acción coloca una colonia.",
   "Effect: When any colony is placed, including this, raise your MC production 1 step.":"Efecto: al ser colocada una colonia, incluyendo esta, aumenta la producción de M€ 1 nivel.",
 
+  "THARSIS": "THARSIS",
+  "REPUBLIC": "REPÚBLICA",
+  "Tharsis Republic": "República Tharsis",
   "You start with 40 MC. As your first action in the game,place a city tile.":"Comienza con 40 M€. Como primera acción en el juego, coloca una loseta de ciudad.",
   "Effect: When any city tile is placed ON MARS, increase your MC production 1 step. When you place a city tile, gain 3 MC.":"Efecto: al colocar cualquier loseta de ciudad sobre MARTE, aumenta tu producción de M€ en 1. Al colocar una loseta de ciudad, obtén 3 M€.",
 

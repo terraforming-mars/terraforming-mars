@@ -8,17 +8,21 @@ import {TileType} from '../TileType';
 import {MoonSpaces} from './MoonSpaces';
 
 class Space implements ISpace {
-  public readonly bonus: Array<SpaceBonus> = [];
-  constructor(public id: string, public spaceType: SpaceType, public x: number, public y: number) { }
+  constructor(
+    public id: string,
+    public spaceType: SpaceType,
+    public x: number,
+    public y: number,
+    public bonus: Array<SpaceBonus>) { }
 
-  public static mine(id: string, x: number, y: number) {
-    return new Space(id, SpaceType.LUNAR_MINE, x, y);
+  public static mine(id: string, x: number, y: number, bonus: Array<SpaceBonus>) {
+    return new Space(id, SpaceType.LUNAR_MINE, x, y, bonus);
   }
-  public static surface(id: string, x: number, y: number) {
-    return new Space(id, SpaceType.LAND, x, y);
+  public static surface(id: string, x: number, y: number, bonus: Array<SpaceBonus>) {
+    return new Space(id, SpaceType.LAND, x, y, bonus);
   }
   public static colony(id: string) {
-    return new Space(id, SpaceType.COLONY, 0, 0);
+    return new Space(id, SpaceType.COLONY, 0, 0, []);
   }
 }
 
@@ -49,43 +53,64 @@ export class MoonBoard extends Board {
   }
 
   public static newInstance(): MoonBoard {
-    const spaces: Array<ISpace> = [];
+    const STEEL = SpaceBonus.STEEL;
+    const DRAW_CARD = SpaceBonus.DRAW_CARD;
+    const TITANIUM = SpaceBonus.TITANIUM;
 
-    spaces.push(Space.colony(MoonSpaces.LUNA_TRADE_STATION));
-    // y = 0
-    spaces.push(Space.mine('m02', 2, 0));
-    spaces.push(Space.surface('m03', 3, 0));
-    spaces.push(Space.surface('m04', 4, 0));
 
-    // y = 1
-    spaces.push(Space.surface('m05', 1, 1));
-    spaces.push(Space.surface('m06', 2, 1));
-    spaces.push(Space.mine('m07', 3, 1));
-    spaces.push(Space.mine('m08', 4, 1));
-
-    // y = 2
-    spaces.push(Space.surface('m09', 0, 2));
-    spaces.push(Space.surface('m10', 1, 2));
-    spaces.push(Space.surface('m11', 2, 2));
-    spaces.push(Space.mine('m12', 3, 2));
-    spaces.push(Space.mine('m13', 4, 2));
-
-    // y = 3
-    spaces.push(Space.mine('m14', 1, 3));
-    spaces.push(Space.mine('m15', 2, 3));
-    spaces.push(Space.surface('m16', 3, 3));
-    spaces.push(Space.mine('m17', 4, 3));
-    // y = 4
-    spaces.push(Space.surface('m18', 2, 4));
-    spaces.push(Space.surface('m19', 3, 4));
-    spaces.push(Space.surface('m20', 4, 4));
-
-    spaces.push(Space.colony(MoonSpaces.MOMENTUM_VIRIUM));
-    return new MoonBoard(spaces);
+    const b = new Builder();
+    b.colony(); // Luna Trade Station
+    b.row(2).land().land(STEEL, DRAW_CARD).land().mine(TITANIUM);
+    b.row(1).mine(TITANIUM, TITANIUM).mine(/* Mare Imbrium */).land(STEEL).land().land();
+    b.row(0).mine().land(STEEL).land(STEEL, TITANIUM).mine(/* Mare Serenatis*/).mine(TITANIUM).land(STEEL, STEEL);
+    b.row(1).land(STEEL).land().land().mine(TITANIUM).mine(TITANIUM);
+    b.row(0).land().mine(TITANIUM).mine(/* Mare Nubium */).land().mine(/* Mare Nectaris */).land(STEEL);
+    b.row(1).land().land(STEEL).land(STEEL).land(DRAW_CARD, DRAW_CARD).land(STEEL);
+    b.row(2).land(DRAW_CARD, DRAW_CARD).mine(TITANIUM).mine(TITANIUM, TITANIUM).land();
+    b.colony();
+    return new MoonBoard(b.spaces);
   }
 
   public static deserialize(board: SerializedBoard, players: Array<Player>): MoonBoard {
     const spaces = Board.deserializeSpaces(board.spaces, players);
     return new MoonBoard(spaces);
+  }
+}
+
+class Builder {
+  y: number = -1;
+  x: number = 0;
+  spaces: Array<ISpace> = [];
+  private idx: number = 0;
+
+  public row(startX: number): Row {
+    this.y++;
+    this.x = startX;
+    return new Row(this);
+  }
+  public colony() {
+    this.spaces.push(Space.colony(this.nextId()));
+  }
+  public nextId(): string {
+    this.idx++;
+    const strId = this.idx.toString().padStart(2, '0');
+    return 'm' + strId;
+  }
+}
+
+class Row {
+  constructor(private builder: Builder) {
+  }
+
+  land(...bonuses: SpaceBonus[]): Row {
+    const space = Space.surface(this.builder.nextId(), this.builder.x++, this.builder.y, bonuses);
+    this.builder.spaces.push(space);
+    return this;
+  }
+
+  mine(...bonuses: SpaceBonus[]): Row {
+    const space = Space.mine(this.builder.nextId(), this.builder.x++, this.builder.y, bonuses);
+    this.builder.spaces.push(space);
+    return this;
   }
 }

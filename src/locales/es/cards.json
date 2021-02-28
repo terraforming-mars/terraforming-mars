@@ -94,6 +94,8 @@
     "Requires -12 C or warmer. Add 1 Animal TO ANY ANIMAL CARD. Gain 3 Plants. Increase your MC production 2 steps.": "Requiere -12 C o más cálido. Añade 1 animal a CUALQUIER CARTA DE ANIMAL. Obtén 3 plantas. Incrementa tu producción de M€ 2 niveles.",
 
     "Interstellar Colony Ship": "Nave Colonia Interestelar",
+    "Requires that you have 5 Science tags.": "Requiere tener 5 símbolos de ciencia.",
+
 
     "Security Fleet": "Flota de Seguridad",
     "Action: Spend 1 titanium to add 1 fighter resource to this card.": "Acción: gasta 1 de titanio para añadir 1 recurso caza espacial a esta carta.",
@@ -157,7 +159,7 @@
     "Decrease your MC production 2 steps and increase your Energy production 3 steps.": "Reduce tu producción de M€ en 2 e incrementa tu producción de energía 3 niveles.",
 
     "Lightning Harvest": "Recolección de Rayos",
-    "Requires 3 Science tags. Increase your Energy production and your MC production up one step each.": "Requiere 3 símbolos de ciencia. Aumenta tu producción de energía y tu producción de M€ 1 nivel cada una.",
+    "Requires 3 Science tags. Increase your Energy production and your MC production one step each.": "Requiere 3 símbolos de ciencia. Aumenta tu producción de energía y tu producción de M€ 1 nivel cada una.",
 
     "Algae": "Algas",
     "Requires 5 ocean tiles. Gain 1 Plant and increase your Plant production 2 steps.": "Requiere 5 losetas de océano. Obtén 1 planta e incrementa tu producción de plantas 2 niveles.",
@@ -237,7 +239,7 @@
     "Effect: When you play a card, you pay 2 MC less for it.": "Efecto: al jugar una carta, paga 2 M€ menos por ella.",
 
     "Advanced Alloys": "Aleaciones Avanzadas",
-    "Effect: Each titanium you have is worth 1 MC extra. Each steel you have is worth 1 MC extra.": "Efecto: cada titanio que tengas vale 1 M€ adicional.", 
+    "Effect: Each titanium you have is worth 1 MC extra.": "Efecto: cada titanio que tengas vale 1 M€ adicional.", 
     "Effect: Each steel you have is worth 1 MC extra.": "Efecto: Cada acero que tengas vale 1 M€ adicional.",
 
     "Birds": "Aves",
@@ -248,7 +250,7 @@
     "Effect: When you play a Science tag, including this, you may discard a card from hand to draw a card.": "Efecto: por cada símbolo de ciencia que juegues, incluyendo este, puedes descartar 1 carta de tu mano para coger otra.",
 
     "Viral Enhancers": "Potenciadores Virales",
-    "Effect: When you play a plant, microbe, or an animal tag, including this, gain 1 plant or add 1 resource to THAT CARD.": "Efecto: al jugar un símbolo de planta, microbio o animal, incluyendo este, obtienes 1 planta o añade un recurso a DICHA CARTA.",
+    "Effect: When you play a Plant, Microbe, or an Animal tag, including this, gain 1 plant or add 1 resource to THAT CARD.": "Efecto: al jugar un símbolo de planta, microbio o animal, incluyendo este, obtienes 1 planta o añade un recurso a DICHA CARTA.",
 
     "Towing A Comet": "Remolque de Cometa",
     "Gain 2 plants. Raise oxygen level 1 step and place an ocean tile.": "Obtén 2 plantas. Aumenta el nivel de oxígeno 1 nivel y coloca una loseta de océano.",
@@ -270,7 +272,7 @@
 
     "Ganymede Colony": "Colonia Ganímedes",
     "Place a city tile ON THE RESERVED AREA.": "Coloca una loseta de ciudad EN EL ÁREA RESERVADA para la colonia Ganímenedes.",
-    "1 VP per Jovian tag you have.": " 1 PV por cada símbolo Joviano que tengas.",
+    "1 VP per Jovian tag you have.": " 1 PV por cada símbolo Joviano que poseas.",
 
     "Callisto Penal Mines": "Prisión Minera de Calisto",
     "Increase your MC production 3 steps.": "Aumenta tu producción de M€ 3 niveles.",
@@ -302,8 +304,8 @@
     "Gene Repair": "Reparación Genética",
     "Requires 3 science tags. Increase your MC production 2 steps.": "Requiere 3 símbolos de ciencia. Incrementa tu producción de M€ 2 niveles.",
 
-    "IO Mining Industries": "Industrias Mineras ÍO",
-    "Increase your titanium production 2 steps and your MC production 2 steps. 1 VP per Jovian tag you have.": "Aumenta tu producción de titanio y tu producción de M€ 2 niveles cada una. 1 PV por cada símbolo Joviano que poseas.",
+    "Io Mining Industries": "Industrias Mineras IO",
+    "Increase your titanium production 2 steps and your MC production 2 steps.": "Aumenta tu producción de titanio y tu producción de M€ 2 niveles cada una.",
 
     "Bushes": "Arbustos",
     "Requires -10 C or warmer. Increase your plant production 2 steps. Gain 2 plants.": "Requiere -10°C o más cálido. Aumenta tu producción de plantas 2 niveles. Obtén 2 plantas.",
@@ -569,7 +571,7 @@
     "(Increase your MC production 2 steps. Place on a greenery tile ON AN AREA RESERVED FOR OCEAN, disregarding normal placement restrictions, and increase oxygen 1 step.)": "Aumenta tu producción de M€ 2 niveles. Coloca una loseta de vegetación en UN ÁREA RESERVADA PARA OCÉANO, sin tener en cuenta las restricciones normales de colocación, e incrementa el oxígeno 1 nivel.",
 
     "Satellites": "Satélites",
-    "Increase your MC production 1 step for each space tag you have, including this one.": "Aumenta tu producción de M€ 1 nivel por cada símbolo de espacio que poseas, incluyendo este.",
+    "Increase your MC production 1 step for each space tag your have, including this one.": "Aumenta tu producción de M€ 1 nivel por cada símbolo de espacio que poseas, incluyendo este.",
 
     "Noctis Farming": "Cultivos en Noctis",
     "Requires -20 C or warmer. Increase your MC production 1 step and gain 2 Plants.": "Requiere -20°C o más cálido. Aumenta tu producción de M€ 1 nivel y obtén 2 plantas.",

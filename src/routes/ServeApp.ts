@@ -1,0 +1,14 @@
+import * as http from 'http';
+import {Handler} from './Handler';
+import {ServeAsset} from './ServeAsset';
+
+export class ServeApp extends Handler {
+  public static INSTANCE: ServeApp = new ServeApp();
+  private constructor() {
+    super();
+  }
+  public get(req: http.IncomingMessage, res: http.ServerResponse, ctx: IContext): void {
+    req.url = '/assets/index.html';
+    ServeAsset.INSTANCE.get(req, res, ctx);
+  }
+}

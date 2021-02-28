@@ -93,10 +93,7 @@ class Builder {
   }
   public nextId(): string {
     this.idx++;
-    let strId = this.idx.toString();
-    if (this.idx < 10) {
-      strId = '0'+strId;
-    }
+    const strId = this.idx.toString().padStart(2, '0');
     return 'm' + strId;
   }
 }

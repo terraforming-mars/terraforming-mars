@@ -440,7 +440,6 @@ export class Turmoil implements ISerializable<SerializedTurmoil> {
 
       turmoil.delegateReserve = d.delegateReserve;
 
-      // TODO(kberg): remove this test by 2021-02-01
       turmoil.politicalAgendasData = PoliticalAgendas.deserialize(d.politicalAgendasData);
 
       d.parties.forEach((sp) => {
@@ -454,21 +453,6 @@ export class Turmoil implements ISerializable<SerializedTurmoil> {
 
       turmoil.playersInfluenceBonus = new Map<string, number>(d.playersInfluenceBonus);
 
-      function globalEventName(object: any): string {
-        function instanceOfIGlobalEvent(object: any): object is IGlobalEvent {
-          try {
-            return 'revealedDelegate' in object;
-          } catch (typeError) {
-            return false;
-          }
-        }
-        if (instanceOfIGlobalEvent(object)) {
-          return object.name;
-        } else {
-          return object;
-        }
-      }
-
       turmoil.playersInfluenceBonus = new Map<string, number>(d.playersInfluenceBonus);
 
       if (d.distantGlobalEvent) {
@@ -478,7 +462,7 @@ export class Turmoil implements ISerializable<SerializedTurmoil> {
         turmoil.comingGlobalEvent = getGlobalEventByName(d.comingGlobalEvent);
       }
       if (d.currentGlobalEvent) {
-        turmoil.currentGlobalEvent = getGlobalEventByName(globalEventName(d.currentGlobalEvent));
+        turmoil.currentGlobalEvent = getGlobalEventByName(d.currentGlobalEvent);
       }
 
       return turmoil;

@@ -1836,7 +1836,7 @@ export class Player implements ISerializable<SerializedPlayer> {
         sendDelegate = new SendDelegateToArea(this, 'Send a delegate in an area (from lobby)');
       } else if (this.isCorporation(CardName.INCITE) && this.canAfford(3) && this.game.turmoil.getDelegates(this.id) > 0) {
         sendDelegate = new SendDelegateToArea(this, 'Send a delegate in an area (3 MC)', {cost: 3});
-      } else if (this.canAfford(5) && this.game.turmoil!.getDelegates(this.id) > 0) {
+      } else if (this.canAfford(5) && this.game.turmoil.getDelegates(this.id) > 0) {
         sendDelegate = new SendDelegateToArea(this, 'Send a delegate in an area (5 MC)', {cost: 5});
       }
       if (sendDelegate) {

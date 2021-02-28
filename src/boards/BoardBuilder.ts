@@ -106,10 +106,11 @@ export class BoardBuilder {
     }
 
     private newTile(idx: number, pos_x: number, pos_y: number, is_ocean: boolean, bonus: Array<SpaceBonus>) {
+      const id = idx.toString().padStart(2, '0');
       if (is_ocean) {
-        return Space.ocean(idx, pos_x, pos_y, bonus);
+        return Space.ocean(id, pos_x, pos_y, bonus);
       } else {
-        return Space.land(idx, pos_x, pos_y, bonus);
+        return Space.land(id, pos_x, pos_y, bonus);
       }
     }
 }
@@ -122,18 +123,11 @@ class Space implements ISpace {
     return new Space(id, SpaceType.COLONY, [], -1, -1);
   }
 
-  private static spaceId(id: number): SpaceId {
-    let strId = id.toString();
-    if (id < 10) {
-      strId = '0'+strId;
-    }
-    return strId;
-  }
-  static land(id: number, x: number, y: number, bonus: Array<SpaceBonus> = []) {
-    return new Space(this.spaceId(id), SpaceType.LAND, bonus, x, y);
+  static land(id: string, x: number, y: number, bonus: Array<SpaceBonus> = []) {
+    return new Space(id, SpaceType.LAND, bonus, x, y);
   }
 
-  static ocean(id: number, x: number, y: number, bonus: Array<SpaceBonus> = []) {
-    return new Space(this.spaceId(id), SpaceType.OCEAN, bonus, x, y);
+  static ocean(id: string, x: number, y: number, bonus: Array<SpaceBonus> = []) {
+    return new Space(id, SpaceType.OCEAN, bonus, x, y);
   }
 }

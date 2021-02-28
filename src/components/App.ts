@@ -19,7 +19,7 @@ const dialogPolyfill = require('dialog-polyfill');
 
 interface MainAppData {
     screen: 'create-game-form' |
-            'debug-ui' |
+            'cards' |
             'empty' |
             'game-home' |
             'games-overview' |
@@ -177,14 +177,13 @@ export const mainAppSettings = {
     } else if (currentPathname === '/games-overview') {
       app.screen = 'games-overview';
     } else if (
-      currentPathname === '/new-game' ||
-            currentPathname === '/solo'
+      currentPathname === '/new-game' || currentPathname === '/solo'
     ) {
       app.screen = 'create-game-form';
     } else if (currentPathname === '/load') {
       app.screen = 'load';
-    } else if (currentPathname === '/debug-ui') {
-      app.screen = 'debug-ui';
+    } else if (currentPathname === '/debug-ui' || currentPathname === '/cards') {
+      app.screen = 'cards';
     } else if (currentPathname === '/help') {
       app.screen = 'help';
     } else {

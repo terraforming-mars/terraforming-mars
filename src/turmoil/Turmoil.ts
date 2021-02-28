@@ -236,7 +236,7 @@ export class Turmoil implements ISerializable<SerializedTurmoil> {
       this.lobby = new Set<string>();
 
       game.getPlayers().forEach((player) => {
-        if (this.getDelegates(player.id) > 0) {
+        if (this.getDelegatesInReserve(player.id) > 0) {
           const index = this.delegateReserve.indexOf(player.id);
           if (index > -1) {
             this.delegateReserve.splice(index, 1);
@@ -383,15 +383,14 @@ export class Turmoil implements ISerializable<SerializedTurmoil> {
     }
 
     // Return number of delegates in reserve
-    // TODO(kberg): rename to getDelegatesInReserve()
-    public getDelegates(playerId: PlayerId | NeutralPlayer): number {
+    public getDelegatesInReserve(playerId: PlayerId | NeutralPlayer): number {
       const delegates = this.delegateReserve.filter((p) => p === playerId).length;
       return delegates;
     }
 
     // Check if player has delegates available
     public hasAvailableDelegates(playerId: PlayerId | NeutralPlayer): boolean {
-      return this.getDelegates(playerId) > 0;
+      return this.getDelegatesInReserve(playerId) > 0;
     }
 
     // Get Victory Points

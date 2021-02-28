@@ -83,7 +83,7 @@ export const MoonBoard = Vue.component('moonboard', {
   template: `
     <div class="board-cont moon-board" id="moon_board">
       <svg id="moon_board_legend" height="550" width="630" class="board-legend">
-        <g id="mare_imbrium" transform="translate(240, 40)">
+        <g id="mare_imbrium" transform="translate(250, 40)">
           <text class="board-caption">
             <tspan dy="15">Mare</tspan>
             <tspan x="12" dy="12">Imbrium</tspan>
@@ -92,7 +92,7 @@ export const MoonBoard = Vue.component('moonboard', {
           <text x="30" y="107" class="board-caption board_caption--black">●</text>
         </g>
 
-        <g id="mare_sereitatis" transform="translate(480, 140)">
+        <g id="mare_sereitatis" transform="translate(485, 140)">
           <text class="board-caption">
               <tspan dy="15">Mare</tspan>
               <tspan x="4" dy="12">Serenitatis</tspan>
@@ -102,13 +102,13 @@ export const MoonBoard = Vue.component('moonboard', {
         </g>
 
 
-        <g id="mare_nubium" transform="translate(160, 325)">
+        <g id="mare_nubium" transform="translate(195, 350)">
           <text class="board-caption">
             <tspan dy="15">Mare</tspan>
             <tspan x="-2" dy="12">Nubium</tspan>
           </text>
-          <line x1="29" y1="14" x2="140" y2="-35" class="board-line"></line>
-          <text x="138" y="-33" class="board-caption board_caption--black">●</text>
+          <line x1="29" y1="14" x2="115" y2="-64" class="board-line"></line>
+          <text x="113" y="-62" class="board-caption board_caption--black">●</text>
         </g>
 
         <g id="mare_nectaris" transform="translate(450, 300)">
@@ -116,8 +116,8 @@ export const MoonBoard = Vue.component('moonboard', {
             <tspan dy="15">Mare</tspan>
             <tspan dy="12" x="48">Nectaris</tspan>
           </text>
-          <line x1="-49" y1="-12" x2="45" y2="15" class="board-line"></line>
-          <text x="-49" y="-9" class="board-caption board_caption--black">&#x25cf;</text>
+          <line x1="-39" y1="-12" x2="45" y2="15" class="board-line"></line>
+          <text x="-39" y="-9" class="board-caption board_caption--black">&#x25cf;</text>
         </g>
       </svg>
 

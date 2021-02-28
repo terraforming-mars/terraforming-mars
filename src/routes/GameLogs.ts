@@ -5,13 +5,10 @@ import * as zlib from 'zlib';
 
 import {GameLoader} from '../database/GameLoader';
 import {LogMessage} from '../LogMessage';
+import {IContext} from './IHandler';
 import {Route} from './Route';
 
-export class GameLogs extends Route {
-  public canHandle(url: string): boolean {
-    return url.startsWith('/api/game/logs?');
-  }
-
+export class GameLogs {
   public static getLogMessageIndexByGen(data: Array<LogMessage>, generation: number, startIndex: number = 0): number | undefined {
     let counter = 0;
     for (let i = startIndex; i < data.length; i++) {
@@ -30,10 +27,9 @@ export class GameLogs extends Route {
     return undefined;
   }
 
-  public handle(req: http.IncomingMessage, res: http.ServerResponse): void {
+  public handle(req: http.IncomingMessage, res: http.ServerResponse, ctx: IContext): void {
     if (req.url === undefined) {
-      console.warn('url not defined');
-      this.notFound(req, res);
+      ctx.route.notFound(req, res, 'url not defined');
       return;
     }
 
@@ -42,14 +38,13 @@ export class GameLogs extends Route {
     const id = params.id;
 
     if (id === undefined || Array.isArray(id)) {
-      this.badRequest(req, res);
+      ctx.route.badRequest(req, res, 'invalid playerid');
       return;
     }
 
     GameLoader.getInstance().getByPlayerId(id, (game) => {
       if (game === undefined) {
-        console.warn('game not found');
-        this.notFound(req, res);
+        ctx.route.notFound(req, res, 'game not found');
         return;
       }
 
@@ -64,7 +59,7 @@ export class GameLogs extends Route {
           },
         }, (err, compressed) => {
           if (err !== null) {
-            this.internalServerError(req, res, err);
+            ctx.route.internalServerError(req, res, err);
             return;
           }
           res.setHeader('Content-Encoding', 'br');
@@ -74,7 +69,7 @@ export class GameLogs extends Route {
       } else if (Route.supportsEncoding(req, 'gzip')) {
         zlib.gzip(data, (err, compressed) => {
           if (err !== null) {
-            this.internalServerError(req, res, err);
+            ctx.route.internalServerError(req, res, err);
             return;
           }
           res.setHeader('Content-Encoding', 'gzip');

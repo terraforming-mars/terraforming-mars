@@ -56,6 +56,10 @@ describe('ApiGame', function() {
       {
         'activePlayer': 'black',
         'id': 'validId',
+<<<<<<< HEAD
+=======
+        'lastSoloGeneration': 14,
+>>>>>>> main
         'phase': 'research',
         'players': [
           {

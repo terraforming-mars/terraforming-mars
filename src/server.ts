@@ -23,8 +23,8 @@ import {Route} from './routes/Route';
 import {Database} from './database/Database';
 import {PlayerInput} from './routes/PlayerInput';
 import {GameLoader} from './database/GameLoader';
-import {ServeAsset} from './routes/ServeAsset';
 import {ServeApp} from './routes/ServeApp';
+import {ServeAsset} from './routes/ServeAsset';
 
 const serverId = process.env.SERVER_ID || generateRandomId();
 const route = new Route();

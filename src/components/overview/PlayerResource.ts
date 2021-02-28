@@ -58,12 +58,12 @@ export const PlayerResource = Vue.component('player-resource', {
       return this.type === Resources.PLANTS && this.plantsAreProtected;
     },
     showResourceValue: function(): boolean {
-      const tutorialModeOn = PreferencesManager.loadValue('tutorial_mode') === '1';
+      const learnerModeOn = PreferencesManager.loadValue('learner_mode') === '1';
       switch (this.type) {
       case Resources.STEEL:
-        return tutorialModeOn || this.steelValue > DEFAULT_STEEL_VALUE;
+        return learnerModeOn || this.steelValue > DEFAULT_STEEL_VALUE;
       case Resources.TITANIUM:
-        return tutorialModeOn || this.titaniumValue > DEFAULT_TITANIUM_VALUE;
+        return learnerModeOn || this.titaniumValue > DEFAULT_TITANIUM_VALUE;
       case Resources.HEAT:
         return this.canUseHeatAsMegaCredits;
       default:

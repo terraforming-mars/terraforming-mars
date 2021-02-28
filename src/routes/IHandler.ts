@@ -1,4 +1,5 @@
 import * as http from 'http';
+import {IGameLoader} from '../database/IGameLoader';
 import {Route} from './Route';
 
 export interface IHandler {
@@ -9,4 +10,5 @@ export interface IContext {
   url: URL,
   route: Route,
   serverId: string,
+  gameLoader: IGameLoader,
 };

@@ -1,6 +1,7 @@
 import {Database} from './Database';
 import {Game, GameId} from '../Game';
 import {PlayerId} from '../Player';
+import {IGameLoader} from './IGameLoader';
 
 type LoadCallback = (game: Game | undefined) => void;
 
@@ -23,7 +24,7 @@ enum State {
  * Loads games from javascript memory or database
  * Loads games from database sequentially as needed
  */
-export class GameLoader {
+export class GameLoader implements IGameLoader {
   private state = State.WAITING;
 
   // indicates if game is being loaded from database
@@ -46,7 +47,7 @@ export class GameLoader {
 
   private constructor() {}
 
-  public static getInstance(): GameLoader {
+  public static getInstance(): IGameLoader {
     if (GameLoader.instance === undefined) {
       GameLoader.instance = new GameLoader();
     }
@@ -64,12 +65,6 @@ export class GameLoader {
     return Array.from(this.games.keys());
   }
 
-  /**
-   * Gets a game from javascript memory or pulls from database if needed.
-   * @param {GameId} gameId the id of the game to retrieve
-   * @param {boolean} bypassCache always pull from database
-   * @param {LoadCallback} cb called with game when available
-   */
   public getByGameId(gameId: GameId, bypassCache: boolean, cb: LoadCallback): void {
     this.loadAllGameIds();
     if (bypassCache === false && this.games.get(gameId) !== undefined) {

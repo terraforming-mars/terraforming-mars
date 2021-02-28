@@ -47,6 +47,7 @@ export class RemoveResourcesFromCard implements DeferredAction {
         return undefined;
       },
     );
+    selectCard.showOwner = true;
 
     if (this.mandatory) {
       if (resourceCards.length === 1) {

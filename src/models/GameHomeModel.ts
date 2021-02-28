@@ -11,6 +11,7 @@ export interface GameHomeModel {
     phase: Phase;
     players: Array<GameHomePlayerModel>;
     gameOptions: GameOptionsModel;
+    lastSoloGeneration: number;
 }
 
 interface GameHomePlayerModel {

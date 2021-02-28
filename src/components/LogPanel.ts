@@ -22,6 +22,9 @@ export const LogPanel = Vue.component('log-panel', {
     generation: {
       type: Number,
     },
+    lastSoloGeneration: {
+      type: Number,
+    },
     players: {
       type: Array as () => Array<PlayerModel>,
     },
@@ -228,9 +231,8 @@ export const LogPanel = Vue.component('log-panel', {
     getGenerationText: function(): string {
       let retText = '';
       if (this.players.length === 1) {
-        const MAX_GEN = this.players[0].gameOptions.preludeExtension ? 12 : 14;
-        retText += 'of ' + MAX_GEN;
-        if (MAX_GEN === this.generation) {
+        retText += 'of ' + this.lastSoloGeneration;
+        if (this.lastSoloGeneration === this.generation) {
           retText = '<span class=\'last-generation blink-animation\'>' + retText + '</span>';
         }
       }
@@ -249,7 +251,7 @@ export const LogPanel = Vue.component('log-panel', {
       });
   },
   template: `
-      <div class="log-container"> 
+      <div class="log-container">
         <div class="log-generations">
           <h2 :class="getTitleClasses()">
               <span v-i18n>Game log</span>

@@ -753,8 +753,6 @@ export class Game implements ISerializable<SerializedGame> {
       player.cardDiscount = 0; // Iapetus reset hook
       player.runProductionPhase();
     });
-    // Syndicate Pirate Raids hook. Also see Colony.ts and Player.ts
-    this.syndicatePirateRaider = undefined;
 
     if (this.gameIsOver()) {
       this.gotoFinalGreeneryPlacement();
@@ -775,6 +773,8 @@ export class Game implements ISerializable<SerializedGame> {
       this.colonies.forEach((colony) => {
         colony.endGeneration(this);
       });
+      // Syndicate Pirate Raids hook. Also see Colony.ts and Player.ts
+      this.syndicatePirateRaider = undefined;
     }
 
     if (this.gameOptions.turmoilExtension) {

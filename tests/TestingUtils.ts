@@ -100,6 +100,12 @@ export class TestingUtils {
     }
     return action.execute();
   }
+
+  public static forceGenerationEnd(game: Game) {
+    while (game.deferredActions.pop() !== undefined) {};
+    game.getPlayers().forEach((player) => player.pass());
+    game.playerIsFinishedTakingActions();
+  }
 }
 
 export const setCustomGameOptions = function(options: object = {}): GameOptions {

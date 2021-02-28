@@ -114,11 +114,10 @@ export const WaitingFor = Vue.component('waiting-for', {
 
               return;
             }
+            vueApp.waitForUpdate();
           } else {
             root.showAlert(`Received unexpected response from server (${xhr.status}). Server is most likely restarting.`, () => vueApp.waitForUpdate());
-            return;
           }
-          vueApp.waitForUpdate();
         };
         xhr.responseType = 'json';
         xhr.send();

@@ -44,11 +44,6 @@ export const LogPanel = Vue.component('log-panel', {
   components: {
     Card,
   },
-  watch: {
-    selectedGeneration: function(generation: number) {
-      this.getLogsForGeneration(generation);
-    },
-  },
   methods: {
     scrollToEnd: function() {
       const scrollablePanel = document.getElementById('logpanel-scrollable');
@@ -185,9 +180,13 @@ export const LogPanel = Vue.component('log-panel', {
       return '<i class=\'icon icon-cross\' />';
     },
     selectGeneration: function(gen: number): void {
+      if (gen !== this.selectedGeneration) {
+        this.getLogsForGeneration(gen);
+      }
       this.selectedGeneration = gen;
     },
     getLogsForGeneration: function(generation: number): void {
+      const messages = this.messages;
       // abort any pending requests
       if (logRequest !== undefined) {
         logRequest.abort();
@@ -202,8 +201,8 @@ export const LogPanel = Vue.component('log-panel', {
       };
       xhr.onload = () => {
         if (xhr.status === 200) {
-          this.messages.splice(0, this.messages.length);
-          this.messages.push(...xhr.response);
+          messages.splice(0, messages.length);
+          messages.push(...xhr.response);
           if (generation === this.generation) {
             this.$nextTick(this.scrollToEnd);
           }
@@ -241,7 +240,6 @@ export const LogPanel = Vue.component('log-panel', {
           retText = '<span class=\'last-generation blink-animation\'>' + retText + '</span>';
         }
       }
-
       return retText;
     },
   },

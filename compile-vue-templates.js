@@ -102,7 +102,7 @@ checkComponent(
 checkComponent(
   'src/components/LogPanel',
   require('./build/src/components/LogPanel').LogPanel,
-  ['cards', 'players', 'messages'],
+  ['cards', 'messages'],
 );
 checkComponent(
   'src/components/Milestone',

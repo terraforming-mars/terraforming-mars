@@ -462,6 +462,9 @@ export enum CardName {
     STANFORD_TORUS = 'Stanford Torus',
     SATURN_SURFING = 'Saturn Surfing',
 
+    // Promo cards
+    BIO_PRINTING_FACILITY = 'Bio Printing Facility',
+
     // Community corps
     AGRICOLA_INC = 'Agricola Inc',
     PROJECT_WORKSHOP = 'Project Workshop',

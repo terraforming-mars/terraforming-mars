@@ -217,7 +217,8 @@ export const PlayerHome = Vue.component('player-home', {
               :venus = "player.venusScaleLevel"
               :turmoil = "player.turmoil"
               :gameOptions = "player.gameOptions"
-              :playerNumber = "player.players.length">
+              :playerNumber = "player.players.length"
+              :lastSoloGeneration = "player.lastSoloGeneration">
                 <div class="deck-size">{{ player.deckSize }}</div>
             </preferences>
 
@@ -251,7 +252,7 @@ export const PlayerHome = Vue.component('player-home', {
                 <players-overview class="player_home_block player_home_block--players nofloat:" :player="player" v-trim-whitespace id="shortkey-playersoverview"/>
 
                 <div class="player_home_block player_home_block--log player_home_block--hide_log nofloat">
-                    <log-panel :id="player.id" :players="player.players" :generation="player.generation" :color="player.color"></log-panel>
+                    <log-panel :id="player.id" :players="player.players" :generation="player.generation" :lastSoloGeneration="player.lastSoloGeneration" :color="player.color"></log-panel>
                 </div>
 
                 <div class="player_home_block player_home_block--actions nofloat">

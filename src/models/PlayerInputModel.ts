@@ -31,6 +31,8 @@ export interface PlayerInputModel {
     payProduction?: IPayProductionModel;
     aresData?: IAresData;
     selectBlueCardAction: boolean;
+    showOnlyInLearnerMode?: boolean;
+    showOwner?: boolean;
     availableParties: Array<PartyName> | undefined;
     turmoil?: TurmoilModel;
 }

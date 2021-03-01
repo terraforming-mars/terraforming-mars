@@ -25,7 +25,7 @@ export class PreferencesManager {
       'hide_tile_confirmation',
       'show_card_number',
       'show_discount_on_cards',
-      'tutorial_mode',
+      'learner_mode',
     ];
 
     static preferencesValues: Map<string, boolean | string> = new Map<string, boolean | string>();
@@ -43,5 +43,10 @@ export class PreferencesManager {
       const value = localStorage.getItem(name);
       if (value === null) return '';
       return value;
+    }
+
+    static loadBooleanValue(name: string): boolean {
+      if ( ! PreferencesManager.localStorageSupported()) return false;
+      return localStorage.getItem(name) === '1';
     }
 }

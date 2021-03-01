@@ -38,7 +38,7 @@ describe('LunaSenate', () => {
 
     card.play(player);
 
-    expect(player.getProduction(Resources.MEGACREDITS)).eq(7);
+    expect(player.getProduction(Resources.MEGACREDITS)).eq(9);
   });
 
   it('getVictoryPoints', () => {

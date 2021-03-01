@@ -672,11 +672,6 @@ export class Player implements ISerializable<SerializedPlayer> {
       tagCount += this.scienceTagCount;
     }
 
-    // PoliticalAgendas Scientists P4 hook
-    if (tag === Tags.SCIENCE && this.hasTurmoilScienceTagBonus) {
-      tagCount += 1;
-    }
-
     if (includeTagSubstitutions) {
       // Earth Embassy hook
       if (tag === Tags.EARTH && this.playedCards.some((c) => c.name === CardName.EARTH_EMBASSY)) {
@@ -1839,9 +1834,9 @@ export class Player implements ISerializable<SerializedPlayer> {
       let sendDelegate;
       if (this.game.turmoil?.lobby.has(this.id)) {
         sendDelegate = new SendDelegateToArea(this, 'Send a delegate in an area (from lobby)');
-      } else if (this.isCorporation(CardName.INCITE) && this.canAfford(3) && this.game.turmoil.getDelegates(this.id) > 0) {
+      } else if (this.isCorporation(CardName.INCITE) && this.canAfford(3) && this.game.turmoil.getDelegatesInReserve(this.id) > 0) {
         sendDelegate = new SendDelegateToArea(this, 'Send a delegate in an area (3 MC)', {cost: 3});
-      } else if (this.canAfford(5) && this.game.turmoil!.getDelegates(this.id) > 0) {
+      } else if (this.canAfford(5) && this.game.turmoil.getDelegatesInReserve(this.id) > 0) {
         sendDelegate = new SendDelegateToArea(this, 'Send a delegate in an area (5 MC)', {cost: 5});
       }
       if (sendDelegate) {

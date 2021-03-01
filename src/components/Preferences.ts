@@ -41,6 +41,9 @@ export const Preferences = Vue.component('preferences', {
     turmoil: {
       type: Object as () => TurmoilModel || undefined,
     },
+    lastSoloGeneration: {
+      type: Number,
+    },
   },
   components: {
     'game-setup-detail': GameSetupDetail,
@@ -75,7 +78,7 @@ export const Preferences = Vue.component('preferences', {
       'hide_tile_confirmation': false as boolean | unknown[],
       'show_card_number': false as boolean | unknown[],
       'show_discount_on_cards': true as boolean | unknown[],
-      'tutorial_mode': true as boolean | unknown[],
+      'learner_mode': true as boolean | unknown[],
     };
   },
   methods: {
@@ -241,7 +244,7 @@ export const Preferences = Vue.component('preferences', {
                     <div class="info_panel" v-if="ui.gamesetup_detail_open">
                       <div class="info_panel-spacing"></div>
                       <div class="info-panel-title" v-i18n>Game Setup Details</div>
-                      <game-setup-detail :gameOptions="gameOptions" :playerNumber="playerNumber"></game-setup-detail>
+                      <game-setup-detail :gameOptions="gameOptions" :playerNumber="playerNumber" :lastSoloGeneration="lastSoloGeneration"></game-setup-detail>
 
                       <div class="info_panel_actions">
                         <button class="btn btn-lg btn-primary" v-on:click="ui.gamesetup_detail_open=false">Ok</button>
@@ -378,8 +381,10 @@ export const Preferences = Vue.component('preferences', {
                     </div>
                     <div class="preferences_panel_item">
                         <label class="form-switch">
-                            <input type="checkbox" v-on:change="updatePreferences" v-model="tutorial_mode" />
-                            <i class="form-icon"></i> <span v-i18n>Tutorial Mode (req. refresh)</span>
+                            <input type="checkbox" v-on:change="updatePreferences" v-model="learner_mode" />
+                            <i class="form-icon"></i> 
+                            <span v-i18n>Learner Mode (req. refresh)</span>
+                            <span class="tooltip tooltip-left" data-tooltip="Show information that can be helpful\n to players who are still learning the games">&#9432;</span>
                         </label>
                     </div>
                     <div class="preferences_panel_item form-group">

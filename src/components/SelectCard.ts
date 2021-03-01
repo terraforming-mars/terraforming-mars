@@ -11,10 +11,16 @@ import {CardName} from '../CardName';
 import {PlayerInputModel} from '../models/PlayerInputModel';
 import {sortActiveCards} from '../components/ActiveCardsSortingOrder';
 import {TranslateMixin} from './TranslateMixin';
+import {Color} from '../Color';
 
 interface SelectCardModel {
   cards: VueModelRadio<CardModel> | VueModelCheckbox<Array<CardModel>>;
   warning: string | Message | undefined;
+}
+
+export interface OwnerModel {
+  name: string;
+  color: Color;
 }
 
 export const SelectCard = Vue.component('select-card', {
@@ -93,15 +99,30 @@ export const SelectCard = Vue.component('select-card', {
     saveData: function() {
       this.onsave([this.getData()]);
     },
+    getCardBoxClass: function(card: CardModel): string {
+      if (this.playerinput.showOwner && this.getOwner(card) !== undefined) {
+        return 'cardbox cardbox-with-owner-label';
+      }
+      return 'cardbox';
+    },
+    getOwner: function(card: CardModel): OwnerModel | undefined {
+      for (const player of this.player.players) {
+        if (player.playedCards.find((c) => c.name === card.name)) {
+          return {name: player.name, color: player.color} as OwnerModel;
+        }
+      }
+      return undefined;
+    },
   },
   template: `<div class="wf-component wf-component--select-card">
         <div v-if="showtitle === true" class="nofloat wf-component-title">{{ $t(playerinput.title) }}</div>
-        <label v-for="card in getOrderedCards()" :key="card.name" class="cardbox">
-          <template v-if="!card.isDisabled">
-            <input v-if="playerinput.maxCardsToSelect === 1 && playerinput.minCardsToSelect === 1" type="radio" v-model="cards" :value="card" />
-            <input v-else type="checkbox" v-model="cards" :value="card" :disabled="playerinput.maxCardsToSelect !== undefined && Array.isArray(cards) && cards.length >= playerinput.maxCardsToSelect && cards.includes(card) === false" />
-          </template>
-            <Card :card="card" />
+        <label v-for="card in getOrderedCards()" :key="card.name" :class="getCardBoxClass(card)">
+            <template v-if="!card.isDisabled">
+              <input v-if="playerinput.maxCardsToSelect === 1 && playerinput.minCardsToSelect === 1" type="radio" v-model="cards" :value="card" />
+              <input v-else type="checkbox" v-model="cards" :value="card" :disabled="playerinput.maxCardsToSelect !== undefined && Array.isArray(cards) && cards.length >= playerinput.maxCardsToSelect && cards.includes(card) === false" />
+            </template>
+            <Card v-if="playerinput.showOwner && getOwner(card) !== undefined" :card="card" :owner="getOwner(card)" />
+            <Card v-else :card="card"  />
         </label>
         <div v-if="hasCardWarning()" class="card-warning">{{ $t(warning) }}</div>
         <div v-if="showsave === true" class="nofloat">

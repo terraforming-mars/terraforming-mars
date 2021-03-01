@@ -1,12 +1,22 @@
 {
     "You start with 1 plant production, 1 MC production and 40 MC.": "Вы начинаете с 40 МС, 1 производством растений, и 1 производством МС",
     "Effect: At game end, score -2 / 0 / 1 / 2 VP PER TAG TYPE for 0 / 1-2 / 3-4 / 5+ tags.": "Эффект: В конце игры получите -2/0/1/2 ПО за 0/1-2/3-4/5+ разыгранных вами уникальных меток.",
-    "You start with 39 MC, 1 steel and 1 titanium.": "Вы начинаете с 39 МС, 1 сталью, и 1 титаном",
-    "As your first action, draw a blue card.": "Первым действием доберите синюю карту",
+    "You start with 39 MC, 1 steel and 1 titanium. As your first action, draw a blue card.": "Вы начинаете с 39 МС, 1 сталью, и 1 титаном. Первым действием доберите синюю карту",
     "Action: Flip and discard a played blue card to convert any VP on it into TR and draw 2 cards, or spend 3 MC to draw a blue card.": "Действие: Сбросьте одну из уже разыгранных синих карт. ПО с этой карты переходят в РТ. Или потратьте 2 MC, чтобы добрать синюю карту",
+    
+    "Incite": "Incite",
     "You start with 32 MC. As your first action, place two delegates in one party.": "Вы начинаете с 32 МС. Первым действием разместите 2 делегатов в одной из партий",
-    "Effect: You have influence +1. When you send a delegate from the reserve, you pay 2 MC less for it.": "Эффект: Ваше влияние 1. Когда вы отправляете делегата из резерва платите на 2 MC меньше",
+    "Effect: You have +1 influence. When you send a delegate using the lobbying action, you pay 2 MC less for it.": "Эффект: Ваше влияние +1. Когда вы отправляете делегата из резерва платите на 2 MC меньше",
+    
     "Action: Replay a played event from any player by paying its cost ONLY in MC (discounts and rebates apply), then REMOVE IT FROM PLAY.)": "Действие: Разыграйте уже сыгранную любым игроком карту-событие оплатив ее стоимость только в МC (скидки работают). Затем удалите ее из игры",
     "You start with 38 MC and 1 Energy production.": "Вы начинаете с 38 МС и 1 производством энергии",
-    "Select event card to replay at cost in MC and remove from play": "Выберите карту-событие, чтобы разыграть за полную стоимость в МС, а потом удалить ее из игры"
+
+    "Playwrights": "Playwrights",
+    "Action: Replay a played event from any player by paying its cost ONLY in MC (discounts and rebates apply), then REMOVE IT FROM PLAY.": 
+    "Действие. Выберите карту-событие любого игрока, разыграйте её за полную стоимость в МС и удалите эту карту из игры",
+
+        
+    "Midas": "Midas",
+    "You start with 120 MC. Lower your TR 7 steps.": "You start with 120 MC. Уменьшите свой РТ на 7",
+    "": ""
 }

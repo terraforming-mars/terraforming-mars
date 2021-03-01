@@ -1,11 +1,11 @@
 import {expect} from 'chai';
-import {Player} from '../../src/Player';
-import {Game} from '../../src/Game';
-import {Turmoil} from '../../src/turmoil/Turmoil';
-import {TestingUtils, setCustomGameOptions, TestPlayers} from '../TestingUtils';
-import {MarsFirst, MARS_FIRST_BONUS_1, MARS_FIRST_BONUS_2, MARS_FIRST_POLICY_4} from '../../src/turmoil/parties/MarsFirst';
-import {Mine} from '../../src/cards/base/Mine';
-import {Tags} from '../../src/cards/Tags';
+import {Player} from '../../../src/Player';
+import {Game} from '../../../src/Game';
+import {Turmoil} from '../../../src/turmoil/Turmoil';
+import {TestingUtils, setCustomGameOptions, TestPlayers} from '../../TestingUtils';
+import {MarsFirst, MARS_FIRST_BONUS_1, MARS_FIRST_BONUS_2, MARS_FIRST_POLICY_4} from '../../../src/turmoil/parties/MarsFirst';
+import {Mine} from '../../../src/cards/base/Mine';
+import {Tags} from '../../../src/cards/Tags';
 
 describe('MarsFirst', function() {
   let player : Player; let game : Game; let turmoil: Turmoil; let marsFirst: MarsFirst;

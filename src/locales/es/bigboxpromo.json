@@ -5,7 +5,7 @@
   "Asteroid Hollowing":"Vaciado de Asteroides",
   
   "Action: Spend 1 titanium to add 1 asteroid resource here and increase MC production 1 step.":"Acción: gasta 1 de titanio para añadir 1 asteroide aquí e incrementar 1 nivel tu producción de M€.",
-  "1 VP per 2 asteroid resources on this card.":"1 PV por cada 2 asteorides sobre esta carta.",
+  "1 VP per 2 asteroids on this card.":"1 PV por cada 2 asteorides sobre esta carta.",
   "Advertising":"Propapanga",
   "Effect: When you play a card with a basic cost of 20 MC or more, increase your MC production 1 step.":"Cuando juegues una carta con coste 20 M€ o más, aumenta 1 nivel tu producción de M€.",
   
@@ -69,14 +69,14 @@
   "(Action: Spend 2X MC to gain X energy.)":"Acción: gasta 2X M€ para obtener X recursos de energía.",
   "(Action: Decrease energy production 1 step to gain 8 MC.)":"Acción: disminuye 1 nivel tu producción de energía para ganar 8 M€.",
   
-  "Penguin":"企鹅",
-  "(Requires 8 oceans.)":"(需要8海洋。)",
-  "Requires 8 oceans. 1 VP for each animal on this card":"需要场上已有8片海洋。本牌每个动物价值1分",
+  "Penguin":"Pingüinos",
+  "(Requires 8 oceans.)":"(Requiere 8 océanos)",
+  "Requires 8 oceans. 1 VP for each animal on this card":"Requiere  océanos. 1 PV por cada animal en esta carta",
   
   
-  "Sub-Crust Measurements":"测量地壳",
-  "Action: Draw a card.":"行动：抽1张牌。",
-  "(Requires 2 science tags.)":"需要2个科学标志。",
+  "Sub-Crust Measurements":"Mediciones en la subcorteza",
+  "Action: Draw a card.":"Acción: roba una carta",
+  "(Requires 2 science tags.)":"Requiere 2 símbolos de ciencia",
   
   "Potatoes":"Patatas",
   "(Lose 2 plants. Increase your MC production 2 steps.)":"Pierde 2 plantas y aumenta 2 niveles tu producción de M€.",

@@ -4,13 +4,25 @@
   "Send a delegate in an area (5MC)": "Enviar delegado a un partido (5 M€)",
   "Policies": "Políticas de Gobierno",
   "No ruling Policy": "Sin política de Gobierno",
+
   "Mars First": "Marte Primero",
   "Scientists": "Científicos",
   "Unity": "Unidad",
   "Kelvinists": "Kelvinistas",
   "Reds": "Los Rojos",
   "Greens": "Los Verdes",
+  
+  "mars First": "Marte Primero",
+  "scientists": "Científicos",
+  "unity": "Unidad",
+  "kelvinists": "Kelvinistas",
+  "reds": "Los Rojos",
+  "greens": "Los Verdes",
+
   "Chairman": "Presidente",
+  "Party leader": "Líder dle partido",
+  "2 Party leaders": "2 líderes del partido",
+
   "Mars First - (All players receive 1 MC for each Building tag they have.)": "Marte Primero - (Cada jugador recibe 1 M€ por cada símbolo de edificio que posean.)",
   "Scientists - (All players receive 1 MC for each Science tag they have.)": "Científicos - (Cada jugador recibe 1 M€ por cada símbolo de ciencia que tenga.)",
   "Unity - (All players receive 1 MC for each Venus tag, Earth tag, and Jovian tag they have.)": "Unidad - (Cada jugador recibe 1 M€ por cada símbolo de Venus, Tierra y Joviano que tenga.)",

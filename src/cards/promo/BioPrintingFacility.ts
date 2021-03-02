@@ -50,7 +50,7 @@ export class BioPrintingFacility extends Card implements IActionCard, IProjectCa
       return undefined;
     }
 
-    const gainPlantOption = new SelectOption('Gain 2 plant', 'Gain plant', () => {
+    const gainPlantOption = new SelectOption('Gain 2 plants', 'Gain plants', () => {
       player.plants += 2;
       LogHelper.logGainStandardResource(player, Resources.PLANTS, 2);
       return undefined;
@@ -61,8 +61,8 @@ export class BioPrintingFacility extends Card implements IActionCard, IProjectCa
 
       return new OrOptions(
         new SelectOption('Add 1 animal to ' + targetCard.name, 'Add animal', () => {
-          player.addResourceTo(targetCard, 1);
-          LogHelper.logAddResource(player, targetCard, 1);
+          player.addResourceTo(targetCard);
+          LogHelper.logAddResource(player, targetCard);
           return undefined;
         }),
         gainPlantOption,
@@ -75,8 +75,8 @@ export class BioPrintingFacility extends Card implements IActionCard, IProjectCa
         'Add animal',
         availableAnimalCards,
         (foundCards: Array<ICard>) => {
-          player.addResourceTo(foundCards[0], 1);
-          LogHelper.logAddResource(player, foundCards[0], 1);
+          player.addResourceTo(foundCards[0]);
+          LogHelper.logAddResource(player, foundCards[0]);
           return undefined;
         },
       ),

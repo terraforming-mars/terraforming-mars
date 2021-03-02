@@ -229,5 +229,10 @@
     "End": "Завершить",
     "${0} ${1} ${2} on row ${3} position ${4}": "${0} ${1} ${2} в координатах: ${3}, ${4}",
     "placed": "разместил",
-    "greenery tile": "тайл озеленения"
+    "greenery tile": "тайл озеленения",
+    "Must select at least ${0} corporations": "Выбрано недостаточно корпораций для начала игры. Нужно хотя бы: ${0}",
+    "Show timers": "Показывать таймеры",
+    "Multiplayer Options": "Мультиплеер",
+    "Cards to exclude from the game": "Карты, которые будут исключены из игры",
+    "Start typing the card name to exclude": "Начните набирать название карты на английском языке"
 }

@@ -44,6 +44,7 @@ export interface PlayerModel {
     influence: number;
     isActive: boolean;
     isSoloModeWin: boolean;
+    lastSoloGeneration: number,
     megaCredits: number;
     megaCreditProduction: number;
     milestones: Array<ClaimedMilestoneModel>;

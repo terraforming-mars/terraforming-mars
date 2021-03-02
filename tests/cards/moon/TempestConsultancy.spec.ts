@@ -34,7 +34,7 @@ describe('TempestConsultancy', () => {
 
   it('action, 1 delegate', () => {
     player.tagsForTest = {moon: 5};
-    expect(turmoil.getDelegates(player.id)).eq(6);
+    expect(turmoil.getDelegatesInReserve(player.id)).eq(6);
     // This test is brittle - it assumes mars first will be orOptions[0]. But OK.
     const marsFirst = turmoil.getPartyByName(PartyName.MARS)!;
     expect(marsFirst.getDelegates(player.id)).eq(0);
@@ -43,13 +43,13 @@ describe('TempestConsultancy', () => {
     const options = action.execute();
     options.cb(marsFirst.name);
 
-    expect(turmoil.getDelegates(player.id)).eq(5);
+    expect(turmoil.getDelegatesInReserve(player.id)).eq(5);
     expect(marsFirst.getDelegates(player.id)).eq(1);
   });
 
   it('action, 3 delegates', () => {
     player.tagsForTest = {moon: 16};
-    expect(turmoil.getDelegates(player.id)).eq(6);
+    expect(turmoil.getDelegatesInReserve(player.id)).eq(6);
     // This test is brittle - it assumes mars first will be orOptions[0]. But OK.
     const marsFirst = turmoil.getPartyByName(PartyName.MARS)!;
     expect(marsFirst.getDelegates(player.id)).eq(0);
@@ -58,7 +58,7 @@ describe('TempestConsultancy', () => {
     const options = action.execute();
     options.cb(marsFirst.name);
 
-    expect(turmoil.getDelegates(player.id)).eq(3);
+    expect(turmoil.getDelegatesInReserve(player.id)).eq(3);
     expect(marsFirst.getDelegates(player.id)).eq(3);
   });
 

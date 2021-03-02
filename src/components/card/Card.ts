@@ -160,8 +160,8 @@ export const Card = Vue.component('card', {
             <CardResourceCounter v-if="card.resources !== undefined" :amount="getResourceAmount(card)" />
             <CardExtraContent :card="card" />
             <template v-if="owner !== undefined">
-              <div :class="'card-owner-label player_translucent_bg_color_'+ owner?.color">
-                {{owner?.name}}
+              <div :class="'card-owner-label player_translucent_bg_color_'+ owner.color">
+                {{owner.name}}
               </div>
             </template>
         </div>

@@ -14,7 +14,7 @@ export class ContentType {
   public static getContentType(filename: string): string | undefined {
     const parts = filename.split('.');
     let idx = parts.length - 1;
-    if (parts[idx] === 'br' || parts[idx] === 'gzip') {
+    if (parts[idx] === 'br' || parts[idx] === 'gz') {
       idx--;
     }
     if (idx < 0) {

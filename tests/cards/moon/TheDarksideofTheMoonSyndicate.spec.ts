@@ -82,7 +82,7 @@ describe('TheDarksideofTheMoonSyndicate', () => {
   });
 
   it('effect', () => {
-    const centerSpace = moonData.moon.getSpace('m06');
+    const centerSpace = moonData.moon.getSpace('m07');
     const adjacentSpaces = moonData.moon.getAdjacentSpaces(centerSpace);
 
     // Space 0 intentionallyleft blank

@@ -132,7 +132,7 @@ export abstract class Colony implements SerializedColony {
 
       if (usesTradeFleet) {
         this.visitor = player.id;
-        player.tradesThisTurn++;
+        player.tradesThisGeneration++;
       }
 
       if (decreaseTrackAfterTrade) {

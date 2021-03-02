@@ -74,7 +74,7 @@ export const GameSetupDetail = Vue.component('game-setup-detail', {
               <div v-if="isRandomMANone()" class="game-config generic" v-i18n>Board-defined</div>
               <div v-if="isRandomMALimited()" class="game-config generic" v-i18n>Randomized with limited synergy</div>
               <div v-if="isRandomMAUnlimited()" class="game-config generic" v-i18n>Full randomized</div>
-              <div v-if="isRandomMANone() && gameOptions.includeVenusMA" class="game-config generic" v-i18n>HoverLord & Venuphile</div>
+              <div v-if="isRandomMANone() && gameOptions.venusNextExtension" class="game-config generic" v-i18n>HoverLord & Venuphile</div>
               <div v-if="!isRandomMANone() && !gameOptions.includeVenusMA" class="game-config generic" v-i18n>(5 each)</div>
               <div v-if="!isRandomMANone() && gameOptions.includeVenusMA" class="game-config generic" v-i18n>(6 each)</div>
             </li>

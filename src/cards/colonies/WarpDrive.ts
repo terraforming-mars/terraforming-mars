@@ -16,6 +16,7 @@ export class WarpDrive extends Card implements IProjectCard {
       cardType: CardType.ACTIVE,
 
       requirements: CardRequirements.builder((b) => b.tag(Tags.SCIENCE, 5)),
+      cardDiscount: {tag: Tags.SPACE, amount: 4},
       metadata: {
         cardNumber: 'C49',
         renderData: CardRenderer.builder((b) => {

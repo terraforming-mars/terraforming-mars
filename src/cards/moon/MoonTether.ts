@@ -14,8 +14,9 @@ export class MoonTether extends Card implements IProjectCard {
       cardType: CardType.ACTIVE,
       tags: [Tags.MOON, Tags.SPACE],
       cost: 18,
-      requirements: CardRequirements.builder((b) => b.tag(Tags.SPACE, 6)),
 
+      requirements: CardRequirements.builder((b) => b.tag(Tags.SPACE, 6)),
+      cardDiscount: {amount: 2},
       metadata: {
         cardNumber: 'M90',
         renderData: CardRenderer.builder((b) => {
@@ -36,6 +37,7 @@ export class MoonTether extends Card implements IProjectCard {
   public play() {
     return undefined;
   }
+
 
   public getCardDiscount() {
     return 2;

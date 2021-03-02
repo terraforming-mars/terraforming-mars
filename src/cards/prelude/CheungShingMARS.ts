@@ -18,6 +18,7 @@ export class CheungShingMARS extends Card implements CorporationCard {
       startingMegaCredits: 44,
       productionBox: Units.of({megacredits: 3}),
 
+      cardDiscount: {tag: Tags.BUILDING, amount: 2},
       metadata: {
         cardNumber: 'R16',
         description: 'You start with 3 MC production and 44 MC.',
@@ -33,6 +34,7 @@ export class CheungShingMARS extends Card implements CorporationCard {
       },
     });
   }
+
 
   public getCardDiscount(_player: Player, card: IProjectCard) {
     return card.tags.filter((tag) => tag === Tags.BUILDING).length * 2;

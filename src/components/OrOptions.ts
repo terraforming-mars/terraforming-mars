@@ -4,6 +4,7 @@ import {$t} from '../directives/i18n';
 import {Button} from '../components/common/Button';
 import {PlayerModel} from '../models/PlayerModel';
 import {PlayerInputModel} from '../models/PlayerInputModel';
+import {PreferencesManager} from './PreferencesManager';
 
 let unique: number = 0;
 
@@ -119,29 +120,40 @@ export const OrOptions = Vue.component('or-options', {
         ),
       );
       optionElements.push(subchildren[subchildren.length - 1]);
-      children.push(createElement('div', subchildren));
-      if (this.showsave && this.$data.selectedOption === idx) {
-        children.push(
-          createElement(
-            'div',
-            {
-              'style': {'margin': '5px 30px 10px'},
-              'class': 'wf-action',
-            },
-            [
-              createElement(Button, {
-                props: {
-                  title: $t(option.buttonLabel),
-                  type: 'submit',
-                  size: 'normal',
-                  onClick: () => {
-                    this.saveData();
+
+      // Show all option by default unless it is told to show only in learner mode
+      let showOption = true;
+      if (option.showOnlyInLearnerMode && !PreferencesManager.loadBooleanValue('learner_mode')) {
+        showOption = false;
+      }
+
+      // Only push this orOption element if we are showing it
+      if (showOption) {
+        children.push(createElement('div', subchildren));
+
+        if (this.showsave && this.$data.selectedOption === idx) {
+          children.push(
+            createElement(
+              'div',
+              {
+                'style': {'margin': '5px 30px 10px'},
+                'class': 'wf-action',
+              },
+              [
+                createElement(Button, {
+                  props: {
+                    title: $t(option.buttonLabel),
+                    type: 'submit',
+                    size: 'normal',
+                    onClick: () => {
+                      this.saveData();
+                    },
                   },
-                },
-              }),
-            ],
-          ),
-        );
+                }),
+              ],
+            ),
+          );
+        }
       }
     });
     return createElement('div', {'class': 'wf-options'}, children);

@@ -10,6 +10,17 @@
     </head>
     <body id="ts-preferences-target">
         <div id="app" :class="'topmost-'+screen">
+            <section>
+                <dialog id="alert-dialog">
+                    <form method="dialog">
+                        <p class="title" v-i18n>Error with input</p>
+                        <p id="alert-dialog-message"></p>
+                        <menu class="dialog-menu centered-content">
+                            <button id="alert-dialog-button" class="btn btn-lg btn-primary">OK</button>
+                        </menu>
+                    </form>
+                </dialog>
+            </section>
             <div class="main-container">
                 <start-screen v-if="screen === 'start-screen'" :version="settings.version"></start-screen>
                 <create-game-form
@@ -33,8 +44,8 @@
                 <games-overview
                     v-else-if="screen === 'games-overview'"
                 ></games-overview>
-                <debug-ui v-else-if="screen === 'debug-ui'"></debug-ui>
-                <help-iconology v-else-if="screen === 'help-iconology'"></help-iconology>
+                <debug-ui v-else-if="screen === 'cards'"></debug-ui>
+                <help v-else-if="screen === 'help'"></help>
             </div>
             <div class="notice">
                 Not affiliated with FryxGames, Asmodee Digital or Steam in any way.

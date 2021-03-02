@@ -21,6 +21,9 @@ export class TheArchaicFoundationInstitute implements CorporationCard {
   }
 
   public onCardPlayed(player: Player, card: IProjectCard): void {
+    if (player.corporationCard?.name !== this.name) {
+      return undefined;
+    }
     const moonTags = card.tags.filter((t) => t === Tags.MOON);
     const count = moonTags.length;
     if (count > 0) {

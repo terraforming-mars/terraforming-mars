@@ -22,8 +22,6 @@ import {KeyboardNavigation} from '../../src/KeyboardNavigation';
 import {MoonBoard} from './moon/MoonBoard';
 import {Phase} from '../../src/Phase';
 
-const dialogPolyfill = require('dialog-polyfill');
-
 import * as raw_settings from '../genfiles/settings.json';
 
 export interface PlayerHomeModel {
@@ -179,25 +177,10 @@ export const PlayerHome = Vue.component('player-home', {
     window.removeEventListener('keydown', this.navigatePage);
   },
   mounted: function() {
-    dialogPolyfill.default.registerDialog(
-      document.getElementById('dialog-default'),
-    );
     window.addEventListener('keydown', this.navigatePage);
   },
   template: `
         <div id="player-home" :class="(player.turmoil ? 'with-turmoil': '')">
-            <section>
-                <dialog id="dialog-default">
-                    <form method="dialog">
-                        <p class="title" v-i18n>Error with input</p>
-                        <p id="dialog-default-message"></p>
-                        <menu class="dialog-menu centered-content">
-                            <button class="btn btn-lg btn-primary">OK</button>
-                        </menu>
-                    </form>
-                </dialog>
-            </section>
-
             <top-bar :player="player" />
 
             <div v-if="player.phase === 'end'">

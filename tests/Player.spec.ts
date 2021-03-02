@@ -125,15 +125,6 @@ describe('Player', function() {
     player.process([['1']]);
     expect(player.getWaitingFor()).to.be.undefined;
   });
-  it('serializes every property', function() {
-    const player = new Player('blue', Color.BLUE, false, 0, 'id');
-    const serialized = player.serialize();
-    const serializedKeys = Object.keys(serialized);
-    const playerKeys = Object.keys(player).filter((key) => key !== '_game');
-    serializedKeys.sort();
-    playerKeys.sort();
-    expect(serializedKeys).to.deep.eq(playerKeys);
-  });
   it('serialization test for pickedCorporationCard', () => {
     const player = TestPlayers.BLUE.newPlayer();
     player.pickedCorporationCard = new SaturnSystems();
@@ -218,5 +209,6 @@ describe('Player', function() {
     const newPlayer = Player.deserialize(json as SerializedPlayer);
 
     expect(newPlayer.color).eq(Color.PURPLE);
+    expect(newPlayer.tradesThisGeneration).eq(100);
   });
 });

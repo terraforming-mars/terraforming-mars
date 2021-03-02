@@ -76,7 +76,7 @@ export interface PlayerModel {
     titanium: number;
     titaniumProduction: number;
     titaniumValue: number;
-    tradesThisTurn: number;
+    tradesThisGeneration: number;
     turmoil: TurmoilModel | undefined;
     venusScaleLevel: number;
     victoryPointsBreakdown: VictoryPointsBreakdown;

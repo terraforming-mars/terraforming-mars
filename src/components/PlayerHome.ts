@@ -125,7 +125,7 @@ export const PlayerHome = Vue.component('player-home', {
     },
     getFleetsCountRange: function(player: PlayerModel): Array<number> {
       const fleetsRange: Array<number> = [];
-      for (let i = 0; i < player.fleetSize - player.tradesThisTurn; i++) {
+      for (let i = 0; i < player.fleetSize - player.tradesThisGeneration; i++) {
         fleetsRange.push(i);
       }
       return fleetsRange;

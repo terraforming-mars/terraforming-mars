@@ -21,8 +21,8 @@ export class TheGrandLunaCapitalGroup implements CorporationCard {
     description: 'You start with 32 MC and 1 titanium resource. As your first action, place a colony tile on the Moon and raise Colony Rate 1 step.',
     cardNumber: '',
     renderData: CardRenderer.builder((b) => {
-      b.megacredits(32).titanium(1).moonColony();
-      b.effect('Effect: When you place a colony tile next to another colony tile, you gain 2 MC for each adjacent colony tile.', (eb) => {
+      b.megacredits(32).titanium(1).moonColony().br;
+      b.effect('When you place a colony tile next to another colony tile, you gain 2 MC for each adjacent colony tile.', (eb) => {
         eb.tile(TileType.MOON_COLONY, false).tile(TileType.MOON_COLONY, false).asterix()
           .startEffect
           .megacredits(-2).slash().tile(TileType.MOON_COLONY, false);

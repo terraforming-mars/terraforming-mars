@@ -32,7 +32,7 @@ export class LunarMineUrbanization extends Card implements IProjectCard {
 
         renderData: CardRenderer.builder((b) => {
           b.production((pb) => pb.megacredits(1)).br;
-          b.moonColonyRate(1);
+          b.moonColonyRate();
           b.tile(TileType.LUNAR_MINE_URBANIZATION, false).asterix();
         }),
       },

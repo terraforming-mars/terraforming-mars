@@ -24,7 +24,7 @@ export class LunarTradeFleet extends Card {
         renderData: CardRenderer.builder((b) => {
           b.production((pb) => pb.megacredits(1));
           b.br;
-          b.moonLogisticsRate(1);
+          b.moonLogisticsRate();
         }),
       },
     });

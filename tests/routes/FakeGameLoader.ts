@@ -13,24 +13,15 @@ export class FakeGameLoader implements IGameLoader {
     cb(this.games.get(gameId));
   }
   getByPlayerId(playerId: string, cb: (game: Game | undefined) => void): void {
-    let found = false;
-    this.games.forEach((game) => {
-      if (found === true) {
-        return;
-      }
-      game.getPlayers().forEach((player) => {
-        if (found === true) {
-          return;
-        }
+    for (const game of Array.from(this.games.values())) {
+      for (const player of game.getPlayers()) {
         if (player.id === playerId) {
           cb(game);
-          found = true;
+          return;
         }
-      });
-    });
-    if (found === false) {
-      cb(undefined);
+      }
     }
+    cb(undefined);
   }
   restoreGameAt(_gameId: string, _saveId: number, _cb: (game: Game | undefined) => void): void {
     throw new Error('Method not implemented.');

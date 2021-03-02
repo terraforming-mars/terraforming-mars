@@ -116,7 +116,7 @@ export const WaitingFor = Vue.component('waiting-for', {
             }
             vueApp.waitForUpdate();
           } else {
-            root.showAlert(`Received unexpected response from server (${xhr.status}). Server is most likely restarting.`, () => vueApp.waitForUpdate());
+            root.showAlert(`Received unexpected response from server (${xhr.status}). This is often due to the server restarting.`, () => vueApp.waitForUpdate());
           }
         };
         xhr.responseType = 'json';

@@ -14,6 +14,8 @@ import {TileType} from '../TileType';
 import {playerColorClass} from '../utils/utils';
 import {Color} from '../Color';
 
+let logRequest: XMLHttpRequest | undefined;
+
 export const LogPanel = Vue.component('log-panel', {
   props: {
     id: {
@@ -178,34 +180,38 @@ export const LogPanel = Vue.component('log-panel', {
       return '<i class=\'icon icon-cross\' />';
     },
     selectGeneration: function(gen: number): void {
+      if (gen !== this.selectedGeneration) {
+        this.getLogsForGeneration(gen);
+      }
       this.selectedGeneration = gen;
     },
-    getMessagesForGeneration: function(generation: number) {
-      let foundStart = false;
-      const newMessages: Array<LogMessage> = [];
-      for (const message of this.messages) {
-        if (message.message === 'Generation ${0}') {
-          const value = Number(message.data[0]?.value);
-          if (value === generation) {
-            foundStart = true;
-          } else if (value === generation + 1) {
-            break;
+    getLogsForGeneration: function(generation: number): void {
+      const messages = this.messages;
+      // abort any pending requests
+      if (logRequest !== undefined) {
+        logRequest.abort();
+        logRequest = undefined;
+      }
+
+      const xhr = new XMLHttpRequest();
+      logRequest = xhr;
+      xhr.open('GET', `/api/game/logs?id=${this.id}&generation=${generation}`);
+      xhr.onerror = () => {
+        console.error('error updating messages, unable to reach server');
+      };
+      xhr.onload = () => {
+        if (xhr.status === 200) {
+          messages.splice(0, messages.length);
+          messages.push(...xhr.response);
+          if (generation === this.generation) {
+            this.$nextTick(this.scrollToEnd);
           }
+        } else {
+          console.error(`error updating messages, response code ${xhr.status}`);
         }
-        if (foundStart === true) {
-          newMessages.push(message);
-        }
-      }
-      return newMessages;
-    },
-    getMessages: function() {
-      // return all messages for current generation
-      if (this.selectedGeneration === this.generation) {
-        this.$nextTick(this.scrollToEnd);
-        return this.messages;
-      }
-      // limit to selected generation
-      return this.getMessagesForGeneration(this.selectedGeneration);
+      };
+      xhr.responseType = 'json';
+      xhr.send();
     },
     getClassesGenIndicator: function(gen: number): string {
       const classes = ['log-gen-indicator'];
@@ -216,10 +222,8 @@ export const LogPanel = Vue.component('log-panel', {
     },
     getGenerationsRange: function(): Array<number> {
       const generations: Array<number> = [];
-      for (const message of this.messages) {
-        if (message.message === 'Generation ${0}') {
-          generations.push(Number(message.data[0]?.value));
-        }
+      for (let i = 1; i <= this.generation; i++) {
+        generations.push(i);
       }
       return generations;
     },
@@ -236,19 +240,11 @@ export const LogPanel = Vue.component('log-panel', {
           retText = '<span class=\'last-generation blink-animation\'>' + retText + '</span>';
         }
       }
-
       return retText;
     },
   },
   mounted: function() {
-    fetch(`/api/game/logs?id=${this.id}`)
-      .then((response) => response.json())
-      .then((messages) => {
-        this.messages.splice(0, this.messages.length, ...messages);
-      })
-      .catch((error) => {
-        console.error('error updating messages', error);
-      });
+    this.getLogsForGeneration(this.generation);
   },
   template: `
       <div class="log-container">
@@ -267,7 +263,7 @@ export const LogPanel = Vue.component('log-panel', {
         <div class="panel log-panel">
           <div id="logpanel-scrollable" class="panel-body">
             <ul v-if="messages">
-              <li v-for="message in getMessages()" v-on:click.prevent="cardClicked(message)" v-html="parseMessage(message)"></li>
+              <li v-for="message in messages" v-on:click.prevent="cardClicked(message)" v-html="parseMessage(message)"></li>
             </ul>
           </div>
         </div>

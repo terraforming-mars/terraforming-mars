@@ -1,15 +1,15 @@
 {
-    "You start with 1 plant production, 1 MC production and 40 MC.": "Rozpoczynasz grę z 40 MC oraz 1 dodatkowym poziomem produkcji MC i roślinności",
-    "Effect: At game end, score -2 / 0 / 1 / 2 VP PER TAG TYPE for 0 / 1-2 / 3-4 / 5+ tags.": "Efekt trwały: Na koniec gry otrzymujesz -2 / 0 / 1 / 2 PZ za następującą liczbę RODZAJÓW SYMBOLI: 0 / 1-2 / 3-4 / 5+.",
+    "You start with 1 plant production, 1 MC production and 40 MC.": "Comienza con 1 nivel de producción de plantas, 1 de producción de M€ y 40 M€.",
+    "Effect: At game end, score -2 / 0 / 1 / 2 VP PER TAG TYPE for 0 / 1-2 / 3-4 / 5+ tags.": "Efecto: Al terminar terminar la partida gana por cada 0/1-2/3-4/5+ tipos de símbolos -2/0/1/2 PV.",
 
-    "You start with 39 MC, 1 steel and 1 titanium. As your first action, draw a blue card.": "Rozpoczynasz grę z 39 MC. Otrzymujesz 1 jednostkę stali i tytanu. Podczas pierwszej akcji dobierz niebieską kartę.",
-    "Action: Flip and discard a played blue card to convert any VP on it into TR and draw 2 cards, or spend 3 MC to draw a blue card.": "Akcja: Odwróć i odrzuć zagraną aktywną (niebieską) kartę, żeby otrzymać tyle WT, ile PZ miała odrzucona karta. Dobierz 2 karty albo wydaj 3 MC, żeby dobrać niebieską kartę.",
+    "You start with 39 MC, 1 steel and 1 titanium. As your first action, draw a blue card.": "Comienza con 39 M€, 1 de acero y titanio. Como primera acción roba un proyecto azul.",
+    "Action: Flip and discard a played blue card to convert any VP on it into TR and draw 2 cards, or spend 3 MC to draw a blue card.": "Acción: Da la vuelta y descarta un proyecto azul jugado para convertir cualquier PV en ella en VT y roba 2 cartas o paga 3 M€ para robar un proyecto azul.",
 
-    "You start with 32 MC. As your first action, place two delegates in one party.": "Rozpoczynasz grę z 32 MC. Podczas pierwszej akcji umieść dwóch delegatów w wybranej partii.",
-    "Effect: You have +1 influence. When you send a delegate using the lobbying action, you pay 2 MC less for it.": "Efekt trwały: Otrzymujesz 1 punkt wpływów. Gdy korzystasz z akcji Lobbingu, żeby przesunąć znacznik delegata z rezerwy delegatów, płacisz za to 2 MC mniej.",
+    "You start with 32 MC. As your first action, place two delegates in one party.": "Comienza con 32 M€. Como primera acción coloca 2 delegados en un partido.",
+    "Effect: You have +1 influence. When you send a delegate using the lobbying action, you pay 2 MC less for it.": "Efecto: Posees +1 de influencia. Al envíar un delegado usando la acción del cabildo, pagas 2 M€ menos.",
 
-    "You start with 38 MC and 1 Energy production.": "Rozpoczynasz grę z 38 MC i 1 dodatkowym poziomem produkcji energii.",
-    "Action: Replay a played event from any player by paying its cost ONLY in MC (discounts and rebates apply), then REMOVE IT FROM PLAY.": "Akcja: Ponownie zagraj wykorzystaną kartę wydarzenia dowolnego gracza, płacąc za nią wyłącznie za pomocą MC (wliczając wszelkie zniżki), a nastepnie usuń ją z gry.",
+    "You start with 38 MC and 1 Energy production.": "Comienza con 38 M€ y 1 de producción de energía.",
+    "Action: Replay a played event from any player by paying its cost ONLY in MC (discounts and rebates apply), then REMOVE IT FROM PLAY.": "Acción: Vuelve a jugar un evento ya jugado por cualquier jugador pagando su coste SÓLO en M€ (descuentos o reembolsos sí cuentan), después QUITA EL EVENTO DE LA PARTIDA.",
 
-    "You start with 120 MC. Lower your TR 7 steps.": "Rozpoczynasz grę z 120 MC. Obniż swój WT o 7 poziomów."
+    "You start with 120 MC. Lower your TR 7 steps.": "Comienza con 120 M€. Reduce tu VT 7 niveles."
 }

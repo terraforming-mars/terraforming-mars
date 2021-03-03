@@ -3,13 +3,14 @@ import * as http from 'http';
 
 import {IContext} from './IHandler';
 import {LogMessage} from '../LogMessage';
+import {LogMessageType} from '../LogMessageType';
 
 export class GameLogs {
   private getLogsForGeneration(messages: Array<LogMessage>, generation: number) {
     let foundStart = generation === 1;
     const newMessages: Array<LogMessage> = [];
     for (const message of messages) {
-      if (message.message === 'Generation ${0}') {
+      if (message.type === LogMessageType.NEW_GENERATION) {
         const value = Number(message.data[0]?.value);
         if (value === generation) {
           foundStart = true;

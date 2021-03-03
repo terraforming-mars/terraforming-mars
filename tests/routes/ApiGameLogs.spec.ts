@@ -44,7 +44,7 @@ describe('ApiGameLogs', function() {
     ctx.url = new URL('http://boo.com' + req.url);
     const game = Game.newInstance('game-id', [player], player);
     ctx.gameLoader.add(game);
-    game.log('Generation ${0}', (b) => b.number(50));
+    game.log('Generation ${0}', (b) => b.forNewGeneration().number(50));
     ApiGameLogs.INSTANCE.get(req, res.hide(), ctx);
     const messages = JSON.parse(res.content);
     expect(messages.length).gt(1);
@@ -58,7 +58,7 @@ describe('ApiGameLogs', function() {
     ctx.url = new URL('http://boo.com' + req.url);
     const game = Game.newInstance('game-id', [player], player);
     ctx.gameLoader.add(game);
-    game.log('Generation ${0}', (b) => b.number(50));
+    game.log('Generation ${0}', (b) => b.forNewGeneration().number(50));
     ApiGameLogs.INSTANCE.get(req, res.hide(), ctx);
     const messages = JSON.parse(res.content);
     expect(messages.length).eq(1);

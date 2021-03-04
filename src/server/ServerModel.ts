@@ -134,15 +134,12 @@ export class Server {
 
   // This is only ever used in ApiWaitingFor, and could be isolated from ServerModel.
   public static getWaitingForModel(player: Player, prevGameAge: number): WaitingForModel {
-    const result: WaitingForModel = {
-      result: 'WAIT',
-    };
     if (player.getWaitingFor() !== undefined || player.game.phase === Phase.END) {
-      result.result = 'GO';
+      return {result: 'GO'};
     } else if (player.game.gameAge > prevGameAge) {
-      result.result = 'REFRESH';
+      return {result: 'REFRESH'};
     }
-    return result;
+    return {result: 'WAIT'};
   }
 }
 

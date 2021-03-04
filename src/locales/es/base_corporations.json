@@ -84,8 +84,8 @@
   "Action: If your Terraform Rating was raised this generation, you may pay 3 MC to raise it 1 step more.":"Acción: si tu valor de terraformación aumentó en esta generación, puedes pagar 3 M€ para incrementarlo en 1 más.",
 
   "Pharmacy Union": "Sindicato farmacéutico",
-  "You start with 54 MC. When this corporation is revealed, draw a Science card.":"Comienza con 54 M€. Cuando reveles esta corporación, roba una carta con símbolo de ciencia.",
-  "When ANY microbe tag is played, add a disease here and lose 4 MC or as much as possible. When you play a science tag, remove a disease here and gain 1 TR OR if there are no diseases here, you MAY put this card face down in your EVENTS PILE to gain 3 TR.":"Efecto: cuando se juegue CUALQUIER símbolo de microbio, añade un recurso de enfermedad a esta carta y pierde 4 M€. Cuando juegues un símbolo de ciencia, elimina una enfermedad de esta carta y gana 1 VT O si no hay enfermedades sobre esta carta,, puedes ponerla bocabajo y obtener 3 VT.",
+  "You start with 54 MC . Draw a Science card.":"Comienza con 54 M€. Cuando reveles esta corporación, roba una carta con símbolo de ciencia.",
+  "Effect: When ANY microbe tag is played, add a disease here and lose 4 MC or as much as possible. When you play a science tag, remove a disease here and gain 1 TR OR if there are no diseases here, you MAY put this card face down in your EVENTS PILE to gain 3 TR.":"Efecto: cuando se juegue CUALQUIER símbolo de microbio, añade un recurso de enfermedad a esta carta y pierde 4 M€. Cuando juegues un símbolo de ciencia, elimina una enfermedad de esta carta y gana 1 VT O si no hay enfermedades sobre esta carta,, puedes ponerla bocabajo y obtener 3 VT.",
   
   "Arcadian": "Comunidades",
   "Communities": "Arcádicas",
@@ -104,11 +104,11 @@
   "pay": "Paga",
   "Pay": "Paga",
   "PAY": "Paga",
-  
+
   "Effect: When you play a building tag, including this, gain 1 microbe to this card, or remove 2 microbes here and raise your plant production 1 step.":"Efecto: al jugar una carta tipo edificio, incluyendo esta, gana 1 microbio para esta carta o quita 2 microbios de ella y aumenta tu producción de plantas 1 nivel.",
   "You start with 38 MC and 1 steel production.":"Comienza con 38 M€ y 1 nivel de producción de acero.",
   
-  "Effect: when a microbe tag is played, incl. this, THAT PLAYER gains 2 MC, or adds a microbe to THAT card, and you gain 2 MC.":"Efecto: al jugarse una carta tipo microbio, también esta, DICHO jugador gana 2M€ o añade 1 micróbio a esa carta y obtienes 2M€.",
+  "Effect: when a microbe tag is played, incl. this, THAT PLAYER gains 2 MC, or adds a microbe to THAT card, and you gain 2 MC.":"Efecto:al jugarse cartas tipo microbio (incl.esta), DICHO jugador gana 2M€ o añade 1 micróbio a esa carta y obtienes 2M€.",
   "You start with 44 MC. As your first action, reveal cards until you have revealed a microbe tag. Take it and discard the rest.":"Comienza con 44 M€. Como primera acción revela cartas hasta que hayas revelado una con símbolo de microbio. Toma esa carta en tu mano y descarta el resto.",
 
   "You start with 1 plant production and 47 MC":"Comienza con 47M€ y 1 nivel de producción de plantas",

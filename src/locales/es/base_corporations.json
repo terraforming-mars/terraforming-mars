@@ -83,14 +83,20 @@
   "You start with 40 MC.":"Comienza con 40 M€.",
   "Action: If your Terraform Rating was raised this generation, you may pay 3 MC to raise it 1 step more.":"Acción: si tu valor de terraformación aumentó en esta generación, puedes pagar 3 M€ para incrementarlo en 1 más.",
 
+  "Pharmacy Union": "Sindicato farmacéutico",
+  "You start with 54 MC . Draw a Science card.": "Comienza con 54 M€. Roba una carta de tipo Ciencia.",
+  "Effect: When ANY microbe tag is played, add a disease here and lose 4 MC or as much as possible. When you play a science tag, remove a disease here and gain 1 TR OR if there are no diseases here, you MAY put this card face down in your EVENTS PILE to gain 3 TR.": "Efecto: Cuando se ponga en juego CUALQUIER carta de tipo microbio añade una enfermedad aquí y pierde 4 M€ o tanto como sea posible. Al jugar una carta de tipo Ciencia quita una enfermedad y gana 1 VT O si no hay enfermedades PUEDES poner esta carta en la pila de eventos para ganar 3 VT.",
+  
+  "Arcadian": "Communidades",
+  "Communities": "Arcádicas",
+  "You start with 40 MC and 10 steel. AS YOUR FIRST ACTION, PLACE A COMMUNITY [PLAYER MARKER] ON A NON-RESERVED AREA.": "Comienza con 40 M€ y 10 de titanio. Como primera acción coloca una ficha de jugador en un ÁREA NO RESERVADA.",
   "ACTION: PLACE A COMMUNITY (PLAYER MARKER) ON A NON-RESERVED AREA ADJACENT TO ONE OF YOUR TILES OR MARKED AREAS":"Acción: coloca una ficha de jugador en un área no reservada adyadente a una de tus losetas o áreas marcadas",
   "EFFECT: MARKED AREAS ARE RESERVED FOR YOU. WHEN YOU PLACE A TILE THERE, GAIN 3 MC":"Efecto：las áreas marcadas están reservadas para ti. Al colocar una loseta allí obtén 3 M€.",
-  "You start with 40 MC and 10 steel. AS YOUR FIRST ACTION, PLACE A COMMUNITY (PLAYER MARKER) ON A NON-RESERVED AREA.":"Comienza con 40 M€ y 10 de titanio. Como primer acción coloca una ficha de jugador en un área no reservada.",
   
   "Action: Increase your energy production 1 step IF YOU HAVE NO ENERGY RESOURCES, or spend 3MC to draw a building card.":"Acción: aumenta tu producción de energía 1 nivel si no tienes recursos de energía o gasta 3 M€ para robar una carta tipo edificio.",
   "You start with 37 MC. Increase your steel production 1 step.":"Comienza con 37 M€. Aumenta tu producción de acero 1 nivel.",
   
-  "Effect: Each new adjacency between your tile and an opponent's tile gives you a standard resource of your choice (regardless of who just placed a tile).":"Efecto: por cada loseta tuya nueva adyacente a losetas de oponentes obten un recurso estandar a tu elección (independientemente de quien haya colocado la loseta).",
+  "Effect: Each new adjacency between your tile and an opponent's tile gives you a standard resource of your choice [regardless of who just placed a tile].":"Efecto: por cada loseta tuya nueva adyacente a losetas de oponentes obten un recurso estandar a tu elección (independientemente de quien haya colocado la loseta).",
   "You start with 47 MC. As your first action, place a greenery tile and raise the oxygen 1 step.":"Comienza con 47 M€. Como primera acción, cooca una loseta de vegetación y aumenta el oxígeno 1 nivel.",
   
   "Effect: When a player causes another player to decrease production or lose resources, pay 3MC to the victim, or as much as possible.":"Efecto: cuando un jugador cause a otro la pérdida de producción o recursos paga 3 M€ a a víctima o tanto como sea posible.",
@@ -99,8 +105,8 @@
   "Effect: When you play a building tag, including this, gain 1 microbe to this card, or remove 2 microbes here and raise your plant production 1 step.":"Efecto: al jugar una carta tipo edificio, incluyendo esta, gana 1 microbio para esta carta o quita 2 microbios de ella y aumenta tu producción de plantas 1 nivel.",
   "You start with 38 MC and 1 steel production.":"Comienza con 38 M€ y 1 nivel de producción de acero.",
   
-  "Effect: when a microbe tag is played, incl. this, THAT PLAYER gains 2 MC, or adds a microbe to THAT card, and you gain 2 MC.":"Efecto：cuando se juega una carta tipo microbio, incluyendo esta, dicho jugador gana 2 M€ o añade un micróbio a esa carta y tú ganas 2 M€.",
-  "You start with 44 MC. As your first action, reveal cards until you have revealed a microbe tag. Take that card into hand and discard the rest.":"Comienza con 44 M€. Como primera acción revela cartas hasta que hayas revelado una con símbolo de microbio. Toma esa carta en tu mano y descarta el resto.",
+  "Effect: when a microbe tag is played, incl. this, THAT PLAYER gains 2 MC, or adds a microbe to THAT card, and you gain 2 MC.":"Efecto：al jugarse una carta tipo microbio, también esta, DICHO jugador gana 2 M€ o añade un micróbio a esa carta y obtienes 2 M€.",
+  "You start with 44 MC. As your first action, reveal cards until you have revealed a microbe tag. Take it and discard the rest.":"Comienza con 44 M€. Como primera acción revela cartas hasta que hayas revelado una con símbolo de microbio. Toma esa carta en tu mano y descarta el resto.",
 
   "You start with 1 plant production and 47 MC":"Comienza con 47M€ y 1 nivel de producción de plantas",
   "Effect: For each step you increase the production of a resource, including this, you also gain that resource.":"Efecto：por cada nivel que aumentes la producción de un recurso, incluyento esta, también ganas ese recurso.",

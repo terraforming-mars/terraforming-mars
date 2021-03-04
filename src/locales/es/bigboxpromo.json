@@ -1,9 +1,9 @@
 {
-  "Action: Add an asteroid resource to ANY card or gain any standard resource, OR remove an asteroid resource from this card to gain 3 titanium.":"Añade un asteroide a CUALQUIER CARTA o gana un recurso estándar cualquiera O elimina un asteroide de esta carta y obtén 3 de titanio.",
-  "Astrodrill":"Astrodrill",
+  "Astrodrill":"Astrotaladro",
   "You start with 38 MC and 3 asteroid resources.":"Comienza con 38 M€ y 3 recursos de asteroide.",
-  "Asteroid Hollowing":"Vaciado de Asteroides",
+  "Add an asteroid resource to ANY card OR gain any standard resource, OR remove an asteroid resource from this card to gain 3 titanium..": "Acción: añade 1 asteroide a CUALQUIER carta U obtén cualquier recurso estándar O quita un asteroide de aquó para obtener 3 de titanio.",
   
+  "Asteroid Hollowing":"Vaciado de Asteroides",
   "Action: Spend 1 titanium to add 1 asteroid resource here and increase MC production 1 step.":"Acción: gasta 1 de titanio para añadir 1 asteroide aquí e incrementar 1 nivel tu producción de M€.",
   "1VP for each 2 asteroids on this card.":"1 PV por cada 2 asteorides en esta carta.",
   "Advertising":"Propapanga",
@@ -72,7 +72,10 @@
   "Penguin":"Pingüinos",
   "(Requires 8 oceans.)":"(Requiere 8 océanos)",
   "Requires 8 oceans. 1 VP for each animal on this card":"Requiere  océanos. 1 PV por cada animal en esta carta",
-  
+
+  "Pharmacy Union": "Pharmacy Union",
+  "You start with 54 MC . Draw a Science card.": "Rozpoczynasz grę z 54 MC. Odkrywaj karty z wierzchu talii projektów, dopóki nie odkryjesz karty z symbolem nauki. Weź tę kartę na rękę, a resztę odrzuć.",
+  "Effect: When ANY microbe tag is played, add a disease here and lose 4 MC or as much as possible. When you play a science tag, remove a disease here and gain 1 TR OR if there are no diseases here, you MAY put this card face down in your EVENTS PILE to gain 3 TR.": "Efekt trwały: Za każdym razem, gdy któryś z graczy zagra kartę z symbolem mikrobów (z tą włącznie), umieść na tej karcie 1 jednostkę chorób i zapłać 4 MC (lub tyle, ile możesz). Gdy zagrywasz kartę z symbolem nauki, usuń 1 jednostkę chorób z tej karty i podnieś swój WT o 1 poziom, albo, jeśli na tej karcie nie ma jednostek chorób, możesz podnieść swój WT o 3 poziomy i obrócić tę kartę wierzchem na dół (tracąc symbole i efekty tej karty).",
   
   "Sub-Crust Measurements":"Mediciones en la subcorteza",
   "Action: Draw a card.":"Acción: roba una carta",

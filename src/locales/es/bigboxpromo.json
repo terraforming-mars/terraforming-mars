@@ -10,9 +10,6 @@
   "Effect: When you play a card with a basic cost of 20 MC or more, increase your MC production 1 step.":"Cuando juegues una carta con coste 20 M€ o más, aumenta 1 nivel tu producción de M€.",
   
   
-  "You start with 54 MC. When this corporation is revealed, draw a Science card.":"Comienza con 54 M€. Cuando reveles esta corporación, roba una carta con símbolo de ciencia.",
-  
-  "Effect: When ANY microbe tag is played, add a disease here and lose 4 MC. When you play a science tag, remove a disease here and gain 1 TR OR if there are no diseases here, you may turn this card face down to gain 3 TR":"Efecto: cuando se juegue CUALQUIER símbolo de microbio, añade un recurso de enfermedad a esta carta y pierde 4 M€. Cuando juegues un símbolo de ciencia, elimina una enfermedad de esta carta y gana 1 VT O si no hay enfermedades sobre esta carta,, puedes ponerla bocabajo y obtener 3 VT.",
   
   "Comet Aiming":"Apuntado de Cometas",
   "(Action: Spend 1 titanium to add 1 asteroid resource to ANY CARD.)":"Acción: asta 1 titanio para añadir un recurso de asteroide a CUALQUIER CARTA.",
@@ -72,10 +69,6 @@
   "Penguin":"Pingüinos",
   "(Requires 8 oceans.)":"(Requiere 8 océanos)",
   "Requires 8 oceans. 1 VP for each animal on this card":"Requiere  océanos. 1 PV por cada animal en esta carta",
-
-  "Pharmacy Union": "Pharmacy Union",
-  "You start with 54 MC . Draw a Science card.": "Rozpoczynasz grę z 54 MC. Odkrywaj karty z wierzchu talii projektów, dopóki nie odkryjesz karty z symbolem nauki. Weź tę kartę na rękę, a resztę odrzuć.",
-  "Effect: When ANY microbe tag is played, add a disease here and lose 4 MC or as much as possible. When you play a science tag, remove a disease here and gain 1 TR OR if there are no diseases here, you MAY put this card face down in your EVENTS PILE to gain 3 TR.": "Efekt trwały: Za każdym razem, gdy któryś z graczy zagra kartę z symbolem mikrobów (z tą włącznie), umieść na tej karcie 1 jednostkę chorób i zapłać 4 MC (lub tyle, ile możesz). Gdy zagrywasz kartę z symbolem nauki, usuń 1 jednostkę chorób z tej karty i podnieś swój WT o 1 poziom, albo, jeśli na tej karcie nie ma jednostek chorób, możesz podnieść swój WT o 3 poziomy i obrócić tę kartę wierzchem na dół (tracąc symbole i efekty tej karty).",
   
   "Sub-Crust Measurements":"Mediciones en la subcorteza",
   "Action: Draw a card.":"Acción: roba una carta",

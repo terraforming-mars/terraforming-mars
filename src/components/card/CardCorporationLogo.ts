@@ -20,8 +20,8 @@ export const CardCorporationLogo = Vue.component('CardCorporationLogo', {
         return '<div class="card-poseidon-logo">POSEIDON</div>';
       case CardName.SATURN_SYSTEMS:
         return `<div class="card-saturn-logo">
-        'SATURN <span style="font-size:20px;display:inline-block;">&#x25CF;</span> SYSTEMS';
-        '</div>`;
+        SATURN <span style="font-size:20px;display:inline-block;">&#x25CF;</span> SYSTEMS
+        </div>`;
       case CardName.CELESTIC:
         return `<div class="card-celestic-logo">
         <span style="background: linear-gradient(to right, rgb(251,192,137),rgb(251,192,137),rgb(23,185,236));padding-left: 5px;">CEL</span>

@@ -16,7 +16,9 @@ import {Tags} from '../../cards/Tags';
 import {ALL_CARD_MANIFESTS} from '../../cards/AllCards';
 import {GameModule} from '../../GameModule';
 import {CardRequirements} from '../../cards/CardRequirements';
+import {PreferencesManager} from '../PreferencesManager';
 import {OwnerModel} from '../../components/SelectCard';
+
 
 export const Card = Vue.component('card', {
   components: {
@@ -121,6 +123,10 @@ export const Card = Vue.component('card', {
       if (this.isStandardProject()) {
         classes.push('card-standard-project');
       }
+      const learnerModeOff = PreferencesManager.loadValue('learner_mode') === '0';
+      if (learnerModeOff && this.isStandardProject() && card.isDisabled) {
+        classes.push('card-hide');
+      }
       return classes.join(' ');
     },
     getCardMetadata: function(): CardMetadata | undefined {
@@ -154,8 +160,8 @@ export const Card = Vue.component('card', {
             <CardResourceCounter v-if="card.resources !== undefined" :amount="getResourceAmount(card)" />
             <CardExtraContent :card="card" />
             <template v-if="owner !== undefined">
-              <div :class="'card-owner-label player_translucent_bg_color_'+ owner?.color">
-                {{owner?.name}}
+              <div :class="'card-owner-label player_translucent_bg_color_'+ owner.color">
+                {{owner.name}}
               </div>
             </template>
         </div>

@@ -22,8 +22,6 @@ import {KeyboardNavigation} from '../../src/KeyboardNavigation';
 import {MoonBoard} from './moon/MoonBoard';
 import {Phase} from '../../src/Phase';
 
-const dialogPolyfill = require('dialog-polyfill');
-
 import * as raw_settings from '../genfiles/settings.json';
 
 export interface PlayerHomeModel {
@@ -125,7 +123,7 @@ export const PlayerHome = Vue.component('player-home', {
     },
     getFleetsCountRange: function(player: PlayerModel): Array<number> {
       const fleetsRange: Array<number> = [];
-      for (let i = 0; i < player.fleetSize - player.tradesThisTurn; i++) {
+      for (let i = 0; i < player.fleetSize - player.tradesThisGeneration; i++) {
         fleetsRange.push(i);
       }
       return fleetsRange;
@@ -179,25 +177,10 @@ export const PlayerHome = Vue.component('player-home', {
     window.removeEventListener('keydown', this.navigatePage);
   },
   mounted: function() {
-    dialogPolyfill.default.registerDialog(
-      document.getElementById('dialog-default'),
-    );
     window.addEventListener('keydown', this.navigatePage);
   },
   template: `
         <div id="player-home" :class="(player.turmoil ? 'with-turmoil': '')">
-            <section>
-                <dialog id="dialog-default">
-                    <form method="dialog">
-                        <p class="title" v-i18n>Error with input</p>
-                        <p id="dialog-default-message"></p>
-                        <menu class="dialog-menu centered-content">
-                            <button class="btn btn-lg btn-primary">OK</button>
-                        </menu>
-                    </form>
-                </dialog>
-            </section>
-
             <top-bar :player="player" />
 
             <div v-if="player.phase === 'end'">
@@ -269,9 +252,9 @@ export const PlayerHome = Vue.component('player-home', {
                 </div>
 
                 <a name="cards" class="player_home_anchor"></a>
-                <div class="player_home_block player_home_block--hand" v-if="player.cardsInHand.length > 0" id="shortkey-hand">
-                    <dynamic-title title="Cards In Hand" :color="player.color" :withAdditional="true" :additional="player.cardsInHandNbr.toString()" />
-                    <sortable-cards :playerId="player.id" :cards="player.cardsInHand" />
+                <div class="player_home_block player_home_block--hand" v-if="player.cardsInHand.length + player.preludeCardsInHand.length > 0" id="shortkey-hand">
+                    <dynamic-title title="Cards In Hand" :color="player.color" :withAdditional="true" :additional="(player.cardsInHandNbr + player.preludeCardsInHand.length).toString()" />
+                    <sortable-cards :playerId="player.id" :cards="player.preludeCardsInHand.concat(player.cardsInHand)" />
                 </div>
 
                 <div class="player_home_block player_home_block--cards"">

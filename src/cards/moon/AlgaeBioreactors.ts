@@ -20,7 +20,7 @@ export class AlgaeBioreactors extends MoonCard {
         description: 'Decrease your plant production 1 step. Raise Colony Rate 1 step and oxygen 1%.',
         cardNumber: 'M47',
         renderData: CardRenderer.builder((b) => {
-          b.production((pb) => pb.minus().plants(1)).moonColonyRate(1).oxygen(1);
+          b.production((pb) => pb.minus().plants(1)).moonColonyRate().oxygen(1);
         }),
       },
     }, {

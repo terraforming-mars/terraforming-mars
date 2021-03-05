@@ -18,7 +18,7 @@ export class NewColonyPlanningInitiaitives extends Card {
         description: 'Requires Colony Rate to be 2 or higher. Raise Colony Rate 1 step.',
         cardNumber: 'M31',
         renderData: CardRenderer.builder((b) => {
-          b.moonColonyRate(1);
+          b.moonColonyRate();
         }),
       },
     });

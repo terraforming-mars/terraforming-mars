@@ -30,7 +30,7 @@ export class LunaMiningHub extends MoonCard {
         renderData: CardRenderer.builder((b) => {
           b.minus().titanium(1).minus().steel(1).br;
           b.production((pb) => pb.steel(1).titanium(1));
-          b.tile(TileType.LUNA_MINING_HUB, true).moonMiningRate(1);
+          b.tile(TileType.LUNA_MINING_HUB, true).moonMiningRate();
         }),
         victoryPoints: CardRenderDynamicVictoryPoints.questionmark(), // (2, 1),
       },

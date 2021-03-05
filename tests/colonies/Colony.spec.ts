@@ -77,7 +77,7 @@ describe('Colony', function() {
   it('Should increase by 1 at the end of a generation', function() {
     game.colonies = game.colonyDealer!.drawColonies(4, [], true, true);
     game.colonies.forEach((colony) => {
-      colony.endGeneration();
+      colony.endGeneration(game);
       if (colony.isActive) {
         expect(colony.trackPosition).to.eq(2);
       } else {

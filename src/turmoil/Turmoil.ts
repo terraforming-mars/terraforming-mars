@@ -236,7 +236,7 @@ export class Turmoil implements ISerializable<SerializedTurmoil> {
       this.lobby = new Set<string>();
 
       game.getPlayers().forEach((player) => {
-        if (this.getDelegates(player.id) > 0) {
+        if (this.getDelegatesInReserve(player.id) > 0) {
           const index = this.delegateReserve.indexOf(player.id);
           if (index > -1) {
             this.delegateReserve.splice(index, 1);
@@ -383,15 +383,14 @@ export class Turmoil implements ISerializable<SerializedTurmoil> {
     }
 
     // Return number of delegates in reserve
-    // TODO(kberg): rename to getDelegatesInReserve()
-    public getDelegates(playerId: PlayerId | NeutralPlayer): number {
+    public getDelegatesInReserve(playerId: PlayerId | NeutralPlayer): number {
       const delegates = this.delegateReserve.filter((p) => p === playerId).length;
       return delegates;
     }
 
     // Check if player has delegates available
     public hasAvailableDelegates(playerId: PlayerId | NeutralPlayer): boolean {
-      return this.getDelegates(playerId) > 0;
+      return this.getDelegatesInReserve(playerId) > 0;
     }
 
     // Get Victory Points
@@ -440,7 +439,6 @@ export class Turmoil implements ISerializable<SerializedTurmoil> {
 
       turmoil.delegateReserve = d.delegateReserve;
 
-      // TODO(kberg): remove this test by 2021-02-01
       turmoil.politicalAgendasData = PoliticalAgendas.deserialize(d.politicalAgendasData);
 
       d.parties.forEach((sp) => {
@@ -454,21 +452,6 @@ export class Turmoil implements ISerializable<SerializedTurmoil> {
 
       turmoil.playersInfluenceBonus = new Map<string, number>(d.playersInfluenceBonus);
 
-      function globalEventName(object: any): string {
-        function instanceOfIGlobalEvent(object: any): object is IGlobalEvent {
-          try {
-            return 'revealedDelegate' in object;
-          } catch (typeError) {
-            return false;
-          }
-        }
-        if (instanceOfIGlobalEvent(object)) {
-          return object.name;
-        } else {
-          return object;
-        }
-      }
-
       turmoil.playersInfluenceBonus = new Map<string, number>(d.playersInfluenceBonus);
 
       if (d.distantGlobalEvent) {
@@ -478,7 +461,7 @@ export class Turmoil implements ISerializable<SerializedTurmoil> {
         turmoil.comingGlobalEvent = getGlobalEventByName(d.comingGlobalEvent);
       }
       if (d.currentGlobalEvent) {
-        turmoil.currentGlobalEvent = getGlobalEventByName(globalEventName(d.currentGlobalEvent));
+        turmoil.currentGlobalEvent = getGlobalEventByName(d.currentGlobalEvent);
       }
 
       return turmoil;

@@ -194,6 +194,8 @@ export class Game implements ISerializable<SerializedGame> {
   public monsInsuranceOwner: PlayerId | undefined = undefined;
   // Crash Site promo project
   public someoneHasRemovedOtherPlayersPlants: boolean = false;
+  // Syndicate Pirate Raids
+  public syndicatePirateRaider: PlayerId | undefined = undefined;
 
   private constructor(
     public id: GameId,
@@ -251,9 +253,6 @@ export class Game implements ISerializable<SerializedGame> {
       gameOptions.draftVariant = false;
       gameOptions.initialDraftVariant = false;
       gameOptions.randomMA = RandomMAOptionType.NONE;
-      if (gameOptions.moonExpansion) {
-        gameOptions.requiresMoonTrackCompletion = true;
-      }
 
       players[0].setTerraformRating(14);
       players[0].terraformRatingAtGenerationStart = 14;
@@ -416,6 +415,7 @@ export class Game implements ISerializable<SerializedGame> {
       researchedPlayers: Array.from(this.researchedPlayers),
       seed: this.seed,
       someoneHasRemovedOtherPlayersPlants: this.someoneHasRemovedOtherPlayersPlants,
+      syndicatePirateRaider: this.syndicatePirateRaider,
       temperature: this.temperature,
       unDraftedCards: Array.from(this.unDraftedCards.entries()).map((a) => {
         return [
@@ -768,8 +768,10 @@ export class Game implements ISerializable<SerializedGame> {
   private gotoEndGeneration() {
     if (this.gameOptions.coloniesExtension) {
       this.colonies.forEach((colony) => {
-        colony.endGeneration();
+        colony.endGeneration(this);
       });
+      // Syndicate Pirate Raids hook. Also see Colony.ts and Player.ts
+      this.syndicatePirateRaider = undefined;
     }
 
     if (this.gameOptions.turmoilExtension) {
@@ -1630,6 +1632,7 @@ export class Game implements ISerializable<SerializedGame> {
     game.initialDraftIteration = d.initialDraftIteration;
     game.monsInsuranceOwner = d.monsInsuranceOwner;
     game.someoneHasRemovedOtherPlayersPlants = d.someoneHasRemovedOtherPlayersPlants;
+    game.syndicatePirateRaider = d.syndicatePirateRaider;
 
     // Still in Draft or Research of generation 1
     if (game.generation === 1 && players.some((p) => p.corporationCard === undefined)) {

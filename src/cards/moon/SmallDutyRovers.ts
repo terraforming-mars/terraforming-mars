@@ -24,7 +24,7 @@ export class SmallDutyRovers extends MoonCard implements IProjectCard {
         description: 'Spend 1 Titanium. Raise Logistic Rate 1 step. Gain 1 MC per each colony tile, mine tile and road tile on the Moon.',
         cardNumber: 'M73',
         renderData: CardRenderer.builder((b) => {
-          b.minus().titanium(1).moonLogisticsRate(1).br;
+          b.minus().titanium(1).moonLogisticsRate().br;
           b.megacredits(1).slash()
             .tile(TileType.MOON_COLONY, false)
             .tile(TileType.MOON_MINE, false)

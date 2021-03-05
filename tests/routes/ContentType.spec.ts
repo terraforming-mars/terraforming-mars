@@ -6,7 +6,7 @@ describe('ContentType', () => {
     ['/path/to/foo.ico', 'image/x-icon'],
     ['/path/to/foo.js', 'text/javascript'],
     ['/path/to/foo.map', 'text/javascript'],
-    ['/path/to/foo.js.gzip', 'text/javascript'],
+    ['/path/to/foo.js.gz', 'text/javascript'],
     ['/path/to/foo.png.br', 'image/png'],
     ['/path/to/foo.js.zip', undefined],
     ['/path/to/foo.png.ico', 'image/x-icon'],

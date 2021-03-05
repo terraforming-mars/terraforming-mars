@@ -1,5 +1,6 @@
 import * as http from 'http';
 import {Handler} from './Handler';
+import {IContext} from './IHandler';
 import {ServeAsset} from './ServeAsset';
 
 export class ServeApp extends Handler {

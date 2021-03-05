@@ -2,10 +2,6 @@
 import * as http from 'http';
 
 export class Route {
-  public static supportsEncoding(req: http.IncomingMessage, encoding: 'gzip' | 'br'): boolean {
-    return req.headers['accept-encoding'] !== undefined &&
-           req.headers['accept-encoding'].includes(encoding);
-  }
   public badRequest(req: http.IncomingMessage, res: http.ServerResponse, err?: string): void {
     console.warn('bad request', req.url);
     res.writeHead(400);

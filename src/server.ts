@@ -20,6 +20,7 @@ import {ApiGameLogs} from './routes/ApiGameLogs';
 import {ApiGames} from './routes/ApiGames';
 import {ApiGame} from './routes/ApiGame';
 import {ApiPlayer} from './routes/ApiPlayer';
+import {ApiSpectator} from './routes/ApiSpectator';
 import {ApiWaitingFor} from './routes/ApiWaitingFor';
 import {IHandler} from './routes/IHandler';
 import {Route} from './routes/Route';
@@ -63,6 +64,7 @@ const handlers: Map<string, IHandler> = new Map(
     // ['/main.js', ServeAsset.INSTANCE],
     // ['/main.js.map', ServeAsset.INSTANCE],
     ['/api/player', ApiPlayer.INSTANCE],
+    ['/api/spectator', ApiSpectator.INSTANCE],
     ['/api/waitingfor', ApiWaitingFor.INSTANCE],
     ['/api/games', ApiGames.INSTANCE],
     ['/api/game', ApiGame.INSTANCE],
@@ -293,7 +295,6 @@ function createGame(req: http.IncomingMessage, res: http.ServerResponse): void {
       const gameReq = JSON.parse(body);
       const gameId = generateRandomId();
       const spectatorId = generateRandomId();
-      console.log(`gameId: ${gameId} | spectatorId: ${spectatorId}`);
       const players = gameReq.players.map((obj: any) => {
         return new Player(
           obj.name,
@@ -371,7 +372,7 @@ function createGame(req: http.IncomingMessage, res: http.ServerResponse): void {
         });
       } else {
         const seed = Math.random();
-        const game = Game.newInstance(gameId, players, players[firstPlayerIdx], gameOptions, seed, spectatorId);
+        const game = Game.newInstance(gameId, players, players[firstPlayerIdx], gameOptions, spectatorId, seed);
         GameLoader.getInstance().add(game);
         res.setHeader('Content-Type', 'application/json');
         res.write(getGameModelJSON(game));

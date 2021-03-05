@@ -65,6 +65,7 @@ export interface PlayerModel {
     preludeCardsInHand: Array<CardModel>;
     selfReplicatingRobotsCards: Array<CardModel>;
     spaces: Array<SpaceModel>;
+    spectatorId?: string;
     steel: number;
     steelProduction: number;
     steelValue: number;

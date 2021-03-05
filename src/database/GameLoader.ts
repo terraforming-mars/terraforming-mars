@@ -1,5 +1,5 @@
 import {Database} from './Database';
-import {Game, GameId} from '../Game';
+import {Game, GameId, SpectatorId} from '../Game';
 import {PlayerId} from '../Player';
 
 type LoadCallback = (game: Game | undefined) => void;
@@ -35,6 +35,9 @@ export class GameLoader {
 
   // player ids which we know exist mapped to game id
   private readonly playerIds = new Map<PlayerId, GameId>();
+
+  // spectator ids which we know exist mapped to game id
+  private readonly spectatorIds = new Map<SpectatorId, GameId>();
 
   // requests for game that are waiting to load
   private readonly gameRequests: Array<[GameId, boolean, LoadCallback]> = [];
@@ -91,6 +94,17 @@ export class GameLoader {
     } else if (gameId !== undefined || this.state !== State.READY) {
       this.playerRequests.push([playerId, cb]);
       this.loadNextGame();
+    } else {
+      cb(undefined);
+    }
+  }
+
+  public getBySpectatorId(spectatorId: SpectatorId, cb: LoadCallback): void {
+    // TODO finish implementation
+    this.loadAllGameIds();
+    const gameId = this.spectatorIds.get(spectatorId);
+    if (gameId !== undefined) {
+      cb(this.games.get(gameId));
     } else {
       cb(undefined);
     }

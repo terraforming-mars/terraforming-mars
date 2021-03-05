@@ -235,7 +235,8 @@ export class Game implements ISerializable<SerializedGame> {
     players: Array<Player>,
     firstPlayer: Player,
     gameOptions: GameOptions = {...DEFAULT_GAME_OPTIONS},
-    seed: number = 0, spectatorId: SpectatorId = '000000000000'): Game {
+    spectatorId: SpectatorId,
+    seed: number = 0): Game {
     if (gameOptions.clonedGamedId !== undefined) {
       throw new Error('Cloning should not come through this execution path.');
     }
@@ -1536,6 +1537,11 @@ export class Game implements ISerializable<SerializedGame> {
 
     // Rebuild dealer object to be sure that we will have cards in the same order
     const dealer = Dealer.deserialize(d.dealer);
+
+    // TODO - remove once all old games have spectator id
+    if (d.spectatorId === undefined) {
+      d.spectatorId = Math.floor(Math.random() * Math.pow(16, 12)).toString(16);
+    }
 
     const game: Game = new Game(d.id, players, first, d.activePlayer, gameOptions, d.seed, board, dealer, d.spectatorId);
 

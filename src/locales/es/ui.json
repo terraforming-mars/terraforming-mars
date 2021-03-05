@@ -17,6 +17,9 @@
     "Black": "Negro",
     "Purple": "Morado",
 
+    
+
+
     "tharsis": "Tharsis",
     "hellas": "Hellas",
     "elysium": "Elysium",
@@ -70,7 +73,7 @@
     "Tycoon": "Magnate",
     "Requires that you have 15 project cards in play (blue and green cards)": "Requiere que tener 15 cartas de proyecto en juego (cartas azules y verdes).",
 
-"   Awards": "Recompensas",
+    "Awards": "Recompensas",
     "Landlord": "Terrateniente",
     "Owning the most tiles in play": "Poseer la mayor cantidad de losetas en juego.",
     "Banker": "Banquero",
@@ -105,7 +108,6 @@
     "Having the most Venus tags in play": "Contar con el mayor número de símbolos de Venus en juego (los eventos no cuentan).",
 
     "Actions": "Acciones",
-    "Played Cards": "Cartas Jugadas",
     "Hide active cards": "Ocultar cartas activas",
     "Show active cards": "Mostrar cartas activas",
     "Hide automated cards": "Ocultar cartas automáticas",
@@ -124,6 +126,16 @@
     "(click on player name to see details)": "(para ver detalles haz clic en el nombre de jugador)",
     "Go to game results": "Ir a resultados de la partida",
     "Save": "Guardar",
+    "show tiles" :"mostrar losetas",
+    "hide tiles": "ocultar losetas",
+    "toggle tags view:": "cambiar vista de símbolos:",
+    "concise": "Abreviada",
+    "CONCISE": "Abreviada",
+    "full": "Completa",
+    "FULL" : "Completa",
+    "Played Cards": "ha jugado las cartas",
+    "played cards": "ha jugado las cartas",
+
 
     "Select which cards to take into hand": "Seleccionar que cartas deseas llevarte a la mano (3 )",
     "Not enough cards selected": "No hay suficientes cartas seleccionadas",
@@ -187,7 +199,7 @@
     "Agendas": "Agendas",
     "Random": "Aleatorio",
     "The Moon": "La Luna",
-    "Drafted cards": "Drafted cards",
+    "Drafted cards": "Cartas elegidas",
     "Take first action of Celestic corporation": "Realiza la primera acción de la corporación Celestic",
     "Draw 2 cards with a floater icon on it": "Roba 2 cartas con un flotador en ellas",
     "Project Cards": "Cartas de Proyecto",
@@ -206,7 +218,6 @@
      "Select where to build the second colony": "Selecciona donde quieres construir la segunda colonia",
      "Select ocean space for Europa colony":"Selecciona un área de océano para la colonia Europa",
      "The id of this game is S{0}": "El identificador de esta partida es S{0}",
-     "Take action": "Realizar acción",
      "Select": "Seleccionar",
      "Take": "Tomar",
      "Pay":"Pagar",
@@ -256,7 +267,8 @@
     "Select space for greenery tile": "Selecciona un área para una loseta de vegetación",
     "show": "Mostrar",
     "hide": "Esconder",
-    "Game Log": "Registro de juego",
+    "Game Log": "Registro de la partida",
+    "Game log": "Registro de la partida",
     "Select prelude card to play": "Selecciona la carta de Preludio que deseas jugar",
     "Pay trade fee": "Pagar tasa comercial",
     "Select colony tile for trade": "Seleccionar loseta de colonia para comerciar",
@@ -305,11 +317,8 @@
     "Turmoil": "Conflictos",
 
     "TR solo mode": "VT modo solitario",
-
-
-
+    
     "Players": "Jugadores",
-
 
     "Goes First?": "¿Va el primero?",
 

@@ -32,8 +32,9 @@ describe('AerospaceMission', function() {
     game.deferredActions.pop();
     selectColony2.cb((<any>ColonyName)[selectColony2.coloniesModel[0].name.toUpperCase()]);
 
-    const openColonies = game.colonies.filter((colony) => colony.isActive);
-    expect(openColonies[0].colonies.find((c) => c === player.id)).is.not.undefined;
-    expect(openColonies[1].colonies.find((c) => c === player.id)).is.not.undefined;
+    const builtColonies = game.colonies.filter((colony) => colony.isActive && colony.colonies.length > 0);
+    expect(builtColonies).has.lengthOf(2);
+    expect(builtColonies[0].colonies.find((c) => c === player.id)).is.not.undefined;
+    expect(builtColonies[1].colonies.find((c) => c === player.id)).is.not.undefined;
   });
 });

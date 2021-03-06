@@ -14,7 +14,7 @@ const MOON_OPTIONS = setCustomGameOptions({moonExpansion: true});
 
 describe('NanotechIndustries', () => {
   let player: Player;
-  let card: NanotechIndustries;
+  let nanotechIndustries: NanotechIndustries;
 
   // Physics Complex: 2 points per resource.
   const physicsComplex = new PhysicsComplex();
@@ -28,17 +28,18 @@ describe('NanotechIndustries', () => {
   beforeEach(() => {
     player = TestPlayers.BLUE.newPlayer();
     Game.newInstance('id', [player], player, MOON_OPTIONS);
-    card = new NanotechIndustries();
+    nanotechIndustries = new NanotechIndustries();
   });
 
   it('act', () => {
+    player.corporationCard = nanotechIndustries;
     player.playedCards = [physicsComplex, searchForLife, olympusConference, prideoftheEarthArkship];
-    card.action(player);
+    nanotechIndustries.action(player);
 
     const action: SelectCard<IProjectCard> =
       player.game.deferredActions.pop()?.execute() as SelectCard<IProjectCard>;
 
-    expect(action!.cards).has.members([olympusConference, prideoftheEarthArkship]);
+    expect(action!.cards).has.members([nanotechIndustries, olympusConference, prideoftheEarthArkship]);
 
     olympusConference.resourceCount = 0;
     action.cb([olympusConference]);
@@ -50,18 +51,18 @@ describe('NanotechIndustries', () => {
   });
 
   it('victory points', () => {
-    card.resourceCount = 0;
-    expect(card.getVictoryPoints()).eq(0);
-    card.resourceCount = 1;
-    expect(card.getVictoryPoints()).eq(0);
-    card.resourceCount = 2;
-    expect(card.getVictoryPoints()).eq(1);
-    card.resourceCount = 3;
-    expect(card.getVictoryPoints()).eq(1);
-    card.resourceCount = 4;
-    expect(card.getVictoryPoints()).eq(2);
-    card.resourceCount = 5;
-    expect(card.getVictoryPoints()).eq(2);
+    nanotechIndustries.resourceCount = 0;
+    expect(nanotechIndustries.getVictoryPoints()).eq(0);
+    nanotechIndustries.resourceCount = 1;
+    expect(nanotechIndustries.getVictoryPoints()).eq(0);
+    nanotechIndustries.resourceCount = 2;
+    expect(nanotechIndustries.getVictoryPoints()).eq(1);
+    nanotechIndustries.resourceCount = 3;
+    expect(nanotechIndustries.getVictoryPoints()).eq(1);
+    nanotechIndustries.resourceCount = 4;
+    expect(nanotechIndustries.getVictoryPoints()).eq(2);
+    nanotechIndustries.resourceCount = 5;
+    expect(nanotechIndustries.getVictoryPoints()).eq(2);
   });
 });
 

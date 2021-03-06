@@ -37,10 +37,7 @@ describe('MilestoneAwardSelector', function() {
     // Tharsis milestones and awards has total synergy of 21 and break the rules.
     expect(MilestoneAwardSelector.verifySynergyRules(
       getMAIndices(...ORIGINAL_MILESTONES, ...ORIGINAL_AWARDS),
-      MilestoneAwardSelector.MAX_SYNERGY_ALLOWED_RULE,
-      MilestoneAwardSelector.TOTAL_SYNERGY_ALLOWED_RULE,
-      MilestoneAwardSelector.NUM_HIGH_ALLOWED_RULE,
-      MilestoneAwardSelector.HIGH_THRESHOLD_RULE)).eq(false);
+      MilestoneAwardSelector.LIMITED_SYNERGY)).eq(false);
   });
 
   it('Elysium\'s milestones and awards do not break limited synergy rules', function() {
@@ -48,26 +45,25 @@ describe('MilestoneAwardSelector', function() {
     // This set does not break the rules.
     expect(MilestoneAwardSelector.verifySynergyRules(
       getMAIndices(...ELYSIUM_MILESTONES, ...ELYSIUM_AWARDS),
-      MilestoneAwardSelector.MAX_SYNERGY_ALLOWED_RULE,
-      MilestoneAwardSelector.TOTAL_SYNERGY_ALLOWED_RULE,
-      MilestoneAwardSelector.NUM_HIGH_ALLOWED_RULE,
-      MilestoneAwardSelector.HIGH_THRESHOLD_RULE)).eq(true);
+      MilestoneAwardSelector.LIMITED_SYNERGY)).eq(true);
   });
 
   it('Hellas\'s milestones and awards do not break limited synergy rules', function() {
     // Hellas milestones and awards has total synergy of 11 and no high pair. It does not break the rules.
     expect(MilestoneAwardSelector.verifySynergyRules(
       getMAIndices(...HELLAS_MILESTONES, ...HELLAS_AWARDS),
-      MilestoneAwardSelector.MAX_SYNERGY_ALLOWED_RULE,
-      MilestoneAwardSelector.TOTAL_SYNERGY_ALLOWED_RULE,
-      MilestoneAwardSelector.NUM_HIGH_ALLOWED_RULE,
-      MilestoneAwardSelector.HIGH_THRESHOLD_RULE)).eq(true);
+      MilestoneAwardSelector.LIMITED_SYNERGY)).eq(true);
   });
 
   it('Hellas\'s milestones and awards break stringent limited synergy rules', function() {
     // Hellas milestones and awards break rules if allowed no synergy whatsoever.
     expect(MilestoneAwardSelector.verifySynergyRules(
       getMAIndices(...HELLAS_MILESTONES, ...HELLAS_AWARDS),
-      0, 0, 0, MilestoneAwardSelector.HIGH_THRESHOLD_RULE)).eq(false);
+      {
+        highThreshold: 10,
+        maxSynergyAllowed: 0,
+        numberOfHighAllowed: 0,
+        totalSynergyAllowed: 0,
+      })).eq(false);
   });
 });

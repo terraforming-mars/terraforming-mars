@@ -1,3 +1,4 @@
+import {AresSetup} from './ares/AresSetup';
 import {ELYSIUM_AWARDS, HELLAS_AWARDS, ORIGINAL_AWARDS, VENUS_AWARDS} from './awards/Awards';
 import {Banker} from './awards/Banker';
 import {Benefactor} from './awards/Benefactor';
@@ -16,6 +17,7 @@ import {Scientist} from './awards/Scientist';
 import {SpaceBaron} from './awards/SpaceBaron';
 import {Thermalist} from './awards/Thermalist';
 import {Venuphile} from './awards/Venuphile';
+import {BoardName} from './boards/BoardName';
 import {GameOptions} from './Game';
 import {IDrawnMilestonesAndAwards} from './IDrawnMilestonesAndAwards';
 import {Builder} from './milestones/Builder';
@@ -35,6 +37,7 @@ import {Specialist} from './milestones/Specialist';
 import {Tactician} from './milestones/Tactician';
 import {Terraformer} from './milestones/Terraformer';
 import {Tycoon} from './milestones/Tycoon';
+import {RandomMAOptionType} from './RandomMAOptionType';
 
 export namespace MilestoneAwardSelector {
   // exported for testing.
@@ -50,7 +53,7 @@ export namespace MilestoneAwardSelector {
     ...VENUS_AWARDS,
   ];
 
-  export function buildSynergies(): Array<Array<number>> {
+  function buildSynergies(): Array<Array<number>> {
     const array: Array<Array<number>> = new Array(MA_ITEMS.length);
     for (let idx = 0; idx < MA_ITEMS.length; idx++) {
       array[idx] = new Array(MA_ITEMS.length).fill(0);
@@ -164,6 +167,7 @@ export namespace MilestoneAwardSelector {
   }
 
   // Function to compute max synergy of a given set of milestones and awards.
+  // Exported for testing
   export function computeSynergy(indexes: Array<number>) : number {
     let max = 0;
     for (let i = 0; i<indexes.length - 1; i++) {
@@ -181,6 +185,51 @@ export namespace MilestoneAwardSelector {
   export const TOTAL_SYNERGY_ALLOWED_RULE = 20;
   export const NUM_HIGH_ALLOWED_RULE = 20;
   export const HIGH_THRESHOLD_RULE = 4;
+
+  export function chooseMilestonesAndAwards(gameOptions: GameOptions): IDrawnMilestonesAndAwards {
+    let drawnMilestonesAndAwards: IDrawnMilestonesAndAwards = {
+      milestones: [],
+      awards: [],
+    };
+
+    const includeVenus = gameOptions.venusNextExtension && gameOptions.includeVenusMA;
+    const requiredQty = includeVenus ? 6 : 5;
+
+    switch (gameOptions.randomMA) {
+    case RandomMAOptionType.NONE:
+      switch (gameOptions.boardName) {
+      case BoardName.ORIGINAL:
+        drawnMilestonesAndAwards.milestones.push(...ORIGINAL_MILESTONES);
+        drawnMilestonesAndAwards.awards.push(...ORIGINAL_AWARDS);
+        break;
+      case BoardName.HELLAS:
+        drawnMilestonesAndAwards.milestones.push(...HELLAS_MILESTONES);
+        drawnMilestonesAndAwards.awards.push(...HELLAS_AWARDS);
+        break;
+      case BoardName.ELYSIUM:
+        drawnMilestonesAndAwards.milestones.push(...ELYSIUM_MILESTONES);
+        drawnMilestonesAndAwards.awards.push(...ELYSIUM_AWARDS);
+        break;
+      }
+      if (includeVenus) {
+        drawnMilestonesAndAwards.milestones.push(...VENUS_MILESTONES);
+        drawnMilestonesAndAwards.awards.push(...VENUS_AWARDS);
+      }
+
+      break;
+    case RandomMAOptionType.LIMITED:
+      drawnMilestonesAndAwards = MilestoneAwardSelector.getRandomMilestonesAndAwards(gameOptions, requiredQty);
+      break;
+    case RandomMAOptionType.UNLIMITED:
+      drawnMilestonesAndAwards = MilestoneAwardSelector.getRandomMilestonesAndAwards(gameOptions, requiredQty, 100, 100, 100, 100);
+      break;
+    }
+
+    if (gameOptions.aresExtension) {
+      AresSetup.setupMilestonesAwards(drawnMilestonesAndAwards);
+    };
+    return drawnMilestonesAndAwards;
+  };
 
   // Selects |numberMARequested| milestones and |numberMARequested| awards from all available awards and milestones (optionally including
   // Venusian.) It does this by following these rules:

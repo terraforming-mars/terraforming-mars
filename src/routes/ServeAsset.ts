@@ -136,16 +136,6 @@ export class ServeAsset extends Handler {
   }
 
   private supportedEncodings(req: http.IncomingMessage): Set<Encoding> {
-    const encoding: Set<Encoding> = new Set();
-    const acceptEncoding = req.headers['accept-encoding'];
-    if (acceptEncoding !== undefined) {
-      if (acceptEncoding.includes('br')) {
-        encoding.add('br');
-      }
-      if (acceptEncoding.includes('gzip')) {
-        encoding.add('gzip');
-      }
-    }
-    return encoding;
+    return new Set(req.headers['accept-encoding'] as (Array<Encoding> | undefined));
   }
 }

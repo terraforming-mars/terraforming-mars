@@ -1,11 +1,11 @@
-import {AresSetup} from './ares/AresSetup';
-import {ALL_AWARDS, ELYSIUM_AWARDS, HELLAS_AWARDS, ORIGINAL_AWARDS, VENUS_AWARDS} from './awards/Awards';
+import {ALL_AWARDS, ARES_AWARDS, ELYSIUM_AWARDS, HELLAS_AWARDS, ORIGINAL_AWARDS, VENUS_AWARDS} from './awards/Awards';
 import {Banker} from './awards/Banker';
 import {Benefactor} from './awards/Benefactor';
 import {Celebrity} from './awards/Celebrity';
 import {Contractor} from './awards/Contractor';
 import {Cultivator} from './awards/Cultivator';
 import {DesertSettler} from './awards/DesertSettler';
+import {Entrepeneur} from './awards/Entrepeneur';
 import {EstateDealer} from './awards/EstateDealer';
 import {Excentric} from './awards/Excentric';
 import {IAward} from './awards/IAward';
@@ -29,7 +29,8 @@ import {Generalist} from './milestones/Generalist';
 import {Hoverlord} from './milestones/Hoverlord';
 import {IMilestone} from './milestones/IMilestone';
 import {Mayor} from './milestones/Mayor';
-import {ALL_MILESTONES, ELYSIUM_MILESTONES, HELLAS_MILESTONES, ORIGINAL_MILESTONES, VENUS_MILESTONES} from './milestones/Milestones';
+import {ALL_MILESTONES, ARES_MILESTONES, ELYSIUM_MILESTONES, HELLAS_MILESTONES, ORIGINAL_MILESTONES, VENUS_MILESTONES} from './milestones/Milestones';
+import {Networker} from './milestones/Networker';
 import {Planner} from './milestones/Planner';
 import {PolarExplorer} from './milestones/PolarExplorer';
 import {RimSettler} from './milestones/RimSettler';
@@ -106,6 +107,7 @@ export namespace MilestoneAwardSelector {
       bind(Terraformer, Benefactor, 9);
       bind(Gardener, Cultivator, 9);
       bind(Builder, Contractor, 9);
+      bind(Networker, Entrepeneur, 9);
       bind(EstateDealer, Cultivator, 8);
       bind(Landlord, Cultivator, 8);
       bind(Landlord, DesertSettler, 7);
@@ -213,8 +215,11 @@ export namespace MilestoneAwardSelector {
   }
 
   export interface Constraints {
+    // No pairing may have a synergy greater than this.
     maxSynergyAllowed: number;
+    // Sum of all the synergies may be no greater than this.
     totalSynergyAllowed: number;
+    // 3) Limited a number of pair with synergy at |highThreshold| or above to |numberOfHighAllowed| or below.
     numberOfHighAllowed: number;
     highThreshold: number;
   }
@@ -240,6 +245,7 @@ export namespace MilestoneAwardSelector {
     };
 
     const includeVenus = gameOptions.venusNextExtension && gameOptions.includeVenusMA;
+
     const requiredQty = includeVenus ? 6 : 5;
 
     switch (gameOptions.randomMA) {
@@ -262,8 +268,12 @@ export namespace MilestoneAwardSelector {
         drawnMilestonesAndAwards.milestones.push(...VENUS_MILESTONES);
         drawnMilestonesAndAwards.awards.push(...VENUS_AWARDS);
       }
-
+      if (gameOptions.aresExtension) {
+        drawnMilestonesAndAwards.milestones.push(...ARES_MILESTONES);
+        drawnMilestonesAndAwards.awards.push(...ARES_AWARDS);
+      };
       break;
+
     case RandomMAOptionType.LIMITED:
       drawnMilestonesAndAwards = getRandomMilestonesAndAwards(gameOptions, requiredQty, LIMITED_SYNERGY);
       break;
@@ -272,9 +282,6 @@ export namespace MilestoneAwardSelector {
       break;
     }
 
-    if (gameOptions.aresExtension) {
-      AresSetup.setupMilestonesAwards(drawnMilestonesAndAwards);
-    };
     return drawnMilestonesAndAwards;
   };
 
@@ -294,11 +301,17 @@ export namespace MilestoneAwardSelector {
       throw new Error('No limited synergy milestones and awards set was generated after ' + maxAttempts + ' attempts. Please try again.');
     }
 
-    const candidateMilestones = ALL_MILESTONES.map((ma) => ma.name);
-    const candidateAwards = ALL_AWARDS.map((ma) => ma.name);
+    const toName = (e: {name: string}) => e.name;
+
+    const candidateMilestones = ALL_MILESTONES.map(toName);
+    const candidateAwards = ALL_AWARDS.map(toName);
     if (withVenusian) {
-      candidateMilestones.push(...VENUS_MILESTONES.map((ma) => ma.name));
-      candidateAwards.push(...VENUS_AWARDS.map((ma) => ma.name));
+      candidateMilestones.push(...VENUS_MILESTONES.map(toName));
+      candidateAwards.push(...VENUS_AWARDS.map(toName));
+    }
+    if (gameOptions.aresExtension) {
+      candidateMilestones.push(...ARES_MILESTONES.map(toName));
+      candidateAwards.push(...ARES_AWARDS.map(toName));
     }
     const shuffledMilestones = shuffle(candidateMilestones);
     const shuffledAwards = shuffle(candidateAwards);

@@ -50,10 +50,10 @@ export class GameSetup {
 
       break;
     case RandomMAOptionType.LIMITED:
-      drawnMilestonesAndAwards = getRandomMilestonesAndAwards(includeVenus, requiredQty);
+      drawnMilestonesAndAwards = getRandomMilestonesAndAwards(gameOptions, requiredQty);
       break;
     case RandomMAOptionType.UNLIMITED:
-      drawnMilestonesAndAwards = getRandomMilestonesAndAwards(includeVenus, requiredQty, 100, 100, 100, 100);
+      drawnMilestonesAndAwards = getRandomMilestonesAndAwards(gameOptions, requiredQty, 100, 100, 100, 100);
       break;
     }
 

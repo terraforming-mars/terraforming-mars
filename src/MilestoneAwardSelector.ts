@@ -16,6 +16,7 @@ import {Scientist} from './awards/Scientist';
 import {SpaceBaron} from './awards/SpaceBaron';
 import {Thermalist} from './awards/Thermalist';
 import {Venuphile} from './awards/Venuphile';
+import {GameOptions} from './Game';
 import {IDrawnMilestonesAndAwards} from './IDrawnMilestonesAndAwards';
 import {Builder} from './milestones/Builder';
 import {Diversifier} from './milestones/Diversifier';
@@ -174,24 +175,26 @@ export function computeSynergy(indexes: Array<number>) : number {
 }
 
 // Limited Synergy Constants
-const MAX_RANDOM_ATTEMPTS: number = 5;
-export const MAX_SYNERGY_ALLOWED_RULE: number= 6;
-export const TOTAL_SYNERGY_ALLOWED_RULE: number= 20;
-export const NUM_HIGH_ALLOWED_RULE: number= 20;
-export const HIGH_THRESHOLD_RULE: number= 4;
+const MAX_RANDOM_ATTEMPTS = 5;
+export const MAX_SYNERGY_ALLOWED_RULE = 6;
+export const TOTAL_SYNERGY_ALLOWED_RULE = 20;
+export const NUM_HIGH_ALLOWED_RULE = 20;
+export const HIGH_THRESHOLD_RULE = 4;
 
 // Selects |numberMARequested| milestones and |numberMARequested| awards from all available awards and milestones (optionally including
 // Venusian.) It does this by following these rules:
 // 1) No pair with synergy above |maxSynergyAllowed|.
 // 2) Total synergy is |totalSynergyAllowed| or below.
 // 3) Limited a number of pair with synergy at |highThreshold| or above to |numberOfHighAllowed| or below.
-export function getRandomMilestonesAndAwards(withVenusian: boolean = true,
+export function getRandomMilestonesAndAwards(gameOptions: GameOptions,
   numberMARequested: number,
   maxSynergyAllowed: number = MAX_SYNERGY_ALLOWED_RULE,
   totalSynergyAllowed: number = TOTAL_SYNERGY_ALLOWED_RULE,
   numberOfHighAllowed: number = NUM_HIGH_ALLOWED_RULE,
   highThreshold: number = HIGH_THRESHOLD_RULE,
   attempt: number = 1): IDrawnMilestonesAndAwards {
+  const withVenusian = gameOptions.venusNextExtension && gameOptions.includeVenusMA;
+
   if (attempt > MAX_RANDOM_ATTEMPTS) {
     throw new Error('No limited synergy milestones and awards set was generated after ' + MAX_RANDOM_ATTEMPTS + ' attempts. Please try again.');
   }
@@ -211,7 +214,7 @@ export function getRandomMilestonesAndAwards(withVenusian: boolean = true,
       const newMilestone = shuffled_milestones.splice(0, 1)[0];
       // If need to add more milestone, but not enough milestone left, restart the function with a recursive call.
       if (newMilestone === undefined) {
-        return getRandomMilestonesAndAwards(withVenusian, numberMARequested, maxSynergyAllowed, totalSynergyAllowed, numberOfHighAllowed, highThreshold, attempt+1);
+        return getRandomMilestonesAndAwards(gameOptions, numberMARequested, maxSynergyAllowed, totalSynergyAllowed, numberOfHighAllowed, highThreshold, attempt+1);
       }
       const milestoneAddSuccess = pickedMA.addNewMA(newMilestone);
       if (milestoneAddSuccess) milestoneCount++;
@@ -219,7 +222,7 @@ export function getRandomMilestonesAndAwards(withVenusian: boolean = true,
       const newAward = shuffled_awards.splice(0, 1)[0];
       // If need to add more award, but not enough award left, restart the function with a recursive call.
       if (newAward === undefined) {
-        return getRandomMilestonesAndAwards(withVenusian, numberMARequested, maxSynergyAllowed, totalSynergyAllowed, numberOfHighAllowed, highThreshold, attempt+1);
+        return getRandomMilestonesAndAwards(gameOptions, numberMARequested, maxSynergyAllowed, totalSynergyAllowed, numberOfHighAllowed, highThreshold, attempt+1);
       }
       const awardAddSuccess = pickedMA.addNewMA(newAward);
       if (awardAddSuccess) awardCount++;

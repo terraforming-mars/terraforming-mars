@@ -10,7 +10,7 @@ function getMAIndices(...entries: Array<IMilestone | IAward>): Array<number> {
   return idxs;
 }
 
-describe('MilestoneAwardSelecter', function() {
+describe('MilestoneAwardSelector', function() {
   // These aren't particularly excellent tests as much as they help demonstrate
   // what the original maps, if selected in full, would have as a synergy.
 

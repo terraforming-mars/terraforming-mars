@@ -40,17 +40,24 @@ import {Tycoon} from './milestones/Tycoon';
 import {RandomMAOptionType} from './RandomMAOptionType';
 
 export namespace MilestoneAwardSelector {
-  // exported for testing.
-  export const MA_ITEMS = [
+  const MILESTONES = [
     ...ORIGINAL_MILESTONES,
     ...ELYSIUM_MILESTONES,
     ...HELLAS_MILESTONES,
     ...VENUS_MILESTONES,
+  ];
 
+  const AWARDS = [
     ...ORIGINAL_AWARDS,
     ...ELYSIUM_AWARDS,
     ...HELLAS_AWARDS,
     ...VENUS_AWARDS,
+  ];
+
+  // exported for testing.
+  export const MA_ITEMS = [
+    ...MILESTONES,
+    ...AWARDS,
   ];
 
   function buildSynergies(): Array<Array<number>> {

@@ -7,7 +7,7 @@ import {HellasBoard} from './boards/HellasBoard';
 import {ELYSIUM_MILESTONES, HELLAS_MILESTONES, ORIGINAL_MILESTONES, VENUS_MILESTONES} from './milestones/Milestones';
 import {OriginalBoard} from './boards/OriginalBoard';
 import {RandomMAOptionType} from './RandomMAOptionType';
-import {getRandomMilestonesAndAwards} from './MilestoneAwardSelector';
+import {MilestoneAwardSelector} from './MilestoneAwardSelector';
 import {IDrawnMilestonesAndAwards} from './IDrawnMilestonesAndAwards';
 import {Player} from './Player';
 import {Resources} from './Resources';
@@ -50,10 +50,10 @@ export class GameSetup {
 
       break;
     case RandomMAOptionType.LIMITED:
-      drawnMilestonesAndAwards = getRandomMilestonesAndAwards(gameOptions, requiredQty);
+      drawnMilestonesAndAwards = MilestoneAwardSelector.getRandomMilestonesAndAwards(gameOptions, requiredQty);
       break;
     case RandomMAOptionType.UNLIMITED:
-      drawnMilestonesAndAwards = getRandomMilestonesAndAwards(gameOptions, requiredQty, 100, 100, 100, 100);
+      drawnMilestonesAndAwards = MilestoneAwardSelector.getRandomMilestonesAndAwards(gameOptions, requiredQty, 100, 100, 100, 100);
       break;
     }
 

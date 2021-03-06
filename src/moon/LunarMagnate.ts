@@ -11,5 +11,3 @@ export class LunarMagnate implements IAward {
       }, () => 0) || 0;
     }
 }
-// c2. Awards
-// Fullmoon: Have the most number of moon tags played.

@@ -16,7 +16,7 @@ import {ApiGames} from './routes/ApiGames';
 import {ApiGame} from './routes/ApiGame';
 import {ApiPlayer} from './routes/ApiPlayer';
 import {ApiWaitingFor} from './routes/ApiWaitingFor';
-import {CreateGame} from './routes/CreateGame';
+import {GameHandler} from './routes/Game';
 import {LoadGame} from './routes/LoadGame';
 import {IHandler} from './routes/IHandler';
 import {Route} from './routes/Route';
@@ -35,7 +35,6 @@ const handlers: Map<string, IHandler> = new Map(
     ['/', ServeApp.INSTANCE],
     ['/new-game', ServeApp.INSTANCE],
     ['/solo', ServeApp.INSTANCE],
-    ['/game', ServeApp.INSTANCE],
     ['/player', ServeApp.INSTANCE],
     ['/the-end', ServeApp.INSTANCE],
     ['/load', ServeApp.INSTANCE],
@@ -52,7 +51,7 @@ const handlers: Map<string, IHandler> = new Map(
     ['/api/clonablegames', ApiCloneableGames.INSTANCE],
     ['/api/cloneablegames', ApiCloneableGames.INSTANCE],
     ['/api/game/logs', ApiGameLogs.INSTANCE],
-    ['/game', CreateGame.INSTANCE],
+    ['/game', GameHandler.INSTANCE],
     ['/load', LoadGame.INSTANCE],
     ['/player/input', PlayerInput.INSTANCE],
   ],
@@ -66,12 +65,7 @@ function processRequest(req: http.IncomingMessage, res: http.ServerResponse): vo
 
   const url = new URL(req.url, `http://${req.headers.host}`);
   const ctx = {url, route, serverId, gameLoader: GameLoader.getInstance()};
-  let handler: IHandler | undefined = handlers.get(url.pathname);
-
-  // TODO bafolts or kberg fix this bug with collision of POST and GET for /game
-  if (req.method === 'GET' && handler !== undefined && url.pathname === '/game') {
-    handler = undefined;
-  }
+  const handler: IHandler | undefined = handlers.get(url.pathname);
 
   if (handler !== undefined) {
     handler.processRequest(req, res, ctx);

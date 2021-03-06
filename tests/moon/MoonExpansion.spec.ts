@@ -33,6 +33,15 @@ describe('MoonExpansion', () => {
     expect(space.tile).deep.eq({tileType: TileType.LUNA_TRADE_STATION});
   });
 
+  it('addTile grants space bonus', () => {
+    // Contains card and steel.
+    player.steel = 0;
+    player.cardsInHand = [];
+    MoonExpansion.addTile(player, 'm03', {tileType: TileType.MOON_ROAD});
+    expect(player.steel).eq(1);
+    expect(player.cardsInHand).has.length(1);
+  });
+
   it('addTile fails occupied space', () => {
     const space: ISpace = moonData.moon.getSpace(MoonSpaces.MARE_IMBRIUM);
     space.tile = {tileType: TileType.MOON_MINE};

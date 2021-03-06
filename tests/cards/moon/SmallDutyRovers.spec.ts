@@ -37,6 +37,10 @@ describe('SmallDutyRovers', () => {
     expect(player.getTerraformRating()).eq(14);
     player.titanium = 1;
     player.megaCredits = 0;
+    // remove space bonuses to keep this simple.
+    moonData.moon.spaces.forEach((space) => {
+      space.bonus = [];
+    });
 
     MoonExpansion.addTile(player, 'm04', {tileType: TileType.MOON_MINE});
     MoonExpansion.addTile(player, 'm05', {tileType: TileType.MOON_COLONY});

@@ -20,6 +20,9 @@ export class MockResponse {
     this.statusCode = statusCode;
   }
 
+  // MockResponse isn't really of type ServerResponse,
+  // and this makes it seem like it is so we can sneak
+  // one of these past the compiler.
   public hide(): http.ServerResponse {
     return this as unknown as http.ServerResponse;
   }

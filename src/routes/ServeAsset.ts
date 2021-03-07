@@ -12,7 +12,6 @@ type Encoding = 'gzip' | 'br';
 
 export class ServeAsset extends Handler {
   public static readonly INSTANCE: ServeAsset = new ServeAsset();
-
   private readonly cache = new BufferCache();
 
   // Public for tests

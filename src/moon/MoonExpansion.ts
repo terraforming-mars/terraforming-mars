@@ -14,6 +14,7 @@ import {Tags} from '../cards/Tags';
 import {ISpace} from '../boards/ISpace';
 import {MAXIMUM_COLONY_RATE, MAXIMUM_LOGISTICS_RATE, MAXIMUM_MINING_RATE} from '../constants';
 import {Resources} from '../Resources';
+import {Phase} from '../Phase';
 
 // export interface CoOwnedSpace {
 //   spaceId: string;
@@ -82,7 +83,8 @@ export class MoonExpansion {
   // Having a custom addTile isn't ideal, but game.addTile is pretty specific, and this
   // isn't.
   public static addTile(player: Player, spaceId: string, tile: ITile): void {
-    MoonExpansion.ifMoon(player.game, (moonData) => {
+    const game = player.game;
+    MoonExpansion.ifMoon(game, (moonData) => {
       const space = moonData.moon.getSpace(spaceId);
       if (!MOON_TILES.includes(tile.tileType)) {
         throw new Error(`Bad tile type for the moon: ${tile.tileType}`);
@@ -99,6 +101,13 @@ export class MoonExpansion {
 
       space.tile = tile;
       space.player = player;
+
+      if (game.phase !== Phase.SOLAR) {
+        space.bonus.forEach((spaceBonus) => {
+          game.grantSpaceBonus(player, spaceBonus);
+        });
+      }
+
       // TODO(kberg): indicate that it's a moon space.
       LogHelper.logTilePlacement(player, space, tile.tileType);
 

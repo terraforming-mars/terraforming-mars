@@ -1282,6 +1282,9 @@ export class Game implements ISerializable<SerializedGame> {
                   space.player === player,
     ).length;
   }
+
+  // addTile applies to the Mars board, but not the Moon board, see MoonExpansion.addTile for placing
+  // a tile on The Moon.
   public addTile(
     player: Player, spaceType: SpaceType,
     space: ISpace, tile: ITile): void {

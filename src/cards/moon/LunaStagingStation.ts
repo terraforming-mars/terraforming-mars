@@ -22,7 +22,7 @@ export class LunaStagingStation extends MoonCard {
         cardNumber: 'M30',
         renderData: CardRenderer.builder((b) => {
           b.minus().titanium(1).br;
-          b.moonLogisticsRate(2);
+          b.moonLogisticsRate({amount: 2});
         }),
       },
     }, {

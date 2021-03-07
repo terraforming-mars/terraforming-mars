@@ -8,10 +8,10 @@ export const Party = Vue.component('party', {
       type: Object as () => PartyModel,
     },
     isDominant: {
-      type: Object as () => boolean,
+      type: Boolean,
     },
     isAvailable: {
-      type: Object as () => boolean,
+      type: Boolean,
     },
   },
   methods: {

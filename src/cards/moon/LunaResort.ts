@@ -21,13 +21,13 @@ export class LunaResort extends MoonCard {
       requirements: CardRequirements.builder((b) => b.colonies(2)),
       metadata: {
         description:
-          'Requires 2 colonies on the Moon. Spend 2 titanium. Decrease your energy prodcution 1 step and increase your MC production 3 steps. Raise Colony Rate 1 step.',
+          'Requires 2 colonies on the Moon. Spend 2 titanium. Decrease your energy production 1 step and increase your MC production 3 steps. Raise Colony Rate 1 step.',
         cardNumber: 'M21',
         renderData: CardRenderer.builder((b) => {
           b.minus().titanium(2).production((pb) => {
             pb.minus().energy(1).nbsp.megacredits(3);
           }).br;
-          b.moonColonyRate(1);
+          b.moonColonyRate();
         }),
       },
     }, {

@@ -22,8 +22,6 @@ import {KeyboardNavigation} from '../../src/KeyboardNavigation';
 import {MoonBoard} from './moon/MoonBoard';
 import {Phase} from '../../src/Phase';
 
-const dialogPolyfill = require('dialog-polyfill');
-
 import * as raw_settings from '../genfiles/settings.json';
 
 export interface PlayerHomeModel {
@@ -125,7 +123,7 @@ export const PlayerHome = Vue.component('player-home', {
     },
     getFleetsCountRange: function(player: PlayerModel): Array<number> {
       const fleetsRange: Array<number> = [];
-      for (let i = 0; i < player.fleetSize - player.tradesThisTurn; i++) {
+      for (let i = 0; i < player.fleetSize - player.tradesThisGeneration; i++) {
         fleetsRange.push(i);
       }
       return fleetsRange;
@@ -153,11 +151,11 @@ export const PlayerHome = Vue.component('player-home', {
     },
     getToggleLabel: function(hideType: string): string {
       if (hideType === 'ACTIVE') {
-        return (this.isActiveCardShown() ? 'Hide' : 'Show') + ' active cards';
+        return (this.isActiveCardShown() ? '✔' : '');
       } else if (hideType === 'AUTOMATED') {
-        return (this.isAutomatedCardShown() ? 'Hide' : 'Show') + ' automated cards';
+        return (this.isAutomatedCardShown() ? '✔' : '');
       } else if (hideType === 'EVENT') {
-        return (this.isEventCardShown() ? 'Hide' : 'Show') + ' event cards';
+        return (this.isEventCardShown() ? '✔' : '');
       } else {
         return '';
       }
@@ -179,25 +177,10 @@ export const PlayerHome = Vue.component('player-home', {
     window.removeEventListener('keydown', this.navigatePage);
   },
   mounted: function() {
-    dialogPolyfill.default.registerDialog(
-      document.getElementById('dialog-default'),
-    );
     window.addEventListener('keydown', this.navigatePage);
   },
   template: `
         <div id="player-home" :class="(player.turmoil ? 'with-turmoil': '')">
-            <section>
-                <dialog id="dialog-default">
-                    <form method="dialog">
-                        <p class="title" v-i18n>Error with input</p>
-                        <p id="dialog-default-message"></p>
-                        <menu class="dialog-menu centered-content">
-                            <button class="btn btn-lg btn-primary">OK</button>
-                        </menu>
-                    </form>
-                </dialog>
-            </section>
-
             <top-bar :player="player" />
 
             <div v-if="player.phase === 'end'">
@@ -217,7 +200,8 @@ export const PlayerHome = Vue.component('player-home', {
               :venus = "player.venusScaleLevel"
               :turmoil = "player.turmoil"
               :gameOptions = "player.gameOptions"
-              :playerNumber = "player.players.length">
+              :playerNumber = "player.players.length"
+              :lastSoloGeneration = "player.lastSoloGeneration">
                 <div class="deck-size">{{ player.deckSize }}</div>
             </preferences>
 
@@ -251,7 +235,7 @@ export const PlayerHome = Vue.component('player-home', {
                 <players-overview class="player_home_block player_home_block--players nofloat:" :player="player" v-trim-whitespace id="shortkey-playersoverview"/>
 
                 <div class="player_home_block player_home_block--log player_home_block--hide_log nofloat">
-                    <log-panel :id="player.id" :players="player.players" :generation="player.generation" :color="player.color"></log-panel>
+                    <log-panel :id="player.id" :players="player.players" :generation="player.generation" :lastSoloGeneration="player.lastSoloGeneration" :color="player.color"></log-panel>
                 </div>
 
                 <div class="player_home_block player_home_block--actions nofloat">
@@ -268,26 +252,29 @@ export const PlayerHome = Vue.component('player-home', {
                 </div>
 
                 <a name="cards" class="player_home_anchor"></a>
-                <div class="player_home_block player_home_block--hand" v-if="player.cardsInHand.length > 0" id="shortkey-hand">
-                    <dynamic-title title="Cards In Hand" :color="player.color" :withAdditional="true" :additional="player.cardsInHandNbr.toString()" />
-                    <sortable-cards :playerId="player.id" :cards="player.cardsInHand" />
+                <div class="player_home_block player_home_block--hand" v-if="player.cardsInHand.length + player.preludeCardsInHand.length > 0" id="shortkey-hand">
+                    <dynamic-title title="Cards In Hand" :color="player.color" :withAdditional="true" :additional="(player.cardsInHandNbr + player.preludeCardsInHand.length).toString()" />
+                    <sortable-cards :playerId="player.id" :cards="player.preludeCardsInHand.concat(player.cardsInHand)" />
                 </div>
 
                 <div class="player_home_block player_home_block--cards"">
-                    <dynamic-title title="Played Cards" :color="player.color" :withAdditional="true" :additional="getPlayerCardsPlayed(player, true).toString()" />
                     <div class="hiding-card-button-row">
-                        <div :class="getHideButtonClass('ACTIVE')" v-on:click.prevent="toggleActiveCardsHiding()">
-                          <span v-i18n>{{ getToggleLabel('ACTIVE')}}</span>
-                          <span>{{'&nbsp;('+getCardsByType(player.playedCards, [getActiveCardType()]).length.toString()+')' }}</span>
+                        <dynamic-title title="Played Cards" :color="player.color" />
+                        <div class="played-cards-filters">
+                          <div :class="getHideButtonClass('ACTIVE')" v-on:click.prevent="toggleActiveCardsHiding()">
+                            <div class="played-cards-count">{{getCardsByType(player.playedCards, [getActiveCardType()]).length.toString()}}</div>
+                            <div class="played-cards-selection" v-i18n>{{ getToggleLabel('ACTIVE')}}</div>
+                          </div>
+                          <div :class="getHideButtonClass('AUTOMATED')" v-on:click.prevent="toggleAutomatedCardsHiding()">
+                            <div class="played-cards-count">{{getCardsByType(player.playedCards, [getAutomatedCardType(), getPreludeCardType()]).length.toString()}}</div>
+                            <div class="played-cards-selection" v-i18n>{{ getToggleLabel('AUTOMATED')}}</div>
+                          </div>
+                          <div :class="getHideButtonClass('EVENT')" v-on:click.prevent="toggleEventCardsHiding()">
+                            <div class="played-cards-count">{{getCardsByType(player.playedCards, [getEventCardType()]).length.toString()}}</div>
+                            <div class="played-cards-selection" v-i18n>{{ getToggleLabel('EVENT')}}</div>
+                          </div>
                         </div>
-                        <div :class="getHideButtonClass('AUTOMATED')" v-on:click.prevent="toggleAutomatedCardsHiding()">
-                          <span v-i18n>{{ getToggleLabel('AUTOMATED')}}</span>
-                          <span>{{'&nbsp;('+getCardsByType(player.playedCards, [getAutomatedCardType(), getPreludeCardType()]).length.toString()+')' }}</span>
-                        </div>
-                        <div :class="getHideButtonClass('EVENT')" v-on:click.prevent="toggleEventCardsHiding()">
-                          <span v-i18n>{{ getToggleLabel('EVENT')}}</span>
-                          <span>{{'&nbsp;('+getCardsByType(player.playedCards, [getEventCardType()]).length.toString()+')' }}</span>
-                        </div>
+                        <div class="text-overview">[ toggle cards filters ]</div>
                     </div>
                     <div v-if="player.corporationCard !== undefined" class="cardbox">
                         <Card :card="player.corporationCard" :actionUsed="isCardActivated(player.corporationCard, player)"/>

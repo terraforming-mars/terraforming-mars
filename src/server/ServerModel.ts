@@ -55,6 +55,7 @@ export class Server {
         name: player.name,
       })),
       gameOptions: getGameOptionsAsModel(game.gameOptions),
+      lastSoloGeneration: game.lastSoloGeneration(),
     };
   }
 
@@ -92,6 +93,7 @@ export class Server {
       influence: turmoil ? game.turmoil!.getPlayerInfluence(player) : 0,
       isActive: player.id === game.activePlayer,
       isSoloModeWin: game.isSoloModeWin(),
+      lastSoloGeneration: game.lastSoloGeneration(),
       megaCredits: player.megaCredits,
       megaCreditProduction: player.getProduction(Resources.MEGACREDITS),
       milestones: getMilestones(game),
@@ -124,7 +126,7 @@ export class Server {
       titanium: player.titanium,
       titaniumProduction: player.getProduction(Resources.TITANIUM),
       titaniumValue: player.getTitaniumValue(),
-      tradesThisTurn: player.tradesThisTurn,
+      tradesThisGeneration: player.tradesThisGeneration,
       turmoil: turmoil,
       venusScaleLevel: game.getVenusScaleLevel(),
       victoryPointsBreakdown: player.getVictoryPoints(),
@@ -140,15 +142,12 @@ export class Server {
 
   // This is only ever used in ApiWaitingFor, and could be isolated from ServerModel.
   public static getWaitingForModel(player: Player, prevGameAge: number): WaitingForModel {
-    const result: WaitingForModel = {
-      result: 'WAIT',
-    };
     if (player.getWaitingFor() !== undefined || player.game.phase === Phase.END) {
-      result.result = 'GO';
+      return {result: 'GO'};
     } else if (player.game.gameAge > prevGameAge) {
-      result.result = 'REFRESH';
+      return {result: 'REFRESH'};
     }
-    return result;
+    return {result: 'WAIT'};
   }
 }
 
@@ -288,6 +287,7 @@ function getWaitingFor(
     });
     playerInputModel.maxCardsToSelect = selectCard.maxCardsToSelect;
     playerInputModel.minCardsToSelect = selectCard.minCardsToSelect;
+    playerInputModel.showOnlyInLearnerMode = selectCard.enabled?.every((p: boolean) => p === false);
     playerInputModel.selectBlueCardAction = selectCard.selectBlueCardAction;
     if (selectCard.showOwner) {
       playerInputModel.showOwner = true;
@@ -424,7 +424,7 @@ function getPlayers(players: Array<Player>, game: Game): Array<PlayerModel> {
         player.getActionsThisGeneration(),
       ),
       fleetSize: player.getFleetSize(),
-      tradesThisTurn: player.tradesThisTurn,
+      tradesThisGeneration: player.tradesThisGeneration,
       turmoil: turmoil,
       selfReplicatingRobotsCards: player.getSelfReplicatingRobotsCards(),
       needsToDraft: player.needsToDraft,

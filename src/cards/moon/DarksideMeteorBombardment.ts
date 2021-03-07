@@ -11,7 +11,7 @@ export class DarksideMeteorBombardment extends Card {
     super({
       name: CardName.DARKSIDE_METEOR_BOMBARDMENT,
       cardType: CardType.EVENT,
-      tags: [Tags.SPACE, Tags.EVENT],
+      tags: [Tags.SPACE],
       cost: 20,
 
       metadata: {
@@ -20,7 +20,7 @@ export class DarksideMeteorBombardment extends Card {
         renderData: CardRenderer.builder((b) => {
           b.steel(2).titanium(2);
           b.br;
-          b.moonMiningRate(2);
+          b.moonMiningRate({amount: 2});
         }),
       },
     });

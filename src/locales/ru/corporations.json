@@ -7,7 +7,7 @@
     "Effect: After you pay for a card or standard project with a basic cost of 20MC or more, you gain 4MC.": "Эффект: Заплатив за карту или стандартный проект 20 MC или больше, получите 4 МС",
     
     "Ecoline": "Ecoline",
-    "You start with 2 plant production, 3 plants, and 36MC": "Вы начинаете c 2 уровнями производства растений, 3 растениями и 36 МС",
+    "You start with 2 plant production, 3 plants, and 36 MC.": "Вы начинаете c 2 уровнями производства растений, 3 растениями и 36 МС",
     "Effect: You may always pay 7 plants, instead of 8, to place greenery.": "Эффект: Вы всегда можете потратить 7 растений вместо 8, чтобы выложить жетон озеленения",
 
 
@@ -18,7 +18,7 @@
 
     "Interplanetary Сinematics": "Interplanetary Сinematics",
     "You start with 20 steel and 30 MC.": "Вы начинаете с 20 стали и 30 MC",
-    "Effect: Each time you play an event, you gain 2 MC.)": "Эффект: Каждый раз, разыгрывая событие, получайте 2 МС",
+    "Effect: Each time you play an event, you gain 2 MC.": "Эффект: Каждый раз, разыгрывая событие, получайте 2 МС",
 
 
     "Inventrix": "Inventrix",
@@ -39,17 +39,27 @@
 
     "UNMI": "UNMI",
     "You start with 40 MC.": "Вы начинаете с 40 MC",
-    "Action:If your Terraform Rating was raised this generation, you may pay 3 MC to raise it 1 step more.": "Действие: Если в текущем поколении у вас увеличивался РТ, можете заплатить 3 МС, чтобы увеличить РТ еще на 1",
+    "Action: If your Terraform Rating was raised this generation, you may pay 3 MC to raise it 1 step more.": "Действие: Если в текущем поколении у вас увеличивался РТ, можете заплатить 3 МС, чтобы увеличить РТ еще на 1",
 
     "Mining Guild": "Mining Guild",
-    "You start with 30 MC, 5 steel, and 1 steel production": "Вы начинаете c 30 МС, 5 стали, и 1 дополнительным уровнем производства стали",
+    "You start with 30 MC, 5 steel and 1 steel production.": "Вы начинаете c 30 МС, 5 стали, и 1 дополнительным уровнем производства стали",
     "Effect: Each time you get any steel or titanium as a placement bonus on the map, increase your steel production 1 step.": "Эффект: Всякий раз, получая сталь или титан по территориальному бонусу увеличивайте своё производство стали на 1",
 
     "Terractor": "Terractor",
     "You start with 60 MC.": "Вы начинаете с 60 MC",
-    "Effect: When playing an Earth card, you pay 3 MC less for it.": "Эффект: Разыгрывая карту с меткой Земли, платите на 3 МС меньше",
+    "Effect: When you play an Earth tag, you pay 3 MC less for it.": "Эффект: Разыгрывая карту с меткой Земли, платите на 3 МС меньше",
 
     "Saturn Systems": "Saturn Systems",
     "You start with 1 titanium production and 42 MC.": "Вы начинаете 1 дополнительным производством титана и 42 МС",
-    "Effect: Each time any Jovian tag is put into play, including this, increase your MC production 1 step.": "Эффект: При розыгрыше каждой метки Юпитера, включая эту, ваше производство МС увеличивается на 1"
+    "Effect: Each time any Jovian tag is put into play, including this, increase your MC production 1 step.": "Эффект: При розыгрыше каждой метки Юпитера, включая эту, ваше производство МС увеличивается на 1",
+
+    "Vitor": "Vitor",
+    "You start with 45 MC. As your first action, fund an award for free.": "Вы начинаете c 45 МС. Первым действием бесплатно учредите награду",
+    "awards": "Награда",
+    "Effect: When you play a card with a NON-NEGATIVE VP icon, including this, gain 3MC.": "Эффект: Каждый раз, разыгрывая карту с не отрицательными ПО, включая эту, получайте 3 MC",
+
+    "Valley Trust": "Valley Trust",
+    "Effect: When you play a Science tag, you pay 2MC less for it.": "Эффект: Платите на 3 MC меньше за каждую метку науки на разыгрываемых картах",
+    "": ""
+
 }

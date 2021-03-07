@@ -9,18 +9,41 @@ import {SelectCard} from '../../inputs/SelectCard';
 import {CardName} from '../../CardName';
 import {CardType} from '../CardType';
 import {LogHelper} from '../../LogHelper';
-import {CardMetadata} from '../CardMetadata';
+import {Card} from '../Card';
 import {CardRenderer} from '../render/CardRenderer';
 import {CardRenderItemSize} from '../render/CardRenderItemSize';
 import {PlayerInput} from '../../PlayerInput';
 
-export class StormCraftIncorporated implements IActionCard, CorporationCard, IResourceCard {
-  public name = CardName.STORMCRAFT_INCORPORATED;
-  public tags = [Tags.JOVIAN];
-  public startingMegaCredits: number = 48;
-  public resourceType = ResourceType.FLOATER;
-  public resourceCount: number = 0;
-  public cardType = CardType.CORPORATION;
+export class StormCraftIncorporated extends Card implements IActionCard, CorporationCard, IResourceCard {
+  constructor() {
+    super({
+      name: CardName.STORMCRAFT_INCORPORATED,
+      tags: [Tags.JOVIAN],
+      startingMegaCredits: 48,
+      resourceType: ResourceType.FLOATER,
+      cardType: CardType.CORPORATION,
+      metadata: {
+        cardNumber: 'R29',
+        description: 'You start with 48 MC.',
+        renderData: CardRenderer.builder((b) => {
+          b.br.br.br;
+          b.megacredits(48);
+          b.corpBox('action', (ce) => {
+            ce.vSpace(CardRenderItemSize.LARGE);
+            ce.action('Add a floater to ANY card.', (eb) => {
+              eb.empty().startAction.floaters(1).asterix();
+            });
+            ce.vSpace();
+            ce.effect('Floaters on this card may be used as 2 heat each.', (eb) => {
+              eb.startEffect.floaters(1).equals().heat(2);
+            });
+          });
+        }),
+      },
+    });
+  }
+
+  public resourceCount = 0;
 
   public play() {
     return undefined;
@@ -79,24 +102,5 @@ export class StormCraftIncorporated implements IActionCard, CorporationCard, IRe
         return undefined;
       }, 0, Math.min(player.getResourcesOnCorporation(), Math.ceil(targetAmount / 2))),
     );
-  }
-
-  public metadata: CardMetadata = {
-    cardNumber: 'R29',
-    description: 'You start with 48 MC.',
-    renderData: CardRenderer.builder((b) => {
-      b.br.br.br;
-      b.megacredits(48);
-      b.corpBox('action', (ce) => {
-        ce.vSpace(CardRenderItemSize.LARGE);
-        ce.action('Add a floater to ANY card.', (eb) => {
-          eb.empty().startAction.floaters(1).asterix();
-        });
-        ce.vSpace();
-        ce.effect('Floaters on this card may be used as 2 heat each.', (eb) => {
-          eb.startEffect.floaters(1).equals().heat(2);
-        });
-      });
-    }),
   }
 }

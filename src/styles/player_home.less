@@ -168,9 +168,9 @@
 .tag-type-main {
     border-radius: 4px;
     border: none;
-    width: 34px;
+    width: 40px;
     height: 34px;
-    background-size: 34px;
+    background-size: 40px 34px;
 }
 
 .tag-type-secondary {
@@ -191,8 +191,8 @@
 
 .tag-cards {
     background-image: url("./assets/sidebar/preferences_cards.png");
-    background-color: black !important;
-    background-position: 0px;
+    background-color: #0008 !important;
+    background-position: 2px;
 }
 .tag-vp {
     background: linear-gradient(#cc8b00, #805700, #805700) !important;
@@ -207,13 +207,13 @@
     text-shadow: 0 0 5px darkorange;
     text-align: center;
     top: 3px;
-    left: 4px;
+    left: 7px;
 }
 
 .tag-tr {
     background-image: url(assets/resources/tr.png);
     background-image: url(assets/resources/tr.png);
-    background-size: 43px 38px !important;
+    background-size: 49px 38px !important;
     background-position: -4px -2px !important;
 }
 .tag-city-count {
@@ -823,11 +823,11 @@
         display: inline-block;
         vertical-align: middle;
         padding: 8px 14px 8px 11px;
-        border-radius: 0 10px 10px 0;
         height: 46px;
         cursor: pointer;
         margin-top: 12px;
-
+        border-radius: 0 0 20px 0;
+        
         img {
             width: 20px;
         }
@@ -842,10 +842,8 @@
 
     .player-info {
         background: #303030 !important;
-        border-radius: 0 !important;
-        border: 1px solid #ffffff2e;
-        filter: drop-shadow(0 0 3px #ffffff2e);
-
+        border-radius: 0 0 10px 10px;
+        padding: 8px 0;
         .player-status-and-res {
             min-width: 564px !important;
         }
@@ -871,19 +869,32 @@
 .hiding-card-button-row {
     display: flex;
     flex-flow: row;
+
+    .played-cards-filters {
+        display: flex;
+    }
+
+    .text-overview {
+        text-transform: uppercase;
+        margin-left: 5px;
+        color: #303030;
+        font-weight: bold;
+        margin-top: 12px;
+        font-size: 16px;
+    } 
 }
 
 .hiding-card-button {
     display: flex;
-    width: fit-content;
-    padding: 2px 4px;
     text-transform: uppercase;
     border-radius: 4px;
-    color: black;
+    font-size: 23px;
+    line-height: 30px;
+    margin: 10px 0px 0 10px;
+    width: 100px;
+    height: 30px;
+    text-align: center;
     cursor: pointer;
-    font-size: 16px;
-    margin: 5px;
-    padding: 0px 8px;
 
     &.active {
         background-color: rgba(47,146,225, 0.75);
@@ -896,12 +907,24 @@
     }
     &.active-transparent {
         background-color: rgba(47,146,225, 0.5);
+        color: #fff8;
     }
     &.automated-transparent {
         background-color: rgba(13,176,11, 0.5);
+        color: #fff8;
     }
     &.event-transparent {
         background-color: rgba(237,106,21,0.5);
+        color: #fff8;
+    }
+
+    .played-cards-count {
+        font-family: "Prototype";
+        width: 80px;
+        padding-left: 18px;
+    }
+    .played-cards-selection {
+        font-size: 16px;
     }
 }
 

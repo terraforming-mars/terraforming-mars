@@ -24,6 +24,18 @@ export const SpectatorHome = Vue.component('spectator-home', {
   },
   mounted: function() {
     // TODO load this spectator with XHR
+    fetch('/api/spectator' + window.location.search)
+      .then((response) => response.json())
+      .then((json) => {
+        this.$data.spectator = json;
+      })
+      .catch(() => {
+        alert('error pulling information for spectator');
+      });
   },
-  template: `<div id="spectator-home"></div>`,
+  template: `<div id="spectator-home">
+    <template v-if="spectator !== undefined">
+      Generation: {{spectator.generation}}
+    </template>
+  </div>`,
 });

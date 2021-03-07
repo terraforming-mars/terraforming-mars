@@ -12,8 +12,8 @@ export class ApiSpectator extends Handler {
   }
 
   public get(req: http.IncomingMessage, res: http.ServerResponse, ctx: IContext): void {
-    const spectatorId = ctx.url.searchParams.get('id');
-    GameLoader.getInstance().getBySpectatorId(spectatorId as string, (game) => {
+    const spectatorId = String(ctx.url.searchParams.get('id'));
+    GameLoader.getInstance().getBySpectatorId(spectatorId, (game) => {
       if (game === undefined) {
         ctx.route.notFound(req, res);
         return;

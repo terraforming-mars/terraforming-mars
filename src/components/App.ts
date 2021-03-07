@@ -23,6 +23,7 @@ interface MainAppData {
             'help' |
             'load' |
             'player-home' |
+            'spectator-home' |
             'start-screen' |
             'the-end';
     /**
@@ -166,6 +167,8 @@ export const mainAppSettings = {
       app.screen = 'cards';
     } else if (currentPathname === '/help') {
       app.screen = 'help';
+    } else if (currentPathname === '/spectator') {
+      app.screen = 'spectator-home';
     } else {
       app.screen = 'start-screen';
     }

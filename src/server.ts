@@ -295,6 +295,7 @@ function createGame(req: http.IncomingMessage, res: http.ServerResponse): void {
       const gameReq = JSON.parse(body);
       const gameId = generateRandomId();
       const spectatorId = generateRandomId();
+      console.log('the spectator id is ' + spectatorId);
       const players = gameReq.players.map((obj: any) => {
         return new Player(
           obj.name,
@@ -372,7 +373,7 @@ function createGame(req: http.IncomingMessage, res: http.ServerResponse): void {
         });
       } else {
         const seed = Math.random();
-        const game = Game.newInstance(gameId, players, players[firstPlayerIdx], gameOptions, spectatorId, seed);
+        const game = Game.newInstance(gameId, players, players[firstPlayerIdx], gameOptions, seed);
         GameLoader.getInstance().add(game);
         res.setHeader('Content-Type', 'application/json');
         res.write(getGameModelJSON(game));

@@ -39,10 +39,6 @@ export class LunaMiningHub extends MoonCard {
     });
   };
 
-  public canPlay(player: Player): boolean {
-    return MoonExpansion.moonData(player.game).miningRate >= 5;
-  }
-
   public play(player: Player) {
     super.play(player);
     player.game.defer(new PlaceSpecialMoonTile(

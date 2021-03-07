@@ -24,10 +24,6 @@ export class UndergroundDetonators extends Card {
     });
   };
 
-  public canPlay(): boolean {
-    return true;
-  }
-
   public play(player: Player) {
     player.steel += 1;
     player.titanium += 1;

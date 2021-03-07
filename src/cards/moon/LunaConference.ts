@@ -31,16 +31,6 @@ export class LunaConference extends Card implements IProjectCard {
     });
   };
 
-  public canPlay(player: Player): boolean {
-    if (player.game.turmoil === undefined) {
-      return false;
-    }
-    if (!player.game.turmoil.canPlay(player, PartyName.SCIENTISTS)) {
-      return false;
-    }
-    return true;
-  }
-
   public play(player: Player) {
     const moonRoadCount = MoonExpansion.tiles(player.game, TileType.MOON_ROAD, true).length;
     const moonColonyCount = MoonExpansion.tiles(player.game, TileType.MOON_COLONY, true).length;

@@ -1,11 +1,9 @@
 import {CardName} from '../../CardName';
-import {Player} from '../../Player';
 import {CardType} from '../CardType';
 import {Tags} from '../Tags';
 import {CardRenderer} from '../render/CardRenderer';
-import {MoonExpansion} from '../../moon/MoonExpansion';
-import {TileType} from '../../TileType';
 import {Card} from '../Card';
+import {CardRequirements} from '../CardRequirements';
 
 export class MooncrateBlockFactory extends Card {
   constructor() {
@@ -14,6 +12,7 @@ export class MooncrateBlockFactory extends Card {
       cardType: CardType.ACTIVE,
       tags: [Tags.BUILDING],
       cost: 8,
+      requirements: CardRequirements.builder((b) => b.miningTiles(1).any()),
 
       metadata: {
         description: 'Effect: When you pay for a luna standard project (colony, road, mine), you spend 4MC less. / Requires 1 mine on the Moon.',
@@ -22,10 +21,6 @@ export class MooncrateBlockFactory extends Card {
       },
     });
   };
-
-  public canPlay(player: Player): boolean {
-    return MoonExpansion.tiles(player.game, TileType.MOON_MINE, true).length >= 1;
-  }
 
   public play() {
     return undefined;

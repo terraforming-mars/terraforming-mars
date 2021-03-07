@@ -1572,6 +1572,10 @@ export class Game implements ISerializable<SerializedGame> {
 
     const awards: Array<IAward> = [];
     d.awards.forEach((element: IAward) => {
+      // TODO(kberg): remove by 2021-03-30
+      if (element.name === 'Entrepeneur') {
+        element.name = 'Entrepreneur';
+      }
       ALL_AWARDS.forEach((award: IAward) => {
         if (award.name === element.name) {
           awards.push(award);

@@ -67,7 +67,6 @@ export class DarksideIncubationPlant extends MoonCard implements IActionCard, IP
           MoonExpansion.raiseColonyRate(player);
           return undefined;
         }));
-      } else {
       }
     });
     if (options.length === 1) {

@@ -16,7 +16,7 @@ export class LunarSecurityStations extends Card implements IProjectCard {
       cost: 9,
 
       metadata: {
-        description: 'Requires 3 road tiles on the Moon. Raise Logistic Rate 1 step.',
+        description: 'Requires 3 road tiles on the Moon. Raise the Logistic Rate 1 step.',
         cardNumber: 'M42',
         renderData: CardRenderer.builder((b) => {
           b.moonLogisticsRate();

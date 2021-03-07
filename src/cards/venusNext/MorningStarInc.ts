@@ -5,6 +5,7 @@ import {CardName} from '../../CardName';
 import {CardType} from '../CardType';
 import {CardMetadata} from '../CardMetadata';
 import {CardRenderer} from '../render/CardRenderer';
+import {GlobalParameter} from '../../GlobalParameter';
 
 export class MorningStarInc implements CorporationCard {
     public name = CardName.MORNING_STAR_INC;
@@ -18,9 +19,8 @@ export class MorningStarInc implements CorporationCard {
       return undefined;
     }
 
-    public getRequirementBonus(_player: Player, venusOnly?: boolean): number {
-      if (venusOnly !== undefined && venusOnly) return 2;
-      return 0;
+    public getRequirementBonus(_player: Player, parameter: GlobalParameter): number {
+      return parameter === GlobalParameter.VENUS ? 2 : 0;
     }
 
     public play() {

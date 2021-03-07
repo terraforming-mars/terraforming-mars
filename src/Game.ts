@@ -1223,19 +1223,24 @@ export class Game implements ISerializable<SerializedGame> {
 
   public checkRequirements(player: Player, parameter: GlobalParameter, level: number, max: boolean = false): boolean {
     let currentLevel: number;
-    let playerRequirementsBonus: number = player.getRequirementsBonus(parameter === GlobalParameter.VENUS);
+    let playerRequirementsBonus: number = player.getRequirementsBonus(parameter);
 
-    if (parameter === GlobalParameter.OCEANS) {
+    switch (parameter) {
+    case GlobalParameter.OCEANS:
       currentLevel = this.board.getOceansOnBoard();
-    } else if (parameter === GlobalParameter.OXYGEN) {
+      break;
+    case GlobalParameter.OXYGEN:
       currentLevel = this.getOxygenLevel();
-    } else if (parameter === GlobalParameter.TEMPERATURE) {
+      break;
+    case GlobalParameter.TEMPERATURE:
       currentLevel = this.getTemperature();
       playerRequirementsBonus *= 2;
-    } else if (parameter === GlobalParameter.VENUS) {
+      break;
+    case GlobalParameter.VENUS:
       currentLevel = this.getVenusScaleLevel();
       playerRequirementsBonus *= 2;
-    } else {
+      break;
+    default:
       console.warn(`Unknown GlobalParameter provided: ${parameter}`);
       return false;
     }

@@ -1,5 +1,4 @@
 import * as http from 'http';
-import {Player} from '../Player';
 import {Server} from '../server/ServerModel';
 import {Handler} from './Handler';
 import {IContext} from './IHandler';
@@ -18,15 +17,14 @@ export class ApiPlayer extends Handler {
         ctx.route.notFound(req, res);
         return;
       }
-      let player: Player | undefined;
       try {
-        player = game.getPlayerById(playerId);
+        const player = game.getPlayerById(playerId);
+        ctx.route.writeJson(res, Server.getPlayerModel(player));
       } catch (err) {
         console.warn(`unable to find player ${playerId}`, err);
         ctx.route.notFound(req, res);
         return;
       }
-      ctx.route.writeJson(res, Server.getPlayerModel(player));
     });
   }
 }

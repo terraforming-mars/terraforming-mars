@@ -5,7 +5,7 @@ import {Celebrity} from './awards/Celebrity';
 import {Contractor} from './awards/Contractor';
 import {Cultivator} from './awards/Cultivator';
 import {DesertSettler} from './awards/DesertSettler';
-import {Entrepeneur} from './awards/Entrepeneur';
+import {Entrepreneur} from './awards/Entrepreneur';
 import {EstateDealer} from './awards/EstateDealer';
 import {Excentric} from './awards/Excentric';
 import {IAward} from './awards/IAward';
@@ -83,8 +83,14 @@ export namespace MilestoneAwardSelector {
     }
   }
   class Synergies {
-    // This map uses keys "X|Y" and of course stores strings as both
-    // "Y|X" and "X|X"
+    // This map uses keys of the format "X|Y" where X and Y are MA names. Entries are stored as "X|Y"
+    // and also "Y|X"; it just makes searching slightly faster. There will also be entries of the type "X|X".
+    //
+    // I honestly don't remember why "X|X" is useful, and it's possible it's no longer necessary. That's
+    // something that should be carefully conisdered and possibly removed, and not just propagated because
+    // it's what we had to begin with. In other words, someone figure out why, and preserve it, and document
+    // why, or be certain it's unnecessary and remove this paragraph and the code below that sets "X|X" to 1000.
+    //
     private static map: Map<string, number> = Synergies.makeMap();
 
     private constructor() {
@@ -107,7 +113,7 @@ export namespace MilestoneAwardSelector {
       bind(Terraformer, Benefactor, 9);
       bind(Gardener, Cultivator, 9);
       bind(Builder, Contractor, 9);
-      bind(Networker, Entrepeneur, 9);
+      bind(Networker, Entrepreneur, 9);
       bind(EstateDealer, Cultivator, 8);
       bind(Landlord, Cultivator, 8);
       bind(Landlord, DesertSettler, 7);

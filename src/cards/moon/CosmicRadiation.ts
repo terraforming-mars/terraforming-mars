@@ -14,7 +14,7 @@ export class CosmicRadiation extends Card implements IProjectCard {
     super({
       name: CardName.COSMIC_RADIATION,
       cardType: CardType.EVENT,
-      tags: [Tags.MOON, Tags.EVENT],
+      tags: [Tags.MOON],
       cost: 3,
 
       requirements: CardRequirements.builder((b) => b.miningRate(4)),

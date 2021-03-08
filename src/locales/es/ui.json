@@ -17,7 +17,15 @@
     "Black": "Negro",
     "Purple": "Morado",
 
-    
+    "victoryPoints": "Puntos de victoria",
+    "terraformRating": "Valor de terraformación",
+    "milestones": "Hitos",
+    "Claimed ": "Ha reclamado ",
+    " milestone" : " como hito",
+    "greenery": "Vegetación",
+    "city": "ciudad",
+
+
 
 
     "tharsis": "Tharsis",
@@ -257,6 +265,7 @@
     
     
     "Select a card to keep and pass the rest to ${0}": "Escoge la carta que deseas conservar y pasa el resto al jugador ->${0}",
+    "Select two cards to keep and pass the rest to ${0}": "Excoge dos cartas que desees conservar y pasa el reto al jugador ->${0}",
     "Game Home": "Resumen de la partida",
     "Send players their links below. As game administrator pick your link to use.": "A continuación envía a los jugadores sus enlaces personales. Como administrador, puedes elegir el enlace que deseas utilizar.",
     "Drafted Cards": "Cartas seleccionadas",

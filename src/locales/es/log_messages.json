@@ -16,9 +16,51 @@
     "Take action": "Realizar acción",
     "Take first action of ${0} corporation": "Realiza la primera acción de ${0}",
     "Don\u2019t place a greenery": "No coloques una loseta de vegetación",
-    "${0}\u2019s ${1} amount ${2} by ${3} by ${4}": "('${0} ${1} amount ${2} by ${3} by ${4}",
-    "increased" : "ha disminuido",
-    "decreased": "ha aumentado",
+    "${0}\u2019s ${1} amount ${2} by ${3} by ${4}": "La cantidad de ${1} de ${0} ${2} en ${3} por ${4}",
+    "increased" : "ha sido aumentada",
+    "decreased": "ha sido disminuida",
+    "${0}\u2019s ${1} production ${2} by ${3} by ${4}": "La producción de ${1} de ${0} ${2} en ${3} por ${4}",
+    "${0}\u2019s ${1} production ${2} by ${3} by Global Event": "La producción de ${1} de ${0} ${2} en ${3} debido a un evento global",
+    "${0} removed ${1} resource(s) from ${2}\u2019s ${3}": "${0} le ha quitado ${1} recruso/s a ${2} de ${3}",
+    "Card not found" : "No se ha encontrado la carta",
+    "Incorrect options provided" : "Se han facilitado opciones incorrectas",
+    "Input contains unauthorized keys": "La entrada contiene teclas no autorizadas",
+    "Number not provided for amount": "No se ha introducido un número para cantidad",
+    "Amount provided too high (max ": "La cantidad introducida es muy alta (máximo ",
+    "Amount provided too low (min ": "La cantidad introducida es muy baja (mínmo ",
+    "No colony selected": "No se ha seleccionado una colonia",
+    "Not enough cards selected": "No se han seleccionado cartas suficientes",
+    "Too many cards selected": "Se han seleccionado demasiadas cartas",
+    "Selected unavailable card": "La carta seleccionada no está disponible",
+    "Amount is not a number": "La cantidad no es un número",
+    "Space not available": "Espacio no disponible",
+    "Player not available": "Jugador no disponible",
+    "No party selected": "No se ha saleccionado un partido",
+    "Select action for World Government Terraforming": "Selecciona una acción a realizar por el gobierno mundial",
+    "Confirm": "Confirmar",
+    "Increase temperature": "Aumentar temperatura",
+    "Increase oxygen": "Aumentar oxígeno",
+    "Increase Venus scale": "Aumenta el nivel de Venus",
+    "Increase": "Aumentar",
+    "Add an ocean": "Coloca una loseta de océano",
+    "Do not have enough steel": "No dispone de suficiente acero ",
+    "Do not have enough titanium": "No dispone de suficiente titanio",
+    "Do not have enough mega credits": "No dispone de suficientes megacréditos",
+    "Did not spend enough to pay for card": "Na ha pagado lo suficiente para jugar la carta",
+    "Don\u2019t place a greenery": "No colocar una loseta de vegetación",
+    "All awards already funded": "Ya han sido finanziados todas las recompensas",
+    "Didn\u2019t even find player": "No se ha encontrado un jugador",
+    "No player has played requested card": "Ningún jugador ha jugado la carta solicitada",
+    "Drew and discarded ${0} (cost ${1}) to place a ${2}": "Ha robado y descartado ${0} (coste ${1}) para colocar ${2}",
+
+
+
+
+
+
+
+
+
 
     "${0} played ${1}": "${0} ha jugado ${1}",
     "${0} used ${1} action": "${0} ha realizado la acción ${1}",

@@ -63,6 +63,7 @@ import {IMoonData} from './moon/IMoonData';
 import {MoonExpansion} from './moon/MoonExpansion';
 import {TurmoilHandler} from './turmoil/TurmoilHandler';
 import {Random} from './Random';
+import {MilestoneAwardSelector} from './MilestoneAwardSelector';
 
 export type GameId = string;
 
@@ -265,7 +266,7 @@ export class Game implements ISerializable<SerializedGame> {
       game.aresData = AresSetup.initialData(gameOptions.aresExtension, gameOptions.aresHazards, players);
     }
 
-    const milestonesAwards = GameSetup.chooseMilestonesAndAwards(gameOptions);
+    const milestonesAwards = MilestoneAwardSelector.chooseMilestonesAndAwards(gameOptions);
     game.milestones = milestonesAwards.milestones;
     game.awards = milestonesAwards.awards;
 

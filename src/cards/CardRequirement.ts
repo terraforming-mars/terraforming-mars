@@ -156,13 +156,21 @@ export class CardRequirement {
     case RequirementType.LOGISTIC_RATE:
       return this.satisfiesInequality(MoonExpansion.moonData(player.game).logisticRate);
 
+    case RequirementType.COLONY_TILES:
+      return this.satisfiesInequality(
+        MoonExpansion.tiles(player.game, TileType.MOON_COLONY, true, this._isAny ? undefined : player).length);
+
+    case RequirementType.MINING_TILES:
+      return this.satisfiesInequality(MoonExpansion.tiles(player.game, TileType.MOON_MINE, true, this._isAny ? undefined : player).length);
+
+    case RequirementType.ROAD_TILES:
+      return this.satisfiesInequality(MoonExpansion.tiles(player.game, TileType.MOON_ROAD, true, this._isAny ? undefined : player).length);
+
     case RequirementType.TAG:
     case RequirementType.PARTY:
     case RequirementType.PRODUCTION:
       throw `Use subclass satisfies() for requirement type ${this.type}`;
     }
-
-    return false;
   }
 }
 

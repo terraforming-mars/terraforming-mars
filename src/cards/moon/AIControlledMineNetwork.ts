@@ -26,10 +26,6 @@ export class AIControlledMineNetwork extends Card {
     });
   };
 
-  public canPlay(player: Player): boolean {
-    return MoonExpansion.moonData(player.game).logisticRate >= 2;
-  }
-
   public play(player: Player) {
     MoonExpansion.raiseLogisticRate(player);
     return undefined;

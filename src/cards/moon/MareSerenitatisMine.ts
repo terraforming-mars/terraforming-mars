@@ -38,10 +38,6 @@ export class MareSerenitatisMine extends MoonCard implements IProjectCard, IMoon
     });
   }
 
-  public canPlay(player: Player) {
-    return super.canPlay(player);
-  }
-
   public play(player: Player) {
     super.play(player);
     MoonExpansion.addMineTile(player, MoonSpaces.MARE_SERENITATIS, this.name);

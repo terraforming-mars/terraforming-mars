@@ -29,10 +29,6 @@ export class LunaSenate extends Card implements IProjectCard {
     });
   };
 
-  public canPlay(player: Player): boolean {
-    return player.getTagCount(Tags.MOON) >= 3;
-  }
-
   public play(player: Player) {
     // count + 2 because the 2 moon tags above apply, and this card isn't in
     // played cards yet.

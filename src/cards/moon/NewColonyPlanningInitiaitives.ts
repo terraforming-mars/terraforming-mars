@@ -24,10 +24,6 @@ export class NewColonyPlanningInitiaitives extends Card {
     });
   };
 
-  public canPlay(player: Player): boolean {
-    return MoonExpansion.moonData(player.game).colonyRate >= 2;
-  }
-
   public play(player: Player) {
     MoonExpansion.raiseColonyRate(player);
     return undefined;

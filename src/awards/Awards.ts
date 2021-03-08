@@ -61,4 +61,5 @@ export const ALL_AWARDS: Array<IAward> = [
   ...ELYSIUM_AWARDS,
   ...HELLAS_AWARDS,
   ...VENUS_AWARDS,
-  ...ARES_AWARDS];
+  ...ARES_AWARDS,
+  ...MOON_AWARDS];

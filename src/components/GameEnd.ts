@@ -172,6 +172,7 @@ export const GameEnd = Vue.component('game-end', {
                         :spaces="player.spaces"
                         :venusNextExtension="player.gameOptions.venusNextExtension"
                         :venusScaleLevel="player.venusScaleLevel"
+                        :aresExtension="player.gameOptions.aresExtension"
                         :boardName ="player.gameOptions.boardName"
                         :oceans_count="player.oceans"
                         :oxygen_level="player.oxygenLevel"

@@ -8,6 +8,7 @@ import {GameLoader} from '../database/GameLoader';
 import {Game, GameId} from '../Game';
 import {Player} from '../Player';
 import {Server} from '../server/ServerModel';
+import {ServeAsset} from './ServeAsset';
 
 // A copy from server.ts. Please dedupe.
 function generateRandomId(): GameId {
@@ -15,10 +16,16 @@ function generateRandomId(): GameId {
   return Math.floor(Math.random() * Math.pow(16, 12)).toString(16);
 }
 
-export class CreateGame extends Handler {
-  public static readonly INSTANCE = new CreateGame();
+// Oh, this could be called Game, but that would introduce all kinds of issues.
+export class GameHandler extends Handler {
+  public static readonly INSTANCE = new GameHandler();
   private constructor() {
     super();
+  }
+
+  public get(req: http.IncomingMessage, res: http.ServerResponse, ctx: IContext): void {
+    req.url = '/assets/index.html';
+    ServeAsset.INSTANCE.get(req, res, ctx);
   }
 
   // TODO(kberg): much of this code can be moved outside of handler, and that

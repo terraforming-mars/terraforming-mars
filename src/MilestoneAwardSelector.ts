@@ -1,5 +1,5 @@
 import {AresSetup} from './ares/AresSetup';
-import {ALL_AWARDS, ELYSIUM_AWARDS, HELLAS_AWARDS, ORIGINAL_AWARDS, VENUS_AWARDS} from './awards/Awards';
+import {ELYSIUM_AWARDS, HELLAS_AWARDS, ORIGINAL_AWARDS, VENUS_AWARDS} from './awards/Awards';
 import {Banker} from './awards/Banker';
 import {Benefactor} from './awards/Benefactor';
 import {Celebrity} from './awards/Celebrity';
@@ -29,7 +29,7 @@ import {Generalist} from './milestones/Generalist';
 import {Hoverlord} from './milestones/Hoverlord';
 import {IMilestone} from './milestones/IMilestone';
 import {Mayor} from './milestones/Mayor';
-import {ALL_MILESTONES, ELYSIUM_MILESTONES, HELLAS_MILESTONES, ORIGINAL_MILESTONES, VENUS_MILESTONES} from './milestones/Milestones';
+import {ELYSIUM_MILESTONES, HELLAS_MILESTONES, ORIGINAL_MILESTONES, VENUS_MILESTONES} from './milestones/Milestones';
 import {Planner} from './milestones/Planner';
 import {PolarExplorer} from './milestones/PolarExplorer';
 import {RimSettler} from './milestones/RimSettler';
@@ -41,13 +41,13 @@ import {RandomMAOptionType} from './RandomMAOptionType';
 
 export namespace MilestoneAwardSelector {
   class MAs {
-    private static readonly milestones = [
+    public static readonly milestones = [
       ...ORIGINAL_MILESTONES,
       ...ELYSIUM_MILESTONES,
       ...HELLAS_MILESTONES,
       ...VENUS_MILESTONES,
     ];
-    private static readonly awards = [
+    public static readonly awards = [
       ...ORIGINAL_AWARDS,
       ...ELYSIUM_AWARDS,
       ...HELLAS_AWARDS,
@@ -300,8 +300,8 @@ export namespace MilestoneAwardSelector {
       throw new Error('No limited synergy milestones and awards set was generated after ' + maxAttempts + ' attempts. Please try again.');
     }
 
-    const candidateMilestones = ALL_MILESTONES.map((ma) => ma.name);
-    const candidateAwards = ALL_AWARDS.map((ma) => ma.name);
+    const candidateMilestones = MAs.milestones.map((ma) => ma.name);
+    const candidateAwards = MAs.awards.map((ma) => ma.name);
     if (withVenusian) {
       candidateMilestones.push(...VENUS_MILESTONES.map((ma) => ma.name));
       candidateAwards.push(...VENUS_AWARDS.map((ma) => ma.name));

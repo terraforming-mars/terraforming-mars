@@ -15,8 +15,8 @@
     "available action.": "acción disponible.",
     "Take action": "Realizar acción",
     "Take first action of ${0} corporation": "Realiza la primera acción de ${0}",
-    "Don\'t place a greenery": "No coloques una loseta de vegetación",
-    "${0}\'s ${1} amount ${2} by ${3} by ${4}": "('${0} ${1} amount ${2} by ${3} by ${4}",
+    "Don\u2019t place a greenery": "No coloques una loseta de vegetación",
+    "${0}\u2019s ${1} amount ${2} by ${3} by ${4}": "('${0} ${1} amount ${2} by ${3} by ${4}",
     "increased" : "ha disminuido",
     "decreased": "ha aumentado",
 

@@ -1,14 +1,15 @@
 import * as http from 'http';
 import {expect} from 'chai';
-import {ApiGames} from '../../src/routes/ApiGames';
+import {ApiPlayer} from '../../src/routes/ApiPlayer';
 import {Route} from '../../src/routes/Route';
 import {Game} from '../../src/Game';
 import {TestPlayers} from '../TestPlayers';
 import {MockResponse} from './HttpMocks';
 import {IContext} from '../../src/routes/IHandler';
 import {FakeGameLoader} from './FakeGameLoader';
+import {PlayerModel} from '../../src/models/PlayerModel';
 
-describe('ApiGames', function() {
+describe('ApiPlayer', function() {
   let req: http.IncomingMessage;
   let res: MockResponse;
   let ctx: IContext;
@@ -24,22 +25,21 @@ describe('ApiGames', function() {
     };
   });
 
-  it('validates server id', () => {
-    req.url = '/api/games';
+  it('fails game not found', () => {
+    req.url = '/api/player?id=googoo';
     ctx.url = new URL('http://boo.com' + req.url);
-    ApiGames.INSTANCE.processRequest(req, res.hide(), ctx);
-    expect(res.content).eq('Not authorized');
+    ApiPlayer.INSTANCE.get(req, res.hide(), ctx);
+    expect(res.content).eq('Not found');
   });
 
-  it('simple', () => {
-    ApiGames.INSTANCE.get(req, res.hide(), ctx);
-    expect(res.content).eq('[]');
-  });
-
-  it('a game', () => {
+  it('pulls player', () => {
     const player = TestPlayers.BLACK.newPlayer();
-    ctx.gameLoader.add(Game.newInstance('game-id', [player], player));
-    ApiGames.INSTANCE.get(req, res.hide(), ctx);
-    expect(res.content).eq('["game-id"]');
+    req.url = '/api/player?id=' + player.id;
+    ctx.url = new URL('http://boo.com' + req.url);
+    const game = Game.newInstance('game-id', [player], player);
+    ctx.gameLoader.add(game);
+    ApiPlayer.INSTANCE.get(req, res.hide(), ctx);
+    const response: PlayerModel = JSON.parse(res.content);
+    expect(response.id).eq(player.id);
   });
 });

@@ -15,7 +15,7 @@ import {Magnate} from './Magnate';
 import {SpaceBaron} from './SpaceBaron';
 import {Excentric} from './Excentric';
 import {Contractor} from './Contractor';
-import {Entrepeneur} from './Entrepeneur';
+import {Entrepreneur} from './Entrepreneur';
 import {FullMoon} from '../moon/FullMoon';
 import {LunarMagnate} from '../moon/LunarMagnate';
 
@@ -48,12 +48,12 @@ export const HELLAS_AWARDS: Array<IAward> = [
 ];
 
 export const ARES_AWARDS: Array<IAward> = [
-  new FullMoon(),
-  new LunarMagnate(),
+  new Entrepreneur(),
 ];
 
 export const MOON_AWARDS: Array<IAward> = [
-  new Entrepeneur(),
+  new FullMoon(),
+  new LunarMagnate(),
 ];
 
 export const ALL_AWARDS: Array<IAward> = [

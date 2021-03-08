@@ -1,7 +1,6 @@
 import {CardName} from '../../CardName';
 import {Player} from '../../Player';
 import {CardType} from '../CardType';
-import {Tags} from '../Tags';
 import {MoonExpansion} from '../../moon/MoonExpansion';
 import {CardRenderer} from '../render/CardRenderer';
 import {Card} from '../Card';
@@ -10,7 +9,6 @@ export class UndergroundDetonators extends Card {
   constructor() {
     super({
       name: CardName.UNDERGROUND_DETONATORS,
-      tags: [Tags.EVENT],
       cardType: CardType.EVENT,
       cost: 9,
 

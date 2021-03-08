@@ -15,7 +15,7 @@ export class LunaConference extends Card implements IProjectCard {
     super({
       name: CardName.LUNA_CONFERENCE,
       cardType: CardType.EVENT,
-      tags: [Tags.SCIENCE, Tags.MOON, Tags.EVENT],
+      tags: [Tags.SCIENCE, Tags.MOON],
       cost: 5,
       requirements: CardRequirements.builder((b) => b.party(PartyName.SCIENTISTS)),
 

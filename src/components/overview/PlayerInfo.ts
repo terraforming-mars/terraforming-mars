@@ -94,6 +94,9 @@ export const PlayerInfo = Vue.component('player-info', {
     getNrPlayedCards: function(): number {
       return this.player.playedCards.length;
     },
+    getAvailableBlueActionCount: function(): number {
+      return this.player.availableBlueCardActionCount;
+    },
   },
   template: ` 
       <div :class="getClasses()">
@@ -121,6 +124,13 @@ export const PlayerInfo = Vue.component('player-info', {
               </div>
             </div>
             <Button class="played-cards-button" size="tiny" :onClick="togglePlayerDetails" :title="buttonLabel()" />
+          </div>
+          <div class="tag-display player-board-blue-action-counter">
+            <div class="tag-count tag-action-card tag-size-big tag-type-main">
+              <div class="blue-stripe"></div>
+              <div class="red-arrow"></div>
+            </div>
+            <span class="tag-count-display">{{ getAvailableBlueActionCount() }}</span>
           </div>
         </div>
         <player-tags :player="player" v-trim-whitespace :isActivePlayer="getIsActivePlayer()" :hideZeroTags="hideZeroTags" />

@@ -16,26 +16,14 @@ describe('GrandLunaAcademy', () => {
     card = new GrandLunaAcademy();
   });
 
-  it('play', () => {
-    player.cardsInHand = [];
-    player.tagsForTest = {moon: 1};
-    card.play(player);
-    expect(player.cardsInHand).has.length(0);
-
-    player.cardsInHand = [];
-    player.tagsForTest = {moon: 2};
-    card.play(player);
-    expect(player.cardsInHand).has.length(1);
-
-    player.cardsInHand = [];
-    player.tagsForTest = {moon: 3};
-    card.play(player);
-    expect(player.cardsInHand).has.length(1);
-
-    player.cardsInHand = [];
-    player.tagsForTest = {moon: 4};
-    card.play(player);
-    expect(player.cardsInHand).has.length(2);
+  const cases = [[0, 0], [1, 1], [2, 1], [3, 2], [4, 2]];
+  cases.forEach(([tags, cards]) => {
+    it(`play: ${tags} tags, ${cards} cards`, () => {
+      player.cardsInHand = [];
+      player.tagsForTest = {moon: tags};
+      card.play(player);
+      expect(player.cardsInHand).has.length(cards);
+    });
   });
 });
 

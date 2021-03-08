@@ -32,8 +32,8 @@ describe('HeavyDutyRovers', () => {
     moonData.logisticRate = 0;
     expect(player.getTerraformRating()).eq(14);
 
-    moonData.moon.getSpace('m06')!.tile = {tileType: TileType.MOON_MINE};
-    moonData.moon.getSpace('m05')!.tile = {tileType: TileType.MOON_ROAD};
+    moonData.moon.getSpace('m07')!.tile = {tileType: TileType.MOON_MINE};
+    moonData.moon.getSpace('m06')!.tile = {tileType: TileType.MOON_ROAD};
     moonData.moon.getSpace('m02')!.tile = {tileType: TileType.MOON_MINE};
 
     card.play(player);

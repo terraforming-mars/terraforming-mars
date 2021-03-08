@@ -6,6 +6,8 @@ import {ColorWithNeutral} from '../Color';
 import {IPayProductionModel} from './IPayProductionUnitsModel';
 import {IAresData} from '../ares/IAresData';
 import {Message} from '../Message';
+import {PartyName} from '../turmoil/parties/PartyName';
+import {TurmoilModel} from './TurmoilModel';
 
 export interface PlayerInputModel {
     amount: number | undefined;
@@ -29,4 +31,8 @@ export interface PlayerInputModel {
     payProduction?: IPayProductionModel;
     aresData?: IAresData;
     selectBlueCardAction: boolean;
+    showOnlyInLearnerMode?: boolean;
+    showOwner?: boolean;
+    availableParties: Array<PartyName> | undefined;
+    turmoil?: TurmoilModel;
 }

@@ -34,9 +34,13 @@ export class CulturalMetropolis extends Card implements IProjectCard {
   }
 
   public canPlay(player: Player): boolean {
-    if (player.game.turmoil !== undefined) {
+    const turmoil = player.game.turmoil;
+    if (turmoil !== undefined) {
       // This card requires player has 2 delegates available
-      return player.game.turmoil.canPlay(player, PartyName.UNITY) && player.getProduction(Resources.ENERGY) >= 1 && (player.game.turmoil.getDelegates(player.id) > 1 || (player.game.turmoil.getDelegates(player.id) === 1 && player.game.turmoil.lobby.has(player.id)));
+      return turmoil.canPlay(player, PartyName.UNITY) &&
+        player.getProduction(Resources.ENERGY) >= 1 &&
+        (turmoil.getDelegatesInReserve(player.id) > 1 ||
+        (turmoil.getDelegatesInReserve(player.id) === 1 && turmoil.lobby.has(player.id)));
     }
     return false;
   }
@@ -47,10 +51,10 @@ export class CulturalMetropolis extends Card implements IProjectCard {
     player.game.defer(new PlaceCityTile(player));
     const title = 'Select where to send two delegates';
 
-    if (player.game.turmoil!.getDelegates(player.id) > 1) {
-      player.game.defer(new SendDelegateToArea(player, title, 2, undefined, undefined, false));
-    } else if (player.game.turmoil!.getDelegates(player.id) === 1 && player.game.turmoil!.lobby.has(player.id)) {
-      player.game.defer(new SendDelegateToArea(player, title, 2, undefined, undefined, true));
+    if (player.game.turmoil!.getDelegatesInReserve(player.id) > 1) {
+      player.game.defer(new SendDelegateToArea(player, title, {count: 2, source: 'reserve'}));
+    } else if (player.game.turmoil!.getDelegatesInReserve(player.id) === 1 && player.game.turmoil!.lobby.has(player.id)) {
+      player.game.defer(new SendDelegateToArea(player, title, {count: 2, source: 'lobby'}));
     }
     return undefined;
   }

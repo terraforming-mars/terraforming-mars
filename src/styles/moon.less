@@ -1,21 +1,21 @@
 .moon-board {
-	width: 462px;
-	height: 269px;
+	width: 568px;
+	height: 335px;
 	margin: 85px 0 0 0;
 	background: url(assets/moon/board.png) no-repeat;
 }
 
 .global-numbers-colony {
 	position: absolute;
-	margin: 8px 0px 0px 1px;
+	margin: 60px 0px 0px 26px;
 }
 .global-numbers-logistics {
   position: absolute;
-	margin: 8px 0px 0px 346px;
+	margin: 60px 0px 0px 435px;
 }
 .global-numbers-mining {
   position: absolute;
-  margin: 8px 0px 0px 406px;
+  margin: 60px 0px 0px 508px;
 }
 
 .board-space-tile--colony {
@@ -46,30 +46,55 @@
 // 	background-image: url(./assets/moon/lunar-mine-urbanization.png);
 // }
 
-.moon-space-m01 { margin: 15px 0 0 49px; }
-.moon-space-m02 { margin: -55px 0 0 39px; }
-.moon-space-m03 { margin: -55px 0 0 88px; }
-.moon-space-m04 { margin: -55px 0 0 137px; }
-.moon-space-m05 { margin: -16px 0 0 16px; }
-.moon-space-m06 { margin: -16px 0 0 65px; }
-.moon-space-m07 { margin: -16px 0 0 114px; }
-.moon-space-m08 { margin: -16px 0 0 163px; }
-.moon-space-m09 { margin: 23px 0 0 -10px; }
-.moon-space-m10 { margin: 23px 0 0 39px; }
-.moon-space-m11 { margin: 23px 0 0 88px; }
-.moon-space-m12 { margin: 23px 0 0 137px; }
-.moon-space-m13 { margin: 23px 0 0 186px; }
-.moon-space-m14 { margin: 62px 0 0 16px; }
-.moon-space-m15 { margin: 62px 0 0 65px; }
-.moon-space-m16 { margin: 62px 0 0 114px; }
-.moon-space-m17 { margin: 62px 0 0 163px; }
-.moon-space-m18 { margin: 101px 0 0 39px; }
-.moon-space-m19 { margin: 101px 0 0 88px; }
-.moon-space-m20 { margin: 101px 0 0 137px; }
-.moon-space-m21 { margin: 210px 0 0 301px; }
+.moon-space-m01 { margin: 15px 0 0 59px; }
+// Row 1
+.moon-space-m02 { margin: -57px 0 0 44px; }
+.moon-space-m03 { margin: -57px 0 0 93px; }
+.moon-space-m04 { margin: -57px 0 0 142px; }
+.moon-space-m05 { margin: -57px 0 0 191px; }
+// Row 2
+.moon-space-m06 { margin: -18px 0 0 21px; }
+.moon-space-m07 { margin: -18px 0 0 70px; }
+.moon-space-m08 { margin: -18px 0 0 119px; }
+.moon-space-m09 { margin: -18px 0 0 168px; }
+.moon-space-m10 { margin: -18px 0 0 217px; }
+// Row 3
+.moon-space-m11 { margin: 21px 0 0 -5px; }
+.moon-space-m12 { margin: 21px 0 0 44px; }
+.moon-space-m13 { margin: 21px 0 0 93px; }
+.moon-space-m14 { margin: 21px 0 0 142px; }
+.moon-space-m15 { margin: 21px 0 0 191px; }
+.moon-space-m16 { margin: 21px 0 0 240px; }
+// Row 4
+.moon-space-m17 { margin: 60px 0 0 21px; }
+.moon-space-m18 { margin: 60px 0 0 70px; }
+.moon-space-m19 { margin: 60px 0 0 119px; }
+.moon-space-m20 { margin: 60px 0 0 168px; }
+.moon-space-m21 { margin: 60px 0 0 217px; }
+// Row 5
+.moon-space-m22 { margin: 99px 0 0 -5px; }
+.moon-space-m23 { margin: 99px 0 0 44px; }
+.moon-space-m24 { margin: 99px 0 0 93px; }
+.moon-space-m25 { margin: 99px 0 0 142px; }
+.moon-space-m26 { margin: 99px 0 0 191px; }
+.moon-space-m27 { margin: 99px 0 0 240px; }
+// Row 6
+.moon-space-m28 { margin: 138px 0 0 21px; }
+.moon-space-m29 { margin: 138px 0 0 70px; }
+.moon-space-m30 { margin: 138px 0 0 119px; }
+.moon-space-m31 { margin: 138px 0 0 168px; }
+.moon-space-m32 { margin: 138px 0 0 217px; }
+// Row 7
+.moon-space-m33 { margin: 177px 0 0 44px; }
+.moon-space-m34 { margin: 177px 0 0 93px; }
+.moon-space-m35 { margin: 177px 0 0 142px; }
+.moon-space-m36 { margin: 177px 0 0 191px; }
+
+.moon-space-m37 { margin: 11px 0 0 363px; }
 
 .moon-space-type-mine {
 	background: url(assets/moon/hex_brown.png);
+	background-color: #8303;
 }
 
 .moon-space-type-other {
@@ -142,10 +167,25 @@
 	width: 52px;
 	height: 51px;
 }
+
+.card-play-moon-colony--S {
+	background-image: url(./assets/moon/play-colonytile.png);
+	width: 30px;
+	height: 30px;
+	background-size: 30px 30px;
+}
+
 .card-play-moon-mine {
 	background-image: url(./assets/moon/play-minetile.png);
 	width: 52px;
 	height: 51px;
+}
+
+.card-play-moon-mine--S {
+	background-image: url(./assets/moon/play-minetile.png);
+	width: 30px;
+	height: 30px;
+	background-size: 30px 30px;
 }
 
 .card-play-moon-road {
@@ -154,22 +194,51 @@
 	height: 51px;
 }
 
-.card-increase-colony-rate {
+.card-play-moon-road--S {
+	background-image: url(./assets/moon/play-roadtile.png);
+	width: 30px;
+	height: 30px;
+	background-size: 30px 30px;
+}
+
+// TODO(kberg): Rename these files so they don't have 'increase' in their names.
+.card-colony-rate {
 	background-image: url(./assets/moon/card-increase-colony-rate.png);
 	width: 46px;
 	height: 46px;
 }
 
-.card-increase-mining-rate {
+.card-colony-rate--S {
+	background-image: url(./assets/moon/card-increase-colony-rate.png);
+	width: 30px;
+	height: 30px;
+	background-size: 30px 30px;
+}
+
+.card-mining-rate {
 	background-image: url(./assets/moon/card-increase-mining-rate.png);
 	width: 46px;
 	height: 46px;
 }
 
-.card-increase-logistics-rate {
+.card-mining-rate--S {
+	background-image: url(./assets/moon/card-increase-mining-rate.png);
+	width: 30px;
+	height: 30px;
+	background-size: 30px 30px;
+}
+
+.card-logistics-rate {
 	background-image: url(./assets/moon/card-increase-logistics-rate.png);
 	width: 46px;
 	height: 46px;
+}
+
+.card-logistics-rate--S {
+	background-image: url(./assets/moon/card-increase-logistics-rate.png);
+	width: 30px;
+	height: 30px;
+	background-size: 30px 30px;
 }
 
 .card-tile-lunar-colony {

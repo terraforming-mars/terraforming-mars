@@ -4,18 +4,19 @@ import {Game} from '../../src/Game';
 import {IMoonData} from '../../src/moon/IMoonData';
 import {MoonExpansion} from '../../src/moon/MoonExpansion';
 import {MoonSpaces} from '../../src/moon/MoonSpaces';
-import {Player} from '../../src/Player';
+import {Resources} from '../../src/Resources';
 import {SpaceName} from '../../src/SpaceName';
 import {TileType} from '../../src/TileType';
 import {setCustomGameOptions} from '../TestingUtils';
+import {TestPlayer} from '../TestPlayer';
 import {TestPlayers} from '../TestPlayers';
 
 const MOON_OPTIONS = setCustomGameOptions({moonExpansion: true});
 
 describe('MoonExpansion', () => {
   let game: Game;
-  let player: Player;
-  let player2: Player;
+  let player: TestPlayer;
+  let player2: TestPlayer;
   let moonData: IMoonData;
 
   beforeEach(() => {
@@ -30,6 +31,15 @@ describe('MoonExpansion', () => {
     const space: ISpace = moonData.moon.getSpace(MoonSpaces.MARE_IMBRIUM);
     expect(space.player).eq(player);
     expect(space.tile).deep.eq({tileType: TileType.LUNA_TRADE_STATION});
+  });
+
+  it('addTile grants space bonus', () => {
+    // Contains card and steel.
+    player.steel = 0;
+    player.cardsInHand = [];
+    MoonExpansion.addTile(player, 'm03', {tileType: TileType.MOON_ROAD});
+    expect(player.steel).eq(1);
+    expect(player.cardsInHand).has.length(1);
   });
 
   it('addTile fails occupied space', () => {
@@ -81,5 +91,54 @@ describe('MoonExpansion', () => {
     // Remove the road, and the mine is worth nothing.
     moonData.moon.getSpace('m03').tile = undefined;
     expect(computeVps()).eql({colonies: 0, mines: 0, roads: 0});
+  });
+
+  it('Raise mining rate bonus 2-3', () => {
+    moonData.miningRate = 2;
+    player.cardsInHand = [];
+    MoonExpansion.raiseMiningRate(player, 1);
+    expect(player.cardsInHand).has.length(1);
+  });
+
+  it('Raise mining rate bonus 1-4', () => {
+    moonData.miningRate = 1;
+    player.cardsInHand = [];
+    MoonExpansion.raiseMiningRate(player, 3);
+    expect(player.cardsInHand).has.length(1);
+  });
+
+  it('Raise mining rate bonus 5-6', () => {
+    moonData.miningRate = 5;
+    player.setProductionForTest({titanium: 0});
+    MoonExpansion.raiseMiningRate(player, 1);
+    expect(player.getProduction(Resources.TITANIUM)).eq(1);
+  });
+
+  it('Raise logistic rate bonus 2-3', () => {
+    moonData.logisticRate = 2;
+    player.cardsInHand = [];
+    MoonExpansion.raiseLogisticRate(player, 1);
+    expect(player.cardsInHand).has.length(1);
+  });
+
+  it('Raise logistic rate bonus 5-6', () => {
+    moonData.logisticRate = 5;
+    player.setProductionForTest({steel: 0});
+    MoonExpansion.raiseLogisticRate(player, 1);
+    expect(player.getProduction(Resources.STEEL)).eq(1);
+  });
+
+  it('Raise colony rate bonus 2-3', () => {
+    moonData.colonyRate = 2;
+    player.cardsInHand = [];
+    MoonExpansion.raiseColonyRate(player, 1);
+    expect(player.cardsInHand).has.length(1);
+  });
+
+  it('Raise colony rate bonus 5-6', () => {
+    moonData.colonyRate = 5;
+    player.cardsInHand = [];
+    MoonExpansion.raiseColonyRate(player, 1);
+    expect(player.cardsInHand).has.length(1);
   });
 });

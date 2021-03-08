@@ -41,6 +41,9 @@ export const Preferences = Vue.component('preferences', {
     turmoil: {
       type: Object as () => TurmoilModel || undefined,
     },
+    lastSoloGeneration: {
+      type: Number,
+    },
   },
   components: {
     'game-setup-detail': GameSetupDetail,
@@ -75,6 +78,7 @@ export const Preferences = Vue.component('preferences', {
       'hide_tile_confirmation': false as boolean | unknown[],
       'show_card_number': false as boolean | unknown[],
       'show_discount_on_cards': true as boolean | unknown[],
+      'learner_mode': true as boolean | unknown[],
     };
   },
   methods: {
@@ -236,29 +240,20 @@ export const Preferences = Vue.component('preferences', {
                   <i class="preferences_icon preferences_icon--info"
                   :class="{'preferences_item--is-active': ui.gamesetup_detail_open}"
                   v-on:click="ui.gamesetup_detail_open = !ui.gamesetup_detail_open"
-                  :title="$t('hotkeys and game setup details')"></i>
+                  :title="$t('game setup details')"></i>
                     <div class="info_panel" v-if="ui.gamesetup_detail_open">
-                      <div class="info-panel-title" v-i18n>Hotkeys Mapping</div>
-                      <div class="help-page-hotkeys">
-                        <div class="keys">
-                          <div v-i18n>Main Board</div>
-                          <div v-i18n>Players Overview Table</div>
-                          <div v-i18n>Cards in Hand</div>
-                          <div v-i18n>Colonies</div>
-                        </div>
-                      </div>
                       <div class="info_panel-spacing"></div>
                       <div class="info-panel-title" v-i18n>Game Setup Details</div>
-                      <game-setup-detail :gameOptions="gameOptions" :playerNumber="playerNumber"></game-setup-detail>
+                      <game-setup-detail :gameOptions="gameOptions" :playerNumber="playerNumber" :lastSoloGeneration="lastSoloGeneration"></game-setup-detail>
 
                       <div class="info_panel_actions">
                         <button class="btn btn-lg btn-primary" v-on:click="ui.gamesetup_detail_open=false">Ok</button>
                       </div>
                     </div>
                 </div>
-                <a href="/help-iconology" target="_blank">
+                <a href="/help" target="_blank">
                     <div class="preferences_item preferences_item--help">
-                      <i class="preferences_icon preferences_icon--help" :title="$t('game symbols')"></i>
+                      <i class="preferences_icon preferences_icon--help" :title="$t('player aid')"></i>
                     </div>
                 </a>
             <div class="preferences_item preferences_item--settings">
@@ -384,7 +379,14 @@ export const Preferences = Vue.component('preferences', {
                             <i class="form-icon"></i> <span v-i18n>Show card numbers (req. refresh)</span>
                         </label>
                     </div>
-
+                    <div class="preferences_panel_item">
+                        <label class="form-switch">
+                            <input type="checkbox" v-on:change="updatePreferences" v-model="learner_mode" />
+                            <i class="form-icon"></i> 
+                            <span v-i18n>Learner Mode (req. refresh)</span>
+                            <span class="tooltip tooltip-left" data-tooltip="Show information that can be helpful\n to players who are still learning the games">&#9432;</span>
+                        </label>
+                    </div>
                     <div class="preferences_panel_item form-group">
                         <label class="form-label"><span v-i18n>Language</span> (<a href="javascript:document.location.reload(true);" v-i18n>refresh page</a> <span v-i18n>to see changes</span>)</label>
                         <div class="preferences_panel_langs">

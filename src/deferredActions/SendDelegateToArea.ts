@@ -1,69 +1,83 @@
 import {Player, PlayerId} from '../Player';
-import {OrOptions} from '../inputs/OrOptions';
-import {SelectOption} from '../inputs/SelectOption';
+import {SelectPartyToSendDelegate} from '../inputs/SelectPartyToSendDelegate';
 import {DeferredAction, Priority} from './DeferredAction';
 import {SelectHowToPayDeferred} from './SelectHowToPayDeferred';
 import {NeutralPlayer} from '../turmoil/Turmoil';
+import {PartyName} from '../turmoil/parties/PartyName';
 
 export class SendDelegateToArea implements DeferredAction {
   public priority = Priority.DEFAULT;
   constructor(
         public player: Player,
         public title: string = 'Select where to send a delegate',
-        public nbr: number = 1,
-        public replace: PlayerId | NeutralPlayer | undefined = undefined,
-        public price: number | undefined = undefined,
-        public fromLobby: boolean = true,
+        public options: SendDelegateToArea.Options = {},
   ) {}
 
   public execute() {
-    const sendDelegate = new OrOptions();
-    // Change the default title
-    sendDelegate.title = this.title;
-    sendDelegate.buttonLabel = 'Send delegate';
-    let parties;
-    if (this.replace) {
-      parties = this.player.game.turmoil!.parties.filter((party) => {
+    const turmoil = this.player.game.turmoil;
+    if (turmoil === undefined) {
+      throw new Error(`Turmoil not defined in game ${this.player.game.id}`);
+    }
+
+    // All parties are eligible, unless this action is used to replace a delegate.
+    let parties = turmoil.parties;
+    if (this.options.replace) {
+      parties = turmoil.parties.filter((party) => {
         if (party.delegates.length < 2) return false;
 
         for (const delegate of party.delegates) {
-          if (delegate !== this.replace) continue;
+          if (delegate !== this.options.replace) continue;
           if (delegate !== party.partyLeader) return true;
-          return party.delegates.filter((delegate) => delegate === this.replace).length > 1;
+          return party.delegates.filter((delegate) => delegate === this.options.replace).length > 1;
         }
         return false;
       });
     } else {
-      parties = this.player.game.turmoil!.parties;
+      parties = turmoil.parties;
     }
 
-    sendDelegate.options = parties.map((party) => new SelectOption(
-      party.name + ' (' + party.description + ')',
-      'Send delegate',
-      () => {
-        if (this.price) {
-          this.player.game.defer(new SelectHowToPayDeferred(this.player, this.price, {title: 'Select how to pay for send delegate action'}));
-        }
+    // How many delegate to send
+    const numDelegateToSend = this.options.count || 1;
 
-        if (this.nbr > 1 && this.fromLobby) { // For card: Cultural Metropolis
-                    this.player.game.turmoil?.sendDelegateToParty(this.player.id, party.name, this.player.game, true);
-                    for (let i = 0; i < this.nbr - 1; i++) {
-                        this.player.game.turmoil?.sendDelegateToParty(this.player.id, party.name, this.player.game, false);
-                    }
-        } else {
-          for (let i = 0; i < this.nbr; i++) {
-            if (this.replace) {
-                            this.player.game.turmoil?.removeDelegateFromParty(this.replace, party.name, this.player.game);
-            }
-                        this.player.game.turmoil?.sendDelegateToParty(this.player.id, party.name, this.player.game, this.fromLobby);
+    const availableParties = parties.map((party) => party.name);
+
+    const sendDelegate = new SelectPartyToSendDelegate(this.title, 'Send delegate', availableParties, (partyName: PartyName) => {
+      if (this.options.cost) {
+        this.player.game.defer(new SelectHowToPayDeferred(this.player, this.options.cost, {title: 'Select how to pay for send delegate action'}));
+      }
+
+      const source = this.options.source || 'lobby';
+      if (numDelegateToSend > 1 && source === 'lobby') { // For card: Cultural Metropolis
+        turmoil.sendDelegateToParty(this.player.id, partyName, this.player.game, 'lobby');
+        for (let i = 0; i < numDelegateToSend - 1; i++) {
+          turmoil.sendDelegateToParty(this.player.id, partyName, this.player.game, 'reserve');
+        }
+      } else {
+        for (let i = 0; i < numDelegateToSend; i++) {
+          if (this.options.replace) {
+            turmoil.removeDelegateFromParty(this.options.replace, partyName, this.player.game);
           }
+          turmoil.sendDelegateToParty(this.player.id, partyName, this.player.game, source);
         }
+      }
 
-        this.player.game.log('${0} sent ${1} delegate(s) in ${2} area', (b) => b.player(this.player).number(this.nbr).party(party));
-        return undefined;
-      },
-    ));
+      this.player.game.log('${0} sent ${1} delegate(s) in ${2} area', (b) => b.player(this.player).number(numDelegateToSend).party(turmoil.getPartyByName(partyName)));
+      return undefined;
+    });
 
     return sendDelegate;
+  }
+}
+
+export namespace SendDelegateToArea {
+  export interface Options {
+    /** The number of delegates to replace. Default is 1. */
+    count?: number,
+    /** If defined, this action is used to replace another player's delegates */
+    replace?: PlayerId | NeutralPlayer | undefined,
+    /** Cost for sending this delegate. Default is no cost. */
+    cost?: number,
+    /** Source of the delegates being added. Default is 'lobby' */
+    source?: 'lobby' | 'reserve'
   }
 }

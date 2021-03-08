@@ -1,5 +1,4 @@
 import Vue from 'vue';
-
 import {CardType} from '../cards/CardType';
 import {LogMessage} from '../LogMessage';
 import {LogMessageType} from '../LogMessageType';
@@ -12,22 +11,34 @@ import {CardFinder} from './../CardFinder';
 import {ICard} from '../cards/ICard';
 import {CardName} from '../CardName';
 import {TileType} from '../TileType';
+import {playerColorClass} from '../utils/utils';
+import {Color} from '../Color';
 
-import * as raw_settings from '../genfiles/settings.json';
+let logRequest: XMLHttpRequest | undefined;
 
 export const LogPanel = Vue.component('log-panel', {
   props: {
     id: {
       type: String,
     },
+    generation: {
+      type: Number,
+    },
+    lastSoloGeneration: {
+      type: Number,
+    },
     players: {
       type: Array as () => Array<PlayerModel>,
+    },
+    color: {
+      type: String as () => Color,
     },
   },
   data: function() {
     return {
       cards: [] as Array<string>,
       messages: [] as Array<LogMessage>,
+      selectedGeneration: this.generation,
     };
   },
   components: {
@@ -166,36 +177,103 @@ export const LogPanel = Vue.component('log-panel', {
       this.cards = [];
     },
     getCrossHtml: function() {
-      return '<i class=\'icon icon-cross\' /i>';
+      return '<i class=\'icon icon-cross\' />';
+    },
+    selectGeneration: function(gen: number): void {
+      if (gen !== this.selectedGeneration) {
+        this.getLogsForGeneration(gen);
+      }
+      this.selectedGeneration = gen;
+    },
+    getLogsForGeneration: function(generation: number): void {
+      const messages = this.messages;
+      // abort any pending requests
+      if (logRequest !== undefined) {
+        logRequest.abort();
+        logRequest = undefined;
+      }
+
+      const xhr = new XMLHttpRequest();
+      logRequest = xhr;
+      xhr.open('GET', `/api/game/logs?id=${this.id}&generation=${generation}`);
+      xhr.onerror = () => {
+        console.error('error updating messages, unable to reach server');
+      };
+      xhr.onload = () => {
+        if (xhr.status === 200) {
+          messages.splice(0, messages.length);
+          messages.push(...xhr.response);
+          if (generation === this.generation) {
+            this.$nextTick(this.scrollToEnd);
+          }
+        } else {
+          console.error(`error updating messages, response code ${xhr.status}`);
+        }
+      };
+      xhr.responseType = 'json';
+      xhr.send();
+    },
+    getClassesGenIndicator: function(gen: number): string {
+      const classes = ['log-gen-indicator'];
+      if (gen === this.selectedGeneration) {
+        classes.push('log-gen-indicator--selected');
+      }
+      return classes.join(' ');
+    },
+    getGenerationsRange: function(): Array<number> {
+      const generations: Array<number> = [];
+      for (let i = 1; i <= this.generation; i++) {
+        generations.push(i);
+      }
+      return generations;
+    },
+    getTitleClasses: function(): string {
+      const classes = ['log-title'];
+      classes.push(playerColorClass(this.color.toLowerCase(), 'shadow'));
+      return classes.join(' ');
+    },
+    getGenerationText: function(): string {
+      let retText = '';
+      if (this.players.length === 1) {
+        retText += 'of ' + this.lastSoloGeneration;
+        if (this.lastSoloGeneration === this.generation) {
+          retText = '<span class=\'last-generation blink-animation\'>' + retText + '</span>';
+        }
+      }
+      return retText;
     },
   },
   mounted: function() {
-    fetch(`/api/game/logs?id=${this.id}&limit=${raw_settings.logLength}`)
-      .then((response) => response.json())
-      .then((messages) => {
-        this.messages.splice(0, this.messages.length);
-        this.messages.push(...messages);
-        this.$nextTick(this.scrollToEnd);
-      })
-      .catch((error) => {
-        console.error('error updating messages', error);
-      });
+    this.getLogsForGeneration(this.generation);
   },
   template: `
-    <div>
-        <div class="panel log-panel">
-            <div id="logpanel-scrollable" class="panel-body">
-                <ul v-if="messages">
-                    <li v-for="message in messages" v-on:click.prevent="cardClicked(message)" v-html="parseMessage(message)"></li>
-                </ul>
+      <div class="log-container">
+        <div class="log-generations">
+          <h2 :class="getTitleClasses()">
+              <span v-i18n>Game log</span>
+          </h2>
+          <div class="log-gen-title">Gen: </div>
+          <div class="log-gen-numbers">
+            <div v-for="n in getGenerationsRange()" :class="getClassesGenIndicator(n)" v-on:click.prevent="selectGeneration(n)">
+              {{ n }}
             </div>
+          </div>
+          <span class="label-additional" v-html="getGenerationText()"></span>
+        </div>
+        <div class="panel log-panel">
+          <div id="logpanel-scrollable" class="panel-body">
+            <ul v-if="messages">
+              <li v-for="message in messages" v-on:click.prevent="cardClicked(message)" v-html="parseMessage(message)"></li>
+            </ul>
+          </div>
         </div>
         <div class="card-panel" v-if="cards.length > 0">
-            <Button size="big" type="close" :disableOnServerBusy="false" :onClick="hideMe" align="right"/>
-            <div id="log_panel_card" class="cardbox" v-for="(card, index) in cards" :key="index">
-                <Card :card="{name: card}"/>
-            </div>
+          <Button size="big" type="close" :disableOnServerBusy="false" :onClick="hideMe" align="right"/>
+          <div id="log_panel_card" class="cardbox" v-for="(card, index) in cards" :key="index">
+            <Card :card="{name: card}"/>
+          </div>
         </div>
-    </div>
+      </div>
     `,
 });
+

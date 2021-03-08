@@ -171,7 +171,8 @@ checkComponent(
     'ui', 'hide_corporation', 'hide_hand', 'hide_cards', 'hide_awards_and_milestones', 'hide_tag_overview',
     'hide_turnorder', 'hide_corporation_names', , 'hide_top_bar', 'small_cards', 'remove_background', 'magnify_cards',
     'magnify_card_descriptions', 'show_alerts', 'hide_ma_scores', 'hide_non_blue_cards', 'hide_log',
-    'lang', 'langs', 'enable_sounds', 'smooth_scrolling', 'hide_tile_confirmation', 'show_card_number', 'show_discount_on_cards'
+    'lang', 'langs', 'enable_sounds', 'smooth_scrolling', 'hide_tile_confirmation', 'show_card_number', 'show_discount_on_cards',
+    'learner_mode',
   ],
 );
 checkComponent(
@@ -267,6 +268,26 @@ checkComponent(
 checkComponent(
   'src/components/Turmoil',
   require('./build/src/components/Turmoil').Turmoil,
+  [],
+);
+checkComponent(
+  'src/components/help/Help',
+  require('./build/src/components/help/Help').Help,
+  [],
+);
+checkComponent(
+  'src/components/help/HelpIconology',
+  require('./build/src/components/help/HelpIconology').HelpIconology,
+  [],
+);
+checkComponent(
+  'src/components/help/HelpPhases',
+  require('./build/src/components/help/HelpPhases').HelpPhases,
+  [],
+);
+checkComponent(
+  'src/components/help/HelpStandardProjects',
+  require('./build/src/components/help/HelpStandardProjects').HelpStandardProjects,
   [],
 );
 

@@ -28,6 +28,11 @@ export interface IResourceCard {
     resourceCount: number;
 }
 
+export interface CardDiscount {
+  tag?: Tags, // When absent, discount applies to all cards.
+  amount: number
+ }
+
 export interface ICard {
     name: CardName;
     tags: Array<Tags>;
@@ -35,6 +40,7 @@ export interface ICard {
     action?: (player: Player) => OrOptions | SelectOption | AndOptions | SelectAmount | SelectCard<ICard> | SelectCard<IProjectCard> | SelectHowToPay | SelectPlayer | SelectSpace | undefined;
     canAct?: (player: Player) => boolean;
     getCardDiscount?: (player: Player, card: IProjectCard) => number;
+    cardDiscount?: CardDiscount;
     getRequirementBonus?: (player: Player, venusOnly?: boolean) => number;
     getVictoryPoints?: (player: Player) => number;
     onCardPlayed?: (player: Player, card: IProjectCard) => OrOptions | void;

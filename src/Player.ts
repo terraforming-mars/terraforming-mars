@@ -37,6 +37,7 @@ import {SendDelegateToArea} from './deferredActions/SendDelegateToArea';
 import {DeferredAction} from './deferredActions/DeferredAction';
 import {SelectHowToPayDeferred} from './deferredActions/SelectHowToPayDeferred';
 import {SelectColony} from './inputs/SelectColony';
+import {SelectPartyToSendDelegate} from './inputs/SelectPartyToSendDelegate';
 import {SelectDelegate} from './inputs/SelectDelegate';
 import {SelectHowToPay} from './inputs/SelectHowToPay';
 import {SelectHowToPayForProjectCard} from './inputs/SelectHowToPayForProjectCard';
@@ -128,7 +129,7 @@ export class Player implements ISerializable<SerializedPlayer> {
 
   // Colonies
   private fleetSize: number = 1;
-  public tradesThisTurn: number = 0;
+  public tradesThisGeneration: number = 0;
   public colonyTradeOffset: number = 0;
   public colonyTradeDiscount: number = 0;
   public colonyVictoryPoints: number = 0;
@@ -671,11 +672,6 @@ export class Player implements ISerializable<SerializedPlayer> {
       tagCount += this.scienceTagCount;
     }
 
-    // PoliticalAgendas Scientists P4 hook
-    if (tag === Tags.SCIENCE && this.hasTurmoilScienceTagBonus) {
-      tagCount += 1;
-    }
-
     if (includeTagSubstitutions) {
       // Earth Embassy hook
       if (tag === Tags.EARTH && this.playedCards.some((c) => c.name === CardName.EARTH_EMBASSY)) {
@@ -897,6 +893,13 @@ export class Player implements ISerializable<SerializedPlayer> {
       // TODO(kberg): I'm sure there's some input validation required.
       const response: IAresGlobalParametersResponse = JSON.parse(input[0][0]);
       pi.cb(response);
+    } else if (pi instanceof SelectPartyToSendDelegate) {
+      this.checkInputLength(input, 1, 1);
+      const party: PartyName = (input[0][0]) as PartyName;
+      if (party === undefined) {
+        throw new Error('No party selected');
+      }
+      this.runInputCb(pi.cb(party));
     } else {
       throw new Error('Unsupported waitingFor');
     }
@@ -928,7 +931,15 @@ export class Player implements ISerializable<SerializedPlayer> {
   public runProductionPhase(): void {
     this.actionsThisGeneration.clear();
     this.removingPlayers = [];
-    this.tradesThisTurn = 0;
+    // Syndicate Pirate Raids hook. If it is in effect, then only the syndicate pirate raider will
+    // retrieve their fleets.
+    // See Colony.ts for the other half of this effect, and Game.ts which disables it.
+    if (this.game.syndicatePirateRaider === undefined) {
+      this.tradesThisGeneration = 0;
+    } else if (this.game.syndicatePirateRaider === this.id) {
+      this.tradesThisGeneration = 0;
+    }
+
     this.turmoilPolicyActionUsed = false;
     this.politicalAgendasActionUsedCount = 0;
     this.megaCredits += this.megaCreditProduction + this.terraformRating;
@@ -1815,7 +1826,7 @@ export class Player implements ISerializable<SerializedPlayer> {
     if (this.game.gameOptions.coloniesExtension) {
       const openColonies = this.game.colonies.filter((colony) => colony.isActive && colony.visitor === undefined);
       if (openColonies.length > 0 &&
-        this.fleetSize > this.tradesThisTurn &&
+        this.fleetSize > this.tradesThisGeneration &&
         (this.canAfford(this.getMcTradeCost()) ||
           this.energy >= this.getEnergyTradeCost() ||
           this.titanium >= this.getTitaniumTradeCost())
@@ -1826,15 +1837,15 @@ export class Player implements ISerializable<SerializedPlayer> {
       }
     }
 
-    // If you can pay to send some in the Ara
-    if (this.game.gameOptions.turmoilExtension) {
+    // If you can pay to add a delegate to a party.
+    if (this.game.gameOptions.turmoilExtension && this.game.turmoil !== undefined) {
       let sendDelegate;
       if (this.game.turmoil?.lobby.has(this.id)) {
         sendDelegate = new SendDelegateToArea(this, 'Send a delegate in an area (from lobby)');
-      } else if (this.isCorporation(CardName.INCITE) && this.canAfford(3) && this.game.turmoil!.getDelegates(this.id) > 0) {
-        sendDelegate = new SendDelegateToArea(this, 'Send a delegate in an area (3 MC)', 1, undefined, 3, false);
-      } else if (this.canAfford(5) && this.game.turmoil!.getDelegates(this.id) > 0) {
-        sendDelegate = new SendDelegateToArea(this, 'Send a delegate in an area (5 MC)', 1, undefined, 5, false);
+      } else if (this.isCorporation(CardName.INCITE) && this.canAfford(3) && this.game.turmoil.getDelegatesInReserve(this.id) > 0) {
+        sendDelegate = new SendDelegateToArea(this, 'Send a delegate in an area (3 MC)', {cost: 3});
+      } else if (this.canAfford(5) && this.game.turmoil.getDelegatesInReserve(this.id) > 0) {
+        sendDelegate = new SendDelegateToArea(this, 'Send a delegate in an area (5 MC)', {cost: 5});
       }
       if (sendDelegate) {
         const input = sendDelegate.execute();
@@ -1990,7 +2001,7 @@ export class Player implements ISerializable<SerializedPlayer> {
       cardDiscount: this.cardDiscount,
       // Colonies
       fleetSize: this.fleetSize,
-      tradesThisTurn: this.tradesThisTurn,
+      tradesThisTurn: this.tradesThisGeneration,
       colonyTradeOffset: this.colonyTradeOffset,
       colonyTradeDiscount: this.colonyTradeDiscount,
       colonyVictoryPoints: this.colonyVictoryPoints,
@@ -2058,7 +2069,7 @@ export class Player implements ISerializable<SerializedPlayer> {
     player.titanium = d.titanium;
     player.titaniumProduction = d.titaniumProduction;
     player.titaniumValue = d.titaniumValue;
-    player.tradesThisTurn = d.tradesThisTurn;
+    player.tradesThisGeneration = d.tradesThisTurn;
     player.turmoilPolicyActionUsed = d.turmoilPolicyActionUsed;
     player.politicalAgendasActionUsedCount = d.politicalAgendasActionUsedCount;
     player.victoryPointsBreakdown = d.victoryPointsBreakdown;

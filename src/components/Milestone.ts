@@ -1,5 +1,7 @@
 import Vue from 'vue';
+import {MILESTONE_COST, MAX_MILESTONES} from '../constants';
 import {ClaimedMilestoneModel} from '../models/ClaimedMilestoneModel';
+import {PreferencesManager} from './PreferencesManager';
 
 export const Milestone = Vue.component('milestone', {
   props: {
@@ -35,15 +37,25 @@ export const Milestone = Vue.component('milestone', {
     toggleList: function() {
       this.showList = !this.showList;
     },
+    getAvailableMilestoneSpots: function(): Array<number> {
+      const count = this.milestones_list.filter((milestone) => milestone.player_name).length;
+      return Array(MAX_MILESTONES - count).fill(MILESTONE_COST);
+    },
+    isLearnerModeOn: function(): boolean {
+      return PreferencesManager.loadValue('learner_mode') === '1';
+    },
   },
   template: `
     <div class="milestones_cont" v-trim-whitespace>
         <div class="milestones">
             <div class="ma-title">
                 <a class="ma-clickable" href="#" v-on:click.prevent="toggleList()" v-i18n>Milestones</a>
-                <span v-for="milestone in milestones_list" v-if="milestone.player_name" class="claimed-milestone-inline" :title="milestone.player_name">
+                <span v-for="milestone in milestones_list" v-if="milestone.player_name" class="milestone-award-inline paid" :title="milestone.player_name">
                     <span v-i18n>{{ milestone.milestone.name }}</span>
                     <span class="ma-player-cube"><i :class="'board-cube board-cube--'+milestone.player_color" /></span>
+                </span>
+                <span v-for="spotPrice in getAvailableMilestoneSpots()" class="milestone-award-inline unpaid" v-if="isLearnerModeOn()">
+                    <div class="milestone-award-price">{{spotPrice}}</div>
                 </span>
             </div>
             <div v-show="shouldShowList()">

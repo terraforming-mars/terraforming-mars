@@ -22,6 +22,7 @@ import {SerializedColony} from '../SerializedColony';
 import {StealResources} from '../deferredActions/StealResources';
 import {Tags} from '../cards/Tags';
 import {SendDelegateToArea} from '../deferredActions/SendDelegateToArea';
+import {Game} from '../Game';
 
 export enum ShouldIncreaseTrack { YES, NO, ASK }
 
@@ -47,11 +48,20 @@ export abstract class Colony implements SerializedColony {
     public shouldIncreaseTrack: ShouldIncreaseTrack = ShouldIncreaseTrack.YES;
 
 
-    public endGeneration(): void {
+    public endGeneration(game: Game): void {
       if (this.isActive) {
         this.increaseTrack();
       }
-      this.visitor = undefined;
+      // Syndicate Pirate Raids hook. If it is in effect, then only the syndicate pirate raider will
+      // retrieve their fleets.
+      // See Player.ts for the other half of this effect, and Game.ts which disables it.
+      if (game.syndicatePirateRaider) {
+        if (game.syndicatePirateRaider === this.visitor) {
+          this.visitor = undefined;
+        }
+      } else {
+        this.visitor = undefined;
+      }
     }
 
     public increaseTrack(value: number = 1): void {
@@ -122,7 +132,7 @@ export abstract class Colony implements SerializedColony {
 
       if (usesTradeFleet) {
         this.visitor = player.id;
-        player.tradesThisTurn++;
+        player.tradesThisGeneration++;
       }
 
       if (decreaseTrackAfterTrade) {
@@ -220,21 +230,21 @@ export abstract class Colony implements SerializedColony {
       case ColonyBenefit.PLACE_DELEGATES:
         if (game.turmoil !== undefined) {
           const playerHasLobbyDelegate = game.turmoil.lobby.has(player.id);
-          let availablePlayerDelegates = game.turmoil.getDelegates(player.id);
+          let availablePlayerDelegates = game.turmoil.getDelegatesInReserve(player.id);
           if (playerHasLobbyDelegate) availablePlayerDelegates += 1;
 
           const qty = Math.min(quantity, availablePlayerDelegates);
 
           for (let i = 0; i < qty; i++) {
             const fromLobby = (i === qty - 1 && qty === availablePlayerDelegates && playerHasLobbyDelegate);
-            game.defer(new SendDelegateToArea(player, 'Select where to send delegate', 1, undefined, undefined, fromLobby));
+            game.defer(new SendDelegateToArea(player, 'Select where to send delegate', {source: fromLobby ? 'lobby' : 'reserve'}));
           }
         }
         break;
 
       case ColonyBenefit.GIVE_MC_PER_DELEGATE:
         if (game.turmoil !== undefined) {
-          let partyDelegateCount = PLAYER_DELEGATES_COUNT - game.turmoil.getDelegates(player.id);
+          let partyDelegateCount = PLAYER_DELEGATES_COUNT - game.turmoil.getDelegatesInReserve(player.id);
           if (game.turmoil.lobby.has(player.id)) partyDelegateCount--;
           if (game.turmoil.chairman === player.id) partyDelegateCount--;
 

@@ -1,5 +1,5 @@
 import {AresSetup} from './ares/AresSetup';
-import {ALL_AWARDS, ELYSIUM_AWARDS, HELLAS_AWARDS, ORIGINAL_AWARDS, VENUS_AWARDS} from './awards/Awards';
+import {ALL_AWARDS, ARES_AWARDS, ELYSIUM_AWARDS, HELLAS_AWARDS, ORIGINAL_AWARDS, VENUS_AWARDS} from './awards/Awards';
 import {Banker} from './awards/Banker';
 import {Benefactor} from './awards/Benefactor';
 import {Celebrity} from './awards/Celebrity';
@@ -29,7 +29,7 @@ import {Generalist} from './milestones/Generalist';
 import {Hoverlord} from './milestones/Hoverlord';
 import {IMilestone} from './milestones/IMilestone';
 import {Mayor} from './milestones/Mayor';
-import {ALL_MILESTONES, ELYSIUM_MILESTONES, HELLAS_MILESTONES, ORIGINAL_MILESTONES, VENUS_MILESTONES} from './milestones/Milestones';
+import {ALL_MILESTONES, ARES_MILESTONES, ELYSIUM_MILESTONES, HELLAS_MILESTONES, ORIGINAL_MILESTONES, VENUS_MILESTONES} from './milestones/Milestones';
 import {Planner} from './milestones/Planner';
 import {PolarExplorer} from './milestones/PolarExplorer';
 import {RimSettler} from './milestones/RimSettler';
@@ -46,22 +46,26 @@ export namespace MilestoneAwardSelector {
       ...ELYSIUM_MILESTONES,
       ...HELLAS_MILESTONES,
       ...VENUS_MILESTONES,
+      ...ARES_MILESTONES,
     ];
     private static readonly awards = [
       ...ORIGINAL_AWARDS,
       ...ELYSIUM_AWARDS,
       ...HELLAS_AWARDS,
       ...VENUS_AWARDS,
+      ...ARES_AWARDS,
     ];
     public static readonly ALL = [
       ...ORIGINAL_MILESTONES,
       ...ELYSIUM_MILESTONES,
       ...HELLAS_MILESTONES,
       ...VENUS_MILESTONES,
+      ...ARES_MILESTONES,
       ...ORIGINAL_AWARDS,
       ...ELYSIUM_AWARDS,
       ...HELLAS_AWARDS,
       ...VENUS_AWARDS,
+      ...ARES_AWARDS,
     ];
 
 

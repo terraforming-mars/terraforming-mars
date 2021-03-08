@@ -82,8 +82,16 @@ export namespace MilestoneAwardSelector {
     }
   }
   class Synergies {
-    // This map uses keys "X|Y" and of course stores strings as both
-    // "Y|X" and "X|X"
+    // This map uses keys of the format "X|Y" where X and Y are MA names.
+    // Entries are stored as "X|Y" and also "Y|X"; it just makes searching
+    // slightly faster. There will also be entries of the type "X|X".
+    //
+    // I honestly don't remember why "X|X" is useful, and it's possible
+    // it's no longer necessary. That's something that should be carefully conisdered
+    // and possibly removed, and not just propagated because that's what we had to begin with.
+    // In other words, someone figure out why, and preserve it, and document why, or
+    // be certain it's unnecessary and remove this paragraph and the code below that sets "X|X" to 1000.
+    // 
     private static map: Map<string, number> = Synergies.makeMap();
 
     private constructor() {

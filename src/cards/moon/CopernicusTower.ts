@@ -31,19 +31,14 @@ export class CopernicusTower extends Card implements IActionCard, IProjectCard {
           b.action('Add 1 Science resource to this card.', (eb) => {
             eb.empty().startAction.science(1);
           }).br;
-          b.or().br;
-          b.action('Action: Spend 1 Science resource here to raise your TR 1 step.', (eb) => {
-            eb.science(1).startAction.production((pb) => pb.megacredits(1));
+          b.action('Spend 1 Science resource here to raise your TR 1 step.', (eb) => {
+            eb.science(1).startAction.tr(1);
           });
         }),
       },
     });
   };
   public resourceCount = 0;
-
-  public canPlay(player: Player): boolean {
-    return player.getProduction(Resources.TITANIUM) >= 2;
-  }
 
   public play() {
     return undefined;

@@ -23,15 +23,11 @@ export class UndermoonDrugLordsNetwork extends Card implements IProjectCard {
         renderData: CardRenderer.builder((b) => {
           b.production((pb) => {
             pb.megacredits(1);
-          }).slash().moonColonyRate(2);
+          }).slash().moonColonyRate({amount: 2});
         }),
       },
     });
   };
-
-  public canPlay(): boolean {
-    return true;
-  }
 
   public play(player: Player) {
     const gain = Math.floor(MoonExpansion.moonData(player.game).colonyRate / 2);

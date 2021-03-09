@@ -22,17 +22,13 @@ export class LunaStagingStation extends MoonCard {
         cardNumber: 'M30',
         renderData: CardRenderer.builder((b) => {
           b.minus().titanium(1).br;
-          b.moonLogisticsRate(2);
+          b.moonLogisticsRate({amount: 2});
         }),
       },
     }, {
       reserveUnits: Units.of({titanium: 1}),
     });
   };
-
-  public canPlay(player: Player): boolean {
-    return MoonExpansion.moonData(player.game).logisticRate >= 2;
-  }
 
   public play(player: Player) {
     super.play(player);

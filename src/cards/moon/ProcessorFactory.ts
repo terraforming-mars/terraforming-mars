@@ -31,10 +31,6 @@ export class ProcessorFactory extends Card implements IProjectCard {
   };
   public resourceCount = 0;
 
-  public canPlay(): boolean {
-    return true;
-  }
-
   public play() {
     return undefined;
   }

@@ -19,15 +19,11 @@ export class LTFHeadquarters extends Card {
         description: 'Raise Colony Rate 1 step. Place a colony. Gain 1 trade fleet.',
         cardNumber: 'M79',
         renderData: CardRenderer.builder((b) => {
-          b.moonColonyRate(1).colonies(1).tradeFleet();
+          b.moonColonyRate().colonies(1).tradeFleet();
         }),
       },
     });
   };
-
-  public canPlay(): boolean {
-    return true;
-  }
 
   public play(player: Player) {
     MoonExpansion.raiseColonyRate(player);

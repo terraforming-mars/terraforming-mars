@@ -30,7 +30,7 @@ export class LunaMiningHub extends MoonCard {
         renderData: CardRenderer.builder((b) => {
           b.minus().titanium(1).minus().steel(1).br;
           b.production((pb) => pb.steel(1).titanium(1));
-          b.tile(TileType.LUNA_MINING_HUB, true).moonMiningRate(1);
+          b.tile(TileType.LUNA_MINING_HUB, true).moonMiningRate();
         }),
         victoryPoints: CardRenderDynamicVictoryPoints.questionmark(), // (2, 1),
       },
@@ -38,10 +38,6 @@ export class LunaMiningHub extends MoonCard {
       reserveUnits: Units.of({titanium: 1, steel: 1}),
     });
   };
-
-  public canPlay(player: Player): boolean {
-    return MoonExpansion.moonData(player.game).miningRate >= 5;
-  }
 
   public play(player: Player) {
     super.play(player);

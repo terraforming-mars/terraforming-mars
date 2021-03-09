@@ -12,6 +12,7 @@ import {CardRenderer} from '../render/CardRenderer';
 import {CardRenderDynamicVictoryPoints} from '../render/CardRenderDynamicVictoryPoints';
 import {Units} from '../../Units';
 import {MoonCard} from './MoonCard';
+import {CardRenderItemSize} from '../render/CardRenderItemSize';
 
 export class DarksideIncubationPlant extends MoonCard implements IActionCard, IProjectCard {
   constructor() {
@@ -26,12 +27,11 @@ export class DarksideIncubationPlant extends MoonCard implements IActionCard, IP
         description: 'Spend 1 titanium. 1 VP per every 2 microbes here.',
         cardNumber: 'M45',
         renderData: CardRenderer.builder((b) => {
-          b.action('Add 1 microbe here', (eb) => {
+          b.action('Add 1 microbe to this card.', (eb) => {
             eb.empty().startAction.microbes(1);
           }).br;
-          b.or().br;
           b.action('Spend 2 microbes to raise Colony Rate 1 step.', (eb) => {
-            eb.microbes(2).startAction.moonColonyRate(1);
+            eb.microbes(2).startAction.moonColonyRate({size: CardRenderItemSize.SMALL});
           });
 
           b.br;

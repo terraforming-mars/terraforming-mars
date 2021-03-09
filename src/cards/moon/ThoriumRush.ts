@@ -14,7 +14,7 @@ export class ThoriumRush extends Card implements IProjectCard {
     super({
       name: CardName.THORIUM_RUSH,
       cardType: CardType.EVENT,
-      tags: [Tags.MOON, Tags.BUILDING, Tags.EVENT],
+      tags: [Tags.MOON, Tags.BUILDING],
       cost: 39,
 
       metadata: {
@@ -27,9 +27,6 @@ export class ThoriumRush extends Card implements IProjectCard {
       },
     });
   };
-  public canPlay(): boolean {
-    return true;
-  }
 
   public play(player: Player) {
     player.game.defer(new PlaceMoonColonyTile(player));

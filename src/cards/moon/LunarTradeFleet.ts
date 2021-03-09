@@ -24,15 +24,11 @@ export class LunarTradeFleet extends Card {
         renderData: CardRenderer.builder((b) => {
           b.production((pb) => pb.megacredits(1));
           b.br;
-          b.moonLogisticsRate(1);
+          b.moonLogisticsRate();
         }),
       },
     });
   };
-
-  public canPlay(player: Player): boolean {
-    return player.getProduction(Resources.TITANIUM) >= 2;
-  }
 
   public play(player: Player) {
     player.addProduction(Resources.MEGACREDITS, 1, player.game);

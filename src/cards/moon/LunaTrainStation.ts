@@ -29,17 +29,13 @@ export class LunaTrainStation extends MoonCard {
         renderData: CardRenderer.builder((b) => {
           b.minus().steel(2).br;
           b.production((pb) => pb.megacredits(4));
-          b.tile(TileType.LUNA_TRAIN_STATION, true).moonLogisticsRate(1);
+          b.tile(TileType.LUNA_TRAIN_STATION, true).moonLogisticsRate();
         }),
         victoryPoints: CardRenderDynamicVictoryPoints.questionmark(), // (2, 1),
       },
     }, {
       reserveUnits: Units.of({steel: 2}),
     });
-  }
-
-  public canPlay(player: Player): boolean {
-    return MoonExpansion.moonData(player.game).logisticRate >= 5;
   }
 
   public play(player: Player) {

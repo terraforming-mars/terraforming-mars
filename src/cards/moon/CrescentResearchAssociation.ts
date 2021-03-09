@@ -34,6 +34,7 @@ export class CrescentResearchAssociation implements CorporationCard {
     description: 'You start with 50 MC. 1 VP for every 3 Moon tags you have.',
     cardNumber: '',
     renderData: CardRenderer.builder((b) => {
+      b.megacredits(50).br;
       b.effect('When you play a moon tag, you pay 1 MC less for each Moon tag you have.', (eb) => {
         eb.moon().startEffect.megacredits(1).slash().moon();
       });

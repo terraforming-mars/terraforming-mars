@@ -25,16 +25,12 @@ export class OffWorldCityLiving extends Card implements IProjectCard {
         renderData: CardRenderer.builder((b) => {
           b.production((pb) => pb.megacredits(1)).slash().city().asterix();
           b.br;
-          b.moonColonyRate(1);
+          b.moonColonyRate();
         }),
         victoryPoints: CardRenderDynamicVictoryPoints.cities(1, 3),
       },
     });
   };
-
-  public canPlay(): boolean {
-    return true;
-  }
 
   public play(player: Player) {
     const amount = player.game.getCitiesInPlay() - player.game.getCitiesInPlayOnMars();

@@ -14,7 +14,7 @@ export class CosmicRadiation extends Card implements IProjectCard {
     super({
       name: CardName.COSMIC_RADIATION,
       cardType: CardType.EVENT,
-      tags: [Tags.MOON, Tags.EVENT],
+      tags: [Tags.MOON],
       cost: 3,
 
       requirements: CardRequirements.builder((b) => b.miningRate(4)),
@@ -22,15 +22,11 @@ export class CosmicRadiation extends Card implements IProjectCard {
         description: 'Requires 4 Mining Rate. All players pay 4MC for each mining tile they own.',
         cardNumber: 'M52',
         renderData: CardRenderer.builder((b) => {
-          b.megacredits(4).slash().tile(TileType.MOON_MINE, false).asterix();
+          b.minus().megacredits(4).slash().tile(TileType.MOON_MINE, false).asterix();
         }),
       },
     });
   };
-
-  public canPlay(player: Player): boolean {
-    return MoonExpansion.moonData(player.game).miningRate >= 4;
-  }
 
   public play(player: Player) {
     const mines = MoonExpansion.tiles(player.game, TileType.MOON_MINE, false);

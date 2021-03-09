@@ -13,10 +13,6 @@ export class HeavyDutyRovers implements IProjectCard {
   public cardType = CardType.AUTOMATED;
   public name = CardName.HEAVY_DUTY_ROVERS;
 
-  public canPlay(): boolean {
-    return true;
-  }
-
   public play(player: Player) {
     MoonExpansion.ifMoon(player.game, (moonData) => {
       const mines = moonData.moon.getSpacesWithTile(TileType.MOON_MINE);
@@ -39,7 +35,7 @@ export class HeavyDutyRovers implements IProjectCard {
       // TODO(kberg): Can the two tiles abut each other?
       b.megacredits(4).slash().tile(TileType.MOON_MINE, false).tile(TileType.MOON_ROAD, false);
       b.br;
-      b.moonLogisticsRate(1);
+      b.moonLogisticsRate();
     }),
   };
 }

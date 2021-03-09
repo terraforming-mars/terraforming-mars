@@ -24,15 +24,11 @@ export class PreliminaryDarkside extends Card implements IProjectCard {
         cardNumber: 'M63',
         renderData: CardRenderer.builder((b) => {
           b.titanium(3).digit.or().steel(4).digit.br;
-          b.moonMiningRate(1);
+          b.moonMiningRate();
         }),
       },
     });
   };
-
-  public canPlay(): boolean {
-    return true;
-  }
 
   public play(player: Player) {
     MoonExpansion.raiseMiningRate(player);

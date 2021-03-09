@@ -69,6 +69,7 @@ describe('MilestoneAwardSelector', () => {
   });
 
   it('Main entrance point', () => {
+    // These tests don't test results, they just make sure these calls don't fail.
     MilestoneAwardSelector.chooseMilestonesAndAwards(
       TestingUtils.setCustomGameOptions({randomMA: RandomMAOptionType.NONE}));
     MilestoneAwardSelector.chooseMilestonesAndAwards(

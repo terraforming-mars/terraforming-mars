@@ -134,7 +134,7 @@
     "(click on player name to see details)": "(para ver detalles haz clic en el nombre de jugador)",
     "Go to game results": "Ir a resultados de la partida",
     "Save": "Guardar",
-    "show tiles" :"mostrar losetas",
+    "show tiles": "mostrar losetas",
     "hide tiles": "ocultar losetas",
     "toggle tags view:": "cambiar vista de símbolos:",
     "concise": "Abreviada",
@@ -296,6 +296,9 @@
     "End": "Finalizar",
     "Sell": "Vender",
     "Undo": "Deshacer",
+    "Hide": "Ocultar",
+    "Show": "Mostrar",
+    "Your selected cards": "Las cartas que has seleccionado",
         
     "All": "Todas",   
     "Corporate Era": "Era corporativa",

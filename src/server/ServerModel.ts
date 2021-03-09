@@ -80,6 +80,7 @@ export class Server {
       dealtProjectCards: getCards(player, player.dealtProjectCards),
       deckSize: game.dealer.getDeckSize(),
       draftedCards: getCards(player, player.draftedCards, {showNewCost: true}),
+      endGenerationScores: player.endGenerationScores,
       energy: player.energy,
       energyProduction: player.getProduction(Resources.ENERGY),
       fleetSize: player.getFleetSize(),

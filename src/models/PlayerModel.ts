@@ -32,6 +32,7 @@ export interface PlayerModel {
     dealtProjectCards: Array<CardModel>;
     deckSize: number;
     draftedCards: Array<CardModel>;
+    endGenerationScores: Array<number>;
     energy: number;
     energyProduction: number;
     fleetSize: number;

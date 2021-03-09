@@ -69,7 +69,7 @@ export const WaitingFor = Vue.component('waiting-for', {
   },
   methods: {
     animateTitle: function() {
-      const sequence = '\u25CB\u25D4\u25D1\u25D5\u2B24';
+      const sequence = '\u25D1\u25D2\u25D0\u25D3';
       const first = document.title[0];
       const position = sequence.indexOf(first);
       let next = sequence[0];

@@ -38,10 +38,6 @@ export class LunaTrainStation extends MoonCard {
     });
   }
 
-  public canPlay(player: Player): boolean {
-    return MoonExpansion.moonData(player.game).logisticRate >= 5;
-  }
-
   public play(player: Player) {
     super.play(player);
     player.game.defer(new PlaceSpecialMoonTile(player, {

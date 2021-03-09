@@ -23,10 +23,6 @@ export class StagingStationBehemoth extends Card implements IProjectCard {
     });
   };
 
-  public canPlay(): boolean {
-    return true;
-  }
-
   public play(player: Player) {
     player.increaseFleetSize();
     player.increaseFleetSize();

@@ -40,10 +40,6 @@ export class CopernicusTower extends Card implements IActionCard, IProjectCard {
   };
   public resourceCount = 0;
 
-  public canPlay(player: Player): boolean {
-    return player.getProduction(Resources.TITANIUM) >= 2;
-  }
-
   public play() {
     return undefined;
   }

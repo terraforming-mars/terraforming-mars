@@ -63,6 +63,7 @@ import {IMoonData} from './moon/IMoonData';
 import {MoonExpansion} from './moon/MoonExpansion';
 import {TurmoilHandler} from './turmoil/TurmoilHandler';
 import {Random} from './Random';
+import {MilestoneAwardSelector} from './MilestoneAwardSelector';
 
 export type GameId = string;
 
@@ -265,7 +266,7 @@ export class Game implements ISerializable<SerializedGame> {
       game.aresData = AresSetup.initialData(gameOptions.aresExtension, gameOptions.aresHazards, players);
     }
 
-    const milestonesAwards = GameSetup.chooseMilestonesAndAwards(gameOptions);
+    const milestonesAwards = MilestoneAwardSelector.chooseMilestonesAndAwards(gameOptions);
     game.milestones = milestonesAwards.milestones;
     game.awards = milestonesAwards.awards;
 
@@ -1575,6 +1576,10 @@ export class Game implements ISerializable<SerializedGame> {
 
     const awards: Array<IAward> = [];
     d.awards.forEach((element: IAward) => {
+      // TODO(kberg): remove by 2021-03-30
+      if (element.name === 'Entrepeneur') {
+        element.name = 'Entrepreneur';
+      }
       ALL_AWARDS.forEach((award: IAward) => {
         if (award.name === element.name) {
           awards.push(award);

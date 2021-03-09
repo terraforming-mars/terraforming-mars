@@ -33,10 +33,6 @@ export class RustEatingBacteria extends Card implements IActionCard, IProjectCar
 
   public resourceCount = 0;
 
-  public canPlay(): boolean {
-    return true;
-  }
-
   public play() {
     return undefined;
   }

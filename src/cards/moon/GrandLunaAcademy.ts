@@ -24,10 +24,6 @@ export class GrandLunaAcademy extends Card implements IProjectCard {
     });
   };
 
-  public canPlay(): boolean {
-    return true;
-  }
-
   public play(player: Player) {
     const tags = player.getTagCount(Tags.MOON);
     // Adding 1 so this tag is included in the count.

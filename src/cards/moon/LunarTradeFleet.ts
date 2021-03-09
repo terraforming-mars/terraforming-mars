@@ -30,10 +30,6 @@ export class LunarTradeFleet extends Card {
     });
   };
 
-  public canPlay(player: Player): boolean {
-    return player.getProduction(Resources.TITANIUM) >= 2;
-  }
-
   public play(player: Player) {
     player.addProduction(Resources.MEGACREDITS, 1, player.game);
     MoonExpansion.raiseLogisticRate(player);

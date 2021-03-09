@@ -25,9 +25,6 @@ export class DarksideMeteorBombardment extends Card {
       },
     });
   };
-  public canPlay(): boolean {
-    return true;
-  }
 
   public play(player: Player) {
     player.steel += 2;

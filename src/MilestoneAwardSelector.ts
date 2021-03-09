@@ -70,7 +70,7 @@ export namespace MilestoneAwardSelector {
       if (milestone) {
         return milestone;
       }
-      throw (`Milestone ${name} not found.`);
+      throw new Error(`Milestone ${name} not found.`);
     }
 
     public static getAward(name: string): IAward {
@@ -78,7 +78,7 @@ export namespace MilestoneAwardSelector {
       if (award) {
         return award;
       }
-      throw (`Award ${name} not found.`);
+      throw new Error(`Award ${name} not found.`);
     }
   }
   class Synergies {

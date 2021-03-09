@@ -155,6 +155,9 @@ export class Player implements ISerializable<SerializedPlayer> {
   // cards that provide 'next card' discounts. This will clear between turns.
   public removedFromPlayCards: Array<IProjectCard> = [];
 
+  // Stats
+  public endGenerationScores: Array<number> = [];
+
   constructor(
     public name: string,
     public color: Color,
@@ -2027,6 +2030,8 @@ export class Player implements ISerializable<SerializedPlayer> {
       timer: this.timer.serialize(),
       // Used when undoing action
       usedUndo: this.usedUndo,
+      // Stats
+      endGenerationScores: this.endGenerationScores,
     };
     if (this.lastCardPlayed !== undefined) {
       result.lastCardPlayed = this.lastCardPlayed.name;
@@ -2046,6 +2051,7 @@ export class Player implements ISerializable<SerializedPlayer> {
     player.colonyTradeOffset = d.colonyTradeOffset;
     player.colonyVictoryPoints = d.colonyVictoryPoints;
     player.corporationInitialActionDone = d.corporationInitialActionDone;
+    player.endGenerationScores = d.endGenerationScores;
     player.energy = d.energy;
     player.energyProduction = d.energyProduction;
     player.fleetSize = d.fleetSize;

@@ -785,6 +785,11 @@ export class Game implements ISerializable<SerializedGame> {
       return;
     }
 
+    this.getPlayers().forEach((player) => {
+      player.getVictoryPoints();
+      player.endGenerationScores.push(player.victoryPointsBreakdown.total);
+    });
+
     this.phase = Phase.INTERGENERATION;
     this.goToDraftOrResearch();
   }

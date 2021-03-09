@@ -147,6 +147,7 @@ describe('Player', function() {
       titaniumProduction: 6,
       plants: 7,
       plantProduction: 8,
+      endGenerationScores: [],
       energy: 9,
       energyProduction: 10,
       heat: 11,

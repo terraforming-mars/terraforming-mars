@@ -16,6 +16,8 @@ import {SpaceBaron} from './SpaceBaron';
 import {Excentric} from './Excentric';
 import {Contractor} from './Contractor';
 import {Entrepreneur} from './Entrepreneur';
+import {FullMoon} from '../moon/FullMoon';
+import {LunarMagnate} from '../moon/LunarMagnate';
 
 export const ORIGINAL_AWARDS: Array<IAward> = [
   new Landlord(),
@@ -49,4 +51,15 @@ export const ARES_AWARDS: Array<IAward> = [
   new Entrepreneur(),
 ];
 
-export const ALL_AWARDS: Array<IAward> = [...ORIGINAL_AWARDS, ...ELYSIUM_AWARDS, ...HELLAS_AWARDS, ...VENUS_AWARDS, ...ARES_AWARDS];
+export const MOON_AWARDS: Array<IAward> = [
+  new FullMoon(),
+  new LunarMagnate(),
+];
+
+export const ALL_AWARDS: Array<IAward> = [
+  ...ORIGINAL_AWARDS,
+  ...ELYSIUM_AWARDS,
+  ...HELLAS_AWARDS,
+  ...VENUS_AWARDS,
+  ...ARES_AWARDS,
+  ...MOON_AWARDS];

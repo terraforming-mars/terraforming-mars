@@ -1,5 +1,4 @@
 import {CardName} from '../../CardName';
-import {Player} from '../../Player';
 import {CardType} from '../CardType';
 import {IProjectCard} from '../IProjectCard';
 import {Tags} from '../Tags';
@@ -29,10 +28,6 @@ export class MoonTether extends Card implements IProjectCard {
       },
     });
   };
-
-  public canPlay(player: Player): boolean {
-    return player.getTagCount(Tags.SPACE) >= 6;
-  }
 
   public play() {
     return undefined;

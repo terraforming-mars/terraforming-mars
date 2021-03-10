@@ -1,4 +1,4 @@
-import {ALL_AWARDS, ARES_AWARDS, ELYSIUM_AWARDS, HELLAS_AWARDS, ORIGINAL_AWARDS, VENUS_AWARDS} from './awards/Awards';
+import {ARES_AWARDS, ELYSIUM_AWARDS, HELLAS_AWARDS, ORIGINAL_AWARDS, VENUS_AWARDS} from './awards/Awards';
 import {Banker} from './awards/Banker';
 import {Benefactor} from './awards/Benefactor';
 import {Celebrity} from './awards/Celebrity';
@@ -29,7 +29,7 @@ import {Generalist} from './milestones/Generalist';
 import {Hoverlord} from './milestones/Hoverlord';
 import {IMilestone} from './milestones/IMilestone';
 import {Mayor} from './milestones/Mayor';
-import {ALL_MILESTONES, ARES_MILESTONES, ELYSIUM_MILESTONES, HELLAS_MILESTONES, ORIGINAL_MILESTONES, VENUS_MILESTONES} from './milestones/Milestones';
+import {ARES_MILESTONES, ELYSIUM_MILESTONES, HELLAS_MILESTONES, ORIGINAL_MILESTONES, VENUS_MILESTONES} from './milestones/Milestones';
 import {Networker} from './milestones/Networker';
 import {Planner} from './milestones/Planner';
 import {PolarExplorer} from './milestones/PolarExplorer';
@@ -42,13 +42,13 @@ import {RandomMAOptionType} from './RandomMAOptionType';
 
 export namespace MilestoneAwardSelector {
   class MAs {
-    private static readonly milestones = [
+    public static readonly milestones = [
       ...ORIGINAL_MILESTONES,
       ...ELYSIUM_MILESTONES,
       ...HELLAS_MILESTONES,
       ...VENUS_MILESTONES,
     ];
-    private static readonly awards = [
+    public static readonly awards = [
       ...ORIGINAL_AWARDS,
       ...ELYSIUM_AWARDS,
       ...HELLAS_AWARDS,
@@ -71,7 +71,7 @@ export namespace MilestoneAwardSelector {
       if (milestone) {
         return milestone;
       }
-      throw (`Milestone ${name} not found.`);
+      throw new Error(`Milestone ${name} not found.`);
     }
 
     public static getAward(name: string): IAward {
@@ -79,7 +79,7 @@ export namespace MilestoneAwardSelector {
       if (award) {
         return award;
       }
-      throw (`Award ${name} not found.`);
+      throw new Error(`Award ${name} not found.`);
     }
   }
   class Synergies {
@@ -309,8 +309,8 @@ export namespace MilestoneAwardSelector {
 
     const toName = (e: {name: string}) => e.name;
 
-    const candidateMilestones = ALL_MILESTONES.map(toName);
-    const candidateAwards = ALL_AWARDS.map(toName);
+    const candidateMilestones = MAs.milestones.map(toName);
+    const candidateAwards = MAs.awards.map(toName);
     if (withVenusian) {
       candidateMilestones.push(...VENUS_MILESTONES.map(toName));
       candidateAwards.push(...VENUS_AWARDS.map(toName));

@@ -10,6 +10,7 @@ import {MoonExpansion} from '../../moon/MoonExpansion';
 import {Units} from '../../Units';
 import {MoonCard} from './MoonCard';
 import {PlaceSpecialMoonTile} from '../../moon/PlaceSpecialMoonTile';
+import {CardRenderItemSize} from '../render/CardRenderItemSize';
 
 export class LunaMiningHub extends MoonCard {
   constructor() {
@@ -23,25 +24,23 @@ export class LunaMiningHub extends MoonCard {
       requirements: CardRequirements.builder((b) => b.miningRate(5)),
       metadata: {
         cardNumber: 'M14',
-        description: 'Requires a Mining Rate of 5 or higher. ' +
-          'Spend 1 titanium and 1 steel. Increase your steel and titanium production 1 step each. ' +
-          'Place this tile on the Moon and raise Mining Rate 1 step. ' +
-          '2 ADDITIONAL VPs FOR EACH MINING TILE ADJACENT TO THIS TILE.',
+        description: {
+          text: '2 VP PER MINING TILE ADJACENT TO THIS TILE.',
+          align: 'left',
+        },
         renderData: CardRenderer.builder((b) => {
-          b.minus().titanium(1).minus().steel(1).br;
-          b.production((pb) => pb.steel(1).titanium(1));
-          b.tile(TileType.LUNA_MINING_HUB, true).moonMiningRate();
+          b.text('Requires a Mining Rate of 5 or higher.', CardRenderItemSize.TINY, false, false).br;
+          b.minus().steel(1).minus().titanium(1).production((pb) => pb.steel(1).titanium(1)).br;
+          b.text('Spend 1 steel and 1 titanium and raise your steel and titanium production 1 step.', CardRenderItemSize.TINY, false, false).br;
+          b.tile(TileType.LUNA_MINING_HUB, true).moonMiningRate({size: CardRenderItemSize.SMALL});
+          b.text('Place this tile on the Moon and raise the Mining Rate 1 step.', CardRenderItemSize.TINY, false, false);
         }),
-        victoryPoints: CardRenderDynamicVictoryPoints.questionmark(), // (2, 1),
+        victoryPoints: CardRenderDynamicVictoryPoints.miningTile(2),
       },
     }, {
       reserveUnits: Units.of({titanium: 1, steel: 1}),
     });
   };
-
-  public canPlay(player: Player): boolean {
-    return MoonExpansion.moonData(player.game).miningRate >= 5;
-  }
 
   public play(player: Player) {
     super.play(player);

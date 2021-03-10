@@ -13,10 +13,6 @@ export class HE3Refinery implements IProjectCard {
   public cardType = CardType.ACTIVE;
   public name = CardName.HE3_REFINERY;
 
-  public canPlay(): boolean {
-    return true;
-  }
-
   public play() {
     return undefined;
   }

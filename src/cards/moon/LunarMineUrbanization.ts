@@ -8,7 +8,6 @@ import {MoonExpansion} from '../../moon/MoonExpansion';
 import {TileType} from '../../TileType';
 import {Resources} from '../../Resources';
 import {SelectSpace} from '../../inputs/SelectSpace';
-import {ISpace} from '../../boards/ISpace';
 import {Card} from '../Card';
 import {CardRequirements} from '../CardRequirements';
 import {Units} from '../../Units';
@@ -21,13 +20,11 @@ export class LunarMineUrbanization extends Card implements IProjectCard {
       tags: [Tags.MOON, Tags.BUILDING],
       cost: 8,
       productionBox: Units.of({megacredits: 1}),
-      requirements: CardRequirements.builder((b) => {
-        // TODO(kberg): distinguish between any mining tile and your mining tile.
-        b.miningTiles(1);
-      }),
+      // NOTE(kberg): Rules were that it says it Requires 1 mine tile. Changing to "Requires you have 1 mine tile."
+      requirements: CardRequirements.builder((b) => b.miningTiles(1)),
       metadata: {
         description: 'Requires you have 1 mine tile. Increase your MC production 1 step. Replace one of your mine tiles ' +
-        'with this special tile. Raise Colony Rate 1 step. This tile counts both as a colony and a mine tile.',
+        'with this special tile. Raise the Colony Rate 1 step. This tile counts both as a colony and a mine tile.',
         cardNumber: 'M55',
 
         renderData: CardRenderer.builder((b) => {
@@ -39,18 +36,9 @@ export class LunarMineUrbanization extends Card implements IProjectCard {
     });
   };
 
-  private static myMineTiles(player: Player): Array<ISpace> {
-    return MoonExpansion.tiles(player.game, TileType.MOON_MINE, false).filter((space) => space.player?.id === player.id);
-  }
-
-  // NOTE(kberg): Rules were that it says it Requires 1 mine tile. Changing to "Requires you have 1 mine tile."
-  public canPlay(player: Player): boolean {
-    return LunarMineUrbanization.myMineTiles(player).length >= 1;
-  }
-
   public play(player: Player) {
     player.addProduction(Resources.MEGACREDITS, 1);
-    const tiles = LunarMineUrbanization.myMineTiles(player);
+    const tiles = MoonExpansion.tiles(player.game, TileType.MOON_MINE, false).filter((space) => space.player?.id === player.id);
     return new SelectSpace('Select one of your mines to upgrade', tiles, (space) => {
       if (space.tile === undefined) {
         throw new Error(`Space ${space.id} should have a tile, how doesn't it?`);

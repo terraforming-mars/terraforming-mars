@@ -17,7 +17,7 @@ export class AlgaeBioreactors extends MoonCard {
       productionBox: Units.of({plants: -1}),
 
       metadata: {
-        description: 'Decrease your plant production 1 step. Raise Colony Rate 1 step and oxygen 1%.',
+        description: 'Decrease your plant production 1 step. Raise the Colony Rate 1 step and oxygen 1%.',
         cardNumber: 'M47',
         renderData: CardRenderer.builder((b) => {
           b.production((pb) => pb.minus().plants(1)).moonColonyRate().oxygen(1);

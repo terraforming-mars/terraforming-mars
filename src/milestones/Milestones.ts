@@ -16,6 +16,8 @@ import {PolarExplorer} from './PolarExplorer';
 import {Energizer} from './Energizer';
 import {RimSettler} from './RimSettler';
 import {Networker} from './Networker';
+import {OneGiantStep} from '../moon/OneGiantStep';
+import {Lunarchitect} from '../moon/Lunarchitect';
 
 export const ORIGINAL_MILESTONES: Array<IMilestone> = [
   new Terraformer(),
@@ -49,4 +51,15 @@ export const ARES_MILESTONES: Array<IMilestone> = [
   new Networker(),
 ];
 
-export const ALL_MILESTONES: Array<IMilestone> = [...ORIGINAL_MILESTONES, ...ELYSIUM_MILESTONES, ...HELLAS_MILESTONES, ...VENUS_MILESTONES, ...ARES_MILESTONES];
+export const MOON_MILESTONES: Array<IMilestone> = [
+  new OneGiantStep(),
+  new Lunarchitect,
+];
+
+export const ALL_MILESTONES: Array<IMilestone> = [
+  ...ORIGINAL_MILESTONES,
+  ...ELYSIUM_MILESTONES,
+  ...HELLAS_MILESTONES,
+  ...VENUS_MILESTONES,
+  ...ARES_MILESTONES,
+  ...MOON_MILESTONES];

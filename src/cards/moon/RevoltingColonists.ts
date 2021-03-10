@@ -28,10 +28,6 @@ export class RevoltingColonists extends Card implements IProjectCard {
     });
   };
 
-  public canPlay(player: Player): boolean {
-    return MoonExpansion.moonData(player.game).colonyRate >= 4;
-  }
-
   public play(player: Player) {
     const colonies = MoonExpansion.tiles(player.game, TileType.MOON_COLONY, false);
     player.game.getPlayers().forEach((colonyTileOwner) => {

@@ -4,9 +4,9 @@ import {CardType} from '../CardType';
 import {CardRenderer} from '../render/CardRenderer';
 import {Card} from '../Card';
 import {MoonExpansion} from '../../moon/MoonExpansion';
-import {TileType} from '../../TileType';
 import {CardRenderItemSize} from '../render/CardRenderItemSize';
 import {IProjectCard} from '../IProjectCard';
+import {CardRequirements} from '../CardRequirements';
 
 export class LunarSecurityStations extends Card implements IProjectCard {
   constructor() {
@@ -14,9 +14,10 @@ export class LunarSecurityStations extends Card implements IProjectCard {
       name: CardName.LUNAR_SECURITY_STATIONS,
       cardType: CardType.ACTIVE,
       cost: 9,
+      requirements: CardRequirements.builder((b) => b.roadTiles(3).any()),
 
       metadata: {
-        description: 'Requires 3 road tiles on the Moon. Raise Logistic Rate 1 step.',
+        description: 'Requires 3 road tiles on the Moon. Raise the Logistic Rate 1 step.',
         cardNumber: 'M42',
         renderData: CardRenderer.builder((b) => {
           b.moonLogisticsRate();
@@ -26,10 +27,6 @@ export class LunarSecurityStations extends Card implements IProjectCard {
       },
     });
   };
-
-  public canPlay(player: Player): boolean {
-    return MoonExpansion.tiles(player.game, TileType.MOON_ROAD, true).length >= 3;
-  }
 
   public play(player: Player) {
     MoonExpansion.raiseLogisticRate(player);

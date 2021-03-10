@@ -59,10 +59,12 @@ export namespace MilestoneAwardSelector {
       ...ELYSIUM_MILESTONES,
       ...HELLAS_MILESTONES,
       ...VENUS_MILESTONES,
+      ...ARES_MILESTONES,
       ...ORIGINAL_AWARDS,
       ...ELYSIUM_AWARDS,
       ...HELLAS_AWARDS,
       ...VENUS_AWARDS,
+      ...ARES_AWARDS,
     ];
 
 
@@ -82,34 +84,66 @@ export namespace MilestoneAwardSelector {
       throw new Error(`Award ${name} not found.`);
     }
   }
+
+  // This map uses keys of the format "X|Y" where X and Y are MA names. Entries are stored as "X|Y"
+  // and also "Y|X"; it just makes searching slightly faster. There will also be entries of the type "X|X".
+  //
+  // I honestly don't remember why "X|X" is useful, and it's possible it's no longer necessary. That's
+  // something that should be carefully conisdered and possibly removed, and not just propagated because
+  // it's what we had to begin with. In other words, someone figure out why, and preserve it, and document
+  // why, or be certain it's unnecessary and remove this paragraph and the code below that sets "X|X" to 1000.
+  //
+  class SynergyMap {
+    private readonly map: Map<string, number> = new Map();
+    public set(a: string, b: string, weight: number): void {
+      this.map.set(a + '|' + b, weight);
+      this.map.set(b + '|' + a, weight);
+    }
+
+    public get(a: string, b: string) {
+      return this.map.get(a + '|' + b) || 0;
+    }
+  };
+
   class Synergies {
-    // This map uses keys of the format "X|Y" where X and Y are MA names. Entries are stored as "X|Y"
-    // and also "Y|X"; it just makes searching slightly faster. There will also be entries of the type "X|X".
-    //
-    // I honestly don't remember why "X|X" is useful, and it's possible it's no longer necessary. That's
-    // something that should be carefully conisdered and possibly removed, and not just propagated because
-    // it's what we had to begin with. In other words, someone figure out why, and preserve it, and document
-    // why, or be certain it's unnecessary and remove this paragraph and the code below that sets "X|X" to 1000.
-    //
-    private static map: Map<string, number> = Synergies.makeMap();
+    public static map: SynergyMap = Synergies.makeMap();
 
     private constructor() {
     }
 
-    private static makeMap(): Map<string, number> {
-      const synergies: Map<string, number> = new Map();
-      MAs.ALL.forEach((ma) => {
-        synergies.set(ma.name + '|' + ma.name, 1000);
-      });
+    private static makeMap(): SynergyMap {
+      const synergies = new SynergyMap();
 
       // Higher synergies represent similar milestones or awards. For instance, Terraformer rewards for high TR
       // and the Benefactor award is given to the player with the highets TR. Their synergy weight is 9, very high.
-      function bind(First: { new(): IMilestone | IAward }, Second: { new(): IMilestone | IAward }, weight: number) {
-        const aName = new First().name;
-        const bName = new Second().name;
-        synergies.set(aName + '|' + bName, weight);
-        synergies.set(bName + '|' + aName, weight);
+      function bind(A: { new(): IMilestone | IAward }, B: { new(): IMilestone | IAward }, weight: number):void;
+      function bind(a: string, b: string, weight: number):void;
+      function bind(A: any, B: any, weight: number):void {
+        if (typeof A === 'string') {
+          synergies.set(A, B, weight);
+        } else {
+          synergies.set(new A().name, new B().name, weight);
+        }
       }
+
+      MAs.ALL.forEach((ma) => {
+        bind(ma.name, ma.name, 1000);
+      });
+
+      function bindAll(MA: { new(): IMilestone | IAward }, weight: number) {
+        const ma = new MA().name;
+        MAs.ALL.forEach((otherMA) => {
+          if (ma !== otherMA.name) {
+            bind(ma, otherMA.name, weight);
+          }
+        });
+      }
+
+      // Set a default synergy of 5 from Ares MAs to non-Ares MAs.
+      // Bindings after this call will override them.
+      bindAll(Networker, 5);
+      bindAll(Entrepreneur, 5);
+
       bind(Terraformer, Benefactor, 9);
       bind(Gardener, Cultivator, 9);
       bind(Builder, Contractor, 9);
@@ -189,11 +223,6 @@ export namespace MilestoneAwardSelector {
       bind(Gardener, Ecologist, 1);
       return synergies;
     }
-
-    public static get(a: string, b: string): number {
-      const tmp = Synergies.map.get(a + '|' + b);
-      return tmp || 0;
-    }
   }
 
   function shuffle<T>(arr: Array<T>) {
@@ -213,7 +242,7 @@ export namespace MilestoneAwardSelector {
     let max = 0;
     for (let i = 0; i < names.length - 1; i++) {
       for (let j = i + 1; j < names.length; j++) {
-        const synergy = Synergies.get(names[i], names[j]);
+        const synergy = Synergies.map.get(names[i], names[j]);
         max = Math.max(synergy, max);
       }
     }
@@ -311,6 +340,7 @@ export namespace MilestoneAwardSelector {
 
     const candidateMilestones = MAs.milestones.map(toName);
     const candidateAwards = MAs.awards.map(toName);
+
     if (withVenusian) {
       candidateMilestones.push(...VENUS_MILESTONES.map(toName));
       candidateAwards.push(...VENUS_AWARDS.map(toName));
@@ -366,7 +396,7 @@ export namespace MilestoneAwardSelector {
     let numberOfHigh = 0;
     for (let i = 0; i < mas.length - 1; i++) {
       for (let j = i + 1; j < mas.length; j++) {
-        const synergy = Synergies.get(mas[i], mas[j]);
+        const synergy = Synergies.map.get(mas[i], mas[j]);
         max = Math.max(synergy, max);
         totalSynergy += synergy;
         if (synergy >= constraints.highThreshold) numberOfHigh++;
@@ -403,7 +433,7 @@ export namespace MilestoneAwardSelector {
 
       // Find maximum synergy of this new item compared to the others
       this.milestones.concat(this.awards).forEach((ma) => {
-        const synergy = Synergies.get(ma, candidate);
+        const synergy = Synergies.map.get(ma, candidate);
         totalSynergy += synergy;
         if (synergy >= this.constraints.highThreshold) {
           highCount++;

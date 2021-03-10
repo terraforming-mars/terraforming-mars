@@ -125,7 +125,7 @@ export const PlayerInfo = Vue.component('player-info', {
             </div>
             <Button class="played-cards-button" size="tiny" :onClick="togglePlayerDetails" :title="buttonLabel()" />
           </div>
-          <div class="tag-display player-board-blue-action-counter">
+          <div class="tag-display player-board-blue-action-counter tooltip tooltip-top" data-tooltip="The number of available active card actions">
             <div class="tag-count tag-action-card">
               <div class="blue-stripe"></div>
               <div class="red-arrow"></div>

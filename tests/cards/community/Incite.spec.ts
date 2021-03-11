@@ -5,8 +5,8 @@ import {Game} from '../../../src/Game';
 import {SelectPartyToSendDelegate} from '../../../src/inputs/SelectPartyToSendDelegate';
 import {Player} from '../../../src/Player';
 import {PartyName} from '../../../src/turmoil/parties/PartyName';
-import {setCustomGameOptions} from '../../TestingUtils';
-import {TestPlayers} from '../../TestingUtils';
+import {TestingUtils} from '../../TestingUtils';
+import {TestPlayers} from '../../TestPlayers';
 
 describe('Incite', function() {
   let card : Incite; let player : Player; let game : Game;
@@ -15,7 +15,7 @@ describe('Incite', function() {
     card = new Incite();
     player = TestPlayers.BLUE.newPlayer();
 
-    const gameOptions = setCustomGameOptions();
+    const gameOptions = TestingUtils.setCustomGameOptions();
     game = Game.newInstance('foobar', [player], player, gameOptions);
 
     card.play(player);

@@ -1,6 +1,6 @@
 import {expect} from 'chai';
 import {DrawCards} from '../../src/deferredActions/DrawCards';
-import {TestPlayers} from '../TestingUtils';
+import {TestPlayers} from '../TestPlayers';
 import {Game} from '../../src/Game';
 import {Player} from '../../src/Player';
 import {AICentral} from '../../src/cards/base/AICentral';

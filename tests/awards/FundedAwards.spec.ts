@@ -3,7 +3,7 @@ import {deserializeFundedAwards, serializeFundedAwards} from '../../src/awards/F
 import {FundedAward} from '../../src/awards/FundedAward';
 import {Cultivator} from '../../src/awards/Cultivator';
 import {Industrialist} from '../../src/awards/Industrialist';
-import {TestPlayers} from '../TestingUtils';
+import {TestPlayers} from '../TestPlayers';
 
 describe('FundedAwards', function() {
   it('test serialization', () => {

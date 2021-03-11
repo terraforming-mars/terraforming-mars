@@ -4,7 +4,8 @@ import {TharsisRepublic} from '../../../src/cards/corporation/TharsisRepublic';
 import {Game} from '../../../src/Game';
 import {Player} from '../../../src/Player';
 import {Resources} from '../../../src/Resources';
-import {TestingUtils, TestPlayers} from '../../TestingUtils';
+import {TestingUtils} from '../../TestingUtils';
+import {TestPlayers} from '../../TestPlayers';
 
 describe('ImmigrantCity', function() {
   let card : ImmigrantCity; let player : Player; let player2 : Player; let game : Game;

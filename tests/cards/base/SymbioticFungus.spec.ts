@@ -4,7 +4,7 @@ import {Decomposers} from '../../../src/cards/base/Decomposers';
 import {SymbioticFungus} from '../../../src/cards/base/SymbioticFungus';
 import {Game} from '../../../src/Game';
 import {Player} from '../../../src/Player';
-import {TestPlayers} from '../../TestingUtils';
+import {TestPlayers} from '../../TestPlayers';
 
 describe('SymbioticFungus', function() {
   let card : SymbioticFungus; let player : Player; let game : Game;

@@ -1,6 +1,7 @@
 import {Game} from '../../../src/Game';
 import {Player} from '../../../src/Player';
-import {setCustomGameOptions, TestPlayers} from '../../TestingUtils';
+import {TestingUtils} from '../../TestingUtils';
+import {TestPlayers} from '../../TestPlayers';
 import {DarksideObservatory} from '../../../src/cards/moon/DarksideObservatory';
 import {expect} from 'chai';
 import {PhysicsComplex} from '../../../src/cards/base/PhysicsComplex';
@@ -9,7 +10,7 @@ import {OlympusConference} from '../../../src/cards/base/OlympusConference';
 import {PrideoftheEarthArkship} from '../../../src/cards/moon/PrideoftheEarthArkship';
 import {ProcessorFactory} from '../../../src/cards/moon/ProcessorFactory';
 
-const MOON_OPTIONS = setCustomGameOptions({moonExpansion: true});
+const MOON_OPTIONS = TestingUtils.setCustomGameOptions({moonExpansion: true});
 
 describe('DarksideObservatory', () => {
   let player: Player;

@@ -5,7 +5,7 @@ import {OrOptions} from '../../../src/inputs/OrOptions';
 import {SelectAmount} from '../../../src/inputs/SelectAmount';
 import {Player} from '../../../src/Player';
 import {Resources} from '../../../src/Resources';
-import {TestPlayers} from '../../TestingUtils';
+import {TestPlayers} from '../../TestPlayers';
 
 describe('EnergyMarket', function() {
   let card : EnergyMarket; let player : Player;

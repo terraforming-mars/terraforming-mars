@@ -1,5 +1,5 @@
 import {Game} from '../../../src/Game';
-import {setCustomGameOptions} from '../../TestingUtils';
+import {TestingUtils} from '../../TestingUtils';
 import {CrescentResearchAssociation} from '../../../src/cards/moon/CrescentResearchAssociation';
 import {expect} from 'chai';
 import {TestPlayer} from '../../TestPlayer';
@@ -7,7 +7,7 @@ import {TestPlayers} from '../../TestPlayers';
 import {MareNectarisMine} from '../../../src/cards/moon/MareNectarisMine';
 import {Predators} from '../../../src/cards/base/Predators';
 
-const MOON_OPTIONS = setCustomGameOptions({moonExpansion: true});
+const MOON_OPTIONS = TestingUtils.setCustomGameOptions({moonExpansion: true});
 
 describe('CrescentResearchAssociation', () => {
   let player: TestPlayer;

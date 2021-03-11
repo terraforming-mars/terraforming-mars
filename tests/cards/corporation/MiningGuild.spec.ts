@@ -6,7 +6,8 @@ import {Resources} from '../../../src/Resources';
 import {SpaceBonus} from '../../../src/SpaceBonus';
 import {SpaceType} from '../../../src/SpaceType';
 import {Phase} from '../../../src/Phase';
-import {TestPlayers, TestingUtils} from '../../TestingUtils';
+import {TestingUtils} from '../../TestingUtils';
+import {TestPlayers} from '../../TestPlayers';
 
 describe('MiningGuild', function() {
   let card : MiningGuild; let player : Player; let player2 : Player; let game: Game;

@@ -2,7 +2,8 @@ import {expect} from 'chai';
 import {Player} from '../../../src/Player';
 import {Game} from '../../../src/Game';
 import {Turmoil} from '../../../src/turmoil/Turmoil';
-import {TestingUtils, setCustomGameOptions, TestPlayers} from '../../TestingUtils';
+import {TestingUtils} from '../../TestingUtils';
+import {TestPlayers} from '../../TestPlayers';
 import {Reds, REDS_BONUS_1, REDS_BONUS_2, REDS_POLICY_3} from '../../../src/turmoil/parties/Reds';
 import {Resources} from '../../../src/Resources';
 
@@ -12,7 +13,7 @@ describe('Reds', function() {
   beforeEach(function() {
     player = TestPlayers.BLUE.newPlayer();
     secondPlayer = TestPlayers.RED.newPlayer();
-    const gameOptions = setCustomGameOptions();
+    const gameOptions = TestingUtils.setCustomGameOptions();
     game = Game.newInstance('foobar', [player, secondPlayer], player, gameOptions);
     turmoil = game.turmoil!;
     reds = new Reds();

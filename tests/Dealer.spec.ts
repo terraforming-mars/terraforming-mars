@@ -1,11 +1,11 @@
 import {expect} from 'chai';
 import {Dealer} from '../src/Dealer';
-import {setCustomGameOptions} from './TestingUtils';
+import {TestingUtils} from './TestingUtils';
 import {CardLoader} from '../src/CardLoader';
 
 describe('Dealer', function() {
   it('deserializes from serialized', function() {
-    const gameOptions = setCustomGameOptions({
+    const gameOptions = TestingUtils.setCustomGameOptions({
       corporateEra: false,
       preludeExtension: true,
       venusNextExtension: false,

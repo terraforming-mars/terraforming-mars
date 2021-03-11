@@ -4,7 +4,7 @@ import {Resources} from '../../src/Resources';
 import {Sabotage} from '../../src/turmoil/globalEvents/Sabotage';
 import {Kelvinists} from '../../src/turmoil/parties/Kelvinists';
 import {Turmoil} from '../../src/turmoil/Turmoil';
-import {TestPlayers} from '../TestingUtils';
+import {TestPlayers} from '../TestPlayers';
 
 describe('Sabotage', function() {
   it('resolve play', function() {

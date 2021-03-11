@@ -1,7 +1,7 @@
 import {expect} from 'chai';
 import {TechnologyDemonstration} from '../../../src/cards/base/TechnologyDemonstration';
 import {Game} from '../../../src/Game';
-import {TestPlayers} from '../../TestingUtils';
+import {TestPlayers} from '../../TestPlayers';
 
 describe('TechnologyDemonstration', function() {
   it('Should play', function() {

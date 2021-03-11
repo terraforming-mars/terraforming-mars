@@ -4,7 +4,7 @@ import {Fish} from '../../../src/cards/base/Fish';
 import {Predators} from '../../../src/cards/base/Predators';
 import {MeatIndustry} from '../../../src/cards/promo/MeatIndustry';
 import {Game} from '../../../src/Game';
-import {TestPlayers} from '../../TestingUtils';
+import {TestPlayers} from '../../TestPlayers';
 
 describe('MeatIndustry', function() {
   it('Gives 2 MC whenever player gains an animal', function() {

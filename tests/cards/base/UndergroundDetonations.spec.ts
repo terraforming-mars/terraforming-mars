@@ -3,7 +3,7 @@ import {UndergroundDetonations} from '../../../src/cards/base/UndergroundDetonat
 import {Game} from '../../../src/Game';
 import {Player} from '../../../src/Player';
 import {Resources} from '../../../src/Resources';
-import {TestPlayers} from '../../TestingUtils';
+import {TestPlayers} from '../../TestPlayers';
 
 describe('UndergroundDetonations', function() {
   let card : UndergroundDetonations; let player : Player; let game : Game;

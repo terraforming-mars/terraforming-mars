@@ -2,7 +2,7 @@ import {expect} from 'chai';
 import {RimFreighters} from '../../../src/cards/colonies/RimFreighters';
 import {Ceres} from '../../../src/colonies/Ceres';
 import {Game} from '../../../src/Game';
-import {TestPlayers} from '../../TestingUtils';
+import {TestPlayers} from '../../TestPlayers';
 
 describe('RimFreighters', function() {
   it('Should play', function() {

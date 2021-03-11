@@ -1,7 +1,7 @@
 import {expect} from 'chai';
 import {CoronaExtractor} from '../../../src/cards/colonies/CoronaExtractor';
 import {Resources} from '../../../src/Resources';
-import {TestPlayers} from '../../TestingUtils';
+import {TestPlayers} from '../../TestPlayers';
 
 describe('CoronaExtractor', function() {
   it('Should play', function() {

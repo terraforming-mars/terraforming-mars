@@ -3,7 +3,7 @@ import {Lichen} from '../../../src/cards/base/Lichen';
 import {Game} from '../../../src/Game';
 import {Player} from '../../../src/Player';
 import {Resources} from '../../../src/Resources';
-import {TestPlayers} from '../../TestingUtils';
+import {TestPlayers} from '../../TestPlayers';
 
 describe('Lichen', function() {
   let card : Lichen; let player : Player; let game : Game;

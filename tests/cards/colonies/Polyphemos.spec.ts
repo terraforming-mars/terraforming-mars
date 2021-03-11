@@ -7,7 +7,7 @@ import {Game} from '../../../src/Game';
 import {AndOptions} from '../../../src/inputs/AndOptions';
 import {SelectCard} from '../../../src/inputs/SelectCard';
 import {Resources} from '../../../src/Resources';
-import {TestPlayers} from '../../TestingUtils';
+import {TestPlayers} from '../../TestPlayers';
 
 describe('Polyphemos', function() {
   it('Should play', function() {

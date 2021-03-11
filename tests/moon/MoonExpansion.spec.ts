@@ -7,11 +7,11 @@ import {MoonSpaces} from '../../src/moon/MoonSpaces';
 import {Resources} from '../../src/Resources';
 import {SpaceName} from '../../src/SpaceName';
 import {TileType} from '../../src/TileType';
-import {setCustomGameOptions} from '../TestingUtils';
+import {TestingUtils} from '../TestingUtils';
 import {TestPlayer} from '../TestPlayer';
 import {TestPlayers} from '../TestPlayers';
 
-const MOON_OPTIONS = setCustomGameOptions({moonExpansion: true});
+const MOON_OPTIONS = TestingUtils.setCustomGameOptions({moonExpansion: true});
 
 describe('MoonExpansion', () => {
   let game: Game;

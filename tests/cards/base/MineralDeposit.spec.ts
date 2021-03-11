@@ -1,7 +1,7 @@
 import {expect} from 'chai';
 import {MineralDeposit} from '../../../src/cards/base/MineralDeposit';
 import {Game} from '../../../src/Game';
-import {TestPlayers} from '../../TestingUtils';
+import {TestPlayers} from '../../TestPlayers';
 
 describe('MineralDeposit', function() {
   it('Should play', function() {

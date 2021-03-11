@@ -3,7 +3,7 @@ import {expect} from 'chai';
 import {Bushes} from '../../../src/cards/base/Bushes';
 import {SpaceStation} from '../../../src/cards/base/SpaceStation';
 import {Game} from '../../../src/Game';
-import {TestPlayers} from '../../TestingUtils';
+import {TestPlayers} from '../../TestPlayers';
 
 describe('SpaceStation', function() {
   it('Should play', function() {

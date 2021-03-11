@@ -3,7 +3,7 @@ import {Sabotage} from '../../../src/cards/base/Sabotage';
 import {Game} from '../../../src/Game';
 import {OrOptions} from '../../../src/inputs/OrOptions';
 import {Player} from '../../../src/Player';
-import {TestPlayers} from '../../TestingUtils';
+import {TestPlayers} from '../../TestPlayers';
 
 describe('Sabotage', function() {
   let card : Sabotage; let player : Player; let player2: Player;

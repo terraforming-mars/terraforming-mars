@@ -3,7 +3,7 @@ import {ResearchOutpost} from '../../../src/cards/base/ResearchOutpost';
 import {Game} from '../../../src/Game';
 import {SelectSpace} from '../../../src/inputs/SelectSpace';
 import {Player} from '../../../src/Player';
-import {TestPlayers} from '../../TestingUtils';
+import {TestPlayers} from '../../TestPlayers';
 
 describe('ResearchOutpost', function() {
   let card : ResearchOutpost; let player : Player; let game : Game;

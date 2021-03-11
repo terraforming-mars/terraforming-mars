@@ -3,7 +3,7 @@ import {MorningStarInc} from '../../../src/cards/venusNext/MorningStarInc';
 import {SpinInducingAsteroid} from '../../../src/cards/venusNext/SpinInducingAsteroid';
 import {Game} from '../../../src/Game';
 import {Player} from '../../../src/Player';
-import {TestPlayers} from '../../TestingUtils';
+import {TestPlayers} from '../../TestPlayers';
 
 describe('SpinInducingAsteroid', function() {
   let card : SpinInducingAsteroid; let player : Player; let game : Game;

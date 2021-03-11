@@ -1,7 +1,7 @@
 import {expect} from 'chai';
 import {ConvoyFromEuropa} from '../../../src/cards/base/ConvoyFromEuropa';
 import {Game} from '../../../src/Game';
-import {TestPlayers} from '../../TestingUtils';
+import {TestPlayers} from '../../TestPlayers';
 
 describe('ConvoyFromEuropa', function() {
   it('Should play', function() {

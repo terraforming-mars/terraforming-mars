@@ -2,7 +2,7 @@ import {expect} from 'chai';
 import {ValuableGases} from '../../../src/cards/community/ValuableGases';
 import {Game} from '../../../src/Game';
 import {Player} from '../../../src/Player';
-import {TestPlayers} from '../../TestingUtils';
+import {TestPlayers} from '../../TestPlayers';
 
 describe('ValuableGases', function() {
   let card : ValuableGases; let player : Player;

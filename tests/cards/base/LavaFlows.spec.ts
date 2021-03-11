@@ -5,7 +5,8 @@ import {Player} from '../../../src/Player';
 import {SpaceName} from '../../../src/SpaceName';
 import {SpaceType} from '../../../src/SpaceType';
 import {TileType} from '../../../src/TileType';
-import {TestingUtils, TestPlayers} from '../../TestingUtils';
+import {TestingUtils} from '../../TestingUtils';
+import {TestPlayers} from '../../TestPlayers';
 
 describe('LavaFlows', function() {
   let card : LavaFlows; let player : Player; let game : Game;

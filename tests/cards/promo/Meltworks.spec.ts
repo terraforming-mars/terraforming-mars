@@ -1,7 +1,7 @@
 import {expect} from 'chai';
 import {Meltworks} from '../../../src/cards/promo/Meltworks';
 import {Player} from '../../../src/Player';
-import {TestPlayers} from '../../TestingUtils';
+import {TestPlayers} from '../../TestPlayers';
 
 describe('Meltworks', function() {
   let card : Meltworks; let player : Player;

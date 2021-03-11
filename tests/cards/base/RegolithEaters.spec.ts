@@ -3,7 +3,7 @@ import {RegolithEaters} from '../../../src/cards/base/RegolithEaters';
 import {Game} from '../../../src/Game';
 import {OrOptions} from '../../../src/inputs/OrOptions';
 import {Player} from '../../../src/Player';
-import {TestPlayers} from '../../TestingUtils';
+import {TestPlayers} from '../../TestPlayers';
 
 describe('RegolithEaters', function() {
   let card : RegolithEaters; let player : Player; let game : Game;

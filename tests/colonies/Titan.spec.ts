@@ -5,7 +5,7 @@ import {Titan} from '../../src/colonies/Titan';
 import {AddResourcesToCard} from '../../src/deferredActions/AddResourcesToCard';
 import {Game} from '../../src/Game';
 import {Player} from '../../src/Player';
-import {TestPlayers} from '../TestingUtils';
+import {TestPlayers} from '../TestPlayers';
 
 describe('Titan', function() {
   let titan: Titan; let aerialMappers: AerialMappers; let player: Player; let player2: Player; let game: Game;

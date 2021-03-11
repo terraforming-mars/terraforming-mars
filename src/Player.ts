@@ -905,6 +905,10 @@ export class Player implements ISerializable<SerializedPlayer> {
     }
   }
 
+  public getAvailableBlueActionCount(): number {
+    return this.getPlayableActionCards().length;
+  }
+
   private getPlayableActionCards(): Array<ICard> {
     const result: Array<ICard> = [];
     if (

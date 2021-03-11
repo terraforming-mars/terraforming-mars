@@ -240,7 +240,6 @@ export namespace MilestoneAwardSelector {
     };
 
     const includeVenus = gameOptions.venusNextExtension && gameOptions.includeVenusMA;
-
     const requiredQty = includeVenus ? 6 : 5;
 
     switch (gameOptions.randomMA) {
@@ -289,8 +288,6 @@ export namespace MilestoneAwardSelector {
     numberMARequested: number,
     constraints: Constraints,
     attempt: number = 1): IDrawnMilestonesAndAwards {
-    const withVenusian = gameOptions.venusNextExtension && gameOptions.includeVenusMA;
-
     const maxAttempts = 5;
     if (attempt > maxAttempts) {
       throw new Error('No limited synergy milestones and awards set was generated after ' + maxAttempts + ' attempts. Please try again.');
@@ -298,10 +295,10 @@ export namespace MilestoneAwardSelector {
 
     const toName = (e: {name: string}) => e.name;
 
-    const candidateMilestones = [...ORIGINAL_MILESTONES, ...ELYSIUM_MILESTONES, ...HELLAS_MILESTONES, ...VENUS_MILESTONES].map(toName);
-    const candidateAwards = [...ORIGINAL_AWARDS, ...ELYSIUM_AWARDS, ...HELLAS_AWARDS, ...VENUS_AWARDS].map(toName);
+    const candidateMilestones = [...ORIGINAL_MILESTONES, ...ELYSIUM_MILESTONES, ...HELLAS_MILESTONES].map(toName);
+    const candidateAwards = [...ORIGINAL_AWARDS, ...ELYSIUM_AWARDS, ...HELLAS_AWARDS].map(toName);
 
-    if (withVenusian) {
+    if (gameOptions.venusNextExtension && gameOptions.includeVenusMA) {
       candidateMilestones.push(...VENUS_MILESTONES.map(toName));
       candidateAwards.push(...VENUS_AWARDS.map(toName));
     }

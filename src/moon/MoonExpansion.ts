@@ -102,7 +102,9 @@ export class MoonExpansion {
       }
 
       space.tile = tile;
-      space.player = player;
+      if (player.game.phase !== Phase.SOLAR) {
+        space.player = player;
+      }
 
       if (game.phase !== Phase.SOLAR) {
         space.bonus.forEach((spaceBonus) => {

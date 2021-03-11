@@ -14,7 +14,7 @@ import {TestPlayers as NewTestPlayers} from './TestPlayers';
 
 export class TestingUtils {
   // Returns the oceans created during this operation which may not reflect all oceans.
-  public static maxOutOceans = function(player: Player, toValue: number = 0): Array<ISpace> {
+  public static maxOutOceans(player: Player, toValue: number = 0): Array<ISpace> {
     const oceans = [];
     if (toValue < 1) {
       toValue = constants.MAX_OCEAN_TILES;
@@ -29,14 +29,14 @@ export class TestingUtils {
     return oceans;
   };
 
-  public static resetBoard = function(game: Game): void {
+  public static resetBoard(game: Game): void {
     game.board.spaces.forEach((space) => {
       space.player = undefined;
       space.tile = undefined;
     });
   };
 
-  public static setCustomGameOptions = function(options: object = {}): GameOptions {
+  public static setCustomGameOptions(options: Partial<GameOptions> = {}): GameOptions {
     const defaultOptions = {
       draftVariant: false,
       initialDraftVariant: false,
@@ -74,7 +74,7 @@ export class TestingUtils {
     return Object.assign(defaultOptions, options);
   };
 
-  public static setRulingPartyAndRulingPolicy = function(game: Game, turmoil: Turmoil, party: IParty, policyId: TurmoilPolicy) {
+  public static setRulingPartyAndRulingPolicy(game: Game, turmoil: Turmoil, party: IParty, policyId: TurmoilPolicy) {
     turmoil.rulingParty = party;
     turmoil.politicalAgendasData.currentAgenda = {bonusId: party.bonuses[0].id, policyId: policyId};
     game.phase = Phase.ACTION;
@@ -108,7 +108,7 @@ export class TestingUtils {
   }
 }
 
-export const setCustomGameOptions = function(options: object = {}): GameOptions {
+export const setCustomGameOptions = function(options: Partial<GameOptions> = {}): GameOptions {
   return TestingUtils.setCustomGameOptions(options);
 };
 

@@ -11,6 +11,7 @@ import {CardDiscount} from './ICard';
 
 export interface StaticCardProperties {
   adjacencyBonus?: IAdjacencyBonus;
+  cardCost?: number;
   cardType: CardType;
   cost?: number;
   initialActionText?: string;
@@ -46,6 +47,9 @@ export abstract class Card {
   }
   public get adjacencyBonus() {
     return this.properties.adjacencyBonus;
+  }
+  public get cardCost() {
+    return this.properties.cardCost;
   }
   public get cardType() {
     return this.properties.cardType;

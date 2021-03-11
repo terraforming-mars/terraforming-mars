@@ -18,6 +18,7 @@ export interface PlayerModel {
     actionsTakenThisRound: number;
     actionsThisGeneration: Array<string>;
     aresData: IAresData | undefined;
+    availableBlueCardActionCount: number;
     awards: Array<FundedAwardModel>;
     cardCost: number;
     cardsInHand: Array<CardModel>;
@@ -76,7 +77,7 @@ export interface PlayerModel {
     titanium: number;
     titaniumProduction: number;
     titaniumValue: number;
-    tradesThisTurn: number;
+    tradesThisGeneration: number;
     turmoil: TurmoilModel | undefined;
     venusScaleLevel: number;
     victoryPointsBreakdown: VictoryPointsBreakdown;

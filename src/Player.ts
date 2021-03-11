@@ -129,7 +129,7 @@ export class Player implements ISerializable<SerializedPlayer> {
 
   // Colonies
   private fleetSize: number = 1;
-  public tradesThisTurn: number = 0;
+  public tradesThisGeneration: number = 0;
   public colonyTradeOffset: number = 0;
   public colonyTradeDiscount: number = 0;
   public colonyVictoryPoints: number = 0;
@@ -905,6 +905,10 @@ export class Player implements ISerializable<SerializedPlayer> {
     }
   }
 
+  public getAvailableBlueActionCount(): number {
+    return this.getPlayableActionCards().length;
+  }
+
   private getPlayableActionCards(): Array<ICard> {
     const result: Array<ICard> = [];
     if (
@@ -931,7 +935,15 @@ export class Player implements ISerializable<SerializedPlayer> {
   public runProductionPhase(): void {
     this.actionsThisGeneration.clear();
     this.removingPlayers = [];
-    this.tradesThisTurn = 0;
+    // Syndicate Pirate Raids hook. If it is in effect, then only the syndicate pirate raider will
+    // retrieve their fleets.
+    // See Colony.ts for the other half of this effect, and Game.ts which disables it.
+    if (this.game.syndicatePirateRaider === undefined) {
+      this.tradesThisGeneration = 0;
+    } else if (this.game.syndicatePirateRaider === this.id) {
+      this.tradesThisGeneration = 0;
+    }
+
     this.turmoilPolicyActionUsed = false;
     this.politicalAgendasActionUsedCount = 0;
     this.megaCredits += this.megaCreditProduction + this.terraformRating;
@@ -1818,7 +1830,7 @@ export class Player implements ISerializable<SerializedPlayer> {
     if (this.game.gameOptions.coloniesExtension) {
       const openColonies = this.game.colonies.filter((colony) => colony.isActive && colony.visitor === undefined);
       if (openColonies.length > 0 &&
-        this.fleetSize > this.tradesThisTurn &&
+        this.fleetSize > this.tradesThisGeneration &&
         (this.canAfford(this.getMcTradeCost()) ||
           this.energy >= this.getEnergyTradeCost() ||
           this.titanium >= this.getTitaniumTradeCost())
@@ -1993,7 +2005,7 @@ export class Player implements ISerializable<SerializedPlayer> {
       cardDiscount: this.cardDiscount,
       // Colonies
       fleetSize: this.fleetSize,
-      tradesThisTurn: this.tradesThisTurn,
+      tradesThisTurn: this.tradesThisGeneration,
       colonyTradeOffset: this.colonyTradeOffset,
       colonyTradeDiscount: this.colonyTradeDiscount,
       colonyVictoryPoints: this.colonyVictoryPoints,
@@ -2061,7 +2073,7 @@ export class Player implements ISerializable<SerializedPlayer> {
     player.titanium = d.titanium;
     player.titaniumProduction = d.titaniumProduction;
     player.titaniumValue = d.titaniumValue;
-    player.tradesThisTurn = d.tradesThisTurn;
+    player.tradesThisGeneration = d.tradesThisTurn;
     player.turmoilPolicyActionUsed = d.turmoilPolicyActionUsed;
     player.politicalAgendasActionUsedCount = d.politicalAgendasActionUsedCount;
     player.victoryPointsBreakdown = d.victoryPointsBreakdown;

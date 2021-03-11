@@ -63,6 +63,7 @@ import {IMoonData} from './moon/IMoonData';
 import {MoonExpansion} from './moon/MoonExpansion';
 import {TurmoilHandler} from './turmoil/TurmoilHandler';
 import {Random} from './Random';
+import {MilestoneAwardSelector} from './MilestoneAwardSelector';
 
 export type GameId = string;
 
@@ -194,6 +195,8 @@ export class Game implements ISerializable<SerializedGame> {
   public monsInsuranceOwner: PlayerId | undefined = undefined;
   // Crash Site promo project
   public someoneHasRemovedOtherPlayersPlants: boolean = false;
+  // Syndicate Pirate Raids
+  public syndicatePirateRaider: PlayerId | undefined = undefined;
 
   private constructor(
     public id: GameId,
@@ -251,9 +254,6 @@ export class Game implements ISerializable<SerializedGame> {
       gameOptions.draftVariant = false;
       gameOptions.initialDraftVariant = false;
       gameOptions.randomMA = RandomMAOptionType.NONE;
-      if (gameOptions.moonExpansion) {
-        gameOptions.requiresMoonTrackCompletion = true;
-      }
 
       players[0].setTerraformRating(14);
       players[0].terraformRatingAtGenerationStart = 14;
@@ -266,7 +266,7 @@ export class Game implements ISerializable<SerializedGame> {
       game.aresData = AresSetup.initialData(gameOptions.aresExtension, gameOptions.aresHazards, players);
     }
 
-    const milestonesAwards = GameSetup.chooseMilestonesAndAwards(gameOptions);
+    const milestonesAwards = MilestoneAwardSelector.chooseMilestonesAndAwards(gameOptions);
     game.milestones = milestonesAwards.milestones;
     game.awards = milestonesAwards.awards;
 
@@ -416,6 +416,7 @@ export class Game implements ISerializable<SerializedGame> {
       researchedPlayers: Array.from(this.researchedPlayers),
       seed: this.seed,
       someoneHasRemovedOtherPlayersPlants: this.someoneHasRemovedOtherPlayersPlants,
+      syndicatePirateRaider: this.syndicatePirateRaider,
       temperature: this.temperature,
       unDraftedCards: Array.from(this.unDraftedCards.entries()).map((a) => {
         return [
@@ -768,8 +769,10 @@ export class Game implements ISerializable<SerializedGame> {
   private gotoEndGeneration() {
     if (this.gameOptions.coloniesExtension) {
       this.colonies.forEach((colony) => {
-        colony.endGeneration();
+        colony.endGeneration(this);
       });
+      // Syndicate Pirate Raids hook. Also see Colony.ts and Player.ts
+      this.syndicatePirateRaider = undefined;
     }
 
     if (this.gameOptions.turmoilExtension) {
@@ -1280,6 +1283,9 @@ export class Game implements ISerializable<SerializedGame> {
                   space.player === player,
     ).length;
   }
+
+  // addTile applies to the Mars board, but not the Moon board, see MoonExpansion.addTile for placing
+  // a tile on The Moon.
   public addTile(
     player: Player, spaceType: SpaceType,
     space: ISpace, tile: ITile): void {
@@ -1569,6 +1575,10 @@ export class Game implements ISerializable<SerializedGame> {
 
     const awards: Array<IAward> = [];
     d.awards.forEach((element: IAward) => {
+      // TODO(kberg): remove by 2021-03-30
+      if (element.name === 'Entrepeneur') {
+        element.name = 'Entrepreneur';
+      }
       ALL_AWARDS.forEach((award: IAward) => {
         if (award.name === element.name) {
           awards.push(award);
@@ -1629,6 +1639,7 @@ export class Game implements ISerializable<SerializedGame> {
     game.initialDraftIteration = d.initialDraftIteration;
     game.monsInsuranceOwner = d.monsInsuranceOwner;
     game.someoneHasRemovedOtherPlayersPlants = d.someoneHasRemovedOtherPlayersPlants;
+    game.syndicatePirateRaider = d.syndicatePirateRaider;
 
     // Still in Draft or Research of generation 1
     if (game.generation === 1 && players.some((p) => p.corporationCard === undefined)) {

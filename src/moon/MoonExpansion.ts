@@ -14,6 +14,7 @@ import {Tags} from '../cards/Tags';
 import {ISpace} from '../boards/ISpace';
 import {MAXIMUM_COLONY_RATE, MAXIMUM_LOGISTICS_RATE, MAXIMUM_MINING_RATE} from '../constants';
 import {Resources} from '../Resources';
+import {Phase} from '../Phase';
 
 // export interface CoOwnedSpace {
 //   spaceId: string;
@@ -82,7 +83,8 @@ export class MoonExpansion {
   // Having a custom addTile isn't ideal, but game.addTile is pretty specific, and this
   // isn't.
   public static addTile(player: Player, spaceId: string, tile: ITile): void {
-    MoonExpansion.ifMoon(player.game, (moonData) => {
+    const game = player.game;
+    MoonExpansion.ifMoon(game, (moonData) => {
       const space = moonData.moon.getSpace(spaceId);
       if (!MOON_TILES.includes(tile.tileType)) {
         throw new Error(`Bad tile type for the moon: ${tile.tileType}`);
@@ -99,6 +101,13 @@ export class MoonExpansion {
 
       space.tile = tile;
       space.player = player;
+
+      if (game.phase !== Phase.SOLAR) {
+        space.bonus.forEach((spaceBonus) => {
+          game.grantSpaceBonus(player, spaceBonus);
+        });
+      }
+
       // TODO(kberg): indicate that it's a moon space.
       LogHelper.logTilePlacement(player, space, tile.tileType);
 
@@ -190,7 +199,11 @@ export class MoonExpansion {
    *
    * Special tiles such as Lunar Mine Urbanization, are especially included.
    */
-  public static tiles(game: Game, tileType: TileType, surfaceOnly: boolean = false): Array<ISpace> {
+  public static tiles(
+    game: Game,
+    tileType: TileType,
+    surfaceOnly: boolean = false,
+    player? : Player): Array<ISpace> {
     let tiles: Array<ISpace> = [];
     MoonExpansion.ifMoon(game, (moonData) => {
       tiles = moonData.moon.spaces.filter(
@@ -205,11 +218,15 @@ export class MoonExpansion {
           } else if (tileType === TileType.MOON_MINE) {
             include = type === TileType.MOON_MINE || type === TileType.LUNAR_MINE_URBANIZATION;
           } else {
-            include = include && type === tileType;
+            include = type === tileType;
           }
 
-          if (surfaceOnly) {
-            include = include && space.spaceType !== SpaceType.COLONY;
+          if (include && surfaceOnly) {
+            include = space.spaceType !== SpaceType.COLONY;
+          }
+
+          if (include && player !== undefined) {
+            include = space.player === player;
           }
 
           return include;

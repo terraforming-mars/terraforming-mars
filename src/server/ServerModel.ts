@@ -66,6 +66,7 @@ export class Server {
       actionsTakenThisRound: player.actionsTakenThisRound,
       actionsThisGeneration: Array.from(player.getActionsThisGeneration()),
       aresData: game.aresData,
+      availableBlueCardActionCount: player.getAvailableBlueActionCount(),
       awards: getAwards(game),
       cardCost: player.cardCost,
       cardsInHand: getCards(player, player.cardsInHand, {showNewCost: true}),
@@ -124,7 +125,7 @@ export class Server {
       titanium: player.titanium,
       titaniumProduction: player.getProduction(Resources.TITANIUM),
       titaniumValue: player.getTitaniumValue(),
-      tradesThisTurn: player.tradesThisTurn,
+      tradesThisGeneration: player.tradesThisGeneration,
       turmoil: turmoil,
       venusScaleLevel: game.getVenusScaleLevel(),
       victoryPointsBreakdown: player.getVictoryPoints(),
@@ -134,15 +135,12 @@ export class Server {
 
   // This is only ever used in ApiWaitingFor, and could be isolated from ServerModel.
   public static getWaitingForModel(player: Player, prevGameAge: number): WaitingForModel {
-    const result: WaitingForModel = {
-      result: 'WAIT',
-    };
     if (player.getWaitingFor() !== undefined || player.game.phase === Phase.END) {
-      result.result = 'GO';
+      return {result: 'GO'};
     } else if (player.game.gameAge > prevGameAge) {
-      result.result = 'REFRESH';
+      return {result: 'REFRESH'};
     }
-    return result;
+    return {result: 'WAIT'};
   }
 }
 
@@ -419,7 +417,7 @@ function getPlayers(players: Array<Player>, game: Game): Array<PlayerModel> {
         player.getActionsThisGeneration(),
       ),
       fleetSize: player.getFleetSize(),
-      tradesThisTurn: player.tradesThisTurn,
+      tradesThisGeneration: player.tradesThisGeneration,
       turmoil: turmoil,
       selfReplicatingRobotsCards: player.getSelfReplicatingRobotsCards(),
       needsToDraft: player.needsToDraft,
@@ -427,6 +425,7 @@ function getPlayers(players: Array<Player>, game: Game): Array<PlayerModel> {
       deckSize: game.dealer.getDeckSize(),
       actionsTakenThisRound: player.actionsTakenThisRound,
       timer: player.timer.serialize(),
+      availableBlueCardActionCount: player.getAvailableBlueActionCount(),
     } as PlayerModel;
   });
 }

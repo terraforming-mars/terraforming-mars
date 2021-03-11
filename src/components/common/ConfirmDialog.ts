@@ -8,6 +8,10 @@ export const ConfirmDialog = Vue.component('confirm-dialog', {
     message: {
       type: String,
     },
+    enableDontShowAgainCheckbox: {
+      type: Boolean,
+      default: false,
+    },
   },
   data: function() {
     return {
@@ -32,7 +36,7 @@ export const ConfirmDialog = Vue.component('confirm-dialog', {
     },
   },
   mounted: function() {
-    dialogPolyfill.default.registerDialog(this.$refs['dialog']);
+    (dialogPolyfill.default || dialogPolyfill).registerDialog(this.$refs['dialog']);
   },
   template: `<dialog ref="dialog">
       <form method="dialog">
@@ -41,8 +45,8 @@ export const ConfirmDialog = Vue.component('confirm-dialog', {
           <button class="btn btn-lg btn-primary" v-on:click="accept()">Yes</button>
           <button class="btn btn-lg" v-on:click="dismiss()">No</button>
         </menu>
-        <input type="checkbox" v-model="hide" id="dialog-confirm-dismiss" />
-        <label for="dialog-confirm-dismiss">Don't show this again</label>
+        <input v-if="enableDontShowAgainCheckbox" type="checkbox" v-model="hide" id="dialog-confirm-dismiss" />
+        <label v-if="enableDontShowAgainCheckbox" for="dialog-confirm-dismiss">Don't show this again</label>
       </form>
     </dialog>`,
 });

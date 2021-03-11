@@ -77,4 +77,14 @@ describe('MilestoneAwardSelector', () => {
     MilestoneAwardSelector.chooseMilestonesAndAwards(
       TestingUtils.setCustomGameOptions({randomMA: RandomMAOptionType.UNLIMITED}));
   });
+
+  it('Main entrance point, Ares enabled', () => {
+    // These tests don't test results, they just make sure these calls don't fail.
+    MilestoneAwardSelector.chooseMilestonesAndAwards(
+      TestingUtils.setCustomGameOptions({randomMA: RandomMAOptionType.NONE, aresExtension: true}));
+    MilestoneAwardSelector.chooseMilestonesAndAwards(
+      TestingUtils.setCustomGameOptions({randomMA: RandomMAOptionType.LIMITED, aresExtension: true}));
+    MilestoneAwardSelector.chooseMilestonesAndAwards(
+      TestingUtils.setCustomGameOptions({randomMA: RandomMAOptionType.UNLIMITED, aresExtension: true}));
+  });
 });

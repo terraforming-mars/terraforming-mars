@@ -1,4 +1,4 @@
-import {ARES_AWARDS, ELYSIUM_AWARDS, HELLAS_AWARDS, ORIGINAL_AWARDS, VENUS_AWARDS} from './awards/Awards';
+import {ARES_AWARDS, Awards, ELYSIUM_AWARDS, HELLAS_AWARDS, ORIGINAL_AWARDS, VENUS_AWARDS} from './awards/Awards';
 import {Banker} from './awards/Banker';
 import {Benefactor} from './awards/Benefactor';
 import {Celebrity} from './awards/Celebrity';
@@ -29,7 +29,7 @@ import {Generalist} from './milestones/Generalist';
 import {Hoverlord} from './milestones/Hoverlord';
 import {IMilestone} from './milestones/IMilestone';
 import {Mayor} from './milestones/Mayor';
-import {ARES_MILESTONES, ELYSIUM_MILESTONES, HELLAS_MILESTONES, ORIGINAL_MILESTONES, VENUS_MILESTONES} from './milestones/Milestones';
+import {ARES_MILESTONES, ELYSIUM_MILESTONES, HELLAS_MILESTONES, Milestones, ORIGINAL_MILESTONES, VENUS_MILESTONES} from './milestones/Milestones';
 import {Networker} from './milestones/Networker';
 import {Planner} from './milestones/Planner';
 import {PolarExplorer} from './milestones/PolarExplorer';
@@ -41,50 +41,6 @@ import {Tycoon} from './milestones/Tycoon';
 import {RandomMAOptionType} from './RandomMAOptionType';
 
 export namespace MilestoneAwardSelector {
-  class MAs {
-    public static readonly milestones = [
-      ...ORIGINAL_MILESTONES,
-      ...ELYSIUM_MILESTONES,
-      ...HELLAS_MILESTONES,
-      ...VENUS_MILESTONES,
-    ];
-    public static readonly awards = [
-      ...ORIGINAL_AWARDS,
-      ...ELYSIUM_AWARDS,
-      ...HELLAS_AWARDS,
-      ...VENUS_AWARDS,
-    ];
-    public static readonly ALL = [
-      ...ORIGINAL_MILESTONES,
-      ...ELYSIUM_MILESTONES,
-      ...HELLAS_MILESTONES,
-      ...VENUS_MILESTONES,
-      ...ARES_MILESTONES,
-      ...ORIGINAL_AWARDS,
-      ...ELYSIUM_AWARDS,
-      ...HELLAS_AWARDS,
-      ...VENUS_AWARDS,
-      ...ARES_AWARDS,
-    ];
-
-
-    public static getMilestone(name: string): IMilestone {
-      const milestone = this.milestones.find((m) => m.name === name);
-      if (milestone) {
-        return milestone;
-      }
-      throw new Error(`Milestone ${name} not found.`);
-    }
-
-    public static getAward(name: string): IAward {
-      const award = this.awards.find((a) => a.name === name);
-      if (award) {
-        return award;
-      }
-      throw new Error(`Award ${name} not found.`);
-    }
-  }
-
   // This map uses keys of the format "X|Y" where X and Y are MA names. Entries are stored as "X|Y"
   // and also "Y|X"; it just makes searching slightly faster. There will also be entries of the type "X|X".
   //
@@ -126,13 +82,17 @@ export namespace MilestoneAwardSelector {
         }
       }
 
-      MAs.ALL.forEach((ma) => {
+      Milestones.ALL.forEach((ma) => {
+        bind(ma.name, ma.name, 1000);
+      });
+      Awards.ALL.forEach((ma) => {
         bind(ma.name, ma.name, 1000);
       });
 
+
       function bindAll(MA: { new(): IMilestone | IAward }, weight: number) {
         const ma = new MA().name;
-        MAs.ALL.forEach((otherMA) => {
+        [...Milestones.ALL, ...Awards.ALL].forEach((otherMA) => {
           if (ma !== otherMA.name) {
             bind(ma, otherMA.name, weight);
           }
@@ -338,8 +298,8 @@ export namespace MilestoneAwardSelector {
 
     const toName = (e: {name: string}) => e.name;
 
-    const candidateMilestones = MAs.milestones.map(toName);
-    const candidateAwards = MAs.awards.map(toName);
+    const candidateMilestones = [...ORIGINAL_MILESTONES, ...ELYSIUM_MILESTONES, ...HELLAS_MILESTONES, ...VENUS_MILESTONES].map(toName);
+    const candidateAwards = [...ORIGINAL_AWARDS, ...ELYSIUM_AWARDS, ...HELLAS_AWARDS, ...VENUS_AWARDS].map(toName);
 
     if (withVenusian) {
       candidateMilestones.push(...VENUS_MILESTONES.map(toName));
@@ -379,8 +339,8 @@ export namespace MilestoneAwardSelector {
     }
 
     return {
-      milestones: accum.milestones.map((name) => MAs.getMilestone(name)),
-      awards: accum.awards.map((name) => MAs.getAward(name)),
+      milestones: accum.milestones.map((name) => Milestones.getByName(name)),
+      awards: accum.awards.map((name) => Awards.getByName(name)),
     };
   }
 

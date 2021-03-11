@@ -93,7 +93,7 @@ describe('MilestoneAwardSelector', () => {
       const mas = MilestoneAwardSelector.chooseMilestonesAndAwards(
         TestingUtils.setCustomGameOptions({
           randomMA: RandomMAOptionType.LIMITED,
-          venusExtension: false,
+          venusNextExtension: false,
           aresExtension: false,
           moonExpansion: false,
         }));

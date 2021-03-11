@@ -76,5 +76,11 @@ describe('MilestoneAwardSelector', () => {
       TestingUtils.setCustomGameOptions({randomMA: RandomMAOptionType.LIMITED}));
     MilestoneAwardSelector.chooseMilestonesAndAwards(
       TestingUtils.setCustomGameOptions({randomMA: RandomMAOptionType.UNLIMITED}));
+    MilestoneAwardSelector.chooseMilestonesAndAwards(
+      TestingUtils.setCustomGameOptions({randomMA: RandomMAOptionType.NONE, moonExpansion: true}));
+    MilestoneAwardSelector.chooseMilestonesAndAwards(
+      TestingUtils.setCustomGameOptions({randomMA: RandomMAOptionType.LIMITED, moonExpansion: true}));
+    MilestoneAwardSelector.chooseMilestonesAndAwards(
+      TestingUtils.setCustomGameOptions({randomMA: RandomMAOptionType.UNLIMITED, moonExpansion: true}));
   });
 });

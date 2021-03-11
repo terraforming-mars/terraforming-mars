@@ -1,9 +1,9 @@
 import {expect} from 'chai';
-import {ELYSIUM_AWARDS, HELLAS_AWARDS, ORIGINAL_AWARDS, VENUS_AWARDS} from '../src/awards/Awards';
+import {ARES_AWARDS, ELYSIUM_AWARDS, HELLAS_AWARDS, MOON_AWARDS, ORIGINAL_AWARDS, VENUS_AWARDS} from '../src/awards/Awards';
 import {IAward} from '../src/awards/IAward';
 import {MilestoneAwardSelector} from '../src/MilestoneAwardSelector';
 import {IMilestone} from '../src/milestones/IMilestone';
-import {ELYSIUM_MILESTONES, HELLAS_MILESTONES, ORIGINAL_MILESTONES, VENUS_MILESTONES} from '../src/milestones/Milestones';
+import {ARES_MILESTONES, ELYSIUM_MILESTONES, HELLAS_MILESTONES, MOON_MILESTONES, ORIGINAL_MILESTONES, VENUS_MILESTONES} from '../src/milestones/Milestones';
 import {RandomMAOptionType} from '../src/RandomMAOptionType';
 import {TestingUtils} from './TestingUtils';
 
@@ -72,9 +72,34 @@ describe('MilestoneAwardSelector', () => {
     // These tests don't test results, they just make sure these calls don't fail.
     MilestoneAwardSelector.chooseMilestonesAndAwards(
       TestingUtils.setCustomGameOptions({randomMA: RandomMAOptionType.NONE}));
+  });
+  it('Main entrance point - limited', () => {
     MilestoneAwardSelector.chooseMilestonesAndAwards(
       TestingUtils.setCustomGameOptions({randomMA: RandomMAOptionType.LIMITED}));
+  });
+  it('Main entrance point - unlimited', () => {
     MilestoneAwardSelector.chooseMilestonesAndAwards(
       TestingUtils.setCustomGameOptions({randomMA: RandomMAOptionType.UNLIMITED}));
+  });
+
+  it('Do not select expansion milestones or awards when they are not selected', () => {
+    const intersection = function<T>(a: Array<T>, b: Array<T>) {
+      return a.filter((e) => b.includes(e));
+    };
+
+    const avoidedAwards = [...VENUS_AWARDS, ...ARES_AWARDS, ...MOON_AWARDS].map((a) => a.name);
+    const avoidedMilestiones = [...VENUS_MILESTONES, ...ARES_MILESTONES, ...MOON_MILESTONES].map((m) => m.name);
+    for (let idx = 0; idx < 10000; idx++) {
+      const mas = MilestoneAwardSelector.chooseMilestonesAndAwards(
+        TestingUtils.setCustomGameOptions({
+          randomMA: RandomMAOptionType.LIMITED,
+          venusExtension: false,
+          aresExtension: false,
+          moonExpansion: false,
+        }));
+
+      expect(intersection(mas.awards.map((award) => award.name), avoidedAwards)).is.empty;
+      expect(intersection(mas.milestones.map((milestone) => milestone.name), avoidedMilestiones)).is.empty;
+    }
   });
 });

@@ -45,13 +45,11 @@ export namespace MilestoneAwardSelector {
       ...ORIGINAL_MILESTONES,
       ...ELYSIUM_MILESTONES,
       ...HELLAS_MILESTONES,
-      ...VENUS_MILESTONES,
     ];
     public static readonly awards = [
       ...ORIGINAL_AWARDS,
       ...ELYSIUM_AWARDS,
       ...HELLAS_AWARDS,
-      ...VENUS_AWARDS,
     ];
     public static readonly ALL = [
       ...ORIGINAL_MILESTONES,

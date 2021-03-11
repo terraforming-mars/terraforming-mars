@@ -158,8 +158,6 @@ export class MoonExpansion {
       const available = MAXIMUM_COLONY_RATE - moonData.colonyRate;
       const increment = Math.min(count, available);
       if (increment > 0) {
-        moonData.colonyRate += increment;
-
         if (player.game.phase === Phase.SOLAR) {
           player.game.log('The World Government raised the colony rate ${1} step(s)', (b) => b.player(player).number(increment));
           this.activateLunaFirst(undefined, player.game, count);
@@ -174,6 +172,7 @@ export class MoonExpansion {
           });
           this.activateLunaFirst(player, player.game, count);
         }
+        moonData.colonyRate += increment;
       }
     });
   }

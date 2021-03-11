@@ -1,4 +1,4 @@
-import {ARES_AWARDS, ELYSIUM_AWARDS, HELLAS_AWARDS, ORIGINAL_AWARDS, VENUS_AWARDS} from './awards/Awards';
+import {ARES_AWARDS, ELYSIUM_AWARDS, HELLAS_AWARDS, MOON_AWARDS, ORIGINAL_AWARDS, VENUS_AWARDS} from './awards/Awards';
 import {Banker} from './awards/Banker';
 import {Benefactor} from './awards/Benefactor';
 import {Celebrity} from './awards/Celebrity';
@@ -29,7 +29,7 @@ import {Generalist} from './milestones/Generalist';
 import {Hoverlord} from './milestones/Hoverlord';
 import {IMilestone} from './milestones/IMilestone';
 import {Mayor} from './milestones/Mayor';
-import {ARES_MILESTONES, ELYSIUM_MILESTONES, HELLAS_MILESTONES, ORIGINAL_MILESTONES, VENUS_MILESTONES} from './milestones/Milestones';
+import {ARES_MILESTONES, ELYSIUM_MILESTONES, HELLAS_MILESTONES, MOON_MILESTONES, ORIGINAL_MILESTONES, VENUS_MILESTONES} from './milestones/Milestones';
 import {Networker} from './milestones/Networker';
 import {Planner} from './milestones/Planner';
 import {PolarExplorer} from './milestones/PolarExplorer';
@@ -38,6 +38,10 @@ import {Specialist} from './milestones/Specialist';
 import {Tactician} from './milestones/Tactician';
 import {Terraformer} from './milestones/Terraformer';
 import {Tycoon} from './milestones/Tycoon';
+import {FullMoon} from './moon/FullMoon';
+import {Lunarchitect} from './moon/Lunarchitect';
+import {LunarMagnate} from './moon/LunarMagnate';
+import {OneGiantStep} from './moon/OneGiantStep';
 import {RandomMAOptionType} from './RandomMAOptionType';
 
 export namespace MilestoneAwardSelector {
@@ -60,15 +64,16 @@ export namespace MilestoneAwardSelector {
       ...HELLAS_MILESTONES,
       ...VENUS_MILESTONES,
       ...ARES_MILESTONES,
+      ...MOON_MILESTONES,
       ...ORIGINAL_AWARDS,
       ...ELYSIUM_AWARDS,
       ...HELLAS_AWARDS,
       ...VENUS_AWARDS,
       ...ARES_AWARDS,
+      ...MOON_AWARDS,
     ];
 
-
-    public static getMilestone(name: string): IMilestone {
+    static getMilestone(name: string): IMilestone {
       const milestone = this.milestones.find((m) => m.name === name);
       if (milestone) {
         return milestone;
@@ -76,7 +81,7 @@ export namespace MilestoneAwardSelector {
       throw new Error(`Milestone ${name} not found.`);
     }
 
-    public static getAward(name: string): IAward {
+    static getAward(name: string): IAward {
       const award = this.awards.find((a) => a.name === name);
       if (award) {
         return award;
@@ -130,30 +135,37 @@ export namespace MilestoneAwardSelector {
         bind(ma.name, ma.name, 1000);
       });
 
-      function bindAll(MA: { new(): IMilestone | IAward }, weight: number) {
-        const ma = new MA().name;
+      function bindAll(ma: IMilestone | IAward, weight: number) {
+        const maName = ma.name;
         MAs.ALL.forEach((otherMA) => {
-          if (ma !== otherMA.name) {
-            bind(ma, otherMA.name, weight);
+          if (maName !== otherMA.name) {
+            bind(maName, otherMA.name, weight);
           }
         });
       }
 
-      // Set a default synergy of 5 from Ares MAs to non-Ares MAs.
+      // Set a default synergy of 5 from Ares and Moon milestones to
+      // every other MA.
       // Bindings after this call will override them.
-      bindAll(Networker, 5);
-      bindAll(Entrepreneur, 5);
+      [...MOON_MILESTONES, ...ARES_MILESTONES].forEach((milestone) => bindAll(milestone, 5));
+      [...MOON_AWARDS, ...ARES_AWARDS].forEach((milestone) => bindAll(milestone, 5));
 
       bind(Terraformer, Benefactor, 9);
       bind(Gardener, Cultivator, 9);
       bind(Builder, Contractor, 9);
       bind(Networker, Entrepreneur, 9);
+      bind(OneGiantStep, FullMoon, 9);
+      bind(Lunarchitect, LunarMagnate, 9);
+      bind(OneGiantStep, Lunarchitect, 9);
+      bind(FullMoon, LunarMagnate, 9);
       bind(EstateDealer, Cultivator, 8);
       bind(Landlord, Cultivator, 8);
       bind(Landlord, DesertSettler, 7);
       bind(Landlord, EstateDealer, 7);
       bind(DesertSettler, Cultivator, 7);
       bind(Miner, Industrialist, 7);
+      bind(OneGiantStep, LunarMagnate, 7);
+      bind(Lunarchitect, FullMoon, 7);
       bind(Energizer, Industrialist, 6);
       bind(Gardener, Landlord, 6);
       bind(Mayor, Landlord, 6);
@@ -307,6 +319,16 @@ export namespace MilestoneAwardSelector {
         drawnMilestonesAndAwards.milestones.push(...ARES_MILESTONES);
         drawnMilestonesAndAwards.awards.push(...ARES_AWARDS);
       };
+      if (gameOptions.moonExpansion) {
+        // One MA will reward moon tags, the other will reward moon tiles.
+        if (Math.random() > 0.5) {
+          drawnMilestonesAndAwards.milestones.push(new OneGiantStep());
+          drawnMilestonesAndAwards.awards.push(new LunarMagnate());
+        } else {
+          drawnMilestonesAndAwards.milestones.push(new Lunarchitect());
+          drawnMilestonesAndAwards.awards.push(new FullMoon());
+        }
+      };
       break;
 
     case RandomMAOptionType.LIMITED:
@@ -329,8 +351,6 @@ export namespace MilestoneAwardSelector {
     numberMARequested: number,
     constraints: Constraints,
     attempt: number = 1): IDrawnMilestonesAndAwards {
-    const withVenusian = gameOptions.venusNextExtension && gameOptions.includeVenusMA;
-
     const maxAttempts = 5;
     if (attempt > maxAttempts) {
       throw new Error('No limited synergy milestones and awards set was generated after ' + maxAttempts + ' attempts. Please try again.');
@@ -341,13 +361,17 @@ export namespace MilestoneAwardSelector {
     const candidateMilestones = MAs.milestones.map(toName);
     const candidateAwards = MAs.awards.map(toName);
 
-    if (withVenusian) {
+    if (gameOptions.venusNextExtension && gameOptions.includeVenusMA) {
       candidateMilestones.push(...VENUS_MILESTONES.map(toName));
       candidateAwards.push(...VENUS_AWARDS.map(toName));
     }
     if (gameOptions.aresExtension) {
       candidateMilestones.push(...ARES_MILESTONES.map(toName));
       candidateAwards.push(...ARES_AWARDS.map(toName));
+    }
+    if (gameOptions.moonExpansion) {
+      candidateMilestones.push(...MOON_MILESTONES.map(toName));
+      candidateAwards.push(...MOON_AWARDS.map(toName));
     }
     const shuffledMilestones = shuffle(candidateMilestones);
     const shuffledAwards = shuffle(candidateAwards);
@@ -359,14 +383,14 @@ export namespace MilestoneAwardSelector {
       // If there is enough award, add a milestone. And vice versa. If still need both, flip a coin to decide which to add.
       if (accum.awards.length === numberMARequested || (accum.milestones.length !== numberMARequested && Math.round(Math.random()))) {
         const newMilestone = shuffledMilestones.splice(0, 1)[0];
-        // If need to add more milestone, but not enough milestone left, restart the function with a recursive call.
+        // If not enough milestone are left to satisfy the constraints, restart the function with a recursive call.
         if (newMilestone === undefined) {
           return getRandomMilestonesAndAwards(gameOptions, numberMARequested, constraints, attempt+1);
         }
         accum.add(newMilestone, true);
       } else {
         const newAward = shuffledAwards.splice(0, 1)[0];
-        // If need to add more award, but not enough award left, restart the function with a recursive call.
+        // If not enough awards are left to satisfy the constraints, restart the function with a recursive call.
         if (newAward === undefined) {
           return getRandomMilestonesAndAwards(gameOptions, numberMARequested, constraints, attempt+1);
         }
@@ -431,7 +455,7 @@ export namespace MilestoneAwardSelector {
       let highCount = this.accumulatedHighCount;
       let max = 0;
 
-      // Find maximum synergy of this new item compared to the others
+      // Find the maximum synergy of this new item compared to the others
       this.milestones.concat(this.awards).forEach((ma) => {
         const synergy = Synergies.map.get(ma, candidate);
         totalSynergy += synergy;

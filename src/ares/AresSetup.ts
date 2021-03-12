@@ -1,6 +1,3 @@
-import {ARES_MILESTONES} from '../milestones/Milestones';
-import {ARES_AWARDS} from '../awards/Awards';
-import {IDrawnMilestonesAndAwards} from '../IDrawnMilestonesAndAwards';
 import {Player} from '../Player';
 import {IAresData} from './IAresData';
 import {Game} from '../Game';
@@ -24,11 +21,6 @@ export class AresSetup {
         return {id: p.id, count: 0};
       }),
     };
-  }
-
-  public static setupMilestonesAwards(drawnMilestonesAndAwards: IDrawnMilestonesAndAwards) {
-    drawnMilestonesAndAwards.milestones.push(...ARES_MILESTONES);
-    drawnMilestonesAndAwards.awards.push(...ARES_AWARDS);
   }
 
   public static setupHazards(game: Game, playerCount: number) {

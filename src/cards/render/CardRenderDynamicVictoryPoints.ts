@@ -74,6 +74,16 @@ export class CardRenderDynamicVictoryPoints {
   public static moon(points: number, target: number): CardRenderDynamicVictoryPoints {
     return new CardRenderDynamicVictoryPoints(new CardRenderItem(CardRenderItemType.MOON), points, target);
   }
+  public static miningTile(points: number): CardRenderDynamicVictoryPoints {
+    const item = new CardRenderItem(CardRenderItemType.MOON_MINE);
+    item.size = CardRenderItemSize.SMALL;
+    return new CardRenderDynamicVictoryPoints(item, points, 1);
+  }
+  public static colonyTile(points: number): CardRenderDynamicVictoryPoints {
+    const item = new CardRenderItem(CardRenderItemType.MOON_COLONY);
+    item.size = CardRenderItemSize.SMALL;
+    return new CardRenderDynamicVictoryPoints(item, points, 1);
+  }
   public static questionmark(): CardRenderDynamicVictoryPoints {
     return new CardRenderDynamicVictoryPoints(undefined, 0, 0);
   }

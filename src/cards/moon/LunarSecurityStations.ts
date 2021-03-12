@@ -17,7 +17,7 @@ export class LunarSecurityStations extends Card implements IProjectCard {
       requirements: CardRequirements.builder((b) => b.roadTiles(3).any()),
 
       metadata: {
-        description: 'Requires 3 road tiles on the Moon. Raise Logistic Rate 1 step.',
+        description: 'Requires 3 road tiles on the Moon. Raise the Logistic Rate 1 step.',
         cardNumber: 'M42',
         renderData: CardRenderer.builder((b) => {
           b.moonLogisticsRate();

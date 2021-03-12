@@ -47,3 +47,16 @@ This tool extracts the entire history of a game from a database and stores it in
 If you plan to extract from the local SQLite database, have no environemnt variables. If you're extracting
 from PostgreSQL, use the POSTGRES_HOST environment variable. You cannot export from a local filesystem database.
 You might as well then just run `cp -R`
+
+## Analyze MA
+
+Starts a local web server that you can use to get results of MA synergy. To run,
+
+```sh
+npm run compile
+node build/src/tools/analyze_ma.js
+```
+
+And then point your browser to http://localhost:8081
+
+Warning: this is a fragile tool, and it might fail or hide errors.

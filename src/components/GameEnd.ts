@@ -172,6 +172,7 @@ export const GameEnd = Vue.component('game-end', {
                         :spaces="player.spaces"
                         :venusNextExtension="player.gameOptions.venusNextExtension"
                         :venusScaleLevel="player.venusScaleLevel"
+                        :aresExtension="player.gameOptions.aresExtension"
                         :boardName ="player.gameOptions.boardName"
                         :oceans_count="player.oceans"
                         :oxygen_level="player.oxygenLevel"
@@ -180,7 +181,7 @@ export const GameEnd = Vue.component('game-end', {
                 </div>
                 <div class="game_end_block--log game-end-column">
                     <h2 v-i18n>Final game log</h2>
-                    <log-panel :id="player.id" :players="player.players"></log-panel>
+                    <log-panel :color="player.color" :generation="player.generation" :id="player.id" :lastSoloGeneration="player.lastSoloGeneration" :players="player.players"></log-panel>
                 </div>
                 </div>
             </div>

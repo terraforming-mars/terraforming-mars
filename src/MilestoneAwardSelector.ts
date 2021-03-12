@@ -1,11 +1,11 @@
-import {AresSetup} from './ares/AresSetup';
-import {ALL_AWARDS, ELYSIUM_AWARDS, HELLAS_AWARDS, ORIGINAL_AWARDS, VENUS_AWARDS} from './awards/Awards';
+import {ARES_AWARDS, Awards, ELYSIUM_AWARDS, HELLAS_AWARDS, ORIGINAL_AWARDS, VENUS_AWARDS} from './awards/Awards';
 import {Banker} from './awards/Banker';
 import {Benefactor} from './awards/Benefactor';
 import {Celebrity} from './awards/Celebrity';
 import {Contractor} from './awards/Contractor';
 import {Cultivator} from './awards/Cultivator';
 import {DesertSettler} from './awards/DesertSettler';
+import {Entrepreneur} from './awards/Entrepreneur';
 import {EstateDealer} from './awards/EstateDealer';
 import {Excentric} from './awards/Excentric';
 import {IAward} from './awards/IAward';
@@ -29,7 +29,8 @@ import {Generalist} from './milestones/Generalist';
 import {Hoverlord} from './milestones/Hoverlord';
 import {IMilestone} from './milestones/IMilestone';
 import {Mayor} from './milestones/Mayor';
-import {ALL_MILESTONES, ELYSIUM_MILESTONES, HELLAS_MILESTONES, ORIGINAL_MILESTONES, VENUS_MILESTONES} from './milestones/Milestones';
+import {ARES_MILESTONES, ELYSIUM_MILESTONES, HELLAS_MILESTONES, Milestones, ORIGINAL_MILESTONES, VENUS_MILESTONES} from './milestones/Milestones';
+import {Networker} from './milestones/Networker';
 import {Planner} from './milestones/Planner';
 import {PolarExplorer} from './milestones/PolarExplorer';
 import {RimSettler} from './milestones/RimSettler';
@@ -40,75 +41,58 @@ import {Tycoon} from './milestones/Tycoon';
 import {RandomMAOptionType} from './RandomMAOptionType';
 
 export namespace MilestoneAwardSelector {
-  class MAs {
-    public static readonly milestones = [
-      ...ORIGINAL_MILESTONES,
-      ...ELYSIUM_MILESTONES,
-      ...HELLAS_MILESTONES,
-    ];
-    public static readonly awards = [
-      ...ORIGINAL_AWARDS,
-      ...ELYSIUM_AWARDS,
-      ...HELLAS_AWARDS,
-    ];
-    public static readonly ALL = [
-      ...ORIGINAL_MILESTONES,
-      ...ELYSIUM_MILESTONES,
-      ...HELLAS_MILESTONES,
-      ...VENUS_MILESTONES,
-      ...ORIGINAL_AWARDS,
-      ...ELYSIUM_AWARDS,
-      ...HELLAS_AWARDS,
-      ...VENUS_AWARDS,
-    ];
-
-    public static getMilestone(name: string): IMilestone {
-      const milestone = ALL_MILESTONES.find((m) => m.name === name);
-      if (milestone) {
-        return milestone;
-      }
-      throw new Error(`Milestone ${name} not found.`);
+  // This map uses keys of the format "X|Y" where X and Y are MA names. Entries are stored as "X|Y"
+  // and also "Y|X"; it just makes searching slightly faster. There will also be entries of the type "X|X".
+  //
+  // I honestly don't remember why "X|X" is useful, and it's possible it's no longer necessary. That's
+  // something that should be carefully conisdered and possibly removed, and not just propagated because
+  // it's what we had to begin with. In other words, someone figure out why, and preserve it, and document
+  // why, or be certain it's unnecessary and remove this paragraph and the code below that sets "X|X" to 1000.
+  //
+  class SynergyMap {
+    private readonly map: Map<string, number> = new Map();
+    public set(a: string, b: string, weight: number): void {
+      this.map.set(a + '|' + b, weight);
+      this.map.set(b + '|' + a, weight);
     }
 
-    public static getAward(name: string): IAward {
-      const award = ALL_AWARDS.find((a) => a.name === name);
-      if (award) {
-        return award;
-      }
-      throw new Error(`Award ${name} not found.`);
+    public get(a: string, b: string) {
+      return this.map.get(a + '|' + b) || 0;
     }
-  }
+  };
+
   class Synergies {
-    // This map uses keys of the format "X|Y" where X and Y are MA names. Entries are stored as "X|Y"
-    // and also "Y|X"; it just makes searching slightly faster. There will also be entries of the type "X|X".
-    //
-    // I honestly don't remember why "X|X" is useful, and it's possible it's no longer necessary. That's
-    // something that should be carefully conisdered and possibly removed, and not just propagated because
-    // it's what we had to begin with. In other words, someone figure out why, and preserve it, and document
-    // why, or be certain it's unnecessary and remove this paragraph and the code below that sets "X|X" to 1000.
-    //
-    private static map: Map<string, number> = Synergies.makeMap();
+    public static map: SynergyMap = Synergies.makeMap();
 
     private constructor() {
     }
 
-    private static makeMap(): Map<string, number> {
-      const synergies: Map<string, number> = new Map();
-      MAs.ALL.forEach((ma) => {
-        synergies.set(ma.name + '|' + ma.name, 1000);
-      });
+    private static makeMap(): SynergyMap {
+      const synergies = new SynergyMap();
 
       // Higher synergies represent similar milestones or awards. For instance, Terraformer rewards for high TR
       // and the Benefactor award is given to the player with the highets TR. Their synergy weight is 9, very high.
-      function bind(First: { new(): IMilestone | IAward }, Second: { new(): IMilestone | IAward }, weight: number) {
-        const aName = new First().name;
-        const bName = new Second().name;
-        synergies.set(aName + '|' + bName, weight);
-        synergies.set(bName + '|' + aName, weight);
+      function bind(A: { new(): IMilestone | IAward }, B: { new(): IMilestone | IAward }, weight: number):void;
+      function bind(a: string, b: string, weight: number):void;
+      function bind(A: any, B: any, weight: number):void {
+        if (typeof A === 'string') {
+          synergies.set(A, B, weight);
+        } else {
+          synergies.set(new A().name, new B().name, weight);
+        }
       }
+
+      Milestones.ALL.forEach((ma) => {
+        bind(ma.name, ma.name, 1000);
+      });
+      Awards.ALL.forEach((ma) => {
+        bind(ma.name, ma.name, 1000);
+      });
+
       bind(Terraformer, Benefactor, 9);
       bind(Gardener, Cultivator, 9);
       bind(Builder, Contractor, 9);
+      bind(Networker, Entrepreneur, 9);
       bind(EstateDealer, Cultivator, 8);
       bind(Landlord, Cultivator, 8);
       bind(Landlord, DesertSettler, 7);
@@ -184,11 +168,6 @@ export namespace MilestoneAwardSelector {
       bind(Gardener, Ecologist, 1);
       return synergies;
     }
-
-    public static get(a: string, b: string): number {
-      const tmp = Synergies.map.get(a + '|' + b);
-      return tmp || 0;
-    }
   }
 
   function shuffle<T>(arr: Array<T>) {
@@ -208,7 +187,7 @@ export namespace MilestoneAwardSelector {
     let max = 0;
     for (let i = 0; i < names.length - 1; i++) {
       for (let j = i + 1; j < names.length; j++) {
-        const synergy = Synergies.get(names[i], names[j]);
+        const synergy = Synergies.map.get(names[i], names[j]);
         max = Math.max(synergy, max);
       }
     }
@@ -216,8 +195,11 @@ export namespace MilestoneAwardSelector {
   }
 
   export interface Constraints {
+    // No pairing may have a synergy greater than this.
     maxSynergyAllowed: number;
+    // Sum of all the synergies may be no greater than this.
     totalSynergyAllowed: number;
+    // 3) Limited a number of pair with synergy at |highThreshold| or above to |numberOfHighAllowed| or below.
     numberOfHighAllowed: number;
     highThreshold: number;
   }
@@ -265,8 +247,12 @@ export namespace MilestoneAwardSelector {
         drawnMilestonesAndAwards.milestones.push(...VENUS_MILESTONES);
         drawnMilestonesAndAwards.awards.push(...VENUS_AWARDS);
       }
-
+      if (gameOptions.aresExtension) {
+        drawnMilestonesAndAwards.milestones.push(...ARES_MILESTONES);
+        drawnMilestonesAndAwards.awards.push(...ARES_AWARDS);
+      };
       break;
+
     case RandomMAOptionType.LIMITED:
       drawnMilestonesAndAwards = getRandomMilestonesAndAwards(gameOptions, requiredQty, LIMITED_SYNERGY);
       break;
@@ -275,9 +261,6 @@ export namespace MilestoneAwardSelector {
       break;
     }
 
-    if (gameOptions.aresExtension) {
-      AresSetup.setupMilestonesAwards(drawnMilestonesAndAwards);
-    };
     return drawnMilestonesAndAwards;
   };
 
@@ -290,18 +273,23 @@ export namespace MilestoneAwardSelector {
     numberMARequested: number,
     constraints: Constraints,
     attempt: number = 1): IDrawnMilestonesAndAwards {
-    const withVenusian = gameOptions.venusNextExtension && gameOptions.includeVenusMA;
-
     const maxAttempts = 5;
     if (attempt > maxAttempts) {
       throw new Error('No limited synergy milestones and awards set was generated after ' + maxAttempts + ' attempts. Please try again.');
     }
 
-    const candidateMilestones = MAs.milestones.map((ma) => ma.name);
-    const candidateAwards = MAs.awards.map((ma) => ma.name);
-    if (withVenusian) {
-      candidateMilestones.push(...VENUS_MILESTONES.map((ma) => ma.name));
-      candidateAwards.push(...VENUS_AWARDS.map((ma) => ma.name));
+    const toName = (e: {name: string}) => e.name;
+
+    const candidateMilestones = [...ORIGINAL_MILESTONES, ...ELYSIUM_MILESTONES, ...HELLAS_MILESTONES].map(toName);
+    const candidateAwards = [...ORIGINAL_AWARDS, ...ELYSIUM_AWARDS, ...HELLAS_AWARDS].map(toName);
+
+    if (gameOptions.venusNextExtension && gameOptions.includeVenusMA) {
+      candidateMilestones.push(...VENUS_MILESTONES.map(toName));
+      candidateAwards.push(...VENUS_AWARDS.map(toName));
+    }
+    if (gameOptions.aresExtension) {
+      candidateMilestones.push(...ARES_MILESTONES.map(toName));
+      candidateAwards.push(...ARES_AWARDS.map(toName));
     }
     const shuffledMilestones = shuffle(candidateMilestones);
     const shuffledAwards = shuffle(candidateAwards);
@@ -333,8 +321,8 @@ export namespace MilestoneAwardSelector {
     }
 
     return {
-      milestones: accum.milestones.map((name) => MAs.getMilestone(name)),
-      awards: accum.awards.map((name) => MAs.getAward(name)),
+      milestones: accum.milestones.map((name) => Milestones.getByName(name)),
+      awards: accum.awards.map((name) => Awards.getByName(name)),
     };
   }
 
@@ -350,7 +338,7 @@ export namespace MilestoneAwardSelector {
     let numberOfHigh = 0;
     for (let i = 0; i < mas.length - 1; i++) {
       for (let j = i + 1; j < mas.length; j++) {
-        const synergy = Synergies.get(mas[i], mas[j]);
+        const synergy = Synergies.map.get(mas[i], mas[j]);
         max = Math.max(synergy, max);
         totalSynergy += synergy;
         if (synergy >= constraints.highThreshold) numberOfHigh++;
@@ -387,7 +375,7 @@ export namespace MilestoneAwardSelector {
 
       // Find maximum synergy of this new item compared to the others
       this.milestones.concat(this.awards).forEach((ma) => {
-        const synergy = Synergies.get(ma, candidate);
+        const synergy = Synergies.map.get(ma, candidate);
         totalSynergy += synergy;
         if (synergy >= this.constraints.highThreshold) {
           highCount++;

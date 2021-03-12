@@ -82,13 +82,27 @@ describe('MilestoneAwardSelector', () => {
       TestingUtils.setCustomGameOptions({randomMA: RandomMAOptionType.UNLIMITED}));
   });
 
+  it('Main entrance point, Ares enabled', () => {
+    // These tests don't test results, they just make sure these calls don't fail.
+    MilestoneAwardSelector.chooseMilestonesAndAwards(
+      TestingUtils.setCustomGameOptions({randomMA: RandomMAOptionType.NONE, aresExtension: true}));
+  });
+  it('Main entrance point, Ares enabled - limited', () => {
+    MilestoneAwardSelector.chooseMilestonesAndAwards(
+      TestingUtils.setCustomGameOptions({randomMA: RandomMAOptionType.LIMITED, aresExtension: true}));
+  });
+  it('Main entrance point, Ares enabled - unlimited', () => {
+    MilestoneAwardSelector.chooseMilestonesAndAwards(
+      TestingUtils.setCustomGameOptions({randomMA: RandomMAOptionType.UNLIMITED, aresExtension: true}));
+  });
+
   it('Do not select expansion milestones or awards when they are not selected', () => {
     const intersection = function<T>(a: Array<T>, b: Array<T>) {
       return a.filter((e) => b.includes(e));
     };
 
     const avoidedAwards = [...VENUS_AWARDS, ...ARES_AWARDS, ...MOON_AWARDS].map((a) => a.name);
-    const avoidedMilestiones = [...VENUS_MILESTONES, ...ARES_MILESTONES, ...MOON_MILESTONES].map((m) => m.name);
+    const avoidedMilestones = [...VENUS_MILESTONES, ...ARES_MILESTONES, ...MOON_MILESTONES].map((m) => m.name);
     for (let idx = 0; idx < 10000; idx++) {
       const mas = MilestoneAwardSelector.chooseMilestonesAndAwards(
         TestingUtils.setCustomGameOptions({
@@ -99,7 +113,7 @@ describe('MilestoneAwardSelector', () => {
         }));
 
       expect(intersection(mas.awards.map((award) => award.name), avoidedAwards)).is.empty;
-      expect(intersection(mas.milestones.map((milestone) => milestone.name), avoidedMilestiones)).is.empty;
+      expect(intersection(mas.milestones.map((milestone) => milestone.name), avoidedMilestones)).is.empty;
     }
   });
 });

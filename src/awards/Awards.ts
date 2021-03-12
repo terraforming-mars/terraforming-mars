@@ -63,3 +63,15 @@ export const ALL_AWARDS: Array<IAward> = [
   ...VENUS_AWARDS,
   ...ARES_AWARDS,
   ...MOON_AWARDS];
+
+export namespace Awards {
+  export const ALL = ALL_AWARDS;
+
+  export function getByName(name: string): IAward {
+    const award = ALL_AWARDS.find((a) => a.name === name);
+    if (award) {
+      return award;
+    }
+    throw new Error(`Award ${name} not found.`);
+  }
+}

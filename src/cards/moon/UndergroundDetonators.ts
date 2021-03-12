@@ -13,7 +13,7 @@ export class UndergroundDetonators extends Card {
       cost: 9,
 
       metadata: {
-        description: 'Gain 1 steel and 1 titanium. Raise Mining Rate 1 step.',
+        description: 'Gain 1 steel and 1 titanium. Raise the Mining Rate 1 step.',
         cardNumber: 'M34',
         renderData: CardRenderer.builder((b) => {
           b.steel(1).titanium(1);
@@ -23,10 +23,6 @@ export class UndergroundDetonators extends Card {
       },
     });
   };
-
-  public canPlay(): boolean {
-    return true;
-  }
 
   public play(player: Player) {
     player.steel += 1;

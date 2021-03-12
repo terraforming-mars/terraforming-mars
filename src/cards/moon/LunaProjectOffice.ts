@@ -6,6 +6,7 @@ import {Tags} from '../Tags';
 import {CardRenderer} from '../render/CardRenderer';
 import {MoonExpansion} from '../../moon/MoonExpansion';
 import {Card} from '../Card';
+import {CardRequirements} from '../CardRequirements';
 
 export class LunaProjectOffice extends Card implements IProjectCard {
   constructor() {
@@ -14,6 +15,7 @@ export class LunaProjectOffice extends Card implements IProjectCard {
       cardType: CardType.AUTOMATED,
       tags: [Tags.SCIENCE],
       cost: 4,
+      requirements: CardRequirements.builder((b) => b.tag(Tags.SCIENCE, 2)),
 
       metadata: {
         description: 'Requires 2 science tags. / DRAW 5 CARDS DURING THE RESEARCH PHASE FOR THE NEXT 2 GENERATIONS.',
@@ -23,10 +25,6 @@ export class LunaProjectOffice extends Card implements IProjectCard {
     });
   };
   public resourceCount = 0;
-
-  public canPlay(player: Player): boolean {
-    return player.getTagCount(Tags.SCIENCE) >= 2;
-  }
 
   public static consume(player: Player): boolean {
     return MoonExpansion.ifElseMoon(player.game, () => {

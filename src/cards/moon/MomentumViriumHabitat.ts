@@ -20,7 +20,7 @@ export class MomentumViriumHabitat extends MoonCard {
 
       metadata: {
         description: 'Spend 1 titanium. Increase your heat production 2 steps and your MC production 3 steps. ' +
-        'Place a colony tile ON THE RESERVED AREA and raise Colony Rate 1 step.',
+        'Place a colony tile ON THE RESERVED AREA and raise the Colony Rate 1 step.',
         cardNumber: 'M12',
         renderData: CardRenderer.builder((b) => {
           b.minus().titanium(1).br;

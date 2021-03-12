@@ -19,7 +19,7 @@ export class LunarTradeFleet extends Card {
       requirements: CardRequirements.builder((b) => b.production(Resources.TITANIUM, 2)),
       metadata: {
         description: 'Requires that you have 2 titanium production. ' +
-        'Increase your MC production 1 step. Raise Logistic Rate 1 step.',
+        'Increase your MC production 1 step. Raise the Logistic Rate 1 step.',
         cardNumber: 'M35',
         renderData: CardRenderer.builder((b) => {
           b.production((pb) => pb.megacredits(1));
@@ -29,10 +29,6 @@ export class LunarTradeFleet extends Card {
       },
     });
   };
-
-  public canPlay(player: Player): boolean {
-    return player.getProduction(Resources.TITANIUM) >= 2;
-  }
 
   public play(player: Player) {
     player.addProduction(Resources.MEGACREDITS, 1, player.game);

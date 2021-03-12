@@ -211,7 +211,11 @@ export class MoonExpansion {
    *
    * Special tiles such as Lunar Mine Urbanization, are especially included.
    */
-  public static tiles(game: Game, tileType: TileType, surfaceOnly: boolean = false): Array<ISpace> {
+  public static tiles(
+    game: Game,
+    tileType: TileType,
+    surfaceOnly: boolean = false,
+    player? : Player): Array<ISpace> {
     return MoonExpansion.ifElseMoon(game, (moonData) => {
       return moonData.moon.spaces.filter(
         (space) => {
@@ -225,11 +229,15 @@ export class MoonExpansion {
           } else if (tileType === TileType.MOON_MINE) {
             include = type === TileType.MOON_MINE || type === TileType.LUNAR_MINE_URBANIZATION;
           } else {
-            include = include && type === tileType;
+            include = type === tileType;
           }
 
-          if (surfaceOnly) {
-            include = include && space.spaceType !== SpaceType.COLONY;
+          if (include && surfaceOnly) {
+            include = space.spaceType !== SpaceType.COLONY;
+          }
+
+          if (include && player !== undefined) {
+            include = space.player === player;
           }
 
           return include;

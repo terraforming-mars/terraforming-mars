@@ -26,10 +26,6 @@ export class DarksideMiningSyndicate extends Card implements IProjectCard {
     });
   };
 
-  public canPlay(): boolean {
-    return true;
-  }
-
   public play(player: Player) {
     const productionBonus = (MoonExpansion.moonData(player.game).miningRate >= 2) ? 1 : 2;
     player.addProduction(Resources.TITANIUM, productionBonus);

@@ -89,21 +89,6 @@ export namespace MilestoneAwardSelector {
         bind(ma.name, ma.name, 1000);
       });
 
-
-      function bindAll(MA: { new(): IMilestone | IAward }, weight: number) {
-        const ma = new MA().name;
-        [...Milestones.ALL, ...Awards.ALL].forEach((otherMA) => {
-          if (ma !== otherMA.name) {
-            bind(ma, otherMA.name, weight);
-          }
-        });
-      }
-
-      // Set a default synergy of 5 from Ares MAs to non-Ares MAs.
-      // Bindings after this call will override them.
-      bindAll(Networker, 5);
-      bindAll(Entrepreneur, 5);
-
       bind(Terraformer, Benefactor, 9);
       bind(Gardener, Cultivator, 9);
       bind(Builder, Contractor, 9);

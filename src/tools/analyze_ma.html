@@ -18,6 +18,7 @@
     </form>
     <button onclick="submit()">Submit</button>
     <div id="viz"></div>
+    <div id="raw"></div>
 
     <script type="text/javascript">
       // set the dimensions and margins of the graph
@@ -27,6 +28,7 @@
 
       function submit() {
         var svg = d3.select("#viz")
+          .html("")
           .append("svg")
             .attr("width", width + margin.left + margin.right)
             .attr("height", height + margin.top + margin.bottom)
@@ -74,6 +76,8 @@
             .attr("width", x.bandwidth())
             .attr("height", (d) => height - y(d.count))
             .attr("fill", "#69b3a2");
+
+          d3.select("#raw").html("").append("code").text(data.map((e) => `${e.name}: ${e.count}`).join('\n'));
         }
     </script>
   </body>

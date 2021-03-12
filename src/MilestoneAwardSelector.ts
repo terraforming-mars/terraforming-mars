@@ -292,6 +292,9 @@ export namespace MilestoneAwardSelector {
     attempt: number = 1): IDrawnMilestonesAndAwards {
     const withVenusian = gameOptions.venusNextExtension && gameOptions.includeVenusMA;
 
+    // 5 is a fine number of attempts. A sample of 100,000 runs showed that this algorithm
+    // didn't get past 3.
+    // https://github.com/bafolts/terraforming-mars/pull/1637#issuecomment-711411034
     const maxAttempts = 5;
     if (attempt > maxAttempts) {
       throw new Error('No limited synergy milestones and awards set was generated after ' + maxAttempts + ' attempts. Please try again.');

@@ -93,22 +93,6 @@ export namespace MilestoneAwardSelector {
         bind(ma.name, ma.name, 1000);
       });
 
-
-      function bindAll(ma: IMilestone | IAward, weight: number) {
-        const maName = ma.name;
-        [...Milestones.ALL, ...Awards.ALL].forEach((otherMA) => {
-          if (maName !== otherMA.name) {
-            bind(maName, otherMA.name, weight);
-          }
-        });
-      }
-
-      // Set a default synergy of 5 from Ares and Moon milestones to
-      // every other MA.
-      // Bindings after this call will override them.
-      [...MOON_MILESTONES, ...ARES_MILESTONES].forEach((milestone) => bindAll(milestone, 5));
-      [...MOON_AWARDS, ...ARES_AWARDS].forEach((milestone) => bindAll(milestone, 5));
-
       bind(Terraformer, Benefactor, 9);
       bind(Gardener, Cultivator, 9);
       bind(Builder, Contractor, 9);
@@ -251,7 +235,6 @@ export namespace MilestoneAwardSelector {
     };
 
     const includeVenus = gameOptions.venusNextExtension && gameOptions.includeVenusMA;
-
     const requiredQty = includeVenus ? 6 : 5;
 
     switch (gameOptions.randomMA) {
@@ -317,8 +300,8 @@ export namespace MilestoneAwardSelector {
 
     const toName = (e: {name: string}) => e.name;
 
-    const candidateMilestones = [...ORIGINAL_MILESTONES, ...ELYSIUM_MILESTONES, ...HELLAS_MILESTONES, ...VENUS_MILESTONES].map(toName);
-    const candidateAwards = [...ORIGINAL_AWARDS, ...ELYSIUM_AWARDS, ...HELLAS_AWARDS, ...VENUS_AWARDS].map(toName);
+    const candidateMilestones = [...ORIGINAL_MILESTONES, ...ELYSIUM_MILESTONES, ...HELLAS_MILESTONES].map(toName);
+    const candidateAwards = [...ORIGINAL_AWARDS, ...ELYSIUM_AWARDS, ...HELLAS_AWARDS].map(toName);
 
     if (gameOptions.venusNextExtension && gameOptions.includeVenusMA) {
       candidateMilestones.push(...VENUS_MILESTONES.map(toName));

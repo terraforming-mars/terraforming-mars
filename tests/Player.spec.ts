@@ -125,6 +125,21 @@ describe('Player', function() {
     player.process([['1']]);
     expect(player.getWaitingFor()).to.be.undefined;
   });
+  it('Includes buffer gas for non solo games', function() {
+    const player = TestPlayers.BLUE.newPlayer();
+    const player2= TestPlayers.RED.newPlayer();
+    Game.newInstance('foobar', [player, player2], player);
+    const option = player.getStandardProjectOption();
+    const bufferGas = option.cards.find((card) => card.name === CardName.BUFFER_GAS_STANDARD_PROJECT);
+    expect(bufferGas).not.to.be.undefined;
+  });
+  it('Omits buffer gas for non solo games', function() {
+    const player = TestPlayers.BLUE.newPlayer();
+    Game.newInstance('foobar', [player], player);
+    const option = player.getStandardProjectOption();
+    const bufferGas = option.cards.find((card) => card.name === CardName.BUFFER_GAS_STANDARD_PROJECT);
+    expect(bufferGas).to.be.undefined;
+  });
   it('serialization test for pickedCorporationCard', () => {
     const player = TestPlayers.BLUE.newPlayer();
     player.pickedCorporationCard = new SaturnSystems();

@@ -1669,12 +1669,21 @@ export class Player implements ISerializable<SerializedPlayer> {
   private getStandardProjects(): Array<StandardProjectCard> {
     return new CardLoader(this.game.gameOptions)
       .getStandardProjects()
-      .filter((card) => card.name !== CardName.SELL_PATENTS_STANDARD_PROJECT)
+      .filter((card) => {
+        // sell patents is not displayed as a card
+        if (card.name === CardName.SELL_PATENTS_STANDARD_PROJECT) {
+          return false;
+        }
+        // only show buffer gas in solo mode
+        if (card.name === CardName.BUFFER_GAS_STANDARD_PROJECT && this.game.isSoloMode()) {
+          return false;
+        }
+        return true;
+      })
       .sort((a, b) => a.cost - b.cost);
   }
 
-  // Public for testing. TODO: make protected using the TestPlayer class.
-  public getStandardProjectOption(): SelectCard<StandardProjectCard> {
+  protected getStandardProjectOption(): SelectCard<StandardProjectCard> {
     const standardProjects: Array<StandardProjectCard> = this.getStandardProjects();
 
     return new SelectCard(

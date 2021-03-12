@@ -154,7 +154,8 @@ export const GameEnd = Vue.component('game-end', {
                                 <span :class="'log-player ' + getEndGamePlayerHighlightColorClass(p.color)"><a :href="'/player?id='+p.id+'&noredirect'">{{p.name}}</a></span>
                             </div>
                             <div v-for="v in p.victoryPointsBreakdown.detailsCards">
-                                {{v}}
+                                <!-- Removing any expansion-specific suffix-->
+                                {{v.split(':')[0]}}
                             </div>
                             <div v-for="v in p.victoryPointsBreakdown.detailsMilestones">
                                 {{v}}

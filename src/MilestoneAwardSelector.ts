@@ -1,5 +1,5 @@
 import {AresSetup} from './ares/AresSetup';
-import {ELYSIUM_AWARDS, HELLAS_AWARDS, ORIGINAL_AWARDS, VENUS_AWARDS} from './awards/Awards';
+import {ALL_AWARDS, ELYSIUM_AWARDS, HELLAS_AWARDS, ORIGINAL_AWARDS, VENUS_AWARDS} from './awards/Awards';
 import {Banker} from './awards/Banker';
 import {Benefactor} from './awards/Benefactor';
 import {Celebrity} from './awards/Celebrity';
@@ -29,7 +29,7 @@ import {Generalist} from './milestones/Generalist';
 import {Hoverlord} from './milestones/Hoverlord';
 import {IMilestone} from './milestones/IMilestone';
 import {Mayor} from './milestones/Mayor';
-import {ELYSIUM_MILESTONES, HELLAS_MILESTONES, ORIGINAL_MILESTONES, VENUS_MILESTONES} from './milestones/Milestones';
+import {ALL_MILESTONES, ELYSIUM_MILESTONES, HELLAS_MILESTONES, ORIGINAL_MILESTONES, VENUS_MILESTONES} from './milestones/Milestones';
 import {Planner} from './milestones/Planner';
 import {PolarExplorer} from './milestones/PolarExplorer';
 import {RimSettler} from './milestones/RimSettler';
@@ -62,9 +62,8 @@ export namespace MilestoneAwardSelector {
       ...VENUS_AWARDS,
     ];
 
-
     public static getMilestone(name: string): IMilestone {
-      const milestone = this.milestones.find((m) => m.name === name);
+      const milestone = ALL_MILESTONES.find((m) => m.name === name);
       if (milestone) {
         return milestone;
       }
@@ -72,7 +71,7 @@ export namespace MilestoneAwardSelector {
     }
 
     public static getAward(name: string): IAward {
-      const award = this.awards.find((a) => a.name === name);
+      const award = ALL_AWARDS.find((a) => a.name === name);
       if (award) {
         return award;
       }

@@ -1,24 +1,25 @@
 export namespace SoundManager {
-  const frequencies = [
-    196.00, // G3
-    220.00, // A3
-    246.94, // B3
-    261.63, // C4
-    293.66, // D4
-    329.63, // E4
-    349.23, // F4
-    392.00, // G4
-    440.00, // A4
-    493.88, // B4
-    523.25, // C5
-    587.33, // D5
-    659.25, // E5
-    698.46, // F5
-    783.99, // G5
-    880.00, // A5
-    987.77, // B5
-    1046.50, // C6
-  ];
+  enum NOTES {
+    G3 = 196.00,
+    A3 = 220.00,
+    B3 = 246.94,
+    C4 = 261.63,
+    D4 = 293.66,
+    E4 = 329.63,
+    F4 = 349.23,
+    G4 = 392.00,
+    A4 = 440.00,
+    B4 = 493.88,
+    C5 = 523.25,
+    D5 = 587.33,
+    E5 = 659.25,
+    F5 = 698.46,
+    G5 = 783.99,
+    A5 = 880.00,
+    B5 = 987.77,
+    C6 = 1046.50,
+  };
+
   function setupGainNode(audioCtx: AudioContext, time: number) {
     time += audioCtx.currentTime;
 
@@ -60,8 +61,8 @@ export namespace SoundManager {
     if (audioCtx === undefined) return;
 
     audioCtx.resume().then(() => {
-      playSound(audioCtx, frequencies[10], 0, 0.4);
-      playSound(audioCtx, frequencies[8], 0.2, 0.4);
+      playSound(audioCtx, NOTES.C5, 0, 0.4);
+      playSound(audioCtx, NOTES.A4, 0.2, 0.4);
     });
   }
 }

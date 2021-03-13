@@ -27,7 +27,7 @@ export class LunaProjectOffice extends Card implements IProjectCard {
   public resourceCount = 0;
 
   public static consume(player: Player): boolean {
-    return MoonExpansion.ifMoon(player.game, () => {
+    return MoonExpansion.ifElseMoon(player.game, () => {
       const card = player.playedCards.find((card) => card.name === CardName.LUNA_PROJECT_OFFICE);
       if (card !== undefined) {
         const lunaProjectOffice = card as LunaProjectOffice;
@@ -37,7 +37,7 @@ export class LunaProjectOffice extends Card implements IProjectCard {
         }
       }
       return false;
-    }) || false;
+    }, () => false);
   }
 
   public play(_player: Player) {

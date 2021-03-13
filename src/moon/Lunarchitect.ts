@@ -9,7 +9,7 @@ export class Lunarchitect implements IMilestone {
 
     public description: string = 'Own at least 6 Moon tiles'
     public getScore(player: Player): number {
-      return MoonExpansion.ifMoon(player.game, (moonData) => {
+      return MoonExpansion.ifElseMoon(player.game, (moonData) => {
         return moonData.moon.spaces.filter((space) => space.player?.id === player.id).length;
       }, () => 0) || 0;
     }

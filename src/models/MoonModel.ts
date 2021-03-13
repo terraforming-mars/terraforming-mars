@@ -14,16 +14,14 @@ export interface MoonModel {
 
 export namespace MoonModel {
   export function serialize(game: Game): MoonModel | undefined {
-    let model = undefined;
-    MoonExpansion.ifMoon(game, (moonData) => {
-      model = {
+    return MoonExpansion.ifElseMoon(game, (moonData) => {
+      return {
         logisticsRate: moonData.logisticRate,
         miningRate: moonData.miningRate,
         colonyRate: moonData.colonyRate,
         spaces: getSpaces(moonData.moon.spaces),
       };
-    });
-    return model;
+    }, () => undefined);
   }
 
 

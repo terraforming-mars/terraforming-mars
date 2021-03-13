@@ -192,7 +192,7 @@
 .tag-cards {
     background-image: url("./assets/sidebar/preferences_cards.png");
     background-color: #0008 !important;
-    background-position: 2px;
+    background-position: 0px;
 }
 .tag-vp {
     background: linear-gradient(#cc8b00, #805700, #805700) !important;
@@ -208,6 +208,35 @@
     text-align: center;
     top: 3px;
     left: 7px;
+}
+
+.tag-action-card {
+    margin-top: 0px;
+    margin-left: 0px;
+
+    border-radius: 4px;
+    border: none;
+    width: 30px;
+    height: 34px;
+    background: linear-gradient(to bottom right, #ffffff, #aaaaaa, #eeeeee, #cecece, #dddddd, #eeeeee, #cccccc);
+
+    .blue-stripe {
+        background: linear-gradient(-60deg, #208cdf 10%, #4da3e6, #208cdf 90%);
+        height: 8px;
+        top: 3px;
+        position: relative;
+    }
+    .red-arrow{
+        background-image: url(./assets/misc/arrow.png);
+        background-size: 25px;
+        width: 25px;
+        height: 30px;
+        vertical-align: middle;
+        display: inline-block;
+        background-repeat: no-repeat;
+        align-self: center;
+        background-position: 0px;
+    }
 }
 
 .tag-tr {
@@ -249,6 +278,9 @@
     border-radius: 0px !important;
     background-position: 0px !important;
   }
+.player-board-blue-action-counter{
+    margin-top: 8px;
+}
 
 .tag-display {
     display: flex;

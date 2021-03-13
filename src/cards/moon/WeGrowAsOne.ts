@@ -30,16 +30,6 @@ export class WeGrowAsOne extends Card implements IProjectCard {
     });
   };
 
-  public canPlay(player: Player): boolean {
-    if (player.game.turmoil === undefined) {
-      return false;
-    }
-    if (!player.game.turmoil.canPlay(player, PartyName.UNITY)) {
-      return false;
-    }
-    return true;
-  }
-
   public play(player: Player) {
     player.game.colonies.forEach((colony) => {
       if (colony.colonies.includes(player.id)) {

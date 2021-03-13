@@ -15,7 +15,7 @@ export class DarksideMeteorBombardment extends Card {
       cost: 20,
 
       metadata: {
-        description: 'Gain 2 steel and 2 titanium. Raise Mining Rate 2 steps.',
+        description: 'Gain 2 steel and 2 titanium. Raise the Mining Rate 2 steps.',
         cardNumber: 'M33',
         renderData: CardRenderer.builder((b) => {
           b.steel(2).titanium(2);
@@ -25,9 +25,6 @@ export class DarksideMeteorBombardment extends Card {
       },
     });
   };
-  public canPlay(): boolean {
-    return true;
-  }
 
   public play(player: Player) {
     player.steel += 2;

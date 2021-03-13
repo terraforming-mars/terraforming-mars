@@ -24,13 +24,16 @@ export class DarksideIncubationPlant extends MoonCard implements IActionCard, IP
       resourceType: ResourceType.MICROBE,
 
       metadata: {
-        description: 'Spend 1 titanium. 1 VP per every 2 microbes here.',
+        description: {
+          text: 'Spend 1 titanium. 1 VP for every 2 microbes here.',
+          align: 'left',
+        },
         cardNumber: 'M45',
         renderData: CardRenderer.builder((b) => {
-          b.action('Add 1 microbe to this card.', (eb) => {
+          b.action('Add 1 microbe here.', (eb) => {
             eb.empty().startAction.microbes(1);
           }).br;
-          b.action('Spend 2 microbes to raise Colony Rate 1 step.', (eb) => {
+          b.action('Spend 2 microbes to raise the Colony Rate 1 step.', (eb) => {
             eb.microbes(2).startAction.moonColonyRate({size: CardRenderItemSize.SMALL});
           });
 
@@ -67,7 +70,6 @@ export class DarksideIncubationPlant extends MoonCard implements IActionCard, IP
           MoonExpansion.raiseColonyRate(player);
           return undefined;
         }));
-      } else {
       }
     });
     if (options.length === 1) {

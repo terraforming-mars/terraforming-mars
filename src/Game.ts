@@ -63,6 +63,7 @@ import {IMoonData} from './moon/IMoonData';
 import {MoonExpansion} from './moon/MoonExpansion';
 import {TurmoilHandler} from './turmoil/TurmoilHandler';
 import {Random} from './Random';
+import {MilestoneAwardSelector} from './MilestoneAwardSelector';
 
 export type GameId = string;
 
@@ -265,7 +266,7 @@ export class Game implements ISerializable<SerializedGame> {
       game.aresData = AresSetup.initialData(gameOptions.aresExtension, gameOptions.aresHazards, players);
     }
 
-    const milestonesAwards = GameSetup.chooseMilestonesAndAwards(gameOptions);
+    const milestonesAwards = MilestoneAwardSelector.chooseMilestonesAndAwards(gameOptions);
     game.milestones = milestonesAwards.milestones;
     game.awards = milestonesAwards.awards;
 
@@ -1223,19 +1224,24 @@ export class Game implements ISerializable<SerializedGame> {
 
   public checkRequirements(player: Player, parameter: GlobalParameter, level: number, max: boolean = false): boolean {
     let currentLevel: number;
-    let playerRequirementsBonus: number = player.getRequirementsBonus(parameter === GlobalParameter.VENUS);
+    let playerRequirementsBonus: number = player.getRequirementsBonus(parameter);
 
-    if (parameter === GlobalParameter.OCEANS) {
+    switch (parameter) {
+    case GlobalParameter.OCEANS:
       currentLevel = this.board.getOceansOnBoard();
-    } else if (parameter === GlobalParameter.OXYGEN) {
+      break;
+    case GlobalParameter.OXYGEN:
       currentLevel = this.getOxygenLevel();
-    } else if (parameter === GlobalParameter.TEMPERATURE) {
+      break;
+    case GlobalParameter.TEMPERATURE:
       currentLevel = this.getTemperature();
       playerRequirementsBonus *= 2;
-    } else if (parameter === GlobalParameter.VENUS) {
+      break;
+    case GlobalParameter.VENUS:
       currentLevel = this.getVenusScaleLevel();
       playerRequirementsBonus *= 2;
-    } else {
+      break;
+    default:
       console.warn(`Unknown GlobalParameter provided: ${parameter}`);
       return false;
     }
@@ -1575,6 +1581,10 @@ export class Game implements ISerializable<SerializedGame> {
 
     const awards: Array<IAward> = [];
     d.awards.forEach((element: IAward) => {
+      // TODO(kberg): remove by 2021-03-30
+      if (element.name === 'Entrepeneur') {
+        element.name = 'Entrepreneur';
+      }
       ALL_AWARDS.forEach((award: IAward) => {
         if (award.name === element.name) {
           awards.push(award);

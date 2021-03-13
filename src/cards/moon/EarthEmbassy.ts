@@ -25,11 +25,6 @@ export class EarthEmbassy extends Card implements IProjectCard {
     });
   };
 
-
-  public canPlay(): boolean {
-    return true;
-  }
-
   // Behavior is baked into `Player.getTagCount`
   public play() {
     return undefined;

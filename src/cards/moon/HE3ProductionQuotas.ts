@@ -18,15 +18,13 @@ export class HE3ProductionQuotas extends Card implements IProjectCard {
       tags: [Tags.MOON],
       cost: 10,
 
-      requirements: CardRequirements.builder((b) => b.party(PartyName.KELVINISTS).miningRate(1)),
+      requirements: CardRequirements.builder((b) => b.party(PartyName.KELVINISTS).miningTiles(1).any()),
       metadata: {
-        description: 'Requires that Kelvinists are ruling or that you have 2 delegates there and 1 mine tile on the Moon. ' +
-        'Pay 1 steel per mine tile on the Moon to gain 4 heat per mine tile on the Moon. Raise Mining Rate 1 step.',
+        description: 'Requires that Kelvinists are ruling or that you have 2 delegates there, and 1 mine tile on the Moon. ' +
+        'Pay 1 steel per mine tile on the Moon to gain 4 heat per mine tile on the Moon. Raise the Mining Rate 1 step.',
         cardNumber: 'M57',
-        // TODO(kberg): Switch mining rate to mines, also YOU must have a mine.
         renderData: CardRenderer.builder((b) => {
-          b.minus().steel(1).slash().tile(TileType.MOON_MINE, false).asterix().br;
-          b.text('=>').heat(4).br;
+          b.minus().steel(1).slash().tile(TileType.MOON_MINE, false).asterix().arrow().text('4').heat(1).br;
           b.moonMiningRate();
         }),
       },
@@ -34,11 +32,10 @@ export class HE3ProductionQuotas extends Card implements IProjectCard {
   };
 
   public canPlay(player: Player): boolean {
-    const game = player.game;
-    if (game.turmoil === undefined || !game.turmoil.canPlay(player, PartyName.KELVINISTS)) {
+    if (super.canPlay(player) === false) {
       return false;
     }
-    const moonTiles = MoonExpansion.tiles(game, TileType.MOON_MINE, true);
+    const moonTiles = MoonExpansion.tiles(player.game, TileType.MOON_MINE, true);
     if (player.steel < moonTiles.length) {
       return false;
     }

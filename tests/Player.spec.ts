@@ -14,6 +14,8 @@ import {Player} from '../src/Player';
 import {Color} from '../src/Color';
 import {VictoryPointsBreakdown} from '../src/VictoryPointsBreakdown';
 import {CardName} from '../src/CardName';
+import {GlobalParameter} from '../src/GlobalParameter';
+import {TestingUtils} from './TestingUtils';
 
 describe('Player', function() {
   it('should initialize with right defaults', function() {
@@ -140,6 +142,47 @@ describe('Player', function() {
     const bufferGas = option.cards.find((card) => card.name === CardName.BUFFER_GAS_STANDARD_PROJECT);
     expect(bufferGas).to.be.undefined;
   });
+
+  it('wgt includes all parameters at the game start', () => {
+    const player = TestPlayers.BLUE.newPlayer();
+    const gameOptions = TestingUtils.setCustomGameOptions({venusNextExtension: false});
+    Game.newInstance('foobar', [player], player, gameOptions);
+    player.worldGovernmentTerraforming();
+    const parameters = waitingForGlobalParameters(player);
+    expect(parameters).to.have.members([
+      GlobalParameter.OXYGEN,
+      GlobalParameter.TEMPERATURE,
+      GlobalParameter.OCEANS]);
+  });
+
+  it('wgt includes all parameters at the game start, with Venus', () => {
+    const player = TestPlayers.BLUE.newPlayer();
+    const gameOptions = TestingUtils.setCustomGameOptions({venusNextExtension: true});
+    Game.newInstance('foobar', [player], player, gameOptions);
+    player.worldGovernmentTerraforming();
+    const parameters = waitingForGlobalParameters(player);
+    expect(parameters).to.have.members([
+      GlobalParameter.OXYGEN,
+      GlobalParameter.TEMPERATURE,
+      GlobalParameter.OCEANS,
+      GlobalParameter.VENUS]);
+  });
+
+  it('wgt includes all parameters at the game start, with The Moon', () => {
+    const player = TestPlayers.BLUE.newPlayer();
+    const gameOptions = TestingUtils.setCustomGameOptions({venusNextExtension: false, moonExpansion: true});
+    Game.newInstance('foobar', [player], player, gameOptions);
+    player.worldGovernmentTerraforming();
+    const parameters = waitingForGlobalParameters(player);
+    expect(parameters).to.have.members([
+      GlobalParameter.OXYGEN,
+      GlobalParameter.TEMPERATURE,
+      GlobalParameter.OCEANS,
+      GlobalParameter.MOON_MINING_RATE,
+      GlobalParameter.MOON_COLONY_RATE,
+      GlobalParameter.MOON_LOGISTICS_RATE]);
+  });
+
   it('serialization test for pickedCorporationCard', () => {
     const player = TestPlayers.BLUE.newPlayer();
     player.pickedCorporationCard = new SaturnSystems();
@@ -227,3 +270,32 @@ describe('Player', function() {
     expect(newPlayer.tradesThisGeneration).eq(100);
   });
 });
+
+function waitingForGlobalParameters(player: Player): Array<GlobalParameter> {
+  return player.getWaitingFor()!.options!.map((o) => o.title as string).map(titlesToGlobalParameter);
+}
+
+function titlesToGlobalParameter(title: string): GlobalParameter {
+  if (title.includes('temperature')) {
+    return GlobalParameter.TEMPERATURE;
+  }
+  if (title.includes('ocean')) {
+    return GlobalParameter.OCEANS;
+  }
+  if (title.includes('oxygen')) {
+    return GlobalParameter.OXYGEN;
+  }
+  if (title.includes('Venus')) {
+    return GlobalParameter.VENUS;
+  }
+  if (title.includes('colony')) {
+    return GlobalParameter.MOON_COLONY_RATE;
+  }
+  if (title.includes('mine')) {
+    return GlobalParameter.MOON_MINING_RATE;
+  }
+  if (title.includes('road')) {
+    return GlobalParameter.MOON_LOGISTICS_RATE;
+  }
+  throw new Error('title does not match any description: ' + title);
+}

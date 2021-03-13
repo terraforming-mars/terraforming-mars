@@ -32,8 +32,7 @@ export class LunaStagingStation extends MoonCard {
 
   public play(player: Player) {
     super.play(player);
-    MoonExpansion.raiseLogisticRate(player);
-    MoonExpansion.raiseLogisticRate(player);
+    MoonExpansion.raiseLogisticRate(player, 2);
     return undefined;
   }
 }

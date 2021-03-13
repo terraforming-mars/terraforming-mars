@@ -37,7 +37,7 @@ describe('GameLoader', function() {
     };
   });
   beforeEach(function() {
-    (GameLoader as any).instance = undefined;
+    (GameLoader.getInstance() as GameLoader).reset();
   });
   after(function() {
     (Player as any).prototype.generateId = originalGenerateId;

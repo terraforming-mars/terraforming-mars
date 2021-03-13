@@ -9,7 +9,6 @@ import * as http from 'http';
 import * as fs from 'fs';
 import * as querystring from 'querystring';
 
-import {GameId} from './Game';
 import {ApiCloneableGames} from './routes/ApiCloneableGames';
 import {ApiGameLogs} from './routes/ApiGameLogs';
 import {ApiGames} from './routes/ApiGames';
@@ -27,7 +26,7 @@ import {GameLoader} from './database/GameLoader';
 import {ServeApp} from './routes/ServeApp';
 import {ServeAsset} from './routes/ServeAsset';
 
-const serverId = process.env.SERVER_ID || generateRandomId();
+const serverId = process.env.SERVER_ID || GameHandler.INSTANCE.generateRandomId('');
 const route = new Route();
 
 const handlers: Map<string, IHandler> = new Map(
@@ -136,11 +135,6 @@ if (process.env.KEY_PATH && process.env.CERT_PATH) {
   server = https.createServer(options, requestHandler);
 } else {
   server = http.createServer(requestHandler);
-}
-
-function generateRandomId(): GameId {
-  // 281474976710656 possible values.
-  return Math.floor(Math.random() * Math.pow(16, 12)).toString(16);
 }
 
 function isServerIdValid(req: http.IncomingMessage): boolean {

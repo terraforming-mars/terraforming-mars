@@ -42,14 +42,21 @@ export class GameLoader implements IGameLoader {
   // participant ids which we know exist mapped to game id
   private readonly participantIds = new Map<SpectatorId | PlayerId, GameId>();
 
-  private static instance?: GameLoader;
+  private static readonly instance = new GameLoader();
 
   private constructor() {}
 
-  public static getInstance(): IGameLoader {
-    if (GameLoader.instance === undefined) {
-      GameLoader.instance = new GameLoader();
+  public reset(): void {
+    this.games.clear();
+    this.participantIds.clear();
+    this.state = State.WAITING;
+    this.loadingGame = false;
+    if (this.onGameIdsLoaded.length > 0) {
+      throw new Error('can not reset with pending callbacks');
     }
+  }
+
+  public static getInstance(): IGameLoader {
     return GameLoader.instance;
   }
 
@@ -75,7 +82,7 @@ export class GameLoader implements IGameLoader {
       this.onGameIdsLoaded.unshift(() => {
         this.loadGame(gameId, bypassCache, this.onGameLoaded(cb));
       });
-      this.loadNextGame();
+      this.runGameIdLoadedCallback();
     } else {
       cb(undefined);
     }
@@ -90,7 +97,7 @@ export class GameLoader implements IGameLoader {
       this.onGameIdsLoaded.push(() => {
         this.loadParticipant(id, this.onGameLoaded(cb));
       });
-      this.loadNextGame();
+      this.runGameIdLoadedCallback();
     } else {
       cb(undefined);
     }
@@ -169,11 +176,11 @@ export class GameLoader implements IGameLoader {
     return (game: Game | undefined) => {
       cb(game);
       this.loadingGame = false;
-      this.loadNextGame();
+      this.runGameIdLoadedCallback();
     };
   }
 
-  private loadNextGame(): void {
+  private runGameIdLoadedCallback(): void {
     if (this.state === State.READY && this.loadingGame === false) {
       const callback = this.onGameIdsLoaded.shift();
       if (callback !== undefined) {
@@ -184,7 +191,7 @@ export class GameLoader implements IGameLoader {
 
   private allGameIdsLoaded(): void {
     this.state = State.READY;
-    this.loadNextGame();
+    this.runGameIdLoadedCallback();
   }
 
   private loadAllGameIds(): void {

@@ -1,5 +1,5 @@
 export namespace SoundManager {
-  enum NOTES {
+  enum Notes {
     G3 = 196.00,
     A3 = 220.00,
     B3 = 246.94,
@@ -56,13 +56,29 @@ export namespace SoundManager {
     oscillator.stop(time + len);
   }
 
-  export function playActivePlayerSound() {
+  function playInContext(cb: (audioCtx: any) => void) {
     const audioCtx = createAudioContext();
     if (audioCtx === undefined) return;
 
     audioCtx.resume().then(() => {
-      playSound(audioCtx, NOTES.C5, 0, 0.4);
-      playSound(audioCtx, NOTES.A4, 0.2, 0.4);
+      cb(audioCtx);
+    });
+  }
+
+  export function playActivePlayerSound() {
+    playInContext((audioCtx) => {
+      playSound(audioCtx, Notes.C5, 0, 0.4);
+      playSound(audioCtx, Notes.A4, 0.2, 0.4);
+    });
+  }
+
+  export function newLog() {
+    playInContext((audioCtx) => {
+      playSound(audioCtx, 100, 0.005, 0.03);
+      playSound(audioCtx, 0, 0.005, 0.03);
+      playSound(audioCtx, 100, 0.005, 0.02);
+      playSound(audioCtx, 0, 0.005, 0.02);
+      playSound(audioCtx, 100, 0.005, 0.01);
     });
   }
 }

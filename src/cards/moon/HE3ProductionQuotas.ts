@@ -21,13 +21,11 @@ export class HE3ProductionQuotas extends Card implements IProjectCard {
       requirements: CardRequirements.builder((b) => b.party(PartyName.KELVINISTS).miningTiles(1).any()),
       metadata: {
         description: 'Requires that Kelvinists are ruling or that you have 2 delegates there, and 1 mine tile on the Moon. ' +
-        'Pay 1 steel per mine tile on the Moon to gain 4 heat per mine tile on the Moon. Raise Mining Rate 1 step.',
+        'Pay 1 steel per mine tile on the Moon to gain 4 heat per mine tile on the Moon. Raise the Mining Rate 1 step.',
         cardNumber: 'M57',
-        // TODO(kberg): Add a visual cue that YOU must have a mine?
         renderData: CardRenderer.builder((b) => {
-          b.minus().steel(1).slash().tile(TileType.MOON_MINE, false).asterix().br;
-          b.text('=>').heat(4).br;
-          b.moonMine();
+          b.minus().steel(1).slash().tile(TileType.MOON_MINE, false).asterix().arrow().text('4').heat(1).br;
+          b.moonMiningRate();
         }),
       },
     });

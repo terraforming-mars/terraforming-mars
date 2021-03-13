@@ -1,5 +1,4 @@
 {
-    "You start with 42 MC. Instead of choosing from 10 cards during setup, you get 10 cards for free.": "Comienza con 42 M€. EN LUGAR DE PARTICIPAR EN LA PRIMERA FASE DE INVESTIGACIÓN, ROBA 10 CARTAS SIN COSTE ALGUNO.",
     "Colonizer Training Camp": "Base de Entrenamiento",
     "Oxygen must be 5% or less.": "El oxígeno debe ser 5% o inferior.",
 
@@ -704,6 +703,7 @@
     "Increase your MC production 1 step for every 2 Building tags you have, including this.": "Aumenta tu producción de M€ 1 nivel por cada 2 símbolos de edificio que poseas, incluyendo este.",
 
     "AI Central": "Central IA",
+
     "Action: Draw 2 cards.": "Acción: Roba 2 cartas.",
     "2 Science": "2 Ciencia",
     "3 Science": "3 Ciencia",
@@ -728,9 +728,8 @@
 
   "Requires 2 Earth tags. Increase MC production 4 steps.":"Requiere 2 símbolos de Tierra. Incrementa tu producción de M€ en 4.",
   "Oxygen must be 4% or lower. Draw two cards.":"El oxígeno debe ser 4% o inferior. Roba 2 cartas.",
-  "After being played, when you perform an action, the wild tag counts as any tag of your choice.":"打出来之后，当你执行行动时，问号可以视为任意标志",
-  "Decrease your energy production 1 step and increase your MC production 2 steps. Place a City Tile on a VOLCANIC AREA regardless of adjacent cities.":"减少1点电力产能，提升2点金钱产能。放置一个城市版块到火山区，忽视相邻规则",
-  "Effect: When paying for a plant card, microbes here may be used as 2 MC each.":"效果：当你打出植物标志的卡牌是，这张卡上的每个微生物资源可以作为2MC支付",
+  "After being played, when you perform an action, the wild tag counts as any tag of your choice.":"",
+  "Decrease your energy production 1 step and increase your MC production 2 steps. Place a City Tile on a VOLCANIC AREA regardless of adjacent cities.":"",
+  "Effect: When paying for a plant card, microbes here may be used as 2 MC each.":"",
   "Temperature must be -20 C or lower.":"La temperatura debe ser de -20℃ o inferior."
 }
-

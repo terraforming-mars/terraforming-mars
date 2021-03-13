@@ -13,7 +13,7 @@ export class BasicInfrastructure extends PreludeCard {
       tags: [Tags.MOON],
 
       metadata: {
-        description: 'Place a road tile on the Moon and raise Logistics Rate 1 step. Gain 1 trade fleet.',
+        description: 'Place a road tile on the Moon and raise the Logistics Rate 1 step. Gain 1 trade fleet.',
         cardNumber: '',
         renderData: CardRenderer.builder((b) => {
           b.tile(TileType.MOON_ROAD, false).tradeFleet();

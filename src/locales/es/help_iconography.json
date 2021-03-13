@@ -24,17 +24,17 @@
     "Heat": "Calor",
     "Floater": "Flotador",
     "Asteroid": "Asteroide",
-    
+
     "Greenery": "Vegetación",
     "City": "Ciudad",
     "Ocean": "Océano",
     "Special": "Especial",
-    
+
     "Temperature": "Temperatura",
     "Oxygen": "Oxígeno",
     "Oceans": "Ocenos",
-   
-    
+
+
     "Victory Point (VP)": "Punto de victoria (PV)",
     "Terraform Rating (TR)": "Valor de terraformación (VT)",
     "Project Card": "Carta de proyecto",
@@ -43,7 +43,7 @@
     "Trade Fleet": "Flota comercial",
     "Delegate": "Delegado",
     "Influence": "Influencia",
-    
+
     "Hotkeys Mapping" : "Asignación teclas acceso rápido",
     "Main Board": "Tablero principal",
     "Players Overview Table": "Tablero resumen jugadores", 

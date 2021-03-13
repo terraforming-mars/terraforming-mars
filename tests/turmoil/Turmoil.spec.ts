@@ -8,6 +8,7 @@ import {OrOptions} from '../../src/inputs/OrOptions';
 import {SelectSpace} from '../../src/inputs/SelectSpace';
 import {SpaceBonus} from '../../src/SpaceBonus';
 import {Turmoil} from '../../src/turmoil/Turmoil';
+import {TestPlayer} from '../TestPlayer';
 import {TestingUtils, setCustomGameOptions, TestPlayers} from '../TestingUtils';
 import {Reds} from '../../src/turmoil/parties/Reds';
 import {ReleaseOfInertGases} from '../../src/cards/base/ReleaseOfInertGases';
@@ -27,7 +28,7 @@ import {IParty} from '../../src/turmoil/parties/IParty';
 import {GreeneryStandardProject} from '../../src/cards/base/standardProjects/GreeneryStandardProject';
 
 describe('Turmoil', function() {
-  let player : Player; let player2 : Player; let game : Game; let turmoil: Turmoil;
+  let player : TestPlayer; let player2 : Player; let game : Game; let turmoil: Turmoil;
 
   beforeEach(function() {
     player = TestPlayers.BLUE.newPlayer();

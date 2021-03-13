@@ -10,6 +10,7 @@ import {PlaceMoonColonyTile} from '../../moon/PlaceMoonColonyTile';
 import {MoonExpansion} from '../../moon/MoonExpansion';
 import {ISpace} from '../../boards/ISpace';
 import {Resources} from '../../Resources';
+import {CardRenderDynamicVictoryPoints} from '../render/CardRenderDynamicVictoryPoints';
 
 export class TheGrandLunaCapitalGroup implements CorporationCard {
   public startingMegaCredits = 32;
@@ -19,7 +20,10 @@ export class TheGrandLunaCapitalGroup implements CorporationCard {
   public initialActionText = 'Place a colony tile';
 
   public readonly metadata: CardMetadata = {
-    description: 'You start with 32 MC and 1 titanium resource. As your first action, place a colony tile on the Moon and raise the Colony Rate 1 step.',
+    description: {
+      text: 'You start with 32 MC and 1 titanium. As your first action, place a colony tile on the Moon and raise the Colony Rate 1 step.',
+      align: 'left',
+    },
     cardNumber: 'MC7',
     renderData: CardRenderer.builder((b) => {
       b.megacredits(32).titanium(1).moonColony().br;
@@ -28,8 +32,9 @@ export class TheGrandLunaCapitalGroup implements CorporationCard {
           .startEffect
           .megacredits(2).slash().tile(TileType.MOON_COLONY, false);
       }).br,
-      b.text('1 VP for each colony tile adjacent to your colony tiles.').br;
+      b.vpText('1 VP for each colony tile adjacent to your colony tiles.').br;
     }),
+    victoryPoints: CardRenderDynamicVictoryPoints.colonyTile(1),
   };
 
   public play(player: Player) {

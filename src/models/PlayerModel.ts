@@ -37,6 +37,7 @@ export interface PlayerModel {
     energyProduction: number;
     fleetSize: number;
     gameAge: number;
+    timeline: number;
     gameOptions: GameOptionsModel;
     generation: number;
     heat: number;

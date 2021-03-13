@@ -1,7 +1,9 @@
 import * as http from 'http';
 import {Handler} from './Handler';
 import {IContext} from './IHandler';
-import {Server} from '../server/ServerModel';
+import {Phase} from '../Phase';
+import {Player} from '../Player';
+import {WaitingForModel} from '../models/WaitingForModel';
 
 export class ApiWaitingFor extends Handler {
   public static readonly INSTANCE = new ApiWaitingFor();
@@ -9,16 +11,26 @@ export class ApiWaitingFor extends Handler {
     super();
   }
 
+  private getWaitingForModel(player: Player, prevGameAge: number, prevTimeline: number): WaitingForModel {
+    if (player.getWaitingFor() !== undefined || player.game.phase === Phase.END) {
+      return {result: 'GO'};
+    } else if (player.game.gameAge > prevGameAge || player.game.timeline > prevTimeline) {
+      return {result: 'REFRESH'};
+    }
+    return {result: 'WAIT'};
+  }
+
   public get(req: http.IncomingMessage, res: http.ServerResponse, ctx: IContext): void {
     const playerId = String(ctx.url.searchParams.get('id'));
     const prevGameAge = Number(ctx.url.searchParams.get('prev-game-age'));
+    const prevTimeline = Number(ctx.url.searchParams.get('prev-timeline'));
     ctx.gameLoader.getByPlayerId(playerId, (game) => {
       if (game === undefined) {
         ctx.route.notFound(req, res, 'cannot find game for that player');
         return;
       }
       try {
-        ctx.route.writeJson(res, Server.getWaitingForModel(game.getPlayerById(playerId), prevGameAge));
+        ctx.route.writeJson(res, this.getWaitingForModel(game.getPlayerById(playerId), prevGameAge, prevTimeline));
       } catch (err) {
         // This is basically impossible since getPlayerById ensures that the player is on that game.
         console.warn(`unable to find player ${playerId}`, err);

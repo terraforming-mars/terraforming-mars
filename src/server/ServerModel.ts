@@ -39,7 +39,6 @@ import {ShiftAresGlobalParameters} from '../inputs/ShiftAresGlobalParameters';
 import {MoonModel} from '../models/MoonModel';
 import {CardName} from '../CardName';
 import {Units} from '../Units';
-import {WaitingForModel} from '../models/WaitingForModel';
 import {SelectPartyToSendDelegate} from '../inputs/SelectPartyToSendDelegate';
 
 export class Server {
@@ -121,6 +120,7 @@ export class Server {
       tags: player.getAllTags(),
       temperature: game.getTemperature(),
       terraformRating: player.getTerraformRating(),
+      timeline: game.timeline,
       timer: player.timer.serialize(),
       titanium: player.titanium,
       titaniumProduction: player.getProduction(Resources.TITANIUM),
@@ -131,16 +131,6 @@ export class Server {
       victoryPointsBreakdown: player.getVictoryPoints(),
       waitingFor: getWaitingFor(player, player.getWaitingFor()),
     };
-  }
-
-  // This is only ever used in ApiWaitingFor, and could be isolated from ServerModel.
-  public static getWaitingForModel(player: Player, prevGameAge: number): WaitingForModel {
-    if (player.getWaitingFor() !== undefined || player.game.phase === Phase.END) {
-      return {result: 'GO'};
-    } else if (player.game.gameAge > prevGameAge) {
-      return {result: 'REFRESH'};
-    }
-    return {result: 'WAIT'};
   }
 }
 

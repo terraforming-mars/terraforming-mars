@@ -10,6 +10,7 @@ import {SpaceBonus} from '../../src/SpaceBonus';
 import {Turmoil} from '../../src/turmoil/Turmoil';
 import {TestingUtils} from '../TestingUtils';
 import {TestPlayers} from '../TestPlayers';
+import {TestPlayer} from '../TestPlayer';
 import {Reds} from '../../src/turmoil/parties/Reds';
 import {ReleaseOfInertGases} from '../../src/cards/base/ReleaseOfInertGases';
 import {JovianEmbassy} from '../../src/cards/promo/JovianEmbassy';
@@ -28,7 +29,7 @@ import {IParty} from '../../src/turmoil/parties/IParty';
 import {GreeneryStandardProject} from '../../src/cards/base/standardProjects/GreeneryStandardProject';
 
 describe('Turmoil', function() {
-  let player : Player; let player2 : Player; let game : Game; let turmoil: Turmoil;
+  let player : TestPlayer; let player2 : Player; let game : Game; let turmoil: Turmoil;
 
   beforeEach(function() {
     player = TestPlayers.BLUE.newPlayer();

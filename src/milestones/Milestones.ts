@@ -63,3 +63,15 @@ export const ALL_MILESTONES: Array<IMilestone> = [
   ...VENUS_MILESTONES,
   ...ARES_MILESTONES,
   ...MOON_MILESTONES];
+
+export namespace Milestones {
+  export const ALL = ALL_MILESTONES;
+
+  export function getByName(name: string): IMilestone {
+    const milestone = ALL_MILESTONES.find((m) => m.name === name);
+    if (milestone) {
+      return milestone;
+    }
+    throw new Error(`Milestone ${name} not found.`);
+  }
+}

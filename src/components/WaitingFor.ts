@@ -18,7 +18,7 @@ import {SelectPartyToSendDelegate} from './SelectPartyToSendDelegate';
 import {PlayerInputModel} from '../models/PlayerInputModel';
 import {PlayerModel} from '../models/PlayerModel';
 import {PreferencesManager} from './PreferencesManager';
-import {playActivePlayerSound} from './SoundManager';
+import {SoundManager} from './SoundManager';
 import {SelectColony} from './SelectColony';
 import {SelectProductionToLose} from './SelectProductionToLose';
 import {ShiftAresGlobalParameters} from './ShiftAresGlobalParameters';
@@ -104,7 +104,7 @@ export const WaitingFor = Vue.component('waiting-for', {
                 });
               }
               const soundsEnabled = PreferencesManager.loadValue('enable_sounds') === '1';
-              if (soundsEnabled) playActivePlayerSound();
+              if (soundsEnabled) SoundManager.playActivePlayerSound();
 
               // We don't need to wait anymore - it's our turn
               return;

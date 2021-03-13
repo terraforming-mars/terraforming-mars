@@ -20,6 +20,8 @@ enum State {
   READY
 }
 
+type GameIdCallback = () => void;
+
 /**
  * Loads games from javascript memory or database
  * Loads games from database sequentially as needed
@@ -35,16 +37,10 @@ export class GameLoader implements IGameLoader {
   private readonly games = new Map<GameId, Game | undefined>();
 
   // player ids which we know exist mapped to game id
-  private readonly playerIds = new Map<PlayerId, GameId>();
+  private readonly onGameIdsLoaded: Array<GameIdCallback> = [];
 
-  // spectator ids which we know exist mapped to game id
-  private readonly spectatorIds = new Map<SpectatorId, GameId>();
-
-  // requests for game that are waiting to load
-  private readonly gameRequests: Array<() => void> = [];
-
-  // requests for player that are waiting to load
-  private readonly entityRequests: Array<() => void> = [];
+  // participant ids which we know exist mapped to game id
+  private readonly participantIds = new Map<SpectatorId | PlayerId, GameId>();
 
   private static instance?: GameLoader;
 
@@ -60,10 +56,10 @@ export class GameLoader implements IGameLoader {
   public add(game: Game): void {
     this.games.set(game.id, game);
     if (game.spectatorId !== undefined) {
-      this.spectatorIds.set(game.spectatorId, game.id);
+      this.participantIds.set(game.spectatorId, game.id);
     }
     for (const player of game.getPlayers()) {
-      this.playerIds.set(player.id, game.id);
+      this.participantIds.set(player.id, game.id);
     }
   }
 
@@ -76,7 +72,7 @@ export class GameLoader implements IGameLoader {
     if (bypassCache === false && this.games.get(gameId) !== undefined) {
       cb(this.games.get(gameId));
     } else if (this.games.has(gameId) || this.state !== State.READY) {
-      this.gameRequests.push(() => {
+      this.onGameIdsLoaded.unshift(() => {
         this.loadGame(gameId, bypassCache, this.onGameLoaded(cb));
       });
       this.loadNextGame();
@@ -85,14 +81,14 @@ export class GameLoader implements IGameLoader {
     }
   }
 
-  private getByEntityId<T>(id: T, map: Map<T, GameId>, cb: LoadCallback): void {
+  private getByParticipantId(id: PlayerId | SpectatorId, cb: LoadCallback): void {
     this.loadAllGameIds();
-    const gameId = map.get(id);
+    const gameId = this.participantIds.get(id);
     if (gameId !== undefined && this.games.get(gameId) !== undefined) {
       cb(this.games.get(gameId));
     } else if (gameId !== undefined || this.state !== State.READY) {
-      this.entityRequests.push(() => {
-        this.loadEntity(id, map, this.onGameLoaded(cb));
+      this.onGameIdsLoaded.push(() => {
+        this.loadParticipant(id, this.onGameLoaded(cb));
       });
       this.loadNextGame();
     } else {
@@ -101,11 +97,11 @@ export class GameLoader implements IGameLoader {
   }
 
   public getByPlayerId(playerId: PlayerId, cb: LoadCallback): void {
-    this.getByEntityId(playerId, this.playerIds, cb);
+    this.getByParticipantId(playerId, cb);
   }
 
   public getBySpectatorId(spectatorId: SpectatorId, cb: LoadCallback): void {
-    this.getByEntityId(spectatorId, this.spectatorIds, cb);
+    this.getByParticipantId(spectatorId, cb);
   }
 
   public restoreGameAt(gameId: GameId, saveId: number, cb: LoadCallback): void {
@@ -154,8 +150,8 @@ export class GameLoader implements IGameLoader {
     }
   }
 
-  private loadEntity<T>(id: T, map: Map<T, GameId>, cb: LoadCallback): void {
-    const gameId = map.get(id);
+  private loadParticipant(id: PlayerId | SpectatorId, cb: LoadCallback): void {
+    const gameId = this.participantIds.get(id);
     this.loadingGame = true;
     if (gameId === undefined) {
       console.warn(`GameLoader:id not found ${id}`);
@@ -179,15 +175,9 @@ export class GameLoader implements IGameLoader {
 
   private loadNextGame(): void {
     if (this.state === State.READY && this.loadingGame === false) {
-      const gameRequest = this.gameRequests.shift();
-      if (gameRequest !== undefined) {
-        gameRequest();
-        return;
-      }
-      const entityRequest = this.entityRequests.shift();
-      if (entityRequest !== undefined) {
-        entityRequest();
-        return;
+      const callback = this.onGameIdsLoaded.shift();
+      if (callback !== undefined) {
+        callback();
       }
     }
   }
@@ -227,10 +217,10 @@ export class GameLoader implements IGameLoader {
               if (this.games.get(gameId) === undefined) {
                 this.games.set(gameId, undefined);
                 if (game.spectatorId !== undefined) {
-                  this.spectatorIds.set(game.spectatorId, gameId);
+                  this.participantIds.set(game.spectatorId, gameId);
                 }
                 for (const player of game.players) {
-                  this.playerIds.set(player.id, gameId);
+                  this.participantIds.set(player.id, gameId);
                 }
               }
             }

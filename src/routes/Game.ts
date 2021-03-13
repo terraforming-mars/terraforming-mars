@@ -11,9 +11,9 @@ import {Server} from '../server/ServerModel';
 import {ServeAsset} from './ServeAsset';
 
 // A copy from server.ts. Please dedupe.
-function generateRandomId(): GameId {
+function generateRandomId(prefix: string): GameId {
   // 281474976710656 possible values.
-  return Math.floor(Math.random() * Math.pow(16, 12)).toString(16);
+  return prefix + Math.floor(Math.random() * Math.pow(16, 12)).toString(16);
 }
 
 // Oh, this could be called Game, but that would introduce all kinds of issues.
@@ -38,15 +38,15 @@ export class GameHandler extends Handler {
     req.once('end', () => {
       try {
         const gameReq = JSON.parse(body);
-        const gameId = generateRandomId();
-        const spectatorId = generateRandomId();
+        const gameId = generateRandomId('g');
+        const spectatorId = generateRandomId('s');
         const players = gameReq.players.map((obj: any) => {
           return new Player(
             obj.name,
             obj.color,
             obj.beginner,
             Number(obj.handicap), // For some reason handicap is coming up a string.
-            generateRandomId(),
+            generateRandomId('p'),
           );
         });
         let firstPlayerIdx: number = 0;
@@ -115,8 +115,7 @@ export class GameHandler extends Handler {
           });
         } else {
           const seed = Math.random();
-          const game = Game.newInstance(gameId, players, players[firstPlayerIdx], gameOptions, seed);
-          game.spectatorId = spectatorId;
+          const game = Game.newInstance(gameId, players, players[firstPlayerIdx], gameOptions, seed, spectatorId);
           GameLoader.getInstance().add(game);
           ctx.route.writeJson(res, Server.getGameModel(game));
         }

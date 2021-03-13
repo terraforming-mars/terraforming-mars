@@ -19,7 +19,7 @@ export class ThoriumRush extends Card implements IProjectCard {
 
       metadata: {
         description: 'Place 1 colony tile, 1 mining tile and 1 road tile on the Moon. ' +
-        'Raise Colony Rate, Mining Rate and Logistic Rate 1 step.',
+        'Raise the Colony Rate, Mining Rate and Logistic Rate 1 step.',
         cardNumber: 'M56',
         renderData: CardRenderer.builder((b) => {
           b.moonColony().moonMine().moonRoad();
@@ -27,9 +27,6 @@ export class ThoriumRush extends Card implements IProjectCard {
       },
     });
   };
-  public canPlay(): boolean {
-    return true;
-  }
 
   public play(player: Player) {
     player.game.defer(new PlaceMoonColonyTile(player));

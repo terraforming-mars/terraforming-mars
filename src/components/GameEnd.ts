@@ -122,9 +122,9 @@ export const GameEnd = Vue.component('game-end', {
                                 <th v-if="player.moon !== undefined">Moon Colonies</th>
                                 <th v-if="player.moon !== undefined">Moon Mines</th>
                                 <th>VP</th>
-                                <th>MC</th>
+                                <th class="game-end-total"><div class="game-end-total-column">Total</div></th>
+                                <th>M€</th>
                                 <th v-if="player.gameOptions.showTimers">Timer</th>
-                                <th><div class="game-end-total-column">Total</div></th>
                             </tr>
                         </thead>
                         <tbody>
@@ -140,9 +140,9 @@ export const GameEnd = Vue.component('game-end', {
                                 <td v-if="player.moon !== undefined">{{ p.victoryPointsBreakdown.moonColonies }}</td>
                                 <td v-if="player.moon !== undefined">{{ p.victoryPointsBreakdown.moonMines }}</td>
                                 <td>{{ p.victoryPointsBreakdown.victoryPoints }}</td>
-                                <td>{{ p.megaCredits }}</td>
-                                <td v-if="player.gameOptions.showTimers">{{ getTimer(p) }}</td>
-                                <td>{{ p.victoryPointsBreakdown.total }}</td>
+                                <td class="game-end-total">{{ p.victoryPointsBreakdown.total }}</td>
+                                <td class="game-end-mc">{{ p.megaCredits }}M€</td>
+                                <td v-if="player.gameOptions.showTimers" class="game-end-timer">{{ getTimer(p) }}</td>
                             </tr>
                         </tbody>
                     </table>
@@ -172,6 +172,7 @@ export const GameEnd = Vue.component('game-end', {
                         :spaces="player.spaces"
                         :venusNextExtension="player.gameOptions.venusNextExtension"
                         :venusScaleLevel="player.venusScaleLevel"
+                        :aresExtension="player.gameOptions.aresExtension"
                         :boardName ="player.gameOptions.boardName"
                         :oceans_count="player.oceans"
                         :oxygen_level="player.oxygenLevel"
@@ -180,7 +181,7 @@ export const GameEnd = Vue.component('game-end', {
                 </div>
                 <div class="game_end_block--log game-end-column">
                     <h2 v-i18n>Final game log</h2>
-                    <log-panel :id="player.id" :players="player.players"></log-panel>
+                    <log-panel :color="player.color" :generation="player.generation" :id="player.id" :lastSoloGeneration="player.lastSoloGeneration" :players="player.players"></log-panel>
                 </div>
                 </div>
             </div>

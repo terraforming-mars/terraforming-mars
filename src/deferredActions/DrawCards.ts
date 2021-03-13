@@ -59,6 +59,7 @@ export namespace DrawCards {
 
   export interface ChooseOptions {
     keepMax?: number,
+    logDrawnCard?: boolean,
     paying?: boolean,
   }
 
@@ -107,6 +108,9 @@ export namespace DrawCards {
               discard(player, selected, cards);
             },
           }));
+      } else if (options.logDrawnCard === true) {
+        keep(player, selected, DrawCards.LogType.DREW_VERBOSE);
+        discard(player, selected, cards);
       } else {
         keep(player, selected, options.paying ? DrawCards.LogType.BOUGHT : DrawCards.LogType.DREW);
         discard(player, selected, cards);

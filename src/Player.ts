@@ -67,6 +67,7 @@ import {ConvertPlants} from './cards/base/standardActions/ConvertPlants';
 import {ConvertHeat} from './cards/base/standardActions/ConvertHeat';
 import {Manutech} from './cards/venusNext/Manutech';
 import {LunaProjectOffice} from './cards/moon/LunaProjectOffice';
+import {GlobalParameter} from './GlobalParameter';
 
 export type PlayerId = string;
 
@@ -533,17 +534,17 @@ export class Player implements ISerializable<SerializedPlayer> {
     } else return 0;
   }
 
-  public getRequirementsBonus(venusOnly?: boolean): number {
+  public getRequirementsBonus(parameter: GlobalParameter): number {
     let requirementsBonus: number = 0;
     if (
       this.corporationCard !== undefined &&
           this.corporationCard.getRequirementBonus !== undefined) {
-      requirementsBonus += this.corporationCard.getRequirementBonus(this, venusOnly);
+      requirementsBonus += this.corporationCard.getRequirementBonus(this, parameter);
     }
     for (const playedCard of this.playedCards) {
       if (playedCard.getRequirementBonus !== undefined &&
-          playedCard.getRequirementBonus(this)) {
-        requirementsBonus += playedCard.getRequirementBonus(this);
+          playedCard.getRequirementBonus(this, parameter)) {
+        requirementsBonus += playedCard.getRequirementBonus(this, parameter);
       }
     }
 
@@ -903,6 +904,10 @@ export class Player implements ISerializable<SerializedPlayer> {
     } else {
       throw new Error('Unsupported waitingFor');
     }
+  }
+
+  public getAvailableBlueActionCount(): number {
+    return this.getPlayableActionCards().length;
   }
 
   private getPlayableActionCards(): Array<ICard> {
@@ -1665,12 +1670,21 @@ export class Player implements ISerializable<SerializedPlayer> {
   private getStandardProjects(): Array<StandardProjectCard> {
     return new CardLoader(this.game.gameOptions)
       .getStandardProjects()
-      .filter((card) => card.name !== CardName.SELL_PATENTS_STANDARD_PROJECT)
+      .filter((card) => {
+        // sell patents is not displayed as a card
+        if (card.name === CardName.SELL_PATENTS_STANDARD_PROJECT) {
+          return false;
+        }
+        // only show buffer gas in solo mode
+        if (card.name === CardName.BUFFER_GAS_STANDARD_PROJECT && this.game.isSoloMode()) {
+          return false;
+        }
+        return true;
+      })
       .sort((a, b) => a.cost - b.cost);
   }
 
-  // Public for testing. TODO: make protected using the TestPlayer class.
-  public getStandardProjectOption(): SelectCard<StandardProjectCard> {
+  protected getStandardProjectOption(): SelectCard<StandardProjectCard> {
     const standardProjects: Array<StandardProjectCard> = this.getStandardProjects();
 
     return new SelectCard(

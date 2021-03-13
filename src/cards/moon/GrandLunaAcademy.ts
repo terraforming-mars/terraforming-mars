@@ -15,7 +15,7 @@ export class GrandLunaAcademy extends Card implements IProjectCard {
       cost: 13,
 
       metadata: {
-        description: 'Draw 1 card per each 2 Moon tags you have, including this.',
+        description: 'Draw 1 card per 2 Moon tags you have, including this.',
         cardNumber: 'M83',
         renderData: CardRenderer.builder((b) => {
           b.cards(1).slash().moon(2).digit.played;
@@ -23,10 +23,6 @@ export class GrandLunaAcademy extends Card implements IProjectCard {
       },
     });
   };
-
-  public canPlay(): boolean {
-    return true;
-  }
 
   public play(player: Player) {
     const tags = player.getTagCount(Tags.MOON);

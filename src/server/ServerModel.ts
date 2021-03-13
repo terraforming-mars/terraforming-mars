@@ -67,6 +67,7 @@ export class Server {
       actionsTakenThisRound: player.actionsTakenThisRound,
       actionsThisGeneration: Array.from(player.getActionsThisGeneration()),
       aresData: game.aresData,
+      availableBlueCardActionCount: player.getAvailableBlueActionCount(),
       awards: getAwards(game),
       cardCost: player.cardCost,
       cardsInHand: getCards(player, player.cardsInHand, {showNewCost: true}),
@@ -432,6 +433,7 @@ function getPlayers(players: Array<Player>, game: Game): Array<PlayerModel> {
       deckSize: game.dealer.getDeckSize(),
       actionsTakenThisRound: player.actionsTakenThisRound,
       timer: player.timer.serialize(),
+      availableBlueCardActionCount: player.getAvailableBlueActionCount(),
     } as PlayerModel;
   });
 }

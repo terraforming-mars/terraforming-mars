@@ -30,11 +30,6 @@ export class SubterraneanHabitats extends MoonCard implements IProjectCard {
     });
   };
 
-
-  public canPlay(player: Player): boolean {
-    return super.canPlay(player);
-  }
-
   public play(player: Player) {
     super.play(player);
     MoonExpansion.raiseColonyRate(player);

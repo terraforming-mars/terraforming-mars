@@ -26,7 +26,7 @@ export abstract class MoonCard extends Card implements IProjectCard, IMoonCard {
   }
 
   public canPlay(player: Player) {
-    return Units.canAdjustProduction(this.productionBox, player);
+    return super.canPlay(player) && Units.canAdjustProduction(this.productionBox, player);
   }
 
   public play(player: Player) {

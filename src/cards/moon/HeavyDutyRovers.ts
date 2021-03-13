@@ -13,10 +13,6 @@ export class HeavyDutyRovers implements IProjectCard {
   public cardType = CardType.AUTOMATED;
   public name = CardName.HEAVY_DUTY_ROVERS;
 
-  public canPlay(): boolean {
-    return true;
-  }
-
   public play(player: Player) {
     MoonExpansion.ifMoon(player.game, (moonData) => {
       const mines = moonData.moon.getSpacesWithTile(TileType.MOON_MINE);
@@ -33,7 +29,7 @@ export class HeavyDutyRovers implements IProjectCard {
   }
 
   public readonly metadata: CardMetadata = {
-    description: 'Gain 4 MC for each mining tile adjacent to a road tile. Raise Logistic Rate 1 step.',
+    description: 'Gain 4 MC for each mining tile adjacent to a road tile. Raise the Logistic Rate 1 step.',
     cardNumber: 'M39',
     renderData: CardRenderer.builder((b) => {
       // TODO(kberg): Can the two tiles abut each other?

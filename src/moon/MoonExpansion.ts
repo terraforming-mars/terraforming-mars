@@ -36,7 +36,7 @@ export class MoonExpansion {
   }
 
   // If the moon expansion is enabled, execute this callback, otherwise do nothing.
-  public static ifMoon<T>(game: Game, cb: (moonData: IMoonData) => T, elseCb?: () => T) {
+  public static ifMoon<T>(game: Game, cb: (moonData: IMoonData) => T): T | undefined {
     if (game.gameOptions.moonExpansion) {
       if (game.moonData === undefined) {
         console.log(`Assertion failure: game.moonData is undefined for ${game.id}`);
@@ -44,7 +44,19 @@ export class MoonExpansion {
         return cb(game.moonData);
       }
     }
-    return elseCb ? elseCb() : undefined;
+    return undefined;
+  }
+
+  // If the moon expansion is enabled, execute this callback, otherwise execute the else callback.
+  public static ifElseMoon<T>(game: Game, cb: (moonData: IMoonData) => T, elseCb: () => T): T {
+    if (game.gameOptions.moonExpansion) {
+      if (game.moonData === undefined) {
+        console.log(`Assertion failure: game.moonData is undefined for ${game.id}`);
+      } else {
+        return cb(game.moonData);
+      }
+    }
+    return elseCb();
   }
 
   // If the moon expansion is enabled, return with the game's MoonData instance, otherwise throw an error.
@@ -199,10 +211,13 @@ export class MoonExpansion {
    *
    * Special tiles such as Lunar Mine Urbanization, are especially included.
    */
-  public static tiles(game: Game, tileType: TileType, surfaceOnly: boolean = false): Array<ISpace> {
-    let tiles: Array<ISpace> = [];
-    MoonExpansion.ifMoon(game, (moonData) => {
-      tiles = moonData.moon.spaces.filter(
+  public static tiles(
+    game: Game,
+    tileType: TileType,
+    surfaceOnly: boolean = false,
+    player? : Player): Array<ISpace> {
+    return MoonExpansion.ifElseMoon(game, (moonData) => {
+      return moonData.moon.spaces.filter(
         (space) => {
           if (space.tile === undefined) {
             return false;
@@ -214,17 +229,20 @@ export class MoonExpansion {
           } else if (tileType === TileType.MOON_MINE) {
             include = type === TileType.MOON_MINE || type === TileType.LUNAR_MINE_URBANIZATION;
           } else {
-            include = include && type === tileType;
+            include = type === tileType;
           }
 
-          if (surfaceOnly) {
-            include = include && space.spaceType !== SpaceType.COLONY;
+          if (include && surfaceOnly) {
+            include = space.spaceType !== SpaceType.COLONY;
+          }
+
+          if (include && player !== undefined) {
+            include = space.player === player;
           }
 
           return include;
         });
-    });
-    return tiles;
+    }, () => []);
   }
 
   /*

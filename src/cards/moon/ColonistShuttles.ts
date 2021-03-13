@@ -17,7 +17,7 @@ export class ColonistShuttles extends MoonCard {
       cost: 12,
 
       metadata: {
-        description: 'Spend 1 titanium. Raise Colony Rate 1 step. Gain 2MC for each colony tile on the Moon.',
+        description: 'Spend 1 titanium. Raise the Colony Rate 1 step. Gain 2MC for each colony tile on the Moon.',
         cardNumber: 'M16',
         renderData: CardRenderer.builder((b) => {
           b.minus().titanium(1).moonColonyRate().br;

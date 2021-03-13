@@ -23,6 +23,7 @@ import {Helion} from '../src/cards/corporation/Helion';
 import {CardName} from '../src/CardName';
 import {Player} from '../src/Player';
 import {Color} from '../src/Color';
+import {RandomMAOptionType} from '../src/RandomMAOptionType';
 
 describe('Game', function() {
   it('should initialize with right defaults', function() {
@@ -433,7 +434,7 @@ describe('Game', function() {
   it('Generates random milestones and awards', function() {
     const player = TestPlayers.BLUE.newPlayer();
     const player2 = TestPlayers.RED.newPlayer();
-    const gameOptions = setCustomGameOptions({boardName: BoardName.HELLAS, randomMA: true});
+    const gameOptions = setCustomGameOptions({boardName: BoardName.HELLAS, randomMA: RandomMAOptionType.UNLIMITED});
     const game = Game.newInstance('foobar', [player, player2], player, gameOptions);
 
     const prevMilestones = game.milestones.map((m) => m.name).sort();

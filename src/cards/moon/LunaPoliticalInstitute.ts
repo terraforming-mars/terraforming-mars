@@ -30,10 +30,6 @@ export class LunaPoliticalInstitute extends Card implements IActionCard, IProjec
     });
   };
 
-  public canPlay(player: Player): boolean {
-    return player.getTagCount(Tags.MOON) >= 2;
-  }
-
   public play() {
     return undefined;
   }

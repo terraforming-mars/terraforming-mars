@@ -1,5 +1,5 @@
 {
-    "Terraforming Mars": "Terraformando Marte",
+    "Terraforming Mars": "Terraforming Mars",
     "Create New Game": "Crear nueva partida",
     "№ of Players": "Número de jugadores",
     "Expansions": "Expansiones",
@@ -24,9 +24,6 @@
     " milestone" : " como hito",
     "greenery": "Vegetación",
     "city": "ciudad",
-
-
-
 
     "tharsis": "Tharsis",
     "hellas": "Hellas",
@@ -147,7 +144,6 @@
     "Played Cards":"ha jugado las cartas",
     "played cards":"ha jugado las cartas",
 
-
     "Select which cards to take into hand": "Seleccionar que cartas deseas llevarte a la mano (3 )",
     "Not enough cards selected": "No hay suficientes cartas seleccionadas",
 
@@ -166,7 +162,6 @@
     "Pass": "Pasar",
     "Pay for a Standard Project": "Pagar por un Proyecto Estándar",
     "Play project card": "Jugar una carta de proyecto",
-    "Sell patents": "Vender patentes",
     "Fund an award": "Financiar recompensa",
     "Take action for action phase, select one available action.": "Selecciona una de las acciones disponibles:",
     "Undo last action": "Deshacer última acción",
@@ -181,7 +176,6 @@
     "Air scrapping (15 MC)": "Aire excedente (15 М€)",
     "Buffer Gas (16 MC)": "Colchón de gas (16 М€)",
     "Power plant": "Planta energética",
-    "Asteroid": "Asteroide",
     "Aquifer": "Acuífero",
     "Greenery": "Vegetación",
     "City": "Ciudad",
@@ -203,8 +197,7 @@
     "Donate": "Donar",
     "LoginOut": "Cerrar sesión",
     "Help Translation": "Ayudar a Traducir",
-    
-        
+
     "Toggle all": "Invertir selección",
     "Base": "Juego base",
     "Agendas": "Agendas",
@@ -220,8 +213,6 @@
     "filter": "filtrar",
     "Filter description": "Filtrar descripción",
     "Sort by ID": "Ordenar por ID",
-
- 
 
      "Remove colony": "Quitar colonia",
      "Select colony tile to remove":  "Selecciona loseta de colonia que deseas quitar",
@@ -247,26 +238,10 @@
      "Show timers": "Mostrar cronómetros",
      "You cannot pay for this card": "No puedes pagar esta carta",
      "Select card(s) to buy":"Selecciona carta/s que deseas comprar",
-   
+
     "Starting Megacredits:":"Megacréditos iniciales：",
     "After Preludes:":"Después de cartas de Preludio：",
-    
-    
-    "Air Scrapping": "Aire excedente",
-    "Buffer Gas": "Colchón de Gas",
-    "(Spend 16 MC to increase your TR 1 step. Solo games only.)": "Incrementa un VT por 16 М€. Únicamente en modo solitario.",
-    "Sell Patents": "Vender Patentes",
-    "(Discard any number of cards to gain that amount of MC.)": "(Descarta un número de cartas para ganar dicho número de М€.)",
-    "(Spend 11 MC to increase your Energy production 1 step.)": "(Incrementa la producción de energía 1 nivel por 11 М€.)",
-    "(Spend 14 MC to raise temperature 1 step.)":"(Incrementa la temperatura 1 nivel por 14 М€.)",
-    "(Spend 15 MC to raise Venus 1 step.)": "(Incrementa en 1 nivel la terraformación de Venus por 15 М€.)",
-    "(Spend 17 MC to place a colony.)":"(Coloca 1 colonia por 17 М€.)",
-    "(Spend 18 MC to place an ocean tile.)":"(Coloca 1 loseta de océano por 18 М€.)",
-    "(Spend 23 MC to place a greenery tile and raise oxygen 1 step.)":"(Coloca 1 loseta de vegetación por 23 М€.)",
-    "(Spend 25 MC to place a city tile and increase your MC production 1 step.)":"(Coloca 1 loseta de vegetación por 25 М€.)",
 
-    
-    
     "Select a card to keep and pass the rest to ${0}": "Escoge la carta que deseas conservar y pasa el resto al jugador ->${0}",
     "Select two cards to keep and pass the rest to ${0}": "Excoge dos cartas que desees conservar y pasa el reto al jugador ->${0}",
     "Game Home": "Resumen de la partida",
@@ -302,7 +277,7 @@
     "Hide": "Ocultar",
     "Show": "Mostrar",
     "Your selected cards": "Las cartas que has seleccionado",
-        
+
     "All": "Todas",   
     "Corporate Era": "Era corporativa",
     "Randomize board tiles": "Areas de tablero aleatorias",
@@ -332,7 +307,7 @@
     "Turmoil": "Conflictos",
 
     "TR solo mode": "VT modo solitario",
-    
+
     "Players": "Jugadores",
 
     "Goes First?": "¿Va el primero?",

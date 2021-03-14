@@ -174,6 +174,7 @@ export class Game implements ISerializable<SerializedGame> {
 
   // Drafting
   private draftRound: number = 1;
+  // Used when drafting the first 10 project cards.
   private initialDraftIteration: number = 1;
   private unDraftedCards: Map<PlayerId, Array<IProjectCard>> = new Map();
 

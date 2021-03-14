@@ -1014,12 +1014,18 @@ export class Player implements ISerializable<SerializedPlayer> {
     });
   }
 
-  public dealCards(quantity: number, cards: Array<IProjectCard>) {
+  public dealCards(quantity: number, cards: Array<IProjectCard>): void {
     for (let i = 0; i < quantity; i++) {
       cards.push(this.game.dealer.dealCard(this.game, true));
     }
   }
 
+  /*
+   * @param initialDraft when true, this is part of the first generation draft.
+   * @param playerName  The player _this_ player passes remaining cards to.
+   * @param passedCards The cards received from the draw, or from the prior player. If empty, it's the first
+   *   step in the draft, and cards have to be dealt.
+   */
   public runDraftPhase(initialDraft: boolean, playerName: string, passedCards?: Array<IProjectCard>): void {
     let cardsToKeep = 1;
 
@@ -1055,8 +1061,10 @@ export class Player implements ISerializable<SerializedPlayer> {
       'Keep',
       cards,
       (foundCards: Array<IProjectCard>) => {
-        this.draftedCards.push(foundCards[0]);
-        cards = cards.filter((card) => card !== foundCards[0]);
+        foundCards.forEach((card) => {
+          this.draftedCards.push(card);
+          cards = cards.filter((c) => c !== card);
+        });
         this.game.playerIsFinishedWithDraftingPhase(initialDraft, this, cards);
         return undefined;
       }, cardsToKeep, cardsToKeep,

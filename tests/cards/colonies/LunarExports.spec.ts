@@ -3,7 +3,7 @@ import {LunarExports} from '../../../src/cards/colonies/LunarExports';
 import {Game} from '../../../src/Game';
 import {OrOptions} from '../../../src/inputs/OrOptions';
 import {Resources} from '../../../src/Resources';
-import {TestPlayers} from '../../TestingUtils';
+import {TestPlayers} from '../../TestPlayers';
 
 describe('LunarExports', function() {
   it('Should play', function() {

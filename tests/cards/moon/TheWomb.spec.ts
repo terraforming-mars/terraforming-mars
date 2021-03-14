@@ -1,12 +1,13 @@
 import {Game} from '../../../src/Game';
-import {setCustomGameOptions, TestPlayers} from '../../TestingUtils';
+import {TestingUtils} from '../../TestingUtils';
+import {TestPlayers} from '../../TestPlayers';
 import {TestPlayer} from '../../TestPlayer';
 import {TheWomb} from '../../../src/cards/moon/TheWomb';
 import {expect} from 'chai';
 import {Resources} from '../../../src/Resources';
 import {PlaceMoonColonyTile} from '../../../src/moon/PlaceMoonColonyTile';
 
-const MOON_OPTIONS = setCustomGameOptions({moonExpansion: true});
+const MOON_OPTIONS = TestingUtils.setCustomGameOptions({moonExpansion: true});
 
 describe('TheWomb', () => {
   let player: TestPlayer;

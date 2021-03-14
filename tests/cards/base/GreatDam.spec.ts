@@ -3,7 +3,8 @@ import {GreatDam} from '../../../src/cards/base/GreatDam';
 import {Game} from '../../../src/Game';
 import {Player} from '../../../src/Player';
 import {Resources} from '../../../src/Resources';
-import {TestingUtils, TestPlayers} from '../../TestingUtils';
+import {TestingUtils} from '../../TestingUtils';
+import {TestPlayers} from '../../TestPlayers';
 
 describe('GreatDam', function() {
   let card : GreatDam; let player : Player;

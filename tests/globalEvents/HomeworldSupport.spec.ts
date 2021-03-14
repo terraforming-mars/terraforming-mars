@@ -5,7 +5,7 @@ import {Resources} from '../../src/Resources';
 import {HomeworldSupport} from '../../src/turmoil/globalEvents/HomeworldSupport';
 import {Kelvinists} from '../../src/turmoil/parties/Kelvinists';
 import {Turmoil} from '../../src/turmoil/Turmoil';
-import {TestPlayers} from '../TestingUtils';
+import {TestPlayers} from '../TestPlayers';
 
 describe('HomeworldSupport', function() {
   it('resolve play', function() {

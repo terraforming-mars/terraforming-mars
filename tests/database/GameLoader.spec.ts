@@ -4,7 +4,7 @@ import {Game} from '../../src/Game';
 import {GameLoader} from '../../src/database/GameLoader';
 import {Player} from '../../src/Player';
 import {SerializedGame} from '../../src/SerializedGame';
-import {TestPlayers} from '../TestingUtils';
+import {TestPlayers} from '../TestPlayers';
 
 describe('GameLoader', function() {
   const expectedGameIds: Array<string> = ['alpha', 'foobar'];

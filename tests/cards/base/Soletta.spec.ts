@@ -3,7 +3,7 @@ import {expect} from 'chai';
 import {Soletta} from '../../../src/cards/base/Soletta';
 import {Game} from '../../../src/Game';
 import {Resources} from '../../../src/Resources';
-import {TestPlayers} from '../../TestingUtils';
+import {TestPlayers} from '../../TestPlayers';
 
 describe('Soletta', function() {
   it('Should play', function() {

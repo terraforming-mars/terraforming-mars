@@ -4,7 +4,7 @@ import {ResearchOutpost} from '../../../src/cards/base/ResearchOutpost';
 import {Aridor} from '../../../src/cards/colonies/Aridor';
 import {Game} from '../../../src/Game';
 import {Resources} from '../../../src/Resources';
-import {TestPlayers} from '../../TestingUtils';
+import {TestPlayers} from '../../TestPlayers';
 
 describe('Aridor', function() {
   it('Should play', function() {

@@ -1,12 +1,13 @@
 import {Game} from '../../../src/Game';
-import {setCustomGameOptions, TestPlayers} from '../../TestingUtils';
+import {TestingUtils} from '../../TestingUtils';
+import {TestPlayers} from '../../TestPlayers';
 import {LunaProjectOffice} from '../../../src/cards/moon/LunaProjectOffice';
 import {expect} from 'chai';
 import {SelectCard} from '../../../src/inputs/SelectCard';
 import {IProjectCard} from '../../../src/cards/IProjectCard';
 import {Player} from '../../../src/Player';
 
-const MOON_OPTIONS = setCustomGameOptions({moonExpansion: true});
+const MOON_OPTIONS = TestingUtils.setCustomGameOptions({moonExpansion: true});
 
 describe('LunaProjectOffice', () => {
   it('can play', () => {
@@ -30,7 +31,7 @@ describe('LunaProjectOffice', () => {
       'id',
       [player],
       player,
-      setCustomGameOptions({
+      TestingUtils.setCustomGameOptions({
         moonExpansion: true,
         turmoilExtension: false,
       }));
@@ -77,7 +78,7 @@ describe('LunaProjectOffice', () => {
       'id',
       [player, redPlayer],
       player,
-      setCustomGameOptions({
+      TestingUtils.setCustomGameOptions({
         moonExpansion: true,
         draftVariant: true,
         turmoilExtension: false,
@@ -134,7 +135,7 @@ describe('LunaProjectOffice', () => {
       'id',
       [player, redPlayer],
       player,
-      setCustomGameOptions({
+      TestingUtils.setCustomGameOptions({
         moonExpansion: true,
         draftVariant: false,
         turmoilExtension: false,

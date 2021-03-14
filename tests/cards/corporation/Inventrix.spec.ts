@@ -2,7 +2,7 @@ import {expect} from 'chai';
 import {Inventrix} from '../../../src/cards/corporation/Inventrix';
 import {Game} from '../../../src/Game';
 import {Player} from '../../../src/Player';
-import {TestPlayers} from '../../TestingUtils';
+import {TestPlayers} from '../../TestPlayers';
 
 describe('Inventrix', function() {
   let card : Inventrix; let player : Player;

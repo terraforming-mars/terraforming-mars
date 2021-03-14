@@ -10,7 +10,6 @@ import {Phase} from '../src/Phase';
 import {IParty} from '../src/turmoil/parties/IParty';
 import {Turmoil} from '../src/turmoil/Turmoil';
 import {TurmoilPolicy} from '../src/turmoil/TurmoilPolicy';
-import {TestPlayers as NewTestPlayers} from './TestPlayers';
 
 export class TestingUtils {
   // Returns the oceans created during this operation which may not reflect all oceans.
@@ -106,14 +105,4 @@ export class TestingUtils {
     game.getPlayers().forEach((player) => player.pass());
     game.playerIsFinishedTakingActions();
   }
-}
-
-export const setCustomGameOptions = function(options: Partial<GameOptions> = {}): GameOptions {
-  return TestingUtils.setCustomGameOptions(options);
-};
-
-// Prefer these players when testing, as their IDs are easy to recognize in output.
-export class TestPlayers {
-  public static BLUE = NewTestPlayers.BLUE;
-  public static RED = NewTestPlayers.RED;
 }

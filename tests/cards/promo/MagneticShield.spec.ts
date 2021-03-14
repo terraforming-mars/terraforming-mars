@@ -3,7 +3,7 @@ import {PowerPlant} from '../../../src/cards/base/PowerPlant';
 import {MagneticShield} from '../../../src/cards/promo/MagneticShield';
 import {Game} from '../../../src/Game';
 import {Player} from '../../../src/Player';
-import {TestPlayers} from '../../TestingUtils';
+import {TestPlayers} from '../../TestPlayers';
 
 describe('MagneticShield', function() {
   let card : MagneticShield; let player : Player;

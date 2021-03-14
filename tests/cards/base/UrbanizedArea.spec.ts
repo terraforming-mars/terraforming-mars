@@ -6,7 +6,7 @@ import {Player} from '../../../src/Player';
 import {Resources} from '../../../src/Resources';
 import {SpaceName} from '../../../src/SpaceName';
 import {SpaceType} from '../../../src/SpaceType';
-import {TestPlayers} from '../../TestingUtils';
+import {TestPlayers} from '../../TestPlayers';
 
 describe('UrbanizedArea', function() {
   let card : UrbanizedArea; let player : Player; let game : Game; let lands: ISpace[];

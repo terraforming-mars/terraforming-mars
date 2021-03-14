@@ -3,7 +3,7 @@ import {Livestock} from '../../../src/cards/base/Livestock';
 import {Game} from '../../../src/Game';
 import {Player} from '../../../src/Player';
 import {Resources} from '../../../src/Resources';
-import {TestPlayers} from '../../TestingUtils';
+import {TestPlayers} from '../../TestPlayers';
 
 describe('Livestock', function() {
   let card : Livestock; let player : Player; let game : Game;

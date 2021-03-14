@@ -1,7 +1,7 @@
 import {expect} from 'chai';
 import {MiningOperations} from '../../../src/cards/prelude/MiningOperations';
 import {Resources} from '../../../src/Resources';
-import {TestPlayers} from '../../TestingUtils';
+import {TestPlayers} from '../../TestPlayers';
 
 describe('MiningOperations', function() {
   it('Should play', function() {

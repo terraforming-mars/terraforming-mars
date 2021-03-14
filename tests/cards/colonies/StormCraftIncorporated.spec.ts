@@ -4,7 +4,7 @@ import * as constants from '../../../src/constants';
 import {Game} from '../../../src/Game';
 import {SelectAmount} from '../../../src/inputs/SelectAmount';
 import {Player} from '../../../src/Player';
-import {TestPlayers} from '../../TestingUtils';
+import {TestPlayers} from '../../TestPlayers';
 
 describe('StormCraftIncorporated', function() {
   let card : StormCraftIncorporated; let player : Player;

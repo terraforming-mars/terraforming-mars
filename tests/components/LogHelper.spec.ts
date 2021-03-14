@@ -5,7 +5,7 @@ import {Ants} from '../../src/cards/base/Ants';
 import {Birds} from '../../src/cards/base/Birds';
 import {Game} from '../../src/Game';
 import {LogHelper} from '../../src/LogHelper';
-import {TestPlayers} from '../TestingUtils';
+import {TestPlayers} from '../TestPlayers';
 
 describe('LogHelper', function() {
   it('logs drawn cards by card', function() {

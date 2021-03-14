@@ -5,7 +5,7 @@ import {Tardigrades} from '../../../src/cards/base/Tardigrades';
 import {Ants} from '../../../src/cards/base/Ants';
 import {Game} from '../../../src/Game';
 import {AerobrakedAmmoniaAsteroid} from '../../../src/cards/base/AerobrakedAmmoniaAsteroid';
-import {TestPlayers} from '../../TestingUtils';
+import {TestPlayers} from '../../TestPlayers';
 
 describe('TopsoilContract', function() {
   let card : TopsoilContract; let player : Player; let player2 : Player;

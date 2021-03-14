@@ -1,10 +1,11 @@
-import {setCustomGameOptions, TestPlayers} from '../../TestingUtils';
+import {TestingUtils} from '../../TestingUtils';
+import {TestPlayers} from '../../TestPlayers';
 import {GrandLunaAcademy} from '../../../src/cards/moon/GrandLunaAcademy';
 import {expect} from 'chai';
 import {TestPlayer} from '../../TestPlayer';
 import {Game} from '../../../src/Game';
 
-const MOON_OPTIONS = setCustomGameOptions({moonExpansion: true});
+const MOON_OPTIONS = TestingUtils.setCustomGameOptions({moonExpansion: true});
 
 describe('GrandLunaAcademy', () => {
   let player: TestPlayer;

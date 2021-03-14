@@ -273,7 +273,6 @@ export namespace MilestoneAwardSelector {
     numberMARequested: number,
     constraints: Constraints,
     attempt: number = 1): IDrawnMilestonesAndAwards {
-
     // 5 is a fine number of attempts. A sample of 100,000 runs showed that this algorithm
     // didn't get past 3.
     // https://github.com/bafolts/terraforming-mars/pull/1637#issuecomment-711411034

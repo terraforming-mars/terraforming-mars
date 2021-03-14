@@ -11,6 +11,7 @@ import {CardType} from '../CardType';
 import {DeferredAction, Priority} from '../../deferredActions/DeferredAction';
 import {CardRenderer} from '../render/CardRenderer';
 import {CardRenderItemSize} from '../render/CardRenderItemSize';
+import {BoardId} from '../../boards/BoardId';
 
 export class Philares extends Card implements CorporationCard {
   constructor() {
@@ -106,7 +107,13 @@ export class Philares extends Card implements CorporationCard {
     return selectResources;
   }
 
-  public onTilePlaced(cardOwner: Player, activePlayer: Player, space: ISpace) {
+  public onTilePlaced(cardOwner: Player, activePlayer: Player, space: ISpace, boardId: BoardId) {
+    // TODO(kberg): Clarify that this is nerfed for The Moon.
+    // Nerfing on The Moon.
+    if (boardId !== BoardId.MARS) {
+      return;
+    }
+
     if (space.player === undefined) {
       return;
     }

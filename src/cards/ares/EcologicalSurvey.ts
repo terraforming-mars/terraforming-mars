@@ -14,6 +14,7 @@ import {IProjectCard} from '../IProjectCard';
 import {Tags} from '../Tags';
 import {CardRequirements} from '../CardRequirements';
 import {CardRenderer} from '../render/CardRenderer';
+import {BoardId} from '../../boards/BoardId';
 
 export class EcologicalSurvey extends Card implements IProjectCard {
   constructor() {
@@ -41,7 +42,11 @@ export class EcologicalSurvey extends Card implements IProjectCard {
     return player.game.board.getAdjacentSpaces(space).some((adj) => adj.adjacency?.bonus.includes(bonus));
   }
 
-  public onTilePlaced(cardOwner: Player, activePlayer: Player, space: ISpace) {
+  public onTilePlaced(cardOwner: Player, activePlayer: Player, space: ISpace, boardId: BoardId) {
+    // Adjacency bonuses are only available on Mars.
+    if (boardId !== BoardId.MARS) {
+      return;
+    }
     if (cardOwner.game.phase === Phase.SOLAR || cardOwner.id !== activePlayer.id) {
       return;
     }

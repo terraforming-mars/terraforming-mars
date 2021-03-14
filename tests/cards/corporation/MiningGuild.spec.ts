@@ -7,6 +7,7 @@ import {SpaceBonus} from '../../../src/SpaceBonus';
 import {SpaceType} from '../../../src/SpaceType';
 import {Phase} from '../../../src/Phase';
 import {TestPlayers, TestingUtils} from '../../TestingUtils';
+import {BoardId} from '../../../src/boards/BoardId';
 
 describe('MiningGuild', function() {
   let card : MiningGuild; let player : Player; let player2 : Player; let game: Game;
@@ -27,19 +28,19 @@ describe('MiningGuild', function() {
   });
 
   it('Gives steel production bonus when placing tiles', function() {
-    card.onTilePlaced(player, player, {player, spaceType: SpaceType.LAND, x: 0, y: 0, id: 'foobar', bonus: []});
+    card.onTilePlaced(player, player, {player, spaceType: SpaceType.LAND, x: 0, y: 0, id: 'foobar', bonus: []}, BoardId.MARS);
     TestingUtils.runAllActions(game);
     expect(player.getProduction(Resources.STEEL)).to.eq(0);
 
-    card.onTilePlaced(player, player, {player, spaceType: SpaceType.LAND, x: 0, y: 0, id: 'foobar', bonus: [SpaceBonus.STEEL, SpaceBonus.TITANIUM]});
+    card.onTilePlaced(player, player, {player, spaceType: SpaceType.LAND, x: 0, y: 0, id: 'foobar', bonus: [SpaceBonus.STEEL, SpaceBonus.TITANIUM]}, BoardId.MARS);
     TestingUtils.runAllActions(game);
     expect(player.getProduction(Resources.STEEL)).to.eq(1);
 
-    card.onTilePlaced(player, player, {player, spaceType: SpaceType.LAND, x: 0, y: 0, id: 'foobar', bonus: [SpaceBonus.STEEL]});
+    card.onTilePlaced(player, player, {player, spaceType: SpaceType.LAND, x: 0, y: 0, id: 'foobar', bonus: [SpaceBonus.STEEL]}, BoardId.MARS);
     TestingUtils.runAllActions(game);
     expect(player.getProduction(Resources.STEEL)).to.eq(2);
 
-    card.onTilePlaced(player, player, {player, spaceType: SpaceType.LAND, x: 0, y: 0, id: 'foobar', bonus: [SpaceBonus.TITANIUM]});
+    card.onTilePlaced(player, player, {player, spaceType: SpaceType.LAND, x: 0, y: 0, id: 'foobar', bonus: [SpaceBonus.TITANIUM]}, BoardId.MARS);
     TestingUtils.runAllActions(game);
     expect(player.getProduction(Resources.STEEL)).to.eq(3);
   });
@@ -56,7 +57,7 @@ describe('MiningGuild', function() {
   });
 
   it('Does not give bonus when other players place tiles', function() {
-    card.onTilePlaced(player, player2, {player, spaceType: SpaceType.LAND, x: 0, y: 0, id: 'foobar', bonus: [SpaceBonus.TITANIUM]});
+    card.onTilePlaced(player, player2, {player, spaceType: SpaceType.LAND, x: 0, y: 0, id: 'foobar', bonus: [SpaceBonus.TITANIUM]}, BoardId.MARS);
     TestingUtils.runAllActions(game);
     expect(player.getProduction(Resources.STEEL)).to.eq(0);
   });

@@ -1,5 +1,8 @@
 import {expect} from 'chai';
 import {ISpace} from '../../src/boards/ISpace';
+import {EcologicalSurvey} from '../../src/cards/ares/EcologicalSurvey';
+import {GeologicalSurvey} from '../../src/cards/ares/GeologicalSurvey';
+import {Philares} from '../../src/cards/promo/Philares';
 import {Game} from '../../src/Game';
 import {IMoonData} from '../../src/moon/IMoonData';
 import {MoonExpansion} from '../../src/moon/MoonExpansion';
@@ -50,6 +53,16 @@ describe('MoonExpansion', () => {
 
   it('addTile throws with Mars space', () => {
     expect(() => MoonExpansion.addTile(player, SpaceName.NOCTIS_CITY, {tileType: TileType.LUNA_TRADE_STATION})).to.throw(/.*/);
+  });
+
+  // The rules for how these cards could change, and that's fine if that means
+  // changing these tests, but I would be surprised if that were the case.
+  it('Adding a tile while someone has cards with onTilePlaced behavior does not trigger them.', () => {
+    player.cardsInHand = [new EcologicalSurvey(), new GeologicalSurvey()];
+    player.corporationCard = new Philares();
+    player.steel = 0;
+    MoonExpansion.addTile(player, 'm03', {tileType: TileType.MOON_ROAD});
+    expect(player.steel).eq(1);
   });
 
   it('raiseMiningRate', () => {

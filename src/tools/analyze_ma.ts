@@ -74,9 +74,14 @@ function calc(params: URLSearchParams): string {
     if (nth % 100 === 0) {
       console.log(`#${nth}`);
     }
-    const mas = MilestoneAwardSelector.chooseMilestonesAndAwards(options);
-    mas.awards.forEach((award) => results.add(award.name));
-    mas.milestones.forEach((milestone) => results.add(milestone.name));
+    try {
+      const mas = MilestoneAwardSelector.chooseMilestonesAndAwards(options);
+      mas.awards.forEach((award) => results.add(award.name));
+      mas.milestones.forEach((milestone) => results.add(milestone.name));
+    } catch (err) {
+      console.log(err);
+      results.add('ERROR');
+    }
   }
 
   const copy = new Array(...results.entries());

@@ -3,6 +3,7 @@ import {CreateGameForm} from './CreateGameForm';
 import {GameHome} from './GameHome';
 import {GamesOverview} from './GamesOverview';
 import {PlayerHome} from './PlayerHome';
+import {SpectatorHome} from './SpectatorHome';
 import {PlayerModel} from '../models/PlayerModel';
 import {StartScreen} from './StartScreen';
 import {LoadGameForm} from './LoadGameForm';
@@ -26,6 +27,7 @@ interface MainAppData {
             'help' |
             'load' |
             'player-home' |
+            'spectator-home' |
             'start-screen' |
             'the-end';
     /**
@@ -69,6 +71,7 @@ export const mainAppSettings = {
     'load-game-form': LoadGameForm,
     'game-home': GameHome,
     'player-home': PlayerHome,
+    'spectator-home': SpectatorHome,
     'player-end': GameEnd,
     'games-overview': GamesOverview,
     'debug-ui': DebugUI,
@@ -186,6 +189,8 @@ export const mainAppSettings = {
       app.screen = 'cards';
     } else if (currentPathname === '/help') {
       app.screen = 'help';
+    } else if (currentPathname === '/spectator') {
+      app.screen = 'spectator-home';
     } else {
       app.screen = 'start-screen';
     }

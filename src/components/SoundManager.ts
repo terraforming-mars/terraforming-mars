@@ -40,7 +40,7 @@ export namespace SoundManager {
     return oscillator;
   }
 
-  function createAudioContext() {
+  function createAudioContext(): AudioContext | undefined {
     const audioCtx = window.AudioContext || (window as any).webkitAudioContext ? new AudioContext() : undefined;
 
     if (audioCtx === undefined) console.log('This web browser doesn\'t support Web Audio API');
@@ -56,7 +56,7 @@ export namespace SoundManager {
     oscillator.stop(time + len);
   }
 
-  function playInContext(cb: (audioCtx: any) => void) {
+  function playInContext(cb: (audioCtx: AudioContext) => void) {
     const audioCtx = createAudioContext();
     if (audioCtx === undefined) return;
 

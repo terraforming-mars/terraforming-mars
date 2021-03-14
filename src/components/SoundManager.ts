@@ -20,13 +20,13 @@ export namespace SoundManager {
     C6 = 1046.50,
   };
 
-  function setupGainNode(audioCtx: AudioContext, time: number) {
+  function setupGainNode(audioCtx: AudioContext, time: number, value: number) {
     time += audioCtx.currentTime;
 
     const gainNode = audioCtx.createGain();
     gainNode.connect(audioCtx.destination);
     gainNode.gain.setValueAtTime(0, time);
-    gainNode.gain.linearRampToValueAtTime(1, time + 0.01);
+    gainNode.gain.linearRampToValueAtTime(value, time + 0.01);
 
     return gainNode;
   }
@@ -40,8 +40,8 @@ export namespace SoundManager {
     return oscillator;
   }
 
-  function playSound(audioCtx: AudioContext, frequency: number, time: number, len: number) {
-    const gainNode = setupGainNode(audioCtx, time);
+  function playSound(audioCtx: AudioContext, frequency: number, time: number, len: number, gainValue: number = 1) {
+    const gainNode = setupGainNode(audioCtx, time, gainValue);
     const oscillator = setupOscillator(audioCtx, frequency, gainNode);
 
     oscillator.start(time);
@@ -71,11 +71,7 @@ export namespace SoundManager {
 
   export function newLog() {
     playInContext((audioCtx) => {
-      playSound(audioCtx, 100, 0.005, 0.03);
-      playSound(audioCtx, 0, 0.005, 0.03);
-      playSound(audioCtx, 100, 0.005, 0.02);
-      playSound(audioCtx, 0, 0.005, 0.02);
-      playSound(audioCtx, 100, 0.005, 0.01);
+      playSound(audioCtx, Notes.G3, 0.02, 0.05, .1);
     });
   }
 }

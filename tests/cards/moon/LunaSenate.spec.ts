@@ -1,12 +1,12 @@
 import {Game} from '../../../src/Game';
-import {setCustomGameOptions} from '../../TestingUtils';
+import {TestingUtils} from '../../TestingUtils';
 import {TestPlayers} from '../../TestPlayers';
 import {TestPlayer} from '../../TestPlayer';
 import {LunaSenate} from '../../../src/cards/moon/LunaSenate';
 import {expect} from 'chai';
 import {Resources} from '../../../src/Resources';
 
-const MOON_OPTIONS = setCustomGameOptions({moonExpansion: true});
+const MOON_OPTIONS = TestingUtils.setCustomGameOptions({moonExpansion: true});
 
 describe('LunaSenate', () => {
   let player: TestPlayer;

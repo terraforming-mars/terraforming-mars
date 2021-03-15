@@ -36,6 +36,7 @@ import {SelectDelegate} from '../inputs/SelectDelegate';
 import {SelectColony} from '../inputs/SelectColony';
 import {SelectProductionToLose} from '../inputs/SelectProductionToLose';
 import {ShiftAresGlobalParameters} from '../inputs/ShiftAresGlobalParameters';
+import {SpectatorModel} from '../models/SpectatorModel';
 import {MoonModel} from '../models/MoonModel';
 import {CardName} from '../CardName';
 import {Units} from '../Units';
@@ -66,6 +67,7 @@ export class Server {
       actionsTakenThisRound: player.actionsTakenThisRound,
       actionsThisGeneration: Array.from(player.getActionsThisGeneration()),
       aresData: game.aresData,
+      availableBlueCardActionCount: player.getAvailableBlueActionCount(),
       awards: getAwards(game),
       cardCost: player.cardCost,
       cardsInHand: getCards(player, player.cardsInHand, {showNewCost: true}),
@@ -114,6 +116,7 @@ export class Server {
       preludeCardsInHand: getCards(player, player.preludeCardsInHand),
       selfReplicatingRobotsCards: player.getSelfReplicatingRobotsCards(),
       spaces: getSpaces(game.board),
+      spectatorId: game.spectatorId,
       steel: player.steel,
       steelProduction: player.getProduction(Resources.STEEL),
       steelValue: player.getSteelValue(),
@@ -132,17 +135,20 @@ export class Server {
     };
   }
 
+  public static getSpectatorModel(game: Game): SpectatorModel {
+    return {
+      generation: game.generation,
+    };
+  }
+
   // This is only ever used in ApiWaitingFor, and could be isolated from ServerModel.
   public static getWaitingForModel(player: Player, prevGameAge: number): WaitingForModel {
-    const result: WaitingForModel = {
-      result: 'WAIT',
-    };
     if (player.getWaitingFor() !== undefined || player.game.phase === Phase.END) {
-      result.result = 'GO';
+      return {result: 'GO'};
     } else if (player.game.gameAge > prevGameAge) {
-      result.result = 'REFRESH';
+      return {result: 'REFRESH'};
     }
-    return result;
+    return {result: 'WAIT'};
   }
 }
 
@@ -427,6 +433,7 @@ function getPlayers(players: Array<Player>, game: Game): Array<PlayerModel> {
       deckSize: game.dealer.getDeckSize(),
       actionsTakenThisRound: player.actionsTakenThisRound,
       timer: player.timer.serialize(),
+      availableBlueCardActionCount: player.getAvailableBlueActionCount(),
     } as PlayerModel;
   });
 }

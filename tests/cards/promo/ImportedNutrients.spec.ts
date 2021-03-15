@@ -3,7 +3,7 @@ import {Ants} from '../../../src/cards/base/Ants';
 import {Decomposers} from '../../../src/cards/base/Decomposers';
 import {ImportedNutrients} from '../../../src/cards/promo/ImportedNutrients';
 import {Player} from '../../../src/Player';
-import {TestPlayers} from '../../TestingUtils';
+import {TestPlayers} from '../../TestPlayers';
 
 describe('ImportedNutrients', function() {
   let card : ImportedNutrients; let player : Player;

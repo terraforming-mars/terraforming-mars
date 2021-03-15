@@ -3,7 +3,7 @@ import {Game} from '../../src/Game';
 import {Resources} from '../../src/Resources';
 import {MudSlides} from '../../src/turmoil/globalEvents/MudSlides';
 import {Turmoil} from '../../src/turmoil/Turmoil';
-import {TestPlayers} from '../TestingUtils';
+import {TestPlayers} from '../TestPlayers';
 
 describe('MudSlides', function() {
   it('resolve play', function() {

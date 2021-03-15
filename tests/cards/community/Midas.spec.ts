@@ -1,7 +1,7 @@
 import {expect} from 'chai';
 import {Midas} from '../../../src/cards/community/Midas';
 import {Player} from '../../../src/Player';
-import {TestPlayers} from '../../TestingUtils';
+import {TestPlayers} from '../../TestPlayers';
 
 describe('Midas', function() {
   let card : Midas; let player : Player;

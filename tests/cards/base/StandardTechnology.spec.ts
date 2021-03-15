@@ -2,7 +2,7 @@ import {expect} from 'chai';
 import {AsteroidStandardProject} from '../../../src/cards/base/standardProjects/AsteroidStandardProject';
 import {SellPatentsStandardProject} from '../../../src/cards/base/standardProjects/SellPatentsStandardProject';
 import {StandardTechnology} from '../../../src/cards/base/StandardTechnology';
-import {TestPlayers} from '../../TestingUtils';
+import {TestPlayers} from '../../TestPlayers';
 
 describe('StandardTechnology', function() {
   it('Should play', function() {

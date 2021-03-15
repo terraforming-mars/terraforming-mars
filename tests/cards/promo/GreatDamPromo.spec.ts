@@ -6,7 +6,7 @@ import {Player} from '../../../src/Player';
 import {Resources} from '../../../src/Resources';
 import {TileType} from '../../../src/TileType';
 import {TestingUtils} from '../../TestingUtils';
-import {TestPlayers} from '../../TestingUtils';
+import {TestPlayers} from '../../TestPlayers';
 
 describe('GreatDamPromo', function() {
   let card : GreatDamPromo; let player : Player;

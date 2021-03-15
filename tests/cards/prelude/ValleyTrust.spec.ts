@@ -5,7 +5,7 @@ import {Research} from '../../../src/cards/base/Research';
 import {ValleyTrust} from '../../../src/cards/prelude/ValleyTrust';
 import {Game} from '../../../src/Game';
 import {Player} from '../../../src/Player';
-import {TestPlayers} from '../../TestingUtils';
+import {TestPlayers} from '../../TestPlayers';
 
 describe('ValleyTrust', function() {
   let card : ValleyTrust; let player : Player;

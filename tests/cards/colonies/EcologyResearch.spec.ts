@@ -9,7 +9,8 @@ import {Game} from '../../../src/Game';
 import {SelectCard} from '../../../src/inputs/SelectCard';
 import {Player} from '../../../src/Player';
 import {Resources} from '../../../src/Resources';
-import {setCustomGameOptions, TestPlayers} from '../../TestingUtils';
+import {TestingUtils} from '../../TestingUtils';
+import {TestPlayers} from '../../TestPlayers';
 
 describe('EcologyResearch', function() {
   let card : EcologyResearch; let player : Player; let game : Game; let colony1: Luna;
@@ -18,7 +19,7 @@ describe('EcologyResearch', function() {
     card = new EcologyResearch();
     player = TestPlayers.BLUE.newPlayer();
     const redPlayer = TestPlayers.RED.newPlayer();
-    const gameOptions = setCustomGameOptions({coloniesExtension: true});
+    const gameOptions = TestingUtils.setCustomGameOptions({coloniesExtension: true});
     game = Game.newInstance('foobar', [player, redPlayer], player, gameOptions);
 
     colony1 = new Luna();

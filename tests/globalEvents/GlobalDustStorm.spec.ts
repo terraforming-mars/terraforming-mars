@@ -5,7 +5,7 @@ import {Resources} from '../../src/Resources';
 import {GlobalDustStorm} from '../../src/turmoil/globalEvents/GlobalDustStorm';
 import {Kelvinists} from '../../src/turmoil/parties/Kelvinists';
 import {Turmoil} from '../../src/turmoil/Turmoil';
-import {TestPlayers} from '../TestingUtils';
+import {TestPlayers} from '../TestPlayers';
 
 describe('GlobalDustStorm', function() {
   it('resolve play', function() {

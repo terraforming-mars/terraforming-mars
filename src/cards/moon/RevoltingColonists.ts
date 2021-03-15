@@ -14,7 +14,7 @@ export class RevoltingColonists extends Card implements IProjectCard {
     super({
       name: CardName.REVOLTING_COLONISTS,
       cardType: CardType.EVENT,
-      tags: [Tags.MOON, Tags.EVENT],
+      tags: [Tags.MOON],
       cost: 3,
       requirements: CardRequirements.builder((b) => b.colonyRate(4)),
 
@@ -27,10 +27,6 @@ export class RevoltingColonists extends Card implements IProjectCard {
       },
     });
   };
-
-  public canPlay(player: Player): boolean {
-    return MoonExpansion.moonData(player.game).colonyRate >= 4;
-  }
 
   public play(player: Player) {
     const colonies = MoonExpansion.tiles(player.game, TileType.MOON_COLONY, false);

@@ -1,5 +1,4 @@
 import * as http from 'http';
-import * as querystring from 'querystring';
 import {IHandler, IContext} from './IHandler';
 
 export namespace Handler {
@@ -14,11 +13,11 @@ export abstract class Handler implements IHandler {
     this.validateServerId = options?.validateServerId === true;
   }
 
-  private isServerIdValid(req: http.IncomingMessage, ctx: IContext): boolean {
-    const queryParams = querystring.parse(req.url!.replace(/^.*\?/, ''));
+  private isServerIdValid(ctx: IContext): boolean {
+    const serverId = ctx.url.searchParams.get('serverId');
     if (
-      queryParams.serverId === undefined ||
-      queryParams.serverId !== ctx.serverId
+      serverId === null ||
+      serverId !== ctx.serverId
     ) {
       console.warn('No or invalid serverId given');
       return false;
@@ -27,7 +26,7 @@ export abstract class Handler implements IHandler {
   }
 
   processRequest(req: http.IncomingMessage, res: http.ServerResponse, ctx: IContext): void {
-    if (this.validateServerId && !this.isServerIdValid(req, ctx)) {
+    if (this.validateServerId && !this.isServerIdValid(ctx)) {
       ctx.route.notAuthorized(req, res);
       return;
     }

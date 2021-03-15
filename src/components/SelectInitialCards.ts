@@ -9,6 +9,8 @@ import {CorporationCard} from '../cards/corporation/CorporationCard';
 import {PlayerInputModel} from '../models/PlayerInputModel';
 import {PlayerModel} from '../models/PlayerModel';
 import {SelectCard} from './SelectCard';
+import {ConfirmDialog} from './common/ConfirmDialog';
+import {PreferencesManager} from './PreferencesManager';
 
 export const SelectInitialCards = Vue.component('select-initial-cards', {
   props: {
@@ -31,6 +33,7 @@ export const SelectInitialCards = Vue.component('select-initial-cards', {
   components: {
     Button,
     'select-card': SelectCard,
+    'confirm-dialog': ConfirmDialog,
   },
   data: function() {
     return {
@@ -148,6 +151,13 @@ export const SelectInitialCards = Vue.component('select-initial-cards', {
       starting -= this.selectedCards.length * cardCost;
       return starting;
     },
+    saveIfConfirmed: function() {
+      if (PreferencesManager.loadValue('show_alerts') === '1' && this.selectedCards.length === 0) {
+        (this.$refs['confirmation'] as any).show();
+      } else {
+        this.saveData();
+      }
+    },
     saveData: function() {
       const result: Array<Array<string>> = [];
       result.push([]);
@@ -172,14 +182,22 @@ export const SelectInitialCards = Vue.component('select-initial-cards', {
     preludesChanged: function(cards: Array<CardName>) {
       this.selectedPrelude = cards;
     },
+    confirmSelection: function() {
+      this.saveData();
+    },
   },
-  template: `<div class="select-initial-cards">
-   <select-card :player="player" :playerinput="getOption(0)" :showtitle="true" v-on:cardschanged="corporationChanged" />
+  template: `
+  <div class="select-initial-cards">
+    <confirm-dialog
+      message="Continue without buying initial cards?"
+      ref="confirmation"
+      v-on:accept="confirmSelection" />
+    <select-card :player="player" :playerinput="getOption(0)" :showtitle="true" v-on:cardschanged="corporationChanged" />
     <select-card v-if="hasPrelude()" :player="player" :playerinput="getOption(1)" :showtitle="true" v-on:cardschanged="preludesChanged" />
     <select-card :player="player" :playerinput="getOption(hasPrelude() ? 2 : 1)" :showtitle="true" v-on:cardschanged="cardsChanged" />
     <div v-if="selectedCorporation" v-i18n>Starting Megacredits: <div class="megacredits">{{getStartingMegacredits()}}</div></div>
     <div v-if="selectedCorporation && hasPrelude()" v-i18n>After Preludes: <div class="megacredits">{{getStartingMegacredits() + getAfterPreludes()}}</div></div>
-    <Button v-if="showsave" :onClick="saveData" type="submit" :title="playerinput.buttonLabel" />
+    <Button v-if="showsave" :onClick="saveIfConfirmed" type="submit" :title="playerinput.buttonLabel" />
   </div>`,
 });
 

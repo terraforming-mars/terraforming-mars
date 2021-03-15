@@ -3,7 +3,7 @@ import {SearchForLife} from '../../../src/cards/base/SearchForLife';
 import {Tags} from '../../../src/cards/Tags';
 import {Game} from '../../../src/Game';
 import {Player} from '../../../src/Player';
-import {TestPlayers} from '../../TestingUtils';
+import {TestPlayers} from '../../TestPlayers';
 
 describe('SearchForLife', function() {
   let card : SearchForLife; let player : Player; let game : Game;

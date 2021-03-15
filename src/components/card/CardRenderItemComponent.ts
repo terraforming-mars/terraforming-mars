@@ -110,6 +110,8 @@ export const CardRenderItemComponent = Vue.component('CardRenderItemComponent', 
         classes.push('card-resource-trade-discount');
       } else if (type === CardRenderItemType.TRADE_FLEET) {
         classes.push('card-resource-trade-fleet');
+      } else if (type === CardRenderItemType.SYNDICATE_FLEET) {
+        classes.push('card-resource-syndicate-fleet');
       } else if (type === CardRenderItemType.CHAIRMAN) {
         classes.push('card-chairman');
       } else if (type === CardRenderItemType.PARTY_LEADERS) {
@@ -271,22 +273,28 @@ export const CardRenderItemComponent = Vue.component('CardRenderItemComponent', 
         return '<div class="board-cube--bronze"></div>';
       }
       if (this.item.type === CardRenderItemType.MOON_COLONY) {
-        return '<div class="card-play-moon-colony"></div>';
+        const clazz = this.item.size === undefined ? 'card-play-moon-colony' : `card-play-moon-colony--${this.item.size}`;
+        return `<div class="${clazz}"></div>`;
       }
       if (this.item.type === CardRenderItemType.MOON_COLONY_RATE) {
-        return '<div class="card-increase-colony-rate"></div>';
+        const clazz = this.item.size === undefined ? 'card-colony-rate' : `card-colony-rate--${this.item.size}`;
+        return `<div class="${clazz}"></div>`;
       }
       if (this.item.type === CardRenderItemType.MOON_MINE) {
-        return '<div class="card-play-moon-mine"></div>';
+        const clazz = this.item.size === undefined ? 'card-play-moon-mine' : `card-play-moon-mine--${this.item.size}`;
+        return `<div class="${clazz}"></div>`;
       }
       if (this.item.type === CardRenderItemType.MOON_MINING_RATE) {
-        return '<div class="card-increase-mining-rate"></div>';
+        const clazz = this.item.size === undefined ? 'card-mining-rate' : `card-mining-rate--${this.item.size}`;
+        return `<div class="${clazz}"></div>`;
       }
       if (this.item.type === CardRenderItemType.MOON_ROAD) {
-        return '<div class="card-play-moon-road"></div>';
+        const clazz = this.item.size === undefined ? 'card-play-moon-road' : `card-play-moon-road--${this.item.size}`;
+        return `<div class="${clazz}"></div>`;
       }
       if (this.item.type === CardRenderItemType.MOON_LOGISTICS_RATE) {
-        return '<div class="card-increase-logistics-rate"></div>';
+        const clazz = this.item.size === undefined ? 'card-logistics-rate' : `card-logistics-rate--${this.item.size}`;
+        return `<div class="${clazz}"></div>`;
       }
       // TODO(chosta): abstract once another case of cancel (X) on top of an item is needed
       if (this.item.type === CardRenderItemType.TR && this.item.cancelled === true) {

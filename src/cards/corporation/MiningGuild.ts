@@ -11,6 +11,7 @@ import {CardType} from '../CardType';
 import {GainProduction} from '../../deferredActions/GainProduction';
 import {CardRenderer} from '../render/CardRenderer';
 import {Units} from '../../Units';
+import {BoardType} from '../../boards/BoardType';
 
 export class MiningGuild extends Card implements CorporationCard {
   constructor() {
@@ -38,7 +39,12 @@ export class MiningGuild extends Card implements CorporationCard {
     });
   }
 
-  public onTilePlaced(cardOwner: Player, activePlayer: Player, space: ISpace) {
+  public onTilePlaced(cardOwner: Player, activePlayer: Player, space: ISpace, boardType: BoardType) {
+    // TODO(kberg): Clarify that this is nerfed for The Moon.
+    // Nerfing on The Moon.
+    if (boardType !== BoardType.MARS) {
+      return;
+    }
     if (cardOwner.id !== activePlayer.id || cardOwner.game.phase === Phase.SOLAR) {
       return;
     }

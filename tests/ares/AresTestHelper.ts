@@ -6,15 +6,15 @@ import {Resources} from '../../src/Resources';
 import {SpaceType} from '../../src/SpaceType';
 import {TileType} from '../../src/TileType';
 import {ISpace} from '../../src/boards/ISpace';
-import {setCustomGameOptions} from '../TestingUtils';
+import {TestingUtils} from '../TestingUtils';
 import {AresHandler} from '../../src/ares/AresHandler';
 
-export const ARES_OPTIONS_NO_HAZARDS = setCustomGameOptions({
+export const ARES_OPTIONS_NO_HAZARDS = TestingUtils.setCustomGameOptions({
   aresExtension: true,
   aresHazards: false,
 });
 
-export const ARES_OPTIONS_WITH_HAZARDS = setCustomGameOptions({
+export const ARES_OPTIONS_WITH_HAZARDS = TestingUtils.setCustomGameOptions({
   aresExtension: true,
   aresHazards: true,
 });

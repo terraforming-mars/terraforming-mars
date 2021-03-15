@@ -3,7 +3,7 @@ import {EarthCatapult} from '../../../src/cards/base/EarthCatapult';
 import {Advertising} from '../../../src/cards/promo/Advertising';
 import {Game} from '../../../src/Game';
 import {Resources} from '../../../src/Resources';
-import {TestPlayers} from '../../TestingUtils';
+import {TestPlayers} from '../../TestPlayers';
 
 describe('Advertising', function() {
   it('Should play', function() {

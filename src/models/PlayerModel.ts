@@ -18,6 +18,7 @@ export interface PlayerModel {
     actionsTakenThisRound: number;
     actionsThisGeneration: Array<string>;
     aresData: IAresData | undefined;
+    availableBlueCardActionCount: number;
     awards: Array<FundedAwardModel>;
     cardCost: number;
     cardsInHand: Array<CardModel>;
@@ -66,6 +67,7 @@ export interface PlayerModel {
     preludeCardsInHand: Array<CardModel>;
     selfReplicatingRobotsCards: Array<CardModel>;
     spaces: Array<SpaceModel>;
+    spectatorId?: string;
     steel: number;
     steelProduction: number;
     steelValue: number;

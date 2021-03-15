@@ -2,7 +2,7 @@ import {expect} from 'chai';
 import {PermafrostExtraction} from '../../../src/cards/base/PermafrostExtraction';
 import {Game} from '../../../src/Game';
 import {Player} from '../../../src/Player';
-import {TestPlayers} from '../../TestingUtils';
+import {TestPlayers} from '../../TestPlayers';
 
 describe('PermafrostExtraction', function() {
   let card : PermafrostExtraction; let player : Player; let game : Game;

@@ -2,7 +2,7 @@ import {expect} from 'chai';
 import {Biolab} from '../../../src/cards/prelude/Biolab';
 import {Game} from '../../../src/Game';
 import {Resources} from '../../../src/Resources';
-import {TestPlayers} from '../../TestingUtils';
+import {TestPlayers} from '../../TestPlayers';
 
 describe('Biolab', function() {
   it('Should play', function() {

@@ -15,6 +15,13 @@ export interface TurmoilModel {
   coming: GlobalEventModel | undefined;
   current: GlobalEventModel | undefined;
   politicalAgendas: PoliticalAgendasModel | undefined;
+  policyActionUsers: Array<PolicyUser>;
+}
+
+export interface PolicyUser {
+  color: Color;
+  turmoilPolicyActionUsed: boolean;
+  politicalAgendasActionUsedCount: number;
 }
 
 export interface PartyModel {
@@ -141,6 +148,16 @@ export function getTurmoil(game: Game): TurmoilModel | undefined {
       };
     }
 
+    const policyActionUsers = Array.from(
+      game.getPlayers(),
+      (player) => {
+        return {
+          color: player.color,
+          turmoilPolicyActionUsed: player.turmoilPolicyActionUsed,
+          politicalAgendasActionUsedCount: player.politicalAgendasActionUsedCount} as PolicyUser;
+      },
+    );
+
     return {
       chairman: chairman,
       ruling: ruling,
@@ -155,6 +172,7 @@ export function getTurmoil(game: Game): TurmoilModel | undefined {
         currentAgenda: turmoil.politicalAgendasData.currentAgenda,
         staticAgendas: staticAgendasModel,
       },
+      policyActionUsers,
     };
   } else {
     return undefined;

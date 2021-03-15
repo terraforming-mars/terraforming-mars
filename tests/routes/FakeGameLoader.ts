@@ -12,7 +12,18 @@ export class FakeGameLoader implements IGameLoader {
   getByGameId(gameId: string, _bypassCache: boolean, cb: (game: Game | undefined) => void): void {
     cb(this.games.get(gameId));
   }
-  getByPlayerId(_playerId: string, _cb: (game: Game | undefined) => void): void {
+  getByPlayerId(playerId: string, cb: (game: Game | undefined) => void): void {
+    for (const game of Array.from(this.games.values())) {
+      for (const player of game.getPlayers()) {
+        if (player.id === playerId) {
+          cb(game);
+          return;
+        }
+      }
+    }
+    cb(undefined);
+  }
+  getBySpectatorId(_spectatorId: string, _cb: (game: Game | undefined) => void): void {
     throw new Error('Method not implemented.');
   }
   restoreGameAt(_gameId: string, _saveId: number, _cb: (game: Game | undefined) => void): void {

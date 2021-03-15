@@ -1,11 +1,12 @@
 import {Game} from '../../../src/Game';
-import {setCustomGameOptions, TestPlayers} from '../../TestingUtils';
+import {TestingUtils} from '../../TestingUtils';
+import {TestPlayers} from '../../TestPlayers';
 import {ArchimedesHydroponicsStation} from '../../../src/cards/moon/ArchimedesHydroponicsStation';
 import {expect} from 'chai';
 import {Resources} from '../../../src/Resources';
 import {TestPlayer} from '../../TestPlayer';
 
-const MOON_OPTIONS = setCustomGameOptions({moonExpansion: true});
+const MOON_OPTIONS = TestingUtils.setCustomGameOptions({moonExpansion: true});
 
 describe('ArchimedesHydroponicsStation', () => {
   let player: TestPlayer;

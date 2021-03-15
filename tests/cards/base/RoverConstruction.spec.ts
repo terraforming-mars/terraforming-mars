@@ -1,7 +1,8 @@
 import {expect} from 'chai';
 import {RoverConstruction} from '../../../src/cards/base/RoverConstruction';
 import {Game} from '../../../src/Game';
-import {TestingUtils, TestPlayers} from '../../TestingUtils';
+import {TestingUtils} from '../../TestingUtils';
+import {TestPlayers} from '../../TestPlayers';
 
 describe('RoverConstruction', function() {
   it('Should play', function() {

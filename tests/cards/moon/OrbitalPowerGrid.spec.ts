@@ -1,13 +1,14 @@
 import {Game} from '../../../src/Game';
 import {Player} from '../../../src/Player';
-import {setCustomGameOptions, TestPlayers} from '../../TestingUtils';
+import {TestingUtils} from '../../TestingUtils';
+import {TestPlayers} from '../../TestPlayers';
 import {OrbitalPowerGrid} from '../../../src/cards/moon/OrbitalPowerGrid';
 import {expect} from 'chai';
 import {TileType} from '../../../src/TileType';
 import {Resources} from '../../../src/Resources';
 import {SpaceType} from '../../../src/SpaceType';
 
-const MOON_OPTIONS = setCustomGameOptions({moonExpansion: true});
+const MOON_OPTIONS = TestingUtils.setCustomGameOptions({moonExpansion: true});
 
 describe('OrbitalPowerGrid', () => {
   let player: Player;

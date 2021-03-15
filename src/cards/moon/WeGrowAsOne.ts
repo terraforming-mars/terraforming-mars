@@ -13,7 +13,7 @@ export class WeGrowAsOne extends Card implements IProjectCard {
     super({
       name: CardName.WE_GROW_AS_ONE,
       cardType: CardType.EVENT,
-      tags: [Tags.SPACE, Tags.EVENT],
+      tags: [Tags.SPACE],
       cost: 8,
       requirements: CardRequirements.builder((b) => b.party(PartyName.UNITY)),
 
@@ -29,16 +29,6 @@ export class WeGrowAsOne extends Card implements IProjectCard {
       },
     });
   };
-
-  public canPlay(player: Player): boolean {
-    if (player.game.turmoil === undefined) {
-      return false;
-    }
-    if (!player.game.turmoil.canPlay(player, PartyName.UNITY)) {
-      return false;
-    }
-    return true;
-  }
 
   public play(player: Player) {
     player.game.colonies.forEach((colony) => {

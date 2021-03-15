@@ -2,7 +2,8 @@ import {expect} from 'chai';
 import {ArcadianCommunities} from '../../../src/cards/promo/ArcadianCommunities';
 import {Game} from '../../../src/Game';
 import {SelectSpace} from '../../../src/inputs/SelectSpace';
-import {TestingUtils, TestPlayers} from '../../TestingUtils';
+import {TestingUtils} from '../../TestingUtils';
+import {TestPlayers} from '../../TestPlayers';
 
 
 describe('ArcadianCommunities', function() {

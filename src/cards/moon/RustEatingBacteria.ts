@@ -19,23 +19,19 @@ export class RustEatingBacteria extends Card implements IActionCard, IProjectCar
       resourceType: ResourceType.MICROBE,
 
       metadata: {
-        description: '1 VP per each 3 Microbes here.',
         cardNumber: 'M88',
         victoryPoints: CardRenderDynamicVictoryPoints.microbes(1, 3),
         renderData: CardRenderer.builder((b) => {
-          b.action('Spend 1 Steel to add 2 Microbes here.', (eb) => {
+          b.action('Spend 1 steel to add 2 Microbes here.', (eb) => {
             eb.startAction.steel(1).arrow().microbes(2);
-          });
+          }).br;
+          b.vpText('1 VP per 3 Microbes here.');
         }),
       },
     });
   };
 
   public resourceCount = 0;
-
-  public canPlay(): boolean {
-    return true;
-  }
 
   public play() {
     return undefined;

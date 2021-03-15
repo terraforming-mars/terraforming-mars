@@ -5,7 +5,7 @@ import {Player} from '../../../src/Player';
 import {Resources} from '../../../src/Resources';
 import {SpaceName} from '../../../src/SpaceName';
 import {TileType} from '../../../src/TileType';
-import {TestPlayers} from '../../TestingUtils';
+import {TestPlayers} from '../../TestPlayers';
 
 describe('NoctisCity', function() {
   let card : NoctisCity; let player : Player; let game : Game;

@@ -1,7 +1,7 @@
 import {expect} from 'chai';
 import {HousePrinting} from '../../../src/cards/prelude/HousePrinting';
 import {Resources} from '../../../src/Resources';
-import {TestPlayers} from '../../TestingUtils';
+import {TestPlayers} from '../../TestPlayers';
 
 describe('HousePrinting', function() {
   it('Should play', function() {

@@ -1,7 +1,7 @@
 
 import {expect} from 'chai';
 import {AdaptationTechnology} from '../../../src/cards/base/AdaptationTechnology';
-import {TestPlayers} from '../../TestingUtils';
+import {TestPlayers} from '../../TestPlayers';
 
 describe('AdaptationTechnology', function() {
   it('Should play', function() {

@@ -7,7 +7,7 @@ import {ViralEnhancers} from '../../../src/cards/base/ViralEnhancers';
 import {Game} from '../../../src/Game';
 import {OrOptions} from '../../../src/inputs/OrOptions';
 import {Player} from '../../../src/Player';
-import {TestPlayers} from '../../TestingUtils';
+import {TestPlayers} from '../../TestPlayers';
 
 describe('ViralEnhancers', function() {
   let card : ViralEnhancers; let player : Player; let game : Game;

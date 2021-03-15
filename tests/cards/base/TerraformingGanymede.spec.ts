@@ -1,7 +1,7 @@
 import {expect} from 'chai';
 import {TerraformingGanymede} from '../../../src/cards/base/TerraformingGanymede';
 import {Game} from '../../../src/Game';
-import {TestPlayers} from '../../TestingUtils';
+import {TestPlayers} from '../../TestPlayers';
 
 describe('TerraformingGanymede', function() {
   it('Should play', function() {

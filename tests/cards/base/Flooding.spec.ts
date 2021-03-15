@@ -7,7 +7,8 @@ import {SelectPlayer} from '../../../src/inputs/SelectPlayer';
 import {SelectSpace} from '../../../src/inputs/SelectSpace';
 import {Player} from '../../../src/Player';
 import {SpaceType} from '../../../src/SpaceType';
-import {TestingUtils, TestPlayers} from '../../TestingUtils';
+import {TestingUtils} from '../../TestingUtils';
+import {TestPlayers} from '../../TestPlayers';
 
 describe('Flooding', function() {
   let card : Flooding; let player : Player; let player2 : Player; let game : Game;

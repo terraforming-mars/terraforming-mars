@@ -4,7 +4,8 @@ import {ViralEnhancers} from '../../../src/cards/base/ViralEnhancers';
 import {Game} from '../../../src/Game';
 import {Player} from '../../../src/Player';
 import {Resources} from '../../../src/Resources';
-import {TestingUtils, TestPlayers} from '../../TestingUtils';
+import {TestingUtils} from '../../TestingUtils';
+import {TestPlayers} from '../../TestPlayers';
 
 describe('Moss', function() {
   let card : Moss; let player : Player;

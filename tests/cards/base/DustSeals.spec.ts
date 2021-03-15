@@ -2,7 +2,8 @@ import {expect} from 'chai';
 import {DustSeals} from '../../../src/cards/base/DustSeals';
 import {Game} from '../../../src/Game';
 import {Player} from '../../../src/Player';
-import {TestingUtils, TestPlayers} from '../../TestingUtils';
+import {TestingUtils} from '../../TestingUtils';
+import {TestPlayers} from '../../TestPlayers';
 
 describe('DustSeals', function() {
   let card : DustSeals; let player : Player;

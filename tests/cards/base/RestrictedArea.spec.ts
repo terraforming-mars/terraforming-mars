@@ -3,7 +3,7 @@ import {RestrictedArea} from '../../../src/cards/base/RestrictedArea';
 import {Game} from '../../../src/Game';
 import {Player} from '../../../src/Player';
 import {TileType} from '../../../src/TileType';
-import {TestPlayers} from '../../TestingUtils';
+import {TestPlayers} from '../../TestPlayers';
 
 describe('RestrictedArea', function() {
   let card : RestrictedArea; let player : Player; let game : Game;

@@ -4,7 +4,7 @@ import {Luna} from '../../../src/colonies/Luna';
 import {Triton} from '../../../src/colonies/Triton';
 import {Game} from '../../../src/Game';
 import {Resources} from '../../../src/Resources';
-import {TestPlayers} from '../../TestingUtils';
+import {TestPlayers} from '../../TestPlayers';
 
 describe('QuantumCommunications', function() {
   it('Should play', function() {

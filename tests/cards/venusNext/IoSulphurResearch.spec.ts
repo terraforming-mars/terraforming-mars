@@ -1,7 +1,7 @@
 import {expect} from 'chai';
 import {IoSulphurResearch} from '../../../src/cards/venusNext/IoSulphurResearch';
 import {Game} from '../../../src/Game';
-import {TestPlayers} from '../../TestingUtils';
+import {TestPlayers} from '../../TestPlayers';
 
 describe('IoSulphurResearch', function() {
   it('Should play', function() {

@@ -1,7 +1,7 @@
 import {Game} from '../../../src/Game';
 import {IMoonData} from '../../../src/moon/IMoonData';
 import {MoonExpansion} from '../../../src/moon/MoonExpansion';
-import {setCustomGameOptions} from '../../TestingUtils';
+import {TestingUtils} from '../../TestingUtils';
 import {SubterraneanHabitats} from '../../../src/cards/moon/SubterraneanHabitats';
 import {expect} from 'chai';
 import {CardName} from '../../../src/CardName';
@@ -9,7 +9,7 @@ import {TheWomb} from '../../../src/cards/moon/TheWomb';
 import {TestPlayer} from '../../TestPlayer';
 import {TestPlayers} from '../../TestPlayers';
 
-const MOON_OPTIONS = setCustomGameOptions({moonExpansion: true});
+const MOON_OPTIONS = TestingUtils.setCustomGameOptions({moonExpansion: true});
 
 describe('SubterraneanHabitats', () => {
   let game: Game;

@@ -1,7 +1,7 @@
 import {expect} from 'chai';
 import {ProtectedHabitats} from '../../../src/cards/base/ProtectedHabitats';
 import {Game} from '../../../src/Game';
-import {TestPlayers} from '../../TestingUtils';
+import {TestPlayers} from '../../TestPlayers';
 
 describe('ProtectedHabitats', function() {
   it('Should play', function() {

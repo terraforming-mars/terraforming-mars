@@ -148,13 +148,13 @@ export class CardRequirement {
       return this.satisfiesInequality(standardResources + nonStandardResources);
 
     case RequirementType.COLONY_RATE:
-      return this.satisfiesInequality(MoonExpansion.moonData(player.game).colonyRate);
+      return player.game.checkRequirements(player, GlobalParameter.MOON_COLONY_RATE, this.amount, this.isMax);
 
     case RequirementType.MINING_RATE:
-      return this.satisfiesInequality(MoonExpansion.moonData(player.game).miningRate);
+      return player.game.checkRequirements(player, GlobalParameter.MOON_MINING_RATE, this.amount, this.isMax);
 
     case RequirementType.LOGISTIC_RATE:
-      return this.satisfiesInequality(MoonExpansion.moonData(player.game).logisticRate);
+      return player.game.checkRequirements(player, GlobalParameter.MOON_LOGISTICS_RATE, this.amount, this.isMax);
 
     case RequirementType.COLONY_TILES:
       return this.satisfiesInequality(

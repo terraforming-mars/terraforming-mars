@@ -2,7 +2,7 @@ import {expect} from 'chai';
 import {MartianRails} from '../../../src/cards/base/MartianRails';
 import {Game} from '../../../src/Game';
 import {Player} from '../../../src/Player';
-import {TestPlayers} from '../../TestingUtils';
+import {TestPlayers} from '../../TestPlayers';
 
 describe('MartianRails', function() {
   let card : MartianRails; let player : Player; let game : Game;

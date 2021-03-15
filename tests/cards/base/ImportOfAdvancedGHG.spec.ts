@@ -2,7 +2,7 @@ import {expect} from 'chai';
 import {ImportOfAdvancedGHG} from '../../../src/cards/base/ImportOfAdvancedGHG';
 import {Game} from '../../../src/Game';
 import {Resources} from '../../../src/Resources';
-import {TestPlayers} from '../../TestingUtils';
+import {TestPlayers} from '../../TestPlayers';
 
 describe('ImportOfAdvancedGHG', function() {
   it('Should play', function() {

@@ -18,7 +18,8 @@ import {Player} from '../../../src/Player';
 import {Resources} from '../../../src/Resources';
 import {SpaceBonus} from '../../../src/SpaceBonus';
 import {ARES_OPTIONS_NO_HAZARDS} from '../../ares/AresTestHelper';
-import {TestingUtils, setCustomGameOptions, TestPlayers} from '../../TestingUtils';
+import {TestingUtils} from '../../TestingUtils';
+import {TestPlayers} from '../../TestPlayers';
 import {staticCardProperties} from '../../../src/cards/Card';
 import {TileType} from '../../../src/TileType';
 import {ICard} from '../../../src/cards/ICard';
@@ -31,7 +32,7 @@ describe('RoboticWorkforce', function() {
     card = new RoboticWorkforce();
     player = TestPlayers.BLUE.newPlayer();
     redPlayer = TestPlayers.RED.newPlayer();
-    game = Game.newInstance('foobar', [player, redPlayer], player, setCustomGameOptions({moonExpansion: true}));
+    game = Game.newInstance('foobar', [player, redPlayer], player, TestingUtils.setCustomGameOptions({moonExpansion: true}));
   });
 
   it('Can\'t play if no building cards to copy', function() {
@@ -154,7 +155,7 @@ describe('RoboticWorkforce', function() {
 
   const testCard = function(card: ICard) {
     const researchCoordination = new ResearchCoordination();
-    const gameOptions = setCustomGameOptions({moonExpansion: true});
+    const gameOptions = TestingUtils.setCustomGameOptions({moonExpansion: true});
     const productions = [Resources.MEGACREDITS, Resources.STEEL, Resources.TITANIUM, Resources.PLANTS, Resources.ENERGY, Resources.HEAT];
 
     if ((card.tags.includes(Tags.BUILDING) || card.tags.includes(Tags.WILDCARD)) && card.play !== undefined) {

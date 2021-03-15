@@ -4,8 +4,8 @@ import {Game} from '../../../src/Game';
 import {SelectPartyToSendDelegate} from '../../../src/inputs/SelectPartyToSendDelegate';
 import {Player} from '../../../src/Player';
 import {PartyName} from '../../../src/turmoil/parties/PartyName';
-import {setCustomGameOptions} from '../../TestingUtils';
-import {TestPlayers} from '../../TestingUtils';
+import {TestingUtils} from '../../TestingUtils';
+import {TestPlayers} from '../../TestPlayers';
 
 describe('PoliticalUprising', function() {
   let card : PoliticalUprising; let player : Player; let game : Game;
@@ -14,7 +14,7 @@ describe('PoliticalUprising', function() {
     card = new PoliticalUprising();
     player = TestPlayers.BLUE.newPlayer();
     const redPlayer = TestPlayers.RED.newPlayer();
-    const gameOptions = setCustomGameOptions();
+    const gameOptions = TestingUtils.setCustomGameOptions();
     game = Game.newInstance('foobar', [player, redPlayer], player, gameOptions);
   });
 

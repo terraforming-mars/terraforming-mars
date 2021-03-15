@@ -3,7 +3,7 @@ import {Bushes} from '../../../src/cards/base/Bushes';
 import {Player} from '../../../src/Player';
 import {Game} from '../../../src/Game';
 import {Resources} from '../../../src/Resources';
-import {TestPlayers} from '../../TestingUtils';
+import {TestPlayers} from '../../TestPlayers';
 
 describe('Bushes', function() {
   let card : Bushes; let player : Player; let game : Game;

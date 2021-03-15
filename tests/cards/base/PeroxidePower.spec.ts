@@ -1,7 +1,7 @@
 import {expect} from 'chai';
 import {PeroxidePower} from '../../../src/cards/base/PeroxidePower';
 import {Resources} from '../../../src/Resources';
-import {TestPlayers} from '../../TestingUtils';
+import {TestPlayers} from '../../TestPlayers';
 
 describe('PeroxidePower', function() {
   it('Should play', function() {

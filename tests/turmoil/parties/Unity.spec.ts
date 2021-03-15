@@ -2,7 +2,8 @@ import {expect} from 'chai';
 import {Player} from '../../../src/Player';
 import {Game} from '../../../src/Game';
 import {Turmoil} from '../../../src/turmoil/Turmoil';
-import {TestingUtils, setCustomGameOptions, TestPlayers} from '../../TestingUtils';
+import {TestingUtils} from '../../TestingUtils';
+import {TestPlayers} from '../../TestPlayers';
 import {Unity, UNITY_BONUS_1, UNITY_BONUS_2, UNITY_POLICY_2, UNITY_POLICY_3} from '../../../src/turmoil/parties/Unity';
 import {SisterPlanetSupport} from '../../../src/cards/venusNext/SisterPlanetSupport';
 import {VestaShipyard} from '../../../src/cards/base/VestaShipyard';
@@ -15,7 +16,7 @@ describe('Unity', function() {
 
   beforeEach(function() {
     player = TestPlayers.BLUE.newPlayer();
-    const gameOptions = setCustomGameOptions();
+    const gameOptions = TestingUtils.setCustomGameOptions();
     game = Game.newInstance('foobar', [player], player, gameOptions);
     turmoil = game.turmoil!;
     unity = new Unity();

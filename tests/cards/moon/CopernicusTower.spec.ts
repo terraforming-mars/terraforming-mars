@@ -1,12 +1,12 @@
 import {Game} from '../../../src/Game';
-import {setCustomGameOptions} from '../../TestingUtils';
+import {TestingUtils} from '../../TestingUtils';
 import {TestPlayers} from '../../TestPlayers';
 import {TestPlayer} from '../../TestPlayer';
 import {CopernicusTower} from '../../../src/cards/moon/CopernicusTower';
 import {expect} from 'chai';
 import {OrOptions} from '../../../src/inputs/OrOptions';
 
-const MOON_OPTIONS = setCustomGameOptions({moonExpansion: true});
+const MOON_OPTIONS = TestingUtils.setCustomGameOptions({moonExpansion: true});
 
 describe('CopernicusTower', () => {
   let player: TestPlayer;

@@ -24,7 +24,7 @@ import {SpaceHotels} from '../../src/cards/prelude/SpaceHotels';
 import {GMOContract} from '../../src/cards/turmoil/GMOContract';
 import {PioneerSettlement} from '../../src/cards/colonies/PioneerSettlement';
 import {Algae} from '../../src/cards/base/Algae';
-import {TestPlayers} from '../TestingUtils';
+import {TestPlayers} from '../TestPlayers';
 
 describe('Tactician', function() {
   let milestone : Tactician; let player : Player;

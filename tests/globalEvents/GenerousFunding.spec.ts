@@ -4,7 +4,7 @@ import {Resources} from '../../src/Resources';
 import {GenerousFunding} from '../../src/turmoil/globalEvents/GenerousFunding';
 import {Kelvinists} from '../../src/turmoil/parties/Kelvinists';
 import {Turmoil} from '../../src/turmoil/Turmoil';
-import {TestPlayers} from '../TestingUtils';
+import {TestPlayers} from '../TestPlayers';
 
 describe('GenerousFunding', function() {
   it('resolve play', function() {

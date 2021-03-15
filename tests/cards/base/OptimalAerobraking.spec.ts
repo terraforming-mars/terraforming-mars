@@ -2,7 +2,7 @@ import {expect} from 'chai';
 import {BigAsteroid} from '../../../src/cards/base/BigAsteroid';
 import {OptimalAerobraking} from '../../../src/cards/base/OptimalAerobraking';
 import {Game} from '../../../src/Game';
-import {TestPlayers} from '../../TestingUtils';
+import {TestPlayers} from '../../TestPlayers';
 
 describe('OptimalAerobraking', function() {
   it('Should play', function() {

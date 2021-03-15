@@ -5,7 +5,7 @@ import {Resources} from '../../src/Resources';
 import {InterplanetaryTrade} from '../../src/turmoil/globalEvents/InterplanetaryTrade';
 import {Kelvinists} from '../../src/turmoil/parties/Kelvinists';
 import {Turmoil} from '../../src/turmoil/Turmoil';
-import {TestPlayers} from '../TestingUtils';
+import {TestPlayers} from '../TestPlayers';
 
 describe('InterplanetaryTrade', function() {
   it('resolve play', function() {

@@ -3,7 +3,8 @@ import {KelpFarming} from '../../../src/cards/base/KelpFarming';
 import {Game} from '../../../src/Game';
 import {Player} from '../../../src/Player';
 import {Resources} from '../../../src/Resources';
-import {TestingUtils, TestPlayers} from '../../TestingUtils';
+import {TestingUtils} from '../../TestingUtils';
+import {TestPlayers} from '../../TestPlayers';
 
 describe('KelpFarming', function() {
   let card : KelpFarming; let player : Player;

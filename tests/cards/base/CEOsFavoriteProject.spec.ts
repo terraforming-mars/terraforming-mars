@@ -7,7 +7,7 @@ import {SecurityFleet} from '../../../src/cards/base/SecurityFleet';
 import {Game} from '../../../src/Game';
 import {SelectCard} from '../../../src/inputs/SelectCard';
 import {Player} from '../../../src/Player';
-import {TestPlayers} from '../../TestingUtils';
+import {TestPlayers} from '../../TestPlayers';
 
 describe('CEOsFavoriteProject', function() {
   let card : CEOsFavoriteProject; let player : Player;

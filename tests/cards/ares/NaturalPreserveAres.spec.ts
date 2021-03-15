@@ -6,7 +6,7 @@ import {SelectSpace} from '../../../src/inputs/SelectSpace';
 import {NaturalPreserveAres} from '../../../src/cards/ares/NaturalPreserveAres';
 import {SpaceBonus} from '../../../src/SpaceBonus';
 import {ARES_OPTIONS_NO_HAZARDS} from '../../ares/AresTestHelper';
-import {TestPlayers} from '../../TestingUtils';
+import {TestPlayers} from '../../TestPlayers';
 
 describe('NaturalPreserveAres', function() {
   let card : NaturalPreserveAres; let player : Player;

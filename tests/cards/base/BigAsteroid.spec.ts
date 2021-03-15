@@ -3,7 +3,7 @@ import {BigAsteroid} from '../../../src/cards/base/BigAsteroid';
 import {Game} from '../../../src/Game';
 import {OrOptions} from '../../../src/inputs/OrOptions';
 import {Player} from '../../../src/Player';
-import {TestPlayers} from '../../TestingUtils';
+import {TestPlayers} from '../../TestPlayers';
 
 describe('BigAsteroid', function() {
   let card : BigAsteroid; let player : Player; let player2 : Player; let game : Game;

@@ -7,7 +7,7 @@ import {TileType} from '../../../src/TileType';
 import {Resources} from '../../../src/Resources';
 import {MiningRightsAres} from '../../../src/cards/ares/MiningRightsAres';
 import {ARES_OPTIONS_NO_HAZARDS} from '../../ares/AresTestHelper';
-import {TestPlayers} from '../../TestingUtils';
+import {TestPlayers} from '../../TestPlayers';
 
 describe('MiningRightsAres', function() {
   let card : MiningRightsAres; let player : Player; let game : Game;

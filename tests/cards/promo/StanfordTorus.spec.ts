@@ -2,7 +2,7 @@ import {expect} from 'chai';
 import {StanfordTorus} from '../../../src/cards/promo/StanfordTorus';
 import {Game} from '../../../src/Game';
 import {Player} from '../../../src/Player';
-import {TestPlayers} from '../../TestingUtils';
+import {TestPlayers} from '../../TestPlayers';
 
 describe('StanfordTorus', function() {
   let card : StanfordTorus; let player : Player;

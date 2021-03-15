@@ -7,7 +7,7 @@ import {HowToPay} from '../../../src/inputs/HowToPay';
 import {OrOptions} from '../../../src/inputs/OrOptions';
 import {SelectHowToPay} from '../../../src/inputs/SelectHowToPay';
 import {Player} from '../../../src/Player';
-import {TestPlayers} from '../../TestingUtils';
+import {TestPlayers} from '../../TestPlayers';
 
 describe('DirectedImpactors', function() {
   let card : DirectedImpactors; let player : Player; let game : Game;

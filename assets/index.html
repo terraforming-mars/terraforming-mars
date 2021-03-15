@@ -37,6 +37,7 @@
                     :key="playerkey"
                     :settings="settings"
                 ></player-home>
+                <spectator-home v-else-if="screen === 'spectator-home'"></spectator-home>
                 <game-end
                     v-else-if="screen === 'the-end'"
                     :player="player"

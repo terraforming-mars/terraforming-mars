@@ -1,7 +1,7 @@
 import {expect} from 'chai';
 import {LagrangeObservatory} from '../../../src/cards/base/LagrangeObservatory';
 import {Game} from '../../../src/Game';
-import {TestPlayers} from '../../TestingUtils';
+import {TestPlayers} from '../../TestPlayers';
 
 describe('LagrangeObservatory', function() {
   it('Should play', function() {

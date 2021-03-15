@@ -5,7 +5,7 @@ import {Game} from '../../src/Game';
 import {MicrogravityHealthProblems} from '../../src/turmoil/globalEvents/MicrogravityHealthProblems';
 import {Kelvinists} from '../../src/turmoil/parties/Kelvinists';
 import {Turmoil} from '../../src/turmoil/Turmoil';
-import {TestPlayers} from '../TestingUtils';
+import {TestPlayers} from '../TestPlayers';
 
 describe('MicrogravityHealthProblems', function() {
   it('resolve play', function() {

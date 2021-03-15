@@ -8,7 +8,8 @@ import {Game} from '../../../src/Game';
 import {SelectCard} from '../../../src/inputs/SelectCard';
 import {Player} from '../../../src/Player';
 import {Resources} from '../../../src/Resources';
-import {setCustomGameOptions, TestPlayers} from '../../TestingUtils';
+import {TestingUtils} from '../../TestingUtils';
+import {TestPlayers} from '../../TestPlayers';
 
 describe('MaxwellBase', function() {
   let card : MaxwellBase; let player : Player; let game : Game;
@@ -17,7 +18,7 @@ describe('MaxwellBase', function() {
     card = new MaxwellBase();
     player = TestPlayers.BLUE.newPlayer();
     const redPlayer = TestPlayers.RED.newPlayer();
-    const gameOptions = setCustomGameOptions();
+    const gameOptions = TestingUtils.setCustomGameOptions();
     game = Game.newInstance('foobar', [player, redPlayer], player, gameOptions);
   });
 

@@ -2,7 +2,7 @@ import {expect} from 'chai';
 import {Predators} from '../../../src/cards/base/Predators';
 import {Arklight} from '../../../src/cards/colonies/Arklight';
 import {Game} from '../../../src/Game';
-import {TestPlayers} from '../../TestingUtils';
+import {TestPlayers} from '../../TestPlayers';
 
 describe('Arklight', function() {
   it('Should play', function() {

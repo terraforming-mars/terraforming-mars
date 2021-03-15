@@ -2,7 +2,7 @@ import {expect} from 'chai';
 import {Capital} from '../../../src/cards/base/Capital';
 import {MedicalLab} from '../../../src/cards/base/MedicalLab';
 import {Resources} from '../../../src/Resources';
-import {TestPlayers} from '../../TestingUtils';
+import {TestPlayers} from '../../TestPlayers';
 
 describe('MedicalLab', function() {
   it('Should play', function() {

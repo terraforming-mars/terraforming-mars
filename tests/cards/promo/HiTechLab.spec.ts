@@ -4,7 +4,7 @@ import {Game} from '../../../src/Game';
 import {SelectAmount} from '../../../src/inputs/SelectAmount';
 import {Player} from '../../../src/Player';
 import {Resources} from '../../../src/Resources';
-import {TestPlayers} from '../../TestingUtils';
+import {TestPlayers} from '../../TestPlayers';
 
 describe('HiTechLab', function() {
   let card : HiTechLab; let player : Player;

@@ -2,12 +2,13 @@ import {Game} from '../../../src/Game';
 import {IMoonData} from '../../../src/moon/IMoonData';
 import {MoonExpansion} from '../../../src/moon/MoonExpansion';
 import {Player} from '../../../src/Player';
-import {setCustomGameOptions, TestPlayers} from '../../TestingUtils';
+import {TestingUtils} from '../../TestingUtils';
+import {TestPlayers} from '../../TestPlayers';
 import {DeepLunarMining} from '../../../src/cards/moon/DeepLunarMining';
 import {expect} from 'chai';
 import {Resources} from '../../../src/Resources';
 
-const MOON_OPTIONS = setCustomGameOptions({moonExpansion: true});
+const MOON_OPTIONS = TestingUtils.setCustomGameOptions({moonExpansion: true});
 
 describe('DeepLunarMining', () => {
   let game: Game;

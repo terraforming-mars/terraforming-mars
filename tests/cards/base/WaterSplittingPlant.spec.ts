@@ -2,7 +2,8 @@ import {expect} from 'chai';
 import {WaterSplittingPlant} from '../../../src/cards/base/WaterSplittingPlant';
 import {Game} from '../../../src/Game';
 import {Player} from '../../../src/Player';
-import {TestingUtils, TestPlayers} from '../../TestingUtils';
+import {TestingUtils} from '../../TestingUtils';
+import {TestPlayers} from '../../TestPlayers';
 
 describe('WaterSplittingPlant', function() {
   let card : WaterSplittingPlant; let player : Player; let game : Game;

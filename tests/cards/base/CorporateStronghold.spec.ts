@@ -5,7 +5,7 @@ import {SelectSpace} from '../../../src/inputs/SelectSpace';
 import {Player} from '../../../src/Player';
 import {Resources} from '../../../src/Resources';
 import {TileType} from '../../../src/TileType';
-import {TestPlayers} from '../../TestingUtils';
+import {TestPlayers} from '../../TestPlayers';
 
 describe('CorporateStronghold', function() {
   let card : CorporateStronghold; let player : Player;

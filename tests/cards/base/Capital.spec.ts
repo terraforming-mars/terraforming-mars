@@ -6,7 +6,8 @@ import {SpaceType} from '../../../src/SpaceType';
 import {TileType} from '../../../src/TileType';
 import {SelectSpace} from '../../../src/inputs/SelectSpace';
 import {Resources} from '../../../src/Resources';
-import {TestingUtils, TestPlayers} from '../../TestingUtils';
+import {TestingUtils} from '../../TestingUtils';
+import {TestPlayers} from '../../TestPlayers';
 import {Board} from '../../../src/boards/Board';
 
 describe('Capital', function() {

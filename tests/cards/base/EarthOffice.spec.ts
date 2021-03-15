@@ -4,7 +4,7 @@ import {EarthOffice} from '../../../src/cards/base/EarthOffice';
 import {LunaGovernor} from '../../../src/cards/colonies/LunaGovernor';
 import {Game} from '../../../src/Game';
 import {Player} from '../../../src/Player';
-import {TestPlayers} from '../../TestingUtils';
+import {TestPlayers} from '../../TestPlayers';
 
 describe('EarthOffice', function() {
   let card : EarthOffice; let player : Player;

@@ -3,7 +3,7 @@ import {LocalShading} from '../../../src/cards/venusNext/LocalShading';
 import {OrOptions} from '../../../src/inputs/OrOptions';
 import {Player} from '../../../src/Player';
 import {Resources} from '../../../src/Resources';
-import {TestPlayers} from '../../TestingUtils';
+import {TestPlayers} from '../../TestPlayers';
 
 describe('LocalShading', function() {
   let card : LocalShading; let player : Player;

@@ -3,7 +3,7 @@ import {JupiterFloatingStation} from '../../../src/cards/colonies/JupiterFloatin
 import {Game} from '../../../src/Game';
 import {OrOptions} from '../../../src/inputs/OrOptions';
 import {Player} from '../../../src/Player';
-import {TestPlayers} from '../../TestingUtils';
+import {TestPlayers} from '../../TestPlayers';
 
 describe('JupiterFloatingStation', function() {
   let card : JupiterFloatingStation; let player : Player;

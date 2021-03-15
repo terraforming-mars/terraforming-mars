@@ -3,7 +3,7 @@ import {Bushes} from '../../../src/cards/base/Bushes';
 import {NitrogenRichAsteroid} from '../../../src/cards/base/NitrogenRichAsteroid';
 import {Game} from '../../../src/Game';
 import {Resources} from '../../../src/Resources';
-import {TestPlayers} from '../../TestingUtils';
+import {TestPlayers} from '../../TestPlayers';
 
 describe('NitrogenRichAsteroid', function() {
   it('Should play', function() {

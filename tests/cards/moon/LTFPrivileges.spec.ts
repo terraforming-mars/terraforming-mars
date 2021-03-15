@@ -1,12 +1,13 @@
 import {Game} from '../../../src/Game';
 import {Player} from '../../../src/Player';
-import {setCustomGameOptions, TestPlayers} from '../../TestingUtils';
+import {TestingUtils} from '../../TestingUtils';
+import {TestPlayers} from '../../TestPlayers';
 import {LTFPrivileges} from '../../../src/cards/moon/LTFPrivileges';
 import {expect} from 'chai';
 import {CardName} from '../../../src/CardName';
 import {MareSerenitatisMine} from '../../../src/cards/moon/MareSerenitatisMine';
 
-const MOON_OPTIONS = setCustomGameOptions({moonExpansion: true});
+const MOON_OPTIONS = TestingUtils.setCustomGameOptions({moonExpansion: true});
 
 describe('LTFPrivileges', () => {
   let player: Player;

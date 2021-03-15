@@ -31,7 +31,7 @@ describe('LakeMarineris', function() {
     secondOcean.cb(secondOcean.availableSpaces[1]);
     expect(player.getTerraformRating()).to.eq(22);
 
-    player.victoryPointsBreakdown.setVictoryPoints('victoryPoints', card.getVictoryPoints());
+    player.victoryPointsBreakdown.cardVPs(card.name, card.getVictoryPoints());
     expect(player.victoryPointsBreakdown.victoryPoints).to.eq(2);
   });
 });

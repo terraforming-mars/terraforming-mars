@@ -40,7 +40,7 @@ describe('MarsUniversity', function() {
 
   it('Gives victory point', function() {
     card.play();
-    player.victoryPointsBreakdown.setVictoryPoints('victoryPoints', card.getVictoryPoints());
+    player.victoryPointsBreakdown.cardVPs(card.name, card.getVictoryPoints());
     expect(player.victoryPointsBreakdown.victoryPoints).to.eq(1);
   });
 

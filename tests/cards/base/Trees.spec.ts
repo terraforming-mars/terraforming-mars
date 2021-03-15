@@ -27,7 +27,7 @@ describe('Trees', function() {
     expect(player.getProduction(Resources.PLANTS)).to.eq(3);
     expect(player.plants).to.eq(1);
 
-    player.victoryPointsBreakdown.setVictoryPoints('victoryPoints', card.getVictoryPoints());
+    player.victoryPointsBreakdown.cardVPs(card.name, card.getVictoryPoints());
     expect(player.victoryPointsBreakdown.victoryPoints).to.eq(1);
   });
 });

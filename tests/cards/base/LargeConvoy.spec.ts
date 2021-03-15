@@ -20,7 +20,7 @@ describe('LargeConvoy', function() {
   it('Should play without animal cards', function() {
     card.play(player);
 
-    player.victoryPointsBreakdown.setVictoryPoints('victoryPoints', card.getVictoryPoints());
+    player.victoryPointsBreakdown.cardVPs(card.name, card.getVictoryPoints());
     expect(player.victoryPointsBreakdown.victoryPoints).to.eq(2);
     expect(player.cardsInHand).has.lengthOf(2);
     expect(player.plants).to.eq(5);
@@ -49,7 +49,7 @@ describe('LargeConvoy', function() {
     const action = card.play(player);
     expect(action).is.not.undefined;
 
-    player.victoryPointsBreakdown.setVictoryPoints('victoryPoints', card.getVictoryPoints());
+    player.victoryPointsBreakdown.cardVPs(card.name, card.getVictoryPoints());
     expect(player.victoryPointsBreakdown.victoryPoints).to.eq(2);
     expect(player.cardsInHand).has.lengthOf(2);
     expect(player.plants).to.eq(0);
@@ -68,7 +68,7 @@ describe('LargeConvoy', function() {
     const action = card.play(player);
     expect(action).is.not.undefined;
 
-    player.victoryPointsBreakdown.setVictoryPoints('victoryPoints', card.getVictoryPoints());
+    player.victoryPointsBreakdown.cardVPs(card.name, card.getVictoryPoints());
     expect(player.victoryPointsBreakdown.victoryPoints).to.eq(2);
     expect(player.cardsInHand).has.lengthOf(cardsInHand + 2);
 

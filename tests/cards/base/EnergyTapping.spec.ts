@@ -41,7 +41,7 @@ describe('EnergyTapping', function() {
     Game.newInstance('foobar', [player], player);
     card.play(player);
 
-    player.victoryPointsBreakdown.setVictoryPoints('victoryPoints', card.getVictoryPoints());
+    player.victoryPointsBreakdown.cardVPs(card.name, card.getVictoryPoints());
     expect(player.getProduction(Resources.ENERGY)).to.eq(1);
     expect(player.victoryPointsBreakdown.victoryPoints).to.eq(-1);
   });

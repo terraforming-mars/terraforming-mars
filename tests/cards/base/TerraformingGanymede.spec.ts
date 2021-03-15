@@ -11,7 +11,7 @@ describe('TerraformingGanymede', function() {
     Game.newInstance('foobar', [player, player2], player);
     const action = card.play(player);
     expect(action).is.undefined;
-    player.victoryPointsBreakdown.setVictoryPoints('victoryPoints', card.getVictoryPoints());
+    player.victoryPointsBreakdown.cardVPs(card.name, card.getVictoryPoints());
     expect(player.victoryPointsBreakdown.victoryPoints).to.eq(2);
     player.playedCards.push(card);
     expect(player.getTerraformRating()).to.eq(21);

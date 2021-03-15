@@ -9,7 +9,7 @@ describe('AdaptationTechnology', function() {
     const player = TestPlayers.BLUE.newPlayer();
 
     card.play();
-    player.victoryPointsBreakdown.setVictoryPoints('victoryPoints', card.getVictoryPoints());
+    player.victoryPointsBreakdown.cardVPs(card.name, card.getVictoryPoints());
     expect(player.victoryPointsBreakdown.victoryPoints).to.eq(1);
     expect(card.getRequirementBonus()).to.eq(2);
   });

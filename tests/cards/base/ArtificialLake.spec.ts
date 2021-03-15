@@ -34,7 +34,7 @@ describe('ArtificialLake', function() {
         const placedTile = action!.availableSpaces[0].tile;
         expect(placedTile!.tileType).to.eq(TileType.OCEAN);
 
-        player.victoryPointsBreakdown.setVictoryPoints('victoryPoints', card.getVictoryPoints());
+        player.victoryPointsBreakdown.cardVPs(card.name, card.getVictoryPoints());
         expect(player.victoryPointsBreakdown.victoryPoints).to.eq(1);
   });
 

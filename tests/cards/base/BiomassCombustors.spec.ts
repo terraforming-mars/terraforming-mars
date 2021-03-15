@@ -42,7 +42,7 @@ describe('BiomassCombustors', function() {
     expect(player.getProduction(Resources.ENERGY)).to.eq(2);
     expect(player2.getProduction(Resources.PLANTS)).to.eq(0);
 
-    player.victoryPointsBreakdown.setVictoryPoints('victoryPoints', card.getVictoryPoints());
+    player.victoryPointsBreakdown.cardVPs(card.name, card.getVictoryPoints());
     expect(player.victoryPointsBreakdown.victoryPoints).to.eq(-1);
   });
 });

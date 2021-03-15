@@ -26,7 +26,7 @@ describe('MethaneFromTitan', function() {
 
     expect(player.getProduction(Resources.HEAT)).to.eq(2);
     expect(player.getProduction(Resources.PLANTS)).to.eq(2);
-    player.victoryPointsBreakdown.setVictoryPoints('victoryPoints', card.getVictoryPoints());
+    player.victoryPointsBreakdown.cardVPs(card.name, card.getVictoryPoints());
     expect(player.victoryPointsBreakdown.victoryPoints).to.eq(2);
   });
 });

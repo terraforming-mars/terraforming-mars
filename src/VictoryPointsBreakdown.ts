@@ -72,9 +72,6 @@ export class VictoryPointsBreakdown {
       case 'moon road':
         this.moonRoads += points;
         break;
-      default:
-        console.warn('Unknown victory point constraint ' + key);
-        break;
       }
     }
 }

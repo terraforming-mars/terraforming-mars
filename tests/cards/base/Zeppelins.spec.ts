@@ -28,7 +28,7 @@ describe('Zeppelins', function() {
 
     card.play(player);
     expect(player.getProduction(Resources.MEGACREDITS)).to.eq(1);
-    player.victoryPointsBreakdown.setVictoryPoints('victoryPoints', card.getVictoryPoints());
+    player.victoryPointsBreakdown.cardVPs(card.name, card.getVictoryPoints());
     expect(player.victoryPointsBreakdown.victoryPoints).to.eq(1);
   });
 });

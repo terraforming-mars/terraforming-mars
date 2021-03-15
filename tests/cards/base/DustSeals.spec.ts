@@ -22,7 +22,7 @@ describe('DustSeals', function() {
   it('Should play', function() {
     expect(card.canPlay(player)).is.true;
     card.play();
-    player.victoryPointsBreakdown.setVictoryPoints('victoryPoints', card.getVictoryPoints());
+    player.victoryPointsBreakdown.cardVPs(card.name, card.getVictoryPoints());
     expect(player.victoryPointsBreakdown.victoryPoints).to.eq(1);
   });
 });

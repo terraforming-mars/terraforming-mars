@@ -25,7 +25,7 @@ describe('GeneRepair', function() {
     card.play(player);
 
     expect(player.getProduction(Resources.MEGACREDITS)).to.eq(2);
-    player.victoryPointsBreakdown.setVictoryPoints('victoryPoints', card.getVictoryPoints());
+    player.victoryPointsBreakdown.cardVPs(card.name, card.getVictoryPoints());
     expect(player.victoryPointsBreakdown.victoryPoints).to.eq(2);
   });
 });

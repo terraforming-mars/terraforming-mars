@@ -23,7 +23,7 @@ describe('TectonicStressPower', function() {
     card.play(player);
 
     expect(player.getProduction(Resources.ENERGY)).to.eq(3);
-    player.victoryPointsBreakdown.setVictoryPoints('victoryPoints', card.getVictoryPoints());
+    player.victoryPointsBreakdown.cardVPs(card.name, card.getVictoryPoints());
     expect(player.victoryPointsBreakdown.victoryPoints).to.eq(1);
   });
 });

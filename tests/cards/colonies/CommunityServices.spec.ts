@@ -18,7 +18,7 @@ describe('CommunityServices', function() {
     player.corporationCard = corpo;
     const action = card.play(player);
     expect(action).is.undefined;
-    player.victoryPointsBreakdown.setVictoryPoints('victoryPoints', card.getVictoryPoints());
+    player.victoryPointsBreakdown.cardVPs(card.name, card.getVictoryPoints());
     expect(player.victoryPointsBreakdown.victoryPoints).to.eq(1);
     expect(player.getProduction(Resources.MEGACREDITS)).to.eq(4);
   });
@@ -32,7 +32,7 @@ describe('CommunityServices', function() {
     player.corporationCard = corpo;
     const action = card.play(player);
     expect(action).is.undefined;
-    player.victoryPointsBreakdown.setVictoryPoints('victoryPoints', card.getVictoryPoints());
+    player.victoryPointsBreakdown.cardVPs(card.name, card.getVictoryPoints());
     expect(player.victoryPointsBreakdown.victoryPoints).to.eq(1);
     expect(player.getProduction(Resources.MEGACREDITS)).to.eq(4);
   });

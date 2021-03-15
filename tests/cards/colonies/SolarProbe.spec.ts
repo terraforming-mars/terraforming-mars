@@ -15,7 +15,7 @@ describe('SolarProbe', function() {
     const action = card.play(player);
     expect(action).is.undefined;
     expect(player.cardsInHand).has.lengthOf(1);
-    player.victoryPointsBreakdown.setVictoryPoints('victoryPoints', card.getVictoryPoints());
+    player.victoryPointsBreakdown.cardVPs(card.name, card.getVictoryPoints());
     expect(player.victoryPointsBreakdown.victoryPoints).to.eq(1);
   });
 });

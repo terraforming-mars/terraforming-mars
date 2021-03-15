@@ -46,7 +46,7 @@ describe('Flooding', function() {
     subActionSelectPlayer.cb(player2);
     expect(player2.megaCredits).to.eq(0);
 
-    player.victoryPointsBreakdown.setVictoryPoints('victoryPoints', card.getVictoryPoints());
+    player.victoryPointsBreakdown.cardVPs(card.name, card.getVictoryPoints());
     expect(player.victoryPointsBreakdown.victoryPoints).to.eq(-1);
   });
 

@@ -9,7 +9,7 @@ describe('LuxuryFoods', function() {
     expect(card.canPlay(player)).is.not.true;
     const action = card.play();
     expect(action).is.undefined;
-    player.victoryPointsBreakdown.setVictoryPoints('victoryPoints', card.getVictoryPoints());
+    player.victoryPointsBreakdown.cardVPs(card.name, card.getVictoryPoints());
     expect(player.victoryPointsBreakdown.victoryPoints).to.eq(2);
   });
 });

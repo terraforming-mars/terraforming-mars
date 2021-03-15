@@ -18,7 +18,7 @@ describe('Conscription', function() {
   it('play', () => {
     const action = card.play();
     expect(action).is.undefined;
-    player.victoryPointsBreakdown.setVictoryPoints('victoryPoints', card.getVictoryPoints());
+    player.victoryPointsBreakdown.cardVPs(card.name, card.getVictoryPoints());
     expect(player.victoryPointsBreakdown.victoryPoints).to.eq(-1);
     expect(card.getCardDiscount(player)).to.eq(0);
   });

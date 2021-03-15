@@ -5,7 +5,8 @@ import * as constants from '../../../src/constants';
 import {Game} from '../../../src/Game';
 import {SelectSpace} from '../../../src/inputs/SelectSpace';
 import {SpaceName} from '../../../src/SpaceName';
-import {setCustomGameOptions, TestPlayers} from '../../TestingUtils';
+import {TestingUtils} from '../../TestingUtils';
+import {TestPlayers} from '../../TestPlayers';
 
 describe('LandClaim', function() {
   it('Should play', function() {
@@ -24,7 +25,7 @@ describe('LandClaim', function() {
     const card = new LandClaim();
     const player = TestPlayers.BLUE.newPlayer();
     const player2 = TestPlayers.RED.newPlayer();
-    Game.newInstance('foobar', [player, player2], player, setCustomGameOptions({
+    Game.newInstance('foobar', [player, player2], player, TestingUtils.setCustomGameOptions({
       boardName: BoardName.HELLAS,
     }));
     const action = card.play(player) as SelectSpace;

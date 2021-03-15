@@ -6,7 +6,7 @@ import {Game} from '../../src/Game';
 import {SponsoredProjects} from '../../src/turmoil/globalEvents/SponsoredProjects';
 import {Kelvinists} from '../../src/turmoil/parties/Kelvinists';
 import {Turmoil} from '../../src/turmoil/Turmoil';
-import {TestPlayers} from '../TestingUtils';
+import {TestPlayers} from '../TestPlayers';
 
 describe('SponsoredProjects', function() {
   it('resolve play', function() {

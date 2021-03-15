@@ -5,7 +5,7 @@ import {Extremophiles} from '../../../src/cards/venusNext/Extremophiles';
 import {Game} from '../../../src/Game';
 import {SelectCard} from '../../../src/inputs/SelectCard';
 import {Player} from '../../../src/Player';
-import {TestPlayers} from '../../TestingUtils';
+import {TestPlayers} from '../../TestPlayers';
 
 describe('Extremophiles', function() {
   let card : Extremophiles; let player : Player;

@@ -15,6 +15,7 @@ import {ISpace} from '../boards/ISpace';
 import {MAXIMUM_COLONY_RATE, MAXIMUM_LOGISTICS_RATE, MAXIMUM_MINING_RATE} from '../constants';
 import {Resources} from '../Resources';
 import {Phase} from '../Phase';
+import {BoardType} from '../boards/BoardType';
 
 // export interface CoOwnedSpace {
 //   spaceId: string;
@@ -36,7 +37,7 @@ export class MoonExpansion {
   }
 
   // If the moon expansion is enabled, execute this callback, otherwise do nothing.
-  public static ifMoon<T>(game: Game, cb: (moonData: IMoonData) => T, elseCb?: () => T) {
+  public static ifMoon<T>(game: Game, cb: (moonData: IMoonData) => T): T | undefined {
     if (game.gameOptions.moonExpansion) {
       if (game.moonData === undefined) {
         console.log(`Assertion failure: game.moonData is undefined for ${game.id}`);
@@ -44,7 +45,19 @@ export class MoonExpansion {
         return cb(game.moonData);
       }
     }
-    return elseCb ? elseCb() : undefined;
+    return undefined;
+  }
+
+  // If the moon expansion is enabled, execute this callback, otherwise execute the else callback.
+  public static ifElseMoon<T>(game: Game, cb: (moonData: IMoonData) => T, elseCb: () => T): T {
+    if (game.gameOptions.moonExpansion) {
+      if (game.moonData === undefined) {
+        console.log(`Assertion failure: game.moonData is undefined for ${game.id}`);
+      } else {
+        return cb(game.moonData);
+      }
+    }
+    return elseCb();
   }
 
   // If the moon expansion is enabled, return with the game's MoonData instance, otherwise throw an error.
@@ -115,7 +128,7 @@ export class MoonExpansion {
       // hard-code onTilePlaced here. I wouldn't be surprised if this introduces a problem, but for now
       // it's not a problem until it is.
       if (player.corporationCard !== undefined && player.corporationCard.onTilePlaced !== undefined) {
-        player.corporationCard.onTilePlaced(player, player, space);
+        player.corporationCard.onTilePlaced(player, player, space, BoardType.MOON);
       }
     });
   }
@@ -204,9 +217,8 @@ export class MoonExpansion {
     tileType: TileType,
     surfaceOnly: boolean = false,
     player? : Player): Array<ISpace> {
-    let tiles: Array<ISpace> = [];
-    MoonExpansion.ifMoon(game, (moonData) => {
-      tiles = moonData.moon.spaces.filter(
+    return MoonExpansion.ifElseMoon(game, (moonData) => {
+      return moonData.moon.spaces.filter(
         (space) => {
           if (space.tile === undefined) {
             return false;
@@ -231,8 +243,7 @@ export class MoonExpansion {
 
           return include;
         });
-    });
-    return tiles;
+    }, () => []);
   }
 
   /*

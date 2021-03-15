@@ -3,7 +3,7 @@ import {Research} from '../../../src/cards/base/Research';
 import {VenusianAnimals} from '../../../src/cards/venusNext/VenusianAnimals';
 import {Game} from '../../../src/Game';
 import {Player} from '../../../src/Player';
-import {TestPlayers} from '../../TestingUtils';
+import {TestPlayers} from '../../TestPlayers';
 
 describe('VenusianAnimals', function() {
   let card : VenusianAnimals; let player : Player; let game : Game;

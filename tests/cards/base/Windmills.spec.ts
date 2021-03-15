@@ -3,7 +3,7 @@ import {Windmills} from '../../../src/cards/base/Windmills';
 import {Game} from '../../../src/Game';
 import {Player} from '../../../src/Player';
 import {Resources} from '../../../src/Resources';
-import {TestPlayers} from '../../TestingUtils';
+import {TestPlayers} from '../../TestPlayers';
 
 describe('Windmills', function() {
   let card : Windmills; let player : Player; let game : Game;

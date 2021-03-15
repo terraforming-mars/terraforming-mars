@@ -5,22 +5,21 @@ import {Database} from '../database/Database';
 import {BoardName} from '../boards/BoardName';
 import {Cloner} from '../database/Cloner';
 import {GameLoader} from '../database/GameLoader';
-import {Game, GameId} from '../Game';
+import {Game} from '../Game';
 import {Player} from '../Player';
 import {Server} from '../server/ServerModel';
 import {ServeAsset} from './ServeAsset';
-
-// A copy from server.ts. Please dedupe.
-function generateRandomId(): GameId {
-  // 281474976710656 possible values.
-  return Math.floor(Math.random() * Math.pow(16, 12)).toString(16);
-}
 
 // Oh, this could be called Game, but that would introduce all kinds of issues.
 export class GameHandler extends Handler {
   public static readonly INSTANCE = new GameHandler();
   private constructor() {
     super();
+  }
+
+  public generateRandomId(prefix: string): string {
+    // 281474976710656 possible values.
+    return prefix + Math.floor(Math.random() * Math.pow(16, 12)).toString(16);
   }
 
   public get(req: http.IncomingMessage, res: http.ServerResponse, ctx: IContext): void {
@@ -38,14 +37,15 @@ export class GameHandler extends Handler {
     req.once('end', () => {
       try {
         const gameReq = JSON.parse(body);
-        const gameId = generateRandomId();
+        const gameId = this.generateRandomId('g');
+        const spectatorId = this.generateRandomId('s');
         const players = gameReq.players.map((obj: any) => {
           return new Player(
             obj.name,
             obj.color,
             obj.beginner,
             Number(obj.handicap), // For some reason handicap is coming up a string.
-            generateRandomId(),
+            this.generateRandomId('p'),
           );
         });
         let firstPlayerIdx: number = 0;
@@ -114,7 +114,7 @@ export class GameHandler extends Handler {
           });
         } else {
           const seed = Math.random();
-          const game = Game.newInstance(gameId, players, players[firstPlayerIdx], gameOptions, seed);
+          const game = Game.newInstance(gameId, players, players[firstPlayerIdx], gameOptions, seed, spectatorId);
           GameLoader.getInstance().add(game);
           ctx.route.writeJson(res, Server.getGameModel(game));
         }

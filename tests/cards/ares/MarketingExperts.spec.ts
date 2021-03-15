@@ -8,7 +8,7 @@ import {TileType} from '../../../src/TileType';
 import {ARES_OPTIONS_NO_HAZARDS} from '../../ares/AresTestHelper';
 import {SpaceBonus} from '../../../src/SpaceBonus';
 import {EmptyBoard} from '../../ares/EmptyBoard';
-import {TestPlayers} from '../../TestingUtils';
+import {TestPlayers} from '../../TestPlayers';
 
 describe('MarketingExperts', function() {
   let card : MarketingExperts; let player : Player; let otherPlayer: Player; let game : Game;

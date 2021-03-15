@@ -9,7 +9,7 @@ import {SelectCard} from '../../../src/inputs/SelectCard';
 import {Player} from '../../../src/Player';
 import {Resources} from '../../../src/Resources';
 import {TileType} from '../../../src/TileType';
-import {TestPlayers} from '../../TestingUtils';
+import {TestPlayers} from '../../TestPlayers';
 
 describe('UrbanDecomposers', function() {
   let card : UrbanDecomposers; let player : Player; let game : Game;

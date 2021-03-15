@@ -2,7 +2,8 @@ import {expect} from 'chai';
 import {ArcticAlgae} from '../../../src/cards/base/ArcticAlgae';
 import {Game} from '../../../src/Game';
 import {Player} from '../../../src/Player';
-import {TestingUtils, TestPlayers} from '../../TestingUtils';
+import {TestingUtils} from '../../TestingUtils';
+import {TestPlayers} from '../../TestPlayers';
 
 describe('ArcticAlgae', function() {
   let card : ArcticAlgae; let player : Player; let player2 : Player; let game : Game;

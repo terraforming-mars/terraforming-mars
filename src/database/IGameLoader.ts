@@ -1,4 +1,4 @@
-import {Game, GameId} from '../Game';
+import {Game, GameId, SpectatorId} from '../Game';
 import {PlayerId} from '../Player';
 
 type LoadCallback = (game: Game | undefined) => void;
@@ -18,5 +18,6 @@ export interface IGameLoader {
    */
   getByGameId(gameId: GameId, bypassCache: boolean, cb: LoadCallback): void;
   getByPlayerId(playerId: PlayerId, cb: LoadCallback): void;
+  getBySpectatorId(spectatorId: SpectatorId, cb: LoadCallback): void;
   restoreGameAt(gameId: GameId, saveId: number, cb: LoadCallback): void;
 }

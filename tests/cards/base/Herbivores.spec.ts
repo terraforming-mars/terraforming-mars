@@ -4,7 +4,8 @@ import {Game} from '../../../src/Game';
 import {SelectPlayer} from '../../../src/inputs/SelectPlayer';
 import {Player} from '../../../src/Player';
 import {Resources} from '../../../src/Resources';
-import {TestingUtils, TestPlayers} from '../../TestingUtils';
+import {TestingUtils} from '../../TestingUtils';
+import {TestPlayers} from '../../TestPlayers';
 
 describe('Herbivores', function() {
   let card : Herbivores; let player : Player; let player2: Player; let game: Game;

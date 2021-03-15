@@ -1,5 +1,5 @@
 import {Game} from '../../../src/Game';
-import {setCustomGameOptions, TestingUtils} from '../../TestingUtils';
+import {TestingUtils} from '../../TestingUtils';
 import {expect} from 'chai';
 import {TestPlayer} from '../../TestPlayer';
 import {TestPlayers} from '../../TestPlayers';
@@ -14,7 +14,7 @@ describe('SyndicatePirateRaids', () => {
   beforeEach(() => {
     player = TestPlayers.BLUE.newPlayer();
     otherPlayer = TestPlayers.RED.newPlayer();
-    game = Game.newInstance('id', [player, otherPlayer], player, setCustomGameOptions({coloniesExtension: true}));
+    game = Game.newInstance('id', [player, otherPlayer], player, TestingUtils.setCustomGameOptions({coloniesExtension: true}));
     card = new SyndicatePirateRaids();
   });
 

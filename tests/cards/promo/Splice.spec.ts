@@ -7,7 +7,7 @@ import {Game} from '../../../src/Game';
 import {AndOptions} from '../../../src/inputs/AndOptions';
 import {OrOptions} from '../../../src/inputs/OrOptions';
 import {Player} from '../../../src/Player';
-import {TestPlayers} from '../../TestingUtils';
+import {TestPlayers} from '../../TestPlayers';
 
 describe('Splice', function() {
   let card : Splice; let player : Player; let player2 : Player;

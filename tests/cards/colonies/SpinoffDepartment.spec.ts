@@ -3,7 +3,7 @@ import {EarthCatapult} from '../../../src/cards/base/EarthCatapult';
 import {SpinoffDepartment} from '../../../src/cards/colonies/SpinoffDepartment';
 import {Game} from '../../../src/Game';
 import {Resources} from '../../../src/Resources';
-import {TestPlayers} from '../../TestingUtils';
+import {TestPlayers} from '../../TestPlayers';
 
 describe('SpinoffDepartment', function() {
   it('Should play', function() {

@@ -5,7 +5,7 @@ import {ResearchCoordination} from '../../../src/cards/prelude/ResearchCoordinat
 import {OrbitalCleanup} from '../../../src/cards/promo/OrbitalCleanup';
 import {Player} from '../../../src/Player';
 import {Resources} from '../../../src/Resources';
-import {TestPlayers} from '../../TestingUtils';
+import {TestPlayers} from '../../TestPlayers';
 
 describe('OrbitalCleanup', function() {
   let card : OrbitalCleanup; let player : Player;

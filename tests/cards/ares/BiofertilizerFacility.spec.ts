@@ -9,7 +9,7 @@ import {Resources} from '../../../src/Resources';
 import {SpaceBonus} from '../../../src/SpaceBonus';
 import {TileType} from '../../../src/TileType';
 import {ARES_OPTIONS_NO_HAZARDS} from '../../ares/AresTestHelper';
-import {TestPlayers} from '../../TestingUtils';
+import {TestPlayers} from '../../TestPlayers';
 
 describe('BiofertilizerFacility', function() {
   let card : BiofertilizerFacility; let player : Player; let game : Game;

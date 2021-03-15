@@ -2,7 +2,7 @@ import {expect} from 'chai';
 import {TollStation} from '../../../src/cards/base/TollStation';
 import {Game} from '../../../src/Game';
 import {Resources} from '../../../src/Resources';
-import {TestPlayers} from '../../TestingUtils';
+import {TestPlayers} from '../../TestPlayers';
 
 describe('TollStation', function() {
   it('Should play', function() {

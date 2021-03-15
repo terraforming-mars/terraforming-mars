@@ -1,6 +1,7 @@
 import {CorporationCard} from '../corporation/CorporationCard';
 import {Player} from '../../Player';
 import {Tags} from '../Tags';
+import {Card} from '../Card';
 import {CardName} from '../../CardName';
 import {CardType} from '../CardType';
 import {IProjectCard} from '../IProjectCard';
@@ -8,15 +9,37 @@ import {SelectCard} from '../../inputs/SelectCard';
 import {Resources} from '../../Resources';
 import {SelectHowToPayDeferred} from '../../deferredActions/SelectHowToPayDeferred';
 import {DeferredAction} from '../../deferredActions/DeferredAction';
-import {CardMetadata} from '../CardMetadata';
 import {CardRenderer} from '../render/CardRenderer';
 import {CardRenderItemSize} from '../render/CardRenderItemSize';
 
-export class Playwrights implements CorporationCard {
-    public name = CardName.PLAYWRIGHTS;
-    public tags = [Tags.ENERGY];
-    public startingMegaCredits: number = 38;
-    public cardType = CardType.CORPORATION;
+export class Playwrights extends Card implements CorporationCard {
+  constructor() {
+    super({
+      name: CardName.PLAYWRIGHTS,
+      tags: [Tags.ENERGY],
+      startingMegaCredits: 38,
+      cardType: CardType.CORPORATION,
+
+      metadata: {
+        cardNumber: 'R40',
+        description: 'You start with 38 MC and 1 Energy production.',
+        renderData: CardRenderer.builder((b) => {
+          b.br.br;
+          b.megacredits(38).production((pb) => pb.energy(1));
+          b.corpBox('action', (cb) => {
+            cb.action('Replay a played event from any player by paying its cost ONLY in MC (discounts and rebates apply), then REMOVE IT FROM PLAY.', (eb) => {
+              // TODO(chosta): find a reasonable way to represent "?" (alphanumeric maybe)
+              // use 1000 as an id to tell Vue to render the '?'
+              eb.megacredits(1000).startAction;
+              eb.text('replay', CardRenderItemSize.SMALL, true);
+              eb.nbsp.cards(1).any.secondaryTag(Tags.EVENT);
+            });
+          });
+        }),
+      },
+    });
+  }
+
     private checkLoops: number = 0;
 
     public play(player: Player) {
@@ -97,23 +120,5 @@ export class Playwrights implements CorporationCard {
       this.checkLoops--;
 
       return playedEvents;
-    }
-
-    public metadata: CardMetadata = {
-      cardNumber: 'R40',
-      description: 'You start with 38 MC and 1 Energy production.',
-      renderData: CardRenderer.builder((b) => {
-        b.br.br;
-        b.megacredits(38).production((pb) => pb.energy(1));
-        b.corpBox('action', (cb) => {
-          cb.action('Replay a played event from any player by paying its cost ONLY in MC (discounts and rebates apply), then REMOVE IT FROM PLAY.', (eb) => {
-            // TODO(chosta): find a reasonable way to represent "?" (alphanumeric maybe)
-            // use 1000 as an id to tell Vue to render the '?'
-            eb.megacredits(1000).startAction;
-            eb.text('replay', CardRenderItemSize.SMALL, true);
-            eb.nbsp.cards(1).any.secondaryTag(Tags.EVENT);
-          });
-        });
-      }),
     }
 }

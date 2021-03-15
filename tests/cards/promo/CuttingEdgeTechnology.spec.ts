@@ -4,7 +4,7 @@ import {HeatTrappers} from '../../../src/cards/base/HeatTrappers';
 import {CuttingEdgeTechnology} from '../../../src/cards/promo/CuttingEdgeTechnology';
 import {VoteOfNoConfidence} from '../../../src/cards/turmoil/VoteOfNoConfidence';
 import {Game} from '../../../src/Game';
-import {TestPlayers} from '../../TestingUtils';
+import {TestPlayers} from '../../TestPlayers';
 
 describe('CuttingEdgeTechnology', function() {
   it('Should play', function() {

@@ -2,11 +2,12 @@ import {Game} from '../../../src/Game';
 import {IMoonData} from '../../../src/moon/IMoonData';
 import {MoonExpansion} from '../../../src/moon/MoonExpansion';
 import {Player} from '../../../src/Player';
-import {setCustomGameOptions, TestPlayers} from '../../TestingUtils';
+import {TestingUtils} from '../../TestingUtils';
+import {TestPlayers} from '../../TestPlayers';
 import {ColonistShuttles} from '../../../src/cards/moon/ColonistShuttles';
 import {expect} from 'chai';
 
-const MOON_OPTIONS = setCustomGameOptions({moonExpansion: true});
+const MOON_OPTIONS = TestingUtils.setCustomGameOptions({moonExpansion: true});
 
 describe('ColonistShuttles', () => {
   let game: Game;

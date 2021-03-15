@@ -2,7 +2,7 @@ import {expect} from 'chai';
 import {IndustrialMicrobes} from '../../../src/cards/base/IndustrialMicrobes';
 import {Game} from '../../../src/Game';
 import {Resources} from '../../../src/Resources';
-import {TestPlayers} from '../../TestingUtils';
+import {TestPlayers} from '../../TestPlayers';
 
 describe('IndustrialMicrobes', function() {
   it('Should play', function() {

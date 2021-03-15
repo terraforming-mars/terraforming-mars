@@ -2,7 +2,7 @@ import {expect} from 'chai';
 import {AerialMappers} from '../../../src/cards/venusNext/AerialMappers';
 import {CometForVenus} from '../../../src/cards/venusNext/CometForVenus';
 import {Game} from '../../../src/Game';
-import {TestPlayers} from '../../TestingUtils';
+import {TestPlayers} from '../../TestPlayers';
 
 describe('CometForVenus', function() {
   it('Should play', function() {

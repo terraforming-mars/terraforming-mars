@@ -6,7 +6,7 @@ import {Player} from '../../../src/Player';
 import {Resources} from '../../../src/Resources';
 import {SpaceBonus} from '../../../src/SpaceBonus';
 import {TileType} from '../../../src/TileType';
-import {TestPlayers} from '../../TestingUtils';
+import {TestPlayers} from '../../TestPlayers';
 
 describe('MiningArea', function() {
   let card : MiningArea; let player : Player; let game : Game;

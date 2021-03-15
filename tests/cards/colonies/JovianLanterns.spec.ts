@@ -2,7 +2,7 @@ import {expect} from 'chai';
 import {JovianLanterns} from '../../../src/cards/colonies/JovianLanterns';
 import {Game} from '../../../src/Game';
 import {Player} from '../../../src/Player';
-import {TestPlayers} from '../../TestingUtils';
+import {TestPlayers} from '../../TestPlayers';
 
 describe('JovianLanterns', function() {
   let card : JovianLanterns; let player : Player;

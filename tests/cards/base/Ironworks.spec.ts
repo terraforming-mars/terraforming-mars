@@ -2,7 +2,7 @@ import {expect} from 'chai';
 import {Ironworks} from '../../../src/cards/base/Ironworks';
 import {Game} from '../../../src/Game';
 import {Player} from '../../../src/Player';
-import {TestPlayers} from '../../TestingUtils';
+import {TestPlayers} from '../../TestPlayers';
 
 describe('Ironworks', function() {
   let card : Ironworks; let player : Player; let game : Game;

@@ -3,7 +3,7 @@ import {DesignedMicroOrganisms} from '../../../src/cards/base/DesignedMicroOrgan
 import {Game} from '../../../src/Game';
 import {Player} from '../../../src/Player';
 import {Resources} from '../../../src/Resources';
-import {TestPlayers} from '../../TestingUtils';
+import {TestPlayers} from '../../TestPlayers';
 
 describe('DesignedMicroOrganisms', function() {
   let card : DesignedMicroOrganisms; let player : Player; let game : Game;

@@ -1,10 +1,11 @@
 import {Game} from '../../../src/Game';
 import {Player} from '../../../src/Player';
-import {setCustomGameOptions, TestPlayers} from '../../TestingUtils';
+import {TestingUtils} from '../../TestingUtils';
+import {TestPlayers} from '../../TestPlayers';
 import {RustEatingBacteria} from '../../../src/cards/moon/RustEatingBacteria';
 import {expect} from 'chai';
 
-const MOON_OPTIONS = setCustomGameOptions({moonExpansion: true});
+const MOON_OPTIONS = TestingUtils.setCustomGameOptions({moonExpansion: true});
 
 describe('RustEatingBacteria', () => {
   let player: Player;

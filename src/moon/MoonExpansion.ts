@@ -15,7 +15,7 @@ import {ISpace} from '../boards/ISpace';
 import {MAXIMUM_COLONY_RATE, MAXIMUM_LOGISTICS_RATE, MAXIMUM_MINING_RATE} from '../constants';
 import {Resources} from '../Resources';
 import {Phase} from '../Phase';
-import {BoardId} from '../boards/BoardId';
+import {BoardType} from '../boards/BoardType';
 
 // export interface CoOwnedSpace {
 //   spaceId: string;
@@ -128,7 +128,7 @@ export class MoonExpansion {
       // hard-code onTilePlaced here. I wouldn't be surprised if this introduces a problem, but for now
       // it's not a problem until it is.
       if (player.corporationCard !== undefined && player.corporationCard.onTilePlaced !== undefined) {
-        player.corporationCard.onTilePlaced(player, player, space, BoardId.MOON);
+        player.corporationCard.onTilePlaced(player, player, space, BoardType.MOON);
       }
     });
   }

@@ -19,7 +19,7 @@ import {CardMetadata} from './CardMetadata';
 import {StandardProjectCard} from './StandardProjectCard';
 import {CardRequirements} from './CardRequirements';
 import {GlobalParameter} from '../GlobalParameter';
-import {BoardId} from '../boards/BoardId';
+import {BoardType} from '../boards/BoardType';
 
 export interface IActionCard {
     action: (player: Player) => OrOptions | SelectOption | AndOptions | SelectAmount | SelectCard<ICard> | SelectCard<IProjectCard> | SelectHowToPay | SelectPlayer | SelectSpace | undefined;
@@ -48,7 +48,7 @@ export interface ICard {
     getVictoryPoints?: (player: Player) => number;
     onCardPlayed?: (player: Player, card: IProjectCard) => OrOptions | void;
     onStandardProject?: (player: Player, projectType: StandardProjectCard) => void;
-    onTilePlaced?: (cardOwner: Player, activePlayer: Player, space: ISpace, boardId: BoardId) => void;
+    onTilePlaced?: (cardOwner: Player, activePlayer: Player, space: ISpace, boardType: BoardType) => void;
     onDiscard?: (player: Player) => void;
     resourceType?: ResourceType;
     resourceCount?: number;

@@ -64,7 +64,7 @@ import {MoonExpansion} from './moon/MoonExpansion';
 import {TurmoilHandler} from './turmoil/TurmoilHandler';
 import {Random} from './Random';
 import {MilestoneAwardSelector} from './MilestoneAwardSelector';
-import {BoardId} from './boards/BoardId';
+import {BoardType} from './boards/BoardType';
 
 export type GameId = string;
 export type SpectatorId = string;
@@ -1394,9 +1394,9 @@ export class Game implements ISerializable<SerializedGame> {
     }
 
     this.players.forEach((p) => {
-      p.corporationCard?.onTilePlaced?.(p, player, space, BoardId.MARS);
+      p.corporationCard?.onTilePlaced?.(p, player, space, BoardType.MARS);
       p.playedCards.forEach((playedCard) => {
-        playedCard.onTilePlaced?.(p, player, space, BoardId.MARS);
+        playedCard.onTilePlaced?.(p, player, space, BoardType.MARS);
       });
     });
 

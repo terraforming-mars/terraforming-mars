@@ -1,4 +1,4 @@
-export enum BoardId {
+export enum BoardType {
   MARS = 'mars',
   MOON = 'moon'
 }

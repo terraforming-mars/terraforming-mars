@@ -1,4 +1,7 @@
-export type VictoryPoints = 'terraformRating' | 'milestones' | 'awards' | 'greenery' | 'city' | 'moon colony' | 'moon mine' | 'moon road' | 'victoryPoints';
+import {CardName} from './CardName';
+import {Player} from './Player';
+
+export type VictoryPoints = 'terraformRating' | 'greenery' | 'city' | 'moon colony' | 'moon mine' | 'moon road';
 
 export class VictoryPointsBreakdown {
     public terraformRating: number = 0;
@@ -11,9 +14,10 @@ export class VictoryPointsBreakdown {
     public moonRoads: number = 0;
     public victoryPoints = 0;
     public total = 0;
-    public detailsCards: Array<string> = [];
+    public detailsCards: Array<[CardName, number]> = [];
+    public detailsOther: Array<[string, number]> = [];
     public detailsMilestones: Array<string> = [];
-    public detailsAwards: Array<string> = [];
+    public detailsAwards: Array<[string, number, number, string]> = [];
 
     public updateTotal(): void {
       this.total = 0;
@@ -28,28 +32,36 @@ export class VictoryPointsBreakdown {
       this.total += this.victoryPoints;
     }
 
-    public setVictoryPoints(key: VictoryPoints, points: number, message?: string) {
+    public cardVPs(cardName: CardName, points: number) {
+      this.victoryPoints += points;
+      this.detailsCards.push([cardName, points]);
+    }
+
+    public otherVPs(description: string, points: number) {
+      this.victoryPoints += points;
+      this.detailsOther.push([description, points]);
+    }
+
+    public milestoneVPs(name: string, points: number) {
+      this.milestones += points;
+      this.detailsMilestones.push(name);
+    }
+
+    public awardVPs(name: string, points: number, place: number, fundedBy: Player) {
+      this.awards += points;
+      this.detailsAwards.push([name, points, place, fundedBy.name]);
+    }
+
+    public setVictoryPoints(key: VictoryPoints, points: number) {
       switch (key) {
       case 'terraformRating':
         this.terraformRating += points;
-        break;
-      case 'milestones':
-        this.milestones += points;
-        if (message !== undefined) this.detailsMilestones.push(message+': '+points);
-        break;
-      case 'awards':
-        this.awards += points;
-        if (message !== undefined) this.detailsAwards.push(message+': '+points);
         break;
       case 'greenery':
         this.greenery += points;
         break;
       case 'city':
         this.city += points;
-        break;
-      case 'victoryPoints':
-        this.victoryPoints += points;
-        if (message !== undefined) this.detailsCards.push(message+': '+points);
         break;
       case 'moon colony':
         this.moonColonies += points;

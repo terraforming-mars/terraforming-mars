@@ -18,7 +18,7 @@ describe('NuclearZoneAres', function() {
       const space = action.availableSpaces[0];
       action.cb(space);
       expect(space.tile && space.tile.tileType).to.eq(TileType.NUCLEAR_ZONE);
-      player.victoryPointsBreakdown.setVictoryPoints('victoryPoints', card.getVictoryPoints());
+      player.victoryPointsBreakdown.cardVPs(card.name, card.getVictoryPoints());
       expect(player.victoryPointsBreakdown.victoryPoints).to.eq(-2);
       expect(space.adjacency).deep.eq({bonus: [], cost: 2});
     }

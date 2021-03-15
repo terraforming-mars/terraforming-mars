@@ -154,13 +154,18 @@ export const GameEnd = Vue.component('game-end', {
                                 <span :class="'log-player ' + getEndGamePlayerHighlightColorClass(p.color)"><a :href="'/player?id='+p.id+'&noredirect'">{{p.name}}</a></span>
                             </div>
                             <div v-for="v in p.victoryPointsBreakdown.detailsCards">
-                                {{v}}
+                                <!-- Removing any expansion-specific suffix-->
+                                <-- TODO(kberg) make i18n -->
+                                {{v[0].split(':')[0]}}: {{v[1]}}
+                            </div>
+                            <div v-for="v in p.victoryPointsBreakdown.detailsOther">
+                                {{v[0]}}: {{v[1]}}
                             </div>
                             <div v-for="v in p.victoryPointsBreakdown.detailsMilestones">
-                                {{v}}
+                                Claimed {{v}} milestone
                             </div>
                             <div v-for="v in p.victoryPointsBreakdown.detailsAwards">
-                                {{v}}
+                                <span v-if="v[2] === 1">1st</span><span v-else>2nd</span> place for {{v[0]}} award (funded by {{v[3]}})
                             </div>
                         </div>
                     </div>

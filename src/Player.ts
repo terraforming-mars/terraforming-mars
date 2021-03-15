@@ -402,13 +402,13 @@ export class Player implements ISerializable<SerializedPlayer> {
 
     // Victory points from corporations
     if (this.corporationCard !== undefined && this.corporationCard.getVictoryPoints !== undefined) {
-      this.victoryPointsBreakdown.setVictoryPoints('victoryPoints', this.corporationCard.getVictoryPoints(this), this.corporationCard.name);
+      this.victoryPointsBreakdown.cardVPs(this.corporationCard.name, this.corporationCard.getVictoryPoints(this));
     }
 
     // Victory points from cards
     for (const playedCard of this.playedCards) {
       if (playedCard.getVictoryPoints !== undefined) {
-        this.victoryPointsBreakdown.setVictoryPoints('victoryPoints', playedCard.getVictoryPoints(this), playedCard.name);
+        this.victoryPointsBreakdown.cardVPs(playedCard.name, playedCard.getVictoryPoints(this));
       }
     }
 
@@ -421,7 +421,7 @@ export class Player implements ISerializable<SerializedPlayer> {
     // Victory points from milestones
     for (const milestone of this.game.claimedMilestones) {
       if (milestone.player !== undefined && milestone.player.id === this.id) {
-        this.victoryPointsBreakdown.setVictoryPoints('milestones', 5, 'Claimed '+milestone.milestone.name+' milestone');
+        this.victoryPointsBreakdown.milestoneVPs(milestone.milestone.name, 5);
       }
     }
 
@@ -447,12 +447,12 @@ export class Player implements ISerializable<SerializedPlayer> {
     const includeTurmoilVP : boolean = this.game.gameIsOver() || this.game.phase === Phase.END;
 
     if (includeTurmoilVP && this.game.gameOptions.turmoilExtension && this.game.turmoil) {
-      this.victoryPointsBreakdown.setVictoryPoints('victoryPoints', this.game.turmoil.getPlayerVictoryPoints(this), 'Turmoil Points');
+      this.victoryPointsBreakdown.otherVPs('Turmoil Points', this.game.turmoil.getPlayerVictoryPoints(this));
     }
 
     // Titania Colony VP
     if (this.colonyVictoryPoints > 0) {
-      this.victoryPointsBreakdown.setVictoryPoints('victoryPoints', this.colonyVictoryPoints, 'Colony VP');
+      this.victoryPointsBreakdown.otherVPs('Colony VP', this.colonyVictoryPoints);
     }
 
     MoonExpansion.calculateVictoryPoints(this);
@@ -1513,29 +1513,28 @@ export class Player implements ISerializable<SerializedPlayer> {
 
       // We have one rank 1 player
       if (fundedAward.award.getScore(players[0]) > fundedAward.award.getScore(players[1])) {
-        if (players[0].id === this.id) this.victoryPointsBreakdown.setVictoryPoints('awards', 5, '1st place for '+fundedAward.award.name+' award (funded by '+fundedAward.player.name+')');
+        if (players[0].id === this.id) this.victoryPointsBreakdown.awardVPs(fundedAward.award.name, 5, 1, fundedAward.player);
         players.shift();
 
         if (players.length > 1) {
           // We have one rank 2 player
           if (fundedAward.award.getScore(players[0]) > fundedAward.award.getScore(players[1])) {
-            if (players[0].id === this.id) this.victoryPointsBreakdown.setVictoryPoints('awards', 2, '2nd place for '+fundedAward.award.name+' award (funded by '+fundedAward.player.name+')');
+            if (players[0].id === this.id) this.victoryPointsBreakdown.awardVPs(fundedAward.award.name, 2, 2, fundedAward.player);
 
           // We have at least two rank 2 players
           } else {
             const score = fundedAward.award.getScore(players[0]);
             while (players.length > 0 && fundedAward.award.getScore(players[0]) === score) {
-              if (players[0].id === this.id) this.victoryPointsBreakdown.setVictoryPoints('awards', 2, '2nd place for '+fundedAward.award.name+' award (funded by '+fundedAward.player.name+')');
+              if (players[0].id === this.id) this.victoryPointsBreakdown.awardVPs(fundedAward.award.name, 2, 2, fundedAward.player);
               players.shift();
             }
           }
         }
-
       // We have at least two rank 1 players
       } else {
         const score = fundedAward.award.getScore(players[0]);
         while (players.length > 0 && fundedAward.award.getScore(players[0]) === score) {
-          if (players[0].id === this.id) this.victoryPointsBreakdown.setVictoryPoints('awards', 5, '1st place for '+fundedAward.award.name+' award (funded by '+fundedAward.player.name+')');
+          if (players[0].id === this.id) this.victoryPointsBreakdown.awardVPs(fundedAward.award.name, 5, 1, fundedAward.player);
           players.shift();
         }
       }

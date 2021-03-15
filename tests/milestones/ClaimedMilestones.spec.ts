@@ -3,7 +3,7 @@ import {deserializeClaimedMilestones, serializeClaimedMilestones} from '../../sr
 import {ClaimedMilestone} from '../../src/milestones/ClaimedMilestone';
 import {Diversifier} from '../../src/milestones/Diversifier';
 import {Generalist} from '../../src/milestones/Generalist';
-import {TestPlayers} from '../TestingUtils';
+import {TestPlayers} from '../TestPlayers';
 
 describe('ClaimedMilestones', function() {
   it('test serialization', () => {

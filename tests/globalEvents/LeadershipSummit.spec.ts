@@ -3,7 +3,7 @@ import {LeadershipSummit} from '../../src/turmoil/globalEvents/LeadershipSummit'
 import {Game} from '../../src/Game';
 import {Turmoil} from '../../src/turmoil/Turmoil';
 import {PartyName} from '../../src/turmoil/parties/PartyName';
-import {TestPlayers} from '../TestingUtils';
+import {TestPlayers} from '../TestPlayers';
 
 describe('LeadershipSummit', function() {
   it('resolve play', function() {

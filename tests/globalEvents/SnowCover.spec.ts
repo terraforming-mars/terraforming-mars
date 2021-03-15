@@ -5,7 +5,7 @@ import {Player} from '../../src/Player';
 import {SnowCover} from '../../src/turmoil/globalEvents/SnowCover';
 import {Kelvinists} from '../../src/turmoil/parties/Kelvinists';
 import {Turmoil} from '../../src/turmoil/Turmoil';
-import {TestPlayers} from '../TestingUtils';
+import {TestPlayers} from '../TestPlayers';
 
 describe('SnowCover', function() {
   let card : SnowCover; let player : Player; let player2: Player; let game : Game; let turmoil: Turmoil;

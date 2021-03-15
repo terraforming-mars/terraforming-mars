@@ -1,5 +1,5 @@
 import {Game} from '../../../src/Game';
-import {setCustomGameOptions} from '../../TestingUtils';
+import {TestingUtils} from '../../TestingUtils';
 import {LunaFirstIncorporated} from '../../../src/cards/moon/LunaFirstIncorporated';
 import {expect} from 'chai';
 import {MoonExpansion} from '../../../src/moon/MoonExpansion';
@@ -7,7 +7,7 @@ import {TestPlayer} from '../../TestPlayer';
 import {TestPlayers} from '../../TestPlayers';
 import {Resources} from '../../../src/Resources';
 
-const MOON_OPTIONS = setCustomGameOptions({moonExpansion: true});
+const MOON_OPTIONS = TestingUtils.setCustomGameOptions({moonExpansion: true});
 
 describe('LunaFirstIncorporated', () => {
   let player: TestPlayer;

@@ -1,14 +1,14 @@
 import {expect} from 'chai';
 import {COMMUNITY_CARD_MANIFEST} from '../src/cards/community/CommunityCardManifest';
 import {CardFinder} from '../src/CardFinder';
-import {setCustomGameOptions} from './TestingUtils';
+import {TestingUtils} from './TestingUtils';
 import {CardLoader} from '../src/CardLoader';
 import {CardName} from '../src/CardName';
 
 describe('CardLoader', function() {
   it('correctly removes projectCardsToRemove', function() {
     // include corporate era
-    const gameOptions = setCustomGameOptions({
+    const gameOptions = TestingUtils.setCustomGameOptions({
       corporateEra: false,
       preludeExtension: false,
       venusNextExtension: false,
@@ -25,7 +25,7 @@ describe('CardLoader', function() {
 
   it('correctly separates 71 corporate era cards', function() {
     // include corporate era
-    const gameOptions = setCustomGameOptions({
+    const gameOptions = TestingUtils.setCustomGameOptions({
       corporateEra: true,
       preludeExtension: false,
       venusNextExtension: false,
@@ -45,7 +45,7 @@ describe('CardLoader', function() {
   });
 
   it('excludes expansion-specific preludes if those expansions are not selected ', function() {
-    const gameOptions = setCustomGameOptions({
+    const gameOptions = TestingUtils.setCustomGameOptions({
       corporateEra: true,
       preludeExtension: false,
       venusNextExtension: false,

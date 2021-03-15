@@ -8,8 +8,9 @@ import {OrOptions} from '../../src/inputs/OrOptions';
 import {SelectSpace} from '../../src/inputs/SelectSpace';
 import {SpaceBonus} from '../../src/SpaceBonus';
 import {Turmoil} from '../../src/turmoil/Turmoil';
+import {TestingUtils} from '../TestingUtils';
+import {TestPlayers} from '../TestPlayers';
 import {TestPlayer} from '../TestPlayer';
-import {TestingUtils, setCustomGameOptions, TestPlayers} from '../TestingUtils';
 import {Reds} from '../../src/turmoil/parties/Reds';
 import {ReleaseOfInertGases} from '../../src/cards/base/ReleaseOfInertGases';
 import {JovianEmbassy} from '../../src/cards/promo/JovianEmbassy';
@@ -33,7 +34,7 @@ describe('Turmoil', function() {
   beforeEach(function() {
     player = TestPlayers.BLUE.newPlayer();
     player2 = TestPlayers.RED.newPlayer();
-    const gameOptions = setCustomGameOptions();
+    const gameOptions = TestingUtils.setCustomGameOptions();
 
     game = Game.newInstance('foobar', [player, player2], player, gameOptions);
     game.phase = Phase.ACTION;

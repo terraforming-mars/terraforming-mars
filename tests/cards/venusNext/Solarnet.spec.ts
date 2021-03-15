@@ -1,7 +1,7 @@
 import {expect} from 'chai';
 import {Solarnet} from '../../../src/cards/venusNext/Solarnet';
 import {Game} from '../../../src/Game';
-import {TestPlayers} from '../../TestingUtils';
+import {TestPlayers} from '../../TestPlayers';
 
 describe('Solarnet', function() {
   it('Should play', function() {

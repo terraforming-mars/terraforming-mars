@@ -3,7 +3,7 @@ import {HiredRaiders} from '../../../src/cards/base/HiredRaiders';
 import {Game} from '../../../src/Game';
 import {OrOptions} from '../../../src/inputs/OrOptions';
 import {Player} from '../../../src/Player';
-import {TestPlayers} from '../../TestingUtils';
+import {TestPlayers} from '../../TestPlayers';
 
 describe('HiredRaiders', function() {
   let card : HiredRaiders; let player : Player; let player2: Player;

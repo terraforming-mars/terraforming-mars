@@ -2,7 +2,7 @@ import {expect} from 'chai';
 import {RefugeeCamps} from '../../../src/cards/colonies/RefugeeCamps';
 import {Player} from '../../../src/Player';
 import {Resources} from '../../../src/Resources';
-import {TestPlayers} from '../../TestingUtils';
+import {TestPlayers} from '../../TestPlayers';
 
 describe('RefugeeCamps', function() {
   let card : RefugeeCamps; let player : Player;

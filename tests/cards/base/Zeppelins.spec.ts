@@ -3,7 +3,7 @@ import {Zeppelins} from '../../../src/cards/base/Zeppelins';
 import {Game} from '../../../src/Game';
 import {Player} from '../../../src/Player';
 import {Resources} from '../../../src/Resources';
-import {TestPlayers} from '../../TestingUtils';
+import {TestPlayers} from '../../TestPlayers';
 
 describe('Zeppelins', function() {
   let card : Zeppelins; let player : Player; let game : Game;

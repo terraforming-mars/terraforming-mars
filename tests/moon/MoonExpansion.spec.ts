@@ -1,7 +1,9 @@
 import {expect} from 'chai';
 import {ISpace} from '../../src/boards/ISpace';
+import {SpecialDesign} from '../../src/cards/base/SpecialDesign';
 import {EcologicalSurvey} from '../../src/cards/ares/EcologicalSurvey';
 import {GeologicalSurvey} from '../../src/cards/ares/GeologicalSurvey';
+import {LunaMiningHub} from '../../src/cards/moon/LunaMiningHub';
 import {Philares} from '../../src/cards/promo/Philares';
 import {Game} from '../../src/Game';
 import {IMoonData} from '../../src/moon/IMoonData';
@@ -10,11 +12,11 @@ import {MoonSpaces} from '../../src/moon/MoonSpaces';
 import {Resources} from '../../src/Resources';
 import {SpaceName} from '../../src/SpaceName';
 import {TileType} from '../../src/TileType';
-import {setCustomGameOptions} from '../TestingUtils';
+import {TestingUtils} from '../TestingUtils';
 import {TestPlayer} from '../TestPlayer';
 import {TestPlayers} from '../TestPlayers';
 
-const MOON_OPTIONS = setCustomGameOptions({moonExpansion: true});
+const MOON_OPTIONS = TestingUtils.setCustomGameOptions({moonExpansion: true});
 
 describe('MoonExpansion', () => {
   let game: Game;
@@ -153,5 +155,24 @@ describe('MoonExpansion', () => {
     player.cardsInHand = [];
     MoonExpansion.raiseColonyRate(player, 1);
     expect(player.cardsInHand).has.length(1);
+  });
+
+  it('Moon parameters are global parameters', () => {
+    const card = new LunaMiningHub(); // requires mining rate 5.
+    const specialDesign = new SpecialDesign();
+
+    player.cardsInHand = [card];
+    player.megaCredits = card.cost;
+
+    player.titanium = 1;
+    player.steel = 1;
+    moonData.miningRate = 3;
+    expect(player.getPlayableCards()).does.not.include(card);
+
+    // Gives a +2/-2 on the next action
+    player.playedCards = [specialDesign];
+    player.lastCardPlayed = specialDesign;
+
+    expect(player.getPlayableCards()).does.include(card);
   });
 });

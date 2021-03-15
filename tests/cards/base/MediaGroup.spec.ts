@@ -2,7 +2,7 @@ import {expect} from 'chai';
 import {MediaGroup} from '../../../src/cards/base/MediaGroup';
 import {Virus} from '../../../src/cards/base/Virus';
 import {Game} from '../../../src/Game';
-import {TestPlayers} from '../../TestingUtils';
+import {TestPlayers} from '../../TestPlayers';
 
 describe('MediaGroup', function() {
   it('Should play', function() {

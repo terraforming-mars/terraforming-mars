@@ -7,7 +7,7 @@ import {HydrogenToVenus} from '../../../src/cards/venusNext/HydrogenToVenus';
 import {Game} from '../../../src/Game';
 import {SelectCard} from '../../../src/inputs/SelectCard';
 import {Player} from '../../../src/Player';
-import {TestPlayers} from '../../TestingUtils';
+import {TestPlayers} from '../../TestPlayers';
 
 describe('HydrogenToVenus', function() {
   let card : HydrogenToVenus; let player : Player; let game : Game;

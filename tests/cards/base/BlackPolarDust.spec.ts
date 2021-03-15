@@ -2,7 +2,8 @@ import {expect} from 'chai';
 import {BlackPolarDust} from '../../../src/cards/base/BlackPolarDust';
 import {Player} from '../../../src/Player';
 import {Game} from '../../../src/Game';
-import {TestingUtils, TestPlayers} from '../../TestingUtils';
+import {TestingUtils} from '../../TestingUtils';
+import {TestPlayers} from '../../TestPlayers';
 import {Resources} from '../../../src/Resources';
 import {SelectSpace} from '../../../src/inputs/SelectSpace';
 

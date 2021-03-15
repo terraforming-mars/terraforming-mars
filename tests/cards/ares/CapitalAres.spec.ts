@@ -8,7 +8,7 @@ import {Resources} from '../../../src/Resources';
 import {TileType} from '../../../src/TileType';
 import {SpaceBonus} from '../../../src/SpaceBonus';
 import {ARES_OPTIONS_NO_HAZARDS} from '../../ares/AresTestHelper';
-import {TestPlayers} from '../../TestingUtils';
+import {TestPlayers} from '../../TestPlayers';
 
 describe('CapitalAres', function() {
   let card : CapitalAres; let player : Player; let game : Game;

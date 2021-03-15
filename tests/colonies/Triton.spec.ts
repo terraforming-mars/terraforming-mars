@@ -2,7 +2,7 @@ import {expect} from 'chai';
 import {Triton} from '../../src/colonies/Triton';
 import {Game} from '../../src/Game';
 import {Player} from '../../src/Player';
-import {TestPlayers} from '../TestingUtils';
+import {TestPlayers} from '../TestPlayers';
 
 describe('Triton', function() {
   let triton: Triton; let player: Player; let player2: Player; let game: Game;

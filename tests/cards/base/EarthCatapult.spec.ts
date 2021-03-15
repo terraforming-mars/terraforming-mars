@@ -1,6 +1,6 @@
 import {expect} from 'chai';
 import {EarthCatapult} from '../../../src/cards/base/EarthCatapult';
-import {TestPlayers} from '../../TestingUtils';
+import {TestPlayers} from '../../TestPlayers';
 
 describe('EarthCatapult', function() {
   it('Should play', function() {

@@ -2,7 +2,8 @@ import {expect} from 'chai';
 import {Player} from '../../src/Player';
 import {PartyName} from '../../src/turmoil/parties/PartyName';
 import {Game} from '../../src/Game';
-import {TestingUtils, setCustomGameOptions, TestPlayers} from '../TestingUtils';
+import {TestingUtils} from '../TestingUtils';
+import {TestPlayers} from '../TestPlayers';
 import {AgendaStyle, PoliticalAgendas} from '../../src/turmoil/PoliticalAgendas';
 import {AndOptions} from '../../src/inputs/AndOptions';
 import {OrOptions} from '../../src/inputs/OrOptions';
@@ -27,7 +28,7 @@ describe('PoliticalAgendas', function() {
   deserialized.forEach((deserialize) => {
     const suffix = deserialize ? ', but deserialized' : '';
     it('Standard' + suffix, () => {
-      let game = Game.newInstance('foobar', [player1, player2], player1, setCustomGameOptions({politicalAgendasExtension: AgendaStyle.STANDARD}));
+      let game = Game.newInstance('foobar', [player1, player2], player1, TestingUtils.setCustomGameOptions({politicalAgendasExtension: AgendaStyle.STANDARD}));
       if (deserialize) {
         game = Game.deserialize(game.serialize());
       }
@@ -50,7 +51,7 @@ describe('PoliticalAgendas', function() {
       // For the neutral chairman to always pick the second item in the list.
       PoliticalAgendas.randomElement = (list: Array<any>) => list[1];
 
-      let game = Game.newInstance('foobar', [player1, player2], player1, setCustomGameOptions({politicalAgendasExtension: AgendaStyle.CHAIRMAN}));
+      let game = Game.newInstance('foobar', [player1, player2], player1, TestingUtils.setCustomGameOptions({politicalAgendasExtension: AgendaStyle.CHAIRMAN}));
       if (deserialize) {
         game = Game.deserialize(game.serialize());
         // Get a new copy of player2 who will have a different set of waitingFor.
@@ -87,7 +88,7 @@ describe('PoliticalAgendas', function() {
       // For the neutral chairperson to always pick the second item.
       PoliticalAgendas.randomElement = (list: Array<any>) => list[1];
 
-      let game = Game.newInstance('foobar', [player1, player2], player1, setCustomGameOptions({politicalAgendasExtension: AgendaStyle.CHAIRMAN}));
+      let game = Game.newInstance('foobar', [player1, player2], player1, TestingUtils.setCustomGameOptions({politicalAgendasExtension: AgendaStyle.CHAIRMAN}));
       if (deserialize) {
         game = Game.deserialize(game.serialize());
       }

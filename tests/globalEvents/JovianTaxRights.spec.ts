@@ -6,7 +6,7 @@ import {Resources} from '../../src/Resources';
 import {JovianTaxRights} from '../../src/turmoil/globalEvents/JovianTaxRights';
 import {Kelvinists} from '../../src/turmoil/parties/Kelvinists';
 import {Turmoil} from '../../src/turmoil/Turmoil';
-import {TestPlayers} from '../TestingUtils';
+import {TestPlayers} from '../TestPlayers';
 
 describe('JovianTaxRights', function() {
   it('resolve play', function() {

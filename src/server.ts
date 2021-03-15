@@ -9,12 +9,12 @@ import * as http from 'http';
 import * as fs from 'fs';
 import * as querystring from 'querystring';
 
-import {GameId} from './Game';
 import {ApiCloneableGames} from './routes/ApiCloneableGames';
 import {ApiGameLogs} from './routes/ApiGameLogs';
 import {ApiGames} from './routes/ApiGames';
 import {ApiGame} from './routes/ApiGame';
 import {ApiPlayer} from './routes/ApiPlayer';
+import {ApiSpectator} from './routes/ApiSpectator';
 import {ApiWaitingFor} from './routes/ApiWaitingFor';
 import {GameHandler} from './routes/Game';
 import {LoadGame} from './routes/LoadGame';
@@ -26,7 +26,7 @@ import {GameLoader} from './database/GameLoader';
 import {ServeApp} from './routes/ServeApp';
 import {ServeAsset} from './routes/ServeAsset';
 
-const serverId = process.env.SERVER_ID || generateRandomId();
+const serverId = process.env.SERVER_ID || GameHandler.INSTANCE.generateRandomId('');
 const route = new Route();
 
 const handlers: Map<string, IHandler> = new Map(
@@ -35,6 +35,7 @@ const handlers: Map<string, IHandler> = new Map(
     ['/', ServeApp.INSTANCE],
     ['/new-game', ServeApp.INSTANCE],
     ['/solo', ServeApp.INSTANCE],
+    ['/spectator', ServeApp.INSTANCE],
     ['/player', ServeApp.INSTANCE],
     ['/the-end', ServeApp.INSTANCE],
     ['/load', ServeApp.INSTANCE],
@@ -45,6 +46,7 @@ const handlers: Map<string, IHandler> = new Map(
     ['/main.js', ServeAsset.INSTANCE],
     ['/main.js.map', ServeAsset.INSTANCE],
     ['/api/player', ApiPlayer.INSTANCE],
+    ['/api/spectator', ApiSpectator.INSTANCE],
     ['/api/waitingfor', ApiWaitingFor.INSTANCE],
     ['/api/games', ApiGames.INSTANCE],
     ['/api/game', ApiGame.INSTANCE],
@@ -133,11 +135,6 @@ if (process.env.KEY_PATH && process.env.CERT_PATH) {
   server = https.createServer(options, requestHandler);
 } else {
   server = http.createServer(requestHandler);
-}
-
-function generateRandomId(): GameId {
-  // 281474976710656 possible values.
-  return Math.floor(Math.random() * Math.pow(16, 12)).toString(16);
 }
 
 function isServerIdValid(req: http.IncomingMessage): boolean {

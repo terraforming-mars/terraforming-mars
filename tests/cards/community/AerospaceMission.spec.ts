@@ -6,7 +6,8 @@ import {ColonyName} from '../../../src/colonies/ColonyName';
 import {Game} from '../../../src/Game';
 import {SelectColony} from '../../../src/inputs/SelectColony';
 import {Player} from '../../../src/Player';
-import {setCustomGameOptions, TestPlayers} from '../../TestingUtils';
+import {TestingUtils} from '../../TestingUtils';
+import {TestPlayers} from '../../TestPlayers';
 
 describe('AerospaceMission', function() {
   let card : AerospaceMission; let player : Player; let game : Game;
@@ -15,7 +16,7 @@ describe('AerospaceMission', function() {
     card = new AerospaceMission();
     player = TestPlayers.BLUE.newPlayer();
     const redPlayer = TestPlayers.RED.newPlayer();
-    const gameOptions = setCustomGameOptions({coloniesExtension: true});
+    const gameOptions = TestingUtils.setCustomGameOptions({coloniesExtension: true});
     game = Game.newInstance('foobar', [player, redPlayer], player, gameOptions);
     game.colonies.push(new Iapetus(), new Leavitt()); // ensure 2 colonies are always available
   });

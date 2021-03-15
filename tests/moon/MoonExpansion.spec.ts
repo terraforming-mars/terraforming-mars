@@ -1,5 +1,7 @@
 import {expect} from 'chai';
 import {ISpace} from '../../src/boards/ISpace';
+import {SpecialDesign} from '../../src/cards/base/SpecialDesign';
+import {LunaMiningHub} from '../../src/cards/moon/LunaMiningHub';
 import {Game} from '../../src/Game';
 import {IMoonData} from '../../src/moon/IMoonData';
 import {MoonExpansion} from '../../src/moon/MoonExpansion';
@@ -140,5 +142,24 @@ describe('MoonExpansion', () => {
     player.cardsInHand = [];
     MoonExpansion.raiseColonyRate(player, 1);
     expect(player.cardsInHand).has.length(1);
+  });
+
+  it('Moon parameters are global parameters', () => {
+    const card = new LunaMiningHub(); // requires mining rate 5.
+    const specialDesign = new SpecialDesign();
+
+    player.cardsInHand = [card];
+    player.megaCredits = card.cost;
+
+    player.titanium = 1;
+    player.steel = 1;
+    moonData.miningRate = 3;
+    expect(player.getPlayableCards()).does.not.include(card);
+
+    // Gives a +2/-2 on the next action
+    player.playedCards = [specialDesign];
+    player.lastCardPlayed = specialDesign;
+
+    expect(player.getPlayableCards()).does.include(card);
   });
 });

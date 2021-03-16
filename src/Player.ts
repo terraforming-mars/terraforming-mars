@@ -1684,7 +1684,7 @@ export class Player implements ISerializable<SerializedPlayer> {
           return false;
         }
         // only show buffer gas in solo mode
-        if (card.name === CardName.BUFFER_GAS_STANDARD_PROJECT && this.game.isSoloMode()) {
+        if (card.name === CardName.BUFFER_GAS_STANDARD_PROJECT && this.game.isSoloMode() === false) {
           return false;
         }
         return true;

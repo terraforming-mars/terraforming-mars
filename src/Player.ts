@@ -1413,7 +1413,6 @@ export class Player implements ISerializable<SerializedPlayer> {
     const selectColony = new SelectColony('Select colony tile for trade', 'trade', coloniesModel, (colonyName: ColonyName) => {
       openColonies.forEach((colony) => {
         if (colony.name === colonyName) {
-          this.game.log('${0} traded with ${1}', (b) => b.player(this).colony(colony));
           if (payWith === Resources.MEGACREDITS) {
             this.game.defer(new SelectHowToPayDeferred(
               this,
@@ -1421,19 +1420,23 @@ export class Player implements ISerializable<SerializedPlayer> {
               {
                 title: 'Select how to pay ' + mcTradeAmount + ' for colony trade',
                 afterPay: () => {
+                  this.game.log('${0} spent ${1} MC to trade with ${2}', (b) => b.player(this).number(mcTradeAmount).colony(colony));
                   colony.trade(this);
                 },
               },
             ));
           } else if (payWith === Resources.ENERGY) {
             this.energy -= energyTradeAmount;
+            this.game.log('${0} spent ${1} energy to trade with ${2}', (b) => b.player(this).number(energyTradeAmount).colony(colony));
             colony.trade(this);
           } else if (payWith === Resources.TITANIUM) {
             this.titanium -= titaniumTradeAmount;
+            this.game.log('${0} spent ${1} titanium to trade with ${2}', (b) => b.player(this).number(titaniumTradeAmount).colony(colony));
             colony.trade(this);
           } else if (payWith === ResourceType.FLOATER && titanFloatingLaunchPad !== undefined && titanFloatingLaunchPad.resourceCount) {
             titanFloatingLaunchPad.resourceCount--;
             this.actionsThisGeneration.add(titanFloatingLaunchPad.name);
+            this.game.log('${0} spent 1 floater to trade with ${1}', (b) => b.player(this).colony(colony));
             colony.trade(this);
           }
           return undefined;

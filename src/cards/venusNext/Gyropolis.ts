@@ -36,7 +36,7 @@ export class Gyropolis extends Card {
   public play(player: Player) {
     const tags: Array<Tags> = [Tags.VENUS, Tags.EARTH];
     player.addProduction(Resources.ENERGY, -2);
-    player.addProduction(Resources.MEGACREDITS, player.getMultipleTagCount(tags));
+    player.addProduction(Resources.MEGACREDITS, player.getMultipleTagCount(tags), player.game);
     return new SelectSpace('Select space for city tile', player.game.board.getAvailableSpacesForCity(player), (space: ISpace) => {
       player.game.addCityTile(player, space.id);
       return undefined;

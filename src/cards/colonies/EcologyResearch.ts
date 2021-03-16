@@ -32,7 +32,7 @@ export class EcologyResearch extends Card implements IProjectCard {
 
   public play(player: Player) {
     const coloniesCount = player.getColoniesCount();
-    player.addProduction(Resources.PLANTS, coloniesCount);
+    player.addProduction(Resources.PLANTS, coloniesCount, player.game);
 
     const animalCards = player.getResourceCards(ResourceType.ANIMAL);
     if (animalCards.length) {

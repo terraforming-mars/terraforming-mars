@@ -18,8 +18,6 @@ import {PreferencesManager} from './PreferencesManager';
 
 let logRequest: XMLHttpRequest | undefined;
 
-import * as raw_settings from '../genfiles/settings.json';
-
 export const LogPanel = Vue.component('log-panel', {
   props: {
     id: {

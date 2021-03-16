@@ -17,6 +17,9 @@ export const Preferences = Vue.component('preferences', {
     gameOptions: {
       type: Object as () => GameOptionsModel,
     },
+    active_player: {
+      type: Boolean,
+    },
     player_color: {
       type: String as () => Color,
     },
@@ -137,6 +140,7 @@ export const Preferences = Vue.component('preferences', {
         this.$data[k] = PreferencesManager.preferencesValues.get(k);
         this.setPreferencesCSS(this.$data[k], k);
       }
+      this.setPreferencesCSS(this.active_player, 'active_player');
     },
     getGenMarker: function(): string {
       return `${this.generation}`;

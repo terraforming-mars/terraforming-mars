@@ -7,7 +7,6 @@ require('console-stamp')(
 import * as https from 'https';
 import * as http from 'http';
 import * as fs from 'fs';
-import * as querystring from 'querystring';
 
 import {ApiCloneableGames} from './routes/ApiCloneableGames';
 import {ApiGameLogs} from './routes/ApiGameLogs';
@@ -17,6 +16,7 @@ import {ApiPlayer} from './routes/ApiPlayer';
 import {ApiSpectator} from './routes/ApiSpectator';
 import {ApiWaitingFor} from './routes/ApiWaitingFor';
 import {GameHandler} from './routes/Game';
+import {GamesOverview} from './routes/GamesOverview';
 import {LoadGame} from './routes/LoadGame';
 import {IHandler} from './routes/IHandler';
 import {Route} from './routes/Route';
@@ -31,31 +31,30 @@ const route = new Route();
 
 const handlers: Map<string, IHandler> = new Map(
   [
-    // ['/games-overview', GamesOverview.INSTANCE],
     ['/', ServeApp.INSTANCE],
-    ['/new-game', ServeApp.INSTANCE],
-    ['/solo', ServeApp.INSTANCE],
-    ['/spectator', ServeApp.INSTANCE],
-    ['/player', ServeApp.INSTANCE],
-    ['/the-end', ServeApp.INSTANCE],
-    ['/load', ServeApp.INSTANCE],
-    ['/cards', ServeApp.INSTANCE],
-    ['/help', ServeApp.INSTANCE],
-    ['/styles.css', ServeAsset.INSTANCE],
-    ['/favicon.ico', ServeAsset.INSTANCE],
-    ['/main.js', ServeAsset.INSTANCE],
-    ['/main.js.map', ServeAsset.INSTANCE],
+    ['/api/clonablegames', ApiCloneableGames.INSTANCE],
+    ['/api/cloneablegames', ApiCloneableGames.INSTANCE],
+    ['/api/game', ApiGame.INSTANCE],
+    ['/api/game/logs', ApiGameLogs.INSTANCE],
+    ['/api/games', ApiGames.INSTANCE],
     ['/api/player', ApiPlayer.INSTANCE],
     ['/api/spectator', ApiSpectator.INSTANCE],
     ['/api/waitingfor', ApiWaitingFor.INSTANCE],
-    ['/api/games', ApiGames.INSTANCE],
-    ['/api/game', ApiGame.INSTANCE],
-    ['/api/clonablegames', ApiCloneableGames.INSTANCE],
-    ['/api/cloneablegames', ApiCloneableGames.INSTANCE],
-    ['/api/game/logs', ApiGameLogs.INSTANCE],
+    ['/cards', ServeApp.INSTANCE],
+    ['/favicon.ico', ServeAsset.INSTANCE],
     ['/game', GameHandler.INSTANCE],
+    ['/games-overview', GamesOverview.INSTANCE],
+    ['/help', ServeApp.INSTANCE],
     ['/load', LoadGame.INSTANCE],
+    ['/main.js', ServeAsset.INSTANCE],
+    ['/main.js.map', ServeAsset.INSTANCE],
+    ['/new-game', ServeApp.INSTANCE],
+    ['/player', ServeApp.INSTANCE],
     ['/player/input', PlayerInput.INSTANCE],
+    ['/solo', ServeApp.INSTANCE],
+    ['/spectator', ServeApp.INSTANCE],
+    ['/styles.css', ServeAsset.INSTANCE],
+    ['/the-end', ServeApp.INSTANCE],
   ],
 );
 
@@ -71,31 +70,9 @@ function processRequest(req: http.IncomingMessage, res: http.ServerResponse): vo
 
   if (handler !== undefined) {
     handler.processRequest(req, res, ctx);
-    return;
-  }
-
-  switch (req.method) {
-  case 'GET':
-    switch (url.pathname) {
-    case '/games-overview':
-      if (!isServerIdValid(req)) {
-        route.notAuthorized(req, res);
-        return;
-      } else {
-        ServeApp.INSTANCE.get(req, res, ctx);
-      }
-      break;
-
-    default:
-      if (url.pathname.startsWith('/assets/')) {
-        ServeAsset.INSTANCE.get(req, res, ctx);
-      } else {
-        route.notFound(req, res);
-      }
-    }
-    break;
-
-  default:
+  } else if (req.method === 'GET' && url.pathname.startsWith('/assets/')) {
+    ServeAsset.INSTANCE.get(req, res, ctx);
+  } else {
     route.notFound(req, res);
   }
 }
@@ -135,18 +112,6 @@ if (process.env.KEY_PATH && process.env.CERT_PATH) {
   server = https.createServer(options, requestHandler);
 } else {
   server = http.createServer(requestHandler);
-}
-
-function isServerIdValid(req: http.IncomingMessage): boolean {
-  const queryParams = querystring.parse(req.url!.replace(/^.*\?/, ''));
-  if (
-    queryParams.serverId === undefined ||
-    queryParams.serverId !== serverId
-  ) {
-    console.warn('No or invalid serverId given');
-    return false;
-  }
-  return true;
 }
 
 console.log('Starting server on port ' + (process.env.PORT || 8080));

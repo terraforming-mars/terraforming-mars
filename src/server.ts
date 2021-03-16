@@ -26,6 +26,10 @@ import {GameLoader} from './database/GameLoader';
 import {ServeApp} from './routes/ServeApp';
 import {ServeAsset} from './routes/ServeAsset';
 
+process.on('uncaughtException', (err: any) => {
+  console.error('UNCAUGHT EXCEPTION', err);
+});
+
 const serverId = process.env.SERVER_ID || GameHandler.INSTANCE.generateRandomId('');
 const route = new Route();
 

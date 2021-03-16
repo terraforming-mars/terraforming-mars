@@ -4,17 +4,11 @@ import {GameLoader} from '../database/GameLoader';
 import {Server} from '../server/ServerModel';
 import {Handler} from './Handler';
 import {IContext} from './IHandler';
-import {ServeApp} from './ServeApp';
 
 export class LoadGame extends Handler {
   public static readonly INSTANCE = new LoadGame();
   private constructor() {
     super();
-  }
-
-  public get(req: http.IncomingMessage, res: http.ServerResponse, ctx: IContext): void {
-    req.url = '/assets/index.html';
-    ServeApp.INSTANCE.get(req, res, ctx);
   }
 
   public put(req: http.IncomingMessage, res: http.ServerResponse, ctx: IContext): void {

@@ -15,14 +15,15 @@ import {ApiGame} from './routes/ApiGame';
 import {ApiPlayer} from './routes/ApiPlayer';
 import {ApiSpectator} from './routes/ApiSpectator';
 import {ApiWaitingFor} from './routes/ApiWaitingFor';
-import {GameHandler} from './routes/Game';
-import {GamesOverview} from './routes/GamesOverview';
-import {LoadGame} from './routes/LoadGame';
-import {IHandler} from './routes/IHandler';
-import {Route} from './routes/Route';
 import {Database} from './database/Database';
-import {PlayerInput} from './routes/PlayerInput';
+import {GameHandler} from './routes/Game';
 import {GameLoader} from './database/GameLoader';
+import {GamesOverview} from './routes/GamesOverview';
+import {IHandler} from './routes/IHandler';
+import {Load} from './routes/Load';
+import {LoadGame} from './routes/LoadGame';
+import {Route} from './routes/Route';
+import {PlayerInput} from './routes/PlayerInput';
 import {ServeApp} from './routes/ServeApp';
 import {ServeAsset} from './routes/ServeAsset';
 
@@ -45,7 +46,8 @@ const handlers: Map<string, IHandler> = new Map(
     ['/game', GameHandler.INSTANCE],
     ['/games-overview', GamesOverview.INSTANCE],
     ['/help', ServeApp.INSTANCE],
-    ['/load', LoadGame.INSTANCE],
+    ['/load', Load.INSTANCE],
+    ['/load_game', LoadGame.INSTANCE],
     ['/main.js', ServeAsset.INSTANCE],
     ['/main.js.map', ServeAsset.INSTANCE],
     ['/new-game', ServeApp.INSTANCE],

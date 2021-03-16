@@ -17,7 +17,7 @@ export const Preferences = Vue.component('preferences', {
     gameOptions: {
       type: Object as () => GameOptionsModel,
     },
-    active_player: {
+    acting_player: {
       type: Boolean,
     },
     player_color: {
@@ -141,9 +141,9 @@ export const Preferences = Vue.component('preferences', {
         this.setPreferencesCSS(this.$data[k], k);
       }
     },
-    getActivePlayerClass: function(): string {
-      if (this.active_player) {
-        return 'preferences_active_player';
+    getActingPlayerClass: function(): string {
+      if (this.acting_player) {
+        return 'preferences_acting_player';
       } else {
         return '';
       }
@@ -203,7 +203,7 @@ export const Preferences = Vue.component('preferences', {
     this.updatePreferencesFromStorage();
   },
   template: `
-        <div :class="'preferences_cont '+getActivePlayerClass()" :data="syncPreferences()">
+        <div :class="'preferences_cont '+getActingPlayerClass()" :data="syncPreferences()">
                 <div class="preferences_tm">
                     <div class="preferences-gen-text">GEN</div>
                     <div class="preferences-gen-marker">{{ getGenMarker() }}</div>

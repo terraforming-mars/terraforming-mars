@@ -104,8 +104,8 @@ export const PlayerHome = Vue.component('player-home', {
         }
       }
     },
-    isPlayerActive: function(player: PlayerModel) : boolean {
-      return player.players.length > 1 && (player.needsToDraft || (player.needsToDraft === undefined && player.isActive));
+    isPlayerActing: function(player: PlayerModel) : boolean {
+      return player.players.length > 1 && player.waitingFor !== undefined;
     },
     getPlayerCssForTurnOrder: (
       player: PlayerModel,
@@ -190,7 +190,7 @@ export const PlayerHome = Vue.component('player-home', {
             </div>
 
             <preferences v-trim-whitespace
-              :active_player="isPlayerActive(player)"
+              :acting_player="isPlayerActing(player)"
               :player_color="player.color"
               :generation="player.generation"
               :coloniesCount="player.colonies.length"

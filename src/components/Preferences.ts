@@ -140,7 +140,13 @@ export const Preferences = Vue.component('preferences', {
         this.$data[k] = PreferencesManager.preferencesValues.get(k);
         this.setPreferencesCSS(this.$data[k], k);
       }
-      this.setPreferencesCSS(this.active_player, 'active_player');
+    },
+    getActivePlayerClass: function(): string {
+      if (this.active_player) {
+        return 'preferences_active_player';
+      } else {
+        return '';
+      }
     },
     getGenMarker: function(): string {
       return `${this.generation}`;
@@ -197,7 +203,7 @@ export const Preferences = Vue.component('preferences', {
     this.updatePreferencesFromStorage();
   },
   template: `
-        <div class="preferences_cont" :data="syncPreferences()">
+        <div :class="'preferences_cont '+getActivePlayerClass()" :data="syncPreferences()">
                 <div class="preferences_tm">
                     <div class="preferences-gen-text">GEN</div>
                     <div class="preferences-gen-marker">{{ getGenMarker() }}</div>

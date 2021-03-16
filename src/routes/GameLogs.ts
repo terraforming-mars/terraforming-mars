@@ -1,54 +1,54 @@
 
 import * as http from 'http';
-import * as querystring from 'querystring';
 
-import {GameLoader} from '../database/GameLoader';
-import {Route} from './Route';
+import {IContext} from './IHandler';
+import {LogMessage} from '../LogMessage';
+import {LogMessageType} from '../LogMessageType';
 
-export class GameLogs extends Route {
-  public canHandle(url: string): boolean {
-    return url.startsWith('/api/game/logs?');
+export class GameLogs {
+  private getLogsForGeneration(messages: Array<LogMessage>, generation: number) {
+    let foundStart = generation === 1;
+    const newMessages: Array<LogMessage> = [];
+    for (const message of messages) {
+      if (message.type === LogMessageType.NEW_GENERATION) {
+        const value = Number(message.data[0]?.value);
+        if (value === generation) {
+          foundStart = true;
+        } else if (value === generation + 1) {
+          break;
+        }
+      }
+      if (foundStart === true) {
+        newMessages.push(message);
+      }
+    }
+    return newMessages;
   }
-  public handle(req: http.IncomingMessage, res: http.ServerResponse): void {
-    if (req.url === undefined) {
-      console.warn('url not defined');
-      this.notFound(req, res);
+
+  public handle(req: http.IncomingMessage, res: http.ServerResponse, ctx: IContext): void {
+    const id = ctx.url.searchParams.get('id');
+    const generation = ctx.url.searchParams.get('generation');
+    if (id === null) {
+      ctx.route.badRequest(req, res, 'must provide playerid');
       return;
     }
 
-    const params = querystring.parse(req.url.substring(req.url.indexOf('?') + 1));
-
-    const id = params.id;
-    const limit = params.limit;
-
-    if (id === undefined || Array.isArray(id)) {
-      this.badRequest(req, res);
-      return;
-    }
-
-    GameLoader.getInstance().getByPlayerId(id, (game) => {
+    ctx.gameLoader.getByPlayerId(id, (game) => {
       if (game === undefined) {
-        console.warn('game not found');
-        this.notFound(req, res);
+        ctx.route.notFound(req, res, 'game not found');
         return;
       }
+      let logs: Array<LogMessage> | undefined;
 
-      const log = game.gameLog;
-
-      if (limit !== undefined && !Array.isArray(limit)) {
-        const theLimit = parseInt(limit);
-        if (isNaN(theLimit)) {
-          this.badRequest(req, res);
-          return;
-        }
-        if (log.length > theLimit) {
-          log.splice(0, log.length - theLimit);
-        }
+      // for most recent generation pull last 50 log messages
+      if (generation === null || Number(generation) === game.generation) {
+        logs = game.gameLog.slice(-50);
+      } else { // pull all logs for generation
+        logs = this.getLogsForGeneration(game.gameLog, Number(generation));
       }
 
       res.setHeader('Content-Type', 'application/json');
-      res.write(JSON.stringify(log));
-      res.end();
+      res.end(JSON.stringify(logs));
     });
   }
 }

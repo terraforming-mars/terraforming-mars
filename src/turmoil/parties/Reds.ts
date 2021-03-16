@@ -117,7 +117,7 @@ class RedsPolicy03 implements Policy {
       player,
       4,
       {
-        title: 'Select how to pay for Turmoil  Redsaction',
+        title: 'Select how to pay for Turmoil Reds action',
         afterPay: () => {
           const orOptions = new OrOptions();
 

@@ -4,7 +4,7 @@ import {PlaceOceanTile} from '../../src/deferredActions/PlaceOceanTile';
 import {Game} from '../../src/Game';
 import {Player} from '../../src/Player';
 import {Resources} from '../../src/Resources';
-import {TestPlayers} from '../TestingUtils';
+import {TestPlayers} from '../TestPlayers';
 
 describe('Europa', function() {
   let europa: Europa; let player: Player; let player2: Player; let game: Game;

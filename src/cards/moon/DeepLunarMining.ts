@@ -23,7 +23,7 @@ export class DeepLunarMining extends MoonCard {
           b.minus().titanium(1).production((pb) => {
             pb.titanium(2);
           }).br;
-          b.moonMiningRate(1);
+          b.moonMiningRate();
         }),
       },
     }, {

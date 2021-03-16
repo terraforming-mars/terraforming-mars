@@ -1,11 +1,12 @@
 import {Game} from '../../../src/Game';
-import {setCustomGameOptions, TestPlayers} from '../../TestingUtils';
+import {TestingUtils} from '../../TestingUtils';
+import {TestPlayers} from '../../TestPlayers';
 import {TestPlayer} from '../../TestPlayer';
 import {HE3Lobbyists} from '../../../src/cards/moon/HE3Lobbyists';
 import {expect} from 'chai';
 import {Resources} from '../../../src/Resources';
 
-const MOON_OPTIONS = setCustomGameOptions({moonExpansion: true});
+const MOON_OPTIONS = TestingUtils.setCustomGameOptions({moonExpansion: true});
 
 describe('HE3Lobbyists', () => {
   let player: TestPlayer;
@@ -28,13 +29,13 @@ describe('HE3Lobbyists', () => {
     player.setProductionForTest({megacredits: 0});
     player.tagsForTest = {moon: 0};
     card.play(player);
-    expect(player.getProduction(Resources.MEGACREDITS)).eq(0);
+    expect(player.getProduction(Resources.MEGACREDITS)).eq(1);
 
 
     player.setProductionForTest({megacredits: 0});
     player.tagsForTest = {moon: 7};
     card.play(player);
-    expect(player.getProduction(Resources.MEGACREDITS)).eq(7);
+    expect(player.getProduction(Resources.MEGACREDITS)).eq(8);
   });
 });
 

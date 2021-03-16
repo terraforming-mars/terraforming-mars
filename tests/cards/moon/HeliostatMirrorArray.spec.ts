@@ -1,11 +1,12 @@
 import {Game} from '../../../src/Game';
-import {setCustomGameOptions, TestPlayers} from '../../TestingUtils';
+import {TestingUtils} from '../../TestingUtils';
+import {TestPlayers} from '../../TestPlayers';
 import {HeliostatMirrorArray} from '../../../src/cards/moon/HeliostatMirrorArray';
 import {expect} from 'chai';
 import {Resources} from '../../../src/Resources';
 import {TestPlayer} from '../../TestPlayer';
 
-const MOON_OPTIONS = setCustomGameOptions({moonExpansion: true});
+const MOON_OPTIONS = TestingUtils.setCustomGameOptions({moonExpansion: true});
 
 describe('HeliostatMirrorArray', () => {
   let player: TestPlayer;

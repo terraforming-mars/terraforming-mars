@@ -5,7 +5,7 @@ import {PowerPlantStandardProject} from '../../../src/cards/base/standardProject
 import {Thorgate} from '../../../src/cards/corporation/Thorgate';
 import {Game} from '../../../src/Game';
 import {Resources} from '../../../src/Resources';
-import {TestPlayers} from '../../TestingUtils';
+import {TestPlayers} from '../../TestPlayers';
 
 describe('Thorgate', function() {
   it('Should play', function() {

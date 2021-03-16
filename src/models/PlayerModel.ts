@@ -18,6 +18,7 @@ export interface PlayerModel {
     actionsTakenThisRound: number;
     actionsThisGeneration: Array<string>;
     aresData: IAresData | undefined;
+    availableBlueCardActionCount: number;
     awards: Array<FundedAwardModel>;
     cardCost: number;
     cardsInHand: Array<CardModel>;
@@ -44,6 +45,7 @@ export interface PlayerModel {
     influence: number;
     isActive: boolean;
     isSoloModeWin: boolean;
+    lastSoloGeneration: number,
     megaCredits: number;
     megaCreditProduction: number;
     milestones: Array<ClaimedMilestoneModel>;
@@ -65,6 +67,7 @@ export interface PlayerModel {
     preludeCardsInHand: Array<CardModel>;
     selfReplicatingRobotsCards: Array<CardModel>;
     spaces: Array<SpaceModel>;
+    spectatorId?: string;
     steel: number;
     steelProduction: number;
     steelValue: number;
@@ -75,7 +78,7 @@ export interface PlayerModel {
     titanium: number;
     titaniumProduction: number;
     titaniumValue: number;
-    tradesThisTurn: number;
+    tradesThisGeneration: number;
     turmoil: TurmoilModel | undefined;
     venusScaleLevel: number;
     victoryPointsBreakdown: VictoryPointsBreakdown;

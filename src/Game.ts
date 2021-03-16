@@ -63,8 +63,11 @@ import {IMoonData} from './moon/IMoonData';
 import {MoonExpansion} from './moon/MoonExpansion';
 import {TurmoilHandler} from './turmoil/TurmoilHandler';
 import {Random} from './Random';
+import {MilestoneAwardSelector} from './MilestoneAwardSelector';
+import {BoardType} from './boards/BoardType';
 
 export type GameId = string;
+export type SpectatorId = string;
 
 export interface Score {
   corporation: String;
@@ -150,6 +153,7 @@ export class Game implements ISerializable<SerializedGame> {
   public lastSaveId: number = 0;
   private clonedGamedId: string | undefined;
   public seed: number;
+  public spectatorId: SpectatorId | undefined;
   public deferredActions: DeferredActionsQueue = new DeferredActionsQueue();
   public gameAge: number = 0; // Each log event increases it
   public gameLog: Array<LogMessage> = [];
@@ -173,6 +177,7 @@ export class Game implements ISerializable<SerializedGame> {
 
   // Drafting
   private draftRound: number = 1;
+  // Used when drafting the first 10 project cards.
   private initialDraftIteration: number = 1;
   private unDraftedCards: Map<PlayerId, Array<IProjectCard>> = new Map();
 
@@ -194,6 +199,8 @@ export class Game implements ISerializable<SerializedGame> {
   public monsInsuranceOwner: PlayerId | undefined = undefined;
   // Crash Site promo project
   public someoneHasRemovedOtherPlayersPlants: boolean = false;
+  // Syndicate Pirate Raids
+  public syndicatePirateRaider: PlayerId | undefined = undefined;
 
   private constructor(
     public id: GameId,
@@ -233,7 +240,8 @@ export class Game implements ISerializable<SerializedGame> {
     players: Array<Player>,
     firstPlayer: Player,
     gameOptions: GameOptions = {...DEFAULT_GAME_OPTIONS},
-    seed: number = 0): Game {
+    seed: number = 0,
+    spectatorId: SpectatorId | undefined = undefined): Game {
     if (gameOptions.clonedGamedId !== undefined) {
       throw new Error('Cloning should not come through this execution path.');
     }
@@ -256,14 +264,14 @@ export class Game implements ISerializable<SerializedGame> {
       players[0].terraformRatingAtGenerationStart = 14;
     }
 
-    const game: Game = new Game(id, players, firstPlayer, activePlayer, gameOptions, seed, board, dealer);
-
+    const game = new Game(id, players, firstPlayer, activePlayer, gameOptions, seed, board, dealer);
+    game.spectatorId = spectatorId;
     // Initialize Ares data
     if (gameOptions.aresExtension) {
       game.aresData = AresSetup.initialData(gameOptions.aresExtension, gameOptions.aresHazards, players);
     }
 
-    const milestonesAwards = GameSetup.chooseMilestonesAndAwards(gameOptions);
+    const milestonesAwards = MilestoneAwardSelector.chooseMilestonesAndAwards(gameOptions);
     game.milestones = milestonesAwards.milestones;
     game.awards = milestonesAwards.awards;
 
@@ -274,10 +282,6 @@ export class Game implements ISerializable<SerializedGame> {
       const allowCommunityColonies = gameOptions.communityCardsOption || communityColoniesSelected;
 
       game.colonies = game.colonyDealer.drawColonies(players.length, gameOptions.customColoniesList, gameOptions.venusNextExtension, gameOptions.turmoilExtension, allowCommunityColonies);
-      if (players.length === 1) {
-        players[0].addProduction(Resources.MEGACREDITS, -2);
-        game.defer(new RemoveColonyFromGame(players[0]));
-      }
     }
 
     // Add Turmoil stuff
@@ -417,6 +421,8 @@ export class Game implements ISerializable<SerializedGame> {
       researchedPlayers: Array.from(this.researchedPlayers),
       seed: this.seed,
       someoneHasRemovedOtherPlayersPlants: this.someoneHasRemovedOtherPlayersPlants,
+      spectatorId: this.spectatorId,
+      syndicatePirateRaider: this.syndicatePirateRaider,
       temperature: this.temperature,
       unDraftedCards: Array.from(this.unDraftedCards.entries()).map((a) => {
         return [
@@ -518,13 +524,41 @@ export class Game implements ISerializable<SerializedGame> {
     return globalParametersMaxed;
   }
 
+  public lastSoloGeneration(): number {
+    let lastGeneration = 14;
+    const options = this.gameOptions;
+    if (options.preludeExtension) {
+      lastGeneration -= 2;
+    }
+
+    // Only add 2 more generations when using the track completion option
+    // and not the solo TR option.
+    //
+    // isSoloModeWin backs this up.
+    if (options.moonExpansion) {
+      if (!options.soloTR && options.requiresMoonTrackCompletion) {
+        lastGeneration += 2;
+      }
+    }
+    return lastGeneration;
+  }
+
   public isSoloModeWin(): boolean {
-    // Solo TR
+    // Solo TR victory condition
     if (this.gameOptions.soloTR) {
       return this.players[0].getTerraformRating() >= 63;
     }
-    if ( ! this.marsIsTerraformed()) return false;
-    return this.gameOptions.preludeExtension ? this.generation <= 12 : this.generation <= 14;
+
+    // Complete terraforing victory condition.
+    if (!this.marsIsTerraformed()) {
+      return false;
+    }
+
+    // This last conditional doesn't make much sense to me. It's only ever really used
+    // on the client at components/GameEnd.ts. Which is probably why it doesn't make
+    // obvious sense why when this generation is earlier than the last generation
+    // of the game means "true, is solo mode win."
+    return this.generation <= this.lastSoloGeneration();
   }
 
   public getAwardFundingCost(): number {
@@ -554,14 +588,14 @@ export class Game implements ISerializable<SerializedGame> {
     // Awards are disabled for 1 player games
     if (this.players.length === 1) return true;
 
-    return this.fundedAwards.length > 2;
+    return this.fundedAwards.length >= constants.MAX_AWARDS;
   }
 
   public allMilestonesClaimed(): boolean {
     // Milestones are disabled for 1 player games
     if (this.players.length === 1) return true;
 
-    return this.claimedMilestones.length > 2;
+    return this.claimedMilestones.length >= constants.MAX_MILESTONES;
   }
 
   private playerHasPickedCorporationCard(player: Player, corporationCard: CorporationCard) {
@@ -686,6 +720,10 @@ export class Game implements ISerializable<SerializedGame> {
         player.setWaitingFor(this.pickCorporationCard(player), () => {});
       }
     }
+    if (this.players.length === 1 && this.gameOptions.coloniesExtension) {
+      this.players[0].addProduction(Resources.MEGACREDITS, -2);
+      this.defer(new RemoveColonyFromGame(this.players[0]));
+    }
   }
 
   private gotoResearchPhase(): void {
@@ -704,10 +742,9 @@ export class Game implements ISerializable<SerializedGame> {
   }
 
   public gameIsOver(): boolean {
-    // Single player game is done after generation 14 or 12 with prelude
     if (this.isSoloMode()) {
-      // Solo mode must go on until 14 or 12 generation even if Mars is already terraformed
-      return this.generation === 14 || (this.generation === 12 && this.gameOptions.preludeExtension);
+      // Solo games continue until the designated generation end even if Mars is already terraformed
+      return this.generation === this.lastSoloGeneration();
     }
     return this.marsIsTerraformed();
   }
@@ -738,8 +775,10 @@ export class Game implements ISerializable<SerializedGame> {
   private gotoEndGeneration() {
     if (this.gameOptions.coloniesExtension) {
       this.colonies.forEach((colony) => {
-        colony.endGeneration();
+        colony.endGeneration(this);
       });
+      // Syndicate Pirate Raids hook. Also see Colony.ts and Player.ts
+      this.syndicatePirateRaider = undefined;
     }
 
     if (this.gameOptions.turmoilExtension) {
@@ -1191,19 +1230,36 @@ export class Game implements ISerializable<SerializedGame> {
 
   public checkRequirements(player: Player, parameter: GlobalParameter, level: number, max: boolean = false): boolean {
     let currentLevel: number;
-    let playerRequirementsBonus: number = player.getRequirementsBonus(parameter === GlobalParameter.VENUS);
+    let playerRequirementsBonus: number = player.getRequirementsBonus(parameter);
 
-    if (parameter === GlobalParameter.OCEANS) {
+    switch (parameter) {
+    case GlobalParameter.OCEANS:
       currentLevel = this.board.getOceansOnBoard();
-    } else if (parameter === GlobalParameter.OXYGEN) {
+      break;
+    case GlobalParameter.OXYGEN:
       currentLevel = this.getOxygenLevel();
-    } else if (parameter === GlobalParameter.TEMPERATURE) {
+      break;
+    case GlobalParameter.TEMPERATURE:
       currentLevel = this.getTemperature();
       playerRequirementsBonus *= 2;
-    } else if (parameter === GlobalParameter.VENUS) {
+      break;
+
+    case GlobalParameter.VENUS:
       currentLevel = this.getVenusScaleLevel();
       playerRequirementsBonus *= 2;
-    } else {
+      break;
+
+    case GlobalParameter.MOON_COLONY_RATE:
+      currentLevel = MoonExpansion.moonData(player.game).colonyRate;
+      break;
+    case GlobalParameter.MOON_MINING_RATE:
+      currentLevel = MoonExpansion.moonData(player.game).miningRate;
+      break;
+    case GlobalParameter.MOON_LOGISTICS_RATE:
+      currentLevel = MoonExpansion.moonData(player.game).logisticRate;
+      break;
+
+    default:
       console.warn(`Unknown GlobalParameter provided: ${parameter}`);
       return false;
     }
@@ -1250,6 +1306,9 @@ export class Game implements ISerializable<SerializedGame> {
                   space.player === player,
     ).length;
   }
+
+  // addTile applies to the Mars board, but not the Moon board, see MoonExpansion.addTile for placing
+  // a tile on The Moon.
   public addTile(
     player: Player, spaceType: SpaceType,
     space: ISpace, tile: ITile): void {
@@ -1336,9 +1395,9 @@ export class Game implements ISerializable<SerializedGame> {
     }
 
     this.players.forEach((p) => {
-      p.corporationCard?.onTilePlaced?.(p, player, space);
+      p.corporationCard?.onTilePlaced?.(p, player, space, BoardType.MARS);
       p.playedCards.forEach((playedCard) => {
-        playedCard.onTilePlaced?.(p, player, space);
+        playedCard.onTilePlaced?.(p, player, space, BoardType.MARS);
       });
     });
 
@@ -1523,8 +1582,8 @@ export class Game implements ISerializable<SerializedGame> {
 
     // Rebuild dealer object to be sure that we will have cards in the same order
     const dealer = Dealer.deserialize(d.dealer);
-
-    const game: Game = new Game(d.id, players, first, d.activePlayer, gameOptions, d.seed, board, dealer);
+    const game = new Game(d.id, players, first, d.activePlayer, gameOptions, d.seed, board, dealer);
+    game.spectatorId = d.spectatorId;
 
     const milestones: Array<IMilestone> = [];
     d.milestones.forEach((element: IMilestone) => {
@@ -1540,6 +1599,10 @@ export class Game implements ISerializable<SerializedGame> {
 
     const awards: Array<IAward> = [];
     d.awards.forEach((element: IAward) => {
+      // TODO(kberg): remove by 2021-03-30
+      if (element.name === 'Entrepeneur') {
+        element.name = 'Entrepreneur';
+      }
       ALL_AWARDS.forEach((award: IAward) => {
         if (award.name === element.name) {
           awards.push(award);
@@ -1600,6 +1663,7 @@ export class Game implements ISerializable<SerializedGame> {
     game.initialDraftIteration = d.initialDraftIteration;
     game.monsInsuranceOwner = d.monsInsuranceOwner;
     game.someoneHasRemovedOtherPlayersPlants = d.someoneHasRemovedOtherPlayersPlants;
+    game.syndicatePirateRaider = d.syndicatePirateRaider;
 
     // Still in Draft or Research of generation 1
     if (game.generation === 1 && players.some((p) => p.corporationCard === undefined)) {

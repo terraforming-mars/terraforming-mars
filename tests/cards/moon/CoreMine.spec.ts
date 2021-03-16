@@ -2,13 +2,14 @@ import {Game} from '../../../src/Game';
 import {IMoonData} from '../../../src/moon/IMoonData';
 import {MoonExpansion} from '../../../src/moon/MoonExpansion';
 import {Player} from '../../../src/Player';
-import {setCustomGameOptions, TestPlayers} from '../../TestingUtils';
+import {TestingUtils} from '../../TestingUtils';
+import {TestPlayers} from '../../TestPlayers';
 import {CoreMine} from '../../../src/cards/moon/CoreMine';
 import {expect} from 'chai';
 import {Resources} from '../../../src/Resources';
 import {PlaceMoonMineTile} from '../../../src/moon/PlaceMoonMineTile';
 
-const MOON_OPTIONS = setCustomGameOptions({moonExpansion: true});
+const MOON_OPTIONS = TestingUtils.setCustomGameOptions({moonExpansion: true});
 
 describe('CoreMine', () => {
   let game: Game;

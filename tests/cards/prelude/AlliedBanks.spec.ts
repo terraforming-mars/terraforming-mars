@@ -1,7 +1,7 @@
 import {expect} from 'chai';
 import {AlliedBanks} from '../../../src/cards/prelude/AlliedBanks';
 import {Resources} from '../../../src/Resources';
-import {TestPlayers} from '../../TestingUtils';
+import {TestPlayers} from '../../TestPlayers';
 
 describe('AlliedBanks', function() {
   it('Should play', function() {

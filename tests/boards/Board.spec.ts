@@ -4,7 +4,7 @@ import {Player} from '../../src/Player';
 import {TileType} from '../../src/TileType';
 import {ISpace} from '../../src/boards/ISpace';
 import {SpaceType} from '../../src/SpaceType';
-import {TestPlayers} from '../TestingUtils';
+import {TestPlayers} from '../TestPlayers';
 import {Board} from '../../src/boards/Board';
 import {Color} from '../../src/Color';
 import {SerializedBoard} from '../../src/boards/SerializedBoard';

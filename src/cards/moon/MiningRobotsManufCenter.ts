@@ -21,7 +21,7 @@ export class MiningRobotsManufCenter extends MoonCard {
         cardNumber: 'M23',
         renderData: CardRenderer.builder((b) => {
           b.minus().titanium(1).br;
-          b.moonMiningRate(2);
+          b.moonMiningRate({amount: 2});
         }),
       },
     }, {

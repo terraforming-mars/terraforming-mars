@@ -1,7 +1,7 @@
 import {expect} from 'chai';
 import {SisterPlanetSupport} from '../../../src/cards/venusNext/SisterPlanetSupport';
 import {Resources} from '../../../src/Resources';
-import {TestPlayers} from '../../TestingUtils';
+import {TestPlayers} from '../../TestPlayers';
 
 describe('SisterPlanetSupport', function() {
   it('Should play', function() {

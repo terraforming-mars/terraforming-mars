@@ -6,7 +6,7 @@ import {Player} from '../../../src/Player';
 import {IProjectCard} from '../../../src/cards/IProjectCard';
 import {expect} from 'chai';
 import {ARES_OPTIONS_NO_HAZARDS} from '../../ares/AresTestHelper';
-import {TestPlayers} from '../../TestingUtils';
+import {TestPlayers} from '../../TestPlayers';
 
 describe('BioengineeringEnclosure', function() {
   let card : BioengineeringEnclosure; let player : Player; let game : Game;

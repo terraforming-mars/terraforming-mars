@@ -1,5 +1,7 @@
 import Vue from 'vue';
+import {AWARD_COSTS} from '../constants';
 import {FundedAwardModel} from '../models/FundedAwardModel';
+import {PreferencesManager} from './PreferencesManager';
 
 export const Award = Vue.component('award', {
   props: {
@@ -35,18 +37,33 @@ export const Award = Vue.component('award', {
     toggleList: function() {
       this.showList = !this.showList;
     },
+    getAvailableAwardSpots: function(): Array<number> {
+      let numFundedAwards = 0;
+      this.awards_list.forEach((award)=>{
+        if (award.player_name) {
+          numFundedAwards++;
+        }
+      });
+      return AWARD_COSTS.slice(numFundedAwards);
+    },
+    isLearnerModeOn: function(): boolean {
+      return PreferencesManager.loadValue('learner_mode') === '1';
+    },
   },
   template: `
     <div class="awards_cont" v-trim-whitespace>
         <div class="awards">
             <div class="ma-title">
                 <a class="ma-clickable awards-padding" href="#" v-on:click.prevent="toggleList()" v-i18n>Awards</a>
-                <span v-for="award in awards_list" v-if="award.player_name" class="funded-award-inline" :title="award.player_name">
+                <span v-for="award in awards_list" v-if="award.player_name" class="milestone-award-inline paid" :title="award.player_name">
                     <span v-i18n>{{ award.award.name }}</span>
                     <span class="ma-player-cube"><i :class="'board-cube board-cube--'+award.player_color" /></span>
                 </span>
+                <span v-for="spotPrice in getAvailableAwardSpots()" class="milestone-award-inline unpaid" v-if="isLearnerModeOn()">
+                  <div class="milestone-award-price">{{spotPrice}}</div>
+                </span>
             </div>
-            
+
             <div v-show="shouldShowList()">
                 <div title="press to show or hide the description" v-on:click.prevent="toggle(award)" v-for="award in awards_list" class="ma-block">
                     <div class="ma-player" v-if="award.player_name"><i :title="award.player_name" :class="'board-cube board-cube--'+award.player_color" /></div>

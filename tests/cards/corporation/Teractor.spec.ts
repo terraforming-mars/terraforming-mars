@@ -5,7 +5,7 @@ import {LunaGovernor} from '../../../src/cards/colonies/LunaGovernor';
 import {Teractor} from '../../../src/cards/corporation/Teractor';
 import {Game} from '../../../src/Game';
 import {Player} from '../../../src/Player';
-import {TestPlayers} from '../../TestingUtils';
+import {TestPlayers} from '../../TestPlayers';
 
 describe('Teractor', function() {
   let card : Teractor; let player : Player;

@@ -5,7 +5,7 @@ import {Miranda} from '../../src/colonies/Miranda';
 import {AddResourcesToCard} from '../../src/deferredActions/AddResourcesToCard';
 import {Game} from '../../src/Game';
 import {Player} from '../../src/Player';
-import {TestPlayers} from '../TestingUtils';
+import {TestPlayers} from '../TestPlayers';
 
 describe('Miranda', function() {
   let miranda: Miranda; let pets: Pets; let player: Player; let player2: Player; let game: Game;

@@ -3,7 +3,7 @@ import {DeimosDown} from '../../../src/cards/base/DeimosDown';
 import {Game} from '../../../src/Game';
 import {OrOptions} from '../../../src/inputs/OrOptions';
 import {Player} from '../../../src/Player';
-import {TestPlayers} from '../../TestingUtils';
+import {TestPlayers} from '../../TestPlayers';
 
 describe('DeimosDown', function() {
   let card : DeimosDown; let player : Player; let player2 : Player; let game : Game;

@@ -1,6 +1,7 @@
 import {Game} from '../../../src/Game';
 import {Player} from '../../../src/Player';
-import {setCustomGameOptions, TestPlayers} from '../../TestingUtils';
+import {TestingUtils} from '../../TestingUtils';
+import {TestPlayers} from '../../TestPlayers';
 import {LunaConference} from '../../../src/cards/moon/LunaConference';
 import {expect} from 'chai';
 import {MoonExpansion} from '../../../src/moon/MoonExpansion';
@@ -9,7 +10,7 @@ import {TileType} from '../../../src/TileType';
 import {Scientists} from '../../../src/turmoil/parties/Scientists';
 import {Greens} from '../../../src/turmoil/parties/Greens';
 
-const MOON_OPTIONS = setCustomGameOptions({moonExpansion: true});
+const MOON_OPTIONS = TestingUtils.setCustomGameOptions({moonExpansion: true});
 
 describe('LunaConference', () => {
   let player: Player;

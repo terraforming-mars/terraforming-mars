@@ -22,18 +22,13 @@ export class SubterraneanHabitats extends MoonCard implements IProjectCard {
             eb.startEffect.moonColony().colon().minus().titanium(1);
           });
           b.br;
-          b.minus().steel(2).moonColonyRate(1);
+          b.minus().steel(2).moonColonyRate();
         }),
       },
     }, {
       reserveUnits: Units.of({steel: 2}),
     });
   };
-
-
-  public canPlay(player: Player): boolean {
-    return super.canPlay(player);
-  }
 
   public play(player: Player) {
     super.play(player);

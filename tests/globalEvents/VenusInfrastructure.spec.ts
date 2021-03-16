@@ -5,7 +5,7 @@ import {Resources} from '../../src/Resources';
 import {VenusInfrastructure} from '../../src/turmoil/globalEvents/VenusInfrastructure';
 import {Kelvinists} from '../../src/turmoil/parties/Kelvinists';
 import {Turmoil} from '../../src/turmoil/Turmoil';
-import {TestPlayers} from '../TestingUtils';
+import {TestPlayers} from '../TestPlayers';
 
 describe('VenusInfrastructure', function() {
   it('resolve play', function() {

@@ -22,7 +22,7 @@ export class TitaniumExtractionCenter extends MoonCard {
         cardNumber: 'M26',
         renderData: CardRenderer.builder((b) => {
           b.minus().titanium(2).br;
-          b.production((pb) => pb.titanium(1)).slash().moonMiningRate(2);
+          b.production((pb) => pb.titanium(1)).slash().moonMiningRate({amount: 2});
         }),
       },
     }, {

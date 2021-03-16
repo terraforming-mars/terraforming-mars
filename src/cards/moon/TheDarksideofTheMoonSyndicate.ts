@@ -14,6 +14,7 @@ import {Resources} from '../../Resources';
 import {OrOptions} from '../../inputs/OrOptions';
 import {SelectOption} from '../../inputs/SelectOption';
 import {StealResources} from '../../deferredActions/StealResources';
+import {CardRenderItemSize} from '../render/CardRenderItemSize';
 
 export class TheDarksideofTheMoonSyndicate implements CorporationCard {
   public name = CardName.THE_DARKSIDE_OF_THE_MOON_SYNDICATE;
@@ -27,17 +28,21 @@ export class TheDarksideofTheMoonSyndicate implements CorporationCard {
     description: 'You start with 40 MC and 2 syndicate fleets on this card.',
     cardNumber: '',
     renderData: CardRenderer.builder((b) => {
+      b.megacredits(40).syndicateFleet(2).br;
       b
         .action('Spend 1 titanium to add 1 syndicate fleet on this card', (eb) => {
-          eb.titanium(1).startAction.asterix(); // TODO: Add syndicate fleet
+          eb.titanium(1).startAction.syndicateFleet(); // TODO: Add syndicate fleet
         })
-        .or()
-        .action('Action: Remove 1 syndicate fleet from this card to steal 8MC from any opponent.', (eb) => {
-          eb.asterix().startAction.megacredits(-8);
+        .br
+        .action('Remove 1 syndicate fleet from this card to steal 8MC from any opponent.', (eb) => {
+          eb.syndicateFleet().startAction.text('STEAL').megacredits(8);
         })
         .br
         .effect('When you place a tile on the Moon, steal 2 MC from the opponents for each tile of theirs placed next to yours.', (eb) => {
-          eb.moonColony().slash().moonMine().slash().moonRoad().asterix().startAction.megacredits(-2).slash().emptyTile().emptyTile().asterix();
+          eb.moonColony({size: CardRenderItemSize.SMALL}).slash().br
+            .moonMine({size: CardRenderItemSize.SMALL}).slash()
+            .moonRoad({size: CardRenderItemSize.SMALL}).asterix()
+            .startAction.megacredits(-2).slash().emptyTile().emptyTile().asterix();
         });
     }),
   };

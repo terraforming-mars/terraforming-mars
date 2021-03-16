@@ -2,7 +2,7 @@ import {expect} from 'chai';
 import {CaretakerContract} from '../../../src/cards/base/CaretakerContract';
 import {Game} from '../../../src/Game';
 import {Player} from '../../../src/Player';
-import {TestPlayers} from '../../TestingUtils';
+import {TestPlayers} from '../../TestPlayers';
 
 describe('CaretakerContract', function() {
   let card : CaretakerContract; let player : Player; let game : Game;

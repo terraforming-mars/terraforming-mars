@@ -10,7 +10,7 @@ import {InterplanetaryTrade} from '../../../src/cards/promo/InterplanetaryTrade'
 import {MaxwellBase} from '../../../src/cards/venusNext/MaxwellBase';
 import {Player} from '../../../src/Player';
 import {Resources} from '../../../src/Resources';
-import {TestPlayers} from '../../TestingUtils';
+import {TestPlayers} from '../../TestPlayers';
 
 describe('InterplanetaryTrade', function() {
   let card : InterplanetaryTrade; let player : Player;

@@ -5,7 +5,7 @@ import {MAX_VENUS_SCALE} from '../../../src/constants';
 import {Game} from '../../../src/Game';
 import {OrOptions} from '../../../src/inputs/OrOptions';
 import {Player} from '../../../src/Player';
-import {TestPlayers} from '../../TestingUtils';
+import {TestPlayers} from '../../TestPlayers';
 
 describe('RotatorImpacts', function() {
   let card : RotatorImpacts; let player : Player; let game : Game;

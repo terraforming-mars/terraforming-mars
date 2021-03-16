@@ -6,7 +6,8 @@ import {Game} from '../../../src/Game';
 import {SelectCard} from '../../../src/inputs/SelectCard';
 import {Player} from '../../../src/Player';
 import {Resources} from '../../../src/Resources';
-import {setCustomGameOptions, TestPlayers} from '../../TestingUtils';
+import {TestingUtils} from '../../TestingUtils';
+import {TestPlayers} from '../../TestPlayers';
 
 describe('Stratopolis', function() {
   let card: Stratopolis; let player: Player;
@@ -15,7 +16,7 @@ describe('Stratopolis', function() {
     card = new Stratopolis();
     player = TestPlayers.BLUE.newPlayer();
     const redPlayer = TestPlayers.RED.newPlayer();
-    const gameOptions = setCustomGameOptions();
+    const gameOptions = TestingUtils.setCustomGameOptions();
     Game.newInstance('foobar', [player, redPlayer], player, gameOptions);
   });
 

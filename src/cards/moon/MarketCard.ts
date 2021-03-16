@@ -2,7 +2,6 @@ import {SelectHowToPayDeferred} from '../../deferredActions/SelectHowToPayDeferr
 import {OrOptions} from '../../inputs/OrOptions';
 import {SelectAmount} from '../../inputs/SelectAmount';
 import {SelectOption} from '../../inputs/SelectOption';
-import {MoonExpansion} from '../../moon/MoonExpansion';
 import {Player} from '../../Player';
 import {Resources} from '../../Resources';
 import {Card, StaticCardProperties} from '../Card';
@@ -22,10 +21,6 @@ export abstract class MarketCard extends Card implements IActionCard {
     public readonly sellingTerms: Terms,
     properties: StaticCardProperties) {
     super(properties);
-  }
-
-  public canPlay(player: Player): boolean {
-    return MoonExpansion.moonData(player.game).miningRate >= 3;
   }
 
   public play() {

@@ -3,7 +3,7 @@ import {MagneticFieldGenerators} from '../../../src/cards/base/MagneticFieldGene
 import {Game} from '../../../src/Game';
 import {Player} from '../../../src/Player';
 import {Resources} from '../../../src/Resources';
-import {TestPlayers} from '../../TestingUtils';
+import {TestPlayers} from '../../TestPlayers';
 
 describe('MagneticFieldGenerators', function() {
   let card : MagneticFieldGenerators; let player : Player;

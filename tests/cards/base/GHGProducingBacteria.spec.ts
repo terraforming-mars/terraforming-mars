@@ -3,7 +3,7 @@ import {GHGProducingBacteria} from '../../../src/cards/base/GHGProducingBacteria
 import {Game} from '../../../src/Game';
 import {OrOptions} from '../../../src/inputs/OrOptions';
 import {Player} from '../../../src/Player';
-import {TestPlayers} from '../../TestingUtils';
+import {TestPlayers} from '../../TestPlayers';
 
 describe('GHGProducingBacteria', function() {
   let card : GHGProducingBacteria; let player : Player; let game : Game;

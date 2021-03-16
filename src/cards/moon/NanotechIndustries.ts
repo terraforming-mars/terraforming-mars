@@ -10,6 +10,7 @@ import {Player} from '../../Player';
 import {CardRenderDynamicVictoryPoints} from '../render/CardRenderDynamicVictoryPoints';
 import {AddResourcesToCard} from '../../deferredActions/AddResourcesToCard';
 import {MoonCards} from '../../moon/MoonCards';
+import {PlayerInput} from '../../PlayerInput';
 
 export class NanotechIndustries implements IActionCard, CorporationCard {
   public name = CardName.NANOTECH_INDUSTRIES;
@@ -23,7 +24,8 @@ export class NanotechIndustries implements IActionCard, CorporationCard {
     return undefined;
   }
 
-  public initialAction(player: Player) {
+  public initialActionText: string = 'Draw 3 cards and keep 2.';
+  public initialAction(player: Player): PlayerInput {
     return player.drawCardKeepSome(3, {keepMax: 2});
   }
 
@@ -45,8 +47,9 @@ export class NanotechIndustries implements IActionCard, CorporationCard {
   }
 
   public readonly metadata: CardMetadata = {
-    cardNumber: '',
+    cardNumber: 'MC1',
     renderData: CardRenderer.builder((b) => {
+      b.megacredits(42).cards(3).minus().cards(1).br;
       b.action('Add 1 science resource to ANY card [except those giving 2 or more VP per 1 science resource.]', (eb) => {
         eb.empty().startAction.science(1).asterix();
       });

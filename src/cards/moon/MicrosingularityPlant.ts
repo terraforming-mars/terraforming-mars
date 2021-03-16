@@ -2,11 +2,10 @@ import {CardName} from '../../CardName';
 import {Player} from '../../Player';
 import {CardType} from '../CardType';
 import {Tags} from '../Tags';
-import {MoonExpansion} from '../../moon/MoonExpansion';
-import {TileType} from '../../TileType';
 import {Resources} from '../../Resources';
 import {CardRenderer} from '../render/CardRenderer';
 import {Card} from '../Card';
+import {CardRequirements} from '../CardRequirements';
 
 export class MicrosingularityPlant extends Card {
   constructor() {
@@ -15,6 +14,7 @@ export class MicrosingularityPlant extends Card {
       cardType: CardType.AUTOMATED,
       tags: [Tags.ENERGY],
       cost: 10,
+      requirements: CardRequirements.builder((b) => b.colonyTiles(2).any()),
 
       metadata: {
         description: 'Requires 2 colonies on the Moon. Increase your energy production 2 steps.',
@@ -26,10 +26,6 @@ export class MicrosingularityPlant extends Card {
       },
     });
   };
-
-  public canPlay(player: Player): boolean {
-    return MoonExpansion.tiles(player.game, TileType.MOON_COLONY, true).length >= 2;
-  }
 
   public play(player: Player) {
     player.addProduction(Resources.ENERGY, 2, player.game);

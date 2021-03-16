@@ -5,7 +5,7 @@ import {TileType} from '../../../src/TileType';
 import {IndustrialCenterAres} from '../../../src/cards/ares/IndustrialCenterAres';
 import {SpaceBonus} from '../../../src/SpaceBonus';
 import {ARES_OPTIONS_NO_HAZARDS} from '../../ares/AresTestHelper';
-import {TestPlayers} from '../../TestingUtils';
+import {TestPlayers} from '../../TestPlayers';
 
 describe('IndustrialCenterAres', function() {
   let card : IndustrialCenterAres; let player : Player; let game : Game;

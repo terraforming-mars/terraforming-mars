@@ -142,11 +142,7 @@ export const Preferences = Vue.component('preferences', {
       }
     },
     getActingPlayerClass: function(): string {
-      if (this.acting_player) {
-        return 'preferences_acting_player';
-      } else {
-        return '';
-      }
+      return this.acting_player ? 'preferences_acting_player' : 'preferences_nonacting_player';
     },
     getGenMarker: function(): string {
       return `${this.generation}`;

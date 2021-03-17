@@ -133,9 +133,18 @@ describe('Player', function() {
     const bufferGas = option.cards.find((card) => card.name === CardName.BUFFER_GAS_STANDARD_PROJECT);
     expect(bufferGas).to.be.undefined;
   });
-  it('Includes buffer gas for non solo games', function() {
+  it('Omit buffer gas for solo games without 63 TR', function() {
     const player = TestPlayers.BLUE.newPlayer();
     Game.newInstance('foobar', [player], player);
+    const option = player.getStandardProjectOption();
+    const bufferGas = option.cards.find((card) => card.name === CardName.BUFFER_GAS_STANDARD_PROJECT);
+    expect(bufferGas).to.be.undefined;
+  });
+
+  it('Include buffer gas for solo games with 63 TR', function() {
+    const player = TestPlayers.BLUE.newPlayer();
+    const game = Game.newInstance('foobar', [player], player);
+    game.gameOptions.soloTR = true;
     const option = player.getStandardProjectOption();
     const bufferGas = option.cards.find((card) => card.name === CardName.BUFFER_GAS_STANDARD_PROJECT);
     expect(bufferGas).not.to.be.undefined;

@@ -40,7 +40,6 @@ import {SpectatorModel} from '../models/SpectatorModel';
 import {MoonModel} from '../models/MoonModel';
 import {CardName} from '../CardName';
 import {Units} from '../Units';
-import {WaitingForModel} from '../models/WaitingForModel';
 import {SelectPartyToSendDelegate} from '../inputs/SelectPartyToSendDelegate';
 
 export class Server {
@@ -129,6 +128,7 @@ export class Server {
       titaniumValue: player.getTitaniumValue(),
       tradesThisGeneration: player.tradesThisGeneration,
       turmoil: turmoil,
+      undoCount: game.undoCount,
       venusScaleLevel: game.getVenusScaleLevel(),
       victoryPointsBreakdown: player.getVictoryPoints(),
       waitingFor: getWaitingFor(player, player.getWaitingFor()),
@@ -139,16 +139,6 @@ export class Server {
     return {
       generation: game.generation,
     };
-  }
-
-  // This is only ever used in ApiWaitingFor, and could be isolated from ServerModel.
-  public static getWaitingForModel(player: Player, prevGameAge: number): WaitingForModel {
-    if (player.getWaitingFor() !== undefined || player.game.phase === Phase.END) {
-      return {result: 'GO'};
-    } else if (player.game.gameAge > prevGameAge) {
-      return {result: 'REFRESH'};
-    }
-    return {result: 'WAIT'};
   }
 }
 

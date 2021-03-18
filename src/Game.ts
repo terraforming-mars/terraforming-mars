@@ -157,6 +157,7 @@ export class Game implements ISerializable<SerializedGame> {
   public deferredActions: DeferredActionsQueue = new DeferredActionsQueue();
   public gameAge: number = 0; // Each log event increases it
   public gameLog: Array<LogMessage> = [];
+  public undoCount: number = 0; // Each undo increases it
 
   public generation: number = 1;
   public phase: Phase = Phase.RESEARCH;
@@ -424,6 +425,7 @@ export class Game implements ISerializable<SerializedGame> {
       spectatorId: this.spectatorId,
       syndicatePirateRaider: this.syndicatePirateRaider,
       temperature: this.temperature,
+      undoCount: this.undoCount,
       unDraftedCards: Array.from(this.unDraftedCards.entries()).map((a) => {
         return [
           a[0],
@@ -1656,6 +1658,7 @@ export class Game implements ISerializable<SerializedGame> {
     game.generation = d.generation;
     game.phase = d.phase;
     game.oxygenLevel = d.oxygenLevel;
+    game.undoCount = d.undoCount ?? 0;
     game.temperature = d.temperature;
     game.venusScaleLevel = d.venusScaleLevel;
     game.activePlayer = d.activePlayer;

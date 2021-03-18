@@ -9,6 +9,7 @@ import {Card} from '../Card';
 import {CardRequirements} from '../CardRequirements';
 
 export class LunaProjectOffice extends Card implements IProjectCard {
+  // TODO(kberg): don't use resource count as this card is not meant for working with CEO's Favorite Project.
   constructor() {
     super({
       name: CardName.LUNA_PROJECT_OFFICE,
@@ -40,7 +41,7 @@ export class LunaProjectOffice extends Card implements IProjectCard {
     }, () => false);
   }
 
-  public play(_player: Player) {
+  public play() {
     this.resourceCount = 2;
     return undefined;
   }

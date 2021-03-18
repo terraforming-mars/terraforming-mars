@@ -11,7 +11,7 @@ import {SerializedPlayer} from './SerializedPlayer';
 import {SerializedDealer} from './SerializedDealer';
 import {SerializedTurmoil} from './turmoil/SerializedTurmoil';
 import {PlayerId} from './Player';
-import {GameId, GameOptions} from './Game';
+import {GameId, GameOptions, SpectatorId} from './Game';
 import {IAresData} from './ares/IAresData';
 import {LogMessage} from './LogMessage';
 import {SerializedBoard} from './boards/SerializedBoard';
@@ -48,8 +48,9 @@ export interface SerializedGame {
     phase: Phase;
     players: Array<SerializedPlayer>;
     researchedPlayers: Array<PlayerId>;
-    seed: number
+    seed: number;
     someoneHasRemovedOtherPlayersPlants: boolean;
+    spectatorId: SpectatorId | undefined;
     syndicatePirateRaider: PlayerId | undefined;
     temperature: number;
     turmoil?: SerializedTurmoil;

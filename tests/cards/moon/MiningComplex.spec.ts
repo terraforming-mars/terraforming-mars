@@ -2,14 +2,15 @@ import {Game} from '../../../src/Game';
 import {IMoonData} from '../../../src/moon/IMoonData';
 import {MoonExpansion} from '../../../src/moon/MoonExpansion';
 import {Player} from '../../../src/Player';
-import {setCustomGameOptions, TestPlayers} from '../../TestingUtils';
+import {TestingUtils} from '../../TestingUtils';
+import {TestPlayers} from '../../TestPlayers';
 import {MiningComplex} from '../../../src/cards/moon/MiningComplex';
 import {expect} from 'chai';
 import {PlaceMoonRoadTile} from '../../../src/moon/PlaceMoonRoadTile';
 import {PlaceMoonMineTile} from '../../../src/moon/PlaceMoonMineTile';
 import {SelectSpace} from '../../../src/inputs/SelectSpace';
 
-const MOON_OPTIONS = setCustomGameOptions({moonExpansion: true});
+const MOON_OPTIONS = TestingUtils.setCustomGameOptions({moonExpansion: true});
 
 describe('MiningComplex', () => {
   let game: Game;

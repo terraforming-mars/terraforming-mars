@@ -10,7 +10,7 @@ import {OrOptions} from '../../../src/inputs/OrOptions';
 import {SelectCard} from '../../../src/inputs/SelectCard';
 import {SelectColony} from '../../../src/inputs/SelectColony';
 import {Player} from '../../../src/Player';
-import {TestPlayers} from '../../TestingUtils';
+import {TestPlayers} from '../../TestPlayers';
 
 describe('TitanFloatingLaunchPad', function() {
   let card : TitanFloatingLaunchPad; let player : Player; let game : Game;

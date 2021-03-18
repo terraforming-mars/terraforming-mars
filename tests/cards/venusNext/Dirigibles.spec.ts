@@ -4,7 +4,7 @@ import {FloatingHabs} from '../../../src/cards/venusNext/FloatingHabs';
 import {Game} from '../../../src/Game';
 import {SelectCard} from '../../../src/inputs/SelectCard';
 import {Player} from '../../../src/Player';
-import {TestPlayers} from '../../TestingUtils';
+import {TestPlayers} from '../../TestPlayers';
 
 describe('Dirigibles', function() {
   let card : Dirigibles; let player : Player;

@@ -1,7 +1,7 @@
 import {expect} from 'chai';
 import {RegoPlastics} from '../../../src/cards/promo/RegoPlastics';
 import {Player} from '../../../src/Player';
-import {TestPlayers} from '../../TestingUtils';
+import {TestPlayers} from '../../TestPlayers';
 import {Game} from '../../../src/Game';
 
 describe('RegoPlastics', function() {

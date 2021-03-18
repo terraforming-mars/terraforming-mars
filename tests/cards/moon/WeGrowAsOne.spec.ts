@@ -1,6 +1,7 @@
 import {Game} from '../../../src/Game';
 import {Player} from '../../../src/Player';
-import {setCustomGameOptions, TestPlayers} from '../../TestingUtils';
+import {TestingUtils} from '../../TestingUtils';
+import {TestPlayers} from '../../TestPlayers';
 import {WeGrowAsOne} from '../../../src/cards/moon/WeGrowAsOne';
 import {expect} from 'chai';
 import {Unity} from '../../../src/turmoil/parties/Unity';
@@ -17,7 +18,7 @@ describe('WeGrowAsOne', () => {
       'id',
       [player],
       player,
-      setCustomGameOptions({
+      TestingUtils.setCustomGameOptions({
         moonExpansion: true,
         coloniesExtension: true,
       }));

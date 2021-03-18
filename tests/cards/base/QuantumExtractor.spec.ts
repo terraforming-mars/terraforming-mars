@@ -4,7 +4,7 @@ import {QuantumExtractor} from '../../../src/cards/base/QuantumExtractor';
 import {TollStation} from '../../../src/cards/base/TollStation';
 import {Game} from '../../../src/Game';
 import {Player} from '../../../src/Player';
-import {TestPlayers} from '../../TestingUtils';
+import {TestPlayers} from '../../TestPlayers';
 
 describe('QuantumExtractor', function() {
   let card : QuantumExtractor; let player : Player;

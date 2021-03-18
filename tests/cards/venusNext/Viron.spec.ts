@@ -3,7 +3,7 @@ import {RestrictedArea} from '../../../src/cards/base/RestrictedArea';
 import {Viron} from '../../../src/cards/venusNext/Viron';
 import {Game} from '../../../src/Game';
 import {SelectCard} from '../../../src/inputs/SelectCard';
-import {TestPlayers} from '../../TestingUtils';
+import {TestPlayers} from '../../TestPlayers';
 
 describe('Viron', function() {
   it('Should act', function() {

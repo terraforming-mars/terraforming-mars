@@ -5,7 +5,7 @@ import {DiversitySupport} from '../../../src/cards/promo/DiversitySupport';
 import {Dirigibles} from '../../../src/cards/venusNext/Dirigibles';
 import {Game} from '../../../src/Game';
 import {Player} from '../../../src/Player';
-import {TestPlayers} from '../../TestingUtils';
+import {TestPlayers} from '../../TestPlayers';
 
 describe('DiversitySupport', function() {
   let card : DiversitySupport; let player : Player;

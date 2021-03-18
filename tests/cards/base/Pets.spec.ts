@@ -1,7 +1,8 @@
 import {expect} from 'chai';
 import {Pets} from '../../../src/cards/base/Pets';
 import {Game} from '../../../src/Game';
-import {TestingUtils, TestPlayers} from '../../TestingUtils';
+import {TestingUtils} from '../../TestingUtils';
+import {TestPlayers} from '../../TestPlayers';
 
 describe('Pets', function() {
   it('Should play', function() {

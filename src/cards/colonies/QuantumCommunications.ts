@@ -39,7 +39,7 @@ export class QuantumCommunications extends Card implements IProjectCard {
     player.game.colonies.forEach((colony) => {
       coloniesCount += colony.colonies.length;
     });
-    player.addProduction(Resources.MEGACREDITS, coloniesCount);
+    player.addProduction(Resources.MEGACREDITS, coloniesCount, player.game);
     return undefined;
   }
 

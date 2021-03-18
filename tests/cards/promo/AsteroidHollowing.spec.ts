@@ -3,7 +3,7 @@ import {AsteroidHollowing} from '../../../src/cards/promo/AsteroidHollowing';
 import {Game} from '../../../src/Game';
 import {Player} from '../../../src/Player';
 import {Resources} from '../../../src/Resources';
-import {TestPlayers} from '../../TestingUtils';
+import {TestPlayers} from '../../TestPlayers';
 
 describe('AsteroidHollowing', function() {
   let card : AsteroidHollowing; let player : Player;

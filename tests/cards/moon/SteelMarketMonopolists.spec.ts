@@ -2,12 +2,13 @@ import {Game} from '../../../src/Game';
 import {IMoonData} from '../../../src/moon/IMoonData';
 import {MoonExpansion} from '../../../src/moon/MoonExpansion';
 import {Player} from '../../../src/Player';
-import {setCustomGameOptions, TestPlayers} from '../../TestingUtils';
+import {TestingUtils} from '../../TestingUtils';
+import {TestPlayers} from '../../TestPlayers';
 import {SteelMarketMonopolists} from '../../../src/cards/moon/SteelMarketMonopolists';
 import {expect} from 'chai';
 import {SelectAmount} from '../../../src/inputs/SelectAmount';
 
-const MOON_OPTIONS = setCustomGameOptions({moonExpansion: true});
+const MOON_OPTIONS = TestingUtils.setCustomGameOptions({moonExpansion: true});
 
 describe('SteelMarketMonopolists', () => {
   let game: Game;

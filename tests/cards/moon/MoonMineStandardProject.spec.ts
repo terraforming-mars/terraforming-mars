@@ -2,7 +2,8 @@ import {Game} from '../../../src/Game';
 import {IMoonData} from '../../../src/moon/IMoonData';
 import {MoonExpansion} from '../../../src/moon/MoonExpansion';
 import {Player} from '../../../src/Player';
-import {setCustomGameOptions, TestPlayers} from '../../TestingUtils';
+import {TestingUtils} from '../../TestingUtils';
+import {TestPlayers} from '../../TestPlayers';
 import {MoonMineStandardProject} from '../../../src/cards/moon/MoonMineStandardProject';
 import {expect} from 'chai';
 import {Resources} from '../../../src/Resources';
@@ -10,7 +11,7 @@ import {SelectHowToPayDeferred} from '../../../src/deferredActions/SelectHowToPa
 import {PlaceMoonMineTile} from '../../../src/moon/PlaceMoonMineTile';
 import {MooncrateBlockFactory} from '../../../src/cards/moon/MooncrateBlockFactory';
 
-const MOON_OPTIONS = setCustomGameOptions({moonExpansion: true});
+const MOON_OPTIONS = TestingUtils.setCustomGameOptions({moonExpansion: true});
 
 describe('MoonMineStandardProject', () => {
   let game: Game;

@@ -11,7 +11,8 @@ import {TileType} from '../../../src/TileType';
 import {AresTestHelper, ARES_OPTIONS_NO_HAZARDS} from '../../ares/AresTestHelper';
 import {EmptyBoard} from '../../ares/EmptyBoard';
 import {MarsFirst} from '../../../src/turmoil/parties/MarsFirst';
-import {TestingUtils, TestPlayers} from '../../TestingUtils';
+import {TestingUtils} from '../../TestingUtils';
+import {TestPlayers} from '../../TestPlayers';
 
 describe('GeologicalSurvey', function() {
   let card : GeologicalSurvey; let player : Player; let game : Game;

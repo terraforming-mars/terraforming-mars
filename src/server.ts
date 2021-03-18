@@ -7,53 +7,60 @@ require('console-stamp')(
 import * as https from 'https';
 import * as http from 'http';
 import * as fs from 'fs';
-import * as querystring from 'querystring';
 
-import {GameId} from './Game';
 import {ApiCloneableGames} from './routes/ApiCloneableGames';
 import {ApiGameLogs} from './routes/ApiGameLogs';
 import {ApiGames} from './routes/ApiGames';
 import {ApiGame} from './routes/ApiGame';
 import {ApiPlayer} from './routes/ApiPlayer';
+import {ApiSpectator} from './routes/ApiSpectator';
 import {ApiWaitingFor} from './routes/ApiWaitingFor';
-import {GameHandler} from './routes/Game';
-import {LoadGame} from './routes/LoadGame';
-import {IHandler} from './routes/IHandler';
-import {Route} from './routes/Route';
 import {Database} from './database/Database';
-import {PlayerInput} from './routes/PlayerInput';
+import {GameHandler} from './routes/Game';
 import {GameLoader} from './database/GameLoader';
+import {GamesOverview} from './routes/GamesOverview';
+import {IHandler} from './routes/IHandler';
+import {Load} from './routes/Load';
+import {LoadGame} from './routes/LoadGame';
+import {Route} from './routes/Route';
+import {PlayerInput} from './routes/PlayerInput';
 import {ServeApp} from './routes/ServeApp';
 import {ServeAsset} from './routes/ServeAsset';
 
-const serverId = process.env.SERVER_ID || generateRandomId();
+process.on('uncaughtException', (err: any) => {
+  console.error('UNCAUGHT EXCEPTION', err);
+});
+
+const serverId = process.env.SERVER_ID || GameHandler.INSTANCE.generateRandomId('');
 const route = new Route();
 
 const handlers: Map<string, IHandler> = new Map(
   [
-    // ['/games-overview', GamesOverview.INSTANCE],
     ['/', ServeApp.INSTANCE],
-    ['/new-game', ServeApp.INSTANCE],
-    ['/solo', ServeApp.INSTANCE],
-    ['/player', ServeApp.INSTANCE],
-    ['/the-end', ServeApp.INSTANCE],
-    ['/load', ServeApp.INSTANCE],
-    ['/cards', ServeApp.INSTANCE],
-    ['/help', ServeApp.INSTANCE],
-    ['/styles.css', ServeAsset.INSTANCE],
-    ['/favicon.ico', ServeAsset.INSTANCE],
-    ['/main.js', ServeAsset.INSTANCE],
-    ['/main.js.map', ServeAsset.INSTANCE],
-    ['/api/player', ApiPlayer.INSTANCE],
-    ['/api/waitingfor', ApiWaitingFor.INSTANCE],
-    ['/api/games', ApiGames.INSTANCE],
-    ['/api/game', ApiGame.INSTANCE],
     ['/api/clonablegames', ApiCloneableGames.INSTANCE],
     ['/api/cloneablegames', ApiCloneableGames.INSTANCE],
+    ['/api/game', ApiGame.INSTANCE],
     ['/api/game/logs', ApiGameLogs.INSTANCE],
+    ['/api/games', ApiGames.INSTANCE],
+    ['/api/player', ApiPlayer.INSTANCE],
+    ['/api/spectator', ApiSpectator.INSTANCE],
+    ['/api/waitingfor', ApiWaitingFor.INSTANCE],
+    ['/cards', ServeApp.INSTANCE],
+    ['/favicon.ico', ServeAsset.INSTANCE],
     ['/game', GameHandler.INSTANCE],
-    ['/load', LoadGame.INSTANCE],
+    ['/games-overview', GamesOverview.INSTANCE],
+    ['/help', ServeApp.INSTANCE],
+    ['/load', Load.INSTANCE],
+    ['/load_game', LoadGame.INSTANCE],
+    ['/main.js', ServeAsset.INSTANCE],
+    ['/main.js.map', ServeAsset.INSTANCE],
+    ['/new-game', ServeApp.INSTANCE],
+    ['/player', ServeApp.INSTANCE],
     ['/player/input', PlayerInput.INSTANCE],
+    ['/solo', ServeApp.INSTANCE],
+    ['/spectator', ServeApp.INSTANCE],
+    ['/styles.css', ServeAsset.INSTANCE],
+    ['/the-end', ServeApp.INSTANCE],
   ],
 );
 
@@ -69,31 +76,9 @@ function processRequest(req: http.IncomingMessage, res: http.ServerResponse): vo
 
   if (handler !== undefined) {
     handler.processRequest(req, res, ctx);
-    return;
-  }
-
-  switch (req.method) {
-  case 'GET':
-    switch (url.pathname) {
-    case '/games-overview':
-      if (!isServerIdValid(req)) {
-        route.notAuthorized(req, res);
-        return;
-      } else {
-        ServeApp.INSTANCE.get(req, res, ctx);
-      }
-      break;
-
-    default:
-      if (url.pathname.startsWith('/assets/')) {
-        ServeAsset.INSTANCE.get(req, res, ctx);
-      } else {
-        route.notFound(req, res);
-      }
-    }
-    break;
-
-  default:
+  } else if (req.method === 'GET' && url.pathname.startsWith('/assets/')) {
+    ServeAsset.INSTANCE.get(req, res, ctx);
+  } else {
     route.notFound(req, res);
   }
 }
@@ -133,23 +118,6 @@ if (process.env.KEY_PATH && process.env.CERT_PATH) {
   server = https.createServer(options, requestHandler);
 } else {
   server = http.createServer(requestHandler);
-}
-
-function generateRandomId(): GameId {
-  // 281474976710656 possible values.
-  return Math.floor(Math.random() * Math.pow(16, 12)).toString(16);
-}
-
-function isServerIdValid(req: http.IncomingMessage): boolean {
-  const queryParams = querystring.parse(req.url!.replace(/^.*\?/, ''));
-  if (
-    queryParams.serverId === undefined ||
-    queryParams.serverId !== serverId
-  ) {
-    console.warn('No or invalid serverId given');
-    return false;
-  }
-  return true;
 }
 
 console.log('Starting server on port ' + (process.env.PORT || 8080));

@@ -3,7 +3,7 @@ import {Mangrove} from '../../../src/cards/base/Mangrove';
 import {Game} from '../../../src/Game';
 import {Player} from '../../../src/Player';
 import {TileType} from '../../../src/TileType';
-import {TestPlayers} from '../../TestingUtils';
+import {TestPlayers} from '../../TestPlayers';
 
 describe('Mangrove', function() {
   let card : Mangrove; let player : Player;

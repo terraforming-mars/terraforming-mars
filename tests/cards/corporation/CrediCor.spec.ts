@@ -7,7 +7,7 @@ import {GreeneryStandardProject} from '../../../src/cards/base/standardProjects/
 import {CrediCor} from '../../../src/cards/corporation/CrediCor';
 import {Game} from '../../../src/Game';
 import {Player} from '../../../src/Player';
-import {TestPlayers} from '../../TestingUtils';
+import {TestPlayers} from '../../TestPlayers';
 
 describe('CrediCor', function() {
   let card : CrediCor; let player : Player;

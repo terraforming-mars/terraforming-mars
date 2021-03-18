@@ -1,7 +1,7 @@
 import {expect} from 'chai';
 import {Recyclon} from '../../../src/cards/promo/Recyclon';
 import {Resources} from '../../../src/Resources';
-import {TestPlayers} from '../../TestingUtils';
+import {TestPlayers} from '../../TestPlayers';
 
 describe('Recyclon', function() {
   it('Should play', function() {

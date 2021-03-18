@@ -11,7 +11,8 @@ import {SpaceBonus} from '../../../src/SpaceBonus';
 import {ArcticAlgae} from '../../../src/cards/base/ArcticAlgae';
 import {SpaceType} from '../../../src/SpaceType';
 import {Phase} from '../../../src/Phase';
-import {TestingUtils, TestPlayers} from '../../TestingUtils';
+import {TestingUtils} from '../../TestingUtils';
+import {TestPlayers} from '../../TestPlayers';
 
 describe('EcologicalSurvey', function() {
   let card : EcologicalSurvey;

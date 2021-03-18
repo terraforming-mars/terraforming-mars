@@ -2,7 +2,7 @@ import {expect} from 'chai';
 import {IshtarMining} from '../../../src/cards/venusNext/IshtarMining';
 import {Game} from '../../../src/Game';
 import {Resources} from '../../../src/Resources';
-import {TestPlayers} from '../../TestingUtils';
+import {TestPlayers} from '../../TestPlayers';
 
 describe('IshtarMining', function() {
   it('Should play', function() {

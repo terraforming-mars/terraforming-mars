@@ -2,14 +2,14 @@ import {expect} from 'chai';
 import {Cloner} from '../../src/database/Cloner';
 import {Game} from '../../src/Game';
 import {Player} from '../../src/Player';
-import {setCustomGameOptions} from '../TestingUtils';
+import {TestingUtils} from '../TestingUtils';
 import {Color} from '../../src/Color';
 
 describe('Cloner', function() {
   it('solo game preserved', () => {
     const player = new Player('old-player1', Color.YELLOW, true, 9, 'old-player1-id');
     const game = Game.newInstance(
-      'old-game-id', [player], player, setCustomGameOptions({}), -5179823149812374);
+      'old-game-id', [player], player, TestingUtils.setCustomGameOptions({}), -5179823149812374);
 
     const newPlayer = new Player('new-player1', Color.RED, false, 3, 'new-player1-id');
     let newGame: Game | undefined = undefined;

@@ -1,7 +1,7 @@
 
 import {expect} from 'chai';
 import {TransNeptuneProbe} from '../../../src/cards/base/TransNeptuneProbe';
-import {TestPlayers} from '../../TestingUtils';
+import {TestPlayers} from '../../TestPlayers';
 
 describe('TransNeptuneProbe', function() {
   it('Should play', function() {

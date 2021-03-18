@@ -1,7 +1,7 @@
 import {expect} from 'chai';
 import {UNMIContractor} from '../../../src/cards/prelude/UNMIContractor';
 import {Game} from '../../../src/Game';
-import {TestPlayers} from '../../TestingUtils';
+import {TestPlayers} from '../../TestPlayers';
 
 describe('UNMIContractor', function() {
   it('Should play', function() {

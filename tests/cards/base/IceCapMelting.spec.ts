@@ -2,7 +2,7 @@ import {expect} from 'chai';
 import {IceCapMelting} from '../../../src/cards/base/IceCapMelting';
 import {Game} from '../../../src/Game';
 import {Player} from '../../../src/Player';
-import {TestPlayers} from '../../TestingUtils';
+import {TestPlayers} from '../../TestPlayers';
 
 describe('IceCapMelting', function() {
   let card : IceCapMelting; let player : Player; let game : Game;

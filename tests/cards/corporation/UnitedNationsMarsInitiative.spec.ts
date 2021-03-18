@@ -2,7 +2,7 @@ import {expect} from 'chai';
 import {UnitedNationsMarsInitiative} from '../../../src/cards/corporation/UnitedNationsMarsInitiative';
 import {Game} from '../../../src/Game';
 import {Player} from '../../../src/Player';
-import {TestPlayers} from '../../TestingUtils';
+import {TestPlayers} from '../../TestPlayers';
 
 describe('UnitedNationsMarsInitiative', function() {
   let card : UnitedNationsMarsInitiative; let player : Player;

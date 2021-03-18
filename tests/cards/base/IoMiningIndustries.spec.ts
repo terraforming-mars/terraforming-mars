@@ -1,7 +1,7 @@
 import {expect} from 'chai';
 import {IoMiningIndustries} from '../../../src/cards/base/IoMiningIndustries';
 import {Resources} from '../../../src/Resources';
-import {TestPlayers} from '../../TestingUtils';
+import {TestPlayers} from '../../TestPlayers';
 
 describe('IoMiningIndustries', function() {
   it('Should play', function() {

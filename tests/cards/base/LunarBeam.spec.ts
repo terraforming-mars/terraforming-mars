@@ -2,7 +2,7 @@ import {expect} from 'chai';
 import {LunarBeam} from '../../../src/cards/base/LunarBeam';
 import {Player} from '../../../src/Player';
 import {Resources} from '../../../src/Resources';
-import {TestPlayers} from '../../TestingUtils';
+import {TestPlayers} from '../../TestPlayers';
 
 describe('LunarBeam', function() {
   let card : LunarBeam; let player : Player;

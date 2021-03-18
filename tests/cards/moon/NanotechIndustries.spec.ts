@@ -1,6 +1,7 @@
 import {Game} from '../../../src/Game';
 import {Player} from '../../../src/Player';
-import {setCustomGameOptions, TestPlayers} from '../../TestingUtils';
+import {TestingUtils} from '../../TestingUtils';
+import {TestPlayers} from '../../TestPlayers';
 import {NanotechIndustries} from '../../../src/cards/moon/NanotechIndustries';
 import {expect} from 'chai';
 import {PhysicsComplex} from '../../../src/cards/base/PhysicsComplex';
@@ -10,7 +11,7 @@ import {PrideoftheEarthArkship} from '../../../src/cards/moon/PrideoftheEarthArk
 import {SelectCard} from '../../../src/inputs/SelectCard';
 import {IProjectCard} from '../../../src/cards/IProjectCard';
 
-const MOON_OPTIONS = setCustomGameOptions({moonExpansion: true});
+const MOON_OPTIONS = TestingUtils.setCustomGameOptions({moonExpansion: true});
 
 describe('NanotechIndustries', () => {
   let player: Player;

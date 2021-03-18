@@ -4,7 +4,7 @@ import {Virus} from '../../../src/cards/base/Virus';
 import {InterplanetaryCinematics} from '../../../src/cards/corporation/InterplanetaryCinematics';
 import {Game} from '../../../src/Game';
 import {Player} from '../../../src/Player';
-import {TestPlayers} from '../../TestingUtils';
+import {TestPlayers} from '../../TestPlayers';
 
 describe('InterplanetaryCinematics', function() {
   let card : InterplanetaryCinematics; let player : Player;

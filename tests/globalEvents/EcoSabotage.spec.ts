@@ -4,7 +4,7 @@ import {Resources} from '../../src/Resources';
 import {EcoSabotage} from '../../src/turmoil/globalEvents/EcoSabotage';
 import {Kelvinists} from '../../src/turmoil/parties/Kelvinists';
 import {Turmoil} from '../../src/turmoil/Turmoil';
-import {TestPlayers} from '../TestingUtils';
+import {TestPlayers} from '../TestPlayers';
 
 describe('EcoSabotage', function() {
   it('resolve play', function() {

@@ -3,7 +3,7 @@ import {Poseidon} from '../../../src/cards/colonies/Poseidon';
 import {Ceres} from '../../../src/colonies/Ceres';
 import {Game} from '../../../src/Game';
 import {Resources} from '../../../src/Resources';
-import {TestPlayers} from '../../TestingUtils';
+import {TestPlayers} from '../../TestPlayers';
 
 // TODO: add a test for Posideon's initial action.
 

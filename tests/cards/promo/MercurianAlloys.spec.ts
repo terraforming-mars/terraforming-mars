@@ -3,7 +3,7 @@ import {Research} from '../../../src/cards/base/Research';
 import {MercurianAlloys} from '../../../src/cards/promo/MercurianAlloys';
 import {Game} from '../../../src/Game';
 import {Player} from '../../../src/Player';
-import {TestPlayers} from '../../TestingUtils';
+import {TestPlayers} from '../../TestPlayers';
 
 describe('MercurianAlloys', function() {
   let card : MercurianAlloys; let player : Player;

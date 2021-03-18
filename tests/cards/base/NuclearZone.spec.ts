@@ -2,7 +2,7 @@ import {expect} from 'chai';
 import {NuclearZone} from '../../../src/cards/base/NuclearZone';
 import {Game} from '../../../src/Game';
 import {TileType} from '../../../src/TileType';
-import {TestPlayers} from '../../TestingUtils';
+import {TestPlayers} from '../../TestPlayers';
 
 describe('NuclearZone', function() {
   it('Should play', function() {

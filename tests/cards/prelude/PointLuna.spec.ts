@@ -5,7 +5,7 @@ import {PointLuna} from '../../../src/cards/prelude/PointLuna';
 import {Game} from '../../../src/Game';
 import {Player} from '../../../src/Player';
 import {Resources} from '../../../src/Resources';
-import {TestPlayers} from '../../TestingUtils';
+import {TestPlayers} from '../../TestPlayers';
 
 describe('PointLuna', function() {
   let card : PointLuna; let player : Player;

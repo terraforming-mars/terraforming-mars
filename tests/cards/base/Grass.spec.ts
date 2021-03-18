@@ -3,7 +3,7 @@ import {Grass} from '../../../src/cards/base/Grass';
 import {Game} from '../../../src/Game';
 import {Player} from '../../../src/Player';
 import {Resources} from '../../../src/Resources';
-import {TestPlayers} from '../../TestingUtils';
+import {TestPlayers} from '../../TestPlayers';
 
 describe('Grass', function() {
   let card : Grass; let player : Player; let game : Game;

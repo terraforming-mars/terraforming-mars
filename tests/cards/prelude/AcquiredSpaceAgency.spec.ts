@@ -2,7 +2,7 @@ import {expect} from 'chai';
 import {AcquiredSpaceAgency} from '../../../src/cards/prelude/AcquiredSpaceAgency';
 import {Tags} from '../../../src/cards/Tags';
 import {Game} from '../../../src/Game';
-import {TestPlayers} from '../../TestingUtils';
+import {TestPlayers} from '../../TestPlayers';
 
 describe('AcquiredSpaceAgency', function() {
   it('Should play', function() {

@@ -8,7 +8,7 @@ import {SelectCard} from '../../../src/inputs/SelectCard';
 import {ICard} from '../../../src/cards/ICard';
 import {Player} from '../../../src/Player';
 import {Resources} from '../../../src/Resources';
-import {TestPlayers} from '../../TestingUtils';
+import {TestPlayers} from '../../TestPlayers';
 
 describe('ProjectInspection', function() {
   let card : ProjectInspection; let player : Player; let restrictedArea: RestrictedArea;

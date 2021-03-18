@@ -64,8 +64,10 @@ import {MoonExpansion} from './moon/MoonExpansion';
 import {TurmoilHandler} from './turmoil/TurmoilHandler';
 import {Random} from './Random';
 import {MilestoneAwardSelector} from './MilestoneAwardSelector';
+import {BoardType} from './boards/BoardType';
 
 export type GameId = string;
+export type SpectatorId = string;
 
 export interface Score {
   corporation: String;
@@ -151,6 +153,7 @@ export class Game implements ISerializable<SerializedGame> {
   public lastSaveId: number = 0;
   private clonedGamedId: string | undefined;
   public seed: number;
+  public spectatorId: SpectatorId | undefined;
   public deferredActions: DeferredActionsQueue = new DeferredActionsQueue();
   public gameAge: number = 0; // Each log event increases it
   public gameLog: Array<LogMessage> = [];
@@ -175,6 +178,7 @@ export class Game implements ISerializable<SerializedGame> {
 
   // Drafting
   private draftRound: number = 1;
+  // Used when drafting the first 10 project cards.
   private initialDraftIteration: number = 1;
   private unDraftedCards: Map<PlayerId, Array<IProjectCard>> = new Map();
 
@@ -237,7 +241,8 @@ export class Game implements ISerializable<SerializedGame> {
     players: Array<Player>,
     firstPlayer: Player,
     gameOptions: GameOptions = {...DEFAULT_GAME_OPTIONS},
-    seed: number = 0): Game {
+    seed: number = 0,
+    spectatorId: SpectatorId | undefined = undefined): Game {
     if (gameOptions.clonedGamedId !== undefined) {
       throw new Error('Cloning should not come through this execution path.');
     }
@@ -260,8 +265,8 @@ export class Game implements ISerializable<SerializedGame> {
       players[0].terraformRatingAtGenerationStart = 14;
     }
 
-    const game: Game = new Game(id, players, firstPlayer, activePlayer, gameOptions, seed, board, dealer);
-
+    const game = new Game(id, players, firstPlayer, activePlayer, gameOptions, seed, board, dealer);
+    game.spectatorId = spectatorId;
     // Initialize Ares data
     if (gameOptions.aresExtension) {
       game.aresData = AresSetup.initialData(gameOptions.aresExtension, gameOptions.aresHazards, players);
@@ -417,6 +422,7 @@ export class Game implements ISerializable<SerializedGame> {
       researchedPlayers: Array.from(this.researchedPlayers),
       seed: this.seed,
       someoneHasRemovedOtherPlayersPlants: this.someoneHasRemovedOtherPlayersPlants,
+      spectatorId: this.spectatorId,
       syndicatePirateRaider: this.syndicatePirateRaider,
       temperature: this.temperature,
       undoCount: this.undoCount,
@@ -1239,10 +1245,22 @@ export class Game implements ISerializable<SerializedGame> {
       currentLevel = this.getTemperature();
       playerRequirementsBonus *= 2;
       break;
+
     case GlobalParameter.VENUS:
       currentLevel = this.getVenusScaleLevel();
       playerRequirementsBonus *= 2;
       break;
+
+    case GlobalParameter.MOON_COLONY_RATE:
+      currentLevel = MoonExpansion.moonData(player.game).colonyRate;
+      break;
+    case GlobalParameter.MOON_MINING_RATE:
+      currentLevel = MoonExpansion.moonData(player.game).miningRate;
+      break;
+    case GlobalParameter.MOON_LOGISTICS_RATE:
+      currentLevel = MoonExpansion.moonData(player.game).logisticRate;
+      break;
+
     default:
       console.warn(`Unknown GlobalParameter provided: ${parameter}`);
       return false;
@@ -1379,9 +1397,9 @@ export class Game implements ISerializable<SerializedGame> {
     }
 
     this.players.forEach((p) => {
-      p.corporationCard?.onTilePlaced?.(p, player, space);
+      p.corporationCard?.onTilePlaced?.(p, player, space, BoardType.MARS);
       p.playedCards.forEach((playedCard) => {
-        playedCard.onTilePlaced?.(p, player, space);
+        playedCard.onTilePlaced?.(p, player, space, BoardType.MARS);
       });
     });
 
@@ -1566,8 +1584,8 @@ export class Game implements ISerializable<SerializedGame> {
 
     // Rebuild dealer object to be sure that we will have cards in the same order
     const dealer = Dealer.deserialize(d.dealer);
-
-    const game: Game = new Game(d.id, players, first, d.activePlayer, gameOptions, d.seed, board, dealer);
+    const game = new Game(d.id, players, first, d.activePlayer, gameOptions, d.seed, board, dealer);
+    game.spectatorId = d.spectatorId;
 
     const milestones: Array<IMilestone> = [];
     d.milestones.forEach((element: IMilestone) => {

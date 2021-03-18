@@ -356,6 +356,16 @@ export class Player implements ISerializable<SerializedPlayer> {
 
     const modifier = amount > 0 ? 'increased' : 'decreased';
 
+    // Gaining production from multiplier cards
+    if (game !== undefined && fromPlayer === undefined && amount > 0) {
+      game.log('${0}\'s ${1} production ${2} by ${3}', (b) =>
+        b.player(this)
+          .string(resource)
+          .string(modifier)
+          .number(Math.abs(amount)));
+    }
+
+    // Production reduced by other players
     if (game !== undefined && fromPlayer !== undefined && amount < 0) {
       if (fromPlayer !== this && this.removingPlayers.includes(fromPlayer.id) === false) {
         this.removingPlayers.push(fromPlayer.id);

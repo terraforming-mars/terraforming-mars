@@ -29,7 +29,7 @@ export class MirandaResort extends Card implements IProjectCard {
   }
 
   public play(player: Player) {
-    player.addProduction(Resources.MEGACREDITS, player.getTagCount(Tags.EARTH));
+    player.addProduction(Resources.MEGACREDITS, player.getTagCount(Tags.EARTH), player.game);
     return undefined;
   }
   public getVictoryPoints() {

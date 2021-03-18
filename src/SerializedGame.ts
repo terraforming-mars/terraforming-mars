@@ -52,8 +52,8 @@ export interface SerializedGame {
     someoneHasRemovedOtherPlayersPlants: boolean;
     syndicatePirateRaider: PlayerId | undefined;
     temperature: number;
-    timeline: number;
     turmoil?: SerializedTurmoil;
+    undoCount: number;
     unDraftedCards: Array<[PlayerId, Array<CardName>]>;
     venusScaleLevel: number;
 }

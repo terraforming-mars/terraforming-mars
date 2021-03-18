@@ -97,7 +97,7 @@ export class GameLoader implements IGameLoader {
         if (game !== undefined) {
           Database.getInstance().deleteGameNbrSaves(gameId, 1);
           this.add(game);
-          game.timeline++;
+          game.undoCount++;
           cb(game);
         } else {
           console.log(err);

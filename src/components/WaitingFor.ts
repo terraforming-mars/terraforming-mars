@@ -84,7 +84,7 @@ export const WaitingFor = Vue.component('waiting-for', {
       clearTimeout(ui_update_timeout_id);
       const askForUpdate = () => {
         const xhr = new XMLHttpRequest();
-        xhr.open('GET', '/api/waitingfor' + window.location.search + '&prev-game-age=' + String(this.player.gameAge) + '&prev-timeline=' + String(this.player.timeline));
+        xhr.open('GET', '/api/waitingfor' + window.location.search + '&gameAge=' + this.player.gameAge + '&undoCount=' + this.player.undoCount);
         xhr.onerror = function() {
           root.showAlert('Unable to reach the server. The server may be restarting or down for maintenance.', () => vueApp.waitForUpdate());
         };

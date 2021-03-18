@@ -37,7 +37,6 @@ export interface PlayerModel {
     energyProduction: number;
     fleetSize: number;
     gameAge: number;
-    timeline: number;
     gameOptions: GameOptionsModel;
     generation: number;
     heat: number;
@@ -80,6 +79,7 @@ export interface PlayerModel {
     titaniumValue: number;
     tradesThisGeneration: number;
     turmoil: TurmoilModel | undefined;
+    undoCount: number;
     venusScaleLevel: number;
     victoryPointsBreakdown: VictoryPointsBreakdown;
     waitingFor: PlayerInputModel | undefined;

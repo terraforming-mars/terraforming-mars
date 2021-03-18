@@ -47,7 +47,7 @@ describe('Cloner', function() {
 
     expect(game.seed).eq(newGame!.seed);
     expect(game.gameAge).eq(newGame!.gameAge);
-    expect(game.timeline).eq(newGame!.timeline);
+    expect(game.undoCount).eq(newGame!.undoCount);
     expect(game.dealer, 'dealer').to.deep.eq(newGame!.dealer);
     expect(game.milestones, 'milestones').to.deep.eq(newGame!.milestones);
     expect(game.awards, 'awards').to.deep.eq(newGame!.awards);

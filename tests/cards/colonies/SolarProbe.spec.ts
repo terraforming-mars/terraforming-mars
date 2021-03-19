@@ -2,7 +2,7 @@ import {expect} from 'chai';
 import {Research} from '../../../src/cards/base/Research';
 import {SolarProbe} from '../../../src/cards/colonies/SolarProbe';
 import {Game} from '../../../src/Game';
-import {TestPlayers} from '../../TestingUtils';
+import {TestPlayers} from '../../TestPlayers';
 
 describe('SolarProbe', function() {
   it('Should play', function() {

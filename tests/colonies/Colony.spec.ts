@@ -12,10 +12,10 @@ import {SelectColony} from '../../src/inputs/SelectColony';
 import {SelectCard} from '../../src/inputs/SelectCard';
 import {IProjectCard} from '../../src/cards/IProjectCard';
 import {MAX_COLONY_TRACK_POSITION} from '../../src/constants';
-import {setCustomGameOptions} from '../TestingUtils';
+import {TestingUtils} from '../TestingUtils';
 import {BuildColonyStandardProject} from '../../src/cards/colonies/BuildColonyStandardProject';
 
-const gameOptions = setCustomGameOptions({coloniesExtension: true});
+const gameOptions = TestingUtils.setCustomGameOptions({coloniesExtension: true});
 
 function isBuildColonyStandardProjectAvailable(player: Player) {
   return new BuildColonyStandardProject().canAct(player);
@@ -77,7 +77,7 @@ describe('Colony', function() {
   it('Should increase by 1 at the end of a generation', function() {
     game.colonies = game.colonyDealer!.drawColonies(4, [], true, true);
     game.colonies.forEach((colony) => {
-      colony.endGeneration();
+      colony.endGeneration(game);
       if (colony.isActive) {
         expect(colony.trackPosition).to.eq(2);
       } else {

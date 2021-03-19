@@ -15,7 +15,7 @@ export class LunaConference extends Card implements IProjectCard {
     super({
       name: CardName.LUNA_CONFERENCE,
       cardType: CardType.EVENT,
-      tags: [Tags.SCIENCE, Tags.MOON, Tags.EVENT],
+      tags: [Tags.SCIENCE, Tags.MOON],
       cost: 5,
       requirements: CardRequirements.builder((b) => b.party(PartyName.SCIENTISTS)),
 
@@ -30,16 +30,6 @@ export class LunaConference extends Card implements IProjectCard {
       },
     });
   };
-
-  public canPlay(player: Player): boolean {
-    if (player.game.turmoil === undefined) {
-      return false;
-    }
-    if (!player.game.turmoil.canPlay(player, PartyName.SCIENTISTS)) {
-      return false;
-    }
-    return true;
-  }
 
   public play(player: Player) {
     const moonRoadCount = MoonExpansion.tiles(player.game, TileType.MOON_ROAD, true).length;

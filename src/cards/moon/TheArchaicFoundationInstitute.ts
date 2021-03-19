@@ -21,6 +21,9 @@ export class TheArchaicFoundationInstitute implements CorporationCard {
   }
 
   public onCardPlayed(player: Player, card: IProjectCard): void {
+    if (player.corporationCard?.name !== this.name) {
+      return undefined;
+    }
     const moonTags = card.tags.filter((t) => t === Tags.MOON);
     const count = moonTags.length;
     if (count > 0) {
@@ -40,7 +43,7 @@ export class TheArchaicFoundationInstitute implements CorporationCard {
       b.megacredits(55).br;
       b.effect('When you play a Moon tag, add a bronze resource cube on this card.', (eb) => {
         eb.moon().startEffect.resourceCube();
-      });
+      }).br;
       b.effect('Automatically remove every 3 bronze resource cubes collected here and increase your TR 1 step.', (eb) => {
         eb.resourceCube(3).startEffect.tr(1);
       });

@@ -2,11 +2,11 @@ import {expect} from 'chai';
 import {Incite} from '../../../src/cards/community/Incite';
 import {EventAnalysts} from '../../../src/cards/turmoil/EventAnalysts';
 import {Game} from '../../../src/Game';
-import {OrOptions} from '../../../src/inputs/OrOptions';
+import {SelectPartyToSendDelegate} from '../../../src/inputs/SelectPartyToSendDelegate';
 import {Player} from '../../../src/Player';
 import {PartyName} from '../../../src/turmoil/parties/PartyName';
-import {setCustomGameOptions} from '../../TestingUtils';
-import {TestPlayers} from '../../TestingUtils';
+import {TestingUtils} from '../../TestingUtils';
+import {TestPlayers} from '../../TestPlayers';
 
 describe('Incite', function() {
   let card : Incite; let player : Player; let game : Game;
@@ -15,7 +15,7 @@ describe('Incite', function() {
     card = new Incite();
     player = TestPlayers.BLUE.newPlayer();
 
-    const gameOptions = setCustomGameOptions();
+    const gameOptions = TestingUtils.setCustomGameOptions();
     game = Game.newInstance('foobar', [player], player, gameOptions);
 
     card.play(player);
@@ -36,8 +36,8 @@ describe('Incite', function() {
     card.initialAction(player);
     expect(game.deferredActions).has.lengthOf(1);
 
-    const orOptions = game.deferredActions.peek()!.execute() as OrOptions;
-    orOptions.options[0].cb();
+    const sendDelegate = game.deferredActions.peek()!.execute() as SelectPartyToSendDelegate;
+    sendDelegate.cb(PartyName.MARS);
 
     const marsFirst = game.turmoil!.getPartyByName(PartyName.MARS);
     expect(marsFirst!.delegates.filter((d) => d === player.id)).has.lengthOf(2);

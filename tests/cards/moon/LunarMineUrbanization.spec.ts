@@ -1,5 +1,6 @@
 import {Game} from '../../../src/Game';
-import {setCustomGameOptions, TestPlayers} from '../../TestingUtils';
+import {TestingUtils} from '../../TestingUtils';
+import {TestPlayers} from '../../TestPlayers';
 import {LunarMineUrbanization} from '../../../src/cards/moon/LunarMineUrbanization';
 import {expect} from 'chai';
 import {MoonExpansion} from '../../../src/moon/MoonExpansion';
@@ -8,7 +9,7 @@ import {TileType} from '../../../src/TileType';
 import {TestPlayer} from '../../TestPlayer';
 import {Resources} from '../../../src/Resources';
 
-const MOON_OPTIONS = setCustomGameOptions({moonExpansion: true});
+const MOON_OPTIONS = TestingUtils.setCustomGameOptions({moonExpansion: true});
 
 describe('LunarMineUrbanization', () => {
   let player: TestPlayer;

@@ -1,5 +1,6 @@
 import {Game} from '../../../src/Game';
-import {setCustomGameOptions, TestPlayers} from '../../TestingUtils';
+import {TestingUtils} from '../../TestingUtils';
+import {TestPlayers} from '../../TestPlayers';
 import {TestPlayer} from '../../TestPlayer';
 import {HeavyDutyRovers} from '../../../src/cards/moon/HeavyDutyRovers';
 import {expect} from 'chai';
@@ -7,7 +8,7 @@ import {IMoonData} from '../../../src/moon/IMoonData';
 import {MoonExpansion} from '../../../src/moon/MoonExpansion';
 import {TileType} from '../../../src/TileType';
 
-const MOON_OPTIONS = setCustomGameOptions({moonExpansion: true});
+const MOON_OPTIONS = TestingUtils.setCustomGameOptions({moonExpansion: true});
 
 describe('HeavyDutyRovers', () => {
   let player: TestPlayer;
@@ -32,8 +33,8 @@ describe('HeavyDutyRovers', () => {
     moonData.logisticRate = 0;
     expect(player.getTerraformRating()).eq(14);
 
-    moonData.moon.getSpace('m06')!.tile = {tileType: TileType.MOON_MINE};
-    moonData.moon.getSpace('m05')!.tile = {tileType: TileType.MOON_ROAD};
+    moonData.moon.getSpace('m07')!.tile = {tileType: TileType.MOON_MINE};
+    moonData.moon.getSpace('m06')!.tile = {tileType: TileType.MOON_ROAD};
     moonData.moon.getSpace('m02')!.tile = {tileType: TileType.MOON_MINE};
 
     card.play(player);

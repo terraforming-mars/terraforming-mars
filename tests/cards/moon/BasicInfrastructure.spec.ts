@@ -2,13 +2,14 @@ import {Game} from '../../../src/Game';
 import {IMoonData} from '../../../src/moon/IMoonData';
 import {MoonExpansion} from '../../../src/moon/MoonExpansion';
 import {Player} from '../../../src/Player';
-import {setCustomGameOptions, TestPlayers} from '../../TestingUtils';
+import {TestingUtils} from '../../TestingUtils';
+import {TestPlayers} from '../../TestPlayers';
 import {BasicInfrastructure} from '../../../src/cards/moon/BasicInfrastructure';
 import {expect} from 'chai';
 import {Resources} from '../../../src/Resources';
 import {PlaceMoonRoadTile} from '../../../src/moon/PlaceMoonRoadTile';
 
-const MOON_OPTIONS = setCustomGameOptions({moonExpansion: true});
+const MOON_OPTIONS = TestingUtils.setCustomGameOptions({moonExpansion: true});
 
 describe('BasicInfrastructure', () => {
   let game: Game;

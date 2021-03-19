@@ -31,6 +31,10 @@ export class TestPlayer extends Player {
 
   public tagsForTest: Partial<TagsForTest> | undefined = undefined;
 
+  public getStandardProjectOption() {
+    return super.getStandardProjectOption();
+  }
+
   public getTagCount(tag: Tags, includeEventsTags:boolean = false, includeWildcardTags:boolean = true): number {
     if (this.tagsForTest !== undefined) {
       return this.tagsForTest[tag] || 0;

@@ -8,7 +8,8 @@ import {Resources} from '../../../src/Resources';
 import {IParty} from '../../../src/turmoil/parties/IParty';
 import {PartyName} from '../../../src/turmoil/parties/PartyName';
 import {Turmoil} from '../../../src/turmoil/Turmoil';
-import {setCustomGameOptions, TestPlayers} from '../../TestingUtils';
+import {TestingUtils} from '../../TestingUtils';
+import {TestPlayers} from '../../TestPlayers';
 
 describe('DiasporaMovement', function() {
   let card : DiasporaMovement; let player : Player; let player2 : Player; let game : Game; let turmoil: Turmoil; let reds: IParty;
@@ -18,7 +19,7 @@ describe('DiasporaMovement', function() {
     player = TestPlayers.BLUE.newPlayer();
     player2 = TestPlayers.RED.newPlayer();
 
-    const gameOptions = setCustomGameOptions();
+    const gameOptions = TestingUtils.setCustomGameOptions();
     game = Game.newInstance('foobar', [player, player2], player, gameOptions);
     turmoil = game.turmoil!;
     reds = turmoil.getPartyByName(PartyName.REDS)!;

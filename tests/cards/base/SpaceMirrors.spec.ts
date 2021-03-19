@@ -3,7 +3,7 @@ import {SpaceMirrors} from '../../../src/cards/base/SpaceMirrors';
 import {Game} from '../../../src/Game';
 import {Player} from '../../../src/Player';
 import {Resources} from '../../../src/Resources';
-import {TestPlayers} from '../../TestingUtils';
+import {TestPlayers} from '../../TestPlayers';
 
 describe('SpaceMirrors', function() {
   let card : SpaceMirrors; let player : Player; let game : Game;

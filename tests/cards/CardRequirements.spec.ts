@@ -1,7 +1,8 @@
 import {expect} from 'chai';
 import {CardRequirements} from '../../src/cards/CardRequirements';
 import {Player} from '../../src/Player';
-import {setCustomGameOptions, TestPlayers} from '../TestingUtils';
+import {TestingUtils} from '../TestingUtils';
+import {TestPlayers} from '../TestPlayers';
 import {Game} from '../../src/Game';
 import {AdaptationTechnology} from '../../src/cards/base/AdaptationTechnology';
 import {TileType} from '../../src/TileType';
@@ -23,7 +24,7 @@ describe('CardRequirements', function() {
   beforeEach(function() {
     player = TestPlayers.BLUE.newPlayer();
     player2 = TestPlayers.RED.newPlayer();
-    const gameOptions = setCustomGameOptions();
+    const gameOptions = TestingUtils.setCustomGameOptions();
 
     Game.newInstance('foobar', [player, player2], player, gameOptions);
   });

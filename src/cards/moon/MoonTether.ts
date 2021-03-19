@@ -1,5 +1,4 @@
 import {CardName} from '../../CardName';
-import {Player} from '../../Player';
 import {CardType} from '../CardType';
 import {IProjectCard} from '../IProjectCard';
 import {Tags} from '../Tags';
@@ -14,8 +13,9 @@ export class MoonTether extends Card implements IProjectCard {
       cardType: CardType.ACTIVE,
       tags: [Tags.MOON, Tags.SPACE],
       cost: 18,
-      requirements: CardRequirements.builder((b) => b.tag(Tags.SPACE, 6)),
 
+      requirements: CardRequirements.builder((b) => b.tag(Tags.SPACE, 6)),
+      cardDiscount: {amount: 2},
       metadata: {
         cardNumber: 'M90',
         renderData: CardRenderer.builder((b) => {
@@ -29,13 +29,10 @@ export class MoonTether extends Card implements IProjectCard {
     });
   };
 
-  public canPlay(player: Player): boolean {
-    return player.getTagCount(Tags.SPACE) >= 6;
-  }
-
   public play() {
     return undefined;
   }
+
 
   public getCardDiscount() {
     return 2;

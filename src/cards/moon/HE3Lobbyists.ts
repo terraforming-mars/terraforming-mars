@@ -24,13 +24,9 @@ export class HE3Lobbyists extends Card {
     });
   };
 
-  public canPlay(): boolean {
-    return true;
-  }
-
   public play(player: Player) {
-    // TODO(kberg): test whether this card's tag is included
-    player.addProduction(Resources.MEGACREDITS, player.getTagCount(Tags.MOON));
+    // + 1 because the tag above isn't yet included in the played cards pile.
+    player.addProduction(Resources.MEGACREDITS, player.getTagCount(Tags.MOON) + 1);
     return undefined;
   }
 }

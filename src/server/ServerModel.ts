@@ -36,10 +36,11 @@ import {SelectDelegate} from '../inputs/SelectDelegate';
 import {SelectColony} from '../inputs/SelectColony';
 import {SelectProductionToLose} from '../inputs/SelectProductionToLose';
 import {ShiftAresGlobalParameters} from '../inputs/ShiftAresGlobalParameters';
+import {SpectatorModel} from '../models/SpectatorModel';
 import {MoonModel} from '../models/MoonModel';
 import {CardName} from '../CardName';
 import {Units} from '../Units';
-import {WaitingForModel} from '../models/WaitingForModel';
+import {SelectPartyToSendDelegate} from '../inputs/SelectPartyToSendDelegate';
 
 export class Server {
   public static getGameModel(game: Game): GameHomeModel {
@@ -53,16 +54,19 @@ export class Server {
         name: player.name,
       })),
       gameOptions: getGameOptionsAsModel(game.gameOptions),
+      lastSoloGeneration: game.lastSoloGeneration(),
     };
   }
 
-  public static getPlayerModel(player: Player, game: Game): PlayerModel {
+  public static getPlayerModel(player: Player): PlayerModel {
+    const game = player.game;
     const turmoil = getTurmoil(game);
 
     return {
       actionsTakenThisRound: player.actionsTakenThisRound,
       actionsThisGeneration: Array.from(player.getActionsThisGeneration()),
       aresData: game.aresData,
+      availableBlueCardActionCount: player.getAvailableBlueActionCount(),
       awards: getAwards(game),
       cardCost: player.cardCost,
       cardsInHand: getCards(player, player.cardsInHand, {showNewCost: true}),
@@ -89,6 +93,7 @@ export class Server {
       influence: turmoil ? game.turmoil!.getPlayerInfluence(player) : 0,
       isActive: player.id === game.activePlayer,
       isSoloModeWin: game.isSoloModeWin(),
+      lastSoloGeneration: game.lastSoloGeneration(),
       megaCredits: player.megaCredits,
       megaCreditProduction: player.getProduction(Resources.MEGACREDITS),
       milestones: getMilestones(game),
@@ -110,6 +115,7 @@ export class Server {
       preludeCardsInHand: getCards(player, player.preludeCardsInHand),
       selfReplicatingRobotsCards: player.getSelfReplicatingRobotsCards(),
       spaces: getSpaces(game.board),
+      spectatorId: game.spectatorId,
       steel: player.steel,
       steelProduction: player.getProduction(Resources.STEEL),
       steelValue: player.getSteelValue(),
@@ -120,24 +126,19 @@ export class Server {
       titanium: player.titanium,
       titaniumProduction: player.getProduction(Resources.TITANIUM),
       titaniumValue: player.getTitaniumValue(),
-      tradesThisTurn: player.tradesThisTurn,
+      tradesThisGeneration: player.tradesThisGeneration,
       turmoil: turmoil,
+      undoCount: game.undoCount,
       venusScaleLevel: game.getVenusScaleLevel(),
       victoryPointsBreakdown: player.getVictoryPoints(),
       waitingFor: getWaitingFor(player, player.getWaitingFor()),
     };
   }
 
-  public static getWaitingForModel(player: Player, prevGameAge: number): WaitingForModel {
-    const result: WaitingForModel = {
-      result: 'WAIT',
+  public static getSpectatorModel(game: Game): SpectatorModel {
+    return {
+      generation: game.generation,
     };
-    if (player.getWaitingFor() !== undefined || player.game.phase === Phase.END) {
-      result.result = 'GO';
-    } else if (player.game.gameAge > prevGameAge) {
-      result.result = 'REFRESH';
-    }
-    return result;
   }
 }
 
@@ -209,6 +210,7 @@ function getCorporationCard(player: Player): CardModel | undefined {
     cardType: CardType.CORPORATION,
     isDisabled: player.corporationCard.isDisabled,
     warning: player.corporationCard.warning,
+    discount: player.corporationCard.cardDiscount,
   } as CardModel;
 }
 
@@ -241,6 +243,8 @@ function getWaitingFor(
     payProduction: undefined,
     aresData: undefined,
     selectBlueCardAction: false,
+    availableParties: undefined,
+    turmoil: undefined,
   };
   switch (waitingFor.inputType) {
   case PlayerInputTypes.AND_OPTIONS:
@@ -274,7 +278,11 @@ function getWaitingFor(
     });
     playerInputModel.maxCardsToSelect = selectCard.maxCardsToSelect;
     playerInputModel.minCardsToSelect = selectCard.minCardsToSelect;
+    playerInputModel.showOnlyInLearnerMode = selectCard.enabled?.every((p: boolean) => p === false);
     playerInputModel.selectBlueCardAction = selectCard.selectBlueCardAction;
+    if (selectCard.showOwner) {
+      playerInputModel.showOwner = true;
+    }
     break;
   case PlayerInputTypes.SELECT_COLONY:
     playerInputModel.coloniesModel = (waitingFor as SelectColony).coloniesModel;
@@ -309,6 +317,12 @@ function getWaitingFor(
         }
       },
     );
+    break;
+  case PlayerInputTypes.SELECT_PARTY_TO_SEND_DELEGATE:
+    playerInputModel.availableParties = (waitingFor as SelectPartyToSendDelegate).availableParties;
+    if (player.game !== undefined) {
+      playerInputModel.turmoil = getTurmoil(player.game);
+    }
     break;
   case PlayerInputTypes.SELECT_PRODUCTION_TO_LOSE:
     const _player = (waitingFor as SelectProductionToLose).player;
@@ -350,6 +364,8 @@ function getCards(
     isDisabled: options.enabled?.[index] === false,
     warning: card.warning,
     reserveUnits: options.reserveUnitMap?.get(card.name) || Units.EMPTY,
+    bonusResource: (card as IProjectCard).bonusResource,
+    discount: card.cardDiscount,
   }));
 }
 
@@ -399,7 +415,7 @@ function getPlayers(players: Array<Player>, game: Game): Array<PlayerModel> {
         player.getActionsThisGeneration(),
       ),
       fleetSize: player.getFleetSize(),
-      tradesThisTurn: player.tradesThisTurn,
+      tradesThisGeneration: player.tradesThisGeneration,
       turmoil: turmoil,
       selfReplicatingRobotsCards: player.getSelfReplicatingRobotsCards(),
       needsToDraft: player.needsToDraft,
@@ -407,6 +423,7 @@ function getPlayers(players: Array<Player>, game: Game): Array<PlayerModel> {
       deckSize: game.dealer.getDeckSize(),
       actionsTakenThisRound: player.actionsTakenThisRound,
       timer: player.timer.serialize(),
+      availableBlueCardActionCount: player.getAvailableBlueActionCount(),
     } as PlayerModel;
   });
 }

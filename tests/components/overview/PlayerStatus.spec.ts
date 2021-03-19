@@ -1,4 +1,4 @@
-
+/*
 import {createLocalVue, mount} from '@vue/test-utils';
 
 import {expect} from 'chai';
@@ -36,3 +36,4 @@ describe('PlayerStatus', function() {
     expect(test.text()).to.eq('1');
   });
 });
+*/

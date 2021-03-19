@@ -148,21 +148,29 @@ export class CardRequirement {
       return this.satisfiesInequality(standardResources + nonStandardResources);
 
     case RequirementType.COLONY_RATE:
-      return this.satisfiesInequality(MoonExpansion.moonData(player.game).colonyRate);
+      return player.game.checkRequirements(player, GlobalParameter.MOON_COLONY_RATE, this.amount, this.isMax);
 
     case RequirementType.MINING_RATE:
-      return this.satisfiesInequality(MoonExpansion.moonData(player.game).miningRate);
+      return player.game.checkRequirements(player, GlobalParameter.MOON_MINING_RATE, this.amount, this.isMax);
 
     case RequirementType.LOGISTIC_RATE:
-      return this.satisfiesInequality(MoonExpansion.moonData(player.game).logisticRate);
+      return player.game.checkRequirements(player, GlobalParameter.MOON_LOGISTICS_RATE, this.amount, this.isMax);
+
+    case RequirementType.COLONY_TILES:
+      return this.satisfiesInequality(
+        MoonExpansion.tiles(player.game, TileType.MOON_COLONY, true, this._isAny ? undefined : player).length);
+
+    case RequirementType.MINING_TILES:
+      return this.satisfiesInequality(MoonExpansion.tiles(player.game, TileType.MOON_MINE, true, this._isAny ? undefined : player).length);
+
+    case RequirementType.ROAD_TILES:
+      return this.satisfiesInequality(MoonExpansion.tiles(player.game, TileType.MOON_ROAD, true, this._isAny ? undefined : player).length);
 
     case RequirementType.TAG:
     case RequirementType.PARTY:
     case RequirementType.PRODUCTION:
       throw `Use subclass satisfies() for requirement type ${this.type}`;
     }
-
-    return false;
   }
 }
 
@@ -175,7 +183,11 @@ export class TagCardRequirement extends CardRequirement {
     return firstLetterUpperCase(this.tag);
   }
   public satisfies(player: Player): boolean {
-    return this.satisfiesInequality(player.getTagCount(this.tag));
+    let tagCount = player.getTagCount(this.tag);
+    // PoliticalAgendas Scientists P4 hook
+    if (this.tag === Tags.SCIENCE && player.hasTurmoilScienceTagBonus) tagCount += 1;
+
+    return this.satisfiesInequality(tagCount);
   }
 }
 

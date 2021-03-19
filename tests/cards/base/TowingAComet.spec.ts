@@ -2,7 +2,7 @@
 import {expect} from 'chai';
 import {TowingAComet} from '../../../src/cards/base/TowingAComet';
 import {Game} from '../../../src/Game';
-import {TestPlayers} from '../../TestingUtils';
+import {TestPlayers} from '../../TestPlayers';
 
 describe('TowingAComet', function() {
   it('Should play', function() {

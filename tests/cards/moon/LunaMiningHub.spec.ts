@@ -2,14 +2,15 @@ import {Game} from '../../../src/Game';
 import {IMoonData} from '../../../src/moon/IMoonData';
 import {MoonExpansion} from '../../../src/moon/MoonExpansion';
 import {Player} from '../../../src/Player';
-import {setCustomGameOptions, TestPlayers} from '../../TestingUtils';
+import {TestingUtils} from '../../TestingUtils';
+import {TestPlayers} from '../../TestPlayers';
 import {LunaMiningHub} from '../../../src/cards/moon/LunaMiningHub';
 import {expect} from 'chai';
 import {Resources} from '../../../src/Resources';
 import {TileType} from '../../../src/TileType';
 import {PlaceSpecialMoonTile} from '../../../src/moon/PlaceSpecialMoonTile';
 
-const MOON_OPTIONS = setCustomGameOptions({moonExpansion: true});
+const MOON_OPTIONS = TestingUtils.setCustomGameOptions({moonExpansion: true});
 
 describe('LunaMiningHub', () => {
   let game: Game;
@@ -78,7 +79,7 @@ describe('LunaMiningHub', () => {
 
   it('getVictoryPoints', () => {
     // This space has room to surround it with mines.
-    const space = moonData.moon.spaces[10];
+    const space = moonData.moon.getSpace('m15');
     space.tile = {tileType: TileType.LUNA_MINING_HUB, card: card.name};
 
     expect(card.getVictoryPoints(player)).eq(0);

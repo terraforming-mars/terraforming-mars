@@ -53,7 +53,7 @@ export class TitanFloatingLaunchPad extends Card implements IProjectCard, IResou
   public action(player: Player) {
     const openColonies = player.game.colonies.filter((colony) => colony.isActive && colony.visitor === undefined);
 
-    if (this.resourceCount === 0 || openColonies.length === 0 || player.getFleetSize() <= player.tradesThisTurn) {
+    if (this.resourceCount === 0 || openColonies.length === 0 || player.getFleetSize() <= player.tradesThisGeneration) {
       player.game.defer(new AddResourcesToCard(player, ResourceType.FLOATER, {restrictedTag: Tags.JOVIAN, title: 'Add 1 floater to a Jovian card'}));
       return undefined;
     }
@@ -72,7 +72,7 @@ export class TitanFloatingLaunchPad extends Card implements IProjectCard, IResou
             openColonies.forEach((colony) => {
               if (colony.name === colonyName) {
                 this.resourceCount--;
-                player.game.log('${0} traded with ${1}', (b) => b.player(player).colony(colony));
+                player.game.log('${0} spent 1 floater to trade with ${1}', (b) => b.player(player).colony(colony));
                 colony.trade(player);
                 return undefined;
               }

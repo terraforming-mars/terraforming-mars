@@ -1,7 +1,7 @@
 import {expect} from 'chai';
 import {Celestic} from '../../../src/cards/venusNext/Celestic';
 import {Game} from '../../../src/Game';
-import {TestPlayers} from '../../TestingUtils';
+import {TestPlayers} from '../../TestPlayers';
 
 describe('Celestic', function() {
   it('Should play', function() {

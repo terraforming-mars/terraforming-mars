@@ -3,14 +3,15 @@ import {MartianMediaCenter} from '../../../src/cards/turmoil/MartianMediaCenter'
 import {Game} from '../../../src/Game';
 import {Resources} from '../../../src/Resources';
 import {PartyName} from '../../../src/turmoil/parties/PartyName';
-import {setCustomGameOptions, TestPlayers} from '../../TestingUtils';
+import {TestingUtils} from '../../TestingUtils';
+import {TestPlayers} from '../../TestPlayers';
 
 describe('MartianMediaCenter', function() {
   it('Should play', function() {
     const card = new MartianMediaCenter();
     const player = TestPlayers.BLUE.newPlayer();
 
-    const gameOptions = setCustomGameOptions();
+    const gameOptions = TestingUtils.setCustomGameOptions();
     const game = Game.newInstance('foobar', [player], player, gameOptions);
     expect(card.canPlay(player)).is.not.true;
 

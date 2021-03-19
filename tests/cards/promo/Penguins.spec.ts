@@ -3,7 +3,7 @@ import {Penguins} from '../../../src/cards/promo/Penguins';
 import {Game} from '../../../src/Game';
 import {Player} from '../../../src/Player';
 import {TestingUtils} from '../../TestingUtils';
-import {TestPlayers} from '../../TestingUtils';
+import {TestPlayers} from '../../TestPlayers';
 
 describe('Penguins', function() {
   let card : Penguins; let player : Player;

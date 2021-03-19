@@ -1,13 +1,14 @@
 import {Game} from '../../../src/Game';
 import {Player} from '../../../src/Player';
-import {setCustomGameOptions, TestPlayers} from '../../TestingUtils';
+import {TestingUtils} from '../../TestingUtils';
+import {TestPlayers} from '../../TestPlayers';
 import {SmallDutyRovers} from '../../../src/cards/moon/SmallDutyRovers';
 import {expect} from 'chai';
 import {MoonExpansion} from '../../../src/moon/MoonExpansion';
 import {IMoonData} from '../../../src/moon/IMoonData';
 import {TileType} from '../../../src/TileType';
 
-const MOON_OPTIONS = setCustomGameOptions({moonExpansion: true});
+const MOON_OPTIONS = TestingUtils.setCustomGameOptions({moonExpansion: true});
 
 describe('SmallDutyRovers', () => {
   let player: Player;
@@ -37,6 +38,10 @@ describe('SmallDutyRovers', () => {
     expect(player.getTerraformRating()).eq(14);
     player.titanium = 1;
     player.megaCredits = 0;
+    // remove space bonuses to keep this simple.
+    moonData.moon.spaces.forEach((space) => {
+      space.bonus = [];
+    });
 
     MoonExpansion.addTile(player, 'm04', {tileType: TileType.MOON_MINE});
     MoonExpansion.addTile(player, 'm05', {tileType: TileType.MOON_COLONY});

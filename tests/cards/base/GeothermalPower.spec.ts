@@ -1,7 +1,7 @@
 import {expect} from 'chai';
 import {GeothermalPower} from '../../../src/cards/base/GeothermalPower';
 import {Resources} from '../../../src/Resources';
-import {TestPlayers} from '../../TestingUtils';
+import {TestPlayers} from '../../TestPlayers';
 
 describe('GeothermalPower', function() {
   it('Should play', function() {

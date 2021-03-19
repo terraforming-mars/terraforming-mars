@@ -1,21 +1,27 @@
 import {expect} from 'chai';
 import {ISpace} from '../../src/boards/ISpace';
+import {SpecialDesign} from '../../src/cards/base/SpecialDesign';
+import {EcologicalSurvey} from '../../src/cards/ares/EcologicalSurvey';
+import {GeologicalSurvey} from '../../src/cards/ares/GeologicalSurvey';
+import {LunaMiningHub} from '../../src/cards/moon/LunaMiningHub';
+import {Philares} from '../../src/cards/promo/Philares';
 import {Game} from '../../src/Game';
 import {IMoonData} from '../../src/moon/IMoonData';
 import {MoonExpansion} from '../../src/moon/MoonExpansion';
 import {MoonSpaces} from '../../src/moon/MoonSpaces';
-import {Player} from '../../src/Player';
+import {Resources} from '../../src/Resources';
 import {SpaceName} from '../../src/SpaceName';
 import {TileType} from '../../src/TileType';
-import {setCustomGameOptions} from '../TestingUtils';
+import {TestingUtils} from '../TestingUtils';
+import {TestPlayer} from '../TestPlayer';
 import {TestPlayers} from '../TestPlayers';
 
-const MOON_OPTIONS = setCustomGameOptions({moonExpansion: true});
+const MOON_OPTIONS = TestingUtils.setCustomGameOptions({moonExpansion: true});
 
 describe('MoonExpansion', () => {
   let game: Game;
-  let player: Player;
-  let player2: Player;
+  let player: TestPlayer;
+  let player2: TestPlayer;
   let moonData: IMoonData;
 
   beforeEach(() => {
@@ -32,6 +38,15 @@ describe('MoonExpansion', () => {
     expect(space.tile).deep.eq({tileType: TileType.LUNA_TRADE_STATION});
   });
 
+  it('addTile grants space bonus', () => {
+    // Contains card and steel.
+    player.steel = 0;
+    player.cardsInHand = [];
+    MoonExpansion.addTile(player, 'm03', {tileType: TileType.MOON_ROAD});
+    expect(player.steel).eq(1);
+    expect(player.cardsInHand).has.length(1);
+  });
+
   it('addTile fails occupied space', () => {
     const space: ISpace = moonData.moon.getSpace(MoonSpaces.MARE_IMBRIUM);
     space.tile = {tileType: TileType.MOON_MINE};
@@ -40,6 +55,16 @@ describe('MoonExpansion', () => {
 
   it('addTile throws with Mars space', () => {
     expect(() => MoonExpansion.addTile(player, SpaceName.NOCTIS_CITY, {tileType: TileType.LUNA_TRADE_STATION})).to.throw(/.*/);
+  });
+
+  // The rules for how these cards could change, and that's fine if that means
+  // changing these tests, but I would be surprised if that were the case.
+  it('Adding a tile while someone has cards with onTilePlaced behavior does not trigger them.', () => {
+    player.cardsInHand = [new EcologicalSurvey(), new GeologicalSurvey()];
+    player.corporationCard = new Philares();
+    player.steel = 0;
+    MoonExpansion.addTile(player, 'm03', {tileType: TileType.MOON_ROAD});
+    expect(player.steel).eq(1);
   });
 
   it('raiseMiningRate', () => {
@@ -81,5 +106,73 @@ describe('MoonExpansion', () => {
     // Remove the road, and the mine is worth nothing.
     moonData.moon.getSpace('m03').tile = undefined;
     expect(computeVps()).eql({colonies: 0, mines: 0, roads: 0});
+  });
+
+  it('Raise mining rate bonus 2-3', () => {
+    moonData.miningRate = 2;
+    player.cardsInHand = [];
+    MoonExpansion.raiseMiningRate(player, 1);
+    expect(player.cardsInHand).has.length(1);
+  });
+
+  it('Raise mining rate bonus 1-4', () => {
+    moonData.miningRate = 1;
+    player.cardsInHand = [];
+    MoonExpansion.raiseMiningRate(player, 3);
+    expect(player.cardsInHand).has.length(1);
+  });
+
+  it('Raise mining rate bonus 5-6', () => {
+    moonData.miningRate = 5;
+    player.setProductionForTest({titanium: 0});
+    MoonExpansion.raiseMiningRate(player, 1);
+    expect(player.getProduction(Resources.TITANIUM)).eq(1);
+  });
+
+  it('Raise logistic rate bonus 2-3', () => {
+    moonData.logisticRate = 2;
+    player.cardsInHand = [];
+    MoonExpansion.raiseLogisticRate(player, 1);
+    expect(player.cardsInHand).has.length(1);
+  });
+
+  it('Raise logistic rate bonus 5-6', () => {
+    moonData.logisticRate = 5;
+    player.setProductionForTest({steel: 0});
+    MoonExpansion.raiseLogisticRate(player, 1);
+    expect(player.getProduction(Resources.STEEL)).eq(1);
+  });
+
+  it('Raise colony rate bonus 2-3', () => {
+    moonData.colonyRate = 2;
+    player.cardsInHand = [];
+    MoonExpansion.raiseColonyRate(player, 1);
+    expect(player.cardsInHand).has.length(1);
+  });
+
+  it('Raise colony rate bonus 5-6', () => {
+    moonData.colonyRate = 5;
+    player.cardsInHand = [];
+    MoonExpansion.raiseColonyRate(player, 1);
+    expect(player.cardsInHand).has.length(1);
+  });
+
+  it('Moon parameters are global parameters', () => {
+    const card = new LunaMiningHub(); // requires mining rate 5.
+    const specialDesign = new SpecialDesign();
+
+    player.cardsInHand = [card];
+    player.megaCredits = card.cost;
+
+    player.titanium = 1;
+    player.steel = 1;
+    moonData.miningRate = 3;
+    expect(player.getPlayableCards()).does.not.include(card);
+
+    // Gives a +2/-2 on the next action
+    player.playedCards = [specialDesign];
+    player.lastCardPlayed = specialDesign;
+
+    expect(player.getPlayableCards()).does.include(card);
   });
 });

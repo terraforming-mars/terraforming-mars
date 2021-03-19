@@ -15,18 +15,14 @@ export class NewColonyPlanningInitiaitives extends Card {
 
       requirements: CardRequirements.builder((b) => b.colonyRate(2)),
       metadata: {
-        description: 'Requires Colony Rate to be 2 or higher. Raise Colony Rate 1 step.',
+        description: 'Requires Colony Rate to be 2 or higher. Raise the Colony Rate 1 step.',
         cardNumber: 'M31',
         renderData: CardRenderer.builder((b) => {
-          b.moonColonyRate(1);
+          b.moonColonyRate();
         }),
       },
     });
   };
-
-  public canPlay(player: Player): boolean {
-    return MoonExpansion.moonData(player.game).colonyRate >= 2;
-  }
 
   public play(player: Player) {
     MoonExpansion.raiseColonyRate(player);

@@ -3,7 +3,7 @@ import {Factorum} from '../../../src/cards/promo/Factorum';
 import {Game} from '../../../src/Game';
 import {OrOptions} from '../../../src/inputs/OrOptions';
 import {Resources} from '../../../src/Resources';
-import {TestPlayers} from '../../TestingUtils';
+import {TestPlayers} from '../../TestPlayers';
 
 describe('Factorum', function() {
   it('Should play', function() {

@@ -1,7 +1,7 @@
 import {expect} from 'chai';
 import {SecurityFleet} from '../../../src/cards/base/SecurityFleet';
 import {Player} from '../../../src/Player';
-import {TestPlayers} from '../../TestingUtils';
+import {TestPlayers} from '../../TestPlayers';
 
 describe('SecurityFleet', function() {
   let card : SecurityFleet; let player : Player;

@@ -1,6 +1,7 @@
 import {Game} from '../../../src/Game';
 import {Player} from '../../../src/Player';
-import {setCustomGameOptions, TestPlayers} from '../../TestingUtils';
+import {TestingUtils} from '../../TestingUtils';
+import {TestPlayers} from '../../TestPlayers';
 import {TheDarksideofTheMoonSyndicate} from '../../../src/cards/moon/TheDarksideofTheMoonSyndicate';
 import {expect} from 'chai';
 import {MoonExpansion} from '../../../src/moon/MoonExpansion';
@@ -9,7 +10,7 @@ import {OrOptions} from '../../../src/inputs/OrOptions';
 import {StealResources} from '../../../src/deferredActions/StealResources';
 import {TileType} from '../../../src/TileType';
 
-const MOON_OPTIONS = setCustomGameOptions({moonExpansion: true});
+const MOON_OPTIONS = TestingUtils.setCustomGameOptions({moonExpansion: true});
 
 describe('TheDarksideofTheMoonSyndicate', () => {
   let player: Player;
@@ -82,7 +83,7 @@ describe('TheDarksideofTheMoonSyndicate', () => {
   });
 
   it('effect', () => {
-    const centerSpace = moonData.moon.getSpace('m06');
+    const centerSpace = moonData.moon.getSpace('m07');
     const adjacentSpaces = moonData.moon.getAdjacentSpaces(centerSpace);
 
     // Space 0 intentionallyleft blank

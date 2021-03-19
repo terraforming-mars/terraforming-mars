@@ -23,23 +23,19 @@ export class LunaTrainStation extends MoonCard {
 
       metadata: {
         description: 'Requires a Logistic Rate of 5 or higher. Spend 2 steel. ' +
-        'Increase your MC production 4 steps. Place this tile on the Moon and raise Logistic Rate 1 step. ' +
+        'Increase your MC production 4 steps. Place this tile on the Moon and raise the Logistic Rate 1 step. ' +
         '2 ADDITIONAL VPs FOR EACH MINING TILE ADJACENT TO THIS TILE.',
         cardNumber: 'M15',
         renderData: CardRenderer.builder((b) => {
           b.minus().steel(2).br;
           b.production((pb) => pb.megacredits(4));
-          b.tile(TileType.LUNA_TRAIN_STATION, true).moonLogisticsRate(1);
+          b.tile(TileType.LUNA_TRAIN_STATION, true).moonLogisticsRate();
         }),
         victoryPoints: CardRenderDynamicVictoryPoints.questionmark(), // (2, 1),
       },
     }, {
       reserveUnits: Units.of({steel: 2}),
     });
-  }
-
-  public canPlay(player: Player): boolean {
-    return MoonExpansion.moonData(player.game).logisticRate >= 5;
   }
 
   public play(player: Player) {

@@ -35,12 +35,32 @@
 }
 
 .card-unavailable {
-    filter: brightness(0.4);
+    filter: brightness(0.55);
+}
+
+.card-hide {
+    display: none;
 }
 
 .nofloat {
     clear: both;
     margin-bottom: 15px;
+}
+
+.cardbox-with-owner-label {
+    padding-bottom: 25px;
+}
+
+.card-owner-label {
+    border-radius: 0px 0px 15px 15px;
+    margin: auto;
+    margin-top: 10px;
+    width: 60%;
+    padding: 3px 20px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    text-align: center;
 }
 
 .card-warning {
@@ -2083,7 +2103,26 @@ input[type="radio"]:checked + .filterDiv::after {
     z-index: 1000;
     top: 100px;
     left: 70px;
+    background: url(./assets/martian.png);
+    width: 100px;
+    height: 123px;
 }
+
+.mined-metal {
+    position: absolute;
+    top: 147px;
+    width: 57px;
+    height: 38px;
+    background: url(./assets/misc/production.png);
+    background-size: 72px;
+    &.mined-steel {
+        left: 105px;
+    }
+    &.mined-titanium {
+        left: 69px;
+    }
+}
+
 
 .card-domed-crater {
     .content {

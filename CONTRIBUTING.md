@@ -38,7 +38,7 @@ If these things seem difficult, just ask us for help, even if your code is in a 
 Once in a while the group will decide that it doesn’t make sense to include a particular feature or change. This is why we’d prefer you contact us before spending all that time writing a feature! We commit to giving a clear reason why we are declining a feature. While not ideal, remember that you can fork the repo and host your own copy of the game.
 
 ## Technical Considerations
-### Compatibility
+### Technical Compatibility
 
 We endeavor to have this app run on home Windows, Linux, Mac computers, and support modern popular browsers (sorry, IE11) so any changes that might seem browser / platform specific may get extra scrutiny.
 

@@ -25,7 +25,7 @@ export class SinusIridiumRoadNetwork extends MoonCard {
         renderData: CardRenderer.builder((b) => {
           b.minus().steel(1).br;
           b.production((pb) => {
-            pb.minus().energy(1).br.megacredits(3);
+            pb.minus().energy(1).nbsp.megacredits(3);
           }).br;
           b.moonRoad();
         }),

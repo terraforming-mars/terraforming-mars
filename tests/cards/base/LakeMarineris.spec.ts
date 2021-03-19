@@ -3,7 +3,7 @@ import {LakeMarineris} from '../../../src/cards/base/LakeMarineris';
 import {Game} from '../../../src/Game';
 import {SelectSpace} from '../../../src/inputs/SelectSpace';
 import {Player} from '../../../src/Player';
-import {TestPlayers} from '../../TestingUtils';
+import {TestPlayers} from '../../TestPlayers';
 
 describe('LakeMarineris', function() {
   let card : LakeMarineris; let player : Player; let game : Game;

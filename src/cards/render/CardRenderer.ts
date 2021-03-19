@@ -1,9 +1,9 @@
-import {AltSecondaryTag, CardRenderItem} from './CardRenderItem';
+import {AltSecondaryTag, CardRenderItem, ItemOptions} from './CardRenderItem';
 import {CardRenderSymbol} from './CardRenderSymbol';
 import {CardRenderItemSize} from './CardRenderItemSize';
 import {CardRenderItemType} from './CardRenderItemType';
-import {Tags} from '../Tags';
 import {TileType} from '../../TileType';
+import {Tags} from '../Tags';
 
 type ItemType = CardRenderItem | CardRenderProductionBox | CardRenderSymbol | CardRenderEffect | CardRenderTile | string | undefined;
 
@@ -114,7 +114,6 @@ export class CardRenderCorpBoxAction extends CardRenderer {
     return builder.build();
   }
 }
-
 
 class Builder {
   protected _data: Array<Array<ItemType>> = [[]];
@@ -425,7 +424,7 @@ class Builder {
     return this;
   }
 
-  public moon(amount: number = 1): Builder {
+  public moon(amount: number = -1): Builder {
     this._addRowItem(new CardRenderItem(CardRenderItemType.MOON, amount));
     return this;
   }
@@ -435,33 +434,38 @@ class Builder {
     return this;
   }
 
-  public moonColony(): Builder {
-    this._addRowItem(new CardRenderItem(CardRenderItemType.MOON_COLONY));
+  public moonColony(options?: ItemOptions | undefined): Builder {
+    this._addRowItem(new CardRenderItem(CardRenderItemType.MOON_COLONY).withOptions(options));
     return this;
   }
 
-  public moonColonyRate(amount: number = 1): Builder {
-    this._addRowItem(new CardRenderItem(CardRenderItemType.MOON_COLONY_RATE, amount));
+  public moonColonyRate(options?: ItemOptions): Builder {
+    this._addRowItem(new CardRenderItem(CardRenderItemType.MOON_COLONY_RATE).withOptions(options));
     return this;
   }
 
-  public moonRoad(): Builder {
-    this._addRowItem(new CardRenderItem(CardRenderItemType.MOON_ROAD));
+  public moonRoad(options?: ItemOptions): Builder {
+    this._addRowItem(new CardRenderItem(CardRenderItemType.MOON_ROAD).withOptions(options));
     return this;
   }
 
-  public moonLogisticsRate(amount: number = 1): Builder {
-    this._addRowItem(new CardRenderItem(CardRenderItemType.MOON_LOGISTICS_RATE, amount));
+  public moonLogisticsRate(options?: ItemOptions): Builder {
+    this._addRowItem(new CardRenderItem(CardRenderItemType.MOON_LOGISTICS_RATE).withOptions(options));
     return this;
   }
 
-  public moonMine(): Builder {
-    this._addRowItem(new CardRenderItem(CardRenderItemType.MOON_MINE));
+  public moonMine(options?: ItemOptions): Builder {
+    this._addRowItem(new CardRenderItem(CardRenderItemType.MOON_MINE).withOptions(options));
     return this;
   }
 
-  public moonMiningRate(amount: number = 1): Builder {
-    this._addRowItem(new CardRenderItem(CardRenderItemType.MOON_MINING_RATE, amount));
+  public moonMiningRate(options?: ItemOptions): Builder {
+    this._addRowItem(new CardRenderItem(CardRenderItemType.MOON_MINING_RATE).withOptions(options));
+    return this;
+  }
+
+  public syndicateFleet(amount: number = 1): Builder {
+    this._addRowItem(new CardRenderItem(CardRenderItemType.SYNDICATE_FLEET, amount));
     return this;
   }
 

@@ -67,6 +67,9 @@ import {ConvertPlants} from './cards/base/standardActions/ConvertPlants';
 import {ConvertHeat} from './cards/base/standardActions/ConvertHeat';
 import {Manutech} from './cards/venusNext/Manutech';
 import {LunaProjectOffice} from './cards/moon/LunaProjectOffice';
+import {PlaceMoonMineTile} from './moon/PlaceMoonMineTile';
+import {PlaceMoonColonyTile} from './moon/PlaceMoonColonyTile';
+import {PlaceMoonRoadTile} from './moon/PlaceMoonRoadTile';
 import {GlobalParameter} from './GlobalParameter';
 
 export type PlayerId = string;
@@ -1018,6 +1021,35 @@ export class Player implements ISerializable<SerializedPlayer> {
         }),
       );
     }
+
+    MoonExpansion.ifMoon(game, (moonData) => {
+      if (moonData.colonyRate < constants.MAXIMUM_COLONY_RATE) {
+        action.options.push(
+          new SelectOption('Place a colony tile on the Moon', 'Increase', () => {
+            game.defer(new PlaceMoonColonyTile(this));
+            return undefined;
+          }),
+        );
+      }
+
+      if (moonData.miningRate < constants.MAXIMUM_MINING_RATE) {
+        action.options.push(
+          new SelectOption('Place a mine tile on the Moon', 'Increase', () => {
+            game.defer(new PlaceMoonMineTile(this));
+            return undefined;
+          }),
+        );
+      }
+
+      if (moonData.logisticRate < constants.MAXIMUM_LOGISTICS_RATE) {
+        action.options.push(
+          new SelectOption('Place a road tile on the Moon', 'Increase', () => {
+            game.defer(new PlaceMoonRoadTile(this));
+            return undefined;
+          }),
+        );
+      }
+    });
 
     this.setWaitingFor(action, () => {
       this.doneWorldGovernmentTerraforming();

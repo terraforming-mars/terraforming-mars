@@ -127,15 +127,15 @@ describe('Player', function() {
     player.process([['1']]);
     expect(player.getWaitingFor()).to.be.undefined;
   });
-  it('Includes buffer gas for non solo games', function() {
+  it('Omits buffer gas for non solo games', function() {
     const player = TestPlayers.BLUE.newPlayer();
     const player2= TestPlayers.RED.newPlayer();
     Game.newInstance('foobar', [player, player2], player);
     const option = player.getStandardProjectOption();
     const bufferGas = option.cards.find((card) => card.name === CardName.BUFFER_GAS_STANDARD_PROJECT);
-    expect(bufferGas).not.to.be.undefined;
+    expect(bufferGas).to.be.undefined;
   });
-  it('Omits buffer gas for non solo games', function() {
+  it('Omit buffer gas for solo games without 63 TR', function() {
     const player = TestPlayers.BLUE.newPlayer();
     Game.newInstance('foobar', [player], player);
     const option = player.getStandardProjectOption();
@@ -181,6 +181,15 @@ describe('Player', function() {
       GlobalParameter.MOON_MINING_RATE,
       GlobalParameter.MOON_COLONY_RATE,
       GlobalParameter.MOON_LOGISTICS_RATE]);
+  });
+
+  it('Include buffer gas for solo games with 63 TR', function() {
+    const player = TestPlayers.BLUE.newPlayer();
+    const game = Game.newInstance('foobar', [player], player);
+    game.gameOptions.soloTR = true;
+    const option = player.getStandardProjectOption();
+    const bufferGas = option.cards.find((card) => card.name === CardName.BUFFER_GAS_STANDARD_PROJECT);
+    expect(bufferGas).not.to.be.undefined;
   });
 
   it('serialization test for pickedCorporationCard', () => {

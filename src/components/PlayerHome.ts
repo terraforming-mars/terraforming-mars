@@ -104,17 +104,16 @@ export const PlayerHome = Vue.component('player-home', {
         }
       }
     },
+    isPlayerActing: function(player: PlayerModel) : boolean {
+      return player.players.length > 1 && player.waitingFor !== undefined;
+    },
     getPlayerCssForTurnOrder: (
       player: PlayerModel,
       highlightActive: boolean,
     ): string => {
       const classes = ['highlighter_box'];
-
       if (highlightActive) {
-        if (
-          player.needsToDraft ||
-                    (player.needsToDraft === undefined && player.isActive)
-        ) {
+        if (player.needsToDraft || (player.needsToDraft === undefined && player.isActive)) {
           classes.push('player_is_active');
         }
         classes.push(playerColorClass(player.color, 'bg'));
@@ -191,6 +190,7 @@ export const PlayerHome = Vue.component('player-home', {
             </div>
 
             <preferences v-trim-whitespace
+              :acting_player="isPlayerActing(player)"
               :player_color="player.color"
               :generation="player.generation"
               :coloniesCount="player.colonies.length"

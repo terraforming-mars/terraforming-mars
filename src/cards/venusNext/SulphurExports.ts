@@ -38,7 +38,7 @@ export class SulphurExports extends Card {
   }
 
   public play(player: Player) {
-    player.addProduction(Resources.MEGACREDITS, player.getTagCount(Tags.VENUS) + 1 );
+    player.addProduction(Resources.MEGACREDITS, player.getTagCount(Tags.VENUS) + 1, player.game);
     player.game.increaseVenusScaleLevel(player, 1);
     return undefined;
   }

@@ -80,20 +80,26 @@ describe('MilestoneAwardSelector', () => {
   it('Main entrance point - unlimited', () => {
     MilestoneAwardSelector.chooseMilestonesAndAwards(
       TestingUtils.setCustomGameOptions({randomMA: RandomMAOptionType.UNLIMITED}));
+    MilestoneAwardSelector.chooseMilestonesAndAwards(
+      TestingUtils.setCustomGameOptions({randomMA: RandomMAOptionType.NONE, moonExpansion: true}));
+    MilestoneAwardSelector.chooseMilestonesAndAwards(
+      TestingUtils.setCustomGameOptions({randomMA: RandomMAOptionType.LIMITED, moonExpansion: true}));
+    MilestoneAwardSelector.chooseMilestonesAndAwards(
+      TestingUtils.setCustomGameOptions({randomMA: RandomMAOptionType.UNLIMITED, moonExpansion: true}));
   });
 
-  it('Main entrance point, Ares enabled', () => {
+  it('Main entrance point, Ares & Moon enabled', () => {
     // These tests don't test results, they just make sure these calls don't fail.
     MilestoneAwardSelector.chooseMilestonesAndAwards(
-      TestingUtils.setCustomGameOptions({randomMA: RandomMAOptionType.NONE, aresExtension: true}));
+      TestingUtils.setCustomGameOptions({randomMA: RandomMAOptionType.NONE, aresExtension: true, moonExpansion: true}));
   });
-  it('Main entrance point, Ares enabled - limited', () => {
+  it('Main entrance point, Ares & Moon enabled - limited', () => {
     MilestoneAwardSelector.chooseMilestonesAndAwards(
-      TestingUtils.setCustomGameOptions({randomMA: RandomMAOptionType.LIMITED, aresExtension: true}));
+      TestingUtils.setCustomGameOptions({randomMA: RandomMAOptionType.LIMITED, aresExtension: true, moonExpansion: true}));
   });
-  it('Main entrance point, Ares enabled - unlimited', () => {
+  it('Main entrance point, Ares & Moon enabled - unlimited', () => {
     MilestoneAwardSelector.chooseMilestonesAndAwards(
-      TestingUtils.setCustomGameOptions({randomMA: RandomMAOptionType.UNLIMITED, aresExtension: true}));
+      TestingUtils.setCustomGameOptions({randomMA: RandomMAOptionType.UNLIMITED, aresExtension: true, moonExpansion: true}));
   });
 
   it('Do not select expansion milestones or awards when they are not selected', () => {

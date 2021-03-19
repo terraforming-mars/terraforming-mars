@@ -53,7 +53,7 @@ export const ARES_MILESTONES: Array<IMilestone> = [
 
 export const MOON_MILESTONES: Array<IMilestone> = [
   new OneGiantStep(),
-  new Lunarchitect,
+  new Lunarchitect(),
 ];
 
 export const ALL_MILESTONES: Array<IMilestone> = [

@@ -26,7 +26,7 @@ export class PowerGrid extends Card implements IProjectCard {
   }
 
   public play(player: Player) {
-    player.addProduction(Resources.ENERGY, 1 + player.getTagCount(Tags.ENERGY));
+    player.addProduction(Resources.ENERGY, 1 + player.getTagCount(Tags.ENERGY), player.game);
     return undefined;
   }
 }

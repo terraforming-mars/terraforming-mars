@@ -95,6 +95,8 @@ export class MoonExpansion {
 
   // Having a custom addTile isn't ideal, but game.addTile is pretty specific, and this
   // isn't.
+
+  // Update: I think this is going to have to merge with addTile. It won't be bad.
   public static addTile(player: Player, spaceId: string, tile: ITile): void {
     const game = player.game;
     MoonExpansion.ifMoon(game, (moonData) => {
@@ -113,7 +115,9 @@ export class MoonExpansion {
       }
 
       space.tile = tile;
-      space.player = player;
+      if (player.game.phase !== Phase.SOLAR) {
+        space.player = player;
+      }
 
       if (game.phase !== Phase.SOLAR) {
         space.bonus.forEach((spaceBonus) => {
@@ -143,16 +147,21 @@ export class MoonExpansion {
       const available = MAXIMUM_MINING_RATE - moonData.miningRate;
       const increment = Math.min(count, available);
       if (increment > 0) {
-        player.game.log('${0} raised the mining rate ${1} step(s)', (b) => b.player(player).number(increment));
-        player.increaseTerraformRatingSteps(increment);
-        this.bonus(moonData.miningRate, increment, 3, () => {
-          player.drawCard();
-        });
-        this.bonus(moonData.miningRate, increment, 6, () => {
-          player.addProduction(Resources.TITANIUM, 1, player.game);
-        });
+        if (player.game.phase === Phase.SOLAR) {
+          player.game.log('The World Government raised the mining rate ${1} step(s)', (b) => b.player(player).number(increment));
+          this.activateLunaFirst(undefined, player.game, increment);
+        } else {
+          player.game.log('${0} raised the mining rate ${1} step(s)', (b) => b.player(player).number(increment));
+          player.increaseTerraformRatingSteps(increment);
+          this.bonus(moonData.miningRate, increment, 3, () => {
+            player.drawCard();
+          });
+          this.bonus(moonData.miningRate, increment, 6, () => {
+            player.addProduction(Resources.TITANIUM, 1, player.game);
+          });
+          this.activateLunaFirst(player, player.game, increment);
+        }
         moonData.miningRate += increment;
-        this.activateLunaFirst(player, player.game, increment);
       }
     });
   }
@@ -162,16 +171,21 @@ export class MoonExpansion {
       const available = MAXIMUM_COLONY_RATE - moonData.colonyRate;
       const increment = Math.min(count, available);
       if (increment > 0) {
-        player.game.log('${0} raised the moon colony rate ${1} step(s)', (b) => b.player(player).number(increment));
-        player.increaseTerraformRatingSteps(count);
-        this.bonus(moonData.colonyRate, increment, 3, () => {
-          player.drawCard();
-        });
-        this.bonus(moonData.colonyRate, increment, 6, () => {
-          player.drawCard();
-        });
+        if (player.game.phase === Phase.SOLAR) {
+          player.game.log('The World Government raised the colony rate ${1} step(s)', (b) => b.player(player).number(increment));
+          this.activateLunaFirst(undefined, player.game, count);
+        } else {
+          player.game.log('${0} raised the moon colony rate ${1} step(s)', (b) => b.player(player).number(increment));
+          player.increaseTerraformRatingSteps(count);
+          this.bonus(moonData.colonyRate, increment, 3, () => {
+            player.drawCard();
+          });
+          this.bonus(moonData.colonyRate, increment, 6, () => {
+            player.drawCard();
+          });
+          this.activateLunaFirst(player, player.game, count);
+        }
         moonData.colonyRate += increment;
-        this.activateLunaFirst(player, player.game, count);
       }
     });
   }
@@ -181,16 +195,21 @@ export class MoonExpansion {
       const available = MAXIMUM_LOGISTICS_RATE - moonData.logisticRate;
       const increment = Math.min(count, available);
       if (increment > 0) {
-        player.game.log('${0} raised the logistic rate ${1} step(s)', (b) => b.player(player).number(increment));
-        player.increaseTerraformRatingSteps(count);
-        this.bonus(moonData.logisticRate, increment, 3, () => {
-          player.drawCard();
-        });
-        this.bonus(moonData.logisticRate, increment, 6, () => {
-          player.addProduction(Resources.STEEL, 1, player.game);
-        });
+        if (player.game.phase === Phase.SOLAR) {
+          player.game.log('The World Government raised the logistic rate ${1} step(s)', (b) => b.player(player).number(increment));
+          this.activateLunaFirst(undefined, player.game, increment);
+        } else {
+          player.game.log('${0} raised the logistic rate ${1} step(s)', (b) => b.player(player).number(increment));
+          player.increaseTerraformRatingSteps(count);
+          this.bonus(moonData.logisticRate, increment, 3, () => {
+            player.drawCard();
+          });
+          this.bonus(moonData.logisticRate, increment, 6, () => {
+            player.addProduction(Resources.STEEL, 1, player.game);
+          });
+          this.activateLunaFirst(player, player.game, increment);
+        }
         moonData.logisticRate += increment;
-        this.activateLunaFirst(player, player.game, increment);
       }
     });
   }

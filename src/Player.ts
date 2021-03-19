@@ -1041,7 +1041,7 @@ export class Player implements ISerializable<SerializedPlayer> {
         );
       }
 
-      if (moonData.miningRate < constants.MAXIMUM_LOGISTICS_RATE) {
+      if (moonData.logisticRate < constants.MAXIMUM_LOGISTICS_RATE) {
         action.options.push(
           new SelectOption('Place a road tile on the Moon', 'Increase', () => {
             game.defer(new PlaceMoonRoadTile(this));

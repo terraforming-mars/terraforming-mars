@@ -9,7 +9,8 @@ const MODULE_TO_CSS: Map<string, string> = new Map([
   [GameModule.Prelude, 'prelude-icon'],
   [GameModule.Turmoil, 'turmoil-icon'],
   [GameModule.Community, 'community-icon'],
-  [GameModule.Ares, 'ares-icon']],
+  [GameModule.Ares, 'ares-icon'],
+  [GameModule.Moon, 'moon-icon']],
 );
 export const CardExpansion = Vue.component('CardExpansion', {
   props: {

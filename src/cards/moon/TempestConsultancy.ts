@@ -5,6 +5,7 @@ import {CardMetadata} from '../CardMetadata';
 import {CardType} from '../CardType';
 import {CorporationCard} from '../corporation/CorporationCard';
 import {CardRenderer} from '../render/CardRenderer';
+import {CardRenderItemSize} from '../render/CardRenderItemSize';
 import {Tags} from '../Tags';
 
 export class TempestConsultancy implements CorporationCard {
@@ -47,9 +48,9 @@ export class TempestConsultancy implements CorporationCard {
     description: 'You start with 37 MC. As your first action, place 2 delegates in one party.',
     cardNumber: '',
     renderData: CardRenderer.builder((b) => {
-      b.megacredits(37).br;
+      b.megacredits(37).delegates(1).delegates(1).br;
       b.action('Place 1 delegate in any party for every 5 moon tags you have [max 3.]', (eb) => {
-        eb.empty().startAction.text('5').moon().slash().delegates(1).text('max 3');
+        eb.empty().startAction.delegates(1).text('(max 3)', CardRenderItemSize.SMALL).slash().text('5 ').moon();
       }).br;
       b.effect('When your delegate becomes the chairman, increase your TR 1 step.', (eb) => {
         eb.chairman().startEffect.tr(1);

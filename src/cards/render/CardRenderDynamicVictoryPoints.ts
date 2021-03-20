@@ -77,7 +77,7 @@ export class CardRenderDynamicVictoryPoints {
   public static miningTile(points: number): CardRenderDynamicVictoryPoints {
     const item = new CardRenderItem(CardRenderItemType.MOON_MINE);
     item.size = CardRenderItemSize.SMALL;
-    return new CardRenderDynamicVictoryPoints(item, points, 1);
+    return new CardRenderDynamicVictoryPoints(item, points, points);
   }
   public static colonyTile(points: number): CardRenderDynamicVictoryPoints {
     const item = new CardRenderItem(CardRenderItemType.MOON_COLONY);

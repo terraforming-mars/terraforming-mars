@@ -28,7 +28,7 @@ export const CardsFilter = Vue.component('cards-filter', {
     addCard: function(cardNameToAdd: CardName) {
       if (this.selectedCardNames.includes(cardNameToAdd)) return;
       this.selectedCardNames.push(cardNameToAdd);
-      this.selectedCardNames = this.selectedCardNames.sort();
+      this.selectedCardNames.sort();
       this.searchTerm = '';
     },
   },
@@ -36,9 +36,18 @@ export const CardsFilter = Vue.component('cards-filter', {
     selectedCardNames: function(value) {
       this.$emit('cards-list-changed', value);
     },
-    searchTerm: function(value) {
+    searchTerm: function(value: string) {
       if (value === '') {
         this.foundCardNames = [];
+        return;
+      }
+      if (value.indexOf(',') !== -1) {
+        const cardNames = new Set(value.split(',').map((c) => c.trim()));
+        for (const item of allItems) {
+          if (cardNames.has(item)) {
+            this.addCard(item);
+          }
+        }
         return;
       }
       const newCardNames = allItems.filter(

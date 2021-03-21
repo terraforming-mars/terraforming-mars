@@ -31,18 +31,19 @@ body {
 }
 
 .game_end_table {
-    border: 2px solid #7b7b7b;
     width: auto;
     font-family: Prototype;
+    background: #222;
 
     td, th {
         text-align: center !important;
-        border-bottom: .05rem solid #7b7b7b !important;
-        padding: 5px 20px;
-        text-shadow: 0 0px 2px black, 0 2px 1px black;
+        border: none;
+        padding: 5px 10px;
+        text-shadow: 0 0px 2px black, 0 1px 1px black;
         font-weight: normal;
-        min-width: 80px;
-        max-width: 400px;
+        min-width: 60px;
+        max-width: 320px;
+        line-height: 30px;
     }
 
     a {
@@ -66,7 +67,7 @@ body {
         height: 40px;
         background-size: 34px 40px;
         vertical-align: middle;
-        margin-left: 3px;
+        margin-left: 2px;
     }
     .table-forest-tile {
         background-image: url(./assets/tiles/greenery_no_O2.png);
@@ -74,14 +75,13 @@ body {
         height: 40px;
         background-size: 34px 40px;
         vertical-align: middle;
-        margin-left: 3px;
+        margin-left: 2px;
     }
     .tr {
         background-image: url(./assets/resources/tr.png);
         width: 46px;
         height: 38px;
         background-size: 46px 38px;
-        border-radius: 10px;
     }
     .vp {
         font-size: 18px;
@@ -101,7 +101,7 @@ body {
         color: #ffcc64;
         width: 38px;
         height: 38px;
-        background: #222;
+        background: #000;
         line-height: 38px;
         border-radius: 5px;
         cursor: context-menu;
@@ -147,7 +147,7 @@ body {
         text-align: center;
         font-family: 'Prototype';
         letter-spacing: 1px;
-        text-shadow: 0 0px 2px black, 0 2px 1px black;
+        text-shadow: 0 0px 2px black, 0 1px 1px black;
         font-size: 23px;
     }
 
@@ -184,16 +184,12 @@ body {
 
 .game-end-total {
   font-size: 30px;
-  border-left: 2px solid #7b7b7b;
 }
 
 .game-end-mc {
-  font-size: smaller;
-}
-.game-end-clock {
-    border-left: 2px solid #7b7b7b;
+  opacity: 0.5;
 }
 
 .game-end-timer {
-  font-size: smaller;
+  opacity: 0.5;
 }

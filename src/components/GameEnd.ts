@@ -109,8 +109,6 @@ export const GameEnd = Vue.component('game-end', {
                         <thead>
                             <tr v-i18n>
                                 <th><div class="card-delegate"></div></th>
-                                <th class="game-end-clock">&#x1F551;</th>
-                                <th><div class="mc-icon"></div></th>
                                 <th><div class="tr"></div></th>
                                 <th><div class="m-and-a" title="Milestones points">M</div></th>
                                 <th><div class="m-and-a" title="Awards points">A</div></th>
@@ -121,6 +119,8 @@ export const GameEnd = Vue.component('game-end', {
                                 <th v-if="player.moon !== undefined">Moon Mines</th>
                                 <th><div class="vp">VP</div></th>
                                 <th class="game-end-total"><div class="game-end-total-column">Total</div></th>
+                                <th><div class="mc-icon"></div></th>
+                                <th class="game-end-clock">&#x1F551;</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -128,12 +128,6 @@ export const GameEnd = Vue.component('game-end', {
                                 <td>
                                   <a :href="'/player?id='+p.id+'&noredirect'">{{ p.name }}</a>
                                   <div class="column-corporation">{{ p.corporationCard === undefined ? "" : p.corporationCard.name }}</div>
-                                </td>
-                                <td class="game-end-clock">
-                                  <div v-if="player.gameOptions.showTimers" class="game-end-timer">{{ getTimer(p) }}</div>
-                                </td>
-                                <td class="game-end-mc">
-                                  <div>{{ p.megaCredits }}</div>
                                 </td>
                                 <td>{{ p.victoryPointsBreakdown.terraformRating }}</td>
                                 <td>{{ p.victoryPointsBreakdown.milestones }}</td>
@@ -145,6 +139,12 @@ export const GameEnd = Vue.component('game-end', {
                                 <td v-if="player.moon !== undefined">{{ p.victoryPointsBreakdown.moonMines }}</td>
                                 <td>{{ p.victoryPointsBreakdown.victoryPoints }}</td>
                                 <td class="game-end-total">{{ p.victoryPointsBreakdown.total }}</td>
+                                <td class="game-end-mc">
+                                  <div>{{ p.megaCredits }}</div>
+                                </td>
+                                <td class="game-end-clock">
+                                  <div v-if="player.gameOptions.showTimers" class="game-end-timer">{{ getTimer(p) }}</div>
+                                </td>
                             </tr>
                         </tbody>
                     </table>

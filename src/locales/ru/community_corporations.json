@@ -15,8 +15,7 @@
     "Action: Replay a played event from any player by paying its cost ONLY in MC (discounts and rebates apply), then REMOVE IT FROM PLAY.": 
     "Действие. Выберите карту-событие любого игрока, разыграйте её за полную стоимость в МС и удалите эту карту из игры",
 
-        
     "Midas": "Midas",
-    "You start with 120 MC. Lower your TR 7 steps.": "You start with 120 MC. Уменьшите свой РТ на 7",
+    "You start with 120 MC. Lower your TR 7 steps.": "Вы начинаете со 120 MC. Уменьшите свой РТ на 7",
     "": ""
 }

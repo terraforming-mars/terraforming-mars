@@ -8,21 +8,24 @@ import {Player} from '../../../src/Player';
 import {Resources} from '../../../src/Resources';
 import {TestPlayers} from '../../TestPlayers';
 
-describe('EosChasmaNationalPark', function() {
+describe('EosChasmaNationalPark', () => {
   let card : EosChasmaNationalPark; let player : Player; let game : Game;
 
-  beforeEach(function() {
+  beforeEach(() => {
     card = new EosChasmaNationalPark();
     player = TestPlayers.BLUE.newPlayer();
     const redPlayer = TestPlayers.RED.newPlayer();
     game = Game.newInstance('foobar', [player, redPlayer], player);
   });
 
-  it('Can\'t play', function() {
+  it('Can play', () => {
+    (game as any).temperature = -14;
     expect(card.canPlay(player)).is.not.true;
+    (game as any).temperature = -12;
+    expect(card.canPlay(player)).is.true;
   });
 
-  it('Should play', function() {
+  it('Should play', () => {
     (game as any).temperature = -12;
     const birds = new Birds();
     const fish = new Fish();
@@ -42,7 +45,7 @@ describe('EosChasmaNationalPark', function() {
         expect(player.victoryPointsBreakdown.victoryPoints).to.eq(2);
   });
 
-  it('Should play - single target', function() {
+  it('Should play - single target', () => {
     (game as any).temperature = -12;
     const birds = new Birds();
     player.playedCards.push(birds);

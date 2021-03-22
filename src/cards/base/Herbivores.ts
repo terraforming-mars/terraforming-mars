@@ -14,7 +14,6 @@ import {DecreaseAnyProduction} from '../../deferredActions/DecreaseAnyProduction
 import {CardRenderer} from '../render/CardRenderer';
 import {CardRequirements} from '../CardRequirements';
 import {CardRenderDynamicVictoryPoints} from '../render/CardRenderDynamicVictoryPoints';
-import {GlobalParameter} from '../../GlobalParameter';
 import {CardRenderItemSize} from '../render/CardRenderItemSize';
 
 export class Herbivores extends Card implements IProjectCard, IResourceCard {
@@ -48,7 +47,7 @@ export class Herbivores extends Card implements IProjectCard, IResourceCard {
     public resourceCount: number = 0;
 
     public canPlay(player: Player): boolean {
-      return player.game.checkMinRequirements(player, GlobalParameter.OXYGEN, 8) && player.game.someoneHasResourceProduction(Resources.PLANTS, 1);
+      return super.canPlay(player) && player.game.someoneHasResourceProduction(Resources.PLANTS, 1);
     }
 
     public getVictoryPoints(): number {

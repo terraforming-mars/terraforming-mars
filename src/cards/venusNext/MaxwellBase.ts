@@ -11,7 +11,6 @@ import {CardName} from '../../CardName';
 import {LogHelper} from '../../LogHelper';
 import {CardRequirements} from '../CardRequirements';
 import {CardRenderer} from '../render/CardRenderer';
-import {GlobalParameter} from '../../GlobalParameter';
 import {Card} from '../Card';
 
 export class MaxwellBase extends Card implements IActionCard {
@@ -40,7 +39,7 @@ export class MaxwellBase extends Card implements IActionCard {
     });
   };
   public canPlay(player: Player): boolean {
-    return player.getProduction(Resources.ENERGY) >= 1 && player.game.checkMinRequirements(player, GlobalParameter.VENUS, 12);
+    return player.getProduction(Resources.ENERGY) >= 1 && super.canPlay(player);
   }
   public play(player: Player) {
     player.addProduction(Resources.ENERGY, -1);

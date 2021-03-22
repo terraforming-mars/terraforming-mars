@@ -8,7 +8,6 @@ import {IResourceCard} from '../ICard';
 import {CardRequirements} from '../CardRequirements';
 import {CardRenderer} from '../render/CardRenderer';
 import {CardRenderDynamicVictoryPoints} from '../render/CardRenderDynamicVictoryPoints';
-import {GlobalParameter} from '../../GlobalParameter';
 import {Card} from '../Card';
 
 export class VenusianAnimals extends Card implements IResourceCard {
@@ -35,9 +34,6 @@ export class VenusianAnimals extends Card implements IResourceCard {
     });
   };
   public resourceCount: number = 0;
-  public canPlay(player: Player): boolean {
-    return player.game.checkMinRequirements(player, GlobalParameter.VENUS, 18);
-  }
   public play() {
     return undefined;
   }

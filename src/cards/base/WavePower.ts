@@ -7,7 +7,6 @@ import {Resources} from '../../Resources';
 import {CardName} from '../../CardName';
 import {CardRequirements} from '../CardRequirements';
 import {CardRenderer} from '../render/CardRenderer';
-import {GlobalParameter} from '../../GlobalParameter';
 
 export class WavePower extends Card implements IProjectCard {
   constructor() {
@@ -28,9 +27,7 @@ export class WavePower extends Card implements IProjectCard {
       },
     });
   }
-  public canPlay(player: Player): boolean {
-    return player.game.checkMinRequirements(player, GlobalParameter.OCEANS, 3);
-  }
+
   public play(player: Player) {
     player.addProduction(Resources.ENERGY);
     return undefined;

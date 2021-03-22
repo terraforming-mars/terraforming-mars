@@ -1,4 +1,13 @@
 {
+   "Place a colony tile on the Moon":"放置一块殖民地板块在月球上",
+   "Place a mine tile on the Moon":"放置一个矿板块在月球上",
+   "Place a road tile on the Moon":"放置一个道路板块在月球上", 
+    "Select a space on the Moon for a colony tile.":"选择空格放置殖民地板块",
+    "Select a space on the Moon for a mining tile.":"选择空格放置矿板块",
+    "Select a space on the Moon for a road tile.":"选择空格放置道路板块",
+   
+
+    
     "Lunar Habitat": "月球栖息地",
     "(Spend 22 MC and 1 titanium to place a colony on the moon and raise your MC production 1 step.)": "花费22MC和1个钛在月球上放置一个殖民地并提升1点你的金钱产量",
     

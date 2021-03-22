@@ -586,7 +586,7 @@ export enum CardName {
     LUNAR_INDUSTRY_COMPLEX = 'Lunar Industry Complex',
     DARKSIDE_OBSERVATORY = 'Darkside Observatory',
     MARTIAN_EMBASSY = 'Martian Embassy',
-    EARTH_EMBASSY = 'Earth Embasy',
+    EARTH_EMBASSY = 'Earth Embassy',
     ROVER_DRIVERS_UNION = 'Rover Drivers Union',
     LTF_HEADQUARTERS = 'L.T.F. Headquarters',
     DARKSIDE_SMUGGLERS_UNION = 'Darkside Smugglers\' Union',

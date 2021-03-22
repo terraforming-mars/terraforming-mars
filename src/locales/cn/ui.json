@@ -185,6 +185,7 @@
     "Agendas": "议会扩",
     "Random": "随机",
     "The Moon": "月亮扩",
+    "Mandatory Moon Terraforming":"必须完成月球改造",
     "Drafted cards": "已选择卡牌",
     "Take first action of Celestic corporation": "为Celestic公司做出第一个行动",
     "Draw 2 cards with a floater icon on it": "摸两张含有云豆的牌",
@@ -298,5 +299,23 @@
     "TR Boost": "TR先给玩家",
     "Player ${0} name": "输入玩家${0}名字",
     "Multiplayer Options": "多人玩家游戏选项",
-    "Community": "玩家DIY扩"
+    "Community": "玩家DIY扩",
+    
+    
+    
+     "Sorry, you lose.": "对不起，您挑战失败",
+     "Terraforming Mars - Game finished!": "殖民火星 - 游戏结束!",
+     "Go to main page": "回到主页",
+     "Victory points breakdown after ${0} generations": "${0} 回合获胜点数分解",
+     "Player": "玩家",
+     "Corporation": "公司",
+     "Total": "合计",
+     "Timer": "计时器",
+     "Victory points details": "获胜点数详情",
+     "Final game log": "最终游戏日志",
+     "Final situation on the board": "最终游戏版图情况",
+     "${0} won!": "${0}获胜！！！"
+   
+      
+    
 }

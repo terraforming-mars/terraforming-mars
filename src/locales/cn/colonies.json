@@ -158,5 +158,34 @@
   "Effect: When you play a Space card, you pay 4 MC less for it.":"效果：当你打出1张太空牌时，少支付4块钱。",
   "Requires 5 Science tags.":"需求：5个科技标志。",
 
-  "Effect: When you play an animal or plant tag, including this, add 1 animal to this card.":"效果: 当你打出1个动物标志或植物标志(包括本牌)时,增加1个动物资源到本卡"
+  "Effect: When you play an animal or plant tag, including this, add 1 animal to this card.":"效果: 当你打出1个动物标志或植物标志(包括本牌)时,增加1个动物资源到本卡",
+  
+      "Callisto":"木卫四",
+    "Ceres":"谷神星",
+    "Enceladus":"土卫二",
+    "Europa":"木卫二",
+    "Ganymede":"木卫三",
+    "Io":"木卫一",
+    "Luna":"月球",
+    "Miranda":"天卫五",
+    "Pluto":"冥王星",
+    "Titan":"土卫六",
+    "Triton":"海卫一",
+    "Colony Bonus":"殖民地奖励",
+    "Trade Income":"贸易收入",
+    "Select colony":"选择殖民地",
+    "Trade Income: Gain the indicated production":"贸易收入：获得指定的产量",
+    "Callisto - (Energy)":"木卫四-（能量）",
+    "Ceres - (Steel)":"谷神星-（钢铁）",
+    "Enceladus - (Microbes)":"土卫二-（微生物）",
+    "Europa - (Production)":"木卫二-（产量）",
+    "Ganymede - (Plants)":"木卫三-（植物）",
+    "Io - (Heat)":"木卫一-（热能）",
+    "Luna - (MegaCredits)":"月球-（超级积分）",
+    "Miranda - (Animals)":"天卫五-（动物）",
+    "Pluto - (Cards)":"冥王星-（卡牌）",
+    "Titan - (Floaters)":"土卫六-（云）",
+    "Triton - (Titanium)":"海卫一-（钛）"
+  
+  
 }

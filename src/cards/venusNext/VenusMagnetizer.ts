@@ -9,7 +9,6 @@ import {PartyHooks} from '../../turmoil/parties/PartyHooks';
 import {PartyName} from '../../turmoil/parties/PartyName';
 import {CardRequirements} from '../CardRequirements';
 import {CardRenderer} from '../render/CardRenderer';
-import {GlobalParameter} from '../../GlobalParameter';
 import {Card} from '../Card';
 
 export class VenusMagnetizer extends Card implements IActionCard {
@@ -33,9 +32,6 @@ export class VenusMagnetizer extends Card implements IActionCard {
     });
   };
 
-  public canPlay(player: Player): boolean {
-    return player.game.checkMinRequirements(player, GlobalParameter.VENUS, 10);
-  }
   public play() {
     return undefined;
   }

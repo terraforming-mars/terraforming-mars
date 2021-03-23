@@ -7,7 +7,6 @@ import {Resources} from '../../Resources';
 import {CardName} from '../../CardName';
 import {CardRequirements} from '../CardRequirements';
 import {CardRenderer} from '../render/CardRenderer';
-import {GlobalParameter} from '../../GlobalParameter';
 
 export class Moss extends Card implements IProjectCard {
   constructor() {
@@ -29,11 +28,11 @@ export class Moss extends Card implements IProjectCard {
   }
 
   public canPlay(player: Player): boolean {
-    const meetsOceanRequirements = player.game.checkMinRequirements(player, GlobalParameter.OCEANS, 3);
+    const meetsCardRequirements = super.canPlay(player);
     const hasViralEnhancers = player.playedCards.find((card) => card.name === CardName.VIRAL_ENHANCERS);
     const hasEnoughPlants = player.plants >= 1 || hasViralEnhancers !== undefined || player.isCorporation(CardName.MANUTECH);
 
-    return meetsOceanRequirements && hasEnoughPlants;
+    return meetsCardRequirements && hasEnoughPlants;
   }
   public play(player: Player) {
     player.plants--;

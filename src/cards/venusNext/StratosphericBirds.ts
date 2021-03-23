@@ -8,7 +8,6 @@ import {RemoveResourcesFromCard} from '../../deferredActions/RemoveResourcesFrom
 import {CardRequirements} from '../CardRequirements';
 import {CardRenderer} from '../render/CardRenderer';
 import {CardRenderDynamicVictoryPoints} from '../render/CardRenderDynamicVictoryPoints';
-import {GlobalParameter} from '../../GlobalParameter';
 import {Card} from '../Card';
 
 export class StratosphericBirds extends Card implements IActionCard, IResourceCard {
@@ -43,16 +42,16 @@ export class StratosphericBirds extends Card implements IActionCard, IResourceCa
     const cardsWithFloater = player.getCardsWithResources().filter((card) => card.resourceType === ResourceType.FLOATER);
     if (cardsWithFloater.length === 0) return false;
 
-    const meetsVenusRequirements = player.game.checkMinRequirements(player, GlobalParameter.VENUS, 12);
+    const meetsGlobalRequirements = super.canPlay(player);
 
     if (cardsWithFloater.length > 1) {
-      return meetsVenusRequirements;
+      return meetsGlobalRequirements;
     } else {
       const floaterCard = cardsWithFloater[0];
-      if (floaterCard.name !== CardName.DIRIGIBLES) return meetsVenusRequirements;
+      if (floaterCard.name !== CardName.DIRIGIBLES) return meetsGlobalRequirements;
 
       const canPayForFloater = ((floaterCard.resourceCount! - 1) * 3 + player.megaCredits) >= 12;
-      return canPayForFloater && meetsVenusRequirements;
+      return canPayForFloater && meetsGlobalRequirements;
     }
   }
   public play(player: Player) {

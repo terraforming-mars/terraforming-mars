@@ -28,7 +28,7 @@ export class LunaMetropolis extends Card {
     });
   };
   public play(player: Player) {
-    player.addProduction(Resources.MEGACREDITS, player.getTagCount(Tags.EARTH) + 1);
+    player.addProduction(Resources.MEGACREDITS, player.getTagCount(Tags.EARTH) + 1, player.game);
     player.game.addCityTile(player, SpaceName.LUNA_METROPOLIS, SpaceType.COLONY);
     return undefined;
   }

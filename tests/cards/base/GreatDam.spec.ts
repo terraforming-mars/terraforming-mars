@@ -6,21 +6,24 @@ import {Resources} from '../../../src/Resources';
 import {TestingUtils} from '../../TestingUtils';
 import {TestPlayers} from '../../TestPlayers';
 
-describe('GreatDam', function() {
+describe('GreatDam', () => {
   let card : GreatDam; let player : Player;
 
-  beforeEach(function() {
+  beforeEach(() => {
     card = new GreatDam();
     player = TestPlayers.BLUE.newPlayer();
     const redPlayer = TestPlayers.RED.newPlayer();
     Game.newInstance('foobar', [player, redPlayer], player);
   });
 
-  it('Can\'t play', function() {
+  it('Can play', () => {
+    TestingUtils.maxOutOceans(player, 3);
     expect(card.canPlay(player)).is.not.true;
+    TestingUtils.maxOutOceans(player, 4);
+    expect(card.canPlay(player)).is.true;
   });
 
-  it('Should play', function() {
+  it('Should play', () => {
     TestingUtils.maxOutOceans(player, 4);
     expect(card.canPlay(player)).is.true;
     card.play(player);

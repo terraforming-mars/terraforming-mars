@@ -30,7 +30,7 @@ export class Zeppelins extends Card implements IProjectCard {
     });
   }
   public play(player: Player) {
-    player.addProduction(Resources.MEGACREDITS, player.game.getCitiesInPlayOnMars());
+    player.addProduction(Resources.MEGACREDITS, player.game.getCitiesInPlayOnMars(), player.game);
     return undefined;
   }
   public getVictoryPoints() {

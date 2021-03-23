@@ -5,7 +5,6 @@ import {Resources} from '../../Resources';
 import {CardName} from '../../CardName';
 import {CardRequirements} from '../CardRequirements';
 import {CardRenderer} from '../render/CardRenderer';
-import {GlobalParameter} from '../../GlobalParameter';
 import {Card} from '../Card';
 
 export class IshtarMining extends Card {
@@ -23,9 +22,6 @@ export class IshtarMining extends Card {
         description: 'Requires Venus 8%. Increase your titanium production 1 step.',
       },
     });
-  }
-  public canPlay(player: Player): boolean {
-    return player.game.checkMinRequirements(player, GlobalParameter.VENUS, 8);
   }
   public play(player: Player) {
     player.addProduction(Resources.TITANIUM);

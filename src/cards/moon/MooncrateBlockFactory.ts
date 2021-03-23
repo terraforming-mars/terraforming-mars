@@ -12,17 +12,22 @@ export class MooncrateBlockFactory extends Card {
       cardType: CardType.ACTIVE,
       tags: [Tags.BUILDING],
       cost: 8,
-      requirements: CardRequirements.builder((b) => b.miningTiles(1).any()),
+      requirements: CardRequirements.builder((b) => b.miningTiles(1)),
 
       metadata: {
-        description: 'Effect: When you pay for a luna standard project (colony, road, mine), you spend 4MC less. / Requires 1 mine on the Moon.',
+        description: 'Requires 1 mine on the Moon.',
         cardNumber: 'M38',
-        renderData: CardRenderer.builder((_b) => {}),
+        renderData: CardRenderer.builder((b) => {
+          b.effect('When you pay for a Lunar standard project, you spend 4MC less.', (eb) => {
+            eb.plate('Lunar standard projects').startEffect.megacredits(-4);
+          });
+        }),
       },
     });
   };
 
   public play() {
+    // Behavior is in MoonColonyStandardProject, MoonMineStandardProject and MoonRoadStandardProject.
     return undefined;
   }
 }

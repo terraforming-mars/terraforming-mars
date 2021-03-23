@@ -10,7 +10,6 @@ import {CardName} from '../../CardName';
 import {CardRequirements} from '../CardRequirements';
 import {CardRenderer} from '../render/CardRenderer';
 import {CardRenderDynamicVictoryPoints} from '../render/CardRenderDynamicVictoryPoints';
-import {GlobalParameter} from '../../GlobalParameter';
 
 export class Livestock extends Card implements IActionCard, IProjectCard, IResourceCard {
   constructor() {
@@ -44,7 +43,7 @@ export class Livestock extends Card implements IActionCard, IProjectCard, IResou
 
     public resourceCount = 0;
     public canPlay(player: Player): boolean {
-      return player.game.checkMinRequirements(player, GlobalParameter.OXYGEN, 9) && player.getProduction(Resources.PLANTS) >= 1;
+      return super.canPlay(player) && player.getProduction(Resources.PLANTS) >= 1;
     }
     public getVictoryPoints(): number {
       return this.resourceCount;

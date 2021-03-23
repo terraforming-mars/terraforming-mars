@@ -30,7 +30,7 @@
     "Increase your plant production 1 step. Play a card from hand, ignoring global requirements.": "Повысьте производство растений на 1. Разыграйте карту с руки, игнорируя глобальные требования.",
 
     "Eccentric Sponsor": "Эксцентричный спонсор",
-    "Play 1 card from hand with a 25 MC reduction.": "Разыграйте карту с руки, снизив ее стоимость на 25 mc.",
+    "Play a card from hand, reducing its cost by 25 MC": "Разыграйте карту с руки, снизив ее стоимость на 25 mc.",
 
     "Experimental Forest": "Экспериментальный лес",
     "Place 1 Greenery Tile and raise oxygen 1 step. Reveal cards until you reveal two cards with plant tags on them. Take them into your hand and discard the rest.": "Проведите озеленение и повысьте уровень кислорода на 1. Тяните карты из колоды, пока не найдете 2 карты с символом растения. Возьмите их в руку. Сбросьте остальные.",
@@ -44,7 +44,7 @@
     "Huge Asteroid": "Огромный астероид",
     "Increase Temperature 3 steps. Pay 5 MC.": "Повысьте температуру на 3. Заплатите 5 MC.",
 
-    "IO Research Outpost": "Исследовательская база на Ио",
+    "Io Research Outpost": "Исследовательская база на Ио",
     "Increase your titanium production 1 step. Draw a card.": "Повысьте производство титана на 1. Возьмите 1 карту",
 
     "Loan": "Кредит",
@@ -102,5 +102,35 @@
     "Increase your TR 3 steps. Draw a card.": "Повысьте рейтинг на 3. Возьмите 1 карту.",
 
     "Acquired Space Agency": "Приобретенное космоагенство",
-    "Gain 6 titanium. Reveal cards until you reveal two cards with Space Tags. Take them into your hand, discard the rest.": "Получите 6 титана. Тяните карты из колоды, пока не найдете 2 карты с символом космоса. Возьмите их в руку. Сбросьте остальные."
+    "Gain 6 titanium. Reveal cards until you reveal two cards with Space Tags. Take them into your hand, discard the rest.": "Получите 6 титана. Тяните карты из колоды, пока не найдете 2 карты с символом космоса. Возьмите их в руку. Сбросьте остальные.",
+
+
+    "Aerospace Mission": "Космическая миссия",
+    "Place 2 colonies. Pay 14 MC.": "Разместите 2 колонии. Заплатите 14 МС",
+
+    "By-Election": "Довыборы",
+    "set ruling party": "назначьте правящую партию",
+    "Set the ruling party to one of your choice. Gain 1 influence.": "Сделайте любую партию правящей. Получите 1 влияние",
+
+    "Political Uprising": "Переворот",
+    "Place 4 delegates. Draw a Turmoil card.": "Разместите 4 своих делегатов. Доберите карту из дополнения Кризис",
+
+    "Research Grant": "Исследовательский грант",
+    "Gain 8 MC.": "Получите 8 МС",
+
+    "Trade Advance":"Торговое преимущество",
+    "[ solo": "[ соло",
+    "Trade all colonies with": "",
+    "Gain 2 MC [SOLO: Gain 10 MC]. Immediately trade with all active colonies. You may increase the Colony Tile track 1 step before each of these trades.": 
+    "Получите 2 МС [СОЛО: Получите 10 МС]. Немедленно поторгуйте со всеми активными колониями. Можете увеличить трек колонии, с которой торгуете при каждой из этих торговых операций",
+
+
+    "Valuable Gases": "Ценные газы",
+    "Gain 6 MC. Play a Venus card from your hand and add 4 floaters to it.": 
+    "Получите 6 MC. Разыграйте карту с меткой Венеры с руки и добавьте на неё 4 аэростата",
+
+    "Venus First": "Венера вперед!",
+    "Raise Venus 2 steps. Draw 2 Venus cards from the deck.": 
+    "Увеличьте шкалу Венеры на 2. Доберите 2 карты с меткой Венеры"
+
 }

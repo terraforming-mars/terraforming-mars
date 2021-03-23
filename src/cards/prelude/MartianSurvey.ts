@@ -6,7 +6,6 @@ import {Card} from '../Card';
 import {CardName} from '../../CardName';
 import {CardRequirements} from '../CardRequirements';
 import {CardRenderer} from '../render/CardRenderer';
-import {GlobalParameter} from '../../GlobalParameter';
 
 export class MartianSurvey extends Card implements IProjectCard {
   constructor() {
@@ -26,9 +25,6 @@ export class MartianSurvey extends Card implements IProjectCard {
         victoryPoints: 1,
       },
     });
-  }
-  public canPlay(player: Player): boolean {
-    return player.game.checkMaxRequirements(player, GlobalParameter.OXYGEN, 4);
   }
 
   public play(player: Player) {

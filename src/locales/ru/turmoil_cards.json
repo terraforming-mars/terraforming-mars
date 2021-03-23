@@ -24,7 +24,7 @@
     "Requires that Mars First is ruling or that you have 2 delegates there. Increase your MC production 2 steps.": "Требование: Марс вперед в правящий партии или 2 делегата в ней. Увеличте своё производство МС на 2",
     
     "Parliament Hall": "Зал парламента",
-    "Requires that Mars First are ruling or that you have 2 delegates there. Increase your MC production 1 step for every 3 Building tag you have, including this.": "Требование: Марс вперед в правящий партии или 2 делегата в ней. Увеличьте своё производство МС на 1 за каждые 3 метки Зданий, включая эту",
+    "Requires that Mars First are ruling or that you have 2 delegates there. Increase your MC production 1 step for every 3 Building tags you have, including this.": "Требование: Марс вперед в правящий партии или 2 делегата в ней. Увеличьте своё производство МС на 1 за каждые 3 метки Зданий, включая эту",
     
     "PR Office": "Пресс-служба",
     "Requires that Unity are ruling or that you have 2 delegates there. Gain 1 TR. Gain 1 MC for each Earth tag you have, including this.": "Требование: Союз в правящий партии или 2 делегата в ней. Получите 1 РТ. Получите 1 МС за каждую свою метку Земли, включая эту",
@@ -36,7 +36,7 @@
     "Exchange one NEUTRAL NON-LEADER delegate with one of your own from the reserve.": "Замените 1 нейтрального делегата (не лидера) на своего из запаса",
     
     "Red Tourism Wave": "Наплыв туристов",
-    "Requires that Reds are ruling or that you have 2 delegates there. Gain 1 MC from each EMPTY AREA ADJACENT TO YOUR TILES.": "Требование: Красные в правящий партии или 2 делегата в ней. Получите 1 МС за каждую ПУСТУЮ клетку рядом с ВАШИМИ ЖЕТОНАМИ",
+    "Requires that Reds are ruling or that you have 2 delegates there. Gain 1 MC from each EMPTY AREA ADJACENT TO YOUR TILES": "Требование: Красные в правящий партии или 2 делегата в ней. Получите 1 МС за каждую ПУСТУЮ клетку рядом с ВАШИМИ ЖЕТОНАМИ",
     
     "Sponsored Mohole": "Грант на скважину",
     "Requires that Kelvinists are ruling or that you have 2 delegates there. Increase your heat production 2 steps.": "Кельвинисты в правящий партии или 2 делегата в ней. Увеличьте своё производство тепла на 2",
@@ -48,5 +48,8 @@
     "Requires that Greens are ruling or that you have 2 delegates there. Place a greenery tile and raise oxygen 1 step.": "Требование: Зелёные в правящий партии или 2 делегата в ней. Выложите жатон озеленения",
     
     "Vote Of No Confidence": "Вотум недоверия",
-    "Requires that you have a Party Leader in any party and that the sitting Chairman is neutral. Remove the NEUTRAL Chairman and move your own delegate(from the reserve) there instead. Gain 1 TR.": "Требование: ваш делегат - лидер. Уберите НЕЙТРАЛЬНОГО председателя и назначьте туда своего делегата из запаса. Получите 1 РТ"
+    "Requires that you have a Party Leader in any party and that the sitting Chairman is neutral. Remove the NEUTRAL Chairman and move your own delegate (from the reserve) there instead. Gain 1 TR.": "Требование: ваш делегат - лидер. Уберите НЕЙТРАЛЬНОГО председателя и назначьте туда своего делегата из запаса. Получите 1 РТ",
+
+    "Political Alliance": "Политический союз",
+    "Requires that you have 2 party leaders. Gain 1 TR.": "Требование: у вас есть хотя бы 2 лидера партий. Увеличьте свой РТ на 1"
 }

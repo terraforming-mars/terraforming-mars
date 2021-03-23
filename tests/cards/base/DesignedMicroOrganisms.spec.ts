@@ -15,9 +15,14 @@ describe('DesignedMicroOrganisms', function() {
     game = Game.newInstance('foobar', [player, redPlayer], player);
   });
 
-  it('Can\'t play', function() {
+  it('Cannot play', function() {
     (game as any).temperature = -12;
     expect(card.canPlay(player)).is.not.true;
+  });
+
+  it('Can play', function() {
+    (game as any).temperature = -14;
+    expect(card.canPlay(player)).is.true;
   });
 
   it('Should play', function() {

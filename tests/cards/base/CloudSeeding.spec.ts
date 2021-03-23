@@ -7,34 +7,41 @@ import {Resources} from '../../../src/Resources';
 import {TestingUtils} from '../../TestingUtils';
 import {TestPlayers} from '../../TestPlayers';
 
-describe('CloudSeeding', function() {
+describe('CloudSeeding', () => {
   let card : CloudSeeding; let player : Player; let player2 : Player; let game : Game;
 
-  beforeEach(function() {
+  beforeEach(() => {
     card = new CloudSeeding();
     player = TestPlayers.BLUE.newPlayer();
     player2 = TestPlayers.RED.newPlayer();
     game = Game.newInstance('foobar', [player, player2], player);
   });
 
-  it('Can\'t play if cannot reduce MC production', function() {
+  it('Cannot play if cannot reduce MC production', () => {
     TestingUtils.maxOutOceans(player, 3);
     player.addProduction(Resources.MEGACREDITS, -5);
     expect(card.canPlay(player)).is.not.true;
   });
 
-  it('Can\'t play if ocean requirements not met', function() {
+  it('Cannot play if ocean requirements not met', () => {
     TestingUtils.maxOutOceans(player, 2);
     player.addProduction(Resources.HEAT);
     expect(card.canPlay(player)).is.not.true;
   });
 
-  it('Can\'t play if no one has heat production', function() {
+  it('Cannot play if no one has heat production', () => {
     TestingUtils.maxOutOceans(player, 3);
     expect(card.canPlay(player)).is.not.true;
   });
 
-  it('Should play - auto select if single target', function() {
+  it('Can play', () => {
+    TestingUtils.maxOutOceans(player, 3);
+    player.addProduction(Resources.MEGACREDITS, -4);
+    player.addProduction(Resources.HEAT);
+    expect(card.canPlay(player)).is.true;
+  });
+
+  it('Should play - auto select if single target', () => {
     // Meet requirements
     player2.addProduction(Resources.HEAT);
     TestingUtils.maxOutOceans(player, 3);
@@ -49,7 +56,7 @@ describe('CloudSeeding', function() {
     expect(player2.getProduction(Resources.HEAT)).to.eq(0);
   });
 
-  it('Should play - multiple targets', function() {
+  it('Should play - multiple targets', () => {
     player.addProduction(Resources.HEAT);
     player2.addProduction(Resources.HEAT);
 

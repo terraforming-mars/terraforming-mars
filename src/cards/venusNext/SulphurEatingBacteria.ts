@@ -10,7 +10,6 @@ import {CardName} from '../../CardName';
 import {LogHelper} from '../../LogHelper';
 import {CardRequirements} from '../CardRequirements';
 import {CardRenderer} from '../render/CardRenderer';
-import {GlobalParameter} from '../../GlobalParameter';
 import {Card} from '../Card';
 
 export class SulphurEatingBacteria extends Card implements IActionCard, IResourceCard {
@@ -39,9 +38,7 @@ export class SulphurEatingBacteria extends Card implements IActionCard, IResourc
     });
   };
   public resourceCount: number = 0;
-  public canPlay(player: Player): boolean {
-    return player.game.checkMinRequirements(player, GlobalParameter.VENUS, 6);
-  }
+
   public play() {
     return undefined;
   }

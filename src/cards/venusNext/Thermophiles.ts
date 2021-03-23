@@ -13,7 +13,6 @@ import {PartyHooks} from '../../turmoil/parties/PartyHooks';
 import {PartyName} from '../../turmoil/parties/PartyName';
 import {CardRequirements} from '../CardRequirements';
 import {CardRenderer} from '../render/CardRenderer';
-import {GlobalParameter} from '../../GlobalParameter';
 import {Card} from '../Card';
 
 export class Thermophiles extends Card implements IActionCard, IResourceCard {
@@ -42,9 +41,7 @@ export class Thermophiles extends Card implements IActionCard, IResourceCard {
     });
   };
   public resourceCount: number = 0;
-  public canPlay(player: Player): boolean {
-    return player.game.checkMinRequirements(player, GlobalParameter.VENUS, 6);
-  }
+
   public play() {
     return undefined;
   }

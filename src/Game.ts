@@ -1222,10 +1222,6 @@ export class Game implements ISerializable<SerializedGame> {
     return this.temperature;
   }
 
-  public checkMinRequirements(player: Player, parameter: GlobalParameter, level: number): boolean {
-    return this.checkRequirements(player, parameter, level);
-  }
-
   public checkRequirements(player: Player, parameter: GlobalParameter, level: number, max: boolean = false): boolean {
     let currentLevel: number;
     let playerRequirementsBonus: number = player.getRequirementsBonus(parameter);

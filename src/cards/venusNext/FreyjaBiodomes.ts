@@ -9,7 +9,6 @@ import {CardName} from '../../CardName';
 import {LogHelper} from '../../LogHelper';
 import {CardRequirements} from '../CardRequirements';
 import {CardRenderer} from '../render/CardRenderer';
-import {GlobalParameter} from '../../GlobalParameter';
 import {Card} from '../Card';
 
 export class FreyjaBiodomes extends Card {
@@ -36,7 +35,7 @@ export class FreyjaBiodomes extends Card {
     });
   };
   public canPlay(player: Player): boolean {
-    return player.getProduction(Resources.ENERGY) >= 1 && player.game.checkMinRequirements(player, GlobalParameter.VENUS, 10);
+    return player.getProduction(Resources.ENERGY) >= 1 && super.canPlay(player);
   }
   public getResCards(player: Player): ICard[] {
     let resourceCards = player.getResourceCards(ResourceType.ANIMAL);

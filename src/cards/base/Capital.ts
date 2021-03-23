@@ -15,7 +15,6 @@ import {CardMetadata} from '../CardMetadata';
 import {CardRequirements} from '../CardRequirements';
 import {CardRenderer} from '../render/CardRenderer';
 import {CardRenderDynamicVictoryPoints} from '../render/CardRenderDynamicVictoryPoints';
-import {GlobalParameter} from '../../GlobalParameter';
 
 export class Capital extends Card implements IProjectCard {
   constructor(
@@ -50,7 +49,7 @@ export class Capital extends Card implements IProjectCard {
   }
   public canPlay(player: Player): boolean {
     return player.getProduction(Resources.ENERGY) >= 2 &&
-        player.game.checkMinRequirements(player, GlobalParameter.OCEANS, 4) &&
+        super.canPlay(player) &&
         player.game.board.getAvailableSpacesForCity(player).length > 0;
   }
   public getVictoryPoints(player: Player) {

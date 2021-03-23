@@ -9,6 +9,7 @@ import {CallistoPenalMines} from '../src/cards/base/CallistoPenalMines';
 import {CEOsFavoriteProject} from '../src/cards/base/CEOsFavoriteProject';
 import {RadChemFactory} from '../src/cards/base/RadChemFactory';
 import {TitanFloatingLaunchPad} from '../src/cards/colonies/TitanFloatingLaunchPad';
+import {EarthEmbassy} from '../src/cards/moon/EarthEmbassy';
 
 describe('Deck', function() {
   const cards: Array<ICardFactory<IProjectCard>> = [
@@ -18,6 +19,7 @@ describe('Deck', function() {
     {cardName: CardName.CEOS_FAVORITE_PROJECT, Factory: CEOsFavoriteProject},
     {cardName: CardName.RAD_CHEM_FACTORY, Factory: RadChemFactory},
     {cardName: CardName.TITAN_FLOATING_LAUNCHPAD, Factory: TitanFloatingLaunchPad},
+    {cardName: CardName.EARTH_EMBASSY, Factory: EarthEmbassy},
   ];
   const deck: Deck<IProjectCard> = new Deck(cards);
 
@@ -29,8 +31,6 @@ describe('Deck', function() {
   });
 
   it('finds renamed cards', function() {
-    expect(deck.findByCardName('CEOs Favorite Project' as CardName)?.cardName).to.equal(CardName.CEOS_FAVORITE_PROJECT);
-    expect(deck.findByCardName('Rad-chem Factory' as CardName)?.cardName).to.equal(CardName.RAD_CHEM_FACTORY);
-    expect(deck.findByCardName('Titan Floater Launch-pad' as CardName)?.cardName).to.equal(CardName.TITAN_FLOATING_LAUNCHPAD);
+    expect(deck.findByCardName('Earth Embasy' as CardName)?.cardName).to.equal(CardName.EARTH_EMBASSY);
   });
 });

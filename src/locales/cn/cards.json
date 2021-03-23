@@ -29,7 +29,7 @@
     "5 Oceans": "5 海洋",
     "6 Oceans": "6 海洋",
     "Requires 4 ocean tiles. Place this tile. Decrease your Energy production 2 steps and increase your MC production 5 steps.": "需要至少已放置4个海洋。放置本版块,降低你的电力产能2级,提升你的MC产能5级",
-    "1 ADDITIONAL VP FOR EACH OCEAN TILE ADJACENT TO THIS CITY TILE.": "该城市板块相邻每有1个海洋板块,额外获得1分",
+    "1 additional VP for each ocean tile adjacent to this city tile.": "该城市板块相邻每有1个海洋板块,额外获得1分",
 
     "Asteroid": "小行星",
     "Raise temperature 1 step and gain 2 titanium. Remove up to 3 Plants from any player.": "提升火星温度1级并获得2个钛合金,移除任一玩家的最多3个植物资源",
@@ -82,7 +82,8 @@
 
     "Predators": "捕食者",
     "Action: Remove 1 Animal from any card and add it to this card.": "行动:移除任意一张卡上的1个动物资源,并放置到这张卡上",
-    "(Requires 11% oxygen.)": "需要至少11%的氧气浓度才能打出,这张卡每有1个动物资源,获得1分",
+    "(Requires 11% oxygen.)": "需要至少11%的氧气浓度才能打出",
+    "1 VP per Animal on this card.":"这张卡每有1个动物资源,获得1分",
 
     "Space Station": "空间站",
     "Effect: When you play a Space card, you pay 2 MC less for it.": "效果:每当你打出一张空间标志卡,你可以少支付2MC",
@@ -121,6 +122,7 @@
     "Ants": "蚂蚁",
     "Action: Remove 1 Microbe from any card to add 1 to this card.": "行动: 从任意的卡上移除一个微生物资源,并放置到本卡上",
     "Requires 4% oxygen. 1 VP per 2 Microbes on this card.": "需要至少4%的氧气浓度。这张卡上每有2个微生物资源,获得1分",
+    "1 VP per 2 Microbes on this card.":"在这张卡片上，每2个微生物获得 1个VP。",
 
     "Release of Inert Gases": "释放惰性气体",
     "(Raise your terraforming rating 2 steps.)": "提升你的改造度(TR)2",
@@ -140,7 +142,7 @@
     "Food Factory": "食品工厂",
     "(Decrease your Plant production 1 step and increase your MC production 4 steps)": "降低你的植物产能1级，增加你的MC产能4级",
 
-    "Archaebacteria": "古细菌类",
+    "ArchaeBacteria": "古细菌类",
     "It must be -18 C or colder. Increase your Plant production 1 step.": "需要火星温度至少低于-18度。增加你的植物产能1级",
 
     "Carbonate Processing": "碳酸盐处理",
@@ -181,7 +183,8 @@
     "(Requires 0° C or warmer. Place 2 ocean tiles.)": "需要温度至少达到0度,放置2块海洋板块",
 
     "Small Animals": "小动物",
-    "(Requires 6% oxygen. Decrease any Plant production 1 step.)": "需要氧气浓度至少达到6% 降低任一玩家的植物产能1级。本卡上每有2个动物资源,获得1分",
+    "(Requires 6% oxygen. Decrease any Plant production 1 step.)": "需要氧气浓度至少达到6% 降低任一玩家的植物产能1级。",
+    "1 VP per 2 Animals on this card.":"本卡上每有2个动物资源,获得1分",
 
 
     "Kelp Farming": "养殖海藻",
@@ -266,7 +269,7 @@
 
     "Ganymede Colony": "木卫三殖民地",
     "(Place a city tile ON THE RESERVED AREA.)": "放置一个城市版块在'预留位置'上。",
-    " 1 VP per Jovian tag you have": "你每有一个木星标志,获得1分",
+    "1 VP per Jovian tag you have.": "你每有一个木星标志,获得1分",
 
     "Callisto Penal Mines": "木卫四开采法",
     "Increase your MC production 3 steps.": "增加你的MC产能3级",
@@ -410,7 +413,7 @@
     "Ecological Zone": "生态保护区",
     "(Effect: When you play an animal or plant tag /including these/, add an animal to this card.)": "效果: 当你打出1个动物标志或植物标志(包括本牌2个)时,增加1个动物资源到本卡",
     "(Requires that YOU have a greenery tile. Place this tile adjacent to ANY greenery.)": "需要你至少拥有一个绿化板块。放置这个版块到任意的绿化版块旁边。本卡上每有2个动物资源,获得1分",
-    "1 VP PER 2 ANIMALS ON THIS CARD.": "两个动物1分",
+    "1 VP per 2 Animals on this card.": "两个动物1分",
 
     "Zeppelins": "齐柏林飞艇",
     "Requires 5% oxygen. Increase your MC production 1 step for each City tile ON MARS.": "需要至少氧气浓度5%,火星上每有1个城市,增加你的MC产能1级",
@@ -421,7 +424,7 @@
     "Decomposers": "分解者",
     "Effect: When you play an Animal, Plant, or Microbe tag, including this, add a Microbe to this card.": "效果: 当你打出动物、植物或微生物标志(包括本牌)时,增加一个微生物资源到本牌",
     "(Requires 3% oxygen.)": "需要至少3%氧气浓度。",
-    "1 VP PER 3 MICROBES ON THIS CARD.": "本牌上每有3个微生物资源,获得1分",
+    "1 VP per 3 Microbes on this card.": "本牌上每有3个微生物资源,获得1分",
 
     "Fusion Power": "聚变能源",
     "Requires 2 Power tags. Increase your Energy production 3 steps.": "需要至少2个电力标志。增加你的电力产能3级",
@@ -552,7 +555,7 @@
   "Decrease your Energy production 2 steps and increase your Plant production 1 step. Raise your TR 1 step.": "电力产量-2 植物产量+1 改造度+1",
 
   "Pets": "宠物",
-  "ANIMALS MAY NOT BE REMOVED FROM THIS CARD": "此牌上的动物资源不能被移除",
+  "Animals may not be removed from this card": "此牌上的动物资源不能被移除",
   "Effect: When any City tile is placed, add an Animal to this card.": "效果:每当有城市板块被放置 时增加1枚动物资源到此牌上",
   "(Add 1 Animal to this card.)": "增加1枚动物资源到此牌上 ",
   "1 VP per 2 Animals here.": "此牌上:2枚动物资源=1分",

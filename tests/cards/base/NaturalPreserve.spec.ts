@@ -7,17 +7,17 @@ import {Resources} from '../../../src/Resources';
 import {TileType} from '../../../src/TileType';
 import {TestPlayers} from '../../TestPlayers';
 
-describe('NaturalPreserve', function() {
+describe('NaturalPreserve', () => {
   let card : NaturalPreserve; let player : Player; let game : Game;
 
-  beforeEach(function() {
+  beforeEach(() => {
     card = new NaturalPreserve();
     player = TestPlayers.BLUE.newPlayer();
     const redPlayer = TestPlayers.RED.newPlayer();
     game = Game.newInstance('foobar', [player, redPlayer], player);
   });
 
-  it('Can\'t play if no spaces available', function() {
+  it('Cannot play if no spaces available', () => {
     const lands = game.board.getAvailableSpacesOnLand(player);
     for (const land of lands) {
       game.addTile(player, land.spaceType, land, {tileType: TileType.NATURAL_PRESERVE});
@@ -26,12 +26,17 @@ describe('NaturalPreserve', function() {
     expect(card.canPlay(player)).is.not.true;
   });
 
-  it('Can\'t play if oxygen level too high', function() {
+  it('Cannot play if oxygen level too high', () => {
     (game as any).oxygenLevel = 5;
     expect(card.canPlay(player)).is.not.true;
   });
 
-  it('Should play', function() {
+  it('Can play', () => {
+    (game as any).oxygenLevel = 4;
+    expect(card.canPlay(player)).is.true;
+  });
+
+  it('Should play', () => {
     expect(card.canPlay(player)).is.true;
     const action = card.play(player);
     expect(action).is.not.undefined;

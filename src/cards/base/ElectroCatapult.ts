@@ -10,7 +10,6 @@ import {Resources} from '../../Resources';
 import {CardName} from '../../CardName';
 import {CardRequirements} from '../CardRequirements';
 import {CardRenderer} from '../render/CardRenderer';
-import {GlobalParameter} from '../../GlobalParameter';
 import {Units} from '../../Units';
 
 export class ElectroCatapult extends Card implements IActionCard, IProjectCard {
@@ -40,8 +39,7 @@ export class ElectroCatapult extends Card implements IActionCard, IProjectCard {
     });
   }
   public canPlay(player: Player): boolean {
-    return player.getProduction(Resources.ENERGY) >= 1 &&
-        player.game.checkMaxRequirements(player, GlobalParameter.OXYGEN, 8);
+    return player.getProduction(Resources.ENERGY) >= 1 && super.canPlay(player);
   }
   public canAct(player: Player): boolean {
     return player.plants > 0 || player.steel > 0;

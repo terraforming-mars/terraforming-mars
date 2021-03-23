@@ -13,12 +13,16 @@ describe('MartianSurvey', function() {
     game = Game.newInstance('foobar', [player], player);
   });
 
-  it('Can\'t play', function() {
+  it('Cannot play', () => {
     (game as any).oxygenLevel = 5;
     expect(card.canPlay(player)).is.not.true;
   });
+  it('Can play', () => {
+    (game as any).oxygenLevel = 4;
+    expect(card.canPlay(player)).is.true;
+  });
 
-  it('Should play', function() {
+  it('Should play', () => {
     expect(card.canPlay(player)).is.true;
     card.play(player);
 

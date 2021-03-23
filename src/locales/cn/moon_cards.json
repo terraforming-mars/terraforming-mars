@@ -64,9 +64,33 @@
  
  
  
- 
+ "AI Controlled Mine Network":"人工智控挖矿网络",
+  "(Requires Logistic Rate to be 2 or higher. Raise the Logistic Rate 1 step)":"要求物流率为2或更高。提高物流速度1步",
   
+  
+  "Algae Bioreactors":"藻类生物反应器",
+  "(Decrease your plant production 1 step. Raise the Colony Rate 1 step and oxygen 1%.)":"(减少你的植物产量 1。提殖民速度1，加 1 氧。)",
+  
+  "Ancient Shipyards":"古代造船厂",
+  "(Action: Steal 8 MC from any player and add a resource cube here.)":"(行动:从任何玩家那里偷取8 MC并在这里添加一个资源立方体。)",
+  "(Spend 3 titanium. -1 VP for every 2 resources here.)":"(花3钛。这里每2个资源-1个VP。)",
  
+ "Archimedes Hydroponics Station":"阿基米德水培站",
+  "(Decrease your energy production 1 step and your MC production 1 step. Increase your plant production 2 steps.)":"(减少你的电力和MC产能1。增加你的绿叶产量2。)",
+  
+  "Aristarchus Road Network":"亚里士多德道路网",
+  "(Spend 2 steel. Increase your MC production 2 steps. Place a road tile on the Moon and raise the Logistics Rate 1 step.)":"（花2块钢。增加MC产能2。在月球放置道路板块，并提高物流速度 1步。）",
+  
+  "Colonist Shuttles":"殖民者航天飞机",
+  "(Spend 1 titanium. Raise the Colony Rate 1 step. Gain 2MC for each colony tile on the Moon.)":"(花1钛。提高殖民速度1步。月球上每个殖民地板块获得2MC。)",
+  
+  "Copernicus Solar Arrays":"哥白尼太阳能阵列",
+  "(Spend 1 titanium. Gain 2 heat. Incease your energy production 1 step.)":"(花1钛。获得2热。提高你的电力产量1。)",
+  
+  "Copernicus Tower":"哥白尼塔",
+  "Requires you have 2 titanium production.":"要求您有2个钛产。",
+  "(Action: Add 1 Science resource here, or spend 1 Science resource here to raise your TR 1 step.)":"(行动:在这里增加1个科学资源，或在这里花费1个科学资源来提高你的TR 1步。)",
+  "1 VP PER MOON TAG YOU HAVE.":"每个月球标签得1 VP。",
  
  
  "Mare Imbrium Mine": "雨海(月面)采矿",
@@ -79,7 +103,15 @@
     "(Spend 1 titanium. Increase your titanium production 1 step. Place a mine ON THE RESERVED AREA and raise the Mining Rate 1 step.)": "(花费1个钛 增加1钛产量。在预留区域上放置矿板块并提高开采速度1格)",
   
   "Mare Serenitatis Mine": "澄海(月面)采矿",
-   "(Spend 2 titanium and 1 steel. Increase your steel production 1 step and your titanium production 1 step. Place a mine ON THE RESERVED AREA and a road tile adjacent to it. Raise the Mining Rate 1 step and the Logistic Rate 1 step.)": "(花费2个钛和1个钢 增加1钢铁产量和1钛产量。在预留区域上放置矿板块并在与其相邻的地方放置道路板块，提高物流速度1格)"
+   "(Spend 2 titanium and 1 steel. Increase your steel production 1 step and your titanium production 1 step. Place a mine ON THE RESERVED AREA and a road tile adjacent to it. Raise the Mining Rate 1 step and the Logistic Rate 1 step.)": "(花费2个钛和1个钢 增加1钢铁产量和1钛产量。在预留区域上放置矿板块并在与其相邻的地方放置道路板块，提高物流速度1格)",
+  
+     "Steal":"偷取",
+     "Colony rate":"殖民速度",
+     "Mining rate":"采矿速度",
+     "Logistic rate":"物流速度",
+      "Colony tiles":"殖民板块",
+      "Mine tiles":"采矿板块",
+      "Road tiles":"道路板块"
   
   
 }

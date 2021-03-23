@@ -35,11 +35,11 @@ export class VictoryPointsBreakdown {
         break;
       case 'milestones':
         this.milestones += points;
-        if (message !== undefined) this.detailsMilestones.push(message+': '+points);
+        if (message !== undefined) this.detailsMilestones.push(message+':'+points);
         break;
       case 'awards':
         this.awards += points;
-        if (message !== undefined) this.detailsAwards.push(message+': '+points);
+        if (message !== undefined) this.detailsAwards.push(message+':'+points);
         break;
       case 'greenery':
         this.greenery += points;
@@ -49,7 +49,7 @@ export class VictoryPointsBreakdown {
         break;
       case 'victoryPoints':
         this.victoryPoints += points;
-        if (message !== undefined) this.detailsCards.push(message+': '+points);
+        if (message !== undefined) this.detailsCards.push(message+':'+points);
         break;
       case 'moon colony':
         this.moonColonies += points;

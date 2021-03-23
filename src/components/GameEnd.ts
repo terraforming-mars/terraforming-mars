@@ -25,9 +25,6 @@ export const GameEnd = Vue.component('game-end', {
     'Button': Button,
   },
   methods: {
-    getEndGamePlayerHighlightColorClass: function(color: string): string {
-      return playerColorClass(color.toLowerCase(), 'bg');
-    },
     getEndGamePlayerRowColorClass: function(color: string): string {
       return playerColorClass(color.toLowerCase(), 'bg_transparent');
     },
@@ -104,33 +101,34 @@ export const GameEnd = Vue.component('game-end', {
                     </a>
                 </div>
                 <div v-if="!isSoloGame() || player.isSoloModeWin" class="game-end-winer-announcement">
-                    <span v-for="p in getWinners()"><span :class="'log-player ' + getEndGamePlayerHighlightColorClass(p.color)">{{ p.name }}</span></span> won!
+                    <span v-for="p in getWinners()"><span :class="'log-player ' + getEndGamePlayerRowColorClass(p.color)">{{ p.name }}</span></span> won!
                 </div>
                 <div class="game_end_victory_points">
                     <h2 v-i18n>Victory points breakdown after<span> {{player.generation}} </span>generations</h2>
                     <table class="table game_end_table">
                         <thead>
                             <tr v-i18n>
-                                <th>Player</th>
-                                <th>Corporation</th>
-                                <th>TR</th>
-                                <th>Milestones</th>
-                                <th>Awards</th>
-                                <th>Greenery</th>
-                                <th>City</th>
+                                <th><div class="card-delegate"></div></th>
+                                <th><div class="tr"></div></th>
+                                <th><div class="m-and-a" title="Milestones points">M</div></th>
+                                <th><div class="m-and-a" title="Awards points">A</div></th>
+                                <th><div class="table-forest-tile"></div></th>
+                                <th><div class="table-city-tile"></div></th>
                                 <th v-if="player.moon !== undefined">Moon Roads</th>
                                 <th v-if="player.moon !== undefined">Moon Colonies</th>
                                 <th v-if="player.moon !== undefined">Moon Mines</th>
-                                <th>VP</th>
+                                <th><div class="vp">VP</div></th>
                                 <th class="game-end-total"><div class="game-end-total-column">Total</div></th>
-                                <th>M€</th>
-                                <th v-if="player.gameOptions.showTimers">Timer</th>
+                                <th><div class="mc-icon"></div></th>
+                                <th class="game-end-clock">&#x1F551;</th>
                             </tr>
                         </thead>
                         <tbody>
                             <tr v-for="p in getSortedPlayers()" :class="getEndGamePlayerRowColorClass(p.color)">
-                                <td><a :href="'/player?id='+p.id+'&noredirect'">{{ p.name }}</a></td>
-                                <td v-i18n>{{ p.corporationCard === undefined ? "" : p.corporationCard.name }}</td>
+                                <td>
+                                  <a :href="'/player?id='+p.id+'&noredirect'">{{ p.name }}</a>
+                                  <div class="column-corporation">{{ p.corporationCard === undefined ? "" : p.corporationCard.name }}</div>
+                                </td>
                                 <td>{{ p.victoryPointsBreakdown.terraformRating }}</td>
                                 <td>{{ p.victoryPointsBreakdown.milestones }}</td>
                                 <td>{{ p.victoryPointsBreakdown.awards }}</td>
@@ -141,8 +139,12 @@ export const GameEnd = Vue.component('game-end', {
                                 <td v-if="player.moon !== undefined">{{ p.victoryPointsBreakdown.moonMines }}</td>
                                 <td>{{ p.victoryPointsBreakdown.victoryPoints }}</td>
                                 <td class="game-end-total">{{ p.victoryPointsBreakdown.total }}</td>
-                                <td class="game-end-mc">{{ p.megaCredits }}M€</td>
-                                <td v-if="player.gameOptions.showTimers" class="game-end-timer">{{ getTimer(p) }}</td>
+                                <td class="game-end-mc">
+                                  <div>{{ p.megaCredits }}</div>
+                                </td>
+                                <td class="game-end-clock">
+                                  <div v-if="player.gameOptions.showTimers" class="game-end-timer">{{ getTimer(p) }}</div>
+                                </td>
                             </tr>
                         </tbody>
                     </table>
@@ -151,16 +153,25 @@ export const GameEnd = Vue.component('game-end', {
                     <div class="game-end-flexrow">
                         <div v-for="p in getSortedPlayers()" class="game-end-column">
                             <div class="game-end-winer-scorebreak-player-title">
-                                <span :class="'log-player ' + getEndGamePlayerHighlightColorClass(p.color)"><a :href="'/player?id='+p.id+'&noredirect'">{{p.name}}</a></span>
+                                <div :class="'game-end-player ' + getEndGamePlayerRowColorClass(p.color)"><a :href="'/player?id='+p.id+'&noredirect'">{{p.name}}</a></div>
                             </div>
                             <div v-for="v in p.victoryPointsBreakdown.detailsCards">
-                                {{v}}
+                              <div class="game-end-column-row">
+                                <div class="game-end-column-vp">{{v.split(':', 2)[1]}}</div>
+                                <div class="game-end-column-text">{{v.split(':', 2)[0]}}</div>
+                              </div>
                             </div>
                             <div v-for="v in p.victoryPointsBreakdown.detailsMilestones">
-                                {{v}}
+                              <div class="game-end-column-row">
+                                <div class="game-end-column-vp">{{v.split(':', 2)[1]}}</div>
+                                <div class="game-end-column-text">{{v.split(':', 2)[0]}}</div>
+                              </div>
                             </div>
                             <div v-for="v in p.victoryPointsBreakdown.detailsAwards">
-                                {{v}}
+                              <div class="game-end-column-row">
+                                <div class="game-end-column-vp">{{v.split(':', 2)[1]}}</div>
+                                <div class="game-end-column-text">{{v.split(':', 2)[0]}}</div>
+                              </div>
                             </div>
                         </div>
                     </div>
@@ -180,10 +191,9 @@ export const GameEnd = Vue.component('game-end', {
                         :shouldNotify="false"></board>
                 </div>
                 <div class="game_end_block--log game-end-column">
-                    <h2 v-i18n>Final game log</h2>
-                    <log-panel :color="player.color" :generation="player.generation" :id="player.id" :lastSoloGeneration="player.lastSoloGeneration" :players="player.players"></log-panel>
+                  <log-panel :color="player.color" :generation="player.generation" :id="player.id" :lastSoloGeneration="player.lastSoloGeneration" :players="player.players"></log-panel>                
                 </div>
-                </div>
+              </div>
             </div>
         </div>
     `,

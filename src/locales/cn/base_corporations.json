@@ -26,7 +26,7 @@
   "Effect: You may always pay 7 plants, instead of 8, to place greenery.":"效果:你可以用7个植物资源(而不是8)来放置一个绿化版块",
 
   "You start with 3 heat production and 42 MC.":"起始获得42MC,提升热能产能3级",
-  "Effect: Your may use heat as MC. You may not use MC as heat.":"效果:你可以用热能资源代替MC使用,但不用用MC代替热能资源使用",
+  "Effect: You may use heat as MC. You may not use MC as heat.":"效果:你可以用热能资源代替MC使用,但不用用MC代替热能资源使用",
 
   "You start with 45 MC. As your first action, fund an award for free.":"起始获得45MC。作为你的起始行动,你可以免费资助一个奖项",
   "Effect: When you play a card with a NON-NEGATIVE VP icon, including this, gain 3MC.":"效果:当你打出一张有非负分图标的牌(包括本牌)时,获得3MC",
@@ -35,7 +35,7 @@
   "Effect: When you buy a card to hand, pay 5MC instead of 3, including the starting hand.":"效果:当你购买手牌时,你需要支付5MC而非原本的3MC,包括起始的手牌",
 
 
-  "You start with 30 MC, 5 steel, and 1 steel production":"起始获得30MC,5个钢铁资源,提升钢铁产能1级",
+  "You start with 30 MC, 5 steel and 1 steel production.":"起始获得30MC,5个钢铁资源,提升钢铁产能1级",
   "Effect: Each time you get any steel or titanium as a placement bonus on the map, increase your steel production 1 step.":"效果:每当你因放置一个版块而获得钢铁资源或钛合金资源时,提升你的钢铁产能1级",
 
   "You start with 40MC. As your first action add a colony tile.":"起始获得40MC。作为你的第一个行动,将一个殖民地板块加入游戏",
@@ -56,7 +56,7 @@
   "Action: Add a floater to ANY card.":"行动:放置1个云资源到任意卡牌",
   "1 VP per 3 floaters on this card.":"本牌上每3个云资源获得1分",
 
-  "As you first action in the game, draw 3 cards. Start with 45MC.":"起始获得45MC。作为你的第一个行动,抽3张牌",
+  "As your first action in the game, draw 3 cards. Start with 45MC.":"起始获得45MC。作为你的第一个行动,抽3张牌",
   "Effect: Your temperature, oxygen, ocean, and Venus requirements are +2 or -2 steps, your choice in each case.":"效果:你打牌时的 温度/氧气浓度/海洋 要求 +2格或-2格",
 
   "You start with 20 steel and 30 MC.":"起始获得30MC和20个钢铁资源",
@@ -79,7 +79,7 @@
   "Effect: When you play an Science tag, you pay 2MC less for it.":"效果：你打出的牌上每有一个科学标志，你少为其支付2元。",
   "You start with 37 MC. As your first action, draw 3 Prelude cards, and play one of them. Discard the other two.":"你起始拥有37元，作为游戏中的你的第一个行动，你必须抽三张前序卡，打出其中一张，然后弃掉剩余两张。",
 
-  "Action:If your Terraform Rating was raised this generation, you may pay 3 MC to raise it 1 step more.":"行动：如果你的改造度在本时代有过提升，你可以支付3元来提升一点改造度。",
+  "Action: If your Terraform Rating was raised this generation, you may pay 3 MC to raise it 1 step more.":"行动：如果你的改造度在本时代有过提升，你可以支付3元来提升一点改造度。",
   "You start with 40 MC.":"你起始拥有40元。",
 
   "ACTION: PLACE A COMMUNITY (PLAYER MARKER) ON A NON-RESERVED AREA ADJACENT TO ONE OF YOUR TILES OR MARKED AREAS":"行动：将你的一个玩家标记放置在一个非保留区，并且和你的至少一个板块或者玩家标记相邻。",

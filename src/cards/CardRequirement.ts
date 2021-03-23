@@ -124,16 +124,16 @@ export class CardRequirement {
       return false;
 
     case RequirementType.OCEANS:
-      return player.game.checkRequirements(player, GlobalParameter.OCEANS, this.amount, this.isMax);
+      return this.checkGlobalRequirement(player, GlobalParameter.OCEANS, this.amount, this.isMax);
 
     case RequirementType.OXYGEN:
-      return player.game.checkRequirements(player, GlobalParameter.OXYGEN, this.amount, this.isMax);
+      return this.checkGlobalRequirement(player, GlobalParameter.OXYGEN, this.amount, this.isMax);
 
     case RequirementType.TEMPERATURE:
-      return player.game.checkRequirements(player, GlobalParameter.TEMPERATURE, this.amount, this.isMax);
+      return this.checkGlobalRequirement(player, GlobalParameter.TEMPERATURE, this.amount, this.isMax);
 
     case RequirementType.VENUS:
-      return player.game.checkRequirements(player, GlobalParameter.VENUS, this.amount, this.isMax);
+      return this.checkGlobalRequirement(player, GlobalParameter.VENUS, this.amount, this.isMax);
 
     case RequirementType.TR:
       return this.satisfiesInequality(player.getTerraformRating());

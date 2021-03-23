@@ -2,31 +2,37 @@ import {expect} from 'chai';
 import {ElectroCatapult} from '../../../src/cards/base/ElectroCatapult';
 import {Game} from '../../../src/Game';
 import {OrOptions} from '../../../src/inputs/OrOptions';
-import {Player} from '../../../src/Player';
 import {Resources} from '../../../src/Resources';
+import {TestPlayer} from '../../TestPlayer';
 import {TestPlayers} from '../../TestPlayers';
 
-describe('ElectroCatapult', function() {
-  let card : ElectroCatapult; let player : Player; let game : Game;
+describe('ElectroCatapult', () => {
+  let card : ElectroCatapult; let player : TestPlayer; let game : Game;
 
-  beforeEach(function() {
+  beforeEach(() => {
     card = new ElectroCatapult();
     player = TestPlayers.BLUE.newPlayer();
     const redPlayer = TestPlayers.RED.newPlayer();
     game = Game.newInstance('foobar', [player, redPlayer], player);
   });
 
-  it('Can\'t play without energy production', function() {
+  it('Cannot play without energy production', () => {
     expect(card.canPlay(player)).is.not.true;
   });
 
-  it('Can\'t play if oxygen level too high', function() {
+  it('Cannot play if oxygen level too high', () => {
     player.addProduction(Resources.ENERGY);
     (game as any).oxygenLevel = 9;
     expect(card.canPlay(player)).is.not.true;
   });
 
-  it('Should play', function() {
+  it('Can play', () => {
+    player.setProductionForTest({energy: 1});
+    (game as any).oxygenLevel = 8;
+    expect(card.canPlay(player)).is.true;
+  });
+
+  it('Should play', () => {
     player.addProduction(Resources.ENERGY);
     card.play(player);
 
@@ -34,7 +40,7 @@ describe('ElectroCatapult', function() {
     player.victoryPointsBreakdown.setVictoryPoints('victoryPoints', card.getVictoryPoints());
     expect(player.victoryPointsBreakdown.victoryPoints).to.eq(1);
   });
-  it('Should act', function() {
+  it('Should act', () => {
     player.plants = 1;
     player.steel = 1;
 

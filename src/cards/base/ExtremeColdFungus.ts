@@ -13,7 +13,6 @@ import {LogHelper} from '../../LogHelper';
 import {Resources} from '../../Resources';
 import {CardRequirements} from '../CardRequirements';
 import {CardRenderer} from '../render/CardRenderer';
-import {GlobalParameter} from '../../GlobalParameter';
 
 export class ExtremeColdFungus extends Card implements IActionCard, IProjectCard {
   constructor() {
@@ -38,9 +37,6 @@ export class ExtremeColdFungus extends Card implements IActionCard, IProjectCard
         }),
       },
     });
-  }
-  public canPlay(player: Player): boolean {
-    return player.game.checkMaxRequirements(player, GlobalParameter.TEMPERATURE, -10);
   }
   public play() {
     return undefined;

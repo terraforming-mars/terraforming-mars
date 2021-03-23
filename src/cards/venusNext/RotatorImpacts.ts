@@ -13,7 +13,6 @@ import {SelectHowToPayDeferred} from '../../deferredActions/SelectHowToPayDeferr
 import {LogHelper} from '../../LogHelper';
 import {CardRequirements} from '../CardRequirements';
 import {CardRenderer} from '../render/CardRenderer';
-import {GlobalParameter} from '../../GlobalParameter';
 import {Card} from '../Card';
 
 export class RotatorImpacts extends Card implements IActionCard, IResourceCard {
@@ -41,12 +40,11 @@ export class RotatorImpacts extends Card implements IActionCard, IResourceCard {
     });
   };
   public resourceCount: number = 0;
-  public canPlay(player: Player): boolean {
-    return player.game.checkMaxRequirements(player, GlobalParameter.VENUS, 14);
-  }
+
   public play() {
     return undefined;
   }
+
   public canAct(player: Player): boolean {
     const venusMaxed = player.game.getVenusScaleLevel() === MAX_VENUS_SCALE;
     const canSpendResource = this.resourceCount > 0 && !venusMaxed;

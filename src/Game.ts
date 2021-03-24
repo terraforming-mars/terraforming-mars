@@ -1222,49 +1222,6 @@ export class Game implements ISerializable<SerializedGame> {
     return this.temperature;
   }
 
-  public checkRequirements(player: Player, parameter: GlobalParameter, level: number, max: boolean = false): boolean {
-    let currentLevel: number;
-    let playerRequirementsBonus: number = player.getRequirementsBonus(parameter);
-
-    switch (parameter) {
-    case GlobalParameter.OCEANS:
-      currentLevel = this.board.getOceansOnBoard();
-      break;
-    case GlobalParameter.OXYGEN:
-      currentLevel = this.getOxygenLevel();
-      break;
-    case GlobalParameter.TEMPERATURE:
-      currentLevel = this.getTemperature();
-      playerRequirementsBonus *= 2;
-      break;
-
-    case GlobalParameter.VENUS:
-      currentLevel = this.getVenusScaleLevel();
-      playerRequirementsBonus *= 2;
-      break;
-
-    case GlobalParameter.MOON_COLONY_RATE:
-      currentLevel = MoonExpansion.moonData(player.game).colonyRate;
-      break;
-    case GlobalParameter.MOON_MINING_RATE:
-      currentLevel = MoonExpansion.moonData(player.game).miningRate;
-      break;
-    case GlobalParameter.MOON_LOGISTICS_RATE:
-      currentLevel = MoonExpansion.moonData(player.game).logisticRate;
-      break;
-
-    default:
-      console.warn(`Unknown GlobalParameter provided: ${parameter}`);
-      return false;
-    }
-
-    if (max) {
-      return currentLevel <= level + playerRequirementsBonus;
-    } else {
-      return currentLevel >= level - playerRequirementsBonus;
-    }
-  }
-
   public getGeneration(): number {
     return this.generation;
   }

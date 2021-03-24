@@ -1,4 +1,5 @@
 import {Message} from '../Message';
+import {Player} from '../Player';
 import {PlayerInput} from '../PlayerInput';
 import {PlayerInputTypes} from '../PlayerInputTypes';
 
@@ -9,6 +10,10 @@ export class SelectOption implements PlayerInput {
         public buttonLabel: string = 'Select',
         public cb: () => PlayerInput | undefined) {
       this.buttonLabel = buttonLabel;
+    }
+
+    public runInput(player: Player, _input: ReadonlyArray<ReadonlyArray<string>>) {
+      player.runInputCb(this.cb());
     }
 }
 

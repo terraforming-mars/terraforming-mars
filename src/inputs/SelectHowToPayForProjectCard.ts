@@ -30,4 +30,11 @@ export class SelectHowToPayForProjectCard implements PlayerInput {
       return [card.name, MoonExpansion.adjustedReserveCosts(player, card)];
     }));
   }
+
+  public runInput(player: Player, input: ReadonlyArray<ReadonlyArray<string>>): void {
+    PlayerInput.checkInputLength(input, 1, 2);
+    const foundCard: IProjectCard = player.getCard(this.cards, input[0][0]);
+    const howToPay: HowToPay = Player.parseHowToPayJSON(input[0][1]);
+    player.runInputCb(this.cb(foundCard, howToPay));
+  }
 }

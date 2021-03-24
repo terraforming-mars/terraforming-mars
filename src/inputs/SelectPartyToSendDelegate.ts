@@ -1,4 +1,5 @@
 import {Message} from '../Message';
+import {Player} from '../Player';
 import {PlayerInput} from '../PlayerInput';
 import {PlayerInputTypes} from '../PlayerInputTypes';
 import {PartyName} from '../turmoil/parties/PartyName';
@@ -11,4 +12,13 @@ export class SelectPartyToSendDelegate implements PlayerInput {
         public availableParties: PartyName[],
         public cb: (party: PartyName) => undefined,
     ) {}
+
+    public runInput(player: Player, input: ReadonlyArray<ReadonlyArray<string>>) {
+      PlayerInput.checkInputLength(input, 1, 1);
+      const party: PartyName = (input[0][0]) as PartyName;
+      if (party === undefined) {
+        throw new Error('No party selected');
+      }
+      player.runInputCb(this.cb(party));
+    }
 }

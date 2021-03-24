@@ -16,4 +16,10 @@ export class SelectProductionToLose implements PlayerInput {
     ) {
       this.buttonLabel = buttonLabel;
     }
+
+    public runInput(player: Player, input: ReadonlyArray<ReadonlyArray<string>>) {
+      // TODO(kberg): I'm sure there's some input validation required.
+      const units: Units = JSON.parse(input[0][0]);
+      player.runInputCb(this.cb(units));
+    }
 }

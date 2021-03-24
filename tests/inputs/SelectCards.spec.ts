@@ -24,13 +24,13 @@ describe('SelectCard', function() {
       [true, false, true],
     );
 
-    player.runInput([[cards[0].name]], selectCards);
+    selectCards.runInput(player, [[cards[0].name]]);
     expect(cbArray).to.has.length(1);
 
-    player.runInput([[cards[2].name]], selectCards);
+    selectCards.runInput(player, [[cards[2].name]]);
     expect(cbArray).to.has.length(2);
 
-    expect(() => player.runInput([[cards[1].name]], selectCards)).to.throw(Error, /Selected unavailable card/);
+    expect(() => selectCards.runInput(player, [[cards[1].name]])).to.throw(Error, /Selected unavailable card/);
   });
 });
 

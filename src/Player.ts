@@ -30,19 +30,14 @@ import {Phase} from './Phase';
 import {PlayerInput} from './PlayerInput';
 import {ResourceType} from './ResourceType';
 import {Resources} from './Resources';
-import {SelectAmount} from './inputs/SelectAmount';
 import {SelectCard} from './inputs/SelectCard';
 import {SellPatentsStandardProject} from './cards/base/standardProjects/SellPatentsStandardProject';
 import {SendDelegateToArea} from './deferredActions/SendDelegateToArea';
 import {DeferredAction} from './deferredActions/DeferredAction';
 import {SelectHowToPayDeferred} from './deferredActions/SelectHowToPayDeferred';
 import {SelectColony} from './inputs/SelectColony';
-import {SelectPartyToSendDelegate} from './inputs/SelectPartyToSendDelegate';
-import {SelectDelegate} from './inputs/SelectDelegate';
-import {SelectHowToPay} from './inputs/SelectHowToPay';
 import {SelectHowToPayForProjectCard} from './inputs/SelectHowToPayForProjectCard';
 import {SelectOption} from './inputs/SelectOption';
-import {SelectPlayer} from './inputs/SelectPlayer';
 import {SelectSpace} from './inputs/SelectSpace';
 import {SelfReplicatingRobots} from './cards/promo/SelfReplicatingRobots';
 import {SerializedCard} from './SerializedCard';
@@ -52,8 +47,6 @@ import {StormCraftIncorporated} from './cards/colonies/StormCraftIncorporated';
 import {Tags} from './cards/Tags';
 import {TileType} from './TileType';
 import {VictoryPointsBreakdown} from './VictoryPointsBreakdown';
-import {SelectProductionToLose} from './inputs/SelectProductionToLose';
-import {IAresGlobalParametersResponse, ShiftAresGlobalParameters} from './inputs/ShiftAresGlobalParameters';
 import {Timer} from './Timer';
 import {TurmoilHandler} from './turmoil/TurmoilHandler';
 import {TurmoilPolicy} from './turmoil/TurmoilPolicy';
@@ -756,7 +749,8 @@ export class Player implements ISerializable<SerializedPlayer> {
     return false;
   }
 
-  public getCard(cards: Array<IProjectCard>, cardName: string): IProjectCard {
+  // TODO(kberg): Make static, or put elsewhere. This doesn't belong here.
+  public getCard<T extends ICard> (cards: Array<T>, cardName: string): T {
     const foundCard = cards.find((card) => card.name === cardName);
     if (foundCard === undefined) {
       throw new Error('Card not found');
@@ -764,22 +758,15 @@ export class Player implements ISerializable<SerializedPlayer> {
     return foundCard;
   }
 
-  private runInputCb(result: PlayerInput | undefined): void {
+  // Not great that this is public. But not awful either
+  public runInputCb(result: PlayerInput | undefined): void {
     if (result !== undefined) {
       this.game.defer(new DeferredAction(this, () => result));
     }
   }
 
-  private checkInputLength(input: ReadonlyArray<ReadonlyArray<string>>, length: number, firstOptionLength?: number) {
-    if (input.length !== length) {
-      throw new Error('Incorrect options provided');
-    }
-    if (firstOptionLength !== undefined && input[0].length !== firstOptionLength) {
-      throw new Error('Incorrect options provided (nested)');
-    }
-  }
-
-  private parseHowToPayJSON(json: string): HowToPay {
+  // TODO(kberg): Move out of here.
+  public static parseHowToPayJSON(json: string): HowToPay {
     const defaults: HowToPay = {
       steel: 0,
       heat: 0,
@@ -796,126 +783,6 @@ export class Player implements ISerializable<SerializedPlayer> {
       return howToPay;
     } catch (err) {
       throw new Error('Unable to parse HowToPay input ' + err);
-    }
-  }
-
-  // This is only public for a test. It's not great.
-  // TODO(kberg): Fix taht.
-  public runInput(input: ReadonlyArray<ReadonlyArray<string>>, pi: PlayerInput): void {
-    if (pi instanceof AndOptions) {
-      this.checkInputLength(input, pi.options.length);
-      for (let i = 0; i < input.length; i++) {
-        this.runInput([input[i]], pi.options[i]);
-      }
-      this.runInputCb(pi.cb());
-    } else if (pi instanceof SelectAmount) {
-      this.checkInputLength(input, 1, 1);
-      const amount: number = parseInt(input[0][0]);
-      if (isNaN(amount)) {
-        throw new Error('Number not provided for amount');
-      }
-      if (amount > pi.max) {
-        throw new Error('Amount provided too high (max ' + String(pi.max) + ')');
-      }
-      if (amount < pi.min) {
-        throw new Error('Amount provided too low (min ' + String(pi.min) + ')');
-      }
-      this.runInputCb(pi.cb(amount));
-    } else if (pi instanceof SelectOption) {
-      this.runInputCb(pi.cb());
-    } else if (pi instanceof SelectColony) {
-      this.checkInputLength(input, 1, 1);
-      const colony: ColonyName = (input[0][0]) as ColonyName;
-      if (colony === undefined) {
-        throw new Error('No colony selected');
-      }
-      this.runInputCb(pi.cb(colony));
-    } else if (pi instanceof OrOptions) {
-      // input length is variable, can't test it with checkInputLength
-      if (input.length === 0 || input[0].length !== 1) {
-        throw new Error('Incorrect options provided');
-      }
-      const optionIndex = parseInt(input[0][0]);
-      const selectedOptionInput = input.slice(1);
-      this.runInput(selectedOptionInput, pi.options[optionIndex]);
-      this.runInputCb(pi.cb());
-    } else if (pi instanceof SelectHowToPayForProjectCard) {
-      this.checkInputLength(input, 1, 2);
-      const foundCard: IProjectCard = this.getCard(pi.cards, input[0][0]);
-      const howToPay: HowToPay = this.parseHowToPayJSON(input[0][1]);
-      this.runInputCb(pi.cb(foundCard, howToPay));
-    } else if (pi instanceof SelectCard) {
-      this.checkInputLength(input, 1);
-      if (input[0].length < pi.minCardsToSelect) {
-        throw new Error('Not enough cards selected');
-      }
-      if (input[0].length > pi.maxCardsToSelect) {
-        throw new Error('Too many cards selected');
-      }
-      const mappedCards: Array<ICard> = [];
-      for (const cardName of input[0]) {
-        mappedCards.push(this.getCard(pi.cards, cardName));
-        if (pi.enabled?.[pi.cards.findIndex((card) => card.name === cardName)] === false) {
-          throw new Error('Selected unavailable card');
-        }
-      }
-      this.runInputCb(pi.cb(mappedCards));
-    } else if (pi instanceof SelectAmount) {
-      this.checkInputLength(input, 1, 1);
-      const amount = parseInt(input[0][0]);
-      if (isNaN(amount)) {
-        throw new Error('Amount is not a number');
-      }
-      this.runInputCb(pi.cb(amount));
-    } else if (pi instanceof SelectSpace) {
-      this.checkInputLength(input, 1, 1);
-      const foundSpace = pi.availableSpaces.find(
-        (space) => space.id === input[0][0],
-      );
-      if (foundSpace === undefined) {
-        throw new Error('Space not available');
-      }
-      this.runInputCb(pi.cb(foundSpace));
-    } else if (pi instanceof SelectPlayer) {
-      this.checkInputLength(input, 1, 1);
-      const foundPlayer = pi.players.find(
-        (player) => player.color === input[0][0] || player.id === input[0][0],
-      );
-      if (foundPlayer === undefined) {
-        throw new Error('Player not available');
-      }
-      this.runInputCb(pi.cb(foundPlayer));
-    } else if (pi instanceof SelectDelegate) {
-      this.checkInputLength(input, 1, 1);
-      const foundPlayer = pi.players.find((player) =>
-        player === input[0][0] ||
-        (player instanceof Player && (player.id === input[0][0] || player.color === input[0][0])),
-      );
-      if (foundPlayer === undefined) {
-        throw new Error('Player not available');
-      }
-      this.runInputCb(pi.cb(foundPlayer));
-    } else if (pi instanceof SelectHowToPay) {
-      this.checkInputLength(input, 1, 1);
-      const howToPay: HowToPay = this.parseHowToPayJSON(input[0][0]);
-      this.runInputCb(pi.cb(howToPay));
-    } else if (pi instanceof SelectProductionToLose) {
-      // TODO(kberg): I'm sure there's some input validation required.
-      const units: Units = JSON.parse(input[0][0]);
-      pi.cb(units);
-    } else if (pi instanceof ShiftAresGlobalParameters) {
-      // TODO(kberg): I'm sure there's some input validation required.
-      const response: IAresGlobalParametersResponse = JSON.parse(input[0][0]);
-      pi.cb(response);
-    } else if (pi instanceof SelectPartyToSendDelegate) {
-      this.checkInputLength(input, 1, 1);
-      const party: PartyName = (input[0][0]) as PartyName;
-      if (party === undefined) {
-        throw new Error('No party selected');
-      }
-      this.runInputCb(pi.cb(party));
-    } else {
-      throw new Error('Unsupported waitingFor');
     }
   }
 
@@ -1977,7 +1844,7 @@ export class Player implements ISerializable<SerializedPlayer> {
     this.waitingForCb = undefined;
     try {
       this.timer.stop();
-      this.runInput(input, waitingFor);
+      waitingFor.runInput(this, input);
       waitingForCb();
     } catch (err) {
       this.setWaitingFor(waitingFor, waitingForCb);

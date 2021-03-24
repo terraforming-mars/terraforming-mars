@@ -43,8 +43,9 @@ export class IntragenSanctuaryHeadquarters implements CorporationCard {
     return this.onCardPlayed(player, card as ICard as IProjectCard);
   }
 
-  public onCardPlayed(_player: Player, card: IProjectCard): void {
-    this.resourceCount += card.tags.filter((tag) => tag === Tags.ANIMAL).length;
+  public onCardPlayed(player: Player, card: IProjectCard): void {
+    const count = card.tags.filter((tag) => tag === Tags.ANIMAL).length;
+    player.addResourceTo(this, count);
     return undefined;
   }
 

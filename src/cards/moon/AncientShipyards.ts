@@ -48,7 +48,7 @@ export class AncientShipyards extends MoonCard {
   public action(player: Player) {
     const deferredAction = new StealResources(player, Resources.MEGACREDITS, 8);
     deferredAction.stealComplete = () => {
-      this.resourceCount++;
+      player.addResourceTo(this, 1);
     };
     player.game.defer(deferredAction);
     return undefined;

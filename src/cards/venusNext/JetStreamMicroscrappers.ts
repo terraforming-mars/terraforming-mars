@@ -82,7 +82,7 @@ export class JetStreamMicroscrappers extends Card implements IActionCard, IResou
   }
 
   private spendResource(player: Player) {
-    this.resourceCount -= 2;
+    player.removeResourceFrom(this, 2);
     player.game.increaseVenusScaleLevel(player, 1);
     LogHelper.logVenusIncrease( player, 1);
     return undefined;

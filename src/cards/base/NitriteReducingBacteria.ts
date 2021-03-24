@@ -68,7 +68,7 @@ export class NitriteReducingBacteria extends Card implements IActionCard, IProje
 
       if (!redsAreRuling || (redsAreRuling && player.canAfford(REDS_RULING_POLICY_COST))) {
         orOptions.options.push(new SelectOption('Remove 3 microbes to increase your terraform rating 1 step', 'Remove microbes', () => {
-          this.resourceCount -= 3;
+          player.removeResourceFrom(this, 3);
           LogHelper.logRemoveResource(player, this, 3, 'gain 1 TR');
           player.increaseTerraformRating();
           return undefined;

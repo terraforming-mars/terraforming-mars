@@ -41,7 +41,7 @@ export class RefugeeCamps extends Card implements IProjectCard, IResourceCard {
 
   public action(player: Player) {
     player.addProduction(Resources.MEGACREDITS, -1);
-    this.resourceCount++;
+    player.addResourceTo(this, 1);
     return undefined;
   }
 

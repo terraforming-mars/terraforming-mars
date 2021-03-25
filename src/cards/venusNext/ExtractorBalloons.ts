@@ -40,8 +40,8 @@ export class ExtractorBalloons extends Card implements IActionCard, IResourceCar
 
   public resourceCount: number = 0;
 
-  public play() {
-    this.resourceCount += 3;
+  public play(player: Player) {
+    player.addResourceTo(this, 3);
     return undefined;
   }
   public canAct(): boolean {
@@ -58,7 +58,7 @@ export class ExtractorBalloons extends Card implements IActionCard, IResourceCar
     return new OrOptions(
       new SelectOption('Remove 2 floaters to raise Venus scale 1 step',
         'Remove floaters', () => {
-          this.resourceCount -= 2;
+          player.removeResourceFrom(this, 2);
           player.game.increaseVenusScaleLevel(player, 1);
           LogHelper.logVenusIncrease( player, 1);
           return undefined;

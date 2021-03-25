@@ -56,7 +56,7 @@ export class StormCraftIncorporated extends Card implements IActionCard, Corpora
   public action(player: Player) {
     const floaterCards = player.getResourceCards(ResourceType.FLOATER);
     if (floaterCards.length === 1) {
-      this.resourceCount++;
+      player.addResourceTo(this, 1);
       LogHelper.logAddResource(player, this);
       return undefined;
     }

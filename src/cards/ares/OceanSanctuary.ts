@@ -41,7 +41,7 @@ export class OceanSanctuary extends Card implements IResourceCard {
   }
 
   public play(player: Player) {
-    this.resourceCount++;
+    player.addResourceTo(this, 1);
     return new SelectSpace(
       'Select space for Ocean Sanctuary',
       player.game.board.getOceansTiles(false),

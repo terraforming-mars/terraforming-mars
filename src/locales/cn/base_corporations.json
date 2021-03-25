@@ -5,11 +5,6 @@
   "You start with 45 MC. Increase your MC production 2 steps. 1 VP per 2 animals on this card.":"你起始获得45MC。提升你的MC产能2级。牌上每2个动物资源1分",
   "Effect: When you play an animal or plant tag, including<br> this, add 1 animal<br> to this card.":"效果:当你打出动物或植物标志时(包括本牌),在此牌上放置1个动物资源",
 
-  "You start with 50 MC. As your first action, reveal cards from the deck until you have revealed 3 Venus-tag cards. Take those into hand and discard the rest.":"起始获得50MC。作为你的第一个行动,展示牌库的牌直到展示出3张带有金星标志的牌。把这3张牌加入手中,并弃掉剩余的牌。",
-  "Effect: Your Venus requirements are +/- 2 steps, your choice in each case.":"效果:你打出的牌中,受到金星改造度条件限制时 +/- 2格",
-
-  "You start with 1 plant production and 47 MC)":"起始获得47MC,提升植物产能1级",
-  "Effect: Whenever Venus is terraformed 1 step, you gain 2MC.":"效果:每当金星改造度提升1格,你都获得2MC",
 
   "You start with 1 energy production and 48 MC.":"起始获得48MC,提升电力产能1级",
   "Effect: When playing a power card OR THE STANDARD PROJECT POWER PLANT, you pay 3 MC less for it.":"效果:每当你打出带有电力标志,或执行标准行动中建立发电厂行动时,均可少支付3MC",
@@ -43,9 +38,7 @@
 
   "You start with 1 titanium production, and 38 MC.":"起始获得38MC,提升钛合金产能1级",
 
-  "You start with 42 MC. As your first action, reveal cards from the deck until you have revealed 2 cards with a floater icon on it. Take those 2 cards into hand and discard the rest.":"起始获得42MC。作为你的第一个行动,从牌库顶展示牌,直到展示出2张带有云图标的牌。将那2张牌加入手牌,并弃掉剩余的牌。",
-  "Action: Add a floater to ANY card.":"行动:放置1个云资源到任意卡牌",
-  "1 VP per 3 floaters on this card.":"本牌上每3个云资源获得1分",
+ 
 
   "As your first action in the game, draw 3 cards. Start with 45MC.":"起始获得45MC。作为你的第一个行动,抽3张牌",
   "Effect: Your temperature, oxygen, ocean, and Venus requirements are +2 or -2 steps, your choice in each case.":"效果:你打牌时的 温度/氧气浓度/海洋 要求 +2格或-2格",
@@ -59,7 +52,6 @@
   "You start with 57 MC.":"起始获得57MC",
   "Effect: After you pay for a card or standard project with a basic cost of 20MC or more, you gain 4MC.":"效果:当你打出一张20MC以上的卡,或执行一个20MC以上的标准行动时,你获得4MC",
 
-  "You start with 48 MC.":"起始获得48MC",
   "Effect: Floaters on this card may be used as 2 heat each.":"效果:本卡上的云资源能当做2个热能资源使用",
 
   "Action: Use a blue card action that has already been used this generation":"行动:执行一次本时代已经使用过的蓝卡行动" ,
@@ -89,10 +81,7 @@
   "You start with 44 MC. As your first action, reveal cards until you have revealed a microbe tag. Take that card into hand and discard the rest.":"你起始拥有44元。作为你的第一个行动，亮出牌堆顶的牌直至有微生物标志被亮出。获得那张带微生物标志的牌并弃置其余亮出的牌。",
 
   "You start with 1 plant production and 47 MC":"你起始拥有47元及1点植物产能。",
-  "Effect: For each step you increase the production of a resource, including this, you also gain that resource.":"效果：包括本牌在内，每当你提升1点标准资源产能，获得1个对应资源。",
-  
-  "You start with 1 steel production, and 35 MC":"你起始时拥有35元及1点钢铁产能。",
-  "Action: Use a blue card action that has already been used this generation.":"行动：选择一张本世代已执行行动的蓝色卡牌，再次执行该行动。"
+ 
 
 
 }

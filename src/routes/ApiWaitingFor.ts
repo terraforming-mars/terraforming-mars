@@ -22,8 +22,7 @@ export class ApiWaitingFor extends Handler {
 
   public get(req: http.IncomingMessage, res: http.ServerResponse, ctx: IContext): void {
     const playerId = String(ctx.url.searchParams.get('id'));
-    // TODO bafolts remove prev-game-age by 2020-04-01
-    const gameAge = Number(ctx.url.searchParams.get('gameAge') ?? ctx.url.searchParams.get('prev-game-age'));
+    const gameAge = Number(ctx.url.searchParams.get('gameAge'));
     const undoCount = Number(ctx.url.searchParams.get('undoCount'));
     ctx.gameLoader.getByPlayerId(playerId, (game) => {
       if (game === undefined) {

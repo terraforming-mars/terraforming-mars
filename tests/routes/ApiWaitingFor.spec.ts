@@ -25,7 +25,7 @@ describe('ApiWaitingFor', function() {
   });
 
   it('fails when game not found', () => {
-    req.url = '/api/waitingfor?id=game-id&prev-game-age=123';
+    req.url = '/api/waitingfor?id=game-id&gameAge=123&undoCount=0';
     ctx.url = new URL('http://boo.com' + req.url);
     ApiWaitingFor.INSTANCE.get(req, res.hide(), ctx);
     expect(res.content).eq('Not found: cannot find game for that player');
@@ -33,7 +33,7 @@ describe('ApiWaitingFor', function() {
 
   it('fails when player not found', () => {
     const player = TestPlayers.BLACK.newPlayer();
-    req.url = '/api/waitingfor?id=' + player.id + '&prev-game-age=50';
+    req.url = '/api/waitingfor?id=' + player.id + '&gameAge=50&undoCount=0';
     ctx.url = new URL('http://boo.com' + req.url);
     const game = Game.newInstance('game-id', [player], player);
     ctx.gameLoader.add(game);
@@ -46,7 +46,7 @@ describe('ApiWaitingFor', function() {
 
   it('sends model', () => {
     const player = TestPlayers.BLACK.newPlayer();
-    req.url = '/api/waitingfor?id=' + player.id + '&prev-game-age=50';
+    req.url = '/api/waitingfor?id=' + player.id + '&gameAge=50&undoCount=0';
     ctx.url = new URL('http://boo.com' + req.url);
     const game = Game.newInstance('game-id', [player], player);
     ctx.gameLoader.add(game);

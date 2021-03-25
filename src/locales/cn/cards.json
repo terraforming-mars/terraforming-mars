@@ -698,13 +698,8 @@
   "Standard projects":"标准项目",
    "steal":"偷取",
    "next card":"下张牌",
-    "Copy A":"复制一个",
+    "Copy A":"复制一个"
 
-  "Requires 2 Earth tags. Increase MC production 4 steps.":"需要两个地球图标.增加4点MC产能",
-  "Oxygen must be 4% or lower. Draw two cards.":"氧气浓度≤4%.抽两张卡",
-  "After being played, when you perform an action, the wild tag counts as any tag of your choice.":"打出来之后，当你执行行动时，问号可以视为任意标志",
-  "Decrease your energy production 1 step and increase your MC production 2 steps. Place a City Tile on a VOLCANIC AREA regardless of adjacent cities.":"减少1点电力产能，提升2点金钱产能。放置一个城市版块到火山区，忽视相邻规则",
-  "Effect: When paying for a plant card, microbes here may be used as 2 MC each.":"效果：当你打出植物标志的卡牌是，这张卡上的每个微生物资源可以作为2MC支付",
-  "Temperature must be -20 C or lower.":"温度必须 ≤ -20℃"
+
 }
 

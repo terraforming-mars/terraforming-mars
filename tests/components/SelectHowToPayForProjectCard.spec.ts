@@ -1,9 +1,11 @@
-
 import {createLocalVue, mount} from '@vue/test-utils';
 
 import {expect} from 'chai';
 import {CardName} from '../../src/CardName';
+import {CardType} from '../../src/cards/CardType';
 import {SelectHowToPayForProjectCard} from '../../src/components/SelectHowToPayForProjectCard';
+import {PlayerInputModel} from '../../src/models/PlayerInputModel';
+import {PlayerModel} from '../../src/models/PlayerModel';
 import {Units} from '../../src/Units';
 
 describe('SelectHowToPayForProjectCard', function() {
@@ -254,14 +256,61 @@ describe('SelectHowToPayForProjectCard', function() {
     expect(titaniumTextBox.value).eq('1');
   });
 
+  it('select Luna Train Station limits how much steel you can use', async () => {
+    // Luna Train Station costs 20, and will need 2 steel. Player has 20 MC and 4 steel.
+    //
+    // The algorithm will select 20 MC,
+    //
+    // Then when clicking the 'max' button for steel, the algorithm will switch to 16 MC and 2 steel.
+    const wrapper = setupCardForPurchase(
+      CardName.LUNA_TRAIN_STATION, 20,
+      {
+        megaCredits: 20,
+        steel: 4,
+        steelValue: 2,
+        titaniumValue: 0, // Needed for when setReminingMCValue is called.
+      },
+      {canUseSteel: true},
+      Units.of({steel: 2}));
+
+    const vm = wrapper.vm;
+    await vm.$nextTick();
+
+    expect(vm.megaCredits).eq(20);
+    expect(vm.steel).eq(0);
+    const maxButton = wrapper.find('[title~=Steel] ~ .btn-max');
+    await maxButton.trigger('click');
+
+    expect(vm.megaCredits).eq(16);
+    expect(vm.steel).eq(2);
+  });
+
   const setupCardForPurchase = function(
-    cardName: CardName, cardCost: number, playerFields: object, playerInputFields: object) {
-    const player = Object.assign({
-      cardsInHand: [{name: cardName, calculatedCost: cardCost, reserveUnits: Units.of({})}],
+    cardName: CardName,
+    cardCost: number,
+    playerFields: Partial<PlayerModel>,
+    playerInputFields: Partial<PlayerInputModel>,
+    reserveUnits: Units = Units.EMPTY) {
+    const player: Partial<PlayerModel> = Object.assign({
+      cards: [{name: cardName, calculatedCost: cardCost}],
       id: 'foo',
-      selfReplicatingRobotCards: [],
+      steel: 0,
+      titanium: 0,
     }, playerFields);
-    const playerInput = Object.assign({title: 'foo', cards: [{name: cardName}]}, playerInputFields);
+
+    const playerInput: Partial<PlayerInputModel> = {
+      title: 'foo',
+      cards: [{
+        name: cardName,
+        resources: undefined,
+        resourceType: undefined,
+        cardType: CardType.ACTIVE,
+        isDisabled: false,
+        reserveUnits: reserveUnits,
+        calculatedCost: cardCost,
+      }],
+    };
+    Object.assign(playerInput, playerInputFields);
 
     return mount(SelectHowToPayForProjectCard, {
       localVue: getLocalVue(),

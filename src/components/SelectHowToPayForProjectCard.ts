@@ -31,7 +31,6 @@ import {PlayerModel} from '../models/PlayerModel';
 import {PreferencesManager} from './PreferencesManager';
 import {TranslateMixin} from './TranslateMixin';
 import {CardName} from '../CardName';
-// import {Units} from '../Units';
 
 export const SelectHowToPayForProjectCard = Vue.component('select-how-to-pay-for-project-card', {
   props: {
@@ -101,7 +100,7 @@ export const SelectHowToPayForProjectCard = Vue.component('select-how-to-pay-for
   },
   methods: {
     getCard: function() {
-      const card = this.player.cardsInHand.concat(this.player.selfReplicatingRobotsCards).find((c) => c.name === this.cardName);
+      const card = this.cards.find((c) => c.name === this.cardName); // this.player.cardsInHand.concat(this.player.selfReplicatingRobotsCards).find((c) => c.name === this.cardName);
       if (card === undefined) {
         throw new Error(`card not found ${this.cardName}`);
       }
@@ -167,15 +166,14 @@ export const SelectHowToPayForProjectCard = Vue.component('select-how-to-pay-for
       if (megacreditBalance > 0 && this.canUseFloaters()) {
         this.floaters = deductUnits(this.playerinput.floaters, 3);
       }
-
+      this.availableSteel = Math.max(this.player.steel - this.card.reserveUnits.steel, 0);
       if (megacreditBalance > 0 && this.canUseSteel()) {
-        const availableSteel = Math.max(this.player.steel - this.card.reserveUnits.steel, 0);
-        this.steel = deductUnits(availableSteel, this.player.steelValue, true);
+        this.steel = deductUnits(this.availableSteel, this.player.steelValue, true);
       }
 
+      this.availableTitanium = Math.max(this.player.titanium - this.card.reserveUnits.titanium, 0);
       if (megacreditBalance > 0 && this.canUseTitanium()) {
-        const availableTitanium = Math.max(this.player.titanium - this.card.reserveUnits.titanium, 0);
-        this.titanium = deductUnits(availableTitanium, this.player.titaniumValue, true);
+        this.titanium = deductUnits(this.availableTitanium, this.player.titaniumValue, true);
       }
 
       if (megacreditBalance > 0 && this.canUseHeat()) {
@@ -188,7 +186,7 @@ export const SelectHowToPayForProjectCard = Vue.component('select-how-to-pay-for
         // We need not try to save heat since heat is paid last at value 1. We will never overspend in heat.
         // We do not need to save Ti either because Ti is paid last before heat. If we overspend, it is because of Ti.
         // We cannot reduce the amount of Ti and still pay enough.
-        this.steel -= saveOverSpendingUnits(this.steel, this.player.steelValue);
+        this.steel -= saveOverSpendingUnits(this.availableSteel, this.player.steelValue);
         this.floaters -= saveOverSpendingUnits(this.floaters, 3);
         this.microbes -= saveOverSpendingUnits(this.microbes, 2);
         this.megaCredits -= saveOverSpendingUnits(this.megaCredits, 1);
@@ -198,7 +196,7 @@ export const SelectHowToPayForProjectCard = Vue.component('select-how-to-pay-for
       return this.playerinput.canUseHeat && this.player.heat > 0;
     },
     canUseSteel: function() {
-      if (this.card !== undefined && this.player.steel > 0) {
+      if (this.card !== undefined && this.availableSteel > 0) {
         if (this.tags.find((tag) => tag === Tags.BUILDING) !== undefined) {
           return true;
         }
@@ -206,7 +204,7 @@ export const SelectHowToPayForProjectCard = Vue.component('select-how-to-pay-for
       return false;
     },
     canUseTitanium: function() {
-      if (this.card !== undefined && this.player.titanium > 0) {
+      if (this.card !== undefined && this.availableTitanium > 0) {
         if (this.tags.find((tag) => tag === Tags.SPACE) !== undefined) {
           return true;
         }
@@ -361,8 +359,8 @@ export const SelectHowToPayForProjectCard = Vue.component('select-how-to-pay-for
       <i class="resource_icon resource_icon--steel payments_type_icon" title="Pay by Steel"></i>
       <Button type="minus" :onClick="_=>reduceValue('steel', 1)" />
       <input class="form-input form-inline payments_input" v-model.number="steel" />
-      <Button type="plus" :onClick="_=>addValue('steel', 1)" />
-      <Button type="max" :onClick="_=>setMaxValue('steel')" title="MAX" />
+      <Button type="plus" :onClick="_=>addValue('steel', 1, this.availableSteel)" />
+      <Button type="max" :onClick="_=>setMaxValue('steel', this.availableSteel)" title="MAX" />
     </div>
     <div v-if="showReserveSteelWarning()" class="card-warning" v-i18n>
     (Some steel is unavailable here in reserve for the project card.)
@@ -372,8 +370,8 @@ export const SelectHowToPayForProjectCard = Vue.component('select-how-to-pay-for
       <i class="resource_icon resource_icon--titanium payments_type_icon" :title="$t('Pay by Titanium')"></i>
       <Button type="minus" :onClick="_=>reduceValue('titanium', 1)" />
       <input class="form-input form-inline payments_input" v-model.number="titanium" />
-      <Button type="plus" :onClick="_=>addValue('titanium', 1)" />
-      <Button type="max" :onClick="_=>setMaxValue('titanium')" title="MAX" />
+      <Button type="plus" :onClick="_=>addValue('titanium', 1, this.availableTitanium)" />
+      <Button type="max" :onClick="_=>setMaxValue('titanium', this.availableTitanium)" title="MAX" />
     </div>
     <div v-if="showReserveTitaniumWarning()" class="card-warning" v-i18n>
     (Some titanium is unavailable here in reserve for the project card.)

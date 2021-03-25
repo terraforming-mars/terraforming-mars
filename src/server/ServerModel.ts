@@ -38,7 +38,6 @@ import {SelectProductionToLose} from '../inputs/SelectProductionToLose';
 import {ShiftAresGlobalParameters} from '../inputs/ShiftAresGlobalParameters';
 import {SpectatorModel} from '../models/SpectatorModel';
 import {MoonModel} from '../models/MoonModel';
-import {CardName} from '../CardName';
 import {Units} from '../Units';
 import {SelectPartyToSendDelegate} from '../inputs/SelectPartyToSendDelegate';
 
@@ -264,7 +263,7 @@ function getWaitingFor(
     break;
   case PlayerInputTypes.SELECT_HOW_TO_PAY_FOR_PROJECT_CARD:
     const shtpfpc: SelectHowToPayForProjectCard = waitingFor as SelectHowToPayForProjectCard;
-    playerInputModel.cards = getCards(player, shtpfpc.cards, {showNewCost: true, reserveUnitMap: shtpfpc.reserveUnitsMap});
+    playerInputModel.cards = getCards(player, shtpfpc.cards, {showNewCost: true, reserveUnits: shtpfpc.reserveUnits});
     playerInputModel.microbes = shtpfpc.microbes;
     playerInputModel.floaters = shtpfpc.floaters;
     playerInputModel.canUseHeat = shtpfpc.canUseHeat;
@@ -351,7 +350,7 @@ function getCards(
   options: {
     showResources?: boolean,
     showNewCost?: boolean,
-    reserveUnitMap?: Map<CardName, Units>,
+    reserveUnits?: Array<Units>,
     enabled?: Array<boolean>, // If provided, then the cards with false in `enabled` are not selectable and grayed out
   } = {},
 ): Array<CardModel> {
@@ -363,7 +362,7 @@ function getCards(
     cardType: card.cardType,
     isDisabled: options.enabled?.[index] === false,
     warning: card.warning,
-    reserveUnits: options.reserveUnitMap?.get(card.name) || Units.EMPTY,
+    reserveUnits: options.reserveUnits ? options.reserveUnits[index] : Units.EMPTY,
     bonusResource: (card as IProjectCard).bonusResource,
     discount: card.cardDiscount,
   }));

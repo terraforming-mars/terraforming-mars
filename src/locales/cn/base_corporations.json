@@ -8,11 +8,6 @@
   "You start with 50 MC. As your first action, reveal cards from the deck until you have revealed 3 Venus-tag cards. Take those into hand and discard the rest.":"起始获得50MC。作为你的第一个行动,展示牌库的牌直到展示出3张带有金星标志的牌。把这3张牌加入手中,并弃掉剩余的牌。",
   "Effect: Your Venus requirements are +/- 2 steps, your choice in each case.":"效果:你打出的牌中,受到金星改造度条件限制时 +/- 2格",
 
-
-  "You start with 3 MC production and 44 MC.":"起始获得44MC,提升MC产能3级",
-  "Effect: When you play a building tag, you pay 2 MC less for it.":"效果:当你打出带有建筑标志的牌时,你可以少支付2MC",
-
-
   "You start with 1 plant production and 47 MC)":"起始获得47MC,提升植物产能1级",
   "Effect: Whenever Venus is terraformed 1 step, you gain 2MC.":"效果:每当金星改造度提升1格,你都获得2MC",
 
@@ -28,8 +23,6 @@
   "You start with 3 heat production and 42 MC.":"起始获得42MC,提升热能产能3级",
   "Effect: You may use heat as MC. You may not use MC as heat.":"效果:你可以用热能资源代替MC使用,但不用用MC代替热能资源使用",
 
-  "You start with 45 MC. As your first action, fund an award for free.":"起始获得45MC。作为你的起始行动,你可以免费资助一个奖项",
-  "Effect: When you play a card with a NON-NEGATIVE VP icon, including this, gain 3MC.":"效果:当你打出一张有非负分图标的牌(包括本牌)时,获得3MC",
 
   "You start with 50MC. Increase your MC production 5 steps. Gain 5 titanium.":"起始获得50MC。提升你的MC产能5级,获得5个钛合金",
   "Effect: When you buy a card to hand, pay 5MC instead of 3, including the starting hand.":"效果:当你购买手牌时,你需要支付5MC而非原本的3MC,包括起始的手牌",
@@ -47,8 +40,6 @@
   "You start with 40 MC. As your first action in the game,place a city tile.":"起始获得40MC。作为你的第一个行动,放置一个城市版块",
   "Effect: When any city tile is placed ON MARS, increase your MC production 1 step. When you place a city tile, gain 3 MC.":"效果:每当一个城市版块放置到火星上,提升你的MC产能1级。每当你放置一个城市版块,获得3MC",
 
-  "You start with 47 MC.":"起始获得47MC",
-  "Action: Spend 4 MC to increase (one of) your LOWEST PRODUCTION 1 step.":"行动:花费4MC,提升你1项产能最低的产能1级",
 
   "You start with 1 titanium production, and 38 MC.":"起始获得38MC,提升钛合金产能1级",
 
@@ -73,12 +64,8 @@
 
   "Action: Use a blue card action that has already been used this generation":"行动:执行一次本时代已经使用过的蓝卡行动" ,
 
-  "Effect: When you play an Earth tag, including this, draw a card.":"效果：你打出的牌上每有一个地球符号，包括此卡，抽一张牌。",
-  "You start with 1 titanium production and 38 MC.":"你起始拥有1点钛产量和38元。",
-  
-  "Effect: When you play an Science tag, you pay 2MC less for it.":"效果：你打出的牌上每有一个科学标志，你少为其支付2元。",
-  "You start with 37 MC. As your first action, draw 3 Prelude cards, and play one of them. Discard the other two.":"你起始拥有37元，作为游戏中的你的第一个行动，你必须抽三张前序卡，打出其中一张，然后弃掉剩余两张。",
-
+ 
+ 
   "Action: If your Terraform Rating was raised this generation, you may pay 3 MC to raise it 1 step more.":"行动：如果你的改造度在本时代有过提升，你可以支付3元来提升一点改造度。",
   "You start with 40 MC.":"你起始拥有40元。",
 

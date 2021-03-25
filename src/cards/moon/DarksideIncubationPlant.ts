@@ -68,7 +68,7 @@ export class DarksideIncubationPlant extends MoonCard implements IActionCard, IP
       if (this.resourceCount >= 2 && moonData.colonyRate < 8) {
         options.push(new SelectOption('Spend 2 microbes to raise the Colony Rate 1 step.', 'Select', () => {
           player.removeResourceFrom(this, 2);
-          LogHelper.logRemoveResource(player, this, 3, 'raise the Colony Rate');
+          LogHelper.logRemoveResource(player, this, 2, 'raise the Colony Rate');
           MoonExpansion.raiseColonyRate(player);
           return undefined;
         }));

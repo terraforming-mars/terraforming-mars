@@ -2,8 +2,7 @@
   "You start with 1 titanium production and 42 MC.":"你起始获得42MC和提升钛合金产能1级",
   "Effect: Each time any Jovian tag is put into play, including this, increase your MC production 1 step.":"效果:每次当有木星标志牌被打出时(包括本牌),提升你的MC产能1级",
 
-  "You start with 45 MC. Increase your MC production 2 steps. 1 VP per 2 animals on this card.":"你起始获得45MC。提升你的MC产能2级。牌上每2个动物资源1分",
-  "Effect: When you play an animal or plant tag, including<br> this, add 1 animal<br> to this card.":"效果:当你打出动物或植物标志时(包括本牌),在此牌上放置1个动物资源",
+  
 
 
   "You start with 1 energy production and 48 MC.":"起始获得48MC,提升电力产能1级",
@@ -19,8 +18,6 @@
   "Effect: You may use heat as MC. You may not use MC as heat.":"效果:你可以用热能资源代替MC使用,但不用用MC代替热能资源使用",
 
 
-  "You start with 50MC. Increase your MC production 5 steps. Gain 5 titanium.":"起始获得50MC。提升你的MC产能5级,获得5个钛合金",
-  "Effect: When you buy a card to hand, pay 5MC instead of 3, including the starting hand.":"效果:当你购买手牌时,你需要支付5MC而非原本的3MC,包括起始的手牌",
 
 
   "You start with 30 MC, 5 steel and 1 steel production.":"起始获得30MC,5个钢铁资源,提升钢铁产能1级",
@@ -29,8 +26,7 @@
   "You start with 40MC. As your first action add a colony tile.":"起始获得40MC。作为你的第一个行动,将一个殖民地板块加入游戏",
   "Effect: When you get a new type of tag in play (event cards do not count), increase your MC production 1 step.":"当你获得一个新的标志时(不计算事件卡),提升你的MC产能1级",
 
-  "You start with 45MC. As your first action, place a colony.":"起始获得45MC。作为你的第一个行动,放置一个殖民地",
-  "Effect: When any colony is placed, including this, raise your MC production 1 step.":"任何殖民地放置时，增加你的MC产能1级，包括这个",
+  
 
   "You start with 40 MC. As your first action in the game,place a city tile.":"起始获得40MC。作为你的第一个行动,放置一个城市版块",
   "Effect: When any city tile is placed ON MARS, increase your MC production 1 step. When you place a city tile, gain 3 MC.":"效果:每当一个城市版块放置到火星上,提升你的MC产能1级。每当你放置一个城市版块,获得3MC",
@@ -52,7 +48,7 @@
   "You start with 57 MC.":"起始获得57MC",
   "Effect: After you pay for a card or standard project with a basic cost of 20MC or more, you gain 4MC.":"效果:当你打出一张20MC以上的卡,或执行一个20MC以上的标准行动时,你获得4MC",
 
-  "Effect: Floaters on this card may be used as 2 heat each.":"效果:本卡上的云资源能当做2个热能资源使用",
+ 
 
   "Action: Use a blue card action that has already been used this generation":"行动:执行一次本时代已经使用过的蓝卡行动" ,
 

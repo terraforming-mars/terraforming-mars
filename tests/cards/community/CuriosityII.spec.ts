@@ -20,10 +20,10 @@ describe('CuriosityII', function() {
     game.phase = Phase.ACTION;
 
     player.corporationCard = card;
-    player.megaCredits = 3;
+    player.megaCredits = 2;
   });
 
-  it('Can pay 3 MC to draw card when placing a tile on a non-empty space', function() {
+  it('Can pay 2 MC to draw card when placing a tile on a non-empty space', function() {
     const nonEmptySpace = game.board.getAvailableSpacesOnLand(player).find((space) => space.bonus.length > 0)!;
     game.addCityTile(player, nonEmptySpace.id);
     player.cardsInHand = [];
@@ -33,9 +33,9 @@ describe('CuriosityII', function() {
 
     orOptions.options[1].cb(); // Do nothing
     expect(player.cardsInHand).is.empty;
-    expect(player.megaCredits).to.eq(3);
+    expect(player.megaCredits).to.eq(2);
 
-    orOptions.options[0].cb(); // Pay 3 MC to draw a card
+    orOptions.options[0].cb(); // Pay 2 MC to draw a card
     TestingUtils.runAllActions(game);
     expect(player.cardsInHand).has.lengthOf(1);
     expect(player.megaCredits).to.eq(0);
@@ -47,7 +47,7 @@ describe('CuriosityII', function() {
     TestingUtils.runAllActions(game);
 
     expect(player.cardsInHand).is.empty;
-    expect(player.megaCredits).to.eq(3);
+    expect(player.megaCredits).to.eq(2);
   });
 
   it('Does not trigger when opponent places a tile', function() {
@@ -56,10 +56,10 @@ describe('CuriosityII', function() {
     TestingUtils.runAllActions(game);
 
     expect(player.cardsInHand).is.empty;
-    expect(player.megaCredits).to.eq(3);
+    expect(player.megaCredits).to.eq(2);
   });
 
-  it('Placing a tile on top of antoher one triggers the bonus', () => {
+  it('Placing a tile on top of another one triggers the bonus', () => {
     // particularly when the space bonus is empty.
     const oceanSpace = game.board.getAvailableSpacesForOcean(player2).find((space) => space.bonus.length === 0)!;
     game.board.getSpace(oceanSpace.id).tile = {tileType: TileType.OCEAN};
@@ -69,7 +69,7 @@ describe('CuriosityII', function() {
     action.cb(oceanSpace);
 
     const orOptions = game.deferredActions.pop()!.execute() as OrOptions;
-    orOptions.options[0].cb(); // Pay 3 MC to draw a card
+    orOptions.options[0].cb(); // Pay 2 MC to draw a card
     TestingUtils.runAllActions(game);
 
     expect(player.cardsInHand).has.lengthOf(1);

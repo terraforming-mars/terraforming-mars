@@ -34,9 +34,9 @@ export class CuriosityII extends Card implements CorporationCard {
           b.corpBox('effect', (ce) => {
             ce.effect(
               'When you place a tile on an area that has a RESOURCE placement bonus, ' +
-              'or on top of another tile, you may pay 3 MC to draw a card. ',
+              'or on top of another tile, you may pay 2 MC to draw a card.',
               (eb) => {
-                eb.emptyTile('normal', CardRenderItemSize.SMALL).nbsp.asterix().startEffect.megacredits(-3).cards(1);
+                eb.emptyTile('normal', CardRenderItemSize.SMALL).nbsp.asterix().startEffect.megacredits(-2).cards(1);
               });
           });
         }),
@@ -62,11 +62,11 @@ export class CuriosityII extends Card implements CorporationCard {
   }
 
   private corpAction(player: Player) {
-    if (!player.canAfford(3)) return undefined;
+    if (!player.canAfford(2)) return undefined;
 
     return new OrOptions(
-      new SelectOption('Pay 3 MC to draw a card', 'Confirm', () => {
-        player.game.defer(new SelectHowToPayDeferred(player, 3, {title: 'Select how to pay for action'}));
+      new SelectOption('Pay 2 MC to draw a card', 'Confirm', () => {
+        player.game.defer(new SelectHowToPayDeferred(player, 2, {title: 'Select how to pay for action'}));
         player.game.defer(DrawCards.keepAll(player));
         return undefined;
       }),

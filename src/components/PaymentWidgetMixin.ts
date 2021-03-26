@@ -44,7 +44,7 @@ export const PaymentWidgetMixin = {
     },
     addValue: function(target: string, to: number, max?: number): void {
       const currentValue: number = (this as any)[target];
-      let maxValue: number = max !== undefined ? max : (this as any).player[target];
+      let maxValue: number = max ?? (this as any).player[target];
 
       if (target === 'megaCredits') {
         maxValue = this.getMegaCreditsMax();

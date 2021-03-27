@@ -1,25 +1,25 @@
-import {CardModel} from '../models/CardModel';
-import {ColonyModel} from '../models/ColonyModel';
+import {CardModel} from './CardModel';
+import {ColonyModel} from './ColonyModel';
 import {Color} from '../Color';
 import {Game, GameOptions} from '../Game';
-import {GameHomeModel} from '../models/GameHomeModel';
-import {GameOptionsModel} from '../models/GameOptionsModel';
+import {GameHomeModel} from './GameHomeModel';
+import {GameOptionsModel} from './GameOptionsModel';
 import {ICard} from '../cards/ICard';
 import {IProjectCard} from '../cards/IProjectCard';
 import {Board} from '../boards/Board';
 import {ISpace} from '../boards/ISpace';
 import {Player} from '../Player';
 import {PlayerInput} from '../PlayerInput';
-import {PlayerInputModel} from '../models/PlayerInputModel';
+import {PlayerInputModel} from './PlayerInputModel';
 import {PlayerInputTypes} from '../PlayerInputTypes';
-import {PlayerModel} from '../models/PlayerModel';
+import {PlayerModel} from './PlayerModel';
 import {SelectAmount} from '../inputs/SelectAmount';
 import {SelectCard} from '../inputs/SelectCard';
 import {SelectHowToPay} from '../inputs/SelectHowToPay';
 import {SelectHowToPayForProjectCard} from '../inputs/SelectHowToPayForProjectCard';
 import {SelectPlayer} from '../inputs/SelectPlayer';
 import {SelectSpace} from '../inputs/SelectSpace';
-import {SpaceHighlight, SpaceModel} from '../models/SpaceModel';
+import {SpaceHighlight, SpaceModel} from './SpaceModel';
 import {TileType} from '../TileType';
 import {Phase} from '../Phase';
 import {Resources} from '../Resources';
@@ -27,17 +27,17 @@ import {CardType} from '../cards/CardType';
 import {
   ClaimedMilestoneModel,
   IMilestoneScore,
-} from '../models/ClaimedMilestoneModel';
-import {FundedAwardModel, IAwardScore} from '../models/FundedAwardModel';
+} from './ClaimedMilestoneModel';
+import {FundedAwardModel, IAwardScore} from './FundedAwardModel';
 import {
   getTurmoil,
-} from '../models/TurmoilModel';
+} from './TurmoilModel';
 import {SelectDelegate} from '../inputs/SelectDelegate';
 import {SelectColony} from '../inputs/SelectColony';
 import {SelectProductionToLose} from '../inputs/SelectProductionToLose';
 import {ShiftAresGlobalParameters} from '../inputs/ShiftAresGlobalParameters';
-import {SpectatorModel} from '../models/SpectatorModel';
-import {MoonModel} from '../models/MoonModel';
+import {SpectatorModel} from './SpectatorModel';
+import {MoonModel} from './MoonModel';
 import {Units} from '../Units';
 import {SelectPartyToSendDelegate} from '../inputs/SelectPartyToSendDelegate';
 

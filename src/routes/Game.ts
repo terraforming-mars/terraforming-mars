@@ -7,7 +7,7 @@ import {Cloner} from '../database/Cloner';
 import {GameLoader} from '../database/GameLoader';
 import {Game} from '../Game';
 import {Player} from '../Player';
-import {Server} from '../server/ServerModel';
+import {Server} from '../models/ServerModel';
 import {ServeAsset} from './ServeAsset';
 
 // Oh, this could be called Game, but that would introduce all kinds of issues.

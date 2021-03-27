@@ -1,6 +1,6 @@
 import {expect} from 'chai';
 
-import {BufferCache} from '../../src/server/BufferCache';
+import {BufferCache} from '../../src/routes/BufferCache';
 
 describe('BufferCache', function() {
   it('sets with hash', function() {

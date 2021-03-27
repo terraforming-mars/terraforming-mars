@@ -77,7 +77,7 @@ export const PaymentWidgetMixin = {
     setMaxValue: function(target: string, max?: number): void {
       let currentValue: number = (this as any)[target];
       const cardCost: number = (this as any).$data.cost;
-      let amountHave: number = max !== undefined ? max : (this as any).player[target];
+      let amountHave: number = max ?? (this as any).player[target];
 
       let amountNeed: number = cardCost;
       if (['titanium', 'steel', 'microbes', 'floaters'].includes(target)) {

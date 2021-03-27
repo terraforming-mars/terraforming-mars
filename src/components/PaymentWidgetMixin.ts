@@ -42,9 +42,9 @@ export const PaymentWidgetMixin = {
 
       this.setRemainingMCValue();
     },
-    addValue: function(target: string, to: number): void {
+    addValue: function(target: string, to: number, max?: number): void {
       const currentValue: number = (this as any)[target];
-      let maxValue: number = (this as any).player[target];
+      let maxValue: number = max ?? (this as any).player[target];
 
       if (target === 'megaCredits') {
         maxValue = this.getMegaCreditsMax();
@@ -74,10 +74,10 @@ export const PaymentWidgetMixin = {
 
       (this as any)['megaCredits'] = Math.max(0, Math.min(this.getMegaCreditsMax(), remainingMC));
     },
-    setMaxValue: function(target: string): void {
+    setMaxValue: function(target: string, max?: number): void {
       let currentValue: number = (this as any)[target];
       const cardCost: number = (this as any).$data.cost;
-      let amountHave: number = (this as any).player[target];
+      let amountHave: number = max ?? (this as any).player[target];
 
       let amountNeed: number = cardCost;
       if (['titanium', 'steel', 'microbes', 'floaters'].includes(target)) {
@@ -91,7 +91,7 @@ export const PaymentWidgetMixin = {
       }
 
       while (currentValue < amountHave && currentValue < amountNeed) {
-        this.addValue(target, 1);
+        this.addValue(target, 1, max);
         currentValue++;
       }
     },

@@ -756,14 +756,6 @@ export class Player implements ISerializable<SerializedPlayer> {
     return false;
   }
 
-  public getCard(cards: Array<IProjectCard>, cardName: string): IProjectCard {
-    const foundCard = cards.find((card) => card.name === cardName);
-    if (foundCard === undefined) {
-      throw new Error('Card not found');
-    }
-    return foundCard;
-  }
-
   private runInputCb(result: PlayerInput | undefined): void {
     if (result !== undefined) {
       this.game.defer(new DeferredAction(this, () => result));
@@ -800,7 +792,7 @@ export class Player implements ISerializable<SerializedPlayer> {
   }
 
   // This is only public for a test. It's not great.
-  // TODO(kberg): Fix taht.
+  // TODO(kberg): Fix that.
   public runInput(input: ReadonlyArray<ReadonlyArray<string>>, pi: PlayerInput): void {
     if (pi instanceof AndOptions) {
       this.checkInputLength(input, pi.options.length);
@@ -841,8 +833,17 @@ export class Player implements ISerializable<SerializedPlayer> {
       this.runInputCb(pi.cb());
     } else if (pi instanceof SelectHowToPayForProjectCard) {
       this.checkInputLength(input, 1, 2);
-      const foundCard: IProjectCard = this.getCard(pi.cards, input[0][0]);
+      const cardName = input[0][0];
+      const _data = PlayerInput.getCard(pi.cards, cardName);
+      const foundCard: IProjectCard = _data.card;
       const howToPay: HowToPay = this.parseHowToPayJSON(input[0][1]);
+      const reserveUnits = pi.reserveUnits[_data.idx];
+      if (reserveUnits.steel + howToPay.steel > this.steel) {
+        throw new Error(`${reserveUnits.steel} units of steel must be reserved for ${cardName}`);
+      }
+      if (reserveUnits.titanium + howToPay.titanium > this.titanium) {
+        throw new Error(`${reserveUnits.titanium} units of titanium must be reserved for ${cardName}`);
+      }
       this.runInputCb(pi.cb(foundCard, howToPay));
     } else if (pi instanceof SelectCard) {
       this.checkInputLength(input, 1);
@@ -854,7 +855,7 @@ export class Player implements ISerializable<SerializedPlayer> {
       }
       const mappedCards: Array<ICard> = [];
       for (const cardName of input[0]) {
-        mappedCards.push(this.getCard(pi.cards, cardName));
+        mappedCards.push(PlayerInput.getCard(pi.cards, cardName).card);
         if (pi.enabled?.[pi.cards.findIndex((card) => card.name === cardName)] === false) {
           throw new Error('Selected unavailable card');
         }

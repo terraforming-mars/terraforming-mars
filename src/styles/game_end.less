@@ -1,5 +1,5 @@
 body {
-    background: rgb(50,53,59);
+    background: rgb(53,57,63);
 }
 
 .game_end_success, .game_end_fail {
@@ -32,7 +32,6 @@ body {
 
 .game_end_table {
     width: auto;
-    font-family: Prototype;
     background: #222;
 
     td, th {
@@ -58,7 +57,7 @@ body {
         height: 36px;
         background-size: 30px 36px;
         vertical-align: middle;
-        filter: drop-shadow(0px 0px 1px black);
+        filter: drop-shadow(0px 0px 1px black) brightness(0.8);
     }
     .table-city-tile {
         background-image: url(./assets/tiles/city.png);
@@ -84,6 +83,7 @@ body {
         background-size: 46px 38px;
     }
     .vp {
+        font-family: 'Prototype';
         font-size: 18px;
         color: black;
         font-weight: normal !important;
@@ -115,6 +115,8 @@ body {
         position: relative;
         vertical-align: sub;
         text-shadow: none;
+        background-repeat: no-repeat;
+        filter: brightness(0.8);
     }
     .mc-icon::after {
         position: absolute;
@@ -129,6 +131,9 @@ body {
         line-height: 27px;
         left: 0px;
         font-size: 18px;
+    }
+    .clock-icon {
+        filter: brightness(0.8);
     }
     .column-corporation {
         width: 300px;
@@ -145,8 +150,6 @@ body {
 
     .game-end-player {
         text-align: center;
-        font-family: 'Prototype';
-        letter-spacing: 1px;
         text-shadow: 0 0px 2px black, 0 1px 1px black;
         font-size: 23px;
     }

@@ -146,6 +146,7 @@ export class RoboticWorkforce extends Card implements IProjectCard {
     CardName.MINING_GUILD,
     CardName.RECYCLON,
     CardName.UTOPIA_INVEST,
+    CardName.CURIOSITY_II,
   ];
 
   private getAvailableCards(player: Player): Array<ICard> {

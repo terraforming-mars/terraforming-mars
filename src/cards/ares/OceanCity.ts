@@ -47,11 +47,13 @@ export class OceanCity extends Card implements IProjectCard {
       'Select space for Ocean City',
       player.game.board.getOceansTiles(false),
       (space: ISpace) => {
-        player.game.removeTile(space.id);
-        player.game.addTile(player, space.spaceType, space, {
+        const tile = {
           tileType: TileType.OCEAN_CITY,
           card: this.name,
-        });
+          covers: space.tile,
+        };
+        player.game.removeTile(space.id);
+        player.game.addTile(player, space.spaceType, space, tile);
         return undefined;
       },
     );

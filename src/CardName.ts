@@ -467,10 +467,11 @@ export enum CardName {
 
     // Community corps
     AGRICOLA_INC = 'Agricola Inc',
-    PROJECT_WORKSHOP = 'Project Workshop',
+    CURIOSITY_II = 'Curiosity II',
     INCITE = 'Incite',
-    PLAYWRIGHTS = 'Playwrights',
     MIDAS = 'Midas',
+    PLAYWRIGHTS = 'Playwrights',
+    PROJECT_WORKSHOP = 'Project Workshop',
 
     // Community preludes
     VALUABLE_GASES = 'Valuable Gases',

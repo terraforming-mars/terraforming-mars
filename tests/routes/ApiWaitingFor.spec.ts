@@ -14,7 +14,7 @@ describe('ApiWaitingFor', function() {
   let ctx: IContext;
 
   beforeEach(() => {
-    req = {} as http.IncomingMessage;
+    req = {headers: {}} as http.IncomingMessage;
     res = new MockResponse();
     ctx = {
       route: new Route(),
@@ -28,6 +28,7 @@ describe('ApiWaitingFor', function() {
     req.url = '/api/waitingfor?id=game-id&gameAge=123&undoCount=0';
     ctx.url = new URL('http://boo.com' + req.url);
     ApiWaitingFor.INSTANCE.get(req, res.hide(), ctx);
+    expect(res.statusCode).eq(404);
     expect(res.content).eq('Not found: cannot find game for that player');
   });
 
@@ -41,6 +42,7 @@ describe('ApiWaitingFor', function() {
       throw new Error('player does not exist');
     };
     ApiWaitingFor.INSTANCE.get(req, res.hide(), ctx);
+    expect(res.statusCode).eq(404);
     expect(res.content).eq('Not found: player not found');
   });
 
@@ -51,6 +53,20 @@ describe('ApiWaitingFor', function() {
     const game = Game.newInstance('game-id', [player], player);
     ctx.gameLoader.add(game);
     ApiWaitingFor.INSTANCE.get(req, res.hide(), ctx);
+    expect(res.headers.get('ETag')).eq(`${player.id}:${game.gameAge}:${game.undoCount}`);
+    expect(res.statusCode).eq(200);
     expect(res.content).eq('{"result":"GO"}');
+  });
+
+  it('sends not modified', () => {
+    const player = TestPlayers.BLACK.newPlayer();
+    req.url = '/api/waitingfor?id=' + player.id + '&gameAge=50&undoCount=0';
+    ctx.url = new URL('http://boo.com' + req.url);
+    const game = Game.newInstance('game-id', [player], player);
+    ctx.gameLoader.add(game);
+    req.headers['if-none-match'] = `${player.id}:${game.gameAge}:${game.undoCount}`;
+    ApiWaitingFor.INSTANCE.get(req, res.hide(), ctx);
+    expect(res.statusCode).eq(304);
+    expect(res.content).eq('');
   });
 });

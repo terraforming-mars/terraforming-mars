@@ -82,6 +82,7 @@ export const Preferences = Vue.component('preferences', {
       'show_card_number': false as boolean | unknown[],
       'show_discount_on_cards': true as boolean | unknown[],
       'learner_mode': true as boolean | unknown[],
+      'hide_animated_sidebar': false as boolean | unknown[],
     };
   },
   methods: {
@@ -141,8 +142,11 @@ export const Preferences = Vue.component('preferences', {
         this.setPreferencesCSS(this.$data[k], k);
       }
     },
-    getActingPlayerClass: function(): string {
-      return this.acting_player ? 'preferences_acting_player' : 'preferences_nonacting_player';
+    getPlayerColorCubeClass: function(): string {
+      return this.acting_player && (PreferencesManager.loadBooleanValue('hide_animated_sidebar') === false) ? 'preferences_player_inner active' : 'preferences_player_inner';
+    },
+    getSideBarClass: function(): string {
+      return this.acting_player && (PreferencesManager.loadBooleanValue('hide_animated_sidebar') === false) ? 'preferences_acting_player' : 'preferences_nonacting_player';
     },
     getGenMarker: function(): string {
       return `${this.generation}`;
@@ -199,7 +203,7 @@ export const Preferences = Vue.component('preferences', {
     this.updatePreferencesFromStorage();
   },
   template: `
-        <div :class="'preferences_cont '+getActingPlayerClass()" :data="syncPreferences()">
+        <div :class="'preferences_cont '+getSideBarClass()" :data="syncPreferences()">
                 <div class="preferences_tm">
                     <div class="preferences-gen-text">GEN</div>
                     <div class="preferences-gen-marker">{{ getGenMarker() }}</div>
@@ -220,7 +224,7 @@ export const Preferences = Vue.component('preferences', {
                   </div>
                 </div>
                 <div class="preferences_item preferences_player">
-                  <div class="preferences_player_inner" :class="'player_bg_color_' + player_color"></div>
+                  <div :class="getPlayerColorCubeClass()+' player_bg_color_' + player_color"></div>
                 </div>
                 <a  href="#board">
                     <div class="preferences_item preferences_item_shortcut">
@@ -371,6 +375,12 @@ export const Preferences = Vue.component('preferences', {
                         <label class="form-switch">
                             <input type="checkbox" v-on:change="updatePreferences" v-model="hide_tile_confirmation" />
                             <i class="form-icon"></i> <span v-i18n>Hide tile confirmation</span>
+                        </label>
+                    </div>
+                    <div class="preferences_panel_item">
+                        <label class="form-switch">
+                            <input type="checkbox" v-on:change="updatePreferences" v-model="hide_animated_sidebar" />
+                            <i class="form-icon"></i> <span v-i18n>Hide sidebar notification</span>
                         </label>
                     </div>
                     <div class="preferences_panel_item">

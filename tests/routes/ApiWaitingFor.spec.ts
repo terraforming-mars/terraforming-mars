@@ -53,32 +53,6 @@ describe('ApiWaitingFor', function() {
     const game = Game.newInstance('game-id', [player], player);
     ctx.gameLoader.add(game);
     ApiWaitingFor.INSTANCE.get(req, res.hide(), ctx);
-    expect(res.headers.get('ETag')).eq(`${player.id}:${game.gameAge}:${game.undoCount}`);
-    expect(res.statusCode).eq(200);
-    expect(res.content).eq('{"result":"GO"}');
-  });
-
-  it('sends not modified', () => {
-    const player = TestPlayers.BLACK.newPlayer();
-    req.url = '/api/waitingfor?id=' + player.id + '&gameAge=50&undoCount=0';
-    ctx.url = new URL('http://boo.com' + req.url);
-    const game = Game.newInstance('game-id', [player], player);
-    (player as any).waitingFor = undefined;
-    ctx.gameLoader.add(game);
-    req.headers['if-none-match'] = `${player.id}:${game.gameAge}:${game.undoCount}`;
-    ApiWaitingFor.INSTANCE.get(req, res.hide(), ctx);
-    expect(res.statusCode).eq(304);
-    expect(res.content).eq('');
-  });
-
-  it('sends model when time to go', () => {
-    const player = TestPlayers.BLACK.newPlayer();
-    req.url = '/api/waitingfor?id=' + player.id + '&gameAge=50&undoCount=0';
-    ctx.url = new URL('http://boo.com' + req.url);
-    const game = Game.newInstance('game-id', [player], player);
-    ctx.gameLoader.add(game);
-    req.headers['if-none-match'] = `${player.id}:${game.gameAge}:${game.undoCount}`;
-    ApiWaitingFor.INSTANCE.get(req, res.hide(), ctx);
     expect(res.statusCode).eq(200);
     expect(res.content).eq('{"result":"GO"}');
   });

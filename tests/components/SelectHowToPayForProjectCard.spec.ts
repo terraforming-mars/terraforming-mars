@@ -285,6 +285,31 @@ describe('SelectHowToPayForProjectCard', function() {
     expect(vm.steel).eq(2);
   });
 
+  it('select how to pay uses titanium metal bonus without using steel', async function() {
+    // Io Mining Industries cost 41 mc. Player has 10 MC, 2 Steel and 13 Ti.
+    // The steel is artificially inflated to be worth 4 MC each.
+    // The titanium is artificially inflated to be worth 5 MC each.
+    // The algorithm will try to spend 10 mc. Then spend as much Ti as possible.
+    // This will come down to 10 MC and 7 Ti (at value 5). So we are effectively spending 45 MC.
+    // That is overspending by 4 mc. The algorithm will try to spend 4 mc less if possible.
+    // IT WILL NOT TRY TO SPEND LESS STEEL EVEN IF IT HAS STEEL AND STEEL VALUE IS 4.
+    // It will reduce the amount of MC.
+    // The final answer should be 6mc and 7 Ti (at value 5).
+    const wrapper = setupCardForPurchase(
+      CardName.IO_MINING_INDUSTRIES, 41,
+      {megaCredits: 10, titanium: 13, titaniumValue: 5, steel: 2, steelValue: 4},
+      {canUseTitanium: true});
+
+    const vm = wrapper.vm;
+    await vm.$nextTick();
+
+    expect(vm.megaCredits).eq(6);
+    expect(vm.titanium).eq(7);
+    expect(vm.steel).eq(0);
+    const titaniumTextBox = wrapper.find('[title~=Titanium] ~ input').element as HTMLInputElement;
+    expect(titaniumTextBox.value).eq('7');
+  });
+
   const setupCardForPurchase = function(
     cardName: CardName,
     cardCost: number,

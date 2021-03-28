@@ -34,14 +34,7 @@ export class ApiWaitingFor extends Handler {
         return;
       }
       try {
-        const etag = `${playerId}:${game.gameAge}:${game.undoCount}`;
         const player = game.getPlayerById(playerId);
-        if (req.headers['if-none-match'] === etag && this.timeToGo(player) === false) {
-          ctx.route.notModified(res);
-          return;
-        }
-        res.setHeader('Cache-Control', 'must-revalidate');
-        res.setHeader('ETag', etag);
         ctx.route.writeJson(res, this.getWaitingForModel(player, gameAge, undoCount));
       } catch (err) {
         // This is basically impossible since getPlayerById ensures that the player is on that game.

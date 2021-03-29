@@ -12,8 +12,12 @@ export class Sabotage implements IGlobalEvent {
     public currentDelegate = PartyName.REDS;
     public resolve(game: Game, turmoil: Turmoil) {
       game.getPlayers().forEach((player) => {
-        player.addProduction(Resources.ENERGY, -1, game, undefined, true);
-        player.addProduction(Resources.STEEL, -1, game, undefined, true);
+        if (player.getProduction(Resources.ENERGY) >= 1) {
+          player.addProduction(Resources.ENERGY, -1, game, undefined, true);
+        }
+        if (player.getProduction(Resources.STEEL) >= 1) {
+          player.addProduction(Resources.STEEL, -1, game, undefined, true);
+        }
         player.setResource(Resources.STEEL, turmoil.getPlayerInfluence(player), game, undefined, true);
       });
     }

@@ -215,6 +215,7 @@ export class Turmoil implements ISerializable<SerializedTurmoil> {
 
       // 2 - Global Event
       if (this.currentGlobalEvent) {
+        game.log('Global event "' + this.currentGlobalEvent.name + '" has been resolved.');
         this.currentGlobalEvent.resolve(game, this);
       }
 

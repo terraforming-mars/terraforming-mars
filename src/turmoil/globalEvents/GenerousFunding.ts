@@ -12,7 +12,9 @@ export class GenerousFunding implements IGlobalEvent {
     public currentDelegate = PartyName.UNITY;
     public resolve(game: Game, turmoil: Turmoil) {
       game.getPlayers().forEach((player) => {
-        player.setResource(Resources.MEGACREDITS, 2 * (Math.min(5, Math.floor((player.getTerraformRating() - 15) / 5)) + turmoil.getPlayerInfluence(player)), game, undefined, true);
+        const trSet = player.getTerraformRating() > 15 ? Math.floor((player.getTerraformRating() - 15) / 5) : 0;
+        const MAXSET = 5;
+        player.setResource(Resources.MEGACREDITS, 2 * (Math.min(MAXSET, trSet) + turmoil.getPlayerInfluence(player)), game, undefined, true);
       });
     }
 }

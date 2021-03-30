@@ -39,13 +39,13 @@ export class MoonColonyStandardProject extends StandardProjectCard {
       return false;
     }
 
-    return player.canAfford(this.cost) && Units.hasUnits(this.reserveUnits, player);
+    return player.canAfford(this.cost) && player.hasUnits(this.reserveUnits);
   }
 
   // TODO(kberg): subclass MoonCard? This is starting to show the problems with just using subclassing.
   actionEssence(player: Player): void {
     const adjustedReserveUnits = MoonExpansion.adjustedReserveCosts(player, this);
-    Units.deductUnits(adjustedReserveUnits, player);
+    player.deductUnits(adjustedReserveUnits);
     player.game.defer(new PlaceMoonColonyTile(player));
     player.addProduction(Resources.MEGACREDITS, 1, player.game);
   }

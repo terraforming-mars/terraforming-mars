@@ -291,109 +291,111 @@ generateVueClass(
 );
 
 function generateVueClass(name, component, dataProperties) {
-  process.stdout.write(`generating the Vue typed template file for ${name} ... `);
+  try {
+    const methodNames = component.methods === undefined ? [] : Object.keys(component.methods);
 
-  const methodNames = component.methods === undefined ? [] : Object.keys(component.methods);
+    if (Array.isArray(component.props)) {
+      throw new Error(`props must define types for component ${name}`);
+    }
 
-  if (Array.isArray(component.props)) {
-    throw new Error(`props must define types for component ${name}`);
-  }
+    const propertyNames = component.props === undefined ? [] : Object.keys(component.props);
+    const template = component.template;
 
-  const propertyNames = component.props === undefined ? [] : Object.keys(component.props);
-  const template = component.template;
+    if (component.template === undefined) {
+      throw new Error(`no template for component ${name}`);
+    }
 
-  if (component.template === undefined) {
-    throw new Error(`no template for component ${name}`);
-  }
+    let result = compiler.compile(template, {
+      warn: true,
+    });
 
-  let result = compiler.compile(template, {
-    warn: true,
-  });
+    if (result.errors.length > 0) {
+      console.error(result.errors); // needed for debugging
+      throw new Error(`errors found while parsing template for ${name}`, result.errors);
+    }
 
-  if (result.errors.length > 0) {
-    console.error(result.errors); // needed for debugging
-    throw new Error(`errors found while parsing template for ${name}`, result.errors);
-  }
+    if (result.tips.length > 0) {
+      console.log(result.tips); // needed for debugging
+      throw new Error(`tips found while parsing template for ${name}`, result.tips);
+    }
 
-  if (result.tips.length > 0) {
-    console.log(result.tips); // needed for debugging
-    throw new Error(`tips found while parsing template for ${name}`, result.tips);
-  }
+    result = result.render;
 
-  result = result.render;
+    // provide type information for $event argument
+    result = result.replace(/function\(\$event\)/g, 'function($event: VueDomEvent)');
 
-  // provide type information for $event argument
-  result = result.replace(/function\(\$event\)/g, 'function($event: VueDomEvent)');
+    // strip 'with' lacking typescript support
+    result = result.substring('with(this){'.length);
+    result = result.substring(0, result.length - 1);
 
-  // strip 'with' lacking typescript support
-  result = result.substring('with(this){'.length);
-  result = result.substring(0, result.length - 1);
+    // make easier to read and debug
+    result = beautify(result);
 
-  // make easier to read and debug
-  result = beautify(result);
+    // append scope since we stripped 'with'
+    let scope = '';
+    dataProperties.forEach(function(dataProperty) {
+      scope += `let ${dataProperty} = this.${dataProperty};\n`;
+    });
 
-  // append scope since we stripped 'with'
-  let scope = '';
-  dataProperties.forEach(function(dataProperty) {
-    scope += `let ${dataProperty} = this.${dataProperty};\n`;
-  });
+    propertyNames.forEach(function(propertyName) {
+      scope += `const ${propertyName} = this.${propertyName};\n`;
+    });
+    methodNames.forEach(function(methodName) {
+      scope += `const ${methodName} = this.${methodName};\n`;
+    });
 
-  propertyNames.forEach(function(propertyName) {
-    scope += `const ${propertyName} = this.${propertyName};\n`;
-  });
-  methodNames.forEach(function(methodName) {
-    scope += `const ${methodName} = this.${methodName};\n`;
-  });
-
-  // add mix-ins
-  if (Array.isArray(component.mixins)) {
-    for (const mixin of component.mixins) {
-      const methods = Object.keys(mixin.methods);
-      for (const method of methods) {
-        scope += `const ${method} = ${mixin.name}.methods.${method};\n`;
+    // add mix-ins
+    if (Array.isArray(component.mixins)) {
+      for (const mixin of component.mixins) {
+        const methods = Object.keys(mixin.methods);
+        for (const method of methods) {
+          scope += `const ${method} = ${mixin.name}.methods.${method};\n`;
+        }
       }
     }
-  }
 
-  result = scope + result;
+    result = scope + result;
 
-  let file = fs.readFileSync(`${name}.ts`).toString();
-  const lines = file.split('\n');
-  let i = 0;
-  // insert line to run through tsc with compiled template
-  for (; i < lines.length; i++) {
-    if (lines[i].trim() === 'methods: {') {
-      lines.splice(i + 1, 0, `checker: function() { ${result} },`);
-      break;
+    let file = fs.readFileSync(`${name}.ts`).toString();
+    const lines = file.split('\n');
+    let i = 0;
+    // insert line to run through tsc with compiled template
+    for (; i < lines.length; i++) {
+      if (lines[i].trim() === 'methods: {') {
+        lines.splice(i + 1, 0, `checker: function() { ${result} },`);
+        break;
+      }
     }
+
+    if (i === lines.length) {
+      throw new Error(`must provide line with 'methods: {' for inserting checker for ${name}`);
+    }
+
+    // append types for minified functions
+    lines.unshift('declare const _c: any;');
+    lines.unshift('declare function _e(): void;');
+
+    // seems to be indexOf
+    lines.unshift('declare function _i<T>(arg1: Array<T>, arg2: T): number;');
+    lines.unshift('declare const _m: any;');
+    lines.unshift('declare function _n(arg: string): number;');
+    lines.unshift('declare function _q<T>(arg1: T, arg2: T): string;');
+    lines.unshift('declare function _s(arg: number | string | undefined): string;');
+    lines.unshift('declare function _t(arg: string): unknown;');
+    lines.unshift('declare function _v(arg: string): unknown;');
+    lines.unshift('interface VueDomEventTarget { checked: boolean, composing: boolean, value: string };');
+    lines.unshift('interface VueDomEvent { preventDefault: () => void; target: VueDomEventTarget; };');
+    lines.unshift('declare function $forceUpdate(): void');
+    lines.unshift('declare function $set(arg1: any, key: string, value: string): void;');
+    // seems to be array looper iterating function needs to pass along type information
+    lines.unshift('declare function _l(arg1: number, arg2: (item2: number, idx: number) => any): any;');
+    lines.unshift('declare function _l<T>(arg1: {[x: string]: T}, args: (item2: T, idx: number) => any): any;');
+    lines.unshift('declare function _l<T>(arg1: Array<T>, arg2: (item2: T, idx: number) => any): any;');
+    file = lines.join('\n');
+
+    fs.writeFileSync(`./build/${name}Vue.ts`, file);
+  } catch (err) {
+    console.log(`Error generating the Vue typed template file for ${name}`);
+    throw err;
   }
-
-  if (i === lines.length) {
-    throw new Error(`must provide line with 'methods: {' for inserting checker for ${name}`);
-  }
-
-  // append types for minified functions
-  lines.unshift('declare const _c: any;');
-  lines.unshift('declare function _e(): void;');
-
-  // seems to be indexOf
-  lines.unshift('declare function _i<T>(arg1: Array<T>, arg2: T): number;');
-  lines.unshift('declare const _m: any;');
-  lines.unshift('declare function _n(arg: string): number;');
-  lines.unshift('declare function _q<T>(arg1: T, arg2: T): string;');
-  lines.unshift('declare function _s(arg: number | string | undefined): string;');
-  lines.unshift('declare function _t(arg: string): unknown;');
-  lines.unshift('declare function _v(arg: string): unknown;');
-  lines.unshift('interface VueDomEventTarget { checked: boolean, composing: boolean, value: string };');
-  lines.unshift('interface VueDomEvent { preventDefault: () => void; target: VueDomEventTarget; };');
-  lines.unshift('declare function $forceUpdate(): void');
-  lines.unshift('declare function $set(arg1: any, key: string, value: string): void;');
-  // seems to be array looper iterating function needs to pass along type information
-  lines.unshift('declare function _l(arg1: number, arg2: (item2: number, idx: number) => any): any;');
-  lines.unshift('declare function _l<T>(arg1: {[x: string]: T}, args: (item2: T, idx: number) => any): any;');
-  lines.unshift('declare function _l<T>(arg1: Array<T>, arg2: (item2: T, idx: number) => any): any;');
-  file = lines.join('\n');
-
-  fs.writeFileSync(`./build/${name}Vue.ts`, file);
-  process.stdout.write('done\n');
 }

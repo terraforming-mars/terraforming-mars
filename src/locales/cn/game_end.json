@@ -1,0 +1,31 @@
+{
+    " - Game finished!":" - 游戏结束！",
+    "Sorry, you lose.": "对不起，你输了.",
+    "Next time you will get more luck!": "下一次你将更幸运!",
+    "Also, take into account these small hints to win:": "另外，请考虑以下小技巧以取胜：",
+    "Concentrate more on Global parameters, not on Victory Points": "更多地关注全局参数，而不是得分",
+    "Don't be greedy on cards selection": "不要贪图卡牌选择",
+    "Try to increase Heat production, not Megacredits": "尝试增加热量产能，而不是MC”",
+    "Try to start with Beginner corporation": "尝试用新手公司开始游戏",
+    
+    "You win!": "你赢了！",
+    "But it isn't the reason to stop making Mars better.": "但这不是停止让火星变得更好的理由。",
+    "Try to win with expansions enabled": "尝试加入更多扩展包获得胜利",
+    "Try to win before the last generation comes": "尝试在最后一个时代之前获得胜利",
+    "Can you get": "你能获得",
+    "+ Victory Points?": "+ 的分数吗?",
+  
+   "Terraforming Mars - Game finished!": "殖民火星 - 游戏结束!",
+    "Go to main page": "回到主页",
+    "Timer": "计时器",
+    "Victory points breakdown after": "胜利点数分解",
+    "generations": "时代",
+    "Player": "玩家",
+    "Corporation": "公司",
+    "TR": "TR",
+    "VP": "VP",
+    "Total": "合计",
+    "Victory points details for": "获胜点数详情：",
+    "Final situation on the board": "最终游戏版图情况",
+    "Final game log": "最终游戏日志"
+}

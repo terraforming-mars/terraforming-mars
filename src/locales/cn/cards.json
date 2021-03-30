@@ -21,16 +21,7 @@
 
     "Martian Rails": "火星高铁",
     "Action: Spend 1 Energy to gain 1 MC for each City tile ON MARS.": "行动:花费1电力,火星上每有1个城市,你获得1MC",
-
-    "Capital": "首都",
-    "2 Oceans": "2 海洋",
-    "3 Oceans": "3 海洋",
-    "4 Oceans": "4 海洋",
-    "5 Oceans": "5 海洋",
-    "6 Oceans": "6 海洋",
-    "Requires 4 ocean tiles. Place this tile. Decrease your Energy production 2 steps and increase your MC production 5 steps.": "需要至少已放置4个海洋。放置本版块,降低你的电力产能2级,提升你的MC产能5级",
-    "1 additional VP for each ocean tile adjacent to this city tile.": "该城市板块相邻每有1个海洋板块,额外获得1分",
-
+    
     "Asteroid": "小行星",
     "Raise temperature 1 step and gain 2 titanium. Remove up to 3 Plants from any player.": "提升火星温度1级并获得2个钛合金,移除任一玩家的最多3个植物资源",
 
@@ -149,9 +140,6 @@
     "Carbonate Processing": "碳酸盐处理",
     "Decrease your Energy production 1 step and increase your heat production 3 steps.": "降低你的电力产能1级并增加你的热能产能3级",
 
-    "Natural Preserve": "自然保护区",
-    "Oxygen must be 4% or less. Place this tile NEXT TO NO OTHER TILE. Increase your MC production 1 step.": "氧气浓度不能高于4%。把这个版块放置在不与已有版块相邻的地方。提升你的MC产能1级",
-
     "Nuclear Power": "核能",
     "Decrease your MC production 2 steps and increase your Energy production 3 steps.": "降低你的MC产能2级并增加你的电力产能3级",
 
@@ -214,17 +202,11 @@
     "Mining Expedition": "矿业探险",
     "Raise oxygen 1 step. Remove 2 plants from any player. Gain 2 steel.": "提升氧气浓度1级。移除任一玩家的2个植物资源。获得2个钢铁资源",
 
-    "Mining Area": "采矿区",
-    "Place this tile on an area with a steel or titanium placement bonus, adjacent to another of your tiles. Increase your production of that resource 1 step.": "将此版块放置在版图上有钢铁或钛合金奖励的地方,并且必须邻近你的任一版块。增加对应的资源产量1级",
-
     "Building Industries": "建筑行业",
     "Decrease your Energy production 1 step and increase your steel production 2 steps.": "降低你的电力产能1级并增加你的钢铁产能2级",
 
     "Land Claim": "宣称领土",
     "Place your marker on a non-reserved area. Only you may place a tile there.": "放置一个你的标志物在一个版图格子上。只有你能在该格子上放置版块。",
-
-    "Mining Rights": "采矿权",
-    "Place this tile on an area with a steel or titanium placement bonus. Increase that production 1 step.": "将本版块放置在一个有钢铁或钛合金奖励的格子上。提升该种类资源的产能1级",
 
     "Sponsors": "赞助商",
     "Increase your MC production 2 steps.": "提升你的MC产能2级",
@@ -280,11 +262,7 @@
 
     "Trans-Neptune Probe": "海王星探测器",
 
-    "Commercial District": "商业区",
-    "Place this tile. Decrease your energy production 1 step and increase your MC production 4 steps.": "放置这个版块。降低你的电力产能1级并增加你的MC产能4级",
-    "1 VP per adjacent city tile.": "每相邻1个城市,获得1分",
-
-    "Robotic Workforce": "机器人大军",
+      "Robotic Workforce": "机器人大军",
     "Duplicate only the production box of one of your building cards.": "复制一张你已打出的带有建筑标志的卡的产能变化",
 
     "Grass": "草",
@@ -318,9 +296,6 @@
 
     "Greenhouses": "温室",
     "Gain 1 plant for each city tile in play.": "场上每有1个城市,你获得1个植物资源",
-
-    "Nuclear Zone": "核爆辐射区",
-    "Place this tile and raise temperature 2 steps.": "放置这个版块并提升火星温度2格",
 
     "Tropical Resort": "热带度假胜地",
     "Reduce your heat production 2 steps and increase your MC production 3 steps.": "降低你的热能产能2级并提升你的MC产能3级",
@@ -397,10 +372,6 @@
     "Moss": "苔藓",
     "Requires 3 ocean tiles and that you lose 1 plant. Increase your plant production 1 step.": "需要至少3个还帮版块且你移除1个植物资源。增加你的植物产能1级",
 
-    "Industrial Center": "工业中心",
-    "Action: Spend 7 MC to increase your steel production 1 step.": "行动: 花费7MC,提升你的钢铁产能1级",
-    "Place this tile adjacent to a city tile.": "将这个版块放置到一个城市旁边",
-
     "Hired Raiders": "雇佣掠夺者",
     "Steal up to 2 steel, or 3 MC from any player.": "盗取任一玩家最多2个钢铁资源或3MC",
 
@@ -412,11 +383,6 @@
 
     "Subterranean Reservoir": "地下水库",
     "Place 1 ocean tile.": "放置1个海洋版块",
-
-    "Ecological Zone": "生态保护区",
-    "(Effect: When you play an animal or plant tag /including these/, add an animal to this card.)": "效果: 当你打出1个动物标志或植物标志(包括本牌2个)时,增加1个动物资源到本卡",
-    "(Requires that YOU have a greenery tile. Place this tile adjacent to ANY greenery.)": "需要你至少拥有一个绿化板块。放置这个版块到任意的绿化版块旁边。本卡上每有2个动物资源,获得1分",
-    "1 VP per 2 Animals on this card.": "两个动物1分",
 
     "Zeppelins": "齐柏林飞艇",
     "Requires 5% oxygen. Increase your MC production 1 step for each City tile ON MARS.": "需要至少氧气浓度5%,火星上每有1个城市,增加你的MC产能1级",
@@ -457,14 +423,8 @@
     "Wave Power": "潮汐能源",
     "Requires 3 ocean tiles. Increase your energy production 1 step.": "需要至少3个海洋版块。增加你的电力产能1级",
 
-    "Lava Flows": "熔岩流",
-    "Raise temperature 2 steps and place this tile ON EITHER THARSIS THOLUS, ASCRAEUS MONS, PAVONIS MONS OR ARSIA MONS.": "提升火星温度2级并放置这个版块到以下几个地方之一:'THARSIS THOLUS, ASCRAEUS MONS, PAVONIS MONS OR ARSIA MONS'",
-
     "Power Plant": "发电厂",
     "Increase your Energy production 1 step.": "增加你的电力产能1级",
-
-    "Mohole Area": "超深钻区域",
-    "Increase your heat production 4 steps. Place this tile ON AN AREA RESERVED FOR OCEAN.": "增加你的热能产能4级。把这个版块放置在原本要放置海洋版块的区域",
 
     "Large Convoy": "大型护航队",
     "Place an ocean tile and draw 2 cards. Gain 5 Plants or add 4 Animals to ANOTHER card.": "放置一个海洋版块并抽2张牌。获得5个植物资源,或放置4个动物资源到其它牌",
@@ -643,11 +603,7 @@
   "Immigration Shuttles": "移民航天机",
   "(Increase your MC production 5 steps.)": "MC产量+5",
   "1 VP for every 3rd City in play.": "场上每三块城市板块=1分",
-
-  "Restricted Area": "管制区",
-  "Action: Spend 2 MC to draw a card.": "行动：花费两枚MC资源 抽取一张牌",
-  "Effect: when playing a Venus tag, Floaters here may be used as payment, and are worth 3MC each":"效果：当你打出带有V标志的牌时，这张卡上的每个云资源可以当成3MC支付",
-
+ 
   "Place this tile.": "放置此板块",
 
   "Immigrant City": "移民城市",

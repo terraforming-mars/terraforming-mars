@@ -239,6 +239,7 @@ export class RoboticWorkforce extends Card implements IProjectCard {
       new Updater(CardName.CAPITAL, {energy: -2, megacredits: 5}),
       new Updater(CardName.CAPITAL_ARES, {energy: -2, megacredits: 5}),
       new Updater(CardName.CULTURAL_METROPOLIS, {energy: -1, megacredits: 3}),
+      new Updater(CardName.CURIOSITY_II, {steel: 2}),
       new Updater(CardName.DOME_FARMING, {megacredits: 2, plants: 1}),
       new Updater(CardName.EARLY_SETTLEMENT, {plants: 1}),
       new Updater(CardName.FACTORUM, {steel: 1}),

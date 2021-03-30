@@ -12,6 +12,7 @@ export class Sabotage implements IGlobalEvent {
     public currentDelegate = PartyName.REDS;
     public resolve(game: Game, turmoil: Turmoil) {
       game.getPlayers().forEach((player) => {
+        // This conditional isn't to prevent negative production, but to prevent misleading logging when the production diff is zero.
         if (player.getProduction(Resources.ENERGY) >= 1) {
           player.addProduction(Resources.ENERGY, -1, game, undefined, true);
         }

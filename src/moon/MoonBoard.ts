@@ -63,7 +63,7 @@ export class MoonBoard extends Board {
     b.row(2).land().land(STEEL, DRAW_CARD).land().mine(TITANIUM);
     b.row(1).mine(TITANIUM, TITANIUM).mine(/* Mare Imbrium */).land(STEEL).land().land();
     b.row(0).mine().land(STEEL).land(STEEL, TITANIUM).mine(/* Mare Serenatis*/).mine(TITANIUM).land(STEEL, STEEL);
-    b.row(1).land(STEEL).land().land().mine(TITANIUM).mine(TITANIUM);
+    b.row(0).land(STEEL).land().land().mine(TITANIUM).mine(TITANIUM);
     b.row(0).land().mine(TITANIUM).mine(/* Mare Nubium */).land().mine(/* Mare Nectaris */).land(STEEL);
     b.row(1).land().land(STEEL).land(STEEL).land(DRAW_CARD, DRAW_CARD).land(STEEL);
     b.row(2).land(DRAW_CARD, DRAW_CARD).mine(TITANIUM).mine(TITANIUM, TITANIUM).land();

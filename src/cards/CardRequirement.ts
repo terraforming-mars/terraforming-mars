@@ -124,16 +124,16 @@ export class CardRequirement {
       return false;
 
     case RequirementType.OCEANS:
-      return player.game.checkRequirements(player, GlobalParameter.OCEANS, this.amount, this.isMax);
+      return this.checkGlobalRequirement(player, GlobalParameter.OCEANS, this.amount, this.isMax);
 
     case RequirementType.OXYGEN:
-      return player.game.checkRequirements(player, GlobalParameter.OXYGEN, this.amount, this.isMax);
+      return this.checkGlobalRequirement(player, GlobalParameter.OXYGEN, this.amount, this.isMax);
 
     case RequirementType.TEMPERATURE:
-      return player.game.checkRequirements(player, GlobalParameter.TEMPERATURE, this.amount, this.isMax);
+      return this.checkGlobalRequirement(player, GlobalParameter.TEMPERATURE, this.amount, this.isMax);
 
     case RequirementType.VENUS:
-      return player.game.checkRequirements(player, GlobalParameter.VENUS, this.amount, this.isMax);
+      return this.checkGlobalRequirement(player, GlobalParameter.VENUS, this.amount, this.isMax);
 
     case RequirementType.TR:
       return this.satisfiesInequality(player.getTerraformRating());
@@ -148,13 +148,13 @@ export class CardRequirement {
       return this.satisfiesInequality(standardResources + nonStandardResources);
 
     case RequirementType.COLONY_RATE:
-      return player.game.checkRequirements(player, GlobalParameter.MOON_COLONY_RATE, this.amount, this.isMax);
+      return this.checkGlobalRequirement(player, GlobalParameter.MOON_COLONY_RATE, this.amount, this.isMax);
 
     case RequirementType.MINING_RATE:
-      return player.game.checkRequirements(player, GlobalParameter.MOON_MINING_RATE, this.amount, this.isMax);
+      return this.checkGlobalRequirement(player, GlobalParameter.MOON_MINING_RATE, this.amount, this.isMax);
 
     case RequirementType.LOGISTIC_RATE:
-      return player.game.checkRequirements(player, GlobalParameter.MOON_LOGISTICS_RATE, this.amount, this.isMax);
+      return this.checkGlobalRequirement(player, GlobalParameter.MOON_LOGISTICS_RATE, this.amount, this.isMax);
 
     case RequirementType.COLONY_TILES:
       return this.satisfiesInequality(
@@ -170,6 +170,49 @@ export class CardRequirement {
     case RequirementType.PARTY:
     case RequirementType.PRODUCTION:
       throw `Use subclass satisfies() for requirement type ${this.type}`;
+    }
+  }
+
+  private checkGlobalRequirement(player: Player, parameter: GlobalParameter, level: number, max: boolean = false): boolean {
+    let currentLevel: number;
+    let playerRequirementsBonus: number = player.getRequirementsBonus(parameter);
+
+    switch (parameter) {
+    case GlobalParameter.OCEANS:
+      currentLevel = player.game.board.getOceansOnBoard();
+      break;
+    case GlobalParameter.OXYGEN:
+      currentLevel = player.game.getOxygenLevel();
+      break;
+    case GlobalParameter.TEMPERATURE:
+      currentLevel = player.game.getTemperature();
+      playerRequirementsBonus *= 2;
+      break;
+
+    case GlobalParameter.VENUS:
+      currentLevel = player.game.getVenusScaleLevel();
+      playerRequirementsBonus *= 2;
+      break;
+
+    case GlobalParameter.MOON_COLONY_RATE:
+      currentLevel = MoonExpansion.moonData(player.game).colonyRate;
+      break;
+    case GlobalParameter.MOON_MINING_RATE:
+      currentLevel = MoonExpansion.moonData(player.game).miningRate;
+      break;
+    case GlobalParameter.MOON_LOGISTICS_RATE:
+      currentLevel = MoonExpansion.moonData(player.game).logisticRate;
+      break;
+
+    default:
+      console.warn(`Unknown GlobalParameter provided: ${parameter}`);
+      return false;
+    }
+
+    if (max) {
+      return currentLevel <= level + playerRequirementsBonus;
+    } else {
+      return currentLevel >= level - playerRequirementsBonus;
     }
   }
 }

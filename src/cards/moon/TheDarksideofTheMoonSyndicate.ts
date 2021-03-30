@@ -47,8 +47,8 @@ export class TheDarksideofTheMoonSyndicate implements CorporationCard {
     }),
   };
 
-  public play() {
-    this.resourceCount += 2;
+  public play(player: Player) {
+    player.addResourceTo(this, 2);
     return undefined;
   }
 

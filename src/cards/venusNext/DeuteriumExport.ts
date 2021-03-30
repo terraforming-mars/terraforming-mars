@@ -45,7 +45,7 @@ export class DeuteriumExport extends Card implements IActionCard, IResourceCard 
   }
   public action(player: Player) {
     if (this.resourceCount < 1) {
-      this.resourceCount++;
+      player.addResourceTo(this, 1);
       return undefined;
     }
     return new OrOptions(
@@ -55,7 +55,7 @@ export class DeuteriumExport extends Card implements IActionCard, IResourceCard 
         return undefined;
       }),
       new SelectOption('Add 1 floater to this card', 'Add floater', () => {
-        this.resourceCount++;
+        player.addResourceTo(this, 1);
         return undefined;
       }),
     );

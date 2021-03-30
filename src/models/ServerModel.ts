@@ -1,25 +1,25 @@
-import {CardModel} from '../models/CardModel';
-import {ColonyModel} from '../models/ColonyModel';
+import {CardModel} from './CardModel';
+import {ColonyModel} from './ColonyModel';
 import {Color} from '../Color';
 import {Game, GameOptions} from '../Game';
-import {GameHomeModel} from '../models/GameHomeModel';
-import {GameOptionsModel} from '../models/GameOptionsModel';
+import {GameHomeModel} from './GameHomeModel';
+import {GameOptionsModel} from './GameOptionsModel';
 import {ICard} from '../cards/ICard';
 import {IProjectCard} from '../cards/IProjectCard';
 import {Board} from '../boards/Board';
 import {ISpace} from '../boards/ISpace';
 import {Player} from '../Player';
 import {PlayerInput} from '../PlayerInput';
-import {PlayerInputModel} from '../models/PlayerInputModel';
+import {PlayerInputModel} from './PlayerInputModel';
 import {PlayerInputTypes} from '../PlayerInputTypes';
-import {PlayerModel} from '../models/PlayerModel';
+import {PlayerModel} from './PlayerModel';
 import {SelectAmount} from '../inputs/SelectAmount';
 import {SelectCard} from '../inputs/SelectCard';
 import {SelectHowToPay} from '../inputs/SelectHowToPay';
 import {SelectHowToPayForProjectCard} from '../inputs/SelectHowToPayForProjectCard';
 import {SelectPlayer} from '../inputs/SelectPlayer';
 import {SelectSpace} from '../inputs/SelectSpace';
-import {SpaceHighlight, SpaceModel} from '../models/SpaceModel';
+import {SpaceHighlight, SpaceModel} from './SpaceModel';
 import {TileType} from '../TileType';
 import {Phase} from '../Phase';
 import {Resources} from '../Resources';
@@ -27,18 +27,17 @@ import {CardType} from '../cards/CardType';
 import {
   ClaimedMilestoneModel,
   IMilestoneScore,
-} from '../models/ClaimedMilestoneModel';
-import {FundedAwardModel, IAwardScore} from '../models/FundedAwardModel';
+} from './ClaimedMilestoneModel';
+import {FundedAwardModel, IAwardScore} from './FundedAwardModel';
 import {
   getTurmoil,
-} from '../models/TurmoilModel';
+} from './TurmoilModel';
 import {SelectDelegate} from '../inputs/SelectDelegate';
 import {SelectColony} from '../inputs/SelectColony';
 import {SelectProductionToLose} from '../inputs/SelectProductionToLose';
 import {ShiftAresGlobalParameters} from '../inputs/ShiftAresGlobalParameters';
-import {SpectatorModel} from '../models/SpectatorModel';
-import {MoonModel} from '../models/MoonModel';
-import {CardName} from '../CardName';
+import {SpectatorModel} from './SpectatorModel';
+import {MoonModel} from './MoonModel';
 import {Units} from '../Units';
 import {SelectPartyToSendDelegate} from '../inputs/SelectPartyToSendDelegate';
 
@@ -264,7 +263,7 @@ function getWaitingFor(
     break;
   case PlayerInputTypes.SELECT_HOW_TO_PAY_FOR_PROJECT_CARD:
     const shtpfpc: SelectHowToPayForProjectCard = waitingFor as SelectHowToPayForProjectCard;
-    playerInputModel.cards = getCards(player, shtpfpc.cards, {showNewCost: true, reserveUnitMap: shtpfpc.reserveUnitsMap});
+    playerInputModel.cards = getCards(player, shtpfpc.cards, {showNewCost: true, reserveUnits: shtpfpc.reserveUnits});
     playerInputModel.microbes = shtpfpc.microbes;
     playerInputModel.floaters = shtpfpc.floaters;
     playerInputModel.canUseHeat = shtpfpc.canUseHeat;
@@ -351,7 +350,7 @@ function getCards(
   options: {
     showResources?: boolean,
     showNewCost?: boolean,
-    reserveUnitMap?: Map<CardName, Units>,
+    reserveUnits?: Array<Units>,
     enabled?: Array<boolean>, // If provided, then the cards with false in `enabled` are not selectable and grayed out
   } = {},
 ): Array<CardModel> {
@@ -363,7 +362,7 @@ function getCards(
     cardType: card.cardType,
     isDisabled: options.enabled?.[index] === false,
     warning: card.warning,
-    reserveUnits: options.reserveUnitMap?.get(card.name) || Units.EMPTY,
+    reserveUnits: options.reserveUnits ? options.reserveUnits[index] : Units.EMPTY,
     bonusResource: (card as IProjectCard).bonusResource,
     discount: card.cardDiscount,
   }));

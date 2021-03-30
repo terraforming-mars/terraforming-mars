@@ -10,11 +10,12 @@
     line-height: 24px;
     height: 26px;
     letter-spacing: 0px;
-    margin-top: 32px;
+    margin-top: 34px;
     left: -17px;
     background: linear-gradient(to right, black, #aaa,#aaa, #aaa);
     color: black;
     clip-path: polygon(85% 0%, 100% 50%, 85% 100%, 0% 100%, 0% 0%);
+    z-index: 1;
 }
 
 .player-played-cards {
@@ -102,23 +103,22 @@
 
 .player-info-details {
     white-space: nowrap;
-    letter-spacing: 1px;
-    line-height: 19px;
+    line-height: 18px;
     width: 136px;
     color: #e6e1e1;
-    font-family: 'Prototype';
     .player-info-name {
         text-shadow: 0px 1px 1px #000;
-        font-size: 20px;
-        font-family: 'Prototype';
         overflow: hidden;
         text-overflow: ellipsis;
+        font-size: 20px;
+        line-height: 24px;
+        margin-top: -4px;
     } 
     .player-info-corp { 
-        font-size: 16px;
-        margin-bottom: 5px;
+        font-size: 18px;
         overflow: hidden;
         text-overflow: ellipsis;
+        height: 26px;
     }
 }
 
@@ -135,8 +135,8 @@
             position: relative;
             .megacredits-container {
                 position: absolute;
-                left: 12px;
-                top: -17px;
+                right: -6px;
+                top: -18px;
                 z-index: 10;
                 border-radius: 8px 8px 0px 1px;
                 padding: 8px 8px 0px 8px;
@@ -149,7 +149,7 @@
                     font-size: 15px;
                     font-style: normal;
                     font-family: Prototype;
-                    line-height: 21px;
+                    line-height: 20px;
                     text-align: center;
                 }
             }

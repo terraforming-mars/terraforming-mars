@@ -22,6 +22,8 @@ describe('Sabotage', function() {
 
     const action = card.play(player) as OrOptions;
 
+    expect(action.options).has.lengthOf(4);
+
     action.options[0].cb();
     expect(player2.titanium).to.eq(0);
 

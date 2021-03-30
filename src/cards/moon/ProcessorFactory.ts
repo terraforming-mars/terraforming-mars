@@ -13,7 +13,7 @@ export class ProcessorFactory extends Card implements IProjectCard {
   constructor() {
     super({
       name: CardName.PROCESSOR_FACTORY,
-      cardType: CardType.AUTOMATED,
+      cardType: CardType.ACTIVE,
       tags: [Tags.MOON, Tags.BUILDING],
       cost: 8,
       resourceType: ResourceType.DATA,

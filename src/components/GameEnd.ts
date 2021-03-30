@@ -120,7 +120,7 @@ export const GameEnd = Vue.component('game-end', {
                                 <th><div class="vp">VP</div></th>
                                 <th class="game-end-total"><div class="game-end-total-column">Total</div></th>
                                 <th><div class="mc-icon"></div></th>
-                                <th class="game-end-clock">&#x1F551;</th>
+                                <th v-if="player.gameOptions.showTimers" class="clock-icon">&#x1F551;</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -142,7 +142,7 @@ export const GameEnd = Vue.component('game-end', {
                                 <td class="game-end-mc">
                                   <div>{{ p.megaCredits }}</div>
                                 </td>
-                                <td class="game-end-clock">
+                                <td>
                                   <div v-if="player.gameOptions.showTimers" class="game-end-timer">{{ getTimer(p) }}</div>
                                 </td>
                             </tr>

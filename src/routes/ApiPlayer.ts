@@ -1,5 +1,5 @@
 import * as http from 'http';
-import {Server} from '../server/ServerModel';
+import {Server} from '../models/ServerModel';
 import {Handler} from './Handler';
 import {IContext} from './IHandler';
 

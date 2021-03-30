@@ -43,7 +43,7 @@ export class RustEatingBacteria extends Card implements IActionCard, IProjectCar
 
   public action(player: Player) {
     player.steel -= 1;
-    this.resourceCount += 2;
+    player.addResourceTo(this, 2);
     return undefined;
   }
 

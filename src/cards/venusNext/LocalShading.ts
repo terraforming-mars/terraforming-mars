@@ -43,13 +43,13 @@ export class LocalShading extends Card implements IActionCard, IResourceCard {
   }
   public action(player: Player) {
     if (this.resourceCount < 1) {
-      this.resourceCount++;
+      player.addResourceTo(this, 1);
       return undefined;
     }
 
     const opts: Array<SelectOption> = [];
 
-    const addResource = new SelectOption('Add 1 floater to this card', 'Add floater', () => this.addResource());
+    const addResource = new SelectOption('Add 1 floater to this card', 'Add floater', () => this.addResource(player));
     const spendResource = new SelectOption('Remove 1 floater to increase MC production 1 step', 'Remove floater', () => this.spendResource(player));
 
     opts.push(spendResource);
@@ -58,8 +58,8 @@ export class LocalShading extends Card implements IActionCard, IResourceCard {
     return new OrOptions(...opts);
   }
 
-  private addResource() {
-    this.resourceCount++;
+  private addResource(player: Player) {
+    player.addResourceTo(this, 1);
     return undefined;
   }
 

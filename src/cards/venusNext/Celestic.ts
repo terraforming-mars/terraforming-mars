@@ -77,7 +77,7 @@ export class Celestic extends Card implements IActionCard, CorporationCard, IRes
     public action(player: Player) {
       const floaterCards = player.getResourceCards(ResourceType.FLOATER);
       if (floaterCards.length === 1) {
-        this.resourceCount++;
+        player.addResourceTo(this, 1);
         LogHelper.logAddResource(player, floaterCards[0]);
         return undefined;
       }

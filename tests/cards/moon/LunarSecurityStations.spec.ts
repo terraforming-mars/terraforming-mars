@@ -54,12 +54,12 @@ describe('LunarSecurityStations', () => {
     opponent2.playedCards = [];
     let action = hiredRaiders.play(player) as OrOptions;
     // Options for both opponents.
-    expect(action.options).has.lengthOf(2);
+    expect(action.options).has.lengthOf(3);
 
     opponent2.playedCards = [lunaSecurityStations];
     action = hiredRaiders.play(player) as OrOptions;
     // Options for only one opponent.
-    expect(action.options).has.lengthOf(1);
+    expect(action.options).has.lengthOf(2);
     action.options[0].cb();
     // And it's the one weithout Luna Security Stations.
     expect(opponent1.steel).to.eq(3);

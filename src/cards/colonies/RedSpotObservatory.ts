@@ -51,13 +51,13 @@ export class RedSpotObservatory extends Card implements IProjectCard, IResourceC
 
   public action(player: Player) {
     if (this.resourceCount < 1) {
-      this.resourceCount++;
+      player.addResourceTo(this, 1);
       return undefined;
     }
 
     const opts: Array<SelectOption> = [];
 
-    const addResource = new SelectOption('Add 1 floater on this card', 'Add floater', () => this.addResource());
+    const addResource = new SelectOption('Add 1 floater on this card', 'Add floater', () => this.addResource(player));
     const spendResource = new SelectOption('Remove 1 floater on this card to draw a card', 'Remove floater', () => this.spendResource(player));
 
     opts.push(spendResource);
@@ -66,8 +66,8 @@ export class RedSpotObservatory extends Card implements IProjectCard, IResourceC
     return new OrOptions(...opts);
   }
 
-  private addResource() {
-    this.resourceCount++;
+  private addResource(player: Player) {
+    player.addResourceTo(this, 1);
     return undefined;
   }
 

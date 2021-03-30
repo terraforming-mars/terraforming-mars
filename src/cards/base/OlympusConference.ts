@@ -43,7 +43,7 @@ export class OlympusConference extends Card implements IProjectCard, IResourceCa
           () => {
             // Can't remove a resource
             if (this.resourceCount === 0) {
-              this.resourceCount++;
+              player.addResourceTo(this, 1);
               return undefined;
             }
             return new OrOptions(
@@ -53,7 +53,7 @@ export class OlympusConference extends Card implements IProjectCard, IResourceCa
                 return undefined;
               }),
               new SelectOption('Add a science resource to this card', 'Add resource', () => {
-                this.resourceCount++;
+                player.addResourceTo(this, 1);
                 return undefined;
               }),
             );

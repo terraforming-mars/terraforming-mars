@@ -11,8 +11,12 @@ export class ApiWaitingFor extends Handler {
     super();
   }
 
+  private timeToGo(player: Player): boolean {
+    return player.getWaitingFor() !== undefined || player.game.phase === Phase.END;
+  }
+
   private getWaitingForModel(player: Player, gameAge: number, undoCount: number): WaitingForModel {
-    if (player.getWaitingFor() !== undefined || player.game.phase === Phase.END) {
+    if (this.timeToGo(player)) {
       return {result: 'GO'};
     } else if (player.game.gameAge > gameAge || player.game.undoCount > undoCount) {
       return {result: 'REFRESH'};
@@ -22,8 +26,7 @@ export class ApiWaitingFor extends Handler {
 
   public get(req: http.IncomingMessage, res: http.ServerResponse, ctx: IContext): void {
     const playerId = String(ctx.url.searchParams.get('id'));
-    // TODO bafolts remove prev-game-age by 2020-04-01
-    const gameAge = Number(ctx.url.searchParams.get('gameAge') ?? ctx.url.searchParams.get('prev-game-age'));
+    const gameAge = Number(ctx.url.searchParams.get('gameAge'));
     const undoCount = Number(ctx.url.searchParams.get('undoCount'));
     ctx.gameLoader.getByPlayerId(playerId, (game) => {
       if (game === undefined) {
@@ -31,7 +34,8 @@ export class ApiWaitingFor extends Handler {
         return;
       }
       try {
-        ctx.route.writeJson(res, this.getWaitingForModel(game.getPlayerById(playerId), gameAge, undoCount));
+        const player = game.getPlayerById(playerId);
+        ctx.route.writeJson(res, this.getWaitingForModel(player, gameAge, undoCount));
       } catch (err) {
         // This is basically impossible since getPlayerById ensures that the player is on that game.
         console.warn(`unable to find player ${playerId}`, err);

@@ -59,8 +59,8 @@
   "Darkside Meteor Bombardment":"黑暗流星轰击",
   "Gain 2 steel and 2 titanium. Raise the Mining Rate 2 steps.":"增加2个钢和2个钛。提高采矿效率2步。",
   
-  "Darkside Mining Syndicate":"",
-  "Increase your Titanium production 2 steps, or 1 step if the Mining Rate is at least 2. And then raise the Mining Rate 1 step.":"",
+  "Darkside Mining Syndicate":"黑暗采矿集团",
+  "Increase your Titanium production 2 steps, or 1 step if the Mining Rate is at least 2. And then raise the Mining Rate 1 step.":"增加您的钛产量2步，如果采矿率至少为2，则增加1步。然后提高采矿效率1",
   
   "Darkside Observatory":"黑暗矿业集团",
   "Action: Add 1 Science to ANY card [EXCEPT those giving 2 VP or more per science resource.]":"行动:在任意卡片上添加1门科学资源(每个科学资源给予2个VP或更多的卡片除外)",
@@ -70,7 +70,7 @@
   "Spend 1 titanium. Increase your titanium production 2 steps. Raise the Mining Rate 1 step.":"花1钛。增加你的钛产量2步。提高采矿效率1步。",
   
   "Earth Embassy":"地球大使馆",
-  "Effect: After being played, when you perform an action, your Moon tags count as Earth tags, but not vice versa.":"效果:在打出后，当你执行一个动作时，你的月球标签算作地球标签，但反之亦然。",
+  "Effect: After being played, when you perform an action, your Moon tags count as Earth tags, but not vice versa.":"效果:在打出后，当你执行一个动作时，你的月球标签算作地球标签，但反向不成立。",
   
   
   

@@ -64,7 +64,6 @@ export const Preferences = Vue.component('preferences', {
       'small_cards': false as boolean | unknown[],
       'remove_background': false as boolean | unknown[],
       'magnify_cards': true as boolean | unknown[],
-      'magnify_card_descriptions': true as boolean | unknown[],
       'show_alerts': true as boolean | unknown[],
       'lang': 'en',
       'langs': LANGUAGES,
@@ -282,12 +281,6 @@ export const Preferences = Vue.component('preferences', {
                         <label class="form-switch">
                             <input type="checkbox" v-on:change="updatePreferences" v-model="magnify_cards" />
                             <i class="form-icon"></i> <span v-i18n>Magnify cards on hover</span>
-                        </label>
-                    </div>
-                    <div class="preferences_panel_item">
-                        <label class="form-switch">
-                            <input type="checkbox" v-on:change="updatePreferences" v-model="magnify_card_descriptions" />
-                            <i class="form-icon"></i> <span v-i18n>Magnify card descriptions on hover</span>
                         </label>
                     </div>
                     <div class="preferences_panel_item">

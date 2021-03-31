@@ -30,7 +30,7 @@ export class ArchimedesHydroponicsStation extends MoonCard {
   };
 
   public play(player: Player) {
-    Units.adjustProduction(this.productionBox, player, player.game);
+    player.adjustProduction(this.productionBox, player.game);
     return undefined;
   }
 }

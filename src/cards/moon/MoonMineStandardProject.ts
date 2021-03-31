@@ -40,12 +40,12 @@ export class MoonMineStandardProject extends StandardProjectCard {
       return false;
     }
 
-    return player.canAfford(this.cost) && Units.hasUnits(this.reserveUnits, player);
+    return player.canAfford(this.cost) && player.hasUnits(this.reserveUnits);
   }
 
   actionEssence(player: Player): void {
     const adjustedReserveUnits = MoonExpansion.adjustedReserveCosts(player, this);
-    Units.deductUnits(adjustedReserveUnits, player);
+    player.deductUnits(adjustedReserveUnits);
     player.game.defer(new PlaceMoonMineTile(player));
     player.addProduction(Resources.STEEL, 1, player.game);
   }

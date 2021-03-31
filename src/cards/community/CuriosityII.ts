@@ -16,6 +16,7 @@ import {DrawCards} from '../../deferredActions/DrawCards';
 import {SpaceType} from '../../SpaceType';
 import {SpaceBonus} from '../../SpaceBonus';
 import {Phase} from '../../Phase';
+import {Units} from '../../Units';
 
 export class CuriosityII extends Card implements CorporationCard {
   constructor() {
@@ -24,6 +25,7 @@ export class CuriosityII extends Card implements CorporationCard {
       name: CardName.CURIOSITY_II,
       tags: [Tags.SCIENCE, Tags.BUILDING],
       startingMegaCredits: 40,
+      productionBox: Units.of({steel: 2}),
 
       metadata: {
         cardNumber: '',

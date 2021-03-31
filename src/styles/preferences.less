@@ -11,7 +11,7 @@
     height: 100%;
 }
 .preferences_acting_player {
-    background: #4a4033;
+    background: linear-gradient(180deg, #303030 0%, #303030 25%, #745B54 80%, #745B54 100%);
 }
 .preferences_nonacting_player {
     background: #303030;
@@ -90,6 +90,29 @@
     width: 26px;
     height: 26px;
     border-radius: 3px;
+    &.active {
+        -webkit-animation: rotation 8s infinite linear;
+        animation: rotation 8s infinite linear;
+        box-shadow: 0 0 5px 2px #fff;
+    }
+}
+
+@-webkit-keyframes rotation {
+    from {
+        -webkit-transform: rotate(0deg);
+    }
+    to {
+        -webkit-transform: rotate(359deg);
+    }
+}
+
+@keyframes rotation {
+    from {
+      transform: rotate(0deg);
+    }
+    to {
+      transform: rotate(359deg);
+    }
 }
 
 .preferences_global_params {

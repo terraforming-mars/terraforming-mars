@@ -26,6 +26,7 @@ export class PreferencesManager {
       'show_card_number',
       'show_discount_on_cards',
       'learner_mode',
+      'hide_animated_sidebar',
     ];
 
     static preferencesValues: Map<string, boolean | string> = new Map<string, boolean | string>();

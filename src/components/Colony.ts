@@ -22,9 +22,6 @@ export const Colony = Vue.component('colony', {
     getColonyXPosition: (index: number): number => {
       return index * 56 + 16;
     },
-    getColonyCubeYOffset: function(): number {
-      return 7;
-    },
     getCubeYPosition: (
       colony: ColonyModel,
       isColonyCube = false,

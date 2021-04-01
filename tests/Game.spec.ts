@@ -24,6 +24,8 @@ import {CardName} from '../src/CardName';
 import {Player} from '../src/Player';
 import {Color} from '../src/Color';
 import {RandomMAOptionType} from '../src/RandomMAOptionType';
+import {SpaceBonus} from '../src/SpaceBonus';
+import {TileType} from '../src/TileType';
 
 describe('Game', function() {
   it('should initialize with right defaults', function() {
@@ -487,6 +489,16 @@ describe('Game', function() {
     expect(
       () => Game.newInstance('id', [player1, player2], player1))
       .to.throw(Error, /Duplicate color found/);
+  });
+
+  it('grant space bonus sanity test', () => {
+    const player = TestPlayers.BLUE.newPlayer();
+    const game = Game.newInstance('foobar', [player], player);
+    const space = game.board.getAvailableSpacesOnLand()[0];
+    space.bonus = [SpaceBonus.DRAW_CARD, SpaceBonus.DRAW_CARD, SpaceBonus.DRAW_CARD, SpaceBonus.DRAW_CARD];
+    expect(player.cardsInHand).has.length(0);
+    game.addTile(player, space.spaceType, space, {tileType: TileType.GREENERY});
+    expect(player.cardsInHand).has.length(4);
   });
 
   /**

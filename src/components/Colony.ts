@@ -20,24 +20,34 @@ export const Colony = Vue.component('colony', {
       return colony.trackPosition * 56 + 27;
     },
     getColonyXPosition: (index: number): number => {
-      const offset: number = 5;
-      return index * 56 + 27 + offset;
+      return index * 56 + 16;
     },
     getCubeYPosition: (
       colony: ColonyModel,
       isColonyCube = false,
     ): number => {
-      if (colony.name === ColonyName.IAPETUS || colony.name === ColonyName.LEAVITT) return 185;
-      if (colony.name === ColonyName.VENUS) return 190;
-      if (colony.name === ColonyName.PALLAS) return 172;
-      if (colony.name === ColonyName.MERCURY || colony.name === ColonyName.HYGIEA) return 148;
-
-      let offset: number = 0;
-      if (isColonyCube !== true) offset = 7;
-      if (colony.name === ColonyName.EUROPA) return 170 + offset;
-      if (colony.name === ColonyName.PLUTO) return 169 + offset;
-      if (colony.name === ColonyName.MIRANDA) return 180 + offset;
-      return 168 + offset;
+      const offset = isColonyCube ? 7 : 0;
+      switch (colony.name) {
+      case ColonyName.IAPETUS:
+      case ColonyName.LEAVITT:
+        return 181 + offset;
+      case ColonyName.VENUS:
+        return 186 + offset;
+      case ColonyName.PALLAS:
+        return 168 + offset;
+      case ColonyName.MERCURY:
+      case ColonyName.HYGIEA:
+        return 144 + offset;
+      case ColonyName.EUROPA:
+      case ColonyName.MIRANDA:
+        return 166 + offset;
+      case ColonyName.PLUTO:
+        return 165 + offset;
+      case ColonyName.LUNA:
+        return 163 + offset;
+      default:
+        return 164 + offset;
+      }
     },
     getGanymede: (): string => {
       return ColonyName.GANYMEDE;
@@ -104,9 +114,15 @@ export const Colony = Vue.component('colony', {
       <div :class="'colonies-fleet colonies-fleet-'+ colony.visitor"></div>
     </div>
     <div v-if="colony.isActive" :style="'margin-left:' + getCubeXPosition(colony) + 'px; margin-top:' + getCubeYPosition(colony, true) + 'px;'" class="colony_cube"></div>
-    <div v-if="colony.colonies.length > 0" :style="'margin-left: ' + getColonyXPosition(0) + 'px;  margin-top:' + getCubeYPosition(colony) + 'px;'" :class="'board-cube board-cube--' + colony.colonies[0]"></div>
-    <div v-if="colony.colonies.length > 1" :style="'margin-left: ' + getColonyXPosition(1) + 'px;  margin-top:' + getCubeYPosition(colony) + 'px;'" :class="'board-cube board-cube--' + colony.colonies[1]"></div>
-    <div v-if="colony.colonies.length > 2" :style="'margin-left: ' + getColonyXPosition(2) + 'px;  margin-top:' + getCubeYPosition(colony) + 'px;'" :class="'board-cube board-cube--' + colony.colonies[2]"></div>
+    <div v-if="colony.colonies.length > 0" :style="'margin-left: ' + getColonyXPosition(0) + 'px;  margin-top:' + getCubeYPosition(colony) + 'px;'" class="occupied-colony-space">
+      <div :class="'board-cube colony-cube board-cube--' + colony.colonies[0]"></div>
+    </div>
+    <div v-if="colony.colonies.length > 1" :style="'margin-left: ' + getColonyXPosition(1) + 'px;  margin-top:' + getCubeYPosition(colony) + 'px;'" class="occupied-colony-space">
+      <div :class="'board-cube colony-cube board-cube--' + colony.colonies[1]"></div>
+    </div>
+    <div v-if="colony.colonies.length > 2" :style="'margin-left: ' + getColonyXPosition(2) + 'px;  margin-top:' + getCubeYPosition(colony) + 'px;'" class="occupied-colony-space">
+      <div :class="'board-cube colony-cube board-cube--' + colony.colonies[2]"></div>
+    </div>
 
     <div class="colony-card-title-div">
       <span class="colony-card-title-span" :class="colony.name + '-title'">{{colony.name}}</span>

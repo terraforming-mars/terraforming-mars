@@ -6,7 +6,7 @@ import {LogMessage} from '../LogMessage';
 import {LogMessageType} from '../LogMessageType';
 
 export class GameLogs {
-  private getLogsForGeneration(messages: Array<LogMessage>, generation: number) {
+  private getLogsForGeneration(messages: Array<LogMessage>, generation: number): Array<LogMessage> {
     let foundStart = generation === 1;
     const newMessages: Array<LogMessage> = [];
     for (const message of messages) {

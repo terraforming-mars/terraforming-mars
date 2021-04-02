@@ -42,6 +42,8 @@ export class IntragenSanctuaryHeadquarters implements CorporationCard {
   }
 
   public play() {
+    // Gains the initial resource from its own tag.
+    this.resourceCount = 1;
     return undefined;
   };
 

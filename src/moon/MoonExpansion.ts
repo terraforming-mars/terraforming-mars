@@ -285,7 +285,7 @@ export class MoonExpansion {
     }
 
     if (tilesBuilt.includes(TileType.MOON_MINE) && player.cardIsInEffect(CardName.IMPROVED_MOON_CONCRETE)) {
-      steel -= 1;
+      titanium -= 1;
     }
 
     if (tilesBuilt.includes(TileType.MOON_ROAD) && player.cardIsInEffect(CardName.LUNAR_DUST_PROCESSING_PLANT)) {

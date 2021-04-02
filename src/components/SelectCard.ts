@@ -1,4 +1,3 @@
-
 import Vue from 'vue';
 import {Button} from '../components/common/Button';
 import {Message} from '../Message';
@@ -114,7 +113,7 @@ export const SelectCard = Vue.component('select-card', {
       return undefined;
     },
     buttonLabel: function(): string {
-      return this.playerinput.buttonLabel + ' ' + this.$data.cards.length;
+      return this.playerinput.buttonLabel + ' ' + this.cardsSelected();
     },
   },
   template: `<div class="wf-component wf-component--select-card">

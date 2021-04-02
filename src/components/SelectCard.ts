@@ -1,4 +1,3 @@
-
 import Vue from 'vue';
 import {Button} from '../components/common/Button';
 import {Message} from '../Message';
@@ -108,10 +107,13 @@ export const SelectCard = Vue.component('select-card', {
     getOwner: function(card: CardModel): OwnerModel | undefined {
       for (const player of this.player.players) {
         if (player.playedCards.find((c) => c.name === card.name)) {
-          return {name: player.name, color: player.color} as OwnerModel;
+          return {name: player.name, color: player.color};
         }
       }
       return undefined;
+    },
+    buttonLabel: function(): string {
+      return this.playerinput.buttonLabel + ' ' + this.cardsSelected();
     },
   },
   template: `<div class="wf-component wf-component--select-card">
@@ -126,9 +128,8 @@ export const SelectCard = Vue.component('select-card', {
         </label>
         <div v-if="hasCardWarning()" class="card-warning">{{ $t(warning) }}</div>
         <div v-if="showsave === true" class="nofloat">
-            <Button :disabled="isOptionalToManyCards() && cardsSelected() === 0" type="submit" :onClick="saveData" :title="playerinput.buttonLabel" />
+            <Button :disabled="isOptionalToManyCards() && cardsSelected() === 0" type="submit" :onClick="saveData" :title="buttonLabel()" />
             <Button :disabled="isOptionalToManyCards() && cardsSelected() > 0" v-if="isOptionalToManyCards()" :onClick="saveData" type="submit" :title="$t('Skip this action')" />
         </div>
     </div>`,
 });
-

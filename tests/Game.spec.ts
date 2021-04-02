@@ -495,10 +495,17 @@ describe('Game', function() {
     const player = TestPlayers.BLUE.newPlayer();
     const game = Game.newInstance('foobar', [player], player);
     const space = game.board.getAvailableSpacesOnLand()[0];
-    space.bonus = [SpaceBonus.DRAW_CARD, SpaceBonus.DRAW_CARD, SpaceBonus.DRAW_CARD, SpaceBonus.DRAW_CARD];
+
+    space.bonus = [SpaceBonus.DRAW_CARD, SpaceBonus.DRAW_CARD, SpaceBonus.DRAW_CARD, SpaceBonus.DRAW_CARD, SpaceBonus.PLANT, SpaceBonus.TITANIUM];
     expect(player.cardsInHand).has.length(0);
+    expect(player.plants).eq(0);
+    expect(player.titanium).eq(0);
+
     game.addTile(player, space.spaceType, space, {tileType: TileType.GREENERY});
+
     expect(player.cardsInHand).has.length(4);
+    expect(player.plants).eq(1);
+    expect(player.titanium).eq(1);
   });
 
   /**

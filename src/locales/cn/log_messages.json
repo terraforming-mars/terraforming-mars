@@ -49,6 +49,24 @@
     "${0} sold ${1} patents":"${0} 卖了 ${1} 张专利(牌)",
     "${0}'s ${1} production increased by ${2}":"${0}的 ${1}产能 增加 ${2}",
     "${0} ${1} ${2} on row ${3} position ${4}": "${0} ${1} ${2} 在第 ${3} 排的第 ${4} 个位置上",
+    
+"A neutral delegate is the new chairman." :"中立的代表是新任主席。",
+"Greens are in power in the first generation.":"绿党在第一代掌权。",
+"The ruling bonus is ${0}":"统治者设定奖励为 ${0}",                                          
+"The ruling policy is ${0}":"统治者设定政策为 ${0}",  
+"${0} sent ${1} delegate(s) in ${2} area":"${0} 送出 ${1} delegate(s) 在 ${2} 区域",  
+"${0}'s ${1} production ${2} by ${3} by Global Event":"${0} 的 ${1} 产量 ${2} 被 ${3} 被全球事件",  
+"${0} used ${1} standard action":"${0} 使用了 ${1} 标准行动",  
+"${0} placed a City tile":"${0} 放置了城市板块",  
+"${0} added ${1} ${2} to ${3}":"${0} 增加了 ${1} ${2} 到 ${3}",  
+"${0} removed ${1} ${2} from ${3} to ${4}":"${0} 移除 ${1} ${2} 从 ${3} 到 ${4}",  
+"${0} revealed and discarded ${1}":"${0} 展示并丢弃了 ${1}",  
+"${0} is using their ${1} effect to draw a card.":"${0} 正在使用其 ${1} 效果来摸牌",  
+"Drew and discarded ${0} (cost ${1}) to place a ${2}":"提取并丢弃 ${0} (费用 ${1}) 来放置 ${2}",
+
+    
+    
+    
     "placed":"放置",
     "greenery tile":"绿化板块",
     "ocean tile":"海洋板块",

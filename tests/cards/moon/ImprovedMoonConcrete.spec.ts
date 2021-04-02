@@ -47,23 +47,19 @@ describe('ImprovedMoonConcrete', () => {
   });
 
   it('effect', () => {
-    // This test and the next show that Mare Sernaitatis needs a steel and 2 titanium.
-    // BUT FOR NOW ACTUALLY I'M HACKING THE CARD TO NEED 2 STEEL
     player.titanium = 2;
-    player.steel = 2;
+    player.steel = 1;
     player.megaCredits = 1000;
 
     const msm = new MareSerenitatisMine();
-    // TODO(kberg): Find an example that needs 2 steel. For now, hack this card to need 2 steel.
-    msm.reserveUnits.steel = 2;
     player.cardsInHand = [msm];
     expect(player.getPlayableCards().map((card) => card.name)).deep.eq([CardName.MARE_SERENITATIS_MINE]);
 
-    player.titanium = 2;
+    player.titanium = 1;
     player.steel = 1;
     expect(player.getPlayableCards().map((card) => card.name)).is.empty;
 
-    // And this one shows that with Improved Moon Concrete, doesn't need steel.
+    // And this one shows that with Improved Moon Concrete, doesn't need the titanium.
     player.playedCards = [card];
     expect(player.getPlayableCards().map((card) => card.name)).deep.eq([CardName.MARE_SERENITATIS_MINE]);
   });

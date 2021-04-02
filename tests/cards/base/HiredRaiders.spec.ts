@@ -21,7 +21,7 @@ describe('HiredRaiders', function() {
     player2.megaCredits = 2;
 
     const action = card.play(player) as OrOptions;
-    expect(action.options).has.lengthOf(2);
+    expect(action.options).has.lengthOf(3);
     action.options[1].cb();
     expect(player2.megaCredits).to.eq(0);
     expect(player.megaCredits).to.eq(12);

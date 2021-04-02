@@ -9,6 +9,8 @@ import {PartyHooks} from '../../turmoil/parties/PartyHooks';
 import {PartyName} from '../../turmoil/parties/PartyName';
 import {CardRenderer} from '../render/CardRenderer';
 import {Card} from '../Card';
+import {OrOptions} from '../../inputs/OrOptions';
+import {SelectOption} from '../../inputs/SelectOption';
 
 export class CometForVenus extends Card {
   constructor() {
@@ -45,21 +47,29 @@ export class CometForVenus extends Card {
       return undefined;
     }
 
-    if (venusTagPlayers.length === 1) {
-      venusTagPlayers[0].setResource(Resources.MEGACREDITS, -4, player.game, player);
-      player.game.increaseVenusScaleLevel(player, 1);
-      return undefined;
+    if (venusTagPlayers.length > 0) {
+      return new OrOptions(
+        new SelectPlayer(
+          Array.from(venusTagPlayers),
+          'Select player to remove up to 4 mega credits from',
+          'Remove MC',
+          (selectedPlayer: Player) => {
+            selectedPlayer.setResource(Resources.MEGACREDITS, -4, player.game, player);
+            player.game.increaseVenusScaleLevel(player, 1);
+            return undefined;
+          },
+        ),
+        new SelectOption(
+          'Do not remove mega credits',
+          'Confirm',
+          () => {
+            player.game.increaseVenusScaleLevel(player, 1);
+            return undefined;
+          },
+        ),
+      );
     }
 
-    return new SelectPlayer(
-      venusTagPlayers,
-      'Select player to remove up to 4 mega credits from',
-      'Remove MC',
-      (selectedPlayer: Player) => {
-        selectedPlayer.setResource(Resources.MEGACREDITS, -4, player.game, player);
-        player.game.increaseVenusScaleLevel(player, 1);
-        return undefined;
-      },
-    );
+    return undefined;
   }
 }

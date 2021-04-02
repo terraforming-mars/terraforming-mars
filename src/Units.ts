@@ -1,10 +1,6 @@
 // A representation of a value associated with each standard resource type.
 // Could be a player's inventory, or their production, or just a way to pass several resource-related values
 
-import {Game} from './Game';
-import {Player} from './Player';
-import {Resources} from './Resources';
-
 // import {Player} from './Player';
 
 // Units represents any value of each standard unit.
@@ -82,58 +78,4 @@ export namespace Units {
   //   purse.energy += delta.energy || 0;
   //   purse.heat += delta.heat || 0;
   // }
-
-  // Returns true when the player has the supplied units in its inventory.
-  export function hasUnits(units: Units, player:Player): boolean {
-    return player.megaCredits - units.megacredits >= 0 &&
-      player.steel - units.steel >= 0 &&
-      player.titanium - units.titanium >= 0 &&
-      player.plants - units.plants >= 0 &&
-      player.energy - units.energy >= 0 &&
-      player.heat - units.heat >= 0;
-  }
-
-  export function deductUnits(units: Units, player: Player) {
-    player.megaCredits -= units.megacredits;
-    player.steel -= units.steel;
-    player.titanium -= units.titanium;
-    player.plants -= units.plants;
-    player.energy -= units.energy;
-    player.heat -= units.heat;
-  }
-
-  export function canAdjustProduction(units: Units, player: Player): boolean {
-    return player.getProduction(Resources.MEGACREDITS) + units.megacredits >= -5 &&
-      player.getProduction(Resources.STEEL) + units.steel >= 0 &&
-      player.getProduction(Resources.TITANIUM) + units.titanium >= 0 &&
-      player.getProduction(Resources.PLANTS) + units.plants >= 0 &&
-      player.getProduction(Resources.ENERGY) + units.energy >= 0 &&
-      player.getProduction(Resources.HEAT) + units.heat >= 0;
-  }
-
-  export function adjustProduction(units: Units, player: Player, game?: Game, fromPlayer?: Player) {
-    if (units.megacredits !== undefined) {
-      player.addProduction(Resources.MEGACREDITS, units.megacredits, game, fromPlayer);
-    }
-
-    if (units.steel !== undefined) {
-      player.addProduction(Resources.STEEL, units.steel, game, fromPlayer);
-    }
-
-    if (units.titanium !== undefined) {
-      player.addProduction(Resources.TITANIUM, units.titanium, game, fromPlayer);
-    }
-
-    if (units.plants !== undefined) {
-      player.addProduction(Resources.PLANTS, units.plants, game, fromPlayer);
-    }
-
-    if (units.energy !== undefined) {
-      player.addProduction(Resources.ENERGY, units.energy, game, fromPlayer);
-    }
-
-    if (units.heat !== undefined) {
-      player.addProduction(Resources.HEAT, units.heat, game, fromPlayer);
-    }
-  }
 }

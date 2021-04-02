@@ -186,7 +186,7 @@ export const SelectHowToPayForProjectCard = Vue.component('select-how-to-pay-for
         // We need not try to save heat since heat is paid last at value 1. We will never overspend in heat.
         // We do not need to save Ti either because Ti is paid last before heat. If we overspend, it is because of Ti.
         // We cannot reduce the amount of Ti and still pay enough.
-        this.steel -= saveOverSpendingUnits(this.availableSteel, this.player.steelValue);
+        this.steel -= saveOverSpendingUnits(this.steel, this.player.steelValue);
         this.floaters -= saveOverSpendingUnits(this.floaters, 3);
         this.microbes -= saveOverSpendingUnits(this.microbes, 2);
         this.megaCredits -= saveOverSpendingUnits(this.megaCredits, 1);

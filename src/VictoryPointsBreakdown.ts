@@ -11,7 +11,7 @@ export class VictoryPointsBreakdown {
     public moonRoads: number = 0;
     public victoryPoints = 0;
     public total = 0;
-    public detailsCards: Array<string> = [];
+    public detailsCards: Array<{cardName: string, victoryPoint: number}> = [];
     public detailsMilestones: Array<string> = [];
     public detailsAwards: Array<string> = [];
 
@@ -49,7 +49,7 @@ export class VictoryPointsBreakdown {
         break;
       case 'victoryPoints':
         this.victoryPoints += points;
-        if (message !== undefined) this.detailsCards.push(message+':'+points);
+        if (message !== undefined) this.detailsCards.push({cardName: message, victoryPoint: points});
         break;
       case 'moon colony':
         this.moonColonies += points;

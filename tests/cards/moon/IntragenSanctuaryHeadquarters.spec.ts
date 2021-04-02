@@ -19,6 +19,12 @@ describe('IntragenSanctuaryHeadquarters', () => {
     card = new IntragenSanctuaryHeadquarters();
   });
 
+  it('on play', () => {
+    expect(card.resourceCount).eq(0);
+    card.play();
+    expect(card.resourceCount).eq(1);
+  });
+
   it('onCardPlayed', () => {
     expect(card.resourceCount).eq(0);
 

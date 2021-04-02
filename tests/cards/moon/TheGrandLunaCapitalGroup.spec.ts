@@ -52,7 +52,7 @@ describe('TheGrandLunaCapitalGroup', () => {
 
   it('victoryPoints', () => {
     // It's possible better tests are necessary, but I don't think so.
-
+    // I was wrong.
     const centerSpace = moonData.moon.getSpace('m06');
     const adjacentSpaces = moonData.moon.getAdjacentSpaces(centerSpace);
 

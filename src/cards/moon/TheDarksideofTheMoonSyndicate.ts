@@ -7,7 +7,6 @@ import {CardRenderer} from '../render/CardRenderer';
 import {ResourceType} from '../../ResourceType';
 import {Player} from '../../Player';
 import {ISpace} from '../../boards/ISpace';
-import {TileType} from '../../TileType';
 import {MoonExpansion} from '../../moon/MoonExpansion';
 import {Multiset} from '../../utils/Multiset';
 import {Resources} from '../../Resources';
@@ -88,10 +87,7 @@ export class TheDarksideofTheMoonSyndicate implements CorporationCard {
       return undefined;
     }
     const game = activePlayer.game;
-    switch (space.tile.tileType) {
-    case TileType.MOON_COLONY:
-    case TileType.MOON_MINE:
-    case TileType.MOON_ROAD:
+    if (MoonExpansion.MOON_TILES.includes(space.tile.tileType)) {
       const costs = new Multiset<Player>();
       MoonExpansion.moonData(game).moon.getAdjacentSpaces(space).forEach((space) => {
         if (space.tile !== undefined && space.player !== undefined && space.player !== activePlayer) {

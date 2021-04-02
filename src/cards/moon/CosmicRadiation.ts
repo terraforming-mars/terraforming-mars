@@ -29,7 +29,7 @@ export class CosmicRadiation extends Card implements IProjectCard {
   };
 
   public play(player: Player) {
-    const mines = MoonExpansion.tiles(player.game, TileType.MOON_MINE, false);
+    const mines = MoonExpansion.tiles(player.game, TileType.MOON_MINE);
     player.game.getPlayers().forEach((mineTileOwner) => {
       const owned = mines.filter((mine) => mine.player?.id === mineTileOwner.id).length;
       if (owned > 0) {

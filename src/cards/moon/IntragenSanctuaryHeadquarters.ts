@@ -20,6 +20,8 @@ export class IntragenSanctuaryHeadquarters implements CorporationCard {
   public resourceType = ResourceType.ANIMAL;
   public resourceCount = 0;
 
+  public initialActionText = 'Place a colony tile on the Moon.';
+
   public readonly metadata: CardMetadata = {
     description: 'You start with 38 MC. ' +
       'As your first action, place a colony tile on the Moon and raise the Colony Rate 1 step.',
@@ -34,10 +36,14 @@ export class IntragenSanctuaryHeadquarters implements CorporationCard {
     victoryPoints: CardRenderDynamicVictoryPoints.animals(1, 2),
   }
 
-  public play(player: Player) {
+  public initialAction(player: Player) {
     player.game.defer(new PlaceMoonColonyTile(player));
     return undefined;
   }
+
+  public play() {
+    return undefined;
+  };
 
   public onCorpCardPlayed(player: Player, card: CorporationCard) {
     return this.onCardPlayed(player, card as ICard as IProjectCard);

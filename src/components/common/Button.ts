@@ -40,6 +40,10 @@ export const Button = Vue.component('Button', {
           'plus',
         ].includes(item),
     },
+    danger: {
+      type: Boolean,
+      default: false,
+    },
     onClick: {
       type: Function,
       default: () => {},
@@ -68,6 +72,10 @@ export const Button = Vue.component('Button', {
         classes.push('btn-action');
       } else if (this.type === 'submit') {
         classes.push('btn-submit');
+      }
+
+      if (this.danger || this.title === 'Discard' || this.title === 'Sell') {
+        classes.push('btn-dangerous');
       }
 
       // align

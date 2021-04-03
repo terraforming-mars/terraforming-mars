@@ -42,6 +42,7 @@ export const SelectCard = Vue.component('select-card', {
   },
   data: function() {
     return {
+      // Preselect the card if there is only one card as an option
       cards: [],
       warning: undefined,
     } as SelectCardModel;
@@ -87,10 +88,8 @@ export const SelectCard = Vue.component('select-card', {
       }
       return false;
     },
-    isOptionalToManyCards: function(): boolean {
-      return this.playerinput.maxCardsToSelect !== undefined &&
-             this.playerinput.maxCardsToSelect > 1 &&
-             this.playerinput.minCardsToSelect === 0;
+    isSelectionOptional: function(): boolean {
+      return this.playerinput.minCardsToSelect === 0;
     },
     getData: function(): Array<CardName> {
       return Array.isArray(this.$data.cards) ? this.$data.cards.map((card) => card.name) : [this.$data.cards.name];
@@ -128,8 +127,8 @@ export const SelectCard = Vue.component('select-card', {
         </label>
         <div v-if="hasCardWarning()" class="card-warning">{{ $t(warning) }}</div>
         <div v-if="showsave === true" class="nofloat">
-            <Button :disabled="isOptionalToManyCards() && cardsSelected() === 0" type="submit" :onClick="saveData" :title="buttonLabel()" />
-            <Button :disabled="isOptionalToManyCards() && cardsSelected() > 0" v-if="isOptionalToManyCards()" :onClick="saveData" type="submit" :title="$t('Skip this action')" />
+            <Button :disabled="isSelectionOptional() && cardsSelected() === 0" type="submit" :onClick="saveData" :title="buttonLabel()"/>
+            <Button :disabled="isSelectionOptional() && cardsSelected() > 0" v-if="isSelectionOptional()" :onClick="saveData" type="submit" :danger="true" :title="$t('Skip this action')" />
         </div>
     </div>`,
 });

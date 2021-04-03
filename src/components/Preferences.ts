@@ -311,7 +311,7 @@ export const Preferences = Vue.component('preferences', {
                     <div class="preferences_panel_item">
                         <label class="form-switch">
                             <input type="checkbox" v-on:change="updatePreferences" v-model="hide_color_code_buttons" />
-                            <i class="form-icon"></i> <span v-i18n>Hide label skip/discard/sell buttons</span>
+                            <i class="form-icon"></i> <span v-i18n>Hide button color coding</span>
                         </label>
                     </div>
                     <div class="preferences_panel_item">

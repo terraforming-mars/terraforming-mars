@@ -73,6 +73,7 @@ export const Preferences = Vue.component('preferences', {
       'hide_discount_on_cards': false as boolean | unknown[],
       'learner_mode': true as boolean | unknown[],
       'hide_animated_sidebar': false as boolean | unknown[],
+      'color_label_buttons': false as boolean | unknown[],
     };
   },
   methods: {
@@ -305,6 +306,12 @@ export const Preferences = Vue.component('preferences', {
                         <label class="form-switch">
                             <input type="checkbox" v-on:change="updatePreferences" v-model="show_alerts" />
                             <i class="form-icon"></i> <span v-i18n>Show in-game alerts</span>
+                        </label>
+                    </div>
+                    <div class="preferences_panel_item">
+                        <label class="form-switch">
+                            <input type="checkbox" v-on:change="updatePreferences" v-model="color_label_buttons" />
+                            <i class="form-icon"></i> <span v-i18n>Color label dangerous buttons</span>
                         </label>
                     </div>
                     <div class="preferences_panel_item">

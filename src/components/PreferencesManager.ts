@@ -18,6 +18,7 @@ export class PreferencesManager {
       'hide_discount_on_cards',
       'learner_mode',
       'hide_animated_sidebar',
+      'color_label_buttons',
     ];
 
     static preferencesValues: Map<string, boolean | string> = new Map<string, boolean | string>();

@@ -170,7 +170,7 @@ generateVueClass(
     'ui', 'hide_hand', 'hide_awards_and_milestones',
     'hide_top_bar', 'small_cards', 'remove_background', 'magnify_cards',
     'show_alerts', 'lang', 'langs', 'enable_sounds', 'hide_tile_confirmation', 
-    'show_card_number', 'hide_discount_on_cards', 'learner_mode', 'hide_animated_sidebar',
+    'show_card_number', 'hide_discount_on_cards', 'learner_mode', 'hide_animated_sidebar', 'color_label_buttons'
   ],
 );
 generateVueClass(

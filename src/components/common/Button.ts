@@ -1,4 +1,5 @@
 import Vue from 'vue';
+import {PreferencesManager} from '../PreferencesManager';
 
 export const Button = Vue.component('Button', {
   props: {
@@ -74,8 +75,10 @@ export const Button = Vue.component('Button', {
         classes.push('btn-submit');
       }
 
-      if (this.danger || this.title === 'Discard' || this.title === 'Sell') {
-        classes.push('btn-dangerous');
+      if (this.danger || this.title.includes('Discard' || this.title === 'Sell')) {
+        if (PreferencesManager.loadBooleanValue('color_label_buttons')) {
+          classes.push('btn-dangerous');
+        }
       }
 
       // align

@@ -87,7 +87,7 @@ export class TheDarksideofTheMoonSyndicate implements CorporationCard {
       return undefined;
     }
     const game = activePlayer.game;
-    if (MoonExpansion.MOON_TILES.includes(space.tile.tileType)) {
+    if (MoonExpansion.MOON_TILES.has(space.tile.tileType)) {
       const costs = new Multiset<Player>();
       MoonExpansion.moonData(game).moon.getAdjacentSpaces(space).forEach((space) => {
         if (space.tile !== undefined && space.player !== undefined && space.player !== activePlayer) {

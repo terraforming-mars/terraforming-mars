@@ -23,7 +23,7 @@ import {BoardType} from '../boards/BoardType';
 // }
 
 export class MoonExpansion {
-  public static readonly MOON_TILES = [
+  public static readonly MOON_TILES: Set<TileType> = new Set([
     TileType.MOON_MINE,
     TileType.MOON_COLONY,
     TileType.MOON_ROAD,
@@ -31,7 +31,7 @@ export class MoonExpansion {
     TileType.LUNA_MINING_HUB,
     TileType.LUNA_TRAIN_STATION,
     TileType.LUNAR_MINE_URBANIZATION,
-  ];
+  ]);
 
   private constructor() {
   }
@@ -101,7 +101,7 @@ export class MoonExpansion {
     const game = player.game;
     MoonExpansion.ifMoon(game, (moonData) => {
       const space = moonData.moon.getSpace(spaceId);
-      if (!this.MOON_TILES.includes(tile.tileType)) {
+      if (!this.MOON_TILES.has(tile.tileType)) {
         throw new Error(`Bad tile type for the moon: ${tile.tileType}`);
       }
       if (space.tile !== undefined) {

@@ -73,7 +73,7 @@ export const Preferences = Vue.component('preferences', {
       'hide_discount_on_cards': false as boolean | unknown[],
       'learner_mode': true as boolean | unknown[],
       'hide_animated_sidebar': false as boolean | unknown[],
-      'color_label_buttons': false as boolean | unknown[],
+      'hide_color_code_buttons': false as boolean | unknown[],
     };
   },
   methods: {
@@ -310,8 +310,8 @@ export const Preferences = Vue.component('preferences', {
                     </div>
                     <div class="preferences_panel_item">
                         <label class="form-switch">
-                            <input type="checkbox" v-on:change="updatePreferences" v-model="color_label_buttons" />
-                            <i class="form-icon"></i> <span v-i18n>Color label skip/discard/sell buttons</span>
+                            <input type="checkbox" v-on:change="updatePreferences" v-model="hide_color_code_buttons" />
+                            <i class="form-icon"></i> <span v-i18n>Hide label skip/discard/sell buttons</span>
                         </label>
                     </div>
                     <div class="preferences_panel_item">

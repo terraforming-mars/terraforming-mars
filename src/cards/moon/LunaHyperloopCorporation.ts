@@ -26,13 +26,13 @@ export class LunaHyperloopCorporation implements IActionCard, CorporationCard {
   }
 
   public action(player: Player) {
-    const roadTileCount = MoonExpansion.tiles(player.game, TileType.MOON_ROAD, true).length;
+    const roadTileCount = MoonExpansion.tiles(player.game, TileType.MOON_ROAD, {surfaceOnly: true}).length;
     player.megaCredits += roadTileCount;
     return undefined;
   }
 
   public getVictoryPoints(player: Player) {
-    return MoonExpansion.tiles(player.game, TileType.MOON_ROAD, true).length;
+    return MoonExpansion.tiles(player.game, TileType.MOON_ROAD, {surfaceOnly: true}).length;
   }
 
   public readonly metadata: CardMetadata = {

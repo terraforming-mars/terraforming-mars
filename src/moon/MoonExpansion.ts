@@ -22,17 +22,17 @@ import {BoardType} from '../boards/BoardType';
 //   coOwner: PlayerId;
 // }
 
-const MOON_TILES = [
-  TileType.MOON_MINE,
-  TileType.MOON_COLONY,
-  TileType.MOON_ROAD,
-  TileType.LUNA_TRADE_STATION,
-  TileType.LUNA_MINING_HUB,
-  TileType.LUNA_TRAIN_STATION,
-  TileType.LUNAR_MINE_URBANIZATION,
-];
-
 export class MoonExpansion {
+  public static readonly MOON_TILES: Set<TileType> = new Set([
+    TileType.MOON_MINE,
+    TileType.MOON_COLONY,
+    TileType.MOON_ROAD,
+    TileType.LUNA_TRADE_STATION,
+    TileType.LUNA_MINING_HUB,
+    TileType.LUNA_TRAIN_STATION,
+    TileType.LUNAR_MINE_URBANIZATION,
+  ]);
+
   private constructor() {
   }
 
@@ -101,7 +101,7 @@ export class MoonExpansion {
     const game = player.game;
     MoonExpansion.ifMoon(game, (moonData) => {
       const space = moonData.moon.getSpace(spaceId);
-      if (!MOON_TILES.includes(tile.tileType)) {
+      if (!this.MOON_TILES.has(tile.tileType)) {
         throw new Error(`Bad tile type for the moon: ${tile.tileType}`);
       }
       if (space.tile !== undefined) {
@@ -225,6 +225,21 @@ export class MoonExpansion {
     }
   }
 
+  // Use this to test whether a space has a given moon tile type rather than
+  // testing tiletype directly. It takes into account Lunar Mine Urbanization.
+  public static spaceHasType(space: ISpace, type: TileType): boolean {
+    if (space.tile === undefined) {
+      return false;
+    }
+    if (space.tile.tileType === type) {
+      return true;
+    }
+    if (space.tile.tileType === TileType.LUNAR_MINE_URBANIZATION) {
+      return type === TileType.MOON_COLONY || type === TileType.MOON_MINE;
+    }
+    return false;
+  }
+
   /*
    * Return the list of spaces on the board with a given tile type, optionally excluding
    * colony spaces.
@@ -233,31 +248,27 @@ export class MoonExpansion {
    */
   public static tiles(
     game: Game,
-    tileType: TileType,
-    surfaceOnly: boolean = false,
-    player? : Player): Array<ISpace> {
+    tileType?: TileType,
+    options?: {
+      surfaceOnly?: boolean,
+      ownedBy? : Player
+    }): Array<ISpace> {
     return MoonExpansion.ifElseMoon(game, (moonData) => {
       return moonData.moon.spaces.filter(
         (space) => {
           if (space.tile === undefined) {
             return false;
           }
-          const type = space.tile.tileType;
           let include: boolean = true;
-          if (tileType === TileType.MOON_COLONY) {
-            include = type === TileType.MOON_COLONY || type === TileType.LUNAR_MINE_URBANIZATION;
-          } else if (tileType === TileType.MOON_MINE) {
-            include = type === TileType.MOON_MINE || type === TileType.LUNAR_MINE_URBANIZATION;
-          } else {
-            include = type === tileType;
+          if (tileType) {
+            include = MoonExpansion.spaceHasType(space, tileType);
           }
-
-          if (include && surfaceOnly) {
+          if (include && options?.surfaceOnly) {
             include = space.spaceType !== SpaceType.COLONY;
           }
 
-          if (include && player !== undefined) {
-            include = space.player === player;
+          if (include && options?.ownedBy !== undefined) {
+            include = space.player === options?.ownedBy;
           }
 
           return include;
@@ -311,7 +322,7 @@ export class MoonExpansion {
             break;
           case TileType.MOON_MINE:
           case TileType.MOON_COLONY:
-            const points = moon.getAdjacentSpaces(space).filter((adj) => adj.tile?.tileType === TileType.MOON_ROAD).length;
+            const points = moon.getAdjacentSpaces(space).filter((adj) => MoonExpansion.spaceHasType(adj, TileType.MOON_ROAD)).length;
             if (space.tile.tileType === TileType.MOON_MINE) {
               player.victoryPointsBreakdown.setVictoryPoints('moon mine', points);
             } else {

@@ -20,6 +20,7 @@ export interface PlayerInputModel {
     options: Array<PlayerInputModel> | undefined;
     min: number | undefined;
     max: number | undefined;
+    maxByDefault?: boolean;
     maxCardsToSelect: number | undefined;
     microbes: number | undefined;
     floaters: number | undefined;

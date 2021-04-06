@@ -27,6 +27,7 @@ export interface PlayerInputModel {
     players: Array<ColorWithNeutral> | undefined;
     title: string | Message;
     buttonLabel: string;
+    buttonDanger?: boolean;
     coloniesModel : Array<ColonyModel> | undefined;
     payProduction?: IPayProductionModel;
     aresData?: IAresData;

@@ -75,7 +75,7 @@ export const Button = Vue.component('Button', {
         classes.push('btn-submit');
       }
 
-      if (this.danger || this.title === 'Discard' || this.title === 'Sell') {
+      if (this.danger) {
         if (!PreferencesManager.loadBooleanValue('hide_color_code_buttons')) {
           classes.push('btn-dangerous');
         }

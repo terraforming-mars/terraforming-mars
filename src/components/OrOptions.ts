@@ -148,6 +148,7 @@ export const OrOptions = Vue.component('or-options', {
                     onClick: () => {
                       this.saveData();
                     },
+                    danger: this.playerinput.buttonDanger,
                   },
                 }),
               ],

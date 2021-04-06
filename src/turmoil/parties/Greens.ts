@@ -19,7 +19,7 @@ import {ResourceType} from '../../ResourceType';
 import {Phase} from '../../Phase';
 import {SelectHowToPayDeferred} from '../../deferredActions/SelectHowToPayDeferred';
 import {DeferredAction} from '../../deferredActions/DeferredAction';
-import {POLITICAL_AGENDAS_MAX_ACTION_USES} from '../../constants';
+import {POLITICAL_AGENDAS_MAX_ACTION_USES, GREENS_RULING_POLICY_REBATE} from '../../constants';
 import {TurmoilPolicy} from '../TurmoilPolicy';
 
 export class Greens extends Party implements IParty {
@@ -65,7 +65,7 @@ class GreensPolicy01 implements Policy {
 
   onTilePlaced(player: Player, space: ISpace) {
     if (space.tile?.tileType === TileType.GREENERY && player.game.phase === Phase.ACTION) {
-      player.setResource(Resources.MEGACREDITS, 4);
+      player.setResource(Resources.MEGACREDITS, GREENS_RULING_POLICY_REBATE);
     }
   }
 }

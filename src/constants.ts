@@ -27,6 +27,7 @@ export const ENERGY_TRADE_COST: number = 3;
 export const TITANIUM_TRADE_COST: number = 3;
 // Turmoil
 export const PLAYER_DELEGATES_COUNT: number = 7;
+export const GREENS_RULING_POLICY_REBATE: number = 4;
 export const REDS_RULING_POLICY_COST: number = 3;
 export const POLITICAL_AGENDAS_MAX_ACTION_USES: number = 3;
 // Map specific

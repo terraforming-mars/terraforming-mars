@@ -8,6 +8,10 @@ import {SpaceType} from '../SpaceType';
 import {BoardBuilder} from './BoardBuilder';
 import {SerializedBoard} from './SerializedBoard';
 import {Random} from '../Random';
+import {TileType} from '../TileType';
+import {PartyName} from '../turmoil/parties/PartyName';
+import {GREENS_RULING_POLICY_REBATE} from '../constants';
+import {CardName} from '../CardName';
 
 export class HellasBoard extends Board {
   public static newInstance(shuffle: boolean, rng: Random, includeVenus: boolean): HellasBoard {
@@ -51,8 +55,25 @@ export class HellasBoard extends Board {
     return new HellasBoard(Board.deserializeSpaces(board.spaces, players));
   }
 
-  private filterHellas(player: Player, spaces: Array<ISpace>) {
-    return player.canAfford(HELLAS_BONUS_OCEAN_COST) ? spaces : spaces.filter((space) => space.id !== SpaceName.HELLAS_OCEAN_TILE);
+  private filterHellas(player: Player, spaces: Array<ISpace>, tileType?: TileType) {
+    let cost = HELLAS_BONUS_OCEAN_COST;
+    if (tileType === TileType.GREENERY) {
+      if (player.game.turmoil?.rulingParty.name === PartyName.GREENS) cost -= GREENS_RULING_POLICY_REBATE;
+      if (player.cardIsInEffect(CardName.HERBIVORES) && player.cardIsInEffect(CardName.MEAT_INDUSTRY)) cost -= 2;
+    }
+    if (tileType === TileType.CITY) {
+      if (player.corporationCard?.name === CardName.THARSIS_REPUBLIC) cost -= 3;
+      if (player.cardIsInEffect(CardName.ROVER_CONSTRUCTION)) cost -= 2;
+    }
+    if (tileType === TileType.LAVA_FLOWS) {
+      if (player.cardIsInEffect(CardName.MEDIA_GROUP)) cost -= 2;
+    }
+    if (tileType === TileType.DEIMOS_DOWN) {
+      if (player.cardIsInEffect(CardName.MEDIA_GROUP)) cost -= 2;
+      if (player.cardIsInEffect(CardName.OPTIMAL_AEROBRAKING)) cost -= 3;
+    }
+    console.log(`tile: ${tileType}, const: ${cost}, canAfford: ${player.canAfford(cost)}`);
+    return player.canAfford(cost) ? spaces : spaces.filter((space) => space.id !== SpaceName.HELLAS_OCEAN_TILE);
   }
 
   public getSpaces(spaceType: SpaceType, player: Player): Array<ISpace> {
@@ -60,7 +81,7 @@ export class HellasBoard extends Board {
   }
 
   public getAvailableSpacesForCity(player: Player): Array<ISpace> {
-    return this.filterHellas(player, super.getAvailableSpacesForCity(player));
+    return this.filterHellas(player, super.getAvailableSpacesForCity(player), TileType.CITY);
   }
 
   public getAvailableSpacesOnLand(player: Player): Array<ISpace> {
@@ -68,7 +89,7 @@ export class HellasBoard extends Board {
   }
 
   public getAvailableSpacesForGreenery(player: Player): Array<ISpace> {
-    return this.filterHellas(player, super.getAvailableSpacesForGreenery(player));
+    return this.filterHellas(player, super.getAvailableSpacesForGreenery(player), TileType.GREENERY);
   }
 
   public getVolcanicSpaceIds(): Array<string> {

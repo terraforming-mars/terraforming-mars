@@ -39,7 +39,7 @@ export class Sabotage extends Card implements IProjectCard {
         const optionTitle = 'Remove ' + amountRemoved + ' titanium from ' + target.name;
 
         availableActions.options.push(new SelectOption(optionTitle, 'Confirm', () => {
-          target.setResource(Resources.TITANIUM, -3, player.game, player);
+          target.setResource(Resources.TITANIUM, -amountRemoved, player.game, player);
           return undefined;
         }));
       }
@@ -49,7 +49,7 @@ export class Sabotage extends Card implements IProjectCard {
         const optionTitle = 'Remove ' + amountRemoved + ' steel from ' + target.name;
 
         availableActions.options.push(new SelectOption(optionTitle, 'Confirm', () => {
-          target.setResource(Resources.STEEL, -4, player.game, player);
+          target.setResource(Resources.STEEL, -amountRemoved, player.game, player);
           return undefined;
         }));
       }
@@ -59,7 +59,7 @@ export class Sabotage extends Card implements IProjectCard {
         const optionTitle = 'Remove ' + amountRemoved + ' MC from ' + target.name;
 
         availableActions.options.push(new SelectOption(optionTitle, 'Confirm', () => {
-          target.setResource(Resources.MEGACREDITS, -7, player.game, player);
+          target.setResource(Resources.MEGACREDITS, -amountRemoved, player.game, player);
           return undefined;
         }));
       }

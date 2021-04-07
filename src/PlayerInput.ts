@@ -5,6 +5,7 @@ import {PlayerInputTypes} from './PlayerInputTypes';
 export interface PlayerInput {
     inputType: PlayerInputTypes;
     buttonLabel: string;
+    buttonDanger?: boolean;
     options?: Array<PlayerInput>;
     title: string | Message;
     cb: (...item: any) => PlayerInput | undefined;

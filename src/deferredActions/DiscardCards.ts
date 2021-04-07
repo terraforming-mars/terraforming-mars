@@ -17,7 +17,7 @@ export class DiscardCards implements DeferredAction {
       cards.forEach((card) => this.player.game.dealer.discard(card));
       return undefined;
     }
-    return new SelectCard(
+    const select = new SelectCard(
       this.title,
       'Discard',
       this.player.cardsInHand,
@@ -31,5 +31,7 @@ export class DiscardCards implements DeferredAction {
       this.count,
       this.count,
     );
+    select.buttonDanger = true;
+    return select;
   }
 }

@@ -30,7 +30,7 @@ export class SellPatentsStandardProject extends StandardProjectCard {
   }
 
   public action(player: Player): SelectCard<IProjectCard> {
-    return new SelectCard(
+    const select = new SelectCard(
       'Sell patents',
       'Sell',
       player.cardsInHand,
@@ -50,5 +50,7 @@ export class SellPatentsStandardProject extends StandardProjectCard {
         return undefined;
       }, player.cardsInHand.length,
     );
+    select.buttonDanger = true;
+    return select;
   }
 }

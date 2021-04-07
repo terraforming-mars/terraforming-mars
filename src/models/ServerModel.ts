@@ -223,7 +223,7 @@ function getWaitingFor(
   const playerInputModel: PlayerInputModel = {
     title: waitingFor.title,
     buttonLabel: waitingFor.buttonLabel,
-    buttonDanger: waitingFor.buttonLabel === 'Sell' || waitingFor.buttonLabel === 'Discard' ? true : undefined,
+    buttonDanger: waitingFor.buttonDanger,
     inputType: waitingFor.inputType,
     amount: undefined,
     options: undefined,

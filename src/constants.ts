@@ -44,6 +44,7 @@ export const LANGUAGES = [
   {'id': 'cn', 'title': 'Chinese'},
   {'id': 'pl', 'title': 'Polish'},
   {'id': 'es', 'title': 'Spanish'},
+  {'id': 'br', 'title': 'Português Brasileiro'},
 ];
 
 export const APP_NAME = 'Terraforming Mars';

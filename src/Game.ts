@@ -753,7 +753,7 @@ export class Game implements ISerializable<SerializedGame> {
   }
 
   public isDoneWithFinalProduction(): boolean {
-    return this.gameIsOver() && this.phase === Phase.PRODUCTION;
+    return this.phase === Phase.END || (this.gameIsOver() && this.phase === Phase.PRODUCTION);
   }
 
   private gotoProductionPhase(): void {

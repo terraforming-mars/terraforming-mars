@@ -295,7 +295,7 @@ export class Player implements ISerializable<SerializedPlayer> {
       const monsInsuranceOwner: Player = this.game.getPlayerById(this.game.monsInsuranceOwner);
       const retribution: number = Math.min(monsInsuranceOwner.megaCredits, 3);
       this.megaCredits += retribution;
-      monsInsuranceOwner.setResource(Resources.MEGACREDITS, -retribution);
+      monsInsuranceOwner.setResource(Resources.MEGACREDITS, -3);
       if (retribution > 0) {
         this.game.log('${0} received ${1} MC from ${2} owner (${3})', (b) =>
           b.player(this)
@@ -307,22 +307,41 @@ export class Player implements ISerializable<SerializedPlayer> {
   }
 
   public setResource(resource: Resources, amount : number = 1, game? : Game, fromPlayer? : Player, globalEvent? : boolean) {
-    if (resource === Resources.MEGACREDITS) this.megaCredits = Math.max(0, this.megaCredits + amount);
-    if (resource === Resources.STEEL) this.steel = Math.max(0, this.steel + amount);
-    if (resource === Resources.TITANIUM) this.titanium = Math.max(0, this.titanium + amount);
-    if (resource === Resources.PLANTS) this.plants = Math.max(0, this.plants + amount);
-    if (resource === Resources.ENERGY) this.energy = Math.max(0, this.energy + amount);
-    if (resource === Resources.HEAT) this.heat = Math.max(0, this.heat + amount);
+    var variation = 0
+    if (resource === Resources.MEGACREDITS) {
+      variation = Math.max(0, this.megaCredits + amount) - this.megaCredits;
+      this.megaCredits = this.megaCredits + variation;
+    }
+    if (resource === Resources.STEEL) {
+      variation = Math.max(0, this.steel + amount) - this.steel;
+      this.steel = this.steel + variation;
+    }
+    if (resource === Resources.TITANIUM) {
+      variation = Math.max(0, this.titanium + amount) - this.titanium;
+      this.titanium = this.titanium + variation;
+    }
+    if (resource === Resources.PLANTS) {
+      variation = Math.max(0, this.plants + amount) - this.plants;
+      this.plants = this.plants + variation;
+    }
+    if (resource === Resources.ENERGY) {
+      variation = Math.max(0, this.energy + amount) - this.energy;
+      this.energy = this.energy + variation;
+    }
+    if (resource === Resources.HEAT) {
+      variation = Math.max(0, this.heat + amount) - this.heat;
+      this.heat = this.heat + variation;
+    }
 
     const modifier = amount > 0 ? 'increased' : 'decreased';
 
-    if (game !== undefined && fromPlayer !== undefined && amount < 0) {
+    if (game !== undefined && fromPlayer !== undefined && variation < 0) {
       if (fromPlayer !== this && this.removingPlayers.includes(fromPlayer.id) === false) {
         this.removingPlayers.push(fromPlayer.id);
       }
 
       // Crash site cleanup hook
-      if (fromPlayer !== this && resource === Resources.PLANTS && amount < 0) {
+      if (fromPlayer !== this && resource === Resources.PLANTS && variation < 0) {
         game.someoneHasRemovedOtherPlayersPlants = true;
       }
 
@@ -330,17 +349,17 @@ export class Player implements ISerializable<SerializedPlayer> {
         b.player(this)
           .string(resource)
           .string(modifier)
-          .number(Math.abs(amount))
+          .number(Math.abs(variation))
           .player(fromPlayer));
     }
 
     // Global event logging
-    if (game !== undefined && globalEvent && amount !== 0) {
+    if (game !== undefined && globalEvent && variation !== 0) {
       game.log('${0}\'s ${1} amount ${2} by ${3} by Global Event', (b) =>
         b.player(this)
           .string(resource)
           .string(modifier)
-          .number(Math.abs(amount)));
+          .number(Math.abs(variation)));
     }
 
     // Mons Insurance hook

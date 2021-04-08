@@ -12,6 +12,7 @@ describe('LawSuit', function() {
   beforeEach(function() {
     card = new LawSuit();
     player = TestPlayers.BLUE.newPlayer();
+    player.megaCredits = 1;
     player2 = TestPlayers.RED.newPlayer();
     game = Game.newInstance('foobar', [player, player2], player);
   });

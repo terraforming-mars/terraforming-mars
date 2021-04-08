@@ -8,6 +8,7 @@ import {ImprovedMoonConcrete} from '../../../src/cards/moon/ImprovedMoonConcrete
 import {expect} from 'chai';
 import {MareSerenitatisMine} from '../../../src/cards/moon/MareSerenitatisMine';
 import {CardName} from '../../../src/CardName';
+import {MoonMineStandardProject} from '../../../src/cards/moon/MoonMineStandardProject';
 
 const MOON_OPTIONS = TestingUtils.setCustomGameOptions({moonExpansion: true});
 
@@ -59,8 +60,23 @@ describe('ImprovedMoonConcrete', () => {
     player.steel = 1;
     expect(player.getPlayableCards().map((card) => card.name)).is.empty;
 
-    // And this one shows that with Improved Moon Concrete, doesn't need the titanium.
+    // And this one shows that with Improved Moon Concrete, titanium isn't necessary
     player.playedCards = [card];
     expect(player.getPlayableCards().map((card) => card.name)).deep.eq([CardName.MARE_SERENITATIS_MINE]);
+  });
+
+  it('applies to mine standard project', () => {
+    player.titanium = 1;
+    player.megaCredits = 1000;
+
+    const projectCard = new MoonMineStandardProject();
+    expect(projectCard.canAct(player)).is.true;
+
+    player.titanium = 0;
+    expect(projectCard.canAct(player)).is.false;
+
+    // And this one shows that with Improved Moon Concrete, titanium isn't necessary
+    player.playedCards = [card];
+    expect(projectCard.canAct(player)).is.true;
   });
 });

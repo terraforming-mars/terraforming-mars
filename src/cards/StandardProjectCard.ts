@@ -14,6 +14,7 @@ import {CardMetadata} from './CardMetadata';
 import {CardName} from '../CardName';
 import {SelectHowToPayDeferred} from '../deferredActions/SelectHowToPayDeferred';
 import {Card} from './Card';
+import {MoonExpansion} from '../moon/MoonExpansion';
 
 interface StaticStandardProjectCardProperties {
   name: CardName,
@@ -52,7 +53,7 @@ export abstract class StandardProjectCard extends Card implements IActionCard, I
   }
 
   public canAct(player: Player): boolean {
-    return player.canAfford(this.cost - this.discount(player));
+    return player.canAfford(this.cost - this.discount(player), false, false, false, false, MoonExpansion.adjustedReserveCosts(player, this));
   }
 
   protected projectPlayed(player: Player) {

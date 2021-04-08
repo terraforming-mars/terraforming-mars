@@ -21,7 +21,7 @@ class Space implements ISpace {
     return new Space(id, SpaceType.LAND, x, y, bonus);
   }
   public static colony(id: string) {
-    return new Space(id, SpaceType.COLONY, 0, 0, []);
+    return new Space(id, SpaceType.COLONY, -1, -1, []);
   }
 }
 

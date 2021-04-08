@@ -307,7 +307,7 @@ export class Player implements ISerializable<SerializedPlayer> {
   }
 
   public setResource(resource: Resources, amount : number = 1, game? : Game, fromPlayer? : Player, globalEvent? : boolean) {
-    var variation = 0
+    let variation = 0;
     if (resource === Resources.MEGACREDITS) {
       variation = Math.max(0, this.megaCredits + amount) - this.megaCredits;
       this.megaCredits = this.megaCredits + variation;

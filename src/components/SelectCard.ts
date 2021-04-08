@@ -113,7 +113,7 @@ export const SelectCard = Vue.component('select-card', {
       return undefined;
     },
     buttonLabel: function(): string {
-      return this.playerinput.buttonLabel + ' ' + this.cardsSelected();
+      return this.playerinput.maxCardsToSelect !== 1 ? this.playerinput.buttonLabel + ' ' + this.cardsSelected() : this.playerinput.buttonLabel;
     },
   },
   template: `<div class="wf-component wf-component--select-card">

@@ -32,8 +32,8 @@ export class LunaConference extends Card implements IProjectCard {
   };
 
   public play(player: Player) {
-    const moonRoadCount = MoonExpansion.tiles(player.game, TileType.MOON_ROAD, true).length;
-    const moonColonyCount = MoonExpansion.tiles(player.game, TileType.MOON_COLONY, true).length;
+    const moonRoadCount = MoonExpansion.tiles(player.game, TileType.MOON_ROAD, {surfaceOnly: true}).length;
+    const moonColonyCount = MoonExpansion.tiles(player.game, TileType.MOON_COLONY, {surfaceOnly: true}).length;
     player.megaCredits += (moonRoadCount + moonColonyCount) * 2;
     return undefined;
   }

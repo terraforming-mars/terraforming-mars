@@ -46,11 +46,11 @@ export class LunaTradeStation extends MoonCard implements IActionCard {
   }
 
   public canAct(player: Player): boolean {
-    return MoonExpansion.tiles(player.game, TileType.MOON_MINE, true).length > 0;
+    return MoonExpansion.tiles(player.game, TileType.MOON_MINE, {surfaceOnly: true}).length > 0;
   }
 
   public action(player: Player) {
-    const surfaceMines = MoonExpansion.tiles(player.game, TileType.MOON_MINE, true).length;
+    const surfaceMines = MoonExpansion.tiles(player.game, TileType.MOON_MINE, {surfaceOnly: true}).length;
     player.megaCredits += surfaceMines;
     return undefined;
   }

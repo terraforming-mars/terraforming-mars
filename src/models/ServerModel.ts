@@ -236,6 +236,7 @@ function getWaitingFor(
     availableSpaces: undefined,
     min: undefined,
     max: undefined,
+    maxByDefault: undefined,
     microbes: undefined,
     floaters: undefined,
     coloniesModel: undefined,
@@ -305,6 +306,7 @@ function getWaitingFor(
   case PlayerInputTypes.SELECT_AMOUNT:
     playerInputModel.min = (waitingFor as SelectAmount).min;
     playerInputModel.max = (waitingFor as SelectAmount).max;
+    playerInputModel.maxByDefault = (waitingFor as SelectAmount).maxByDefault;
     break;
   case PlayerInputTypes.SELECT_DELEGATE:
     playerInputModel.players = (waitingFor as SelectDelegate).players.map(

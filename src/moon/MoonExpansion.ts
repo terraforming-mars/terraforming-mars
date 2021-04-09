@@ -125,8 +125,7 @@ export class MoonExpansion {
         });
       }
 
-      // TODO(kberg): indicate that it's a moon space.
-      LogHelper.logTilePlacement(player, space, tile.tileType);
+      MoonExpansion.logTilePlacement(player, space, tile.tileType);
 
       // Ideally, this should be part of game.addTile, but since it isn't it's convenient enough to
       // hard-code onTilePlaced here. I wouldn't be surprised if this introduces a problem, but for now
@@ -137,11 +136,24 @@ export class MoonExpansion {
     });
   }
 
+  private static logTilePlacement(player: Player, space: ISpace, tileType: TileType) {
+    // Skip off-grid tiles
+    if (space.x !== -1 && space.y !== -1) {
+      const offsets = [-1, 0, 1, 1, 1, 0, -1];
+      const row: number = space.y + 1;
+      const position: number = space.x + offsets[space.y];
+
+      player.game.log('${0} placed a ${1} tile on the Moon at (${2}, ${3})', (b) =>
+        b.player(player).string(TileType.toString(tileType)).number(row).number(position));
+    }
+  }
+
   private static bonus(originalRate: number, increment: number, value: number, cb: () => void): void {
     if (originalRate < value && originalRate + increment >= value) {
       cb();
     }
   }
+
   public static raiseMiningRate(player: Player, count: number = 1) {
     MoonExpansion.ifMoon(player.game, (moonData) => {
       const available = MAXIMUM_MINING_RATE - moonData.miningRate;

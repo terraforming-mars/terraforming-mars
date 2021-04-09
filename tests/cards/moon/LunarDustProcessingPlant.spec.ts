@@ -8,6 +8,7 @@ import {LunarDustProcessingPlant} from '../../../src/cards/moon/LunarDustProcess
 import {expect} from 'chai';
 import {MareSerenitatisMine} from '../../../src/cards/moon/MareSerenitatisMine';
 import {CardName} from '../../../src/CardName';
+import {MoonRoadStandardProject} from '../../../src/cards/moon/MoonRoadStandardProject';
 
 const MOON_OPTIONS = TestingUtils.setCustomGameOptions({moonExpansion: true});
 
@@ -59,8 +60,23 @@ describe('LunarDustProcessingPlant', () => {
     player.steel = 0;
     expect(player.getPlayableCards().map((card) => card.name)).is.empty;
 
-    // And this one shows that with Lunar Dust Processing Plant, doesn't need steel.
+    // And this one shows that with Lunar Dust Processing Plant, steel isn't necessary
     player.playedCards = [card];
     expect(player.getPlayableCards().map((card) => card.name)).deep.eq([CardName.MARE_SERENITATIS_MINE]);
+  });
+
+  it('applies to road standard project', () => {
+    player.steel = 1;
+    player.megaCredits = 1000;
+
+    const projectCard = new MoonRoadStandardProject();
+    expect(projectCard.canAct(player)).is.true;
+
+    player.steel = 0;
+    expect(projectCard.canAct(player)).is.false;
+
+    // And this one shows that with Lunar Dust Processing Plant, steel isn't necessary
+    player.playedCards = [card];
+    expect(projectCard.canAct(player)).is.true;
   });
 });

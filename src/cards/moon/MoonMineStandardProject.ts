@@ -6,8 +6,10 @@ import {MoonExpansion} from '../../moon/MoonExpansion';
 import {PlaceMoonMineTile} from '../../moon/PlaceMoonMineTile';
 import {Units} from '../../Units';
 import {Resources} from '../../Resources';
+import {IMoonCard} from './IMoonCard';
+import {TileType} from '../../TileType';
 
-export class MoonMineStandardProject extends StandardProjectCard {
+export class MoonMineStandardProject extends StandardProjectCard implements IMoonCard {
   constructor() {
     super({
       name: CardName.MOON_MINE_STANDARD_PROJECT,
@@ -24,6 +26,7 @@ export class MoonMineStandardProject extends StandardProjectCard {
   }
 
   public reserveUnits = Units.of({titanium: 1});
+  public tilesBuilt = [TileType.MOON_MINE];
 
   protected discount(player: Player): number {
     if (player.playedCards.find((card) => card.name === CardName.MOONCRATE_BLOCK_FACTORY)) {
@@ -40,7 +43,7 @@ export class MoonMineStandardProject extends StandardProjectCard {
       return false;
     }
 
-    return player.canAfford(this.cost) && player.hasUnits(this.reserveUnits);
+    return super.canAct(player);
   }
 
   actionEssence(player: Player): void {

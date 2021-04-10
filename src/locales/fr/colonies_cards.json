@@ -53,7 +53,7 @@
     "Place a colony.": "Placez 1 colonie",
     
     "Jovian Lanterns": "Lanternes Joviennes",
-	"Action: Spend 1 titanium to add 2 floaters here.": "Action: Dépensez 1 titane pour ajouter 2 flotteurs sur cette carte" 
+    "Action: Spend 1 titanium to add 2 floaters here.": "Action: Dépensez 1 titane pour ajouter 2 flotteurs sur cette carte", 
     "Requires 1 Jovian tag. Increase your TR 1 step. Add 2 floaters to ANY card. 1VP per 2 floaters.": "Nécessite 1 badge Jovien. Augmentez votre NT de 1. Ajoutez 2 flotteurs à N'IMPORTE QUELLE carte. 1PV par groupe de 2 flotteurs sur cette carte",
     
     "Jupiter Floating Station": "Station Flottante Jovienne",
@@ -112,8 +112,8 @@
     "Place a colony. MAY BE PLACED WHERE YOU ALREADY HAVE A COLONY. Draw 2 cards.": "Placez 1 colonie. ELLE PEUT ETRE PLACEE SUR UNE TUILE COLONIE OU VOUS AVEZ DEJA UN COLONIE. Piochez 2 cartes.",
     
     "Rim Freighters": "Cargos de la Bordure",
-	"Effect: When you trade, you pay 1 less resource for it.": "Effet: Lorsque vous commercez, le coût est réduit de 1 ressource."
-	
+    "Effect: When you trade, you pay 1 less resource for it.": "Effet: Lorsque vous commercez, le coût est réduit de 1 ressource.",
+    
     "Sky Docks": "Docks Orbitaux",
     "Effect: When you play a card, you pay 1 MC less for it.": "Effet: Le coût de vos cartes est réduit de 1 M€",
     "Requires 2 Earth tags. Gain 1 Trade Fleet.": "Nécessite 2 badges Terre. Gagnez 1 Flotte marchande",
@@ -153,7 +153,7 @@
     
     "Trading Colony": "Colonie Marchande",
     "Effect: When you trade, you may first increase that Colony Tile track 1 step.": "Effet: Lorsque vous commercez, faites d'abord progresser la tuile colonie de 1. Placez 1 colonie.",
-	
+    
     "Urban Decomposers": "Décomposeurs Urbains",
     "Requires that you have 1 city tile and 1 colony in play. Increase your plant production 1 step, and add 2 microbes to ANOTHER card.": "Nécessite que vous ayez 1 tuile Cité et 1 colonie en jeu. Augmentez votre production de plantes de 1 et ajoutez 2 microbes à une AUTRE carte.",
     

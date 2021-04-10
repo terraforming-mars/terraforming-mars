@@ -42,7 +42,6 @@ export const SelectCard = Vue.component('select-card', {
   },
   data: function() {
     return {
-      // Preselect the card if there is only one card as an option
       cards: [],
       warning: undefined,
     } as SelectCardModel;

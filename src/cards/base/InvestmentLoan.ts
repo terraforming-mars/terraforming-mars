@@ -16,7 +16,7 @@ export class InvestmentLoan extends Card implements IProjectCard {
       cost: 3,
 
       metadata: {
-        cardNumber: '110',
+        cardNumber: '151',
         renderData: CardRenderer.builder((b) => {
           b.production((pb) => pb.megacredits(-1)).nbsp.megacredits(10);
         }),

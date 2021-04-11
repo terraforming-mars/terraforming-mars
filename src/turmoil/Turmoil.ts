@@ -145,16 +145,29 @@ export class Turmoil implements ISerializable<SerializedTurmoil> {
     }
 
     // Use to remove a delegate from a specific party
-    public removeDelegateFromParty(playerId: PlayerId | NeutralPlayer, partyName: PartyName, game: Game, dominanceCheck: boolean = true): void {
+    public removeDelegateFromParty(playerId: PlayerId | NeutralPlayer, partyName: PartyName, game: Game): void {
       const party = this.getPartyByName(partyName);
       if (party) {
         this.delegateReserve.push(playerId);
         party.removeDelegate(playerId, game);
+        this.checkDominantParty(party);
+      } else {
+        throw 'Party not found';
+      }
+    }
 
-        // Skip party dominant party check during removal part of Recruitment
-        if (dominanceCheck) {
-          this.checkDominantParty(party);
-        }
+    // Use to replace a delegate from a specific party with another delegate with NO DOMINANCE CHANGE
+    public replaceDelegateFromParty(
+      outgoingPlayerId: PlayerId | NeutralPlayer,
+      incomingPlayerId: PlayerId | NeutralPlayer,
+      source: 'lobby' | 'reserve' = 'lobby',
+      partyName: PartyName,
+      game: Game): void {
+      const party = this.getPartyByName(partyName);
+      if (party) {
+        this.delegateReserve.push(outgoingPlayerId);
+        party.removeDelegate(outgoingPlayerId, game);
+        this.sendDelegateToParty(incomingPlayerId, partyName, game, source);
       } else {
         throw 'Party not found';
       }

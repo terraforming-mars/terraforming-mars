@@ -16,13 +16,14 @@
     "Take action for action phase, select one ": "Faça uma ação na fase de ações, escolha uma ",
     "available action.": "ação disponível.",
     "Take action": "Fazer ação",
-    "Take first action of ${0} corporation": "Faça a primera ação da ${0}",
+    "Take first action of ${0} corporation": "Fazer a primera ação da ${0}",
     "Don\u2019t place a greenery": "Não colocar um tile de vegetação",
     "${0}\u2019s ${1} amount ${2} by ${3} by ${4}": "${4} ${2} em ${3} a quantidade de ${1} de ${0}",
+    "${0}'s ${1} amount ${2} by ${3} by ${4}": "${4} ${2} em ${3} a quantidade de ${1} de ${0}",
     "increased":"aumentou",
     "decreased":"diminuiu",
     "${0}\u2019s ${1} production ${2} by ${3} by ${4}": "${4} ${2} em ${3} a produção de ${1} de ${0}",
-    "${0}\u2019s ${1} production ${2} by ${3} by Global Event": "${4} ${2} em ${3} a produção de ${1} pelo Evento Global",
+    "${0}\u2019s ${1} production ${2} by ${3} by Global Event": "{0} teve sua produção de ${1} ${2} em ${3} pelo Evento Global",
     "${0} removed ${1} resource(s) from ${2}\u2019s ${3}": "${0} removeu ${1} recurso(s) de ${3} de ${2}",
     "Card not found" : "Carta não encontrada",
     "Incorrect options provided" : "Opções incorretas inseridas",
@@ -55,7 +56,7 @@
     "Drew and discarded ${0} (cost ${1}) to place a ${2}": "Comprou e descartou ${0} (custo ${1}) para colocar ${2}",
 
     "${0} played ${1}": "${0} jogou ${1}",
-    "${0} used ${1} action": "${0} realizou a ação ${1}",
+    "${0} used ${1} action": "${0} fez a ação ${1}",
     "${0} funded ${1} award": "${0} financiou o prêmio ${1}",
     "${0} claimed ${1} milestone": "${0} reinvindicou o marco ${1} ",
     "${0} passed": "${0} passou",
@@ -76,7 +77,7 @@
     "${0}'s ${1} amount modified by ${2} by ${3}": "O recurso ${1} de ${0} foi modificado em ${2} por ${3}",
     "${0} received ${1} MC from ${2} owner (${3})": "${0} recebeu ${1} M$ de ${2} (${3})",
     "${0} copied ${1} production with ${2}": "${0} copiou a produção de ${1} com ${2}",
-    "${0} used ${1} action with ${2}": "${0} realizou a ação ${1} com ${2}",
+    "${0} used ${1} action with ${2}": "${0} fez a ação ${1} com ${2}",
     "${0} is the new chairman and gained ${1} TR": "${0} é o novo presidente e ganhou (${1}) IT",
     "Turmoil phase has been resolved": "A fase de Reviravolta terminou",
 
@@ -86,7 +87,7 @@
     "${0} drew ${1}, ${2} and ${3}": "${0} comprou ${1}, ${2} e ${3}",
     "${0} sold ${1} patents": "${0} vendeu patente ${1}",
     "${0}'s ${1} production increased by ${2}":"A produção de ${1} de ${0} foi aumentada em ${2}",
-    "${0} ${1} ${2} on row ${3} position ${4}": "${0} ${1} ${2} na fila ${3} posição ${4}",
+    "${0} ${1} ${2} on row ${3} position ${4}": "${0} ${1} ${2} na linha ${3} posição ${4}",
     "placed":"colocou",
     "greenery tile":"tile de vegetação",
     "ocean tile":"tile de oceano",
@@ -96,5 +97,31 @@
     "drew":"comprou",
     "bought":"comprou",
     "sold":"vendeu",
-    "${0} card(s) were discarded": "${0} carta(s) foi(ram) descartada(s)"
+    "${0} card(s) were discarded": "${0} carta(s) foi(ram) descartada(s)",
+
+    
+    "The ruling bonus is ${0}": "O bônus de governo é ${0}",
+    "The ruling policy is ${0}": "A política de governo é ${0}",
+
+    "A neutral delegate is the new chairman.": "Um delegado neutro é o novo Presidente.",
+    "Greens are in power in the first generation.": "Verdes começam sendo o partido governante na primeira geração.",
+    "${0} sent ${1} delegate(s) in ${2} area": "${0} moveu ${1} delegado(s) para área ${2}",  
+    "${0}'s ${1} production ${2} by ${3} by Global Event": "{0} teve sua produção de ${1} ${2} em ${3} pelo Evento Global",
+    "${0} placed a City tile": "${0} colocou um tile de Cidade",  
+    "${0} removed ${1} ${2} from ${3} to ${4}": "${0} removeu ${1} ${2} de ${3} para ${4}",  
+    "${0} is using their ${1} effect to draw a card.": "${0} está usando efeito de ${1} para comprar uma carta",
+    "Global event ": "Evento global ",
+    " has been resolved.": " foi resolvido",
+
+    "active": "ativo",
+    "passed": "passou",
+    "next": "próximo",
+    "none": "nada",
+    "drafting": "escolhendo",
+    "researching": "pesquisando",
+
+    "${0} used Turmoil Scientists action": "${0} usou ação do Cientistas: Reviravolta",
+    "Select how to pay for Turmoil Scientists action": "Escolha como pagar pela ação do Cientistas: Reviravolta",
+
+    "${0} doubled resources on ${1} from ${2} to ${3}": "${0} dobrou os recursos em ${1} de ${2} para ${3}"
 }

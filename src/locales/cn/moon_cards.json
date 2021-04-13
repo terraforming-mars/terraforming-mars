@@ -72,12 +72,131 @@
   "Earth Embassy":"地球大使馆",
   "Effect: After being played, when you perform an action, your Moon tags count as Earth tags, but not vice versa.":"效果:在打出后，当你执行一个动作时，你的月球标签算作地球标签，但反向不成立。",
   
-  
-  
-  
-  
-  
-  
+  "Geodesic Tents": "测量营地",
+  "Decrease your energy production 1 step and increase your plant production 1 step. ": "降低电产和植物产量 1 。",
+  "Spend 1 titanium. Place a colony tile on the Moon and raise the Colony Rate 1 step.": "花费1个钛。 在月球上放置一块殖民地砖，并提高 殖民效率 1步。",
+ 
+  "Grand Luna Academy": "大月球学院",
+  "Draw 1 card per 2 Moon tags you have, including this.": "每2个月亮标签抽一张牌，包括这张牌",
+ 
+  "HE3 Fusion Plant": "氦-3 核融合发电厂",
+ "2 Mining rate": "2采矿效率",
+ "Requires Mining Rate of 2 or higher. ": "要求采矿效率2或更高。",
+ "Increase your energy production 1 step for each mining tile on the Moon.": "月球上每个采矿板块增加1步电能产量。",
+ 
+ "HE3 Lobbyists": "氦-3 游说者",
+ "Increase your MC production 1 step for each moon tag you have (including this).": "每个月球标签（包括此牌），将您的MC产量增加1步。",
+
+ 
+ "HE3 Production Quotas": "氦-3 生产配额",
+ "ANY KELVINISTS": "任何开尔文党",
+ "MINE TILES": "采矿板块",
+ "Requires that Kelvinists are ruling or that you have 2 delegates there, and 1 mine tile on the Moon. ": "“要求开尔文主义党当权，或者你在那里有2个代表和在月球上有1个采矿板块。",
+ "Pay 1 steel per mine tile on the Moon to gain 4 heat per mine tile on the Moon. Raise the Mining Rate 1 step.": "在月球上的每个挖矿板块支付1钢可以获得4热能。提高采矿效率1步。",
+ 
+ 
+  "HE3 Refinery": "氦-3 提炼厂",
+ "Action: Gain 1 MC for each level of Mining Rate.": "行动：每一采矿效率等级获得1 MC。",
+ 
+ "Habitat 14": "14# 栖息地",
+ "Decrease your energy production 1 step and your MC production 1 step. Spend 1 titanium. Place a colony tile on the Moon and raise the Colony Rate 1 step.": "降低电能和MC产量1步。花费1钛，在月球上放一块殖民地板块，并提高1殖民地效率。",
+ 
+ "Heavy Duty Rovers": "重型探测车",
+ "Gain 4 MC for each mining tile adjacent to a road tile. Raise the Logistic Rate 1 step.": "每一个与道路板块相邻的采矿板块获得4 MC。提高物流效率1步",
+ 
+ "Heliostat Mirror Array": "太阳能反射镜阵列",
+  "Spend 1 titanium. Gain 1 heat. Increase your energy production 2 steps.": "“花费1钛。获得1热量。增加2 电能产量。",
+ 
+ "Hypersensitive Silicon Chip Factory": "超敏硅芯片厂",
+ "Any 2 Mine tiles": "任何2个采矿板块",
+ "Requires 2 mining tiles on the Moon. Spend 2 titanium. Increase your MC production 4 steps.": "在月球上需要2个采矿板块。花2钛，增加你的MC产能 4步",
+ 
+ "Improved Moon Concrete": "改进的月球混凝土",
+ "Effect: When you build a mine on the Moon, you spend 1 titanium less.": "效果：当您在月球上建造采矿板块时，您的钛花费减少了1。",
+ "Spend 2 steel. Raise the Mining Rate 1 step.": "花2钢铁。提高采矿速率1步",
+ 
+ "Iron Extraction Center": "钢铁提取中心",
+ "Spend 1 titanium. Increase your steel production 1 step for every 2 raised steps of mining rate.": "花费1钛。 每提高2步采矿效率，您的钢铁产量就会增加1步。",
+ 
+ 
+ "L.T.F. Headquarters":"L.T.F. 总部",
+ "Raise the Colony Rate 1 step. Place a colony. Gain 1 trade fleet.": "提高殖民效率1步。放置一个殖民地。获得1个贸易舰队。",
+ 
+ "L.T.F. Privileges":"L.T.F 特权",
+ "Effect: When playing a Moon tag, you do not pay additional steel or titanium for playing it.": "效果：打出月球标签时，无需支付额外的钢或钛费用。",
+ 
+ "Luna Conference" :"月球会议",
+ "Requires that Scientists are ruling or that you have 2 delegates there. ": "要求科学党当政，或者那里有2位代表。",
+ "Gain 2 MC per road tile on the Moon. Gain 2MC per colony tile on the Moon.": "在月球上每块道路板块获得2 MC。在月球上每块殖民地板块获得2MC。",
+ 
+ "Luna Mining Hub" :"月球采矿中心",
+ "5 Mining rate": "5采矿效率",
+ "Requires a Mining Rate of 5 or higher.": "需要最少5的采矿效率",
+ "Spend 1 steel and 1 titanium and raise your steel and titanium production 1 step.": "花费1钢和1钛，并提高您的钢和钛产量1步。",
+ "Place this tile on the Moon and raise the Mining Rate 1 step.": "将此板块放在月球上，并提高采矿效率1步。",
+  "2 VP PER MINING TILE ADJACENT TO THIS TILE.": "每个与该板块相邻的采矿板块获得2VP",
+
+ 
+ "Luna Political Institute" :"月球政治研究所",
+ "2 Moon": "两个月亮标记",
+   "Action: Move one of your delegates from the reserve to any party.": "行动:把你的一名代表从预备区移到任何党派。",
+  "Requires that you have 2 Moon tags.": "需要两个月亮标记",
+ 
+ "Luna Project Office" :"月球项目办公室",
+ "DRAW 5 CARDS DURING THE RESEARCH PHASE FOR THE NEXT 2 GENERATIONS.": "在接下来的两个时代中的研究阶段抽取5张卡片。",
+ 
+ "Luna Resort" :"月球度假村",
+ "Any 2 Colony tiles": "任何两个殖民地板块",
+ "Requires 2 colonies on the Moon. Spend 2 titanium. Decrease your energy production 1 step and increase your MC production 3 steps. Raise the Colony Rate 1 step.": "在月球上需要2个殖民地板块。 花费2钛。 降低电产1步，增加MC产量3步。 提高殖民地效率1步。", 
+ 
+  "Luna Senate" :"月球参议院",
+ "3 Moon": "3月球标志", 
+"1 VP per Moon tag you have.": "每一个月球标签增加1MC产量",
+ "Requires that you have 3 Moon tags. Increase your MC production 1 step per Moon tag in the game (including these.)": "要求您具有3个月球标签。在游戏中每个月球标签（包括这张牌）将您的MC产量提高1步。",
+ 
+ "Luna Staging Station" :"月球转运站",
+ "2 Logistic rate": "2物流效率",
+ "Requires Logistic Rate to be 2 or higher. Spend 1 titanium. Raise the Logistic Rate 2 steps.": "要求物流效率为2或更高。 花费1钛。 提高物流效率2步。",
+ 
+ "Luna Trade Station" :"月球贸易战",
+"Action: Gain 1 MC for each mining tile on the Moon.": "行动：月球上的每个采矿板块获得1 MC。",
+  "Spend 2 titanium. Place this tile ON THE RESERVED AREA.": "花费2钛。将此板块放置在预留区域上。",
+ 
+ "Luna Train Station" :"月球火车站",
+ "Requires a Logistic Rate of 5 or higher. Spend 2 steel. ": "要求物流效率为5或更高。花费2钢铁。",
+  "Increase your MC production 4 steps. Place this tile on the Moon and raise the Logistic Rate 1 step. ": "将您的MC产量增加4个步骤。将此板块放在月球上，并提高物流效率1步。",
+  "2 VP FOR EACH MINING TILE ADJACENT TO THIS TILE.": "每个采矿板块在该板块旁边获得2分",
+ 
+ "Lunar Dust Processing Plant" :"月球尘埃处理厂",
+ "Effect: When you place a road tile on the Moon, you spend no steel on it.": "效果：当您在月球上放置道路板块时，您无需在其上花费任何钢材。",
+ "Spend 1 titanium. Raise the Logistic Rate 1 step.": "花费1钛。提高物流效率1步。",
+ 
+ "Lunar Industry Complex" :"月球工业园区",
+ "Spend 2 Titanium. Place a mine tile on the Moon and raise the Mining Rate 1 step. ": "花费2钛。在月球上放置一个挖矿板块，并提高采矿速率1步。",
+  "Increase your Steel, Titanium, and Heat production 1 step each. Increase your Energy production 2 steps.": "将钢、钛和热的产量分别增加1步。电产增加2步。",
+ 
+ "Lunar Mine Urbanization" :"月球矿脉城市化",
+ "Requires you have 1 mine tile. Increase your MC production 1 step. Replace one of your mine tiles ": "要求你有1个矿板块。增加你的MC生产1步。替换你的一个采矿板块",
+  "with this special tile. Raise the Colony Rate 1 step. This tile counts both as a colony and a mine tile.": "用这种特殊的改造板块。提高殖民效率1步。这个特殊板块既可以算作殖民地板块也可以算作采矿板块。",
+ 
+ "Lunar Observation Post" :"月球观测站",
+ "Action: Add 1 data resource to ANY card": "行动：向任意卡牌添加1个数据资源",
+  "Spend 1 titanium. 1 VP for every 3 data resources here.": "花费一个钛 每3个数据资源 换 1VP。",
+ 
+ "Lunar Security Stations" :"月球安全局",
+ "Any 3 Road tiles": "任意3个道路板块",
+  "Requires 3 road tiles on the Moon. Raise the Logistic Rate 1 step.": "在月球上需要3个道路板块。提高物流效率1步。",
+ 
+ 
+ "Lunar Steel" :"月球钢制品",
+ 
+ 
+ "Lunar Trade Fleet" :"月球贸易车队",
+ "2 Titanium production": "2钛产量",
+ "Requires that you have 2 titanium production. ": "要求您有2个钛产量。",
+ "Increase your MC production 1 step. Raise the Logistic Rate 1 step.": "增加MC产量1步。提高物流效率1步。",
+ 
+ 
  
  "Mare Imbrium Mine": "雨海(月面)采矿",
   "Spend 1 titanium. Increase your steel production 1 step and your titanium production 1 step. Place a mine ON THE RESERVED AREA and raise the Mining Rate 1 step.": "花费1个钛 增加1钢铁产量和1钛产量 在预留区域上放置矿板块并提高开采速度1格",

@@ -20,6 +20,7 @@
     "Commercial District": "商业区",
     "1 VP per adjacent city tile.": "每相邻1个城市,获得1分",
     "Place this tile which grants an ADJACENCY BONUS of 2MC. Decrease your energy production 1 step and increase your MC production 4 steps.": "放置此版块，此版块的相邻收益为2MC。降低你的电力产能1格，提升你的MC产能4格",
+    "Place this tile. Decrease your energy production 1 step and increase your MC production 4 steps.":"放置此版块，降低你的电力产能1格，提升你的MC产能4格",
     
     "Desperate Measures": "绝望措施",
     "Effect: Place a bronze cube on a dust storm tile and raise oxygen 1 step, or place a bronze cube on an erosion tile and raise the temperature 1 step. The hazard tile with the bronze cube cannot be removed.": "效果：放置一个资源方块在一个沙尘暴版块上并提升氧气1格，或放置一个资源方块在一个腐蚀版块上并提升温度1格。有资源方块的的危机版块不能被移除",
@@ -57,7 +58,8 @@
 
     "Mining Area": "采矿区",
     "Place one of these tiles on an area with a steel or titanium placement bonus, ADJACENT TO ANOTHER OF YOUR TILES. This tile provides an ADJACENCY BONUS of the same resource as the area. Increase your production of that resource 1 step.": "放置此版块到一个有钢铁资源或钛合金资源的格子上且与你的版块相邻。此版块的相邻收益为1个对应资源。提升你的对应资源产能1格",
- 
+    "Place this tile on an area with a steel or titanium placement bonus, adjacent to another of your tiles. Increase your production of that resource 1 step.":"放置此版块到一个有钢铁资源或钛合金资源的格子上且与你的版块相邻。提升你的对应资源产能1格",
+   
     "Mining Rights": "采矿权",
     "Place one of these tiles on an area with a steel or titanium placement bonus. This tile provides an ADJACENCY BONUS of the same resource as the area. Increase your production of that resource 1 step.": "放置此版块到一个有钢铁资源或钛合金资源的格子上。此版块的相邻收益为1个对应资源。提升你的对应资源产能1格",
     "Place this tile on an area with a steel or titanium placement bonus. Increase that production 1 step.":"放置此版块到一个有钢铁资源或钛合金资源的格子上。提升你的对应资源产能1格",

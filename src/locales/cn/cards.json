@@ -3,7 +3,7 @@
     "Colonizer Training Camp": "开拓者训练营",
     "Oxygen must be 5% or less.": "氧气浓度必须少于或等于5%",
 
-    "Asteroid Mining Consortium": "Asteroid Mining Consortium",
+    "Asteroid Mining Consortium": "行星采矿财团",
     "Requires that you have titanium production. Decrease any titanium production 1 step and increase your own 1 step.": "你必须有钛合金产能。降低任意玩家的钛合金产能1级,提升你的钛合金产能1级",
 
     "Deep Well Heating": "深井加热",
@@ -231,7 +231,7 @@
     "Effect: When you play a Science tag, including this, you may discard a card from hand to draw a card.": "效果: 当你打出一个科学标志,包括本牌,你可以从手牌中弃掉1张牌,然后抽1张牌",
 
     "Viral Enhancers": "病毒增强",
-    "When you play a Plant, Microbe, or an Animal tag, including this, gain 1 plant or add 1 resource to THAT CARD.": "效果: 当你打出一个植物、微生物或动物标志时,包括本牌,获得1个植物,或增加1个对应资源到该牌",
+    "Effect: When you play a Plant, Microbe, or an Animal tag, including this, gain 1 plant or add 1 resource to THAT CARD.": "效果: 当你打出一个植物、微生物或动物标志时,包括本牌,获得1个植物,或增加1个对应资源到该牌",
 
     "Towing A Comet": "牵引彗星",
     "Gain 2 plants. Raise oxygen level 1 step and place an ocean tile.": "获得2个植物资源。提升1格氧气浓度并放置一个海洋版块",

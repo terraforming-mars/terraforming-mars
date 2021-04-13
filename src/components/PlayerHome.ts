@@ -99,8 +99,7 @@ export const PlayerHome = Vue.component('player-home', {
         const el = document.getElementById('shortkey-' + idSuffix);
         if (el) {
           event.preventDefault();
-          const scrollingSpeed = PreferencesManager.loadValue('smooth_scrolling') === '1' ? 'smooth' : 'auto';
-          el.scrollIntoView({block: 'center', inline: 'center', behavior: scrollingSpeed});
+          el.scrollIntoView({block: 'center', inline: 'center', behavior: 'auto'});
         }
       }
     },
@@ -234,7 +233,7 @@ export const PlayerHome = Vue.component('player-home', {
 
                 <players-overview class="player_home_block player_home_block--players nofloat:" :player="player" v-trim-whitespace id="shortkey-playersoverview"/>
 
-                <div class="player_home_block player_home_block--log player_home_block--hide_log nofloat">
+                <div class="player_home_block nofloat">
                     <log-panel :id="player.id" :players="player.players" :generation="player.generation" :lastSoloGeneration="player.lastSoloGeneration" :color="player.color"></log-panel>
                 </div>
 
@@ -283,9 +282,9 @@ export const PlayerHome = Vue.component('player-home', {
                         <Card :card="card" :actionUsed="isCardActivated(card, player)"/>
                     </div>
 
-                    <stacked-cards v-show="isAutomatedCardShown()" class="player_home_block--non_blue_cards" :cards="getCardsByType(player.playedCards, [getAutomatedCardType(), getPreludeCardType()])" ></stacked-cards>
+                    <stacked-cards v-show="isAutomatedCardShown()" :cards="getCardsByType(player.playedCards, [getAutomatedCardType(), getPreludeCardType()])" ></stacked-cards>
 
-                    <stacked-cards v-show="isEventCardShown()" class="player_home_block--non_blue_cards" :cards="getCardsByType(player.playedCards, [getEventCardType()])" ></stacked-cards>
+                    <stacked-cards v-show="isEventCardShown()" :cards="getCardsByType(player.playedCards, [getEventCardType()])" ></stacked-cards>
 
                 </div>
 

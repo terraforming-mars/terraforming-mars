@@ -4,7 +4,6 @@ import {SerializedBoard} from '../boards/SerializedBoard';
 import {Player} from '../Player';
 import {SpaceBonus} from '../SpaceBonus';
 import {SpaceType} from '../SpaceType';
-import {TileType} from '../TileType';
 import {MoonSpaces} from './MoonSpaces';
 
 class Space implements ISpace {
@@ -22,7 +21,7 @@ class Space implements ISpace {
     return new Space(id, SpaceType.LAND, x, y, bonus);
   }
   public static colony(id: string) {
-    return new Space(id, SpaceType.COLONY, 0, 0, []);
+    return new Space(id, SpaceType.COLONY, -1, -1, []);
   }
 }
 
@@ -48,15 +47,10 @@ export class MoonBoard extends Board {
     return spaces;
   }
 
-  public getSpacesWithTile(tileType: TileType): Array<ISpace> {
-    return this.spaces.filter((space) => space.tile?.tileType === tileType);
-  }
-
   public static newInstance(): MoonBoard {
     const STEEL = SpaceBonus.STEEL;
     const DRAW_CARD = SpaceBonus.DRAW_CARD;
     const TITANIUM = SpaceBonus.TITANIUM;
-
 
     const b = new Builder();
     b.colony(); // Luna Trade Station

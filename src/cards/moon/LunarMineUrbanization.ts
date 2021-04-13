@@ -30,7 +30,7 @@ export class LunarMineUrbanization extends Card implements IProjectCard {
         renderData: CardRenderer.builder((b) => {
           b.production((pb) => pb.megacredits(1)).br;
           b.moonColonyRate();
-          b.tile(TileType.LUNAR_MINE_URBANIZATION, false).asterix();
+          b.tile(TileType.LUNAR_MINE_URBANIZATION, true).asterix();
         }),
       },
     });
@@ -38,7 +38,7 @@ export class LunarMineUrbanization extends Card implements IProjectCard {
 
   public play(player: Player) {
     player.addProduction(Resources.MEGACREDITS, 1);
-    const tiles = MoonExpansion.tiles(player.game, TileType.MOON_MINE, false).filter((space) => space.player?.id === player.id);
+    const tiles = MoonExpansion.tiles(player.game, TileType.MOON_MINE, {ownedBy: player});
     return new SelectSpace('Select one of your mines to upgrade', tiles, (space) => {
       if (space.tile === undefined) {
         throw new Error(`Space ${space.id} should have a tile, how doesn't it?`);

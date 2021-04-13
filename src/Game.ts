@@ -65,6 +65,7 @@ import {TurmoilHandler} from './turmoil/TurmoilHandler';
 import {Random} from './Random';
 import {MilestoneAwardSelector} from './MilestoneAwardSelector';
 import {BoardType} from './boards/BoardType';
+import {Multiset} from './utils/Multiset';
 
 export type GameId = string;
 export type SpectatorId = string;
@@ -751,6 +752,10 @@ export class Game implements ISerializable<SerializedGame> {
     return this.marsIsTerraformed();
   }
 
+  public isDoneWithFinalProduction(): boolean {
+    return this.phase === Phase.END || (this.gameIsOver() && this.phase === Phase.PRODUCTION);
+  }
+
   private gotoProductionPhase(): void {
     this.phase = Phase.PRODUCTION;
     this.passedPlayers.clear();
@@ -1317,8 +1322,9 @@ export class Game implements ISerializable<SerializedGame> {
     // Part 5. Collect the bonuses
     if (this.phase !== Phase.SOLAR) {
       if (!coveringExistingTile) {
-        space.bonus.forEach((spaceBonus) => {
-          this.grantSpaceBonus(player, spaceBonus);
+        const bonuses = new Multiset(space.bonus);
+        bonuses.entries().forEach(([bonus, count]) => {
+          this.grantSpaceBonus(player, bonus, count);
         });
       }
 
@@ -1359,17 +1365,17 @@ export class Game implements ISerializable<SerializedGame> {
     LogHelper.logTilePlacement(player, space, tile.tileType);
   }
 
-  public grantSpaceBonus(player: Player, spaceBonus: SpaceBonus) {
+  public grantSpaceBonus(player: Player, spaceBonus: SpaceBonus, count: number = 1) {
     if (spaceBonus === SpaceBonus.DRAW_CARD) {
-      player.drawCard();
+      player.drawCard(count);
     } else if (spaceBonus === SpaceBonus.PLANT) {
-      player.plants++;
+      player.plants += count;
     } else if (spaceBonus === SpaceBonus.STEEL) {
-      player.steel++;
+      player.steel += count;
     } else if (spaceBonus === SpaceBonus.TITANIUM) {
-      player.titanium++;
+      player.titanium += count;
     } else if (spaceBonus === SpaceBonus.HEAT) {
-      player.heat++;
+      player.heat += count;
     }
   }
 

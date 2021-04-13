@@ -158,13 +158,15 @@ export class CardRequirement {
 
     case RequirementType.COLONY_TILES:
       return this.satisfiesInequality(
-        MoonExpansion.tiles(player.game, TileType.MOON_COLONY, true, this._isAny ? undefined : player).length);
+        MoonExpansion.tiles(player.game, TileType.MOON_COLONY, {surfaceOnly: true, ownedBy: this._isAny ? undefined : player}).length);
 
     case RequirementType.MINING_TILES:
-      return this.satisfiesInequality(MoonExpansion.tiles(player.game, TileType.MOON_MINE, true, this._isAny ? undefined : player).length);
+      return this.satisfiesInequality(
+        MoonExpansion.tiles(player.game, TileType.MOON_MINE, {surfaceOnly: true, ownedBy: this._isAny ? undefined : player}).length);
 
     case RequirementType.ROAD_TILES:
-      return this.satisfiesInequality(MoonExpansion.tiles(player.game, TileType.MOON_ROAD, true, this._isAny ? undefined : player).length);
+      return this.satisfiesInequality(
+        MoonExpansion.tiles(player.game, TileType.MOON_ROAD, {surfaceOnly: true, ownedBy: this._isAny ? undefined : player}).length);
 
     case RequirementType.TAG:
     case RequirementType.PARTY:

@@ -1899,7 +1899,7 @@ export class Player implements ISerializable<SerializedPlayer> {
   // Return possible mid-game actions like play a card and fund an award, but no play prelude card.
   public getActions() {
     const action: OrOptions = new OrOptions();
-    action.title = this.actionsTakenThisRound === 1 ?
+    action.title = this.actionsTakenThisRound === 0 ?
       'Take your first action' : 'Take your second action';
     action.buttonLabel = 'Take action';
 

@@ -159,11 +159,12 @@ export const CorporationsFilter = Vue.component('corporations-filter', {
         <div class="corporations-filter-toolbox-cont">
             <h2 v-i18n>Corporations</h2>
             <div class="corporations-filter-toolbox corporations-filter-toolbox--topmost">
-                <a href="#" v-i18n v-on:click.prevent="selectAll('All')">All</a> |
-                <a href="#" v-i18n v-on:click.prevent="selectNone('All')">None</a> |
-                <a href="#" v-i18n v-on:click.prevent="invertSelection('All')">Invert</a>
+                <a href="#" v-i18n v-on:click.prevent="selectAll('All')">All*</a> |
+                <a href="#" v-i18n v-on:click.prevent="selectNone('All')">None*</a> |
+                <a href="#" v-i18n v-on:click.prevent="invertSelection('All')">Invert*</a>
             </div>
         </div>
+        <br/>
         <div class="corporations-filter-group" v-for="entry in corpsByModule" v-if="entry[1].length > 0">
             <div class="corporations-filter-toolbox-cont">
                 <div class="corporations-filter-toolbox">

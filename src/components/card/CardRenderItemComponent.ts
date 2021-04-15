@@ -154,6 +154,9 @@ export const CardRenderItemComponent = Vue.component('CardRenderItemComponent', 
       } else if (type === CardRenderItemType.DATA_RESOURCE) {
         classes.push('card-resource');
         classes.push('card-resource-data');
+      } else if (type === CardRenderItemType.RESOURCE_CUBE) {
+        classes.push('card-resource');
+        classes.push('card-resource-cube');
       }
 
       // round tags

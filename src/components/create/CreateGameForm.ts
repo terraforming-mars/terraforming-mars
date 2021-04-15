@@ -174,21 +174,25 @@ export const CreateGameForm = Vue.component('create-game-form', {
       const refs = this.$refs;
       const file = (refs.file as any).files[0];
       const reader = new FileReader();
-      const component = (this as any) as CreateGameModel;
+      const component = this.$data;
 
       reader.addEventListener('load', function() {
         const readerResults = reader.result;
         if (typeof(readerResults) === 'string') {
           const results = JSON.parse(readerResults);
-
-          component.playersCount = results['players'].length;
+          const players = results['players'];
+          component.playersCount = players.length;
           component.showCorporationList = results['customCorporationsList'].length > 0;
           component.showColoniesList = results['customColoniesList'].length > 0;
           component.showCardsBlackList = results['cardsBlackList'].length > 0;
 
           for (const k in results) {
-            if (['customCorporationsList', 'customColoniesList', 'cardsBlackList'].includes(k)) continue;
+            if (['customCorporationsList', 'customColoniesList', 'cardsBlackList', 'players'].includes(k)) continue;
             (component as any)[k] = results[k];
+          }
+
+          for (let i = 0; i < players.length; i++) {
+            component.players[i] = players[i];
           }
 
           Vue.nextTick(() => {

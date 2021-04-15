@@ -366,8 +366,19 @@ export const PlayerHome = Vue.component('player-home', {
                         </div>
                     </summary>
                     <div class="accordion-body">
-                        <board :spaces="player.spaces" :venusNextExtension="player.gameOptions.venusNextExtension" :venusScaleLevel="player.venusScaleLevel" :boardName ="player.gameOptions.boardName"></board>
+                        <board
+                          :spaces="player.spaces"
+                          :venusNextExtension="player.gameOptions.venusNextExtension"
+                          :venusScaleLevel="player.venusScaleLevel"
+                          :boardName ="player.gameOptions.boardName"
+                          :aresExtension="player.gameOptions.aresExtension"
+                          :aresData="player.aresData">
+                        </board>
+
                         <turmoil v-if="player.turmoil" :turmoil="player.turmoil"></turmoil>
+
+                        <moonboard v-if="player.gameOptions.moonExpansion" :model="player.moon"></moonboard>
+
                     </div>
                 </details>
             </div>

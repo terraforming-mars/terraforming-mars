@@ -70,8 +70,17 @@ export class GameLoader implements IGameLoader {
     }
   }
 
-  public getLoadedGameIds(): Array<string> {
-    return Array.from(this.games.keys());
+  public getLoadedGameIds(): Array<{id: string, participants: Array<string>}> {
+    const entries: Map<string, Array<string>> = new Map();
+    this.participantIds.forEach((gameId, participantId) => {
+      if (!entries.has(gameId)) {
+        entries.set(gameId, [participantId]);
+      } else {
+        entries.get(gameId)!.push(participantId);
+      }
+    });
+    const arry: Array<[string, Array<string>]> = Array.from(entries.entries());
+    return arry.map(([id, participants]) => ({id: id, participants: participants}));
   }
 
   public getByGameId(gameId: GameId, bypassCache: boolean, cb: LoadCallback): void {

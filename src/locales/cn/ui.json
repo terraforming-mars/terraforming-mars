@@ -143,7 +143,8 @@
     "Play project card": "打出项目卡",
     "Sell patents": "贩卖专利",
     "Fund an award": "选择一项奖项进行资助",
-    "Take action for action phase, select one available action.": "行动阶段,执行一个合法行动",
+    "Take your first action": "行动阶段,执行一个合法行动",
+    "Take your second action": "行动阶段,执行一个合法行动",
     "Undo last action": "撤回操作",
     "End Turn": "结束本轮操作",
     "Perform an action from a played card": "执行一个已打出卡牌上的行动",
@@ -178,8 +179,8 @@
     "Donate": "捐助本站",
     "LoginOut": "登出",
     "Help Translation": "帮助翻译",
-    
-        
+
+
     "Toggle all": "全部切换",
     "Base": "基础",
     "Agendas": "议会扩",
@@ -196,7 +197,7 @@
     "Filter description": "过滤叙述",
     "Sort by ID": "按编号排序",
 
- 
+
 
      "Remove colony": "移除殖民地",
      "Select colony tile to remove":  "选择你想移除的殖民地",
@@ -224,11 +225,11 @@
      "Show timers": "显示计时器",
      "You cannot pay for this card": "你不能为此牌支付",
      "Select card(s) to buy":"选择你需要购买的牌",
-   
+
     "Starting Megacredits:":"起始MC：",
     "After Preludes:":"前序牌打出后MC：",
-    
-    
+
+
     "Air Scrapping": "空中竞争",
     "Buffer Gas": "缓冲气体",
     "(Spend 16 MC to increase your TR 1 step. Solo games only.)": "花费16MC来提升改造度1格，仅Solo用。",
@@ -242,8 +243,8 @@
     "(Spend 23 MC to place a greenery tile and raise oxygen 1 step.)":"花费23MC来放置一块绿化板块并增加一格氧气",
     "(Spend 25 MC to place a city tile and increase your MC production 1 step.)":"花费25MC来放置一个城市板块并增加你的金钱产量1格",
 
-    
-    
+
+
     "Select a card to keep and pass the rest to ${0}": "选择一张你需要留下的牌然后将其余传递给玩家->${0}",
     "Game Home": "游戏主页",
     "Send players their links below. As game administrator pick your link to use.": "请将名字上的链接复制给其他小伙伴进行游戏，如果你是游戏创建者请选择你的名字进行游戏",
@@ -274,8 +275,8 @@
     "End": "结束",
     "Sell": "卖出",
     "Undo": "反悔",
-        
-    "All": "全选",   
+
+    "All": "全选",
     "Corporate Era": "公司时代",
     "Randomize board tiles": "随机打乱版图",
     "Set Predefined Game": "读取未完成游戏",
@@ -300,9 +301,9 @@
     "Player ${0} name": "输入玩家${0}名字",
     "Multiplayer Options": "多人玩家游戏选项",
     "Community": "玩家DIY扩"
-    
-    
-    
-      
-    
+
+
+
+
+
 }

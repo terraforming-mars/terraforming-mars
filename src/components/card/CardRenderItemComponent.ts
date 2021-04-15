@@ -7,7 +7,11 @@ import {CardRenderItemSize} from '../../cards/render/CardRenderItemSize';
 import {CardRenderSymbolComponent} from './CardRenderSymbolComponent';
 
 // microbe, animal and plant tag could be used both as a resource and played tag
-const RESOURCE_AND_TAG_TYPES = [CardRenderItemType.ANIMALS, CardRenderItemType.PLANTS, CardRenderItemType.MICROBES];
+const RESOURCE_AND_TAG_TYPES = [
+  CardRenderItemType.ANIMALS,
+  CardRenderItemType.PLANTS,
+  CardRenderItemType.MICROBES,
+  CardRenderItemType.SCIENCE];
 
 export const CardRenderItemComponent = Vue.component('CardRenderItemComponent', {
   props: {

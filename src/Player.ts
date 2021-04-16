@@ -1900,7 +1900,7 @@ export class Player implements ISerializable<SerializedPlayer> {
   public getActions() {
     const action: OrOptions = new OrOptions();
     action.title = this.actionsTakenThisRound === 0 ?
-      'Take your first action' : 'Take your second action';
+      'Take your first action' : 'Take your next action';
     action.buttonLabel = 'Take action';
 
     if (this.canAfford(MILESTONE_COST) && !this.game.allMilestonesClaimed()) {

@@ -3,7 +3,6 @@ import {generateClassString} from '../../utils/utils';
 import {CardRenderItem} from '../../cards/render/CardRenderItem';
 import {CardRenderItemType} from '../../cards/render/CardRenderItemType';
 import {CardRenderSymbol} from '../../cards/render/CardRenderSymbol';
-import {CardRenderItemSize} from '../../cards/render/CardRenderItemSize';
 import {CardRenderSymbolComponent} from './CardRenderSymbolComponent';
 
 // microbe, animal and plant tag could be used both as a resource and played tag
@@ -35,7 +34,7 @@ export const CardRenderItemComponent = Vue.component('CardRenderItemComponent', 
       } else if (type === CardRenderItemType.OCEANS) {
         classes.push('card-global-requirement');
         classes.push('card-ocean-global-requirement');
-        if (this.item.size !== undefined && this.item.size !== CardRenderItemSize.MEDIUM) {
+        if (this.item.size !== undefined && this.item.size !== 'medium') {
           classes.push(`card-ocean--${this.item.size}`);
         }
       } else if (type === CardRenderItemType.VENUS) {
@@ -44,7 +43,7 @@ export const CardRenderItemComponent = Vue.component('CardRenderItemComponent', 
       } else if (type === CardRenderItemType.TR) {
         classes.push('card-tile');
         classes.push('card-tr');
-        if (this.item.size !== undefined && this.item.size !== CardRenderItemSize.MEDIUM) {
+        if (this.item.size !== undefined && this.item.size !== 'medium') {
           classes.push(`card-tr--${this.item.size}`);
         }
       } else if (type === CardRenderItemType.TITANIUM) {
@@ -65,7 +64,7 @@ export const CardRenderItemComponent = Vue.component('CardRenderItemComponent', 
       } else if (type === CardRenderItemType.MEGACREDITS) {
         classes.push('card-resource');
         classes.push('card-resource-money');
-        if (this.item.size !== undefined && this.item.size !== CardRenderItemSize.MEDIUM) {
+        if (this.item.size !== undefined && this.item.size !== 'medium') {
           classes.push(`card-money--${this.item.size}`);
         }
       } else if (type === CardRenderItemType.CARDS) {
@@ -106,7 +105,7 @@ export const CardRenderItemComponent = Vue.component('CardRenderItemComponent', 
       } else if (type === CardRenderItemType.COLONIES) {
         classes.push('card-resource-colony');
         // TODO (chosta): think about an abstraction for item size
-        if (this.item.size === CardRenderItemSize.SMALL) {
+        if (this.item.size === 'small') {
           classes.push('card-resource-colony-S');
         }
       } else if (type === CardRenderItemType.TRADE_DISCOUNT || type === CardRenderItemType.MULTIPLIER_WHITE) {

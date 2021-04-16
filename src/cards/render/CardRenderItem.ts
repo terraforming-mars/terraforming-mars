@@ -20,7 +20,7 @@ export enum AltSecondaryTag {
 }
 
 export interface ItemOptions {
-  size?: CardRenderItemSize | 'small' | 'medium' | 'large' | 'tiny';
+  size?: CardRenderItemSize | CardRenderItemSize;
   amount?: number;
 }
 
@@ -51,25 +51,7 @@ export class CardRenderItem {
     if (options === undefined) {
       return this;
     }
-    // TODO(kberg): This is fine for now, but eventually this can move to CardRenderer, and the composer wouldn't even care about the enum.
-    switch (options.size) {
-    case 'small':
-    case CardRenderItemSize.SMALL:
-      this.size = CardRenderItemSize.SMALL;
-      break;
-    case 'medium':
-    case CardRenderItemSize.MEDIUM:
-      this.size = CardRenderItemSize.MEDIUM;
-      break;
-    case 'large':
-    case CardRenderItemSize.LARGE:
-      this.size = CardRenderItemSize.LARGE;
-      break;
-    case 'tiny':
-    case CardRenderItemSize.TINY:
-      this.size = CardRenderItemSize.TINY;
-      break;
-    }
+    this.size = options.size;
     if (options.amount !== undefined) {
       this.amount = options.amount;
     }

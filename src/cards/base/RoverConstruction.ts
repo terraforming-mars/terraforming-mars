@@ -10,7 +10,6 @@ import {Priority} from '../../deferredActions/DeferredAction';
 import {GainResources} from '../../deferredActions/GainResources';
 import {Board} from '../../boards/Board';
 import {CardRenderer} from '../render/CardRenderer';
-import {CardRenderItemSize} from '../render/CardRenderItemSize';
 
 export class RoverConstruction extends Card implements IProjectCard {
   constructor() {
@@ -24,7 +23,7 @@ export class RoverConstruction extends Card implements IProjectCard {
         cardNumber: '038',
         renderData: CardRenderer.builder((b) => {
           b.effect('When any City tile is placed, gain 2 MC.', (eb) => {
-            eb.city(CardRenderItemSize.SMALL).any.startEffect.megacredits(2);
+            eb.city('small').any.startEffect.megacredits(2);
           });
         }),
         victoryPoints: 1,

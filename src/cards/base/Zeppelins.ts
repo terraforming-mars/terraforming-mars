@@ -6,7 +6,6 @@ import {Resources} from '../../Resources';
 import {CardName} from '../../CardName';
 import {CardRequirements} from '../CardRequirements';
 import {CardRenderer} from '../render/CardRenderer';
-import {CardRenderItemSize} from '../render/CardRenderItemSize';
 
 export class Zeppelins extends Card implements IProjectCard {
   constructor() {
@@ -21,7 +20,7 @@ export class Zeppelins extends Card implements IProjectCard {
         renderData: CardRenderer.builder((b) => {
           b.production((pb) => {
             pb.megacredits(1).slash();
-            pb.city(CardRenderItemSize.SMALL).any.asterix();
+            pb.city('small').any.asterix();
           });
         }),
         description: 'Requires 5% oxygen. Increase your MC production 1 step for each City tile ON MARS.',

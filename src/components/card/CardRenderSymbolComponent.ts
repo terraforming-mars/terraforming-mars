@@ -21,21 +21,21 @@ export const CardRenderSymbolComponent = Vue.component('CardRenderSymbolComponen
         classes.push('card-minus');
       } else if (type === CardRenderSymbolType.PLUS) {
         classes.push('card-plus');
-        if (size === CardRenderItemSize.SMALL) {
+        if (size === 'small') {
           classes.push('card-plus--small');
         }
       } else if (type === CardRenderSymbolType.OR) {
         classes.push('card-or');
-        if (size === CardRenderItemSize.SMALL) {
+        if (size === 'small') {
           classes.push('card-or--small');
         }
-        if (size === CardRenderItemSize.TINY) {
+        if (size === 'tiny') {
           classes.push('card-or--tiny');
         }
       } else if (type === CardRenderSymbolType.COLON) {
         classes.push('card-colon');
       } else if (type === CardRenderSymbolType.ARROW) {
-        if (size === CardRenderItemSize.SMALL) {
+        if (size === 'small') {
           classes.push('card-red-arrow--small');
         } else {
           classes.push('card-red-arrow');
@@ -45,11 +45,11 @@ export const CardRenderSymbolComponent = Vue.component('CardRenderSymbolComponen
         classes.push('card-nbsp');
       } else if (type === CardRenderSymbolType.VSPACE) {
         classes.push('card-vspace');
-        if (size === CardRenderItemSize.SMALL) {
+        if (size === 'small') {
           classes.push('card-vspace--small');
-        } else if (size === CardRenderItemSize.MEDIUM) {
+        } else if (size === 'medium') {
           classes.push('card-vspace--medium');
-        } else if (size === CardRenderItemSize.LARGE) {
+        } else if (size === 'large') {
           classes.push('card-vspace--large');
         }
       } else if (type === CardRenderSymbolType.SLASH) {

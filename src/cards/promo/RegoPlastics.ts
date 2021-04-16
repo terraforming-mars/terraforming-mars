@@ -5,7 +5,6 @@ import {CardType} from '../CardType';
 import {Tags} from '../Tags';
 import {Player} from '../../Player';
 import {CardRenderer} from '../render/CardRenderer';
-import {CardRenderItemSize} from '../render/CardRenderItemSize';
 
 export class RegoPlastics extends Card implements IProjectCard {
   constructor() {
@@ -19,7 +18,7 @@ export class RegoPlastics extends Card implements IProjectCard {
         cardNumber: 'X10',
         renderData: CardRenderer.builder((b) => {
           b.effect('Your steel resources are worth 1 MC extra.', (eb) => {
-            eb.steel(1).startEffect.plus(CardRenderItemSize.SMALL).megacredits(1);
+            eb.steel(1).startEffect.plus('small').megacredits(1);
           });
         }),
         victoryPoints: 1,

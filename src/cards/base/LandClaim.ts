@@ -7,7 +7,6 @@ import {ISpace} from '../../boards/ISpace';
 import {CardName} from '../../CardName';
 import {LogHelper} from '../../LogHelper';
 import {CardRenderer} from '../render/CardRenderer';
-import {CardRenderItemSize} from '../render/CardRenderItemSize';
 
 export class LandClaim extends Card implements IProjectCard {
   constructor() {
@@ -19,7 +18,7 @@ export class LandClaim extends Card implements IProjectCard {
       metadata: {
         cardNumber: '066',
         renderData: CardRenderer.builder((b) => {
-          b.text('Place your marker on a non-reserved area. Only you may place a tile there.', CardRenderItemSize.SMALL, true);
+          b.text('Place your marker on a non-reserved area. Only you may place a tile there.', 'small', true);
         }),
       },
     });

@@ -6,7 +6,6 @@ import {CardName} from '../../CardName';
 import {Resources} from '../../Resources';
 import {ResourceType} from '../../ResourceType';
 import {AddResourcesToCard} from '../../deferredActions/AddResourcesToCard';
-import {CardRenderItemSize} from '../render/CardRenderItemSize';
 import {Card} from '../Card';
 import {CardRenderer} from '../render/CardRenderer';
 
@@ -22,7 +21,7 @@ export class EcologyResearch extends Card implements IProjectCard {
         description: 'Increase your plant production 1 step for each colony you own. Add 1 animal to ANOTHER card and 2 microbes to ANOTHER card.',
         cardNumber: 'C09',
         renderData: CardRenderer.builder((b) => {
-          b.production((pb) => pb.plants(1).slash().colonies(1, CardRenderItemSize.SMALL)).br;
+          b.production((pb) => pb.plants(1).slash().colonies(1, 'small')).br;
           b.animals(1).asterix().nbsp.nbsp.microbes(2).asterix();
         }),
         victoryPoints: 1,

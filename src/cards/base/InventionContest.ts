@@ -5,7 +5,6 @@ import {Tags} from '../Tags';
 import {Player} from '../../Player';
 import {CardName} from '../../CardName';
 import {CardRenderer} from '../render/CardRenderer';
-import {CardRenderItemSize} from '../render/CardRenderItemSize';
 
 export class InventionContest extends Card implements IProjectCard {
   constructor() {
@@ -18,7 +17,7 @@ export class InventionContest extends Card implements IProjectCard {
       metadata: {
         cardNumber: '192',
         renderData: CardRenderer.builder((b) => {
-          b.text('Look at the top 3 cards from the deck. Take 1 of them into hand and discard the other two', CardRenderItemSize.SMALL, true);
+          b.text('Look at the top 3 cards from the deck. Take 1 of them into hand and discard the other two', 'small', true);
         }),
       },
     });

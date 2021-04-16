@@ -1,7 +1,6 @@
 import {CardRenderer} from '../../src/cards/render/CardRenderer';
 import {CardRenderItem, AltSecondaryTag} from '../../src/cards/render/CardRenderItem';
 import {CardRenderItemType} from '../../src/cards/render/CardRenderItemType';
-import {CardRenderItemSize} from '../../src/cards/render/CardRenderItemSize';
 import {expect} from 'chai';
 
 describe('CardRenderer', function() {
@@ -96,16 +95,16 @@ describe('CardRenderer', function() {
       expect(item.amount).to.equal(10);
     });
     it('size - S', () => {
-      const renderer = CardRenderer.builder((b) => b.tr(6, CardRenderItemSize.SMALL));
+      const renderer = CardRenderer.builder((b) => b.tr(6, 'small'));
       const item = renderer.rows[0][0] as CardRenderItem;
       expect(item.amount).to.equal(6);
-      expect(item.size).to.equal(CardRenderItemSize.SMALL);
+      expect(item.size).to.equal('small');
     });
     it('cancelled', () => {
-      const renderer = CardRenderer.builder((b) => b.tr(6, CardRenderItemSize.SMALL, true));
+      const renderer = CardRenderer.builder((b) => b.tr(6, 'small', true));
       const item = renderer.rows[0][0] as CardRenderItem;
       expect(item.amount).to.equal(6);
-      expect(item.size).to.equal(CardRenderItemSize.SMALL);
+      expect(item.size).to.equal('small');
       expect(item.cancelled).to.be.true;
     });
   });
@@ -119,13 +118,13 @@ describe('CardRenderer', function() {
       expect(item.amountInside).to.be.true;
     });
     it('size - s', () => {
-      const renderer = CardRenderer.builder((b) => b.megacredits(16, CardRenderItemSize.SMALL));
+      const renderer = CardRenderer.builder((b) => b.megacredits(16, 'small'));
       const item = renderer.rows[0][0] as CardRenderItem;
       expect(item.type).to.equal(CardRenderItemType.MEGACREDITS);
       expect(item.amount).to.equal(16);
       expect(item.showDigit).to.be.false;
       expect(item.amountInside).to.be.true;
-      expect(item.size).to.equal(CardRenderItemSize.SMALL);
+      expect(item.size).to.equal('small');
     });
   });
   it('cards: success', () => {
@@ -202,10 +201,10 @@ describe('CardRenderer', function() {
       expect(item.amount).to.equal(2);
     });
     it('size - s', () => {
-      const renderer = CardRenderer.builder((b) => b.colonies(1, CardRenderItemSize.SMALL));
+      const renderer = CardRenderer.builder((b) => b.colonies(1, 'small'));
       const item = renderer.rows[0][0] as CardRenderItem;
       expect(item.type).to.equal(CardRenderItemType.COLONIES);
-      expect(item.size).to.equal(CardRenderItemSize.SMALL);
+      expect(item.size).to.equal('small');
       expect(item.amount).to.equal(1);
     });
   });
@@ -241,10 +240,10 @@ describe('CardRenderer', function() {
       expect(item.amount).to.equal(-1);
     });
     it('size - s', () => {
-      const renderer = CardRenderer.builder((b) => b.greenery(CardRenderItemSize.SMALL));
+      const renderer = CardRenderer.builder((b) => b.greenery('small'));
       const item = renderer.rows[0][0] as CardRenderItem;
       expect(item.type).to.equal(CardRenderItemType.GREENERY);
-      expect(item.size).to.equal(CardRenderItemSize.SMALL);
+      expect(item.size).to.equal('small');
       expect(item.amount).to.equal(-1);
     });
     it('without 02', () => {

@@ -14,7 +14,6 @@ import {DecreaseAnyProduction} from '../../deferredActions/DecreaseAnyProduction
 import {CardRenderer} from '../render/CardRenderer';
 import {CardRequirements} from '../CardRequirements';
 import {CardRenderDynamicVictoryPoints} from '../render/CardRenderDynamicVictoryPoints';
-import {CardRenderItemSize} from '../render/CardRenderItemSize';
 
 export class Herbivores extends Card implements IProjectCard, IResourceCard {
   constructor() {
@@ -30,7 +29,7 @@ export class Herbivores extends Card implements IProjectCard, IResourceCard {
         cardNumber: '147',
         renderData: CardRenderer.builder((b) => {
           b.effect('When you place a greenery tile, add an Animal to this card.', (eb) => {
-            eb.greenery(CardRenderItemSize.MEDIUM, false).startEffect.animals(1);
+            eb.greenery('medium', false).startEffect.animals(1);
           }).br;
           b.vpText('1 VP per 2 Animals on this card.');
           b.animals(1).production((pb) => pb.minus().plants(1).any);

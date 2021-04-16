@@ -17,7 +17,6 @@ import {PartyHooks} from '../../turmoil/parties/PartyHooks';
 import {PartyName} from '../../turmoil/parties/PartyName';
 import {PlaceOceanTile} from '../../deferredActions/PlaceOceanTile';
 import {CardRenderer} from '../render/CardRenderer';
-import {CardRenderItemSize} from '../render/CardRenderItemSize';
 
 export class LargeConvoy extends Card implements IProjectCard {
   constructor() {
@@ -31,7 +30,7 @@ export class LargeConvoy extends Card implements IProjectCard {
         cardNumber: '143',
         renderData: CardRenderer.builder((b) => {
           b.oceans(1).cards(2).br;
-          b.plants(5).digit.or(CardRenderItemSize.MEDIUM).animals(4).digit.asterix();
+          b.plants(5).digit.or('medium').animals(4).digit.asterix();
         }),
         description: 'Place an ocean tile and draw 2 cards. Gain 5 Plants or add 4 Animals to ANOTHER card.',
         victoryPoints: 2,

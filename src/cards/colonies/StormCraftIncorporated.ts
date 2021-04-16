@@ -11,7 +11,6 @@ import {CardType} from '../CardType';
 import {LogHelper} from '../../LogHelper';
 import {Card} from '../Card';
 import {CardRenderer} from '../render/CardRenderer';
-import {CardRenderItemSize} from '../render/CardRenderItemSize';
 import {PlayerInput} from '../../PlayerInput';
 
 export class StormCraftIncorporated extends Card implements IActionCard, CorporationCard, IResourceCard {
@@ -29,7 +28,7 @@ export class StormCraftIncorporated extends Card implements IActionCard, Corpora
           b.br.br.br;
           b.megacredits(48);
           b.corpBox('action', (ce) => {
-            ce.vSpace(CardRenderItemSize.LARGE);
+            ce.vSpace('large');
             ce.action('Add a floater to ANY card.', (eb) => {
               eb.empty().startAction.floaters(1).asterix();
             });

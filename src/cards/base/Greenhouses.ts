@@ -7,7 +7,6 @@ import {CardName} from '../../CardName';
 import {LogHelper} from '../../LogHelper';
 import {Resources} from '../../Resources';
 import {CardRenderer} from '../render/CardRenderer';
-import {CardRenderItemSize} from '../render/CardRenderItemSize';
 
 export class Greenhouses extends Card implements IProjectCard {
   constructor() {
@@ -20,7 +19,7 @@ export class Greenhouses extends Card implements IProjectCard {
       metadata: {
         cardNumber: '096',
         renderData: CardRenderer.builder((b) => {
-          b.plants(1).slash().city(CardRenderItemSize.SMALL).any;
+          b.plants(1).slash().city('small').any;
         }),
         description: 'Gain 1 plant for each city tile in play.',
       },

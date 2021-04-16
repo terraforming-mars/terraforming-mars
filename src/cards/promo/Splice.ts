@@ -9,7 +9,6 @@ import {ResourceType} from '../../ResourceType';
 import {CardName} from '../../CardName';
 import {CardType} from '../CardType';
 import {CardRenderer} from '../render/CardRenderer';
-import {CardRenderItemSize} from '../render/CardRenderItemSize';
 
 export class Splice extends Card implements CorporationCard {
   constructor() {
@@ -26,7 +25,7 @@ export class Splice extends Card implements CorporationCard {
         renderData: CardRenderer.builder((b) => {
           b.megacredits(44).nbsp.cards(1).secondaryTag(Tags.MICROBE);
           b.corpBox('effect', (ce) => {
-            ce.vSpace(CardRenderItemSize.LARGE);
+            ce.vSpace('large');
             ce.effect(undefined, (eb) => {
               eb.microbes(1).played.any.startEffect;
               eb.megacredits(2).any.or().microbes(1).any.asterix();

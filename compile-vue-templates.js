@@ -59,8 +59,8 @@ generateVueClass(
   ['selectedCardNames', 'foundCardNames', 'searchTerm'],
 );
 generateVueClass(
-  'src/components/ColoniesFilter',
-  require('./build/src/components/ColoniesFilter').ColoniesFilter,
+  'src/components/create/ColoniesFilter',
+  require('./build/src/components/create/ColoniesFilter').ColoniesFilter,
   ['allColonies', 'officialColonies', 'communityColonies', 'selectedColonies'],
 );
 generateVueClass(
@@ -74,8 +74,8 @@ generateVueClass(
   ['hide'],
 );
 generateVueClass(
-  'src/components/CorporationsFilter',
-  require('./build/src/components/CorporationsFilter').CorporationsFilter,
+  'src/components/create/CorporationsFilter',
+  require('./build/src/components/create/CorporationsFilter').CorporationsFilter,
   ['cardsByModuleMap', 'customCorporationsList', 'selectedCorporations', 'corpsByModule'],
 );
 generateVueClass(
@@ -169,7 +169,7 @@ generateVueClass(
   [
     'ui', 'hide_hand', 'hide_awards_and_milestones',
     'hide_top_bar', 'small_cards', 'remove_background', 'magnify_cards',
-    'show_alerts', 'lang', 'langs', 'enable_sounds', 'hide_tile_confirmation', 
+    'show_alerts', 'lang', 'langs', 'enable_sounds', 'hide_tile_confirmation',
     'show_card_number', 'hide_discount_on_cards', 'learner_mode', 'hide_animated_sidebar',
   ],
 );

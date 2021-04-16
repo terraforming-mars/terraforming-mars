@@ -22,7 +22,7 @@ export class RevoltingColonists extends Card implements IProjectCard {
         description: 'Requires 4 Colony Rate. All players pay 3MC for each colony tile they own.',
         cardNumber: 'M51',
         renderData: CardRenderer.builder((b) => {
-          b.megacredits(3).slash().tile(TileType.MOON_COLONY, false).asterix();
+          b.megacredits(3).any.slash().moonColony({size: 'small'}).any;
         }),
       },
     });

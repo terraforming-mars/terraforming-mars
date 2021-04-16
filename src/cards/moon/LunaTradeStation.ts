@@ -24,7 +24,7 @@ export class LunaTradeStation extends MoonCard implements IActionCard {
         cardNumber: 'M13',
         renderData: CardRenderer.builder((b) => {
           b.action('Gain 1 MC for each mining tile on the Moon.', (eb) =>
-            eb.empty().startAction.megacredits(1).slash().tile(TileType.MOON_MINE, false));
+            eb.empty().startAction.megacredits(1).slash().moonColony({size: 'small'}).any);
           b.br.minus().titanium(2).tile(TileType.LUNA_TRADE_STATION, true).asterix();
         }),
       },

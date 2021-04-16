@@ -28,13 +28,13 @@ export class TheGrandLunaCapitalGroup implements CorporationCard {
     renderData: CardRenderer.builder((b) => {
       b.megacredits(32).titanium(1).moonColony().br;
       b.effect('When you place a colony tile, gain 2 MC for each adjacent colony tile.', (eb) => {
-        eb.tile(TileType.MOON_COLONY, false).tile(TileType.MOON_COLONY, false).asterix()
+        eb.moonColony({size: 'small'}).any.moonColony({size: 'small'}).asterix()
           .startEffect
-          .megacredits(2).slash().tile(TileType.MOON_COLONY, false);
+          .megacredits(2).slash().moonColony({size: 'small'}).any;
       }).br,
       b.vpText('1 VP for each colony tile adjacent to your colony tiles.').br;
     }),
-    victoryPoints: CardRenderDynamicVictoryPoints.colonyTile(1),
+    victoryPoints: CardRenderDynamicVictoryPoints.moonColonyTile(1),
   };
 
   public play(player: Player) {

@@ -21,7 +21,7 @@ export class RemoveOceanTile implements DeferredAction {
       this.player.game.board.getOceansTiles(false),
       (space: ISpace) => {
         this.player.game.removeTile(space.id);
-        LogHelper.logBoardTileAction(this.player, space, 'ocean space', 'removed');
+        LogHelper.logBoardTileAction(this.player, space, 'ocean tile', 'removed');
         return undefined;
       },
     );

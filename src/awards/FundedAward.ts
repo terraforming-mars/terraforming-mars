@@ -25,10 +25,6 @@ export function deserializeFundedAwards(
   players: Array<Player>,
   awards: Array<IAward>): Array<FundedAward> {
   return fundedAwards.map((element: SerializedFundedAward) => {
-    // TODO(kberg): remove by 2021-03-30
-    if (element.name === 'Entrepeneur') {
-      element.name = 'Entrepreneur';
-    }
     const awardName = element.name;
     if (awardName === undefined) {
       throw new Error('Award name not found');

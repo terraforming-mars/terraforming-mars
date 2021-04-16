@@ -1,21 +1,21 @@
 import Vue from 'vue';
-import {Color} from '../Color';
-import {BoardName} from '../boards/BoardName';
-import {CardName} from '../CardName';
+import {Color} from '../../Color';
+import {BoardName} from '../../boards/BoardName';
+import {CardName} from '../../CardName';
 import {CorporationsFilter} from './CorporationsFilter';
-import {translateTextWithParams} from '../directives/i18n';
-import {IGameData} from '../database/IDatabase';
+import {translateTextWithParams} from '../../directives/i18n';
+import {IGameData} from '../../database/IDatabase';
 import {ColoniesFilter} from './ColoniesFilter';
-import {ColonyName} from '../colonies/ColonyName';
-import {CardsFilter} from './CardsFilter';
-import {Button} from '../components/common/Button';
-import {playerColorClass} from '../utils/utils';
-import {RandomMAOptionType} from '../RandomMAOptionType';
-import {GameId} from '../Game';
-import {AgendaStyle} from '../turmoil/PoliticalAgendas';
+import {ColonyName} from '../../colonies/ColonyName';
+import {CardsFilter} from '../CardsFilter';
+import {Button} from '../common/Button';
+import {playerColorClass} from '../../utils/utils';
+import {RandomMAOptionType} from '../../RandomMAOptionType';
+import {GameId} from '../../Game';
+import {AgendaStyle} from '../../turmoil/PoliticalAgendas';
 
-import * as constants from '../constants';
-import {$t} from '../directives/i18n';
+import * as constants from '../../constants';
+import {$t} from '../../directives/i18n';
 
 export interface CreateGameModel {
     constants: typeof constants;

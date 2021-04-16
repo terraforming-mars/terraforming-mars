@@ -491,7 +491,7 @@ export class Game implements ISerializable<SerializedGame> {
 
   public milestoneClaimed(milestone: IMilestone): boolean {
     return this.claimedMilestones.find(
-      (claimedMilestone) => claimedMilestone.milestone === milestone,
+      (claimedMilestone) => claimedMilestone.milestone.name === milestone.name,
     ) !== undefined;
   }
 
@@ -583,7 +583,7 @@ export class Game implements ISerializable<SerializedGame> {
 
   public hasBeenFunded(award: IAward): boolean {
     return this.fundedAwards.find(
-      (fundedAward) => fundedAward.award === award,
+      (fundedAward) => fundedAward.award.name === award.name,
     ) !== undefined;
   }
 

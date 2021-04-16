@@ -164,7 +164,8 @@
     "Pay for a Standard Project": "Pagar por um projeto-padrão",
     "Play project card": "Jogar uma carta de projeto",
     "Fund an award": "Financiar um prêmio",
-    "Take action for action phase, select one available action.": "Faça uma ação para a fase de ações, escolha uma ação disponível:",
+    "Take your first action": "Faça uma ação para a fase de ações, escolha uma ação disponível:",
+    "Take your second action": "Faça uma ação para a fase de ações, escolha uma ação disponível:",
     "Undo last action": "Desfazer última ação",
     "End Turn": "Encerrar o turno",
     "Perform an action from a played card": "Realizar ação de uma carta",
@@ -280,7 +281,7 @@
     "Show": "Mostrar",
     "Your selected cards:": "Suas cartas escolhidas",
 
-    "All": "Todas",   
+    "All": "Todas",
     "Corporate Era": "Era corporativa",
     "Randomize board tiles": "Áreas de tabuleiro aleatórias",
     "Set Predefined Game": "Jogo predefinido",

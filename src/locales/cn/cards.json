@@ -3,7 +3,7 @@
     "Colonizer Training Camp": "开拓者训练营",
     "Oxygen must be 5% or less.": "氧气浓度必须少于或等于5%",
 
-    "Asteroid Mining Consortium": "Asteroid Mining Consortium",
+    "Asteroid Mining Consortium": "行星采矿财团",
     "Requires that you have titanium production. Decrease any titanium production 1 step and increase your own 1 step.": "你必须有钛合金产能。降低任意玩家的钛合金产能1级,提升你的钛合金产能1级",
 
     "Deep Well Heating": "深井加热",
@@ -12,9 +12,10 @@
     "Cloud Seeding": "人工降雨",
     "Requires 3 ocean tiles. Decrease your MC production 1 step and any heat production 1 step. Increase your Plant production 2 steps.": "需要至少已放置3个湖泊。降低你的MC产能1级,提升你的植物产能2级",
 
-    "Search for Life": "寻找生命",
+    "Search For Life": "寻找生命",
     "Action: Spend 1 MC to reveal the top card of the draw deck. If that card has a Microbe tag, add a Science resource here.": "行动:支付1MC,展示计划卡牌库顶的牌。如果该牌有微生物标志,则加1个科研资源方块到本牌",
     "3 VPs if you have one or more Science resources here.": "这张牌至少有1个科研资源方块时,获得3分",
+    "Oxygen must be 6% or less.":"氧气必须在6%或者以下",
 
     "Inventors Guild": "发明者指南",
     "Action: Look at the top card and either buy it or discard it": "行动:查看计划卡牌库顶的牌,你可以买它或者弃掉它",
@@ -31,7 +32,7 @@
     "Big Asteroid": "大型小行星",
     "Raise temperature 2 steps and gain 4 titanium. Remove up to 4 Plants from any player.": "提升火星温度2级并获得4个钛合金资源。移除任一玩家的最多4个植物资源",
 
-    "Water Import from Europa": "从欧罗巴(木卫二)注入水源",
+    "Water Import From Europa": "从欧罗巴(木卫二)注入水源",
     "Action: Pay 12 MC to place an ocean tile. TITANIUM MAY BE USED as if playing a Space card.": "行动:支付12MC(可以用钛合金资源代替)来建造一个海洋版块",
     "1 VP for each Jovian tag you have.": "每有1个木星标志,获得1分",
 
@@ -230,9 +231,9 @@
     "Effect: When you play a Science tag, including this, you may discard a card from hand to draw a card.": "效果: 当你打出一个科学标志,包括本牌,你可以从手牌中弃掉1张牌,然后抽1张牌",
 
     "Viral Enhancers": "病毒增强",
-    "When you play a Plant, Microbe, or an Animal tag, including this, gain 1 plant or add 1 resource to THAT CARD.": "效果: 当你打出一个植物、微生物或动物标志时,包括本牌,获得1个植物,或增加1个对应资源到该牌",
+    "Effect: When you play a Plant, Microbe, or an Animal tag, including this, gain 1 plant or add 1 resource to THAT CARD.": "效果: 当你打出一个植物、微生物或动物标志时,包括本牌,获得1个植物,或增加1个对应资源到该牌",
 
-    "Towing a Comet": "牵引彗星",
+    "Towing A Comet": "牵引彗星",
     "Gain 2 plants. Raise oxygen level 1 step and place an ocean tile.": "获得2个植物资源。提升1格氧气浓度并放置一个海洋版块",
 
     "Space Mirrors": "太空镜",

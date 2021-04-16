@@ -30,7 +30,7 @@ export class IceMoonColony extends Card implements IProjectCard {
   public canPlay(player: Player): boolean {
     const oceansMaxed = player.game.board.getOceansOnBoard() === MAX_OCEAN_TILES;
     const hasAvailableColonyTile = player.hasAvailableColonyTileToBuildOn();
-    const canPayForReds = player.canAfford(player.getCardCost(this) + REDS_RULING_POLICY_COST, false, true);
+    const canPayForReds = player.canAfford(player.getCardCost(this) + REDS_RULING_POLICY_COST, {titanium: true});
 
     if (PartyHooks.shouldApplyPolicy(player.game, PartyName.REDS) && !oceansMaxed) {
       return hasAvailableColonyTile && canPayForReds;

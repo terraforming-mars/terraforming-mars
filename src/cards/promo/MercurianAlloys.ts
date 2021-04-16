@@ -6,7 +6,6 @@ import {Tags} from '../Tags';
 import {Player} from '../../Player';
 import {CardRequirements} from '../CardRequirements';
 import {CardRenderer} from '../render/CardRenderer';
-import {CardRenderItemSize} from '../render/CardRenderItemSize';
 
 export class MercurianAlloys extends Card implements IProjectCard {
   constructor() {
@@ -21,7 +20,7 @@ export class MercurianAlloys extends Card implements IProjectCard {
         cardNumber: 'X07',
         renderData: CardRenderer.builder((b) => {
           b.effect('Your titanium resources are worth 1 MC extra.', (eb) => {
-            eb.titanium(1).startEffect.plus(CardRenderItemSize.SMALL).megacredits(1);
+            eb.titanium(1).startEffect.plus('small').megacredits(1);
           });
         }),
         description: 'Requires 2 Science tags.',

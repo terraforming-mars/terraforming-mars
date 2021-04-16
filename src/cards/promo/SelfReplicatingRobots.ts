@@ -8,7 +8,6 @@ import {SelectCard} from '../../inputs/SelectCard';
 import {OrOptions} from '../../inputs/OrOptions';
 import {CardRenderer} from '../render/CardRenderer';
 import {CardRequirements} from '../CardRequirements';
-import {CardRenderItemSize} from '../render/CardRenderItemSize';
 
 export interface RobotCard {
     card: IProjectCard;
@@ -30,7 +29,7 @@ export class SelfReplicatingRobots extends Card implements IProjectCard {
             eb.empty().startAction.selfReplicatingRobots();
             eb.nbsp.or().nbsp.arrow().multiplierWhite().text('x2');
           }).br;
-          b.text('Effect: Card here may be played as if from hand with its cost reduced by the number of resources on it.', CardRenderItemSize.TINY, true);
+          b.text('Effect: Card here may be played as if from hand with its cost reduced by the number of resources on it.', 'tiny', true);
         }),
         description: 'Requires 2 Science tags.',
       },

@@ -5,7 +5,6 @@ import {Player} from '../../Player';
 import {CardType} from '../CardType';
 import {IProjectCard} from '../IProjectCard';
 import {CardRenderer} from '../render/CardRenderer';
-import {CardRenderItemSize} from '../render/CardRenderItemSize';
 
 export class ButterflyEffect extends Card implements IProjectCard {
   constructor() {
@@ -19,7 +18,7 @@ export class ButterflyEffect extends Card implements IProjectCard {
         description: 'Effect: Gain 1 TR. Move each individual hazard marker up to 1 step up or down.',
         renderData: CardRenderer.builder((b) => {
           b.tr(1).br;
-          b.plate('All hazard markers').colon().text('-1 / 0 / +1', CardRenderItemSize.SMALL);
+          b.plate('All hazard markers').colon().text('-1 / 0 / +1', 'small');
         }),
       },
     });

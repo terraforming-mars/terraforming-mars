@@ -5,7 +5,6 @@ import {Card} from '../Card';
 import {CardName} from '../../CardName';
 import {CardType} from '../CardType';
 import {CardRenderer} from '../render/CardRenderer';
-import {CardRenderItemSize} from '../render/CardRenderItemSize';
 
 export class MonsInsurance extends Card implements CorporationCard {
   constructor() {
@@ -22,10 +21,10 @@ export class MonsInsurance extends Card implements CorporationCard {
             pb.megacredits(4).nbsp.megacredits(-2).any.asterix();
           });
           b.corpBox('effect', (cb) => {
-            cb.vSpace(CardRenderItemSize.SMALL);
+            cb.vSpace('small');
             cb.effect('When a player causes another player to decrease production or lose resources, pay 3MC to the victim, or as much as possible.', (eb) => {
               eb.production((pb) => pb.wild(1).any).or().minus().wild(1).any;
-              eb.startEffect.text('pay', CardRenderItemSize.SMALL, true).megacredits(3);
+              eb.startEffect.text('pay', 'small', true).megacredits(3);
             });
           });
         }),

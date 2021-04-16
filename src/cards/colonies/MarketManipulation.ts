@@ -7,7 +7,6 @@ import {Game} from '../../Game';
 import {OrOptions} from '../../inputs/OrOptions';
 import {SelectOption} from '../../inputs/SelectOption';
 import {Card} from '../Card';
-import {CardRenderItemSize} from '../render/CardRenderItemSize';
 import {CardRenderer} from '../render/CardRenderer';
 
 export class MarketManipulation extends Card implements IProjectCard {
@@ -21,7 +20,7 @@ export class MarketManipulation extends Card implements IProjectCard {
       metadata: {
         cardNumber: 'C23',
         renderData: CardRenderer.builder((b) => {
-          b.text('Increase one colony tile track 1 step. Decrease another colony tile track 1 step.', CardRenderItemSize.SMALL, true);
+          b.text('Increase one colony tile track 1 step. Decrease another colony tile track 1 step.', 'small', true);
         }),
       },
     });

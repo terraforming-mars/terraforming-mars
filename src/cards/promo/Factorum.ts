@@ -10,7 +10,6 @@ import {CardName} from '../../CardName';
 import {CardType} from '../CardType';
 import {LogHelper} from '../../LogHelper';
 import {CardRenderer} from '../render/CardRenderer';
-import {CardRenderItemSize} from '../render/CardRenderItemSize';
 
 export class Factorum extends Card implements IActionCard, CorporationCard {
   constructor() {
@@ -26,7 +25,7 @@ export class Factorum extends Card implements IActionCard, CorporationCard {
         renderData: CardRenderer.builder((b) => {
           b.megacredits(37).nbsp.production((pb) => pb.steel(1));
           b.corpBox('action', (ce) => {
-            ce.vSpace(CardRenderItemSize.LARGE);
+            ce.vSpace('large');
             ce.action('Increase your energy production 1 step IF YOU HAVE NO ENERGY RESOURCES, or spend 3MC to draw a building card.', (eb) => {
               eb.empty().arrow().production((pb) => pb.energy(1));
               eb.or().megacredits(3).startAction.cards(1).secondaryTag(Tags.BUILDING);

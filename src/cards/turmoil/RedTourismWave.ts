@@ -7,7 +7,6 @@ import {PartyName} from '../../turmoil/parties/PartyName';
 import {Resources} from '../../Resources';
 import {CardRequirements} from '../CardRequirements';
 import {CardRenderer} from '../render/CardRenderer';
-import {CardRenderItemSize} from '../render/CardRenderItemSize';
 import {Card} from '../Card';
 
 export class RedTourismWave extends Card implements IProjectCard {
@@ -22,7 +21,7 @@ export class RedTourismWave extends Card implements IProjectCard {
       metadata: {
         cardNumber: 'T12',
         renderData: CardRenderer.builder((b) => {
-          b.megacredits(1).slash().emptyTile('normal', CardRenderItemSize.SMALL).asterix();
+          b.megacredits(1).slash().emptyTile('normal', 'small').asterix();
         }),
         description: 'Requires that Reds are ruling or that you have 2 delegates there. Gain 1 MC from each EMPTY AREA ADJACENT TO YOUR TILES',
       },

@@ -7,7 +7,6 @@ import {Resources} from '../../Resources';
 import {CardName} from '../../CardName';
 import {CardType} from '../CardType';
 import {CardRenderer} from '../render/CardRenderer';
-import {CardRenderItemSize} from '../render/CardRenderItemSize';
 import {DeferredAction} from '../../deferredActions/DeferredAction';
 import {OrOptions} from '../../inputs/OrOptions';
 import {SelectOption} from '../../inputs/SelectOption';
@@ -39,7 +38,7 @@ export class CuriosityII extends Card implements CorporationCard {
               'When you place a tile on an area that has a RESOURCE placement bonus, ' +
               'or on top of another tile, you may pay 2 MC to draw a card.',
               (eb) => {
-                eb.emptyTile('normal', CardRenderItemSize.SMALL).nbsp.asterix().startEffect.megacredits(-2).cards(1);
+                eb.emptyTile('normal', 'small').nbsp.asterix().startEffect.megacredits(-2).cards(1);
               });
           });
         }),

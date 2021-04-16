@@ -5,7 +5,6 @@ import {CardName} from '../../CardName';
 import {DeferredAction} from '../../deferredActions/DeferredAction';
 import {CardRenderer} from '../render/CardRenderer';
 import {Card} from '../Card';
-import {CardRenderItemSize} from '../render/CardRenderItemSize';
 
 export class ProductiveOutpost extends Card implements IProjectCard {
   constructor() {
@@ -17,7 +16,7 @@ export class ProductiveOutpost extends Card implements IProjectCard {
       metadata: {
         cardNumber: 'C30',
         renderData: CardRenderer.builder((b) => {
-          b.text('Gain all your colony bonuses.', CardRenderItemSize.SMALL, true);
+          b.text('Gain all your colony bonuses.', 'small', true);
         }),
       },
     });

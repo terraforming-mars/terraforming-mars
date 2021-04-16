@@ -6,7 +6,6 @@ import {CardName} from '../../CardName';
 import {CardRequirements} from '../CardRequirements';
 import {Card} from '../Card';
 import {CardRenderer} from '../render/CardRenderer';
-import {CardRenderItemSize} from '../render/CardRenderItemSize';
 
 export class Conscription extends Card implements IProjectCard {
   constructor() {
@@ -20,7 +19,7 @@ export class Conscription extends Card implements IProjectCard {
       metadata: {
         cardNumber: 'C05',
         renderData: CardRenderer.builder((b) => {
-          b.text('next card', CardRenderItemSize.SMALL, true).colon().megacredits(-16);
+          b.text('next card', 'small', true).colon().megacredits(-16);
         }),
         description: 'Requires 2 Earth tags. The next card you play this generation costs 16 MC less.',
         victoryPoints: -1,

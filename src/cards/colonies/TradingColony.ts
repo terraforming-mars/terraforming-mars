@@ -6,7 +6,6 @@ import {CardName} from '../../CardName';
 import {BuildColony} from '../../deferredActions/BuildColony';
 import {CardRenderer} from '../render/CardRenderer';
 import {Card} from '../Card';
-import {CardRenderItemSize} from '../render/CardRenderItemSize';
 
 export class TradingColony extends Card implements IProjectCard {
   constructor() {
@@ -20,7 +19,7 @@ export class TradingColony extends Card implements IProjectCard {
         cardNumber: 'C47',
         renderData: CardRenderer.builder((b) => {
           b.effect('When you trade, you may first increase that Colony Tile track 1 step.', (eb) => {
-            eb.trade().startEffect.text('+1', CardRenderItemSize.LARGE);
+            eb.trade().startEffect.text('+1', 'large');
           }).br;
           b.colonies(1);
         }),

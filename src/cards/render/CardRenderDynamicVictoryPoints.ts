@@ -1,6 +1,5 @@
 import {CardRenderItemType} from './CardRenderItemType';
 import {CardRenderItem} from './CardRenderItem';
-import {CardRenderItemSize} from './CardRenderItemSize';
 
 export class CardRenderDynamicVictoryPoints {
   public targetOneOrMore: boolean = false; // marking target to be one or more res (Search for Life)
@@ -24,12 +23,12 @@ export class CardRenderDynamicVictoryPoints {
   }
   public static oceans(points: number, target: number): CardRenderDynamicVictoryPoints {
     const item = new CardRenderItem(CardRenderItemType.OCEANS);
-    item.size = CardRenderItemSize.SMALL;
+    item.size = 'small';
     return new CardRenderDynamicVictoryPoints(item, points, target);
   }
   public static cities(points: number, target: number, any: boolean = false): CardRenderDynamicVictoryPoints {
     const item = new CardRenderItem(CardRenderItemType.CITY);
-    item.size = CardRenderItemSize.SMALL;
+    item.size = 'small';
     item.anyPlayer = any;
     return new CardRenderDynamicVictoryPoints(item, points, target);
   }
@@ -55,7 +54,7 @@ export class CardRenderDynamicVictoryPoints {
   }
   public static colonies(points: number, target: number, any: boolean = false): CardRenderDynamicVictoryPoints {
     const item = new CardRenderItem(CardRenderItemType.COLONIES);
-    item.size = CardRenderItemSize.SMALL;
+    item.size = 'small';
     item.anyPlayer = any;
     return new CardRenderDynamicVictoryPoints(item, points, target);
   }
@@ -76,18 +75,18 @@ export class CardRenderDynamicVictoryPoints {
   }
   public static moonMiningTile(points: number, any: boolean = false): CardRenderDynamicVictoryPoints {
     const item = new CardRenderItem(CardRenderItemType.MOON_MINE);
-    item.size = CardRenderItemSize.SMALL;
+    item.size = 'small';
     item.anyPlayer = any;
     return new CardRenderDynamicVictoryPoints(item, points, points);
   }
   public static moonColonyTile(points: number): CardRenderDynamicVictoryPoints {
     const item = new CardRenderItem(CardRenderItemType.MOON_COLONY);
-    item.size = CardRenderItemSize.SMALL;
+    item.size = 'small';
     return new CardRenderDynamicVictoryPoints(item, points, 1);
   }
   public static moonRoadTile(points: number, any: boolean = false): CardRenderDynamicVictoryPoints {
     const item = new CardRenderItem(CardRenderItemType.MOON_ROAD);
-    item.size = CardRenderItemSize.SMALL;
+    item.size = 'small';
     item.anyPlayer = any;
     return new CardRenderDynamicVictoryPoints(item, points, 1);
   }

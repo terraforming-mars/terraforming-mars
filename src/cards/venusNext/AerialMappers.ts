@@ -9,7 +9,6 @@ import {SelectCard} from '../../inputs/SelectCard';
 import {CardName} from '../../CardName';
 import {LogHelper} from '../../LogHelper';
 import {CardRenderer} from '../render/CardRenderer';
-import {CardRenderItemSize} from '../render/CardRenderItemSize';
 import {Card} from '../Card';
 
 export class AerialMappers extends Card implements IActionCard, IResourceCard {
@@ -27,7 +26,7 @@ export class AerialMappers extends Card implements IActionCard, IResourceCard {
           b.action('Add floater to ANY card.', (be) => {
             be.empty().startAction.floaters(1).asterix();
           }).br;
-          b.or(CardRenderItemSize.SMALL).br;
+          b.or('small').br;
           b.action('Spend one floater here to draw 1 card.', (be) => {
             be.floaters(1).startAction.cards(1);
           });

@@ -6,7 +6,6 @@ import {CardName} from '../../CardName';
 import {ResourceType} from '../../ResourceType';
 import {SelectHowToPayForProjectCard} from '../../inputs/SelectHowToPayForProjectCard';
 import {CardRenderer} from '../render/CardRenderer';
-import {CardRenderItemSize} from '../render/CardRenderItemSize';
 
 export class ValuableGases extends PreludeCard implements IProjectCard {
   constructor() {
@@ -18,7 +17,7 @@ export class ValuableGases extends PreludeCard implements IProjectCard {
         cardNumber: 'Y06',
         renderData: CardRenderer.builder((b) => {
           b.megacredits(6).br.br;
-          b.text('play', CardRenderItemSize.MEDIUM, true).cards(1).secondaryTag(Tags.VENUS).colon();
+          b.text('play', 'medium', true).cards(1).secondaryTag(Tags.VENUS).colon();
           b.floaters(4).digit;
         }),
         description: 'Gain 6 MC. Play a Venus card from your hand and add 4 floaters to it.',

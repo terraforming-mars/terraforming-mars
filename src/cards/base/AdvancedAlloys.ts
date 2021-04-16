@@ -5,7 +5,6 @@ import {CardType} from '../CardType';
 import {Player} from '../../Player';
 import {CardName} from '../../CardName';
 import {CardRenderer} from '../render/CardRenderer';
-import {CardRenderItemSize} from '../render/CardRenderItemSize';
 
 export class AdvancedAlloys extends Card implements IProjectCard {
   constructor() {
@@ -19,10 +18,10 @@ export class AdvancedAlloys extends Card implements IProjectCard {
         cardNumber: '071',
         renderData: CardRenderer.builder((b) => {
           b.effect('Each titanium you have is worth 1 MC extra.', (be) => {
-            be.titanium(1).startEffect.plus(CardRenderItemSize.SMALL).megacredits(1);
+            be.titanium(1).startEffect.plus('small').megacredits(1);
           }).br;
           b.effect('Each steel you have is worth 1 MC extra.', (be) => {
-            be.steel(1).startEffect.plus(CardRenderItemSize.SMALL).megacredits(1);
+            be.steel(1).startEffect.plus('small').megacredits(1);
           });
         }),
       },

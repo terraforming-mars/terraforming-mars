@@ -7,17 +7,20 @@
     "Action: Remove 1 animal from THIS card to add 1 animal to ANOTHER card.": "行动：从此卡移除1个动物资源并添加1个动物资源到一张其他卡牌上",
     "Requires 1 science tag to play. Add 2 animals to this card. OTHERS MAY NOT REMOVE ANIMALS FROM THIS CARD.": "需要你有1个科学标志。添加2个动物资源到此卡。此卡上的动物资源不能被其他玩家移除",
    
-    "Butterfly Effect": "Efekt Motyla",
+    "Butterfly Effect": "蝴蝶效应",
     "Effect: Gain 1 TR. Move each individual hazard marker up to 1 step up or down.": "效果：获得1TR。移动每个危机标记往上1格或往下1格",
     "All hazard markers": "所有危机标记",
   
     "Capital": "首都",
     "1 additional VP for each ocean tile adjacent to this city tile.": "该城市板块相邻每有1个海洋板块,额外获得1分",
     "Requires 4 ocean tiles. Place tile with ADJACENCY BONUS of 2MC. Energy prod -2 and MC prod +5.": "需要至少已放置4个海洋。放置本版块,降低你的电力产能2级,提升你的MC产能5级",
-  
+     "equires 4 ocean tiles. Place this tile. Decrease your Energy production 2 steps and increase your MC production 5 steps.":"需要至少已放置4个海洋。放置本版块,降低你的电力产能2级,提升你的MC产能5级",
+
+    
     "Commercial District": "商业区",
     "1 VP per adjacent city tile.": "每相邻1个城市,获得1分",
     "Place this tile which grants an ADJACENCY BONUS of 2MC. Decrease your energy production 1 step and increase your MC production 4 steps.": "放置此版块，此版块的相邻收益为2MC。降低你的电力产能1格，提升你的MC产能4格",
+    "Place this tile. Decrease your energy production 1 step and increase your MC production 4 steps.":"放置此版块，降低你的电力产能1格，提升你的MC产能4格",
     
     "Desperate Measures": "绝望措施",
     "Effect: Place a bronze cube on a dust storm tile and raise oxygen 1 step, or place a bronze cube on an erosion tile and raise the temperature 1 step. The hazard tile with the bronze cube cannot be removed.": "效果：放置一个资源方块在一个沙尘暴版块上并提升氧气1格，或放置一个资源方块在一个腐蚀版块上并提升温度1格。有资源方块的的危机版块不能被移除",
@@ -31,7 +34,7 @@
     "Effect: When you play an animal or plant tag /including these/, add an animal to this card.": "效果: 当你打出1个动物标志或植物标志(包括本牌2个)时,增加1个动物资源到本卡",
     "the tile grants an adjacency bonus of 1 animal. 1 VP per 2 animals on this card.": "此版块的相邻收益为1个动物资源。本卡上每有2个动物资源获得1分",
     "Requires that YOU have a greenery tile. Place this tile adjacent to ANY greenery.": "需要你至少拥有一个绿化板块。放置这个版块到任意的绿化版块旁边。本卡上每有2个动物资源,获得1分",
-  
+    "The tile grants an ADJACENCY BONUS of 1 animal. 1 VP per 2 Animals on this card.":"此版块的相邻收益为1个动物资源。本卡上每有2个动物资源获得1分",
     
     "Geological Survey": "地质调查",
     "Any max 5 Greeneries": "至多5片绿化版块",
@@ -44,6 +47,7 @@
        
     "Lava Flows": "熔岩流",
     "Raise temperature 2 steps and place this tile ON EITHER THARSIS THOLUS, ASCRAEUS MONS, PAVONIS MONS OR ARSIA MONS. This tile grants an ADJACENCY BONUS of 2 heat.": "提升温度2格并放置这个版块到以下几个地方之一:'THARSIS THOLUS, ASCRAEUS MONS, PAVONIS MONS OR ARSIA MONS。此版块的相邻收益为2个热能资源",
+    "Raise temperature 2 steps and place this tile ON EITHER THARSIS THOLUS, ASCRAEUS MONS, PAVONIS MONS OR ARSIA MONS.":"提升温度2格并放置这个版块到以下几个地方之一:'THARSIS THOLUS, ASCRAEUS MONS, PAVONIS MONS OR ARSIA MONS。",
 
     "Marketing Experts": "营销专家",
     "Effect: When an ADJACENCY BONUS is collected from a tile you own, you gain 1MC.": "效果：当你的版块提供一次相邻收益时，你获得1MC",
@@ -54,19 +58,24 @@
 
     "Mining Area": "采矿区",
     "Place one of these tiles on an area with a steel or titanium placement bonus, ADJACENT TO ANOTHER OF YOUR TILES. This tile provides an ADJACENCY BONUS of the same resource as the area. Increase your production of that resource 1 step.": "放置此版块到一个有钢铁资源或钛合金资源的格子上且与你的版块相邻。此版块的相邻收益为1个对应资源。提升你的对应资源产能1格",
- 
+    "Place this tile on an area with a steel or titanium placement bonus, adjacent to another of your tiles. Increase your production of that resource 1 step.":"放置此版块到一个有钢铁资源或钛合金资源的格子上且与你的版块相邻。提升你的对应资源产能1格",
+   
     "Mining Rights": "采矿权",
     "Place one of these tiles on an area with a steel or titanium placement bonus. This tile provides an ADJACENCY BONUS of the same resource as the area. Increase your production of that resource 1 step.": "放置此版块到一个有钢铁资源或钛合金资源的格子上。此版块的相邻收益为1个对应资源。提升你的对应资源产能1格",
-   
+    "Place this tile on an area with a steel or titanium placement bonus. Increase that production 1 step.":"放置此版块到一个有钢铁资源或钛合金资源的格子上。提升你的对应资源产能1格",
+    
     "Mohole Area": "超深钻区域",
     "Increase your heat production 4 steps. Place this tile ON AN AREA RESERVED FOR OCEAN. The tile grants an ADJACENCY BONUS of 2 heat.": "提升你的热能产能4格。放置此版块到一个海洋保留区。此版块的相邻收益为2个热能资源",
-     
+    "Increase your heat production 4 steps. Place this tile ON AN AREA RESERVED FOR OCEAN.":"提升你的热能产能4格。放置此版块到一个海洋保留区。",
+    
     "Natural Preserve": "自然保护区",
     "Oxygen must be 4% or less. Place this tile NEXT TO NO OTHER TILE. The tile grants an ADJACENCY BONUS of of 1MC. Increase your MC production 1 step.": "氧气浓度不能高于4%。放置此版块到不与已有版块相邻的格子。此版块的相邻收益为1MC。提升你的MC产能1格",
+    "Oxygen must be 4% or less. Place this tile NEXT TO NO OTHER TILE. Increase your MC production 1 step.":"氧气浓度不能高于4%。放置此版块到不与已有版块相邻的格子。提升你的MC产能1格",
     
     "Nuclear Zone": "核爆辐射区",
     "Raise the temperature two steps. Place this tile. Players must pay an additional 2MC when they place a tile with their player marker on it ADJACENT to the Nuclear Zone.": "提升温度2格，放置此版块。当玩家在此版块相邻格放置带有自己玩家标记的版块时，必须先花费2MC",
-   
+    "Place this tile and raise temperature 2 steps.":"提升温度2格，放置此版块。",
+    
     "Ocean City": "海洋城市",
     "Requires 6 ocean tiles. Decrease your Energy production 1 step and increase your MC production 3 steps. Place this tile on top of an existing ocean tile, IGNORING NORMAL PLACEMENT RESTRICTIONS FOR CITIES. The tile counts as a city as well as an ocean.": "需求有6块海洋。降低你的电力产能1格，提升你的MC产能3格。放置此版块到一个已有的海洋版块上，无视通常的城市放置限制。此版块即视为城市也视为海洋",
    

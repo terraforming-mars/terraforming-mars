@@ -25,7 +25,7 @@ export class PrideoftheEarthArkship extends MoonCard implements IActionCard {
         cardNumber: 'M24',
         renderData: CardRenderer.builder((b) => {
           b.action('Add 1 science resource here per every 5 science tags you have.', (eb) => {
-            eb.empty().startAction.science(1).slash().text('5').science(); // TODO(kberg): these should be tags, not resources.
+            eb.empty().startAction.science(1).slash().text('5').science().played;
           }).br;
           b.minus().titanium(2);
         }),

@@ -105,7 +105,8 @@
 	"generation ${0} of ${1}": "Génération ${0} sur ${1}",
 
 	"Actions": "Actions",
-	"Take action for action phase, select one available action.": "Phase d'Actions. Sélectionnez une des actions disponibles.",
+	"Take your first action": "Phase d'Actions. Sélectionnez une des actions disponibles.",
+	"Take your second action": "Phase d'Actions. Sélectionnez une des actions disponibles.",
 	"Select prelude card to play": "Sélectionnez une carte Prélude à jouer",
 	"Claim a milestone": "Valider un objectif",
 	"Convert 8 heat into temperature": "Convertir 8 chaleurs en température",

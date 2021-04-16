@@ -1,5 +1,5 @@
 import {GameEnd} from './GameEnd';
-import {CreateGameForm} from './CreateGameForm';
+import {CreateGameForm} from './create/CreateGameForm';
 import {GameHome} from './GameHome';
 import {GamesOverview} from './GamesOverview';
 import {PlayerHome} from './PlayerHome';

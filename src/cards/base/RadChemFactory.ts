@@ -33,7 +33,7 @@ export class RadChemFactory extends Card implements IProjectCard {
   public canPlay(player: Player): boolean {
     const hasEnergyProduction = player.getProduction(Resources.ENERGY) >= 1;
     if (PartyHooks.shouldApplyPolicy(player.game, PartyName.REDS)) {
-      return player.canAfford(player.getCardCost(this) + REDS_RULING_POLICY_COST * 2, true) && hasEnergyProduction;
+      return player.canAfford(player.getCardCost(this) + REDS_RULING_POLICY_COST * 2, {steel: true}) && hasEnergyProduction;
     }
 
     return hasEnergyProduction;

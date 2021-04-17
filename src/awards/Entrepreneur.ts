@@ -1,7 +1,6 @@
 import {IAward} from './IAward';
 import {Player} from '../Player';
 
-// TODO(kberg): write a test.
 export class Entrepreneur implements IAward {
     public name: string = 'Entrepreneur';
     public description: string = 'Most tiles that grant adjacency bonuses'

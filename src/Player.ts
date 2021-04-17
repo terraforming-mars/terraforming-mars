@@ -1747,24 +1747,35 @@ export class Player implements ISerializable<SerializedPlayer> {
   public canPlay(card: IProjectCard): boolean {
     const canAfford = this.canAfford(
       this.getCardCost(card),
-      this.canUseSteel(card),
-      this.canUseTitanium(card),
-      this.canUseFloaters(card),
-      this.canUseMicrobes(card),
-      MoonExpansion.adjustedReserveCosts(this, card),
-    );
+      {
+        steel: this.canUseSteel(card),
+        titanium: this.canUseTitanium(card),
+        floaters: this.canUseFloaters(card),
+        microbes: this.canUseMicrobes(card),
+        reserveUnits: MoonExpansion.adjustedReserveCosts(this, card),
+      });
 
     return canAfford && (card.canPlay === undefined || card.canPlay(this));
   }
 
   // Checks if the player can afford to pay `cost` mc (possibly replaceable with steal, titanium etc.)
   // and additionally pay the reserveUnits (no replaces here)
-  // TODO(sienmich): use options parameter
-  public canAfford(cost: number, canUseSteel: boolean = false, canUseTitanium: boolean = false, canUseFloaters: boolean = false, canUseMicrobes : boolean = false, reserveUnits: Units = Units.EMPTY): boolean {
-    // Check if player has the reserveUnits - required resources
+  public canAfford(cost: number, options?: {
+    steel?: boolean,
+    titanium?: boolean,
+    floaters?: boolean,
+    microbes?: boolean,
+    reserveUnits?: Units
+  }) {
+    const reserveUnits = options?.reserveUnits ?? Units.EMPTY;
     if (!this.hasUnits(reserveUnits)) {
       return false;
     }
+
+    const canUseSteel: boolean = options?.steel ?? false;
+    const canUseTitanium: boolean = options?.titanium ?? false;
+    const canUseFloaters: boolean = options?.floaters ?? false;
+    const canUseMicrobes: boolean = options?.microbes ?? false;
 
     return cost <=
       this.megaCredits - reserveUnits.megacredits +
@@ -1899,8 +1910,8 @@ export class Player implements ISerializable<SerializedPlayer> {
   // Return possible mid-game actions like play a card and fund an award, but no play prelude card.
   public getActions() {
     const action: OrOptions = new OrOptions();
-    action.title = 'Take action for action phase, select one ' +
-                      'available action.';
+    action.title = this.actionsTakenThisRound === 0 ?
+      'Take your first action' : 'Take your next action';
     action.buttonLabel = 'Take action';
 
     if (this.canAfford(MILESTONE_COST) && !this.game.allMilestonesClaimed()) {

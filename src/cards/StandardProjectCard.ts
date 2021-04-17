@@ -53,7 +53,7 @@ export abstract class StandardProjectCard extends Card implements IActionCard, I
   }
 
   public canAct(player: Player): boolean {
-    return player.canAfford(this.cost - this.discount(player), false, false, false, false, MoonExpansion.adjustedReserveCosts(player, this));
+    return player.canAfford(this.cost - this.discount(player), {reserveUnits: MoonExpansion.adjustedReserveCosts(player, this)});
   }
 
   protected projectPlayed(player: Player) {

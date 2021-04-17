@@ -9,7 +9,6 @@ import {SpaceType} from '../../SpaceType';
 import {Resources} from '../../Resources';
 import {Units} from '../../Units';
 import {MoonCard} from './MoonCard';
-import {TileType} from '../../TileType';
 
 export class SmallDutyRovers extends MoonCard implements IProjectCard {
   constructor() {
@@ -26,9 +25,9 @@ export class SmallDutyRovers extends MoonCard implements IProjectCard {
         renderData: CardRenderer.builder((b) => {
           b.minus().titanium(1).moonLogisticsRate().br;
           b.megacredits(1).slash()
-            .tile(TileType.MOON_COLONY, false)
-            .tile(TileType.MOON_MINE, false)
-            .tile(TileType.MOON_ROAD, false).br;
+            .moonColony({size: 'small'}).any
+            .moonMine({size: 'small'}).any
+            .moonRoad({size: 'small'}).any;
         }),
       },
     }, {

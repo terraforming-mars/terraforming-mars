@@ -24,8 +24,8 @@ export class LunaConference extends Card implements IProjectCard {
         'Gain 2 MC per road tile on the Moon. Gain 2MC per colony tile on the Moon.',
         cardNumber: 'M58',
         renderData: CardRenderer.builder((b) => {
-          b.megacredits(2).slash().tile(TileType.MOON_ROAD, false).br;
-          b.megacredits(2).slash().tile(TileType.MOON_COLONY, false).asterix().br;
+          b.megacredits(2).slash().moonRoad({size: 'small'}).any.br;
+          b.megacredits(2).slash().moonColony({size: 'small'}).any.br;
         }),
       },
     });

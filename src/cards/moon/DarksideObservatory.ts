@@ -22,7 +22,7 @@ export class DarksideObservatory extends Card implements IProjectCard, IActionCa
         cardNumber: 'M75',
         renderData: CardRenderer.builder((b) => {
           b.action('Add 1 Science to ANY card [EXCEPT those giving 2 VP or more per science resource.]', (ab) => {
-            ab.empty().startAction.science(1);
+            ab.empty().startAction.science(1).asterix();
           }).br;
           b.or().br;
           b.action('Add 2 Data to ANY card.', (ab) => {

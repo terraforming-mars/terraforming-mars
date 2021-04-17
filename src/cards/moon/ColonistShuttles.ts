@@ -21,7 +21,7 @@ export class ColonistShuttles extends MoonCard {
         cardNumber: 'M16',
         renderData: CardRenderer.builder((b) => {
           b.minus().titanium(1).moonColonyRate().br;
-          b.megacredits(2).slash().tile(TileType.MOON_COLONY, false);
+          b.megacredits(2).slash().moonColony({size: 'small'}).any;
         }),
       },
     }, {

@@ -7,7 +7,6 @@ import {CardRenderer} from '../render/CardRenderer';
 import {MoonExpansion} from '../../moon/MoonExpansion';
 import {Resources} from '../../Resources';
 import {Card} from '../Card';
-import {CardRenderItemSize} from '../render/CardRenderItemSize';
 
 export class DarksideMiningSyndicate extends Card implements IProjectCard {
   constructor() {
@@ -22,10 +21,8 @@ export class DarksideMiningSyndicate extends Card implements IProjectCard {
         '1 step if the Mining Rate is at least 2. And then raise the Mining Rate 1 step.',
         cardNumber: 'M66',
         renderData: CardRenderer.builder((b) => {
-          b.production((pb) => {
-            pb.titanium(2).nbsp.or().br;
-            pb.moonMiningRate({size: CardRenderItemSize.SMALL, amount: 2}).colon().nbsp.titanium(1);
-          }).br;
+          b.production((pb) => pb.titanium(2)).or().br;
+          b.moonMiningRate({size: 'small', amount: 2}).colon().production((pb) => pb.nbsp.titanium(1)).br;
           b.moonMiningRate().br;
         }),
       },

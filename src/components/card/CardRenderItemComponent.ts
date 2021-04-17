@@ -115,6 +115,7 @@ export const CardRenderItemComponent = Vue.component('CardRenderItemComponent', 
       } else if (type === CardRenderItemType.TRADE_FLEET) {
         classes.push('card-resource-trade-fleet');
       } else if (type === CardRenderItemType.SYNDICATE_FLEET) {
+        classes.push('card-resource');
         classes.push('card-resource-syndicate-fleet');
       } else if (type === CardRenderItemType.CHAIRMAN) {
         classes.push('card-chairman');

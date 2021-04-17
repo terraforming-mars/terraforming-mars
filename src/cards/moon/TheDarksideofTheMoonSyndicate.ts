@@ -24,24 +24,19 @@ export class TheDarksideofTheMoonSyndicate implements CorporationCard {
   public resourceCount = 0;
 
   public readonly metadata: CardMetadata = {
-    description: 'You start with 40 MC and 2 syndicate fleets on this card.',
     cardNumber: '',
     renderData: CardRenderer.builder((b) => {
       b.megacredits(40).syndicateFleet(2).br;
+      b.text('You start with 40 MC and 2 syndicate fleets on this card.', CardRenderItemSize.SMALL, false, false).br;
+      b.titanium(1).arrow(CardRenderItemSize.SMALL).syndicateFleet()
+        .or(CardRenderItemSize.SMALL)
+        .syndicateFleet().arrow(CardRenderItemSize.SMALL).text('steal', CardRenderItemSize.TINY).megacredits(8).any.br;
+      b.description('(Action: Spend 1 titanium to add 1 syndicate fleet on this card OR remove 1 syndicate fleet from this card to steal 8MC from any opponent.').br;
       b
-        .action('Spend 1 titanium to add 1 syndicate fleet on this card', (eb) => {
-          eb.titanium(1).startAction.syndicateFleet(); // TODO: Add syndicate fleet
-        })
-        .br
-        .action('Remove 1 syndicate fleet from this card to steal 8MC from any opponent.', (eb) => {
-          eb.syndicateFleet().startAction.text('STEAL').megacredits(8);
-        })
-        .br
-        .effect('When you place a tile on the Moon, steal 2 MC from the opponents for each tile of theirs placed next to yours.', (eb) => {
-          eb.moonColony({size: CardRenderItemSize.SMALL}).slash().br
-            .moonMine({size: CardRenderItemSize.SMALL}).slash()
-            .moonRoad({size: CardRenderItemSize.SMALL}).asterix()
-            .startAction.megacredits(-2).slash().emptyTile().emptyTile().asterix();
+        .effect('When you place a tile on the Moon, steal 2 MC from opponents for each of their tiles next to yours.', (eb) => {
+          eb.emptyTile('normal', CardRenderItemSize.SMALL).secondaryTag(Tags.MOON)
+            .startEffect
+            .text('STEAL').megacredits(2).any.slash().emptyTile('normal', CardRenderItemSize.SMALL).emptyTile('normal', CardRenderItemSize.SMALL).any;
         });
     }),
   };

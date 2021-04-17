@@ -1767,15 +1767,15 @@ export class Player implements ISerializable<SerializedPlayer> {
     microbes?: boolean,
     reserveUnits?: Units
   }) {
-    const reserveUnits = options?.reserveUnits || Units.EMPTY;
+    const reserveUnits = options?.reserveUnits ?? Units.EMPTY;
     if (!this.hasUnits(reserveUnits)) {
       return false;
     }
 
-    const canUseSteel: boolean = options?.steel || false;
-    const canUseTitanium: boolean = options?.titanium || false;
-    const canUseFloaters: boolean = options?.floaters || false;
-    const canUseMicrobes: boolean = options?.microbes || false;
+    const canUseSteel: boolean = options?.steel ?? false;
+    const canUseTitanium: boolean = options?.titanium ?? false;
+    const canUseFloaters: boolean = options?.floaters ?? false;
+    const canUseMicrobes: boolean = options?.microbes ?? false;
 
     return cost <=
       this.megaCredits - reserveUnits.megacredits +

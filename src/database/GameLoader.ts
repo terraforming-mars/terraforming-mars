@@ -2,6 +2,7 @@ import {Database} from './Database';
 import {Game, GameId, SpectatorId} from '../Game';
 import {PlayerId} from '../Player';
 import {IGameLoader} from './IGameLoader';
+import {MultiMap} from 'mnemonist';
 
 type LoadCallback = (game: Game | undefined) => void;
 
@@ -70,16 +71,11 @@ export class GameLoader implements IGameLoader {
     }
   }
 
-  public getLoadedGameIds(): Array<{id: string, participants: Array<string>}> {
-    const entries: Map<string, Array<string>> = new Map();
-    this.participantIds.forEach((gameId, participantId) => {
-      if (!entries.has(gameId)) {
-        entries.set(gameId, [participantId]);
-      } else {
-        entries.get(gameId)!.push(participantId);
-      }
-    });
-    const arry: Array<[string, Array<string>]> = Array.from(entries.entries());
+  public getLoadedGameIds(): Array<{id: GameId, participants: Array<SpectatorId | PlayerId>}> {
+    const map = new MultiMap<GameId, SpectatorId | PlayerId>();
+
+    this.participantIds.forEach((gameId, participantId) => map.set(gameId, participantId));
+    const arry: Array<[string, Array<string>]> = Array.from(map.associations());
     return arry.map(([id, participants]) => ({id: id, participants: participants}));
   }
 

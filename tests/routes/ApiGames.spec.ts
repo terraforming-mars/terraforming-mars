@@ -39,14 +39,7 @@ describe('ApiGames', function() {
   it('a game', () => {
     const player = TestPlayers.BLACK.newPlayer();
     ctx.gameLoader.add(Game.newInstance('game-id', [player], player));
-    ApiGames.INSTANCE.get(req, res.hide(), ctx);
-    expect(res.content).eq('["game-id"]');
-  });
-
-  it('a game with player ids', () => {
-    const player = TestPlayers.BLACK.newPlayer();
-    ctx.gameLoader.add(Game.newInstance('game-id', [player], player));
-    ctx.url = new URL('http://boo.com?full');
+    ctx.url = new URL('http://boo.com');
     ApiGames.INSTANCE.get(req, res.hide(), ctx);
     // Player ids aren't exactly available in the fake game loader.
     // A base class shared between GameLoader and FakeGameLoader would fix that.

@@ -13,7 +13,7 @@ import {AddResourcesToCard} from '../../deferredActions/AddResourcesToCard';
 import {CardRequirements} from '../CardRequirements';
 import {Card} from '../Card';
 import {CardRenderer} from '../render/CardRenderer';
-import {CardRenderItemSize} from '../render/CardRenderItemSize';
+import {Size} from '../render/Size';
 
 export class JupiterFloatingStation extends Card implements IProjectCard, IResourceCard {
   constructor() {
@@ -34,7 +34,7 @@ export class JupiterFloatingStation extends Card implements IProjectCard, IResou
           b.or().br;
           b.action('Gain 1 MC for every floater here [MAX 4].', (eb) => {
             eb.empty().startAction;
-            eb.megacredits(1).slash().floaters(1).text('[max 4]', CardRenderItemSize.SMALL);
+            eb.megacredits(1).slash().floaters(1).text('[max 4]', Size.SMALL);
           });
         }),
         description: {

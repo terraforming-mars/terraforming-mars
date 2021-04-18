@@ -7,7 +7,7 @@ import {SelectPlayer} from '../../inputs/SelectPlayer';
 import {Resources} from '../../Resources';
 import {CardName} from '../../CardName';
 import {CardRenderer} from '../render/CardRenderer';
-import {CardRenderItemSize} from '../render/CardRenderItemSize';
+import {Size} from '../render/Size';
 import {CardRenderDynamicVictoryPoints} from '../render/CardRenderDynamicVictoryPoints';
 
 export class LawSuit extends Card implements IProjectCard {
@@ -21,7 +21,7 @@ export class LawSuit extends Card implements IProjectCard {
       metadata: {
         cardNumber: 'X06',
         renderData: CardRenderer.builder((b) => {
-          b.text('steal', CardRenderItemSize.SMALL, true).megacredits(3).any.asterix();
+          b.text('steal', Size.SMALL, true).megacredits(3).any.asterix();
         }),
         description: 'Steal 3 MC from a player that REMOVED YOUR RESOURCES OR DECREASED YOUR PRODUCTION this generation. Place this card face down in THAT PLAYER\'S EVENT PILE.',
         victoryPoints: CardRenderDynamicVictoryPoints.any(-1),

@@ -11,7 +11,7 @@ import {PartyHooks} from '../../turmoil/parties/PartyHooks';
 import {PartyName} from '../../turmoil/parties/PartyName';
 import {LogHelper} from '../../LogHelper';
 import {CardRenderer} from '../render/CardRenderer';
-import {CardRenderItemSize} from '../render/CardRenderItemSize';
+import {Size} from '../render/Size';
 import {Card} from '../Card';
 
 export class ExtractorBalloons extends Card implements IActionCard, IResourceCard {
@@ -31,7 +31,7 @@ export class ExtractorBalloons extends Card implements IActionCard, IResourceCar
             eb.empty().startAction.floaters(1);
           }).br;
           b.action('Remove 2 Floaters here to raise Venus 1 step.', (eb) => {
-            eb.or(CardRenderItemSize.SMALL).floaters(2).startAction.venus(1);
+            eb.or(Size.SMALL).floaters(2).startAction.venus(1);
           }).br.floaters(3);
         }),
       },

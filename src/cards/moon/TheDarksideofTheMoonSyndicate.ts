@@ -14,6 +14,7 @@ import {OrOptions} from '../../inputs/OrOptions';
 import {SelectOption} from '../../inputs/SelectOption';
 import {StealResources} from '../../deferredActions/StealResources';
 import {CardRenderItemSize} from '../render/CardRenderItemSize';
+import {Phase} from '../../Phase';
 
 export class TheDarksideofTheMoonSyndicate implements CorporationCard {
   public name = CardName.THE_DARKSIDE_OF_THE_MOON_SYNDICATE;
@@ -74,6 +75,9 @@ export class TheDarksideofTheMoonSyndicate implements CorporationCard {
   }
 
   public onTilePlaced(cardOwner: Player, activePlayer: Player, space: ISpace) {
+    if (activePlayer.game.phase === Phase.SOLAR) {
+      return;
+    }
     if (activePlayer !== cardOwner) {
       return undefined;
     }

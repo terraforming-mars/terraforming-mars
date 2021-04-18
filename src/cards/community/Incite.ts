@@ -6,7 +6,7 @@ import {CardName} from '../../CardName';
 import {CardType} from '../CardType';
 import {SendDelegateToArea} from '../../deferredActions/SendDelegateToArea';
 import {CardRenderer} from '../render/CardRenderer';
-import {CardRenderItemSize} from '../render/CardRenderItemSize';
+import {Size} from '../render/Size';
 
 export class Incite extends Card implements CorporationCard {
   constructor() {
@@ -24,11 +24,11 @@ export class Incite extends Card implements CorporationCard {
           b.br.br;
           b.megacredits(32).nbsp.delegates(2);
           b.corpBox('effect', (ce) => {
-            ce.vSpace(CardRenderItemSize.LARGE);
+            ce.vSpace(Size.LARGE);
             ce.effect(undefined, (eb) => {
               eb.startEffect.influence(1);
             });
-            ce.vSpace(CardRenderItemSize.SMALL);
+            ce.vSpace(Size.SMALL);
             ce.effect('You have +1 influence. When you send a delegate using the lobbying action, you pay 2 MC less for it.', (eb) => {
               eb.delegates(1).startEffect.megacredits(-2);
             });

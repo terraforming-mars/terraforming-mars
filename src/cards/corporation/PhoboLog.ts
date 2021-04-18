@@ -5,7 +5,7 @@ import {CorporationCard} from './CorporationCard';
 import {CardName} from '../../CardName';
 import {CardType} from '../CardType';
 import {CardRenderer} from '../render/CardRenderer';
-import {CardRenderItemSize} from '../render/CardRenderItemSize';
+import {Size} from '../render/Size';
 
 export class PhoboLog extends Card implements CorporationCard {
   constructor() {
@@ -23,7 +23,7 @@ export class PhoboLog extends Card implements CorporationCard {
           b.megacredits(23).nbsp.titanium(10).digit;
           b.corpBox('effect', (ce) => {
             ce.effect('Your titanium resources are each worth 1 MC extra.', (eb) => {
-              eb.titanium(1).startEffect.plus(CardRenderItemSize.SMALL).megacredits(1);
+              eb.titanium(1).startEffect.plus(Size.SMALL).megacredits(1);
             });
           });
         }),

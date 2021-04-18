@@ -7,6 +7,7 @@ import {CardRenderer} from '../render/CardRenderer';
 import {MoonExpansion} from '../../moon/MoonExpansion';
 import {Resources} from '../../Resources';
 import {Card} from '../Card';
+import {Size} from '../render/Size';
 
 export class DarksideMiningSyndicate extends Card implements IProjectCard {
   constructor() {
@@ -22,7 +23,7 @@ export class DarksideMiningSyndicate extends Card implements IProjectCard {
         cardNumber: 'M66',
         renderData: CardRenderer.builder((b) => {
           b.production((pb) => pb.titanium(2)).or().br;
-          b.moonMiningRate({size: 'small', amount: 2}).colon().production((pb) => pb.nbsp.titanium(1)).br;
+          b.moonMiningRate({size: Size.SMALL, amount: 2}).colon().production((pb) => pb.nbsp.titanium(1)).br;
           b.moonMiningRate().br;
         }),
       },

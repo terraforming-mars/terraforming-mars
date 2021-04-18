@@ -7,7 +7,7 @@ import {IActionCard} from '../ICard';
 import {CardName} from '../../CardName';
 import {CardType} from '../CardType';
 import {CardRenderer} from '../render/CardRenderer';
-import {CardRenderItemSize} from '../render/CardRenderItemSize';
+import {Size} from '../render/Size';
 
 export class ArcadianCommunities extends Card implements IActionCard, CorporationCard {
   constructor() {
@@ -24,9 +24,9 @@ export class ArcadianCommunities extends Card implements IActionCard, Corporatio
           b.br;
           b.megacredits(40).nbsp.steel(10).digit.nbsp.community().asterix();
           b.corpBox('action', (ce) => {
-            ce.text('ACTION: PLACE A COMMUNITY (PLAYER MARKER) ON A NON-RESERVED AREA ADJACENT TO ONE OF YOUR TILES OR MARKED AREAS', CardRenderItemSize.TINY, true);
-            ce.vSpace(CardRenderItemSize.MEDIUM);
-            ce.text('EFFECT: MARKED AREAS ARE RESERVED FOR YOU. WHEN YOU PLACE A TILE THERE, GAIN 3 MC', CardRenderItemSize.TINY, true);
+            ce.text('ACTION: PLACE A COMMUNITY (PLAYER MARKER) ON A NON-RESERVED AREA ADJACENT TO ONE OF YOUR TILES OR MARKED AREAS', Size.TINY, true);
+            ce.vSpace(Size.MEDIUM);
+            ce.text('EFFECT: MARKED AREAS ARE RESERVED FOR YOU. WHEN YOU PLACE A TILE THERE, GAIN 3 MC', Size.TINY, true);
           });
         }),
       },

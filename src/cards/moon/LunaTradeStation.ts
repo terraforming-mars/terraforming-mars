@@ -9,6 +9,7 @@ import {CardRenderer} from '../render/CardRenderer';
 import {IActionCard} from '../ICard';
 import {Units} from '../../Units';
 import {MoonCard} from './MoonCard';
+import {Size} from '../render/Size';
 
 export class LunaTradeStation extends MoonCard implements IActionCard {
   constructor() {
@@ -24,7 +25,7 @@ export class LunaTradeStation extends MoonCard implements IActionCard {
         cardNumber: 'M13',
         renderData: CardRenderer.builder((b) => {
           b.action('Gain 1 MC for each mining tile on the Moon.', (eb) =>
-            eb.empty().startAction.megacredits(1).slash().moonColony({size: 'small'}).any);
+            eb.empty().startAction.megacredits(1).slash().moonColony({size: Size.SMALL}).any);
           b.br.minus().titanium(2).tile(TileType.LUNA_TRADE_STATION, true).asterix();
         }),
       },

@@ -13,7 +13,7 @@ import {GainProduction} from '../../deferredActions/GainProduction';
 import {Board} from '../../boards/Board';
 import {CardType} from '../CardType';
 import {CardRenderer} from '../render/CardRenderer';
-import {CardRenderItemSize} from '../render/CardRenderItemSize';
+import {Size} from '../render/Size';
 
 export class TharsisRepublic extends Card implements CorporationCard {
   constructor() {
@@ -32,9 +32,9 @@ export class TharsisRepublic extends Card implements CorporationCard {
           b.megacredits(40).nbsp.city();
           b.corpBox('effect', (ce) => {
             ce.effect('When any city tile is placed ON MARS, increase your MC production 1 step. When you place a city tile, gain 3 MC.', (eb) => {
-              eb.city(CardRenderItemSize.SMALL).any.asterix().colon();
+              eb.city(Size.SMALL).any.asterix().colon();
               eb.production((pb) => pb.megacredits(1)).nbsp;
-              eb.city(CardRenderItemSize.SMALL).startEffect.megacredits(3);
+              eb.city(Size.SMALL).startEffect.megacredits(3);
             });
           });
         }),

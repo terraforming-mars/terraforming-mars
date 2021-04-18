@@ -8,6 +8,7 @@ import {TileType} from '../../TileType';
 import {CardRenderer} from '../render/CardRenderer';
 import {CardRequirements} from '../CardRequirements';
 import {Card} from '../Card';
+import {Size} from '../render/Size';
 
 export class RevoltingColonists extends Card implements IProjectCard {
   constructor() {
@@ -22,7 +23,7 @@ export class RevoltingColonists extends Card implements IProjectCard {
         description: 'Requires 4 Colony Rate. All players pay 3MC for each colony tile they own.',
         cardNumber: 'M51',
         renderData: CardRenderer.builder((b) => {
-          b.megacredits(3).any.slash().moonColony({size: 'small'}).any;
+          b.megacredits(3).any.slash().moonColony({size: Size.SMALL}).any;
         }),
       },
     });

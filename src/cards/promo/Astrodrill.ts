@@ -12,7 +12,7 @@ import {LogHelper} from '../../LogHelper';
 import {Resources} from '../../Resources';
 import {CardType} from '../CardType';
 import {CardRenderer} from '../render/CardRenderer';
-import {CardRenderItemSize} from '../render/CardRenderItemSize';
+import {Size} from '../render/Size';
 
 export class Astrodrill extends Card implements IActionCard, CorporationCard {
   constructor() {
@@ -30,7 +30,7 @@ export class Astrodrill extends Card implements IActionCard, CorporationCard {
           b.br;
           b.megacredits(38).nbsp.asteroids(3).digit;
           b.corpBox('action', (ce) => {
-            ce.vSpace(CardRenderItemSize.LARGE);
+            ce.vSpace(Size.LARGE);
             ce.action(undefined, (eb) => {
               eb.empty().startAction.asteroids(1).asterix().slash().wild(1).or();
             });

@@ -7,7 +7,7 @@ import {SelectCard} from '../../inputs/SelectCard';
 import {CardName} from '../../CardName';
 import {LogHelper} from '../../LogHelper';
 import {CardRenderer} from '../render/CardRenderer';
-import {CardRenderItemSize} from '../render/CardRenderItemSize';
+import {Size} from '../render/Size';
 
 export class CEOsFavoriteProject extends Card implements IProjectCard {
   constructor() {
@@ -18,7 +18,7 @@ export class CEOsFavoriteProject extends Card implements IProjectCard {
 
       metadata: {
         cardNumber: '149',
-        renderData: CardRenderer.builder((b) => b.text('Add 1 resource to a card with at least 1 resource on it', CardRenderItemSize.SMALL, true)),
+        renderData: CardRenderer.builder((b) => b.text('Add 1 resource to a card with at least 1 resource on it', Size.SMALL, true)),
       },
     });
   }

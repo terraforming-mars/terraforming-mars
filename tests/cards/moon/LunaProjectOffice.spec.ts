@@ -36,37 +36,38 @@ describe('LunaProjectOffice', () => {
         turmoilExtension: false,
       }));
 
+    game.generation = 10;
     const card = new LunaProjectOffice();
 
     player.playedCards = [card];
-    card.play();
-    expect(card.resourceCount).eq(2);
+    card.play(player);
+    expect(LunaProjectOffice.isActive(player)).is.true;
 
-    game.generation = 2;
 
-    // End the generation. Player will have 5 cards to draw from and 1 more 5-card draw.
+    // End the generation. Player will draw 5 cards from and 1 more 5-card draw.
 
     finishGeneration(game);
-    expect(game.getGeneration()).to.eq(3);
+    expect(game.getGeneration()).to.eq(11);
 
+    expect(LunaProjectOffice.isActive(player)).is.true;
     expect(getWaitingFor(player).cards).has.length(5);
-    expect(card.resourceCount).eq(1);
 
-    // End the generation. Player will have 5 cards to draw from and no more 5-card draws.
+    // End the generation. Player will draw 5 cards from this generation.
+    // Since this is the second generation after playing LPO, it is also the last.
 
     finishGeneration(game);
-    expect(game.getGeneration()).to.eq(4);
+    expect(game.getGeneration()).to.eq(12);
 
+    expect(LunaProjectOffice.isActive(player)).is.true;
     expect(getWaitingFor(player).cards).has.length(5);
-    expect(card.resourceCount).eq(0);
 
-    // End the generation. Player will have 4 cards to draw and no more 5-card draws.
+    // End the generation. Player will draw 4 cards.
 
     finishGeneration(game);
-    expect(game.getGeneration()).to.eq(5);
+    expect(game.getGeneration()).to.eq(13);
 
+    expect(LunaProjectOffice.isActive(player)).is.false;
     expect(getWaitingFor(player).cards).has.length(4);
-    expect(card.resourceCount).eq(0);
   });
 
   // This test is almost exactly the same as the solo test, but they take
@@ -83,52 +84,49 @@ describe('LunaProjectOffice', () => {
         draftVariant: true,
         turmoilExtension: false,
       }));
+
+    game.generation = 10;
     const card = new LunaProjectOffice();
 
     player.playedCards = [card];
-    card.play();
-    expect(card.resourceCount).eq(2);
+    card.play(player);
+    expect(LunaProjectOffice.isActive(player)).is.true;
 
-    game.generation = 2;
-
-    // End the generation. Player will have 5 cards to draw from and will have one more resource
-    // on this card, allowing a 5-card draft next generation.
+    // End the generation. Player will draw 5 cards this generation.
 
     finishGeneration(game);
-    expect(game.getGeneration()).to.eq(3);
+    expect(game.getGeneration()).to.eq(11);
 
     expect(getWaitingFor(player).cards).has.length(5);
     expect(getWaitingFor(player).minCardsToSelect).eq(2);
     expect(getWaitingFor(player).maxCardsToSelect).eq(2);
     expect(getWaitingFor(redPlayer).cards).has.length(4);
-    expect(card.resourceCount).eq(1);
 
-    // End the generation. Player will have 5 cards to draw from and no resources on
-    // this card, so the generation after the player will only draw 4 cards.
+    // End the generation. Player will draw 5 cards this generation.
+    // Since this is the second generation after playing LPO, it is also the last.
 
     finishGeneration(game);
-    expect(game.getGeneration()).to.eq(4);
+    expect(game.getGeneration()).to.eq(12);
 
     expect(getWaitingFor(player).cards).has.length(5);
     expect(getWaitingFor(player).minCardsToSelect).eq(2);
     expect(getWaitingFor(player).maxCardsToSelect).eq(2);
     expect(getWaitingFor(redPlayer).cards).has.length(4);
-    expect(card.resourceCount).eq(0);
+    expect(LunaProjectOffice.isActive(player)).is.true;
 
-    // End the generation. Player will have 4 cards to draw, and still no
-    // resources on its card.
+    // End the generation. Player will draw 4 cards.
 
     finishGeneration(game);
-    expect(game.getGeneration()).to.eq(5);
+    expect(game.getGeneration()).to.eq(13);
 
+    expect(LunaProjectOffice.isActive(player)).is.false;
     expect(getWaitingFor(player).cards).has.length(4);
     expect(getWaitingFor(player).minCardsToSelect).eq(1);
     expect(getWaitingFor(player).maxCardsToSelect).eq(1);
     expect(getWaitingFor(redPlayer).cards).has.length(4);
-    expect(card.resourceCount).eq(0);
   });
 
-  // This test is almost exactly the same as the solo test, but they take
+  // This test is almost exactly the same as the solo test, but it takes
   // different paths in the code.
   it('play - 2 player - no draft', function() {
     const player = TestPlayers.BLUE.newPlayer();
@@ -142,46 +140,42 @@ describe('LunaProjectOffice', () => {
         draftVariant: false,
         turmoilExtension: false,
       }));
+
+    game.generation = 10;
     const card = new LunaProjectOffice();
 
     player.playedCards = [card];
-    card.play();
-    expect(card.resourceCount).eq(2);
+    card.play(player);
+    expect(LunaProjectOffice.isActive(player)).is.true;
 
-    game.generation = 2;
 
-    // End the generation. Player will have 5 cards to draw from and will have one more resource
-    // on this card, allowing a 5-card draft next generation.
-
+    // End the generation. Player will draw 5 cards this generation.
     finishGeneration(game);
-    expect(game.getGeneration()).to.eq(3);
+    expect(game.getGeneration()).to.eq(11);
 
+    expect(LunaProjectOffice.isActive(player)).is.true;
     expect(getWaitingFor(player).cards).has.length(5);
     expect(getWaitingFor(player).minCardsToSelect).eq(0);
     expect(getWaitingFor(redPlayer).cards).has.length(4);
-    expect(card.resourceCount).eq(1);
 
-    // End the generation. Player will have 5 cards to draw from and no resources on
+    // End the generation. Player will draw 5 cards and no resources on
     // this card, so the generation after the player will only draw 4 cards.
 
     finishGeneration(game);
-    expect(game.getGeneration()).to.eq(4);
+    expect(game.getGeneration()).to.eq(12);
 
     expect(getWaitingFor(player).cards).has.length(5);
     expect(getWaitingFor(player).minCardsToSelect).eq(0);
     expect(getWaitingFor(redPlayer).cards).has.length(4);
-    expect(card.resourceCount).eq(0);
 
-    // End the generation. Player will have 4 cards to draw, and still no
-    // resources on its card.
+    // End the generation. Player will draw 4 cards.
 
     finishGeneration(game);
-    expect(game.getGeneration()).to.eq(5);
+    expect(game.getGeneration()).to.eq(13);
 
     expect(getWaitingFor(player).cards).has.length(4);
     expect(getWaitingFor(player).minCardsToSelect).eq(0);
     expect(getWaitingFor(redPlayer).cards).has.length(4);
-    expect(card.resourceCount).eq(0);
   });
 });
 

@@ -1130,7 +1130,7 @@ export class Player implements ISerializable<SerializedPlayer> {
     if (passedCards === undefined) {
       if (!initialDraft) {
         let cardsToDraw = 4;
-        if (LunaProjectOffice.consume(this)) {
+        if (LunaProjectOffice.isActive(this)) {
           cardsToDraw = 5;
           cardsToKeep = 2;
         }
@@ -1181,7 +1181,7 @@ export class Player implements ISerializable<SerializedPlayer> {
   public runResearchPhase(draftVariant: boolean): void {
     let dealtCards: Array<IProjectCard> = [];
     if (!draftVariant) {
-      this.dealCards(LunaProjectOffice.consume(this) ? 5 : 4, dealtCards);
+      this.dealCards(LunaProjectOffice.isActive(this) ? 5 : 4, dealtCards);
     } else {
       dealtCards = this.draftedCards;
       this.draftedCards = [];

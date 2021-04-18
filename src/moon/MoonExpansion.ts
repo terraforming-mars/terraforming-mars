@@ -75,6 +75,7 @@ export class MoonExpansion {
       miningRate: 0,
       logisticRate: 0,
       lunaFirstPlayer: undefined,
+      lunaProjectOfficeLastGeneration: undefined,
     };
   }
 

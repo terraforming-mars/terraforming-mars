@@ -8,6 +8,7 @@ import {CardRenderer} from '../render/CardRenderer';
 import {Units} from '../../Units';
 import {TileType} from '../../TileType';
 import {MoonCard} from './MoonCard';
+import {AltSecondaryTag} from '../render/CardRenderItem';
 
 export class MomentumViriumHabitat extends MoonCard {
   constructor() {
@@ -27,7 +28,7 @@ export class MomentumViriumHabitat extends MoonCard {
           b.production((pb) => {
             pb.heat(2).megacredits(3);
           }).br;
-          b.moonColony().asterix();
+          b.moonColony().secondaryTag(AltSecondaryTag.MOON_COLONY_RATE).asterix();
         }),
       },
     }, {

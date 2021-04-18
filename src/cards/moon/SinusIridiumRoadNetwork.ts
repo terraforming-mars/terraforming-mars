@@ -7,6 +7,7 @@ import {CardRenderer} from '../render/CardRenderer';
 import {Units} from '../../Units';
 import {TileType} from '../../TileType';
 import {MoonCard} from './MoonCard';
+import {AltSecondaryTag} from '../render/CardRenderItem';
 
 export class SinusIridiumRoadNetwork extends MoonCard {
   constructor() {
@@ -27,7 +28,7 @@ export class SinusIridiumRoadNetwork extends MoonCard {
           b.production((pb) => {
             pb.minus().energy(1).nbsp.megacredits(3);
           }).br;
-          b.moonRoad();
+          b.moonRoad().secondaryTag(AltSecondaryTag.MOON_LOGISTICS_RATE);
         }),
       },
     }, {

@@ -7,6 +7,7 @@ import {CardRenderer} from '../render/CardRenderer';
 import {TileType} from '../../TileType';
 import {Units} from '../../Units';
 import {MoonCard} from './MoonCard';
+import {AltSecondaryTag} from '../render/CardRenderItem';
 
 export class AristarchusRoadNetwork extends MoonCard {
   constructor() {
@@ -23,7 +24,7 @@ export class AristarchusRoadNetwork extends MoonCard {
         cardNumber: 'M10',
         renderData: CardRenderer.builder((b) => {
           b.minus().steel(2).nbsp.production((eb) => eb.megacredits(2)).br;
-          b.moonRoad();
+          b.moonRoad().secondaryTag(AltSecondaryTag.MOON_LOGISTICS_RATE);
         }),
       },
     }, {

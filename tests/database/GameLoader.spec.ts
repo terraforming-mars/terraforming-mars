@@ -162,7 +162,9 @@ describe('GameLoader', function() {
     GameLoader.getInstance().getByPlayerId(players[Math.floor(Math.random() * players.length)]!.id, (game1) => {
       expect(game1).not.is.undefined;
     });
-    expect(GameLoader.getInstance().getLoadedGameIds()).to.deep.eq(['foobar']);
+    expect(GameLoader.getInstance().getLoadedGameIds()).to.deep.eq(
+      [{'id': 'foobar', 'participants': ['blue-id', 'red-id']}],
+    );
   });
 
   it('loads values after error pulling game ids', function() {

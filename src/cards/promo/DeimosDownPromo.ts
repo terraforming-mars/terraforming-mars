@@ -39,7 +39,7 @@ export class DeimosDownPromo extends Card implements IProjectCard {
     const stepsRaised = Math.min(remainingTemperatureSteps, 3);
 
     if (PartyHooks.shouldApplyPolicy(player.game, PartyName.REDS)) {
-      return player.canAfford(player.getCardCost(this) + REDS_RULING_POLICY_COST * stepsRaised, false, true) && canPlaceTile;
+      return player.canAfford(player.getCardCost(this) + REDS_RULING_POLICY_COST * stepsRaised, {titanium: true}) && canPlaceTile;
     }
 
     return canPlaceTile;

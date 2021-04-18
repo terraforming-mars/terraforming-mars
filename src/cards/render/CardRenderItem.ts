@@ -20,7 +20,7 @@ export enum AltSecondaryTag {
 }
 
 export interface ItemOptions {
-  size?: CardRenderItemSize | CardRenderItemSize;
+  size?: CardRenderItemSize;
   amount?: number;
 }
 

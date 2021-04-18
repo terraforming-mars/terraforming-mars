@@ -161,7 +161,7 @@ export const LogPanel = Vue.component('log-panel', {
     },
     cardClicked: function(message: LogMessage) {
       const datas = message.data;
-      for (const data of datas) {
+      datas.forEach((data: LogMessageData) => {
         if (data.type !== undefined && data.value !== undefined) {
           if (data.type === LogMessageDataType.CARD) {
             const card_name = data.value;
@@ -171,10 +171,9 @@ export const LogPanel = Vue.component('log-panel', {
             } else {
               this.cards.splice(index, 1);
             }
-            break;
           }
         }
-      }
+      });
     },
     hideMe: function() {
       this.cards = [];

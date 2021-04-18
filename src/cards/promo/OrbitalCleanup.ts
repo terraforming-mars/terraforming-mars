@@ -25,7 +25,7 @@ export class OrbitalCleanup extends Card implements IProjectCard {
             pb.megacredits(-2);
           });
         }),
-        description: 'Decrease your MC production 2 steps.',
+        description: 'Decrease your M€ production 2 steps.',
         victoryPoints: 2,
       },
     });

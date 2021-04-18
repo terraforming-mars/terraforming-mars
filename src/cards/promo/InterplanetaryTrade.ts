@@ -21,7 +21,7 @@ export class InterplanetaryTrade extends Card implements IProjectCard {
           b.production((pb) => pb.megacredits(1));
           b.slash().diverseTag();
         }),
-        description: 'Increase your MC production 1 step per different tag you have in play, including this.',
+        description: 'Increase your M€ production 1 step per different tag you have in play, including this.',
         victoryPoints: 1,
       },
     });

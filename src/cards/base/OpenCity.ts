@@ -30,7 +30,7 @@ export class OpenCity extends Card implements IProjectCard {
           }).city().plants(2);
         }),
         description: {
-          text: 'Requires 12% oxygen. Gain 2 plants. Place a City tile. Decrease your Energy production 1 step and increase your MC production 4 steps.',
+          text: 'Requires 12% oxygen. Gain 2 plants. Place a City tile. Decrease your Energy production 1 step and increase your M€ production 4 steps.',
           align: 'left',
         },
         victoryPoints: 1,

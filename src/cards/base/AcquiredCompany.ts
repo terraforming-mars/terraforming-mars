@@ -16,7 +16,7 @@ export class AcquiredCompany extends Card implements IProjectCard {
       cost: 10,
 
       metadata: {
-        description: 'Increase your MC production 3 steps.',
+        description: 'Increase your M€ production 3 steps.',
         cardNumber: '106',
         renderData: CardRenderer.builder((b) => b.production((pb) => pb.megacredits(3))),
       },

@@ -21,7 +21,7 @@ export class Poseidon extends Card implements CorporationCard {
           b.br.br;
           b.megacredits(45).nbsp.colonies(1);
           b.corpBox('effect', (ce) => {
-            ce.effect('When any colony is placed, including this, raise your MC production 1 step.', (eb) => {
+            ce.effect('When any colony is placed, including this, raise your M€ production 1 step.', (eb) => {
               eb.colonies(1).any.startEffect.production((pb) => pb.megacredits(1));
             });
           });

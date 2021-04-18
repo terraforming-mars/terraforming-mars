@@ -22,7 +22,7 @@ export class Satellites extends Card implements IProjectCard {
             pb.megacredits(1).slash().space().played;
           });
         }),
-        description: 'Increase your MC production 1 step for each space tag your have, including this one.',
+        description: 'Increase your M€ production 1 step for each space tag your have, including this one.',
       },
     });
   }

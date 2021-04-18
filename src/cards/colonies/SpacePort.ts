@@ -28,7 +28,7 @@ export class SpacePort extends Card implements IProjectCard {
           }).nbsp.city().br;
           b.tradeFleet();
         }),
-        description: 'Requires 1 colony. Decrease your Energy production 1 step and increase your MC production 4 steps. Place a City tile. Gain 1 Trade Fleet.',
+        description: 'Requires 1 colony. Decrease your Energy production 1 step and increase your M€ production 4 steps. Place a City tile. Gain 1 Trade Fleet.',
       },
     });
   }

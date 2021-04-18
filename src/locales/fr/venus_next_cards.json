@@ -18,7 +18,7 @@
     "Raise Venus 1 step. Remove up to 4MC from any player WITH A VENUS TAG IN PLAY.": "Augmentez Vénus de 1. Retirez jusqu'à 4 M€ à un joueur ayant 1 badge Vénus en jeu.",
 
     "Corroder Suits": "Combinaison Anticorrosion",
-    "Increase your MC production 2 steps. Add 1 resource to ANY Venus CARD": "Augmentez votre production de M€ de 2.. Ajoutez 1 ressource à N'IMPORTE QUELLE carte Vénus.",
+    "Increase your M€ production 2 steps. Add 1 resource to ANY Venus CARD": "Augmentez votre production de M€ de 2.. Ajoutez 1 ressource à N'IMPORTE QUELLE carte Vénus.",
 
     "Dawn City": "Cité Aurora",
     "Requires 4 Science tags. Decrease your energy production 1 step. Increase your titanium production 1 step. Place a City tile on the RESERVED AREA": "Nécessite 4 badges Science. Diminuez votre production d'énergie de 1. Augmentez votre production de titane de 1. Placez une tuile Cité SUR LA ZONE RESERVEE.",
@@ -46,7 +46,7 @@
     "Action: Spend 2 MC to add 1 Floater to this card, OR spend 2 Floaters here to increase Venus 1 step": "Action: Dépensez 2 M€ pour ajouter 1 flotteur sur cette carte, ou retirez 2 flotteurs de cette carte pour augmenter Vénus de 1.",
 
     "Freyja Biodomes": "Biodôme de Feyja",
-    "Requires 10% Venus. Add 2 Microbes or 2 Animals to another Venus card. Decrease your energy production 1 step and increase your MC production 2 steps": "Nécessite que Vénus ait atteint 10%. Ajoutez 2 microbes ou 2 animaux sur UNE AUTRE CARTE VENUS. Diminuez votre production d'énergie de 1 et augmentez votre production de M€ de 2.",
+    "Requires 10% Venus. Add 2 Microbes or 2 Animals to another Venus card. Decrease your energy production 1 step and increase your M€ production 2 steps": "Nécessite que Vénus ait atteint 10%. Ajoutez 2 microbes ou 2 animaux sur UNE AUTRE CARTE VENUS. Diminuez votre production d'énergie de 1 et augmentez votre production de M€ de 2.",
 
     "GHG Import From Venus": "Important de GES de Vénus",
     "Raise Venus 1 step. Increase your heat production 3 steps": "Augmentez Vénus de 1. Augmentez votre production de chaleur de 3.",
@@ -55,7 +55,7 @@
     "Raise Venus 3 steps": "Augmentez Vénus de 3.",
 
     "Gyropolis": "Gyropolis",
-    "Decrease your energy production 2 steps. Increase your MC production 1 step for each Venus and Earth tag you have. Place a City tile": "Diminuez votre production d'énergie de 2. Augmentez votre production de M€ de 1 par badge Vénus et Terre en votre possession. Placez une tuile cité.",
+    "Decrease your energy production 2 steps. Increase your M€ production 1 step for each Venus and Earth tag you have. Place a City tile": "Diminuez votre production d'énergie de 2. Augmentez votre production de M€ de 1 par badge Vénus et Terre en votre possession. Placez une tuile cité.",
 
     "Hydrogen to Venus": "Hydrogène pour Vénus",
     "Raise Venus 1 step. Add 1 Floater to A Venus CARD for each Jovian tag you have": "Augmentez Vénus de 1. Ajoutez 1 flotteur sur UNE CARTE VENUS pour chaque badge Jovien en votre possession.",
@@ -70,10 +70,10 @@
     "Action: Spend 1 titanium to add 2 Floaters here, OR spend 2 Floaters here to raise Venus 1 step": "Action: Dépensez 1 titane pour ajouter 2 flotteurs sur cette carte, ou retirez 2 flotteurs de cette carte pour augmenter Vénus de 1.",
 
     "Local Shading": "Ombrage Sélectif",
-    "Action: add 1 Floater to this card, or spend 1 Floater here to raise your MC production 1 step": "Action: Ajoutez 1 flotteur sur cette carte, ou retirez 1 flotteur de cette carte pour augmenter votre production de M€ de 1.",
+    "Action: add 1 Floater to this card, or spend 1 Floater here to raise your M€ production 1 step": "Action: Ajoutez 1 flotteur sur cette carte, ou retirez 1 flotteur de cette carte pour augmenter votre production de M€ de 1.",
 
     "Luna Metropolis": "Métropole Lunaire",
-    "Increase your MC production 1 step for each Earth tag you have, including this. Place a City tile on the RESERVED AREA": "Augmentez votre production de M€ de 1 pour chaque badge terre en votre possession, y compris celui-ci. Placez une tuile Cité SUR LA ZONE RESERVEE.",
+    "Increase your M€ production 1 step for each Earth tag you have, including this. Place a City tile on the RESERVED AREA": "Augmentez votre production de M€ de 1 pour chaque badge terre en votre possession, y compris celui-ci. Placez une tuile Cité SUR LA ZONE RESERVEE.",
 
     "Luxury Foods": "Mets Raffinés",
     "Venus Earth Jovian": "Nécessite un badge Vénus, un badge Terre et un badge Jovien.",
@@ -100,7 +100,7 @@
     "Venus must be 14% or lower": "Vénus doit être à 14% ou moins.",
 
     "Sister Planet Support": "Soutien de la Planète Soeur",
-    "Requires Venus and Earth tags. Increase your MC production 3 steps": "Nécessite un badge Vénus, un badge Terre. Augmentez votre production de M€ de 3.",
+    "Requires Venus and Earth tags. Increase your M€ production 3 steps": "Nécessite un badge Vénus, un badge Terre. Augmentez votre production de M€ de 3.",
 
     "Solarnet": "Solarnet",
     "Requires Venus, Earth and Jovian tags. Draw 2 cards": "Nécessite un badge Vénus, un badge Terre et un badge Jovien. Piochez 2 cartes.",
@@ -113,7 +113,7 @@
 
     "Stratopolis": "Stratopolis",
     "Action: Add 2 floaters to ANY VENUS CARD.": "Action: ajoutez 2 flotteurs sur N'IMPORTE QUELLE CARTE VENUS.",
-    "Requires 2 science tags. Increase your MC production 2 steps.": "Nécessite 2 badges Science. Augmentez votre production de M€ de 2..",
+    "Requires 2 science tags. Increase your M€ production 2 steps.": "Nécessite 2 badges Science. Augmentez votre production de M€ de 2..",
     "Place a City tile ON THE RESERVED AREA. 1 VP for every 3rd Floater on this card.": "Placez une tuile cité sur LA ZONE RESERVEE. 1 PV par groupe de 3 flotteurs sur cette carte.",
 
     "Stratospheric Birds": "Oiseaux Stratospheriques",
@@ -121,14 +121,14 @@
     "Requires Venus 12% and that you spend 1 Floater from any card. 1 VP for each Animal on this card.": "Nécessite que Vénus ait atteint 12% et que vous retiriez 1 flotteur de n'importe quelle carte. 1 PV par animal sur cette carte.",
 
     "Sulphur Exports": "Exportations de Soufre",
-    "Increase Venus 1 step. Increase your MC production 1 step for each Venus tag you have, including this.": "Augmentez Vénus de 1. Augmentez votre production de M€ de 1 par badge Vénus en votre possession y compris celui-ci.",
+    "Increase Venus 1 step. Increase your M€ production 1 step for each Venus tag you have, including this.": "Augmentez Vénus de 1. Augmentez votre production de M€ de 1 par badge Vénus en votre possession y compris celui-ci.",
 
     "Sulphur-Eating Bacteria": "Bactéries Sulfo-Oxydantes",
     "Action: add 1 Microbe to this card, or spend any number of Microbes here to gain triple amount of MC": "Action: Ajoutez 1 microbe sur cette carte, ou retirez n'importe quel nombre de microbes de cette carte pour gagner le triple de M€.",
     "Requires Venus 6%": "Nécessite que Vénus ait atteint 6%.",
 
     "Terraforming Contract": "Contrat de Terraformation",
-    "Requires that you have at least 25 TR. Increase your MC production 4 steps.": "Votre NT doit être d'au moins 25. Augmentez votre production de M€ de 4.",
+    "Requires that you have at least 25 TR. Increase your M€ production 4 steps.": "Votre NT doit être d'au moins 25. Augmentez votre production de M€ de 4.",
 
     "Thermophiles": "Thermophiles",
     "Action: add 1 Microbe to ANY Venus CARD or spend 2 Microbes here to raise Venus 1 step": "Action: Ajoutez 1 microbe sur N'IMPORTE QUELLE CARTE VENUS, ou retirez 2 microbes de cette carte pour augmenter Vénus de 1.",
@@ -137,7 +137,7 @@
     "Raise Venus 1 step.": "Augmentez Vénus de 1.",
 
     "Venus Governor": "Gouverneur de Vénus",
-    "Requires 2 Venus tags. Increase your MC production 2 steps.": "Nécessite 2 badges Vénus. Augmentez votre production de M€ de 2.",
+    "Requires 2 Venus tags. Increase your M€ production 2 steps.": "Nécessite 2 badges Vénus. Augmentez votre production de M€ de 2.",
 
     "Venus Magnetizer": "Magnétisation de Vénus",
     "Action: Decrease your Energy production 1 step to raise Venus 1 step.": "Action: Diminuez votre production d'énergie de 1 pour augmenter Vénus de 1.",

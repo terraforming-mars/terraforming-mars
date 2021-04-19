@@ -18,7 +18,7 @@ export class SinusIridiumRoadNetwork extends MoonCard {
       productionBox: Units.of({energy: -1, megacredits: 3}),
 
       metadata: {
-        description: 'Decrease your energy production 1 step and increase your MC production 3 steps. ' +
+        description: 'Decrease your energy production 1 step and increase your M€ production 3 steps. ' +
           'Spend 1 steel. ' +
           'Place a road tile on the Moon and raise the Logistics Rate 1 step.',
         cardNumber: 'M11',

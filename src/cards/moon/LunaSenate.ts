@@ -19,7 +19,7 @@ export class LunaSenate extends Card implements IProjectCard {
       requirements: CardRequirements.builder((b) => b.tag(Tags.MOON, 3)),
 
       metadata: {
-        description: 'Requires that you have 3 Moon tags. Increase your MC production 1 step per Moon tag in the game (including these.)',
+        description: 'Requires that you have 3 Moon tags. Increase your M€ production 1 step per Moon tag in the game (including these.)',
         cardNumber: 'M70',
         renderData: CardRenderer.builder((b) => {
           b.production((pb) => pb.megacredits(1)).slash().moon().any;

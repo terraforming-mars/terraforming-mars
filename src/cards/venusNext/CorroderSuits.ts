@@ -20,7 +20,7 @@ export class CorroderSuits extends Card {
 
       metadata: {
         cardNumber: '219',
-        description: 'Increase your MC production 2 steps. Add 1 resource to ANY Venus CARD.',
+        description: 'Increase your M€ production 2 steps. Add 1 resource to ANY Venus CARD.',
         renderData: CardRenderer.builder((b) => {
           b.production((pb) => {
             pb.megacredits(2);

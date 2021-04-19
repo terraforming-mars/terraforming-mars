@@ -48,7 +48,7 @@
     "Add an ocean": "Colocar um tile de oceano",
     "Do not have enough steel": "Aço insuficiente",
     "Do not have enough titanium": "Titânio insuficiente",
-    "Do not have enough mega credits": "Megacréditos insuficientes",
+    "Do not have enough M€": "Megacréditos insuficientes",
     "Did not spend enough to pay for card": "Não pagou suficiente para jogar a carta",
     "All awards already funded": "Todos os prêmios já foram financiados",
     "Didn't even find player": "Jogador não encontrado",
@@ -63,7 +63,7 @@
     "${0} ended turn": "${0} terminou seu turno",
     "${0} converted heat into temperature": "${0} converteu calor em temperatura",
     "${0} converted plants into a greenery": "${0} converteu plantas em uma vegetação",
-    "${0} spent ${1} MC to trade with ${2}": "${0} gastou ${1} M$ para negociar com ${2}",
+    "${0} spent ${1} M€ to trade with ${2}": "${0} gastou ${1} M$ para negociar com ${2}",
     "${0} spent ${1} energy to trade with ${2}": "${0} gastou ${1} energia para negociar com ${2}",
     "${0} spent ${1} titanium to trade with ${2}": "${0} gastou ${1} titânio para negociar com ${2}",
     "${0} spent 1 floater to trade with ${1}": "${0} gastou 1 flutuador para negociar com ${1}",
@@ -79,7 +79,7 @@
     "${0} loses ${1} resource(s) on ${2} by ${3}": "${3} fez que ${0} perca ${1} recurso(s) em ${2}",
     "${0}'s ${1} production modified by ${2} by ${3}": "A produção de ${1} de ${0} foi modificada em ${2} por ${3}",
     "${0}'s ${1} amount modified by ${2} by ${3}": "O recurso ${1} de ${0} foi modificado em ${2} por ${3}",
-    "${0} received ${1} MC from ${2} owner (${3})": "${0} recebeu ${1} M$ de ${2} (${3})",
+    "${0} received ${1} M€ from ${2} owner (${3})": "${0} recebeu ${1} M$ de ${2} (${3})",
     "${0} copied ${1} production with ${2}": "${0} copiou a produção de ${1} com ${2}",
     "${0} used ${1} action with ${2}": "${0} fez a ação ${1} com ${2}",
     "${0} is the new chairman and gained ${1} TR": "${0} é o novo presidente e ganhou (${1}) IT",
@@ -103,7 +103,7 @@
     "sold": "vendeu",
     "${0} card(s) were discarded": "${0} carta(s) foi(ram) descartada(s)",
 
-    
+
     "The ruling bonus is ${0}": "O bônus de governo é ${0}",
     "The ruling policy is ${0}": "A política de governo é ${0}",
 

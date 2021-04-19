@@ -23,7 +23,7 @@ export class SpinoffDepartment extends Card implements IProjectCard {
           }).br;
           b.production((pb) => pb.megacredits(2));
         }),
-        description: 'Increase your MC production 2 steps.',
+        description: 'Increase your M€ production 2 steps.',
       },
     });
   }

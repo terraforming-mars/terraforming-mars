@@ -29,10 +29,17 @@ export const CardRenderSymbolComponent = Vue.component('CardRenderSymbolComponen
         if (size === CardRenderItemSize.SMALL) {
           classes.push('card-or--small');
         }
+        if (size === CardRenderItemSize.TINY) {
+          classes.push('card-or--tiny');
+        }
       } else if (type === CardRenderSymbolType.COLON) {
         classes.push('card-colon');
       } else if (type === CardRenderSymbolType.ARROW) {
-        classes.push('card-red-arrow');
+        if (size === CardRenderItemSize.SMALL) {
+          classes.push('card-red-arrow--small');
+        } else {
+          classes.push('card-red-arrow');
+        }
       } else if (type === CardRenderSymbolType.NBSP) {
         // TODO (chosta): add size
         classes.push('card-nbsp');

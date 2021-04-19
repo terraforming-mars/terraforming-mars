@@ -7,7 +7,7 @@ import {Turmoil} from '../Turmoil';
 
 export class JovianTaxRights implements IGlobalEvent {
     public name = GlobalEventName.JOVIAN_TAX_RIGHTS;
-    public description = 'Increase MC production 1 step for each colony. Gain 1 titanium for each influence.';
+    public description = 'Increase M€ production 1 step for each colony. Gain 1 titanium for each influence.';
     public revealedDelegate = PartyName.SCIENTISTS;
     public currentDelegate = PartyName.UNITY;
     public resolve(game: Game, turmoil: Turmoil) {

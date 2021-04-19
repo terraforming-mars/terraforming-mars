@@ -17,7 +17,7 @@ export class HypersensitiveSiliconChipFactory extends MoonCard {
       requirements: CardRequirements.builder((b) => b.miningTiles(2).any()),
 
       metadata: {
-        description: 'Requires 2 mining tiles on the Moon. Spend 2 titanium. Increase your MC production 4 steps.',
+        description: 'Requires 2 mining tiles on the Moon. Spend 2 titanium. Increase your M€ production 4 steps.',
         cardNumber: 'M43',
         renderData: CardRenderer.builder((b) => {
           b.minus().titanium(2).nbsp;

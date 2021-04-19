@@ -30,7 +30,7 @@ export class MagneticShield extends Card implements IProjectCard {
   public canPlay(player: Player): boolean {
     const hasEnergyTags = player.getTagCount(Tags.ENERGY) >= 2;
     if (PartyHooks.shouldApplyPolicy(player.game, PartyName.REDS)) {
-      return player.canAfford(player.getCardCost(this) + REDS_RULING_POLICY_COST * 4, false, true) && hasEnergyTags;
+      return player.canAfford(player.getCardCost(this) + REDS_RULING_POLICY_COST * 4, {titanium: true}) && hasEnergyTags;
     }
 
     return hasEnergyTags;

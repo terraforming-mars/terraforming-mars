@@ -26,12 +26,12 @@ export class ImmigrantCity extends Card implements IProjectCard {
       metadata: {
         cardNumber: '200',
         renderData: CardRenderer.builder((b) => {
-          b.effect('When a City tile is placed, including this, increase your MC production 1 step.', (eb) => {
+          b.effect('When a City tile is placed, including this, increase your M€ production 1 step.', (eb) => {
             eb.city().any.startEffect.production((pb) => pb.megacredits(1));
           }).br;
           b.production((pb) => pb.minus().energy(1).megacredits(-2)).city();
         }),
-        description: 'Decrease your Energy production 1 step and decrease your MC production 2 steps. Place a City tile.',
+        description: 'Decrease your Energy production 1 step and decrease your M€ production 2 steps. Place a City tile.',
       },
     });
   }

@@ -32,10 +32,10 @@ export class LunaMiningHub extends MoonCard {
           b.text('Requires a Mining Rate of 5 or higher.', CardRenderItemSize.TINY, false, false).br;
           b.minus().steel(1).minus().titanium(1).production((pb) => pb.steel(1).titanium(1)).br;
           b.text('Spend 1 steel and 1 titanium and raise your steel and titanium production 1 step.', CardRenderItemSize.TINY, false, false).br;
-          b.tile(TileType.LUNA_MINING_HUB, true).moonMiningRate({size: CardRenderItemSize.SMALL});
+          b.tile(TileType.LUNA_MINING_HUB, true).moonMiningRate({size: 'small'});
           b.text('Place this tile on the Moon and raise the Mining Rate 1 step.', CardRenderItemSize.TINY, false, false);
         }),
-        victoryPoints: CardRenderDynamicVictoryPoints.miningTile(2),
+        victoryPoints: CardRenderDynamicVictoryPoints.moonMiningTile(2, true),
       },
     }, {
       reserveUnits: Units.of({titanium: 1, steel: 1}),

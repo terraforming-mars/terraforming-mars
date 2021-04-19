@@ -30,7 +30,7 @@ export class OceanCity extends Card implements IProjectCard {
             pb.plus().megacredits(3);
           }).nbsp.tile(TileType.OCEAN_CITY, false, true);
         }),
-        description: 'Requires 6 ocean tiles. Decrease your Energy production 1 step and increase your MC production 3 steps. Place this tile on top of an existing ocean tile, IGNORING NORMAL PLACEMENT RESTRICTIONS FOR CITIES. The tile counts as a city as well as an ocean.',
+        description: 'Requires 6 ocean tiles. Decrease your Energy production 1 step and increase your M€ production 3 steps. Place this tile on top of an existing ocean tile, IGNORING NORMAL PLACEMENT RESTRICTIONS FOR CITIES. The tile counts as a city as well as an ocean.',
       },
     });
   }

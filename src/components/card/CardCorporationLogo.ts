@@ -146,7 +146,7 @@ export const CardCorporationLogo = Vue.component('CardCorporationLogo', {
       case CardName.TEMPEST_CONSULTANCY:
         return '<div class="card-tempest-consultancy-logo"></div>';
       case CardName.THE_DARKSIDE_OF_THE_MOON_SYNDICATE:
-        return '<div class="card-the-darkside-of-the-moon-syndicate-logo">The Darkside of the Moon Syndicate</div>';
+        return '<div class="card-the-darkside-of-the-moon-syndicate-logo"></div>';
       case CardName.LUNA_HYPERLOOP_CORPORATION:
         return '<div class="card-luna-hyperloop-corporation-logo"></div>';
       case CardName.CRESCENT_RESEARCH_ASSOCIATION:

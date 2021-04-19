@@ -23,7 +23,7 @@ export class Capital extends Card implements IProjectCard {
     metadata: CardMetadata = {
       cardNumber: '008',
       description: {
-        text: 'Requires 4 ocean tiles. Place this tile. Decrease your Energy production 2 steps and increase your MC production 5 steps.',
+        text: 'Requires 4 ocean tiles. Place this tile. Decrease your Energy production 2 steps and increase your M€ production 5 steps.',
         align: 'left',
       },
       renderData: CardRenderer.builder((b) => {

@@ -22,7 +22,7 @@ export class LunaMetropolis extends Card {
           b.production((pb) => pb.megacredits(1).slash().earth().played).br;
           b.city().asterix();
         }),
-        description: 'Increase your MC production 1 step for each Earth tag you have, including this. Place a City tile on the RESERVED AREA',
+        description: 'Increase your M€ production 1 step for each Earth tag you have, including this. Place a City tile on the RESERVED AREA',
         victoryPoints: 2,
       },
     });

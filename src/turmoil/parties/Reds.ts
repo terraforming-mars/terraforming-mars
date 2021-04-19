@@ -182,7 +182,7 @@ class RedsPolicy03 implements Policy {
 
 class RedsPolicy04 implements Policy {
   id = TurmoilPolicy.REDS_POLICY_4;
-  description: string = 'When you raise a global parameter, decrease your MC production 1 step per step raised if possible';
+  description: string = 'When you raise a global parameter, decrease your M€ production 1 step per step raised if possible';
   isDefault = false;
 }
 

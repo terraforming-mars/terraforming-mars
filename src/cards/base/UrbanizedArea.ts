@@ -28,7 +28,7 @@ export class UrbanizedArea extends Card implements IProjectCard {
             pb.plus().megacredits(2);
           }).city().asterix();
         }),
-        description: 'Decrease your Energy production 1 step and increase your MC production 2 steps. Place a city tile ADJACENT TO AT LEAST 2 OTHER CITY TILES.',
+        description: 'Decrease your Energy production 1 step and increase your M€ production 2 steps. Place a city tile ADJACENT TO AT LEAST 2 OTHER CITY TILES.',
       },
     });
   }

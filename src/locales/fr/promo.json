@@ -18,7 +18,7 @@
   "Action: Remove 1 asteroid here to raise temperature 1 step.": "Action: Enlevez 1 astéroïde pour augmenter la température.",
 
   "Field-Capped City": "Cité aux toits cultivés",
-  "Increase your MC production 2 steps, increase your energy production 1 step, gain 3 plants, and place a city tile.": "Augmentez votre production de M€ de 2, augmentez votre production d'Energie de 1, gagnez 3 plantes et placez une tuile Cité.",
+  "Increase your M€ production 2 steps, increase your energy production 1 step, gain 3 plants, and place a city tile.": "Augmentez votre production de M€ de 2, augmentez votre production d'Energie de 1, gagnez 3 plantes et placez une tuile Cité.",
 
   "Magnetic Shield": "Bouclier Magnétique",
   "Requires 2 power tags. Raise your TR 4 steps.": "Nécessite 2 badges Energie. Augmentez votre NT de 4.",
@@ -52,7 +52,7 @@
   "Requires 2 science tags.": "Nécessite 2 badges Science.",
 
   "Potatoes": "Patates",
-  "Lose 2 plants. Increase your MC production 2 steps.": "Perdez 2 plates. Augmentez votre production de M€ de 2.",
+  "Lose 2 plants. Increase your M€ production 2 steps.": "Perdez 2 plates. Augmentez votre production de M€ de 2.",
 
   "Meat Industry": "Industrie de la Viande",
   "Effect: When you gain an animal to ANY CARD, gain 2MC.": "Effet: Quand vous ajoutez une animal sur N'IMPORTE QUELLE CARTE, gagnez 2 M€.",
@@ -62,29 +62,29 @@
 
   "Orbital Cleanup": "Nettoyage Orbital",
   "Action: Gain 1 MC per Science tag you have.": "Action: Gagnez 1 M€ par badge Science en votre possession.",
-  "Decrease your MC production 2 steps.": "Diminuez votre production de M€ de 2.",
+  "Decrease your M€ production 2 steps.": "Diminuez votre production de M€ de 2.",
 
   "Law Suit": "Attaque en Justice",
-  "Steal 3 MC from a player that REMOVED YOUR RESOURCES OR DECREASED YOUR PRODUCTION this generation. Place this card face down in THAT PLAYER'S EVENT PILE.": "Volez 3 M€ à un joueur qui a RETIRE VOS RESSOURCES OU DIMINUE VOTRE PRODUCTION lors de cette génération. Placez cette carte face cachée dans la pile des EVENEMENTS DE CE JOUEUR.",
+  "Steal 3 M€ from a player that REMOVED YOUR RESOURCES OR DECREASED YOUR PRODUCTION this generation. Place this card face down in THAT PLAYER'S EVENT PILE.": "Volez 3 M€ à un joueur qui a RETIRE VOS RESSOURCES OU DIMINUE VOTRE PRODUCTION lors de cette génération. Placez cette carte face cachée dans la pile des EVENEMENTS DE CE JOUEUR.",
 
   "Small Asteroid": "Petit Asteroïde",
   "Increase temperature 1 step. Remove up to 2 plants from any player.": "Augmentez la température de 1. Enlevez jusqu'à 2 plantes à n'importe quel joueur.",
 
   "Asteroid Hollowing": "Asteroïde Creux",
-  "Action: Spend 1 titanium to add 1 asteroid resource here and increase MC production 1 step.": "Action: Dépensez 1 titane pour ajouter 1 ressource astéroïde sur cette carte et augmenter votre production de M€ de 1.",
+  "Action: Spend 1 titanium to add 1 asteroid resource here and increase M€ production 1 step.": "Action: Dépensez 1 titane pour ajouter 1 ressource astéroïde sur cette carte et augmenter votre production de M€ de 1.",
   "1VP for each 2 asteroids on this card.": "1 PV tous les 2 astéroïdes sur cette carte.",
 
   "Project Inspection": "Inspection de Projet",
   "Use a card action that has been used this generation.": "Utilisez l'action d'une carte qui a déjà été utilisée cette génération.",
 
   "Advertising": "Publicité",
-  "Effect: When you play a card with a basic cost of 20 MC or more, increase your MC production 1 step.": "Effet: Lorsque vous jouez une carte ayant un coût de 20 M€ ou plus, augmentez votre production de M€ de 1.",
+  "Effect: When you play a card with a basic cost of 20 MC or more, increase your M€ production 1 step.": "Effet: Lorsque vous jouez une carte ayant un coût de 20 M€ ou plus, augmentez votre production de M€ de 1.",
 
   "Rego Plastics": "Régoplastiques",
   "Effect: Your steel resources are worth 1 MC extra.": "Effet: Vos ressources d'acier valent 1 M€ supplémentaire.",
 
   "Interplanetary Trade": "Commerce Interplanétaire",
-  "Increase your MC production 1 step per different tag you have in play, including this.": "Augmentez votre production de M€ de 1 pour chaque badge différent que vous avez en jeu.",
+  "Increase your M€ production 1 step per different tag you have in play, including this.": "Augmentez votre production de M€ de 1 pour chaque badge différent que vous avez en jeu.",
 
   "Penguins": "Pingouins",
   "Action: Add 1 Animal to this card.": "Action: Ajoutez 1 animal sur cette carte.",
@@ -112,7 +112,7 @@
 
   "Asteroid Rights": "Droits d'Asteroïdes",
   "Action: Spend 1 MC to add 1 asteroid to ANY card.": "Action: Dépensez 1 M€ pour ajouter 1 astéroïde sur N'IMPORTE QUELLE carte.",
-  "Action: Spend 1 asteroid here to increase MC production 1 step OR gain 2 titanium.": "Action: Dépensez 1 astéroïde pour augmenter votre production de M€ de 1 ou gagner 2 titanes.",
+  "Action: Spend 1 asteroid here to increase M€ production 1 step OR gain 2 titanium.": "Action: Dépensez 1 astéroïde pour augmenter votre production de M€ de 1 ou gagner 2 titanes.",
   "Add 2 asteroids to this card.": "*Ajouez 2 astéroïdes sur cette carte.",
 
   "Stanford Torus": "Tore de Stanford",

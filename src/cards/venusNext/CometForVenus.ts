@@ -51,7 +51,7 @@ export class CometForVenus extends Card {
       return new OrOptions(
         new SelectPlayer(
           Array.from(venusTagPlayers),
-          'Select player to remove up to 4 mega credits from',
+          'Select player to remove up to 4 M€ from',
           'Remove MC',
           (selectedPlayer: Player) => {
             selectedPlayer.setResource(Resources.MEGACREDITS, -4, player.game, player);
@@ -60,7 +60,7 @@ export class CometForVenus extends Card {
           },
         ),
         new SelectOption(
-          'Do not remove mega credits',
+          'Do not remove M€',
           'Confirm',
           () => {
             player.game.increaseVenusScaleLevel(player, 1);

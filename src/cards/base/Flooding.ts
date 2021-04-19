@@ -27,7 +27,7 @@ export class Flooding extends Card implements IProjectCard {
         renderData: CardRenderer.builder((b) => {
           b.oceans(1).nbsp.minus().megacredits(4).any.asterix();
         }),
-        description: 'Place an ocean tile. IF THERE ARE TILES ADJACENT TO THIS OCEAN TILE, YOU MAY REMOVE 4 MC FROM THE OWNER OF ONE OF THOSE TILES.',
+        description: 'Place an ocean tile. IF THERE ARE TILES ADJACENT TO THIS OCEAN TILE, YOU MAY REMOVE 4 M€ from THE OWNER OF ONE OF THOSE TILES.',
         victoryPoints: -1,
       },
     });
@@ -69,7 +69,7 @@ export class Flooding extends Card implements IProjectCard {
           return new OrOptions(
             new SelectPlayer(
               Array.from(adjacentPlayers),
-              'Select adjacent player to remove 4 mega credits from',
+              'Select adjacent player to remove 4 M€ from',
               'Remove credits',
               (selectedPlayer: Player) => {
                 selectedPlayer.setResource(Resources.MEGACREDITS, -4, player.game, player);
@@ -77,7 +77,7 @@ export class Flooding extends Card implements IProjectCard {
               },
             ),
             new SelectOption(
-              'Don\'t remove mega credits from adjacent player',
+              'Don\'t remove M€ from adjacent player',
               'Confirm',
               () => {
                 return undefined;

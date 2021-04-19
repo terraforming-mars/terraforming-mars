@@ -18,7 +18,7 @@ export class TheWomb extends MoonCard {
       productionBox: Units.of({energy: -2, megacredits: 4}),
 
       metadata: {
-        description: 'Decrease your energy production 2 steps and increase your MC production 4 steps. ' +
+        description: 'Decrease your energy production 2 steps and increase your M€ production 4 steps. ' +
           'Spend 2 titanium. Place a colony tile on the Moon and raise the Colony Rate 1 step.',
         cardNumber: 'M08',
         renderData: CardRenderer.builder((b) => {

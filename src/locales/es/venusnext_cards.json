@@ -17,7 +17,7 @@
   "Requires Venus, Earth and Jovian tags. Increase your steel production 2 steps.":"Requiere un símbolo tipo Venus, uno tipo Tierra y uno Joviano. Aumenta tu producción de acero 2 niveles.",
 
   "Corroder Suits":"Trajes Anticorrosión",
-  "Increase your MC production 2 steps. Add 1 resource to ANY Venus CARD.":"Aumenta tu producción de M€ 2 niveles. Añade 1 recurso a CUALQUIER CARTA TIPO VENUS.",
+  "Increase your M€ production 2 steps. Add 1 resource to ANY Venus CARD.":"Aumenta tu producción de M€ 2 niveles. Añade 1 recurso a CUALQUIER CARTA TIPO VENUS.",
 
   "Venusian Insects":"Insectos Venusianos",
   "Action: add 1 Microbe to this card.":"Acción: añade 1 microbio a esta carta.",
@@ -40,13 +40,13 @@
   "Discard 1 card from your hand and THEN draw 3 cards. All OPPONENTS draw 1 card.":"Descarta 1 carta de tu mano y LUEGO roba 3 cartas. Todos los OPONENTES roban una carta.",
 
   "Sulphur Exports":"Exportaciones de Azufre",
-  "Increase Venus 1 step. Increase your MC production 1 step for each Venus tag you have, including this.":"Aumenta la escala de Venus 1 nivel. Incrementa tu producción de M€ 1 nivel por cada símbolo tipo Venus que poseas, incluyendo este.",
+  "Increase Venus 1 step. Increase your M€ production 1 step for each Venus tag you have, including this.":"Aumenta la escala de Venus 1 nivel. Incrementa tu producción de M€ 1 nivel por cada símbolo tipo Venus que poseas, incluyendo este.",
 
   "Venus Soils":"Tierras de Venus",
   "Raise Venus 1 step. Increase your Plant production 1 step. Add 2 Microbes to ANOTHER card":"Aumenta la escala de Venus 1 nivel. Aumenta tu producción de plantas 1 nivel. Añade 2 microbios a OTRA carta.",
 
   "Terraforming Contract":"Contrato de Terraformación",
-  "Requires that you have at least 25 TR. Increase your MC production 4 steps.":"Requiere que tengas al menos 25 en VT. Aumenta tu producción de M€ 4 niveles.",
+  "Requires that you have at least 25 TR. Increase your M€ production 4 steps.":"Requiere que tengas al menos 25 en VT. Aumenta tu producción de M€ 4 niveles.",
 
   "Solarnet":"Red Solar",
   "Requires Venus, Earth and Jovian tags. Draw 2 cards.":"Requiere un símbolo tipo Venus, uno tipo Tierra y uno Joviano. Roba 2 cartas.",
@@ -127,7 +127,7 @@
   "Raise Venus 3 steps.":"Incrementa la escala de Venus 3 niveles.",
 
   "Gyropolis":"Girópolis",
-  "Decrease your energy production 2 steps. Increase your MC production 1 step for each Venus and Earth tag you have. Place a City tile.":"Reduce tu producción de energía 2 niveles. Aumenta tu producción de M€ 1 nivel por cada símbolo tipo Venuns y tipo Tierra que tengas. Coloca una loseta de ciudad.",
+  "Decrease your energy production 2 steps. Increase your M€ production 1 step for each Venus and Earth tag you have. Place a City tile.":"Reduce tu producción de energía 2 niveles. Aumenta tu producción de M€ 1 nivel por cada símbolo tipo Venuns y tipo Tierra que tengas. Coloca una loseta de ciudad.",
 
   "Io Sulphur Research":"Investigar Azufre de Ío",
   "Draw 1 card, or draw 3 if you have at least 3 Venus tags.":"Roba 1 carta, o roba 3 cartas si tienes al menos 3 símbolos tipo Venus.",
@@ -137,11 +137,11 @@
   "Requires Venus 8%. Increase your titanium production 1 step.":"Requiere 8% en la escala de Venus. Aumenta tu producción de titanio 1 nivel.",
 
   "Luna Metropolis":"Metrópolis Luna",
-  "Increase your MC production 1 step for each Earth tag you have, including this. Place a City tile on the RESERVED AREA":"Incrementa tu producción de M€ 1 nivel por cada símbolo tipo Tierra que tengas, incluyendo este. Coloca una loseta de ciudad en el ÁREA RESERVADA.",
+  "Increase your M€ production 1 step for each Earth tag you have, including this. Place a City tile on the RESERVED AREA":"Incrementa tu producción de M€ 1 nivel por cada símbolo tipo Tierra que tengas, incluyendo este. Coloca una loseta de ciudad en el ÁREA RESERVADA.",
 
   "Local Shading":"Sombra Local",
   "Action: Add 1 Floater to this card.":"Acción: añade 1 flotador a esta carta.",
-  "Action: Spend 1 Floater here to raise your MC production 1 step.":"Acción: gasta 1 flotador de esta carta para incrementar tu producción de M€ 1 nivel.",
+  "Action: Spend 1 Floater here to raise your M€ production 1 step.":"Acción: gasta 1 flotador de esta carta para incrementar tu producción de M€ 1 nivel.",
 
   "Maxwell Base":"Base Maxwell",
   "Action: Add 1 resource to ANOTHER VENUS CARD.":"Acción: añade 1 recurso a OTRA CARTA TIPO VENUS.",
@@ -149,15 +149,15 @@
 
   "Sister Planet Support":"Planeta Hermano",
   "Venus Earth":"",
-  "Requires Venus and Earth tags. Increase your MC production 3 steps.":"Requiere un símbolo tipo Venus y uno tipo Tierra. Aumenta tu producción de M€ 3 niveles.",
+  "Requires Venus and Earth tags. Increase your M€ production 3 steps.":"Requiere un símbolo tipo Venus y uno tipo Tierra. Aumenta tu producción de M€ 3 niveles.",
 
   "Stratopolis":"Estratópolis",
   "Action: Add 2 floaters to ANY VENUS CARD.":"Acción: añade 2 flotadores a CUALQUIER CARTA TIPO VENUS.",
   "1 VP for every 3rd Floater on this card.":"1 PV por cada 3 flotadores en esta carta.",
-  "Requires 2 science tags. Increase your MC production 2 steps. Place a City tile ON THE RESERVED AREA":"Requiere 2 símbolos tipo ciencia. Aumenta tu producción de M€ 2 niveles. Coloca una loseta de ciudad en el ÁREA RESERVADA.",
+  "Requires 2 science tags. Increase your M€ production 2 steps. Place a City tile ON THE RESERVED AREA":"Requiere 2 símbolos tipo ciencia. Aumenta tu producción de M€ 2 niveles. Coloca una loseta de ciudad en el ÁREA RESERVADA.",
 
   "Venus Governor":"Gobernador de Venus",
-  "Requires 2 Venus tags. Increase your MC production 2 steps.":"Requiere 2 símbolos tipo Venus. Aumenta tu producción de M€ 2 niveles.",
+  "Requires 2 Venus tags. Increase your M€ production 2 steps.":"Requiere 2 símbolos tipo Venus. Aumenta tu producción de M€ 2 niveles.",
 
   "Venusian Animals":"Animales Venusianos",
   "18% Venus":"18% Venus",
@@ -178,6 +178,6 @@
   "Raise Venus 2 steps. Increase your heat production 2 steps.":"Aumenta la escala de Venus 2 niveles. Incrementa tu producción de calor 2 niveles.",
 
   "Saturn Surfing":"",
-  "Action: Spend 1 floater from here to gain 1 MC from each floater here, INCLUDING THE PAID FLOATER. Max 5.":"",
+  "Action: Spend 1 floater from here to gain 1 M€ from each floater here, INCLUDING THE PAID FLOATER. Max 5.":"",
   "Add 1 floater here for every Earth tag you have, including this.":""
 }

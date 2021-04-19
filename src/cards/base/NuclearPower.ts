@@ -25,7 +25,7 @@ export class NuclearPower extends Card implements IProjectCard {
             pb.plus().energy(3);
           });
         }),
-        description: 'Decrease your MC production 2 steps and increase your Energy production 3 steps.',
+        description: 'Decrease your M€ production 2 steps and increase your Energy production 3 steps.',
       },
     });
   }

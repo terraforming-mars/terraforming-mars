@@ -22,11 +22,11 @@ export class LunaFirstIncorporated implements CorporationCard {
   }
 
   public readonly metadata: CardMetadata = {
-    description: 'You start with 40 MC, 2 steel, and 2 Ctitanium.',
+    description: 'You start with 40 MC, 2 steel, and 2 Titanium.',
     cardNumber: '',
     renderData: CardRenderer.builder((b) => {
       b.megacredits(40).steel(2).titanium(2).br;
-      b.effect('When you raise any Moon Rate, increase your MC production 1 step per step.', (eb) => {
+      b.effect('When you raise any Moon Rate, increase your M€ production 1 step per step.', (eb) => {
         eb.moonColonyRate({size: CardRenderItemSize.SMALL}).slash()
           .moonMiningRate({size: CardRenderItemSize.SMALL}).slash()
           .moonLogisticsRate({size: CardRenderItemSize.SMALL})

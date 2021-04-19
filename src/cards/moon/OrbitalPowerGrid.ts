@@ -16,10 +16,10 @@ export class OrbitalPowerGrid extends Card implements IProjectCard {
       cost: 19,
 
       metadata: {
-        description: 'Increase your energy production 1 step per each city tile NOT ON MARS.',
+        description: 'Increase your energy production 1 step per city tile NOT ON MARS.',
         cardNumber: 'M85',
         renderData: CardRenderer.builder((b) => {
-          b.production((pb) => pb.energy(1)).slash().city().asterix();
+          b.production((pb) => pb.energy(1)).slash().city().any.secondaryTag(Tags.SPACE);
         }),
         victoryPoints: 1,
       },

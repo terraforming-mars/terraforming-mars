@@ -7,7 +7,6 @@ import {PartyName} from '../../turmoil/parties/PartyName';
 import {REDS_RULING_POLICY_COST} from '../../constants';
 import {CardRequirements} from '../CardRequirements';
 import {CardRenderer} from '../render/CardRenderer';
-import {GlobalParameter} from '../../GlobalParameter';
 import {Card} from '../Card';
 
 export class NeutralizerFactory extends Card {
@@ -30,12 +29,12 @@ export class NeutralizerFactory extends Card {
   };
 
   public canPlay(player: Player): boolean {
-    const venusRequirementMet = player.game.checkMinRequirements(player, GlobalParameter.VENUS, 10);
+    const globalRequirementsMet = super.canPlay(player);
     if (PartyHooks.shouldApplyPolicy(player.game, PartyName.REDS)) {
-      return player.canAfford(player.getCardCost(this) + REDS_RULING_POLICY_COST, false, false, true) && venusRequirementMet;
+      return player.canAfford(player.getCardCost(this) + REDS_RULING_POLICY_COST, {floaters: true}) && globalRequirementsMet;
     }
 
-    return venusRequirementMet;
+    return globalRequirementsMet;
   }
 
   public play(player: Player) {

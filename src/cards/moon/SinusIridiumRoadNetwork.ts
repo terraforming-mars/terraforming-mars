@@ -18,14 +18,14 @@ export class SinusIridiumRoadNetwork extends MoonCard {
       productionBox: Units.of({energy: -1, megacredits: 3}),
 
       metadata: {
-        description: 'Decrease your energy production 1 step and increase your MC production 3 steps. ' +
+        description: 'Decrease your energy production 1 step and increase your M€ production 3 steps. ' +
           'Spend 1 steel. ' +
           'Place a road tile on the Moon and raise the Logistics Rate 1 step.',
         cardNumber: 'M11',
         renderData: CardRenderer.builder((b) => {
           b.minus().steel(1).br;
           b.production((pb) => {
-            pb.minus().energy(1).br.megacredits(3);
+            pb.minus().energy(1).nbsp.megacredits(3);
           }).br;
           b.moonRoad();
         }),

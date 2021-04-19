@@ -24,7 +24,7 @@ export const SelectAmount = Vue.component('select-amount', {
   },
   data: function() {
     return {
-      amount: String(this.playerinput.min),
+      amount: this.playerinput.maxByDefault ? String(this.playerinput.max) : String(this.playerinput.min),
     };
   },
   methods: {

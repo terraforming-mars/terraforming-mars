@@ -11,6 +11,7 @@ export const CardCorporationLogo = Vue.component('CardCorporationLogo', {
     getHtmlContent: function(): string {
       const title: CardName = this.title;
       // TODO(chosta): refactor to include only the exceptions and DRY the code
+
       switch (title) {
       case CardName.APHRODITE:
         return '<div class="card-aphrodite-logo">APHRODITE</div>';
@@ -145,7 +146,7 @@ export const CardCorporationLogo = Vue.component('CardCorporationLogo', {
       case CardName.TEMPEST_CONSULTANCY:
         return '<div class="card-tempest-consultancy-logo"></div>';
       case CardName.THE_DARKSIDE_OF_THE_MOON_SYNDICATE:
-        return '<div class="card-the-darkside-of-the-moon-syndicate-logo">The Darkside of the Moon Syndicate</div>';
+        return '<div class="card-the-darkside-of-the-moon-syndicate-logo"></div>';
       case CardName.LUNA_HYPERLOOP_CORPORATION:
         return '<div class="card-luna-hyperloop-corporation-logo"></div>';
       case CardName.CRESCENT_RESEARCH_ASSOCIATION:
@@ -158,6 +159,8 @@ export const CardCorporationLogo = Vue.component('CardCorporationLogo', {
         return '<div class="card-intragen-sanctuary-headquarters-logo"></div>';
       case CardName.THE_ARCHAIC_FOUNDATION_INSTITUTE:
         return '<div class="card-the-archaic-foundation-institute-logo"></div>';
+      case CardName.CURIOSITY_II:
+        return '<div class="card-curiosity-ii-logo">Curiosity II</div>';
       }
       return '';
     },

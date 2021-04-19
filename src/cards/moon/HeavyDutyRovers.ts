@@ -13,16 +13,12 @@ export class HeavyDutyRovers implements IProjectCard {
   public cardType = CardType.AUTOMATED;
   public name = CardName.HEAVY_DUTY_ROVERS;
 
-  public canPlay(): boolean {
-    return true;
-  }
-
   public play(player: Player) {
     MoonExpansion.ifMoon(player.game, (moonData) => {
-      const mines = moonData.moon.getSpacesWithTile(TileType.MOON_MINE);
+      const mines = MoonExpansion.tiles(player.game, TileType.MOON_MINE);
       const minesNextToRoads = mines.filter((mine) => {
         const spacesNextToMine = moonData.moon.getAdjacentSpaces(mine);
-        const firstRoad = spacesNextToMine.find((space) => space.tile?.tileType === TileType.MOON_ROAD);
+        const firstRoad = spacesNextToMine.find((s) => MoonExpansion.spaceHasType(s, TileType.MOON_ROAD));
         return firstRoad !== undefined;
       });
       const count = minesNextToRoads.length;
@@ -33,13 +29,12 @@ export class HeavyDutyRovers implements IProjectCard {
   }
 
   public readonly metadata: CardMetadata = {
-    description: 'Gain 4 MC for each mining tile adjacent to a road tile. Raise Logistic Rate 1 step.',
+    description: 'Gain 4 MC for each mining tile adjacent to a road tile. Raise the Logistic Rate 1 step.',
     cardNumber: 'M39',
     renderData: CardRenderer.builder((b) => {
-      // TODO(kberg): Can the two tiles abut each other?
-      b.megacredits(4).slash().tile(TileType.MOON_MINE, false).tile(TileType.MOON_ROAD, false);
+      b.megacredits(4).slash().moonRoad({size: 'small'}).any.moonMine({size: 'small'}).any;
       b.br;
-      b.moonLogisticsRate();
+      b.moonLogisticsRate({size: 'small'});
     }),
   };
 }

@@ -19,19 +19,16 @@ export class LunaSenate extends Card implements IProjectCard {
       requirements: CardRequirements.builder((b) => b.tag(Tags.MOON, 3)),
 
       metadata: {
-        description: 'Requires that you have 3 Moon tags. Increase your MC production 1 step per each Moon tag in the game (including these.) 1 VP per each Moon tag you have.',
+        description: 'Requires that you have 3 Moon tags. Increase your M€ production 1 step per Moon tag in the game (including these.)',
         cardNumber: 'M70',
         renderData: CardRenderer.builder((b) => {
           b.production((pb) => pb.megacredits(1)).slash().moon().any;
+          b.vpText('1 VP per Moon tag you have.');
         }),
         victoryPoints: CardRenderDynamicVictoryPoints.moon(1, 1),
       },
     });
   };
-
-  public canPlay(player: Player): boolean {
-    return player.getTagCount(Tags.MOON) >= 3;
-  }
 
   public play(player: Player) {
     // count + 2 because the 2 moon tags above apply, and this card isn't in

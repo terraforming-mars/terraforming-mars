@@ -17,18 +17,17 @@ export class DarksideMiningSyndicate extends Card implements IProjectCard {
       cost: 18,
 
       metadata: {
-        description: 'Increase your Titanium production 2 steps if Mining Rate is 0 or 1 OR ' +
-        'increase your Titanium production 1 step if Mining Rate is at least 2. ' +
-        'And then raise the Mining Rate 1 step.',
+        description: 'Increase your Titanium production 2 steps, or ' +
+        '1 step if the Mining Rate is at least 2. And then raise the Mining Rate 1 step.',
         cardNumber: 'M66',
-        renderData: CardRenderer.builder((_b) => {}),
+        renderData: CardRenderer.builder((b) => {
+          b.production((pb) => pb.titanium(2)).or().br;
+          b.moonMiningRate({size: 'small', amount: 2}).colon().production((pb) => pb.nbsp.titanium(1)).br;
+          b.moonMiningRate().br;
+        }),
       },
     });
   };
-
-  public canPlay(): boolean {
-    return true;
-  }
 
   public play(player: Player) {
     const productionBonus = (MoonExpansion.moonData(player.game).miningRate >= 2) ? 1 : 2;

@@ -2,7 +2,8 @@ import {expect} from 'chai';
 import {LakefrontResorts} from '../../../src/cards/turmoil/LakefrontResorts';
 import {Game} from '../../../src/Game';
 import {Resources} from '../../../src/Resources';
-import {TestingUtils, TestPlayers} from '../../TestingUtils';
+import {TestingUtils} from '../../TestingUtils';
+import {TestPlayers} from '../../TestPlayers';
 
 describe('LakefrontResorts', function() {
   it('Should play', function() {

@@ -1,12 +1,13 @@
 import {Game} from '../../../src/Game';
 import {Player} from '../../../src/Player';
-import {setCustomGameOptions, TestPlayers} from '../../TestingUtils';
+import {TestingUtils} from '../../TestingUtils';
+import {TestPlayers} from '../../TestPlayers';
 import {IntragenSanctuaryHeadquarters} from '../../../src/cards/moon/IntragenSanctuaryHeadquarters';
 import {expect} from 'chai';
 import {MicroMills} from '../../../src/cards/base/MicroMills';
 import {MartianZoo} from '../../../src/cards/colonies/MartianZoo';
 
-const MOON_OPTIONS = setCustomGameOptions({moonExpansion: true});
+const MOON_OPTIONS = TestingUtils.setCustomGameOptions({moonExpansion: true});
 
 describe('IntragenSanctuaryHeadquarters', () => {
   let player: Player;
@@ -16,6 +17,12 @@ describe('IntragenSanctuaryHeadquarters', () => {
     player = TestPlayers.BLUE.newPlayer();
     Game.newInstance('id', [player], player, MOON_OPTIONS);
     card = new IntragenSanctuaryHeadquarters();
+  });
+
+  it('on play', () => {
+    expect(card.resourceCount).eq(0);
+    card.play();
+    expect(card.resourceCount).eq(1);
   });
 
   it('onCardPlayed', () => {

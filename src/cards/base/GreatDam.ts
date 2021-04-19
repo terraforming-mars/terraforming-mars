@@ -7,7 +7,6 @@ import {Resources} from '../../Resources';
 import {CardName} from '../../CardName';
 import {CardRequirements} from '../CardRequirements';
 import {CardRenderer} from '../render/CardRenderer';
-import {GlobalParameter} from '../../GlobalParameter';
 import {Units} from '../../Units';
 
 export class GreatDam extends Card implements IProjectCard {
@@ -29,9 +28,6 @@ export class GreatDam extends Card implements IProjectCard {
         victoryPoints: 1,
       },
     });
-  }
-  public canPlay(player: Player): boolean {
-    return player.game.checkMinRequirements(player, GlobalParameter.OCEANS, 4);
   }
   public play(player: Player) {
     player.addProduction(Resources.ENERGY, 2);

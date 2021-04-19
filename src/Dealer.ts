@@ -19,13 +19,13 @@ export class Dealer implements ISerializable<SerializedDealer> {
     public static newInstance(loader: CardLoader): Dealer {
       const dealer = new Dealer();
 
-      dealer.deck = dealer.shuffleCards(loader.getProjectCards());
-      dealer.preludeDeck = dealer.shuffleCards(loader.getPreludeCards());
+      dealer.deck = Dealer.shuffle(loader.getProjectCards());
+      dealer.preludeDeck = Dealer.shuffle(loader.getPreludeCards());
       dealer.corporationCards = loader.getCorporationCards();
       return dealer;
     }
 
-    public shuffleCards<T>(cards: Array<T>): Array<T> {
+    public static shuffle<T>(cards: Array<T>): Array<T> {
       const deck: Array<T> = [];
       const copy = cards.slice();
       while (copy.length) {
@@ -50,7 +50,7 @@ export class Dealer implements ISerializable<SerializedDealer> {
 
       if (this.deck.length === 0) {
         game.log('The discard pile has been shuffled to form a new deck.');
-        this.deck = this.shuffleCards(this.discarded);
+        this.deck = Dealer.shuffle(this.discarded);
         this.discarded = [];
       }
 

@@ -24,26 +24,16 @@ export class LunaConference extends Card implements IProjectCard {
         'Gain 2 MC per road tile on the Moon. Gain 2MC per colony tile on the Moon.',
         cardNumber: 'M58',
         renderData: CardRenderer.builder((b) => {
-          b.megacredits(2).slash().tile(TileType.MOON_ROAD, false).br;
-          b.megacredits(2).slash().tile(TileType.MOON_COLONY, false).asterix().br;
+          b.megacredits(2).slash().moonRoad({size: 'small'}).any.br;
+          b.megacredits(2).slash().moonColony({size: 'small'}).any.br;
         }),
       },
     });
   };
 
-  public canPlay(player: Player): boolean {
-    if (player.game.turmoil === undefined) {
-      return false;
-    }
-    if (!player.game.turmoil.canPlay(player, PartyName.SCIENTISTS)) {
-      return false;
-    }
-    return true;
-  }
-
   public play(player: Player) {
-    const moonRoadCount = MoonExpansion.tiles(player.game, TileType.MOON_ROAD, true).length;
-    const moonColonyCount = MoonExpansion.tiles(player.game, TileType.MOON_COLONY, true).length;
+    const moonRoadCount = MoonExpansion.tiles(player.game, TileType.MOON_ROAD, {surfaceOnly: true}).length;
+    const moonColonyCount = MoonExpansion.tiles(player.game, TileType.MOON_COLONY, {surfaceOnly: true}).length;
     player.megaCredits += (moonRoadCount + moonColonyCount) * 2;
     return undefined;
   }

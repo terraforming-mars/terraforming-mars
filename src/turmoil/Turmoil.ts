@@ -156,6 +156,23 @@ export class Turmoil implements ISerializable<SerializedTurmoil> {
       }
     }
 
+    // Use to replace a delegate from a specific party with another delegate with NO DOMINANCE CHANGE
+    public replaceDelegateFromParty(
+      outgoingPlayerId: PlayerId | NeutralPlayer,
+      incomingPlayerId: PlayerId | NeutralPlayer,
+      source: 'lobby' | 'reserve' = 'lobby',
+      partyName: PartyName,
+      game: Game): void {
+      const party = this.getPartyByName(partyName);
+      if (party) {
+        this.delegateReserve.push(outgoingPlayerId);
+        party.removeDelegate(outgoingPlayerId, game);
+        this.sendDelegateToParty(incomingPlayerId, partyName, game, source);
+      } else {
+        throw 'Party not found';
+      }
+    }
+
     // Check dominant party
     public checkDominantParty(party:IParty): void {
       // If there is a dominant party
@@ -214,7 +231,9 @@ export class Turmoil implements ISerializable<SerializedTurmoil> {
       });
 
       // 2 - Global Event
+      // TODO: create a LogMessageDataType for Global Events, ref https://github.com/bafolts/terraforming-mars/issues/3057
       if (this.currentGlobalEvent) {
+        game.log('Global event "' + this.currentGlobalEvent.name + '" has been resolved.');
         this.currentGlobalEvent.resolve(game, this);
       }
 

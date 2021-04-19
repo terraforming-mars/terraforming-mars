@@ -3,7 +3,8 @@ import {Game} from '../../src/Game';
 import {Player} from '../../src/Player';
 import {ALL_CARD_MANIFESTS} from '../../src/cards/AllCards';
 import {CardRenderDynamicVictoryPoints} from '../../src/cards/render/CardRenderDynamicVictoryPoints';
-import {setCustomGameOptions, TestPlayers} from '../TestingUtils';
+import {TestingUtils} from '../TestingUtils';
+import {TestPlayers} from '../TestPlayers';
 
 describe('CardMetadata', function() {
   let player : Player;
@@ -11,7 +12,7 @@ describe('CardMetadata', function() {
   beforeEach(function() {
     player = TestPlayers.BLUE.newPlayer();
     const redPlayer = TestPlayers.RED.newPlayer();
-    Game.newInstance('foobar', [player, redPlayer], player, setCustomGameOptions({moonExpansion: true}));
+    Game.newInstance('foobar', [player, redPlayer], player, TestingUtils.setCustomGameOptions({moonExpansion: true}));
   });
 
   it('should have a VP icon', function() {

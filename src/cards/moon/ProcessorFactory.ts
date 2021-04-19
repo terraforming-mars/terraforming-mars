@@ -13,16 +13,16 @@ export class ProcessorFactory extends Card implements IProjectCard {
   constructor() {
     super({
       name: CardName.PROCESSOR_FACTORY,
-      cardType: CardType.AUTOMATED,
+      cardType: CardType.ACTIVE,
       tags: [Tags.MOON, Tags.BUILDING],
       cost: 8,
       resourceType: ResourceType.DATA,
 
       metadata: {
-        description: '',
         cardNumber: 'M86',
         renderData: CardRenderer.builder((b) => {
           b.action('Spend 1 Steel to add 2 Data resources to any card.', (eb) => eb.startAction.steel(1).arrow().data().data());
+          b.br;
           b.vpText('1 VP for every 3 data resources here.');
         }),
         victoryPoints: CardRenderDynamicVictoryPoints.data(1, 3),
@@ -30,10 +30,6 @@ export class ProcessorFactory extends Card implements IProjectCard {
     });
   };
   public resourceCount = 0;
-
-  public canPlay(): boolean {
-    return true;
-  }
 
   public play() {
     return undefined;

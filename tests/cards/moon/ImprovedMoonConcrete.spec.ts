@@ -2,13 +2,15 @@ import {Game} from '../../../src/Game';
 import {IMoonData} from '../../../src/moon/IMoonData';
 import {MoonExpansion} from '../../../src/moon/MoonExpansion';
 import {Player} from '../../../src/Player';
-import {setCustomGameOptions, TestPlayers} from '../../TestingUtils';
+import {TestingUtils} from '../../TestingUtils';
+import {TestPlayers} from '../../TestPlayers';
 import {ImprovedMoonConcrete} from '../../../src/cards/moon/ImprovedMoonConcrete';
 import {expect} from 'chai';
 import {MareSerenitatisMine} from '../../../src/cards/moon/MareSerenitatisMine';
 import {CardName} from '../../../src/CardName';
+import {MoonMineStandardProject} from '../../../src/cards/moon/MoonMineStandardProject';
 
-const MOON_OPTIONS = setCustomGameOptions({moonExpansion: true});
+const MOON_OPTIONS = TestingUtils.setCustomGameOptions({moonExpansion: true});
 
 describe('ImprovedMoonConcrete', () => {
   let game: Game;
@@ -46,24 +48,35 @@ describe('ImprovedMoonConcrete', () => {
   });
 
   it('effect', () => {
-    // This test and the next show that Mare Sernaitatis needs a steel and 2 titanium.
-    // BUT FOR NOW ACTUALLY I'M HACKING THE CARD TO NEED 2 STEEL
     player.titanium = 2;
-    player.steel = 2;
+    player.steel = 1;
     player.megaCredits = 1000;
 
     const msm = new MareSerenitatisMine();
-    // TODO(kberg): Find an example that needs 2 steel. For now, hack this card to need 2 steel.
-    msm.reserveUnits.steel = 2;
     player.cardsInHand = [msm];
     expect(player.getPlayableCards().map((card) => card.name)).deep.eq([CardName.MARE_SERENITATIS_MINE]);
 
-    player.titanium = 2;
+    player.titanium = 1;
     player.steel = 1;
     expect(player.getPlayableCards().map((card) => card.name)).is.empty;
 
-    // And this one shows that with Improved Moon Concrete, doesn't need steel.
+    // And this one shows that with Improved Moon Concrete, titanium isn't necessary
     player.playedCards = [card];
     expect(player.getPlayableCards().map((card) => card.name)).deep.eq([CardName.MARE_SERENITATIS_MINE]);
+  });
+
+  it('applies to mine standard project', () => {
+    player.titanium = 1;
+    player.megaCredits = 1000;
+
+    const projectCard = new MoonMineStandardProject();
+    expect(projectCard.canAct(player)).is.true;
+
+    player.titanium = 0;
+    expect(projectCard.canAct(player)).is.false;
+
+    // And this one shows that with Improved Moon Concrete, titanium isn't necessary
+    player.playedCards = [card];
+    expect(projectCard.canAct(player)).is.true;
   });
 });

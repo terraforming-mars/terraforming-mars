@@ -1,5 +1,5 @@
 import {Game} from '../../../src/Game';
-import {setCustomGameOptions} from '../../TestingUtils';
+import {TestingUtils} from '../../TestingUtils';
 import {TestPlayers} from '../../TestPlayers';
 import {TestPlayer} from '../../TestPlayer';
 import {RoverDriversUnion} from '../../../src/cards/moon/RoverDriversUnion';
@@ -8,7 +8,7 @@ import {MoonExpansion} from '../../../src/moon/MoonExpansion';
 import {IMoonData} from '../../../src/moon/IMoonData';
 import {Resources} from '../../../src/Resources';
 
-const MOON_OPTIONS = setCustomGameOptions({moonExpansion: true});
+const MOON_OPTIONS = TestingUtils.setCustomGameOptions({moonExpansion: true});
 
 describe('RoverDriversUnion', () => {
   let player: TestPlayer;

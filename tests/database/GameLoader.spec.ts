@@ -4,7 +4,7 @@ import {Game} from '../../src/Game';
 import {GameLoader} from '../../src/database/GameLoader';
 import {Player} from '../../src/Player';
 import {SerializedGame} from '../../src/SerializedGame';
-import {TestPlayers} from '../TestingUtils';
+import {TestPlayers} from '../TestPlayers';
 
 describe('GameLoader', function() {
   const expectedGameIds: Array<string> = ['alpha', 'foobar'];
@@ -37,7 +37,7 @@ describe('GameLoader', function() {
     };
   });
   beforeEach(function() {
-    (GameLoader as any).instance = undefined;
+    (GameLoader.getInstance() as GameLoader).reset();
   });
   after(function() {
     (Player as any).prototype.generateId = originalGenerateId;
@@ -162,7 +162,9 @@ describe('GameLoader', function() {
     GameLoader.getInstance().getByPlayerId(players[Math.floor(Math.random() * players.length)]!.id, (game1) => {
       expect(game1).not.is.undefined;
     });
-    expect(GameLoader.getInstance().getLoadedGameIds()).to.deep.eq(['foobar']);
+    expect(GameLoader.getInstance().getLoadedGameIds()).to.deep.eq(
+      [{'id': 'foobar', 'participants': ['blue-id', 'red-id']}],
+    );
   });
 
   it('loads values after error pulling game ids', function() {

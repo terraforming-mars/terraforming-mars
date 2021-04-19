@@ -1,12 +1,13 @@
 import {Game} from '../../../src/Game';
 import {Player} from '../../../src/Player';
-import {setCustomGameOptions, TestPlayers} from '../../TestingUtils';
+import {TestingUtils} from '../../TestingUtils';
+import {TestPlayers} from '../../TestPlayers';
 import {TheGrandLunaCapitalGroup} from '../../../src/cards/moon/TheGrandLunaCapitalGroup';
 import {expect} from 'chai';
 import {MoonExpansion} from '../../../src/moon/MoonExpansion';
 import {IMoonData} from '../../../src/moon/IMoonData';
 
-const MOON_OPTIONS = setCustomGameOptions({moonExpansion: true});
+const MOON_OPTIONS = TestingUtils.setCustomGameOptions({moonExpansion: true});
 
 describe('TheGrandLunaCapitalGroup', () => {
   let player: Player;
@@ -51,7 +52,7 @@ describe('TheGrandLunaCapitalGroup', () => {
 
   it('victoryPoints', () => {
     // It's possible better tests are necessary, but I don't think so.
-
+    // I was wrong.
     const centerSpace = moonData.moon.getSpace('m06');
     const adjacentSpaces = moonData.moon.getAdjacentSpaces(centerSpace);
 

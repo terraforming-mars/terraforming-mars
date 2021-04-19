@@ -10,7 +10,6 @@ import {CardName} from '../../CardName';
 import {CardRequirements} from '../CardRequirements';
 import {CardRenderer} from '../render/CardRenderer';
 import {CardRenderDynamicVictoryPoints} from '../render/CardRenderDynamicVictoryPoints';
-import {GlobalParameter} from '../../GlobalParameter';
 
 export class Livestock extends Card implements IActionCard, IProjectCard, IResourceCard {
   constructor() {
@@ -34,7 +33,7 @@ export class Livestock extends Card implements IActionCard, IProjectCard, IResou
           b.vpText('1 VP for each Animal on this card.');
         }),
         description: {
-          text: 'Requires 9% oxygen. Decrease your Plant production 1 step and increase your MC production 2 steps',
+          text: 'Requires 9% oxygen. Decrease your Plant production 1 step and increase your M€ production 2 steps',
           align: 'left',
         },
         victoryPoints: CardRenderDynamicVictoryPoints.animals(1, 1),
@@ -44,7 +43,7 @@ export class Livestock extends Card implements IActionCard, IProjectCard, IResou
 
     public resourceCount = 0;
     public canPlay(player: Player): boolean {
-      return player.game.checkMinRequirements(player, GlobalParameter.OXYGEN, 9) && player.getProduction(Resources.PLANTS) >= 1;
+      return super.canPlay(player) && player.getProduction(Resources.PLANTS) >= 1;
     }
     public getVictoryPoints(): number {
       return this.resourceCount;

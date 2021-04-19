@@ -12,37 +12,33 @@ import {OrOptions} from '../../inputs/OrOptions';
 import {SelectOption} from '../../inputs/SelectOption';
 import {Card} from '../Card';
 import {CardRenderDynamicVictoryPoints} from '../render/CardRenderDynamicVictoryPoints';
+import {CardRenderItemSize} from '../render/CardRenderItemSize';
 
 export class CopernicusTower extends Card implements IActionCard, IProjectCard {
   constructor() {
     super({
       name: CardName.COPERNICUS_TOWER,
-      cardType: CardType.AUTOMATED,
+      cardType: CardType.ACTIVE,
       tags: [Tags.SCIENCE, Tags.MOON],
       cost: 36,
       resourceType: ResourceType.SCIENCE,
       requirements: CardRequirements.builder((b) => b.production(Resources.TITANIUM, 2)),
 
       metadata: {
-        description: 'Requires that you have 2 Titanium production. 1VP per each Moon tag you have.',
         cardNumber: 'M72',
         victoryPoints: CardRenderDynamicVictoryPoints.moon(1, 1),
         renderData: CardRenderer.builder((b) => {
-          b.action('Add 1 Science resource to this card.', (eb) => {
-            eb.empty().startAction.science(1);
-          }).br;
-          b.action('Spend 1 Science resource here to raise your TR 1 step.', (eb) => {
-            eb.science(1).startAction.tr(1);
+          b.text('Requires you have 2 titanium production.', CardRenderItemSize.TINY, false, false).br;
+          b.action('Add 1 Science resource here, or spend 1 Science resource here to raise your TR 1 step.', (eb) => {
+            eb.empty().startAction.science(1).nbsp.slash().nbsp.science(1).arrow().tr(1);
           });
+          b.br;
+          b.vpText('1 VP PER MOON TAG YOU HAVE.');
         }),
       },
     });
   };
   public resourceCount = 0;
-
-  public canPlay(player: Player): boolean {
-    return player.getProduction(Resources.TITANIUM) >= 2;
-  }
 
   public play() {
     return undefined;

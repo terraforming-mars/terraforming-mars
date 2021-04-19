@@ -47,7 +47,7 @@ export class DirectedImpactors extends Card implements IActionCard, IProjectCard
 
     public canAct(player: Player): boolean {
       const cardHasResources = this.resourceCount > 0;
-      const canPayForAsteroid = player.canAfford(6, false, true);
+      const canPayForAsteroid = player.canAfford(6, {titanium: true});
 
       if (player.game.getTemperature() === MAX_TEMPERATURE && cardHasResources) return true;
       if (canPayForAsteroid) return true;
@@ -76,7 +76,7 @@ export class DirectedImpactors extends Card implements IActionCard, IProjectCard
         return this.addResource(player, asteroidCards);
       }
 
-      if (player.canAfford(6, false, true)) {
+      if (player.canAfford(6, {titanium: true})) {
         opts.push(addResource);
       } else {
         return this.spendResource(player);

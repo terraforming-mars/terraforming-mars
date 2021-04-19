@@ -3,7 +3,7 @@ import {IndenturedWorkers} from '../../../src/cards/base/IndenturedWorkers';
 import {MicroMills} from '../../../src/cards/base/MicroMills';
 import {Game} from '../../../src/Game';
 import {Player} from '../../../src/Player';
-import {TestPlayers} from '../../TestingUtils';
+import {TestPlayers} from '../../TestPlayers';
 
 describe('IndenturedWorkers', function() {
   let card: IndenturedWorkers;

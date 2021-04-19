@@ -1,3 +1,7 @@
+body {
+    background: rgb(53,57,63);
+}
+
 .game_end_success, .game_end_fail {
     max-width: 820px;
     margin: 30px auto;
@@ -27,18 +31,114 @@
 }
 
 .game_end_table {
-    border: 2px solid #7b7b7b;
     width: auto;
+    background: #222;
 
     td, th {
         text-align: center !important;
-        border-bottom: .05rem solid #7b7b7b !important;
-        padding: 10px 20px;
-        text-shadow: 2px 2px 4px #000000;
+        border: none;
+        padding: 10px;
+        text-shadow: 0 0px 2px black, 0 1px 1px black;
+        font-weight: normal;
+        min-width: 60px;
+        max-width: 320px;
+        line-height: 30px;
     }
 
     a {
         text-decoration: underline;
+        font-size: 30px;
+    }
+
+    .card-delegate {
+        display: inline-block;
+        background-image: url(./assets/misc/delegate.png);
+        width: 30px;
+        height: 36px;
+        background-size: 30px 36px;
+        vertical-align: middle;
+        filter: drop-shadow(0px 0px 1px black) brightness(0.8);
+    }
+    .table-city-tile {
+        background-image: url(./assets/tiles/city.png);
+        filter: brightness(0.8) drop-shadow(0px 1px 1px rgba(0, 0, 0, 0.5));
+        width: 34px;
+        height: 40px;
+        background-size: 34px 40px;
+        vertical-align: middle;
+        margin-left: 2px;
+    }
+    .table-forest-tile {
+        background-image: url(./assets/tiles/greenery_no_O2.png);
+        width: 34px;
+        height: 40px;
+        background-size: 34px 40px;
+        vertical-align: middle;
+        margin-left: 2px;
+    }
+    .tr {
+        background-image: url(./assets/resources/tr.png);
+        width: 46px;
+        height: 38px;
+        background-size: 46px 38px;
+    }
+    .vp {
+        font-family: 'Prototype';
+        font-size: 18px;
+        color: black;
+        font-weight: normal !important;
+        text-shadow: 0 0 5px darkorange;
+        width: 38px;
+        height: 38px;
+        line-height: 38px;
+        text-align: center;
+        border-radius: 50%;
+        background-color: #cda282;
+        background: linear-gradient(#cc8b00, #805700, #805700);
+        box-shadow: 0 1px 1px 0px black;
+    }
+    .m-and-a{
+        color: #ffcc64;
+        width: 38px;
+        height: 36px;
+        line-height: 36px;
+        background: #444;
+        border-radius: 3px;
+        cursor: context-menu;
+        text-shadow: none;
+        font-weight: bold;
+    }
+    .mc-icon {
+        background-image: url(assets/resources/megacredit.png);
+        width: 26px;
+        height: 26px;
+        display: inline-block;
+        background-size: contain;
+        position: relative;
+        vertical-align: sub;
+        text-shadow: none;
+        background-repeat: no-repeat;
+        filter: brightness(0.8);
+    }
+    .mc-icon::after {
+        position: absolute;
+        content: "€";
+        color: rgba(0, 0, 0, 0.3);
+        font-style: normal;
+        font-family: Arial;
+        font-weight: bold;
+        width: 26px;
+        height: 26px;
+        text-align: center;
+        line-height: 27px;
+        left: 0px;
+        font-size: 18px;
+    }
+    .clock-icon {
+        filter: brightness(0.8);
+    }
+    .column-corporation {
+        width: 300px;
     }
 }
 .game-end-flexrow {
@@ -46,21 +146,55 @@
     flex-flow: row wrap;
 
     .game-end-column {
-        min-width: 400px;
         padding-right: 20px;
         padding-bottom: 40px;
     }
+
+    .game-end-player {
+        text-align: center;
+        text-shadow: 0 0px 2px black, 0 1px 1px black;
+        font-size: 23px;
+    }
+
+    .game-end-column-row {
+        display: flex;
+        background: #222;
+        width: 275px;
+        font-size: 18px;
+    }
+
+    .game-end-column-vp {
+        width: 45px;
+        font-weight: bold;
+        text-align: center;
+    }
+    .game-end-column-text {
+        width: 215px;
+    }
 }
 
-.game-end-winer-scorebreak-player-title{
-    font-size: 32px
+.game-end-winer-scorebreak-player-title {
+    font-size: 32px;
+    width: 275px;
 }
 
-.game-end-total-column{
-    padding: 5px 30px;
+.game-end-total-column {
+    padding: 0px 30px;
 }
 
-.game-end-winer-announcement{
+.game-end-winer-announcement {
     text-align: center;
     font-size: 40px;
+}
+
+.game-end-total {
+  font-size: 30px;
+}
+
+.game-end-mc {
+  opacity: 0.5;
+}
+
+.game-end-timer {
+  opacity: 0.5;
 }

@@ -10,7 +10,6 @@ import {CardName} from '../../CardName';
 import {LogHelper} from '../../LogHelper';
 import {CardRequirements} from '../CardRequirements';
 import {CardRenderer} from '../render/CardRenderer';
-import {GlobalParameter} from '../../GlobalParameter';
 import {Card} from '../Card';
 
 export class SulphurEatingBacteria extends Card implements IActionCard, IResourceCard {
@@ -39,9 +38,7 @@ export class SulphurEatingBacteria extends Card implements IActionCard, IResourc
     });
   };
   public resourceCount: number = 0;
-  public canPlay(player: Player): boolean {
-    return player.game.checkMinRequirements(player, GlobalParameter.VENUS, 6);
-  }
+
   public play() {
     return undefined;
   }
@@ -52,7 +49,7 @@ export class SulphurEatingBacteria extends Card implements IActionCard, IResourc
     const opts: Array<SelectOption | SelectAmount> = [];
 
     const addResource = new SelectOption('Add 1 microbe to this card', 'Add microbe', () => this.addResource(player));
-    const spendResource = new SelectAmount('Remove any number of microbes to gain 3 MC per microbe removed', 'Remove microbes', (amount: number) => this.spendResource(player, amount), 1, this.resourceCount);
+    const spendResource = new SelectAmount('Remove any number of microbes to gain 3 MC per microbe removed', 'Remove microbes', (amount: number) => this.spendResource(player, amount), 1, this.resourceCount, true);
 
     opts.push(addResource);
 

@@ -73,13 +73,13 @@ export class TitanAirScrapping extends Card implements IProjectCard, IResourceCa
   }
 
   private addResource(player: Player) {
-    this.resourceCount += 2;
+    player.addResourceTo(this, 2);
     player.titanium--;
     return undefined;
   }
 
   private spendResource(player: Player) {
-    this.resourceCount -= 2;
+    player.removeResourceFrom(this, 2);
     player.increaseTerraformRating();
     return undefined;
   }

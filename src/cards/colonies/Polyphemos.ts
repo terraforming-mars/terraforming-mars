@@ -16,7 +16,7 @@ export class Polyphemos extends Card implements CorporationCard {
 
       metadata: {
         cardNumber: 'R11',
-        description: 'You start with 50MC. Increase your MC production 5 steps. Gain 5 titanium.',
+        description: 'You start with 50MC. Increase your M€ production 5 steps. Gain 5 titanium.',
         renderData: CardRenderer.builder((b) => {
           b.br;
           b.megacredits(50).nbsp.production((pb) => pb.megacredits(5)).nbsp.titanium(5).digit;

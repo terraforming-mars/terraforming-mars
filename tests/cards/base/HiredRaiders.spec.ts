@@ -3,7 +3,7 @@ import {HiredRaiders} from '../../../src/cards/base/HiredRaiders';
 import {Game} from '../../../src/Game';
 import {OrOptions} from '../../../src/inputs/OrOptions';
 import {Player} from '../../../src/Player';
-import {TestPlayers} from '../../TestingUtils';
+import {TestPlayers} from '../../TestPlayers';
 
 describe('HiredRaiders', function() {
   let card : HiredRaiders; let player : Player; let player2: Player;
@@ -21,7 +21,7 @@ describe('HiredRaiders', function() {
     player2.megaCredits = 2;
 
     const action = card.play(player) as OrOptions;
-    expect(action.options).has.lengthOf(2);
+    expect(action.options).has.lengthOf(3);
     action.options[1].cb();
     expect(player2.megaCredits).to.eq(0);
     expect(player.megaCredits).to.eq(12);

@@ -99,22 +99,20 @@ export const PlayerHome = Vue.component('player-home', {
         const el = document.getElementById('shortkey-' + idSuffix);
         if (el) {
           event.preventDefault();
-          const scrollingSpeed = PreferencesManager.loadValue('smooth_scrolling') === '1' ? 'smooth' : 'auto';
-          el.scrollIntoView({block: 'center', inline: 'center', behavior: scrollingSpeed});
+          el.scrollIntoView({block: 'center', inline: 'center', behavior: 'auto'});
         }
       }
+    },
+    isPlayerActing: function(player: PlayerModel) : boolean {
+      return player.players.length > 1 && player.waitingFor !== undefined;
     },
     getPlayerCssForTurnOrder: (
       player: PlayerModel,
       highlightActive: boolean,
     ): string => {
       const classes = ['highlighter_box'];
-
       if (highlightActive) {
-        if (
-          player.needsToDraft ||
-                    (player.needsToDraft === undefined && player.isActive)
-        ) {
+        if (player.needsToDraft || (player.needsToDraft === undefined && player.isActive)) {
           classes.push('player_is_active');
         }
         classes.push(playerColorClass(player.color, 'bg'));
@@ -191,6 +189,7 @@ export const PlayerHome = Vue.component('player-home', {
             </div>
 
             <preferences v-trim-whitespace
+              :acting_player="isPlayerActing(player)"
               :player_color="player.color"
               :generation="player.generation"
               :coloniesCount="player.colonies.length"
@@ -234,7 +233,7 @@ export const PlayerHome = Vue.component('player-home', {
 
                 <players-overview class="player_home_block player_home_block--players nofloat:" :player="player" v-trim-whitespace id="shortkey-playersoverview"/>
 
-                <div class="player_home_block player_home_block--log player_home_block--hide_log nofloat">
+                <div class="player_home_block nofloat">
                     <log-panel :id="player.id" :players="player.players" :generation="player.generation" :lastSoloGeneration="player.lastSoloGeneration" :color="player.color"></log-panel>
                 </div>
 
@@ -283,9 +282,9 @@ export const PlayerHome = Vue.component('player-home', {
                         <Card :card="card" :actionUsed="isCardActivated(card, player)"/>
                     </div>
 
-                    <stacked-cards v-show="isAutomatedCardShown()" class="player_home_block--non_blue_cards" :cards="getCardsByType(player.playedCards, [getAutomatedCardType(), getPreludeCardType()])" ></stacked-cards>
+                    <stacked-cards v-show="isAutomatedCardShown()" :cards="getCardsByType(player.playedCards, [getAutomatedCardType(), getPreludeCardType()])" ></stacked-cards>
 
-                    <stacked-cards v-show="isEventCardShown()" class="player_home_block--non_blue_cards" :cards="getCardsByType(player.playedCards, [getEventCardType()])" ></stacked-cards>
+                    <stacked-cards v-show="isEventCardShown()" :cards="getCardsByType(player.playedCards, [getEventCardType()])" ></stacked-cards>
 
                 </div>
 
@@ -367,8 +366,19 @@ export const PlayerHome = Vue.component('player-home', {
                         </div>
                     </summary>
                     <div class="accordion-body">
-                        <board :spaces="player.spaces" :venusNextExtension="player.gameOptions.venusNextExtension" :venusScaleLevel="player.venusScaleLevel" :boardName ="player.gameOptions.boardName"></board>
+                        <board
+                          :spaces="player.spaces"
+                          :venusNextExtension="player.gameOptions.venusNextExtension"
+                          :venusScaleLevel="player.venusScaleLevel"
+                          :boardName ="player.gameOptions.boardName"
+                          :aresExtension="player.gameOptions.aresExtension"
+                          :aresData="player.aresData">
+                        </board>
+
                         <turmoil v-if="player.turmoil" :turmoil="player.turmoil"></turmoil>
+
+                        <moonboard v-if="player.gameOptions.moonExpansion" :model="player.moon"></moonboard>
+
                     </div>
                 </details>
             </div>

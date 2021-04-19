@@ -16,16 +16,14 @@ export class StagingStationBehemoth extends Card implements IProjectCard {
       cost: 24,
 
       metadata: {
-        description: 'Gain 2 trade fleets. Raise Logistic Rate 1 step.',
+        description: 'Gain 2 trade fleets. Raise the Logistic Rate 1 step.',
         cardNumber: 'M68',
-        renderData: CardRenderer.builder((_b) => {}),
+        renderData: CardRenderer.builder((b) => {
+          b.tradeFleet().tradeFleet().moonLogisticsRate();
+        }),
       },
     });
   };
-
-  public canPlay(): boolean {
-    return true;
-  }
 
   public play(player: Player) {
     player.increaseFleetSize();

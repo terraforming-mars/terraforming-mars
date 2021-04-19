@@ -19,7 +19,7 @@ export class FieldCappedCity extends Card implements IProjectCard {
 
       metadata: {
         cardNumber: 'X19',
-        description: 'Increase your MC production 2 steps, increase your energy production 1 step, gain 3 plants, and place a city tile.',
+        description: 'Increase your M€ production 2 steps, increase your energy production 1 step, gain 3 plants, and place a city tile.',
         renderData: CardRenderer.builder((b) => {
           b.production((pb) => {
             pb.megacredits(2).br;

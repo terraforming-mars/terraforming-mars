@@ -2,14 +2,15 @@ import {Game} from '../../../src/Game';
 import {IMoonData} from '../../../src/moon/IMoonData';
 import {MoonExpansion} from '../../../src/moon/MoonExpansion';
 import {Player} from '../../../src/Player';
-import {setCustomGameOptions, TestPlayers} from '../../TestingUtils';
+import {TestingUtils} from '../../TestingUtils';
+import {TestPlayers} from '../../TestPlayers';
 import {LunaTrainStation} from '../../../src/cards/moon/LunaTrainStation';
 import {expect} from 'chai';
 import {Resources} from '../../../src/Resources';
 import {TileType} from '../../../src/TileType';
 import {PlaceSpecialMoonTile} from '../../../src/moon/PlaceSpecialMoonTile';
 
-const MOON_OPTIONS = setCustomGameOptions({moonExpansion: true});
+const MOON_OPTIONS = TestingUtils.setCustomGameOptions({moonExpansion: true});
 
 describe('LunaTrainStation', () => {
   let game: Game;
@@ -64,20 +65,20 @@ describe('LunaTrainStation', () => {
   });
 
   it('getVictoryPoints', () => {
-    // This space has room to surround it with mines.
+    // This space has room to surround it with roads.
     const space = moonData.moon.getSpace('m15');
     space.tile = {tileType: TileType.LUNA_TRAIN_STATION, card: card.name};
 
     expect(card.getVictoryPoints(player)).eq(0);
     const adjacentSpaces = moonData.moon.getAdjacentSpaces(space);
 
-    adjacentSpaces[0].tile = {tileType: TileType.MOON_MINE};
+    adjacentSpaces[0].tile = {tileType: TileType.MOON_ROAD};
     expect(card.getVictoryPoints(player)).eq(2);
 
-    adjacentSpaces[1].tile = {tileType: TileType.MOON_MINE};
+    adjacentSpaces[1].tile = {tileType: TileType.MOON_ROAD};
     expect(card.getVictoryPoints(player)).eq(4);
 
-    adjacentSpaces[2].tile = {tileType: TileType.MOON_MINE};
+    adjacentSpaces[2].tile = {tileType: TileType.MOON_ROAD};
     expect(card.getVictoryPoints(player)).eq(6);
   });
 });

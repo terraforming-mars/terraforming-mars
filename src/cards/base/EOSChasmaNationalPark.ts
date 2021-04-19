@@ -11,7 +11,6 @@ import {ResourceType} from '../../ResourceType';
 import {LogHelper} from '../../LogHelper';
 import {CardRequirements} from '../CardRequirements';
 import {CardRenderer} from '../render/CardRenderer';
-import {GlobalParameter} from '../../GlobalParameter';
 import {Units} from '../../Units';
 
 export class EosChasmaNationalPark extends Card implements IProjectCard {
@@ -26,7 +25,7 @@ export class EosChasmaNationalPark extends Card implements IProjectCard {
       requirements: CardRequirements.builder((b) => b.temperature(-12)),
       metadata: {
         cardNumber: '026',
-        description: 'Requires -12 C or warmer. Add 1 Animal TO ANY ANIMAL CARD. Gain 3 Plants. Increase your MC production 2 steps.',
+        description: 'Requires -12 C or warmer. Add 1 Animal TO ANY ANIMAL CARD. Gain 3 Plants. Increase your M€ production 2 steps.',
         renderData: CardRenderer.builder((b) => {
           b.animals(1).asterix().plants(3).br;
           b.production((pb) => pb.megacredits(2));
@@ -34,10 +33,6 @@ export class EosChasmaNationalPark extends Card implements IProjectCard {
         victoryPoints: 1,
       },
     });
-  }
-
-  public canPlay(player: Player): boolean {
-    return player.game.checkMinRequirements(player, GlobalParameter.TEMPERATURE, -12);
   }
 
   public play(player: Player) {

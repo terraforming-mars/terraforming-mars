@@ -1,4 +1,4 @@
-import {Game, GameId} from '../Game';
+import {Game, GameId, SpectatorId} from '../Game';
 import {PlayerId} from '../Player';
 
 type LoadCallback = (game: Game | undefined) => void;
@@ -9,7 +9,7 @@ type LoadCallback = (game: Game | undefined) => void;
  */
 export interface IGameLoader {
   add(game: Game): void;
-  getLoadedGameIds(): Array<string>;
+  getLoadedGameIds(): Array<{id: GameId, participants: Array<SpectatorId | PlayerId>}>;
   /**
    * Gets a game from javascript memory or pulls from database if needed.
    * @param {GameId} gameId the id of the game to retrieve
@@ -18,5 +18,6 @@ export interface IGameLoader {
    */
   getByGameId(gameId: GameId, bypassCache: boolean, cb: LoadCallback): void;
   getByPlayerId(playerId: PlayerId, cb: LoadCallback): void;
+  getBySpectatorId(spectatorId: SpectatorId, cb: LoadCallback): void;
   restoreGameAt(gameId: GameId, saveId: number, cb: LoadCallback): void;
 }

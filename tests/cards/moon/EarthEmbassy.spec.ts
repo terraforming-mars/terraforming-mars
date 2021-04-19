@@ -1,5 +1,5 @@
 import {Game} from '../../../src/Game';
-import {setCustomGameOptions} from '../../TestingUtils';
+import {TestingUtils} from '../../TestingUtils';
 import {TestPlayers} from '../../TestPlayers';
 import {TestPlayer} from '../../TestPlayer';
 import {EarthEmbassy} from '../../../src/cards/moon/EarthEmbassy';
@@ -10,7 +10,7 @@ import {CardName} from '../../../src/CardName';
 import {IProjectCard} from '../../../src/cards/IProjectCard';
 import {CardMetadata} from '../../../src/cards/CardMetadata';
 
-const MOON_OPTIONS = setCustomGameOptions({moonExpansion: true});
+const MOON_OPTIONS = TestingUtils.setCustomGameOptions({moonExpansion: true});
 
 describe('EarthEmbassy', () => {
   let player: TestPlayer;

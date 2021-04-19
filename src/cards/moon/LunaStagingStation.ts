@@ -18,7 +18,7 @@ export class LunaStagingStation extends MoonCard {
 
       requirements: CardRequirements.builder((b) => b.logisticRate(2)),
       metadata: {
-        description: 'Requires Logistic Rate to be 2 or higher. Spend 1 titanium. Raise Logistic Rate 2 steps.',
+        description: 'Requires Logistic Rate to be 2 or higher. Spend 1 titanium. Raise the Logistic Rate 2 steps.',
         cardNumber: 'M30',
         renderData: CardRenderer.builder((b) => {
           b.minus().titanium(1).br;
@@ -30,14 +30,9 @@ export class LunaStagingStation extends MoonCard {
     });
   };
 
-  public canPlay(player: Player): boolean {
-    return MoonExpansion.moonData(player.game).logisticRate >= 2;
-  }
-
   public play(player: Player) {
     super.play(player);
-    MoonExpansion.raiseLogisticRate(player);
-    MoonExpansion.raiseLogisticRate(player);
+    MoonExpansion.raiseLogisticRate(player, 2);
     return undefined;
   }
 }

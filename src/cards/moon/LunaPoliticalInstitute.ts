@@ -23,16 +23,12 @@ export class LunaPoliticalInstitute extends Card implements IActionCard, IProjec
         cardNumber: 'M71',
         renderData: CardRenderer.builder((b) => {
           b.action(
-            'Move one of your delegates from the Delegate Reserve into any party.',
+            'Move one of your delegates from the reserve to any party.',
             (eb) => eb.empty().startAction.delegates(1));
         }),
       },
     });
   };
-
-  public canPlay(player: Player): boolean {
-    return player.getTagCount(Tags.MOON) >= 2;
-  }
 
   public play() {
     return undefined;

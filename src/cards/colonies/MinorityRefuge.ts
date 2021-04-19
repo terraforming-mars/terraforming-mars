@@ -22,7 +22,7 @@ export class MinorityRefuge extends Card implements IProjectCard {
         renderData: CardRenderer.builder((b) => {
           b.production((pb) => pb.megacredits(-2)).colonies(1);
         }),
-        description: 'Decrease your MC production 2 steps. Place a colony.',
+        description: 'Decrease your M€ production 2 steps. Place a colony.',
       },
     });
   }

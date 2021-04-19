@@ -5,30 +5,35 @@ import {MAX_VENUS_SCALE} from '../../../src/constants';
 import {Game} from '../../../src/Game';
 import {OrOptions} from '../../../src/inputs/OrOptions';
 import {Player} from '../../../src/Player';
-import {TestPlayers} from '../../TestingUtils';
+import {TestPlayers} from '../../TestPlayers';
 
-describe('RotatorImpacts', function() {
+describe('RotatorImpacts', () => {
   let card : RotatorImpacts; let player : Player; let game : Game;
 
-  beforeEach(function() {
+  beforeEach(() => {
     card = new RotatorImpacts();
     player = TestPlayers.BLUE.newPlayer();
     const redPlayer = TestPlayers.RED.newPlayer();
     game = Game.newInstance('foobar', [player, redPlayer], player);
   });
 
-  it('Can\'t play', function() {
+  it('Cannot play', () => {
     (game as any).venusScaleLevel = 16;
     expect(card.canPlay(player)).is.not.true;
   });
 
-  it('Should play', function() {
+  it('Can play', () => {
+    (game as any).venusScaleLevel = 14;
+    expect(card.canPlay(player)).is.true;
+  });
+
+  it('Should play', () => {
     expect(card.canPlay(player)).is.true;
     const action = card.play();
     expect(action).is.undefined;
   });
 
-  it('Works with MSI corporation', function() {
+  it('Works with MSI corporation', () => {
     const corp = new MorningStarInc();
     corp.play();
     player.corporationCard = corp;
@@ -37,7 +42,7 @@ describe('RotatorImpacts', function() {
     expect(card.canPlay(player)).is.true;
   });
 
-  it('Should act', function() {
+  it('Should act', () => {
     player.playedCards.push(card);
     player.megaCredits = 16;
     player.titanium = 2;
@@ -57,13 +62,13 @@ describe('RotatorImpacts', function() {
     expect(game.getVenusScaleLevel()).to.eq(2);
   });
 
-  it('Should not allow to raise Venus level if there no resources on card', function() {
+  it('Should not allow to raise Venus level if there no resources on card', () => {
     player.playedCards.push(card);
     player.megaCredits = 5;
     expect(card.canAct(player)).is.not.true;
   });
 
-  it('Should allow to raise Venus level only', function() {
+  it('Should allow to raise Venus level only', () => {
     player.playedCards.push(card);
     card.resourceCount = 1;
     expect(card.canAct(player)).is.true;
@@ -74,7 +79,7 @@ describe('RotatorImpacts', function() {
     expect(game.getVenusScaleLevel()).to.eq(2);
   });
 
-  it('Should not allow to raise Venus level if Venus level is maxed out', function() {
+  it('Should not allow to raise Venus level if Venus level is maxed out', () => {
     player.playedCards.push(card);
     card.resourceCount = 1;
 

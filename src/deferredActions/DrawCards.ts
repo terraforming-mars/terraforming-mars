@@ -8,7 +8,12 @@ import {CardType} from '../cards/CardType';
 import {SelectHowToPayDeferred} from './SelectHowToPayDeferred';
 import {LogHelper} from '../LogHelper';
 
-// <T> is the return value type
+enum LogType {
+  DREW='drew',
+  BOUGHT='bought',
+  DREW_VERBOSE='drew_verbose',
+}
+
 export class DrawCards<T extends undefined | SelectCard<IProjectCard>> implements DeferredAction {
   public priority = Priority.DRAW_CARDS;
   private constructor(
@@ -41,36 +46,14 @@ export class DrawCards<T extends undefined | SelectCard<IProjectCard>> implement
 
   public static keepAll(player: Player, count: number = 1, options?: DrawCards.DrawOptions): DrawCards<undefined> {
     return new DrawCards(player, count, options, (cards) =>
-      DrawCards.keep(player, cards, options === undefined ? DrawCards.LogType.DREW : DrawCards.LogType.DREW_VERBOSE));
+      DrawCards.keep(player, cards, options === undefined ? LogType.DREW : LogType.DREW_VERBOSE));
   }
 
   public static keepSome(player: Player, count: number = 1, options: DrawCards.AllOptions): DrawCards<SelectCard<IProjectCard>> {
     return new DrawCards(player, count, options, (cards) => DrawCards.choose(player, cards, options));
   }
-}
 
-export namespace DrawCards {
-  export interface DrawOptions {
-    tag?: Tags,
-    resource?: ResourceType,
-    cardType?: CardType,
-    include?: (card: IProjectCard) => boolean,
-  }
-
-  export interface ChooseOptions {
-    keepMax?: number,
-    paying?: boolean,
-  }
-
-  export enum LogType {
-    DREW='drew',
-    BOUGHT='bought',
-    DREW_VERBOSE='drew_verbose',
-  }
-
-  export interface AllOptions extends DrawOptions, ChooseOptions { }
-
-  export function keep(player: Player, cards: Array<IProjectCard>, logType: LogType = LogType.DREW): undefined {
+  public static keep(player: Player, cards: Array<IProjectCard>, logType: LogType = LogType.DREW): undefined {
     player.cardsInHand.push(...cards);
     if (logType === LogType.DREW_VERBOSE) {
       LogHelper.logDrawnCards(player, cards);
@@ -80,7 +63,7 @@ export namespace DrawCards {
     return undefined;
   }
 
-  export function discard(player: Player, preserve: Array<IProjectCard>, discard: Array<IProjectCard>) {
+  public static discard(player: Player, preserve: Array<IProjectCard>, discard: Array<IProjectCard>) {
     discard.forEach((card) => {
       if (preserve.find((f) => f.name === card.name) === undefined) {
         player.game.dealer.discard(card);
@@ -88,7 +71,7 @@ export namespace DrawCards {
     });
   }
 
-  export function choose(player: Player, cards: Array<IProjectCard>, options: DrawCards.ChooseOptions): SelectCard<IProjectCard> {
+  public static choose(player: Player, cards: Array<IProjectCard>, options: DrawCards.ChooseOptions): SelectCard<IProjectCard> {
     let max = options.keepMax || cards.length;
     if (options.paying) {
       max = Math.min(max, Math.floor(player.spendableMegacredits() / player.cardCost));
@@ -96,20 +79,23 @@ export namespace DrawCards {
     const min = options.paying ? 0 : options.keepMax;
     const msg = options.paying ? (max === 0 ? 'You cannot afford any cards' : 'Select card(s) to buy') :
       `Select ${max} card(s) to keep`;
-    const button = max === 0 ? 'Oh' : (options.paying ? 'Buy' : 'Select');
+    const button = max === 0 ? 'Ok' : (options.paying ? 'Buy' : 'Select');
     const cb = (selected: Array<IProjectCard>) => {
       if (options.paying && selected.length > 0) {
         player.game.defer(
           new SelectHowToPayDeferred(player, selected.length * player.cardCost, {
             title: 'Select how to pay for cards',
             afterPay: () => {
-              keep(player, selected, DrawCards.LogType.BOUGHT);
-              discard(player, selected, cards);
+              this.keep(player, selected, LogType.BOUGHT);
+              this.discard(player, selected, cards);
             },
           }));
+      } else if (options.logDrawnCard === true) {
+        this.keep(player, selected, LogType.DREW_VERBOSE);
+        this.discard(player, selected, cards);
       } else {
-        keep(player, selected, options.paying ? DrawCards.LogType.BOUGHT : DrawCards.LogType.DREW);
-        discard(player, selected, cards);
+        this.keep(player, selected, options.paying ? LogType.BOUGHT : LogType.DREW);
+        this.discard(player, selected, cards);
       }
       return undefined;
     };
@@ -125,4 +111,21 @@ export namespace DrawCards {
       false,
     );
   }
+}
+
+export namespace DrawCards {
+  export interface DrawOptions {
+    tag?: Tags,
+    resource?: ResourceType,
+    cardType?: CardType,
+    include?: (card: IProjectCard) => boolean,
+  }
+
+  export interface ChooseOptions {
+    keepMax?: number,
+    logDrawnCard?: boolean,
+    paying?: boolean,
+  }
+
+  export interface AllOptions extends DrawOptions, ChooseOptions { }
 }

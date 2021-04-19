@@ -3,7 +3,7 @@ import {LocalShading} from '../../../src/cards/venusNext/LocalShading';
 import {VenusGovernor} from '../../../src/cards/venusNext/VenusGovernor';
 import {VenusWaystation} from '../../../src/cards/venusNext/VenusWaystation';
 import {Game} from '../../../src/Game';
-import {TestPlayers} from '../../TestingUtils';
+import {TestPlayers} from '../../TestPlayers';
 
 describe('VenusWaystation', function() {
   it('Should play', function() {

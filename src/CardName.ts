@@ -467,10 +467,11 @@ export enum CardName {
 
     // Community corps
     AGRICOLA_INC = 'Agricola Inc',
-    PROJECT_WORKSHOP = 'Project Workshop',
+    CURIOSITY_II = 'Curiosity II',
     INCITE = 'Incite',
-    PLAYWRIGHTS = 'Playwrights',
     MIDAS = 'Midas',
+    PLAYWRIGHTS = 'Playwrights',
+    PROJECT_WORKSHOP = 'Project Workshop',
 
     // Community preludes
     VALUABLE_GASES = 'Valuable Gases',
@@ -586,7 +587,7 @@ export enum CardName {
     LUNAR_INDUSTRY_COMPLEX = 'Lunar Industry Complex',
     DARKSIDE_OBSERVATORY = 'Darkside Observatory',
     MARTIAN_EMBASSY = 'Martian Embassy',
-    EARTH_EMBASSY = 'Earth Embasy',
+    EARTH_EMBASSY = 'Earth Embassy',
     ROVER_DRIVERS_UNION = 'Rover Drivers Union',
     LTF_HEADQUARTERS = 'L.T.F. Headquarters',
     DARKSIDE_SMUGGLERS_UNION = 'Darkside Smugglers\' Union',

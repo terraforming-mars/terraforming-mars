@@ -6,30 +6,39 @@ import {SpaceType} from '../../../src/SpaceType';
 import {TileType} from '../../../src/TileType';
 import {SelectSpace} from '../../../src/inputs/SelectSpace';
 import {Resources} from '../../../src/Resources';
-import {TestingUtils, TestPlayers} from '../../TestingUtils';
+import {TestingUtils} from '../../TestingUtils';
+import {TestPlayers} from '../../TestPlayers';
 import {Board} from '../../../src/boards/Board';
 
-describe('Capital', function() {
+describe('Capital', () => {
   let card : Capital; let player : Player; let game : Game;
 
-  beforeEach(function() {
+  beforeEach(() => {
     card = new Capital();
     player = TestPlayers.BLUE.newPlayer();
     const redPlayer = TestPlayers.RED.newPlayer();
     game = Game.newInstance('foobar', [player, redPlayer], player);
   });
 
-  it('Can\'t play without energy production', function() {
-    TestingUtils.maxOutOceans(player);
+  it('Cannot play without 2 energy production', () => {
+    TestingUtils.maxOutOceans(player, 4);
+    player.addProduction(Resources.ENERGY, 1);
     expect(card.canPlay(player)).is.not.true;
   });
 
-  it('Can\'t play if oceans requirement not met', function() {
+  it('Cannot play if oceans requirement not met', () => {
+    TestingUtils.maxOutOceans(player, 3);
     player.addProduction(Resources.ENERGY, 2);
     expect(card.canPlay(player)).is.not.true;
   });
 
-  it('Should play', function() {
+  it('Can play', () => {
+    TestingUtils.maxOutOceans(player, 4);
+    player.addProduction(Resources.ENERGY, 2);
+    expect(card.canPlay(player)).is.true;
+  });
+
+  it('Should play', () => {
     const oceanSpaces = game.board.getAvailableSpacesForOcean(player);
     for (let i = 0; i < 4; i++) {
       oceanSpaces[i].tile = {tileType: TileType.OCEAN};
@@ -54,7 +63,7 @@ describe('Capital', function() {
     expect(citySpace.adjacency?.bonus).eq(undefined);
   });
 
-  it('Capital special tile counts as a city', function() {
+  it('Capital special tile counts as a city', () => {
     const space = game.board.getNthAvailableLandSpace(2, 1, player);
     game.addTile(player, SpaceType.LAND, space, {
       tileType: TileType.CAPITAL,

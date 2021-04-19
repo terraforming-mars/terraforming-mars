@@ -2,7 +2,7 @@ import {Game} from '../../../src/Game';
 import {IMoonData} from '../../../src/moon/IMoonData';
 import {MoonExpansion} from '../../../src/moon/MoonExpansion';
 import {Player} from '../../../src/Player';
-import {setCustomGameOptions} from '../../TestingUtils';
+import {TestingUtils} from '../../TestingUtils';
 import {LunarSecurityStations} from '../../../src/cards/moon/LunarSecurityStations';
 import {expect} from 'chai';
 import {OrOptions} from '../../../src/inputs/OrOptions';
@@ -10,7 +10,7 @@ import {HiredRaiders} from '../../../src/cards/base/HiredRaiders';
 import {TileType} from '../../../src/TileType';
 import {TestPlayers} from '../../TestPlayers';
 
-const MOON_OPTIONS = setCustomGameOptions({moonExpansion: true});
+const MOON_OPTIONS = TestingUtils.setCustomGameOptions({moonExpansion: true});
 
 describe('LunarSecurityStations', () => {
   let game: Game;
@@ -54,12 +54,12 @@ describe('LunarSecurityStations', () => {
     opponent2.playedCards = [];
     let action = hiredRaiders.play(player) as OrOptions;
     // Options for both opponents.
-    expect(action.options).has.lengthOf(2);
+    expect(action.options).has.lengthOf(3);
 
     opponent2.playedCards = [lunaSecurityStations];
     action = hiredRaiders.play(player) as OrOptions;
     // Options for only one opponent.
-    expect(action.options).has.lengthOf(1);
+    expect(action.options).has.lengthOf(2);
     action.options[0].cb();
     // And it's the one weithout Luna Security Stations.
     expect(opponent1.steel).to.eq(3);

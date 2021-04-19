@@ -24,7 +24,7 @@ export class QuantumCommunications extends Card implements IProjectCard {
             pb.megacredits(1).slash().colonies(1, CardRenderItemSize.SMALL).any;
           });
         }),
-        description: 'Requires 4 Science tags. Increase your MC production 1 step for each colony in play.',
+        description: 'Requires 4 Science tags. Increase your M€ production 1 step for each colony in play.',
         victoryPoints: 1,
       },
     });
@@ -39,7 +39,7 @@ export class QuantumCommunications extends Card implements IProjectCard {
     player.game.colonies.forEach((colony) => {
       coloniesCount += colony.colonies.length;
     });
-    player.addProduction(Resources.MEGACREDITS, coloniesCount);
+    player.addProduction(Resources.MEGACREDITS, coloniesCount, player.game);
     return undefined;
   }
 

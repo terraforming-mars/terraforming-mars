@@ -1,6 +1,7 @@
 import {Game} from '../../../src/Game';
 import {Player} from '../../../src/Player';
-import {setCustomGameOptions, TestPlayers} from '../../TestingUtils';
+import {TestingUtils} from '../../TestingUtils';
+import {TestPlayers} from '../../TestPlayers';
 import {LunarPlanningOffice} from '../../../src/cards/moon/LunarPlanningOffice';
 import {expect} from 'chai';
 import {MareNectarisMine} from '../../../src/cards/moon/MareNectarisMine';
@@ -9,7 +10,7 @@ import {MicroMills} from '../../../src/cards/base/MicroMills';
 import {RoboticWorkforce} from '../../../src/cards/base/RoboticWorkforce';
 import {CardName} from '../../../src/CardName';
 
-const MOON_OPTIONS = setCustomGameOptions({moonExpansion: true});
+const MOON_OPTIONS = TestingUtils.setCustomGameOptions({moonExpansion: true});
 
 describe('LunarPlanningOffice', () => {
   let game: Game;

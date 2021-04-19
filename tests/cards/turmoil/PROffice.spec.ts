@@ -5,7 +5,8 @@ import {PROffice} from '../../../src/cards/turmoil/PROffice';
 import {Game} from '../../../src/Game';
 import {Resources} from '../../../src/Resources';
 import {PartyName} from '../../../src/turmoil/parties/PartyName';
-import {setCustomGameOptions, TestPlayers} from '../../TestingUtils';
+import {TestingUtils} from '../../TestingUtils';
+import {TestPlayers} from '../../TestPlayers';
 
 describe('PROffice', function() {
   it('Should play', function() {
@@ -14,7 +15,7 @@ describe('PROffice', function() {
     const card3 = new AcquiredCompany();
     const player = TestPlayers.BLUE.newPlayer();
 
-    const gameOptions = setCustomGameOptions();
+    const gameOptions = TestingUtils.setCustomGameOptions();
     const game = Game.newInstance('foobar', [player], player, gameOptions);
     expect(card.canPlay(player)).is.not.true;
 

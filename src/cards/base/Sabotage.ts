@@ -56,7 +56,7 @@ export class Sabotage extends Card implements IProjectCard {
 
       if (target.megaCredits > 0) {
         const amountRemoved = Math.min(7, target.megaCredits);
-        const optionTitle = 'Remove ' + amountRemoved + ' MC from ' + target.name;
+        const optionTitle = 'Remove ' + amountRemoved + ' M€ from ' + target.name;
 
         availableActions.options.push(new SelectOption(optionTitle, 'Confirm', () => {
           target.setResource(Resources.MEGACREDITS, -7, player.game, player);
@@ -65,7 +65,12 @@ export class Sabotage extends Card implements IProjectCard {
       }
     });
 
-    if (availableActions.options.length > 0) return availableActions;
+    if (availableActions.options.length > 0) {
+      availableActions.options.push(new SelectOption('Do not remove resource', 'Confirm', () => {
+        return undefined;
+      }));
+      return availableActions;
+    }
     return undefined;
   }
 }

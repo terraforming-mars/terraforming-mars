@@ -18,7 +18,7 @@ import {SelectPartyToSendDelegate} from './SelectPartyToSendDelegate';
 import {PlayerInputModel} from '../models/PlayerInputModel';
 import {PlayerModel} from '../models/PlayerModel';
 import {PreferencesManager} from './PreferencesManager';
-import {playActivePlayerSound} from '../SoundManager';
+import {SoundManager} from './SoundManager';
 import {SelectColony} from './SelectColony';
 import {SelectProductionToLose} from './SelectProductionToLose';
 import {ShiftAresGlobalParameters} from './ShiftAresGlobalParameters';
@@ -69,7 +69,7 @@ export const WaitingFor = Vue.component('waiting-for', {
   },
   methods: {
     animateTitle: function() {
-      const sequence = '\u25CB\u25D4\u25D1\u25D5\u2B24';
+      const sequence = '\u25D1\u25D2\u25D0\u25D3';
       const first = document.title[0];
       const position = sequence.indexOf(first);
       let next = sequence[0];
@@ -84,7 +84,7 @@ export const WaitingFor = Vue.component('waiting-for', {
       clearTimeout(ui_update_timeout_id);
       const askForUpdate = () => {
         const xhr = new XMLHttpRequest();
-        xhr.open('GET', '/api/waitingfor' + window.location.search + '&prev-game-age=' + this.player.gameAge.toString());
+        xhr.open('GET', '/api/waitingfor' + window.location.search + '&gameAge=' + this.player.gameAge + '&undoCount=' + this.player.undoCount);
         xhr.onerror = function() {
           root.showAlert('Unable to reach the server. The server may be restarting or down for maintenance.', () => vueApp.waitForUpdate());
         };
@@ -104,7 +104,7 @@ export const WaitingFor = Vue.component('waiting-for', {
                 });
               }
               const soundsEnabled = PreferencesManager.loadValue('enable_sounds') === '1';
-              if (soundsEnabled) playActivePlayerSound();
+              if (soundsEnabled) SoundManager.playActivePlayerSound();
 
               // We don't need to wait anymore - it's our turn
               return;

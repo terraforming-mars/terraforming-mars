@@ -30,7 +30,7 @@ export class OceanCity extends Card implements IProjectCard {
             pb.plus().megacredits(3);
           }).nbsp.tile(TileType.OCEAN_CITY, false, true);
         }),
-        description: 'Requires 6 ocean tiles. Decrease your Energy production 1 step and increase your MC production 3 steps. Place this tile on top of an existing ocean tile, IGNORING NORMAL PLACEMENT RESTRICTIONS FOR CITIES. The tile counts as a city as well as an ocean.',
+        description: 'Requires 6 ocean tiles. Decrease your Energy production 1 step and increase your M€ production 3 steps. Place this tile on top of an existing ocean tile, IGNORING NORMAL PLACEMENT RESTRICTIONS FOR CITIES. The tile counts as a city as well as an ocean.',
       },
     });
   }
@@ -47,11 +47,13 @@ export class OceanCity extends Card implements IProjectCard {
       'Select space for Ocean City',
       player.game.board.getOceansTiles(false),
       (space: ISpace) => {
-        player.game.removeTile(space.id);
-        player.game.addTile(player, space.spaceType, space, {
+        const tile = {
           tileType: TileType.OCEAN_CITY,
           card: this.name,
-        });
+          covers: space.tile,
+        };
+        player.game.removeTile(space.id);
+        player.game.addTile(player, space.spaceType, space, tile);
         return undefined;
       },
     );

@@ -26,13 +26,13 @@ export class LunaHyperloopCorporation implements IActionCard, CorporationCard {
   }
 
   public action(player: Player) {
-    const roadTileCount = MoonExpansion.tiles(player.game, TileType.MOON_ROAD, true).length;
+    const roadTileCount = MoonExpansion.tiles(player.game, TileType.MOON_ROAD, {surfaceOnly: true}).length;
     player.megaCredits += roadTileCount;
     return undefined;
   }
 
   public getVictoryPoints(player: Player) {
-    return MoonExpansion.tiles(player.game, TileType.MOON_ROAD, true).length;
+    return MoonExpansion.tiles(player.game, TileType.MOON_ROAD, {surfaceOnly: true}).length;
   }
 
   public readonly metadata: CardMetadata = {
@@ -41,10 +41,10 @@ export class LunaHyperloopCorporation implements IActionCard, CorporationCard {
     renderData: CardRenderer.builder((b) => {
       b.megacredits(38).steel(4).br;
       b.action('Gain 1 MC for each road tile on the Moon.', (eb) => {
-        eb.empty().startAction.megacredits(1).slash().tile(TileType.MOON_ROAD, false);
+        eb.empty().startAction.megacredits(1).slash().moonRoad({size: 'small'}).any;
       }).br,
-      b.text('1 VP for each road tile on the Moon.').br;
+      b.vpText('1 VP for each road tile on the Moon.').br;
     }),
-    victoryPoints: CardRenderDynamicVictoryPoints.questionmark(),
+    victoryPoints: CardRenderDynamicVictoryPoints.moonRoadTile(1, true),
   }
 }

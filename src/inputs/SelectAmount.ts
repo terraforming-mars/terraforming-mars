@@ -11,6 +11,7 @@ export class SelectAmount implements PlayerInput {
         public cb: (amount: number) => undefined | PlayerInput,
         public min: number,
         public max: number,
+        public maxByDefault?: boolean,
     ) {
       this.buttonLabel = buttonLabel;
     }

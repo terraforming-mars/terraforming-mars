@@ -2,7 +2,7 @@ import {expect} from 'chai';
 import {Aphrodite} from '../../../src/cards/venusNext/Aphrodite';
 import {Game} from '../../../src/Game';
 import {Resources} from '../../../src/Resources';
-import {TestPlayers} from '../../TestingUtils';
+import {TestPlayers} from '../../TestPlayers';
 
 describe('Aphrodite', function() {
   it('Should play', function() {

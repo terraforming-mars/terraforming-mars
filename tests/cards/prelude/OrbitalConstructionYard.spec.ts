@@ -1,7 +1,7 @@
 import {expect} from 'chai';
 import {OrbitalConstructionYard} from '../../../src/cards/prelude/OrbitalConstructionYard';
 import {Resources} from '../../../src/Resources';
-import {TestPlayers} from '../../TestingUtils';
+import {TestPlayers} from '../../TestPlayers';
 
 
 describe('OrbitalConstructionYard', function() {

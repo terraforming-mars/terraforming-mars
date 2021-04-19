@@ -25,7 +25,7 @@ export class KelpFarming extends Card implements IProjectCard {
             pb.plants(3);
           }).nbsp.plants(2);
         }),
-        description: 'Requires 6 ocean tiles. Increase your MC production 2 steps and your Plant production 3 steps. Gain 2 Plants.',
+        description: 'Requires 6 ocean tiles. Increase your M€ production 2 steps and your Plant production 3 steps. Gain 2 Plants.',
         victoryPoints: 1,
       },
     });

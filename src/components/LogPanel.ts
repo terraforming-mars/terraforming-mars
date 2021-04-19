@@ -13,6 +13,8 @@ import {CardName} from '../CardName';
 import {TileType} from '../TileType';
 import {playerColorClass} from '../utils/utils';
 import {Color} from '../Color';
+import {SoundManager} from './SoundManager';
+import {PreferencesManager} from './PreferencesManager';
 
 let logRequest: XMLHttpRequest | undefined;
 
@@ -203,6 +205,9 @@ export const LogPanel = Vue.component('log-panel', {
         if (xhr.status === 200) {
           messages.splice(0, messages.length);
           messages.push(...xhr.response);
+          if (PreferencesManager.loadBooleanValue('enable_sounds') && window.location.search.includes('experimental=1') ) {
+            SoundManager.newLog();
+          }
           if (generation === this.generation) {
             this.$nextTick(this.scrollToEnd);
           }
@@ -269,7 +274,7 @@ export const LogPanel = Vue.component('log-panel', {
         </div>
         <div class="card-panel" v-if="cards.length > 0">
           <Button size="big" type="close" :disableOnServerBusy="false" :onClick="hideMe" align="right"/>
-          <div id="log_panel_card" class="cardbox" v-for="(card, index) in cards" :key="index">
+          <div id="log_panel_card" class="cardbox" v-for="(card, index) in cards" :key="card">
             <Card :card="{name: card}"/>
           </div>
         </div>

@@ -5,7 +5,7 @@ import {Vitor} from '../../../src/cards/prelude/Vitor';
 import {Game} from '../../../src/Game';
 import {OrOptions} from '../../../src/inputs/OrOptions';
 import {Player} from '../../../src/Player';
-import {TestPlayers} from '../../TestingUtils';
+import {TestPlayers} from '../../TestPlayers';
 
 describe('Vitor', function() {
   let card : Vitor; let player : Player; let game : Game;

@@ -2,7 +2,8 @@ import {expect} from 'chai';
 import {Player} from '../../../src/Player';
 import {Game} from '../../../src/Game';
 import {Turmoil} from '../../../src/turmoil/Turmoil';
-import {TestingUtils, setCustomGameOptions, TestPlayers} from '../../TestingUtils';
+import {TestingUtils} from '../../TestingUtils';
+import {TestPlayers} from '../../TestPlayers';
 import {Scientists, SCIENTISTS_BONUS_1, SCIENTISTS_BONUS_2, SCIENTISTS_POLICY_1, SCIENTISTS_POLICY_4} from '../../../src/turmoil/parties/Scientists';
 import {SearchForLife} from '../../../src/cards/base/SearchForLife';
 import {Research} from '../../../src/cards/base/Research';
@@ -13,7 +14,7 @@ describe('Scientists', function() {
 
   beforeEach(function() {
     player = TestPlayers.BLUE.newPlayer();
-    const gameOptions = setCustomGameOptions();
+    const gameOptions = TestingUtils.setCustomGameOptions();
     game = Game.newInstance('foobar', [player], player, gameOptions);
     turmoil = game.turmoil!;
     scientists = new Scientists();

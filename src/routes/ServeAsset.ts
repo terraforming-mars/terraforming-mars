@@ -4,7 +4,7 @@ import * as path from 'path';
 import * as zlib from 'zlib';
 
 import {IContext} from './IHandler';
-import {BufferCache} from '../server/BufferCache';
+import {BufferCache} from './BufferCache';
 import {ContentType} from './ContentType';
 import {Handler} from './Handler';
 

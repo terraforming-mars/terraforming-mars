@@ -3,29 +3,32 @@ import {GHGProducingBacteria} from '../../../src/cards/base/GHGProducingBacteria
 import {Game} from '../../../src/Game';
 import {OrOptions} from '../../../src/inputs/OrOptions';
 import {Player} from '../../../src/Player';
-import {TestPlayers} from '../../TestingUtils';
+import {TestPlayers} from '../../TestPlayers';
 
-describe('GHGProducingBacteria', function() {
+describe('GHGProducingBacteria', () => {
   let card : GHGProducingBacteria; let player : Player; let game : Game;
 
-  beforeEach(function() {
+  beforeEach(() => {
     card = new GHGProducingBacteria();
     player = TestPlayers.BLUE.newPlayer();
     const redPlayer = TestPlayers.RED.newPlayer();
     game = Game.newInstance('foobar', [player, redPlayer], player);
   });
 
-  it('Can\'t play', function() {
+  it('Can play', () => {
+    (game as any).oxygenLevel = 3;
     expect(card.canPlay(player)).is.not.true;
+    (game as any).oxygenLevel = 4;
+    expect(card.canPlay(player)).is.true;
   });
 
-  it('Should play', function() {
+  it('Should play', () => {
     (game as any).oxygenLevel = 4;
     const action = card.play();
     expect(action).is.undefined;
   });
 
-  it('Should act', function() {
+  it('Should act', () => {
     player.playedCards.push(card);
 
     card.action(player);

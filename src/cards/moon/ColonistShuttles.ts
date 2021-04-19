@@ -17,11 +17,11 @@ export class ColonistShuttles extends MoonCard {
       cost: 12,
 
       metadata: {
-        description: 'Spend 1 titanium. Raise Colony Rate 1 step. Gain 2MC for each colony tile on the Moon.',
+        description: 'Spend 1 titanium. Raise the Colony Rate 1 step. Gain 2MC for each colony tile on the Moon.',
         cardNumber: 'M16',
         renderData: CardRenderer.builder((b) => {
           b.minus().titanium(1).moonColonyRate().br;
-          b.megacredits(2).slash().tile(TileType.MOON_COLONY, false);
+          b.megacredits(2).slash().moonColony({size: 'small'}).any;
         }),
       },
     }, {
@@ -33,7 +33,7 @@ export class ColonistShuttles extends MoonCard {
   public play(player: Player) {
     super.play(player);
     MoonExpansion.raiseColonyRate(player);
-    const surfaceColonies = MoonExpansion.tiles(player.game, TileType.MOON_COLONY, true).length;
+    const surfaceColonies = MoonExpansion.tiles(player.game, TileType.MOON_COLONY, {surfaceOnly: true}).length;
     player.megaCredits += surfaceColonies * 2;
     return undefined;
   }

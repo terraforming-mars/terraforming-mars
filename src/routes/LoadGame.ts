@@ -1,7 +1,7 @@
 import * as http from 'http';
 import {Database} from '../database/Database';
 import {GameLoader} from '../database/GameLoader';
-import {Server} from '../server/ServerModel';
+import {Server} from '../models/ServerModel';
 import {Handler} from './Handler';
 import {IContext} from './IHandler';
 

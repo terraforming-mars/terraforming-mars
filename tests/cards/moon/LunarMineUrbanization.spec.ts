@@ -1,5 +1,6 @@
 import {Game} from '../../../src/Game';
-import {setCustomGameOptions, TestPlayers} from '../../TestingUtils';
+import {TestingUtils} from '../../TestingUtils';
+import {TestPlayers} from '../../TestPlayers';
 import {LunarMineUrbanization} from '../../../src/cards/moon/LunarMineUrbanization';
 import {expect} from 'chai';
 import {MoonExpansion} from '../../../src/moon/MoonExpansion';
@@ -8,7 +9,7 @@ import {TileType} from '../../../src/TileType';
 import {TestPlayer} from '../../TestPlayer';
 import {Resources} from '../../../src/Resources';
 
-const MOON_OPTIONS = setCustomGameOptions({moonExpansion: true});
+const MOON_OPTIONS = TestingUtils.setCustomGameOptions({moonExpansion: true});
 
 describe('LunarMineUrbanization', () => {
   let player: TestPlayer;
@@ -59,5 +60,28 @@ describe('LunarMineUrbanization', () => {
     expect(MoonExpansion.tiles(player.game, TileType.MOON_COLONY)).eql([space]);
     expect(moonData.colonyRate).eq(1);
     expect(player.getTerraformRating()).eq(15);
+  });
+
+  it('computeVictoryPoints', () => {
+    function computeVps() {
+      const vps = player.victoryPointsBreakdown;
+      vps.moonColonies = 0;
+      vps.moonMines = 0;
+      vps.moonRoads = 0;
+      MoonExpansion.calculateVictoryPoints(player);
+      return {
+        colonies: vps.moonColonies,
+        mines: vps.moonMines,
+        roads: vps.moonRoads,
+      };
+    };
+
+    expect(computeVps()).eql({colonies: 0, mines: 0, roads: 0});
+    MoonExpansion.addTile(player, 'm02', {tileType: TileType.MOON_ROAD});
+    MoonExpansion.calculateVictoryPoints(player);
+    expect(computeVps()).eql({colonies: 0, mines: 0, roads: 1});
+    MoonExpansion.addTile(player, 'm03', {tileType: TileType.LUNAR_MINE_URBANIZATION});
+
+    expect(computeVps()).eql({colonies: 1, mines: 1, roads: 1});
   });
 });

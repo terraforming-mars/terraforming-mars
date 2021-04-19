@@ -3,12 +3,11 @@ import {ICard} from './cards/ICard';
 import {ICardFactory} from './cards/ICardFactory';
 
 const CARD_RENAMES = new Map<string, CardName>([
-  // TODO(bafolts): remove after 02/15/2021 before 03/01/2021
-  ['CEOs Favorite Project', CardName.CEOS_FAVORITE_PROJECT],
-  // TODO(bafolts): remove after 02/15/2021 before 03/01/2021
-  ['Rad-chem Factory', CardName.RAD_CHEM_FACTORY],
-  // TODO(bafolts): remove after 02/15/2021 before 03/01/2021
-  ['Titan Floater Launch-pad', CardName.TITAN_FLOATING_LAUNCHPAD],
+  // When renaming a card, add the rename here (like the example below), and add a TODO (like the example below)
+  // And remember to add a test in Deck.spec.ts.
+
+  // TODO(yournamehere): remove after 2021-04-05
+  // ['Earth Embasy', CardName.EARTH_EMBASSY],
 ]);
 
 export class Deck<T extends ICard> {

@@ -1,15 +1,16 @@
 import {Game} from '../../../src/Game';
 import {IMoonData} from '../../../src/moon/IMoonData';
 import {MoonExpansion} from '../../../src/moon/MoonExpansion';
-import {setCustomGameOptions} from '../../TestingUtils';
+import {TestingUtils} from '../../TestingUtils';
 import {SubterraneanHabitats} from '../../../src/cards/moon/SubterraneanHabitats';
 import {expect} from 'chai';
 import {CardName} from '../../../src/CardName';
 import {TheWomb} from '../../../src/cards/moon/TheWomb';
 import {TestPlayer} from '../../TestPlayer';
 import {TestPlayers} from '../../TestPlayers';
+import {MoonColonyStandardProject} from '../../../src/cards/moon/MoonColonyStandardProject';
 
-const MOON_OPTIONS = setCustomGameOptions({moonExpansion: true});
+const MOON_OPTIONS = TestingUtils.setCustomGameOptions({moonExpansion: true});
 
 describe('SubterraneanHabitats', () => {
   let game: Game;
@@ -59,8 +60,23 @@ describe('SubterraneanHabitats', () => {
     player.titanium = 1;
     expect(player.getPlayableCards().map((card) => card.name)).is.empty;
 
-    // And this one shows that with Subterranean Habitats, it doesn't need both titanium.
+    // And this one shows that with Subterranean Habitats, it needs one fewer unit of titanium.
     player.playedCards = [card];
     expect(player.getPlayableCards().map((card) => card.name)).deep.eq([CardName.THE_WOMB]);
+  });
+
+  it('applies to colony standard project', () => {
+    player.titanium = 1;
+    player.megaCredits = 1000;
+
+    const projectCard = new MoonColonyStandardProject();
+    expect(projectCard.canAct(player)).is.true;
+
+    player.titanium = 0;
+    expect(projectCard.canAct(player)).is.false;
+
+    // And this one shows that with Subterranean Habitats, titanium isn't necessary
+    player.playedCards = [card];
+    expect(projectCard.canAct(player)).is.true;
   });
 });

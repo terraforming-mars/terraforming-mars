@@ -8,7 +8,8 @@ import {Resources} from '../../../src/Resources';
 import {Reds} from '../../../src/turmoil/parties/Reds';
 import {PoliticalAgendas} from '../../../src/turmoil/PoliticalAgendas';
 import {Turmoil} from '../../../src/turmoil/Turmoil';
-import {setCustomGameOptions, TestPlayers} from '../../TestingUtils';
+import {TestingUtils} from '../../TestingUtils';
+import {TestPlayers} from '../../TestPlayers';
 
 describe('StripMine', function() {
   let card : StripMine; let player : Player; let game : Game; let turmoil: Turmoil;
@@ -17,7 +18,7 @@ describe('StripMine', function() {
     card = new StripMine();
     player = TestPlayers.BLUE.newPlayer();
     const redPlayer = TestPlayers.RED.newPlayer();
-    const gameOptions = setCustomGameOptions();
+    const gameOptions = TestingUtils.setCustomGameOptions();
 
     game = Game.newInstance('foobar', [player, redPlayer], player, gameOptions);
     turmoil = game.turmoil!;

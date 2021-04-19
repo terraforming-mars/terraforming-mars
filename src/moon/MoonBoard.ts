@@ -4,7 +4,6 @@ import {SerializedBoard} from '../boards/SerializedBoard';
 import {Player} from '../Player';
 import {SpaceBonus} from '../SpaceBonus';
 import {SpaceType} from '../SpaceType';
-import {TileType} from '../TileType';
 import {MoonSpaces} from './MoonSpaces';
 
 class Space implements ISpace {
@@ -22,7 +21,7 @@ class Space implements ISpace {
     return new Space(id, SpaceType.LAND, x, y, bonus);
   }
   public static colony(id: string) {
-    return new Space(id, SpaceType.COLONY, 0, 0, []);
+    return new Space(id, SpaceType.COLONY, -1, -1, []);
   }
 }
 
@@ -48,22 +47,17 @@ export class MoonBoard extends Board {
     return spaces;
   }
 
-  public getSpacesWithTile(tileType: TileType): Array<ISpace> {
-    return this.spaces.filter((space) => space.tile?.tileType === tileType);
-  }
-
   public static newInstance(): MoonBoard {
     const STEEL = SpaceBonus.STEEL;
     const DRAW_CARD = SpaceBonus.DRAW_CARD;
     const TITANIUM = SpaceBonus.TITANIUM;
-
 
     const b = new Builder();
     b.colony(); // Luna Trade Station
     b.row(2).land().land(STEEL, DRAW_CARD).land().mine(TITANIUM);
     b.row(1).mine(TITANIUM, TITANIUM).mine(/* Mare Imbrium */).land(STEEL).land().land();
     b.row(0).mine().land(STEEL).land(STEEL, TITANIUM).mine(/* Mare Serenatis*/).mine(TITANIUM).land(STEEL, STEEL);
-    b.row(1).land(STEEL).land().land().mine(TITANIUM).mine(TITANIUM);
+    b.row(0).land(STEEL).land().land().mine(TITANIUM).mine(TITANIUM);
     b.row(0).land().mine(TITANIUM).mine(/* Mare Nubium */).land().mine(/* Mare Nectaris */).land(STEEL);
     b.row(1).land().land(STEEL).land(STEEL).land(DRAW_CARD, DRAW_CARD).land(STEEL);
     b.row(2).land(DRAW_CARD, DRAW_CARD).mine(TITANIUM).mine(TITANIUM, TITANIUM).land();

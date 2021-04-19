@@ -1,7 +1,7 @@
 import {expect} from 'chai';
 import {JovianEmbassy} from '../../../src/cards/promo/JovianEmbassy';
 import {Game} from '../../../src/Game';
-import {TestPlayers} from '../../TestingUtils';
+import {TestPlayers} from '../../TestPlayers';
 
 describe('JovianEmbassy', function() {
   it('Should play', function() {

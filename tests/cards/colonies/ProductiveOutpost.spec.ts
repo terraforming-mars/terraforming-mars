@@ -3,7 +3,7 @@ import {ProductiveOutpost} from '../../../src/cards/colonies/ProductiveOutpost';
 import {Luna} from '../../../src/colonies/Luna';
 import {Triton} from '../../../src/colonies/Triton';
 import {Game} from '../../../src/Game';
-import {TestPlayers} from '../../TestingUtils';
+import {TestPlayers} from '../../TestPlayers';
 
 describe('ProductiveOutpost', function() {
   it('Should play', function() {

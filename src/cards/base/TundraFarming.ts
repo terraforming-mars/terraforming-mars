@@ -7,7 +7,6 @@ import {Resources} from '../../Resources';
 import {CardName} from '../../CardName';
 import {CardRequirements} from '../CardRequirements';
 import {CardRenderer} from '../render/CardRenderer';
-import {GlobalParameter} from '../../GlobalParameter';
 
 export class TundraFarming extends Card implements IProjectCard {
   constructor() {
@@ -25,14 +24,12 @@ export class TundraFarming extends Card implements IProjectCard {
             pb.plants(1).megacredits(2);
           }).plants(1);
         }),
-        description: 'Requires -6° C or warmer. Increase your Plant production 1 step and your MC production 2 steps. Gain 1 Plant.',
+        description: 'Requires -6° C or warmer. Increase your Plant production 1 step and your M€ production 2 steps. Gain 1 Plant.',
         victoryPoints: 2,
       },
     });
   }
-  public canPlay(player: Player): boolean {
-    return player.game.checkMinRequirements(player, GlobalParameter.TEMPERATURE, -6);
-  }
+
   public play(player: Player) {
     player.addProduction(Resources.PLANTS);
     player.addProduction(Resources.MEGACREDITS, 2);

@@ -1,21 +1,21 @@
 import Vue from 'vue';
-import {Color} from '../Color';
-import {BoardName} from '../boards/BoardName';
-import {CardName} from '../CardName';
+import {Color} from '../../Color';
+import {BoardName} from '../../boards/BoardName';
+import {CardName} from '../../CardName';
 import {CorporationsFilter} from './CorporationsFilter';
-import {translateTextWithParams} from '../directives/i18n';
-import {IGameData} from '../database/IDatabase';
+import {translateTextWithParams} from '../../directives/i18n';
+import {IGameData} from '../../database/IDatabase';
 import {ColoniesFilter} from './ColoniesFilter';
-import {ColonyName} from '../colonies/ColonyName';
-import {CardsFilter} from './CardsFilter';
-import {Button} from '../components/common/Button';
-import {playerColorClass} from '../utils/utils';
-import {RandomMAOptionType} from '../RandomMAOptionType';
-import {GameId} from '../Game';
-import {AgendaStyle} from '../turmoil/PoliticalAgendas';
+import {ColonyName} from '../../colonies/ColonyName';
+import {CardsFilter} from '../CardsFilter';
+import {Button} from '../common/Button';
+import {playerColorClass} from '../../utils/utils';
+import {RandomMAOptionType} from '../../RandomMAOptionType';
+import {GameId} from '../../Game';
+import {AgendaStyle} from '../../turmoil/PoliticalAgendas';
 
-import * as constants from '../constants';
-import {$t} from '../directives/i18n';
+import * as constants from '../../constants';
+import {$t} from '../../directives/i18n';
 
 export interface CreateGameModel {
     constants: typeof constants;
@@ -174,21 +174,25 @@ export const CreateGameForm = Vue.component('create-game-form', {
       const refs = this.$refs;
       const file = (refs.file as any).files[0];
       const reader = new FileReader();
-      const component = (this as any) as CreateGameModel;
+      const component = this.$data;
 
       reader.addEventListener('load', function() {
         const readerResults = reader.result;
         if (typeof(readerResults) === 'string') {
           const results = JSON.parse(readerResults);
-
-          component.playersCount = results['players'].length;
+          const players = results['players'];
+          component.playersCount = players.length;
           component.showCorporationList = results['customCorporationsList'].length > 0;
           component.showColoniesList = results['customColoniesList'].length > 0;
           component.showCardsBlackList = results['cardsBlackList'].length > 0;
 
           for (const k in results) {
-            if (['customCorporationsList', 'customColoniesList', 'cardsBlackList'].includes(k)) continue;
+            if (['customCorporationsList', 'customColoniesList', 'cardsBlackList', 'players'].includes(k)) continue;
             (component as any)[k] = results[k];
+          }
+
+          for (let i = 0; i < players.length; i++) {
+            component.players[i] = players[i];
           }
 
           Vue.nextTick(() => {
@@ -608,8 +612,7 @@ export const CreateGameForm = Vue.component('create-game-form', {
                             <input type="checkbox" name="themoon" id="themoon-checkbox" v-model="moonExpansion">
                             <label for="themoon-checkbox" class="expansion-button">
                                 <div class="create-game-expansion-icon expansion-icon-themoon"></div>
-                                <span v-i18n>The Moon</span>&nbsp;<a href="https://github.com/bafolts/terraforming-mars/wiki/The-Moon" class="tooltip" target="_blank">&#9432;</a>
-                                &nbsp;<span style="font-size: smaller;">α: alpha</span>
+                                <span v-i18n>The Moon</span>&nbsp;<span style="font-size: small;">(&beta;)</span>&nbsp;<a href="https://github.com/bafolts/terraforming-mars/wiki/The-Moon" class="tooltip" target="_blank">&#9432;</a>
                             </label>
 
                             <template v-if="moonExpansion">

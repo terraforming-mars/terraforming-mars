@@ -3,7 +3,7 @@ import {Sabotage} from '../../../src/cards/base/Sabotage';
 import {Game} from '../../../src/Game';
 import {OrOptions} from '../../../src/inputs/OrOptions';
 import {Player} from '../../../src/Player';
-import {TestPlayers} from '../../TestingUtils';
+import {TestPlayers} from '../../TestPlayers';
 
 describe('Sabotage', function() {
   let card : Sabotage; let player : Player; let player2: Player;
@@ -21,6 +21,8 @@ describe('Sabotage', function() {
     player2.megaCredits = 7;
 
     const action = card.play(player) as OrOptions;
+
+    expect(action.options).has.lengthOf(4);
 
     action.options[0].cb();
     expect(player2.titanium).to.eq(0);

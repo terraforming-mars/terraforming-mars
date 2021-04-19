@@ -44,7 +44,7 @@ export class PhysicsComplex extends Card implements IActionCard, IProjectCard, I
     }
     public action(player: Player) {
       player.energy -= 6;
-      this.resourceCount++;
+      player.addResourceTo(this, 1);
       return undefined;
     }
 }

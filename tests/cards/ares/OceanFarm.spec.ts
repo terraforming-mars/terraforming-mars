@@ -7,7 +7,7 @@ import {TileType} from '../../../src/TileType';
 import {SpaceBonus} from '../../../src/SpaceBonus';
 import {Resources} from '../../../src/Resources';
 import {SpaceType} from '../../../src/SpaceType';
-import {TestPlayers} from '../../TestingUtils';
+import {TestPlayers} from '../../TestPlayers';
 
 describe('OceanFarm', function() {
   let card : OceanFarm; let player : Player; let otherPlayer: Player; let game : Game;

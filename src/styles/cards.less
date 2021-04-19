@@ -387,7 +387,25 @@ input[type="radio"]:checked + .filterDiv::after {
     border-radius: 50%;
     box-shadow: 0 0 0 1px rgba(0,0,0,0.4);
     content: "A";
-  }
+}
+
+
+.moon-icon:after {
+  position: absolute;
+  color:#DDD;
+  border: 1px solid #222;
+  background: #999;
+  font-family: Prototype;
+  font-weight: bold;
+  font-size: 14px;
+  line-height: 17px;
+  width: 16px;
+  height:16px;
+  text-align: center;
+  border-radius: 50%;
+  box-shadow: 0 0 0 1px rgba(0,0,0,0.4);
+  content: "M";
+}
 
 .button-icon:after {
     margin-top: -9px;
@@ -2711,8 +2729,8 @@ input[type="radio"]:checked + .filterDiv::after {
 }
 
 .card-standard-project {
-    height: 140px;
-    width: 200px;
+    height: 155px;
+    width: 235px;
     .card-content-wrapper {
         .card-cost-and-tags {
             position: absolute;

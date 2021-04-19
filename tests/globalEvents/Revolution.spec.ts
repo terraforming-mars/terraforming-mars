@@ -5,7 +5,7 @@ import {Player} from '../../src/Player';
 import {Revolution} from '../../src/turmoil/globalEvents/Revolution';
 import {Kelvinists} from '../../src/turmoil/parties/Kelvinists';
 import {Turmoil} from '../../src/turmoil/Turmoil';
-import {TestPlayers} from '../TestingUtils';
+import {TestPlayers} from '../TestPlayers';
 
 describe('Revolution', function() {
   let card : Revolution; let player : Player; let player2 : Player; let game : Game; let turmoil: Turmoil;

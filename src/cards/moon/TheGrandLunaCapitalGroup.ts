@@ -8,8 +8,9 @@ import {CardRenderer} from '../render/CardRenderer';
 import {TileType} from '../../TileType';
 import {PlaceMoonColonyTile} from '../../moon/PlaceMoonColonyTile';
 import {MoonExpansion} from '../../moon/MoonExpansion';
-import {ISpace} from '../../boards/ISpace';
+import {ISpace, SpaceId} from '../../boards/ISpace';
 import {Resources} from '../../Resources';
+import {CardRenderDynamicVictoryPoints} from '../render/CardRenderDynamicVictoryPoints';
 
 export class TheGrandLunaCapitalGroup implements CorporationCard {
   public startingMegaCredits = 32;
@@ -19,17 +20,21 @@ export class TheGrandLunaCapitalGroup implements CorporationCard {
   public initialActionText = 'Place a colony tile';
 
   public readonly metadata: CardMetadata = {
-    description: 'You start with 32 MC and 1 titanium resource. As your first action, place a colony tile on the Moon and raise the Colony Rate 1 step.',
+    description: {
+      text: 'You start with 32 MC and 1 titanium. As your first action, place a colony tile on the Moon and raise the Colony Rate 1 step.',
+      align: 'left',
+    },
     cardNumber: 'MC7',
     renderData: CardRenderer.builder((b) => {
       b.megacredits(32).titanium(1).moonColony().br;
       b.effect('When you place a colony tile, gain 2 MC for each adjacent colony tile.', (eb) => {
-        eb.tile(TileType.MOON_COLONY, false).tile(TileType.MOON_COLONY, false).asterix()
+        eb.moonColony({size: 'small'}).any.moonColony({size: 'small'}).asterix()
           .startEffect
-          .megacredits(2).slash().tile(TileType.MOON_COLONY, false);
+          .megacredits(2).slash().moonColony({size: 'small'}).any;
       }).br,
-      b.text('1 VP for each colony tile adjacent to your colony tiles.').br;
+      b.vpText('1 VP for each colony tile adjacent to your colony tiles.').br;
     }),
+    victoryPoints: CardRenderDynamicVictoryPoints.moonColonyTile(1),
   };
 
   public play(player: Player) {
@@ -46,20 +51,26 @@ export class TheGrandLunaCapitalGroup implements CorporationCard {
     if (cardOwner.id !== activePlayer.id) {
       return;
     }
-    if (space.tile?.tileType !== TileType.MOON_COLONY) {
+    if (!MoonExpansion.spaceHasType(space, TileType.MOON_COLONY)) {
       return;
     }
     const adjacentSpaces = MoonExpansion.moonData(cardOwner.game).moon.getAdjacentSpaces(space);
-    const filtered = adjacentSpaces.filter((space) => space.tile?.tileType === TileType.MOON_COLONY);
+    const filtered = adjacentSpaces.filter((space) => MoonExpansion.spaceHasType(space, TileType.MOON_COLONY));
     cardOwner.setResource(Resources.MEGACREDITS, filtered.length * 2, cardOwner.game);
   }
 
   public getVictoryPoints(player: Player) {
     const moon = MoonExpansion.moonData(player.game).moon;
-    const colonyTiles = MoonExpansion.tiles(player.game, TileType.MOON_COLONY, true);
-    const tilesAdjacentToPlayer = colonyTiles.filter((tile) =>
-      moon.getAdjacentSpaces(tile).some((neighbor) => neighbor.player?.id === player.id));
+    const neighboringColonyTiles: Set<SpaceId> = new Set();
+    const colonyTiles = MoonExpansion.tiles(player.game, TileType.MOON_COLONY, {ownedBy: player});
+    colonyTiles.forEach((tile) =>
+      moon.getAdjacentSpaces(tile).forEach((neighbor) => {
+        if (MoonExpansion.spaceHasType(neighbor, TileType.MOON_COLONY)) {
+          neighboringColonyTiles.add(neighbor.id);
+        }
+      }),
+    );
 
-    return tilesAdjacentToPlayer.length;
+    return neighboringColonyTiles.size;
   }
 }

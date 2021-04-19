@@ -36,7 +36,7 @@ export class Comet extends Card implements IProjectCard {
     const totalSteps = temperatureStep + oceanStep;
 
     if (PartyHooks.shouldApplyPolicy(player.game, PartyName.REDS)) {
-      return player.canAfford(player.getCardCost(this) + REDS_RULING_POLICY_COST * totalSteps, false, true);
+      return player.canAfford(player.getCardCost(this) + REDS_RULING_POLICY_COST * totalSteps, {titanium: true});
     }
 
     return true;

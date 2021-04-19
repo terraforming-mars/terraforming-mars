@@ -20,7 +20,7 @@ export class Potatoes extends Card implements IProjectCard {
         renderData: CardRenderer.builder((b) => {
           b.minus().plants(2).nbsp.production((pb) => pb.megacredits(2));
         }),
-        description: 'Lose 2 plants. Increase your MC production 2 steps.',
+        description: 'Lose 2 plants. Increase your M€ production 2 steps.',
       },
     });
   }

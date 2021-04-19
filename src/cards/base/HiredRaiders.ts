@@ -23,7 +23,7 @@ export class HiredRaiders extends Card implements IProjectCard {
           b.or().br;
           b.text('steal', CardRenderItemSize.MEDIUM, true).megacredits(3).any;
         }),
-        description: 'Steal up to 2 steel, or 3 MC from any player.',
+        description: 'Steal up to 2 steel, or 3 M€ from any player.',
       },
     });
   }
@@ -35,7 +35,7 @@ export class HiredRaiders extends Card implements IProjectCard {
           player.steel += 2;
           return undefined;
         }),
-        new SelectOption('Steal 3 mega credit', 'Steal MC', () => {
+        new SelectOption('Steal 3 mega credit', 'Steal M€', () => {
           player.megaCredits += 3;
           return undefined;
         }),
@@ -59,7 +59,7 @@ export class HiredRaiders extends Card implements IProjectCard {
 
       if (target.megaCredits > 0) {
         const amountStolen = Math.min(3, target.megaCredits);
-        const optionTitle = 'Steal ' + amountStolen + ' MC from ' + target.name;
+        const optionTitle = 'Steal ' + amountStolen + ' M€ from ' + target.name;
 
         availableActions.options.push(new SelectOption(optionTitle, 'Confirm', () => {
           player.megaCredits += amountStolen;

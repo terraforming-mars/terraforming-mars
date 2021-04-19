@@ -23,7 +23,7 @@ export class MarketingExperts extends Card implements IProjectCard {
           }).br;
           b.production((pb) => pb.megacredits(1));
         }),
-        description: 'Increase your MC production 1 step.',
+        description: 'Increase your M€ production 1 step.',
       },
     });
   }

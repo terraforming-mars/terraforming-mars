@@ -17,7 +17,7 @@ describe('CloudSeeding', () => {
     game = Game.newInstance('foobar', [player, player2], player);
   });
 
-  it('Cannot play if cannot reduce MC production', () => {
+  it('Cannot play if cannot reduce M€ production', () => {
     TestingUtils.maxOutOceans(player, 3);
     player.addProduction(Resources.MEGACREDITS, -5);
     expect(card.canPlay(player)).is.not.true;

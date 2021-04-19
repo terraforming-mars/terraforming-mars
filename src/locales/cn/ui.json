@@ -72,7 +72,7 @@
     "Landlord": "地产大亨",
     "Owning the most tiles in play": "拥有最多建筑物版块",
     "Banker": "金融巨头",
-    "Having the highest MC production": "拥有最高的MC产能",
+    "Having the highest M€ production": "拥有最高的MC产能",
     "Scientist": "科技巨擘",
     "Having the most science tags in play": "拥有最多科学标志",
     "Thermalist": "热能魁首",
@@ -144,7 +144,7 @@
     "Sell patents": "贩卖专利",
     "Fund an award": "选择一项奖项进行资助",
     "Take your first action": "行动阶段,执行一个合法行动",
-    "Take your second action": "行动阶段,执行一个合法行动",
+    "Take your next action": "行动阶段,执行一个合法行动",
     "Undo last action": "撤回操作",
     "End Turn": "结束本轮操作",
     "Perform an action from a played card": "执行一个已打出卡牌上的行动",
@@ -241,7 +241,7 @@
     "(Spend 17 MC to place a colony.)":"花费17MC来放置1个殖民地",
     "(Spend 18 MC to place an ocean tile.)":"花费18MC来放置一块海洋板块",
     "(Spend 23 MC to place a greenery tile and raise oxygen 1 step.)":"花费23MC来放置一块绿化板块并增加一格氧气",
-    "(Spend 25 MC to place a city tile and increase your MC production 1 step.)":"花费25MC来放置一个城市板块并增加你的金钱产量1格",
+    "(Spend 25 MC to place a city tile and increase your M€ production 1 step.)":"花费25MC来放置一个城市板块并增加你的金钱产量1格",
 
 
 

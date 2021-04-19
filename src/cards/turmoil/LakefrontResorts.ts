@@ -28,7 +28,7 @@ export class LakefrontResorts extends Card implements CorporationCard {
           b.megacredits(54);
           b.corpBox('effect', (ce) => {
             ce.vSpace(CardRenderItemSize.MEDIUM);
-            ce.effect('When any ocean tile is placed, increase your MC production 1 step. Your bonus for placing adjacent to oceans is 3MC instead of 2MC.', (eb) => {
+            ce.effect('When any ocean tile is placed, increase your M€ production 1 step. Your bonus for placing adjacent to oceans is 3MC instead of 2MC.', (eb) => {
               eb.oceans(1, CardRenderItemSize.SMALL).any.colon().production((pb) => pb.megacredits(1));
               eb.emptyTile('normal', CardRenderItemSize.SMALL).oceans(1, CardRenderItemSize.SMALL);
               eb.startEffect.megacredits(3);

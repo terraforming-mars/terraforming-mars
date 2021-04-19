@@ -1,13 +1,13 @@
 {
   "Cheung Shing MARS":"昌盛火星",
-  "You start with 3 MC production and 44 MC.":"起始获得44MC,提升MC产能3级",
+  "You start with 3 M€ production and 44 MC.":"起始获得44MC,提升MC产能3级",
   "Effect: When you play a building tag, you pay 2 MC less for it.":"效果:当你打出带有建筑标志的牌时,你可以少支付2MC",
-    
+
   "Point Luna":"月点",
   "Effect: When you play an Earth tag, including this, draw a card.":"效果：你打出的牌上每有一个地球符号，包括此卡，抽一张牌。",
   "You start with 1 titanium production and 38 MC.":"你起始拥有1点钛产量和38元。",
-    
-  "Robinson Industries":"罗宾逊实业", 
+
+  "Robinson Industries":"罗宾逊实业",
   "You start with 47 MC.":"起始获得47MC",
   "Action: Spend 4 MC to increase (one of) your LOWEST production 1 step.":"行动:花费4MC,提升你1项产能最低的产能1级",
 
@@ -18,44 +18,44 @@
   "Vitor":"维特尔",
   "You start with 45 MC. As your first action, fund an award for free.":"起始获得45MC。作为你的起始行动,你可以免费资助一个奖项",
   "Effect: When you play a card with a NON-NEGATIVE VP icon, including this, gain 3MC.":"效果:当你打出一张有非负分图标的牌(包括本牌)时,获得3MC",
-    
-    
-    
-    
-    
+
+
+
+
+
     "max":"最大",
     "Global requirements":"全球需求",
-    
+
     "House Printing":"房屋打印",
     "Increase your steel production 1 step.":"增加你的钢铁产量1步。",
-    
+
     "Lava Tube Settlement":"熔岩管殖民",
-    "Decrease your Energy production 1 step and increase your MC production 2 steps. Place a City Tile on a VOLCANIC AREA regardless of adjacent cities.":"减少1点电力产能，提升2点金钱产能。放置一个城市版块到火山区，忽视相邻规则",
-    
+    "Decrease your Energy production 1 step and increase your M€ production 2 steps. Place a City Tile on a VOLCANIC AREA regardless of adjacent cities.":"减少1点电力产能，提升2点金钱产能。放置一个城市版块到火山区，忽视相邻规则",
+
     "Martian Survey":"调查火星",
     "Oxygen must be 4% or lower. Draw two cards.":"氧气浓度≤4%.抽两张卡",
-    
+
     "Psychrophiles":"嗜冷者",
     "Action: Add 1 microbe to this card.":"行动：在这张卡上添加1个微生物。",
     "Effect: When paying for a plant card, microbes here may be used as 2 MC each.":"效果：当你打出植物标志的卡牌是，这张卡上的每个微生物资源可以作为2MC支付",
     "Temperature must be -20 C or lower.":"温度必须 ≤ -20℃",
-    
+
     "Research Coordination":"协调研究",
     "After being played, when you perform an action, the wild tag counts as any tag of your choice.":"打出来之后，当你执行行动时，问号可以视为任意标志",
-    
+
     "SF Memorial":"SF纪念馆",
     "Draw 1 card.":"抽取一张牌",
-    
+
     "Space Hotels":"太空酒店",
-    "Requires 2 Earth tags. Increase MC production 4 steps.":"需要两个地球图标.增加4点MC产能",
-    
-  
-   
-  
-  
-    
+    "Requires 2 Earth tags. Increase M€ production 4 steps.":"需要两个地球图标.增加4点MC产能",
+
+
+
+
+
+
     "Allied Banks": "联合银行",
-    "Increase your MC production 4 steps. Gain 3 MC.": "提升4格MC产量,获得3MC",
+    "Increase your M€ production 4 steps. Gain 3 MC.": "提升4格MC产量,获得3MC",
 
     "Aquifer Turbines": "含水层涡轮机",
     "Place an Ocean tile. Increase your energy production 2 steps. Pay 3 MC.": "放置一个海洋。提升你的电力产能2格,支付3MC",
@@ -67,13 +67,13 @@
     "Increase your plant production 1 step. Draw 3 cards.": "提升你的植物产能1格,抽3张牌",
 
     "Biosphere Support": "生物圈支援载体",
-    "Increase your plant production 2 steps. Decrease your MC production 1 step.": "提升你的植物产能2格,降低你的MC产能1格",
+    "Increase your plant production 2 steps. Decrease your M€ production 1 step.": "提升你的植物产能2格,降低你的MC产能1格",
 
     "Business Empire": "商业帝国",
-    "Increase your MC production 6 steps. Pay 6 MC.": "提升你的MC产能6格,支付6MC",
+    "Increase your M€ production 6 steps. Pay 6 MC.": "提升你的MC产能6格,支付6MC",
 
     "Dome Farming": "圆顶农业",
-    "Increase your MC production 2 steps and plant production 1 step.": "提升你的MC产量2格和植物产量1格",
+    "Increase your M€ production 2 steps and plant production 1 step.": "提升你的MC产量2格和植物产量1格",
 
     "Donation": "捐赠",
     "Gain 21 MC.": "获得 21 MC.",
@@ -103,7 +103,7 @@
     "Increase your titanium production 1 step. Draw a card.": "提升钛合金产量1级,抽1张卡",
 
     "Loan": "贷款",
-    "Gain 30 MC. Decrease your MC production 2 steps.": "获得30MC,降低MC产能2格",
+    "Gain 30 MC. Decrease your M€ production 2 steps.": "获得30MC,降低MC产能2格",
 
     "Martian Industries": "火星工业",
     "Increase your energy and steel production 1 step. Gain 6 MC.": "提升你的电力和钢铁产能1格,获得6MC",
@@ -136,7 +136,7 @@
     "Increase your energy production 3 steps.": "提升你的电力产能3格",
 
     "Research Network": "研究网络",
-    "Increase your MC production 1 step. Draw 3 cards. After being played, when you perform an action, the wild tag counts as any tag of your choice.": "提升你的MC产量1格,抽3张牌",
+    "Increase your M€ production 1 step. Draw 3 cards. After being played, when you perform an action, the wild tag counts as any tag of your choice.": "提升你的MC产量1格,抽3张牌",
 
     "Self-Sufficient Settlement": "自给自足的据点",
     "Increase your money production 2 steps. Place a City tile.": "提升你的MC产量2级,放置1个城市版块",

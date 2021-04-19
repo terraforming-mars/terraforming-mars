@@ -56,7 +56,7 @@ export class UtopiaInvest extends Card implements IActionCard, CorporationCard {
 
     const options: Array<SelectOption> = [];
 
-    const reduceMegacredits = new SelectOption('Decrease MC production', 'Decrease production', () => {
+    const reduceMegacredits = new SelectOption('Decrease M€ production', 'Decrease production', () => {
       player.addProduction(Resources.MEGACREDITS, -1);
       player.megaCredits += 4;
       this.log(player, 'megacredit');

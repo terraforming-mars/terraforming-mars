@@ -30,7 +30,7 @@ export class MartianMediaCenter extends Card implements IProjectCard {
             pb.megacredits(2);
           });
         }),
-        description: 'Requires that Mars First is ruling or that you have 2 delegates there. Increase your MC production 2 steps.',
+        description: 'Requires that Mars First is ruling or that you have 2 delegates there. Increase your M€ production 2 steps.',
       },
     });
   }

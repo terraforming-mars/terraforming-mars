@@ -23,7 +23,7 @@ export class AncientShipyards extends MoonCard {
         description: 'Spend 3 titanium. -1 VP for every 2 resources here.',
         cardNumber: 'M19',
         renderData: CardRenderer.builder((b) => {
-          b.action('Steal 8 MC from any player and add a resource cube here.', (eb) => {
+          b.action('Steal 8 M€ from any player and add a resource cube here.', (eb) => {
             eb.empty().startAction.text('Steal').nbsp.megacredits(8).any.colon().resourceCube(1);
           }).br.br;
           b.minus().titanium(3);

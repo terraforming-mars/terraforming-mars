@@ -33,7 +33,7 @@ export class CometForVenus extends Card {
   public canPlay(player: Player): boolean {
     const venusMaxed = player.game.getVenusScaleLevel() === MAX_VENUS_SCALE;
     if (PartyHooks.shouldApplyPolicy(player.game, PartyName.REDS) && !venusMaxed) {
-      return player.canAfford(player.getCardCost(this) + REDS_RULING_POLICY_COST, false, true);
+      return player.canAfford(player.getCardCost(this) + REDS_RULING_POLICY_COST, {titanium: true});
     }
 
     return true;
@@ -51,7 +51,7 @@ export class CometForVenus extends Card {
       return new OrOptions(
         new SelectPlayer(
           Array.from(venusTagPlayers),
-          'Select player to remove up to 4 mega credits from',
+          'Select player to remove up to 4 M€ from',
           'Remove MC',
           (selectedPlayer: Player) => {
             selectedPlayer.setResource(Resources.MEGACREDITS, -4, player.game, player);
@@ -60,7 +60,7 @@ export class CometForVenus extends Card {
           },
         ),
         new SelectOption(
-          'Do not remove mega credits',
+          'Do not remove M€',
           'Confirm',
           () => {
             player.game.increaseVenusScaleLevel(player, 1);

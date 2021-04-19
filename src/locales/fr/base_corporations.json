@@ -1,6 +1,6 @@
 {
     "CORPORATION": "CORPORATION",
-    
+
     "Beginner": "Jeune Corporation",
     "You start with 42 MC. Instead of choosing from 10 cards during setup, you get 10 cards for free.": "Vous commencez avec 42 M€. AU LIEU DE PARTICIPER À LA PREMIÈRE PHASE DE RECHERCHE, PIOCHEZ GRATUITEMENT 10 CARTES.",
 
@@ -37,7 +37,7 @@
     "REPUBLIC": "DE THARSIS",
     "Tharsis Republic": "République de Tharsis",
     "You start with 40 MC. As your first action in the game,place a city tile.": "Vous commencez avec 40 M€. Comme première action de la partie, placez une tuile Cité.",
-    "Effect: When any city tile is placed ON MARS, increase your MC production 1 step. When you place a city tile, gain 3 MC.": "Effet: Lorsqu'une Cité est placée SUR MARS, augmentez votre production de M€ de 1. Lorsque vous placez une tuile Cité, gagnez 3 M€.",
+    "Effect: When any city tile is placed ON MARS, increase your M€ production 1 step. When you place a city tile, gain 3 MC.": "Effet: Lorsqu'une Cité est placée SUR MARS, augmentez votre production de M€ de 1. Lorsque vous placez une tuile Cité, gagnez 3 M€.",
 
     "THORGATE": "THORGATE",
     "Thorgate": "Thorgate",
@@ -64,5 +64,5 @@
     "SYSTEMS": "SYSTEMS",
     "Saturn Systems": "Saturn Systems",
     "You start with 1 titanium production and 42 MC.": "Vous commencez avec une production de titane de 1 et 42 M€.",
-    "Effect: Each time any Jovian tag is put into play, including this, increase your MC production 1 step.": "Effet: Chaque fois qu'un badge Jovien entre en jeu, y compris celui-ci, augmentez votre production de M€ de 1."
+    "Effect: Each time any Jovian tag is put into play, including this, increase your M€ production 1 step.": "Effet: Chaque fois qu'un badge Jovien entre en jeu, y compris celui-ci, augmentez votre production de M€ de 1."
 }

@@ -24,7 +24,7 @@ export class SpaceHotels extends Card implements IProjectCard {
             pb.megacredits(4);
           });
         }),
-        description: 'Requires 2 Earth tags. Increase MC production 4 steps.',
+        description: 'Requires 2 Earth tags. Increase M€ production 4 steps.',
       },
     });
   }

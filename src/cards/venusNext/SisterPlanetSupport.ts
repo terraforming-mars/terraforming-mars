@@ -21,7 +21,7 @@ export class SisterPlanetSupport extends Card {
         renderData: CardRenderer.builder((b) => {
           b.production((pb) => pb.megacredits(3));
         }),
-        description: 'Requires Venus and Earth tags. Increase your MC production 3 steps.',
+        description: 'Requires Venus and Earth tags. Increase your M€ production 3 steps.',
       },
     });
   };

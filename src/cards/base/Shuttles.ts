@@ -30,7 +30,7 @@ export class Shuttles extends Card implements IProjectCard {
           });
         }),
         description: {
-          text: 'Requires 5% oxygen. Decrease your Energy production 1 step and increase your MC production 2 steps.',
+          text: 'Requires 5% oxygen. Decrease your Energy production 1 step and increase your M€ production 2 steps.',
           align: 'left',
         },
         victoryPoints: 1,

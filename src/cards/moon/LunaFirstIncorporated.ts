@@ -26,7 +26,7 @@ export class LunaFirstIncorporated implements CorporationCard {
     cardNumber: '',
     renderData: CardRenderer.builder((b) => {
       b.megacredits(40).steel(2).titanium(2).br;
-      b.effect('When you raise any Moon Rate, increase your MC production 1 step per step.', (eb) => {
+      b.effect('When you raise any Moon Rate, increase your M€ production 1 step per step.', (eb) => {
         eb.moonColonyRate({size: Size.SMALL}).slash()
           .moonMiningRate({size: Size.SMALL}).slash()
           .moonLogisticsRate({size: Size.SMALL})

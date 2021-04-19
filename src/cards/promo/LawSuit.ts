@@ -23,7 +23,7 @@ export class LawSuit extends Card implements IProjectCard {
         renderData: CardRenderer.builder((b) => {
           b.text('steal', Size.SMALL, true).megacredits(3).any.asterix();
         }),
-        description: 'Steal 3 MC from a player that REMOVED YOUR RESOURCES OR DECREASED YOUR PRODUCTION this generation. Place this card face down in THAT PLAYER\'S EVENT PILE.',
+        description: 'Steal 3 M€ from a player that REMOVED YOUR RESOURCES OR DECREASED YOUR PRODUCTION this generation. Place this card face down in THAT PLAYER\'S EVENT PILE.',
         victoryPoints: CardRenderDynamicVictoryPoints.any(-1),
       },
     });
@@ -34,7 +34,7 @@ export class LawSuit extends Card implements IProjectCard {
   }
 
   public play(player: Player) {
-    return new SelectPlayer(player.game.getPlayersById(player.removingPlayers), 'Select player to sue (steal 3 MC from)', 'Steal MC', (suedPlayer: Player) => {
+    return new SelectPlayer(player.game.getPlayersById(player.removingPlayers), 'Select player to sue (steal 3 M€ from)', 'Steal M€', (suedPlayer: Player) => {
       player.setResource(Resources.MEGACREDITS, Math.min(3, suedPlayer.getResource(Resources.MEGACREDITS)));
       suedPlayer.setResource(Resources.MEGACREDITS, -3, player.game, player);
       suedPlayer.playedCards.push(this);

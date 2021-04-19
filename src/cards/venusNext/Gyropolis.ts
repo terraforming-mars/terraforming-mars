@@ -25,7 +25,7 @@ export class Gyropolis extends Card {
             pb.plus().megacredits(1).slash().earth().played.br;
           }).nbsp.city();
         }),
-        description: 'Decrease your energy production 2 steps. Increase your MC production 1 step for each Venus and Earth tag you have. Place a City tile.',
+        description: 'Decrease your energy production 2 steps. Increase your M€ production 1 step for each Venus and Earth tag you have. Place a City tile.',
       },
     });
   };

@@ -1,7 +1,7 @@
 {
     "Buffer Gas": "Depósito de Gás",
     "(Spend 16 MC to increase your TR 1 step. Solo games only.)": "Gaste 16 M$ para aumentar 1 IT. Apenas en modo solo.",
-    "(Spend 25 MC to place a city tile and increase your MC production 1 step.)":"Gaste 25 M$ para colocar um tile cidade e aumentar sua produção de M$ em 1.",
+    "(Spend 25 MC to place a city tile and increase your M€ production 1 step.)":"Gaste 25 M$ para colocar um tile cidade e aumentar sua produção de M$ em 1.",
     "(Spend 17 MC to place a colony.)":"Gaste 17 M$ para colocar um colônia.",
     "(Spend 23 MC to place a greenery tile and raise oxygen 1 step.)":"Gaste 23 M$ para colocar um tile de vegetacão.",
     "(Spend 11 MC to increase your Energy production 1 step.)": "Gaste 11 M$ para aumentar a produção de energia 1 nível.",
@@ -17,7 +17,7 @@
 
 
     "Build Moon Colony": "Construir Colônia Lunar",
-    "(Spend 22 MC and 1 titanium to place a colony on the moon and raise your MC production 1 step.)": "Gaste 22 M€ e 1 de titânio para colocar uma colônia na Lua e aumentar sua produção de M€ 1 nível.",
+    "(Spend 22 MC and 1 titanium to place a colony on the moon and raise your M€ production 1 step.)": "Gaste 22 M€ e 1 de titânio para colocar uma colônia na Lua e aumentar sua produção de M€ 1 nível.",
     "Build Moon Mine": "Construir Mina Lunar",
     "(Spend 20 MC and 1 titanium to place a mine on the moon and raise steel production 1 step.)": "Gaste 20 M€ e 1 de titânio para colocar uma mina na Lua e aumentar sua produção de aço 1 nível.",
     "Build Moon Road": "Construir Carretera Lunar",

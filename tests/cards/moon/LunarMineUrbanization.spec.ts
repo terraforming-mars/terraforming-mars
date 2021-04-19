@@ -61,4 +61,27 @@ describe('LunarMineUrbanization', () => {
     expect(moonData.colonyRate).eq(1);
     expect(player.getTerraformRating()).eq(15);
   });
+
+  it('computeVictoryPoints', () => {
+    function computeVps() {
+      const vps = player.victoryPointsBreakdown;
+      vps.moonColonies = 0;
+      vps.moonMines = 0;
+      vps.moonRoads = 0;
+      MoonExpansion.calculateVictoryPoints(player);
+      return {
+        colonies: vps.moonColonies,
+        mines: vps.moonMines,
+        roads: vps.moonRoads,
+      };
+    };
+
+    expect(computeVps()).eql({colonies: 0, mines: 0, roads: 0});
+    MoonExpansion.addTile(player, 'm02', {tileType: TileType.MOON_ROAD});
+    MoonExpansion.calculateVictoryPoints(player);
+    expect(computeVps()).eql({colonies: 0, mines: 0, roads: 1});
+    MoonExpansion.addTile(player, 'm03', {tileType: TileType.LUNAR_MINE_URBANIZATION});
+
+    expect(computeVps()).eql({colonies: 1, mines: 1, roads: 1});
+  });
 });

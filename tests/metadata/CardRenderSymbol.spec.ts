@@ -1,10 +1,10 @@
 import {CardRenderSymbol} from '../../src/cards/render/CardRenderSymbol';
-import {CardRenderItemSize} from '../../src/cards/render/CardRenderItemSize';
+import {Size} from '../../src/cards/render/Size';
 import {CardRenderSymbolType} from '../../src/cards/render/CardRenderSymbolType';
 import {expect} from 'chai';
 
-const sizeM = CardRenderItemSize.MEDIUM;
-const sizeS = CardRenderItemSize.SMALL;
+const sizeM = Size.MEDIUM;
+const sizeS = Size.SMALL;
 
 describe('CardRenderSymbol', function() {
   it('asterix: success', function() {

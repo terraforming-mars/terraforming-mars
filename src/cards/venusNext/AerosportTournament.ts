@@ -6,7 +6,7 @@ import {Resources} from '../../Resources';
 import {LogHelper} from '../../LogHelper';
 import {CardRequirements} from '../CardRequirements';
 import {CardRenderer} from '../render/CardRenderer';
-import {CardRenderItemSize} from '../render/CardRenderItemSize';
+import {Size} from '../render/Size';
 import {Card} from '../Card';
 
 
@@ -22,7 +22,7 @@ export class AerosportTournament extends Card {
         cardNumber: '214',
         description: 'Requires that you have 5 Floaters. Gain 1 MC per each City tile in play.',
         renderData: CardRenderer.builder((b) => {
-          b.megacredits(1).slash().city(CardRenderItemSize.SMALL).any;
+          b.megacredits(1).slash().city(Size.SMALL).any;
         }),
         victoryPoints: 1,
       },

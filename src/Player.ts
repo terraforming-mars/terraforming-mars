@@ -4,7 +4,6 @@ import {AndOptions} from './inputs/AndOptions';
 import {Aridor} from './cards/colonies/Aridor';
 import {Board} from './boards/Board';
 import {CardFinder} from './CardFinder';
-import {CardModel} from './models/CardModel';
 import {CardName} from './CardName';
 import {CardType} from './cards/CardType';
 import {ColonyModel} from './models/ColonyModel';
@@ -14,7 +13,7 @@ import {CorporationCard} from './cards/corporation/CorporationCard';
 import {Game} from './Game';
 import {HowToPay} from './inputs/HowToPay';
 import {IAward} from './awards/IAward';
-import {ICard} from './cards/ICard';
+import {ICard, IResourceCard} from './cards/ICard';
 import {Colony} from './colonies/Colony';
 import {ISerializable} from './ISerializable';
 import {IMilestone} from './milestones/IMilestone';
@@ -44,7 +43,7 @@ import {SelectHowToPayForProjectCard} from './inputs/SelectHowToPayForProjectCar
 import {SelectOption} from './inputs/SelectOption';
 import {SelectPlayer} from './inputs/SelectPlayer';
 import {SelectSpace} from './inputs/SelectSpace';
-import {SelfReplicatingRobots} from './cards/promo/SelfReplicatingRobots';
+import {RobotCard, SelfReplicatingRobots} from './cards/promo/SelfReplicatingRobots';
 import {SerializedCard} from './SerializedCard';
 import {SerializedPlayer} from './SerializedPlayer';
 import {SpaceType} from './SpaceType';
@@ -210,6 +209,10 @@ export class Player implements ISerializable<SerializedPlayer> {
     if (this.titaniumValue > constants.DEFAULT_TITANIUM_VALUE) {
       this.titaniumValue--;
     }
+  }
+
+  public getSelfReplicatingRobotsTargetCards(): Array<RobotCard> {
+    return (this.playedCards.find((card) => card instanceof SelfReplicatingRobots) as (SelfReplicatingRobots | undefined))?.targetCards ?? [];
   }
 
   public getSteelValue(): number {
@@ -644,7 +647,7 @@ export class Player implements ISerializable<SerializedPlayer> {
       }
     }
   }
-  public addResourceTo(card: ICard, count: number = 1): void {
+  public addResourceTo(card: IResourceCard, count: number = 1): void {
     if (card.resourceCount !== undefined) {
       card.resourceCount += count;
     }
@@ -909,8 +912,9 @@ export class Player implements ISerializable<SerializedPlayer> {
       }
       const mappedCards: Array<ICard> = [];
       for (const cardName of input[0]) {
-        mappedCards.push(PlayerInput.getCard(pi.cards, cardName).card);
-        if (pi.enabled?.[pi.cards.findIndex((card) => card.name === cardName)] === false) {
+        const cardIndex = PlayerInput.getCard(pi.cards, cardName);
+        mappedCards.push(cardIndex.card);
+        if (pi.enabled?.[cardIndex.idx] === false) {
           throw new Error('Selected unavailable card');
         }
       }
@@ -1189,30 +1193,6 @@ export class Player implements ISerializable<SerializedPlayer> {
 
     const action = DrawCards.choose(this, dealtCards, {paying: true});
     this.setWaitingFor(action, () => this.game.playerIsFinishedWithResearchPhase(this));
-  }
-
-  public getSelfReplicatingRobotsCards() : Array<CardModel> {
-    const card = this.playedCards.find((card) => card.name === CardName.SELF_REPLICATING_ROBOTS);
-    const cards : Array<CardModel> = [];
-    if (card instanceof SelfReplicatingRobots) {
-      if (card.targetCards.length > 0) {
-        for (const targetCard of card.targetCards) {
-          cards.push(
-            {
-              resources: targetCard.resourceCount,
-              resourceType: undefined, // Card on SRR cannot gather its own resources (if any)
-              name: targetCard.card.name,
-              calculatedCost: this.getCardCost(targetCard.card),
-              cardType: card.cardType,
-              isDisabled: false,
-              reserveUnits: Units.EMPTY, // I wonder if this could just be removed.
-            },
-          );
-        }
-        return cards;
-      }
-    }
-    return cards;
   }
 
   public getCardCost(card: IProjectCard): number {

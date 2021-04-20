@@ -8,7 +8,7 @@ import {Turmoil} from '../Turmoil';
 
 export class InterplanetaryTrade implements IGlobalEvent {
     public name = GlobalEventName.INTERPLANETARY_TRADE;
-    public description = 'Gain 2 MC for each space tag (max 5) and influence.';
+    public description = 'Gain 2 M€ for each space tag (max 5) and influence.';
     public revealedDelegate = PartyName.UNITY;
     public currentDelegate = PartyName.UNITY;
     public resolve(game: Game, turmoil: Turmoil) {

@@ -39,11 +39,11 @@
     "Requires 2 Science tags. 1 VP for every 3rd Microbe on this card": "Nécessite 2 badges Science. 1 PV par groupe de 3 microbes sur cette carte.",
 
     "Floating Habs": "Habitats Flottans",
-    "Action: spend 2 MC to add 1 Floater to ANY card": "Action: Dépensez 2 M€ pour ajouter 1 flotteur sur N'IMPORTE QUELLE carte.",
+    "Action: spend 2 M€ to add 1 Floater to ANY card": "Action: Dépensez 2 M€ pour ajouter 1 flotteur sur N'IMPORTE QUELLE carte.",
     "Requires 2 Science tags. 1 VP for every 2nd Floater on this card": "Nécessite 2 badges Science. 1 PV par groupe de 2 flotteurs sur cette carte.",
 
     "Forced Precipitation": "Précipitations Induites",
-    "Action: Spend 2 MC to add 1 Floater to this card, OR spend 2 Floaters here to increase Venus 1 step": "Action: Dépensez 2 M€ pour ajouter 1 flotteur sur cette carte, ou retirez 2 flotteurs de cette carte pour augmenter Vénus de 1.",
+    "Action: Spend 2 M€ to add 1 Floater to this card, OR spend 2 Floaters here to increase Venus 1 step": "Action: Dépensez 2 M€ pour ajouter 1 flotteur sur cette carte, ou retirez 2 flotteurs de cette carte pour augmenter Vénus de 1.",
 
     "Freyja Biodomes": "Biodôme de Feyja",
     "Requires 10% Venus. Add 2 Microbes or 2 Animals to another Venus card. Decrease your energy production 1 step and increase your M€ production 2 steps": "Nécessite que Vénus ait atteint 10%. Ajoutez 2 microbes ou 2 animaux sur UNE AUTRE CARTE VENUS. Diminuez votre production d'énergie de 1 et augmentez votre production de M€ de 2.",
@@ -96,7 +96,7 @@
     "Raise Venus 2 steps. Increase your heat production 2 steps": "Augmentez Vénus de 2. Augmentez votre production de chaleur de 2.",
 
     "Rotator Impacts": "Impacts Rotatifs",
-    "Action: spend 6 MC to add an asteroid resource to this card (TITANIUM MAY BE USED), or spend 1 resource from this card to increase Venus 1 step": "Action: Dépensez 6M€ pour ajouter un astéroïde sur cette carte (VOUS POUVEZ UTILISER DU TITANT) ou retirez 1 ressource de cette carte pour augmenter Vénus de 1.",
+    "Action: spend 6 M€ to add an asteroid resource to this card (TITANIUM MAY BE USED), or spend 1 resource from this card to increase Venus 1 step": "Action: Dépensez 6M€ pour ajouter un astéroïde sur cette carte (VOUS POUVEZ UTILISER DU TITANT) ou retirez 1 ressource de cette carte pour augmenter Vénus de 1.",
     "Venus must be 14% or lower": "Vénus doit être à 14% ou moins.",
 
     "Sister Planet Support": "Soutien de la Planète Soeur",
@@ -147,7 +147,7 @@
     "Raise Venus 1 step. Increase your Plant production 1 step. Add 2 Microbes to ANOTHER card.": "Augmentez Vénus de 1. Augmentez votre production de plante de 1. Ajoutez 2 microbes sur une AUTRE carte.",
 
     "Venus Waystation": "Porte Vénusienne",
-    "Effect: When you play a Venus tag, you pay 2 MC less for it.": "Effet: le coût des cartes Vénus que vous jouez est réduit de 2.",
+    "Effect: When you play a Venus tag, you pay 2 M€ less for it.": "Effet: le coût des cartes Vénus que vous jouez est réduit de 2.",
 
     "Venusian Animals": "Animaux Vénusiens",
     "Effect: when you play a Science tag, including this, add 1 Animal to this card": "Effet: Lorsque vous jouez une carte Science, y compris celle-ci, ajoutez 1 animal sur cette carte.",

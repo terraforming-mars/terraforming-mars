@@ -32,7 +32,7 @@ export class Greens extends Party implements IParty {
 class GreensBonus01 implements Bonus {
   isDefault = true;
   id = 'gb01';
-  description: string = 'Gain 1 MC for each Plant, Microbe and Animal tag you have';
+  description: string = 'Gain 1 M€ for each Plant, Microbe and Animal tag you have';
 
   grant(game: Game) {
     game.getPlayers().forEach((player) => {
@@ -44,7 +44,7 @@ class GreensBonus01 implements Bonus {
 
 class GreensBonus02 implements Bonus {
   id = 'gb02';
-  description: string = 'Gain 2 MC for each greenery tile you have';
+  description: string = 'Gain 2 M€ for each greenery tile you have';
   isDefault = false;
 
   grant(game: Game) {
@@ -95,7 +95,7 @@ class GreensPolicy03 implements Policy {
 
 class GreensPolicy04 implements Policy {
   id = TurmoilPolicy.GREENS_POLICY_4;
-  description: string = 'Spend 5 MC to gain 3 plants or add 2 microbes to any card (Turmoil Greens)';
+  description: string = 'Spend 5 M€ to gain 3 plants or add 2 microbes to any card (Turmoil Greens)';
   isDefault = false;
 
   canAct(player: Player) {

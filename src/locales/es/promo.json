@@ -8,13 +8,13 @@
   "Action: Remove 1 asteroid here to place an ocean.":"Acción: elimina un recurso de asteroide de esta carta para colocar una loseta de océano.",
 
   "Cutting Edge Technology":"Tecnología Punta",
-  "Effect: When playing a card with a requirement, you pay 2 MC less for it.":"Efecto: cuando juegues una carta con requisitos, paga 2 M€ menos por ella.",
+  "Effect: When playing a card with a requirement, you pay 2 M€ less for it.":"Efecto: cuando juegues una carta con requisitos, paga 2 M€ menos por ella.",
 
   "Crash Site Cleanup":"Limpieza de Cráter",
   "Requires that a player removed ANOTHER PLAYER's plants this generation. Gain 1 titanium or 2 steel.":"Requiere que un jugador haya eliminado plantas DE OTRO JUGADOR esta generación. Gana 1 de titanio o 2 de acero.",
 
   "Directed Impactors":"Impactos dirigidos",
-  "(Action: Spend 6 MC to add 1 asteroid to ANY CARD (titanium may be used to pay for this).)":"Acción: gasta 6 M€ para añadir un asteroide a CUALQUIER CARTA (puedes usar titanio para esto).",
+  "(Action: Spend 6 M€ to add 1 asteroid to ANY CARD (titanium may be used to pay for this).)":"Acción: gasta 6 M€ para añadir un asteroide a CUALQUIER CARTA (puedes usar titanio para esto).",
   "(Action: Remove 1 asteroid here to raise temperature 1 step.)":"Acción: elimina un asteroide de esta carta para aumentar la temperatura 1 nivel.",
 
   "Field-Capped City":"#Ciudad con Cúpula Energética#",
@@ -83,7 +83,7 @@
   "Use a card action that has been used this generation.":"Usa la acción de una carta que haya sido usada esta generación.",
 
   "Rego Plastics":"Plásticos Rego",
-  "Effect: Your steel resources are worth 1 MC extra.":"Efecto: tus recursos de acero valen +1 M€.",
+  "Effect: Your steel resources are worth 1 M€ extra.":"Efecto: tus recursos de acero valen +1 M€.",
 
   "Interplanetary Trade":"Comercio interplanetario",
   "Increase your M€ production 1 step per different tag you have in play, including this.":"Aumenta tu producción de M€ 1 nivel por cada símbolo diferente que tengas en juego, incluyendo este.",
@@ -106,14 +106,14 @@
   "Action: Spend any amount of energy to draw the same number of cards. TAKE 1 INTO HAND AND DISCARD THE REST.":"Acción: Roba X número de cartas por la misma cantidad de energía. Toma una de esas cartas en tu mano y descarta el resto. ",
 
   "Mercurian Alloys":"Aleaciones de Mercurio",
-  "Effect: Your titanium resources are worth 1 MC extra.":"Efecto: Tus recursos de titanio valen +1 M€.",
+  "Effect: Your titanium resources are worth 1 M€ extra.":"Efecto: Tus recursos de titanio valen +1 M€.",
 
   "Energy Market":"Mercado Energético",
-  "Action: Spend 2X MC to gain X energy.":"Acción: gasta 2X M€ para obtener X recursos de energía.",
+  "Action: Spend 2X M€ to gain X energy.":"Acción: gasta 2X M€ para obtener X recursos de energía.",
   "Action: Decrease energy production 1 step to gain 8 MC.":"Acción: disminuye 1 nivel tu producción de energía para ganar 8 M€.",
 
   "Asteroid Rights":"Derechos de Asteroides",
-  "Action: Spend 1 MC to add 1 asteroid to ANY card.": "Acción: gasta 1 M€ para ñadir un asteroide a CUALQUIER carta.",
+  "Action: Spend 1 M€ to add 1 asteroid to ANY card.": "Acción: gasta 1 M€ para ñadir un asteroide a CUALQUIER carta.",
   "Action: Spend 1 asteroid here to increase M€ production 1 step OR gain 2 titanium.": "Acción: elimina un asteroide sobre esta carta para aumentar 1 nivele tu producción de M€ U obtener 2 de titanio.",
   "Add 2 asteroids to this card.": "Añade 2 asteroides a esta carta.",
 
@@ -153,5 +153,5 @@
 
   "Requires 8 oceans. 1 VP for each animal on this card.":"Requiere 8 océanos. 1 PV por cada animal en esta carta.",
   "Requires 2 Science tags.":"Requiere 2 símbolos de ciencia",
-  "Action: Spend 2X MC to gain X energy, or decrease energy production 1 step to gain 8 MC.":""
+  "Action: Spend 2X M€ to gain X energy, or decrease energy production 1 step to gain 8 MC.":""
 }

@@ -42,7 +42,7 @@
     "Requires 5 or fewer greeneries on Mars.": "需要火星上不能有超过5片绿化版块",
 
     "Industrial Center": "工业中心",
-    "Action: Spend 7 MC to increase your steel production 1 step.": "行动: 花费7MC,提升你的钢铁产能1级",
+    "Action: Spend 7 M€ to increase your steel production 1 step.": "行动: 花费7MC,提升你的钢铁产能1级",
     "Place this tile adjacent to a city tile. This tile grants an ADJACENCY BONUS of 1 steel.": "放置此版块到一个城市版块旁边。此版块的相邻收益为1个钢铁资源",
 
     "Lava Flows": "熔岩流",
@@ -87,7 +87,7 @@
     "Requires 5 ocean tiles. Place this tile on top of an existing ocean tile. The tile grants an ADJACENCY BONUS of 1 animal. Add 1 animal to this card.": "需求有5块海洋。放置此版块到一个已有的海洋版块上，此版块的相邻收益为1个动物资源。添加1个动物资源到此卡",
 
     "Restricted Area": "管制区",
-    "Action: Spend 2 MC to draw a card.": "行动：花费两枚MC资源 抽取一张牌",
+    "Action: Spend 2 M€ to draw a card.": "行动：花费两枚MC资源 抽取一张牌",
     "Place this tile which grants an ADJACENCY BONUS of 1 card.": "放置此版块，此版块的相邻收益为1张牌",
 
     "Solar Farm": "太阳能农场",

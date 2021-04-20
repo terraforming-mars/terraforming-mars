@@ -12,7 +12,7 @@ export class IndustrialCenterAres extends IndustrialCenter {
       {
         cardNumber: 'A10',
         renderData: CardRenderer.builder((b) => {
-          b.action('Spend 7 MC to increase your steel production 1 step.', (eb) => {
+          b.action('Spend 7 M€ to increase your steel production 1 step.', (eb) => {
             eb.megacredits(7).startAction.production((pb) => pb.steel(1));
           }).br;
           b.tile(TileType.INDUSTRIAL_CENTER, false, true);

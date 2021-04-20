@@ -20,7 +20,7 @@ export class SpaceMirrors extends Card implements IActionCard, IProjectCard {
       metadata: {
         cardNumber: '076',
         renderData: CardRenderer.builder((b) => {
-          b.action('Spend 7 MC to increase your energy production 1 step.', (eb) => {
+          b.action('Spend 7 M€ to increase your energy production 1 step.', (eb) => {
             eb.megacredits(7).startAction.production((pb) => pb.energy(1));
           });
         }),

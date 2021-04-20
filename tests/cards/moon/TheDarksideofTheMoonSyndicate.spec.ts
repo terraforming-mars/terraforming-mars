@@ -97,7 +97,7 @@ describe('TheDarksideofTheMoonSyndicate', () => {
     adjacentSpaces[4].tile = {tileType: TileType.MOON_COLONY};
     adjacentSpaces[4].player = player;
 
-    // Test 1: Remove 6 MC for each of the 3 adjacent spaces.
+    // Test 1: Remove 6 M€ for each of the 3 adjacent spaces.
     otherPlayer.megaCredits = 10;
     player.megaCredits = 0;
     player.corporationCard = card;
@@ -131,7 +131,7 @@ describe('TheDarksideofTheMoonSyndicate', () => {
     adjacentSpaces[4].tile = {tileType: TileType.MOON_COLONY};
     adjacentSpaces[4].player = player;
 
-    // Test 1: Remove 6 MC for each of the 3 adjacent spaces.
+    // Test 1: Remove 6 M€ for each of the 3 adjacent spaces.
     otherPlayer.megaCredits = 10;
     player.megaCredits = 0;
     player.corporationCard = card;

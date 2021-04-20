@@ -30,7 +30,7 @@
   "Requires Venus 6%":"Współczynnik Terraformacji Wenus musi być równy albo wyższy niż 6%.",
 
   "Venus Waystation":"Wenusjańska Stacja Tranzytowa",
-  "Effect: When you play a Venus tag, you pay 2 MC less for it.":"Efekt trwały: Gdy zagrywasz kartę z symbolem Wenus, płacisz za nią o 2 MC mniej.",
+  "Effect: When you play a Venus tag, you pay 2 M€ less for it.":"Efekt trwały: Gdy zagrywasz kartę z symbolem Wenus, płacisz za nią o 2 MC mniej.",
 
   "Thermophiles":"Termofile",
   "Action: Add 1 Microbe to ANY Venus CARD.":"Akcja: Umieść 1 jednostkę mikrobów na dowolnej karcie z symbolem Wenus.",
@@ -55,7 +55,7 @@
   "Requires 3 science tags. Draw 2 cards.":"Musisz posiadać przynajmniej 3 symbole nauki. Dobierz 2 karty.",
 
   "Rotator Impacts":"Rotacja Uderzeniowa",
-  "Action: Spend 6 MC to add an asteroid resource to this card [TITANIUM MAY BE USED].": "Akcja: Wydaj 6 MC (możesz użyć tytanu), żeby umieścić tu 1 jednostkę asteroid.",
+  "Action: Spend 6 M€ to add an asteroid resource to this card [TITANIUM MAY BE USED].": "Akcja: Wydaj 6 MC (możesz użyć tytanu), żeby umieścić tu 1 jednostkę asteroid.",
   "Action: Spend 1 resource from this card to increase Venus 1 step.":"Akcja: Usuń z tej karty 1 jednostkę asteroid i podnieś Współczynnik Terraformacji Wenus o 1 poziom.",
   "Venus must be 14% or lower":"Współczynnik Terraformacji Wenus musi być równy albo niższy niż 14%.",
 
@@ -74,7 +74,7 @@
   "Effect: When playing a Venus tag, Floaters here may be used as payment, and are worth 3MC each.":"Efekt trwały: Gdy zagrywasz kartę z symbolem Wenus do pokrycia kosztu tej karty możesz użyć znajdujące się na karcie Statków Powietrznych jednostki dryfowców. Każda jednostka dryfowców jest warta 3 MC.",
 
   "Floating Habs":"Dryfujące Jednostki Mieszkalne",
-  "Action: Spend 2 MC to add 1 Floater to ANY card":"Akcja: Wydaj 2 MC, aby umieścić 1 jednostkę dryfowców na dowolnej karcie.",
+  "Action: Spend 2 M€ to add 1 Floater to ANY card":"Akcja: Wydaj 2 MC, aby umieścić 1 jednostkę dryfowców na dowolnej karcie.",
   "1 VP for every 2nd Floater on this card.":"Otrzymujesz po 1 PZ za każde 2 jednostki dryfowców znajdujące się na tej karcie.",
   "Requires 2 Science tags. 1 VP for every 2nd Floater on this card":"Musisz posiadać przynajmniej 2 symbole nauki.",
 
@@ -116,7 +116,7 @@
   "Add 3 Floaters to this card":"Umieść 3 jednostki dryfowców na tej karcie.",
 
   "Forced Precipitation":"Wymuszone Opady Atmosferyczne",
-  "Action: Spend 2 MC to add 1 Floater to THIS card.":"Akcja: Zapłać 2 MC, żeby umieścić na tej karcie 1 jednostkę dryfowców.",
+  "Action: Spend 2 M€ to add 1 Floater to THIS card.":"Akcja: Zapłać 2 MC, żeby umieścić na tej karcie 1 jednostkę dryfowców.",
   "Action: Spend 2 Floaters here to increase Venus 1 step.":"Akcja: Usuń z tej karty 2 jednostki dryfowców i podnieś Współczynnik Terraformacji Wenus o 1 poziom.",
 
   "Freyja Biodomes":"Biokopuły we Freyja Montes",

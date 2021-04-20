@@ -57,7 +57,7 @@ describe('Reds', function() {
     expect(player.megaCredits).to.eq(0);
   });
 
-  it('Ruling policy 3: Pay 4 MC to reduce a non-maxed global parameter 1 step', function() {
+  it('Ruling policy 3: Pay 4 M€ to reduce a non-maxed global parameter 1 step', function() {
     TestingUtils.setRulingPartyAndRulingPolicy(game, turmoil, reds, reds.policies[2].id);
 
     const redsPolicy = REDS_POLICY_3;

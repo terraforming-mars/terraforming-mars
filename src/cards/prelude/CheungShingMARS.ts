@@ -26,7 +26,7 @@ export class CheungShingMARS extends Card implements CorporationCard {
           b.br.br;
           b.production((pb) => pb.megacredits(3)).nbsp.megacredits(44);
           b.corpBox('effect', (ce) => {
-            ce.effect('When you play a building tag, you pay 2 MC less for it.', (eb) => {
+            ce.effect('When you play a building tag, you pay 2 M€ less for it.', (eb) => {
               eb.building().played.startEffect.megacredits(-2);
             });
           });

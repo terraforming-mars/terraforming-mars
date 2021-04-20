@@ -21,7 +21,7 @@ export class MolecularPrinting extends Card implements IProjectCard {
           b.megacredits(1).slash().city(Size.SMALL).any.br;
           b.megacredits(1).slash().colonies(1, Size.SMALL).any;
         }),
-        description: 'Gain 1 MC for each city tile in play. Gain 1 MC for each colony in play.',
+        description: 'Gain 1 M€ for each city tile in play. Gain 1 M€ for each colony in play.',
         victoryPoints: 1,
       },
     });

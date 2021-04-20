@@ -57,12 +57,12 @@
   "(Action: Remove 1 asteroid here to place an ocean.)":"，花费1个小行星资源并放置一片海洋板块。",
 
   "Cutting Edge Technology":"前沿科技",
-  "Effect: When playing a card with a requirement, you pay 2 MC less for it.":"效果：有打出限制的卡牌打出费用减2。",
+  "Effect: When playing a card with a requirement, you pay 2 M€ less for it.":"效果：有打出限制的卡牌打出费用减2。",
   "Crash Site Cleanup":"陨石坑清洁",
   "Requires that a player removed ANOTHER PLAYER's plants this generation. Gain 1 titanium or 2 steel.":"需要本时代有一名玩家减少了另一名玩家植物。获得1个钛金属或者2个铁。",
 
   "Directed Impactors":"定向冲撞器",
-  "(Action: Spend 6 MC to add 1 asteroid to ANY CARD (titanium may be used to pay for this).)":"行动：花费6点金钱（可用钛金属支付）在任意卡牌上增加一个小行星资源",
+  "(Action: Spend 6 M€ to add 1 asteroid to ANY CARD (titanium may be used to pay for this).)":"行动：花费6点金钱（可用钛金属支付）在任意卡牌上增加一个小行星资源",
   "(Action: Remove 1 asteroid here to raise temperature 1 step.)":"，花费本卡的1个小行星资源并提升1点温度。",
 
   "Field-Capped City":"磁场穹顶城市",
@@ -99,12 +99,12 @@
   "(Decrease your energy production 1 step. 1VP per asteroid on this card.)":"降低1点电力产能。本卡上每个小行星资源值1分。",
 
   "Asteroid Rights":"小行星权力",
-  "(Action: Spend 1 MC to add 1 asteroid to ANY card.)": "(行动:花费1 MC在任意卡片上添加1颗小行星。)",
+  "(Action: Spend 1 M€ to add 1 asteroid to ANY card.)": "(行动:花费1 MC在任意卡片上添加1颗小行星。)",
   "(Action: Spend 1 asteroid here to increase M€ production 1 step OR gain 2 titanium.)": "(行动:在这里花费1个小行星增加MC产量1步或获得2个钛。)",
   "(Add 2 asteroids to this card.)": "(在此卡上添加2颗小行星)",
 
   "Energy Market":"能源市场",
-  "(Action: Spend 2X MC to gain X energy.)":"(行动:花费2X MC获得X能量)",
+  "(Action: Spend 2X M€ to gain X energy.)":"(行动:花费2X MC获得X能量)",
   "(Action: Decrease energy production 1 step to gain 8 MC.)":"(行动:减少能量生产1步获得8 MC。)",
 
   "Penguin":"企鹅",

@@ -199,7 +199,7 @@ export abstract class Colony implements SerializedColony {
 
       case ColonyBenefit.GAIN_CARD_DISCOUNT:
         player.cardDiscount += 1;
-        game.log('Cards played by ${0} cost 1 MC less this generation', (b) => b.player(player));
+        game.log('Cards played by ${0} cost 1 M€ less this generation', (b) => b.player(player));
         break;
 
       case ColonyBenefit.GAIN_PRODUCTION:

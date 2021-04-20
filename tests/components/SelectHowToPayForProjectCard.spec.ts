@@ -141,7 +141,7 @@ describe('SelectHowToPayForProjectCard', function() {
     // artificially inflated to be worth 7MC each.
     // The algorithm will try to spend 2 mc. Then spend as much Ti as possible.
     // This will come down to 2 MC and 2 Ti (at value 7). So we are effectively spending 16.
-    // That is overspending by 5 mc. The algorithm will try to spend 5 mc less if possible.
+    // That is overspending by 5 mc. The algorithm will try to spend 5 M€ less if possible.
     // It is not, so it will try to overspend as little mc as it can.
     // The final answer should be 0mc and 2 Ti (at value 7).
     const wrapper = setupCardForPurchase(
@@ -291,7 +291,7 @@ describe('SelectHowToPayForProjectCard', function() {
     // The titanium is artificially inflated to be worth 5 MC each.
     // The algorithm will try to spend 10 mc. Then spend as much Ti as possible.
     // This will come down to 10 MC and 7 Ti (at value 5). So we are effectively spending 45 MC.
-    // That is overspending by 4 mc. The algorithm will try to spend 4 mc less if possible.
+    // That is overspending by 4 mc. The algorithm will try to spend 4 M€ less if possible.
     // IT WILL NOT TRY TO SPEND LESS STEEL EVEN IF IT HAS STEEL AND STEEL VALUE IS 4.
     // It will reduce the amount of MC.
     // The final answer should be 6mc and 7 Ti (at value 5).

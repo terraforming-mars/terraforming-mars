@@ -8,13 +8,13 @@
   "Action: Remove 1 asteroid here to place an ocean.": "Akcja: Wydaj 1 jednostkę asteroid z tej karty i umieść na planszy obszar oceanu.",
 
   "Cutting Edge Technology": "Cutting Edge Technology",
-  "Effect: When playing a card with a requirement, you pay 2 MC less for it.": "Efekt trwały: Gdy zagrywasz kartę z wymaganiami, płacisz za nią o 2 MC mniej.",
+  "Effect: When playing a card with a requirement, you pay 2 M€ less for it.": "Efekt trwały: Gdy zagrywasz kartę z wymaganiami, płacisz za nią o 2 MC mniej.",
 
   "Crash Site Cleanup": "Crash Site Cleanup",
   "Requires that a player removed ANOTHER PLAYER's plants this generation. Gain 1 titanium or 2 steel.": "Wymagania: Jakiś gracz spowodował, że inny gracz musiał stracić jednostki roślinności w tym pokoleniu. Otrzymujesz 1 jednostkę tytanu lub 2 jednostki stali.",
 
   "Directed Impactors": "Directed Impactors",
-  "Action: Spend 6 MC to add 1 asteroid to ANY CARD (titanium may be used to pay for this).": "Akcja: Wydaj 6 MC (możesz użyć tytanu), żeby umieścić tu 1 jednostkę asteroid.",
+  "Action: Spend 6 M€ to add 1 asteroid to ANY CARD (titanium may be used to pay for this).": "Akcja: Wydaj 6 MC (możesz użyć tytanu), żeby umieścić tu 1 jednostkę asteroid.",
   "Action: Remove 1 asteroid here to raise temperature 1 step.": "Akcja: Wydaj 1 jednostkę asteroid z tej karty i podnieś temperaturę o 2°C.",
 
   "Field-Capped City": "Field-Capped City",
@@ -80,7 +80,7 @@
   "Effect: When you play a card with a basic cost of 20 MC or more, increase your M€ production 1 step.": "Efekt trwały: Gdy zagrywasz kartę o podstawowym koszcie wynoszącym 20 MC lub więcej, podnieś swoją produkcję MC o 1 poziom.",
 
   "Rego Plastics": "Regoplastik",
-  "Effect: Your steel resources are worth 1 MC extra.": "Efekt trwały: Twoje jednostki stali są warte o 1 MC więcej.",
+  "Effect: Your steel resources are worth 1 M€ extra.": "Efekt trwały: Twoje jednostki stali są warte o 1 MC więcej.",
 
   "Interplanetary Trade": "Handel międzyplanetarny",
   "Increase your M€ production 1 step per different tag you have in play, including this.": "Podnieś swoją produkcję MC o tyle poziomów, ile różnych symboli posiadasz (włącznie z tym).",
@@ -103,14 +103,14 @@
   "Action: Spend any amount of energy to draw the same number of cards. TAKE 1 INTO HAND AND DISCARD THE REST.": "Akcja: Wydaj dowolną liczbę jednostek energii, aby dobrać tyle samo kart. WEŹ 1 Z NICH NA RĘKĘ, ODRZUĆ RESZTĘ.",
 
   "Mercurian Alloys": "Merkuriańskie stopy",
-  "Effect: Your titanium resources are worth 1 MC extra.": "Efekt trwały: Twoje jednostki tytanu są warte o 1 MC więcej.",
+  "Effect: Your titanium resources are worth 1 M€ extra.": "Efekt trwały: Twoje jednostki tytanu są warte o 1 MC więcej.",
 
   "Energy Market": "Rynek energetyczny",
-  "Action: Spend 2X MC to gain X energy.": "Akcja: Wydaj 2*X MC, aby otrzymać X jednostek energii.",
+  "Action: Spend 2X M€ to gain X energy.": "Akcja: Wydaj 2*X MC, aby otrzymać X jednostek energii.",
   "Action: Decrease energy production 1 step to gain 8 MC.": "Akcja: Obniż swoją produkcję energii o 1 poziom, aby otrzymać 8 MC.",
 
   "Asteroid Rights": "Asteroid Rights",
-  "Action: Spend 1 MC to add 1 asteroid to ANY card.": "Akcja: Wydaj 1 MC, żeby umieścić 1 jednostkę asteroid na dowolnej karcie.",
+  "Action: Spend 1 M€ to add 1 asteroid to ANY card.": "Akcja: Wydaj 1 MC, żeby umieścić 1 jednostkę asteroid na dowolnej karcie.",
   "Action: Spend 1 asteroid here to increase M€ production 1 step OR gain 2 titanium.": "Akcja: Wydaj 1 jednostkę asteroid z tej karty i podnieś swoją produkcję MC o 1 poziom lub otrzymaj 2 jednostki tytanu.",
   "Add 2 asteroids to this card.": "Umieść na tej karcie 2 jednostki asteroid.",
 

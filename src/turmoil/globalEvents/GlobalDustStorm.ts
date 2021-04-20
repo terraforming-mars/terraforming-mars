@@ -8,7 +8,7 @@ import {Turmoil} from '../Turmoil';
 
 export class GlobalDustStorm implements IGlobalEvent {
     public name = GlobalEventName.GLOBAL_DUST_STORM;
-    public description = 'Lose all heat. Lose 2 MC for each Building tag (max 5, then reduced by influence).';
+    public description = 'Lose all heat. Lose 2 M€ for each Building tag (max 5, then reduced by influence).';
     public revealedDelegate = PartyName.KELVINISTS;
     public currentDelegate = PartyName.GREENS;
     public resolve(game: Game, turmoil: Turmoil) {

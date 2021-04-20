@@ -8,7 +8,7 @@ import {CardType} from '../../cards/CardType';
 
 export class SolarnetShutdown implements IGlobalEvent {
     public name = GlobalEventName.SOLARNET_SHUTDOWN;
-    public description = 'Lose 3 MC for each blue card (max 5, then reduced by influence).';
+    public description = 'Lose 3 M€ for each blue card (max 5, then reduced by influence).';
     public revealedDelegate = PartyName.SCIENTISTS;
     public currentDelegate = PartyName.MARS;
     public resolve(game: Game, turmoil: Turmoil) {

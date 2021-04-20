@@ -4,7 +4,7 @@
 
   "Thorgate":"威胁公司",
   "You start with 1 energy production and 48 MC.":"起始获得48MC,提升电力产能1级",
-  "Effect: When playing a power card OR THE STANDARD PROJECT POWER PLANT, you pay 3 MC less for it.":"效果:每当你打出带有电力标志,或执行标准行动中建立发电厂行动时,均可少支付3MC",
+  "Effect: When playing a power card OR THE STANDARD PROJECT POWER PLANT, you pay 3 M€ less for it.":"效果:每当你打出带有电力标志,或执行标准行动中建立发电厂行动时,均可少支付3MC",
 
 
 
@@ -44,7 +44,7 @@
 
   "PhoboLog":"火卫一日志",
   "You start with 10 titanium and 23 MC.":"起始获得23MC和10个钛合金资源",
-  "Effect: Your titanium resources are each worth 1 MC extra.":"效果:你的钛合金资源价值额外+1",
+  "Effect: Your titanium resources are each worth 1 M€ extra.":"效果:你的钛合金资源价值额外+1",
 
   "CrediCor":"债权人",
   "You start with 57 MC.":"起始获得57MC",
@@ -53,7 +53,7 @@
   "Action: Use a blue card action that has already been used this generation":"行动:执行一次本时代已经使用过的蓝卡行动" ,
 
  "United Nations Mars Initiative":"火星计划联合国",
-  "Action: If your Terraform Rating was raised this generation, you may pay 3 MC to raise it 1 step more.":"行动：如果你的改造度在本时代有过提升，你可以支付3元来提升一点改造度。",
+  "Action: If your Terraform Rating was raised this generation, you may pay 3 M€ to raise it 1 step more.":"行动：如果你的改造度在本时代有过提升，你可以支付3元来提升一点改造度。",
   "You start with 40 MC.":"你起始拥有40元。",
 
 
@@ -74,7 +74,7 @@
 
   "Teractor":"拖拉机公司",
   "You start with 60 MC.":"起始获得60MC",
-  "Effect: When you play an Earth tag, you pay 3 MC less for it.":"效果:当你打出带有地球标志的牌时,你少支付3MC",
+  "Effect: When you play an Earth tag, you pay 3 M€ less for it.":"效果:当你打出带有地球标志的牌时,你少支付3MC",
 
 
 

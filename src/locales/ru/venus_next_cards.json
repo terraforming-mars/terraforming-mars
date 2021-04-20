@@ -42,12 +42,12 @@
     "1 VP for every 3rd Microbe on this card.": "1 ПО за каждые 3 микроба на этой карте",
 
     "Floating Habs": "Аэростанции",
-    "Action: Spend 2 MC to add 1 Floater to ANY card": "Действие: потратьте 2 МС, чтобы добавить 1 аэростат на любую карту",
+    "Action: Spend 2 M€ to add 1 Floater to ANY card": "Действие: потратьте 2 МС, чтобы добавить 1 аэростат на любую карту",
     "1 VP for every 2nd Floater on this card.": "1 ПО за каждые 2-й аэростат на этой карте",
     "Requires 2 Science tags. 1 VP for every 2nd Floater on this card": "Требование: у вас есть хотя бы 2 метки Науки",
 
     "Forced Precipitation": "Вызов осадков",
-    "Action: Spend 2 MC to add 1 Floater to THIS card.": "Действие: Потратьте 2 МС, чтобы добавить 1 аэростат на эту карту",
+    "Action: Spend 2 M€ to add 1 Floater to THIS card.": "Действие: Потратьте 2 МС, чтобы добавить 1 аэростат на эту карту",
     "Action: Spend 2 Floaters here to increase Venus 1 step.": "Действие: Потратьте 2 аэростата, чтобы увеличить шкалу Венеры на 1",
 
     "Freyja Biodomes": "Биокуполы Фрейя",
@@ -102,7 +102,7 @@
     "Raise Venus 2 steps. Increase your heat production 2 steps": "Увеличьте шкалу Венеры на 2. Увеличьте свое производство тепла на 2",
 
     "Rotator Impacts": "Вращательные удары",
-    "Action: Spend 6 MC to add an asteroid resource to this card [TITANIUM MAY BE USED].": "Действие: потратьте 6 МС, чтобы добавить астероид на эту карту. Можете использовать титан",
+    "Action: Spend 6 M€ to add an asteroid resource to this card [TITANIUM MAY BE USED].": "Действие: потратьте 6 МС, чтобы добавить астероид на эту карту. Можете использовать титан",
     "Action: Spend 1 resource from this card to increase Venus 1 step.": "Действие: потратье ресурс с этой карты, чтобы увеличить шкалу Венеры на 1",
     "Venus must be 14% or lower": "Требование: 14% на шкале Венеры или ниже",
 
@@ -155,7 +155,7 @@
     "Raise Venus 1 step. Increase your Plant production 1 step. Add 2 Microbes to ANOTHER card": "Увеличьте шкалу Венеры на 1. Увеличьте свое производство растений на 1. Добавьте 2 микробов на другую карту",
 
     "Venus Waystation": "Венерианская станция",
-    "Effect: When you play a Venus tag, you pay 2 MC less for it.": "Эффект: разыгрывая карту с меткой Венеры, платите за нее на 2 МС меньше",
+    "Effect: When you play a Venus tag, you pay 2 M€ less for it.": "Эффект: разыгрывая карту с меткой Венеры, платите за нее на 2 МС меньше",
 
     "Venusian Animals": "Животные на Венере",
     "Effect: When you play a Science tag, including this, add 1 Animal to this card.": "Эффект: разыгрывая метку открытия, включая эту, добавляйте 1 животное на эту карту",

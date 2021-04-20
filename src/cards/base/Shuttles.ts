@@ -21,7 +21,7 @@ export class Shuttles extends Card implements IProjectCard {
       metadata: {
         cardNumber: '166',
         renderData: CardRenderer.builder((b) => {
-          b.effect('When you play a Space card, you pay 2 MC less for it.', (eb) => {
+          b.effect('When you play a Space card, you pay 2 M€ less for it.', (eb) => {
             eb.space().played.startEffect.megacredits(-2);
           }).br;
           b.production((pb) => {

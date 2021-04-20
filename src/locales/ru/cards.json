@@ -14,7 +14,7 @@
     "Requires 3 ocean tiles. Decrease your M€ production 1 step and any heat production 1 step. Increase your Plant production 2 steps.": "Необходимо 3 тайла океана. Снизьте свой доход на 1 и производство тепла любого игрока на 1. Повысьте своё производство растений на 2.",
 
     "Search For Life": "Поиски жизни",
-    "Action: Spend 1 MC to reveal the top card of the draw deck. If that card has a Microbe tag, add a Science resource here.": "Действие: потратьте 1 МC, чтобы открыть верхнюю карту колоды. Если на карте есть символ бактерий, положите жетон науки на эту карту.",
+    "Action: Spend 1 M€ to reveal the top card of the draw deck. If that card has a Microbe tag, add a Science resource here.": "Действие: потратьте 1 МC, чтобы открыть верхнюю карту колоды. Если на карте есть символ бактерий, положите жетон науки на эту карту.",
     "3 VPs if you have one or more Science resources here.": "3 ПО, если на этой карте есть хотя бы 1 жетон науки.",
     "Oxygen must be 6% or less.": "Уровень кислорода должен быть 6% или ниже",
 
@@ -22,7 +22,7 @@
     "ACTION: LOOK AT THE TOP CARD AND EITHER BUY IT OR DISCARD IT": "Действие: посмотрите верхнюю карту колоды и купите её или сбросьте.",
 
     "Martian Rails": "Марсианский монорельс",
-    "Action: Spend 1 Energy to gain 1 MC for each City tile ON MARS.": "Действие: потратьте 1 энергию, чтобы получить 1 MC за каждый город на поверхности Марса.",
+    "Action: Spend 1 Energy to gain 1 M€ for each City tile ON MARS.": "Действие: потратьте 1 энергию, чтобы получить 1 MC за каждый город на поверхности Марса.",
 
     "Capital": "Столица",
     "2 Oceans": "2 Океана",
@@ -43,7 +43,7 @@
     "Raise temperature 2 steps and gain 4 titanium. Remove up to 4 Plants from any player.": "Повысьте температуру на 2 и получите 4 титана. Удалите до 4 растений у любого игрока.",
 
     "Water Import from Europa": "Импорт воды с Европы",
-    "Action: Pay 12 MC to place an ocean tile. TITANIUM MAY BE USED as if playing a Space card.": "Действие: заплатите 12 MC, чтоб выложить тайл океана. Можно использовать титан для оплаты, как при игре карты с символом космоса.",
+    "Action: Pay 12 M€ to place an ocean tile. TITANIUM MAY BE USED as if playing a Space card.": "Действие: заплатите 12 MC, чтоб выложить тайл океана. Можно использовать титан для оплаты, как при игре карты с символом космоса.",
     "1 VP for each Jovian tag you have.": "1 ПО за каждый ваш символ Юпитера.",
 
     "Space Elevator": "Космический лифт",
@@ -69,7 +69,7 @@
     "Gain 3 Plants, or add 3 Microbes or 2 Animals to ANOTHER card. Place an ocean tile.": "Получите 3 растения или же положите 3 жетона бактерий или 2 жетона животных на другую карту. Выложите тайл океана.",
 
     "Research Outpost": "Исследовательская станция",
-    "Effect: When you play a card, you pay 1 MC less for it.": "Свойство: когда играете карту, вы платите на 1 MC меньше.",
+    "Effect: When you play a card, you pay 1 M€ less for it.": "Свойство: когда играете карту, вы платите на 1 MC меньше.",
     "Place a city tile NEXT TO NO OTHER TILE.": "Постройте город, не соседний ни с каким другим тайлом.",
 
     "Phobos Space Haven": "Гавань на Фобосе",
@@ -87,7 +87,7 @@
     "Requires 11% oxygen. 1 VP per Animal on this card.": "Уровень кислорода должен быть 11%. 1 ПО за каждый жетон животных на этой карте.",
 
     "Space Station": "Космическая станция",
-    "Effect: When you play a Space card, you pay 2 MC less for it.": "Свойство: когда играете карту с символом космоса, вы платите на 2 MC меньше.",
+    "Effect: When you play a Space card, you pay 2 M€ less for it.": "Свойство: когда играете карту с символом космоса, вы платите на 2 MC меньше.",
 
     "Eos Chasma National Park": "Национальный парк в каньоне Эос",
     "Requires -12 C or warmer. Add 1 Animal TO ANY ANIMAL CARD. Gain 3 Plants. Increase your M€ production 2 steps.": "Температура должна быть -12 градусов или выше. Положите 1 жетон животных на любую карту с символом животных. Получите 3 растения. Повысьте свой доход на 2.",
@@ -231,11 +231,11 @@
     "Oxygen must be 8% or less. Decrease your energy production 1 step.": "Уровень кислорода должен быть 8% или ниже. Снизьте своё производство энергии на 1.",
 
     "Earth Catapult": "Катапульта на Земле",
-    "Effect: When you play a card, you pay 2 MC less for it.": "Свойство: когда играете карту, вы платите на 2 MC меньше.",
+    "Effect: When you play a card, you pay 2 M€ less for it.": "Свойство: когда играете карту, вы платите на 2 MC меньше.",
 
     "Advanced Alloys": "Улучшенные сплавы",
-    "Effect: Each titanium you have is worth 1 MC extra.": "Свойство: каждая ваша единица титана стоит на 1 MC больше",
-    "Effect: Each steel you have is worth 1 MC extra.": "Свойство: Каждая ваша единица стали стоит на 1 MC больше",
+    "Effect: Each titanium you have is worth 1 M€ extra.": "Свойство: каждая ваша единица титана стоит на 1 MC больше",
+    "Effect: Each steel you have is worth 1 M€ extra.": "Свойство: Каждая ваша единица стали стоит на 1 MC больше",
 
     "Birds": "Птицы",
     "Action: Add an animal to this card.": "Действие: положите жетон животных на эту карту.",
@@ -251,7 +251,7 @@
     "Gain 2 plants. Raise oxygen level 1 step and place an ocean tile.": "Получите 2 растения. Повысьте уровень кислорода на 1 и выложите тайл океана.",
 
     "Space Mirrors": "Космические зеркала",
-    "Action: Spend 7 MC to increase your energy production 1 step.": "Действие: заплатите 7 MC, чтобы повысить своё производство энергии на 1.",
+    "Action: Spend 7 M€ to increase your energy production 1 step.": "Действие: заплатите 7 MC, чтобы повысить своё производство энергии на 1.",
 
     "Solar Wind Power": "Энергия солнечного ветра",
     "Increase your energy production 1 step and gain 2 titanium.": "Повысьте своё производство энергии на 1 и получите 2 титана.",
@@ -341,12 +341,12 @@
     "Action: Spend 4 energy to gain 1 titanium and increase oxygen 1 step.": "Действие: потратьте 4 энергии, чтобы получить 1 титан и повысить уровень кислорода на 1.",
 
     "Earth Office": "Офис на Земле",
-    "Effect: When you play an Earth card, you pay 3 MC less for it.": "Свойство: когда вы играете карту с символом Земли, вы платите на 3 MC меньше.",
+    "Effect: When you play an Earth card, you pay 3 M€ less for it.": "Свойство: когда вы играете карту с символом Земли, вы платите на 3 MC меньше.",
 
     "Acquired Company": "Приобретённая компания",
 
     "Media Archives": "Архивы СМИ",
-    "Gain 1 MC for each event EVER PLAYED by all players.": "Получите 1 MC за каждую сыгранную карту событий, учитываются все карты событий, сыгранные всеми игроками в этой партии.",
+    "Gain 1 M€ for each event EVER PLAYED by all players.": "Получите 1 MC за каждую сыгранную карту событий, учитываются все карты событий, сыгранные всеми игроками в этой партии.",
 
     "Open City": "Город под открытым небом",
     "Requires 12% oxygen. Gain 2 plants. Place a City tile. Decrease your Energy production 1 step and increase your M€ production 4 steps.": "Уровень кислорода должен быть 12%. Получите 2 растения и постройте город. Снизьте своё производство энергии на 1 и повысьте свой доход на 4.",
@@ -400,7 +400,7 @@
     "Requires 3 ocean tiles and that you lose 1 plant. Increase your plant production 1 step.": "Необходимо 3 тайла океана и потерять 1 растение. Повысьте своё производство растений на 1.",
 
     "Industrial Center": "Промышленный центр",
-    "Action: Spend 7 MC to increase your steel production 1 step.": "Действие: потратьте 7 MC, чтоб повысить своё производство стали на 1.",
+    "Action: Spend 7 M€ to increase your steel production 1 step.": "Действие: потратьте 7 MC, чтоб повысить своё производство стали на 1.",
     "Place this tile adjacent to a city tile.": "Выложите этот тайл рядом с любым городом.",
 
     "Hired Raiders": "Наёмные налётчики",
@@ -605,10 +605,10 @@
     "When you play a Science tag, including this, either add a Science resource to this card, or remove a Science resource from this card to draw a card.": "Когда вы вводите в игру символ науки на карте, включая этот, положите жетон науки на эту карту или удалите жетон науки с этой карты, чтобы взять карту.",
 
     "Rad-Suits": "Противорадиационные костюмы",
-    "Requires two cities in play. Increase your MC up 1 step.": "Необходимо наличие 2 городов в игре. Повысьте свой доход на 1.",
+    "Requires two cities in play. Increase your M€ production 1 step.": "Необходимо наличие 2 городов в игре. Повысьте свой доход на 1.",
 
     "Aquifer Pumping": "Водоотлив из подземного резервуара",
-    "Action: Spend 8 MC to place 1 ocean tile. STEEL MAY BE USED as if you were playing a Building card.": "Действие: потратьте 8 MC, чтобы выложить тайл океана. Можете использовать сталь для оплаты, как при игре карты с символом строительства.",
+    "Action: Spend 8 M€ to place 1 ocean tile. STEEL MAY BE USED as if you were playing a Building card.": "Действие: потратьте 8 MC, чтобы выложить тайл океана. Можете использовать сталь для оплаты, как при игре карты с символом строительства.",
 
     "Flooding": "Потоп",
     "Place an ocean tile. IF THERE ARE TILES ADJACENT TO THIS OCEAN TILE, YOU MAY REMOVE 4 M€ from THE OWNER OF ONE OF THOSE TILES.": "Выложите тайл океана. Если рядом с этим тайлом есть другие тайлы, вы можете удалить 4MC у владельца одного из тайлов.",
@@ -645,7 +645,7 @@
     "1 VP for every 3rd City in play.": "1 ПО за каждые 3 города в игре",
 
     "Restricted Area": "Закрытая зона",
-    "Action: Spend 2 MC to draw a card.": "Действие: потратьте 2 MC, чтобы взять карту.",
+    "Action: Spend 2 M€ to draw a card.": "Действие: потратьте 2 MC, чтобы взять карту.",
     "Place this tile.": "Выложите этот тайл.",
 
     "Immigrant City": "Город иммигрантов",

@@ -29,7 +29,7 @@ export class HE3Refinery implements IProjectCard {
   public readonly metadata: CardMetadata = {
     cardNumber: 'M49',
     renderData: CardRenderer.builder((b) => {
-      b.action('Gain 1 MC for each level of Mining Rate.', (eb) => {
+      b.action('Gain 1 M€ for each level of Mining Rate.', (eb) => {
         eb.empty().startAction;
         eb.megacredits(1).slash().moonMiningRate();
       });

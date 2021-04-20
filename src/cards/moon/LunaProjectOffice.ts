@@ -39,7 +39,7 @@ export class LunaProjectOffice extends Card implements IProjectCard {
       if (!player.playedCards.some((card) => card.name === CardName.LUNA_PROJECT_OFFICE)) {
         return false;
       }
-      return player.game.generation <= (moonData.lunaProjectOfficeLastGeneration || -1);
+      return player.game.generation <= (moonData.lunaProjectOfficeLastGeneration ?? -1);
     }, () => false);
   }
 }

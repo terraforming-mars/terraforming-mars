@@ -25,7 +25,7 @@ export class MarsFirst extends Party implements IParty {
 // TODO(nwai90): Mars First bonus IDs start with 'm' and policies start with 'mp'.
 class MarsFirstBonus01 implements Bonus {
   id = 'mb01';
-  description = 'Gain 1 MC for each Building tag you have';
+  description = 'Gain 1 M€ for each Building tag you have';
   isDefault = true;
 
   grant(game: Game) {
@@ -38,7 +38,7 @@ class MarsFirstBonus01 implements Bonus {
 
 class MarsFirstBonus02 implements Bonus {
   id = 'mb02';
-  description = 'Gain 1 MC for each tile you have ON MARS';
+  description = 'Gain 1 M€ for each tile you have ON MARS';
   isDefault = false;
 
   grant(game: Game) {
@@ -76,13 +76,13 @@ class MarsFirstPolicy02 implements Policy {
 
 class MarsFirstPolicy03 implements Policy {
   id = TurmoilPolicy.MARS_FIRST_POLICY_3;
-  description: string = 'Your steel resources are worth 1 MC extra';
+  description: string = 'Your steel resources are worth 1 M€ extra';
   isDefault = false;
 }
 
 class MarsFirstPolicy04 implements Policy {
   id = TurmoilPolicy.MARS_FIRST_POLICY_4;
-  description: string = 'Spend 4 MC to draw a Building card (Turmoil Mars First)';
+  description: string = 'Spend 4 M€ to draw a Building card (Turmoil Mars First)';
   isDefault = false;
 
   canAct(player: Player) {

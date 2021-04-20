@@ -29,7 +29,7 @@ export class Incite extends Card implements CorporationCard {
               eb.startEffect.influence(1);
             });
             ce.vSpace(Size.SMALL);
-            ce.effect('You have +1 influence. When you send a delegate using the lobbying action, you pay 2 MC less for it.', (eb) => {
+            ce.effect('You have +1 influence. When you send a delegate using the lobbying action, you pay 2 M€ less for it.', (eb) => {
               eb.delegates(1).startEffect.megacredits(-2);
             });
           });

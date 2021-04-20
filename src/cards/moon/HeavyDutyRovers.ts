@@ -30,7 +30,7 @@ export class HeavyDutyRovers implements IProjectCard {
   }
 
   public readonly metadata: CardMetadata = {
-    description: 'Gain 4 MC for each mining tile adjacent to a road tile. Raise the Logistic Rate 1 step.',
+    description: 'Gain 4 M€ for each mining tile adjacent to a road tile. Raise the Logistic Rate 1 step.',
     cardNumber: 'M39',
     renderData: CardRenderer.builder((b) => {
       b.megacredits(4).slash().moonRoad({size: Size.SMALL}).any.moonMine({size: Size.SMALL}).any;

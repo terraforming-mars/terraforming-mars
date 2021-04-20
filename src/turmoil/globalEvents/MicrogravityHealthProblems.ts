@@ -7,7 +7,7 @@ import {Turmoil} from '../Turmoil';
 
 export class MicrogravityHealthProblems implements IGlobalEvent {
     public name = GlobalEventName.MICROGRAVITY_HEALTH_PROBLEMS;
-    public description = 'Lose 3 MC for each colony (max 5, then reduced by influence).';
+    public description = 'Lose 3 M€ for each colony (max 5, then reduced by influence).';
     public revealedDelegate = PartyName.MARS;
     public currentDelegate = PartyName.SCIENTISTS;
     public resolve(game: Game, turmoil: Turmoil) {

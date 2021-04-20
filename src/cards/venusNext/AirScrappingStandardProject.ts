@@ -15,7 +15,7 @@ export class AirScrappingStandardProject extends StandardProjectCard {
       metadata: {
         cardNumber: 'SP1',
         renderData: CardRenderer.builder((b) =>
-          b.standardProject('Spend 15 MC to raise Venus 1 step.', (eb) => {
+          b.standardProject('Spend 15 M€ to raise Venus 1 step.', (eb) => {
             eb.megacredits(15).startAction.venus(1);
           }),
         ),

@@ -22,7 +22,7 @@ export class SeptumTribus extends Card implements IActionCard, CorporationCard {
           b.br;
           b.megacredits(36);
           b.corpBox('action', (ce) => {
-            ce.action('Gain 2 MC for each party where you have at least 1 delegate.', (eb) => {
+            ce.action('Gain 2 M€ for each party where you have at least 1 delegate.', (eb) => {
               eb.empty().startAction.megacredits(2).slash().delegates(1).asterix();
             });
           });

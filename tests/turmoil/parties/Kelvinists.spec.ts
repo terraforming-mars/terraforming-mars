@@ -22,7 +22,7 @@ describe('Kelvinists', function() {
     TestingUtils.resetBoard(game);
   });
 
-  it('Ruling bonus 1: Gain 1 MC for each Heat production you have', function() {
+  it('Ruling bonus 1: Gain 1 M€ for each Heat production you have', function() {
     player.addProduction(Resources.HEAT, 5);
 
     const bonus = KELVINISTS_BONUS_1;
@@ -38,7 +38,7 @@ describe('Kelvinists', function() {
     expect(player.heat).to.eq(5);
   });
 
-  it('Ruling policy 1: Pay 10 MC to increase your Energy and Heat production 1 step', function() {
+  it('Ruling policy 1: Pay 10 M€ to increase your Energy and Heat production 1 step', function() {
     TestingUtils.setRulingPartyAndRulingPolicy(game, turmoil, kelvinists, kelvinists.policies[0].id);
 
     const kelvinistsPolicy = KELVINISTS_POLICY_1;

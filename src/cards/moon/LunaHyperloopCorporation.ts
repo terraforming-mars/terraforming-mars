@@ -41,7 +41,7 @@ export class LunaHyperloopCorporation implements IActionCard, CorporationCard {
     cardNumber: '',
     renderData: CardRenderer.builder((b) => {
       b.megacredits(38).steel(4).br;
-      b.action('Gain 1 MC for each road tile on the Moon.', (eb) => {
+      b.action('Gain 1 M€ for each road tile on the Moon.', (eb) => {
         eb.empty().startAction.megacredits(1).slash().moonRoad({size: Size.SMALL}).any;
       }).br,
       b.vpText('1 VP for each road tile on the Moon.').br;

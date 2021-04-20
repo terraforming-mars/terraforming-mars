@@ -24,7 +24,7 @@ export class RobinsonIndustries extends Card implements IActionCard, Corporation
           b.br.br.br;
           b.megacredits(47);
           b.corpBox('action', (ce) => {
-            ce.action('Spend 4 MC to increase (one of) your LOWEST production 1 step.', (eb) => {
+            ce.action('Spend 4 M€ to increase (one of) your LOWEST production 1 step.', (eb) => {
               eb.megacredits(4).startAction.production((pb) => pb.wild(1).asterix());
             });
           });

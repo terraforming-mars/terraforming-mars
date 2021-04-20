@@ -10,13 +10,13 @@
     "Action: Remove 1 asteroid here to place an ocean.": "Действие: Удалите 1 астероид отсюда, чтобы залить океан",
 
     "Cutting Edge Technology": "Новейшие технологии",
-    "Effect: When playing a card with a requirement, you pay 2 MC less for it.": "Эффект: За каждую карту с требованиями платите на 2МС меньше",
+    "Effect: When playing a card with a requirement, you pay 2 M€ less for it.": "Эффект: За каждую карту с требованиями платите на 2МС меньше",
 
     "Crash Site Cleanup": "Зачистка кратеров",
     "Requires that a player removed ANOTHER PLAYER's plants this generation. Gain 1 titanium or 2 steel.": "Требует, чтобы один из игроков отобрал у другого игрока растения в этом поколении. Получите 1 титан или 2 стали",
 
     "Directed Impactors": "Обстрел астероидами",
-    "Action: Spend 6 MC to add 1 asteroid to ANY CARD (titanium may be used to pay for this).": "Действие: Потратьте 6МС, чтобы добавить 1 астероид на любую карту. Можно заплатить титаном",
+    "Action: Spend 6 M€ to add 1 asteroid to ANY CARD (titanium may be used to pay for this).": "Действие: Потратьте 6МС, чтобы добавить 1 астероид на любую карту. Можно заплатить титаном",
     "Action: Remove 1 asteroid here to raise temperature 1 step.": "Действие: Удалите 1 астероид отсюда, чтобы поднять температуру на 1 шаг",
 
     "Field-Capped City": "Защитное поле",
@@ -92,7 +92,7 @@
     "Effect: When you play a card with a basic cost of 20 MC or more, increase your M€ production 1 step.": "Эффект: Играя карту с базовой стоимостью 20 или дороже, повышайте своё производство МС на 1",
 
     "Rego Plastics": "Регопластик",
-    "Effect: Your steel resources are worth 1 MC extra.": "Эффект: Ваша сталь стоит на 1 МС дороже",
+    "Effect: Your steel resources are worth 1 M€ extra.": "Эффект: Ваша сталь стоит на 1 МС дороже",
 
     "OR 2": "ИЛИ 2",
     "Interplanetary Trade": "Межпланетная торговля",
@@ -119,15 +119,15 @@
     "Action: Spend any amount of energy to draw the same number of cards. TAKE 1 INTO HAND AND DISCARD THE REST.": "Потратьте любое количество эненргии, чтобы взять столько же карт из колоды. Оставьте себе только одну из них, а остальные сбросьте",
 
     "Mercurian Alloys": "Сплавы меркурия",
-    "Effect: Your titanium resources are worth 1 MC extra.": "Эффект: Ваш титан стоит на 1 МС дороже",
+    "Effect: Your titanium resources are worth 1 M€ extra.": "Эффект: Ваш титан стоит на 1 МС дороже",
 
     "Energy Market": "Энергетический рынок",
-    "Action: Spend 2X MC to gain X energy.": "Действие: Потратьте 2Х МС, чтобы получить Х энергии",
+    "Action: Spend 2X M€ to gain X energy.": "Действие: Потратьте 2Х МС, чтобы получить Х энергии",
     "Action: Decrease energy production 1 step to gain 8 MC.": "Действие: Уменьшите своё производство энергии на 1, чтобы получить 8 МС",
     "OR": "ИЛИ",
 
     "Asteroid Rights": "Права на астероиды",
-    "Action: Spend 1 MC to add 1 asteroid to ANY card.": "Действие: Потратьте 1 МС, чтобы добавить 1 астероид на любую карту",
+    "Action: Spend 1 M€ to add 1 asteroid to ANY card.": "Действие: Потратьте 1 МС, чтобы добавить 1 астероид на любую карту",
     "Action: Spend 1 asteroid here to increase M€ production 1 step OR gain 2 titanium.": "Действие: Потратьте 1 астероид отсюда, чтобы увеличить на 1 производство МС или получить 2 титана",
     "Add 2 asteroids to this card.": "Добавьте 2 астероида на эту карту",
 

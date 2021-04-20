@@ -9,7 +9,7 @@ import {Turmoil} from '../Turmoil';
 
 export class SpinoffProducts implements IGlobalEvent {
     public name = GlobalEventName.SPINOFF_PRODUCTS;
-    public description = 'Gain 2 MC for each Science tag (max 5) and influence.';
+    public description = 'Gain 2 M€ for each Science tag (max 5) and influence.';
     public revealedDelegate = PartyName.GREENS;
     public currentDelegate = PartyName.SCIENTISTS;
     public resolve(game: Game, turmoil: Turmoil) {

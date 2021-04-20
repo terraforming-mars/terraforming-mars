@@ -36,7 +36,7 @@ export class ProjectWorkshop extends Card implements CorporationCard {
               eb.cards(2).digit;
             });
             cb.vSpace(Size.SMALL);
-            cb.action('Flip and discard a played blue card to convert any VP on it into TR and draw 2 cards, or spend 3 MC to draw a blue card.', (eb) => {
+            cb.action('Flip and discard a played blue card to convert any VP on it into TR and draw 2 cards, or spend 3 M€ to draw a blue card.', (eb) => {
               eb.or().megacredits(3).startAction.cards(1).secondaryTag(AltSecondaryTag.BLUE);
             });
           });
@@ -89,7 +89,7 @@ export class ProjectWorkshop extends Card implements CorporationCard {
       },
     );
 
-    const drawBlueCard = new SelectOption('Spend 3 MC to draw a blue card', 'Draw card', () => {
+    const drawBlueCard = new SelectOption('Spend 3 M€ to draw a blue card', 'Draw card', () => {
       player.megaCredits -= 3;
       player.drawCard(1, {cardType: CardType.ACTIVE});
       return undefined;

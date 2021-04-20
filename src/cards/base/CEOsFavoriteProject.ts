@@ -34,12 +34,7 @@ export class CEOsFavoriteProject extends Card implements IProjectCard {
       'Add resource',
       player.getCardsWithResources().concat(robotCards.map((c) => c.card)),
       (foundCards: Array<ICard>) => {
-        const robotCard = robotCards.find((c) => c.card.name === foundCards[0].name);
-        if (robotCard !== undefined) {
-          robotCard.resourceCount++;
-        } else {
-          player.addResourceTo(foundCards[0]);
-        }
+        player.addResourceTo(robotCards.find((c) => c.card.name === foundCards[0].name) ?? foundCards[0]);
         LogHelper.logAddResource(player, foundCards[0]);
         return undefined;
       },

@@ -13,7 +13,7 @@ import {CorporationCard} from './cards/corporation/CorporationCard';
 import {Game} from './Game';
 import {HowToPay} from './inputs/HowToPay';
 import {IAward} from './awards/IAward';
-import {ICard} from './cards/ICard';
+import {ICard, IResourceCard} from './cards/ICard';
 import {Colony} from './colonies/Colony';
 import {ISerializable} from './ISerializable';
 import {IMilestone} from './milestones/IMilestone';
@@ -212,12 +212,7 @@ export class Player implements ISerializable<SerializedPlayer> {
   }
 
   public getSelfReplicatingRobotsTargetCards(): Array<RobotCard> {
-    for (const card of this.playedCards) {
-      if (card instanceof SelfReplicatingRobots) {
-        return card.targetCards;
-      }
-    }
-    return [];
+    return (this.playedCards.find((card) => card instanceof SelfReplicatingRobots) as (SelfReplicatingRobots | undefined))?.targetCards ?? [];
   }
 
   public getSteelValue(): number {
@@ -652,7 +647,7 @@ export class Player implements ISerializable<SerializedPlayer> {
       }
     }
   }
-  public addResourceTo(card: ICard, count: number = 1): void {
+  public addResourceTo(card: IResourceCard, count: number = 1): void {
     if (card.resourceCount !== undefined) {
       card.resourceCount += count;
     }

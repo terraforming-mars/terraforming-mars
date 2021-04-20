@@ -1,7 +1,7 @@
 import Vue from 'vue';
 import {CardRenderSymbolType} from '../../cards/render/CardRenderSymbolType';
 import {CardRenderSymbol} from '../../cards/render/CardRenderSymbol';
-import {CardRenderItemSize} from '../../cards/render/CardRenderItemSize';
+import {Size} from '../../cards/render/Size';
 
 export const CardRenderSymbolComponent = Vue.component('CardRenderSymbolComponent', {
   props: {
@@ -13,7 +13,7 @@ export const CardRenderSymbolComponent = Vue.component('CardRenderSymbolComponen
   methods: {
     getClasses: function(): string {
       const type: CardRenderSymbolType = this.item.type;
-      const size: CardRenderItemSize = this.item.size;
+      const size: Size = this.item.size;
       const classes: Array<string> = ['card-special'];
       if (type === CardRenderSymbolType.ASTERIX) {
         classes.push('card-asterix');
@@ -21,21 +21,21 @@ export const CardRenderSymbolComponent = Vue.component('CardRenderSymbolComponen
         classes.push('card-minus');
       } else if (type === CardRenderSymbolType.PLUS) {
         classes.push('card-plus');
-        if (size === CardRenderItemSize.SMALL) {
+        if (size === Size.SMALL) {
           classes.push('card-plus--small');
         }
       } else if (type === CardRenderSymbolType.OR) {
         classes.push('card-or');
-        if (size === CardRenderItemSize.SMALL) {
+        if (size === Size.SMALL) {
           classes.push('card-or--small');
         }
-        if (size === CardRenderItemSize.TINY) {
+        if (size === Size.TINY) {
           classes.push('card-or--tiny');
         }
       } else if (type === CardRenderSymbolType.COLON) {
         classes.push('card-colon');
       } else if (type === CardRenderSymbolType.ARROW) {
-        if (size === CardRenderItemSize.SMALL) {
+        if (size === Size.SMALL) {
           classes.push('card-red-arrow--small');
         } else {
           classes.push('card-red-arrow');
@@ -45,11 +45,11 @@ export const CardRenderSymbolComponent = Vue.component('CardRenderSymbolComponen
         classes.push('card-nbsp');
       } else if (type === CardRenderSymbolType.VSPACE) {
         classes.push('card-vspace');
-        if (size === CardRenderItemSize.SMALL) {
+        if (size === Size.SMALL) {
           classes.push('card-vspace--small');
-        } else if (size === CardRenderItemSize.MEDIUM) {
+        } else if (size === Size.MEDIUM) {
           classes.push('card-vspace--medium');
-        } else if (size === CardRenderItemSize.LARGE) {
+        } else if (size === Size.LARGE) {
           classes.push('card-vspace--large');
         }
       } else if (type === CardRenderSymbolType.SLASH) {

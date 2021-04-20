@@ -10,7 +10,7 @@ import {Resources} from '../../Resources';
 import {SelectHowToPayDeferred} from '../../deferredActions/SelectHowToPayDeferred';
 import {DeferredAction} from '../../deferredActions/DeferredAction';
 import {CardRenderer} from '../render/CardRenderer';
-import {CardRenderItemSize} from '../render/CardRenderItemSize';
+import {Size} from '../render/Size';
 
 export class Playwrights extends Card implements CorporationCard {
   constructor() {
@@ -31,7 +31,7 @@ export class Playwrights extends Card implements CorporationCard {
               // TODO(chosta): find a reasonable way to represent "?" (alphanumeric maybe)
               // use 1000 as an id to tell Vue to render the '?'
               eb.megacredits(1000).startAction;
-              eb.text('replay', CardRenderItemSize.SMALL, true);
+              eb.text('replay', Size.SMALL, true);
               eb.nbsp.cards(1).any.secondaryTag(Tags.EVENT);
             });
           });

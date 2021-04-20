@@ -3,48 +3,48 @@
   e.g. plus and minus sign, asterix, arrow, dash, slash, etc.
  */
 import {CardRenderSymbolType} from './CardRenderSymbolType';
-import {CardRenderItemSize} from './CardRenderItemSize';
+import {Size} from './Size';
 
 export class CardRenderSymbol {
-  private constructor(public type: CardRenderSymbolType, public size: CardRenderItemSize, public isIcon: boolean = false) {}
+  private constructor(public type: CardRenderSymbolType, public size: Size, public isIcon: boolean = false) {}
 
-  public static asterix(size: CardRenderItemSize = CardRenderItemSize.MEDIUM): CardRenderSymbol {
+  public static asterix(size: Size = Size.MEDIUM): CardRenderSymbol {
     return new CardRenderSymbol(CardRenderSymbolType.ASTERIX, size);
   }
-  public static or(size: CardRenderItemSize = CardRenderItemSize.MEDIUM): CardRenderSymbol {
+  public static or(size: Size = Size.MEDIUM): CardRenderSymbol {
     return new CardRenderSymbol(CardRenderSymbolType.OR, size);
   }
-  public static plus(size: CardRenderItemSize = CardRenderItemSize.MEDIUM): CardRenderSymbol {
+  public static plus(size: Size = Size.MEDIUM): CardRenderSymbol {
     return new CardRenderSymbol(CardRenderSymbolType.PLUS, size, true);
   }
-  public static minus(size: CardRenderItemSize = CardRenderItemSize.MEDIUM): CardRenderSymbol {
+  public static minus(size: Size = Size.MEDIUM): CardRenderSymbol {
     return new CardRenderSymbol(CardRenderSymbolType.MINUS, size, true);
   }
-  public static empty(size: CardRenderItemSize = CardRenderItemSize.MEDIUM): CardRenderSymbol {
+  public static empty(size: Size = Size.MEDIUM): CardRenderSymbol {
     return new CardRenderSymbol(CardRenderSymbolType.EMPTY, size);
   }
-  public static slash(size: CardRenderItemSize = CardRenderItemSize.MEDIUM): CardRenderSymbol {
+  public static slash(size: Size = Size.MEDIUM): CardRenderSymbol {
     return new CardRenderSymbol(CardRenderSymbolType.SLASH, size);
   }
-  public static colon(size: CardRenderItemSize = CardRenderItemSize.MEDIUM): CardRenderSymbol {
+  public static colon(size: Size = Size.MEDIUM): CardRenderSymbol {
     return new CardRenderSymbol(CardRenderSymbolType.COLON, size);
   }
-  public static arrow(size: CardRenderItemSize = CardRenderItemSize.MEDIUM): CardRenderSymbol {
+  public static arrow(size: Size = Size.MEDIUM): CardRenderSymbol {
     return new CardRenderSymbol(CardRenderSymbolType.ARROW, size, true);
   }
-  public static bracketOpen(size: CardRenderItemSize = CardRenderItemSize.MEDIUM): CardRenderSymbol {
+  public static bracketOpen(size: Size = Size.MEDIUM): CardRenderSymbol {
     return new CardRenderSymbol(CardRenderSymbolType.BRACKET_OPEN, size);
   }
-  public static bracketClose(size: CardRenderItemSize = CardRenderItemSize.MEDIUM): CardRenderSymbol {
+  public static bracketClose(size: Size = Size.MEDIUM): CardRenderSymbol {
     return new CardRenderSymbol(CardRenderSymbolType.BRACKET_CLOSE, size);
   }
-  public static nbsp(size: CardRenderItemSize = CardRenderItemSize.MEDIUM): CardRenderSymbol {
+  public static nbsp(size: Size = Size.MEDIUM): CardRenderSymbol {
     return new CardRenderSymbol(CardRenderSymbolType.NBSP, size, true);
   }
-  public static vSpace(size: CardRenderItemSize = CardRenderItemSize.MEDIUM): CardRenderSymbol {
+  public static vSpace(size: Size = Size.MEDIUM): CardRenderSymbol {
     return new CardRenderSymbol(CardRenderSymbolType.VSPACE, size, true);
   }
-  public static equals(size: CardRenderItemSize = CardRenderItemSize.MEDIUM): CardRenderSymbol {
+  public static equals(size: Size = Size.MEDIUM): CardRenderSymbol {
     return new CardRenderSymbol(CardRenderSymbolType.EQUALS, size);
   }
 }

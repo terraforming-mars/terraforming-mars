@@ -13,7 +13,7 @@ import {Resources} from '../../Resources';
 import {OrOptions} from '../../inputs/OrOptions';
 import {SelectOption} from '../../inputs/SelectOption';
 import {StealResources} from '../../deferredActions/StealResources';
-import {CardRenderItemSize} from '../render/CardRenderItemSize';
+import {Size} from '../render/Size';
 import {Phase} from '../../Phase';
 
 export class TheDarksideofTheMoonSyndicate implements CorporationCard {
@@ -28,16 +28,16 @@ export class TheDarksideofTheMoonSyndicate implements CorporationCard {
     cardNumber: '',
     renderData: CardRenderer.builder((b) => {
       b.megacredits(40).syndicateFleet(2).br;
-      b.text('You start with 40 MC and 2 syndicate fleets on this card.', CardRenderItemSize.SMALL, false, false).br;
-      b.titanium(1).arrow(CardRenderItemSize.SMALL).syndicateFleet()
-        .or(CardRenderItemSize.SMALL)
-        .syndicateFleet().arrow(CardRenderItemSize.SMALL).text('steal', CardRenderItemSize.TINY).megacredits(8).any.br;
+      b.text('You start with 40 MC and 2 syndicate fleets on this card.', Size.SMALL, false, false).br;
+      b.titanium(1).arrow(Size.SMALL).syndicateFleet()
+        .or(Size.SMALL)
+        .syndicateFleet().arrow(Size.SMALL).text('steal', Size.TINY).megacredits(8).any.br;
       b.description('(Action: Spend 1 titanium to add 1 syndicate fleet on this card OR remove 1 syndicate fleet from this card to steal 8MC from any opponent.').br;
       b
         .effect('When you place a tile on the Moon, steal 2 M€ from opponents for each of their tiles next to yours.', (eb) => {
-          eb.emptyTile('normal', CardRenderItemSize.SMALL).secondaryTag(Tags.MOON)
+          eb.emptyTile('normal', Size.SMALL).secondaryTag(Tags.MOON)
             .startEffect
-            .text('STEAL').megacredits(2).any.slash().emptyTile('normal', CardRenderItemSize.SMALL).emptyTile('normal', CardRenderItemSize.SMALL).any;
+            .text('STEAL').megacredits(2).any.slash().emptyTile('normal', Size.SMALL).emptyTile('normal', Size.SMALL).any;
         });
     }),
   };

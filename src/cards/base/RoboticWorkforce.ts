@@ -10,7 +10,7 @@ import {ICard} from '../ICard';
 import {DecreaseAnyProduction} from '../../deferredActions/DecreaseAnyProduction';
 import {SpaceBonus} from '../../SpaceBonus';
 import {CardRenderer} from '../render/CardRenderer';
-import {CardRenderItemSize} from '../render/CardRenderItemSize';
+import {Size} from '../render/Size';
 import {Units} from '../../Units';
 
 class Updater {
@@ -30,7 +30,7 @@ export class RoboticWorkforce extends Card implements IProjectCard {
       metadata: {
         cardNumber: '086',
         renderData: CardRenderer.builder((b) => {
-          b.text('Copy A', CardRenderItemSize.SMALL, true).nbsp;
+          b.text('Copy A', Size.SMALL, true).nbsp;
           b.production((pb) => pb.building().played);
         }),
         description: 'Duplicate only the production box of one of your building cards.',

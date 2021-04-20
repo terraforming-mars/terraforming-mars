@@ -7,7 +7,7 @@ import {SelectOption} from '../../inputs/SelectOption';
 import {Resources} from '../../Resources';
 import {CardName} from '../../CardName';
 import {CardRenderer} from '../render/CardRenderer';
-import {CardRenderItemSize} from '../render/CardRenderItemSize';
+import {Size} from '../render/Size';
 
 export class HiredRaiders extends Card implements IProjectCard {
   constructor() {
@@ -19,9 +19,9 @@ export class HiredRaiders extends Card implements IProjectCard {
       metadata: {
         cardNumber: '124',
         renderData: CardRenderer.builder((b) => {
-          b.text('steal', CardRenderItemSize.MEDIUM, true).steel(2).any.br;
+          b.text('steal', Size.MEDIUM, true).steel(2).any.br;
           b.or().br;
-          b.text('steal', CardRenderItemSize.MEDIUM, true).megacredits(3).any;
+          b.text('steal', Size.MEDIUM, true).megacredits(3).any;
         }),
         description: 'Steal up to 2 steel, or 3 M€ from any player.',
       },

@@ -15,7 +15,7 @@ export class CommunityServices extends Card implements IProjectCard {
 
       metadata: {
         cardNumber: 'C04',
-        description: 'Increase your MC production 1 step per CARD WITH NO TAGS, including this.',
+        description: 'Increase your M€ production 1 step per CARD WITH NO TAGS, including this.',
         renderData: CardRenderer.builder((b) => {
           b.production((pb) => {
             pb.megacredits(1);

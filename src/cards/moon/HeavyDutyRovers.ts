@@ -35,7 +35,7 @@ export class HeavyDutyRovers implements IProjectCard {
     renderData: CardRenderer.builder((b) => {
       b.megacredits(4).slash().moonRoad({size: Size.SMALL}).any.moonMine({size: Size.SMALL}).any;
       b.br;
-      b.moonLogisticsRate();
+      b.moonLogisticsRate({size: Size.SMALL});
     }),
   };
 }

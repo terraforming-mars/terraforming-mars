@@ -22,7 +22,7 @@ export class Hackers extends Card implements IProjectCard {
             pb.plus().megacredits(2);
           });
         }),
-        description: 'Decrease your energy production 1 step and any MC production 2 steps. increase your MC production 2 steps.',
+        description: 'Decrease your energy production 1 step and any M€ production 2 steps. increase your M€ production 2 steps.',
         victoryPoints: -1,
       },
     });

@@ -25,7 +25,7 @@ export class TropicalResort extends Card implements IProjectCard {
             pb.plus().megacredits(3);
           });
         }),
-        description: 'Reduce your heat production 2 steps and increase your MC production 3 steps.',
+        description: 'Reduce your heat production 2 steps and increase your M€ production 3 steps.',
         victoryPoints: 2,
       },
     });

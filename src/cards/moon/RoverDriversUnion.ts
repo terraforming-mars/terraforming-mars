@@ -19,7 +19,7 @@ export class RoverDriversUnion extends Card implements IProjectCard {
       requirements: CardRequirements.builder((b) => b.logisticRate(2)),
 
       metadata: {
-        description: 'Requires 2 Logistic Rate. Raise the Logistic Rate 1 step. Increase your MC production 1 step per Logistic Rate.',
+        description: 'Requires 2 Logistic Rate. Raise the Logistic Rate 1 step. Increase your M€ production 1 step per Logistic Rate.',
         cardNumber: 'M78',
         renderData: CardRenderer.builder((b) => {
           b.moonLogisticsRate().br;

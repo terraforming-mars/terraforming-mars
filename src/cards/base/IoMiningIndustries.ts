@@ -22,7 +22,7 @@ export class IoMiningIndustries extends Card implements IProjectCard {
           b.production((pb) => pb.titanium(2).megacredits(2)).br;
           b.vpText('1 VP per Jovian tag you have.');
         }),
-        description: 'Increase your titanium production 2 steps and your MC production 2 steps.',
+        description: 'Increase your titanium production 2 steps and your M€ production 2 steps.',
         victoryPoints: CardRenderDynamicVictoryPoints.jovians(1, 1),
       },
     });

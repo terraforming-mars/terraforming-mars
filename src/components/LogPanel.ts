@@ -274,7 +274,7 @@ export const LogPanel = Vue.component('log-panel', {
         </div>
         <div class="card-panel" v-if="cards.length > 0">
           <Button size="big" type="close" :disableOnServerBusy="false" :onClick="hideMe" align="right"/>
-          <div id="log_panel_card" class="cardbox" v-for="(card, index) in cards" :key="index">
+          <div id="log_panel_card" class="cardbox" v-for="(card, index) in cards" :key="card">
             <Card :card="{name: card}"/>
           </div>
         </div>

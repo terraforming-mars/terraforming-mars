@@ -24,7 +24,7 @@ export class Zeppelins extends Card implements IProjectCard {
             pb.city(Size.SMALL).any.asterix();
           });
         }),
-        description: 'Requires 5% oxygen. Increase your MC production 1 step for each City tile ON MARS.',
+        description: 'Requires 5% oxygen. Increase your M€ production 1 step for each City tile ON MARS.',
         victoryPoints: 1,
       },
     });

@@ -70,7 +70,7 @@ export const HelpPhases = Vue.component('help-phases', {
                       <div class="expansion-icon expansion-icon-colony"></div>
                     </li>
                     <li>
-                      <span v-i18n>send delegate: free from lobby, 5 mc from reserve</span>
+                      <span v-i18n>send delegate: free from lobby, 5 M€ from reserve</span>
                       <div class="expansion-icon expansion-icon-turmoil"></div>
                     </li>
                   </ul>

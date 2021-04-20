@@ -14,6 +14,7 @@ import {OrOptions} from '../../inputs/OrOptions';
 import {SelectOption} from '../../inputs/SelectOption';
 import {StealResources} from '../../deferredActions/StealResources';
 import {Size} from '../render/Size';
+import {Phase} from '../../Phase';
 
 export class TheDarksideofTheMoonSyndicate implements CorporationCard {
   public name = CardName.THE_DARKSIDE_OF_THE_MOON_SYNDICATE;
@@ -33,7 +34,7 @@ export class TheDarksideofTheMoonSyndicate implements CorporationCard {
         .syndicateFleet().arrow(Size.SMALL).text('steal', Size.TINY).megacredits(8).any.br;
       b.description('(Action: Spend 1 titanium to add 1 syndicate fleet on this card OR remove 1 syndicate fleet from this card to steal 8MC from any opponent.').br;
       b
-        .effect('When you place a tile on the Moon, steal 2 MC from opponents for each of their tiles next to yours.', (eb) => {
+        .effect('When you place a tile on the Moon, steal 2 M€ from opponents for each of their tiles next to yours.', (eb) => {
           eb.emptyTile('normal', Size.SMALL).secondaryTag(Tags.MOON)
             .startEffect
             .text('STEAL').megacredits(2).any.slash().emptyTile('normal', Size.SMALL).emptyTile('normal', Size.SMALL).any;
@@ -74,6 +75,9 @@ export class TheDarksideofTheMoonSyndicate implements CorporationCard {
   }
 
   public onTilePlaced(cardOwner: Player, activePlayer: Player, space: ISpace) {
+    if (activePlayer.game.phase === Phase.SOLAR) {
+      return;
+    }
     if (activePlayer !== cardOwner) {
       return undefined;
     }

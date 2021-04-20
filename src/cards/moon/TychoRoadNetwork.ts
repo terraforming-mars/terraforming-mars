@@ -19,7 +19,7 @@ export class TychoRoadNetwork extends MoonCard {
       productionBox: Units.of({megacredits: 1}),
 
       metadata: {
-        description: 'Spend 1 steel. Increase your MC production 1 step. ' +
+        description: 'Spend 1 steel. Increase your M€ production 1 step. ' +
         'Place a road tile on the Moon and raise the Logistics Rate 1 step.',
         cardNumber: 'M09',
         renderData: CardRenderer.builder((b) => {

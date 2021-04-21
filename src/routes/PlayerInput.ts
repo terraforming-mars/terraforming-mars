@@ -12,10 +12,13 @@ export class PlayerInput extends Handler {
   }
 
   public post(req: http.IncomingMessage, res: http.ServerResponse, ctx: IContext): void {
-    // I made this req.url! We know at this point url is not null. But moving to using ctx.url will help.
-    const playerId: string = req.url!.substring(
-      '/player/input?id='.length,
-    );
+    const playerId = ctx.url.searchParams.get('id');
+
+    if (playerId === null) {
+      ctx.route.badRequest(req, res, 'must provide id');
+      return;
+    }
+
     // This is the exact same code as in `ApiPlayer`. I bet it's not the only place.
     GameLoader.getInstance().getByPlayerId(playerId, (game) => {
       if (game === undefined) {

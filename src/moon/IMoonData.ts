@@ -8,6 +8,7 @@ export interface IMoonData {
   miningRate: number;
   logisticRate: number;
   lunaFirstPlayer: Player | undefined;
+  lunaProjectOfficeLastGeneration: number | undefined;
 }
 
 export namespace IMoonData {
@@ -21,6 +22,7 @@ export namespace IMoonData {
       miningRate: moonData.miningRate,
       logisticRate: moonData.logisticRate,
       lunaFirstPlayerId: moonData.lunaFirstPlayer ? moonData.lunaFirstPlayer.id : undefined,
+      lunaProjectOfficeLastGeneration: moonData.lunaProjectOfficeLastGeneration,
     };
   };
 
@@ -35,6 +37,7 @@ export namespace IMoonData {
       miningRate: moonData.miningRate,
       moon: MoonBoard.deserialize(moonData.moon, players),
       lunaFirstPlayer: lunaFirstPlayer,
+      lunaProjectOfficeLastGeneration: moonData.lunaProjectOfficeLastGeneration,
     };
   }
 }

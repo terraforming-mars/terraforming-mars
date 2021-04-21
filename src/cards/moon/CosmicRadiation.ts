@@ -39,7 +39,7 @@ export class CosmicRadiation extends Card implements IProjectCard {
         const spent = Math.min(owes, mineTileOwner.megaCredits);
         mineTileOwner.megaCredits -= spent;
         player.game.log(
-          '${0} spends ${1} MC for the ${2} mines they own.',
+          '${0} spends ${1} M€ for the ${2} mines they own.',
           (b) => b.player(mineTileOwner).number(spent).number(owned));
       }
     });

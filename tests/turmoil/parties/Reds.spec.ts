@@ -39,7 +39,7 @@ describe('Reds', function() {
     expect(player.getTerraformRating()).to.eq(playerInitialTR - 1);
   });
 
-  it('Ruling policy 1: When you take an action that raises TR, you MUST pay 3 MC per step raised', function() {
+  it('Ruling policy 1: When you take an action that raises TR, you MUST pay 3 M€ per step raised', function() {
     TestingUtils.setRulingPartyAndRulingPolicy(game, turmoil, reds, reds.policies[0].id);
 
     player.megaCredits = 3;

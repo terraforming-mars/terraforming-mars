@@ -31,7 +31,7 @@ describe('TharsisRepublic', function() {
     expect(player.megaCredits).to.eq(3);
   });
 
-  it('Gives 3 MC and MC production for own city on Mars', function() {
+  it('Gives 3 M€ and MC production for own city on Mars', function() {
     game.addCityTile(player, game.board.getAvailableSpacesOnLand(player)[0].id);
     TestingUtils.runAllActions(game);
 

@@ -63,7 +63,7 @@
   "Decrease your Energy production 4 steps and increase your Plant production 2 steps. Raise your TR 3 steps and place this tile.":"Disminuye tu producción de energía 3 niveles y aumenta tu producción de plantas 2 niveles. Obtén 3 VT. Coloca esta loseta.",
 
   "Orbital Cleanup":"Limpieza orbital",
-  "Action: Gain 1 MC per Science tag you have.":"Acción: obtén 1 M€ por cada símbolo de ciencia que poseas.",
+  "Action: Gain 1 M€ per Science tag you have.":"Acción: obtén 1 M€ por cada símbolo de ciencia que poseas.",
   "Decrease your M€ production 2 steps.":"Disminuye tu producción de M€ 2 niveles.",
 
   "Law Suit":"Litigio",
@@ -128,7 +128,7 @@
 
   "Arcadian": "",
   "Communities": "",
-  "You start with 40 MC and 10 steel. AS YOUR FIRST ACTION, PLACE A COMMUNITY [PLAYER MARKER] ON A NON-RESERVED AREA.": "",
+  "You start with 40 M€ and 10 steel. AS YOUR FIRST ACTION, PLACE A COMMUNITY [PLAYER MARKER] ON A NON-RESERVED AREA.": "",
   "ACTION: PLACE A COMMUNITY (PLAYER MARKER) ON A NON-RESERVED AREA ADJACENT TO ONE OF YOUR TILES OR MARKED AREAS": "",
   "EFFECT: MARKED AREAS ARE RESERVED FOR YOU. WHEN YOU PLACE A TILE THERE, GAIN 3 MC": "",
 
@@ -138,7 +138,7 @@
   "Raise temperature 3 steps and gain 4 steel. Place this tile ADJACENT TO no other city tile. Remove up to 6 Plants from any player.":"Aumenta la temperatura 3 niveles y obtén 4 de acero. Coloca esta loseta NO ADYACENTE a una ciudad. Elimina hasta 6 plantas de un jugador. ",
 
   "Astrodrill":"Astrotaladro",
-  "You start with 38 MC and 3 asteroid resources.":"Comienza con 38 M€ y 3 recursos de asteroide.",
+  "You start with 38 M€ and 3 asteroid resources.":"Comienza con 38 M€ y 3 recursos de asteroide.",
   "Action: Add an asteroid resource to ANY card OR gain any standard resource, OR remove an asteroid resource from this card to gain 3 titanium.": "Acción: añade 1 asteroide a CUALQUIER carta U obtén cualquier recurso estándar O quita un asteroide de aquó para obtener 3 de titanio.",
 
   "Requires 4 ocean tiles. Increase your Energy production 2 steps. Place this tile ADJACENT TO an ocean tile.":"Requiere 4 losetas de océano. Aumenta tu producción de energía 2 niveles. Coloca esta loseta ADYACENTE a una loseta de oceáno.",
@@ -148,7 +148,7 @@
   "You start with 37 MC. Increase your steel production 1 step.": "",
   "Action: Increase your energy production 1 step IF YOU HAVE NO ENERGY RESOURCES, or spend 3MC to draw a building card.": "",
 
-  "You start with 38 MC and 1 steel production.": "",
+  "You start with 38 M€ and 1 steel production.": "",
   "Effect: When you play a building tag, including this, gain 1 microbe to this card, or remove 2 microbes here and raise your plant production 1 step.": "",
 
   "Requires 8 oceans. 1 VP for each animal on this card.":"Requiere 8 océanos. 1 PV por cada animal en esta carta.",

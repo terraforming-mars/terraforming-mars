@@ -17,7 +17,7 @@ export class MoonColonyStandardProject extends StandardProjectCard implements IM
       metadata: {
         cardNumber: '',
         renderData: CardRenderer.builder((b) =>
-          b.standardProject('Spend 22 MC and 1 titanium to place a colony on the moon and raise your M€ production 1 step.', (eb) => {
+          b.standardProject('Spend 22 M€ and 1 titanium to place a colony on the moon and raise your M€ production 1 step.', (eb) => {
             eb.megacredits(22).titanium(1).startAction.moonColony().production((pb) => pb.megacredits(1));
           }),
         ),

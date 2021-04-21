@@ -28,7 +28,7 @@ export class TheDarksideofTheMoonSyndicate implements CorporationCard {
     cardNumber: '',
     renderData: CardRenderer.builder((b) => {
       b.megacredits(40).syndicateFleet(2).br;
-      b.text('You start with 40 MC and 2 syndicate fleets on this card.', Size.SMALL, false, false).br;
+      b.text('You start with 40 M€ and 2 syndicate fleets on this card.', Size.SMALL, false, false).br;
       b.titanium(1).arrow(Size.SMALL).syndicateFleet()
         .or(Size.SMALL)
         .syndicateFleet().arrow(Size.SMALL).text('steal', Size.TINY).megacredits(8).any.br;

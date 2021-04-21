@@ -14,7 +14,7 @@
     "Increase your M€ production 1 step per CARD WITH NO TAGS, including this.": "Podnieś swoją produkcję MC o 1 poziom za każdą posiadaną kartę bez symboli (z tą włącznie).",
 
     "Conscription": "Pobór",
-    "Requires 2 Earth tags. The next card you play this generation costs 16 MC less.": "Musisz posiadać przynajmniej 2 symbole ziemi. Nastepna zagrana przez Ciebie podczas tego pokolenia karta będzie kosztować o 16 MC mniej.",
+    "Requires 2 Earth tags. The next card you play this generation costs 16 M€ less.": "Musisz posiadać przynajmniej 2 symbole ziemi. Nastepna zagrana przez Ciebie podczas tego pokolenia karta będzie kosztować o 16 MC mniej.",
 
     "Corona Extractor": "Ekstraktor Korony",
     "Requires 4 science tags. Increase your energy production 4 steps.": "Musisz posiadać przynajmniej 4 symbole nauki. Podnieś swoją produkcję energii o 4 poziomy.",
@@ -59,7 +59,7 @@
 
     "Jupiter Floating Station": "Stacja Dryfowa na Jowiszu",
     "Action: Add 1 floater to a JOVIAN CARD.": "Akcja: Umieść 1 jednostkę dryfowców na dowolnej karcie z symbolem Jowisza.",
-    "Action: Gain 1 MC for every floater here [MAX 4].": "Akcja: Otrzymaj 1 MC za każdą znajdującą się na tej karcie jednostkę dryfowców (max 4).",
+    "Action: Gain 1 M€ for every floater here [MAX 4].": "Akcja: Otrzymaj 1 MC za każdą znajdującą się na tej karcie jednostkę dryfowców (max 4).",
     "Requires 3 Science tags.": "Musisz posiadać przynajmniej 3 symbole nauki.",
 
     "Luna Governor": "Gubernator Księżyca",

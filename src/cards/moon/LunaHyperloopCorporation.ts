@@ -37,7 +37,7 @@ export class LunaHyperloopCorporation implements IActionCard, CorporationCard {
   }
 
   public readonly metadata: CardMetadata = {
-    description: 'You start with 38 MC and 4 steel.',
+    description: 'You start with 38 M€ and 4 steel.',
     cardNumber: '',
     renderData: CardRenderer.builder((b) => {
       b.megacredits(38).steel(4).br;

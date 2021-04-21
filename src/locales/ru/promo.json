@@ -70,7 +70,7 @@
     "Decrease your Energy production 4 steps and increase your Plant production 2 steps. Raise your TR 3 steps and place this tile.": "Уменьшите своё производство энергии на 4, увеличьте свое производство растений на 2. Увеличьте своё РТ на 3 и разместите этот тайл",
 
     "Orbital Cleanup": "Очистка орбиты",
-    "Action: Gain 1 MC per Science tag you have.": "Действие: Получите 1 МС за каждую свою метку Науки",
+    "Action: Gain 1 M€ per Science tag you have.": "Действие: Получите 1 МС за каждую свою метку Науки",
     "Decrease your M€ production 2 steps.": "Уменьшите своё производство МС на 2",
 
     "Law Suit": "Судебный иск",
@@ -137,7 +137,7 @@
     "Каждый игрок разыгрывающий карту с меткой бактерии (вкл. эту) получает 2 MC или добавляет на ТУ карту бактерию, а вы получаете 2 MC",
 
     "Recyclon": "Recyclon",
-    "You start with 38 MC and 1 steel production.": "Вы начинаете c 36 МС и 1 дополнительным уровнем производства стали",
+    "You start with 38 M€ and 1 steel production.": "Вы начинаете c 36 МС и 1 дополнительным уровнем производства стали",
     "Effect: When you play a building tag, including this, gain 1 microbe to this card, or remove 2 microbes here and raise your plant production 1 step.":
     "Когда вы разыгрываете метку строителя, включая эту, добавьте сюда 1 бактерию, или удалите отсюда 2 бактерии, чтобы повысить ваше производство растений на 1",
 
@@ -160,7 +160,7 @@
     "Действие: Увеличьте ваше производство энергии, если у вас нет ресурсов-энергии или потратьте 3 MC, чтобы добрать карту с меткой строителя",
 
     "Arcadian Communities": "Arcadian Communities",
-    "You start with 40 MC and 10 steel. AS YOUR FIRST ACTION, PLACE A COMMUNITY [PLAYER MARKER] ON A NON-RESERVED AREA.":
+    "You start with 40 M€ and 10 steel. AS YOUR FIRST ACTION, PLACE A COMMUNITY [PLAYER MARKER] ON A NON-RESERVED AREA.":
     "Вы начинаете c 37 МС и 10 стали. Первым действием разместите СООБЩЕСТВО [свой кубик] на незарезервированном месте на карте",
     "ACTION: PLACE A COMMUNITY (PLAYER MARKER) ON A NON-RESERVED AREA ADJACENT TO ONE OF YOUR TILES OR MARKED AREAS":
     "Действие: Разместите СООБЩЕСТВО [свой кубик] на незарезервированном месте по соседству c другим вашим тайлом или СООБЩЕСТОВОМ",
@@ -168,7 +168,7 @@
     "Эффект: Никто кроме вас не может размещать тайлы на места с вашими СООБЩЕСВАМИ. Когда вы размещаете тайл в таком месте получайте 3 MC",
 
     "Astrodrill": "Astrodrill",
-    "You start with 38 MC and 3 asteroid resources.": "Вы начинаете c 38 МС и 3 астероидами",
+    "You start with 38 M€ and 3 asteroid resources.": "Вы начинаете c 38 МС и 3 астероидами",
     "Action: Add an asteroid resource to ANY card OR gain any standard resource, OR remove an asteroid resource from this card to gain 3 titanium.":
     "Действие: Добавьте астероид на ЛЮБУЮ карту или получите любой стандартный ресурс. ИЛИ удалите отсюда астероид и получите 3 титана",
 

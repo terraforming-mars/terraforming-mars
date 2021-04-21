@@ -60,7 +60,7 @@
   "Decrease your Energy production 4 steps and increase your Plant production 2 steps. Raise your TR 3 steps and place this tile.": "",
 
   "Orbital Cleanup": "Sprzątanie Orbitalne",
-  "Action: Gain 1 MC per Science tag you have.": "Akcja: Otrzymujesz 1 MC za każdy posiadany symbol nauki.",
+  "Action: Gain 1 M€ per Science tag you have.": "Akcja: Otrzymujesz 1 MC za każdy posiadany symbol nauki.",
   "Decrease your M€ production 2 steps.": "Obniż swoją produkcję MC o 2 poziomy.",
 
   "Law Suit": "Pozew",
@@ -125,7 +125,7 @@
 
   "Arcadian": "Wspólnota",
   "Communities": "Arkadyjska",
-  "You start with 40 MC and 10 steel. AS YOUR FIRST ACTION, PLACE A COMMUNITY [PLAYER MARKER] ON A NON-RESERVED AREA.": "Rozpoczynasz grę z 10 MC i 10 jednostkami stali. W ramach swojej pierwszej akcji w grze umieść na niezarezerwowanym polu na planszy znacznik wspólnoty (Twój znacznik gracza).",
+  "You start with 40 M€ and 10 steel. AS YOUR FIRST ACTION, PLACE A COMMUNITY [PLAYER MARKER] ON A NON-RESERVED AREA.": "Rozpoczynasz grę z 10 MC i 10 jednostkami stali. W ramach swojej pierwszej akcji w grze umieść na niezarezerwowanym polu na planszy znacznik wspólnoty (Twój znacznik gracza).",
   "ACTION: PLACE A COMMUNITY (PLAYER MARKER) ON A NON-RESERVED AREA ADJACENT TO ONE OF YOUR TILES OR MARKED AREAS": "Akcja: Umieść znacznik wspólnoty (Twój znacznik gracza) na niezarezerwowanym polu na planszy sąsiadującym z Twoim obszarem albo innym znacznikiem wspólnoty.",
   "EFFECT: MARKED AREAS ARE RESERVED FOR YOU. WHEN YOU PLACE A TILE THERE, GAIN 3 MC": "Pola ze znacznikami wspólnoty są dla Ciebie zarezerwowane. Gdy umieszczasz na nich dowolny obszar, otrzymujesz 3 MC.",
 
@@ -134,7 +134,7 @@
 
   "Raise temperature 3 steps and gain 4 steel. Place this tile ADJACENT TO no other city tile. Remove up to 6 Plants from any player.": "Podnieś temperaturę o 6°C. Otrzymujesz 4 jednostki stali. Usuń do 6 jednostek roślinności dowolnego gracza. Umieść ten obszar na planszy na polu, które nie sąsiaduje z żadnym obszarem miasta.",
 
-  "You start with 38 MC and 3 asteroid resources.": "Rozpoczynasz grę z 3 jednostkami asteroid i 38 MC.",
+  "You start with 38 M€ and 3 asteroid resources.": "Rozpoczynasz grę z 3 jednostkami asteroid i 38 MC.",
   "Action: Add an asteroid resource to ANY card OR gain any standard resource, OR remove an asteroid resource from this card to gain 3 titanium.": "Akcja: Umieść 1 jednostkę asteroid na dowolnej karcie, albo otrzymaj 1 dowolną jednostkę zasobów, albo wydaj 1 jednostkę asteroid z tej karty, aby otrzymać 3 jednostki tytanu.",
 
   "Requires 4 ocean tiles. Increase your Energy production 2 steps. Place this tile ADJACENT TO an ocean tile.": "Wymagania: Na planszy muszą się znajdować przynajmniej 4 obszary oceanów. Podnieś swoją produkcję energii o 2 poziomy. Umieść ten obszar na planszy na polu sąsiadującym z obszarem oceanu.",
@@ -144,6 +144,6 @@
   "You start with 37 MC. Increase your steel production 1 step.": "Rozpoczynasz grę z 37 MC i dodatkowym poziomem produkcji stali.",
   "Action: Increase your energy production 1 step IF YOU HAVE NO ENERGY RESOURCES, or spend 3MC to draw a building card.": "JEŚLI NIE POSIADASZ JEDNOSTEK ENERGII, podnieś swoją produkcję energii o 1 poziom ALBO wydaj 3 MC, aby dobrać pierwszą z odkrywanych kart z symbolem budowli z talii projektów (pozostałe odrzuć).",
 
-  "You start with 38 MC and 1 steel production.": "Rozpoczynasz grę z 38 MC i 1 dodatkowym poziomem produkcji stali.",
+  "You start with 38 M€ and 1 steel production.": "Rozpoczynasz grę z 38 MC i 1 dodatkowym poziomem produkcji stali.",
   "Effect: When you play a building tag, including this, gain 1 microbe to this card, or remove 2 microbes here and raise your plant production 1 step.": "Efekt trwały: Gdy zagrywasz kartę z symbolem budowli (z tą włącznie), umieść na tej karcie 1 jednostkę mikrobów i podnieś swoją produkcję zieleni o 1 poziom za każdy symbol budowli na zagranej karcie."
 }

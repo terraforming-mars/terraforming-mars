@@ -38,7 +38,7 @@ export class RevoltingColonists extends Card implements IProjectCard {
         const spent = Math.min(owes, colonyTileOwner.megaCredits);
         colonyTileOwner.megaCredits -= spent;
         player.game.log(
-          '${0} spends ${1} MC for the ${2} colonies they own.',
+          '${0} spends ${1} M€ for the ${2} colonies they own.',
           (b) => b.player(colonyTileOwner).number(spent).number(owned));
       }
     });

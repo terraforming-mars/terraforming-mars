@@ -4,7 +4,7 @@
     "Effect: At game end, score -2 / 0 / 1 / 2 VP PER TAG TYPE for 0 / 1-2 / 3-4 / 5+ tags.": "效果：终局计分时，若你拥有每种标志0/1-2/3-4/5+个，得到-2/0/1/2 VP",
 
     "Curiosity II": "求知II型公司",
-    "You start with 40 MC and 2 steel production.":"起始拥有40MC和2钢铁产量",
+    "You start with 40 M€ and 2 steel production.":"起始拥有40MC和2钢铁产量",
     "Effect: When you place a tile on an area that has a RESOURCE placement bonus, or on top of another tile, you may pay 2 M€ to draw a card.":"效果:当你在一个有资源放置奖励的区域上放置一个板块，或将板块放置在另一个板块上，你可以支付2 MC来抽一张牌。",
 
     "Incite": "煽动公司",
@@ -15,7 +15,7 @@
     "You start with 120 MC. Lower your TR 7 steps.": "起始获得120MC，降低7点改造度",
 
     "Playwrights": "剧作家",
-    "You start with 38 MC and 1 Energy production.": "起始拥有38MC和1点电力产量",
+    "You start with 38 M€ and 1 Energy production.": "起始拥有38MC和1点电力产量",
     "Action: Replay a played event from any player by paying its cost ONLY in MC (discounts and rebates apply), then REMOVE IT FROM PLAY.": "行动：仅适用MC支付费用来重复一个任意玩家已经打出的事件效果（适用减费与回钱），然后将其从游戏中移除",
 
    "Project Workshop": "项目探讨公司",

@@ -17,7 +17,7 @@ export class MoonMineStandardProject extends StandardProjectCard implements IMoo
       metadata: {
         cardNumber: '',
         renderData: CardRenderer.builder((b) =>
-          b.standardProject('Spend 20 MC and 1 titanium to place a mine on the moon and raise steel production 1 step.', (eb) => {
+          b.standardProject('Spend 20 M€ and 1 titanium to place a mine on the moon and raise steel production 1 step.', (eb) => {
             eb.megacredits(20).titanium(1).startAction.moonMine().production((pb) => pb.steel(1));
           }),
         ),

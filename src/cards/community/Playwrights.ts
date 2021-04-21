@@ -22,7 +22,7 @@ export class Playwrights extends Card implements CorporationCard {
 
       metadata: {
         cardNumber: 'R40',
-        description: 'You start with 38 MC and 1 Energy production.',
+        description: 'You start with 38 M€ and 1 Energy production.',
         renderData: CardRenderer.builder((b) => {
           b.br.br;
           b.megacredits(38).production((pb) => pb.energy(1));
@@ -57,7 +57,7 @@ export class Playwrights extends Card implements CorporationCard {
       const replayableEvents = this.getReplayableEvents(player);
 
       return new SelectCard<IProjectCard>(
-        'Select event card to replay at cost in MC and remove from play', 'Select', replayableEvents,
+        'Select event card to replay at cost in M€ and remove from play', 'Select', replayableEvents,
         (foundCards: Array<IProjectCard>) => {
           const selectedCard: IProjectCard = foundCards[0];
 

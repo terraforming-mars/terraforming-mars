@@ -68,7 +68,7 @@ class RedsBonus02 implements Bonus {
 class RedsPolicy01 implements Policy {
   id = TurmoilPolicy.REDS_DEFAULT_POLICY;
   isDefault = true;
-  description: string = 'When you take an action that raises TR, you MUST pay 3 MC per step raised';
+  description: string = 'When you take an action that raises TR, you MUST pay 3 M€ per step raised';
 }
 
 class RedsPolicy02 implements Policy {

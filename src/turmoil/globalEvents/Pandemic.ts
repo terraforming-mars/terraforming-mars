@@ -8,7 +8,7 @@ import {Turmoil} from '../Turmoil';
 
 export class Pandemic implements IGlobalEvent {
     public name = GlobalEventName.PANDEMIC;
-    public description = 'Lose 3 MC for each Building tag (max 5, then reduced by influence).';
+    public description = 'Lose 3 M€ for each Building tag (max 5, then reduced by influence).';
     public revealedDelegate = PartyName.GREENS;
     public currentDelegate = PartyName.MARS;
     public resolve(game: Game, turmoil: Turmoil) {

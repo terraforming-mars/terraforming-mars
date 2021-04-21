@@ -20,7 +20,7 @@ export class MercurianAlloys extends Card implements IProjectCard {
       metadata: {
         cardNumber: 'X07',
         renderData: CardRenderer.builder((b) => {
-          b.effect('Your titanium resources are worth 1 MC extra.', (eb) => {
+          b.effect('Your titanium resources are worth 1 M€ extra.', (eb) => {
             eb.titanium(1).startEffect.plus(Size.SMALL).megacredits(1);
           });
         }),

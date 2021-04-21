@@ -16,7 +16,7 @@ export class GreeneryStandardProject extends StandardProjectCard {
       metadata: {
         cardNumber: 'SP6',
         renderData: CardRenderer.builder((b) =>
-          b.standardProject('Spend 23 MC to place a greenery tile and raise oxygen 1 step.', (eb) => {
+          b.standardProject('Spend 23 M€ to place a greenery tile and raise oxygen 1 step.', (eb) => {
             eb.megacredits(23).startAction.greenery();
           }),
         ),

@@ -56,7 +56,7 @@
   "Requires Venus 6%).":"需要金星改造度达到6%",
 
   "Venus Waystation":"金星中转站",
-  "Effect: When you play a Venus tag, you pay 2 MC less for it.":"效果: 当你打出一个带有金星标志的牌,你可以少花费2MC",
+  "Effect: When you play a Venus tag, you pay 2 M€ less for it.":"效果: 当你打出一个带有金星标志的牌,你可以少花费2MC",
 
 
   "Action: Add 1 resource to ANOTHER VENUS CARD).":"行动:放置1个资源到其它金星卡牌",
@@ -88,7 +88,7 @@
   "Requires 3 science tags. Draw 2 cards.":"需要你有3个科学标志。抽2张牌。",
 
   "Rotator Impacts":"回旋冲撞",
-  "Action: Spend 6 MC to add an asteroid resource to this card [TITANIUM MAY BE USED].":"行动：花费6MC在本牌上增加一个陨石资源（可以使用钛）",
+  "Action: Spend 6 M€ to add an asteroid resource to this card [TITANIUM MAY BE USED].":"行动：花费6MC在本牌上增加一个陨石资源（可以使用钛）",
   "Action: Spend 1 resource from this card to increase Venus 1 step.":"行动：从本牌移除一个资源提升金星改造度一格。",
   "Venus must be 14% or lower).":"金星改造度需要小于等于14%",
 
@@ -107,7 +107,7 @@
   "Effect: When playing a Venus tag, Floaters here may be used as payment, and are worth 3MC each.":"效果：当你打出一张带有金星标志的卡牌，你可以移除本卡上任意个云资源来支付费用，每个云资源价值3元。",
 
   "Floating Habs":"漂浮舱",
-  "Action: Spend 2 MC to add 1 Floater to ANY card":"行动：花费2MC并在任意一张牌上增加一个云资源",
+  "Action: Spend 2 M€ to add 1 Floater to ANY card":"行动：花费2MC并在任意一张牌上增加一个云资源",
   "Requires 2 Science tags. 1 VP for every 2nd Floater on this card).":"需要你至少有2个科学标志。",
   "Requires 2 Science tags.":"需要你至少有2个科学标志。",
   "1 VP for every 2nd Floater on this card.":"本牌每2个云资源价值1分。",
@@ -168,12 +168,12 @@
 
   "Requires 2 Science tags. 1 VP for every 3rd Microbe on this card":"需要你拥有2个科学标志才能打出。本卡上每3个微生物资源为你提供1VP。",
 
-  "Action: spend 2 MC to add 1 Floater to ANY card":"行动：支付2元以放置1个云资源到任意卡牌上。",
+  "Action: spend 2 M€ to add 1 Floater to ANY card":"行动：支付2元以放置1个云资源到任意卡牌上。",
 
   "Requires 2 Science tags. 1 VP for every 2nd Floater on this card":"需要你拥有2个科学标志才能打出。本卡上每2个云资源为你提供1VP。",
 
   "Forced Precipitation":"强制降水",
-  "Action: Spend 2 MC to add 1 Floater to THIS card.":"行动：支付2元以放置1个云资源到本卡上",
+  "Action: Spend 2 M€ to add 1 Floater to THIS card.":"行动：支付2元以放置1个云资源到本卡上",
   "Action: Spend 2 Floaters here to increase Venus 1 step.":"行动：移除本卡上2个云资源以提升金星改造度1格。",
 
   "Freyja Biodomes":"弗雷雅生态馆",
@@ -212,7 +212,7 @@
 
 
   "max 14% Venus":"金星改造度≤14%",
-  "Action: spend 6 MC to add an asteroid resource to this card (TITANIUM MAY BE USED), or spend 1 resource from this card to increase Venus 1 step":"行动：支付6元以放置1个小行星资源到本卡上（可以使用钛资源支付），或移除本卡上1个小行星资源以提升金星改造度1格。",
+  "Action: spend 6 M€ to add an asteroid resource to this card (TITANIUM MAY BE USED), or spend 1 resource from this card to increase Venus 1 step":"行动：支付6元以放置1个小行星资源到本卡上（可以使用钛资源支付），或移除本卡上1个小行星资源以提升金星改造度1格。",
   "Venus must be 14% or lower":"金星改造度≤14%",
 
   "Sister Planet Support":"姊妹星球支持",

@@ -19,7 +19,7 @@ export class Kelvinists extends Party implements IParty {
 class KelvinistsBonus01 implements Bonus {
   id = 'kb01';
   isDefault = true;
-  description = 'Gain 1 MC for each Heat production you have';
+  description = 'Gain 1 M€ for each Heat production you have';
 
   grant(game: Game) {
     game.getPlayers().forEach((player) => {
@@ -45,7 +45,7 @@ class KelvinistsBonus02 implements Bonus {
 class KelvinistsPolicy01 implements Policy {
   isDefault = true;
   id = TurmoilPolicy.KELVINISTS_DEFAULT_POLICY;
-  description: string = 'Pay 10 MC to increase your Energy and Heat production 1 step (Turmoil Kelvinists)';
+  description: string = 'Pay 10 M€ to increase your Energy and Heat production 1 step (Turmoil Kelvinists)';
 
   canAct(player: Player) {
     return player.canAfford(10);

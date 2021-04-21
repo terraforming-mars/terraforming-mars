@@ -18,7 +18,7 @@ export class VenusWaystation extends Card {
       metadata: {
         cardNumber: '258',
         renderData: CardRenderer.builder((b) => {
-          b.effect('When you play a Venus tag, you pay 2 MC less for it.', (eb)=> {
+          b.effect('When you play a Venus tag, you pay 2 M€ less for it.', (eb)=> {
             eb.venus(1).played.startEffect.megacredits(-2);
           });
         }),

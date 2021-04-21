@@ -112,7 +112,7 @@ export class Server {
       playedCards: getCards(player, player.playedCards, {showResources: true}),
       players: getPlayers(game.getPlayers(), game),
       preludeCardsInHand: getCards(player, player.preludeCardsInHand),
-      selfReplicatingRobotsCards: player.getSelfReplicatingRobotsCards(),
+      selfReplicatingRobotsCards: getSelfReplicatingRobotsTargetCards(player),
       spaces: getSpaces(game.board),
       spectatorId: game.spectatorId,
       steel: player.steel,
@@ -139,6 +139,18 @@ export class Server {
       generation: game.generation,
     };
   }
+}
+
+function getSelfReplicatingRobotsTargetCards(player: Player): Array<CardModel> {
+  return player.getSelfReplicatingRobotsTargetCards().map((targetCard) => ({
+    resources: targetCard.resourceCount,
+    resourceType: undefined, // Card on SRR cannot gather its own resources (if any)
+    name: targetCard.card.name,
+    calculatedCost: player.getCardCost(targetCard.card),
+    cardType: CardType.ACTIVE,
+    isDisabled: false,
+    reserveUnits: Units.EMPTY, // I wonder if this could just be removed.
+  }));
 }
 
 function getMilestones(game: Game): Array<ClaimedMilestoneModel> {
@@ -418,7 +430,7 @@ function getPlayers(players: Array<Player>, game: Game): Array<PlayerModel> {
       fleetSize: player.getFleetSize(),
       tradesThisGeneration: player.tradesThisGeneration,
       turmoil: turmoil,
-      selfReplicatingRobotsCards: player.getSelfReplicatingRobotsCards(),
+      selfReplicatingRobotsCards: getSelfReplicatingRobotsTargetCards(player),
       needsToDraft: player.needsToDraft,
       needsToResearch: !game.hasResearched(player),
       deckSize: game.dealer.getDeckSize(),

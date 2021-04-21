@@ -8,7 +8,7 @@ import {Board} from '../../boards/Board';
 
 export class Riots implements IGlobalEvent {
     public name = GlobalEventName.RIOTS;
-    public description = 'Lose 4 MC for each City tile (max 5, then reduced by influence).';
+    public description = 'Lose 4 M€ for each City tile (max 5, then reduced by influence).';
     public revealedDelegate = PartyName.MARS;
     public currentDelegate = PartyName.REDS;
     public resolve(game: Game, turmoil: Turmoil) {

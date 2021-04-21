@@ -86,7 +86,7 @@
     "Decrease your M€ production 2 steps. Place a colony.": "Obniż swoją produkcję MC o 2 poziomy i umieść 1 kolonię na kaflu obiektu.",
 
     "Molecular Printing": "Druk Molekularny",
-    "Gain 1 MC for each city tile in play. Gain 1 MC for each colony in play.": "Otrzymujesz 1 MC za każdy obszar miasta w grze. Otrzymujesz 1 MC za każdą kolonię w grze.",
+    "Gain 1 M€ for each city tile in play. Gain 1 M€ for each colony in play.": "Otrzymujesz 1 MC za każdy obszar miasta w grze. Otrzymujesz 1 MC za każdą kolonię w grze.",
 
     "Nitrogen from Titan": "Azot z Tytana",
     "Raise your TR 2 steps. Add 2 floaters to a JOVIAN CARD.": "Podnieś swój WT o 2 poziomy. Umieść 2 jednostki dryfowców na dowolnej karcie z symbolem Jowisza.",
@@ -115,7 +115,7 @@
     "Effect: When you trade, you pay 1 less resource for it.": "Efekt trwały: Gdy wykonujesz akcję handlu z obiektem, płacisz o 1 jednostkę zasobów mniej.",
 
     "Sky Docks": "Podniebna Stacja Przeładunkowa",
-    "Effect: When you play a card, you pay 1 MC less for it.": "Efekt trwały: Gdy zagrywasz kartę, płacisz za nią o 1 MC mniej.",
+    "Effect: When you play a card, you pay 1 M€ less for it.": "Efekt trwały: Gdy zagrywasz kartę, płacisz za nią o 1 MC mniej.",
     "Requires 2 Earth tags. Gain 1 Trade Fleet.": "Musisz posiadać przynajmniej 2 symbole Ziemi. Otrzymujesz 1 flotę handlową.",
 
     "Solar Probe": "Sonda Słoneczna",
@@ -163,6 +163,6 @@
     "Requires that you have 1 city tile and 1 colony in play. Increase your plant production 1 step, and add 2 microbes to ANOTHER card.": "Musisz posiadać przynajmniej 1 obszar miasta i 1 kolonię. Podnieś swoją produkcję roślinności o 1 poziom i umieść 2 jednostki mikrobów na dowolnej karcie.",
 
     "Warp Drive": "Napęd Warp",
-    "Effect: When you play a Space card, you pay 4 MC less for it.": "Efekt trwały: Gdy zagrywasz kartę z symbolem przestrzeni kosmicznej, płacisz za nią o 4 MC mniej.",
+    "Effect: When you play a Space card, you pay 4 M€ less for it.": "Efekt trwały: Gdy zagrywasz kartę z symbolem przestrzeni kosmicznej, płacisz za nią o 4 MC mniej.",
     "Requires 5 Science tags.": "Musisz posiadać przynajmniej 5 symboli nauki."
 }

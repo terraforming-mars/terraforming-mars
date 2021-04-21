@@ -29,7 +29,7 @@ export class TheGrandLunaCapitalGroup implements CorporationCard {
     cardNumber: 'MC7',
     renderData: CardRenderer.builder((b) => {
       b.megacredits(32).titanium(1).moonColony().secondaryTag(AltSecondaryTag.MOON_COLONY_RATE).br;
-      b.effect('When you place a colony tile, gain 2 MC for each adjacent colony tile.', (eb) => {
+      b.effect('When you place a colony tile, gain 2 M€ for each adjacent colony tile.', (eb) => {
         eb.moonColony({size: Size.SMALL}).any.moonColony({size: Size.SMALL}).asterix()
           .startEffect
           .megacredits(2).slash().moonColony({size: Size.SMALL}).any;

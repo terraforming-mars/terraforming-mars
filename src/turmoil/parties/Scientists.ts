@@ -20,7 +20,7 @@ export class Scientists extends Party implements IParty {
 class ScientistsBonus01 implements Bonus {
   id = 'sb01';
   isDefault = true;
-  description: string = 'Gain 1 MC for each Science tag you have';
+  description: string = 'Gain 1 M€ for each Science tag you have';
 
   grant(game: Game) {
     game.getPlayers().forEach((player) => {
@@ -46,7 +46,7 @@ class ScientistsBonus02 implements Bonus {
 class ScientistsPolicy01 implements Policy {
   isDefault = true;
   id = TurmoilPolicy.SCIENTISTS_DEFAULT_POLICY;
-  description: string = 'Pay 10 MC to draw 3 cards (Turmoil Scientists)';
+  description: string = 'Pay 10 M€ to draw 3 cards (Turmoil Scientists)';
 
   canAct(player: Player) {
     return player.canAfford(10) && player.turmoilPolicyActionUsed === false;

@@ -20,7 +20,7 @@ export class RestrictedArea extends Card implements IActionCard, IProjectCard {
     metadata: CardMetadata = {
       cardNumber: '199',
       renderData: CardRenderer.builder((b) => {
-        b.action('Spend 2 MC to draw a card.', (eb) => {
+        b.action('Spend 2 M€ to draw a card.', (eb) => {
           eb.megacredits(2).startAction.cards(1);
         }).br;
         b.tile(TileType.RESTRICTED_AREA, true);

@@ -21,7 +21,7 @@ describe('MarsFirst', function() {
     TestingUtils.resetBoard(game);
   });
 
-  it('Ruling bonus 1: Gain 1 MC for each Building tag you have', function() {
+  it('Ruling bonus 1: Gain 1 M€ for each Building tag you have', function() {
     player.playedCards.push(new Mine());
 
     const bonus = MARS_FIRST_BONUS_1;
@@ -29,7 +29,7 @@ describe('MarsFirst', function() {
     expect(player.megaCredits).to.eq(1);
   });
 
-  it('Ruling bonus 2: Gain 1 MC for each tile you have ON MARS', function() {
+  it('Ruling bonus 2: Gain 1 M€ for each tile you have ON MARS', function() {
     game.addGreenery(player, '11');
 
     const bonus = MARS_FIRST_BONUS_2;
@@ -52,12 +52,12 @@ describe('MarsFirst', function() {
     expect(player.megaCredits).to.eq(2);
   });
 
-  it('Ruling policy 3: Your steel resources are worth 1 MC extra', function() {
+  it('Ruling policy 3: Your steel resources are worth 1 M€ extra', function() {
     TestingUtils.setRulingPartyAndRulingPolicy(game, turmoil, marsFirst, marsFirst.policies[2].id);
     expect(player.getSteelValue()).to.eq(3);
   });
 
-  it('Ruling policy 4: Spend 4 MC to draw a Building card', function() {
+  it('Ruling policy 4: Spend 4 M€ to draw a Building card', function() {
     TestingUtils.setRulingPartyAndRulingPolicy(game, turmoil, marsFirst, marsFirst.policies[3].id);
 
     const marsFirstPolicy = MARS_FIRST_POLICY_4;

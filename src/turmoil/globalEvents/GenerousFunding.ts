@@ -7,7 +7,7 @@ import {Turmoil} from '../Turmoil';
 
 export class GenerousFunding implements IGlobalEvent {
     public name = GlobalEventName.GENEROUS_FUNDING;
-    public description = 'Gain 2 MC for each influence and set of 5 TR over 15 (max 5 sets).';
+    public description = 'Gain 2 M€ for each influence and set of 5 TR over 15 (max 5 sets).';
     public revealedDelegate = PartyName.KELVINISTS;
     public currentDelegate = PartyName.UNITY;
     public resolve(game: Game, turmoil: Turmoil) {

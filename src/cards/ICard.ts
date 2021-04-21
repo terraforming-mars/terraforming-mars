@@ -27,7 +27,8 @@ export interface IActionCard {
 }
 
 export interface IResourceCard {
-    resourceCount: number;
+    resourceCount?: number;
+    resourceType?: ResourceType;
 }
 
 export interface CardDiscount {

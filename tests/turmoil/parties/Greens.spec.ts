@@ -26,7 +26,7 @@ describe('Greens', function() {
     TestingUtils.resetBoard(game);
   });
 
-  it('Ruling bonus 1: Gain 1 MC for each Plant, Microbe and Animal tag you have', function() {
+  it('Ruling bonus 1: Gain 1 M€ for each Plant, Microbe and Animal tag you have', function() {
     player.playedCards.push(new Tardigrades(), new Lichen(), new Fish());
 
     const bonus = GREENS_BONUS_1;
@@ -34,7 +34,7 @@ describe('Greens', function() {
     expect(player.megaCredits).to.eq(3);
   });
 
-  it('Ruling bonus 2: Gain 2 MC for each greenery tile you have', function() {
+  it('Ruling bonus 2: Gain 2 M€ for each greenery tile you have', function() {
     game.board.spaces[0].player = player;
     game.board.spaces[0].tile = {tileType: TileType.GREENERY};
     game.board.spaces[1].player = player;
@@ -68,7 +68,7 @@ describe('Greens', function() {
     expect(player.megaCredits).to.eq(2);
   });
 
-  it('Ruling policy 4: Spend 5 MC to gain 3 plants or add 2 microbes to any card', function() {
+  it('Ruling policy 4: Spend 5 M€ to gain 3 plants or add 2 microbes to any card', function() {
     TestingUtils.setRulingPartyAndRulingPolicy(game, turmoil, greens, greens.policies[3].id);
 
     const greensPolicy = GREENS_POLICY_4;

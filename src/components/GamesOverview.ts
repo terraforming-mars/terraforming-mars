@@ -29,7 +29,7 @@ export const GamesOverview = Vue.component('games-overview', {
           const result = xhr.response;
           if (result instanceof Array) {
             result.forEach(function(gameId) {
-              (vueApp as any).getGame(gameId);
+              (vueApp as any).getGame(gameId.id);
             });
           } else {
             alert('Unexpected response fetching games from API');

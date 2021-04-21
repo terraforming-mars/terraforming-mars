@@ -10,6 +10,7 @@ import {Units} from '../../Units';
 import {TileType} from '../../TileType';
 import {IMoonCard} from './IMoonCard';
 import {MoonCard} from './MoonCard';
+import {AltSecondaryTag} from '../render/CardRenderItem';
 
 export class MareNubiumMine extends MoonCard implements IProjectCard, IMoonCard {
   constructor() {
@@ -25,7 +26,7 @@ export class MareNubiumMine extends MoonCard implements IProjectCard, IMoonCard 
         cardNumber: 'M02',
         renderData: CardRenderer.builder((b) => {
           b.minus().titanium(1);
-          b.production((pb) => pb.titanium(1)).moonMine().asterix();
+          b.production((pb) => pb.titanium(1)).moonMine().secondaryTag(AltSecondaryTag.MOON_MINING_RATE).asterix();
         }),
       },
     }, {

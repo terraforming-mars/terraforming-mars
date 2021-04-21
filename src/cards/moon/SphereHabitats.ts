@@ -7,6 +7,7 @@ import {CardRenderer} from '../render/CardRenderer';
 import {Units} from '../../Units';
 import {MoonCard} from './MoonCard';
 import {TileType} from '../../TileType';
+import {AltSecondaryTag} from '../render/CardRenderItem';
 
 export class SphereHabitats extends MoonCard {
   constructor() {
@@ -21,7 +22,7 @@ export class SphereHabitats extends MoonCard {
         cardNumber: 'M07',
         renderData: CardRenderer.builder((b) => {
           b.minus().titanium(1).br;
-          b.moonColony();
+          b.moonColony().secondaryTag(AltSecondaryTag.MOON_COLONY_RATE);
         }),
       },
     }, {

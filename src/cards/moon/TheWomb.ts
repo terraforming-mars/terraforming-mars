@@ -7,6 +7,7 @@ import {CardRenderer} from '../render/CardRenderer';
 import {Units} from '../../Units';
 import {MoonCard} from './MoonCard';
 import {TileType} from '../../TileType';
+import {AltSecondaryTag} from '../render/CardRenderItem';
 
 export class TheWomb extends MoonCard {
   constructor() {
@@ -25,7 +26,7 @@ export class TheWomb extends MoonCard {
           b.production((pb) => {
             pb.minus().energy(2).nbsp.megacredits(4);
           }).br;
-          b.minus().titanium(2).moonColony();
+          b.minus().titanium(2).moonColony().secondaryTag(AltSecondaryTag.MOON_COLONY_RATE);
         }),
       },
     }, {

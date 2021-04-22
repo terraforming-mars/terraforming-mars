@@ -370,6 +370,10 @@ export class Game implements ISerializable<SerializedGame> {
       game.log('The id of this game is ${0}', (b) => b.rawString(id));
     }
 
+    players.forEach((player) => {
+      game.log('Good luck ${0}!', (b) => b.player(player), {reservedFor: player});
+    });
+
     game.log('Generation ${0}', (b) => b.forNewGeneration().number(game.generation));
 
     // Initial Draft
@@ -1476,12 +1480,14 @@ export class Game implements ISerializable<SerializedGame> {
     return player.cardsInHand.filter((card) => card.cardType === cardType);
   }
 
-  public log(message: string, f?: (builder: LogBuilder) => void) {
+  public log(message: string, f?: (builder: LogBuilder) => void, options?: {reservedFor?: Player}) {
     const builder = new LogBuilder(message);
     if (f) {
       f(builder);
     }
-    this.gameLog.push(builder.logMessage());
+    const logMessage = builder.build();
+    logMessage.playerId = options?.reservedFor?.id;
+    this.gameLog.push(logMessage);
     this.gameAge++;
   }
 

@@ -96,7 +96,7 @@ export class LogBuilder {
       return this;
     }
 
-    public logMessage(): LogMessage {
+    public build(): LogMessage {
       return new LogMessage(this.type, this.message, this.parameters);
     }
 }

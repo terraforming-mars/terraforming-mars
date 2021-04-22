@@ -28,7 +28,7 @@ describe('ApiGameLogs', function() {
     req.url = '/api/game/logs';
     ctx.url = new URL('http://boo.com' + req.url);
     ApiGameLogs.INSTANCE.get(req, res.hide(), ctx);
-    expect(res.content).eq('Bad request: must provide playerid');
+    expect(res.content).eq('Bad request: must provide player id as the id parameter');
   });
 
   it('fails when game not found', () => {

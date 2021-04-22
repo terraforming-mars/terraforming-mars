@@ -1,12 +1,12 @@
 {
 
   "Arcadian Communities":"阿卡迪亚社区",
-  "You start with 40 MC and 10 steel. AS YOUR FIRST ACTION, PLACE A COMMUNITY [PLAYER MARKER] ON A NON-RESERVED AREA.":"你起始拥有40元和10个钢铁。作为游戏中的你的第一个行动，你必须你的一个玩家标记放置在一个非海洋保留区.",
+  "You start with 40 M€ and 10 steel. AS YOUR FIRST ACTION, PLACE A COMMUNITY [PLAYER MARKER] ON A NON-RESERVED AREA.":"你起始拥有40元和10个钢铁。作为游戏中的你的第一个行动，你必须你的一个玩家标记放置在一个非海洋保留区.",
   "ACTION: PLACE A COMMUNITY (PLAYER MARKER) ON A NON-RESERVED AREA ADJACENT TO ONE OF YOUR TILES OR MARKED AREAS":"行动：将你的一个玩家标记放置在一个非保留区，并且和你的至少一个板块或者玩家标记相邻。",
   "EFFECT: MARKED AREAS ARE RESERVED FOR YOU. WHEN YOU PLACE A TILE THERE, GAIN 3 MC":"效果：只有你能在拥有你的玩家标记的位置放置板块，当你如此做后，获得3元，",
 
   "Astrodrill":"天体钻井",
-   "You start with 38 MC and 3 asteroid resources.":"游戏开始时，你获得38MC和3个小行星资源。",
+   "You start with 38 M€ and 3 asteroid resources.":"游戏开始时，你获得38MC和3个小行星资源。",
   "Action: Add an asteroid resource to ANY card OR gain any standard resource, OR remove an asteroid resource from this card to gain 3 titanium.":"行动：在任意一张卡牌上增加一个小行星资源并且获得一个标准资源，或者移除本卡上的一个小行星并获得3个钛金属。",
 
   "Factorum":"因子公司",
@@ -18,15 +18,15 @@
   "Effect: When a player causes another player to decrease production or lose resources, pay 3M€ to the victim, or as much as possible.":"效果：当某玩家使另一玩家产能/资源受损，你向产能/资源受损的玩家支付3元。若你拥有金钱不足3元则改为支付全部拥有的金钱。",
 
   "Pharmacy Union":"制药联盟",
-  "You start with 54 MC . Draw a Science card.":"游戏开始时，你获得54点金钱。抽取一张有科学标志的卡牌。",
-  "Effect: When ANY microbe tag is played, add a disease here and lose 4 MC or as much as possible. When you play a science tag, remove a disease here and gain 1 TR OR if there are no diseases here, you MAY put this card face down in your EVENTS PILE to gain 3 TR.":"效果：当任何玩家打出一个微生物标志，包括这两个，在本卡上增加一个疾病资源并失去4点金钱（如果不足则失去所有）。当你打出一个科学标志时，你可以移除一个疾病资源并提升1点改造度，或者如果此时已经没有疾病资源你可以提升3点改造度并将本卡翻面（失去所有效果及标志）。",
+  "You start with 54 M€ . Draw a Science card.":"游戏开始时，你获得54点金钱。抽取一张有科学标志的卡牌。",
+  "Effect: When ANY microbe tag is played, add a disease here and lose 4 M€ or as much as possible. When you play a science tag, remove a disease here and gain 1 TR OR if there are no diseases here, you MAY put this card face down in your EVENTS PILE to gain 3 TR.":"效果：当任何玩家打出一个微生物标志，包括这两个，在本卡上增加一个疾病资源并失去4点金钱（如果不足则失去所有）。当你打出一个科学标志时，你可以移除一个疾病资源并提升1点改造度，或者如果此时已经没有疾病资源你可以提升3点改造度并将本卡翻面（失去所有效果及标志）。",
 
   "Philares":"菲拉雷斯",
   "You start with 47 MC. As your first action, place a greenery tile and raise the oxygen 1 step.":"你起始拥有47元。作为你的第一个行动，放置一个绿化板块并提升1格氧气浓度。",
   "Effect: Each new adjacency between your tile and an opponent's tile gives you a standard resource of your choice [regardless of who just placed a tile].":"效果：每次你的版块和任意对手的某个版块相邻，你获得一个标准资源，种类由你选择（不论是谁放置了新的版块）。",
 
   "Recyclon":"回收公司",
-  "You start with 38 MC and 1 steel production.":"你起始拥有38元及1点钢铁产能。",
+  "You start with 38 M€ and 1 steel production.":"你起始拥有38元及1点钢铁产能。",
   "Effect: When you play a building tag, including this, gain 1 microbe to this card, or remove 2 microbes here and raise your plant production 1 step.":"效果：每当你打出1个建筑标志，包括本卡上的建筑标志，放置1个微生资源到本卡上，或移除本卡上2个微生物资源以提升1点植物产能。",
 
   "Splice":"基因重组公司",
@@ -45,7 +45,7 @@
   "1VP for each 2 asteroids on this card.":"本卡每两个小行星值1分。",
 
   "Advertising":"广告业",
-  "Effect: When you play a card with a basic cost of 20 MC or more, increase your M€ production 1 step.":"效果：每当你打出一张20元以上的卡牌时，提升1点金钱产能。",
+  "Effect: When you play a card with a basic cost of 20 M€ or more, increase your M€ production 1 step.":"效果：每当你打出一张20元以上的卡牌时，提升1点金钱产能。",
 
 
 

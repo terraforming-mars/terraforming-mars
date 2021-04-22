@@ -4,7 +4,7 @@
    "Requires that you have 3 floaters. Increase your MC production 2 steps. Add 2 floaters to ANY card.": "Requer que tenha 3 flutuadores. Aumente sua produção de M$ em 2 níveis. Adicione 2 flutuadores à QUALQUER CARTA.",
 
    "Air Raid": "Assalto Aéreo",
-   "Requires that you lose 1 floater. Steal 5 MC from any player.": "Requer que gaste 1 flutuador. Roube 5 M$ de qualquer jogador.",
+   "Requires that you lose 1 floater. Steal 5 M€ from any player.": "Requer que gaste 1 flutuador. Roube 5 M$ de qualquer jogador.",
 
    "Atmo Collectors": "Coletores Atmosféricos",
    "Action: Add one floater here.": "Ação: Adicione 1 flutuador à esta carta.",
@@ -15,7 +15,7 @@
    "Increase your MC production 1 step per CARD WITH NO TAGS, including this.": "Aumente sua produção de M$ em 1 nível para cada CARTA SEM ÍCONE, incluindo essa.",
 
    "Conscription": "Recrutamento",
-   "Requires 2 Earth tags. The next card you play this generation costs 16 MC less.": "Requer 2 ícones de Terra. A próxima carta que jogar nesta geração custa 16 M$ a menos.",
+   "Requires 2 Earth tags. The next card you play this generation costs 16 M€ less.": "Requer 2 ícones de Terra. A próxima carta que jogar nesta geração custa 16 M$ a menos.",
 
    "Corona Extractor": "Extrator de Corona",
    "Requires 4 science tags. Increase your energy production 4 steps.": "Requer 4 ícones de ciência. Aumente sua produção de energia em 4 níveis.",
@@ -61,7 +61,7 @@
 
    "Jupiter Floating Station": "Estação Flutuante de Júpiter",
    "Action: Add 1 floater to a JOVIAN CARD.": "Ação: Adicione 1 flutuador à uma CARTA JOVIANA.",
-   "Action: Gain 1 MC for every floater here [MAX 4].": "Ação: Receba 1 M$ para cada flutuador nesta carta (máx. 4)",
+   "Action: Gain 1 M€ for every floater here [MAX 4].": "Ação: Receba 1 M$ para cada flutuador nesta carta (máx. 4)",
    "Requires 3 Science tags.": "Requer 3 ícones de ciência.",
 
    "Luma Governor": "Governador da Lua",
@@ -88,7 +88,7 @@
    "Decrease your MC production 2 steps. Place a colony.": "Reduza sua produção de M$ em 2 níveis. Coloque uma colônia.",
 
    "Molecular Printing": "Impressão Molecular",
-   "Gain 1 MC for each city tile in play. Gain 1 MC for each colony in play.": "Receba 1 M$ para cada cidade em jogo, e 1 M$ para cada colônia em jogo.",
+   "Gain 1 M€ for each city tile in play. Gain 1 M€ for each colony in play.": "Receba 1 M$ para cada cidade em jogo, e 1 M$ para cada colônia em jogo.",
 
    "Nitrogen from Titan": "Nitrogênio de Titan",
    "Raise your TR 2 steps. Add 2 floaters to a JOVIAN CARD.": "Aumente seu IT em 2 níveis. Adicione 2 flutuadores à qualquer CARTA JOVIANA.",
@@ -116,7 +116,7 @@
    "Rim Freighters": "Cargueiro de Orla",
 
    "Sky Docks": "Docas Aérea",
-   "Effect: When you play a card, you pay 1 MC less for it.": "Efeito: Aol jogar uma carta, pague 1 M$ a menos por ela.",
+   "Effect: When you play a card, you pay 1 M€ less for it.": "Efeito: Aol jogar uma carta, pague 1 M$ a menos por ela.",
    "Requires 2 Earth tags. Gain 1 Trade Fleet.": "Requer 2 ícones de Terra. Receba 1 frota comercial.",
 
    "Solar Probe": "Sonda Solar",
@@ -162,6 +162,6 @@
    "Requires that you have 1 city tile and 1 colony in play. Increase your plant production 1 step, and add 2 microbes to ANOTHER card.": "Requer que você tenha 1 cidade e 1 colônia em jogo. Aumente sua produção de planta em 1 nível e adicione 2 micróbios à qualquer carta.",
 
    "Warp Drive": "Unidade de Dobra",
-   "Effect: When you play a Space card, you pay 4 MC less for it.": "Efeito: Ao jogar uma carta com ícone espacial, pague 4 M$ a menos por ela.",
+   "Effect: When you play a Space card, you pay 4 M€ less for it.": "Efeito: Ao jogar uma carta com ícone espacial, pague 4 M$ a menos por ela.",
    "Requires 5 Science tags.": "Requer 5 ícones de ciência."
 }

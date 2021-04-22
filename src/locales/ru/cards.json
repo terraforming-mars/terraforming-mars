@@ -22,7 +22,7 @@
     "ACTION: LOOK AT THE TOP CARD AND EITHER BUY IT OR DISCARD IT": "Действие: посмотрите верхнюю карту колоды и купите её или сбросьте.",
 
     "Martian Rails": "Марсианский монорельс",
-    "Action: Spend 1 Energy to gain 1 M€ for each City tile ON MARS.": "Действие: потратьте 1 энергию, чтобы получить 1 MC за каждый город на поверхности Марса.",
+    "Action: Spend 1 Energy to gain 1 M€ for each City tile ON MARS.": "Действие: потратьте 1 энергию, чтобы получить 1 M€ за каждый город на поверхности Марса.",
 
     "Capital": "Столица",
     "2 Oceans": "2 Океана",
@@ -69,7 +69,7 @@
     "Gain 3 Plants, or add 3 Microbes or 2 Animals to ANOTHER card. Place an ocean tile.": "Получите 3 растения или же положите 3 жетона бактерий или 2 жетона животных на другую карту. Выложите тайл океана.",
 
     "Research Outpost": "Исследовательская станция",
-    "Effect: When you play a card, you pay 1 M€ less for it.": "Свойство: когда играете карту, вы платите на 1 MC меньше.",
+    "Effect: When you play a card, you pay 1 M€ less for it.": "Свойство: когда играете карту, вы платите на 1 M€ меньше.",
     "Place a city tile NEXT TO NO OTHER TILE.": "Постройте город, не соседний ни с каким другим тайлом.",
 
     "Phobos Space Haven": "Гавань на Фобосе",
@@ -87,7 +87,7 @@
     "Requires 11% oxygen. 1 VP per Animal on this card.": "Уровень кислорода должен быть 11%. 1 ПО за каждый жетон животных на этой карте.",
 
     "Space Station": "Космическая станция",
-    "Effect: When you play a Space card, you pay 2 M€ less for it.": "Свойство: когда играете карту с символом космоса, вы платите на 2 MC меньше.",
+    "Effect: When you play a Space card, you pay 2 M€ less for it.": "Свойство: когда играете карту с символом космоса, вы платите на 2 M€ меньше.",
 
     "Eos Chasma National Park": "Национальный парк в каньоне Эос",
     "Requires -12 C or warmer. Add 1 Animal TO ANY ANIMAL CARD. Gain 3 Plants. Increase your M€ production 2 steps.": "Температура должна быть -12 градусов или выше. Положите 1 жетон животных на любую карту с символом животных. Получите 3 растения. Повысьте свой доход на 2.",
@@ -106,7 +106,7 @@
     "Decrease your M€ production 2 steps and increase your heat production and Energy production 2 steps each.": "Снизьте свой доход на 2 и повысьте своё производство тепла и производство энергии на 2.",
 
     "Optimal Aerobraking": "Оптимальное аэроторможение",
-    "Effect: When you play a Space Event, you gain 3 MC and 3 heat.": "Свойство: когда вы играете карту события с символом космоса, вы получаете 3 MC и 3 тепла.",
+    "Effect: When you play a Space Event, you gain 3 M€ and 3 heat.": "Свойство: когда вы играете карту события с символом космоса, вы получаете 3 M€ и 3 тепла.",
 
     "Underground City": "Подземный город",
     "Place a City tile. Decrease your Energy production 2 steps and increase your steel production 2 steps.": "Постройте город. Снизьте своё производство энергии на 2 и повысьте своё производство стали на 2.",
@@ -231,11 +231,11 @@
     "Oxygen must be 8% or less. Decrease your energy production 1 step.": "Уровень кислорода должен быть 8% или ниже. Снизьте своё производство энергии на 1.",
 
     "Earth Catapult": "Катапульта на Земле",
-    "Effect: When you play a card, you pay 2 M€ less for it.": "Свойство: когда играете карту, вы платите на 2 MC меньше.",
+    "Effect: When you play a card, you pay 2 M€ less for it.": "Свойство: когда играете карту, вы платите на 2 M€ меньше.",
 
     "Advanced Alloys": "Улучшенные сплавы",
-    "Effect: Each titanium you have is worth 1 M€ extra.": "Свойство: каждая ваша единица титана стоит на 1 MC больше",
-    "Effect: Each steel you have is worth 1 M€ extra.": "Свойство: Каждая ваша единица стали стоит на 1 MC больше",
+    "Effect: Each titanium you have is worth 1 M€ extra.": "Свойство: каждая ваша единица титана стоит на 1 M€ больше",
+    "Effect: Each steel you have is worth 1 M€ extra.": "Свойство: Каждая ваша единица стали стоит на 1 M€ больше",
 
     "Birds": "Птицы",
     "Action: Add an animal to this card.": "Действие: положите жетон животных на эту карту.",
@@ -341,12 +341,12 @@
     "Action: Spend 4 energy to gain 1 titanium and increase oxygen 1 step.": "Действие: потратьте 4 энергии, чтобы получить 1 титан и повысить уровень кислорода на 1.",
 
     "Earth Office": "Офис на Земле",
-    "Effect: When you play an Earth card, you pay 3 M€ less for it.": "Свойство: когда вы играете карту с символом Земли, вы платите на 3 MC меньше.",
+    "Effect: When you play an Earth card, you pay 3 M€ less for it.": "Свойство: когда вы играете карту с символом Земли, вы платите на 3 M€ меньше.",
 
     "Acquired Company": "Приобретённая компания",
 
     "Media Archives": "Архивы СМИ",
-    "Gain 1 M€ for each event EVER PLAYED by all players.": "Получите 1 MC за каждую сыгранную карту событий, учитываются все карты событий, сыгранные всеми игроками в этой партии.",
+    "Gain 1 M€ for each event EVER PLAYED by all players.": "Получите 1 M€ за каждую сыгранную карту событий, учитываются все карты событий, сыгранные всеми игроками в этой партии.",
 
     "Open City": "Город под открытым небом",
     "Requires 12% oxygen. Gain 2 plants. Place a City tile. Decrease your Energy production 1 step and increase your M€ production 4 steps.": "Уровень кислорода должен быть 12%. Получите 2 растения и постройте город. Снизьте своё производство энергии на 1 и повысьте свой доход на 4.",
@@ -632,7 +632,7 @@
     "Action: Spend any amount of Energy and gain that amount of MC.": "Действие: потратьте любое количество энергии, чтобы получить такое же количество MC.",
 
     "Indentured Workers": "Законтрактованные рабочие",
-    "The next card you play this generation costs 8 MC less.": "Следующая карта, которую вы сыграете в этом поколении, будет стоить на 8M€ меньше.",
+    "The next card you play this generation costs 8 M€ less.": "Следующая карта, которую вы сыграете в этом поколении, будет стоить на 8M€ меньше.",
 
     "Lagrange Observatory": "Обсерватория Лагранжа",
     "Draw 1 card.": "Возьмите 1 карту.",

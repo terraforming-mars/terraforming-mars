@@ -29,7 +29,7 @@
   "Requires Vênus 6%":"Requer 6% na terraformação de Vênus.",
 
   "Vênus Waystation":"Estação de Passagem de Vênus",
-  "Effect: When you play a Vênus tag, you pay 2 MC less for it.":"Efeito: quando jogar uma carta com ícone de Vênus, pague 2 M$ a menos por ela.",
+  "Effect: When you play a Vênus tag, you pay 2 M€ less for it.":"Efeito: quando jogar uma carta com ícone de Vênus, pague 2 M$ a menos por ela.",
 
   "Thermophiles":"Termófilos",
   "Action: Add 1 Microbe to ANY Vênus CARD.":"Ação: adicione 1 micróbio à qualquer CARTA DE VÊNUS.",
@@ -54,7 +54,7 @@
   "Requires 3 science tags. Draw 2 cards.":"Requer 3 ícones de ciência. Compre 2 cartas.",
 
   "Rotator Impacts":"Impactos Rotatórios",
-  "Action: Spend 6 MC to add an asteroid resource to this card [TITANIUM MAY BE USED].": "Ação: Gaste 5 M$ para adicionar um recurso de asteroide à esta carta (PODE USAR TIT NIO).",
+  "Action: Spend 6 M€ to add an asteroid resource to this card [TITANIUM MAY BE USED].": "Ação: Gaste 5 M$ para adicionar um recurso de asteroide à esta carta (PODE USAR TIT NIO).",
   "Action: Spend 1 resource from this card to increase Vênus 1 step.":"Ação: Gaste um recurso desta carta para aumentar a terraformação de Vênus em 1 nível.",
   "Vênus must be 14% or lower":"A terraformação de Vênus deve estar em 14% ou inferior.",
 
@@ -73,7 +73,7 @@
   "Effect: When playing a Vênus tag, Floaters here may be used as payment, and are worth 3M€ each.":"Efeito: quando jogar uma carta de Vênus, os flutuadores desta carta podem ser usados para pagar o custo, com um valor de 3 M$ cada um.",
 
   "Floating Habs":"Habitates Flutuantes",
-  "Action: Spend 2 MC to add 1 Floater to ANY card":"Ação: Gaste 2 M$ para adicionar 1 flutuador à qualquer carta.",
+  "Action: Spend 2 M€ to add 1 Floater to ANY card":"Ação: Gaste 2 M$ para adicionar 1 flutuador à qualquer carta.",
   "1 VP for every 2nd Floater on this card.":"1 PV para cada 2 flutuadores nesta carta.",
   "Requires 2 Science tags. 1 VP for every 2nd Floater on this card":"Requer 2 ícones de ciência. 1 PV para cada 2 flutuadores nesta carta.",
 
@@ -91,7 +91,7 @@
   "Action: Spend one floater here to draw 1 card.":"Ação: Gaste um flutuador desta carta para receber uma carta.",
 
   "Aerosport Tournament":"Torneio Esportivo Aéreo",
-  "Requires that you have 5 Floaters. Gain 1 MC per each City tile in play.":"Requer 5 flutuadores. Ganhe 1 M$ para cada cidade em jogo.",
+  "Requires that you have 5 Floaters. Gain 1 M€ per each City tile in play.":"Requer 5 flutuadores. Ganhe 1 M$ para cada cidade em jogo.",
 
   "Air-Scrapping Expedition":"Expedición Desguace Aéreo",
   "Raise Vênus 1 step. Add 3 Floaters to ANY Vênus CARD.":"Incrementa a terraformação de Vênus 1 nível. adicione 3 flutuadores a qualquer CARTA TIPO Vênus.",
@@ -114,7 +114,7 @@
   "Add 3 Floaters to this card":"Adicione 3 flutuadores à esta carta.",
 
   "Forced Precipitation":"Precipitação Forçada",
-  "Action: Spend 2 MC to add 1 Floater to THIS card.":"Ação: Gaste 2 M$ para adicionar um flutuador à esta carta.",
+  "Action: Spend 2 M€ to add 1 Floater to THIS card.":"Ação: Gaste 2 M$ para adicionar um flutuador à esta carta.",
   "Action: Spend 2 Floaters here to increase Vênus 1 step.":"Ação: Gaste 2 flutuadores desta carta para aumentar a terraformação de Vênus em 1 nível.",
 
   "Freyja Biodomes":"Biodomos de Freya",
@@ -175,6 +175,6 @@
   "Raise Vênus 2 steps. Increase your heat production 2 steps.":"Aumente a terraformação de Vênus em 2 níveis. Aumente a sua produção de calor em 2 níveis.",
 
   "Saturn Surfing":"Surfe em Saturno",
-  "Action: Spend 1 floater from here to gain 1 MC from each floater here, INCLUDING THE PAID FLOATER. Max 5.":"Ação: Gaste 1 flutuador aqui para ganhar 1 M$ para cada flutuador aqui, INCLUINDO O FLUTUADOR GASTO. Máx 5.",
+  "Action: Spend 1 floater from here to gain 1 M€ from each floater here, INCLUDING THE PAID FLOATER. Max 5.":"Ação: Gaste 1 flutuador aqui para ganhar 1 M$ para cada flutuador aqui, INCLUINDO O FLUTUADOR GASTO. Máx 5.",
   "Add 1 floater here for every Earth tag you have, including this.":"Adicione 1 flutuador aqui para cada ícone de Terra que tiver, incluindo este"
 }

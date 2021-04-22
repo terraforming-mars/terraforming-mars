@@ -17,7 +17,7 @@
 
     "Conscription": "Мобилизация",
     "next card": "След. карта",
-    "Requires 2 Earth tags. The next card you play this generation costs 16 MC less.": "Требует 2 метки земли. Заплатите за следующую карту, которую сыграете в этом поколении на 16 МС меньше",
+    "Requires 2 Earth tags. The next card you play this generation costs 16 M€ less.": "Требует 2 метки земли. Заплатите за следующую карту, которую сыграете в этом поколении на 16 МС меньше",
 
     "Corona Extractor": "Сбор солнечной плазмы",
     "Requires 4 science tags. Increase your energy production 4 steps.": "Требует 4 метки Науки. Увеличьте своё производство энергии на 4",
@@ -68,7 +68,7 @@
 
     "Jupiter Floating Station": "Станция Юпитера",
     "Action: Add 1 floater to a JOVIAN CARD.": "Дествие: Добавьте 1 аэростат на карту с меткой Юпитера",
-    "Action: Gain 1 MC for every floater here [MAX 4].": "Дествие: Получите 1 МС за каждый аэростат здесь, но не больше 4",
+    "Action: Gain 1 M€ for every floater here [MAX 4].": "Дествие: Получите 1 МС за каждый аэростат здесь, но не больше 4",
     "Requires 3 Science tags.": "Требует 3 метки Науки",
 
     "Luna Governor": "губернатор Луны",

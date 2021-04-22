@@ -32,7 +32,7 @@
     "Trade Advance":"Comercio por adelantado",
     "[ solo": "[ solitario",
     "Trade all colonies with": "Comercia con todas las colonias con",
-    "Gain 2 MC [SOLO: Gain 10 MC]. Immediately trade with all active colonies. You may increase the Colony Tile track 1 step before each of these trades.": "Obtén 2 M€ (10 M€ modo solitario). Comercia con todas las colonias activas inmediatamente. Puedes aumentar 1 nivel de losetas de colonias cada vez que comercies con cada una de ellas.",
+    "Gain 2 M€ [SOLO: Gain 10 MC]. Immediately trade with all active colonies. You may increase the Colony Tile track 1 step before each of these trades.": "Obtén 2 M€ (10 M€ modo solitario). Comercia con todas las colonias activas inmediatamente. Puedes aumentar 1 nivel de losetas de colonias cada vez que comercies con cada una de ellas.",
 
 
     "Valuable Gases": "Gases valiosos",
@@ -136,7 +136,7 @@
     "Decrease your M€ production 2 steps and increase your heat production and Energy production 2 steps each.": "Reduce tu producción de M€ en 2 e incrementa tu producción de calor y producción de energía 2 niveles cada una.",
 
     "Optimal Aerobraking": "Aerofreno Óptimo",
-    "Effect: When you play a Space Event, you gain 3 MC and 3 heat.": "Efecto: al jugar un evento tipo espacio obtienes 3 M€ y 3 de calor.",
+    "Effect: When you play a Space Event, you gain 3 M€ and 3 heat.": "Efecto: al jugar un evento tipo espacio obtienes 3 M€ y 3 de calor.",
 
     "Underground City": "Ciudad Subterránea",
     "Place a City tile. Decrease your Energy production 2 steps and increase your steel production 2 steps.": "Coloca una loseta de ciudad. Reduce tu producción de energía 2 niveles e incrementa tu producción de acero 2 niveles.",
@@ -659,7 +659,7 @@
     "Action: Spend any amount of Energy and gain that amount of MC.": "Acción: gasta cualquier cantidad de energía para obtener esa cantidad en M€.",
 
     "Indentured Workers": "Becarios",
-    "The next card you play this generation costs 8 MC less.": "La siguiente carta que juegues en esta generación cuesta 8 M€ menos.",
+    "The next card you play this generation costs 8 M€ less.": "La siguiente carta que juegues en esta generación cuesta 8 M€ menos.",
 
     "Lagrange Observatory": "Observatorio Lagrange",
     "Draw 1 card.": "Roba 1 carta.",
@@ -730,6 +730,6 @@
   "Oxygen must be 4% or lower. Draw two cards.":"El oxígeno debe ser 4% o inferior. Roba 2 cartas.",
   "After being played, when you perform an action, the wild tag counts as any tag of your choice.":"",
   "Decrease your energy production 1 step and increase your M€ production 2 steps. Place a City Tile on a VOLCANIC AREA regardless of adjacent cities.":"",
-  "Effect: When paying for a plant card, microbes here may be used as 2 MC each.":"",
+  "Effect: When paying for a plant card, microbes here may be used as 2 M€ each.":"",
   "Temperature must be -20 C or lower.":"La temperatura debe ser de -20℃ o inferior."
 }

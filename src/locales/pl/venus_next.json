@@ -30,7 +30,7 @@
   "Requires Venus 6%":"Współczynnik Terraformacji Wenus musi być równy albo wyższy niż 6%.",
 
   "Venus Waystation":"Wenusjańska Stacja Tranzytowa",
-  "Effect: When you play a Venus tag, you pay 2 M€ less for it.":"Efekt trwały: Gdy zagrywasz kartę z symbolem Wenus, płacisz za nią o 2 MC mniej.",
+  "Effect: When you play a Venus tag, you pay 2 M€ less for it.":"Efekt trwały: Gdy zagrywasz kartę z symbolem Wenus, płacisz za nią o 2 M€ mniej.",
 
   "Thermophiles":"Termofile",
   "Action: Add 1 Microbe to ANY Venus CARD.":"Akcja: Umieść 1 jednostkę mikrobów na dowolnej karcie z symbolem Wenus.",
@@ -55,7 +55,7 @@
   "Requires 3 science tags. Draw 2 cards.":"Musisz posiadać przynajmniej 3 symbole nauki. Dobierz 2 karty.",
 
   "Rotator Impacts":"Rotacja Uderzeniowa",
-  "Action: Spend 6 M€ to add an asteroid resource to this card [TITANIUM MAY BE USED].": "Akcja: Wydaj 6 MC (możesz użyć tytanu), żeby umieścić tu 1 jednostkę asteroid.",
+  "Action: Spend 6 M€ to add an asteroid resource to this card [TITANIUM MAY BE USED].": "Akcja: Wydaj 6 M€ (możesz użyć tytanu), żeby umieścić tu 1 jednostkę asteroid.",
   "Action: Spend 1 resource from this card to increase Venus 1 step.":"Akcja: Usuń z tej karty 1 jednostkę asteroid i podnieś Współczynnik Terraformacji Wenus o 1 poziom.",
   "Venus must be 14% or lower":"Współczynnik Terraformacji Wenus musi być równy albo niższy niż 14%.",
 
@@ -92,7 +92,7 @@
   "Action: Spend one floater here to draw 1 card.":"Akcja: Usuń 1 jednostkę dryfowców z tej karty, żeby dobrać kartę.",
 
   "Aerosport Tournament":"Turniej Aerosportowy",
-  "Requires that you have 5 Floaters. Gain 1 MC per each City tile in play.":"Musisz posiadać przynajmniej 5 jednostek dryfowców. Otrzymujesz po 1 MC za każdy obszar miasta na planszach.",
+  "Requires that you have 5 Floaters. Gain 1 M€ per each City tile in play.":"Musisz posiadać przynajmniej 5 jednostek dryfowców. Otrzymujesz po 1 M€ za każdy obszar miasta na planszach.",
 
   "Air-Scrapping Expedition":"Operacja Uzdatniania Atmosfery",
   "Raise Venus 1 step. Add 3 Floaters to ANY Venus CARD.":"Podnieś Współczynnik Terraformacji Wenus o 1 poziom. Umieść 3 jednostki dryfowców na dowolnej karcie z symbolem Wenus.",
@@ -101,7 +101,7 @@
   "Requires 3 Science tags. Either raise the temperature 2 steps, or raise Venus 2 steps. Add 2 Floaters to ANY card.":"Musisz posiadać przynajmniej 3 symbole nauki. Podnieś Temperaturę o 4°C albo Współczynnik Terraformacji Wenus o 2 poziomy. Umieść 2 jednostki dryfowców na dowolnej karcie.",
 
   "Comet for Venus":"Kometa dla Wenus",
-  "Raise Venus 1 step. Remove up to 4M€ from any player WITH A VENUS TAG IN PLAY.":"Podnieś Współczynnik Terraformacji Wenus o 1 poziom. Usuń do 4 MC dowolnego gracza posiadajacego kartę z symbolem Wenus.",
+  "Raise Venus 1 step. Remove up to 4M€ from any player WITH A VENUS TAG IN PLAY.":"Podnieś Współczynnik Terraformacji Wenus o 1 poziom. Usuń do 4 M€ dowolnego gracza posiadajacego kartę z symbolem Wenus.",
 
   "Dawn City":"Miasto Świtu",
   "Requires 4 Science tags. Decrease your energy production 1 step. Increase your titanium production 1 step. Place a City tile on the RESERVED AREA.":"Musisz posiadać przynajmniej 4 symbole nauki. Obniż swoją produkcję energii o 1 poziom. Podnieś swoją produkcję tytanu o 1 poziom. Umieść obszar miasta na planszy Wenus, na polu zarezerwowanym dla Miasta Świtu.",
@@ -178,7 +178,7 @@
   "Raise Venus 2 steps. Increase your heat production 2 steps.":"Podnieś Współczynnik Terraformacji Wenus o 2 poziomy. Podnieś swoją produkcję ciepła o 2 poziomy.",
 
   "Saturn Surfing":"Saturniański Cloudsurfing",
-  "Action: Spend 1 floater from here to gain 1 M€ from each floater here, INCLUDING THE PAID FLOATER. Max 5.":"Akcja: Usuń z tej karty 1 jednostkę dryfowców, aby otrzymać po 1 MC za każdą znajdującą się na tej karcie jednostkę dryfowców, włączając tę, KTÓRĄ USUNĄŁEŚ (max 5).",
+  "Action: Spend 1 floater from here to gain 1 M€ from each floater here, INCLUDING THE PAID FLOATER. Max 5.":"Akcja: Usuń z tej karty 1 jednostkę dryfowców, aby otrzymać po 1 M€ za każdą znajdującą się na tej karcie jednostkę dryfowców, włączając tę, KTÓRĄ USUNĄŁEŚ (max 5).",
   "Add 1 floater here for every Earth tag you have, including this.":"Umieść na tej karcie po 1 jednostce dryfowców za każdy posiadany symbol Ziemi (z tym włącznie)."
 
 }

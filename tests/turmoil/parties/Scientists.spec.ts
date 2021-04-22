@@ -30,7 +30,7 @@ describe('Scientists', function() {
     expect(player.megaCredits).to.eq(1);
   });
 
-  it('Ruling bonus 2: Gain 1 MC for every 3 cards in hand', function() {
+  it('Ruling bonus 2: Gain 1 M€ for every 3 cards in hand', function() {
     player.cardsInHand.push(new SearchForLife(), new Research(), new GeneRepair());
 
     const bonus = SCIENTISTS_BONUS_2;

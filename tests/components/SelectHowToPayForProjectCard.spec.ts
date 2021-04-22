@@ -122,7 +122,7 @@ describe('SelectHowToPayForProjectCard', function() {
 
   it('select how to pay uses steel', async function() {
     // Regoplastic will cost 10. Player has 7M€ and 4 steels.
-    // They should spend at least enough to pay for the card, that is 6 mc and 2 steel.
+    // They should spend at least enough to pay for the card, that is 6 M€ and 2 steel.
     const wrapper = setupCardForPurchase(
       CardName.REGO_PLASTICS, 10,
       {steel: 4, megaCredits: 7, steelValue: 2},
@@ -140,7 +140,7 @@ describe('SelectHowToPayForProjectCard', function() {
     // Solar Wind Power will cost 11. Player has 2M€ and 4 Ti. The titanium is
     // artificially inflated to be worth 7M€ each.
     // The algorithm will try to spend 2 mc. Then spend as much Ti as possible.
-    // This will come down to 2 MC and 2 Ti (at value 7). So we are effectively spending 16.
+    // This will come down to 2 M€ and 2 Ti (at value 7). So we are effectively spending 16.
     // That is overspending by 5 mc. The algorithm will try to spend 5 M€ less if possible.
     // It is not, so it will try to overspend as little mc as it can.
     // The final answer should be 0M€ and 2 Ti (at value 7).
@@ -257,11 +257,11 @@ describe('SelectHowToPayForProjectCard', function() {
   });
 
   it('select Luna Train Station limits how much steel you can use', async () => {
-    // Luna Train Station costs 20, and will need 2 steel. Player has 20 MC and 4 steel.
+    // Luna Train Station costs 20, and will need 2 steel. Player has 20 M€ and 4 steel.
     //
     // The algorithm will select 20 MC,
     //
-    // Then when clicking the 'max' button for steel, the algorithm will switch to 16 MC and 2 steel.
+    // Then when clicking the 'max' button for steel, the algorithm will switch to 16 M€ and 2 steel.
     const wrapper = setupCardForPurchase(
       CardName.LUNA_TRAIN_STATION, 20,
       {
@@ -287,10 +287,10 @@ describe('SelectHowToPayForProjectCard', function() {
 
   it('select how to pay uses titanium metal bonus without using steel', async function() {
     // Io Mining Industries cost 41 mc. Player has 10 MC, 2 Steel and 13 Ti.
-    // The steel is artificially inflated to be worth 4 MC each.
-    // The titanium is artificially inflated to be worth 5 MC each.
+    // The steel is artificially inflated to be worth 4 M€ each.
+    // The titanium is artificially inflated to be worth 5 M€ each.
     // The algorithm will try to spend 10 mc. Then spend as much Ti as possible.
-    // This will come down to 10 MC and 7 Ti (at value 5). So we are effectively spending 45 MC.
+    // This will come down to 10 M€ and 7 Ti (at value 5). So we are effectively spending 45 MC.
     // That is overspending by 4 mc. The algorithm will try to spend 4 M€ less if possible.
     // IT WILL NOT TRY TO SPEND LESS STEEL EVEN IF IT HAS STEEL AND STEEL VALUE IS 4.
     // It will reduce the amount of MC.

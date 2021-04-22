@@ -9,7 +9,7 @@
    "Spend 4 M€ to draw a Building card (Turmoil Mars First)": "Gaste 4 M$ para comprar uma carta de construção (Marte Primeiro: Turmoil)",
    "Select a Scientists bonus.": "Escolha o bônus dos Cientistas.",
    "Gain 1 M€ for each Science tag you have": "Ganhe 1 M$ por cada ícone de ciência",
-   "Gain 1 MC for every 3 cards in hand": "Ganhe 1 M$ para cada 3 cartas na sua mão",
+   "Gain 1 M€ for every 3 cards in hand": "Ganhe 1 M$ para cada 3 cartas na sua mão",
    "Select a Scientists policy.": "Escolha a política dos Cientistas.",
    "Your global requirements are +/- 2 steps": "Seus requisitos globais são +/- 2",
    "When you raise a global parameter, draw a card per step raised": "Quando você sobe um parâmetro global, compre uma carta para nível.",
@@ -36,8 +36,8 @@
    "The player(s) with the lowest TR gains 1 TR": "O(s) jogador(es) com menos IT ganha(m) 1 IT",
    "The player(s) with the highest TR loses 1 TR": "O(s) jogador(es) com mais IT perde(m) 1 IT",
    "Select a Reds policy.": "Escolha a política dos Vemelhos.",
-   "When you take an action that raises TR, you MUST pay 3 MC per step raised": "Quando você fizer uma ação que aumenta o IT, PRECISA pagar 3 M$ por nível",
-   "When you place a tile, pay 3 MC or as much as possible": "Quando você coloca um tile, pague 3 M$ ou o máximo que puder",
+   "When you take an action that raises TR, you MUST pay 3 M€ per step raised": "Quando você fizer uma ação que aumenta o IT, PRECISA pagar 3 M$ por nível",
+   "When you place a tile, pay 3 M€ or as much as possible": "Quando você coloca um tile, pague 3 M$ ou o máximo que puder",
    "Pay 4 M€ to reduce a non-maxed global parameter 1 step (do not gain any track bonuses)": "Pague 4 M$ para reduzir um parâmetro global não maximizado 1 nível (não ganhe nenhum bônus)",
    "When you raise a global parameter, decrease your M€ production 1 step per step raised if possible": "Quaando você aumenta um parâmetro global, diminua sua produção de megacrédito 1 nível por nível aumentado se possível",
 
@@ -46,7 +46,7 @@
    "Gain 1 heat for each Heat production you have": "Ganhe 1 de calor por cada produção de calor",
    "Select a Kelvinists policy.": "Escolha a política dos Kelvinistas.",
    "Pay 10 M€ to increase your Energy and Heat production 1 step (Turmoil Kelvinists)": "Pague 10 M$ para aumentar suas produções de energia e calor 1 nível (Kelvinistas: Reviravolta)",
-   "When you raise temperature, gain 3 MC per step raised": "Quando você aumenta a temperatura, ganhe 3 M$ por nível aumentado",
+   "When you raise temperature, gain 3 M€ per step raised": "Quando você aumenta a temperatura, ganhe 3 M$ por nível aumentado",
    "Convert 6 heat into temperature (Turmoil Kelvinists)": "Converta 6 de calor para aumentar a temperatura (Kelvinistas: Reviravolta)",
    "When you place a tile, gain 2 heat": "Quando você coloca um tile, ganhe 2 de calor"
 

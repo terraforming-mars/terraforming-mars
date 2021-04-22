@@ -62,7 +62,7 @@ export class FloatingHabs extends Card implements IActionCard, IResourceCard {
     }
 
     return new SelectCard(
-      'Spend 2 MC and select card to add 1 floater',
+      'Spend 2 M€ and select card to add 1 floater',
       'Add floater',
       floaterCards,
       (foundCards: Array<ICard>) => {

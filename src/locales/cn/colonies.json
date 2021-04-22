@@ -128,7 +128,7 @@
   "Increase your M€ production 1 step per CARD WITH NO TAGS, including this.":"每有一张无标志的卡牌（包括此卡），你的金钱产量+1。",
 
   "Conscription":"征兵",
-  "Requires 2 Earth tags. The next card you play this generation costs 16 MC less.":"需求：2个地球标志。本时代你打出的下一张牌费用-16。",
+  "Requires 2 Earth tags. The next card you play this generation costs 16 M€ less.":"需求：2个地球标志。本时代你打出的下一张牌费用-16。",
 
   "Corona Extractor":"日冕提取器",
   "4 Science":"4个科技标志",
@@ -155,7 +155,7 @@
 
   "Jupiter Floating Station":"木星浮动站",
   "Action: Add 1 floater to a JOVIAN CARD.":"行动：在一张木星卡上+1云资源",
-  "Action: Gain 1 MC for every floater here [MAX 4].":"行动：获得等同于此卡上云资源数量的钱（最多获得4块钱）。",
+  "Action: Gain 1 M€ for every floater here [MAX 4].":"行动：获得等同于此卡上云资源数量的钱（最多获得4块钱）。",
   "Requires 3 Science tags.":"需求：3个科技标志。",
 
   "Lunar Exports":"月球出口",

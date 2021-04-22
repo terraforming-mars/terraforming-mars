@@ -1663,10 +1663,17 @@ export class Player implements ISerializable<SerializedPlayer> {
   // Propose a new action to undo last action
   private undoTurnOption(): PlayerInput {
     return new SelectOption('Undo last action', 'Undo', () => {
-      GameLoader.getInstance().restoreGameAt(this.game.id, this.game.lastSaveId - 2, (game) => {
-        if (game !== undefined) {
-          this.usedUndo = true; // To prevent going back into takeAction()
+      this.usedUndo = true; // To prevent going back into takeAction()
+      GameLoader.getInstance().restoreGameAt(this.game.id, this.game.lastSaveId - 2, (err) => {
+        // If there is an error with restoring the game from the database this undo action has failed.
+        // We need a mechanism to tell the user this has failed. By now the `res` has been sent.
+        // For now we will keep this player instance going and hope player discovers what has happened.
+        if (err) {
+          this.takeAction();
+          return;
         }
+        // If there was no error the GameLoader has loaded the old version of `Player`
+        // This instance of `Player` will eventually be garbage collected.
       });
       return undefined;
     });

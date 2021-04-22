@@ -15,7 +15,7 @@ export class VenusInfrastructure implements IGlobalEvent {
       game.getPlayers().forEach((player) => {
         const amount = Math.min(5, player.getTagCount(Tags.VENUS, false, false)) + turmoil.getPlayerInfluence(player);
         if (amount > 0) {
-          player.setResource(Resources.MEGACREDITS, amount * 2, game, undefined, true);
+          player.addResource(Resources.MEGACREDITS, amount * 2, game, undefined, true);
         }
       });
     }

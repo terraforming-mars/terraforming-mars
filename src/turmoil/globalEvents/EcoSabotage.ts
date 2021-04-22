@@ -15,7 +15,7 @@ export class EcoSabotage implements IGlobalEvent {
         const plants = player.getResource(Resources.PLANTS);
         const maxPlants = 3 + turmoil.getPlayerInfluence(player);
         const plantDecrease = Math.max(0, plants - maxPlants);
-        player.setResource(Resources.PLANTS, -plantDecrease, game, undefined, true);
+        player.addResource(Resources.PLANTS, -plantDecrease, game, undefined, true);
       });
     }
 }

@@ -13,7 +13,7 @@ export class ScientificCommunity implements IGlobalEvent {
     public resolve(game: Game, turmoil: Turmoil) {
       game.getPlayers().forEach((player) => {
         const amount = player.cardsInHand.length + turmoil.getPlayerInfluence(player);
-        player.setResource(Resources.MEGACREDITS, amount, game, undefined, true);
+        player.addResource(Resources.MEGACREDITS, amount, game, undefined, true);
       });
     }
 }

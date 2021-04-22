@@ -19,7 +19,7 @@ export class Sabotage implements IGlobalEvent {
         if (player.getProduction(Resources.STEEL) >= 1) {
           player.addProduction(Resources.STEEL, -1, game, undefined, true);
         }
-        player.setResource(Resources.STEEL, turmoil.getPlayerInfluence(player), game, undefined, true);
+        player.addResource(Resources.STEEL, turmoil.getPlayerInfluence(player), game, undefined, true);
       });
     }
 }

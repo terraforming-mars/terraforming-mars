@@ -21,7 +21,7 @@ describe('LawSuit', function() {
   });
 
   it('Can play if resources removed this turn by other player', function() {
-    player.setResource(Resources.MEGACREDITS, -1, game, player2);
+    player.addResource(Resources.MEGACREDITS, -1, game, player2);
     expect(card.canPlay(player)).is.true;
   });
 
@@ -31,7 +31,7 @@ describe('LawSuit', function() {
   });
 
   it('Should play', function() {
-    player.setResource(Resources.MEGACREDITS, -1, game, player2);
+    player.addResource(Resources.MEGACREDITS, -1, game, player2);
     player.addProduction(Resources.MEGACREDITS, -1, game, player2);
 
     const play = card.play(player);

@@ -46,7 +46,7 @@ export class PROffice extends Card implements IProjectCard {
   public play(player: Player) {
     player.increaseTerraformRating();
     const amount = player.getTagCount(Tags.EARTH) + 1;
-    player.setResource(Resources.MEGACREDITS, amount);
+    player.addResource(Resources.MEGACREDITS, amount);
     return undefined;
   }
 }

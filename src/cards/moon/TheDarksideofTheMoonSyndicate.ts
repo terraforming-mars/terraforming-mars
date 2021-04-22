@@ -97,8 +97,8 @@ export class TheDarksideofTheMoonSyndicate implements CorporationCard {
         // TODO(kberg): Create a Game.steal method that manages this, both here
         // and in StealResources.
         const adjustedQuantity = Math.min(qty, target.megaCredits);
-        activePlayer.setResource(Resources.MEGACREDITS, adjustedQuantity, game);
-        target.setResource(Resources.MEGACREDITS, -adjustedQuantity, game, activePlayer);
+        activePlayer.addResource(Resources.MEGACREDITS, adjustedQuantity, game);
+        target.addResource(Resources.MEGACREDITS, -adjustedQuantity, game, activePlayer);
       });
     }
     return undefined;

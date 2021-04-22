@@ -298,7 +298,7 @@ export class Player implements ISerializable<SerializedPlayer> {
       const monsInsuranceOwner: Player = this.game.getPlayerById(this.game.monsInsuranceOwner);
       const retribution: number = Math.min(monsInsuranceOwner.megaCredits, 3);
       this.megaCredits += retribution;
-      monsInsuranceOwner.setResource(Resources.MEGACREDITS, -3);
+      monsInsuranceOwner.addResource(Resources.MEGACREDITS, -3);
       if (retribution > 0) {
         this.game.log('${0} received ${1} M€ from ${2} owner (${3})', (b) =>
           b.player(this)
@@ -309,7 +309,7 @@ export class Player implements ISerializable<SerializedPlayer> {
     }
   }
 
-  public setResource(resource: Resources, amount : number = 1, game? : Game, fromPlayer? : Player, globalEvent? : boolean) {
+  public addResource(resource: Resources, amount : number = 1, game? : Game, fromPlayer? : Player, globalEvent? : boolean) {
     if (resource === Resources.MEGACREDITS) this.megaCredits = Math.max(0, this.megaCredits + amount);
     if (resource === Resources.STEEL) this.steel = Math.max(0, this.steel + amount);
     if (resource === Resources.TITANIUM) this.titanium = Math.max(0, this.titanium + amount);

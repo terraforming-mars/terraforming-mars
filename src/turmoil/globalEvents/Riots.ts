@@ -19,7 +19,7 @@ export class Riots implements IGlobalEvent {
         ).length;
         const amount = Math.min(5, city) - turmoil.getPlayerInfluence(player);
         if (amount > 0) {
-          player.setResource(Resources.MEGACREDITS, -4 * amount, game, undefined, true);
+          player.addResource(Resources.MEGACREDITS, -4 * amount, game, undefined, true);
         }
       });
     }

@@ -17,7 +17,7 @@ export class JovianTaxRights implements IGlobalEvent {
           coloniesCount += colony.colonies.filter((owner) => owner === player.id).length;
         });
         player.addProduction(Resources.MEGACREDITS, coloniesCount, game, undefined, true);
-        player.setResource(Resources.TITANIUM, turmoil.getPlayerInfluence(player), game, undefined, true);
+        player.addResource(Resources.TITANIUM, turmoil.getPlayerInfluence(player), game, undefined, true);
       });
     }
 }

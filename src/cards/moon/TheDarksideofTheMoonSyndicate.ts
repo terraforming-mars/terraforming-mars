@@ -32,7 +32,7 @@ export class TheDarksideofTheMoonSyndicate implements CorporationCard {
       b.titanium(1).arrow(Size.SMALL).syndicateFleet()
         .or(Size.SMALL)
         .syndicateFleet().arrow(Size.SMALL).text('steal', Size.TINY).megacredits(8).any.br;
-      b.description('(Action: Spend 1 titanium to add 1 syndicate fleet on this card OR remove 1 syndicate fleet from this card to steal 8MC from any opponent.').br;
+      b.description('(Action: Spend 1 titanium to add 1 syndicate fleet on this card OR remove 1 syndicate fleet from this card to steal 8 M€from any opponent.').br;
       b
         .effect('When you place a tile on the Moon, steal 2 M€ from opponents for each of their tiles next to yours.', (eb) => {
           eb.emptyTile('normal', Size.SMALL).secondaryTag(Tags.MOON)
@@ -61,7 +61,7 @@ export class TheDarksideofTheMoonSyndicate implements CorporationCard {
       }));
     }
     if (this.resourceCount > 0) {
-      orOptions.options.push(new SelectOption('Remove 1 syndicate fleet from this card to steal 8MC from any opponent.', 'Remove syndicate fleet', () => {
+      orOptions.options.push(new SelectOption('Remove 1 syndicate fleet from this card to steal 8 M€from any opponent.', 'Remove syndicate fleet', () => {
         player.removeResourceFrom(this);
         player.game.defer(new StealResources(player, Resources.MEGACREDITS, 8));
         return undefined;

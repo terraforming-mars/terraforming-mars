@@ -21,7 +21,7 @@ export class CrediCor extends Card implements CorporationCard {
           b.br.br.br;
           b.megacredits(57);
           b.corpBox('effect', (ce) => {
-            ce.effect('After you pay for a card or standard project with a basic cost of 20MC or more, you gain 4MC.', (eb) => {
+            ce.effect('After you pay for a card or standard project with a basic cost of 20 M€or more, you gain 4MC.', (eb) => {
               eb.minus().megacredits(20).startEffect.megacredits(4);
             });
           });

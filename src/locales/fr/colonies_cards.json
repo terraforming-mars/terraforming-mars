@@ -75,7 +75,7 @@
 
     "Martian Zoo": "Zoo Martien",
     "Effect: When you play an Earth tag, place an animal here.": "Effet: Lorsque vous jouez une carte Terre. Placez un animal sur le Zoo Martien.",
-    "Action: Gain 1MC per animal here.": "Action: Gagnez 1M€ par animal sur cette carte",
+    "Action: Gain 1 M€per animal here.": "Action: Gagnez 1M€ par animal sur cette carte",
     "Requires 2 city tiles in play.": "Nécessite 2 tuiles Cités en jeu",
 
     "Mining Colony": "Colonie Minière",
@@ -85,8 +85,8 @@
     "Decrease your M€ production 2 steps. Place a colony.": "Diminuez votre production de M€ de 2,. Placez une colonie",
 
     "Molecular Printing": "Impression Moléculaire",
-    "Gain 1MC for each city tile in play.": "Gagnez 1M€ par tuile cité en jeu.",
-    "Gain 1MC for each colony in play.": "Gagnez 1M€ par tuile colonie en jeu.",
+    "Gain 1 M€for each city tile in play.": "Gagnez 1M€ par tuile cité en jeu.",
+    "Gain 1 M€for each colony in play.": "Gagnez 1M€ par tuile colonie en jeu.",
 
     "Nitrogen From Titan": "Azote de Titan",
     "Raise your TR 2 steps. Add 2 floaters to a JOVIAN CARD.": "Augmentez votre NT de 2. Ajoutez 2 flotteurs à n'importe quelle CARTE JOVIENNE",
@@ -131,7 +131,7 @@
     "Requires a colony. Place a colony. MAY BE PLACED ON A COLONY TILE WHERE YOU ALREADY HAVE A COLONY. Gain 1 Trade Fleet. 1VP per 2 colonies in play.": "Nécessite 1 colonie. Placez 1 colonie. ELLE PEUT ETRE PLACEE SUR UNE TUILE COLONIE OU VOUS AVEZ DEJA UN COLONIE. Gagnez 1 Flotte marchande. 1 PV par groupe de 2 colonies en jeu.",
 
     "Spin-off Department": "Pépinière d'Entreprises",
-    "Effect: WHEN PLAYING A CARD WITH A BASIC COST OF 20MC OR MORE, draw a card.": "Effet: Lorsque vous jouez une carte ayant un coût de 20 M€ou plus, piochez une carte.",
+    "Effect: WHEN PLAYING A CARD WITH A BASIC COST OF 20 M€OR MORE, draw a card.": "Effet: Lorsque vous jouez une carte ayant un coût de 20 M€ou plus, piochez une carte.",
     "Increase your M€ production 2 steps.": "Augmentez votre production de M€ de 2.",
 
     "Sub-Zero Salt Fish": "Poisson Salé antigel",

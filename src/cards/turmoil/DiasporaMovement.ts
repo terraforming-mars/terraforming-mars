@@ -20,7 +20,7 @@ export class DiasporaMovement extends Card implements IProjectCard {
       requirements: CardRequirements.builder((b) => b.party(PartyName.REDS)),
       metadata: {
         cardNumber: 'TO4',
-        description: 'Requires that Reds are ruling or that you have 2 delegates there. Gain 1MC for each Jovian tag in play, including this.',
+        description: 'Requires that Reds are ruling or that you have 2 delegates there. Gain 1 M€for each Jovian tag in play, including this.',
         renderData: CardRenderer.builder((b) => {
           b.megacredits(1).slash().jovian().played.any;
         }),

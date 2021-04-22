@@ -18,7 +18,7 @@
   "(Action: Remove 1 asteroid here to raise temperature 1 step.)": "Ação: remova um asteroide desta carta para aumentar a temperatura 1 nível.",
 
   "Field-Capped City": "Cidade com Cúpula Energética",
-  "(Increase your M$ production 2 steps, increase your energy production 1 step, gain 3 plants, and place a city tile.)": "Coloque uma cidade. Aumente 2 níveis sua produção de M$ e 1 nível a produção de energia. Receba 3 plantas.",
+  "(Increase your M€ production 2 steps, increase your energy production 1 step, gain 3 plants, and place a city tile.)": "Coloque uma cidade. Aumente 2 níveis sua produção de M$ e 1 nível a produção de energia. Receba 3 plantas.",
 
   "Magnetic Shield": "Escudo Magnético",
   "2 Power": "2 Ícones de energia",
@@ -55,7 +55,7 @@
   "Requires 2 science tags.": "Requer 2 ícones de ciência",
 
   "Potatoes": "Batatas",
-  "Lose 2 plants. Increase your M$ production 2 steps.": "Perca 2 plantas e aumente 2 níveis sua produção de M$.",
+  "Lose 2 plants. Increase your M€ production 2 steps.": "Perca 2 plantas e aumente 2 níveis sua produção de M$.",
 
   "Meat Industry": "Indústria da Carne",
   "Effect: When you gain an animal to ANY CARD, gain 2MC.": "Efeito: quando adicionar um recurso de animal a QUALQUER CARTA, receba 2 M$.",
@@ -64,20 +64,20 @@
 
   "Orbital Cleanup": "Limpeza Orbital",
   "Action: Gain 1 M€ per Science tag you have.": "Ação: receba 1 M$ por cada ícone de ciência que você possua.",
-  "Decrease your M$ production 2 steps.": "Diminua sua produção de M$ 2 níveis.",
+  "Decrease your M€ production 2 steps.": "Diminua sua produção de M$ 2 níveis.",
 
   "Law Suit": "Processo",
-  "Steal 3 M$ from a player that REMOVED YOUR RESOURCES OR DECREASED YOUR PRODUCTION this generation. Place this card face down in THAT PLAYER'S EVENT PILE.": "Roube 3 M$ de um jogador QUE REMOVEU RECURSOS SEUS OU DIMINUIU SUA PRODUÇÃO nesta geração. Posicione esta carta NO BARALHO DE EVENTOS DESTE JOGADOR.",
+  "Steal 3 M€ from a player that REMOVED YOUR RESOURCES OR DECREASED YOUR PRODUCTION this generation. Place this card face down in THAT PLAYER'S EVENT PILE.": "Roube 3 M$ de um jogador QUE REMOVEU RECURSOS SEUS OU DIMINUIU SUA PRODUÇÃO nesta geração. Posicione esta carta NO BARALHO DE EVENTOS DESTE JOGADOR.",
 
   "Small Asteroid": "Pequeno Asteroide",
   "Increase temperature 1 step. Remove up to 2 plants from any player.": "Aumente a temperatura 1 nível. Remova até 2 plantas de qualquer jogador.",
 
   "Asteroid Hollowing": "Excavação de Asteroides",
-  "Action: Spend 1 titanium to add 1 asteroid resource here and increase M$ production 1 step.": "Ação: gaste 1 de titânio para adicionar 1 asteroide aquí e incrementar 1 nível sua produção de M$.",
+  "Action: Spend 1 titanium to add 1 asteroid resource here and increase M€ production 1 step.": "Ação: gaste 1 de titânio para adicionar 1 asteroide aquí e incrementar 1 nível sua produção de M$.",
   "1VP for each 2 asteroids on this card.": "1 PV por cada 2 asteorides nesta carta.",
 
   "Advertising": "Propaganda",
-  "Effect: When you play a card with a basic cost of 20 M€ or more, increase your M$ production 1 step.": "Quando você jogar uma carta com custo 20 M$ ou mais, aumente 1 nível sua produção de M$.",
+  "Effect: When you play a card with a basic cost of 20 M€ or more, increase your M€ production 1 step.": "Quando você jogar uma carta com custo 20 M$ ou mais, aumente 1 nível sua produção de M$.",
 
   "Project Inspection": "Inspeção de Projetos",
   "Use a card action that has been used this generation.": "Use uma carta de ação que já foi utilizada nesta geração.",
@@ -86,7 +86,7 @@
   "Effect: Your steel resources are worth 1 M€ extra.": "Efeito: Seu aço vale 1 M$ extra.",
 
   "Interplanetary Trade": "Negociação Interplanetária",
-  "Increase your M$ production 1 step per different tag you have in play, including this.": "Aumente sua produção de M$ 1 nível para cada ícone diferente que você tenha em jogo.",
+  "Increase your M€ production 1 step per different tag you have in play, including this.": "Aumente sua produção de M$ 1 nível para cada ícone diferente que você tenha em jogo.",
 
   "Penguins": "Pinguins",
   "Action: Add 1 Animal to this card.": "Ação: Adicione 1 animal a esta carta.",
@@ -114,13 +114,13 @@
 
   "Asteroid Rights": "Direitos de Asteroides",
   "Action: Spend 1 M€ to add 1 asteroid to ANY card.": "Ação: gaste 1 M$ para adicionar um asteroide a QUALQUER carta.",
-  "Action: Spend 1 asteroid here to increase M$ production 1 step OR gain 2 titanium.": "Ação: remova um asteroide sobre esta carta para aumentar 1 nível sua produção de M$ OU receber 2 de titânio.",
+  "Action: Spend 1 asteroid here to increase M€ production 1 step OR gain 2 titanium.": "Ação: remova um asteroide sobre esta carta para aumentar 1 nível sua produção de M$ OU receber 2 de titânio.",
   "Add 2 asteroids to this card.": "Adicione 2 asteroides a esta carta.",
 
   "Stanford Torus": "Toroide de Stanford",
   "Place a city tile IN SPACE, outside and separate from the planet.": "Coloque um tile de cidade NO ESPAÇO separado do planeta.",
 
-  "You start with 48 M€. Increase your M$ production 4 steps. ALL OPPONENTS DECREASE THEIR M$ production 2 STEPS. THIS DOES NOT TRIGGER THE EFFECT BELOW.": "Você começa com 48 M$. Aumente sua produção de M$ em 4 níveis. TODOS OS OPONENTES REDUZEM SUA PRODUÇÃO DE M$ EM 2 NÍVEIS. ISTO NÃO ACIONA O EFEITO ABAIXO.",
+  "You start with 48 M€. Increase your M€ production 4 steps. ALL OPPONENTS DECREASE THEIR M€ production 2 STEPS. THIS DOES NOT TRIGGER THE EFFECT BELOW.": "Você começa com 48 M$. Aumente sua produção de M$ em 4 níveis. TODOS OS OPONENTES REDUZEM SUA PRODUÇÃO DE M$ EM 2 NÍVEIS. ISTO NÃO ACIONA O EFEITO ABAIXO.",
   "Effect: When a player causes another player to decrease production or lose resources, pay 3MC to the victim, or as much as possible.": "Efeito: Quando um jogador casar a diminuição da produçao ou a perda de recursos de outro jogador, pague 3 M$ para a vítima, caso possível.",
 
   "You start with 47 M€. As your first action, place a greenery tile and raise the oxygen 1 step.": "Você começa com 47 M$. Como sua primeira ação, posicione um tile de vegetação",

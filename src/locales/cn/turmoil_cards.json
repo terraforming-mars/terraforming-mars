@@ -6,7 +6,7 @@
   "Requires that you are Chairman. Remove any NON-LEADER delegate.": "需要你是主席。移除1个非领导者代表",
 
   "Cultural Metropolis": "多元化都市",
-  "Requires that Unity is ruling or that you have 2 delegates there. Decrease your energy production 1 step and increase your MC production 3 steps. Place a city tile. Place 2 delegates in 1 party.": "需要联合党为执政党，或你在该党有至少2个代表。减少1点电力产量，增加3点MC产量。放置一个城市。放置2个代表到1个政党。",
+  "Requires that Unity is ruling or that you have 2 delegates there. Decrease your energy production 1 step and increase your M€ production 3 steps. Place a city tile. Place 2 delegates in 1 party.": "需要联合党为执政党，或你在该党有至少2个代表。减少1点电力产量，增加3点MC产量。放置一个城市。放置2个代表到1个政党。",
 
   "Diaspora Movement": "大流散运动",
   "Requires that Reds are ruling or that you have 2 delegates there. Gain 1MC for each Jovian tag in play, including this.": "需要红党为执政党，或你在该党有至少2个代表。场上每有1个木星标志，你获得1点MC,包括此牌",
@@ -20,14 +20,14 @@
   "Requires that Greens are ruling or that you have 2 delegates there.": "需要绿党为执政党，或你在该党有至少2个代表。",
 
   "Martian Media Center": "火星媒体中心",
-  "Action: Pay 3 MC to add a delegate to any party.": "行动：花费3点MC增加一名代表。",
-  "Requires that Mars First is ruling or that you have 2 delegates there. Increase your MC production 2 steps.": "需要火星之首党为执政党，或你在该党有至少2个代表。提升2点MC产量。",
+  "Action: Pay 3 M€ to add a delegate to any party.": "行动：花费3点MC增加一名代表。",
+  "Requires that Mars First is ruling or that you have 2 delegates there. Increase your M€ production 2 steps.": "需要火星之首党为执政党，或你在该党有至少2个代表。提升2点MC产量。",
 
   "Parliament Hall": "议会大厅",
-  "Requires that Mars First are ruling or that you have 2 delegates there. Increase your MC production 1 step for every 3 Building tags you have, including this.": "需要火星之首为执政党，或你在该党有至少2个代表。你每有3个建筑标志标志，包括这张，获得1点MC产量。",
+  "Requires that Mars First are ruling or that you have 2 delegates there. Increase your M€ production 1 step for every 3 Building tags you have, including this.": "需要火星之首为执政党，或你在该党有至少2个代表。你每有3个建筑标志标志，包括这张，获得1点MC产量。",
 
   "PR Office": "公关办公室",
-  "Requires that Unity are ruling or that you have 2 delegates there. Gain 1 TR. Gain 1 MC for each Earth tag you have, including this.": "需要联合党为执政党，或你在该党有至少2个代表。提升1点改造度。你每有1个地球标志，获得1点MC，包含本卡。",
+  "Requires that Unity are ruling or that you have 2 delegates there. Gain 1 TR. Gain 1 M€ for each Earth tag you have, including this.": "需要联合党为执政党，或你在该党有至少2个代表。提升1点改造度。你每有1个地球标志，获得1点MC，包含本卡。",
 
   "Public Celebrations": "公开庆典",
   "Requires that you are Chairman.": "需要你是主席。",
@@ -36,7 +36,7 @@
   "Exchange one NEUTRAL NON-LEADER delegate with one of your own from the reserve.": "将场上的一个中立非领导者代表替换为你储备区的代表。",
 
   "Red Tourism Wave": "红色旅游风潮",
-  "Requires that Reds are ruling or that you have 2 delegates there. Gain 1 MC from each EMPTY AREA ADJACENT TO YOUR TILES": "需要红党为执政党，或你在该党有至少2个代表。每有一个空白板块与你的板块相邻，你获得1点MC。",
+  "Requires that Reds are ruling or that you have 2 delegates there. Gain 1 M€ from each EMPTY AREA ADJACENT TO YOUR TILES": "需要红党为执政党，或你在该党有至少2个代表。每有一个空白板块与你的板块相邻，你获得1点MC。",
 
   "Sponsored Mohole": "莫霍计划赞助",
   "Requires that Kelvinists are ruling or that you have 2 delegates there. Increase your heat production 2 steps.": "需要开尔文主义党为执政党，或你在该党有至少2个代表。提升2点热能产量。",
@@ -51,6 +51,6 @@
   "Requires that you have a Party Leader in any party and that the sitting Chairman is neutral. Remove the NEUTRAL Chairman and move your own delegate (from the reserve) there instead. Gain 1 TR.": "需要你是一个政党的领导者且当前主席是中立代表。将中立主席替换为你储备区的一名代表。提升1点改造度。",
 
   "2 Party leaders":"两个政党领袖",
-  
+
   "Requires that you have 2 party leaders. Gain 1 TR.":"需要你是2个政党的领导者，获得1TR"
 }

@@ -10,7 +10,7 @@ import {CardName} from '../../CardName';
 import {CardType} from '../CardType';
 import {DeferredAction, Priority} from '../../deferredActions/DeferredAction';
 import {CardRenderer} from '../render/CardRenderer';
-import {CardRenderItemSize} from '../render/CardRenderItemSize';
+import {Size} from '../render/Size';
 import {BoardType} from '../../boards/BoardType';
 
 export class Philares extends Card implements CorporationCard {
@@ -29,8 +29,8 @@ export class Philares extends Card implements CorporationCard {
           b.megacredits(47).nbsp.greenery();
           b.corpBox('effect', (ce) => {
             ce.effect('Each new adjacency between your tile and an opponent\'s tile gives you a standard resource of your choice [regardless of who just placed a tile].', (eb) => {
-              eb.emptyTile('normal', CardRenderItemSize.SMALL).any.nbsp;
-              eb.emptyTile('normal', CardRenderItemSize.SMALL).startEffect.wild(1);
+              eb.emptyTile('normal', Size.SMALL).any.nbsp;
+              eb.emptyTile('normal', Size.SMALL).startEffect.wild(1);
             });
           });
         }),

@@ -21,7 +21,7 @@ export class Shuttles extends Card implements IProjectCard {
       metadata: {
         cardNumber: '166',
         renderData: CardRenderer.builder((b) => {
-          b.effect('When you play a Space card, you pay 2 MC less for it.', (eb) => {
+          b.effect('When you play a Space card, you pay 2 M€ less for it.', (eb) => {
             eb.space().played.startEffect.megacredits(-2);
           }).br;
           b.production((pb) => {
@@ -30,7 +30,7 @@ export class Shuttles extends Card implements IProjectCard {
           });
         }),
         description: {
-          text: 'Requires 5% oxygen. Decrease your Energy production 1 step and increase your MC production 2 steps.',
+          text: 'Requires 5% oxygen. Decrease your Energy production 1 step and increase your M€ production 2 steps.',
           align: 'left',
         },
         victoryPoints: 1,

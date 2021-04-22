@@ -17,6 +17,7 @@ import {CardName} from '../src/CardName';
 import {GlobalParameter} from '../src/GlobalParameter';
 import {TestingUtils} from './TestingUtils';
 import {Units} from '../src/Units';
+import {SelfReplicatingRobots} from '../src/cards/promo/SelfReplicatingRobots';
 
 describe('Player', function() {
   it('should initialize with right defaults', function() {
@@ -278,6 +279,14 @@ describe('Player', function() {
 
     expect(newPlayer.color).eq(Color.PURPLE);
     expect(newPlayer.tradesThisGeneration).eq(100);
+  });
+  it('pulls self replicating robots target cards', function() {
+    const player = TestPlayers.BLUE.newPlayer();
+    expect(player.getSelfReplicatingRobotsTargetCards().length).eq(0);
+    const srr = new SelfReplicatingRobots();
+    player.playedCards.push(srr);
+    srr.targetCards.push({card: new LunarBeam(), resourceCount: 0});
+    expect(player.getSelfReplicatingRobotsTargetCards().length).eq(1);
   });
 });
 

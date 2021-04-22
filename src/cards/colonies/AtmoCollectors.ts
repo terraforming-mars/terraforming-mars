@@ -10,7 +10,7 @@ import {LogHelper} from '../../LogHelper';
 import {Resources} from '../../Resources';
 import {AddResourcesToCard} from '../../deferredActions/AddResourcesToCard';
 import {Card} from '../Card';
-import {CardRenderItemSize} from '../render/CardRenderItemSize';
+import {Size} from '../render/Size';
 import {CardRenderer} from '../render/CardRenderer';
 
 export class AtmoCollectors extends Card implements IProjectCard, IResourceCard {
@@ -26,10 +26,10 @@ export class AtmoCollectors extends Card implements IProjectCard, IResourceCard 
         cardNumber: 'C03',
         renderData: CardRenderer.builder((b) => {
           b.action('Add one floater here.', (eb) => {
-            eb.empty().startAction.floaters(1).or(CardRenderItemSize.SMALL);
+            eb.empty().startAction.floaters(1).or(Size.SMALL);
           }).br;
           b.action('Spend 1 floater here to gain 2 titanium, or 3 energy, or 4 heat.', (eb) => {
-            eb.floaters(1).startAction.titanium(2).digit.slash(CardRenderItemSize.SMALL).energy(3).digit.slash(CardRenderItemSize.SMALL).heat(4).digit;
+            eb.floaters(1).startAction.titanium(2).digit.slash(Size.SMALL).energy(3).digit.slash(Size.SMALL).heat(4).digit;
           }).br;
           b.floaters(2).asterix();
         }),

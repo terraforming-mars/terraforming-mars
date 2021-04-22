@@ -42,7 +42,7 @@ export class MoholeLake extends Card implements IActionCard, IProjectCard {
     const totalSteps = temperatureStep + oceanStep;
 
     if (PartyHooks.shouldApplyPolicy(player.game, PartyName.REDS)) {
-      return player.canAfford(REDS_RULING_POLICY_COST * totalSteps, true);
+      return player.canAfford(REDS_RULING_POLICY_COST * totalSteps, {steel: true});
     }
 
     return true;

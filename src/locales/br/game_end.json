@@ -22,7 +22,12 @@
     "VP": "PV",
     "Total": "Total",
     "Victory points details for": "Detalhes de pontos de vitória de",
+    "Victory points details": "Detalhamento dos pontos de vitória",
     "Final situation on the board": "Situação final do tabuleiro",
     "Final game log": "Log de fim de jogo",
-    "Go to main page": "Voltar ao menu principal"
+    "Go to main page": "Voltar ao menu principal",
+    " - Game finished!":" - Fim de jogo!",
+    "Terraforming Mars - Game finished!": "Terraforming Mars - Fim de jogo!",
+    " won!": "venceu!"
+
 }

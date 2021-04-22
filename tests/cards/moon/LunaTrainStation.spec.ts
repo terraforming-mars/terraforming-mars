@@ -65,20 +65,20 @@ describe('LunaTrainStation', () => {
   });
 
   it('getVictoryPoints', () => {
-    // This space has room to surround it with mines.
+    // This space has room to surround it with roads.
     const space = moonData.moon.getSpace('m15');
     space.tile = {tileType: TileType.LUNA_TRAIN_STATION, card: card.name};
 
     expect(card.getVictoryPoints(player)).eq(0);
     const adjacentSpaces = moonData.moon.getAdjacentSpaces(space);
 
-    adjacentSpaces[0].tile = {tileType: TileType.MOON_MINE};
+    adjacentSpaces[0].tile = {tileType: TileType.MOON_ROAD};
     expect(card.getVictoryPoints(player)).eq(2);
 
-    adjacentSpaces[1].tile = {tileType: TileType.MOON_MINE};
+    adjacentSpaces[1].tile = {tileType: TileType.MOON_ROAD};
     expect(card.getVictoryPoints(player)).eq(4);
 
-    adjacentSpaces[2].tile = {tileType: TileType.MOON_MINE};
+    adjacentSpaces[2].tile = {tileType: TileType.MOON_ROAD};
     expect(card.getVictoryPoints(player)).eq(6);
   });
 });

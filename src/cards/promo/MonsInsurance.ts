@@ -5,7 +5,7 @@ import {Card} from '../Card';
 import {CardName} from '../../CardName';
 import {CardType} from '../CardType';
 import {CardRenderer} from '../render/CardRenderer';
-import {CardRenderItemSize} from '../render/CardRenderItemSize';
+import {Size} from '../render/Size';
 
 export class MonsInsurance extends Card implements CorporationCard {
   constructor() {
@@ -16,16 +16,16 @@ export class MonsInsurance extends Card implements CorporationCard {
 
       metadata: {
         cardNumber: 'R46',
-        description: 'You start with 48 MC. Increase your MC production 4 steps. ALL OPPONENTS DECREASE THEIR MC PRODUCTION 2 STEPS. THIS DOES NOT TRIGGER THE EFFECT BELOW.',
+        description: 'You start with 48 MC. Increase your M€ production 4 steps. ALL OPPONENTS DECREASE THEIR M€ production 2 STEPS. THIS DOES NOT TRIGGER THE EFFECT BELOW.',
         renderData: CardRenderer.builder((b) => {
           b.megacredits(48).production((pb) => {
             pb.megacredits(4).nbsp.megacredits(-2).any.asterix();
           });
           b.corpBox('effect', (cb) => {
-            cb.vSpace(CardRenderItemSize.SMALL);
+            cb.vSpace(Size.SMALL);
             cb.effect('When a player causes another player to decrease production or lose resources, pay 3MC to the victim, or as much as possible.', (eb) => {
               eb.production((pb) => pb.wild(1).any).or().minus().wild(1).any;
-              eb.startEffect.text('pay', CardRenderItemSize.SMALL, true).megacredits(3);
+              eb.startEffect.text('pay', Size.SMALL, true).megacredits(3);
             });
           });
         }),

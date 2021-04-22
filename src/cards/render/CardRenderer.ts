@@ -1,6 +1,6 @@
 import {AltSecondaryTag, CardRenderItem, ItemOptions} from './CardRenderItem';
 import {CardRenderSymbol} from './CardRenderSymbol';
-import {CardRenderItemSize} from './CardRenderItemSize';
+import {Size} from './Size';
 import {CardRenderItemType} from './CardRenderItemType';
 import {TileType} from '../../TileType';
 import {Tags} from '../Tags';
@@ -161,7 +161,7 @@ class Builder {
     return this;
   }
 
-  public oceans(amount: number, size: CardRenderItemSize = CardRenderItemSize.MEDIUM): Builder {
+  public oceans(amount: number, size: Size = Size.MEDIUM): Builder {
     const item = new CardRenderItem(CardRenderItemType.OCEANS, amount);
     item.size = size;
     this._addRowItem(item);
@@ -219,7 +219,7 @@ class Builder {
     return this;
   }
 
-  public tr(amount: number, size: CardRenderItemSize = CardRenderItemSize.MEDIUM, cancelled: boolean = false): Builder {
+  public tr(amount: number, size: Size = Size.MEDIUM, cancelled: boolean = false): Builder {
     const item = new CardRenderItem(CardRenderItemType.TR, amount);
     item.size = size;
     item.cancelled = cancelled;
@@ -227,7 +227,7 @@ class Builder {
     return this;
   }
 
-  public megacredits(amount: number, size: CardRenderItemSize = CardRenderItemSize.MEDIUM): Builder {
+  public megacredits(amount: number, size: Size = Size.MEDIUM): Builder {
     const item = new CardRenderItem(CardRenderItemType.MEGACREDITS, amount);
     item.amountInside = true;
     item.showDigit = false;
@@ -290,7 +290,7 @@ class Builder {
     return this;
   }
 
-  public colonies(amount: number = 1, size: CardRenderItemSize = CardRenderItemSize.MEDIUM): Builder {
+  public colonies(amount: number = 1, size: Size = Size.MEDIUM): Builder {
     const item = new CardRenderItem(CardRenderItemType.COLONIES, amount);
     item.size = size;
     this._addRowItem(item);
@@ -314,14 +314,14 @@ class Builder {
     return this;
   }
 
-  public city(size: CardRenderItemSize = CardRenderItemSize.MEDIUM) {
+  public city(size: Size = Size.MEDIUM) {
     const item = new CardRenderItem(CardRenderItemType.CITY);
     item.size = size;
     this._addRowItem(item);
     return this;
   }
 
-  public greenery(size: CardRenderItemSize = CardRenderItemSize.MEDIUM, withO2: boolean = true) {
+  public greenery(size: Size = Size.MEDIUM, withO2: boolean = true) {
     const item = new CardRenderItem(CardRenderItemType.GREENERY);
     item.size = size;
     if (withO2) {
@@ -444,6 +444,7 @@ class Builder {
     return this;
   }
 
+  // TODO(kberg): Replace moon road image with JUST a road, and add an altsecondary tag to support it.
   public moonRoad(options?: ItemOptions): Builder {
     this._addRowItem(new CardRenderItem(CardRenderItemType.MOON_ROAD).withOptions(options));
     return this;
@@ -469,7 +470,7 @@ class Builder {
     return this;
   }
 
-  public emptyTile(type: 'normal' | 'golden' = 'normal', size: CardRenderItemSize = CardRenderItemSize.MEDIUM) {
+  public emptyTile(type: 'normal' | 'golden' = 'normal', size: Size = Size.MEDIUM) {
     if (type === 'normal') {
       const normal = new CardRenderItem(CardRenderItemType.EMPTY_TILE, -1);
       normal.size = size;
@@ -518,49 +519,49 @@ class Builder {
     return this;
   }
 
-  public or(size: CardRenderItemSize = CardRenderItemSize.SMALL): Builder {
+  public or(size: Size = Size.SMALL): Builder {
     this._checkExistingItem();
     this._addSymbol(CardRenderSymbol.or(size));
     return this;
   }
 
-  public asterix(size: CardRenderItemSize = CardRenderItemSize.MEDIUM): Builder {
+  public asterix(size: Size = Size.MEDIUM): Builder {
     this._checkExistingItem();
     this._addSymbol(CardRenderSymbol.asterix(size));
     return this;
   }
 
-  public plus(size: CardRenderItemSize = CardRenderItemSize.MEDIUM): Builder {
+  public plus(size: Size = Size.MEDIUM): Builder {
     this._checkExistingItem();
     this._addSymbol(CardRenderSymbol.plus(size));
     return this;
   }
 
-  public minus(size: CardRenderItemSize = CardRenderItemSize.MEDIUM): Builder {
+  public minus(size: Size = Size.MEDIUM): Builder {
     this._checkExistingItem();
     this._addSymbol(CardRenderSymbol.minus(size));
     return this;
   }
 
-  public slash(size: CardRenderItemSize = CardRenderItemSize.MEDIUM): Builder {
+  public slash(size: Size = Size.MEDIUM): Builder {
     this._checkExistingItem();
     this._addSymbol(CardRenderSymbol.slash(size));
     return this;
   }
 
-  public colon(size: CardRenderItemSize = CardRenderItemSize.MEDIUM): Builder {
+  public colon(size: Size = Size.MEDIUM): Builder {
     this._checkExistingItem();
     this._addSymbol(CardRenderSymbol.colon(size));
     return this;
   }
 
-  public arrow(size: CardRenderItemSize = CardRenderItemSize.MEDIUM): Builder {
+  public arrow(size: Size = Size.MEDIUM): Builder {
     this._checkExistingItem();
     this._addSymbol(CardRenderSymbol.arrow(size));
     return this;
   }
 
-  public equals(size: CardRenderItemSize = CardRenderItemSize.MEDIUM): Builder {
+  public equals(size: Size = Size.MEDIUM): Builder {
     this._checkExistingItem();
     this._addSymbol(CardRenderSymbol.equals(size));
     return this;
@@ -581,7 +582,7 @@ class Builder {
     return this;
   }
 
-  public text(text: string, size: CardRenderItemSize = CardRenderItemSize.MEDIUM, uppercase: boolean = false, isBold: boolean = true): Builder {
+  public text(text: string, size: Size = Size.MEDIUM, uppercase: boolean = false, isBold: boolean = true): Builder {
     const item = new CardRenderItem(CardRenderItemType.TEXT);
     item.text = text;
     item.size = size;
@@ -592,7 +593,7 @@ class Builder {
   }
 
   public vpText(text: string): Builder {
-    return this.text(text, CardRenderItemSize.TINY, true);
+    return this.text(text, Size.TINY, true);
   }
 
   public get br(): Builder {
@@ -601,7 +602,7 @@ class Builder {
     return this;
   }
 
-  public tile(tile: TileType, hasSymbol: boolean, isAres: boolean = false): Builder {
+  public tile(tile: TileType, hasSymbol: boolean = false, isAres: boolean = false): Builder {
     this._addTile(tile, hasSymbol, isAres);
     return this;
   }
@@ -626,7 +627,7 @@ class Builder {
   /*
    * add non breakable vertical space (a div with different pixels height)
    */
-  public vSpace(size: CardRenderItemSize = CardRenderItemSize.MEDIUM): Builder {
+  public vSpace(size: Size = Size.MEDIUM): Builder {
     this._addSymbol(CardRenderSymbol.vSpace(size));
     return this;
   }

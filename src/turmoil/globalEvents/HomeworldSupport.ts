@@ -8,7 +8,7 @@ import {Turmoil} from '../Turmoil';
 
 export class HomeworldSupport implements IGlobalEvent {
     public name = GlobalEventName.HOMEWORLD_SUPPORT;
-    public description = 'Gain 2 MC for each Earth tag (max 5) and influence.';
+    public description = 'Gain 2 M€ for each Earth tag (max 5) and influence.';
     public revealedDelegate = PartyName.REDS;
     public currentDelegate = PartyName.UNITY;
     public resolve(game: Game, turmoil: Turmoil) {

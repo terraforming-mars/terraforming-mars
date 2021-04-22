@@ -4,7 +4,6 @@ import {AndOptions} from './inputs/AndOptions';
 import {Aridor} from './cards/colonies/Aridor';
 import {Board} from './boards/Board';
 import {CardFinder} from './CardFinder';
-import {CardModel} from './models/CardModel';
 import {CardName} from './CardName';
 import {CardType} from './cards/CardType';
 import {ColonyModel} from './models/ColonyModel';
@@ -14,7 +13,7 @@ import {CorporationCard} from './cards/corporation/CorporationCard';
 import {Game} from './Game';
 import {HowToPay} from './inputs/HowToPay';
 import {IAward} from './awards/IAward';
-import {ICard} from './cards/ICard';
+import {ICard, IResourceCard} from './cards/ICard';
 import {Colony} from './colonies/Colony';
 import {ISerializable} from './ISerializable';
 import {IMilestone} from './milestones/IMilestone';
@@ -44,7 +43,7 @@ import {SelectHowToPayForProjectCard} from './inputs/SelectHowToPayForProjectCar
 import {SelectOption} from './inputs/SelectOption';
 import {SelectPlayer} from './inputs/SelectPlayer';
 import {SelectSpace} from './inputs/SelectSpace';
-import {SelfReplicatingRobots} from './cards/promo/SelfReplicatingRobots';
+import {RobotCard, SelfReplicatingRobots} from './cards/promo/SelfReplicatingRobots';
 import {SerializedCard} from './SerializedCard';
 import {SerializedPlayer} from './SerializedPlayer';
 import {SpaceType} from './SpaceType';
@@ -212,6 +211,10 @@ export class Player implements ISerializable<SerializedPlayer> {
     }
   }
 
+  public getSelfReplicatingRobotsTargetCards(): Array<RobotCard> {
+    return (this.playedCards.find((card) => card instanceof SelfReplicatingRobots) as (SelfReplicatingRobots | undefined))?.targetCards ?? [];
+  }
+
   public getSteelValue(): number {
     if (PartyHooks.shouldApplyPolicy(this.game, PartyName.MARS, TurmoilPolicy.MARS_FIRST_POLICY_3)) return this.steelValue + 1;
     return this.steelValue;
@@ -297,7 +300,7 @@ export class Player implements ISerializable<SerializedPlayer> {
       this.megaCredits += retribution;
       monsInsuranceOwner.setResource(Resources.MEGACREDITS, -3);
       if (retribution > 0) {
-        this.game.log('${0} received ${1} MC from ${2} owner (${3})', (b) =>
+        this.game.log('${0} received ${1} M€ from ${2} owner (${3})', (b) =>
           b.player(this)
             .number(retribution)
             .cardName(CardName.MONS_INSURANCE)
@@ -644,7 +647,7 @@ export class Player implements ISerializable<SerializedPlayer> {
       }
     }
   }
-  public addResourceTo(card: ICard, count: number = 1): void {
+  public addResourceTo(card: IResourceCard, count: number = 1): void {
     if (card.resourceCount !== undefined) {
       card.resourceCount += count;
     }
@@ -909,8 +912,9 @@ export class Player implements ISerializable<SerializedPlayer> {
       }
       const mappedCards: Array<ICard> = [];
       for (const cardName of input[0]) {
-        mappedCards.push(PlayerInput.getCard(pi.cards, cardName).card);
-        if (pi.enabled?.[pi.cards.findIndex((card) => card.name === cardName)] === false) {
+        const cardIndex = PlayerInput.getCard(pi.cards, cardName);
+        mappedCards.push(cardIndex.card);
+        if (pi.enabled?.[cardIndex.idx] === false) {
           throw new Error('Selected unavailable card');
         }
       }
@@ -1130,7 +1134,7 @@ export class Player implements ISerializable<SerializedPlayer> {
     if (passedCards === undefined) {
       if (!initialDraft) {
         let cardsToDraw = 4;
-        if (LunaProjectOffice.consume(this)) {
+        if (LunaProjectOffice.isActive(this)) {
           cardsToDraw = 5;
           cardsToKeep = 2;
         }
@@ -1181,7 +1185,7 @@ export class Player implements ISerializable<SerializedPlayer> {
   public runResearchPhase(draftVariant: boolean): void {
     let dealtCards: Array<IProjectCard> = [];
     if (!draftVariant) {
-      this.dealCards(LunaProjectOffice.consume(this) ? 5 : 4, dealtCards);
+      this.dealCards(LunaProjectOffice.isActive(this) ? 5 : 4, dealtCards);
     } else {
       dealtCards = this.draftedCards;
       this.draftedCards = [];
@@ -1189,30 +1193,6 @@ export class Player implements ISerializable<SerializedPlayer> {
 
     const action = DrawCards.choose(this, dealtCards, {paying: true});
     this.setWaitingFor(action, () => this.game.playerIsFinishedWithResearchPhase(this));
-  }
-
-  public getSelfReplicatingRobotsCards() : Array<CardModel> {
-    const card = this.playedCards.find((card) => card.name === CardName.SELF_REPLICATING_ROBOTS);
-    const cards : Array<CardModel> = [];
-    if (card instanceof SelfReplicatingRobots) {
-      if (card.targetCards.length > 0) {
-        for (const targetCard of card.targetCards) {
-          cards.push(
-            {
-              resources: targetCard.resourceCount,
-              resourceType: undefined, // Card on SRR cannot gather its own resources (if any)
-              name: targetCard.card.name,
-              calculatedCost: this.getCardCost(targetCard.card),
-              cardType: card.cardType,
-              isDisabled: false,
-              reserveUnits: Units.EMPTY, // I wonder if this could just be removed.
-            },
-          );
-        }
-        return cards;
-      }
-    }
-    return cards;
   }
 
   public getCardCost(card: IProjectCard): number {
@@ -1324,7 +1304,7 @@ export class Player implements ISerializable<SerializedPlayer> {
     }
 
     if (howToPay.megaCredits > this.megaCredits) {
-      throw new Error('Do not have enough mega credits');
+      throw new Error('Do not have enough M€');
     }
 
     totalToPay += howToPay.megaCredits;
@@ -1517,7 +1497,7 @@ export class Player implements ISerializable<SerializedPlayer> {
               {
                 title: 'Select how to pay ' + mcTradeAmount + ' for colony trade',
                 afterPay: () => {
-                  this.game.log('${0} spent ${1} MC to trade with ${2}', (b) => b.player(this).number(mcTradeAmount).colony(colony));
+                  this.game.log('${0} spent ${1} M€ to trade with ${2}', (b) => b.player(this).number(mcTradeAmount).colony(colony));
                   colony.trade(this);
                 },
               },
@@ -1747,24 +1727,35 @@ export class Player implements ISerializable<SerializedPlayer> {
   public canPlay(card: IProjectCard): boolean {
     const canAfford = this.canAfford(
       this.getCardCost(card),
-      this.canUseSteel(card),
-      this.canUseTitanium(card),
-      this.canUseFloaters(card),
-      this.canUseMicrobes(card),
-      MoonExpansion.adjustedReserveCosts(this, card),
-    );
+      {
+        steel: this.canUseSteel(card),
+        titanium: this.canUseTitanium(card),
+        floaters: this.canUseFloaters(card),
+        microbes: this.canUseMicrobes(card),
+        reserveUnits: MoonExpansion.adjustedReserveCosts(this, card),
+      });
 
     return canAfford && (card.canPlay === undefined || card.canPlay(this));
   }
 
   // Checks if the player can afford to pay `cost` mc (possibly replaceable with steal, titanium etc.)
   // and additionally pay the reserveUnits (no replaces here)
-  // TODO(sienmich): use options parameter
-  public canAfford(cost: number, canUseSteel: boolean = false, canUseTitanium: boolean = false, canUseFloaters: boolean = false, canUseMicrobes : boolean = false, reserveUnits: Units = Units.EMPTY): boolean {
-    // Check if player has the reserveUnits - required resources
+  public canAfford(cost: number, options?: {
+    steel?: boolean,
+    titanium?: boolean,
+    floaters?: boolean,
+    microbes?: boolean,
+    reserveUnits?: Units
+  }) {
+    const reserveUnits = options?.reserveUnits ?? Units.EMPTY;
     if (!this.hasUnits(reserveUnits)) {
       return false;
     }
+
+    const canUseSteel: boolean = options?.steel ?? false;
+    const canUseTitanium: boolean = options?.titanium ?? false;
+    const canUseFloaters: boolean = options?.floaters ?? false;
+    const canUseMicrobes: boolean = options?.microbes ?? false;
 
     return cost <=
       this.megaCredits - reserveUnits.megacredits +
@@ -1899,8 +1890,8 @@ export class Player implements ISerializable<SerializedPlayer> {
   // Return possible mid-game actions like play a card and fund an award, but no play prelude card.
   public getActions() {
     const action: OrOptions = new OrOptions();
-    action.title = 'Take action for action phase, select one ' +
-                      'available action.';
+    action.title = this.actionsTakenThisRound === 0 ?
+      'Take your first action' : 'Take your next action';
     action.buttonLabel = 'Take action';
 
     if (this.canAfford(MILESTONE_COST) && !this.game.allMilestonesClaimed()) {

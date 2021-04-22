@@ -21,12 +21,12 @@ export class CheungShingMARS extends Card implements CorporationCard {
       cardDiscount: {tag: Tags.BUILDING, amount: 2},
       metadata: {
         cardNumber: 'R16',
-        description: 'You start with 3 MC production and 44 MC.',
+        description: 'You start with 3 M€ production and 44 MC.',
         renderData: CardRenderer.builder((b) => {
           b.br.br;
           b.production((pb) => pb.megacredits(3)).nbsp.megacredits(44);
           b.corpBox('effect', (ce) => {
-            ce.effect('When you play a building tag, you pay 2 MC less for it.', (eb) => {
+            ce.effect('When you play a building tag, you pay 2 M€ less for it.', (eb) => {
               eb.building().played.startEffect.megacredits(-2);
             });
           });

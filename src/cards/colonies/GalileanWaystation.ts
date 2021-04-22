@@ -16,7 +16,7 @@ export class GalileanWaystation extends Card implements IProjectCard {
       cardType: CardType.AUTOMATED,
 
       metadata: {
-        description: 'Increase your MC production 1 step for every Jovian tag in play.',
+        description: 'Increase your M€ production 1 step for every Jovian tag in play.',
         cardNumber: 'C13',
         renderData: CardRenderer.builder((b) => {
           b.production((pb) => pb.megacredits(1).slash().jovian().played.any);

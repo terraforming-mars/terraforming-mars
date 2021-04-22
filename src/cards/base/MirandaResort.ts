@@ -22,7 +22,7 @@ export class MirandaResort extends Card implements IProjectCard {
             pb.megacredits(1).slash().earth().played;
           });
         }),
-        description: 'Increase your MC production 1 step for each Earth tag you have.',
+        description: 'Increase your M€ production 1 step for each Earth tag you have.',
         victoryPoints: 1,
       },
     });

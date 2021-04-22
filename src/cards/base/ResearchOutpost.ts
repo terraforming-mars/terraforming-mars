@@ -21,7 +21,7 @@ export class ResearchOutpost extends Card implements IProjectCard {
       metadata: {
         cardNumber: '020',
         renderData: CardRenderer.builder((b) => {
-          b.effect('When you play a card, you pay 1 MC less for it.', (eb) => {
+          b.effect('When you play a card, you pay 1 M€ less for it.', (eb) => {
             eb.empty().startEffect.megacredits(-1);
           }).br;
           b.city();

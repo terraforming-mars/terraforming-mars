@@ -24,21 +24,21 @@
 
     "Phobolog": "Phobolog",
     "You start with 10 titanium and 23 MC.":"Comienza con 10 de titanio y 23 M€.",
-    "Effect: Your titanium resources are each worth 1 MC extra.":"Efecto: cada recurso de titanio te proporciona 1 M€ adicional.",
+    "Effect: Your titanium resources are each worth 1 M€ extra.":"Efecto: cada recurso de titanio te proporciona 1 M€ adicional.",
 
     "THARSIS": "THARSIS",
     "REPUBLIC": "REPÚBLICA",
     "Tharsis Republic": "República Tharsis",
     "You start with 40 MC. As your first action in the game,place a city tile.":"Comienza con 40 M€. Como primera acción en el juego, coloca una loseta de ciudad.",
-    "Effect: When any city tile is placed ON MARS, increase your MC production 1 step. When you place a city tile, gain 3 MC.":"Efecto: al colocar cualquier loseta de ciudad sobre MARTE, aumenta tu producción de M€ en 1. Al colocar una loseta de ciudad, obtén 3 M€.",
+    "Effect: When any city tile is placed ON MARS, increase your M€ production 1 step. When you place a city tile, gain 3 MC.":"Efecto: al colocar cualquier loseta de ciudad sobre MARTE, aumenta tu producción de M€ en 1. Al colocar una loseta de ciudad, obtén 3 M€.",
 
     "Thorgate": "Thorgate",
     "You start with 1 energy production and 48 MC.":"Comienza con 1 en producción de energía y 48 M€.",
-    "Effect: When playing a power card OR THE STANDARD PROJECT POWER PLANT, you pay 3 MC less for it.":"Efecto: al jugar una carta de energía O EL PROYECTO ESTÁNDAR DE PLANTA ENERGÉTICA, paga 3 M€ menos por ella.",
+    "Effect: When playing a power card OR THE STANDARD PROJECT POWER PLANT, you pay 3 M€ less for it.":"Efecto: al jugar una carta de energía O EL PROYECTO ESTÁNDAR DE PLANTA ENERGÉTICA, paga 3 M€ menos por ella.",
 
     "UNMI": "UNMI",
     "You start with 40 MC.":"Comienza con 40 M€.",
-    "Action: If your Terraform Rating was raised this generation, you may pay 3 MC to raise it 1 step more.":"Acción: si tu valor de terraformación aumentó en esta generación, puedes pagar 3 M€ para incrementarlo en 1 más.",
+    "Action: If your Terraform Rating was raised this generation, you may pay 3 M€ to raise it 1 step more.":"Acción: si tu valor de terraformación aumentó en esta generación, puedes pagar 3 M€ para incrementarlo en 1 más.",
 
     "Mining Guild": "Mining Guild",
     "You start with 30 MC, 5 steel and 1 steel production.":"Comienza con 30 M€, 5 de acero y 1 en producción de acero.",
@@ -46,9 +46,9 @@
 
     "Terractor": "Terractor",
     "You start with 60 MC.":"Comienza con 60 M€.",
-    "Effect: When you play an Earth tag, you pay 3 MC less for it.":"Efecto: al jugar una carta tipo Tierra, paga 3 M€ menos por ella.",
+    "Effect: When you play an Earth tag, you pay 3 M€ less for it.":"Efecto: al jugar una carta tipo Tierra, paga 3 M€ menos por ella.",
 
     "Saturn Systems": "Saturn Systems",
     "You start with 1 titanium production and 42 MC.":"Comienza con 1 en producción de titanio y 42 M€.",
-    "Effect: Each time any Jovian tag is put into play, including this, increase your MC production 1 step.":"Efecto: cada vez que se juegue una carta Joviana, incluyendo esta, aumenta tu producción de M€ en 1."
+    "Effect: Each time any Jovian tag is put into play, including this, increase your M€ production 1 step.":"Efecto: cada vez que se juegue una carta Joviana, incluyendo esta, aumenta tu producción de M€ en 1."
 }

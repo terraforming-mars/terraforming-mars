@@ -7,12 +7,12 @@
     "Place one of these tiles on an area with a steel or titanium placement bonus, ADJACENT TO ANOTHER OF YOUR TILES. This tile provides an ADJACENCY BONUS of the same resource as the area. Increase your production of that resource 1 step.": "Umieść ten obszar obok innych swoich obszarów, na polu zawierającym premię stali albo tytanu. Wybierz kafel z premią sąsiedztwa taką samą jak premia na wybranym polu. Podnieś swoją produkcję tego zasobu o 1 poziom. Gdy dowolny gracz umieści obszar obok tego obszaru, otrzymuje oznaczoną premię.",
 
     "Industrial Center": "Ośrodek Przemysłowy",
-    "Action: Spend 7 MC to increase your steel production 1 step.": "Akcja: Wydaj 7 MC, żeby podnieś swoją produkcję stali o 1 poziom.",
+    "Action: Spend 7 M€ to increase your steel production 1 step.": "Akcja: Wydaj 7 MC, żeby podnieś swoją produkcję stali o 1 poziom.",
     "Place this tile adjacent to a city tile. This tile grants an ADJACENCY BONUS of 1 steel.": "Umieść ten obszar na polu sąsiadującym z obszarem miasta. Gdy dowolny gracz umieści obszar obok tego obszaru, otrzymuje 1 jednostkę stali.",
 
     "Marketing Experts": "Eksperci od Marketingu",
     "Effect: When an ADJACENCY BONUS is collected from a tile you own, you gain 1MC.": "Efekt trwały: Gdy którykolwiek z graczy otrzymuje premię zasobów za sąsiedztwo z twoim obszarem, otrzymujesz 1 MC.",
-    "Increase your MC production 1 step.": "Podnieś swoją produkcję MC o 1 poziom.",
+    "Increase your M€ production 1 step.": "Podnieś swoją produkcję MC o 1 poziom.",
 
     "Bioengineering Enclosure": "Sektor Bioinżynierii",
     "Action: Remove 1 animal from THIS card to add 1 animal to ANOTHER card.": "Akcja: Usuń 1 jednostkę zwierząt z tej karty, aby umieścić 1 jednostkę zwierząt na dowolnej karcie.",
@@ -36,7 +36,7 @@
     "Place one of these tiles on an area with a steel or titanium placement bonus. This tile provides an ADJACENCY BONUS of the same resource as the area. Increase your production of that resource 1 step.": "Umieść ten obszar na polu zawierającym premię stali albo tytanu. Wybierz kafel z premią sąsiedztwa taką samą jak premia na wybranym polu. Podnieś swoją produkcję tego zasobu o 1 poziom. Gdy dowolny gracz umieści obszar obok tego obszaru, otrzymuje oznaczoną premię.",
 
     "Natural Preserve": "Rezerwat Naturalny",
-    "Oxygen must be 4% or less. Place this tile NEXT TO NO OTHER TILE. The tile grants an ADJACENCY BONUS of of 1MC. Increase your MC production 1 step.": "Poziom Tlenu musi być równy albo niższy niż 4%. Umieść ten obszar na polu niesąsiadującym z innymi obszarami. Gdy dowolny gracz umieści obszar obok tego obszaru, otrzymuje 1 MC. Podnieś swoją produkcję MC o 1 poziom.",
+    "Oxygen must be 4% or less. Place this tile NEXT TO NO OTHER TILE. The tile grants an ADJACENCY BONUS of of 1MC. Increase your M€ production 1 step.": "Poziom Tlenu musi być równy albo niższy niż 4%. Umieść ten obszar na polu niesąsiadującym z innymi obszarami. Gdy dowolny gracz umieści obszar obok tego obszaru, otrzymuje 1 MC. Podnieś swoją produkcję MC o 1 poziom.",
 
     "Ocean Sanctuary": "Sanktuarium Oceaniczne",
     "1 VP per animal on this card.": "1 PZ za każdą jednostkę zwierząt na karcie.",
@@ -46,7 +46,7 @@
     "Raise the temperature two steps. Place this tile. Players must pay an additional 2MC when they place a tile with their player marker on it ADJACENT to the Nuclear Zone.": "Podnieś Temperaturę o 4°C. Umieść ten obszar na planszy. Gracze, stawiając swoje obszary ze znacznikiem gracza obok tego obszaru, muszą zapłacić 2 MC.",
 
     "Restricted Area": "Obszar Zastrzeżony",
-    "Action: Spend 2 MC to draw a card.": "Akcja: Wydaj 2 MC, żeby dobrać 1 kartę.",
+    "Action: Spend 2 M€ to draw a card.": "Akcja: Wydaj 2 MC, żeby dobrać 1 kartę.",
     "Place this tile which grants an ADJACENCY BONUS of 1 card.": "Umieść ten obszar na planszy. Gdy dowolny gracz umieści obszar obok tego obszaru, dobiera 1 kartę.",
 
     "Solar Farm": "Farma Solarna",
@@ -68,10 +68,10 @@
 
     "Commercial District": "Dystrykt Handlowy",
     "1 VP per adjacent city tile.": "1 PZ ZA KAŻDY OBSZAR MIASTA OBOK TEGO OBSZARU.",
-    "Place this tile which grants an ADJACENCY BONUS of 2MC. Decrease your energy production 1 step and increase your MC production 4 steps.": "Obniż swoją produkcję energii o 1 poziom. Podnieś swoją produkcję MC o 4 poziomy. Umieść ten obszar na planszy. Gdy dowolny gracz umieści obszar obok tego obszaru, otrzymuje 2 MC.",
+    "Place this tile which grants an ADJACENCY BONUS of 2MC. Decrease your energy production 1 step and increase your M€ production 4 steps.": "Obniż swoją produkcję energii o 1 poziom. Podnieś swoją produkcję MC o 4 poziomy. Umieść ten obszar na planszy. Gdy dowolny gracz umieści obszar obok tego obszaru, otrzymuje 2 MC.",
 
     "Ocean City": "Miasto na Oceanie",
-    "Requires 6 ocean tiles. Decrease your Energy production 1 step and increase your MC production 3 steps. Place this tile on top of an existing ocean tile, IGNORING NORMAL PLACEMENT RESTRICTIONS FOR CITIES. The tile counts as a city as well as an ocean.": "Na planszy musi znajdować się przynajmniej 6 obszarów oceanów. Obniż swoją produkcję energii o 1 poziom. Podnieś swoją produkcję MC o 3 poziomy. Umieść ten specjalny obszar miasta na istniejącym obszarze oceanu, ignorując normalne ograniczenia umieszczania miast. Ten obszar liczy się jako obszar miasta i obszar oceanu.",
+    "Requires 6 ocean tiles. Decrease your Energy production 1 step and increase your M€ production 3 steps. Place this tile on top of an existing ocean tile, IGNORING NORMAL PLACEMENT RESTRICTIONS FOR CITIES. The tile counts as a city as well as an ocean.": "Na planszy musi znajdować się przynajmniej 6 obszarów oceanów. Obniż swoją produkcję energii o 1 poziom. Podnieś swoją produkcję MC o 3 poziomy. Umieść ten specjalny obszar miasta na istniejącym obszarze oceanu, ignorując normalne ograniczenia umieszczania miast. Ten obszar liczy się jako obszar miasta i obszar oceanu.",
 
     "Lava Flows": "Strumienie Lawy",
     "Raise temperature 2 steps and place this tile ON EITHER THARSIS THOLUS, ASCRAEUS MONS, PAVONIS MONS OR ARSIA MONS. This tile grants an ADJACENCY BONUS of 2 heat.": "Podnieś Temperaturę o 4°C. Umieść ten obszar na jednym z wymienionych obszarów: THARSIS THOLUS, ASCRAEUS MONS, PAVONIS MONS, ARSIA MONS. Gdy dowolny gracz umieści obszar obok tego obszaru, otrzymuje 2 jednostki ciepła.",

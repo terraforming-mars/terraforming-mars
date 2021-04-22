@@ -6,7 +6,7 @@
     "Requires that you are Chairman. Remove any NON-LEADER delegate.": "Wymagania: Twój delegat musi być przewodniczącym. Przenieś do rezerwy dowolnego delegata niebędącego liderem partii.",
 
     "Cultural Metropolis": "Metropolia kultury",
-    "Requires that Unity is ruling or that you have 2 delegates there. Decrease your energy production 1 step and increase your MC production 3 steps. Place a city tile. Place 2 delegates in 1 party.": "Wymagania: Jedność musi być partią rządzącą lub musisz mieć przynajmniej 2 delegatów w tej partii. Efekt natychmiastowy: Obniż swoją produkcję energii 1 poziom. Podnieś swoją produkcję MC o 3 poziomy. Umieść na planszy obszar miasta. Umieść 2 znaczniki swoich delegatów w 1 partii.",
+    "Requires that Unity is ruling or that you have 2 delegates there. Decrease your energy production 1 step and increase your M€ production 3 steps. Place a city tile. Place 2 delegates in 1 party.": "Wymagania: Jedność musi być partią rządzącą lub musisz mieć przynajmniej 2 delegatów w tej partii. Efekt natychmiastowy: Obniż swoją produkcję energii 1 poziom. Podnieś swoją produkcję MC o 3 poziomy. Umieść na planszy obszar miasta. Umieść 2 znaczniki swoich delegatów w 1 partii.",
 
     "Diaspora Movement": "Migracje diasporyczne",
     "Requires that Reds are ruling or that you have 2 delegates there. Gain 1MC for each Jovian tag in play, including this.": "Wymagania: Czerwoni muszą być partią rządzącą lub musisz mieć przynajmniej 2 delegatów w tej partii. Otrzymujesz 1 MC za każdy symbol Jowisza w grze (z tym włącznie)",
@@ -20,14 +20,14 @@
     "Requires that Greens are ruling or that you have 2 delegates there.": "Wymagania: Zieloni muszą być partią rządzącą lub musisz mieć przynajmniej 2 delegatów w tej partii.",
 
     "Martian Media Center": "Marsjańskie centrum informacyjne",
-    "Action: Pay 3 MC to add a delegate to any party.": "Akcja: Zapłać 3 MC, aby dodać znacznik swojego delegata do dowolnej partii.",
-    "Requires that Mars First is ruling or that you have 2 delegates there. Increase your MC production 2 steps.": "Wymagania: Teraz Mars musi być partią rządzącą lub musisz mieć przynajmniej 2 delegatów w tej partii. Podnieś swoją produkcję MC o 2 poziomy.",
+    "Action: Pay 3 M€ to add a delegate to any party.": "Akcja: Zapłać 3 MC, aby dodać znacznik swojego delegata do dowolnej partii.",
+    "Requires that Mars First is ruling or that you have 2 delegates there. Increase your M€ production 2 steps.": "Wymagania: Teraz Mars musi być partią rządzącą lub musisz mieć przynajmniej 2 delegatów w tej partii. Podnieś swoją produkcję MC o 2 poziomy.",
 
     "Parliament Hall": "Sala komitetu",
-    "Requires that Mars First are ruling or that you have 2 delegates there. Increase your MC production 1 step for every 3 Building tags you have, including this.": "Wymagania: Teraz Mars musi być partią rządzącą lub musisz mieć przynajmniej 2 delegatów w tej partii. Podnieś swoją produkcję MC o 1 poziom za każde 3 posiadane symbole budowli (z tym włącznie).",
+    "Requires that Mars First are ruling or that you have 2 delegates there. Increase your M€ production 1 step for every 3 Building tags you have, including this.": "Wymagania: Teraz Mars musi być partią rządzącą lub musisz mieć przynajmniej 2 delegatów w tej partii. Podnieś swoją produkcję MC o 1 poziom za każde 3 posiadane symbole budowli (z tym włącznie).",
 
     "PR Office": "Biuro PR",
-    "Requires that Unity are ruling or that you have 2 delegates there. Gain 1 TR. Gain 1 MC for each Earth tag you have, including this.": "Wymagania: Jedność musi być partią rządzącą lub musisz mieć przynajmniej 2 delegatów w tej partii. Podnieś swój WT o 1 poziom. Otrzymujesz 1 MC za każdy posiadany symbol Ziemi (z tym włącznie).",
+    "Requires that Unity are ruling or that you have 2 delegates there. Gain 1 TR. Gain 1 M€ for each Earth tag you have, including this.": "Wymagania: Jedność musi być partią rządzącą lub musisz mieć przynajmniej 2 delegatów w tej partii. Podnieś swój WT o 1 poziom. Otrzymujesz 1 MC za każdy posiadany symbol Ziemi (z tym włącznie).",
 
     "Public Celebrations": "Uroczystości publiczne",
     "Requires that you are Chairman.": "Wymagania: Twój delegat musi być przewodniczącym.",
@@ -36,7 +36,7 @@
     "Exchange one NEUTRAL NON-LEADER delegate with one of your own from the reserve.": "Zamień 1 znacznik neutralnego delegata niebędącego liderem na znacznik Twojego delegata z rezerwy.",
 
     "Red Tourism Wave": "Turyści na Marsie",
-    "Requires that Reds are ruling or that you have 2 delegates there. Gain 1 MC from each EMPTY AREA ADJACENT TO YOUR TILES": "Wymagania: Czerwoni muszą być partią rządzącą lub musisz mieć przynajmniej 2 delegatów w tej partii. Otrzymujesz 1 MC za każdy PUSTY OBSZAR SĄDIADUJĄCY Z TWOIMI OBSZARAMI",
+    "Requires that Reds are ruling or that you have 2 delegates there. Gain 1 M€ from each EMPTY AREA ADJACENT TO YOUR TILES": "Wymagania: Czerwoni muszą być partią rządzącą lub musisz mieć przynajmniej 2 delegatów w tej partii. Otrzymujesz 1 MC za każdy PUSTY OBSZAR SĄDIADUJĄCY Z TWOIMI OBSZARAMI",
 
     "Sponsored Mohole": "Sponsorowany Mohole",
     "Requires that Kelvinists are ruling or that you have 2 delegates there. Increase your heat production 2 steps.": "Wymagania: Kelwiniści muszą być partią rządzącą lub musisz mieć przynajmniej 2 delegatów w tej partii. Podnieś swoją produkcję ciepła o 2 poziomy.",

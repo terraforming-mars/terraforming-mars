@@ -7,6 +7,7 @@ import {CardRenderer} from '../render/CardRenderer';
 import {TileType} from '../../TileType';
 import {Units} from '../../Units';
 import {MoonCard} from './MoonCard';
+import {AltSecondaryTag} from '../render/CardRenderItem';
 
 export class AristarchusRoadNetwork extends MoonCard {
   constructor() {
@@ -18,12 +19,12 @@ export class AristarchusRoadNetwork extends MoonCard {
       productionBox: Units.of({megacredits: 2}),
 
       metadata: {
-        description: 'Spend 2 steel. Increase your MC production 2 steps. ' +
+        description: 'Spend 2 steel. Increase your M€ production 2 steps. ' +
         'Place a road tile on the Moon and raise the Logistics Rate 1 step.',
         cardNumber: 'M10',
         renderData: CardRenderer.builder((b) => {
           b.minus().steel(2).nbsp.production((eb) => eb.megacredits(2)).br;
-          b.moonRoad();
+          b.moonRoad().secondaryTag(AltSecondaryTag.MOON_LOGISTICS_RATE);
         }),
       },
     }, {

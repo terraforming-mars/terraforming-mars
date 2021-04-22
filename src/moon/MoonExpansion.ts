@@ -75,6 +75,7 @@ export class MoonExpansion {
       miningRate: 0,
       logisticRate: 0,
       lunaFirstPlayer: undefined,
+      lunaProjectOfficeLastGeneration: undefined,
     };
   }
 
@@ -328,16 +329,19 @@ export class MoonExpansion {
       const mySpaces = moon.spaces.filter((space) => space.player?.id === player.id);
       mySpaces.forEach((space) => {
         if (space.tile !== undefined) {
-          switch (space.tile.tileType) {
+          const type = space.tile.tileType;
+          switch (type) {
           case TileType.MOON_ROAD:
             player.victoryPointsBreakdown.setVictoryPoints('moon road', 1);
             break;
           case TileType.MOON_MINE:
           case TileType.MOON_COLONY:
+          case TileType.LUNAR_MINE_URBANIZATION:
             const points = moon.getAdjacentSpaces(space).filter((adj) => MoonExpansion.spaceHasType(adj, TileType.MOON_ROAD)).length;
-            if (space.tile.tileType === TileType.MOON_MINE) {
+            if (type === TileType.MOON_MINE || type === TileType.LUNAR_MINE_URBANIZATION) {
               player.victoryPointsBreakdown.setVictoryPoints('moon mine', points);
-            } else {
+            }
+            if (type === TileType.MOON_COLONY || type === TileType.LUNAR_MINE_URBANIZATION) {
               player.victoryPointsBreakdown.setVictoryPoints('moon colony', points);
             }
             break;

@@ -7,7 +7,7 @@ import {Playwrights} from '../community/Playwrights';
 import {ICard} from '../ICard';
 import {SelectCard} from '../../inputs/SelectCard';
 import {CardRenderer} from '../render/CardRenderer';
-import {CardRenderItemSize} from '../render/CardRenderItemSize';
+import {Size} from '../render/Size';
 
 export class ProjectInspection extends Card implements IProjectCard {
   constructor() {
@@ -19,7 +19,7 @@ export class ProjectInspection extends Card implements IProjectCard {
       metadata: {
         cardNumber: 'X02',
         renderData: CardRenderer.builder((b) => {
-          b.text('Use a card action that has been used this generation.', CardRenderItemSize.SMALL, true);
+          b.text('Use a card action that has been used this generation.', Size.SMALL, true);
         }),
       },
     });

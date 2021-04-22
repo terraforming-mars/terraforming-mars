@@ -24,19 +24,19 @@
 
     "Phobolog": "Phobolog",
     "You start with 10 titanium and 23 MC.": "Rozpoczynasz grę z 10 jednostkami tytanu i 23 MC.",
-    "Effect: Your titanium resources are each worth 1 MC extra.": "Efekt trwały: Każda posiadana przez Ciebie jednostka tytanu jest warta o 1 MC więcej.",
+    "Effect: Your titanium resources are each worth 1 M€ extra.": "Efekt trwały: Każda posiadana przez Ciebie jednostka tytanu jest warta o 1 MC więcej.",
 
     "Tharsis Republic": "Republika Tharsis",
     "You start with 40 MC. As your first action in the game,place a city tile.": "Rozpoczynasz grę z 40 MC. W ramach swojej pierwszej akcji w grze umieść na planszy obszar miasta.",
-    "Effect: When any city tile is placed ON MARS, increase your MC production 1 step. When you place a city tile, gain 3 MC.": "Za każdym razem, gdy któryś z graczy umieści NA MARSIE obszar miasta, podnieś swoją produkcję MC o 1 poziom. Jeśli to Ty umieściłeś obszar miasta, otrzymujesz dodatkowo 3 MC.",
+    "Effect: When any city tile is placed ON MARS, increase your M€ production 1 step. When you place a city tile, gain 3 MC.": "Za każdym razem, gdy któryś z graczy umieści NA MARSIE obszar miasta, podnieś swoją produkcję MC o 1 poziom. Jeśli to Ty umieściłeś obszar miasta, otrzymujesz dodatkowo 3 MC.",
 
     "Thorgate": "Thorgate",
     "You start with 1 energy production and 48 MC.": "Rozpoczynasz grę z 1 dodatkowym poziomem produkcji energii i 48 MC.",
-    "Effect: When playing a power card OR THE STANDARD PROJECT POWER PLANT, you pay 3 MC less for it.": "Efekt trwały: Gdy zagrywasz kartę z symbolem energii albo wykorzystujesz projekt standardowy, fundując Elektrownię, to płacisz o 3 MC mniej.",
+    "Effect: When playing a power card OR THE STANDARD PROJECT POWER PLANT, you pay 3 M€ less for it.": "Efekt trwały: Gdy zagrywasz kartę z symbolem energii albo wykorzystujesz projekt standardowy, fundując Elektrownię, to płacisz o 3 MC mniej.",
 
     "UNMI": "UNMI",
     "You start with 40 MC.": "Rozpoczynasz grę z 40 MC.",
-    "Action: If your Terraform Rating was raised this generation, you may pay 3 MC to raise it 1 step more.": "Akcja: Jeśli podczas tego pokolenia podniosłeś swój współczynnik terraformacji, zapłać 3 MC, żeby podnieść go o dodatkowy punkt.",
+    "Action: If your Terraform Rating was raised this generation, you may pay 3 M€ to raise it 1 step more.": "Akcja: Jeśli podczas tego pokolenia podniosłeś swój współczynnik terraformacji, zapłać 3 MC, żeby podnieść go o dodatkowy punkt.",
 
     "Mining Guild": "Mining Guild",
     "You start with 30 MC, 5 steel and 1 steel production.": "Rozpoczynasz grę z 30 MC, 5 jednostkami stali i 1 dodatkowym poziomem produkcji stali.",
@@ -44,9 +44,9 @@
 
     "Terractor": "Terractor",
     "You start with 60 MC.": "Rozpoczynasz grę z 60 MC",
-    "Effect: When you play an Earth tag, you pay 3 MC less for it.": "Efekt trwały: Gdy zagrywasz kartę z symbolem Ziemi, płacisz za nią o 3 MC mniej.",
+    "Effect: When you play an Earth tag, you pay 3 M€ less for it.": "Efekt trwały: Gdy zagrywasz kartę z symbolem Ziemi, płacisz za nią o 3 MC mniej.",
 
     "Saturn Systems": "Saturn Systems",
     "You start with 1 titanium production and 42 MC.": "Rozpoczynasz grę z 1 dodatkowym poziomem produkcji tytanu i 42 MC.",
-    "Effect: Each time any Jovian tag is put into play, including this, increase your MC production 1 step.": "Efekt trwały: Za każdym razem, gdy któryś z graczy zagra kartę z symbolem Jowisza (z tą włącznie), podnieś swoją produkcję MC o 1 poziom."
+    "Effect: Each time any Jovian tag is put into play, including this, increase your M€ production 1 step.": "Efekt trwały: Za każdym razem, gdy któryś z graczy zagra kartę z symbolem Jowisza (z tą włącznie), podnieś swoją produkcję MC o 1 poziom."
 }

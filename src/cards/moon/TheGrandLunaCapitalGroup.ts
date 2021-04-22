@@ -11,6 +11,8 @@ import {MoonExpansion} from '../../moon/MoonExpansion';
 import {ISpace, SpaceId} from '../../boards/ISpace';
 import {Resources} from '../../Resources';
 import {CardRenderDynamicVictoryPoints} from '../render/CardRenderDynamicVictoryPoints';
+import {Size} from '../render/Size';
+import {AltSecondaryTag} from '../render/CardRenderItem';
 
 export class TheGrandLunaCapitalGroup implements CorporationCard {
   public startingMegaCredits = 32;
@@ -26,15 +28,15 @@ export class TheGrandLunaCapitalGroup implements CorporationCard {
     },
     cardNumber: 'MC7',
     renderData: CardRenderer.builder((b) => {
-      b.megacredits(32).titanium(1).moonColony().br;
-      b.effect('When you place a colony tile, gain 2 MC for each adjacent colony tile.', (eb) => {
-        eb.tile(TileType.MOON_COLONY, false).tile(TileType.MOON_COLONY, false).asterix()
+      b.megacredits(32).titanium(1).moonColony().secondaryTag(AltSecondaryTag.MOON_COLONY_RATE).br;
+      b.effect('When you place a colony tile, gain 2 M€ for each adjacent colony tile.', (eb) => {
+        eb.moonColony({size: Size.SMALL}).any.moonColony({size: Size.SMALL}).asterix()
           .startEffect
-          .megacredits(2).slash().tile(TileType.MOON_COLONY, false);
+          .megacredits(2).slash().moonColony({size: Size.SMALL}).any;
       }).br,
       b.vpText('1 VP for each colony tile adjacent to your colony tiles.').br;
     }),
-    victoryPoints: CardRenderDynamicVictoryPoints.colonyTile(1),
+    victoryPoints: CardRenderDynamicVictoryPoints.moonColonyTile(1),
   };
 
   public play(player: Player) {

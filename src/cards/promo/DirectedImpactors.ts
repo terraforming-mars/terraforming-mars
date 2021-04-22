@@ -28,7 +28,7 @@ export class DirectedImpactors extends Card implements IActionCard, IProjectCard
       metadata: {
         cardNumber: 'X18',
         renderData: CardRenderer.builder((b) => {
-          b.action('Spend 6 MC to add 1 asteroid to ANY CARD (titanium may be used to pay for this).', (eb) => {
+          b.action('Spend 6 M€ to add 1 asteroid to ANY CARD (titanium may be used to pay for this).', (eb) => {
             eb.megacredits(6).titanium(1).brackets.startAction.asteroids(1).asterix();
           }).br;
           b.or().br;
@@ -47,7 +47,7 @@ export class DirectedImpactors extends Card implements IActionCard, IProjectCard
 
     public canAct(player: Player): boolean {
       const cardHasResources = this.resourceCount > 0;
-      const canPayForAsteroid = player.canAfford(6, false, true);
+      const canPayForAsteroid = player.canAfford(6, {titanium: true});
 
       if (player.game.getTemperature() === MAX_TEMPERATURE && cardHasResources) return true;
       if (canPayForAsteroid) return true;
@@ -76,7 +76,7 @@ export class DirectedImpactors extends Card implements IActionCard, IProjectCard
         return this.addResource(player, asteroidCards);
       }
 
-      if (player.canAfford(6, false, true)) {
+      if (player.canAfford(6, {titanium: true})) {
         opts.push(addResource);
       } else {
         return this.spendResource(player);

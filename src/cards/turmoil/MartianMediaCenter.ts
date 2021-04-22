@@ -23,14 +23,14 @@ export class MartianMediaCenter extends Card implements IProjectCard {
       metadata: {
         cardNumber: 'T07',
         renderData: CardRenderer.builder((b) => {
-          b.action('Pay 3 MC to add a delegate to any party.', (eb) => {
+          b.action('Pay 3 M€ to add a delegate to any party.', (eb) => {
             eb.megacredits(3).startAction.delegates(1);
           }).br;
           b.production((pb) => {
             pb.megacredits(2);
           });
         }),
-        description: 'Requires that Mars First is ruling or that you have 2 delegates there. Increase your MC production 2 steps.',
+        description: 'Requires that Mars First is ruling or that you have 2 delegates there. Increase your M€ production 2 steps.',
       },
     });
   }

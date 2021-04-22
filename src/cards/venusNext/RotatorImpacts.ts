@@ -28,7 +28,7 @@ export class RotatorImpacts extends Card implements IActionCard, IResourceCard {
       metadata: {
         cardNumber: '243',
         renderData: CardRenderer.builder((b) => {
-          b.action('Spend 6 MC to add an asteroid resource to this card [TITANIUM MAY BE USED].', (eb) => {
+          b.action('Spend 6 M€ to add an asteroid resource to this card [TITANIUM MAY BE USED].', (eb) => {
             eb.megacredits(6).titanium(1).brackets.startAction.asteroids(1);
           }).br;
           b.action('Spend 1 resource from this card to increase Venus 1 step.', (eb) => {
@@ -50,10 +50,10 @@ export class RotatorImpacts extends Card implements IActionCard, IResourceCard {
     const canSpendResource = this.resourceCount > 0 && !venusMaxed;
 
     if (PartyHooks.shouldApplyPolicy(player.game, PartyName.REDS) && !venusMaxed) {
-      return player.canAfford(6, false, true) || (canSpendResource && player.canAfford(REDS_RULING_POLICY_COST));
+      return player.canAfford(6, {titanium: true}) || (canSpendResource && player.canAfford(REDS_RULING_POLICY_COST));
     }
 
-    return player.canAfford(6, false, true) || canSpendResource;
+    return player.canAfford(6, {titanium: true}) || canSpendResource;
   }
 
   public action(player: Player) {
@@ -68,7 +68,7 @@ export class RotatorImpacts extends Card implements IActionCard, IResourceCard {
       return this.addResource(player);
     }
 
-    if (player.canAfford(6, false, true)) {
+    if (player.canAfford(6, {titanium: true})) {
       opts.push(addResource);
     } else {
       return this.spendResource(player);

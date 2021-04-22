@@ -23,7 +23,7 @@ export class SulphurExports extends Card {
           b.venus(1).br;
           b.production((pb) => pb.megacredits(1).slash().venus(1).played);
         }),
-        description: 'Increase Venus 1 step. Increase your MC production 1 step for each Venus tag you have, including this.',
+        description: 'Increase Venus 1 step. Increase your M€ production 1 step for each Venus tag you have, including this.',
       },
     });
   };
@@ -31,7 +31,7 @@ export class SulphurExports extends Card {
   public canPlay(player: Player): boolean {
     const venusMaxed = player.game.getVenusScaleLevel() === MAX_VENUS_SCALE;
     if (PartyHooks.shouldApplyPolicy(player.game, PartyName.REDS) && !venusMaxed) {
-      return player.canAfford(player.getCardCost(this) + REDS_RULING_POLICY_COST, false, true, true);
+      return player.canAfford(player.getCardCost(this) + REDS_RULING_POLICY_COST, {titanium: true, floaters: true});
     }
 
     return true;

@@ -89,7 +89,7 @@ class RedsPolicy02 implements Policy {
 
 class RedsPolicy03 implements Policy {
   id = TurmoilPolicy.REDS_POLICY_3;
-  description: string = 'Pay 4 MC to reduce a non-maxed global parameter 1 step (do not gain any track bonuses)';
+  description: string = 'Pay 4 M€ to reduce a non-maxed global parameter 1 step (do not gain any track bonuses)';
   isDefault = false;
 
   canAct(player: Player) {
@@ -182,7 +182,7 @@ class RedsPolicy03 implements Policy {
 
 class RedsPolicy04 implements Policy {
   id = TurmoilPolicy.REDS_POLICY_4;
-  description: string = 'When you raise a global parameter, decrease your MC production 1 step per step raised if possible';
+  description: string = 'When you raise a global parameter, decrease your M€ production 1 step per step raised if possible';
   isDefault = false;
 }
 

@@ -5,7 +5,7 @@
     "Credicor": "Credicor",
     "You start with 57 MC.": "Вы начинаете с 57 MC",
     "Effect: After you pay for a card or standard project with a basic cost of 20MC or more, you gain 4MC.": "Эффект: Заплатив за карту или стандартный проект 20 MC или больше, получите 4 МС",
-    
+
     "Ecoline": "Ecoline",
     "You start with 2 plant production, 3 plants, and 36 MC.": "Вы начинаете c 2 уровнями производства растений, 3 растениями и 36 МС",
     "Effect: You may always pay 7 plants, instead of 8, to place greenery.": "Эффект: Вы всегда можете потратить 7 растений вместо 8, чтобы выложить жетон озеленения",
@@ -27,19 +27,19 @@
 
     "Phobolog": "Phobolog",
     "You start with 10 titanium and 23 MC.": "Вы начинаете с 10 титана и 23 MC",
-    "Effect: Your titanium resources are each worth 1 MC extra.": "Эффект: Каждый ваш титан стоит на 1 МС больше",
+    "Effect: Your titanium resources are each worth 1 M€ extra.": "Эффект: Каждый ваш титан стоит на 1 МС больше",
 
     "Tharsis Republic": "Tharsis Republic",
     "You start with 40 MC. As your first action in the game,place a city tile.": "Вы начинаете с 40 MC. В качестве своего первого действия постройте город",
-    "Effect: When any city tile is placed ON MARS, increase your MC production 1 step. When you place a city tile, gain 3 MC.": "Эффект: Когда на Марс выкладывается жетон города, ваше производство МС увеличивается на 1. Выкладывая жетон города, получайте 3 МС",
+    "Effect: When any city tile is placed ON MARS, increase your M€ production 1 step. When you place a city tile, gain 3 MC.": "Эффект: Когда на Марс выкладывается жетон города, ваше производство МС увеличивается на 1. Выкладывая жетон города, получайте 3 МС",
 
     "Thorgate": "Thorgate",
     "You start with 1 energy production and 48 MC.": "Вы начинаете c 1 дополнительным уровнем производства энергии и 48 МС",
-    "Effect: When playing a power card OR THE STANDARD PROJECT POWER PLANT, you pay 3 MC less for it.": "Эффект: Разыгрывая карту с меткой энергии или выполняя стандарный проект Электростанция, платите на 3 МС меньше",
+    "Effect: When playing a power card OR THE STANDARD PROJECT POWER PLANT, you pay 3 M€ less for it.": "Эффект: Разыгрывая карту с меткой энергии или выполняя стандарный проект Электростанция, платите на 3 МС меньше",
 
     "UNMI": "UNMI",
     "You start with 40 MC.": "Вы начинаете с 40 MC",
-    "Action: If your Terraform Rating was raised this generation, you may pay 3 MC to raise it 1 step more.": "Действие: Если в текущем поколении у вас увеличивался РТ, можете заплатить 3 МС, чтобы увеличить РТ еще на 1",
+    "Action: If your Terraform Rating was raised this generation, you may pay 3 M€ to raise it 1 step more.": "Действие: Если в текущем поколении у вас увеличивался РТ, можете заплатить 3 МС, чтобы увеличить РТ еще на 1",
 
     "Mining Guild": "Mining Guild",
     "You start with 30 MC, 5 steel and 1 steel production.": "Вы начинаете c 30 МС, 5 стали, и 1 дополнительным уровнем производства стали",
@@ -47,11 +47,11 @@
 
     "Terractor": "Terractor",
     "You start with 60 MC.": "Вы начинаете с 60 MC",
-    "Effect: When you play an Earth tag, you pay 3 MC less for it.": "Эффект: Разыгрывая карту с меткой Земли, платите на 3 МС меньше",
+    "Effect: When you play an Earth tag, you pay 3 M€ less for it.": "Эффект: Разыгрывая карту с меткой Земли, платите на 3 МС меньше",
 
     "Saturn Systems": "Saturn Systems",
     "You start with 1 titanium production and 42 MC.": "Вы начинаете 1 дополнительным производством титана и 42 МС",
-    "Effect: Each time any Jovian tag is put into play, including this, increase your MC production 1 step.": "Эффект: При розыгрыше каждой метки Юпитера, включая эту, ваше производство МС увеличивается на 1",
+    "Effect: Each time any Jovian tag is put into play, including this, increase your M€ production 1 step.": "Эффект: При розыгрыше каждой метки Юпитера, включая эту, ваше производство МС увеличивается на 1",
 
     "Vitor": "Vitor",
     "You start with 45 MC. As your first action, fund an award for free.": "Вы начинаете c 45 МС. Первым действием бесплатно учредите награду",

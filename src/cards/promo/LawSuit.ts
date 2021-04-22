@@ -35,8 +35,9 @@ export class LawSuit extends Card implements IProjectCard {
 
   public play(player: Player) {
     return new SelectPlayer(player.game.getPlayersById(player.removingPlayers), 'Select player to sue (steal 3 M€ from)', 'Steal M€', (suedPlayer: Player) => {
-      player.setResource(Resources.MEGACREDITS, Math.min(3, suedPlayer.getResource(Resources.MEGACREDITS)));
-      suedPlayer.setResource(Resources.MEGACREDITS, -3, player.game, player);
+      const amount = Math.min(3, suedPlayer.megaCredits);
+      player.setResource(Resources.MEGACREDITS, amount);
+      suedPlayer.setResource(Resources.MEGACREDITS, -amount, player.game, player);
       suedPlayer.playedCards.push(this);
       return undefined;
     });

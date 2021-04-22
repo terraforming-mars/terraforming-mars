@@ -91,7 +91,7 @@ export class Aridor extends Card implements CorporationCard {
         const currentSize = this.allTags.size;
         this.allTags.add(tag);
         if (this.allTags.size > currentSize) {
-          player.addProduction(Resources.MEGACREDITS);
+          player.addProduction(Resources.MEGACREDITS, 1);
         }
       }
       return undefined;

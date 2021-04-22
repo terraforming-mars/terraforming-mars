@@ -20,9 +20,9 @@ export class MetalsCompany extends PreludeCard implements IProjectCard {
     });
   }
   public play(player: Player) {
-    player.addProduction(Resources.MEGACREDITS);
-    player.addProduction(Resources.TITANIUM);
-    player.addProduction(Resources.STEEL);
+    player.addProduction(Resources.MEGACREDITS, 1);
+    player.addProduction(Resources.TITANIUM, 1);
+    player.addProduction(Resources.STEEL, 1);
     return undefined;
   }
 }

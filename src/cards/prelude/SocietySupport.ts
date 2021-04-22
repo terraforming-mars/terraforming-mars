@@ -23,9 +23,9 @@ export class SocietySupport extends PreludeCard {
   }
   public play(player: Player) {
     player.addProduction(Resources.MEGACREDITS, -1);
-    player.addProduction(Resources.PLANTS);
-    player.addProduction(Resources.ENERGY);
-    player.addProduction(Resources.HEAT);
+    player.addProduction(Resources.PLANTS, 1);
+    player.addProduction(Resources.ENERGY, 1);
+    player.addProduction(Resources.HEAT, 1);
     return undefined;
   }
 }

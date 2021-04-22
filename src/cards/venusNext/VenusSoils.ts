@@ -42,7 +42,7 @@ export class VenusSoils extends Card {
   }
 
   public play(player: Player) {
-    player.addProduction(Resources.PLANTS);
+    player.addProduction(Resources.PLANTS, 1);
     player.game.increaseVenusScaleLevel(player, 1);
 
     const microbeCards = player.getResourceCards(ResourceType.MICROBE);

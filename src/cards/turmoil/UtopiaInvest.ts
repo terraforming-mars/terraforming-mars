@@ -35,8 +35,8 @@ export class UtopiaInvest extends Card implements IActionCard, CorporationCard {
   }
 
   public play(player: Player) {
-    player.addProduction(Resources.STEEL);
-    player.addProduction(Resources.TITANIUM);
+    player.addProduction(Resources.STEEL, 1);
+    player.addProduction(Resources.TITANIUM, 1);
     return undefined;
   }
   public canAct(player: Player): boolean {

@@ -89,7 +89,7 @@ export abstract class Colony implements SerializedColony {
       // Poseidon hook
       const poseidon = player.game.getPlayers().find((player) => player.isCorporation(CardName.POSEIDON));
       if (poseidon !== undefined) {
-        poseidon.addProduction(Resources.MEGACREDITS);
+        poseidon.addProduction(Resources.MEGACREDITS, 1);
       }
     }
 

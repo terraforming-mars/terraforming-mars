@@ -51,7 +51,7 @@ export class DeuteriumExport extends Card implements IActionCard, IResourceCard 
     return new OrOptions(
       new SelectOption('Remove 1 floater to raise energy production 1 step', 'Remove floater', () => {
         this.resourceCount--;
-        player.addProduction(Resources.ENERGY);
+        player.addProduction(Resources.ENERGY, 1);
         return undefined;
       }),
       new SelectOption('Add 1 floater to this card', 'Add floater', () => {

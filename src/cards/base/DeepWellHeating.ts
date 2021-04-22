@@ -40,7 +40,7 @@ export class DeepWellHeating extends Card implements IProjectCard {
   }
 
   public play(player: Player) {
-    player.addProduction(Resources.ENERGY);
+    player.addProduction(Resources.ENERGY, 1);
     return player.game.increaseTemperature(player, 1);
   }
 }

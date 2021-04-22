@@ -170,7 +170,7 @@ export class MoonExpansion {
             player.drawCard();
           });
           this.bonus(moonData.miningRate, increment, 6, () => {
-            player.addProduction(Resources.TITANIUM, 1, player.game);
+            player.addProduction(Resources.TITANIUM, 1, {log: true});
           });
           this.activateLunaFirst(player, player.game, increment);
         }
@@ -218,7 +218,7 @@ export class MoonExpansion {
             player.drawCard();
           });
           this.bonus(moonData.logisticRate, increment, 6, () => {
-            player.addProduction(Resources.STEEL, 1, player.game);
+            player.addProduction(Resources.STEEL, 1, {log: true});
           });
           this.activateLunaFirst(player, player.game, increment);
         }
@@ -233,7 +233,7 @@ export class MoonExpansion {
       lunaFirstPlayer.megaCredits += count;
       LogHelper.logGainStandardResource(lunaFirstPlayer, Resources.MEGACREDITS, count);
       if (lunaFirstPlayer.id === sourcePlayer?.id) {
-        lunaFirstPlayer.addProduction(Resources.MEGACREDITS, count, game);
+        lunaFirstPlayer.addProduction(Resources.MEGACREDITS, count, {log: true});
       }
     }
   }

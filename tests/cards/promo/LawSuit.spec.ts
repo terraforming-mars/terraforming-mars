@@ -7,13 +7,13 @@ import {Resources} from '../../../src/Resources';
 import {TestPlayers} from '../../TestPlayers';
 
 describe('LawSuit', function() {
-  let card : LawSuit; let player : Player; let player2 : Player; let game : Game;
+  let card : LawSuit; let player : Player; let player2 : Player;
 
   beforeEach(function() {
     card = new LawSuit();
     player = TestPlayers.BLUE.newPlayer();
     player2 = TestPlayers.RED.newPlayer();
-    game = Game.newInstance('foobar', [player, player2], player);
+    Game.newInstance('foobar', [player, player2], player);
   });
 
   it('Can\'t play if no resources or production reduced this turn', function() {
@@ -21,18 +21,18 @@ describe('LawSuit', function() {
   });
 
   it('Can play if resources removed this turn by other player', function() {
-    player.addResource(Resources.MEGACREDITS, -1, game, player2);
+    player.addResource(Resources.MEGACREDITS, -1, {log: true, from: player2});
     expect(card.canPlay(player)).is.true;
   });
 
   it('Can play if production decreased this turn by other player', function() {
-    player.addProduction(Resources.MEGACREDITS, -1, game, player2);
+    player.addProduction(Resources.MEGACREDITS, -1, {log: true, from: player2});
     expect(card.canPlay(player)).is.true;
   });
 
   it('Should play', function() {
-    player.addResource(Resources.MEGACREDITS, -1, game, player2);
-    player.addProduction(Resources.MEGACREDITS, -1, game, player2);
+    player.addResource(Resources.MEGACREDITS, -1, {log: true, from: player2});
+    player.addProduction(Resources.MEGACREDITS, -1, {log: true, from: player2});
 
     const play = card.play(player);
     expect(play instanceof SelectPlayer).is.true;

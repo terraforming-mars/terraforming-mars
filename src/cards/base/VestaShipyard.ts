@@ -29,7 +29,7 @@ export class VestaShipyard extends Card implements IProjectCard {
     return 1;
   }
   public play(player: Player): undefined {
-    player.addProduction(Resources.TITANIUM);
+    player.addProduction(Resources.TITANIUM, 1);
     return undefined;
   }
 }

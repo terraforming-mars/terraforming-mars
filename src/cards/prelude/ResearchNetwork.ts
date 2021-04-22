@@ -23,7 +23,7 @@ export class ResearchNetwork extends PreludeCard implements IProjectCard {
     });
   }
   public play(player: Player) {
-    player.addProduction(Resources.MEGACREDITS);
+    player.addProduction(Resources.MEGACREDITS, 1);
     player.drawCard(3);
     return undefined;
   }

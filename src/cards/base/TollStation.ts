@@ -31,7 +31,7 @@ export class TollStation extends Card implements IProjectCard {
       .filter((aPlayer) => aPlayer !== player)
       .map((opponent) => opponent.getTagCount(Tags.SPACE, false, false))
       .reduce((a, c) => a + c, 0);
-    player.addProduction(Resources.MEGACREDITS, amount, player.game);
+    player.addProduction(Resources.MEGACREDITS, amount, {log: true});
     return undefined;
   }
 }

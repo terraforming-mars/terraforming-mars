@@ -27,7 +27,7 @@ export class Grass extends Card implements IProjectCard {
     });
   }
   public play(player: Player) {
-    player.addProduction(Resources.PLANTS);
+    player.addProduction(Resources.PLANTS, 1);
     player.plants += 3;
     return undefined;
   }

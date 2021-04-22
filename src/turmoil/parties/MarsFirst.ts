@@ -59,7 +59,7 @@ class MarsFirstPolicy01 implements Policy {
 
   onTilePlaced(player: Player, space: ISpace) {
     if (space.tile && space.spaceType !== SpaceType.COLONY && player.game.phase === Phase.ACTION) {
-      player.addResource(Resources.STEEL);
+      player.addResource(Resources.STEEL, 1);
     }
   }
 }

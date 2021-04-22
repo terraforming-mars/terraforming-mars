@@ -26,7 +26,7 @@ export class Mine extends Card implements IProjectCard {
   }
 
   public play(player: Player) {
-    player.addProduction(Resources.STEEL);
+    player.addProduction(Resources.STEEL, 1);
     return undefined;
   }
 }

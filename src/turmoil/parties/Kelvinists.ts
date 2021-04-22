@@ -60,8 +60,8 @@ class KelvinistsPolicy01 implements Policy {
       {
         title: 'Select how to pay for Turmoil Kelvinists action',
         afterPay: () => {
-          player.addProduction(Resources.ENERGY);
-          player.addProduction(Resources.HEAT);
+          player.addProduction(Resources.ENERGY, 1);
+          player.addProduction(Resources.HEAT, 1);
           game.log('${0} increased heat and energy production 1 step', (b) => b.player(player));
         },
       },

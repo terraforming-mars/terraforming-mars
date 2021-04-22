@@ -27,7 +27,7 @@ describe('Fish', function() {
 
   it('Should play - auto select if single target', function() {
     (game as any).temperature = 2;
-    player2.addProduction(Resources.PLANTS);
+    player2.addProduction(Resources.PLANTS, 1);
 
     expect(card.canPlay(player)).is.true;
     card.play(player);
@@ -39,8 +39,8 @@ describe('Fish', function() {
 
   it('Should play - multiple targets', function() {
     (game as any).temperature = 2;
-    player.addProduction(Resources.PLANTS);
-    player2.addProduction(Resources.PLANTS);
+    player.addProduction(Resources.PLANTS, 1);
+    player2.addProduction(Resources.PLANTS, 1);
 
     expect(card.canPlay(player)).is.true;
     card.play(player);

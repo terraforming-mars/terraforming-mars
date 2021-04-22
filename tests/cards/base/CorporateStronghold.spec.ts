@@ -22,7 +22,7 @@ describe('CorporateStronghold', function() {
   });
 
   it('Should play', function() {
-    player.addProduction(Resources.ENERGY);
+    player.addProduction(Resources.ENERGY, 1);
     expect(card.canPlay(player)).is.true;
 
     const action = card.play(player);

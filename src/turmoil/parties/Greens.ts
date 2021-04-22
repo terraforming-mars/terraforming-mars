@@ -76,7 +76,7 @@ class GreensPolicy02 implements Policy {
   isDefault = false;
 
   onTilePlaced(player: Player) {
-    player.addResource(Resources.PLANTS);
+    player.addResource(Resources.PLANTS, 1);
   }
 }
 

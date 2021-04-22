@@ -27,7 +27,7 @@ export class TitaniumMine extends Card implements IProjectCard {
     });
   }
   public play(player: Player) {
-    player.addProduction(Resources.TITANIUM);
+    player.addProduction(Resources.TITANIUM, 1);
     return undefined;
   }
 }

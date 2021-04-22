@@ -27,7 +27,7 @@ export class FirstLunarSettlement extends PreludeCard implements IProjectCard {
   public tilesBuilt = [TileType.MOON_COLONY];
 
   public play(player: Player) {
-    player.addProduction(Resources.MEGACREDITS, 1, player.game);
+    player.addProduction(Resources.MEGACREDITS, 1, {log: true});
     player.game.defer(new PlaceMoonColonyTile(player));
     return undefined;
   }

@@ -23,8 +23,8 @@ export class MartianIndustries extends PreludeCard implements IProjectCard {
     });
   }
   public play(player: Player) {
-    player.addProduction(Resources.ENERGY);
-    player.addProduction(Resources.STEEL);
+    player.addProduction(Resources.ENERGY, 1);
+    player.addProduction(Resources.STEEL, 1);
     player.megaCredits += 6;
     return undefined;
   }

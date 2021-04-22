@@ -185,7 +185,7 @@ describe('CardRequirements', function() {
   it('satisfies properly for production', function() {
     const requirements = CardRequirements.builder((b) => b.production(Resources.PLANTS));
     expect(requirements.satisfies(player)).eq(false);
-    player.addProduction(Resources.PLANTS);
+    player.addProduction(Resources.PLANTS, 1);
     expect(requirements.satisfies(player)).eq(true);
   });
 

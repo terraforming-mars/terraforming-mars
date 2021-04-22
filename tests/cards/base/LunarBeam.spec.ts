@@ -16,7 +16,7 @@ describe('LunarBeam', function() {
     player.addProduction(Resources.MEGACREDITS, -4);
     expect(card.canPlay(player)).is.not.true;
 
-    player.addProduction(Resources.MEGACREDITS);
+    player.addProduction(Resources.MEGACREDITS, 1);
     expect(card.canPlay(player)).is.true;
   });
 

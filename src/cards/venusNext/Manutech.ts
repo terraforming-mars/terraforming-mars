@@ -32,7 +32,7 @@ export class Manutech extends Card implements CorporationCard {
   }
 
   public play(player: Player) {
-    player.addProduction(Resources.STEEL);
+    player.addProduction(Resources.STEEL, 1);
     return undefined;
   }
 

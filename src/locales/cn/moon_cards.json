@@ -37,7 +37,7 @@
   "Spend 2 steel. Increase your M€ production 2 steps. Place a road tile on the Moon and raise the Logistics Rate 1 step.":"花2块钢。增加MC产能2。在月球放置道路板块，并提高物流速度 1步。",
 
   "Colonist Shuttles":"殖民者航天飞机",
-  "Spend 1 titanium. Raise the Colony Rate 1 step. Gain 2MC for each colony tile on the Moon.":"花1钛。提高殖民速度1步。月球上每个殖民地板块获得2MC。",
+  "Spend 1 titanium. Raise the Colony Rate 1 step. Gain 2M€ for each colony tile on the Moon.":"花1钛。提高殖民速度1步。月球上每个殖民地板块获得2MC。",
 
   "Copernicus Solar Arrays":"哥白尼太阳能阵列",
   "Spend 1 titanium. Gain 2 heat. Incease your energy production 1 step.":"花1钛。获得2热。提高你的电力产量1。",
@@ -49,7 +49,7 @@
 
   "Cosmic Radiation":"宇宙辐射",
   "4 Mining rate":"4月球采矿效率",
-  "Requires 4 Mining Rate. All players pay 4MC for each mining tile they own.":"需要4个采矿效率。所有玩家为自己拥有的每个采矿板块支付4MC费用。",
+  "Requires 4 Mining Rate. All players pay 4M€ for each mining tile they own.":"需要4个采矿效率。所有玩家为自己拥有的每个采矿板块支付4MC费用。",
 
   "Darkside Incubation Plant":"黑暗孵化厂",
   "Action: Add 1 microbe here.":"行动：在此处添加1个微生物",
@@ -127,7 +127,7 @@
 
  "Luna Conference" :"月球会议",
  "Requires that Scientists are ruling or that you have 2 delegates there. ": "要求科学党当政，或者那里有2位代表。",
- "Gain 2 MC per road tile on the Moon. Gain 2MC per colony tile on the Moon.": "在月球上每块道路板块获得2 MC。在月球上每块殖民地板块获得2MC。",
+ "Gain 2 MC per road tile on the Moon. Gain 2M€ per colony tile on the Moon.": "在月球上每块道路板块获得2 MC。在月球上每块殖民地板块获得2MC。",
 
  "Luna Mining Hub" :"月球采矿中心",
  "5 Mining rate": "5采矿效率",

@@ -71,7 +71,7 @@
 
   "Dirigibles":"Statki Powietrzne",
   "Action: Add 1 Floater to ANY card":"Akcja: Umieść 1 jednostkę dryfowców na dowolnej karcie.",
-  "Effect: When playing a Venus tag, Floaters here may be used as payment, and are worth 3MC each.":"Efekt trwały: Gdy zagrywasz kartę z symbolem Wenus do pokrycia kosztu tej karty możesz użyć znajdujące się na karcie Statków Powietrznych jednostki dryfowców. Każda jednostka dryfowców jest warta 3 MC.",
+  "Effect: When playing a Venus tag, Floaters here may be used as payment, and are worth 3M€ each.":"Efekt trwały: Gdy zagrywasz kartę z symbolem Wenus do pokrycia kosztu tej karty możesz użyć znajdujące się na karcie Statków Powietrznych jednostki dryfowców. Każda jednostka dryfowców jest warta 3 MC.",
 
   "Floating Habs":"Dryfujące Jednostki Mieszkalne",
   "Action: Spend 2 M€ to add 1 Floater to ANY card":"Akcja: Wydaj 2 MC, aby umieścić 1 jednostkę dryfowców na dowolnej karcie.",
@@ -101,7 +101,7 @@
   "Requires 3 Science tags. Either raise the temperature 2 steps, or raise Venus 2 steps. Add 2 Floaters to ANY card.":"Musisz posiadać przynajmniej 3 symbole nauki. Podnieś Temperaturę o 4°C albo Współczynnik Terraformacji Wenus o 2 poziomy. Umieść 2 jednostki dryfowców na dowolnej karcie.",
 
   "Comet for Venus":"Kometa dla Wenus",
-  "Raise Venus 1 step. Remove up to 4MC from any player WITH A VENUS TAG IN PLAY.":"Podnieś Współczynnik Terraformacji Wenus o 1 poziom. Usuń do 4 MC dowolnego gracza posiadajacego kartę z symbolem Wenus.",
+  "Raise Venus 1 step. Remove up to 4M€ from any player WITH A VENUS TAG IN PLAY.":"Podnieś Współczynnik Terraformacji Wenus o 1 poziom. Usuń do 4 MC dowolnego gracza posiadajacego kartę z symbolem Wenus.",
 
   "Dawn City":"Miasto Świtu",
   "Requires 4 Science tags. Decrease your energy production 1 step. Increase your titanium production 1 step. Place a City tile on the RESERVED AREA.":"Musisz posiadać przynajmniej 4 symbole nauki. Obniż swoją produkcję energii o 1 poziom. Podnieś swoją produkcję tytanu o 1 poziom. Umieść obszar miasta na planszy Wenus, na polu zarezerwowanym dla Miasta Świtu.",

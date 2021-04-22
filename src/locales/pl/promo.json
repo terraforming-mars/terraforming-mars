@@ -118,7 +118,7 @@
   "Place a city tile IN SPACE, outside and separate from the planet.": "Umieść obszar miasta w PRZESTRZENI KOSMICZNEJ, poza planetą, bez sąsiedztwa z innymi obszarami.",
 
   "You start with 48 MC. Increase your M€ production 4 steps. ALL OPPONENTS DECREASE THEIR M€ production 2 STEPS. THIS DOES NOT TRIGGER THE EFFECT BELOW.": "Rozpoczynasz grę z 48 MC i 4 dodatkowymi poziomami produkcji MC. KAŻDY PRZECIWNIK OBNIŻA SWOJĄ PRODUKCJĘ MC O 2 POZIOMY. NIE WYWOŁUJE TO PONIŻSZEGO EFEKTU.",
-  "Effect: When a player causes another player to decrease production or lose resources, pay 3MC to the victim, or as much as possible.": "Efekt trwały: Gdy jakiś gracz spowoduje, że inny gracz musi obniżyć produkcję lub stracić zasoby, zapłać poszkodowanemu graczowi 3MC (lub tyle, ile możesz).",
+  "Effect: When a player causes another player to decrease production or lose resources, pay 3M€ to the victim, or as much as possible.": "Efekt trwały: Gdy jakiś gracz spowoduje, że inny gracz musi obniżyć produkcję lub stracić zasoby, zapłać poszkodowanemu graczowi 3M€ (lub tyle, ile możesz).",
 
   "You start with 47 MC. As your first action, place a greenery tile and raise the oxygen 1 step.": "Rozpoczynasz grę z 47 MC. W ramach swojej pierwszej akcji w grze umieść obszar zieleni na planszy i podnieś poziom tlenu o 1%.",
   "Effect: Each new adjacency between your tile and an opponent's tile gives you a standard resource of your choice [regardless of who just placed a tile].": "Efekt trwały: Za każde nowe sąsiedztwo pomiędzy Twoim obszarem a obszarem innego gracza otrzymujesz 1 jednostkę wybranego przez siebie zasobu standardowego (bez względu na to, kto umieścił nowy obszar).",
@@ -142,7 +142,7 @@
   "Decrease your Energy production 4 steps and increase your Plant production 2 step. Raise your TR 3 step.": "Obniż swoją produkcję energii o 4 poziomy. Podnieś swoją produkcję roślinności o 2 poziomy. Podnieś swój współczynnik terraformacji o 3. Umieść ten obszar na planszy.",
 
   "You start with 37 MC. Increase your steel production 1 step.": "Rozpoczynasz grę z 37 MC i dodatkowym poziomem produkcji stali.",
-  "Action: Increase your energy production 1 step IF YOU HAVE NO ENERGY RESOURCES, or spend 3MC to draw a building card.": "JEŚLI NIE POSIADASZ JEDNOSTEK ENERGII, podnieś swoją produkcję energii o 1 poziom ALBO wydaj 3 MC, aby dobrać pierwszą z odkrywanych kart z symbolem budowli z talii projektów (pozostałe odrzuć).",
+  "Action: Increase your energy production 1 step IF YOU HAVE NO ENERGY RESOURCES, or spend 3M€ to draw a building card.": "JEŚLI NIE POSIADASZ JEDNOSTEK ENERGII, podnieś swoją produkcję energii o 1 poziom ALBO wydaj 3 MC, aby dobrać pierwszą z odkrywanych kart z symbolem budowli z talii projektów (pozostałe odrzuć).",
 
   "You start with 38 MC and 1 steel production.": "Rozpoczynasz grę z 38 MC i 1 dodatkowym poziomem produkcji stali.",
   "Effect: When you play a building tag, including this, gain 1 microbe to this card, or remove 2 microbes here and raise your plant production 1 step.": "Efekt trwały: Gdy zagrywasz kartę z symbolem budowli (z tą włącznie), umieść na tej karcie 1 jednostkę mikrobów i podnieś swoją produkcję zieleni o 1 poziom za każdy symbol budowli na zagranej karcie."

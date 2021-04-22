@@ -9,7 +9,7 @@
 
   "Polyphemos":"波呂斐摩斯",
   "You start with 50MC. Increase your M€ production 5 steps. Gain 5 titanium.":"起始获得50MC。提升你的MC产能5级,获得5个钛合金",
-  "Effect: When you buy a card to hand, pay 5MC instead of 3, including the starting hand.":"效果:当你购买手牌时,你需要支付5MC而非原本的3MC,包括起始的手牌",
+  "Effect: When you buy a card to hand, pay 5M€ instead of 3, including the starting hand.":"效果:当你购买手牌时,你需要支付5MC而非原本的3MC,包括起始的手牌",
 
   "Poseidon":"波塞頓",
   "You start with 45MC. As your first action, place a colony.":"起始获得45MC。作为你的第一个行动,放置一个殖民地",
@@ -52,7 +52,7 @@
 
   "Martian Zoo": "火星动物园",
   "Effect: When you play an Earth tag, place an animal here.": "效果：每当你打出地球标时，在此卡上放1个动物标志",
-  "Action: Gain 1MC per animal here.": "行动：此卡上每有1点动物，获得1块钱",
+  "Action: Gain 1M€ per animal here.": "行动：此卡上每有1点动物，获得1块钱",
   "(Requires 2 city)":"需要2个城市",
   "(tiles in play.)":"",
   "Any 2 Cities":"任何两个城市",
@@ -185,7 +185,7 @@
   "Requires 1 colony. Decrease your Energy production 1 step and increase your M€ production 4 steps. Place a City tile. Gain 1 Trade Fleet.":"需求：1块殖民地。你的电力产量-1，金钱产量+4。放置1座城市。获得1艘贸易飞船。",
   "Requires a colony. Place a colony. MAY BE PLACED ON A COLONY TILE WHERE YOU ALREADY HAVE A COLONY. Gain 1 Trade Fleet. 1VP per 2 colonies in play.":"需求：1块殖民地。放置1块殖民地。可以放在你已经拥有殖民地的那块殖民地板块上。获得1艘贸易飞船。每有2块殖民地算1分。",
   "Spin-off Department":"副产品部门",
-  "Effect: WHEN PLAYING A CARD WITH A BASIC COST OF 20MC OR MORE, draw a card.":"效果：打出1张原始费用为20或更多的牌时，摸1张牌。",
+  "Effect: WHEN PLAYING A CARD WITH A BASIC COST OF 20M€ OR MORE, draw a card.":"效果：打出1张原始费用为20或更多的牌时，摸1张牌。",
 
 
   "Sub-zero Salt Fish":"零下咸鱼",

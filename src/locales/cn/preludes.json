@@ -12,7 +12,7 @@
   "Action: Spend 4 M€ to increase (one of) your LOWEST production 1 step.":"行动:花费4MC,提升你1项产能最低的产能1级",
 
   "Valley Trust":"莱瓦信托",
-  "Effect: When you play a Science tag, you pay 2MC less for it.":"效果：你打出的牌上每有一个科学标志，你少为其支付2元。",
+  "Effect: When you play a Science tag, you pay 2M€ less for it.":"效果：你打出的牌上每有一个科学标志，你少为其支付2元。",
   "You start with 37 MC. As your first action, draw 3 Prelude cards, and play one of them. Discard the other two.":"你起始拥有37元，作为游戏中的你的第一个行动，你必须抽三张前序卡，打出其中一张，然后弃掉剩余两张。",
 
   "Vitor":"维特尔",
@@ -85,7 +85,7 @@
     "Increase your plant production 1 step. Play a card from hand, ignoring global requirements.": "提升你的植物产能1级,并从手中打出一张牌,无视它的全球参数需求条件（温度、氧气、海洋、金星）",
 
     "Eccentric Sponsor": "奇特的赞助者",
-    "Play a card from hand, reducing its cost by 25 MC": "以降低 25MC 的价格打出一张手牌",
+    "Play a card from hand, reducing its cost by 25 MC": "以降低 25M€ 的价格打出一张手牌",
 
     "Experimental Forest": "实验林场",
     "Place 1 Greenery Tile and raise oxygen 1 step. Reveal cards until you reveal two cards with plant tags on them. Take them into your hand and discard the rest.": "放置1个绿化版块。不断展示牌库顶的牌,直到有两张带有植物标志的牌。把这两张牌加入你的手牌,并弃掉剩余的牌",

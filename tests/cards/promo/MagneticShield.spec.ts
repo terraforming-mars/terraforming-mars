@@ -22,6 +22,7 @@ describe('MagneticShield', function() {
   it('Should play', function() {
     player.playedCards.push(new PowerPlant());
     player.playedCards.push(new PowerPlant());
+    player.playedCards.push(new PowerPlant());
     expect(card.canPlay(player)).is.true;
 
     card.play(player);

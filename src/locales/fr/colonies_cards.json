@@ -14,7 +14,7 @@
 
     "Conscription": "Conscription",
     "NEXT CARD:": "PROCHAINE CARTE:",
-    "Requires 2 Earth tags. The next card you play this generation costs 16 MC less.": "Nécessite 2 badges Terre. Le coût de la prochaine carte que vous jouez lors de cette génération est réduit de 16M€",
+    "Requires 2 Earth tags. The next card you play this generation costs 16 M€ less.": "Nécessite 2 badges Terre. Le coût de la prochaine carte que vous jouez lors de cette génération est réduit de 16M€",
 
     "Corona Extractor": "Extracteur de la Couronne Solaire",
     "Requires 4 science tags. Increase your energy production 4 steps.": "Nécessite 4 badges Science. Augmentez votre production d'énergie de 4",
@@ -57,7 +57,7 @@
     "Requires 1 Jovian tag. Increase your TR 1 step. Add 2 floaters to ANY card. 1VP per 2 floaters.": "Nécessite 1 badge Jovien. Augmentez votre NT de 1. Ajoutez 2 flotteurs à N'IMPORTE QUELLE carte. 1PV par groupe de 2 flotteurs sur cette carte",
 
     "Jupiter Floating Station": "Station Flottante Jovienne",
-    "Action: Add 1 floater to a JOVIAN CARD, or gain 1 MC for every floater here (MAX 4).": "Action: Ajoutez 1 flotteur sur une CARTE JOVIENNE, ou gagnez 1M€ par flotteur sur cette carte (Max 4).",
+    "Action: Add 1 floater to a JOVIAN CARD, or gain 1 M€ for every floater here (MAX 4).": "Action: Ajoutez 1 flotteur sur une CARTE JOVIENNE, ou gagnez 1M€ par flotteur sur cette carte (Max 4).",
     "Requires 3 Science tags.": "Nécessite 3 badges Science",
 
     "Luna Governor": "Gouverneur de la Lune",
@@ -75,7 +75,7 @@
 
     "Martian Zoo": "Zoo Martien",
     "Effect: When you play an Earth tag, place an animal here.": "Effet: Lorsque vous jouez une carte Terre. Placez un animal sur le Zoo Martien.",
-    "Action: Gain 1MC per animal here.": "Action: Gagnez 1M€ par animal sur cette carte",
+    "Action: Gain 1M€ per animal here.": "Action: Gagnez 1M€ par animal sur cette carte",
     "Requires 2 city tiles in play.": "Nécessite 2 tuiles Cités en jeu",
 
     "Mining Colony": "Colonie Minière",
@@ -85,8 +85,8 @@
     "Decrease your M€ production 2 steps. Place a colony.": "Diminuez votre production de M€ de 2,. Placez une colonie",
 
     "Molecular Printing": "Impression Moléculaire",
-    "Gain 1MC for each city tile in play.": "Gagnez 1M€ par tuile cité en jeu.",
-    "Gain 1MC for each colony in play.": "Gagnez 1M€ par tuile colonie en jeu.",
+    "Gain 1M€ for each city tile in play.": "Gagnez 1M€ par tuile cité en jeu.",
+    "Gain 1M€ for each colony in play.": "Gagnez 1M€ par tuile colonie en jeu.",
 
     "Nitrogen From Titan": "Azote de Titan",
     "Raise your TR 2 steps. Add 2 floaters to a JOVIAN CARD.": "Augmentez votre NT de 2. Ajoutez 2 flotteurs à n'importe quelle CARTE JOVIENNE",
@@ -131,7 +131,7 @@
     "Requires a colony. Place a colony. MAY BE PLACED ON A COLONY TILE WHERE YOU ALREADY HAVE A COLONY. Gain 1 Trade Fleet. 1VP per 2 colonies in play.": "Nécessite 1 colonie. Placez 1 colonie. ELLE PEUT ETRE PLACEE SUR UNE TUILE COLONIE OU VOUS AVEZ DEJA UN COLONIE. Gagnez 1 Flotte marchande. 1 PV par groupe de 2 colonies en jeu.",
 
     "Spin-off Department": "Pépinière d'Entreprises",
-    "Effect: WHEN PLAYING A CARD WITH A BASIC COST OF 20MC OR MORE, draw a card.": "Effet: Lorsque vous jouez une carte ayant un coût de 20 M€ou plus, piochez une carte.",
+    "Effect: WHEN PLAYING A CARD WITH A BASIC COST OF 20M€ OR MORE, draw a card.": "Effet: Lorsque vous jouez une carte ayant un coût de 20 M€ou plus, piochez une carte.",
     "Increase your M€ production 2 steps.": "Augmentez votre production de M€ de 2.",
 
     "Sub-Zero Salt Fish": "Poisson Salé antigel",

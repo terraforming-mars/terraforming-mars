@@ -49,7 +49,7 @@ describe('Kelvinists', function() {
     expect(player.getProduction(Resources.HEAT)).to.eq(1);
   });
 
-  it('Ruling policy 2: When you raise temperature, gain 3 MC per step raised', function() {
+  it('Ruling policy 2: When you raise temperature, gain 3 M€ per step raised', function() {
     TestingUtils.setRulingPartyAndRulingPolicy(game, turmoil, kelvinists, kelvinists.policies[1].id);
 
     game.increaseTemperature(player, 1);

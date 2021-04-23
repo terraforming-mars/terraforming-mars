@@ -12,7 +12,7 @@
     "Requires 3 ocean tiles. Decrease your MC production 1 step and any heat production 1 step. Increase your Plant production 2 steps.": "Requer 3 tiles de oceano. Diminua sua produção de M$ em 1 nível e 1 nível de qualquer produção de calor. Aumente sua produção de plantas em 2.",
 
     "Search For Life": "Procura por Vida",
-    "Action: Spend 1 MC to reveal the top card of the draw deck. If that card has a Microbe tag, add a Science resource here.": "Ação: gaste 1 M$ para revelar e descartar a carta do topo do baralho; se esta carta tiver um ícone de micróbio, adicione um recurso de ciência aqui.",
+    "Action: Spend 1 M€ to reveal the top card of the draw deck. If that card has a Microbe tag, add a Science resource here.": "Ação: gaste 1 M$ para revelar e descartar a carta do topo do baralho; se esta carta tiver um ícone de micróbio, adicione um recurso de ciência aqui.",
     "3 VPs if you have one or more Science resources here.": "3 PV se você tiver um ou mais recursos de ciência aqui.",
     "Oxygen must be 6% or less.": "O nível de oxigênio deve estar em 6% ou menos.",
 
@@ -32,7 +32,7 @@
     "Trade Advance": "Comércio Avançado",
     "[ solo": "[ solo",
     "Trade all colonies with": "Comercie com todas as colônias com",
-    "Gain 2 MC [SOLO: Gain 10 MC]. Immediately trade with all active colonies. You may increase the Colony Tile track 1 step before each of these trades.": "Ganhe 2 M$ (10 M$ modo solo). Comercia com todas as colônias ativas inmediatamente. Você pode aumentar 1 nível de tiles de colônias cada vez que comercies com cada uma delas.",
+    "Gain 2 M€ [SOLO: Gain 10 MC]. Immediately trade with all active colonies. You may increase the Colony Tile track 1 step before each of these trades.": "Ganhe 2 M$ (10 M$ modo solo). Comercia com todas as colônias ativas inmediatamente. Você pode aumentar 1 nível de tiles de colônias cada vez que comercies com cada uma delas.",
 
     "Valuable Gases": "Gases Valiosos",
     "Gain 6 MC. Play a Venus card from your hand and add 4 floaters to it.": "Ganhe 6 M$. Jogue uma carta de Vênus da mão e adicione 4 flutuadores.",
@@ -45,7 +45,7 @@
     "Action: Look at the top card and either buy it or discard it": "AÇÃO: OLHE A CARTA DO TOPO; VOCÊ PODE COMPRÁ-LA OU DESCARTÁ-LA. SE COMPRAR PAGUE 3 M$",
 
     "Martian Rails": "Trilhos Marcianos",
-    "Action: Spend 1 Energy to gain 1 MC for each City tile ON MARS.": "Ação: gaste 1 de energia para ganhar 1 M$ por cada tile de cidade EM MARTE.",
+    "Action: Spend 1 Energy to gain 1 M€ for each City tile ON MARS.": "Ação: gaste 1 de energia para ganhar 1 M$ por cada tile de cidade EM MARTE.",
 
 
 
@@ -69,7 +69,7 @@
     "Raise temperature 2 steps and gain 4 titanium. Remove up to 4 Plants from any player.": "Aumente a temperatura 2 níveis e ganhe 4 de titânio. Remova até 4 plantas de qualquer jogador.",
 
     "Water Import From Europa": "Importação de Água de Europa",
-    "Action: Pay 12 MC to place an ocean tile. TITANIUM MAY BE USED as if playing a Space card.": "Ação: Pague 12 M$ para colocar um tile de oceano. TITÂNIO PODE SER USADO como se você estivesse jogando uma carta de espaço.",
+    "Action: Pay 12 M€ to place an ocean tile. TITANIUM MAY BE USED as if playing a Space card.": "Ação: Pague 12 M$ para colocar um tile de oceano. TITÂNIO PODE SER USADO como se você estivesse jogando uma carta de espaço.",
     "1 VP for each Jovian tag you have.": "1 PV por cada ícone Joviano que você tiver.",
 
     "Space Elevator": "Elevador Espacial",
@@ -95,7 +95,7 @@
     "Gain 3 Plants, or add 3 Microbes or 2 Animals to ANOTHER card. Place an ocean tile.": "Ganhe 3 plantas, ou adicione 3 micróbios ou 2 animais a OUTRA carta. Coloque um tile de oceano.",
 
     "Research Outpost": "Posto de Pesquisa",
-    "Effect: When you play a card, you pay 1 MC less for it.": "Efeito: quando você joga uma carta, pague 1 M$ a menos por ela.",
+    "Effect: When you play a card, you pay 1 M€ less for it.": "Efeito: quando você joga uma carta, pague 1 M$ a menos por ela.",
     "Place a city tile NEXT TO NO OTHER TILE.": "Coloque um tile de cidade QUE NÃO ENCOSTE EM NENHUM OUTRO TILE.",
 
     "Phobos Space Haven": "Porto Espacial de Fobos",
@@ -114,7 +114,7 @@
     "(Requires 11% oxygen.)": "Requer 11% de oxigênio.",
 
     "Space Station": "Estação Espacial",
-    "Effect: When you play a Space card, you pay 2 MC less for it.": "Quando você joga uma carta de espaço, pague 2 M$ a menos por ela.",
+    "Effect: When you play a Space card, you pay 2 M€ less for it.": "Quando você joga uma carta de espaço, pague 2 M$ a menos por ela.",
 
     "Eos Chasma National Park": "Parque Nacional de Eos Chasma",
     "Requires -12 C or warmer. Add 1 Animal TO ANY ANIMAL CARD. Gain 3 Plants. Increase your MC production 2 steps.": "Requer temperatura -12°C ou mais. Adicione 1 animal a QUALQUER CARTA DE ANIMAL. Ganhe 3 plantas. Aumente sua produção de M$ 2 níveis.",
@@ -134,7 +134,7 @@
     "Decrease your MC production 2 steps and increase your heat production and Energy production 2 steps each.": "Diminua sua produção de M$ em 2 e aumente sua produção de calor e produção de energia 2 níveis cada.",
 
     "Optimal Aerobraking": "Aerofrenagem Ideal",
-    "Effect: When you play a Space Event, you gain 3 MC and 3 heat.": "Efeito: quando joga um evento espacial, você ganha 3 M$ e 3 de calor.",
+    "Effect: When you play a Space Event, you gain 3 M€ and 3 heat.": "Efeito: quando joga um evento espacial, você ganha 3 M$ e 3 de calor.",
 
     "Underground City": "Cidade Subterrânea",
     "Place a City tile. Decrease your Energy production 2 steps and increase your steel production 2 steps.": "Coloque um tile de cidade. Diminua sua produção de energia 2 níveis e aumente sua produção de aço 2 níveis.",
@@ -152,7 +152,7 @@
     "Ants": "Formigas",
     "Action: Remove 1 Microbe from any card to add 1 to this card.": "Ação: remova 1 micróbio de qualquer carta para adicionar 1 a esta carta.",
     "1 VP per 2 Microbes on this card.": "1 PV por cada 2 micróbios nesta carta.",
-    
+
     "Release of Inert Gases": "Liberação de Gases Inertes",
     "(Raise your terraforming rating 2 steps.)": "Aumente seu IT em 2 níveis.",
 
@@ -261,11 +261,11 @@
     "Oxygen must be 8% or less. Decrease your energy production 1 step.": "O nível de oxigênio deve estar em 8% ou menos. Diminua sua produção de energia 1 nível.",
 
     "Earth Catapult": "Catapulta Terrestre",
-    "Effect: When you play a card, you pay 2 MC less for it.": "Efeito: quando você joga uma carta, pague 2 M$ a menos por ela.",
+    "Effect: When you play a card, you pay 2 M€ less for it.": "Efeito: quando você joga uma carta, pague 2 M$ a menos por ela.",
 
     "Advanced Alloys": "Ligas Avançadas",
-    "Effect: Each titanium you have is worth 1 MC extra.": "Efeito: cada titânio que você tem vale 1 M$ adicional.", 
-    "Effect: Each steel you have is worth 1 MC extra.": "Efeito: Cada aço que você tem vale 1 M$ adicional.",
+    "Effect: Each titanium you have is worth 1 M€ extra.": "Efeito: cada titânio que você tem vale 1 M$ adicional.",
+    "Effect: Each steel you have is worth 1 M€ extra.": "Efeito: Cada aço que você tem vale 1 M$ adicional.",
 
     "Birds": "Pássaros",
     "Action: Add an animal to this card.": "Ação: adicione 1 animal a esta carta.",
@@ -281,7 +281,7 @@
     "Gain 2 plants. Raise oxygen level 1 step and place an ocean tile.": "Ganhe 2 plantas. Aumente o nível de oxigênio 1 nível e coloque um tile de oceano.",
 
     "Space Mirrors": "Espelhos Espaciais",
-    "Action: Spend 7 MC to increase your energy production 1 step.": "Ação: gaste 7 M$ para aumentar sua produção de energia 1 nível.",
+    "Action: Spend 7 M€ to increase your energy production 1 step.": "Ação: gaste 7 M$ para aumentar sua produção de energia 1 nível.",
 
     "Solar Wind Power": "Energia de Vento Solar",
     "Increase your energy production 1 step and gain 2 titanium.": "Aumente sua produção de energia 1 nível e ganhe 2 de titânio.",
@@ -310,7 +310,7 @@
     "Commercial District": "Distrito Comercial",
     "Place this tile. Decrease your energy production 1 step and increase your MC production 4 steps.": "Coloque este tile. Diminua sua produção de energia em 1 nível e aumente sua produção de M$ 4 níveis.",
     "1 VP per adjacent city tile.": "1 PV por tile de cidade adjacente.",
-    
+
     "Robotic Workforce": "Força de Trabalho Robótica",
     "Duplicate only the production box of one of your building cards.": "Duplique apenas o quadrilátero de produção de apenas uma de suas cartas de construção.",
 
@@ -370,13 +370,13 @@
     "Action: Spend 4 energy to gain 1 titanium and increase oxygen 1 step.": "Ação: gaste 4 de energia para ganhar 1 de titânio e aumentar o oxigênio 1 nível.",
 
     "Earth Office": "Escritório na Terra",
-    "Effect: When you play an Earth card, you pay 3 MC less for it.": "Efeito: quando você joga um ícone de Terra, pague 3 M$ a menos.",
-    "When you play an Earth card, you pay 3 MC less for it.": "Quando você joga um ícone de Terra, pague 3 M$ a menos.",
+    "Effect: When you play an Earth card, you pay 3 M€ less for it.": "Efeito: quando você joga um ícone de Terra, pague 3 M$ a menos.",
+    "When you play an Earth card, you pay 3 M€ less for it.": "Quando você joga um ícone de Terra, pague 3 M$ a menos.",
 
     "Acquired Company": "Aquisição de Companhia",
 
     "Media Archives": "Arquivos Mídia",
-    "Gain 1 MC for each event EVER PLAYED by all players.": "Ganhe 1 M$ por cada evento JÁ JOGADO por todos os jugadores.",
+    "Gain 1 M€ for each event EVER PLAYED by all players.": "Ganhe 1 M$ por cada evento JÁ JOGADO por todos os jugadores.",
 
     "Open City": "Cidade ao ar Livre",
     "Requires 12% oxygen. Gain 2 plants. Place a City tile. Decrease your Energy production 1 step and increase your MC production 4 steps.": "Requer 12% de oxigênio. Diminua sua produção de energia 1 nível e aumente sua produção de M$ em 4. Ganhe 2 plantas e coloque um tile de cidade.",
@@ -424,11 +424,11 @@
     "Requires 3 ocean tiles and that you lose 1 plant. Increase your plant production 1 step.": "Requer 3 tiles de oceano. Perca 1 de planta. Aumente sua produção de plantas 1 nível.",
 
     "Industrial Center": "Centro Industrial",
-    "Action: Spend 7 MC to increase your steel production 1 step.": "Ação: gaste 7 M$ para aumentar sua produção de aço 1 nível.",
+    "Action: Spend 7 M€ to increase your steel production 1 step.": "Ação: gaste 7 M$ para aumentar sua produção de aço 1 nível.",
     "Place this tile adjacent to a city tile.": "Coloque este tile ADJACENTE A UM TILE DE CIDADE.",
 
     "Hired Raiders": "Mercenários Sobre Rodas",
-    "Steal up to 2 steel, or 3 MC from any player.": "Roube até 2 de aço ou 3 M$ de qualquer jogador.",
+    "Steal up to 2 steel, or 3 M€ from any player.": "Roube até 2 de aço ou 3 M$ de qualquer jogador.",
 
     "Hackers": "Hackers",
     "Decrease your energy production 1 step and any MC production 2 steps. increase your MC production 2 steps.": "Diminua sua produção de energia 1 nível e a produção de M$ de qualquer jogador 2 níveis. Aumente sua produção de M$ 2 níveis.",
@@ -625,7 +625,7 @@
 
     "Livestock": "Pecuária",
     "(Requires 9% oxygen. Decrease your Plant production 1 step and increase your MC production 2 steps)": "Requer 9% de oxigênio. Diminua sua produção de plantas 1 nível e aumente sua produção de M$ em 2.",
-   
+
     "Olympus Conference": "Conferência de Olimpo",
     "When you play a Science tag, including this, either add a Science resource to this card, or remove a Science resource from this card to draw a card.": "Quando você joga um ícone de ciência, incluindo este, você pode ou adicionar um recurso de ciência a esta carta, ou retirar dela um recurso de ciência para comprar uma carta.",
 
@@ -633,10 +633,10 @@
     "Requires two cities in play. Increase your MC up 1 step.": "Requer 2 tiles de cidade em jogo. Aumente sua produção de M$ 1 nível.",
 
     "Aquifer Pumping": "Bombeamento em Aquífero",
-    "Action: Spend 8 MC to place 1 ocean tile. STEEL MAY BE USED as if you were playing a Building card.": "Ação: gaste 8 M$ para colocar um tile de oceano. AÇO OIDE SER USADO, como se estivesse jogando uma carta de construção.",
+    "Action: Spend 8 M€ to place 1 ocean tile. STEEL MAY BE USED as if you were playing a Building card.": "Ação: gaste 8 M$ para colocar um tile de oceano. AÇO OIDE SER USADO, como se estivesse jogando uma carta de construção.",
 
     "Flooding": "Inundação",
-    "Place an ocean tile. IF THERE ARE TILES ADJACENT TO THIS OCEAN TILE, YOU MAY REMOVE 4 MC FROM THE OWNER OF ONE OF THOSE TILES.": "Coloque um tile de oceano. SE HÁ QUALQUER TILE ADJACENTE A ESTE TILE DE OCEANO, VOCÊ PODE RETIRAR 4 M$ DO PROPRIETÁRIO DE UMA DELES.",
+    "Place an ocean tile. IF THERE ARE TILES ADJACENT TO THIS OCEAN TILE, YOU MAY REMOVE 4 M€ FROM THE OWNER OF ONE OF THOSE TILES.": "Coloque um tile de oceano. SE HÁ QUALQUER TILE ADJACENTE A ESTE TILE DE OCEANO, VOCÊ PODE RETIRAR 4 M$ DO PROPRIETÁRIO DE UMA DELES.",
 
     "Energy Saving": "Economia de energia",
     "Increase your Energy production 1 step for each City tile in play.": "Aumente sua produção de energia 1 nível por cada tile de cidade em jogo.",
@@ -657,7 +657,7 @@
     "Action: Spend any amount of Energy and gain that amount of MC.": "Ação: gaste qualquer quantidade de energia para ganhar a mesma quantidade em M$.",
 
     "Indentured Workers": "Servidão por Contrato",
-    "The next card you play this generation costs 8 MC less.": "A próxima carta que você jogar nesta geração custa 8 M$ a menos.",
+    "The next card you play this generation costs 8 M€ less.": "A próxima carta que você jogar nesta geração custa 8 M$ a menos.",
 
     "Lagrange Observatory": "Observatório Lagrange",
     "Draw 1 card.": "Compre 1 carta.",
@@ -670,7 +670,7 @@
     "1 VP for every 3rd City in play.": "1 PV a cada três cidades em jogo.",
 
     "Restricted Area": "Área Restrita",
-    "Action: Spend 2 MC to draw a card.": "Ação: gaste 2 M$ para comprar 1 carta.",
+    "Action: Spend 2 M€ to draw a card.": "Ação: gaste 2 M$ para comprar 1 carta.",
 
     "Place this tile.": "Coloque este tile.",
 
@@ -682,7 +682,7 @@
     "Decrease any Energy production 1 step and increase your own 1 step.": "Diminua qualquer produção de energia 1 nível e aumente a sua em 1 nível.",
 
     "Underground Detonations": "Explosões Subterrâneas",
-    "Action: Spend 10MC to increase your heat production 2 steps.": "Ação: gaste 10 M$ para aumentar sua produção de calor 2 níveis.",
+    "Action: Spend 10M€ to increase your heat production 2 steps.": "Ação: gaste 10 M$ para aumentar sua produção de calor 2 níveis.",
 
     "Soletta": "Soletta",
     "Increase your heat production 7 steps.": "Aumente sua produção de calor 7 níveis.",
@@ -727,6 +727,6 @@
   "Oxygen must be 4% or lower. Draw two cards.": "O nível de oxigênio deve estar em 4% ou menos. Compre 2 cartas.",
   "After being played, when you perform an action, the wild tag counts as any tag of your choice.": "Depois de jogada, o ícone curinga vale qualquer ícone que você escolher ao fazer uma ação.",
   "Decrease your energy production 1 step and increase your MC production 2 steps. Place a City Tile on a VOLCANIC AREA regardless of adjacent cities.": "Diminua sua produção de eneriga 1 nível e aumente sua produção de M$ 2 níveis. Coloque um tile de cidade numa ÁREA VULCÂNICA, não importando cidades adjacentes.",
-  "Effect: When paying for a plant card, microbes here may be used as 2 MC each.": "Efeito: Quando você jogar uma carta de planta, micróbios aqui podem ser usados como 2 M$ cada.",
+  "Effect: When paying for a plant card, microbes here may be used as 2 M€ each.": "Efeito: Quando você jogar uma carta de planta, micróbios aqui podem ser usados como 2 M$ cada.",
   "Temperature must be -20 C or lower.": "A temperatura deve ser de -20℃ ou menos."
 }

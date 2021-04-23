@@ -1,8 +1,8 @@
 {
     "Pharmacy Union": "Pharmacy Union",
-    "You start with 54 MC . Draw a Science card.": "Вы начинаете с 54МС. доберите карту с меткой Науки.",
-    "Effect: When ANY microbe tag is played, add a disease here and lose 4 MC or as much as possible. When you play a science tag, remove a disease here and gain 1 TR OR if there are no diseases here, you MAY put this card face down in your EVENTS PILE to gain 3 TR.": "Эффект: Когда разыгрывается любая метка Микроб, добавьте сюда болезнь. Когда вы разыгрываете метку Науки удалите болезнь отсюда и получите 1 РТ ИЛИ если на этой карте нет болезней можете однократно получить 3 РТ",
-    "You start with 54 MC . When this corporation is revealed, draw a Science card.": "Вы начинаете с 54МС. Когда корпорация входит в игру доберите карту с меткой Науки",
+    "You start with 54 M€ . Draw a Science card.": "Вы начинаете с 54МС. доберите карту с меткой Науки.",
+    "Effect: When ANY microbe tag is played, add a disease here and lose 4 M€ or as much as possible. When you play a science tag, remove a disease here and gain 1 TR OR if there are no diseases here, you MAY put this card face down in your EVENTS PILE to gain 3 TR.": "Эффект: Когда разыгрывается любая метка Микроб, добавьте сюда болезнь. Когда вы разыгрываете метку Науки удалите болезнь отсюда и получите 1 РТ ИЛИ если на этой карте нет болезней можете однократно получить 3 РТ",
+    "You start with 54 M€ . When this corporation is revealed, draw a Science card.": "Вы начинаете с 54МС. Когда корпорация входит в игру доберите карту с меткой Науки",
     "Effect: When ANY microbe tag is played, add a disease here and lose 4 MC. When you play a science tag, remove a disease here and gain 1 TR OR if there are no diseases here, you may turn this card face down to gain 3 TR": "Эффект: Когда разыгрывается любая метка Микроб, добавьте сюда болезнь. Когда вы разыгрываете метку Науки удалите болезнь отсюда и получите 1 РТ ИЛИ если на этой карте нет болезней можете однократно получить 3 РТ",
 
     "Comet Aiming": "Обстрел кометами",
@@ -70,7 +70,7 @@
     "Decrease your Energy production 4 steps and increase your Plant production 2 steps. Raise your TR 3 steps and place this tile.": "Уменьшите своё производство энергии на 4, увеличьте свое производство растений на 2. Увеличьте своё РТ на 3 и разместите этот тайл",
 
     "Orbital Cleanup": "Очистка орбиты",
-    "Action: Gain 1 MC per Science tag you have.": "Действие: Получите 1 МС за каждую свою метку Науки",
+    "Action: Gain 1 M€ per Science tag you have.": "Действие: Получите 1 МС за каждую свою метку Науки",
     "Decrease your M€ production 2 steps.": "Уменьшите своё производство МС на 2",
 
     "Law Suit": "Судебный иск",
@@ -89,7 +89,7 @@
     "STEAL": "Украдите",
 
     "Advertising": "Реклама",
-    "Effect: When you play a card with a basic cost of 20 MC or more, increase your M€ production 1 step.": "Эффект: Играя карту с базовой стоимостью 20 или дороже, повышайте своё производство МС на 1",
+    "Effect: When you play a card with a basic cost of 20 M€ or more, increase your M€ production 1 step.": "Эффект: Играя карту с базовой стоимостью 20 или дороже, повышайте своё производство МС на 1",
 
     "Rego Plastics": "Регопластик",
     "Effect: Your steel resources are worth 1 M€ extra.": "Эффект: Ваша сталь стоит на 1 МС дороже",
@@ -134,10 +134,10 @@
     "Splice": "Splice",
     "You start with 44 MC. As your first action, reveal cards until you have revealed a microbe tag. Take it and discard the rest.": "Вы начинаете с 44 МС. Первым действием доберите карту с меткой бактерии",
     "Effect: when a microbe tag is played, incl. this, THAT PLAYER gains 2 MC, or adds a microbe to THAT card, and you gain 2 MC.":
-    "Каждый игрок разыгрывающий карту с меткой бактерии (вкл. эту) получает 2 MC или добавляет на ТУ карту бактерию, а вы получаете 2 MC",
+    "Каждый игрок разыгрывающий карту с меткой бактерии (вкл. эту) получает 2 M€ или добавляет на ТУ карту бактерию, а вы получаете 2 MC",
 
     "Recyclon": "Recyclon",
-    "You start with 38 MC and 1 steel production.": "Вы начинаете c 36 МС и 1 дополнительным уровнем производства стали",
+    "You start with 38 M€ and 1 steel production.": "Вы начинаете c 36 МС и 1 дополнительным уровнем производства стали",
     "Effect: When you play a building tag, including this, gain 1 microbe to this card, or remove 2 microbes here and raise your plant production 1 step.":
     "Когда вы разыгрываете метку строителя, включая эту, добавьте сюда 1 бактерию, или удалите отсюда 2 бактерии, чтобы повысить ваше производство растений на 1",
 
@@ -150,17 +150,17 @@
     "Mons Insurance": "Mons Insurance",
     "You start with 48 MC. Increase your M€ production 4 steps. ALL OPPONENTS DECREASE THEIR M€ production 2 STEPS. THIS DOES NOT TRIGGER THE EFFECT BELOW.":
     "Вы начинаете c 48 МС. Увеличьте ваш доход на 4. Все противники уменьшают свой доход на 2, но это уменьшение не включает эффект с этой карты",
-    "Effect: When a player causes another player to decrease production or lose resources, pay 3MC to the victim, or as much as possible.":
+    "Effect: When a player causes another player to decrease production or lose resources, pay 3M€ to the victim, or as much as possible.":
     "Когда один из игроков заставляет другого игрока потерять производство или ресурсы, заплатите жертве 3 МС или столько сколько у вас есть",
 
     "Factorum": "Factorum",
     "You start with 37 MC. Increase your steel production 1 step.":
     "Вы начинаете c 37 МС и 1 дополнительным уровнем производства стали",
-    "Action: Increase your energy production 1 step IF YOU HAVE NO ENERGY RESOURCES, or spend 3MC to draw a building card.":
+    "Action: Increase your energy production 1 step IF YOU HAVE NO ENERGY RESOURCES, or spend 3M€ to draw a building card.":
     "Действие: Увеличьте ваше производство энергии, если у вас нет ресурсов-энергии или потратьте 3 MC, чтобы добрать карту с меткой строителя",
 
     "Arcadian Communities": "Arcadian Communities",
-    "You start with 40 MC and 10 steel. AS YOUR FIRST ACTION, PLACE A COMMUNITY [PLAYER MARKER] ON A NON-RESERVED AREA.":
+    "You start with 40 M€ and 10 steel. AS YOUR FIRST ACTION, PLACE A COMMUNITY [PLAYER MARKER] ON A NON-RESERVED AREA.":
     "Вы начинаете c 37 МС и 10 стали. Первым действием разместите СООБЩЕСТВО [свой кубик] на незарезервированном месте на карте",
     "ACTION: PLACE A COMMUNITY (PLAYER MARKER) ON A NON-RESERVED AREA ADJACENT TO ONE OF YOUR TILES OR MARKED AREAS":
     "Действие: Разместите СООБЩЕСТВО [свой кубик] на незарезервированном месте по соседству c другим вашим тайлом или СООБЩЕСТОВОМ",
@@ -168,7 +168,7 @@
     "Эффект: Никто кроме вас не может размещать тайлы на места с вашими СООБЩЕСВАМИ. Когда вы размещаете тайл в таком месте получайте 3 MC",
 
     "Astrodrill": "Astrodrill",
-    "You start with 38 MC and 3 asteroid resources.": "Вы начинаете c 38 МС и 3 астероидами",
+    "You start with 38 M€ and 3 asteroid resources.": "Вы начинаете c 38 МС и 3 астероидами",
     "Action: Add an asteroid resource to ANY card OR gain any standard resource, OR remove an asteroid resource from this card to gain 3 titanium.":
     "Действие: Добавьте астероид на ЛЮБУЮ карту или получите любой стандартный ресурс. ИЛИ удалите отсюда астероид и получите 3 титана",
 

@@ -23,7 +23,7 @@ export class TheGrandLunaCapitalGroup implements CorporationCard {
 
   public readonly metadata: CardMetadata = {
     description: {
-      text: 'You start with 32 MC and 1 titanium. As your first action, place a colony tile on the Moon and raise the Colony Rate 1 step.',
+      text: 'You start with 32 M€ and 1 titanium. As your first action, place a colony tile on the Moon and raise the Colony Rate 1 step.',
       align: 'left',
     },
     cardNumber: 'MC7',

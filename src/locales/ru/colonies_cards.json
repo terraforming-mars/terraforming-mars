@@ -17,7 +17,7 @@
 
     "Conscription": "Мобилизация",
     "next card": "След. карта",
-    "Requires 2 Earth tags. The next card you play this generation costs 16 MC less.": "Требует 2 метки земли. Заплатите за следующую карту, которую сыграете в этом поколении на 16 МС меньше",
+    "Requires 2 Earth tags. The next card you play this generation costs 16 M€ less.": "Требует 2 метки земли. Заплатите за следующую карту, которую сыграете в этом поколении на 16 МС меньше",
 
     "Corona Extractor": "Сбор солнечной плазмы",
     "Requires 4 science tags. Increase your energy production 4 steps.": "Требует 4 метки Науки. Увеличьте своё производство энергии на 4",
@@ -68,7 +68,7 @@
 
     "Jupiter Floating Station": "Станция Юпитера",
     "Action: Add 1 floater to a JOVIAN CARD.": "Дествие: Добавьте 1 аэростат на карту с меткой Юпитера",
-    "Action: Gain 1 MC for every floater here [MAX 4].": "Дествие: Получите 1 МС за каждый аэростат здесь, но не больше 4",
+    "Action: Gain 1 M€ for every floater here [MAX 4].": "Дествие: Получите 1 МС за каждый аэростат здесь, но не больше 4",
     "Requires 3 Science tags.": "Требует 3 метки Науки",
 
     "Luna Governor": "губернатор Луны",
@@ -85,7 +85,7 @@
 
     "Martian Zoo": "Марсианский зоопарк",
     "Effect: When you play an Earth tag, place an animal here.": "Эффект: Разыгрывая метку Земли, добавляйте сюда 1 животное",
-    "Action: Gain 1MC per animal here.": "Действие: Получите 1МС за каждое животное здесь",
+    "Action: Gain 1M€ per animal here.": "Действие: Получите 1МС за каждое животное здесь",
     "Requires 2 city tiles in play.": "Требует 2 города в игре",
 
     "Mining Colony": "Шахтерская колония",
@@ -140,7 +140,7 @@
     "1VP per 2 colonies in play.": "1 ПО за каждые 2 колонии в игре",
 
     "Spin-off Department": "Дочерний отдел",
-    "Effect: WHEN PLAYING A CARD WITH A BASIC COST OF 20MC OR MORE, draw a card.": "Эффект: Разыгрывая карту с базовой стоимостью 20 и больше, добирайте 1 карту",
+    "Effect: WHEN PLAYING A CARD WITH A BASIC COST OF 20M€ OR MORE, draw a card.": "Эффект: Разыгрывая карту с базовой стоимостью 20 и больше, добирайте 1 карту",
     "Increase your M€ production 2 steps.": "Увеличьте своё производство МС на 2",
 
     "Sub-Zero Salt Fish": "Ледяная рыба",

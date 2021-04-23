@@ -25,7 +25,7 @@ export class Psychrophiles extends Card implements IActionCard, IProjectCard, IR
           b.action('Add 1 microbe to this card.', (eb) => {
             eb.empty().startAction.microbes(1);
           }).br;
-          b.effect('When paying for a plant card, microbes here may be used as 2 MC each.', (eb) => {
+          b.effect('When paying for a plant card, microbes here may be used as 2 M€ each.', (eb) => {
             eb.plants(1).played.startEffect.microbes(1).equals().megacredits(2);
           });
         }),

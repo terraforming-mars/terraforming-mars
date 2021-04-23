@@ -22,7 +22,7 @@ export class Playwrights extends Card implements CorporationCard {
 
       metadata: {
         cardNumber: 'R40',
-        description: 'You start with 38 MC and 1 Energy production.',
+        description: 'You start with 38 M€ and 1 Energy production.',
         renderData: CardRenderer.builder((b) => {
           b.br.br;
           b.megacredits(38).production((pb) => pb.energy(1));

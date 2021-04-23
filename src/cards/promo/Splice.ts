@@ -73,10 +73,10 @@ export class Splice extends Card implements CorporationCard {
       return undefined;
     });
 
-    // Splice owner get 2MC per microbe tag
+    // Splice owner get 2M€ per microbe tag
     player.game.getCardPlayer(this.name).megaCredits += megacreditsGain;
 
-    // Card player choose between 2 MC and a microbe on card, if possible
+    // Card player choose between 2 M€ and a microbe on card, if possible
     if (card.resourceType !== undefined && card.resourceType === ResourceType.MICROBE) {
       return new OrOptions(addResource, getMegacredits);
     } else {

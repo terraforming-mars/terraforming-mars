@@ -14,7 +14,7 @@
     "Increase your M€ production 1 step per CARD WITH NO TAGS, including this.": "Aumenta tu producción de M€ 1 nivel por cada CARTA SIN SÍMBOLOS (en la esquina superior derecha), incluyendo esta.",
 
     "Conscription": "Reclutamiento",
-    "Requires 2 Earth tags. The next card you play this generation costs 16 MC less.": "Requiere 2 símbolos de Tierra. La próxima carta que juegues esta generación cuesta 16 M€ menos.",
+    "Requires 2 Earth tags. The next card you play this generation costs 16 M€ less.": "Requiere 2 símbolos de Tierra. La próxima carta que juegues esta generación cuesta 16 M€ menos.",
 
     "Corona Extractor": "Extractor de Corona Solar",
     "Requires 4 science tags. Increase your energy production 4 steps.": "Requiere 4 símbolos de ciencia. Aumenta tu producción de energía 4 niveles.",
@@ -59,7 +59,7 @@
 
     "Jupiter Floating Station": "Estación Flotante de Júpiter",
     "Action: Add 1 floater to a JOVIAN CARD.": "Acción: añade 1 flotador a una CARTA JOVIANA.",
-    "Action: Gain 1 MC for every floater here [MAX 4].": "Acción: Gana 1 M€ por cada flotador en esta carta (máx. 4)",
+    "Action: Gain 1 M€ for every floater here [MAX 4].": "Acción: Gana 1 M€ por cada flotador en esta carta (máx. 4)",
     "Requires 3 Science tags.": "Requiere 3 símbolos de ciencia.",
 
     "Luna Governor": "Gobernador de la Luna",
@@ -76,7 +76,7 @@
 
     "Martian Zoo": "Zoo Marciano",
     "Effect: When you play an Earth tag, place an animal here.": "Efecto: al jugar una carta tipo Tierra, coloca un animal en esta carta.",
-    "Action: Gain 1MC per animal here.": "Acción: obtén 1 M€ por cada animal en esta carta.",
+    "Action: Gain 1M€ per animal here.": "Acción: obtén 1 M€ por cada animal en esta carta.",
     "Requires 2 city tiles in play.": "Requiere 2 losetas de ciudad en juego.",
 
     "Mining Colony": "Colonia Minera",
@@ -132,7 +132,7 @@
     "1VP per 2 colonies in play.": "1 PV por cada 2 colonias en juego.",
 
     "Spin-off Department": "Departamento Filial",
-    "Effect: WHEN PLAYING A CARD WITH A BASIC COST OF 20MC OR MORE, draw a card.": "Efecto: al jugar una carta con un coste básico de 20 M€ o más, roba 1 carta.",
+    "Effect: WHEN PLAYING A CARD WITH A BASIC COST OF 20M€ OR MORE, draw a card.": "Efecto: al jugar una carta con un coste básico de 20 M€ o más, roba 1 carta.",
     "Increase your M€ production 2 steps.": "Incrementa tu producción de M€ 2 niveles.",
 
     "Sub-zero Salt Fish": "Pez de Agua Salada Fría",

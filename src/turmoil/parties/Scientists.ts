@@ -32,7 +32,7 @@ class ScientistsBonus01 implements Bonus {
 
 class ScientistsBonus02 implements Bonus {
   id = 'sb02';
-  description: string = 'Gain 1 MC for every 3 cards in hand';
+  description: string = 'Gain 1 M€ for every 3 cards in hand';
   isDefault = false;
 
   grant(game: Game) {

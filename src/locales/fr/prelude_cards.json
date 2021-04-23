@@ -30,7 +30,7 @@
     "Increase your plant production 1 step. Play a card from hand, ignoring global requirements.": "Augmentez votre production de plantes de 1. JOUEZ UNE CARTE DE VOTRE MAIN, EN IGNORANT LES PRÉREQUIS GLOBAUX.",
 
     "Eccentric Sponsor": "Mécène Excentrique",
-    "Play 1 card from hand with a 25 MC reduction.": "JOUEZ 1 CARTE DE VOTRE MAIN, SON COÛT EST RÉDUIT DE 25 M€.",
+    "Play 1 card from hand with a 25 M€ reduction.": "JOUEZ 1 CARTE DE VOTRE MAIN, SON COÛT EST RÉDUIT DE 25 M€.",
 
     "Experimental Forest": "Forêt Expérimentale",
     "Place 1 Greenery Tile and raise oxygen 1 step. Reveal cards until you reveal two cards with plant tags on them. Take them into your hand and discard the rest.": "Placez 1 tuile Forêt et augmentez l'oxygène de 1. Révélez des cartes de la pioche jusqu'à avoir 2 cartes avec un badge Plante : ajoutez ces cartes à votre main et défaussez les autres.",
@@ -116,8 +116,8 @@
     "PSYCHROPHILES": "Psychrophiles",
     "Psychrophiles": "Psychrophiles",
     "Action: Add 1 microbe to this card.": "Action: Ajoutez un microbe sur cette carte.",
-    "Effect: When paying for a plant card, microbes here may be used as 2 MC each.": "Effet: Vous pouvez réduire de 2 M€ le coût de vos cartes Plantes pour chaque microbe de cette carte dépensé.",
-    "Action: Add 1 microbe to this card.) (Effect: When paying for a plant card, microbes here may be used as 2 MC each.": "Action: Ajoutez un microbe sur cette carte.) (Effet: Vous pouvez réduire de 2 M€ le coût de vos cartes Plantes pour chaque microbe de cette carte dépensé.",
+    "Effect: When paying for a plant card, microbes here may be used as 2 M€ each.": "Effet: Vous pouvez réduire de 2 M€ le coût de vos cartes Plantes pour chaque microbe de cette carte dépensé.",
+    "Action: Add 1 microbe to this card.) (Effect: When paying for a plant card, microbes here may be used as 2 M€ each.": "Action: Ajoutez un microbe sur cette carte.) (Effet: Vous pouvez réduire de 2 M€ le coût de vos cartes Plantes pour chaque microbe de cette carte dépensé.",
     "Temperature must be -20 C or lower.": "La température doit être de -20°C ou moins.",
 
     "RESEARCH COORDINATION": "Coordination de la Recherche",

@@ -22,7 +22,7 @@ describe('TopsoilContract', function() {
     expect(player.plants).to.eq(3);
   });
 
-  it('Gives 1 MC whenever player gains a microbe', function() {
+  it('Gives 1 M€ whenever player gains a microbe', function() {
     player.playedCards.push(card);
 
     // Get MC when player gains microbes

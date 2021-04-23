@@ -23,7 +23,7 @@ export class Recyclon extends Card implements CorporationCard, IResourceCard {
 
       metadata: {
         cardNumber: 'R26',
-        description: 'You start with 38 MC and 1 steel production.',
+        description: 'You start with 38 M€ and 1 steel production.',
         renderData: CardRenderer.builder((b) => {
           b.br.br;
           b.megacredits(38).nbsp.production((pb) => pb.steel(1));

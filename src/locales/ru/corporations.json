@@ -4,7 +4,7 @@
 
     "Credicor": "Credicor",
     "You start with 57 MC.": "Вы начинаете с 57 MC",
-    "Effect: After you pay for a card or standard project with a basic cost of 20MC or more, you gain 4MC.": "Эффект: Заплатив за карту или стандартный проект 20 MC или больше, получите 4 МС",
+    "Effect: After you pay for a card or standard project with a basic cost of 20M€ or more, you gain 4MC.": "Эффект: Заплатив за карту или стандартный проект 20 M€ или больше, получите 4 МС",
 
     "Ecoline": "Ecoline",
     "You start with 2 plant production, 3 plants, and 36 MC.": "Вы начинаете c 2 уровнями производства растений, 3 растениями и 36 МС",
@@ -59,7 +59,7 @@
     "Effect: When you play a card with a NON-NEGATIVE VP icon, including this, gain 3MC.": "Эффект: Каждый раз, разыгрывая карту с не отрицательными ПО, включая эту, получайте 3 MC",
 
     "Valley Trust": "Valley Trust",
-    "Effect: When you play a Science tag, you pay 2MC less for it.": "Эффект: Платите на 3 MC меньше за каждую метку науки на разыгрываемых картах",
+    "Effect: When you play a Science tag, you pay 2M€ less for it.": "Эффект: Платите на 3 M€ меньше за каждую метку науки на разыгрываемых картах",
     "": ""
 
 }

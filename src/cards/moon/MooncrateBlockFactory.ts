@@ -18,7 +18,7 @@ export class MooncrateBlockFactory extends Card {
         description: 'Requires 1 mine on the Moon.',
         cardNumber: 'M38',
         renderData: CardRenderer.builder((b) => {
-          b.effect('When you pay for a Lunar standard project, you spend 4MC less.', (eb) => {
+          b.effect('When you pay for a Lunar standard project, you spend 4M€ less.', (eb) => {
             eb.plate('Lunar standard projects').startEffect.megacredits(-4);
           });
         }),

@@ -97,7 +97,7 @@
     "Decrease your M€ production 2 steps and increase your heat production and Energy production 2 steps each.": "降低你的MC产能2级并增加你的热能产能和电力产产能各2级",
 
     "Optimal Aerobraking": "最优的空气动力制动",
-    "Effect: When you play a Space Event, you gain 3 MC and 3 heat.": "效果: 当你打出同时带有空间标志和事件标志的牌时,获得3MC和3热能资源",
+    "Effect: When you play a Space Event, you gain 3 M€ and 3 heat.": "效果: 当你打出同时带有空间标志和事件标志的牌时,获得3MC和3热能资源",
 
     "Underground City": "地下城",
     "Place a City tile. Decrease your Energy production 2 steps and increase your steel production 2 steps.": "放置一个城市版块。降低你的电力产能2级并提升你的钢铁产能2级",
@@ -593,7 +593,7 @@
   "Action: Spend any amount of Energy and gain that amount of MC.": "花费X枚电力资源，获得X枚MC资源，X由你决定",
 
   "Indentured Workers": "合同工",
-  "The next card you play this generation costs 8 MC less.": "本回合你打出下一张卡牌所需支付的费用减少8",
+  "The next card you play this generation costs 8 M€ less.": "本回合你打出下一张卡牌所需支付的费用减少8",
 
   "Lagrange Observatory": "拉格朗日观察点",
   "Draw 1 card.": "抽取一张牌",
@@ -615,7 +615,7 @@
   "Decrease any Energy production 1 step and increase your own 1 step.": "任一玩家电力产量-1 你的电力产量+1",
 
   "Underground Detonations": "地下爆破",
-  "Action: Spend 10MC to increase your heat production 2 steps.": "行动：花费10枚MC资源 热能产量+2",
+  "Action: Spend 10M€ to increase your heat production 2 steps.": "行动：花费10枚MC资源 热能产量+2",
 
   "Soletta": "索莱塔",
   "Increase your heat production 7 steps.": "热能产量+7",

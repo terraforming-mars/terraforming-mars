@@ -74,7 +74,7 @@ describe('Reds', function() {
     expect(redsPolicy.canAct(player)).to.be.false;
   });
 
-  it('Ruling policy 4: When you raise a global parameter, decrease your MC production 1 step per step raised if possible', function() {
+  it('Ruling policy 4: When you raise a global parameter, decrease your M€ production 1 step per step raised if possible', function() {
     TestingUtils.setRulingPartyAndRulingPolicy(game, turmoil, reds, reds.policies[3].id);
 
     game.increaseOxygenLevel(player, 1);

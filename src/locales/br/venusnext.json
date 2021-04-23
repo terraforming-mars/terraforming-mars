@@ -17,7 +17,7 @@
   "Requires Vênus, Earth and Jovian tags. Increase your steel production 2 steps.":"Requer um ícone de Vênus, um de Terra e um Joviano. Aumente a sua produção de aço em 2 níveis.",
 
   "Corroder Suits":"Trajes Anticorrosão",
-  "Increase your MC production 2 steps. Add 1 resource to ANY Vênus CARD.":"Aumente a sua produção de M$ em 2 níveis. Adicione 1 recurso à qualquer CARTA DE VÊNUS.",
+  "Increase your M€ production 2 steps. Add 1 resource to ANY Vênus CARD.":"Aumente a sua produção de M$ em 2 níveis. Adicione 1 recurso à qualquer CARTA DE VÊNUS.",
 
   "Vênusian Insects":"Insetos Venusianos",
   "Action: add 1 Microbe to this card.":"Ação: adicione 1 micróbio à esta carta.",
@@ -39,13 +39,13 @@
   "Discard 1 card from your hand and THEN draw 3 cards. All OPPONENTS draw 1 card.":"Descarte 1 carta de a sua mão e compre 3 cartas. Todos os OPONENTES recebem uma carta.",
 
   "Sulphur Exports":"Exportações de Enxofre",
-  "Increase Vênus 1 step. Increase your MC production 1 step for each Vênus tag you have, including this.":"Aumente a terraformação de Vênus em 1 nível. Aumente a sua produção de M$ 1 em nível para cada ícone de Vênus que tiver, incluindo este.",
+  "Increase Vênus 1 step. Increase your M€ production 1 step for each Vênus tag you have, including this.":"Aumente a terraformação de Vênus em 1 nível. Aumente a sua produção de M$ 1 em nível para cada ícone de Vênus que tiver, incluindo este.",
 
   "Vênus Soils":"Solo Venusiano",
   "Raise Vênus 1 step. Increase your Plant production 1 step. Add 2 Microbes to ANOTHER card":"Aumente a terraformação de Vênus em 1 nível. Aumente a sua produção de planta em 1 nível. Adicione 2 micróbios a OUTRA carta.",
 
   "Terraforming Contract":"Contrato de Terraformação",
-  "Requires that you have at least 25 TR. Increase your MC production 4 steps.":"Requer que você tenha pelo menos 25 de IT. Aumente a sua produção de M$ 4 em níveis.",
+  "Requires that you have at least 25 TR. Increase your M€ production 4 steps.":"Requer que você tenha pelo menos 25 de IT. Aumente a sua produção de M$ 4 em níveis.",
 
   "Solarnet":"Solarnet",
   "Requires Vênus, Earth and Jovian tags. Draw 2 cards.":"Requer um ícone de Vênus, um de Terra e um Joviano. Compre 2 cartas.",
@@ -119,13 +119,13 @@
 
   "Freyja Biodomes":"Biodomos de Freya",
   "10% Vênus":"10% Vênus",
-  "Requires 10% on the Vênus track. Add 2 Microbes or 2 Animals to another Vênus card. Production: energy -1, MC +2.":"Requer 10% na terraformação de Vênus. Adicione 2 micróbios ou 2 animais à qualquer OUTRA CARTA DE VÊNUS. Reduza a sua produção de energía em 1 nível e aumente a sua produção de M$ em 2 níveis.",
+  "Requires 10% on the Vênus track. Add 2 Microbes or 2 Animals to another Vênus card. Production: energy -1, M€ +2.":"Requer 10% na terraformação de Vênus. Adicione 2 micróbios ou 2 animais à qualquer OUTRA CARTA DE VÊNUS. Reduza a sua produção de energía em 1 nível e aumente a sua produção de M$ em 2 níveis.",
 
   "Giant Solar Shade":"Proteção Solar Gigante",
   "Raise Vênus 3 steps.":"Aumente a terraformação de Vênus em 3 níveis.",
 
   "Gyropolis":"Girópolis",
-  "Decrease your energy production 2 steps. Increase your MC production 1 step for each Vênus and Earth tag you have. Place a City tile.":"Reduza a sua produção de energia em 2 níveis. Aumente a sua produção de M$ em 1 nível para cada ícone de Vênus e de Terra que possuir. Coloque uma cidade.",
+  "Decrease your energy production 2 steps. Increase your M€ production 1 step for each Vênus and Earth tag you have. Place a City tile.":"Reduza a sua produção de energia em 2 níveis. Aumente a sua produção de M$ em 1 nível para cada ícone de Vênus e de Terra que possuir. Coloque uma cidade.",
 
   "Io Sulphur Research":"Pesquisa de Enxofre em Ío",
   "Draw 1 card, or draw 3 if you have at least 3 Vênus tags.":"Compre 1 carta, ou compre 3 cartas se tiver pelo menos 3 ícones de Vênus.",
@@ -135,10 +135,10 @@
   "Requires Vênus 8%. Increase your titanium production 1 step.":"Requer 8% na terraformação de Vênus. Aumente a sua produção de titânio em 1 nível.",
 
   "Luna Metropolis":"Metrópolis Luna",
-  "Increase your MC production 1 step for each Earth tag you have, including this. Place a City tile on the RESERVED AREA":"Aumente a sua produção de M$ em 1 nível para cada ícone de Terra que tiver, incluindo este. Coloque uma cidade NA ÁREA RESERVADA.",
+  "Increase your M€ production 1 step for each Earth tag you have, including this. Place a City tile on the RESERVED AREA":"Aumente a sua produção de M$ em 1 nível para cada ícone de Terra que tiver, incluindo este. Coloque uma cidade NA ÁREA RESERVADA.",
 
   "Local Shading":"Sombra Local",
-  "Action: Spend 1 Floater here to raise your MC production 1 step.":"Ação: Gaste 1 flutuador desta carta para aumentar a sua produção de M$ em 1 nível.",
+  "Action: Spend 1 Floater here to raise your M€ production 1 step.":"Ação: Gaste 1 flutuador desta carta para aumentar a sua produção de M$ em 1 nível.",
 
   "Maxwell Base":"Base Maxwell",
   "Action: Add 1 resource to ANOTHER Vênus CARD.":"Ação: adicione 1 recurso à OUTRA CARTA DE VÊNUS.",
@@ -146,15 +146,15 @@
 
   "Sister Planet Support":"Suporte do Planeta Vizinho",
   "Vênus Earth":"",
-  "Requires Vênus and Earth tags. Increase your MC production 3 steps.":"Requer um ícone de Vênus e um de Terra. Aumente a sua produção de M$ em 3 níveis.",
+  "Requires Vênus and Earth tags. Increase your M€ production 3 steps.":"Requer um ícone de Vênus e um de Terra. Aumente a sua produção de M$ em 3 níveis.",
 
   "Stratopolis":"Estratópolis",
   "Action: Add 2 floaters to ANY Vênus CARD.":"Ação: adicione 2 flutuadores à qualquer CARTA DE VÊNUS.",
   "1 VP for every 3rd Floater on this card.":"1 PV para cada 3 flutuadores nesta carta.",
-  "Requires 2 science tags. Increase your MC production 2 steps. Place a City tile ON THE RESERVED AREA":"Requer 2 ícones de ciência. Aumente a sua produção de M$ em 2 níveis. Coloque uma cidade NA ÁREA RESERVADA.",
+  "Requires 2 science tags. Increase your M€ production 2 steps. Place a City tile ON THE RESERVED AREA":"Requer 2 ícones de ciência. Aumente a sua produção de M$ em 2 níveis. Coloque uma cidade NA ÁREA RESERVADA.",
 
   "Vênus Governor":"Governador de Vênus",
-  "Requires 2 Vênus tags. Increase your MC production 2 steps.":"Requer 2 ícones de Vênus. Aumente a sua produção de M$ em 2 níveis.",
+  "Requires 2 Vênus tags. Increase your M€ production 2 steps.":"Requer 2 ícones de Vênus. Aumente a sua produção de M$ em 2 níveis.",
 
   "Vênusian Animals":"Animais Venusianos",
   "18% Vênus":"18% Vênus",

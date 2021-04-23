@@ -24,7 +24,7 @@ const TO_STRING_MAP: Map<SpaceBonus, string> = new Map([
   [SpaceBonus.DRAW_CARD, 'Card'],
   [SpaceBonus.HEAT, 'Heat'],
   [SpaceBonus.OCEAN, 'Ocean'],
-  [SpaceBonus.MEGACREDITS, 'MC'],
+  [SpaceBonus.MEGACREDITS, 'M€'],
   [SpaceBonus.ANIMAL, 'Animal'],
   [SpaceBonus.MICROBE, 'Microbe'],
   [SpaceBonus.POWER, 'Power'],

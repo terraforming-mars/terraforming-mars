@@ -7,7 +7,7 @@
     "(Spend 11 M€ to increase your Energy production 1 step.)": "Wydaj 11 MC, aby podnieść swoją produkcję energii o 1 poziom.",
     "Sell Patents": "Sprzedaj patenty",
     "Sell patents": "Sprzedaj patenty",
-    "(Discard any number of cards to gain that amount of MC.)": "Odrzuć z ręki dowolną liczbę kart, aby uzyskać taką samą liczbę MC",
+    "(Discard any number of cards to gain that amount of MC.)": "Odrzuć z ręki dowolną liczbę kart, aby uzyskać taką samą liczbę M€",
     "asteroid": "asteroida",
     "(Spend 14 M€ to raise temperature 1 step.)": "Wydaj 14 MC, aby podnieść Temperaturę o 1 poziom.",
     "Air Scrapping": "Uzdatnianie powietrza",
@@ -15,9 +15,9 @@
     "(Spend 18 M€ to place an ocean tile.)": "Wydaj 18 MC, aby położyć obszar oceanu na planszy.",
 
     "Build Moon Colony": "",
-    "(Spend 22 MC and 1 titanium to place a colony on the moon and raise your M€ production 1 step.)": "",
+    "(Spend 22 M€ and 1 titanium to place a colony on the moon and raise your M€ production 1 step.)": "",
     "Build Moon Mine": "",
-    "(Spend 20 MC and 1 titanium to place a mine on the moon and raise steel production 1 step.)": "",
+    "(Spend 20 M€ and 1 titanium to place a mine on the moon and raise steel production 1 step.)": "",
     "Build Moon Road": "",
-    "(Spend 18 MC and 1 steel to place a road on the moon and raise the Logistics Rate 1 step.)": ""
+    "(Spend 18 M€ and 1 steel to place a road on the moon and raise the Logistics Rate 1 step.)": ""
 }

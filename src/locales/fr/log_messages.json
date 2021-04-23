@@ -33,7 +33,7 @@
     "${0} copied ${1} production with ${2}": "${0} a copié la production de ${1} avec ${2}",
     "${0} placed ${1} tile on row ${2} position ${3}": "${0} a placé une tuile ${1} sur la ligne ${2} position ${3}",
     "${0} gained ${1} ${2}": "${0} a gagné ${1} ${2}",
-    "${0} spent 1 ${1} to gain 7 MC": "${0} a dépensé 1 ${1} pour gagner 7 M€",
+    "${0} spent 1 ${1} to gain 7 M€": "${0} a dépensé 1 ${1} pour gagner 7 M€",
     "${0} removed an animal from ${1}": "${0} a retiré un animal de ${1}",
     "${0} removed a microbe from ${1}": "${0} a retiré un microbe de ${1}",
     "${0} removed a microbe from ${1}'s ${2}": "${0} a retiré un microbe de ${2} de ${1}",

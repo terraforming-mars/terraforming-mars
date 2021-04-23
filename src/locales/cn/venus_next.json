@@ -104,7 +104,7 @@
 
   "Dirigibles":"悬浮艇",
   "Action: Add 1 Floater to ANY card":"行动：在任意一张牌上增加一个云资源。",
-  "Effect: When playing a Venus tag, Floaters here may be used as payment, and are worth 3MC each.":"效果：当你打出一张带有金星标志的卡牌，你可以移除本卡上任意个云资源来支付费用，每个云资源价值3元。",
+  "Effect: When playing a Venus tag, Floaters here may be used as payment, and are worth 3M€ each.":"效果：当你打出一张带有金星标志的卡牌，你可以移除本卡上任意个云资源来支付费用，每个云资源价值3元。",
 
   "Floating Habs":"漂浮舱",
   "Action: Spend 2 M€ to add 1 Floater to ANY card":"行动：花费2MC并在任意一张牌上增加一个云资源",
@@ -139,7 +139,7 @@
 
   "Aerosport Tournament":"航空运动锦标赛",
   "5 Floaters":"5 云资源",
-  "Requires that you have 5 Floaters. Gain 1 MC per each City tile in play.":"需要你拥有5个云资源才能打出，游戏中的每个城市使你获得1元。",
+  "Requires that you have 5 Floaters. Gain 1 M€ per each City tile in play.":"需要你拥有5个云资源才能打出，游戏中的每个城市使你获得1元。",
 
   "Air-Scrapping Expedition":"金星改造远征队",
   "Raise Venus 1 step. Add 3 Floaters to ANY Venus CARD.":"提升1格金星改造度。放置3个云资源到任意带有金星标志的卡牌上。",
@@ -148,7 +148,7 @@
   "Requires 3 Science tags. Either raise the temperature 2 steps, or raise Venus 2 steps. Add 2 Floaters to ANY card.":"需要你拥有3个科学标志才能打出。提升温度或金星改造度2格。放置2个云资源到任意卡牌上。",
 
   "Comet for Venus":"飞向金星的彗星",
-  "Raise Venus 1 step. Remove up to 4MC from any player WITH A VENUS TAG IN PLAY.":"提升1格金星改造度。移除任意一位有金星标志的玩家4MC。",
+  "Raise Venus 1 step. Remove up to 4M€ from any player WITH A VENUS TAG IN PLAY.":"提升1格金星改造度。移除任意一位有金星标志的玩家4MC。",
 
   "Increase your M€ production 2 steps. Add 1 resource to ANY Venus CARD":"提升2点MC产能。在任意金星卡上添加一个资源",
 
@@ -179,7 +179,7 @@
   "Freyja Biodomes":"弗雷雅生态馆",
 
   "10% Venus":"金星改造度 10%",
-  "Requires 10% on the Venus track. Add 2 Microbes or 2 Animals to another Venus card. Production: energy -1, MC +2.":"需要金星改造度达到10%才能打出。放置2个微生物或动物资源到任意带有金星标志的卡牌上。减少1点电力产能，提升2点金钱产能。",
+  "Requires 10% on the Venus track. Add 2 Microbes or 2 Animals to another Venus card. Production: energy -1, M€ +2.":"需要金星改造度达到10%才能打出。放置2个微生物或动物资源到任意带有金星标志的卡牌上。减少1点电力产能，提升2点金钱产能。",
 
   "Giant Solar Shade":"巨型日光遮蔽器",
   "Raise Venus 3 steps.":"提升金星改造度3格。",
@@ -233,7 +233,7 @@
 
   "6% Venus":"金星改造度 6%",
 
-  "Action: add 1 Microbe to this card, or spend any number of Microbes here to gain triple amount of MC":"行动：放置1个微生物资源到本卡上，或移除本卡上任意数量的微生物资源以获得3倍数量的金钱",
+  "Action: add 1 Microbe to this card, or spend any number of Microbes here to gain triple amount of M€":"行动：放置1个微生物资源到本卡上，或移除本卡上任意数量的微生物资源以获得3倍数量的金钱",
   "Requires Venus 6%":"需要金星改造度达到6%才能打出。",
   "Action: add 1 Microbe to ANY Venus CARD or spend 2 Microbes here to raise Venus 1 step":"行动：放置1个微生物资源到任意带有金星标志的卡牌上，或移除本卡上2个微生物资源以提升金星改造度1格。",
 

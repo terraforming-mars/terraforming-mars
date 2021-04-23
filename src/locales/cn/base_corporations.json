@@ -14,7 +14,7 @@
 
   "Helion":"海利昂",
   "You start with 3 heat production and 42 MC.":"起始获得42MC,提升热能产能3级",
-  "Effect: You may use heat as MC. You may not use MC as heat.":"效果:你可以用热能资源代替MC使用,但不用用MC代替热能资源使用",
+  "Effect: You may use heat as MC. You may not use M€ as heat.":"效果:你可以用热能资源代替MC使用,但不用用MC代替热能资源使用",
 
 
 
@@ -48,7 +48,7 @@
 
   "CrediCor":"债权人",
   "You start with 57 MC.":"起始获得57MC",
-  "Effect: After you pay for a card or standard project with a basic cost of 20MC or more, you gain 4MC.":"效果:当你打出一张20MC以上的卡,或执行一个20MC以上的标准行动时,你获得4MC",
+  "Effect: After you pay for a card or standard project with a basic cost of 20M€ or more, you gain 4MC.":"效果:当你打出一张20MC以上的卡,或执行一个20MC以上的标准行动时,你获得4MC",
 
   "Action: Use a blue card action that has already been used this generation":"行动:执行一次本时代已经使用过的蓝卡行动" ,
 
@@ -85,7 +85,7 @@
 
 
 
-  "You start with 1 plant production and 47 MC":"你起始拥有47元及1点植物产能。"
+  "You start with 1 plant production and 47 M€":"你起始拥有47元及1点植物产能。"
 
 
 

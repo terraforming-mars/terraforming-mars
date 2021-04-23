@@ -21,6 +21,7 @@ export class DesperateMeasures extends Card implements IProjectCard {
         cardNumber: 'A04',
         description: 'Effect: Place a bronze cube on a dust storm tile and raise oxygen 1 step, or place a bronze cube on an erosion tile and raise the temperature 1 step. The hazard tile with the bronze cube cannot be removed.',
         renderData: CardRenderer.builder((b) => {
+          b.resourceCube().asterix().br;
           b.temperature(1).slash().oxygen(1);
         }),
         victoryPoints: -2,

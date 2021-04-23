@@ -52,7 +52,7 @@ export class CometForVenus extends Card {
         new SelectPlayer(
           Array.from(venusTagPlayers),
           'Select player to remove up to 4 M€ from',
-          'Remove MC',
+          'Remove M€',
           (selectedPlayer: Player) => {
             selectedPlayer.setResource(Resources.MEGACREDITS, -4, player.game, player);
             player.game.increaseVenusScaleLevel(player, 1);

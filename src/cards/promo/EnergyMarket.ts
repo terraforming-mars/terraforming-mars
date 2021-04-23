@@ -67,7 +67,7 @@ export class EnergyMarket extends Card implements IProjectCard {
   private getMegacreditsOption(player: Player) {
     player.addProduction(Resources.ENERGY, -1);
     player.setResource(Resources.MEGACREDITS, 8);
-    player.game.log('${0} decreased energy production 1 step to gain 8 MC', (b) => b.player(player));
+    player.game.log('${0} decreased energy production 1 step to gain 8 M€', (b) => b.player(player));
     return undefined;
   }
 
@@ -75,10 +75,10 @@ export class EnergyMarket extends Card implements IProjectCard {
     const availableMC = player.spendableMegacredits();
     if (availableMC >= 2 && player.getProduction(Resources.ENERGY) >= 1) {
       return new OrOptions(
-        new SelectOption('Spend 2X M€ to gain X energy', 'Spend MC', () => {
+        new SelectOption('Spend 2X M€ to gain X energy', 'Spend M€', () => {
           return this.getEnergyOption(player, availableMC);
         }),
-        new SelectOption('Decrease energy production 1 step to gain 8 MC', 'Decrease energy', () => {
+        new SelectOption('Decrease energy production 1 step to gain 8 M€', 'Decrease energy', () => {
           return this.getMegacreditsOption(player);
         }),
       );

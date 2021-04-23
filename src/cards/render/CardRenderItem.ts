@@ -17,6 +17,10 @@ export enum AltSecondaryTag {
   FLOATER = 'floater',
   // 'blue' => used in Project Workshop
   BLUE = 'blue',
+
+  MOON_MINING_RATE = 'moon-mine',
+  MOON_COLONY_RATE = 'moon-colony',
+  MOON_LOGISTICS_RATE = 'moon-road',
 }
 
 export interface ItemOptions {

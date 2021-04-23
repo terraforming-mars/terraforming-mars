@@ -7,6 +7,7 @@ import {PlaceMoonColonyTile} from '../../moon/PlaceMoonColonyTile';
 import {CardRenderer} from '../render/CardRenderer';
 import {TileType} from '../../TileType';
 import {IProjectCard} from '../IProjectCard';
+import {AltSecondaryTag} from '../render/CardRenderItem';
 
 export class FirstLunarSettlement extends PreludeCard implements IProjectCard {
   constructor() {
@@ -17,7 +18,7 @@ export class FirstLunarSettlement extends PreludeCard implements IProjectCard {
         description: 'Place a colony tile on the Moon and Raise the Colony Rate 1 step. Increase your M€ production 1 step.',
         cardNumber: '',
         renderData: CardRenderer.builder((b) => {
-          b.production((pb) => pb.megacredits(1)).tile(TileType.MOON_COLONY, false);
+          b.production((pb) => pb.megacredits(1)).moonColony().secondaryTag(AltSecondaryTag.MOON_COLONY_RATE);
         }),
       },
     });

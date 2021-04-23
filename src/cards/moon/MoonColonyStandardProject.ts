@@ -8,6 +8,7 @@ import {Units} from '../../Units';
 import {Resources} from '../../Resources';
 import {IMoonCard} from './IMoonCard';
 import {TileType} from '../../TileType';
+import {AltSecondaryTag} from '../render/CardRenderItem';
 
 export class MoonColonyStandardProject extends StandardProjectCard implements IMoonCard {
   constructor() {
@@ -18,7 +19,7 @@ export class MoonColonyStandardProject extends StandardProjectCard implements IM
         cardNumber: '',
         renderData: CardRenderer.builder((b) =>
           b.standardProject('Spend 22 MC and 1 titanium to place a colony on the moon and raise your M€ production 1 step.', (eb) => {
-            eb.megacredits(22).titanium(1).startAction.moonColony().production((pb) => pb.megacredits(1));
+            eb.megacredits(22).titanium(1).startAction.moonColony().secondaryTag(AltSecondaryTag.MOON_COLONY_RATE).production((pb) => pb.megacredits(1));
           }),
         ),
       },

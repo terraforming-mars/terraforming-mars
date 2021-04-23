@@ -122,7 +122,7 @@ export const MoonBoard = Vue.component('moonboard', {
       </svg>
 
       <div class="board-outer-spaces">
-        <moon-space :space="getSpaceById('m01')" text="Luna Space Station"></moon-space>
+        <moon-space :space="getSpaceById('m01')" text="Luna Trade Station"></moon-space>
         <moon-space :space="getSpaceById('m37')" text="Momentum Virium Habitat"></moon-space>
       </div>
 

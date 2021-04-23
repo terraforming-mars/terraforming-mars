@@ -1527,7 +1527,7 @@ export class Player implements ISerializable<SerializedPlayer> {
     howToPayForTrade.title = 'Pay trade fee';
     howToPayForTrade.buttonLabel = 'Pay';
 
-    const payWithMC = new SelectOption('Pay ' + mcTradeAmount +' MC', '', () => {
+    const payWithMC = new SelectOption('Pay ' + mcTradeAmount +' M€', '', () => {
       payWith = Resources.MEGACREDITS;
       return undefined;
     });

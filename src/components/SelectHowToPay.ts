@@ -206,7 +206,7 @@ export const SelectHowToPay = Vue.component('select-how-to-pay', {
       if (requiredAmt > 0 && totalSpentAmt > requiredAmt && showAlert) {
         const diff = totalSpentAmt - requiredAmt;
 
-        if (confirm('Warning: You are overpaying by ' + diff + ' MC')) {
+        if (confirm('Warning: You are overpaying by ' + diff + ' M€')) {
           this.onsave([[JSON.stringify(htp)]]);
         } else {
           this.$data.warning = 'Please adjust payment amount';

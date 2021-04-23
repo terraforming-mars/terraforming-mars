@@ -528,10 +528,10 @@
   "Opponents may not remove your": "效果：对手无法移除你的下列资源",
 
   "Protected Valley": "受保护的山脉",
-  "(Increase your M€ production 2 steps. Place on a greenery tile ON AN AREA RESERVED FOR OCEAN, disregarding normal placement restrictions, and increase oxygen 1 step.)": "MC产量+2 放置一块绿植板块到1格海洋保留区上",
+  "(Increase your M€ production 2 steps. Place on a greenery tile ON AN AREA RESERVED FOR OCEAN, disregarding normal placement restrictions, and increase oxygen 1 step.)": "M€产量+2 放置一块绿植板块到1格海洋保留区上",
 
   "Satellites": "卫星",
-  "Increase your M€ production 1 step for each space tag your have, including this one.": "MC产量+n，n=你的太空图标数（包括此牌）",
+  "Increase your M€ production 1 step for each space tag your have, including this one.": "M€产量+n，n=你的太空图标数（包括此牌）",
 
   "Noctis Farming": "诺提斯农耕",
   "Requires -20 C or warmer. Increase your M€ production 1 step and gain 2 Plants.": "（需求：温度≥-20℃） MC产量+1 获得2枚植物资源",
@@ -602,7 +602,7 @@
   "Raise your TR 1 step for each Jovian tag you have, including this.": "每有一个木星标就提升一步改造度（包括此牌）",
 
   "Immigration Shuttles": "移民航天机",
-  "(Increase your M€ production 5 steps.)": "MC产量+5",
+  "(Increase your M€ production 5 steps.)": "M€产量+5",
   "1 VP for every 3rd City in play.": "场上每三块城市板块=1分",
 
   "Place this tile.": "放置此板块",

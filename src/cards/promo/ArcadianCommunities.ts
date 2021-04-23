@@ -26,7 +26,7 @@ export class ArcadianCommunities extends Card implements IActionCard, Corporatio
           b.corpBox('action', (ce) => {
             ce.text('ACTION: PLACE A COMMUNITY (PLAYER MARKER) ON A NON-RESERVED AREA ADJACENT TO ONE OF YOUR TILES OR MARKED AREAS', Size.TINY, true);
             ce.vSpace(Size.MEDIUM);
-            ce.text('EFFECT: MARKED AREAS ARE RESERVED FOR YOU. WHEN YOU PLACE A TILE THERE, GAIN 3 MC', Size.TINY, true);
+            ce.text('EFFECT: MARKED AREAS ARE RESERVED FOR YOU. WHEN YOU PLACE A TILE THERE, GAIN 3 M€', Size.TINY, true);
           });
         }),
       },

@@ -74,7 +74,7 @@ export class SulphurEatingBacteria extends Card implements IActionCard, IResourc
     const megaCreditsGained = 3 * amount;
     player.megaCredits += megaCreditsGained;
 
-    const logText: string = 'gain ' + megaCreditsGained + ' MC';
+    const logText: string = 'gain ' + megaCreditsGained + ' M€';
     LogHelper.logRemoveResource(player, this, amount, logText);
     return undefined;
   }

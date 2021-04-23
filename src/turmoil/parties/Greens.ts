@@ -61,7 +61,7 @@ class GreensBonus02 implements Bonus {
 class GreensPolicy01 implements Policy {
   isDefault = true;
   id = TurmoilPolicy.GREENS_DEFAULT_POLICY;
-  description: string = 'When you place a greenery tile, gain 4 MC';
+  description: string = 'When you place a greenery tile, gain 4 M€';
 
   onTilePlaced(player: Player, space: ISpace) {
     if (space.tile?.tileType === TileType.GREENERY && player.game.phase === Phase.ACTION) {
@@ -82,7 +82,7 @@ class GreensPolicy02 implements Policy {
 
 class GreensPolicy03 implements Policy {
   id = TurmoilPolicy.GREENS_POLICY_3;
-  description: string = 'When you play an animal, plant or microbe tag, gain 2 MC';
+  description: string = 'When you play an animal, plant or microbe tag, gain 2 M€';
   isDefault = false;
 
   onCardPlayed(player: Player, card: IProjectCard) {

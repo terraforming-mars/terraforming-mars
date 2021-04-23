@@ -68,7 +68,7 @@ export class Splice extends Card implements CorporationCard {
       return undefined;
     });
 
-    const getMegacredits = new SelectOption(`Gain ${megacreditsGain} MC`, 'Gain MC', () => {
+    const getMegacredits = new SelectOption(`Gain ${megacreditsGain} MC`, 'Gain M€', () => {
       player.megaCredits += megacreditsGain;
       return undefined;
     });

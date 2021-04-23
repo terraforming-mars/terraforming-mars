@@ -64,7 +64,7 @@ export class JupiterFloatingStation extends Card implements IProjectCard, IResou
         }));
         return undefined;
       }),
-      new SelectOption('Gain 1 M€ per floater here (max 4) ', 'Gain MC', () => {
+      new SelectOption('Gain 1 M€ per floater here (max 4) ', 'Gain M€', () => {
         const amount = Math.min(this.resourceCount, 4);
         player.megaCredits += amount;
         LogHelper.logGainStandardResource(player, Resources.MEGACREDITS, amount);

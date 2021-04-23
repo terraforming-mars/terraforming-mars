@@ -32,7 +32,7 @@
     "Trade Advance": "Comércio Avançado",
     "[ solo": "[ solo",
     "Trade all colonies with": "Comercie com todas as colônias com",
-    "Gain 2 M€ [SOLO: Gain 10 M€]. Immediately trade with all active colonies. You may increase the Colony Tile track 1 step before each of these trades.": "Ganhe 2 M$ (10 M$ modo solo). Comercia com todas as colônias ativas inmediatamente. Você pode aumentar 1 nível de tiles de colônias cada vez que comercies com cada uma delas.",
+    "Gain 2 M€ [SOLO: Gain 10 MC]. Immediately trade with all active colonies. You may increase the Colony Tile track 1 step before each of these trades.": "Ganhe 2 M$ (10 M$ modo solo). Comercia com todas as colônias ativas inmediatamente. Você pode aumentar 1 nível de tiles de colônias cada vez que comercies com cada uma delas.",
 
     "Valuable Gases": "Gases Valiosos",
     "Gain 6 M€. Play a Venus card from your hand and add 4 floaters to it.": "Ganhe 6 M$. Jogue uma carta de Vênus da mão e adicione 4 flutuadores.",
@@ -152,7 +152,7 @@
     "Ants": "Formigas",
     "Action: Remove 1 Microbe from any card to add 1 to this card.": "Ação: remova 1 micróbio de qualquer carta para adicionar 1 a esta carta.",
     "1 VP per 2 Microbes on this card.": "1 PV por cada 2 micróbios nesta carta.",
-    
+
     "Release of Inert Gases": "Liberação de Gases Inertes",
     "(Raise your terraforming rating 2 steps.)": "Aumente seu IT em 2 níveis.",
 
@@ -264,7 +264,7 @@
     "Effect: When you play a card, you pay 2 M€ less for it.": "Efeito: quando você joga uma carta, pague 2 M$ a menos por ela.",
 
     "Advanced Alloys": "Ligas Avançadas",
-    "Effect: Each titanium you have is worth 1 M€ extra.": "Efeito: cada titânio que você tem vale 1 M$ adicional.", 
+    "Effect: Each titanium you have is worth 1 M€ extra.": "Efeito: cada titânio que você tem vale 1 M$ adicional.",
     "Effect: Each steel you have is worth 1 M€ extra.": "Efeito: Cada aço que você tem vale 1 M$ adicional.",
 
     "Birds": "Pássaros",
@@ -310,7 +310,7 @@
     "Commercial District": "Distrito Comercial",
     "Place this tile. Decrease your energy production 1 step and increase your M€ production 4 steps.": "Coloque este tile. Diminua sua produção de energia em 1 nível e aumente sua produção de M$ 4 níveis.",
     "1 VP per adjacent city tile.": "1 PV por tile de cidade adjacente.",
-    
+
     "Robotic Workforce": "Força de Trabalho Robótica",
     "Duplicate only the production box of one of your building cards.": "Duplique apenas o quadrilátero de produção de apenas uma de suas cartas de construção.",
 
@@ -517,7 +517,7 @@
     "Requires 7 science tags.": "Requer 7 ícones de ciência.",
 
     "Investment Loan": "Empréstimo de Investimento",
-    "Decrease your M€ production 1 step. Gain 10 M€.": "Diminua sua produção de M$ 1 nível. Ganhe 10 M$.",
+    "Decrease your M€ production 1 step. Gain 10 MC.": "Diminua sua produção de M$ 1 nível. Ganhe 10 M$.",
 
     "Insulation": "Isolantes",
     "Decrease your heat production any number of steps and increase your M€ production the same number of steps.": "Diminua sua produção de calor qualquer número de níveis e aumente sua produção de M$ este mesmo número.",
@@ -625,11 +625,11 @@
 
     "Livestock": "Pecuária",
     "(Requires 9% oxygen. Decrease your Plant production 1 step and increase your M€ production 2 steps)": "Requer 9% de oxigênio. Diminua sua produção de plantas 1 nível e aumente sua produção de M$ em 2.",
-   
+
     "Olympus Conference": "Conferência de Olimpo",
     "When you play a Science tag, including this, either add a Science resource to this card, or remove a Science resource from this card to draw a card.": "Quando você joga um ícone de ciência, incluindo este, você pode ou adicionar um recurso de ciência a esta carta, ou retirar dela um recurso de ciência para comprar uma carta.",
 
-    "Rad-Suits": "Roupa Antirradiação",
+    "Rad-Suits": "Roua Antirradiação",
     "Requires two cities in play. Increase your M€ up 1 step.": "Requer 2 tiles de cidade em jogo. Aumente sua produção de M$ 1 nível.",
 
     "Aquifer Pumping": "Bombeamento em Aquífero",
@@ -682,7 +682,7 @@
     "Decrease any Energy production 1 step and increase your own 1 step.": "Diminua qualquer produção de energia 1 nível e aumente a sua em 1 nível.",
 
     "Underground Detonations": "Explosões Subterrâneas",
-    "Action: Spend 10MC to increase your heat production 2 steps.": "Ação: gaste 10 M$ para aumentar sua produção de calor 2 níveis.",
+    "Action: Spend 10M€ to increase your heat production 2 steps.": "Ação: gaste 10 M$ para aumentar sua produção de calor 2 níveis.",
 
     "Soletta": "Soletta",
     "Increase your heat production 7 steps.": "Aumente sua produção de calor 7 níveis.",

@@ -37,7 +37,7 @@ describe('AsteroidRights', function() {
     player.megaCredits = 0;
     const action = card.action(player) as OrOptions;
 
-    // Gain 1 MC prod
+    // Gain 1 M€ prod
     action.options[1].cb();
     expect(player.getProduction(Resources.MEGACREDITS)).to.eq(1);
 

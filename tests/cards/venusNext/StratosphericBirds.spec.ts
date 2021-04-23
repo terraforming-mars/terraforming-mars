@@ -86,11 +86,11 @@ describe('StratosphericBirds', () => {
     (game as any).venusScaleLevel = 12;
     player.megaCredits = 9;
 
-    // 9 MC + 1 Dirigibles floater: Cannot play
+    // 9 M€ + 1 Dirigibles floater: Cannot play
     expect(card.canPlay(player)).is.not.true;
 
 
-    // 12 MC + 1 Dirigibles floater: Card is playable
+    // 12 M€ + 1 Dirigibles floater: Card is playable
     player.megaCredits = 12;
     const SelectHowToPayForProjectCard = player.playProjectCard();
     expect(card.canPlay(player)).is.true;

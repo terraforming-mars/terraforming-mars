@@ -31,7 +31,7 @@ describe('TharsisRepublic', function() {
     expect(player.megaCredits).to.eq(3);
   });
 
-  it('Gives 3 MC and MC production for own city on Mars', function() {
+  it('Gives 3 M€ and MC production for own city on Mars', function() {
     game.addCityTile(player, game.board.getAvailableSpacesOnLand(player)[0].id);
     TestingUtils.runAllActions(game);
 
@@ -55,7 +55,7 @@ describe('TharsisRepublic', function() {
     expect(player.getProduction(Resources.MEGACREDITS)).to.eq(0);
   });
 
-  it('Gives 2 MC production in solo mode', function() {
+  it('Gives 2 M€ production in solo mode', function() {
     const player = TestPlayers.BLUE.newPlayer();
     const game = Game.newInstance('foobar', [player], player);
     card.play(player);

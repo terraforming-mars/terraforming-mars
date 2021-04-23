@@ -7,14 +7,14 @@ import {Game} from '../../../src/Game';
 import {TestPlayers} from '../../TestPlayers';
 
 describe('MeatIndustry', function() {
-  it('Gives 2 MC whenever player gains an animal', function() {
+  it('Gives 2 M€ whenever player gains an animal', function() {
     const card = new MeatIndustry();
     const player = TestPlayers.BLUE.newPlayer();
     const player2 = TestPlayers.RED.newPlayer();
     Game.newInstance('foobar', [player, player2], player);
     player.playedCards.push(card);
 
-    // Get 2 MC when player gains animals
+    // Get 2 M€ when player gains animals
     const fish = new Fish();
     player.playedCards.push(fish);
     fish.action(player);

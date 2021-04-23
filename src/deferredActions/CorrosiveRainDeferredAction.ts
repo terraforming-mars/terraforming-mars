@@ -11,7 +11,7 @@ export class CorrosiveRainDeferredAction implements DeferredAction {
   public priority = Priority.DEFAULT;
   constructor(
         public player: Player,
-        public title: string = 'Remove 2 floaters from a card or lose up to 10 MC',
+        public title: string = 'Remove 2 floaters from a card or lose up to 10 M€',
   ) {}
 
   public execute() {
@@ -25,7 +25,7 @@ export class CorrosiveRainDeferredAction implements DeferredAction {
     }
 
     const selectAction = new OrOptions();
-    const payMC = new SelectOption('Lose up to 10 MC', 'Lose MC', () => {
+    const payMC = new SelectOption('Lose up to 10 M€', 'Lose M€', () => {
       this.player.setResource(Resources.MEGACREDITS, -10);
       return undefined;
     });

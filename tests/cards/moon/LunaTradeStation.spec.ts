@@ -55,19 +55,19 @@ describe('LunaTradeStation', () => {
     expect(player.megaCredits).eq(0);
 
     player.megaCredits = 0;
-    spaces[0].tile = {tileType: TileType.MOON_MINE};
-    card.action(player);
-    expect(player.megaCredits).eq(1);
-
-    player.megaCredits = 0;
-    spaces[1].tile = {tileType: TileType.MOON_MINE};
+    spaces[0].tile = {tileType: TileType.MOON_COLONY};
     card.action(player);
     expect(player.megaCredits).eq(2);
 
     player.megaCredits = 0;
-    spaces[2].tile = {tileType: TileType.MOON_MINE};
+    spaces[1].tile = {tileType: TileType.MOON_COLONY};
     card.action(player);
-    expect(player.megaCredits).eq(3);
+    expect(player.megaCredits).eq(4);
+
+    player.megaCredits = 0;
+    spaces[2].tile = {tileType: TileType.MOON_COLONY};
+    card.action(player);
+    expect(player.megaCredits).eq(6);
   });
 });
 

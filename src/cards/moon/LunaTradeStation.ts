@@ -9,6 +9,8 @@ import {CardRenderer} from '../render/CardRenderer';
 import {IActionCard} from '../ICard';
 import {Units} from '../../Units';
 import {MoonCard} from './MoonCard';
+import {Game} from '../../Game';
+import {Resources} from '../../Resources';
 
 export class LunaTradeStation extends MoonCard implements IActionCard {
   constructor() {
@@ -45,13 +47,17 @@ export class LunaTradeStation extends MoonCard implements IActionCard {
     return undefined;
   }
 
+  private surfaceColonyCount(game: Game): number {
+    return MoonExpansion.tiles(game, TileType.MOON_COLONY, {surfaceOnly: true}).length;
+  }
+
   public canAct(player: Player): boolean {
-    return MoonExpansion.tiles(player.game, TileType.MOON_MINE, {surfaceOnly: true}).length > 0;
+    return this.surfaceColonyCount(player.game) > 0;
   }
 
   public action(player: Player) {
-    const surfaceMines = MoonExpansion.tiles(player.game, TileType.MOON_MINE, {surfaceOnly: true}).length;
-    player.megaCredits += surfaceMines;
+    const surfaceColonies = this.surfaceColonyCount(player.game);
+    player.setResource(Resources.MEGACREDITS, 2 * surfaceColonies, player.game);
     return undefined;
   }
 }

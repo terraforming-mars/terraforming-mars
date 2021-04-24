@@ -39,8 +39,7 @@ export class EnergyMarket extends Card implements IProjectCard {
   }
 
   public canAct(player: Player): boolean {
-    const availableMC = (player.canUseHeatAsMegaCredits) ? player.getResource(Resources.MEGACREDITS) + player.getResource(Resources.HEAT) : player.getResource(Resources.MEGACREDITS);
-    return availableMC >= 2 || player.getProduction(Resources.ENERGY) >= 1;
+    return player.canAfford(2) || player.getProduction(Resources.ENERGY) >= 1;
   }
 
   private getEnergyOption(player: Player, availableMC: number): SelectAmount {

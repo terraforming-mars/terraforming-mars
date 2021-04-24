@@ -1669,6 +1669,7 @@ export class Player implements ISerializable<SerializedPlayer> {
         // We need a mechanism to tell the user this has failed. By now the `res` has been sent.
         // For now we will keep this player instance going and hope player discovers what has happened.
         if (err) {
+          this.game.log('Unable to perform undo operation', () => {}, {reservedFor: this});
           this.usedUndo = false;
           this.takeAction();
           return;

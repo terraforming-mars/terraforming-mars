@@ -8,7 +8,7 @@ import {Tags} from '../../cards/Tags';
 
 export class VenusInfrastructure implements IGlobalEvent {
     public name = GlobalEventName.VENUS_INFRASTRUCTURE;
-    public description = 'Gain 2 MC per Venus tag (max 5) and influence.';
+    public description = 'Gain 2 M€ per Venus tag (max 5) and influence.';
     public revealedDelegate = PartyName.MARS;
     public currentDelegate = PartyName.UNITY;
     public resolve(game: Game, turmoil: Turmoil) {

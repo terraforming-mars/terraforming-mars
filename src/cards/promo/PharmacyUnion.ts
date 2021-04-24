@@ -28,14 +28,14 @@ export class PharmacyUnion extends Card implements CorporationCard {
         renderData: CardRenderer.builder((b) => {
           b.megacredits(54).cards(1).secondaryTag(Tags.SCIENCE);
           // blank space after MC is on purpose
-          b.text('(You start with 54 MC . Draw a Science card.)', Size.TINY, false, false);
+          b.text('(You start with 54 M€ . Draw a Science card.)', Size.TINY, false, false);
           b.corpBox('effect', (ce) => {
             ce.vSpace(Size.LARGE);
             ce.effect(undefined, (eb) => {
               eb.microbes(1).any.played.startEffect.disease().megacredits(-4);
             });
             ce.vSpace();
-            ce.effect('When ANY microbe tag is played, add a disease here and lose 4 MC or as much as possible. When you play a science tag, remove a disease here and gain 1 TR OR if there are no diseases here, you MAY put this card face down in your EVENTS PILE to gain 3 TR.', (eb) => {
+            ce.effect('When ANY microbe tag is played, add a disease here and lose 4 M€ or as much as possible. When you play a science tag, remove a disease here and gain 1 TR OR if there are no diseases here, you MAY put this card face down in your EVENTS PILE to gain 3 TR.', (eb) => {
               eb.science(1).played.startEffect.minus().disease();
               eb.tr(1, Size.SMALL).slash().tr(3, Size.SMALL).digit;
             });
@@ -87,19 +87,19 @@ export class PharmacyUnion extends Card implements CorporationCard {
             player,
             () => {
               const orOptions = new OrOptions(
-                new SelectOption('Turn it face down to gain 3 TR and lose up to 4 MC', 'Confirm', () => {
+                new SelectOption('Turn it face down to gain 3 TR and lose up to 4 M€', 'Confirm', () => {
                   const megaCreditsLost = Math.min(player.megaCredits, 4);
                   this.isDisabled = true;
                   player.increaseTerraformRatingSteps(3);
                   player.megaCredits -= megaCreditsLost;
-                  game.log('${0} turned ${1} face down to gain 3 TR and lost ${2} MC', (b) => b.player(player).card(this).number(megaCreditsLost));
+                  game.log('${0} turned ${1} face down to gain 3 TR and lost ${2} M€', (b) => b.player(player).card(this).number(megaCreditsLost));
                   return undefined;
                 }),
                 new SelectOption('Add a disease to it and lose up to 4 MC, then remove a disease to gain 1 TR', 'Confirm', () => {
                   const megaCreditsLost = Math.min(player.megaCredits, 4);
                   player.increaseTerraformRating();
                   player.megaCredits -= megaCreditsLost;
-                  game.log('${0} added a disease to ${1} and lost ${2} MC', (b) => b.player(player).card(this).number(megaCreditsLost));
+                  game.log('${0} added a disease to ${1} and lost ${2} M€', (b) => b.player(player).card(this).number(megaCreditsLost));
                   game.log('${0} removed a disease from ${1} to gain 1 TR', (b) => b.player(player).card(this));
                   return undefined;
                 }),
@@ -165,7 +165,7 @@ export class PharmacyUnion extends Card implements CorporationCard {
             const megaCreditsLost = Math.min(player.megaCredits, microbeTagCount * 4);
             player.addResourceTo(this, microbeTagCount);
             player.megaCredits -= megaCreditsLost;
-            game.log('${0} added a disease to ${1} and lost ${2} MC', (b) => b.player(player).card(this).number(megaCreditsLost));
+            game.log('${0} added a disease to ${1} and lost ${2} M€', (b) => b.player(player).card(this).number(megaCreditsLost));
             return undefined;
           },
         ), -1); // Make it a priority

@@ -1,7 +1,7 @@
 {
     "Polyphemos": "Polyphemos",
     "You start with 50MC. Increase your M€ production 5 steps. Gain 5 titanium.": "Вы начинаете с 50МС. Увеличьте своё производство МС на 5. Получите 5 титана",
-    "Effect: When you buy a card to hand, pay 5MC instead of 3, including the starting hand.": "Эффект: Покупка карт в руку, включая стартовые, стоит не 3 MС, а 5 МС",
+    "Effect: When you buy a card to hand, pay 5M€ instead of 3, including the starting hand.": "Эффект: Покупка карт в руку, включая стартовые, стоит не 3 MС, а 5 МС",
 
     "STORMCRAFT INCORPORATED": "STORMCRAFT INCORPORATED",
     "Action: Add a floater to ANY card.": "Действие: добавьте аэростат на любую карту",
@@ -22,7 +22,7 @@
     "Эффект: Увеличивайте своё производство МС на 1 каждый раз когда строится колония",
 
     "Point Luna": "Point Luna",
-    "You start with 1 titanium production and 38 MC.": "Вы начинаете с 1 доп. производством титана и 38 MC",
+    "You start with 1 titanium production and 38 MC.": "Вы начинаете с 1 доп. производством титана и 38 M€",
     "Effect: When you play an Earth tag, including this, draw a card.": "Разыгрывая карту с меткой Земли, включая эту, доберите карту",
     "": ""
 

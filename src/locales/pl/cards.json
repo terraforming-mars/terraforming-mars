@@ -62,7 +62,7 @@
     "Gain 3 Plants, or add 3 Microbes or 2 Animals to ANOTHER card. Place an ocean tile.": "Otrzymujesz 3 jednostki roślinności ALBO umieść na innej karcie 3 jednostki mikrobów ALBO 2 jednostki zwierząt. Umieść na planszy obszar oceanu.",
 
     "Research Outpost": "Placówka Naukowa",
-    "Effect: When you play a card, you pay 1 M€ less for it.": "Efekt trwały: Gdy zagrywasz dowolną kartę, płacisz za nią o 1 MC mniej.",
+    "Effect: When you play a card, you pay 1 M€ less for it.": "Efekt trwały: Gdy zagrywasz dowolną kartę, płacisz za nią o 1 M€ mniej.",
     "Place a city tile NEXT TO NO OTHER TILE.": "Umieść obszar miasta na planszy, na polu, które NIE SĄSIADUJE z innymi umieszczonymi już obszarami.",
 
     "Phobos Space Haven": "Kosmiczna Przystań na Fobosie",
@@ -80,7 +80,7 @@
     "Requires 11% oxygen.": "Poziom Tlenu musi być równy albo wyższy niż 11%.",
 
     "Space Station": "Stacja Kosmiczna",
-    "Effect: When you play a Space card, you pay 2 M€ less for it.": "Efekt trwały: Gdy zagrywasz kartę z symbolem przestrzeni kosmicznej, płacisz za nią o 2 MC mniej.",
+    "Effect: When you play a Space card, you pay 2 M€ less for it.": "Efekt trwały: Gdy zagrywasz kartę z symbolem przestrzeni kosmicznej, płacisz za nią o 2 M€ mniej.",
 
     "Eos Chasma National Park": "Park Narodowy w Eos Chasma",
     "Requires -12 C or warmer. Add 1 Animal TO ANY ANIMAL CARD. Gain 3 Plants. Increase your M€ production 2 steps.": "Temperatura musi być równa albo wyższa niż -12°C. Umieść 1 jednostkę zwierząt na dowolnej karcie z symbolem zwierząt. Otrzymujesz 3 jednostki roślinności. Podnieś swoją produkcję MC o 2 poziomy.",
@@ -99,7 +99,7 @@
     "Decrease your M€ production 2 steps and increase your heat production and Energy production 2 steps each.": "Obniż swoją produkcję MC o 2 poziomy i podnieś swoją produkcję ciepła i energii o 2 poziomy.",
 
     "Optimal Aerobraking": "Optymalne Hamowanie Aerodynamiczne",
-    "Effect: When you play a Space Event, you gain 3 MC and 3 heat.": "Efekt trwały: Gdy zagrywasz kartę wydarzenia z symbolem przestrzeni kosmicznej, otrzymujesz 3 MC i 3 jednostki ciepła.",
+    "Effect: When you play a Space Event, you gain 3 M€ and 3 heat.": "Efekt trwały: Gdy zagrywasz kartę wydarzenia z symbolem przestrzeni kosmicznej, otrzymujesz 3 M€ i 3 jednostki ciepła.",
 
     "Underground City": "Podziemne miasto",
     "Place a City tile. Decrease your Energy production 2 steps and increase your steel production 2 steps.": "Umieść na planszy obszar miasta. Obniż swoją produkcję energii o 2 poziomy i podnieś swoją produkcję stali o 2 poziomy.",
@@ -225,11 +225,11 @@
     "Oxygen must be 8% or less. Decrease your energy production 1 step.": "Poziom Tlenu musi być równy albo niższy niż 8%. Obniż swoją produkcję energii o 1 poziom.",
 
     "Earth Catapult": "Katapulta Międzyplanetarna",
-    "Effect: When you play a card, you pay 2 M€ less for it.": "Efekt trwały: Gdy zagrywasz dowolną kartę, płacisz za nią o 2 MC mniej.",
+    "Effect: When you play a card, you pay 2 M€ less for it.": "Efekt trwały: Gdy zagrywasz dowolną kartę, płacisz za nią o 2 M€ mniej.",
 
     "Advanced Alloys": "Zaawansowane Stopy Metali",
-    "Effect: Each titanium you have is worth 1 M€ extra.": "Efekt trwały: Każda posiadana przez Ciebie jednostka tytanu jest warta o 1 MC więcej.",
-    "Effect: Each steel you have is worth 1 M€ extra.": "Efekt trwały: Każda posiadana przez Ciebie jednostka stali jest warta o 1 MC więcej.",
+    "Effect: Each titanium you have is worth 1 M€ extra.": "Efekt trwały: Każda posiadana przez Ciebie jednostka tytanu jest warta o 1 M€ więcej.",
+    "Effect: Each steel you have is worth 1 M€ extra.": "Efekt trwały: Każda posiadana przez Ciebie jednostka stali jest warta o 1 M€ więcej.",
 
     "Birds": "Ptaki",
     "Action: Add an animal to this card.": "Akcja: Umieść na tej karcie 1 jednostkę zwierząt.",
@@ -254,7 +254,7 @@
     "Place 2 ocean tiles.": "Umieść na planszy 2 obszary oceanów.",
 
     "Quantum Extractor": "Ekstraktor Kwantowy",
-    "Effect: When you play a Space card, you pay 2 M€ less for it.": "Efekt trwały: Gdy zagrywasz kartę z symbolem przestrzeni kosmicznej, płacisz za nią o 2 MC mniej.",
+    "Effect: When you play a Space card, you pay 2 M€ less for it.": "Efekt trwały: Gdy zagrywasz kartę z symbolem przestrzeni kosmicznej, płacisz za nią o 2 M€ mniej.",
     "Requires 4 science tags. Increase your energy production 4 steps.": "Musisz posiadać przynajmniej 4 symbole nauki. Podnieś swoją produkcję energii o 4 poziomy.",
 
     "Giant Ice Asteroid": "Gigantyczna Asteroida Lodowa",
@@ -302,7 +302,7 @@
     "Requires -10 C or warmer. Increase your plant production 2 steps. Gain 2 plants.": "Temperatura musi być równa albo wyższa niż -10°C. Podnieś swoją produkcję roślinności o 2 poziomy. Otrzymujesz 2 jednostki roślinności.",
 
     "Mass Converter": "Konwerter Masy",
-    "Effect: When you play a Space card, you pay 2 M€ less for it.": "Efekt trwały: Gdy zagrywasz kartę z symbolem przestrzeni kosmicznej, płacisz za nią o 2 MC mniej.",
+    "Effect: When you play a Space card, you pay 2 M€ less for it.": "Efekt trwały: Gdy zagrywasz kartę z symbolem przestrzeni kosmicznej, płacisz za nią o 2 M€ mniej.",
     "Requires 5 science tags. Increase your energy production 6 steps.": "Musisz posiadać przynajmniej 5 symboli nauki. Podnieś swoją produkcję energii o 6 poziomów.",
 
     "Physics Complex": "Kompleks Fizyki Jądrowej",
@@ -337,13 +337,13 @@
     "Action: Spend 4 energy to gain 1 titanium and increase oxygen 1 step.": "Akcja: Wydaj 4 jednostki energii, żeby otrzymać 1 jednostkę tytanu i podnieść Poziom Tlenu o 1%.",
 
     "Earth Office": "Biuro na Ziemi",
-    "Effect: When you play an Earth card, you pay 3 M€ less for it.": "Efekt trwały: Gdy zagrywasz kartę z symbolem Ziemi, płacisz za nią o 3 MC mniej.",
+    "Effect: When you play an Earth card, you pay 3 M€ less for it.": "Efekt trwały: Gdy zagrywasz kartę z symbolem Ziemi, płacisz za nią o 3 M€ mniej.",
 
     "Acquired Company": "Przejęcie Firmy",
     "Increase your M€ production 3 steps.": "Podnieś swoją produkcję MC o 3 poziomy.",
 
     "Media Archives": "Archiwum Mediów",
-    "Gain 1 M€ for each event EVER PLAYED by all players.": "Otrzymujesz po 1 MC za każde wydarzenie zagrane do tej pory przez wszystkich graczy.",
+    "Gain 1 M€ for each event EVER PLAYED by all players.": "Otrzymujesz po 1 M€ za każde wydarzenie zagrane do tej pory przez wszystkich graczy.",
 
     "Open City": "Nieosłonięte Miasto",
     "Requires 12% oxygen. Gain 2 plants. Place a City tile. Decrease your Energy production 1 step and increase your M€ production 4 steps.": "Poziom Tlenu musi być równy albo wyższy niż 12%. Obniż swoją produkcję energii o 1 poziom. Podnieś swoją produkcję MC o 4 poziomy. Otrzymujesz 2 jednostki roślinności. Umieść na planszy obszar miasta.",
@@ -390,7 +390,7 @@
     "Decrease your Energy production 1 step and increase your M€ production 2 steps. Place a city tile ADJACENT TO AT LEAST 2 OTHER CITY TILES.": "Obniż swoją produkcję energii o 1 poziom. Podnieś swoją produkcję MC o 2 poziomy. Umieść obszar miasta na planszy, na polu sąsiadującym przynajmniej z 2 innymi obszarami miast.",
 
     "Sabotage": "Sabotaż",
-    "Remove up to 3 titanium from any player, or 4 steel, or 7 MC.": "Usuń do 3 jednostek tytanu albo do 4 jednostek stali, albo do 7 MC dowolnego gracza.",
+    "Remove up to 3 titanium from any player, or 4 steel, or 7 MC.": "Usuń do 3 jednostek tytanu albo do 4 jednostek stali, albo do 7 M€ dowolnego gracza.",
 
     "Moss": "Mech",
     "Requires 3 ocean tiles and that you lose 1 plant. Increase your plant production 1 step.": "Na planszy muszą znajdować się przynajmniej 3 obszary oceanów. Tracisz 1 jednostkę roślinności. Podnieś swoją produkcję roślinności o 1 poziom.",
@@ -487,7 +487,7 @@
     "Add 1 resource to a card with at least 1 resource on it": "UMIEŚĆ 1 JEDNOSTKĘ ZASOBÓW NA KARCIE, NA KTÓREJ ZNAJDUJE SIĘ PRZYNAJMNIEJ 1 JEDNOSTKA ZASOBÓW.",
 
     "Anti-Gravity Technology": "Technologia Antygrawitacji",
-    "Effect: When you play a card, you pay 2 M€ less for it.": "Efekt trwały: Gdy zagrywasz dowolną kartę, płacisz za nią o 2 MC mniej.",
+    "Effect: When you play a card, you pay 2 M€ less for it.": "Efekt trwały: Gdy zagrywasz dowolną kartę, płacisz za nią o 2 M€ mniej.",
     "Requires 7 science tags.": "Musisz posiadać przynajmniej 2 symbole nauki.",
 
     "Investment Loan": "Kredyt Inwestycyjny",
@@ -539,7 +539,7 @@
     "Decrease your Energy production 4 steps and increase your Plant production 2 step. Raise your TR 3 step.": "Obniż swoją produkcję energii o 4 poziomy. Podnieś swoją produkcję roślinności o 2 poziomy. Podnieś swój współczynnik terraformacji o 3.",
 
     "Shuttles": "Promy",
-    "Effect: When you play a Space card, you pay 2 M€ less for it.": "Efekt trwały: Gdy zagrywasz kartę z symbolem przestrzeni kosmicznej, płacisz za nią o 2 MC mniej.",
+    "Effect: When you play a Space card, you pay 2 M€ less for it.": "Efekt trwały: Gdy zagrywasz kartę z symbolem przestrzeni kosmicznej, płacisz za nią o 2 M€ mniej.",
     "Requires 5% oxygen. Decrease your Energy production 1 step and increase your M€ production 2 steps.": "Poziom Tlenu musi być równy albo wyższy niż 5%. Obniż swoją produkcję energii o 1 poziom. Podnieś swoją produkcję MC o 2 poziomy.",
 
     "Import of Advanced GHG": "Zaawansowane Gazy Cieplarniane",
@@ -631,7 +631,7 @@
     "Action: Spend any amount of Energy and gain that amount of MC.": "Akcja: Wydaj dowolną liczbę jednostek energii, żeby otrzymać tyle samo MC.",
 
     "Indentured Workers": "Tania Siła Robocza",
-    "The next card you play this generation costs 8 MC less.": "Następna karta, którą zagrasz podczas tego pokolenia, będzie Cię kosztować o 8 MC mniej.",
+    "The next card you play this generation costs 8 M€ less.": "Następna karta, którą zagrasz podczas tego pokolenia, będzie Cię kosztować o 8 M€ mniej.",
 
     "Lagrange Observatory": "Obserwatorium Lagrange'a",
     "Draw 1 card.": "Dobierz 1 kartę.",
@@ -655,7 +655,7 @@
     "Decrease any Energy production 1 step and increase your own 1 step.": "Obniż produkcję energii dowolnego gracza o 1 poziom. Podnieś swoją produkcję energii o 1 poziom.",
 
     "Underground Detonations": "Podziemne Detonacje",
-    "Action: Spend 10MC to increase your heat production 2 steps.": "Akcja: Wydaj 10 MC, żeby podnieść swoją produkcję ciepła o 2 poziomy.",
+    "Action: Spend 10M€ to increase your heat production 2 steps.": "Akcja: Wydaj 10 MC, żeby podnieść swoją produkcję ciepła o 2 poziomy.",
 
     "Soletta": "Soletta",
     "Increase your heat production 7 steps.": "Podnieś swoją produkcję ciepła o 7 poziomów.",

@@ -8,7 +8,7 @@ import {DiscardCards} from '../../deferredActions/DiscardCards';
 
 export class ParadigmBreakdown implements IGlobalEvent {
     public name = GlobalEventName.PARADIGM_BREAKDOWN;
-    public description = 'Discard 2 cards from hand. Gain 2 MC per influence.';
+    public description = 'Discard 2 cards from hand. Gain 2 M€ per influence.';
     public revealedDelegate = PartyName.KELVINISTS;
     public currentDelegate = PartyName.REDS;
     public resolve(game: Game, turmoil: Turmoil) {

@@ -42,7 +42,7 @@
     "Requires 5 ocean tiles. Place this tile on top of an existing ocean tile. The tile grants an ADJACENCY BONUS of 1 animal. Add 1 animal to this card.": "",
 
     "Nuclear Zone": "",
-    "Raise the temperature two steps. Place this tile. Players must pay an additional 2MC when they place a tile with their player marker on it ADJACENT to the Nuclear Zone.": "",
+    "Raise the temperature two steps. Place this tile. Players must pay an additional 2M€ when they place a tile with their player marker on it ADJACENT to the Nuclear Zone.": "",
 
     "Restricted Area": "",
     "Action: Spend 2 M€ to draw a card.": "",
@@ -80,5 +80,5 @@
 
     "Capital": "",
     "1 additional VP for each ocean tile adjacent to this city tile.": "",
-    "Requires 4 ocean tiles. Place tile with ADJACENCY BONUS of 2MC. Energy prod -2 and MC prod +5.": ""
+    "Requires 4 ocean tiles. Place tile with ADJACENCY BONUS of 2MC. Energy prod -2 and M€ prod +5.": ""
 }

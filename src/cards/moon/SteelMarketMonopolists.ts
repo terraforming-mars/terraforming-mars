@@ -25,7 +25,7 @@ export class SteelMarketMonopolists extends MarketCard {
               eb.megacredits(3).multiplier.startAction.text('x').steel(2).asterix();
             }).br;
             b.or().br;
-            b.action('Spend X steel to gain 3X MC (max 3 steel).', (eb) => {
+            b.action('Spend X steel to gain 3X M€ (max 3 steel).', (eb) => {
               eb.text('X').steel(0).startAction.text('x').megacredits(3).asterix();
             });
           }),

@@ -73,7 +73,7 @@ class KelvinistsPolicy01 implements Policy {
 
 class KelvinistsPolicy02 implements Policy {
   id = TurmoilPolicy.KELVINISTS_POLICY_2;
-  description: string = 'When you raise temperature, gain 3 MC per step raised';
+  description: string = 'When you raise temperature, gain 3 M€ per step raised';
   isDefault = false;
 }
 

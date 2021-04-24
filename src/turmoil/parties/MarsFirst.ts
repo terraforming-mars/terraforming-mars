@@ -66,7 +66,7 @@ class MarsFirstPolicy01 implements Policy {
 
 class MarsFirstPolicy02 implements Policy {
   id = TurmoilPolicy.MARS_FIRST_POLICY_2;
-  description: string = 'When you play a Building tag, gain 2 MC';
+  description: string = 'When you play a Building tag, gain 2 M€';
   isDefault = false;
 
   onCardPlayed(player: Player, card: IProjectCard) {

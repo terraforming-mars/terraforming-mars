@@ -324,7 +324,7 @@ export const SelectHowToPayForProjectCard = Vue.component('select-how-to-pay-for
       if (totalSpentAmt > this.cost && showAlert) {
         const diff = totalSpentAmt - this.cost;
 
-        if (confirm('Warning: You are overpaying by ' + diff + ' MC')) {
+        if (confirm('Warning: You are overpaying by ' + diff + ' M€')) {
           this.onsave([[
             this.card.name,
             JSON.stringify(htp),

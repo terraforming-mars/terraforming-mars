@@ -30,7 +30,7 @@
     "Increase your plant production 1 step. Play a card from hand, ignoring global requirements.": "Повысьте производство растений на 1. Разыграйте карту с руки, игнорируя глобальные требования.",
 
     "Eccentric Sponsor": "Эксцентричный спонсор",
-    "Play a card from hand, reducing its cost by 25 MC": "Разыграйте карту с руки, снизив ее стоимость на 25 mc.",
+    "Play a card from hand, reducing its cost by 25 M€": "Разыграйте карту с руки, снизив ее стоимость на 25 mc.",
 
     "Experimental Forest": "Экспериментальный лес",
     "Place 1 Greenery Tile and raise oxygen 1 step. Reveal cards until you reveal two cards with plant tags on them. Take them into your hand and discard the rest.": "Проведите озеленение и повысьте уровень кислорода на 1. Тяните карты из колоды, пока не найдете 2 карты с символом растения. Возьмите их в руку. Сбросьте остальные.",
@@ -121,7 +121,7 @@
     "Trade Advance":"Торговое преимущество",
     "[ solo": "[ соло",
     "Trade all colonies with": "",
-    "Gain 2 MC [SOLO: Gain 10 MC]. Immediately trade with all active colonies. You may increase the Colony Tile track 1 step before each of these trades.":
+    "Gain 2 M€ [SOLO: Gain 10 MC]. Immediately trade with all active colonies. You may increase the Colony Tile track 1 step before each of these trades.":
     "Получите 2 МС [СОЛО: Получите 10 МС]. Немедленно поторгуйте со всеми активными колониями. Можете увеличить трек колонии, с которой торгуете при каждой из этих торговых операций",
 
 

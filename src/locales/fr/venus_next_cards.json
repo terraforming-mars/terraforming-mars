@@ -3,7 +3,7 @@
     "Action: Add 1 Floater to ANY card or spend 1 Floater here to draw 1 card": "Action: Ajoutez 1 flotteur sur N'IMPORTE QUELLE CARTE ou retirez 1 flotteur de cette carte pour piocher une carte.",
 
     "Aerosport Tournament": "Tournoi d'Aérosport",
-    "Requires that you have 5 Floaters. Gain 1 MC per each City tile in play": "Nécessite que vous ayez 5 flotteurs en votre possession. Gagnez 1 M€ par cité en jeu.",
+    "Requires that you have 5 Floaters. Gain 1 M€ per each City tile in play": "Nécessite que vous ayez 5 flotteurs en votre possession. Gagnez 1 M€ par cité en jeu.",
 
     "Air-Scrapping Expedition": "Mission de Purification",
     "Raise Venus 1 step. Add 3 Floaters to ANY Venus CARD": "Augmentez Vénus de 1. Ajoutez 3 flotteurs sur N'IMPORTE QUELLE carte Vénus.",
@@ -15,7 +15,7 @@
     "Requires 3 Science tags. Either raise the temperature 2 steps, or raise Venus 2 steps. Add 2 Floaters to ANY card": "Nécessite 3 badges Science. Au choix: Augmentez la température de 2 ou augmentez Vénus de 2. Ajoutez 2 flotteurs à N'IMPORTE QUELLE carte.",
 
     "Comet for Venus": "Comète Vers Vénus",
-    "Raise Venus 1 step. Remove up to 4MC from any player WITH A VENUS TAG IN PLAY.": "Augmentez Vénus de 1. Retirez jusqu'à 4 M€ à un joueur ayant 1 badge Vénus en jeu.",
+    "Raise Venus 1 step. Remove up to 4M€ from any player WITH A VENUS TAG IN PLAY.": "Augmentez Vénus de 1. Retirez jusqu'à 4 M€ à un joueur ayant 1 badge Vénus en jeu.",
 
     "Corroder Suits": "Combinaison Anticorrosion",
     "Increase your M€ production 2 steps. Add 1 resource to ANY Venus CARD": "Augmentez votre production de M€ de 2.. Ajoutez 1 ressource à N'IMPORTE QUELLE carte Vénus.",
@@ -28,7 +28,7 @@
 
     "Dirigibles": "Dirigeables",
     "Action: add 1 Floater to ANY card.": "Action: Ajoutez 1 flotteur sur N'IMPORTE QUELLE carte.",
-    "Effect: when playing a Venus tag, Floaters here may be used as payment, and are worth 3MC each": "Effet: Lorsque vous jouez une carte Vénus, vous pouvez utiliser les flotteurs de cette carte pour payer son coût;ils valent 3 M€ chacun.",
+    "Effect: when playing a Venus tag, Floaters here may be used as payment, and are worth 3M€ each": "Effet: Lorsque vous jouez une carte Vénus, vous pouvez utiliser les flotteurs de cette carte pour payer son coût;ils valent 3 M€ chacun.",
 
     "Extractor Balloons": "Ballons Extracteurs",
     "Action: add 1 Floater to this card, or remove 2 Floaters here to raise Venus 1 step": "Action: Ajoutez 1 flotteur sur cette carte, ou retirez 2 flotteurs de cette carte pour augmenter Vénus de 13",
@@ -124,7 +124,7 @@
     "Increase Venus 1 step. Increase your M€ production 1 step for each Venus tag you have, including this.": "Augmentez Vénus de 1. Augmentez votre production de M€ de 1 par badge Vénus en votre possession y compris celui-ci.",
 
     "Sulphur-Eating Bacteria": "Bactéries Sulfo-Oxydantes",
-    "Action: add 1 Microbe to this card, or spend any number of Microbes here to gain triple amount of MC": "Action: Ajoutez 1 microbe sur cette carte, ou retirez n'importe quel nombre de microbes de cette carte pour gagner le triple de M€.",
+    "Action: add 1 Microbe to this card, or spend any number of Microbes here to gain triple amount of M€": "Action: Ajoutez 1 microbe sur cette carte, ou retirez n'importe quel nombre de microbes de cette carte pour gagner le triple de M€.",
     "Requires Venus 6%": "Nécessite que Vénus ait atteint 6%.",
 
     "Terraforming Contract": "Contrat de Terraformation",

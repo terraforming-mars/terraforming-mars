@@ -19,7 +19,7 @@ export class TradeAdvance extends PreludeCard implements IProjectCard {
           b.text('Trade all colonies with').br;
           b.trade().colon().text('+1');
         }),
-        description: 'Gain 2 MC [SOLO: Gain 10 MC]. Immediately trade with all active colonies. You may increase the Colony Tile track 1 step before each of these trades.',
+        description: 'Gain 2 M€ [SOLO: Gain 10 MC]. Immediately trade with all active colonies. You may increase the Colony Tile track 1 step before each of these trades.',
       },
     });
   }

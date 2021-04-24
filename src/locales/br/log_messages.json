@@ -138,11 +138,27 @@
     "megacredits": "megacréditos",
     "steel": "aço",
     "plant": "planta",
+    "plants": "plantas",
     "energy": "energia",
     "microbe": "micróbio",
     "science": "ciência",
     "floater": "flutuador",
     "asteroid": "asteroide",
     "resource(s)": "recurso(s)",
-    "microbe(s)": "micróbio(s)"
+    "microbe(s)": "micróbio(s)",
+
+    "The id of this game is ${0}": "O id desta partida é ${0}",
+    "Dealt and discarded ${0} (cost ${1}) to place a ${2}": "Comprou e descartou ${0} (custo ${1}) para colocar um ${2}",
+    "${0}'s ${1} amount ${2} by ${3} by Global Event": "A quantidade ${1} de ${0} foi ${2} em ${3} pelo Evento Global",
+    "${0} placed ${1} tile on row ${2} position ${3}": "${0} colocou um tile ${1} na linha ${2} posição ${3}",
+    "${0} spent 1 ${1} to gain 7 M€": "${0} gastou 1 ${1} para ganhar 7 M$",
+    "${0} removed an animal from ${1}": "${0} a retiré un animal de ${1}",
+    "${0} removed a microbe from ${1}": "${0} a retiré un microbe de ${1}",
+    "${0} removed a microbe from ${1}'s ${2}": "${0} a retiré un microbe de ${2} de ${1}",
+    "${0} found life!": "${0} a trouvé de la vie !",
+    "${0} removed a disease from ${1} to gain 1 TR": "${0} a retiré une maladie de ${1} pour gagner 1 NT",
+    "${0} turned ${1} face down to gain 3 TR": "${0} a retourné ${1} face cachée pour gagner 3 NT",
+    "${0} placed a Greenery tile": "${0} colocou um tile Forêt",
+    "${0} gained ${1} TR": "${0} a gagné ${1} NT",
+    "1 card(s) were discarded": "1 carte a été défaussée"
 }

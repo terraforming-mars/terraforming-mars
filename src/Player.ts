@@ -1669,6 +1669,7 @@ export class Player implements ISerializable<SerializedPlayer> {
         // We need a mechanism to tell the user this has failed. By now the `res` has been sent.
         // For now we will keep this player instance going and hope player discovers what has happened.
         if (err) {
+          this.usedUndo = false;
           this.takeAction();
           return;
         }
@@ -1811,8 +1812,13 @@ export class Player implements ISerializable<SerializedPlayer> {
   }
 
   public takeAction(): void {
+    /**
+     * Once an undo has been used we switch to
+     * a different instance of `Player` pulled from
+     * database. The instance where the undo was performed
+     * should no longer take actions
+     */
     if (this.usedUndo) {
-      this.usedUndo = false;
       return;
     }
 

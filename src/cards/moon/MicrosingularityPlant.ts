@@ -28,7 +28,7 @@ export class MicrosingularityPlant extends Card {
   };
 
   public play(player: Player) {
-    player.addProduction(Resources.ENERGY, 2, player.game);
+    player.addProduction(Resources.ENERGY, 2, {log: true});
     return undefined;
   }
 }

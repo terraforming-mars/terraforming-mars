@@ -57,7 +57,7 @@ export class LunaTradeStation extends MoonCard implements IActionCard {
 
   public action(player: Player) {
     const surfaceColonies = this.surfaceColonyCount(player.game);
-    player.setResource(Resources.MEGACREDITS, 2 * surfaceColonies, player.game);
+    player.addResource(Resources.MEGACREDITS, 2 * surfaceColonies, {log: true});
     return undefined;
   }
 }

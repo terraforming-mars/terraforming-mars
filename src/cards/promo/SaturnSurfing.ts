@@ -45,7 +45,7 @@ export class SaturnSurfing extends Card implements IActionCard, IProjectCard, IR
     }
 
     public action(player: Player) {
-      player.setResource(Resources.MEGACREDITS, Math.min(5, this.resourceCount--));
+      player.addResource(Resources.MEGACREDITS, Math.min(5, this.resourceCount--));
       return undefined;
     }
 

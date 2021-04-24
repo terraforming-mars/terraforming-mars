@@ -14,7 +14,7 @@ export class SpinoffProducts implements IGlobalEvent {
     public currentDelegate = PartyName.SCIENTISTS;
     public resolve(game: Game, turmoil: Turmoil) {
       game.getPlayers().forEach((player) => {
-        player.setResource(Resources.MEGACREDITS, 2 * (Math.min(5, player.getTagCount(Tags.SCIENCE, false, false)) + turmoil.getPlayerInfluence(player)), game, undefined, true);
+        player.addResource(Resources.MEGACREDITS, 2 * (Math.min(5, player.getTagCount(Tags.SCIENCE, false, false)) + turmoil.getPlayerInfluence(player)), {log: true, from: this.name});
       });
     }
 }

@@ -31,7 +31,7 @@ class MarsFirstBonus01 implements Bonus {
   grant(game: Game) {
     game.getPlayers().forEach((player) => {
       const tagCount = player.getTagCount(Tags.BUILDING, false, false);
-      player.setResource(Resources.MEGACREDITS, tagCount);
+      player.addResource(Resources.MEGACREDITS, tagCount);
     });
   }
 }
@@ -47,7 +47,7 @@ class MarsFirstBonus02 implements Bonus {
         return space.tile !== undefined && space.player === player && space.spaceType !== SpaceType.COLONY;
       }).length;
 
-      player.setResource(Resources.MEGACREDITS, tileCount);
+      player.addResource(Resources.MEGACREDITS, tileCount);
     });
   }
 }
@@ -59,7 +59,7 @@ class MarsFirstPolicy01 implements Policy {
 
   onTilePlaced(player: Player, space: ISpace) {
     if (space.tile && space.spaceType !== SpaceType.COLONY && player.game.phase === Phase.ACTION) {
-      player.setResource(Resources.STEEL);
+      player.addResource(Resources.STEEL, 1);
     }
   }
 }
@@ -70,7 +70,7 @@ class MarsFirstPolicy02 implements Policy {
   isDefault = false;
 
   onCardPlayed(player: Player, card: IProjectCard) {
-    if (card.tags.includes(Tags.BUILDING)) player.setResource(Resources.MEGACREDITS, 2);
+    if (card.tags.includes(Tags.BUILDING)) player.addResource(Resources.MEGACREDITS, 2);
   }
 }
 

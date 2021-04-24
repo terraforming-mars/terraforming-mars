@@ -31,7 +31,7 @@ export class TundraFarming extends Card implements IProjectCard {
   }
 
   public play(player: Player) {
-    player.addProduction(Resources.PLANTS);
+    player.addProduction(Resources.PLANTS, 1);
     player.addProduction(Resources.MEGACREDITS, 2);
     player.plants++;
     return undefined;

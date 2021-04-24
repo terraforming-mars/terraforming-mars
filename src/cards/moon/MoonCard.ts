@@ -32,7 +32,7 @@ export abstract class MoonCard extends Card implements IProjectCard, IMoonCard {
   public play(player: Player) {
     const adjustedReserveUnits = MoonExpansion.adjustedReserveCosts(player, this);
     player.deductUnits(adjustedReserveUnits);
-    player.adjustProduction(this.productionBox, player.game);
+    player.adjustProduction(this.productionBox, {log: true});
     return undefined;
   }
 }

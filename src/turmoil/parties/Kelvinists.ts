@@ -24,7 +24,7 @@ class KelvinistsBonus01 implements Bonus {
   grant(game: Game) {
     game.getPlayers().forEach((player) => {
       const heatProduction = player.getProduction(Resources.HEAT);
-      player.setResource(Resources.MEGACREDITS, heatProduction);
+      player.addResource(Resources.MEGACREDITS, heatProduction);
     });
   }
 }
@@ -37,7 +37,7 @@ class KelvinistsBonus02 implements Bonus {
   grant(game: Game) {
     game.getPlayers().forEach((player) => {
       const heatProduction = player.getProduction(Resources.HEAT);
-      player.setResource(Resources.HEAT, heatProduction);
+      player.addResource(Resources.HEAT, heatProduction);
     });
   }
 }
@@ -60,8 +60,8 @@ class KelvinistsPolicy01 implements Policy {
       {
         title: 'Select how to pay for Turmoil Kelvinists action',
         afterPay: () => {
-          player.addProduction(Resources.ENERGY);
-          player.addProduction(Resources.HEAT);
+          player.addProduction(Resources.ENERGY, 1);
+          player.addProduction(Resources.HEAT, 1);
           game.log('${0} increased heat and energy production 1 step', (b) => b.player(player));
         },
       },
@@ -91,7 +91,7 @@ class KelvinistsPolicy03 implements Policy {
     game.log('${0} used Turmoil Kelvinists action', (b) => b.player(player));
     game.log('${0} spent 6 heat to raise temperature 1 step', (b) => b.player(player));
 
-    player.setResource(Resources.HEAT, -6);
+    player.addResource(Resources.HEAT, -6);
     game.increaseTemperature(player, 1);
     return undefined;
   }
@@ -103,7 +103,7 @@ class KelvinistsPolicy04 implements Policy {
   isDefault = false;
 
   onTilePlaced(player: Player) {
-    player.setResource(Resources.HEAT, 2);
+    player.addResource(Resources.HEAT, 2);
   }
 }
 

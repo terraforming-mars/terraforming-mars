@@ -58,7 +58,7 @@ export class TheGrandLunaCapitalGroup implements CorporationCard {
     }
     const adjacentSpaces = MoonExpansion.moonData(cardOwner.game).moon.getAdjacentSpaces(space);
     const filtered = adjacentSpaces.filter((space) => MoonExpansion.spaceHasType(space, TileType.MOON_COLONY));
-    cardOwner.setResource(Resources.MEGACREDITS, filtered.length * 2, cardOwner.game);
+    cardOwner.addResource(Resources.MEGACREDITS, filtered.length * 2, {log: true});
   }
 
   public getVictoryPoints(player: Player) {

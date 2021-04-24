@@ -89,7 +89,7 @@ export abstract class Colony implements SerializedColony {
       // Poseidon hook
       const poseidon = player.game.getPlayers().find((player) => player.isCorporation(CardName.POSEIDON));
       if (poseidon !== undefined) {
-        poseidon.addProduction(Resources.MEGACREDITS);
+        poseidon.addProduction(Resources.MEGACREDITS, 1);
       }
     }
 
@@ -210,7 +210,7 @@ export abstract class Colony implements SerializedColony {
 
       case ColonyBenefit.GAIN_RESOURCES:
         if (resource === undefined) throw new Error('Resource cannot be undefined');
-        player.setResource(resource, quantity);
+        player.addResource(resource, quantity);
         LogHelper.logGainStandardResource(player, resource, quantity);
         break;
 
@@ -248,7 +248,7 @@ export abstract class Colony implements SerializedColony {
           if (game.turmoil.lobby.has(player.id)) partyDelegateCount--;
           if (game.turmoil.chairman === player.id) partyDelegateCount--;
 
-          player.setResource(Resources.MEGACREDITS, partyDelegateCount);
+          player.addResource(Resources.MEGACREDITS, partyDelegateCount);
           LogHelper.logGainStandardResource(player, Resources.MEGACREDITS, partyDelegateCount);
         }
         break;
@@ -274,7 +274,7 @@ export abstract class Colony implements SerializedColony {
 
       case ColonyBenefit.LOSE_RESOURCES:
         if (resource === undefined) throw new Error('Resource cannot be undefined');
-        player.setResource(resource, -quantity);
+        player.addResource(resource, -quantity);
         break;
 
       case ColonyBenefit.OPPONENT_DISCARD:

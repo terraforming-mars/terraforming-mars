@@ -32,7 +32,7 @@ export class Windmills extends Card implements IProjectCard {
   }
 
   public play(player: Player): PlayerInput | undefined {
-    player.addProduction(Resources.ENERGY);
+    player.addProduction(Resources.ENERGY, 1);
     return undefined;
   }
   public getVictoryPoints() {

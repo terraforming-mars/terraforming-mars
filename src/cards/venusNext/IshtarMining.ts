@@ -24,7 +24,7 @@ export class IshtarMining extends Card {
     });
   }
   public play(player: Player) {
-    player.addProduction(Resources.TITANIUM);
+    player.addProduction(Resources.TITANIUM, 1);
     return undefined;
   }
 }

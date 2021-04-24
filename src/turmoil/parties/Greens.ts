@@ -37,7 +37,7 @@ class GreensBonus01 implements Bonus {
   grant(game: Game) {
     game.getPlayers().forEach((player) => {
       const tagCount = player.getTagCount(Tags.PLANT, false, false) + player.getTagCount(Tags.MICROBE, false, false) + player.getTagCount(Tags.ANIMAL, false, false);
-      player.setResource(Resources.MEGACREDITS, tagCount);
+      player.addResource(Resources.MEGACREDITS, tagCount);
     });
   }
 }
@@ -53,7 +53,7 @@ class GreensBonus02 implements Bonus {
         return space.tile && space.tile.tileType === TileType.GREENERY && space.player !== undefined && space.player.id === player.id;
       }).length;
 
-      player.setResource(Resources.MEGACREDITS, count * 2);
+      player.addResource(Resources.MEGACREDITS, count * 2);
     });
   }
 }
@@ -65,7 +65,7 @@ class GreensPolicy01 implements Policy {
 
   onTilePlaced(player: Player, space: ISpace) {
     if (space.tile?.tileType === TileType.GREENERY && player.game.phase === Phase.ACTION) {
-      player.setResource(Resources.MEGACREDITS, 4);
+      player.addResource(Resources.MEGACREDITS, 4);
     }
   }
 }
@@ -76,7 +76,7 @@ class GreensPolicy02 implements Policy {
   isDefault = false;
 
   onTilePlaced(player: Player) {
-    player.setResource(Resources.PLANTS);
+    player.addResource(Resources.PLANTS, 1);
   }
 }
 
@@ -89,7 +89,7 @@ class GreensPolicy03 implements Policy {
     const tags = [Tags.ANIMAL, Tags.PLANT, Tags.MICROBE];
     const tagCount = card.tags.filter((tag) => tags.includes(tag)).length;
 
-    player.setResource(Resources.MEGACREDITS, tagCount * 2);
+    player.addResource(Resources.MEGACREDITS, tagCount * 2);
   }
 }
 
@@ -138,7 +138,7 @@ class GreensPolicy04 implements Policy {
           }
 
           orOptions.options.push(new SelectOption('Gain 3 plants', 'Confirm', () => {
-            player.setResource(Resources.PLANTS, 3);
+            player.addResource(Resources.PLANTS, 3);
             game.log('${0} gained 3 plants', (b) => b.player(player));
             return undefined;
           }));

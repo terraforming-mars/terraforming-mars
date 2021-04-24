@@ -28,13 +28,13 @@ describe('MaxwellBase', function() {
   });
 
   it('Can\'t play if Venus requirement not met', function() {
-    player.addProduction(Resources.ENERGY);
+    player.addProduction(Resources.ENERGY, 1);
     (game as any).venusScaleLevel = 10;
     expect(card.canPlay(player)).is.not.true;
   });
 
   it('Should play', function() {
-    player.addProduction(Resources.ENERGY);
+    player.addProduction(Resources.ENERGY, 1);
     (game as any).venusScaleLevel = 12;
     expect(card.canPlay(player)).is.true;
 

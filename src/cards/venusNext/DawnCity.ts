@@ -36,7 +36,7 @@ export class DawnCity extends Card {
   }
   public play(player: Player) {
     player.addProduction(Resources.ENERGY, -1);
-    player.addProduction(Resources.TITANIUM);
+    player.addProduction(Resources.TITANIUM, 1);
     player.game.addCityTile(player, SpaceName.DAWN_CITY, SpaceType.COLONY);
     return undefined;
   }

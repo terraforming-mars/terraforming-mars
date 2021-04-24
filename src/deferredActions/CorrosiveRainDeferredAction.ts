@@ -6,6 +6,7 @@ import {Resources} from '../Resources';
 import {ResourceType} from '../ResourceType';
 import {SelectOption} from '../inputs/SelectOption';
 import {DeferredAction, Priority} from './DeferredAction';
+import {GlobalEventName} from '../turmoil/globalEvents/GlobalEventName';
 
 export class CorrosiveRainDeferredAction implements DeferredAction {
   public priority = Priority.DEFAULT;
@@ -20,13 +21,13 @@ export class CorrosiveRainDeferredAction implements DeferredAction {
             card.resourceCount >= 2);
 
     if (floaterCards.length === 0) {
-      this.player.setResource(Resources.MEGACREDITS, -10, this.player.game, undefined, true);
+      this.player.addResource(Resources.MEGACREDITS, -10, {log: true, from: GlobalEventName.CORROSIVE_RAIN});
       return undefined;
     }
 
     const selectAction = new OrOptions();
     const payMC = new SelectOption('Lose up to 10 M€', 'Lose M€', () => {
-      this.player.setResource(Resources.MEGACREDITS, -10);
+      this.player.addResource(Resources.MEGACREDITS, -10);
       return undefined;
     });
     const removeFloaters = new SelectCard(

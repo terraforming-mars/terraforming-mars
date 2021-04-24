@@ -27,7 +27,7 @@ export class Satellites extends Card implements IProjectCard {
     });
   }
   public play(player: Player) {
-    player.addProduction(Resources.MEGACREDITS, 1 + player.getTagCount(Tags.SPACE), player.game);
+    player.addProduction(Resources.MEGACREDITS, 1 + player.getTagCount(Tags.SPACE), {log: true});
     return undefined;
   }
 }

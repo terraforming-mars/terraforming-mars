@@ -48,11 +48,11 @@ export class EnergyMarket extends Card implements IProjectCard {
       'Gain energy',
       (amount: number) => {
         if (player.canUseHeatAsMegaCredits) {
-          player.setResource(Resources.ENERGY, amount);
+          player.addResource(Resources.ENERGY, amount);
           player.game.defer(new SelectHowToPayDeferred(player, (amount * 2)));
         } else {
-          player.setResource(Resources.ENERGY, amount);
-          player.setResource(Resources.MEGACREDITS, -(amount * 2));
+          player.addResource(Resources.ENERGY, amount);
+          player.addResource(Resources.MEGACREDITS, -(amount * 2));
         }
 
         player.game.log('${0} gained ${1} energy', (b) => b.player(player).number(amount));
@@ -65,7 +65,7 @@ export class EnergyMarket extends Card implements IProjectCard {
 
   private getMegacreditsOption(player: Player) {
     player.addProduction(Resources.ENERGY, -1);
-    player.setResource(Resources.MEGACREDITS, 8);
+    player.addResource(Resources.MEGACREDITS, 8);
     player.game.log('${0} decreased energy production 1 step to gain 8 M€', (b) => b.player(player));
     return undefined;
   }

@@ -67,7 +67,7 @@ export class AsteroidRights extends Card implements IActionCard, IProjectCard, I
           return undefined;
         }),
         new SelectOption('Increase M€ production 1 step', 'Select', () => {
-          player.addProduction(Resources.MEGACREDITS);
+          player.addProduction(Resources.MEGACREDITS, 1);
           LogHelper.logRemoveResource(player, this, 1, 'increase M€ production 1 step');
           return undefined;
         }),

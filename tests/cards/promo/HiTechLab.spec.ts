@@ -20,7 +20,7 @@ describe('HiTechLab', function() {
   });
 
   it('Should act', function() {
-    player.setResource(Resources.ENERGY, 5);
+    player.addResource(Resources.ENERGY, 5);
     expect(card.canAct(player)).is.true;
 
     const amount = card.action(player) as SelectAmount;

@@ -28,7 +28,7 @@ export class Lichen extends Card implements IProjectCard {
   }
 
   public play(player: Player) {
-    player.addProduction(Resources.PLANTS);
+    player.addProduction(Resources.PLANTS, 1);
     return undefined;
   }
 }

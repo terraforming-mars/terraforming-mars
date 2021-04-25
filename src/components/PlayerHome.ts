@@ -7,7 +7,7 @@ import {Award} from './Award';
 import {PlayersOverview} from './overview/PlayersOverview';
 import {WaitingFor} from './WaitingFor';
 import {Preferences} from './Preferences';
-import {PlayerModel} from '../models/PlayerModel';
+import {PlayerModel, PublicPlayerModel} from '../models/PlayerModel';
 import {Colony} from './Colony';
 import {LogPanel} from './LogPanel';
 import {PlayerMixin} from './PlayerMixin';
@@ -107,7 +107,7 @@ export const PlayerHome = Vue.component('player-home', {
       return player.players.length > 1 && player.waitingFor !== undefined;
     },
     getPlayerCssForTurnOrder: (
-      player: PlayerModel,
+      player: PublicPlayerModel,
       highlightActive: boolean,
     ): string => {
       const classes = ['highlighter_box'];
@@ -119,7 +119,7 @@ export const PlayerHome = Vue.component('player-home', {
       }
       return classes.join(' ');
     },
-    getFleetsCountRange: function(player: PlayerModel): Array<number> {
+    getFleetsCountRange: function(player: PublicPlayerModel): Array<number> {
       const fleetsRange: Array<number> = [];
       for (let i = 0; i < player.fleetSize - player.tradesThisGeneration; i++) {
         fleetsRange.push(i);

@@ -12,7 +12,7 @@ import {Player} from '../Player';
 import {PlayerInput} from '../PlayerInput';
 import {PlayerInputModel} from './PlayerInputModel';
 import {PlayerInputTypes} from '../PlayerInputTypes';
-import {PlayerModel} from './PlayerModel';
+import {PlayerModel, PublicPlayerModel} from './PlayerModel';
 import {SelectAmount} from '../inputs/SelectAmount';
 import {SelectCard} from '../inputs/SelectCard';
 import {SelectHowToPay} from '../inputs/SelectHowToPay';
@@ -125,7 +125,7 @@ export class Server {
       plantProduction: player.getProduction(Resources.PLANTS),
       plantsAreProtected: player.plantsAreProtected(),
       playedCards: this.getCards(player, player.playedCards, {showResources: true}),
-      players: this.getPlayers(game.getPlayers(), game),
+      players: this.getPlayers(game),
       preludeCardsInHand: this.getCards(player, player.preludeCardsInHand),
       selfReplicatingRobotsCards: this.getSelfReplicatingRobotsTargetCards(player),
       steel: player.steel,
@@ -390,9 +390,9 @@ export class Server {
     }));
   }
 
-  public static getPlayers(players: Array<Player>, game: Game): Array<PlayerModel> {
+  public static getPlayers(game: Game): Array<PublicPlayerModel> {
+    const players = game.getPlayers();
     const turmoil = getTurmoil(game);
-
     return players.map((player) => {
       return {
         actionsTakenThisRound: player.actionsTakenThisRound,
@@ -436,19 +436,6 @@ export class Server {
         tradesThisGeneration: player.tradesThisGeneration,
         turmoil: turmoil,
         victoryPointsBreakdown: player.getVictoryPoints(),
-
-        // TODO(kberg): Move commonGameData out of this version of getPlayers()
-        game: this.getCommonGameModel(player.game),
-        // Fields that will be removed once this has its own private model.
-        cardsInHand: [],
-        dealtCorporationCards: [],
-        dealtPreludeCards: [],
-        dealtProjectCards: [],
-        draftedCards: [],
-        pickedCorporationCard: [],
-        players: [],
-        preludeCardsInHand: [],
-        waitingFor: undefined,
       };
     });
   }

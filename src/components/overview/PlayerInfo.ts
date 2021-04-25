@@ -99,10 +99,10 @@ export const PlayerInfo = Vue.component('player-info', {
       return this.player.availableBlueCardActionCount;
     },
     isLearnerModeOff: function(): boolean {
-      return PreferencesManager.loadBooleanValue('learner_mode') === false;
+      return PreferencesManager.loadBoolean('learner_mode') === false;
     },
   },
-  template: ` 
+  template: `
       <div :class="getClasses()">
         <div :class="getPlayerStatusAndResClasses()">
         <div class="player-status">
@@ -120,8 +120,8 @@ export const PlayerInfo = Vue.component('player-info', {
                 <div class="played-cards-icon hiding-card-button active"></div>
                 <div class="played-cards-icon hiding-card-button automated"></div>
                 <div class="played-cards-icon hiding-card-button event"></div>
-                <div class="played-cards-count"> 
-                  {{ 
+                <div class="played-cards-count">
+                  {{
                     getNrPlayedCards()
                   }}
                 </div>
@@ -129,7 +129,7 @@ export const PlayerInfo = Vue.component('player-info', {
             </div>
             <Button class="played-cards-button" size="tiny" :onClick="togglePlayerDetails" :title="buttonLabel()" />
           </div>
-          <div v-if="isLearnerModeOff()" class="tag-display player-board-blue-action-counter tooltip tooltip-top" data-tooltip="The number of available active card actions">
+          <div v-if="isLearnerModeOff()" class="tag-display player-board-blue-action-counter tooltip tooltip-top" data-tooltip="The number of available actions on active cards">
             <div class="tag-count tag-action-card">
               <div class="blue-stripe"></div>
               <div class="red-arrow"></div>

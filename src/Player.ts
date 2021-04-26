@@ -311,7 +311,6 @@ export class Player implements ISerializable<SerializedPlayer> {
   }
 
   public addResource(resource: Resources, amount: number, options? : { log: boolean, from? : Player | GlobalEventName}) {
-
     let availableAmountToRemove = 0;
     switch(resource) {
       case Resources.MEGACREDITS:

@@ -29,7 +29,7 @@ describe('LavaTubeSettlement', function() {
   });
 
   it('Can\'t play if no volcanic spaces left', function() {
-    player.addProduction(Resources.ENERGY);
+    player.addProduction(Resources.ENERGY, 1);
     game.addTile(player, SpaceType.LAND, game.board.getSpace(SpaceName.THARSIS_THOLUS), {tileType: TileType.LAVA_FLOWS});
     game.addTile(player, SpaceType.LAND, game.board.getSpace(SpaceName.ARSIA_MONS), {tileType: TileType.LAVA_FLOWS});
     game.addTile(player, SpaceType.LAND, game.board.getSpace(SpaceName.PAVONIS_MONS), {tileType: TileType.LAVA_FLOWS});
@@ -41,7 +41,7 @@ describe('LavaTubeSettlement', function() {
   });
 
   it('Should play', function() {
-    player.addProduction(Resources.ENERGY);
+    player.addProduction(Resources.ENERGY, 1);
     expect(card.canPlay(player)).is.true;
 
     card.play(player);

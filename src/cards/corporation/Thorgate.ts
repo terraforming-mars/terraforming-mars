@@ -41,7 +41,7 @@ export class Thorgate extends Card implements CorporationCard {
     return 0;
   }
   public play(player: Player) {
-    player.addProduction(Resources.ENERGY);
+    player.addProduction(Resources.ENERGY, 1);
     return undefined;
   }
 }

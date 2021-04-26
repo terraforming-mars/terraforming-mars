@@ -13,11 +13,11 @@ export class GlobalDustStorm implements IGlobalEvent {
     public currentDelegate = PartyName.GREENS;
     public resolve(game: Game, turmoil: Turmoil) {
       game.getPlayers().forEach((player) => {
-        if (player.getResource(Resources.HEAT) > 0) {
-          player.setResource(Resources.HEAT, -player.getResource(Resources.HEAT), game, undefined, true);
+        if (player.heat > 0) {
+          player.addResource(Resources.HEAT, -player.heat, {log: true, from: this.name});
         }
         const maxedSteelTags = Math.min(5, player.getTagCount(Tags.BUILDING, false, false));
-        player.setResource(Resources.MEGACREDITS, -2 * Math.max(0, maxedSteelTags - turmoil.getPlayerInfluence(player)), game, undefined, true);
+        player.addResource(Resources.MEGACREDITS, -2 * Math.max(0, maxedSteelTags - turmoil.getPlayerInfluence(player)), {log: true, from: this.name});
       });
     }
 }

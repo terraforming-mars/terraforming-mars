@@ -32,7 +32,7 @@ export class Aphrodite extends Card implements CorporationCard {
   }
 
   public play(player: Player) {
-    player.addProduction(Resources.PLANTS);
+    player.addProduction(Resources.PLANTS, 1);
     return undefined;
   }
 }

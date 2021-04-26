@@ -42,7 +42,7 @@ export class RedTourismWave extends Card implements IProjectCard {
         adj.tile !== undefined && adj.player === player,
       ),
     ).length;
-    player.setResource(Resources.MEGACREDITS, amount);
+    player.addResource(Resources.MEGACREDITS, amount);
     return undefined;
   }
 }

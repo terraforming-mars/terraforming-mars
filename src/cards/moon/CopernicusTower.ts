@@ -72,7 +72,7 @@ export class CopernicusTower extends Card implements IActionCard, IProjectCard {
   private spendResource(player: Player) {
     player.removeResourceFrom(this);
     player.increaseTerraformRating();
-    player.addProduction(Resources.MEGACREDITS);
+    player.addProduction(Resources.MEGACREDITS, 1);
     return undefined;
   }
 }

@@ -18,7 +18,7 @@ export class StealResources implements DeferredAction {
 
   public execute() {
     if (this.player.game.isSoloMode()) {
-      this.player.setResource(this.resource, this.count);
+      this.player.addResource(this.resource, this.count);
       return undefined;
     }
 
@@ -40,8 +40,8 @@ export class StealResources implements DeferredAction {
         'Steal ' + qtyToSteal + ' ' + this.resource + ' from ' + candidate.name,
         'Steal',
         () => {
-          candidate.setResource(this.resource, -qtyToSteal, this.player.game, this.player);
-          this.player.setResource(this.resource, qtyToSteal);
+          candidate.addResource(this.resource, -qtyToSteal, {log: true, from: this.player});
+          this.player.addResource(this.resource, qtyToSteal);
           this.stealComplete();
           return undefined;
         },

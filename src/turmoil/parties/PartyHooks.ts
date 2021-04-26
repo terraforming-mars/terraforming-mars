@@ -13,7 +13,7 @@ export class PartyHooks {
   static applyMarsFirstRulingPolicy(player: Player, spaceType: SpaceType) {
     if (this.shouldApplyPolicy(player.game, PartyName.MARS, TurmoilPolicy.MARS_FIRST_DEFAULT_POLICY) &&
         spaceType !== SpaceType.COLONY) {
-      player.setResource(Resources.STEEL, 1);
+      player.addResource(Resources.STEEL, 1);
     }
   }
 

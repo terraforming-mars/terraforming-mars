@@ -44,7 +44,7 @@ export class GMOContract extends Card implements IProjectCard {
     if (amount > 0) {
       player.game.defer(
         new DeferredAction(player, () => {
-          player.setResource(Resources.MEGACREDITS, amount * 2);
+          player.addResource(Resources.MEGACREDITS, amount * 2);
           return undefined;
         }),
       );

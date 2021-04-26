@@ -12,7 +12,7 @@ describe('DawnCity', function() {
     const redPlayer = TestPlayers.RED.newPlayer();
     const gameOptions = TestingUtils.setCustomGameOptions();
     Game.newInstance('foobar', [player, redPlayer], player, gameOptions);
-    player.addProduction(Resources.ENERGY);
+    player.addProduction(Resources.ENERGY, 1);
     expect(card.canPlay(player)).is.not.true;
 
     const action = card.play(player);

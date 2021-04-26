@@ -17,7 +17,7 @@ export class SelectProductionToLoseDeferred implements DeferredAction {
       this.unitsToLose,
       this.player,
       (production: Units) => {
-        this.player.adjustProduction(Units.negative(production), this.player.game);
+        this.player.adjustProduction(Units.negative(production), {log: true});
         return undefined;
       },
     );

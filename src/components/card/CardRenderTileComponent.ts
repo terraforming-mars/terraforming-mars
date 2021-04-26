@@ -15,14 +15,14 @@ interface Classes {
 }
 const TILE_CLASSES: Map<TileType, Classes> = new Map([
   [TileType.BIOFERTILIZER_FACILITY, {
-    tile: 'card-tile-biofertilizer-facility',
+    aresTile: 'card-tile-biofertilizer-facility',
   }],
   [TileType.CAPITAL, {
     tile: 'card-tile-capital',
     aresTile: 'card-tile-capital-ares',
   }],
   [TileType.COMMERCIAL_DISTRICT, {
-    tile: 'card-tile-commercial-district-ares',
+    aresTile: 'card-tile-commercial-district-ares',
     symbol: 'card-tile-symbol-commercial-district',
   }],
   [TileType.DEIMOS_DOWN, {
@@ -32,15 +32,15 @@ const TILE_CLASSES: Map<TileType, Classes> = new Map([
     symbol: 'card-tile-symbol-great-dam',
   }],
   [TileType.ECOLOGICAL_ZONE, {
-    tile: 'card-tile-ecological-zone-ares',
+    aresTile: 'card-tile-ecological-zone-ares',
     symbol: 'card-tile-symbol-ecological-zone',
   }],
   [TileType.INDUSTRIAL_CENTER, {
-    tile: 'card-tile-industrial-center-ares',
+    aresTile: 'card-tile-industrial-center-ares',
     symbol: 'card-tile-symbol-industrial-center',
   }],
   [TileType.LAVA_FLOWS, {
-    tile: 'card-tile-lava-flows-ares',
+    aresTile: 'card-tile-lava-flows-ares',
     symbol: 'card-tile-symbol-lava-flows',
   }],
   [TileType.LUNA_TRADE_STATION, {
@@ -59,7 +59,7 @@ const TILE_CLASSES: Map<TileType, Classes> = new Map([
     symbol: 'card-tile-symbol-magnetic-field-generators',
   }],
   [TileType.METALLIC_ASTEROID, {
-    tile: 'card-tile-metallic-asteroid',
+    aresTile: 'card-tile-metallic-asteroid',
   }],
   [TileType.MINING_AREA, {
     symbol: 'card-tile-symbol-mining',
@@ -74,7 +74,7 @@ const TILE_CLASSES: Map<TileType, Classes> = new Map([
     tile: 'card-tile-mining-titanium',
   }],
   [TileType.MOHOLE_AREA, {
-    tile: 'card-tile-mohole-area-ares',
+    aresTile: 'card-tile-mohole-area-ares',
     symbol: 'card-tile-symbol-mohole-area',
   }],
   [TileType.MOON_MINE, {
@@ -87,11 +87,11 @@ const TILE_CLASSES: Map<TileType, Classes> = new Map([
     tile: 'card-tile-lunar-road',
   }],
   [TileType.NATURAL_PRESERVE, {
-    tile: 'card-tile-natural-preserve-ares',
+    aresTile: 'card-tile-natural-preserve-ares',
     symbol: 'card-tile-symbol-natural-preserve',
   }],
   [TileType.NUCLEAR_ZONE, {
-    tile: 'card-tile-nuclear-zone-ares',
+    aresTile: 'card-tile-nuclear-zone-ares',
     symbol: 'card-tile-symbol-nuclear-zone',
   }],
   [TileType.OCEAN_CITY, {
@@ -105,7 +105,7 @@ const TILE_CLASSES: Map<TileType, Classes> = new Map([
   }],
 
   [TileType.RESTRICTED_AREA, {
-    tile: 'card-tile-restricted-area-ares',
+    aresTile: 'card-tile-restricted-area-ares',
     symbol: 'card-tile-symbol-restricted-area',
   }],
   [TileType.SOLAR_FARM, {

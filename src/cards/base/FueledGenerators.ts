@@ -35,7 +35,7 @@ export class FueledGenerators extends Card implements IProjectCard {
   }
   public play(player: Player) {
     player.addProduction(Resources.MEGACREDITS, -1);
-    player.addProduction(Resources.ENERGY);
+    player.addProduction(Resources.ENERGY, 1);
     return undefined;
   }
 }

@@ -32,7 +32,7 @@ export class SpaceElevator extends Card implements IActionCard, IProjectCard {
     });
   }
   public play(player: Player) {
-    player.addProduction(Resources.TITANIUM);
+    player.addProduction(Resources.TITANIUM, 1);
     return undefined;
   }
   public canAct(player: Player): boolean {

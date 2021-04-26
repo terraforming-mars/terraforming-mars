@@ -35,7 +35,7 @@ class UnityBonus01 implements Bonus {
       const tags = [Tags.VENUS, Tags.EARTH, Tags.JOVIAN];
       const tagCount = tags.map((tag) => player.getTagCount(tag, false, false)).reduce((acc, count) => acc + count, 0);
 
-      player.setResource(Resources.MEGACREDITS, tagCount);
+      player.addResource(Resources.MEGACREDITS, tagCount);
     });
   }
 }
@@ -48,7 +48,7 @@ class UnityBonus02 implements Bonus {
   grant(game: Game) {
     game.getPlayers().forEach((player) => {
       const tagCount = player.getTagCount(Tags.SPACE, false, false);
-      player.setResource(Resources.MEGACREDITS, tagCount);
+      player.addResource(Resources.MEGACREDITS, tagCount);
     });
   }
 }
@@ -104,7 +104,7 @@ class UnityPolicy02 implements Policy {
           }
 
           orOptions.options.push(new SelectOption('Gain 2 titanium', 'Confirm', () => {
-            player.setResource(Resources.TITANIUM, 2);
+            player.addResource(Resources.TITANIUM, 2);
             game.log('${0} gained 2 titanium', (b) => b.player(player));
             return undefined;
           }));

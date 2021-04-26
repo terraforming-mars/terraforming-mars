@@ -24,7 +24,7 @@ export class CoreMine extends PreludeCard implements IProjectCard {
   }
 
   public play(player: Player) {
-    player.addProduction(Resources.TITANIUM, 1, player.game);
+    player.addProduction(Resources.TITANIUM, 1, {log: true});
     player.game.defer(new PlaceMoonMineTile(player));
     return undefined;
   }

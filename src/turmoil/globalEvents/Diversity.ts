@@ -13,7 +13,7 @@ export class Diversity implements IGlobalEvent {
     public resolve(game: Game, turmoil: Turmoil) {
       game.getPlayers().forEach((player) => {
         if (player.getDistinctTagCount(false) + turmoil.getPlayerInfluence(player) >= 9) {
-          player.setResource(Resources.MEGACREDITS, 10, game, undefined, true);
+          player.addResource(Resources.MEGACREDITS, 10, {log: true, from: this.name});
         }
       });
     }

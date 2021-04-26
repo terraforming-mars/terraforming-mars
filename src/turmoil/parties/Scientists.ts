@@ -25,7 +25,7 @@ class ScientistsBonus01 implements Bonus {
   grant(game: Game) {
     game.getPlayers().forEach((player) => {
       const tagCount = player.getTagCount(Tags.SCIENCE, false, false);
-      player.setResource(Resources.MEGACREDITS, tagCount);
+      player.addResource(Resources.MEGACREDITS, tagCount);
     });
   }
 }
@@ -38,7 +38,7 @@ class ScientistsBonus02 implements Bonus {
   grant(game: Game) {
     game.getPlayers().forEach((player) => {
       const amount = Math.floor(player.cardsInHand.length / 3);
-      player.setResource(Resources.MEGACREDITS, amount);
+      player.addResource(Resources.MEGACREDITS, amount);
     });
   }
 }

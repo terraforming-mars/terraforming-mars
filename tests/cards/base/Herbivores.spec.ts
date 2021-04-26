@@ -24,13 +24,13 @@ describe('Herbivores', () => {
 
   it('Can\'t play if oxygen level too low', () => {
     (game as any).oxygenLevel = 7;
-    player2.addProduction(Resources.PLANTS);
+    player2.addProduction(Resources.PLANTS, 1);
     expect(card.canPlay(player)).is.not.true;
   });
 
   it('Should play - auto select if single target', () => {
     (game as any).oxygenLevel = 8;
-    player2.addProduction(Resources.PLANTS);
+    player2.addProduction(Resources.PLANTS, 1);
     expect(card.canPlay(player)).is.true;
 
     card.play(player);
@@ -42,8 +42,8 @@ describe('Herbivores', () => {
   });
 
   it('Should play - multiple targets', () => {
-    player.addProduction(Resources.PLANTS);
-    player2.addProduction(Resources.PLANTS);
+    player.addProduction(Resources.PLANTS, 1);
+    player2.addProduction(Resources.PLANTS, 1);
 
     card.play(player);
     expect(card.resourceCount).to.eq(1);
@@ -73,7 +73,7 @@ describe('Herbivores', () => {
   it('Should be playable in solo mode', () => {
     const game = Game.newInstance('foobar_solo', [player], player);
     (game as any).oxygenLevel = 8;
-    player.addProduction(Resources.PLANTS);
+    player.addProduction(Resources.PLANTS, 1);
 
     expect(card.canPlay(player)).is.true;
     card.play(player);

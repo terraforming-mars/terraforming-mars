@@ -62,7 +62,7 @@ describe('Kelvinists', function() {
     const kelvinistsPolicy = KELVINISTS_POLICY_3;
     expect(kelvinistsPolicy.canAct(player)).to.be.false;
 
-    player.setResource(Resources.HEAT, 6);
+    player.addResource(Resources.HEAT, 6);
     expect(kelvinistsPolicy.canAct(player)).to.be.true;
 
     const initialTR = player.getTerraformRating();

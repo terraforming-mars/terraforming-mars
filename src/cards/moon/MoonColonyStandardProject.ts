@@ -52,6 +52,6 @@ export class MoonColonyStandardProject extends StandardProjectCard implements IM
     const adjustedReserveUnits = MoonExpansion.adjustedReserveCosts(player, this);
     player.deductUnits(adjustedReserveUnits);
     player.game.defer(new PlaceMoonColonyTile(player));
-    player.addProduction(Resources.MEGACREDITS, 1, player.game);
+    player.addProduction(Resources.MEGACREDITS, 1, {log: true});
   }
 }

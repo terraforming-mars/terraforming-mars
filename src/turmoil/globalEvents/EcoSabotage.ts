@@ -12,10 +12,10 @@ export class EcoSabotage implements IGlobalEvent {
     public currentDelegate = PartyName.REDS;
     public resolve(game: Game, turmoil: Turmoil) {
       game.getPlayers().forEach((player) => {
-        const plants = player.getResource(Resources.PLANTS);
+        const plants = player.plants;
         const maxPlants = 3 + turmoil.getPlayerInfluence(player);
         const plantDecrease = Math.max(0, plants - maxPlants);
-        player.setResource(Resources.PLANTS, -plantDecrease, game, undefined, true);
+        player.addResource(Resources.PLANTS, -plantDecrease, {log: true, from: this.name});
       });
     }
 }

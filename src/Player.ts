@@ -70,6 +70,7 @@ import {PlaceMoonMineTile} from './moon/PlaceMoonMineTile';
 import {PlaceMoonColonyTile} from './moon/PlaceMoonColonyTile';
 import {PlaceMoonRoadTile} from './moon/PlaceMoonRoadTile';
 import {GlobalParameter} from './GlobalParameter';
+import {GlobalEventName} from './turmoil/globalEvents/GlobalEventName';
 
 export type PlayerId = string;
 
@@ -298,7 +299,7 @@ export class Player implements ISerializable<SerializedPlayer> {
       const monsInsuranceOwner: Player = this.game.getPlayerById(this.game.monsInsuranceOwner);
       const retribution: number = Math.min(monsInsuranceOwner.megaCredits, 3);
       this.megaCredits += retribution;
-      monsInsuranceOwner.setResource(Resources.MEGACREDITS, -3);
+      monsInsuranceOwner.addResource(Resources.MEGACREDITS, -3);
       if (retribution > 0) {
         this.game.log('${0} received ${1} M€ from ${2} owner (${3})', (b) =>
           b.player(this)
@@ -309,50 +310,54 @@ export class Player implements ISerializable<SerializedPlayer> {
     }
   }
 
-  public setResource(resource: Resources, amount : number = 1, game? : Game, fromPlayer? : Player, globalEvent? : boolean) {
+  public addResource(resource: Resources, amount: number, options? : { log: boolean, from? : Player | GlobalEventName}) {
     if (resource === Resources.MEGACREDITS) this.megaCredits = Math.max(0, this.megaCredits + amount);
     if (resource === Resources.STEEL) this.steel = Math.max(0, this.steel + amount);
+
     if (resource === Resources.TITANIUM) this.titanium = Math.max(0, this.titanium + amount);
     if (resource === Resources.PLANTS) this.plants = Math.max(0, this.plants + amount);
     if (resource === Resources.ENERGY) this.energy = Math.max(0, this.energy + amount);
     if (resource === Resources.HEAT) this.heat = Math.max(0, this.heat + amount);
 
-    const modifier = amount > 0 ? 'increased' : 'decreased';
+    if (options?.log === true) {
+      const modifier = amount > 0 ? 'increased' : 'decreased';
 
-    if (game !== undefined && fromPlayer !== undefined && amount < 0) {
-      if (fromPlayer !== this && this.removingPlayers.includes(fromPlayer.id) === false) {
-        this.removingPlayers.push(fromPlayer.id);
+      if (options?.from !== undefined && options.from instanceof Player && amount < 0) {
+        const from: Player = options.from;
+        if (from !== this && this.removingPlayers.includes(from.id) === false) {
+          this.removingPlayers.push(from.id);
+        }
+
+        // Crash site cleanup hook
+        if (from !== this && resource === Resources.PLANTS && amount < 0) {
+          this.game.someoneHasRemovedOtherPlayersPlants = true;
+        }
+
+        this.game.log('${0}\'s ${1} amount ${2} by ${3} by ${4}', (b) =>
+          b.player(this)
+            .string(resource)
+            .string(modifier)
+            .number(Math.abs(amount))
+            .player(from));
       }
 
-      // Crash site cleanup hook
-      if (fromPlayer !== this && resource === Resources.PLANTS && amount < 0) {
-        game.someoneHasRemovedOtherPlayersPlants = true;
+      // Global event logging
+      if (options?.from !== undefined && ! (options.from instanceof Player) && amount !== 0) {
+        this.game.log('${0}\'s ${1} amount ${2} by ${3} by Global Event', (b) =>
+          b.player(this)
+            .string(resource)
+            .string(modifier)
+            .number(Math.abs(amount)));
       }
 
-      game.log('${0}\'s ${1} amount ${2} by ${3} by ${4}', (b) =>
-        b.player(this)
-          .string(resource)
-          .string(modifier)
-          .number(Math.abs(amount))
-          .player(fromPlayer));
-    }
-
-    // Global event logging
-    if (game !== undefined && globalEvent && amount !== 0) {
-      game.log('${0}\'s ${1} amount ${2} by ${3} by Global Event', (b) =>
-        b.player(this)
-          .string(resource)
-          .string(modifier)
-          .number(Math.abs(amount)));
-    }
-
-    // Mons Insurance hook
-    if (game !== undefined && amount < 0 && fromPlayer !== undefined && fromPlayer !== this) {
-      this.resolveMonsInsurance();
+      // Mons Insurance hook
+      if (amount < 0 && options?.from !== undefined && options.from !== this) {
+        this.resolveMonsInsurance();
+      }
     }
   }
 
-  public addProduction(resource: Resources, amount : number = 1, game? : Game, fromPlayer? : Player, globalEvent? : boolean) {
+  public addProduction(resource: Resources, amount : number, options? : { log: boolean, from? : Player | GlobalEventName}) {
     if (resource === Resources.MEGACREDITS) this.megaCreditProduction = Math.max(-5, this.megaCreditProduction + amount);
     if (resource === Resources.STEEL) this.steelProduction = Math.max(0, this.steelProduction + amount);
     if (resource === Resources.TITANIUM) this.titaniumProduction = Math.max(0, this.titaniumProduction + amount);
@@ -360,47 +365,49 @@ export class Player implements ISerializable<SerializedPlayer> {
     if (resource === Resources.ENERGY) this.energyProduction = Math.max(0, this.energyProduction + amount);
     if (resource === Resources.HEAT) this.heatProduction = Math.max(0, this.heatProduction + amount);
 
-    const modifier = amount > 0 ? 'increased' : 'decreased';
-
-    // Gaining production from multiplier cards
-    if (game !== undefined && fromPlayer === undefined && amount > 0) {
-      game.log('${0}\'s ${1} production ${2} by ${3}', (b) =>
-        b.player(this)
-          .string(resource)
-          .string(modifier)
-          .number(Math.abs(amount)));
-    }
-
-    // Production reduced by other players
-    if (game !== undefined && fromPlayer !== undefined && amount < 0) {
-      if (fromPlayer !== this && this.removingPlayers.includes(fromPlayer.id) === false) {
-        this.removingPlayers.push(fromPlayer.id);
+    if (options?.log === true) {
+      const modifier = amount > 0 ? 'increased' : 'decreased';
+      // Gaining production from multiplier cards
+      if (options?.from === undefined && amount > 0) {
+        this.game.log('${0}\'s ${1} production ${2} by ${3}', (b) =>
+          b.player(this)
+            .string(resource)
+            .string(modifier)
+            .number(Math.abs(amount)));
       }
-      game.log('${0}\'s ${1} production ${2} by ${3} by ${4}', (b) =>
-        b.player(this)
-          .string(resource)
-          .string(modifier)
-          .number(Math.abs(amount))
-          .player(fromPlayer));
-    }
 
-    // Global event logging
-    if (game !== undefined && globalEvent && amount !== 0) {
-      game.log('${0}\'s ${1} production ${2} by ${3} by Global Event', (b) =>
-        b.player(this)
-          .string(resource)
-          .string(modifier)
-          .number(Math.abs(amount)));
+      // Production reduced by other players
+      if (options?.from !== undefined && options.from instanceof Player && amount < 0) {
+        const from: Player = options.from;
+        if (from !== this && this.removingPlayers.includes(from.id) === false) {
+          this.removingPlayers.push(from.id);
+        }
+        this.game.log('${0}\'s ${1} production ${2} by ${3} by ${4}', (b) =>
+          b.player(this)
+            .string(resource)
+            .string(modifier)
+            .number(Math.abs(amount))
+            .player(from));
+      }
+
+      // Global event logging
+      if (options?.from !== undefined && ! (options.from instanceof Player) && amount !== 0) {
+        this.game.log('${0}\'s ${1} production ${2} by ${3} by Global Event', (b) =>
+          b.player(this)
+            .string(resource)
+            .string(modifier)
+            .number(Math.abs(amount)));
+      }
+
+      // Mons Insurance hook
+      if (amount < 0 && options.from !== undefined && options.from !== this) {
+        this.resolveMonsInsurance();
+      }
     }
 
     // Manutech hook
     if (this.isCorporation(CardName.MANUTECH)) {
       Manutech.onProductionGain(this, resource, amount);
-    }
-
-    // Mons Insurance hook
-    if (game !== undefined && amount < 0 && fromPlayer !== undefined && fromPlayer !== this) {
-      this.resolveMonsInsurance();
     }
   };
 
@@ -432,29 +439,29 @@ export class Player implements ISerializable<SerializedPlayer> {
       this.getProduction(Resources.HEAT) + units.heat >= 0;
   }
 
-  public adjustProduction(units: Units, game?: Game, fromPlayer?: Player) {
+  public adjustProduction(units: Units, options?: {log: boolean, from?: Player}) {
     if (units.megacredits !== undefined) {
-      this.addProduction(Resources.MEGACREDITS, units.megacredits, game, fromPlayer);
+      this.addProduction(Resources.MEGACREDITS, units.megacredits, options);
     }
 
     if (units.steel !== undefined) {
-      this.addProduction(Resources.STEEL, units.steel, game, fromPlayer);
+      this.addProduction(Resources.STEEL, units.steel, options);
     }
 
     if (units.titanium !== undefined) {
-      this.addProduction(Resources.TITANIUM, units.titanium, game, fromPlayer);
+      this.addProduction(Resources.TITANIUM, units.titanium, options);
     }
 
     if (units.plants !== undefined) {
-      this.addProduction(Resources.PLANTS, units.plants, game, fromPlayer);
+      this.addProduction(Resources.PLANTS, units.plants, options);
     }
 
     if (units.energy !== undefined) {
-      this.addProduction(Resources.ENERGY, units.energy, game, fromPlayer);
+      this.addProduction(Resources.ENERGY, units.energy, options);
     }
 
     if (units.heat !== undefined) {
-      this.addProduction(Resources.HEAT, units.heat, game, fromPlayer);
+      this.addProduction(Resources.HEAT, units.heat, options);
     }
   }
 
@@ -1656,10 +1663,25 @@ export class Player implements ISerializable<SerializedPlayer> {
   // Propose a new action to undo last action
   private undoTurnOption(): PlayerInput {
     return new SelectOption('Undo last action', 'Undo', () => {
-      GameLoader.getInstance().restoreGameAt(this.game.id, this.game.lastSaveId - 2, (game) => {
-        if (game !== undefined) {
-          this.usedUndo = true; // To prevent going back into takeAction()
+      /**
+       * The usedUndo flag is used as a kill switch. Once this flag
+       * is set on an instance we don't expect that instance to take
+       * further action or be used. We assume the `GameLoader` is going
+       * to create a new `Player` instance to use with the a `Game`.
+       */
+      this.usedUndo = true; // To prevent going back into takeAction()
+      GameLoader.getInstance().restoreGameAt(this.game.id, this.game.lastSaveId - 2, (err) => {
+        // If there is an error with restoring the game from the database this undo action has failed.
+        // We need a mechanism to tell the user this has failed. By now the `res` has been sent.
+        // For now we will keep this player instance going and hope player discovers what has happened.
+        if (err) {
+          this.game.log('Unable to perform undo operation', () => {}, {reservedFor: this});
+          this.usedUndo = false;
+          this.takeAction();
+          return;
         }
+        // If there was no error the GameLoader has loaded the old version of `Player`
+        // This instance of `Player` will eventually be garbage collected.
       });
       return undefined;
     });
@@ -1797,8 +1819,13 @@ export class Player implements ISerializable<SerializedPlayer> {
   }
 
   public takeAction(): void {
+    /**
+     * Once an undo has been used we switch to
+     * the new instance of `Player` pulled from
+     * database. This instance, where the undo was performed,
+     * should no longer take actions.
+     */
     if (this.usedUndo) {
-      this.usedUndo = false;
       return;
     }
 

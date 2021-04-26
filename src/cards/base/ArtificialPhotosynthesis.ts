@@ -32,7 +32,7 @@ export class ArtificialPhotosynthesis extends Card implements IProjectCard {
         return undefined;
       }),
       new SelectOption('Increase your plant production 1 step', 'Increase', () => {
-        player.addProduction(Resources.PLANTS);
+        player.addProduction(Resources.PLANTS, 1);
         return undefined;
       }),
     );

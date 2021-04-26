@@ -21,7 +21,7 @@ export enum GlobalEventName {
     RIOTS = 'Riots',
     VOLCANIC_ERUPTIONS = 'Volcanic Eruptions',
     MUD_SLIDES = 'Mud Slides',
-    MINERS_ON_STRIKE = 'Miners Of Strike',
+    MINERS_ON_STRIKE = 'Miners On Strike',
     SABOTAGE = 'Sabotage',
     REVOLUTION = 'Revolution',
     DRY_DESERTS = 'Dry Deserts',

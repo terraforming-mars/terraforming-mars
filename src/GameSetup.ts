@@ -24,12 +24,12 @@ export class GameSetup {
   }
 
   public static setStartingProductions(player: Player) {
-    player.addProduction(Resources.MEGACREDITS);
-    player.addProduction(Resources.STEEL);
-    player.addProduction(Resources.TITANIUM);
-    player.addProduction(Resources.PLANTS);
-    player.addProduction(Resources.ENERGY);
-    player.addProduction(Resources.HEAT);
+    player.addProduction(Resources.MEGACREDITS, 1);
+    player.addProduction(Resources.STEEL, 1);
+    player.addProduction(Resources.TITANIUM, 1);
+    player.addProduction(Resources.PLANTS, 1);
+    player.addProduction(Resources.ENERGY, 1);
+    player.addProduction(Resources.HEAT, 1);
   }
 
   public static includesCommunityColonies(gameOptions: GameOptions) : boolean {

@@ -30,6 +30,6 @@ export class PowerPlantStandardProject extends StandardProjectCard {
   }
 
   actionEssence(player: Player): void {
-    player.addProduction(Resources.ENERGY);
+    player.addProduction(Resources.ENERGY, 1);
   }
 }

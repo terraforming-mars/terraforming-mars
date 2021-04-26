@@ -116,22 +116,25 @@ export class GameLoader implements IGameLoader {
     this.getByParticipantId(spectatorId, cb);
   }
 
-  public restoreGameAt(gameId: GameId, saveId: number, cb: LoadCallback): void {
+  public restoreGameAt(gameId: GameId, saveId: number, cb: (err?: any) => void): void {
     try {
       Database.getInstance().restoreGame(gameId, saveId, (err, game) => {
-        if (game !== undefined) {
+        if (err) {
+          console.error('error while restoring game', err);
+          cb(err);
+        } else if (game !== undefined) {
           Database.getInstance().deleteGameNbrSaves(gameId, 1);
           this.add(game);
           game.undoCount++;
-          cb(game);
+          cb();
         } else {
-          console.log(err);
-          cb(undefined);
+          console.error('game not found while restoring game', err);
+          cb(new Error('game not found'));
         }
       });
     } catch (error) {
       console.log(error);
-      cb(undefined);
+      cb(error);
     }
   }
 

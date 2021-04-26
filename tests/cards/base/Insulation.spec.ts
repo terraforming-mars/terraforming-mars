@@ -13,7 +13,7 @@ describe('Insulation', function() {
     Game.newInstance('foobar', [player, redPlayer], player);
 
     expect(card.canPlay(player)).is.false;
-    player.addProduction(Resources.HEAT);
+    player.addProduction(Resources.HEAT, 1);
     expect(card.canPlay(player)).is.true;
 
     const action = card.play(player);

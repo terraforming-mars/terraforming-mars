@@ -16,7 +16,7 @@ describe('UndergroundCity', function() {
   });
 
   it('Can\'t play', function() {
-    player.addProduction(Resources.ENERGY);
+    player.addProduction(Resources.ENERGY, 1);
     expect(card.canPlay(player)).is.not.true;
   });
 

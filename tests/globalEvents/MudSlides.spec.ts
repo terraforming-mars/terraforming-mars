@@ -16,7 +16,7 @@ describe('MudSlides', function() {
     const oceanTile = game.board.getAvailableSpacesForOcean(player)[0];
     game.addCityTile(player, game.board.getAdjacentSpaces(oceanTile)[0].id);
     game.addOceanTile(player, oceanTile.id);
-    player.setResource(Resources.MEGACREDITS, 10);
+    player.addResource(Resources.MEGACREDITS, 10);
     card.resolve(game, turmoil);
     expect(player.getResource(Resources.MEGACREDITS)).to.eq(6);
   });

@@ -33,7 +33,7 @@ export class HiTechLab extends Card implements IProjectCard {
   }
 
   public canAct(player: Player): boolean {
-    return player.getResource(Resources.ENERGY) > 0;
+    return player.energy > 0;
   }
 
   public action(player: Player) {
@@ -41,12 +41,12 @@ export class HiTechLab extends Card implements IProjectCard {
       'Select amount of energy to spend',
       'Spend energy',
       (amount: number) => {
-        player.setResource(Resources.ENERGY, -amount);
+        player.addResource(Resources.ENERGY, -amount);
         player.game.log('${0} spent ${1} energy', (b) => b.player(player).number(amount));
         return player.drawCardKeepSome(amount, {keepMax: 1});
       },
       1,
-      player.getResource(Resources.ENERGY),
+      player.energy,
     );
   }
 

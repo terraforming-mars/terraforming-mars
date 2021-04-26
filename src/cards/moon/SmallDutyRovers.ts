@@ -42,7 +42,7 @@ export class SmallDutyRovers extends MoonCard implements IProjectCard {
     const moonData = MoonExpansion.moonData(player.game);
     const gain = moonData.moon.spaces.filter((s) => s.tile !== undefined && s.spaceType !== SpaceType.COLONY).length;
 
-    player.setResource(Resources.MEGACREDITS, gain, player.game);
+    player.addResource(Resources.MEGACREDITS, gain, {log: true});
 
     return undefined;
   }

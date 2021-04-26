@@ -312,31 +312,32 @@ export class Player implements ISerializable<SerializedPlayer> {
 
   public addResource(resource: Resources, amount: number, options? : { log: boolean, from? : Player | GlobalEventName}) {
     let availableAmountToRemove = 0;
-    switch(resource) {
-      case Resources.MEGACREDITS:
-        availableAmountToRemove = this.megaCredits;
-        this.megaCredits = Math.max(0, this.megaCredits + amount);
-        break;
-      case Resources.STEEL:
-        availableAmountToRemove = this.steel;
-        this.steel = Math.max(0, this.steel + amount);
-        break;
-      case Resources.TITANIUM:
-        availableAmountToRemove = this.titanium;
-        this.titanium = Math.max(0, this.titanium + amount);
-        break;
-      case Resources.PLANTS:
-        availableAmountToRemove = this.plants;
-        this.plants = Math.max(0, this.plants + amount);
-        break;
-      case Resources.ENERGY:
-        availableAmountToRemove = this.energy;
-        this.energy = Math.max(0, this.energy + amount);
-        break;
-      case Resources.HEAT:
-        availableAmountToRemove = this.heat;
-        this.heat = Math.max(0, this.heat + amount);
-        break;
+
+    switch (resource) {
+    case Resources.MEGACREDITS:
+      availableAmountToRemove = this.megaCredits;
+      this.megaCredits = Math.max(0, this.megaCredits + amount);
+      break;
+    case Resources.STEEL:
+      availableAmountToRemove = this.steel;
+      this.steel = Math.max(0, this.steel + amount);
+      break;
+    case Resources.TITANIUM:
+      availableAmountToRemove = this.titanium;
+      this.titanium = Math.max(0, this.titanium + amount);
+      break;
+    case Resources.PLANTS:
+      availableAmountToRemove = this.plants;
+      this.plants = Math.max(0, this.plants + amount);
+      break;
+    case Resources.ENERGY:
+      availableAmountToRemove = this.energy;
+      this.energy = Math.max(0, this.energy + amount);
+      break;
+    case Resources.HEAT:
+      availableAmountToRemove = this.heat;
+      this.heat = Math.max(0, this.heat + amount);
+      break;
     }
 
     if (options?.log === true) {

@@ -1663,6 +1663,12 @@ export class Player implements ISerializable<SerializedPlayer> {
   // Propose a new action to undo last action
   private undoTurnOption(): PlayerInput {
     return new SelectOption('Undo last action', 'Undo', () => {
+      /**
+       * The usedUndo flag is used as a kill switch. Once this flag
+       * is set on an instance we don't expect that instance to take
+       * further action or be used. We assume the `GameLoader` is going
+       * to create a new `Player` instance to use with the a `Game`.
+       */
       this.usedUndo = true; // To prevent going back into takeAction()
       GameLoader.getInstance().restoreGameAt(this.game.id, this.game.lastSaveId - 2, (err) => {
         // If there is an error with restoring the game from the database this undo action has failed.
@@ -1815,9 +1821,9 @@ export class Player implements ISerializable<SerializedPlayer> {
   public takeAction(): void {
     /**
      * Once an undo has been used we switch to
-     * a different instance of `Player` pulled from
-     * database. The instance where the undo was performed
-     * should no longer take actions
+     * the new instance of `Player` pulled from
+     * database. This instance, where the undo was performed,
+     * should no longer take actions.
      */
     if (this.usedUndo) {
       return;

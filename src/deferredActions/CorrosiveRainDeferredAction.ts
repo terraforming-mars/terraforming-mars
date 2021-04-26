@@ -20,8 +20,6 @@ export class CorrosiveRainDeferredAction implements DeferredAction {
             card.resourceCount !== undefined &&
             card.resourceCount >= 2);
 
-    const amountLost = Math.min(10, this.player.megaCredits);
-
     if (floaterCards.length === 0) {
       this.player.addResource(Resources.MEGACREDITS, -10, {log: true, from: GlobalEventName.CORROSIVE_RAIN});
       return undefined;

@@ -54,6 +54,6 @@ describe('ApiWaitingFor', function() {
     ctx.gameLoader.add(game);
     ApiWaitingFor.INSTANCE.get(req, res.hide(), ctx);
     expect(res.statusCode).eq(200);
-    expect(res.content).eq('{"result":"GO"}');
+    expect(res.content).matches(/{"result":"GO","version":"[^"].*"}/);
   });
 });

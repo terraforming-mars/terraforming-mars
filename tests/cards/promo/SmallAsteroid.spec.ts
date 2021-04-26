@@ -17,7 +17,7 @@ describe('SmallAsteroid', function() {
   });
 
   it('Should play', function() {
-    player2.setResource(Resources.PLANTS, 3);
+    player2.addResource(Resources.PLANTS, 3);
     card.play(player);
     expect(player.game.deferredActions).has.lengthOf(1);
 
@@ -31,7 +31,7 @@ describe('SmallAsteroid', function() {
   });
 
   it('Doesn\'t remove plants in solo mode', function() {
-    player.setResource(Resources.PLANTS, 3);
+    player.addResource(Resources.PLANTS, 3);
     Game.newInstance('solo', [player], player);
     card.play(player);
     expect(player.getResource(Resources.PLANTS)).to.eq(3);
@@ -40,8 +40,8 @@ describe('SmallAsteroid', function() {
   it('Works correctly with multiple targets', function() {
     const player3 = TestPlayers.YELLOW.newPlayer();
     Game.newInstance('foobar', [player, player2, player3], player);
-    player2.setResource(Resources.PLANTS, 3);
-    player3.setResource(Resources.PLANTS, 5);
+    player2.addResource(Resources.PLANTS, 3);
+    player3.addResource(Resources.PLANTS, 5);
 
     card.play(player);
     expect(player.game.deferredActions).has.lengthOf(1);

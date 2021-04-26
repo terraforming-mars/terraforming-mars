@@ -18,7 +18,7 @@ export class Cartel extends Card implements IProjectCard {
 
       metadata: {
         cardNumber: '137',
-        description: 'Increase your MC production 1 step for each Earth tag you have, including this.',
+        description: 'Increase your M€ production 1 step for each Earth tag you have, including this.',
         renderData: CardRenderer.builder((b) => b.production((pb) => {
           pb.megacredits(1).slash().earth().played;
         })),
@@ -26,7 +26,7 @@ export class Cartel extends Card implements IProjectCard {
     });
   }
   public play(player: Player) {
-    player.addProduction(Resources.MEGACREDITS, player.getTagCount(Tags.EARTH) + 1, player.game);
+    player.addProduction(Resources.MEGACREDITS, player.getTagCount(Tags.EARTH) + 1, {log: true});
     return undefined;
   }
 }

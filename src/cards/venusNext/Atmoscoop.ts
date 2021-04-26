@@ -15,7 +15,7 @@ import {PartyHooks} from '../../turmoil/parties/PartyHooks';
 import {PartyName} from '../../turmoil/parties/PartyName';
 import {CardRequirements} from '../CardRequirements';
 import {CardRenderer} from '../render/CardRenderer';
-import {CardRenderItemSize} from '../render/CardRenderItemSize';
+import {Size} from '../render/Size';
 import {Card} from '../Card';
 
 export class Atmoscoop extends Card implements IProjectCard {
@@ -31,7 +31,7 @@ export class Atmoscoop extends Card implements IProjectCard {
         cardNumber: '217',
         description: 'Requires 3 Science tags. Either raise the temperature 2 steps, or raise Venus 2 steps. Add 2 Floaters to ANY card.',
         renderData: CardRenderer.builder((b) => {
-          b.temperature(2).or(CardRenderItemSize.SMALL).venus(2).br;
+          b.temperature(2).or(Size.SMALL).venus(2).br;
           b.floaters(2).asterix();
         }),
         victoryPoints: 1,
@@ -46,7 +46,7 @@ export class Atmoscoop extends Card implements IProjectCard {
     const stepsRaised = Math.min(remainingTemperatureSteps, remainingVenusSteps, 2);
 
     if (PartyHooks.shouldApplyPolicy(player.game, PartyName.REDS)) {
-      return player.canAfford(this.cost + constants.REDS_RULING_POLICY_COST * stepsRaised, false, true) && meetsTagRequirements;
+      return player.canAfford(this.cost + constants.REDS_RULING_POLICY_COST * stepsRaised, {titanium: true}) && meetsTagRequirements;
     }
 
     return meetsTagRequirements;

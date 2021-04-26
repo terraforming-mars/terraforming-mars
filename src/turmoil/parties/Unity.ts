@@ -27,7 +27,7 @@ export class Unity extends Party implements IParty {
 
 class UnityBonus01 implements Bonus {
   id = 'ub01';
-  description = 'Gain 1 MC for each Venus, Earth and Jovian tag you have';
+  description = 'Gain 1 M€ for each Venus, Earth and Jovian tag you have';
   isDefault = true;
 
   grant(game: Game) {
@@ -35,20 +35,20 @@ class UnityBonus01 implements Bonus {
       const tags = [Tags.VENUS, Tags.EARTH, Tags.JOVIAN];
       const tagCount = tags.map((tag) => player.getTagCount(tag, false, false)).reduce((acc, count) => acc + count, 0);
 
-      player.setResource(Resources.MEGACREDITS, tagCount);
+      player.addResource(Resources.MEGACREDITS, tagCount);
     });
   }
 }
 
 class UnityBonus02 implements Bonus {
   id = 'ub02';
-  description = 'Gain 1 MC for each Space tag you have';
+  description = 'Gain 1 M€ for each Space tag you have';
   isDefault = false;
 
   grant(game: Game) {
     game.getPlayers().forEach((player) => {
       const tagCount = player.getTagCount(Tags.SPACE, false, false);
-      player.setResource(Resources.MEGACREDITS, tagCount);
+      player.addResource(Resources.MEGACREDITS, tagCount);
     });
   }
 }
@@ -56,12 +56,12 @@ class UnityBonus02 implements Bonus {
 class UnityPolicy01 implements Policy {
   isDefault = true;
   id = TurmoilPolicy.UNITY_DEFAULT_POLICY;
-  description: string = 'Your titanium resources are worth 1 MC extra';
+  description: string = 'Your titanium resources are worth 1 M€ extra';
 }
 
 class UnityPolicy02 implements Policy {
   id = TurmoilPolicy.UNITY_POLICY_2;
-  description: string = 'Spend 4 MC to gain 2 titanium or add 2 floaters to any card (Turmoil Unity)';
+  description: string = 'Spend 4 M€ to gain 2 titanium or add 2 floaters to any card (Turmoil Unity)';
   isDefault = false;
 
   canAct(player: Player) {
@@ -104,7 +104,7 @@ class UnityPolicy02 implements Policy {
           }
 
           orOptions.options.push(new SelectOption('Gain 2 titanium', 'Confirm', () => {
-            player.setResource(Resources.TITANIUM, 2);
+            player.addResource(Resources.TITANIUM, 2);
             game.log('${0} gained 2 titanium', (b) => b.player(player));
             return undefined;
           }));
@@ -123,7 +123,7 @@ class UnityPolicy02 implements Policy {
 
 class UnityPolicy03 implements Policy {
   id = TurmoilPolicy.UNITY_POLICY_3;
-  description: string = 'Spend 4 MC to draw a Space card (Turmoil Unity)';
+  description: string = 'Spend 4 M€ to draw a Space card (Turmoil Unity)';
   isDefault = false;
 
   canAct(player: Player) {
@@ -152,7 +152,7 @@ class UnityPolicy03 implements Policy {
 
 class UnityPolicy04 implements Policy {
   id = TurmoilPolicy.UNITY_POLICY_4;
-  description: string = 'Cards with Space tags cost 2 MC less to play';
+  description: string = 'Cards with Space tags cost 2 M€ less to play';
   isDefault = false;
 }
 

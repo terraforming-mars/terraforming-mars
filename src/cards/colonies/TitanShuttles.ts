@@ -65,6 +65,7 @@ export class TitanShuttles extends Card implements IProjectCard, IResourceCard {
         },
         1,
         this.resourceCount,
+        true,
       ),
     );
   }

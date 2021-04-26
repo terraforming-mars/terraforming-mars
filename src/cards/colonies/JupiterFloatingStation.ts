@@ -13,7 +13,7 @@ import {AddResourcesToCard} from '../../deferredActions/AddResourcesToCard';
 import {CardRequirements} from '../CardRequirements';
 import {Card} from '../Card';
 import {CardRenderer} from '../render/CardRenderer';
-import {CardRenderItemSize} from '../render/CardRenderItemSize';
+import {Size} from '../render/Size';
 
 export class JupiterFloatingStation extends Card implements IProjectCard, IResourceCard {
   constructor() {
@@ -32,9 +32,9 @@ export class JupiterFloatingStation extends Card implements IProjectCard, IResou
             eb.empty().startAction.floaters(1).secondaryTag(Tags.JOVIAN);
           }).br;
           b.or().br;
-          b.action('Gain 1 MC for every floater here [MAX 4].', (eb) => {
+          b.action('Gain 1 M€ for every floater here [MAX 4].', (eb) => {
             eb.empty().startAction;
-            eb.megacredits(1).slash().floaters(1).text('[max 4]', CardRenderItemSize.SMALL);
+            eb.megacredits(1).slash().floaters(1).text('[max 4]', Size.SMALL);
           });
         }),
         description: {
@@ -64,7 +64,7 @@ export class JupiterFloatingStation extends Card implements IProjectCard, IResou
         }));
         return undefined;
       }),
-      new SelectOption('Gain 1 MC per floater here (max 4) ', 'Gain MC', () => {
+      new SelectOption('Gain 1 M€ per floater here (max 4) ', 'Gain M€', () => {
         const amount = Math.min(this.resourceCount, 4);
         player.megaCredits += amount;
         LogHelper.logGainStandardResource(player, Resources.MEGACREDITS, amount);

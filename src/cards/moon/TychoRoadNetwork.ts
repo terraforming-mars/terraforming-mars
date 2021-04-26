@@ -7,6 +7,7 @@ import {CardRenderer} from '../render/CardRenderer';
 import {Units} from '../../Units';
 import {TileType} from '../../TileType';
 import {MoonCard} from './MoonCard';
+import {AltSecondaryTag} from '../render/CardRenderItem';
 
 export class TychoRoadNetwork extends MoonCard {
   constructor() {
@@ -18,13 +19,13 @@ export class TychoRoadNetwork extends MoonCard {
       productionBox: Units.of({megacredits: 1}),
 
       metadata: {
-        description: 'Spend 1 steel. Increase your MC production 1 step. ' +
+        description: 'Spend 1 steel. Increase your M€ production 1 step. ' +
         'Place a road tile on the Moon and raise the Logistics Rate 1 step.',
         cardNumber: 'M09',
         renderData: CardRenderer.builder((b) => {
           b.minus().steel(1).br;
           b.production((eb) => eb.megacredits(1)).br;
-          b.moonRoad();
+          b.moonRoad().secondaryTag(AltSecondaryTag.MOON_LOGISTICS_RATE);
         }),
       },
     }, {

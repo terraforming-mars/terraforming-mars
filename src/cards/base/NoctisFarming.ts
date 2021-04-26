@@ -26,14 +26,14 @@ export class NoctisFarming extends Card implements IProjectCard {
             pb.megacredits(1);
           }).nbsp.plants(2);
         }),
-        description: 'Requires -20 C or warmer. Increase your MC production 1 step and gain 2 Plants.',
+        description: 'Requires -20 C or warmer. Increase your M€ production 1 step and gain 2 Plants.',
         victoryPoints: 1,
       },
     });
   }
 
   public play(player: Player) {
-    player.addProduction(Resources.MEGACREDITS);
+    player.addProduction(Resources.MEGACREDITS, 1);
     player.plants += 2;
     return undefined;
   }

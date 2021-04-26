@@ -10,7 +10,7 @@ import {Priority} from '../../deferredActions/DeferredAction';
 import {GainProduction} from '../../deferredActions/GainProduction';
 import {CardType} from '../CardType';
 import {CardRenderer} from '../render/CardRenderer';
-import {CardRenderItemSize} from '../render/CardRenderItemSize';
+import {Size} from '../render/Size';
 
 export class LakefrontResorts extends Card implements CorporationCard {
   constructor() {
@@ -27,10 +27,10 @@ export class LakefrontResorts extends Card implements CorporationCard {
           b.br.br.br;
           b.megacredits(54);
           b.corpBox('effect', (ce) => {
-            ce.vSpace(CardRenderItemSize.MEDIUM);
-            ce.effect('When any ocean tile is placed, increase your MC production 1 step. Your bonus for placing adjacent to oceans is 3MC instead of 2MC.', (eb) => {
-              eb.oceans(1, CardRenderItemSize.SMALL).any.colon().production((pb) => pb.megacredits(1));
-              eb.emptyTile('normal', CardRenderItemSize.SMALL).oceans(1, CardRenderItemSize.SMALL);
+            ce.vSpace(Size.MEDIUM);
+            ce.effect('When any ocean tile is placed, increase your M€ production 1 step. Your bonus for placing adjacent to oceans is 3M€ instead of 2MC.', (eb) => {
+              eb.oceans(1, Size.SMALL).any.colon().production((pb) => pb.megacredits(1));
+              eb.emptyTile('normal', Size.SMALL).oceans(1, Size.SMALL);
               eb.startEffect.megacredits(3);
             });
           });

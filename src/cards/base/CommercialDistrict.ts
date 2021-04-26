@@ -21,7 +21,7 @@ export class CommercialDistrict extends Card implements IProjectCard {
     adjacencyBonus: IAdjacencyBonus | undefined = undefined,
     metadata: CardMetadata = {
       cardNumber: '085',
-      description: 'Place this tile. Decrease your energy production 1 step and increase your MC production 4 steps.',
+      description: 'Place this tile. Decrease your energy production 1 step and increase your M€ production 4 steps.',
       renderData: CardRenderer.builder((b) => {
         b.production((pb) => {
           pb.minus().energy(1).br;

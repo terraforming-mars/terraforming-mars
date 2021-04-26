@@ -8,7 +8,7 @@ import {SelectOption} from '../../inputs/SelectOption';
 import {Resources} from '../../Resources';
 import {CardName} from '../../CardName';
 import {CardRenderer} from '../render/CardRenderer';
-import {CardRenderItemSize} from '../render/CardRenderItemSize';
+import {Size} from '../render/Size';
 
 export class ArtificialPhotosynthesis extends Card implements IProjectCard {
   constructor() {
@@ -21,7 +21,7 @@ export class ArtificialPhotosynthesis extends Card implements IProjectCard {
       metadata: {
         description: 'Increase your plant production 1 step or your energy production 2 steps.',
         cardNumber: '115',
-        renderData: CardRenderer.builder((b) => b.production((pb) => pb.plants(1).or(CardRenderItemSize.SMALL).energy(2))),
+        renderData: CardRenderer.builder((b) => b.production((pb) => pb.plants(1).or(Size.SMALL).energy(2))),
       },
     });
   }
@@ -32,7 +32,7 @@ export class ArtificialPhotosynthesis extends Card implements IProjectCard {
         return undefined;
       }),
       new SelectOption('Increase your plant production 1 step', 'Increase', () => {
-        player.addProduction(Resources.PLANTS);
+        player.addProduction(Resources.PLANTS, 1);
         return undefined;
       }),
     );

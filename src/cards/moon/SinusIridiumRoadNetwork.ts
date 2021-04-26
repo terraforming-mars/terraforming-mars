@@ -7,6 +7,7 @@ import {CardRenderer} from '../render/CardRenderer';
 import {Units} from '../../Units';
 import {TileType} from '../../TileType';
 import {MoonCard} from './MoonCard';
+import {AltSecondaryTag} from '../render/CardRenderItem';
 
 export class SinusIridiumRoadNetwork extends MoonCard {
   constructor() {
@@ -18,7 +19,7 @@ export class SinusIridiumRoadNetwork extends MoonCard {
       productionBox: Units.of({energy: -1, megacredits: 3}),
 
       metadata: {
-        description: 'Decrease your energy production 1 step and increase your MC production 3 steps. ' +
+        description: 'Decrease your energy production 1 step and increase your M€ production 3 steps. ' +
           'Spend 1 steel. ' +
           'Place a road tile on the Moon and raise the Logistics Rate 1 step.',
         cardNumber: 'M11',
@@ -27,7 +28,7 @@ export class SinusIridiumRoadNetwork extends MoonCard {
           b.production((pb) => {
             pb.minus().energy(1).nbsp.megacredits(3);
           }).br;
-          b.moonRoad();
+          b.moonRoad().secondaryTag(AltSecondaryTag.MOON_LOGISTICS_RATE);
         }),
       },
     }, {

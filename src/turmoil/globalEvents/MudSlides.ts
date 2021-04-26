@@ -8,7 +8,7 @@ import {TileType} from '../../TileType';
 
 export class MudSlides implements IGlobalEvent {
     public name = GlobalEventName.MUD_SLIDES;
-    public description = 'Lose 4 MC for each tile adjacent to ocean (max 5, then reduced by influence).';
+    public description = 'Lose 4 M€ for each tile adjacent to ocean (max 5, then reduced by influence).';
     public revealedDelegate = PartyName.KELVINISTS;
     public currentDelegate = PartyName.GREENS;
     public resolve(game: Game, turmoil: Turmoil) {
@@ -20,7 +20,7 @@ export class MudSlides implements IGlobalEvent {
         ).length;
         const amount = Math.min(5, tiles) - turmoil.getPlayerInfluence(player);
         if (amount > 0) {
-          player.setResource(Resources.MEGACREDITS, -4 * amount, game, undefined, true);
+          player.addResource(Resources.MEGACREDITS, -4 * amount, {log: true, from: this.name});
         }
       });
     }

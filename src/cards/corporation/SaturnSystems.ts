@@ -23,7 +23,7 @@ export class SaturnSystems extends Card implements CorporationCard {
           b.br;
           b.production((pb) => pb.titanium(1)).nbsp.megacredits(42);
           b.corpBox('effect', (ce) => {
-            ce.effect('Each time any Jovian tag is put into play, including this, increase your MC production 1 step.', (eb) => {
+            ce.effect('Each time any Jovian tag is put into play, including this, increase your M€ production 1 step.', (eb) => {
               eb.jovian().played.any.startEffect.production((pb) => pb.megacredits(1));
             });
           });
@@ -43,14 +43,14 @@ export class SaturnSystems extends Card implements CorporationCard {
   private _onCardPlayed(player: Player, card: IProjectCard | CorporationCard) {
     for (const tag of card.tags) {
       if (tag === Tags.JOVIAN) {
-        player.game.getCardPlayer(this.name).addProduction(Resources.MEGACREDITS);
+        player.game.getCardPlayer(this.name).addProduction(Resources.MEGACREDITS, 1);
       }
     }
   }
 
   public play(player: Player) {
-    player.addProduction(Resources.TITANIUM);
-    player.addProduction(Resources.MEGACREDITS);
+    player.addProduction(Resources.TITANIUM, 1);
+    player.addProduction(Resources.MEGACREDITS, 1);
     return undefined;
   }
 }

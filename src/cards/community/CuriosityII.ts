@@ -7,7 +7,7 @@ import {Resources} from '../../Resources';
 import {CardName} from '../../CardName';
 import {CardType} from '../CardType';
 import {CardRenderer} from '../render/CardRenderer';
-import {CardRenderItemSize} from '../render/CardRenderItemSize';
+import {Size} from '../render/Size';
 import {DeferredAction} from '../../deferredActions/DeferredAction';
 import {OrOptions} from '../../inputs/OrOptions';
 import {SelectOption} from '../../inputs/SelectOption';
@@ -29,7 +29,7 @@ export class CuriosityII extends Card implements CorporationCard {
 
       metadata: {
         cardNumber: '',
-        description: 'You start with 40 MC and 2 steel production.',
+        description: 'You start with 40 M€ and 2 steel production.',
         renderData: CardRenderer.builder((b) => {
           b.br.br;
           b.megacredits(40).nbsp.production((pb) => pb.steel(2));
@@ -37,9 +37,9 @@ export class CuriosityII extends Card implements CorporationCard {
             ce.vSpace();
             ce.effect(
               'When you place a tile on an area that has a RESOURCE placement bonus, ' +
-              'or on top of another tile, you may pay 2 MC to draw a card.',
+              'or on top of another tile, you may pay 2 M€ to draw a card.',
               (eb) => {
-                eb.emptyTile('normal', CardRenderItemSize.SMALL).nbsp.asterix().startEffect.megacredits(-2).cards(1);
+                eb.emptyTile('normal', Size.SMALL).nbsp.asterix().startEffect.megacredits(-2).cards(1);
               });
           });
         }),
@@ -68,7 +68,7 @@ export class CuriosityII extends Card implements CorporationCard {
     if (!player.canAfford(2)) return undefined;
 
     return new OrOptions(
-      new SelectOption('Pay 2 MC to draw a card', 'Confirm', () => {
+      new SelectOption('Pay 2 M€ to draw a card', 'Confirm', () => {
         player.game.defer(new SelectHowToPayDeferred(player, 2, {title: 'Select how to pay for action'}));
         player.game.defer(DrawCards.keepAll(player));
         return undefined;

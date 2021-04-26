@@ -85,6 +85,7 @@
                 letter-spacing: 1px;
                 background: linear-gradient(to right, #000089, dodgerblue, deepskyblue);
                 -webkit-background-clip: text;
+                background-clip: text;
                 -webkit-text-fill-color: transparent;
                 -webkit-transform: scale(2, 1);
                 -moz-transform: scale(2, 1);
@@ -715,8 +716,8 @@
             .card-the-darkside-of-the-moon-syndicate-logo {
                 background-image: url(./assets/moon/corp-logo-darkside.png);
                 height: 50px;
-                width: 50px;
-                background-size: 50px 50px;
+                width: 187px;
+                background-size: 187px;
                 margin-top: 10px;
             }
             .card-luna-hyperloop-corporation-logo {
@@ -743,22 +744,23 @@
             .card-the-grand-luna-capital-group-logo {
                 background-image: url(./assets/moon/corp-logo-grand-luna.png);
                 height: 50px;
-                width: 150px;
-                background-size: 150px 50px;
+                width: 143px;
+                background-size: 143px 50px;
                 margin-top: 10px;
+                border-radius: 5px;
             }
             .card-intragen-sanctuary-headquarters-logo {
                 background-image: url(./assets/moon/corp-logo-intragen.png);
-                height: 50px;
-                width: 150px;
-                background-size: 150px 50px;
+                height: 45px;
+                width: 142px;
+                background-size: 142px 45px;
                 margin-top: 10px;
             }
             .card-the-archaic-foundation-institute-logo {
                 background-image: url(./assets/moon/corp-logo-archaic-foundation.png);
                 height: 50px;
-                width: 150px;
-                background-size: 150px 50px;
+                width: 180px;
+                background-size: 180px 50px;
                 margin-top: 10px;
             }
         }
@@ -968,6 +970,10 @@
                 color: #0000 !important;
                 background-image: url(./assets/resources/syndicate-fleet.png);
             }
+            .card-resource-cube {
+                color: #0000 !important;
+                background-image: url(./assets/cube.png);
+            }
             .card-resource-diverse {
                 background: linear-gradient(to bottom right, green, yellow, red);
             }
@@ -1020,6 +1026,11 @@
             }
             .card-or--small, .card-slash--small {
                 font-size: @font_size_small;
+                margin-left: 2px;
+                margin-right: 2px;
+            }
+            .card-or--tiny, .card-slash--tiny {
+                font-size: @font_size_tiny;
                 margin-left: 2px;
                 margin-right: 2px;
             }
@@ -1082,6 +1093,18 @@
                 background-repeat: no-repeat;
                 background-position: 0px;
             }
+            .card-red-arrow--small {
+                background-image: url(./assets/misc/short-arrow.png);
+                background-size: 15px;
+                width: 15px;
+                height: 15px;
+                vertical-align: middle;
+                display: inline-block;
+                background-repeat: no-repeat;
+                background-position: 0px;
+            }
+
+
             /*colony special*/
             .card-resource-trade {
                 background-image: url(./assets/tiles/trade.png);

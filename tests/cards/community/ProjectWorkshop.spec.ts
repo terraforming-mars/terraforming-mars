@@ -40,7 +40,7 @@ describe('ProjectWorkshop', function() {
     expect(card.canAct(player)).is.not.true;
   });
 
-  it('Can spend 3 MC to draw a blue card', function() {
+  it('Can spend 3 M€ to draw a blue card', function() {
     player.megaCredits = 3;
 
     expect(card.canAct(player)).is.true;

@@ -25,20 +25,20 @@ export class MarsFirst extends Party implements IParty {
 // TODO(nwai90): Mars First bonus IDs start with 'm' and policies start with 'mp'.
 class MarsFirstBonus01 implements Bonus {
   id = 'mb01';
-  description = 'Gain 1 MC for each Building tag you have';
+  description = 'Gain 1 M€ for each Building tag you have';
   isDefault = true;
 
   grant(game: Game) {
     game.getPlayers().forEach((player) => {
       const tagCount = player.getTagCount(Tags.BUILDING, false, false);
-      player.setResource(Resources.MEGACREDITS, tagCount);
+      player.addResource(Resources.MEGACREDITS, tagCount);
     });
   }
 }
 
 class MarsFirstBonus02 implements Bonus {
   id = 'mb02';
-  description = 'Gain 1 MC for each tile you have ON MARS';
+  description = 'Gain 1 M€ for each tile you have ON MARS';
   isDefault = false;
 
   grant(game: Game) {
@@ -47,7 +47,7 @@ class MarsFirstBonus02 implements Bonus {
         return space.tile !== undefined && space.player === player && space.spaceType !== SpaceType.COLONY;
       }).length;
 
-      player.setResource(Resources.MEGACREDITS, tileCount);
+      player.addResource(Resources.MEGACREDITS, tileCount);
     });
   }
 }
@@ -59,30 +59,30 @@ class MarsFirstPolicy01 implements Policy {
 
   onTilePlaced(player: Player, space: ISpace) {
     if (space.tile && space.spaceType !== SpaceType.COLONY && player.game.phase === Phase.ACTION) {
-      player.setResource(Resources.STEEL);
+      player.addResource(Resources.STEEL, 1);
     }
   }
 }
 
 class MarsFirstPolicy02 implements Policy {
   id = TurmoilPolicy.MARS_FIRST_POLICY_2;
-  description: string = 'When you play a Building tag, gain 2 MC';
+  description: string = 'When you play a Building tag, gain 2 M€';
   isDefault = false;
 
   onCardPlayed(player: Player, card: IProjectCard) {
-    if (card.tags.includes(Tags.BUILDING)) player.setResource(Resources.MEGACREDITS, 2);
+    if (card.tags.includes(Tags.BUILDING)) player.addResource(Resources.MEGACREDITS, 2);
   }
 }
 
 class MarsFirstPolicy03 implements Policy {
   id = TurmoilPolicy.MARS_FIRST_POLICY_3;
-  description: string = 'Your steel resources are worth 1 MC extra';
+  description: string = 'Your steel resources are worth 1 M€ extra';
   isDefault = false;
 }
 
 class MarsFirstPolicy04 implements Policy {
   id = TurmoilPolicy.MARS_FIRST_POLICY_4;
-  description: string = 'Spend 4 MC to draw a Building card (Turmoil Mars First)';
+  description: string = 'Spend 4 M€ to draw a Building card (Turmoil Mars First)';
   isDefault = false;
 
   canAct(player: Player) {

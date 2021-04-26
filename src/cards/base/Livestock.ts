@@ -33,7 +33,7 @@ export class Livestock extends Card implements IActionCard, IProjectCard, IResou
           b.vpText('1 VP for each Animal on this card.');
         }),
         description: {
-          text: 'Requires 9% oxygen. Decrease your Plant production 1 step and increase your MC production 2 steps',
+          text: 'Requires 9% oxygen. Decrease your Plant production 1 step and increase your M€ production 2 steps',
           align: 'left',
         },
         victoryPoints: CardRenderDynamicVictoryPoints.animals(1, 1),

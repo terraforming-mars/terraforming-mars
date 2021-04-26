@@ -30,7 +30,7 @@ export class EcologyExperts extends PreludeCard {
     return 0;
   }
   public play(player: Player) {
-    player.addProduction(Resources.PLANTS);
+    player.addProduction(Resources.PLANTS, 1);
     player.game.defer(new PlayProjectCard(player));
     return undefined;
   }

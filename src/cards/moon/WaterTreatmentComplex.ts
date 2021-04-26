@@ -29,7 +29,7 @@ export class WaterTreatmentComplex extends MoonCard {
 
   public play(player: Player) {
     super.play(player);
-    player.addProduction(Resources.PLANTS, -1, player.game);
+    player.addProduction(Resources.PLANTS, -1, {log: true});
     MoonExpansion.raiseColonyRate(player, 2);
     return undefined;
   }

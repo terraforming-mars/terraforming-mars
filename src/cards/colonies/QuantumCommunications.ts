@@ -7,7 +7,7 @@ import {Resources} from '../../Resources';
 import {CardRenderer} from '../render/CardRenderer';
 import {CardRequirements} from '../CardRequirements';
 import {Card} from '../Card';
-import {CardRenderItemSize} from '../render/CardRenderItemSize';
+import {Size} from '../render/Size';
 
 export class QuantumCommunications extends Card implements IProjectCard {
   constructor() {
@@ -21,10 +21,10 @@ export class QuantumCommunications extends Card implements IProjectCard {
         cardNumber: '079',
         renderData: CardRenderer.builder((b) => {
           b.production((pb) => {
-            pb.megacredits(1).slash().colonies(1, CardRenderItemSize.SMALL).any;
+            pb.megacredits(1).slash().colonies(1, Size.SMALL).any;
           });
         }),
-        description: 'Requires 4 Science tags. Increase your MC production 1 step for each colony in play.',
+        description: 'Requires 4 Science tags. Increase your M€ production 1 step for each colony in play.',
         victoryPoints: 1,
       },
     });
@@ -39,7 +39,7 @@ export class QuantumCommunications extends Card implements IProjectCard {
     player.game.colonies.forEach((colony) => {
       coloniesCount += colony.colonies.length;
     });
-    player.addProduction(Resources.MEGACREDITS, coloniesCount, player.game);
+    player.addProduction(Resources.MEGACREDITS, coloniesCount, {log: true});
     return undefined;
   }
 

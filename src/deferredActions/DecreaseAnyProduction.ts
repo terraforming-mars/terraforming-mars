@@ -31,7 +31,7 @@ export class DecreaseAnyProduction implements DeferredAction {
     }
 
     if (candidates.length === 1) {
-      candidates[0].addProduction(this.resource, -this.count, this.player.game, this.player);
+      candidates[0].addProduction(this.resource, -this.count, {log: true, from: this.player});
       return undefined;
     }
 
@@ -40,7 +40,7 @@ export class DecreaseAnyProduction implements DeferredAction {
       this.title,
       'Decrease',
       (found: Player) => {
-        found.addProduction(this.resource, -this.count, this.player.game, this.player);
+        found.addProduction(this.resource, -this.count, {log: true, from: this.player});
         return undefined;
       },
     );

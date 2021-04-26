@@ -25,7 +25,7 @@ export class FuelFactory extends Card implements IProjectCard {
             pb.plus().titanium(1).megacredits(1);
           });
         }),
-        description: 'Decrease your Energy production 1 step and increase your titanium and your MC production 1 step each.',
+        description: 'Decrease your Energy production 1 step and increase your titanium and your M€ production 1 step each.',
       },
     });
   }
@@ -35,8 +35,8 @@ export class FuelFactory extends Card implements IProjectCard {
   }
   public play(player: Player) {
     player.addProduction(Resources.ENERGY, -1);
-    player.addProduction(Resources.TITANIUM);
-    player.addProduction(Resources.MEGACREDITS);
+    player.addProduction(Resources.TITANIUM, 1);
+    player.addProduction(Resources.MEGACREDITS, 1);
     return undefined;
   }
 }

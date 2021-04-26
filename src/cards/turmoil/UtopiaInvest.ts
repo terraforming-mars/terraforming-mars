@@ -35,8 +35,8 @@ export class UtopiaInvest extends Card implements IActionCard, CorporationCard {
   }
 
   public play(player: Player) {
-    player.addProduction(Resources.STEEL);
-    player.addProduction(Resources.TITANIUM);
+    player.addProduction(Resources.STEEL, 1);
+    player.addProduction(Resources.TITANIUM, 1);
     return undefined;
   }
   public canAct(player: Player): boolean {
@@ -56,7 +56,7 @@ export class UtopiaInvest extends Card implements IActionCard, CorporationCard {
 
     const options: Array<SelectOption> = [];
 
-    const reduceMegacredits = new SelectOption('Decrease MC production', 'Decrease production', () => {
+    const reduceMegacredits = new SelectOption('Decrease M€ production', 'Decrease production', () => {
       player.addProduction(Resources.MEGACREDITS, -1);
       player.megaCredits += 4;
       this.log(player, 'megacredit');

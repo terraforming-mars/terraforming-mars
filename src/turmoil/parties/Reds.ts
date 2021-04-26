@@ -68,12 +68,12 @@ class RedsBonus02 implements Bonus {
 class RedsPolicy01 implements Policy {
   id = TurmoilPolicy.REDS_DEFAULT_POLICY;
   isDefault = true;
-  description: string = 'When you take an action that raises TR, you MUST pay 3 MC per step raised';
+  description: string = 'When you take an action that raises TR, you MUST pay 3 M€ per step raised';
 }
 
 class RedsPolicy02 implements Policy {
   id = TurmoilPolicy.REDS_POLICY_2;
-  description: string = 'When you place a tile, pay 3 MC or as much as possible';
+  description: string = 'When you place a tile, pay 3 M€ or as much as possible';
   isDefault = false;
 
   onTilePlaced(player: Player) {
@@ -89,7 +89,7 @@ class RedsPolicy02 implements Policy {
 
 class RedsPolicy03 implements Policy {
   id = TurmoilPolicy.REDS_POLICY_3;
-  description: string = 'Pay 4 MC to reduce a non-maxed global parameter 1 step (do not gain any track bonuses)';
+  description: string = 'Pay 4 M€ to reduce a non-maxed global parameter 1 step (do not gain any track bonuses)';
   isDefault = false;
 
   canAct(player: Player) {
@@ -182,7 +182,7 @@ class RedsPolicy03 implements Policy {
 
 class RedsPolicy04 implements Policy {
   id = TurmoilPolicy.REDS_POLICY_4;
-  description: string = 'When you raise a global parameter, decrease your MC production 1 step per step raised if possible';
+  description: string = 'When you raise a global parameter, decrease your M€ production 1 step per step raised if possible';
   isDefault = false;
 }
 

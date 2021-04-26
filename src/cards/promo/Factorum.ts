@@ -10,7 +10,7 @@ import {CardName} from '../../CardName';
 import {CardType} from '../CardType';
 import {LogHelper} from '../../LogHelper';
 import {CardRenderer} from '../render/CardRenderer';
-import {CardRenderItemSize} from '../render/CardRenderItemSize';
+import {Size} from '../render/Size';
 
 export class Factorum extends Card implements IActionCard, CorporationCard {
   constructor() {
@@ -26,8 +26,8 @@ export class Factorum extends Card implements IActionCard, CorporationCard {
         renderData: CardRenderer.builder((b) => {
           b.megacredits(37).nbsp.production((pb) => pb.steel(1));
           b.corpBox('action', (ce) => {
-            ce.vSpace(CardRenderItemSize.LARGE);
-            ce.action('Increase your energy production 1 step IF YOU HAVE NO ENERGY RESOURCES, or spend 3MC to draw a building card.', (eb) => {
+            ce.vSpace(Size.LARGE);
+            ce.action('Increase your energy production 1 step IF YOU HAVE NO ENERGY RESOURCES, or spend 3M€ to draw a building card.', (eb) => {
               eb.empty().arrow().production((pb) => pb.energy(1));
               eb.or().megacredits(3).startAction.cards(1).secondaryTag(Tags.BUILDING);
             });
@@ -38,7 +38,7 @@ export class Factorum extends Card implements IActionCard, CorporationCard {
   }
 
   public play(player: Player) {
-    player.addProduction(Resources.STEEL);
+    player.addProduction(Resources.STEEL, 1);
     return undefined;
   }
 
@@ -51,13 +51,13 @@ export class Factorum extends Card implements IActionCard, CorporationCard {
       'Increase your energy production 1 step',
       'Increase production',
       () => {
-        player.addProduction(Resources.ENERGY);
+        player.addProduction(Resources.ENERGY, 1);
         LogHelper.logGainProduction(player, Resources.ENERGY);
         return undefined;
       },
     );
 
-    const drawBuildingCard = new SelectOption('Spend 3 MC to draw a building card', 'Draw card', () => {
+    const drawBuildingCard = new SelectOption('Spend 3 M€ to draw a building card', 'Draw card', () => {
       player.megaCredits -= 3;
       player.drawCard(1, {tag: Tags.BUILDING});
       return undefined;

@@ -23,7 +23,7 @@ export class OrbitalConstructionYard extends PreludeCard implements IProjectCard
     });
   }
   public play(player: Player) {
-    player.addProduction(Resources.TITANIUM);
+    player.addProduction(Resources.TITANIUM, 1);
     player.titanium += 4;
     return undefined;
   }

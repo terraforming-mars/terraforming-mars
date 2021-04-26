@@ -4,7 +4,7 @@ import {Player} from '../../Player';
 import {IProjectCard} from '../IProjectCard';
 import {CardName} from '../../CardName';
 import {CardRenderer} from '../render/CardRenderer';
-import {CardRenderItemSize} from '../render/CardRenderItemSize';
+import {Size} from '../render/Size';
 
 export class IndenturedWorkers extends Card implements IProjectCard {
   constructor() {
@@ -16,9 +16,9 @@ export class IndenturedWorkers extends Card implements IProjectCard {
       metadata: {
         cardNumber: '195',
         renderData: CardRenderer.builder((b) => {
-          b.text('next card', CardRenderItemSize.SMALL, true).colon().megacredits(-8);
+          b.text('next card', Size.SMALL, true).colon().megacredits(-8);
         }),
-        description: 'The next card you play this generation costs 8 MC less.',
+        description: 'The next card you play this generation costs 8 M€ less.',
         victoryPoints: -1,
       },
     });

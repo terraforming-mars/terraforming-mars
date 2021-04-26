@@ -27,10 +27,10 @@ export class AsteroidRights extends Card implements IActionCard, IProjectCard, I
         cardNumber: 'X31',
         description: 'Add 2 asteroids to this card.',
         renderData: CardRenderer.builder((b) => {
-          b.action('Spend 1 MC to add 1 asteroid to ANY card.', (eb) => {
+          b.action('Spend 1 M€ to add 1 asteroid to ANY card.', (eb) => {
             eb.megacredits(1).startAction.asteroids(1).asterix().nbsp.or();
           }).br;
-          b.action('Spend 1 asteroid here to increase MC production 1 step OR gain 2 titanium.', (eb) => {
+          b.action('Spend 1 asteroid here to increase M€ production 1 step OR gain 2 titanium.', (eb) => {
             eb.asteroids(1)
               .startAction.production((pb) => pb.megacredits(1))
               .or()
@@ -57,7 +57,7 @@ export class AsteroidRights extends Card implements IActionCard, IProjectCard, I
     const hasAsteroids = this.resourceCount > 0;
     const asteroidCards = player.getResourceCards(ResourceType.ASTEROID);
 
-    const spendAsteroidOption = new SelectOption('Remove 1 asteroid on this card to increase MC production 1 step OR gain 2 titanium', 'Remove asteroid', () => {
+    const spendAsteroidOption = new SelectOption('Remove 1 asteroid on this card to increase M€ production 1 step OR gain 2 titanium', 'Remove asteroid', () => {
       this.resourceCount--;
 
       return new OrOptions(
@@ -66,9 +66,9 @@ export class AsteroidRights extends Card implements IActionCard, IProjectCard, I
           LogHelper.logRemoveResource(player, this, 1, 'gain 2 titanium');
           return undefined;
         }),
-        new SelectOption('Increase MC production 1 step', 'Select', () => {
-          player.addProduction(Resources.MEGACREDITS);
-          LogHelper.logRemoveResource(player, this, 1, 'increase MC production 1 step');
+        new SelectOption('Increase M€ production 1 step', 'Select', () => {
+          player.addProduction(Resources.MEGACREDITS, 1);
+          LogHelper.logRemoveResource(player, this, 1, 'increase M€ production 1 step');
           return undefined;
         }),
       );

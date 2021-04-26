@@ -20,7 +20,7 @@ export class PhobosSpaceHaven extends Card implements IProjectCard {
       metadata: {
         cardNumber: '021',
         renderData: CardRenderer.builder((b) => {
-          b.production((pb) => pb.titanium(1)).nbsp.city();
+          b.production((pb) => pb.titanium(1)).nbsp.city().asterix();
         }),
         description: 'Increase your titanium production 1 step and place a City tile ON THE RESERVED AREA.',
         victoryPoints: 3,
@@ -30,7 +30,7 @@ export class PhobosSpaceHaven extends Card implements IProjectCard {
 
   public play(player: Player) {
     player.game.addCityTile(player, SpaceName.PHOBOS_SPACE_HAVEN, SpaceType.COLONY);
-    player.addProduction(Resources.TITANIUM);
+    player.addProduction(Resources.TITANIUM, 1);
     return undefined;
   }
   public getVictoryPoints() {

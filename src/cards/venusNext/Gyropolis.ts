@@ -25,7 +25,7 @@ export class Gyropolis extends Card {
             pb.plus().megacredits(1).slash().earth().played.br;
           }).nbsp.city();
         }),
-        description: 'Decrease your energy production 2 steps. Increase your MC production 1 step for each Venus and Earth tag you have. Place a City tile.',
+        description: 'Decrease your energy production 2 steps. Increase your M€ production 1 step for each Venus and Earth tag you have. Place a City tile.',
       },
     });
   };
@@ -36,7 +36,7 @@ export class Gyropolis extends Card {
   public play(player: Player) {
     const tags: Array<Tags> = [Tags.VENUS, Tags.EARTH];
     player.addProduction(Resources.ENERGY, -2);
-    player.addProduction(Resources.MEGACREDITS, player.getMultipleTagCount(tags), player.game);
+    player.addProduction(Resources.MEGACREDITS, player.getMultipleTagCount(tags), {log: true});
     return new SelectSpace('Select space for city tile', player.game.board.getAvailableSpacesForCity(player), (space: ISpace) => {
       player.game.addCityTile(player, space.id);
       return undefined;

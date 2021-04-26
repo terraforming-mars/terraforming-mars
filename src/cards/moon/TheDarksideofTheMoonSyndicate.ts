@@ -13,7 +13,8 @@ import {Resources} from '../../Resources';
 import {OrOptions} from '../../inputs/OrOptions';
 import {SelectOption} from '../../inputs/SelectOption';
 import {StealResources} from '../../deferredActions/StealResources';
-import {CardRenderItemSize} from '../render/CardRenderItemSize';
+import {Size} from '../render/Size';
+import {Phase} from '../../Phase';
 
 export class TheDarksideofTheMoonSyndicate implements CorporationCard {
   public name = CardName.THE_DARKSIDE_OF_THE_MOON_SYNDICATE;
@@ -24,24 +25,19 @@ export class TheDarksideofTheMoonSyndicate implements CorporationCard {
   public resourceCount = 0;
 
   public readonly metadata: CardMetadata = {
-    description: 'You start with 40 MC and 2 syndicate fleets on this card.',
     cardNumber: '',
     renderData: CardRenderer.builder((b) => {
       b.megacredits(40).syndicateFleet(2).br;
+      b.text('You start with 40 M€ and 2 syndicate fleets on this card.', Size.SMALL, false, false).br;
+      b.titanium(1).arrow(Size.SMALL).syndicateFleet()
+        .slash(Size.SMALL)
+        .syndicateFleet().arrow(Size.SMALL).text('steal', Size.TINY).megacredits(8).any.br;
+      b.description('Action: Spend 1 titanium to add 1 syndicate fleet on this card OR remove 1 syndicate fleet from this card to steal 8M€ from any opponent.').br;
       b
-        .action('Spend 1 titanium to add 1 syndicate fleet on this card', (eb) => {
-          eb.titanium(1).startAction.syndicateFleet(); // TODO: Add syndicate fleet
-        })
-        .br
-        .action('Remove 1 syndicate fleet from this card to steal 8MC from any opponent.', (eb) => {
-          eb.syndicateFleet().startAction.text('STEAL').megacredits(8);
-        })
-        .br
-        .effect('When you place a tile on the Moon, steal 2 MC from the opponents for each tile of theirs placed next to yours.', (eb) => {
-          eb.moonColony({size: CardRenderItemSize.SMALL}).slash().br
-            .moonMine({size: CardRenderItemSize.SMALL}).slash()
-            .moonRoad({size: CardRenderItemSize.SMALL}).asterix()
-            .startAction.megacredits(-2).slash().emptyTile().emptyTile().asterix();
+        .effect('When you place a tile on the Moon, steal 2 M€ from opponents for each of their tiles next to yours.', (eb) => {
+          eb.emptyTile('normal', Size.SMALL).secondaryTag(Tags.MOON)
+            .startEffect
+            .text('STEAL').megacredits(2).any.slash().emptyTile('normal', Size.SMALL).emptyTile('normal', Size.SMALL).any;
         });
     }),
   };
@@ -65,7 +61,7 @@ export class TheDarksideofTheMoonSyndicate implements CorporationCard {
       }));
     }
     if (this.resourceCount > 0) {
-      orOptions.options.push(new SelectOption('Remove 1 syndicate fleet from this card to steal 8MC from any opponent.', 'Remove syndicate fleet', () => {
+      orOptions.options.push(new SelectOption('Remove 1 syndicate fleet from this card to steal 8M€ from any opponent.', 'Remove syndicate fleet', () => {
         player.removeResourceFrom(this);
         player.game.defer(new StealResources(player, Resources.MEGACREDITS, 8));
         return undefined;
@@ -79,6 +75,9 @@ export class TheDarksideofTheMoonSyndicate implements CorporationCard {
   }
 
   public onTilePlaced(cardOwner: Player, activePlayer: Player, space: ISpace) {
+    if (activePlayer.game.phase === Phase.SOLAR) {
+      return;
+    }
     if (activePlayer !== cardOwner) {
       return undefined;
     }
@@ -98,8 +97,8 @@ export class TheDarksideofTheMoonSyndicate implements CorporationCard {
         // TODO(kberg): Create a Game.steal method that manages this, both here
         // and in StealResources.
         const adjustedQuantity = Math.min(qty, target.megaCredits);
-        activePlayer.setResource(Resources.MEGACREDITS, adjustedQuantity, game);
-        target.setResource(Resources.MEGACREDITS, -adjustedQuantity, game, activePlayer);
+        activePlayer.addResource(Resources.MEGACREDITS, adjustedQuantity, {log: true});
+        target.addResource(Resources.MEGACREDITS, -adjustedQuantity, {log: true, from: activePlayer});
       });
     }
     return undefined;

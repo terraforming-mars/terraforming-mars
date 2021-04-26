@@ -370,6 +370,10 @@ export class Game implements ISerializable<SerializedGame> {
       game.log('The id of this game is ${0}', (b) => b.rawString(id));
     }
 
+    players.forEach((player) => {
+      game.log('Good luck ${0}!', (b) => b.player(player), {reservedFor: player});
+    });
+
     game.log('Generation ${0}', (b) => b.forNewGeneration().number(game.generation));
 
     // Initial Draft
@@ -491,7 +495,7 @@ export class Game implements ISerializable<SerializedGame> {
 
   public milestoneClaimed(milestone: IMilestone): boolean {
     return this.claimedMilestones.find(
-      (claimedMilestone) => claimedMilestone.milestone === milestone,
+      (claimedMilestone) => claimedMilestone.milestone.name === milestone.name,
     ) !== undefined;
   }
 
@@ -583,7 +587,7 @@ export class Game implements ISerializable<SerializedGame> {
 
   public hasBeenFunded(award: IAward): boolean {
     return this.fundedAwards.find(
-      (fundedAward) => fundedAward.award === award,
+      (fundedAward) => fundedAward.award.name === award.name,
     ) !== undefined;
   }
 
@@ -750,6 +754,10 @@ export class Game implements ISerializable<SerializedGame> {
       return this.generation === this.lastSoloGeneration();
     }
     return this.marsIsTerraformed();
+  }
+
+  public isDoneWithFinalProduction(): boolean {
+    return this.phase === Phase.END || (this.gameIsOver() && this.phase === Phase.PRODUCTION);
   }
 
   private gotoProductionPhase(): void {
@@ -1191,10 +1199,10 @@ export class Game implements ISerializable<SerializedGame> {
     if (this.phase !== Phase.SOLAR) {
       // BONUS FOR HEAT PRODUCTION AT -20 and -24
       if (this.temperature < -24 && this.temperature + steps * 2 >= -24) {
-        player.addProduction(Resources.HEAT);
+        player.addProduction(Resources.HEAT, 1);
       }
       if (this.temperature < -20 && this.temperature + steps * 2 >= -20) {
-        player.addProduction(Resources.HEAT);
+        player.addProduction(Resources.HEAT, 1);
       }
 
       TurmoilHandler.onGlobalParameterIncrease(player, GlobalParameter.TEMPERATURE, steps);
@@ -1472,12 +1480,14 @@ export class Game implements ISerializable<SerializedGame> {
     return player.cardsInHand.filter((card) => card.cardType === cardType);
   }
 
-  public log(message: string, f?: (builder: LogBuilder) => void) {
+  public log(message: string, f?: (builder: LogBuilder) => void, options?: {reservedFor?: Player}) {
     const builder = new LogBuilder(message);
     if (f) {
       f(builder);
     }
-    this.gameLog.push(builder.logMessage());
+    const logMessage = builder.build();
+    logMessage.playerId = options?.reservedFor?.id;
+    this.gameLog.push(logMessage);
     this.gameAge++;
   }
 
@@ -1547,10 +1557,6 @@ export class Game implements ISerializable<SerializedGame> {
 
     const awards: Array<IAward> = [];
     d.awards.forEach((element: IAward) => {
-      // TODO(kberg): remove by 2021-03-30
-      if (element.name === 'Entrepeneur') {
-        element.name = 'Entrepreneur';
-      }
       ALL_AWARDS.forEach((award: IAward) => {
         if (award.name === element.name) {
           awards.push(award);

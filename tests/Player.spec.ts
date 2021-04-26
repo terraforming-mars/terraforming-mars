@@ -17,6 +17,9 @@ import {CardName} from '../src/CardName';
 import {GlobalParameter} from '../src/GlobalParameter';
 import {TestingUtils} from './TestingUtils';
 import {Units} from '../src/Units';
+import {SelfReplicatingRobots} from '../src/cards/promo/SelfReplicatingRobots';
+import {OrOptions} from '../src/inputs/OrOptions';
+import {GameLoader} from '../src/database/GameLoader';
 
 describe('Player', function() {
   it('should initialize with right defaults', function() {
@@ -278,6 +281,51 @@ describe('Player', function() {
 
     expect(newPlayer.color).eq(Color.PURPLE);
     expect(newPlayer.tradesThisGeneration).eq(100);
+  });
+  it('pulls self replicating robots target cards', function() {
+    const player = TestPlayers.BLUE.newPlayer();
+    expect(player.getSelfReplicatingRobotsTargetCards().length).eq(0);
+    const srr = new SelfReplicatingRobots();
+    player.playedCards.push(srr);
+    srr.targetCards.push({card: new LunarBeam(), resourceCount: 0});
+    expect(player.getSelfReplicatingRobotsTargetCards().length).eq(1);
+  });
+  it('uses undo', function() {
+    const player = TestPlayers.BLUE.newPlayer();
+    player.beginner = true;
+    const game = Game.newInstance('foo', [player], player);
+    game.gameOptions.undoOption = true;
+    player.process([['1'], ['Power Plant:SP']]);
+    const options = player.getWaitingFor() as OrOptions;
+    expect((player as any).usedUndo).is.false;
+    player.process([[String(options.options.length - 1)], ['']]);
+    expect((player as any).usedUndo).is.true;
+    expect(player.getWaitingFor()).is.undefined;
+  });
+  it('progresses game if undo operation fails', function() {
+    const player = TestPlayers.BLUE.newPlayer();
+    player.beginner = true;
+    const game = Game.newInstance('foo', [player], player);
+    game.gameOptions.undoOption = true;
+    player.process([['1'], ['Power Plant:SP']]);
+    const options = player.getWaitingFor() as OrOptions;
+    expect((player as any).usedUndo).is.false;
+    const instance = GameLoader.getInstance();
+    const originRestore = instance.restoreGameAt;
+    let restoreGameCb: ((err: any) => void) | undefined = undefined;
+    instance.restoreGameAt = function(_gameId: string, _saveId: number, cb: (err: any) => void) {
+      restoreGameCb = cb;
+      instance.restoreGameAt = originRestore;
+    };
+    player.process([[String(options.options.length - 1)], ['']]);
+    expect((player as any).usedUndo).is.true;
+    if (restoreGameCb === undefined) {
+      throw new Error('did not call to restore game');
+    }
+    expect(player.getWaitingFor()).is.undefined;
+    (restoreGameCb as (err: any) => void)('unable to restore game');
+    expect((player as any).usedUndo).is.false;
+    expect(player.getWaitingFor()).not.is.undefined;
   });
 });
 

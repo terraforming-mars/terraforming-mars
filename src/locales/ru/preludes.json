@@ -1,6 +1,6 @@
 {
     "Allied Banks": "Союзнический банк",
-    "Increase your MC production 4 steps. Gain 3 MC.": "Повысьте доход на 4. Получите 3 MC.",
+    "Increase your M€ production 4 steps. Gain 3 MC.": "Повысьте доход на 4. Получите 3 MC.",
 
     "Aquifer Turbines": "Гидротурбины",
     "Place an Ocean tile. Increase your energy production 2 steps. Pay 3 MC.": "Выложите тайл океана и повысьте производство энергии на 2. Заплатите 3 MC.",
@@ -12,13 +12,13 @@
     "Increase your plant production 1 step. Draw 3 cards.": "Повысьте производство растений на 1. Возьмите 3 карты.",
 
     "Biosphere Support": "Поддержка биосферы",
-    "Increase your plant production 2 steps. Decrease your MC production 1 step.": "Снизьте свой доход на 1 и повысьте производство растений на 2 шага.",
+    "Increase your plant production 2 steps. Decrease your M€ production 1 step.": "Снизьте свой доход на 1 и повысьте производство растений на 2 шага.",
 
     "Business Empire": "Бизнес-империя",
-    "Increase your MC production 6 steps. Pay 6 MC.": "Повысьте доход на 6. Заплатите 6 MC.",
+    "Increase your M€ production 6 steps. Pay 6 MC.": "Повысьте доход на 6. Заплатите 6 MC.",
 
     "Dome Farming": "Тепличное хозяйство",
-    "Increase your MC production 2 steps and plant production 1 step.": "Повысьте доход на 2 и производство растений на 1.",
+    "Increase your M€ production 2 steps and plant production 1 step.": "Повысьте доход на 2 и производство растений на 1.",
 
     "Donation": "Пожертвование",
     "Gain 21 MC.": "Получите 21 MC.",
@@ -30,7 +30,7 @@
     "Increase your plant production 1 step. Play a card from hand, ignoring global requirements.": "Повысьте производство растений на 1. Разыграйте карту с руки, игнорируя глобальные требования.",
 
     "Eccentric Sponsor": "Эксцентричный спонсор",
-    "Play a card from hand, reducing its cost by 25 MC": "Разыграйте карту с руки, снизив ее стоимость на 25 mc.",
+    "Play a card from hand, reducing its cost by 25 M€": "Разыграйте карту с руки, снизив ее стоимость на 25 mc.",
 
     "Experimental Forest": "Экспериментальный лес",
     "Place 1 Greenery Tile and raise oxygen 1 step. Reveal cards until you reveal two cards with plant tags on them. Take them into your hand and discard the rest.": "Проведите озеленение и повысьте уровень кислорода на 1. Тяните карты из колоды, пока не найдете 2 карты с символом растения. Возьмите их в руку. Сбросьте остальные.",
@@ -48,7 +48,7 @@
     "Increase your titanium production 1 step. Draw a card.": "Повысьте производство титана на 1. Возьмите 1 карту",
 
     "Loan": "Кредит",
-    "Gain 30 MC. Decrease your MC production 2 steps.": "Получите 30 MC. Снизьте доход на 2.",
+    "Gain 30 MC. Decrease your M€ production 2 steps.": "Получите 30 MC. Снизьте доход на 2.",
 
     "Martian Industries": "Промышленность Марса",
     "Increase your energy and steel production 1 step. Gain 6 MC.": "Повысьте производство энергии и стали на 1 каждое. Получите 6 MC.",
@@ -81,7 +81,7 @@
     "Increase your energy production 3 steps.": "Повысьте производство энергии на 3.",
 
     "Research Network": "Исследовательская сеть",
-    "Increase your MC production 1 step. Draw 3 cards. After being played, when you perform an action, the wild tag counts as any tag of your choice.": "Возьмите 3 карты и увеличьте доход на 1.",
+    "Increase your M€ production 1 step. Draw 3 cards. After being played, when you perform an action, the wild tag counts as any tag of your choice.": "Возьмите 3 карты и увеличьте доход на 1.",
 
     "Self-Sufficient Settlement": "Самодостаточное поселение",
     "Increase your money production 2 steps. Place a City tile.": "Выложите тайл города. Повысьте доход на 2.",
@@ -121,16 +121,16 @@
     "Trade Advance":"Торговое преимущество",
     "[ solo": "[ соло",
     "Trade all colonies with": "",
-    "Gain 2 MC [SOLO: Gain 10 MC]. Immediately trade with all active colonies. You may increase the Colony Tile track 1 step before each of these trades.": 
+    "Gain 2 M€ [SOLO: Gain 10 MC]. Immediately trade with all active colonies. You may increase the Colony Tile track 1 step before each of these trades.":
     "Получите 2 МС [СОЛО: Получите 10 МС]. Немедленно поторгуйте со всеми активными колониями. Можете увеличить трек колонии, с которой торгуете при каждой из этих торговых операций",
 
 
     "Valuable Gases": "Ценные газы",
-    "Gain 6 MC. Play a Venus card from your hand and add 4 floaters to it.": 
+    "Gain 6 MC. Play a Venus card from your hand and add 4 floaters to it.":
     "Получите 6 MC. Разыграйте карту с меткой Венеры с руки и добавьте на неё 4 аэростата",
 
     "Venus First": "Венера вперед!",
-    "Raise Venus 2 steps. Draw 2 Venus cards from the deck.": 
+    "Raise Venus 2 steps. Draw 2 Venus cards from the deck.":
     "Увеличьте шкалу Венеры на 2. Доберите 2 карты с меткой Венеры"
 
 }

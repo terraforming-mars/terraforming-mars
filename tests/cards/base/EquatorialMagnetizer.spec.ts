@@ -20,7 +20,7 @@ describe('EquatorialMagnetizer', function() {
   });
 
   it('Should act', function() {
-    player.addProduction(Resources.ENERGY);
+    player.addProduction(Resources.ENERGY, 1);
     expect(card.canAct(player)).is.true;
 
     card.action(player);

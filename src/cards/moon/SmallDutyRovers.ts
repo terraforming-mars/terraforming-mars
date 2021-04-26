@@ -9,7 +9,7 @@ import {SpaceType} from '../../SpaceType';
 import {Resources} from '../../Resources';
 import {Units} from '../../Units';
 import {MoonCard} from './MoonCard';
-import {TileType} from '../../TileType';
+import {Size} from '../render/Size';
 
 export class SmallDutyRovers extends MoonCard implements IProjectCard {
   constructor() {
@@ -21,14 +21,14 @@ export class SmallDutyRovers extends MoonCard implements IProjectCard {
       productionBox: Units.of({}),
 
       metadata: {
-        description: 'Spend 1 titanium. Raise the Logistic Rate 1 step. Gain 1 MC per colony tile, mine tile and road tile on the Moon.',
+        description: 'Spend 1 titanium. Raise the Logistic Rate 1 step. Gain 1 M€ per colony tile, mine tile and road tile on the Moon.',
         cardNumber: 'M73',
         renderData: CardRenderer.builder((b) => {
           b.minus().titanium(1).moonLogisticsRate().br;
           b.megacredits(1).slash()
-            .tile(TileType.MOON_COLONY, false)
-            .tile(TileType.MOON_MINE, false)
-            .tile(TileType.MOON_ROAD, false).br;
+            .moonColony({size: Size.SMALL}).any
+            .moonMine({size: Size.SMALL}).any
+            .moonRoad({size: Size.SMALL}).any;
         }),
       },
     }, {
@@ -42,7 +42,7 @@ export class SmallDutyRovers extends MoonCard implements IProjectCard {
     const moonData = MoonExpansion.moonData(player.game);
     const gain = moonData.moon.spaces.filter((s) => s.tile !== undefined && s.spaceType !== SpaceType.COLONY).length;
 
-    player.setResource(Resources.MEGACREDITS, gain, player.game);
+    player.addResource(Resources.MEGACREDITS, gain, {log: true});
 
     return undefined;
   }

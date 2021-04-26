@@ -1,6 +1,6 @@
 {
     "Allied Banks": "Sprzymierzony Bank",
-    "Increase your MC production 4 steps. Gain 3 MC.": "Podnieś swoją produkcję MC o 4 poziomy. Otrzymujesz 3 MC.",
+    "Increase your M€ production 4 steps. Gain 3 MC.": "Podnieś swoją produkcję MC o 4 poziomy. Otrzymujesz 3 MC.",
 
     "Aquifer Turbines": "Turbiny Wodne",
     "Place an Ocean tile. Increase your energy production 2 steps. Pay 3 MC.": "Umieść na planszy obszar oceanu. Podnieś swoją produkcję energii o 2 poziomy. Tracisz 3 MC.",
@@ -12,13 +12,13 @@
     "Increase your plant production 1 step. Draw 3 cards.": "Podnieś swoją produkcję roślinności o 1 poziom. Dobierz 3 karty.",
 
     "Biosphere Support": "Wspomaganie Biosfery",
-    "Increase your plant production 2 steps. Decrease your MC production 1 step.": "Obniż swoją produkcję MC o 1 poziom. Podnieś swoją produkcję roślinności o 2 poziomy.",
+    "Increase your plant production 2 steps. Decrease your M€ production 1 step.": "Obniż swoją produkcję MC o 1 poziom. Podnieś swoją produkcję roślinności o 2 poziomy.",
 
     "Business Empire": "Biznesowe Imperium",
-    "Increase your MC production 6 steps. Pay 6 MC.": "Podnieś swoją produkcję MC o 6 poziomów. Tracisz 6 MC.",
+    "Increase your M€ production 6 steps. Pay 6 MC.": "Podnieś swoją produkcję MC o 6 poziomów. Tracisz 6 MC.",
 
     "Dome Farming": "Rolnictwo Kopułowe",
-    "Increase your MC production 2 steps and plant production 1 step.": "Podnieś swoją produkcję roślinności o 1 poziom. Podnieś swoją produkcję MC o 2 poziomy.",
+    "Increase your M€ production 2 steps and plant production 1 step.": "Podnieś swoją produkcję roślinności o 1 poziom. Podnieś swoją produkcję MC o 2 poziomy.",
 
     "Donation": "Darowizna",
     "Gain 21 MC.": "Otrzymujesz 21 MC.",
@@ -30,7 +30,7 @@
     "Increase your plant production 1 step. Play a card from hand, ignoring global requirements.": "Podnieś swoją produkcję roślinności o 1 poziom. Zagraj kartę z ręki, ignorując jej wymagania dotyczące wskaźników globalnych.",
 
     "Eccentric Sponsor": "Ekscentryczny Sponsor",
-    "Play a card from hand, reducing its cost by 25 MC": "Zagraj kartę z ręki, obniżając jej koszt o 25 MC.",
+    "Play a card from hand, reducing its cost by 25 M€": "Zagraj kartę z ręki, obniżając jej koszt o 25 MC.",
 
     "Experimental Forest": "Eksperymentalny Las",
     "Place 1 Greenery Tile and raise oxygen 1 step. Reveal cards until you reveal two cards with plant tags on them. Take them into your hand and discard the rest.": "Umieść na planszy obszar zieleni i podnieś Poziom Tlenu o 1%. Odkrywaj karty z wierzchu talii projektów, dopóki nie odkryjesz 2 kart z symbolem roślinności. Weź te karty na rękę, resztę odrzuć.",
@@ -48,7 +48,7 @@
     "Increase your titanium production 1 step. Draw a card.": "Podnieś swoją produkcję tytanu o 1 poziom. Dobierz kartę.",
 
     "Loan": "Pożyczka",
-    "Gain 30 MC. Decrease your MC production 2 steps.": "Obniż swoją produkcję MC o 2 poziomy. Otrzymujesz 30 MC.",
+    "Gain 30 MC. Decrease your M€ production 2 steps.": "Obniż swoją produkcję MC o 2 poziomy. Otrzymujesz 30 MC.",
 
     "Martian Industries": "Przemysł Marsjański",
     "Increase your energy and steel production 1 step. Gain 6 MC.": "Podnieś swoją produkcję energii i stali o 1 poziom. Otrzymujesz 6 MC.",
@@ -81,7 +81,7 @@
     "Increase your energy production 3 steps.": "Podnieś swoją produkcję energii o 3 poziomy.",
 
     "Research Network": "Sieć Badawcza",
-    "Increase your MC production 1 step. Draw 3 cards. After being played, when you perform an action, the wild tag counts as any tag of your choice.": "Dobierz 3 karty i podnieś swoją produkcję MC o 1 poziom.",
+    "Increase your M€ production 1 step. Draw 3 cards. After being played, when you perform an action, the wild tag counts as any tag of your choice.": "Dobierz 3 karty i podnieś swoją produkcję MC o 1 poziom.",
 
     "Self-Sufficient Settlement": "Samowystarczalna Osada",
     "Increase your money production 2 steps. Place a City tile.": "Umieść na planszy obszar miasta i podnieś swoją produkcję MC o 2 poziomy.",

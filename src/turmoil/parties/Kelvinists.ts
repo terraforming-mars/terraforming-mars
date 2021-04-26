@@ -19,12 +19,12 @@ export class Kelvinists extends Party implements IParty {
 class KelvinistsBonus01 implements Bonus {
   id = 'kb01';
   isDefault = true;
-  description = 'Gain 1 MC for each Heat production you have';
+  description = 'Gain 1 M€ for each Heat production you have';
 
   grant(game: Game) {
     game.getPlayers().forEach((player) => {
       const heatProduction = player.getProduction(Resources.HEAT);
-      player.setResource(Resources.MEGACREDITS, heatProduction);
+      player.addResource(Resources.MEGACREDITS, heatProduction);
     });
   }
 }
@@ -37,7 +37,7 @@ class KelvinistsBonus02 implements Bonus {
   grant(game: Game) {
     game.getPlayers().forEach((player) => {
       const heatProduction = player.getProduction(Resources.HEAT);
-      player.setResource(Resources.HEAT, heatProduction);
+      player.addResource(Resources.HEAT, heatProduction);
     });
   }
 }
@@ -45,7 +45,7 @@ class KelvinistsBonus02 implements Bonus {
 class KelvinistsPolicy01 implements Policy {
   isDefault = true;
   id = TurmoilPolicy.KELVINISTS_DEFAULT_POLICY;
-  description: string = 'Pay 10 MC to increase your Energy and Heat production 1 step (Turmoil Kelvinists)';
+  description: string = 'Pay 10 M€ to increase your Energy and Heat production 1 step (Turmoil Kelvinists)';
 
   canAct(player: Player) {
     return player.canAfford(10);
@@ -60,8 +60,8 @@ class KelvinistsPolicy01 implements Policy {
       {
         title: 'Select how to pay for Turmoil Kelvinists action',
         afterPay: () => {
-          player.addProduction(Resources.ENERGY);
-          player.addProduction(Resources.HEAT);
+          player.addProduction(Resources.ENERGY, 1);
+          player.addProduction(Resources.HEAT, 1);
           game.log('${0} increased heat and energy production 1 step', (b) => b.player(player));
         },
       },
@@ -73,7 +73,7 @@ class KelvinistsPolicy01 implements Policy {
 
 class KelvinistsPolicy02 implements Policy {
   id = TurmoilPolicy.KELVINISTS_POLICY_2;
-  description: string = 'When you raise temperature, gain 3 MC per step raised';
+  description: string = 'When you raise temperature, gain 3 M€ per step raised';
   isDefault = false;
 }
 
@@ -91,7 +91,7 @@ class KelvinistsPolicy03 implements Policy {
     game.log('${0} used Turmoil Kelvinists action', (b) => b.player(player));
     game.log('${0} spent 6 heat to raise temperature 1 step', (b) => b.player(player));
 
-    player.setResource(Resources.HEAT, -6);
+    player.addResource(Resources.HEAT, -6);
     game.increaseTemperature(player, 1);
     return undefined;
   }
@@ -103,7 +103,7 @@ class KelvinistsPolicy04 implements Policy {
   isDefault = false;
 
   onTilePlaced(player: Player) {
-    player.setResource(Resources.HEAT, 2);
+    player.addResource(Resources.HEAT, 2);
   }
 }
 

@@ -13,7 +13,7 @@ describe('Riots', function() {
     const turmoil = Turmoil.newInstance(game);
     turmoil.initGlobalEvent(game);
     game.addCityTile(player, game.board.getAvailableSpacesOnLand(player)[0].id);
-    player.setResource(Resources.MEGACREDITS, 10);
+    player.addResource(Resources.MEGACREDITS, 10);
     card.resolve(game, turmoil);
     expect(player.getResource(Resources.MEGACREDITS)).to.eq(6);
   });

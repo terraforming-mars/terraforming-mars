@@ -8,7 +8,7 @@
     "${0} ended turn": "${0} hat den Zug beendet",
     "${0} converted heat into temperature": "${0} hat Wärme in einen Temperaturanstieg investiert",
     "${0} converted plants into a greenery": "${0} hat Pflanzen in eine Grünfläche umgewandelt",
-    "${0} spent ${1} MC to trade with ${2}": "${0} hat mit ${2} gehandelt",
+    "${0} spent ${1} M€ to trade with ${2}": "${0} hat mit ${2} gehandelt",
     "${0} spent ${1} energy to trade with ${2}": "${0} hat mit ${2} gehandelt",
     "${0} spent ${1} titanium to trade with ${2}": "${0} hat mit ${2} gehandelt",
     "${0} spent 1 floater to trade with ${1}": "${0} hat mit ${1} gehandelt",
@@ -22,7 +22,7 @@
     "${0} loses ${1} resource(s) on ${2} by ${3}": "${0} verlor ${1} Ressource(n) auf ${2} durch ${3}",
     "${0}'s ${1} production modified by ${2} by ${3}": "Die ${1}-Produktion von ${0} wurde um ${2} modifiziert durch ${3}",
     "${0}'s ${1} amount modified by ${2} by ${3}": "Die ${1}-Ressourcen von ${0} wurde um ${2} modifiziert durch ${3}",
-    "${0} received ${1} MC from ${2} owner (${3})": "${0} erhielt ${1} MC von ${2} (${3})",
+    "${0} received ${1} M€ from ${2} owner (${3})": "${0} erhielt ${1} M€ von ${2} (${3})",
     "${0} copied ${1} production with ${2}": "${0} hat die Produktion von ${1} mit ${2} kopiert",
     "${0} used ${1} action with ${2}": "${0} hat mit ${2} eine Aktion von ${1} genutzt",
     "${0} sold ${1} patents": "${0} hat ${1} Patente verkauft"

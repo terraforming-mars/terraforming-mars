@@ -8,6 +8,7 @@ import {TileType} from '../../TileType';
 import {CardRenderer} from '../render/CardRenderer';
 import {CardRequirements} from '../CardRequirements';
 import {Card} from '../Card';
+import {Size} from '../render/Size';
 
 export class RevoltingColonists extends Card implements IProjectCard {
   constructor() {
@@ -19,10 +20,10 @@ export class RevoltingColonists extends Card implements IProjectCard {
       requirements: CardRequirements.builder((b) => b.colonyRate(4)),
 
       metadata: {
-        description: 'Requires 4 Colony Rate. All players pay 3MC for each colony tile they own.',
+        description: 'Requires 4 Colony Rate. All players pay 3M€ for each colony tile they own.',
         cardNumber: 'M51',
         renderData: CardRenderer.builder((b) => {
-          b.megacredits(3).slash().tile(TileType.MOON_COLONY, false).asterix();
+          b.megacredits(3).any.slash().moonColony({size: Size.SMALL}).any;
         }),
       },
     });
@@ -37,7 +38,7 @@ export class RevoltingColonists extends Card implements IProjectCard {
         const spent = Math.min(owes, colonyTileOwner.megaCredits);
         colonyTileOwner.megaCredits -= spent;
         player.game.log(
-          '${0} spends ${1} MC for the ${2} colonies they own.',
+          '${0} spends ${1} M€ for the ${2} colonies they own.',
           (b) => b.player(colonyTileOwner).number(spent).number(owned));
       }
     });

@@ -35,7 +35,7 @@ export class CopernicusSolarArrays extends MoonCard {
   public play(player: Player) {
     super.play(player);
     player.heat += 2;
-    player.addProduction(Resources.ENERGY, 1, player.game);
+    player.addProduction(Resources.ENERGY, 1, {log: true});
     return undefined;
   }
 }

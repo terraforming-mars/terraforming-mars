@@ -21,7 +21,7 @@ export class MediaArchives extends Card implements IProjectCard {
         renderData: CardRenderer.builder((b) => {
           b.megacredits(1).slash().event().played.any;
         }),
-        description: 'Gain 1 MC for each event EVER PLAYED by all players.',
+        description: 'Gain 1 M€ for each event EVER PLAYED by all players.',
       },
     });
   }

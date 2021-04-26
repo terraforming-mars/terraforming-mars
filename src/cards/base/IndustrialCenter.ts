@@ -22,7 +22,7 @@ export class IndustrialCenter extends Card implements IActionCard, IProjectCard 
     metadata: CardMetadata = {
       cardNumber: '123',
       renderData: CardRenderer.builder((b) => {
-        b.action('Spend 7 MC to increase your steel production 1 step.', (eb) => {
+        b.action('Spend 7 M€ to increase your steel production 1 step.', (eb) => {
           eb.megacredits(7).startAction.production((pb) => pb.steel(1));
         }).br;
         b.tile(TileType.INDUSTRIAL_CENTER, true, false).asterix();
@@ -59,7 +59,7 @@ export class IndustrialCenter extends Card implements IActionCard, IProjectCard 
   }
   public action(player: Player) {
     player.game.defer(new SelectHowToPayDeferred(player, 7, {title: 'Select how to pay for action'}));
-    player.addProduction(Resources.STEEL);
+    player.addProduction(Resources.STEEL, 1);
     return undefined;
   }
 }

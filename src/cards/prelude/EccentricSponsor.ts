@@ -3,7 +3,7 @@ import {CardName} from '../../CardName';
 import {PreludeCard} from './PreludeCard';
 import {PlayProjectCard} from '../../deferredActions/PlayProjectCard';
 import {CardRenderer} from '../render/CardRenderer';
-import {CardRenderItemSize} from '../render/CardRenderItemSize';
+import {Size} from '../render/Size';
 
 export class EccentricSponsor extends PreludeCard {
   constructor() {
@@ -13,7 +13,7 @@ export class EccentricSponsor extends PreludeCard {
       metadata: {
         cardNumber: 'P11',
         renderData: CardRenderer.builder((b) => {
-          b.text('Play a card from hand, reducing its cost by 25 MC', CardRenderItemSize.SMALL, true);
+          b.text('Play a card from hand, reducing its cost by 25 M€', Size.SMALL, true);
         }),
       },
     });

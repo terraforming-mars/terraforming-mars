@@ -8,6 +8,7 @@ import {CardRenderer} from '../render/CardRenderer';
 import {Units} from '../../Units';
 import {TileType} from '../../TileType';
 import {MoonCard} from './MoonCard';
+import {AltSecondaryTag} from '../render/CardRenderItem';
 
 export class MomentumViriumHabitat extends MoonCard {
   constructor() {
@@ -19,7 +20,7 @@ export class MomentumViriumHabitat extends MoonCard {
       productionBox: Units.of({heat: 2, megacredits: 3}),
 
       metadata: {
-        description: 'Spend 1 titanium. Increase your heat production 2 steps and your MC production 3 steps. ' +
+        description: 'Spend 1 titanium. Increase your heat production 2 steps and your M€ production 3 steps. ' +
         'Place a colony tile ON THE RESERVED AREA and raise the Colony Rate 1 step.',
         cardNumber: 'M12',
         renderData: CardRenderer.builder((b) => {
@@ -27,7 +28,7 @@ export class MomentumViriumHabitat extends MoonCard {
           b.production((pb) => {
             pb.heat(2).megacredits(3);
           }).br;
-          b.moonColony().asterix();
+          b.moonColony().secondaryTag(AltSecondaryTag.MOON_COLONY_RATE).asterix();
         }),
       },
     }, {

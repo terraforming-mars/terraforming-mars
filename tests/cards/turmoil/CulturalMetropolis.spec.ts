@@ -37,7 +37,7 @@ describe('Cultural Metropolis', function() {
   });
 
   it('Should play', function() {
-    player.addProduction(Resources.ENERGY);
+    player.addProduction(Resources.ENERGY, 1);
     const unity = turmoil.getPartyByName(PartyName.UNITY)!;
     unity.sendDelegate(player.id, game);
     unity.sendDelegate(player.id, game);

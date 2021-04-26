@@ -15,8 +15,8 @@ describe('MinersOnStrike', function() {
     const game = Game.newInstance('foobar', [player, player2], player);
     const turmoil = Turmoil.newInstance(game);
     turmoil.initGlobalEvent(game);
-    player.setResource(Resources.TITANIUM, 5);
-    player2.setResource(Resources.TITANIUM, 5);
+    player.addResource(Resources.TITANIUM, 5);
+    player2.addResource(Resources.TITANIUM, 5);
     player.playedCards.push(new MethaneFromTitan());
     player2.playedCards.push(new MethaneFromTitan());
     player2.playedCards.push(new MethaneFromTitan());

@@ -6,6 +6,7 @@ import {CardMetadata} from '../CardMetadata';
 import {MoonExpansion} from '../../moon/MoonExpansion';
 import {TileType} from '../../TileType';
 import {CardRenderer} from '../render/CardRenderer';
+import {Size} from '../render/Size';
 
 export class HeavyDutyRovers implements IProjectCard {
   public cost = 12;
@@ -29,13 +30,12 @@ export class HeavyDutyRovers implements IProjectCard {
   }
 
   public readonly metadata: CardMetadata = {
-    description: 'Gain 4 MC for each mining tile adjacent to a road tile. Raise the Logistic Rate 1 step.',
+    description: 'Gain 4 M€ for each mining tile adjacent to a road tile. Raise the Logistic Rate 1 step.',
     cardNumber: 'M39',
     renderData: CardRenderer.builder((b) => {
-      // TODO(kberg): Can the two tiles abut each other?
-      b.megacredits(4).slash().tile(TileType.MOON_MINE, false).tile(TileType.MOON_ROAD, false);
+      b.megacredits(4).slash().moonRoad({size: Size.SMALL}).any.moonMine({size: Size.SMALL}).any;
       b.br;
-      b.moonLogisticsRate();
+      b.moonLogisticsRate({size: Size.SMALL});
     }),
   };
 }

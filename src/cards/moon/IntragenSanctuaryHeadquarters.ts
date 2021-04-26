@@ -29,7 +29,7 @@ export class IntragenSanctuaryHeadquarters implements CorporationCard {
     renderData: CardRenderer.builder((b) => {
       b.megacredits(38).br;
       b.effect('When any player plays an animal tag (including this), add 1 animal on this card.', (eb) => {
-        eb.animals(1).startEffect.animals(1);
+        eb.animals(1).played.startEffect.animals(1);
       }).br,
       b.text('1 VP for every 2 animals on this card.').br;
     }),

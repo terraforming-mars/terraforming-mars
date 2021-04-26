@@ -17,7 +17,7 @@ import {PartyHooks} from '../../turmoil/parties/PartyHooks';
 import {PartyName} from '../../turmoil/parties/PartyName';
 import {PlaceOceanTile} from '../../deferredActions/PlaceOceanTile';
 import {CardRenderer} from '../render/CardRenderer';
-import {CardRenderItemSize} from '../render/CardRenderItemSize';
+import {Size} from '../render/Size';
 
 export class LargeConvoy extends Card implements IProjectCard {
   constructor() {
@@ -31,7 +31,7 @@ export class LargeConvoy extends Card implements IProjectCard {
         cardNumber: '143',
         renderData: CardRenderer.builder((b) => {
           b.oceans(1).cards(2).br;
-          b.plants(5).digit.or(CardRenderItemSize.MEDIUM).animals(4).digit.asterix();
+          b.plants(5).digit.or(Size.MEDIUM).animals(4).digit.asterix();
         }),
         description: 'Place an ocean tile and draw 2 cards. Gain 5 Plants or add 4 Animals to ANOTHER card.',
         victoryPoints: 2,
@@ -43,7 +43,7 @@ export class LargeConvoy extends Card implements IProjectCard {
     const oceansMaxed = player.game.board.getOceansOnBoard() === MAX_OCEAN_TILES;
 
     if (PartyHooks.shouldApplyPolicy(player.game, PartyName.REDS) && !oceansMaxed) {
-      return player.canAfford(player.getCardCost(this) + REDS_RULING_POLICY_COST, false, true);
+      return player.canAfford(player.getCardCost(this) + REDS_RULING_POLICY_COST, {titanium: true});
     }
 
     return true;

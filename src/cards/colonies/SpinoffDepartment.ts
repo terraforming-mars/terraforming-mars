@@ -18,12 +18,12 @@ export class SpinoffDepartment extends Card implements IProjectCard {
       metadata: {
         cardNumber: 'C41',
         renderData: CardRenderer.builder((b) => {
-          b.effect('WHEN PLAYING A CARD WITH A BASIC COST OF 20MC OR MORE, draw a card.', (eb) => {
+          b.effect('WHEN PLAYING A CARD WITH A BASIC COST OF 20M€ OR MORE, draw a card.', (eb) => {
             eb.megacredits(20).asterix().startEffect.cards(1);
           }).br;
           b.production((pb) => pb.megacredits(2));
         }),
-        description: 'Increase your MC production 2 steps.',
+        description: 'Increase your M€ production 2 steps.',
       },
     });
   }

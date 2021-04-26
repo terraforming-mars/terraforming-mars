@@ -21,7 +21,7 @@ describe('ElectroCatapult', () => {
   });
 
   it('Cannot play if oxygen level too high', () => {
-    player.addProduction(Resources.ENERGY);
+    player.addProduction(Resources.ENERGY, 1);
     (game as any).oxygenLevel = 9;
     expect(card.canPlay(player)).is.not.true;
   });
@@ -33,7 +33,7 @@ describe('ElectroCatapult', () => {
   });
 
   it('Should play', () => {
-    player.addProduction(Resources.ENERGY);
+    player.addProduction(Resources.ENERGY, 1);
     card.play(player);
 
     expect(player.getProduction(Resources.ENERGY)).to.eq(0);

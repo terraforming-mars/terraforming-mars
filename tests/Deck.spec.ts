@@ -30,7 +30,8 @@ describe('Deck', function() {
     expect(deck.findByCardName(CardName.ECOLOGICAL_ZONE)).is.undefined;
   });
 
+  // Dont' remove this test. It's a placeholder for card renames.
   it('finds renamed cards', function() {
-    expect(deck.findByCardName('Earth Embasy' as CardName)?.cardName).to.equal(CardName.EARTH_EMBASSY);
+    // expect(deck.findByCardName('Earth Embasy' as CardName)?.cardName).to.equal(CardName.EARTH_EMBASSY);
   });
 });

@@ -26,7 +26,7 @@ export class ImportedGHG extends Card implements IProjectCard {
   }
 
   public play(player: Player) {
-    player.addProduction(Resources.HEAT);
+    player.addProduction(Resources.HEAT, 1);
     player.heat += 3;
     return undefined;
   }

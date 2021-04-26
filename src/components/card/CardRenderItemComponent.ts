@@ -1,13 +1,18 @@
 import Vue from 'vue';
 import {generateClassString} from '../../utils/utils';
-import {CardRenderItem} from '../../cards/render/CardRenderItem';
+import {AltSecondaryTag, CardRenderItem} from '../../cards/render/CardRenderItem';
 import {CardRenderItemType} from '../../cards/render/CardRenderItemType';
 import {CardRenderSymbol} from '../../cards/render/CardRenderSymbol';
-import {CardRenderItemSize} from '../../cards/render/CardRenderItemSize';
+import {Size} from '../../cards/render/Size';
 import {CardRenderSymbolComponent} from './CardRenderSymbolComponent';
+import {Tags} from '../../cards/Tags';
 
 // microbe, animal and plant tag could be used both as a resource and played tag
-const RESOURCE_AND_TAG_TYPES = [CardRenderItemType.ANIMALS, CardRenderItemType.PLANTS, CardRenderItemType.MICROBES];
+const RESOURCE_AND_TAG_TYPES = [
+  CardRenderItemType.ANIMALS,
+  CardRenderItemType.PLANTS,
+  CardRenderItemType.MICROBES,
+  CardRenderItemType.SCIENCE];
 
 export const CardRenderItemComponent = Vue.component('CardRenderItemComponent', {
   props: {
@@ -21,6 +26,7 @@ export const CardRenderItemComponent = Vue.component('CardRenderItemComponent', 
   methods: {
     getComponentClasses: function(): string {
       let classes: Array<string> = [];
+
       const type: CardRenderItemType = this.item.type;
       if (type === CardRenderItemType.TEMPERATURE) {
         classes.push('card-global-requirement');
@@ -31,7 +37,7 @@ export const CardRenderItemComponent = Vue.component('CardRenderItemComponent', 
       } else if (type === CardRenderItemType.OCEANS) {
         classes.push('card-global-requirement');
         classes.push('card-ocean-global-requirement');
-        if (this.item.size !== undefined && this.item.size !== CardRenderItemSize.MEDIUM) {
+        if (this.item.size !== undefined && this.item.size !== Size.MEDIUM) {
           classes.push(`card-ocean--${this.item.size}`);
         }
       } else if (type === CardRenderItemType.VENUS) {
@@ -40,7 +46,7 @@ export const CardRenderItemComponent = Vue.component('CardRenderItemComponent', 
       } else if (type === CardRenderItemType.TR) {
         classes.push('card-tile');
         classes.push('card-tr');
-        if (this.item.size !== undefined && this.item.size !== CardRenderItemSize.MEDIUM) {
+        if (this.item.size !== undefined && this.item.size !== Size.MEDIUM) {
           classes.push(`card-tr--${this.item.size}`);
         }
       } else if (type === CardRenderItemType.TITANIUM) {
@@ -61,7 +67,7 @@ export const CardRenderItemComponent = Vue.component('CardRenderItemComponent', 
       } else if (type === CardRenderItemType.MEGACREDITS) {
         classes.push('card-resource');
         classes.push('card-resource-money');
-        if (this.item.size !== undefined && this.item.size !== CardRenderItemSize.MEDIUM) {
+        if (this.item.size !== undefined && this.item.size !== Size.MEDIUM) {
           classes.push(`card-money--${this.item.size}`);
         }
       } else if (type === CardRenderItemType.CARDS) {
@@ -102,7 +108,7 @@ export const CardRenderItemComponent = Vue.component('CardRenderItemComponent', 
       } else if (type === CardRenderItemType.COLONIES) {
         classes.push('card-resource-colony');
         // TODO (chosta): think about an abstraction for item size
-        if (this.item.size === CardRenderItemSize.SMALL) {
+        if (this.item.size === Size.SMALL) {
           classes.push('card-resource-colony-S');
         }
       } else if (type === CardRenderItemType.TRADE_DISCOUNT || type === CardRenderItemType.MULTIPLIER_WHITE) {
@@ -111,6 +117,7 @@ export const CardRenderItemComponent = Vue.component('CardRenderItemComponent', 
       } else if (type === CardRenderItemType.TRADE_FLEET) {
         classes.push('card-resource-trade-fleet');
       } else if (type === CardRenderItemType.SYNDICATE_FLEET) {
+        classes.push('card-resource');
         classes.push('card-resource-syndicate-fleet');
       } else if (type === CardRenderItemType.CHAIRMAN) {
         classes.push('card-chairman');
@@ -128,7 +135,7 @@ export const CardRenderItemComponent = Vue.component('CardRenderItemComponent', 
         classes.push(`city-tile--${this.item.size}`);
       } else if (type === CardRenderItemType.GREENERY) {
         classes.push('card-tile');
-        if (this.item.secondaryTag === 'oxygen') {
+        if (this.item.secondaryTag === AltSecondaryTag.OXYGEN) {
           classes.push(`greenery-tile-oxygen--${this.item.size}`);
         } else {
           classes.push(`greenery-tile--${this.item.size}`);
@@ -150,6 +157,43 @@ export const CardRenderItemComponent = Vue.component('CardRenderItemComponent', 
       } else if (type === CardRenderItemType.DATA_RESOURCE) {
         classes.push('card-resource');
         classes.push('card-resource-data');
+      } else if (type === CardRenderItemType.RESOURCE_CUBE) {
+        classes.push('card-resource');
+        classes.push('card-resource-cube');
+      } else if (this.item.type === CardRenderItemType.MOON_COLONY) {
+        if (this.item.secondaryTag === AltSecondaryTag.MOON_COLONY_RATE) {
+          classes.push(sized('card-tile-lunar-colony-rate', this.item.size));
+        } else {
+          classes.push(sized('card-tile-lunar-colony', this.item.size));
+        }
+      }
+
+      function sized(clazz: string, size: string | undefined) {
+        return size !== undefined ? `${clazz}--${size}` : clazz;
+      }
+
+      if (this.item.type === CardRenderItemType.MOON_COLONY_RATE) {
+        classes.push(this.item.size === undefined ? 'card-colony-rate' : `card-colony-rate--${this.item.size}`);
+      }
+      if (this.item.type === CardRenderItemType.MOON_MINE) {
+        if (this.item.secondaryTag === AltSecondaryTag.MOON_MINING_RATE) {
+          classes.push(sized('card-tile-lunar-mine-rate', this.item.size));
+        } else {
+          classes.push(sized('card-tile-lunar-mine', this.item.size));
+        }
+      }
+      if (this.item.type === CardRenderItemType.MOON_MINING_RATE) {
+        classes.push(this.item.size === undefined ? 'card-mining-rate' : `card-mining-rate--${this.item.size}`);
+      }
+      if (this.item.type === CardRenderItemType.MOON_ROAD) {
+        if (this.item.secondaryTag === AltSecondaryTag.MOON_LOGISTICS_RATE) {
+          classes.push(sized('card-tile-lunar-road-rate', this.item.size));
+        } else {
+          classes.push(sized('card-tile-lunar-road', this.item.size));
+        }
+      }
+      if (this.item.type === CardRenderItemType.MOON_LOGISTICS_RATE) {
+        classes.push(this.item.size === undefined ? 'card-logistics-rate' : `card-logistics-rate--${this.item.size}`);
       }
 
       // round tags
@@ -230,7 +274,14 @@ export const CardRenderItemComponent = Vue.component('CardRenderItemComponent', 
         }
       }
 
-      if (this.item.secondaryTag !== undefined && this.item.secondaryTag !== 'oxygen') {
+      const previouslyRendered: Array<Tags | AltSecondaryTag> = [
+        AltSecondaryTag.OXYGEN,
+        AltSecondaryTag.MOON_COLONY_RATE,
+        AltSecondaryTag.MOON_MINING_RATE,
+        AltSecondaryTag.MOON_LOGISTICS_RATE,
+      ];
+      // Oxygen is handled specially separately.
+      if (this.item.secondaryTag !== undefined && !previouslyRendered.includes(this.item.secondaryTag)) {
         const classes: string[] = ['card-icon'];
         classes.push(`card-tag-${this.item.secondaryTag}`);
         result += '<div class="' + generateClassString(classes) + '"></div>';
@@ -263,6 +314,7 @@ export const CardRenderItemComponent = Vue.component('CardRenderItemComponent', 
         result = '<div class="card-resource points-big card-vp-questionmark">?</div>';
       }
       // TODO(chosta): find a reasonable way to represent "?" (alphanumeric maybe)
+      // This is assocaited with the card Playwrights.
       if (this.item.type === CardRenderItemType.MEGACREDITS && this.item.amount === 1000) {
         result = '?';
       }
@@ -271,30 +323,6 @@ export const CardRenderItemComponent = Vue.component('CardRenderItemComponent', 
       }
       if (this.item.type === CardRenderItemType.RESOURCE_CUBE) {
         return '<div class="board-cube--bronze"></div>';
-      }
-      if (this.item.type === CardRenderItemType.MOON_COLONY) {
-        const clazz = this.item.size === undefined ? 'card-play-moon-colony' : `card-play-moon-colony--${this.item.size}`;
-        return `<div class="${clazz}"></div>`;
-      }
-      if (this.item.type === CardRenderItemType.MOON_COLONY_RATE) {
-        const clazz = this.item.size === undefined ? 'card-colony-rate' : `card-colony-rate--${this.item.size}`;
-        return `<div class="${clazz}"></div>`;
-      }
-      if (this.item.type === CardRenderItemType.MOON_MINE) {
-        const clazz = this.item.size === undefined ? 'card-play-moon-mine' : `card-play-moon-mine--${this.item.size}`;
-        return `<div class="${clazz}"></div>`;
-      }
-      if (this.item.type === CardRenderItemType.MOON_MINING_RATE) {
-        const clazz = this.item.size === undefined ? 'card-mining-rate' : `card-mining-rate--${this.item.size}`;
-        return `<div class="${clazz}"></div>`;
-      }
-      if (this.item.type === CardRenderItemType.MOON_ROAD) {
-        const clazz = this.item.size === undefined ? 'card-play-moon-road' : `card-play-moon-road--${this.item.size}`;
-        return `<div class="${clazz}"></div>`;
-      }
-      if (this.item.type === CardRenderItemType.MOON_LOGISTICS_RATE) {
-        const clazz = this.item.size === undefined ? 'card-logistics-rate' : `card-logistics-rate--${this.item.size}`;
-        return `<div class="${clazz}"></div>`;
       }
       // TODO(chosta): abstract once another case of cancel (X) on top of an item is needed
       if (this.item.type === CardRenderItemType.TR && this.item.cancelled === true) {

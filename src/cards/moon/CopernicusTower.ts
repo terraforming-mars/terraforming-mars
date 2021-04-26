@@ -12,7 +12,7 @@ import {OrOptions} from '../../inputs/OrOptions';
 import {SelectOption} from '../../inputs/SelectOption';
 import {Card} from '../Card';
 import {CardRenderDynamicVictoryPoints} from '../render/CardRenderDynamicVictoryPoints';
-import {CardRenderItemSize} from '../render/CardRenderItemSize';
+import {Size} from '../render/Size';
 
 export class CopernicusTower extends Card implements IActionCard, IProjectCard {
   constructor() {
@@ -28,7 +28,7 @@ export class CopernicusTower extends Card implements IActionCard, IProjectCard {
         cardNumber: 'M72',
         victoryPoints: CardRenderDynamicVictoryPoints.moon(1, 1),
         renderData: CardRenderer.builder((b) => {
-          b.text('Requires you have 2 titanium production.', CardRenderItemSize.TINY, false, false).br;
+          b.text('Requires you have 2 titanium production.', Size.TINY, false, false).br;
           b.action('Add 1 Science resource here, or spend 1 Science resource here to raise your TR 1 step.', (eb) => {
             eb.empty().startAction.science(1).nbsp.slash().nbsp.science(1).arrow().tr(1);
           });
@@ -72,7 +72,7 @@ export class CopernicusTower extends Card implements IActionCard, IProjectCard {
   private spendResource(player: Player) {
     player.removeResourceFrom(this);
     player.increaseTerraformRating();
-    player.addProduction(Resources.MEGACREDITS);
+    player.addProduction(Resources.MEGACREDITS, 1);
     return undefined;
   }
 }

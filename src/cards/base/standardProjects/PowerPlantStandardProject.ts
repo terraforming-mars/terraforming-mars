@@ -12,7 +12,7 @@ export class PowerPlantStandardProject extends StandardProjectCard {
       metadata: {
         cardNumber: 'SP7',
         renderData: CardRenderer.builder((b) =>
-          b.standardProject('Spend 11 MC to increase your Energy production 1 step.', (eb) => {
+          b.standardProject('Spend 11 M€ to increase your Energy production 1 step.', (eb) => {
             eb.megacredits(11).startAction.production((pb) => {
               pb.energy(1);
             });
@@ -30,6 +30,6 @@ export class PowerPlantStandardProject extends StandardProjectCard {
   }
 
   actionEssence(player: Player): void {
-    player.addProduction(Resources.ENERGY);
+    player.addProduction(Resources.ENERGY, 1);
   }
 }

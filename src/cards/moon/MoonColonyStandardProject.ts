@@ -6,8 +6,11 @@ import {MoonExpansion} from '../../moon/MoonExpansion';
 import {PlaceMoonColonyTile} from '../../moon/PlaceMoonColonyTile';
 import {Units} from '../../Units';
 import {Resources} from '../../Resources';
+import {IMoonCard} from './IMoonCard';
+import {TileType} from '../../TileType';
+import {AltSecondaryTag} from '../render/CardRenderItem';
 
-export class MoonColonyStandardProject extends StandardProjectCard {
+export class MoonColonyStandardProject extends StandardProjectCard implements IMoonCard {
   constructor() {
     super({
       name: CardName.MOON_COLONY_STANDARD_PROJECT,
@@ -15,8 +18,8 @@ export class MoonColonyStandardProject extends StandardProjectCard {
       metadata: {
         cardNumber: '',
         renderData: CardRenderer.builder((b) =>
-          b.standardProject('Spend 22 MC and 1 titanium to place a colony on the moon and raise your MC production 1 step.', (eb) => {
-            eb.megacredits(22).titanium(1).startAction.moonColony().production((pb) => pb.megacredits(1));
+          b.standardProject('Spend 22 M€ and 1 titanium to place a colony on the moon and raise your M€ production 1 step.', (eb) => {
+            eb.megacredits(22).titanium(1).startAction.moonColony().secondaryTag(AltSecondaryTag.MOON_COLONY_RATE).production((pb) => pb.megacredits(1));
           }),
         ),
       },
@@ -24,6 +27,8 @@ export class MoonColonyStandardProject extends StandardProjectCard {
   }
 
   public reserveUnits = Units.of({titanium: 1});
+  public tilesBuilt = [TileType.MOON_COLONY];
+
   protected discount(player: Player): number {
     if (player.playedCards.find((card) => card.name === CardName.MOONCRATE_BLOCK_FACTORY)) {
       return 4;
@@ -39,7 +44,7 @@ export class MoonColonyStandardProject extends StandardProjectCard {
       return false;
     }
 
-    return player.canAfford(this.cost) && player.hasUnits(this.reserveUnits);
+    return super.canAct(player);
   }
 
   // TODO(kberg): subclass MoonCard? This is starting to show the problems with just using subclassing.
@@ -47,6 +52,6 @@ export class MoonColonyStandardProject extends StandardProjectCard {
     const adjustedReserveUnits = MoonExpansion.adjustedReserveCosts(player, this);
     player.deductUnits(adjustedReserveUnits);
     player.game.defer(new PlaceMoonColonyTile(player));
-    player.addProduction(Resources.MEGACREDITS, 1, player.game);
+    player.addProduction(Resources.MEGACREDITS, 1, {log: true});
   }
 }

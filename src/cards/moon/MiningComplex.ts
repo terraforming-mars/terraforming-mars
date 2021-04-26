@@ -8,6 +8,7 @@ import {MoonExpansion} from '../../moon/MoonExpansion';
 import {PlaceMoonRoadTile} from '../../moon/PlaceMoonRoadTile';
 import {SpaceType} from '../../SpaceType';
 import {Resources} from '../../Resources';
+import {AltSecondaryTag} from '../render/CardRenderItem';
 
 export class MiningComplex extends PreludeCard {
   constructor() {
@@ -21,7 +22,7 @@ export class MiningComplex extends PreludeCard {
         'Pay 7 MC.',
         cardNumber: '',
         renderData: CardRenderer.builder((b) =>
-          b.moonMine().moonRoad().asterix().br.minus().megacredits(7),
+          b.moonMine().secondaryTag(AltSecondaryTag.MOON_MINING_RATE).moonRoad().secondaryTag(AltSecondaryTag.MOON_LOGISTICS_RATE).asterix().br.minus().megacredits(7),
         ),
       },
     });
@@ -41,7 +42,7 @@ export class MiningComplex extends PreludeCard {
             'Select a space next to the mine for a road',
             availableRoadSpaces));
       }));
-    player.setResource(Resources.MEGACREDITS, -7);
+    player.addResource(Resources.MEGACREDITS, -7);
     return undefined;
   }
 }

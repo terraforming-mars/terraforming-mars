@@ -4,7 +4,7 @@ import {CardType} from '../CardType';
 import {IProjectCard} from '../IProjectCard';
 import {Tags} from '../Tags';
 import {CardRenderer} from '../render/CardRenderer';
-import {CardRenderItemSize} from '../render/CardRenderItemSize';
+import {Size} from '../render/Size';
 import {Card} from '../Card';
 
 export class LunarSteel extends Card implements IProjectCard {
@@ -18,8 +18,8 @@ export class LunarSteel extends Card implements IProjectCard {
       metadata: {
         cardNumber: 'M87',
         renderData: CardRenderer.builder((b) => {
-          b.effect('Your steel resources are worth 1 MC extra.', (eb) => {
-            eb.steel(1).startEffect.plus(CardRenderItemSize.SMALL).megacredits(1);
+          b.effect('Your steel resources are worth 1 M€ extra.', (eb) => {
+            eb.steel(1).startEffect.plus(Size.SMALL).megacredits(1);
           });
         }),
       },

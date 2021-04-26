@@ -29,7 +29,7 @@ export class LavaTubeSettlement extends Card implements IProjectCard {
           }).br;
           b.city().asterix();
         }),
-        description: 'Decrease your Energy production 1 step and increase your MC production 2 steps. Place a City Tile on a VOLCANIC AREA regardless of adjacent cities.',
+        description: 'Decrease your Energy production 1 step and increase your M€ production 2 steps. Place a City Tile on a VOLCANIC AREA regardless of adjacent cities.',
       },
     });
   }

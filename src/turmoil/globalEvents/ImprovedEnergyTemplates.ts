@@ -13,7 +13,7 @@ export class ImprovedEnergyTemplates implements IGlobalEvent {
     public currentDelegate = PartyName.KELVINISTS;
     public resolve(game: Game, turmoil: Turmoil) {
       game.getPlayers().forEach((player) => {
-        player.addProduction(Resources.ENERGY, Math.floor((player.getTagCount(Tags.ENERGY, false, false) + turmoil.getPlayerInfluence(player)) / 2), game, undefined, true);
+        player.addProduction(Resources.ENERGY, Math.floor((player.getTagCount(Tags.ENERGY, false, false) + turmoil.getPlayerInfluence(player)) / 2), {log: true, from: this.name});
       });
     }
 }

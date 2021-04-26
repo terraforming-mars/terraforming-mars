@@ -7,7 +7,7 @@ import {Turmoil} from '../Turmoil';
 
 export class JovianTaxRights implements IGlobalEvent {
     public name = GlobalEventName.JOVIAN_TAX_RIGHTS;
-    public description = 'Increase MC production 1 step for each colony. Gain 1 titanium for each influence.';
+    public description = 'Increase M€ production 1 step for each colony. Gain 1 titanium for each influence.';
     public revealedDelegate = PartyName.SCIENTISTS;
     public currentDelegate = PartyName.UNITY;
     public resolve(game: Game, turmoil: Turmoil) {
@@ -16,8 +16,8 @@ export class JovianTaxRights implements IGlobalEvent {
         game.colonies.forEach((colony) => {
           coloniesCount += colony.colonies.filter((owner) => owner === player.id).length;
         });
-        player.addProduction(Resources.MEGACREDITS, coloniesCount, game, undefined, true);
-        player.setResource(Resources.TITANIUM, turmoil.getPlayerInfluence(player), game, undefined, true);
+        player.addProduction(Resources.MEGACREDITS, coloniesCount, {log: true, from: this.name});
+        player.addResource(Resources.TITANIUM, turmoil.getPlayerInfluence(player), {log: true, from: this.name});
       });
     }
 }

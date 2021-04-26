@@ -8,7 +8,7 @@ import {Board} from '../../boards/Board';
 
 export class Riots implements IGlobalEvent {
     public name = GlobalEventName.RIOTS;
-    public description = 'Lose 4 MC for each City tile (max 5, then reduced by influence).';
+    public description = 'Lose 4 M€ for each City tile (max 5, then reduced by influence).';
     public revealedDelegate = PartyName.MARS;
     public currentDelegate = PartyName.REDS;
     public resolve(game: Game, turmoil: Turmoil) {
@@ -19,7 +19,7 @@ export class Riots implements IGlobalEvent {
         ).length;
         const amount = Math.min(5, city) - turmoil.getPlayerInfluence(player);
         if (amount > 0) {
-          player.setResource(Resources.MEGACREDITS, -4 * amount, game, undefined, true);
+          player.addResource(Resources.MEGACREDITS, -4 * amount, {log: true, from: this.name});
         }
       });
     }

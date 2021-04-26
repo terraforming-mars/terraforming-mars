@@ -28,7 +28,7 @@ export class Aridor extends Card implements CorporationCard {
           b.br.br;
           b.megacredits(40).nbsp.placeColony();
           b.corpBox('effect', (ce) => {
-            ce.effect('When you get a new type of tag in play [event cards do not count], increase your MC production 1 step.', (eb) => {
+            ce.effect('When you get a new type of tag in play [event cards do not count], increase your M€ production 1 step.', (eb) => {
               eb.diverseTag().startEffect.production((pb) => pb.megacredits(1));
             });
           });
@@ -91,7 +91,7 @@ export class Aridor extends Card implements CorporationCard {
         const currentSize = this.allTags.size;
         this.allTags.add(tag);
         if (this.allTags.size > currentSize) {
-          player.addProduction(Resources.MEGACREDITS);
+          player.addProduction(Resources.MEGACREDITS, 1);
         }
       }
       return undefined;

@@ -12,7 +12,7 @@ import {IResourceCard} from '../ICard';
 import {Board} from '../../boards/Board';
 import {CardRenderer} from '../render/CardRenderer';
 import {CardRenderDynamicVictoryPoints} from '../render/CardRenderDynamicVictoryPoints';
-import {CardRenderItemSize} from '../render/CardRenderItemSize';
+import {Size} from '../render/Size';
 
 export class Pets extends Card implements IProjectCard, IResourceCard {
   constructor() {
@@ -27,10 +27,10 @@ export class Pets extends Card implements IProjectCard, IResourceCard {
         cardNumber: '172',
         renderData: CardRenderer.builder((b) => {
           b.effect('When any City tile is placed, add an Animal to this card.', (eb) => {
-            eb.city(CardRenderItemSize.SMALL).any.startEffect.animals(1);
+            eb.city(Size.SMALL).any.startEffect.animals(1);
           }).br;
           b.animals(1).br;
-          b.text('Animals may not be removed from this card', CardRenderItemSize.SMALL, true).br;
+          b.text('Animals may not be removed from this card', Size.SMALL, true).br;
           b.vpText('1 VP per 2 Animals here.');
         }),
         description: {text: 'Add 1 Animal to this card.', align: 'left'},

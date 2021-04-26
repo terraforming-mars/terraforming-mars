@@ -23,7 +23,7 @@ export class Recyclon extends Card implements CorporationCard, IResourceCard {
 
       metadata: {
         cardNumber: 'R26',
-        description: 'You start with 38 MC and 1 steel production.',
+        description: 'You start with 38 M€ and 1 steel production.',
         renderData: CardRenderer.builder((b) => {
           b.br.br;
           b.megacredits(38).nbsp.production((pb) => pb.steel(1));
@@ -40,7 +40,7 @@ export class Recyclon extends Card implements CorporationCard, IResourceCard {
     public resourceCount = 0;
 
     public play(player: Player) {
-      player.addProduction(Resources.STEEL);
+      player.addProduction(Resources.STEEL, 1);
       player.addResourceTo(this);
       return undefined;
     }
@@ -60,7 +60,7 @@ export class Recyclon extends Card implements CorporationCard, IResourceCard {
 
       const spendResource = new SelectOption('Remove 2 microbes on this card and increase plant production 1 step', 'Remove microbes', () => {
         player.removeResourceFrom(this, 2);
-        player.addProduction(Resources.PLANTS);
+        player.addProduction(Resources.PLANTS, 1);
         return undefined;
       });
       return new OrOptions(spendResource, addResource);

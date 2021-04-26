@@ -152,7 +152,7 @@ export const SelectHowToPay = Vue.component('select-how-to-pay', {
       };
 
       if (htp.megaCredits > this.player.megaCredits) {
-        this.$data.warning = 'You don\'t have that many mega credits';
+        this.$data.warning = 'You don\'t have that many M€';
         return;
       }
       if (htp.heat > this.player.heat) {
@@ -206,7 +206,7 @@ export const SelectHowToPay = Vue.component('select-how-to-pay', {
       if (requiredAmt > 0 && totalSpentAmt > requiredAmt && showAlert) {
         const diff = totalSpentAmt - requiredAmt;
 
-        if (confirm('Warning: You are overpaying by ' + diff + ' MC')) {
+        if (confirm('Warning: You are overpaying by ' + diff + ' M€')) {
           this.onsave([[JSON.stringify(htp)]]);
         } else {
           this.$data.warning = 'Please adjust payment amount';
@@ -243,7 +243,7 @@ export const SelectHowToPay = Vue.component('select-how-to-pay', {
       <Button type="minus" :onClick="_=>reduceValue('heat', 1)" />
       <input class="form-input form-inline payments_input" v-model.number="heat" />
       <Button type="plus" :onClick="_=>addValue('heat', 1)" />
-      <Button type="max" :onClick="_=>setMaxValue('heat')" title="MAX" /> 
+      <Button type="max" :onClick="_=>setMaxValue('heat')" title="MAX" />
     </div>
 
     <div class="payments_type input-group">

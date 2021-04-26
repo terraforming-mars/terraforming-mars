@@ -144,10 +144,17 @@ export const LogPanel = Vue.component('log-panel', {
     },
     parseMessage: function(message: LogMessage) {
       try {
-        const logEntryBullet = (this.isNewGeneration(message.type)) ? '' : `<span title="${new Date(message.timestamp).toLocaleString()}">&#x1f551;</span>`;
+        let logEntryBullet = '';
+
+        if (message.type !== LogMessageType.NEW_GENERATION) {
+          const when = new Date(message.timestamp).toLocaleString();
+          // clock or speaking.
+          const icon = message.playerId === undefined ? '&#x1f551;' : '&#x1f4ac;';
+          logEntryBullet = `<span title="${when}">${icon}</span>`;
+        }
         if (message.type !== undefined && message.message !== undefined) {
           message.message = $t(message.message);
-          return logEntryBullet+message.message.replace(/\$\{([0-9]{1})\}/gi, (_match, idx) => {
+          return logEntryBullet + message.message.replace(/\$\{([0-9]{1})\}/gi, (_match, idx) => {
             return this.parseData(message.data[idx]);
           });
         }
@@ -155,9 +162,6 @@ export const LogPanel = Vue.component('log-panel', {
         return this.safeMessage(message);
       }
       return '';
-    },
-    isNewGeneration: function(type: LogMessageType) {
-      return (type === LogMessageType.NEW_GENERATION);
     },
     cardClicked: function(message: LogMessage) {
       const datas = message.data;
@@ -274,7 +278,7 @@ export const LogPanel = Vue.component('log-panel', {
         </div>
         <div class="card-panel" v-if="cards.length > 0">
           <Button size="big" type="close" :disableOnServerBusy="false" :onClick="hideMe" align="right"/>
-          <div id="log_panel_card" class="cardbox" v-for="(card, index) in cards" :key="index">
+          <div id="log_panel_card" class="cardbox" v-for="(card, index) in cards" :key="card">
             <Card :card="{name: card}"/>
           </div>
         </div>

@@ -8,13 +8,13 @@ import {CardType} from '../../cards/CardType';
 
 export class CelebrityLeaders implements IGlobalEvent {
     public name = GlobalEventName.CELEBRITY_LEADERS;
-    public description = 'Gain 2 MC for each event played (max 5) and influence.';
+    public description = 'Gain 2 M€ for each event played (max 5) and influence.';
     public revealedDelegate = PartyName.UNITY;
     public currentDelegate = PartyName.GREENS;
     public resolve(game: Game, turmoil: Turmoil) {
       game.getPlayers().forEach((player) => {
         const eventsCards = player.playedCards.filter((card) => card.cardType === CardType.EVENT).length;
-        player.setResource(Resources.MEGACREDITS, 2 * (Math.min(5, eventsCards) + turmoil.getPlayerInfluence(player)), game, undefined, true);
+        player.addResource(Resources.MEGACREDITS, 2 * (Math.min(5, eventsCards) + turmoil.getPlayerInfluence(player)), {log: true, from: this.name});
       });
     }
 }

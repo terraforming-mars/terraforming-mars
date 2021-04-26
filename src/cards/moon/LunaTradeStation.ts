@@ -9,6 +9,8 @@ import {CardRenderer} from '../render/CardRenderer';
 import {IActionCard} from '../ICard';
 import {Units} from '../../Units';
 import {MoonCard} from './MoonCard';
+import {Game} from '../../Game';
+import {Resources} from '../../Resources';
 
 export class LunaTradeStation extends MoonCard implements IActionCard {
   constructor() {
@@ -23,8 +25,8 @@ export class LunaTradeStation extends MoonCard implements IActionCard {
         description: 'Spend 2 titanium. Place this tile ON THE RESERVED AREA.',
         cardNumber: 'M13',
         renderData: CardRenderer.builder((b) => {
-          b.action('Gain 1 MC for each mining tile on the Moon.', (eb) =>
-            eb.empty().startAction.megacredits(1).slash().tile(TileType.MOON_MINE, false));
+          b.action('Gain 2 M€ for each colony tile on the Moon.', (eb) =>
+            eb.empty().startAction.megacredits(2).slash().moonColony().any);
           b.br.minus().titanium(2).tile(TileType.LUNA_TRADE_STATION, true).asterix();
         }),
       },
@@ -45,13 +47,17 @@ export class LunaTradeStation extends MoonCard implements IActionCard {
     return undefined;
   }
 
+  private surfaceColonyCount(game: Game): number {
+    return MoonExpansion.tiles(game, TileType.MOON_COLONY, {surfaceOnly: true}).length;
+  }
+
   public canAct(player: Player): boolean {
-    return MoonExpansion.tiles(player.game, TileType.MOON_MINE, {surfaceOnly: true}).length > 0;
+    return this.surfaceColonyCount(player.game) > 0;
   }
 
   public action(player: Player) {
-    const surfaceMines = MoonExpansion.tiles(player.game, TileType.MOON_MINE, {surfaceOnly: true}).length;
-    player.megaCredits += surfaceMines;
+    const surfaceColonies = this.surfaceColonyCount(player.game);
+    player.addResource(Resources.MEGACREDITS, 2 * surfaceColonies, {log: true});
     return undefined;
   }
 }

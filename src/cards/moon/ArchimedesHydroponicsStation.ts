@@ -16,7 +16,7 @@ export class ArchimedesHydroponicsStation extends MoonCard {
       productionBox: Units.of({energy: -1, megacredits: -1, plants: 2}),
 
       metadata: {
-        description: 'Decrease your energy production 1 step and your MC production 1 step. Increase your plant production 2 steps.',
+        description: 'Decrease your energy production 1 step and your M€ production 1 step. Increase your plant production 2 steps.',
         cardNumber: 'M27',
         renderData: CardRenderer.builder((b) => {
           b.production((pb) => pb.minus().energy(1).megacredits(1));
@@ -30,7 +30,7 @@ export class ArchimedesHydroponicsStation extends MoonCard {
   };
 
   public play(player: Player) {
-    player.adjustProduction(this.productionBox, player.game);
+    player.adjustProduction(this.productionBox, {log: true});
     return undefined;
   }
 }

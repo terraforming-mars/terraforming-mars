@@ -18,12 +18,12 @@ export class ResearchNetwork extends PreludeCard implements IProjectCard {
           b.production((pb) => pb.megacredits(1)).br;
           b.cards(3);
         }),
-        description: 'Increase your MC production 1 step. Draw 3 cards. After being played, when you perform an action, the wild tag counts as any tag of your choice.',
+        description: 'Increase your M€ production 1 step. Draw 3 cards. After being played, when you perform an action, the wild tag counts as any tag of your choice.',
       },
     });
   }
   public play(player: Player) {
-    player.addProduction(Resources.MEGACREDITS);
+    player.addProduction(Resources.MEGACREDITS, 1);
     player.drawCard(3);
     return undefined;
   }

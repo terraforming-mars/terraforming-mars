@@ -8,7 +8,7 @@ import {SelectOption} from '../../inputs/SelectOption';
 import {OrOptions} from '../../inputs/OrOptions';
 import {DeferredAction} from '../../deferredActions/DeferredAction';
 import {CardRenderer} from '../render/CardRenderer';
-import {CardRenderItemSize} from '../render/CardRenderItemSize';
+import {Size} from '../render/Size';
 import {PoliticalAgendas} from '../../turmoil/PoliticalAgendas';
 
 export class ByElection extends PreludeCard implements IProjectCard {
@@ -20,7 +20,7 @@ export class ByElection extends PreludeCard implements IProjectCard {
       metadata: {
         cardNumber: 'Y02',
         renderData: CardRenderer.builder((b) => {
-          b.text('set ruling party', CardRenderItemSize.SMALL, true).br;
+          b.text('set ruling party', Size.SMALL, true).br;
           b.plus().influence(1);
         }),
         description: 'Set the ruling party to one of your choice. Gain 1 influence.',

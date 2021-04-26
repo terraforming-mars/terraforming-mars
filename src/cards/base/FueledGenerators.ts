@@ -25,7 +25,7 @@ export class FueledGenerators extends Card implements IProjectCard {
             pb.plus().energy(1);
           });
         }),
-        description: 'Decrease your MC production 1 step and increase your Energy production 1 steps.',
+        description: 'Decrease your M€ production 1 step and increase your Energy production 1 steps.',
       },
     });
   }
@@ -35,7 +35,7 @@ export class FueledGenerators extends Card implements IProjectCard {
   }
   public play(player: Player) {
     player.addProduction(Resources.MEGACREDITS, -1);
-    player.addProduction(Resources.ENERGY);
+    player.addProduction(Resources.ENERGY, 1);
     return undefined;
   }
 }

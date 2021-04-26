@@ -11,7 +11,7 @@ import {OrOptions} from '../../inputs/OrOptions';
 import {SelectOption} from '../../inputs/SelectOption';
 import {Card} from '../Card';
 import {CardRenderer} from '../render/CardRenderer';
-import {CardRenderItemSize} from '../render/CardRenderItemSize';
+import {Size} from '../render/Size';
 import {AltSecondaryTag} from '../render/CardRenderItem';
 
 export class ProjectWorkshop extends Card implements CorporationCard {
@@ -29,14 +29,14 @@ export class ProjectWorkshop extends Card implements CorporationCard {
         renderData: CardRenderer.builder((b) => {
           b.megacredits(39).steel(1).titanium(1).cards(1).secondaryTag(AltSecondaryTag.BLUE);
           b.corpBox('action', (cb) => {
-            cb.vSpace(CardRenderItemSize.LARGE);
+            cb.vSpace(Size.LARGE);
             cb.action(undefined, (eb) => {
-              eb.text('flip', CardRenderItemSize.SMALL, true).cards(1).secondaryTag(AltSecondaryTag.BLUE);
-              eb.startAction.text('?', CardRenderItemSize.MEDIUM, true).tr(1, CardRenderItemSize.SMALL);
+              eb.text('flip', Size.SMALL, true).cards(1).secondaryTag(AltSecondaryTag.BLUE);
+              eb.startAction.text('?', Size.MEDIUM, true).tr(1, Size.SMALL);
               eb.cards(2).digit;
             });
-            cb.vSpace(CardRenderItemSize.SMALL);
-            cb.action('Flip and discard a played blue card to convert any VP on it into TR and draw 2 cards, or spend 3 MC to draw a blue card.', (eb) => {
+            cb.vSpace(Size.SMALL);
+            cb.action('Flip and discard a played blue card to convert any VP on it into TR and draw 2 cards, or spend 3 M€ to draw a blue card.', (eb) => {
               eb.or().megacredits(3).startAction.cards(1).secondaryTag(AltSecondaryTag.BLUE);
             });
           });
@@ -89,7 +89,7 @@ export class ProjectWorkshop extends Card implements CorporationCard {
       },
     );
 
-    const drawBlueCard = new SelectOption('Spend 3 MC to draw a blue card', 'Draw card', () => {
+    const drawBlueCard = new SelectOption('Spend 3 M€ to draw a blue card', 'Draw card', () => {
       player.megaCredits -= 3;
       player.drawCard(1, {cardType: CardType.ACTIVE});
       return undefined;

@@ -9,6 +9,7 @@ import {IMoonData} from '../../../src/moon/IMoonData';
 import {OrOptions} from '../../../src/inputs/OrOptions';
 import {StealResources} from '../../../src/deferredActions/StealResources';
 import {TileType} from '../../../src/TileType';
+import {Phase} from '../../../src/Phase';
 
 const MOON_OPTIONS = TestingUtils.setCustomGameOptions({moonExpansion: true});
 
@@ -96,7 +97,7 @@ describe('TheDarksideofTheMoonSyndicate', () => {
     adjacentSpaces[4].tile = {tileType: TileType.MOON_COLONY};
     adjacentSpaces[4].player = player;
 
-    // Test 1: Remove 6 MC for each of the 3 adjacent spaces.
+    // Test 1: Remove 6 M€ for each of the 3 adjacent spaces.
     otherPlayer.megaCredits = 10;
     player.megaCredits = 0;
     player.corporationCard = card;
@@ -114,6 +115,33 @@ describe('TheDarksideofTheMoonSyndicate', () => {
     MoonExpansion.addMineTile(player, centerSpace.id);
     expect(otherPlayer.megaCredits).eq(0);
     expect(player.megaCredits).eq(5);
+  });
+
+  it('no effect during solar phase', () => {
+    const centerSpace = moonData.moon.getSpace('m07');
+    const adjacentSpaces = moonData.moon.getAdjacentSpaces(centerSpace);
+
+    // Space 0 intentionallyleft blank
+    MoonExpansion.addMineTile(otherPlayer, adjacentSpaces[1].id);
+    MoonExpansion.addColonyTile(otherPlayer, adjacentSpaces[2].id);
+    MoonExpansion.addRoadTile(otherPlayer, adjacentSpaces[3].id);
+
+    // Active player will be ignored. Also, using direct construction here so as to not trigger
+    // corp effect just yet.
+    adjacentSpaces[4].tile = {tileType: TileType.MOON_COLONY};
+    adjacentSpaces[4].player = player;
+
+    // Test 1: Remove 6 M€ for each of the 3 adjacent spaces.
+    otherPlayer.megaCredits = 10;
+    player.megaCredits = 0;
+    player.corporationCard = card;
+
+    player.game.phase = Phase.SOLAR;
+
+    // Trigger the effect.
+    MoonExpansion.addMineTile(player, centerSpace.id);
+    expect(otherPlayer.megaCredits).eq(10);
+    expect(player.megaCredits).eq(0);
   });
 });
 

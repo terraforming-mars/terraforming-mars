@@ -6,7 +6,7 @@ import {Resources} from '../../Resources';
 import {CardName} from '../../CardName';
 import {CardRequirements} from '../CardRequirements';
 import {CardRenderer} from '../render/CardRenderer';
-import {CardRenderItemSize} from '../render/CardRenderItemSize';
+import {Size} from '../render/Size';
 
 export class Zeppelins extends Card implements IProjectCard {
   constructor() {
@@ -21,16 +21,16 @@ export class Zeppelins extends Card implements IProjectCard {
         renderData: CardRenderer.builder((b) => {
           b.production((pb) => {
             pb.megacredits(1).slash();
-            pb.city(CardRenderItemSize.SMALL).any.asterix();
+            pb.city(Size.SMALL).any.asterix();
           });
         }),
-        description: 'Requires 5% oxygen. Increase your MC production 1 step for each City tile ON MARS.',
+        description: 'Requires 5% oxygen. Increase your M€ production 1 step for each City tile ON MARS.',
         victoryPoints: 1,
       },
     });
   }
   public play(player: Player) {
-    player.addProduction(Resources.MEGACREDITS, player.game.getCitiesInPlayOnMars(), player.game);
+    player.addProduction(Resources.MEGACREDITS, player.game.getCitiesInPlayOnMars(), {log: true});
     return undefined;
   }
   public getVictoryPoints() {

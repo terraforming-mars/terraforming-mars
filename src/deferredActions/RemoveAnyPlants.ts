@@ -19,7 +19,7 @@ export class RemoveAnyPlants implements DeferredAction {
       return undefined;
     }
 
-    const candidates = this.player.game.getPlayers().filter((p) => p.id !== this.player.id && !p.plantsAreProtected() && p.getResource(Resources.PLANTS) > 0);
+    const candidates = this.player.game.getPlayers().filter((p) => p.id !== this.player.id && !p.plantsAreProtected() && p.plants > 0);
 
     if (candidates.length === 0) {
       return undefined;
@@ -28,7 +28,7 @@ export class RemoveAnyPlants implements DeferredAction {
     const removalOptions = candidates.map((candidate) => {
       const qtyToRemove = Math.min(candidate.plants, this.count);
       return new SelectOption('Remove ' + qtyToRemove + ' plants from ' + candidate.name, 'Remove plants', () => {
-        candidate.setResource(Resources.PLANTS, -qtyToRemove, this.player.game, this.player);
+        candidate.addResource(Resources.PLANTS, -qtyToRemove, {log: true, from: this.player});
         return undefined;
       });
     });

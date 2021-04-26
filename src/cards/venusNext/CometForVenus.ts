@@ -21,7 +21,7 @@ export class CometForVenus extends Card {
       cost: 11,
 
       metadata: {
-        description: 'Raise Venus 1 step. Remove up to 4MC from any player WITH A VENUS TAG IN PLAY.',
+        description: 'Raise Venus 1 step. Remove up to 4M€ from any player WITH A VENUS TAG IN PLAY.',
         cardNumber: '218',
         renderData: CardRenderer.builder((b) => {
           b.venus(1).nbsp.nbsp.minus().megacredits(4).secondaryTag(Tags.VENUS).any;
@@ -33,7 +33,7 @@ export class CometForVenus extends Card {
   public canPlay(player: Player): boolean {
     const venusMaxed = player.game.getVenusScaleLevel() === MAX_VENUS_SCALE;
     if (PartyHooks.shouldApplyPolicy(player.game, PartyName.REDS) && !venusMaxed) {
-      return player.canAfford(player.getCardCost(this) + REDS_RULING_POLICY_COST, false, true);
+      return player.canAfford(player.getCardCost(this) + REDS_RULING_POLICY_COST, {titanium: true});
     }
 
     return true;
@@ -51,17 +51,16 @@ export class CometForVenus extends Card {
       return new OrOptions(
         new SelectPlayer(
           Array.from(venusTagPlayers),
-          'Select player to remove up to 4 mega credits from',
-          'Remove MC',
+          'Select player to remove up to 4 M€ from',
+          'Remove M€',
           (selectedPlayer: Player) => {
-            const amountRemoved = Math.min(4, selectedPlayer.megaCredits);
-            selectedPlayer.setResource(Resources.MEGACREDITS, -amountRemoved, player.game, player);
+            selectedPlayer.addResource(Resources.MEGACREDITS, -4, {log: true, from: player});
             player.game.increaseVenusScaleLevel(player, 1);
             return undefined;
           },
         ),
         new SelectOption(
-          'Do not remove mega credits',
+          'Do not remove M€',
           'Confirm',
           () => {
             player.game.increaseVenusScaleLevel(player, 1);

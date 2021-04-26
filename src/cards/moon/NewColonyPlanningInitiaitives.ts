@@ -10,7 +10,7 @@ export class NewColonyPlanningInitiaitives extends Card {
   constructor() {
     super({
       name: CardName.NEW_COLONY_PLANNING_INITIAITIVES,
-      cardType: CardType.ACTIVE,
+      cardType: CardType.AUTOMATED,
       cost: 6,
 
       requirements: CardRequirements.builder((b) => b.colonyRate(2)),

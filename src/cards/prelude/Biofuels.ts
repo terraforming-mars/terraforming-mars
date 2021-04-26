@@ -22,8 +22,8 @@ export class Biofuels extends PreludeCard {
     });
   }
   public play(player: Player) {
-    player.addProduction(Resources.ENERGY);
-    player.addProduction(Resources.PLANTS);
+    player.addProduction(Resources.ENERGY, 1);
+    player.addProduction(Resources.PLANTS, 1);
     player.plants += 2;
     return undefined;
   }

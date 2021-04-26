@@ -21,7 +21,7 @@ export class SaturnSurfing extends Card implements IActionCard, IProjectCard, IR
       metadata: {
         cardNumber: 'X11',
         renderData: CardRenderer.builder((b) => {
-          b.action('Spend 1 floater from here to gain 1 MC from each floater here, INCLUDING THE PAID FLOATER. Max 5.', (eb) => {
+          b.action('Spend 1 floater from here to gain 1 M€ from each floater here, INCLUDING THE PAID FLOATER. Max 5.', (eb) => {
             eb.floaters(1).startAction.megacredits(1).slash().floaters(1);
             eb.asterix().text('max 5');
           }).br;
@@ -45,7 +45,7 @@ export class SaturnSurfing extends Card implements IActionCard, IProjectCard, IR
     }
 
     public action(player: Player) {
-      player.setResource(Resources.MEGACREDITS, Math.min(5, this.resourceCount--));
+      player.addResource(Resources.MEGACREDITS, Math.min(5, this.resourceCount--));
       return undefined;
     }
 

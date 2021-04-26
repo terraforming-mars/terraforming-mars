@@ -8,6 +8,7 @@ import {CorporationCard} from '../corporation/CorporationCard';
 import {IActionCard} from '../ICard';
 import {CardRenderDynamicVictoryPoints} from '../render/CardRenderDynamicVictoryPoints';
 import {CardRenderer} from '../render/CardRenderer';
+import {Size} from '../render/Size';
 import {Tags} from '../Tags';
 
 export class LunaHyperloopCorporation implements IActionCard, CorporationCard {
@@ -36,15 +37,15 @@ export class LunaHyperloopCorporation implements IActionCard, CorporationCard {
   }
 
   public readonly metadata: CardMetadata = {
-    description: 'You start with 38 MC and 4 steel.',
+    description: 'You start with 38 M€ and 4 steel.',
     cardNumber: '',
     renderData: CardRenderer.builder((b) => {
       b.megacredits(38).steel(4).br;
-      b.action('Gain 1 MC for each road tile on the Moon.', (eb) => {
-        eb.empty().startAction.megacredits(1).slash().tile(TileType.MOON_ROAD, false);
+      b.action('Gain 1 M€ for each road tile on the Moon.', (eb) => {
+        eb.empty().startAction.megacredits(1).slash().moonRoad({size: Size.SMALL}).any;
       }).br,
-      b.text('1 VP for each road tile on the Moon.').br;
+      b.vpText('1 VP for each road tile on the Moon.').br;
     }),
-    victoryPoints: CardRenderDynamicVictoryPoints.questionmark(),
+    victoryPoints: CardRenderDynamicVictoryPoints.moonRoadTile(1, true),
   }
 }

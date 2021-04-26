@@ -82,6 +82,7 @@ export interface PlayerModel {
     turmoil: TurmoilModel | undefined;
     undoCount: number;
     venusScaleLevel: number;
+    version: string;
     victoryPointsBreakdown: VictoryPointsBreakdown;
     waitingFor: PlayerInputModel | undefined;
 }

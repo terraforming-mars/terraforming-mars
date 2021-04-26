@@ -40,6 +40,7 @@ import {SpectatorModel} from './SpectatorModel';
 import {MoonModel} from './MoonModel';
 import {Units} from '../Units';
 import {SelectPartyToSendDelegate} from '../inputs/SelectPartyToSendDelegate';
+import * as raw_settings from '../genfiles/settings.json';
 
 export class Server {
   public static getGameModel(game: Game): GameHomeModel {
@@ -128,6 +129,7 @@ export class Server {
       tradesThisGeneration: player.tradesThisGeneration,
       turmoil: turmoil,
       undoCount: game.undoCount,
+      version: raw_settings.version,
       venusScaleLevel: game.getVenusScaleLevel(),
       victoryPointsBreakdown: player.getVictoryPoints(),
       waitingFor: getWaitingFor(player, player.getWaitingFor()),

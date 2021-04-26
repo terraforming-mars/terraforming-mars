@@ -91,6 +91,7 @@ export const WaitingFor = Vue.component('waiting-for', {
         xhr.onload = () => {
           if (xhr.status === 200) {
             const result = xhr.response as WaitingForModel;
+            root.testServerVersion(result.version);
             if (result.result === 'GO') {
               root.updatePlayer();
 

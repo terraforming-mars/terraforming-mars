@@ -42,6 +42,7 @@ interface MainAppData {
     isServerSideRequestInProgress: boolean;
     componentsVisibility: {[x: string]: boolean};
     game: GameHomeModel | undefined;
+    lastServedVersion: string;
 }
 
 export const mainAppSettings = {
@@ -64,6 +65,7 @@ export const mainAppSettings = {
     } as {[x: string]: boolean},
     game: undefined as GameHomeModel | undefined,
     logPaused: false,
+    lastServedVersion: raw_settings.version,
   } as MainAppData,
   'components': {
     'start-screen': StartScreen,
@@ -118,6 +120,7 @@ export const mainAppSettings = {
       xhr.onload = () => {
         if (xhr.status === 200) {
           app.player = xhr.response as PlayerModel;
+          this.testServerVersion(app.player.version);
           app.playerkey++;
           if (
             app.player.phase === 'end' &&
@@ -147,6 +150,19 @@ export const mainAppSettings = {
       };
       xhr.responseType = 'json';
       xhr.send();
+    },
+    testServerVersion: function(version: string) {
+      const app = this as unknown as typeof mainAppSettings.data;
+      const player = app.player;
+      if (player === undefined) {
+        return;
+      }
+      if (version !== undefined && version.length > 0) {
+        if (app.lastServedVersion !== version) {
+          app.lastServedVersion = version;
+          alert('A new version of the app is available. Please refresh your browser so it remains compatible with the server.');
+        }
+      }
     },
   },
   'mounted': function() {

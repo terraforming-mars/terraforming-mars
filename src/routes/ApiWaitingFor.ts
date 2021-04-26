@@ -5,6 +5,8 @@ import {Phase} from '../Phase';
 import {Player} from '../Player';
 import {WaitingForModel} from '../models/WaitingForModel';
 
+import * as raw_settings from '../genfiles/settings.json';
+
 export class ApiWaitingFor extends Handler {
   public static readonly INSTANCE = new ApiWaitingFor();
   private constructor() {
@@ -17,11 +19,11 @@ export class ApiWaitingFor extends Handler {
 
   private getWaitingForModel(player: Player, gameAge: number, undoCount: number): WaitingForModel {
     if (this.timeToGo(player)) {
-      return {result: 'GO'};
+      return {result: 'GO', version: raw_settings.version};
     } else if (player.game.gameAge > gameAge || player.game.undoCount > undoCount) {
-      return {result: 'REFRESH'};
+      return {result: 'REFRESH', version: raw_settings.version};
     }
-    return {result: 'WAIT'};
+    return {result: 'WAIT', version: raw_settings.version};
   }
 
   public get(req: http.IncomingMessage, res: http.ServerResponse, ctx: IContext): void {

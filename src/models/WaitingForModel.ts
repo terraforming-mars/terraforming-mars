@@ -1,4 +1,5 @@
 
 export interface WaitingForModel {
-  result: 'GO' | 'REFRESH' | 'WAIT'
+  result: 'GO' | 'REFRESH' | 'WAIT',
+  version: string
 }

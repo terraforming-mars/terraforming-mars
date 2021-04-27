@@ -8,7 +8,7 @@ import {PlayerModel} from '../models/PlayerModel';
 import {StartScreen} from './StartScreen';
 import {LoadGameForm} from './LoadGameForm';
 import {DebugUI} from './DebugUI';
-import {GameHomeModel} from '../models/GameHomeModel';
+import {SimpleGameModel} from '../models/SimpleGameModel';
 import {Help} from './help/Help';
 
 import {$t} from '../directives/i18n';
@@ -41,7 +41,7 @@ interface MainAppData {
     settings: typeof raw_settings;
     isServerSideRequestInProgress: boolean;
     componentsVisibility: {[x: string]: boolean};
-    game: GameHomeModel | undefined;
+    game: SimpleGameModel | undefined;
 }
 
 export const mainAppSettings = {
@@ -62,7 +62,7 @@ export const mainAppSettings = {
       'pinned_player_4': false,
       'turmoil_parties': false,
     } as {[x: string]: boolean},
-    game: undefined as GameHomeModel | undefined,
+    game: undefined as SimpleGameModel | undefined,
     logPaused: false,
   } as MainAppData,
   'components': {
@@ -120,7 +120,7 @@ export const mainAppSettings = {
           app.player = xhr.response as PlayerModel;
           app.playerkey++;
           if (
-            app.player.phase === 'end' &&
+            app.player.game.phase === 'end' &&
                         window.location.search.includes('&noredirect') === false
           ) {
             app.screen = 'the-end';
@@ -170,7 +170,7 @@ export const mainAppSettings = {
             `${constants.APP_NAME} - Game`,
             '/game?id=' + xhr.response.id,
           );
-          app.game = xhr.response as GameHomeModel;
+          app.game = xhr.response as SimpleGameModel;
         } else {
           alert('Unexpected server response');
         }

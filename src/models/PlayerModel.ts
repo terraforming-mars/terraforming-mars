@@ -6,7 +6,7 @@ import {PlayerInputModel} from './PlayerInputModel';
 import {SerializedTimer} from '../SerializedTimer';
 import {GameModel} from './GameModel';
 
-export interface PlayerModel {
+export interface PlayerModel extends GameModel {
   actionsTakenThisRound: number;
   actionsThisGeneration: Array<string>;
   availableBlueCardActionCount: number;

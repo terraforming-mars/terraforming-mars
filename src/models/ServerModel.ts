@@ -90,6 +90,8 @@ export class Server {
     const game = player.game;
     const turmoil = getTurmoil(game);
 
+    const gameModel = this.getCommonGameModel(game);
+
     return {
       actionsTakenThisRound: player.actionsTakenThisRound,
       actionsThisGeneration: Array.from(player.getActionsThisGeneration()),
@@ -140,6 +142,29 @@ export class Server {
       tradesThisGeneration: player.tradesThisGeneration,
       victoryPointsBreakdown: player.getVictoryPoints(),
       waitingFor: this.getWaitingFor(player, player.getWaitingFor()),
+
+      // Remove these after 2021-05-05
+      aresData: gameModel.aresData,
+      awards: gameModel.awards,
+      colonies: gameModel.colonies,
+      deckSize: gameModel.deckSize,
+      gameAge: gameModel.gameAge,
+      gameOptions: gameModel.gameOptions,
+      generation: gameModel.generation,
+      isSoloModeWin: gameModel.isSoloModeWin,
+      lastSoloGeneration: gameModel.lastSoloGeneration,
+      milestones: gameModel.milestones,
+      moon: gameModel.moon,
+      oceans: gameModel.oceans,
+      oxygenLevel: gameModel.oxygenLevel,
+      passedPlayers: gameModel.passedPlayers,
+      phase: gameModel.phase,
+      spaces: gameModel.spaces,
+      spectatorId: gameModel.spectatorId,
+      temperature: gameModel.temperature,
+      turmoil: gameModel.turmoil,
+      undoCount: gameModel.undoCount,
+      venusScaleLevel: gameModel.venusScaleLevel,
     };
   }
 
@@ -393,6 +418,8 @@ export class Server {
   public static getPlayers(players: Array<Player>, game: Game): Array<PlayerModel> {
     const turmoil = getTurmoil(game);
 
+    const gameModel = this.getCommonGameModel(game);
+
     return players.map((player) => {
       return {
         actionsTakenThisRound: player.actionsTakenThisRound,
@@ -404,7 +431,6 @@ export class Server {
         coloniesCount: player.getColoniesCount(),
         color: player.color,
         corporationCard: this.getCorporationCard(player),
-        deckSize: game.dealer.getDeckSize(),
         energy: player.energy,
         energyProduction: player.getProduction(Resources.ENERGY),
         fleetSize: player.getFleetSize(),
@@ -434,7 +460,6 @@ export class Server {
         titaniumProduction: player.getProduction(Resources.TITANIUM),
         titaniumValue: player.getTitaniumValue(),
         tradesThisGeneration: player.tradesThisGeneration,
-        turmoil: turmoil,
         victoryPointsBreakdown: player.getVictoryPoints(),
 
         // TODO(kberg): Move commonGameData out of this version of getPlayers()
@@ -449,6 +474,29 @@ export class Server {
         players: [],
         preludeCardsInHand: [],
         waitingFor: undefined,
+
+        // Remove these after 2021-05-05
+        aresData: gameModel.aresData,
+        awards: gameModel.awards,
+        colonies: gameModel.colonies,
+        deckSize: gameModel.deckSize,
+        gameAge: gameModel.gameAge,
+        gameOptions: gameModel.gameOptions,
+        generation: gameModel.generation,
+        isSoloModeWin: gameModel.isSoloModeWin,
+        lastSoloGeneration: gameModel.lastSoloGeneration,
+        milestones: gameModel.milestones,
+        moon: gameModel.moon,
+        oceans: gameModel.oceans,
+        oxygenLevel: gameModel.oxygenLevel,
+        passedPlayers: gameModel.passedPlayers,
+        phase: gameModel.phase,
+        spaces: gameModel.spaces,
+        spectatorId: gameModel.spectatorId,
+        temperature: gameModel.temperature,
+        turmoil: gameModel.turmoil,
+        undoCount: gameModel.undoCount,
+        venusScaleLevel: gameModel.venusScaleLevel,
       };
     });
   }

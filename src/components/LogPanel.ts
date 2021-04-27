@@ -209,7 +209,7 @@ export const LogPanel = Vue.component('log-panel', {
         if (xhr.status === 200) {
           messages.splice(0, messages.length);
           messages.push(...xhr.response);
-          if (PreferencesManager.loadBooleanValue('enable_sounds') && window.location.search.includes('experimental=1') ) {
+          if (PreferencesManager.loadBoolean('enable_sounds') && window.location.search.includes('experimental=1') ) {
             SoundManager.newLog();
           }
           if (generation === this.generation) {

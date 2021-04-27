@@ -42,7 +42,7 @@ export const Milestone = Vue.component('milestone', {
       return Array(MAX_MILESTONES - count).fill(MILESTONE_COST);
     },
     isLearnerModeOn: function(): boolean {
-      return PreferencesManager.loadValue('learner_mode') === '1';
+      return PreferencesManager.load('learner_mode') === '1';
     },
   },
   template: `

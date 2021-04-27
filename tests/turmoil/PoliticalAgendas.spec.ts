@@ -5,7 +5,6 @@ import {Game} from '../../src/Game';
 import {TestingUtils} from '../TestingUtils';
 import {TestPlayers} from '../TestPlayers';
 import {AgendaStyle, PoliticalAgendas} from '../../src/turmoil/PoliticalAgendas';
-import {AndOptions} from '../../src/inputs/AndOptions';
 import {OrOptions} from '../../src/inputs/OrOptions';
 
 describe('PoliticalAgendas', function() {
@@ -71,12 +70,15 @@ describe('PoliticalAgendas', function() {
       // The new ruling party is lined up.
       expect(PoliticalAgendas.currentAgenda(turmoil)).deep.eq({bonusId: 'kb02', policyId: 'kp02'});
 
-      const waitingFor = player2.getWaitingFor() as AndOptions;
+      const waitingFor = player2.getWaitingFor() as OrOptions;
       const bonusOptions = waitingFor.options[0] as OrOptions;
       bonusOptions.options[0].cb();
+
+      expect(PoliticalAgendas.currentAgenda(turmoil)).deep.eq({bonusId: 'kb01', policyId: 'kp02'});
+
+      // In the real world only one of these two is selectable, but to keep the test simple, invoke both.
       const policyOptions = waitingFor.options[1] as OrOptions;
       policyOptions.options[3].cb();
-      waitingFor.cb();
 
       expect(PoliticalAgendas.currentAgenda(turmoil)).deep.eq({bonusId: 'kb01', policyId: 'kp04'});
     });

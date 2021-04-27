@@ -63,7 +63,7 @@ export const Board = Vue.component('board', {
     };
   },
   mounted: function() {
-    if (this.marsIsTerraformed() && this.shouldNotify && AlertDialog.shouldAlert && PreferencesManager.loadValue('show_alerts') === '1') {
+    if (this.marsIsTerraformed() && this.shouldNotify && AlertDialog.shouldAlert && PreferencesManager.load('show_alerts') === '1') {
       alert('Mars is Terraformed!');
       AlertDialog.shouldAlert = false;
     };
@@ -230,14 +230,14 @@ export const Board = Vue.component('board', {
                     <line x1="38" y1="20" x2="88" y2="26" class="board-line"></line>
                     <text x="86" y="29" class="board-caption board_caption--black">●</text>
                 </g>
-                
+
                 <g v-if="boardName === 'tharsis'" id="pavonis_mons" transform="translate(90, 230)">
                     <text class="board-caption">
                         <tspan dy="15">Pavonis</tspan>
                         <tspan x="4" dy="12">Mons</tspan>
                     </text>
                     <line x1="35" y1="25" x2="72" y2="30" class="board-line" />
-                    <text x="66" y="33" class="board-caption board_caption--black">●</text>              
+                    <text x="66" y="33" class="board-caption board_caption--black">●</text>
                 </g>
 
 
@@ -247,7 +247,7 @@ export const Board = Vue.component('board', {
                         <tspan x="-2" dy="12">Mons</tspan>
                     </text>
                     <line x1="25" y1="20" x2="49" y2="26" class="board-line" />
-                    <text x="47" y="29" class="board-caption board_caption--black">●</text>              
+                    <text x="47" y="29" class="board-caption board_caption--black">●</text>
                 </g>
 
                 <g v-if="boardName === 'tharsis'" id="tharsis_tholus" transform="translate(85, 175)">
@@ -258,7 +258,7 @@ export const Board = Vue.component('board', {
                     <line y1="-3" x2="160" y2="2" class="board-line" x1="90"></line>
                     <text x="158" y="5" class="board-caption board_caption--black">&#x25cf;</text>
                 </g>
-                
+
                 <g v-if="boardName === 'tharsis'" id="noctis_city" transform="translate(85, 320)">
                     <text class="board-caption">
                         <tspan dy="15">Noctis</tspan>

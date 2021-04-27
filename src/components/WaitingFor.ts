@@ -107,7 +107,7 @@ export const WaitingFor = Vue.component('waiting-for', {
                   });
                 }
               }
-              const soundsEnabled = PreferencesManager.loadValue('enable_sounds') === '1';
+              const soundsEnabled = PreferencesManager.load('enable_sounds') === '1';
               if (soundsEnabled) SoundManager.playActivePlayerSound();
 
               // We don't need to wait anymore - it's our turn

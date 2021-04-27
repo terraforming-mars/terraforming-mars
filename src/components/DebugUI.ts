@@ -166,7 +166,7 @@ export const DebugUI = Vue.component('debug-ui', {
       }
     },
     getLanguageCssClass() {
-      const language = PreferencesManager.loadValue('lang') || 'en';
+      const language = PreferencesManager.load('lang') || 'en';
       return 'language-' + language;
     },
   },

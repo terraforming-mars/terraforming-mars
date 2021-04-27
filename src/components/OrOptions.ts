@@ -123,7 +123,7 @@ export const OrOptions = Vue.component('or-options', {
 
       // Show all option by default unless it is told to show only in learner mode
       let showOption = true;
-      if (option.showOnlyInLearnerMode && !PreferencesManager.loadBooleanValue('learner_mode')) {
+      if (option.showOnlyInLearnerMode && !PreferencesManager.loadBoolean('learner_mode')) {
         showOption = false;
       }
 

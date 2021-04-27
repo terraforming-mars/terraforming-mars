@@ -2,7 +2,7 @@ import {Color} from '../Color';
 import {PartyName} from '../turmoil/parties/PartyName';
 import {GlobalEventName} from '../turmoil/globalEvents/GlobalEventName';
 import {Game} from '../Game';
-import {Agenda} from '../turmoil/PoliticalAgendas';
+import {Agenda, PoliticalAgendas} from '../turmoil/PoliticalAgendas';
 
 export interface TurmoilModel {
   dominant: PartyName | undefined;
@@ -44,11 +44,6 @@ export interface GlobalEventModel {
 }
 
 export interface PoliticalAgendasModel {
-  currentAgenda: Agenda,
-  staticAgendas: StaticAgendasModel | undefined
-}
-
-export interface StaticAgendasModel {
   marsFirst: Agenda;
   scientists: Agenda;
   unity: Agenda;
@@ -124,29 +119,14 @@ export function getTurmoil(game: Game): TurmoilModel | undefined {
       };
     }
 
-    const staticAgendas = turmoil.politicalAgendasData.staticAgendas;
-    const getStaticAgenda = function(partyName: PartyName): Agenda {
-      if (staticAgendas === undefined) {
-        throw new Error('Trying to resolve static agendas when agendas are dynamic.');
-      }
-      const agenda = staticAgendas.get(partyName);
-      if (agenda === undefined) {
-        throw new Error(`Cannot find static agenda for party ${partyName}`);
-      }
-      return agenda;
+    const politicalAgendas: PoliticalAgendasModel = {
+      marsFirst: PoliticalAgendas.getAgenda(turmoil, PartyName.MARS),
+      scientists: PoliticalAgendas.getAgenda(turmoil, PartyName.SCIENTISTS),
+      unity: PoliticalAgendas.getAgenda(turmoil, PartyName.UNITY),
+      greens: PoliticalAgendas.getAgenda(turmoil, PartyName.GREENS),
+      reds: PoliticalAgendas.getAgenda(turmoil, PartyName.REDS),
+      kelvinists: PoliticalAgendas.getAgenda(turmoil, PartyName.KELVINISTS),
     };
-
-    let staticAgendasModel: StaticAgendasModel | undefined;
-    if (staticAgendas !== undefined) {
-      staticAgendasModel = {
-        marsFirst: getStaticAgenda(PartyName.MARS),
-        scientists: getStaticAgenda(PartyName.SCIENTISTS),
-        unity: getStaticAgenda(PartyName.UNITY),
-        greens: getStaticAgenda(PartyName.GREENS),
-        reds: getStaticAgenda(PartyName.REDS),
-        kelvinists: getStaticAgenda(PartyName.KELVINISTS),
-      };
-    }
 
     const policyActionUsers = Array.from(
       game.getPlayers(),
@@ -168,10 +148,7 @@ export function getTurmoil(game: Game): TurmoilModel | undefined {
       distant: distant,
       coming: coming,
       current: current,
-      politicalAgendas: {
-        currentAgenda: turmoil.politicalAgendasData.currentAgenda,
-        staticAgendas: staticAgendasModel,
-      },
+      politicalAgendas: politicalAgendas,
       policyActionUsers,
     };
   } else {

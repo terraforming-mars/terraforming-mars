@@ -145,7 +145,7 @@ export const PlayerTags = Vue.component('player-tags', {
       const turmoil = this.player.turmoil;
       if (tag === Tags.SPACE &&
         turmoil && turmoil.ruling === PartyName.UNITY &&
-        turmoil.politicalAgendas?.currentAgenda.policyId === TurmoilPolicy.UNITY_POLICY_4) {
+        turmoil.politicalAgendas?.unity.policyId === TurmoilPolicy.UNITY_POLICY_4) {
         return true;
       }
 
@@ -168,7 +168,7 @@ export const PlayerTags = Vue.component('player-tags', {
       }
 
       if (tag === Tags.SPACE && this.player.turmoil?.ruling === PartyName.UNITY) {
-        if (this.player.turmoil.politicalAgendas?.currentAgenda.policyId === TurmoilPolicy.UNITY_POLICY_4) discount += 2;
+        if (this.player.turmoil.politicalAgendas?.unity.policyId === TurmoilPolicy.UNITY_POLICY_4) discount += 2;
       }
 
       const iapetusColony = this.player.colonies.find((colony) => colony.name === ColonyName.IAPETUS);

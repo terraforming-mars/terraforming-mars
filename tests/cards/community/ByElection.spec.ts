@@ -31,6 +31,6 @@ describe('ByElection', function() {
 
     const rulingParty = turmoil.rulingParty;
     expect(rulingParty.name).to.eq(PartyName.MARS);
-    expect(turmoil.politicalAgendasData!.currentAgenda).deep.eq({bonusId: 'mb01', policyId: 'mfp01'});
+    expect(turmoil.politicalAgendasData.agendas.get(PartyName.MARS)).deep.eq({bonusId: 'mb01', policyId: 'mfp01'});
   });
 });

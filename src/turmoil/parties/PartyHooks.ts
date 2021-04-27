@@ -8,6 +8,7 @@ import {Resources} from '../../Resources';
 import {ISpace} from '../../boards/ISpace';
 import {GREENS_POLICY_1} from './Greens';
 import {TurmoilPolicy} from '../TurmoilPolicy';
+import {PoliticalAgendas} from '../PoliticalAgendas';
 
 export class PartyHooks {
   static applyMarsFirstRulingPolicy(player: Player, spaceType: SpaceType) {
@@ -44,7 +45,7 @@ export class PartyHooks {
 
     const currentPolicyId: PolicyId = (turmoil.politicalAgendasData === undefined) ?
       rulingParty.policies[0].id :
-      turmoil.politicalAgendasData.currentAgenda.policyId;
+      PoliticalAgendas.currentAgenda(turmoil).policyId;
 
     return rulingParty.name === partyName && currentPolicyId === policyId;
   }

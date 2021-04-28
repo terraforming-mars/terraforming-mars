@@ -22,7 +22,7 @@ export class GreatDamPromo extends Card implements IProjectCard {
 
       requirements: CardRequirements.builder((b) => b.oceans(4)),
       metadata: {
-        cardNumber: '136',
+        cardNumber: 'X32',
         renderData: CardRenderer.builder((b) => {
           b.production((pb) => pb.energy(2)).tile(TileType.GREAT_DAM, true, false).asterix();
         }),

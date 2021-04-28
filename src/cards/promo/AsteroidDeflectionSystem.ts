@@ -21,7 +21,7 @@ export class AsteroidDeflectionSystem extends Card implements IActionCard, IProj
       resourceType: ResourceType.ASTEROID,
 
       metadata: {
-        cardNumber: 'X27',
+        cardNumber: 'X14',
         renderData: CardRenderer.builder((b) => {
           b.action('REVEAL AND DISCARD the top card of the deck. If it has a space tag, add an asteroid here.', (eb) => {
             eb.empty().startAction.cards(1).asterix().nbsp.space().played.colon().asteroids(1);

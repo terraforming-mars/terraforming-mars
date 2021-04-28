@@ -16,7 +16,7 @@ export class DiversitySupport extends Card implements IProjectCard {
 
       requirements: CardRequirements.builder((b) => b.resourceTypes(9)),
       metadata: {
-        cardNumber: 'X23',
+        cardNumber: 'X20',
         description: 'Requires that you have 9 different types of resources. Gain 1 TR.',
         renderData: CardRenderer.builder((b) => b.tr(1)),
       },

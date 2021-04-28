@@ -18,7 +18,7 @@ export class JovianEmbassy extends Card implements IProjectCard {
       cost: 14,
 
       metadata: {
-        cardNumber: 'X24',
+        cardNumber: 'X23',
         renderData: CardRenderer.builder((b) => {
           b.tr(1);
         }),

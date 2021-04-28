@@ -28,7 +28,7 @@ export class PreferencesManager {
   }
 
   static save(name: Key, val: string | boolean, updateMap: boolean = false): void {
-    const stringVal = typeof(val) === 'string' ? val : (val ? '0' : '1');
+    const stringVal = typeof(val) === 'string' ? val : (val ? '1' : '0');
     if (this.localStorageSupported()) {
       localStorage.setItem(name, stringVal);
     }

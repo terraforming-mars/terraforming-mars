@@ -572,7 +572,7 @@
   "Action: Spend 8 M€ to place 1 ocean tile. STEEL MAY BE USED as if you were playing a Building card.": " 行动：花费8枚MC资源（也可用钢铁）来放置一块海洋板块",
 
   "Flooding": "洪水",
-  "Place an ocean tile. IF THERE ARE TILES ADJACENT TO THIS OCEAN TILE, YOU MAY REMOVE 4 M€ from THE OWNER OF ONE OF THOSE TILES.": "放置一块海洋板块 你可以选择一块与此海洋相邻的板块，移除其拥有者4枚MC资源",
+  "Place an ocean tile. IF THERE ARE TILES ADJACENT TO THIS OCEAN TILE, YOU MAY REMOVE 4 M€ FROM THE OWNER OF ONE OF THOSE TILES.": "放置一块海洋板块 你可以选择一块与此海洋相邻的板块，移除其拥有者4枚MC资源",
 
   "Energy Saving": "节能减排",
   "Increase your Energy production 1 step for each City tile in play.": "电力产量+n，n=场上以放置的城市数",

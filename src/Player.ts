@@ -311,46 +311,25 @@ export class Player implements ISerializable<SerializedPlayer> {
   }
 
   public addResource(resource: Resources, amount: number, options? : { log: boolean, from? : Player | GlobalEventName}) {
-    let availableAmountToRemove = 0;
-
-    switch (resource) {
-    case Resources.MEGACREDITS:
-      availableAmountToRemove = this.megaCredits;
-      this.megaCredits = Math.max(0, this.megaCredits + amount);
-      break;
-    case Resources.STEEL:
-      availableAmountToRemove = this.steel;
-      this.steel = Math.max(0, this.steel + amount);
-      break;
-    case Resources.TITANIUM:
-      availableAmountToRemove = this.titanium;
-      this.titanium = Math.max(0, this.titanium + amount);
-      break;
-    case Resources.PLANTS:
-      availableAmountToRemove = this.plants;
-      this.plants = Math.max(0, this.plants + amount);
-      break;
-    case Resources.ENERGY:
-      availableAmountToRemove = this.energy;
-      this.energy = Math.max(0, this.energy + amount);
-      break;
-    case Resources.HEAT:
-      availableAmountToRemove = this.heat;
-      this.heat = Math.max(0, this.heat + amount);
-      break;
-    }
+    const delta = Math.max(0, this.getResource(resource) + amount) - this.getResource(resource);
+    if (resource === Resources.MEGACREDITS) this.megaCredits = delta;
+    if (resource === Resources.STEEL) this.steel = delta;
+    if (resource === Resources.TITANIUM) this.titanium = delta;
+    if (resource === Resources.PLANTS) this.plants = delta;
+    if (resource === Resources.ENERGY) this.energy = delta;
+    if (resource === Resources.HEAT) this.heat = delta;
 
     if (options?.log === true) {
-      const modifier = amount > 0 ? 'increased' : 'decreased';
+      const modifier = delta > 0 ? 'increased' : 'decreased';
 
-      if (options?.from !== undefined && options.from instanceof Player && amount < 0) {
+      if (options?.from !== undefined && options.from instanceof Player && delta < 0) {
         const from: Player = options.from;
         if (from !== this && this.removingPlayers.includes(from.id) === false) {
           this.removingPlayers.push(from.id);
         }
 
         // Crash site cleanup hook
-        if (from !== this && resource === Resources.PLANTS && amount < 0) {
+        if (from !== this && resource === Resources.PLANTS && delta < 0) {
           this.game.someoneHasRemovedOtherPlayersPlants = true;
         }
 
@@ -358,21 +337,21 @@ export class Player implements ISerializable<SerializedPlayer> {
           b.player(this)
             .string(resource)
             .string(modifier)
-            .number(amount >= 0 ? amount : Math.min(availableAmountToRemove, amount))
+            .number(Math.abs(delta))
             .player(from));
       }
 
       // Global event logging
-      if (options?.from !== undefined && ! (options.from instanceof Player) && amount !== 0) {
+      if (options?.from !== undefined && ! (options.from instanceof Player) && delta !== 0) {
         this.game.log('${0}\'s ${1} amount ${2} by ${3} by Global Event', (b) =>
           b.player(this)
             .string(resource)
             .string(modifier)
-            .number(amount >= 0 ? amount : Math.min(availableAmountToRemove, amount)));
+            .number(Math.abs(delta)));
       }
 
       // Mons Insurance hook
-      if (amount < 0 && options?.from !== undefined && options.from !== this) {
+      if (delta < 0 && options?.from !== undefined && options.from !== this) {
         this.resolveMonsInsurance();
       }
     }

@@ -13,7 +13,7 @@ export class CuttingEdgeTechnology extends Card implements IProjectCard {
       cardType: CardType.ACTIVE,
       name: CardName.CUTTING_EDGE_TECHNOLOGY,
       tags: [Tags.SCIENCE],
-      cost: 11,
+      cost: 12,
 
       metadata: {
         cardNumber: 'X17',

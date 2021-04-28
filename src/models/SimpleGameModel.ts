@@ -3,18 +3,18 @@ import {Color} from '../Color';
 import {GameId} from '../Game';
 import {Phase} from '../Phase';
 import {PlayerId} from '../Player';
-import {GameOptionsModel} from '../models/GameOptionsModel';
+import {GameOptionsModel} from './GameOptionsModel';
 
-export interface GameHomeModel {
+export interface SimpleGameModel {
     activePlayer: Color;
     id: GameId;
     phase: Phase;
-    players: Array<GameHomePlayerModel>;
+    players: Array<SimplePlayerModel>;
     gameOptions: GameOptionsModel;
     lastSoloGeneration: number;
 }
 
-interface GameHomePlayerModel {
+interface SimplePlayerModel {
     color: Color;
     id: PlayerId;
     name: string;

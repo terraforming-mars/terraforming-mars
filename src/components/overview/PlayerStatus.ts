@@ -36,7 +36,7 @@ export const PlayerStatus = Vue.component('player-status', {
       const classes: Array<string> = [];
       const baseClass = 'player-action-status-container';
       classes.push(baseClass);
-      if (!this.player.gameOptions.showTimers) {
+      if (!this.player.game.gameOptions.showTimers) {
         classes.push('no-timer');
       }
       if (this.actionLabel === ActionLabel.PASSED) {
@@ -59,9 +59,9 @@ export const PlayerStatus = Vue.component('player-status', {
         <div class="player-status-bottom">
           <div :class="getLabelAndTimerClasses()">
             <div :class="getActionStatusClasses()">{{ actionLabel }}</div>
-            <div class="player-status-timer" v-if="player.gameOptions.showTimers"><player-timer :timer="player.timer"/></div>
+            <div class="player-status-timer" v-if="player.game.gameOptions.showTimers"><player-timer :timer="player.timer"/></div>
           </div>
-        </div>   
+        </div>
       </div>
     `,
 });

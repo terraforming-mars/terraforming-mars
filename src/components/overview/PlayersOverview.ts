@@ -65,25 +65,25 @@ export const PlayersOverview = Vue.component('players-overview', {
       return result.slice(0, -1);
     },
     getActionLabel(player: PlayerModel): string {
-      if (this.player.phase === Phase.DRAFTING) {
+      if (this.player.game.phase === Phase.DRAFTING) {
         if (player.needsToDraft) {
           return ActionLabel.DRAFTING;
         } else {
           return ActionLabel.NONE;
         }
-      } else if (this.player.phase === Phase.RESEARCH) {
+      } else if (this.player.game.phase === Phase.RESEARCH) {
         if (player.needsToResearch) {
           return ActionLabel.RESEARCHING;
         } else {
           return ActionLabel.NONE;
         }
       }
-      if (this.player.passedPlayers.includes(player.color)) {
+      if (this.player.game.passedPlayers.includes(player.color)) {
         return ActionLabel.PASSED;
       }
       if (player.isActive) return ActionLabel.ACTIVE;
       const notPassedPlayers = this.player.players.filter(
-        (p: PlayerModel) => !this.player.passedPlayers.includes(p.color),
+        (p: PlayerModel) => !this.player.game.passedPlayers.includes(p.color),
       );
 
       const currentPlayerIndex: number = getCurrentPlayerIndex(

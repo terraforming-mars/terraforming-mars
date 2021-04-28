@@ -312,12 +312,12 @@ export class Player implements ISerializable<SerializedPlayer> {
 
   public addResource(resource: Resources, amount: number, options? : { log: boolean, from? : Player | GlobalEventName}) {
     const delta = Math.max(0, this.getResource(resource) + amount) - this.getResource(resource);
-    if (resource === Resources.MEGACREDITS) this.megaCredits = delta;
-    if (resource === Resources.STEEL) this.steel = delta;
-    if (resource === Resources.TITANIUM) this.titanium = delta;
-    if (resource === Resources.PLANTS) this.plants = delta;
-    if (resource === Resources.ENERGY) this.energy = delta;
-    if (resource === Resources.HEAT) this.heat = delta;
+    if (resource === Resources.MEGACREDITS) this.megaCredits += delta;
+    if (resource === Resources.STEEL) this.steel += delta;
+    if (resource === Resources.TITANIUM) this.titanium += delta;
+    if (resource === Resources.PLANTS) this.plants += delta;
+    if (resource === Resources.ENERGY) this.energy += delta;
+    if (resource === Resources.HEAT) this.heat += delta;
 
     if (options?.log === true) {
       const modifier = delta > 0 ? 'increased' : 'decreased';

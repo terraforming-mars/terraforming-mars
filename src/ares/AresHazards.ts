@@ -24,7 +24,9 @@ export class _AresHazardPlacement {
     game.board.spaces
       .filter((s) => s.tile?.tileType === from)
       .forEach((s) => {
-        this.putHazardAt(s, to);
+        if (s.tile !== undefined) {
+          s.tile.tileType = to;
+        }
       });
 
     game.log('${0} have upgraded to ${1}', (b) => b.string(TileType.toString(from)).string(TileType.toString(to)));

@@ -62,16 +62,16 @@ export const PLAYER_INTERFACE_TAGS_ORDER: Array<InterfaceTagsType> = [
 ];
 
 export const checkTagUsed = (tag: InterfaceTagsType, player: PlayerModel) => {
-  if (player.gameOptions.coloniesExtension === false && tag === SpecialTags.COLONY_COUNT) {
+  if (player.game.gameOptions.coloniesExtension === false && tag === SpecialTags.COLONY_COUNT) {
     return false;
   }
-  if (player.turmoil === undefined && tag === SpecialTags.INFLUENCE) {
+  if (player.game.turmoil === undefined && tag === SpecialTags.INFLUENCE) {
     return false;
   }
-  if (player.gameOptions.venusNextExtension === false && tag === Tags.VENUS) {
+  if (player.game.gameOptions.venusNextExtension === false && tag === Tags.VENUS) {
     return false;
   }
-  if (player.gameOptions.moonExpansion === false && tag === Tags.MOON) {
+  if (player.game.gameOptions.moonExpansion === false && tag === Tags.MOON) {
     return false;
   }
   return true;
@@ -97,16 +97,16 @@ export const PlayerTags = Vue.component('player-tags', {
 
   methods: {
     showColonyCount: function(): boolean {
-      return this.player.gameOptions.coloniesExtension;
+      return this.player.game.gameOptions.coloniesExtension;
     },
     showInfluence: function(): boolean {
-      return this.player.turmoil !== undefined;
+      return this.player.game.turmoil !== undefined;
     },
     showVenus: function(): boolean {
-      return this.player.gameOptions.venusNextExtension;
+      return this.player.game.gameOptions.venusNextExtension;
     },
     showMoon: function(): boolean {
-      return this.player.gameOptions.moonExpansion;
+      return this.player.game.gameOptions.moonExpansion;
     },
     getTagsPlaceholders: function(): Array<InterfaceTagsType> {
       const tags = PLAYER_INTERFACE_TAGS_ORDER;
@@ -127,7 +127,7 @@ export const PlayerTags = Vue.component('player-tags', {
       return this.player.victoryPointsBreakdown.total;
     },
     hideVpCount: function(): boolean {
-      return !this.player.gameOptions.showOtherPlayersVP && !this.isActivePlayer;
+      return !this.player.game.gameOptions.showOtherPlayersVP && !this.isActivePlayer;
     },
     showShortTags: function(): boolean {
       if (this.hideZeroTags === true) return true;
@@ -142,14 +142,14 @@ export const PlayerTags = Vue.component('player-tags', {
         }
       }
 
-      const turmoil = this.player.turmoil;
+      const turmoil = this.player.game.turmoil;
       if (tag === Tags.SPACE &&
         turmoil && turmoil.ruling === PartyName.UNITY &&
         turmoil.politicalAgendas?.currentAgenda.policyId === TurmoilPolicy.UNITY_POLICY_4) {
         return true;
       }
 
-      const iapetusColony = this.player.colonies.find((colony) => colony.name === ColonyName.IAPETUS);
+      const iapetusColony = this.player.game.colonies.find((colony) => colony.name === ColonyName.IAPETUS);
       if (tag === 'all' &&
         iapetusColony !== undefined &&
         iapetusColony.visitor !== undefined &&
@@ -167,11 +167,11 @@ export const PlayerTags = Vue.component('player-tags', {
         }
       }
 
-      if (tag === Tags.SPACE && this.player.turmoil?.ruling === PartyName.UNITY) {
-        if (this.player.turmoil.politicalAgendas?.currentAgenda.policyId === TurmoilPolicy.UNITY_POLICY_4) discount += 2;
+      if (tag === Tags.SPACE && this.player.game.turmoil?.ruling === PartyName.UNITY) {
+        if (this.player.game.turmoil.politicalAgendas?.currentAgenda.policyId === TurmoilPolicy.UNITY_POLICY_4) discount += 2;
       }
 
-      const iapetusColony = this.player.colonies.find((colony) => colony.name === ColonyName.IAPETUS);
+      const iapetusColony = this.player.game.colonies.find((colony) => colony.name === ColonyName.IAPETUS);
       if (tag === 'all' && iapetusColony !== undefined && iapetusColony.visitor !== undefined) {
         discount += iapetusColony.colonies.filter((owner) => owner === this.player.color).length;
       }

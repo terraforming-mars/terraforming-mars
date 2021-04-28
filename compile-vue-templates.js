@@ -54,8 +54,8 @@ generateVueClass(
   [],
 );
 generateVueClass(
-  'src/components/CardsFilter',
-  require('./build/src/components/CardsFilter').CardsFilter,
+  'src/components/create/CardsFilter',
+  require('./build/src/components/create/CardsFilter').CardsFilter,
   ['selectedCardNames', 'foundCardNames', 'searchTerm'],
 );
 generateVueClass(

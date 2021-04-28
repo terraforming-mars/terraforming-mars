@@ -7,7 +7,7 @@ import {translateTextWithParams} from '../../directives/i18n';
 import {IGameData} from '../../database/IDatabase';
 import {ColoniesFilter} from './ColoniesFilter';
 import {ColonyName} from '../../colonies/ColonyName';
-import {CardsFilter} from '../CardsFilter';
+import {CardsFilter} from './CardsFilter';
 import {Button} from '../common/Button';
 import {playerColorClass} from '../../utils/utils';
 import {RandomMAOptionType} from '../../RandomMAOptionType';
@@ -511,13 +511,13 @@ export const CreateGameForm = Vue.component('create-game-form', {
   template: `
         <div id="create-game">
             <h1><span v-i18n>{{ constants.APP_NAME }}</span> — <span v-i18n>Create New Game</span></h1>
-            <div class="create-game-discord-invite" v-if="playersCount===1" v-i18n>
-              (<span v-i18n>Looking for people to play with</span>? <a href="https://discord.gg/VR8TbrD" class="tooltip" target="_blank"><u>Join us on Discord</u></a>.)
+            <div class="create-game-discord-invite" v-if="playersCount===1">
+              (<span v-i18n>Looking for people to play with</span>? <a href="https://discord.gg/VR8TbrD" class="tooltip" target="_blank"><u v-i18n>Join us on Discord</u></a>.)
             </div>
 
-            <div class="create-game-form create-game--block">
+            <div class="create-game-form create-game-panel create-game--block">
 
-                <div class="container create-game-options">
+                <div class="create-game-options">
 
                     <div class="create-game-solo-player form-group" v-if="isSoloModePage" v-for="newPlayer in getPlayers()">
                         <div>
@@ -812,7 +812,7 @@ export const CreateGameForm = Vue.component('create-game-form', {
                             <div class="container">
                                 <div class="columns">
                                     <template v-for="newPlayer in getPlayers()">
-                                    <div :class="'form-group col6 create-game-player create-game--block '+getPlayerContainerColorClass(newPlayer.color)">
+                                    <div :class="'form-group col6 create-game-player '+getPlayerContainerColorClass(newPlayer.color)">
                                         <div>
                                             <input class="form-input form-inline create-game-player-name" :placeholder="getPlayerNamePlaceholder(newPlayer)" v-model="newPlayer.name" />
                                         </div>
@@ -865,35 +865,37 @@ export const CreateGameForm = Vue.component('create-game-form', {
             </div>
 
 
+            <div class="create-game--block" v-if="showCorporationList">
+              <corporations-filter
+                  ref="corporationsFilter"
+                  v-on:corporation-list-changed="updateCustomCorporationsList"
+                  v-bind:corporateEra="corporateEra"
+                  v-bind:prelude="prelude"
+                  v-bind:venusNext="venusNext"
+                  v-bind:colonies="colonies"
+                  v-bind:turmoil="turmoil"
+                  v-bind:promoCardsOption="promoCardsOption"
+                  v-bind:communityCardsOption="communityCardsOption"
+                  v-bind:moonExpansion="moonExpansion"
+              ></corporations-filter>
+            </div>
 
-            <corporations-filter
-                ref="corporationsFilter"
-                v-if="showCorporationList"
-                v-on:corporation-list-changed="updateCustomCorporationsList"
-                v-bind:corporateEra="corporateEra"
-                v-bind:prelude="prelude"
-                v-bind:venusNext="venusNext"
-                v-bind:colonies="colonies"
-                v-bind:turmoil="turmoil"
-                v-bind:promoCardsOption="promoCardsOption"
-                v-bind:communityCardsOption="communityCardsOption"
-                v-bind:moonExpansion="moonExpansion"
-            ></corporations-filter>
+            <div class="create-game--block" v-if="showColoniesList">
+              <colonies-filter
+                  ref="coloniesFilter"
+                  v-on:colonies-list-changed="updateCustomColoniesList"
+                  v-bind:venusNext="venusNext"
+                  v-bind:turmoil="turmoil"
+                  v-bind:communityCardsOption="communityCardsOption"
+              ></colonies-filter>
+            </div>
 
-            <colonies-filter
-                ref="coloniesFilter"
-                v-if="showColoniesList"
-                v-on:colonies-list-changed="updateCustomColoniesList"
-                v-bind:venusNext="venusNext"
-                v-bind:turmoil="turmoil"
-                v-bind:communityCardsOption="communityCardsOption"
-            ></colonies-filter>
-
-            <cards-filter
-                ref="cardsFilter"
-                v-if="showCardsBlackList"
-                v-on:cards-list-changed="updateCardsBlackList"
-            ></cards-filter>
+            <div class="create-game--block" v-if="showCardsBlackList">
+              <cards-filter
+                  ref="cardsFilter"
+                  v-on:cards-list-changed="updateCardsBlackList"
+              ></cards-filter>
+            </div>
         </div>
     `,
 });

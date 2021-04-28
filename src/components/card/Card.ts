@@ -123,7 +123,7 @@ export const Card = Vue.component('card', {
       if (this.isStandardProject()) {
         classes.push('card-standard-project');
       }
-      const learnerModeOff = PreferencesManager.loadValue('learner_mode') === '0';
+      const learnerModeOff = PreferencesManager.load('learner_mode') === '0';
       if (learnerModeOff && this.isStandardProject() && card.isDisabled) {
         classes.push('card-hide');
       }

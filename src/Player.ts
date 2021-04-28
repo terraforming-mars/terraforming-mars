@@ -320,9 +320,9 @@ export class Player implements ISerializable<SerializedPlayer> {
     if (resource === Resources.HEAT) this.heat += delta;
 
     if (options?.log === true) {
-      const modifier = delta > 0 ? 'increased' : 'decreased';
+      const modifier = amount > 0 ? 'increased' : 'decreased';
 
-      if (options?.from !== undefined && options.from instanceof Player && delta < 0) {
+      if (options?.from !== undefined && options.from instanceof Player && amount < 0) {
         const from: Player = options.from;
         if (from !== this && this.removingPlayers.includes(from.id) === false) {
           this.removingPlayers.push(from.id);

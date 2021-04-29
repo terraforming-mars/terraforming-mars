@@ -15,6 +15,7 @@ import {SerializedTurmoil} from './SerializedTurmoil';
 import {PLAYER_DELEGATES_COUNT} from '../constants';
 import {AgendaStyle, PoliticalAgendasData, PoliticalAgendas} from './PoliticalAgendas';
 import {CardName} from '../CardName';
+import {DeferredAction} from '../deferredActions/DeferredAction';
 
 export type NeutralPlayer = 'NEUTRAL';
 
@@ -313,7 +314,13 @@ export class Turmoil implements ISerializable<SerializedTurmoil> {
           const player = game.getPlayerById(this.chairman);
           // Tempest Consultancy Hook (gains an additional TR when they become chairman)
           const steps = player.corporationCard?.name === CardName.TEMPEST_CONSULTANCY ? 2 :1;
-          player.increaseTerraformRatingSteps(steps);
+
+          // Raise TR but after resolving the new policy
+          game.defer(new DeferredAction(player, () => {
+            player.increaseTerraformRatingSteps(steps);
+            return undefined;
+          }));
+
           game.log('${0} is the new chairman and gained ${1} TR', (b) => b.player(player).number(steps));
         } else {
           game.log('A neutral delegate is the new chairman.');

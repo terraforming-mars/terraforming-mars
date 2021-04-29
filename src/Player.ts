@@ -311,7 +311,8 @@ export class Player implements ISerializable<SerializedPlayer> {
   }
 
   public addResource(resource: Resources, amount: number, options? : { log: boolean, from? : Player | GlobalEventName}) {
-    const delta = Math.max(0, this.getResource(resource) + amount) - this.getResource(resource);
+    const delta = (amount >= 0) ? amount : Math.max(amount, -this.getResource(resource));
+
     if (resource === Resources.MEGACREDITS) this.megaCredits += delta;
     if (resource === Resources.STEEL) this.steel += delta;
     if (resource === Resources.TITANIUM) this.titanium += delta;

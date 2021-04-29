@@ -75,7 +75,7 @@
     "${0} increased ${1} colony track ${2} step(s)": "${0} aumentou o marcador da colônia ${1} em ${2} nível(s)",
     "${0} bought ${1} card(s)": "${0} comprou ${1} carta(s)",
     "${0} acted as World Government and increased Venus scale": "${0} atuou como governo mundial e aumentou o valor de terraformação de Vênus",
-    "${0} acted as World Government and placed an ocean": "${0} atuou como governo mundial e colocou uma tile de oceano",
+    "${0} acted as World Government and placed an ocean": "${0} atuou como governo mundial e colocou um tile de oceano",
     "${0} acted as World Government and increased oxygen level": "${0} atuou como governo mundial e aumentou o nível de oxigênio",
     "${0} acted as World Government and increased temperature": "${0} atuou como governo mundial e aumentou a temperatura",
     "${0} loses ${1} resource(s) on ${2} by ${3}": "${3} fez que ${0} perca ${1} recurso(s) em ${2}",

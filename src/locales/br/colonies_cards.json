@@ -21,7 +21,7 @@
    "Requires 4 science tags. Increase your energy production 4 steps.": "Requer 4 ícones de ciência. Aumente sua produção de energia em 4 níveis.",
 
    "Cryo Sleep": "Sono Criogênico",
-   "Effect: When you trade, you pay 1 less resource for it.": "Efeito: Ao trocar, pague 1 recurso a menos.",
+   "Effect: When you trade, you pay 1 less resource for it.": "Efeito: Ao negociar, pague 1 recurso a menos.",
 
    "Earth Elevator": "Elevador Terrestre",
    "Increase your titanium production 3 steps.": "Aumente sua produção de titânio em 3 níveis.",
@@ -64,27 +64,27 @@
    "Action: Gain 1 M€ for every floater here [MAX 4].": "Ação: Receba 1 M$ para cada flutuador nesta carta (máx. 4)",
    "Requires 3 Science tags.": "Requer 3 ícones de ciência.",
 
-   "Luma Governor": "Governador da Lua",
+   "Luna Governor": "Governador da Lua",
    "Requires 3 Earth tags. Increase your M€ production 2 steps.": "Requer 3 ícones de Terra. Aumente sua produção de M$ em 2 níveis.",
 
-   "Lumar Exports": "Exportações Lunares",
+   "Lunar Exports": "Exportações Lunares",
    "Increase your plant production 2 steps, or your M€ production 5 steps.": "Aumente sua produção de planta em 2 níveis ou aumente sua produção de M$ em 5 níveis.",
 
-   "Lumar Mining": "Mineração Lunar",
+   "Lunar Mining": "Mineração Lunar",
    "Increase your titanium production 1 step for every 2 Earth tags you have in play, including this.": "Aumente sua produção de titânio em 1 nível para cada 2 ícones de Terra que você tiver.",
 
    "Market Manipulation": "Manipulação de Mercado",
    "Increase one colony tile track 1 step. Decrease another colony tile track 1 step.": "Aumente 1 nível o marcador de uma colônia. Diminua em 1 o nível do marcador de outra colônia.",
 
    "Martian Zoo": "Zoológico Marciano",
-   "Effect: When you play an Earth tag, place an animal here.": "Efeito:Aol jogar um ícone de Terra, coloque um animal nesta carta.",
+   "Effect: When you play an Earth tag, place an animal here.": "Efeito: Ao jogar um ícone de Terra, coloque um animal nesta carta.",
    "Action: Gain 1M€ per animal here.": "Ação: Receba 1 M$ para cada animal nesta carta.",
    "Requires 2 city tiles in play.": "Requer 2 cidades em jogo.",
 
    "Mining Colony": "Colônia Mineradora",
    "Increase your titanium production 1 step. Place a colony.": "Aumente sua produção de titânio em 1 nível. Coloque uma colônia.",
 
-   "Minority Refuge": "Refúgio de Minorías",
+   "Minority Refuge": "Refúgio de Minorias",
    "Decrease your M€ production 2 steps. Place a colony.": "Reduza sua produção de M$ em 2 níveis. Coloque uma colônia.",
 
    "Molecular Printing": "Impressão Molecular",
@@ -114,7 +114,7 @@
    "Rim Freighters": "Cargueiro de Orla",
 
    "Sky Docks": "Docas Aérea",
-   "Effect: When you play a card, you pay 1 M€ less for it.": "Efeito: Aol jogar uma carta, pague 1 M$ a menos por ela.",
+   "Effect: When you play a card, you pay 1 M€ less for it.": "Efeito: Ao jogar uma carta, pague 1 M$ a menos por ela.",
    "Requires 2 Earth tags. Gain 1 Trade Fleet.": "Requer 2 ícones de Terra. Receba 1 frota comercial.",
 
    "Solar Probe": "Sonda Solar",
@@ -142,7 +142,7 @@
    "Action: Spend 2 floaters here to increase your TR 1 step.": "Ação: Remova 2 flutuadores desta carta para aumentar seu IT em 1 nível.",
 
    "Titan Floating Launch-pad": "Plataforma de Flutuadores em Titã",
-   "Action: Add 1 floater to ANY JOVIAN CARD or spend 1 floater here to trade for free.": "Ação: Adicione 1 flutuador à qualquer CARTA JOVIANA, ou remova 1 flutuador desta carta para trocar sem custo.",
+   "Action: Add 1 floater to ANY JOVIAN CARD or spend 1 floater here to trade for free.": "Ação: Adicione 1 flutuador à qualquer CARTA JOVIANA, ou remova 1 flutuador desta carta para negociar sem custo.",
    "Add two floaters to ANY JOVIAN CARD.": "Adicione 2 flutuadores à qualquer CARTA JOVIANA.",
 
    "Titan Shuttles": "Transportadores em Titã",
@@ -150,7 +150,7 @@
    "Action: Spend any number of floaters here to gain the same number of titanium.": "Ação: Remova qualquer número de flutuadores desta carta para receber essa quantia de titânio.",
 
    "Trade Envoys": "Enviados Comerciais",
-   "Effect: When you trade, you may first increase that Colony Tile track 1 step.": "Efeito: Antes de trocar, aumente o marcador da colônia em 1 nível.",
+   "Effect: When you trade, you may first increase that Colony Tile track 1 step.": "Efeito: Antes de negociar, aumente o marcador da colônia em 1 nível.",
 
    "Trading Colony": "Colônia Comercial",
    "Place a colony": "Coloque uma colônia.",

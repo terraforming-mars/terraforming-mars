@@ -36,7 +36,7 @@
   "(Requires that you have 9 different types of resources. Gain 1 TR.)": "Requer que você tenha 9 tipos de recursos diferentes. Receba 1 IT.",
 
   "Topsoil Contract": "Contrato de Solo Superficial",
-  "(Effect: When you gain a microbe to ANY CARD, also gain 1MC.)": "Efeito: quando adicionar um micróbio a QUALQUER CARTA, receba 1 M€.",
+  "(Effect: When you gain a microbe to ANY CARD, also gain 1MC.)": "Efeito: quando adicionar um micróbio a QUALQUER CARTA, receba 1 M$.",
   "Gain 3 plants.": "Receba 3 plantas.",
 
   "Imported Nutrients": "Importação de Nutrientes",
@@ -110,7 +110,7 @@
 
   "Energy Market": "Mercado de Energia",
   "Action: Spend 2X M€ to gain X energy.": "Ação: Gaste 2X M$ para receber X energias.",
-  "Action: Decrease energy production 1 step to gain 8 M€.": "Ação: Diminua 1 nível sua produção de energia para receber 8 M$.",
+  "Action: Decrease energy production 1 step to gain 8 MC.": "Ação: Diminua 1 nível sua produção de energia para receber 8 M$.",
 
   "Asteroid Rights": "Direitos de Asteroides",
   "Action: Spend 1 M€ to add 1 asteroid to ANY card.": "Ação: gaste 1 M$ para adicionar um asteroide a QUALQUER carta.",
@@ -123,7 +123,7 @@
   "You start with 48 M€. Increase your M$ production 4 steps. ALL OPPONENTS DECREASE THEIR M€ production 2 STEPS. THIS DOES NOT TRIGGER THE EFFECT BELOW.": "Você começa com 48 M$. Aumente sua produção de M$ em 4 níveis. TODOS OS OPONENTES REDUZEM SUA PRODUÇÃO DE M$ EM 2 NÍVEIS. ISTO NÃO ACIONA O EFEITO ABAIXO.",
   "Effect: When a player causes another player to decrease production or lose resources, pay 3M€ to the victim, or as much as possible.": "Efeito: Quando um jogador casar a diminuição da produçao ou a perda de recursos de outro jogador, pague 3 M$ para a vítima, caso possível.",
 
-  "You start with 47 M€. As your first action, place a greenery tile and raise the oxygen 1 step.": "Você começa com 47 M$. Como sua primeira ação, posicione um tile de vegetação",
+  "You start with 47 MC. As your first action, place a greenery tile and raise the oxygen 1 step.": "Você começa com 47 M$. Como sua primeira ação, posicione um tile de vegetação",
   "Effect: Each new adjacency between your tile and an opponent's tile gives you a standard resource of your choice [regardless of who just placed a tile].": "Efeito: Cada nova adjacência entre seus tiles e tiles de oponentes lhe traz um recurso básico à sua escolha - independente de quem acaba de colocar o tile.",
 
   "Arcadian": "Arcadian",
@@ -132,8 +132,8 @@
   "ACTION: PLACE A COMMUNITY (PLAYER MARKER) ON A NON-RESERVED AREA ADJACENT TO ONE OF YOUR TILES OR MARKED AREAS": "AÇÃO: COLOQUE UMA COMUNIDADE (MARCADOR DE JOGADOR) EM UMA ÁREA NÃO RESERVADA ADJACENTE A UM DE SEUS TILES OU ÁREAS MARCADAS",
   "EFFECT: MARKED AREAS ARE RESERVED FOR YOU. WHEN YOU PLACE A TILE THERE, GAIN 3 M€": "EFEITO: ÁREAS MARCADAS SÃO RESERVADAS PARA VOCÊ. QANDO VOCÊ COLOCAR UM TILE LÁ, RECEBA 3 M$",
 
-  "You start with 44 M€. As your first action, reveal cards until you have revealed a microbe tag. Take it and discard the rest.": "Você começa com 44 M$. Como sua primeira ação, compre uma carta e micróbio.",
-  "Effect: when a microbe tag is played, incl. this, THAT PLAYER gains 2 M€, or adds a microbe to THAT card, and you gain 2 M€.": "Efeito: Quando um ícone de micróbio é jogado, incluindo este, AQUELE JOGADOR recebe 2 M$ ou adiciona um micróbio ÀQUELA carta, e você recebe 2 M$.",
+  "You start with 44 MC. As your first action, reveal cards until you have revealed a microbe tag. Take it and discard the rest.": "Você começa com 44 M$. Como sua primeira ação, compre uma carta e micróbio.",
+  "Effect: when a microbe tag is played, incl. this, THAT PLAYER gains 2 MC, or adds a microbe to THAT card, and you gain 2 MC.": "Efeito: Quando um ícone de micróbio é jogado, incluindo este, AQUELE JOGADOR recebe 2 M$ ou adiciona um micróbio ÀQUELA carta, e você recebe 2 M$.",
 
   "Raise temperature 3 steps and gain 4 steel. Place this tile ADJACENT TO no other city tile. Remove up to 6 Plants from any player.": "Aumente a temperatura 3 níveis e receba 4 de aço. Coloque este tile NÃO ADJACENTE a uma cidade. Remova até 6 plantas de um jogador.",
 
@@ -145,7 +145,7 @@
 
   "Decrease your Energy production 4 steps and increase your Plant production 2 step. Raise your TR 3 step.": "Diminua sua produção de energia 4 níveis e aumente sua produção de planta 2 níveis. Aumente seu IT 3 níveis.",
 
-  "You start with 37 M€. Increase your steel production 1 step.": "Você começa com 37 M$. Aumente sua produção de aço em 1 nível.",
+  "You start with 37 MC. Increase your steel production 1 step.": "Você começa com 37 M$. Aumente sua produção de aço em 1 nível.",
   "Action: Increase your energy production 1 step IF YOU HAVE NO ENERGY RESOURCES, or spend 3M€ to draw a building card.": "Ação: Aumente sua produção de enercia nível SE VOCÊ NÃO TEM NENHUM RECURSO DE ENERGIA, ou gaste 3 M$ para comprar uma carta de construção.",
 
   "You start with 38 M€ and 1 steel production.": "Você começa com 38 M$ e 1 nível de produção de aço.",

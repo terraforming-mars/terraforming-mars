@@ -318,10 +318,9 @@ export class Turmoil implements ISerializable<SerializedTurmoil> {
           // Raise TR but after resolving the new policy
           game.defer(new DeferredAction(player, () => {
             player.increaseTerraformRatingSteps(steps);
+            game.log('${0} is the new chairman and gained ${1} TR', (b) => b.player(player).number(steps));
             return undefined;
           }));
-
-          game.log('${0} is the new chairman and gained ${1} TR', (b) => b.player(player).number(steps));
         } else {
           game.log('A neutral delegate is the new chairman.');
         }

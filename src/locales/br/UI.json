@@ -111,7 +111,7 @@
     "Most tiles south of the equator (the four bottom rows)": "Mais tiles ao sul do equador (4 linhas inferiores do mapa).",
     "Estate Dealer": "Corretor de Imóveis",
     "Most tiles adjacent to ocean tiles": "Mais tiles adjacentes a tiles de oceano.",
-    "Benefactor": "Benefeitor",
+    "Benefactor": "Benfeitor",
     "Highest terraform rating": "Maior IT. Este prêmio deve ser contabilizado primeiro!",
     "Venuphile": "Venusófilo",
     "Having the most Venus tags in play": "Ter o maior número de ícones de Vênus em jogo.",
@@ -306,7 +306,6 @@
     "Player ${0} name": "Nome do Jogador ${0}",
     "Multiplayer Options": "Opções multiplayer",
 
-
     "Turmoil": "Reviravolta",
 
     "TR solo mode": "IT modo solo",
@@ -338,5 +337,55 @@
 
     "Draw 3 cards": "Comprar 3 cartas",
     "Game Setup Details": "Detalhes da Configuração do Jogo",
-    "game setup details": "detalhes da configuração do jogo"
+    "game setup details": "detalhes da configuração do jogo",
+    "Milestones & Awards": "Marcos e Prêmios",
+    "Hide button color coding": "Esconder codificação de botões por cores",
+    "How to pay?": "Como pagar?",
+
+    "Add 1 Microbe to this card.": "Adicionar 1 Micróbio a esta carta.",
+    "Decrease": "Diminuir",
+
+    "Remove 2 floaters to raise Venus 1 step": "Remova 2 flutuadores para aumentar Vênus 1 nível",
+    "Spend one titanium to add 2 floaters to this card": "Gaste 1 titânio para adicionar 2 flutuadores a esta carta",
+
+    "Spend 3 M€ to draw a blue card": "Gastar 3 M$ para comprar uma carta azul",
+    
+    "Flip and discard a played blue card": "Vire e descarte uma carta azul jogada",
+    "Select card to add 1 resource": "Escolha uma carta para adicionar 1 recurso",
+    "Add resource": "Adicionar recurso",
+    "Skip removing plants": "Não remover plantas",
+
+    "Remove 2 microbes to raise Venus 1 step": "",
+    "Select a Venus card to add 1 microbe": "Escolha uma carta de Vênus para adicionar 1 micróbio",
+    "Add microbes": "Adicionar micróbios",
+    "Remove microbes": "Remover micróbios",
+    "Remove 1 asteroid to raise Venus 1 step": "Remover 1 asteroide para aumentar",
+    "Pay 6 to add 1 asteroid to this card": "Pagar 6 para adicionar 1 asteroid",
+    "Remove asteroid": "Remover asteroide",
+    "gain 1 TR": "ganhar 1 IT",
+    "Draw card": "Comprar carta",
+    "Remove 1 asteroid on this card to increase M€ production 1 step OR gain 2 titanium": "Remover 1 asteroide desta carta para increase M€ production 1 step OR gain 2 titanium",
+    "Remove an asteroid resource to place an ocean": "Remover um asteroide para colocar um oceano",
+    "Select card to add 1 asteroid": "",
+    "gain 2 titanium": "ganhar 2 titânios",
+    "asteroid(s) ": "asteroide(s)",
+    "Commercial District tile": "tile",
+    "Gain 2 titanium": "Ganhar 2 titânios",
+    "Increase M€ production 1 step": "Aumentar produção de megacréditos 1 nível",
+    "${0} decreased energy production 1 step to gain 8 M€": "${0} diminuir produção de energia 1 nível para ganhar 8 M$",
+    "${0} flipped and discarded ${1}": "${0} virou e descartou ${1}",
+    "Remove resource": "Remover recurso",
+    "Remove a science resource from this card to draw a card": "Remover um recurso de ciência desta carta para comprar uma carta",
+    "Add a science resource to this card": "Adicionar um recurso de ciência a esta carta",
+    "Select a card to discard": "Escolha uma carta para descartar",
+    "Do nothing": "Fazer nada",
+    "Discard": "Descartar",
+    "Select player to decrease ": "Escolha um jogador para diminuir produção de ",
+    " production by ": " em ",
+    " step(s)": " nível(is)",
+    "Remove 1 asteroid to raise temperature 1 step": "Remover 1 asteroide para aumentar a temperatura 1 nível",
+    "Pay 6 to add 1 asteroid to a card": "Pagar 6 para adicionar 1 asteroid a uma carta",
+    "Skip removal": "Não remover",
+    "Select player to sue (steal 3 M€ from)": "Escolha jogador para processar (roubar 3 M$)",
+    "Steal M€": "Roubar M$"
 }

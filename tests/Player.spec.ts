@@ -579,3 +579,23 @@ function titlesToGlobalParameter(title: string): GlobalParameter {
   }
   throw new Error('title does not match any description: ' + title);
 }
+
+it('adds resources', () => {
+  const player = TestPlayers.BLUE.newPlayer();
+  player.megaCredits = 10;
+  // adds any positive amount
+  player.addResource(Resources.MEGACREDITS, 12);
+  expect(player.megaCredits).eq(22);
+  // removes more than we have
+  player.addResource(Resources.MEGACREDITS, -23);
+  expect(player.megaCredits).eq(0);
+  // adds any positive amount
+  player.addResource(Resources.MEGACREDITS, 5);
+  expect(player.megaCredits).eq(5);
+  // removes less than we have
+  player.addResource(Resources.MEGACREDITS, -4);
+  expect(player.megaCredits).eq(1);
+  // makes no change
+  player.addResource(Resources.MEGACREDITS, 0);
+  expect(player.megaCredits).eq(1);
+});

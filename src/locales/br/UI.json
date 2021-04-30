@@ -240,7 +240,8 @@
      "Remove 2 floaters to raise Venus scale 1 step": "Remova 2 flutuadores para aumentar 1 nível a escala de terraformação de Vênus",
      "Show timers": "Mostrar cronômetros",
      "You cannot pay for this card": "Você não consegue pagar por esta carta",
-     "Select card(s) to buy":"Escolha carta(s) que deseja comprar",
+     "Select card(s) to buy": "Escolha carta(s) que deseja comprar",
+     "You cannot afford any cards": "Você não consegue pagar as cartas",
 
     "Starting Megacredits:":"Megacréditos iniciais：",
     "After Preludes:":"Depois dos prelúdio：",
@@ -387,5 +388,7 @@
     "Pay 6 to add 1 asteroid to a card": "Pagar 6 para adicionar 1 asteroid a uma carta",
     "Skip removal": "Não remover",
     "Select player to sue (steal 3 M€ from)": "Escolha jogador para processar (roubar 3 M$)",
-    "Steal M€": "Roubar M$"
+    "Steal M€": "Roubar M$",
+
+    "Select where to send a delegate": "Escolha o partido para enviar o delegado."
 }

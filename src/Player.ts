@@ -350,11 +350,11 @@ export class Player implements ISerializable<SerializedPlayer> {
             .string(modifier)
             .number(Math.abs(delta)));
       }
+    }
 
-      // Mons Insurance hook
-      if (delta < 0 && options?.from !== undefined && options.from !== this) {
-        this.resolveMonsInsurance();
-      }
+    // Mons Insurance hook
+    if (options?.from !== undefined && amount < 0 && (options.from instanceof Player && options.from.id !== this.id)) {
+      this.resolveMonsInsurance();
     }
   }
 
@@ -399,11 +399,11 @@ export class Player implements ISerializable<SerializedPlayer> {
             .string(modifier)
             .number(Math.abs(amount)));
       }
+    }
 
-      // Mons Insurance hook
-      if (amount < 0 && options.from !== undefined && options.from !== this) {
-        this.resolveMonsInsurance();
-      }
+    // Mons Insurance hook
+    if (options?.from !== undefined && amount < 0 && (options.from instanceof Player && options.from.id !== this.id)) {
+      this.resolveMonsInsurance();
     }
 
     // Manutech hook

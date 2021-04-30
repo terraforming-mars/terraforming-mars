@@ -22,7 +22,7 @@ export class MagneticFieldGeneratorsPromo extends Card implements IProjectCard {
       cost: 22,
 
       metadata: {
-        cardNumber: '165',
+        cardNumber: 'X33',
         renderData: CardRenderer.builder((b) => {
           b.production((pb) => {
             pb.minus().energy(4).digit.br;

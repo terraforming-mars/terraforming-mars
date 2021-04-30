@@ -16,7 +16,7 @@ export class Potatoes extends Card implements IProjectCard {
       cost: 2,
 
       metadata: {
-        cardNumber: 'X29',
+        cardNumber: 'X28',
         renderData: CardRenderer.builder((b) => {
           b.minus().plants(2).nbsp.production((pb) => pb.megacredits(2));
         }),

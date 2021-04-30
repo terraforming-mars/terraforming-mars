@@ -18,7 +18,7 @@ export function translateMessage(message: Message): string {
 
 export function translateText(englishText: string): string {
   let translatedText = englishText;
-  const lang = PreferencesManager.loadValue('lang') || 'en';
+  const lang = PreferencesManager.load('lang') || 'en';
   if (lang === 'en') return englishText;
 
   englishText = normalizeText(englishText);

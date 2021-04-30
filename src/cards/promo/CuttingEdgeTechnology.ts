@@ -13,10 +13,10 @@ export class CuttingEdgeTechnology extends Card implements IProjectCard {
       cardType: CardType.ACTIVE,
       name: CardName.CUTTING_EDGE_TECHNOLOGY,
       tags: [Tags.SCIENCE],
-      cost: 11,
+      cost: 12,
 
       metadata: {
-        cardNumber: 'X17',
+        cardNumber: 'X18',
         renderData: CardRenderer.builder((b) => {
           b.effect('When playing a card with a requirement, you pay 2 M€ less for it.', (eb) => {
             eb.cards(1).secondaryTag(AltSecondaryTag.REQ).startEffect.megacredits(-2);

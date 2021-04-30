@@ -319,7 +319,7 @@ export const SelectHowToPayForProjectCard = Vue.component('select-how-to-pay-for
         }
       }
 
-      const showAlert = PreferencesManager.loadValue('show_alerts') === '1';
+      const showAlert = PreferencesManager.load('show_alerts') === '1';
 
       if (totalSpentAmt > this.cost && showAlert) {
         const diff = totalSpentAmt - this.cost;

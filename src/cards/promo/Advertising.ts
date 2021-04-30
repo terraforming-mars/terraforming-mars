@@ -16,7 +16,7 @@ export class Advertising extends Card implements IProjectCard {
       cost: 4,
 
       metadata: {
-        cardNumber: 'X14',
+        cardNumber: 'X13',
         renderData: CardRenderer.builder((b) => b.effect('When you play a card with a basic cost of 20 M€ or more, increase your M€ production 1 step.', (be) => {
           be.megacredits(20).asterix().startEffect.production((pb) => pb.megacredits(1));
         })),

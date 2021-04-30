@@ -289,6 +289,26 @@ describe('AresHandler', function() {
     expect(tiles.get(TileType.DUST_STORM_SEVERE)).has.lengthOf(3);
   });
 
+  it('amplifying dust storms does not change desperate measures', function() {
+    game = Game.newInstance('foobar', [player, otherPlayer], player, ARES_OPTIONS_WITH_HAZARDS);
+    while (game.getOxygenLevel() < 4) {
+      game.increaseOxygenLevel(player, 1);
+    }
+
+    let tiles = AresTestHelper.byTileType(AresTestHelper.getHazards(game));
+    expect(tiles.get(TileType.DUST_STORM_MILD)).has.lengthOf(3);
+    expect(tiles.get(TileType.DUST_STORM_SEVERE)).has.lengthOf(0);
+    const protectedTile = tiles.get(TileType.DUST_STORM_MILD)![0];
+    protectedTile.tile!.protectedHazard = true;
+
+    game.increaseOxygenLevel(player, 1);
+
+    tiles = AresTestHelper.byTileType(AresTestHelper.getHazards(game));
+    expect(tiles.get(TileType.DUST_STORM_MILD)).has.lengthOf(0);
+    expect(tiles.get(TileType.DUST_STORM_SEVERE)).has.lengthOf(3);
+    expect(protectedTile.tile!.protectedHazard).is.true;
+  });
+
   it('erosions amplify at -4C', function() {
     game = Game.newInstance('foobar', [player, otherPlayer], player, ARES_OPTIONS_WITH_HAZARDS);
     while (game.getTemperature() < -6) {

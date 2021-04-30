@@ -6,7 +6,7 @@ import {PlayerInputModel} from './PlayerInputModel';
 import {SerializedTimer} from '../SerializedTimer';
 import {GameModel} from './GameModel';
 
-export interface PublicPlayerModel {
+export interface PublicPlayerModel extends GameModel {
   actionsTakenThisRound: number;
   actionsThisGeneration: Array<string /* CardName */>;
   availableBlueCardActionCount: number;
@@ -34,6 +34,7 @@ export interface PublicPlayerModel {
   plantProduction: number;
   plantsAreProtected: boolean;
   playedCards: Array<CardModel>;
+  preludeCardsInHand: Array<CardModel>;
   selfReplicatingRobotsCards: Array<CardModel>;
   steel: number;
   steelProduction: number;

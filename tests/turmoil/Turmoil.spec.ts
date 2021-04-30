@@ -125,6 +125,7 @@ describe('Turmoil', function() {
 
     game.phase = Phase.SOLAR;
     turmoil.endGeneration(game);
+    game.deferredActions.runAll(() => {});
 
     expect(game.getPlayerById(turmoil.chairman!)).to.eq(player);
     // both players lose 1 TR; player gains 1 TR from Reds ruling bonus, 1 TR from chairman

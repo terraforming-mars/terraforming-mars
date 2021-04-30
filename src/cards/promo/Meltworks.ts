@@ -16,7 +16,7 @@ export class Meltworks extends Card implements IActionCard, IProjectCard {
       cost: 4,
 
       metadata: {
-        cardNumber: 'X21',
+        cardNumber: 'X26',
         renderData: CardRenderer.builder((b) => {
           b.action('Spend 5 heat to gain 3 steel.', (eb) => {
             eb.heat(5).digit.startAction.steel(3);

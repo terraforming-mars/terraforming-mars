@@ -7,7 +7,11 @@
     "(Spend 11 M€ to increase your Energy production 1 step.)": "Gaste 11 M$ para aumentar a produção de energia 1 nível.",
     "Sell Patents": "Vender Patentes",
     "Sell patents": "Vender patentes",
+<<<<<<< HEAD
     "(Discard any number of cards to gain that amount of MC.)": "Descarta qualquer número de cartas para ganhar o mesmo número de M$.",
+=======
+    "(Discard any number of cards to gain that amount of M€.)": "Descarta qualquer número de cartas para ganhar o mesmo número de M$.",
+>>>>>>> 18fdc174b1740f9b07097dcb64d7e8765892cef8
     "Asteroid": "Asteroide",
     "asteroid": "asteroide",
     "(Spend 14 M€ to raise temperature 1 step.)":"Gaste 14 M$ para aumentar a temperatura 1 nível.",

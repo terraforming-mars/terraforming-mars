@@ -20,7 +20,7 @@ export class MagneticShield extends Card implements IProjectCard {
 
       requirements: CardRequirements.builder((b) => b.tag(Tags.ENERGY, 3)),
       metadata: {
-        cardNumber: 'X20',
+        cardNumber: 'X24',
         renderData: CardRenderer.builder((b) => b.tr(4).digit),
         description: 'Requires 3 power tags. Raise your TR 4 steps.',
       },

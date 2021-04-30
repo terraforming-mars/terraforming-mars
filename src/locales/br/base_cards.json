@@ -372,7 +372,7 @@
     "Acquired Company": "Aquisição de Companhia",
 
     "Media Archives": "Arquivos de Mídia",
-    "Gain 1 M€ for each event EVER PLAYED by all players.": "Ganhe 1 M$ por cada evento JÁ JOGADO por todos os jugadores.",
+    "Gain 1 M€ for each event EVER PLAYED by all players.": "Ganhe 1 M$ por cada evento JÁ JOGADO por todos os jogadores.",
 
     "Open City": "Cidade ao ar Livre",
     "Requires 12% oxygen. Gain 2 plants. Place a City tile. Decrease your Energy production 1 step and increase your M€ production 4 steps.": "Requer 12% de oxigênio. Diminua sua produção de energia 1 nível e aumente sua produção de M$ em 4. Ganhe 2 plantas e coloque um tile de cidade.",
@@ -663,7 +663,11 @@
     "Raise your TR 1 step for each Jovian tag you have, including this.": "Aumente seu IT 1 nível por cada ícone Joviano que você tiver, incluindo este.",
 
     "Immigration Shuttles": "Naves de Imigração",
+<<<<<<< HEAD
     "Increase your M€ production 5 steps.": "Aumente sua produção de M$ 5 níveis.",
+=======
+    "Increase your M€ production 5 steps.": "Aumente sua produção de M€ 5 níveis.",
+>>>>>>> 18fdc174b1740f9b07097dcb64d7e8765892cef8
     "1 VP for every 3rd City in play.": "1 PV a cada três cidades em jogo.",
 
     "Restricted Area": "Área Restrita",

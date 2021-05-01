@@ -22,7 +22,7 @@ export class TerralabsResearch extends Card implements CorporationCard {
           b.br;
           b.megacredits(14).nbsp.minus().tr(1);
           b.corpBox('effect', (ce) => {
-            ce.effect('Buying cards to hand costs 1MC.', (eb) => {
+            ce.effect('Buying cards to hand costs 1 M€.', (eb) => {
               eb.cards(1).startEffect.megacredits(1);
             });
           });

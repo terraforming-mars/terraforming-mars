@@ -50,7 +50,7 @@
     "Raise temperature 2 steps and place this tile ON EITHER THARSIS THOLUS, ASCRAEUS MONS, PAVONIS MONS OR ARSIA MONS.":"提升温度2格并放置这个版块到以下几个地方之一:'THARSIS THOLUS, ASCRAEUS MONS, PAVONIS MONS OR ARSIA MONS。",
 
     "Marketing Experts": "营销专家",
-    "Effect: When an ADJACENCY BONUS is collected from a tile you own, you gain 1MC.": "效果：当你的版块提供一次相邻收益时，你获得1MC",
+    "Effect: When an ADJACENCY BONUS is collected from a tile you own, you gain 1 M€.": "效果：当你的版块提供一次相邻收益时，你获得1 M€",
     "Increase your M€ production 1 step.": "提升你的MC产量1格.",
 
     "Metallic Asteroid": "金属陨石",
@@ -69,7 +69,7 @@
     "Increase your heat production 4 steps. Place this tile ON AN AREA RESERVED FOR OCEAN.":"提升你的热能产能4格。放置此版块到一个海洋保留区。",
 
     "Natural Preserve": "自然保护区",
-    "Oxygen must be 4% or less. Place this tile NEXT TO NO OTHER TILE. The tile grants an ADJACENCY BONUS of of 1MC. Increase your M€ production 1 step.": "氧气浓度不能高于4%。放置此版块到不与已有版块相邻的格子。此版块的相邻收益为1MC。提升你的MC产能1格",
+    "Oxygen must be 4% or less. Place this tile NEXT TO NO OTHER TILE. The tile grants an ADJACENCY BONUS of of 1 M€. Increase your M€ production 1 step.": "氧气浓度不能高于4%。放置此版块到不与已有版块相邻的格子。此版块的相邻收益为1 M€。提升你的MC产能1格",
     "Oxygen must be 4% or less. Place this tile NEXT TO NO OTHER TILE. Increase your M€ production 1 step.":"氧气浓度不能高于4%。放置此版块到不与已有版块相邻的格子。提升你的MC产能1格",
 
     "Nuclear Zone": "核爆辐射区",

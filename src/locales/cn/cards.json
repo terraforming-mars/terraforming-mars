@@ -13,7 +13,7 @@
     "Requires 3 ocean tiles. Decrease your M€ production 1 step and any heat production 1 step. Increase your Plant production 2 steps.": "需要至少已放置3个湖泊。降低你的MC产能1级,提升你的植物产能2级",
 
     "Search For Life": "寻找生命",
-    "Action: Spend 1 M€ to reveal the top card of the draw deck. If that card has a Microbe tag, add a Science resource here.": "行动:支付1MC,展示计划卡牌库顶的牌。如果该牌有微生物标志,则加1个科研资源方块到本牌",
+    "Action: Spend 1 M€ to reveal the top card of the draw deck. If that card has a Microbe tag, add a Science resource here.": "行动:支付1 M€,展示计划卡牌库顶的牌。如果该牌有微生物标志,则加1个科研资源方块到本牌",
     "3 VPs if you have one or more Science resources here.": "这张牌至少有1个科研资源方块时,获得3分",
     "Oxygen must be 6% or less.":"氧气必须在6%或者以下",
 
@@ -21,7 +21,7 @@
     "Action: Look at the top card and either buy it or discard it": "行动:查看计划卡牌库顶的牌,你可以买它或者弃掉它",
 
     "Martian Rails": "火星高铁",
-    "Action: Spend 1 Energy to gain 1 M€ for each City tile ON MARS.": "行动:花费1电力,火星上每有1个城市,你获得1MC",
+    "Action: Spend 1 Energy to gain 1 M€ for each City tile ON MARS.": "行动:花费1电力,火星上每有1个城市,你获得1 M€",
 
     "Asteroid": "小行星",
     "Raise temperature 1 step and gain 2 titanium. Remove up to 3 Plants from any player.": "提升火星温度1级并获得2个钛合金,移除任一玩家的最多3个植物资源",
@@ -59,7 +59,7 @@
     "Gain 3 Plants, or add 3 Microbes or 2 Animals to ANOTHER card. Place an ocean tile.": "获得3个植物资源,或者放置3个微生物资源或2个动物资源到另一张卡。放置一个海洋版块",
 
     "Research Outpost": "科研前哨站",
-    "Effect: When you play a card, you pay 1 M€ less for it.": "效果: 当你打出一张卡时,少支付1MC",
+    "Effect: When you play a card, you pay 1 M€ less for it.": "效果: 当你打出一张卡时,少支付1 M€",
     "Place a city tile NEXT TO NO OTHER TILE.": "放置一个城市,不能和任何其他版块相邻",
 
     "Phobos Space Haven": "福波斯(火卫一)空间港",
@@ -220,8 +220,8 @@
     "Effect: When you play a card, you pay 2 M€ less for it.": "效果: 当你打牌的时候,费用减少2MC",
 
     "Advanced Alloys": "优化合金",
-    "(Effect: Each titanium you have is worth 1 M€ extra.)": "效果:你的钛合金资源价值+1MC",
-    "(Effect: Each steel you have is worth 1 M€ extra.)": "你的钢铁资源价值+1MC",
+    "(Effect: Each titanium you have is worth 1 M€ extra.)": "效果:你的钛合金资源价值+1 M€",
+    "(Effect: Each steel you have is worth 1 M€ extra.)": "你的钢铁资源价值+1 M€",
 
     "Birds": "鸟",
     "Action: Add an animal to this card.": "行动: 增加一个动物资源到本卡",
@@ -325,7 +325,7 @@
     "Acquired Company": "并购公司",
 
     "Media Archives": "多媒体档案库",
-    "Gain 1 M€ for each event EVER PLAYED by all players.": "所有玩家合计每打出过1个事件,你获得1MC",
+    "Gain 1 M€ for each event EVER PLAYED by all players.": "所有玩家合计每打出过1个事件,你获得1 M€",
 
     "Open City": "开放的城市",
     "Requires 12% oxygen. Gain 2 plants. Place a City tile. Decrease your Energy production 1 step and increase your M€ production 4 steps.": "需要氧气浓度达到12%,获得2个植物资源,放置一个城市版块。降低你的电力产能1级并增加你的MC产能4级。",

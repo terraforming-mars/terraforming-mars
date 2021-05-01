@@ -5,7 +5,6 @@ import {Player} from '../../Player';
 import {ResourceType} from '../../ResourceType';
 import {SelectCard} from '../../inputs/SelectCard';
 import {CardName} from '../../CardName';
-import {LogHelper} from '../../LogHelper';
 import {CardRequirements} from '../CardRequirements';
 import {CardRenderer} from '../render/CardRenderer';
 import {CardRenderDynamicVictoryPoints} from '../render/CardRenderDynamicVictoryPoints';
@@ -53,8 +52,7 @@ export class Extremophiles extends Card implements IActionCard, IResourceCard {
   public action(player: Player) {
     const microbeCards = player.getResourceCards(ResourceType.MICROBE);
     if (microbeCards.length === 1) {
-      player.addResourceTo(this);
-      LogHelper.logAddResource(player, microbeCards[0]);
+      player.addResourceTo(this, {log: true});
       return undefined;
     }
 
@@ -63,8 +61,7 @@ export class Extremophiles extends Card implements IActionCard, IResourceCard {
       'Add microbe',
       microbeCards,
       (foundCards: Array<ICard>) => {
-        player.addResourceTo(foundCards[0], 1);
-        LogHelper.logAddResource(player, foundCards[0]);
+        player.addResourceTo(foundCards[0], {log: true});
         return undefined;
       },
     );

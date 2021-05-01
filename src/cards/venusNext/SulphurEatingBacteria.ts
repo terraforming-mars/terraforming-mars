@@ -48,7 +48,10 @@ export class SulphurEatingBacteria extends Card implements IActionCard, IResourc
   public action(player: Player) {
     const opts: Array<SelectOption | SelectAmount> = [];
 
-    const addResource = new SelectOption('Add 1 microbe to this card', 'Add microbe', () => this.addResource(player));
+    const addResource = new SelectOption('Add 1 microbe to this card', 'Add microbe', () => {
+      player.addResourceTo(this, {log: true});
+      return undefined;
+    });
     const spendResource = new SelectAmount('Remove any number of microbes to gain 3 M€ per microbe removed', 'Remove microbes', (amount: number) => this.spendResource(player, amount), 1, this.resourceCount, true);
 
     opts.push(addResource);
@@ -56,16 +59,11 @@ export class SulphurEatingBacteria extends Card implements IActionCard, IResourc
     if (this.resourceCount > 0) {
       opts.push(spendResource);
     } else {
-      return this.addResource(player);
+      player.addResourceTo(this, {log: true});
+      return undefined;
     }
 
     return new OrOptions(...opts);
-  }
-
-  private addResource(player: Player) {
-    player.addResourceTo(this);
-    LogHelper.logAddResource(player, this);
-    return undefined;
   }
 
   private spendResource(player: Player, amount: number) {

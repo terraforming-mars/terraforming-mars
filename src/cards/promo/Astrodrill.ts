@@ -89,8 +89,7 @@ export class Astrodrill extends Card implements IActionCard, CorporationCard {
       });
 
       const addResourceToSelf = new SelectOption('Add 1 asteroid to this card', 'Add asteroid', () => {
-        player.addResourceTo(this);
-        LogHelper.logAddResource(player, this);
+        player.addResourceTo(this, {log: true});
 
         return undefined;
       });
@@ -100,8 +99,7 @@ export class Astrodrill extends Card implements IActionCard, CorporationCard {
         'Add asteroid',
         asteroidCards,
         (foundCards: Array<ICard>) => {
-          player.addResourceTo(foundCards[0], 1);
-          LogHelper.logAddResource(player, foundCards[0]);
+          player.addResourceTo(foundCards[0], {log: true});
 
           return undefined;
         },

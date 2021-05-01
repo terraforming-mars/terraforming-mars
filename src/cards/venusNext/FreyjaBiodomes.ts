@@ -52,10 +52,9 @@ export class FreyjaBiodomes extends Card {
         'Add resources',
         cards,
         (foundCards: Array<ICard>) => {
-          player.addResourceTo(foundCards[0], 2);
+          player.addResourceTo(foundCards[0], {qty: 2, log: true});
           player.addProduction(Resources.ENERGY, -1);
           player.addProduction(Resources.MEGACREDITS, 2);
-          LogHelper.logAddResource(player, foundCards[0], 2);
           return undefined;
         },
       );

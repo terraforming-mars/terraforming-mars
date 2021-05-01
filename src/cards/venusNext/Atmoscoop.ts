@@ -9,7 +9,6 @@ import {ResourceType} from '../../ResourceType';
 import {SelectCard} from '../../inputs/SelectCard';
 import {ICard} from '../ICard';
 import {CardName} from '../../CardName';
-import {LogHelper} from '../../LogHelper';
 import * as constants from './../../constants';
 import {PartyHooks} from '../../turmoil/parties/PartyHooks';
 import {PartyName} from '../../turmoil/parties/PartyName';
@@ -76,8 +75,7 @@ export class Atmoscoop extends Card implements IProjectCard {
       'Add floaters',
       floaterCards,
       (foundCards: Array<ICard>) => {
-        player.addResourceTo(foundCards[0], 2);
-        LogHelper.logAddResource(player, foundCards[0], 2);
+        player.addResourceTo(foundCards[0], {qty: 2, log: true});
         return undefined;
       },
     );
@@ -90,8 +88,8 @@ export class Atmoscoop extends Card implements IProjectCard {
 
     switch (floaterCards.length) {
     case 1:
-      player.addResourceTo(floaterCards[0], 2);
-      LogHelper.logAddResource(player, floaterCards[0], 2);
+      player.addResourceTo(floaterCards[0], {qty: 2, log: true});
+      // Intentional fall-through
 
     case 0:
       if (!this.temperatureIsMaxed(game) && !this.venusIsMaxed(game)) {

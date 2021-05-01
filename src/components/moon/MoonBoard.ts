@@ -60,8 +60,6 @@ export const MoonBoard = Vue.component('moonboard', {
         throw 'Wrong parameter to get values from';
       }
 
-      console.log(`parameter ${targetParameter}, value ${curValue}`);
-
       const values: Array<MoonParamLevel> = [];
       for (let value: number = 8; value >= 0; value -= 1) {
         const strValue = value.toString();

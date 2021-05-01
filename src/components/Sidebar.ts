@@ -8,7 +8,9 @@ import {GameSetupDetail} from './GameSetupDetail';
 import {GameOptionsModel} from '../models/GameOptionsModel';
 import {TranslateMixin} from './TranslateMixin';
 import {GlobalParameterValue} from './GlobalParameterValue';
+import {MoonGlobalParameterValue} from './MoonGlobalParameterValue';
 import {GlobalParameter} from '../GlobalParameter';
+import {MoonModel} from '../models/MoonModel';
 
 export const Sidebar = Vue.component('sidebar', {
   props: {
@@ -42,6 +44,9 @@ export const Sidebar = Vue.component('sidebar', {
     venus: {
       type: Number,
     },
+    moonData: {
+      type: Object as () => MoonModel,
+    },
     turmoil: {
       type: Object as () => TurmoilModel || undefined,
     },
@@ -52,6 +57,7 @@ export const Sidebar = Vue.component('sidebar', {
   components: {
     'game-setup-detail': GameSetupDetail,
     'global-parameter-value': GlobalParameterValue,
+    'moon-global-parameter-value': MoonGlobalParameterValue,
   },
   mixins: [TranslateMixin],
   data: function() {
@@ -181,6 +187,7 @@ export const Sidebar = Vue.component('sidebar', {
     <global-parameter-value :param="this.globalParameter.OXYGEN" :value="this.oxygen"></global-parameter-value>
     <global-parameter-value :param="this.globalParameter.OCEANS" :value="this.oceans"></global-parameter-value>
     <global-parameter-value v-if="gameOptions.venusNextExtension" :param="this.globalParameter.VENUS" :value="this.venus"></global-parameter-value>
+    <moon-global-parameter-value v-if="gameOptions.moonExpansion" :moonData="this.moonData"></moon-global-parameter-value>
   </div>
 
   <div class="preferences_item preferences_player">

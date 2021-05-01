@@ -18,7 +18,7 @@
   "Action: Remove 1 asteroid here to raise temperature 1 step.": "Akcja: Wydaj 1 jednostkę asteroid z tej karty i podnieś temperaturę o 2°C.",
 
   "Field-Capped City": "Field-Capped City",
-  "Increase your M€ production 2 steps, increase your energy production 1 step, gain 3 plants, and place a city tile.": "Podnieś swoją produkcję energii o 1 poziom. Podnieś swoją produkcję MC o 2 poziomy. Otrzymujesz 3 jednostki roślinności. Umieść na planszy obszar miasta.",
+  "Increase your M€ production 2 steps, increase your energy production 1 step, gain 3 plants, and place a city tile.": "Podnieś swoją produkcję energii o 1 poziom. Podnieś swoją produkcję M€ o 2 poziomy. Otrzymujesz 3 jednostki roślinności. Umieść na planszy obszar miasta.",
 
   "Magnetic Shield": "Magnetic Shield",
   "Requires 2 power tags. Raise your TR 4 steps.": "Wymagania: Musisz posiadać przynajmniej 2 symbole energii. Podnieś swój współczynnik terraformacji o 4.",
@@ -52,7 +52,7 @@
   "Requires 2 science tags.": "Musisz posiadać przynajmniej 2 symbole nauki.",
 
   "Potatoes": "Potatoes",
-  "Lose 2 plants. Increase your M€ production 2 steps.": "Tracisz 2 jednostki roślinności. Podnieś swoją produkcję MC o 2 poziomy.",
+  "Lose 2 plants. Increase your M€ production 2 steps.": "Tracisz 2 jednostki roślinności. Podnieś swoją produkcję M€ o 2 poziomy.",
 
   "Meat Industry": "Meat Industry",
   "Effect: When you gain an animal to ANY CARD, gain 2MC.": "Efekt trwały: Gdy umieszczasz jednostkę zwierząt na dowolnej karcie, otrzymujesz 2 MC.",
@@ -61,7 +61,7 @@
 
   "Orbital Cleanup": "Sprzątanie Orbitalne",
   "Action: Gain 1 M€ per Science tag you have.": "Akcja: Otrzymujesz 1 M€ za każdy posiadany symbol nauki.",
-  "Decrease your M€ production 2 steps.": "Obniż swoją produkcję MC o 2 poziomy.",
+  "Decrease your M€ production 2 steps.": "Obniż swoją produkcję M€ o 2 poziomy.",
 
   "Law Suit": "Pozew",
   "Steal 3 M€ from a player that REMOVED YOUR RESOURCES OR DECREASED YOUR PRODUCTION this generation. Place this card face down in THAT PLAYER'S EVENT PILE.": "Ukradnij 3 M€ graczowi, który podczas tego pokolenia OBNIŻYŁ TWOJĄ PRODUKCJĘ LUB USUNĄŁ TWOJE ZASOBY. Umieść tę kartę zakrytą na STOSIE WYDARZEŃ TEGO GRACZA.",
@@ -70,20 +70,20 @@
   "Increase temperature 1 step. Remove up to 2 plants from any player.": "Podnieś temperaturę o 2°C. Usuń do 2 jednostek roślinności dowolnego gracza.",
 
   "Asteroid Hollowing": "Asteroid Hollowing",
-  "Action: Spend 1 titanium to add 1 asteroid resource here and increase M€ production 1 step.": "Akcja: Wydaj 1 jednostkę tytanu, żeby umieścić tu 1 jednostkę asteroid i podnieść swoją produkcję MC o 1 poziom.",
+  "Action: Spend 1 titanium to add 1 asteroid resource here and increase M€ production 1 step.": "Akcja: Wydaj 1 jednostkę tytanu, żeby umieścić tu 1 jednostkę asteroid i podnieść swoją produkcję M€ o 1 poziom.",
   "1VP for each 2 asteroids on this card.": "Otrzymujesz 1 PZ za każde 2 jednostki asteroid na tej karcie.",
 
   "Project Inspection": "Kontrola projektu",
   "Use a card action that has been used this generation.": "Wykonaj akcję z karty aktywnej, z której skorzystałeś już podczas tego pokolenia.",
 
   "Advertising": "Advertising",
-  "Effect: When you play a card with a basic cost of 20 M€ or more, increase your M€ production 1 step.": "Efekt trwały: Gdy zagrywasz kartę o podstawowym koszcie wynoszącym 20 M€ lub więcej, podnieś swoją produkcję MC o 1 poziom.",
+  "Effect: When you play a card with a basic cost of 20 M€ or more, increase your M€ production 1 step.": "Efekt trwały: Gdy zagrywasz kartę o podstawowym koszcie wynoszącym 20 M€ lub więcej, podnieś swoją produkcję M€ o 1 poziom.",
 
   "Rego Plastics": "Regoplastik",
   "Effect: Your steel resources are worth 1 M€ extra.": "Efekt trwały: Twoje jednostki stali są warte o 1 M€ więcej.",
 
   "Interplanetary Trade": "Handel międzyplanetarny",
-  "Increase your M€ production 1 step per different tag you have in play, including this.": "Podnieś swoją produkcję MC o tyle poziomów, ile różnych symboli posiadasz (włącznie z tym).",
+  "Increase your M€ production 1 step per different tag you have in play, including this.": "Podnieś swoją produkcję M€ o tyle poziomów, ile różnych symboli posiadasz (włącznie z tym).",
 
   "Penguins": "Pingwiny",
   "Action: Add 1 Animal to this card.": "Akcja: Umieść na tej karcie 1 jednostkę zwierząt.",
@@ -111,13 +111,13 @@
 
   "Asteroid Rights": "Asteroid Rights",
   "Action: Spend 1 M€ to add 1 asteroid to ANY card.": "Akcja: Wydaj 1 MC, żeby umieścić 1 jednostkę asteroid na dowolnej karcie.",
-  "Action: Spend 1 asteroid here to increase M€ production 1 step OR gain 2 titanium.": "Akcja: Wydaj 1 jednostkę asteroid z tej karty i podnieś swoją produkcję MC o 1 poziom lub otrzymaj 2 jednostki tytanu.",
+  "Action: Spend 1 asteroid here to increase M€ production 1 step OR gain 2 titanium.": "Akcja: Wydaj 1 jednostkę asteroid z tej karty i podnieś swoją produkcję M€ o 1 poziom lub otrzymaj 2 jednostki tytanu.",
   "Add 2 asteroids to this card.": "Umieść na tej karcie 2 jednostki asteroid.",
 
   "Stanford Torus": "Torus Stanforda",
   "Place a city tile IN SPACE, outside and separate from the planet.": "Umieść obszar miasta w PRZESTRZENI KOSMICZNEJ, poza planetą, bez sąsiedztwa z innymi obszarami.",
 
-  "You start with 48 MC. Increase your M€ production 4 steps. ALL OPPONENTS DECREASE THEIR M€ production 2 STEPS. THIS DOES NOT TRIGGER THE EFFECT BELOW.": "Rozpoczynasz grę z 48 M€ i 4 dodatkowymi poziomami produkcji MC. KAŻDY PRZECIWNIK OBNIŻA SWOJĄ PRODUKCJĘ MC O 2 POZIOMY. NIE WYWOŁUJE TO PONIŻSZEGO EFEKTU.",
+  "You start with 48 MC. Increase your M€ production 4 steps. ALL OPPONENTS DECREASE THEIR M€ production 2 STEPS. THIS DOES NOT TRIGGER THE EFFECT BELOW.": "Rozpoczynasz grę z 48 M€ i 4 dodatkowymi poziomami produkcji MC. KAŻDY PRZECIWNIK OBNIŻA SWOJĄ PRODUKCJĘ M€ O 2 POZIOMY. NIE WYWOŁUJE TO PONIŻSZEGO EFEKTU.",
   "Effect: When a player causes another player to decrease production or lose resources, pay 3M€ to the victim, or as much as possible.": "Efekt trwały: Gdy jakiś gracz spowoduje, że inny gracz musi obniżyć produkcję lub stracić zasoby, zapłać poszkodowanemu graczowi 3M€ (lub tyle, ile możesz).",
 
   "You start with 47 MC. As your first action, place a greenery tile and raise the oxygen 1 step.": "Rozpoczynasz grę z 47 MC. W ramach swojej pierwszej akcji w grze umieść obszar zieleni na planszy i podnieś poziom tlenu o 1%.",

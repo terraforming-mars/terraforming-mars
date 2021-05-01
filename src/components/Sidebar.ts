@@ -1,15 +1,15 @@
 import Vue from 'vue';
 import {Color} from '../Color';
-import {PreferencesManager} from './PreferencesManager';
+import {preferences, PreferencesManager} from './PreferencesManager';
 import {LANGUAGES} from '../constants';
 import {MAX_OCEAN_TILES, MAX_TEMPERATURE, MAX_OXYGEN_LEVEL, MAX_VENUS_SCALE} from '../constants';
 import {TurmoilModel} from '../models/TurmoilModel';
 import {PartyName} from '../turmoil/parties/PartyName';
-import {GameSetupDetail} from '../components/GameSetupDetail';
+import {GameSetupDetail} from './GameSetupDetail';
 import {GameOptionsModel} from '../models/GameOptionsModel';
 import {TranslateMixin} from './TranslateMixin';
 
-export const Preferences = Vue.component('preferences', {
+export const Sidebar = Vue.component('sidebar', {
   props: {
     playerNumber: {
       type: Number,
@@ -96,8 +96,8 @@ export const Preferences = Vue.component('preferences', {
             string,
             boolean | string
             > {
-      for (const k of PreferencesManager.keys) {
-        const val = PreferencesManager.loadValue(k);
+      for (const k of preferences) {
+        const val = PreferencesManager.load(k);
         if (k === 'lang') {
           PreferencesManager.preferencesValues.set(k, this.$data[k]);
           this[k] = val || 'en';
@@ -112,7 +112,7 @@ export const Preferences = Vue.component('preferences', {
     },
     updatePreferences: function(_evt: any): void {
       let strVal: string = '';
-      for (const k of PreferencesManager.keys) {
+      for (const k of preferences) {
         const val = PreferencesManager.preferencesValues.get(k);
         if (val !== this.$data[k]) {
           if (k === 'lang') {
@@ -120,23 +120,23 @@ export const Preferences = Vue.component('preferences', {
           } else {
             strVal = this.$data[k] ? '1' : '0';
           }
-          PreferencesManager.saveValue(k, strVal);
+          PreferencesManager.save(k, strVal);
           PreferencesManager.preferencesValues.set(k, this.$data[k]);
           this.setPreferencesCSS(this.$data[k], k);
         }
       }
     },
     syncPreferences: function(): void {
-      for (const k of PreferencesManager.keys) {
+      for (const k of preferences) {
         this.$data[k] = PreferencesManager.preferencesValues.get(k);
         this.setPreferencesCSS(this.$data[k], k);
       }
     },
     getPlayerColorCubeClass: function(): string {
-      return this.acting_player && (PreferencesManager.loadBooleanValue('hide_animated_sidebar') === false) ? 'preferences_player_inner active' : 'preferences_player_inner';
+      return this.acting_player && (PreferencesManager.loadBoolean('hide_animated_sidebar') === false) ? 'preferences_player_inner active' : 'preferences_player_inner';
     },
     getSideBarClass: function(): string {
-      return this.acting_player && (PreferencesManager.loadBooleanValue('hide_animated_sidebar') === false) ? 'preferences_acting_player' : 'preferences_nonacting_player';
+      return this.acting_player && (PreferencesManager.loadBoolean('hide_animated_sidebar') === false) ? 'preferences_acting_player' : 'preferences_nonacting_player';
     },
     getGenMarker: function(): string {
       return `${this.generation}`;
@@ -328,7 +328,7 @@ export const Preferences = Vue.component('preferences', {
                     <div class="preferences_panel_item">
                         <label class="form-switch">
                             <input type="checkbox" v-on:change="updatePreferences" v-model="learner_mode" />
-                            <i class="form-icon"></i> 
+                            <i class="form-icon"></i>
                             <span v-i18n>Learner Mode (req. refresh)</span>
                             <span class="tooltip tooltip-left" data-tooltip="Show information that can be helpful\n to players who are still learning the games">&#9432;</span>
                         </label>

@@ -22,14 +22,11 @@ export const TopBar = Vue.component('top-bar', {
       this.componentKey += 1;
     },
     toggleBar() {
-      const newVal = this.isExpanded() ? '1': '';
-      PreferencesManager.saveValue('hide_top_bar', newVal);
-      PreferencesManager.preferencesValues.set('hide_top_bar', this.isExpanded());
+      PreferencesManager.save('hide_top_bar', this.isExpanded(), true);
       this.forceRerender();
     },
     isExpanded(): boolean {
-      const val = PreferencesManager.loadValue('hide_top_bar');
-      return val !== '1';
+      return !PreferencesManager.loadBoolean('hide_top_bar');
     },
     formatCssClass(): string {
       const cssClasses = ['top-bar'];

@@ -54,8 +54,8 @@ generateVueClass(
   [],
 );
 generateVueClass(
-  'src/components/CardsFilter',
-  require('./build/src/components/CardsFilter').CardsFilter,
+  'src/components/create/CardsFilter',
+  require('./build/src/components/create/CardsFilter').CardsFilter,
   ['selectedCardNames', 'foundCardNames', 'searchTerm'],
 );
 generateVueClass(
@@ -164,8 +164,8 @@ generateVueClass(
   ['timerText'],
 );
 generateVueClass(
-  'src/components/Preferences',
-  require('./build/src/components/Preferences').Preferences,
+  'src/components/Sidebar',
+  require('./build/src/components/Sidebar').Sidebar,
   [
     'ui', 'hide_hand', 'hide_awards_and_milestones',
     'hide_top_bar', 'small_cards', 'remove_background', 'magnify_cards',

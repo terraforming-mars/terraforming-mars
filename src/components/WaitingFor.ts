@@ -84,7 +84,7 @@ export const WaitingFor = Vue.component('waiting-for', {
       clearTimeout(ui_update_timeout_id);
       const askForUpdate = () => {
         const xhr = new XMLHttpRequest();
-        xhr.open('GET', '/api/waitingfor' + window.location.search + '&gameAge=' + this.player.gameAge + '&undoCount=' + this.player.undoCount);
+        xhr.open('GET', '/api/waitingfor' + window.location.search + '&gameAge=' + this.player.game.gameAge + '&undoCount=' + this.player.game.undoCount);
         xhr.onerror = function() {
           root.showAlert('Unable to reach the server. The server may be restarting or down for maintenance.', () => vueApp.waitForUpdate());
         };
@@ -94,16 +94,20 @@ export const WaitingFor = Vue.component('waiting-for', {
             if (result.result === 'GO') {
               root.updatePlayer();
 
-              if (Notification.permission !== 'granted') {
-                Notification.requestPermission();
+              // Only show notification for multi-player games
+              // todo bafolts remove once undo refactor complete
+              if (this.player.players.length > 1) {
+                if (Notification.permission !== 'granted') {
+                  Notification.requestPermission();
+                }
+                if (Notification.permission === 'granted') {
+                  new Notification(constants.APP_NAME, {
+                    icon: '/favicon.ico',
+                    body: 'It\'s your turn!',
+                  });
+                }
               }
-              if (Notification.permission === 'granted') {
-                new Notification(constants.APP_NAME, {
-                  icon: '/favicon.ico',
-                  body: 'It\'s your turn!',
-                });
-              }
-              const soundsEnabled = PreferencesManager.loadValue('enable_sounds') === '1';
+              const soundsEnabled = PreferencesManager.load('enable_sounds') === '1';
               if (soundsEnabled) SoundManager.playActivePlayerSound();
 
               // We don't need to wait anymore - it's our turn
@@ -130,7 +134,12 @@ export const WaitingFor = Vue.component('waiting-for', {
     window.clearInterval(documentTitleTimer);
     if (this.waitingfor === undefined) {
       this.waitForUpdate();
-      return createElement('div', $t('Not your turn to take any actions'));
+      let message = 'Not your turn to take any actions';
+      // todo bafolts remove once undo refactor complete
+      if (this.players.length === 1) {
+        message = '';
+      }
+      return createElement('div', $t(message));
     }
     if (this.player.players.length > 1 && this.player.waitingFor !== undefined) {
       documentTitleTimer = window.setInterval(() => this.animateTitle(), 1000);
@@ -153,7 +162,7 @@ export const WaitingFor = Vue.component('waiting-for', {
           root.player = xhr.response;
           root.playerkey++;
           root.screen = 'player-home';
-          if (this.player.phase === 'end' && window.location.pathname !== '/the-end') {
+          if (this.player.game.phase === 'end' && window.location.pathname !== '/the-end') {
             (window).location = (window).location;
           }
         } else if (xhr.status === 400 && xhr.responseType === 'json') {

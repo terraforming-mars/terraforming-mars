@@ -349,11 +349,11 @@ export class Player implements ISerializable<SerializedPlayer> {
             .string(modifier)
             .number(Math.abs(amount)));
       }
+    }
 
-      // Mons Insurance hook
-      if (amount < 0 && options?.from !== undefined && options.from !== this) {
-        this.resolveMonsInsurance();
-      }
+    // Mons Insurance hook
+    if (options?.from !== undefined && amount < 0 && (options.from instanceof Player && options.from.id !== this.id)) {
+      this.resolveMonsInsurance();
     }
   }
 
@@ -398,11 +398,11 @@ export class Player implements ISerializable<SerializedPlayer> {
             .string(modifier)
             .number(Math.abs(amount)));
       }
+    }
 
-      // Mons Insurance hook
-      if (amount < 0 && options.from !== undefined && options.from !== this) {
-        this.resolveMonsInsurance();
-      }
+    // Mons Insurance hook
+    if (options?.from !== undefined && amount < 0 && (options.from instanceof Player && options.from.id !== this.id)) {
+      this.resolveMonsInsurance();
     }
 
     // Manutech hook
@@ -1663,10 +1663,25 @@ export class Player implements ISerializable<SerializedPlayer> {
   // Propose a new action to undo last action
   private undoTurnOption(): PlayerInput {
     return new SelectOption('Undo last action', 'Undo', () => {
-      GameLoader.getInstance().restoreGameAt(this.game.id, this.game.lastSaveId - 2, (game) => {
-        if (game !== undefined) {
-          this.usedUndo = true; // To prevent going back into takeAction()
+      /**
+       * The usedUndo flag is used as a kill switch. Once this flag
+       * is set on an instance we don't expect that instance to take
+       * further action or be used. We assume the `GameLoader` is going
+       * to create a new `Player` instance to use with the a `Game`.
+       */
+      this.usedUndo = true; // To prevent going back into takeAction()
+      GameLoader.getInstance().restoreGameAt(this.game.id, this.game.lastSaveId - 2, (err) => {
+        // If there is an error with restoring the game from the database this undo action has failed.
+        // We need a mechanism to tell the user this has failed. By now the `res` has been sent.
+        // For now we will keep this player instance going and hope player discovers what has happened.
+        if (err) {
+          this.game.log('Unable to perform undo operation', () => {}, {reservedFor: this});
+          this.usedUndo = false;
+          this.takeAction();
+          return;
         }
+        // If there was no error the GameLoader has loaded the old version of `Player`
+        // This instance of `Player` will eventually be garbage collected.
       });
       return undefined;
     });
@@ -1804,8 +1819,13 @@ export class Player implements ISerializable<SerializedPlayer> {
   }
 
   public takeAction(): void {
+    /**
+     * Once an undo has been used we switch to
+     * the new instance of `Player` pulled from
+     * database. This instance, where the undo was performed,
+     * should no longer take actions.
+     */
     if (this.usedUndo) {
-      this.usedUndo = false;
       return;
     }
 

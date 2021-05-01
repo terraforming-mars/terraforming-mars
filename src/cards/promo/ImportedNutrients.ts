@@ -18,7 +18,7 @@ export class ImportedNutrients extends Card implements IProjectCard {
       cost: 14,
 
       metadata: {
-        cardNumber: 'X26',
+        cardNumber: 'X22',
         renderData: CardRenderer.builder((b) => {
           b.plants(4).digit.nbsp.microbes(4).digit.asterix();
         }),

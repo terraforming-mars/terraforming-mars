@@ -152,7 +152,7 @@ export const SelectInitialCards = Vue.component('select-initial-cards', {
       return starting;
     },
     saveIfConfirmed: function() {
-      if (PreferencesManager.loadValue('show_alerts') === '1' && this.selectedCards.length === 0) {
+      if (PreferencesManager.load('show_alerts') === '1' && this.selectedCards.length === 0) {
         (this.$refs['confirmation'] as any).show();
       } else {
         this.saveData();

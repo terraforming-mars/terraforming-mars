@@ -1,7 +1,7 @@
 
 import Vue from 'vue';
 import {Button} from '../components/common/Button';
-import {GameHomeModel} from '../models/GameHomeModel';
+import {SimpleGameModel} from '../models/SimpleGameModel';
 import {mainAppSettings} from './App';
 
 import * as constants from '../constants';
@@ -28,7 +28,7 @@ export const LoadGameForm = Vue.component('load-game-form', {
       };
       xhr.onload = () => {
         if (xhr.status === 200) {
-          const response = xhr.response as GameHomeModel;
+          const response = xhr.response as SimpleGameModel;
           if (response.players.length === 1) {
             window.location.href = '/player?id=' + response.players[0].id;
             return;
@@ -59,7 +59,7 @@ export const LoadGameForm = Vue.component('load-game-form', {
                         <input class="form-input form-inline load-game-id" :placeholder="'Game Id'" v-model="gameId" /><br/>
                         <label for="rollbackCount">Number of saves to delete before loading:</label><br/>
                         <input class="form-input form-inline load-game-id" value="0" v-model="rollbackCount" /><br/>
-                        <Button title="Load Game" size="big" type="success" :onClick="loadGame" /> 
+                        <Button title="Load Game" size="big" type="success" :onClick="loadGame" />
                     </div>
                 </div>
             </div>

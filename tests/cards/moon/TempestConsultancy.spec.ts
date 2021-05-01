@@ -69,6 +69,7 @@ describe('TempestConsultancy', () => {
     expect(player.getTerraformRating()).eq(20);
 
     turmoil.setRulingParty(game);
+    game.deferredActions.runAll(() => {});
 
     expect(turmoil.chairman).eq(player.id);
     expect(player.getTerraformRating()).eq(22);

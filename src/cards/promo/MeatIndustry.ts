@@ -14,7 +14,7 @@ export class MeatIndustry extends Card implements IProjectCard {
       cost: 5,
 
       metadata: {
-        cardNumber: 'X30',
+        cardNumber: 'X25',
         renderData: CardRenderer.builder((b) => {
           b.effect('When you gain an animal to ANY CARD, gain 2MC.', (eb) => {
             eb.animals(1).asterix().startEffect.megacredits(2);

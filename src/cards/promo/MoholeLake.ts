@@ -23,7 +23,7 @@ export class MoholeLake extends Card implements IActionCard, IProjectCard {
       cost: 31,
 
       metadata: {
-        cardNumber: 'X22',
+        cardNumber: 'X27',
         renderData: CardRenderer.builder((b) => {
           b.action('Add a microbe or animal to ANOTHER card.', (eb) => {
             eb.empty().startAction.microbes(1).asterix();

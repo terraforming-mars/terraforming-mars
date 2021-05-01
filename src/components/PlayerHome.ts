@@ -6,7 +6,7 @@ import {Milestone} from './Milestone';
 import {Award} from './Award';
 import {PlayersOverview} from './overview/PlayersOverview';
 import {WaitingFor} from './WaitingFor';
-import {Preferences} from './Preferences';
+import {Sidebar} from './Sidebar';
 import {PlayerModel} from '../models/PlayerModel';
 import {Colony} from './Colony';
 import {LogPanel} from './LogPanel';
@@ -65,7 +65,7 @@ export const PlayerHome = Vue.component('player-home', {
     'waiting-for': WaitingFor,
     'milestone': Milestone,
     'award': Award,
-    'preferences': Preferences,
+    'sidebar': Sidebar,
     'colony': Colony,
     'log-panel': LogPanel,
     'turmoil': Turmoil,
@@ -194,7 +194,7 @@ export const PlayerHome = Vue.component('player-home', {
                 </div>
             </div>
 
-            <preferences v-trim-whitespace
+            <sidebar v-trim-whitespace
               :acting_player="isPlayerActing(player)"
               :player_color="player.color"
               :generation="player.game.generation"
@@ -208,7 +208,7 @@ export const PlayerHome = Vue.component('player-home', {
               :playerNumber = "player.players.length"
               :lastSoloGeneration = "player.game.lastSoloGeneration">
                 <div class="deck-size">{{ player.game.deckSize }}</div>
-            </preferences>
+            </sidebar>
 
             <div v-if="player.corporationCard">
 

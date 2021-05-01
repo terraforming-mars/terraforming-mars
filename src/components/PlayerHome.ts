@@ -348,10 +348,9 @@ export const PlayerHome = Vue.component('player-home', {
 
                 <dynamic-title title="Game details" :color="player.color"/>
 
-
                 <div class="player_home_block" v-if="player.players.length > 1">
-                    <milestone :milestones_list="player.game.milestones" />
-                    <award :awards_list="player.game.awards" />
+                    <milestone :show_scores="false" :milestones_list="player.game.milestones" />
+                    <award :show_scores="false" :awards_list="player.game.awards" />
                 </div>
 
                 <div class="player_home_block player_home_block--turnorder nofloat" v-if="player.players.length>1">

@@ -18,7 +18,7 @@ export class SaturnSystems extends Card implements CorporationCard {
 
       metadata: {
         cardNumber: 'R03',
-        description: 'You start with 1 titanium production and 42 MC.',
+        description: 'You start with 1 titanium production and 42 M€.',
         renderData: CardRenderer.builder((b) => {
           b.br;
           b.production((pb) => pb.titanium(1)).nbsp.megacredits(42);

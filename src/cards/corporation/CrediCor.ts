@@ -16,7 +16,7 @@ export class CrediCor extends Card implements CorporationCard {
 
       metadata: {
         cardNumber: 'R08',
-        description: 'You start with 57 MC.',
+        description: 'You start with 57 M€.',
         renderData: CardRenderer.builder((b) => {
           b.br.br.br;
           b.megacredits(57);

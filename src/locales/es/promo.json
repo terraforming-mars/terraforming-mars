@@ -110,7 +110,7 @@
 
   "Energy Market":"Mercado Energético",
   "Action: Spend 2X M€ to gain X energy.":"Acción: gasta 2X M€ para obtener X recursos de energía.",
-  "Action: Decrease energy production 1 step to gain 8 MC.":"Acción: disminuye 1 nivel tu producción de energía para ganar 8 M€.",
+  "Action: Decrease energy production 1 step to gain 8 M€.":"Acción: disminuye 1 nivel tu producción de energía para ganar 8 M€.",
 
   "Asteroid Rights":"Derechos de Asteroides",
   "Action: Spend 1 M€ to add 1 asteroid to ANY card.": "Acción: gasta 1 M€ para ñadir un asteroide a CUALQUIER carta.",
@@ -120,10 +120,10 @@
   "Stanford Torus":"Stanford Torus",
   "Place a city tile IN SPACE, outside and separate from the planet.":"Coloca una loseta de la ciudad EN EL ESPACIO, fuera y separada del planeta.",
 
-  "You start with 48 MC. Increase your M€ production 4 steps. ALL OPPONENTS DECREASE THEIR M€ production 2 STEPS. THIS DOES NOT TRIGGER THE EFFECT BELOW.": "",
+  "You start with 48 M€. Increase your M€ production 4 steps. ALL OPPONENTS DECREASE THEIR M€ production 2 STEPS. THIS DOES NOT TRIGGER THE EFFECT BELOW.": "",
   "Effect: When a player causes another player to decrease production or lose resources, pay 3M€ to the victim, or as much as possible.": "",
 
-  "You start with 47 MC. As your first action, place a greenery tile and raise the oxygen 1 step.": "",
+  "You start with 47 M€. As your first action, place a greenery tile and raise the oxygen 1 step.": "",
   "Effect: Each new adjacency between your tile and an opponent's tile gives you a standard resource of your choice [regardless of who just placed a tile].": "",
 
   "Arcadian": "",
@@ -132,8 +132,8 @@
   "ACTION: PLACE A COMMUNITY (PLAYER MARKER) ON A NON-RESERVED AREA ADJACENT TO ONE OF YOUR TILES OR MARKED AREAS": "",
   "EFFECT: MARKED AREAS ARE RESERVED FOR YOU. WHEN YOU PLACE A TILE THERE, GAIN 3 M€": "",
 
-  "You start with 44 MC. As your first action, reveal cards until you have revealed a microbe tag. Take it and discard the rest.": "",
-  "Effect: when a microbe tag is played, incl. this, THAT PLAYER gains 2 MC, or adds a microbe to THAT card, and you gain 2 MC.": "",
+  "You start with 44 M€. As your first action, reveal cards until you have revealed a microbe tag. Take it and discard the rest.": "",
+  "Effect: when a microbe tag is played, incl. this, THAT PLAYER gains 2 M€, or adds a microbe to THAT card, and you gain 2 M€.": "",
 
   "Raise temperature 3 steps and gain 4 steel. Place this tile ADJACENT TO no other city tile. Remove up to 6 Plants from any player.":"Aumenta la temperatura 3 niveles y obtén 4 de acero. Coloca esta loseta NO ADYACENTE a una ciudad. Elimina hasta 6 plantas de un jugador. ",
 
@@ -145,7 +145,7 @@
 
   "Decrease your Energy production 4 steps and increase your Plant production 2 step. Raise your TR 3 step.": "",
 
-  "You start with 37 MC. Increase your steel production 1 step.": "",
+  "You start with 37 M€. Increase your steel production 1 step.": "",
   "Action: Increase your energy production 1 step IF YOU HAVE NO ENERGY RESOURCES, or spend 3M€ to draw a building card.": "",
 
   "You start with 38 M€ and 1 steel production.": "",
@@ -153,5 +153,5 @@
 
   "Requires 8 oceans. 1 VP for each animal on this card.":"Requiere 8 océanos. 1 PV por cada animal en esta carta.",
   "Requires 2 Science tags.":"Requiere 2 símbolos de ciencia",
-  "Action: Spend 2X M€ to gain X energy, or decrease energy production 1 step to gain 8 MC.":""
+  "Action: Spend 2X M€ to gain X energy, or decrease energy production 1 step to gain 8 M€.":""
 }

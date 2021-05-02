@@ -1,24 +1,24 @@
 {
   "Aphrodite":"阿芙罗狄蒂",
-  "You start with 1 plant production and 47 MC.":"起始获得47MC,提升植物产能1级",
+  "You start with 1 plant production and 47 M€.":"起始获得47MC,提升植物产能1级",
   "Effect: Whenever Venus is terraformed 1 step, you gain 2MC.":"效果:每当金星改造度提升1格,你都获得2MC",
 
   "Celestic":"天体公司",
-  "You start with 42 MC. As your first action, reveal cards from the deck until you have revealed 2 cards with a floater icon on it. Take them into hand and discard the rest.":"起始获得42MC。作为你的第一个行动,从牌库顶展示牌,直到展示出2张带有云图标的牌。将那2张牌加入手牌,并弃掉剩余的牌。",
+  "You start with 42 M€. As your first action, reveal cards from the deck until you have revealed 2 cards with a floater icon on it. Take them into hand and discard the rest.":"起始获得42MC。作为你的第一个行动,从牌库顶展示牌,直到展示出2张带有云图标的牌。将那2张牌加入手牌,并弃掉剩余的牌。",
   "Action: Add a floater to ANY card. 1 VP per 3 floaters on this card.":"行动:放置1个云资源到任意卡牌，本牌上每3个云资源获得1分",
 
   "Manutech":"马努科技",
-  "You start with 1 steel production, and 35 MC.":"你起始时拥有35元及1点钢铁产能。",
+  "You start with 1 steel production, and 35 M€.":"你起始时拥有35元及1点钢铁产能。",
   "Effect: For each step you increase the production of a resource, including this, you also gain that resource.":"效果：包括本牌在内，每当你提升1点标准资源产能，获得1个对应资源。",
 
   "Morning Star Inc.":"晨星公司",
-  "You start with 50 MC. As your first action, reveal cards from the deck until you have revealed 3 Venus-tag cards. Take those into hand and discard the rest.":"起始获得50MC。作为你的第一个行动,展示牌库的牌直到展示出3张带有金星标志的牌。把这3张牌加入手中,并弃掉剩余的牌。",
+  "You start with 50 M€. As your first action, reveal cards from the deck until you have revealed 3 Venus-tag cards. Take those into hand and discard the rest.":"起始获得50MC。作为你的第一个行动,展示牌库的牌直到展示出3张带有金星标志的牌。把这3张牌加入手中,并弃掉剩余的牌。",
   "Effect: Your Venus requirements are +/- 2 steps, your choice in each case.":"效果:你打出的牌中,受到金星改造度条件限制时 +/- 2格",
   "Venus requirements":"金星改造需求",
 
   "Viron":"病毒公司",
    "Action: Use a blue card action that has already been used this generation.":"行动：选择一张本世代已执行行动的蓝色卡牌，再次执行该行动。",
-   "You start with 48 MC.":"起始获得48MC",
+   "You start with 48 M€.":"起始获得48MC",
 
 
 

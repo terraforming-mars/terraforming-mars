@@ -23,7 +23,7 @@ export class Sabotage extends Card implements IProjectCard {
           b.minus().steel(4).digit.any.br.or(Size.SMALL).nbsp;
           b.minus().megacredits(7).any;
         }),
-        description: 'Remove up to 3 titanium from any player, or 4 steel, or 7 MC.',
+        description: 'Remove up to 3 titanium from any player, or 4 steel, or 7 M€.',
       },
     });
   }

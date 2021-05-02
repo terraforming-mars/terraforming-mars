@@ -13,7 +13,7 @@
  "Draw 2 cards with Moon tag. Gain 6 steel.":"抽 2 张有月亮标签的卡片。获得 6 钢。",
 
  "Mining Complex":"综合开采",
- "Place a mine tile on the Moon and raise the Mining Rate 1 step. Place a road tile adjacent to placed mine tile and raise the Logistics Rate 1 step. Pay 7 MC.":"在月球上放置一个矿板块，并提高采矿速度1步。在放置矿板块的旁边放置一个道路板块，提高物流率1步。支付7 MC。",
+ "Place a mine tile on the Moon and raise the Mining Rate 1 step. Place a road tile adjacent to placed mine tile and raise the Logistics Rate 1 step. Pay 7 M€.":"在月球上放置一个矿板块，并提高采矿速度1步。在放置矿板块的旁边放置一个道路板块，提高物流率1步。支付7 M€。",
 
 
 
@@ -27,7 +27,7 @@
   "Decrease your plant production 1 step. Raise the Colony Rate 1 step and oxygen 1%.":"减少你的植物产量 1。提殖民速度1，加 1 氧。",
 
   "Ancient Shipyards":"古代造船厂",
-  "Action: Steal 8 M€ from any player and add a resource cube here.":"行动:从任何玩家那里偷取8 MC并在这里添加一个资源立方体。",
+  "Action: Steal 8 M€ from any player and add a resource cube here.":"行动:从任何玩家那里偷取8 M€并在这里添加一个资源立方体。",
   "Spend 3 titanium. -1 VP for every 2 resources here.":"花3钛。这里每2个资源-1个VP。",
 
  "Archimedes Hydroponics Station":"阿基米德水培站",
@@ -102,7 +102,7 @@
  "Decrease your energy production 1 step and your M€ production 1 step. Spend 1 titanium. Place a colony tile on the Moon and raise the Colony Rate 1 step.": "降低电能和MC产量1步。花费1钛，在月球上放一块殖民地板块，并提高1殖民地效率。",
 
  "Heavy Duty Rovers": "重型探测车",
- "Gain 4 M€ for each mining tile adjacent to a road tile. Raise the Logistic Rate 1 step.": "每一个与道路板块相邻的采矿板块获得4 MC。提高物流效率1步",
+ "Gain 4 M€ for each mining tile adjacent to a road tile. Raise the Logistic Rate 1 step.": "每一个与道路板块相邻的采矿板块获得4 M€。提高物流效率1步",
 
  "Heliostat Mirror Array": "太阳能反射镜阵列",
   "Spend 1 titanium. Gain 1 heat. Increase your energy production 2 steps.": "“花费1钛。获得1热量。增加2 电能产量。",
@@ -127,7 +127,7 @@
 
  "Luna Conference" :"月球会议",
  "Requires that Scientists are ruling or that you have 2 delegates there. ": "要求科学党当政，或者那里有2位代表。",
- "Gain 2 M€ per road tile on the Moon. Gain 2M€ per colony tile on the Moon.": "在月球上每块道路板块获得2 MC。在月球上每块殖民地板块获得2MC。",
+ "Gain 2 M€ per road tile on the Moon. Gain 2M€ per colony tile on the Moon.": "在月球上每块道路板块获得2 M€。在月球上每块殖民地板块获得2MC。",
 
  "Luna Mining Hub" :"月球采矿中心",
  "5 Mining rate": "5采矿效率",

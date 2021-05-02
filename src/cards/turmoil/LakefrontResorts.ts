@@ -22,7 +22,7 @@ export class LakefrontResorts extends Card implements CorporationCard {
 
       metadata: {
         cardNumber: 'R38',
-        description: 'You start with 54 MC.',
+        description: 'You start with 54 M€.',
         renderData: CardRenderer.builder((b) => {
           b.br.br.br;
           b.megacredits(54);

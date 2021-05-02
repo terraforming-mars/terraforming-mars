@@ -19,12 +19,12 @@ export class Pristar extends Card implements CorporationCard, IResourceCard {
 
       metadata: {
         cardNumber: 'R07',
-        description: 'You start with 53 MC. Decrease your TR 2 steps. 1 VP per preservation resource here.',
+        description: 'You start with 53 M€. Decrease your TR 2 steps. 1 VP per preservation resource here.',
         renderData: CardRenderer.builder((b) => {
           b.br.br.br;
           b.megacredits(53).nbsp.nbsp.minus().tr(2, Size.SMALL);
           b.corpBox('effect', (ce) => {
-            ce.effect('During production phase, if you did not get TR so far this generation, add one preservation resource here and gain 6 MC.', (eb) => {
+            ce.effect('During production phase, if you did not get TR so far this generation, add one preservation resource here and gain 6 M€.', (eb) => {
               eb.tr(1, Size.SMALL, true).startEffect.preservation(1).megacredits(6);
             });
           });

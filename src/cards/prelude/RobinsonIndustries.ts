@@ -19,7 +19,7 @@ export class RobinsonIndustries extends Card implements IActionCard, Corporation
 
       metadata: {
         cardNumber: 'R27',
-        description: 'You start with 47 MC.',
+        description: 'You start with 47 M€.',
         renderData: CardRenderer.builder((b) => {
           b.br.br.br;
           b.megacredits(47);

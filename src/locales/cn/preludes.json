@@ -1,22 +1,22 @@
 {
   "Cheung Shing MARS":"昌盛火星",
-  "You start with 3 M€ production and 44 MC.":"起始获得44MC,提升MC产能3级",
+  "You start with 3 M€ production and 44 M€.":"起始获得44MC,提升MC产能3级",
   "Effect: When you play a building tag, you pay 2 M€ less for it.":"效果:当你打出带有建筑标志的牌时,你可以少支付2MC",
 
   "Point Luna":"月点",
   "Effect: When you play an Earth tag, including this, draw a card.":"效果：你打出的牌上每有一个地球符号，包括此卡，抽一张牌。",
-  "You start with 1 titanium production and 38 MC.":"你起始拥有1点钛产量和38元。",
+  "You start with 1 titanium production and 38 M€.":"你起始拥有1点钛产量和38元。",
 
   "Robinson Industries":"罗宾逊实业",
-  "You start with 47 MC.":"起始获得47MC",
+  "You start with 47 M€.":"起始获得47MC",
   "Action: Spend 4 M€ to increase (one of) your LOWEST production 1 step.":"行动:花费4MC,提升你1项产能最低的产能1级",
 
   "Valley Trust":"莱瓦信托",
   "Effect: When you play a Science tag, you pay 2M€ less for it.":"效果：你打出的牌上每有一个科学标志，你少为其支付2元。",
-  "You start with 37 MC. As your first action, draw 3 Prelude cards, and play one of them. Discard the other two.":"你起始拥有37元，作为游戏中的你的第一个行动，你必须抽三张前序卡，打出其中一张，然后弃掉剩余两张。",
+  "You start with 37 M€. As your first action, draw 3 Prelude cards, and play one of them. Discard the other two.":"你起始拥有37元，作为游戏中的你的第一个行动，你必须抽三张前序卡，打出其中一张，然后弃掉剩余两张。",
 
   "Vitor":"维特尔",
-  "You start with 45 MC. As your first action, fund an award for free.":"起始获得45MC。作为你的起始行动,你可以免费资助一个奖项",
+  "You start with 45 M€. As your first action, fund an award for free.":"起始获得45MC。作为你的起始行动,你可以免费资助一个奖项",
   "Effect: When you play a card with a NON-NEGATIVE VP icon, including this, gain 3MC.":"效果:当你打出一张有非负分图标的牌(包括本牌)时,获得3MC",
 
 
@@ -55,10 +55,10 @@
 
 
     "Allied Banks": "联合银行",
-    "Increase your M€ production 4 steps. Gain 3 MC.": "提升4格MC产量,获得3MC",
+    "Increase your M€ production 4 steps. Gain 3 M€.": "提升4格MC产量,获得3MC",
 
     "Aquifer Turbines": "含水层涡轮机",
-    "Place an Ocean tile. Increase your energy production 2 steps. Pay 3 MC.": "放置一个海洋。提升你的电力产能2格,支付3MC",
+    "Place an Ocean tile. Increase your energy production 2 steps. Pay 3 M€.": "放置一个海洋。提升你的电力产能2格,支付3MC",
 
     "Biofuels": "生物燃料",
     "Increase your energy and plant production 1 step. Gain 2 plants.": "提升你的电力和植物产能1级,获得2植物资源",
@@ -70,7 +70,7 @@
     "Increase your plant production 2 steps. Decrease your M€ production 1 step.": "提升你的植物产能2格,降低你的MC产能1格",
 
     "Business Empire": "商业帝国",
-    "Increase your M€ production 6 steps. Pay 6 MC.": "提升你的MC产能6格,支付6MC",
+    "Increase your M€ production 6 steps. Pay 6 M€.": "提升你的MC产能6格,支付6MC",
 
     "Dome Farming": "圆顶农业",
     "Increase your M€ production 2 steps and plant production 1 step.": "提升你的MC产量2格和植物产量1格",
@@ -91,22 +91,22 @@
     "Place 1 Greenery Tile and raise oxygen 1 step. Reveal cards until you reveal two cards with plant tags on them. Take them into your hand and discard the rest.": "放置1个绿化版块。不断展示牌库顶的牌,直到有两张带有植物标志的牌。把这两张牌加入你的手牌,并弃掉剩余的牌",
 
     "Galilean Mining": "伽利略矿业",
-    "Increase your titanium production 2 steps. Pay 5 MC.": "提升钛合金产量2格,支付5MC",
+    "Increase your titanium production 2 steps. Pay 5 M€.": "提升钛合金产量2格,支付5MC",
 
     "Great Aquifer": "大型含水层",
     "Place 2 Ocean tiles.": "放置2块海洋版块",
 
     "Huge Asteroid": "巨型小行星",
-    "Increase Temperature 3 steps. Pay 5 MC.": "提升火星温度3格,支付 5MC.",
+    "Increase Temperature 3 steps. Pay 5 M€.": "提升火星温度3格,支付 5MC.",
 
     "Io Research Outpost": "木卫一研究前哨",
     "Increase your titanium production 1 step. Draw a card.": "提升钛合金产量1级,抽1张卡",
 
     "Loan": "贷款",
-    "Gain 30 MC. Decrease your M€ production 2 steps.": "获得30MC,降低MC产能2格",
+    "Gain 30 M€. Decrease your M€ production 2 steps.": "获得30MC,降低MC产能2格",
 
     "Martian Industries": "火星工业",
-    "Increase your energy and steel production 1 step. Gain 6 MC.": "提升你的电力和钢铁产能1格,获得6MC",
+    "Increase your energy and steel production 1 step. Gain 6 M€.": "提升你的电力和钢铁产能1格,获得6MC",
 
     "Metal-Rich Asteroid": "富含金属的小行星",
     "Increase temperature 1 step. Gain 4 titanium and 4 steel.": "提升温度1格,获得4个钛合金资源和4个钢铁资源",
@@ -124,7 +124,7 @@
     "Increase your steel production 1 step and heat production 2 steps. Gain 2 heat.": "提升1格钢铁产能和2格热能产能,获得2个热能资源",
 
     "Nitrogen Shipment": "氮气运输",
-    "Increase your plant production 1 step. Increase your TR 1 step. Gain 5 MC.": "提升你的1级植物产能和1改造度(TR),获得5MC",
+    "Increase your plant production 1 step. Increase your TR 1 step. Gain 5 M€.": "提升你的1级植物产能和1改造度(TR),获得5MC",
 
     "Orbital Construction Yard": "轨道建造场",
     "Increase your titanium production 1 step. Gain 4 titanium.": "提升你的钛合金产能1级,获得4个钛合金资源",

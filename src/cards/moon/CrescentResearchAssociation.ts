@@ -31,7 +31,7 @@ export class CrescentResearchAssociation implements CorporationCard {
   }
 
   public readonly metadata: CardMetadata = {
-    description: 'You start with 50 MC. 1 VP for every 3 Moon tags you have.',
+    description: 'You start with 50 M€. 1 VP for every 3 Moon tags you have.',
     cardNumber: '',
     renderData: CardRenderer.builder((b) => {
       b.megacredits(50).br;

@@ -21,7 +21,7 @@ export class ValuableGases extends PreludeCard implements IProjectCard {
           b.text('play', Size.MEDIUM, true).cards(1).secondaryTag(Tags.VENUS).colon();
           b.floaters(4).digit;
         }),
-        description: 'Gain 6 MC. Play a Venus card from your hand and add 4 floaters to it.',
+        description: 'Gain 6 M€. Play a Venus card from your hand and add 4 floaters to it.',
       },
     });
   }

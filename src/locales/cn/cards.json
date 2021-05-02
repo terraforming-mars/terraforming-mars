@@ -1,5 +1,5 @@
 {
-    "You start with 42 MC. Instead of choosing from 10 cards during setup, you get 10 cards for free.": "开始游戏时拥有42MC,取代你的第一次研究阶段(第一次购买卡牌阶段),你免费保留这10张牌",
+    "You start with 42 M€. Instead of choosing from 10 cards during setup, you get 10 cards for free.": "开始游戏时拥有42MC,取代你的第一次研究阶段(第一次购买卡牌阶段),你免费保留这10张牌",
     "Colonizer Training Camp": "开拓者训练营",
     "Oxygen must be 5% or less.": "氧气浓度必须少于或等于5%",
 
@@ -37,7 +37,7 @@
     "1 VP for each Jovian tag you have.": "每有1个木星标志,获得1分",
 
     "Space Elevator": "太空电梯",
-    "Action: Spend 1 steel to gain 5 MC.": "行动:支付1钢铁资源获得5MC",
+    "Action: Spend 1 steel to gain 5 M€.": "行动:支付1钢铁资源获得5MC",
     "Increase your titanium production 1 step.": "提升钛合金产能1级",
 
     "Development Center": "发展中心",
@@ -124,7 +124,7 @@
     "Raise your terraforming rating 2 steps and temperature 1 step. Increase your Plant production 1 step, or 4 steps if you have 3 Plant tags.": "提升你的改造度(TR)2,提升火星温度1级。提升你的植物产能1级,如果你有至少3个植物标志,则提升4级",
 
     "Rover Construction": "漫游者建设",
-    "Effect: When any City tile is placed, gain 2 MC.": "效果: 每当有城市被放置时,你获得2MC",
+    "Effect: When any City tile is placed, gain 2 M€.": "效果: 每当有城市被放置时,你获得2MC",
 
     "Deimos Down": "火卫二陨落",
     "Raise temperature 3 steps and gain 4 steel. Remove up to 8 Plants from any player.": "提升火星温度3级并获得4个钢铁资源。移除任一玩家最多8个植物资源",
@@ -368,7 +368,7 @@
     "(Decrease your Energy production 1 step and increase your M€ production 2 steps. Place a city tile ADJACENT TO AT LEAST 2 OTHER CITY TILES.)": "降低你的电力产能1级并增加你的MC产能2级。放置1个城市版块在相邻至少2个城市的区域",
 
     "Sabotage": "蓄意破坏",
-    "Remove up to 3 titanium from any player, or 4 steel, or 7 MC.": "移除任一玩家的最多3个钛合金资源,或4个钢铁资源,或7MC",
+    "Remove up to 3 titanium from any player, or 4 steel, or 7 M€.": "移除任一玩家的最多3个钛合金资源,或4个钢铁资源,或7MC",
 
     "Moss": "苔藓",
     "Requires 3 ocean tiles and that you lose 1 plant. Increase your plant production 1 step.": "需要至少3个还帮版块且你移除1个植物资源。增加你的植物产能1级",
@@ -452,7 +452,7 @@
     "Requires 7 science tags.": "需要7个科学标志",
 
     "Investment Loan": "投资性贷款",
-    "Decrease your M€ production 1 step. Gain 10 MC.": "降低你的MC产能1级,获得10MC",
+    "Decrease your M€ production 1 step. Gain 10 M€.": "降低你的MC产能1级,获得10MC",
 
     "Insulation": "绝缘",
     "Decrease your heat production any number of steps and increase your M€ production the same number of steps.": "降低你任意级数的热能产能,增加你对应级数的MC产能",
@@ -469,7 +469,7 @@
     "It must be -14 C or colder. Increase your Plant production 2 steps.": "火星温度不高于-14度。增加你的植物产能2级",
 
     "Standard Technology": "标准技术",
-    "Effect: After you pay for a standard project, except selling patents, you gain 3 MC.": "效果: 当你执行标准行动后(不包括出售手牌),你获得3MC",
+    "Effect: After you pay for a standard project, except selling patents, you gain 3 M€.": "效果: 当你执行标准行动后(不包括出售手牌),你获得3MC",
 
     "Nitrite Reducing Bacteria": "亚硝酸盐还原菌",
     "Action: Add 1 Microbe to this card, or remove 3 Microbes to increase your TR 1 step.": "行动: 放置1个微生物资源到本牌,或移除3个微生物资源来提升你的改造度(TR) 1格",

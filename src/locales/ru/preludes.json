@@ -1,9 +1,9 @@
 {
     "Allied Banks": "Союзнический банк",
-    "Increase your M€ production 4 steps. Gain 3 MC.": "Повысьте доход на 4. Получите 3 MC.",
+    "Increase your M€ production 4 steps. Gain 3 M€.": "Повысьте доход на 4. Получите 3 M€.",
 
     "Aquifer Turbines": "Гидротурбины",
-    "Place an Ocean tile. Increase your energy production 2 steps. Pay 3 MC.": "Выложите тайл океана и повысьте производство энергии на 2. Заплатите 3 MC.",
+    "Place an Ocean tile. Increase your energy production 2 steps. Pay 3 M€.": "Выложите тайл океана и повысьте производство энергии на 2. Заплатите 3 M€.",
 
     "Biofuels": "Биотопливо",
     "Increase your energy and plant production 1 step. Gain 2 plants.": "Повысьте производство энергии и растений на 1 шаг каждое. Получите 2 растения.",
@@ -15,7 +15,7 @@
     "Increase your plant production 2 steps. Decrease your M€ production 1 step.": "Снизьте свой доход на 1 и повысьте производство растений на 2 шага.",
 
     "Business Empire": "Бизнес-империя",
-    "Increase your M€ production 6 steps. Pay 6 MC.": "Повысьте доход на 6. Заплатите 6 MC.",
+    "Increase your M€ production 6 steps. Pay 6 M€.": "Повысьте доход на 6. Заплатите 6 M€.",
 
     "Dome Farming": "Тепличное хозяйство",
     "Increase your M€ production 2 steps and plant production 1 step.": "Повысьте доход на 2 и производство растений на 1.",
@@ -30,28 +30,28 @@
     "Increase your plant production 1 step. Play a card from hand, ignoring global requirements.": "Повысьте производство растений на 1. Разыграйте карту с руки, игнорируя глобальные требования.",
 
     "Eccentric Sponsor": "Эксцентричный спонсор",
-    "Play a card from hand, reducing its cost by 25 M€": "Разыграйте карту с руки, снизив ее стоимость на 25 mc.",
+    "Play a card from hand, reducing its cost by 25 M€": "Разыграйте карту с руки, снизив ее стоимость на 25 M€.",
 
     "Experimental Forest": "Экспериментальный лес",
     "Place 1 Greenery Tile and raise oxygen 1 step. Reveal cards until you reveal two cards with plant tags on them. Take them into your hand and discard the rest.": "Проведите озеленение и повысьте уровень кислорода на 1. Тяните карты из колоды, пока не найдете 2 карты с символом растения. Возьмите их в руку. Сбросьте остальные.",
 
     "Galilean Mining": "Добыча на Галилео",
-    "Increase your titanium production 2 steps. Pay 5 MC.": "Повысьте производство титана на 2. Заплатите 5 MC.",
+    "Increase your titanium production 2 steps. Pay 5 M€.": "Повысьте производство титана на 2. Заплатите 5 M€.",
 
     "Great Aquifer": "Большой водоносный слой",
     "Place 2 Ocean tiles.": "Выложите 2 тайла океана.",
 
     "Huge Asteroid": "Огромный астероид",
-    "Increase Temperature 3 steps. Pay 5 MC.": "Повысьте температуру на 3. Заплатите 5 MC.",
+    "Increase Temperature 3 steps. Pay 5 M€.": "Повысьте температуру на 3. Заплатите 5 M€.",
 
     "Io Research Outpost": "Исследовательская база на Ио",
     "Increase your titanium production 1 step. Draw a card.": "Повысьте производство титана на 1. Возьмите 1 карту",
 
     "Loan": "Кредит",
-    "Gain 30 MC. Decrease your M€ production 2 steps.": "Получите 30 MC. Снизьте доход на 2.",
+    "Gain 30 M€. Decrease your M€ production 2 steps.": "Получите 30 M€. Снизьте доход на 2.",
 
     "Martian Industries": "Промышленность Марса",
-    "Increase your energy and steel production 1 step. Gain 6 MC.": "Повысьте производство энергии и стали на 1 каждое. Получите 6 MC.",
+    "Increase your energy and steel production 1 step. Gain 6 M€.": "Повысьте производство энергии и стали на 1 каждое. Получите 6 M€.",
 
     "Metal-Rich Asteroid": "Богатый металлом астероид",
     "Increase temperature 1 step. Gain 4 titanium and 4 steel.": "Повысьте температуру на 1. Получите 4 титана и 4 стали.",
@@ -69,7 +69,7 @@
     "Increase your steel production 1 step and heat production 2 steps. Gain 2 heat.": "Повысьте производство стали на 1. Повысьте производство тепла на 2. Получите 2 тепла.",
 
     "Nitrogen Shipment": "Ввоз азота",
-    "Increase your plant production 1 step. Increase your TR 1 step. Gain 5 MC.": "Повысьте свой рейтинг и производство растений на 1 каждое. Получите 5 MC.",
+    "Increase your plant production 1 step. Increase your TR 1 step. Gain 5 M€.": "Повысьте свой рейтинг и производство растений на 1 каждое. Получите 5 M€.",
 
     "Orbital Construction Yard": "Строительный парк на орбите",
     "Increase your titanium production 1 step. Gain 4 titanium.": "Повысьте производство титана на 1. Получите 4 титана.",
@@ -106,7 +106,7 @@
 
 
     "Aerospace Mission": "Космическая миссия",
-    "Place 2 colonies. Pay 14 MC.": "Разместите 2 колонии. Заплатите 14 МС",
+    "Place 2 colonies. Pay 14 M€.": "Разместите 2 колонии. Заплатите 14 МС",
 
     "By-Election": "Довыборы",
     "set ruling party": "назначьте правящую партию",
@@ -116,18 +116,18 @@
     "Place 4 delegates. Draw a Turmoil card.": "Разместите 4 своих делегатов. Доберите карту из дополнения Кризис",
 
     "Research Grant": "Исследовательский грант",
-    "Gain 8 MC.": "Получите 8 МС",
+    "Gain 8 M€.": "Получите 8 МС",
 
     "Trade Advance":"Торговое преимущество",
     "[ solo": "[ соло",
     "Trade all colonies with": "",
-    "Gain 2 M€ [SOLO: Gain 10 MC]. Immediately trade with all active colonies. You may increase the Colony Tile track 1 step before each of these trades.":
+    "Gain 2 M€ [SOLO: Gain 10 M€]. Immediately trade with all active colonies. You may increase the Colony Tile track 1 step before each of these trades.":
     "Получите 2 МС [СОЛО: Получите 10 МС]. Немедленно поторгуйте со всеми активными колониями. Можете увеличить трек колонии, с которой торгуете при каждой из этих торговых операций",
 
 
     "Valuable Gases": "Ценные газы",
-    "Gain 6 MC. Play a Venus card from your hand and add 4 floaters to it.":
-    "Получите 6 MC. Разыграйте карту с меткой Венеры с руки и добавьте на неё 4 аэростата",
+    "Gain 6 M€. Play a Venus card from your hand and add 4 floaters to it.":
+    "Получите 6 M€. Разыграйте карту с меткой Венеры с руки и добавьте на неё 4 аэростата",
 
     "Venus First": "Венера вперед!",
     "Raise Venus 2 steps. Draw 2 Venus cards from the deck.":

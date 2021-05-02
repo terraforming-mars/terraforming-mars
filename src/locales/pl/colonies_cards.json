@@ -1,6 +1,6 @@
 {
     "Airliners": "Dryfowce Pasażerskie",
-    "Requires that you have 3 floaters. Increase your M€ production 2 steps. Add 2 floaters to ANY card.": "Musisz posiadać przynajmniej 3 jednostki dryfowców. Podnieś swoją produkcję MC o 2 poziomy. Umieść 2 jednostki dryfowców na dowolnej karcie.",
+    "Requires that you have 3 floaters. Increase your M€ production 2 steps. Add 2 floaters to ANY card.": "Musisz posiadać przynajmniej 3 jednostki dryfowców. Podnieś swoją produkcję M€ o 2 poziomy. Umieść 2 jednostki dryfowców na dowolnej karcie.",
 
     "Air Raid": "Podniebny Rajd",
     "Requires that you lose 1 floater. Steal 5 M€ from any player.": "Odrzuć 1 jednostkę dryfowców. Ukradnij dowolnemu graczowi 5 MC.",
@@ -11,7 +11,7 @@
     "Add 2 floaters to ANY card.": "Umieść 2 jednostki dryfowców na dowolnej karcie.",
 
     "Community Services": "Usługi Społeczne",
-    "Increase your M€ production 1 step per CARD WITH NO TAGS, including this.": "Podnieś swoją produkcję MC o 1 poziom za każdą posiadaną kartę bez symboli (z tą włącznie).",
+    "Increase your M€ production 1 step per CARD WITH NO TAGS, including this.": "Podnieś swoją produkcję M€ o 1 poziom za każdą posiadaną kartę bez symboli (z tą włącznie).",
 
     "Conscription": "Pobór",
     "Requires 2 Earth tags. The next card you play this generation costs 16 M€ less.": "Musisz posiadać przynajmniej 2 symbole ziemi. Nastepna zagrana przez Ciebie podczas tego pokolenia karta będzie kosztować o 16 M€ mniej.",
@@ -29,7 +29,7 @@
     "Increase your plant production 1 step for each colony you own. Add 1 animal to ANOTHER card and 2 microbes to ANOTHER card.": "Podnieś swoją produkcję roślinności o 1 poziom za każdą posiadaną kolonię. Umieść 1 jednostkę zwierząt na dowolnej karcie. Umieść 2 jednostki mikrobów na dowolnej karcie.",
 
     "Floater Leasing": "Leasing Dryfowców",
-    "Increase your M€ production 1 step PER 3 floaters you have.": "Podnieś swoją produkcję MC o 1 poziom za każde 3 posiadane jednostki dryfowców.",
+    "Increase your M€ production 1 step PER 3 floaters you have.": "Podnieś swoją produkcję M€ o 1 poziom za każde 3 posiadane jednostki dryfowców.",
 
     "Floater Prototypes": "Prototypy Dryfowców",
     "Add two floaters to ANOTHER card.": "Umieść na innej karcie do 2 jednostek dryfowców.",
@@ -38,10 +38,10 @@
     "Action: Add 1 floater to ANOTHER card.": "Akcja: Umieść na innej karcie 1 jednostkę dryfowców.",
 
     "Galilean Waystation": "Stacja Tranzytowa na Galileuszu",
-    "Increase your M€ production 1 step for every Jovian tag in play.": "Podnieś swoją produkcję MC o 1 poziom za każdy symbol Jowisza w grze.",
+    "Increase your M€ production 1 step for every Jovian tag in play.": "Podnieś swoją produkcję M€ o 1 poziom za każdy symbol Jowisza w grze.",
 
     "Heavy Taxation": "Podniesienie Podatków",
-    "Requires 2 Earth tags. Increase your M€ production 2 steps, and gain 4MC.": "Musisz posiadać przynajmniej 2 symbole Ziemi. Podnieś swoją produkcję MC o 2 poziomy. Otrzymujesz 4 MC.",
+    "Requires 2 Earth tags. Increase your M€ production 2 steps, and gain 4MC.": "Musisz posiadać przynajmniej 2 symbole Ziemi. Podnieś swoją produkcję M€ o 2 poziomy. Otrzymujesz 4 MC.",
 
     "Ice Moon Colony": "Kolonia na Księżycu Lodowycm",
     "Place 1 colony and 1 ocean tile.": "Umieść 1 kolonię na kaflu obiektu oraz obszar oceanu na planszy.",
@@ -63,10 +63,10 @@
     "Requires 3 Science tags.": "Musisz posiadać przynajmniej 3 symbole nauki.",
 
     "Luna Governor": "Gubernator Księżyca",
-    "Requires 3 Earth tags. Increase your M€ production 2 steps.": "Musisz posiadać przynajmniej 3 symbole Ziemi. Podnieś swoją produkcję MC o 2 poziomy.",
+    "Requires 3 Earth tags. Increase your M€ production 2 steps.": "Musisz posiadać przynajmniej 3 symbole Ziemi. Podnieś swoją produkcję M€ o 2 poziomy.",
 
     "Lunar Exports": "Księżycowe Towary Eksportowe",
-    "Increase your plant production 2 steps, or your M€ production 5 steps.": "Podnieś swoją produkcję roślinności o 2 poziomy albo produkcję MC o 5 poziomów.",
+    "Increase your plant production 2 steps, or your M€ production 5 steps.": "Podnieś swoją produkcję roślinności o 2 poziomy albo produkcję M€ o 5 poziomów.",
 
     "Lunar Mining": "Górnictwo Księżycowe",
     "Increase your titanium production 1 step for every 2 Earth tags you have in play, including this.": "Podnieś swoją produkcję tytanu o 1 poziom za każde 2 posiadane symbole Ziemi (z tym włącznie).",
@@ -83,7 +83,7 @@
     "Increase your titanium production 1 step. Place a colony.": "Podnieś swoją produkcję tytanu o 1 poziom i umieść 1 kolonię na kaflu obiektu.",
 
     "Minority Refuge": "Azyl",
-    "Decrease your M€ production 2 steps. Place a colony.": "Obniż swoją produkcję MC o 2 poziomy i umieść 1 kolonię na kaflu obiektu.",
+    "Decrease your M€ production 2 steps. Place a colony.": "Obniż swoją produkcję M€ o 2 poziomy i umieść 1 kolonię na kaflu obiektu.",
 
     "Molecular Printing": "Druk Molekularny",
     "Gain 1 M€ for each city tile in play. Gain 1 M€ for each colony in play.": "Otrzymujesz 1 M€ za każdy obszar miasta w grze. Otrzymujesz 1 M€ za każdą kolonię w grze.",
@@ -92,20 +92,20 @@
     "Raise your TR 2 steps. Add 2 floaters to a JOVIAN CARD.": "Podnieś swój WT o 2 poziomy. Umieść 2 jednostki dryfowców na dowolnej karcie z symbolem Jowisza.",
 
     "Pioneer Settlement": "Osada Pionierów",
-    "Requires that you have no more than 1 colony. Decrease your M€ production 2 steps. Place a colony.": "Wymagania: Możesz mieć maksymalnie 1 kolonię. Obniż swoją produkcję MC o 2 poziomy i umieść 1 kolonię na kaflu obiektu.",
+    "Requires that you have no more than 1 colony. Decrease your M€ production 2 steps. Place a colony.": "Wymagania: Możesz mieć maksymalnie 1 kolonię. Obniż swoją produkcję M€ o 2 poziomy i umieść 1 kolonię na kaflu obiektu.",
 
     "Productive Outpost": "Wydajna Placówka",
     "Gain all your colony bonuses.": "OTRZYMUJESZ PREMIĘ KOLONIALNĄ ZA WSZYSTKIE SWOJE KOLONIE.",
 
     "Quantum Communications": "Komunikacja Kwantowa",
-    "Requires 4 Science tags. Increase your M€ production 1 step for each colony in play.": "Musisz posiadać przynajmniej 4 symbole nauki. Podnieś swoją produkcję MC o 1 poziom za każdą kolonię w grze.",
+    "Requires 4 Science tags. Increase your M€ production 1 step for each colony in play.": "Musisz posiadać przynajmniej 4 symbole nauki. Podnieś swoją produkcję M€ o 1 poziom za każdą kolonię w grze.",
 
     "Red Spot Observatory": "Obserwatorium Wielkiej Czerwonej Plamy",
     "Action: Add 1 floater to this card, or spend 1 floater here to draw a card.": "Akcja: Umieść na tej karcie 1 jednostkę dryfowców albo wydaj 1 jednostkę dryfowców z tej karty, aby dobrać 1 kartę.",
     "Requires 3 Science tags. Draw 2 cards.": "Musisz posiadać przynajmniej 3 symbole nauki. Dobierz 2 karty.",
 
     "Refugee Camp": "Obozy Uchodźców",
-    "Action: Decrease your M€ production 1 step to add a camp resource to this card.": "Akcja: Obniż swoją produkcję MC o 1 poziom aby umieścić na tej karcie 1 jednostkę obozów.",
+    "Action: Decrease your M€ production 1 step to add a camp resource to this card.": "Akcja: Obniż swoją produkcję M€ o 1 poziom aby umieścić na tej karcie 1 jednostkę obozów.",
     "1 VP for each camp resource on this card.": "Otrzymujesz 1 PZ za każdą jednostkę obozów znajdującą się na tej karcie.",
 
     "Research Colony": "Kolonia Badawcza",
@@ -125,7 +125,7 @@
     "Increase your heat production 5 steps.": "Podnieś swoją produkcję ciepła o 5 poziomów.",
 
     "Space Port": "Kosmoport",
-    "Requires 1 colony. Decrease your Energy production 1 step and increase your M€ production 4 steps. Place a City tile. Gain 1 Trade Fleet.": "Musisz posiadać przynajmniej 1 kolonię. Otrzymujesz 1 flotę handlową. Umieść na planszy obszar miasta. Obniż swoją produkcję energii o 1 poziom i podnieś swoją produkcję MC o 4 poziomy.",
+    "Requires 1 colony. Decrease your Energy production 1 step and increase your M€ production 4 steps. Place a City tile. Gain 1 Trade Fleet.": "Musisz posiadać przynajmniej 1 kolonię. Otrzymujesz 1 flotę handlową. Umieść na planszy obszar miasta. Obniż swoją produkcję energii o 1 poziom i podnieś swoją produkcję M€ o 4 poziomy.",
 
     "Space Port Colony": "Kolonia z Kosmoportem",
     "Requires a colony. Place a colony. MAY BE PLACED ON A COLONY TILE WHERE YOU ALREADY HAVE A COLONY. Gain 1 Trade Fleet.": "Musisz posiadać przynajmniej 1 kolonię. Umieść 1 kolonię na kaflu obiektu. Możesz ją umieścić na obiekcie, na którym masz już kolonię. Otrzymujesz 1 flotę handlową.",
@@ -133,7 +133,7 @@
 
     "Spin-off Department": "Spółka Spin Off",
     "Effect: WHEN PLAYING A CARD WITH A BASIC COST OF 20M€ OR MORE, draw a card.": "Efekt trwały: Gdy zagrywasz kartę o podstawowym koszcie wynoszącym 20 M€ lub więcej, dobierz kartę.",
-    "Increase your M€ production 2 steps.": "Podnieś swoją produkcję MC o 2 poziomy.",
+    "Increase your M€ production 2 steps.": "Podnieś swoją produkcję M€ o 2 poziomy.",
 
     "Sub-zero Salt Fish": "Słonowodne Ryby Zimnolubne",
     "Action: Add 1 Animal to this card.": "Akcja: Umieść na tej karcie 1 jednostkę zwierząt.",

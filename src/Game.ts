@@ -1062,6 +1062,8 @@ export class Game implements ISerializable<SerializedGame> {
   }
 
   private gotoFinalGreeneryPlacement(): void {
+    this.log('Final greenery placement', (b) => b.forNewGeneration());
+
     const players: Player[] = [];
 
     this.players.forEach((player) => {

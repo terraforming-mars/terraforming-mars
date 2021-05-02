@@ -17,7 +17,7 @@ export class MediaGroup extends Card implements IProjectCard {
       metadata: {
         cardNumber: '109',
         renderData: CardRenderer.builder((b) => {
-          b.effect('After you play an event card, you gain 3MC.', (eb) => {
+          b.effect('After you play an event card, you gain 3 M€.', (eb) => {
             eb.event().played.startEffect.megacredits(3);
           });
         }),

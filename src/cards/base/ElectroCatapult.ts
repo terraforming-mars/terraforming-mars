@@ -29,7 +29,7 @@ export class ElectroCatapult extends Card implements IActionCard, IProjectCard {
           align: 'left',
         },
         renderData: CardRenderer.builder((b) => {
-          b.action('Spend 1 plant or 1 steel to gain 7MC.', (eb) => {
+          b.action('Spend 1 plant or 1 steel to gain 7 M€.', (eb) => {
             eb.plants(1).slash().steel(1).startAction.megacredits(7);
           }).br;
           b.production((pb) => pb.minus().energy(1));

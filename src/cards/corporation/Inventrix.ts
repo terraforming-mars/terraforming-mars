@@ -17,7 +17,7 @@ export class Inventrix extends Card implements CorporationCard {
 
       metadata: {
         cardNumber: 'R43',
-        description: 'As your first action in the game, draw 3 cards. Start with 45MC.',
+        description: 'As your first action in the game, draw 3 cards. Start with 45 M€.',
         renderData: CardRenderer.builder((b) => {
           b.br;
           b.megacredits(45).nbsp.cards(3);

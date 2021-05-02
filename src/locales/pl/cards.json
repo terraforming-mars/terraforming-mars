@@ -12,7 +12,7 @@
     "Requires 3 ocean tiles. Decrease your M€ production 1 step and any heat production 1 step. Increase your Plant production 2 steps.": "Na planszy muszą się znajdować przynajmniej 3 obszary oceanów. Obniż swoją produkcję M€ i produkcję ciepła dowolnego gracza o 1 poziom. Podnieś swoją produkcję roślinności o 2 poziomy.",
 
     "Search For Life": "Poszukiwania Życia",
-    "Action: Spend 1 M€ to reveal the top card of the draw deck. If that card has a Microbe tag, add a Science resource here.": "Akcja: Zapłać 1 MC, żeby odkryć i odrzucić wierzchnią kartę z talii. Jeśli odkryjesz kartę z symbolem mikrobów, umieść tu 1 jednostkę nauki.",
+    "Action: Spend 1 M€ to reveal the top card of the draw deck. If that card has a Microbe tag, add a Science resource here.": "Akcja: Zapłać 1  M€, żeby odkryć i odrzucić wierzchnią kartę z talii. Jeśli odkryjesz kartę z symbolem mikrobów, umieść tu 1 jednostkę nauki.",
     "3 VPs if you have one or more Science resources here.": "Jeśli na tej karcie znajduje się przynajmniej 1 jednostka nauki, otrzymujesz 3 PZ",
     "Oxygen must be 6% or less.": "Poziom Tlenu musi wynosić maximum 6%.",
 
@@ -221,7 +221,7 @@
     "Increase your M€ production 2 steps.": "Podnieś swoją produkcję M€ o 2 poziomy.",
 
     "Electro Catapult": "Katapulta Orbitalna",
-    "Action: Spend 1 plant or 1 steel to gain 7MC.": "Akcja: Wydaj 1 jednostkę roślinności albo stali, żeby otrzymać 7 M€.",
+    "Action: Spend 1 plant or 1 steel to gain 7 M€.": "Akcja: Wydaj 1 jednostkę roślinności albo stali, żeby otrzymać 7 M€.",
     "Oxygen must be 8% or less. Decrease your energy production 1 step.": "Poziom Tlenu musi być równy albo niższy niż 8%. Obniż swoją produkcję energii o 1 poziom.",
 
     "Earth Catapult": "Katapulta Międzyplanetarna",
@@ -349,7 +349,7 @@
     "Requires 12% oxygen. Gain 2 plants. Place a City tile. Decrease your Energy production 1 step and increase your M€ production 4 steps.": "Poziom Tlenu musi być równy albo wyższy niż 12%. Obniż swoją produkcję energii o 1 poziom. Podnieś swoją produkcję M€ o 4 poziomy. Otrzymujesz 2 jednostki roślinności. Umieść na planszy obszar miasta.",
 
     "Media Group": "Grupa Medialna",
-    "Effect: After you play an event card, you gain 3MC.": "Efekt trwały: Gdy zagrywasz kartę wydarzenia, otrzymujesz 3 M€.",
+    "Effect: After you play an event card, you gain 3 M€.": "Efekt trwały: Gdy zagrywasz kartę wydarzenia, otrzymujesz 3 M€.",
 
     "Business Network": "Sieć Kontaktów",
     "Action: Look at the top card and either buy it or discard it": "AKCJA: PODEJRZYJ WIERZCHNIĄ KARTĘ Z TALII PROJEKTÓW, A NASTĘPNIE KUP JĄ ALBO ODRZUĆ",

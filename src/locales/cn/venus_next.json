@@ -1,10 +1,10 @@
 {
   "Aphrodite":"阿芙罗狄蒂",
-  "You start with 1 plant production and 47 M€.":"起始获得47MC,提升植物产能1级",
-  "Effect: Whenever Venus is terraformed 1 step, you gain 2MC.":"效果:每当金星改造度提升1格,你都获得2MC",
+  "You start with 1 plant production and 47 M€.":"起始获得47 M€,提升植物产能1级",
+  "Effect: Whenever Venus is terraformed 1 step, you gain 2 M€.":"效果:每当金星改造度提升1格,你都获得2 M€",
 
   "Celestic":"天体公司",
-  "You start with 42 M€. As your first action, reveal cards from the deck until you have revealed 2 cards with a floater icon on it. Take them into hand and discard the rest.":"起始获得42MC。作为你的第一个行动,从牌库顶展示牌,直到展示出2张带有云图标的牌。将那2张牌加入手牌,并弃掉剩余的牌。",
+  "You start with 42 M€. As your first action, reveal cards from the deck until you have revealed 2 cards with a floater icon on it. Take them into hand and discard the rest.":"起始获得42 M€。作为你的第一个行动,从牌库顶展示牌,直到展示出2张带有云图标的牌。将那2张牌加入手牌,并弃掉剩余的牌。",
   "Action: Add a floater to ANY card. 1 VP per 3 floaters on this card.":"行动:放置1个云资源到任意卡牌，本牌上每3个云资源获得1分",
 
   "Manutech":"马努科技",
@@ -12,13 +12,13 @@
   "Effect: For each step you increase the production of a resource, including this, you also gain that resource.":"效果：包括本牌在内，每当你提升1点标准资源产能，获得1个对应资源。",
 
   "Morning Star Inc.":"晨星公司",
-  "You start with 50 M€. As your first action, reveal cards from the deck until you have revealed 3 Venus-tag cards. Take those into hand and discard the rest.":"起始获得50MC。作为你的第一个行动,展示牌库的牌直到展示出3张带有金星标志的牌。把这3张牌加入手中,并弃掉剩余的牌。",
+  "You start with 50 M€. As your first action, reveal cards from the deck until you have revealed 3 Venus-tag cards. Take those into hand and discard the rest.":"起始获得50 M€。作为你的第一个行动,展示牌库的牌直到展示出3张带有金星标志的牌。把这3张牌加入手中,并弃掉剩余的牌。",
   "Effect: Your Venus requirements are +/- 2 steps, your choice in each case.":"效果:你打出的牌中,受到金星改造度条件限制时 +/- 2格",
   "Venus requirements":"金星改造需求",
 
   "Viron":"病毒公司",
    "Action: Use a blue card action that has already been used this generation.":"行动：选择一张本世代已执行行动的蓝色卡牌，再次执行该行动。",
-   "You start with 48 M€.":"起始获得48MC",
+   "You start with 48 M€.":"起始获得48 M€",
 
 
 
@@ -56,7 +56,7 @@
   "Requires Venus 6%).":"需要金星改造度达到6%",
 
   "Venus Waystation":"金星中转站",
-  "Effect: When you play a Venus tag, you pay 2 M€ less for it.":"效果: 当你打出一个带有金星标志的牌,你可以少花费2MC",
+  "Effect: When you play a Venus tag, you pay 2 M€ less for it.":"效果: 当你打出一个带有金星标志的牌,你可以少花费2 M€",
 
 
   "Action: Add 1 resource to ANOTHER VENUS CARD).":"行动:放置1个资源到其它金星卡牌",
@@ -88,7 +88,7 @@
   "Requires 3 science tags. Draw 2 cards.":"需要你有3个科学标志。抽2张牌。",
 
   "Rotator Impacts":"回旋冲撞",
-  "Action: Spend 6 M€ to add an asteroid resource to this card [TITANIUM MAY BE USED].":"行动：花费6MC在本牌上增加一个陨石资源（可以使用钛）",
+  "Action: Spend 6 M€ to add an asteroid resource to this card [TITANIUM MAY BE USED].":"行动：花费6 M€在本牌上增加一个陨石资源（可以使用钛）",
   "Action: Spend 1 resource from this card to increase Venus 1 step.":"行动：从本牌移除一个资源提升金星改造度一格。",
   "Venus must be 14% or lower).":"金星改造度需要小于等于14%",
 
@@ -107,7 +107,7 @@
   "Effect: When playing a Venus tag, Floaters here may be used as payment, and are worth 3M€ each.":"效果：当你打出一张带有金星标志的卡牌，你可以移除本卡上任意个云资源来支付费用，每个云资源价值3元。",
 
   "Floating Habs":"漂浮舱",
-  "Action: Spend 2 M€ to add 1 Floater to ANY card":"行动：花费2MC并在任意一张牌上增加一个云资源",
+  "Action: Spend 2 M€ to add 1 Floater to ANY card":"行动：花费2 M€并在任意一张牌上增加一个云资源",
   "Requires 2 Science tags. 1 VP for every 2nd Floater on this card).":"需要你至少有2个科学标志。",
   "Requires 2 Science tags.":"需要你至少有2个科学标志。",
   "1 VP for every 2nd Floater on this card.":"本牌每2个云资源价值1分。",
@@ -148,7 +148,7 @@
   "Requires 3 Science tags. Either raise the temperature 2 steps, or raise Venus 2 steps. Add 2 Floaters to ANY card.":"需要你拥有3个科学标志才能打出。提升温度或金星改造度2格。放置2个云资源到任意卡牌上。",
 
   "Comet for Venus":"飞向金星的彗星",
-  "Raise Venus 1 step. Remove up to 4M€ from any player WITH A VENUS TAG IN PLAY.":"提升1格金星改造度。移除任意一位有金星标志的玩家4MC。",
+  "Raise Venus 1 step. Remove up to 4M€ from any player WITH A VENUS TAG IN PLAY.":"提升1格金星改造度。移除任意一位有金星标志的玩家4 M€。",
 
   "Increase your M€ production 2 steps. Add 1 resource to ANY Venus CARD":"提升2点MC产能。在任意金星卡上添加一个资源",
 

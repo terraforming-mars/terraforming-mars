@@ -13,13 +13,13 @@
 
     "Capital": "首都",
     "1 additional VP for each ocean tile adjacent to this city tile.": "该城市板块相邻每有1个海洋板块,额外获得1分",
-    "Requires 4 ocean tiles. Place tile with ADJACENCY BONUS of 2MC. Energy prod -2 and M€ prod +5.": "需要至少已放置4个海洋。放置本版块,降低你的电力产能2级,提升你的MC产能5级",
+    "Requires 4 ocean tiles. Place tile with ADJACENCY BONUS of 2 M€. Energy prod -2 and M€ prod +5.": "需要至少已放置4个海洋。放置本版块,降低你的电力产能2级,提升你的MC产能5级",
      "equires 4 ocean tiles. Place this tile. Decrease your Energy production 2 steps and increase your M€ production 5 steps.":"需要至少已放置4个海洋。放置本版块,降低你的电力产能2级,提升你的MC产能5级",
 
 
     "Commercial District": "商业区",
     "1 VP per adjacent city tile.": "每相邻1个城市,获得1分",
-    "Place this tile which grants an ADJACENCY BONUS of 2MC. Decrease your energy production 1 step and increase your M€ production 4 steps.": "放置此版块，此版块的相邻收益为2MC。降低你的电力产能1格，提升你的MC产能4格",
+    "Place this tile which grants an ADJACENCY BONUS of 2 M€. Decrease your energy production 1 step and increase your M€ production 4 steps.": "放置此版块，此版块的相邻收益为2 M€。降低你的电力产能1格，提升你的MC产能4格",
     "Place this tile. Decrease your energy production 1 step and increase your M€ production 4 steps.":"放置此版块，降低你的电力产能1格，提升你的MC产能4格",
 
     "Desperate Measures": "绝望措施",
@@ -42,7 +42,7 @@
     "Requires 5 or fewer greeneries on Mars.": "需要火星上不能有超过5片绿化版块",
 
     "Industrial Center": "工业中心",
-    "Action: Spend 7 M€ to increase your steel production 1 step.": "行动: 花费7MC,提升你的钢铁产能1级",
+    "Action: Spend 7 M€ to increase your steel production 1 step.": "行动: 花费7 M€,提升你的钢铁产能1级",
     "Place this tile adjacent to a city tile. This tile grants an ADJACENCY BONUS of 1 steel.": "放置此版块到一个城市版块旁边。此版块的相邻收益为1个钢铁资源",
 
     "Lava Flows": "熔岩流",
@@ -73,7 +73,7 @@
     "Oxygen must be 4% or less. Place this tile NEXT TO NO OTHER TILE. Increase your M€ production 1 step.":"氧气浓度不能高于4%。放置此版块到不与已有版块相邻的格子。提升你的MC产能1格",
 
     "Nuclear Zone": "核爆辐射区",
-    "Raise the temperature two steps. Place this tile. Players must pay an additional 2M€ when they place a tile with their player marker on it ADJACENT to the Nuclear Zone.": "提升温度2格，放置此版块。当玩家在此版块相邻格放置带有自己玩家标记的版块时，必须先花费2MC",
+    "Raise the temperature two steps. Place this tile. Players must pay an additional 2M€ when they place a tile with their player marker on it ADJACENT to the Nuclear Zone.": "提升温度2格，放置此版块。当玩家在此版块相邻格放置带有自己玩家标记的版块时，必须先花费2 M€",
     "Place this tile and raise temperature 2 steps.":"提升温度2格，放置此版块。",
 
     "Ocean City": "海洋城市",

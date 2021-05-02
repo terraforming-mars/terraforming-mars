@@ -1,6 +1,6 @@
 {
     "Polyphemos": "Polyphemos",
-    "You start with 50MC. Increase your M€ production 5 steps. Gain 5 titanium.": "Comienza con 50 M€. Incrementa tu producción de M€ 5 niveles. Obtén 5 de titanio.",
+    "You start with 50 M€. Increase your M€ production 5 steps. Gain 5 titanium.": "Comienza con 50 M€. Incrementa tu producción de M€ 5 niveles. Obtén 5 de titanio.",
     "Effect: When you buy a card to hand, pay 5M€ instead of 3, including the starting hand.": "Efecto: al comprar una carta para tu mano, paga 5 M€ en vez de 3 M€, incluyendo tu mano inicial.",
 
     "STORMCRAFT INCORPORATED": "STORMCRAFT INCORPORATED",
@@ -14,10 +14,10 @@
 
     "Aridor": "Aridor",
     "COLONY": "COLONIA",
-    "You start with 40MC. As your first action, put an additional Colony Tile of your choice into play": "Comienza con 40 M€. Como p[rimera acción, pon en juego una loseta adicional de Colonia a tu elección.",
+    "You start with 40 M€. As your first action, put an additional Colony Tile of your choice into play": "Comienza con 40 M€. Como p[rimera acción, pon en juego una loseta adicional de Colonia a tu elección.",
     "Effect: When you get a new type of tag in play [event cards do not count], increase your M€ production 1 step.": "Efecto: cuando juegues un símbolo que no tuvieras ya, aumenta tu producción de M€ 1 nivel.",
 
     "Poseidon": "Poseidón",
-    "You start with 45MC. As your first action, place a colony.": "Comienza con 45 M€. Como primera acción, coloca una colonia.",
+    "You start with 45 M€. As your first action, place a colony.": "Comienza con 45 M€. Como primera acción, coloca una colonia.",
     "Effect: When any colony is placed, including this, raise your M€ production 1 step.": "Efecto: cuando se coloque una colonia, incluyendo esta, aumenta tu producción de M€ 1 nivel."
 }

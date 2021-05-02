@@ -233,9 +233,11 @@ export class Turmoil implements ISerializable<SerializedTurmoil> {
 
       // 2 - Global Event
       // TODO: create a LogMessageDataType for Global Events, ref https://github.com/bafolts/terraforming-mars/issues/3057
-      if (this.currentGlobalEvent) {
-        game.log('Global event "' + this.currentGlobalEvent.name + '" has been resolved.');
-        this.currentGlobalEvent.resolve(game, this);
+      if (this.currentGlobalEvent !== undefined) {
+        const currentGlobalEvent: IGlobalEvent = this.currentGlobalEvent;
+        game.log('Resolving global event ${0}', (b) => b.globalEvent(currentGlobalEvent));
+        // game.log('Global event "' + this.currentGlobalEvent.name + '" has been resolved.');
+        currentGlobalEvent.resolve(game, this);
       }
 
       // 3 - New Government
@@ -338,7 +340,7 @@ export class Turmoil implements ISerializable<SerializedTurmoil> {
       if (bonus === undefined) {
         throw new Error(`Bonus id ${bonusId} not found in party ${rulingParty.name}`);
       }
-      game.log('The ruling bonus is ${0}', (b) => b.string(bonus.description).string(bonusId));
+      game.log('The ruling bonus is: ${0}', (b) => b.string(bonus.description));
       bonus.grant(game);
 
       const policyId = this.politicalAgendasData.currentAgenda.policyId;
@@ -346,7 +348,7 @@ export class Turmoil implements ISerializable<SerializedTurmoil> {
       if (policy === undefined) {
         throw new Error(`Policy id ${policyId} not found in party ${rulingParty.name}`);
       }
-      game.log('The ruling policy is ${0}', (b) => b.string(policy.description).string(policyId));
+      game.log('The ruling policy is: ${0}', (b) => b.string(policy.description));
       // Resolve Ruling Policy for Scientists P4
       if (policy.apply !== undefined) {
         policy.apply(game);

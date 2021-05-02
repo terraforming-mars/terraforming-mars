@@ -156,7 +156,7 @@
     "Dealt and discarded ${0} (cost ${1}) to place a ${2}": "Comprou e descartou ${0} (custo ${1}) para colocar um ${2}",
     "${0}'s ${1} amount ${2} by ${3} by Global Event": "A quantidade ${1} de ${0} foi ${2} em ${3} pelo Evento Global",
     "${0} placed ${1} tile on row ${2} position ${3}": "${0} colocou um tile ${1} na linha ${2} posição ${3}",
-    "${0} spent 1 ${1} to gain 7 M€": "${0} gastou 1 ${1} para ganhar 7 M$",
+    "${0} spent 1 ${1} to gain 7 M€": "${0} gastou 1 ${1} para ganhar 7 M€",
     "${0} removed an animal from ${1}": "${0} removeu um animal de ${1}",
     "${0} removed a microbe from ${1}": "${0} removeu um micróbio de ${1}",
     "${0} removed a microbe from ${1}'s ${2}": "${0} removeu um microbio de ${2} de ${1}",

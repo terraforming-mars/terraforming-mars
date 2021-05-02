@@ -3,6 +3,7 @@ import {PartyName} from '../turmoil/parties/PartyName';
 import {GlobalEventName} from '../turmoil/globalEvents/GlobalEventName';
 import {Game} from '../Game';
 import {Agenda} from '../turmoil/PoliticalAgendas';
+import {IGlobalEvent} from '../turmoil/globalEvents/IGlobalEvent';
 
 export interface TurmoilModel {
   dominant: PartyName | undefined;
@@ -94,35 +95,9 @@ export function getTurmoil(game: Game): TurmoilModel | undefined {
       }
     });
 
-    let distant;
-    if (turmoil.distantGlobalEvent) {
-      distant = {
-        name: turmoil.distantGlobalEvent.name,
-        description: turmoil.distantGlobalEvent.description,
-        revealed: turmoil.distantGlobalEvent.revealedDelegate,
-        current: turmoil.distantGlobalEvent.currentDelegate,
-      };
-    }
-
-    let coming;
-    if (turmoil.comingGlobalEvent) {
-      coming = {
-        name: turmoil.comingGlobalEvent.name,
-        description: turmoil.comingGlobalEvent.description,
-        revealed: turmoil.comingGlobalEvent.revealedDelegate,
-        current: turmoil.comingGlobalEvent.currentDelegate,
-      };
-    }
-
-    let current;
-    if (turmoil.currentGlobalEvent) {
-      current = {
-        name: turmoil.currentGlobalEvent.name,
-        description: turmoil.currentGlobalEvent.description,
-        revealed: turmoil.currentGlobalEvent.revealedDelegate,
-        current: turmoil.currentGlobalEvent.currentDelegate,
-      };
-    }
+    const distant = globalEventToModel(turmoil.distantGlobalEvent);
+    const coming = globalEventToModel(turmoil.comingGlobalEvent);
+    const current = globalEventToModel(turmoil.currentGlobalEvent);
 
     const staticAgendas = turmoil.politicalAgendasData.staticAgendas;
     const getStaticAgenda = function(partyName: PartyName): Agenda {
@@ -148,6 +123,11 @@ export function getTurmoil(game: Game): TurmoilModel | undefined {
       };
     }
 
+    const politicalAgendas = {
+      currentAgenda: turmoil.politicalAgendasData.currentAgenda,
+      staticAgendas: staticAgendasModel,
+    };
+
     const policyActionUsers = Array.from(
       game.getPlayers(),
       (player) => {
@@ -159,24 +139,33 @@ export function getTurmoil(game: Game): TurmoilModel | undefined {
     );
 
     return {
-      chairman: chairman,
-      ruling: ruling,
-      dominant: dominant,
-      parties: parties,
-      lobby: lobby,
-      reserve: reserve,
-      distant: distant,
-      coming: coming,
-      current: current,
-      politicalAgendas: {
-        currentAgenda: turmoil.politicalAgendasData.currentAgenda,
-        staticAgendas: staticAgendasModel,
-      },
+      chairman,
+      ruling,
+      dominant,
+      parties,
+      lobby,
+      reserve,
+      distant,
+      coming,
+      current,
+      politicalAgendas,
       policyActionUsers,
     };
   } else {
     return undefined;
   }
+}
+
+function globalEventToModel(globalEvent: IGlobalEvent | undefined): GlobalEventModel | undefined {
+  if (globalEvent === undefined) {
+    return undefined;
+  }
+  return {
+    name: globalEvent.name,
+    description: globalEvent.description,
+    revealed: globalEvent.revealedDelegate,
+    current: globalEvent.currentDelegate,
+  };
 }
 
 function getParties(game: Game): Array<PartyModel> {

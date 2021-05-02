@@ -16,6 +16,10 @@ import {Color} from '../Color';
 import {SoundManager} from './SoundManager';
 import {PreferencesManager} from './PreferencesManager';
 import {GlobalEventName} from '../turmoil/globalEvents/GlobalEventName';
+import {GlobalEvent} from './GlobalEvent';
+import {getGlobalEventByName} from '../turmoil/globalEvents/GlobalEventDealer';
+import {GlobalEventModel} from '../models/TurmoilModel';
+import {PartyName} from '../turmoil/parties/PartyName';
 
 let logRequest: XMLHttpRequest | undefined;
 
@@ -49,6 +53,7 @@ export const LogPanel = Vue.component('log-panel', {
   },
   components: {
     Card,
+    GlobalEvent,
   },
   methods: {
     scrollToEnd: function() {
@@ -198,7 +203,7 @@ export const LogPanel = Vue.component('log-panel', {
             this.cards.splice(index, 1);
           }
         }
-        if (data.type === LogMessageDataType.CARD) {
+        if (data.type === LogMessageDataType.GLOBAL_EVENT) {
           const globalEventName = data.value as GlobalEventName;
           const index = this.globalEventNames.indexOf(globalEventName);
           if (index === -1) {
@@ -275,6 +280,23 @@ export const LogPanel = Vue.component('log-panel', {
     lastGenerationClass: function(): string {
       return this.lastSoloGeneration === this.generation ? 'last-generation blink-animation' : '';
     },
+    getGlobalEvent: function(globalEventName: GlobalEventName): GlobalEventModel {
+      const globalEvent = getGlobalEventByName(globalEventName);
+      if (globalEvent) {
+        return {
+          name: globalEvent.name,
+          description: globalEvent.description,
+          revealed: globalEvent.revealedDelegate,
+          current: globalEvent.currentDelegate,
+        };
+      }
+      return {
+        name: globalEventName,
+        description: 'global event not found',
+        revealed: PartyName.GREENS,
+        current: PartyName.GREENS,
+      };
+    },
   },
   mounted: function() {
     this.getLogsForGeneration(this.generation);
@@ -306,7 +328,7 @@ export const LogPanel = Vue.component('log-panel', {
             <Card :card="{name: card}"/>
           </div>
           <div id="log_panel_card" class="cardbox" v-for="(globalEventName, index) in globalEventNames" :key="globalEventName">
-            <Card :card="{name: globalEventName}"/>
+            <global-event :globalEvent="getGlobalEvent(globalEventName)" type="current"></global-event>
           </div>
         </div>
       </div>

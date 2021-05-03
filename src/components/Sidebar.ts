@@ -5,11 +5,11 @@ import {LANGUAGES} from '../constants';
 import {MAX_OCEAN_TILES, MAX_TEMPERATURE, MAX_OXYGEN_LEVEL, MAX_VENUS_SCALE} from '../constants';
 import {TurmoilModel} from '../models/TurmoilModel';
 import {PartyName} from '../turmoil/parties/PartyName';
-import {GameSetupDetail} from '../components/GameSetupDetail';
+import {GameSetupDetail} from './GameSetupDetail';
 import {GameOptionsModel} from '../models/GameOptionsModel';
 import {TranslateMixin} from './TranslateMixin';
 
-export const Preferences = Vue.component('preferences', {
+export const Sidebar = Vue.component('sidebar', {
   props: {
     playerNumber: {
       type: Number,

@@ -114,9 +114,9 @@ export const GameEnd = Vue.component('game-end', {
                                 <th><div class="m-and-a" title="Awards points">A</div></th>
                                 <th><div class="table-forest-tile"></div></th>
                                 <th><div class="table-city-tile"></div></th>
-                                <th v-if="player.game.moon !== undefined">Moon Roads</th>
-                                <th v-if="player.game.moon !== undefined">Moon Colonies</th>
-                                <th v-if="player.game.moon !== undefined">Moon Mines</th>
+                                <th v-if="player.game.moon !== undefined"><div class="table-moon-road-tile"></div></th>
+                                <th v-if="player.game.moon !== undefined"><div class="table-moon-colony-tile"></div></th>
+                                <th v-if="player.game.moon !== undefined"><div class="table-moon-mine-tile"></div></th>
                                 <th><div class="vp">VP</div></th>
                                 <th class="game-end-total"><div class="game-end-total-column">Total</div></th>
                                 <th><div class="mc-icon"></div></th>

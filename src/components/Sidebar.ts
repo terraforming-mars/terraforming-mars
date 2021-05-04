@@ -266,73 +266,73 @@ export const Sidebar = Vue.component('sidebar', {
     <div class="preferences_panel" v-if="ui.preferences_panel_open">
       <div class="preferences_panel_item">
         <label class="form-switch">
-          <input type="checkbox" v-on:change="updatePreferences" v-model="hide_hand"></input>
+          <input type="checkbox" v-on:change="updatePreferences" v-model="hide_hand">
           <i class="form-icon"></i> <span v-i18n>Hide cards in hand</span>
         </label>
       </div>
       <div class="preferences_panel_item">
         <label class="form-switch">
-          <input type="checkbox" v-on:change="updatePreferences" v-model="hide_awards_and_milestones"></input>
+          <input type="checkbox" v-on:change="updatePreferences" v-model="hide_awards_and_milestones">
           <i class="form-icon"></i> <span v-i18n>Hide awards and milestones</span>
         </label>
       </div>
       <div class="preferences_panel_item">
         <label class="form-switch">
-          <input type="checkbox" v-on:change="updatePreferences" v-model="small_cards"></input>
+          <input type="checkbox" v-on:change="updatePreferences" v-model="small_cards">
           <i class="form-icon"></i> <span v-i18n>Smaller cards</span>
         </label>
       </div>
       <div class="preferences_panel_item">
         <label class="form-switch">
-          <input type="checkbox" v-on:change="updatePreferences" v-model="magnify_cards"></input>
+          <input type="checkbox" v-on:change="updatePreferences" v-model="magnify_cards">
           <i class="form-icon"></i> <span v-i18n>Magnify cards on hover</span>
         </label>
       </div>
       <div class="preferences_panel_item">
         <label class="form-switch">
-          <input type="checkbox" v-on:change="updatePreferences" v-model="hide_discount_on_cards"></input>
+          <input type="checkbox" v-on:change="updatePreferences" v-model="hide_discount_on_cards">
           <i class="form-icon"></i> <span v-i18n>Hide discount on cards</span>
         </label>
       </div>
       <div class="preferences_panel_item">
         <label class="form-switch">
-          <input type="checkbox" v-on:change="updatePreferences" v-model="show_card_number"></input>
+          <input type="checkbox" v-on:change="updatePreferences" v-model="show_card_number">
           <i class="form-icon"></i> <span v-i18n>Show card numbers (req. refresh)</span>
         </label>
       </div>
       <div class="preferences_panel_item">
         <label class="form-switch">
-          <input type="checkbox" v-on:change="updatePreferences" v-model="remove_background"></input>
+          <input type="checkbox" v-on:change="updatePreferences" v-model="remove_background">
           <i class="form-icon"></i> <span v-i18n>Remove background image</span>
         </label>
       </div>
       <div class="preferences_panel_item">
         <label class="form-switch">
-          <input type="checkbox" v-on:change="updatePreferences" v-model="show_alerts"></input>
+          <input type="checkbox" v-on:change="updatePreferences" v-model="show_alerts">
           <i class="form-icon"></i> <span v-i18n>Show in-game alerts</span>
         </label>
       </div>
       <div class="preferences_panel_item">
         <label class="form-switch">
-          <input type="checkbox" v-on:change="updatePreferences" v-model="enable_sounds"></input>
+          <input type="checkbox" v-on:change="updatePreferences" v-model="enable_sounds">
           <i class="form-icon"></i> <span v-i18n>Enable sounds</span>
         </label>
       </div>
       <div class="preferences_panel_item">
         <label class="form-switch">
-          <input type="checkbox" v-on:change="updatePreferences" v-model="hide_animated_sidebar"></input>
+          <input type="checkbox" v-on:change="updatePreferences" v-model="hide_animated_sidebar">
           <i class="form-icon"></i> <span v-i18n>Hide sidebar notification</span>
         </label>
       </div>
       <div class="preferences_panel_item">
         <label class="form-switch">
-          <input type="checkbox" v-on:change="updatePreferences" v-model="hide_tile_confirmation"></input>
+          <input type="checkbox" v-on:change="updatePreferences" v-model="hide_tile_confirmation">
           <i class="form-icon"></i> <span v-i18n>Hide tile confirmation</span>
         </label>
       </div>
       <div class="preferences_panel_item">
         <label class="form-switch">
-          <input type="checkbox" v-on:change="updatePreferences" v-model="learner_mode"></input>
+          <input type="checkbox" v-on:change="updatePreferences" v-model="learner_mode">
           <i class="form-icon"></i>
           <span v-i18n>Learner Mode (req. refresh)</span>
           <span class="tooltip tooltip-left" data-tooltip="Show information that can be helpful\n to players who are still learning the games">&#9432;</span>
@@ -342,7 +342,7 @@ export const Sidebar = Vue.component('sidebar', {
         <label class="form-label"><span v-i18n>Language</span> (<a href="javascript:document.location.reload(true);" v-i18n>refresh page</a> <span v-i18n>to see changes</span>)</label>
         <div class="preferences_panel_langs">
           <label class="form-radio" v-for="language in langs">
-            <input name="lang" type="radio" v-on:change="updatePreferences" v-model="lang" :value="language.id"></input>
+            <input name="lang" type="radio" v-on:change="updatePreferences" v-model="lang" :value="language.id">
             <i class="form-icon"></i> {{ language.title }}
           </label>
         </div>

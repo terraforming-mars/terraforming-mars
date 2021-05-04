@@ -38,10 +38,6 @@ export class LogHelper {
     player.game.log('${0}\'s ${1} production increased by ${2}', (b) => b.player(player).string(resource).number(qty));
   }
 
-  static logCardChange(player: Player, effect: string, qty: number = 1) {
-    player.game.log('${0} ${1} ${2} card(s)', (b) => b.player(player).string(effect).number(qty));
-  }
-
   static logTilePlacement(player: Player, space: ISpace, tileType: TileType) {
     this.logBoardTileAction(player, space, TileType.toString(tileType) + ' tile');
   }
@@ -86,7 +82,7 @@ export class LogHelper {
     });
   }
 
-  static logDrawnCards(player: Player, cards: Array<ICard> | Array<CardName>) {
+  static logDrawnCards(player: Player, cards: Array<ICard> | Array<CardName>, privateMessage: boolean = false) {
     // If |this.count| equals 3, for instance, this generates "${0} drew ${1}, ${2} and ${3}"
     let message = '${0} drew ';
     if (cards.length === 0) {
@@ -103,6 +99,8 @@ export class LogHelper {
         message += '${' + (i + 1) + '}';
       }
     }
+    const options = privateMessage ? {reservedFor: player} : {};
+
     player.game.log(message, (b) => {
       b.player(player);
       for (const card of cards) {
@@ -112,6 +110,6 @@ export class LogHelper {
           b.card(card);
         }
       }
-    });
+    }, options);
   }
 }

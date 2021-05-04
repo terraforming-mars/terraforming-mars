@@ -1983,9 +1983,9 @@ export class Player implements ISerializable<SerializedPlayer> {
       if (this.game.turmoil?.lobby.has(this.id)) {
         sendDelegate = new SendDelegateToArea(this, 'Send a delegate in an area (from lobby)');
       } else if (this.isCorporation(CardName.INCITE) && this.canAfford(3) && this.game.turmoil.getDelegatesInReserve(this.id) > 0) {
-        sendDelegate = new SendDelegateToArea(this, 'Send a delegate in an area (3 MC)', {cost: 3});
+        sendDelegate = new SendDelegateToArea(this, 'Send a delegate in an area (3 M€)', {cost: 3});
       } else if (this.canAfford(5) && this.game.turmoil.getDelegatesInReserve(this.id) > 0) {
-        sendDelegate = new SendDelegateToArea(this, 'Send a delegate in an area (5 MC)', {cost: 5});
+        sendDelegate = new SendDelegateToArea(this, 'Send a delegate in an area (5 M€)', {cost: 5});
       }
       if (sendDelegate) {
         const input = sendDelegate.execute();

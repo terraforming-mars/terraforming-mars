@@ -22,7 +22,7 @@ export class LunaFirstIncorporated implements CorporationCard {
   }
 
   public readonly metadata: CardMetadata = {
-    description: 'You start with 40 MC, 2 steel, and 2 Titanium.',
+    description: 'You start with 40 M€, 2 steel, and 2 Titanium.',
     cardNumber: '',
     renderData: CardRenderer.builder((b) => {
       b.megacredits(40).steel(2).titanium(2).br;

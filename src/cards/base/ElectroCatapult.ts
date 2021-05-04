@@ -29,7 +29,7 @@ export class ElectroCatapult extends Card implements IActionCard, IProjectCard {
           align: 'left',
         },
         renderData: CardRenderer.builder((b) => {
-          b.action('Spend 1 plant or 1 steel to gain 7MC.', (eb) => {
+          b.action('Spend 1 plant or 1 steel to gain 7 M€.', (eb) => {
             eb.plants(1).slash().steel(1).startAction.megacredits(7);
           }).br;
           b.production((pb) => pb.minus().energy(1));
@@ -47,13 +47,13 @@ export class ElectroCatapult extends Card implements IActionCard, IProjectCard {
   public action(player: Player) {
     if (player.plants > 0 && player.steel > 0) {
       return new OrOptions(
-        new SelectOption('Spend 1 plant to gain 7 mega credit', 'Spend plant', () => {
+        new SelectOption('Spend 1 plant to gain 7 M€', 'Spend plant', () => {
           player.plants--;
           player.megaCredits += 7;
           this.log(player, Resources.PLANTS);
           return undefined;
         }),
-        new SelectOption('Spend 1 steel to gain 7 mega credit', 'Spend steel', () => {
+        new SelectOption('Spend 1 steel to gain 7 M€', 'Spend steel', () => {
           player.steel--;
           player.megaCredits += 7;
           this.log(player, Resources.STEEL);

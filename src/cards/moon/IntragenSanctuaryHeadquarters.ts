@@ -23,7 +23,7 @@ export class IntragenSanctuaryHeadquarters implements CorporationCard {
   public initialActionText = 'Place a colony tile on the Moon.';
 
   public readonly metadata: CardMetadata = {
-    description: 'You start with 38 MC. ' +
+    description: 'You start with 38 M€. ' +
       'As your first action, place a colony tile on the Moon and raise the Colony Rate 1 step.',
     cardNumber: '',
     renderData: CardRenderer.builder((b) => {

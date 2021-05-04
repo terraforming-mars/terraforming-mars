@@ -17,7 +17,7 @@ export class Manutech extends Card implements CorporationCard {
 
       metadata: {
         cardNumber: 'R23',
-        description: 'You start with 1 steel production, and 35 MC.',
+        description: 'You start with 1 steel production, and 35 M€.',
         renderData: CardRenderer.builder((b) => {
           b.br.br;
           b.production((pb) => pb.steel(1)).nbsp.megacredits(35);

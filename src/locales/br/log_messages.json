@@ -167,9 +167,9 @@
     "${0} gained ${1} TR": "${0} ganhou ${1} IT",
     "1 card(s) were discarded": "1 carta foi descartada",
 
-    "Spend 1 plant to gain 7 mega credit": "Gastar 1 planta para ganhar 7 megacréditos",
+    "Spend 1 plant to gain 7 M€": "Gastar 1 planta para ganhar 7 megacréditos",
     "Spend plant": "Gastar planta",
-    "Spend 1 steel to gain 7 mega credit": "Gastar 1 aço para ganhar 7 megacréditos",
+    "Spend 1 steel to gain 7 M€": "Gastar 1 aço para ganhar 7 megacréditos",
     "Spend steel": "Gastar aço",
     "${0} spent ${1} energy": "${0} gastou ${1} energia",
     "${0} gained ${1} energy": "${0} ganhou ${1} energia",

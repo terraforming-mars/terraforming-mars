@@ -724,7 +724,7 @@ export class Game implements ISerializable<SerializedGame> {
     this.save();
     for (const player of this.players) {
       if (player.pickedCorporationCard === undefined && player.dealtCorporationCards.length > 0) {
-        player.setWaitingFor(this.pickCorporationCard(player), () => {});
+        player.setWaitingFor(this.pickCorporationCard(player));
       }
     }
     if (this.players.length === 1 && this.gameOptions.coloniesExtension) {

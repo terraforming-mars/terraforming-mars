@@ -46,7 +46,7 @@ describe('Player', function() {
     player.playedCards.push(new LunarBeam());
     const action = card.play(player); //  Game.newInstance('foobar', [player, player2, player3], player));
     if (action !== undefined) {
-      player.setWaitingFor(action, () => undefined);
+      player.setWaitingFor(action);
       player.process([[player2.id]]);
       expect(player.getProduction(Resources.ENERGY)).to.eq(1);
     }
@@ -61,7 +61,7 @@ describe('Player', function() {
     player.playedCards.push(new LunarBeam());
     const action = card.play(player); // , Game.newInstance('foobar', [player, redPlayer], player));
     if (action !== undefined) {
-      player.setWaitingFor(action, () => undefined);
+      player.setWaitingFor(action);
       expect(player.getWaitingFor()).is.not.undefined;
       expect(function() {
         player.process([[]]);
@@ -84,7 +84,7 @@ describe('Player', function() {
     const action = card.play(player); // Game.newInstance('foobar', [player, redPlayer], player));
     expect(action).is.not.undefined;
     if (action === undefined) return;
-    player.setWaitingFor(action, () => undefined);
+    player.setWaitingFor(action);
     expect(player.getWaitingFor()).is.not.undefined;
     expect(function() {
       player.process([[]]);
@@ -123,7 +123,7 @@ describe('Player', function() {
     const mockOption = new SelectOption('Mock select option', 'Save', () => {
       return mockOption2;
     });
-    player.setWaitingFor(mockOption, () => done());
+    player.setWaitingFor(mockOption, done);
     player.process([['1']]);
     expect(player.getWaitingFor()).not.to.be.undefined;
     player.process([['1']]);

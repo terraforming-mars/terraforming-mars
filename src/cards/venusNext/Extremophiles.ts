@@ -36,9 +36,7 @@ export class Extremophiles extends Card implements IActionCard, IResourceCard {
   };
 
   public resourceCount: number = 0;
-  public canPlay(player: Player): boolean {
-    return player.getTagCount(Tags.SCIENCE) >= 2;
-  }
+
   public play() {
     return undefined;
   }

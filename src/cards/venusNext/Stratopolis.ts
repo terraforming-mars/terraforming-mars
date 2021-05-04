@@ -42,9 +42,7 @@ export class Stratopolis extends Card implements IActionCard, IResourceCard {
     });
   };
   public resourceCount: number = 0;
-  public canPlay(player: Player): boolean {
-    return player.getTagCount(Tags.SCIENCE) >= 2;
-  }
+
   public play(player: Player) {
     player.addProduction(Resources.MEGACREDITS, 2);
     player.game.addCityTile(player, SpaceName.STRATOPOLIS, SpaceType.COLONY);

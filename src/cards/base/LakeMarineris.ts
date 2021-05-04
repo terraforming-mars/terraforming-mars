@@ -27,15 +27,17 @@ export class LakeMarineris extends Card implements IProjectCard {
     });
   }
   public canPlay(player: Player): boolean {
-    const meetsTemperatureRequirements = super.canPlay(player);
+    if (!super.canPlay(player)) {
+      return false;
+    }
     const remainingOceans = MAX_OCEAN_TILES - player.game.board.getOceansOnBoard();
     const oceansPlaced = Math.min(remainingOceans, 2);
 
     if (PartyHooks.shouldApplyPolicy(player.game, PartyName.REDS)) {
-      return player.canAfford(player.getCardCost(this) + REDS_RULING_POLICY_COST * oceansPlaced) && meetsTemperatureRequirements;
+      return player.canAfford(player.getCardCost(this) + REDS_RULING_POLICY_COST * oceansPlaced);
     }
 
-    return meetsTemperatureRequirements;
+    return true;
   }
 
   public play(player: Player) {

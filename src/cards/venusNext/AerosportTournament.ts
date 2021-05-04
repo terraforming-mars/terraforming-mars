@@ -1,6 +1,5 @@
 import {CardType} from '../CardType';
 import {Player} from '../../Player';
-import {ResourceType} from '../../ResourceType';
 import {CardName} from '../../CardName';
 import {Resources} from '../../Resources';
 import {LogHelper} from '../../LogHelper';
@@ -28,9 +27,7 @@ export class AerosportTournament extends Card {
       },
     });
   };
-  public canPlay(player: Player): boolean {
-    return player.getResourceCount(ResourceType.FLOATER) >= 5;
-  }
+
   public play(player: Player) {
     const amount = player.game.getCitiesInPlay();
     player.megaCredits += amount;

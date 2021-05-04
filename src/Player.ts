@@ -1760,7 +1760,7 @@ export class Player implements ISerializable<SerializedPlayer> {
     return canAfford && (card.canPlay === undefined || card.canPlay(this));
   }
 
-  // Checks if the player can afford to pay `cost` mc (possibly replaceable with steal, titanium etc.)
+  // Checks if the player can afford to pay `cost` mc (possibly replaceable with steel, titanium etc.)
   // and additionally pay the reserveUnits (no replaces here)
   public canAfford(cost: number, options?: {
     steel?: boolean,

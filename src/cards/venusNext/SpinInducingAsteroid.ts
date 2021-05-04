@@ -30,13 +30,15 @@ export class SpinInducingAsteroid extends Card implements IProjectCard {
   }
 
   public canPlay(player: Player): boolean {
-    const meetsVenusRequirements = super.canPlay(player);
-
-    if (PartyHooks.shouldApplyPolicy(player.game, PartyName.REDS)) {
-      return player.canAfford(player.getCardCost(this) + REDS_RULING_POLICY_COST * 2, {titanium: true}) && meetsVenusRequirements;
+    if (!super.canPlay(player)) {
+      return false;
     }
 
-    return meetsVenusRequirements;
+    if (PartyHooks.shouldApplyPolicy(player.game, PartyName.REDS)) {
+      return player.canAfford(player.getCardCost(this) + REDS_RULING_POLICY_COST * 2, {titanium: true}) && true;
+    }
+
+    return true;
   }
 
   public play(player: Player) {

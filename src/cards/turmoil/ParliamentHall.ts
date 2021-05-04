@@ -31,13 +31,6 @@ export class ParliamentHall extends Card implements IProjectCard {
     });
   }
 
-  public canPlay(player: Player): boolean {
-    if (player.game.turmoil !== undefined) {
-      return player.game.turmoil.canPlay(player, PartyName.MARS);
-    }
-    return false;
-  }
-
   public play(player: Player) {
     const amount = Math.floor((player.getTagCount(Tags.BUILDING) + 1) / 3);
     player.addProduction(Resources.MEGACREDITS, amount);

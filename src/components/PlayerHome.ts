@@ -7,7 +7,6 @@ import {Award} from './Award';
 import {PlayersOverview} from './overview/PlayersOverview';
 import {WaitingFor} from './WaitingFor';
 import {Sidebar} from './Sidebar';
-import {Preferences} from './Preferences';
 import {PlayerModel, PublicPlayerModel} from '../models/PlayerModel';
 import {Colony} from './Colony';
 import {LogPanel} from './LogPanel';

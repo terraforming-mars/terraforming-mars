@@ -16,7 +16,7 @@ export class Loan extends PreludeCard implements IProjectCard {
           b.production((pb) => pb.minus().megacredits(2)).br;
           b.megacredits(30);
         }),
-        description: 'Gain 30 MC. Decrease your M€ production 2 steps.',
+        description: 'Gain 30 M€. Decrease your M€ production 2 steps.',
       },
     });
   }

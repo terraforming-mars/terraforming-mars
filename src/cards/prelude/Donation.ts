@@ -13,7 +13,7 @@ export class Donation extends PreludeCard {
         renderData: CardRenderer.builder((b) => {
           b.megacredits(21);
         }),
-        description: 'Gain 21 MC.',
+        description: 'Gain 21 M€.',
       },
     });
   }

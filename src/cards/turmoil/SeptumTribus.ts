@@ -17,7 +17,7 @@ export class SeptumTribus extends Card implements IActionCard, CorporationCard {
 
       metadata: {
         cardNumber: 'R15',
-        description: 'You start with 36 MC. When you perform an action, the wild tag counts as any tag of your choice.',
+        description: 'You start with 36 M€. When you perform an action, the wild tag counts as any tag of your choice.',
         renderData: CardRenderer.builder((b) => {
           b.br;
           b.megacredits(36);

@@ -1,4 +1,4 @@
-.preferences_cont {
+.sidebar_cont {
     white-space: nowrap;
     position: fixed;
     left: 0px;
@@ -10,6 +10,86 @@
     align-items: center;
     height: 100%;
 }
+
+.sidebar {
+  .tm {
+    background: url(/assets/board/mars.png);
+    width: 50px;
+    height: 50px;
+    margin-top: 3px;
+    border-radius: 50%;
+    box-shadow: 0 1px 1px 1px black;
+    font-family: Prototype;
+    text-align: center;
+    line-height: 20px;
+    color: black;
+    background-size: 100px;
+    background-position: -26px -20px;
+  }
+  .gen-text {
+    font-size: 14px;
+    margin-top: 2px;
+  }
+  .gen-marker {
+    font-size: 34px;
+  }
+
+  .global_params {
+    width: 60px;
+    margin-bottom: 5px;
+  }
+
+  .temperature-tile {
+    background-image: url(./assets/global-parameters/temperature.png);
+    width: 16px;
+    height: 46px;
+    background-size: 16px 46px;
+    margin-left: 22px;
+    margin-top: 10px;
+  }
+
+  .oxygen-tile {
+    background-image: url(./assets/global-parameters/oxygen.png);
+    width: 40px;
+    height: 40px;
+    background-size: 40px;
+    margin-left: 10px;
+    margin-top: 10px;
+  }
+
+  .ocean-tile {
+    background-image: url(./assets/tiles/ocean.png);
+    width: 32px;
+    height: 36px;
+    background-size: 32px 36px;
+    margin-left: 14px;
+    margin-top: 10px;
+  }
+
+  .venus-tile {
+    background-image: url(./assets/global-parameters/venus.png);
+    width: 40px;
+    height: 26px;
+    background-size: 40px 26px;
+    margin-left: 10px;
+    margin-top: 10px;
+  }
+
+  .global_params_value {
+    text-align: center;
+    font-family: "Prototype";
+    margin-top: -5px;
+  }
+
+  .checkmark{
+    display: inline-block;
+    filter: invert(92%) sepia(11%) saturate(1093%) hue-rotate(46deg) brightness(98%) contrast(85%);
+    width: 18px;
+    height: 18px;
+  }
+
+}
+
 .preferences_acting_player {
     background: linear-gradient(180deg, #303030 0%, #303030 25%, #745B54 80%, #745B54 100%);
 }
@@ -55,27 +135,6 @@
     height: 46px;
 }
 
-.preferences_tm {
-  background: url(/assets/board/mars.png);
-  width: 50px;
-  height: 50px;
-  margin-top: 3px;
-  border-radius: 50%;
-  box-shadow: 0 1px 1px 1px black;
-  font-family: Prototype;
-  text-align: center;
-  line-height: 20px;
-  color: black;
-  background-size: 100px;
-  background-position: -26px -20px;
-}
-.preferences-gen-text {
-    font-size: 14px;
-    margin-top: 2px;
-}
-.preferences-gen-marker {
-    font-size: 34px;
-}
 
 .preferences_player {
     writing-mode: vertical-rl;
@@ -113,60 +172,6 @@
     to {
       transform: rotate(359deg);
     }
-}
-
-.preferences_global_params {
-    width: 60px;
-    margin-bottom: 5px;
-}
-
-.preferences_checkmark{
-    display: inline-block;
-    filter: invert(92%) sepia(11%) saturate(1093%) hue-rotate(46deg) brightness(98%) contrast(85%);
-    width: 18px;
-    height: 18px;
-}
-
-.preferences_venus-tile {
-    background-image: url(./assets/global-parameters/venus.png);
-    width: 40px;
-    height: 26px;
-    background-size: 40px 26px;
-    margin-left: 10px;
-    margin-top: 10px;
-}
-
-.preferences_temperature-tile {
-  background-image: url(./assets/global-parameters/temperature.png);
-  width: 16px;
-  height: 46px;
-  background-size: 16px 46px;
-  margin-left: 22px;
-  margin-top: 10px;
-}
-
-.preferences_oxygen-tile {
-  background-image: url(./assets/global-parameters/oxygen.png);
-  width: 40px;
-  height: 40px;
-  background-size: 40px;
-  margin-left: 10px;
-  margin-top: 10px;
-}
-
-.preferences_ocean-tile {
-  background-image: url(./assets/tiles/ocean.png);
-  width: 32px;
-  height: 36px;
-  background-size: 32px 36px;
-  margin-left: 14px;
-  margin-top: 10px;
-}
-
-.preferences_global_params_value {
-  text-align: center;
-  font-family: "Prototype";
-  margin-top: -5px;
 }
 
 .preferences_icon {

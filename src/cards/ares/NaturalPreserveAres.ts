@@ -14,7 +14,7 @@ export class NaturalPreserveAres extends NaturalPreserve {
         renderData: CardRenderer.builder((b) => {
           b.production((pb) => pb.megacredits(1)).nbsp.tile(TileType.NATURAL_PRESERVE, false, true).asterix();
         }),
-        description: 'Oxygen must be 4% or less. Place this tile NEXT TO NO OTHER TILE. The tile grants an ADJACENCY BONUS of of 1MC. Increase your M€ production 1 step.',
+        description: 'Oxygen must be 4% or less. Place this tile NEXT TO NO OTHER TILE. The tile grants an ADJACENCY BONUS of of 1 M€. Increase your M€ production 1 step.',
         victoryPoints: 1,
       });
   }

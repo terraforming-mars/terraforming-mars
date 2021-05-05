@@ -24,7 +24,7 @@ export class Philares extends Card implements CorporationCard {
 
       metadata: {
         cardNumber: 'R25',
-        description: 'You start with 47 MC. As your first action, place a greenery tile and raise the oxygen 1 step.',
+        description: 'You start with 47 M€. As your first action, place a greenery tile and raise the oxygen 1 step.',
         renderData: CardRenderer.builder((b) => {
           b.megacredits(47).nbsp.greenery();
           b.corpBox('effect', (ce) => {

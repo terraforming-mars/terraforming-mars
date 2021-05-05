@@ -37,7 +37,7 @@ export class TheArchaicFoundationInstitute implements CorporationCard {
   }
 
   public readonly metadata: CardMetadata = {
-    description: 'You start with 55MC.',
+    description: 'You start with 55 M€.',
     cardNumber: '',
     renderData: CardRenderer.builder((b) => {
       b.megacredits(55).br;

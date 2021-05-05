@@ -24,7 +24,7 @@ export class StormCraftIncorporated extends Card implements IActionCard, Corpora
       cardType: CardType.CORPORATION,
       metadata: {
         cardNumber: 'R29',
-        description: 'You start with 48 MC.',
+        description: 'You start with 48 M€.',
         renderData: CardRenderer.builder((b) => {
           b.br.br.br;
           b.megacredits(48);

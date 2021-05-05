@@ -13,7 +13,7 @@ export class BeginnerCorporation extends Card implements CorporationCard {
 
       metadata: {
         cardNumber: 'R00',
-        description: 'You start with 42 MC. Instead of choosing from 10 cards during setup, you get 10 cards for free.',
+        description: 'You start with 42 M€. Instead of choosing from 10 cards during setup, you get 10 cards for free.',
         renderData: CardRenderer.builder((b) => {
           b.megacredits(42).nbsp.cards(10).digit;
         }),

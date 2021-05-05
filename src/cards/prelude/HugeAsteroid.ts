@@ -15,7 +15,7 @@ export class HugeAsteroid extends PreludeCard {
           b.temperature(3).br;
           b.megacredits(-5);
         }),
-        description: 'Increase Temperature 3 steps. Pay 5 MC.',
+        description: 'Increase Temperature 3 steps. Pay 5 M€.',
       },
     });
   }

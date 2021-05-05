@@ -66,7 +66,7 @@ export const HelpPhases = Vue.component('help-phases', {
                     <li v-i18n>claim milestone</li>
                     <li v-i18n>fund award</li>
                     <li>
-                      <span v-i18n>trade with 9 mc, 3 Ti, or 3 energy</span>
+                      <span v-i18n>trade with 9 M€, 3 Ti, or 3 energy</span>
                       <div class="expansion-icon expansion-icon-colony"></div>
                     </li>
                     <li>

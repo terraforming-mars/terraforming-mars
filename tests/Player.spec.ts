@@ -46,7 +46,7 @@ describe('Player', function() {
     player.playedCards.push(new LunarBeam());
     const action = card.play(player); //  Game.newInstance('foobar', [player, player2, player3], player));
     if (action !== undefined) {
-      player.setWaitingFor(action, () => undefined);
+      player.setWaitingFor(action);
       player.process([[player2.id]]);
       expect(player.getProduction(Resources.ENERGY)).to.eq(1);
     }
@@ -61,7 +61,7 @@ describe('Player', function() {
     player.playedCards.push(new LunarBeam());
     const action = card.play(player); // , Game.newInstance('foobar', [player, redPlayer], player));
     if (action !== undefined) {
-      player.setWaitingFor(action, () => undefined);
+      player.setWaitingFor(action);
       expect(player.getWaitingFor()).is.not.undefined;
       expect(function() {
         player.process([[]]);
@@ -84,7 +84,7 @@ describe('Player', function() {
     const action = card.play(player); // Game.newInstance('foobar', [player, redPlayer], player));
     expect(action).is.not.undefined;
     if (action === undefined) return;
-    player.setWaitingFor(action, () => undefined);
+    player.setWaitingFor(action);
     expect(player.getWaitingFor()).is.not.undefined;
     expect(function() {
       player.process([[]]);
@@ -123,7 +123,7 @@ describe('Player', function() {
     const mockOption = new SelectOption('Mock select option', 'Save', () => {
       return mockOption2;
     });
-    player.setWaitingFor(mockOption, () => done());
+    player.setWaitingFor(mockOption, done);
     player.process([['1']]);
     expect(player.getWaitingFor()).not.to.be.undefined;
     player.process([['1']]);
@@ -579,3 +579,23 @@ function titlesToGlobalParameter(title: string): GlobalParameter {
   }
   throw new Error('title does not match any description: ' + title);
 }
+
+it('adds resources', () => {
+  const player = TestPlayers.BLUE.newPlayer();
+  player.megaCredits = 10;
+  // adds any positive amount
+  player.addResource(Resources.MEGACREDITS, 12);
+  expect(player.megaCredits).eq(22);
+  // removes more than we have
+  player.addResource(Resources.MEGACREDITS, -23);
+  expect(player.megaCredits).eq(0);
+  // adds any positive amount
+  player.addResource(Resources.MEGACREDITS, 5);
+  expect(player.megaCredits).eq(5);
+  // removes less than we have
+  player.addResource(Resources.MEGACREDITS, -4);
+  expect(player.megaCredits).eq(1);
+  // makes no change
+  player.addResource(Resources.MEGACREDITS, 0);
+  expect(player.megaCredits).eq(1);
+});

@@ -311,13 +311,14 @@ export class Player implements ISerializable<SerializedPlayer> {
   }
 
   public addResource(resource: Resources, amount: number, options? : { log: boolean, from? : Player | GlobalEventName}) {
-    if (resource === Resources.MEGACREDITS) this.megaCredits = Math.max(0, this.megaCredits + amount);
-    if (resource === Resources.STEEL) this.steel = Math.max(0, this.steel + amount);
+    const delta = (amount >= 0) ? amount : Math.max(amount, -this.getResource(resource));
 
-    if (resource === Resources.TITANIUM) this.titanium = Math.max(0, this.titanium + amount);
-    if (resource === Resources.PLANTS) this.plants = Math.max(0, this.plants + amount);
-    if (resource === Resources.ENERGY) this.energy = Math.max(0, this.energy + amount);
-    if (resource === Resources.HEAT) this.heat = Math.max(0, this.heat + amount);
+    if (resource === Resources.MEGACREDITS) this.megaCredits += delta;
+    if (resource === Resources.STEEL) this.steel += delta;
+    if (resource === Resources.TITANIUM) this.titanium += delta;
+    if (resource === Resources.PLANTS) this.plants += delta;
+    if (resource === Resources.ENERGY) this.energy += delta;
+    if (resource === Resources.HEAT) this.heat += delta;
 
     if (options?.log === true) {
       const modifier = amount > 0 ? 'increased' : 'decreased';
@@ -329,7 +330,7 @@ export class Player implements ISerializable<SerializedPlayer> {
         }
 
         // Crash site cleanup hook
-        if (from !== this && resource === Resources.PLANTS && amount < 0) {
+        if (from !== this && resource === Resources.PLANTS && delta < 0) {
           this.game.someoneHasRemovedOtherPlayersPlants = true;
         }
 
@@ -337,17 +338,17 @@ export class Player implements ISerializable<SerializedPlayer> {
           b.player(this)
             .string(resource)
             .string(modifier)
-            .number(Math.abs(amount))
+            .number(Math.abs(delta))
             .player(from));
       }
 
       // Global event logging
-      if (options?.from !== undefined && ! (options.from instanceof Player) && amount !== 0) {
+      if (options?.from !== undefined && ! (options.from instanceof Player) && delta !== 0) {
         this.game.log('${0}\'s ${1} amount ${2} by ${3} by Global Event', (b) =>
           b.player(this)
             .string(resource)
             .string(modifier)
-            .number(Math.abs(amount)));
+            .number(Math.abs(delta)));
       }
     }
 

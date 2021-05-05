@@ -35,7 +35,7 @@ export class LogHelper {
   }
 
   static logGainProduction(player: Player, resource: Resources, qty: number = 1) {
-    player.game.log('${0}\'s ${1} production increased by ${2}', (b) => b.player(player).string(resource).number(qty));
+    player.game.log('${0} gained ${2} ${1} production', (b) => b.player(player).string(resource).number(qty));
   }
 
   static logTilePlacement(player: Player, space: ISpace, tileType: TileType) {

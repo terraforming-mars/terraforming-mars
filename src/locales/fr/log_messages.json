@@ -28,7 +28,7 @@
     "${0}'s ${1} amount ${2} by ${3} by Global Event": "La quantité de ${1} de ${0} a été ${2} de ${3} par un Événement Global",
     "${0}'s ${1} production ${2} by ${3} by ${4}": "La production de ${1} de ${0} a été ${2} de ${3} par ${4}",
     "${0}'s ${1} production ${2} by ${3} by Global Event": "La production de ${1} de ${0} a été ${2} de ${3} par un Événement Global",
-    "${0}'s ${1} production increased by ${2}": "La production de ${1} de ${0} a augmenté de ${2}",
+    "${0} gained ${2} ${1} production": "La production de ${1} de ${0} a augmenté de ${2}",
     "${0} received ${1} M€ from ${2} owner (${3})": "${0} a reçu ${1} M€ de ${2} (appartenant à ${3})",
     "${0} copied ${1} production with ${2}": "${0} a copié la production de ${1} avec ${2}",
     "${0} placed ${1} tile on row ${2} position ${3}": "${0} a placé une tuile ${1} sur la ligne ${2} position ${3}",

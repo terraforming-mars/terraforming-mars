@@ -232,7 +232,6 @@ export class Turmoil implements ISerializable<SerializedTurmoil> {
       });
 
       // 2 - Global Event
-      // TODO: create a LogMessageDataType for Global Events, ref https://github.com/bafolts/terraforming-mars/issues/3057
       if (this.currentGlobalEvent !== undefined) {
         const currentGlobalEvent: IGlobalEvent = this.currentGlobalEvent;
         game.log('Resolving global event ${0}', (b) => b.globalEvent(currentGlobalEvent));

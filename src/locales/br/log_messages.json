@@ -106,8 +106,8 @@
     "${0} card(s) were discarded": "${0} carta(s) foi(ram) descartada(s)",
 
 
-    "The ruling bonus is ${0}": "O bônus de governo é ${0}",
-    "The ruling policy is ${0}": "A política de governo é ${0}",
+    "The ruling bonus is: ${0}": "O bônus de governo é ${0}",
+    "The ruling policy is: ${0}": "A política de governo é ${0}",
 
     "A neutral delegate is the new chairman.": "Um delegado neutro é o novo Presidente.",
     "Greens are in power in the first generation.": "Verdes começam sendo o partido governante na primeira geração.",

@@ -1,3 +1,5 @@
+// Do not reorder these.
+
 export enum LogMessageDataType {
     STRING,
     RAW_STRING, // Raw strings are untranslated.
@@ -10,4 +12,5 @@ export enum LogMessageDataType {
     PARTY,
     TILE_TYPE,
     SPACE_BONUS,
+    GLOBAL_EVENT,
 }

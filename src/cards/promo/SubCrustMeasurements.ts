@@ -30,10 +30,6 @@ export class SubCrustMeasurements extends Card implements IActionCard, IProjectC
     });
   }
 
-  public canPlay(player: Player): boolean {
-    return player.getTagCount(Tags.SCIENCE) >= 2;
-  }
-
   public play() {
     return undefined;
   }

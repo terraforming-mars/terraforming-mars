@@ -61,8 +61,7 @@ export class CometAiming extends Card implements IActionCard, IProjectCard, IRes
 
       const addAsteroidToSelf = function() {
         player.titanium--;
-        player.addResourceTo(asteroidCards[0]);
-        LogHelper.logAddResource(player, asteroidCards[0]);
+        player.addResourceTo(asteroidCards[0], {log: true});
         return undefined;
       };
 
@@ -72,8 +71,7 @@ export class CometAiming extends Card implements IActionCard, IProjectCard, IRes
         asteroidCards,
         (foundCards: Array<ICard>) => {
           player.titanium--;
-          player.addResourceTo(foundCards[0]);
-          LogHelper.logAddResource(player, foundCards[0]);
+          player.addResourceTo(foundCards[0], {log: true});
           return undefined;
         },
       );

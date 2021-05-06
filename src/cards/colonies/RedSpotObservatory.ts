@@ -45,10 +45,6 @@ export class RedSpotObservatory extends Card implements IProjectCard, IResourceC
     return true;
   }
 
-  public canPlay(player: Player): boolean {
-    return player.getTagCount(Tags.SCIENCE) >= 3;
-  }
-
   public action(player: Player) {
     if (this.resourceCount < 1) {
       player.addResourceTo(this, 1);

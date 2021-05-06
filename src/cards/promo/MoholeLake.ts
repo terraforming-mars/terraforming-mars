@@ -7,7 +7,6 @@ import {Player} from '../../Player';
 import {CardName} from '../../CardName';
 import {ResourceType} from '../../ResourceType';
 import {SelectCard} from '../../inputs/SelectCard';
-import {LogHelper} from '../../LogHelper';
 import {PartyHooks} from '../../turmoil/parties/PartyHooks';
 import {PartyName} from '../../turmoil/parties/PartyName';
 import {REDS_RULING_POLICY_COST, MAX_TEMPERATURE, MAX_OCEAN_TILES} from '../../constants';
@@ -67,14 +66,12 @@ export class MoholeLake extends Card implements IActionCard, IProjectCard {
     }
 
     if (availableCards.length === 1) {
-      player.addResourceTo(availableCards[0]);
-      LogHelper.logAddResource(player, availableCards[0], 1);
+      player.addResourceTo(availableCards[0], {log: true});
       return undefined;
     }
 
     return new SelectCard('Select card to add microbe or animal', 'Add resource', availableCards, (foundCards: Array<ICard>) => {
-      player.addResourceTo(foundCards[0]);
-      LogHelper.logAddResource(player, foundCards[0], 1);
+      player.addResourceTo(foundCards[0], {log: true});
       return undefined;
     });
   }

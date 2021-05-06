@@ -37,10 +37,6 @@ export class WarpDrive extends Card implements IProjectCard {
     return 0;
   }
 
-  public canPlay(player: Player): boolean {
-    return player.getTagCount(Tags.SCIENCE) >= 5;
-  }
-
   public play() {
     return undefined;
   }

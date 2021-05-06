@@ -31,15 +31,18 @@ export class ArtificialLake extends Card implements IProjectCard {
     });
   }
   public canPlay(player: Player): boolean {
-    const meetsRequirements = super.canPlay(player);
+    if (!super.canPlay(player)) {
+      return false;
+    }
     const oceansMaxed = player.game.board.getOceansOnBoard() === MAX_OCEAN_TILES;
 
     if (PartyHooks.shouldApplyPolicy(player.game, PartyName.REDS) && !oceansMaxed) {
-      return player.canAfford(player.getCardCost(this) + REDS_RULING_POLICY_COST, {steel: true}) && meetsRequirements;
+      return player.canAfford(player.getCardCost(this) + REDS_RULING_POLICY_COST, {steel: true});
     }
 
-    return meetsRequirements;
+    return true;
   }
+
   public play(player: Player) {
     if (player.game.board.getOceansOnBoard() >= MAX_OCEAN_TILES) return undefined;
 

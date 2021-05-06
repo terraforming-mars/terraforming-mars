@@ -414,7 +414,6 @@ export class Server {
       discount: card.cardDiscount,
     }));
   }
-
   public static getPlayers(players: Array<Player>, game: Game): Array<PlayerModel> {
     const turmoil = getTurmoil(game);
 

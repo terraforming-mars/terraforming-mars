@@ -29,13 +29,6 @@ export class DiasporaMovement extends Card implements IProjectCard {
     });
   }
 
-  public canPlay(player: Player): boolean {
-    if (player.game.turmoil !== undefined) {
-      return player.game.turmoil.canPlay(player, PartyName.REDS);
-    }
-    return false;
-  }
-
   public play(player: Player) {
     const amount = player.game.getPlayers()
       .map((p) => p.getTagCount(Tags.JOVIAN, false, p.id === player.id ? true : false))

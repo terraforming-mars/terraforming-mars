@@ -328,7 +328,7 @@ export const LogPanel = Vue.component('log-panel', {
             <Card :card="{name: card}"/>
           </div>
           <div id="log_panel_card" class="cardbox" v-for="(globalEventName, index) in globalEventNames" :key="globalEventName">
-            <global-event :globalEvent="getGlobalEvent(globalEventName)" type="current"></global-event>
+            <global-event :globalEvent="getGlobalEvent(globalEventName)" type="prior"></global-event>
           </div>
         </div>
       </div>

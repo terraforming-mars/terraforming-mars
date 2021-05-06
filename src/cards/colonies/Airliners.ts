@@ -29,11 +29,6 @@ export class Airliners extends Card implements IProjectCard {
     });
   }
 
-
-  public canPlay(player: Player): boolean {
-    return player.getResourceCount(ResourceType.FLOATER) >= 3;
-  }
-
   public play(player: Player) {
     player.addProduction(Resources.MEGACREDITS, 2);
     player.game.defer(new AddResourcesToCard(player, ResourceType.FLOATER, {count: 2}));

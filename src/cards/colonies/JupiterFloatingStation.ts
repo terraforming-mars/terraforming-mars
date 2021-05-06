@@ -48,10 +48,6 @@ export class JupiterFloatingStation extends Card implements IProjectCard, IResou
 
   public resourceCount: number = 0;
 
-  public canPlay(player: Player): boolean {
-    return player.getTagCount(Tags.SCIENCE) >= 3;
-  }
-
   public canAct(): boolean {
     return true;
   }

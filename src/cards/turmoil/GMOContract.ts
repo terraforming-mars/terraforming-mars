@@ -32,13 +32,6 @@ export class GMOContract extends Card implements IProjectCard {
     });
   }
 
-  public canPlay(player: Player): boolean {
-    if (player.game.turmoil !== undefined) {
-      return player.game.turmoil.canPlay(player, PartyName.GREENS);
-    }
-    return false;
-  }
-
   public onCardPlayed(player: Player, card: IProjectCard): void {
     const amount = card.tags.filter((tag) => tag === Tags.ANIMAL || tag === Tags.PLANT || tag === Tags.MICROBE).length;
     if (amount > 0) {

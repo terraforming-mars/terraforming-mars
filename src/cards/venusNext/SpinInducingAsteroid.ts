@@ -35,7 +35,7 @@ export class SpinInducingAsteroid extends Card implements IProjectCard {
     }
 
     if (PartyHooks.shouldApplyPolicy(player.game, PartyName.REDS)) {
-      return player.canAfford(player.getCardCost(this) + REDS_RULING_POLICY_COST * 2, {titanium: true}) && true;
+      return player.canAfford(player.getCardCost(this) + REDS_RULING_POLICY_COST * 2, {titanium: true});
     }
 
     return true;

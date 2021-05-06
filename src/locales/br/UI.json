@@ -104,7 +104,7 @@
     "Contractor": "Empreiteiro",
     "Most building tags (event cards do not count)": "Mais ícones de construção.",
     "Celebrity": "Celebridade",
-    "Most cards in play (not events) with a cost of at least 20 megacredits": "Mais cartas em jogo (não eventos) com custo maior ou igual a 20M€.",
+    "Most cards in play (not events) with a cost of at least 20 megacredits": "Mais cartas em jogo (não eventos) com custo maior ou igual a 20 M€.",
     "Industrialist": "Industrialista",
     "Having most steel and energy resources": "Mais recurso aço e energia.",
     "Desert Settler": "Colono Deserto",
@@ -240,7 +240,8 @@
      "Remove 2 floaters to raise Venus scale 1 step": "Remova 2 flutuadores para aumentar 1 nível a escala de terraformação de Vênus",
      "Show timers": "Mostrar cronômetros",
      "You cannot pay for this card": "Você não consegue pagar por esta carta",
-     "Select card(s) to buy":"Escolha carta(s) que deseja comprar",
+     "Select card(s) to buy": "Escolha carta(s) que deseja comprar",
+     "You cannot afford any cards": "Você não consegue pagar as cartas",
 
     "Starting Megacredits:":"Megacréditos iniciais：",
     "After Preludes:":"Depois dos prelúdio：",
@@ -349,7 +350,7 @@
     "Spend one titanium to add 2 floaters to this card": "Gaste 1 titânio para adicionar 2 flutuadores a esta carta",
 
     "Spend 3 M€ to draw a blue card": "Gastar 3 M€ para comprar uma carta azul",
-
+    
     "Flip and discard a played blue card": "Vire e descarte uma carta azul jogada",
     "Select card to add 1 resource": "Escolha uma carta para adicionar 1 recurso",
     "Add resource": "Adicionar recurso",
@@ -387,5 +388,7 @@
     "Pay 6 to add 1 asteroid to a card": "Pagar 6 para adicionar 1 asteroid a uma carta",
     "Skip removal": "Não remover",
     "Select player to sue (steal 3 M€ from)": "Escolha jogador para processar (roubar 3 M€)",
-    "Steal M€": "Roubar M€"
+    "Steal M€": "Roubar M€",
+
+    "Select where to send a delegate": "Escolha o partido para enviar o delegado."
 }

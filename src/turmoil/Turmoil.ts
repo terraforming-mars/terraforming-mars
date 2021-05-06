@@ -236,7 +236,6 @@ export class Turmoil implements ISerializable<SerializedTurmoil> {
       if (this.currentGlobalEvent !== undefined) {
         const currentGlobalEvent: IGlobalEvent = this.currentGlobalEvent;
         game.log('Resolving global event ${0}', (b) => b.globalEvent(currentGlobalEvent));
-        // game.log('Global event "' + this.currentGlobalEvent.name + '" has been resolved.');
         currentGlobalEvent.resolve(game, this);
       }
 

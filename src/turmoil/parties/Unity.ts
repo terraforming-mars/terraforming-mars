@@ -10,7 +10,6 @@ import {SelectHowToPayDeferred} from '../../deferredActions/SelectHowToPayDeferr
 import {Player} from '../../Player';
 import {POLITICAL_AGENDAS_MAX_ACTION_USES} from '../../constants';
 import {ICard} from '../../cards/ICard';
-import {LogHelper} from '../../LogHelper';
 import {DeferredAction} from '../../deferredActions/DeferredAction';
 import {OrOptions} from '../../inputs/OrOptions';
 import {SelectCard} from '../../inputs/SelectCard';
@@ -85,8 +84,7 @@ class UnityPolicy02 implements Policy {
           if (availableFloaterCards.length === 1) {
             orOptions.options.push(
               new SelectOption('Add 2 floaters to ' + availableFloaterCards[0].name, 'Confirm', () => {
-                player.addResourceTo(availableFloaterCards[0], 2);
-                LogHelper.logAddResource(player, availableFloaterCards[0], 2);
+                player.addResourceTo(availableFloaterCards[0], {qty: 2, log: true});
 
                 return undefined;
               }),
@@ -95,8 +93,7 @@ class UnityPolicy02 implements Policy {
             orOptions.options.push(
               new SelectOption('Add 2 floaters to a card', 'Confirm', () => {
                 return new SelectCard('Select card to add 2 floaters', 'Add floaters', availableFloaterCards, (foundCards: Array<ICard>) => {
-                  player.addResourceTo(foundCards[0], 2);
-                  LogHelper.logAddResource(player, foundCards[0], 2);
+                  player.addResourceTo(foundCards[0], {qty: 2, log: true});
                   return undefined;
                 });
               }),

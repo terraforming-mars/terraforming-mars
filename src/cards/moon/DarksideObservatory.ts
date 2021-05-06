@@ -43,10 +43,10 @@ export class DarksideObservatory extends Card implements IProjectCard, IActionCa
 
   private addResource(card: ICard, player: Player): void {
     if (card.resourceType === ResourceType.DATA) {
-      player.addResourceTo(card, 2);
+      player.addResourceTo(card, {qty: 2, log: true});
     }
     if (card.resourceType === ResourceType.SCIENCE) {
-      player.addResourceTo(card, 1);
+      player.addResourceTo(card, {qty: 1, log: true});
     }
   }
 

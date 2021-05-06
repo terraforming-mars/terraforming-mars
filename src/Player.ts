@@ -71,6 +71,7 @@ import {PlaceMoonColonyTile} from './moon/PlaceMoonColonyTile';
 import {PlaceMoonRoadTile} from './moon/PlaceMoonRoadTile';
 import {GlobalParameter} from './GlobalParameter';
 import {GlobalEventName} from './turmoil/globalEvents/GlobalEventName';
+import {LogHelper} from './LogHelper';
 
 export type PlayerId = string;
 
@@ -655,7 +656,10 @@ export class Player implements ISerializable<SerializedPlayer> {
       }
     }
   }
-  public addResourceTo(card: IResourceCard, count: number = 1): void {
+
+  public addResourceTo(card: IResourceCard & ICard, options: number | {qty?: number, log?: boolean} = 1): void {
+    const count = typeof(options) === 'number' ? options : (options.qty ?? 1);
+
     if (card.resourceCount !== undefined) {
       card.resourceCount += count;
     }
@@ -669,10 +673,14 @@ export class Player implements ISerializable<SerializedPlayer> {
     if (card.resourceType === ResourceType.ANIMAL && this.playedCards.map((card) => card.name).includes(CardName.MEAT_INDUSTRY)) {
       this.megaCredits += count * 2;
     }
+
+    if (typeof(options) !== 'number' && options.log === true) {
+      LogHelper.logAddResource(this, card, count);
+    }
   }
 
-  public getCardsWithResources(resource?: ResourceType): Array<ICard> {
-    let result: Array<ICard> = this.playedCards.filter((card) => card.resourceType !== undefined && card.resourceCount && card.resourceCount > 0);
+  public getCardsWithResources(resource?: ResourceType): Array<ICard & IResourceCard> {
+    let result: Array<ICard & IResourceCard> = this.playedCards.filter((card) => card.resourceType !== undefined && card.resourceCount && card.resourceCount > 0);
     if (this.corporationCard !== undefined &&
           this.corporationCard.resourceType !== undefined &&
           this.corporationCard.resourceCount !== undefined &&

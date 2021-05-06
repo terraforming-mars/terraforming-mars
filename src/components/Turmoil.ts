@@ -245,7 +245,7 @@ export const Turmoil = Vue.component('turmoil', {
         <global-event v-if="turmoil.coming" :globalEvent="turmoil.coming" type="coming"></global-event>
         <global-event v-if="turmoil.current" :globalEvent="turmoil.current" type="current"></global-event>
       </div>
-^
+
       <div class="turmoil-board">
         <div class="turmoil-header">
           <div class="turmoil-lobby">

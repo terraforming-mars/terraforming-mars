@@ -20,18 +20,11 @@ export const CardDescription = Vue.component('CardDescription', {
       }
       return generateClassString(classes);
     },
-    getHtmlContent: function(): string {
-      let result: string = '';
-      if (isIDescription(this.item)) {
-        result = this.item.text;
-      } else {
-        result = <string> this.item;
-      }
-
-      return `(${result})`;
+    getDescription: function(): string {
+      return isIDescription(this.item) ? this.item.text : <string> this.item;
     },
   },
   template: `
-      <div :class="getClasses()" v-html="getHtmlContent()"></div>
+      <div :class="getClasses()">({{ getDescription() }})</div>
   `,
 });

@@ -101,7 +101,7 @@ generateVueClass(
 generateVueClass(
   'src/components/LogPanel',
   require('./build/src/components/LogPanel').LogPanel,
-  ['cards', 'messages'],
+  ['cards', 'messages', 'globalEventNames'],
 );
 generateVueClass(
   'src/components/Milestone',
@@ -164,8 +164,8 @@ generateVueClass(
   ['timerText'],
 );
 generateVueClass(
-  'src/components/Preferences',
-  require('./build/src/components/Preferences').Preferences,
+  'src/components/Sidebar',
+  require('./build/src/components/Sidebar').Sidebar,
   [
     'ui', 'hide_hand', 'hide_awards_and_milestones',
     'hide_top_bar', 'small_cards', 'remove_background', 'magnify_cards',

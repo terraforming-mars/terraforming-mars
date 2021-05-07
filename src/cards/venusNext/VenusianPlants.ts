@@ -6,7 +6,6 @@ import {ResourceType} from '../../ResourceType';
 import {SelectCard} from '../../inputs/SelectCard';
 import {ICard} from '../ICard';
 import {CardName} from '../../CardName';
-import {LogHelper} from '../../LogHelper';
 import {MAX_VENUS_SCALE, REDS_RULING_POLICY_COST} from '../../constants';
 import {PartyHooks} from '../../turmoil/parties/PartyHooks';
 import {PartyName} from '../../turmoil/parties/PartyName';
@@ -40,14 +39,16 @@ export class VenusianPlants extends Card implements IProjectCard {
   }
 
   public canPlay(player: Player): boolean {
-    const meetsVenusRequirements = super.canPlay(player);
+    if (!super.canPlay(player)) {
+      return false;
+    }
     const venusMaxed = player.game.getVenusScaleLevel() === MAX_VENUS_SCALE;
 
     if (PartyHooks.shouldApplyPolicy(player.game, PartyName.REDS) && !venusMaxed) {
-      return player.canAfford(player.getCardCost(this) + REDS_RULING_POLICY_COST, {floaters: true, microbes: true}) && meetsVenusRequirements;
+      return player.canAfford(player.getCardCost(this) + REDS_RULING_POLICY_COST, {floaters: true, microbes: true});
     }
 
-    return meetsVenusRequirements;
+    return true;
   }
 
   public play(player: Player) {
@@ -56,8 +57,7 @@ export class VenusianPlants extends Card implements IProjectCard {
     if (cards.length === 0) return undefined;
 
     if (cards.length === 1) {
-      player.addResourceTo(cards[0], 1);
-      LogHelper.logAddResource(player, cards[0]);
+      player.addResourceTo(cards[0], {log: true});
       return undefined;
     }
 
@@ -66,8 +66,7 @@ export class VenusianPlants extends Card implements IProjectCard {
       'Add resource',
       cards,
       (foundCards: Array<ICard>) => {
-        player.addResourceTo(foundCards[0], 1);
-        LogHelper.logAddResource(player, foundCards[0]);
+        player.addResourceTo(foundCards[0], {log: true});
         return undefined;
       },
     );

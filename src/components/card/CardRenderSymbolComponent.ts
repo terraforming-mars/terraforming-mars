@@ -61,14 +61,8 @@ export const CardRenderSymbolComponent = Vue.component('CardRenderSymbolComponen
       return classes.join(' ');
     },
     getContent: function(): string {
-      if (this.item.isIcon) {
-        return '';
-      } else {
-        return this.item.type;
-      }
+      return this.item.isIcon ? '' : this.item.type;
     },
   },
-  template: `
-        <div v-html="getContent()" :class="getClasses()" />
-    `,
+  template: '<div :class="getClasses()">{{ getContent() }}</div>',
 });

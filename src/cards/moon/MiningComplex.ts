@@ -19,7 +19,7 @@ export class MiningComplex extends PreludeCard {
       metadata: {
         description: 'Place a mine tile on the Moon and raise the Mining Rate 1 step. ' +
         'Place a road tile adjacent to placed mine tile and raise the Logistics Rate 1 step. ' +
-        'Pay 7 MC.',
+        'Pay 7 M€.',
         cardNumber: '',
         renderData: CardRenderer.builder((b) =>
           b.moonMine().secondaryTag(AltSecondaryTag.MOON_MINING_RATE).moonRoad().secondaryTag(AltSecondaryTag.MOON_LOGISTICS_RATE).asterix().br.minus().megacredits(7),

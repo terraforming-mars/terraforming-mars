@@ -24,7 +24,7 @@ export class StormCraftIncorporated extends Card implements IActionCard, Corpora
       cardType: CardType.CORPORATION,
       metadata: {
         cardNumber: 'R29',
-        description: 'You start with 48 MC.',
+        description: 'You start with 48 M€.',
         renderData: CardRenderer.builder((b) => {
           b.br.br.br;
           b.megacredits(48);
@@ -56,8 +56,7 @@ export class StormCraftIncorporated extends Card implements IActionCard, Corpora
   public action(player: Player) {
     const floaterCards = player.getResourceCards(ResourceType.FLOATER);
     if (floaterCards.length === 1) {
-      player.addResourceTo(this, 1);
-      LogHelper.logAddResource(player, this);
+      player.addResourceTo(this, {log: true});
       return undefined;
     }
 

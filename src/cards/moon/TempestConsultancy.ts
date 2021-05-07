@@ -45,7 +45,7 @@ export class TempestConsultancy implements CorporationCard {
   }
 
   public readonly metadata: CardMetadata = {
-    description: 'You start with 37 MC. As your first action, place 2 delegates in one party.',
+    description: 'You start with 37 M€. As your first action, place 2 delegates in one party.',
     cardNumber: '',
     renderData: CardRenderer.builder((b) => {
       b.megacredits(37).delegates(1).delegates(1).br;

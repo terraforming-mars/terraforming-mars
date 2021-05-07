@@ -54,7 +54,7 @@ export class NanotechIndustries implements IActionCard, CorporationCard {
         eb.empty().startAction.science(1).asterix();
       });
     }),
-    description: 'You start with 42 MC. As your first action, draw 3 cards. Take 2 of them into hand, and discard the rest. ' +
+    description: 'You start with 42 M€. As your first action, draw 3 cards. Take 2 of them into hand, and discard the rest. ' +
       '1 VP for every 2 science resources here.',
     victoryPoints: CardRenderDynamicVictoryPoints.science(1, 2),
   };

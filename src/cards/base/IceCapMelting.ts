@@ -26,14 +26,16 @@ export class IceCapMelting extends Card implements IProjectCard {
     });
   }
   public canPlay(player: Player): boolean {
-    const meetsTemperatureRequirements = super.canPlay(player);
+    if (!super.canPlay(player)) {
+      return false;
+    }
     const oceansMaxed = player.game.board.getOceansOnBoard() === MAX_OCEAN_TILES;
 
     if (PartyHooks.shouldApplyPolicy(player.game, PartyName.REDS) && !oceansMaxed) {
-      return player.canAfford(player.getCardCost(this) + REDS_RULING_POLICY_COST) && meetsTemperatureRequirements;
+      return player.canAfford(player.getCardCost(this) + REDS_RULING_POLICY_COST);
     }
 
-    return meetsTemperatureRequirements;
+    return true;
   }
   public play(player: Player) {
     player.game.defer(new PlaceOceanTile(player));

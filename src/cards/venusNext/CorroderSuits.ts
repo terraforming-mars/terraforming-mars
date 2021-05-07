@@ -6,7 +6,6 @@ import {ResourceType} from '../../ResourceType';
 import {SelectCard} from '../../inputs/SelectCard';
 import {ICard} from '../ICard';
 import {CardName} from '../../CardName';
-import {LogHelper} from '../../LogHelper';
 import {CardRenderer} from '../render/CardRenderer';
 import {Card} from '../Card';
 
@@ -37,8 +36,7 @@ export class CorroderSuits extends Card {
     if (cards.length === 0) return undefined;
 
     if (cards.length === 1) {
-      player.addResourceTo(cards[0], 1);
-      LogHelper.logAddResource(player, cards[0]);
+      player.addResourceTo(cards[0], {log: true});
       return undefined;
     }
 
@@ -47,8 +45,7 @@ export class CorroderSuits extends Card {
       'Add resource',
       CorroderSuits.getVenusResCards(player),
       (foundCards: Array<ICard>) => {
-        player.addResourceTo(foundCards[0], 1);
-        LogHelper.logAddResource(player, foundCards[0]);
+        player.addResourceTo(foundCards[0], {log: true});
         return undefined;
       },
     );

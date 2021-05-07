@@ -6,8 +6,8 @@ import {Milestone} from './Milestone';
 import {Award} from './Award';
 import {PlayersOverview} from './overview/PlayersOverview';
 import {WaitingFor} from './WaitingFor';
-import {Preferences} from './Preferences';
-import {PlayerModel} from '../models/PlayerModel';
+import {Sidebar} from './Sidebar';
+import {PlayerModel, PublicPlayerModel} from '../models/PlayerModel';
 import {Colony} from './Colony';
 import {LogPanel} from './LogPanel';
 import {PlayerMixin} from './PlayerMixin';
@@ -69,7 +69,7 @@ export const PlayerHome = Vue.component('player-home', {
     'waiting-for': WaitingFor,
     'milestone': Milestone,
     'award': Award,
-    'preferences': Preferences,
+    'sidebar': Sidebar,
     'colony': Colony,
     'log-panel': LogPanel,
     'turmoil': Turmoil,
@@ -111,7 +111,7 @@ export const PlayerHome = Vue.component('player-home', {
       return player.players.length > 1 && player.waitingFor !== undefined;
     },
     getPlayerCssForTurnOrder: (
-      player: PlayerModel,
+      player: PublicPlayerModel,
       highlightActive: boolean,
     ): string => {
       const classes = ['highlighter_box'];
@@ -123,7 +123,7 @@ export const PlayerHome = Vue.component('player-home', {
       }
       return classes.join(' ');
     },
-    getFleetsCountRange: function(player: PlayerModel): Array<number> {
+    getFleetsCountRange: function(player: PublicPlayerModel): Array<number> {
       const fleetsRange: Array<number> = [];
       for (let i = 0; i < player.fleetSize - player.tradesThisGeneration; i++) {
         fleetsRange.push(i);
@@ -203,7 +203,7 @@ export const PlayerHome = Vue.component('player-home', {
                 </div>
             </div>
 
-            <preferences v-trim-whitespace
+            <sidebar v-trim-whitespace
               :acting_player="isPlayerActing(player)"
               :player_color="player.color"
               :generation="player.game.generation"
@@ -217,7 +217,7 @@ export const PlayerHome = Vue.component('player-home', {
               :playerNumber = "player.players.length"
               :lastSoloGeneration = "player.game.lastSoloGeneration">
                 <div class="deck-size">{{ player.game.deckSize }}</div>
-            </preferences>
+            </sidebar>
 
             <div v-if="player.corporationCard">
 
@@ -356,10 +356,9 @@ export const PlayerHome = Vue.component('player-home', {
 
                 <dynamic-title title="Game details" :color="player.color"/>
 
-
                 <div class="player_home_block" v-if="player.players.length > 1">
-                    <milestone :milestones_list="player.game.milestones" />
-                    <award :awards_list="player.game.awards" />
+                    <milestone :show_scores="false" :milestones_list="player.game.milestones" />
+                    <award :show_scores="false" :awards_list="player.game.awards" />
                 </div>
 
                 <div class="player_home_block player_home_block--turnorder nofloat" v-if="player.players.length>1">

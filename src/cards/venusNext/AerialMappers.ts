@@ -65,8 +65,7 @@ export class AerialMappers extends Card implements IActionCard, IResourceCard {
     });
 
     const addResource = new SelectCard('Select card to add 1 floater', 'Add floater', floaterCards, (foundCards: Array<ICard>) => {
-      player.addResourceTo(foundCards[0], 1);
-      LogHelper.logAddResource(player, foundCards[0]);
+      player.addResourceTo(foundCards[0], {log: true});
       return undefined;
     });
 

@@ -6,7 +6,6 @@ import {ResourceType} from '../../ResourceType';
 import {SelectCard} from '../../inputs/SelectCard';
 import {ICard} from '../ICard';
 import {CardName} from '../../CardName';
-import {LogHelper} from '../../LogHelper';
 import {MAX_VENUS_SCALE, REDS_RULING_POLICY_COST} from '../../constants';
 import {PartyHooks} from '../../turmoil/parties/PartyHooks';
 import {PartyName} from '../../turmoil/parties/PartyName';
@@ -50,8 +49,7 @@ export class VenusSoils extends Card {
     if (microbeCards.length === 0) return undefined;
 
     if (microbeCards.length === 1) {
-      player.addResourceTo(microbeCards[0], 2);
-      LogHelper.logAddResource(player, microbeCards[0], 2);
+      player.addResourceTo(microbeCards[0], {qty: 2, log: true});
       return undefined;
     }
 
@@ -60,8 +58,7 @@ export class VenusSoils extends Card {
       'Add microbe(s)',
       microbeCards,
       (foundCards: Array<ICard>) => {
-        player.addResourceTo(foundCards[0], 2);
-        LogHelper.logAddResource(player, foundCards[0], 2);
+        player.addResourceTo(foundCards[0], {qty: 2, log: true});
         return undefined;
       },
     );

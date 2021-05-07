@@ -27,10 +27,6 @@ export class LunaGovernor extends Card implements IProjectCard {
     });
   }
 
-  public canPlay(player: Player): boolean {
-    return player.getTagCount(Tags.EARTH) >= 3;
-  }
-
   public play(player: Player) {
     player.addProduction(Resources.MEGACREDITS, 2);
     return undefined;

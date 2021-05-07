@@ -20,7 +20,7 @@ export class UtopiaInvest extends Card implements IActionCard, CorporationCard {
 
       metadata: {
         cardNumber: 'R33',
-        description: 'You start with 40 MC. Increase your steel and titanium production 1 step each.',
+        description: 'You start with 40 M€. Increase your steel and titanium production 1 step each.',
         renderData: CardRenderer.builder((b) => {
           b.br;
           b.megacredits(40).nbsp.production((pb) => pb.steel(1).titanium(1));

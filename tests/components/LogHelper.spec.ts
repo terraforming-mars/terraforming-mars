@@ -73,4 +73,17 @@ describe('LogHelper', function() {
     expect(msg.data[3].value).to.eq(card3.name);
     expect(msg.message).to.eq('${0} drew ${1}, ${2} and ${3}');
   });
+
+  it('logs drawn cards privately', function() {
+    const player1 = TestPlayers.BLUE.newPlayer();
+    const player2 = TestPlayers.RED.newPlayer();
+    const card1 = new Algae();
+    const game = Game.newInstance('foobar', [player1, player2], player1);
+    LogHelper.logDrawnCards(player1, [card1.name], true);
+    const msg = game.gameLog.pop()!;
+    expect(msg.data.length).to.eq(2);
+    expect(msg.data[0].value).to.eq('You');
+    expect(msg.data[1].value).to.eq(card1.name);
+    expect(msg.message).to.eq('${0} drew ${1}');
+  });
 });

@@ -8,6 +8,10 @@ export const Milestone = Vue.component('milestone', {
     milestones_list: {
       type: Array as () => Array<ClaimedMilestoneModel>,
     },
+    show_scores: {
+      type: Boolean,
+      default: true,
+    },
   },
   data: function() {
     const showDescription: {[x: string]: boolean} = {};
@@ -63,7 +67,7 @@ export const Milestone = Vue.component('milestone', {
                     <div class="ma-player" v-if="milestone.player_name"><i :title="milestone.player_name" :class="'board-cube board-cube--'+milestone.player_color" /></div>
                     <div class="ma-name--milestones" :class="getNameCss(milestone.milestone.name)" v-i18n>
                         {{milestone.milestone.name}}
-                        <div class="ma-scores player_home_block--milestones-and-awards-scores">
+                        <div v-if="show_scores" class="ma-scores player_home_block--milestones-and-awards-scores">
                             <p v-for="score in milestone.scores.sort(
                                 (s1, s2) => s2.playerScore - s1.playerScore
                             )" :class="'ma-score player_bg_color_'+score.playerColor">{{ score.playerScore }}</p>

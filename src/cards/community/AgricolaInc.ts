@@ -20,7 +20,7 @@ export class AgricolaInc extends Card implements CorporationCard {
 
       metadata: {
         cardNumber: 'R36',
-        description: 'You start with 1 plant production, 1 M€ production and 40 MC.',
+        description: 'You start with 1 plant production, 1 M€ production and 40 M€.',
         renderData: CardRenderer.builder((b) => {
           b.br.br;
           b.production((pb) => pb.megacredits(1).plants(1)).nbsp.megacredits(40);

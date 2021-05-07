@@ -168,7 +168,13 @@ export const Board = Vue.component('board', {
                 <div :class="getScaleCSS(lvl)" v-for="lvl in getValuesForParameter('venus')">{{ lvl.strValue }}</div>
             </div>
 
-            <div class="global-numbers-oceans" v-html="oceansValue()">
+            <div class="global-numbers-oceans">
+              <span v-if="this.oceans_count === this.constants.MAX_OCEAN_TILES">
+                <img width="26" src="/assets/misc/circle-checkmark.png" class="board-ocean-checkmark" :alt="$t('Completed!')">
+              </span>
+              <span v-else>
+                {{this.oceans_count}}/{{this.constants.MAX_OCEAN_TILES}}
+              </span>
             </div>
 
             <div v-if="aresExtension && aresData !== undefined">

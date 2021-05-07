@@ -18,7 +18,7 @@ export class Teractor extends Card implements CorporationCard {
       cardDiscount: {tag: Tags.EARTH, amount: 3},
       metadata: {
         cardNumber: 'R30',
-        description: 'You start with 60 MC.',
+        description: 'You start with 60 M€.',
         renderData: CardRenderer.builder((b) => {
           b.br.br;
           b.megacredits(60);

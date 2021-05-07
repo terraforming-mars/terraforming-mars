@@ -71,6 +71,7 @@ import {PlaceMoonColonyTile} from './moon/PlaceMoonColonyTile';
 import {PlaceMoonRoadTile} from './moon/PlaceMoonRoadTile';
 import {GlobalParameter} from './GlobalParameter';
 import {GlobalEventName} from './turmoil/globalEvents/GlobalEventName';
+import {LogHelper} from './LogHelper';
 
 export type PlayerId = string;
 
@@ -311,13 +312,14 @@ export class Player implements ISerializable<SerializedPlayer> {
   }
 
   public addResource(resource: Resources, amount: number, options? : { log: boolean, from? : Player | GlobalEventName}) {
-    if (resource === Resources.MEGACREDITS) this.megaCredits = Math.max(0, this.megaCredits + amount);
-    if (resource === Resources.STEEL) this.steel = Math.max(0, this.steel + amount);
+    const delta = (amount >= 0) ? amount : Math.max(amount, -this.getResource(resource));
 
-    if (resource === Resources.TITANIUM) this.titanium = Math.max(0, this.titanium + amount);
-    if (resource === Resources.PLANTS) this.plants = Math.max(0, this.plants + amount);
-    if (resource === Resources.ENERGY) this.energy = Math.max(0, this.energy + amount);
-    if (resource === Resources.HEAT) this.heat = Math.max(0, this.heat + amount);
+    if (resource === Resources.MEGACREDITS) this.megaCredits += delta;
+    if (resource === Resources.STEEL) this.steel += delta;
+    if (resource === Resources.TITANIUM) this.titanium += delta;
+    if (resource === Resources.PLANTS) this.plants += delta;
+    if (resource === Resources.ENERGY) this.energy += delta;
+    if (resource === Resources.HEAT) this.heat += delta;
 
     if (options?.log === true) {
       const modifier = amount > 0 ? 'increased' : 'decreased';
@@ -329,7 +331,7 @@ export class Player implements ISerializable<SerializedPlayer> {
         }
 
         // Crash site cleanup hook
-        if (from !== this && resource === Resources.PLANTS && amount < 0) {
+        if (from !== this && resource === Resources.PLANTS && delta < 0) {
           this.game.someoneHasRemovedOtherPlayersPlants = true;
         }
 
@@ -337,17 +339,17 @@ export class Player implements ISerializable<SerializedPlayer> {
           b.player(this)
             .string(resource)
             .string(modifier)
-            .number(Math.abs(amount))
+            .number(Math.abs(delta))
             .player(from));
       }
 
       // Global event logging
-      if (options?.from !== undefined && ! (options.from instanceof Player) && amount !== 0) {
+      if (options?.from !== undefined && ! (options.from instanceof Player) && delta !== 0) {
         this.game.log('${0}\'s ${1} amount ${2} by ${3} by Global Event', (b) =>
           b.player(this)
             .string(resource)
             .string(modifier)
-            .number(Math.abs(amount)));
+            .number(Math.abs(delta)));
       }
     }
 
@@ -654,7 +656,10 @@ export class Player implements ISerializable<SerializedPlayer> {
       }
     }
   }
-  public addResourceTo(card: IResourceCard, count: number = 1): void {
+
+  public addResourceTo(card: IResourceCard & ICard, options: number | {qty?: number, log?: boolean} = 1): void {
+    const count = typeof(options) === 'number' ? options : (options.qty ?? 1);
+
     if (card.resourceCount !== undefined) {
       card.resourceCount += count;
     }
@@ -668,10 +673,14 @@ export class Player implements ISerializable<SerializedPlayer> {
     if (card.resourceType === ResourceType.ANIMAL && this.playedCards.map((card) => card.name).includes(CardName.MEAT_INDUSTRY)) {
       this.megaCredits += count * 2;
     }
+
+    if (typeof(options) !== 'number' && options.log === true) {
+      LogHelper.logAddResource(this, card, count);
+    }
   }
 
-  public getCardsWithResources(resource?: ResourceType): Array<ICard> {
-    let result: Array<ICard> = this.playedCards.filter((card) => card.resourceType !== undefined && card.resourceCount && card.resourceCount > 0);
+  public getCardsWithResources(resource?: ResourceType): Array<ICard & IResourceCard> {
+    let result: Array<ICard & IResourceCard> = this.playedCards.filter((card) => card.resourceType !== undefined && card.resourceCount && card.resourceCount > 0);
     if (this.corporationCard !== undefined &&
           this.corporationCard.resourceType !== undefined &&
           this.corporationCard.resourceCount !== undefined &&
@@ -1177,7 +1186,7 @@ export class Player implements ISerializable<SerializedPlayer> {
         return undefined;
       }, cardsToKeep, cardsToKeep,
       false, undefined, false,
-      ), () => { },
+      ),
     );
   }
 
@@ -1714,7 +1723,7 @@ export class Player implements ISerializable<SerializedPlayer> {
           return undefined;
         }),
       );
-      this.setWaitingFor(action, () => {});
+      this.setWaitingFor(action);
       return;
     }
 
@@ -1760,7 +1769,7 @@ export class Player implements ISerializable<SerializedPlayer> {
     return canAfford && (card.canPlay === undefined || card.canPlay(this));
   }
 
-  // Checks if the player can afford to pay `cost` mc (possibly replaceable with steal, titanium etc.)
+  // Checks if the player can afford to pay `cost` mc (possibly replaceable with steel, titanium etc.)
   // and additionally pay the reserveUnits (no replaces here)
   public canAfford(cost: number, options?: {
     steel?: boolean,
@@ -1983,9 +1992,9 @@ export class Player implements ISerializable<SerializedPlayer> {
       if (this.game.turmoil?.lobby.has(this.id)) {
         sendDelegate = new SendDelegateToArea(this, 'Send a delegate in an area (from lobby)');
       } else if (this.isCorporation(CardName.INCITE) && this.canAfford(3) && this.game.turmoil.getDelegatesInReserve(this.id) > 0) {
-        sendDelegate = new SendDelegateToArea(this, 'Send a delegate in an area (3 MC)', {cost: 3});
+        sendDelegate = new SendDelegateToArea(this, 'Send a delegate in an area (3 M€)', {cost: 3});
       } else if (this.canAfford(5) && this.game.turmoil.getDelegatesInReserve(this.id) > 0) {
-        sendDelegate = new SendDelegateToArea(this, 'Send a delegate in an area (5 MC)', {cost: 5});
+        sendDelegate = new SendDelegateToArea(this, 'Send a delegate in an area (5 M€)', {cost: 5});
       }
       if (sendDelegate) {
         const input = sendDelegate.execute();
@@ -2061,8 +2070,7 @@ export class Player implements ISerializable<SerializedPlayer> {
   public getWaitingFor(): PlayerInput | undefined {
     return this.waitingFor;
   }
-
-  public setWaitingFor(input: PlayerInput, cb: () => void): void {
+  public setWaitingFor(input: PlayerInput, cb: () => void = () => {}): void {
     this.timer.start();
     this.waitingFor = input;
     this.waitingForCb = cb;

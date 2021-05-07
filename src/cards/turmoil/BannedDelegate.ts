@@ -28,13 +28,6 @@ export class BannedDelegate extends Card implements IProjectCard {
     });
   }
 
-  public canPlay(player: Player): boolean {
-    if (player.game.turmoil !== undefined) {
-      return player.game.turmoil.chairman === player.id;
-    }
-    return false;
-  }
-
   public play(player: Player) {
     const orOptions: Array<SelectDelegate> = [];
         // Take each party having more than just the party leader in the area

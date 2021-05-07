@@ -24,9 +24,7 @@ export class Solarnet extends Card {
       },
     });
   };
-  public canPlay(player: Player): boolean {
-    return player.checkMultipleTagPresence([Tags.VENUS, Tags.EARTH, Tags.JOVIAN]);
-  }
+
   public play(player: Player) {
     player.drawCard(2);
     return undefined;

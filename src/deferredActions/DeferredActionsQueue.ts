@@ -40,9 +40,7 @@ export class DeferredActionsQueue {
 
     const input = action.execute();
     if (input !== undefined) {
-      action.player.setWaitingFor(input, () => {
-        cb();
-      });
+      action.player.setWaitingFor(input, cb);
     } else {
       cb();
     }

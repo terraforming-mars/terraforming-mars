@@ -1,22 +1,22 @@
 {
   "Aridor":"阿里多尔",
-  "You start with 40MC. As your first action, put an additional Colony Tile of your choice into play":"您从40MC开始游戏。 作为您的第一个动作，请选择一个额外的殖民地板块加入游戏",
+  "You start with 40 M€. As your first action, put an additional Colony Tile of your choice into play":"您从40 M€开始游戏。 作为您的第一个动作，请选择一个额外的殖民地板块加入游戏",
   "Effect: When you get a new type of tag in play [event cards do not count], increase your M€ production 1 step.":"效果：当您在玩耍中获得新的卡牌标签时[事件卡不计入]，请增加MC产量1步。",
 
   "Arklight":"弧光",
-  "You start with 45 MC. Increase your M€ production 2 steps. 1 VP per 2 animals on this card.":"你起始获得45MC。提升你的MC产能2级。牌上每2个动物资源1分",
+  "You start with 45 M€. Increase your M€ production 2 steps. 1 VP per 2 animals on this card.":"你起始获得45 M€。提升你的MC产能2级。牌上每2个动物资源1分",
   "Effect: When you play an animal or plant tag, including<br> this, add 1 animal<br> to this card.":"效果:当你打出动物或植物标志时(包括本牌),在此牌上放置1个动物资源",
 
   "Polyphemos":"波呂斐摩斯",
-  "You start with 50MC. Increase your M€ production 5 steps. Gain 5 titanium.":"起始获得50MC。提升你的MC产能5级,获得5个钛合金",
-  "Effect: When you buy a card to hand, pay 5M€ instead of 3, including the starting hand.":"效果:当你购买手牌时,你需要支付5MC而非原本的3MC,包括起始的手牌",
+  "You start with 50 M€. Increase your M€ production 5 steps. Gain 5 titanium.":"起始获得50 M€。提升你的MC产能5级,获得5个钛合金",
+  "Effect: When you buy a card to hand, pay 5M€ instead of 3, including the starting hand.":"效果:当你购买手牌时,你需要支付5 M€而非原本的3 M€,包括起始的手牌",
 
   "Poseidon":"波塞頓",
-  "You start with 45MC. As your first action, place a colony.":"起始获得45MC。作为你的第一个行动,放置一个殖民地",
+  "You start with 45 M€. As your first action, place a colony.":"起始获得45 M€。作为你的第一个行动,放置一个殖民地",
   "Effect: When any colony is placed, including this, raise your M€ production 1 step.":"任何殖民地放置时，增加你的MC产能1级，包括目前放置这个 豆子",
 
   "Stormcraft Incorporated":"暴风舰公司",
-  "You start with 48 MC.":"起始获得48MC",
+  "You start with 48 M€.":"起始获得48 M€",
   "Action: Add a floater to ANY card.":"行动：增加云资源到任意卡牌",
   "Effect: Floaters on this card may be used as 2 heat each.":"效果:本卡上的云资源能当做2个热能资源使用",
 
@@ -86,7 +86,7 @@
 
   "Heavy Taxation": "重税",
   "2 Earth": "2 地球",
-  "Requires 2 Earth tags. Increase your M€ production 2 steps, and gain 4MC.": "（需要两个地球图标）增加自身2点MC产能 获得4块钱",
+  "Requires 2 Earth tags. Increase your M€ production 2 steps, and gain 4 M€.": "（需要两个地球图标）增加自身2点MC产能 获得4块钱",
 
   "Refugee Camp": "难民营",
   "Action: Decrease your M€ production 1 step to add a camp resource to this card.": "行动：降低自身1点MC产能，增加1点营地资源到此卡上",

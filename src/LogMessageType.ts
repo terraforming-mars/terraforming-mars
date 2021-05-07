@@ -1,4 +1,5 @@
+// Do not reorder these.
 export enum LogMessageType {
-    DEFAULT,
-    NEW_GENERATION
+    DEFAULT = 0,
+    NEW_GENERATION = 1
 }

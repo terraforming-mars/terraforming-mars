@@ -25,7 +25,7 @@ export class ProjectWorkshop extends Card implements CorporationCard {
 
       metadata: {
         cardNumber: 'R45',
-        description: 'You start with 39 MC, 1 steel and 1 titanium. As your first action, draw a blue card.',
+        description: 'You start with 39 M€, 1 steel and 1 titanium. As your first action, draw a blue card.',
         renderData: CardRenderer.builder((b) => {
           b.megacredits(39).steel(1).titanium(1).cards(1).secondaryTag(AltSecondaryTag.BLUE);
           b.corpBox('action', (cb) => {

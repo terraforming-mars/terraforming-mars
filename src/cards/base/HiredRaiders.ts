@@ -35,7 +35,7 @@ export class HiredRaiders extends Card implements IProjectCard {
           player.steel += 2;
           return undefined;
         }),
-        new SelectOption('Steal 3 mega credit', 'Steal M€', () => {
+        new SelectOption('Steal 3 M€', 'Steal M€', () => {
           player.megaCredits += 3;
           return undefined;
         }),

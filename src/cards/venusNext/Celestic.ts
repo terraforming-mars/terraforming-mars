@@ -24,7 +24,7 @@ export class Celestic extends Card implements IActionCard, CorporationCard, IRes
 
       metadata: {
         cardNumber: 'R05',
-        description: 'You start with 42 MC. As your first action, reveal cards from the deck until you have revealed 2 cards with a floater icon on it. Take them into hand and discard the rest.',
+        description: 'You start with 42 M€. As your first action, reveal cards from the deck until you have revealed 2 cards with a floater icon on it. Take them into hand and discard the rest.',
         renderData: CardRenderer.builder((b) => {
           b.megacredits(42).nbsp.cards(2).secondaryTag(AltSecondaryTag.FLOATER);
           b.corpBox('action', (ce) => {
@@ -87,8 +87,7 @@ export class Celestic extends Card implements IActionCard, CorporationCard, IRes
         'Add floater',
         floaterCards,
         (foundCards: Array<ICard>) => {
-          player.addResourceTo(foundCards[0], 1);
-          LogHelper.logAddResource(player, foundCards[0]);
+          player.addResourceTo(foundCards[0], {log: true});
           return undefined;
         },
       );

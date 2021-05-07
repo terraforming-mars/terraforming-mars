@@ -19,7 +19,7 @@ export class Incite extends Card implements CorporationCard {
 
       metadata: {
         cardNumber: 'R37',
-        description: 'You start with 32 MC. As your first action, place two delegates in one party.',
+        description: 'You start with 32 M€. As your first action, place two delegates in one party.',
         renderData: CardRenderer.builder((b) => {
           b.br.br;
           b.megacredits(32).nbsp.delegates(2);

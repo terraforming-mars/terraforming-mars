@@ -29,13 +29,6 @@ export class RedTourismWave extends Card implements IProjectCard {
     });
   }
 
-  public canPlay(player: Player): boolean {
-    if (player.game.turmoil !== undefined) {
-      return player.game.turmoil.canPlay(player, PartyName.REDS);
-    }
-    return false;
-  }
-
   public play(player: Player) {
     const amount = player.game.board.getEmptySpaces().filter((space) =>
       player.game.board.getAdjacentSpaces(space).some((adj) =>

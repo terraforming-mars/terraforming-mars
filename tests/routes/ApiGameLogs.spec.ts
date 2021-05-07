@@ -89,4 +89,34 @@ describe('ApiGameLogs', function() {
     const messages = JSON.parse(res.content);
     expect(messages.length).eq(0);
   });
+
+  [{idx: 0, color: 'Yellow'}, {idx: 1, color: 'Orange'}, {idx: 2, color: 'Blue'}].forEach((entry) => {
+    it('omits private logs for other players: ' + entry.color, () => {
+      const yellowPlayer = TestPlayers.YELLOW.newPlayer();
+      const orangePlayer = TestPlayers.ORANGE.newPlayer();
+      const bluePlayer = TestPlayers.BLUE.newPlayer();
+
+      const players = [yellowPlayer, orangePlayer, bluePlayer];
+      const playerUnderTest = players[entry.idx];
+
+      const game = Game.newInstance('game-id', players, yellowPlayer);
+      ctx.gameLoader.add(game);
+
+      // Remove logs to-date to simplify the test
+      game.gameLog.length = 0;
+      game.log('All players see this.');
+      game.log('Yellow player sees this.', (_b) => {}, {reservedFor: yellowPlayer});
+      game.log('Orange player sees this.', (_b) => {}, {reservedFor: orangePlayer});
+      game.log('Blue player sees this.', (_b) => {}, {reservedFor: bluePlayer});
+
+      req.url = '/api/game/logs?id=' + playerUnderTest.id;
+      ctx.url = new URL('http://boo.com' + req.url);
+      ApiGameLogs.INSTANCE.get(req, res.hide(), ctx);
+      const messages = JSON.parse(res.content);
+
+      expect(messages.length).eq(2);
+      expect(messages[0].message).eq('All players see this.');
+      expect(messages[1].message).eq(`${entry.color} player sees this.`);
+    });
+  });
 });

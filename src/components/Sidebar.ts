@@ -160,13 +160,13 @@ export const Sidebar = Vue.component('sidebar', {
     getRulingParty: function(): string {
       const rulingPartyName = this.turmoil.ruling;
       if (rulingPartyName === PartyName.MARS) {
-        return `Mars`;
+        return 'Mars';
       } else if (rulingPartyName === PartyName.SCIENTISTS) {
-        return `Science`;
+        return 'Science';
       } else if (rulingPartyName === PartyName.KELVINISTS) {
-        return `Kelvin`;
+        return 'Kelvin';
       } else {
-        return `${rulingPartyName}`;
+        return rulingPartyName as string;
       }
     },
   },
@@ -180,7 +180,7 @@ export const Sidebar = Vue.component('sidebar', {
     <div class="gen-marker">{{ getGenMarker() }}</div>
   </div>
   <div v-if="gameOptions.turmoilExtension">
-    <div :class="'party-name party-name-indicator party-name--'+rulingPartyToCss()" v-html="getRulingParty()"></div>
+    <div :class="'party-name party-name-indicator party-name--'+rulingPartyToCss()"> {{ getRulingParty() }}</div>
   </div>
   <div class="global_params">
     <global-parameter-value :param="this.globalParameter.TEMPERATURE" :value="this.temperature"></global-parameter-value>
@@ -189,17 +189,16 @@ export const Sidebar = Vue.component('sidebar', {
     <global-parameter-value v-if="gameOptions.venusNextExtension" :param="this.globalParameter.VENUS" :value="this.venus"></global-parameter-value>
     <moon-global-parameter-value v-if="gameOptions.moonExpansion" :moonData="this.moonData"></moon-global-parameter-value>
   </div>
-
   <div class="preferences_item preferences_player">
     <div :class="getPlayerColorCubeClass()+' player_bg_color_' + player_color"></div>
   </div>
 
-  <a  href="#board">
+  <a href="#board">
       <div class="preferences_item preferences_item_shortcut">
           <i class="preferences_icon preferences_icon--board"></i>
       </div>
   </a>
-  <a  href="#actions">
+  <a href="#actions">
       <div class="preferences_item preferences_item_shortcut">
           <i class="preferences_icon preferences_icon--actions"></i>
       </div>

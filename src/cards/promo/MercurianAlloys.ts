@@ -29,10 +29,6 @@ export class MercurianAlloys extends Card implements IProjectCard {
     });
   }
 
-  public canPlay(player: Player): boolean {
-    return player.getTagCount(Tags.SCIENCE) >= 2;
-  }
-
   public play(player: Player) {
     player.increaseTitaniumValue();
     return undefined;

@@ -6,25 +6,19 @@ import {PlayerInputModel} from './PlayerInputModel';
 import {SerializedTimer} from '../SerializedTimer';
 import {GameModel} from './GameModel';
 
-export interface PlayerModel extends GameModel {
+export interface PublicPlayerModel extends GameModel {
   actionsTakenThisRound: number;
-  actionsThisGeneration: Array<string>;
+  actionsThisGeneration: Array<string /* CardName */>;
   availableBlueCardActionCount: number;
   cardCost: number;
-  cardsInHand: Array<CardModel>;
   cardsInHandNbr: number;
   citiesCount: number;
   coloniesCount: number;
   color: Color;
   corporationCard: CardModel | undefined;
-  dealtCorporationCards: Array<CardModel>;
-  dealtPreludeCards: Array<CardModel>;
-  dealtProjectCards: Array<CardModel>;
-  draftedCards: Array<CardModel>;
   energy: number;
   energyProduction: number;
   fleetSize: number;
-  game: GameModel;
   heat: number;
   heatProduction: number;
   id: string; // PlayerId
@@ -36,12 +30,10 @@ export interface PlayerModel extends GameModel {
   needsToDraft: boolean | undefined;
   needsToResearch: boolean | undefined;
   noTagsCount: number;
-  pickedCorporationCard: Array<CardModel>; // Array?
   plants: number;
   plantProduction: number;
   plantsAreProtected: boolean;
   playedCards: Array<CardModel>;
-  players: Array<PlayerModel>;
   preludeCardsInHand: Array<CardModel>;
   selfReplicatingRobotsCards: Array<CardModel>;
   steel: number;
@@ -55,5 +47,22 @@ export interface PlayerModel extends GameModel {
   titaniumValue: number;
   tradesThisGeneration: number;
   victoryPointsBreakdown: VictoryPointsBreakdown;
+}
+
+export interface PlayerModel extends PublicPlayerModel {
+  availableBlueCardActionCount: number;
+  cardCost: number;
+  cardsInHand: Array<CardModel>;
+  corporationCard: CardModel | undefined;
+  dealtCorporationCards: Array<CardModel>;
+  dealtPreludeCards: Array<CardModel>;
+  dealtProjectCards: Array<CardModel>;
+  draftedCards: Array<CardModel>;
+  game: GameModel;
+  influence: number;
+  pickedCorporationCard: Array<CardModel>; // Why Array?
+  players: Array<PublicPlayerModel>;
+  preludeCardsInHand: Array<CardModel>;
+  timer: SerializedTimer;
   waitingFor: PlayerInputModel | undefined;
 }

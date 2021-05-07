@@ -75,8 +75,7 @@ export class JetStreamMicroscrappers extends Card implements IActionCard, IResou
   }
 
   private addResource(player: Player) {
-    player.addResourceTo(this, 2);
-    LogHelper.logAddResource(player, this, 2);
+    player.addResourceTo(this, {qty: 2, log: true});
     player.titanium--;
     return undefined;
   }

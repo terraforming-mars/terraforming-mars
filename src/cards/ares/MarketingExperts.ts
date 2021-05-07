@@ -18,7 +18,7 @@ export class MarketingExperts extends Card implements IProjectCard {
       metadata: {
         cardNumber: 'A12',
         renderData: CardRenderer.builder((b) => {
-          b.effect('When an ADJACENCY BONUS is collected from a tile you own, you gain 1MC.', (eb) => {
+          b.effect('When an ADJACENCY BONUS is collected from a tile you own, you gain 1 M€.', (eb) => {
             eb.emptyTile().emptyTile('golden').startEffect.megacredits(1);
           }).br;
           b.production((pb) => pb.megacredits(1));

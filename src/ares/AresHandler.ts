@@ -1,6 +1,5 @@
 import {CardName} from '../CardName';
 import {ICard} from '../cards/ICard';
-import {LogHelper} from '../LogHelper';
 import {Game} from '../Game';
 import {SelectCard} from '../inputs/SelectCard';
 import {ISpace} from '../boards/ISpace';
@@ -75,7 +74,7 @@ export class AresHandler {
       const availableCards = player.getResourceCards(resourceType);
       if (availableCards.length === 0) {
       } else if (availableCards.length === 1) {
-        player.addResourceTo(availableCards[0]);
+        player.addResourceTo(availableCards[0], {log: true});
       } else if (availableCards.length > 1) {
         player.game.defer(new DeferredAction(
           player,
@@ -84,8 +83,7 @@ export class AresHandler {
             'Add ' + resourceAsText + 's',
             availableCards,
             (selected: ICard[]) => {
-              player.addResourceTo(selected[0]);
-              LogHelper.logAddResource(player, selected[0], 1);
+              player.addResourceTo(selected[0], {log: true});
               return undefined;
             },
           ),

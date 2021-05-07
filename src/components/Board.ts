@@ -9,10 +9,10 @@ import {PreferencesManager} from './PreferencesManager';
 // @ts-ignore
 import {$t} from '../directives/i18n';
 import {SpaceId} from '../boards/ISpace';
+import {TranslateMixin} from './TranslateMixin';
 
 class GlobalParamLevel {
   constructor(public value: number, public isActive: boolean, public strValue: string) {
-
   }
 }
 
@@ -68,6 +68,7 @@ export const Board = Vue.component('board', {
       AlertDialog.shouldAlert = false;
     };
   },
+  mixins: [TranslateMixin],
   methods: {
     getAllSpacesOnMars: function(): Array<SpaceModel> {
       const boardSpaces: Array<SpaceModel> = this.spaces;
@@ -146,15 +147,6 @@ export const Board = Vue.component('board', {
         return temperatureMaxed && oceansMaxed && oxygenMaxed;
       }
     },
-    oceansValue: function() {
-      const oceans_count = this.oceans_count || 0;
-      const leftover = constants.MAX_OCEAN_TILES - oceans_count;
-      if (leftover === 0) {
-        return '<img width="26" src="/assets/misc/circle-checkmark.png" class="board-ocean-checkmark" :alt="$t(\'Completed!\')">';
-      } else {
-        return `${oceans_count}/${constants.MAX_OCEAN_TILES}`;
-      }
-    },
     getGameBoardClassName: function():string {
       return this.venusNextExtension ? 'board-cont board-with-venus' : 'board-cont board-without-venus';
     },
@@ -196,7 +188,13 @@ export const Board = Vue.component('board', {
                 <div :class="getScaleCSS(lvl)" v-for="lvl in getValuesForParameter('venus')">{{ lvl.strValue }}</div>
             </div>
 
-            <div class="global-numbers-oceans" v-html="oceansValue()">
+            <div class="global-numbers-oceans">
+              <span v-if="this.oceans_count === this.constants.MAX_OCEAN_TILES">
+                <img width="26" src="/assets/misc/circle-checkmark.png" class="board-ocean-checkmark" :alt="$t('Completed!')">
+              </span>
+              <span v-else>
+                {{this.oceans_count}}/{{this.constants.MAX_OCEAN_TILES}}
+              </span>
             </div>
 
             <div v-if="aresExtension && aresData !== undefined">

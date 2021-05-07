@@ -27,7 +27,7 @@ export class OffWorldCityLiving extends Card implements IProjectCard {
           b.moonColonyRate().br;
           b.vpText('1 VP for each 3 city tiles in play.');
         }),
-        victoryPoints: CardRenderDynamicVictoryPoints.cities(1, 3),
+        victoryPoints: CardRenderDynamicVictoryPoints.cities(1, 3, true),
       },
     });
   };

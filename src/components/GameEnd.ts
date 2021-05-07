@@ -1,5 +1,5 @@
 import Vue from 'vue';
-import {PlayerModel} from '../models/PlayerModel';
+import {PlayerModel, PublicPlayerModel} from '../models/PlayerModel';
 import {Board} from './Board';
 import {LogPanel} from './LogPanel';
 import {Button} from '../components/common/Button';
@@ -28,11 +28,11 @@ export const GameEnd = Vue.component('game-end', {
     getEndGamePlayerRowColorClass: function(color: string): string {
       return playerColorClass(color.toLowerCase(), 'bg_transparent');
     },
-    getTimer: function(p: PlayerModel): string {
+    getTimer: function(p: PublicPlayerModel): string {
       return Timer.toString(p.timer);
     },
     getSortedPlayers: function() {
-      this.player.players.sort(function(a:PlayerModel, b:PlayerModel) {
+      this.player.players.sort(function(a:PublicPlayerModel, b:PublicPlayerModel) {
         if (a.victoryPointsBreakdown.total < b.victoryPointsBreakdown.total) return -1;
         if (a.victoryPointsBreakdown.total > b.victoryPointsBreakdown.total) return 1;
         if (a.megaCredits < b.megaCredits) return -1;
@@ -44,7 +44,7 @@ export const GameEnd = Vue.component('game-end', {
     getWinners: function() {
       const sortedPlayers = this.getSortedPlayers();
       const firstWinner = sortedPlayers[0];
-      const winners: PlayerModel[] = [firstWinner];
+      const winners: PublicPlayerModel[] = [firstWinner];
       for (let i = 1; i < sortedPlayers.length; i++) {
         if (sortedPlayers[i].victoryPointsBreakdown.total === firstWinner.victoryPointsBreakdown.total &&
                     sortedPlayers[i].megaCredits === firstWinner.megaCredits) {
@@ -114,9 +114,9 @@ export const GameEnd = Vue.component('game-end', {
                                 <th><div class="m-and-a" title="Awards points">A</div></th>
                                 <th><div class="table-forest-tile"></div></th>
                                 <th><div class="table-city-tile"></div></th>
-                                <th v-if="player.game.moon !== undefined">Moon Roads</th>
-                                <th v-if="player.game.moon !== undefined">Moon Colonies</th>
-                                <th v-if="player.game.moon !== undefined">Moon Mines</th>
+                                <th v-if="player.game.moon !== undefined"><div class="table-moon-road-tile"></div></th>
+                                <th v-if="player.game.moon !== undefined"><div class="table-moon-colony-tile"></div></th>
+                                <th v-if="player.game.moon !== undefined"><div class="table-moon-mine-tile"></div></th>
                                 <th><div class="vp">VP</div></th>
                                 <th class="game-end-total"><div class="game-end-total-column">Total</div></th>
                                 <th><div class="mc-icon"></div></th>
@@ -160,6 +160,10 @@ export const GameEnd = Vue.component('game-end', {
                                 <div class="game-end-column-vp">{{v.victoryPoint}}</div>
                                 <div class="game-end-column-text">{{v.cardName}}</div>
                               </div>
+                            </div>
+                            <div class="game-end-column-row">
+                              <div class="game-end-column-vp">&nbsp;</div>
+                              <div class="game-end-column-text">&nbsp;</div>
                             </div>
                             <div v-for="v in p.victoryPointsBreakdown.detailsMilestones">
                               <div class="game-end-column-row">

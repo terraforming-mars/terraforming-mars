@@ -29,10 +29,6 @@ export class CrashSiteCleanup extends Card implements IProjectCard {
     });
   }
 
-  public canPlay(player: Player) {
-    return player.game.someoneHasRemovedOtherPlayersPlants;
-  }
-
   public play(player: Player) {
     const gainTitanium = new SelectOption(
       'Gain 1 titanium',

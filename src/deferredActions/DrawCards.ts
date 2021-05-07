@@ -58,7 +58,8 @@ export class DrawCards<T extends undefined | SelectCard<IProjectCard>> implement
     if (logType === LogType.DREW_VERBOSE) {
       LogHelper.logDrawnCards(player, cards);
     } else {
-      LogHelper.logCardChange(player, logType, cards.length);
+      player.game.log('${0} ${1} ${2} card(s)', (b) => b.player(player).string(logType).number(cards.length));
+      LogHelper.logDrawnCards(player, cards, /* privateMessage */ true);
     }
     return undefined;
   }

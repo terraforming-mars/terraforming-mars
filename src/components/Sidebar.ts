@@ -1,8 +1,8 @@
 import Vue from 'vue';
+import * as constants from '../constants';
 import {Color} from '../Color';
 import {preferences, PreferencesManager} from './PreferencesManager';
 import {LANGUAGES} from '../constants';
-import {MAX_OCEAN_TILES, MAX_TEMPERATURE, MAX_OXYGEN_LEVEL, MAX_VENUS_SCALE} from '../constants';
 import {TurmoilModel} from '../models/TurmoilModel';
 import {PartyName} from '../turmoil/parties/PartyName';
 import {GameSetupDetail} from './GameSetupDetail';
@@ -54,6 +54,7 @@ export const Sidebar = Vue.component('sidebar', {
   mixins: [TranslateMixin],
   data: function() {
     return {
+      constants,
       'ui': {
         'preferences_panel_open': false,
         'gamesetup_detail_open': false,
@@ -138,37 +139,6 @@ export const Sidebar = Vue.component('sidebar', {
     getSideBarClass: function(): string {
       return this.acting_player && (PreferencesManager.loadBoolean('hide_animated_sidebar') === false) ? 'preferences_acting_player' : 'preferences_nonacting_player';
     },
-    getGenMarker: function(): string {
-      return `${this.generation}`;
-    },
-    getOceanCount: function(): string {
-      if (this.oceans === MAX_OCEAN_TILES) {
-        return '<img src="/assets/misc/checkmark.png" class="checkmark" :alt="$t(\'Completed!\')">';
-      } else {
-        return `${this.oceans}`;
-      }
-    },
-    getTemperatureCount: function(): string {
-      if (this.temperature === MAX_TEMPERATURE) {
-        return '<img src="/assets/misc/checkmark.png" class="checkmark" :alt="$t(\'Completed!\')">';
-      } else {
-        return `${this.temperature}`;
-      }
-    },
-    getOxygenCount: function(): string {
-      if (this.oxygen === MAX_OXYGEN_LEVEL) {
-        return '<img src="/assets/misc/checkmark.png" class="checkmark" :alt="$t(\'Completed!\')">';
-      } else {
-        return `${this.oxygen}`;
-      }
-    },
-    getVenusCount: function(): string {
-      if (this.venus === MAX_VENUS_SCALE) {
-        return '<img src="/assets/misc/checkmark.png" class="checkmark" :alt="$t(\'Completed!\')">';
-      } else {
-        return `${this.venus}`;
-      }
-    },
     rulingPartyToCss: function(): string {
       if (this.turmoil.ruling === undefined) {
         console.warn('no party provided');
@@ -196,21 +166,33 @@ export const Sidebar = Vue.component('sidebar', {
 <div :class="'sidebar_cont sidebar '+getSideBarClass()" :data="syncPreferences()">
   <div class="tm">
     <div class="gen-text">GEN</div>
-    <div class="gen-marker">{{ getGenMarker() }}</div>
+    <div class="gen-marker">{{ this.generation }}</div>
   </div>
   <div v-if="gameOptions.turmoilExtension">
     <div :class="'party-name party-name-indicator party-name--'+rulingPartyToCss()"> {{ getRulingParty() }}</div>
   </div>
   <div class="global_params">
     <div class="temperature-tile"></div>
-    <div class="global_params_value" v-html="getTemperatureCount()"></div>
+    <div class="global_params_value">
+      <span v-if="this.temperature !== constants.MAX_TEMPERATURE">{{ this.temperature }}</span>
+      <span v-else><img src="/assets/misc/checkmark.png" class="checkmark" :alt="$t('Completed!')"></span>
+    </div>
     <div class="oxygen-tile"></div>
-    <div class="global_params_value" v-html="getOxygenCount()"></div>
+    <div class="global_params_value">
+      <span v-if="this.oxygen !== constants.MAX_OXYGEN_LEVEL">{{ this.oxygen }}</span>
+      <span v-else><img src="/assets/misc/checkmark.png" class="checkmark" :alt="$t('Completed!')"></span>
+    </div>
     <div class="ocean-tile"></div>
-    <div class="global_params_value" v-html="getOceanCount()"></div>
+    <div class="global_params_value">
+      <span v-if="this.oceans !== constants.MAX_OCEAN_TILES">{{ this.oceans }}</span>
+      <span v-else><img src="/assets/misc/checkmark.png" class="checkmark" :alt="$t('Completed!')"></span>
+    </div>
     <div v-if="gameOptions.venusNextExtension">
       <div class="venus-tile"></div>
-      <div class="global_params_value" v-html="getVenusCount()"></div>
+      <div class="global_params_value">
+        <span v-if="this.venus !== constants.MAX_VENUS_SCALE">{{ this.venus }}</span>
+        <span v-else><img src="/assets/misc/checkmark.png" class="checkmark" :alt="$t('Completed!')"></span>
+      </div>
     </div>
   </div>
 

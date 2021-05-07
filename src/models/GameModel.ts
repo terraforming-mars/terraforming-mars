@@ -29,6 +29,7 @@ export interface GameModel {
   spaces: Array<SpaceModel>;
   spectatorId?: string;
   temperature: number;
+  isTerraformed: boolean;
   turmoil: TurmoilModel | undefined;
   undoCount: number;
   venusScaleLevel: number;

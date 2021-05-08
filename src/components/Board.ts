@@ -4,9 +4,8 @@ import {BoardSpace} from './BoardSpace';
 import {IAresData} from '../ares/IAresData';
 import {SpaceModel} from '../models/SpaceModel';
 import {SpaceType} from '../SpaceType';
-// @ts-ignore
-import {$t} from '../directives/i18n';
 import {SpaceId} from '../boards/ISpace';
+import {TranslateMixin} from './TranslateMixin';
 
 class GlobalParamLevel {
   constructor(public value: number, public isActive: boolean, public strValue: string) {
@@ -52,6 +51,7 @@ export const Board = Vue.component('board', {
       'isTileHidden': false,
     };
   },
+  mixins: [TranslateMixin],
   methods: {
     getAllSpacesOnMars: function(): Array<SpaceModel> {
       const boardSpaces: Array<SpaceModel> = this.spaces;

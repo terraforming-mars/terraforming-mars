@@ -21,6 +21,7 @@ describe('LawSuit', () => {
   });
 
   it('Can play if resources removed this turn by other player', () => {
+    player.megaCredits = 1;
     player.addResource(Resources.MEGACREDITS, -1, {log: true, from: player2});
     expect(card.canPlay(player)).is.true;
   });

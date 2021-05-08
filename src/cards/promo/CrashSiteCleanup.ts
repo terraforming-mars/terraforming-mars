@@ -53,6 +53,15 @@ export class CrashSiteCleanup extends Card implements IProjectCard {
     return new OrOptions(gainTitanium, gain2Steel);
   }
 
+  public static resourceHook(player: Player, resource: Resources, amount: number, from: Player) {
+    if (from === player || amount >= 0) {
+      return;
+    }
+    if (resource === Resources.PLANTS && amount < 0) {
+      player.game.someoneHasRemovedOtherPlayersPlants = true;
+    }
+  }
+
   public getVictoryPoints() {
     return 1;
   }

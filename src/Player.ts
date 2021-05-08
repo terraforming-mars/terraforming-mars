@@ -72,6 +72,8 @@ import {PlaceMoonRoadTile} from './moon/PlaceMoonRoadTile';
 import {GlobalParameter} from './GlobalParameter';
 import {GlobalEventName} from './turmoil/globalEvents/GlobalEventName';
 import {LogHelper} from './LogHelper';
+import {LawSuit} from './cards/promo/LawSuit';
+import {CrashSiteCleanup} from './cards/promo/CrashSiteCleanup';
 
 export type PlayerId = string;
 
@@ -311,6 +313,31 @@ export class Player implements ISerializable<SerializedPlayer> {
     }
   }
 
+  private logUnitDelta(resource: Resources, amount: number, unitType: 'production' | 'amount', from: Player | GlobalEventName | undefined) {
+    if (amount === 0) {
+      // Logging zero units doesn't seem to happen
+      return;
+    }
+
+    const modifier = amount > 0 ? 'increased' : 'decreased';
+    const absAmount = Math.abs(amount);
+    // TODO(kberg): remove the ${2} for increased and decreased, I bet it's not used.
+    let message = '${0}\'s ${1} ' + unitType + ' ${2} by ${3}';
+
+    if (from !== undefined) {
+      message = message + ' by ' + ((from instanceof Player) ? '${4}' : 'Global Event');
+    }
+    this.game.log(message, (b) => {
+      b.player(this)
+        .string(resource)
+        .string(modifier)
+        .number(absAmount);
+      if (from instanceof Player) {
+        b.player(from);
+      }
+    });
+  }
+
   public addResource(resource: Resources, amount: number, options? : { log: boolean, from? : Player | GlobalEventName}) {
     const delta = (amount >= 0) ? amount : Math.max(amount, -this.getResource(resource));
 
@@ -322,35 +349,12 @@ export class Player implements ISerializable<SerializedPlayer> {
     if (resource === Resources.HEAT) this.heat += delta;
 
     if (options?.log === true) {
-      const modifier = amount > 0 ? 'increased' : 'decreased';
+      this.logUnitDelta(resource, amount, 'amount', options.from);
+    }
 
-      if (options?.from !== undefined && options.from instanceof Player && amount < 0) {
-        const from: Player = options.from;
-        if (from !== this && this.removingPlayers.includes(from.id) === false) {
-          this.removingPlayers.push(from.id);
-        }
-
-        // Crash site cleanup hook
-        if (from !== this && resource === Resources.PLANTS && delta < 0) {
-          this.game.someoneHasRemovedOtherPlayersPlants = true;
-        }
-
-        this.game.log('${0}\'s ${1} amount ${2} by ${3} by ${4}', (b) =>
-          b.player(this)
-            .string(resource)
-            .string(modifier)
-            .number(Math.abs(delta))
-            .player(from));
-      }
-
-      // Global event logging
-      if (options?.from !== undefined && ! (options.from instanceof Player) && delta !== 0) {
-        this.game.log('${0}\'s ${1} amount ${2} by ${3} by Global Event', (b) =>
-          b.player(this)
-            .string(resource)
-            .string(modifier)
-            .number(Math.abs(delta)));
-      }
+    if (options?.from instanceof Player) {
+      LawSuit.resourceHook(this, resource, delta, options.from);
+      CrashSiteCleanup.resourceHook(this, resource, delta, options.from);
     }
 
     // Mons Insurance hook
@@ -368,38 +372,11 @@ export class Player implements ISerializable<SerializedPlayer> {
     if (resource === Resources.HEAT) this.heatProduction = Math.max(0, this.heatProduction + amount);
 
     if (options?.log === true) {
-      const modifier = amount > 0 ? 'increased' : 'decreased';
-      // Gaining production from multiplier cards
-      if (options?.from === undefined && amount > 0) {
-        this.game.log('${0}\'s ${1} production ${2} by ${3}', (b) =>
-          b.player(this)
-            .string(resource)
-            .string(modifier)
-            .number(Math.abs(amount)));
-      }
+      this.logUnitDelta(resource, amount, 'production', options.from);
+    }
 
-      // Production reduced by other players
-      if (options?.from !== undefined && options.from instanceof Player && amount < 0) {
-        const from: Player = options.from;
-        if (from !== this && this.removingPlayers.includes(from.id) === false) {
-          this.removingPlayers.push(from.id);
-        }
-        this.game.log('${0}\'s ${1} production ${2} by ${3} by ${4}', (b) =>
-          b.player(this)
-            .string(resource)
-            .string(modifier)
-            .number(Math.abs(amount))
-            .player(from));
-      }
-
-      // Global event logging
-      if (options?.from !== undefined && ! (options.from instanceof Player) && amount !== 0) {
-        this.game.log('${0}\'s ${1} production ${2} by ${3} by Global Event', (b) =>
-          b.player(this)
-            .string(resource)
-            .string(modifier)
-            .number(Math.abs(amount)));
-      }
+    if (options?.from instanceof Player) {
+      LawSuit.resourceHook(this, resource, amount, options.from);
     }
 
     // Mons Insurance hook

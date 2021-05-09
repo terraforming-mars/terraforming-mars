@@ -8,17 +8,17 @@ import {SpaceBonus} from '../../../src/SpaceBonus';
 import {TileType} from '../../../src/TileType';
 import {TestPlayers} from '../../TestPlayers';
 
-describe('MiningRights', function() {
+describe('MiningRights', () => {
   let card : MiningRights; let player : Player; let game : Game;
 
-  beforeEach(function() {
+  beforeEach(() => {
     card = new MiningRights();
     player = TestPlayers.BLUE.newPlayer();
     const redPlayer = TestPlayers.RED.newPlayer();
     game = Game.newInstance('foobar', [player, redPlayer], player);
   });
 
-  it('Can\'t play if no available spaces', function() {
+  it('Cannot play if no available spaces', () => {
     for (const land of game.board.getAvailableSpacesOnLand(player)) {
       if (land.bonus.includes(SpaceBonus.STEEL) || land.bonus.includes(SpaceBonus.TITANIUM)) {
         game.addTile(player, land.spaceType, land, {tileType: TileType.MINING_RIGHTS});
@@ -27,7 +27,7 @@ describe('MiningRights', function() {
     expect(card.canPlay(player)).is.not.true;
   });
 
-  it('Should play', function() {
+  it('Should play', () => {
     const action = card.play(player);
     expect(action instanceof SelectSpace).is.true;
 

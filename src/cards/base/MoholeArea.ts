@@ -12,6 +12,7 @@ import {CardName} from '../../CardName';
 import {IAdjacencyBonus} from '../../ares/IAdjacencyBonus';
 import {CardMetadata} from '../CardMetadata';
 import {CardRenderer} from '../render/CardRenderer';
+import {Units} from '../../Units';
 
 export class MoholeArea extends Card implements IProjectCard {
   constructor(
@@ -32,6 +33,7 @@ export class MoholeArea extends Card implements IProjectCard {
       cost: 20,
       adjacencyBonus,
       metadata,
+      productionBox: Units.of({heat: 4}),
     });
   }
 

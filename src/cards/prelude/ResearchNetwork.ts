@@ -5,12 +5,14 @@ import {IProjectCard} from '../IProjectCard';
 import {Resources} from '../../Resources';
 import {CardName} from '../../CardName';
 import {CardRenderer} from '../render/CardRenderer';
+import {Units} from '../../Units';
 
 export class ResearchNetwork extends PreludeCard implements IProjectCard {
   constructor() {
     super({
       name: CardName.RESEARCH_NETWORK,
       tags: [Tags.WILDCARD],
+      productionBox: Units.of({megacredits: 1}),
 
       metadata: {
         cardNumber: 'P28',

@@ -31,9 +31,15 @@ export class ParliamentHall extends Card implements IProjectCard {
     });
   }
 
-  public play(player: Player) {
-    const amount = Math.floor((player.getTagCount(Tags.BUILDING) + 1) / 3);
+  public produce(player: Player, includeThis: boolean) {
+    // Don't include this when called by Robotic Workforce.
+    const tagCount = player.getTagCount(Tags.BUILDING) + (includeThis ? 1 : 0);
+    const amount = Math.floor(tagCount / 3);
     player.addProduction(Resources.MEGACREDITS, amount);
+  }
+
+  public play(player: Player) {
+    this.produce(player, true);
     return undefined;
   }
 

@@ -5,12 +5,14 @@ import {IProjectCard} from '../IProjectCard';
 import {Resources} from '../../Resources';
 import {CardName} from '../../CardName';
 import {CardRenderer} from '../render/CardRenderer';
+import {Units} from '../../Units';
 
 export class MiningOperations extends PreludeCard implements IProjectCard {
   constructor() {
     super({
       name: CardName.MINING_OPERATIONS,
       tags: [Tags.BUILDING],
+      productionBox: Units.of({steel: 2}),
 
       metadata: {
         cardNumber: 'P21',

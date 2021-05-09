@@ -11,6 +11,7 @@ import {CardName} from '../../CardName';
 import {IResourceCard} from '../ICard';
 import {CardType} from '../CardType';
 import {CardRenderer} from '../render/CardRenderer';
+import {Units} from '../../Units';
 
 export class Recyclon extends Card implements CorporationCard, IResourceCard {
   constructor() {
@@ -20,6 +21,7 @@ export class Recyclon extends Card implements CorporationCard, IResourceCard {
       tags: [Tags.MICROBE, Tags.BUILDING],
       startingMegaCredits: 38,
       resourceType: ResourceType.MICROBE,
+      productionBox: Units.of({steel: 1}),
 
       metadata: {
         cardNumber: 'R26',

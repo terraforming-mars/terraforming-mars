@@ -6,7 +6,6 @@ import {ResourceType} from '../../ResourceType';
 import {OrOptions} from '../../inputs/OrOptions';
 import {SelectOption} from '../../inputs/SelectOption';
 import {IResourceCard} from '../ICard';
-import {LogHelper} from '../../LogHelper';
 import {Resources} from '../../Resources';
 import {AddResourcesToCard} from '../../deferredActions/AddResourcesToCard';
 import {Card} from '../Card';
@@ -51,20 +50,17 @@ export class AtmoCollectors extends Card implements IProjectCard, IResourceCard 
     return new OrOptions(
       new SelectOption('Remove 1 floater to gain 2 titanium', 'Remove floater', () => {
         this.resourceCount--;
-        player.titanium += 2;
-        LogHelper.logGainStandardResource(player, Resources.TITANIUM, 2);
+        player.addResource(Resources.TITANIUM, 2, {log: true});
         return undefined;
       }),
       new SelectOption('Remove 1 floater to gain 3 energy', 'Remove floater', () => {
         this.resourceCount--;
-        player.energy += 3;
-        LogHelper.logGainStandardResource(player, Resources.ENERGY, 3);
+        player.addResource(Resources.ENERGY, 3, {log: true});
         return undefined;
       }),
       new SelectOption('Remove 1 floater to gain 4 heat', 'Remove floater', () => {
         this.resourceCount--;
-        player.heat += 4;
-        LogHelper.logGainStandardResource(player, Resources.HEAT, 4);
+        player.addResource(Resources.HEAT, 4, {log: true});
         return undefined;
       }),
       new SelectOption('Add 1 floater to this card', 'Add floater', () => {

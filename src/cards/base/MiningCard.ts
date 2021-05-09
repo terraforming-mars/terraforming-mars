@@ -5,7 +5,6 @@ import {CardType} from '../../cards/CardType';
 import {IAdjacencyBonus} from '../../ares/IAdjacencyBonus';
 import {IProjectCard} from '../../cards/IProjectCard';
 import {ISpace} from '../../boards/ISpace';
-import {LogHelper} from '../../LogHelper';
 import {Player} from '../../Player';
 import {Resources} from '../../Resources';
 import {SelectSpace} from '../../inputs/SelectSpace';
@@ -72,9 +71,8 @@ export abstract class MiningCard extends Card implements IProjectCard {
         }
         player.game.addTile(player, foundSpace.spaceType, foundSpace, {tileType: this.getTileType(bonus)});
         foundSpace.adjacency = this.getAdjacencyBonus(bonus);
-        player.addProduction(resource, 1);
+        player.addProduction(resource, 1, {log: true});
         this.bonusResource = resource;
-        LogHelper.logGainProduction(player, resource);
         return undefined;
       });
     }

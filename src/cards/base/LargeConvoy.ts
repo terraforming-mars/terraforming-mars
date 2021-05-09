@@ -10,7 +10,6 @@ import {SelectOption} from '../../inputs/SelectOption';
 import {PlayerInput} from '../../PlayerInput';
 import {ResourceType} from '../../ResourceType';
 import {CardName} from '../../CardName';
-import {LogHelper} from '../../LogHelper';
 import {Resources} from '../../Resources';
 import {MAX_OCEAN_TILES, REDS_RULING_POLICY_COST} from '../../constants';
 import {PartyHooks} from '../../turmoil/parties/PartyHooks';
@@ -55,8 +54,7 @@ export class LargeConvoy extends Card implements IProjectCard {
     const animalCards = player.getResourceCards(ResourceType.ANIMAL);
 
     const gainPlants = function() {
-      player.plants += 5;
-      LogHelper.logGainStandardResource(player, Resources.PLANTS, 5);
+      player.addResource(Resources.PLANTS, 5, {log: true});
       player.game.defer(new PlaceOceanTile(player));
       return undefined;
     };

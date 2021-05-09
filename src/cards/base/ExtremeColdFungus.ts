@@ -9,7 +9,6 @@ import {SelectCard} from '../../inputs/SelectCard';
 import {IProjectCard} from '../IProjectCard';
 import {ResourceType} from '../../ResourceType';
 import {CardName} from '../../CardName';
-import {LogHelper} from '../../LogHelper';
 import {Resources} from '../../Resources';
 import {CardRequirements} from '../CardRequirements';
 import {CardRenderer} from '../render/CardRenderer';
@@ -48,14 +47,12 @@ export class ExtremeColdFungus extends Card implements IActionCard, IProjectCard
     const otherMicrobeCards = player.getResourceCards(ResourceType.MICROBE);
 
     if (otherMicrobeCards.length === 0) {
-      player.plants++;
-      LogHelper.logGainStandardResource(player, Resources.PLANTS);
+      player.addResource(Resources.PLANTS, 1, {log: true});
       return undefined;
     }
 
     const gainPlantOption = new SelectOption('Gain 1 plant', 'Gain plant', () => {
-      player.plants++;
-      LogHelper.logGainStandardResource(player, Resources.PLANTS);
+      player.addResource(Resources.PLANTS, 1, {log: true});
       return undefined;
     });
 

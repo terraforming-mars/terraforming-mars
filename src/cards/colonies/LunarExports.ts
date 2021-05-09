@@ -9,7 +9,6 @@ import {SelectOption} from '../../inputs/SelectOption';
 import {Card} from '../Card';
 import {CardRenderer} from '../render/CardRenderer';
 import {Size} from '../render/Size';
-import {LogHelper} from '../../LogHelper';
 
 export class LunarExports extends Card implements IProjectCard {
   constructor() {
@@ -34,13 +33,11 @@ export class LunarExports extends Card implements IProjectCard {
   public play(player: Player) {
     return new OrOptions(
       new SelectOption('Increase your M€ production by 5', 'Increase +MC', () => {
-        player.addProduction(Resources.MEGACREDITS, 5);
-        LogHelper.logGainProduction(player, Resources.MEGACREDITS, 5);
+        player.addProduction(Resources.MEGACREDITS, 5, {log: true});
         return undefined;
       }),
       new SelectOption('Increase your plant production by 2', 'Increase +plants', () => {
-        player.addProduction(Resources.PLANTS, 2);
-        LogHelper.logGainProduction(player, Resources.PLANTS, 2);
+        player.addProduction(Resources.PLANTS, 2, {log: true});
         return undefined;
       }),
     );

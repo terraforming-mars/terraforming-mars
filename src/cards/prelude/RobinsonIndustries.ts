@@ -6,7 +6,6 @@ import {SelectOption} from '../../inputs/SelectOption';
 import {Resources} from '../../Resources';
 import {Card} from '../Card';
 import {CardName} from '../../CardName';
-import {LogHelper} from '../../LogHelper';
 import {CardType} from '../CardType';
 import {CardRenderer} from '../render/CardRenderer';
 
@@ -63,8 +62,7 @@ export class RobinsonIndustries extends Card implements IActionCard, Corporation
   }
 
   private increaseAndLogProduction(player: Player, resource: Resources) {
-    player.addProduction(resource, 1);
+    player.addProduction(resource, 1, {log: true});
     player.megaCredits -= 4;
-    LogHelper.logGainProduction(player, resource);
   }
 }

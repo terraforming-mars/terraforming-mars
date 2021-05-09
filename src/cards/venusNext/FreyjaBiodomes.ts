@@ -6,7 +6,6 @@ import {ResourceType} from '../../ResourceType';
 import {SelectCard} from '../../inputs/SelectCard';
 import {ICard} from '../ICard';
 import {CardName} from '../../CardName';
-import {LogHelper} from '../../LogHelper';
 import {CardRequirements} from '../CardRequirements';
 import {CardRenderer} from '../render/CardRenderer';
 import {Card} from '../Card';
@@ -61,8 +60,7 @@ export class FreyjaBiodomes extends Card {
     }
 
     if (cards.length === 1) {
-      player.addResourceTo(cards[0], 2);
-      LogHelper.logAddResource(player, cards[0], 2);
+      player.addResourceTo(cards[0], {qty: 2, log: true});
     }
 
     player.addProduction(Resources.ENERGY, -1);

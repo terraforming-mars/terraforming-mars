@@ -8,7 +8,6 @@ import {SelectOption} from '../../inputs/SelectOption';
 import {OrOptions} from '../../inputs/OrOptions';
 import {CardName} from '../../CardName';
 import {CardType} from '../CardType';
-import {LogHelper} from '../../LogHelper';
 import {CardRenderer} from '../render/CardRenderer';
 import {Size} from '../render/Size';
 
@@ -51,8 +50,7 @@ export class Factorum extends Card implements IActionCard, CorporationCard {
       'Increase your energy production 1 step',
       'Increase production',
       () => {
-        player.addProduction(Resources.ENERGY, 1);
-        LogHelper.logGainProduction(player, Resources.ENERGY);
+        player.addProduction(Resources.ENERGY, 1, {log: true});
         return undefined;
       },
     );

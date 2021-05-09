@@ -46,7 +46,7 @@ export const Button = Vue.component('Button', {
     },
   },
   methods: {
-    getClasses: function(): string {
+    getOuterClass: function(): string {
       const classes: Array<string> = ['btn'];
 
       // size
@@ -95,24 +95,24 @@ export const Button = Vue.component('Button', {
       }
       return this.disabled;
     },
-    getHtmlContent: function(): string {
-      if (this.type === 'close') {
-        return '<i class=\'icon icon-cross\' />';
+    getInnerClass: function(): string {
+      switch (this.type) {
+      case 'close':
+        return 'icon icon-cross';
+      case 'back':
+        return 'icon icon-back';
+      case 'plus':
+        return 'icon icon-plus';
+      case 'minus':
+        return 'icon icon-minus';
       }
-      if (this.type === 'back') {
-        return '<i class=\'icon icon-back\' />';
-      }
-      if (this.type === 'plus') {
-        return '<i class=\'icon icon-plus\' />';
-      }
-      if (this.type === 'minus') {
-        return '<i class=\'icon icon-minus\' />';
-      }
-
-      return this.title;
+      return '';
     },
   },
   template: `
-        <button v-on:click.prevent="onClick" :class="getClasses()" :disabled="getDisabled()" v-html="getHtmlContent()" v-i18n />
+        <button v-on:click.prevent="onClick" :class="getOuterClass()" :disabled="getDisabled()" v-i18n>
+          <span v-if="getInnerClass() !== ''" :class="getInnerClass()"></span>
+          <span v-else>{{this.title}}</span>
+        </button>
     `,
 });

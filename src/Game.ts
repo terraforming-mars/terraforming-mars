@@ -1375,13 +1375,13 @@ export class Game implements ISerializable<SerializedGame> {
     if (spaceBonus === SpaceBonus.DRAW_CARD) {
       player.drawCard(count);
     } else if (spaceBonus === SpaceBonus.PLANT) {
-      player.plants += count;
+      player.addResource(Resources.PLANTS, count, {log: true});
     } else if (spaceBonus === SpaceBonus.STEEL) {
-      player.steel += count;
+      player.addResource(Resources.STEEL, count, {log: true});
     } else if (spaceBonus === SpaceBonus.TITANIUM) {
-      player.titanium += count;
+      player.addResource(Resources.TITANIUM, count, {log: true});
     } else if (spaceBonus === SpaceBonus.HEAT) {
-      player.heat += count;
+      player.addResource(Resources.HEAT, count, {log: true});
     }
   }
 

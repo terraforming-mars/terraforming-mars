@@ -43,10 +43,8 @@ export class PlayerInput extends Handler {
 
   private isWaitingForUndo(player: Player, entity: Array<Array<string>>): boolean {
     const waitingFor = player.getWaitingFor();
-    return waitingFor instanceof OrOptions &&
-           entity.length > 0 &&
-           entity[0].length > 0 &&
-           waitingFor.options[Number(entity[0][0])] instanceof UndoActionOption;
+    return entity.length > 0 && entity[0].length > 0 &&
+           waitingFor instanceof OrOptions && waitingFor.options[Number(entity[0][0])] instanceof UndoActionOption;
   }
 
   private performUndo(res: http.ServerResponse, ctx: IContext, player: Player): void {

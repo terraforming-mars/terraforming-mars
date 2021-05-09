@@ -33,10 +33,11 @@ export class BactoviralResearch extends Card implements IProjectCard {
     const scienceTags: number = player.getTagCount(Tags.SCIENCE) + 1;
     const microbeCards = player.getResourceCards(ResourceType.MICROBE);
 
-    if (microbeCards.length === 1) {
+    if (microbeCards.length === 0) {
+      return undefined;
+    } else if (microbeCards.length === 1) {
       player.addResourceTo(microbeCards[0], {qty: scienceTags, log: true});
-    }
-    if (microbeCards.length > 1) {
+    } else if (microbeCards.length > 1) {
       return new SelectCard(
         'Select card to add ' + scienceTags + ' microbe(s)',
         'Add microbe(s)',

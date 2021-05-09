@@ -46,7 +46,7 @@ describe('PlayerInput', function() {
     player.process([['1'], ['Power Plant:SP']]);
     const options = player.getWaitingFor() as OrOptions;
     options.options.push(new UndoActionOption());
-    ctx.gameLoader.restoreGameAt = function(__gameId: string, __lastSaveId: number, cb: (game: Game | undefined) => void) {
+    ctx.gameLoader.restoreGameAt = function(_gameId: string, _lastSaveId: number, cb: (game: Game | undefined) => void) {
       cb(undo);
     };
     PlayerInput.INSTANCE.post(req, res.hide(), ctx);
@@ -57,7 +57,7 @@ describe('PlayerInput', function() {
     expect(model.game.gameAge).eq(undo.gameAge);
   });
 
-  it('reverts to old if undo fails', () => {
+  it('reverts to current game instance if undo fails', () => {
     const player = TestPlayers.BLUE.newPlayer();
     req.url = '/player/input?id=' + player.id;
     ctx.url = new URL('http://boo.com' + req.url);
@@ -69,7 +69,7 @@ describe('PlayerInput', function() {
     player.process([['1'], ['Power Plant:SP']]);
     const options = player.getWaitingFor() as OrOptions;
     options.options.push(new UndoActionOption());
-    ctx.gameLoader.restoreGameAt = function(__gameId: string, __lastSaveId: number, cb: (game: Game | undefined) => void) {
+    ctx.gameLoader.restoreGameAt = function(_gameId: string, _lastSaveId: number, cb: (game: Game | undefined) => void) {
       cb(undefined);
     };
     PlayerInput.INSTANCE.post(req, res.hide(), ctx);

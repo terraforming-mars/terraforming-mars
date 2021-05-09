@@ -94,19 +94,15 @@ export const WaitingFor = Vue.component('waiting-for', {
             if (result.result === 'GO') {
               root.updatePlayer();
 
-              // Only show notification for multi-player games
-              // todo bafolts remove once undo refactor complete
-              if (this.player.players.length > 1) {
-                if (Notification.permission !== 'granted') {
-                  Notification.requestPermission();
-                }
-                if (Notification.permission === 'granted') {
-                  new Notification(constants.APP_NAME, {
-                    icon: '/favicon.ico',
-                    body: 'It\'s your turn!',
-                  });
-                }
+              if (Notification.permission !== 'granted') {
+                Notification.requestPermission();
+              } else if (Notification.permission === 'granted') {
+                new Notification(constants.APP_NAME, {
+                  icon: '/favicon.ico',
+                  body: 'It\'s your turn!',
+                });
               }
+
               const soundsEnabled = PreferencesManager.load('enable_sounds') === '1';
               if (soundsEnabled) SoundManager.playActivePlayerSound();
 
@@ -134,12 +130,7 @@ export const WaitingFor = Vue.component('waiting-for', {
     window.clearInterval(documentTitleTimer);
     if (this.waitingfor === undefined) {
       this.waitForUpdate();
-      let message = 'Not your turn to take any actions';
-      // todo bafolts remove once undo refactor complete
-      if (this.players.length === 1) {
-        message = '';
-      }
-      return createElement('div', $t(message));
+      return createElement('div', $t('Not your turn to take any actions'));
     }
     if (this.player.players.length > 1 && this.player.waitingFor !== undefined) {
       documentTitleTimer = window.setInterval(() => this.animateTitle(), 1000);

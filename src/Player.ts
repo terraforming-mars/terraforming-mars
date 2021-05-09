@@ -56,7 +56,6 @@ import {IAresGlobalParametersResponse, ShiftAresGlobalParameters} from './inputs
 import {Timer} from './Timer';
 import {TurmoilHandler} from './turmoil/TurmoilHandler';
 import {TurmoilPolicy} from './turmoil/TurmoilPolicy';
-import {GameLoader} from './database/GameLoader';
 import {CardLoader} from './CardLoader';
 import {DrawCards} from './deferredActions/DrawCards';
 import {Units} from './Units';
@@ -72,6 +71,7 @@ import {PlaceMoonRoadTile} from './moon/PlaceMoonRoadTile';
 import {GlobalParameter} from './GlobalParameter';
 import {GlobalEventName} from './turmoil/globalEvents/GlobalEventName';
 import {LogHelper} from './LogHelper';
+import {UndoActionOption} from './inputs/UndoActionOption';
 import {LawSuit} from './cards/promo/LawSuit';
 import {CrashSiteCleanup} from './cards/promo/CrashSiteCleanup';
 
@@ -79,7 +79,6 @@ export type PlayerId = string;
 
 export class Player implements ISerializable<SerializedPlayer> {
   public readonly id: PlayerId;
-  private usedUndo: boolean = false;
   private waitingFor?: PlayerInput;
   private waitingForCb?: () => void;
   private _game: Game | undefined = undefined;
@@ -1646,33 +1645,6 @@ export class Player implements ISerializable<SerializedPlayer> {
     });
   }
 
-  // Propose a new action to undo last action
-  private undoTurnOption(): PlayerInput {
-    return new SelectOption('Undo last action', 'Undo', () => {
-      /**
-       * The usedUndo flag is used as a kill switch. Once this flag
-       * is set on an instance we don't expect that instance to take
-       * further action or be used. We assume the `GameLoader` is going
-       * to create a new `Player` instance to use with the a `Game`.
-       */
-      this.usedUndo = true; // To prevent going back into takeAction()
-      GameLoader.getInstance().restoreGameAt(this.game.id, this.game.lastSaveId - 2, (err) => {
-        // If there is an error with restoring the game from the database this undo action has failed.
-        // We need a mechanism to tell the user this has failed. By now the `res` has been sent.
-        // For now we will keep this player instance going and hope player discovers what has happened.
-        if (err) {
-          this.game.log('Unable to perform undo operation', () => {}, {reservedFor: this});
-          this.usedUndo = false;
-          this.takeAction();
-          return;
-        }
-        // If there was no error the GameLoader has loaded the old version of `Player`
-        // This instance of `Player` will eventually be garbage collected.
-      });
-      return undefined;
-    });
-  }
-
   public takeActionForFinalGreenery(): void {
     if (this.game.canPlaceGreenery(this)) {
       const action: OrOptions = new OrOptions();
@@ -1805,16 +1777,6 @@ export class Player implements ISerializable<SerializedPlayer> {
   }
 
   public takeAction(): void {
-    /**
-     * Once an undo has been used we switch to
-     * the new instance of `Player` pulled from
-     * database. This instance, where the undo was performed,
-     * should no longer take actions.
-     */
-    if (this.usedUndo) {
-      return;
-    }
-
     const game = this.game;
 
     if (game.deferredActions.length > 0) {
@@ -2012,7 +1974,7 @@ export class Player implements ISerializable<SerializedPlayer> {
 
     // Propose undo action only if you have done one action this turn
     if (this.actionsTakenThisRound > 0 && this.game.gameOptions.undoOption) {
-      action.options.push(this.undoTurnOption());
+      action.options.push(new UndoActionOption());
     }
 
     return action;
@@ -2150,8 +2112,6 @@ export class Player implements ISerializable<SerializedPlayer> {
       beginner: this.beginner,
       handicap: this.handicap,
       timer: this.timer.serialize(),
-      // Used when undoing action
-      usedUndo: this.usedUndo,
     };
     if (this.lastCardPlayed !== undefined) {
       result.lastCardPlayed = this.lastCardPlayed.name;

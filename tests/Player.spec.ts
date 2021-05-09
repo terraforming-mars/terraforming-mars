@@ -18,8 +18,6 @@ import {GlobalParameter} from '../src/GlobalParameter';
 import {TestingUtils} from './TestingUtils';
 import {Units} from '../src/Units';
 import {SelfReplicatingRobots} from '../src/cards/promo/SelfReplicatingRobots';
-import {OrOptions} from '../src/inputs/OrOptions';
-import {GameLoader} from '../src/database/GameLoader';
 import {Pets} from '../src/cards/base/Pets';
 import {GlobalEventName} from '../src/turmoil/globalEvents/GlobalEventName';
 
@@ -238,7 +236,6 @@ describe('Player', function() {
       playedCards: [], // TODO(kberg): these are SerializedCard.
       draftedCards: [CardName.FISH, CardName.EXTREME_COLD_FUNGUS],
       needsToDraft: false,
-      usedUndo: false,
       cardCost: 3,
       cardDiscount: 7,
       fleetSize: 99,
@@ -291,43 +288,6 @@ describe('Player', function() {
     player.playedCards.push(srr);
     srr.targetCards.push({card: new LunarBeam(), resourceCount: 0});
     expect(player.getSelfReplicatingRobotsTargetCards().length).eq(1);
-  });
-  it('uses undo', function() {
-    const player = TestPlayers.BLUE.newPlayer();
-    player.beginner = true;
-    const game = Game.newInstance('foo', [player], player);
-    game.gameOptions.undoOption = true;
-    player.process([['1'], ['Power Plant:SP']]);
-    const options = player.getWaitingFor() as OrOptions;
-    expect((player as any).usedUndo).is.false;
-    player.process([[String(options.options.length - 1)], ['']]);
-    expect((player as any).usedUndo).is.true;
-    expect(player.getWaitingFor()).is.undefined;
-  });
-  it('progresses game if undo operation fails', function() {
-    const player = TestPlayers.BLUE.newPlayer();
-    player.beginner = true;
-    const game = Game.newInstance('foo', [player], player);
-    game.gameOptions.undoOption = true;
-    player.process([['1'], ['Power Plant:SP']]);
-    const options = player.getWaitingFor() as OrOptions;
-    expect((player as any).usedUndo).is.false;
-    const instance = GameLoader.getInstance();
-    const originRestore = instance.restoreGameAt;
-    let restoreGameCb: ((err: any) => void) | undefined = undefined;
-    instance.restoreGameAt = function(_gameId: string, _saveId: number, cb: (err: any) => void) {
-      restoreGameCb = cb;
-      instance.restoreGameAt = originRestore;
-    };
-    player.process([[String(options.options.length - 1)], ['']]);
-    expect((player as any).usedUndo).is.true;
-    if (restoreGameCb === undefined) {
-      throw new Error('did not call to restore game');
-    }
-    expect(player.getWaitingFor()).is.undefined;
-    (restoreGameCb as (err: any) => void)('unable to restore game');
-    expect((player as any).usedUndo).is.false;
-    expect(player.getWaitingFor()).not.is.undefined;
   });
 
   it('has units', () => {

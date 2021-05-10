@@ -37,10 +37,9 @@ export class CulturalMetropolis extends Card implements IProjectCard {
     const turmoil = player.game.turmoil;
     if (turmoil !== undefined) {
       // This card requires player has 2 delegates available
-      return super.canPlay(player) &&
-        player.getProduction(Resources.ENERGY) >= 1 &&
-        (turmoil.getDelegatesInReserve(player.id) > 1 ||
-        (turmoil.getDelegatesInReserve(player.id) === 1 && turmoil.lobby.has(player.id)));
+      const hasEnoughDelegates = turmoil.getDelegatesInReserve(player.id) > 1 ||
+        (turmoil.getDelegatesInReserve(player.id) === 1 && turmoil.lobby.has(player.id));
+      return super.canPlay(player) && player.getProduction(Resources.ENERGY) >= 1 && hasEnoughDelegates;
     }
     return false;
   }

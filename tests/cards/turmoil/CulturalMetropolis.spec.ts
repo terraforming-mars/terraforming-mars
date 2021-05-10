@@ -48,12 +48,13 @@ describe('Cultural Metropolis', function() {
 
   it('Should play', function() {
     const unity = turmoil.getPartyByName(PartyName.UNITY)!;
+    const startingUnityDelegateCount = unity.delegates.length;
 
     player.addProduction(Resources.ENERGY, 1);
     turmoil.sendDelegateToParty(player.id, PartyName.UNITY, game, 'lobby');
     turmoil.sendDelegateToParty(player.id, PartyName.UNITY, game, 'reserve');
 
-    expect(unity.delegates).has.lengthOf(2);
+    expect(unity.delegates).has.lengthOf(startingUnityDelegateCount + 2);
     expect(turmoil.getDelegatesInReserve(player.id)).to.equal(5);
     expect(card.canPlay(player)).is.true;
 
@@ -66,6 +67,6 @@ describe('Cultural Metropolis', function() {
 
     expect(player.getProduction(Resources.ENERGY)).to.eq(0);
     expect(player.getProduction(Resources.MEGACREDITS)).to.eq(3);
-    expect(unity.delegates).has.lengthOf(4);
+    expect(unity.delegates).has.lengthOf(startingUnityDelegateCount + 4);
   });
 });

@@ -8,6 +8,7 @@ import {IResourceCard} from '../ICard';
 import {CardRequirements} from '../CardRequirements';
 import {Card} from '../Card';
 import {CardRenderer} from '../render/CardRenderer';
+import {Resources} from '../../Resources';
 
 export class MartianZoo extends Card implements IProjectCard, IResourceCard {
   constructor() {
@@ -51,7 +52,7 @@ export class MartianZoo extends Card implements IProjectCard, IResourceCard {
   }
 
   public action(player: Player) {
-    player.megaCredits += this.resourceCount;
+    player.addResource(Resources.MEGACREDITS, this.resourceCount, {log: true});
     return undefined;
   }
 

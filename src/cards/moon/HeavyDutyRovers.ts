@@ -7,6 +7,7 @@ import {TileType} from '../../TileType';
 import {CardRenderer} from '../render/CardRenderer';
 import {Size} from '../render/Size';
 import {Card} from '../Card';
+import {Resources} from '../../Resources';
 
 export class HeavyDutyRovers extends Card implements IProjectCard {
   constructor() {
@@ -36,7 +37,7 @@ export class HeavyDutyRovers extends Card implements IProjectCard {
         return firstRoad !== undefined;
       });
       const count = minesNextToRoads.length;
-      player.megaCredits += count * 4;
+      player.addResource(Resources.MEGACREDITS, count * 4, {log: true});
       MoonExpansion.raiseLogisticRate(player);
     });
     return undefined;

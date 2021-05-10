@@ -6,6 +6,7 @@ import {Card} from '../Card';
 import {CardName} from '../../CardName';
 import {CardType} from '../CardType';
 import {CardRenderer} from '../render/CardRenderer';
+import {Resources} from '../../Resources';
 
 export class SeptumTribus extends Card implements IActionCard, CorporationCard {
   constructor() {
@@ -42,7 +43,7 @@ export class SeptumTribus extends Card implements IActionCard, CorporationCard {
   public action(player: Player) {
     if (player.game.turmoil !== undefined) {
       const partiesWithPresence = player.game.turmoil.parties.filter((party) => party.delegates.includes(player.id));
-      player.megaCredits += partiesWithPresence.length * 2;
+      player.addResource(Resources.MEGACREDITS, partiesWithPresence.length * 2, {log: true});
     }
 
     return undefined;

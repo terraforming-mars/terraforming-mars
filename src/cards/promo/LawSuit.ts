@@ -46,5 +46,14 @@ export class LawSuit extends Card implements IProjectCard {
   public getVictoryPoints() {
     return -1;
   }
+
+  public static resourceHook(player: Player, _resource: Resources, amount: number, from: Player) {
+    if (from === player || amount >= 0) {
+      return;
+    }
+    if (player.removingPlayers.includes(from.id) === false) {
+      player.removingPlayers.push(from.id);
+    }
+  }
 }
 

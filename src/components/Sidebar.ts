@@ -179,13 +179,13 @@ export const Sidebar = Vue.component('sidebar', {
     getRulingParty: function(): string {
       const rulingPartyName = this.turmoil.ruling;
       if (rulingPartyName === PartyName.MARS) {
-        return `Mars`;
+        return 'Mars';
       } else if (rulingPartyName === PartyName.SCIENTISTS) {
-        return `Science`;
+        return 'Science';
       } else if (rulingPartyName === PartyName.KELVINISTS) {
-        return `Kelvin`;
+        return 'Kelvin';
       } else {
-        return `${rulingPartyName}`;
+        return rulingPartyName as string;
       }
     },
   },
@@ -199,7 +199,7 @@ export const Sidebar = Vue.component('sidebar', {
     <div class="gen-marker">{{ getGenMarker() }}</div>
   </div>
   <div v-if="gameOptions.turmoilExtension">
-    <div :class="'party-name party-name-indicator party-name--'+rulingPartyToCss()" v-html="getRulingParty()"></div>
+    <div :class="'party-name party-name-indicator party-name--'+rulingPartyToCss()"> {{ getRulingParty() }}</div>
   </div>
   <div class="global_params">
     <div class="temperature-tile"></div>

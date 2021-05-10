@@ -16,13 +16,26 @@ describe('LawSuit', () => {
     Game.newInstance('foobar', [player, player2], player);
   });
 
-  it('Can\'t play if no resources or production reduced this turn', () => {
+  it('Cannot play if no resources or production reduced this turn', () => {
     expect(card.canPlay(player)).is.not.true;
   });
 
+  it('Cannot play if resource loss is zero', () => {
+    player.megaCredits = 0;
+    player.addResource(Resources.MEGACREDITS, -1, {log: true, from: player2});
+    expect(card.canPlay(player)).is.false;
+  });
+
   it('Can play if resources removed this turn by other player', () => {
+    player.megaCredits = 1;
     player.addResource(Resources.MEGACREDITS, -1, {log: true, from: player2});
     expect(card.canPlay(player)).is.true;
+  });
+
+  it('Cannot play if resources removed by self', () => {
+    player.megaCredits = 1;
+    player.addResource(Resources.MEGACREDITS, -1, {log: true, from: player});
+    expect(card.canPlay(player)).is.false;
   });
 
   it('Can play if production decreased this turn by other player', () => {

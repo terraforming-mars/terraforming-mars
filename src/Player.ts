@@ -56,7 +56,6 @@ import {IAresGlobalParametersResponse, ShiftAresGlobalParameters} from './inputs
 import {Timer} from './Timer';
 import {TurmoilHandler} from './turmoil/TurmoilHandler';
 import {TurmoilPolicy} from './turmoil/TurmoilPolicy';
-import {GameLoader} from './database/GameLoader';
 import {CardLoader} from './CardLoader';
 import {DrawCards} from './deferredActions/DrawCards';
 import {Units} from './Units';
@@ -72,12 +71,14 @@ import {PlaceMoonRoadTile} from './moon/PlaceMoonRoadTile';
 import {GlobalParameter} from './GlobalParameter';
 import {GlobalEventName} from './turmoil/globalEvents/GlobalEventName';
 import {LogHelper} from './LogHelper';
+import {UndoActionOption} from './inputs/UndoActionOption';
+import {LawSuit} from './cards/promo/LawSuit';
+import {CrashSiteCleanup} from './cards/promo/CrashSiteCleanup';
 
 export type PlayerId = string;
 
 export class Player implements ISerializable<SerializedPlayer> {
   public readonly id: PlayerId;
-  private usedUndo: boolean = false;
   private waitingFor?: PlayerInput;
   private waitingForCb?: () => void;
   private _game: Game | undefined = undefined;
@@ -311,6 +312,31 @@ export class Player implements ISerializable<SerializedPlayer> {
     }
   }
 
+  private logUnitDelta(resource: Resources, amount: number, unitType: 'production' | 'amount', from: Player | GlobalEventName | undefined) {
+    if (amount === 0) {
+      // Logging zero units doesn't seem to happen
+      return;
+    }
+
+    const modifier = amount > 0 ? 'increased' : 'decreased';
+    const absAmount = Math.abs(amount);
+    // TODO(kberg): remove the ${2} for increased and decreased, I bet it's not used.
+    let message = '${0}\'s ${1} ' + unitType + ' ${2} by ${3}';
+
+    if (from !== undefined) {
+      message = message + ' by ' + ((from instanceof Player) ? '${4}' : 'Global Event');
+    }
+    this.game.log(message, (b) => {
+      b.player(this)
+        .string(resource)
+        .string(modifier)
+        .number(absAmount);
+      if (from instanceof Player) {
+        b.player(from);
+      }
+    });
+  }
+
   public addResource(resource: Resources, amount: number, options? : { log: boolean, from? : Player | GlobalEventName}) {
     const delta = (amount >= 0) ? amount : Math.max(amount, -this.getResource(resource));
 
@@ -322,35 +348,12 @@ export class Player implements ISerializable<SerializedPlayer> {
     if (resource === Resources.HEAT) this.heat += delta;
 
     if (options?.log === true) {
-      const modifier = amount > 0 ? 'increased' : 'decreased';
+      this.logUnitDelta(resource, amount, 'amount', options.from);
+    }
 
-      if (options?.from !== undefined && options.from instanceof Player && amount < 0) {
-        const from: Player = options.from;
-        if (from !== this && this.removingPlayers.includes(from.id) === false) {
-          this.removingPlayers.push(from.id);
-        }
-
-        // Crash site cleanup hook
-        if (from !== this && resource === Resources.PLANTS && delta < 0) {
-          this.game.someoneHasRemovedOtherPlayersPlants = true;
-        }
-
-        this.game.log('${0}\'s ${1} amount ${2} by ${3} by ${4}', (b) =>
-          b.player(this)
-            .string(resource)
-            .string(modifier)
-            .number(Math.abs(delta))
-            .player(from));
-      }
-
-      // Global event logging
-      if (options?.from !== undefined && ! (options.from instanceof Player) && delta !== 0) {
-        this.game.log('${0}\'s ${1} amount ${2} by ${3} by Global Event', (b) =>
-          b.player(this)
-            .string(resource)
-            .string(modifier)
-            .number(Math.abs(delta)));
-      }
+    if (options?.from instanceof Player) {
+      LawSuit.resourceHook(this, resource, delta, options.from);
+      CrashSiteCleanup.resourceHook(this, resource, delta, options.from);
     }
 
     // Mons Insurance hook
@@ -368,38 +371,11 @@ export class Player implements ISerializable<SerializedPlayer> {
     if (resource === Resources.HEAT) this.heatProduction = Math.max(0, this.heatProduction + amount);
 
     if (options?.log === true) {
-      const modifier = amount > 0 ? 'increased' : 'decreased';
-      // Gaining production from multiplier cards
-      if (options?.from === undefined && amount > 0) {
-        this.game.log('${0}\'s ${1} production ${2} by ${3}', (b) =>
-          b.player(this)
-            .string(resource)
-            .string(modifier)
-            .number(Math.abs(amount)));
-      }
+      this.logUnitDelta(resource, amount, 'production', options.from);
+    }
 
-      // Production reduced by other players
-      if (options?.from !== undefined && options.from instanceof Player && amount < 0) {
-        const from: Player = options.from;
-        if (from !== this && this.removingPlayers.includes(from.id) === false) {
-          this.removingPlayers.push(from.id);
-        }
-        this.game.log('${0}\'s ${1} production ${2} by ${3} by ${4}', (b) =>
-          b.player(this)
-            .string(resource)
-            .string(modifier)
-            .number(Math.abs(amount))
-            .player(from));
-      }
-
-      // Global event logging
-      if (options?.from !== undefined && ! (options.from instanceof Player) && amount !== 0) {
-        this.game.log('${0}\'s ${1} production ${2} by ${3} by Global Event', (b) =>
-          b.player(this)
-            .string(resource)
-            .string(modifier)
-            .number(Math.abs(amount)));
-      }
+    if (options?.from instanceof Player) {
+      LawSuit.resourceHook(this, resource, amount, options.from);
     }
 
     // Mons Insurance hook
@@ -1669,33 +1645,6 @@ export class Player implements ISerializable<SerializedPlayer> {
     });
   }
 
-  // Propose a new action to undo last action
-  private undoTurnOption(): PlayerInput {
-    return new SelectOption('Undo last action', 'Undo', () => {
-      /**
-       * The usedUndo flag is used as a kill switch. Once this flag
-       * is set on an instance we don't expect that instance to take
-       * further action or be used. We assume the `GameLoader` is going
-       * to create a new `Player` instance to use with the a `Game`.
-       */
-      this.usedUndo = true; // To prevent going back into takeAction()
-      GameLoader.getInstance().restoreGameAt(this.game.id, this.game.lastSaveId - 2, (err) => {
-        // If there is an error with restoring the game from the database this undo action has failed.
-        // We need a mechanism to tell the user this has failed. By now the `res` has been sent.
-        // For now we will keep this player instance going and hope player discovers what has happened.
-        if (err) {
-          this.game.log('Unable to perform undo operation', () => {}, {reservedFor: this});
-          this.usedUndo = false;
-          this.takeAction();
-          return;
-        }
-        // If there was no error the GameLoader has loaded the old version of `Player`
-        // This instance of `Player` will eventually be garbage collected.
-      });
-      return undefined;
-    });
-  }
-
   public takeActionForFinalGreenery(): void {
     if (this.game.canPlaceGreenery(this)) {
       const action: OrOptions = new OrOptions();
@@ -1828,16 +1777,6 @@ export class Player implements ISerializable<SerializedPlayer> {
   }
 
   public takeAction(): void {
-    /**
-     * Once an undo has been used we switch to
-     * the new instance of `Player` pulled from
-     * database. This instance, where the undo was performed,
-     * should no longer take actions.
-     */
-    if (this.usedUndo) {
-      return;
-    }
-
     const game = this.game;
 
     if (game.deferredActions.length > 0) {
@@ -2035,7 +1974,7 @@ export class Player implements ISerializable<SerializedPlayer> {
 
     // Propose undo action only if you have done one action this turn
     if (this.actionsTakenThisRound > 0 && this.game.gameOptions.undoOption) {
-      action.options.push(this.undoTurnOption());
+      action.options.push(new UndoActionOption());
     }
 
     return action;
@@ -2173,8 +2112,6 @@ export class Player implements ISerializable<SerializedPlayer> {
       beginner: this.beginner,
       handicap: this.handicap,
       timer: this.timer.serialize(),
-      // Used when undoing action
-      usedUndo: this.usedUndo,
     };
     if (this.lastCardPlayed !== undefined) {
       result.lastCardPlayed = this.lastCardPlayed.name;

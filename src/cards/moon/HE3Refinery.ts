@@ -6,6 +6,7 @@ import {Tags} from '../Tags';
 import {MoonExpansion} from '../../moon/MoonExpansion';
 import {CardRenderer} from '../render/CardRenderer';
 import {Card} from '../Card';
+import {Resources} from '../../Resources';
 
 export class HE3Refinery extends Card implements IProjectCard {
   constructor() {
@@ -36,7 +37,7 @@ export class HE3Refinery extends Card implements IProjectCard {
   }
 
   public action(player: Player) {
-    player.megaCredits += MoonExpansion.moonData(player.game).miningRate;
+    player.addResource(Resources.MEGACREDITS, MoonExpansion.moonData(player.game).miningRate, {log: true});
     return undefined;
   }
 }

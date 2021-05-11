@@ -7,7 +7,6 @@ import {playerColorClass} from '../../utils/utils';
 import {mainAppSettings} from '../App';
 import {range} from '../../utils/utils';
 import {PlayerMixin} from '../PlayerMixin';
-import {PreferencesManager} from '../PreferencesManager';
 
 const isPinned = (root: any, playerIndex: number): boolean => {
   return (root as any).getVisibilityState('pinned_player_' + playerIndex);
@@ -98,9 +97,6 @@ export const PlayerInfo = Vue.component('player-info', {
     getAvailableBlueActionCount: function(): number {
       return this.player.availableBlueCardActionCount;
     },
-    isLearnerModeOff: function(): boolean {
-      return PreferencesManager.loadBoolean('learner_mode') === false;
-    },
   },
   template: `
       <div :class="getClasses()">
@@ -129,7 +125,7 @@ export const PlayerInfo = Vue.component('player-info', {
             </div>
             <Button class="played-cards-button" size="tiny" :onClick="togglePlayerDetails" :title="buttonLabel()" />
           </div>
-          <div v-if="isLearnerModeOff()" class="tag-display player-board-blue-action-counter tooltip tooltip-top" data-tooltip="The number of available actions on active cards">
+          <div class="tag-display player-board-blue-action-counter tooltip tooltip-top" data-tooltip="The number of available actions on active cards">
             <div class="tag-count tag-action-card">
               <div class="blue-stripe"></div>
               <div class="red-arrow"></div>

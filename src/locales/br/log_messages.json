@@ -84,7 +84,7 @@
     "${0} received ${1} M€ from ${2} owner (${3})": "${0} recebeu ${1} M€ de ${2} (${3})",
     "${0} copied ${1} production with ${2}": "${0} copiou a produção de ${1} com ${2}",
     "${0} used ${1} action with ${2}": "${0} fez a ação ${1} com ${2}",
-    "${0} is the new chairman and gained ${1} TR": "${0} é o novo presidente e ganhou (${1}) IT",
+    "${0} is the new chairman and gains ${1} TR": "${0} é o novo presidente e ganhou (${1}) IT",
     "Turmoil phase has been resolved": "A fase de Reviravolta terminou",
 
 
@@ -127,7 +127,7 @@
     "researching": "pesquisando",
 
     "${0} used Turmoil Scientists action": "${0} usou ação do Cientistas: Reviravolta",
-    
+
 	"${0} doubled resources on ${1} from ${2} to ${3}": "${0} dobrou os recursos em ${1} de ${2} para ${3}",
 
     "removed": "removeu",
@@ -188,5 +188,5 @@
 	"Select how to pay for award": "Escolha como pagar pelo prêmio",
 	"Select how to pay for cards": "Escolha como pagar pelas cartas",
     "Select ${max} card(s) to keep": "Escolha ${max} carta(s) para manter"
-    
+
 }

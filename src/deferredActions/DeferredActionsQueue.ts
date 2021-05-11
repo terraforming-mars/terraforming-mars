@@ -1,6 +1,7 @@
 import {DeferredAction} from './DeferredAction';
 import {GiveColonyBonus} from './GiveColonyBonus';
 import {Heap} from 'mnemonist';
+import {Player} from '../Player';
 
 export class DeferredActionsQueue {
   private insertId: number = 0;
@@ -16,24 +17,22 @@ export class DeferredActionsQueue {
     return this.queue.size;
   }
 
+  // only used publicly by tests
+  public pop(): DeferredAction | undefined {
+    return this.queue.pop();
+  }
+
   public push(action: DeferredAction): void {
     action.queueId = this.insertId++;
     this.queue.push(action);
   }
 
-  public pop(): DeferredAction | undefined {
-    return this.queue.pop();
-  }
-
-  public peek(): DeferredAction | undefined {
-    return this.queue.peek();
-  }
-
+  // only used publicly by tests
   public run(action: DeferredAction, cb: () => void): void {
     // Special hook for trade bonus deferred actions
     // So that they happen for all players at the same time
     if (action instanceof GiveColonyBonus) {
-      (action as GiveColonyBonus).cb = cb;
+      action.cb = cb;
       action.execute();
       return;
     }
@@ -46,6 +45,36 @@ export class DeferredActionsQueue {
     }
   }
 
+  public hasActionFor(player: Player): boolean {
+    return this.queue.toArray().some((da) => da.player?.id === player.id);
+  }
+
+  public runAllFor(player: Player, cb: () => void): void {
+    if (this.hasActionFor(player) === false) {
+      cb();
+      return;
+    }
+    let action: DeferredAction | undefined;
+    let otherActions: Array<DeferredAction> = [];
+    let playerAction: DeferredAction | undefined;
+    while (this.queue.size > 0) {
+      action = this.pop();
+      if (action !== undefined) {
+        if (action.player?.id === player.id) {
+          playerAction = action;
+          break;
+        }
+        otherActions.push(action);
+      }
+    }
+    // add back the other actions
+    otherActions.forEach((oa) => this.push(oa));
+    if (playerAction === undefined) {
+      throw new Error('did not find player when expected!');
+    }
+    this.run(playerAction, () => this.runAllFor(player, cb));
+  }
+
   public runAll(cb: () => void): void {
     const action = this.pop();
     if (action === undefined) {
@@ -56,8 +85,10 @@ export class DeferredActionsQueue {
     this.run(action, () => this.runAll(cb));
   }
 
-
   // The following methods are used in tests
+  public peek(): DeferredAction | undefined {
+    return this.queue.peek();
+  }
 
   public runNext(): void {
     const action = this.pop();

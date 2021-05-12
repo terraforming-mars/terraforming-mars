@@ -40,7 +40,7 @@
     "Space not available": "Área não disponível",
     "Player not available": "Jogador não disponível",
     "No party selected": "Nenhum partido salecionado",
-    "Select action for World Government Terraforming": "Escolha uma ação para por o governo mundial",
+    "Select action for World Government Terraforming": "Escolha uma ação para o governo mundial",
     "Confirm": "Confirmar",
     "Increase temperature": "Aumentar temperatura",
     "Increase oxygen": "Aumentar oxigênio",
@@ -55,6 +55,7 @@
     "Didn't even find player": "Jogador não encontrado",
     "No player has played requested card": "Nenhum jogador jogou a carta solicitada",
     "Drew and discarded ${0} (cost ${1}) to place a ${2}": "Comprou e descartou ${0} (custo ${1}) para colocar ${2}",
+    "Good luck ${0}!": "Boa sorte, ${0}!",
 
     "${0} played ${1}": "${0} jogou ${1}",
     "${0} used ${1} action": "${0} fez a ação ${1}",
@@ -91,7 +92,7 @@
     "${0} drew ${1}": "${0} comprou ${1}",
     "${0} drew ${1} and ${2}": "${0} comprou ${1} e ${2}",
     "${0} drew ${1}, ${2} and ${3}": "${0} comprou ${1}, ${2} e ${3}",
-    "${0} sold ${1} patents": "${0} vendeu patente ${1}",
+    "${0} sold ${1} patents": "${0} vendeu ${1} patente(s)",
     "${0}'s ${1} production increased by ${2}": "A produção de ${1} de ${0} foi aumentada em ${2}",
     "${0} ${1} ${2} on row ${3} position ${4}": "${0} ${1} ${2} na linha ${3} posição ${4}",
     "placed": "colocou",
@@ -129,9 +130,11 @@
     "${0} used Turmoil Scientists action": "${0} usou ação do Cientistas: Reviravolta",
 
 	"${0} doubled resources on ${1} from ${2} to ${3}": "${0} dobrou os recursos em ${1} de ${2} para ${3}",
+    "${0} linked ${1} with ${2}": "${0} ligada ${1} com ${2}",
 
     "removed": "removeu",
     "${0} removed an asteroid resource to increase Venus scale 1 step": "${0} removeu um recurso de asteroide para aumentar a escala de terraformação de Vênus 1 nível",
+    "${0} increased Venus scale ${1} step(s)": "${0} aumentou nível de Vênus ${1} nível(is)",
     "${0} gained ${1} ${2}": "${0} ganhou ${1} ${2}",
     "titanium": "titânio",
     "influence": "influência",

@@ -876,13 +876,15 @@ export class Game implements ISerializable<SerializedGame> {
   }
 
   public playerIsFinishedWithResearchPhase(player: Player): void {
+    if (this.deferredActions.hasActionFor(player)) {
+      this.deferredActions.runAllFor(player, () => this.playerIsFinishedWithResearchPhase(player));
+      return;
+    }
     this.researchedPlayers.add(player.id);
     if (this.allPlayersHaveFinishedResearch()) {
-      this.deferredActions.runAll(() => {
-        this.phase = Phase.ACTION;
-        this.passedPlayers.clear();
-        this.startActionsForPlayer(this.first);
-      });
+      this.phase = Phase.ACTION;
+      this.passedPlayers.clear();
+      this.startActionsForPlayer(this.first);
     }
   }
 

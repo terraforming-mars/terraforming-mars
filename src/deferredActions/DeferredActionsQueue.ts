@@ -46,21 +46,17 @@ export class DeferredActionsQueue {
   }
 
   public hasActionFor(player: Player): boolean {
-    return this.queue.toArray().some((da) => da.player?.id === player.id);
+    return this.queue.toArray().some((da) => da.player.id === player.id);
   }
 
   public runAllFor(player: Player, cb: () => void): void {
-    if (this.hasActionFor(player) === false) {
-      cb();
-      return;
-    }
     let action: DeferredAction | undefined;
-    let otherActions: Array<DeferredAction> = [];
+    const otherActions: Array<DeferredAction> = [];
     let playerAction: DeferredAction | undefined;
-    while (this.queue.size > 0) {
+    while (this.length > 0) {
       action = this.pop();
       if (action !== undefined) {
-        if (action.player?.id === player.id) {
+        if (action.player.id === player.id) {
           playerAction = action;
           break;
         }
@@ -70,9 +66,10 @@ export class DeferredActionsQueue {
     // add back the other actions
     otherActions.forEach((oa) => this.push(oa));
     if (playerAction === undefined) {
-      throw new Error('did not find player when expected!');
+      cb();
+    } else {
+      this.run(playerAction, () => this.runAllFor(player, cb));
     }
-    this.run(playerAction, () => this.runAllFor(player, cb));
   }
 
   public runAll(cb: () => void): void {

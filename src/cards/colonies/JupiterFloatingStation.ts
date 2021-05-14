@@ -7,7 +7,6 @@ import {ResourceType} from '../../ResourceType';
 import {OrOptions} from '../../inputs/OrOptions';
 import {SelectOption} from '../../inputs/SelectOption';
 import {IResourceCard} from '../ICard';
-import {LogHelper} from '../../LogHelper';
 import {Resources} from '../../Resources';
 import {AddResourcesToCard} from '../../deferredActions/AddResourcesToCard';
 import {CardRequirements} from '../CardRequirements';
@@ -62,8 +61,7 @@ export class JupiterFloatingStation extends Card implements IProjectCard, IResou
       }),
       new SelectOption('Gain 1 M€ per floater here (max 4) ', 'Gain M€', () => {
         const amount = Math.min(this.resourceCount, 4);
-        player.megaCredits += amount;
-        LogHelper.logGainStandardResource(player, Resources.MEGACREDITS, amount);
+        player.addResource(Resources.MEGACREDITS, amount, {log: true});
         return undefined;
       }),
     );

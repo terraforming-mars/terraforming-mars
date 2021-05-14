@@ -1,6 +1,7 @@
 import {CardName} from '../../CardName';
 import {MoonExpansion} from '../../moon/MoonExpansion';
 import {Player} from '../../Player';
+import {Resources} from '../../Resources';
 import {TileType} from '../../TileType';
 import {Card} from '../Card';
 import {CardType} from '../CardType';
@@ -44,7 +45,8 @@ export class LunaHyperloopCorporation extends Card implements IActionCard, Corpo
 
   public action(player: Player) {
     const roadTileCount = MoonExpansion.tiles(player.game, TileType.MOON_ROAD, {surfaceOnly: true}).length;
-    player.megaCredits += roadTileCount;
+    player.addResource(Resources.MEGACREDITS, roadTileCount, {log: true});
+
     return undefined;
   }
 

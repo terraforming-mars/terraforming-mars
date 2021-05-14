@@ -4,7 +4,6 @@ import {Card} from '../Card';
 import {CardType} from '../CardType';
 import {Player} from '../../Player';
 import {CardName} from '../../CardName';
-import {LogHelper} from '../../LogHelper';
 import {Resources} from '../../Resources';
 import {CardRenderer} from '../render/CardRenderer';
 
@@ -28,9 +27,7 @@ export class MediaArchives extends Card implements IProjectCard {
 
   public play(player: Player) {
     const allPlayedEvents: number = player.game.getPlayers().map((player) => player.getPlayedEventsCount()).reduce((a, c) => a + c, 0);
-
-    player.megaCredits += allPlayedEvents;
-    LogHelper.logGainStandardResource(player, Resources.MEGACREDITS, allPlayedEvents);
+    player.addResource(Resources.MEGACREDITS, allPlayedEvents, {log: true});
     return undefined;
   }
 }

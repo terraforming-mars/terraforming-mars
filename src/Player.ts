@@ -366,17 +366,8 @@ export class Player implements ISerializable<SerializedPlayer> {
   }
 
   public addProduction(resource: Resources, amount : number, options? : { log: boolean, from? : Player | GlobalEventName}) {
-    let delta = amount;
-    if (amount < 0) {
-      if (resource === Resources.MEGACREDITS) {
-        const production = this.getProduction(resource);
-        if (production + amount < -5) {
-          delta = -(production + 5);
-        }
-      } else {
-        delta = Math.max(amount, -this.getProduction(resource));
-      }
-    }
+    const adj = resource === Resources.MEGACREDITS ? -5 : 0;
+    const delta = (amount >= 0) ? amount : Math.max(amount, -(this.getProduction(resource) - adj));
 
     if (resource === Resources.MEGACREDITS) this.megaCreditProduction += delta;
     else if (resource === Resources.STEEL) this.steelProduction += delta;

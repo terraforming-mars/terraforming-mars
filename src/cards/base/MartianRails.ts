@@ -37,7 +37,7 @@ export class MartianRails extends Card implements IActionCard, IProjectCard {
   }
   public action(player: Player) {
     player.energy--;
-    player.addResource(Resources.MEGACREDITS, player.game.getCitiesInPlay(), {log: true});
+    player.addResource(Resources.MEGACREDITS, player.game.getCitiesInPlayOnMars(), {log: true});
 
     return undefined;
   }

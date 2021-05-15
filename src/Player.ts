@@ -341,11 +341,14 @@ export class Player implements ISerializable<SerializedPlayer> {
     const delta = (amount >= 0) ? amount : Math.max(amount, -this.getResource(resource));
 
     if (resource === Resources.MEGACREDITS) this.megaCredits += delta;
-    if (resource === Resources.STEEL) this.steel += delta;
-    if (resource === Resources.TITANIUM) this.titanium += delta;
-    if (resource === Resources.PLANTS) this.plants += delta;
-    if (resource === Resources.ENERGY) this.energy += delta;
-    if (resource === Resources.HEAT) this.heat += delta;
+    else if (resource === Resources.STEEL) this.steel += delta;
+    else if (resource === Resources.TITANIUM) this.titanium += delta;
+    else if (resource === Resources.PLANTS) this.plants += delta;
+    else if (resource === Resources.ENERGY) this.energy += delta;
+    else if (resource === Resources.HEAT) this.heat += delta;
+    else {
+      throw new Error(`tried to add unsupported resource ${resource}`);
+    }
 
     if (options?.log === true) {
       this.logUnitDelta(resource, amount, 'amount', options.from);
@@ -357,29 +360,35 @@ export class Player implements ISerializable<SerializedPlayer> {
     }
 
     // Mons Insurance hook
-    if (options?.from !== undefined && amount < 0 && (options.from instanceof Player && options.from.id !== this.id)) {
+    if (options?.from !== undefined && delta < 0 && (options.from instanceof Player && options.from.id !== this.id)) {
       this.resolveMonsInsurance();
     }
   }
 
   public addProduction(resource: Resources, amount : number, options? : { log: boolean, from? : Player | GlobalEventName}) {
-    if (resource === Resources.MEGACREDITS) this.megaCreditProduction = Math.max(-5, this.megaCreditProduction + amount);
-    if (resource === Resources.STEEL) this.steelProduction = Math.max(0, this.steelProduction + amount);
-    if (resource === Resources.TITANIUM) this.titaniumProduction = Math.max(0, this.titaniumProduction + amount);
-    if (resource === Resources.PLANTS) this.plantProduction = Math.max(0, this.plantProduction + amount);
-    if (resource === Resources.ENERGY) this.energyProduction = Math.max(0, this.energyProduction + amount);
-    if (resource === Resources.HEAT) this.heatProduction = Math.max(0, this.heatProduction + amount);
+    const adj = resource === Resources.MEGACREDITS ? -5 : 0;
+    const delta = (amount >= 0) ? amount : Math.max(amount, -(this.getProduction(resource) - adj));
+
+    if (resource === Resources.MEGACREDITS) this.megaCreditProduction += delta;
+    else if (resource === Resources.STEEL) this.steelProduction += delta;
+    else if (resource === Resources.TITANIUM) this.titaniumProduction += delta;
+    else if (resource === Resources.PLANTS) this.plantProduction += delta;
+    else if (resource === Resources.ENERGY) this.energyProduction += delta;
+    else if (resource === Resources.HEAT) this.heatProduction += delta;
+    else {
+      throw new Error(`tried to add unsupported production ${resource}`);
+    }
 
     if (options?.log === true) {
       this.logUnitDelta(resource, amount, 'production', options.from);
     }
 
     if (options?.from instanceof Player) {
-      LawSuit.resourceHook(this, resource, amount, options.from);
+      LawSuit.resourceHook(this, resource, delta, options.from);
     }
 
     // Mons Insurance hook
-    if (options?.from !== undefined && amount < 0 && (options.from instanceof Player && options.from.id !== this.id)) {
+    if (options?.from !== undefined && delta < 0 && (options.from instanceof Player && options.from.id !== this.id)) {
       this.resolveMonsInsurance();
     }
 

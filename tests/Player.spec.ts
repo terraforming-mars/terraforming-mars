@@ -542,6 +542,22 @@ describe('Player', function() {
     expect(logEntry.data[3].value).eq('Pets');
   });
 
+  it('addResourceTo with Mons Insurance hook does not remove when no credits', () => {
+    const player1 = TestPlayers.BLUE.newPlayer();
+    const player2 = TestPlayers.RED.newPlayer();
+    const game = Game.newInstance('foobar', [player1, player2], player1);
+    player1.megaCredits = 0;
+    player1.setProductionForTest({
+      megacredits: -5,
+    });
+    player2.megaCredits = 3;
+    game.monsInsuranceOwner = player2.id;
+    player1.addResource(Resources.MEGACREDITS, -3, {from: player2, log: false});
+    expect(player2.megaCredits).eq(3); ;
+    player1.addProduction(Resources.MEGACREDITS, -3, {from: player2, log: false});
+    expect(player2.megaCredits).eq(3);
+  });
+
   it('adds resources', () => {
     const player = TestPlayers.BLUE.newPlayer();
     player.megaCredits = 10;

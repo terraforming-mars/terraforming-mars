@@ -6,15 +6,6 @@ import {TestPlayers} from '../TestPlayers';
 import {SelectOption} from '../../src/inputs/SelectOption';
 
 describe('DeferredActionsQueue', () => {
-  it('has action for player', () => {
-    const redPlayer = TestPlayers.RED.newPlayer();
-    const bluePlayer = TestPlayers.BLUE.newPlayer();
-    const queue = new DeferredActionsQueue();
-    expect(queue.hasActionFor(redPlayer)).eq(false);
-    queue.push(new DeferredAction(redPlayer, () => undefined));
-    expect(queue.hasActionFor(redPlayer)).eq(true);
-    expect(queue.hasActionFor(bluePlayer)).eq(false);
-  });
   it('runs actions for player', () => {
     const redPlayer = TestPlayers.RED.newPlayer();
     const bluePlayer = TestPlayers.BLUE.newPlayer();

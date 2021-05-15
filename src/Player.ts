@@ -347,7 +347,7 @@ export class Player implements ISerializable<SerializedPlayer> {
     else if (resource === Resources.ENERGY) this.energy += delta;
     else if (resource === Resources.HEAT) this.heat += delta;
     else {
-      throw new Error('tried to add unsupported resource');
+      throw new Error(`tried to add unsupported resource ${resource}`);
     }
 
     if (options?.log === true) {
@@ -376,7 +376,7 @@ export class Player implements ISerializable<SerializedPlayer> {
     else if (resource === Resources.ENERGY) this.energyProduction += delta;
     else if (resource === Resources.HEAT) this.heatProduction += delta;
     else {
-      throw new Error('tried to add unsupported production');
+      throw new Error(`tried to add unsupported production ${resource}`);
     }
 
     if (options?.log === true) {

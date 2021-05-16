@@ -43,7 +43,8 @@ export class BioPrintingFacility extends Card implements IActionCard, IProjectCa
 
   public action(player: Player) {
     const availableAnimalCards = player.getResourceCards(ResourceType.ANIMAL);
-    player.energy -= 2;
+    player.deductResource(Resources.ENERGY, 2);
+
 
     if (availableAnimalCards.length === 0) {
       player.plants += 2;

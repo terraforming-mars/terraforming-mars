@@ -625,7 +625,8 @@ export class Game implements ISerializable<SerializedGame> {
     }
 
     if (corporationCard.name !== CardName.BEGINNER_CORPORATION) {
-      player.megaCredits -= player.cardsInHand.length * player.cardCost;
+      const diff = player.cardsInHand.length * player.cardCost;
+      player.deductResource(Resources.MEGACREDITS, diff);
     }
     corporationCard.play(player);
     this.log('${0} played ${1}', (b) => b.player(player).card(corporationCard));

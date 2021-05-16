@@ -598,6 +598,7 @@ describe('Player', function() {
     const player2 = TestPlayers.RED.newPlayer();
     const game = Game.newInstance('foobar', [player, player2], player);
 
+    player.megaCredits = 5;
     player.addResource(Resources.MEGACREDITS, -5, {log: true, from: player2});
 
     const log = game.gameLog;

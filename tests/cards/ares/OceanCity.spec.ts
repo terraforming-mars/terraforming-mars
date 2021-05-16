@@ -8,6 +8,7 @@ import {TileType} from '../../../src/TileType';
 import {SpaceType} from '../../../src/SpaceType';
 import {TestPlayers} from '../../TestPlayers';
 import {Capital} from '../../../src/cards/base/Capital';
+import {SpaceBonus} from '../../../src/SpaceBonus';
 
 describe('OceanCity', function() {
   let card: OceanCity; let player: Player; let game: Game;
@@ -153,5 +154,25 @@ describe('OceanCity', function() {
     expect(oceanSpace.tile!.tileType).to.eq(TileType.OCEAN_CITY);
 
     expect(player.getVictoryPoints().victoryPoints).to.eq(1);
+  });
+
+  it('Placing Ocean City does not grant underlying space bonus', () => {
+    const oceanSpace = game.board.spaces.filter((space) => {
+      return space.bonus.length === 1 && space.bonus[0] === SpaceBonus.PLANT && space.spaceType === SpaceType.OCEAN;
+    })[0];
+
+    player.plants = 0;
+    game.addOceanTile(player, oceanSpace.id);
+    expect(player.plants).eq(1);
+
+    const action = card.play(player);
+
+    expect(player.plants).eq(1);
+
+    action.cb(oceanSpace);
+
+    expect(oceanSpace.player).to.eq(player);
+    expect(oceanSpace.tile!.tileType).to.eq(TileType.OCEAN_CITY);
+    expect(player.plants).eq(1);
   });
 });

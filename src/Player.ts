@@ -377,6 +377,7 @@ export class Player implements ISerializable<SerializedPlayer> {
       this.game.logIllegalState(
         `Adjusting ${amount} ${resource} when player has ${playerAmount}`,
         {player: {color: this.color, id: this.id, name: this.name}, resource, amount});
+      this.game.log('An illegal state has occurred; please ask the server owner to read the server log.');
     }
 
     if (resource === Resources.MEGACREDITS) this.megaCredits += delta;

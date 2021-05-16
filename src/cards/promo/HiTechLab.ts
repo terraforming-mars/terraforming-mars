@@ -41,7 +41,7 @@ export class HiTechLab extends Card implements IProjectCard {
       'Select amount of energy to spend',
       'Spend energy',
       (amount: number) => {
-        player.addResource(Resources.ENERGY, -amount);
+        player.deductResource(Resources.ENERGY, amount);
         player.game.log('${0} spent ${1} energy', (b) => b.player(player).number(amount));
         return player.drawCardKeepSome(amount, {keepMax: 1});
       },

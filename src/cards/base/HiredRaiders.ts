@@ -52,7 +52,7 @@ export class HiredRaiders extends Card implements IProjectCard {
 
         availableActions.options.push(new SelectOption(optionTitle, 'Confirm', () => {
           player.steel += amountStolen;
-          target.addResource(Resources.STEEL, -2, {log: true, from: player});
+          target.deductResource(Resources.STEEL, 2, {log: true, from: player});
           return undefined;
         }));
       }
@@ -63,7 +63,7 @@ export class HiredRaiders extends Card implements IProjectCard {
 
         availableActions.options.push(new SelectOption(optionTitle, 'Confirm', () => {
           player.megaCredits += amountStolen;
-          target.addResource(Resources.MEGACREDITS, -3, {log: true, from: player});
+          target.deductResource(Resources.MEGACREDITS, 3, {log: true, from: player});
           return undefined;
         }));
       }

@@ -42,7 +42,7 @@ export class MiningComplex extends PreludeCard {
             'Select a space next to the mine for a road',
             availableRoadSpaces));
       }));
-    player.addResource(Resources.MEGACREDITS, -7);
+    player.deductResource(Resources.MEGACREDITS, 7);
     return undefined;
   }
 }

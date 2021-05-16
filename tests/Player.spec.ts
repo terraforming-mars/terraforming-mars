@@ -560,6 +560,7 @@ describe('Player', function() {
 
   it('adds resources', () => {
     const player = TestPlayers.BLUE.newPlayer();
+    Game.newInstance('x', [player], player);
     player.megaCredits = 10;
     // adds any positive amount
     player.addResource(Resources.MEGACREDITS, 12);
@@ -598,6 +599,7 @@ describe('Player', function() {
     const player2 = TestPlayers.RED.newPlayer();
     const game = Game.newInstance('foobar', [player, player2], player);
 
+    player.megaCredits = 5;
     player.addResource(Resources.MEGACREDITS, -5, {log: true, from: player2});
 
     const log = game.gameLog;
@@ -614,6 +616,39 @@ describe('Player', function() {
     const log = game.gameLog;
     const logEntry = log[log.length - 1];
     expect(TestingUtils.formatLogMessage(logEntry)).eq('blue\'s megacredits amount increased by 12 by Global Event');
+  });
+
+  it('addResource logs error when deducting too much', () => {
+    const player = TestPlayers.BLUE.newPlayer();
+    Game.newInstance('foobar', [player], player);
+
+    player.megaCredits = 10;
+    const warn = console.warn;
+    const consoleLog: Array<Array<any>> = [];
+    console.warn = (message?: any, ...optionalParams: any[]) => {
+      consoleLog.push([message, optionalParams]);
+    };
+    player.addResource(Resources.MEGACREDITS, -12);
+    console.warn = warn;
+
+    expect(consoleLog.length).eq(1);
+    expect(consoleLog[0][0]).eq('Illegal state: Adjusting -12 megacredits when player has 10');
+    expect(JSON.parse(consoleLog[0][1])).deep.eq(
+      {
+        'gameId': 'foobar',
+        'lastSaveId': 0,
+        'logAge': 7,
+        'currentPlayer': 'blue-id',
+        'metadata': {
+          'player': {
+            'color': 'blue',
+            'id': 'blue-id',
+            'name': 'player-blue',
+          },
+          'resource': 'megacredits',
+          'amount': -12,
+        },
+      });
   });
 });
 

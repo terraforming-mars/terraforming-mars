@@ -357,7 +357,8 @@ export class Player implements ISerializable<SerializedPlayer> {
     // When amount is negative, sometimes the amount being asked to be removed is more than the player has.
     // delta represents an adjusted amount which basically declares that a player cannot lose more resources
     // then they have.
-    const delta = (amount >= 0) ? amount : Math.max(amount, -this.getResource(resource));
+    const playerAmount = this.getResource(resource);
+    const delta = (amount >= 0) ? amount : Math.max(amount, -playerAmount);
 
     // Lots of calls to addResource used to deduct resources are done by cards and/or players stealing some
     // fixed amount which, if the current player doesn't have it. it just removes as much as possible.
@@ -373,7 +374,9 @@ export class Player implements ISerializable<SerializedPlayer> {
     //
     // The shortcut for knowing if this is the case is when `options.from` is undefined.
     if (delta !== amount && options?.from === undefined) {
-      // TODO(kberg): Log a lot of information about this situation.
+      this.game.logIllegalState(
+        `Adjusting ${amount} ${resource} when player has ${playerAmount}`,
+        {player: {color: this.color, id: this.id, name: this.name}, resource, amount});
     }
 
     if (resource === Resources.MEGACREDITS) this.megaCredits += delta;

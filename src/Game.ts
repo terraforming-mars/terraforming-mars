@@ -1645,4 +1645,16 @@ export class Game implements ISerializable<SerializedGame> {
 
     return game;
   }
+
+  public logIllegalState(description: string, metadata: {}) {
+    const gameMetadata = {
+      gameId: this.id,
+      lastSaveId: this.lastSaveId,
+      logAge: this.gameLog.length,
+      currentPlayer: this.activePlayer,
+
+      metadata: metadata,
+    };
+    console.warn('Illegal state: ' + description, JSON.stringify(gameMetadata, null, ' '));
+  }
 }

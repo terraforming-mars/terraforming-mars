@@ -29,7 +29,7 @@ export class MagneticFieldGenerators extends Card implements IProjectCard {
           }).br;
           b.tr(3);
         }),
-        description: 'Decrease your Energy production 4 steps and increase your Plant production 2 step. Raise your TR 3 step.',
+        description: 'Decrease your Energy production 4 steps and increase your Plant production 2 steps. Raise your TR 3 steps.',
       },
     });
   }

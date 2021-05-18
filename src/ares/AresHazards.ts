@@ -56,6 +56,10 @@ export class _AresHazardPlacement {
   }
 
   private static testToPlaceErosionTiles(aresData: IAresData, player: Player) {
+    if (player.game.gameOptions.aresHazards === false) {
+      return;
+    }
+
     this.testConstraint(
       aresData.hazardData.erosionOceanCount,
       player.game.board.getOceansOnBoard(),

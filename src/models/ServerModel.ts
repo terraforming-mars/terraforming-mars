@@ -80,6 +80,7 @@ export class Server {
       spaces: this.getSpaces(game.board),
       spectatorId: game.spectatorId,
       temperature: game.getTemperature(),
+      isTerraformed: game.marsIsTerraformed(),
       turmoil: turmoil,
       undoCount: game.undoCount,
       venusScaleLevel: game.getVenusScaleLevel(),
@@ -162,6 +163,7 @@ export class Server {
       spaces: gameModel.spaces,
       spectatorId: gameModel.spectatorId,
       temperature: gameModel.temperature,
+      isTerraformed: gameModel.isTerraformed,
       turmoil: gameModel.turmoil,
       undoCount: gameModel.undoCount,
       venusScaleLevel: gameModel.venusScaleLevel,
@@ -414,7 +416,6 @@ export class Server {
       discount: card.cardDiscount,
     }));
   }
-
   public static getPlayers(players: Array<Player>, game: Game): Array<PlayerModel> {
     const turmoil = getTurmoil(game);
 
@@ -484,6 +485,7 @@ export class Server {
         gameOptions: gameModel.gameOptions,
         generation: gameModel.generation,
         isSoloModeWin: gameModel.isSoloModeWin,
+        isTerraformed: gameModel.isTerraformed,
         lastSoloGeneration: gameModel.lastSoloGeneration,
         milestones: gameModel.milestones,
         moon: gameModel.moon,

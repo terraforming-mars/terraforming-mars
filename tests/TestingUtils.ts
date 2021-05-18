@@ -10,6 +10,7 @@ import {Phase} from '../src/Phase';
 import {IParty} from '../src/turmoil/parties/IParty';
 import {Turmoil} from '../src/turmoil/Turmoil';
 import {TurmoilPolicy} from '../src/turmoil/TurmoilPolicy';
+import {LogMessage} from '../src/LogMessage';
 
 export class TestingUtils {
   // Returns the oceans created during this operation which may not reflect all oceans.
@@ -104,5 +105,12 @@ export class TestingUtils {
     while (game.deferredActions.pop() !== undefined) {};
     game.getPlayers().forEach((player) => player.pass());
     game.playerIsFinishedTakingActions();
+  }
+
+  // Provides a readable version of a log message for easier testing.
+  public static formatLogMessage(message: LogMessage): string {
+    return message.message.replace(/\$\{([0-9]{1})\}/gi, (_match, idx) => {
+      return message.data[idx].value;
+    });
   }
 }

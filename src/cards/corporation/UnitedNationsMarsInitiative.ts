@@ -9,6 +9,7 @@ import {PartyName} from '../../turmoil/parties/PartyName';
 import {REDS_RULING_POLICY_COST} from '../../constants';
 import {CardType} from '../CardType';
 import {CardRenderer} from '../render/CardRenderer';
+import {Resources} from '../../Resources';
 
 export class UnitedNationsMarsInitiative extends Card implements IActionCard, CorporationCard {
   constructor() {
@@ -48,7 +49,7 @@ export class UnitedNationsMarsInitiative extends Card implements IActionCard, Co
     return hasIncreasedTR && player.canAfford(actionCost);
   }
   public action(player: Player) {
-    player.megaCredits -= 3;
+    player.deductResource(Resources.MEGACREDITS, 3);
     player.increaseTerraformRating();
     return undefined;
   }

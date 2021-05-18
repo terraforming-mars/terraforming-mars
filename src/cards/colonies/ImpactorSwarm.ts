@@ -28,10 +28,6 @@ export class ImpactorSwarm extends Card implements IProjectCard {
     });
   }
 
-  public canPlay(player: Player): boolean {
-    return player.getTagCount(Tags.JOVIAN) >= 2;
-  }
-
   public play(player: Player) {
     player.game.defer(new RemoveAnyPlants(player, 2));
     player.heat += 12;

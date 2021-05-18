@@ -625,7 +625,8 @@ export class Game implements ISerializable<SerializedGame> {
     }
 
     if (corporationCard.name !== CardName.BEGINNER_CORPORATION) {
-      player.megaCredits -= player.cardsInHand.length * player.cardCost;
+      const diff = player.cardsInHand.length * player.cardCost;
+      player.deductResource(Resources.MEGACREDITS, diff);
     }
     corporationCard.play(player);
     this.log('${0} played ${1}', (b) => b.player(player).card(corporationCard));
@@ -876,14 +877,14 @@ export class Game implements ISerializable<SerializedGame> {
   }
 
   public playerIsFinishedWithResearchPhase(player: Player): void {
-    this.researchedPlayers.add(player.id);
-    if (this.allPlayersHaveFinishedResearch()) {
-      this.deferredActions.runAll(() => {
+    this.deferredActions.runAllFor(player, () => {
+      this.researchedPlayers.add(player.id);
+      if (this.allPlayersHaveFinishedResearch()) {
         this.phase = Phase.ACTION;
         this.passedPlayers.clear();
         this.startActionsForPlayer(this.first);
-      });
-    }
+      }
+    });
   }
 
   public playerIsFinishedWithDraftingPhase(initialDraft: boolean, player: Player, cards : Array<IProjectCard>): void {
@@ -1375,13 +1376,13 @@ export class Game implements ISerializable<SerializedGame> {
     if (spaceBonus === SpaceBonus.DRAW_CARD) {
       player.drawCard(count);
     } else if (spaceBonus === SpaceBonus.PLANT) {
-      player.plants += count;
+      player.addResource(Resources.PLANTS, count, {log: true});
     } else if (spaceBonus === SpaceBonus.STEEL) {
-      player.steel += count;
+      player.addResource(Resources.STEEL, count, {log: true});
     } else if (spaceBonus === SpaceBonus.TITANIUM) {
-      player.titanium += count;
+      player.addResource(Resources.TITANIUM, count, {log: true});
     } else if (spaceBonus === SpaceBonus.HEAT) {
-      player.heat += count;
+      player.addResource(Resources.HEAT, count, {log: true});
     }
   }
 
@@ -1643,5 +1644,17 @@ export class Game implements ISerializable<SerializedGame> {
     }
 
     return game;
+  }
+
+  public logIllegalState(description: string, metadata: {}) {
+    const gameMetadata = {
+      gameId: this.id,
+      lastSaveId: this.lastSaveId,
+      logAge: this.gameLog.length,
+      currentPlayer: this.activePlayer,
+
+      metadata: metadata,
+    };
+    console.warn('Illegal state: ' + description, JSON.stringify(gameMetadata, null, ' '));
   }
 }

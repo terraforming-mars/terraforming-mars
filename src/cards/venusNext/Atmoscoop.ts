@@ -9,7 +9,6 @@ import {ResourceType} from '../../ResourceType';
 import {SelectCard} from '../../inputs/SelectCard';
 import {ICard} from '../ICard';
 import {CardName} from '../../CardName';
-import {LogHelper} from '../../LogHelper';
 import * as constants from './../../constants';
 import {PartyHooks} from '../../turmoil/parties/PartyHooks';
 import {PartyName} from '../../turmoil/parties/PartyName';
@@ -40,16 +39,18 @@ export class Atmoscoop extends Card implements IProjectCard {
   }
 
   public canPlay(player: Player): boolean {
-    const meetsTagRequirements = super.canPlay(player);
+    if (!super.canPlay(player)) {
+      return false;
+    }
     const remainingTemperatureSteps = (constants.MAX_TEMPERATURE - player.game.getTemperature()) / 2;
     const remainingVenusSteps = (constants.MAX_VENUS_SCALE - player.game.getVenusScaleLevel()) / 2;
     const stepsRaised = Math.min(remainingTemperatureSteps, remainingVenusSteps, 2);
 
     if (PartyHooks.shouldApplyPolicy(player.game, PartyName.REDS)) {
-      return player.canAfford(this.cost + constants.REDS_RULING_POLICY_COST * stepsRaised, {titanium: true}) && meetsTagRequirements;
+      return player.canAfford(this.cost + constants.REDS_RULING_POLICY_COST * stepsRaised, {titanium: true});
     }
 
-    return meetsTagRequirements;
+    return true;
   }
 
   public play(player: Player) {
@@ -76,8 +77,7 @@ export class Atmoscoop extends Card implements IProjectCard {
       'Add floaters',
       floaterCards,
       (foundCards: Array<ICard>) => {
-        player.addResourceTo(foundCards[0], 2);
-        LogHelper.logAddResource(player, foundCards[0], 2);
+        player.addResourceTo(foundCards[0], {qty: 2, log: true});
         return undefined;
       },
     );
@@ -90,8 +90,8 @@ export class Atmoscoop extends Card implements IProjectCard {
 
     switch (floaterCards.length) {
     case 1:
-      player.addResourceTo(floaterCards[0], 2);
-      LogHelper.logAddResource(player, floaterCards[0], 2);
+      player.addResourceTo(floaterCards[0], {qty: 2, log: true});
+      // Intentional fall-through
 
     case 0:
       if (!this.temperatureIsMaxed(game) && !this.venusIsMaxed(game)) {

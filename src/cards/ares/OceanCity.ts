@@ -52,7 +52,6 @@ export class OceanCity extends Card implements IProjectCard {
           card: this.name,
           covers: space.tile,
         };
-        player.game.removeTile(space.id);
         player.game.addTile(player, space.spaceType, space, tile);
         return undefined;
       },

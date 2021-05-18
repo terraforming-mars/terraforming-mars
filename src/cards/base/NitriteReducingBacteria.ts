@@ -58,8 +58,7 @@ export class NitriteReducingBacteria extends Card implements IActionCard, IProje
     }
     public action(player: Player) {
       if (this.resourceCount < 3) {
-        player.addResourceTo(this);
-        LogHelper.logAddResource(player, this);
+        player.addResourceTo(this, {log: true});
         return undefined;
       }
 
@@ -76,8 +75,7 @@ export class NitriteReducingBacteria extends Card implements IActionCard, IProje
       }
 
       orOptions.options.push(new SelectOption('Add 1 microbe to this card', 'Add microbe', () => {
-        player.addResourceTo(this);
-        LogHelper.logAddResource(player, this);
+        player.addResourceTo(this, {log: true});
         return undefined;
       }));
 

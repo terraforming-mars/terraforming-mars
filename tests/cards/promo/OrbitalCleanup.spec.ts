@@ -3,6 +3,7 @@ import {AdvancedAlloys} from '../../../src/cards/base/AdvancedAlloys';
 import {Research} from '../../../src/cards/base/Research';
 import {ResearchCoordination} from '../../../src/cards/prelude/ResearchCoordination';
 import {OrbitalCleanup} from '../../../src/cards/promo/OrbitalCleanup';
+import {Game} from '../../../src/Game';
 import {Player} from '../../../src/Player';
 import {Resources} from '../../../src/Resources';
 import {TestPlayers} from '../../TestPlayers';
@@ -13,6 +14,7 @@ describe('OrbitalCleanup', function() {
   beforeEach(function() {
     card = new OrbitalCleanup();
     player = TestPlayers.BLUE.newPlayer();
+    Game.newInstance('id', [player], player);
   });
 
   it('Can\'t play if cannot decrease MC production', function() {

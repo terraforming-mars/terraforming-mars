@@ -21,13 +21,13 @@ export class CorrosiveRainDeferredAction implements DeferredAction {
             card.resourceCount >= 2);
 
     if (floaterCards.length === 0) {
-      this.player.addResource(Resources.MEGACREDITS, -10, {log: true, from: GlobalEventName.CORROSIVE_RAIN});
+      this.player.deductResource(Resources.MEGACREDITS, 10, {log: true, from: GlobalEventName.CORROSIVE_RAIN});
       return undefined;
     }
 
     const selectAction = new OrOptions();
     const payMC = new SelectOption('Lose up to 10 M€', 'Lose M€', () => {
-      this.player.addResource(Resources.MEGACREDITS, -10);
+      this.player.deductResource(Resources.MEGACREDITS, 10);
       return undefined;
     });
     const removeFloaters = new SelectCard(

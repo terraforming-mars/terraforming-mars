@@ -1,23 +1,15 @@
-
 import Vue from 'vue';
 import * as constants from '../constants';
 import {BoardSpace} from './BoardSpace';
 import {IAresData} from '../ares/IAresData';
 import {SpaceModel} from '../models/SpaceModel';
 import {SpaceType} from '../SpaceType';
-import {PreferencesManager} from './PreferencesManager';
-// @ts-ignore
-import {$t} from '../directives/i18n';
 import {SpaceId} from '../boards/ISpace';
+import {TranslateMixin} from './TranslateMixin';
 
 class GlobalParamLevel {
   constructor(public value: number, public isActive: boolean, public strValue: string) {
-
   }
-}
-
-class AlertDialog {
-    static shouldAlert = true;
 }
 
 export const Board = Vue.component('board', {
@@ -43,9 +35,6 @@ export const Board = Vue.component('board', {
     temperature: {
       type: Number,
     },
-    shouldNotify: {
-      type: Boolean,
-    },
     aresExtension: {
       type: Boolean,
     },
@@ -62,12 +51,7 @@ export const Board = Vue.component('board', {
       'isTileHidden': false,
     };
   },
-  mounted: function() {
-    if (this.marsIsTerraformed() && this.shouldNotify && AlertDialog.shouldAlert && PreferencesManager.load('show_alerts') === '1') {
-      alert('Mars is Terraformed!');
-      AlertDialog.shouldAlert = false;
-    };
-  },
+  mixins: [TranslateMixin],
   methods: {
     getAllSpacesOnMars: function(): Array<SpaceModel> {
       const boardSpaces: Array<SpaceModel> = this.spaces;
@@ -134,18 +118,6 @@ export const Board = Vue.component('board', {
       }
       return css;
     },
-    marsIsTerraformed: function() {
-      const temperatureMaxed = this.temperature === constants.MAX_TEMPERATURE;
-      const oceansMaxed = this.oceans_count === constants.MAX_OCEAN_TILES;
-      const oxygenMaxed = this.oxygen_level === constants.MAX_OXYGEN_LEVEL;
-      const venusMaxed = this.venusScaleLevel === constants.MAX_VENUS_SCALE;
-
-      if (this.venusNextExtension) {
-        return temperatureMaxed && oceansMaxed && oxygenMaxed && venusMaxed;
-      } else {
-        return temperatureMaxed && oceansMaxed && oxygenMaxed;
-      }
-    },
     oceansValue: function() {
       const oceans_count = this.oceans_count || 0;
       const leftover = constants.MAX_OCEAN_TILES - oceans_count;
@@ -196,7 +168,13 @@ export const Board = Vue.component('board', {
                 <div :class="getScaleCSS(lvl)" v-for="lvl in getValuesForParameter('venus')">{{ lvl.strValue }}</div>
             </div>
 
-            <div class="global-numbers-oceans" v-html="oceansValue()">
+            <div class="global-numbers-oceans">
+              <span v-if="this.oceans_count === this.constants.MAX_OCEAN_TILES">
+                <img width="26" src="/assets/misc/circle-checkmark.png" class="board-ocean-checkmark" :alt="$t('Completed!')">
+              </span>
+              <span v-else>
+                {{this.oceans_count}}/{{this.constants.MAX_OCEAN_TILES}}
+              </span>
             </div>
 
             <div v-if="aresExtension && aresData !== undefined">

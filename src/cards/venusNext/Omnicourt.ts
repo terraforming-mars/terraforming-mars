@@ -29,7 +29,7 @@ export class Omnicourt extends Card {
   };
 
   public canPlay(player: Player): boolean {
-    const hasRequiredTags = player.checkMultipleTagPresence([Tags.VENUS, Tags.EARTH, Tags.JOVIAN]);
+    const hasRequiredTags = super.canPlay(player);
     if (PartyHooks.shouldApplyPolicy(player.game, PartyName.REDS)) {
       return player.canAfford(player.getCardCost(this) + REDS_RULING_POLICY_COST * 2, {steel: true}) && hasRequiredTags;
     }

@@ -8,7 +8,6 @@ import {IActionCard, ICard, IResourceCard} from '../ICard';
 import {ResourceType} from '../../ResourceType';
 import {SelectCard} from '../../inputs/SelectCard';
 import {CardName} from '../../CardName';
-import {LogHelper} from '../../LogHelper';
 import {CardRequirements} from '../CardRequirements';
 import {CardRenderer} from '../render/CardRenderer';
 import {CardRenderDynamicVictoryPoints} from '../render/CardRenderDynamicVictoryPoints';
@@ -42,9 +41,7 @@ export class Stratopolis extends Card implements IActionCard, IResourceCard {
     });
   };
   public resourceCount: number = 0;
-  public canPlay(player: Player): boolean {
-    return player.getTagCount(Tags.SCIENCE) >= 2;
-  }
+
   public play(player: Player) {
     player.addProduction(Resources.MEGACREDITS, 2);
     player.game.addCityTile(player, SpaceName.STRATOPOLIS, SpaceType.COLONY);
@@ -67,8 +64,7 @@ export class Stratopolis extends Card implements IActionCard, IResourceCard {
     const cards = this.getResCards(player);
 
     if (cards.length === 1) {
-      player.addResourceTo(cards[0], 2);
-      LogHelper.logAddResource(player, cards[0], 2);
+      player.addResourceTo(cards[0], {qty: 2, log: true});
       return undefined;
     }
 
@@ -77,8 +73,7 @@ export class Stratopolis extends Card implements IActionCard, IResourceCard {
       'Add floater(s)',
       cards,
       (foundCards: Array<ICard>) => {
-        player.addResourceTo(foundCards[0], 2);
-        LogHelper.logAddResource(player, foundCards[0], 2);
+        player.addResourceTo(foundCards[0], {qty: 2, log: true});
         return undefined;
       },
     );

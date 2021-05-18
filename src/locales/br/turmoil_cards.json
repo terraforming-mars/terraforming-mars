@@ -9,7 +9,7 @@
   "Requires that Unity is ruling or that you have 2 delegates there. Decrease your energy production 1 step and increase your M€ production 3 steps. Place a city tile. Place 2 delegates in 1 party.": "Requer que a Unidade esteja governando ou que você possua 2 delegados neles. Diminua sua produção de energia 1 nível e aumente sua produção de M€ 3 níveis. Coloque um tile de cidade. Coloque 2 delegados em 1 partido.",
 
   "Diaspora Movement": "Movimento Diáspora",
-  "Requires that Reds are ruling or that you have 2 delegates there. Gain 1M€ for each Jovian tag in play, including this.": "Requer que os Vermelhos estejam governando ou que você possua 2 delegados neles. Receba 1 M€ por cada ícone joviano em jogo.",
+  "Requires that Reds are ruling or that you have 2 delegates there. Gain 1 M€ for each Jovian tag in play, including this.": "Requer que os Vermelhos estejam governando ou que você possua 2 delegados neles. Receba 1 M€ por cada ícone joviano em jogo.",
 
   "Event Analysts": "Analista de Eventos",
   "Effect: You have +1 influence.": "Efeito: Você possui +1 influência.",
@@ -51,5 +51,5 @@
   "Requires that you have a Party Leader in any party and that the sitting Chairman is neutral. Remove the NEUTRAL Chairman and move your own delegate (from the reserve) there instead. Gain 1 TR.": "Requer que você possua um líder em qualquer partido e que o Presidente seja neutral. Remova o Presidente NEUTRO e adicione um delegado seu da reserva no lugar. Receba 1 IT.",
 
   "Political Alliance": "Aliança Política",
-  "Requires that you have 2 party leaders. Gain 1 TR.":"Requer que você possua 2 líderes de partido. Receba 1 IT."
+  "Requires that you have 2 party leaders. Gain 1 TR.": "Requer que você possua 2 líderes de partido. Receba 1 IT."
 }

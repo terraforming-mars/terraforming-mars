@@ -98,6 +98,10 @@
   "Self-replicating Robots": "Robôs Autorreplicadores",
   "Action: Reveal and place a SPACE OR BUILDING card here from hand, and place 2 resources on it, OR double the resources on a card here.": "Ação: revele de sua mão uma carta ESPACIAL OU DE CONSTRUÇÃO e coloque-a aqui, e coloque 2 recursos nela, OU dobre os recursos em uma carta que esteja aqui.",
   "Effect: Card here may be played as if from hand with its cost reduced by the number of resources on it.": "Efeito: Cartas que estejam aqui podem ser jogadas como se estivessem em sua mão com o custo reduzido pelo número de recursos nela.",
+  "Double resource": "Dobrar recursos",
+  "Select card to double robots resource": "Escolha uma carta para dobrar recursos dos robôs",
+  "Select card to link with Self-Replicating Robots": "Escolha uma carta para ligar com Robôs Autorreplicadores",
+  "Link card": "Ligar carta",
 
   "Dusk Laser Mining": "Mineração a Laser",
   "Requires 2 Science tags. Decrease your energy production 1 step, and increase your titanium production 1 step. Gain 4 titanium.": "Requer 2 ícones de ciência. Diminua sua produção de energia 1 nível e aumente sua produção de titânio 1 nível. Receba 4 titânios.",
@@ -121,7 +125,7 @@
   "Place a city tile IN SPACE, outside and separate from the planet.": "Coloque um tile de cidade NO ESPAÇO separado do planeta.",
 
   "You start with 48 M€. Increase your M€ production 4 steps. ALL OPPONENTS DECREASE THEIR M€ production 2 STEPS. THIS DOES NOT TRIGGER THE EFFECT BELOW.": "Você começa com 48 M€. Aumente sua produção de M€ em 4 níveis. TODOS OS OPONENTES REDUZEM SUA PRODUÇÃO DE M€ EM 2 NÍVEIS. ISTO NÃO ACIONA O EFEITO ABAIXO.",
-  "Effect: When a player causes another player to decrease production or lose resources, pay 3M€ to the victim, or as much as possible.": "Efeito: Quando um jogador casar a diminuição da produçao ou a perda de recursos de outro jogador, pague 3 M€ para a vítima, caso possível.",
+  "Effect: When a player causes another player to decrease production or lose resources, pay 3 M€ to the victim, or as much as possible.": "Efeito: Quando um jogador casar a diminuição da produçao ou a perda de recursos de outro jogador, pague 3 M€ para a vítima, caso possível.",
 
   "You start with 47 M€. As your first action, place a greenery tile and raise the oxygen 1 step.": "Você começa com 47 M€. Como sua primeira ação, posicione um tile de vegetação",
   "Effect: Each new adjacency between your tile and an opponent's tile gives you a standard resource of your choice [regardless of who just placed a tile].": "Efeito: Cada nova adjacência entre seus tiles e tiles de oponentes lhe traz um recurso básico à sua escolha - independente de quem acaba de colocar o tile.",
@@ -143,16 +147,22 @@
 
   "Requires 4 ocean tiles. Increase your Energy production 2 steps. Place this tile ADJACENT TO an ocean tile.": "Requer 4 tiles de oceano. Aumente sua produção de energia 2 níveis. Coloque este tile ADJACENTE a um tile de oceano.",
 
-  "Decrease your Energy production 4 steps and increase your Plant production 2 step. Raise your TR 3 step.": "Diminua sua produção de energia 4 níveis e aumente sua produção de planta 2 níveis. Aumente seu IT 3 níveis.",
+  "Decrease your Energy production 4 steps and increase your Plant production 2 steps. Raise your TR 3 steps.": "Diminua sua produção de energia 4 níveis e aumente sua produção de planta 2 níveis. Aumente seu IT 3 níveis.",
 
   "You start with 37 M€. Increase your steel production 1 step.": "Você começa com 37 M€. Aumente sua produção de aço em 1 nível.",
-  "Action: Increase your energy production 1 step IF YOU HAVE NO ENERGY RESOURCES, or spend 3M€ to draw a building card.": "Ação: Aumente sua produção de enercia nível SE VOCÊ NÃO TEM NENHUM RECURSO DE ENERGIA, ou gaste 3 M€ para comprar uma carta de construção.",
+  "Action: Increase your energy production 1 step IF YOU HAVE NO ENERGY RESOURCES, or spend 3 M€ to draw a building card.": "Ação: Aumente sua produção de enercia nível SE VOCÊ NÃO TEM NENHUM RECURSO DE ENERGIA, ou gaste 3 M€ para comprar uma carta de construção.",
 
   "You start with 38 M€ and 1 steel production.": "Você começa com 38 M€ e 1 nível de produção de aço.",
   "Effect: When you play a building tag, including this, gain 1 microbe to this card, or remove 2 microbes here and raise your plant production 1 step.": "Efeito: Quando você joga um ícone de construção, incluindo este, ganhe 1 micróbio nesta carta, ou remova 2 micróbios aqui para aumentar sua produção de planta 1 nível.",
 
   "Requires 8 oceans. 1 VP for each animal on this card.": "Requer 8 oceanos. 1 PV por cada animal nesta carta.",
   "Requires 2 Science tags.": "Requer 2 ícones de ciência",
-  "Action: Spend 2X M€ to gain X energy, or decrease energy production 1 step to gain 8 M€.": "Ação: Gaste 2X M€ para receber X energias, ou diminua 1 nível sua produção de energia para receber 8 M€."
+  "Action: Spend 2X M€ to gain X energy, or decrease energy production 1 step to gain 8 M€.": "Ação: Gaste 2X M€ para receber X energias, ou diminua 1 nível sua produção de energia para receber 8 M€.",
+
+  "Bactoviral Research": "Pesquisa Bactoviral",
+  "Draw a card. Choose any one microbe card and add a microbe to it for each science tag you have, including this.": "Compre uma carta. Escolha uma carta de micróbio e adicione um micróbio nela para cada ícone de ciência que você tiver, incluindo este.",
+  "Select card to add ": "Escolha uma carta para adicionar ",
+  " microbe(s)": "micróbio(s)",
+  "Add microbe(s)": "Adicionar micróbio(s)"
 }
 

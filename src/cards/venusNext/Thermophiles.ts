@@ -8,7 +8,6 @@ import {SelectOption} from '../../inputs/SelectOption';
 import {MAX_VENUS_SCALE, REDS_RULING_POLICY_COST} from '../../constants';
 import {SelectCard} from '../../inputs/SelectCard';
 import {CardName} from '../../CardName';
-import {LogHelper} from '../../LogHelper';
 import {PartyHooks} from '../../turmoil/parties/PartyHooks';
 import {PartyName} from '../../turmoil/parties/PartyName';
 import {CardRequirements} from '../CardRequirements';
@@ -54,8 +53,7 @@ export class Thermophiles extends Card implements IActionCard, IResourceCard {
 
     // only 1 valid target and cannot remove 2 microbes - add to itself
     if (venusMicrobeCards.length === 1 && !canRaiseVenus) {
-      player.addResourceTo(this);
-      LogHelper.logAddResource(player, this);
+      player.addResourceTo(this, {log: true});
       return undefined;
     }
 
@@ -72,15 +70,13 @@ export class Thermophiles extends Card implements IActionCard, IResourceCard {
       'Add microbe',
       venusMicrobeCards,
       (foundCards: Array<ICard>) => {
-        player.addResourceTo(foundCards[0], 1);
-        LogHelper.logAddResource(player, foundCards[0]);
+        player.addResourceTo(foundCards[0], {log: true});
         return undefined;
       },
     );
 
     const addResourceToSelf = new SelectOption('Add a microbe to this card', 'Add microbe', () => {
-      player.addResourceTo(venusMicrobeCards[0], 1);
-      LogHelper.logAddResource(player, this);
+      player.addResourceTo(venusMicrobeCards[0], {log: true});
       return undefined;
     });
 

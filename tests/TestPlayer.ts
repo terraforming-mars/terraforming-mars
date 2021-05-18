@@ -1,4 +1,5 @@
 import {Player} from '../src/Player';
+import {PlayerInput} from '../src/PlayerInput';
 import {Color} from '../src/Color';
 import {Units} from '../src/Units';
 import {Tags} from '../src/cards/Tags';
@@ -40,6 +41,10 @@ export class TestPlayer extends Player {
       return this.tagsForTest[tag] || 0;
     }
     return super.getTagCount(tag, includeEventsTags, includeWildcardTags);
+  }
+
+  public runInput(input: ReadonlyArray<ReadonlyArray<string>>, pi: PlayerInput): void {
+    super.runInput(input, pi);
   }
 }
 

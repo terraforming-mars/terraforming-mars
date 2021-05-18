@@ -40,7 +40,7 @@
     "Space not available": "Área não disponível",
     "Player not available": "Jogador não disponível",
     "No party selected": "Nenhum partido salecionado",
-    "Select action for World Government Terraforming": "Escolha uma ação para por o governo mundial",
+    "Select action for World Government Terraforming": "Escolha uma ação para o governo mundial",
     "Confirm": "Confirmar",
     "Increase temperature": "Aumentar temperatura",
     "Increase oxygen": "Aumentar oxigênio",
@@ -55,6 +55,7 @@
     "Didn't even find player": "Jogador não encontrado",
     "No player has played requested card": "Nenhum jogador jogou a carta solicitada",
     "Drew and discarded ${0} (cost ${1}) to place a ${2}": "Comprou e descartou ${0} (custo ${1}) para colocar ${2}",
+    "Good luck ${0}!": "Boa sorte, ${0}!",
 
     "${0} played ${1}": "${0} jogou ${1}",
     "${0} used ${1} action": "${0} fez a ação ${1}",
@@ -75,7 +76,7 @@
     "${0} increased ${1} colony track ${2} step(s)": "${0} aumentou o marcador da colônia ${1} em ${2} nível(s)",
     "${0} bought ${1} card(s)": "${0} comprou ${1} carta(s)",
     "${0} acted as World Government and increased Venus scale": "${0} atuou como governo mundial e aumentou o valor de terraformação de Vênus",
-    "${0} acted as World Government and placed an ocean": "${0} atuou como governo mundial e colocou uma tile de oceano",
+    "${0} acted as World Government and placed an ocean": "${0} atuou como governo mundial e colocou um tile de oceano",
     "${0} acted as World Government and increased oxygen level": "${0} atuou como governo mundial e aumentou o nível de oxigênio",
     "${0} acted as World Government and increased temperature": "${0} atuou como governo mundial e aumentou a temperatura",
     "${0} loses ${1} resource(s) on ${2} by ${3}": "${3} fez que ${0} perca ${1} recurso(s) em ${2}",
@@ -84,14 +85,14 @@
     "${0} received ${1} M€ from ${2} owner (${3})": "${0} recebeu ${1} M€ de ${2} (${3})",
     "${0} copied ${1} production with ${2}": "${0} copiou a produção de ${1} com ${2}",
     "${0} used ${1} action with ${2}": "${0} fez a ação ${1} com ${2}",
-    "${0} is the new chairman and gained ${1} TR": "${0} é o novo presidente e ganhou (${1}) IT",
+    "${0} is the new chairman and gains ${1} TR": "${0} é o novo presidente e ganhou (${1}) IT",
     "Turmoil phase has been resolved": "A fase de Reviravolta terminou",
 
 
     "${0} drew ${1}": "${0} comprou ${1}",
     "${0} drew ${1} and ${2}": "${0} comprou ${1} e ${2}",
     "${0} drew ${1}, ${2} and ${3}": "${0} comprou ${1}, ${2} e ${3}",
-    "${0} sold ${1} patents": "${0} vendeu patente ${1}",
+    "${0} sold ${1} patents": "${0} vendeu ${1} patente(s)",
     "${0} gained ${2} ${1} production": "A produção de ${1} de ${0} foi aumentada em ${2}",
     "${0} ${1} ${2} on row ${3} position ${4}": "${0} ${1} ${2} na linha ${3} posição ${4}",
     "placed": "colocou",
@@ -106,8 +107,8 @@
     "${0} card(s) were discarded": "${0} carta(s) foi(ram) descartada(s)",
 
 
-    "The ruling bonus is ${0}": "O bônus de governo é ${0}",
-    "The ruling policy is ${0}": "A política de governo é ${0}",
+    "The ruling bonus is: ${0}": "O bônus de governo é ${0}",
+    "The ruling policy is: ${0}": "A política de governo é ${0}",
 
     "A neutral delegate is the new chairman.": "Um delegado neutro é o novo Presidente.",
     "Greens are in power in the first generation.": "Verdes começam sendo o partido governante na primeira geração.",
@@ -127,12 +128,13 @@
     "researching": "pesquisando",
 
     "${0} used Turmoil Scientists action": "${0} usou ação do Cientistas: Reviravolta",
-    "Select how to pay for Turmoil Scientists action": "Escolha como pagar pela ação do Cientistas: Reviravolta",
 
-    "${0} doubled resources on ${1} from ${2} to ${3}": "${0} dobrou os recursos em ${1} de ${2} para ${3}",
+	"${0} doubled resources on ${1} from ${2} to ${3}": "${0} dobrou os recursos em ${1} de ${2} para ${3}",
+    "${0} linked ${1} with ${2}": "${0} ligada ${1} com ${2}",
 
     "removed": "removeu",
     "${0} removed an asteroid resource to increase Venus scale 1 step": "${0} removeu um recurso de asteroide para aumentar a escala de terraformação de Vênus 1 nível",
+    "${0} increased Venus scale ${1} step(s)": "${0} aumentou nível de Vênus ${1} nível(is)",
     "${0} gained ${1} ${2}": "${0} ganhou ${1} ${2}",
     "titanium": "titânio",
     "influence": "influência",
@@ -173,6 +175,21 @@
     "Spend steel": "Gastar aço",
     "${0} spent ${1} energy": "${0} gastou ${1} energia",
     "${0} gained ${1} energy": "${0} ganhou ${1} energia",
-    "raise temperature 1 step": "aumentar temperatura 1 nível"
+    "raise temperature 1 step": "aumentar temperatura 1 nível",
+
+    "Select how to pay for action": "Escolha como pagar pela ação",
+	"Select how to pay for Martian Media Center action": "Escolha como pagar pela ação do Centro de Mídia Marciano",
+	"Select how to pay for Floating Habs action": "Escolha como pagar pela ação do Habitates Flutuantes",
+	"Select how to pay for Directed Impactors action": "Escolha como pagar pela ação do Impactos Direcionados",
+	"Select how to pay for placement bonus ocean": "Escolha como pagar para colocar o oceano bônus",
+	"Select how to pay for send delegate action": "Escolha como pagar para enviar delegado",
+	"Select how to pay for ${this.name} project": "Escolha como pagar pelo projeto ${this.name}",
+	"Select how to pay for TR increase": "Escolha como pagar pelo aumento de IT",
+	"Select how to pay for Turmoil Kelvinists action": "Escolha como pagar pela ação do Kelvinistas: Reviravolta",
+    "Select how to pay for Turmoil Scientists action": "Escolha como pagar pela ação do Cientistas: Reviravolta",
+	"Select how to pay for milestone": "Escolha como pagar pelo marco",
+	"Select how to pay for award": "Escolha como pagar pelo prêmio",
+	"Select how to pay for cards": "Escolha como pagar pelas cartas",
+    "Select ${max} card(s) to keep": "Escolha ${max} carta(s) para manter"
 
 }

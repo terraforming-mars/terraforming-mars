@@ -888,9 +888,7 @@ export class Player implements ISerializable<SerializedPlayer> {
     }
   }
 
-  // This is only public for a test. It's not great.
-  // TODO(kberg): Fix that.
-  public runInput(input: ReadonlyArray<ReadonlyArray<string>>, pi: PlayerInput): void {
+  protected runInput(input: ReadonlyArray<ReadonlyArray<string>>, pi: PlayerInput): void {
     if (pi instanceof AndOptions) {
       this.checkInputLength(input, pi.options.length);
       for (let i = 0; i < input.length; i++) {

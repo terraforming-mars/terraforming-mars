@@ -13,6 +13,7 @@ import {Card} from '../Card';
 import {CardRenderer} from '../render/CardRenderer';
 import {Size} from '../render/Size';
 import {AltSecondaryTag} from '../render/CardRenderItem';
+import {Resources} from '../../Resources';
 
 export class ProjectWorkshop extends Card implements CorporationCard {
   constructor() {
@@ -90,7 +91,7 @@ export class ProjectWorkshop extends Card implements CorporationCard {
     );
 
     const drawBlueCard = new SelectOption('Spend 3 M€ to draw a blue card', 'Draw card', () => {
-      player.megaCredits -= 3;
+      player.deductResource(Resources.MEGACREDITS, 3);
       player.drawCard(1, {cardType: CardType.ACTIVE});
       return undefined;
     });

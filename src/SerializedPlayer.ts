@@ -60,6 +60,5 @@ export interface SerializedPlayer {
     // TODO(kberg): change tradesThisTurn to tradeThisGeneration later
     tradesThisTurn: number;
     turmoilPolicyActionUsed: boolean;
-    usedUndo: boolean;
     victoryPointsBreakdown: VictoryPointsBreakdown;
 }

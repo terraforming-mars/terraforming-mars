@@ -18,9 +18,8 @@ import {GlobalParameter} from '../src/GlobalParameter';
 import {TestingUtils} from './TestingUtils';
 import {Units} from '../src/Units';
 import {SelfReplicatingRobots} from '../src/cards/promo/SelfReplicatingRobots';
-import {OrOptions} from '../src/inputs/OrOptions';
-import {GameLoader} from '../src/database/GameLoader';
 import {Pets} from '../src/cards/base/Pets';
+import {GlobalEventName} from '../src/turmoil/globalEvents/GlobalEventName';
 
 describe('Player', function() {
   it('should initialize with right defaults', function() {
@@ -237,7 +236,6 @@ describe('Player', function() {
       playedCards: [], // TODO(kberg): these are SerializedCard.
       draftedCards: [CardName.FISH, CardName.EXTREME_COLD_FUNGUS],
       needsToDraft: false,
-      usedUndo: false,
       cardCost: 3,
       cardDiscount: 7,
       fleetSize: 99,
@@ -290,43 +288,6 @@ describe('Player', function() {
     player.playedCards.push(srr);
     srr.targetCards.push({card: new LunarBeam(), resourceCount: 0});
     expect(player.getSelfReplicatingRobotsTargetCards().length).eq(1);
-  });
-  it('uses undo', function() {
-    const player = TestPlayers.BLUE.newPlayer();
-    player.beginner = true;
-    const game = Game.newInstance('foo', [player], player);
-    game.gameOptions.undoOption = true;
-    player.process([['1'], ['Power Plant:SP']]);
-    const options = player.getWaitingFor() as OrOptions;
-    expect((player as any).usedUndo).is.false;
-    player.process([[String(options.options.length - 1)], ['']]);
-    expect((player as any).usedUndo).is.true;
-    expect(player.getWaitingFor()).is.undefined;
-  });
-  it('progresses game if undo operation fails', function() {
-    const player = TestPlayers.BLUE.newPlayer();
-    player.beginner = true;
-    const game = Game.newInstance('foo', [player], player);
-    game.gameOptions.undoOption = true;
-    player.process([['1'], ['Power Plant:SP']]);
-    const options = player.getWaitingFor() as OrOptions;
-    expect((player as any).usedUndo).is.false;
-    const instance = GameLoader.getInstance();
-    const originRestore = instance.restoreGameAt;
-    let restoreGameCb: ((err: any) => void) | undefined = undefined;
-    instance.restoreGameAt = function(_gameId: string, _saveId: number, cb: (err: any) => void) {
-      restoreGameCb = cb;
-      instance.restoreGameAt = originRestore;
-    };
-    player.process([[String(options.options.length - 1)], ['']]);
-    expect((player as any).usedUndo).is.true;
-    if (restoreGameCb === undefined) {
-      throw new Error('did not call to restore game');
-    }
-    expect(player.getWaitingFor()).is.undefined;
-    (restoreGameCb as (err: any) => void)('unable to restore game');
-    expect((player as any).usedUndo).is.false;
-    expect(player.getWaitingFor()).not.is.undefined;
   });
 
   it('has units', () => {
@@ -580,6 +541,115 @@ describe('Player', function() {
     expect(logEntry.data[1].value).eq('3');
     expect(logEntry.data[3].value).eq('Pets');
   });
+
+  it('addResourceTo with Mons Insurance hook does not remove when no credits', () => {
+    const player1 = TestPlayers.BLUE.newPlayer();
+    const player2 = TestPlayers.RED.newPlayer();
+    const game = Game.newInstance('foobar', [player1, player2], player1);
+    player1.megaCredits = 0;
+    player1.setProductionForTest({
+      megacredits: -5,
+    });
+    player2.megaCredits = 3;
+    game.monsInsuranceOwner = player2.id;
+    player1.addResource(Resources.MEGACREDITS, -3, {from: player2, log: false});
+    expect(player2.megaCredits).eq(3); ;
+    player1.addProduction(Resources.MEGACREDITS, -3, {from: player2, log: false});
+    expect(player2.megaCredits).eq(3);
+  });
+
+  it('adds resources', () => {
+    const player = TestPlayers.BLUE.newPlayer();
+    Game.newInstance('x', [player], player);
+    player.megaCredits = 10;
+    // adds any positive amount
+    player.addResource(Resources.MEGACREDITS, 12);
+    expect(player.megaCredits).eq(22);
+    // removes more than we have
+    player.addResource(Resources.MEGACREDITS, -23);
+    expect(player.megaCredits).eq(0);
+    // adds any positive amount
+    player.addResource(Resources.MEGACREDITS, 5);
+    expect(player.megaCredits).eq(5);
+    // removes less than we have
+    player.addResource(Resources.MEGACREDITS, -4);
+    expect(player.megaCredits).eq(1);
+    // makes no change
+    player.addResource(Resources.MEGACREDITS, 0);
+    expect(player.megaCredits).eq(1);
+  });
+
+  it('addResource logging', () => {
+    const player = TestPlayers.BLUE.newPlayer();
+    const game = Game.newInstance('foobar', [player], player);
+
+    const log = game.gameLog;
+    log.length = 0; // Empty it out.
+
+    player.addResource(Resources.MEGACREDITS, 12, {log: false});
+    expect(log.length).eq(0);
+
+    player.addResource(Resources.MEGACREDITS, 12, {log: true});
+    const logEntry = log[0];
+    expect(TestingUtils.formatLogMessage(logEntry)).eq('blue\'s megacredits amount increased by 12');
+  });
+
+  it('addResource logging from player', () => {
+    const player = TestPlayers.BLUE.newPlayer();
+    const player2 = TestPlayers.RED.newPlayer();
+    const game = Game.newInstance('foobar', [player, player2], player);
+
+    player.megaCredits = 5;
+    player.addResource(Resources.MEGACREDITS, -5, {log: true, from: player2});
+
+    const log = game.gameLog;
+    const logEntry = log[log.length - 1];
+    expect(TestingUtils.formatLogMessage(logEntry)).eq('blue\'s megacredits amount decreased by 5 by red');
+  });
+
+  it('addResource logging from global event', () => {
+    const player = TestPlayers.BLUE.newPlayer();
+    const game = Game.newInstance('foobar', [player], player);
+
+    player.addResource(Resources.MEGACREDITS, 12, {log: true, from: GlobalEventName.ASTEROID_MINING});
+
+    const log = game.gameLog;
+    const logEntry = log[log.length - 1];
+    expect(TestingUtils.formatLogMessage(logEntry)).eq('blue\'s megacredits amount increased by 12 by Global Event');
+  });
+
+  it('addResource logs error when deducting too much', () => {
+    const player = TestPlayers.BLUE.newPlayer();
+    Game.newInstance('foobar', [player], player);
+
+    player.megaCredits = 10;
+    const warn = console.warn;
+    const consoleLog: Array<Array<any>> = [];
+    console.warn = (message?: any, ...optionalParams: any[]) => {
+      consoleLog.push([message, optionalParams]);
+    };
+    player.addResource(Resources.MEGACREDITS, -12);
+    console.warn = warn;
+
+    expect(consoleLog.length).eq(1);
+    expect(consoleLog[0][0]).eq('Illegal state: Adjusting -12 megacredits when player has 10');
+    expect(JSON.parse(consoleLog[0][1])).deep.eq(
+      {
+        'gameId': 'foobar',
+        'lastSaveId': 0,
+        'logAge': 7,
+        'currentPlayer': 'blue-id',
+        'metadata': {
+          'player': {
+            'color': 'blue',
+            'id': 'blue-id',
+            'name': 'player-blue',
+          },
+          'resource': 'megacredits',
+          'amount': -12,
+        },
+      });
+  });
 });
 
 function waitingForGlobalParameters(player: Player): Array<GlobalParameter> {
@@ -610,23 +680,3 @@ function titlesToGlobalParameter(title: string): GlobalParameter {
   }
   throw new Error('title does not match any description: ' + title);
 }
-
-it('adds resources', () => {
-  const player = TestPlayers.BLUE.newPlayer();
-  player.megaCredits = 10;
-  // adds any positive amount
-  player.addResource(Resources.MEGACREDITS, 12);
-  expect(player.megaCredits).eq(22);
-  // removes more than we have
-  player.addResource(Resources.MEGACREDITS, -23);
-  expect(player.megaCredits).eq(0);
-  // adds any positive amount
-  player.addResource(Resources.MEGACREDITS, 5);
-  expect(player.megaCredits).eq(5);
-  // removes less than we have
-  player.addResource(Resources.MEGACREDITS, -4);
-  expect(player.megaCredits).eq(1);
-  // makes no change
-  player.addResource(Resources.MEGACREDITS, 0);
-  expect(player.megaCredits).eq(1);
-});

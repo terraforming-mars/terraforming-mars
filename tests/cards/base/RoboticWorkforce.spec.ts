@@ -170,7 +170,7 @@ describe('RoboticWorkforce', () => {
 
   const testCard = function(card: ICard) {
     const researchCoordination = new ResearchCoordination();
-    const gameOptions = TestingUtils.setCustomGameOptions({moonExpansion: true});
+    const gameOptions = TestingUtils.setCustomGameOptions({aresExtension: true, aresHazards: false, moonExpansion: true});
     const productions = [Resources.MEGACREDITS, Resources.STEEL, Resources.TITANIUM, Resources.PLANTS, Resources.ENERGY, Resources.HEAT];
 
     let include = false;

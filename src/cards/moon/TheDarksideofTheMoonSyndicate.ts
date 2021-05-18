@@ -103,7 +103,7 @@ export class TheDarksideofTheMoonSyndicate extends Card implements CorporationCa
         // and in StealResources.
         const adjustedQuantity = Math.min(qty, target.megaCredits);
         activePlayer.addResource(Resources.MEGACREDITS, adjustedQuantity, {log: true});
-        target.addResource(Resources.MEGACREDITS, -adjustedQuantity, {log: true, from: activePlayer});
+        target.deductResource(Resources.MEGACREDITS, adjustedQuantity, {log: true, from: activePlayer});
       });
     }
     return undefined;

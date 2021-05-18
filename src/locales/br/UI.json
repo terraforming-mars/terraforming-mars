@@ -44,9 +44,9 @@
     "BreakThrough": "Descobrimento",
     "NEXT CARD:": "PRÓXIMA CARTA:",
     "GENERATION 1 OF 12": "Geração ${0} de ${1}",
-    "You":"Você",
+    "You": "Você",
     "you": "você",
-    "researching":"pesquisando",
+    "researching": "pesquisando",
 
     "Milestones": "Marcos",
     "Builder": "Construtor",
@@ -135,15 +135,15 @@
     "(click on player name to see details)": "(clique no nome do jogador para ver detalhes)",
     "Go to game results": "Ir para os resultados da partida",
     "Save": "Salvar",
-    "show tiles":"mostrar tiles",
-    "hide tiles":"ocultar tiles",
+    "show tiles": "mostrar tiles",
+    "hide tiles": "ocultar tiles",
     "toggle tags view:": "trocar visualização dos ícones:",
-    "concise":"resumida",
-    "CONCISE":"RESUMIDA",
-    "full":"completa",
+    "concise": "resumida",
+    "CONCISE": "RESUMIDA",
+    "full": "completa",
     "FULL" :"COMPLETA",
-    "Played Cards":"Cartas em Jogo",
-    "played cards":"cartas em jogo",
+    "Played Cards": "Cartas em Jogo",
+    "played cards": "cartas em jogo",
 
     "Select which cards to take into hand": "Escolha quais cartas levar para a mão",
     "Not enough cards selected": "Não foram selecionadas cartas suficientes",
@@ -221,11 +221,11 @@
      "Select colony tile to remove":  "Escolha uma peça de colônia para remover",
      "Select where to build the first colony": "Escolha onde construir a primera colônia",
      "Select where to build the second colony": "Escolha onde construir a segunda colônia",
-     "Select ocean space for Europa colony":"Escolha uma área de oceano para a colônia de Europa",
+     "Select ocean space for Europa colony": "Escolha uma área de oceano para a colônia de Europa",
      "The id of this game is S{0}": "O identificador desta partida é S{0}",
      "Select": "Escolher",
      "Take": "Pegue",
-     "Pay":"Pagar",
+     "Pay": "Pagar",
      "Remove floaters": "Remova flutuadores",
      "Add floater": "Adicione flutuador",
      "Select space for tile": "Escolher área para peça",
@@ -243,8 +243,8 @@
      "Select card(s) to buy": "Escolha carta(s) que deseja comprar",
      "You cannot afford any cards": "Você não consegue pagar as cartas",
 
-    "Starting Megacredits:":"Megacréditos iniciais：",
-    "After Preludes:":"Depois dos prelúdio：",
+    "Starting Megacredits:": "Megacréditos iniciais：",
+    "After Preludes:": "Depois dos prelúdio：",
 
     "Select a card to keep and pass the rest to ${0}": "Escolha um carta para manter e passe o resto para ${0}",
     "Select two cards to keep and pass the rest to ${0}": "Escolha duas cartas para manter e passe o resto para ${0}",
@@ -356,7 +356,7 @@
     "Add resource": "Adicionar recurso",
     "Skip removing plants": "Não remover plantas",
 
-    "Remove 2 microbes to raise Venus 1 step": "",
+    "Remove 2 microbes to raise Venus 1 step": "Remover 2 micróbios para aumentar Vênus 1 nível",
     "Select a Venus card to add 1 microbe": "Escolha uma carta de Vênus para adicionar 1 micróbio",
     "Add microbes": "Adicionar micróbios",
     "Remove microbes": "Remover micróbios",
@@ -365,9 +365,9 @@
     "Remove asteroid": "Remover asteroide",
     "gain 1 TR": "ganhar 1 IT",
     "Draw card": "Comprar carta",
-    "Remove 1 asteroid on this card to increase M€ production 1 step OR gain 2 titanium": "Remover 1 asteroide desta carta para increase M€ production 1 step OR gain 2 titanium",
+    "Remove 1 asteroid on this card to increase M€ production 1 step OR gain 2 titanium": "Remover 1 asteroide desta carta para aumentar produção de M€ 1 nível OU receber 2 tiânios",
     "Remove an asteroid resource to place an ocean": "Remover um asteroide para colocar um oceano",
-    "Select card to add 1 asteroid": "",
+    "Select card to add 1 asteroid": "Escolha carta para adicionar um asteroide",
     "gain 2 titanium": "ganhar 2 titânios",
     "asteroid(s) ": "asteroide(s)",
     "Commercial District tile": "tile",
@@ -390,5 +390,10 @@
     "Select player to sue (steal 3 M€ from)": "Escolha jogador para processar (roubar 3 M€)",
     "Steal M€": "Roubar M€",
 
-    "Select where to send a delegate": "Escolha o partido para enviar o delegado."
+    "Select where to send a delegate": "Escolha o partido para enviar o delegado.",
+    
+    "Convert heat": "Conveter calor",
+	"Take action": "Fazer ação",
+	"Self-Replicating Robots cards": "Cartas ligadas ao Robôs Autorreplicadores"
+	
 }

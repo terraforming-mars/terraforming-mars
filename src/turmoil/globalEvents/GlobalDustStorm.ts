@@ -14,10 +14,10 @@ export class GlobalDustStorm implements IGlobalEvent {
     public resolve(game: Game, turmoil: Turmoil) {
       game.getPlayers().forEach((player) => {
         if (player.heat > 0) {
-          player.addResource(Resources.HEAT, -player.heat, {log: true, from: this.name});
+          player.deductResource(Resources.HEAT, player.heat, {log: true, from: this.name});
         }
         const maxedSteelTags = Math.min(5, player.getTagCount(Tags.BUILDING, false, false));
-        player.addResource(Resources.MEGACREDITS, -2 * Math.max(0, maxedSteelTags - turmoil.getPlayerInfluence(player)), {log: true, from: this.name});
+        player.deductResource(Resources.MEGACREDITS, 2 * Math.max(0, maxedSteelTags - turmoil.getPlayerInfluence(player)), {log: true, from: this.name});
       });
     }
 }

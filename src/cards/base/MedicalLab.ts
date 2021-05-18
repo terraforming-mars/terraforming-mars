@@ -28,13 +28,14 @@ export class MedicalLab extends Card implements IProjectCard {
     });
   }
 
-  public produce(player: Player, includeThis: boolean) {
-    // Don't include this when called by Robotic Workforce.
+  public produce(player: Player) {
+    // Include this when the card is first played, and not when it is called by Robotic Workforce.
+    const includeThis = !player.cardIsInEffect(this.name);
     const tagCount = player.getTagCount(Tags.BUILDING) + (includeThis ? 1 : 0);
     player.addProduction(Resources.MEGACREDITS, Math.floor(tagCount / 2));
   }
   public play(player: Player) {
-    this.produce(player, true);
+    this.produce(player);
     return undefined;
   }
   public getVictoryPoints() {

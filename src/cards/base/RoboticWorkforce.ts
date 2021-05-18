@@ -69,11 +69,11 @@ export class RoboticWorkforce extends Card implements IProjectCard {
         b.player(player).card(card).card(this));
 
       if (card.produce) {
-        card.produce(player, false);
+        card.produce(player);
       } else if (card.productionBox) {
         player.adjustProduction(card.productionBox);
       } else {
-        // Ugh
+        throw new Error(`Card ${card.name} is not a valid Robotic Workforce card.`);
       }
       return undefined;
     });

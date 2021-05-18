@@ -60,6 +60,6 @@ export interface ICard {
     metadata: CardMetadata;
     warning?: string | Message;
     productionBox?: Units;
-    produce?: (player: Player, includeThis: boolean) => void;
+    produce?: (player: Player) => void;
 }
 

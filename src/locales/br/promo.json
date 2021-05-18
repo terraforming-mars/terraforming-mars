@@ -98,6 +98,10 @@
   "Self-replicating Robots": "Robôs Autorreplicadores",
   "Action: Reveal and place a SPACE OR BUILDING card here from hand, and place 2 resources on it, OR double the resources on a card here.": "Ação: revele de sua mão uma carta ESPACIAL OU DE CONSTRUÇÃO e coloque-a aqui, e coloque 2 recursos nela, OU dobre os recursos em uma carta que esteja aqui.",
   "Effect: Card here may be played as if from hand with its cost reduced by the number of resources on it.": "Efeito: Cartas que estejam aqui podem ser jogadas como se estivessem em sua mão com o custo reduzido pelo número de recursos nela.",
+  "Double resource": "Dobrar recursos",
+  "Select card to double robots resource": "Escolha uma carta para dobrar recursos dos robôs",
+  "Select card to link with Self-Replicating Robots": "Escolha uma carta para ligar com Robôs Autorreplicadores",
+  "Link card": "Ligar carta",
 
   "Dusk Laser Mining": "Mineração a Laser",
   "Requires 2 Science tags. Decrease your energy production 1 step, and increase your titanium production 1 step. Gain 4 titanium.": "Requer 2 ícones de ciência. Diminua sua produção de energia 1 nível e aumente sua produção de titânio 1 nível. Receba 4 titânios.",
@@ -153,6 +157,12 @@
 
   "Requires 8 oceans. 1 VP for each animal on this card.": "Requer 8 oceanos. 1 PV por cada animal nesta carta.",
   "Requires 2 Science tags.": "Requer 2 ícones de ciência",
-  "Action: Spend 2X M€ to gain X energy, or decrease energy production 1 step to gain 8 M€.": "Ação: Gaste 2X M€ para receber X energias, ou diminua 1 nível sua produção de energia para receber 8 M€."
+  "Action: Spend 2X M€ to gain X energy, or decrease energy production 1 step to gain 8 M€.": "Ação: Gaste 2X M€ para receber X energias, ou diminua 1 nível sua produção de energia para receber 8 M€.",
+
+  "Bactoviral Research": "Pesquisa Bactoviral",
+  "Draw a card. Choose any one microbe card and add a microbe to it for each science tag you have, including this.": "Compre uma carta. Escolha uma carta de micróbio e adicione um micróbio nela para cada ícone de ciência que você tiver, incluindo este.",
+  "Select card to add ": "Escolha uma carta para adicionar ",
+  " microbe(s)": "micróbio(s)",
+  "Add microbe(s)": "Adicionar micróbio(s)"
 }
 

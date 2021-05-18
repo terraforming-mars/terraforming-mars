@@ -11,10 +11,10 @@ describe('CardRenderDynamicVictoryPoints', function() {
     it('success - returns points w/o item', () => {
       expect(new CardRenderDynamicVictoryPoints(undefined, 5, 5).getPointsHtml()).to.equal('5');
     });
-    it('success - returns points with item - points = targed', () => {
+    it('success - returns points with item - points = targed 10/', () => {
       expect(new CardRenderDynamicVictoryPoints(new CardRenderItem(CardRenderItemType.ASTEROIDS), 10, 10).getPointsHtml()).to.equal('10/');
     });
-    it('success - returns points with item - points = targed', () => {
+    it('success - returns points with item - points = targed 5/10', () => {
       expect(new CardRenderDynamicVictoryPoints(new CardRenderItem(CardRenderItemType.ASTEROIDS), 5, 10).getPointsHtml()).to.equal('5/10');
     });
   });

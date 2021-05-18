@@ -1,6 +1,7 @@
 import {expect} from 'chai';
 import {CulturalMetropolis} from '../../../src/cards/turmoil/CulturalMetropolis';
 import {PLAYER_DELEGATES_COUNT} from '../../../src/constants';
+import {SendDelegateToArea} from '../../../src/deferredActions/SendDelegateToArea';
 import {Game} from '../../../src/Game';
 import {Player} from '../../../src/Player';
 import {Resources} from '../../../src/Resources';
@@ -23,28 +24,49 @@ describe('Cultural Metropolis', function() {
   });
 
   it('Can\'t play without energy production', function() {
+    turmoil.sendDelegateToParty(player.id, PartyName.UNITY, game, 'lobby');
+    turmoil.sendDelegateToParty(player.id, PartyName.UNITY, game, 'reserve');
+    expect(card.canPlay(player)).is.not.true;
+  });
+
+
+  it('Can\'t play without two delegate in unity or unity ruling', function() {
+    player.addProduction(Resources.ENERGY, 1);
     expect(card.canPlay(player)).is.not.true;
   });
 
   it('Can\'t play without 2 delegates available', function() {
-    const reds = turmoil.getPartyByName(PartyName.REDS)!;
-
-    for (let i = 0; i < PLAYER_DELEGATES_COUNT - 1; i++) {
-      reds.sendDelegate(player.id, game);
+    player.addProduction(Resources.ENERGY, 1);
+    turmoil.sendDelegateToParty(player.id, PartyName.UNITY, game, 'lobby');
+    turmoil.sendDelegateToParty(player.id, PartyName.UNITY, game, 'reserve');
+    for (let i = 0; i < PLAYER_DELEGATES_COUNT - 3; i++) {
+      turmoil.sendDelegateToParty(player.id, PartyName.REDS, game, 'reserve');
     }
-
+    expect(turmoil.getDelegatesInReserve(player.id)).to.equal(1);
     expect(card.canPlay(player)).is.not.true;
   });
 
   it('Should play', function() {
-    player.addProduction(Resources.ENERGY, 1);
     const unity = turmoil.getPartyByName(PartyName.UNITY)!;
-    unity.sendDelegate(player.id, game);
-    unity.sendDelegate(player.id, game);
+    const startingUnityDelegateCount = unity.delegates.length;
+
+    player.addProduction(Resources.ENERGY, 1);
+    turmoil.sendDelegateToParty(player.id, PartyName.UNITY, game, 'lobby');
+    turmoil.sendDelegateToParty(player.id, PartyName.UNITY, game, 'reserve');
+
+    expect(unity.delegates).has.lengthOf(startingUnityDelegateCount + 2);
+    expect(turmoil.getDelegatesInReserve(player.id)).to.equal(5);
     expect(card.canPlay(player)).is.true;
 
     card.play(player);
+    expect(game.deferredActions).has.lengthOf(2);
+    player.game.deferredActions.pop(); // Pop out the city placement deferred action
+    const action = player.game.deferredActions.pop() as SendDelegateToArea;
+    const options = action.execute();
+    options.cb(PartyName.UNITY);
+
     expect(player.getProduction(Resources.ENERGY)).to.eq(0);
     expect(player.getProduction(Resources.MEGACREDITS)).to.eq(3);
+    expect(unity.delegates).has.lengthOf(startingUnityDelegateCount + 4);
   });
 });

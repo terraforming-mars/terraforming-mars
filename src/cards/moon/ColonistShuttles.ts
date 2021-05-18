@@ -8,6 +8,7 @@ import {CardRenderer} from '../render/CardRenderer';
 import {Units} from '../../Units';
 import {MoonCard} from './MoonCard';
 import {Size} from '../render/Size';
+import {Resources} from '../../Resources';
 
 export class ColonistShuttles extends MoonCard {
   constructor() {
@@ -35,7 +36,8 @@ export class ColonistShuttles extends MoonCard {
     super.play(player);
     MoonExpansion.raiseColonyRate(player);
     const surfaceColonies = MoonExpansion.tiles(player.game, TileType.MOON_COLONY, {surfaceOnly: true}).length;
-    player.megaCredits += surfaceColonies * 2;
+    player.addResource(Resources.MEGACREDITS, surfaceColonies * 2, {log: true});
+
     return undefined;
   }
 }

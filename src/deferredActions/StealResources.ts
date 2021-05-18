@@ -40,7 +40,7 @@ export class StealResources implements DeferredAction {
         'Steal ' + qtyToSteal + ' ' + this.resource + ' from ' + candidate.name,
         'Steal',
         () => {
-          candidate.addResource(this.resource, -qtyToSteal, {log: true, from: this.player});
+          candidate.deductResource(this.resource, qtyToSteal, {log: true, from: this.player});
           this.player.addResource(this.resource, qtyToSteal);
           this.stealComplete();
           return undefined;

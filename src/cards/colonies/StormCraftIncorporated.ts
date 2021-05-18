@@ -12,6 +12,7 @@ import {Card} from '../Card';
 import {CardRenderer} from '../render/CardRenderer';
 import {Size} from '../render/Size';
 import {PlayerInput} from '../../PlayerInput';
+import {Resources} from '../../Resources';
 
 export class StormCraftIncorporated extends Card implements IActionCard, CorporationCard, IResourceCard {
   constructor() {
@@ -87,7 +88,7 @@ export class StormCraftIncorporated extends Card implements IActionCard, Corpora
           throw new Error(`You cannot overspend floaters`);
         }
         player.removeResourceFrom(player.corporationCard as ICard, floaterAmount);
-        player.heat -= heatAmount;
+        player.deductResource(Resources.HEAT, heatAmount);
         return cb();
       },
       new SelectAmount('Select amount of heat to spend', 'Spend heat', (amount: number) => {

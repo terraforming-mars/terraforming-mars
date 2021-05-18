@@ -80,7 +80,7 @@ export class DrawCards<T extends undefined | SelectCard<IProjectCard>> implement
     const min = options.paying ? 0 : options.keepMax;
     const msg = options.paying ? (max === 0 ? 'You cannot afford any cards' : 'Select card(s) to buy') :
       `Select ${max} card(s) to keep`;
-    const button = max === 0 ? 'Ok' : (options.paying ? 'Buy' : 'Select');
+    const button = max === 0 ? 'Oh' : (options.paying ? 'Buy' : 'Select');
     const cb = (selected: Array<IProjectCard>) => {
       if (options.paying && selected.length > 0) {
         player.game.defer(

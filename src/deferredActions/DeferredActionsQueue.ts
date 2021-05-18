@@ -1,19 +1,13 @@
 import {DeferredAction} from './DeferredAction';
 import {GiveColonyBonus} from './GiveColonyBonus';
-import {Heap} from 'mnemonist';
+import {Player} from '../Player';
 
 export class DeferredActionsQueue {
   private insertId: number = 0;
-
-  private queue: Heap<DeferredAction> = new Heap((a, b) => {
-    if (a.priority === b.priority) {
-      return (a.queueId! < b.queueId!) ? -1 : 1;
-    }
-    return a.priority - b.priority;
-  });
+  private queue: Array<DeferredAction> = [];
 
   get length(): number {
-    return this.queue.size;
+    return this.queue.length;
   }
 
   public push(action: DeferredAction): void {
@@ -21,19 +15,69 @@ export class DeferredActionsQueue {
     this.queue.push(action);
   }
 
-  public pop(): DeferredAction | undefined {
-    return this.queue.pop();
+  public runAllFor(player: Player, cb: () => void): void {
+    let b: DeferredAction | undefined;
+    let j = -1;
+    for (let i = this.queue.length - 1; i >= 0; i--) {
+      const a = this.queue[i];
+      if (a.player.id === player.id && (b === undefined || this.hasHigherPriority(a, b))) {
+        b = a;
+        j = i;
+      }
+    }
+    if (b === undefined) {
+      cb();
+      return;
+    }
+    this.queue.splice(j, 1);
+    this.run(b, () => this.runAllFor(player, cb));
   }
 
+  private hasHigherPriority(a: DeferredAction, b: DeferredAction) {
+    return a.priority < b.priority || (a.priority === b.priority && a.queueId! < b.queueId!);
+  }
+
+  private nextItemIndex(): number {
+    if (this.queue.length === 0) {
+      return -1;
+    }
+    let b = this.queue[0];
+    let j = 0;
+    for (let i = this.queue.length - 1; i >= 1; i--) {
+      const a = this.queue[i];
+      if (this.hasHigherPriority(a, b)) {
+        b = a;
+        j = i;
+      }
+    }
+    return j;
+  }
+
+  public runAll(cb: () => void): void {
+    const next = this.nextItemIndex();
+    const action = this.queue[next];
+    if (action === undefined) {
+      cb();
+      return;
+    }
+    this.queue.splice(next, 1);
+    this.run(action, () => this.runAll(cb));
+  }
+
+  // The following methods are used in tests
   public peek(): DeferredAction | undefined {
-    return this.queue.peek();
+    return this.queue[this.nextItemIndex()];
+  }
+
+  public pop(): DeferredAction | undefined {
+    return this.queue.splice(this.nextItemIndex(), 1)[0];
   }
 
   public run(action: DeferredAction, cb: () => void): void {
     // Special hook for trade bonus deferred actions
     // So that they happen for all players at the same time
     if (action instanceof GiveColonyBonus) {
-      (action as GiveColonyBonus).cb = cb;
+      action.cb = cb;
       action.execute();
       return;
     }
@@ -45,19 +89,6 @@ export class DeferredActionsQueue {
       cb();
     }
   }
-
-  public runAll(cb: () => void): void {
-    const action = this.pop();
-    if (action === undefined) {
-      cb();
-      return;
-    }
-
-    this.run(action, () => this.runAll(cb));
-  }
-
-
-  // The following methods are used in tests
 
   public runNext(): void {
     const action = this.pop();

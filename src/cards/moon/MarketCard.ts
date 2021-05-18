@@ -74,7 +74,7 @@ export abstract class MarketCard extends Card implements IActionCard {
           }});
           player.game.defer(howToPay);
         } else {
-          player.addResource(Resources.MEGACREDITS, -cashDue);
+          player.deductResource(Resources.MEGACREDITS, cashDue);
           player.addResource(this.tradeResource, unitsEarned);
         }
 
@@ -100,7 +100,7 @@ export abstract class MarketCard extends Card implements IActionCard {
       (unitsSold: number) => {
         const cashEarned = unitsSold * terms.to;
         player.addResource(Resources.MEGACREDITS, cashEarned);
-        player.addResource(this.tradeResource, -unitsSold);
+        player.deductResource(this.tradeResource, unitsSold);
 
         player.game.log('${0} sold ${1} ${2}', (b) => b.player(player).number(unitsSold).string(this.tradeResource));
         return undefined;

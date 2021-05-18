@@ -2,7 +2,6 @@ import {CardType} from '../CardType';
 import {Player} from '../../Player';
 import {CardName} from '../../CardName';
 import {Resources} from '../../Resources';
-import {LogHelper} from '../../LogHelper';
 import {CardRequirements} from '../CardRequirements';
 import {CardRenderer} from '../render/CardRenderer';
 import {Size} from '../render/Size';
@@ -29,9 +28,7 @@ export class AerosportTournament extends Card {
   };
 
   public play(player: Player) {
-    const amount = player.game.getCitiesInPlay();
-    player.megaCredits += amount;
-    LogHelper.logGainStandardResource(player, Resources.MEGACREDITS, amount);
+    player.addResource(Resources.MEGACREDITS, player.game.getCitiesInPlay(), {log: true});
     return undefined;
   }
 

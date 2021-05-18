@@ -1,4 +1,3 @@
-import {LogHelper} from '../LogHelper';
 import {Game} from '../Game';
 import {ITile} from '../ITile';
 import {MoonBoard} from './MoonBoard';
@@ -230,8 +229,7 @@ export class MoonExpansion {
   private static activateLunaFirst(sourcePlayer: Player | undefined, game: Game, count: number) {
     const lunaFirstPlayer = MoonExpansion.moonData(game).lunaFirstPlayer;
     if (lunaFirstPlayer !== undefined) {
-      lunaFirstPlayer.megaCredits += count;
-      LogHelper.logGainStandardResource(lunaFirstPlayer, Resources.MEGACREDITS, count);
+      lunaFirstPlayer.addResource(Resources.MEGACREDITS, count, {log: true});
       if (lunaFirstPlayer.id === sourcePlayer?.id) {
         lunaFirstPlayer.addProduction(Resources.MEGACREDITS, count, {log: true});
       }

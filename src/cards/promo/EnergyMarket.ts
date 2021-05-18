@@ -52,7 +52,7 @@ export class EnergyMarket extends Card implements IProjectCard {
           player.game.defer(new SelectHowToPayDeferred(player, (amount * 2)));
         } else {
           player.addResource(Resources.ENERGY, amount);
-          player.addResource(Resources.MEGACREDITS, -(amount * 2));
+          player.deductResource(Resources.MEGACREDITS, (amount * 2));
         }
 
         player.game.log('${0} gained ${1} energy', (b) => b.player(player).number(amount));

@@ -14,6 +14,7 @@ import {CardType} from '../CardType';
 import {DeferredAction} from '../../deferredActions/DeferredAction';
 import {CardRenderer} from '../render/CardRenderer';
 import {Size} from '../render/Size';
+import {Resources} from '../../Resources';
 
 export class PharmacyUnion extends Card implements CorporationCard {
   constructor() {
@@ -91,7 +92,7 @@ export class PharmacyUnion extends Card implements CorporationCard {
                   const megaCreditsLost = Math.min(player.megaCredits, 4);
                   this.isDisabled = true;
                   player.increaseTerraformRatingSteps(3);
-                  player.megaCredits -= megaCreditsLost;
+                  player.deductResource(Resources.MEGACREDITS, megaCreditsLost);
                   game.log('${0} turned ${1} face down to gain 3 TR and lost ${2} M€', (b) => b.player(player).card(this).number(megaCreditsLost));
                   return undefined;
                 }),

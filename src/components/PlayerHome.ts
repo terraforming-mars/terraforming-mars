@@ -30,6 +30,10 @@ export interface PlayerHomeModel {
   showEventCards: boolean;
 }
 
+class TerraformedAlertDialog {
+  static shouldAlert = true;
+}
+
 export const PlayerHome = Vue.component('player-home', {
   data: function(): PlayerHomeModel {
     return {
@@ -182,6 +186,11 @@ export const PlayerHome = Vue.component('player-home', {
   },
   mounted: function() {
     window.addEventListener('keydown', this.navigatePage);
+    if (this.player.game.isTerraformed && TerraformedAlertDialog.shouldAlert && PreferencesManager.load('show_alerts') === '1') {
+      alert('Mars is Terraformed!');
+      // Avoids repeated calls.
+      TerraformedAlertDialog.shouldAlert = false;
+    };
   },
   template: `
         <div id="player-home" :class="(player.game.turmoil ? 'with-turmoil': '')">
@@ -223,7 +232,6 @@ export const PlayerHome = Vue.component('player-home', {
                         :oceans_count="player.game.oceans"
                         :oxygen_level="player.game.oxygenLevel"
                         :temperature="player.game.temperature"
-                        :shouldNotify="true"
                         :aresExtension="player.game.gameOptions.aresExtension"
                         :aresData="player.game.aresData"
                         id="shortkey-board"></board>

@@ -8,6 +8,7 @@ import {ResourceType} from '../../ResourceType';
 import {CardRenderer} from '../render/CardRenderer';
 import {Card} from '../Card';
 import {CardRenderDynamicVictoryPoints} from '../render/CardRenderDynamicVictoryPoints';
+import {Resources} from '../../Resources';
 
 export class RustEatingBacteria extends Card implements IActionCard, IProjectCard {
   constructor() {
@@ -42,7 +43,7 @@ export class RustEatingBacteria extends Card implements IActionCard, IProjectCar
   }
 
   public action(player: Player) {
-    player.steel -= 1;
+    player.deductResource(Resources.STEEL, 1);
     player.addResourceTo(this, 2);
     return undefined;
   }

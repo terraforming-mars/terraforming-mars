@@ -10,6 +10,7 @@ import {Resources} from '../../Resources';
 import {CardRenderer} from '../render/CardRenderer';
 import {CardRenderDynamicVictoryPoints} from '../render/CardRenderDynamicVictoryPoints';
 import {Size} from '../render/Size';
+import {Units} from '../../Units';
 
 export class AsteroidDeflectionSystem extends Card implements IActionCard, IProjectCard, IResourceCard {
   constructor() {
@@ -19,6 +20,7 @@ export class AsteroidDeflectionSystem extends Card implements IActionCard, IProj
       tags: [Tags.SPACE, Tags.EARTH, Tags.BUILDING],
       cost: 13,
       resourceType: ResourceType.ASTEROID,
+      productionBox: Units.of({energy: -1}),
 
       metadata: {
         cardNumber: 'X14',

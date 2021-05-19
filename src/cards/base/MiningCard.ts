@@ -52,6 +52,7 @@ export abstract class MiningCard extends Card implements IProjectCard {
       }
       return result;
     }
+
     private getTileType(bonus: SpaceBonus.STEEL | SpaceBonus.TITANIUM): TileType {
       if (this.isAres()) {
         return bonus === SpaceBonus.STEEL ? TileType.MINING_STEEL_BONUS : TileType.MINING_TITANIUM_BONUS;
@@ -61,18 +62,23 @@ export abstract class MiningCard extends Card implements IProjectCard {
       }
       return TileType.MINING_AREA;
     }
+
+    public produce(player: Player) {
+      if (this.bonusResource === undefined) {
+        return;
+      }
+      player.addProduction(this.bonusResource, 1, {log: true});
+    }
+
     public play(player: Player): SelectSpace {
-      return new SelectSpace(this.getSelectTitle(), this.getAvailableSpaces(player), (foundSpace: ISpace) => {
-        let bonus = SpaceBonus.STEEL;
-        let resource = Resources.STEEL;
-        if (foundSpace.bonus.includes(SpaceBonus.TITANIUM) === true) {
-          bonus = SpaceBonus.TITANIUM;
-          resource = Resources.TITANIUM;
-        }
-        player.game.addTile(player, foundSpace.spaceType, foundSpace, {tileType: this.getTileType(bonus)});
-        foundSpace.adjacency = this.getAdjacencyBonus(bonus);
-        player.addProduction(resource, 1, {log: true});
-        this.bonusResource = resource;
+      return new SelectSpace(this.getSelectTitle(), this.getAvailableSpaces(player), (space: ISpace) => {
+        const grantTitanium = space.bonus.includes(SpaceBonus.TITANIUM);
+        this.bonusResource = grantTitanium ? Resources.TITANIUM : Resources.STEEL;
+        this.produce(player);
+
+        const spaceBonus = grantTitanium ? SpaceBonus.TITANIUM : SpaceBonus.STEEL;
+        player.game.addTile(player, space.spaceType, space, {tileType: this.getTileType(spaceBonus)});
+        space.adjacency = this.getAdjacencyBonus(spaceBonus);
         return undefined;
       });
     }

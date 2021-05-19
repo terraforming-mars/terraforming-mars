@@ -10,6 +10,7 @@ import {CardName} from '../../CardName';
 import {CardType} from '../CardType';
 import {CardRenderer} from '../render/CardRenderer';
 import {Size} from '../render/Size';
+import {Units} from '../../Units';
 
 export class Factorum extends Card implements IActionCard, CorporationCard {
   constructor() {
@@ -18,6 +19,7 @@ export class Factorum extends Card implements IActionCard, CorporationCard {
       name: CardName.FACTORUM,
       tags: [Tags.ENERGY, Tags.BUILDING],
       startingMegaCredits: 37,
+      productionBox: Units.of({steel: 1}),
 
       metadata: {
         cardNumber: 'R22',

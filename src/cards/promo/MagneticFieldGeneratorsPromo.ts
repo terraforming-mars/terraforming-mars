@@ -12,6 +12,7 @@ import {PartyHooks} from '../../turmoil/parties/PartyHooks';
 import {PartyName} from '../../turmoil/parties/PartyName';
 import {REDS_RULING_POLICY_COST} from '../../constants';
 import {CardRenderer} from '../render/CardRenderer';
+import {Units} from '../../Units';
 
 export class MagneticFieldGeneratorsPromo extends Card implements IProjectCard {
   constructor() {
@@ -20,6 +21,7 @@ export class MagneticFieldGeneratorsPromo extends Card implements IProjectCard {
       name: CardName.MAGNETIC_FIELD_GENERATORS_PROMO,
       tags: [Tags.BUILDING],
       cost: 22,
+      productionBox: Units.of({energy: -4, plants: 2}),
 
       metadata: {
         cardNumber: 'X33',

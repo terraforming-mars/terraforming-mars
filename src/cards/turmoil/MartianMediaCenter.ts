@@ -10,6 +10,7 @@ import {SelectHowToPayDeferred} from '../../deferredActions/SelectHowToPayDeferr
 import {SendDelegateToArea} from '../../deferredActions/SendDelegateToArea';
 import {CardRequirements} from '../CardRequirements';
 import {CardRenderer} from '../render/CardRenderer';
+import {Units} from '../../Units';
 
 export class MartianMediaCenter extends Card implements IProjectCard {
   constructor() {
@@ -18,6 +19,7 @@ export class MartianMediaCenter extends Card implements IProjectCard {
       name: CardName.MARTIAN_MEDIA_CENTER,
       tags: [Tags.BUILDING],
       cost: 7,
+      productionBox: Units.of({megacredits: 2}),
 
       requirements: CardRequirements.builder((b) => b.party(PartyName.MARS)),
       metadata: {

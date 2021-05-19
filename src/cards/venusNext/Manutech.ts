@@ -6,6 +6,7 @@ import {Card} from '../Card';
 import {CardName} from '../../CardName';
 import {CardType} from '../CardType';
 import {CardRenderer} from '../render/CardRenderer';
+import {Units} from '../../Units';
 
 export class Manutech extends Card implements CorporationCard {
   constructor() {
@@ -14,6 +15,7 @@ export class Manutech extends Card implements CorporationCard {
       tags: [Tags.BUILDING],
       startingMegaCredits: 35,
       cardType: CardType.CORPORATION,
+      productionBox: Units.of({steel: 1}),
 
       metadata: {
         cardNumber: 'R23',

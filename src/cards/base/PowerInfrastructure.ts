@@ -39,7 +39,7 @@ export class PowerInfrastructure extends Card implements IActionCard, IProjectCa
       'Select amount of energy to spend',
       'Spend energy',
       (amount: number) => {
-        player.addResource(Resources.ENERGY, -amount);
+        player.deductResource(Resources.ENERGY, amount);
         player.addResource(Resources.MEGACREDITS, amount, {log: true});
         return undefined;
       },

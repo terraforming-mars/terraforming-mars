@@ -9,6 +9,7 @@ import {Resources} from '../../Resources';
 import {ICard} from '../ICard';
 import {CardRenderer} from '../render/CardRenderer';
 import {Size} from '../render/Size';
+import {Units} from '../../Units';
 
 export class RoboticWorkforce extends Card implements IProjectCard {
   constructor() {
@@ -39,11 +40,11 @@ export class RoboticWorkforce extends Card implements IProjectCard {
       return player.game.someoneHasResourceProduction(Resources.HEAT, 2);
     }
 
-    if (card.productionBox !== undefined) {
-      return player.canAdjustProduction(card.productionBox);
-    }
+    if (card.produce !== undefined) return true;
 
-    return false;
+    if (card.productionBox === undefined || card.productionBox === Units.EMPTY) return false;
+
+    return player.canAdjustProduction(card.productionBox);
   }
 
   private getAvailableCards(player: Player): Array<ICard> {

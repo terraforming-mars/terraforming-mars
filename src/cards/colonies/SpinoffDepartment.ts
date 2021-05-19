@@ -6,6 +6,7 @@ import {CardName} from '../../CardName';
 import {Resources} from '../../Resources';
 import {CardRenderer} from '../render/CardRenderer';
 import {Card} from '../Card';
+import {Units} from '../../Units';
 
 export class SpinoffDepartment extends Card implements IProjectCard {
   constructor() {
@@ -14,6 +15,7 @@ export class SpinoffDepartment extends Card implements IProjectCard {
       tags: [Tags.BUILDING],
       name: CardName.SPINOFF_DEPARTMENT,
       cardType: CardType.ACTIVE,
+      productionBox: Units.of({megacredits: 2}),
 
       metadata: {
         cardNumber: 'C41',

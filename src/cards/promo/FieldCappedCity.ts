@@ -8,6 +8,7 @@ import {ISpace} from '../../boards/ISpace';
 import {Resources} from '../../Resources';
 import {CardName} from '../../CardName';
 import {CardRenderer} from '../render/CardRenderer';
+import {Units} from '../../Units';
 
 export class FieldCappedCity extends Card implements IProjectCard {
   constructor() {
@@ -16,7 +17,7 @@ export class FieldCappedCity extends Card implements IProjectCard {
       name: CardName.FIELD_CAPPED_CITY,
       tags: [Tags.CITY, Tags.BUILDING, Tags.ENERGY],
       cost: 29,
-
+      productionBox: Units.of({energy: 1, megacredits: 2}),
       metadata: {
         cardNumber: 'X21',
         description: 'Increase your M€ production 2 steps, increase your energy production 1 step, gain 3 plants, and place a city tile.',

@@ -9,6 +9,7 @@ import {Card} from '../Card';
 import {CardName} from '../../CardName';
 import {CardType} from '../CardType';
 import {CardRenderer} from '../render/CardRenderer';
+import {Units} from '../../Units';
 
 export class UtopiaInvest extends Card implements IActionCard, CorporationCard {
   constructor() {
@@ -17,6 +18,7 @@ export class UtopiaInvest extends Card implements IActionCard, CorporationCard {
       tags: [Tags.BUILDING],
       startingMegaCredits: 40,
       cardType: CardType.CORPORATION,
+      productionBox: Units.of({steel: 1, titanium: 1}),
 
       metadata: {
         cardNumber: 'R33',

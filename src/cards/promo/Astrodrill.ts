@@ -56,33 +56,27 @@ export class Astrodrill extends Card implements IActionCard, CorporationCard {
       const gainStandardResource = new SelectOption('Gain a standard resource', 'Gain', () => {
         return new OrOptions(
           new SelectOption('Gain 1 titanium', 'Gain titanium', () => {
-            player.titanium += 1;
-            LogHelper.logGainStandardResource(player, Resources.TITANIUM);
+            player.addResource(Resources.TITANIUM, 1, {log: true});
             return undefined;
           }),
           new SelectOption('Gain 1 steel', 'Gain steel', () => {
-            player.steel += 1;
-            LogHelper.logGainStandardResource(player, Resources.STEEL);
+            player.addResource(Resources.STEEL, 1, {log: true});
             return undefined;
           }),
           new SelectOption('Gain 1 plant', 'Gain plant', () => {
-            player.plants += 1;
-            LogHelper.logGainStandardResource(player, Resources.PLANTS);
+            player.addResource(Resources.PLANTS, 1, {log: true});
             return undefined;
           }),
           new SelectOption('Gain 1 energy', 'Gain energy', () => {
-            player.energy += 1;
-            LogHelper.logGainStandardResource(player, Resources.ENERGY);
+            player.addResource(Resources.ENERGY, 1, {log: true});
             return undefined;
           }),
           new SelectOption('Gain 1 heat', 'Gain heat', () => {
-            player.heat += 1;
-            LogHelper.logGainStandardResource(player, Resources.HEAT);
+            player.addResource(Resources.HEAT, 1, {log: true});
             return undefined;
           }),
           new SelectOption('Gain 1 M€', 'Gain M€', () => {
-            player.megaCredits += 1;
-            LogHelper.logGainStandardResource(player, Resources.MEGACREDITS);
+            player.addResource(Resources.MEGACREDITS, 1, {log: true});
             return undefined;
           }),
         );

@@ -6,7 +6,6 @@ import {SelectOption} from '../../inputs/SelectOption';
 import {Resources} from '../../Resources';
 import {Card} from '../Card';
 import {CardName} from '../../CardName';
-import {LogHelper} from '../../LogHelper';
 import {CardType} from '../CardType';
 import {CardRenderer} from '../render/CardRenderer';
 
@@ -46,7 +45,8 @@ export class RobinsonIndustries extends Card implements IActionCard, Corporation
 
     [Resources.MEGACREDITS, Resources.STEEL, Resources.TITANIUM, Resources.PLANTS, Resources.ENERGY, Resources.HEAT].forEach((resource) => {
       const option = new SelectOption('Increase ' + resource + ' production 1 step', 'Select', () => {
-        this.increaseAndLogProduction(player, resource);
+        player.deductResource(Resources.MEGACREDITS, 4);
+        player.addProduction(resource, 1, {log: true});
         return undefined;
       });
 
@@ -60,11 +60,5 @@ export class RobinsonIndustries extends Card implements IActionCard, Corporation
     const result = new OrOptions();
     result.options = lowest;
     return result;
-  }
-
-  private increaseAndLogProduction(player: Player, resource: Resources) {
-    player.deductResource(Resources.MEGACREDITS, 4);
-    player.addProduction(resource, 1);
-    LogHelper.logGainProduction(player, resource);
   }
 }

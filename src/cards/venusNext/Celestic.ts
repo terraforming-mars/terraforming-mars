@@ -6,7 +6,6 @@ import {IActionCard, ICard, IResourceCard} from '../ICard';
 import {SelectCard} from '../../inputs/SelectCard';
 import {Card} from '../Card';
 import {CardName} from '../../CardName';
-import {LogHelper} from '../../LogHelper';
 import {CardType} from '../CardType';
 import {CardRenderer} from '../render/CardRenderer';
 import {CardRenderDynamicVictoryPoints} from '../render/CardRenderDynamicVictoryPoints';
@@ -77,8 +76,7 @@ export class Celestic extends Card implements IActionCard, CorporationCard, IRes
     public action(player: Player) {
       const floaterCards = player.getResourceCards(ResourceType.FLOATER);
       if (floaterCards.length === 1) {
-        player.addResourceTo(this, 1);
-        LogHelper.logAddResource(player, floaterCards[0]);
+        player.addResourceTo(this, {qty: 1, log: true});
         return undefined;
       }
 

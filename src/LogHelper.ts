@@ -2,7 +2,6 @@ import {CardName} from './CardName';
 import {Game} from './Game';
 import {Player} from './Player';
 import {ICard} from './cards/ICard';
-import {Resources} from './Resources';
 import {ISpace} from './boards/ISpace';
 import {TileType} from './TileType';
 import {Colony} from './colonies/Colony';
@@ -28,14 +27,6 @@ export class LogHelper {
 
     player.game.log('${0} removed ${1} ${2} from ${3} to ${4}', (b) =>
       b.player(player).number(qty).string(resourceType).card(card).string(effect));
-  }
-
-  static logGainStandardResource(player: Player, resource: Resources, qty: number = 1) {
-    player.game.log('${0} gained ${1} ${2}', (b) => b.player(player).number(qty).string(resource));
-  }
-
-  static logGainProduction(player: Player, resource: Resources, qty: number = 1) {
-    player.game.log('${0}\'s ${1} production increased by ${2}', (b) => b.player(player).string(resource).number(qty));
   }
 
   static logTilePlacement(player: Player, space: ISpace, tileType: TileType) {

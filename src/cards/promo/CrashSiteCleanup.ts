@@ -5,7 +5,6 @@ import {CardType} from '../CardType';
 import {CardName} from '../../CardName';
 import {SelectOption} from '../../inputs/SelectOption';
 import {OrOptions} from '../../inputs/OrOptions';
-import {LogHelper} from '../../LogHelper';
 import {Resources} from '../../Resources';
 import {CardRequirements} from '../CardRequirements';
 import {CardRenderer} from '../render/CardRenderer';
@@ -34,8 +33,7 @@ export class CrashSiteCleanup extends Card implements IProjectCard {
       'Gain 1 titanium',
       'Gain titanium',
       () => {
-        player.titanium++;
-        LogHelper.logGainStandardResource(player, Resources.TITANIUM);
+        player.addResource(Resources.TITANIUM, 1, {log: true});
         return undefined;
       },
     );
@@ -44,8 +42,7 @@ export class CrashSiteCleanup extends Card implements IProjectCard {
       'Gain 2 steel',
       'Gain steel',
       () => {
-        player.steel += 2;
-        LogHelper.logGainStandardResource(player, Resources.STEEL, 2);
+        player.addResource(Resources.STEEL, 2, {log: true});
         return undefined;
       },
     );

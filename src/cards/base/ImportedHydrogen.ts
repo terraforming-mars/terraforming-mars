@@ -10,7 +10,6 @@ import {SelectCard} from '../../inputs/SelectCard';
 import {PlayerInput} from '../../PlayerInput';
 import {ResourceType} from '../../ResourceType';
 import {CardName} from '../../CardName';
-import {LogHelper} from '../../LogHelper';
 import {Resources} from '../../Resources';
 import {MAX_OCEAN_TILES, REDS_RULING_POLICY_COST} from '../../constants';
 import {PartyHooks} from '../../turmoil/parties/PartyHooks';
@@ -55,9 +54,7 @@ export class ImportedHydrogen extends Card implements IProjectCard {
     const availableAnimalCards = player.getResourceCards(ResourceType.ANIMAL);
 
     const gainPlants = function() {
-      const qty = 3;
-      player.plants += qty;
-      LogHelper.logGainStandardResource(player, Resources.PLANTS, qty);
+      player.addResource(Resources.PLANTS, 3, {log: true});
       player.game.defer(new PlaceOceanTile(player));
       return undefined;
     };

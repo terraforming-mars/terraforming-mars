@@ -21,7 +21,7 @@ describe('AerospaceMission', function() {
     const redPlayer = TestPlayers.RED.newPlayer();
     const gameOptions = TestingUtils.setCustomGameOptions({coloniesExtension: true});
     game = Game.newInstance('foobar', [player, redPlayer], player, gameOptions);
-    // Ignore randomly generated colonies, and add some colonies that can be built independently on cards
+    // Ignore randomly generated colonies, and add some colonies that can be built independently of cards
     game.colonies = [new Callisto(), new Ceres(), new Io(), new Luna()];
   })
 

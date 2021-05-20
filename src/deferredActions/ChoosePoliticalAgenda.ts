@@ -6,14 +6,13 @@ import {PlayerInput} from '../PlayerInput';
 import {DeferredAction, Priority} from './DeferredAction';
 import {IParty} from '../turmoil/parties/IParty';
 import {Agenda} from '../turmoil/PoliticalAgendas';
-import {Turmoil} from '../turmoil/Turmoil';
 
 export class ChoosePoliticalAgenda implements DeferredAction {
   public priority = Priority.DEFAULT;
   constructor(
     public player: Player,
     public party: IParty,
-    public turmoil: Turmoil,
+    public cb: (agenda: Agenda) => void,
   ) {}
 
   public execute() : PlayerInput {
@@ -36,8 +35,7 @@ export class ChoosePoliticalAgenda implements DeferredAction {
     orPolicies.title = 'Select a ' + this.party.name + ' policy.';
 
     const cb = () => {
-      this.turmoil.politicalAgendasData.currentAgenda = agenda;
-      this.turmoil.onAgendaSelected(this.player.game);
+      this.cb(agenda);
       return undefined;
     };
 

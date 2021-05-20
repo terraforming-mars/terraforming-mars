@@ -76,7 +76,7 @@ export class TestingUtils {
 
   public static setRulingPartyAndRulingPolicy(game: Game, turmoil: Turmoil, party: IParty, policyId: TurmoilPolicy) {
     turmoil.rulingParty = party;
-    turmoil.politicalAgendasData.currentAgenda = {bonusId: party.bonuses[0].id, policyId: policyId};
+    turmoil.politicalAgendasData.agendas.set(party.name, {bonusId: party.bonuses[0].id, policyId: policyId});
     game.phase = Phase.ACTION;
   };
 

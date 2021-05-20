@@ -1,7 +1,7 @@
 import Vue from 'vue';
 import {PartyName} from '../turmoil/parties/PartyName';
 import {$t} from '../directives/i18n';
-import {PoliticalAgendasModel, TurmoilModel} from '../models/TurmoilModel';
+import {TurmoilModel} from '../models/TurmoilModel';
 import {BonusId} from '../turmoil/Bonus';
 import {PolicyId} from '../turmoil/Policy';
 import {GlobalEvent} from './GlobalEvent';
@@ -160,28 +160,28 @@ export const Turmoil = Vue.component('turmoil', {
       }
       return party.toLowerCase().split(' ').join('_');
     },
-    getBonus: function(party: PartyName, politicalAgendas: PoliticalAgendasModel | undefined): string {
+    getBonus: function(party: PartyName | undefined): string {
+      const politicalAgendas = this.turmoil.politicalAgendas;
       let bonusId: BonusId | undefined = undefined;
-      if (politicalAgendas?.staticAgendas !== undefined) {
-        const staticAgendas = politicalAgendas.staticAgendas;
+      if (politicalAgendas !== undefined) {
         switch (party) {
         case PartyName.MARS:
-          bonusId = staticAgendas.marsFirst.bonusId;
+          bonusId = politicalAgendas.marsFirst.bonusId;
           break;
         case PartyName.SCIENTISTS:
-          bonusId = staticAgendas.scientists.bonusId;
+          bonusId = politicalAgendas.scientists.bonusId;
           break;
         case PartyName.UNITY:
-          bonusId = staticAgendas.unity.bonusId;
+          bonusId = politicalAgendas.unity.bonusId;
           break;
         case PartyName.KELVINISTS:
-          bonusId = staticAgendas.kelvinists.bonusId;
+          bonusId = politicalAgendas.kelvinists.bonusId;
           break;
         case PartyName.REDS:
-          bonusId = staticAgendas.reds.bonusId;
+          bonusId = politicalAgendas.reds.bonusId;
           break;
         case PartyName.GREENS:
-          bonusId = staticAgendas.greens.bonusId;
+          bonusId = politicalAgendas.greens.bonusId;
           break;
         }
       }
@@ -191,33 +191,29 @@ export const Turmoil = Vue.component('turmoil', {
       }
       return `No ruling Bonus`;
     },
-    getPolicy: function(party: PartyName | undefined, politicalAgendas: PoliticalAgendasModel | undefined, useCurrentAgenda: boolean = false) {
+    getPolicy: function(partyName: PartyName | undefined) {
+      const politicalAgendas = this.turmoil.politicalAgendas;
       let policyId: PolicyId | undefined = undefined;
-      if (useCurrentAgenda) {
-        policyId = politicalAgendas?.currentAgenda.policyId;
-      } else {
-        if (politicalAgendas?.staticAgendas !== undefined) {
-          const staticAgendas = politicalAgendas.staticAgendas;
-          switch (party) {
-          case PartyName.MARS:
-            policyId = staticAgendas.marsFirst.policyId;
-            break;
-          case PartyName.SCIENTISTS:
-            policyId = staticAgendas.scientists.policyId;
-            break;
-          case PartyName.UNITY:
-            policyId = staticAgendas.unity.policyId;
-            break;
-          case PartyName.KELVINISTS:
-            policyId = staticAgendas.kelvinists.policyId;
-            break;
-          case PartyName.REDS:
-            policyId = staticAgendas.reds.policyId;
-            break;
-          case PartyName.GREENS:
-            policyId = staticAgendas.greens.policyId;
-            break;
-          }
+      if (politicalAgendas !== undefined) {
+        switch (partyName) {
+        case PartyName.MARS:
+          policyId = politicalAgendas.marsFirst.policyId;
+          break;
+        case PartyName.SCIENTISTS:
+          policyId = politicalAgendas.scientists.policyId;
+          break;
+        case PartyName.UNITY:
+          policyId = politicalAgendas.unity.policyId;
+          break;
+        case PartyName.KELVINISTS:
+          policyId = politicalAgendas.kelvinists.policyId;
+          break;
+        case PartyName.REDS:
+          policyId = politicalAgendas.reds.policyId;
+          break;
+        case PartyName.GREENS:
+          policyId = politicalAgendas.greens.policyId;
+          break;
         }
       }
 
@@ -256,7 +252,7 @@ export const Turmoil = Vue.component('turmoil', {
           <div class="dominant-party-name">
             <div :class="'party-name party-name--'+partyNameToCss(turmoil.ruling)" v-i18n>{{ turmoil.ruling }}</div>
           </div>
-          <div class="dominant-party-bonus" v-html="getPolicy(turmoil.ruling, turmoil.politicalAgendas, true)"></div>
+          <div class="dominant-party-bonus" v-html="getPolicy(turmoil.ruling)"></div>
           <div class="policy-user-cubes">
             <template v-for="n in turmoil.policyActionUsers">
               <div v-if="n.turmoilPolicyActionUsed" :class="'policy-use-marker board-cube--'+n.color"></div>
@@ -276,7 +272,7 @@ export const Turmoil = Vue.component('turmoil', {
             <div v-show="isVisible()" class='policies-global'>
               <div v-for="party in turmoil.parties" class='policy-block'>
                 <div :class="'party-name party-name--'+partyNameToCss(party.name)" v-i18n>{{party.name}}</div>
-                <div class="policy-bonus" v-html="getPolicy(party.name, turmoil.politicalAgendas)"></div>
+                <div class="policy-bonus" v-html="getPolicy(party.name)"></div>
               </div>
             </div>
           </div>
@@ -299,7 +295,7 @@ export const Turmoil = Vue.component('turmoil', {
             </div>
             <div :class="'party-name party-name--'+partyNameToCss(party.name)" v-i18n>{{party.name}}</div>
             <div class="party-bonus">
-              <span v-html="getBonus(party.name, turmoil.politicalAgendas)"></span>
+              <span v-html="getBonus(party.name)"></span>
             </div>
           </div>
         </div>

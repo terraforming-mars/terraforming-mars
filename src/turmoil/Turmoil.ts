@@ -34,11 +34,6 @@ export const ALL_PARTIES: Array<IPartyFactory> = [
 ];
 
 const UNINITIALIZED_POLITICAL_AGENDAS_DATA: PoliticalAgendasData = {
-  currentAgenda: {
-    bonusId: 'none',
-    policyId: 'none',
-  },
-  staticAgendas: undefined,
   agendas: new Map(),
   agendaStyle: AgendaStyle.CHAIRMAN,
 };
@@ -94,7 +89,7 @@ export class Turmoil implements ISerializable<SerializedTurmoil> {
         turmoil.delegateReserve.push('NEUTRAL');
       }
 
-      turmoil.politicalAgendasData = PoliticalAgendas.newInstance(agendaStyle, turmoil.parties, turmoil.rulingParty);
+      turmoil.politicalAgendasData = PoliticalAgendas.newInstance(agendaStyle, turmoil.parties);
       // Note: this call relies on an instance of Game that will not be fully formed.
       // TODO(kberg): split newInstance into create/set-up so this can be done once the whole thing is ready.
       turmoil.onAgendaSelected(game);
@@ -333,7 +328,7 @@ export class Turmoil implements ISerializable<SerializedTurmoil> {
       const rulingParty = this.rulingParty;
 
       // Resolve Ruling Bonus
-      const bonusId = this.politicalAgendasData.currentAgenda.bonusId;
+      const bonusId = PoliticalAgendas.currentAgenda(this).bonusId;
       const bonus = rulingParty.bonuses.find((b) => b.id === bonusId);
       if (bonus === undefined) {
         throw new Error(`Bonus id ${bonusId} not found in party ${rulingParty.name}`);
@@ -341,7 +336,7 @@ export class Turmoil implements ISerializable<SerializedTurmoil> {
       game.log('The ruling bonus is: ${0}', (b) => b.string(bonus.description));
       bonus.grant(game);
 
-      const policyId = this.politicalAgendasData.currentAgenda.policyId;
+      const policyId = PoliticalAgendas.currentAgenda(this).policyId;
       const policy = rulingParty.policies.find((p) => p.id === policyId);
       if (policy === undefined) {
         throw new Error(`Policy id ${policyId} not found in party ${rulingParty.name}`);

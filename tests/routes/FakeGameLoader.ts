@@ -12,6 +12,9 @@ export class FakeGameLoader implements IGameLoader {
         return {id: id, participants: []};
       });
   }
+  getLoadedGames(): ReadonlyMap<string, Game | undefined> {
+    throw new Error('Method not implemented.');
+  }
   getByGameId(gameId: string, _bypassCache: boolean, cb: (game: Game | undefined) => void): void {
     cb(this.games.get(gameId));
   }
@@ -27,6 +30,9 @@ export class FakeGameLoader implements IGameLoader {
     cb(undefined);
   }
   getBySpectatorId(_spectatorId: string, _cb: (game: Game | undefined) => void): void {
+    throw new Error('Method not implemented.');
+  }
+  remove(_gameId: string): void {
     throw new Error('Method not implemented.');
   }
   restoreGameAt(_gameId: string, _saveId: number, _cb: (game: Game | undefined) => void): void {

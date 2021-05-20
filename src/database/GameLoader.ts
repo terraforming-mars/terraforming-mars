@@ -47,6 +47,10 @@ export class GameLoader implements IGameLoader {
 
   private constructor() {}
 
+  public getLoadedGames(): ReadonlyMap<GameId, Game | undefined> {
+    return this.games;
+  }
+
   public reset(): void {
     this.games.clear();
     this.participantIds.clear();
@@ -69,6 +73,10 @@ export class GameLoader implements IGameLoader {
     for (const player of game.getPlayers()) {
       this.participantIds.set(player.id, game.id);
     }
+  }
+
+  public remove(gameId: GameId): void {
+    this.games.set(gameId, undefined);
   }
 
   public getLoadedGameIds(): Array<{id: GameId, participants: Array<SpectatorId | PlayerId>}> {

@@ -19,6 +19,7 @@ import {Database} from './database/Database';
 import {GameHandler} from './routes/Game';
 import {GameLoader} from './database/GameLoader';
 import {GamesOverview} from './routes/GamesOverview';
+import {GarbageCollector} from './database/GarbageCollector';
 import {IHandler} from './routes/IHandler';
 import {Load} from './routes/Load';
 import {LoadGame} from './routes/LoadGame';
@@ -130,6 +131,9 @@ try {
   console.error('Cannot connect to database:', err);
   throw err;
 }
+
+// Start garbage collector
+new GarbageCollector(GameLoader.getInstance()).start();
 
 console.log('version 0.X');
 

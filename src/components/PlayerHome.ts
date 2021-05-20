@@ -213,6 +213,7 @@ export const PlayerHome = Vue.component('player-home', {
               :oceans = "player.game.oceans"
               :venus = "player.game.venusScaleLevel"
               :turmoil = "player.game.turmoil"
+              :moonData="player.game.moon"
               :gameOptions = "player.game.gameOptions"
               :playerNumber = "player.players.length"
               :lastSoloGeneration = "player.game.lastSoloGeneration">

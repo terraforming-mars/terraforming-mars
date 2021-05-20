@@ -2,12 +2,15 @@ import Vue from 'vue';
 import {Color} from '../Color';
 import {preferences, PreferencesManager} from './PreferencesManager';
 import {LANGUAGES} from '../constants';
-import {MAX_OCEAN_TILES, MAX_TEMPERATURE, MAX_OXYGEN_LEVEL, MAX_VENUS_SCALE} from '../constants';
 import {TurmoilModel} from '../models/TurmoilModel';
 import {PartyName} from '../turmoil/parties/PartyName';
 import {GameSetupDetail} from './GameSetupDetail';
 import {GameOptionsModel} from '../models/GameOptionsModel';
 import {TranslateMixin} from './TranslateMixin';
+import {GlobalParameterValue} from './GlobalParameterValue';
+import {MoonGlobalParameterValue} from './MoonGlobalParameterValue';
+import {GlobalParameter} from '../GlobalParameter';
+import {MoonModel} from '../models/MoonModel';
 
 export const Sidebar = Vue.component('sidebar', {
   props: {
@@ -41,6 +44,9 @@ export const Sidebar = Vue.component('sidebar', {
     venus: {
       type: Number,
     },
+    moonData: {
+      type: Object as () => MoonModel,
+    },
     turmoil: {
       type: Object as () => TurmoilModel || undefined,
     },
@@ -50,6 +56,8 @@ export const Sidebar = Vue.component('sidebar', {
   },
   components: {
     'game-setup-detail': GameSetupDetail,
+    'global-parameter-value': GlobalParameterValue,
+    'moon-global-parameter-value': MoonGlobalParameterValue,
   },
   mixins: [TranslateMixin],
   data: function() {
@@ -73,6 +81,7 @@ export const Sidebar = Vue.component('sidebar', {
       'hide_discount_on_cards': false as boolean | unknown[],
       'learner_mode': true as boolean | unknown[],
       'hide_animated_sidebar': false as boolean | unknown[],
+      'globalParameter': GlobalParameter,
     };
   },
   methods: {
@@ -141,34 +150,6 @@ export const Sidebar = Vue.component('sidebar', {
     getGenMarker: function(): string {
       return `${this.generation}`;
     },
-    getOceanCount: function(): string {
-      if (this.oceans === MAX_OCEAN_TILES) {
-        return '<img src="/assets/misc/checkmark.png" class="checkmark" :alt="$t(\'Completed!\')">';
-      } else {
-        return `${this.oceans}`;
-      }
-    },
-    getTemperatureCount: function(): string {
-      if (this.temperature === MAX_TEMPERATURE) {
-        return '<img src="/assets/misc/checkmark.png" class="checkmark" :alt="$t(\'Completed!\')">';
-      } else {
-        return `${this.temperature}`;
-      }
-    },
-    getOxygenCount: function(): string {
-      if (this.oxygen === MAX_OXYGEN_LEVEL) {
-        return '<img src="/assets/misc/checkmark.png" class="checkmark" :alt="$t(\'Completed!\')">';
-      } else {
-        return `${this.oxygen}`;
-      }
-    },
-    getVenusCount: function(): string {
-      if (this.venus === MAX_VENUS_SCALE) {
-        return '<img src="/assets/misc/checkmark.png" class="checkmark" :alt="$t(\'Completed!\')">';
-      } else {
-        return `${this.venus}`;
-      }
-    },
     rulingPartyToCss: function(): string {
       if (this.turmoil.ruling === undefined) {
         console.warn('no party provided');
@@ -202,28 +183,22 @@ export const Sidebar = Vue.component('sidebar', {
     <div :class="'party-name party-name-indicator party-name--'+rulingPartyToCss()"> {{ getRulingParty() }}</div>
   </div>
   <div class="global_params">
-    <div class="temperature-tile"></div>
-    <div class="global_params_value" v-html="getTemperatureCount()"></div>
-    <div class="oxygen-tile"></div>
-    <div class="global_params_value" v-html="getOxygenCount()"></div>
-    <div class="ocean-tile"></div>
-    <div class="global_params_value" v-html="getOceanCount()"></div>
-    <div v-if="gameOptions.venusNextExtension">
-      <div class="venus-tile"></div>
-      <div class="global_params_value" v-html="getVenusCount()"></div>
-    </div>
+    <global-parameter-value :param="this.globalParameter.TEMPERATURE" :value="this.temperature"></global-parameter-value>
+    <global-parameter-value :param="this.globalParameter.OXYGEN" :value="this.oxygen"></global-parameter-value>
+    <global-parameter-value :param="this.globalParameter.OCEANS" :value="this.oceans"></global-parameter-value>
+    <global-parameter-value v-if="gameOptions.venusNextExtension" :param="this.globalParameter.VENUS" :value="this.venus"></global-parameter-value>
+    <moon-global-parameter-value v-if="gameOptions.moonExpansion" :moonData="this.moonData"></moon-global-parameter-value>
   </div>
-
   <div class="preferences_item preferences_player">
     <div :class="getPlayerColorCubeClass()+' player_bg_color_' + player_color"></div>
   </div>
 
-  <a  href="#board">
+  <a href="#board">
       <div class="preferences_item preferences_item_shortcut">
           <i class="preferences_icon preferences_icon--board"></i>
       </div>
   </a>
-  <a  href="#actions">
+  <a href="#actions">
       <div class="preferences_item preferences_item_shortcut">
           <i class="preferences_icon preferences_icon--actions"></i>
       </div>

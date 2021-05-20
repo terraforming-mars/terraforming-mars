@@ -10,7 +10,6 @@ import {CardName} from '../../CardName';
 import {PartyHooks} from '../../turmoil/parties/PartyHooks';
 import {PartyName} from '../../turmoil/parties/PartyName';
 import {SelectHowToPayDeferred} from '../../deferredActions/SelectHowToPayDeferred';
-import {LogHelper} from '../../LogHelper';
 import {CardRequirements} from '../CardRequirements';
 import {CardRenderer} from '../render/CardRenderer';
 import {Card} from '../Card';
@@ -79,8 +78,7 @@ export class RotatorImpacts extends Card implements IActionCard, IResourceCard {
 
   private addResource(player: Player) {
     player.game.defer(new SelectHowToPayDeferred(player, 6, {canUseTitanium: true, title: 'Select how to pay for action'}));
-    player.addResourceTo(this);
-    LogHelper.logAddResource(player, this);
+    player.addResourceTo(this, {log: true});
     return undefined;
   }
 

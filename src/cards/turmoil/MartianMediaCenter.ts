@@ -10,6 +10,7 @@ import {SelectHowToPayDeferred} from '../../deferredActions/SelectHowToPayDeferr
 import {SendDelegateToArea} from '../../deferredActions/SendDelegateToArea';
 import {CardRequirements} from '../CardRequirements';
 import {CardRenderer} from '../render/CardRenderer';
+import {Units} from '../../Units';
 
 export class MartianMediaCenter extends Card implements IProjectCard {
   constructor() {
@@ -18,6 +19,7 @@ export class MartianMediaCenter extends Card implements IProjectCard {
       name: CardName.MARTIAN_MEDIA_CENTER,
       tags: [Tags.BUILDING],
       cost: 7,
+      productionBox: Units.of({megacredits: 2}),
 
       requirements: CardRequirements.builder((b) => b.party(PartyName.MARS)),
       metadata: {
@@ -33,13 +35,6 @@ export class MartianMediaCenter extends Card implements IProjectCard {
         description: 'Requires that Mars First is ruling or that you have 2 delegates there. Increase your M€ production 2 steps.',
       },
     });
-  }
-
-  public canPlay(player: Player): boolean {
-    if (player.game.turmoil !== undefined) {
-      return player.game.turmoil.canPlay(player, PartyName.MARS);
-    }
-    return false;
   }
 
   public play(player: Player) {

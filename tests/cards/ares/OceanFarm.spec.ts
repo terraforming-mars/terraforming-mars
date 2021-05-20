@@ -9,17 +9,17 @@ import {Resources} from '../../../src/Resources';
 import {SpaceType} from '../../../src/SpaceType';
 import {TestPlayers} from '../../TestPlayers';
 
-describe('OceanFarm', function() {
+describe('OceanFarm', () => {
   let card : OceanFarm; let player : Player; let otherPlayer: Player; let game : Game;
 
-  beforeEach(function() {
+  beforeEach(() => {
     card = new OceanFarm();
     player = TestPlayers.BLUE.newPlayer();
     otherPlayer = TestPlayers.RED.newPlayer();
     game = Game.newInstance('foobar', [player, otherPlayer], player, ARES_OPTIONS_NO_HAZARDS);
   });
 
-  it('Can play', function() {
+  it('Can play', () => {
     AresTestHelper.addOcean(game, player);
     expect(card.canPlay(player)).is.false;
 
@@ -33,7 +33,7 @@ describe('OceanFarm', function() {
     expect(card.canPlay(player)).is.true;
   });
 
-  it('Play', function() {
+  it('Play', () => {
     expect(player.getProduction(Resources.HEAT)).eq(0);
     expect(player.getProduction(Resources.PLANTS)).eq(0);
 
@@ -50,8 +50,7 @@ describe('OceanFarm', function() {
     expect(oceanSpace.adjacency).to.deep.eq({bonus: [SpaceBonus.PLANT]});
   });
 
-
-  it('Ocean Farm counts as ocean for adjacency', function() {
+  it('Ocean Farm counts as ocean for adjacency', () => {
     const oceanSpace = AresTestHelper.addOcean(game, player);
     const action = card.play(player);
     action.cb(oceanSpace);
@@ -62,5 +61,25 @@ describe('OceanFarm', function() {
     game.addGreenery(otherPlayer, greenery.id);
 
     expect(otherPlayer.megaCredits).eq(2);
+  });
+
+  it('Placing Ocean Farm does not grant underlying space bonus', () => {
+    const oceanSpace = game.board.spaces.filter((space) => {
+      return space.bonus.length === 1 && space.bonus[0] === SpaceBonus.PLANT && space.spaceType === SpaceType.OCEAN;
+    })[0];
+
+    player.plants = 0;
+    game.addOceanTile(player, oceanSpace.id);
+    expect(player.plants).eq(1);
+
+    const action = card.play(player);
+
+    expect(player.plants).eq(1);
+
+    action.cb(oceanSpace);
+
+    expect(oceanSpace.player).to.eq(player);
+    expect(oceanSpace.tile!.tileType).to.eq(TileType.OCEAN_FARM);
+    expect(player.plants).eq(1);
   });
 });

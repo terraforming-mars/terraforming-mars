@@ -17,7 +17,7 @@ export class AlliedBanks extends PreludeCard {
           b.production((pb) => pb.megacredits(4)).br;
           b.megacredits(3);
         }),
-        description: 'Increase your M€ production 4 steps. Gain 3 MC.',
+        description: 'Increase your M€ production 4 steps. Gain 3 M€.',
       },
     });
   }

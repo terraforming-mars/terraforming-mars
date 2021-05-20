@@ -51,8 +51,7 @@ export class GHGProducingBacteria extends Card implements IActionCard, IProjectC
     }
     public action(player: Player) {
       if (this.resourceCount < 2) {
-        player.addResourceTo(this);
-        LogHelper.logAddResource(player, this);
+        player.addResourceTo(this, {log: true});
         return undefined;
       }
 
@@ -68,8 +67,7 @@ export class GHGProducingBacteria extends Card implements IActionCard, IProjectC
       }
 
       orOptions.options.push(new SelectOption('Add 1 microbe to this card', 'Add microbe', () => {
-        player.addResourceTo(this);
-        LogHelper.logAddResource(player, this);
+        player.addResourceTo(this, {log: true});
         return undefined;
       }));
 

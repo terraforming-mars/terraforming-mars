@@ -4,12 +4,14 @@ import {PreludeCard} from './PreludeCard';
 import {Resources} from '../../Resources';
 import {CardName} from '../../CardName';
 import {CardRenderer} from '../render/CardRenderer';
+import {Units} from '../../Units';
 
 export class DomeFarming extends PreludeCard {
   constructor() {
     super({
       name: CardName.DOME_FARMING,
       tags: [Tags.PLANT, Tags.BUILDING],
+      productionBox: Units.of({megacredits: 2, plants: 1}),
 
       metadata: {
         cardNumber: 'P07',

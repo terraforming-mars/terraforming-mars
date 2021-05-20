@@ -11,6 +11,7 @@ import {Board} from '../../boards/Board';
 import {CardRequirements} from '../CardRequirements';
 import {CardRenderer} from '../render/CardRenderer';
 import {Card} from '../Card';
+import {Units} from '../../Units';
 
 export class GreatDamPromo extends Card implements IProjectCard {
   constructor() {
@@ -19,6 +20,7 @@ export class GreatDamPromo extends Card implements IProjectCard {
       name: CardName.GREAT_DAM_PROMO,
       cost: 15,
       tags: [Tags.ENERGY, Tags.BUILDING],
+      productionBox: Units.of({energy: 2}),
 
       requirements: CardRequirements.builder((b) => b.oceans(4)),
       metadata: {
@@ -33,10 +35,10 @@ export class GreatDamPromo extends Card implements IProjectCard {
   }
 
   public canPlay(player: Player): boolean {
-    const meetsOceanRequirements = super.canPlay(player);
-    const canPlaceTile = this.getAvailableSpaces(player).length > 0;
-
-    return meetsOceanRequirements && canPlaceTile;
+    if (!super.canPlay(player)) {
+      return false;
+    }
+    return this.getAvailableSpaces(player).length > 0;
   }
 
   public play(player: Player) {

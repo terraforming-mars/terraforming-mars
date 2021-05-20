@@ -91,7 +91,7 @@ class KelvinistsPolicy03 implements Policy {
     game.log('${0} used Turmoil Kelvinists action', (b) => b.player(player));
     game.log('${0} spent 6 heat to raise temperature 1 step', (b) => b.player(player));
 
-    player.addResource(Resources.HEAT, -6);
+    player.deductResource(Resources.HEAT, 6);
     game.increaseTemperature(player, 1);
     return undefined;
   }

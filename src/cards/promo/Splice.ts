@@ -10,6 +10,7 @@ import {CardName} from '../../CardName';
 import {CardType} from '../CardType';
 import {CardRenderer} from '../render/CardRenderer';
 import {Size} from '../render/Size';
+import {Resources} from '../../Resources';
 
 export class Splice extends Card implements CorporationCard {
   constructor() {
@@ -22,7 +23,7 @@ export class Splice extends Card implements CorporationCard {
 
       metadata: {
         cardNumber: 'R28',
-        description: 'You start with 44 MC. As your first action, reveal cards until you have revealed a microbe tag. Take it and discard the rest.',
+        description: 'You start with 44 M€. As your first action, reveal cards until you have revealed a microbe tag. Take it and discard the rest.',
         renderData: CardRenderer.builder((b) => {
           b.megacredits(44).nbsp.cards(1).secondaryTag(Tags.MICROBE);
           b.corpBox('effect', (ce) => {
@@ -32,7 +33,7 @@ export class Splice extends Card implements CorporationCard {
               eb.megacredits(2).any.or().microbes(1).any.asterix();
             });
             ce.vSpace();
-            ce.effect('when a microbe tag is played, incl. this, THAT PLAYER gains 2 MC, or adds a microbe to THAT card, and you gain 2 MC.', (eb) => {
+            ce.effect('when a microbe tag is played, incl. this, THAT PLAYER gains 2 M€, or adds a microbe to THAT card, and you gain 2 M€.', (eb) => {
               eb.microbes(1).played.any.startEffect;
               eb.megacredits(2);
             });
@@ -69,18 +70,18 @@ export class Splice extends Card implements CorporationCard {
     });
 
     const getMegacredits = new SelectOption(`Gain ${megacreditsGain} MC`, 'Gain M€', () => {
-      player.megaCredits += megacreditsGain;
+      player.addResource(Resources.MEGACREDITS, megacreditsGain, {log: true});
       return undefined;
     });
 
     // Splice owner get 2M€ per microbe tag
-    player.game.getCardPlayer(this.name).megaCredits += megacreditsGain;
+    player.game.getCardPlayer(this.name).addResource(Resources.MEGACREDITS, megacreditsGain, {log: true});
 
     // Card player choose between 2 M€ and a microbe on card, if possible
     if (card.resourceType !== undefined && card.resourceType === ResourceType.MICROBE) {
       return new OrOptions(addResource, getMegacredits);
     } else {
-      player.megaCredits += megacreditsGain;
+      player.addResource(Resources.MEGACREDITS, megacreditsGain, {log: true});
       return undefined;
     }
   }

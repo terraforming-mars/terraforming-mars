@@ -8,6 +8,10 @@ export const Award = Vue.component('award', {
     awards_list: {
       type: Array as () => Array<FundedAwardModel>,
     },
+    show_scores: {
+      type: Boolean,
+      default: true,
+    },
   },
   data: function() {
     const showDescription: {[x: string]: boolean} = {};
@@ -69,7 +73,7 @@ export const Award = Vue.component('award', {
                     <div class="ma-player" v-if="award.player_name"><i :title="award.player_name" :class="'board-cube board-cube--'+award.player_color" /></div>
                     <div class="ma-name--awards award-block" :class="getNameCss(award.award.name)" v-i18n>
                         {{award.award.name}}
-                        <div class="ma-scores player_home_block--milestones-and-awards-scores">
+                        <div v-if="show_scores" class="ma-scores player_home_block--milestones-and-awards-scores">
                             <p v-for="score in award.scores.sort(
                                 (s1, s2) => s2.playerScore - s1.playerScore
                             )" :class="'ma-score player_bg_color_'+score.playerColor">{{ score.playerScore }}</p>

@@ -17,7 +17,7 @@ export class PhoboLog extends Card implements CorporationCard {
 
       metadata: {
         cardNumber: 'R09',
-        description: 'You start with 10 titanium and 23 MC.',
+        description: 'You start with 10 titanium and 23 M€.',
         renderData: CardRenderer.builder((b) => {
           b.br.br;
           b.megacredits(23).nbsp.titanium(10).digit;

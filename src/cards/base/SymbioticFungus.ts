@@ -7,7 +7,6 @@ import {CardType} from '../CardType';
 import {SelectCard} from '../../inputs/SelectCard';
 import {ResourceType} from '../../ResourceType';
 import {CardName} from '../../CardName';
-import {LogHelper} from '../../LogHelper';
 import {CardRequirements} from '../CardRequirements';
 import {CardRenderer} from '../render/CardRenderer';
 
@@ -42,14 +41,12 @@ export class SymbioticFungus extends Card implements IActionCard, IProjectCard {
     if (availableCards.length === 0) return undefined;
 
     if (availableCards.length === 1) {
-      player.addResourceTo(availableCards[0]);
-      LogHelper.logAddResource(player, availableCards[0]);
+      player.addResourceTo(availableCards[0], {log: true});
       return undefined;
     }
 
     return new SelectCard('Select card to add microbe', 'Add microbe', availableCards, (foundCards: Array<ICard>) => {
-      player.addResourceTo(foundCards[0]);
-      LogHelper.logAddResource(player, foundCards[0]);
+      player.addResourceTo(foundCards[0], {log: true});
       return undefined;
     });
   }

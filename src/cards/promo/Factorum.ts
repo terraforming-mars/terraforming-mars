@@ -11,6 +11,7 @@ import {CardType} from '../CardType';
 import {LogHelper} from '../../LogHelper';
 import {CardRenderer} from '../render/CardRenderer';
 import {Size} from '../render/Size';
+import {Units} from '../../Units';
 
 export class Factorum extends Card implements IActionCard, CorporationCard {
   constructor() {
@@ -19,10 +20,11 @@ export class Factorum extends Card implements IActionCard, CorporationCard {
       name: CardName.FACTORUM,
       tags: [Tags.ENERGY, Tags.BUILDING],
       startingMegaCredits: 37,
+      productionBox: Units.of({steel: 1}),
 
       metadata: {
         cardNumber: 'R22',
-        description: 'You start with 37 MC. Increase your steel production 1 step.',
+        description: 'You start with 37 M€. Increase your steel production 1 step.',
         renderData: CardRenderer.builder((b) => {
           b.megacredits(37).nbsp.production((pb) => pb.steel(1));
           b.corpBox('action', (ce) => {
@@ -58,7 +60,7 @@ export class Factorum extends Card implements IActionCard, CorporationCard {
     );
 
     const drawBuildingCard = new SelectOption('Spend 3 M€ to draw a building card', 'Draw card', () => {
-      player.megaCredits -= 3;
+      player.deductResource(Resources.MEGACREDITS, 3);
       player.drawCard(1, {tag: Tags.BUILDING});
       return undefined;
     });

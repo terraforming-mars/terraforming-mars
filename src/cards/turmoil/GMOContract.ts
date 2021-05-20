@@ -23,20 +23,13 @@ export class GMOContract extends Card implements IProjectCard {
         description: 'Requires that Greens are ruling or that you have 2 delegates there.',
         cardNumber: 'T06',
         renderData: CardRenderer.builder((b) => {
-          b.effect('Each time you play a plant, animal or microbe tag, including this, gain 2MC.', (be) => {
+          b.effect('Each time you play a plant, animal or microbe tag, including this, gain 2 M€.', (be) => {
             be.animals(1).played.slash().plants(1).played.slash().microbes(1).played;
             be.startEffect.megacredits(2);
           });
         }),
       },
     });
-  }
-
-  public canPlay(player: Player): boolean {
-    if (player.game.turmoil !== undefined) {
-      return player.game.turmoil.canPlay(player, PartyName.GREENS);
-    }
-    return false;
   }
 
   public onCardPlayed(player: Player, card: IProjectCard): void {

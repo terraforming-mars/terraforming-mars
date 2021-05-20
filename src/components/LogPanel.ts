@@ -15,6 +15,11 @@ import {playerColorClass} from '../utils/utils';
 import {Color} from '../Color';
 import {SoundManager} from './SoundManager';
 import {PreferencesManager} from './PreferencesManager';
+import {GlobalEventName} from '../turmoil/globalEvents/GlobalEventName';
+import {GlobalEvent} from './GlobalEvent';
+import {getGlobalEventByName} from '../turmoil/globalEvents/GlobalEventDealer';
+import {GlobalEventModel} from '../models/TurmoilModel';
+import {PartyName} from '../turmoil/parties/PartyName';
 
 let logRequest: XMLHttpRequest | undefined;
 
@@ -38,13 +43,17 @@ export const LogPanel = Vue.component('log-panel', {
   },
   data: function() {
     return {
-      cards: [] as Array<string>,
+      // temporary storage used when showing cards on the log line.
+      cards: [] as Array<CardName>,
+      globalEventNames: [] as Array<GlobalEventName>,
+
       messages: [] as Array<LogMessage>,
       selectedGeneration: this.generation,
     };
   },
   components: {
     Card,
+    GlobalEvent,
   },
   methods: {
     scrollToEnd: function() {
@@ -53,8 +62,8 @@ export const LogPanel = Vue.component('log-panel', {
         scrollablePanel.scrollTop = scrollablePanel.scrollHeight;
       }
     },
-    parseCardType: function(cardType: CardType, cardNameString: string) {
-      cardNameString = $t(cardNameString);
+    cardToHtml: function(cardType: CardType, cardName: string) {
+      const cardNameString = $t(cardName);
       const suffixFreeCardName = cardNameString.split(':')[0];
       let className: string | undefined;
       if (cardType === CardType.EVENT) {
@@ -74,7 +83,7 @@ export const LogPanel = Vue.component('log-panel', {
       }
       return '<span class="log-card '+ className + '">' + suffixFreeCardName + '</span>';
     },
-    parseData: function(data: LogMessageData) {
+    messageDataToHTML: function(data: LogMessageData): string {
       const translatableMessageDataTypes = [
         LogMessageDataType.STRING,
         LogMessageDataType.STANDARD_PROJECT,
@@ -83,45 +92,60 @@ export const LogPanel = Vue.component('log-panel', {
         LogMessageDataType.COLONY,
         LogMessageDataType.PARTY,
         LogMessageDataType.TILE_TYPE,
+        LogMessageDataType.GLOBAL_EVENT,
       ];
-      if (data.type !== undefined && data.value !== undefined) {
-        if (data.type === LogMessageDataType.PLAYER) {
-          for (const player of this.players) {
-            if (data.value === player.color || data.value === player.id) {
-              return '<span class="log-player player_bg_color_'+player.color+'">'+player.name+'</span>';
-            }
+      if (data.type === undefined || data.value === undefined) {
+        return '';
+      }
+
+      switch (data.type) {
+      case LogMessageDataType.PLAYER:
+        for (const player of this.players) {
+          if (data.value === player.color || data.value === player.id) {
+            return '<span class="log-player player_bg_color_'+player.color+'">'+player.name+'</span>';
           }
-        } else if (data.type === LogMessageDataType.CARD) {
-          const cardName = data.value as CardName;
-          for (const player of this.players) {
-            if (player.corporationCard !== undefined && cardName === player.corporationCard.name) {
-              return '<span class="log-card background-color-corporation">' + $t(cardName) + '</span>';
-            } else {
-              const cards = player.playedCards.concat(player.selfReplicatingRobotsCards);
-              for (const card of cards) {
-                if (cardName === card.name && card.cardType !== undefined) {
-                  return this.parseCardType(card.cardType, data.value);
-                }
+        }
+        break;
+
+      case LogMessageDataType.CARD:
+        const cardName = data.value as CardName;
+        for (const player of this.players) {
+          if (player.corporationCard !== undefined && cardName === player.corporationCard.name) {
+            return '<span class="log-card background-color-global-event">' + $t(cardName) + '</span>';
+          } else {
+            const robotCards = player.playedCards.concat(player.selfReplicatingRobotsCards);
+            for (const robotCard of robotCards) {
+              if (cardName === robotCard.name && robotCard.cardType !== undefined) {
+                return this.cardToHtml(robotCard.cardType, cardName);
               }
             }
           }
-          const card = new CardFinder().getCardByName<ICard>(cardName, (manifest) => [
-            manifest.projectCards,
-            manifest.preludeCards,
-            manifest.standardProjects,
-            manifest.standardActions,
-          ]);
-          if (card && card.cardType) return this.parseCardType(card.cardType, data.value);
-        } else if (data.type === LogMessageDataType.TILE_TYPE) {
-          const tileType: TileType = +data.value;
-          return $t(TileType.toString(tileType));
-        } else if (translatableMessageDataTypes.includes(data.type)) {
+        }
+        const card = new CardFinder().getCardByName<ICard>(cardName, (manifest) => [
+          manifest.projectCards,
+          manifest.preludeCards,
+          manifest.standardProjects,
+          manifest.standardActions,
+        ]);
+        if (card && card.cardType) {
+          return this.cardToHtml(card.cardType, data.value);
+        }
+        break;
+
+      case LogMessageDataType.GLOBAL_EVENT:
+        const globalEventName = data.value as GlobalEventName;
+        return '<span class="log-card background-color-global-event">' + $t(globalEventName) + '</span>';
+
+      case LogMessageDataType.TILE_TYPE:
+        const tileType: TileType = +data.value;
+        return $t(TileType.toString(tileType));
+
+      default:
+        if (translatableMessageDataTypes.includes(data.type)) {
           return $t(data.value);
-        } else {
-          return data.value;
         }
       }
-      return '';
+      return data.value;
     },
     // Called in the event that a bad log message comes down. Does its best to return something.
     safeMessage: function(message: LogMessage) {
@@ -142,7 +166,7 @@ export const LogPanel = Vue.component('log-panel', {
         return `BUG: Unparseable message: ${message.message} ${err.toString()}`;
       }
     },
-    parseMessage: function(message: LogMessage) {
+    messageToHTML: function(message: LogMessage) {
       try {
         let logEntryBullet = '';
 
@@ -155,7 +179,7 @@ export const LogPanel = Vue.component('log-panel', {
         if (message.type !== undefined && message.message !== undefined) {
           message.message = $t(message.message);
           return logEntryBullet + message.message.replace(/\$\{([0-9]{1})\}/gi, (_match, idx) => {
-            return this.parseData(message.data[idx]);
+            return this.messageDataToHTML(message.data[idx]);
           });
         }
       } catch (err) {
@@ -163,24 +187,36 @@ export const LogPanel = Vue.component('log-panel', {
       }
       return '';
     },
-    cardClicked: function(message: LogMessage) {
+    messageClicked: function(message: LogMessage) {
+      // TODO(kberg): add global event here, too.
       const datas = message.data;
       datas.forEach((data: LogMessageData) => {
-        if (data.type !== undefined && data.value !== undefined) {
-          if (data.type === LogMessageDataType.CARD) {
-            const card_name = data.value;
-            const index = this.cards.indexOf(card_name);
-            if (index === -1) {
-              this.cards.push(card_name);
-            } else {
-              this.cards.splice(index, 1);
-            }
+        if (data.value === undefined) {
+          return;
+        }
+        if (data.type === LogMessageDataType.CARD) {
+          const cardName = data.value as CardName;
+          const index = this.cards.indexOf(cardName);
+          if (index === -1) {
+            this.cards.push(cardName);
+          } else {
+            this.cards.splice(index, 1);
+          }
+        }
+        if (data.type === LogMessageDataType.GLOBAL_EVENT) {
+          const globalEventName = data.value as GlobalEventName;
+          const index = this.globalEventNames.indexOf(globalEventName);
+          if (index === -1) {
+            this.globalEventNames.push(globalEventName);
+          } else {
+            this.globalEventNames.splice(index, 1);
           }
         }
       });
     },
     hideMe: function() {
       this.cards = [];
+      this.globalEventNames = [];
     },
     getCrossHtml: function() {
       return '<i class=\'icon icon-cross\' />';
@@ -241,15 +277,25 @@ export const LogPanel = Vue.component('log-panel', {
       classes.push(playerColorClass(this.color.toLowerCase(), 'shadow'));
       return classes.join(' ');
     },
-    getGenerationText: function(): string {
-      let retText = '';
-      if (this.players.length === 1) {
-        retText += 'of ' + this.lastSoloGeneration;
-        if (this.lastSoloGeneration === this.generation) {
-          retText = '<span class=\'last-generation blink-animation\'>' + retText + '</span>';
-        }
+    lastGenerationClass: function(): string {
+      return this.lastSoloGeneration === this.generation ? 'last-generation blink-animation' : '';
+    },
+    getGlobalEvent: function(globalEventName: GlobalEventName): GlobalEventModel {
+      const globalEvent = getGlobalEventByName(globalEventName);
+      if (globalEvent) {
+        return {
+          name: globalEvent.name,
+          description: globalEvent.description,
+          revealed: globalEvent.revealedDelegate,
+          current: globalEvent.currentDelegate,
+        };
       }
-      return retText;
+      return {
+        name: globalEventName,
+        description: 'global event not found',
+        revealed: PartyName.GREENS,
+        current: PartyName.GREENS,
+      };
     },
   },
   mounted: function() {
@@ -267,19 +313,22 @@ export const LogPanel = Vue.component('log-panel', {
               {{ n }}
             </div>
           </div>
-          <span class="label-additional" v-html="getGenerationText()"></span>
+          <span class="label-additional" v-if="players.length === 1"><span :class="lastGenerationClass">of {{this.lastSoloGeneration}}</span></span>
         </div>
         <div class="panel log-panel">
           <div id="logpanel-scrollable" class="panel-body">
             <ul v-if="messages">
-              <li v-for="message in messages" v-on:click.prevent="cardClicked(message)" v-html="parseMessage(message)"></li>
+              <li v-for="message in messages" v-on:click.prevent="messageClicked(message)" v-html="messageToHTML(message)"></li>
             </ul>
           </div>
         </div>
-        <div class="card-panel" v-if="cards.length > 0">
+        <div class="card-panel" v-if="cards.length > 0 || globalEventNames.length > 0">
           <Button size="big" type="close" :disableOnServerBusy="false" :onClick="hideMe" align="right"/>
           <div id="log_panel_card" class="cardbox" v-for="(card, index) in cards" :key="card">
             <Card :card="{name: card}"/>
+          </div>
+          <div id="log_panel_card" class="cardbox" v-for="(globalEventName, index) in globalEventNames" :key="globalEventName">
+            <global-event :globalEvent="getGlobalEvent(globalEventName)" type="prior"></global-event>
           </div>
         </div>
       </div>

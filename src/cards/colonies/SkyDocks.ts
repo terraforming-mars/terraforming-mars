@@ -31,10 +31,6 @@ export class SkyDocks extends Card implements IProjectCard {
     });
   }
 
-  public canPlay(player: Player): boolean {
-    return player.getTagCount(Tags.EARTH) >= 2;
-  }
-
   public play(player: Player) {
     player.increaseFleetSize();
     return undefined;

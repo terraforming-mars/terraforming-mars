@@ -6,6 +6,7 @@ import {CardName} from '../../CardName';
 import {CardRequirements} from '../CardRequirements';
 import {CardRenderer} from '../render/CardRenderer';
 import {Card} from '../Card';
+import {Units} from '../../Units';
 
 export class MiningQuota extends Card {
   constructor() {
@@ -14,6 +15,7 @@ export class MiningQuota extends Card {
       cardType: CardType.AUTOMATED,
       tags: [Tags.BUILDING],
       cost: 5,
+      productionBox: Units.of({steel: 2}),
 
       requirements: CardRequirements.builder((b) => b.tag(Tags.VENUS).tag(Tags.EARTH).tag(Tags.JOVIAN)),
       metadata: {
@@ -25,10 +27,6 @@ export class MiningQuota extends Card {
       },
     });
   };
-
-  public canPlay(player: Player): boolean {
-    return player.checkMultipleTagPresence([Tags.VENUS, Tags.EARTH, Tags.JOVIAN]);
-  }
 
   public play(player: Player) {
     player.addProduction(Resources.STEEL, 2);

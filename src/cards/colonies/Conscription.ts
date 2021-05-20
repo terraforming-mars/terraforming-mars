@@ -28,10 +28,6 @@ export class Conscription extends Card implements IProjectCard {
     });
   }
 
-  public canPlay(player: Player): boolean {
-    return player.getTagCount(Tags.EARTH) >= 2;
-  }
-
   public getCardDiscount(player: Player) {
     if (player.lastCardPlayed !== undefined && player.lastCardPlayed.name === this.name) {
       return 16;

@@ -26,7 +26,7 @@ export class EnergyMarket extends Card implements IProjectCard {
             eb.megacredits(2).multiplier.startAction.text('x').energy(1);
           }).br;
           b.or().br;
-          b.action('Decrease energy production 1 step to gain 8 MC.', (eb) => {
+          b.action('Decrease energy production 1 step to gain 8 M€.', (eb) => {
             eb.production((pb) => pb.energy(1)).startAction.megacredits(8);
           });
         }),
@@ -52,7 +52,7 @@ export class EnergyMarket extends Card implements IProjectCard {
           player.game.defer(new SelectHowToPayDeferred(player, (amount * 2)));
         } else {
           player.addResource(Resources.ENERGY, amount);
-          player.addResource(Resources.MEGACREDITS, -(amount * 2));
+          player.deductResource(Resources.MEGACREDITS, (amount * 2));
         }
 
         player.game.log('${0} gained ${1} energy', (b) => b.player(player).number(amount));

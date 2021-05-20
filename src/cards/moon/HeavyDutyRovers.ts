@@ -2,17 +2,31 @@ import {CardName} from '../../CardName';
 import {Player} from '../../Player';
 import {CardType} from '../CardType';
 import {IProjectCard} from '../IProjectCard';
-import {CardMetadata} from '../CardMetadata';
 import {MoonExpansion} from '../../moon/MoonExpansion';
 import {TileType} from '../../TileType';
 import {CardRenderer} from '../render/CardRenderer';
 import {Size} from '../render/Size';
+import {Card} from '../Card';
+import {Resources} from '../../Resources';
 
-export class HeavyDutyRovers implements IProjectCard {
-  public cost = 12;
-  public tags = [];
-  public cardType = CardType.AUTOMATED;
-  public name = CardName.HEAVY_DUTY_ROVERS;
+export class HeavyDutyRovers extends Card implements IProjectCard {
+  constructor() {
+    super({
+      cardType: CardType.AUTOMATED,
+      name: CardName.HEAVY_DUTY_ROVERS,
+      cost: 12,
+
+      metadata: {
+        description: 'Gain 4 M€ for each mining tile adjacent to a road tile. Raise the Logistic Rate 1 step.',
+        cardNumber: 'M39',
+        renderData: CardRenderer.builder((b) => {
+          b.megacredits(4).slash().moonRoad({size: Size.SMALL}).any.moonMine({size: Size.SMALL}).any;
+          b.br;
+          b.moonLogisticsRate({size: Size.SMALL});
+        }),
+      },
+    });
+  }
 
   public play(player: Player) {
     MoonExpansion.ifMoon(player.game, (moonData) => {
@@ -23,19 +37,9 @@ export class HeavyDutyRovers implements IProjectCard {
         return firstRoad !== undefined;
       });
       const count = minesNextToRoads.length;
-      player.megaCredits += count * 4;
+      player.addResource(Resources.MEGACREDITS, count * 4, {log: true});
       MoonExpansion.raiseLogisticRate(player);
     });
     return undefined;
   }
-
-  public readonly metadata: CardMetadata = {
-    description: 'Gain 4 M€ for each mining tile adjacent to a road tile. Raise the Logistic Rate 1 step.',
-    cardNumber: 'M39',
-    renderData: CardRenderer.builder((b) => {
-      b.megacredits(4).slash().moonRoad({size: Size.SMALL}).any.moonMine({size: Size.SMALL}).any;
-      b.br;
-      b.moonLogisticsRate({size: Size.SMALL});
-    }),
-  };
 }

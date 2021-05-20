@@ -18,7 +18,7 @@ export class PointLuna extends Card implements CorporationCard {
 
       metadata: {
         cardNumber: 'R10',
-        description: 'You start with 1 titanium production and 38 MC.',
+        description: 'You start with 1 titanium production and 38 M€.',
         renderData: CardRenderer.builder((b) => {
           b.br;
           b.production((pb) => pb.titanium(1)).nbsp.megacredits(38);

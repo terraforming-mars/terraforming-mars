@@ -24,7 +24,7 @@ export class MiningGuild extends Card implements CorporationCard {
 
       metadata: {
         cardNumber: 'R24',
-        description: 'You start with 30 MC, 5 steel and 1 steel production.',
+        description: 'You start with 30 M€, 5 steel and 1 steel production.',
         renderData: CardRenderer.builder((b) => {
           b.br.br;
           b.megacredits(30).nbsp.steel(5).digit.nbsp.production((pb) => pb.steel(1));

@@ -8,7 +8,6 @@ import {IActionCard, ICard} from '../ICard';
 import {ResourceType} from '../../ResourceType';
 import {SelectCard} from '../../inputs/SelectCard';
 import {CardName} from '../../CardName';
-import {LogHelper} from '../../LogHelper';
 import {CardRequirements} from '../CardRequirements';
 import {CardRenderer} from '../render/CardRenderer';
 import {Card} from '../Card';
@@ -65,8 +64,7 @@ export class MaxwellBase extends Card implements IActionCard {
     const cards = this.getResCards(player);
 
     if (cards.length === 1) {
-      player.addResourceTo(cards[0], 1);
-      LogHelper.logAddResource(player, cards[0]);
+      player.addResourceTo(cards[0], {log: true});
       return undefined;
     }
 
@@ -75,8 +73,7 @@ export class MaxwellBase extends Card implements IActionCard {
       'Add resource',
       cards,
       (foundCards: Array<ICard>) => {
-        player.addResourceTo(foundCards[0], 1);
-        LogHelper.logAddResource(player, foundCards[0]);
+        player.addResourceTo(foundCards[0], {log: true});
         return undefined;
       },
     );

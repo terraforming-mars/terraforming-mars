@@ -1,8 +1,7 @@
 import {Color} from '../src/Color';
 import {TestPlayer} from './TestPlayer';
 
-// TODO(kberg): Remove the export when TestingUtils no longer needs it.
-export class TestPlayerFactory {
+class TestPlayerFactory {
   constructor(private color: Color) {}
   newPlayer(): TestPlayer {
     return new TestPlayer(this.color);

@@ -30,10 +30,6 @@ export class QuantumCommunications extends Card implements IProjectCard {
     });
   }
 
-  public canPlay(player: Player): boolean {
-    return player.getTagCount(Tags.SCIENCE) >= 4;
-  }
-
   public play(player: Player) {
     let coloniesCount: number = 0;
     player.game.colonies.forEach((colony) => {

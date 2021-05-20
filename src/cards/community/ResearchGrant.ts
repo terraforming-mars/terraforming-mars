@@ -16,7 +16,7 @@ export class ResearchGrant extends PreludeCard implements IProjectCard {
         renderData: CardRenderer.builder((b) => {
           b.megacredits(8);
         }),
-        description: 'Gain 8 MC.',
+        description: 'Gain 8 M€.',
       },
     });
   }

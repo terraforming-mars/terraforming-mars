@@ -18,7 +18,7 @@ export class SubCrustMeasurements extends Card implements IActionCard, IProjectC
 
       requirements: CardRequirements.builder((b) => b.tag(Tags.SCIENCE, 2)),
       metadata: {
-        cardNumber: 'X28',
+        cardNumber: 'X29',
         renderData: CardRenderer.builder((b) => {
           b.action('Draw a card.', (eb) => {
             eb.empty().startAction.cards(1);
@@ -28,10 +28,6 @@ export class SubCrustMeasurements extends Card implements IActionCard, IProjectC
         victoryPoints: 2,
       },
     });
-  }
-
-  public canPlay(player: Player): boolean {
-    return player.getTagCount(Tags.SCIENCE) >= 2;
   }
 
   public play() {

@@ -9,6 +9,7 @@ import {Card} from '../Card';
 import {CardName} from '../../CardName';
 import {CardType} from '../CardType';
 import {CardRenderer} from '../render/CardRenderer';
+import {Units} from '../../Units';
 
 export class UtopiaInvest extends Card implements IActionCard, CorporationCard {
   constructor() {
@@ -17,10 +18,11 @@ export class UtopiaInvest extends Card implements IActionCard, CorporationCard {
       tags: [Tags.BUILDING],
       startingMegaCredits: 40,
       cardType: CardType.CORPORATION,
+      productionBox: Units.of({steel: 1, titanium: 1}),
 
       metadata: {
         cardNumber: 'R33',
-        description: 'You start with 40 MC. Increase your steel and titanium production 1 step each.',
+        description: 'You start with 40 M€. Increase your steel and titanium production 1 step each.',
         renderData: CardRenderer.builder((b) => {
           b.br;
           b.megacredits(40).nbsp.production((pb) => pb.steel(1).titanium(1));

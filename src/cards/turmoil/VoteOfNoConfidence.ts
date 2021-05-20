@@ -24,24 +24,28 @@ export class VoteOfNoConfidence extends Card implements IProjectCard {
           b.nbsp.plus().partyLeaders().br;
           b.tr(1);
         }),
-        description: 'Requires that you have a Party Leader in any party and that the sitting Chairman is neutral. Remove the NEUTRAL Chairman and move your own delegate (from the reserve) there instead. Gain 1 TR.',
+        description: 'Requires that you have a Party Leader in any party and that the sitting Chairman is neutral. ' +
+          'Remove the NEUTRAL Chairman and move your own delegate (from the reserve) there instead. Gain 1 TR.',
       },
     });
   }
 
   public canPlay(player: Player): boolean {
+    if (!super.canPlay(player)) {
+      return false;
+    }
     if (player.game.turmoil !== undefined) {
-      if (!player.game.turmoil!.hasAvailableDelegates(player.id)) return false;
+      if (!player.game.turmoil.hasAvailableDelegates(player.id)) return false;
 
-      const parties = player.game.turmoil.parties.filter((party) => party.partyLeader === player.id);
       const chairmanIsNeutral = player.game.turmoil.chairman === 'NEUTRAL';
-      const hasPartyLeadership = parties.length > 0;
-
-      if (PartyHooks.shouldApplyPolicy(player.game, PartyName.REDS)) {
-        return player.canAfford(player.getCardCost(this) + REDS_RULING_POLICY_COST) && chairmanIsNeutral && hasPartyLeadership;
+      if (chairmanIsNeutral === false) {
+        return false;
       }
 
-      return chairmanIsNeutral && hasPartyLeadership;
+      if (PartyHooks.shouldApplyPolicy(player.game, PartyName.REDS)) {
+        return player.canAfford(player.getCardCost(this) + REDS_RULING_POLICY_COST);
+      }
+      return true;
     }
     return false;
   }

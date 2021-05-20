@@ -27,13 +27,6 @@ export class EventAnalysts extends Card implements IProjectCard {
     });
   }
 
-  public canPlay(player: Player): boolean {
-    if (player.game.turmoil !== undefined) {
-      return player.game.turmoil.canPlay(player, PartyName.SCIENTISTS);
-    }
-    return false;
-  }
-
   public play(player: Player) {
     if (player.game.turmoil) {
       player.game.turmoil.addInfluenceBonus(player);

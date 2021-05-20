@@ -17,7 +17,7 @@ export class Helion extends Card implements CorporationCard {
 
       metadata: {
         cardNumber: 'R18',
-        description: 'You start with 3 heat production and 42 MC.',
+        description: 'You start with 3 heat production and 42 M€.',
         renderData: CardRenderer.builder((b) => {
           b.br;
           b.production((pb) => pb.heat(3)).nbsp.megacredits(42);

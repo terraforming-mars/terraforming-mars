@@ -5,14 +5,15 @@ import {Tardigrades} from '../../../src/cards/base/Tardigrades';
 import {MonsInsurance} from '../../../src/cards/promo/MonsInsurance';
 import {Game} from '../../../src/Game';
 import {OrOptions} from '../../../src/inputs/OrOptions';
-import {Player} from '../../../src/Player';
 import {Resources} from '../../../src/Resources';
+import {GlobalEventName} from '../../../src/turmoil/globalEvents/GlobalEventName';
+import {TestPlayer} from '../../TestPlayer';
 import {TestPlayers} from '../../TestPlayers';
 
-describe('MonsInsurance', function() {
-  let card : MonsInsurance; let player : Player; let player2: Player; let player3: Player;
+describe('MonsInsurance', () => {
+  let card: MonsInsurance; let player: TestPlayer; let player2: TestPlayer; let player3: TestPlayer;
 
-  beforeEach(function() {
+  beforeEach(() => {
     card = new MonsInsurance();
 
     player = TestPlayers.BLUE.newPlayer();
@@ -21,7 +22,7 @@ describe('MonsInsurance', function() {
     Game.newInstance('foobar', [player, player2, player3], player);
   });
 
-  it('Should play', function() {
+  it('Should play', () => {
     const play = card.play(player);
     expect(play).is.undefined;
     expect(player.getProduction(Resources.MEGACREDITS)).to.eq(4);
@@ -29,7 +30,7 @@ describe('MonsInsurance', function() {
     expect(player3.getProduction(Resources.MEGACREDITS)).to.eq(-2);
   });
 
-  it('Triggers effect when resources are removed', function() {
+  it('Triggers effect when resources are removed', () => {
     card.play(player);
     player.corporationCard = card;
     player.megaCredits = 2;
@@ -44,7 +45,7 @@ describe('MonsInsurance', function() {
     expect(player.megaCredits).to.eq(0);
   });
 
-  it('Doesn\'t trigger effect when player removes resources from self', function() {
+  it('Does not trigger effect when player removes resources from self', () => {
     card.play(player);
     player.corporationCard = card;
     player.megaCredits = 2;
@@ -59,7 +60,7 @@ describe('MonsInsurance', function() {
     expect(player.megaCredits).to.eq(2);
   });
 
-  it('Doesn\'t trigger effect when player should pay itself', function() {
+  it('Does not trigger effect when player should pay itself', () => {
     card.play(player);
     player.corporationCard = card;
     player.megaCredits = 2;
@@ -74,5 +75,57 @@ describe('MonsInsurance', function() {
     ants.action(player2); // remove resource from Mons' card
     expect(player2.megaCredits).to.eq(0);
     expect(player.megaCredits).to.eq(2);
+  });
+
+  it('Effect triggers direct calls to addResource', () => {
+    card.play(player);
+    player.corporationCard = card;
+    player.megaCredits = 10;
+    player2.megaCredits = 10;
+    player2.steel = 1;
+
+    player2.addResource(Resources.STEEL, -1, {log: false, from: player3});
+
+    expect(player2.megaCredits).to.eq(13);
+    expect(player.megaCredits).to.eq(7);
+  });
+
+  it('Effect does not trigger direct calls to addResource for Global Event', () => {
+    card.play(player);
+    player.corporationCard = card;
+    player.megaCredits = 10;
+    player2.megaCredits = 10;
+    player2.steel = 1;
+
+    player2.addResource(Resources.STEEL, -1, {log: false, from: GlobalEventName.ECO_SABOTAGE});
+
+    expect(player2.megaCredits).to.eq(10);
+    expect(player.megaCredits).to.eq(10);
+  });
+
+  it('Effect triggers direct calls to addProduction', () => {
+    card.play(player);
+    player.corporationCard = card;
+    player.setProductionForTest({megacredits: 1});
+    player.megaCredits = 10;
+    player2.megaCredits = 10;
+
+    player2.addProduction(Resources.MEGACREDITS, -1, {log: false, from: player3});
+
+    expect(player2.megaCredits).to.eq(13);
+    expect(player.megaCredits).to.eq(7);
+  });
+
+  it('Effect does not trigger direct calls to addProduction for Global Event', () => {
+    card.play(player);
+    player.corporationCard = card;
+    player.setProductionForTest({megacredits: 1});
+    player.megaCredits = 10;
+    player2.megaCredits = 10;
+
+    player2.addProduction(Resources.MEGACREDITS, -1, {log: false, from: GlobalEventName.ECO_SABOTAGE});
+
+    expect(player2.megaCredits).to.eq(10);
+    expect(player.megaCredits).to.eq(10);
   });
 });

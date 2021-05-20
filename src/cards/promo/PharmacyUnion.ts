@@ -14,6 +14,7 @@ import {CardType} from '../CardType';
 import {DeferredAction} from '../../deferredActions/DeferredAction';
 import {CardRenderer} from '../render/CardRenderer';
 import {Size} from '../render/Size';
+import {Resources} from '../../Resources';
 
 export class PharmacyUnion extends Card implements CorporationCard {
   constructor() {
@@ -91,11 +92,11 @@ export class PharmacyUnion extends Card implements CorporationCard {
                   const megaCreditsLost = Math.min(player.megaCredits, 4);
                   this.isDisabled = true;
                   player.increaseTerraformRatingSteps(3);
-                  player.megaCredits -= megaCreditsLost;
+                  player.deductResource(Resources.MEGACREDITS, megaCreditsLost);
                   game.log('${0} turned ${1} face down to gain 3 TR and lost ${2} M€', (b) => b.player(player).card(this).number(megaCreditsLost));
                   return undefined;
                 }),
-                new SelectOption('Add a disease to it and lose up to 4 MC, then remove a disease to gain 1 TR', 'Confirm', () => {
+                new SelectOption('Add a disease to it and lose up to 4 M€, then remove a disease to gain 1 TR', 'Confirm', () => {
                   const megaCreditsLost = Math.min(player.megaCredits, 4);
                   player.increaseTerraformRating();
                   player.megaCredits -= megaCreditsLost;

@@ -56,41 +56,34 @@ export class Astrodrill extends Card implements IActionCard, CorporationCard {
       const gainStandardResource = new SelectOption('Gain a standard resource', 'Gain', () => {
         return new OrOptions(
           new SelectOption('Gain 1 titanium', 'Gain titanium', () => {
-            player.titanium += 1;
-            LogHelper.logGainStandardResource(player, Resources.TITANIUM);
+            player.addResource(Resources.TITANIUM, 1, {log: true});
             return undefined;
           }),
           new SelectOption('Gain 1 steel', 'Gain steel', () => {
-            player.steel += 1;
-            LogHelper.logGainStandardResource(player, Resources.STEEL);
+            player.addResource(Resources.STEEL, 1, {log: true});
             return undefined;
           }),
           new SelectOption('Gain 1 plant', 'Gain plant', () => {
-            player.plants += 1;
-            LogHelper.logGainStandardResource(player, Resources.PLANTS);
+            player.addResource(Resources.PLANTS, 1, {log: true});
             return undefined;
           }),
           new SelectOption('Gain 1 energy', 'Gain energy', () => {
-            player.energy += 1;
-            LogHelper.logGainStandardResource(player, Resources.ENERGY);
+            player.addResource(Resources.ENERGY, 1, {log: true});
             return undefined;
           }),
           new SelectOption('Gain 1 heat', 'Gain heat', () => {
-            player.heat += 1;
-            LogHelper.logGainStandardResource(player, Resources.HEAT);
+            player.addResource(Resources.HEAT, 1, {log: true});
             return undefined;
           }),
           new SelectOption('Gain 1 M€', 'Gain M€', () => {
-            player.megaCredits += 1;
-            LogHelper.logGainStandardResource(player, Resources.MEGACREDITS);
+            player.addResource(Resources.MEGACREDITS, 1, {log: true});
             return undefined;
           }),
         );
       });
 
       const addResourceToSelf = new SelectOption('Add 1 asteroid to this card', 'Add asteroid', () => {
-        player.addResourceTo(this);
-        LogHelper.logAddResource(player, this);
+        player.addResourceTo(this, {log: true});
 
         return undefined;
       });
@@ -100,8 +93,7 @@ export class Astrodrill extends Card implements IActionCard, CorporationCard {
         'Add asteroid',
         asteroidCards,
         (foundCards: Array<ICard>) => {
-          player.addResourceTo(foundCards[0], 1);
-          LogHelper.logAddResource(player, foundCards[0]);
+          player.addResourceTo(foundCards[0], {log: true});
 
           return undefined;
         },

@@ -21,12 +21,12 @@ export class SteelMarketMonopolists extends MarketCard {
           description: 'Requires Mining Rate to be 3 or higher.',
           cardNumber: 'M28',
           renderData: CardRenderer.builder((b) => {
-            b.action('Spend 3X M€ to gain 2X steel (max 9MC)', (eb) => {
+            b.action('Spend 3X M€ to gain 2X steel (max 9 M€)', (eb) => {
               eb.megacredits(3).multiplier.startAction.text('x').steel(2).asterix();
             }).br;
             b.or().br;
             b.action('Spend X steel to gain 3X M€ (max 3 steel).', (eb) => {
-              eb.text('X').steel(0).startAction.text('x').megacredits(3).asterix();
+              eb.text('X').steel(1).startAction.text('x').megacredits(3).asterix();
             });
           }),
         },

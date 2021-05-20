@@ -7,7 +7,6 @@ import {Resources} from '../../Resources';
 import {CardName} from '../../CardName';
 import {DecreaseAnyProduction} from '../../deferredActions/DecreaseAnyProduction';
 import {CardRenderer} from '../render/CardRenderer';
-import {Units} from '../../Units';
 
 export class HeatTrappers extends Card implements IProjectCard {
   constructor() {
@@ -16,7 +15,6 @@ export class HeatTrappers extends Card implements IProjectCard {
       name: CardName.HEAT_TRAPPERS,
       tags: [Tags.ENERGY, Tags.BUILDING],
       cost: 6,
-      productionBox: Units.of({energy: 1}),
 
       metadata: {
         cardNumber: '178',
@@ -36,9 +34,13 @@ export class HeatTrappers extends Card implements IProjectCard {
     return player.game.someoneHasResourceProduction(Resources.HEAT, 2);
   }
 
-  public play(player: Player) {
+  public produce(player: Player) {
     player.game.defer(new DecreaseAnyProduction(player, Resources.HEAT, 2));
     player.addProduction(Resources.ENERGY, 1);
+  }
+
+  public play(player: Player) {
+    this.produce(player);
     return undefined;
   }
   public getVictoryPoints() {

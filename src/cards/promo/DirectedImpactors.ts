@@ -26,7 +26,7 @@ export class DirectedImpactors extends Card implements IActionCard, IProjectCard
       resourceType: ResourceType.ASTEROID,
 
       metadata: {
-        cardNumber: 'X18',
+        cardNumber: 'X19',
         renderData: CardRenderer.builder((b) => {
           b.action('Spend 6 M€ to add 1 asteroid to ANY CARD (titanium may be used to pay for this).', (eb) => {
             eb.megacredits(6).titanium(1).brackets.startAction.asteroids(1).asterix();
@@ -89,8 +89,7 @@ export class DirectedImpactors extends Card implements IActionCard, IProjectCard
       player.game.defer(new SelectHowToPayDeferred(player, 6, {canUseTitanium: true, title: 'Select how to pay for Directed Impactors action'}));
 
       if (asteroidCards.length === 1) {
-        player.addResourceTo(this);
-        LogHelper.logAddResource(player, this);
+        player.addResourceTo(this, {log: true});
         return undefined;
       }
 
@@ -99,8 +98,7 @@ export class DirectedImpactors extends Card implements IActionCard, IProjectCard
         'Add asteroid',
         asteroidCards,
         (foundCards: Array<ICard>) => {
-          player.addResourceTo(foundCards[0]);
-          LogHelper.logAddResource(player, foundCards[0]);
+          player.addResourceTo(foundCards[0], {log: true});
           return undefined;
         },
       );

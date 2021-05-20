@@ -27,12 +27,13 @@ export class PreferencesManager {
     return typeof localStorage !== 'undefined';
   }
 
-  static save(name: Key, val: string | boolean): void {
-    if (!this.localStorageSupported()) return;
-    if (typeof(val) === 'string') {
-      localStorage.setItem(name, val);
-    } else {
-      localStorage.setItem(name, val ? '0' : '1');
+  static save(name: Key, val: string | boolean, updateMap: boolean = false): void {
+    const stringVal = typeof(val) === 'string' ? val : (val ? '1' : '0');
+    if (this.localStorageSupported()) {
+      localStorage.setItem(name, stringVal);
+    }
+    if (updateMap) {
+      this.preferencesValues.set(name, stringVal);
     }
   }
 

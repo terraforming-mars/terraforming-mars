@@ -51,7 +51,6 @@ export class OceanSanctuary extends Card implements IResourceCard {
           card: this.name,
           covers: space.tile,
         };
-        player.game.removeTile(space.id);
         player.game.addTile(player, space.spaceType, space, tile);
         space.adjacency = {bonus: [SpaceBonus.ANIMAL]};
         return undefined;

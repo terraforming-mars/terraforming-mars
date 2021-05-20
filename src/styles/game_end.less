@@ -59,23 +59,35 @@ body {
         vertical-align: middle;
         filter: drop-shadow(0px 0px 1px black) brightness(0.8);
     }
+    .resized-tile {
+        width: 34px;
+        height: 40px;
+        background-size: 34px 40px;
+        vertical-align: middle;
+        margin-left: 2px;
+    }
     .table-city-tile {
         background-image: url(./assets/tiles/city.png);
         filter: brightness(0.8) drop-shadow(0px 1px 1px rgba(0, 0, 0, 0.5));
-        width: 34px;
-        height: 40px;
-        background-size: 34px 40px;
-        vertical-align: middle;
-        margin-left: 2px;
+        .resized-tile
     }
     .table-forest-tile {
         background-image: url(./assets/tiles/greenery_no_O2.png);
-        width: 34px;
-        height: 40px;
-        background-size: 34px 40px;
-        vertical-align: middle;
-        margin-left: 2px;
+        .resized-tile;
     }
+    .table-moon-road-tile {
+        .board-space-tile--road;
+        .resized-tile
+    }
+    .table-moon-colony-tile {
+        .board-space-tile--colony;
+        .resized-tile
+    }
+    .table-moon-mine-tile {
+        .board-space-tile--mine;
+        .resized-tile
+    }
+
     .tr {
         background-image: url(./assets/resources/tr.png);
         width: 46px;

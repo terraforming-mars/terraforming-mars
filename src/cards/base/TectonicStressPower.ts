@@ -29,13 +29,7 @@ export class TectonicStressPower extends Card implements IProjectCard {
       },
     });
   }
-  public canPlay(player: Player): boolean {
-    return player.getTagCount(Tags.SCIENCE) >= 2;
-  }
   public play(player: Player) {
-    if (player.getTagCount(Tags.SCIENCE) < 2) {
-      throw 'Requires 2 science tags';
-    }
     player.addProduction(Resources.ENERGY, 3);
     return undefined;
   }

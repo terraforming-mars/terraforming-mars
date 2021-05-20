@@ -11,7 +11,6 @@ import {ISpace} from '../../boards/ISpace';
 import {Player} from '../../Player';
 import {IProjectCard} from '../../cards/IProjectCard';
 import {ICard} from '../../cards/ICard';
-import {LogHelper} from '../../LogHelper';
 import {OrOptions} from '../../inputs/OrOptions';
 import {SelectCard} from '../../inputs/SelectCard';
 import {SelectOption} from '../../inputs/SelectOption';
@@ -119,8 +118,7 @@ class GreensPolicy04 implements Policy {
           if (availableMicrobeCards.length === 1) {
             orOptions.options.push(
               new SelectOption('Add 2 microbes to ' + availableMicrobeCards[0].name, 'Confirm', () => {
-                player.addResourceTo(availableMicrobeCards[0], 2);
-                LogHelper.logAddResource(player, availableMicrobeCards[0], 2);
+                player.addResourceTo(availableMicrobeCards[0], {qty: 2, log: true});
 
                 return undefined;
               }),
@@ -129,8 +127,7 @@ class GreensPolicy04 implements Policy {
             orOptions.options.push(
               new SelectOption('Add 2 microbes to a card', 'Confirm', () => {
                 return new SelectCard('Select card to add 2 microbes', 'Add microbes', availableMicrobeCards, (foundCards: Array<ICard>) => {
-                  player.addResourceTo(foundCards[0], 2);
-                  LogHelper.logAddResource(player, foundCards[0], 2);
+                  player.addResourceTo(foundCards[0], {qty: 2, log: true});
                   return undefined;
                 });
               }),

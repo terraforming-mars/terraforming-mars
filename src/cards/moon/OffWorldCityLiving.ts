@@ -4,7 +4,6 @@ import {CardType} from '../CardType';
 import {IProjectCard} from '../IProjectCard';
 import {Tags} from '../Tags';
 import {Resources} from '../../Resources';
-import {LogHelper} from '../../LogHelper';
 import {MoonExpansion} from '../../moon/MoonExpansion';
 import {CardRenderer} from '../render/CardRenderer';
 import {CardRenderDynamicVictoryPoints} from '../render/CardRenderDynamicVictoryPoints';
@@ -27,15 +26,14 @@ export class OffWorldCityLiving extends Card implements IProjectCard {
           b.moonColonyRate().br;
           b.vpText('1 VP for each 3 city tiles in play.');
         }),
-        victoryPoints: CardRenderDynamicVictoryPoints.cities(1, 3),
+        victoryPoints: CardRenderDynamicVictoryPoints.cities(1, 3, true),
       },
     });
   };
 
   public play(player: Player) {
     const amount = player.game.getCitiesInPlay() - player.game.getCitiesInPlayOnMars();
-    player.addProduction(Resources.MEGACREDITS, amount);
-    LogHelper.logGainProduction(player, Resources.MEGACREDITS, amount);
+    player.addProduction(Resources.MEGACREDITS, amount, {log: true});
     MoonExpansion.raiseColonyRate(player);
     return undefined;
   }

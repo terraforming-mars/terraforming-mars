@@ -6,8 +6,8 @@ import {Milestone} from './Milestone';
 import {Award} from './Award';
 import {PlayersOverview} from './overview/PlayersOverview';
 import {WaitingFor} from './WaitingFor';
-import {Preferences} from './Preferences';
-import {PlayerModel} from '../models/PlayerModel';
+import {Sidebar} from './Sidebar';
+import {PlayerModel, PublicPlayerModel} from '../models/PlayerModel';
 import {Colony} from './Colony';
 import {LogPanel} from './LogPanel';
 import {PlayerMixin} from './PlayerMixin';
@@ -28,6 +28,10 @@ export interface PlayerHomeModel {
   showActiveCards: boolean;
   showAutomatedCards: boolean;
   showEventCards: boolean;
+}
+
+class TerraformedAlertDialog {
+  static shouldAlert = true;
 }
 
 export const PlayerHome = Vue.component('player-home', {
@@ -65,7 +69,7 @@ export const PlayerHome = Vue.component('player-home', {
     'waiting-for': WaitingFor,
     'milestone': Milestone,
     'award': Award,
-    'preferences': Preferences,
+    'sidebar': Sidebar,
     'colony': Colony,
     'log-panel': LogPanel,
     'turmoil': Turmoil,
@@ -107,7 +111,7 @@ export const PlayerHome = Vue.component('player-home', {
       return player.players.length > 1 && player.waitingFor !== undefined;
     },
     getPlayerCssForTurnOrder: (
-      player: PlayerModel,
+      player: PublicPlayerModel,
       highlightActive: boolean,
     ): string => {
       const classes = ['highlighter_box'];
@@ -119,7 +123,7 @@ export const PlayerHome = Vue.component('player-home', {
       }
       return classes.join(' ');
     },
-    getFleetsCountRange: function(player: PlayerModel): Array<number> {
+    getFleetsCountRange: function(player: PublicPlayerModel): Array<number> {
       const fleetsRange: Array<number> = [];
       for (let i = 0; i < player.fleetSize - player.tradesThisGeneration; i++) {
         fleetsRange.push(i);
@@ -151,7 +155,7 @@ export const PlayerHome = Vue.component('player-home', {
       return false;
     },
     isInitialDraftingPhase(): boolean {
-      return (this.player.phase === Phase.INITIALDRAFTING) && this.player.gameOptions.initialDraftVariant;
+      return (this.player.game.phase === Phase.INITIALDRAFTING) && this.player.game.gameOptions.initialDraftVariant;
     },
     getToggleLabel: function(hideType: string): string {
       if (hideType === 'ACTIVE') {
@@ -182,71 +186,76 @@ export const PlayerHome = Vue.component('player-home', {
   },
   mounted: function() {
     window.addEventListener('keydown', this.navigatePage);
+    if (this.player.game.isTerraformed && TerraformedAlertDialog.shouldAlert && PreferencesManager.load('show_alerts') === '1') {
+      alert('Mars is Terraformed!');
+      // Avoids repeated calls.
+      TerraformedAlertDialog.shouldAlert = false;
+    };
   },
   template: `
-        <div id="player-home" :class="(player.turmoil ? 'with-turmoil': '')">
+        <div id="player-home" :class="(player.game.turmoil ? 'with-turmoil': '')">
             <top-bar :player="player" />
 
-            <div v-if="player.phase === 'end'">
+            <div v-if="player.game.phase === 'end'">
                 <div class="player_home_block">
                     <dynamic-title title="This game is over!" :color="player.color"/>
                     <a :href="'/the-end?id='+ player.id" v-i18n>Go to game results</a>
                 </div>
             </div>
 
-            <preferences v-trim-whitespace
+            <sidebar v-trim-whitespace
               :acting_player="isPlayerActing(player)"
               :player_color="player.color"
-              :generation="player.generation"
-              :coloniesCount="player.colonies.length"
-              :temperature = "player.temperature"
-              :oxygen = "player.oxygenLevel"
-              :oceans = "player.oceans"
-              :venus = "player.venusScaleLevel"
-              :turmoil = "player.turmoil"
-              :gameOptions = "player.gameOptions"
+              :generation="player.game.generation"
+              :coloniesCount="player.game.colonies.length"
+              :temperature = "player.game.temperature"
+              :oxygen = "player.game.oxygenLevel"
+              :oceans = "player.game.oceans"
+              :venus = "player.game.venusScaleLevel"
+              :turmoil = "player.game.turmoil"
+              :moonData="player.game.moon"
+              :gameOptions = "player.game.gameOptions"
               :playerNumber = "player.players.length"
-              :lastSoloGeneration = "player.lastSoloGeneration">
-                <div class="deck-size">{{ player.deckSize }}</div>
-            </preferences>
+              :lastSoloGeneration = "player.game.lastSoloGeneration">
+                <div class="deck-size">{{ player.game.deckSize }}</div>
+            </sidebar>
 
             <div v-if="player.corporationCard">
 
                 <div class="player_home_block">
                     <a name="board" class="player_home_anchor"></a>
                     <board
-                        :spaces="player.spaces"
-                        :venusNextExtension="player.gameOptions.venusNextExtension"
-                        :venusScaleLevel="player.venusScaleLevel"
-                        :boardName ="player.gameOptions.boardName"
-                        :oceans_count="player.oceans"
-                        :oxygen_level="player.oxygenLevel"
-                        :temperature="player.temperature"
-                        :shouldNotify="true"
-                        :aresExtension="player.gameOptions.aresExtension"
-                        :aresData="player.aresData"
+                        :spaces="player.game.spaces"
+                        :venusNextExtension="player.game.gameOptions.venusNextExtension"
+                        :venusScaleLevel="player.game.venusScaleLevel"
+                        :boardName ="player.game.gameOptions.boardName"
+                        :oceans_count="player.game.oceans"
+                        :oxygen_level="player.game.oxygenLevel"
+                        :temperature="player.game.temperature"
+                        :aresExtension="player.game.gameOptions.aresExtension"
+                        :aresData="player.game.aresData"
                         id="shortkey-board"></board>
 
-                    <turmoil v-if="player.turmoil" :turmoil="player.turmoil"></turmoil>
+                    <turmoil v-if="player.game.turmoil" :turmoil="player.game.turmoil"></turmoil>
 
-                    <moonboard v-if="player.gameOptions.moonExpansion" :model="player.moon"></moonboard>
+                    <moonboard v-if="player.game.gameOptions.moonExpansion" :model="player.game.moon"></moonboard>
 
                     <div v-if="player.players.length > 1" class="player_home_block--milestones-and-awards">
-                        <milestone :milestones_list="player.milestones" />
-                        <award :awards_list="player.awards" />
+                        <milestone :milestones_list="player.game.milestones" />
+                        <award :awards_list="player.game.awards" />
                     </div>
                 </div>
 
                 <players-overview class="player_home_block player_home_block--players nofloat:" :player="player" v-trim-whitespace id="shortkey-playersoverview"/>
 
                 <div class="player_home_block nofloat">
-                    <log-panel :id="player.id" :players="player.players" :generation="player.generation" :lastSoloGeneration="player.lastSoloGeneration" :color="player.color"></log-panel>
+                    <log-panel :id="player.id" :players="player.players" :generation="player.game.generation" :lastSoloGeneration="player.game.lastSoloGeneration" :color="player.color"></log-panel>
                 </div>
 
                 <div class="player_home_block player_home_block--actions nofloat">
                     <a name="actions" class="player_home_anchor"></a>
                     <dynamic-title title="Actions" :color="player.color"/>
-                    <waiting-for v-if="player.phase !== 'end'" :players="player.players" :player="player" :settings="settings" :waitingfor="player.waitingFor"></waiting-for>
+                    <waiting-for v-if="player.game.phase !== 'end'" :players="player.players" :player="player" :settings="settings" :waitingfor="player.waitingFor"></waiting-for>
                 </div>
 
                 <div class="player_home_block player_home_block--hand" v-if="player.draftedCards.length > 0">
@@ -332,7 +341,7 @@ export const PlayerHome = Vue.component('player-home', {
                     <div class="cardbox">
                       <Card :card="player.pickedCorporationCard[0]"/>
                     </div>
-                    <div v-if="player.gameOptions.preludeExtension" v-for="card in player.preludeCardsInHand" :key="card.name" class="cardbox">
+                    <div v-if="player.game.gameOptions.preludeExtension" v-for="card in player.preludeCardsInHand" :key="card.name" class="cardbox">
                       <Card :card="card"/>
                     </div>
                   </div>
@@ -344,14 +353,13 @@ export const PlayerHome = Vue.component('player-home', {
                 </template>
 
                 <dynamic-title v-if="player.pickedCorporationCard.length === 0" title="Select initial cards:" :color="player.color"/>
-                <waiting-for v-if="player.phase !== 'end'" :players="player.players" :player="player" :settings="settings" :waitingfor="player.waitingFor"></waiting-for>
+                <waiting-for v-if="player.game.phase !== 'end'" :players="player.players" :player="player" :settings="settings" :waitingfor="player.waitingFor"></waiting-for>
 
                 <dynamic-title title="Game details" :color="player.color"/>
 
-
                 <div class="player_home_block" v-if="player.players.length > 1">
-                    <milestone :milestones_list="player.milestones" />
-                    <award :awards_list="player.awards" />
+                    <milestone :show_scores="false" :milestones_list="player.game.milestones" />
+                    <award :show_scores="false" :awards_list="player.game.awards" />
                 </div>
 
                 <div class="player_home_block player_home_block--turnorder nofloat" v-if="player.players.length>1">
@@ -373,23 +381,23 @@ export const PlayerHome = Vue.component('player-home', {
                     </summary>
                     <div class="accordion-body">
                         <board
-                          :spaces="player.spaces"
-                          :venusNextExtension="player.gameOptions.venusNextExtension"
-                          :venusScaleLevel="player.venusScaleLevel"
-                          :boardName ="player.gameOptions.boardName"
-                          :aresExtension="player.gameOptions.aresExtension"
-                          :aresData="player.aresData">
+                          :spaces="player.game.spaces"
+                          :venusNextExtension="player.game.gameOptions.venusNextExtension"
+                          :venusScaleLevel="player.game.venusScaleLevel"
+                          :boardName ="player.game.gameOptions.boardName"
+                          :aresExtension="player.game.gameOptions.aresExtension"
+                          :aresData="player.game.aresData">
                         </board>
 
-                        <turmoil v-if="player.turmoil" :turmoil="player.turmoil"></turmoil>
+                        <turmoil v-if="player.game.turmoil" :turmoil="player.game.turmoil"></turmoil>
 
-                        <moonboard v-if="player.gameOptions.moonExpansion" :model="player.moon"></moonboard>
+                        <moonboard v-if="player.game.gameOptions.moonExpansion" :model="player.game.moon"></moonboard>
 
                     </div>
                 </details>
             </div>
 
-            <div v-if="player.colonies.length > 0" class="player_home_block" ref="colonies" id="shortkey-colonies">
+            <div v-if="player.game.colonies.length > 0" class="player_home_block" ref="colonies" id="shortkey-colonies">
                 <a name="colonies" class="player_home_anchor"></a>
                 <dynamic-title title="Colonies" :color="player.color"/>
                 <div class="colonies-fleets-cont" v-if="player.corporationCard">
@@ -398,7 +406,7 @@ export const PlayerHome = Vue.component('player-home', {
                     </div>
                 </div>
                 <div class="player_home_colony_cont">
-                    <div class="player_home_colony" v-for="colony in player.colonies" :key="colony.name">
+                    <div class="player_home_colony" v-for="colony in player.game.colonies" :key="colony.name">
                         <colony :colony="colony"></colony>
                     </div>
                 </div>

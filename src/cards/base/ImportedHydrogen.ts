@@ -10,7 +10,6 @@ import {SelectCard} from '../../inputs/SelectCard';
 import {PlayerInput} from '../../PlayerInput';
 import {ResourceType} from '../../ResourceType';
 import {CardName} from '../../CardName';
-import {LogHelper} from '../../LogHelper';
 import {Resources} from '../../Resources';
 import {MAX_OCEAN_TILES, REDS_RULING_POLICY_COST} from '../../constants';
 import {PartyHooks} from '../../turmoil/parties/PartyHooks';
@@ -55,9 +54,7 @@ export class ImportedHydrogen extends Card implements IProjectCard {
     const availableAnimalCards = player.getResourceCards(ResourceType.ANIMAL);
 
     const gainPlants = function() {
-      const qty = 3;
-      player.plants += qty;
-      LogHelper.logGainStandardResource(player, Resources.PLANTS, qty);
+      player.addResource(Resources.PLANTS, 3, {log: true});
       player.game.defer(new PlaceOceanTile(player));
       return undefined;
     };
@@ -74,8 +71,7 @@ export class ImportedHydrogen extends Card implements IProjectCard {
     if (availableMicrobeCards.length === 1) {
       const targetMicrobeCard = availableMicrobeCards[0];
       availableActions.push(new SelectOption('Add 3 microbes to ' + targetMicrobeCard.name, 'Add microbes', () => {
-        player.addResourceTo(targetMicrobeCard, 3);
-        LogHelper.logAddResource(player, targetMicrobeCard, 3);
+        player.addResourceTo(targetMicrobeCard, {qty: 3, log: true});
         player.game.defer(new PlaceOceanTile(player));
         return undefined;
       }));
@@ -83,8 +79,7 @@ export class ImportedHydrogen extends Card implements IProjectCard {
       availableActions.push(new SelectCard('Add 3 microbes to a card',
         'Add microbes',
         availableMicrobeCards, (foundCards: Array<ICard>) => {
-          player.addResourceTo(foundCards[0], 3);
-          LogHelper.logAddResource(player, foundCards[0], 3);
+          player.addResourceTo(foundCards[0], {qty: 3, log: true});
           player.game.defer(new PlaceOceanTile(player));
           return undefined;
         }));
@@ -93,15 +88,13 @@ export class ImportedHydrogen extends Card implements IProjectCard {
     if (availableAnimalCards.length === 1) {
       const targetAnimalCard = availableAnimalCards[0];
       availableActions.push(new SelectOption('Add 2 animals to ' + targetAnimalCard.name, 'Add animals', () => {
-        player.addResourceTo(targetAnimalCard, 2);
-        LogHelper.logAddResource(player, targetAnimalCard, 2);
+        player.addResourceTo(targetAnimalCard, {qty: 2, log: true});
         player.game.defer(new PlaceOceanTile(player));
         return undefined;
       }));
     } else if (availableAnimalCards.length > 1) {
       availableActions.push(new SelectCard('Add 2 animals to a card', 'Add animals', availableAnimalCards, (foundCards: Array<ICard>) => {
-        player.addResourceTo(foundCards[0], 2);
-        LogHelper.logAddResource(player, foundCards[0], 2);
+        player.addResourceTo(foundCards[0], {qty: 2, log: true});
         player.game.defer(new PlaceOceanTile(player));
         return undefined;
       }));

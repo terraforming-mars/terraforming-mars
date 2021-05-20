@@ -4,28 +4,28 @@ import {Resources} from '../../src/Resources';
 import {PartyName} from '../../src/turmoil/parties/PartyName';
 import {expect} from 'chai';
 
-describe('CardRequirement', function() {
-  it('ocean: success', function() {
+describe('CardRequirements', function() {
+  it('ocean: success - 1', function() {
     expect(CardRequirements.builder((b) => b.oceans(1)).getRequirementsText()).to.equal(
       'Ocean',
     );
   });
-  it('oceans: success', function() {
+  it('oceans: success - 3', function() {
     expect(CardRequirements.builder((b) => b.oceans(3)).getRequirementsText()).to.equal(
       '3 Oceans',
     );
   });
-  it('oceans: success - max', function() {
+  it('oceans: success - max 3', function() {
     expect(CardRequirements.builder((b) => b.oceans(3).max()).getRequirementsText()).to.equal(
       'max 3 Oceans',
     );
   });
-  it('ocean: success - max', function() {
+  it('ocean: success - max 1', function() {
     expect(CardRequirements.builder((b) => b.oceans(1).max()).getRequirementsText()).to.equal(
       'max 1 Ocean',
     );
   });
-  it('ocean: success - max', function() {
+  it('oxygen: success ', function() {
     expect(CardRequirements.builder((b) => b.oxygen(3)).getRequirementsText()).to.equal(
       '3% O2',
     );
@@ -45,7 +45,7 @@ describe('CardRequirement', function() {
       '-10° C',
     );
   });
-  it('temperature (-): success', function() {
+  it('temperature (-): success - max', function() {
     expect(
       CardRequirements.builder((b) => b.temperature(4).max()).getRequirementsText(),
     ).to.equal('max 4° C');

@@ -25,9 +25,6 @@ export class VenusGovernor extends Card {
       },
     });
   };
-  public canPlay(player: Player): boolean {
-    return player.getTagCount(Tags.VENUS) >= 2;
-  }
   public play(player: Player) {
     player.addProduction(Resources.MEGACREDITS, 2);
     return undefined;

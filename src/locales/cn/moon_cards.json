@@ -13,7 +13,7 @@
  "Draw 2 cards with Moon tag. Gain 6 steel.":"抽 2 张有月亮标签的卡片。获得 6 钢。",
 
  "Mining Complex":"综合开采",
- "Place a mine tile on the Moon and raise the Mining Rate 1 step. Place a road tile adjacent to placed mine tile and raise the Logistics Rate 1 step. Pay 7 MC.":"在月球上放置一个矿板块，并提高采矿速度1步。在放置矿板块的旁边放置一个道路板块，提高物流率1步。支付7 MC。",
+ "Place a mine tile on the Moon and raise the Mining Rate 1 step. Place a road tile adjacent to placed mine tile and raise the Logistics Rate 1 step. Pay 7 M€.":"在月球上放置一个矿板块，并提高采矿速度1步。在放置矿板块的旁边放置一个道路板块，提高物流率1步。支付7 M€。",
 
 
 
@@ -27,7 +27,7 @@
   "Decrease your plant production 1 step. Raise the Colony Rate 1 step and oxygen 1%.":"减少你的植物产量 1。提殖民速度1，加 1 氧。",
 
   "Ancient Shipyards":"古代造船厂",
-  "Action: Steal 8 M€ from any player and add a resource cube here.":"行动:从任何玩家那里偷取8 MC并在这里添加一个资源立方体。",
+  "Action: Steal 8 M€ from any player and add a resource cube here.":"行动:从任何玩家那里偷取8 M€并在这里添加一个资源立方体。",
   "Spend 3 titanium. -1 VP for every 2 resources here.":"花3钛。这里每2个资源-1个VP。",
 
  "Archimedes Hydroponics Station":"阿基米德水培站",
@@ -37,7 +37,7 @@
   "Spend 2 steel. Increase your M€ production 2 steps. Place a road tile on the Moon and raise the Logistics Rate 1 step.":"花2块钢。增加MC产能2。在月球放置道路板块，并提高物流速度 1步。",
 
   "Colonist Shuttles":"殖民者航天飞机",
-  "Spend 1 titanium. Raise the Colony Rate 1 step. Gain 2M€ for each colony tile on the Moon.":"花1钛。提高殖民速度1步。月球上每个殖民地板块获得2MC。",
+  "Spend 1 titanium. Raise the Colony Rate 1 step. Gain 2M€ for each colony tile on the Moon.":"花1钛。提高殖民速度1步。月球上每个殖民地板块获得2 M€。",
 
   "Copernicus Solar Arrays":"哥白尼太阳能阵列",
   "Spend 1 titanium. Gain 2 heat. Incease your energy production 1 step.":"花1钛。获得2热。提高你的电力产量1。",
@@ -49,7 +49,7 @@
 
   "Cosmic Radiation":"宇宙辐射",
   "4 Mining rate":"4月球采矿效率",
-  "Requires 4 Mining Rate. All players pay 4M€ for each mining tile they own.":"需要4个采矿效率。所有玩家为自己拥有的每个采矿板块支付4MC费用。",
+  "Requires 4 Mining Rate. All players pay 4M€ for each mining tile they own.":"需要4个采矿效率。所有玩家为自己拥有的每个采矿板块支付4 M€费用。",
 
   "Darkside Incubation Plant":"黑暗孵化厂",
   "Action: Add 1 microbe here.":"行动：在此处添加1个微生物",
@@ -96,13 +96,13 @@
 
 
   "HE3 Refinery": "氦-3 提炼厂",
- "Action: Gain 1 M€ for each level of Mining Rate.": "行动：每一采矿效率等级获得1 MC。",
+ "Action: Gain 1 M€ for each level of Mining Rate.": "行动：每一采矿效率等级获得1 M€。",
 
  "Habitat 14": "14# 栖息地",
  "Decrease your energy production 1 step and your M€ production 1 step. Spend 1 titanium. Place a colony tile on the Moon and raise the Colony Rate 1 step.": "降低电能和MC产量1步。花费1钛，在月球上放一块殖民地板块，并提高1殖民地效率。",
 
  "Heavy Duty Rovers": "重型探测车",
- "Gain 4 M€ for each mining tile adjacent to a road tile. Raise the Logistic Rate 1 step.": "每一个与道路板块相邻的采矿板块获得4 MC。提高物流效率1步",
+ "Gain 4 M€ for each mining tile adjacent to a road tile. Raise the Logistic Rate 1 step.": "每一个与道路板块相邻的采矿板块获得4 M€。提高物流效率1步",
 
  "Heliostat Mirror Array": "太阳能反射镜阵列",
   "Spend 1 titanium. Gain 1 heat. Increase your energy production 2 steps.": "“花费1钛。获得1热量。增加2 电能产量。",
@@ -127,7 +127,7 @@
 
  "Luna Conference" :"月球会议",
  "Requires that Scientists are ruling or that you have 2 delegates there. ": "要求科学党当政，或者那里有2位代表。",
- "Gain 2 M€ per road tile on the Moon. Gain 2M€ per colony tile on the Moon.": "在月球上每块道路板块获得2 MC。在月球上每块殖民地板块获得2MC。",
+ "Gain 2 M€ per road tile on the Moon. Gain 2M€ per colony tile on the Moon.": "在月球上每块道路板块获得2 M€。在月球上每块殖民地板块获得2 M€。",
 
  "Luna Mining Hub" :"月球采矿中心",
  "5 Mining rate": "5采矿效率",
@@ -151,7 +151,7 @@
 
   "Luna Senate" :"月球参议院",
  "3 Moon": "3月球标志",
-"1 VP per Moon tag you have.": "每一个月球标签增加1MC产量",
+"1 VP per Moon tag you have.": "每一个月球标签增加1 M€产量",
  "Requires that you have 3 Moon tags. Increase your M€ production 1 step per Moon tag in the game (including these.)": "要求您具有3个月球标签。在游戏中每个月球标签（包括这张牌）将您的MC产量提高1步。",
 
  "Luna Staging Station" :"月球转运站",
@@ -159,7 +159,7 @@
  "Requires Logistic Rate to be 2 or higher. Spend 1 titanium. Raise the Logistic Rate 2 steps.": "要求物流效率为2或更高。 花费1钛。 提高物流效率2步。",
 
  "Luna Trade Station" :"月球贸易战",
-"Action: Gain 1 M€ for each mining tile on the Moon.": "行动：月球上的每个采矿板块获得1 MC。",
+"Action: Gain 1 M€ for each mining tile on the Moon.": "行动：月球上的每个采矿板块获得1 M€。",
   "Spend 2 titanium. Place this tile ON THE RESERVED AREA.": "花费2钛。将此板块放置在预留区域上。",
 
  "Luna Train Station" :"月球火车站",

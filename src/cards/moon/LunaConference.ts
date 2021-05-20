@@ -10,6 +10,7 @@ import {TileType} from '../../TileType';
 import {CardRequirements} from '../CardRequirements';
 import {Card} from '../Card';
 import {Size} from '../render/Size';
+import {Resources} from '../../Resources';
 
 export class LunaConference extends Card implements IProjectCard {
   constructor() {
@@ -35,7 +36,8 @@ export class LunaConference extends Card implements IProjectCard {
   public play(player: Player) {
     const moonRoadCount = MoonExpansion.tiles(player.game, TileType.MOON_ROAD, {surfaceOnly: true}).length;
     const moonColonyCount = MoonExpansion.tiles(player.game, TileType.MOON_COLONY, {surfaceOnly: true}).length;
-    player.megaCredits += (moonRoadCount + moonColonyCount) * 2;
+    player.addResource(Resources.MEGACREDITS, (moonRoadCount + moonColonyCount) * 2, {log: true});
+
     return undefined;
   }
 }

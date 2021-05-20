@@ -2,7 +2,6 @@ import {Player} from '../Player';
 import {SelectCard} from '../inputs/SelectCard';
 import {ResourceType} from '../ResourceType';
 import {ICard} from '../cards/ICard';
-import {LogHelper} from '../LogHelper';
 import {Tags} from '../cards/Tags';
 import {DeferredAction, Priority} from './DeferredAction';
 import {LogBuilder} from '../LogBuilder';
@@ -44,8 +43,7 @@ export class AddResourcesToCard implements DeferredAction {
     }
 
     if (cards.length === 1) {
-      this.player.addResourceTo(cards[0], count);
-      LogHelper.logAddResource(this.player, cards[0], count);
+      this.player.addResourceTo(cards[0], {qty: count, log: true});
       return undefined;
     }
 
@@ -54,8 +52,7 @@ export class AddResourcesToCard implements DeferredAction {
       count === 1 ? 'Add resource' : 'Add resources',
       cards,
       (selected: Array<ICard>) => {
-        this.player.addResourceTo(selected[0], count);
-        LogHelper.logAddResource(this.player, selected[0], count);
+        this.player.addResourceTo(selected[0], {qty: count, log: true});
         return undefined;
       },
     );

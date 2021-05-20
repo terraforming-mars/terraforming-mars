@@ -8,7 +8,7 @@ import {PartyName} from '../../turmoil/parties/PartyName';
 import {CardRequirements} from '../CardRequirements';
 import {CardRenderer} from '../render/CardRenderer';
 import {Card} from '../Card';
-
+import {Units} from '../../Units';
 
 export class SponsoredMohole extends Card implements IProjectCard {
   constructor() {
@@ -17,6 +17,7 @@ export class SponsoredMohole extends Card implements IProjectCard {
       tags: [Tags.BUILDING],
       name: CardName.SPONSORED_MOHOLE,
       cardType: CardType.AUTOMATED,
+      productionBox: Units.of({heat: 2}),
 
       requirements: CardRequirements.builder((b) => b.party(PartyName.KELVINISTS)),
       metadata: {
@@ -27,13 +28,6 @@ export class SponsoredMohole extends Card implements IProjectCard {
         description: 'Requires that Kelvinists are ruling or that you have 2 delegates there. Increase your heat production 2 steps.',
       },
     });
-  }
-
-  public canPlay(player: Player): boolean {
-    if (player.game.turmoil !== undefined) {
-      return player.game.turmoil.canPlay(player, PartyName.KELVINISTS);
-    }
-    return false;
   }
 
   public play(player: Player) {

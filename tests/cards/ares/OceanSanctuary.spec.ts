@@ -62,4 +62,24 @@ describe('OceanSanctuary', function() {
     card.resourceCount = 7;
     expect(card.getVictoryPoints()).eq(7);
   });
+
+  it('Placing Ocean Sanctuary does not grant underlying space bonus', () => {
+    const oceanSpace = game.board.spaces.filter((space) => {
+      return space.bonus.length === 1 && space.bonus[0] === SpaceBonus.PLANT && space.spaceType === SpaceType.OCEAN;
+    })[0];
+
+    player.plants = 0;
+    game.addOceanTile(player, oceanSpace.id);
+    expect(player.plants).eq(1);
+
+    const action = card.play(player);
+
+    expect(player.plants).eq(1);
+
+    action.cb(oceanSpace);
+
+    expect(oceanSpace.player).to.eq(player);
+    expect(oceanSpace.tile!.tileType).to.eq(TileType.OCEAN_SANCTUARY);
+    expect(player.plants).eq(1);
+  });
 });

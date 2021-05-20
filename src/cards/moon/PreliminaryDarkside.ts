@@ -7,7 +7,6 @@ import {CardRenderer} from '../render/CardRenderer';
 import {MoonExpansion} from '../../moon/MoonExpansion';
 import {OrOptions} from '../../inputs/OrOptions';
 import {SelectOption} from '../../inputs/SelectOption';
-import {LogHelper} from '../../LogHelper';
 import {Resources} from '../../Resources';
 import {Card} from '../Card';
 
@@ -34,13 +33,11 @@ export class PreliminaryDarkside extends Card implements IProjectCard {
     MoonExpansion.raiseMiningRate(player);
     return new OrOptions(
       new SelectOption('Gain 3 titanium.', 'Gain titanium', () => {
-        player.titanium += 3;
-        LogHelper.logGainStandardResource(player, Resources.TITANIUM, 3);
+        player.addResource(Resources.TITANIUM, 3, {log: true});
         return undefined;
       }),
       new SelectOption('Gain 4 steel.', 'Gain steel', () => {
-        player.steel += 4;
-        LogHelper.logGainStandardResource(player, Resources.STEEL, 4);
+        player.addResource(Resources.STEEL, 4, {log: true});
         return undefined;
       }));
   }

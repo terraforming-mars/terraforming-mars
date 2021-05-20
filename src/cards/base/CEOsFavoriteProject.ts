@@ -8,6 +8,7 @@ import {CardName} from '../../CardName';
 import {LogHelper} from '../../LogHelper';
 import {CardRenderer} from '../render/CardRenderer';
 import {Size} from '../render/Size';
+import {RobotCard} from '../promo/SelfReplicatingRobots';
 
 export class CEOsFavoriteProject extends Card implements IProjectCard {
   constructor() {
@@ -34,8 +35,14 @@ export class CEOsFavoriteProject extends Card implements IProjectCard {
       'Add resource',
       player.getCardsWithResources().concat(robotCards.map((c) => c.card)),
       (foundCards: Array<ICard>) => {
-        player.addResourceTo(robotCards.find((c) => c.card.name === foundCards[0].name) ?? foundCards[0]);
-        LogHelper.logAddResource(player, foundCards[0]);
+        // if the user selected a robot card, handle it here:
+        const robotCard: RobotCard | undefined = robotCards.find((c) => c.card.name === foundCards[0].name);
+        if (robotCard) {
+          robotCard.resourceCount++;
+          LogHelper.logAddResource(player, robotCard.card);
+        } else {
+          player.addResourceTo(foundCards[0], {log: true});
+        }
         return undefined;
       },
     );

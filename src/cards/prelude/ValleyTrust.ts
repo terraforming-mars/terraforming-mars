@@ -20,7 +20,7 @@ export class ValleyTrust extends Card implements CorporationCard {
       cardDiscount: {tag: Tags.SCIENCE, amount: 2},
       metadata: {
         cardNumber: 'R34',
-        description: 'You start with 37 MC. As your first action, draw 3 Prelude cards, and play one of them. Discard the other two.',
+        description: 'You start with 37 M€. As your first action, draw 3 Prelude cards, and play one of them. Discard the other two.',
         renderData: CardRenderer.builder((b) => {
           b.br.br;
           b.megacredits(37).nbsp.prelude().asterix();

@@ -177,12 +177,12 @@ export const DebugUI = Vue.component('debug-ui', {
               <a href="https://ssimeonoff.github.io/cards-list" target="_blank">legacy card UI</a>
             </div>
             <div class="form-group">
-              <input class="form-input form-input-line" placeholder="filter" v-model="filterText"></input>
-              <input type="checkbox" name="filterDescription" id="filterDescription-checkbox" v-model="filterDescription"></input>
+              <input class="form-input form-input-line" placeholder="filter" v-model="filterText">
+              <input type="checkbox" name="filterDescription" id="filterDescription-checkbox" v-model="filterDescription">
               <label for="filterDescription-checkbox">
                   <span v-i18n>Filter description</span>
               </label>
-              <input type="checkbox" name="sortById" id="sortById-checkbox" v-model="sortById"></input>
+              <input type="checkbox" name="sortById" id="sortById-checkbox" v-model="sortById">
               <label for="sortById-checkbox">
                   <span v-i18n>Sort by ID (work in progress)</span>
               </label>
@@ -193,60 +193,60 @@ export const DebugUI = Vue.component('debug-ui', {
                 <span v-i18n>Toggle all</span>
             </button>
 
-            <input type="checkbox" name="base" id="base-checkbox" v-model="base"></input>
+            <input type="checkbox" name="base" id="base-checkbox" v-model="base">
               <label for="base-checkbox" class="expansion-button">
                   <span v-i18n>Base</span>
               </label>
 
-              <input type="checkbox" name="corporateEra" id="corporateEra-checkbox" v-model="corporateEra"></input>
+              <input type="checkbox" name="corporateEra" id="corporateEra-checkbox" v-model="corporateEra">
               <label for="corporateEra-checkbox" class="expansion-button">
                   <div class="create-game-expansion-icon expansion-icon-CE"></div>
                   <span v-i18n>Corporate Era</span>
               </label>
 
-              <input type="checkbox" name="prelude" id="prelude-checkbox" v-model="prelude"></input>
+              <input type="checkbox" name="prelude" id="prelude-checkbox" v-model="prelude">
               <label for="prelude-checkbox" class="expansion-button">
                   <div class="create-game-expansion-icon expansion-icon-prelude"></div>
                   <span v-i18n>Prelude</span>
               </label>
 
-              <input type="checkbox" name="venusNext" id="venusNext-checkbox" v-model="venusNext"></input>
+              <input type="checkbox" name="venusNext" id="venusNext-checkbox" v-model="venusNext">
               <label for="venusNext-checkbox" class="expansion-button">
               <div class="create-game-expansion-icon expansion-icon-venus"></div>
                   <span v-i18n>Venus Next</span>
               </label>
 
-              <input type="checkbox" name="colonies" id="colonies-checkbox" v-model="colonies"></input>
+              <input type="checkbox" name="colonies" id="colonies-checkbox" v-model="colonies">
               <label for="colonies-checkbox" class="expansion-button">
               <div class="create-game-expansion-icon expansion-icon-colony"></div>
                   <span v-i18n>Colonies</span>
               </label>
 
-              <input type="checkbox" name="turmoil" id="turmoil-checkbox" v-model="turmoil"></input>
+              <input type="checkbox" name="turmoil" id="turmoil-checkbox" v-model="turmoil">
               <label for="turmoil-checkbox" class="expansion-button">
                   <div class="create-game-expansion-icon expansion-icon-turmoil"></div>
                   <span v-i18n>Turmoil</span>
               </label>
 
-              <input type="checkbox" name="promo" id="promo-checkbox" v-model="promo"></input>
+              <input type="checkbox" name="promo" id="promo-checkbox" v-model="promo">
               <label for="promo-checkbox" class="expansion-button">
                   <div class="create-game-expansion-icon expansion-icon-promo"></div>
                   <span v-i18n>Promos</span>
               </label>
 
-              <input type="checkbox" name="ares" id="ares-checkbox" v-model="ares"></input>
+              <input type="checkbox" name="ares" id="ares-checkbox" v-model="ares">
               <label for="ares-checkbox" class="expansion-button">
                   <div class="create-game-expansion-icon expansion-icon-ares"></div>
                   <span v-i18n>Ares</span>
               </label>
 
-              <input type="checkbox" name="community" id="community-checkbox" v-model="community"></input>
+              <input type="checkbox" name="community" id="community-checkbox" v-model="community">
               <label for="community-checkbox" class="expansion-button">
                   <div class="create-game-expansion-icon expansion-icon-community"></div>
                   <span v-i18n>Community</span>
               </label><span/>
 
-              <input type="checkbox" name="moon" id="moon-checkbox" v-model="moon"></input>
+              <input type="checkbox" name="moon" id="moon-checkbox" v-model="moon">
               <label for="moon-checkbox" class="expansion-button">
                 <div class="create-game-expansion-icon expansion-icon-themoon"></div>
                 <span v-i18n>The Moon</span>

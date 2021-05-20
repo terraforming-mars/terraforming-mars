@@ -5,7 +5,6 @@ import {Player} from '../../Player';
 import {ResourceType} from '../../ResourceType';
 import {SelectCard} from '../../inputs/SelectCard';
 import {CardName} from '../../CardName';
-import {LogHelper} from '../../LogHelper';
 import {MAX_VENUS_SCALE, REDS_RULING_POLICY_COST} from '../../constants';
 import {PartyHooks} from '../../turmoil/parties/PartyHooks';
 import {PartyName} from '../../turmoil/parties/PartyName';
@@ -60,8 +59,7 @@ export class HydrogenToVenus extends Card {
     });
     if (jovianTags > 0) {
       if (floatersCards.length === 1) {
-        player.addResourceTo(floatersCards[0], jovianTags);
-        LogHelper.logAddResource(player, floatersCards[0], jovianTags);
+        player.addResourceTo(floatersCards[0], {qty: jovianTags, log: true});
       }
       if (floatersCards.length > 1) {
         return new SelectCard(
@@ -69,8 +67,7 @@ export class HydrogenToVenus extends Card {
           'Add floater(s)',
           floatersCards,
           (foundCards: Array<ICard>) => {
-            player.addResourceTo(foundCards[0], jovianTags);
-            LogHelper.logAddResource(player, foundCards[0], jovianTags);
+            player.addResourceTo(foundCards[0], {qty: jovianTags, log: true});
             player.game.increaseVenusScaleLevel(player, 1);
             return undefined;
           },

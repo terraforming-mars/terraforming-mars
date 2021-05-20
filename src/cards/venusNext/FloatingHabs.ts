@@ -5,7 +5,6 @@ import {Player} from '../../Player';
 import {ResourceType} from '../../ResourceType';
 import {SelectCard} from '../../inputs/SelectCard';
 import {CardName} from '../../CardName';
-import {LogHelper} from '../../LogHelper';
 import {SelectHowToPayDeferred} from '../../deferredActions/SelectHowToPayDeferred';
 import {CardRequirements} from '../CardRequirements';
 import {CardRenderer} from '../render/CardRenderer';
@@ -36,9 +35,7 @@ export class FloatingHabs extends Card implements IActionCard, IResourceCard {
     });
   };
   public resourceCount: number = 0;
-  public canPlay(player: Player): boolean {
-    return player.getTagCount(Tags.SCIENCE) >= 2;
-  }
+
   public play() {
     return undefined;
   }
@@ -56,8 +53,7 @@ export class FloatingHabs extends Card implements IActionCard, IResourceCard {
     // add to itself if no other available target
     if (floaterCards.length === 1) {
       player.game.defer(new SelectHowToPayDeferred(player, 2, {title: 'Select how to pay for Floating Habs action'}));
-      LogHelper.logAddResource(player, floaterCards[0]);
-      player.addResourceTo(floaterCards[0], 1);
+      player.addResourceTo(floaterCards[0], {log: true});
       return undefined;
     }
 
@@ -67,8 +63,7 @@ export class FloatingHabs extends Card implements IActionCard, IResourceCard {
       floaterCards,
       (foundCards: Array<ICard>) => {
         player.game.defer(new SelectHowToPayDeferred(player, 2, {title: 'Select how to pay for Floating Habs action'}));
-        LogHelper.logAddResource(player, foundCards[0]);
-        player.addResourceTo(foundCards[0], 1);
+        player.addResourceTo(foundCards[0], {log: true});
         return undefined;
       },
     );

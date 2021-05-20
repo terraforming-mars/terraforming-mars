@@ -7,7 +7,6 @@ import {ResourceType} from '../../ResourceType';
 import {Tags} from '../Tags';
 import {Player} from '../../Player';
 import {Resources} from '../../Resources';
-import {LogHelper} from '../../LogHelper';
 import {CardRenderer} from '../render/CardRenderer';
 import {CardRenderDynamicVictoryPoints} from '../render/CardRenderDynamicVictoryPoints';
 
@@ -21,7 +20,7 @@ export class AsteroidHollowing extends Card implements IActionCard, IProjectCard
       resourceType: ResourceType.ASTEROID,
 
       metadata: {
-        cardNumber: 'X13',
+        cardNumber: 'X15',
         renderData: CardRenderer.builder((b) => {
           b.action('Spend 1 titanium to add 1 asteroid resource here and increase M€ production 1 step.', (eb) => {
             eb.titanium(1).startAction.asteroids(1).production((pb) => pb.megacredits(1));
@@ -43,10 +42,9 @@ export class AsteroidHollowing extends Card implements IActionCard, IProjectCard
   }
 
   public action(player: Player) {
-    player.titanium -= 1;
+    player.deductResource(Resources.TITANIUM, 1);
     player.addProduction(Resources.MEGACREDITS, 1);
-    player.addResourceTo(this);
-    LogHelper.logAddResource(player, this);
+    player.addResourceTo(this, {log: true});
 
     return undefined;
   }

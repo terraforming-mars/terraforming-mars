@@ -12,6 +12,7 @@ import {IAdjacencyBonus} from '../../ares/IAdjacencyBonus';
 import {CardMetadata} from '../CardMetadata';
 import {CardRequirements} from '../CardRequirements';
 import {CardRenderer} from '../render/CardRenderer';
+import {Units} from '../../Units';
 
 export class NaturalPreserve extends Card implements IProjectCard {
   constructor(
@@ -30,6 +31,7 @@ export class NaturalPreserve extends Card implements IProjectCard {
       name,
       tags: [Tags.SCIENCE, Tags.BUILDING],
       cost: 9,
+      productionBox: Units.of({megacredits: 1}),
       adjacencyBonus,
       requirements: CardRequirements.builder((b) => b.oxygen(4).max()),
       metadata,

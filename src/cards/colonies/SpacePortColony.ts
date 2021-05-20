@@ -30,14 +30,6 @@ export class SpacePortColony extends Card implements IProjectCard {
     });
   }
 
-  public canPlay(player: Player): boolean {
-    let coloniesCount: number = 0;
-    player.game.colonies.forEach((colony) => {
-      coloniesCount += colony.colonies.filter((owner) => owner === player.id).length;
-    });
-    return coloniesCount > 0;
-  }
-
   public play(player: Player) {
     player.game.defer(new BuildColony(player, true, 'Select colony for Space Port Colony'));
     player.increaseFleetSize();

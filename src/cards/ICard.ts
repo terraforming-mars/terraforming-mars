@@ -20,6 +20,7 @@ import {StandardProjectCard} from './StandardProjectCard';
 import {CardRequirements} from './CardRequirements';
 import {GlobalParameter} from '../GlobalParameter';
 import {BoardType} from '../boards/BoardType';
+import {Units} from '../Units';
 
 export interface IActionCard {
     action: (player: Player) => OrOptions | SelectOption | AndOptions | SelectAmount | SelectCard<ICard> | SelectCard<IProjectCard> | SelectHowToPay | SelectPlayer | SelectSpace | undefined;
@@ -58,5 +59,7 @@ export interface ICard {
     requirements?: CardRequirements;
     metadata: CardMetadata;
     warning?: string | Message;
+    productionBox?: Units;
+    produce?: (player: Player) => void;
 }
 

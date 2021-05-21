@@ -132,34 +132,34 @@ export const Sidebar = Vue.component('sidebar', {
     <global-parameter-value v-if="gameOptions.venusNextExtension" :param="this.globalParameter.VENUS" :value="this.venus"></global-parameter-value>
     <moon-global-parameter-value v-if="gameOptions.moonExpansion" :moonData="this.moonData"></moon-global-parameter-value>
   </div>
-  <div class="preferences_item preferences_player">
+  <div class="sidebar_item preferences_player">
     <div :class="getPlayerColorCubeClass()+' player_bg_color_' + player_color"></div>
   </div>
 
   <a href="#board">
-      <div class="preferences_item preferences_item_shortcut">
-          <i class="preferences_icon preferences_icon--board"></i>
+      <div class="sidebar_item sidebar_item_shortcut">
+          <i class="sidebar_icon sidebar_icon--board"></i>
       </div>
   </a>
   <a href="#actions">
-      <div class="preferences_item preferences_item_shortcut">
-          <i class="preferences_icon preferences_icon--actions"></i>
+      <div class="sidebar_item sidebar_item_shortcut">
+          <i class="sidebar_icon sidebar_icon--actions"></i>
       </div>
   </a>
   <a href="#cards">
-      <div class="preferences_item goto-cards preferences_item_shortcut">
-          <i class="preferences_icon preferences_icon--cards"><slot></slot></i>
+      <div class="sidebar_item goto-cards sidebar_item_shortcut">
+          <i class="sidebar_icon sidebar_icon--cards"><slot></slot></i>
       </div>
   </a>
   <a v-if="coloniesCount > 0" href="#colonies">
-      <div class="preferences_item preferences_item_shortcut">
-          <i class="preferences_icon preferences_icon--colonies"></i>
+      <div class="sidebar_item sidebar_item_shortcut">
+          <i class="sidebar_icon sidebar_icon--colonies"></i>
       </div>
   </a>
 
-  <div class="preferences_item preferences_item--info">
-    <i class="preferences_icon preferences_icon--info"
-      :class="{'preferences_item--is-active': ui.gamesetup_detail_open}"
+  <div class="sidebar_item sidebar_item--info">
+    <i class="sidebar_icon sidebar_icon--info"
+      :class="{'sidebar_item--is-active': ui.gamesetup_detail_open}"
       v-on:click="ui.gamesetup_detail_open = !ui.gamesetup_detail_open"
       :title="$t('game setup details')"></i>
     <div class="info_panel" v-if="ui.gamesetup_detail_open">
@@ -174,13 +174,13 @@ export const Sidebar = Vue.component('sidebar', {
   </div>
 
   <a href="/help" target="_blank">
-    <div class="preferences_item preferences_item--help">
-      <i class="preferences_icon preferences_icon--help" :title="$t('player aid')"></i>
+    <div class="sidebar_item sidebar_item--help">
+      <i class="sidebar_icon sidebar_icon--help" :title="$t('player aid')"></i>
     </div>
   </a>
 
-  <div class="preferences_item preferences_item--settings">
-    <i class="preferences_icon preferences_icon--settings" :class="{'preferences_item--is-active': ui.preferences_panel_open}" v-on:click="ui.preferences_panel_open = !ui.preferences_panel_open"></i>
+  <div class="sidebar_item sidebar_item--settings">
+    <i class="sidebar_icon sidebar_icon--settings" :class="{'sidebar_item--is-active': ui.preferences_panel_open}" v-on:click="ui.preferences_panel_open = !ui.preferences_panel_open"></i>
     <preferences-dialog v-if="ui.preferences_panel_open" @okButtonClicked="ui.preferences_panel_open = false"/>
   </div>
 </div>

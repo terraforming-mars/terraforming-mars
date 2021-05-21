@@ -82,7 +82,7 @@ export const PlayerInfo = Vue.component('player-info', {
       // for active player => scroll to cards UI
       if (this.player.color === this.activePlayer.color) {
         const el: HTMLElement = document.getElementsByClassName(
-          'preferences_icon--cards',
+          'sidebar_icon--cards',
         )[0] as HTMLElement;
         el.click();
 

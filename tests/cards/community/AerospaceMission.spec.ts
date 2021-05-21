@@ -1,11 +1,14 @@
 import {expect} from 'chai';
 import {AerospaceMission} from '../../../src/cards/community/AerospaceMission';
-import {Iapetus} from '../../../src/cards/community/Iapetus';
-import {Leavitt} from '../../../src/cards/community/Leavitt';
+import {Callisto} from '../../../src/colonies/Callisto';
+import {Ceres} from '../../../src/colonies/Ceres';
 import {ColonyName} from '../../../src/colonies/ColonyName';
+import {Io} from '../../../src/colonies/Io';
+import {Luna} from '../../../src/colonies/Luna';
 import {Game} from '../../../src/Game';
 import {SelectColony} from '../../../src/inputs/SelectColony';
 import {Player} from '../../../src/Player';
+import {Resources} from '../../../src/Resources';
 import {TestingUtils} from '../../TestingUtils';
 import {TestPlayers} from '../../TestPlayers';
 
@@ -18,21 +21,31 @@ describe('AerospaceMission', function() {
     const redPlayer = TestPlayers.RED.newPlayer();
     const gameOptions = TestingUtils.setCustomGameOptions({coloniesExtension: true});
     game = Game.newInstance('foobar', [player, redPlayer], player, gameOptions);
-    game.colonies.push(new Iapetus(), new Leavitt()); // ensure 2 colonies are always available
+    // Ignore randomly generated colonies, and add some colonies that can be built independently of cards
+    game.colonies = [new Callisto(), new Ceres(), new Io(), new Luna()];
   });
 
   it('Should play', function() {
     card.play(player);
     expect(game.deferredActions).has.lengthOf(2);
 
+    // Expect Callisto and Ceres to show up first and second in the colonies list, every time
+    expect(game.colonies[0].name).to.eq(ColonyName.CALLISTO);
+    expect(game.colonies[1].name).to.eq(ColonyName.CERES);
+
+    // Build the first free on Callisto
     const selectColony = game.deferredActions.peek()!.execute() as SelectColony;
     game.deferredActions.pop();
     selectColony.cb((<any>ColonyName)[selectColony.coloniesModel[0].name.toUpperCase()]);
+    expect(player.getProduction(Resources.ENERGY)).to.eq(1);
 
+    // Build the second free on Ceres
     const selectColony2 = game.deferredActions.peek()!.execute() as SelectColony;
     game.deferredActions.pop();
     selectColony2.cb((<any>ColonyName)[selectColony2.coloniesModel[0].name.toUpperCase()]);
+    expect(player.getProduction(Resources.STEEL)).to.eq(1);
 
+    // Check that we built two colonies
     const builtColonies = game.colonies.filter((colony) => colony.isActive && colony.colonies.length > 0);
     expect(builtColonies).has.lengthOf(2);
     expect(builtColonies[0].colonies.find((c) => c === player.id)).is.not.undefined;

@@ -33,6 +33,9 @@ export class RoboticWorkforce extends Card implements IProjectCard {
   }
 
   private isCardApplicable(card: ICard, player: Player): boolean {
+    if (!card.tags.includes(Tags.BUILDING)) {
+      return false;
+    }
     if (card.name === CardName.BIOMASS_COMBUSTORS) {
       return player.game.someoneHasResourceProduction(Resources.PLANTS, 1);
     }

@@ -23,6 +23,8 @@ import {ICard} from '../../../src/cards/ICard';
 import {TestPlayer} from '../../TestPlayer';
 import {Units} from '../../../src/Units';
 import {fail} from 'assert';
+import {SolarWindPower} from '../../../src/cards/base/SolarWindPower';
+import {MarsUniversity} from '../../../src/cards/base/MarsUniversity';
 
 describe('RoboticWorkforce', () => {
   let card : RoboticWorkforce; let player : TestPlayer; let game : Game;
@@ -135,20 +137,19 @@ describe('RoboticWorkforce', () => {
     expect(player.getProduction(Resources.TITANIUM)).to.eq(1);
   });
 
-  // it('all cards have updaters or productionBoxes', () => {
-  //   const errors: Array<string> = [];
-  //   RoboticWorkforce.complicatedCards.forEach((cardName) => {
-  //     const updater = card.getUnits(cardName, player);
-  //     const units = staticCardProperties.get(cardName)?.productionBox;
-  //     if (updater === undefined && units === undefined) {
-  //       errors.push(cardName + ' is unregistered');
-  //     }
-  //     if (updater !== undefined && units !== undefined) {
-  //       errors.push(cardName + ' is double-registered');
-  //     }
-  //   });
-  //   expect(errors, errors.toString()).is.empty;
-  // });
+  it('Should not work with Solar Wind Power (no building tag, but has production)', () => {
+    player.playedCards.push(new SolarWindPower());
+
+    const action = card.play(player);
+    expect(action).is.undefined;
+  });
+
+  it('Should not work with Mars University (building tag, no production)', () => {
+    player.playedCards.push(new MarsUniversity());
+
+    const action = card.play(player);
+    expect(action).is.undefined;
+  });
 
   ALL_CARD_MANIFESTS.forEach((manifest) => {
     manifest.projectCards.factories.forEach((c) => {
@@ -175,7 +176,7 @@ describe('RoboticWorkforce', () => {
 
     let include = false;
     if ((card.tags.includes(Tags.BUILDING) || card.tags.includes(Tags.WILDCARD)) && card.play !== undefined) {
-    // Solar Farm is a pain to test so let's just say it's fine
+      // Solar Farm is a pain to test so let's just say it's fine
       if (card.name === CardName.SOLAR_FARM) {
         return;
       }

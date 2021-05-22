@@ -82,11 +82,18 @@ export class PoliticalAgendas {
     // Agendas are static unless it's chosen by a chairperson, in which case
     // defer the selection.
     if (politicalAgendasData.agendaStyle === AgendaStyle.CHAIRMAN && chairman !== 'NEUTRAL') {
-      game.defer(new ChoosePoliticalAgenda(game.getPlayerById(chairman), rulingParty, (nextAgenda) => {
-        turmoil.politicalAgendasData.agendas.set(rulingParty.name, nextAgenda);
-        turmoil.onAgendaSelected(game);
-        return undefined;
-      }));
+      const agenda = this.getAgenda(turmoil, rulingParty.name);
+      game.defer(new ChoosePoliticalAgenda(
+        game.getPlayerById(chairman),
+        rulingParty,
+        (bonusId) => {
+          agenda.bonusId = bonusId;
+          turmoil.onAgendaSelected(game);
+        },
+        (policyId) => {
+          agenda.policyId = policyId;
+          turmoil.onAgendaSelected(game);
+        }));
     } else {
       turmoil.onAgendaSelected(game);
     }

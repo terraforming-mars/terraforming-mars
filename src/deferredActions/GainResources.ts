@@ -1,13 +1,11 @@
 import {Player} from '../Player';
 import {Resources} from '../Resources';
 import {DeferredAction, Priority} from './DeferredAction';
-import {LogBuilder} from '../LogBuilder';
 
 export namespace GainResources {
   export interface Options {
     count?: number;
-    logMessage?: string;
-    logBuilder?: (builder: LogBuilder) => void;
+    cb?: () => void;
   }
 }
 
@@ -17,19 +15,19 @@ export class GainResources implements DeferredAction {
     public player: Player,
     public resource: Resources,
     public options: GainResources.Options = {},
-  ) {}
+  ) {
+    if ((options.count ?? 0) < 0) {
+      throw new Error('GainResources count option must be >= 0');
+    }
+  }
 
   public execute() {
-    if (this.options.count === undefined) {
-      this.options.count = 1;
-    } else if (this.options.count < 0) {
-      throw new Error('GainResources count option must be >= 0');
-    } else if (this.options.count === 0) {
+    if (this.options.count === 0) {
       return undefined;
     }
-    this.player.addResource(this.resource, this.options.count);
-    if (this.options.logMessage !== undefined) {
-      this.player.game.log(this.options.logMessage, this.options.logBuilder);
+    this.player.addResource(this.resource, this.options.count ?? 1);
+    if (this.options.cb) {
+      this.options.cb();
     }
     return undefined;
   }

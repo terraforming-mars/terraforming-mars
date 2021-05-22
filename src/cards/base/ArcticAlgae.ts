@@ -37,8 +37,9 @@ export class ArcticAlgae extends Card implements IProjectCard {
       cardOwner.game.defer(
         new GainResources(cardOwner, Resources.PLANTS, {
           count: 2,
-          logMessage: '${0} gained 2 ${1} from ${2}',
-          logBuilder: (b) => b.player(cardOwner).string(Resources.PLANTS).cardName(this.name),
+          cb: () => activePlayer.game.log(
+            '${0} gained 2 ${1} from ${2}',
+            (b) => b.player(cardOwner).string(Resources.PLANTS).cardName(this.name)),
         }),
         cardOwner.id !== activePlayer.id ? Priority.OPPONENT_TRIGGER : undefined,
       );

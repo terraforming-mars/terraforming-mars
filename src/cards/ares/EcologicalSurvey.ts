@@ -59,8 +59,9 @@ export class EcologicalSurvey extends Card implements IProjectCard {
         cardOwner,
         Resources.PLANTS,
         {
-          logMessage: '${0} gained a bonus ${1} because of ${2}',
-          logBuilder: (b) => b.player(cardOwner).string(Resources.PLANTS).cardName(this.name),
+          cb: () => activePlayer.game.log(
+            '${0} gained a bonus ${1} because of ${2}',
+            (b) => b.player(cardOwner).string(Resources.PLANTS).cardName(this.name)),
         }));
     }
 

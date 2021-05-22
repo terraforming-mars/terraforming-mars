@@ -61,8 +61,9 @@ export class GeologicalSurvey extends Card implements IProjectCard {
           cardOwner,
           resource,
           {
-            logMessage: '${0} gained a bonus ${1} because of ${2}',
-            logBuilder: (b) => b.player(cardOwner).string(resource).cardName(this.name),
+            cb: () => activePlayer.game.log(
+              '${0} gained a bonus ${1} because of ${2}',
+              (b) => b.player(cardOwner).string(resource).cardName(this.name)),
           }));
       }
     });

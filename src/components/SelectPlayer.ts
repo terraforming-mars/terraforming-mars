@@ -3,7 +3,7 @@ import Vue from 'vue';
 import {Button} from './common/Button';
 import {ColorWithNeutral} from '../Color';
 import {PlayerInputModel} from '../models/PlayerInputModel';
-import {PlayerModel} from '../models/PlayerModel';
+import {PublicPlayerModel} from '../models/PlayerModel';
 import {SelectPlayerRow} from './SelectPlayerRow';
 import {VueModelRadio} from './VueTypes';
 import {TranslateMixin} from './TranslateMixin';
@@ -11,7 +11,7 @@ import {TranslateMixin} from './TranslateMixin';
 export const SelectPlayer = Vue.component('select-player', {
   props: {
     players: {
-      type: Array as () => Array<PlayerModel>,
+      type: Array as () => Array<PublicPlayerModel>,
     },
     playerinput: {
       type: Object as () => PlayerInputModel,

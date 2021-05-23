@@ -4,7 +4,7 @@ import {LogMessage} from '../LogMessage';
 import {LogMessageType} from '../LogMessageType';
 import {LogMessageData} from '../LogMessageData';
 import {LogMessageDataType} from '../LogMessageDataType';
-import {PlayerModel} from '../models/PlayerModel';
+import {PublicPlayerModel} from '../models/PlayerModel';
 import {Card} from './card/Card';
 import {$t} from '../directives/i18n';
 import {CardFinder} from './../CardFinder';
@@ -35,7 +35,7 @@ export const LogPanel = Vue.component('log-panel', {
       type: Number,
     },
     players: {
-      type: Array as () => Array<PlayerModel>,
+      type: Array as () => Array<PublicPlayerModel>,
     },
     color: {
       type: String as () => Color,
@@ -188,7 +188,6 @@ export const LogPanel = Vue.component('log-panel', {
       return '';
     },
     messageClicked: function(message: LogMessage) {
-      // TODO(kberg): add global event here, too.
       const datas = message.data;
       datas.forEach((data: LogMessageData) => {
         if (data.value === undefined) {

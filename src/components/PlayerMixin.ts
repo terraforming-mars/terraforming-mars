@@ -1,6 +1,6 @@
 import {CardModel} from '../models/CardModel';
 import {CardType} from '../cards/CardType';
-import {PlayerModel} from '../models/PlayerModel';
+import {PublicPlayerModel} from '../models/PlayerModel';
 import {sortActiveCards} from '../components/ActiveCardsSortingOrder';
 
 // Common code for player layouts
@@ -22,7 +22,7 @@ export const PlayerMixin = {
       return cards.reverse();
     },
     getPlayerCardsPlayed: function(
-      player: PlayerModel,
+      player: PublicPlayerModel,
       withCorp: boolean,
     ): number {
       const playedCardsNr = player.playedCards.length || 0;
@@ -41,14 +41,16 @@ export const PlayerMixin = {
       return CardType.PRELUDE;
     },
     isCardActivated: function(
-      card: CardModel,
-      player: PlayerModel,
+      // TODO(kberg): The | undefined was added because PlayerHomeView uses publicPlayer(),
+      // which makes it hard to elegaently rely on Typescript's compiler to know that the
+      // incoming corporation card is certainly defined.
+      card: CardModel | undefined,
+      player: PublicPlayerModel,
     ): boolean {
-      return (
-        (player !== undefined &&
-                player.actionsThisGeneration !== undefined &&
-                player.actionsThisGeneration.includes(card.name)) || card.isDisabled
-      );
+      return card !== undefined &&
+          ((player.actionsThisGeneration !== undefined &&
+            player.actionsThisGeneration.includes(card.name)) ||
+          card.isDisabled);
     },
   },
 };

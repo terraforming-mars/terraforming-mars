@@ -2,7 +2,7 @@ import Vue from 'vue';
 import {ActionLabel} from './ActionLabel';
 import {Button} from '../common/Button';
 import {mainAppSettings} from '../App';
-import {PlayerModel} from '../../models/PlayerModel';
+import {PlayerModel, publicModelOf, PublicPlayerModel} from '../../models/PlayerModel';
 import {PlayerTimer} from './PlayerTimer';
 
 export const hidePlayerData = (root: typeof mainAppSettings.methods, playerIndex: number) => {
@@ -25,6 +25,11 @@ export const PlayerStatus = Vue.component('player-status', {
     },
     playerIndex: {
       type: Number,
+    },
+  },
+  computed: {
+    publicPlayer: function(): PublicPlayerModel {
+      return publicModelOf(this.player);
     },
   },
   components: {
@@ -59,7 +64,7 @@ export const PlayerStatus = Vue.component('player-status', {
         <div class="player-status-bottom">
           <div :class="getLabelAndTimerClasses()">
             <div :class="getActionStatusClasses()">{{ actionLabel }}</div>
-            <div class="player-status-timer" v-if="player.game.gameOptions.showTimers"><player-timer :timer="player.timer"/></div>
+            <div class="player-status-timer" v-if="player.game.gameOptions.showTimers"><player-timer :timer="this.publicPlayer.timer"/></div>
           </div>
         </div>
       </div>

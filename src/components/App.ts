@@ -119,6 +119,8 @@ export const mainAppSettings = {
         if (xhr.status === 200) {
           app.player = xhr.response as PlayerModel;
           app.playerkey++;
+          const playerId = app.player.players[app.player.playersIndex].id;
+
           if (
             app.player.game.phase === 'end' &&
                         window.location.search.includes('&noredirect') === false
@@ -128,7 +130,7 @@ export const mainAppSettings = {
               window.history.replaceState(
                 xhr.response,
                 `${constants.APP_NAME} - Player`,
-                '/the-end?id=' + app.player.id,
+                '/the-end?id=' + playerId,
               );
             }
           } else {
@@ -137,7 +139,7 @@ export const mainAppSettings = {
               window.history.replaceState(
                 xhr.response,
                 `${constants.APP_NAME} - Game`,
-                '/player?id=' + app.player.id,
+                '/player?id=' + playerId,
               );
             }
           }

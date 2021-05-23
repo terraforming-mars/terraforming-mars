@@ -2,7 +2,7 @@ import Vue from 'vue';
 
 import {StackedCards} from './StackedCards';
 import {PlayerMixin} from './PlayerMixin';
-import {PlayerModel} from '../models/PlayerModel';
+import {PublicPlayerModel} from '../models/PlayerModel';
 import {hidePlayerData} from './overview/PlayerStatus';
 import {mainAppSettings} from './App';
 import {Card} from './card/Card';
@@ -10,7 +10,7 @@ import {Card} from './card/Card';
 export const OtherPlayer = Vue.component('other-player', {
   props: {
     player: {
-      type: Object as () => PlayerModel,
+      type: Object as () => PublicPlayerModel,
     },
     playerIndex: {
       type: Number,

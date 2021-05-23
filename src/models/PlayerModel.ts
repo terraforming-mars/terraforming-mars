@@ -34,7 +34,6 @@ export interface PublicPlayerModel {
   plantProduction: number;
   plantsAreProtected: boolean;
   playedCards: Array<CardModel>;
-  preludeCardsInHand: Array<CardModel>;
   selfReplicatingRobotsCards: Array<CardModel>;
   steel: number;
   steelProduction: number;
@@ -49,7 +48,7 @@ export interface PublicPlayerModel {
   victoryPointsBreakdown: VictoryPointsBreakdown;
 }
 
-export interface PlayerModel extends PublicPlayerModel {
+export interface PrivatePlayerModel {
   availableBlueCardActionCount: number;
   cardCost: number;
   cardsInHand: Array<CardModel>;
@@ -61,8 +60,21 @@ export interface PlayerModel extends PublicPlayerModel {
   game: GameModel;
   influence: number;
   pickedCorporationCard: Array<CardModel>; // Why Array?
-  players: Array<PublicPlayerModel>;
   preludeCardsInHand: Array<CardModel>;
   timer: SerializedTimer;
   waitingFor: PlayerInputModel | undefined;
+}
+
+// A player's view of the game includes public game information,
+// public information about all the players,
+// your private information, and your index in the public players array.
+export interface PlayerModel {
+  game: GameModel;
+  players: Array<PublicPlayerModel>;
+  privateModel: PrivatePlayerModel;
+  playersIndex: number,
+}
+
+export function publicModelOf(playerModel: PlayerModel): PublicPlayerModel {
+  return playerModel.players[playerModel.playersIndex];
 }

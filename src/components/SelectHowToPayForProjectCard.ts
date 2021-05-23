@@ -1,4 +1,3 @@
-
 import Vue from 'vue';
 import {Button} from './common/Button';
 
@@ -27,7 +26,7 @@ import {CardModel} from '../models/CardModel';
 import {CardOrderStorage} from './CardOrderStorage';
 import {PaymentWidgetMixin} from './PaymentWidgetMixin';
 import {PlayerInputModel} from '../models/PlayerInputModel';
-import {PlayerModel} from '../models/PlayerModel';
+import {PublicPlayerModel} from '../models/PlayerModel';
 import {PreferencesManager} from './PreferencesManager';
 import {TranslateMixin} from './TranslateMixin';
 import {CardName} from '../CardName';
@@ -35,7 +34,7 @@ import {CardName} from '../CardName';
 export const SelectHowToPayForProjectCard = Vue.component('select-how-to-pay-for-project-card', {
   props: {
     player: {
-      type: Object as () => PlayerModel,
+      type: Object as () => PublicPlayerModel,
     },
     playerinput: {
       type: Object as () => PlayerInputModel,

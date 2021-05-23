@@ -3,14 +3,14 @@ import Vue from 'vue';
 import {Button} from '../components/common/Button';
 import {ColorWithNeutral} from '../Color';
 import {PlayerInputModel} from '../models/PlayerInputModel';
-import {PlayerModel} from '../models/PlayerModel';
+import {PublicPlayerModel} from '../models/PlayerModel';
 import {SelectPlayerRow} from './SelectPlayerRow';
 import {TranslateMixin} from './TranslateMixin';
 
 export const SelectPartyPlayer = Vue.component('select-party-player', {
   props: {
     players: {
-      type: Array as () => Array<PlayerModel>,
+      type: Array as () => Array<PublicPlayerModel>,
     },
     playerinput: {
       type: Object as () => PlayerInputModel,

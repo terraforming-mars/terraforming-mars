@@ -1,5 +1,5 @@
 import Vue from 'vue';
-import {PlayerModel, PublicPlayerModel} from '../models/PlayerModel';
+import {PlayerModel, publicModelOf, PublicPlayerModel} from '../models/PlayerModel';
 import {Board} from './Board';
 import {LogPanel} from './LogPanel';
 import {Button} from '../components/common/Button';
@@ -12,6 +12,11 @@ export const GameEnd = Vue.component('game-end', {
   props: {
     player: {
       type: Object as () => PlayerModel,
+    },
+  },
+  computed: {
+    publicPlayer: function(): PublicPlayerModel {
+      return publicModelOf(this.player);
     },
   },
   data: function() {
@@ -74,7 +79,7 @@ export const GameEnd = Vue.component('game-end', {
                             <ul class="game_end_list">
                                 <li v-i18n>Try to win with expansions enabled</li>
                                 <li v-i18n>Try to win before the last generation comes</li>
-                                <li><span v-i18n>Can you get</span> {{ player.victoryPointsBreakdown.total + 10 }}<span v-i18n>+ Victory Points?</span></li>
+                                <li><span v-i18n>Can you get</span> {{ this.publicPlayer.victoryPointsBreakdown.total + 10 }}<span v-i18n>+ Victory Points?</span></li>
                             </ul>
                         </div>
                     </div>
@@ -194,7 +199,7 @@ export const GameEnd = Vue.component('game-end', {
                         :temperature="player.game.temperature"></board>
                 </div>
                 <div class="game_end_block--log game-end-column">
-                  <log-panel :color="player.color" :generation="player.game.generation" :id="player.id" :lastSoloGeneration="player.game.lastSoloGeneration" :players="player.players"></log-panel>
+                  <log-panel :color="this.publicPlayer.color" :generation="player.game.generation" :id="this.publicPlayer.id" :lastSoloGeneration="player.game.lastSoloGeneration" :players="player.players"></log-panel>
                 </div>
               </div>
             </div>

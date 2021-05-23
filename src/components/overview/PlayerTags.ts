@@ -1,7 +1,7 @@
 import Vue from 'vue';
 import {TagCount} from '../TagCount';
 import {ITagCount} from '../../ITagCount';
-import {PlayerModel} from '../../models/PlayerModel';
+import {PublicPlayerModel} from '../../models/PlayerModel';
 import {Tags} from '../../cards/Tags';
 import {CardName} from '../../CardName';
 import {SpecialTags} from '../../cards/SpecialTags';
@@ -12,6 +12,8 @@ import {PartyName} from '../../turmoil/parties/PartyName';
 import {TurmoilPolicy} from '../../turmoil/TurmoilPolicy';
 import {ColonyName} from '../../colonies/ColonyName';
 import {CardModel} from '../../models/CardModel';
+import {GameOptionsModel} from '../../models/GameOptionsModel';
+import {GameModel} from '../../models/GameModel';
 
 type InterfaceTagsType = Tags | SpecialTags | 'all' | 'separator';
 
@@ -61,17 +63,17 @@ export const PLAYER_INTERFACE_TAGS_ORDER: Array<InterfaceTagsType> = [
   SpecialTags.COLONY_COUNT,
 ];
 
-export const checkTagUsed = (tag: InterfaceTagsType, player: PlayerModel) => {
-  if (player.game.gameOptions.coloniesExtension === false && tag === SpecialTags.COLONY_COUNT) {
+export const checkTagUsed = (tag: InterfaceTagsType, gameOptions: GameOptionsModel) => {
+  if (gameOptions.coloniesExtension === false && tag === SpecialTags.COLONY_COUNT) {
     return false;
   }
-  if (player.game.turmoil === undefined && tag === SpecialTags.INFLUENCE) {
+  if (gameOptions.turmoilExtension === false && tag === SpecialTags.INFLUENCE) {
     return false;
   }
-  if (player.game.gameOptions.venusNextExtension === false && tag === Tags.VENUS) {
+  if (gameOptions.venusNextExtension === false && tag === Tags.VENUS) {
     return false;
   }
-  if (player.game.gameOptions.moonExpansion === false && tag === Tags.MOON) {
+  if (gameOptions.moonExpansion === false && tag === Tags.MOON) {
     return false;
   }
   return true;
@@ -80,7 +82,10 @@ export const checkTagUsed = (tag: InterfaceTagsType, player: PlayerModel) => {
 export const PlayerTags = Vue.component('player-tags', {
   props: {
     player: {
-      type: Object as () => PlayerModel,
+      type: Object as () => PublicPlayerModel,
+    },
+    game: {
+      type: Object as () => GameModel,
     },
     isActivePlayer: {
       type: Boolean,
@@ -97,21 +102,21 @@ export const PlayerTags = Vue.component('player-tags', {
 
   methods: {
     showColonyCount: function(): boolean {
-      return this.player.game.gameOptions.coloniesExtension;
+      return this.game.gameOptions.coloniesExtension;
     },
     showInfluence: function(): boolean {
-      return this.player.game.turmoil !== undefined;
+      return this.game.gameOptions.turmoilExtension;
     },
     showVenus: function(): boolean {
-      return this.player.game.gameOptions.venusNextExtension;
+      return this.game.gameOptions.venusNextExtension;
     },
     showMoon: function(): boolean {
-      return this.player.game.gameOptions.moonExpansion;
+      return this.game.gameOptions.moonExpansion;
     },
     getTagsPlaceholders: function(): Array<InterfaceTagsType> {
       const tags = PLAYER_INTERFACE_TAGS_ORDER;
       return tags.filter((tag) => {
-        return checkTagUsed(tag, this.player);
+        return checkTagUsed(tag, this.game.gameOptions);
       });
     },
     getCardCount: function(): number {
@@ -127,7 +132,8 @@ export const PlayerTags = Vue.component('player-tags', {
       return this.player.victoryPointsBreakdown.total;
     },
     hideVpCount: function(): boolean {
-      return !this.player.game.gameOptions.showOtherPlayersVP && !this.isActivePlayer;
+      // TODO(kberg): hide other players' VP in ServerModel.
+      return !this.game.gameOptions.showOtherPlayersVP && !this.isActivePlayer;
     },
     showShortTags: function(): boolean {
       if (this.hideZeroTags === true) return true;
@@ -142,14 +148,14 @@ export const PlayerTags = Vue.component('player-tags', {
         }
       }
 
-      const turmoil = this.player.game.turmoil;
+      const turmoil = this.game.turmoil;
       if (tag === Tags.SPACE &&
         turmoil && turmoil.ruling === PartyName.UNITY &&
         turmoil.politicalAgendas?.unity.policyId === TurmoilPolicy.UNITY_POLICY_4) {
         return true;
       }
 
-      const iapetusColony = this.player.game.colonies.find((colony) => colony.name === ColonyName.IAPETUS);
+      const iapetusColony = this.game.colonies.find((colony) => colony.name === ColonyName.IAPETUS);
       if (tag === 'all' &&
         iapetusColony !== undefined &&
         iapetusColony.visitor !== undefined &&
@@ -167,11 +173,11 @@ export const PlayerTags = Vue.component('player-tags', {
         }
       }
 
-      if (tag === Tags.SPACE && this.player.game.turmoil?.ruling === PartyName.UNITY) {
-        if (this.player.game.turmoil.politicalAgendas?.unity.policyId === TurmoilPolicy.UNITY_POLICY_4) discount += 2;
+      if (tag === Tags.SPACE && this.game.turmoil?.ruling === PartyName.UNITY) {
+        if (this.game.turmoil.politicalAgendas?.unity.policyId === TurmoilPolicy.UNITY_POLICY_4) discount += 2;
       }
 
-      const iapetusColony = this.player.game.colonies.find((colony) => colony.name === ColonyName.IAPETUS);
+      const iapetusColony = this.game.colonies.find((colony) => colony.name === ColonyName.IAPETUS);
       if (tag === 'all' && iapetusColony !== undefined && iapetusColony.visitor !== undefined) {
         discount += iapetusColony.colonies.filter((owner) => owner === this.player.color).length;
       }

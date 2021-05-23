@@ -1,5 +1,5 @@
 import Vue from 'vue';
-import {PlayerModel} from '../../models/PlayerModel';
+import {PlayerModel, publicModelOf, PublicPlayerModel} from '../../models/PlayerModel';
 import {PlayerResources} from './PlayerResources';
 import {PlayerTags} from './PlayerTags';
 import {PlayerStatus} from './PlayerStatus';
@@ -23,7 +23,7 @@ export const PlayerInfo = Vue.component('player-info', {
       type: Object as () => PlayerModel,
     },
     activePlayer: {
-      type: Object as () => PlayerModel,
+      type: Object as () => PublicPlayerModel,
     },
     firstForGen: {
       type: Boolean,
@@ -38,6 +38,11 @@ export const PlayerInfo = Vue.component('player-info', {
       type: Boolean,
     },
   },
+  computed: {
+    publicPlayer: function(): PublicPlayerModel {
+      return publicModelOf(this.player);
+    },
+  },
   components: {
     'player-resources': PlayerResources,
     'player-tags': PlayerTags,
@@ -47,7 +52,7 @@ export const PlayerInfo = Vue.component('player-info', {
   methods: {
     getClasses: function(): string {
       const classes = ['player-info'];
-      classes.push(playerColorClass(this.player.color, 'bg_transparent'));
+      classes.push(playerColorClass(this.publicPlayer.color, 'bg_transparent'));
       return classes.join(' ');
     },
     getPlayerStatusAndResClasses: function(): string {
@@ -55,14 +60,14 @@ export const PlayerInfo = Vue.component('player-info', {
       return classes.join(' ');
     },
     getIsActivePlayer: function(): boolean {
-      return this.player.color === this.activePlayer.color;
+      return this.publicPlayer.color === this.activePlayer.color;
     },
     pinPlayer: function() {
       let hiddenPlayersIndexes: Array<Number> = [];
       const playerPinned = isPinned(this.$root, this.playerIndex);
 
       // if player is already pinned, add to hidden players (toggle)
-      hiddenPlayersIndexes = range(this.activePlayer.players.length - 1);
+      hiddenPlayersIndexes = range(this.player.players.length - 1);
       if (!playerPinned) {
         showPlayerData(this.$root, this.playerIndex);
         hiddenPlayersIndexes = hiddenPlayersIndexes.filter(
@@ -80,7 +85,7 @@ export const PlayerInfo = Vue.component('player-info', {
     },
     togglePlayerDetails: function() {
       // for active player => scroll to cards UI
-      if (this.player.color === this.activePlayer.color) {
+      if (this.publicPlayer.color === this.activePlayer.color) {
         const el: HTMLElement = document.getElementsByClassName(
           'preferences_icon--cards',
         )[0] as HTMLElement;
@@ -92,10 +97,10 @@ export const PlayerInfo = Vue.component('player-info', {
       this.pinPlayer();
     },
     getNrPlayedCards: function(): number {
-      return this.player.playedCards.length;
+      return this.publicPlayer.playedCards.length;
     },
     getAvailableBlueActionCount: function(): number {
-      return this.player.availableBlueCardActionCount;
+      return this.publicPlayer.availableBlueCardActionCount;
     },
   },
   template: `
@@ -103,9 +108,9 @@ export const PlayerInfo = Vue.component('player-info', {
         <div :class="getPlayerStatusAndResClasses()">
         <div class="player-status">
           <div class="player-info-details">
-            <div class="player-info-name">{{ player.name }}</div>
-            <div class="icon-first-player" v-if="firstForGen && activePlayer.players.length > 1">1st</div>
-            <div class="player-info-corp" v-if="player.corporationCard !== undefined" :title="player.corporationCard.name">{{ player.corporationCard.name }}</div>
+            <div class="player-info-name">{{ this.publicPlayer.name }}</div>
+            <div class="icon-first-player" v-if="firstForGen && player.players.length > 1">1st</div>
+            <div class="player-info-corp" v-if="this.publicPlayer.corporationCard !== undefined" :title="this.publicPlayer.corporationCard.name">{{ this.publicPlayer.corporationCard.name }}</div>
           </div>
           <player-status :player="player" :activePlayer="activePlayer" :firstForGen="firstForGen" v-trim-whitespace :actionLabel="actionLabel" :playerIndex="playerIndex"/>
         </div>

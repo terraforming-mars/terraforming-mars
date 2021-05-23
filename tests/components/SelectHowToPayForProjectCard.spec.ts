@@ -5,7 +5,7 @@ import {CardName} from '../../src/CardName';
 import {CardType} from '../../src/cards/CardType';
 import {SelectHowToPayForProjectCard} from '../../src/components/SelectHowToPayForProjectCard';
 import {PlayerInputModel} from '../../src/models/PlayerInputModel';
-import {PlayerModel} from '../../src/models/PlayerModel';
+import {PublicPlayerModel} from '../../src/models/PlayerModel';
 import {Units} from '../../src/Units';
 
 describe('SelectHowToPayForProjectCard', function() {
@@ -313,11 +313,11 @@ describe('SelectHowToPayForProjectCard', function() {
   const setupCardForPurchase = function(
     cardName: CardName,
     cardCost: number,
-    playerFields: Partial<PlayerModel>,
+    playerFields: Partial<PublicPlayerModel>,
     playerInputFields: Partial<PlayerInputModel>,
     reserveUnits: Units = Units.EMPTY) {
-    const player: Partial<PlayerModel> = Object.assign({
-      cards: [{name: cardName, calculatedCost: cardCost}],
+    const player: Partial<PublicPlayerModel> = Object.assign({
+      cardsInHand: [{name: cardName, calculatedCost: cardCost}],
       id: 'foo',
       steel: 0,
       titanium: 0,

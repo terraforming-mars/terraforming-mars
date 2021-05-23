@@ -2,7 +2,7 @@ import Vue from 'vue';
 import {Button} from '../components/common/Button';
 import {Message} from '../Message';
 import {CardOrderStorage} from './CardOrderStorage';
-import {PlayerModel} from '../models/PlayerModel';
+import {PlayerModel, publicModelOf} from '../models/PlayerModel';
 import {VueModelCheckbox, VueModelRadio} from './VueTypes';
 import {Card} from './card/Card';
 import {CardModel} from '../models/CardModel';
@@ -73,7 +73,7 @@ export const SelectCard = Vue.component('select-card', {
         return sortActiveCards(this.playerinput.cards);
       } else {
         return CardOrderStorage.getOrdered(
-          CardOrderStorage.getCardOrder(this.player.id),
+          CardOrderStorage.getCardOrder(publicModelOf(this.player).id),
           this.playerinput.cards,
         );
       }

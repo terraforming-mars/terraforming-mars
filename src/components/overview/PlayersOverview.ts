@@ -2,7 +2,7 @@ import Vue from 'vue';
 import {PlayerInfo} from './PlayerInfo';
 import {OverviewSettings} from './OverviewSettings';
 import {OtherPlayer} from '../OtherPlayer';
-import {PlayerModel, PublicPlayerModel} from '../../models/PlayerModel';
+import {PlayerModel, publicModelOf, PublicPlayerModel} from '../../models/PlayerModel';
 import {ActionLabel} from './ActionLabel';
 import {Phase} from '../../Phase';
 import {Color} from '../../Color';
@@ -37,12 +37,15 @@ export const PlayersOverview = Vue.component('players-overview', {
     return {};
   },
   methods: {
+    publicPlayer: function() {
+      return publicModelOf(this.player);
+    },
     hasPlayers: function(): boolean {
       return this.player.players.length > 0;
     },
     getPlayerOnFocus: function(): PublicPlayerModel {
       return this.player.players.filter(
-        (p: PublicPlayerModel) => p.color === this.player.color,
+        (p: PublicPlayerModel) => p.color === this.publicPlayer().color,
       )[0];
     },
     getIsFirstForGen: function(player: PublicPlayerModel): boolean {
@@ -53,7 +56,7 @@ export const PlayersOverview = Vue.component('players-overview', {
       let result: Array<PublicPlayerModel> = [];
       let currentPlayerOffset: number = 0;
       const currentPlayerIndex: number = getCurrentPlayerIndex(
-        this.player.color,
+        this.publicPlayer().color,
         this.player.players,
       );
 
@@ -109,7 +112,7 @@ export const PlayersOverview = Vue.component('players-overview', {
             <overview-settings />
             <div class="other_player" v-if="player.players.length > 1">
                 <div v-for="(otherPlayer, index) in getPlayersInOrder()" :key="otherPlayer.id">
-                    <other-player v-if="otherPlayer.id !== player.id" :player="otherPlayer" :playerIndex="index"/>
+                    <other-player v-if="otherPlayer.id !== publicPlayer().id" :player="otherPlayer" :playerIndex="index"/>
                 </div>
             </div>
             <player-info v-for="(p, index) in getPlayersInOrder()"
@@ -124,8 +127,8 @@ export const PlayersOverview = Vue.component('players-overview', {
               :player="getPlayerOnFocus()"
               :activePlayer="player"
               :key="player.players.length - 1"
-              :firstForGen="getIsFirstForGen(player)"
-              :actionLabel="getActionLabel(player)"
+              :firstForGen="getIsFirstForGen(publicPlayer())"
+              :actionLabel="getActionLabel(publicPlayer())"
               :playerIndex="-1"/>
         </div>
     `,

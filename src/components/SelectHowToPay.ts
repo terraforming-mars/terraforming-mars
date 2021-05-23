@@ -3,7 +3,7 @@ import Vue from 'vue';
 import {HowToPay} from '../inputs/HowToPay';
 import {PaymentWidgetMixin} from './PaymentWidgetMixin';
 import {PlayerInputModel} from '../models/PlayerInputModel';
-import {PlayerModel} from '../models/PlayerModel';
+import {PublicPlayerModel} from '../models/PlayerModel';
 import {PreferencesManager} from './PreferencesManager';
 import {Button} from '../components/common/Button';
 import {TranslateMixin} from './TranslateMixin';
@@ -22,7 +22,7 @@ interface SelectHowToPayModel {
 export const SelectHowToPay = Vue.component('select-how-to-pay', {
   props: {
     player: {
-      type: Object as () => PlayerModel,
+      type: Object as () => PublicPlayerModel,
     },
     playerinput: {
       type: Object as () => PlayerInputModel,

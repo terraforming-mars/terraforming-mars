@@ -91,8 +91,6 @@ export class Server {
     const game = player.game;
     const turmoil = getTurmoil(game);
 
-    const gameModel = this.getCommonGameModel(game);
-
     return {
       actionsTakenThisRound: player.actionsTakenThisRound,
       actionsThisGeneration: Array.from(player.getActionsThisGeneration()),
@@ -143,30 +141,6 @@ export class Server {
       tradesThisGeneration: player.tradesThisGeneration,
       victoryPointsBreakdown: player.getVictoryPoints(),
       waitingFor: this.getWaitingFor(player, player.getWaitingFor()),
-
-      // Remove these after 2021-05-05
-      aresData: gameModel.aresData,
-      awards: gameModel.awards,
-      colonies: gameModel.colonies,
-      deckSize: gameModel.deckSize,
-      gameAge: gameModel.gameAge,
-      gameOptions: gameModel.gameOptions,
-      generation: gameModel.generation,
-      isSoloModeWin: gameModel.isSoloModeWin,
-      lastSoloGeneration: gameModel.lastSoloGeneration,
-      milestones: gameModel.milestones,
-      moon: gameModel.moon,
-      oceans: gameModel.oceans,
-      oxygenLevel: gameModel.oxygenLevel,
-      passedPlayers: gameModel.passedPlayers,
-      phase: gameModel.phase,
-      spaces: gameModel.spaces,
-      spectatorId: gameModel.spectatorId,
-      temperature: gameModel.temperature,
-      isTerraformed: gameModel.isTerraformed,
-      turmoil: gameModel.turmoil,
-      undoCount: gameModel.undoCount,
-      venusScaleLevel: gameModel.venusScaleLevel,
     };
   }
 

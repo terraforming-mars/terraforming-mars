@@ -48,10 +48,6 @@ export class GameLoader implements IGameLoader {
 
   private constructor() {}
 
-  public getLoadedGames(): ReadonlyMap<GameId, Game | undefined> {
-    return this.games;
-  }
-
   public reset(): void {
     this.games.clear();
     this.participantIds.clear();

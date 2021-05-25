@@ -32,7 +32,4 @@ export class FakeGameLoader implements IGameLoader {
   restoreGameAt(_gameId: string, _saveId: number, _cb: (game: Game | undefined) => void): void {
     throw new Error('Method not implemented.');
   }
-  unloadEndedGames(): void {
-    throw new Error('Method not implemented.');
-  }
 }

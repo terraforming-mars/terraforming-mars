@@ -20,5 +20,4 @@ export interface IGameLoader {
   getByPlayerId(playerId: PlayerId, cb: LoadCallback): void;
   getBySpectatorId(spectatorId: SpectatorId, cb: LoadCallback): void;
   restoreGameAt(gameId: GameId, saveId: number, cb: LoadCallback): void;
-  unloadEndedGames(): void;
 }

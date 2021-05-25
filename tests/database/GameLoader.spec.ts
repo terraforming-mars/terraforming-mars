@@ -235,7 +235,7 @@ describe('GameLoader', function() {
     const removedIds: Array<string> = [];
     GameLoader.getInstance().add(game1);
     GameLoader.getInstance().add(game2);
-    GameLoader.getInstance().remove = (gameId) => {
+    (GameLoader.getInstance() as any).remove = (gameId: string) => {
       removedIds.push(gameId);
     };
     GameLoader.getInstance().unloadEndedGames();

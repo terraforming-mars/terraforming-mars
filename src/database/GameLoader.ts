@@ -85,7 +85,7 @@ export class GameLoader implements IGameLoader {
     }
   }
 
-  public remove(gameId: GameId): void {
+  private remove(gameId: GameId): void {
     this.games.set(gameId, undefined);
   }
 

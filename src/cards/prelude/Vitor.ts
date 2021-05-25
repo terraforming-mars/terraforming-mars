@@ -43,14 +43,19 @@ export class Vitor extends Card implements CorporationCard {
   }
 
   public initialAction(player: Player) {
+    const game = player.game;
+
     // Awards are disabled for 1 player games
-    if (player.game.isSoloMode()) {
-      return;
-    }
+    if (game.isSoloMode()) return;
+
     const freeAward = new OrOptions();
     freeAward.title = 'Select award to fund';
     freeAward.buttonLabel = 'Confirm';
-    freeAward.options = player.game.awards.map((award) => this.selectAwardToFund(player, award));
+
+    // If Vitor isn't going first and someone else funds awards, filter them out.
+    const availableAwards = game.awards.filter((award) => !game.fundedAwards.map((fa) => fa.award).includes(award));
+    freeAward.options = availableAwards.map((award) => this.selectAwardToFund(player, award));
+
     return freeAward;
   }
 

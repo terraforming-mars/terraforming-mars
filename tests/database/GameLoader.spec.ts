@@ -2,6 +2,7 @@ import {expect} from 'chai';
 import {Database} from '../../src/database/Database';
 import {Game} from '../../src/Game';
 import {GameLoader} from '../../src/database/GameLoader';
+import {Phase} from '../../src/Phase';
 import {Player} from '../../src/Player';
 import {SerializedGame} from '../../src/SerializedGame';
 import {TestPlayers} from '../TestPlayers';
@@ -222,5 +223,23 @@ describe('GameLoader', function() {
       Database.getInstance().getGames = workingGetGames;
       done();
     });
+  });
+
+  it('removes games with END phase', function() {
+    const expectedGames = new Map<string, Game | undefined>();
+    const game1 = Game.newInstance('foo', [player], player);
+    const game2 = Game.newInstance('bar', [player], player);
+    expectedGames.set('foo', game1);
+    expectedGames.set('bar', game2);
+    game1.phase = Phase.END;
+    const removedIds: Array<string> = [];
+    GameLoader.getInstance().add(game1);
+    GameLoader.getInstance().add(game2);
+    GameLoader.getInstance().remove = (gameId) => {
+      removedIds.push(gameId);
+    };
+    GameLoader.getInstance().unloadEndedGames();
+    expect(removedIds.length).eq(1);
+    expect(removedIds[0]).eq('foo');
   });
 });

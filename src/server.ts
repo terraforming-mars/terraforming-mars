@@ -19,7 +19,6 @@ import {Database} from './database/Database';
 import {GameHandler} from './routes/Game';
 import {GameLoader} from './database/GameLoader';
 import {GamesOverview} from './routes/GamesOverview';
-import {GarbageCollector} from './database/GarbageCollector';
 import {IHandler} from './routes/IHandler';
 import {Load} from './routes/Load';
 import {LoadGame} from './routes/LoadGame';
@@ -132,12 +131,13 @@ try {
   throw err;
 }
 
-// Start garbage collector
-new GarbageCollector(GameLoader.getInstance()).start();
-
 console.log('version 0.X');
 
 server.listen(process.env.PORT || 8080);
+
+setInterval(function() {
+  GameLoader.getInstance().unloadEndedGames();
+}, 1000 * 60 * 60 /* once an hour */);
 
 console.log(
   '\nThe secret serverId for this server is \x1b[1m' +

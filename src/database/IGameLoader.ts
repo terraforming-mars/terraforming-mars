@@ -22,4 +22,5 @@ export interface IGameLoader {
   getLoadedGames(): ReadonlyMap<GameId, Game | undefined>;
   remove(gameId: GameId): void;
   restoreGameAt(gameId: GameId, saveId: number, cb: LoadCallback): void;
+  unloadEndedGames(): void;
 }

@@ -3,6 +3,7 @@ import {Game, GameId, SpectatorId} from '../Game';
 import {PlayerId} from '../Player';
 import {IGameLoader} from './IGameLoader';
 import {MultiMap} from 'mnemonist';
+import {Phase} from '../Phase';
 
 type LoadCallback = (game: Game | undefined) => void;
 
@@ -59,6 +60,15 @@ export class GameLoader implements IGameLoader {
     if (this.onGameIdsLoaded.length > 0) {
       throw new Error('can not reset with pending callbacks');
     }
+  }
+
+  public unloadEndedGames(): void {
+    this.games.forEach((game, gameId) => {
+      if (game !== undefined && game.phase === Phase.END) {
+        console.log(`Unloading ${gameId}`);
+        this.remove(gameId);
+      }
+    });
   }
 
   public static getInstance(): IGameLoader {

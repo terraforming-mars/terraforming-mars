@@ -1868,6 +1868,17 @@ export class Player implements ISerializable<SerializedPlayer> {
     }
 
     const corporationCard = this.corporationCard;
+
+
+    // Terraforming Mars FAQ says:
+    //   If for any reason you are not able to perform your mandatory first action (e.g. if
+    //   all 3 Awards are claimed before starting your turn as Vitor), you can skip this and
+    //   proceed with other actions instead.
+    // This code just uses "must skip" instead of "can skip".
+    if (this.isCorporation(CardName.VITOR) && this.game.allAwardsFunded()) {
+      this.corporationInitialActionDone = true;
+    }
+
     if (corporationCard !== undefined &&
           corporationCard.initialAction !== undefined &&
           corporationCard.initialActionText !== undefined &&

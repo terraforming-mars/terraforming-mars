@@ -135,6 +135,10 @@ console.log('version 0.X');
 
 server.listen(process.env.PORT || 8080);
 
+setInterval(function() {
+  GameLoader.getInstance().unloadEndedGames();
+}, 1000 * 60 * 60 /* once an hour */);
+
 console.log(
   '\nThe secret serverId for this server is \x1b[1m' +
   serverId +

@@ -119,7 +119,7 @@ export const mainAppSettings = {
         if (xhr.status === 200) {
           app.player = xhr.response as PlayerModel;
           app.playerkey++;
-          const playerId = app.player.players[app.player.playersIndex].id;
+          const playerId = app.player.privateModel.id;
 
           if (
             app.player.game.phase === 'end' &&

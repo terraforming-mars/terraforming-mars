@@ -16,7 +16,7 @@ import {$t} from '../directives/i18n';
 import {SelectPartyPlayer} from './SelectPartyPlayer';
 import {SelectPartyToSendDelegate} from './SelectPartyToSendDelegate';
 import {PlayerInputModel} from '../models/PlayerInputModel';
-import {PlayerModel, publicModelOf} from '../models/PlayerModel';
+import {PlayerModel} from '../models/PlayerModel';
 import {PreferencesManager} from './PreferencesManager';
 import {SoundManager} from './SoundManager';
 import {SelectColony} from './SelectColony';
@@ -145,7 +145,7 @@ export const WaitingFor = Vue.component('waiting-for', {
       }
 
       root.isServerSideRequestInProgress = true;
-      xhr.open('POST', '/player/input?id=' + publicModelOf(this.player).id);
+      xhr.open('POST', '/player/input?id=' + this.player.privateModel.id);
       xhr.responseType = 'json';
       xhr.onload = () => {
         if (xhr.status === 200) {

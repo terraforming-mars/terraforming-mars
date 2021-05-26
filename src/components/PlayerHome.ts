@@ -201,7 +201,7 @@ export const PlayerHome = Vue.component('player-home', {
             <div v-if="player.game.phase === 'end'">
                 <div class="player_home_block">
                     <dynamic-title title="This game is over!" :color="publicPlayer().color"/>
-                    <a :href="'/the-end?id='+ publicPlayer().id" v-i18n>Go to game results</a>
+                    <a :href="'/the-end?id='+ player.privateModel.id" v-i18n>Go to game results</a>
                 </div>
             </div>
 
@@ -251,7 +251,7 @@ export const PlayerHome = Vue.component('player-home', {
                 <players-overview class="player_home_block player_home_block--players nofloat:" :player="player" v-trim-whitespace id="shortkey-playersoverview"/>
 
                 <div class="player_home_block nofloat">
-                    <log-panel :id="publicPlayer().id" :players="player.players" :generation="player.game.generation" :lastSoloGeneration="player.game.lastSoloGeneration" :color="publicPlayer().color"></log-panel>
+                    <log-panel :id="player.privateModel.id" :players="player.players" :generation="player.game.generation" :lastSoloGeneration="player.game.lastSoloGeneration" :color="publicPlayer().color"></log-panel>
                 </div>
 
                 <div class="player_home_block player_home_block--actions nofloat">
@@ -270,7 +270,7 @@ export const PlayerHome = Vue.component('player-home', {
                 <a name="cards" class="player_home_anchor"></a>
                 <div class="player_home_block player_home_block--hand" v-if="player.privateModel.cardsInHand.length + player.privateModel.preludeCardsInHand.length > 0" id="shortkey-hand">
                     <dynamic-title title="Cards In Hand" :color="publicPlayer().color" :withAdditional="true" :additional="(publicPlayer().cardsInHandNbr + player.privateModel.preludeCardsInHand.length).toString()" />
-                    <sortable-cards :playerId="publicPlayer().id" :cards="player.privateModel.preludeCardsInHand.concat(player.privateModel.cardsInHand)" />
+                    <sortable-cards :playerId="player.privateModel.id" :cards="player.privateModel.preludeCardsInHand.concat(player.privateModel.cardsInHand)" />
                 </div>
 
                 <div class="player_home_block player_home_block--cards"">

@@ -111,14 +111,14 @@ export const PlayersOverview = Vue.component('players-overview', {
         <div class="players-overview" v-if="hasPlayers()">
             <overview-settings />
             <div class="other_player" v-if="player.players.length > 1">
-                <div v-for="(otherPlayer, index) in getPlayersInOrder()" :key="otherPlayer.id">
-                    <other-player v-if="otherPlayer.id !== publicPlayer().id" :player="otherPlayer" :playerIndex="index"/>
+                <div v-for="(otherPlayer, index) in getPlayersInOrder()" :key="otherPlayer.color">
+                    <other-player v-if="otherPlayer.color !== publicPlayer().color" :player="otherPlayer" :playerIndex="index"/>
                 </div>
             </div>
             <player-info v-for="(p, index) in getPlayersInOrder()"
               :activePlayer="player"
               :player="p"
-              :key="p.id"
+              :key="p.color"
               :firstForGen="getIsFirstForGen(p)"
               :actionLabel="getActionLabel(p)"
               :playerIndex="index"/>

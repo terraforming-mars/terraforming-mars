@@ -101,7 +101,7 @@ export const LogPanel = Vue.component('log-panel', {
       switch (data.type) {
       case LogMessageDataType.PLAYER:
         for (const player of this.players) {
-          if (data.value === player.color || data.value === player.id) {
+          if (data.value === player.color) {
             return '<span class="log-player player_bg_color_'+player.color+'">'+player.name+'</span>';
           }
         }

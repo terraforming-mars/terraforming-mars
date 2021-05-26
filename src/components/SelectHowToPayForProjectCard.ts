@@ -56,7 +56,7 @@ export const SelectHowToPayForProjectCard = Vue.component('select-how-to-pay-for
             this.playerinput.cards !== undefined &&
             this.playerinput.cards.length > 0) {
       cards = CardOrderStorage.getOrdered(
-        CardOrderStorage.getCardOrder(this.player.id),
+        CardOrderStorage.getCardOrder(this.player.color),
         this.playerinput.cards,
       );
       card = cards[0];

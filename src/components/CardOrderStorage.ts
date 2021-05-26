@@ -1,12 +1,13 @@
-
 import {CardModel} from '../models/CardModel';
 
 const STORAGE_PREFIX = 'cardOrder';
 
 export class CardOrderStorage {
-  public static getCardOrder(playerId: string): {[x: string]: number} {
+  public static getCardOrder(playerColor: string): {[x: string]: number} {
     try {
-      const order = typeof localStorage === 'undefined' ? null : localStorage.getItem(`${STORAGE_PREFIX}${playerId}`);
+      const order = typeof localStorage === 'undefined' ?
+        null :
+        localStorage.getItem(`${STORAGE_PREFIX}${playerColor}`);
       if (order === null) {
         return {};
       }
@@ -24,9 +25,9 @@ export class CardOrderStorage {
     });
     return hits.concat(misses);
   }
-  public static updateCardOrder(playerId: string, order: {[x: string]: number}): void {
+  public static updateCardOrder(playerColor: string, order: {[x: string]: number}): void {
     try {
-      localStorage.setItem(`${STORAGE_PREFIX}${playerId}`, JSON.stringify(order));
+      localStorage.setItem(`${STORAGE_PREFIX}${playerColor}`, JSON.stringify(order));
     } catch (err) {
       console.warn('unable to update card order with local storage', err);
     }

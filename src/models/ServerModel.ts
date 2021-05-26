@@ -87,8 +87,8 @@ export class Server {
     };
   }
   public static getPlayerModel(player: Player): PlayerModel {
-    const players = this.getPlayers(player.game);
-    const playersIndex = players.findIndex((p) => p.id = player.id);
+    const players = player.game.getPlayers().map((p) => this.getPlayer(p));
+    const playersIndex = players.findIndex((p) => p.color = player.color);
     return {
       game: this.getCommonGameModel(player.game),
       players,
@@ -106,11 +106,11 @@ export class Server {
       cardCost: player.cardCost,
       cardsInHand: this.getCards(player, player.cardsInHand, {showNewCost: true}),
       corporationCard: this.getCorporationCard(player),
-      game: this.getCommonGameModel(player.game),
       dealtCorporationCards: this.getCards(player, player.dealtCorporationCards),
       dealtPreludeCards: this.getCards(player, player.dealtPreludeCards),
       dealtProjectCards: this.getCards(player, player.dealtProjectCards),
       draftedCards: this.getCards(player, player.draftedCards, {showNewCost: true}),
+      id: player.id,
       influence: turmoil ? game.turmoil!.getPlayerInfluence(player) : 0,
       pickedCorporationCard: player.pickedCorporationCard ? this.getCards(player, [player.pickedCorporationCard]) : [],
       preludeCardsInHand: this.getCards(player, player.preludeCardsInHand),
@@ -365,52 +365,49 @@ export class Server {
       discount: card.cardDiscount,
     }));
   }
-  private static getPlayers(game: Game): Array<PublicPlayerModel> {
-    const players = game.getPlayers();
-    return players.map((player) => {
-      return {
-        actionsTakenThisRound: player.actionsTakenThisRound,
-        actionsThisGeneration: Array.from(player.getActionsThisGeneration()),
-        availableBlueCardActionCount: player.getAvailableBlueActionCount(),
-        cardCost: player.cardCost,
-        cardsInHandNbr: player.cardsInHand.length,
-        citiesCount: player.getCitiesCount(),
-        coloniesCount: player.getColoniesCount(),
-        color: player.color,
-        corporationCard: this.getCorporationCard(player),
-        energy: player.energy,
-        energyProduction: player.getProduction(Resources.ENERGY),
-        fleetSize: player.getFleetSize(),
-        heat: player.heat,
-        heatProduction: player.getProduction(Resources.HEAT),
-        id: game.phase === Phase.END ? player.id : player.color,
-        influence: game.turmoil?.getPlayerInfluence(player) ?? 0,
-        isActive: player.id === game.activePlayer,
-        megaCredits: player.megaCredits,
-        megaCreditProduction: player.getProduction(Resources.MEGACREDITS),
-        name: player.name,
-        needsToDraft: player.needsToDraft,
-        needsToResearch: !game.hasResearched(player),
-        noTagsCount: player.getNoTagsCount(),
-        plants: player.plants,
-        plantProduction: player.getProduction(Resources.PLANTS),
-        plantsAreProtected: player.plantsAreProtected(),
-        playedCards: this.getCards(player, player.playedCards, {showResources: true}),
-        preludeCardsInHand: '',
-        selfReplicatingRobotsCards: this.getSelfReplicatingRobotsTargetCards(player),
-        steel: player.steel,
-        steelProduction: player.getProduction(Resources.STEEL),
-        steelValue: player.getSteelValue(),
-        tags: player.getAllTags(),
-        terraformRating: player.getTerraformRating(),
-        timer: player.timer.serialize(),
-        titanium: player.titanium,
-        titaniumProduction: player.getProduction(Resources.TITANIUM),
-        titaniumValue: player.getTitaniumValue(),
-        tradesThisGeneration: player.tradesThisGeneration,
-        victoryPointsBreakdown: player.getVictoryPoints(),
-      };
-    });
+
+  private static getPlayer(player: Player): PublicPlayerModel {
+    return {
+      actionsTakenThisRound: player.actionsTakenThisRound,
+      actionsThisGeneration: Array.from(player.getActionsThisGeneration()),
+      availableBlueCardActionCount: player.getAvailableBlueActionCount(),
+      cardCost: player.cardCost,
+      cardsInHandNbr: player.cardsInHand.length,
+      citiesCount: player.getCitiesCount(),
+      coloniesCount: player.getColoniesCount(),
+      color: player.color,
+      corporationCard: this.getCorporationCard(player),
+      energy: player.energy,
+      energyProduction: player.getProduction(Resources.ENERGY),
+      fleetSize: player.getFleetSize(),
+      heat: player.heat,
+      heatProduction: player.getProduction(Resources.HEAT),
+      id: player.game.phase === Phase.END ? player.id : 'invalid',
+      influence: player.game.turmoil?.getPlayerInfluence(player) ?? 0,
+      isActive: player.id === player.game.activePlayer,
+      megaCredits: player.megaCredits,
+      megaCreditProduction: player.getProduction(Resources.MEGACREDITS),
+      name: player.name,
+      needsToDraft: player.needsToDraft,
+      needsToResearch: !player.game.hasResearched(player),
+      noTagsCount: player.getNoTagsCount(),
+      plants: player.plants,
+      plantProduction: player.getProduction(Resources.PLANTS),
+      plantsAreProtected: player.plantsAreProtected(),
+      playedCards: this.getCards(player, player.playedCards, {showResources: true}),
+      selfReplicatingRobotsCards: this.getSelfReplicatingRobotsTargetCards(player),
+      steel: player.steel,
+      steelProduction: player.getProduction(Resources.STEEL),
+      steelValue: player.getSteelValue(),
+      tags: player.getAllTags(),
+      terraformRating: player.getTerraformRating(),
+      timer: player.timer.serialize(),
+      titanium: player.titanium,
+      titaniumProduction: player.getProduction(Resources.TITANIUM),
+      titaniumValue: player.getTitaniumValue(),
+      tradesThisGeneration: player.tradesThisGeneration,
+      victoryPointsBreakdown: player.getVictoryPoints(),
+    };
   }
 
   public static getColonies(game: Game): Array<ColonyModel> {

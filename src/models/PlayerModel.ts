@@ -5,6 +5,7 @@ import {ITagCount} from '../ITagCount';
 import {PlayerInputModel} from './PlayerInputModel';
 import {SerializedTimer} from '../SerializedTimer';
 import {GameModel} from './GameModel';
+import {PlayerId} from '../Player';
 
 export interface PublicPlayerModel {
   actionsTakenThisRound: number;
@@ -21,7 +22,7 @@ export interface PublicPlayerModel {
   fleetSize: number;
   heat: number;
   heatProduction: number;
-  id: string; // PlayerId
+  id: PlayerId | 'invalid',
   influence: number;
   isActive: boolean;
   megaCredits: number;
@@ -57,7 +58,7 @@ export interface PrivatePlayerModel {
   dealtPreludeCards: Array<CardModel>;
   dealtProjectCards: Array<CardModel>;
   draftedCards: Array<CardModel>;
-  game: GameModel;
+  id: PlayerId;
   influence: number;
   pickedCorporationCard: Array<CardModel>; // Why Array?
   preludeCardsInHand: Array<CardModel>;

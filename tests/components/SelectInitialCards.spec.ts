@@ -17,10 +17,9 @@ describe('SelectInitialCards', function() {
       localVue: getLocalVue(),
       propsData: {
         player: {
-          playersIndex: 0,
-          players: [{
+          privateModel: {
             id: 'foo',
-          }],
+          },
         },
         playerinput: {
           title: 'foo',
@@ -41,8 +40,8 @@ describe('SelectInitialCards', function() {
     expect(component).not.is.undefined;
     const selectCards = component.findAllComponents({name: 'select-card'});
     expect(selectCards.length).to.eq(2);
-    await selectCards.at(0).vm.$emit('cardschanged', [CardName.ECOLINE]);
-    await selectCards.at(1).vm.$emit('cardschanged', [CardName.ANTS]);
+    selectCards.at(0).vm.$emit('cardschanged', [CardName.ECOLINE]);
+    selectCards.at(1).vm.$emit('cardschanged', [CardName.ANTS]);
     const buttons = component.findAllComponents({name: 'Button'});
     await buttons.at(0).findAllComponents({
       name: 'button',
@@ -55,10 +54,11 @@ describe('SelectInitialCards', function() {
       localVue: getLocalVue(),
       propsData: {
         player: {
-          playersIndex: 0,
-          players: [{
-            id: 'foo',
-          }],
+          player: {
+            privateModel: {
+              id: 'foo',
+            },
+          },
         },
         playerinput: {
           title: 'foo',
@@ -82,9 +82,9 @@ describe('SelectInitialCards', function() {
     expect(component).not.is.undefined;
     const selectCards = component.findAllComponents({name: 'select-card'});
     expect(selectCards.length).to.eq(3);
-    await selectCards.at(0).vm.$emit('cardschanged', [CardName.ECOLINE]);
-    await selectCards.at(1).vm.$emit('cardschanged', [CardName.ALLIED_BANKS]);
-    await selectCards.at(2).vm.$emit('cardschanged', [CardName.ANTS]);
+    selectCards.at(0).vm.$emit('cardschanged', [CardName.ECOLINE]);
+    selectCards.at(1).vm.$emit('cardschanged', [CardName.ALLIED_BANKS]);
+    selectCards.at(2).vm.$emit('cardschanged', [CardName.ANTS]);
     const buttons = component.findAllComponents({name: 'Button'});
     await buttons.at(0).findAllComponents({
       name: 'button',

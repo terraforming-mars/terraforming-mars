@@ -1788,7 +1788,7 @@ export class Player implements ISerializable<SerializedPlayer> {
     return cost <=
       this.megaCredits - reserveUnits.megacredits +
       (this.canUseHeatAsMegaCredits ? this.heat - reserveUnits.heat : 0) +
-      (canUseSteel ? (this.steel - reserveUnits.steel) * this.steelValue : 0) +
+      (canUseSteel ? (this.steel - reserveUnits.steel) * this.getSteelValue() : 0) +
       (canUseTitanium ? (this.titanium - reserveUnits.titanium) * this.getTitaniumValue() : 0) +
       (canUseFloaters ? this.getFloatersCanSpend() * 3 : 0) +
       (canUseMicrobes ? this.getMicrobesCanSpend() * 2 : 0);

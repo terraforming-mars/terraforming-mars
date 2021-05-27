@@ -116,7 +116,7 @@
 
     "${0} placed a City tile": "${0} colocou um tile de Cidade",
     "${0} removed ${1} ${2} from ${3} to ${4}": "${0} removeu ${1} ${2} de ${3} para ${4}",
-    "${0} is using their ${1} effect to draw a card.": "${0} está usando efeito de ${1} para comprar uma carta",
+    "${0} is using their ${1} effect to draw a card by discarding a card.": "${0} está usando efeito de ${1} para comprar uma carta",
     "Global event ": "Evento global ",
     " has been resolved.": " foi resolvido",
 

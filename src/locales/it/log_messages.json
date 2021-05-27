@@ -49,7 +49,7 @@
     "${0} sold ${1} patents":"${0} ha venduto ${1} brevetto/i",
     "${0}'s ${1} production increased by ${2}":"La Produzione di ${1} di ${0} è incrementata di ${2}",
     "${0} ${1} ${2} on row ${3} position ${4}": "${0} ${1} ${2} sulla riga ${3} posizione ${4}",
-    
+
 "A neutral delegate is the new chairman." :"Un Delegato neutrale è il nuovo Presidente",
 "Greens are in power in the first generation.":"I Verdi sono al potere durante la prima generazione",
 "The ruling bonus is ${0}":"Il bonus di governo è ${0}",
@@ -61,12 +61,12 @@
 "${0} added ${1} ${2} to ${3}":"${0} ha aggiunto ${1} ${2} a ${3}",
 "${0} removed ${1} ${2} from ${3} to ${4}":"${0} ha rimosso ${1} ${2} da ${3} a ${4}",
 "${0} revealed and discarded ${1}":"${0} ha rivelato e scartato ${1}",
-"${0} is using their ${1} effect to draw a card.":"${0} sta usando l'effetto di ${1} per pescare una carta",
+"${0} is using their ${1} effect to draw a card by discarding a card.":"${0} sta usando l'effetto di ${1} per pescare una carta",
 "Drew and discarded ${0} (cost ${1}) to place a ${2}":"Pescato e scartato ${0} (costo ${1}) per posizionare 1 ${2}",
 
-    
-    
-    
+
+
+
     "placed":"ha posizionato",
     "greenery tile":"una tessera Vegetazione",
     "ocean tile":"una tessera Oceano",

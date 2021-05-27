@@ -61,7 +61,7 @@
 "${0} added ${1} ${2} to ${3}":"${0} 增加了 ${1} ${2} 到 ${3}",
 "${0} removed ${1} ${2} from ${3} to ${4}":"${0} 移除 ${1} ${2} 从 ${3} 到 ${4}",
 "${0} revealed and discarded ${1}":"${0} 展示并丢弃了 ${1}",
-"${0} is using their ${1} effect to draw a card.":"${0} 正在使用其 ${1} 效果来摸牌",
+"${0} is using their ${1} effect to draw a card by discarding a card.":"${0} 正在使用其 ${1} 效果来摸牌",
 "Drew and discarded ${0} (cost ${1}) to place a ${2}":"提取并丢弃 ${0} (费用 ${1}) 来放置 ${2}",
 
 

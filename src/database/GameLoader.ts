@@ -116,6 +116,10 @@ export class GameLoader implements IGameLoader {
     this.getByParticipantId(spectatorId, cb);
   }
 
+  public remove(gameId: GameId): void {
+    this.games.set(gameId, undefined);
+  }
+
   public restoreGameAt(gameId: GameId, saveId: number, cb: LoadCallback): void {
     try {
       Database.getInstance().restoreGame(gameId, saveId, (err, game) => {

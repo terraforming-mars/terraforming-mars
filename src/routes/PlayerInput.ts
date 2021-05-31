@@ -1,16 +1,23 @@
 import * as http from 'http';
-import {Game} from '../Game';
+import {Game, GameId} from '../Game';
+import {Phase} from '../Phase';
 import {Player} from '../Player';
 import {Server} from '../models/ServerModel';
 import {Handler} from './Handler';
 import {IContext} from './IHandler';
+import {IGameLoader} from '../database/IGameLoader';
 import {OrOptions} from '../inputs/OrOptions';
 import {UndoActionOption} from '../inputs/UndoActionOption';
 
 export class PlayerInput extends Handler {
   public static readonly INSTANCE = new PlayerInput();
+  private removeTimeout = 60 * 60 * 1000;
   private constructor() {
     super();
+  }
+
+  public setRemoveTimeout(removeTimeout: number) {
+    this.removeTimeout = removeTimeout;
   }
 
   public post(req: http.IncomingMessage, res: http.ServerResponse, ctx: IContext): void {
@@ -65,6 +72,13 @@ export class PlayerInput extends Handler {
     });
   }
 
+  private scheduleRemoval(gameLoader: IGameLoader, gameId: GameId): void {
+    setTimeout(() => {
+      console.log(`remove ${gameId}`);
+      gameLoader.remove(gameId);
+    }, this.removeTimeout);
+  }
+
   private processInput(
     req: http.IncomingMessage,
     res: http.ServerResponse,
@@ -82,7 +96,11 @@ export class PlayerInput extends Handler {
           this.performUndo(res, ctx, player);
           return;
         }
+        const startPhase = player.game.phase;
         player.process(entity);
+        if (startPhase !== Phase.END && player.game.phase === Phase.END) {
+          this.scheduleRemoval(ctx.gameLoader, player.game.id);
+        }
         ctx.route.writeJson(res, Server.getPlayerModel(player));
       } catch (err) {
         res.writeHead(400, {

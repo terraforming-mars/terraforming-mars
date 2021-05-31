@@ -5,13 +5,13 @@ import {Game} from '../../../src/Game';
 import {OrOptions} from '../../../src/inputs/OrOptions';
 import {SelectPlayer} from '../../../src/inputs/SelectPlayer';
 import {SelectSpace} from '../../../src/inputs/SelectSpace';
-import {Player} from '../../../src/Player';
+import {TestPlayer} from '../../TestPlayer';
 import {SpaceType} from '../../../src/SpaceType';
 import {TestingUtils} from '../../TestingUtils';
 import {TestPlayers} from '../../TestPlayers';
 
 describe('Flooding', function() {
-  let card : Flooding; let player : Player; let player2 : Player; let game : Game;
+  let card : Flooding; let player : TestPlayer; let player2 : TestPlayer; let game : Game;
 
   beforeEach(function() {
     card = new Flooding();

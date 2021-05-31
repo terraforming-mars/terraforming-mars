@@ -1,12 +1,12 @@
 import {expect} from 'chai';
 import {GeneRepair} from '../../../src/cards/base/GeneRepair';
 import {Game} from '../../../src/Game';
-import {Player} from '../../../src/Player';
+import {TestPlayer} from '../../TestPlayer';
 import {Resources} from '../../../src/Resources';
 import {TestPlayers} from '../../TestPlayers';
 
 describe('GeneRepair', function() {
-  let card : GeneRepair; let player : Player;
+  let card : GeneRepair; let player : TestPlayer;
 
   beforeEach(function() {
     card = new GeneRepair();

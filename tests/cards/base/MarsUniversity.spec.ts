@@ -4,11 +4,11 @@ import {Pets} from '../../../src/cards/base/Pets';
 import {Research} from '../../../src/cards/base/Research';
 import {Game} from '../../../src/Game';
 import {OrOptions} from '../../../src/inputs/OrOptions';
-import {Player} from '../../../src/Player';
+import {TestPlayer} from '../../TestPlayer';
 import {TestPlayers} from '../../TestPlayers';
 
 describe('MarsUniversity', function() {
-  let card : MarsUniversity; let player : Player; let game : Game;
+  let card : MarsUniversity; let player : TestPlayer; let game : Game;
 
   beforeEach(function() {
     card = new MarsUniversity();

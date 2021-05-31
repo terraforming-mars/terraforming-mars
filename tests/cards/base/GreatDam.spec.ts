@@ -1,13 +1,13 @@
 import {expect} from 'chai';
 import {GreatDam} from '../../../src/cards/base/GreatDam';
 import {Game} from '../../../src/Game';
-import {Player} from '../../../src/Player';
+import {TestPlayer} from '../../TestPlayer';
 import {Resources} from '../../../src/Resources';
 import {TestingUtils} from '../../TestingUtils';
 import {TestPlayers} from '../../TestPlayers';
 
 describe('GreatDam', () => {
-  let card : GreatDam; let player : Player;
+  let card : GreatDam; let player : TestPlayer;
 
   beforeEach(() => {
     card = new GreatDam();

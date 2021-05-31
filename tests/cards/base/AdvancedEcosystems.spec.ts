@@ -1,6 +1,6 @@
 import {expect} from 'chai';
 import {AdvancedEcosystems} from '../../../src/cards/base/AdvancedEcosystems';
-import {Player} from '../../../src/Player';
+import {TestPlayer} from '../../TestPlayer';
 import {Tardigrades} from '../../../src/cards/base/Tardigrades';
 import {TundraFarming} from '../../../src/cards/base/TundraFarming';
 import {ResearchCoordination} from '../../../src/cards/prelude/ResearchCoordination';
@@ -8,7 +8,7 @@ import {ResearchNetwork} from '../../../src/cards/prelude/ResearchNetwork';
 import {TestPlayers} from '../../TestPlayers';
 
 describe('AdvancedEcosystems', function() {
-  let card : AdvancedEcosystems; let player : Player;
+  let card : AdvancedEcosystems; let player : TestPlayer;
 
   beforeEach(function() {
     card = new AdvancedEcosystems();

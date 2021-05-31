@@ -1,13 +1,13 @@
 import {expect} from 'chai';
 import {WavePower} from '../../../src/cards/base/WavePower';
 import {Game} from '../../../src/Game';
-import {Player} from '../../../src/Player';
+import {TestPlayer} from '../../TestPlayer';
 import {Resources} from '../../../src/Resources';
 import {TestingUtils} from '../../TestingUtils';
 import {TestPlayers} from '../../TestPlayers';
 
 describe('WavePower', function() {
-  let card : WavePower; let player : Player;
+  let card : WavePower; let player : TestPlayer;
 
   beforeEach(function() {
     card = new WavePower();

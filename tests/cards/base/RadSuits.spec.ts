@@ -1,12 +1,12 @@
 import {expect} from 'chai';
 import {RadSuits} from '../../../src/cards/base/RadSuits';
 import {Game} from '../../../src/Game';
-import {Player} from '../../../src/Player';
+import {TestPlayer} from '../../TestPlayer';
 import {Resources} from '../../../src/Resources';
 import {TestPlayers} from '../../TestPlayers';
 
 describe('RadSuits', function() {
-  let card : RadSuits; let player : Player; let game : Game;
+  let card : RadSuits; let player : TestPlayer; let game : Game;
 
   beforeEach(function() {
     card = new RadSuits();

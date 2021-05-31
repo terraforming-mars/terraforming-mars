@@ -1,12 +1,12 @@
 import {expect} from 'chai';
 import {TundraFarming} from '../../../src/cards/base/TundraFarming';
 import {Game} from '../../../src/Game';
-import {Player} from '../../../src/Player';
+import {TestPlayer} from '../../TestPlayer';
 import {Resources} from '../../../src/Resources';
 import {TestPlayers} from '../../TestPlayers';
 
 describe('TundraFarming', function() {
-  let card : TundraFarming; let player : Player; let game : Game;
+  let card : TundraFarming; let player : TestPlayer; let game : Game;
 
   beforeEach(function() {
     card = new TundraFarming();

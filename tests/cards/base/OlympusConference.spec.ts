@@ -7,11 +7,11 @@ import {ScienceTagCard} from '../../../src/cards/community/ScienceTagCard';
 import {DeferredActionsQueue} from '../../../src/deferredActions/DeferredActionsQueue';
 import {Game} from '../../../src/Game';
 import {OrOptions} from '../../../src/inputs/OrOptions';
-import {Player} from '../../../src/Player';
+import {TestPlayer} from '../../TestPlayer';
 import {TestPlayers} from '../../TestPlayers';
 
 describe('OlympusConference', function() {
-  let card : OlympusConference; let player : Player; let game : Game;
+  let card : OlympusConference; let player : TestPlayer; let game : Game;
 
   beforeEach(function() {
     card = new OlympusConference();

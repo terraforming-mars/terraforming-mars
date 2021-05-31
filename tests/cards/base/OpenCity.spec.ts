@@ -1,12 +1,12 @@
 import {expect} from 'chai';
 import {OpenCity} from '../../../src/cards/base/OpenCity';
 import {Game} from '../../../src/Game';
-import {Player} from '../../../src/Player';
+import {TestPlayer} from '../../TestPlayer';
 import {Resources} from '../../../src/Resources';
 import {TestPlayers} from '../../TestPlayers';
 
 describe('OpenCity', function() {
-  let card : OpenCity; let player : Player; let game : Game;
+  let card : OpenCity; let player : TestPlayer; let game : Game;
 
   beforeEach(function() {
     card = new OpenCity();

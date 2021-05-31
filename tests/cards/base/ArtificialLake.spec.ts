@@ -3,13 +3,13 @@ import {ArtificialLake} from '../../../src/cards/base/ArtificialLake';
 import * as constants from '../../../src/constants';
 import {Game} from '../../../src/Game';
 import {SelectSpace} from '../../../src/inputs/SelectSpace';
-import {Player} from '../../../src/Player';
+import {TestPlayer} from '../../TestPlayer';
 import {SpaceType} from '../../../src/SpaceType';
 import {TileType} from '../../../src/TileType';
 import {TestPlayers} from '../../TestPlayers';
 
 describe('ArtificialLake', function() {
-  let card : ArtificialLake; let player : Player; let game : Game;
+  let card : ArtificialLake; let player : TestPlayer; let game : Game;
 
   beforeEach(function() {
     card = new ArtificialLake();

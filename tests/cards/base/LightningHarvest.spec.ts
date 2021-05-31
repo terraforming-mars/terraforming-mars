@@ -2,12 +2,12 @@ import {expect} from 'chai';
 import {GeneRepair} from '../../../src/cards/base/GeneRepair';
 import {LightningHarvest} from '../../../src/cards/base/LightningHarvest';
 import {Game} from '../../../src/Game';
-import {Player} from '../../../src/Player';
+import {TestPlayer} from '../../TestPlayer';
 import {Resources} from '../../../src/Resources';
 import {TestPlayers} from '../../TestPlayers';
 
 describe('LightningHarvest', function() {
-  let card : LightningHarvest; let player : Player;
+  let card : LightningHarvest; let player : TestPlayer;
 
   beforeEach(function() {
     card = new LightningHarvest();

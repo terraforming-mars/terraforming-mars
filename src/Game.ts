@@ -1039,11 +1039,12 @@ export class Game implements ISerializable<SerializedGame> {
     Database.getInstance().cleanSaves(this.id, this.lastSaveId);
     const scores: Array<Score> = [];
     this.players.forEach((player) => {
-      let corponame: String = '';
+      let corponame: string = '';
+      const vpb = player.getVictoryPoints();
       if (player.corporationCard !== undefined) {
         corponame = player.corporationCard.name;
       }
-      scores.push({corporation: corponame, playerScore: player.victoryPointsBreakdown.total});
+      scores.push({corporation: corponame, playerScore: vpb.total});
     });
 
     Database.getInstance().saveGameResults(this.id, this.players.length, this.generation, this.gameOptions, scores);

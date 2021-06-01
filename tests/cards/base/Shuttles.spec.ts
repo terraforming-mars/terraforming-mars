@@ -3,12 +3,12 @@ import {Bushes} from '../../../src/cards/base/Bushes';
 import {Shuttles} from '../../../src/cards/base/Shuttles';
 import {TollStation} from '../../../src/cards/base/TollStation';
 import {Game} from '../../../src/Game';
-import {Player} from '../../../src/Player';
+import {TestPlayer} from '../../TestPlayer';
 import {Resources} from '../../../src/Resources';
 import {TestPlayers} from '../../TestPlayers';
 
 describe('Shuttles', function() {
-  let card : Shuttles; let player : Player; let game : Game;
+  let card : Shuttles; let player : TestPlayer; let game : Game;
 
   beforeEach(function() {
     card = new Shuttles();

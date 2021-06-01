@@ -2,12 +2,12 @@ import {expect} from 'chai';
 import {MicroMills} from '../../../src/cards/base/MicroMills';
 import {Conscription} from '../../../src/cards/colonies/Conscription';
 import {Game} from '../../../src/Game';
-import {Player} from '../../../src/Player';
+import {TestPlayer} from '../../TestPlayer';
 import {TestPlayers} from '../../TestPlayers';
 
 describe('Conscription', function() {
   let card: Conscription;
-  let player: Player;
+  let player: TestPlayer;
 
   beforeEach(() => {
     card = new Conscription();

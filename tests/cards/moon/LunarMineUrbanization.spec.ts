@@ -63,12 +63,12 @@ describe('LunarMineUrbanization', () => {
   });
 
   it('computeVictoryPoints', () => {
+    const vps = player.victoryPointsBreakdown;
     function computeVps() {
-      const vps = player.victoryPointsBreakdown;
       vps.moonColonies = 0;
       vps.moonMines = 0;
       vps.moonRoads = 0;
-      MoonExpansion.calculateVictoryPoints(player);
+      MoonExpansion.calculateVictoryPoints(player, vps);
       return {
         colonies: vps.moonColonies,
         mines: vps.moonMines,
@@ -78,7 +78,7 @@ describe('LunarMineUrbanization', () => {
 
     expect(computeVps()).eql({colonies: 0, mines: 0, roads: 0});
     MoonExpansion.addTile(player, 'm02', {tileType: TileType.MOON_ROAD});
-    MoonExpansion.calculateVictoryPoints(player);
+    MoonExpansion.calculateVictoryPoints(player, vps);
     expect(computeVps()).eql({colonies: 0, mines: 0, roads: 1});
     MoonExpansion.addTile(player, 'm03', {tileType: TileType.LUNAR_MINE_URBANIZATION});
 

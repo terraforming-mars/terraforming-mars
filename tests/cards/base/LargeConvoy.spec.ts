@@ -4,12 +4,12 @@ import {LargeConvoy} from '../../../src/cards/base/LargeConvoy';
 import {Pets} from '../../../src/cards/base/Pets';
 import {Game} from '../../../src/Game';
 import {OrOptions} from '../../../src/inputs/OrOptions';
-import {Player} from '../../../src/Player';
+import {TestPlayer} from '../../TestPlayer';
 import {TestingUtils} from '../../TestingUtils';
 import {TestPlayers} from '../../TestPlayers';
 
 describe('LargeConvoy', function() {
-  let card : LargeConvoy; let player : Player;
+  let card : LargeConvoy; let player : TestPlayer;
 
   beforeEach(function() {
     card = new LargeConvoy();

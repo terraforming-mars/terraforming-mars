@@ -2,13 +2,13 @@ import {expect} from 'chai';
 import {NaturalPreserve} from '../../../src/cards/base/NaturalPreserve';
 import {Game} from '../../../src/Game';
 import {SelectSpace} from '../../../src/inputs/SelectSpace';
-import {Player} from '../../../src/Player';
+import {TestPlayer} from '../../TestPlayer';
 import {Resources} from '../../../src/Resources';
 import {TileType} from '../../../src/TileType';
 import {TestPlayers} from '../../TestPlayers';
 
 describe('NaturalPreserve', () => {
-  let card : NaturalPreserve; let player : Player; let game : Game;
+  let card : NaturalPreserve; let player : TestPlayer; let game : Game;
 
   beforeEach(() => {
     card = new NaturalPreserve();

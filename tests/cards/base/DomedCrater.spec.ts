@@ -2,13 +2,13 @@ import {expect} from 'chai';
 import {DomedCrater} from '../../../src/cards/base/DomedCrater';
 import {Game} from '../../../src/Game';
 import {SelectSpace} from '../../../src/inputs/SelectSpace';
-import {Player} from '../../../src/Player';
+import {TestPlayer} from '../../TestPlayer';
 import {Resources} from '../../../src/Resources';
 import {TileType} from '../../../src/TileType';
 import {TestPlayers} from '../../TestPlayers';
 
 describe('DomedCrater', function() {
-  let card : DomedCrater; let player : Player; let game : Game;
+  let card : DomedCrater; let player : TestPlayer; let game : Game;
 
   beforeEach(function() {
     card = new DomedCrater();

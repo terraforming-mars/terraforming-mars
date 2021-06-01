@@ -1,12 +1,12 @@
 import {expect} from 'chai';
 import {SpaceElevator} from '../../../src/cards/base/SpaceElevator';
 import {Game} from '../../../src/Game';
-import {Player} from '../../../src/Player';
+import {TestPlayer} from '../../TestPlayer';
 import {Resources} from '../../../src/Resources';
 import {TestPlayers} from '../../TestPlayers';
 
 describe('SpaceElevator', function() {
-  let card : SpaceElevator; let player : Player;
+  let card : SpaceElevator; let player : TestPlayer;
 
   beforeEach(function() {
     card = new SpaceElevator();

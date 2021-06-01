@@ -1,6 +1,6 @@
 import {expect} from 'chai';
 import {Capital} from '../../../src/cards/base/Capital';
-import {Player} from '../../../src/Player';
+import {TestPlayer} from '../../TestPlayer';
 import {Game} from '../../../src/Game';
 import {SpaceType} from '../../../src/SpaceType';
 import {TileType} from '../../../src/TileType';
@@ -11,7 +11,7 @@ import {TestPlayers} from '../../TestPlayers';
 import {Board} from '../../../src/boards/Board';
 
 describe('Capital', () => {
-  let card : Capital; let player : Player; let game : Game;
+  let card : Capital; let player : TestPlayer; let game : Game;
 
   beforeEach(() => {
     card = new Capital();

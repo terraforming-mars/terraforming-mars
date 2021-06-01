@@ -1,12 +1,12 @@
 import {expect} from 'chai';
 import {BiomassCombustors} from '../../../src/cards/base/BiomassCombustors';
 import {Game} from '../../../src/Game';
-import {Player} from '../../../src/Player';
+import {TestPlayer} from '../../TestPlayer';
 import {Resources} from '../../../src/Resources';
 import {TestPlayers} from '../../TestPlayers';
 
 describe('BiomassCombustors', function() {
-  let card : BiomassCombustors; let player : Player; let player2 : Player; let game : Game;
+  let card : BiomassCombustors; let player : TestPlayer; let player2 : TestPlayer; let game : Game;
 
   beforeEach(function() {
     card = new BiomassCombustors();

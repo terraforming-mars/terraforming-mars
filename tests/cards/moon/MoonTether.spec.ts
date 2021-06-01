@@ -1,6 +1,6 @@
 import {Game} from '../../../src/Game';
-import {Player} from '../../../src/Player';
 import {TestingUtils} from '../../TestingUtils';
+import {TestPlayer} from '../../TestPlayer';
 import {TestPlayers} from '../../TestPlayers';
 import {MoonTether} from '../../../src/cards/moon/MoonTether';
 import {expect} from 'chai';
@@ -8,7 +8,7 @@ import {expect} from 'chai';
 const MOON_OPTIONS = TestingUtils.setCustomGameOptions({moonExpansion: true});
 
 describe('MoonTether', () => {
-  let player: Player;
+  let player: TestPlayer;
   let card: MoonTether;
 
   beforeEach(() => {

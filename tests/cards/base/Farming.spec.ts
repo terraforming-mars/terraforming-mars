@@ -1,12 +1,12 @@
 import {expect} from 'chai';
 import {Farming} from '../../../src/cards/base/Farming';
 import {Game} from '../../../src/Game';
-import {Player} from '../../../src/Player';
+import {TestPlayer} from '../../TestPlayer';
 import {Resources} from '../../../src/Resources';
 import {TestPlayers} from '../../TestPlayers';
 
 describe('Farming', function() {
-  let card : Farming; let player : Player; let game : Game;
+  let card : Farming; let player : TestPlayer; let game : Game;
 
   beforeEach(function() {
     card = new Farming();

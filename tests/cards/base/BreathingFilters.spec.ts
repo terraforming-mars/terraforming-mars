@@ -1,11 +1,11 @@
 import {expect} from 'chai';
 import {BreathingFilters} from '../../../src/cards/base/BreathingFilters';
 import {Game} from '../../../src/Game';
-import {Player} from '../../../src/Player';
+import {TestPlayer} from '../../TestPlayer';
 import {TestPlayers} from '../../TestPlayers';
 
 describe('BreathingFilters', function() {
-  let card : BreathingFilters; let player : Player; let game : Game;
+  let card : BreathingFilters; let player : TestPlayer; let game : Game;
 
   beforeEach(function() {
     card = new BreathingFilters();

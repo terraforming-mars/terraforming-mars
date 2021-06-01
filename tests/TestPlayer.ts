@@ -3,8 +3,10 @@ import {PlayerInput} from '../src/PlayerInput';
 import {Color} from '../src/Color';
 import {Units} from '../src/Units';
 import {Tags} from '../src/cards/Tags';
+import {VictoryPointsBreakdown} from '../src/VictoryPointsBreakdown';
 
 export class TestPlayer extends Player {
+  public victoryPointsBreakdown = new VictoryPointsBreakdown();
   constructor(color: Color) {
     super('player-' + color, color, false, 0, color + '-id');
   }
@@ -28,6 +30,11 @@ export class TestPlayer extends Player {
     if (units.heat !== undefined) {
       this.heatProduction = units.heat;
     }
+  }
+
+  public getVictoryPoints(): VictoryPointsBreakdown {
+    this.victoryPointsBreakdown = super.getVictoryPoints();
+    return this.victoryPointsBreakdown;
   }
 
   public tagsForTest: Partial<TagsForTest> | undefined = undefined;

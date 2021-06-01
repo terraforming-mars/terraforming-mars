@@ -1,12 +1,12 @@
 import {expect} from 'chai';
 import {SearchForLife} from '../../../src/cards/base/SearchForLife';
 import {TectonicStressPower} from '../../../src/cards/base/TectonicStressPower';
-import {Player} from '../../../src/Player';
+import {TestPlayer} from '../../TestPlayer';
 import {Resources} from '../../../src/Resources';
 import {TestPlayers} from '../../TestPlayers';
 
 describe('TectonicStressPower', function() {
-  let card : TectonicStressPower; let player : Player;
+  let card : TectonicStressPower; let player : TestPlayer;
 
   beforeEach(function() {
     card = new TectonicStressPower();

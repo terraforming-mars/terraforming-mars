@@ -2,7 +2,6 @@ import {PlayerId} from './Player';
 import {CardName} from './CardName';
 import {Color} from './Color';
 import {SerializedCard} from './SerializedCard';
-import {VictoryPointsBreakdown} from './VictoryPointsBreakdown';
 import {SerializedTimer} from './SerializedTimer';
 
 export interface SerializedPlayer {
@@ -60,5 +59,4 @@ export interface SerializedPlayer {
     // TODO(kberg): change tradesThisTurn to tradeThisGeneration later
     tradesThisTurn: number;
     turmoilPolicyActionUsed: boolean;
-    victoryPointsBreakdown: VictoryPointsBreakdown;
 }

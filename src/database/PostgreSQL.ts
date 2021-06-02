@@ -3,10 +3,10 @@ import {Game, GameId, GameOptions, Score} from '../Game';
 import {IGameData} from './IDatabase';
 import {SerializedGame} from '../SerializedGame';
 
-import {Client, ClientConfig, QueryResult} from 'pg';
+import {Pool, ClientConfig, QueryResult} from 'pg';
 
 export class PostgreSQL implements IDatabase {
-  private client: Client;
+  private client: Pool;
 
   constructor() {
     const config: ClientConfig = {
@@ -18,8 +18,7 @@ export class PostgreSQL implements IDatabase {
         rejectUnauthorized: false,
       };
     }
-    this.client = new Client(config);
-    this.client.connect();
+    this.client = new Pool(config);
     this.client.query('CREATE TABLE IF NOT EXISTS games(game_id varchar, players integer, save_id integer, game text, status text default \'running\', created_time timestamp default now(), PRIMARY KEY (game_id, save_id))', (err) => {
       if (err) {
         throw err;

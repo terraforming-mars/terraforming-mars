@@ -1,7 +1,6 @@
 import * as http from 'http';
 import * as EventEmitter from 'events';
 import {expect} from 'chai';
-import {Phase} from '../../src/Phase';
 import {PlayerInput} from '../../src/routes/PlayerInput';
 import {Route} from '../../src/routes/Route';
 import {MockResponse} from './HttpMocks';
@@ -91,24 +90,5 @@ describe('PlayerInput', function() {
     req.emit('data', '}{');
     req.emit('end');
     expect(res.content).eq('{"message":"Unexpected token } in JSON at position 0"}');
-  });
-
-  it('schedules game removal when game ends', (done) => {
-    const player = TestPlayers.BLUE.newPlayer();
-    req.url = '/player/input?id=' + player.id;
-    ctx.url = new URL('http://boo.com' + req.url);
-    const game = Game.newInstance('foo', [player], player);
-    ctx.gameLoader.add(game);
-    ctx.gameLoader.remove = function(gameId) {
-      expect(gameId).to.equal(game.id);
-      done();
-    };
-    player.process = function() {
-      player.game.phase = Phase.END;
-    };
-    PlayerInput.INSTANCE.setRemoveTimeout(0);
-    PlayerInput.INSTANCE.post(req, res.hide(), ctx);
-    req.emit('data', JSON.stringify([]));
-    req.emit('end');
   });
 });

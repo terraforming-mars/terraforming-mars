@@ -223,13 +223,4 @@ describe('GameLoader', function() {
       done();
     });
   });
-
-  it('removes', function(done) {
-    GameLoader.getInstance().add(game);
-    GameLoader.getInstance().remove(game.id);
-    GameLoader.getInstance().getByGameId(game.id, false, (game) => {
-      expect(game).is.undefined;
-      done();
-    });
-  });
 });

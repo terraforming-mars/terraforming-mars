@@ -181,7 +181,7 @@ export const Sidebar = Vue.component('sidebar', {
 
   <div class="sidebar_item sidebar_item--settings">
     <i class="sidebar_icon sidebar_icon--settings" :class="{'sidebar_item--is-active': ui.preferences_panel_open}" v-on:click="ui.preferences_panel_open = !ui.preferences_panel_open"></i>
-    <preferences-dialog v-if="ui.preferences_panel_open" @okButtonClicked="ui.preferences_panel_open = false"/>
+    <preferences-dialog v-show="ui.preferences_panel_open" @okButtonClicked="ui.preferences_panel_open = false"/>
   </div>
 </div>
     `,

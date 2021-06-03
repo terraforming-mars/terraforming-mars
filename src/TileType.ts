@@ -89,3 +89,12 @@ export namespace TileType {
     return TO_STRING_MAP.get(tileType) || `(unnamed tile, id ${tileType})`;
   }
 }
+
+// Ares Tiles handling
+
+export const HAZARD_TILES = new Set([TileType.DUST_STORM_MILD, TileType.DUST_STORM_SEVERE, TileType.EROSION_MILD, TileType.EROSION_SEVERE]);
+export const OCEAN_UPGRADE_TILES = new Set([TileType.OCEAN_CITY, TileType.OCEAN_FARM, TileType.OCEAN_SANCTUARY]);
+
+export function isAresTile(tile: TileType): boolean {
+  return HAZARD_TILES.has(tile);
+}

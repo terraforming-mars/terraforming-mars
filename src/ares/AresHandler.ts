@@ -7,7 +7,7 @@ import {Player} from '../Player';
 import {Resources} from '../Resources';
 import {ResourceType} from '../ResourceType';
 import {SpaceBonus} from '../SpaceBonus';
-import {TileType} from '../TileType';
+import {OCEAN_UPGRADE_TILES, TileType} from '../TileType';
 import {ITile} from '../ITile';
 import {IAresData, IMilestoneCount} from './IAresData';
 import {IAdjacencyCost} from './IAdjacencyCost';
@@ -17,9 +17,6 @@ import {DeferredAction} from '../deferredActions/DeferredAction';
 import {SelectHowToPayDeferred} from '../deferredActions/SelectHowToPayDeferred';
 import {SelectProductionToLoseDeferred} from '../deferredActions/SelectProductionToLoseDeferred';
 import {_AresHazardPlacement} from './AresHazards';
-
-export const OCEAN_UPGRADE_TILES = [TileType.OCEAN_CITY, TileType.OCEAN_FARM, TileType.OCEAN_SANCTUARY];
-export const HAZARD_TILES = [TileType.DUST_STORM_MILD, TileType.DUST_STORM_SEVERE, TileType.EROSION_MILD, TileType.EROSION_SEVERE];
 
 export enum HazardSeverity {
     NONE,
@@ -235,7 +232,7 @@ export class AresHandler {
     if (AresHandler.hasHazardTile(space) && space.tile.protectedHazard !== true) {
       return true;
     }
-    if (space.tile.tileType === TileType.OCEAN && OCEAN_UPGRADE_TILES.includes(newTile.tileType)) {
+    if (space.tile.tileType === TileType.OCEAN && OCEAN_UPGRADE_TILES.has(newTile.tileType)) {
       return true;
     }
     return false;

@@ -90,6 +90,11 @@ export namespace TileType {
   }
 }
 
+// Ares Tiles handling
+
+export const HAZARD_TILES = new Set([TileType.DUST_STORM_MILD, TileType.DUST_STORM_SEVERE, TileType.EROSION_MILD, TileType.EROSION_SEVERE]);
+export const OCEAN_UPGRADE_TILES = new Set([TileType.OCEAN_CITY, TileType.OCEAN_FARM, TileType.OCEAN_SANCTUARY]);
+
 export function isAresTile(tile: TileType): boolean {
-  return [TileType.EROSION_MILD, TileType.EROSION_SEVERE, TileType.DUST_STORM_MILD, TileType.DUST_STORM_SEVERE].includes(tile);
+  return HAZARD_TILES.has(tile);
 }

@@ -1,5 +1,6 @@
 import {IAward} from './IAward';
 import {Player} from '../Player';
+import {isAresTile} from '../TileType';
 
 export class DesertSettler implements IAward {
     public name: string = 'Desert Settler';
@@ -9,6 +10,7 @@ export class DesertSettler implements IAward {
         .filter((space) => space.player !== undefined &&
             space.player === player &&
             space.tile !== undefined &&
+            isAresTile(space.tile.tileType) === false &&
             space.y >= 5 && space.y <= 8).length;
     }
 }

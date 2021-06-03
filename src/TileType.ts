@@ -89,3 +89,7 @@ export namespace TileType {
     return TO_STRING_MAP.get(tileType) || `(unnamed tile, id ${tileType})`;
   }
 }
+
+export function isAresTile(tile: TileType): boolean {
+  return [TileType.EROSION_MILD, TileType.EROSION_SEVERE, TileType.DUST_STORM_MILD, TileType.DUST_STORM_SEVERE].includes(tile);
+}

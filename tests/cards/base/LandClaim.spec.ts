@@ -8,8 +8,8 @@ import {SpaceName} from '../../../src/SpaceName';
 import {TestingUtils} from '../../TestingUtils';
 import {TestPlayers} from '../../TestPlayers';
 
-describe('LandClaim', function() {
-  it('Should play', function() {
+describe('LandClaim', function () {
+  it('Should play', function () {
     const card = new LandClaim();
     const player = TestPlayers.BLUE.newPlayer();
     const redPlayer = TestPlayers.RED.newPlayer();
@@ -21,16 +21,25 @@ describe('LandClaim', function() {
     expect(landSpace.player).to.eq(player);
     expect(landSpace.tile).is.undefined;
   });
-  it('can claim south pole on hellas board', function() {
+  it('can claim south pole on hellas board', function () {
     const card = new LandClaim();
     const player = TestPlayers.BLUE.newPlayer();
     const player2 = TestPlayers.RED.newPlayer();
-    Game.newInstance('foobar', [player, player2], player, TestingUtils.setCustomGameOptions({
-      boardName: BoardName.HELLAS,
-    }));
+    Game.newInstance(
+      'foobar',
+      [player, player2],
+      player,
+      TestingUtils.setCustomGameOptions({
+        boardName: BoardName.HELLAS,
+      })
+    );
     const action = card.play(player) as SelectSpace;
     expect(action).is.not.undefined;
     expect(player.canAfford(constants.HELLAS_BONUS_OCEAN_COST)).to.be.false;
-    expect(action.availableSpaces.some((space) => space.id === SpaceName.HELLAS_OCEAN_TILE)).to.be.true;
+    expect(
+      action.availableSpaces.some(
+        (space) => space.id === SpaceName.HELLAS_OCEAN_TILE
+      )
+    ).to.be.true;
   });
 });

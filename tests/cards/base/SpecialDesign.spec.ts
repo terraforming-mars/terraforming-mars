@@ -3,8 +3,8 @@ import {SpecialDesign} from '../../../src/cards/base/SpecialDesign';
 import {Game} from '../../../src/Game';
 import {TestPlayers} from '../../TestPlayers';
 
-describe('SpecialDesign', function() {
-  it('Should play', function() {
+describe('SpecialDesign', function () {
+  it('Should play', function () {
     const card = new SpecialDesign();
     const player = TestPlayers.BLUE.newPlayer();
     const redPlayer = TestPlayers.RED.newPlayer();

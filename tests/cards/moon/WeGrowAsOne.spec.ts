@@ -21,7 +21,8 @@ describe('WeGrowAsOne', () => {
       TestingUtils.setCustomGameOptions({
         moonExpansion: true,
         coloniesExtension: true,
-      }));
+      })
+    );
     card = new WeGrowAsOne();
   });
 

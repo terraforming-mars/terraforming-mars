@@ -18,14 +18,22 @@ export class SeptumTribus extends Card implements IActionCard, CorporationCard {
 
       metadata: {
         cardNumber: 'R15',
-        description: 'You start with 36 M€. When you perform an action, the wild tag counts as any tag of your choice.',
+        description:
+          'You start with 36 M€. When you perform an action, the wild tag counts as any tag of your choice.',
         renderData: CardRenderer.builder((b) => {
           b.br;
           b.megacredits(36);
           b.corpBox('action', (ce) => {
-            ce.action('Gain 2 M€ for each party where you have at least 1 delegate.', (eb) => {
-              eb.empty().startAction.megacredits(2).slash().delegates(1).asterix();
-            });
+            ce.action(
+              'Gain 2 M€ for each party where you have at least 1 delegate.',
+              (eb) => {
+                eb.empty()
+                  .startAction.megacredits(2)
+                  .slash()
+                  .delegates(1)
+                  .asterix();
+              }
+            );
           });
         }),
       },
@@ -42,8 +50,14 @@ export class SeptumTribus extends Card implements IActionCard, CorporationCard {
 
   public action(player: Player) {
     if (player.game.turmoil !== undefined) {
-      const partiesWithPresence = player.game.turmoil.parties.filter((party) => party.delegates.includes(player.id));
-      player.addResource(Resources.MEGACREDITS, partiesWithPresence.length * 2, {log: true});
+      const partiesWithPresence = player.game.turmoil.parties.filter((party) =>
+        party.delegates.includes(player.id)
+      );
+      player.addResource(
+        Resources.MEGACREDITS,
+        partiesWithPresence.length * 2,
+        {log: true}
+      );
     }
 
     return undefined;

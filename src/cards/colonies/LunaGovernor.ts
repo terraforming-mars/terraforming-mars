@@ -22,7 +22,8 @@ export class LunaGovernor extends Card implements IProjectCard {
         renderData: CardRenderer.builder((b) => {
           b.production((pb) => pb.megacredits(2));
         }),
-        description: 'Requires 3 Earth tags. Increase your M€ production 2 steps.',
+        description:
+          'Requires 3 Earth tags. Increase your M€ production 2 steps.',
       },
     });
   }

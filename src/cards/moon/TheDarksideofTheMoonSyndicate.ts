@@ -16,7 +16,10 @@ import {Size} from '../render/Size';
 import {Phase} from '../../Phase';
 import {Card} from '../Card';
 
-export class TheDarksideofTheMoonSyndicate extends Card implements CorporationCard {
+export class TheDarksideofTheMoonSyndicate
+  extends Card
+  implements CorporationCard
+{
   constructor() {
     super({
       cardType: CardType.CORPORATION,
@@ -29,17 +32,40 @@ export class TheDarksideofTheMoonSyndicate extends Card implements CorporationCa
         cardNumber: '',
         renderData: CardRenderer.builder((b) => {
           b.megacredits(40).syndicateFleet(2).br;
-          b.text('You start with 40 M€ and 2 syndicate fleets on this card.', Size.SMALL, false, false).br;
-          b.titanium(1).arrow(Size.SMALL).syndicateFleet()
-            .slash(Size.SMALL)
-            .syndicateFleet().arrow(Size.SMALL).text('steal', Size.TINY).megacredits(8).any.br;
-          b.text('Action: Spend 1 titanium to add 1 syndicate fleet on this card OR remove 1 syndicate fleet from this card to steal 8M€ from any opponent.', Size.TINY, false, false).br;
+          b.text(
+            'You start with 40 M€ and 2 syndicate fleets on this card.',
+            Size.SMALL,
+            false,
+            false
+          ).br;
           b
-            .effect('When you place a tile on the Moon, steal 2 M€ from opponents for each of their tiles next to yours.', (eb) => {
-              eb.emptyTile('normal', Size.SMALL).secondaryTag(Tags.MOON)
-                .startEffect
-                .text('STEAL').megacredits(2).any.slash().emptyTile('normal', Size.SMALL).emptyTile('normal', Size.SMALL).any;
-            });
+            .titanium(1)
+            .arrow(Size.SMALL)
+            .syndicateFleet()
+            .slash(Size.SMALL)
+            .syndicateFleet()
+            .arrow(Size.SMALL)
+            .text('steal', Size.TINY)
+            .megacredits(8).any.br;
+          b.text(
+            'Action: Spend 1 titanium to add 1 syndicate fleet on this card OR remove 1 syndicate fleet from this card to steal 8M€ from any opponent.',
+            Size.TINY,
+            false,
+            false
+          ).br;
+          b.effect(
+            'When you place a tile on the Moon, steal 2 M€ from opponents for each of their tiles next to yours.',
+            (eb) => {
+              eb
+                .emptyTile('normal', Size.SMALL)
+                .secondaryTag(Tags.MOON)
+                .startEffect.text('STEAL')
+                .megacredits(2)
+                .any.slash()
+                .emptyTile('normal', Size.SMALL)
+                .emptyTile('normal', Size.SMALL).any;
+            }
+          );
         }),
       },
     });
@@ -59,18 +85,32 @@ export class TheDarksideofTheMoonSyndicate extends Card implements CorporationCa
   public action(player: Player) {
     const orOptions = new OrOptions();
     if (player.titanium > 0) {
-      orOptions.options.push(new SelectOption('Spend 1 titanium to add 1 syndicate fleet on this card', 'Add syndicate fleet', () => {
-        player.titanium--;
-        player.addResourceTo(this);
-        return undefined;
-      }));
+      orOptions.options.push(
+        new SelectOption(
+          'Spend 1 titanium to add 1 syndicate fleet on this card',
+          'Add syndicate fleet',
+          () => {
+            player.titanium--;
+            player.addResourceTo(this);
+            return undefined;
+          }
+        )
+      );
     }
     if (this.resourceCount > 0) {
-      orOptions.options.push(new SelectOption('Remove 1 syndicate fleet from this card to steal 8M€ from any opponent.', 'Remove syndicate fleet', () => {
-        player.removeResourceFrom(this);
-        player.game.defer(new StealResources(player, Resources.MEGACREDITS, 8));
-        return undefined;
-      }));
+      orOptions.options.push(
+        new SelectOption(
+          'Remove 1 syndicate fleet from this card to steal 8M€ from any opponent.',
+          'Remove syndicate fleet',
+          () => {
+            player.removeResourceFrom(this);
+            player.game.defer(
+              new StealResources(player, Resources.MEGACREDITS, 8)
+            );
+            return undefined;
+          }
+        )
+      );
     }
 
     if (orOptions.options.length === 1) {
@@ -93,17 +133,28 @@ export class TheDarksideofTheMoonSyndicate extends Card implements CorporationCa
     const game = activePlayer.game;
     if (MoonExpansion.MOON_TILES.has(space.tile.tileType)) {
       const costs = new Multiset<Player>();
-      MoonExpansion.moonData(game).moon.getAdjacentSpaces(space).forEach((space) => {
-        if (space.tile !== undefined && space.player !== undefined && space.player !== activePlayer) {
-          costs.add(space.player, 2);
-        }
-      });
+      MoonExpansion.moonData(game)
+        .moon.getAdjacentSpaces(space)
+        .forEach((space) => {
+          if (
+            space.tile !== undefined &&
+            space.player !== undefined &&
+            space.player !== activePlayer
+          ) {
+            costs.add(space.player, 2);
+          }
+        });
       costs.entries().forEach(([target, qty]) => {
         // TODO(kberg): Create a Game.steal method that manages this, both here
         // and in StealResources.
         const adjustedQuantity = Math.min(qty, target.megaCredits);
-        activePlayer.addResource(Resources.MEGACREDITS, adjustedQuantity, {log: true});
-        target.deductResource(Resources.MEGACREDITS, adjustedQuantity, {log: true, from: activePlayer});
+        activePlayer.addResource(Resources.MEGACREDITS, adjustedQuantity, {
+          log: true,
+        });
+        target.deductResource(Resources.MEGACREDITS, adjustedQuantity, {
+          log: true,
+          from: activePlayer,
+        });
       });
     }
     return undefined;

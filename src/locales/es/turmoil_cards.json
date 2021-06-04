@@ -50,5 +50,5 @@
   "Vote Of No Confidence": "Voto de Desconfianza",
   "Requires that you have a Party Leader in any party and that the sitting Chairman is neutral. Remove the NEUTRAL Chairman and move your own delegate (from the reserve) there instead. Gain 1 TR.": "Requiere que tengas un líder en cualqueir partido y que el Presidente sea neutral. Retira el Presidente NEUTRAL y en su lugar añade tu propio delegado de la reserva como nuevo Presidente. Obtén 1 VT.",
 
-  "Requires that you have 2 party leaders. Gain 1 TR.":"#Requiere que tengas 2 líderes de partido. Obtén 1 VT.#"
+  "Requires that you have 2 party leaders. Gain 1 TR.": "#Requiere que tengas 2 líderes de partido. Obtén 1 VT.#"
 }

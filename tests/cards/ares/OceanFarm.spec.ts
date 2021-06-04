@@ -1,7 +1,10 @@
 import {Game} from '../../../src/Game';
 import {Player} from '../../../src/Player';
 import {OceanFarm} from '../../../src/cards/ares/OceanFarm';
-import {AresTestHelper, ARES_OPTIONS_NO_HAZARDS} from '../../ares/AresTestHelper';
+import {
+  AresTestHelper,
+  ARES_OPTIONS_NO_HAZARDS,
+} from '../../ares/AresTestHelper';
 import {expect} from 'chai';
 import {TileType} from '../../../src/TileType';
 import {SpaceBonus} from '../../../src/SpaceBonus';
@@ -10,13 +13,21 @@ import {SpaceType} from '../../../src/SpaceType';
 import {TestPlayers} from '../../TestPlayers';
 
 describe('OceanFarm', () => {
-  let card : OceanFarm; let player : Player; let otherPlayer: Player; let game : Game;
+  let card: OceanFarm;
+  let player: Player;
+  let otherPlayer: Player;
+  let game: Game;
 
   beforeEach(() => {
     card = new OceanFarm();
     player = TestPlayers.BLUE.newPlayer();
     otherPlayer = TestPlayers.RED.newPlayer();
-    game = Game.newInstance('foobar', [player, otherPlayer], player, ARES_OPTIONS_NO_HAZARDS);
+    game = Game.newInstance(
+      'foobar',
+      [player, otherPlayer],
+      player,
+      ARES_OPTIONS_NO_HAZARDS
+    );
   });
 
   it('Can play', () => {
@@ -54,7 +65,9 @@ describe('OceanFarm', () => {
     const oceanSpace = AresTestHelper.addOcean(game, player);
     const action = card.play(player);
     action.cb(oceanSpace);
-    const greenery = game.board.getAdjacentSpaces(oceanSpace).filter((space) => space.spaceType === SpaceType.LAND)[0];
+    const greenery = game.board
+      .getAdjacentSpaces(oceanSpace)
+      .filter((space) => space.spaceType === SpaceType.LAND)[0];
 
     expect(otherPlayer.megaCredits).eq(0);
 
@@ -65,7 +78,11 @@ describe('OceanFarm', () => {
 
   it('Placing Ocean Farm does not grant underlying space bonus', () => {
     const oceanSpace = game.board.spaces.filter((space) => {
-      return space.bonus.length === 1 && space.bonus[0] === SpaceBonus.PLANT && space.spaceType === SpaceType.OCEAN;
+      return (
+        space.bonus.length === 1 &&
+        space.bonus[0] === SpaceBonus.PLANT &&
+        space.spaceType === SpaceType.OCEAN
+      );
     })[0];
 
     player.plants = 0;

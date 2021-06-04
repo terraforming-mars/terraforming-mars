@@ -5,20 +5,21 @@ import {Game} from '../../../src/Game';
 import {Player} from '../../../src/Player';
 import {TestPlayers} from '../../TestPlayers';
 
-describe('MercurianAlloys', function() {
-  let card : MercurianAlloys; let player : Player;
+describe('MercurianAlloys', function () {
+  let card: MercurianAlloys;
+  let player: Player;
 
-  beforeEach(function() {
+  beforeEach(function () {
     card = new MercurianAlloys();
     player = TestPlayers.BLUE.newPlayer();
     Game.newInstance('foobar', [player], player);
   });
 
-  it('Can\'t play if not enough science tags available', function() {
+  it("Can't play if not enough science tags available", function () {
     expect(card.canPlay(player)).is.not.true;
   });
 
-  it('Should play', function() {
+  it('Should play', function () {
     player.playedCards.push(new Research());
     expect(card.canPlay(player)).is.true;
 

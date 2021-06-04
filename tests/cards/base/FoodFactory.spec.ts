@@ -4,19 +4,20 @@ import {TestPlayer} from '../../TestPlayer';
 import {Resources} from '../../../src/Resources';
 import {TestPlayers} from '../../TestPlayers';
 
-describe('FoodFactory', function() {
-  let card : FoodFactory; let player : TestPlayer;
+describe('FoodFactory', function () {
+  let card: FoodFactory;
+  let player: TestPlayer;
 
-  beforeEach(function() {
+  beforeEach(function () {
     card = new FoodFactory();
     player = TestPlayers.BLUE.newPlayer();
   });
 
-  it('Can\'t play', function() {
+  it("Can't play", function () {
     expect(card.canPlay(player)).is.not.true;
   });
 
-  it('Should play', function() {
+  it('Should play', function () {
     player.addProduction(Resources.PLANTS, 1);
     expect(card.canPlay(player)).is.true;
 
@@ -24,7 +25,10 @@ describe('FoodFactory', function() {
     expect(player.getProduction(Resources.PLANTS)).to.eq(0);
     expect(player.getProduction(Resources.MEGACREDITS)).to.eq(4);
 
-    player.victoryPointsBreakdown.setVictoryPoints('victoryPoints', card.getVictoryPoints());
+    player.victoryPointsBreakdown.setVictoryPoints(
+      'victoryPoints',
+      card.getVictoryPoints()
+    );
     expect(player.victoryPointsBreakdown.victoryPoints).to.eq(1);
   });
 });

@@ -20,7 +20,8 @@ export class RadSuits extends Card implements IProjectCard {
         renderData: CardRenderer.builder((b) => {
           b.production((pb) => pb.megacredits(1));
         }),
-        description: 'Requires two cities in play. Increase your M€ production 1 step.',
+        description:
+          'Requires two cities in play. Increase your M€ production 1 step.',
         victoryPoints: 1,
       },
     });

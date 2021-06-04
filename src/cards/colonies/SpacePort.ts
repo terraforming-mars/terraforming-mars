@@ -24,22 +24,28 @@ export class SpacePort extends Card implements IProjectCard {
       metadata: {
         cardNumber: 'C39',
         renderData: CardRenderer.builder((b) => {
-          b.production((pb) => {
-            pb.minus().energy(1).br;
-            pb.plus().megacredits(4);
-          }).nbsp.city().br;
+          b
+            .production((pb) => {
+              pb.minus().energy(1).br;
+              pb.plus().megacredits(4);
+            })
+            .nbsp.city().br;
           b.tradeFleet();
         }),
-        description: 'Requires 1 colony. Decrease your Energy production 1 step and increase your M€ production 4 steps. Place a City tile. Gain 1 Trade Fleet.',
+        description:
+          'Requires 1 colony. Decrease your Energy production 1 step and increase your M€ production 4 steps. Place a City tile. Gain 1 Trade Fleet.',
       },
     });
   }
 
   public canPlay(player: Player): boolean {
-    if (player.game.board.getAvailableSpacesForCity(player).length === 0) return false;
+    if (player.game.board.getAvailableSpacesForCity(player).length === 0)
+      return false;
     let coloniesCount: number = 0;
     player.game.colonies.forEach((colony) => {
-      coloniesCount += colony.colonies.filter((owner) => owner === player.id).length;
+      coloniesCount += colony.colonies.filter(
+        (owner) => owner === player.id
+      ).length;
     });
     return coloniesCount > 0 && player.getProduction(Resources.ENERGY) > 0;
   }
@@ -49,9 +55,13 @@ export class SpacePort extends Card implements IProjectCard {
     player.addProduction(Resources.ENERGY, -1);
     player.increaseFleetSize();
 
-    return new SelectSpace('Select space for city tile', player.game.board.getAvailableSpacesForCity(player), (space: ISpace) => {
-      player.game.addCityTile(player, space.id);
-      return undefined;
-    });
+    return new SelectSpace(
+      'Select space for city tile',
+      player.game.board.getAvailableSpacesForCity(player),
+      (space: ISpace) => {
+        player.game.addCityTile(player, space.id);
+        return undefined;
+      }
+    );
   }
 }

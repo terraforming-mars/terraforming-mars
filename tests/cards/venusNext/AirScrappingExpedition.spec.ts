@@ -6,15 +6,14 @@ import {Game} from '../../../src/Game';
 import {SelectCard} from '../../../src/inputs/SelectCard';
 import {TestPlayers} from '../../TestPlayers';
 
-describe('AirScrappingExpedition', function() {
-  it('Should play', function() {
+describe('AirScrappingExpedition', function () {
+  it('Should play', function () {
     const card = new AirScrappingExpedition();
     const corp = new Celestic();
     const player = TestPlayers.BLUE.newPlayer();
     const redPlayer = TestPlayers.RED.newPlayer();
     const game = Game.newInstance('foobar', [player, redPlayer], player);
     player.corporationCard = corp;
-
 
     const selectCard = card.play(player) as SelectCard<ICard>;
     expect(selectCard).is.not.undefined;

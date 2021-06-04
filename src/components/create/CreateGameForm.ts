@@ -18,77 +18,133 @@ import * as constants from '../../constants';
 import {$t} from '../../directives/i18n';
 
 export interface CreateGameModel {
-    constants: typeof constants;
-    allOfficialExpansions: boolean;
-    firstIndex: number;
-    playersCount: number;
-    players: Array<NewPlayerModel>;
-    corporateEra: boolean;
-    prelude: boolean;
-    draftVariant: boolean;
-    initialDraft: boolean;
-    randomMA: RandomMAOptionType;
-    randomFirstPlayer: boolean;
-    showOtherPlayersVP: boolean;
-    beginnerOption: boolean;
-    venusNext: boolean;
-    colonies: boolean;
-    turmoil: boolean;
-    customCorporationsList: Array<CardName>;
-    customColoniesList: Array<ColonyName>;
-    cardsBlackList: Array<CardName>;
-    showCorporationList: boolean;
-    showColoniesList: boolean;
-    showCardsBlackList: boolean;
-    isSoloModePage: boolean;
-    board: BoardName | 'random';
-    boards: Array<BoardName | 'random'>;
-    seed: number;
-    solarPhaseOption: boolean;
-    shuffleMapOption: boolean;
-    promoCardsOption: boolean;
-    communityCardsOption: boolean;
-    aresExtension: boolean;
-    politicalAgendasExtension: AgendaStyle;
-    moonExpansion: boolean;
-    undoOption: boolean;
-    showTimers: boolean;
-    fastModeOption: boolean;
-    removeNegativeGlobalEventsOption: boolean;
-    includeVenusMA: boolean;
-    startingCorporations: number;
-    soloTR: boolean;
-    clonedGameData: IGameData | undefined;
-    cloneGameData: Array<IGameData>;
-    requiresVenusTrackCompletion: boolean;
-    requiresMoonTrackCompletion: boolean;
-    seededGame: boolean;
+  constants: typeof constants;
+  allOfficialExpansions: boolean;
+  firstIndex: number;
+  playersCount: number;
+  players: Array<NewPlayerModel>;
+  corporateEra: boolean;
+  prelude: boolean;
+  draftVariant: boolean;
+  initialDraft: boolean;
+  randomMA: RandomMAOptionType;
+  randomFirstPlayer: boolean;
+  showOtherPlayersVP: boolean;
+  beginnerOption: boolean;
+  venusNext: boolean;
+  colonies: boolean;
+  turmoil: boolean;
+  customCorporationsList: Array<CardName>;
+  customColoniesList: Array<ColonyName>;
+  cardsBlackList: Array<CardName>;
+  showCorporationList: boolean;
+  showColoniesList: boolean;
+  showCardsBlackList: boolean;
+  isSoloModePage: boolean;
+  board: BoardName | 'random';
+  boards: Array<BoardName | 'random'>;
+  seed: number;
+  solarPhaseOption: boolean;
+  shuffleMapOption: boolean;
+  promoCardsOption: boolean;
+  communityCardsOption: boolean;
+  aresExtension: boolean;
+  politicalAgendasExtension: AgendaStyle;
+  moonExpansion: boolean;
+  undoOption: boolean;
+  showTimers: boolean;
+  fastModeOption: boolean;
+  removeNegativeGlobalEventsOption: boolean;
+  includeVenusMA: boolean;
+  startingCorporations: number;
+  soloTR: boolean;
+  clonedGameData: IGameData | undefined;
+  cloneGameData: Array<IGameData>;
+  requiresVenusTrackCompletion: boolean;
+  requiresMoonTrackCompletion: boolean;
+  seededGame: boolean;
 }
 
 export interface NewPlayerModel {
-    index: number;
-    name: string;
-    color: Color;
-    beginner: boolean;
-    handicap: number;
-    first: boolean;
+  index: number;
+  name: string;
+  color: Color;
+  beginner: boolean;
+  handicap: number;
+  first: boolean;
 }
 
 export const CreateGameForm = Vue.component('create-game-form', {
-  data: function(): CreateGameModel {
+  data: function (): CreateGameModel {
     return {
       constants,
       firstIndex: 1,
       playersCount: 1,
       players: [
-        {index: 1, name: '', color: Color.RED, beginner: false, handicap: 0, first: false},
-        {index: 2, name: '', color: Color.GREEN, beginner: false, handicap: 0, first: false},
-        {index: 3, name: '', color: Color.YELLOW, beginner: false, handicap: 0, first: false},
-        {index: 4, name: '', color: Color.BLUE, beginner: false, handicap: 0, first: false},
-        {index: 5, name: '', color: Color.BLACK, beginner: false, handicap: 0, first: false},
-        {index: 6, name: '', color: Color.PURPLE, beginner: false, handicap: 0, first: false},
-        {index: 7, name: '', color: Color.ORANGE, beginner: false, handicap: 0, first: false},
-        {index: 8, name: '', color: Color.PINK, beginner: false, handicap: 0, first: false},
+        {
+          index: 1,
+          name: '',
+          color: Color.RED,
+          beginner: false,
+          handicap: 0,
+          first: false,
+        },
+        {
+          index: 2,
+          name: '',
+          color: Color.GREEN,
+          beginner: false,
+          handicap: 0,
+          first: false,
+        },
+        {
+          index: 3,
+          name: '',
+          color: Color.YELLOW,
+          beginner: false,
+          handicap: 0,
+          first: false,
+        },
+        {
+          index: 4,
+          name: '',
+          color: Color.BLUE,
+          beginner: false,
+          handicap: 0,
+          first: false,
+        },
+        {
+          index: 5,
+          name: '',
+          color: Color.BLACK,
+          beginner: false,
+          handicap: 0,
+          first: false,
+        },
+        {
+          index: 6,
+          name: '',
+          color: Color.PURPLE,
+          beginner: false,
+          handicap: 0,
+          first: false,
+        },
+        {
+          index: 7,
+          name: '',
+          color: Color.ORANGE,
+          beginner: false,
+          handicap: 0,
+          first: false,
+        },
+        {
+          index: 8,
+          name: '',
+          color: Color.PINK,
+          beginner: false,
+          handicap: 0,
+          first: false,
+        },
       ],
       corporateEra: true,
       prelude: false,
@@ -144,7 +200,7 @@ export const CreateGameForm = Vue.component('create-game-form', {
     'cards-filter': CardsFilter,
     'Button': Button,
   },
-  mounted: function() {
+  mounted: function () {
     if (window.location.pathname === '/solo') {
       this.isSoloModePage = true;
     }
@@ -159,7 +215,7 @@ export const CreateGameForm = Vue.component('create-game-form', {
       .catch((_) => alert('Unexpected server response'));
   },
   methods: {
-    downloadCurrentSettings: function() {
+    downloadCurrentSettings: function () {
       const serializedData = this.serializeSettings();
 
       if (serializedData) {
@@ -170,83 +226,104 @@ export const CreateGameForm = Vue.component('create-game-form', {
         a.click();
       }
     },
-    handleSettingsUpload: function() {
+    handleSettingsUpload: function () {
       const refs = this.$refs;
       const file = (refs.file as any).files[0];
       const reader = new FileReader();
       const component = this.$data;
 
-      reader.addEventListener('load', function() {
-        const readerResults = reader.result;
-        if (typeof(readerResults) === 'string') {
-          const results = JSON.parse(readerResults);
-          const players = results['players'];
-          component.playersCount = players.length;
-          component.showCorporationList = results['customCorporationsList'].length > 0;
-          component.showColoniesList = results['customColoniesList'].length > 0;
-          component.showCardsBlackList = results['cardsBlackList'].length > 0;
+      reader.addEventListener(
+        'load',
+        function () {
+          const readerResults = reader.result;
+          if (typeof readerResults === 'string') {
+            const results = JSON.parse(readerResults);
+            const players = results['players'];
+            component.playersCount = players.length;
+            component.showCorporationList =
+              results['customCorporationsList'].length > 0;
+            component.showColoniesList =
+              results['customColoniesList'].length > 0;
+            component.showCardsBlackList = results['cardsBlackList'].length > 0;
 
-          for (const k in results) {
-            if (['customCorporationsList', 'customColoniesList', 'cardsBlackList', 'players'].includes(k)) continue;
-            (component as any)[k] = results[k];
+            for (const k in results) {
+              if (
+                [
+                  'customCorporationsList',
+                  'customColoniesList',
+                  'cardsBlackList',
+                  'players',
+                ].includes(k)
+              )
+                continue;
+              (component as any)[k] = results[k];
+            }
+
+            for (let i = 0; i < players.length; i++) {
+              component.players[i] = players[i];
+            }
+
+            Vue.nextTick(() => {
+              if (component.showColoniesList) {
+                (refs.coloniesFilter as any).updateColoniesByNames(
+                  results['customColoniesList']
+                );
+              }
+
+              if (component.showCorporationList) {
+                (refs.corporationsFilter as any).selectedCorporations =
+                  results['customCorporationsList'];
+              }
+
+              if (component.showCardsBlackList) {
+                (refs.cardsFilter as any).selectedCardNames =
+                  results['cardsBlackList'];
+              }
+
+              if (!component.seededGame) {
+                component.seed = Math.random();
+              }
+            });
           }
-
-          for (let i = 0; i < players.length; i++) {
-            component.players[i] = players[i];
-          }
-
-          Vue.nextTick(() => {
-            if (component.showColoniesList) {
-              (refs.coloniesFilter as any).updateColoniesByNames(results['customColoniesList']);
-            }
-
-            if (component.showCorporationList) {
-              (refs.corporationsFilter as any).selectedCorporations = results['customCorporationsList'];
-            }
-
-            if (component.showCardsBlackList) {
-              (refs.cardsFilter as any).selectedCardNames = results['cardsBlackList'];
-            }
-
-            if ( ! component.seededGame) {
-              component.seed = Math.random();
-            }
-          });
-        }
-      }, false);
+        },
+        false
+      );
       if (file) {
         if (/\.json$/i.test(file.name)) {
           reader.readAsText(file);
         }
       }
     },
-    getPlayerNamePlaceholder: function(player: NewPlayerModel): string {
-      return translateTextWithParams(
-        'Player ${0} name',
-        [String(player.index)],
-      );
+    getPlayerNamePlaceholder: function (player: NewPlayerModel): string {
+      return translateTextWithParams('Player ${0} name', [
+        String(player.index),
+      ]);
     },
-    updateCustomCorporationsList: function(newCustomCorporationsList: Array<CardName>) {
-      const component = (this as any) as CreateGameModel;
+    updateCustomCorporationsList: function (
+      newCustomCorporationsList: Array<CardName>
+    ) {
+      const component = this as any as CreateGameModel;
       component.customCorporationsList = newCustomCorporationsList;
     },
-    updateCardsBlackList: function(newCardsBlackList: Array<CardName>) {
-      const component = (this as any) as CreateGameModel;
+    updateCardsBlackList: function (newCardsBlackList: Array<CardName>) {
+      const component = this as any as CreateGameModel;
       component.cardsBlackList = newCardsBlackList;
     },
-    updateCustomColoniesList: function(newCustomColoniesList: Array<ColonyName>) {
-      const component = (this as any) as CreateGameModel;
+    updateCustomColoniesList: function (
+      newCustomColoniesList: Array<ColonyName>
+    ) {
+      const component = this as any as CreateGameModel;
       component.customColoniesList = newCustomColoniesList;
     },
-    getPlayers: function(): Array<NewPlayerModel> {
-      const component = (this as any) as CreateGameModel;
+    getPlayers: function (): Array<NewPlayerModel> {
+      const component = this as any as CreateGameModel;
       return component.players.slice(0, component.playersCount);
     },
-    isRandomMAEnabled: function(): Boolean {
+    isRandomMAEnabled: function (): Boolean {
       return this.randomMA !== RandomMAOptionType.NONE;
     },
-    randomMAToggle: function() {
-      const component = (this as any) as CreateGameModel;
+    randomMAToggle: function () {
+      const component = this as any as CreateGameModel;
       if (component.randomMA === RandomMAOptionType.NONE) {
         component.randomMA = RandomMAOptionType.LIMITED;
         this.randomMA = RandomMAOptionType.LIMITED;
@@ -255,7 +332,9 @@ export const CreateGameForm = Vue.component('create-game-form', {
         this.randomMA = RandomMAOptionType.NONE;
       }
     },
-    getRandomMaOptionType: function(type: 'limited' | 'full'): RandomMAOptionType {
+    getRandomMaOptionType: function (
+      type: 'limited' | 'full'
+    ): RandomMAOptionType {
       if (type === 'limited') {
         return RandomMAOptionType.LIMITED;
       } else if (type === 'full') {
@@ -264,17 +343,19 @@ export const CreateGameForm = Vue.component('create-game-form', {
         return RandomMAOptionType.NONE;
       }
     },
-    isPoliticalAgendasExtensionEnabled: function(): Boolean {
+    isPoliticalAgendasExtensionEnabled: function (): Boolean {
       return this.politicalAgendasExtension !== AgendaStyle.STANDARD;
     },
-    politicalAgendasExtensionToggle: function() {
+    politicalAgendasExtensionToggle: function () {
       if (this.politicalAgendasExtension === AgendaStyle.STANDARD) {
         this.politicalAgendasExtension = AgendaStyle.RANDOM;
       } else {
         this.politicalAgendasExtension = AgendaStyle.STANDARD;
       }
     },
-    getPoliticalAgendasExtensionAgendaStyle: function(type: 'random' | 'chairman'): AgendaStyle {
+    getPoliticalAgendasExtensionAgendaStyle: function (
+      type: 'random' | 'chairman'
+    ): AgendaStyle {
       if (type === 'random') {
         return AgendaStyle.RANDOM;
       } else if (type === 'chairman') {
@@ -284,10 +365,16 @@ export const CreateGameForm = Vue.component('create-game-form', {
         return AgendaStyle.STANDARD;
       }
     },
-    isBeginnerToggleEnabled: function(): Boolean {
-      return !(this.initialDraft || this.prelude || this.venusNext || this.colonies || this.turmoil);
+    isBeginnerToggleEnabled: function (): Boolean {
+      return !(
+        this.initialDraft ||
+        this.prelude ||
+        this.venusNext ||
+        this.colonies ||
+        this.turmoil
+      );
     },
-    selectAll: function() {
+    selectAll: function () {
       this.corporateEra = this.$data.allOfficialExpansions;
       this.prelude = this.$data.allOfficialExpansions;
       this.venusNext = this.$data.allOfficialExpansions;
@@ -296,25 +383,25 @@ export const CreateGameForm = Vue.component('create-game-form', {
       this.promoCardsOption = this.$data.allOfficialExpansions;
       this.solarPhaseOption = this.$data.allOfficialExpansions;
     },
-    toggleVenusNext: function() {
+    toggleVenusNext: function () {
       this.solarPhaseOption = this.$data.venusNext;
     },
-    deselectPoliticalAgendasWhenDeselectingTurmoil: function() {
+    deselectPoliticalAgendasWhenDeselectingTurmoil: function () {
       if (this.$data.turmoil === false) {
         this.politicalAgendasExtension = AgendaStyle.STANDARD;
       }
     },
-    deselectVenusCompletion: function() {
+    deselectVenusCompletion: function () {
       if (this.$data.venusNext === false) {
         this.requiresVenusTrackCompletion = false;
       }
     },
-    deselectMoonCompletion: function() {
+    deselectMoonCompletion: function () {
       if (this.$data.moonExpansion === false) {
         this.requiresMoonTrackCompletion = false;
       }
     },
-    getBoardColorClass: function(boardName: string): string {
+    getBoardColorClass: function (boardName: string): string {
       if (boardName === BoardName.ORIGINAL) {
         return 'create-game-board-hexagon create-game-tharsis';
       } else if (boardName === BoardName.HELLAS) {
@@ -325,29 +412,42 @@ export const CreateGameForm = Vue.component('create-game-form', {
         return 'create-game-board-hexagon create-game-random';
       }
     },
-    getPlayerCubeColorClass: function(color: string): string {
+    getPlayerCubeColorClass: function (color: string): string {
       return playerColorClass(color.toLowerCase(), 'bg');
     },
-    getPlayerContainerColorClass: function(color: string): string {
+    getPlayerContainerColorClass: function (color: string): string {
       return playerColorClass(color.toLowerCase(), 'bg_transparent');
     },
-    serializeSettings: function() {
-      const component = (this as any) as CreateGameModel;
+    serializeSettings: function () {
+      const component = this as any as CreateGameModel;
 
       let players = component.players.slice(0, component.playersCount);
 
       if (component.randomFirstPlayer) {
         // Shuffle players array to assign each player a random seat around the table
-        players = players.map((a) => ({sort: Math.random(), value: a}))
+        players = players
+          .map((a) => ({sort: Math.random(), value: a}))
           .sort((a, b) => a.sort - b.sort)
           .map((a) => a.value);
-        component.firstIndex = Math.floor(component.seed * component.playersCount) + 1;
+        component.firstIndex =
+          Math.floor(component.seed * component.playersCount) + 1;
       }
 
       // Auto assign an available color if there are duplicates
-      const uniqueColors = players.map((player) => player.color).filter((v, i, a) => a.indexOf(v) === i);
+      const uniqueColors = players
+        .map((player) => player.color)
+        .filter((v, i, a) => a.indexOf(v) === i);
       if (uniqueColors.length !== players.length) {
-        const allColors = [Color.BLUE, Color.RED, Color.YELLOW, Color.GREEN, Color.BLACK, Color.PURPLE, Color.ORANGE, Color.PINK];
+        const allColors = [
+          Color.BLUE,
+          Color.RED,
+          Color.YELLOW,
+          Color.GREEN,
+          Color.BLACK,
+          Color.PURPLE,
+          Color.ORANGE,
+          Color.PINK,
+        ];
         players.forEach((player) => {
           if (allColors.includes(player.color)) {
             allColors.splice(allColors.indexOf(player.color), 1);
@@ -365,14 +465,15 @@ export const CreateGameForm = Vue.component('create-game-form', {
           if (isSoloMode) {
             player.name = 'You';
           } else {
-            const defaultPlayerName = player.color.charAt(0).toUpperCase() + player.color.slice(1);
+            const defaultPlayerName =
+              player.color.charAt(0).toUpperCase() + player.color.slice(1);
             player.name = defaultPlayerName;
           }
         }
       });
 
       players.map((player: any) => {
-        player.first = (component.firstIndex === player.index);
+        player.first = component.firstIndex === player.index;
         return player;
       });
 
@@ -400,13 +501,15 @@ export const CreateGameForm = Vue.component('create-game-form', {
       const undoOption = component.undoOption;
       const showTimers = component.showTimers;
       const fastModeOption = component.fastModeOption;
-      const removeNegativeGlobalEventsOption = this.removeNegativeGlobalEventsOption;
+      const removeNegativeGlobalEventsOption =
+        this.removeNegativeGlobalEventsOption;
       const includeVenusMA = component.includeVenusMA;
       const startingCorporations = component.startingCorporations;
       const soloTR = component.soloTR;
       const beginnerOption = component.beginnerOption;
       const randomFirstPlayer = component.randomFirstPlayer;
-      const requiresVenusTrackCompletion = component.requiresVenusTrackCompletion;
+      const requiresVenusTrackCompletion =
+        component.requiresVenusTrackCompletion;
       const requiresMoonTrackCompletion = component.requiresMoonTrackCompletion;
       let clonedGamedId: undefined | GameId = undefined;
 
@@ -421,7 +524,11 @@ export const CreateGameForm = Vue.component('create-game-form', {
         }
 
         if (customColoniesList.length < neededColoniesCount) {
-          window.alert(translateTextWithParams('Must select at least ${0} colonies', [neededColoniesCount.toString()]));
+          window.alert(
+            translateTextWithParams('Must select at least ${0} colonies', [
+              neededColoniesCount.toString(),
+            ])
+          );
           return;
         }
       }
@@ -431,7 +538,11 @@ export const CreateGameForm = Vue.component('create-game-form', {
         const neededCorpsCount = players.length * startingCorporations;
 
         if (customCorporationsList.length < neededCorpsCount) {
-          window.alert(translateTextWithParams('Must select at least ${0} corporations', [neededCorpsCount.toString()]));
+          window.alert(
+            translateTextWithParams('Must select at least ${0} corporations', [
+              neededCorpsCount.toString(),
+            ])
+          );
           return;
         }
       }
@@ -448,45 +559,49 @@ export const CreateGameForm = Vue.component('create-game-form', {
         clonedGamedId = undefined;
       }
 
-      const dataToSend = JSON.stringify({
-        players,
-        corporateEra,
-        prelude,
-        draftVariant,
-        showOtherPlayersVP,
-        venusNext,
-        colonies,
-        turmoil,
-        customCorporationsList,
-        customColoniesList,
-        cardsBlackList,
-        board,
-        seed,
-        solarPhaseOption,
-        promoCardsOption,
-        communityCardsOption,
-        aresExtension: aresExtension,
-        politicalAgendasExtension: politicalAgendasExtension,
-        moonExpansion: moonExpansion,
-        undoOption,
-        showTimers,
-        fastModeOption,
-        removeNegativeGlobalEventsOption,
-        includeVenusMA,
-        startingCorporations,
-        soloTR,
-        clonedGamedId,
-        initialDraft,
-        randomMA,
-        shuffleMapOption,
-        beginnerOption,
-        randomFirstPlayer,
-        requiresVenusTrackCompletion,
-        requiresMoonTrackCompletion,
-      }, undefined, 4);
+      const dataToSend = JSON.stringify(
+        {
+          players,
+          corporateEra,
+          prelude,
+          draftVariant,
+          showOtherPlayersVP,
+          venusNext,
+          colonies,
+          turmoil,
+          customCorporationsList,
+          customColoniesList,
+          cardsBlackList,
+          board,
+          seed,
+          solarPhaseOption,
+          promoCardsOption,
+          communityCardsOption,
+          aresExtension: aresExtension,
+          politicalAgendasExtension: politicalAgendasExtension,
+          moonExpansion: moonExpansion,
+          undoOption,
+          showTimers,
+          fastModeOption,
+          removeNegativeGlobalEventsOption,
+          includeVenusMA,
+          startingCorporations,
+          soloTR,
+          clonedGamedId,
+          initialDraft,
+          randomMA,
+          shuffleMapOption,
+          beginnerOption,
+          randomFirstPlayer,
+          requiresVenusTrackCompletion,
+          requiresMoonTrackCompletion,
+        },
+        undefined,
+        4
+      );
       return dataToSend;
     },
-    createGame: function() {
+    createGame: function () {
       const dataToSend = this.serializeSettings();
 
       if (dataToSend === undefined) return;
@@ -495,13 +610,21 @@ export const CreateGameForm = Vue.component('create-game-form', {
           window.location.href = '/player?id=' + response.players[0].id;
           return;
         } else {
-          window.history.replaceState(response, `${constants.APP_NAME} - Game`, '/game?id=' + response.id);
+          window.history.replaceState(
+            response,
+            `${constants.APP_NAME} - Game`,
+            '/game?id=' + response.id
+          );
           (this as any).$root.$data.game = response;
           (this as any).$root.$data.screen = 'game-home';
         }
       };
 
-      fetch('/game', {'method': 'PUT', 'body': dataToSend, 'headers': {'Content-Type': 'application/json'}})
+      fetch('/game', {
+        'method': 'PUT',
+        'body': dataToSend,
+        'headers': {'Content-Type': 'application/json'},
+      })
         .then((response) => response.json())
         .then(onSucces)
         .catch((_) => alert('Unexpected server response'));

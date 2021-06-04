@@ -47,4 +47,3 @@ export class SpaceElevator extends Card implements IActionCard, IProjectCard {
     return 2;
   }
 }
-

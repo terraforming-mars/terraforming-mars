@@ -22,4 +22,3 @@ export class Donation extends PreludeCard {
     return undefined;
   }
 }
-

@@ -4,22 +4,23 @@ import {Game} from '../../../src/Game';
 import {Player} from '../../../src/Player';
 import {TestPlayers} from '../../TestPlayers';
 
-describe('PowerInfrastructure', function() {
-  let card : PowerInfrastructure; let player : Player;
+describe('PowerInfrastructure', function () {
+  let card: PowerInfrastructure;
+  let player: Player;
 
-  beforeEach(function() {
+  beforeEach(function () {
     card = new PowerInfrastructure();
     player = TestPlayers.BLUE.newPlayer();
     const redPlayer = TestPlayers.RED.newPlayer();
     Game.newInstance('foobar', [player, redPlayer], player);
   });
 
-  it('Can\'t act', function() {
+  it("Can't act", function () {
     card.play(player);
     expect(card.canAct(player)).is.not.true;
   });
 
-  it('Should act', function() {
+  it('Should act', function () {
     player.energy = 1;
     expect(card.canAct(player)).is.true;
     const action = card.action(player);

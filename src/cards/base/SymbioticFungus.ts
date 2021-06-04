@@ -45,10 +45,14 @@ export class SymbioticFungus extends Card implements IActionCard, IProjectCard {
       return undefined;
     }
 
-    return new SelectCard('Select card to add microbe', 'Add microbe', availableCards, (foundCards: Array<ICard>) => {
-      player.addResourceTo(foundCards[0], {log: true});
-      return undefined;
-    });
+    return new SelectCard(
+      'Select card to add microbe',
+      'Add microbe',
+      availableCards,
+      (foundCards: Array<ICard>) => {
+        player.addResourceTo(foundCards[0], {log: true});
+        return undefined;
+      }
+    );
   }
 }
-

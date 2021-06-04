@@ -22,11 +22,11 @@ export const SelectOption = Vue.component('select-option', {
     'Button': Button,
   },
   mixins: [TranslateMixin],
-  data: function() {
+  data: function () {
     return {};
   },
   methods: {
-    saveData: function() {
+    saveData: function () {
       this.onsave([['1']]);
     },
   },

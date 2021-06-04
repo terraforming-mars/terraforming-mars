@@ -22,24 +22,40 @@ export class LunaProjectOffice extends Card implements IProjectCard {
         description: 'Requires 2 science tags.',
         cardNumber: 'M20',
         renderData: CardRenderer.builder((b) => {
-          b.text('DRAW 5 CARDS DURING THE RESEARCH PHASE FOR THE NEXT 2 GENERATIONS.', Size.MEDIUM, true);
+          b.text(
+            'DRAW 5 CARDS DURING THE RESEARCH PHASE FOR THE NEXT 2 GENERATIONS.',
+            Size.MEDIUM,
+            true
+          );
         }),
       },
     });
-  };
+  }
 
   public play(player: Player) {
-    MoonExpansion.moonData(player.game).lunaProjectOfficeLastGeneration = player.game.generation + 2;
+    MoonExpansion.moonData(player.game).lunaProjectOfficeLastGeneration =
+      player.game.generation + 2;
     return undefined;
   }
 
   // Returns true when the current player has played Luna Project Office and the card is still valid
   public static isActive(player: Player): boolean {
-    return MoonExpansion.ifElseMoon(player.game, (moonData) => {
-      if (!player.playedCards.some((card) => card.name === CardName.LUNA_PROJECT_OFFICE)) {
-        return false;
-      }
-      return player.game.generation <= (moonData.lunaProjectOfficeLastGeneration ?? -1);
-    }, () => false);
+    return MoonExpansion.ifElseMoon(
+      player.game,
+      (moonData) => {
+        if (
+          !player.playedCards.some(
+            (card) => card.name === CardName.LUNA_PROJECT_OFFICE
+          )
+        ) {
+          return false;
+        }
+        return (
+          player.game.generation <=
+          (moonData.lunaProjectOfficeLastGeneration ?? -1)
+        );
+      },
+      () => false
+    );
   }
 }

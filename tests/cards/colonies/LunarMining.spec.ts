@@ -5,8 +5,8 @@ import {SpaceHotels} from '../../../src/cards/prelude/SpaceHotels';
 import {Resources} from '../../../src/Resources';
 import {TestPlayers} from '../../TestPlayers';
 
-describe('LunarMining', function() {
-  it('Should play', function() {
+describe('LunarMining', function () {
+  it('Should play', function () {
     const card = new LunarMining();
     const card2 = new SpaceHotels();
     const card3 = new LunaGovernor();

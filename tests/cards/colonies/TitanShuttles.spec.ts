@@ -8,10 +8,12 @@ import {SelectCard} from '../../../src/inputs/SelectCard';
 import {Player} from '../../../src/Player';
 import {TestPlayers} from '../../TestPlayers';
 
-describe('TitanShuttles', function() {
-  let card : TitanShuttles; let player : Player; let game : Game;
+describe('TitanShuttles', function () {
+  let card: TitanShuttles;
+  let player: Player;
+  let game: Game;
 
-  beforeEach(function() {
+  beforeEach(function () {
     card = new TitanShuttles();
     player = TestPlayers.BLUE.newPlayer();
     const redPlayer = TestPlayers.RED.newPlayer();
@@ -20,20 +22,20 @@ describe('TitanShuttles', function() {
     player.playedCards.push(card);
   });
 
-  it('Should play', function() {
+  it('Should play', function () {
     const action = card.play();
     expect(action).is.undefined;
   });
 
-  it('Can act', function() {
+  it('Can act', function () {
     expect(card.canAct()).is.true;
   });
 
-  it('Gives VP', function() {
+  it('Gives VP', function () {
     expect(card.getVictoryPoints()).to.eq(1);
   });
 
-  it('Auto add floaters if only 1 option and 1 target available', function() {
+  it('Auto add floaters if only 1 option and 1 target available', function () {
     card.action(player);
     expect(game.deferredActions).has.lengthOf(1);
     const input = game.deferredActions.peek()!.execute();
@@ -41,19 +43,21 @@ describe('TitanShuttles', function() {
     expect(card.resourceCount).to.eq(2);
   });
 
-  it('Can select target if multiple Jovian floater cards available', function() {
+  it('Can select target if multiple Jovian floater cards available', function () {
     const card2 = new TitanFloatingLaunchPad();
     player.playedCards.push(card2);
 
     card.action(player);
     expect(game.deferredActions).has.lengthOf(1);
 
-    const selectCard = game.deferredActions.peek()!.execute() as SelectCard<ICard>;
+    const selectCard = game.deferredActions
+      .peek()!
+      .execute() as SelectCard<ICard>;
     selectCard.cb([card]);
     expect(card.resourceCount).to.eq(2);
   });
 
-  it('Both actions available', function() {
+  it('Both actions available', function () {
     const card2 = new TitanFloatingLaunchPad();
     player.playedCards.push(card2);
     player.addResourceTo(card, 7);
@@ -71,7 +75,9 @@ describe('TitanShuttles', function() {
     orOptions.options[0].cb();
     expect(game.deferredActions).has.lengthOf(1);
 
-    const selectCard = game.deferredActions.peek()!.execute() as SelectCard<ICard>;
+    const selectCard = game.deferredActions
+      .peek()!
+      .execute() as SelectCard<ICard>;
     selectCard.cb([card2]);
     expect(card2.resourceCount).to.eq(2);
   });

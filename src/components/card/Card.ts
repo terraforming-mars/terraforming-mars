@@ -19,7 +19,6 @@ import {CardRequirements} from '../../cards/CardRequirements';
 import {PreferencesManager} from '../PreferencesManager';
 import {OwnerModel} from '../../components/SelectCard';
 
-
 export const Card = Vue.component('card', {
   components: {
     CardTitle,
@@ -43,7 +42,7 @@ export const Card = Vue.component('card', {
       type: Object as () => OwnerModel | undefined,
     },
   },
-  data: function() {
+  data: function () {
     let cardInstance: ICard | undefined;
     const cardName = this.card.name;
     let expansion: GameModule | undefined;
@@ -78,13 +77,13 @@ export const Card = Vue.component('card', {
     };
   },
   methods: {
-    getCardExpansion: function(): string {
+    getCardExpansion: function (): string {
       return this.expansion;
     },
-    getCard: function(): ICard | undefined {
+    getCard: function (): ICard | undefined {
       return this.cardInstance;
     },
-    getTags: function(): Array<string> {
+    getTags: function (): Array<string> {
       let result: Array<string> = [];
       const type = this.getCardType();
       const tags = this.getCard()?.tags;
@@ -97,23 +96,31 @@ export const Card = Vue.component('card', {
 
       return result;
     },
-    getCost: function(): number | undefined {
+    getCost: function (): number | undefined {
       const cost = this.getCard()?.cost;
       const type = this.getCardType();
-      return cost === undefined || type === CardType.PRELUDE || type === CardType.CORPORATION ? undefined : cost;
+      return cost === undefined ||
+        type === CardType.PRELUDE ||
+        type === CardType.CORPORATION
+        ? undefined
+        : cost;
     },
-    getReducedCost: function(): number | undefined {
+    getReducedCost: function (): number | undefined {
       const cost = this.card.calculatedCost;
       const type = this.getCardType();
-      return cost === undefined || type === CardType.PRELUDE || type === CardType.CORPORATION ? undefined : cost;
+      return cost === undefined ||
+        type === CardType.PRELUDE ||
+        type === CardType.CORPORATION
+        ? undefined
+        : cost;
     },
-    getCardType: function(): CardType | undefined {
+    getCardType: function (): CardType | undefined {
       return this.getCard()?.cardType;
     },
-    getCardNumber: function(): string | undefined {
+    getCardNumber: function (): string | undefined {
       return this.getCardMetadata()?.cardNumber;
     },
-    getCardClasses: function(card: CardModel): string {
+    getCardClasses: function (card: CardModel): string {
       const classes = ['card-container', 'filterDiv', 'hover-hide-res'];
       classes.push('card-' + card.name.toLowerCase().replace(/ /g, '-'));
 
@@ -129,20 +136,23 @@ export const Card = Vue.component('card', {
       }
       return classes.join(' ');
     },
-    getCardMetadata: function(): CardMetadata | undefined {
+    getCardMetadata: function (): CardMetadata | undefined {
       return this.getCard()?.metadata;
     },
-    getCardRequirements: function(): CardRequirements | undefined {
+    getCardRequirements: function (): CardRequirements | undefined {
       return this.getCard()?.requirements;
     },
-    getResourceAmount: function(card: CardModel): number {
+    getResourceAmount: function (card: CardModel): number {
       return card.resources !== undefined ? card.resources : 0;
     },
-    isCorporationCard: function() : boolean {
+    isCorporationCard: function (): boolean {
       return this.getCardType() === CardType.CORPORATION;
     },
-    isStandardProject: function() : boolean {
-      return this.getCardType() === CardType.STANDARD_PROJECT || this.getCardType() === CardType.STANDARD_ACTION;
+    isStandardProject: function (): boolean {
+      return (
+        this.getCardType() === CardType.STANDARD_PROJECT ||
+        this.getCardType() === CardType.STANDARD_ACTION
+      );
     },
   },
   template: `

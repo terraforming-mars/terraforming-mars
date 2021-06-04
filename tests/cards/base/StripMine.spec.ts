@@ -11,10 +11,13 @@ import {Turmoil} from '../../../src/turmoil/Turmoil';
 import {TestingUtils} from '../../TestingUtils';
 import {TestPlayers} from '../../TestPlayers';
 
-describe('StripMine', function() {
-  let card : StripMine; let player : Player; let game : Game; let turmoil: Turmoil;
+describe('StripMine', function () {
+  let card: StripMine;
+  let player: Player;
+  let game: Game;
+  let turmoil: Turmoil;
 
-  beforeEach(function() {
+  beforeEach(function () {
     card = new StripMine();
     player = TestPlayers.BLUE.newPlayer();
     const redPlayer = TestPlayers.RED.newPlayer();
@@ -24,12 +27,12 @@ describe('StripMine', function() {
     turmoil = game.turmoil!;
   });
 
-  it('Can\'t play', function() {
+  it("Can't play", function () {
     player.addProduction(Resources.ENERGY, 1);
     expect(card.canPlay(player)).is.not.true;
   });
 
-  it('Should play', function() {
+  it('Should play', function () {
     player.addProduction(Resources.ENERGY, 2);
     expect(card.canPlay(player)).is.true;
 
@@ -40,7 +43,7 @@ describe('StripMine', function() {
     expect(game.getOxygenLevel()).to.eq(2);
   });
 
-  it('Cannot play if Reds are ruling and cannot afford 6 MC', function() {
+  it('Cannot play if Reds are ruling and cannot afford 6 MC', function () {
     player.addProduction(Resources.ENERGY, 2);
     player.megaCredits = card.cost;
     player.game.phase = Phase.ACTION;

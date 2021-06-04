@@ -12,7 +12,10 @@ import {CardRequirements} from '../CardRequirements';
 import {Card} from '../Card';
 import {CardRenderDynamicVictoryPoints} from '../render/CardRenderDynamicVictoryPoints';
 
-export class SubZeroSaltFish extends Card implements IProjectCard, IResourceCard {
+export class SubZeroSaltFish
+  extends Card
+  implements IProjectCard, IResourceCard
+{
   constructor() {
     super({
       cost: 5,
@@ -47,7 +50,10 @@ export class SubZeroSaltFish extends Card implements IProjectCard, IResourceCard
   }
 
   public canPlay(player: Player): boolean {
-    return super.canPlay(player) && player.game.someoneHasResourceProduction(Resources.PLANTS, 1);
+    return (
+      super.canPlay(player) &&
+      player.game.someoneHasResourceProduction(Resources.PLANTS, 1)
+    );
   }
 
   public action(player: Player) {

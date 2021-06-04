@@ -5,34 +5,37 @@ import {Player} from '../../../src/Player';
 import {Resources} from '../../../src/Resources';
 import {TestPlayers} from '../../TestPlayers';
 
-describe('SmallAnimals', function() {
-  let card : SmallAnimals; let player : Player; let player2 : Player; let game : Game;
+describe('SmallAnimals', function () {
+  let card: SmallAnimals;
+  let player: Player;
+  let player2: Player;
+  let game: Game;
 
-  beforeEach(function() {
+  beforeEach(function () {
     card = new SmallAnimals();
     player = TestPlayers.BLUE.newPlayer();
     player2 = TestPlayers.RED.newPlayer();
     game = Game.newInstance('foobar', [player, player2], player);
   });
 
-  it('Can\'t play if oxygen level too low', function() {
+  it("Can't play if oxygen level too low", function () {
     player2.addProduction(Resources.PLANTS, 1);
     (game as any).oxygenLevel = 5;
     expect(card.canPlay(player)).is.not.true;
   });
 
-  it('Can\'t play if no one has plant production', function() {
+  it("Can't play if no one has plant production", function () {
     (game as any).oxygenLevel = 6;
     expect(card.canPlay(player)).is.not.true;
   });
 
-  it('Should act', function() {
+  it('Should act', function () {
     player.playedCards.push(card);
     card.action(player);
     expect(card.resourceCount).to.eq(1);
   });
 
-  it('Should play', function() {
+  it('Should play', function () {
     (game as any).oxygenLevel = 6;
     player2.addProduction(Resources.PLANTS, 1);
     expect(card.canPlay(player)).is.true;
@@ -44,7 +47,7 @@ describe('SmallAnimals', function() {
     expect(player2.getProduction(Resources.PLANTS)).to.eq(0);
   });
 
-  it('Gives victory points', function() {
+  it('Gives victory points', function () {
     player.addResourceTo(card, 3);
     expect(card.getVictoryPoints()).to.eq(1);
 

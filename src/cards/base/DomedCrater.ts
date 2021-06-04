@@ -1,4 +1,3 @@
-
 import {IProjectCard} from '../IProjectCard';
 import {Tags} from '../Tags';
 import {Card} from '../Card';
@@ -29,10 +28,13 @@ export class DomedCrater extends Card implements IProjectCard {
           align: 'left',
         },
         renderData: CardRenderer.builder((b) => {
-          b.production((pb) => {
-            pb.minus().energy(1).br;
-            pb.plus().megacredits(3);
-          }).nbsp.city().plants(3).digit.br;
+          b
+            .production((pb) => {
+              pb.minus().energy(1).br;
+              pb.plus().megacredits(3);
+            })
+            .nbsp.city()
+            .plants(3).digit.br;
         }),
         victoryPoints: 1,
       },
@@ -40,9 +42,11 @@ export class DomedCrater extends Card implements IProjectCard {
   }
 
   public canPlay(player: Player): boolean {
-    return super.canPlay(player) &&
+    return (
+      super.canPlay(player) &&
       player.getProduction(Resources.ENERGY) >= 1 &&
-      player.game.board.getAvailableSpacesForCity(player).length > 0;
+      player.game.board.getAvailableSpacesForCity(player).length > 0
+    );
   }
   public play(player: Player) {
     return new SelectSpace(
@@ -54,7 +58,7 @@ export class DomedCrater extends Card implements IProjectCard {
         player.addProduction(Resources.ENERGY, -1);
         player.addProduction(Resources.MEGACREDITS, 3);
         return undefined;
-      },
+      }
     );
   }
   public getVictoryPoints() {

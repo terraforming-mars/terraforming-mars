@@ -22,7 +22,7 @@ export class AtalantaPlanitiaLab extends Card {
         victoryPoints: 2,
       },
     });
-  };
+  }
 
   public play(player: Player) {
     player.drawCard(2);

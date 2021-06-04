@@ -5,7 +5,10 @@ import {LogMessage} from '../LogMessage';
 import {LogMessageType} from '../LogMessageType';
 
 export class GameLogs {
-  private getLogsForGeneration(messages: Array<LogMessage>, generation: number): Array<LogMessage> {
+  private getLogsForGeneration(
+    messages: Array<LogMessage>,
+    generation: number
+  ): Array<LogMessage> {
     let foundStart = generation === 1;
     const newMessages: Array<LogMessage> = [];
     for (const message of messages) {
@@ -24,10 +27,18 @@ export class GameLogs {
     return newMessages;
   }
 
-  public handle(req: http.IncomingMessage, res: http.ServerResponse, ctx: IContext): void {
+  public handle(
+    req: http.IncomingMessage,
+    res: http.ServerResponse,
+    ctx: IContext
+  ): void {
     const playerId = ctx.url.searchParams.get('id');
     if (playerId === null) {
-      ctx.route.badRequest(req, res, 'must provide player id as the id parameter');
+      ctx.route.badRequest(
+        req,
+        res,
+        'must provide player id as the id parameter'
+      );
       return;
     }
 
@@ -40,13 +51,18 @@ export class GameLogs {
       }
       let logs: Array<LogMessage> | undefined;
 
-      const messagesForPlayer = ((message: LogMessage) => message.playerId === undefined || message.playerId === playerId);
+      const messagesForPlayer = (message: LogMessage) =>
+        message.playerId === undefined || message.playerId === playerId;
 
       // for most recent generation pull last 50 log messages
       if (generation === null || Number(generation) === game.generation) {
         logs = game.gameLog.filter(messagesForPlayer).slice(-50);
-      } else { // pull all logs for generation
-        logs = this.getLogsForGeneration(game.gameLog, Number(generation)).filter(messagesForPlayer);
+      } else {
+        // pull all logs for generation
+        logs = this.getLogsForGeneration(
+          game.gameLog,
+          Number(generation)
+        ).filter(messagesForPlayer);
       }
 
       res.setHeader('Content-Type', 'application/json');

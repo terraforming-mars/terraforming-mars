@@ -17,7 +17,8 @@ export class AquiferStandardProject extends StandardProjectCard {
         renderData: CardRenderer.builder((b) =>
           b.standardProject('Spend 18 M€ to place an ocean tile.', (eb) => {
             eb.megacredits(18).startAction.oceans(1);
-          })),
+          })
+        ),
       },
     });
   }

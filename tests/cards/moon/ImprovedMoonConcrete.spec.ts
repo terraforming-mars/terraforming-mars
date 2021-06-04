@@ -54,7 +54,9 @@ describe('ImprovedMoonConcrete', () => {
 
     const msm = new MareSerenitatisMine();
     player.cardsInHand = [msm];
-    expect(player.getPlayableCards().map((card) => card.name)).deep.eq([CardName.MARE_SERENITATIS_MINE]);
+    expect(player.getPlayableCards().map((card) => card.name)).deep.eq([
+      CardName.MARE_SERENITATIS_MINE,
+    ]);
 
     player.titanium = 1;
     player.steel = 1;
@@ -62,7 +64,9 @@ describe('ImprovedMoonConcrete', () => {
 
     // And this one shows that with Improved Moon Concrete, titanium isn't necessary
     player.playedCards = [card];
-    expect(player.getPlayableCards().map((card) => card.name)).deep.eq([CardName.MARE_SERENITATIS_MINE]);
+    expect(player.getPlayableCards().map((card) => card.name)).deep.eq([
+      CardName.MARE_SERENITATIS_MINE,
+    ]);
   });
 
   it('applies to mine standard project', () => {

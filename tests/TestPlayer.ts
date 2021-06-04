@@ -43,14 +43,21 @@ export class TestPlayer extends Player {
     return super.getStandardProjectOption();
   }
 
-  public getTagCount(tag: Tags, includeEventsTags:boolean = false, includeWildcardTags:boolean = true): number {
+  public getTagCount(
+    tag: Tags,
+    includeEventsTags: boolean = false,
+    includeWildcardTags: boolean = true
+  ): number {
     if (this.tagsForTest !== undefined) {
       return this.tagsForTest[tag] || 0;
     }
     return super.getTagCount(tag, includeEventsTags, includeWildcardTags);
   }
 
-  public runInput(input: ReadonlyArray<ReadonlyArray<string>>, pi: PlayerInput): void {
+  public runInput(
+    input: ReadonlyArray<ReadonlyArray<string>>,
+    pi: PlayerInput
+  ): void {
     super.runInput(input, pi);
   }
 }

@@ -24,19 +24,22 @@ export class CulturalMetropolis extends Card implements IProjectCard {
       requirements: CardRequirements.builder((b) => b.party(PartyName.UNITY)),
       metadata: {
         cardNumber: 'T03',
-        description: 'Requires that Unity is ruling or that you have 2 delegates there. Decrease your energy production 1 step and increase your M€ production 3 steps. Place a city tile. Place 2 delegates in 1 party.',
+        description:
+          'Requires that Unity is ruling or that you have 2 delegates there. Decrease your energy production 1 step and increase your M€ production 3 steps. Place a city tile. Place 2 delegates in 1 party.',
         renderData: CardRenderer.builder((b) => {
           b.production((pb) => {
             pb.minus().energy(1).br;
             pb.plus().megacredits(3);
-          }).city().delegates(2);
+          })
+            .city()
+            .delegates(2);
         }),
       },
     });
   }
 
   public canPlay(player: Player): boolean {
-    if ( ! super.canPlay(player)) {
+    if (!super.canPlay(player)) {
       return false;
     }
 
@@ -47,8 +50,10 @@ export class CulturalMetropolis extends Card implements IProjectCard {
     // This card requires player has 2 delegates available
     const turmoil = player.game.turmoil;
     if (turmoil !== undefined) {
-      const hasEnoughDelegates = turmoil.getDelegatesInReserve(player.id) > 1 ||
-        (turmoil.getDelegatesInReserve(player.id) === 1 && turmoil.lobby.has(player.id));
+      const hasEnoughDelegates =
+        turmoil.getDelegatesInReserve(player.id) > 1 ||
+        (turmoil.getDelegatesInReserve(player.id) === 1 &&
+          turmoil.lobby.has(player.id));
       return hasEnoughDelegates;
     }
 
@@ -62,9 +67,16 @@ export class CulturalMetropolis extends Card implements IProjectCard {
     const title = 'Select where to send two delegates';
 
     if (player.game.turmoil!.getDelegatesInReserve(player.id) > 1) {
-      player.game.defer(new SendDelegateToArea(player, title, {count: 2, source: 'reserve'}));
-    } else if (player.game.turmoil!.getDelegatesInReserve(player.id) === 1 && player.game.turmoil!.lobby.has(player.id)) {
-      player.game.defer(new SendDelegateToArea(player, title, {count: 2, source: 'lobby'}));
+      player.game.defer(
+        new SendDelegateToArea(player, title, {count: 2, source: 'reserve'})
+      );
+    } else if (
+      player.game.turmoil!.getDelegatesInReserve(player.id) === 1 &&
+      player.game.turmoil!.lobby.has(player.id)
+    ) {
+      player.game.defer(
+        new SendDelegateToArea(player, title, {count: 2, source: 'lobby'})
+      );
     }
     return undefined;
   }

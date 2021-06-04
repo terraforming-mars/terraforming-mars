@@ -8,7 +8,7 @@ export class Timer implements ISerializable<SerializedTimer> {
   private afterFirstAction: boolean = false; // Are we already after first action (First action time measure is currently skipped.)
   private static lastStoppedAt: number = 0; // When was last time any Timer.stop() called
 
-  private constructor() { }
+  private constructor() {}
 
   public static newInstance(): Timer {
     return new Timer();
@@ -37,18 +37,20 @@ export class Timer implements ISerializable<SerializedTimer> {
   }
 
   // start() is always called when the game is waiting for a player to supply input.
-  public start() : void {
+  public start(): void {
     this.running = true;
     // Timer is starting when previous timer was stopped. Normally it does not make any difference,
     // but this way undoing actions does not undo the timers.
-    this.startedAt = Timer.lastStoppedAt === 0 ? Date.now() : Timer.lastStoppedAt;
+    this.startedAt =
+      Timer.lastStoppedAt === 0 ? Date.now() : Timer.lastStoppedAt;
   }
 
   // stop() is called immediately when player performs new input action.
-  public stop() : void {
+  public stop(): void {
     this.running = false;
     Timer.lastStoppedAt = Date.now();
-    if (!this.afterFirstAction) { // Skipping timer for first move in game
+    if (!this.afterFirstAction) {
+      // Skipping timer for first move in game
       this.afterFirstAction = true;
       return;
     }
@@ -56,14 +58,14 @@ export class Timer implements ISerializable<SerializedTimer> {
   }
 
   // Converts Timer to [hhh:]mm:ss format based on current time. Used to display the timer.
-  public static toString(d: SerializedTimer) : string {
+  public static toString(d: SerializedTimer): string {
     const elapsed = d.sumElapsed + (d.running ? Date.now() - d.startedAt : 0);
     const elapsedDate = new Date(elapsed);
-    const hours = elapsedDate.getUTCHours() + (elapsedDate.getUTCDate()-1)*24;
+    const hours =
+      elapsedDate.getUTCHours() + (elapsedDate.getUTCDate() - 1) * 24;
     if (hours > 0) {
-      return String(hours)+elapsedDate.toISOString().substr(13, 6);
+      return String(hours) + elapsedDate.toISOString().substr(13, 6);
     }
     return elapsedDate.toISOString().substr(14, 5);
   }
 }
-

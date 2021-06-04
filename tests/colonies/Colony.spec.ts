@@ -15,7 +15,9 @@ import {MAX_COLONY_TRACK_POSITION} from '../../src/constants';
 import {TestingUtils} from '../TestingUtils';
 import {BuildColonyStandardProject} from '../../src/cards/colonies/BuildColonyStandardProject';
 
-const gameOptions = TestingUtils.setCustomGameOptions({coloniesExtension: true});
+const gameOptions = TestingUtils.setCustomGameOptions({
+  coloniesExtension: true,
+});
 
 function isBuildColonyStandardProjectAvailable(player: Player) {
   return new BuildColonyStandardProject().canAct(player);
@@ -26,28 +28,40 @@ function isTradeWithColonyActionAvailable(player: Player) {
   player.takeAction();
   const actions = player.getWaitingFor()! as OrOptions;
   actions.options.forEach((option) => {
-    if (option instanceof AndOptions && option.options.slice(-1)[0] instanceof SelectColony) {
+    if (
+      option instanceof AndOptions &&
+      option.options.slice(-1)[0] instanceof SelectColony
+    ) {
       tradeWithColonyIsAvailable = true;
     }
   });
   return tradeWithColonyIsAvailable;
 }
 
+describe('Colony', function () {
+  let luna: Luna;
+  let player: Player;
+  let player2: Player;
+  let player3: Player;
+  let player4: Player;
+  let game: Game;
 
-describe('Colony', function() {
-  let luna: Luna; let player: Player; let player2: Player; let player3: Player; let player4: Player; let game: Game;
-
-  beforeEach(function() {
+  beforeEach(function () {
     luna = new Luna();
     player = TestPlayers.BLUE.newPlayer();
     player2 = TestPlayers.RED.newPlayer();
     player3 = TestPlayers.YELLOW.newPlayer();
     player4 = TestPlayers.GREEN.newPlayer();
-    game = Game.newInstance('foobar', [player, player2, player3, player4], player, gameOptions);
+    game = Game.newInstance(
+      'foobar',
+      [player, player2, player3, player4],
+      player,
+      gameOptions
+    );
     game.colonies = [luna];
   });
 
-  it('Should build and give placement bonus', function() {
+  it('Should build and give placement bonus', function () {
     expect(luna.colonies).has.lengthOf(0);
     expect(player.getProduction(Resources.MEGACREDITS)).to.eq(0);
 
@@ -67,14 +81,14 @@ describe('Colony', function() {
     expect(player3.getProduction(Resources.MEGACREDITS)).to.eq(2);
   });
 
-  it('Should start with a trackPosition at 1', function() {
+  it('Should start with a trackPosition at 1', function () {
     game.colonies = game.colonyDealer!.drawColonies(4, [], true, true);
     game.colonies.forEach((colony) => {
       expect(colony.trackPosition).to.eq(1);
     });
   });
 
-  it('Should increase by 1 at the end of a generation', function() {
+  it('Should increase by 1 at the end of a generation', function () {
     game.colonies = game.colonyDealer!.drawColonies(4, [], true, true);
     game.colonies.forEach((colony) => {
       colony.endGeneration(game);
@@ -86,7 +100,7 @@ describe('Colony', function() {
     });
   });
 
-  it('Should push the trackPosition if a colony is built on it', function() {
+  it('Should push the trackPosition if a colony is built on it', function () {
     expect(luna.trackPosition).to.eq(1);
     luna.addColony(player);
     expect(luna.trackPosition).to.eq(1);
@@ -96,7 +110,7 @@ describe('Colony', function() {
     expect(luna.trackPosition).to.eq(3);
   });
 
-  it('Should decrease trackPosition after trade', function() {
+  it('Should decrease trackPosition after trade', function () {
     luna.trackPosition = MAX_COLONY_TRACK_POSITION;
     luna.trade(player);
     game.deferredActions.runAll(() => {});
@@ -110,17 +124,17 @@ describe('Colony', function() {
     expect(luna.trackPosition).to.eq(2);
   });
 
-  it('Shouldn\'t increase trackPosition above max', function() {
+  it("Shouldn't increase trackPosition above max", function () {
     luna.increaseTrack(100);
     expect(luna.trackPosition).to.eq(MAX_COLONY_TRACK_POSITION);
   });
 
-  it('Shouldn\'t decrease trackPosition below 0', function() {
+  it("Shouldn't decrease trackPosition below 0", function () {
     luna.decreaseTrack(100);
     expect(luna.trackPosition).to.eq(0);
   });
 
-  it('Should trade', function() {
+  it('Should trade', function () {
     // TODO (Lynesth): Do this better with next colony refactor PR
     const income = [1, 2, 4, 7, 10, 13, 17];
     for (let i = 0; i <= MAX_COLONY_TRACK_POSITION; i++) {
@@ -132,7 +146,7 @@ describe('Colony', function() {
     }
   });
 
-  it('Should give trade bonus to players with colonies only', function() {
+  it('Should give trade bonus to players with colonies only', function () {
     // No colonies
     luna.trackPosition = 3; // 7 MC
     luna.trade(player);
@@ -177,7 +191,7 @@ describe('Colony', function() {
     expect(player4.megaCredits).to.eq(7);
   });
 
-  it('Should give trade bonus for each colony a player has', function() {
+  it('Should give trade bonus for each colony a player has', function () {
     luna.trackPosition = 3; // 7 MC
     luna.addColony(player);
     luna.addColony(player);
@@ -191,14 +205,14 @@ describe('Colony', function() {
     expect(player4.megaCredits).to.eq(0);
   });
 
-  it('Should let player build a colony only if they can afford it', function() {
+  it('Should let player build a colony only if they can afford it', function () {
     expect(isBuildColonyStandardProjectAvailable(player)).to.be.false;
 
     player.megaCredits = 17;
     expect(isBuildColonyStandardProjectAvailable(player)).to.be.true;
   });
 
-  it('Shouldn\'t let players build a colony if they already have one', function() {
+  it("Shouldn't let players build a colony if they already have one", function () {
     player.megaCredits = 17;
 
     luna.addColony(player2);
@@ -208,7 +222,7 @@ describe('Colony', function() {
     expect(isBuildColonyStandardProjectAvailable(player)).to.be.false;
   });
 
-  it('Shouldn\'t let players build a colony if colony tile is full', function() {
+  it("Shouldn't let players build a colony if colony tile is full", function () {
     player.megaCredits = 17;
     expect(luna.isColonyFull()).to.be.false;
 
@@ -225,7 +239,7 @@ describe('Colony', function() {
     expect(isBuildColonyStandardProjectAvailable(player)).to.be.false;
   });
 
-  it('Should let players trade only if they can afford it', function() {
+  it('Should let players trade only if they can afford it', function () {
     expect(isTradeWithColonyActionAvailable(player)).to.be.false;
 
     player.megaCredits = 9;
@@ -240,14 +254,14 @@ describe('Colony', function() {
     expect(isTradeWithColonyActionAvailable(player)).to.be.true;
   });
 
-  it('Shouldn\'t let players trade if they have no fleet', function() {
+  it("Shouldn't let players trade if they have no fleet", function () {
     player.titanium = 3;
 
     luna.trade(player);
     expect(isTradeWithColonyActionAvailable(player)).to.be.false;
   });
 
-  it('Shouldn\'t let players trade with colonies that have already been traded with', function() {
+  it("Shouldn't let players trade with colonies that have already been traded with", function () {
     player.titanium = 3;
     player2.titanium = 3;
 
@@ -255,7 +269,7 @@ describe('Colony', function() {
     expect(isTradeWithColonyActionAvailable(player2)).to.be.false;
   });
 
-  it('Testing GiveTradeBonus Deferred Action', function() {
+  it('Testing GiveTradeBonus Deferred Action', function () {
     const card = new DustSeals();
     player.cardsInHand.push(card);
     player2.cardsInHand.push(card);

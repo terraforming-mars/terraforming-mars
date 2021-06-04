@@ -11,15 +11,18 @@ export class BuildColony implements DeferredAction {
     public player: Player,
     public allowDuplicate: boolean = false,
     public title: string = 'Select where to build a colony',
-    public openColonies?: Array<Colony>,
+    public openColonies?: Array<Colony>
   ) {}
 
   public execute() {
     if (this.openColonies === undefined) {
-      this.openColonies = this.player.game.colonies.filter((colony) =>
-        colony.colonies.length < 3 &&
-        (colony.colonies.includes(this.player.id) === false || this.allowDuplicate) &&
-        colony.isActive);
+      this.openColonies = this.player.game.colonies.filter(
+        (colony) =>
+          colony.colonies.length < 3 &&
+          (colony.colonies.includes(this.player.id) === false ||
+            this.allowDuplicate) &&
+          colony.isActive
+      );
     }
 
     if (this.openColonies.length === 0) {
@@ -27,16 +30,22 @@ export class BuildColony implements DeferredAction {
     }
 
     const openColonies = this.openColonies;
-    const coloniesModel: Array<ColonyModel> = this.player.game.getColoniesModel(openColonies);
+    const coloniesModel: Array<ColonyModel> =
+      this.player.game.getColoniesModel(openColonies);
 
-    return new SelectColony(this.title, 'Build', coloniesModel, (colonyName: ColonyName) => {
-      openColonies.forEach((colony) => {
-        if (colony.name === colonyName) {
-          colony.addColony(this.player);
-        }
+    return new SelectColony(
+      this.title,
+      'Build',
+      coloniesModel,
+      (colonyName: ColonyName) => {
+        openColonies.forEach((colony) => {
+          if (colony.name === colonyName) {
+            colony.addColony(this.player);
+          }
+          return undefined;
+        });
         return undefined;
-      });
-      return undefined;
-    });
+      }
+    );
   }
 }

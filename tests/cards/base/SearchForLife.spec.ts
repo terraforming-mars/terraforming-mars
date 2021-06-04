@@ -5,26 +5,28 @@ import {Game} from '../../../src/Game';
 import {Player} from '../../../src/Player';
 import {TestPlayers} from '../../TestPlayers';
 
-describe('SearchForLife', function() {
-  let card : SearchForLife; let player : Player; let game : Game;
+describe('SearchForLife', function () {
+  let card: SearchForLife;
+  let player: Player;
+  let game: Game;
 
-  beforeEach(function() {
+  beforeEach(function () {
     card = new SearchForLife();
     player = TestPlayers.BLUE.newPlayer();
     const redPlayer = TestPlayers.RED.newPlayer();
     game = Game.newInstance('foobar', [player, redPlayer], player);
   });
 
-  it('Can\'t act if no MC', function() {
+  it("Can't act if no MC", function () {
     expect(card.canAct(player)).is.not.true;
   });
 
-  it('Can\'t play if oxygen level too high', function() {
+  it("Can't play if oxygen level too high", function () {
     (game as any).oxygenLevel = 7;
     expect(card.canPlay(player)).is.not.true;
   });
 
-  it('Should play', function() {
+  it('Should play', function () {
     (game as any).oxygenLevel = 6;
     expect(card.canPlay(player)).is.true;
     player.playedCards.push(card);
@@ -35,12 +37,17 @@ describe('SearchForLife', function() {
     expect(card.getVictoryPoints()).to.eq(3);
   });
 
-
-  it('Should act', function() {
+  it('Should act', function () {
     player.playedCards.push(card);
 
-    while (game.dealer.discarded.find((c) => c.tags.length === 1 && c.tags[0] === Tags.MICROBE) === undefined ||
-               game.dealer.discarded.find((c) => c.tags.length === 1 && c.tags[0] !== Tags.MICROBE) === undefined) {
+    while (
+      game.dealer.discarded.find(
+        (c) => c.tags.length === 1 && c.tags[0] === Tags.MICROBE
+      ) === undefined ||
+      game.dealer.discarded.find(
+        (c) => c.tags.length === 1 && c.tags[0] !== Tags.MICROBE
+      ) === undefined
+    ) {
       player.megaCredits = 1;
       card.action(player);
       game.deferredActions.runNext();

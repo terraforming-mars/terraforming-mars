@@ -13,7 +13,9 @@ export class Solarnet extends Card {
       cardType: CardType.AUTOMATED,
       cost: 7,
 
-      requirements: CardRequirements.builder((b) => b.tag(Tags.VENUS).tag(Tags.EARTH).tag(Tags.JOVIAN)),
+      requirements: CardRequirements.builder((b) =>
+        b.tag(Tags.VENUS).tag(Tags.EARTH).tag(Tags.JOVIAN)
+      ),
       metadata: {
         cardNumber: '245',
         renderData: CardRenderer.builder((b) => {
@@ -23,7 +25,7 @@ export class Solarnet extends Card {
         victoryPoints: 1,
       },
     });
-  };
+  }
 
   public play(player: Player) {
     player.drawCard(2);

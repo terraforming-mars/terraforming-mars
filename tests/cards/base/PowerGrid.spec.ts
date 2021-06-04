@@ -4,8 +4,8 @@ import {Resources} from '../../../src/Resources';
 import {TestPlayers} from '../../TestPlayers';
 import {Game} from '../../../src/Game';
 
-describe('PowerGrid', function() {
-  it('Should play', function() {
+describe('PowerGrid', function () {
+  it('Should play', function () {
     const card = new PowerGrid();
     const player = TestPlayers.BLUE.newPlayer();
     const redPlayer = TestPlayers.RED.newPlayer();

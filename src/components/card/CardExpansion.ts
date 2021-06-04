@@ -10,8 +10,8 @@ const MODULE_TO_CSS: Map<string, string> = new Map([
   [GameModule.Turmoil, 'turmoil-icon'],
   [GameModule.Community, 'community-icon'],
   [GameModule.Ares, 'ares-icon'],
-  [GameModule.Moon, 'moon-icon']],
-);
+  [GameModule.Moon, 'moon-icon'],
+]);
 export const CardExpansion = Vue.component('CardExpansion', {
   props: {
     expansion: {
@@ -24,7 +24,7 @@ export const CardExpansion = Vue.component('CardExpansion', {
     },
   },
   methods: {
-    getClasses: function(): string {
+    getClasses: function (): string {
       const classes = ['card-expansion', 'project-icon'];
       const expansionClass = MODULE_TO_CSS.get(this.expansion);
       if (expansionClass !== undefined) {

@@ -8,10 +8,11 @@ import {SelectCard} from '../../../src/inputs/SelectCard';
 import {Player} from '../../../src/Player';
 import {TestPlayers} from '../../TestPlayers';
 
-describe('Astrodrill', function() {
-  let card : Astrodrill; let player : Player;
+describe('Astrodrill', function () {
+  let card: Astrodrill;
+  let player: Player;
 
-  beforeEach(function() {
+  beforeEach(function () {
     card = new Astrodrill();
     player = TestPlayers.BLUE.newPlayer();
     const redPlayer = TestPlayers.RED.newPlayer();
@@ -21,11 +22,11 @@ describe('Astrodrill', function() {
     player.corporationCard = card;
   });
 
-  it('Starts with 3 asteroid resources', function() {
+  it('Starts with 3 asteroid resources', function () {
     expect(card.resourceCount).to.eq(3);
   });
 
-  it('Should play - can spend asteroid resource', function() {
+  it('Should play - can spend asteroid resource', function () {
     const action = card.action(player) as OrOptions;
     expect(action instanceof OrOptions).is.true;
     expect(action.options).has.lengthOf(3);
@@ -37,7 +38,7 @@ describe('Astrodrill', function() {
     expect(player.game.deferredActions).has.lengthOf(0);
   });
 
-  it('Should play - can add asteroid resource to self', function() {
+  it('Should play - can add asteroid resource to self', function () {
     const action = card.action(player) as OrOptions;
     expect(action instanceof OrOptions).is.true;
     expect(action.options).has.lengthOf(3);
@@ -49,7 +50,7 @@ describe('Astrodrill', function() {
     expect(result).is.undefined;
   });
 
-  it('Should play - can add asteroid resource to other card', function() {
+  it('Should play - can add asteroid resource to other card', function () {
     const cometAiming = new CometAiming();
     player.playedCards.push(cometAiming);
 
@@ -62,7 +63,7 @@ describe('Astrodrill', function() {
     expect(result).is.undefined;
   });
 
-  it('Should play - can gain a standard resource', function() {
+  it('Should play - can gain a standard resource', function () {
     const action = card.action(player) as OrOptions;
     expect(action instanceof OrOptions).is.true;
     expect(action.options).has.lengthOf(3);

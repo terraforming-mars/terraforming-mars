@@ -23,11 +23,15 @@ export class SolarFarm extends Card implements IProjectCard {
       metadata: {
         cardNumber: 'A17',
         renderData: CardRenderer.builder((b) => {
-          b.production((pb) => {
-            pb.energy(1).slash().plants(1);
-          }).asterix().nbsp.tile(TileType.SOLAR_FARM, false, true).br;
+          b
+            .production((pb) => {
+              pb.energy(1).slash().plants(1);
+            })
+            .asterix()
+            .nbsp.tile(TileType.SOLAR_FARM, false, true).br;
         }),
-        description: 'Place this tile which grants an ADJACENCY BONUS of 2 energy. Increase your power production 1 step for each plant resource on the area where you place the tile.',
+        description:
+          'Place this tile which grants an ADJACENCY BONUS of 2 energy. Increase your power production 1 step for each plant resource on the area where you place the tile.',
       },
     });
   }
@@ -41,7 +45,9 @@ export class SolarFarm extends Card implements IProjectCard {
     if (space === undefined) {
       throw new Error('solar Farm space not found');
     }
-    const plantsOnSpace = space.bonus.filter((b) => b === SpaceBonus.PLANT).length;
+    const plantsOnSpace = space.bonus.filter(
+      (b) => b === SpaceBonus.PLANT
+    ).length;
     player.addProduction(Resources.ENERGY, plantsOnSpace, {log: true});
   }
 
@@ -57,7 +63,7 @@ export class SolarFarm extends Card implements IProjectCard {
         this.produce(player);
         space.adjacency = {bonus: [SpaceBonus.POWER, SpaceBonus.POWER]};
         return undefined;
-      },
+      }
     );
   }
 }

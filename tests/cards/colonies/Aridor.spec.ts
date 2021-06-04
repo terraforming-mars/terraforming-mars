@@ -6,8 +6,8 @@ import {Game} from '../../../src/Game';
 import {Resources} from '../../../src/Resources';
 import {TestPlayers} from '../../TestPlayers';
 
-describe('Aridor', function() {
-  it('Should play', function() {
+describe('Aridor', function () {
+  it('Should play', function () {
     const card = new Aridor();
     const player = TestPlayers.BLUE.newPlayer();
     const player2 = TestPlayers.RED.newPlayer();

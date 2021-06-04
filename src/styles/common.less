@@ -1,235 +1,235 @@
-@import (inline) "../../node_modules/spectre.css/dist/spectre.min.css";
-@import (inline) "../../node_modules/spectre.css/dist/spectre-exp.min.css";
-@import (inline) "../../node_modules//spectre.css/dist/spectre-icons.min.css";
-@import (inline) "../../node_modules/dialog-polyfill/dialog-polyfill.css";
-@import "./variables.less";
-@import "./mixins.less";
+@import (inline) '../../node_modules/spectre.css/dist/spectre.min.css';
+@import (inline) '../../node_modules/spectre.css/dist/spectre-exp.min.css';
+@import (inline) '../../node_modules//spectre.css/dist/spectre-icons.min.css';
+@import (inline) '../../node_modules/dialog-polyfill/dialog-polyfill.css';
+@import './variables.less';
+@import './mixins.less';
 
 html,
 body {
-    height: 100%;
-    margin: 0px;
+  height: 100%;
+  margin: 0px;
 }
 .btn {
-    color: @text_action !important;
-    background: @bg_action !important;
-    border-color: @boder_action !important;
+  color: @text_action !important;
+  background: @bg_action !important;
+  border-color: @boder_action !important;
 }
 .btn-tiny {
-    background: #5755d9;
-    border-color: #4b48d6;
-    color: #fff;
-    cursor: pointer;
-    height: 1.5rem;
-    line-height: 0.5rem;
+  background: #5755d9;
+  border-color: #4b48d6;
+  color: #fff;
+  cursor: pointer;
+  height: 1.5rem;
+  line-height: 0.5rem;
 }
 .btn-max {
-    margin-left: 10px;
+  margin-left: 10px;
 }
 .btn-submit {
-    min-width: 183px;
-    height: 50px;
-    font-size: 20px;
-    margin: 10px 0 30px 0;
+  min-width: 183px;
+  height: 50px;
+  font-size: 20px;
+  margin: 10px 0 30px 0;
 }
 .flex {
-    display: flex;
+  display: flex;
 }
 .float-left {
-    float: left !important;
+  float: left !important;
 }
 .float-right {
-    float: right !important;
+  float: right !important;
 }
 .centered-content {
-    display: flex;
-    padding: 0px;
-    justify-content: center;
+  display: flex;
+  padding: 0px;
+  justify-content: center;
 }
 .centered-content button {
-    margin-right: 20px;
+  margin-right: 20px;
 }
 .dynamic-title {
-    font-size: @font_size_huge;
-    margin-bottom: 16px;
+  font-size: @font_size_huge;
+  margin-bottom: 16px;
 }
 
 .capitalized {
-    text-transform: capitalize;
+  text-transform: capitalize;
 }
 
 .main-container {
-    margin: 0 0 0 60px;
+  margin: 0 0 0 60px;
 }
 
 .hidden {
-    display: none !important;
+  display: none !important;
 }
 .visibility-hidden {
-    visibility: hidden !important;
+  visibility: hidden !important;
 }
 
 a:link {
-    color: #ddd;
+  color: #ddd;
 }
 
 a:visited {
-    color: #ccc;
+  color: #ccc;
 }
 
 a:hover {
-    color: #fff;
+  color: #fff;
 }
 
 a:active {
-    color: #ddd;
+  color: #ddd;
 }
 
 @font-face {
-    font-family: Prototype;
-    src: url(./assets/Prototype.ttf);
+  font-family: Prototype;
+  src: url(./assets/Prototype.ttf);
 }
 
 body {
-    background: @bg_main;
-    color: @text_main;
-    font-family: @font_family_main;
-    font-size: @font_size_big;
+  background: @bg_main;
+  color: @text_main;
+  font-family: @font_family_main;
+  font-size: @font_size_big;
 }
 
 h1 {
-    filter: drop-shadow(4px 4px 4px black);
-    text-shadow: -1px -1px 1px #aaaa, 1px 1px 1px #333a;
-    padding: 1px 15px;
-    border-radius: 8px;
+  filter: drop-shadow(4px 4px 4px black);
+  text-shadow: -1px -1px 1px #aaaa, 1px 1px 1px #333a;
+  padding: 1px 15px;
+  border-radius: 8px;
 }
 
 h2 {
-    font-size: @font_size_huge;
-    filter: drop-shadow(4px 4px 4px black);
-    text-shadow: -1px -1px 6px #aaa4;
+  font-size: @font_size_huge;
+  filter: drop-shadow(4px 4px 4px black);
+  text-shadow: -1px -1px 6px #aaa4;
 }
 
 .filterDiv {
-    font-size: 17px !important;
+  font-size: 17px !important;
 }
 
 .is-action {
-    color: lightblue;
-    cursor: pointer;
+  color: lightblue;
+  cursor: pointer;
 }
 
 .nowrap {
-    white-space: nowrap;
+  white-space: nowrap;
 }
 .newlines {
-    white-space: pre;
+  white-space: pre;
 }
 
 .mt-5 {
-    margin-top: 5px;
+  margin-top: 5px;
 }
 
 .mt-10 {
-    margin-top: 10px;
+  margin-top: 10px;
 }
 
 // normal backgrounds
 .player_bg_color_red {
-    background-color: @player_red;
+  background-color: @player_red;
 }
 
 .player_bg_color_yellow {
-    background-color: @player_yellow;
+  background-color: @player_yellow;
 }
 
 .player_bg_color_green {
-    background-color: @player_green;
+  background-color: @player_green;
 }
 
 .player_bg_color_black {
-    background-color: @player_black;
+  background-color: @player_black;
 }
 
 .player_bg_color_blue {
-    background-color: @player_blue;
+  background-color: @player_blue;
 }
 
 .player_bg_color_purple {
-    background-color: @player_purple;
+  background-color: @player_purple;
 }
 
 .player_bg_color_orange {
-    background-color: @player_orange;
+  background-color: @player_orange;
 }
 
 .player_bg_color_pink {
-    background-color: @player_pink;
+  background-color: @player_pink;
 }
 
 // backgroungs with opacity
 .player_translucent_bg_color_red {
-    .player_red_bg_translucent();
+  .player_red_bg_translucent();
 }
 
 .player_translucent_bg_color_yellow {
-    .player_yellow_bg_translucent();
+  .player_yellow_bg_translucent();
 }
 
 .player_translucent_bg_color_green {
-    .player_green_bg_translucent();
+  .player_green_bg_translucent();
 }
 
 .player_translucent_bg_color_black {
-    .player_black_bg_translucent();
+  .player_black_bg_translucent();
 }
 
 .player_translucent_bg_color_blue {
-    .player_blue_bg_translucent();
+  .player_blue_bg_translucent();
 }
 
 .player_translucent_bg_color_purple {
-    .player_purple_bg_translucent();
+  .player_purple_bg_translucent();
 }
 
 .player_translucent_bg_color_orange {
-    .player_orange_bg_translucent();
+  .player_orange_bg_translucent();
 }
 
 .player_translucent_bg_color_pink {
-    .player_pink_bg_translucent();
+  .player_pink_bg_translucent();
 }
 
 .alert-dialog {
-    position: fixed;
+  position: fixed;
 }
 
-@import "./language_switcher.less";
-@import "./cards.less";
-@import "./cards_v2.less";
-@import "./language_hacks.less";
-@import "./board.less";
-@import "./board_items_positions.less";
-@import "./globs.less";
-@import "./game_home.less";
-@import "./game_end.less";
-@import "./resources.less";
-@import "./start_screen.less";
-@import "./create_game_form.less";
-@import "./corporations_filter.less";
-@import "./colonies_filter.less";
-@import "./cards_filter.less";
-@import "./player_home.less";
-@import "./players_overview.less";
-@import "./preferences.less";
-@import "./waiting_for.less";
-@import "./payments.less";
-@import "./other_player.less";
-@import "./colonies.less";
-@import "./log.less";
-@import "./load_game_form.less";
-@import "./turmoil.less";
-@import "./ares.less";
-@import "./help.less";
-@import "./debug_ui.less";
-@import "./moon.less";
+@import './language_switcher.less';
+@import './cards.less';
+@import './cards_v2.less';
+@import './language_hacks.less';
+@import './board.less';
+@import './board_items_positions.less';
+@import './globs.less';
+@import './game_home.less';
+@import './game_end.less';
+@import './resources.less';
+@import './start_screen.less';
+@import './create_game_form.less';
+@import './corporations_filter.less';
+@import './colonies_filter.less';
+@import './cards_filter.less';
+@import './player_home.less';
+@import './players_overview.less';
+@import './preferences.less';
+@import './waiting_for.less';
+@import './payments.less';
+@import './other_player.less';
+@import './colonies.less';
+@import './log.less';
+@import './load_game_form.less';
+@import './turmoil.less';
+@import './ares.less';
+@import './help.less';
+@import './debug_ui.less';
+@import './moon.less';

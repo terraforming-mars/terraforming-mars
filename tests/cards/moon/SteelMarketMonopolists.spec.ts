@@ -95,4 +95,3 @@ describe('SteelMarketMonopolists', () => {
     expect(selectAmount.max).eq(3);
   });
 });
-

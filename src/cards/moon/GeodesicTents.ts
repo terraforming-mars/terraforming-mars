@@ -11,29 +11,33 @@ import {AltSecondaryTag} from '../render/CardRenderItem';
 
 export class GeodesicTents extends MoonCard {
   constructor() {
-    super({
-      name: CardName.GEODESIC_TENTS,
-      cardType: CardType.AUTOMATED,
-      tags: [Tags.PLANT, Tags.CITY, Tags.MOON],
-      cost: 13,
-      productionBox: Units.of({energy: -1, plants: 1}),
+    super(
+      {
+        name: CardName.GEODESIC_TENTS,
+        cardType: CardType.AUTOMATED,
+        tags: [Tags.PLANT, Tags.CITY, Tags.MOON],
+        cost: 13,
+        productionBox: Units.of({energy: -1, plants: 1}),
 
-      metadata: {
-        description: 'Decrease your energy production 1 step and increase your plant production 1 step. ' +
-        'Spend 1 titanium. Place a colony tile on the Moon and raise the Colony Rate 1 step.',
-        cardNumber: 'M06',
-        renderData: CardRenderer.builder((b) => {
-          b.production((pb) => {
-            pb.minus().energy(1).nbsp.plants(1);
-          }).br;
-          b.minus().titanium(1).br;
-          b.moonColony().secondaryTag(AltSecondaryTag.MOON_COLONY_RATE);
-        }),
+        metadata: {
+          description:
+            'Decrease your energy production 1 step and increase your plant production 1 step. ' +
+            'Spend 1 titanium. Place a colony tile on the Moon and raise the Colony Rate 1 step.',
+          cardNumber: 'M06',
+          renderData: CardRenderer.builder((b) => {
+            b.production((pb) => {
+              pb.minus().energy(1).nbsp.plants(1);
+            }).br;
+            b.minus().titanium(1).br;
+            b.moonColony().secondaryTag(AltSecondaryTag.MOON_COLONY_RATE);
+          }),
+        },
       },
-    }, {
-      reserveUnits: Units.of({titanium: 1}),
-      tilesBuilt: [TileType.MOON_COLONY],
-    });
+      {
+        reserveUnits: Units.of({titanium: 1}),
+        tilesBuilt: [TileType.MOON_COLONY],
+      }
+    );
   }
 
   public play(player: Player) {

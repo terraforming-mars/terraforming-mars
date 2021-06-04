@@ -17,10 +17,12 @@ export const GameSetupDetail = Vue.component('game-setup-detail', {
     },
   },
   methods: {
-    isPoliticalAgendasOn: function(): boolean {
-      return (this.gameOptions.politicalAgendasExtension !== AgendaStyle.STANDARD);
+    isPoliticalAgendasOn: function (): boolean {
+      return (
+        this.gameOptions.politicalAgendasExtension !== AgendaStyle.STANDARD
+      );
     },
-    getBoardColorClass: function(boardName: string): string {
+    getBoardColorClass: function (boardName: string): string {
       if (boardName === BoardName.ORIGINAL) {
         return 'game-config board-tharsis map';
       } else if (boardName === BoardName.HELLAS) {
@@ -31,13 +33,13 @@ export const GameSetupDetail = Vue.component('game-setup-detail', {
         return 'game-config board-other map';
       }
     },
-    isRandomMANone: function(): boolean {
+    isRandomMANone: function (): boolean {
       return this.gameOptions.randomMA === RandomMAOptionType.NONE;
     },
-    isRandomMALimited: function(): boolean {
+    isRandomMALimited: function (): boolean {
       return this.gameOptions.randomMA === RandomMAOptionType.LIMITED;
     },
-    isRandomMAUnlimited: function(): boolean {
+    isRandomMAUnlimited: function (): boolean {
       return this.gameOptions.randomMA === RandomMAOptionType.UNLIMITED;
     },
   },

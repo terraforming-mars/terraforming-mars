@@ -13,21 +13,27 @@ export class ChoosePoliticalAgenda implements DeferredAction {
     public player: Player,
     public party: IParty,
     public bonusCb: (bonusId: BonusId) => void,
-    public policyCb: (policyId: PolicyId) => void,
+    public policyCb: (policyId: PolicyId) => void
   ) {}
 
   public execute(): PlayerInput {
-    const bonuses: Array<SelectOption> = this.party.bonuses.map((bonus) => new SelectOption(bonus.description, 'Select', () => {
-      this.bonusCb(bonus.id);
-      return undefined;
-    }));
+    const bonuses: Array<SelectOption> = this.party.bonuses.map(
+      (bonus) =>
+        new SelectOption(bonus.description, 'Select', () => {
+          this.bonusCb(bonus.id);
+          return undefined;
+        })
+    );
     const orBonuses = new OrOptions(...bonuses);
     orBonuses.title = 'Select a ' + this.party.name + ' bonus.';
 
-    const policies = this.party.policies.map((policy) => new SelectOption(policy.description, 'Select', () => {
-      this.policyCb(policy.id);
-      return undefined;
-    }));
+    const policies = this.party.policies.map(
+      (policy) =>
+        new SelectOption(policy.description, 'Select', () => {
+          this.policyCb(policy.id);
+          return undefined;
+        })
+    );
     const orPolicies = new OrOptions(...policies);
     orPolicies.title = 'Select a ' + this.party.name + ' policy.';
 

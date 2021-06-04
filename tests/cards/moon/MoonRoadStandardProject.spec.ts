@@ -59,4 +59,3 @@ describe('MoonRoadStandardProject', () => {
     expect(player.getTerraformRating()).eq(15);
   });
 });
-

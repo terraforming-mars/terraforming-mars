@@ -10,7 +10,10 @@ import {REDS_RULING_POLICY_COST} from '../../constants';
 import {CardRequirements} from '../CardRequirements';
 import {CardRenderer} from '../render/CardRenderer';
 
-export class CaretakerContract extends Card implements IActionCard, IProjectCard {
+export class CaretakerContract
+  extends Card
+  implements IActionCard, IProjectCard
+{
   constructor() {
     super({
       cardType: CardType.ACTIVE,
@@ -21,9 +24,12 @@ export class CaretakerContract extends Card implements IActionCard, IProjectCard
         cardNumber: '154',
         description: 'Requires 0° C or warmer.',
         renderData: CardRenderer.builder((b) => {
-          b.action('Spend 8 heat to increase your terraform rating 1 step.', (eb) => {
-            eb.heat(8).startAction.tr(1);
-          });
+          b.action(
+            'Spend 8 heat to increase your terraform rating 1 step.',
+            (eb) => {
+              eb.heat(8).startAction.tr(1);
+            }
+          );
         }),
       },
     });

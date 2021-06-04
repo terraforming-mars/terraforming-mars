@@ -15,7 +15,7 @@ export const CardTag = Vue.component('CardTag', {
     },
   },
   methods: {
-    getClasses: function(): string {
+    getClasses: function (): string {
       const classes = ['card-tag'];
       classes.push(`tag-${this.type.toLocaleLowerCase()}`);
 

@@ -1,136 +1,130 @@
 {
-    "Allied Banks": "Союзнический банк",
-    "Increase your M€ production 4 steps. Gain 3 M€.": "Повысьте доход на 4. Получите 3 M€.",
+  "Allied Banks": "Союзнический банк",
+  "Increase your M€ production 4 steps. Gain 3 M€.": "Повысьте доход на 4. Получите 3 M€.",
 
-    "Aquifer Turbines": "Гидротурбины",
-    "Place an Ocean tile. Increase your energy production 2 steps. Pay 3 M€.": "Выложите тайл океана и повысьте производство энергии на 2. Заплатите 3 M€.",
+  "Aquifer Turbines": "Гидротурбины",
+  "Place an Ocean tile. Increase your energy production 2 steps. Pay 3 M€.": "Выложите тайл океана и повысьте производство энергии на 2. Заплатите 3 M€.",
 
-    "Biofuels": "Биотопливо",
-    "Increase your energy and plant production 1 step. Gain 2 plants.": "Повысьте производство энергии и растений на 1 шаг каждое. Получите 2 растения.",
+  "Biofuels": "Биотопливо",
+  "Increase your energy and plant production 1 step. Gain 2 plants.": "Повысьте производство энергии и растений на 1 шаг каждое. Получите 2 растения.",
 
-    "Biolab": "Биолаборатория",
-    "Increase your plant production 1 step. Draw 3 cards.": "Повысьте производство растений на 1. Возьмите 3 карты.",
+  "Biolab": "Биолаборатория",
+  "Increase your plant production 1 step. Draw 3 cards.": "Повысьте производство растений на 1. Возьмите 3 карты.",
 
-    "Biosphere Support": "Поддержка биосферы",
-    "Increase your plant production 2 steps. Decrease your M€ production 1 step.": "Снизьте свой доход на 1 и повысьте производство растений на 2 шага.",
+  "Biosphere Support": "Поддержка биосферы",
+  "Increase your plant production 2 steps. Decrease your M€ production 1 step.": "Снизьте свой доход на 1 и повысьте производство растений на 2 шага.",
 
-    "Business Empire": "Бизнес-империя",
-    "Increase your M€ production 6 steps. Pay 6 M€.": "Повысьте доход на 6. Заплатите 6 M€.",
+  "Business Empire": "Бизнес-империя",
+  "Increase your M€ production 6 steps. Pay 6 M€.": "Повысьте доход на 6. Заплатите 6 M€.",
 
-    "Dome Farming": "Тепличное хозяйство",
-    "Increase your M€ production 2 steps and plant production 1 step.": "Повысьте доход на 2 и производство растений на 1.",
+  "Dome Farming": "Тепличное хозяйство",
+  "Increase your M€ production 2 steps and plant production 1 step.": "Повысьте доход на 2 и производство растений на 1.",
 
-    "Donation": "Пожертвование",
-    "Gain 21 M€.": "Получите 21 M€.",
+  "Donation": "Пожертвование",
+  "Gain 21 M€.": "Получите 21 M€.",
 
-    "Early Settlement": "Раннее поселение",
-    "Increase your plant production 1 step. Place a city tile.": "Выложите тайл города. Повысьте производство растений на 1.",
+  "Early Settlement": "Раннее поселение",
+  "Increase your plant production 1 step. Place a city tile.": "Выложите тайл города. Повысьте производство растений на 1.",
 
-    "Ecology Experts": "Экологические эксперты",
-    "Increase your plant production 1 step. Play a card from hand, ignoring global requirements.": "Повысьте производство растений на 1. Разыграйте карту с руки, игнорируя глобальные требования.",
+  "Ecology Experts": "Экологические эксперты",
+  "Increase your plant production 1 step. Play a card from hand, ignoring global requirements.": "Повысьте производство растений на 1. Разыграйте карту с руки, игнорируя глобальные требования.",
 
-    "Eccentric Sponsor": "Эксцентричный спонсор",
-    "Play a card from hand, reducing its cost by 25 M€": "Разыграйте карту с руки, снизив ее стоимость на 25 M€.",
+  "Eccentric Sponsor": "Эксцентричный спонсор",
+  "Play a card from hand, reducing its cost by 25 M€": "Разыграйте карту с руки, снизив ее стоимость на 25 M€.",
 
-    "Experimental Forest": "Экспериментальный лес",
-    "Place 1 Greenery Tile and raise oxygen 1 step. Reveal cards until you reveal two cards with plant tags on them. Take them into your hand and discard the rest.": "Проведите озеленение и повысьте уровень кислорода на 1. Тяните карты из колоды, пока не найдете 2 карты с символом растения. Возьмите их в руку. Сбросьте остальные.",
+  "Experimental Forest": "Экспериментальный лес",
+  "Place 1 Greenery Tile and raise oxygen 1 step. Reveal cards until you reveal two cards with plant tags on them. Take them into your hand and discard the rest.": "Проведите озеленение и повысьте уровень кислорода на 1. Тяните карты из колоды, пока не найдете 2 карты с символом растения. Возьмите их в руку. Сбросьте остальные.",
 
-    "Galilean Mining": "Добыча на Галилео",
-    "Increase your titanium production 2 steps. Pay 5 M€.": "Повысьте производство титана на 2. Заплатите 5 M€.",
+  "Galilean Mining": "Добыча на Галилео",
+  "Increase your titanium production 2 steps. Pay 5 M€.": "Повысьте производство титана на 2. Заплатите 5 M€.",
 
-    "Great Aquifer": "Большой водоносный слой",
-    "Place 2 Ocean tiles.": "Выложите 2 тайла океана.",
+  "Great Aquifer": "Большой водоносный слой",
+  "Place 2 Ocean tiles.": "Выложите 2 тайла океана.",
 
-    "Huge Asteroid": "Огромный астероид",
-    "Increase Temperature 3 steps. Pay 5 M€.": "Повысьте температуру на 3. Заплатите 5 M€.",
+  "Huge Asteroid": "Огромный астероид",
+  "Increase Temperature 3 steps. Pay 5 M€.": "Повысьте температуру на 3. Заплатите 5 M€.",
 
-    "Io Research Outpost": "Исследовательская база на Ио",
-    "Increase your titanium production 1 step. Draw a card.": "Повысьте производство титана на 1. Возьмите 1 карту",
+  "Io Research Outpost": "Исследовательская база на Ио",
+  "Increase your titanium production 1 step. Draw a card.": "Повысьте производство титана на 1. Возьмите 1 карту",
 
-    "Loan": "Кредит",
-    "Gain 30 M€. Decrease your M€ production 2 steps.": "Получите 30 M€. Снизьте доход на 2.",
+  "Loan": "Кредит",
+  "Gain 30 M€. Decrease your M€ production 2 steps.": "Получите 30 M€. Снизьте доход на 2.",
 
-    "Martian Industries": "Промышленность Марса",
-    "Increase your energy and steel production 1 step. Gain 6 M€.": "Повысьте производство энергии и стали на 1 каждое. Получите 6 M€.",
+  "Martian Industries": "Промышленность Марса",
+  "Increase your energy and steel production 1 step. Gain 6 M€.": "Повысьте производство энергии и стали на 1 каждое. Получите 6 M€.",
 
-    "Metal-Rich Asteroid": "Богатый металлом астероид",
-    "Increase temperature 1 step. Gain 4 titanium and 4 steel.": "Повысьте температуру на 1. Получите 4 титана и 4 стали.",
+  "Metal-Rich Asteroid": "Богатый металлом астероид",
+  "Increase temperature 1 step. Gain 4 titanium and 4 steel.": "Повысьте температуру на 1. Получите 4 титана и 4 стали.",
 
-    "Metals Company": "Металлургическая компания",
-    "Increase your MC, steel and titanium production 1 step.": "Повысьте доход, производство стали и титана на 1 шаг каждое.",
+  "Metals Company": "Металлургическая компания",
+  "Increase your MC, steel and titanium production 1 step.": "Повысьте доход, производство стали и титана на 1 шаг каждое.",
 
-    "Mining Operations": "Горные работы",
-    "Increase your steel production 2 steps. Gain 4 steel.": "Повысьте производство стали на 2. Получите 4 стали.",
+  "Mining Operations": "Горные работы",
+  "Increase your steel production 2 steps. Gain 4 steel.": "Повысьте производство стали на 2. Получите 4 стали.",
 
-    "Mohole": "Сверхглубокая скважина",
-    "Increase your heat production 3 steps. Gain 3 heat.": "Повысьте производство тепла на 3. Получите 3 тепла.",
+  "Mohole": "Сверхглубокая скважина",
+  "Increase your heat production 3 steps. Gain 3 heat.": "Повысьте производство тепла на 3. Получите 3 тепла.",
 
-    "Mohole Excavation": "Свехрглубокая добыча",
-    "Increase your steel production 1 step and heat production 2 steps. Gain 2 heat.": "Повысьте производство стали на 1. Повысьте производство тепла на 2. Получите 2 тепла.",
+  "Mohole Excavation": "Свехрглубокая добыча",
+  "Increase your steel production 1 step and heat production 2 steps. Gain 2 heat.": "Повысьте производство стали на 1. Повысьте производство тепла на 2. Получите 2 тепла.",
 
-    "Nitrogen Shipment": "Ввоз азота",
-    "Increase your plant production 1 step. Increase your TR 1 step. Gain 5 M€.": "Повысьте свой рейтинг и производство растений на 1 каждое. Получите 5 M€.",
+  "Nitrogen Shipment": "Ввоз азота",
+  "Increase your plant production 1 step. Increase your TR 1 step. Gain 5 M€.": "Повысьте свой рейтинг и производство растений на 1 каждое. Получите 5 M€.",
 
-    "Orbital Construction Yard": "Строительный парк на орбите",
-    "Increase your titanium production 1 step. Gain 4 titanium.": "Повысьте производство титана на 1. Получите 4 титана.",
+  "Orbital Construction Yard": "Строительный парк на орбите",
+  "Increase your titanium production 1 step. Gain 4 titanium.": "Повысьте производство титана на 1. Получите 4 титана.",
 
-    "Polar Industries": "Полярная промышленность",
-    "Increase your heat production 2 steps. Place an Ocean tile.": "Выложите тайл океана. Повысьте производство тепла на 2.",
+  "Polar Industries": "Полярная промышленность",
+  "Increase your heat production 2 steps. Place an Ocean tile.": "Выложите тайл океана. Повысьте производство тепла на 2.",
 
-    "Power Generation": "Производство энергии",
-    "Increase your energy production 3 steps.": "Повысьте производство энергии на 3.",
+  "Power Generation": "Производство энергии",
+  "Increase your energy production 3 steps.": "Повысьте производство энергии на 3.",
 
-    "Research Network": "Исследовательская сеть",
-    "Increase your M€ production 1 step. Draw 3 cards. After being played, when you perform an action, the wild tag counts as any tag of your choice.": "Возьмите 3 карты и увеличьте доход на 1.",
+  "Research Network": "Исследовательская сеть",
+  "Increase your M€ production 1 step. Draw 3 cards. After being played, when you perform an action, the wild tag counts as any tag of your choice.": "Возьмите 3 карты и увеличьте доход на 1.",
 
-    "Self-Sufficient Settlement": "Самодостаточное поселение",
-    "Increase your money production 2 steps. Place a City tile.": "Выложите тайл города. Повысьте доход на 2.",
+  "Self-Sufficient Settlement": "Самодостаточное поселение",
+  "Increase your money production 2 steps. Place a City tile.": "Выложите тайл города. Повысьте доход на 2.",
 
-    "Smelting Plant": "Плавильный завод",
-    "Raise oxygen 2 steps. Gain 5 steel.": "Повысьте уровень кислорода на 2. Получите 5 стали.",
+  "Smelting Plant": "Плавильный завод",
+  "Raise oxygen 2 steps. Gain 5 steel.": "Повысьте уровень кислорода на 2. Получите 5 стали.",
 
-    "Society Support": "Поддержка общественности",
-    "Increase your plant, energy and heat production 1 step. Decrease money production 1 step.": "Повысьте производство растений, энергии и тепла на 1 каждое. Снизьте доход на 1.",
+  "Society Support": "Поддержка общественности",
+  "Increase your plant, energy and heat production 1 step. Decrease money production 1 step.": "Повысьте производство растений, энергии и тепла на 1 каждое. Снизьте доход на 1.",
 
-    "Supplier": "Поставщик",
-    "Increase your energy production 2 steps. Gain 4 steel.": "Повысьте производство энергии на 2. Получите 4 стали.",
+  "Supplier": "Поставщик",
+  "Increase your energy production 2 steps. Gain 4 steel.": "Повысьте производство энергии на 2. Получите 4 стали.",
 
-    "Supply Drop": "Поставка",
-    "Gain 3 titanium, 8 steel and 3 plants.": "Получите 3 титана, 8 стали и 3 растения.",
+  "Supply Drop": "Поставка",
+  "Gain 3 titanium, 8 steel and 3 plants.": "Получите 3 титана, 8 стали и 3 растения.",
 
-    "UNMI Contractor": "Подрядчик UNMI",
-    "Increase your TR 3 steps. Draw a card.": "Повысьте рейтинг на 3. Возьмите 1 карту.",
+  "UNMI Contractor": "Подрядчик UNMI",
+  "Increase your TR 3 steps. Draw a card.": "Повысьте рейтинг на 3. Возьмите 1 карту.",
 
-    "Acquired Space Agency": "Приобретенное космоагенство",
-    "Gain 6 titanium. Reveal cards until you reveal two cards with Space Tags. Take them into your hand, discard the rest.": "Получите 6 титана. Тяните карты из колоды, пока не найдете 2 карты с символом космоса. Возьмите их в руку. Сбросьте остальные.",
+  "Acquired Space Agency": "Приобретенное космоагенство",
+  "Gain 6 titanium. Reveal cards until you reveal two cards with Space Tags. Take them into your hand, discard the rest.": "Получите 6 титана. Тяните карты из колоды, пока не найдете 2 карты с символом космоса. Возьмите их в руку. Сбросьте остальные.",
 
+  "Aerospace Mission": "Космическая миссия",
+  "Place 2 colonies. Pay 14 M€.": "Разместите 2 колонии. Заплатите 14 МС",
 
-    "Aerospace Mission": "Космическая миссия",
-    "Place 2 colonies. Pay 14 M€.": "Разместите 2 колонии. Заплатите 14 МС",
+  "By-Election": "Довыборы",
+  "set ruling party": "назначьте правящую партию",
+  "Set the ruling party to one of your choice. Gain 1 influence.": "Сделайте любую партию правящей. Получите 1 влияние",
 
-    "By-Election": "Довыборы",
-    "set ruling party": "назначьте правящую партию",
-    "Set the ruling party to one of your choice. Gain 1 influence.": "Сделайте любую партию правящей. Получите 1 влияние",
+  "Political Uprising": "Переворот",
+  "Place 4 delegates. Draw a Turmoil card.": "Разместите 4 своих делегатов. Доберите карту из дополнения Кризис",
 
-    "Political Uprising": "Переворот",
-    "Place 4 delegates. Draw a Turmoil card.": "Разместите 4 своих делегатов. Доберите карту из дополнения Кризис",
+  "Research Grant": "Исследовательский грант",
+  "Gain 8 M€.": "Получите 8 МС",
 
-    "Research Grant": "Исследовательский грант",
-    "Gain 8 M€.": "Получите 8 МС",
+  "Trade Advance": "Торговое преимущество",
+  "[ solo": "[ соло",
+  "Trade all colonies with": "",
+  "Gain 2 M€ [SOLO: Gain 10 M€]. Immediately trade with all active colonies. You may increase the Colony Tile track 1 step before each of these trades.": "Получите 2 МС [СОЛО: Получите 10 МС]. Немедленно поторгуйте со всеми активными колониями. Можете увеличить трек колонии, с которой торгуете при каждой из этих торговых операций",
 
-    "Trade Advance":"Торговое преимущество",
-    "[ solo": "[ соло",
-    "Trade all colonies with": "",
-    "Gain 2 M€ [SOLO: Gain 10 M€]. Immediately trade with all active colonies. You may increase the Colony Tile track 1 step before each of these trades.":
-    "Получите 2 МС [СОЛО: Получите 10 МС]. Немедленно поторгуйте со всеми активными колониями. Можете увеличить трек колонии, с которой торгуете при каждой из этих торговых операций",
+  "Valuable Gases": "Ценные газы",
+  "Gain 6 M€. Play a Venus card from your hand and add 4 floaters to it.": "Получите 6 M€. Разыграйте карту с меткой Венеры с руки и добавьте на неё 4 аэростата",
 
-
-    "Valuable Gases": "Ценные газы",
-    "Gain 6 M€. Play a Venus card from your hand and add 4 floaters to it.":
-    "Получите 6 M€. Разыграйте карту с меткой Венеры с руки и добавьте на неё 4 аэростата",
-
-    "Venus First": "Венера вперед!",
-    "Raise Venus 2 steps. Draw 2 Venus cards from the deck.":
-    "Увеличьте шкалу Венеры на 2. Доберите 2 карты с меткой Венеры"
-
+  "Venus First": "Венера вперед!",
+  "Raise Venus 2 steps. Draw 2 Venus cards from the deck.": "Увеличьте шкалу Венеры на 2. Доберите 2 карты с меткой Венеры"
 }

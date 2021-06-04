@@ -48,4 +48,3 @@ describe('MareImbriumMine', () => {
     expect(mareImbrium.tile!.tileType).eq(TileType.MOON_MINE);
   });
 });
-

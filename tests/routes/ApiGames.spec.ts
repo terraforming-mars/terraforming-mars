@@ -8,7 +8,7 @@ import {MockResponse} from './HttpMocks';
 import {IContext} from '../../src/routes/IHandler';
 import {FakeGameLoader} from './FakeGameLoader';
 
-describe('ApiGames', function() {
+describe('ApiGames', function () {
   let req: http.IncomingMessage;
   let res: MockResponse;
   let ctx: IContext;

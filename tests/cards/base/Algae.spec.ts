@@ -6,21 +6,23 @@ import {Resources} from '../../../src/Resources';
 import {TileType} from '../../../src/TileType';
 import {TestPlayers} from '../../TestPlayers';
 
-describe('Algae', function() {
-  let card : Algae; let player : Player; let game : Game;
+describe('Algae', function () {
+  let card: Algae;
+  let player: Player;
+  let game: Game;
 
-  beforeEach(function() {
+  beforeEach(function () {
     card = new Algae();
     player = TestPlayers.BLUE.newPlayer();
     const redPlayer = TestPlayers.RED.newPlayer();
     game = Game.newInstance('foobar', [player, redPlayer], player);
   });
 
-  it('Can\'t play', function() {
+  it("Can't play", function () {
     expect(card.canPlay(player)).is.not.true;
   });
 
-  it('Should play', function() {
+  it('Should play', function () {
     const oceanSpaces = game.board.getAvailableSpacesForOcean(player);
     for (let i = 0; i < 5; i++) {
       oceanSpaces[i].tile = {tileType: TileType.OCEAN};

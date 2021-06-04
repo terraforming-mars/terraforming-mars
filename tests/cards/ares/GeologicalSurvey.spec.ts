@@ -8,24 +8,34 @@ import {Player} from '../../../src/Player';
 import {SpaceBonus} from '../../../src/SpaceBonus';
 import {SpaceType} from '../../../src/SpaceType';
 import {TileType} from '../../../src/TileType';
-import {AresTestHelper, ARES_OPTIONS_NO_HAZARDS} from '../../ares/AresTestHelper';
+import {
+  AresTestHelper,
+  ARES_OPTIONS_NO_HAZARDS,
+} from '../../ares/AresTestHelper';
 import {EmptyBoard} from '../../ares/EmptyBoard';
 import {MarsFirst} from '../../../src/turmoil/parties/MarsFirst';
 import {TestingUtils} from '../../TestingUtils';
 import {TestPlayers} from '../../TestPlayers';
 
-describe('GeologicalSurvey', function() {
-  let card : GeologicalSurvey; let player : Player; let game : Game;
+describe('GeologicalSurvey', function () {
+  let card: GeologicalSurvey;
+  let player: Player;
+  let game: Game;
 
-  beforeEach(function() {
+  beforeEach(function () {
     card = new GeologicalSurvey();
     player = TestPlayers.BLUE.newPlayer();
     const redPlayer = TestPlayers.RED.newPlayer();
-    game = Game.newInstance('foobar', [player, redPlayer], player, ARES_OPTIONS_NO_HAZARDS);
+    game = Game.newInstance(
+      'foobar',
+      [player, redPlayer],
+      player,
+      ARES_OPTIONS_NO_HAZARDS
+    );
     game.board = EmptyBoard.newInstance();
   });
 
-  it('Can play', function() {
+  it('Can play', function () {
     AresTestHelper.addGreenery(player);
     expect(card.canPlay(player)).is.true;
 
@@ -45,26 +55,28 @@ describe('GeologicalSurvey', function() {
     expect(card.canPlay(player)).is.false;
   });
 
-
-  it('Bonus in the field', function() {
+  it('Bonus in the field', function () {
     // tile types in this test are irrelevant.
     // What's key is that this space has a weird behavior - it grants all the bonuses.
     // Only three of them will grant additional bonuses: steel, titanium, and heat.
 
     const firstSpace = game.board.getAvailableSpacesOnLand(player)[0];
-    firstSpace.adjacency = {bonus: [
-      SpaceBonus.TITANIUM,
-      SpaceBonus.STEEL,
-      SpaceBonus.PLANT,
-      SpaceBonus.DRAW_CARD,
-      SpaceBonus.HEAT,
-      SpaceBonus.MEGACREDITS,
-      SpaceBonus.ANIMAL,
-      SpaceBonus.MICROBE,
-      SpaceBonus.POWER,
-    ],
+    firstSpace.adjacency = {
+      bonus: [
+        SpaceBonus.TITANIUM,
+        SpaceBonus.STEEL,
+        SpaceBonus.PLANT,
+        SpaceBonus.DRAW_CARD,
+        SpaceBonus.HEAT,
+        SpaceBonus.MEGACREDITS,
+        SpaceBonus.ANIMAL,
+        SpaceBonus.MICROBE,
+        SpaceBonus.POWER,
+      ],
     };
-    game.addTile(player, SpaceType.LAND, firstSpace, {tileType: TileType.RESTRICTED_AREA});
+    game.addTile(player, SpaceType.LAND, firstSpace, {
+      tileType: TileType.RESTRICTED_AREA,
+    });
     // firstSpace.player = player;
 
     const microbeCard = new Ants();
@@ -79,12 +91,15 @@ describe('GeologicalSurvey', function() {
     player.heat = 0;
     player.energy = 0;
     player.plants = 0;
-    player.cardsInHand = []; 0;
+    player.cardsInHand = [];
+    0;
     microbeCard.resourceCount = 0;
     animalCard.resourceCount = 0;
 
     const adjacentSpace = game.board.getAdjacentSpaces(firstSpace)[0];
-    game.addTile(player, adjacentSpace.spaceType, adjacentSpace, {tileType: TileType.GREENERY});
+    game.addTile(player, adjacentSpace.spaceType, adjacentSpace, {
+      tileType: TileType.GREENERY,
+    });
     TestingUtils.runAllActions(game);
 
     expect(player.megaCredits).eq(2);
@@ -98,7 +113,7 @@ describe('GeologicalSurvey', function() {
     expect(animalCard.resourceCount).eq(1);
   });
 
-  it('Works with Mars First policy', function() {
+  it('Works with Mars First policy', function () {
     player = TestPlayers.BLUE.newPlayer();
     const gameOptions = TestingUtils.setCustomGameOptions();
     game = Game.newInstance('foobar', [player], player, gameOptions);
@@ -116,7 +131,12 @@ describe('GeologicalSurvey', function() {
 
     TestingUtils.resetBoard(game);
 
-    TestingUtils.setRulingPartyAndRulingPolicy(game, turmoil, marsFirst, marsFirst.policies[0].id);
+    TestingUtils.setRulingPartyAndRulingPolicy(
+      game,
+      turmoil,
+      marsFirst,
+      marsFirst.policies[0].id
+    );
     game.addGreenery(player, '11');
     TestingUtils.runAllActions(game);
     expect(player.steel).eq(2);

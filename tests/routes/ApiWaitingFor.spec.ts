@@ -8,7 +8,7 @@ import {MockResponse} from './HttpMocks';
 import {IContext} from '../../src/routes/IHandler';
 import {FakeGameLoader} from './FakeGameLoader';
 
-describe('ApiWaitingFor', function() {
+describe('ApiWaitingFor', function () {
   let req: http.IncomingMessage;
   let res: MockResponse;
   let ctx: IContext;
@@ -38,7 +38,7 @@ describe('ApiWaitingFor', function() {
     ctx.url = new URL('http://boo.com' + req.url);
     const game = Game.newInstance('game-id', [player], player);
     ctx.gameLoader.add(game);
-    (game as any).getPlayerById = function() {
+    (game as any).getPlayerById = function () {
       throw new Error('player does not exist');
     };
     ApiWaitingFor.INSTANCE.get(req, res.hide(), ctx);

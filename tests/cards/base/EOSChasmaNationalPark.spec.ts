@@ -9,7 +9,9 @@ import {Resources} from '../../../src/Resources';
 import {TestPlayers} from '../../TestPlayers';
 
 describe('EosChasmaNationalPark', () => {
-  let card : EosChasmaNationalPark; let player : TestPlayer; let game : Game;
+  let card: EosChasmaNationalPark;
+  let player: TestPlayer;
+  let game: Game;
 
   beforeEach(() => {
     card = new EosChasmaNationalPark();
@@ -35,14 +37,14 @@ describe('EosChasmaNationalPark', () => {
     const action = card.play(player);
     expect(action instanceof SelectCard).is.true;
     player.playedCards.push(card);
-        action!.cb([birds]);
+    action!.cb([birds]);
 
-        expect(player.getResourcesOnCard(birds)).to.eq(1);
-        expect(player.plants).to.eq(3);
-        expect(player.getProduction(Resources.MEGACREDITS)).to.eq(2);
+    expect(player.getResourcesOnCard(birds)).to.eq(1);
+    expect(player.plants).to.eq(3);
+    expect(player.getProduction(Resources.MEGACREDITS)).to.eq(2);
 
-        player.getVictoryPoints();
-        expect(player.victoryPointsBreakdown.victoryPoints).to.eq(2);
+    player.getVictoryPoints();
+    expect(player.victoryPointsBreakdown.victoryPoints).to.eq(2);
   });
 
   it('Should play - single target', () => {
@@ -62,4 +64,3 @@ describe('EosChasmaNationalPark', () => {
     expect(player.victoryPointsBreakdown.victoryPoints).to.eq(2);
   });
 });
-

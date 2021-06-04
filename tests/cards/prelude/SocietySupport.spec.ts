@@ -3,8 +3,8 @@ import {SocietySupport} from '../../../src/cards/prelude/SocietySupport';
 import {Resources} from '../../../src/Resources';
 import {TestPlayers} from '../../TestPlayers';
 
-describe('SocietySupport', function() {
-  it('Should play', function() {
+describe('SocietySupport', function () {
+  it('Should play', function () {
     const player = TestPlayers.BLUE.newPlayer();
     const card = new SocietySupport();
     const action = card.play(player);

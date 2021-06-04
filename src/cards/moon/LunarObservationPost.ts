@@ -12,28 +12,32 @@ import {MoonCard} from './MoonCard';
 
 export class LunarObservationPost extends MoonCard implements IActionCard {
   constructor() {
-    super({
-      name: CardName.LUNAR_OBSERVATION_POST,
-      cardType: CardType.ACTIVE,
-      tags: [Tags.SCIENCE, Tags.SCIENCE],
-      cost: 7,
-      productionBox: Units.of({}),
-      resourceType: ResourceType.DATA,
-      metadata: {
-        description: 'Spend 1 titanium. 1 VP for every 3 data resources here.',
-        cardNumber: 'M22',
-        renderData: CardRenderer.builder((b) => {
-          b.action('Add 1 data resource to ANY card', (ab) => {
-            ab.data().startAction.asterix();
-          });
-          b.br;
-          b.minus().titanium(1);
-        }),
-        victoryPoints: CardRenderDynamicVictoryPoints.data(1, 3),
+    super(
+      {
+        name: CardName.LUNAR_OBSERVATION_POST,
+        cardType: CardType.ACTIVE,
+        tags: [Tags.SCIENCE, Tags.SCIENCE],
+        cost: 7,
+        productionBox: Units.of({}),
+        resourceType: ResourceType.DATA,
+        metadata: {
+          description:
+            'Spend 1 titanium. 1 VP for every 3 data resources here.',
+          cardNumber: 'M22',
+          renderData: CardRenderer.builder((b) => {
+            b.action('Add 1 data resource to ANY card', (ab) => {
+              ab.data().startAction.asterix();
+            });
+            b.br;
+            b.minus().titanium(1);
+          }),
+          victoryPoints: CardRenderDynamicVictoryPoints.data(1, 3),
+        },
       },
-    }, {
-      reserveUnits: Units.of({titanium: 1}),
-    });
+      {
+        reserveUnits: Units.of({titanium: 1}),
+      }
+    );
   }
 
   public resourceCount: number = 0;

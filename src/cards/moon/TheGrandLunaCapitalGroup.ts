@@ -30,13 +30,25 @@ export class TheGrandLunaCapitalGroup extends Card implements CorporationCard {
         },
         cardNumber: 'MC7',
         renderData: CardRenderer.builder((b) => {
-          b.megacredits(32).titanium(1).moonColony().secondaryTag(AltSecondaryTag.MOON_COLONY_RATE).br;
-          b.effect('When you place a colony tile, gain 2 M€ for each adjacent colony tile.', (eb) => {
-            eb.moonColony({size: Size.SMALL}).any.moonColony({size: Size.SMALL}).asterix()
-              .startEffect
-              .megacredits(2).slash().moonColony({size: Size.SMALL}).any;
-          }).br,
-          b.vpText('1 VP for each colony tile adjacent to your colony tiles.').br;
+          b
+            .megacredits(32)
+            .titanium(1)
+            .moonColony()
+            .secondaryTag(AltSecondaryTag.MOON_COLONY_RATE).br;
+          b.effect(
+            'When you place a colony tile, gain 2 M€ for each adjacent colony tile.',
+            (eb) => {
+              eb
+                .moonColony({size: Size.SMALL})
+                .any.moonColony({size: Size.SMALL})
+                .asterix()
+                .startEffect.megacredits(2)
+                .slash()
+                .moonColony({size: Size.SMALL}).any;
+            }
+          ).br,
+            b.vpText('1 VP for each colony tile adjacent to your colony tiles.')
+              .br;
         }),
         victoryPoints: CardRenderDynamicVictoryPoints.moonColonyTile(1),
       },
@@ -60,21 +72,29 @@ export class TheGrandLunaCapitalGroup extends Card implements CorporationCard {
     if (!MoonExpansion.spaceHasType(space, TileType.MOON_COLONY)) {
       return;
     }
-    const adjacentSpaces = MoonExpansion.moonData(cardOwner.game).moon.getAdjacentSpaces(space);
-    const filtered = adjacentSpaces.filter((space) => MoonExpansion.spaceHasType(space, TileType.MOON_COLONY));
-    cardOwner.addResource(Resources.MEGACREDITS, filtered.length * 2, {log: true});
+    const adjacentSpaces = MoonExpansion.moonData(
+      cardOwner.game
+    ).moon.getAdjacentSpaces(space);
+    const filtered = adjacentSpaces.filter((space) =>
+      MoonExpansion.spaceHasType(space, TileType.MOON_COLONY)
+    );
+    cardOwner.addResource(Resources.MEGACREDITS, filtered.length * 2, {
+      log: true,
+    });
   }
 
   public getVictoryPoints(player: Player) {
     const moon = MoonExpansion.moonData(player.game).moon;
     const neighboringColonyTiles: Set<SpaceId> = new Set();
-    const colonyTiles = MoonExpansion.tiles(player.game, TileType.MOON_COLONY, {ownedBy: player});
+    const colonyTiles = MoonExpansion.tiles(player.game, TileType.MOON_COLONY, {
+      ownedBy: player,
+    });
     colonyTiles.forEach((tile) =>
       moon.getAdjacentSpaces(tile).forEach((neighbor) => {
         if (MoonExpansion.spaceHasType(neighbor, TileType.MOON_COLONY)) {
           neighboringColonyTiles.add(neighbor.id);
         }
-      }),
+      })
     );
 
     return neighboringColonyTiles.size;

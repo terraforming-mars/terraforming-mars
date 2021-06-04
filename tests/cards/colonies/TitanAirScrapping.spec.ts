@@ -5,22 +5,23 @@ import {OrOptions} from '../../../src/inputs/OrOptions';
 import {Player} from '../../../src/Player';
 import {TestPlayers} from '../../TestPlayers';
 
-describe('TitanAirScrapping', function() {
-  let card : TitanAirScrapping; let player : Player;
+describe('TitanAirScrapping', function () {
+  let card: TitanAirScrapping;
+  let player: Player;
 
-  beforeEach(function() {
+  beforeEach(function () {
     card = new TitanAirScrapping();
     player = TestPlayers.BLUE.newPlayer();
     const redPlayer = TestPlayers.RED.newPlayer();
     Game.newInstance('foobar', [player, redPlayer], player);
   });
 
-  it('Can\'t act', function() {
+  it("Can't act", function () {
     player.playedCards.push(card);
     expect(card.canAct(player)).is.not.true;
   });
 
-  it('Should act - both actions possible', function() {
+  it('Should act - both actions possible', function () {
     player.playedCards.push(card);
     player.titanium = 3;
     player.addResourceTo(card, 7);
@@ -28,14 +29,14 @@ describe('TitanAirScrapping', function() {
 
     const orOptions = card.action(player) as OrOptions;
     expect(orOptions instanceof OrOptions).is.true;
-        orOptions!.options[0].cb();
+    orOptions!.options[0].cb();
 
-        expect(player.getTerraformRating()).to.eq(21);
-        expect(player.getResourcesOnCard(card)).to.eq(5);
-        expect(card.getVictoryPoints()).to.eq(2);
+    expect(player.getTerraformRating()).to.eq(21);
+    expect(player.getResourcesOnCard(card)).to.eq(5);
+    expect(card.getVictoryPoints()).to.eq(2);
   });
 
-  it('Should act automatically when only one action possible', function() {
+  it('Should act automatically when only one action possible', function () {
     player.playedCards.push(card);
     player.addResourceTo(card, 2);
     expect(card.canAct(player)).is.true;

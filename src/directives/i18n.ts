@@ -1,4 +1,3 @@
-
 import {LogMessageDataType} from '../LogMessageDataType';
 import {Message} from '../Message';
 import {PreferencesManager} from '../components/PreferencesManager';
@@ -8,12 +7,18 @@ import {LogMessageData} from '../LogMessageData';
 const TM_translations: {[x: string]: {[x: string]: string}} = raw_translations;
 
 export function translateMessage(message: Message): string {
-  return translateText(message.message).replace(/\$\{([0-9]{1})\}/gi, (_match, idx) => {
-    if (message.data[idx] !== undefined && message.data[idx].type === LogMessageDataType.RAW_STRING) {
-      return message.data[idx].value;
+  return translateText(message.message).replace(
+    /\$\{([0-9]{1})\}/gi,
+    (_match, idx) => {
+      if (
+        message.data[idx] !== undefined &&
+        message.data[idx].type === LogMessageDataType.RAW_STRING
+      ) {
+        return message.data[idx].value;
+      }
+      return '';
     }
-    return '';
-  });
+  );
 }
 
 export function translateText(englishText: string): string {
@@ -41,7 +46,10 @@ export function translateText(englishText: string): string {
   return translatedText;
 }
 
-export function translateTextWithParams(englishText: string, params: Array<string>): string {
+export function translateTextWithParams(
+  englishText: string,
+  params: Array<string>
+): string {
   const data = params.map((p) => {
     return {
       type: LogMessageDataType.RAW_STRING,
@@ -58,7 +66,10 @@ export function translateTextWithParams(englishText: string, params: Array<strin
 }
 
 function normalizeText(text: string): string {
-  return text.replace(/[\n\r]/g, '').replace(/[ ]+/g, ' ').trim();
+  return text
+    .replace(/[\n\r]/g, '')
+    .replace(/[ ]+/g, ' ')
+    .trim();
 }
 
 function translateChildren(node: Node) {
@@ -80,9 +91,9 @@ export function translateTextNode(el: HTMLElement) {
   translateChildren(el);
 }
 
-export const $t = function(msg: string | Message | number | undefined) {
-  if ( ! msg) return '';
-  if (typeof(msg) === 'number') return msg.toString();
+export const $t = function (msg: string | Message | number | undefined) {
+  if (!msg) return '';
+  if (typeof msg === 'number') return msg.toString();
   if (typeof msg === 'string') {
     return translateText(msg);
   }

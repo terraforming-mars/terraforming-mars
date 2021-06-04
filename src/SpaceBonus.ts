@@ -3,18 +3,18 @@
 // for now.
 
 export enum SpaceBonus {
-    TITANIUM, // 0
-    STEEL, // 1
-    PLANT, // 2
-    DRAW_CARD, // 3
-    HEAT, // 4
-    OCEAN, // 5
+  TITANIUM, // 0
+  STEEL, // 1
+  PLANT, // 2
+  DRAW_CARD, // 3
+  HEAT, // 4
+  OCEAN, // 5
 
-    // Ares-specific
-    MEGACREDITS, // 6
-    ANIMAL, // 7
-    MICROBE, // 8
-    POWER // 9
+  // Ares-specific
+  MEGACREDITS, // 6
+  ANIMAL, // 7
+  MICROBE, // 8
+  POWER, // 9
 }
 
 const TO_STRING_MAP: Map<SpaceBonus, string> = new Map([
@@ -32,6 +32,8 @@ const TO_STRING_MAP: Map<SpaceBonus, string> = new Map([
 
 export namespace SpaceBonus {
   export function toString(spaceBonus: SpaceBonus): string {
-    return TO_STRING_MAP.get(spaceBonus) || `(unnamed space bonus, id ${spaceBonus})`;
+    return (
+      TO_STRING_MAP.get(spaceBonus) || `(unnamed space bonus, id ${spaceBonus})`
+    );
   }
 }

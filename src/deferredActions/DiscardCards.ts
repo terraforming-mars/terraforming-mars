@@ -6,14 +6,21 @@ import {DeferredAction, Priority} from './DeferredAction';
 export class DiscardCards implements DeferredAction {
   public priority = Priority.DISCARD_CARDS;
   constructor(
-        public player: Player,
-        public count: number = 1,
-        public title: string = 'Select ' + count + ' card' + (count > 1 ? 's' : '') + ' to discard',
+    public player: Player,
+    public count: number = 1,
+    public title: string = 'Select ' +
+      count +
+      ' card' +
+      (count > 1 ? 's' : '') +
+      ' to discard'
   ) {}
 
   public execute() {
     if (this.player.cardsInHand.length <= this.count) {
-      const cards = this.player.cardsInHand.splice(0, this.player.cardsInHand.length);
+      const cards = this.player.cardsInHand.splice(
+        0,
+        this.player.cardsInHand.length
+      );
       cards.forEach((card) => this.player.game.dealer.discard(card));
       return undefined;
     }
@@ -23,13 +30,16 @@ export class DiscardCards implements DeferredAction {
       this.player.cardsInHand,
       (foundCards: Array<IProjectCard>) => {
         for (const card of foundCards) {
-          this.player.cardsInHand.splice(this.player.cardsInHand.indexOf(card), 1);
+          this.player.cardsInHand.splice(
+            this.player.cardsInHand.indexOf(card),
+            1
+          );
           this.player.game.dealer.discard(card);
         }
         return undefined;
       },
       this.count,
-      this.count,
+      this.count
     );
   }
 }

@@ -5,21 +5,22 @@ import {Player} from '../../../src/Player';
 import {Resources} from '../../../src/Resources';
 import {TestPlayers} from '../../TestPlayers';
 
-describe('MagneticFieldGenerators', function() {
-  let card : MagneticFieldGenerators; let player : Player;
+describe('MagneticFieldGenerators', function () {
+  let card: MagneticFieldGenerators;
+  let player: Player;
 
-  beforeEach(function() {
+  beforeEach(function () {
     card = new MagneticFieldGenerators();
     player = TestPlayers.BLUE.newPlayer();
     const redPlayer = TestPlayers.RED.newPlayer();
     Game.newInstance('foobar', [player, redPlayer], player);
   });
 
-  it('Can\'t play', function() {
+  it("Can't play", function () {
     expect(card.canPlay(player)).is.not.true;
   });
 
-  it('Should play', function() {
+  it('Should play', function () {
     player.addProduction(Resources.ENERGY, 4);
     expect(card.canPlay(player)).is.true;
 

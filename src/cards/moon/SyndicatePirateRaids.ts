@@ -15,14 +15,15 @@ export class SyndicatePirateRaids extends Card implements IProjectCard {
       cost: 8,
 
       metadata: {
-        description: 'ALL OPPONENTS CANNOT RETRIEVE THEIR TRADE FLEETS THIS GENERATION',
+        description:
+          'ALL OPPONENTS CANNOT RETRIEVE THEIR TRADE FLEETS THIS GENERATION',
         cardNumber: 'M65',
         renderData: CardRenderer.builder((b) => {
           b.tradeFleet().asterix;
         }),
       },
     });
-  };
+  }
 
   public play(player: Player) {
     const game = player.game;
@@ -30,7 +31,8 @@ export class SyndicatePirateRaids extends Card implements IProjectCard {
 
     game.log(
       'All players except ${0} may not retrieve their trade fleets this generation.',
-      (b) => b.player(player));
+      (b) => b.player(player)
+    );
     return undefined;
   }
 }

@@ -1,12 +1,11 @@
-
 import {expect} from 'chai';
 import {BusinessContacts} from '../../../src/cards/base/BusinessContacts';
 import {Game} from '../../../src/Game';
 import {SelectCard} from '../../../src/inputs/SelectCard';
 import {TestPlayers} from '../../TestPlayers';
 
-describe('BusinessContacts', function() {
-  it('Should play', function() {
+describe('BusinessContacts', function () {
+  it('Should play', function () {
     const card = new BusinessContacts();
     const player = TestPlayers.BLUE.newPlayer();
     const redPlayer = TestPlayers.RED.newPlayer();

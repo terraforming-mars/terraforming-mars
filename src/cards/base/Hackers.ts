@@ -22,7 +22,8 @@ export class Hackers extends Card implements IProjectCard {
             pb.plus().megacredits(2);
           });
         }),
-        description: 'Decrease your energy production 1 step and any M€ production 2 steps. increase your M€ production 2 steps.',
+        description:
+          'Decrease your energy production 1 step and any M€ production 2 steps. increase your M€ production 2 steps.',
         victoryPoints: -1,
       },
     });
@@ -33,7 +34,9 @@ export class Hackers extends Card implements IProjectCard {
   }
 
   public play(player: Player) {
-    player.game.defer(new DecreaseAnyProduction(player, Resources.MEGACREDITS, 2));
+    player.game.defer(
+      new DecreaseAnyProduction(player, Resources.MEGACREDITS, 2)
+    );
     player.addProduction(Resources.MEGACREDITS, 2);
     player.addProduction(Resources.ENERGY, -1);
     return undefined;
@@ -43,4 +46,3 @@ export class Hackers extends Card implements IProjectCard {
     return -1;
   }
 }
-

@@ -3,8 +3,8 @@ import {MartianIndustries} from '../../../src/cards/prelude/MartianIndustries';
 import {Resources} from '../../../src/Resources';
 import {TestPlayers} from '../../TestPlayers';
 
-describe('MartianIndustries', function() {
-  it('Should play', function() {
+describe('MartianIndustries', function () {
+  it('Should play', function () {
     const card = new MartianIndustries();
     const player = TestPlayers.BLUE.newPlayer();
     const action = card.play(player);

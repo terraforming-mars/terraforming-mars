@@ -5,21 +5,22 @@ import {Player} from '../../../src/Player';
 import {Resources} from '../../../src/Resources';
 import {TestPlayers} from '../../TestPlayers';
 
-describe('EquatorialMagnetizer', function() {
-  let card : EquatorialMagnetizer; let player : Player;
+describe('EquatorialMagnetizer', function () {
+  let card: EquatorialMagnetizer;
+  let player: Player;
 
-  beforeEach(function() {
+  beforeEach(function () {
     card = new EquatorialMagnetizer();
     player = TestPlayers.BLUE.newPlayer();
     const redPlayer = TestPlayers.RED.newPlayer();
     Game.newInstance('foobar', [player, redPlayer], player);
   });
 
-  it('Can\'t act', function() {
+  it("Can't act", function () {
     expect(card.canAct(player)).is.not.true;
   });
 
-  it('Should act', function() {
+  it('Should act', function () {
     player.addProduction(Resources.ENERGY, 1);
     expect(card.canAct(player)).is.true;
 

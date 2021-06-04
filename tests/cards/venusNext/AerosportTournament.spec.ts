@@ -4,8 +4,8 @@ import {Celestic} from '../../../src/cards/venusNext/Celestic';
 import {Game} from '../../../src/Game';
 import {TestPlayers} from '../../TestPlayers';
 
-describe('AerosportTournament', function() {
-  it('Should play', function() {
+describe('AerosportTournament', function () {
+  it('Should play', function () {
     const card = new AerosportTournament();
     const corp = new Celestic();
     const player = TestPlayers.BLUE.newPlayer();

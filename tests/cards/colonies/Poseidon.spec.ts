@@ -7,8 +7,8 @@ import {TestPlayers} from '../../TestPlayers';
 
 // TODO: add a test for Posideon's initial action.
 
-describe('Poseidon', function() {
-  it('Should play', function() {
+describe('Poseidon', function () {
+  it('Should play', function () {
     const card = new Poseidon();
     const player = TestPlayers.BLUE.newPlayer();
     const player2 = TestPlayers.RED.newPlayer();

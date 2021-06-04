@@ -6,12 +6,16 @@ import {IoMiningIndustries} from '../../src/cards/base/IoMiningIndustries';
 import {TestPlayers} from '../TestPlayers';
 import {ICard} from '../../src/cards/ICard';
 
-describe('SelectCard', function() {
-  it('Throws error when selected card was not enabled', function() {
+describe('SelectCard', function () {
+  it('Throws error when selected card was not enabled', function () {
     const player = TestPlayers.BLUE.newPlayer();
     const cbArray: ICard[][] = [];
 
-    const cards = [new AquiferPumping(), new RoboticWorkforce(), new IoMiningIndustries()];
+    const cards = [
+      new AquiferPumping(),
+      new RoboticWorkforce(),
+      new IoMiningIndustries(),
+    ];
     const selectCards = new SelectCard(
       'Select card',
       'Save',
@@ -20,8 +24,10 @@ describe('SelectCard', function() {
         cbArray.push(_cards);
         return undefined;
       },
-      1, 1, false,
-      [true, false, true],
+      1,
+      1,
+      false,
+      [true, false, true]
     );
 
     player.runInput([[cards[0].name]], selectCards);
@@ -30,7 +36,9 @@ describe('SelectCard', function() {
     player.runInput([[cards[2].name]], selectCards);
     expect(cbArray).to.has.length(2);
 
-    expect(() => player.runInput([[cards[1].name]], selectCards)).to.throw(Error, /Selected unavailable card/);
+    expect(() => player.runInput([[cards[1].name]], selectCards)).to.throw(
+      Error,
+      /Selected unavailable card/
+    );
   });
 });
-

@@ -17,7 +17,8 @@ export class SocietySupport extends PreludeCard {
             pb.energy(1).heat(1);
           });
         }),
-        description: 'Increase your plant, energy and heat production 1 step. Decrease money production 1 step.',
+        description:
+          'Increase your plant, energy and heat production 1 step. Decrease money production 1 step.',
       },
     });
   }

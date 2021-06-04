@@ -44,4 +44,3 @@ describe('HeavyDutyRovers', () => {
     expect(player.getTerraformRating()).eq(15);
   });
 });
-

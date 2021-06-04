@@ -1,7 +1,10 @@
 import {COLONIES_CARD_MANIFEST} from './cards/colonies/ColoniesCardManifest';
 import {PRELUDE_CARD_MANIFEST} from './cards/prelude/PreludeCardManifest';
 import {PROMO_CARD_MANIFEST} from './cards/promo/PromoCardManifest';
-import {BASE_CARD_MANIFEST, CORP_ERA_CARD_MANIFEST} from './cards/StandardCardManifests';
+import {
+  BASE_CARD_MANIFEST,
+  CORP_ERA_CARD_MANIFEST,
+} from './cards/StandardCardManifests';
 import {TURMOIL_CARD_MANIFEST} from './cards/turmoil/TurmoilCardManifest';
 import {VENUS_CARD_MANIFEST} from './cards/venusNext/VenusCardManifest';
 import {COMMUNITY_CARD_MANIFEST} from './cards/community/CommunityCardManifest';
@@ -38,21 +41,28 @@ export class CardLoader {
     this.manifests = manifests.filter((a) => a[0]).map((a) => a[1]);
   }
 
-  private static include(gameOptions: GameOptions, cf: ICardFactory<ICard>): boolean {
+  private static include(
+    gameOptions: GameOptions,
+    cf: ICardFactory<ICard>
+  ): boolean {
     if (cf.compatibility === undefined) {
       return true;
     }
-    const expansions: Array<GameModule> = Array.isArray(cf.compatibility) ? cf.compatibility : [cf.compatibility];
+    const expansions: Array<GameModule> = Array.isArray(cf.compatibility)
+      ? cf.compatibility
+      : [cf.compatibility];
     return expansions.every((expansion) => {
       switch (expansion) {
-      case GameModule.Venus:
-        return gameOptions.venusNextExtension;
-      case GameModule.Colonies:
-        return gameOptions.coloniesExtension;
-      case GameModule.Turmoil:
-        return gameOptions.turmoilExtension;
-      default:
-        throw new Error(`Unhandled expansion type ${expansion} for card ${cf.cardName}`);
+        case GameModule.Venus:
+          return gameOptions.venusNextExtension;
+        case GameModule.Colonies:
+          return gameOptions.coloniesExtension;
+        case GameModule.Turmoil:
+          return gameOptions.turmoilExtension;
+        default:
+          throw new Error(
+            `Unhandled expansion type ${expansion} for card ${cf.cardName}`
+          );
       }
     });
   }
@@ -72,14 +82,17 @@ export class CardLoader {
     return this.getCards((manifest) => manifest.standardProjects);
   }
   public getCorporationCards() {
-    return this.getCards((manifest) => manifest.corporationCards)
-      .filter((card) => card.name !== CardName.BEGINNER_CORPORATION);
+    return this.getCards((manifest) => manifest.corporationCards).filter(
+      (card) => card.name !== CardName.BEGINNER_CORPORATION
+    );
   }
   public getPreludeCards() {
     return this.getCards((manifest) => manifest.preludeCards);
   }
 
-  private getCards<T extends ICard>(getDeck: (arg0: CardManifest) => Deck<T>) : Array<T> {
+  private getCards<T extends ICard>(
+    getDeck: (arg0: CardManifest) => Deck<T>
+  ): Array<T> {
     const cards: Array<T> = [];
     for (const manifest of this.manifests) {
       this.addDeck(cards, getDeck(manifest));

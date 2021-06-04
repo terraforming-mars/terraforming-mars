@@ -31,11 +31,9 @@ describe('HE3Lobbyists', () => {
     card.play(player);
     expect(player.getProduction(Resources.MEGACREDITS)).eq(1);
 
-
     player.setProductionForTest({megacredits: 0});
     player.tagsForTest = {moon: 7};
     card.play(player);
     expect(player.getProduction(Resources.MEGACREDITS)).eq(8);
   });
 });
-

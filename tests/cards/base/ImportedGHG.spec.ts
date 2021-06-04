@@ -4,8 +4,8 @@ import {Game} from '../../../src/Game';
 import {Resources} from '../../../src/Resources';
 import {TestPlayers} from '../../TestPlayers';
 
-describe('ImportedGHG', function() {
-  it('Should play', function() {
+describe('ImportedGHG', function () {
+  it('Should play', function () {
     const card = new ImportedGHG();
     const player = TestPlayers.BLUE.newPlayer();
     const redPlayer = TestPlayers.RED.newPlayer();

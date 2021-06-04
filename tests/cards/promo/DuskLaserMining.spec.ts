@@ -5,25 +5,26 @@ import {Player} from '../../../src/Player';
 import {Resources} from '../../../src/Resources';
 import {TestPlayers} from '../../TestPlayers';
 
-describe('DuskLaserMining', function() {
-  let card : DuskLaserMining; let player : Player;
+describe('DuskLaserMining', function () {
+  let card: DuskLaserMining;
+  let player: Player;
 
-  beforeEach(function() {
+  beforeEach(function () {
     card = new DuskLaserMining();
     player = TestPlayers.BLUE.newPlayer();
   });
 
-  it('Can\'t play if not enough science tags', function() {
+  it("Can't play if not enough science tags", function () {
     player.addProduction(Resources.ENERGY, 1);
     expect(card.canPlay(player)).is.not.true;
   });
 
-  it('Can\'t play if no energy production', function() {
+  it("Can't play if no energy production", function () {
     player.playedCards.push(new Research());
     expect(card.canPlay(player)).is.not.true;
   });
 
-  it('Should play', function() {
+  it('Should play', function () {
     player.playedCards.push(new Research());
     player.addProduction(Resources.ENERGY, 1);
     expect(card.canPlay(player)).is.true;

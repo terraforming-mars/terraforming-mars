@@ -46,4 +46,3 @@ describe('DeepLunarMining', () => {
     expect(moonData.miningRate).eq(1);
   });
 });
-

@@ -95,4 +95,3 @@ describe('LunaMiningHub', () => {
     expect(card.getVictoryPoints(player)).eq(6);
   });
 });
-

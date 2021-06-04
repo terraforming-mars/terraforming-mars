@@ -53,4 +53,3 @@ describe('DarksideMiningSyndicate', () => {
     expect(player.getTerraformRating()).eq(17);
   });
 });
-

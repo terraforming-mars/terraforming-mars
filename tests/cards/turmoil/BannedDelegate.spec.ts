@@ -9,10 +9,14 @@ import {Turmoil} from '../../../src/turmoil/Turmoil';
 import {TestingUtils} from '../../TestingUtils';
 import {TestPlayers} from '../../TestPlayers';
 
-describe('Banned Delegate', function() {
-  let card : BannedDelegate; let player : Player; let player2 : Player; let game : Game; let turmoil: Turmoil;
+describe('Banned Delegate', function () {
+  let card: BannedDelegate;
+  let player: Player;
+  let player2: Player;
+  let game: Game;
+  let turmoil: Turmoil;
 
-  beforeEach(function() {
+  beforeEach(function () {
     card = new BannedDelegate();
     player = TestPlayers.BLUE.newPlayer();
     player2 = TestPlayers.RED.newPlayer();
@@ -22,12 +26,12 @@ describe('Banned Delegate', function() {
     turmoil = game.turmoil!;
   });
 
-  it('Can\'t play', function() {
+  it("Can't play", function () {
     turmoil.chairman = player2.id;
     expect(card.canPlay(player)).is.not.true;
   });
 
-  it('Should play', function() {
+  it('Should play', function () {
     turmoil.chairman = player.id;
     expect(card.canPlay(player)).is.true;
 
@@ -43,7 +47,9 @@ describe('Banned Delegate', function() {
       selectDelegate.cb(result.players[0]);
     } else {
       const orOptions = result as OrOptions;
-      orOptions.options.forEach((option) => option.cb((option as SelectDelegate).players[0]));
+      orOptions.options.forEach((option) =>
+        option.cb((option as SelectDelegate).players[0])
+      );
     }
 
     expect(greens.delegates).has.lengthOf(initialDelegatesCount - 1);

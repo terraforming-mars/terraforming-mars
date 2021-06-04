@@ -21,9 +21,12 @@ export class Steelworks extends Card implements IProjectCard, IActionCard {
       metadata: {
         cardNumber: '103',
         renderData: CardRenderer.builder((b) => {
-          b.action('Spend 4 energy to gain 2 steel and increase oxygen 1 step.', (eb) => {
-            eb.energy(4).digit.startAction.steel(2).oxygen(1);
-          });
+          b.action(
+            'Spend 4 energy to gain 2 steel and increase oxygen 1 step.',
+            (eb) => {
+              eb.energy(4).digit.startAction.steel(2).oxygen(1);
+            }
+          );
         }),
       },
     });
@@ -32,7 +35,10 @@ export class Steelworks extends Card implements IProjectCard, IActionCard {
     const hasEnoughEnergy = player.energy >= 4;
     const oxygenMaxed = player.game.getOxygenLevel() === MAX_OXYGEN_LEVEL;
 
-    if (PartyHooks.shouldApplyPolicy(player.game, PartyName.REDS) && !oxygenMaxed) {
+    if (
+      PartyHooks.shouldApplyPolicy(player.game, PartyName.REDS) &&
+      !oxygenMaxed
+    ) {
       return player.canAfford(REDS_RULING_POLICY_COST) && hasEnoughEnergy;
     }
 

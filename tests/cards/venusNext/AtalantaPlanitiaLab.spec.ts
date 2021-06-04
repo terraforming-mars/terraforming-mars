@@ -3,8 +3,8 @@ import {AtalantaPlanitiaLab} from '../../../src/cards/venusNext/AtalantaPlanitia
 import {Game} from '../../../src/Game';
 import {TestPlayers} from '../../TestPlayers';
 
-describe('AtalantaPlanitiaLab', function() {
-  it('Should play', function() {
+describe('AtalantaPlanitiaLab', function () {
+  it('Should play', function () {
     const card = new AtalantaPlanitiaLab();
     const player = TestPlayers.BLUE.newPlayer();
     const redPlayer = TestPlayers.RED.newPlayer();

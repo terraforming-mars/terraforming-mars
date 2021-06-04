@@ -18,9 +18,11 @@ function getAllTranslations() {
 
       const files = fs.readdirSync(translationDir);
       files.forEach((file) => {
-        if ( file === undefined || ! file.endsWith('.json')) return;
+        if (file === undefined || !file.endsWith('.json')) return;
 
-        const dataJson = JSON.parse(fs.readFileSync(path.join(translationDir, file), 'utf8'));
+        const dataJson = JSON.parse(
+          fs.readFileSync(path.join(translationDir, file), 'utf8')
+        );
 
         for (const phrase in dataJson) {
           if (dataJson.hasOwnProperty(phrase)) {
@@ -40,10 +42,16 @@ function getAllTranslations() {
 function generateAppVersion() {
   // assumes SOURCE_VERSION is git hash
   if (process.env.SOURCE_VERSION) {
-    return process.env.SOURCE_VERSION.substring(0, 7) + ' ' + new Date().toUTCString().replace(/ \(.+\)/, '');
+    return (
+      process.env.SOURCE_VERSION.substring(0, 7) +
+      ' ' +
+      new Date().toUTCString().replace(/ \(.+\)/, '')
+    );
   }
   try {
-    return child_process.execSync(`git log -1 --pretty=format:"%h %cD"`).toString();
+    return child_process
+      .execSync(`git log -1 --pretty=format:"%h %cD"`)
+      .toString();
   } catch (error) {
     console.warn('unable to generate app version', error);
     return 'unknown version';
@@ -68,12 +76,16 @@ if (!fs.existsSync('src/genfiles')) {
   fs.mkdirSync('src/genfiles');
 }
 
-fs.writeFileSync('src/genfiles/settings.json', JSON.stringify({
-  version: generateAppVersion(),
-  waitingForTimeout: getWaitingForTimeout(),
-  logLength: getLogLength(),
-}));
+fs.writeFileSync(
+  'src/genfiles/settings.json',
+  JSON.stringify({
+    version: generateAppVersion(),
+    waitingForTimeout: getWaitingForTimeout(),
+    logLength: getLogLength(),
+  })
+);
 
-fs.writeFileSync('src/genfiles/translations.json', JSON.stringify(
-  getAllTranslations(),
-));
+fs.writeFileSync(
+  'src/genfiles/translations.json',
+  JSON.stringify(getAllTranslations())
+);

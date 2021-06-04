@@ -8,23 +8,29 @@ import {Game} from '../../../../src/Game';
 import {PoliticalAgendas} from '../../../../src/turmoil/PoliticalAgendas';
 import {Reds} from '../../../../src/turmoil/parties/Reds';
 
-describe('ConvertPlants', function() {
-  let card: ConvertPlants; let player: Player;
+describe('ConvertPlants', function () {
+  let card: ConvertPlants;
+  let player: Player;
 
-  beforeEach(function() {
+  beforeEach(function () {
     card = new ConvertPlants();
     player = TestPlayers.BLUE.newPlayer();
     const player2 = TestPlayers.RED.newPlayer();
-    Game.newInstance('foobar', [player, player2], player, TestingUtils.setCustomGameOptions());
+    Game.newInstance(
+      'foobar',
+      [player, player2],
+      player,
+      TestingUtils.setCustomGameOptions()
+    );
   });
 
-  it('Can not act without plants', function() {
+  it('Can not act without plants', function () {
     expect(card.canAct(player)).eq(false);
     player.plants = 7;
     expect(card.canAct(player)).eq(false);
   });
 
-  it('Can not act with reds', function() {
+  it('Can not act with reds', function () {
     player.plants = 8;
     player.game.phase = Phase.ACTION;
     player.game.turmoil!.rulingParty = new Reds();
@@ -32,7 +38,7 @@ describe('ConvertPlants', function() {
     expect(card.canAct(player)).eq(false);
   });
 
-  it('Should play', function() {
+  it('Should play', function () {
     player.plants = 8;
 
     expect(card.canAct(player)).eq(true);

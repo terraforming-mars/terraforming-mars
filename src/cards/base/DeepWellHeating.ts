@@ -22,7 +22,8 @@ export class DeepWellHeating extends Card implements IProjectCard {
 
       metadata: {
         cardNumber: '003',
-        description: 'Increase your Energy production 1 step. Increase temperature 1 step.',
+        description:
+          'Increase your Energy production 1 step. Increase temperature 1 step.',
         renderData: CardRenderer.builder((b) => {
           b.production((pb) => pb.energy(1)).temperature(1);
         }),
@@ -31,9 +32,16 @@ export class DeepWellHeating extends Card implements IProjectCard {
   }
 
   public canPlay(player: Player): boolean {
-    const temperatureMaxed = player.game.getVenusScaleLevel() === MAX_TEMPERATURE;
-    if (PartyHooks.shouldApplyPolicy(player.game, PartyName.REDS) && !temperatureMaxed) {
-      return player.canAfford(player.getCardCost(this) + REDS_RULING_POLICY_COST, {steel: true});
+    const temperatureMaxed =
+      player.game.getVenusScaleLevel() === MAX_TEMPERATURE;
+    if (
+      PartyHooks.shouldApplyPolicy(player.game, PartyName.REDS) &&
+      !temperatureMaxed
+    ) {
+      return player.canAfford(
+        player.getCardCost(this) + REDS_RULING_POLICY_COST,
+        {steel: true}
+      );
     }
 
     return true;

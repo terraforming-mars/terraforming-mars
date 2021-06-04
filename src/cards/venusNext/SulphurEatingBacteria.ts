@@ -12,7 +12,10 @@ import {CardRequirements} from '../CardRequirements';
 import {CardRenderer} from '../render/CardRenderer';
 import {Card} from '../Card';
 
-export class SulphurEatingBacteria extends Card implements IActionCard, IResourceCard {
+export class SulphurEatingBacteria
+  extends Card
+  implements IActionCard, IResourceCard
+{
   constructor() {
     super({
       name: CardName.SULPHUR_EATING_BACTERIA,
@@ -29,14 +32,17 @@ export class SulphurEatingBacteria extends Card implements IActionCard, IResourc
             eb.empty().startAction.microbes(1);
           }).br;
           b.or().br;
-          b.action('Spend any number of Microbes here to gain triple amount of MC.', (eb) => {
-            eb.text('x').microbes(1).startAction.megacredits(3).multiplier;
-          });
+          b.action(
+            'Spend any number of Microbes here to gain triple amount of MC.',
+            (eb) => {
+              eb.text('x').microbes(1).startAction.megacredits(3).multiplier;
+            }
+          );
         }),
         description: 'Requires Venus 6%',
       },
     });
-  };
+  }
   public resourceCount: number = 0;
 
   public play() {
@@ -48,11 +54,22 @@ export class SulphurEatingBacteria extends Card implements IActionCard, IResourc
   public action(player: Player) {
     const opts: Array<SelectOption | SelectAmount> = [];
 
-    const addResource = new SelectOption('Add 1 microbe to this card', 'Add microbe', () => {
-      player.addResourceTo(this, {log: true});
-      return undefined;
-    });
-    const spendResource = new SelectAmount('Remove any number of microbes to gain 3 M€ per microbe removed', 'Remove microbes', (amount: number) => this.spendResource(player, amount), 1, this.resourceCount, true);
+    const addResource = new SelectOption(
+      'Add 1 microbe to this card',
+      'Add microbe',
+      () => {
+        player.addResourceTo(this, {log: true});
+        return undefined;
+      }
+    );
+    const spendResource = new SelectAmount(
+      'Remove any number of microbes to gain 3 M€ per microbe removed',
+      'Remove microbes',
+      (amount: number) => this.spendResource(player, amount),
+      1,
+      this.resourceCount,
+      true
+    );
 
     opts.push(addResource);
 

@@ -12,7 +12,10 @@ import {Card} from '../Card';
 import {Size} from '../render/Size';
 import {CardRenderer} from '../render/CardRenderer';
 
-export class AtmoCollectors extends Card implements IProjectCard, IResourceCard {
+export class AtmoCollectors
+  extends Card
+  implements IProjectCard, IResourceCard
+{
   constructor() {
     super({
       cost: 15,
@@ -27,9 +30,18 @@ export class AtmoCollectors extends Card implements IProjectCard, IResourceCard 
           b.action('Add one floater here.', (eb) => {
             eb.empty().startAction.floaters(1).or(Size.SMALL);
           }).br;
-          b.action('Spend 1 floater here to gain 2 titanium, or 3 energy, or 4 heat.', (eb) => {
-            eb.floaters(1).startAction.titanium(2).digit.slash(Size.SMALL).energy(3).digit.slash(Size.SMALL).heat(4).digit;
-          }).br;
+          b.action(
+            'Spend 1 floater here to gain 2 titanium, or 3 energy, or 4 heat.',
+            (eb) => {
+              eb
+                .floaters(1)
+                .startAction.titanium(2)
+                .digit.slash(Size.SMALL)
+                .energy(3)
+                .digit.slash(Size.SMALL)
+                .heat(4).digit;
+            }
+          ).br;
           b.floaters(2).asterix();
         }),
       },
@@ -48,29 +60,43 @@ export class AtmoCollectors extends Card implements IProjectCard, IResourceCard 
       return undefined;
     }
     return new OrOptions(
-      new SelectOption('Remove 1 floater to gain 2 titanium', 'Remove floater', () => {
-        this.resourceCount--;
-        player.addResource(Resources.TITANIUM, 2, {log: true});
-        return undefined;
-      }),
-      new SelectOption('Remove 1 floater to gain 3 energy', 'Remove floater', () => {
-        this.resourceCount--;
-        player.addResource(Resources.ENERGY, 3, {log: true});
-        return undefined;
-      }),
-      new SelectOption('Remove 1 floater to gain 4 heat', 'Remove floater', () => {
-        this.resourceCount--;
-        player.addResource(Resources.HEAT, 4, {log: true});
-        return undefined;
-      }),
+      new SelectOption(
+        'Remove 1 floater to gain 2 titanium',
+        'Remove floater',
+        () => {
+          this.resourceCount--;
+          player.addResource(Resources.TITANIUM, 2, {log: true});
+          return undefined;
+        }
+      ),
+      new SelectOption(
+        'Remove 1 floater to gain 3 energy',
+        'Remove floater',
+        () => {
+          this.resourceCount--;
+          player.addResource(Resources.ENERGY, 3, {log: true});
+          return undefined;
+        }
+      ),
+      new SelectOption(
+        'Remove 1 floater to gain 4 heat',
+        'Remove floater',
+        () => {
+          this.resourceCount--;
+          player.addResource(Resources.HEAT, 4, {log: true});
+          return undefined;
+        }
+      ),
       new SelectOption('Add 1 floater to this card', 'Add floater', () => {
         player.addResourceTo(this, {log: true});
         return undefined;
-      }),
+      })
     );
   }
   public play(player: Player) {
-    player.game.defer(new AddResourcesToCard(player, ResourceType.FLOATER, {count: 2}));
+    player.game.defer(
+      new AddResourcesToCard(player, ResourceType.FLOATER, {count: 2})
+    );
     return undefined;
   }
 }

@@ -33,4 +33,3 @@ describe('RustEatingBacteria', () => {
     expect(player.steel).eq(0);
   });
 });
-

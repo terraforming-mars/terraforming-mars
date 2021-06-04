@@ -27,28 +27,45 @@ export class MiningGuild extends Card implements CorporationCard {
         description: 'You start with 30 M€, 5 steel and 1 steel production.',
         renderData: CardRenderer.builder((b) => {
           b.br.br;
-          b.megacredits(30).nbsp.steel(5).digit.nbsp.production((pb) => pb.steel(1));
+          b.megacredits(30)
+            .nbsp.steel(5)
+            .digit.nbsp.production((pb) => pb.steel(1));
           b.corpBox('effect', (ce) => {
-            ce.effect('Each time you get any steel or titanium as a placement bonus on the map, increase your steel production 1 step.', (eb) => {
-              eb.steel(1).asterix().slash().titanium(1).asterix();
-              eb.startEffect.production((pb) => pb.steel(1));
-            });
+            ce.effect(
+              'Each time you get any steel or titanium as a placement bonus on the map, increase your steel production 1 step.',
+              (eb) => {
+                eb.steel(1).asterix().slash().titanium(1).asterix();
+                eb.startEffect.production((pb) => pb.steel(1));
+              }
+            );
           });
         }),
       },
     });
   }
 
-  public onTilePlaced(cardOwner: Player, activePlayer: Player, space: ISpace, boardType: BoardType) {
+  public onTilePlaced(
+    cardOwner: Player,
+    activePlayer: Player,
+    space: ISpace,
+    boardType: BoardType
+  ) {
     // TODO(kberg): Clarify that this is nerfed for The Moon.
     // Nerfing on The Moon.
     if (boardType !== BoardType.MARS) {
       return;
     }
-    if (cardOwner.id !== activePlayer.id || cardOwner.game.phase === Phase.SOLAR) {
+    if (
+      cardOwner.id !== activePlayer.id ||
+      cardOwner.game.phase === Phase.SOLAR
+    ) {
       return;
     }
-    if (space.bonus.some((bonus) => bonus === SpaceBonus.STEEL || bonus === SpaceBonus.TITANIUM)) {
+    if (
+      space.bonus.some(
+        (bonus) => bonus === SpaceBonus.STEEL || bonus === SpaceBonus.TITANIUM
+      )
+    ) {
       cardOwner.game.defer(new GainProduction(cardOwner, Resources.STEEL));
     }
   }

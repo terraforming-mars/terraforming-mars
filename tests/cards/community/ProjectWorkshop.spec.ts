@@ -12,10 +12,13 @@ import {SelectOption} from '../../../src/inputs/SelectOption';
 import {Player} from '../../../src/Player';
 import {TestPlayers} from '../../TestPlayers';
 
-describe('ProjectWorkshop', function() {
-  let card : ProjectWorkshop; let player : Player; let game : Game; let advancedAlloys : AdvancedAlloys;
+describe('ProjectWorkshop', function () {
+  let card: ProjectWorkshop;
+  let player: Player;
+  let game: Game;
+  let advancedAlloys: AdvancedAlloys;
 
-  beforeEach(function() {
+  beforeEach(function () {
     card = new ProjectWorkshop();
     player = TestPlayers.BLUE.newPlayer();
     const redPlayer = TestPlayers.RED.newPlayer();
@@ -26,7 +29,7 @@ describe('ProjectWorkshop', function() {
     player.corporationCard = card;
   });
 
-  it('Starts with correct resources', function() {
+  it('Starts with correct resources', function () {
     expect(player.steel).to.eq(1);
     expect(player.titanium).to.eq(1);
 
@@ -35,12 +38,12 @@ describe('ProjectWorkshop', function() {
     expect(player.cardsInHand[0].cardType).to.eq(CardType.ACTIVE);
   });
 
-  it('Can\'t act', function() {
+  it("Can't act", function () {
     player.megaCredits = 2;
     expect(card.canAct(player)).is.not.true;
   });
 
-  it('Can spend 3 M€ to draw a blue card', function() {
+  it('Can spend 3 M€ to draw a blue card', function () {
     player.megaCredits = 3;
 
     expect(card.canAct(player)).is.true;
@@ -49,7 +52,7 @@ describe('ProjectWorkshop', function() {
     expect(player.cardsInHand[0].cardType).to.eq(CardType.ACTIVE);
   });
 
-  it('Can flip a played blue card and remove its ongoing effects', function() {
+  it('Can flip a played blue card and remove its ongoing effects', function () {
     player.playedCards.push(advancedAlloys);
     advancedAlloys.play(player);
     player.megaCredits = 0;
@@ -65,7 +68,7 @@ describe('ProjectWorkshop', function() {
     expect(player.getTitaniumValue()).to.eq(3);
   });
 
-  it('Converts VP to TR correctly', function() {
+  it('Converts VP to TR correctly', function () {
     const smallAnimals = new SmallAnimals();
     player.addResourceTo(smallAnimals, 5);
 
@@ -89,7 +92,7 @@ describe('ProjectWorkshop', function() {
     expect(player.cardsInHand).has.lengthOf(4);
   });
 
-  it('Can select option if able to do both actions', function() {
+  it('Can select option if able to do both actions', function () {
     player.playedCards.push(advancedAlloys);
     player.megaCredits = 3;
     const result = card.action(player);

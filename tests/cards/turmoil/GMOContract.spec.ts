@@ -5,8 +5,8 @@ import {PartyName} from '../../../src/turmoil/parties/PartyName';
 import {TestingUtils} from '../../TestingUtils';
 import {TestPlayers} from '../../TestPlayers';
 
-describe('GMOContract', function() {
-  it('Should play', function() {
+describe('GMOContract', function () {
+  it('Should play', function () {
     const card = new GMOContract();
     const player = TestPlayers.BLUE.newPlayer();
     const gameOptions = TestingUtils.setCustomGameOptions();

@@ -19,7 +19,7 @@ export interface GameModel {
   gameOptions: GameOptionsModel;
   generation: number;
   isSoloModeWin: boolean;
-  lastSoloGeneration: number,
+  lastSoloGeneration: number;
   milestones: Array<ClaimedMilestoneModel>;
   moon: MoonModel | undefined;
   oceans: number;

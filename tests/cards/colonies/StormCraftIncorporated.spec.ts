@@ -6,10 +6,11 @@ import {SelectAmount} from '../../../src/inputs/SelectAmount';
 import {Player} from '../../../src/Player';
 import {TestPlayers} from '../../TestPlayers';
 
-describe('StormCraftIncorporated', function() {
-  let card : StormCraftIncorporated; let player : Player;
+describe('StormCraftIncorporated', function () {
+  let card: StormCraftIncorporated;
+  let player: Player;
 
-  beforeEach(function() {
+  beforeEach(function () {
     card = new StormCraftIncorporated();
     player = TestPlayers.BLUE.newPlayer();
     const redPlayer = TestPlayers.RED.newPlayer();
@@ -18,7 +19,7 @@ describe('StormCraftIncorporated', function() {
     player.corporationCard = card;
   });
 
-  it('Should play', function() {
+  it('Should play', function () {
     const play = card.play();
     expect(play).is.undefined;
 
@@ -27,7 +28,7 @@ describe('StormCraftIncorporated', function() {
     expect(card.resourceCount).to.eq(1);
   });
 
-  it('Restricts amounts when converting heat', function() {
+  it('Restricts amounts when converting heat', function () {
     player.heat = 10;
     card.resourceCount = 10;
     const options = card.spendHeat(player, constants.HEAT_FOR_TEMPERATURE);
@@ -38,7 +39,7 @@ describe('StormCraftIncorporated', function() {
     expect(floaterOption.max).to.eq(constants.HEAT_FOR_TEMPERATURE / 2);
   });
 
-  it('Validates inputs', function() {
+  it('Validates inputs', function () {
     player.heat = 10;
     card.resourceCount = 10;
     const options = card.spendHeat(player, constants.HEAT_FOR_TEMPERATURE);
@@ -46,12 +47,12 @@ describe('StormCraftIncorporated', function() {
     const floaterOption = options.options[1] as SelectAmount;
     heatOption.cb(4);
     floaterOption.cb(0);
-    expect(function() {
+    expect(function () {
       options.cb();
     }).to.throw(`Need to pay ${constants.HEAT_FOR_TEMPERATURE} heat`);
   });
 
-  it('Converts heat with floaters and heat', function() {
+  it('Converts heat with floaters and heat', function () {
     player.heat = 10;
     card.resourceCount = 10;
     const options = card.spendHeat(player, constants.HEAT_FOR_TEMPERATURE);

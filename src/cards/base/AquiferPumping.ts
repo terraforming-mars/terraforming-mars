@@ -23,7 +23,10 @@ export class AquiferPumping extends Card implements IActionCard, IProjectCard {
       metadata: {
         cardNumber: '187',
         renderData: CardRenderer.builder((b) => {
-          b.action('Spend 8 M€ to place 1 ocean tile. STEEL MAY BE USED as if you were playing a Building card.', (eb) => eb.megacredits(8).steel(1).brackets.startAction.oceans(1));
+          b.action(
+            'Spend 8 M€ to place 1 ocean tile. STEEL MAY BE USED as if you were playing a Building card.',
+            (eb) => eb.megacredits(8).steel(1).brackets.startAction.oceans(1)
+          );
         }),
       },
     });
@@ -33,21 +36,30 @@ export class AquiferPumping extends Card implements IActionCard, IProjectCard {
     return undefined;
   }
   public canAct(player: Player): boolean {
-    const oceansMaxed = player.game.board.getOceansOnBoard() === MAX_OCEAN_TILES;
+    const oceansMaxed =
+      player.game.board.getOceansOnBoard() === MAX_OCEAN_TILES;
     const oceanCost = 8;
 
     if (oceansMaxed) return player.canAfford(oceanCost, {steel: true});
 
     if (PartyHooks.shouldApplyPolicy(player.game, PartyName.REDS)) {
-      return player.canAfford(oceanCost + REDS_RULING_POLICY_COST, {steel: true});
+      return player.canAfford(oceanCost + REDS_RULING_POLICY_COST, {
+        steel: true,
+      });
     }
 
     return player.canAfford(oceanCost, {steel: true});
   }
   public action(player: Player) {
-    player.game.defer(new SelectHowToPayDeferred(player, 8, {canUseSteel: true, title: 'Select how to pay for action', afterPay: () => {
-      player.game.defer(new PlaceOceanTile(player));
-    }}));
+    player.game.defer(
+      new SelectHowToPayDeferred(player, 8, {
+        canUseSteel: true,
+        title: 'Select how to pay for action',
+        afterPay: () => {
+          player.game.defer(new PlaceOceanTile(player));
+        },
+      })
+    );
     return undefined;
   }
 }

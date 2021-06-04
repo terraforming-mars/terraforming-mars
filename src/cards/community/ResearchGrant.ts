@@ -26,4 +26,3 @@ export class ResearchGrant extends PreludeCard implements IProjectCard {
     return undefined;
   }
 }
-

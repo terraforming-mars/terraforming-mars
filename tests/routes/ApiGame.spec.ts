@@ -14,7 +14,7 @@ describe('ApiGame', () => {
   let ctx: IContext;
 
   // Strictly speaking |parameters| can also accept a fragment.
-  const setRequest = function(parameters: string) {
+  const setRequest = function (parameters: string) {
     req.url = parameters;
     ctx.url = new URL('http://boo.com' + parameters);
   };
@@ -52,23 +52,44 @@ describe('ApiGame', () => {
     setRequest('/api/game?id=validId');
     ApiGame.INSTANCE.get(req, res.hide(), ctx);
     // This test is probably brittle.
-    expect(JSON.parse(res.content)).deep.eq(
-      {
-        'activePlayer': 'black',
-        'id': 'validId',
-        'lastSoloGeneration': 14,
-        'phase': 'research',
-        'players': [
-          {
-            'color': 'black',
-            'id': 'black-id',
-            'name': 'player-black',
-          },
-        ],
-        'gameOptions': {
-          'aresExtension': false, 'boardName': 'tharsis', 'cardsBlackList': [], 'coloniesExtension': false, 'communityCardsOption': false, 'corporateEra': true, 'draftVariant': false, 'fastModeOption': false, 'includeVenusMA': true, 'initialDraftVariant': false, 'moonExpansion': false, 'preludeExtension': false, 'promoCardsOption': false, 'politicalAgendasExtension': 'Standard', 'removeNegativeGlobalEvents': false, 'showOtherPlayersVP': false, 'showTimers': true, 'shuffleMapOption': false, 'solarPhaseOption': false, 'soloTR': false, 'randomMA': 'No randomization', 'turmoilExtension': false, 'venusNextExtension': false, 'requiresVenusTrackCompletion': false,
+    expect(JSON.parse(res.content)).deep.eq({
+      'activePlayer': 'black',
+      'id': 'validId',
+      'lastSoloGeneration': 14,
+      'phase': 'research',
+      'players': [
+        {
+          'color': 'black',
+          'id': 'black-id',
+          'name': 'player-black',
         },
+      ],
+      'gameOptions': {
+        'aresExtension': false,
+        'boardName': 'tharsis',
+        'cardsBlackList': [],
+        'coloniesExtension': false,
+        'communityCardsOption': false,
+        'corporateEra': true,
+        'draftVariant': false,
+        'fastModeOption': false,
+        'includeVenusMA': true,
+        'initialDraftVariant': false,
+        'moonExpansion': false,
+        'preludeExtension': false,
+        'promoCardsOption': false,
+        'politicalAgendasExtension': 'Standard',
+        'removeNegativeGlobalEvents': false,
+        'showOtherPlayersVP': false,
+        'showTimers': true,
+        'shuffleMapOption': false,
+        'solarPhaseOption': false,
+        'soloTR': false,
+        'randomMA': 'No randomization',
+        'turmoilExtension': false,
+        'venusNextExtension': false,
+        'requiresVenusTrackCompletion': false,
       },
-    );
+    });
   });
 });

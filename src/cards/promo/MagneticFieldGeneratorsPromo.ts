@@ -30,18 +30,29 @@ export class MagneticFieldGeneratorsPromo extends Card implements IProjectCard {
             pb.minus().energy(4).digit.br;
             pb.plus().plants(2);
           }).br;
-          b.tr(3).digit.tile(TileType.MAGNETIC_FIELD_GENERATORS, true).asterix();
+          b.tr(3)
+            .digit.tile(TileType.MAGNETIC_FIELD_GENERATORS, true)
+            .asterix();
         }),
-        description: 'Decrease your Energy production 4 steps and increase your Plant production 2 steps. Raise your TR 3 steps.',
+        description:
+          'Decrease your Energy production 4 steps and increase your Plant production 2 steps. Raise your TR 3 steps.',
       },
     });
   }
   public canPlay(player: Player): boolean {
     const meetsEnergyRequirements = player.getProduction(Resources.ENERGY) >= 4;
-    const canPlaceTile = player.game.board.getAvailableSpacesOnLand(player).length > 0;
+    const canPlaceTile =
+      player.game.board.getAvailableSpacesOnLand(player).length > 0;
 
     if (PartyHooks.shouldApplyPolicy(player.game, PartyName.REDS)) {
-      return player.canAfford(player.getCardCost(this) + REDS_RULING_POLICY_COST * 3, {steel: true}) && meetsEnergyRequirements && canPlaceTile;
+      return (
+        player.canAfford(
+          player.getCardCost(this) + REDS_RULING_POLICY_COST * 3,
+          {steel: true}
+        ) &&
+        meetsEnergyRequirements &&
+        canPlaceTile
+      );
     }
 
     return meetsEnergyRequirements && canPlaceTile;
@@ -54,9 +65,15 @@ export class MagneticFieldGeneratorsPromo extends Card implements IProjectCard {
     const availableSpaces = player.game.board.getAvailableSpacesOnLand(player);
     if (availableSpaces.length < 1) return undefined;
 
-    return new SelectSpace('Select space for tile', availableSpaces, (foundSpace: ISpace) => {
-      player.game.addTile(player, foundSpace.spaceType, foundSpace, {tileType: TileType.MAGNETIC_FIELD_GENERATORS});
-      return undefined;
-    });
+    return new SelectSpace(
+      'Select space for tile',
+      availableSpaces,
+      (foundSpace: ISpace) => {
+        player.game.addTile(player, foundSpace.spaceType, foundSpace, {
+          tileType: TileType.MAGNETIC_FIELD_GENERATORS,
+        });
+        return undefined;
+      }
+    );
   }
 }

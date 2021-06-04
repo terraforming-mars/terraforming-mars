@@ -7,7 +7,9 @@ import {TestPlayer} from '../../TestPlayer';
 import {TestPlayers} from '../../TestPlayers';
 
 describe('ElectroCatapult', () => {
-  let card : ElectroCatapult; let player : TestPlayer; let game : Game;
+  let card: ElectroCatapult;
+  let player: TestPlayer;
+  let game: Game;
 
   beforeEach(() => {
     card = new ElectroCatapult();
@@ -37,7 +39,10 @@ describe('ElectroCatapult', () => {
     card.play(player);
 
     expect(player.getProduction(Resources.ENERGY)).to.eq(0);
-    player.victoryPointsBreakdown.setVictoryPoints('victoryPoints', card.getVictoryPoints());
+    player.victoryPointsBreakdown.setVictoryPoints(
+      'victoryPoints',
+      card.getVictoryPoints()
+    );
     expect(player.victoryPointsBreakdown.victoryPoints).to.eq(1);
   });
   it('Should act', () => {
@@ -48,12 +53,12 @@ describe('ElectroCatapult', () => {
     expect(action instanceof OrOptions).is.true;
     expect(action!.options).has.lengthOf(2);
 
-        action!.options[0].cb();
-        expect(player.plants).to.eq(0);
-        expect(player.megaCredits).to.eq(7);
+    action!.options[0].cb();
+    expect(player.plants).to.eq(0);
+    expect(player.megaCredits).to.eq(7);
 
-        action!.options[1].cb();
-        expect(player.steel).to.eq(0);
-        expect(player.megaCredits).to.eq(14);
+    action!.options[1].cb();
+    expect(player.steel).to.eq(0);
+    expect(player.megaCredits).to.eq(14);
   });
 });

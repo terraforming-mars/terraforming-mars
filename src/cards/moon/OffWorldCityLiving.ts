@@ -19,20 +19,26 @@ export class OffWorldCityLiving extends Card implements IProjectCard {
 
       metadata: {
         // Check the card for a clever icon.
-        description: 'Increase your M€ production 1 step per city tile NOT ON MARS. Increase Colony Rate 1 step.',
+        description:
+          'Increase your M€ production 1 step per city tile NOT ON MARS. Increase Colony Rate 1 step.',
         cardNumber: 'M53',
         renderData: CardRenderer.builder((b) => {
-          b.production((pb) => pb.megacredits(1)).slash().city().any.secondaryTag(Tags.SPACE).br;
+          b
+            .production((pb) => pb.megacredits(1))
+            .slash()
+            .city()
+            .any.secondaryTag(Tags.SPACE).br;
           b.moonColonyRate().br;
           b.vpText('1 VP for each 3 city tiles in play.');
         }),
         victoryPoints: CardRenderDynamicVictoryPoints.cities(1, 3, true),
       },
     });
-  };
+  }
 
   public play(player: Player) {
-    const amount = player.game.getCitiesInPlay() - player.game.getCitiesInPlayOnMars();
+    const amount =
+      player.game.getCitiesInPlay() - player.game.getCitiesInPlayOnMars();
     player.addProduction(Resources.MEGACREDITS, amount, {log: true});
     MoonExpansion.raiseColonyRate(player);
     return undefined;

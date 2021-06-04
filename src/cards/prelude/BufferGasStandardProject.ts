@@ -14,9 +14,12 @@ export class BufferGasStandardProject extends StandardProjectCard {
       metadata: {
         cardNumber: 'SP3',
         renderData: CardRenderer.builder((b) =>
-          b.standardProject('Spend 16 M€ to increase your TR 1 step. Solo games only.', (eb) => {
-            eb.megacredits(16).startAction.tr(1);
-          }),
+          b.standardProject(
+            'Spend 16 M€ to increase your TR 1 step. Solo games only.',
+            (eb) => {
+              eb.megacredits(16).startAction.tr(1);
+            }
+          )
         ),
       },
     });
@@ -24,7 +27,8 @@ export class BufferGasStandardProject extends StandardProjectCard {
 
   public canAct(player: Player): boolean {
     let cost = this.cost;
-    if (PartyHooks.shouldApplyPolicy(player.game, PartyName.REDS)) cost += REDS_RULING_POLICY_COST;
+    if (PartyHooks.shouldApplyPolicy(player.game, PartyName.REDS))
+      cost += REDS_RULING_POLICY_COST;
 
     return player.canAfford(cost);
   }

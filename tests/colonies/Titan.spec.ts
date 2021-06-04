@@ -7,10 +7,14 @@ import {Game} from '../../src/Game';
 import {Player} from '../../src/Player';
 import {TestPlayers} from '../TestPlayers';
 
-describe('Titan', function() {
-  let titan: Titan; let aerialMappers: AerialMappers; let player: Player; let player2: Player; let game: Game;
+describe('Titan', function () {
+  let titan: Titan;
+  let aerialMappers: AerialMappers;
+  let player: Player;
+  let player2: Player;
+  let game: Game;
 
-  beforeEach(function() {
+  beforeEach(function () {
     titan = new Titan();
     aerialMappers = new AerialMappers();
     player = TestPlayers.BLUE.newPlayer();
@@ -20,13 +24,13 @@ describe('Titan', function() {
     game.colonies.push(titan);
   });
 
-  it('Should activate', function() {
+  it('Should activate', function () {
     expect(titan.isActive).is.false;
     player.playCard(aerialMappers);
     expect(titan.isActive).is.true;
   });
 
-  it('Should build', function() {
+  it('Should build', function () {
     player.playCard(aerialMappers);
     titan.addColony(player);
 
@@ -40,7 +44,7 @@ describe('Titan', function() {
     expect(aerialMappers.resourceCount).to.eq(3);
   });
 
-  it('Should trade', function() {
+  it('Should trade', function () {
     player.playCard(aerialMappers);
     titan.trade(player);
 
@@ -57,7 +61,7 @@ describe('Titan', function() {
     expect(aerialMappers.resourceCount).to.eq(1);
   });
 
-  it('Should give trade bonus', function() {
+  it('Should give trade bonus', function () {
     const dirigibles = new Dirigibles();
     player.playCard(aerialMappers);
     player2.playCard(dirigibles);

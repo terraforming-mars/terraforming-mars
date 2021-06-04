@@ -57,7 +57,9 @@ export function getTurmoil(game: Game): TurmoilModel | undefined {
   if (game.gameOptions.turmoilExtension && game.turmoil) {
     const parties = getParties(game);
     const turmoil = game.turmoil;
-    let chairman; let dominant; let ruling;
+    let chairman;
+    let dominant;
+    let ruling;
 
     if (turmoil.chairman) {
       if (turmoil.chairman === 'NEUTRAL') {
@@ -75,7 +77,7 @@ export function getTurmoil(game: Game): TurmoilModel | undefined {
 
     const lobby = Array.from(
       turmoil.lobby,
-      (player) => game.getPlayerById(player).color,
+      (player) => game.getPlayerById(player).color
     );
 
     const reserve = turmoil.getPresentPlayers().map((player) => {
@@ -103,15 +105,13 @@ export function getTurmoil(game: Game): TurmoilModel | undefined {
       kelvinists: PoliticalAgendas.getAgenda(turmoil, PartyName.KELVINISTS),
     };
 
-    const policyActionUsers = Array.from(
-      game.getPlayers(),
-      (player) => {
-        return {
-          color: player.color,
-          turmoilPolicyActionUsed: player.turmoilPolicyActionUsed,
-          politicalAgendasActionUsedCount: player.politicalAgendasActionUsedCount} as PolicyUser;
-      },
-    );
+    const policyActionUsers = Array.from(game.getPlayers(), (player) => {
+      return {
+        color: player.color,
+        turmoilPolicyActionUsed: player.turmoilPolicyActionUsed,
+        politicalAgendasActionUsedCount: player.politicalAgendasActionUsedCount,
+      } as PolicyUser;
+    });
 
     return {
       chairman,
@@ -131,7 +131,9 @@ export function getTurmoil(game: Game): TurmoilModel | undefined {
   }
 }
 
-function globalEventToModel(globalEvent: IGlobalEvent | undefined): GlobalEventModel | undefined {
+function globalEventToModel(
+  globalEvent: IGlobalEvent | undefined
+): GlobalEventModel | undefined {
   if (globalEvent === undefined) {
     return undefined;
   }
@@ -145,7 +147,7 @@ function globalEventToModel(globalEvent: IGlobalEvent | undefined): GlobalEventM
 
 function getParties(game: Game): Array<PartyModel> {
   if (game.gameOptions.turmoilExtension && game.turmoil) {
-    return game.turmoil.parties.map(function(party) {
+    return game.turmoil.parties.map(function (party) {
       const delegates: Array<DelegatesModel> = [];
       party.getPresentPlayers().forEach((player) => {
         const number = party.getDelegates(player);

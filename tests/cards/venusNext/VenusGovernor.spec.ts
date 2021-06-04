@@ -3,8 +3,8 @@ import {VenusGovernor} from '../../../src/cards/venusNext/VenusGovernor';
 import {Resources} from '../../../src/Resources';
 import {TestPlayers} from '../../TestPlayers';
 
-describe('VenusGovernor', function() {
-  it('Should play', function() {
+describe('VenusGovernor', function () {
+  it('Should play', function () {
     const card = new VenusGovernor();
     const player = TestPlayers.BLUE.newPlayer();
     expect(card.canPlay(player)).is.not.true;

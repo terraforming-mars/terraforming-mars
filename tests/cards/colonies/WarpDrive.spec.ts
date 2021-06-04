@@ -4,8 +4,8 @@ import {WarpDrive} from '../../../src/cards/colonies/WarpDrive';
 import {Game} from '../../../src/Game';
 import {TestPlayers} from '../../TestPlayers';
 
-describe('WarpDrive', function() {
-  it('Should play', function() {
+describe('WarpDrive', function () {
+  it('Should play', function () {
     const card = new WarpDrive();
     const player = TestPlayers.BLUE.newPlayer();
     const player2 = TestPlayers.RED.newPlayer();
@@ -16,4 +16,3 @@ describe('WarpDrive', function() {
     expect(card.getCardDiscount(player, new TollStation())).to.eq(4);
   });
 });
-

@@ -21,9 +21,12 @@ export class Shuttles extends Card implements IProjectCard {
       metadata: {
         cardNumber: '166',
         renderData: CardRenderer.builder((b) => {
-          b.effect('When you play a Space card, you pay 2 M€ less for it.', (eb) => {
-            eb.space().played.startEffect.megacredits(-2);
-          }).br;
+          b.effect(
+            'When you play a Space card, you pay 2 M€ less for it.',
+            (eb) => {
+              eb.space().played.startEffect.megacredits(-2);
+            }
+          ).br;
           b.production((pb) => {
             pb.minus().energy(1).nbsp;
             pb.plus().megacredits(2);
@@ -40,7 +43,6 @@ export class Shuttles extends Card implements IProjectCard {
   public canPlay(player: Player): boolean {
     return super.canPlay(player) && player.getProduction(Resources.ENERGY) >= 1;
   }
-
 
   public getCardDiscount(_player: Player, card: IProjectCard) {
     if (card.tags.includes(Tags.SPACE)) {

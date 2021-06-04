@@ -5,21 +5,23 @@ import {Player} from '../../../src/Player';
 import {Resources} from '../../../src/Resources';
 import {TestPlayers} from '../../TestPlayers';
 
-describe('GalileanMining', function() {
-  let card : GalileanMining; let player : Player; let game : Game;
+describe('GalileanMining', function () {
+  let card: GalileanMining;
+  let player: Player;
+  let game: Game;
 
-  beforeEach(function() {
+  beforeEach(function () {
     card = new GalileanMining();
     player = TestPlayers.BLUE.newPlayer();
     game = Game.newInstance('foobar', [player], player);
   });
 
-  it('Can\'t play', function() {
+  it("Can't play", function () {
     player.megaCredits = 4;
     expect(card.canPlay(player)).is.not.true;
   });
 
-  it('Should play', function() {
+  it('Should play', function () {
     player.megaCredits = 5;
     expect(card.canPlay(player)).is.true;
 

@@ -25,7 +25,8 @@ export class FueledGenerators extends Card implements IProjectCard {
             pb.plus().energy(1);
           });
         }),
-        description: 'Decrease your M€ production 1 step and increase your Energy production 1 steps.',
+        description:
+          'Decrease your M€ production 1 step and increase your Energy production 1 steps.',
       },
     });
   }

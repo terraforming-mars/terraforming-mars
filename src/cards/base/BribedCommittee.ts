@@ -27,7 +27,9 @@ export class BribedCommittee extends Card implements IProjectCard {
   }
   public canPlay(player: Player): boolean {
     if (PartyHooks.shouldApplyPolicy(player.game, PartyName.REDS)) {
-      return player.canAfford(player.getCardCost(this) + REDS_RULING_POLICY_COST * 2);
+      return player.canAfford(
+        player.getCardCost(this) + REDS_RULING_POLICY_COST * 2
+      );
     }
 
     return true;

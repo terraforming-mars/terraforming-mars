@@ -6,22 +6,23 @@ import {Player} from '../../../src/Player';
 import {Resources} from '../../../src/Resources';
 import {TestPlayers} from '../../TestPlayers';
 
-describe('RobinsonIndustries', function() {
-  let card : RobinsonIndustries; let player : Player;
+describe('RobinsonIndustries', function () {
+  let card: RobinsonIndustries;
+  let player: Player;
 
-  beforeEach(function() {
+  beforeEach(function () {
     card = new RobinsonIndustries();
     player = TestPlayers.BLUE.newPlayer();
     Game.newInstance('foobar', [player], player);
     player.corporationCard = card;
   });
 
-  it('Can\'t act', function() {
+  it("Can't act", function () {
     player.megaCredits = 3;
     expect(card.canAct(player)).is.not.true;
   });
 
-  it('Can act', function() {
+  it('Can act', function () {
     player.megaCredits = 4;
     expect(card.canAct(player)).is.true;
 
@@ -33,7 +34,7 @@ describe('RobinsonIndustries', function() {
     expect(player.megaCredits).to.eq(0);
   });
 
-  it('Only allows to choose from lowest production(s)', function() {
+  it('Only allows to choose from lowest production(s)', function () {
     player.addProduction(Resources.MEGACREDITS, -1);
     let result = card.action(player) as OrOptions;
     expect(result.options).has.lengthOf(1);

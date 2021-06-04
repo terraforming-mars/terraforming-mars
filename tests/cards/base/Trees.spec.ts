@@ -5,21 +5,23 @@ import {TestPlayer} from '../../TestPlayer';
 import {Resources} from '../../../src/Resources';
 import {TestPlayers} from '../../TestPlayers';
 
-describe('Trees', function() {
-  let card : Trees; let player : TestPlayer; let game : Game;
+describe('Trees', function () {
+  let card: Trees;
+  let player: TestPlayer;
+  let game: Game;
 
-  beforeEach(function() {
+  beforeEach(function () {
     card = new Trees();
     player = TestPlayers.BLUE.newPlayer();
     const redPlayer = TestPlayers.RED.newPlayer();
     game = Game.newInstance('foobar', [player, redPlayer], player);
   });
 
-  it('Can\'t play', function() {
+  it("Can't play", function () {
     expect(card.canPlay(player)).is.not.true;
   });
 
-  it('Should play', function() {
+  it('Should play', function () {
     (game as any).temperature = -4;
     expect(card.canPlay(player)).is.true;
 
@@ -27,7 +29,10 @@ describe('Trees', function() {
     expect(player.getProduction(Resources.PLANTS)).to.eq(3);
     expect(player.plants).to.eq(1);
 
-    player.victoryPointsBreakdown.setVictoryPoints('victoryPoints', card.getVictoryPoints());
+    player.victoryPointsBreakdown.setVictoryPoints(
+      'victoryPoints',
+      card.getVictoryPoints()
+    );
     expect(player.victoryPointsBreakdown.victoryPoints).to.eq(1);
   });
 });

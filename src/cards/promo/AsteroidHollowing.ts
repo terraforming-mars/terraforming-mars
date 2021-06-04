@@ -10,7 +10,10 @@ import {Resources} from '../../Resources';
 import {CardRenderer} from '../render/CardRenderer';
 import {CardRenderDynamicVictoryPoints} from '../render/CardRenderDynamicVictoryPoints';
 
-export class AsteroidHollowing extends Card implements IActionCard, IProjectCard, IResourceCard {
+export class AsteroidHollowing
+  extends Card
+  implements IActionCard, IProjectCard, IResourceCard
+{
   constructor() {
     super({
       cardType: CardType.ACTIVE,
@@ -22,9 +25,14 @@ export class AsteroidHollowing extends Card implements IActionCard, IProjectCard
       metadata: {
         cardNumber: 'X15',
         renderData: CardRenderer.builder((b) => {
-          b.action('Spend 1 titanium to add 1 asteroid resource here and increase M€ production 1 step.', (eb) => {
-            eb.titanium(1).startAction.asteroids(1).production((pb) => pb.megacredits(1));
-          }).br;
+          b.action(
+            'Spend 1 titanium to add 1 asteroid resource here and increase M€ production 1 step.',
+            (eb) => {
+              eb.titanium(1)
+                .startAction.asteroids(1)
+                .production((pb) => pb.megacredits(1));
+            }
+          ).br;
           b.vpText('1VP for each 2 asteroids on this card.');
         }),
         victoryPoints: CardRenderDynamicVictoryPoints.asteroids(1, 2),

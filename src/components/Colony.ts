@@ -9,7 +9,7 @@ export const Colony = Vue.component('colony', {
       type: Object as () => ColonyModel,
     },
   },
-  data: function() {
+  data: function () {
     return {
       PLUTO: ColonyName.PLUTO,
       GANYMEDE: ColonyName.GANYMEDE,
@@ -22,31 +22,28 @@ export const Colony = Vue.component('colony', {
     getColonyXPosition: (index: number): number => {
       return index * 56 + 16;
     },
-    getCubeYPosition: (
-      colony: ColonyModel,
-      isColonyCube = false,
-    ): number => {
+    getCubeYPosition: (colony: ColonyModel, isColonyCube = false): number => {
       const offset = isColonyCube ? 7 : 0;
       switch (colony.name) {
-      case ColonyName.IAPETUS:
-      case ColonyName.LEAVITT:
-        return 181 + offset;
-      case ColonyName.VENUS:
-        return 186 + offset;
-      case ColonyName.PALLAS:
-        return 168 + offset;
-      case ColonyName.MERCURY:
-      case ColonyName.HYGIEA:
-        return 144 + offset;
-      case ColonyName.EUROPA:
-      case ColonyName.MIRANDA:
-        return 166 + offset;
-      case ColonyName.PLUTO:
-        return 165 + offset;
-      case ColonyName.LUNA:
-        return 163 + offset;
-      default:
-        return 164 + offset;
+        case ColonyName.IAPETUS:
+        case ColonyName.LEAVITT:
+          return 181 + offset;
+        case ColonyName.VENUS:
+          return 186 + offset;
+        case ColonyName.PALLAS:
+          return 168 + offset;
+        case ColonyName.MERCURY:
+        case ColonyName.HYGIEA:
+          return 144 + offset;
+        case ColonyName.EUROPA:
+        case ColonyName.MIRANDA:
+          return 166 + offset;
+        case ColonyName.PLUTO:
+          return 165 + offset;
+        case ColonyName.LUNA:
+          return 163 + offset;
+        default:
+          return 164 + offset;
       }
     },
     getGanymede: (): string => {
@@ -83,7 +80,11 @@ export const Colony = Vue.component('colony', {
       return ColonyName.CALLISTO;
     },
     getColonyContentOffset: (colony: ColonyModel): number => {
-      if (colony.name === ColonyName.PLUTO || colony.name === ColonyName.MIRANDA) return -12;
+      if (
+        colony.name === ColonyName.PLUTO ||
+        colony.name === ColonyName.MIRANDA
+      )
+        return -12;
       return 0;
     },
     getIapetus: (): string => {

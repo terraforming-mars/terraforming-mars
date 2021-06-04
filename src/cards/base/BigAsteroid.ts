@@ -19,7 +19,8 @@ export class BigAsteroid extends Card implements IProjectCard {
       cost: 27,
 
       metadata: {
-        description: 'Raise temperature 2 steps and gain 4 titanium. Remove up to 4 Plants from any player.',
+        description:
+          'Raise temperature 2 steps and gain 4 titanium. Remove up to 4 Plants from any player.',
         cardNumber: '011',
         renderData: CardRenderer.builder((b) => {
           b.temperature(2).br;
@@ -31,11 +32,15 @@ export class BigAsteroid extends Card implements IProjectCard {
   }
 
   public canPlay(player: Player): boolean {
-    const remainingTemperatureSteps = (MAX_TEMPERATURE - player.game.getTemperature()) / 2;
+    const remainingTemperatureSteps =
+      (MAX_TEMPERATURE - player.game.getTemperature()) / 2;
     const stepsRaised = Math.min(remainingTemperatureSteps, 2);
 
     if (PartyHooks.shouldApplyPolicy(player.game, PartyName.REDS)) {
-      return player.canAfford(player.getCardCost(this) + REDS_RULING_POLICY_COST * stepsRaised, {titanium: true});
+      return player.canAfford(
+        player.getCardCost(this) + REDS_RULING_POLICY_COST * stepsRaised,
+        {titanium: true}
+      );
     }
 
     return true;

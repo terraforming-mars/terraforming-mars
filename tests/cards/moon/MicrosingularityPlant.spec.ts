@@ -46,4 +46,3 @@ describe('MicrosingularityPlant', () => {
     expect(player.getProduction(Resources.ENERGY)).eq(2);
   });
 });
-

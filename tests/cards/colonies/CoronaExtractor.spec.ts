@@ -3,8 +3,8 @@ import {CoronaExtractor} from '../../../src/cards/colonies/CoronaExtractor';
 import {Resources} from '../../../src/Resources';
 import {TestPlayers} from '../../TestPlayers';
 
-describe('CoronaExtractor', function() {
-  it('Should play', function() {
+describe('CoronaExtractor', function () {
+  it('Should play', function () {
     const card = new CoronaExtractor();
     const player = TestPlayers.BLUE.newPlayer();
     expect(card.canPlay(player)).is.not.true;

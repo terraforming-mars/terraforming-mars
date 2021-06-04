@@ -11,10 +11,15 @@ import {Turmoil} from '../../../src/turmoil/Turmoil';
 import {TestingUtils} from '../../TestingUtils';
 import {TestPlayers} from '../../TestPlayers';
 
-describe('DiasporaMovement', function() {
-  let card : DiasporaMovement; let player : Player; let player2 : Player; let game : Game; let turmoil: Turmoil; let reds: IParty;
+describe('DiasporaMovement', function () {
+  let card: DiasporaMovement;
+  let player: Player;
+  let player2: Player;
+  let game: Game;
+  let turmoil: Turmoil;
+  let reds: IParty;
 
-  beforeEach(function() {
+  beforeEach(function () {
     card = new DiasporaMovement();
     player = TestPlayers.BLUE.newPlayer();
     player2 = TestPlayers.RED.newPlayer();
@@ -25,12 +30,12 @@ describe('DiasporaMovement', function() {
     reds = turmoil.getPartyByName(PartyName.REDS)!;
   });
 
-  it('Can\'t play', function() {
+  it("Can't play", function () {
     reds.sendDelegate(player.id, game);
     expect(card.canPlay(player)).is.not.true;
   });
 
-  it('Should play', function() {
+  it('Should play', function () {
     reds.sendDelegate(player.id, game);
     reds.sendDelegate(player.id, game);
     expect(card.canPlay(player)).is.true;

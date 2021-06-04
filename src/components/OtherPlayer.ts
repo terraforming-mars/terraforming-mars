@@ -22,13 +22,16 @@ export const OtherPlayer = Vue.component('other-player', {
   },
   mixins: [PlayerMixin],
   methods: {
-    hideMe: function() {
-      hidePlayerData(this.$root as unknown as typeof mainAppSettings.methods, this.playerIndex);
-    },
-    isVisible: function() {
-      return (this.$root as unknown as typeof mainAppSettings.methods).getVisibilityState(
-        'pinned_player_' + this.playerIndex,
+    hideMe: function () {
+      hidePlayerData(
+        this.$root as unknown as typeof mainAppSettings.methods,
+        this.playerIndex
       );
+    },
+    isVisible: function () {
+      return (
+        this.$root as unknown as typeof mainAppSettings.methods
+      ).getVisibilityState('pinned_player_' + this.playerIndex);
     },
   },
   template: `<div>

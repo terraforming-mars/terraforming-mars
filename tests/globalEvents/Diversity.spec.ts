@@ -9,8 +9,8 @@ import {Kelvinists} from '../../src/turmoil/parties/Kelvinists';
 import {Turmoil} from '../../src/turmoil/Turmoil';
 import {TestPlayers} from '../TestPlayers';
 
-describe('Diversity', function() {
-  it('resolve play', function() {
+describe('Diversity', function () {
+  it('resolve play', function () {
     const card = new Diversity();
     const player = TestPlayers.BLUE.newPlayer();
     const player2 = TestPlayers.RED.newPlayer();

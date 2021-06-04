@@ -38,13 +38,11 @@ describe('ThoriumRush', () => {
     card.play(player);
 
     game.deferredActions.pop()?.execute()?.cb(moonData.moon.getSpace('m02')),
-    game.deferredActions.pop()?.execute()?.cb(moonData.moon.getSpace('m03')),
-    game.deferredActions.pop()?.execute()?.cb(moonData.moon.getSpace('m04')),
-
-    expect(moonData.colonyRate).eq(1);
+      game.deferredActions.pop()?.execute()?.cb(moonData.moon.getSpace('m03')),
+      game.deferredActions.pop()?.execute()?.cb(moonData.moon.getSpace('m04')),
+      expect(moonData.colonyRate).eq(1);
     expect(moonData.colonyRate).eq(1);
     expect(moonData.colonyRate).eq(1);
     expect(player.getTerraformRating()).eq(17);
   });
 });
-

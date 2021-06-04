@@ -35,7 +35,10 @@ describe('CrescentResearchAssociation', () => {
 
     player.tagsForTest = {moon: 0};
     player.megaCredits = 14;
-    expect(player.getPlayableCards()).has.members([mareNectarisMine, predators]);
+    expect(player.getPlayableCards()).has.members([
+      mareNectarisMine,
+      predators,
+    ]);
 
     player.tagsForTest = {moon: 0};
     player.megaCredits = 13;
@@ -77,4 +80,3 @@ describe('CrescentResearchAssociation', () => {
     expect(card.getVictoryPoints(player)).eq(2);
   });
 });
-

@@ -6,18 +6,21 @@ import {ResourceType} from '../ResourceType';
 export const PaymentWidgetMixin = {
   'name': 'PaymentWidgetMixin',
   'methods': {
-    getMegaCreditsMax: function(): number {
-      return Math.min((this as any).player.megaCredits, (this as any).$data.cost);
+    getMegaCreditsMax: function (): number {
+      return Math.min(
+        (this as any).player.megaCredits,
+        (this as any).$data.cost
+      );
     },
-    getCssClassFor: function(action: string, target: string): string {
+    getCssClassFor: function (action: string, target: string): string {
       const currentValue: number = (this as any)[target];
       const maxValue: number = (this as any).player[target];
-      const disablingLimit = (action === '<') ? 0 : maxValue;
+      const disablingLimit = action === '<' ? 0 : maxValue;
 
       if (currentValue === disablingLimit) return 'is-disabled';
       return 'is-primary';
     },
-    getResourceRate: function(resourceName: string): number {
+    getResourceRate: function (resourceName: string): number {
       let rate = 1; // one resource == one money
       if (resourceName === 'titanium') {
         rate = (this as any).player.titaniumValue;
@@ -30,7 +33,7 @@ export const PaymentWidgetMixin = {
       }
       return rate;
     },
-    reduceValue: function(target: string, to: number): void {
+    reduceValue: function (target: string, to: number): void {
       const currentValue: number = (this as any)[target];
 
       if (currentValue === 0) return;
@@ -42,7 +45,7 @@ export const PaymentWidgetMixin = {
 
       this.setRemainingMCValue();
     },
-    addValue: function(target: string, to: number, max?: number): void {
+    addValue: function (target: string, to: number, max?: number): void {
       const currentValue: number = (this as any)[target];
       let maxValue: number = max ?? (this as any).player[target];
 
@@ -57,34 +60,40 @@ export const PaymentWidgetMixin = {
       }
       if (currentValue === maxValue) return;
 
-      const realTo = (currentValue + to <= maxValue) ? to : maxValue - currentValue;
+      const realTo =
+        currentValue + to <= maxValue ? to : maxValue - currentValue;
       (this as any)[target] += realTo;
 
       if (target === 'megaCredits' || realTo === 0) return;
 
       this.setRemainingMCValue();
     },
-    setRemainingMCValue: function(): void {
-      const remainingMC: number = (this as any).$data.cost -
-              (this as any)['heat'] -
-              (this as any)['titanium'] * this.getResourceRate('titanium') -
-              (this as any)['steel'] * this.getResourceRate('steel') -
-              (this as any)['microbes'] * this.getResourceRate('microbes') -
-              (this as any)['floaters'] * this.getResourceRate('floaters');
+    setRemainingMCValue: function (): void {
+      const remainingMC: number =
+        (this as any).$data.cost -
+        (this as any)['heat'] -
+        (this as any)['titanium'] * this.getResourceRate('titanium') -
+        (this as any)['steel'] * this.getResourceRate('steel') -
+        (this as any)['microbes'] * this.getResourceRate('microbes') -
+        (this as any)['floaters'] * this.getResourceRate('floaters');
 
-      (this as any)['megaCredits'] = Math.max(0, Math.min(this.getMegaCreditsMax(), remainingMC));
+      (this as any)['megaCredits'] = Math.max(
+        0,
+        Math.min(this.getMegaCreditsMax(), remainingMC)
+      );
     },
-    setMaxValue: function(target: string, max?: number): void {
+    setMaxValue: function (target: string, max?: number): void {
       let currentValue: number = (this as any)[target];
       const cardCost: number = (this as any).$data.cost;
       let amountHave: number = max ?? (this as any).player[target];
 
       let amountNeed: number = cardCost;
       if (['titanium', 'steel', 'microbes', 'floaters'].includes(target)) {
-        amountNeed = Math.floor(cardCost/this.getResourceRate(target));
+        amountNeed = Math.floor(cardCost / this.getResourceRate(target));
       }
 
-      if (target === 'microbes') amountHave = (this as any).playerinput.microbes;
+      if (target === 'microbes')
+        amountHave = (this as any).playerinput.microbes;
       if (target === 'floaters') {
         amountHave = (this as any).playerinput.floaters;
         if (this.isStratosphericBirdsEdgeCase()) amountHave--;
@@ -95,10 +104,13 @@ export const PaymentWidgetMixin = {
         currentValue++;
       }
     },
-    isStratosphericBirdsEdgeCase: function(): boolean {
+    isStratosphericBirdsEdgeCase: function (): boolean {
       if ((this as any).$data.card.name === CardName.STRATOSPHERIC_BIRDS) {
-        const playedCards = (this as any).player.playedCards as Array<CardModel>;
-        const cardsWithFloaters = playedCards.filter((card) => card.resourceType === ResourceType.FLOATER && card.resources);
+        const playedCards = (this as any).player
+          .playedCards as Array<CardModel>;
+        const cardsWithFloaters = playedCards.filter(
+          (card) => card.resourceType === ResourceType.FLOATER && card.resources
+        );
         return cardsWithFloaters.length === 1;
       }
       return false;

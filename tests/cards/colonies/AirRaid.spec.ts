@@ -9,10 +9,13 @@ import {ICard} from '../../../src/cards/ICard';
 import {OrOptions} from '../../../src/inputs/OrOptions';
 import {TestPlayers} from '../../TestPlayers';
 
-describe('AirRaid', function() {
-  let card : AirRaid; let player : Player; let player2 : Player; let corpo: StormCraftIncorporated;
+describe('AirRaid', function () {
+  let card: AirRaid;
+  let player: Player;
+  let player2: Player;
+  let corpo: StormCraftIncorporated;
 
-  beforeEach(function() {
+  beforeEach(function () {
     card = new AirRaid();
     player = TestPlayers.BLUE.newPlayer();
     player2 = TestPlayers.RED.newPlayer();
@@ -22,11 +25,11 @@ describe('AirRaid', function() {
     player.corporationCard = corpo;
   });
 
-  it('Can\'t play', function() {
+  it("Can't play", function () {
     expect(card.canPlay(player)).is.not.true;
   });
 
-  it('Should play - multiple targets', function() {
+  it('Should play - multiple targets', function () {
     const player3 = TestPlayers.YELLOW.newPlayer();
     Game.newInstance('foobar', [player, player2, player3], player);
     player.addResourceTo(corpo);
@@ -39,7 +42,9 @@ describe('AirRaid', function() {
 
     card.play(player);
     const option1 = player.game.deferredActions.pop()!.execute() as OrOptions;
-    const option2 = player.game.deferredActions.pop()!.execute() as SelectCard<ICard>;
+    const option2 = player.game.deferredActions
+      .pop()!
+      .execute() as SelectCard<ICard>;
 
     option1.options[0].cb();
     expect(player2.megaCredits).to.eq(0);
@@ -49,7 +54,7 @@ describe('AirRaid', function() {
     expect(player.getResourcesOnCard(corpo)).to.eq(0);
   });
 
-  it('Should play - single target for floater removal and MC removal', function() {
+  it('Should play - single target for floater removal and MC removal', function () {
     player.addResourceTo(corpo);
     expect(card.canPlay(player)).is.true;
 

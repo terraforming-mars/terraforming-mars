@@ -10,19 +10,28 @@ import {TileType} from '../../../src/TileType';
 import {ARES_OPTIONS_WITH_HAZARDS} from '../../ares/AresTestHelper';
 import {TestPlayers} from '../../TestPlayers';
 
-describe('SolarFarm', function() {
-  let card: SolarFarm; let player: Player; let game: Game;
+describe('SolarFarm', function () {
+  let card: SolarFarm;
+  let player: Player;
+  let game: Game;
 
-  beforeEach(function() {
+  beforeEach(function () {
     card = new SolarFarm();
     player = TestPlayers.BLUE.newPlayer();
     const redPlayer = TestPlayers.RED.newPlayer();
-    game = Game.newInstance('foobar', [player, redPlayer], player, ARES_OPTIONS_WITH_HAZARDS);
+    game = Game.newInstance(
+      'foobar',
+      [player, redPlayer],
+      player,
+      ARES_OPTIONS_WITH_HAZARDS
+    );
   });
 
-  it('Play', function() {
+  it('Play', function () {
     // Find the first spot with no hazard tile on it to place a city.
-    const space = game.board.getAvailableSpacesForCity(player).filter((s) => !AresHandler.hasHazardTile(s))[0];
+    const space = game.board
+      .getAvailableSpacesForCity(player)
+      .filter((s) => !AresHandler.hasHazardTile(s))[0];
     // Hack the space to have a large number of plants, just to show a matching
     // energy production bump - seven.
     space.bonus = [
@@ -40,7 +49,9 @@ describe('SolarFarm', function() {
     expect(action instanceof SelectSpace).is.true;
 
     expect(player.getProduction(Resources.ENERGY)).eq(0);
-    const citySpace = game.board.getAvailableSpacesOnLand(player).filter((s) => !AresHandler.hasHazardTile(s))[0];
+    const citySpace = game.board
+      .getAvailableSpacesOnLand(player)
+      .filter((s) => !AresHandler.hasHazardTile(s))[0];
     action.cb(citySpace);
     expect(citySpace.player).to.eq(player);
     expect(citySpace.tile!.tileType).to.eq(TileType.SOLAR_FARM);

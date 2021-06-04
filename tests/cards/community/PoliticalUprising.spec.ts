@@ -7,10 +7,12 @@ import {PartyName} from '../../../src/turmoil/parties/PartyName';
 import {TestingUtils} from '../../TestingUtils';
 import {TestPlayers} from '../../TestPlayers';
 
-describe('PoliticalUprising', function() {
-  let card : PoliticalUprising; let player : Player; let game : Game;
+describe('PoliticalUprising', function () {
+  let card: PoliticalUprising;
+  let player: Player;
+  let game: Game;
 
-  beforeEach(function() {
+  beforeEach(function () {
     card = new PoliticalUprising();
     player = TestPlayers.BLUE.newPlayer();
     const redPlayer = TestPlayers.RED.newPlayer();
@@ -18,12 +20,14 @@ describe('PoliticalUprising', function() {
     game = Game.newInstance('foobar', [player, redPlayer], player, gameOptions);
   });
 
-  it('Should play', function() {
+  it('Should play', function () {
     card.play(player);
     expect(game.deferredActions).has.lengthOf(4);
 
     while (game.deferredActions.length) {
-      const selectParty = game.deferredActions.peek()!.execute() as SelectPartyToSendDelegate;
+      const selectParty = game.deferredActions
+        .peek()!
+        .execute() as SelectPartyToSendDelegate;
       selectParty.cb(PartyName.MARS);
       game.deferredActions.pop();
     }

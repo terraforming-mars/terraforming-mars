@@ -31,7 +31,6 @@ describe('SinusIridiumRoadNetwork', () => {
     player.setProductionForTest({energy: 0});
     expect(player.getPlayableCards()).does.not.include(card);
 
-
     player.steel = 1;
     player.setProductionForTest({energy: 1});
     expect(player.getPlayableCards()).does.include(card);
@@ -52,4 +51,3 @@ describe('SinusIridiumRoadNetwork', () => {
     expect(player.game.deferredActions.peek()).instanceOf(PlaceMoonRoadTile);
   });
 });
-

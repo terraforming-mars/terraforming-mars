@@ -3,8 +3,8 @@ import {Celestic} from '../../../src/cards/venusNext/Celestic';
 import {Game} from '../../../src/Game';
 import {TestPlayers} from '../../TestPlayers';
 
-describe('Celestic', function() {
-  it('Should play', function() {
+describe('Celestic', function () {
+  it('Should play', function () {
     const card = new Celestic();
     const player = TestPlayers.BLUE.newPlayer();
     const redPlayer = TestPlayers.RED.newPlayer();

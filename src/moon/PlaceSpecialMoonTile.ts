@@ -9,7 +9,7 @@ export class PlaceSpecialMoonTile implements DeferredAction {
     public player: Player,
     public tile: ITile,
     public title: string = 'Select a space on the Moon for this tile.',
-    public priority = Priority.DEFAULT,
+    public priority = Priority.DEFAULT
   ) {}
 
   public execute() {
@@ -19,12 +19,9 @@ export class PlaceSpecialMoonTile implements DeferredAction {
     if (spaces.length === 0) {
       return undefined;
     }
-    return new SelectSpace(
-      this.title,
-      spaces,
-      (space) => {
-        MoonExpansion.addTile(this.player, space.id, this.tile);
-        return undefined;
-      });
+    return new SelectSpace(this.title, spaces, (space) => {
+      MoonExpansion.addTile(this.player, space.id, this.tile);
+      return undefined;
+    });
   }
 }

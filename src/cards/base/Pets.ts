@@ -26,11 +26,15 @@ export class Pets extends Card implements IProjectCard, IResourceCard {
       metadata: {
         cardNumber: '172',
         renderData: CardRenderer.builder((b) => {
-          b.effect('When any City tile is placed, add an Animal to this card.', (eb) => {
-            eb.city(Size.SMALL).any.startEffect.animals(1);
-          }).br;
+          b.effect(
+            'When any City tile is placed, add an Animal to this card.',
+            (eb) => {
+              eb.city(Size.SMALL).any.startEffect.animals(1);
+            }
+          ).br;
           b.animals(1).br;
-          b.text('Animals may not be removed from this card', Size.SMALL, true).br;
+          b.text('Animals may not be removed from this card', Size.SMALL, true)
+            .br;
           b.vpText('1 VP per 2 Animals here.');
         }),
         description: {text: 'Add 1 Animal to this card.', align: 'left'},
@@ -48,8 +52,10 @@ export class Pets extends Card implements IProjectCard, IResourceCard {
   public onTilePlaced(cardOwner: Player, activePlayer: Player, space: ISpace) {
     if (Board.isCitySpace(space)) {
       cardOwner.game.defer(
-        new AddResourcesToCard(cardOwner, ResourceType.ANIMAL, {filter: (c) => c.name === this.name}),
-        cardOwner.id !== activePlayer.id ? Priority.OPPONENT_TRIGGER : undefined,
+        new AddResourcesToCard(cardOwner, ResourceType.ANIMAL, {
+          filter: (c) => c.name === this.name,
+        }),
+        cardOwner.id !== activePlayer.id ? Priority.OPPONENT_TRIGGER : undefined
       );
     }
   }

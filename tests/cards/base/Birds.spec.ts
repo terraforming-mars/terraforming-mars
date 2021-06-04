@@ -6,21 +6,23 @@ import {Resources} from '../../../src/Resources';
 import {SelectPlayer} from '../../../src/inputs/SelectPlayer';
 import {TestPlayers} from '../../TestPlayers';
 
-describe('Birds', function() {
-  let card : Birds; let player : Player; let player2 : Player;
+describe('Birds', function () {
+  let card: Birds;
+  let player: Player;
+  let player2: Player;
 
-  beforeEach(function() {
+  beforeEach(function () {
     card = new Birds();
     player = TestPlayers.BLUE.newPlayer();
     player2 = TestPlayers.RED.newPlayer();
     Game.newInstance('foobar', [player, player2], player);
   });
 
-  it('Cannot play without oxygen', function() {
+  it('Cannot play without oxygen', function () {
     expect(card.canPlay(player)).is.not.true;
   });
 
-  it('Should play', function() {
+  it('Should play', function () {
     const player3 = TestPlayers.GREEN.newPlayer();
     const game = Game.newInstance('foobar', [player, player2, player3], player);
 
@@ -38,7 +40,7 @@ describe('Birds', function() {
     expect(player3.getProduction(Resources.PLANTS)).to.eq(7);
   });
 
-  it('Should act', function() {
+  it('Should act', function () {
     card.action(player);
     expect(card.resourceCount).to.eq(1);
     expect(card.getVictoryPoints()).to.eq(1);

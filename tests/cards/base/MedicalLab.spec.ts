@@ -4,8 +4,8 @@ import {MedicalLab} from '../../../src/cards/base/MedicalLab';
 import {Resources} from '../../../src/Resources';
 import {TestPlayers} from '../../TestPlayers';
 
-describe('MedicalLab', function() {
-  it('Should play', function() {
+describe('MedicalLab', function () {
+  it('Should play', function () {
     const card = new MedicalLab();
     const player = TestPlayers.BLUE.newPlayer();
     const action = card.play(player);
@@ -14,7 +14,10 @@ describe('MedicalLab', function() {
     player.playedCards.push(new Capital());
     card.play(player);
     expect(player.getProduction(Resources.MEGACREDITS)).to.eq(1);
-    player.victoryPointsBreakdown.setVictoryPoints('victoryPoints', card.getVictoryPoints());
+    player.victoryPointsBreakdown.setVictoryPoints(
+      'victoryPoints',
+      card.getVictoryPoints()
+    );
     expect(player.victoryPointsBreakdown.victoryPoints).to.eq(1);
   });
 });

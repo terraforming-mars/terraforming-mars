@@ -26,28 +26,28 @@ export const PlayerTimer = Vue.component('player-timer', {
     },
   },
   methods: {
-    updateTimer: function() {
+    updateTimer: function () {
       this.timerText = Timer.toString(this.timer);
     },
-    hasHours: function() {
+    hasHours: function () {
       if (this.timerText.split(':').length > 2) {
         return 1;
       }
       return 0;
     },
-    getHours: function(): string {
+    getHours: function (): string {
       if (this.hasHours()) {
         return this.timerText.split(':')[0];
       }
       return '';
     },
-    getMinutes: function(): string {
+    getMinutes: function (): string {
       if (this.hasHours()) {
         return this.timerText.split(':')[1];
       }
       return this.timerText.split(':')[0];
     },
-    getSeconds: function(): string {
+    getSeconds: function (): string {
       if (this.hasHours()) {
         return this.timerText.split(':')[2];
       }

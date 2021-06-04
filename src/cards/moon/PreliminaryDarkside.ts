@@ -19,7 +19,8 @@ export class PreliminaryDarkside extends Card implements IProjectCard {
       cost: 13,
 
       metadata: {
-        description: 'Gain 3 titanium or 4 steel. Raise the Mining Rate 1 step.',
+        description:
+          'Gain 3 titanium or 4 steel. Raise the Mining Rate 1 step.',
         cardNumber: 'M63',
         renderData: CardRenderer.builder((b) => {
           b.titanium(3).digit.or().steel(4).digit.br;
@@ -27,7 +28,7 @@ export class PreliminaryDarkside extends Card implements IProjectCard {
         }),
       },
     });
-  };
+  }
 
   public play(player: Player) {
     MoonExpansion.raiseMiningRate(player);
@@ -39,6 +40,7 @@ export class PreliminaryDarkside extends Card implements IProjectCard {
       new SelectOption('Gain 4 steel.', 'Gain steel', () => {
         player.addResource(Resources.STEEL, 4, {log: true});
         return undefined;
-      }));
+      })
+    );
   }
 }

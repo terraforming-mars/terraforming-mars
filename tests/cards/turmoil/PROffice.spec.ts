@@ -8,8 +8,8 @@ import {PartyName} from '../../../src/turmoil/parties/PartyName';
 import {TestingUtils} from '../../TestingUtils';
 import {TestPlayers} from '../../TestPlayers';
 
-describe('PROffice', function() {
-  it('Should play', function() {
+describe('PROffice', function () {
+  it('Should play', function () {
     const card = new PROffice();
     const card2 = new Sponsors();
     const card3 = new AcquiredCompany();

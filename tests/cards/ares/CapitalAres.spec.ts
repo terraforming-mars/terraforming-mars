@@ -10,17 +10,24 @@ import {SpaceBonus} from '../../../src/SpaceBonus';
 import {ARES_OPTIONS_NO_HAZARDS} from '../../ares/AresTestHelper';
 import {TestPlayers} from '../../TestPlayers';
 
-describe('CapitalAres', function() {
-  let card : CapitalAres; let player : TestPlayer; let game : Game;
+describe('CapitalAres', function () {
+  let card: CapitalAres;
+  let player: TestPlayer;
+  let game: Game;
 
-  beforeEach(function() {
+  beforeEach(function () {
     card = new CapitalAres();
     player = TestPlayers.BLUE.newPlayer();
     const redPlayer = TestPlayers.RED.newPlayer();
-    game = Game.newInstance('foobar', [player, redPlayer], player, ARES_OPTIONS_NO_HAZARDS);
+    game = Game.newInstance(
+      'foobar',
+      [player, redPlayer],
+      player,
+      ARES_OPTIONS_NO_HAZARDS
+    );
   });
 
-  it('Should play', function() {
+  it('Should play', function () {
     const oceanSpaces = game.board.getAvailableSpacesForOcean(player);
     for (let i = 0; i < 4; i++) {
       oceanSpaces[i].tile = {tileType: TileType.OCEAN};
@@ -42,6 +49,8 @@ describe('CapitalAres', function() {
     expect(citySpace.tile && citySpace.tile.tileType).to.eq(TileType.CAPITAL);
     expect(player.victoryPointsBreakdown.victoryPoints).to.eq(0);
     expect(card.getVictoryPoints(player)).to.eq(1);
-    expect(citySpace.adjacency).to.deep.eq({bonus: [SpaceBonus.MEGACREDITS, SpaceBonus.MEGACREDITS]});
+    expect(citySpace.adjacency).to.deep.eq({
+      bonus: [SpaceBonus.MEGACREDITS, SpaceBonus.MEGACREDITS],
+    });
   });
 });

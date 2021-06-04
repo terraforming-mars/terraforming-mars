@@ -1,4 +1,3 @@
-
 /**
  * v-model uses boolean if input is not an array
  * at runtime

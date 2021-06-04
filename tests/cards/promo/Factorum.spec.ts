@@ -5,8 +5,8 @@ import {OrOptions} from '../../../src/inputs/OrOptions';
 import {Resources} from '../../../src/Resources';
 import {TestPlayers} from '../../TestPlayers';
 
-describe('Factorum', function() {
-  it('Should play', function() {
+describe('Factorum', function () {
+  it('Should play', function () {
     const card = new Factorum();
     const player = TestPlayers.BLUE.newPlayer();
     const redPlayer = TestPlayers.RED.newPlayer();
@@ -20,7 +20,7 @@ describe('Factorum', function() {
 
     const action = card.action(player);
     expect(action instanceof OrOptions).is.true;
-    if ( ! (action instanceof OrOptions)) return;
+    if (!(action instanceof OrOptions)) return;
 
     expect(action.options).has.lengthOf(2);
     const orOptions = action.options[1] as OrOptions;

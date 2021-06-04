@@ -21,7 +21,8 @@ export class PolarIndustries extends PreludeCard implements IProjectCard {
           b.production((pb) => pb.heat(2)).br;
           b.oceans(1);
         }),
-        description: 'Increase your heat production 2 steps. Place an Ocean tile.',
+        description:
+          'Increase your heat production 2 steps. Place an Ocean tile.',
       },
     });
   }

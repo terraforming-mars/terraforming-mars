@@ -43,4 +43,3 @@ describe('SphereHabitats', () => {
     expect(player.game.deferredActions.peek()).instanceOf(PlaceMoonColonyTile);
   });
 });
-

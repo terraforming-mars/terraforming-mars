@@ -18,7 +18,6 @@ describe('SolarPanelFoundry', () => {
     card = new SolarPanelFoundry();
   });
 
-
   it('can act', () => {
     player.steel = 2;
     expect(card.canAct(player)).is.true;
@@ -37,4 +36,3 @@ describe('SolarPanelFoundry', () => {
     expect(player.steel).eq(0);
   });
 });
-

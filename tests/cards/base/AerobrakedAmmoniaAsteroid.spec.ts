@@ -7,17 +7,18 @@ import {Player} from '../../../src/Player';
 import {Resources} from '../../../src/Resources';
 import {TestPlayers} from '../../TestPlayers';
 
-describe('AerobrakedAmmoniaAsteroid', function() {
-  let card : AerobrakedAmmoniaAsteroid; let player : Player;
+describe('AerobrakedAmmoniaAsteroid', function () {
+  let card: AerobrakedAmmoniaAsteroid;
+  let player: Player;
 
-  beforeEach(function() {
+  beforeEach(function () {
     card = new AerobrakedAmmoniaAsteroid();
     player = TestPlayers.BLUE.newPlayer();
     const redPlayer = TestPlayers.RED.newPlayer();
     Game.newInstance('foobar', [player, redPlayer], player);
   });
 
-  it('Should play without microbe cards', function() {
+  it('Should play without microbe cards', function () {
     player.playedCards.push(card);
     const action = card.play(player);
     expect(player.getProduction(Resources.HEAT)).to.eq(3);
@@ -27,7 +28,7 @@ describe('AerobrakedAmmoniaAsteroid', function() {
     expect(action).is.undefined;
   });
 
-  it('Adds microbes automatically if only 1 target', function() {
+  it('Adds microbes automatically if only 1 target', function () {
     player.playedCards.push(card);
 
     const selectedCard = new Ants();
@@ -39,7 +40,7 @@ describe('AerobrakedAmmoniaAsteroid', function() {
     expect(player.getResourcesOnCard(selectedCard)).to.eq(2);
   });
 
-  it('Adds microbes to another card', function() {
+  it('Adds microbes to another card', function () {
     player.playedCards.push(card);
 
     // Add card to collect Microbes on
@@ -52,8 +53,8 @@ describe('AerobrakedAmmoniaAsteroid', function() {
     expect(player.getProduction(Resources.PLANTS)).to.eq(1);
 
     expect(action).is.not.undefined;
-        action!.cb([selectedCard]);
+    action!.cb([selectedCard]);
 
-        expect(player.getResourcesOnCard(selectedCard)).to.eq(2);
+    expect(player.getResourcesOnCard(selectedCard)).to.eq(2);
   });
 });

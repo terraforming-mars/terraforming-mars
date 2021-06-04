@@ -32,7 +32,11 @@ export class GanymedeColony extends Card implements IProjectCard {
     return player.getTagCount(Tags.JOVIAN, false, false);
   }
   public play(player: Player) {
-    player.game.addCityTile(player, SpaceName.GANYMEDE_COLONY, SpaceType.COLONY);
+    player.game.addCityTile(
+      player,
+      SpaceName.GANYMEDE_COLONY,
+      SpaceType.COLONY
+    );
     return undefined;
   }
 }

@@ -9,7 +9,10 @@ import {CardRenderer} from '../render/CardRenderer';
 import {CardRenderDynamicVictoryPoints} from '../render/CardRenderDynamicVictoryPoints';
 import {Card} from '../Card';
 
-export class VenusianInsects extends Card implements IActionCard, IResourceCard {
+export class VenusianInsects
+  extends Card
+  implements IActionCard, IResourceCard
+{
   constructor() {
     super({
       name: CardName.VENUSIAN_INSECTS,
@@ -22,7 +25,7 @@ export class VenusianInsects extends Card implements IActionCard, IResourceCard 
       metadata: {
         cardNumber: '260',
         renderData: CardRenderer.builder((b) => {
-          b.action('Add 1 Microbe to this card.', (eb)=> {
+          b.action('Add 1 Microbe to this card.', (eb) => {
             eb.empty().startAction.microbes(1);
           }).br;
           b.vpText('1 VP for every 2nd Microbe on this card.');
@@ -31,7 +34,7 @@ export class VenusianInsects extends Card implements IActionCard, IResourceCard 
         victoryPoints: CardRenderDynamicVictoryPoints.microbes(1, 2),
       },
     });
-  };
+  }
   public resourceCount: number = 0;
 
   public play() {

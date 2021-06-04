@@ -3,8 +3,8 @@ import {InventionContest} from '../../../src/cards/base/InventionContest';
 import {Game} from '../../../src/Game';
 import {TestPlayers} from '../../TestPlayers';
 
-describe('InventionContest', function() {
-  it('Should play', function() {
+describe('InventionContest', function () {
+  it('Should play', function () {
     const card = new InventionContest();
     const player = TestPlayers.BLUE.newPlayer();
     const redPlayer = TestPlayers.RED.newPlayer();

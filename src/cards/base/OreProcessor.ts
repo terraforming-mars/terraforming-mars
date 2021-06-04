@@ -21,9 +21,12 @@ export class OreProcessor extends Card implements IActionCard, IProjectCard {
       metadata: {
         cardNumber: '104',
         renderData: CardRenderer.builder((b) => {
-          b.action('Spend 4 energy to gain 1 titanium and increase oxygen 1 step.', (eb) => {
-            eb.energy(4).digit.startAction.titanium(1).oxygen(1);
-          });
+          b.action(
+            'Spend 4 energy to gain 1 titanium and increase oxygen 1 step.',
+            (eb) => {
+              eb.energy(4).digit.startAction.titanium(1).oxygen(1);
+            }
+          );
         }),
       },
     });
@@ -36,7 +39,10 @@ export class OreProcessor extends Card implements IActionCard, IProjectCard {
     const hasEnoughEnergy = player.energy >= 4;
     const oxygenMaxed = player.game.getOxygenLevel() === MAX_OXYGEN_LEVEL;
 
-    if (PartyHooks.shouldApplyPolicy(player.game, PartyName.REDS) && !oxygenMaxed) {
+    if (
+      PartyHooks.shouldApplyPolicy(player.game, PartyName.REDS) &&
+      !oxygenMaxed
+    ) {
       return player.canAfford(REDS_RULING_POLICY_COST) && hasEnoughEnergy;
     }
 

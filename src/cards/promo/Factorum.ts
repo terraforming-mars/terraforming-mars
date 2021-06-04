@@ -23,15 +23,24 @@ export class Factorum extends Card implements IActionCard, CorporationCard {
 
       metadata: {
         cardNumber: 'R22',
-        description: 'You start with 37 M€. Increase your steel production 1 step.',
+        description:
+          'You start with 37 M€. Increase your steel production 1 step.',
         renderData: CardRenderer.builder((b) => {
           b.megacredits(37).nbsp.production((pb) => pb.steel(1));
           b.corpBox('action', (ce) => {
             ce.vSpace(Size.LARGE);
-            ce.action('Increase your energy production 1 step IF YOU HAVE NO ENERGY RESOURCES, or spend 3M€ to draw a building card.', (eb) => {
-              eb.empty().arrow().production((pb) => pb.energy(1));
-              eb.or().megacredits(3).startAction.cards(1).secondaryTag(Tags.BUILDING);
-            });
+            ce.action(
+              'Increase your energy production 1 step IF YOU HAVE NO ENERGY RESOURCES, or spend 3M€ to draw a building card.',
+              (eb) => {
+                eb.empty()
+                  .arrow()
+                  .production((pb) => pb.energy(1));
+                eb.or()
+                  .megacredits(3)
+                  .startAction.cards(1)
+                  .secondaryTag(Tags.BUILDING);
+              }
+            );
           });
         }),
       },
@@ -54,14 +63,18 @@ export class Factorum extends Card implements IActionCard, CorporationCard {
       () => {
         player.addProduction(Resources.ENERGY, 1, {log: true});
         return undefined;
-      },
+      }
     );
 
-    const drawBuildingCard = new SelectOption('Spend 3 M€ to draw a building card', 'Draw card', () => {
-      player.deductResource(Resources.MEGACREDITS, 3);
-      player.drawCard(1, {tag: Tags.BUILDING});
-      return undefined;
-    });
+    const drawBuildingCard = new SelectOption(
+      'Spend 3 M€ to draw a building card',
+      'Draw card',
+      () => {
+        player.deductResource(Resources.MEGACREDITS, 3);
+        player.drawCard(1, {tag: Tags.BUILDING});
+        return undefined;
+      }
+    );
 
     if (player.energy > 0) return drawBuildingCard;
     if (!player.canAfford(3)) return increaseEnergy;

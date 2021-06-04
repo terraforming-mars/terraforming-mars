@@ -1,4 +1,3 @@
-
 import {IProjectCard} from '../IProjectCard';
 import {Tags} from '../Tags';
 import {Card} from '../Card';
@@ -19,9 +18,11 @@ export class CallistoPenalMines extends Card implements IProjectCard {
       metadata: {
         description: 'Increase your M€ production 3 steps.',
         cardNumber: '082',
-        renderData: CardRenderer.builder((b) => b.production((pb) => {
-          pb.megacredits(3);
-        })),
+        renderData: CardRenderer.builder((b) =>
+          b.production((pb) => {
+            pb.megacredits(3);
+          })
+        ),
         victoryPoints: 2,
       },
     });

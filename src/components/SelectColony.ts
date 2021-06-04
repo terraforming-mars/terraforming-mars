@@ -20,7 +20,7 @@ export const SelectColony = Vue.component('select-colony', {
     },
   },
   mixins: [TranslateMixin],
-  data: function() {
+  data: function () {
     return {
       selectedColony: undefined as string | undefined,
     };
@@ -30,7 +30,7 @@ export const SelectColony = Vue.component('select-colony', {
     'Button': Button,
   },
   methods: {
-    saveData: function() {
+    saveData: function () {
       const result: string[][] = [];
       result.push([]);
       if (this.selectedColony !== undefined) {
@@ -50,4 +50,3 @@ export const SelectColony = Vue.component('select-colony', {
         </div>
     </div>`,
 });
-

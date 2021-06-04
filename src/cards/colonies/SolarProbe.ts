@@ -19,7 +19,8 @@ export class SolarProbe extends Card implements IProjectCard {
         renderData: CardRenderer.builder((b) => {
           b.cards(1).slash().science(3).digit.played;
         }),
-        description: 'Draw 1 card for every 3 science tags you have, including this.',
+        description:
+          'Draw 1 card for every 3 science tags you have, including this.',
         victoryPoints: 1,
       },
     });

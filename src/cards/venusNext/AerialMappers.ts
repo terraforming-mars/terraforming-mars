@@ -35,7 +35,7 @@ export class AerialMappers extends Card implements IActionCard, IResourceCard {
         victoryPoints: 1,
       },
     });
-  };
+  }
   public resourceCount: number = 0;
 
   public play() {
@@ -57,26 +57,41 @@ export class AerialMappers extends Card implements IActionCard, IResourceCard {
       return undefined;
     }
 
-    const addResourceToSelf = new SelectOption('Add 1 floater to this card', 'Add floater', () => {
-      player.addResourceTo(this, {qty: 1, log: true});
-      return undefined;
-    });
+    const addResourceToSelf = new SelectOption(
+      'Add 1 floater to this card',
+      'Add floater',
+      () => {
+        player.addResourceTo(this, {qty: 1, log: true});
+        return undefined;
+      }
+    );
 
-    const addResource = new SelectCard('Select card to add 1 floater', 'Add floater', floaterCards, (foundCards: Array<ICard>) => {
-      player.addResourceTo(foundCards[0], {log: true});
-      return undefined;
-    });
+    const addResource = new SelectCard(
+      'Select card to add 1 floater',
+      'Add floater',
+      floaterCards,
+      (foundCards: Array<ICard>) => {
+        player.addResourceTo(foundCards[0], {log: true});
+        return undefined;
+      }
+    );
 
-    const spendResource = new SelectOption('Remove 1 floater on this card and draw a card', 'Remove floater', () => {
-      this.resourceCount--;
-      LogHelper.logRemoveResource(player, this, 1, 'draw a card');
-      player.drawCard();
-      return undefined;
-    });
+    const spendResource = new SelectOption(
+      'Remove 1 floater on this card and draw a card',
+      'Remove floater',
+      () => {
+        this.resourceCount--;
+        LogHelper.logRemoveResource(player, this, 1, 'draw a card');
+        player.drawCard();
+        return undefined;
+      }
+    );
 
     if (this.resourceCount > 0) {
       opts.push(spendResource);
-      floaterCards.length === 1 ? opts.push(addResourceToSelf) : opts.push(addResource);
+      floaterCards.length === 1
+        ? opts.push(addResourceToSelf)
+        : opts.push(addResource);
     } else {
       return addResource;
     }

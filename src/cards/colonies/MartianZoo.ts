@@ -23,9 +23,12 @@ export class MartianZoo extends Card implements IProjectCard, IResourceCard {
       metadata: {
         cardNumber: 'C24',
         renderData: CardRenderer.builder((b) => {
-          b.effect('When you play an Earth tag, place an animal here.', (eb) => {
-            eb.earth().played.startEffect.animals(1);
-          }).br;
+          b.effect(
+            'When you play an Earth tag, place an animal here.',
+            (eb) => {
+              eb.earth().played.startEffect.animals(1);
+            }
+          ).br;
           b.action('Gain 1M€ per animal here.', (eb) => {
             eb.empty().startAction.megacredits(1).slash().animals(1);
           });
@@ -43,7 +46,10 @@ export class MartianZoo extends Card implements IProjectCard, IResourceCard {
 
   public onCardPlayed(player: Player, card: IProjectCard) {
     if (card.tags.includes(Tags.EARTH)) {
-      player.addResourceTo(this, card.tags.filter((tag) => tag === Tags.EARTH).length);
+      player.addResourceTo(
+        this,
+        card.tags.filter((tag) => tag === Tags.EARTH).length
+      );
     }
   }
 

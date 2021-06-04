@@ -22,7 +22,8 @@ export class HeavyTaxation extends Card implements IProjectCard {
         renderData: CardRenderer.builder((b) => {
           b.production((pb) => pb.megacredits(2)).nbsp.megacredits(4);
         }),
-        description: 'Requires 2 Earth tags. Increase your M€ production 2 steps, and gain 4 M€.',
+        description:
+          'Requires 2 Earth tags. Increase your M€ production 2 steps, and gain 4 M€.',
         victoryPoints: -1,
       },
     });

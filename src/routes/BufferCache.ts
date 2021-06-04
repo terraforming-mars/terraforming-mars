@@ -1,9 +1,8 @@
-
 import * as crypto from 'crypto';
 
 interface BufferHash {
-  buffer: Buffer,
-  hash: string
+  buffer: Buffer;
+  hash: string;
 }
 
 export class BufferCache {

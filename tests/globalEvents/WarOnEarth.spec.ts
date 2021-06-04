@@ -5,8 +5,8 @@ import {Kelvinists} from '../../src/turmoil/parties/Kelvinists';
 import {Turmoil} from '../../src/turmoil/Turmoil';
 import {TestPlayers} from '../TestPlayers';
 
-describe('WarOnEarth', function() {
-  it('resolve play', function() {
+describe('WarOnEarth', function () {
+  it('resolve play', function () {
     const card = new WarOnEarth();
     const player = TestPlayers.BLUE.newPlayer();
     const player2 = TestPlayers.RED.newPlayer();

@@ -32,11 +32,22 @@ export abstract class Card {
   constructor(properties: StaticCardProperties) {
     let staticInstance = staticCardProperties.get(properties.name);
     if (staticInstance === undefined) {
-      if (properties.cardType === CardType.CORPORATION && properties.startingMegaCredits === undefined) {
-        throw new Error('must define startingMegaCredits for corporation cards');
+      if (
+        properties.cardType === CardType.CORPORATION &&
+        properties.startingMegaCredits === undefined
+      ) {
+        throw new Error(
+          'must define startingMegaCredits for corporation cards'
+        );
       }
       if (properties.cost === undefined) {
-        if ([CardType.CORPORATION, CardType.PRELUDE, CardType.STANDARD_ACTION].includes(properties.cardType) === false) {
+        if (
+          [
+            CardType.CORPORATION,
+            CardType.PRELUDE,
+            CardType.STANDARD_ACTION,
+          ].includes(properties.cardType) === false
+        ) {
           throw new Error(`${properties.name} must have a cost property`);
         }
       }
@@ -73,7 +84,9 @@ export abstract class Card {
     return this.properties.resourceType;
   }
   public get startingMegaCredits() {
-    return this.properties.startingMegaCredits === undefined ? 0 : this.properties.startingMegaCredits;
+    return this.properties.startingMegaCredits === undefined
+      ? 0
+      : this.properties.startingMegaCredits;
   }
   public get tags() {
     return this.properties.tags === undefined ? [] : this.properties.tags;

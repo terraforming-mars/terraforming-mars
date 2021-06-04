@@ -17,16 +17,20 @@ export class LunarSecurityStations extends Card implements IProjectCard {
       requirements: CardRequirements.builder((b) => b.roadTiles(3).any()),
 
       metadata: {
-        description: 'Requires 3 road tiles on the Moon. Raise the Logistic Rate 1 step.',
+        description:
+          'Requires 3 road tiles on the Moon. Raise the Logistic Rate 1 step.',
         cardNumber: 'M42',
         renderData: CardRenderer.builder((b) => {
           b.text('Opponents may not remove your', Size.SMALL, true).br;
-          b.steel(1).titanium(1).production((pb) => pb.steel(1).titanium(1)).br;
+          b
+            .steel(1)
+            .titanium(1)
+            .production((pb) => pb.steel(1).titanium(1)).br;
           b.moonLogisticsRate();
         }),
       },
     });
-  };
+  }
 
   public play(player: Player) {
     MoonExpansion.raiseLogisticRate(player);

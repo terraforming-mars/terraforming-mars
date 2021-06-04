@@ -14,10 +14,13 @@ import {Player} from '../../../src/Player';
 import {Resources} from '../../../src/Resources';
 import {TestPlayers} from '../../TestPlayers';
 
-describe('Playwrights', function() {
-  let card : Playwrights; let player : Player; let player2: Player; let game : Game;
+describe('Playwrights', function () {
+  let card: Playwrights;
+  let player: Player;
+  let player2: Player;
+  let game: Game;
 
-  beforeEach(function() {
+  beforeEach(function () {
     card = new Playwrights();
     player = TestPlayers.BLUE.newPlayer();
     player2 = TestPlayers.RED.newPlayer();
@@ -27,12 +30,12 @@ describe('Playwrights', function() {
     player.corporationCard = card;
   });
 
-  it('Cannot act without any played events', function() {
+  it('Cannot act without any played events', function () {
     expect(player.getProduction(Resources.ENERGY)).eq(1);
     expect(card.canAct(player)).is.not.true;
   });
 
-  it('Can replay own event', function() {
+  it('Can replay own event', function () {
     const event = new ReleaseOfInertGases();
     const tr = player.getTerraformRating();
     event.play(player);
@@ -56,7 +59,7 @@ describe('Playwrights', function() {
     expect(player.removedFromPlayCards).has.lengthOf(1);
   });
 
-  it('Can replay other player\'s event', function() {
+  it("Can replay other player's event", function () {
     const event = new ReleaseOfInertGases();
     const tr = player.getTerraformRating();
     event.play(player2);
@@ -76,8 +79,12 @@ describe('Playwrights', function() {
     expect(player.removedFromPlayCards).has.lengthOf(1);
   });
 
-  it('Cannot act without any playable events', function() {
-    player2.playedCards.push(new MartianSurvey(), new LocalHeatTrapping(), new DeimosDown());
+  it('Cannot act without any playable events', function () {
+    player2.playedCards.push(
+      new MartianSurvey(),
+      new LocalHeatTrapping(),
+      new DeimosDown()
+    );
 
     (game as any).oxygenLevel = 5;
     player.heat = 4;
@@ -85,23 +92,23 @@ describe('Playwrights', function() {
     expect(card.canAct(player)).is.not.true;
   });
 
-  it('Acts correctly for event cards that give one time discount', function() {
+  it('Acts correctly for event cards that give one time discount', function () {
     const indenturedWorkers = new IndenturedWorkers();
     player.playedCards.push(indenturedWorkers);
 
     const selectCard = card.action(player) as SelectCard<ICard>;
     selectCard.cb([indenturedWorkers]);
-        // SelectHowToPay
-        game.deferredActions.pop()!.execute();
+    // SelectHowToPay
+    game.deferredActions.pop()!.execute();
 
-        const deimosDown = new DeimosDown();
-        expect(player.getCardCost(deimosDown)).to.eq(deimosDown.cost - 8);
+    const deimosDown = new DeimosDown();
+    expect(player.getCardCost(deimosDown)).to.eq(deimosDown.cost - 8);
 
-        player.playCard(deimosDown);
-        expect(player.getCardCost(deimosDown)).to.eq(deimosDown.cost); // no more discount
+    player.playCard(deimosDown);
+    expect(player.getCardCost(deimosDown)).to.eq(deimosDown.cost); // no more discount
   });
 
-  it('Works with Law Suit', function() {
+  it('Works with Law Suit', function () {
     const event = new LawSuit();
     player2.playedCards.push(event);
 

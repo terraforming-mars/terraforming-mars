@@ -1,4 +1,3 @@
-
 import {IProjectCard} from '../IProjectCard';
 import {Tags} from '../Tags';
 import {Card} from '../Card';
@@ -20,7 +19,8 @@ export class Bushes extends Card implements IProjectCard {
       requirements: CardRequirements.builder((b) => b.temperature(-10)),
       metadata: {
         cardNumber: '093',
-        description: 'Requires -10 C or warmer. Increase your plant production 2 steps. Gain 2 plants.',
+        description:
+          'Requires -10 C or warmer. Increase your plant production 2 steps. Gain 2 plants.',
         renderData: CardRenderer.builder((b) => {
           b.production((pb) => {
             pb.plants(2);

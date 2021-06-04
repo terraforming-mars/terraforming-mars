@@ -1,4 +1,3 @@
-
 import Vue from 'vue';
 import {Button} from './common/Button';
 
@@ -7,7 +6,7 @@ interface SelectHowToPayForProjectCardModel {
   card: CardModel;
   cards: Array<CardModel>;
   cost: number;
-  tags: Array<Tags>
+  tags: Array<Tags>;
   heat: number;
   megaCredits: number;
   steel: number;
@@ -32,316 +31,366 @@ import {PreferencesManager} from './PreferencesManager';
 import {TranslateMixin} from './TranslateMixin';
 import {CardName} from '../CardName';
 
-export const SelectHowToPayForProjectCard = Vue.component('select-how-to-pay-for-project-card', {
-  props: {
-    player: {
-      type: Object as () => PlayerModel,
+export const SelectHowToPayForProjectCard = Vue.component(
+  'select-how-to-pay-for-project-card',
+  {
+    props: {
+      player: {
+        type: Object as () => PlayerModel,
+      },
+      playerinput: {
+        type: Object as () => PlayerInputModel,
+      },
+      onsave: {
+        type: Function as unknown as () => (out: Array<Array<string>>) => void,
+      },
+      showsave: {
+        type: Boolean,
+      },
+      showtitle: {
+        type: Boolean,
+      },
     },
-    playerinput: {
-      type: Object as () => PlayerInputModel,
-    },
-    onsave: {
-      type: Function as unknown as () => (out: Array<Array<string>>) => void,
-    },
-    showsave: {
-      type: Boolean,
-    },
-    showtitle: {
-      type: Boolean,
-    },
-  },
-  data: function(): SelectHowToPayForProjectCardModel {
-    let card: CardModel | undefined;
-    let cards: Array<CardModel> = [];
-    if (this.playerinput !== undefined &&
-            this.playerinput.cards !== undefined &&
-            this.playerinput.cards.length > 0) {
-      cards = CardOrderStorage.getOrdered(
-        CardOrderStorage.getCardOrder(this.player.id),
-        this.playerinput.cards,
-      );
-      card = cards[0];
-    }
-    if (card === undefined) {
-      throw new Error('no card provided in player input');
-    }
-    return {
-      cardName: card.name,
-      card: card,
-      cards: cards,
-      cost: 0,
-      tags: [],
-      heat: 0,
-      megaCredits: 0,
-      steel: 0,
-      titanium: 0,
-      microbes: 0,
-      floaters: 0,
-      warning: undefined,
-      availableSteel: 0,
-      availableTitanium: 0,
-    };
-  },
-  components: {
-    Card,
-    Button,
-  },
-  mixins: [PaymentWidgetMixin, TranslateMixin],
-  mounted: function() {
-    const app = this;
-    Vue.nextTick(function() {
-      app.$data.card = app.getCard();
-      app.$data.cost = app.$data.card.calculatedCost;
-      app.$data.tags = app.getCardTags(),
-      app.$data.megaCredits = (app as unknown as typeof PaymentWidgetMixin.methods).getMegaCreditsMax();
-
-      app.setDefaultValues();
-    });
-  },
-  methods: {
-    getCard: function() {
-      const card = this.cards.find((c) => c.name === this.cardName); // this.player.cardsInHand.concat(this.player.selfReplicatingRobotsCards).find((c) => c.name === this.cardName);
+    data: function (): SelectHowToPayForProjectCardModel {
+      let card: CardModel | undefined;
+      let cards: Array<CardModel> = [];
+      if (
+        this.playerinput !== undefined &&
+        this.playerinput.cards !== undefined &&
+        this.playerinput.cards.length > 0
+      ) {
+        cards = CardOrderStorage.getOrdered(
+          CardOrderStorage.getCardOrder(this.player.id),
+          this.playerinput.cards
+        );
+        card = cards[0];
+      }
       if (card === undefined) {
-        throw new Error(`card not found ${this.cardName}`);
+        throw new Error('no card provided in player input');
       }
-      return card;
-    },
-    getCardTags: function() {
-      const card = new CardFinder().getProjectCardByName(this.cardName);
-      if (card === undefined) {
-        throw new Error(`card not found ${this.cardName}`);
-      }
-      return card.tags;
-    },
-    setDefaultValues: function() {
-      this.microbes = 0;
-      this.floaters = 0;
-      this.steel = 0;
-      this.titanium = 0;
-      this.heat = 0;
-
-      let megacreditBalance = Math.max(this.cost - this.player.megaCredits, 0);
-
-      // Calcualtes the optimal number of units to use given the unit value.
-      //
-      // It reads `megacreditBalance` as the remaining balance, and deducts the
-      // consumed balance as part of this method.
-      //
-      // It returns the number of units consumed from availableUnits to make that
-      const deductUnits = function(
-        availableUnits: number | undefined,
-        unitValue: number,
-        overpay: boolean = true): number {
-        if (availableUnits === undefined || availableUnits === 0) {
-          return 0;
-        }
-        // The number of units required to sell to meet the balance.
-        const _tmp = megacreditBalance / unitValue;
-        const balanceAsUnits = overpay ? Math.ceil(_tmp) : Math.floor(_tmp);
-        const contributingUnits = Math.min(availableUnits, balanceAsUnits);
-
-        megacreditBalance -= contributingUnits * unitValue;
-        return contributingUnits;
+      return {
+        cardName: card.name,
+        card: card,
+        cards: cards,
+        cost: 0,
+        tags: [],
+        heat: 0,
+        megaCredits: 0,
+        steel: 0,
+        titanium: 0,
+        microbes: 0,
+        floaters: 0,
+        warning: undefined,
+        availableSteel: 0,
+        availableTitanium: 0,
       };
+    },
+    components: {
+      Card,
+      Button,
+    },
+    mixins: [PaymentWidgetMixin, TranslateMixin],
+    mounted: function () {
+      const app = this;
+      Vue.nextTick(function () {
+        app.$data.card = app.getCard();
+        app.$data.cost = app.$data.card.calculatedCost;
+        (app.$data.tags = app.getCardTags()),
+          (app.$data.megaCredits = (
+            app as unknown as typeof PaymentWidgetMixin.methods
+          ).getMegaCreditsMax());
 
-      // This function help save some money at the end
-      const saveOverSpendingUnits = function(
-        spendingUnits: number | undefined,
-        unitValue: number): number {
-        if (spendingUnits === undefined || spendingUnits === 0 || megacreditBalance === 0) {
-          return 0;
+        app.setDefaultValues();
+      });
+    },
+    methods: {
+      getCard: function () {
+        const card = this.cards.find((c) => c.name === this.cardName); // this.player.cardsInHand.concat(this.player.selfReplicatingRobotsCards).find((c) => c.name === this.cardName);
+        if (card === undefined) {
+          throw new Error(`card not found ${this.cardName}`);
         }
-        // Calculate the unit of resource we can save and still pay enough
-        const overSpendingAsUnits = Math.floor(Math.abs(megacreditBalance) / unitValue);
-        const toSaveUnits = Math.min(spendingUnits, overSpendingAsUnits);
-
-        megacreditBalance += toSaveUnits * unitValue;
-        return toSaveUnits;
-      };
-
-      if (megacreditBalance > 0 && this.canUseMicrobes()) {
-        this.microbes = deductUnits(this.playerinput.microbes, 2);
-      }
-
-      if (megacreditBalance > 0 && this.canUseFloaters()) {
-        this.floaters = deductUnits(this.playerinput.floaters, 3);
-      }
-      this.availableSteel = Math.max(this.player.steel - this.card.reserveUnits.steel, 0);
-      if (megacreditBalance > 0 && this.canUseSteel()) {
-        this.steel = deductUnits(this.availableSteel, this.player.steelValue, true);
-      }
-
-      this.availableTitanium = Math.max(this.player.titanium - this.card.reserveUnits.titanium, 0);
-      if (megacreditBalance > 0 && this.canUseTitanium()) {
-        this.titanium = deductUnits(this.availableTitanium, this.player.titaniumValue, true);
-      }
-
-      if (megacreditBalance > 0 && this.canUseHeat()) {
-        this.heat = deductUnits(this.player.heat, 1);
-      }
-
-      // If we are overspending
-      if (megacreditBalance < 0) {
-        // Try to spend less resource if possible, in the reverse order of the payment (also from high to low)
-        // We need not try to save heat since heat is paid last at value 1. We will never overspend in heat.
-        // We do not need to save Ti either because Ti is paid last before heat. If we overspend, it is because of Ti.
-        // We cannot reduce the amount of Ti and still pay enough.
-        this.steel -= saveOverSpendingUnits(this.steel, this.player.steelValue);
-        this.floaters -= saveOverSpendingUnits(this.floaters, 3);
-        this.microbes -= saveOverSpendingUnits(this.microbes, 2);
-        this.megaCredits -= saveOverSpendingUnits(this.megaCredits, 1);
-      }
-    },
-    canUseHeat: function() {
-      return this.playerinput.canUseHeat && this.player.heat > 0;
-    },
-    canUseSteel: function() {
-      if (this.card !== undefined && this.availableSteel > 0) {
-        if (this.tags.find((tag) => tag === Tags.BUILDING) !== undefined) {
-          return true;
+        return card;
+      },
+      getCardTags: function () {
+        const card = new CardFinder().getProjectCardByName(this.cardName);
+        if (card === undefined) {
+          throw new Error(`card not found ${this.cardName}`);
         }
-      }
-      return false;
-    },
-    canUseTitanium: function() {
-      if (this.card !== undefined && this.availableTitanium > 0) {
-        if (this.tags.find((tag) => tag === Tags.SPACE) !== undefined) {
-          return true;
+        return card.tags;
+      },
+      setDefaultValues: function () {
+        this.microbes = 0;
+        this.floaters = 0;
+        this.steel = 0;
+        this.titanium = 0;
+        this.heat = 0;
+
+        let megacreditBalance = Math.max(
+          this.cost - this.player.megaCredits,
+          0
+        );
+
+        // Calcualtes the optimal number of units to use given the unit value.
+        //
+        // It reads `megacreditBalance` as the remaining balance, and deducts the
+        // consumed balance as part of this method.
+        //
+        // It returns the number of units consumed from availableUnits to make that
+        const deductUnits = function (
+          availableUnits: number | undefined,
+          unitValue: number,
+          overpay: boolean = true
+        ): number {
+          if (availableUnits === undefined || availableUnits === 0) {
+            return 0;
+          }
+          // The number of units required to sell to meet the balance.
+          const _tmp = megacreditBalance / unitValue;
+          const balanceAsUnits = overpay ? Math.ceil(_tmp) : Math.floor(_tmp);
+          const contributingUnits = Math.min(availableUnits, balanceAsUnits);
+
+          megacreditBalance -= contributingUnits * unitValue;
+          return contributingUnits;
+        };
+
+        // This function help save some money at the end
+        const saveOverSpendingUnits = function (
+          spendingUnits: number | undefined,
+          unitValue: number
+        ): number {
+          if (
+            spendingUnits === undefined ||
+            spendingUnits === 0 ||
+            megacreditBalance === 0
+          ) {
+            return 0;
+          }
+          // Calculate the unit of resource we can save and still pay enough
+          const overSpendingAsUnits = Math.floor(
+            Math.abs(megacreditBalance) / unitValue
+          );
+          const toSaveUnits = Math.min(spendingUnits, overSpendingAsUnits);
+
+          megacreditBalance += toSaveUnits * unitValue;
+          return toSaveUnits;
+        };
+
+        if (megacreditBalance > 0 && this.canUseMicrobes()) {
+          this.microbes = deductUnits(this.playerinput.microbes, 2);
         }
-      }
-      return false;
-    },
-    canUseMicrobes: function() {
-      // FYI Microbes are limited to the Psychrophiles card, which allows spending microbes for Plant cards.
-      if (this.card !== undefined && this.playerinput.microbes !== undefined && this.playerinput.microbes > 0) {
-        if (this.tags.find((tag) => tag === Tags.PLANT) !== undefined) {
-          return true;
+
+        if (megacreditBalance > 0 && this.canUseFloaters()) {
+          this.floaters = deductUnits(this.playerinput.floaters, 3);
         }
-      }
-      return false;
-    },
-    canUseFloaters: function() {
-      // FYI Floaters are limited to the DIRIGIBLES card.
-      if (this.card !== undefined && this.playerinput.floaters !== undefined && this.playerinput.floaters > 0) {
-        if (this.tags.find((tag) => tag === Tags.VENUS) !== undefined) {
-          return true;
+        this.availableSteel = Math.max(
+          this.player.steel - this.card.reserveUnits.steel,
+          0
+        );
+        if (megacreditBalance > 0 && this.canUseSteel()) {
+          this.steel = deductUnits(
+            this.availableSteel,
+            this.player.steelValue,
+            true
+          );
         }
-      }
-      return false;
-    },
-    cardChanged: function() {
-      this.card = this.getCard();
-      this.cost = this.card.calculatedCost || 0;
-      this.tags = this.getCardTags();
 
-      this.megaCredits = (this as unknown as typeof PaymentWidgetMixin.methods).getMegaCreditsMax();
+        this.availableTitanium = Math.max(
+          this.player.titanium - this.card.reserveUnits.titanium,
+          0
+        );
+        if (megacreditBalance > 0 && this.canUseTitanium()) {
+          this.titanium = deductUnits(
+            this.availableTitanium,
+            this.player.titaniumValue,
+            true
+          );
+        }
 
-      this.setDefaultValues();
-    },
-    hasWarning: function(): boolean {
-      return this.warning !== undefined;
-    },
-    hasCardWarning: function(): boolean {
-      return this.card !== undefined && this.card.warning !== undefined;
-    },
-    showReserveSteelWarning: function(): boolean {
-      return this.card?.reserveUnits?.steel > 0 && this.canUseSteel();
-    },
-    showReserveTitaniumWarning: function(): boolean {
-      return this.card?.reserveUnits?.titanium > 0 && this.canUseTitanium();
-    },
-    saveData: function() {
-      const htp: HowToPay = {
-        heat: this.heat,
-        megaCredits: this.megaCredits,
-        steel: this.steel,
-        titanium: this.titanium,
-        microbes: this.microbes,
-        floaters: this.floaters,
-      };
-      if (htp.megaCredits > this.player.megaCredits) {
-        this.warning = 'You don\'t have that many M€';
-        return;
-      }
-      if (this.playerinput.microbes !== undefined && htp.microbes > this.playerinput.microbes) {
-        this.warning = 'You don\'t have enough microbes';
-        return;
-      }
-      if (this.playerinput.floaters !== undefined && htp.floaters > this.playerinput.floaters) {
-        this.warning = 'You don\'t have enough floaters';
-        return;
-      }
-      if (htp.heat > this.player.heat) {
-        this.warning = 'You don\'t have enough heat';
-        return;
-      }
-      if (htp.titanium > this.player.titanium) {
-        this.warning = 'You don\'t have enough titanium';
-        return;
-      }
-      if (htp.steel > this.player.steel) {
-        this.warning = 'You don\'t have enough steel';
-        return;
-      }
+        if (megacreditBalance > 0 && this.canUseHeat()) {
+          this.heat = deductUnits(this.player.heat, 1);
+        }
 
-      const totalSpentAmt = (3 * htp.floaters) + (2 * htp.microbes) + htp.heat + htp.megaCredits + (htp.steel * this.player.steelValue) + (htp.titanium * this.player.titaniumValue);
+        // If we are overspending
+        if (megacreditBalance < 0) {
+          // Try to spend less resource if possible, in the reverse order of the payment (also from high to low)
+          // We need not try to save heat since heat is paid last at value 1. We will never overspend in heat.
+          // We do not need to save Ti either because Ti is paid last before heat. If we overspend, it is because of Ti.
+          // We cannot reduce the amount of Ti and still pay enough.
+          this.steel -= saveOverSpendingUnits(
+            this.steel,
+            this.player.steelValue
+          );
+          this.floaters -= saveOverSpendingUnits(this.floaters, 3);
+          this.microbes -= saveOverSpendingUnits(this.microbes, 2);
+          this.megaCredits -= saveOverSpendingUnits(this.megaCredits, 1);
+        }
+      },
+      canUseHeat: function () {
+        return this.playerinput.canUseHeat && this.player.heat > 0;
+      },
+      canUseSteel: function () {
+        if (this.card !== undefined && this.availableSteel > 0) {
+          if (this.tags.find((tag) => tag === Tags.BUILDING) !== undefined) {
+            return true;
+          }
+        }
+        return false;
+      },
+      canUseTitanium: function () {
+        if (this.card !== undefined && this.availableTitanium > 0) {
+          if (this.tags.find((tag) => tag === Tags.SPACE) !== undefined) {
+            return true;
+          }
+        }
+        return false;
+      },
+      canUseMicrobes: function () {
+        // FYI Microbes are limited to the Psychrophiles card, which allows spending microbes for Plant cards.
+        if (
+          this.card !== undefined &&
+          this.playerinput.microbes !== undefined &&
+          this.playerinput.microbes > 0
+        ) {
+          if (this.tags.find((tag) => tag === Tags.PLANT) !== undefined) {
+            return true;
+          }
+        }
+        return false;
+      },
+      canUseFloaters: function () {
+        // FYI Floaters are limited to the DIRIGIBLES card.
+        if (
+          this.card !== undefined &&
+          this.playerinput.floaters !== undefined &&
+          this.playerinput.floaters > 0
+        ) {
+          if (this.tags.find((tag) => tag === Tags.VENUS) !== undefined) {
+            return true;
+          }
+        }
+        return false;
+      },
+      cardChanged: function () {
+        this.card = this.getCard();
+        this.cost = this.card.calculatedCost || 0;
+        this.tags = this.getCardTags();
 
-      if (totalSpentAmt < this.cost) {
-        this.warning = 'Haven\'t spent enough';
-        return;
-      }
+        this.megaCredits = (
+          this as unknown as typeof PaymentWidgetMixin.methods
+        ).getMegaCreditsMax();
 
-      if (totalSpentAmt > this.cost) {
-        const diff = totalSpentAmt - this.cost;
-        if (htp.titanium && diff >= this.player.titaniumValue) {
-          this.warning = 'You cannot overspend titanium';
+        this.setDefaultValues();
+      },
+      hasWarning: function (): boolean {
+        return this.warning !== undefined;
+      },
+      hasCardWarning: function (): boolean {
+        return this.card !== undefined && this.card.warning !== undefined;
+      },
+      showReserveSteelWarning: function (): boolean {
+        return this.card?.reserveUnits?.steel > 0 && this.canUseSteel();
+      },
+      showReserveTitaniumWarning: function (): boolean {
+        return this.card?.reserveUnits?.titanium > 0 && this.canUseTitanium();
+      },
+      saveData: function () {
+        const htp: HowToPay = {
+          heat: this.heat,
+          megaCredits: this.megaCredits,
+          steel: this.steel,
+          titanium: this.titanium,
+          microbes: this.microbes,
+          floaters: this.floaters,
+        };
+        if (htp.megaCredits > this.player.megaCredits) {
+          this.warning = "You don't have that many M€";
           return;
         }
-        if (htp.steel && diff >= this.player.steelValue) {
-          this.warning = 'You cannot overspend steel';
+        if (
+          this.playerinput.microbes !== undefined &&
+          htp.microbes > this.playerinput.microbes
+        ) {
+          this.warning = "You don't have enough microbes";
           return;
         }
-        if (htp.floaters && diff >= 3) {
-          this.warning = 'You cannot overspend floaters';
+        if (
+          this.playerinput.floaters !== undefined &&
+          htp.floaters > this.playerinput.floaters
+        ) {
+          this.warning = "You don't have enough floaters";
           return;
         }
-        if (htp.microbes && diff >= 2) {
-          this.warning = 'You cannot overspend microbes';
+        if (htp.heat > this.player.heat) {
+          this.warning = "You don't have enough heat";
           return;
         }
-        if (htp.heat && diff >= 1) {
-          this.warning = 'You cannot overspend heat';
+        if (htp.titanium > this.player.titanium) {
+          this.warning = "You don't have enough titanium";
           return;
         }
-        if (htp.megaCredits && diff >= 1) {
-          this.warning = 'You cannot overspend megaCredits';
+        if (htp.steel > this.player.steel) {
+          this.warning = "You don't have enough steel";
           return;
         }
-      }
 
-      const showAlert = PreferencesManager.load('show_alerts') === '1';
+        const totalSpentAmt =
+          3 * htp.floaters +
+          2 * htp.microbes +
+          htp.heat +
+          htp.megaCredits +
+          htp.steel * this.player.steelValue +
+          htp.titanium * this.player.titaniumValue;
 
-      if (totalSpentAmt > this.cost && showAlert) {
-        const diff = totalSpentAmt - this.cost;
+        if (totalSpentAmt < this.cost) {
+          this.warning = "Haven't spent enough";
+          return;
+        }
 
-        if (confirm('Warning: You are overpaying by ' + diff + ' M€')) {
-          this.onsave([[
-            this.card.name,
-            JSON.stringify(htp),
-          ]]);
+        if (totalSpentAmt > this.cost) {
+          const diff = totalSpentAmt - this.cost;
+          if (htp.titanium && diff >= this.player.titaniumValue) {
+            this.warning = 'You cannot overspend titanium';
+            return;
+          }
+          if (htp.steel && diff >= this.player.steelValue) {
+            this.warning = 'You cannot overspend steel';
+            return;
+          }
+          if (htp.floaters && diff >= 3) {
+            this.warning = 'You cannot overspend floaters';
+            return;
+          }
+          if (htp.microbes && diff >= 2) {
+            this.warning = 'You cannot overspend microbes';
+            return;
+          }
+          if (htp.heat && diff >= 1) {
+            this.warning = 'You cannot overspend heat';
+            return;
+          }
+          if (htp.megaCredits && diff >= 1) {
+            this.warning = 'You cannot overspend megaCredits';
+            return;
+          }
+        }
+
+        const showAlert = PreferencesManager.load('show_alerts') === '1';
+
+        if (totalSpentAmt > this.cost && showAlert) {
+          const diff = totalSpentAmt - this.cost;
+
+          if (confirm('Warning: You are overpaying by ' + diff + ' M€')) {
+            this.onsave([[this.card.name, JSON.stringify(htp)]]);
+          } else {
+            this.warning = 'Please adjust payment amount';
+            return;
+          }
         } else {
-          this.warning = 'Please adjust payment amount';
-          return;
+          this.onsave([[this.card.name, JSON.stringify(htp)]]);
         }
-      } else {
-        this.onsave([[
-          this.card.name,
-          JSON.stringify(htp),
-        ]]);
-      }
+      },
     },
-  },
-  template: `<div class="payments_cont">
+    template: `<div class="payments_cont">
 
   <div v-if="showtitle === true">{{ $t(playerinput.title) }}</div>
 
@@ -417,4 +466,5 @@ export const SelectHowToPayForProjectCard = Vue.component('select-how-to-pay-for
     </div>
   </section>
 </div>`,
-});
+  }
+);

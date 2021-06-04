@@ -4,19 +4,20 @@ import {Player} from '../../../src/Player';
 import {Resources} from '../../../src/Resources';
 import {TestPlayers} from '../../TestPlayers';
 
-describe('FusionPower', function() {
-  let card : FusionPower; let player : Player;
+describe('FusionPower', function () {
+  let card: FusionPower;
+  let player: Player;
 
-  beforeEach(function() {
+  beforeEach(function () {
     card = new FusionPower();
     player = TestPlayers.BLUE.newPlayer();
   });
 
-  it('Can\'t play', function() {
+  it("Can't play", function () {
     expect(card.canPlay(player)).is.not.true;
   });
 
-  it('Should play', function() {
+  it('Should play', function () {
     player.playedCards.push(card, card);
     expect(card.canPlay(player)).is.true;
 

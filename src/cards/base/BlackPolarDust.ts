@@ -19,7 +19,8 @@ export class BlackPolarDust extends Card implements IProjectCard {
 
       metadata: {
         cardNumber: '022',
-        description: 'Place an ocean tile. Decrease your M€ production 2 steps and increase your heat production 3 steps.',
+        description:
+          'Place an ocean tile. Decrease your M€ production 2 steps and increase your heat production 3 steps.',
         renderData: CardRenderer.builder((b) => {
           b.production((pb) => {
             pb.minus().megacredits(2).br;
@@ -30,11 +31,19 @@ export class BlackPolarDust extends Card implements IProjectCard {
     });
   }
   public canPlay(player: Player): boolean {
-    const meetsMcProdRequirement = player.getProduction(Resources.MEGACREDITS) >= -3;
-    const oceansMaxed = player.game.board.getOceansOnBoard() === MAX_OCEAN_TILES;
+    const meetsMcProdRequirement =
+      player.getProduction(Resources.MEGACREDITS) >= -3;
+    const oceansMaxed =
+      player.game.board.getOceansOnBoard() === MAX_OCEAN_TILES;
 
-    if (PartyHooks.shouldApplyPolicy(player.game, PartyName.REDS) && !oceansMaxed) {
-      return player.canAfford(player.getCardCost(this) + REDS_RULING_POLICY_COST) && meetsMcProdRequirement;
+    if (
+      PartyHooks.shouldApplyPolicy(player.game, PartyName.REDS) &&
+      !oceansMaxed
+    ) {
+      return (
+        player.canAfford(player.getCardCost(this) + REDS_RULING_POLICY_COST) &&
+        meetsMcProdRequirement
+      );
     }
 
     return meetsMcProdRequirement;

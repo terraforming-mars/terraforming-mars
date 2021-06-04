@@ -7,13 +7,18 @@ import {SpaceBonus} from '../../../src/SpaceBonus';
 import {ARES_OPTIONS_NO_HAZARDS} from '../../ares/AresTestHelper';
 import {TestPlayers} from '../../TestPlayers';
 
-describe('MoholeAreaAres', function() {
-  it('Should play', function() {
+describe('MoholeAreaAres', function () {
+  it('Should play', function () {
     const card = new MoholeAreaAres();
     const player = TestPlayers.BLUE.newPlayer();
     const redPlayer = TestPlayers.RED.newPlayer();
 
-    Game.newInstance('foobar', [player, redPlayer], player, ARES_OPTIONS_NO_HAZARDS);
+    Game.newInstance(
+      'foobar',
+      [player, redPlayer],
+      player,
+      ARES_OPTIONS_NO_HAZARDS
+    );
     const action = card.play(player);
 
     expect(action).is.not.undefined;
@@ -23,6 +28,8 @@ describe('MoholeAreaAres', function() {
     action.cb(space);
 
     expect(space.tile && space.tile.tileType).to.eq(TileType.MOHOLE_AREA);
-    expect(space.adjacency).to.deep.eq({bonus: [SpaceBonus.HEAT, SpaceBonus.HEAT]});
+    expect(space.adjacency).to.deep.eq({
+      bonus: [SpaceBonus.HEAT, SpaceBonus.HEAT],
+    });
   });
 });

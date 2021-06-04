@@ -7,25 +7,26 @@ import {Game} from '../../../src/Game';
 import {Player} from '../../../src/Player';
 import {TestPlayers} from '../../TestPlayers';
 
-describe('ValleyTrust', function() {
-  let card : ValleyTrust; let player : Player;
+describe('ValleyTrust', function () {
+  let card: ValleyTrust;
+  let player: Player;
 
-  beforeEach(function() {
+  beforeEach(function () {
     card = new ValleyTrust();
     player = TestPlayers.BLUE.newPlayer();
     Game.newInstance('foobar', [player], player);
   });
 
-  it('Doesn\'t get card discount for other tags', function() {
+  it("Doesn't get card discount for other tags", function () {
     expect(card.getCardDiscount(player, new Ants())).to.eq(0);
   });
 
-  it('Gets card discount for science tags', function() {
+  it('Gets card discount for science tags', function () {
     expect(card.getCardDiscount(player, new MedicalLab())).to.eq(2);
     expect(card.getCardDiscount(player, new Research())).to.eq(4);
   });
 
-  it('Should play', function() {
+  it('Should play', function () {
     const action = card.play();
     expect(action).is.undefined;
   });

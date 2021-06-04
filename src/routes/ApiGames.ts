@@ -8,7 +8,11 @@ export class ApiGames extends Handler {
     super({validateServerId: true});
   }
 
-  public get(_req: http.IncomingMessage, res: http.ServerResponse, ctx: IContext): void {
+  public get(
+    _req: http.IncomingMessage,
+    res: http.ServerResponse,
+    ctx: IContext
+  ): void {
     const ids = ctx.gameLoader.getLoadedGameIds();
     ctx.route.writeJson(res, ids);
   }

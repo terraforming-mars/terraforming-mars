@@ -64,4 +64,3 @@ describe('MareSerenitatisMine', () => {
     expect(player.getTerraformRating()).eq(16);
   });
 });
-

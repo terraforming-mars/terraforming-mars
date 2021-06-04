@@ -22,16 +22,18 @@ export const SelectAmount = Vue.component('select-amount', {
       type: Boolean,
     },
   },
-  data: function() {
+  data: function () {
     return {
-      amount: this.playerinput.maxByDefault ? String(this.playerinput.max) : String(this.playerinput.min),
+      amount: this.playerinput.maxByDefault
+        ? String(this.playerinput.max)
+        : String(this.playerinput.min),
     };
   },
   methods: {
-    saveData: function() {
+    saveData: function () {
       this.onsave([[String(parseInt(this.amount))]]);
     },
-    setMaxValue: function() {
+    setMaxValue: function () {
       this.amount = String(this.playerinput.max);
     },
   },

@@ -9,10 +9,10 @@ import {IProjectCard} from '../IProjectCard';
 import {Units} from '../../Units';
 
 interface StaticPreludeProperties {
-    metadata: CardMetadata;
-    name: CardName;
-    tags?: Array<Tags>;
-    productionBox?: Units;
+  metadata: CardMetadata;
+  name: CardName;
+  tags?: Array<Tags>;
+  productionBox?: Units;
 }
 
 export abstract class PreludeCard extends Card implements IProjectCard {

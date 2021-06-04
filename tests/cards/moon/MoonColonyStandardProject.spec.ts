@@ -63,4 +63,3 @@ describe('MoonColonyStandardProject', () => {
     expect(player.getTerraformRating()).eq(15);
   });
 });
-

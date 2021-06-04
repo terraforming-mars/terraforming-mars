@@ -6,10 +6,14 @@ import {SelectSpace} from '../../../src/inputs/SelectSpace';
 import {Player} from '../../../src/Player';
 import {TestPlayers} from '../../TestPlayers';
 
-describe('GiantIceAsteroid', function() {
-  let card : GiantIceAsteroid; let player : Player; let player2 : Player; let player3 : Player; let game : Game;
+describe('GiantIceAsteroid', function () {
+  let card: GiantIceAsteroid;
+  let player: Player;
+  let player2: Player;
+  let player3: Player;
+  let game: Game;
 
-  beforeEach(function() {
+  beforeEach(function () {
     card = new GiantIceAsteroid();
     player = TestPlayers.BLUE.newPlayer();
     player2 = TestPlayers.RED.newPlayer();
@@ -17,7 +21,7 @@ describe('GiantIceAsteroid', function() {
     game = Game.newInstance('foobar', [player, player2, player3], player);
   });
 
-  it('Should play', function() {
+  it('Should play', function () {
     player2.plants = 4;
     player3.plants = 6;
     card.play(player);
@@ -41,4 +45,3 @@ describe('GiantIceAsteroid', function() {
     expect(player.getTerraformRating()).to.eq(24);
   });
 });
-

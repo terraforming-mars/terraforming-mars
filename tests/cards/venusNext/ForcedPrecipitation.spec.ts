@@ -5,22 +5,24 @@ import {OrOptions} from '../../../src/inputs/OrOptions';
 import {Player} from '../../../src/Player';
 import {TestPlayers} from '../../TestPlayers';
 
-describe('ForcedPrecipitation', function() {
-  let card : ForcedPrecipitation; let player : Player; let game : Game;
+describe('ForcedPrecipitation', function () {
+  let card: ForcedPrecipitation;
+  let player: Player;
+  let game: Game;
 
-  beforeEach(function() {
+  beforeEach(function () {
     card = new ForcedPrecipitation();
     player = TestPlayers.BLUE.newPlayer();
     const redPlayer = TestPlayers.RED.newPlayer();
     game = Game.newInstance('foobar', [player, redPlayer], player);
   });
 
-  it('Should play', function() {
+  it('Should play', function () {
     const action = card.play();
     expect(action).is.undefined;
   });
 
-  it('Should act - both actions available', function() {
+  it('Should act - both actions available', function () {
     player.playedCards.push(card);
     player.megaCredits = 10;
 
@@ -40,7 +42,7 @@ describe('ForcedPrecipitation', function() {
     expect(game.getVenusScaleLevel()).to.eq(2);
   });
 
-  it('Should act - only one action available', function() {
+  it('Should act - only one action available', function () {
     player.playedCards.push(card);
     player.megaCredits = 0;
     player.addResourceTo(card, 2);

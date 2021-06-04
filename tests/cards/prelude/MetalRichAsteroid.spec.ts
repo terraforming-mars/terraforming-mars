@@ -3,8 +3,8 @@ import {MetalRichAsteroid} from '../../../src/cards/prelude/MetalRichAsteroid';
 import {Game} from '../../../src/Game';
 import {TestPlayers} from '../../TestPlayers';
 
-describe('Metal-RichAsteroid', function() {
-  it('Should play', function() {
+describe('Metal-RichAsteroid', function () {
+  it('Should play', function () {
     const card = new MetalRichAsteroid();
     const player = TestPlayers.BLUE.newPlayer();
     const game = Game.newInstance('foobar', [player], player);

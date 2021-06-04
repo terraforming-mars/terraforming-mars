@@ -1,11 +1,8 @@
 {
-    "compilerOptions": {
-        "outDir": "../build/src",
-        "composite": true,
-    },
-    "extends": "../tsconfig.json",
-    "include": [
-        "**/*.ts",
-        "genfiles/*.json",
-    ]
+  "compilerOptions": {
+    "outDir": "../build/src",
+    "composite": true
+  },
+  "extends": "../tsconfig.json",
+  "include": ["**/*.ts", "genfiles/*.json"]
 }

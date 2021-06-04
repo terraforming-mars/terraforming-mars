@@ -18,12 +18,16 @@ export class EcologyExperts extends PreludeCard {
           b.production((pb) => pb.plants(1)).br.br;
           b.projectRequirements();
         }),
-        description: 'Increase your plant production 1 step. Play a card from hand, ignoring global requirements.',
+        description:
+          'Increase your plant production 1 step. Play a card from hand, ignoring global requirements.',
       },
     });
   }
   public getRequirementBonus(player: Player): number {
-    if (player.lastCardPlayed !== undefined && player.lastCardPlayed.name === this.name) {
+    if (
+      player.lastCardPlayed !== undefined &&
+      player.lastCardPlayed.name === this.name
+    ) {
       // Magic number high enough to always ignore requirements.
       return 50;
     }

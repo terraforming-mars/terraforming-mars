@@ -19,11 +19,14 @@ export class LunaConference extends Card implements IProjectCard {
       cardType: CardType.EVENT,
       tags: [Tags.SCIENCE, Tags.MOON],
       cost: 5,
-      requirements: CardRequirements.builder((b) => b.party(PartyName.SCIENTISTS)),
+      requirements: CardRequirements.builder((b) =>
+        b.party(PartyName.SCIENTISTS)
+      ),
 
       metadata: {
-        description: 'Requires that Scientists are ruling or that you have 2 delegates there. ' +
-        'Gain 2 M€ per road tile on the Moon. Gain 2M€ per colony tile on the Moon.',
+        description:
+          'Requires that Scientists are ruling or that you have 2 delegates there. ' +
+          'Gain 2 M€ per road tile on the Moon. Gain 2M€ per colony tile on the Moon.',
         cardNumber: 'M58',
         renderData: CardRenderer.builder((b) => {
           b.megacredits(2).slash().moonRoad({size: Size.SMALL}).any.br;
@@ -31,12 +34,22 @@ export class LunaConference extends Card implements IProjectCard {
         }),
       },
     });
-  };
+  }
 
   public play(player: Player) {
-    const moonRoadCount = MoonExpansion.tiles(player.game, TileType.MOON_ROAD, {surfaceOnly: true}).length;
-    const moonColonyCount = MoonExpansion.tiles(player.game, TileType.MOON_COLONY, {surfaceOnly: true}).length;
-    player.addResource(Resources.MEGACREDITS, (moonRoadCount + moonColonyCount) * 2, {log: true});
+    const moonRoadCount = MoonExpansion.tiles(player.game, TileType.MOON_ROAD, {
+      surfaceOnly: true,
+    }).length;
+    const moonColonyCount = MoonExpansion.tiles(
+      player.game,
+      TileType.MOON_COLONY,
+      {surfaceOnly: true}
+    ).length;
+    player.addResource(
+      Resources.MEGACREDITS,
+      (moonRoadCount + moonColonyCount) * 2,
+      {log: true}
+    );
 
     return undefined;
   }

@@ -26,7 +26,8 @@ export class PowerSupplyConsortium extends Card implements IProjectCard {
             pb.plus().energy(1);
           });
         }),
-        description: 'Requires 2 Power tags. Decrease any Energy production 1 step and increase your own 1 step.',
+        description:
+          'Requires 2 Power tags. Decrease any Energy production 1 step and increase your own 1 step.',
       },
     });
   }

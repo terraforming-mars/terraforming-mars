@@ -23,7 +23,7 @@ export abstract class Board {
     spaces.forEach((space) => {
       this.adjacentSpaces.set(space.id, this.computeAdjacentSpaces(space));
     });
-  };
+  }
 
   public abstract getVolcanicSpaceIds(): Array<string>;
 
@@ -77,9 +77,12 @@ export abstract class Board {
       ];
       const spaces: Array<ISpace> = [];
       for (const [x, y] of coords) {
-        const adj = this.spaces.find((adj) =>
-          space !== adj && adj.spaceType !== SpaceType.COLONY &&
-            adj.x === x && adj.y === y,
+        const adj = this.spaces.find(
+          (adj) =>
+            space !== adj &&
+            adj.spaceType !== SpaceType.COLONY &&
+            adj.x === x &&
+            adj.y === y
         );
         if (adj !== undefined) {
           spaces.push(adj);
@@ -102,7 +105,7 @@ export abstract class Board {
 
   public getSpaceByTileCard(cardName: string): ISpace | undefined {
     return this.spaces.find(
-      (space) => space.tile !== undefined && space.tile.card === cardName,
+      (space) => space.tile !== undefined && space.tile.card === cardName
     );
   }
 
@@ -112,8 +115,9 @@ export abstract class Board {
 
   public getOceansTiles(countUpgradedOceans: boolean): Array<ISpace> {
     if (!countUpgradedOceans) {
-      return this.spaces.filter((space) => space.tile !== undefined &&
-                      space.tile.tileType === TileType.OCEAN,
+      return this.spaces.filter(
+        (space) =>
+          space.tile !== undefined && space.tile.tileType === TileType.OCEAN
       );
     } else {
       return this.spaces.filter((space) => Board.isOceanSpace(space));
@@ -131,24 +135,33 @@ export abstract class Board {
   public getAvailableSpacesForCity(player: Player): Array<ISpace> {
     // A city cannot be adjacent to another city
     return this.getAvailableSpacesOnLand(player).filter(
-      (space) => this.getAdjacentSpaces(space).some((adjacentSpace) => Board.isCitySpace(adjacentSpace)) === false,
+      (space) =>
+        this.getAdjacentSpaces(space).some((adjacentSpace) =>
+          Board.isCitySpace(adjacentSpace)
+        ) === false
     );
   }
 
   public getAvailableSpacesForMarker(player: Player): Array<ISpace> {
-    const spaces = this.getAvailableSpacesOnLand(player)
-      .filter(
-        (space) => this.getAdjacentSpaces(space).find(
-          (adj) => adj.player === player,
-        ) !== undefined,
-      );
-      // Remove duplicates
+    const spaces = this.getAvailableSpacesOnLand(player).filter(
+      (space) =>
+        this.getAdjacentSpaces(space).find((adj) => adj.player === player) !==
+        undefined
+    );
+    // Remove duplicates
     return spaces.filter((space, index) => spaces.indexOf(space) === index);
   }
 
   public getAvailableSpacesForGreenery(player: Player): Array<ISpace> {
-    const spacesForGreenery = this.getAvailableSpacesOnLand(player)
-      .filter((space) => this.getAdjacentSpaces(space).find((adj) => adj.tile !== undefined && adj.player === player && adj.tile.tileType !== TileType.OCEAN) !== undefined);
+    const spacesForGreenery = this.getAvailableSpacesOnLand(player).filter(
+      (space) =>
+        this.getAdjacentSpaces(space).find(
+          (adj) =>
+            adj.tile !== undefined &&
+            adj.player === player &&
+            adj.tile.tileType !== TileType.OCEAN
+        ) !== undefined
+    );
 
     // Spaces next to tiles you own
     if (spacesForGreenery.length > 0) {
@@ -159,24 +172,27 @@ export abstract class Board {
   }
 
   public getAvailableSpacesForOcean(player: Player): Array<ISpace> {
-    return this.getSpaces(SpaceType.OCEAN, player)
-      .filter(
-        (space) => space.tile === undefined &&
-                      (space.player === undefined || space.player === player),
-      );
+    return this.getSpaces(SpaceType.OCEAN, player).filter(
+      (space) =>
+        space.tile === undefined &&
+        (space.player === undefined || space.player === player)
+    );
   }
 
   public getAvailableSpacesOnLand(player?: Player): Array<ISpace> {
-    const landSpaces = this.getSpaces(SpaceType.LAND, player).filter((space) => {
-      const hasPlayerMarker = space.player !== undefined;
-      // A space is available if it doesn't have a player marker on it or it belongs to |player|
-      const safeForPlayer = !hasPlayerMarker || space.player === player;
-      // And also, if it doesn't have a tile. Unless it's a hazard tile.
-      const playableSpace = space.tile === undefined || AresHandler.hasHazardTile(space);
-      // If it does have a hazard tile, make sure it's not a protected one.
-      const blockedByDesperateMeasures = space.tile?.protectedHazard === true;
-      return safeForPlayer && playableSpace && !blockedByDesperateMeasures;
-    });
+    const landSpaces = this.getSpaces(SpaceType.LAND, player).filter(
+      (space) => {
+        const hasPlayerMarker = space.player !== undefined;
+        // A space is available if it doesn't have a player marker on it or it belongs to |player|
+        const safeForPlayer = !hasPlayerMarker || space.player === player;
+        // And also, if it doesn't have a tile. Unless it's a hazard tile.
+        const playableSpace =
+          space.tile === undefined || AresHandler.hasHazardTile(space);
+        // If it does have a hazard tile, make sure it's not a protected one.
+        const blockedByDesperateMeasures = space.tile?.protectedHazard === true;
+        return safeForPlayer && playableSpace && !blockedByDesperateMeasures;
+      }
+    );
 
     return landSpaces;
   }
@@ -190,11 +206,17 @@ export abstract class Board {
     distance: number,
     direction: -1 | 1,
     player: Player | undefined = undefined,
-    predicate: (value: ISpace) => boolean = (_x) => true) {
-    const spaces = this.spaces.filter((space) => {
-      return this.canPlaceTile(space) && (space.player === undefined || space.player === player);
-    }).filter(predicate);
-    let idx = (direction === 1) ? distance : (spaces.length - (distance + 1));
+    predicate: (value: ISpace) => boolean = (_x) => true
+  ) {
+    const spaces = this.spaces
+      .filter((space) => {
+        return (
+          this.canPlaceTile(space) &&
+          (space.player === undefined || space.player === player)
+        );
+      })
+      .filter(predicate);
+    let idx = direction === 1 ? distance : spaces.length - (distance + 1);
     if (spaces.length === 0) {
       throw new Error('no spaces available');
     }
@@ -209,9 +231,11 @@ export abstract class Board {
 
   public getNonReservedLandSpaces(): Array<ISpace> {
     return this.spaces.filter((space) => {
-      return space.spaceType === SpaceType.LAND &&
+      return (
+        space.spaceType === SpaceType.LAND &&
         (space.tile === undefined || AresHandler.hasHazardTile(space)) &&
-        space.player === undefined;
+        space.player === undefined
+      );
     });
   }
 
@@ -220,13 +244,26 @@ export abstract class Board {
   }
 
   public static isCitySpace(space: ISpace): boolean {
-    const cityTileTypes = [TileType.CITY, TileType.CAPITAL, TileType.OCEAN_CITY];
-    return space.tile !== undefined && cityTileTypes.includes(space.tile.tileType);
+    const cityTileTypes = [
+      TileType.CITY,
+      TileType.CAPITAL,
+      TileType.OCEAN_CITY,
+    ];
+    return (
+      space.tile !== undefined && cityTileTypes.includes(space.tile.tileType)
+    );
   }
 
   public static isOceanSpace(space: ISpace): boolean {
-    const oceanTileTypes = [TileType.OCEAN, TileType.OCEAN_CITY, TileType.OCEAN_FARM, TileType.OCEAN_SANCTUARY];
-    return space.tile !== undefined && oceanTileTypes.includes(space.tile.tileType);
+    const oceanTileTypes = [
+      TileType.OCEAN,
+      TileType.OCEAN_CITY,
+      TileType.OCEAN_FARM,
+      TileType.OCEAN_SANCTUARY,
+    ];
+    return (
+      space.tile !== undefined && oceanTileTypes.includes(space.tile.tileType)
+    );
   }
 
   public serialize(): SerializedBoard {
@@ -246,7 +283,10 @@ export abstract class Board {
     };
   }
 
-  public static deserializeSpace(serialized: SerializedSpace, players: Array<Player>): ISpace {
+  public static deserializeSpace(
+    serialized: SerializedSpace,
+    players: Array<Player>
+  ): ISpace {
     const playerId: PlayerId | undefined = serialized.player;
     const player = players.find((p) => p.id === playerId);
     const space: ISpace = {
@@ -270,7 +310,10 @@ export abstract class Board {
     return space;
   }
 
-  public static deserializeSpaces(spaces: Array<SerializedSpace>, players: Array<Player>): Array<ISpace> {
+  public static deserializeSpaces(
+    spaces: Array<SerializedSpace>,
+    players: Array<Player>
+  ): Array<ISpace> {
     return spaces.map((space) => Board.deserializeSpace(space, players));
   }
 }

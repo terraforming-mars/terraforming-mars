@@ -17,11 +17,12 @@ import {Resources} from '../../src/Resources';
 import {SmallAsteroid} from '../../src/cards/promo/SmallAsteroid';
 import {OrOptions} from '../../src/inputs/OrOptions';
 
-describe('CardRequirements', function() {
-  let player: Player; let player2: Player;
+describe('CardRequirements', function () {
+  let player: Player;
+  let player2: Player;
   const adaptationTechnology = new AdaptationTechnology();
 
-  beforeEach(function() {
+  beforeEach(function () {
     player = TestPlayers.BLUE.newPlayer();
     player2 = TestPlayers.RED.newPlayer();
     const gameOptions = TestingUtils.setCustomGameOptions();
@@ -29,7 +30,7 @@ describe('CardRequirements', function() {
     Game.newInstance('foobar', [player, player2], player, gameOptions);
   });
 
-  it('satisfies properly for oceans', function() {
+  it('satisfies properly for oceans', function () {
     const requirements = CardRequirements.builder((b) => b.oceans(5));
     const oceanSpaces = player.game.board.getAvailableSpacesForOcean(player);
     for (let i = 0; i < 5; i++) {
@@ -42,8 +43,10 @@ describe('CardRequirements', function() {
     }
   });
 
-  it('satisfies properly for temperature max', function() {
-    const requirements = CardRequirements.builder((b) => b.temperature(-10).max());
+  it('satisfies properly for temperature max', function () {
+    const requirements = CardRequirements.builder((b) =>
+      b.temperature(-10).max()
+    );
     expect(requirements.satisfies(player)).eq(true);
     (player.game as any).temperature = -10;
     expect(requirements.satisfies(player)).eq(true);
@@ -53,7 +56,7 @@ describe('CardRequirements', function() {
     expect(requirements.satisfies(player)).eq(true);
   });
 
-  it('satisfies properly for oxygen', function() {
+  it('satisfies properly for oxygen', function () {
     const requirements = CardRequirements.builder((b) => b.oxygen(4));
     expect(requirements.satisfies(player)).eq(false);
     (player.game as any).oxygenLevel = 4;
@@ -64,7 +67,7 @@ describe('CardRequirements', function() {
     expect(requirements.satisfies(player)).eq(true);
   });
 
-  it('satisfies properly for venus', function() {
+  it('satisfies properly for venus', function () {
     const requirements = CardRequirements.builder((b) => b.venus(8));
     expect(requirements.satisfies(player)).eq(false);
     (player.game as any).venusScaleLevel = 8;
@@ -75,7 +78,7 @@ describe('CardRequirements', function() {
     expect(requirements.satisfies(player)).eq(true);
   });
 
-  it('satisfies properly for tr', function() {
+  it('satisfies properly for tr', function () {
     const requirements = CardRequirements.builder((b) => b.tr(25));
     expect(requirements.satisfies(player)).eq(false);
     (player as any).terraformRating = 25;
@@ -86,15 +89,17 @@ describe('CardRequirements', function() {
     expect(requirements.satisfies(player)).eq(false);
   });
 
-  it('satisfies properly for chairman', function() {
+  it('satisfies properly for chairman', function () {
     const requirements = CardRequirements.builder((b) => b.chairman());
     expect(requirements.satisfies(player)).eq(false);
     player.game.turmoil!.chairman = player.id;
     expect(requirements.satisfies(player)).eq(true);
   });
 
-  it('satisfies properly for resourceTypes', function() {
-    const requirements = CardRequirements.builder((b) => b.resourceTypes(3).max());
+  it('satisfies properly for resourceTypes', function () {
+    const requirements = CardRequirements.builder((b) =>
+      b.resourceTypes(3).max()
+    );
     expect(requirements.satisfies(player)).eq(true);
     player.megaCredits = 10;
     player.steel = 2;
@@ -107,7 +112,7 @@ describe('CardRequirements', function() {
     expect(requirements.satisfies(player)).eq(false);
   });
 
-  it('satisfies properly for greeneries', function() {
+  it('satisfies properly for greeneries', function () {
     const requirements = CardRequirements.builder((b) => b.greeneries(2).max());
     expect(requirements.satisfies(player)).eq(true);
     AresTestHelper.addGreenery(player);
@@ -120,16 +125,22 @@ describe('CardRequirements', function() {
     expect(requirements.satisfies(player)).eq(false);
   });
 
-  it('satisfies properly for cities', function() {
+  it('satisfies properly for cities', function () {
     const requirements = CardRequirements.builder((b) => b.cities(2).any());
     expect(requirements.satisfies(player)).eq(false);
-    player.game.addCityTile(player2, player.game.board.getAvailableSpacesForCity(player)[0].id);
+    player.game.addCityTile(
+      player2,
+      player.game.board.getAvailableSpacesForCity(player)[0].id
+    );
     expect(requirements.satisfies(player)).eq(false);
-    player.game.addCityTile(player, player.game.board.getAvailableSpacesForCity(player)[0].id);
+    player.game.addCityTile(
+      player,
+      player.game.board.getAvailableSpacesForCity(player)[0].id
+    );
     expect(requirements.satisfies(player)).eq(true);
   });
 
-  it('satisfies properly for colonies', function() {
+  it('satisfies properly for colonies', function () {
     const requirements = CardRequirements.builder((b) => b.colonies(1));
     const colony = new Ceres();
     player.game.colonies.push(colony);
@@ -140,7 +151,7 @@ describe('CardRequirements', function() {
     expect(requirements.satisfies(player)).eq(true);
   });
 
-  it('satisfies properly for floaters', function() {
+  it('satisfies properly for floaters', function () {
     const requirements = CardRequirements.builder((b) => b.floaters(2));
     const corp = new Celestic();
     player.corporationCard = corp;
@@ -150,7 +161,7 @@ describe('CardRequirements', function() {
     expect(requirements.satisfies(player)).eq(true);
   });
 
-  it('satisfies properly for partyLeaders', function() {
+  it('satisfies properly for partyLeaders', function () {
     const requirements = CardRequirements.builder((b) => b.partyLeaders(1));
     expect(requirements.satisfies(player)).eq(false);
     const greens = player.game.turmoil!.getPartyByName(PartyName.GREENS)!;
@@ -158,8 +169,10 @@ describe('CardRequirements', function() {
     expect(requirements.satisfies(player)).eq(true);
   });
 
-  it('satisfies properly for same tags', function() {
-    const requirements = CardRequirements.builder((b) => b.tag(Tags.MICROBE, 2));
+  it('satisfies properly for same tags', function () {
+    const requirements = CardRequirements.builder((b) =>
+      b.tag(Tags.MICROBE, 2)
+    );
 
     const ants = new Ants();
     player.playedCards.push(ants);
@@ -170,8 +183,10 @@ describe('CardRequirements', function() {
     expect(requirements.satisfies(player)).eq(true);
   });
 
-  it('satisfies properly for different tags', function() {
-    const requirements = CardRequirements.builder((b) => b.tag(Tags.MICROBE).tag(Tags.ANIMAL));
+  it('satisfies properly for different tags', function () {
+    const requirements = CardRequirements.builder((b) =>
+      b.tag(Tags.MICROBE).tag(Tags.ANIMAL)
+    );
 
     const researchCoordination = new ResearchCoordination();
     player.playedCards.push(researchCoordination);
@@ -182,22 +197,34 @@ describe('CardRequirements', function() {
     expect(requirements.satisfies(player)).eq(true);
   });
 
-  it('satisfies properly for production', function() {
-    const requirements = CardRequirements.builder((b) => b.production(Resources.PLANTS));
+  it('satisfies properly for production', function () {
+    const requirements = CardRequirements.builder((b) =>
+      b.production(Resources.PLANTS)
+    );
     expect(requirements.satisfies(player)).eq(false);
     player.addProduction(Resources.PLANTS, 1);
     expect(requirements.satisfies(player)).eq(true);
   });
 
-  it('satisfies properly for party', function() {
-    const requirements = CardRequirements.builder((b) => b.party(PartyName.MARS));
+  it('satisfies properly for party', function () {
+    const requirements = CardRequirements.builder((b) =>
+      b.party(PartyName.MARS)
+    );
     expect(requirements.satisfies(player)).eq(false);
-    player.game.turmoil!.sendDelegateToParty(player.id, PartyName.MARS, player.game);
-    player.game.turmoil!.sendDelegateToParty(player.id, PartyName.MARS, player.game);
+    player.game.turmoil!.sendDelegateToParty(
+      player.id,
+      PartyName.MARS,
+      player.game
+    );
+    player.game.turmoil!.sendDelegateToParty(
+      player.id,
+      PartyName.MARS,
+      player.game
+    );
     expect(requirements.satisfies(player)).eq(true);
   });
 
-  it('satisfies properly for plantsRemoved', function() {
+  it('satisfies properly for plantsRemoved', function () {
     const requirements = CardRequirements.builder((b) => b.plantsRemoved());
     expect(requirements.satisfies(player)).eq(false);
 
@@ -205,14 +232,18 @@ describe('CardRequirements', function() {
     const smallAsteroid = new SmallAsteroid();
     smallAsteroid.play(player);
     // Choose Remove 1 plant option
-    const orOptions = player.game.deferredActions.peek()!.execute() as OrOptions;
+    const orOptions = player.game.deferredActions
+      .peek()!
+      .execute() as OrOptions;
     orOptions.options[0].cb([player2]);
 
     expect(requirements.satisfies(player)).eq(true);
   });
 
-  it('throws errors when out of range', function() {
-    expect(() => CardRequirements.builder((b) => b.temperature(-32))).to.throw();
+  it('throws errors when out of range', function () {
+    expect(() =>
+      CardRequirements.builder((b) => b.temperature(-32))
+    ).to.throw();
     expect(() => CardRequirements.builder((b) => b.temperature(10))).to.throw();
     expect(() => CardRequirements.builder((b) => b.temperature(-5))).to.throw();
     expect(() => CardRequirements.builder((b) => b.oxygen(-1))).to.throw();

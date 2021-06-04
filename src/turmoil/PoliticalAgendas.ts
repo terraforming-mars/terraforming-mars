@@ -32,12 +32,16 @@ export class PoliticalAgendas {
 
   public static newInstance(
     agendaStyle: AgendaStyle,
-    parties: Array<IParty>): PoliticalAgendasData {
+    parties: Array<IParty>
+  ): PoliticalAgendasData {
     const agendas: Map<PartyName, Agenda> = new Map();
 
     parties.forEach((p) => {
       if (agendaStyle === AgendaStyle.STANDARD) {
-        agendas.set(p.name, {bonusId: p.bonuses[0].id, policyId: p.policies[0].id});
+        agendas.set(p.name, {
+          bonusId: p.bonuses[0].id,
+          policyId: p.policies[0].id,
+        });
       } else {
         agendas.set(p.name, PoliticalAgendas.getRandomAgenda(p));
       }
@@ -66,7 +70,7 @@ export class PoliticalAgendas {
       throw new Error('Invalid party: ' + partyName);
     }
     return agenda;
-  };
+  }
 
   // The ruling party is already in power, and now it is time for the party to select an agenda.
   // Do not expect the method to return an activated agenda if the current agenda style is chairman
@@ -81,32 +85,42 @@ export class PoliticalAgendas {
 
     // Agendas are static unless it's chosen by a chairperson, in which case
     // defer the selection.
-    if (politicalAgendasData.agendaStyle === AgendaStyle.CHAIRMAN && chairman !== 'NEUTRAL') {
+    if (
+      politicalAgendasData.agendaStyle === AgendaStyle.CHAIRMAN &&
+      chairman !== 'NEUTRAL'
+    ) {
       const agenda = this.getAgenda(turmoil, rulingParty.name);
-      game.defer(new ChoosePoliticalAgenda(
-        game.getPlayerById(chairman),
-        rulingParty,
-        (bonusId) => {
-          agenda.bonusId = bonusId;
-          turmoil.onAgendaSelected(game);
-        },
-        (policyId) => {
-          agenda.policyId = policyId;
-          turmoil.onAgendaSelected(game);
-        }));
+      game.defer(
+        new ChoosePoliticalAgenda(
+          game.getPlayerById(chairman),
+          rulingParty,
+          (bonusId) => {
+            agenda.bonusId = bonusId;
+            turmoil.onAgendaSelected(game);
+          },
+          (policyId) => {
+            agenda.policyId = policyId;
+            turmoil.onAgendaSelected(game);
+          }
+        )
+      );
     } else {
       turmoil.onAgendaSelected(game);
     }
   }
 
-  public static serialize(agenda: PoliticalAgendasData): SerializedPoliticalAgendasData {
+  public static serialize(
+    agenda: PoliticalAgendasData
+  ): SerializedPoliticalAgendasData {
     return {
       agendas: Array.from(agenda.agendas.entries()),
       agendaStyle: agenda.agendaStyle,
     };
   }
 
-  public static deserialize(d: SerializedPoliticalAgendasData): PoliticalAgendasData {
+  public static deserialize(
+    d: SerializedPoliticalAgendasData
+  ): PoliticalAgendasData {
     return {
       agendas: new Map(d.agendas),
       agendaStyle: d.agendaStyle,

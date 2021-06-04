@@ -18,9 +18,12 @@ export class ArchaeBacteria extends Card implements IProjectCard {
 
       requirements: CardRequirements.builder((b) => b.temperature(-18).max()),
       metadata: {
-        description: 'It must be -18 C or colder. Increase your Plant production 1 step.',
+        description:
+          'It must be -18 C or colder. Increase your Plant production 1 step.',
         cardNumber: '042',
-        renderData: CardRenderer.builder((b) => b.production((pb) => pb.plants(1))),
+        renderData: CardRenderer.builder((b) =>
+          b.production((pb) => pb.plants(1))
+        ),
       },
     });
   }

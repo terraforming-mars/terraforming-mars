@@ -23,7 +23,8 @@ export class TerraformingGanymede extends Card implements IProjectCard {
         renderData: CardRenderer.builder((b) => {
           b.tr(1).slash().jovian().played;
         }),
-        description: 'Raise your TR 1 step for each Jovian tag you have, including this.',
+        description:
+          'Raise your TR 1 step for each Jovian tag you have, including this.',
         victoryPoints: 2,
       },
     });
@@ -32,7 +33,10 @@ export class TerraformingGanymede extends Card implements IProjectCard {
     const steps = 1 + player.getTagCount(Tags.JOVIAN);
 
     if (PartyHooks.shouldApplyPolicy(player.game, PartyName.REDS)) {
-      return player.canAfford(player.getCardCost(this) + REDS_RULING_POLICY_COST * steps, {titanium: true});
+      return player.canAfford(
+        player.getCardCost(this) + REDS_RULING_POLICY_COST * steps,
+        {titanium: true}
+      );
     }
 
     return true;

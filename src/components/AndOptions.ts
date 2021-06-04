@@ -26,18 +26,16 @@ export const AndOptions = Vue.component('and-options', {
       type: Boolean,
     },
   },
-  data: function() {
+  data: function () {
     return {};
   },
   methods: {
-    saveData: function() {
+    saveData: function () {
       for (let i = 0; i < this.$data.childComponents.length; i++) {
-        const componentInstance = this.$data.childComponents[i]
-          .componentInstance;
+        const componentInstance =
+          this.$data.childComponents[i].componentInstance;
         if (componentInstance !== undefined) {
-          if (
-            (componentInstance as any).saveData instanceof Function
-          ) {
+          if ((componentInstance as any).saveData instanceof Function) {
             (componentInstance as any).saveData();
           }
         }
@@ -51,14 +49,14 @@ export const AndOptions = Vue.component('and-options', {
       this.onsave(res);
     },
   },
-  render: function(createElement) {
+  render: function (createElement) {
     const playerInput = this.playerinput;
     const children: Array<VNode> = [];
     this.$data.childComponents = [];
     this.$data.responded = [];
     if (this.showtitle) {
       children.push(
-        createElement('div', {'class': 'wf-title'}, $t(playerInput.title)),
+        createElement('div', {'class': 'wf-title'}, $t(playerInput.title))
       );
     }
     if (playerInput.options !== undefined) {
@@ -75,12 +73,10 @@ export const AndOptions = Vue.component('and-options', {
                 this.$data.responded[idx] = out[0];
               },
               false,
-              true,
-            ),
+              true
+            )
           );
-          this.$data.childComponents.push(
-            children[children.length - 1],
-          );
+          this.$data.childComponents.push(children[children.length - 1]);
         }
       });
     }
@@ -95,9 +91,7 @@ export const AndOptions = Vue.component('and-options', {
           },
         },
       });
-      children.push(
-        createElement('div', {'class': 'wf-action'}, [saveBtn]),
-      );
+      children.push(createElement('div', {'class': 'wf-action'}, [saveBtn]));
     }
     return createElement('div', {'class': 'wf-options'}, children);
   },

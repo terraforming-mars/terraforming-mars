@@ -20,12 +20,19 @@ export class AgricolaInc extends Card implements CorporationCard {
 
       metadata: {
         cardNumber: 'R36',
-        description: 'You start with 1 plant production, 1 M€ production and 40 M€.',
+        description:
+          'You start with 1 plant production, 1 M€ production and 40 M€.',
         renderData: CardRenderer.builder((b) => {
           b.br.br;
-          b.production((pb) => pb.megacredits(1).plants(1)).nbsp.megacredits(40);
+          b.production((pb) => pb.megacredits(1).plants(1)).nbsp.megacredits(
+            40
+          );
           b.corpBox('effect', (ce) => {
-            ce.text('Effect: At game end, score -2 / 0 / 1 / 2 VP PER TAG TYPE for 0 / 1-2 / 3-4 / 5+ tags.', Size.SMALL, true);
+            ce.text(
+              'Effect: At game end, score -2 / 0 / 1 / 2 VP PER TAG TYPE for 0 / 1-2 / 3-4 / 5+ tags.',
+              Size.SMALL,
+              true
+            );
           });
         }),
         victoryPoints: CardRenderDynamicVictoryPoints.questionmark(),
@@ -41,10 +48,22 @@ export class AgricolaInc extends Card implements CorporationCard {
   }
 
   public getVictoryPoints(player: Player): number {
-    const scorableTags : Array<Tags> = [Tags.CITY, Tags.EARTH, Tags.ENERGY, Tags.JOVIAN, Tags.MICROBE, Tags.PLANT, Tags.SCIENCE, Tags.SPACE, Tags.BUILDING, Tags.ANIMAL];
-    if (player.game.gameOptions.venusNextExtension) scorableTags.push(Tags.VENUS);
+    const scorableTags: Array<Tags> = [
+      Tags.CITY,
+      Tags.EARTH,
+      Tags.ENERGY,
+      Tags.JOVIAN,
+      Tags.MICROBE,
+      Tags.PLANT,
+      Tags.SCIENCE,
+      Tags.SPACE,
+      Tags.BUILDING,
+      Tags.ANIMAL,
+    ];
+    if (player.game.gameOptions.venusNextExtension)
+      scorableTags.push(Tags.VENUS);
 
-    const playerTags : ITagCount[] = player.getAllTags();
+    const playerTags: ITagCount[] = player.getAllTags();
     let points = 0;
 
     scorableTags.forEach((tag) => {

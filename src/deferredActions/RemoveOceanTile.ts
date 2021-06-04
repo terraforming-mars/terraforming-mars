@@ -7,8 +7,8 @@ import {LogHelper} from '../LogHelper';
 export class RemoveOceanTile implements DeferredAction {
   public priority = Priority.DEFAULT;
   constructor(
-        public player: Player,
-        public title: string = 'Select an Ocean tile to remove from board',
+    public player: Player,
+    public title: string = 'Select an Ocean tile to remove from board'
   ) {}
 
   public execute() {
@@ -21,9 +21,14 @@ export class RemoveOceanTile implements DeferredAction {
       this.player.game.board.getOceansTiles(false),
       (space: ISpace) => {
         this.player.game.removeTile(space.id);
-        LogHelper.logBoardTileAction(this.player, space, 'ocean tile', 'removed');
+        LogHelper.logBoardTileAction(
+          this.player,
+          space,
+          'ocean tile',
+          'removed'
+        );
         return undefined;
-      },
+      }
     );
   }
 }

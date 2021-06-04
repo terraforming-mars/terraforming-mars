@@ -3,8 +3,8 @@ import {DomeFarming} from '../../../src/cards/prelude/DomeFarming';
 import {Resources} from '../../../src/Resources';
 import {TestPlayers} from '../../TestPlayers';
 
-describe('DomeFarming', function() {
-  it('Should play', function() {
+describe('DomeFarming', function () {
+  it('Should play', function () {
     const card = new DomeFarming();
     const player = TestPlayers.BLUE.newPlayer();
     const action = card.play(player);

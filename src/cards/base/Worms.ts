@@ -22,13 +22,18 @@ export class Worms extends Card implements IProjectCard {
         renderData: CardRenderer.builder((b) => {
           b.production((pb) => pb.plants(1).slash().microbes(2).played);
         }),
-        description: 'Requires 4% oxygen. Increase your Plant production 1 step for every 2 Microbe tags you have, including this.',
+        description:
+          'Requires 4% oxygen. Increase your Plant production 1 step for every 2 Microbe tags you have, including this.',
       },
     });
   }
 
   public play(player: Player) {
-    player.addProduction(Resources.PLANTS, Math.floor((player.getTagCount(Tags.MICROBE) + 1) / 2), {log: true});
+    player.addProduction(
+      Resources.PLANTS,
+      Math.floor((player.getTagCount(Tags.MICROBE) + 1) / 2),
+      {log: true}
+    );
     return undefined;
   }
 }

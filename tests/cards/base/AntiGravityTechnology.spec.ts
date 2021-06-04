@@ -3,24 +3,28 @@ import {AntiGravityTechnology} from '../../../src/cards/base/AntiGravityTechnolo
 import {TestPlayer} from '../../TestPlayer';
 import {TestPlayers} from '../../TestPlayers';
 
-describe('AntiGravityTechnology', function() {
-  let card : AntiGravityTechnology; let player : TestPlayer;
+describe('AntiGravityTechnology', function () {
+  let card: AntiGravityTechnology;
+  let player: TestPlayer;
 
-  beforeEach(function() {
+  beforeEach(function () {
     card = new AntiGravityTechnology();
     player = TestPlayers.BLUE.newPlayer();
   });
 
-  it('Can\'t play', function() {
+  it("Can't play", function () {
     expect(card.canPlay(player)).is.not.true;
   });
 
-  it('Should play', function() {
+  it('Should play', function () {
     player.playedCards.push(card, card, card, card, card, card, card);
     expect(card.canPlay(player)).is.true;
 
     card.play();
-    player.victoryPointsBreakdown.setVictoryPoints('victoryPoints', card.getVictoryPoints());
+    player.victoryPointsBreakdown.setVictoryPoints(
+      'victoryPoints',
+      card.getVictoryPoints()
+    );
     expect(player.victoryPointsBreakdown.victoryPoints).to.eq(3);
     expect(card.getCardDiscount()).to.eq(2);
   });

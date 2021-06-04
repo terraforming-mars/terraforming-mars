@@ -7,43 +7,44 @@ import {SelectCard} from '../../../src/inputs/SelectCard';
 import {Player} from '../../../src/Player';
 import {TestPlayers} from '../../TestPlayers';
 
-describe('Extremophiles', function() {
-  let card : Extremophiles; let player : Player;
+describe('Extremophiles', function () {
+  let card: Extremophiles;
+  let player: Player;
 
-  beforeEach(function() {
+  beforeEach(function () {
     card = new Extremophiles();
     player = TestPlayers.BLUE.newPlayer();
     const redPlayer = TestPlayers.RED.newPlayer();
     Game.newInstance('foobar', [player, redPlayer], player);
   });
 
-  it('Can\'t play', function() {
+  it("Can't play", function () {
     expect(card.canPlay(player)).is.not.true;
   });
 
-  it('Should play', function() {
+  it('Should play', function () {
     player.playedCards.push(new Research());
     expect(card.canPlay(player)).is.true;
     const action = card.play();
     expect(action).is.undefined;
   });
 
-  it('Should act', function() {
+  it('Should act', function () {
     player.playedCards.push(card);
     card.action(player);
     expect(card.resourceCount).to.eq(1);
   });
 
-  it('Should act - multiple targets', function() {
+  it('Should act - multiple targets', function () {
     player.playedCards.push(card, new Tardigrades());
     const action = card.action(player);
     expect(action instanceof SelectCard).is.true;
 
-        action!.cb([card]);
-        expect(player.getResourcesOnCard(card)).to.eq(1);
+    action!.cb([card]);
+    expect(player.getResourcesOnCard(card)).to.eq(1);
   });
 
-  it('Gives victory points', function() {
+  it('Gives victory points', function () {
     player.addResourceTo(card, 7);
     expect(card.getVictoryPoints()).to.eq(2);
   });

@@ -8,10 +8,12 @@ import {Player} from '../../../src/Player';
 import {Resources} from '../../../src/Resources';
 import {TestPlayers} from '../../TestPlayers';
 
-describe('Cartel', function() {
-  let card : Cartel; let player : Player; let game : Game;
+describe('Cartel', function () {
+  let card: Cartel;
+  let player: Player;
+  let game: Game;
 
-  beforeEach(function() {
+  beforeEach(function () {
     card = new Cartel();
     player = TestPlayers.BLUE.newPlayer();
     const redPlayer = TestPlayers.RED.newPlayer();
@@ -19,7 +21,7 @@ describe('Cartel', function() {
     player.game = game;
   });
 
-  it('Should play', function() {
+  it('Should play', function () {
     card.play(player);
     expect(player.getProduction(Resources.MEGACREDITS)).to.eq(1);
     player.playedCards.push(card);
@@ -28,7 +30,7 @@ describe('Cartel', function() {
     expect(player.getProduction(Resources.MEGACREDITS)).to.eq(3);
   });
 
-  it('Correctly counts tags', function() {
+  it('Correctly counts tags', function () {
     const cards = [
       new ImportedHydrogen(), // event with earth tag
       new InterstellarColonyShip(), // event with earth tag

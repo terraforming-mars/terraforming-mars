@@ -9,7 +9,7 @@ import {TileType} from '../../src/TileType';
 
 const MOON_OPTIONS = TestingUtils.setCustomGameOptions({moonExpansion: true});
 
-describe('LunarMagnate', function() {
+describe('LunarMagnate', function () {
   let player: TestPlayer;
   let otherPlayer: TestPlayer;
 
@@ -19,7 +19,7 @@ describe('LunarMagnate', function() {
     Game.newInstance('id', [player, otherPlayer], player, MOON_OPTIONS);
   });
 
-  it('Basic test', function() {
+  it('Basic test', function () {
     const award = new LunarMagnate();
     expect(award.getScore(player)).eq(0);
     MoonExpansion.addTile(player, 'm01', {tileType: TileType.MOON_MINE});

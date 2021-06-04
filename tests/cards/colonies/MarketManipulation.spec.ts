@@ -10,10 +10,13 @@ import {OrOptions} from '../../../src/inputs/OrOptions';
 import {Player} from '../../../src/Player';
 import {TestPlayers} from '../../TestPlayers';
 
-describe('MarketManipulation', function() {
-  let card : MarketManipulation; let player : Player; let player2: Player; let luna: Luna;
+describe('MarketManipulation', function () {
+  let card: MarketManipulation;
+  let player: Player;
+  let player2: Player;
+  let luna: Luna;
 
-  beforeEach(function() {
+  beforeEach(function () {
     card = new MarketManipulation();
     player = TestPlayers.BLUE.newPlayer();
     player2 = TestPlayers.RED.newPlayer();
@@ -21,20 +24,22 @@ describe('MarketManipulation', function() {
     luna = new Luna();
   });
 
-  it('Should play', function() {
+  it('Should play', function () {
     const triton = new Triton();
     player.game.colonies.push(luna, triton);
 
     const action = card.play(player) as OrOptions;
     expect(action).is.not.undefined;
-    expect(action.options[0].title).to.eq('Increase Luna (MegaCredits) and decrease Triton (Titanium)');
+    expect(action.options[0].title).to.eq(
+      'Increase Luna (MegaCredits) and decrease Triton (Titanium)'
+    );
     action.options[0].cb();
 
     expect(luna.trackPosition).to.eq(2);
     expect(triton.trackPosition).to.eq(0);
   });
 
-  it('Can\'t play', function() {
+  it("Can't play", function () {
     const enceladus = new Enceladus();
     const miranda = new Miranda();
 

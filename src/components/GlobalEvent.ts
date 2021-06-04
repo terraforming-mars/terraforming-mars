@@ -11,21 +11,21 @@ export const GlobalEvent = Vue.component('global-event', {
     },
   },
   methods: {
-    partyNameClass: function(partyName: string): string {
+    partyNameClass: function (partyName: string): string {
       if (partyName === undefined) {
         return '';
       }
       return 'event-party--' + partyName.toLowerCase().split(' ').join('_');
     },
-    getClass: function(): string {
+    getClass: function (): string {
       const common = 'global-event';
       switch (this.type) {
-      case 'coming':
-        return common + ' global-event--coming';
-      case 'current':
-        return common + ' global-event--current';
-      default:
-        return common;
+        case 'coming':
+          return common + ' global-event--coming';
+        case 'current':
+          return common + ' global-event--current';
+        default:
+          return common;
       }
     },
   },

@@ -3,20 +3,21 @@ import {Meltworks} from '../../../src/cards/promo/Meltworks';
 import {Player} from '../../../src/Player';
 import {TestPlayers} from '../../TestPlayers';
 
-describe('Meltworks', function() {
-  let card : Meltworks; let player : Player;
+describe('Meltworks', function () {
+  let card: Meltworks;
+  let player: Player;
 
-  beforeEach(function() {
+  beforeEach(function () {
     card = new Meltworks();
     player = TestPlayers.BLUE.newPlayer();
   });
 
-  it('Can\'t act', function() {
+  it("Can't act", function () {
     player.heat = 4;
     expect(card.canAct(player)).is.not.true;
   });
 
-  it('Should act', function() {
+  it('Should act', function () {
     player.heat = 5;
     expect(card.canAct(player)).is.true;
 

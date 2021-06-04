@@ -7,10 +7,12 @@ import {PartyName} from '../../../src/turmoil/parties/PartyName';
 import {TestingUtils} from '../../TestingUtils';
 import {TestPlayers} from '../../TestPlayers';
 
-describe('ByElection', function() {
-  let card : ByElection; let player : Player; let game : Game;
+describe('ByElection', function () {
+  let card: ByElection;
+  let player: Player;
+  let game: Game;
 
-  beforeEach(function() {
+  beforeEach(function () {
     card = new ByElection();
     player = TestPlayers.BLUE.newPlayer();
     const redPlayer = TestPlayers.RED.newPlayer();
@@ -18,7 +20,7 @@ describe('ByElection', function() {
     game = Game.newInstance('foobar', [player, redPlayer], player, gameOptions);
   });
 
-  it('Should play', function() {
+  it('Should play', function () {
     card.play(player);
     expect(game.deferredActions).has.lengthOf(1);
 
@@ -31,6 +33,9 @@ describe('ByElection', function() {
 
     const rulingParty = turmoil.rulingParty;
     expect(rulingParty.name).to.eq(PartyName.MARS);
-    expect(turmoil.politicalAgendasData.agendas.get(PartyName.MARS)).deep.eq({bonusId: 'mb01', policyId: 'mfp01'});
+    expect(turmoil.politicalAgendasData.agendas.get(PartyName.MARS)).deep.eq({
+      bonusId: 'mb01',
+      policyId: 'mfp01',
+    });
   });
 });

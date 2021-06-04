@@ -19,9 +19,12 @@ export class TradingColony extends Card implements IProjectCard {
       metadata: {
         cardNumber: 'C47',
         renderData: CardRenderer.builder((b) => {
-          b.effect('When you trade, you may first increase that Colony Tile track 1 step.', (eb) => {
-            eb.trade().startEffect.text('+1', Size.LARGE);
-          }).br;
+          b.effect(
+            'When you trade, you may first increase that Colony Tile track 1 step.',
+            (eb) => {
+              eb.trade().startEffect.text('+1', Size.LARGE);
+            }
+          ).br;
           b.colonies(1);
         }),
         description: 'Place a colony.',
@@ -34,7 +37,9 @@ export class TradingColony extends Card implements IProjectCard {
   }
 
   public play(player: Player) {
-    player.game.defer(new BuildColony(player, false, 'Select colony for Trading Colony'));
+    player.game.defer(
+      new BuildColony(player, false, 'Select colony for Trading Colony')
+    );
     player.colonyTradeOffset++;
     return undefined;
   }

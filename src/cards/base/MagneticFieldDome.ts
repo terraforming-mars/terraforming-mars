@@ -29,7 +29,8 @@ export class MagneticFieldDome extends Card implements IProjectCard {
           });
           b.tr(1);
         }),
-        description: 'Decrease your Energy production 2 steps and increase your Plant production 1 step. Raise your TR 1 step.',
+        description:
+          'Decrease your Energy production 2 steps and increase your Plant production 1 step. Raise your TR 1 step.',
       },
     });
   }
@@ -37,7 +38,11 @@ export class MagneticFieldDome extends Card implements IProjectCard {
   public canPlay(player: Player): boolean {
     const hasEnergyProduction = player.getProduction(Resources.ENERGY) >= 2;
     if (PartyHooks.shouldApplyPolicy(player.game, PartyName.REDS)) {
-      return player.canAfford(player.getCardCost(this) + REDS_RULING_POLICY_COST, {steel: true}) && hasEnergyProduction;
+      return (
+        player.canAfford(player.getCardCost(this) + REDS_RULING_POLICY_COST, {
+          steel: true,
+        }) && hasEnergyProduction
+      );
     }
 
     return hasEnergyProduction;

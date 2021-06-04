@@ -41,4 +41,3 @@ describe('UndergroundDetonators', () => {
     expect(player.getTerraformRating()).eq(15);
   });
 });
-

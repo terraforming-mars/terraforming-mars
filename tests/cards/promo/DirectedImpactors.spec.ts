@@ -9,21 +9,23 @@ import {SelectHowToPay} from '../../../src/inputs/SelectHowToPay';
 import {Player} from '../../../src/Player';
 import {TestPlayers} from '../../TestPlayers';
 
-describe('DirectedImpactors', function() {
-  let card : DirectedImpactors; let player : Player; let game : Game;
+describe('DirectedImpactors', function () {
+  let card: DirectedImpactors;
+  let player: Player;
+  let game: Game;
 
-  beforeEach(function() {
+  beforeEach(function () {
     card = new DirectedImpactors();
     player = TestPlayers.BLUE.newPlayer();
     const redPlayer = TestPlayers.RED.newPlayer();
     game = Game.newInstance('foobar', [player, redPlayer], player);
   });
 
-  it('Should play', function() {
+  it('Should play', function () {
     expect(card.play()).is.undefined;
   });
 
-  it('Should act - single action choice, single target', function() {
+  it('Should act - single action choice, single target', function () {
     player.playedCards.push(card);
     expect(card.canAct(player)).is.not.true;
 
@@ -34,8 +36,17 @@ describe('DirectedImpactors', function() {
     // can add resource to itself
     card.action(player);
     expect(game.deferredActions).has.lengthOf(1);
-    const selectHowToPay = game.deferredActions.peek()!.execute() as SelectHowToPay;
-    selectHowToPay.cb({steel: 0, heat: 0, titanium: 1, megaCredits: 3, microbes: 0, floaters: 0} as HowToPay);
+    const selectHowToPay = game.deferredActions
+      .peek()!
+      .execute() as SelectHowToPay;
+    selectHowToPay.cb({
+      steel: 0,
+      heat: 0,
+      titanium: 1,
+      megaCredits: 3,
+      microbes: 0,
+      floaters: 0,
+    } as HowToPay);
 
     expect(player.megaCredits).to.eq(0);
     expect(player.titanium).to.eq(0);
@@ -48,7 +59,7 @@ describe('DirectedImpactors', function() {
     expect(card.resourceCount).to.eq(0);
   });
 
-  it('Should act - multiple action choices, multiple targets', function() {
+  it('Should act - multiple action choices, multiple targets', function () {
     const card2 = new RotatorImpacts();
     player.playedCards.push(card, card2);
 
@@ -67,16 +78,25 @@ describe('DirectedImpactors', function() {
     // can add resource to any card
     const selectCard = action.options[1].cb();
     expect(game.deferredActions).has.lengthOf(1);
-    const selectHowToPay = game.deferredActions.peek()!.execute() as SelectHowToPay;
-    selectHowToPay.cb({steel: 0, heat: 0, titanium: 1, megaCredits: 3, microbes: 0, floaters: 0} as HowToPay);
+    const selectHowToPay = game.deferredActions
+      .peek()!
+      .execute() as SelectHowToPay;
+    selectHowToPay.cb({
+      steel: 0,
+      heat: 0,
+      titanium: 1,
+      megaCredits: 3,
+      microbes: 0,
+      floaters: 0,
+    } as HowToPay);
 
-        selectCard!.cb([card2]);
-        expect(card2.resourceCount).to.eq(1);
-        expect(player.megaCredits).to.eq(0);
-        expect(player.titanium).to.eq(0);
+    selectCard!.cb([card2]);
+    expect(card2.resourceCount).to.eq(1);
+    expect(player.megaCredits).to.eq(0);
+    expect(player.titanium).to.eq(0);
   });
 
-  it('Can still spend resource even if temperature is max', function() {
+  it('Can still spend resource even if temperature is max', function () {
     player.playedCards.push(card);
     card.resourceCount = 1;
     (game as any).temperature = MAX_TEMPERATURE;

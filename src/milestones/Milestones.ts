@@ -27,9 +27,7 @@ export const ORIGINAL_MILESTONES: Array<IMilestone> = [
   new Planner(),
 ];
 
-export const VENUS_MILESTONES: Array<IMilestone> = [
-  new Hoverlord(),
-];
+export const VENUS_MILESTONES: Array<IMilestone> = [new Hoverlord()];
 
 export const ELYSIUM_MILESTONES: Array<IMilestone> = [
   new Generalist(),
@@ -47,9 +45,7 @@ export const HELLAS_MILESTONES: Array<IMilestone> = [
   new RimSettler(),
 ];
 
-export const ARES_MILESTONES: Array<IMilestone> = [
-  new Networker(),
-];
+export const ARES_MILESTONES: Array<IMilestone> = [new Networker()];
 
 export const MOON_MILESTONES: Array<IMilestone> = [
   new OneGiantStep(),
@@ -62,7 +58,8 @@ export const ALL_MILESTONES: Array<IMilestone> = [
   ...HELLAS_MILESTONES,
   ...VENUS_MILESTONES,
   ...ARES_MILESTONES,
-  ...MOON_MILESTONES];
+  ...MOON_MILESTONES,
+];
 
 export namespace Milestones {
   export const ALL = ALL_MILESTONES;

@@ -54,7 +54,9 @@ describe('LunarDustProcessingPlant', () => {
     player.megaCredits = 1000;
 
     player.cardsInHand = [new MareSerenitatisMine()];
-    expect(player.getPlayableCards().map((card) => card.name)).deep.eq([CardName.MARE_SERENITATIS_MINE]);
+    expect(player.getPlayableCards().map((card) => card.name)).deep.eq([
+      CardName.MARE_SERENITATIS_MINE,
+    ]);
 
     player.titanium = 2;
     player.steel = 0;
@@ -62,7 +64,9 @@ describe('LunarDustProcessingPlant', () => {
 
     // And this one shows that with Lunar Dust Processing Plant, steel isn't necessary
     player.playedCards = [card];
-    expect(player.getPlayableCards().map((card) => card.name)).deep.eq([CardName.MARE_SERENITATIS_MINE]);
+    expect(player.getPlayableCards().map((card) => card.name)).deep.eq([
+      CardName.MARE_SERENITATIS_MINE,
+    ]);
   });
 
   it('applies to road standard project', () => {

@@ -12,29 +12,39 @@ import {CardRequirements} from '../CardRequirements';
 
 export class PrideoftheEarthArkship extends MoonCard implements IActionCard {
   constructor() {
-    super({
-      name: CardName.PRIDE_OF_THE_EARTH_ARKSHIP,
-      cardType: CardType.ACTIVE,
-      tags: [Tags.SCIENCE, Tags.SCIENCE, Tags.SPACE],
-      cost: 22,
-      resourceType: ResourceType.SCIENCE,
-      requirements: CardRequirements.builder((b) => b.tag(Tags.SCIENCE).tag(Tags.SPACE, 2)),
+    super(
+      {
+        name: CardName.PRIDE_OF_THE_EARTH_ARKSHIP,
+        cardType: CardType.ACTIVE,
+        tags: [Tags.SCIENCE, Tags.SCIENCE, Tags.SPACE],
+        cost: 22,
+        resourceType: ResourceType.SCIENCE,
+        requirements: CardRequirements.builder((b) =>
+          b.tag(Tags.SCIENCE).tag(Tags.SPACE, 2)
+        ),
 
-      metadata: {
-        description: 'Requires 1 science and 2 space tags. Spend 2 titanium. 1 VP per science resource here.',
-        cardNumber: 'M24',
-        renderData: CardRenderer.builder((b) => {
-          b.action('Add 1 science resource here per every 5 science tags you have.', (eb) => {
-            eb.empty().startAction.science(1).slash().text('5').science().played;
-          }).br;
-          b.minus().titanium(2);
-        }),
-        victoryPoints: CardRenderDynamicVictoryPoints.science(1, 1),
+        metadata: {
+          description:
+            'Requires 1 science and 2 space tags. Spend 2 titanium. 1 VP per science resource here.',
+          cardNumber: 'M24',
+          renderData: CardRenderer.builder((b) => {
+            b.action(
+              'Add 1 science resource here per every 5 science tags you have.',
+              (eb) => {
+                eb.empty().startAction.science(1).slash().text('5').science()
+                  .played;
+              }
+            ).br;
+            b.minus().titanium(2);
+          }),
+          victoryPoints: CardRenderDynamicVictoryPoints.science(1, 1),
+        },
       },
-    }, {
-      reserveUnits: Units.of({titanium: 2}),
-    });
-  };
+      {
+        reserveUnits: Units.of({titanium: 2}),
+      }
+    );
+  }
   public resourceCount = 0;
 
   public play(player: Player) {

@@ -7,7 +7,7 @@ export class PlaceMoonColonyTile implements DeferredAction {
   public priority = Priority.DEFAULT;
   constructor(
     public player: Player,
-    public title: string = 'Select a space on the Moon for a colony tile.',
+    public title: string = 'Select a space on the Moon for a colony tile.'
   ) {}
 
   public execute() {
@@ -17,13 +17,10 @@ export class PlaceMoonColonyTile implements DeferredAction {
     if (spaces.length === 0) {
       return undefined;
     }
-    return new SelectSpace(
-      this.title,
-      spaces,
-      (space) => {
-        MoonExpansion.addColonyTile(this.player, space.id);
-        MoonExpansion.raiseColonyRate(this.player);
-        return undefined;
-      });
+    return new SelectSpace(this.title, spaces, (space) => {
+      MoonExpansion.addColonyTile(this.player, space.id);
+      MoonExpansion.raiseColonyRate(this.player);
+      return undefined;
+    });
   }
 }

@@ -6,11 +6,11 @@ import {HelpStandardProjects} from './HelpStandardProjects';
 type Tab = 'iconology' | 'standard projects' | 'phases' | 'hotkeys';
 
 export interface HelpPageModel {
-    currentPage: Tab;
+  currentPage: Tab;
 }
 
 export const Help = Vue.component('help', {
-  data: function(): HelpPageModel {
+  data: function (): HelpPageModel {
     return {
       currentPage: 'iconology',
     };
@@ -21,10 +21,10 @@ export const Help = Vue.component('help', {
     'phases': HelpPhases,
   },
   methods: {
-    setTab: function(tab: Tab): void {
+    setTab: function (tab: Tab): void {
       this.currentPage = tab;
     },
-    isOpen: function(tab: Tab): boolean {
+    isOpen: function (tab: Tab): boolean {
       return tab === this.currentPage;
     },
   },

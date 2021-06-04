@@ -12,7 +12,10 @@ import {CardRequirements} from '../CardRequirements';
 import {CardRenderer} from '../render/CardRenderer';
 import {CardRenderDynamicVictoryPoints} from '../render/CardRenderDynamicVictoryPoints';
 
-export class Predators extends Card implements IProjectCard, IActionCard, IResourceCard {
+export class Predators
+  extends Card
+  implements IProjectCard, IActionCard, IResourceCard
+{
   constructor() {
     super({
       cardType: CardType.ACTIVE,
@@ -25,9 +28,12 @@ export class Predators extends Card implements IProjectCard, IActionCard, IResou
       metadata: {
         cardNumber: '024',
         renderData: CardRenderer.builder((b) => {
-          b.action('Remove 1 Animal from any card and add it to this card.', (eb) => {
-            eb.animals(1).any.startAction.animals(1);
-          }).br;
+          b.action(
+            'Remove 1 Animal from any card and add it to this card.',
+            (eb) => {
+              eb.animals(1).any.startAction.animals(1);
+            }
+          ).br;
           b.vpText('1 VP per Animal on this card.');
         }),
         description: 'Requires 11% oxygen.',
@@ -36,24 +42,33 @@ export class Predators extends Card implements IProjectCard, IActionCard, IResou
     });
   }
 
-    public resourceCount: number = 0;
+  public resourceCount: number = 0;
 
-    public getVictoryPoints(): number {
-      return this.resourceCount;
-    }
+  public getVictoryPoints(): number {
+    return this.resourceCount;
+  }
 
-    public play() {
-      return undefined;
-    }
+  public play() {
+    return undefined;
+  }
 
-    public canAct(player: Player): boolean {
-      if (player.game.isSoloMode()) return true;
-      return RemoveResourcesFromCard.getAvailableTargetCards(player, ResourceType.ANIMAL).length > 0;
-    }
+  public canAct(player: Player): boolean {
+    if (player.game.isSoloMode()) return true;
+    return (
+      RemoveResourcesFromCard.getAvailableTargetCards(
+        player,
+        ResourceType.ANIMAL
+      ).length > 0
+    );
+  }
 
-    public action(player: Player) {
-      player.game.defer(new RemoveResourcesFromCard(player, ResourceType.ANIMAL));
-      player.game.defer(new AddResourcesToCard(player, ResourceType.ANIMAL, {filter: (c) => c.name === this.name}));
-      return undefined;
-    }
+  public action(player: Player) {
+    player.game.defer(new RemoveResourcesFromCard(player, ResourceType.ANIMAL));
+    player.game.defer(
+      new AddResourcesToCard(player, ResourceType.ANIMAL, {
+        filter: (c) => c.name === this.name,
+      })
+    );
+    return undefined;
+  }
 }

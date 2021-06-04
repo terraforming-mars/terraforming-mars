@@ -5,22 +5,24 @@ import {Player} from '../../../src/Player';
 import {Resources} from '../../../src/Resources';
 import {TestPlayers} from '../../TestPlayers';
 
-describe('Worms', function() {
-  let card : Worms; let player : Player; let game : Game;
+describe('Worms', function () {
+  let card: Worms;
+  let player: Player;
+  let game: Game;
 
-  beforeEach(function() {
+  beforeEach(function () {
     card = new Worms();
     player = TestPlayers.BLUE.newPlayer();
     const redPlayer = TestPlayers.RED.newPlayer();
     game = Game.newInstance('foobar', [player, redPlayer], player);
   });
 
-  it('Can\'t play', function() {
+  it("Can't play", function () {
     (game as any).oxygenLevel = 3;
     expect(card.canPlay(player)).is.not.true;
   });
 
-  it('Should play', function() {
+  it('Should play', function () {
     (game as any).oxygenLevel = 4;
     expect(card.canPlay(player)).is.true;
     player.playedCards.push(card);

@@ -12,9 +12,15 @@ import {TurmoilPolicy} from '../TurmoilPolicy';
 
 export class Scientists extends Party implements IParty {
   name = PartyName.SCIENTISTS;
-  description: string = 'Tech is the door to the future, and Scientists will do anything to open it.';
+  description: string =
+    'Tech is the door to the future, and Scientists will do anything to open it.';
   bonuses = [SCIENTISTS_BONUS_1, SCIENTISTS_BONUS_2];
-  policies = [SCIENTISTS_POLICY_1, SCIENTISTS_POLICY_2, SCIENTISTS_POLICY_3, SCIENTISTS_POLICY_4];
+  policies = [
+    SCIENTISTS_POLICY_1,
+    SCIENTISTS_POLICY_2,
+    SCIENTISTS_POLICY_3,
+    SCIENTISTS_POLICY_4,
+  ];
 }
 
 class ScientistsBonus01 implements Bonus {
@@ -55,17 +61,15 @@ class ScientistsPolicy01 implements Policy {
   action(player: Player) {
     const game = player.game;
     game.log('${0} used Turmoil Scientists action', (b) => b.player(player));
-    game.defer(new SelectHowToPayDeferred(
-      player,
-      10,
-      {
+    game.defer(
+      new SelectHowToPayDeferred(player, 10, {
         title: 'Select how to pay for Turmoil Scientists action',
         afterPay: () => {
           player.drawCard(3);
           player.turmoilPolicyActionUsed = true;
         },
-      },
-    ));
+      })
+    );
 
     return undefined;
   }
@@ -79,13 +83,15 @@ class ScientistsPolicy02 implements Policy {
 
 class ScientistsPolicy03 implements Policy {
   id = TurmoilPolicy.SCIENTISTS_POLICY_3;
-  description: string = 'When you raise a global parameter, draw a card per step raised';
+  description: string =
+    'When you raise a global parameter, draw a card per step raised';
   isDefault = false;
 }
 
 class ScientistsPolicy04 implements Policy {
   id = TurmoilPolicy.SCIENTISTS_POLICY_4;
-  description: string = 'Cards with Science tag requirements may be played with 1 less Science tag';
+  description: string =
+    'Cards with Science tag requirements may be played with 1 less Science tag';
   isDefault = false;
 
   apply(game: Game) {

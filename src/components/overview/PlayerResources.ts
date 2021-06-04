@@ -10,13 +10,13 @@ export const PlayerResources = Vue.component('player-resources', {
       type: Object as () => PlayerModel,
     },
   },
-  data: function() {
+  data: function () {
     return {
       resources: Resources,
     };
   },
   methods: {
-    canUseHeatAsMegaCredits: function(): boolean {
+    canUseHeatAsMegaCredits: function (): boolean {
       return this.player.corporationCard?.name === CardName.HELION;
     },
   },

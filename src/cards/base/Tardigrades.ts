@@ -30,18 +30,18 @@ export class Tardigrades extends Card implements IProjectCard, IResourceCard {
       },
     });
   }
-    public resourceCount = 0;
-    public getVictoryPoints(): number {
-      return Math.floor(this.resourceCount / 4);
-    }
-    public play() {
-      return undefined;
-    }
-    public action(player: Player) {
-      player.addResourceTo(this);
-      return undefined;
-    }
-    public canAct(): boolean {
-      return true;
-    }
+  public resourceCount = 0;
+  public getVictoryPoints(): number {
+    return Math.floor(this.resourceCount / 4);
+  }
+  public play() {
+    return undefined;
+  }
+  public action(player: Player) {
+    player.addResourceTo(this);
+    return undefined;
+  }
+  public canAct(): boolean {
+    return true;
+  }
 }

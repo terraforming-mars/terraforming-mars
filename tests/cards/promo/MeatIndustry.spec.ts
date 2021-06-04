@@ -6,8 +6,8 @@ import {MeatIndustry} from '../../../src/cards/promo/MeatIndustry';
 import {Game} from '../../../src/Game';
 import {TestPlayers} from '../../TestPlayers';
 
-describe('MeatIndustry', function() {
-  it('Gives 2 M€ whenever player gains an animal', function() {
+describe('MeatIndustry', function () {
+  it('Gives 2 M€ whenever player gains an animal', function () {
     const card = new MeatIndustry();
     const player = TestPlayers.BLUE.newPlayer();
     const player2 = TestPlayers.RED.newPlayer();

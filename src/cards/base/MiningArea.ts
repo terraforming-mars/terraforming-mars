@@ -16,16 +16,24 @@ export class MiningArea extends MiningCard {
           pb.steel(1).or().titanium(1);
         }).asterix();
       }),
-      description: 'Place this tile on an area with a steel or titanium placement bonus, adjacent to another of your tiles. Increase your production of that resource 1 step.',
-    }) {
-    super(
-      name,
-      4,
-      metadata,
-    );
+      description:
+        'Place this tile on an area with a steel or titanium placement bonus, adjacent to another of your tiles. Increase your production of that resource 1 step.',
+    }
+  ) {
+    super(name, 4, metadata);
   }
   protected getAvailableSpaces(player: Player) {
-    return super.getAvailableSpaces(player)
-      .filter((space) => player.game.board.getAdjacentSpaces(space).some((adjacentSpace) => adjacentSpace.tile !== undefined && adjacentSpace.tile.tileType !== TileType.OCEAN && adjacentSpace.player === player));
+    return super
+      .getAvailableSpaces(player)
+      .filter((space) =>
+        player.game.board
+          .getAdjacentSpaces(space)
+          .some(
+            (adjacentSpace) =>
+              adjacentSpace.tile !== undefined &&
+              adjacentSpace.tile.tileType !== TileType.OCEAN &&
+              adjacentSpace.player === player
+          )
+      );
   }
 }

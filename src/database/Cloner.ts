@@ -12,16 +12,26 @@ export class Cloner {
     firstPlayerIndex: number,
     err: Error | undefined,
     serialized: SerializedGame | undefined,
-    cb: DbLoadCallback<Game>) {
-    const response: {err?: Error, game: Game | undefined} = {err: err, game: undefined};
+    cb: DbLoadCallback<Game>
+  ) {
+    const response: {err?: Error; game: Game | undefined} = {
+      err: err,
+      game: undefined,
+    };
 
     try {
       if ((err === undefined || err === null) && serialized !== undefined) {
         const sourceGameId: GameId = serialized.id;
-        const oldPlayerIds: Array<PlayerId> = serialized.players.map((player) => player.id);
-        const newPlayerIds: Array<PlayerId> = players.map((player) => player.id);
+        const oldPlayerIds: Array<PlayerId> = serialized.players.map(
+          (player) => player.id
+        );
+        const newPlayerIds: Array<PlayerId> = players.map(
+          (player) => player.id
+        );
         if (oldPlayerIds.length !== newPlayerIds.length) {
-          throw new Error(`Failing to clone from a ${oldPlayerIds.length} game ${sourceGameId} to a ${newPlayerIds.length} game.`);
+          throw new Error(
+            `Failing to clone from a ${oldPlayerIds.length} game ${sourceGameId} to a ${newPlayerIds.length} game.`
+          );
         }
         Cloner.replacePlayerIds(serialized, oldPlayerIds, newPlayerIds);
         if (oldPlayerIds.length === 1) {
@@ -29,7 +39,8 @@ export class Cloner {
           Cloner.replacePlayerIds(
             serialized,
             [GameSetup.neutralPlayerFor(sourceGameId).id],
-            [GameSetup.neutralPlayerFor(newGameId).id]);
+            [GameSetup.neutralPlayerFor(newGameId).id]
+          );
         }
         serialized.id = newGameId;
 
@@ -47,7 +58,11 @@ export class Cloner {
     cb(response.err, response.game);
   }
 
-  private static replacePlayerIds(obj: any, oldPlayerIds:Array<PlayerId>, newPlayerIds: Array<PlayerId>) {
+  private static replacePlayerIds(
+    obj: any,
+    oldPlayerIds: Array<PlayerId>,
+    newPlayerIds: Array<PlayerId>
+  ) {
     if (obj === undefined || obj === null) {
       return;
     }
@@ -74,10 +89,10 @@ export class Cloner {
     // Handicap updates are only done during game set-up. So when cloning, adjust the
     // terraforming rating to the difference between the two handicaps.
     const terraformRatingDelta = Number(from.handicap) - Number(to.handicap);
-    const newTerraformRating = Number(to.terraformRating) + terraformRatingDelta;
+    const newTerraformRating =
+      Number(to.terraformRating) + terraformRatingDelta;
     to.terraformRating = newTerraformRating;
     // Also update the handicap to reflect appropriately.
     to.handicap = Number(from.handicap);
   }
 }
-

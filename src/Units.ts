@@ -47,7 +47,8 @@ export namespace Units {
   // reducing the need to check for undefined everywhere.
   export function of(partialUnits: Partial<Units>): Units {
     return {
-      megacredits: partialUnits.megacredits === undefined ? 0 : partialUnits.megacredits,
+      megacredits:
+        partialUnits.megacredits === undefined ? 0 : partialUnits.megacredits,
       steel: partialUnits.steel === undefined ? 0 : partialUnits.steel,
       titanium: partialUnits.titanium === undefined ? 0 : partialUnits.titanium,
       plants: partialUnits.plants === undefined ? 0 : partialUnits.plants,

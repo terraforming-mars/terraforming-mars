@@ -6,22 +6,23 @@ import {Player} from '../../../src/Player';
 import {Resources} from '../../../src/Resources';
 import {TestPlayers} from '../../TestPlayers';
 
-describe('MagneticFieldGeneratorsPromo', function() {
-  let card : MagneticFieldGeneratorsPromo; let player : Player;
+describe('MagneticFieldGeneratorsPromo', function () {
+  let card: MagneticFieldGeneratorsPromo;
+  let player: Player;
 
-  beforeEach(function() {
+  beforeEach(function () {
     card = new MagneticFieldGeneratorsPromo();
     player = TestPlayers.BLUE.newPlayer();
     const redPlayer = TestPlayers.RED.newPlayer();
     Game.newInstance('foobar', [player, redPlayer], player);
   });
 
-  it('Cannot play without enough energy production', function() {
+  it('Cannot play without enough energy production', function () {
     player.addProduction(Resources.ENERGY, 3);
     expect(card.canPlay(player)).is.not.true;
   });
 
-  it('Should play', function() {
+  it('Should play', function () {
     player.addProduction(Resources.ENERGY, 4);
     expect(card.canPlay(player)).is.true;
 

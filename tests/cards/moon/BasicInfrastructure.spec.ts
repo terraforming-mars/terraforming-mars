@@ -39,4 +39,3 @@ describe('BasicInfrastructure', () => {
     expect(player.getFleetSize()).eq(2);
   });
 });
-

@@ -29,7 +29,8 @@ export class LavaTubeSettlement extends Card implements IProjectCard {
           }).br;
           b.city().asterix();
         }),
-        description: 'Decrease your Energy production 1 step and increase your M€ production 2 steps. Place a City Tile on a VOLCANIC AREA regardless of adjacent cities.',
+        description:
+          'Decrease your Energy production 1 step and increase your M€ production 2 steps. Place a City Tile on a VOLCANIC AREA regardless of adjacent cities.',
       },
     });
   }
@@ -44,17 +45,22 @@ export class LavaTubeSettlement extends Card implements IProjectCard {
   }
 
   public canPlay(player: Player): boolean {
-    return this.getSpacesForCity(player).length > 0 && player.getProduction(Resources.ENERGY) >= 1;
+    return (
+      this.getSpacesForCity(player).length > 0 &&
+      player.getProduction(Resources.ENERGY) >= 1
+    );
   }
 
   public play(player: Player) {
     player.addProduction(Resources.MEGACREDITS, 2);
     player.addProduction(Resources.ENERGY, -1);
-    player.game.defer(new PlaceCityTile(
-      player,
-      'Select either Tharsis Tholus, Ascraeus Mons, Pavonis Mons or Arsia Mons',
-      this.getSpacesForCity(player),
-    ));
+    player.game.defer(
+      new PlaceCityTile(
+        player,
+        'Select either Tharsis Tholus, Ascraeus Mons, Pavonis Mons or Arsia Mons',
+        this.getSpacesForCity(player)
+      )
+    );
     return undefined;
   }
 }

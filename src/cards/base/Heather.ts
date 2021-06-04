@@ -22,7 +22,8 @@ export class Heather extends Card implements IProjectCard {
         renderData: CardRenderer.builder((b) => {
           b.production((pb) => pb.plants(1)).plants(1);
         }),
-        description: 'Requires -14 C° or warmer. Increase your plant production 1 step. Gain 1 plant.',
+        description:
+          'Requires -14 C° or warmer. Increase your plant production 1 step. Gain 1 plant.',
       },
     });
   }

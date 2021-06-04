@@ -26,15 +26,16 @@ import {PioneerSettlement} from '../../src/cards/colonies/PioneerSettlement';
 import {Algae} from '../../src/cards/base/Algae';
 import {TestPlayers} from '../TestPlayers';
 
-describe('Tactician', function() {
-  let milestone : Tactician; let player : Player;
+describe('Tactician', function () {
+  let milestone: Tactician;
+  let player: Player;
 
-  beforeEach(function() {
+  beforeEach(function () {
     milestone = new Tactician();
     player = TestPlayers.BLUE.newPlayer();
   });
 
-  it('Can\'t claim without 5 cards with requirements', function() {
+  it("Can't claim without 5 cards with requirements", function () {
     for (let i = 0; i < 5; i++) {
       player.playedCards.push(new Virus());
       player.playedCards.push(new RoboticWorkforce());
@@ -51,7 +52,7 @@ describe('Tactician', function() {
     expect(milestone.canClaim(player)).is.not.true;
   });
 
-  it('Excludes event cards with requirements', function() {
+  it('Excludes event cards with requirements', function () {
     player.playedCards.push(new PermafrostExtraction());
     player.playedCards.push(new InterstellarColonyShip());
     player.playedCards.push(new SpinInducingAsteroid());
@@ -63,7 +64,7 @@ describe('Tactician', function() {
     expect(milestone.canClaim(player)).is.not.true;
   });
 
-  it('Can claim with 5 cards with requirements', function() {
+  it('Can claim with 5 cards with requirements', function () {
     player.playedCards.push(new CupolaCity());
     player.playedCards.push(new VenusianAnimals());
     player.playedCards.push(new SpaceHotels());
@@ -73,8 +74,7 @@ describe('Tactician', function() {
     expect(milestone.canClaim(player)).is.true;
   });
 
-
-  it('Can claim with >5 cards (here: 6) with requirements', function() {
+  it('Can claim with >5 cards (here: 6) with requirements', function () {
     player.playedCards.push(new CupolaCity());
     player.playedCards.push(new VenusianAnimals());
     player.playedCards.push(new SpaceHotels());

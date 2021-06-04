@@ -4,19 +4,20 @@ import {TestPlayer} from '../../TestPlayer';
 import {Resources} from '../../../src/Resources';
 import {TestPlayers} from '../../TestPlayers';
 
-describe('BeamFromAThoriumAsteroid', function() {
-  let card : BeamFromAThoriumAsteroid; let player : TestPlayer;
+describe('BeamFromAThoriumAsteroid', function () {
+  let card: BeamFromAThoriumAsteroid;
+  let player: TestPlayer;
 
-  beforeEach(function() {
+  beforeEach(function () {
     card = new BeamFromAThoriumAsteroid();
     player = TestPlayers.BLUE.newPlayer();
   });
 
-  it('Cannot play without a Jovian tag', function() {
+  it('Cannot play without a Jovian tag', function () {
     expect(card.canPlay(player)).is.not.true;
   });
 
-  it('Should play', function() {
+  it('Should play', function () {
     player.playedCards.push(card);
     expect(card.canPlay(player)).is.true;
 
@@ -24,7 +25,10 @@ describe('BeamFromAThoriumAsteroid', function() {
     expect(player.getProduction(Resources.HEAT)).to.eq(3);
     expect(player.getProduction(Resources.ENERGY)).to.eq(3);
 
-    player.victoryPointsBreakdown.setVictoryPoints('victoryPoints', card.getVictoryPoints());
+    player.victoryPointsBreakdown.setVictoryPoints(
+      'victoryPoints',
+      card.getVictoryPoints()
+    );
     expect(player.victoryPointsBreakdown.victoryPoints).to.eq(1);
   });
 });

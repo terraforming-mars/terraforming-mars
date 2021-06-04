@@ -5,8 +5,8 @@ import {MudSlides} from '../../src/turmoil/globalEvents/MudSlides';
 import {Turmoil} from '../../src/turmoil/Turmoil';
 import {TestPlayers} from '../TestPlayers';
 
-describe('MudSlides', function() {
-  it('resolve play', function() {
+describe('MudSlides', function () {
+  it('resolve play', function () {
     const card = new MudSlides();
     const player = TestPlayers.BLUE.newPlayer();
     const player2 = TestPlayers.RED.newPlayer();

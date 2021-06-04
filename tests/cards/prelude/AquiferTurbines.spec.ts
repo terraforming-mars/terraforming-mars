@@ -5,21 +5,23 @@ import {Player} from '../../../src/Player';
 import {Resources} from '../../../src/Resources';
 import {TestPlayers} from '../../TestPlayers';
 
-describe('AquiferTurbines', function() {
-  let card : AquiferTurbines; let player : Player; let game : Game;
+describe('AquiferTurbines', function () {
+  let card: AquiferTurbines;
+  let player: Player;
+  let game: Game;
 
-  beforeEach(function() {
+  beforeEach(function () {
     card = new AquiferTurbines();
     player = TestPlayers.BLUE.newPlayer();
     game = Game.newInstance('foobar', [player], player);
   });
 
-  it('Can play', function() {
+  it('Can play', function () {
     player.megaCredits = 3;
     expect(card.canPlay(player)).is.true;
   });
 
-  it('Should play', function() {
+  it('Should play', function () {
     player.megaCredits = 3;
     card.play(player);
 

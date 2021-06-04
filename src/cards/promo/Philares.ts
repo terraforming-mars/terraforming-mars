@@ -24,14 +24,18 @@ export class Philares extends Card implements CorporationCard {
 
       metadata: {
         cardNumber: 'R25',
-        description: 'You start with 47 M€. As your first action, place a greenery tile and raise the oxygen 1 step.',
+        description:
+          'You start with 47 M€. As your first action, place a greenery tile and raise the oxygen 1 step.',
         renderData: CardRenderer.builder((b) => {
           b.megacredits(47).nbsp.greenery();
           b.corpBox('effect', (ce) => {
-            ce.effect('Each new adjacency between your tile and an opponent\'s tile gives you a standard resource of your choice [regardless of who just placed a tile].', (eb) => {
-              eb.emptyTile('normal', Size.SMALL).any.nbsp;
-              eb.emptyTile('normal', Size.SMALL).startEffect.wild(1);
-            });
+            ce.effect(
+              "Each new adjacency between your tile and an opponent's tile gives you a standard resource of your choice [regardless of who just placed a tile].",
+              (eb) => {
+                eb.emptyTile('normal', Size.SMALL).any.nbsp;
+                eb.emptyTile('normal', Size.SMALL).startEffect.wild(1);
+              }
+            );
           });
         }),
       },
@@ -39,17 +43,23 @@ export class Philares extends Card implements CorporationCard {
   }
 
   public initialAction(player: Player) {
-    return new SelectSpace('Select space for greenery tile',
-      player.game.board.getAvailableSpacesForGreenery(player), (space: ISpace) => {
+    return new SelectSpace(
+      'Select space for greenery tile',
+      player.game.board.getAvailableSpacesForGreenery(player),
+      (space: ISpace) => {
         player.game.addGreenery(player, space.id);
 
         player.game.log('${0} placed a Greenery tile', (b) => b.player(player));
 
         return undefined;
-      });
+      }
+    );
   }
 
-  private selectResources(philaresPlayer: Player, resourceCount: number): AndOptions {
+  private selectResources(
+    philaresPlayer: Player,
+    resourceCount: number
+  ): AndOptions {
     let megacreditsAmount: number = 0;
     let steelAmount: number = 0;
     let titaniumAmount: number = 0;
@@ -57,40 +67,77 @@ export class Philares extends Card implements CorporationCard {
     let energyAmount: number = 0;
     let heatAmount: number = 0;
 
-    const selectMegacredit = new SelectAmount('Megacredits', 'Select', (amount: number) => {
-      megacreditsAmount = amount;
-      return undefined;
-    }, 0, resourceCount);
-    const selectSteel = new SelectAmount('Steel', 'Select', (amount: number) => {
-      steelAmount = amount;
-      return undefined;
-    }, 0, resourceCount);
-    const selectTitanium = new SelectAmount('Titanium', 'Select', (amount: number) => {
-      titaniumAmount = amount;
-      return undefined;
-    }, 0, resourceCount);
-    const selectPlants = new SelectAmount('Plants', 'Select', (amount: number) => {
-      plantsAmount = amount;
-      return undefined;
-    }, 0, resourceCount);
-    const selectEnergy = new SelectAmount('Energy', 'Select', (amount: number) => {
-      energyAmount = amount;
-      return undefined;
-    }, 0, resourceCount);
-    const selectHeat = new SelectAmount('Heat', 'Select', (amount: number) => {
-      heatAmount = amount;
-      return undefined;
-    }, 0, resourceCount);
+    const selectMegacredit = new SelectAmount(
+      'Megacredits',
+      'Select',
+      (amount: number) => {
+        megacreditsAmount = amount;
+        return undefined;
+      },
+      0,
+      resourceCount
+    );
+    const selectSteel = new SelectAmount(
+      'Steel',
+      'Select',
+      (amount: number) => {
+        steelAmount = amount;
+        return undefined;
+      },
+      0,
+      resourceCount
+    );
+    const selectTitanium = new SelectAmount(
+      'Titanium',
+      'Select',
+      (amount: number) => {
+        titaniumAmount = amount;
+        return undefined;
+      },
+      0,
+      resourceCount
+    );
+    const selectPlants = new SelectAmount(
+      'Plants',
+      'Select',
+      (amount: number) => {
+        plantsAmount = amount;
+        return undefined;
+      },
+      0,
+      resourceCount
+    );
+    const selectEnergy = new SelectAmount(
+      'Energy',
+      'Select',
+      (amount: number) => {
+        energyAmount = amount;
+        return undefined;
+      },
+      0,
+      resourceCount
+    );
+    const selectHeat = new SelectAmount(
+      'Heat',
+      'Select',
+      (amount: number) => {
+        heatAmount = amount;
+        return undefined;
+      },
+      0,
+      resourceCount
+    );
 
     const selectResources = new AndOptions(
       () => {
         if (
           megacreditsAmount +
-                    steelAmount +
-                    titaniumAmount +
-                    plantsAmount +
-                    energyAmount +
-                    heatAmount > resourceCount
+            steelAmount +
+            titaniumAmount +
+            plantsAmount +
+            energyAmount +
+            heatAmount >
+          resourceCount
         ) {
           throw new Error('Need to select ' + resourceCount + ' resource(s)');
         }
@@ -101,13 +148,26 @@ export class Philares extends Card implements CorporationCard {
         philaresPlayer.energy += energyAmount;
         philaresPlayer.heat += heatAmount;
         return undefined;
-      }, selectMegacredit, selectSteel, selectTitanium, selectPlants, selectEnergy, selectHeat);
-    selectResources.title = 'Philares effect: select ' + resourceCount + ' resource(s)';
+      },
+      selectMegacredit,
+      selectSteel,
+      selectTitanium,
+      selectPlants,
+      selectEnergy,
+      selectHeat
+    );
+    selectResources.title =
+      'Philares effect: select ' + resourceCount + ' resource(s)';
 
     return selectResources;
   }
 
-  public onTilePlaced(cardOwner: Player, activePlayer: Player, space: ISpace, boardType: BoardType) {
+  public onTilePlaced(
+    cardOwner: Player,
+    activePlayer: Player,
+    space: ISpace,
+    boardType: BoardType
+  ) {
     // TODO(kberg): Clarify that this is nerfed for The Moon.
     // Nerfing on The Moon.
     if (boardType !== BoardType.MARS) {
@@ -119,20 +179,32 @@ export class Philares extends Card implements CorporationCard {
     }
     let bonusResource: number = 0;
     if (cardOwner.id === activePlayer.id) {
-      bonusResource = cardOwner.game.board.getAdjacentSpaces(space)
-        .filter((space) => space.tile !== undefined && space.player !== undefined && space.player.id !== cardOwner.id)
-        .length;
+      bonusResource = cardOwner.game.board
+        .getAdjacentSpaces(space)
+        .filter(
+          (space) =>
+            space.tile !== undefined &&
+            space.player !== undefined &&
+            space.player.id !== cardOwner.id
+        ).length;
     } else {
-      bonusResource = cardOwner.game.board.getAdjacentSpaces(space)
-        .filter((space) => space.tile !== undefined && space.player !== undefined && space.player.id === cardOwner.id)
-        .length;
+      bonusResource = cardOwner.game.board
+        .getAdjacentSpaces(space)
+        .filter(
+          (space) =>
+            space.tile !== undefined &&
+            space.player !== undefined &&
+            space.player.id === cardOwner.id
+        ).length;
     }
     if (bonusResource > 0) {
       cardOwner.game.defer(
         new DeferredAction(cardOwner, () => {
           return this.selectResources(cardOwner, bonusResource);
         }),
-        cardOwner.id !== activePlayer.id ? Priority.OPPONENT_TRIGGER : Priority.GAIN_RESOURCE_OR_PRODUCTION,
+        cardOwner.id !== activePlayer.id
+          ? Priority.OPPONENT_TRIGGER
+          : Priority.GAIN_RESOURCE_OR_PRODUCTION
       );
     }
   }

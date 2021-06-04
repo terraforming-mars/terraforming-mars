@@ -5,7 +5,14 @@ import {CardRenderItemType} from './CardRenderItemType';
 import {TileType} from '../../TileType';
 import {Tags} from '../Tags';
 
-type ItemType = CardRenderItem | CardRenderProductionBox | CardRenderSymbol | CardRenderEffect | CardRenderTile | string | undefined;
+type ItemType =
+  | CardRenderItem
+  | CardRenderProductionBox
+  | CardRenderSymbol
+  | CardRenderEffect
+  | CardRenderTile
+  | string
+  | undefined;
 
 export class CardRenderer {
   constructor(protected _rows: Array<Array<ItemType>> = [[]]) {}
@@ -26,7 +33,9 @@ export class CardRenderProductionBox extends CardRenderer {
     super(rows);
   }
 
-  public static builder(f: (builder: ProductionBoxBuilder) => void): CardRenderProductionBox {
+  public static builder(
+    f: (builder: ProductionBoxBuilder) => void
+  ): CardRenderProductionBox {
     const builder = new ProductionBoxBuilder();
     f(builder);
     return builder.build();
@@ -34,11 +43,25 @@ export class CardRenderProductionBox extends CardRenderer {
 }
 
 export class CardRenderTile {
-  constructor(public tile: TileType, public hasSymbol: boolean, public isAres: boolean) { };
+  constructor(
+    public tile: TileType,
+    public hasSymbol: boolean,
+    public isAres: boolean
+  ) {}
 }
 
 export class CardRenderEffect extends CardRenderer {
-  constructor(rows: Array<Array<CardRenderItem | CardRenderSymbol | CardRenderProductionBox | CardRenderTile | string>>) {
+  constructor(
+    rows: Array<
+      Array<
+        | CardRenderItem
+        | CardRenderSymbol
+        | CardRenderProductionBox
+        | CardRenderTile
+        | string
+      >
+    >
+  ) {
     super(rows);
   }
 
@@ -53,10 +76,14 @@ export class CardRenderEffect extends CardRenderer {
    */
   protected _validate(): void {
     if (this.rows.length !== 3) {
-      throw new Error('Card effect must have 3 arrays representing cause, delimiter and effect');
+      throw new Error(
+        'Card effect must have 3 arrays representing cause, delimiter and effect'
+      );
     }
     if (this.rows[1].length !== 1) {
-      throw new Error('Card effect delimiter array must contain exactly 1 item');
+      throw new Error(
+        'Card effect delimiter array must contain exactly 1 item'
+      );
     }
     if (!(this.rows[1][0] instanceof CardRenderSymbol)) {
       throw new Error('Effect delimiter must be a symbol');
@@ -96,7 +123,9 @@ export class CardRenderCorpBoxEffect extends CardRenderer {
     super(rows);
   }
 
-  public static builder(f: (builder: CorpEffectBuilderEffect) => void): CardRenderCorpBoxEffect {
+  public static builder(
+    f: (builder: CorpEffectBuilderEffect) => void
+  ): CardRenderCorpBoxEffect {
     const builder = new CorpEffectBuilderEffect();
     f(builder);
     return builder.build();
@@ -108,7 +137,9 @@ export class CardRenderCorpBoxAction extends CardRenderer {
     super(rows);
   }
 
-  public static builder(f: (builder: CorpEffectBuilderAction) => void): CardRenderCorpBoxAction {
+  public static builder(
+    f: (builder: CorpEffectBuilderAction) => void
+  ): CardRenderCorpBoxAction {
     const builder = new CorpEffectBuilderAction();
     f(builder);
     return builder.build();
@@ -148,7 +179,11 @@ class Builder {
     }
   }
 
-  protected _addTile(tile: TileType, hasSymbol: boolean, isAres: boolean): void {
+  protected _addTile(
+    tile: TileType,
+    hasSymbol: boolean,
+    isAres: boolean
+  ): void {
     const row = this._getCurrentRow();
     if (row !== undefined) {
       row.push(new CardRenderTile(tile, hasSymbol, isAres));
@@ -157,7 +192,9 @@ class Builder {
   }
 
   public temperature(amount: number): Builder {
-    this._addRowItem(new CardRenderItem(CardRenderItemType.TEMPERATURE, amount));
+    this._addRowItem(
+      new CardRenderItem(CardRenderItemType.TEMPERATURE, amount)
+    );
     return this;
   }
 
@@ -219,7 +256,11 @@ class Builder {
     return this;
   }
 
-  public tr(amount: number, size: Size = Size.MEDIUM, cancelled: boolean = false): Builder {
+  public tr(
+    amount: number,
+    size: Size = Size.MEDIUM,
+    cancelled: boolean = false
+  ): Builder {
     const item = new CardRenderItem(CardRenderItemType.TR, amount);
     item.size = size;
     item.cancelled = cancelled;
@@ -298,7 +339,10 @@ class Builder {
   }
 
   public tradeDiscount(amount: number): Builder {
-    const item = new CardRenderItem(CardRenderItemType.TRADE_DISCOUNT, amount * -1);
+    const item = new CardRenderItem(
+      CardRenderItemType.TRADE_DISCOUNT,
+      amount * -1
+    );
     item.amountInside = true;
     this._addRowItem(item);
     return this;
@@ -337,7 +381,9 @@ class Builder {
   }
 
   public partyLeaders(amount: number = -1) {
-    this._addRowItem(new CardRenderItem(CardRenderItemType.PARTY_LEADERS, amount));
+    this._addRowItem(
+      new CardRenderItem(CardRenderItemType.PARTY_LEADERS, amount)
+    );
     return this;
   }
 
@@ -357,7 +403,9 @@ class Builder {
   }
 
   public preservation(amount: number) {
-    this._addRowItem(new CardRenderItem(CardRenderItemType.PRESERVATION, amount));
+    this._addRowItem(
+      new CardRenderItem(CardRenderItemType.PRESERVATION, amount)
+    );
     return this;
   }
 
@@ -409,7 +457,9 @@ class Builder {
   }
 
   public data(amount: number = 1) {
-    this._addRowItem(new CardRenderItem(CardRenderItemType.DATA_RESOURCE, amount));
+    this._addRowItem(
+      new CardRenderItem(CardRenderItemType.DATA_RESOURCE, amount)
+    );
     return this;
   }
 
@@ -430,53 +480,81 @@ class Builder {
   }
 
   public resourceCube(amount = 1): Builder {
-    this._addRowItem(new CardRenderItem(CardRenderItemType.RESOURCE_CUBE, amount));
+    this._addRowItem(
+      new CardRenderItem(CardRenderItemType.RESOURCE_CUBE, amount)
+    );
     return this;
   }
 
   public moonColony(options?: ItemOptions | undefined): Builder {
-    this._addRowItem(new CardRenderItem(CardRenderItemType.MOON_COLONY).withOptions(options));
+    this._addRowItem(
+      new CardRenderItem(CardRenderItemType.MOON_COLONY).withOptions(options)
+    );
     return this;
   }
 
   public moonColonyRate(options?: ItemOptions): Builder {
-    this._addRowItem(new CardRenderItem(CardRenderItemType.MOON_COLONY_RATE).withOptions(options));
+    this._addRowItem(
+      new CardRenderItem(CardRenderItemType.MOON_COLONY_RATE).withOptions(
+        options
+      )
+    );
     return this;
   }
 
   // TODO(kberg): Replace moon road image with JUST a road, and add an altsecondary tag to support it.
   public moonRoad(options?: ItemOptions): Builder {
-    this._addRowItem(new CardRenderItem(CardRenderItemType.MOON_ROAD).withOptions(options));
+    this._addRowItem(
+      new CardRenderItem(CardRenderItemType.MOON_ROAD).withOptions(options)
+    );
     return this;
   }
 
   public moonLogisticsRate(options?: ItemOptions): Builder {
-    this._addRowItem(new CardRenderItem(CardRenderItemType.MOON_LOGISTICS_RATE).withOptions(options));
+    this._addRowItem(
+      new CardRenderItem(CardRenderItemType.MOON_LOGISTICS_RATE).withOptions(
+        options
+      )
+    );
     return this;
   }
 
   public moonMine(options?: ItemOptions): Builder {
-    this._addRowItem(new CardRenderItem(CardRenderItemType.MOON_MINE).withOptions(options));
+    this._addRowItem(
+      new CardRenderItem(CardRenderItemType.MOON_MINE).withOptions(options)
+    );
     return this;
   }
 
   public moonMiningRate(options?: ItemOptions): Builder {
-    this._addRowItem(new CardRenderItem(CardRenderItemType.MOON_MINING_RATE).withOptions(options));
+    this._addRowItem(
+      new CardRenderItem(CardRenderItemType.MOON_MINING_RATE).withOptions(
+        options
+      )
+    );
     return this;
   }
 
   public syndicateFleet(amount: number = 1): Builder {
-    this._addRowItem(new CardRenderItem(CardRenderItemType.SYNDICATE_FLEET, amount));
+    this._addRowItem(
+      new CardRenderItem(CardRenderItemType.SYNDICATE_FLEET, amount)
+    );
     return this;
   }
 
-  public emptyTile(type: 'normal' | 'golden' = 'normal', size: Size = Size.MEDIUM) {
+  public emptyTile(
+    type: 'normal' | 'golden' = 'normal',
+    size: Size = Size.MEDIUM
+  ) {
     if (type === 'normal') {
       const normal = new CardRenderItem(CardRenderItemType.EMPTY_TILE, -1);
       normal.size = size;
       this._addRowItem(normal);
     } else if (type === 'golden') {
-      const golden = new CardRenderItem(CardRenderItemType.EMPTY_TILE_GOLDEN, -1);
+      const golden = new CardRenderItem(
+        CardRenderItemType.EMPTY_TILE_GOLDEN,
+        -1
+      );
       golden.size = size;
       this._addRowItem(golden);
     }
@@ -488,28 +566,42 @@ class Builder {
     return this;
   }
 
-  public standardProject(description: string, eb: (builder: EffectBuilder) => void): Builder {
+  public standardProject(
+    description: string,
+    eb: (builder: EffectBuilder) => void
+  ): Builder {
     const builder = CardRenderEffect.builder(eb);
     builder.description = description;
     this._addRowItem(builder);
     return this;
   }
 
-  public action(description: string | undefined, eb: (builder: EffectBuilder) => void): Builder {
+  public action(
+    description: string | undefined,
+    eb: (builder: EffectBuilder) => void
+  ): Builder {
     const builder = CardRenderEffect.builder(eb);
-    builder.description = description !== undefined ? 'Action: ' + description : undefined;
+    builder.description =
+      description !== undefined ? 'Action: ' + description : undefined;
     this._addRowItem(builder);
     return this;
   }
 
-  public effect(description: string | undefined, eb: (builder: EffectBuilder) => void): Builder {
+  public effect(
+    description: string | undefined,
+    eb: (builder: EffectBuilder) => void
+  ): Builder {
     const builder = CardRenderEffect.builder(eb);
-    builder.description = description !== undefined ? 'Effect: ' + description : undefined;
+    builder.description =
+      description !== undefined ? 'Effect: ' + description : undefined;
     this._addRowItem(builder);
     return this;
   }
 
-  public corpBox(type: 'action' | 'effect', eb: (builder: CorpEffectBuilderEffect | CorpEffectBuilderAction) => void): Builder {
+  public corpBox(
+    type: 'action' | 'effect',
+    eb: (builder: CorpEffectBuilderEffect | CorpEffectBuilderAction) => void
+  ): Builder {
     this.br;
     if (type === 'action') {
       this._addRowItem(CardRenderCorpBoxAction.builder(eb));
@@ -582,7 +674,12 @@ class Builder {
     return this;
   }
 
-  public text(text: string, size: Size = Size.MEDIUM, uppercase: boolean = false, isBold: boolean = true): Builder {
+  public text(
+    text: string,
+    size: Size = Size.MEDIUM,
+    uppercase: boolean = false,
+    isBold: boolean = true
+  ): Builder {
     const item = new CardRenderItem(CardRenderItemType.TEXT);
     item.text = text;
     item.size = size;
@@ -602,7 +699,11 @@ class Builder {
     return this;
   }
 
-  public tile(tile: TileType, hasSymbol: boolean = false, isAres: boolean = false): Builder {
+  public tile(
+    tile: TileType,
+    hasSymbol: boolean = false,
+    isAres: boolean = false
+  ): Builder {
     this._addTile(tile, hasSymbol, isAres);
     return this;
   }
@@ -611,7 +712,9 @@ class Builder {
    * A one off function to handle Project Requirements prelude card
    */
   public projectRequirements(): Builder {
-    this._addRowItem(new CardRenderItem(CardRenderItemType.PROJECT_REQUIREMENTS));
+    this._addRowItem(
+      new CardRenderItem(CardRenderItemType.PROJECT_REQUIREMENTS)
+    );
     return this;
   }
 
@@ -735,7 +838,9 @@ class Builder {
         throw new Error('Called "secondaryTag" without a CardRenderItem.');
       }
       if (!(item instanceof CardRenderItem)) {
-        throw new Error('"secondaryTag" could be called on CardRenderItem only');
+        throw new Error(
+          '"secondaryTag" could be called on CardRenderItem only'
+        );
       }
 
       item.secondaryTag = tag;
@@ -796,7 +901,9 @@ class ProductionBoxBuilder extends Builder {
 }
 
 class EffectBuilder extends Builder {
-  protected _data: Array<Array<CardRenderItem | CardRenderSymbol | CardRenderProductionBox>> = [[]];
+  protected _data: Array<
+    Array<CardRenderItem | CardRenderSymbol | CardRenderProductionBox>
+  > = [[]];
 
   public build(): CardRenderEffect {
     return new CardRenderEffect(this._data);

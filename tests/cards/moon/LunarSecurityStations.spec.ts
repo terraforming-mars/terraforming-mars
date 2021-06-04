@@ -24,11 +24,15 @@ describe('LunarSecurityStations', () => {
     player = TestPlayers.BLUE.newPlayer();
     opponent1 = TestPlayers.RED.newPlayer();
     opponent2 = TestPlayers.GREEN.newPlayer();
-    game = Game.newInstance('id', [player, opponent1, opponent2], player, MOON_OPTIONS);
+    game = Game.newInstance(
+      'id',
+      [player, opponent1, opponent2],
+      player,
+      MOON_OPTIONS
+    );
     moonData = MoonExpansion.moonData(game);
     lunaSecurityStations = new LunarSecurityStations();
   });
-
 
   it('can play', () => {
     player.cardsInHand = [lunaSecurityStations];
@@ -75,4 +79,3 @@ describe('LunarSecurityStations', () => {
     expect(player.getTerraformRating()).eq(21);
   });
 });
-

@@ -49,4 +49,3 @@ describe('TheWomb', () => {
     expect(player.game.deferredActions.peek()).instanceOf(PlaceMoonColonyTile);
   });
 });
-

@@ -25,7 +25,7 @@ describe('LunaProjectOffice', () => {
     expect(player.getPlayableCards()).does.not.include(card);
   });
 
-  it('play - solo', function() {
+  it('play - solo', function () {
     const player = TestPlayers.BLUE.newPlayer();
     const game = Game.newInstance(
       'id',
@@ -34,7 +34,8 @@ describe('LunaProjectOffice', () => {
       TestingUtils.setCustomGameOptions({
         moonExpansion: true,
         turmoilExtension: false,
-      }));
+      })
+    );
 
     game.generation = 10;
     const card = new LunaProjectOffice();
@@ -42,7 +43,6 @@ describe('LunaProjectOffice', () => {
     player.playedCards = [card];
     card.play(player);
     expect(LunaProjectOffice.isActive(player)).is.true;
-
 
     // End the generation. Player will draw 5 cards from and 1 more 5-card draw.
 
@@ -72,7 +72,7 @@ describe('LunaProjectOffice', () => {
 
   // This test is almost exactly the same as the solo test, but they take
   // different paths in the code.
-  it('play - 2 player - draft', function() {
+  it('play - 2 player - draft', function () {
     const player = TestPlayers.BLUE.newPlayer();
     const redPlayer = TestPlayers.RED.newPlayer();
     const game = Game.newInstance(
@@ -83,7 +83,8 @@ describe('LunaProjectOffice', () => {
         moonExpansion: true,
         draftVariant: true,
         turmoilExtension: false,
-      }));
+      })
+    );
 
     game.generation = 10;
     const card = new LunaProjectOffice();
@@ -128,7 +129,7 @@ describe('LunaProjectOffice', () => {
 
   // This test is almost exactly the same as the solo test, but it takes
   // different paths in the code.
-  it('play - 2 player - no draft', function() {
+  it('play - 2 player - no draft', function () {
     const player = TestPlayers.BLUE.newPlayer();
     const redPlayer = TestPlayers.RED.newPlayer();
     const game = Game.newInstance(
@@ -139,7 +140,8 @@ describe('LunaProjectOffice', () => {
         moonExpansion: true,
         draftVariant: false,
         turmoilExtension: false,
-      }));
+      })
+    );
 
     game.generation = 10;
     const card = new LunaProjectOffice();
@@ -147,7 +149,6 @@ describe('LunaProjectOffice', () => {
     player.playedCards = [card];
     card.play(player);
     expect(LunaProjectOffice.isActive(player)).is.true;
-
 
     // End the generation. Player will draw 5 cards this generation.
     finishGeneration(game);

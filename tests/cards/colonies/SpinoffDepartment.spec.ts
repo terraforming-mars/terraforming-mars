@@ -5,8 +5,8 @@ import {Game} from '../../../src/Game';
 import {Resources} from '../../../src/Resources';
 import {TestPlayers} from '../../TestPlayers';
 
-describe('SpinoffDepartment', function() {
-  it('Should play', function() {
+describe('SpinoffDepartment', function () {
+  it('Should play', function () {
     const card = new SpinoffDepartment();
     const card2 = new EarthCatapult();
     const player = TestPlayers.BLUE.newPlayer();

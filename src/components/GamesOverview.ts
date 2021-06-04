@@ -5,30 +5,30 @@ import {Phase} from '../Phase';
 import * as constants from '../constants';
 
 export const GamesOverview = Vue.component('games-overview', {
-  data: function() {
+  data: function () {
     return {
       constants,
       serverId: '',
       games: {},
     };
   },
-  mounted: function() {
-    this.serverId = (new URL(location.href)).searchParams.get('serverId') || '';
+  mounted: function () {
+    this.serverId = new URL(location.href).searchParams.get('serverId') || '';
     this.getGames();
   },
   methods: {
-    getGames: function() {
+    getGames: function () {
       const vueApp = this;
       const xhr = new XMLHttpRequest();
-      xhr.open('GET', '/api/games?serverId='+this.serverId);
-      xhr.onerror = function() {
+      xhr.open('GET', '/api/games?serverId=' + this.serverId);
+      xhr.onerror = function () {
         alert('Error getting games data');
       };
       xhr.onload = () => {
         if (xhr.status === 200) {
           const result = xhr.response;
           if (result instanceof Array) {
-            result.forEach(function(gameId) {
+            result.forEach(function (gameId) {
               (vueApp as any).getGame(gameId.id);
             });
           } else {
@@ -41,11 +41,11 @@ export const GamesOverview = Vue.component('games-overview', {
       xhr.responseType = 'json';
       xhr.send();
     },
-    getGame: function(gameId: string) {
+    getGame: function (gameId: string) {
       const vueApp = this;
       const xhr = new XMLHttpRequest();
-      xhr.open('GET', '/api/game?id='+gameId);
-      xhr.onerror = function() {
+      xhr.open('GET', '/api/game?id=' + gameId);
+      xhr.onerror = function () {
         alert('Error getting game data');
       };
       xhr.onload = () => {
@@ -54,17 +54,17 @@ export const GamesOverview = Vue.component('games-overview', {
           if (result instanceof Object) {
             Vue.set((vueApp as any).games, gameId, result);
           } else {
-            alert('Unexpected response fetching game \'+gameId+\' from API');
+            alert("Unexpected response fetching game '+gameId+' from API");
           }
         } else {
-          alert('Unexpected response fetching game \'+gameId+\' from API');
+          alert("Unexpected response fetching game '+gameId+' from API");
         }
       };
       xhr.responseType = 'json';
       xhr.send();
     },
-    isGameRunning: function(gamePhase: string): boolean {
-      return (gamePhase === Phase.END) ? false : true;
+    isGameRunning: function (gamePhase: string): boolean {
+      return gamePhase === Phase.END ? false : true;
     },
   },
   template: `
@@ -86,4 +86,3 @@ export const GamesOverview = Vue.component('games-overview', {
         </div>
     `,
 });
-

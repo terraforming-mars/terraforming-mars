@@ -9,7 +9,7 @@ import {TileType} from '../../src/TileType';
 
 const MOON_OPTIONS = TestingUtils.setCustomGameOptions({moonExpansion: true});
 
-describe('Lunarchitect', function() {
+describe('Lunarchitect', function () {
   let player: TestPlayer;
   let otherPlayer: TestPlayer;
 
@@ -19,7 +19,7 @@ describe('Lunarchitect', function() {
     Game.newInstance('id', [player, otherPlayer], player, MOON_OPTIONS);
   });
 
-  it('Basic test', function() {
+  it('Basic test', function () {
     const milestone = new Lunarchitect();
     expect(milestone.canClaim(player)).is.not.true;
     MoonExpansion.addTile(player, 'm01', {tileType: TileType.MOON_MINE});
@@ -36,8 +36,7 @@ describe('Lunarchitect', function() {
     expect(milestone.canClaim(player)).is.true;
   });
 
-
-  it('Other player tokens do not count', function() {
+  it('Other player tokens do not count', function () {
     const milestone = new Lunarchitect();
     expect(milestone.canClaim(player)).is.not.true;
     MoonExpansion.addTile(player, 'm01', {tileType: TileType.MOON_MINE});

@@ -7,10 +7,14 @@ import {SelectSpace} from '../../../src/inputs/SelectSpace';
 import {OrOptions} from '../../../src/inputs/OrOptions';
 import {TestPlayers} from '../../TestPlayers';
 
-describe('Comet', function() {
-  let card : Comet; let player : Player; let player2 : Player; let player3: Player; let game : Game;
+describe('Comet', function () {
+  let card: Comet;
+  let player: Player;
+  let player2: Player;
+  let player3: Player;
+  let game: Game;
 
-  beforeEach(function() {
+  beforeEach(function () {
     card = new Comet();
     player = TestPlayers.BLUE.newPlayer();
     player2 = TestPlayers.RED.newPlayer();
@@ -18,7 +22,7 @@ describe('Comet', function() {
     game = Game.newInstance('foobar', [player, player2, player3], player);
   });
 
-  it('Should play', function() {
+  it('Should play', function () {
     player2.plants = 2;
     player3.plants = 4;
 
@@ -35,7 +39,7 @@ describe('Comet', function() {
     expect(player2.plants).to.eq(0);
   });
 
-  it('Provides no options if there is nothing to confirm', function() {
+  it('Provides no options if there is nothing to confirm', function () {
     TestingUtils.maxOutOceans(player);
     player.plants = 8;
 
@@ -47,7 +51,7 @@ describe('Comet', function() {
     expect(game.getTemperature()).to.eq(-28);
   });
 
-  it('Works fine in solo mode', function() {
+  it('Works fine in solo mode', function () {
     Game.newInstance('solo_game', [player], player);
     player.plants = 8;
 

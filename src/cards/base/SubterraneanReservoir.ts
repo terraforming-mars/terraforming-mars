@@ -27,10 +27,16 @@ export class SubterraneanReservoir extends Card implements IProjectCard {
   }
 
   public canPlay(player: Player): boolean {
-    const oceansMaxed = player.game.board.getOceansOnBoard() === MAX_OCEAN_TILES;
+    const oceansMaxed =
+      player.game.board.getOceansOnBoard() === MAX_OCEAN_TILES;
 
-    if (PartyHooks.shouldApplyPolicy(player.game, PartyName.REDS) && !oceansMaxed) {
-      return player.canAfford(player.getCardCost(this) + REDS_RULING_POLICY_COST);
+    if (
+      PartyHooks.shouldApplyPolicy(player.game, PartyName.REDS) &&
+      !oceansMaxed
+    ) {
+      return player.canAfford(
+        player.getCardCost(this) + REDS_RULING_POLICY_COST
+      );
     }
 
     return true;
@@ -41,4 +47,3 @@ export class SubterraneanReservoir extends Card implements IProjectCard {
     return undefined;
   }
 }
-

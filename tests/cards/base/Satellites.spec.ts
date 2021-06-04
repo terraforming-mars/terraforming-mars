@@ -4,8 +4,8 @@ import {Resources} from '../../../src/Resources';
 import {TestPlayers} from '../../TestPlayers';
 import {Game} from '../../../src/Game';
 
-describe('Satellites', function() {
-  it('Should play', function() {
+describe('Satellites', function () {
+  it('Should play', function () {
     const card = new Satellites();
     const player = TestPlayers.BLUE.newPlayer();
     const redPlayer = TestPlayers.RED.newPlayer();

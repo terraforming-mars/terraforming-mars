@@ -32,7 +32,8 @@ export class MartianMediaCenter extends Card implements IProjectCard {
             pb.megacredits(2);
           });
         }),
-        description: 'Requires that Mars First is ruling or that you have 2 delegates there. Increase your M€ production 2 steps.',
+        description:
+          'Requires that Mars First is ruling or that you have 2 delegates there. Increase your M€ production 2 steps.',
       },
     });
   }
@@ -43,12 +44,23 @@ export class MartianMediaCenter extends Card implements IProjectCard {
   }
 
   public canAct(player: Player): boolean {
-    return player.canAfford(3) && player.game.turmoil!.hasAvailableDelegates(player.id);
+    return (
+      player.canAfford(3) &&
+      player.game.turmoil!.hasAvailableDelegates(player.id)
+    );
   }
 
   public action(player: Player) {
-    player.game.defer(new SelectHowToPayDeferred(player, 3, {title: 'Select how to pay for Martian Media Center action'}));
-    player.game.defer(new SendDelegateToArea(player, 'Select where to send a delegate', {source: 'reserve'}));
+    player.game.defer(
+      new SelectHowToPayDeferred(player, 3, {
+        title: 'Select how to pay for Martian Media Center action',
+      })
+    );
+    player.game.defer(
+      new SendDelegateToArea(player, 'Select where to send a delegate', {
+        source: 'reserve',
+      })
+    );
     return undefined;
   }
 }

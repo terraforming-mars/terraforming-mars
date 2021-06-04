@@ -19,7 +19,8 @@ export class BiosphereSupport extends PreludeCard {
             pb.plants(2);
           });
         }),
-        description: 'Increase your plant production 2 steps. Decrease your M€ production 1 step.',
+        description:
+          'Increase your plant production 2 steps. Decrease your M€ production 1 step.',
       },
     });
   }
@@ -32,4 +33,3 @@ export class BiosphereSupport extends PreludeCard {
     return undefined;
   }
 }
-

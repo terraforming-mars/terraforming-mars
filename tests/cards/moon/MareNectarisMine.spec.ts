@@ -52,4 +52,3 @@ describe('MareNectarisMine', () => {
     expect(mareNectaris.tile!.tileType).eq(TileType.MOON_MINE);
   });
 });
-

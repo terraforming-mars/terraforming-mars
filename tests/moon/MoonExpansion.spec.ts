@@ -32,7 +32,9 @@ describe('MoonExpansion', () => {
   });
 
   it('addTile', () => {
-    MoonExpansion.addTile(player, MoonSpaces.MARE_IMBRIUM, {tileType: TileType.LUNA_TRADE_STATION});
+    MoonExpansion.addTile(player, MoonSpaces.MARE_IMBRIUM, {
+      tileType: TileType.LUNA_TRADE_STATION,
+    });
     const space: ISpace = moonData.moon.getSpace(MoonSpaces.MARE_IMBRIUM);
     expect(space.player).eq(player);
     expect(space.tile).deep.eq({tileType: TileType.LUNA_TRADE_STATION});
@@ -50,11 +52,19 @@ describe('MoonExpansion', () => {
   it('addTile fails occupied space', () => {
     const space: ISpace = moonData.moon.getSpace(MoonSpaces.MARE_IMBRIUM);
     space.tile = {tileType: TileType.MOON_MINE};
-    expect(() => MoonExpansion.addTile(player, MoonSpaces.MARE_IMBRIUM, {tileType: TileType.LUNA_TRADE_STATION})).to.throw(/occupied/);
+    expect(() =>
+      MoonExpansion.addTile(player, MoonSpaces.MARE_IMBRIUM, {
+        tileType: TileType.LUNA_TRADE_STATION,
+      })
+    ).to.throw(/occupied/);
   });
 
   it('addTile throws with Mars space', () => {
-    expect(() => MoonExpansion.addTile(player, SpaceName.NOCTIS_CITY, {tileType: TileType.LUNA_TRADE_STATION})).to.throw(/.*/);
+    expect(() =>
+      MoonExpansion.addTile(player, SpaceName.NOCTIS_CITY, {
+        tileType: TileType.LUNA_TRADE_STATION,
+      })
+    ).to.throw(/.*/);
   });
 
   // The rules for how these cards could change, and that's fine if that means
@@ -87,7 +97,7 @@ describe('MoonExpansion', () => {
         mines: vps.moonMines,
         roads: vps.moonRoads,
       };
-    };
+    }
 
     expect(computeVps()).eql({colonies: 0, mines: 0, roads: 0});
     MoonExpansion.addTile(player, 'm02', {tileType: TileType.MOON_ROAD});

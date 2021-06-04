@@ -9,7 +9,10 @@ import {CardName} from '../../CardName';
 import {Resources} from '../../Resources';
 import {CardRenderer} from '../render/CardRenderer';
 
-export class SaturnSurfing extends Card implements IActionCard, IProjectCard, IResourceCard {
+export class SaturnSurfing
+  extends Card
+  implements IActionCard, IProjectCard, IResourceCard
+{
   constructor() {
     super({
       cardType: CardType.ACTIVE,
@@ -21,35 +24,42 @@ export class SaturnSurfing extends Card implements IActionCard, IProjectCard, IR
       metadata: {
         cardNumber: 'X11',
         renderData: CardRenderer.builder((b) => {
-          b.action('Spend 1 floater from here to gain 1 M€ from each floater here, INCLUDING THE PAID FLOATER. Max 5.', (eb) => {
-            eb.floaters(1).startAction.megacredits(1).slash().floaters(1);
-            eb.asterix().text('max 5');
-          }).br;
+          b.action(
+            'Spend 1 floater from here to gain 1 M€ from each floater here, INCLUDING THE PAID FLOATER. Max 5.',
+            (eb) => {
+              eb.floaters(1).startAction.megacredits(1).slash().floaters(1);
+              eb.asterix().text('max 5');
+            }
+          ).br;
           b.floaters(1).slash().earth().played;
         }),
-        description: 'Add 1 floater here for every Earth tag you have, including this.',
+        description:
+          'Add 1 floater here for every Earth tag you have, including this.',
         victoryPoints: 1,
       },
     });
   }
 
-    public resourceCount = 0;
+  public resourceCount = 0;
 
-    public play(player: Player) {
-      this.resourceCount = player.getTagCount(Tags.EARTH) + 1;
-      return undefined;
-    }
+  public play(player: Player) {
+    this.resourceCount = player.getTagCount(Tags.EARTH) + 1;
+    return undefined;
+  }
 
-    public canAct(): boolean {
-      return this.resourceCount > 0;
-    }
+  public canAct(): boolean {
+    return this.resourceCount > 0;
+  }
 
-    public action(player: Player) {
-      player.addResource(Resources.MEGACREDITS, Math.min(5, this.resourceCount--));
-      return undefined;
-    }
+  public action(player: Player) {
+    player.addResource(
+      Resources.MEGACREDITS,
+      Math.min(5, this.resourceCount--)
+    );
+    return undefined;
+  }
 
-    public getVictoryPoints() {
-      return 1;
-    }
+  public getVictoryPoints() {
+    return 1;
+  }
 }

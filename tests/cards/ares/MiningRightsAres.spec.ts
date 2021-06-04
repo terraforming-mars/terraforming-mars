@@ -9,39 +9,59 @@ import {MiningRightsAres} from '../../../src/cards/ares/MiningRightsAres';
 import {ARES_OPTIONS_NO_HAZARDS} from '../../ares/AresTestHelper';
 import {TestPlayers} from '../../TestPlayers';
 
-describe('MiningRightsAres', function() {
-  let card : MiningRightsAres; let player : Player; let game : Game;
+describe('MiningRightsAres', function () {
+  let card: MiningRightsAres;
+  let player: Player;
+  let game: Game;
 
-  beforeEach(function() {
+  beforeEach(function () {
     card = new MiningRightsAres();
     player = TestPlayers.BLUE.newPlayer();
     const redPlayer = TestPlayers.RED.newPlayer();
-    game = Game.newInstance('foobar', [player, redPlayer], player, ARES_OPTIONS_NO_HAZARDS);
+    game = Game.newInstance(
+      'foobar',
+      [player, redPlayer],
+      player,
+      ARES_OPTIONS_NO_HAZARDS
+    );
   });
 
-  it('Should play', function() {
+  it('Should play', function () {
     const action = card.play(player);
     expect(action instanceof SelectSpace).is.true;
 
-    const titaniumSpace = action.availableSpaces.find((space) => space.bonus.includes(SpaceBonus.TITANIUM) && space.bonus.includes(SpaceBonus.STEEL) === false);
+    const titaniumSpace = action.availableSpaces.find(
+      (space) =>
+        space.bonus.includes(SpaceBonus.TITANIUM) &&
+        space.bonus.includes(SpaceBonus.STEEL) === false
+    );
     expect(titaniumSpace).is.not.undefined;
     action.cb(titaniumSpace!);
     expect(titaniumSpace!.player).to.eq(player);
-    expect(titaniumSpace!.tile && titaniumSpace!.tile!.tileType).to.eq(TileType.MINING_TITANIUM_BONUS);
+    expect(titaniumSpace!.tile && titaniumSpace!.tile!.tileType).to.eq(
+      TileType.MINING_TITANIUM_BONUS
+    );
     expect(player.getProduction(Resources.TITANIUM)).to.eq(1);
     expect(titaniumSpace!.adjacency).to.deep.eq({bonus: [SpaceBonus.TITANIUM]});
 
-    const steelSpace = action.availableSpaces.find((space) => space.bonus.includes(SpaceBonus.TITANIUM) === false && space.bonus.includes(SpaceBonus.STEEL));
+    const steelSpace = action.availableSpaces.find(
+      (space) =>
+        space.bonus.includes(SpaceBonus.TITANIUM) === false &&
+        space.bonus.includes(SpaceBonus.STEEL)
+    );
     expect(steelSpace).is.not.undefined;
     action.cb(steelSpace!);
     expect(steelSpace!.player).to.eq(player);
-    expect(steelSpace!.tile && steelSpace!.tile!.tileType).to.eq(TileType.MINING_STEEL_BONUS);
+    expect(steelSpace!.tile && steelSpace!.tile!.tileType).to.eq(
+      TileType.MINING_STEEL_BONUS
+    );
     expect(player.getProduction(Resources.TITANIUM)).to.eq(1);
     expect(steelSpace!.adjacency).to.deep.eq({bonus: [SpaceBonus.STEEL]});
   });
 
-  it('Candidate spaces can\'t include hazards', function() {
-    const land = game.board.getAvailableSpacesOnLand(player)
+  it("Candidate spaces can't include hazards", function () {
+    const land = game.board
+      .getAvailableSpacesOnLand(player)
       .find((land) => land.bonus.includes(SpaceBonus.STEEL))!;
 
     let action = card.play(player) as SelectSpace;

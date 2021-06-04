@@ -1,8 +1,11 @@
-
 import * as http from 'http';
 
 export class Route {
-  public badRequest(req: http.IncomingMessage, res: http.ServerResponse, err?: string): void {
+  public badRequest(
+    req: http.IncomingMessage,
+    res: http.ServerResponse,
+    err?: string
+  ): void {
     console.warn('bad request', req.url);
     res.writeHead(400);
     res.write('Bad request');
@@ -12,7 +15,11 @@ export class Route {
     }
     res.end();
   }
-  public notFound(req: http.IncomingMessage, res: http.ServerResponse, err?: string): void {
+  public notFound(
+    req: http.IncomingMessage,
+    res: http.ServerResponse,
+    err?: string
+  ): void {
     if (!process.argv.includes('hide-not-found-warnings')) {
       console.warn('Not found', req.method, req.url);
     }
@@ -31,13 +38,17 @@ export class Route {
   public internalServerError(
     req: http.IncomingMessage,
     res: http.ServerResponse,
-    err: unknown): void {
+    err: unknown
+  ): void {
     console.warn('internal server error', req.url, err);
     res.writeHead(500);
     res.write('Internal server error ' + err);
     res.end();
   }
-  public notAuthorized(req: http.IncomingMessage, res: http.ServerResponse): void {
+  public notAuthorized(
+    req: http.IncomingMessage,
+    res: http.ServerResponse
+  ): void {
     console.warn('Not authorized', req.method, req.url);
     res.writeHead(403);
     res.write('Not authorized');

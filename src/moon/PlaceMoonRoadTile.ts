@@ -9,25 +9,23 @@ export class PlaceMoonRoadTile implements DeferredAction {
   constructor(
     public player: Player,
     public title: string = 'Select a space on the Moon for a road tile.',
-    public spaces?: Array<ISpace>,
+    public spaces?: Array<ISpace>
   ) {}
 
   public execute() {
     const moonData = MoonExpansion.moonData(this.player.game);
-    const spaces = this.spaces !== undefined ?
-      this.spaces:
-      moonData.moon.getAvailableSpacesOnLand(this.player);
+    const spaces =
+      this.spaces !== undefined
+        ? this.spaces
+        : moonData.moon.getAvailableSpacesOnLand(this.player);
 
     if (spaces.length === 0) {
       return undefined;
     }
-    return new SelectSpace(
-      this.title,
-      spaces,
-      (space) => {
-        MoonExpansion.addRoadTile(this.player, space.id);
-        MoonExpansion.raiseLogisticRate(this.player);
-        return undefined;
-      });
+    return new SelectSpace(this.title, spaces, (space) => {
+      MoonExpansion.addRoadTile(this.player, space.id);
+      MoonExpansion.raiseLogisticRate(this.player);
+      return undefined;
+    });
   }
 }

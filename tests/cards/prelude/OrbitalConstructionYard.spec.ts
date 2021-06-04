@@ -3,9 +3,8 @@ import {OrbitalConstructionYard} from '../../../src/cards/prelude/OrbitalConstru
 import {Resources} from '../../../src/Resources';
 import {TestPlayers} from '../../TestPlayers';
 
-
-describe('OrbitalConstructionYard', function() {
-  it('Should play', function() {
+describe('OrbitalConstructionYard', function () {
+  it('Should play', function () {
     const card = new OrbitalConstructionYard();
     const player = TestPlayers.BLUE.newPlayer();
     const action = card.play(player);

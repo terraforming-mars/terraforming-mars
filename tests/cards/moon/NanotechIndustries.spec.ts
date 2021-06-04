@@ -34,13 +34,23 @@ describe('NanotechIndustries', () => {
 
   it('act', () => {
     player.corporationCard = nanotechIndustries;
-    player.playedCards = [physicsComplex, searchForLife, olympusConference, prideoftheEarthArkship];
+    player.playedCards = [
+      physicsComplex,
+      searchForLife,
+      olympusConference,
+      prideoftheEarthArkship,
+    ];
     nanotechIndustries.action(player);
 
-    const action: SelectCard<IProjectCard> =
-      player.game.deferredActions.pop()?.execute() as SelectCard<IProjectCard>;
+    const action: SelectCard<IProjectCard> = player.game.deferredActions
+      .pop()
+      ?.execute() as SelectCard<IProjectCard>;
 
-    expect(action!.cards).has.members([nanotechIndustries, olympusConference, prideoftheEarthArkship]);
+    expect(action!.cards).has.members([
+      nanotechIndustries,
+      olympusConference,
+      prideoftheEarthArkship,
+    ]);
 
     olympusConference.resourceCount = 0;
     action.cb([olympusConference]);
@@ -66,4 +76,3 @@ describe('NanotechIndustries', () => {
     expect(nanotechIndustries.getVictoryPoints()).eq(2);
   });
 });
-

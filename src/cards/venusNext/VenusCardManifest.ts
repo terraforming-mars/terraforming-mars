@@ -62,7 +62,10 @@ export const VENUS_CARD_MANIFEST = new CardManifest({
   projectCards: [
     {cardName: CardName.AERIAL_MAPPERS, Factory: AerialMappers},
     {cardName: CardName.AEROSPORT_TOURNAMENT, Factory: AerosportTournament},
-    {cardName: CardName.AIR_SCRAPPING_EXPEDITION, Factory: AirScrappingExpedition},
+    {
+      cardName: CardName.AIR_SCRAPPING_EXPEDITION,
+      Factory: AirScrappingExpedition,
+    },
     {cardName: CardName.ATALANTA_PLANITIA_LAB, Factory: AtalantaPlanitiaLab},
     {cardName: CardName.ATMOSCOOP, Factory: Atmoscoop},
     {cardName: CardName.COMET_FOR_VENUS, Factory: CometForVenus},
@@ -81,7 +84,10 @@ export const VENUS_CARD_MANIFEST = new CardManifest({
     {cardName: CardName.HYDROGEN_TO_VENUS, Factory: HydrogenToVenus},
     {cardName: CardName.IO_SULPHUR_RESEARCH, Factory: IoSulphurResearch},
     {cardName: CardName.ISHTAR_MINING, Factory: IshtarMining},
-    {cardName: CardName.JET_STREAM_MICROSCRAPPERS, Factory: JetStreamMicroscrappers},
+    {
+      cardName: CardName.JET_STREAM_MICROSCRAPPERS,
+      Factory: JetStreamMicroscrappers,
+    },
     {cardName: CardName.LUNA_METROPOLIS, Factory: LunaMetropolis},
     {cardName: CardName.LOCAL_SHADING, Factory: LocalShading},
     {cardName: CardName.MAXWELL_BASE, Factory: MaxwellBase},
@@ -92,7 +98,10 @@ export const VENUS_CARD_MANIFEST = new CardManifest({
     {cardName: CardName.SPONSORED_ACADEMIES, Factory: SponsoredAcademies},
     {cardName: CardName.STRATOPOLIS, Factory: Stratopolis},
     {cardName: CardName.STRATOSPHERIC_BIRDS, Factory: StratosphericBirds},
-    {cardName: CardName.SULPHUR_EATING_BACTERIA, Factory: SulphurEatingBacteria},
+    {
+      cardName: CardName.SULPHUR_EATING_BACTERIA,
+      Factory: SulphurEatingBacteria,
+    },
     {cardName: CardName.SULPHUR_EXPORTS, Factory: SulphurExports},
     {cardName: CardName.TERRAFORMING_CONTRACT, Factory: TerraformingContract},
     {cardName: CardName.THERMOPHILES, Factory: Thermophiles},
@@ -111,7 +120,10 @@ export const VENUS_CARD_MANIFEST = new CardManifest({
     {cardName: CardName.MINING_QUOTA, Factory: MiningQuota},
   ],
   standardProjects: [
-    {cardName: CardName.AIR_SCRAPPING_STANDARD_PROJECT, Factory: AirScrappingStandardProject},
+    {
+      cardName: CardName.AIR_SCRAPPING_STANDARD_PROJECT,
+      Factory: AirScrappingStandardProject,
+    },
   ],
 
   corporationCards: [
@@ -120,4 +132,5 @@ export const VENUS_CARD_MANIFEST = new CardManifest({
     {cardName: CardName.MANUTECH, Factory: Manutech},
     {cardName: CardName.MORNING_STAR_INC, Factory: MorningStarInc},
     {cardName: CardName.VIRON, Factory: Viron},
-  ]});
+  ],
+});

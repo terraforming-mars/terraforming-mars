@@ -1,388 +1,387 @@
 /* UI to display global parameters (oxygen, temperature, oceans count) */
 
 .global-numbers {
-	font-family: Prototype;
-	font-size: 14px;
-	margin: 11px 0 0 16px;
+  font-family: Prototype;
+  font-size: 14px;
+  margin: 11px 0 0 16px;
 
-	.global-numbers-value {
-		width: 26px;
-		height: 26px;
-		line-height: 26px;
-		text-align: center;
-		border-radius: 5px;
-	}
+  .global-numbers-value {
+    width: 26px;
+    height: 26px;
+    line-height: 26px;
+    text-align: center;
+    border-radius: 5px;
+  }
 
-	.val-is-active {
-		color: white;
-		box-shadow: 0 0px 0px 2px #222, 0px 0 0px 6px #bb8760, 0 0 2px 8px #000;
-		z-index: 1;
-	}
-	.global-numbers-oceans {
-		position: absolute;
-		text-align: left;
-		color: #3682b4;
-		font-family: Prototype;
-		font-size: 30px;
-		margin: 524px 0 0 286px;
-	}
+  .val-is-active {
+    color: white;
+    box-shadow: 0 0px 0px 2px #222, 0px 0 0px 6px #bb8760, 0 0 2px 8px #000;
+    z-index: 1;
+  }
+  .global-numbers-oceans {
+    position: absolute;
+    text-align: left;
+    color: #3682b4;
+    font-family: Prototype;
+    font-size: 30px;
+    margin: 524px 0 0 286px;
+  }
 
-	.global-ares-erosions-icon {
-		background: url(assets/erosion.png) no-repeat;	
-		position: absolute;
-		margin: 529px 0 0 206px;
-		transform: scale(.5, .5);
-		height: 34px;
-		width: 30px;
-	}
+  .global-ares-erosions-icon {
+    background: url(assets/erosion.png) no-repeat;
+    position: absolute;
+    margin: 529px 0 0 206px;
+    transform: scale(0.5, 0.5);
+    height: 34px;
+    width: 30px;
+  }
 
-	.global-ares-erosions-val {
-		position: absolute;
-		font-size: 15px;
-		margin: 535px 0 0 230px;
+  .global-ares-erosions-val {
+    position: absolute;
+    font-size: 15px;
+    margin: 535px 0 0 230px;
 
-		text-align: left;
-		color: #3682b4;
-		font-family: Prototype;
-	}
+    text-align: left;
+    color: #3682b4;
+    font-family: Prototype;
+  }
 
-	.global-ares-remove-dust-storms-icon {
-		background: url(assets/remove-dust-storms.png) no-repeat;	
-		position: absolute;
-		margin: 436px 0 0 276px;
-		transform: scale(.12, .12);
-		height: 218px;
-		width: 175px;
-	}
+  .global-ares-remove-dust-storms-icon {
+    background: url(assets/remove-dust-storms.png) no-repeat;
+    position: absolute;
+    margin: 436px 0 0 276px;
+    transform: scale(0.12, 0.12);
+    height: 218px;
+    width: 175px;
+  }
 
-	.global-ares-remove-dust-storms-val {
-		position: absolute;
-		font-size: 15px;
-		margin: 535px 0 0 381px;
+  .global-ares-remove-dust-storms-val {
+    position: absolute;
+    font-size: 15px;
+    margin: 535px 0 0 381px;
 
-		text-align: left;
-		color: #3682b4;
-		font-family: Prototype;
-	}
+    text-align: left;
+    color: #3682b4;
+    font-family: Prototype;
+  }
 
-	.global-ares-severe-erosions {
-		background: url(assets/severe-erosion.png) no-repeat;	
-		position: absolute;
-		margin: 222px 0 0 570px;
+  .global-ares-severe-erosions {
+    background: url(assets/severe-erosion.png) no-repeat;
+    position: absolute;
+    margin: 222px 0 0 570px;
 
-		height: 60px;
-		width: 54px;
-	}
+    height: 60px;
+    width: 54px;
+  }
 
-	.global-ares-severe-erosions--2 {
-		margin: 195px 0 0 571px;
-		transform: rotate(-14deg) scale(.4, .4);
+  .global-ares-severe-erosions--2 {
+    margin: 195px 0 0 571px;
+    transform: rotate(-14deg) scale(0.4, 0.4);
+  }
+
+  .global-ares-severe-erosions--4 {
+    height: 60px;
+    width: 54px;
+    margin: 222px 0 0 577px;
+    transform: rotate(-11deg) scale(0.4, 0.4);
+  }
+
+  .global-ares-severe-erosions--6 {
+    margin: 247px 0 0 581px;
+    transform: rotate(-3deg) scale(0.4, 0.4);
+  }
+
+  .global-ares-severe-dust-storms {
+    background: url(assets/severe-dust-storm.png) no-repeat;
+    position: absolute;
+    margin: 100px 0 0 250px;
+    height: 60px;
+    width: 54px;
+  }
+
+  .global-ares-severe-dust-storms-4 {
+    margin: 407px 0 0 5px;
+    transform: rotate(-30deg) scale(0.4, 0.4);
+  }
+
+  .global-ares-severe-dust-storms-5 {
+    margin: 378px 0 0 -9px;
+    transform: rotate(-22deg) scale(0.4, 0.4);
+  }
+
+  .global-ares-severe-dust-storms-6 {
+    margin: 346px 0 0 -18px;
+    transform: rotate(-15deg) scale(0.4, 0.4);
+  }
+
+  .checkmark {
+    display: none;
+  }
+
+  .global-numbers-venus {
+    position: absolute;
+
+    .val-0 {
+      position: absolute;
+      margin: 88px 0 0 107px;
+      transform: rotate(-45deg);
     }
-
-	.global-ares-severe-erosions--4 {
-		height: 60px;
-		width: 54px;
-		margin: 222px 0 0 577px;
-		transform: rotate(-11deg) scale(.4, .4);
+    .val-2 {
+      position: absolute;
+      margin: 72px 0 0 129px;
+      transform: rotate(-36deg);
     }
-
-	.global-ares-severe-erosions--6 {
-		margin: 247px 0 0 581px;
-		transform: rotate(-3deg) scale(.4, .4);
+    .val-4 {
+      position: absolute;
+      margin: 58px 0 0 150px;
+      transform: rotate(-33deg);
     }
-
-	.global-ares-severe-dust-storms {
-		background: url(assets/severe-dust-storm.png) no-repeat;	
-		position: absolute;
-		margin: 100px 0 0 250px;
-		height: 60px;
-		width: 54px;
-	}
-
-	.global-ares-severe-dust-storms-4 {
-		margin: 407px 0 0 5px;
-		transform: rotate(-30deg) scale(.4, .4);
+    .val-6 {
+      position: absolute;
+      margin: 46px 0 0 173px;
+      transform: rotate(-26deg);
     }
-
-	.global-ares-severe-dust-storms-5 {
-		margin: 378px 0 0 -9px;
-		transform: rotate(-22deg) scale(.4, .4);
+    .val-8 {
+      position: absolute;
+      margin: 36px 0 0 197px;
+      transform: rotate(-20deg);
     }
+    .val-10 {
+      position: absolute;
+      margin: 28px 0 0 222px;
+      transform: rotate(-15deg);
+    }
+    .val-12 {
+      position: absolute;
+      margin: 23px 0 0 247px;
+      transform: rotate(-8deg);
+    }
+    .val-14 {
+      position: absolute;
+      margin: 20px 0 0 274px;
+      transform: rotate(-2deg);
+    }
+    .val-16 {
+      position: absolute;
+      margin: 20px 0 0 301px;
+      transform: rotate(4deg);
+    }
+    .val-18 {
+      position: absolute;
+      margin: 23px 0 0px 327px;
+      transform: rotate(9deg);
+    }
+    .val-20 {
+      position: absolute;
+      margin: 28px 0 0 352px;
+      transform: rotate(15deg);
+    }
+    .val-22 {
+      position: absolute;
+      margin: 36px 0 0 377px;
+      transform: rotate(21deg);
+    }
+    .val-24 {
+      position: absolute;
+      margin: 46px 0 0 401px;
+      transform: rotate(27deg);
+    }
+    .val-26 {
+      position: absolute;
+      margin: 58px 0 0 425px;
+      transform: rotate(31deg);
+    }
+    .val-28 {
+      position: absolute;
+      margin: 72px 0 0 446px;
+      transform: rotate(35deg);
+    }
+    .val-30 {
+      position: absolute;
+      margin: 88px 0 0 466px;
+      transform: rotate(42deg);
+    }
+  }
 
-	.global-ares-severe-dust-storms-6 {
-		margin: 346px 0 0 -18px;
-		transform: rotate(-15deg) scale(.4, .4);
-	}
+  .global-numbers-oxygen {
+    position: absolute;
+    .val-0 {
+      position: absolute;
+      margin: 500px 0 0 125px;
+      transform: rotate(-54deg);
+    }
+    .val-1 {
+      position: absolute;
+      margin: 482px 0 0 104px;
+      transform: rotate(-48deg);
+    }
+    .val-2 {
+      position: absolute;
+      margin: 460px 0 0 82px;
+      transform: rotate(-43deg);
+    }
+    .val-3 {
+      position: absolute;
+      margin: 435px 0 0 64px;
+      transform: rotate(-37deg);
+    }
+    .val-4 {
+      position: absolute;
+      margin: 411px 0 0 49px;
+      transform: rotate(-30deg);
+    }
+    .val-5 {
+      position: absolute;
+      margin: 383px 0 0 37px;
+      transform: rotate(-22deg);
+    }
+    .val-6 {
+      position: absolute;
+      margin: 355px 0 0 28px;
+      transform: rotate(-15deg);
+    }
+    .val-7 {
+      position: absolute;
+      margin: 325px 0 0 23px;
+      transform: rotate(-10deg);
+    }
+    .val-8 {
+      position: absolute;
+      margin: 295px 0 0 20px;
+      transform: rotate(-2deg);
+    }
+    .val-9 {
+      position: absolute;
+      margin: 265px 0 0 21px;
+      transform: rotate(6deg);
+    }
+    .val-10 {
+      position: absolute;
+      margin: 236px 0 0 25px;
+      transform: rotate(12deg);
+    }
+    .val-11 {
+      position: absolute;
+      margin: 207px 0 0 32px;
+      transform: rotate(19deg);
+    }
+    .val-12 {
+      position: absolute;
+      margin: 179px 0 0 43px;
+      transform: rotate(25deg);
+    }
+    .val-13 {
+      position: absolute;
+      margin: 153px 0 0 56px;
+      transform: rotate(31deg);
+    }
+    .val-14 {
+      position: absolute;
+      margin: 128px 0 0 72px;
+      transform: rotate(37deg);
+    }
+  }
 
-
-	.checkmark {
-		display: none;
-	}
-
-	.global-numbers-venus {
-		position: absolute;
-
-		.val-0 {
-			position: absolute;
-			margin: 88px 0 0 107px;
-			transform: rotate(-45deg);
-		}
-		.val-2 {
-			position: absolute;
-			margin: 72px 0 0 129px;
-			transform: rotate(-36deg);
-		}
-		.val-4 {
-			position: absolute;
-			margin: 58px 0 0 150px;
-			transform: rotate(-33deg);
-		}
-		.val-6 {
-			position: absolute;
-			margin: 46px 0 0 173px;
-			transform: rotate(-26deg);
-		}
-		.val-8 {
-			position: absolute;
-			margin: 36px 0 0 197px;
-			transform: rotate(-20deg);
-		}
-		.val-10 {
-			position: absolute;
-			margin: 28px 0 0 222px;
-			transform: rotate(-15deg);
-		}
-		.val-12 {
-			position: absolute;
-			margin: 23px 0 0 247px;
-			transform: rotate(-8deg);
-		}
-		.val-14 {
-			position: absolute;
-			margin: 20px 0 0 274px;
-			transform: rotate(-2deg);
-		}
-		.val-16 {
-			position: absolute;
-			margin: 20px 0 0 301px;
-			transform: rotate(4deg);
-		}
-		.val-18 {
-			position: absolute;
-			margin: 23px 0 0px 327px;
-			transform: rotate(9deg);
-		}
-		.val-20 {
-			position: absolute;
-			margin: 28px 0 0 352px;
-			transform: rotate(15deg);
-		}
-		.val-22 {
-			position: absolute;
-			margin: 36px 0 0 377px;
-			transform: rotate(21deg);
-		}
-		.val-24 {
-			position: absolute;
-			margin: 46px 0 0 401px;
-			transform: rotate(27deg);
-		}
-		.val-26 {
-			position: absolute;
-			margin: 58px 0 0 425px;
-			transform: rotate(31deg);
-		}
-		.val-28 {
-			position: absolute;
-			margin: 72px 0 0 446px;
-			transform: rotate(35deg);
-		}
-		.val-30 {
-			position: absolute;
-			margin: 88px 0 0 466px;
-			transform: rotate(42deg);
-		}
-	}
-
-	.global-numbers-oxygen {
-		position: absolute;
-		.val-0 {
-			position: absolute;
-			margin: 500px 0 0 125px;
-			transform: rotate(-54deg);
-		}
-		.val-1 {
-			position: absolute;
-			margin: 482px 0 0 104px;
-			transform: rotate(-48deg);
-		}
-		.val-2 {
-			position: absolute;
-			margin: 460px 0 0 82px;
-			transform: rotate(-43deg);
-		}
-		.val-3 {
-			position: absolute;
-			margin: 435px 0 0 64px;
-			transform: rotate(-37deg);
-		}
-		.val-4 {
-			position: absolute;
-			margin: 411px 0 0 49px;
-			transform: rotate(-30deg);
-		}
-		.val-5 {
-			position: absolute;
-			margin: 383px 0 0 37px;
-			transform: rotate(-22deg);
-		}
-		.val-6 {
-			position: absolute;
-			margin: 355px 0 0 28px;
-			transform: rotate(-15deg);
-		}
-		.val-7 {
-			position: absolute;
-			margin: 325px 0 0 23px;
-			transform: rotate(-10deg);
-		}
-		.val-8 {
-			position: absolute;
-			margin: 295px 0 0 20px;
-			transform: rotate(-2deg);
-		}
-		.val-9 {
-			position: absolute;
-			margin: 265px 0 0 21px;
-			transform: rotate(6deg);
-		}
-		.val-10 {
-			position: absolute;
-			margin: 236px 0 0 25px;
-			transform: rotate(12deg);
-		}
-		.val-11 {
-			position: absolute;
-			margin: 207px 0 0 32px;
-			transform: rotate(19deg);
-		}
-		.val-12 {
-			position: absolute;
-			margin: 179px 0 0 43px;
-			transform: rotate(25deg);
-		}
-		.val-13 {
-			position: absolute;
-			margin: 153px 0 0 56px;
-			transform: rotate(31deg);
-		}
-		.val-14 {
-			position: absolute;
-			margin: 128px 0 0 72px;
-			transform: rotate(37deg);
-		}
-	}
-
-	.global-numbers-temperature {
-		.val--30 {
-			position: absolute;
-			margin: 508px 0 0 438px;
-			transform: rotate(55deg);
-		}
-		.val--28 {
-			position: absolute;
-			margin: 493px 0 0 458px;
-			transform: rotate(52deg);
-		}
-		.val--26 {
-			position: absolute;
-			margin: 478px 0 0 474px;
-			transform: rotate(48deg);
-		}
-		.val--24 {
-			position: absolute;
-			margin: 461px 0 0 490px;
-			transform: rotate(43deg);
-		}
-		.val--22 {
-			position: absolute;
-			margin: 443px 0 0 504px;
-			transform: rotate(36deg);
-		}
-		.val--20 {
-			position: absolute;
-			margin: 423px 0 0 517px;
-			transform: rotate(33deg);
-		}
-		.val--18 {
-			position: absolute;
-			margin: 403px 0 0 528px;
-			transform: rotate(25deg);
-		}
-		.val--16 {
-			position: absolute;
-			margin: 381px 0 0 537px;
-			transform: rotate(22deg);
-		}
-		.val--14 {
-			position: absolute;
-			margin: 360px 0 0 544px;
-			transform: rotate(17deg);
-		}
-		.val--12 {
-			position: absolute;
-			margin: 337px 0 0 549px;
-			transform: rotate(12deg);
-		}
-		.val--10 {
-			position: absolute;
-			margin: 314px 0 0 553px;
-			transform: rotate(8deg);
-		}
-		.val--8 {
-			position: absolute;
-			margin: 291px 0 0 554px;
-			transform: rotate(0deg);
-		}
-		.val--6 {
-			position: absolute;
-			margin: 268px 0 0 554px;
-			transform: rotate(-3deg);
-		}
-		.val--4 {
-			position: absolute;
-			margin: 244px 0 0 551px;
-			transform: rotate(-11deg);
-		}
-		.val--2 {
-			position: absolute;
-			margin: 222px 0 0 546px;
-			transform: rotate(-14deg);
-		}
-		.val-0 {
-			position: absolute;
-			margin: 199px 0 0 540px;
-			transform: rotate(-20deg);
-		}
-		.val-2 {
-			position: absolute;
-			margin: 177px 0 0 531px;
-			transform: rotate(-24deg);
-		}
-		.val-4 {
-			position: absolute;
-			margin: 156px 0 0 521px;
-			transform: rotate(-30deg);
-		}
-		.val-6 {
-			position: absolute;
-			margin: 137px 0 0 509px;
-			transform: rotate(-33deg);
-		}
-		.val-8 {
-			position: absolute;
-			margin: 117px 0 0 494px;
-			transform: rotate(-40deg);
-		}
-	}
+  .global-numbers-temperature {
+    .val--30 {
+      position: absolute;
+      margin: 508px 0 0 438px;
+      transform: rotate(55deg);
+    }
+    .val--28 {
+      position: absolute;
+      margin: 493px 0 0 458px;
+      transform: rotate(52deg);
+    }
+    .val--26 {
+      position: absolute;
+      margin: 478px 0 0 474px;
+      transform: rotate(48deg);
+    }
+    .val--24 {
+      position: absolute;
+      margin: 461px 0 0 490px;
+      transform: rotate(43deg);
+    }
+    .val--22 {
+      position: absolute;
+      margin: 443px 0 0 504px;
+      transform: rotate(36deg);
+    }
+    .val--20 {
+      position: absolute;
+      margin: 423px 0 0 517px;
+      transform: rotate(33deg);
+    }
+    .val--18 {
+      position: absolute;
+      margin: 403px 0 0 528px;
+      transform: rotate(25deg);
+    }
+    .val--16 {
+      position: absolute;
+      margin: 381px 0 0 537px;
+      transform: rotate(22deg);
+    }
+    .val--14 {
+      position: absolute;
+      margin: 360px 0 0 544px;
+      transform: rotate(17deg);
+    }
+    .val--12 {
+      position: absolute;
+      margin: 337px 0 0 549px;
+      transform: rotate(12deg);
+    }
+    .val--10 {
+      position: absolute;
+      margin: 314px 0 0 553px;
+      transform: rotate(8deg);
+    }
+    .val--8 {
+      position: absolute;
+      margin: 291px 0 0 554px;
+      transform: rotate(0deg);
+    }
+    .val--6 {
+      position: absolute;
+      margin: 268px 0 0 554px;
+      transform: rotate(-3deg);
+    }
+    .val--4 {
+      position: absolute;
+      margin: 244px 0 0 551px;
+      transform: rotate(-11deg);
+    }
+    .val--2 {
+      position: absolute;
+      margin: 222px 0 0 546px;
+      transform: rotate(-14deg);
+    }
+    .val-0 {
+      position: absolute;
+      margin: 199px 0 0 540px;
+      transform: rotate(-20deg);
+    }
+    .val-2 {
+      position: absolute;
+      margin: 177px 0 0 531px;
+      transform: rotate(-24deg);
+    }
+    .val-4 {
+      position: absolute;
+      margin: 156px 0 0 521px;
+      transform: rotate(-30deg);
+    }
+    .val-6 {
+      position: absolute;
+      margin: 137px 0 0 509px;
+      transform: rotate(-33deg);
+    }
+    .val-8 {
+      position: absolute;
+      margin: 117px 0 0 494px;
+      transform: rotate(-40deg);
+    }
+  }
 }

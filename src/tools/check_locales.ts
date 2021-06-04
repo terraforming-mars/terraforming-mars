@@ -15,7 +15,7 @@ let localesToWarn = locales;
 if (args[0] === '--locales') {
   localesToWarn = args[1].split(',');
   localesToWarn.forEach((locale) => {
-    if ( ! locales.includes(locale)) {
+    if (!locales.includes(locale)) {
       console.error(`Invalid locale ${locale}`);
       process.exit(1);
     }
@@ -26,12 +26,12 @@ let sourceString: keyof typeof raw_translations;
 let warnings: Array<string>;
 
 for (sourceString in raw_translations) {
-  if ( ! raw_translations.hasOwnProperty(sourceString)) continue;
+  if (!raw_translations.hasOwnProperty(sourceString)) continue;
   const translations = raw_translations[sourceString];
   warnings = [];
   for (const localeName of localesToWarn) {
     const trans: string = (translations as any)[localeName];
-    if ( ! trans) {
+    if (!trans) {
       warnings.push('\tmissing ' + localeName);
     }
   }

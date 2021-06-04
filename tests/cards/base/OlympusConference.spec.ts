@@ -10,21 +10,26 @@ import {OrOptions} from '../../../src/inputs/OrOptions';
 import {TestPlayer} from '../../TestPlayer';
 import {TestPlayers} from '../../TestPlayers';
 
-describe('OlympusConference', function() {
-  let card : OlympusConference; let player : TestPlayer; let game : Game;
+describe('OlympusConference', function () {
+  let card: OlympusConference;
+  let player: TestPlayer;
+  let game: Game;
 
-  beforeEach(function() {
+  beforeEach(function () {
     card = new OlympusConference();
     player = TestPlayers.BLUE.newPlayer();
     const redPlayer = TestPlayers.RED.newPlayer();
     game = Game.newInstance('foobar', [player, redPlayer], player);
   });
 
-  it('Should play', function() {
+  it('Should play', function () {
     player.playedCards.push(card);
     card.play();
 
-    player.victoryPointsBreakdown.setVictoryPoints('victoryPoints', card.getVictoryPoints());
+    player.victoryPointsBreakdown.setVictoryPoints(
+      'victoryPoints',
+      card.getVictoryPoints()
+    );
     expect(player.victoryPointsBreakdown.victoryPoints).to.eq(1);
 
     card.onCardPlayed(player, new Bushes());
@@ -53,7 +58,7 @@ describe('OlympusConference', function() {
     expect(game.deferredActions).has.lengthOf(0);
   });
 
-  it('Plays twice for Research', function() {
+  it('Plays twice for Research', function () {
     player.playedCards.push(card);
     card.onCardPlayed(player, new Research());
     expect(game.deferredActions).has.lengthOf(2);
@@ -74,7 +79,7 @@ describe('OlympusConference', function() {
     expect(game.deferredActions).has.lengthOf(0);
   });
 
-  it('Triggers before Mars University', function() {
+  it('Triggers before Mars University', function () {
     const marsUniversity = new MarsUniversity();
     const scienceTagCard = new ScienceTagCard();
 
@@ -95,11 +100,9 @@ describe('OlympusConference', function() {
     orOptions.options[1].cb();
     expect(card.resourceCount).to.eq(2);
 
-
     // Reset the state
     game.deferredActions = new DeferredActionsQueue();
     player.playedCards = [];
-
 
     // Mars University played before Olympus Conference
     player.playedCards.push(marsUniversity);

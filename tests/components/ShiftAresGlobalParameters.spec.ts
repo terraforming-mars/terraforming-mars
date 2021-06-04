@@ -6,7 +6,7 @@ import {PlayerInputModel} from '../../src/models/PlayerInputModel';
 import {PlayerInputTypes} from '../../src/PlayerInputTypes';
 import {PartyName} from '../../src/turmoil/parties/PartyName';
 
-describe('ShiftAresGlobalParameters', function() {
+describe('ShiftAresGlobalParameters', function () {
   const mockPlayerModel: PlayerInputModel = {
     title: 'Testing, baby!',
     buttonLabel: 'Click me!',
@@ -21,7 +21,14 @@ describe('ShiftAresGlobalParameters', function() {
     canUseHeat: undefined,
     players: undefined,
     availableSpaces: undefined,
-    availableParties: [PartyName.MARS, PartyName.SCIENTISTS, PartyName.UNITY, PartyName.GREENS, PartyName.REDS, PartyName.KELVINISTS],
+    availableParties: [
+      PartyName.MARS,
+      PartyName.SCIENTISTS,
+      PartyName.UNITY,
+      PartyName.GREENS,
+      PartyName.REDS,
+      PartyName.KELVINISTS,
+    ],
     min: undefined,
     max: undefined,
     microbes: undefined,
@@ -57,7 +64,7 @@ describe('ShiftAresGlobalParameters', function() {
     const localVue = createLocalVue();
     return localVue;
   }
-  it('sets up data', function() {
+  it('sets up data', function () {
     const playerinput = mockPlayerModel;
     const ares = mount(ShiftAresGlobalParameters, {
       localVue: getLocalVue(),
@@ -65,9 +72,7 @@ describe('ShiftAresGlobalParameters', function() {
         playerinput,
       },
     });
-    expect(
-      ares.vm.$data,
-    ).to.deep.eq({
+    expect(ares.vm.$data).to.deep.eq({
       hazardData: {
         erosionOceanCount: {threshold: 3, available: true},
         removeDustStormsOceanCount: {threshold: 6, available: true},

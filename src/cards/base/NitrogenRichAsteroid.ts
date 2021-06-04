@@ -27,7 +27,8 @@ export class NitrogenRichAsteroid extends Card implements IProjectCard {
           }).br;
           b.tr(2).temperature(1);
         }),
-        description: 'Raise your terraforming rating 2 steps and temperature 1 step. Increase your Plant production 1 step, or 4 steps if you have 3 Plant tags.',
+        description:
+          'Raise your terraforming rating 2 steps and temperature 1 step. Increase your Plant production 1 step, or 4 steps if you have 3 Plant tags.',
       },
     });
   }
@@ -37,7 +38,10 @@ export class NitrogenRichAsteroid extends Card implements IProjectCard {
     if (player.game.getTemperature() < MAX_TEMPERATURE) steps++;
 
     if (PartyHooks.shouldApplyPolicy(player.game, PartyName.REDS)) {
-      return player.canAfford(player.getCardCost(this) + REDS_RULING_POLICY_COST * steps, {titanium: true});
+      return player.canAfford(
+        player.getCardCost(this) + REDS_RULING_POLICY_COST * steps,
+        {titanium: true}
+      );
     }
 
     return true;

@@ -29,11 +29,12 @@ export class FloatingHabs extends Card implements IActionCard, IResourceCard {
           }).br;
           b.vpText('1 VP for every 2nd Floater on this card.');
         }),
-        description: 'Requires 2 Science tags. 1 VP for every 2nd Floater on this card',
+        description:
+          'Requires 2 Science tags. 1 VP for every 2nd Floater on this card',
         victoryPoints: CardRenderDynamicVictoryPoints.floaters(1, 2),
       },
     });
-  };
+  }
   public resourceCount: number = 0;
 
   public play() {
@@ -52,7 +53,11 @@ export class FloatingHabs extends Card implements IActionCard, IResourceCard {
 
     // add to itself if no other available target
     if (floaterCards.length === 1) {
-      player.game.defer(new SelectHowToPayDeferred(player, 2, {title: 'Select how to pay for Floating Habs action'}));
+      player.game.defer(
+        new SelectHowToPayDeferred(player, 2, {
+          title: 'Select how to pay for Floating Habs action',
+        })
+      );
       player.addResourceTo(floaterCards[0], {log: true});
       return undefined;
     }
@@ -62,10 +67,14 @@ export class FloatingHabs extends Card implements IActionCard, IResourceCard {
       'Add floater',
       floaterCards,
       (foundCards: Array<ICard>) => {
-        player.game.defer(new SelectHowToPayDeferred(player, 2, {title: 'Select how to pay for Floating Habs action'}));
+        player.game.defer(
+          new SelectHowToPayDeferred(player, 2, {
+            title: 'Select how to pay for Floating Habs action',
+          })
+        );
         player.addResourceTo(foundCards[0], {log: true});
         return undefined;
-      },
+      }
     );
   }
 }

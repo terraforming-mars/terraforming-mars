@@ -5,7 +5,7 @@ import {Game} from '../../../src/Game';
 import {TestPlayer} from '../../TestPlayer';
 import {TestPlayers} from '../../TestPlayers';
 
-describe('Conscription', function() {
+describe('Conscription', function () {
   let card: Conscription;
   let player: TestPlayer;
 
@@ -18,7 +18,10 @@ describe('Conscription', function() {
   it('play', () => {
     const action = card.play();
     expect(action).is.undefined;
-    player.victoryPointsBreakdown.setVictoryPoints('victoryPoints', card.getVictoryPoints());
+    player.victoryPointsBreakdown.setVictoryPoints(
+      'victoryPoints',
+      card.getVictoryPoints()
+    );
     expect(player.victoryPointsBreakdown.victoryPoints).to.eq(-1);
     expect(card.getCardDiscount(player)).to.eq(0);
   });

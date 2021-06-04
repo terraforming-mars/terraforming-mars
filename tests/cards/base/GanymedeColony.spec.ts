@@ -3,8 +3,8 @@ import {GanymedeColony} from '../../../src/cards/base/GanymedeColony';
 import {Game} from '../../../src/Game';
 import {TestPlayers} from '../../TestPlayers';
 
-describe('GanymedeColony', function() {
-  it('Should play', function() {
+describe('GanymedeColony', function () {
+  it('Should play', function () {
     const card = new GanymedeColony();
     const player = TestPlayers.BLUE.newPlayer();
     const redPlayer = TestPlayers.RED.newPlayer();

@@ -23,7 +23,8 @@ export class ByElection extends PreludeCard implements IProjectCard {
           b.text('set ruling party', Size.SMALL, true).br;
           b.plus().influence(1);
         }),
-        description: 'Set the ruling party to one of your choice. Gain 1 influence.',
+        description:
+          'Set the ruling party to one of your choice. Gain 1 influence.',
       },
     });
   }
@@ -39,19 +40,19 @@ export class ByElection extends PreludeCard implements IProjectCard {
     const setRulingParty = new OrOptions();
 
     setRulingParty.title = 'Select new ruling party';
-    setRulingParty.options = [...ALL_PARTIES.map((p) => new SelectOption(
-      p.partyName, 'Select', () => {
-        turmoil.rulingParty = turmoil.getPartyByName(p.partyName);
-        PoliticalAgendas.setNextAgenda(turmoil, player.game);
+    setRulingParty.options = [
+      ...ALL_PARTIES.map(
+        (p) =>
+          new SelectOption(p.partyName, 'Select', () => {
+            turmoil.rulingParty = turmoil.getPartyByName(p.partyName);
+            PoliticalAgendas.setNextAgenda(turmoil, player.game);
 
-        return undefined;
-      }),
-    )];
+            return undefined;
+          })
+      ),
+    ];
 
-    player.game.defer(new DeferredAction(
-      player,
-      () => setRulingParty,
-    ));
+    player.game.defer(new DeferredAction(player, () => setRulingParty));
 
     return undefined;
   }

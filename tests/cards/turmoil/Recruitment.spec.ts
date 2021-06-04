@@ -5,24 +5,24 @@ import {PartyName} from '../../../src/turmoil/parties/PartyName';
 import {TestingUtils} from '../../TestingUtils';
 import {TestPlayers} from '../../TestPlayers';
 
-describe('Recruitment', function() {
-  it('Should play', function() {
+describe('Recruitment', function () {
+  it('Should play', function () {
     const card = new Recruitment();
     const player = TestPlayers.BLUE.newPlayer();
 
     const gameOptions = TestingUtils.setCustomGameOptions();
     const game = Game.newInstance('foobar', [player], player, gameOptions);
 
-        game.turmoil!.parties.forEach((party) => {
-          party.delegates = [];
-        });
-        expect(card.canPlay(player)).is.not.true;
+    game.turmoil!.parties.forEach((party) => {
+      party.delegates = [];
+    });
+    expect(card.canPlay(player)).is.not.true;
 
-        game.turmoil!.sendDelegateToParty('NEUTRAL', PartyName.GREENS, game);
-        expect(card.canPlay(player)).is.not.true;
-        game.turmoil!.sendDelegateToParty('NEUTRAL', PartyName.GREENS, game);
-        expect(card.canPlay(player)).is.true;
+    game.turmoil!.sendDelegateToParty('NEUTRAL', PartyName.GREENS, game);
+    expect(card.canPlay(player)).is.not.true;
+    game.turmoil!.sendDelegateToParty('NEUTRAL', PartyName.GREENS, game);
+    expect(card.canPlay(player)).is.true;
 
-        card.play(player);
+    card.play(player);
   });
 });

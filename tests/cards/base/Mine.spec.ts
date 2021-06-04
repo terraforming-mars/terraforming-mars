@@ -3,8 +3,8 @@ import {Mine} from '../../../src/cards/base/Mine';
 import {Resources} from '../../../src/Resources';
 import {TestPlayers} from '../../TestPlayers';
 
-describe('Mine', function() {
-  it('Should play', function() {
+describe('Mine', function () {
+  it('Should play', function () {
     const card = new Mine();
     const player = TestPlayers.BLUE.newPlayer();
     const action = card.play(player);

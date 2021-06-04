@@ -5,10 +5,13 @@ import {Player} from '../../src/Player';
 import {Resources} from '../../src/Resources';
 import {TestPlayers} from '../TestPlayers';
 
-describe('Ganymede', function() {
-  let ganymede: Ganymede; let player: Player; let player2: Player; let game: Game;
+describe('Ganymede', function () {
+  let ganymede: Ganymede;
+  let player: Player;
+  let player2: Player;
+  let game: Game;
 
-  beforeEach(function() {
+  beforeEach(function () {
     ganymede = new Ganymede();
     player = TestPlayers.BLUE.newPlayer();
     player2 = TestPlayers.RED.newPlayer();
@@ -17,19 +20,19 @@ describe('Ganymede', function() {
     game.colonies.push(ganymede);
   });
 
-  it('Should build', function() {
+  it('Should build', function () {
     ganymede.addColony(player);
     expect(player.getProduction(Resources.PLANTS)).to.eq(1);
     expect(player2.getProduction(Resources.PLANTS)).to.eq(0);
   });
 
-  it('Should trade', function() {
+  it('Should trade', function () {
     ganymede.trade(player);
     expect(player.plants).to.eq(1);
     expect(player2.plants).to.eq(0);
   });
 
-  it('Should give trade bonus', function() {
+  it('Should give trade bonus', function () {
     ganymede.addColony(player);
 
     ganymede.trade(player2);

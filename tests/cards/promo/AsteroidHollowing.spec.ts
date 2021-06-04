@@ -5,26 +5,27 @@ import {Player} from '../../../src/Player';
 import {Resources} from '../../../src/Resources';
 import {TestPlayers} from '../../TestPlayers';
 
-describe('AsteroidHollowing', function() {
-  let card : AsteroidHollowing; let player : Player;
+describe('AsteroidHollowing', function () {
+  let card: AsteroidHollowing;
+  let player: Player;
 
-  beforeEach(function() {
+  beforeEach(function () {
     card = new AsteroidHollowing();
     player = TestPlayers.BLUE.newPlayer();
     const redPlayer = TestPlayers.RED.newPlayer();
     Game.newInstance('foobar', [player, redPlayer], player);
   });
 
-  it('Should play', function() {
+  it('Should play', function () {
     expect(card.play()).is.undefined;
   });
 
-  it('Can\'t act', function() {
+  it("Can't act", function () {
     player.playedCards.push(card);
     expect(card.canAct(player)).is.not.true;
   });
 
-  it('Should act', function() {
+  it('Should act', function () {
     player.titanium = 1;
     expect(card.canAct(player)).is.true;
 
@@ -34,7 +35,7 @@ describe('AsteroidHollowing', function() {
     expect(player.getProduction(Resources.MEGACREDITS)).to.eq(1);
   });
 
-  it('Should give victory points', function() {
+  it('Should give victory points', function () {
     player.playedCards.push(card);
     player.titanium = 2;
 

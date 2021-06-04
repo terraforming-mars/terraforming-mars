@@ -144,4 +144,3 @@ describe('TheDarksideofTheMoonSyndicate', () => {
     expect(player.megaCredits).eq(0);
   });
 });
-

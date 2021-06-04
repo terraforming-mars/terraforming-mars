@@ -5,17 +5,19 @@ import {OrOptions} from '../../../src/inputs/OrOptions';
 import {Player} from '../../../src/Player';
 import {TestPlayers} from '../../TestPlayers';
 
-describe('Sabotage', function() {
-  let card : Sabotage; let player : Player; let player2: Player;
+describe('Sabotage', function () {
+  let card: Sabotage;
+  let player: Player;
+  let player2: Player;
 
-  beforeEach(function() {
+  beforeEach(function () {
     card = new Sabotage();
     player = TestPlayers.BLUE.newPlayer();
     player2 = TestPlayers.RED.newPlayer();
     Game.newInstance('foobar', [player, player2], player);
   });
 
-  it('Should play', function() {
+  it('Should play', function () {
     player2.titanium = 3;
     player2.steel = 4;
     player2.megaCredits = 7;

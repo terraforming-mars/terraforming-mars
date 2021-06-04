@@ -1,11 +1,10 @@
-
 import {expect} from 'chai';
 import {SolarWindPower} from '../../../src/cards/base/SolarWindPower';
 import {Resources} from '../../../src/Resources';
 import {TestPlayers} from '../../TestPlayers';
 
-describe('SolarWindPower', function() {
-  it('Should play', function() {
+describe('SolarWindPower', function () {
+  it('Should play', function () {
     const card = new SolarWindPower();
     const player = TestPlayers.BLUE.newPlayer();
     const action = card.play(player);

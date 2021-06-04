@@ -5,27 +5,33 @@ import {Player} from '../../../src/Player';
 import {TestingUtils} from '../../TestingUtils';
 import {TestPlayers} from '../../TestPlayers';
 
-describe('ArcticAlgae', function() {
-  let card : ArcticAlgae; let player : Player; let player2 : Player; let game : Game;
+describe('ArcticAlgae', function () {
+  let card: ArcticAlgae;
+  let player: Player;
+  let player2: Player;
+  let game: Game;
 
-  beforeEach(function() {
+  beforeEach(function () {
     card = new ArcticAlgae();
     player = TestPlayers.BLUE.newPlayer();
     player2 = TestPlayers.RED.newPlayer();
     game = Game.newInstance('foobar', [player, player2], player);
   });
 
-  it('Can\'t play', function() {
+  it("Can't play", function () {
     (game as any).temperature = -10;
     expect(card.canPlay(player)).is.not.true;
   });
 
-  it('Should play', function() {
+  it('Should play', function () {
     card.play(player);
     expect(player.plants).to.eq(1);
     player.playedCards.push(card);
 
-    game.addOceanTile(player2, game.board.getAvailableSpacesForOcean(player2)[0].id);
+    game.addOceanTile(
+      player2,
+      game.board.getAvailableSpacesForOcean(player2)[0].id
+    );
     TestingUtils.runNextAction(game);
     expect(player.plants).to.eq(3);
   });

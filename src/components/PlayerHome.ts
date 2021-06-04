@@ -35,21 +35,23 @@ class TerraformedAlertDialog {
 }
 
 export const PlayerHome = Vue.component('player-home', {
-  data: function(): PlayerHomeModel {
+  data: function (): PlayerHomeModel {
     return {
       showActiveCards: !PreferencesManager.loadBoolean('hide_active_cards'),
-      showAutomatedCards: !PreferencesManager.loadBoolean('hide_automated_cards'),
+      showAutomatedCards: !PreferencesManager.loadBoolean(
+        'hide_automated_cards'
+      ),
       showEventCards: !PreferencesManager.loadBoolean('hide_event_cards'),
     };
   },
   watch: {
-    hide_active_cards: function() {
+    hide_active_cards: function () {
       PreferencesManager.save('hide_active_cards', !this.showActiveCards);
     },
-    hide_automated_cards: function() {
+    hide_automated_cards: function () {
       PreferencesManager.save('hide_automated_cards', !this.showAutomatedCards);
     },
-    hide_event_cards: function() {
+    hide_event_cards: function () {
       PreferencesManager.save('hide_event_cards', !this.showEventCards);
     },
   },
@@ -80,50 +82,57 @@ export const PlayerHome = Vue.component('player-home', {
   },
   mixins: [PlayerMixin],
   methods: {
-    navigatePage: function(event: KeyboardEvent) {
+    navigatePage: function (event: KeyboardEvent) {
       const inputSource = event.target as Element;
       if (inputSource.nodeName.toLowerCase() !== 'input') {
         let idSuffix: string | undefined = undefined;
         switch (event.code) {
-        case KeyboardNavigation.GAMEBOARD:
-          idSuffix = 'board';
-          break;
-        case KeyboardNavigation.PLAYERSOVERVIEW:
-          idSuffix = 'playersoverview';
-          break;
-        case KeyboardNavigation.HAND:
-          idSuffix = 'hand';
-          break;
-        case KeyboardNavigation.COLONIES:
-          idSuffix = 'colonies';
-          break;
-        default:
-          return;
+          case KeyboardNavigation.GAMEBOARD:
+            idSuffix = 'board';
+            break;
+          case KeyboardNavigation.PLAYERSOVERVIEW:
+            idSuffix = 'playersoverview';
+            break;
+          case KeyboardNavigation.HAND:
+            idSuffix = 'hand';
+            break;
+          case KeyboardNavigation.COLONIES:
+            idSuffix = 'colonies';
+            break;
+          default:
+            return;
         }
         const el = document.getElementById('shortkey-' + idSuffix);
         if (el) {
           event.preventDefault();
-          el.scrollIntoView({block: 'center', inline: 'center', behavior: 'auto'});
+          el.scrollIntoView({
+            block: 'center',
+            inline: 'center',
+            behavior: 'auto',
+          });
         }
       }
     },
-    isPlayerActing: function(player: PlayerModel) : boolean {
+    isPlayerActing: function (player: PlayerModel): boolean {
       return player.players.length > 1 && player.waitingFor !== undefined;
     },
     getPlayerCssForTurnOrder: (
       player: PublicPlayerModel,
-      highlightActive: boolean,
+      highlightActive: boolean
     ): string => {
       const classes = ['highlighter_box'];
       if (highlightActive) {
-        if (player.needsToDraft || (player.needsToDraft === undefined && player.isActive)) {
+        if (
+          player.needsToDraft ||
+          (player.needsToDraft === undefined && player.isActive)
+        ) {
           classes.push('player_is_active');
         }
         classes.push(playerColorClass(player.color, 'bg'));
       }
       return classes.join(' ');
     },
-    getFleetsCountRange: function(player: PublicPlayerModel): Array<number> {
+    getFleetsCountRange: function (player: PublicPlayerModel): Array<number> {
       const fleetsRange: Array<number> = [];
       for (let i = 0; i < player.fleetSize - player.tradesThisGeneration; i++) {
         fleetsRange.push(i);
@@ -132,48 +141,56 @@ export const PlayerHome = Vue.component('player-home', {
     },
     toggle(type: string): void {
       switch (type) {
-      case 'ACTIVE':
-        this.showActiveCards = !this.showActiveCards;
-        break;
-      case 'AUTOMATED':
-        this.showAutomatedCards = !this.showAutomatedCards;
-        break;
-      case 'EVENT':
-        this.showEventCards = !this.showEventCards;
-        break;
+        case 'ACTIVE':
+          this.showActiveCards = !this.showActiveCards;
+          break;
+        case 'AUTOMATED':
+          this.showAutomatedCards = !this.showAutomatedCards;
+          break;
+        case 'EVENT':
+          this.showEventCards = !this.showEventCards;
+          break;
       }
     },
     isVisible(type: string): boolean {
       switch (type) {
-      case 'ACTIVE':
-        return this.showActiveCards;
-      case 'AUTOMATED':
-        return this.showAutomatedCards;
-      case 'EVENT':
-        return this.showEventCards;
+        case 'ACTIVE':
+          return this.showActiveCards;
+        case 'AUTOMATED':
+          return this.showAutomatedCards;
+        case 'EVENT':
+          return this.showEventCards;
       }
       return false;
     },
     isInitialDraftingPhase(): boolean {
-      return (this.player.game.phase === Phase.INITIALDRAFTING) && this.player.game.gameOptions.initialDraftVariant;
+      return (
+        this.player.game.phase === Phase.INITIALDRAFTING &&
+        this.player.game.gameOptions.initialDraftVariant
+      );
     },
-    getToggleLabel: function(hideType: string): string {
+    getToggleLabel: function (hideType: string): string {
       if (hideType === 'ACTIVE') {
-        return (this.showActiveCards? '✔' : '');
+        return this.showActiveCards ? '✔' : '';
       } else if (hideType === 'AUTOMATED') {
-        return (this.showAutomatedCards ? '✔' : '');
+        return this.showAutomatedCards ? '✔' : '';
       } else if (hideType === 'EVENT') {
-        return (this.showEventCards ? '✔' : '');
+        return this.showEventCards ? '✔' : '';
       } else {
         return '';
       }
     },
-    getHideButtonClass: function(hideType: string): string {
+    getHideButtonClass: function (hideType: string): string {
       const prefix = 'hiding-card-button ';
       if (hideType === 'ACTIVE') {
-        return prefix + (this.showActiveCards ? 'active' : 'active-transparent');
+        return (
+          prefix + (this.showActiveCards ? 'active' : 'active-transparent')
+        );
       } else if (hideType === 'AUTOMATED') {
-        return prefix + (this.showAutomatedCards ? 'automated' : 'automated-transparent');
+        return (
+          prefix +
+          (this.showAutomatedCards ? 'automated' : 'automated-transparent')
+        );
       } else if (hideType === 'EVENT') {
         return prefix + (this.showEventCards ? 'event' : 'event-transparent');
       } else {
@@ -181,16 +198,20 @@ export const PlayerHome = Vue.component('player-home', {
       }
     },
   },
-  destroyed: function() {
+  destroyed: function () {
     window.removeEventListener('keydown', this.navigatePage);
   },
-  mounted: function() {
+  mounted: function () {
     window.addEventListener('keydown', this.navigatePage);
-    if (this.player.game.isTerraformed && TerraformedAlertDialog.shouldAlert && PreferencesManager.load('show_alerts') === '1') {
+    if (
+      this.player.game.isTerraformed &&
+      TerraformedAlertDialog.shouldAlert &&
+      PreferencesManager.load('show_alerts') === '1'
+    ) {
       alert('Mars is Terraformed!');
       // Avoids repeated calls.
       TerraformedAlertDialog.shouldAlert = false;
-    };
+    }
   },
   template: `
         <div id="player-home" :class="(player.game.turmoil ? 'with-turmoil': '')">

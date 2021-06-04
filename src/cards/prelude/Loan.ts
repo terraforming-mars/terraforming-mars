@@ -29,4 +29,3 @@ export class Loan extends PreludeCard implements IProjectCard {
     return undefined;
   }
 }
-

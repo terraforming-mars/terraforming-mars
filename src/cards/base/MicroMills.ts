@@ -28,4 +28,3 @@ export class MicroMills extends Card implements IProjectCard {
     return undefined;
   }
 }
-

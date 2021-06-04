@@ -31,4 +31,3 @@ export class ImportedGHG extends Card implements IProjectCard {
     return undefined;
   }
 }
-

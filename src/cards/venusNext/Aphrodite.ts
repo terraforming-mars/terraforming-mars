@@ -22,9 +22,12 @@ export class Aphrodite extends Card implements CorporationCard {
           b.br;
           b.production((pb) => pb.plants(1)).nbsp.megacredits(47);
           b.corpBox('effect', (ce) => {
-            ce.effect('Whenever Venus is terraformed 1 step, you gain 2 M€.', (eb) => {
-              eb.venus(1).any.startEffect.megacredits(2);
-            });
+            ce.effect(
+              'Whenever Venus is terraformed 1 step, you gain 2 M€.',
+              (eb) => {
+                eb.venus(1).any.startEffect.megacredits(2);
+              }
+            );
           });
         }),
       },

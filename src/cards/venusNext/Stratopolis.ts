@@ -29,7 +29,9 @@ export class Stratopolis extends Card implements IActionCard, IResourceCard {
           b.action('Add 2 floaters to ANY VENUS CARD.', (eb) => {
             eb.empty().startAction.floaters(2).secondaryTag(Tags.VENUS);
           }).br;
-          b.production((pb) => pb.megacredits(2)).city().asterix();
+          b.production((pb) => pb.megacredits(2))
+            .city()
+            .asterix();
           b.vpText('1 VP for every 3rd Floater on this card.');
         }),
         description: {
@@ -39,7 +41,7 @@ export class Stratopolis extends Card implements IActionCard, IResourceCard {
         victoryPoints: CardRenderDynamicVictoryPoints.floaters(1, 3),
       },
     });
-  };
+  }
   public resourceCount: number = 0;
 
   public play(player: Player) {
@@ -53,7 +55,9 @@ export class Stratopolis extends Card implements IActionCard, IResourceCard {
 
   public getResCards(player: Player): ICard[] {
     const resourceCards = player.getResourceCards(ResourceType.FLOATER);
-    return resourceCards.filter((card) => card.tags.some((cardTag) => cardTag === Tags.VENUS));
+    return resourceCards.filter((card) =>
+      card.tags.some((cardTag) => cardTag === Tags.VENUS)
+    );
   }
 
   public canAct(): boolean {
@@ -75,7 +79,7 @@ export class Stratopolis extends Card implements IActionCard, IResourceCard {
       (foundCards: Array<ICard>) => {
         player.addResourceTo(foundCards[0], {qty: 2, log: true});
         return undefined;
-      },
+      }
     );
   }
 }

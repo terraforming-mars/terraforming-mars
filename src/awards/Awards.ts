@@ -27,9 +27,7 @@ export const ORIGINAL_AWARDS: Array<IAward> = [
   new Miner(),
 ];
 
-export const VENUS_AWARDS: Array<IAward> = [
-  new Venuphile(),
-];
+export const VENUS_AWARDS: Array<IAward> = [new Venuphile()];
 
 export const ELYSIUM_AWARDS: Array<IAward> = [
   new Celebrity(),
@@ -47,14 +45,9 @@ export const HELLAS_AWARDS: Array<IAward> = [
   new Contractor(),
 ];
 
-export const ARES_AWARDS: Array<IAward> = [
-  new Entrepreneur(),
-];
+export const ARES_AWARDS: Array<IAward> = [new Entrepreneur()];
 
-export const MOON_AWARDS: Array<IAward> = [
-  new FullMoon(),
-  new LunarMagnate(),
-];
+export const MOON_AWARDS: Array<IAward> = [new FullMoon(), new LunarMagnate()];
 
 export const ALL_AWARDS: Array<IAward> = [
   ...ORIGINAL_AWARDS,
@@ -62,7 +55,8 @@ export const ALL_AWARDS: Array<IAward> = [
   ...HELLAS_AWARDS,
   ...VENUS_AWARDS,
   ...ARES_AWARDS,
-  ...MOON_AWARDS];
+  ...MOON_AWARDS,
+];
 
 export namespace Awards {
   export const ALL = ALL_AWARDS;

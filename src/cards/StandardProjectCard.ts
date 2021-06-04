@@ -17,12 +17,15 @@ import {Card} from './Card';
 import {MoonExpansion} from '../moon/MoonExpansion';
 
 interface StaticStandardProjectCardProperties {
-  name: CardName,
-  cost: number,
-  metadata: CardMetadata,
+  name: CardName;
+  cost: number;
+  metadata: CardMetadata;
 }
 
-export abstract class StandardProjectCard extends Card implements IActionCard, ICard {
+export abstract class StandardProjectCard
+  extends Card
+  implements IActionCard, ICard
+{
   constructor(properties: StaticStandardProjectCardProperties) {
     super({
       cardType: CardType.STANDARD_PROJECT,
@@ -38,7 +41,7 @@ export abstract class StandardProjectCard extends Card implements IActionCard, I
     return undefined;
   }
 
-  protected abstract actionEssence(player: Player): void
+  protected abstract actionEssence(player: Player): void;
 
   public onStandardProject(player: Player): void {
     if (player.corporationCard?.onStandardProject !== undefined) {
@@ -53,24 +56,39 @@ export abstract class StandardProjectCard extends Card implements IActionCard, I
   }
 
   public canAct(player: Player): boolean {
-    return player.canAfford(this.cost - this.discount(player), {reserveUnits: MoonExpansion.adjustedReserveCosts(player, this)});
+    return player.canAfford(this.cost - this.discount(player), {
+      reserveUnits: MoonExpansion.adjustedReserveCosts(player, this),
+    });
   }
 
   protected projectPlayed(player: Player) {
-    player.game.log('${0} used ${1} standard project', (b) => b.player(player).card(this));
+    player.game.log('${0} used ${1} standard project', (b) =>
+      b.player(player).card(this)
+    );
     this.onStandardProject(player);
   }
 
-  public action(player: Player): OrOptions | SelectOption | AndOptions | SelectAmount | SelectCard<ICard> | SelectCard<IProjectCard> | SelectHowToPay | SelectPlayer | SelectSpace | undefined {
-    player.game.defer(new SelectHowToPayDeferred(
-      player,
-      this.cost - this.discount(player),
-      {
+  public action(
+    player: Player
+  ):
+    | OrOptions
+    | SelectOption
+    | AndOptions
+    | SelectAmount
+    | SelectCard<ICard>
+    | SelectCard<IProjectCard>
+    | SelectHowToPay
+    | SelectPlayer
+    | SelectSpace
+    | undefined {
+    player.game.defer(
+      new SelectHowToPayDeferred(player, this.cost - this.discount(player), {
         title: `Select how to pay for ${this.name} project`,
         afterPay: () => {
           this.actionEssence(player);
         },
-      }));
+      })
+    );
     this.projectPlayed(player);
     return undefined;
   }

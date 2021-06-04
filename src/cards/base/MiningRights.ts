@@ -1,4 +1,3 @@
-
 import {CardName} from '../../CardName';
 import {MiningCard} from './MiningCard';
 import {TileType} from '../../TileType';
@@ -16,12 +15,10 @@ export class MiningRights extends MiningCard {
           pb.steel(1).or().titanium(1);
         }).asterix();
       }),
-      description: 'Place this tile on an area with a steel or titanium placement bonus. Increase that production 1 step.',
-    },
+      description:
+        'Place this tile on an area with a steel or titanium placement bonus. Increase that production 1 step.',
+    }
   ) {
-    super(
-      name,
-      9,
-      metadata);
+    super(name, 9, metadata);
   }
 }

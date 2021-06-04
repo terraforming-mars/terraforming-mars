@@ -11,16 +11,22 @@ export const CardCost = Vue.component('CardCost', {
     },
   },
   methods: {
-    getClasses: function(): string {
+    getClasses: function (): string {
       const classes = ['card-cost'];
       if (this.amount === undefined) {
         classes.push('visibility-hidden');
       }
       return classes.join(' ');
     },
-    displayTwoCosts: function(): boolean {
-      const hideDiscount = PreferencesManager.loadBoolean('hide_discount_on_cards');
-      return this.newCost !== undefined && this.newCost !== this.amount && !hideDiscount;
+    displayTwoCosts: function (): boolean {
+      const hideDiscount = PreferencesManager.loadBoolean(
+        'hide_discount_on_cards'
+      );
+      return (
+        this.newCost !== undefined &&
+        this.newCost !== this.amount &&
+        !hideDiscount
+      );
     },
   },
   template: `

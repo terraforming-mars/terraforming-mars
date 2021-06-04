@@ -22,7 +22,8 @@ export class MoholeExcavation extends PreludeCard implements IProjectCard {
             pb.heat(2);
           }).heat(2);
         }),
-        description: 'Increase your steel production 1 step and heat production 2 steps. Gain 2 heat.',
+        description:
+          'Increase your steel production 1 step and heat production 2 steps. Gain 2 heat.',
       },
     });
   }

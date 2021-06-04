@@ -50,4 +50,3 @@ describe('LunaStagingStation', () => {
     expect(player.getTerraformRating()).eq(16);
   });
 });
-

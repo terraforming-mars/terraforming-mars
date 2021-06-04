@@ -9,28 +9,30 @@ import {Player} from '../../../src/Player';
 import {Resources} from '../../../src/Resources';
 import {TestPlayers} from '../../TestPlayers';
 
-describe('FreyjaBiodomes', function() {
-  let card : FreyjaBiodomes; let player : Player; let game : Game;
+describe('FreyjaBiodomes', function () {
+  let card: FreyjaBiodomes;
+  let player: Player;
+  let game: Game;
 
-  beforeEach(function() {
+  beforeEach(function () {
     card = new FreyjaBiodomes();
     player = TestPlayers.BLUE.newPlayer();
     const redPlayer = TestPlayers.RED.newPlayer();
     game = Game.newInstance('foobar', [player, redPlayer], player);
   });
 
-  it('Can\'t play without energy production', function() {
+  it("Can't play without energy production", function () {
     (game as any).venusScaleLevel = 10;
     expect(card.canPlay(player)).is.not.true;
   });
 
-  it('Can\'t play if Venus requirement not met', function() {
+  it("Can't play if Venus requirement not met", function () {
     player.addProduction(Resources.ENERGY, 1);
     (game as any).venusScaleLevel = 8;
     expect(card.canPlay(player)).is.not.true;
   });
 
-  it('Should play - single target', function() {
+  it('Should play - single target', function () {
     const card2 = new Extremophiles();
     player.playedCards.push(card2);
 
@@ -44,7 +46,7 @@ describe('FreyjaBiodomes', function() {
     expect(player.getResourcesOnCard(card2)).to.eq(2);
   });
 
-  it('Should play - multiple targets', function() {
+  it('Should play - multiple targets', function () {
     const card2 = new Extremophiles();
     const card3 = new VenusianAnimals();
     player.addProduction(Resources.ENERGY, 1);

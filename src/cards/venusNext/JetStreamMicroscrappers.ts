@@ -13,7 +13,10 @@ import {LogHelper} from '../../LogHelper';
 import {CardRenderer} from '../render/CardRenderer';
 import {Card} from '../Card';
 
-export class JetStreamMicroscrappers extends Card implements IActionCard, IResourceCard {
+export class JetStreamMicroscrappers
+  extends Card
+  implements IActionCard, IResourceCard
+{
   constructor() {
     super({
       name: CardName.JET_STREAM_MICROSCRAPPERS,
@@ -35,7 +38,7 @@ export class JetStreamMicroscrappers extends Card implements IActionCard, IResou
         }),
       },
     });
-  };
+  }
   public resourceCount: number = 0;
 
   public play() {
@@ -46,8 +49,14 @@ export class JetStreamMicroscrappers extends Card implements IActionCard, IResou
     const venusMaxed = player.game.getVenusScaleLevel() === MAX_VENUS_SCALE;
     const canSpendResource = this.resourceCount > 1 && !venusMaxed;
 
-    if (PartyHooks.shouldApplyPolicy(player.game, PartyName.REDS) && !venusMaxed) {
-      return player.titanium > 0 || (canSpendResource && player.canAfford(REDS_RULING_POLICY_COST));
+    if (
+      PartyHooks.shouldApplyPolicy(player.game, PartyName.REDS) &&
+      !venusMaxed
+    ) {
+      return (
+        player.titanium > 0 ||
+        (canSpendResource && player.canAfford(REDS_RULING_POLICY_COST))
+      );
     }
 
     return player.titanium > 0 || canSpendResource;
@@ -56,10 +65,21 @@ export class JetStreamMicroscrappers extends Card implements IActionCard, IResou
   public action(player: Player) {
     const opts: Array<SelectOption> = [];
 
-    const addResource = new SelectOption('Spend one titanium to add 2 floaters to this card', 'Spend titanium', () => this.addResource(player));
-    const spendResource = new SelectOption('Remove 2 floaters to raise Venus 1 step', 'Remove floaters', () => this.spendResource(player));
+    const addResource = new SelectOption(
+      'Spend one titanium to add 2 floaters to this card',
+      'Spend titanium',
+      () => this.addResource(player)
+    );
+    const spendResource = new SelectOption(
+      'Remove 2 floaters to raise Venus 1 step',
+      'Remove floaters',
+      () => this.spendResource(player)
+    );
 
-    if (this.resourceCount > 1 && player.game.getVenusScaleLevel() < MAX_VENUS_SCALE) {
+    if (
+      this.resourceCount > 1 &&
+      player.game.getVenusScaleLevel() < MAX_VENUS_SCALE
+    ) {
       opts.push(spendResource);
     } else {
       return this.addResource(player);
@@ -83,7 +103,7 @@ export class JetStreamMicroscrappers extends Card implements IActionCard, IResou
   private spendResource(player: Player) {
     player.removeResourceFrom(this, 2);
     player.game.increaseVenusScaleLevel(player, 1);
-    LogHelper.logVenusIncrease( player, 1);
+    LogHelper.logVenusIncrease(player, 1);
     return undefined;
   }
 }

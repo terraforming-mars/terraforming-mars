@@ -22,14 +22,18 @@ export class Conscription extends Card implements IProjectCard {
         renderData: CardRenderer.builder((b) => {
           b.text('next card', Size.SMALL, true).colon().megacredits(-16);
         }),
-        description: 'Requires 2 Earth tags. The next card you play this generation costs 16 M€ less.',
+        description:
+          'Requires 2 Earth tags. The next card you play this generation costs 16 M€ less.',
         victoryPoints: -1,
       },
     });
   }
 
   public getCardDiscount(player: Player) {
-    if (player.lastCardPlayed !== undefined && player.lastCardPlayed.name === this.name) {
+    if (
+      player.lastCardPlayed !== undefined &&
+      player.lastCardPlayed.name === this.name
+    ) {
       return 16;
     }
     return 0;

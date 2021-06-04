@@ -7,17 +7,19 @@ import {OrOptions} from '../../../src/inputs/OrOptions';
 import {TestPlayer} from '../../TestPlayer';
 import {TestPlayers} from '../../TestPlayers';
 
-describe('MarsUniversity', function() {
-  let card : MarsUniversity; let player : TestPlayer; let game : Game;
+describe('MarsUniversity', function () {
+  let card: MarsUniversity;
+  let player: TestPlayer;
+  let game: Game;
 
-  beforeEach(function() {
+  beforeEach(function () {
     card = new MarsUniversity();
     player = TestPlayers.BLUE.newPlayer();
     const redPlayer = TestPlayers.RED.newPlayer();
     game = Game.newInstance('foobar', [player, redPlayer], player);
   });
 
-  it('Should play', function() {
+  it('Should play', function () {
     const action = card.play();
     expect(action).is.undefined;
 
@@ -38,13 +40,16 @@ describe('MarsUniversity', function() {
     expect(game.deferredActions).has.lengthOf(0);
   });
 
-  it('Gives victory point', function() {
+  it('Gives victory point', function () {
     card.play();
-    player.victoryPointsBreakdown.setVictoryPoints('victoryPoints', card.getVictoryPoints());
+    player.victoryPointsBreakdown.setVictoryPoints(
+      'victoryPoints',
+      card.getVictoryPoints()
+    );
     expect(player.victoryPointsBreakdown.victoryPoints).to.eq(1);
   });
 
-  it('Runs twice for multiple science tags', function() {
+  it('Runs twice for multiple science tags', function () {
     player.cardsInHand.push(card, card);
     card.onCardPlayed(player, new Research());
     expect(game.deferredActions).has.lengthOf(2);

@@ -32,7 +32,9 @@ export class PoliticalAlliance extends Card implements IProjectCard {
       return false;
     }
     if (PartyHooks.shouldApplyPolicy(player.game, PartyName.REDS)) {
-      return player.canAfford(player.getCardCost(this) + REDS_RULING_POLICY_COST);
+      return player.canAfford(
+        player.getCardCost(this) + REDS_RULING_POLICY_COST
+      );
     }
     return true;
   }

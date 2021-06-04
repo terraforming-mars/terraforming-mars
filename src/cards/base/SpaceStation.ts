@@ -18,9 +18,12 @@ export class SpaceStation extends Card implements IProjectCard {
       metadata: {
         cardNumber: '025',
         renderData: CardRenderer.builder((b) => {
-          b.effect('When you play a Space card, you pay 2 M€ less for it.', (eb) => {
-            eb.space().played.startEffect.megacredits(-2);
-          });
+          b.effect(
+            'When you play a Space card, you pay 2 M€ less for it.',
+            (eb) => {
+              eb.space().played.startEffect.megacredits(-2);
+            }
+          );
         }),
         victoryPoints: 1,
       },
@@ -40,4 +43,3 @@ export class SpaceStation extends Card implements IProjectCard {
     return 1;
   }
 }
-

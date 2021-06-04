@@ -6,8 +6,8 @@ import {Kelvinists} from '../../src/turmoil/parties/Kelvinists';
 import {Turmoil} from '../../src/turmoil/Turmoil';
 import {TestPlayers} from '../TestPlayers';
 
-describe('Election', function() {
-  it('resolve play', function() {
+describe('Election', function () {
+  it('resolve play', function () {
     const card = new Election();
     const player = TestPlayers.BLUE.newPlayer();
     const player2 = TestPlayers.RED.newPlayer();
@@ -18,7 +18,10 @@ describe('Election', function() {
     player.playedCards.push(new StripMine());
     player2.playedCards.push(new StripMine());
     player2.playedCards.push(new StripMine());
-    game.addCityTile(player3, game.board.getAvailableSpacesOnLand(player3)[0].id);
+    game.addCityTile(
+      player3,
+      game.board.getAvailableSpacesOnLand(player3)[0].id
+    );
     turmoil.chairman = player2.id;
     turmoil.dominantParty = new Kelvinists();
     turmoil.dominantParty.partyLeader = player2.id;

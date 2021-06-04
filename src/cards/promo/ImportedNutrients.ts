@@ -35,10 +35,15 @@ export class ImportedNutrients extends Card implements IProjectCard {
       player.addResourceTo(microbeCards[0], 4);
       return undefined;
     } else if (microbeCards.length > 1) {
-      return new SelectCard('Select card to add 4 microbes', 'Add microbes', microbeCards, (foundCards: Array<ICard>) => {
-        player.addResourceTo(foundCards[0], 4);
-        return undefined;
-      });
+      return new SelectCard(
+        'Select card to add 4 microbes',
+        'Add microbes',
+        microbeCards,
+        (foundCards: Array<ICard>) => {
+          player.addResourceTo(foundCards[0], 4);
+          return undefined;
+        }
+      );
     }
 
     return undefined;

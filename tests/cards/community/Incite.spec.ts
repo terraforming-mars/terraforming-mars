@@ -8,10 +8,12 @@ import {PartyName} from '../../../src/turmoil/parties/PartyName';
 import {TestingUtils} from '../../TestingUtils';
 import {TestPlayers} from '../../TestPlayers';
 
-describe('Incite', function() {
-  let card : Incite; let player : Player; let game : Game;
+describe('Incite', function () {
+  let card: Incite;
+  let player: Player;
+  let game: Game;
 
-  beforeEach(function() {
+  beforeEach(function () {
     card = new Incite();
     player = TestPlayers.BLUE.newPlayer();
 
@@ -22,21 +24,23 @@ describe('Incite', function() {
     player.corporationCard = card;
   });
 
-  it('Starts with +1 influence', function() {
+  it('Starts with +1 influence', function () {
     expect(game.turmoil!.getPlayerInfluence(player)).to.eq(1);
   });
 
-  it('Works with Event Analysts', function() {
+  it('Works with Event Analysts', function () {
     const eventAnalysts = new EventAnalysts();
     eventAnalysts.play(player);
     expect(game.turmoil!.getPlayerInfluence(player)).to.eq(2);
   });
 
-  it('Can perform initial action', function() {
+  it('Can perform initial action', function () {
     card.initialAction(player);
     expect(game.deferredActions).has.lengthOf(1);
 
-    const sendDelegate = game.deferredActions.peek()!.execute() as SelectPartyToSendDelegate;
+    const sendDelegate = game.deferredActions
+      .peek()!
+      .execute() as SelectPartyToSendDelegate;
     sendDelegate.cb(PartyName.MARS);
 
     const marsFirst = game.turmoil!.getPartyByName(PartyName.MARS);

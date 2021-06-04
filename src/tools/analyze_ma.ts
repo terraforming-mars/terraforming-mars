@@ -9,7 +9,10 @@ import {AgendaStyle} from '../turmoil/PoliticalAgendas';
 import {RandomMAOptionType} from '../RandomMAOptionType';
 import {Multiset} from '../utils/Multiset';
 
-function processRequest(req: http.IncomingMessage, res: http.ServerResponse): void {
+function processRequest(
+  req: http.IncomingMessage,
+  res: http.ServerResponse
+): void {
   if (req.url === undefined) {
     return;
   }
@@ -59,15 +62,15 @@ function calc(params: URLSearchParams): string {
 
   const type = params.get('type');
   switch (type) {
-  case 'NONE':
-    options.randomMA = RandomMAOptionType.NONE;
-    break;
-  case 'LIMITED':
-    options.randomMA = RandomMAOptionType.LIMITED;
-    break;
-  case 'FULL':
-    options.randomMA = RandomMAOptionType.UNLIMITED;
-    break;
+    case 'NONE':
+      options.randomMA = RandomMAOptionType.NONE;
+      break;
+    case 'LIMITED':
+      options.randomMA = RandomMAOptionType.LIMITED;
+      break;
+    case 'FULL':
+      options.randomMA = RandomMAOptionType.UNLIMITED;
+      break;
   }
   const results: Multiset<string> = new Multiset();
   for (let nth = 1; nth <= runs; nth++) {
@@ -86,7 +89,9 @@ function calc(params: URLSearchParams): string {
 
   const copy = new Array(...results.entries());
   copy.sort((a, b) => b[1] - a[1]);
-  return 'name,count\n' + copy.map(([name, count]) => `${name},${count}`).join('\n');
+  return (
+    'name,count\n' + copy.map(([name, count]) => `${name},${count}`).join('\n')
+  );
 }
 
 function simpleGameOptions(): GameOptions {

@@ -19,9 +19,9 @@ export class SupplyDrop extends PreludeCard {
   }
 
   public play(player: Player) {
-    player.titanium +=3;
-    player.steel +=8;
-    player.plants +=3;
+    player.titanium += 3;
+    player.steel += 8;
+    player.plants += 3;
     return undefined;
   }
 }

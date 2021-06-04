@@ -13,7 +13,7 @@ let player: Player;
 let redPlayer: Player;
 let game: Game;
 
-describe('GiantSolarShade', function() {
+describe('GiantSolarShade', function () {
   beforeEach(() => {
     card = new GiantSolarShade();
     player = TestPlayers.BLUE.newPlayer();
@@ -23,14 +23,14 @@ describe('GiantSolarShade', function() {
     game = Game.newInstance('foobar', [player, redPlayer], player, gameOptions);
   });
 
-  it('Should play', function() {
+  it('Should play', function () {
     const action = card.play(player);
     expect(action).is.undefined;
     expect(game.getVenusScaleLevel()).to.eq(6);
     expect(player.getTerraformRating()).to.eq(23);
   });
 
-  it('Should play with Reds and Dirigibles', function() {
+  it('Should play with Reds and Dirigibles', function () {
     player.game.phase = Phase.ACTION;
     player.game.turmoil!.rulingParty = new Reds();
     PoliticalAgendas.setNextAgenda(game.turmoil!, game);

@@ -9,7 +9,10 @@ import {CardName} from '../../CardName';
 import {Resources} from '../../Resources';
 import {CardRenderer} from '../render/CardRenderer';
 
-export class PowerInfrastructure extends Card implements IActionCard, IProjectCard {
+export class PowerInfrastructure
+  extends Card
+  implements IActionCard, IProjectCard
+{
   constructor() {
     super({
       cardType: CardType.ACTIVE,
@@ -20,9 +23,12 @@ export class PowerInfrastructure extends Card implements IActionCard, IProjectCa
       metadata: {
         cardNumber: '194',
         renderData: CardRenderer.builder((b) => {
-          b.action('Spend any amount of Energy and gain that amount of MC.', (eb) => {
-            eb.text('x').energy(1).startAction.megacredits(0).multiplier;
-          });
+          b.action(
+            'Spend any amount of Energy and gain that amount of MC.',
+            (eb) => {
+              eb.text('x').energy(1).startAction.megacredits(0).multiplier;
+            }
+          );
         }),
       },
     });
@@ -44,7 +50,7 @@ export class PowerInfrastructure extends Card implements IActionCard, IProjectCa
         return undefined;
       },
       1,
-      player.energy,
+      player.energy
     );
   }
 }

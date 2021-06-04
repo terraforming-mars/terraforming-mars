@@ -18,20 +18,28 @@ export class BuildColonyStandardProject extends StandardProjectCard {
         renderData: CardRenderer.builder((b) =>
           b.standardProject('Spend 17 M€ to place a colony.', (eb) => {
             eb.megacredits(17).startAction.colonies();
-          }),
+          })
         ),
       },
     });
   }
 
   private getOpenColonies(player: Player) {
-    let openColonies = player.game.colonies.filter((colony) => colony.colonies.length < 3 &&
-      colony.colonies.includes(player.id) === false &&
-      colony.isActive);
+    let openColonies = player.game.colonies.filter(
+      (colony) =>
+        colony.colonies.length < 3 &&
+        colony.colonies.includes(player.id) === false &&
+        colony.isActive
+    );
 
     // TODO: Europa sometimes costs additional 3.
-    if (PartyHooks.shouldApplyPolicy(player.game, PartyName.REDS) && !player.canAfford(this.cost + constants.REDS_RULING_POLICY_COST)) {
-      openColonies = openColonies.filter((colony) => colony.name !== ColonyName.VENUS);
+    if (
+      PartyHooks.shouldApplyPolicy(player.game, PartyName.REDS) &&
+      !player.canAfford(this.cost + constants.REDS_RULING_POLICY_COST)
+    ) {
+      openColonies = openColonies.filter(
+        (colony) => colony.name !== ColonyName.VENUS
+      );
     }
 
     return openColonies;

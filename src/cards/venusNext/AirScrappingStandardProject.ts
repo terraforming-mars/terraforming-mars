@@ -17,7 +17,7 @@ export class AirScrappingStandardProject extends StandardProjectCard {
         renderData: CardRenderer.builder((b) =>
           b.standardProject('Spend 15 M€ to raise Venus 1 step.', (eb) => {
             eb.megacredits(15).startAction.venus(1);
-          }),
+          })
         ),
       },
     });
@@ -25,9 +25,13 @@ export class AirScrappingStandardProject extends StandardProjectCard {
 
   public canAct(player: Player): boolean {
     let cost = this.cost;
-    if (PartyHooks.shouldApplyPolicy(player.game, PartyName.REDS)) cost += REDS_RULING_POLICY_COST;
+    if (PartyHooks.shouldApplyPolicy(player.game, PartyName.REDS))
+      cost += REDS_RULING_POLICY_COST;
 
-    return player.canAfford(cost) && player.game.getVenusScaleLevel() < constants.MAX_VENUS_SCALE;
+    return (
+      player.canAfford(cost) &&
+      player.game.getVenusScaleLevel() < constants.MAX_VENUS_SCALE
+    );
   }
 
   actionEssence(player: Player): void {

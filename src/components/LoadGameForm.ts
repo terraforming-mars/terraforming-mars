@@ -1,4 +1,3 @@
-
 import Vue from 'vue';
 import {Button} from '../components/common/Button';
 import {SimpleGameModel} from '../models/SimpleGameModel';
@@ -10,7 +9,7 @@ export const LoadGameForm = Vue.component('load-game-form', {
   components: {
     'Button': Button,
   },
-  data: function() {
+  data: function () {
     return {
       constants,
       gameId: '',
@@ -18,12 +17,12 @@ export const LoadGameForm = Vue.component('load-game-form', {
     };
   },
   methods: {
-    loadGame: function() {
+    loadGame: function () {
       const gameId = this.$data.gameId;
       const rollbackCount = this.$data.rollbackCount;
       const xhr = new XMLHttpRequest();
       xhr.open('PUT', '/load_game');
-      xhr.onerror = function() {
+      xhr.onerror = function () {
         alert('Error loading game');
       };
       xhr.onload = () => {
@@ -33,19 +32,28 @@ export const LoadGameForm = Vue.component('load-game-form', {
             window.location.href = '/player?id=' + response.players[0].id;
             return;
           } else {
-            window.history.replaceState(response, `${constants.APP_NAME} - Game`, '/game?id=' + response.id);
-            (this.$root.$data as unknown as typeof mainAppSettings.data).game = response;
-            (this.$root.$data as unknown as typeof mainAppSettings.data).screen = 'game-home';
+            window.history.replaceState(
+              response,
+              `${constants.APP_NAME} - Game`,
+              '/game?id=' + response.id
+            );
+            (this.$root.$data as unknown as typeof mainAppSettings.data).game =
+              response;
+            (
+              this.$root.$data as unknown as typeof mainAppSettings.data
+            ).screen = 'game-home';
           }
         } else {
           alert('Unexpected server response');
         }
       };
       xhr.responseType = 'json';
-      xhr.send(JSON.stringify({
-        game_id: gameId,
-        rollbackCount: rollbackCount,
-      }));
+      xhr.send(
+        JSON.stringify({
+          game_id: gameId,
+          rollbackCount: rollbackCount,
+        })
+      );
     },
   },
   template: `
@@ -66,4 +74,3 @@ export const LoadGameForm = Vue.component('load-game-form', {
         </div>
     `,
 });
-

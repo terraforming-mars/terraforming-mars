@@ -1,11 +1,10 @@
-
 import {createLocalVue, mount} from '@vue/test-utils';
 
 import {expect} from 'chai';
 import {Award} from '../../src/components/Award';
 import {FundedAwardModel} from '../../src/models/FundedAwardModel';
 
-describe('Award', function() {
+describe('Award', function () {
   const mockAward: FundedAwardModel = {
     award: {
       name: 'test',
@@ -22,13 +21,11 @@ describe('Award', function() {
     localVue.directive('i18n', {});
     return localVue;
   }
-  it('shows list and award', async function() {
+  it('shows list and award', async function () {
     const award = mount(Award, {
       localVue: getLocalVue(),
       propsData: {
-        awards_list: [
-          mockAward,
-        ],
+        awards_list: [mockAward],
       },
     });
     const toggler = award.find('a[class="ma-clickable awards-padding"]');

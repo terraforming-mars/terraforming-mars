@@ -26,13 +26,16 @@ export class LocalShading extends Card implements IActionCard, IResourceCard {
             eb.empty().startAction.floaters(1);
           }).br;
           b.or().br;
-          b.action('Spend 1 Floater here to raise your M€ production 1 step.', (eb) => {
-            eb.floaters(1).startAction.production((pb) => pb.megacredits(1));
-          });
+          b.action(
+            'Spend 1 Floater here to raise your M€ production 1 step.',
+            (eb) => {
+              eb.floaters(1).startAction.production((pb) => pb.megacredits(1));
+            }
+          );
         }),
       },
     });
-  };
+  }
   public resourceCount: number = 0;
 
   public play() {
@@ -49,8 +52,16 @@ export class LocalShading extends Card implements IActionCard, IResourceCard {
 
     const opts: Array<SelectOption> = [];
 
-    const addResource = new SelectOption('Add 1 floater to this card', 'Add floater', () => this.addResource(player));
-    const spendResource = new SelectOption('Remove 1 floater to increase M€ production 1 step', 'Remove floater', () => this.spendResource(player));
+    const addResource = new SelectOption(
+      'Add 1 floater to this card',
+      'Add floater',
+      () => this.addResource(player)
+    );
+    const spendResource = new SelectOption(
+      'Remove 1 floater to increase M€ production 1 step',
+      'Remove floater',
+      () => this.spendResource(player)
+    );
 
     opts.push(spendResource);
     opts.push(addResource);

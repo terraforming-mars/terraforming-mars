@@ -8,7 +8,10 @@ import {PlaceCityTile} from '../../deferredActions/PlaceCityTile';
 import {CardRenderer} from '../render/CardRenderer';
 import {Units} from '../../Units';
 
-export class SelfSufficientSettlement extends PreludeCard implements IProjectCard {
+export class SelfSufficientSettlement
+  extends PreludeCard
+  implements IProjectCard
+{
   constructor() {
     super({
       name: CardName.SELF_SUFFICIENT_SETTLEMENT,
@@ -20,7 +23,8 @@ export class SelfSufficientSettlement extends PreludeCard implements IProjectCar
         renderData: CardRenderer.builder((b) => {
           b.production((pb) => pb.megacredits(2)).city();
         }),
-        description: 'Increase your money production 2 steps. Place a City tile.',
+        description:
+          'Increase your money production 2 steps. Place a City tile.',
       },
     });
   }

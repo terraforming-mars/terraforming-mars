@@ -21,14 +21,16 @@ export class ProcessorFactory extends Card implements IProjectCard {
       metadata: {
         cardNumber: 'M86',
         renderData: CardRenderer.builder((b) => {
-          b.action('Spend 1 Steel to add 2 Data resources to any card.', (eb) => eb.startAction.steel(1).arrow().data().data());
+          b.action('Spend 1 Steel to add 2 Data resources to any card.', (eb) =>
+            eb.startAction.steel(1).arrow().data().data()
+          );
           b.br;
           b.vpText('1 VP for every 3 data resources here.');
         }),
         victoryPoints: CardRenderDynamicVictoryPoints.data(1, 3),
       },
     });
-  };
+  }
   public resourceCount = 0;
 
   public play() {
@@ -41,7 +43,9 @@ export class ProcessorFactory extends Card implements IProjectCard {
 
   public action(player: Player) {
     player.steel--;
-    player.game.defer(new AddResourcesToCard(player, ResourceType.DATA, {count: 2}));
+    player.game.defer(
+      new AddResourcesToCard(player, ResourceType.DATA, {count: 2})
+    );
     return undefined;
   }
 

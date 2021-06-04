@@ -3,8 +3,8 @@ import {Greenhouses} from '../../../src/cards/base/Greenhouses';
 import {Game} from '../../../src/Game';
 import {TestPlayers} from '../../TestPlayers';
 
-describe('Greenhouses', function() {
-  it('Should play', function() {
+describe('Greenhouses', function () {
+  it('Should play', function () {
     const card = new Greenhouses();
     const player = TestPlayers.BLUE.newPlayer();
     const redPlayer = TestPlayers.RED.newPlayer();

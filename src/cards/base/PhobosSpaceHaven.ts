@@ -20,16 +20,23 @@ export class PhobosSpaceHaven extends Card implements IProjectCard {
       metadata: {
         cardNumber: '021',
         renderData: CardRenderer.builder((b) => {
-          b.production((pb) => pb.titanium(1)).nbsp.city().asterix();
+          b.production((pb) => pb.titanium(1))
+            .nbsp.city()
+            .asterix();
         }),
-        description: 'Increase your titanium production 1 step and place a City tile ON THE RESERVED AREA.',
+        description:
+          'Increase your titanium production 1 step and place a City tile ON THE RESERVED AREA.',
         victoryPoints: 3,
       },
     });
   }
 
   public play(player: Player) {
-    player.game.addCityTile(player, SpaceName.PHOBOS_SPACE_HAVEN, SpaceType.COLONY);
+    player.game.addCityTile(
+      player,
+      SpaceName.PHOBOS_SPACE_HAVEN,
+      SpaceType.COLONY
+    );
     player.addProduction(Resources.TITANIUM, 1);
     return undefined;
   }

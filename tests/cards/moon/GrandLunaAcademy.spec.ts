@@ -17,7 +17,13 @@ describe('GrandLunaAcademy', () => {
     card = new GrandLunaAcademy();
   });
 
-  const cases = [[0, 0], [1, 1], [2, 1], [3, 2], [4, 2]];
+  const cases = [
+    [0, 0],
+    [1, 1],
+    [2, 1],
+    [3, 2],
+    [4, 2],
+  ];
   cases.forEach(([tags, cards]) => {
     it(`play: ${tags} tags, ${cards} cards`, () => {
       player.cardsInHand = [];
@@ -27,4 +33,3 @@ describe('GrandLunaAcademy', () => {
     });
   });
 });
-

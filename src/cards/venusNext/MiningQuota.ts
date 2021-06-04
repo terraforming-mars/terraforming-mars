@@ -17,16 +17,19 @@ export class MiningQuota extends Card {
       cost: 5,
       productionBox: Units.of({steel: 2}),
 
-      requirements: CardRequirements.builder((b) => b.tag(Tags.VENUS).tag(Tags.EARTH).tag(Tags.JOVIAN)),
+      requirements: CardRequirements.builder((b) =>
+        b.tag(Tags.VENUS).tag(Tags.EARTH).tag(Tags.JOVIAN)
+      ),
       metadata: {
         cardNumber: '239',
         renderData: CardRenderer.builder((b) => {
           b.production((pb) => pb.steel(2));
         }),
-        description: 'Requires Venus, Earth and Jovian tags. Increase your steel production 2 steps.',
+        description:
+          'Requires Venus, Earth and Jovian tags. Increase your steel production 2 steps.',
       },
     });
-  };
+  }
 
   public play(player: Player) {
     player.addProduction(Resources.STEEL, 2);

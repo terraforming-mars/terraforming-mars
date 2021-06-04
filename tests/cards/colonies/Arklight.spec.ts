@@ -4,8 +4,8 @@ import {Arklight} from '../../../src/cards/colonies/Arklight';
 import {Game} from '../../../src/Game';
 import {TestPlayers} from '../../TestPlayers';
 
-describe('Arklight', function() {
-  it('Should play', function() {
+describe('Arklight', function () {
+  it('Should play', function () {
     const card = new Arklight();
     const player = TestPlayers.BLUE.newPlayer();
     const player2 = TestPlayers.RED.newPlayer();

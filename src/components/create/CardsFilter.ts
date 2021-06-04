@@ -1,19 +1,24 @@
 import Vue from 'vue';
 import {CardName} from '../../CardName';
-import {ALL_PRELUDE_CARD_NAMES, ALL_PROJECT_CARD_NAMES} from '../../cards/AllCards';
+import {
+  ALL_PRELUDE_CARD_NAMES,
+  ALL_PROJECT_CARD_NAMES,
+} from '../../cards/AllCards';
 import {TranslateMixin} from '../TranslateMixin';
 
-const allItems: Array<CardName> = ALL_PROJECT_CARD_NAMES.concat(ALL_PRELUDE_CARD_NAMES).sort();
+const allItems: Array<CardName> = ALL_PROJECT_CARD_NAMES.concat(
+  ALL_PRELUDE_CARD_NAMES
+).sort();
 
 interface CardsFilterModel {
-    selectedCardNames: Array<CardName>;
-    foundCardNames: Array<CardName>;
-    searchTerm: string;
+  selectedCardNames: Array<CardName>;
+  foundCardNames: Array<CardName>;
+  searchTerm: string;
 }
 
 export const CardsFilter = Vue.component('cards-filter', {
   props: {},
-  data: function() {
+  data: function () {
     return {
       selectedCardNames: [],
       foundCardNames: [],
@@ -22,13 +27,15 @@ export const CardsFilter = Vue.component('cards-filter', {
   },
   mixins: [TranslateMixin],
   methods: {
-    isPrelude: function(cardName: CardName) {
+    isPrelude: function (cardName: CardName) {
       return ALL_PRELUDE_CARD_NAMES.includes(cardName);
     },
-    removeCard: function(cardNameToRemove: CardName) {
-      this.selectedCardNames = this.selectedCardNames.filter((curCardName) => curCardName !== cardNameToRemove).sort();
+    removeCard: function (cardNameToRemove: CardName) {
+      this.selectedCardNames = this.selectedCardNames
+        .filter((curCardName) => curCardName !== cardNameToRemove)
+        .sort();
     },
-    addCard: function(cardNameToAdd: CardName) {
+    addCard: function (cardNameToAdd: CardName) {
       if (this.selectedCardNames.includes(cardNameToAdd)) return;
       this.selectedCardNames.push(cardNameToAdd);
       this.selectedCardNames.sort();
@@ -36,10 +43,10 @@ export const CardsFilter = Vue.component('cards-filter', {
     },
   },
   watch: {
-    selectedCardNames: function(value) {
+    selectedCardNames: function (value) {
       this.$emit('cards-list-changed', value);
     },
-    searchTerm: function(value: string) {
+    searchTerm: function (value: string) {
       if (value === '') {
         this.foundCardNames = [];
         return;
@@ -53,9 +60,13 @@ export const CardsFilter = Vue.component('cards-filter', {
         }
         return;
       }
-      const newCardNames = allItems.filter(
-        (candidate: CardName) => ! this.selectedCardNames.includes(candidate) && candidate.toLowerCase().indexOf(value.toLowerCase()) !== -1,
-      ).sort();
+      const newCardNames = allItems
+        .filter(
+          (candidate: CardName) =>
+            !this.selectedCardNames.includes(candidate) &&
+            candidate.toLowerCase().indexOf(value.toLowerCase()) !== -1
+        )
+        .sort();
       this.foundCardNames = newCardNames.slice(0, 5);
     },
   },

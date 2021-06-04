@@ -22,9 +22,13 @@ export class Helion extends Card implements CorporationCard {
           b.br;
           b.production((pb) => pb.heat(3)).nbsp.megacredits(42);
           b.corpBox('effect', (ce) => {
-            ce.effect('You may use heat as MC. You may not use M€ as heat.', (eb) => {
-              eb.startEffect.text('x').heat(1).equals().megacredits(0).multiplier;
-            });
+            ce.effect(
+              'You may use heat as MC. You may not use M€ as heat.',
+              (eb) => {
+                eb.startEffect.text('x').heat(1).equals().megacredits(0)
+                  .multiplier;
+              }
+            );
           });
         }),
       },

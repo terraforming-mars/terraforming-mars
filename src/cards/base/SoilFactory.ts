@@ -25,7 +25,8 @@ export class SoilFactory extends Card implements IProjectCard {
             pb.plus().plants(1);
           });
         }),
-        description: 'Decrease your Energy production 1 step and increase your Plant production 1 step.',
+        description:
+          'Decrease your Energy production 1 step and increase your Plant production 1 step.',
         victoryPoints: 1,
       },
     });

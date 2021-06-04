@@ -19,15 +19,18 @@ export class CorroderSuits extends Card {
 
       metadata: {
         cardNumber: '219',
-        description: 'Increase your M€ production 2 steps. Add 1 resource to ANY Venus CARD.',
+        description:
+          'Increase your M€ production 2 steps. Add 1 resource to ANY Venus CARD.',
         renderData: CardRenderer.builder((b) => {
           b.production((pb) => {
             pb.megacredits(2);
-          }).wild(1).secondaryTag(Tags.VENUS);
+          })
+            .wild(1)
+            .secondaryTag(Tags.VENUS);
         }),
       },
     });
-  };
+  }
 
   public play(player: Player) {
     player.addProduction(Resources.MEGACREDITS, 2);
@@ -47,13 +50,17 @@ export class CorroderSuits extends Card {
       (foundCards: Array<ICard>) => {
         player.addResourceTo(foundCards[0], {log: true});
         return undefined;
-      },
+      }
     );
   }
   public static getVenusResCards(player: Player): ICard[] {
     let resourceCards = player.getResourceCards(ResourceType.FLOATER);
-    resourceCards = resourceCards.concat(player.getResourceCards(ResourceType.MICROBE));
-    resourceCards = resourceCards.concat(player.getResourceCards(ResourceType.ANIMAL));
+    resourceCards = resourceCards.concat(
+      player.getResourceCards(ResourceType.MICROBE)
+    );
+    resourceCards = resourceCards.concat(
+      player.getResourceCards(ResourceType.ANIMAL)
+    );
     return resourceCards.filter((card) => card.tags.includes(Tags.VENUS));
   }
 }

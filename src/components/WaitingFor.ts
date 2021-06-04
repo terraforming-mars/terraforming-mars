@@ -45,9 +45,10 @@ export const WaitingFor = Vue.component('waiting-for', {
       type: Object as () => PlayerInputModel | undefined,
     },
   },
-  data: function() {
+  data: function () {
     return {
-      waitingForTimeout: this.settings.waitingForTimeout as typeof raw_settings.waitingForTimeout,
+      waitingForTimeout: this.settings
+        .waitingForTimeout as typeof raw_settings.waitingForTimeout,
     };
   },
   components: {
@@ -68,7 +69,7 @@ export const WaitingFor = Vue.component('waiting-for', {
     'shift-ares-global-parameters': ShiftAresGlobalParameters,
   },
   methods: {
-    animateTitle: function() {
+    animateTitle: function () {
       const sequence = '\u25D1\u25D2\u25D0\u25D3';
       const first = document.title[0];
       const position = sequence.indexOf(first);
@@ -78,15 +79,26 @@ export const WaitingFor = Vue.component('waiting-for', {
       }
       document.title = next + ' ' + $t(constants.APP_NAME);
     },
-    waitForUpdate: function() {
+    waitForUpdate: function () {
       const vueApp = this;
       const root = this.$root as unknown as typeof mainAppSettings.methods;
       clearTimeout(ui_update_timeout_id);
       const askForUpdate = () => {
         const xhr = new XMLHttpRequest();
-        xhr.open('GET', '/api/waitingfor' + window.location.search + '&gameAge=' + this.player.game.gameAge + '&undoCount=' + this.player.game.undoCount);
-        xhr.onerror = function() {
-          root.showAlert('Unable to reach the server. The server may be restarting or down for maintenance.', () => vueApp.waitForUpdate());
+        xhr.open(
+          'GET',
+          '/api/waitingfor' +
+            window.location.search +
+            '&gameAge=' +
+            this.player.game.gameAge +
+            '&undoCount=' +
+            this.player.game.undoCount
+        );
+        xhr.onerror = function () {
+          root.showAlert(
+            'Unable to reach the server. The server may be restarting or down for maintenance.',
+            () => vueApp.waitForUpdate()
+          );
         };
         xhr.onload = () => {
           if (xhr.status === 200) {
@@ -99,11 +111,12 @@ export const WaitingFor = Vue.component('waiting-for', {
               } else if (Notification.permission === 'granted') {
                 new Notification(constants.APP_NAME, {
                   icon: '/favicon.ico',
-                  body: 'It\'s your turn!',
+                  body: "It's your turn!",
                 });
               }
 
-              const soundsEnabled = PreferencesManager.load('enable_sounds') === '1';
+              const soundsEnabled =
+                PreferencesManager.load('enable_sounds') === '1';
               if (soundsEnabled) SoundManager.playActivePlayerSound();
 
               // We don't need to wait anymore - it's our turn
@@ -116,60 +129,81 @@ export const WaitingFor = Vue.component('waiting-for', {
             }
             vueApp.waitForUpdate();
           } else {
-            root.showAlert(`Received unexpected response from server (${xhr.status}). This is often due to the server restarting.`, () => vueApp.waitForUpdate());
+            root.showAlert(
+              `Received unexpected response from server (${xhr.status}). This is often due to the server restarting.`,
+              () => vueApp.waitForUpdate()
+            );
           }
         };
         xhr.responseType = 'json';
         xhr.send();
       };
-      ui_update_timeout_id = window.setTimeout(askForUpdate, this.waitingForTimeout);
+      ui_update_timeout_id = window.setTimeout(
+        askForUpdate,
+        this.waitingForTimeout
+      );
     },
   },
-  render: function(createElement) {
+  render: function (createElement) {
     document.title = $t(constants.APP_NAME);
     window.clearInterval(documentTitleTimer);
     if (this.waitingfor === undefined) {
       this.waitForUpdate();
       return createElement('div', $t('Not your turn to take any actions'));
     }
-    if (this.player.players.length > 1 && this.player.waitingFor !== undefined) {
+    if (
+      this.player.players.length > 1 &&
+      this.player.waitingFor !== undefined
+    ) {
       documentTitleTimer = window.setInterval(() => this.animateTitle(), 1000);
     }
-    const input = new PlayerInputFactory().getPlayerInput(createElement, this.players, this.player, this.waitingfor, (out: Array<Array<string>>) => {
-      const xhr = new XMLHttpRequest();
-      const root = this.$root as unknown as typeof mainAppSettings.data;
-      const showAlert = (this.$root as unknown as typeof mainAppSettings.methods).showAlert;
-      if (root.isServerSideRequestInProgress) {
-        console.warn('Server request in progress');
-        return;
-      }
-
-      root.isServerSideRequestInProgress = true;
-      xhr.open('POST', '/player/input?id=' + this.player.id);
-      xhr.responseType = 'json';
-      xhr.onload = () => {
-        if (xhr.status === 200) {
-          root.screen = 'empty';
-          root.player = xhr.response;
-          root.playerkey++;
-          root.screen = 'player-home';
-          if (this.player.game.phase === 'end' && window.location.pathname !== '/the-end') {
-            (window).location = (window).location;
-          }
-        } else if (xhr.status === 400 && xhr.responseType === 'json') {
-          showAlert(xhr.response.message);
-        } else {
-          showAlert('Unexpected response from server. Please try again.');
+    const input = new PlayerInputFactory().getPlayerInput(
+      createElement,
+      this.players,
+      this.player,
+      this.waitingfor,
+      (out: Array<Array<string>>) => {
+        const xhr = new XMLHttpRequest();
+        const root = this.$root as unknown as typeof mainAppSettings.data;
+        const showAlert = (
+          this.$root as unknown as typeof mainAppSettings.methods
+        ).showAlert;
+        if (root.isServerSideRequestInProgress) {
+          console.warn('Server request in progress');
+          return;
         }
-        root.isServerSideRequestInProgress = false;
-      };
-      xhr.send(JSON.stringify(out));
-      xhr.onerror = function() {
-        root.isServerSideRequestInProgress = false;
-      };
-    }, true, true);
+
+        root.isServerSideRequestInProgress = true;
+        xhr.open('POST', '/player/input?id=' + this.player.id);
+        xhr.responseType = 'json';
+        xhr.onload = () => {
+          if (xhr.status === 200) {
+            root.screen = 'empty';
+            root.player = xhr.response;
+            root.playerkey++;
+            root.screen = 'player-home';
+            if (
+              this.player.game.phase === 'end' &&
+              window.location.pathname !== '/the-end'
+            ) {
+              window.location = window.location;
+            }
+          } else if (xhr.status === 400 && xhr.responseType === 'json') {
+            showAlert(xhr.response.message);
+          } else {
+            showAlert('Unexpected response from server. Please try again.');
+          }
+          root.isServerSideRequestInProgress = false;
+        };
+        xhr.send(JSON.stringify(out));
+        xhr.onerror = function () {
+          root.isServerSideRequestInProgress = false;
+        };
+      },
+      true,
+      true
+    );
 
     return createElement('div', {'class': 'wf-root'}, [input]);
   },
 });
-

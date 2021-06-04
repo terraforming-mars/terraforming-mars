@@ -10,7 +10,11 @@ export class ApiGame extends Handler {
     super();
   }
 
-  public get(req: http.IncomingMessage, res: http.ServerResponse, ctx: IContext): void {
+  public get(
+    req: http.IncomingMessage,
+    res: http.ServerResponse,
+    ctx: IContext
+  ): void {
     const gameId = ctx.url.searchParams.get('id');
     if (!gameId) {
       ctx.route.notFound(req, res, 'id parameter missing');

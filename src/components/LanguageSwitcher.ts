@@ -3,13 +3,16 @@ import {LANGUAGES} from '../constants';
 import {PreferencesManager} from './PreferencesManager';
 
 export const LanguageSwitcher = Vue.component('language-switcher', {
-  data: function() {
+  data: function () {
     return {
       'languages': LANGUAGES,
     };
   },
   methods: {
-    switchLanguageTo: function(langId: string, reloadThePage: boolean = false) {
+    switchLanguageTo: function (
+      langId: string,
+      reloadThePage: boolean = false
+    ) {
       PreferencesManager.save('lang', langId);
       if (reloadThePage) window.location = window.location;
     },

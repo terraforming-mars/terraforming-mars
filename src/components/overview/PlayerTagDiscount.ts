@@ -7,7 +7,7 @@ export const PlayerTagDiscount = Vue.component('PlayerTagDiscount', {
     },
   },
   methods: {
-    getAmount: function(): number {
+    getAmount: function (): number {
       return this.amount * -1;
     },
   },

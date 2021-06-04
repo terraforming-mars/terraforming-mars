@@ -32,4 +32,3 @@ export class BusinessEmpire extends PreludeCard {
     return undefined;
   }
 }
-

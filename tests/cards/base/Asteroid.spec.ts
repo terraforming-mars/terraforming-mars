@@ -6,17 +6,20 @@ import {Player} from '../../../src/Player';
 import {Resources} from '../../../src/Resources';
 import {TestPlayers} from '../../TestPlayers';
 
-describe('Asteroid', function() {
-  let card : Asteroid; let player : Player; let player2 : Player; let game : Game;
+describe('Asteroid', function () {
+  let card: Asteroid;
+  let player: Player;
+  let player2: Player;
+  let game: Game;
 
-  beforeEach(function() {
+  beforeEach(function () {
     card = new Asteroid();
     player = TestPlayers.BLUE.newPlayer();
     player2 = TestPlayers.RED.newPlayer();
     game = Game.newInstance('foobar', [player, player2], player);
   });
 
-  it('Should play', function() {
+  it('Should play', function () {
     player2.plants = 2;
     card.play(player);
     expect(game.deferredActions).has.lengthOf(1);

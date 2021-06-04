@@ -37,7 +37,11 @@ export class HE3Refinery extends Card implements IProjectCard {
   }
 
   public action(player: Player) {
-    player.addResource(Resources.MEGACREDITS, MoonExpansion.moonData(player.game).miningRate, {log: true});
+    player.addResource(
+      Resources.MEGACREDITS,
+      MoonExpansion.moonData(player.game).miningRate,
+      {log: true}
+    );
     return undefined;
   }
 }

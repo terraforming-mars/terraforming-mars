@@ -25,7 +25,8 @@ export class PioneerSettlement extends Card implements IProjectCard {
           b.production((pb) => pb.megacredits(-2));
           b.nbsp.colonies(1);
         }),
-        description: 'Requires that you have no more than 1 colony. Decrease your M€ production 2 steps. Place a colony.',
+        description:
+          'Requires that you have no more than 1 colony. Decrease your M€ production 2 steps. Place a colony.',
         victoryPoints: 2,
       },
     });
@@ -41,12 +42,16 @@ export class PioneerSettlement extends Card implements IProjectCard {
     let lunaIsAvailable = false;
     let coloniesCount: number = 0;
     const hasOneColonyMax = player.game.colonies.every((colony) => {
-      if (colony.name === ColonyName.LUNA &&
-          colony.isColonyFull() === false &&
-          colony.colonies.includes(player.id) === false) {
+      if (
+        colony.name === ColonyName.LUNA &&
+        colony.isColonyFull() === false &&
+        colony.colonies.includes(player.id) === false
+      ) {
         lunaIsAvailable = true;
       }
-      coloniesCount += colony.colonies.filter((owner) => owner === player.id).length;
+      coloniesCount += colony.colonies.filter(
+        (owner) => owner === player.id
+      ).length;
       if (coloniesCount > 1) {
         return false;
       }
@@ -58,7 +63,10 @@ export class PioneerSettlement extends Card implements IProjectCard {
     }
 
     const megaCreditsProduction = player.getProduction(Resources.MEGACREDITS);
-    if (megaCreditsProduction === -4 && player.isCorporation(CardName.POSEIDON)) {
+    if (
+      megaCreditsProduction === -4 &&
+      player.isCorporation(CardName.POSEIDON)
+    ) {
       return true;
     } else if (megaCreditsProduction <= -4) {
       if (lunaIsAvailable === false) {
@@ -71,10 +79,20 @@ export class PioneerSettlement extends Card implements IProjectCard {
   }
 
   public play(player: Player) {
-    const openColonies = player.getProduction(Resources.MEGACREDITS) <= -4 ?
-      player.game.colonies.filter((colony) => colony.name === ColonyName.LUNA) :
-      undefined;
-    player.game.defer(new BuildColony(player, false, 'Select colony for Pioneer Settlement', openColonies));
+    const openColonies =
+      player.getProduction(Resources.MEGACREDITS) <= -4
+        ? player.game.colonies.filter(
+            (colony) => colony.name === ColonyName.LUNA
+          )
+        : undefined;
+    player.game.defer(
+      new BuildColony(
+        player,
+        false,
+        'Select colony for Pioneer Settlement',
+        openColonies
+      )
+    );
     player.addProduction(Resources.MEGACREDITS, -2);
     return undefined;
   }

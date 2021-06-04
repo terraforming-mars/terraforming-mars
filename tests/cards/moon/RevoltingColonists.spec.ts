@@ -21,7 +21,12 @@ describe('RevoltingColonists', () => {
     player1 = TestPlayers.BLUE.newPlayer();
     player2 = TestPlayers.RED.newPlayer();
     player3 = TestPlayers.YELLOW.newPlayer();
-    const game = Game.newInstance('id', [player1, player2, player3], player1, MOON_OPTIONS);
+    const game = Game.newInstance(
+      'id',
+      [player1, player2, player3],
+      player1,
+      MOON_OPTIONS
+    );
     card = new RevoltingColonists();
     moonData = MoonExpansion.moonData(game);
   });
@@ -40,7 +45,7 @@ describe('RevoltingColonists', () => {
   it('play', () => {
     const spaces = moonData.moon.getAvailableSpacesOnLand();
 
-    const assignTile = function(idx: number, player: Player) {
+    const assignTile = function (idx: number, player: Player) {
       spaces[idx].tile = {tileType: TileType.MOON_COLONY};
       spaces[idx].player = player;
     };
@@ -64,4 +69,3 @@ describe('RevoltingColonists', () => {
     expect(player3.megaCredits).eq(11);
   });
 });
-

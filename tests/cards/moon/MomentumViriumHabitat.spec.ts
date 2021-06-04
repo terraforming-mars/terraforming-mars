@@ -57,4 +57,3 @@ describe('MomentumViriumHabitat', () => {
     expect(moonData.colonyRate).eq(1);
   });
 });
-

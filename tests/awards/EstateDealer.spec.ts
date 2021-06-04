@@ -5,8 +5,8 @@ import {SpaceType} from '../../src/SpaceType';
 import {TileType} from '../../src/TileType';
 import {TestPlayers} from '../TestPlayers';
 
-describe('EstateDealer', function() {
-  it('Correctly counts ocean tiles', function() {
+describe('EstateDealer', function () {
+  it('Correctly counts ocean tiles', function () {
     const award = new EstateDealer();
     const player = TestPlayers.BLUE.newPlayer();
     const player2 = TestPlayers.RED.newPlayer();
@@ -27,7 +27,7 @@ describe('EstateDealer', function() {
     expect(award.getScore(player)).to.eq(1);
   });
 
-  it('Correctly counts Ares upgraded oceans', function() {
+  it('Correctly counts Ares upgraded oceans', function () {
     const award = new EstateDealer();
     const player = TestPlayers.BLUE.newPlayer();
     const player2 = TestPlayers.RED.newPlayer();

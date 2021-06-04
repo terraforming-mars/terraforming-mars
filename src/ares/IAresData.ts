@@ -1,25 +1,25 @@
 import {PlayerId} from '../Player';
 
 export interface IAresData {
-    active: boolean;
-    includeHazards: boolean;
-    hazardData: IHazardData;
-    milestoneResults: Array<IMilestoneCount>;
+  active: boolean;
+  includeHazards: boolean;
+  hazardData: IHazardData;
+  milestoneResults: Array<IMilestoneCount>;
 }
 
 export interface IHazardConstraint {
-    threshold: number,
-    available: boolean
+  threshold: number;
+  available: boolean;
 }
 
 export interface IHazardData {
-    erosionOceanCount: IHazardConstraint,
-    removeDustStormsOceanCount: IHazardConstraint,
-    severeErosionTemperature: IHazardConstraint,
-    severeDustStormOxygen: IHazardConstraint
-};
+  erosionOceanCount: IHazardConstraint;
+  removeDustStormsOceanCount: IHazardConstraint;
+  severeErosionTemperature: IHazardConstraint;
+  severeDustStormOxygen: IHazardConstraint;
+}
 
 export interface IMilestoneCount {
-    id: PlayerId;
-    count: number;
+  id: PlayerId;
+  count: number;
 }

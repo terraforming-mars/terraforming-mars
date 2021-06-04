@@ -6,27 +6,29 @@ import {Player} from '../../../src/Player';
 import {TestingUtils} from '../../TestingUtils';
 import {TestPlayers} from '../../TestPlayers';
 
-describe('WaterImportFromEuropa', function() {
-  let card : WaterImportFromEuropa; let player : Player; let game : Game;
+describe('WaterImportFromEuropa', function () {
+  let card: WaterImportFromEuropa;
+  let player: Player;
+  let game: Game;
 
-  beforeEach(function() {
+  beforeEach(function () {
     card = new WaterImportFromEuropa();
     player = TestPlayers.BLUE.newPlayer();
     const redPlayer = TestPlayers.RED.newPlayer();
     game = Game.newInstance('foobar', [player, redPlayer], player);
   });
 
-  it('Can\'t act', function() {
+  it("Can't act", function () {
     expect(card.canAct(player)).is.not.true;
   });
 
-  it('Should play', function() {
+  it('Should play', function () {
     card.play();
     player.playedCards.push(card);
     expect(card.getVictoryPoints(player)).to.eq(1);
   });
 
-  it('Should act', function() {
+  it('Should act', function () {
     player.megaCredits = 13;
 
     const action = card.action(player);
@@ -41,7 +43,7 @@ describe('WaterImportFromEuropa', function() {
     expect(player.getTerraformRating()).to.eq(21);
   });
 
-  it('Can act if can pay even after oceans are maxed', function() {
+  it('Can act if can pay even after oceans are maxed', function () {
     TestingUtils.maxOutOceans(player);
     player.megaCredits = 12;
 

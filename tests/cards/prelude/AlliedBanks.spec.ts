@@ -3,8 +3,8 @@ import {AlliedBanks} from '../../../src/cards/prelude/AlliedBanks';
 import {Resources} from '../../../src/Resources';
 import {TestPlayers} from '../../TestPlayers';
 
-describe('AlliedBanks', function() {
-  it('Should play', function() {
+describe('AlliedBanks', function () {
+  it('Should play', function () {
     const card = new AlliedBanks();
     const player = TestPlayers.BLUE.newPlayer();
     const action = card.play(player);

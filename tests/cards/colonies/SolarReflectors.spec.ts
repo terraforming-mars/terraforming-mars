@@ -3,8 +3,8 @@ import {SolarReflectors} from '../../../src/cards/colonies/SolarReflectors';
 import {Resources} from '../../../src/Resources';
 import {TestPlayers} from '../../TestPlayers';
 
-describe('SolarReflectors', function() {
-  it('Should play', function() {
+describe('SolarReflectors', function () {
+  it('Should play', function () {
     const card = new SolarReflectors();
     const player = TestPlayers.BLUE.newPlayer();
     const action = card.play(player);

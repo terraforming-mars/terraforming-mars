@@ -44,8 +44,14 @@ export class VenusianPlants extends Card implements IProjectCard {
     }
     const venusMaxed = player.game.getVenusScaleLevel() === MAX_VENUS_SCALE;
 
-    if (PartyHooks.shouldApplyPolicy(player.game, PartyName.REDS) && !venusMaxed) {
-      return player.canAfford(player.getCardCost(this) + REDS_RULING_POLICY_COST, {floaters: true, microbes: true});
+    if (
+      PartyHooks.shouldApplyPolicy(player.game, PartyName.REDS) &&
+      !venusMaxed
+    ) {
+      return player.canAfford(
+        player.getCardCost(this) + REDS_RULING_POLICY_COST,
+        {floaters: true, microbes: true}
+      );
     }
 
     return true;
@@ -68,7 +74,7 @@ export class VenusianPlants extends Card implements IProjectCard {
       (foundCards: Array<ICard>) => {
         player.addResourceTo(foundCards[0], {log: true});
         return undefined;
-      },
+      }
     );
   }
 
@@ -78,7 +84,9 @@ export class VenusianPlants extends Card implements IProjectCard {
 
   public getResCards(player: Player): ICard[] {
     let resourceCards = player.getResourceCards(ResourceType.MICROBE);
-    resourceCards = resourceCards.concat(player.getResourceCards(ResourceType.ANIMAL));
+    resourceCards = resourceCards.concat(
+      player.getResourceCards(ResourceType.ANIMAL)
+    );
     return resourceCards.filter((card) => card.tags.includes(Tags.VENUS));
   }
 }

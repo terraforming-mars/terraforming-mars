@@ -16,13 +16,16 @@ export class SupportedResearch extends Card implements IProjectCard {
       name: CardName.SUPPORTED_RESEARCH,
       cardType: CardType.AUTOMATED,
 
-      requirements: CardRequirements.builder((b) => b.party(PartyName.SCIENTISTS)),
+      requirements: CardRequirements.builder((b) =>
+        b.party(PartyName.SCIENTISTS)
+      ),
       metadata: {
         cardNumber: 'T14',
         renderData: CardRenderer.builder((b) => {
           b.cards(2);
         }),
-        description: 'Requires that Scientists are ruling or that you have 2 delegates there. Draw 2 cards.',
+        description:
+          'Requires that Scientists are ruling or that you have 2 delegates there. Draw 2 cards.',
       },
     });
   }

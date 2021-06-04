@@ -26,7 +26,8 @@ export class WildlifeDome extends Card implements IProjectCard {
         renderData: CardRenderer.builder((b) => {
           b.greenery();
         }),
-        description: 'Requires that Greens are ruling or that you have 2 delegates there. Place a greenery tile and raise oxygen 1 step.',
+        description:
+          'Requires that Greens are ruling or that you have 2 delegates there. Place a greenery tile and raise oxygen 1 step.',
       },
     });
   }
@@ -36,11 +37,20 @@ export class WildlifeDome extends Card implements IProjectCard {
       return false;
     }
     if (player.game.turmoil !== undefined) {
-      const canPlaceTile = player.game.board.getAvailableSpacesForGreenery(player).length > 0;
+      const canPlaceTile =
+        player.game.board.getAvailableSpacesForGreenery(player).length > 0;
       const oxygenMaxed = player.game.getOxygenLevel() === MAX_OXYGEN_LEVEL;
 
-      if (PartyHooks.shouldApplyPolicy(player.game, PartyName.REDS) && !oxygenMaxed) {
-        return player.canAfford(player.getCardCost(this) + REDS_RULING_POLICY_COST, {steel: true, microbes: true}) && canPlaceTile;
+      if (
+        PartyHooks.shouldApplyPolicy(player.game, PartyName.REDS) &&
+        !oxygenMaxed
+      ) {
+        return (
+          player.canAfford(player.getCardCost(this) + REDS_RULING_POLICY_COST, {
+            steel: true,
+            microbes: true,
+          }) && canPlaceTile
+        );
       }
 
       return canPlaceTile;
@@ -49,8 +59,12 @@ export class WildlifeDome extends Card implements IProjectCard {
   }
 
   public play(player: Player) {
-    return new SelectSpace('Select space for greenery tile', player.game.board.getAvailableSpacesForGreenery(player), (space: ISpace) => {
-      return player.game.addGreenery(player, space.id);
-    });
+    return new SelectSpace(
+      'Select space for greenery tile',
+      player.game.board.getAvailableSpacesForGreenery(player),
+      (space: ISpace) => {
+        return player.game.addGreenery(player, space.id);
+      }
+    );
   }
 }

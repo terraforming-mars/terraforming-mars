@@ -8,17 +8,19 @@ import {Player} from '../../../src/Player';
 import {Resources} from '../../../src/Resources';
 import {TestPlayers} from '../../TestPlayers';
 
-describe('VenusSoils', function() {
-  let card : VenusSoils; let player : Player; let game : Game;
+describe('VenusSoils', function () {
+  let card: VenusSoils;
+  let player: Player;
+  let game: Game;
 
-  beforeEach(function() {
+  beforeEach(function () {
     card = new VenusSoils();
     player = TestPlayers.BLUE.newPlayer();
     const redPlayer = TestPlayers.RED.newPlayer();
     game = Game.newInstance('foobar', [player, redPlayer], player);
   });
 
-  it('Should play - single target', function() {
+  it('Should play - single target', function () {
     const card2 = new Thermophiles();
     player.playedCards.push(card2);
     card.play(player);
@@ -28,7 +30,7 @@ describe('VenusSoils', function() {
     expect(game.getVenusScaleLevel()).to.eq(2);
   });
 
-  it('Should play - multiple targets', function() {
+  it('Should play - multiple targets', function () {
     const card2 = new Thermophiles();
     const card3 = new VenusianInsects();
     player.playedCards.push(card2, card3);
@@ -36,9 +38,9 @@ describe('VenusSoils', function() {
     const action = card.play(player);
     expect(action instanceof SelectCard).is.true;
 
-        action!.cb([card2]);
-        expect(player.getResourcesOnCard(card2)).to.eq(2);
-        expect(player.getProduction(Resources.PLANTS)).to.eq(1);
-        expect(game.getVenusScaleLevel()).to.eq(2);
+    action!.cb([card2]);
+    expect(player.getResourcesOnCard(card2)).to.eq(2);
+    expect(player.getProduction(Resources.PLANTS)).to.eq(1);
+    expect(game.getVenusScaleLevel()).to.eq(2);
   });
 });

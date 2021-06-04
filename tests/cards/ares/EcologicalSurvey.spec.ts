@@ -2,7 +2,10 @@ import {EcologicalSurvey} from '../../../src/cards/ares/EcologicalSurvey';
 import {Game} from '../../../src/Game';
 import {Player} from '../../../src/Player';
 import {expect} from 'chai';
-import {ARES_OPTIONS_NO_HAZARDS, AresTestHelper} from '../../ares/AresTestHelper';
+import {
+  ARES_OPTIONS_NO_HAZARDS,
+  AresTestHelper,
+} from '../../ares/AresTestHelper';
 import {TileType} from '../../../src/TileType';
 import {Ants} from '../../../src/cards/base/Ants';
 import {Pets} from '../../../src/cards/base/Pets';
@@ -14,21 +17,26 @@ import {Phase} from '../../../src/Phase';
 import {TestingUtils} from '../../TestingUtils';
 import {TestPlayers} from '../../TestPlayers';
 
-describe('EcologicalSurvey', function() {
-  let card : EcologicalSurvey;
-  let player : Player;
-  let redPlayer : Player;
-  let game : Game;
+describe('EcologicalSurvey', function () {
+  let card: EcologicalSurvey;
+  let player: Player;
+  let redPlayer: Player;
+  let game: Game;
 
-  beforeEach(function() {
+  beforeEach(function () {
     card = new EcologicalSurvey();
     player = TestPlayers.BLUE.newPlayer();
     redPlayer = TestPlayers.RED.newPlayer();
-    game = Game.newInstance('foobar', [player, redPlayer], player, ARES_OPTIONS_NO_HAZARDS);
+    game = Game.newInstance(
+      'foobar',
+      [player, redPlayer],
+      player,
+      ARES_OPTIONS_NO_HAZARDS
+    );
     game.board = EmptyBoard.newInstance();
   });
 
-  it('Can play', function() {
+  it('Can play', function () {
     AresTestHelper.addGreenery(player);
     expect(card.canPlay(player)).is.false;
 
@@ -41,22 +49,23 @@ describe('EcologicalSurvey', function() {
 
   // This doesn't test anything about this card, but about the behavior this card provides, from
   // AresHandler.
-  it('Bonus in the field', function() {
+  it('Bonus in the field', function () {
     // tile types in this test are irrelevant.
     // What's key is that this space has a weird behavior - it grants all the bonuses.
     // Only three of them will grant additional bonuses: plants, animals, and microbes.
     const firstSpace = game.board.getAvailableSpacesOnLand(player)[0];
-    firstSpace.adjacency = {bonus: [
-      SpaceBonus.TITANIUM,
-      SpaceBonus.STEEL,
-      SpaceBonus.PLANT,
-      SpaceBonus.DRAW_CARD,
-      SpaceBonus.HEAT,
-      SpaceBonus.MEGACREDITS,
-      SpaceBonus.ANIMAL,
-      SpaceBonus.MICROBE,
-      SpaceBonus.POWER,
-    ],
+    firstSpace.adjacency = {
+      bonus: [
+        SpaceBonus.TITANIUM,
+        SpaceBonus.STEEL,
+        SpaceBonus.PLANT,
+        SpaceBonus.DRAW_CARD,
+        SpaceBonus.HEAT,
+        SpaceBonus.MEGACREDITS,
+        SpaceBonus.ANIMAL,
+        SpaceBonus.MICROBE,
+        SpaceBonus.POWER,
+      ],
     };
     firstSpace.player = player;
 
@@ -77,7 +86,9 @@ describe('EcologicalSurvey', function() {
     animalCard.resourceCount = 0;
 
     const adjacentSpace = game.board.getAdjacentSpaces(firstSpace)[0];
-    game.addTile(player, adjacentSpace.spaceType, adjacentSpace, {tileType: TileType.GREENERY});
+    game.addTile(player, adjacentSpace.spaceType, adjacentSpace, {
+      tileType: TileType.GREENERY,
+    });
     TestingUtils.runAllActions(game);
 
     expect(player.megaCredits).eq(2);
@@ -91,7 +102,7 @@ describe('EcologicalSurvey', function() {
     expect(animalCard.resourceCount).eq(2);
   });
 
-  it('Bonus granted with Arctic Algae', function() {
+  it('Bonus granted with Arctic Algae', function () {
     // Player has Arctic Algae, will grants two plants when anyone plays an ocean.
     player.playedCards.push(new ArcticAlgae());
     player.playedCards.push(new EcologicalSurvey());
@@ -101,12 +112,14 @@ describe('EcologicalSurvey', function() {
     game.board.spaces[5].bonus = [];
 
     player.plants = 0;
-    game.addTile(player, SpaceType.OCEAN, game.board.spaces[5], {tileType: TileType.OCEAN});
+    game.addTile(player, SpaceType.OCEAN, game.board.spaces[5], {
+      tileType: TileType.OCEAN,
+    });
     TestingUtils.runAllActions(game);
     expect(player.plants).eq(3);
   });
 
-  it('Bonus granted with Arctic Algae not granted during WGT', function() {
+  it('Bonus granted with Arctic Algae not granted during WGT', function () {
     // Player has Arctic Algae, will grants two plants when anyone plays an ocean.
     player.playedCards.push(new ArcticAlgae());
     player.playedCards.push(new EcologicalSurvey());
@@ -117,7 +130,9 @@ describe('EcologicalSurvey', function() {
 
     game.phase = Phase.SOLAR;
     player.plants = 0;
-    game.addTile(player, SpaceType.OCEAN, game.board.spaces[5], {tileType: TileType.OCEAN});
+    game.addTile(player, SpaceType.OCEAN, game.board.spaces[5], {
+      tileType: TileType.OCEAN,
+    });
     TestingUtils.runAllActions(game);
     expect(player.plants).eq(2);
   });

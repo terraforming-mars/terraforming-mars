@@ -49,7 +49,7 @@ export const Sidebar = Vue.component('sidebar', {
       type: Object as () => MoonModel,
     },
     turmoil: {
-      type: Object as () => TurmoilModel || undefined,
+      type: (Object as () => TurmoilModel) || undefined,
     },
     lastSoloGeneration: {
       type: Number,
@@ -62,7 +62,7 @@ export const Sidebar = Vue.component('sidebar', {
     'preferences-dialog': PreferencesDialog,
   },
   mixins: [TranslateMixin],
-  data: function() {
+  data: function () {
     return {
       'ui': {
         'preferences_panel_open': false,
@@ -87,23 +87,29 @@ export const Sidebar = Vue.component('sidebar', {
     };
   },
   methods: {
-    getPlayerColorCubeClass: function(): string {
-      return this.acting_player && (PreferencesManager.loadBoolean('hide_animated_sidebar') === false) ? 'preferences_player_inner active' : 'preferences_player_inner';
+    getPlayerColorCubeClass: function (): string {
+      return this.acting_player &&
+        PreferencesManager.loadBoolean('hide_animated_sidebar') === false
+        ? 'preferences_player_inner active'
+        : 'preferences_player_inner';
     },
-    getSideBarClass: function(): string {
-      return this.acting_player && (PreferencesManager.loadBoolean('hide_animated_sidebar') === false) ? 'preferences_acting_player' : 'preferences_nonacting_player';
+    getSideBarClass: function (): string {
+      return this.acting_player &&
+        PreferencesManager.loadBoolean('hide_animated_sidebar') === false
+        ? 'preferences_acting_player'
+        : 'preferences_nonacting_player';
     },
-    getGenMarker: function(): string {
+    getGenMarker: function (): string {
       return `${this.generation}`;
     },
-    rulingPartyToCss: function(): string {
+    rulingPartyToCss: function (): string {
       if (this.turmoil.ruling === undefined) {
         console.warn('no party provided');
         return '';
       }
       return this.turmoil.ruling.toLowerCase().split(' ').join('_');
     },
-    getRulingParty: function(): string {
+    getRulingParty: function (): string {
       const rulingPartyName = this.turmoil.ruling;
       if (rulingPartyName === PartyName.MARS) {
         return 'Mars';

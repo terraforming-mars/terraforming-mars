@@ -5,7 +5,6 @@ import {ICardFactory} from './cards/ICardFactory';
 const CARD_RENAMES = new Map<string, CardName>([
   // When renaming a card, add the rename here (like the example below), and add a TODO (like the example below)
   // And remember to add a test in Deck.spec.ts.
-
   // TODO(yournamehere): remove after 2021-04-05
   // ['Earth Embasy', CardName.EARTH_EMBASSY],
 ]);

@@ -56,4 +56,3 @@ describe('LunaConference', () => {
     expect(player.megaCredits).eq(6);
   });
 });
-

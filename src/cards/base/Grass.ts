@@ -22,7 +22,8 @@ export class Grass extends Card implements IProjectCard {
         renderData: CardRenderer.builder((b) => {
           b.production((pb) => pb.plants(1)).plants(3);
         }),
-        description: 'Requires -16° C or warmer. Increase your plant production 1 step. Gain 3 plants.',
+        description:
+          'Requires -16° C or warmer. Increase your plant production 1 step. Gain 3 plants.',
       },
     });
   }

@@ -4,8 +4,8 @@ import {Game} from '../../../src/Game';
 import {Resources} from '../../../src/Resources';
 import {TestPlayers} from '../../TestPlayers';
 
-describe('Aphrodite', function() {
-  it('Should play', function() {
+describe('Aphrodite', function () {
+  it('Should play', function () {
     const card = new Aphrodite();
     const player = TestPlayers.BLUE.newPlayer();
     const player2 = TestPlayers.RED.newPlayer();

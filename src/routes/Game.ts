@@ -25,16 +25,24 @@ export class GameHandler extends Handler {
     return prefix + Math.floor(Math.random() * Math.pow(16, 12)).toString(16);
   }
 
-  public get(req: http.IncomingMessage, res: http.ServerResponse, ctx: IContext): void {
+  public get(
+    req: http.IncomingMessage,
+    res: http.ServerResponse,
+    ctx: IContext
+  ): void {
     req.url = '/assets/index.html';
     ServeAsset.INSTANCE.get(req, res, ctx);
   }
 
   // TODO(kberg): much of this code can be moved outside of handler, and that
   // would be better.
-  public put(req: http.IncomingMessage, res: http.ServerResponse, ctx: IContext): void {
+  public put(
+    req: http.IncomingMessage,
+    res: http.ServerResponse,
+    ctx: IContext
+  ): void {
     let body = '';
-    req.on('data', function(data) {
+    req.on('data', function (data) {
       body += data.toString();
     });
     req.once('end', () => {
@@ -48,7 +56,7 @@ export class GameHandler extends Handler {
             obj.color,
             obj.beginner,
             Number(obj.handicap), // For some reason handicap is coming up a string.
-            this.generateRandomId('p'),
+            this.generateRandomId('p')
           );
         });
         let firstPlayerIdx: number = 0;
@@ -102,22 +110,44 @@ export class GameHandler extends Handler {
           requiresMoonTrackCompletion: gameReq.requiresMoonTrackCompletion,
         };
 
-        if (gameOptions.clonedGamedId !== undefined && !gameOptions.clonedGamedId.startsWith('#')) {
-          Database.getInstance().loadCloneableGame(gameOptions.clonedGamedId, (err, serialized) => {
-            Cloner.clone(gameId, players, firstPlayerIdx, err, serialized, (err, game) => {
-              if (err) {
-                throw err;
-              }
-              if (game === undefined) {
-                throw new Error(`game ${gameOptions.clonedGamedId} not cloned`); // how to nest errs in the way Java nests exceptions?
-              }
-              GameLoader.getInstance().add(game);
-              ctx.route.writeJson(res, Server.getGameModel(game));
-            });
-          });
+        if (
+          gameOptions.clonedGamedId !== undefined &&
+          !gameOptions.clonedGamedId.startsWith('#')
+        ) {
+          Database.getInstance().loadCloneableGame(
+            gameOptions.clonedGamedId,
+            (err, serialized) => {
+              Cloner.clone(
+                gameId,
+                players,
+                firstPlayerIdx,
+                err,
+                serialized,
+                (err, game) => {
+                  if (err) {
+                    throw err;
+                  }
+                  if (game === undefined) {
+                    throw new Error(
+                      `game ${gameOptions.clonedGamedId} not cloned`
+                    ); // how to nest errs in the way Java nests exceptions?
+                  }
+                  GameLoader.getInstance().add(game);
+                  ctx.route.writeJson(res, Server.getGameModel(game));
+                }
+              );
+            }
+          );
         } else {
           const seed = Math.random();
-          const game = Game.newInstance(gameId, players, players[firstPlayerIdx], gameOptions, seed, spectatorId);
+          const game = Game.newInstance(
+            gameId,
+            players,
+            players[firstPlayerIdx],
+            gameOptions,
+            seed,
+            spectatorId
+          );
           GameLoader.getInstance().add(game);
           ctx.route.writeJson(res, Server.getGameModel(game));
         }

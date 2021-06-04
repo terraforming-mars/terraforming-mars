@@ -8,7 +8,10 @@ import {CardName} from '../../CardName';
 import {CardRequirements} from '../CardRequirements';
 import {CardRenderer} from '../render/CardRenderer';
 
-export class SubCrustMeasurements extends Card implements IActionCard, IProjectCard {
+export class SubCrustMeasurements
+  extends Card
+  implements IActionCard, IProjectCard
+{
   constructor() {
     super({
       cardType: CardType.ACTIVE,

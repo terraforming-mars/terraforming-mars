@@ -1,4 +1,7 @@
-export const playerColorClass = (color: string, type: 'shadow' | 'bg' | 'bg_transparent'): string => {
+export const playerColorClass = (
+  color: string,
+  type: 'shadow' | 'bg' | 'bg_transparent'
+): string => {
   const prefix = {
     shadow: 'player_shadow_color_',
     bg_transparent: 'player_translucent_bg_color_',
@@ -9,4 +12,5 @@ export const playerColorClass = (color: string, type: 'shadow' | 'bg' | 'bg_tran
 };
 
 export const range = (n: number): Array<number> => Array.from(Array(n).keys());
-export const generateClassString = (classes: Array<string>): string => classes.join(' ').trimStart();
+export const generateClassString = (classes: Array<string>): string =>
+  classes.join(' ').trimStart();

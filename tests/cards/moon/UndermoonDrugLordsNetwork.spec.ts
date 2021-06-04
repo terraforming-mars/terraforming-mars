@@ -48,4 +48,3 @@ describe('UndermoonDrugLordsNetwork', () => {
     expect(player.getProduction(Resources.MEGACREDITS)).eq(2);
   });
 });
-

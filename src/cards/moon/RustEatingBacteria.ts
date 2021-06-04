@@ -10,7 +10,10 @@ import {Card} from '../Card';
 import {CardRenderDynamicVictoryPoints} from '../render/CardRenderDynamicVictoryPoints';
 import {Resources} from '../../Resources';
 
-export class RustEatingBacteria extends Card implements IActionCard, IProjectCard {
+export class RustEatingBacteria
+  extends Card
+  implements IActionCard, IProjectCard
+{
   constructor() {
     super({
       name: CardName.RUST_EATING_BACTERIA,
@@ -30,7 +33,7 @@ export class RustEatingBacteria extends Card implements IActionCard, IProjectCar
         }),
       },
     });
-  };
+  }
 
   public resourceCount = 0;
 

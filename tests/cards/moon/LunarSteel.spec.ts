@@ -23,4 +23,3 @@ describe('LunarSteel', () => {
     expect(player.getSteelValue()).to.eq(3);
   });
 });
-

@@ -4,8 +4,8 @@ import {Game} from '../../../src/Game';
 import {Resources} from '../../../src/Resources';
 import {TestPlayers} from '../../TestPlayers';
 
-describe('InvestmentLoan', function() {
-  it('Should play', function() {
+describe('InvestmentLoan', function () {
+  it('Should play', function () {
     const card = new InvestmentLoan();
     const player = TestPlayers.BLUE.newPlayer();
     const redPlayer = TestPlayers.RED.newPlayer();

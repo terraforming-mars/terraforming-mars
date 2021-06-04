@@ -20,7 +20,12 @@ describe('OffWorldCityLiving', () => {
   beforeEach(() => {
     player = TestPlayers.BLUE.newPlayer();
     // Adding a vestigial player to avoid the two starting cities.
-    const game = Game.newInstance('id', [player, TestPlayers.RED.newPlayer()], player, MOON_OPTIONS);
+    const game = Game.newInstance(
+      'id',
+      [player, TestPlayers.RED.newPlayer()],
+      player,
+      MOON_OPTIONS
+    );
     card = new OffWorldCityLiving();
     moonData = MoonExpansion.moonData(game);
   });
@@ -37,7 +42,9 @@ describe('OffWorldCityLiving', () => {
     expect(player.getTerraformRating()).eq(20);
     expect(player.getProduction(Resources.MEGACREDITS)).eq(0);
 
-    const colonySpaces = player.game.board.spaces.filter((s) => s.spaceType === SpaceType.COLONY);
+    const colonySpaces = player.game.board.spaces.filter(
+      (s) => s.spaceType === SpaceType.COLONY
+    );
     colonySpaces[0].tile = {tileType: TileType.CITY};
     colonySpaces[1].tile = {tileType: TileType.CITY};
 
@@ -55,7 +62,9 @@ describe('OffWorldCityLiving', () => {
 
   it('getVictoryPoints', () => {
     expect(card.getVictoryPoints(player)).eq(0);
-    const colonySpaces = player.game.board.spaces.filter((s) => s.spaceType === SpaceType.COLONY);
+    const colonySpaces = player.game.board.spaces.filter(
+      (s) => s.spaceType === SpaceType.COLONY
+    );
     colonySpaces[0].tile = {tileType: TileType.CITY};
     expect(card.getVictoryPoints(player)).eq(0);
     colonySpaces[1].tile = {tileType: TileType.CITY};
@@ -72,4 +81,3 @@ describe('OffWorldCityLiving', () => {
     expect(card.getVictoryPoints(player)).eq(2);
   });
 });
-

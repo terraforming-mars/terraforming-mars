@@ -3,8 +3,8 @@ import {Biofuels} from '../../../src/cards/prelude/Biofuels';
 import {Resources} from '../../../src/Resources';
 import {TestPlayers} from '../../TestPlayers';
 
-describe('Biofuels', function() {
-  it('Should play', function() {
+describe('Biofuels', function () {
+  it('Should play', function () {
     const card = new Biofuels();
     const player = TestPlayers.BLUE.newPlayer();
     const action = card.play(player);

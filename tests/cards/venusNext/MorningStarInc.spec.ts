@@ -4,8 +4,8 @@ import {MorningStarInc} from '../../../src/cards/venusNext/MorningStarInc';
 import {Game} from '../../../src/Game';
 import {TestPlayers} from '../../TestPlayers';
 
-describe('MorningStarInc', function() {
-  it('Should play', function() {
+describe('MorningStarInc', function () {
+  it('Should play', function () {
     const corp = new MorningStarInc();
     const card = new IshtarMining();
     const player = TestPlayers.BLUE.newPlayer();

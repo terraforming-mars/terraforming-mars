@@ -23,22 +23,28 @@ export class VenusianAnimals extends Card implements IResourceCard {
       metadata: {
         cardNumber: '259',
         renderData: CardRenderer.builder((b) => {
-          b.effect('When you play a Science tag, including this, add 1 Animal to this card.', (eb)=> {
-            eb.science().played.startEffect.animals(1);
-          }).br;
+          b.effect(
+            'When you play a Science tag, including this, add 1 Animal to this card.',
+            (eb) => {
+              eb.science().played.startEffect.animals(1);
+            }
+          ).br;
           b.vpText('1 VP per Animal on this card.');
         }),
         description: 'Requires Venus 18%',
         victoryPoints: CardRenderDynamicVictoryPoints.animals(1, 1),
       },
     });
-  };
+  }
   public resourceCount: number = 0;
   public play() {
     return undefined;
   }
   public onCardPlayed(player: Player, card: IProjectCard): void {
-    player.addResourceTo(this, card.tags.filter((tag) => tag === Tags.SCIENCE).length);
+    player.addResourceTo(
+      this,
+      card.tags.filter((tag) => tag === Tags.SCIENCE).length
+    );
   }
   public getVictoryPoints(): number {
     return this.resourceCount;

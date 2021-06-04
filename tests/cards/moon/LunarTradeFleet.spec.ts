@@ -44,4 +44,3 @@ describe('LunarTradeFleet', () => {
     expect(player.getTerraformRating()).eq(15);
   });
 });
-

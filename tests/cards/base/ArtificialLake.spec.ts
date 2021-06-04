@@ -8,37 +8,42 @@ import {SpaceType} from '../../../src/SpaceType';
 import {TileType} from '../../../src/TileType';
 import {TestPlayers} from '../../TestPlayers';
 
-describe('ArtificialLake', function() {
-  let card : ArtificialLake; let player : TestPlayer; let game : Game;
+describe('ArtificialLake', function () {
+  let card: ArtificialLake;
+  let player: TestPlayer;
+  let game: Game;
 
-  beforeEach(function() {
+  beforeEach(function () {
     card = new ArtificialLake();
     player = TestPlayers.BLUE.newPlayer();
     const redPlayer = TestPlayers.RED.newPlayer();
     game = Game.newInstance('foobar', [player, redPlayer], player);
   });
 
-  it('Can\'t play', function() {
+  it("Can't play", function () {
     expect(card.canPlay(player)).is.not.true;
   });
 
-  it('Should play', function() {
+  it('Should play', function () {
     const action = card.play(player);
     expect(action instanceof SelectSpace).is.true;
 
-        action!.availableSpaces.forEach((space) => {
-          expect(space.spaceType).to.eq(SpaceType.LAND);
-        });
+    action!.availableSpaces.forEach((space) => {
+      expect(space.spaceType).to.eq(SpaceType.LAND);
+    });
 
-        action!.cb(action!.availableSpaces[0]);
-        const placedTile = action!.availableSpaces[0].tile;
-        expect(placedTile!.tileType).to.eq(TileType.OCEAN);
+    action!.cb(action!.availableSpaces[0]);
+    const placedTile = action!.availableSpaces[0].tile;
+    expect(placedTile!.tileType).to.eq(TileType.OCEAN);
 
-        player.victoryPointsBreakdown.setVictoryPoints('victoryPoints', card.getVictoryPoints());
-        expect(player.victoryPointsBreakdown.victoryPoints).to.eq(1);
+    player.victoryPointsBreakdown.setVictoryPoints(
+      'victoryPoints',
+      card.getVictoryPoints()
+    );
+    expect(player.victoryPointsBreakdown.victoryPoints).to.eq(1);
   });
 
-  it('Cannot place ocean if all oceans are already placed', function() {
+  it('Cannot place ocean if all oceans are already placed', function () {
     // Set temperature level to fit requirements
     (game as any).temperature = -6;
 

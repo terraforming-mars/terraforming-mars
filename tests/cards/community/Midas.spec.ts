@@ -3,15 +3,16 @@ import {Midas} from '../../../src/cards/community/Midas';
 import {Player} from '../../../src/Player';
 import {TestPlayers} from '../../TestPlayers';
 
-describe('Midas', function() {
-  let card : Midas; let player : Player;
+describe('Midas', function () {
+  let card: Midas;
+  let player: Player;
 
-  beforeEach(function() {
+  beforeEach(function () {
     card = new Midas();
     player = TestPlayers.BLUE.newPlayer();
   });
 
-  it('Starts with correct TR', function() {
+  it('Starts with correct TR', function () {
     const initialTR = player.getTerraformRating();
 
     card.play(player);

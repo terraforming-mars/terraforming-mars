@@ -13,7 +13,10 @@ import {REDS_RULING_POLICY_COST} from '../../constants';
 import {CardRenderer} from '../render/CardRenderer';
 import {Card} from '../Card';
 
-export class TitanAirScrapping extends Card implements IProjectCard, IResourceCard {
+export class TitanAirScrapping
+  extends Card
+  implements IProjectCard, IResourceCard
+{
   constructor() {
     super({
       cost: 21,
@@ -29,9 +32,12 @@ export class TitanAirScrapping extends Card implements IProjectCard, IResourceCa
             eb.titanium(1).startAction.floaters(2);
           }).br;
           b.or().br;
-          b.action('Spend 2 floaters here to increase your TR 1 step.', (eb) => {
-            eb.floaters(2).startAction.tr(1);
-          });
+          b.action(
+            'Spend 2 floaters here to increase your TR 1 step.',
+            (eb) => {
+              eb.floaters(2).startAction.tr(1);
+            }
+          );
         }),
         victoryPoints: 2,
       },
@@ -45,7 +51,10 @@ export class TitanAirScrapping extends Card implements IProjectCard, IResourceCa
     const hasResources = this.resourceCount >= 2;
 
     if (PartyHooks.shouldApplyPolicy(player.game, PartyName.REDS)) {
-      return hasTitanium || (player.canAfford(REDS_RULING_POLICY_COST) && hasResources);
+      return (
+        hasTitanium ||
+        (player.canAfford(REDS_RULING_POLICY_COST) && hasResources)
+      );
     }
 
     return hasTitanium || hasResources;
@@ -54,12 +63,26 @@ export class TitanAirScrapping extends Card implements IProjectCard, IResourceCa
   public action(player: Player) {
     const opts: Array<SelectOption> = [];
 
-    const addResource = new SelectOption('Spend 1 titanium to add 2 floaters on this card', 'Spend titanium', () => this.addResource(player));
-    const spendResource = new SelectOption('Remove 2 floaters on this card to increase your TR 1 step', 'Remove floaters', () => this.spendResource(player));
+    const addResource = new SelectOption(
+      'Spend 1 titanium to add 2 floaters on this card',
+      'Spend titanium',
+      () => this.addResource(player)
+    );
+    const spendResource = new SelectOption(
+      'Remove 2 floaters on this card to increase your TR 1 step',
+      'Remove floaters',
+      () => this.spendResource(player)
+    );
 
     if (this.resourceCount >= 2 && player.titanium > 0) {
-      const redsAreRuling = PartyHooks.shouldApplyPolicy(player.game, PartyName.REDS);
-      if (!redsAreRuling || (redsAreRuling && player.canAfford(REDS_RULING_POLICY_COST))) {
+      const redsAreRuling = PartyHooks.shouldApplyPolicy(
+        player.game,
+        PartyName.REDS
+      );
+      if (
+        !redsAreRuling ||
+        (redsAreRuling && player.canAfford(REDS_RULING_POLICY_COST))
+      ) {
         opts.push(spendResource);
       }
       opts.push(addResource);

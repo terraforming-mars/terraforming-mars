@@ -18,7 +18,8 @@ export class CrashSiteCleanup extends Card implements IProjectCard {
 
       requirements: CardRequirements.builder((b) => b.plantsRemoved()),
       metadata: {
-        description: 'Requires that a player removed ANOTHER PLAYER\'s plants this generation. Gain 1 titanium or 2 steel.',
+        description:
+          "Requires that a player removed ANOTHER PLAYER's plants this generation. Gain 1 titanium or 2 steel.",
         cardNumber: 'X17',
         renderData: CardRenderer.builder((b) => {
           b.titanium(1).nbsp.or().nbsp.steel(2);
@@ -35,22 +36,23 @@ export class CrashSiteCleanup extends Card implements IProjectCard {
       () => {
         player.addResource(Resources.TITANIUM, 1, {log: true});
         return undefined;
-      },
+      }
     );
 
-    const gain2Steel = new SelectOption(
-      'Gain 2 steel',
-      'Gain steel',
-      () => {
-        player.addResource(Resources.STEEL, 2, {log: true});
-        return undefined;
-      },
-    );
+    const gain2Steel = new SelectOption('Gain 2 steel', 'Gain steel', () => {
+      player.addResource(Resources.STEEL, 2, {log: true});
+      return undefined;
+    });
 
     return new OrOptions(gainTitanium, gain2Steel);
   }
 
-  public static resourceHook(player: Player, resource: Resources, amount: number, from: Player) {
+  public static resourceHook(
+    player: Player,
+    resource: Resources,
+    amount: number,
+    from: Player
+  ) {
     if (from === player || amount >= 0) {
       return;
     }
@@ -63,4 +65,3 @@ export class CrashSiteCleanup extends Card implements IProjectCard {
     return 1;
   }
 }
-

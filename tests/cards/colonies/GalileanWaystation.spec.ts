@@ -9,17 +9,19 @@ import {Player} from '../../../src/Player';
 import {Resources} from '../../../src/Resources';
 import {TestPlayers} from '../../TestPlayers';
 
-describe('GalileanWaystation', function() {
-  let card : GalileanWaystation; let player : Player; let player2: Player;
+describe('GalileanWaystation', function () {
+  let card: GalileanWaystation;
+  let player: Player;
+  let player2: Player;
 
-  beforeEach(function() {
+  beforeEach(function () {
     card = new GalileanWaystation();
     player = TestPlayers.BLUE.newPlayer();
     player2 = TestPlayers.RED.newPlayer();
     Game.newInstance('foobar', [player, player2], player);
   });
 
-  it('Should play', function() {
+  it('Should play', function () {
     const card2 = new ColonizerTrainingCamp();
     const card3 = new MethaneFromTitan();
     player.playedCards.push(card2);
@@ -29,7 +31,7 @@ describe('GalileanWaystation', function() {
     expect(player.getProduction(Resources.MEGACREDITS)).to.eq(2);
   });
 
-  it('Corectly counts wildtags', function() {
+  it('Corectly counts wildtags', function () {
     const card2 = new ColonizerTrainingCamp();
     const card3 = new MethaneFromTitan();
     const researchCoordination = new ResearchCoordination();

@@ -13,18 +13,26 @@ export class CityStandardProject extends StandardProjectCard {
       metadata: {
         cardNumber: 'SP4',
         renderData: CardRenderer.builder((b) =>
-          b.standardProject('Spend 25 M€ to place a city tile and increase your M€ production 1 step.', (eb) => {
-            eb.megacredits(25).startAction.city().production((pb) => {
-              pb.megacredits(1);
-            });
-          }),
+          b.standardProject(
+            'Spend 25 M€ to place a city tile and increase your M€ production 1 step.',
+            (eb) => {
+              eb.megacredits(25)
+                .startAction.city()
+                .production((pb) => {
+                  pb.megacredits(1);
+                });
+            }
+          )
         ),
       },
     });
   }
 
   public canAct(player: Player): boolean {
-    return player.canAfford(this.cost) && player.game.board.getAvailableSpacesForCity(player).length > 0;
+    return (
+      player.canAfford(this.cost) &&
+      player.game.board.getAvailableSpacesForCity(player).length > 0
+    );
   }
 
   actionEssence(player: Player): void {

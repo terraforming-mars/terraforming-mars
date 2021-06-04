@@ -5,8 +5,8 @@ import {Resources} from '../../../src/Resources';
 import {TestingUtils} from '../../TestingUtils';
 import {TestPlayers} from '../../TestPlayers';
 
-describe('LunaMetropolis', function() {
-  it('Should play', function() {
+describe('LunaMetropolis', function () {
+  it('Should play', function () {
     const card = new LunaMetropolis();
     const player = TestPlayers.BLUE.newPlayer();
     const redPlayer = TestPlayers.RED.newPlayer();

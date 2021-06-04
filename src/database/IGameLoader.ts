@@ -9,7 +9,10 @@ type LoadCallback = (game: Game | undefined) => void;
  */
 export interface IGameLoader {
   add(game: Game): void;
-  getLoadedGameIds(): Array<{id: GameId, participants: Array<SpectatorId | PlayerId>}>;
+  getLoadedGameIds(): Array<{
+    id: GameId;
+    participants: Array<SpectatorId | PlayerId>;
+  }>;
   /**
    * Gets a game from javascript memory or pulls from database if needed.
    * @param {GameId} gameId the id of the game to retrieve

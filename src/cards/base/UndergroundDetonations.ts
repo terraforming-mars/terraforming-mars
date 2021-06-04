@@ -9,7 +9,10 @@ import {CardName} from '../../CardName';
 import {SelectHowToPayDeferred} from '../../deferredActions/SelectHowToPayDeferred';
 import {CardRenderer} from '../render/CardRenderer';
 
-export class UndergroundDetonations extends Card implements IActionCard, IProjectCard {
+export class UndergroundDetonations
+  extends Card
+  implements IActionCard, IProjectCard
+{
   constructor() {
     super({
       cardType: CardType.ACTIVE,
@@ -20,9 +23,12 @@ export class UndergroundDetonations extends Card implements IActionCard, IProjec
       metadata: {
         cardNumber: '202',
         renderData: CardRenderer.builder((b) => {
-          b.action('Spend 10M€ to increase your heat production 2 steps.', (eb) => {
-            eb.megacredits(10).startAction.production((pb)=>pb.heat(2));
-          });
+          b.action(
+            'Spend 10M€ to increase your heat production 2 steps.',
+            (eb) => {
+              eb.megacredits(10).startAction.production((pb) => pb.heat(2));
+            }
+          );
         }),
       },
     });
@@ -31,7 +37,11 @@ export class UndergroundDetonations extends Card implements IActionCard, IProjec
     return player.canAfford(10);
   }
   public action(player: Player) {
-    player.game.defer(new SelectHowToPayDeferred(player, 10, {title: 'Select how to pay for action'}));
+    player.game.defer(
+      new SelectHowToPayDeferred(player, 10, {
+        title: 'Select how to pay for action',
+      })
+    );
     player.addProduction(Resources.HEAT, 2);
     return undefined;
   }

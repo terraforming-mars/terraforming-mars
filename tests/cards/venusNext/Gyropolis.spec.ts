@@ -8,8 +8,8 @@ import {Resources} from '../../../src/Resources';
 import {TileType} from '../../../src/TileType';
 import {TestPlayers} from '../../TestPlayers';
 
-describe('Gyropolis', function() {
-  it('Should play', function() {
+describe('Gyropolis', function () {
+  it('Should play', function () {
     const card = new Gyropolis();
     const player = TestPlayers.BLUE.newPlayer();
     const redPlayer = TestPlayers.RED.newPlayer();

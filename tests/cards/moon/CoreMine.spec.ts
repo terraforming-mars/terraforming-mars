@@ -38,4 +38,3 @@ describe('CoreMine', () => {
     expect(player.getTerraformRating()).eq(15);
   });
 });
-

@@ -22,7 +22,8 @@ export class Trees extends Card implements IProjectCard {
         renderData: CardRenderer.builder((b) => {
           b.production((pb) => pb.plants(3)).plants(1);
         }),
-        description: 'Requires -4 C or warmer. Increase your Plant production 3 steps. Gain 1 Plant.',
+        description:
+          'Requires -4 C or warmer. Increase your Plant production 3 steps. Gain 1 Plant.',
         victoryPoints: 1,
       },
     });

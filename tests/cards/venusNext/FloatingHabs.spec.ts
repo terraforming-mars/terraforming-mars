@@ -8,28 +8,30 @@ import {SelectCard} from '../../../src/inputs/SelectCard';
 import {Player} from '../../../src/Player';
 import {TestPlayers} from '../../TestPlayers';
 
-describe('FloatingHabs', function() {
-  let card : FloatingHabs; let player : Player; let game : Game;
+describe('FloatingHabs', function () {
+  let card: FloatingHabs;
+  let player: Player;
+  let game: Game;
 
-  beforeEach(function() {
+  beforeEach(function () {
     card = new FloatingHabs();
     player = TestPlayers.BLUE.newPlayer();
     const redPlayer = TestPlayers.RED.newPlayer();
     game = Game.newInstance('foobar', [player, redPlayer], player);
   });
 
-  it('Can\'t play', function() {
+  it("Can't play", function () {
     expect(card.canPlay(player)).is.not.true;
   });
 
-  it('Should play', function() {
+  it('Should play', function () {
     player.playedCards.push(new Research());
     expect(card.canPlay(player)).is.true;
     const action = card.play();
     expect(action).is.undefined;
   });
 
-  it('Should act - single target', function() {
+  it('Should act - single target', function () {
     player.playedCards.push(card);
     player.megaCredits = 10;
 
@@ -39,7 +41,7 @@ describe('FloatingHabs', function() {
     expect(player.megaCredits).to.eq(8);
   });
 
-  it('Should act - multiple targets', function() {
+  it('Should act - multiple targets', function () {
     player.playedCards.push(card, new Dirigibles());
     player.megaCredits = 10;
     const action = card.action(player);
@@ -51,7 +53,7 @@ describe('FloatingHabs', function() {
     expect(player.megaCredits).to.eq(8);
   });
 
-  it('Gives victory points', function() {
+  it('Gives victory points', function () {
     player.addResourceTo(card, 5);
     expect(card.getVictoryPoints()).to.eq(2);
   });

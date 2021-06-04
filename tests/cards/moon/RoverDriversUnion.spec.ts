@@ -53,4 +53,3 @@ describe('RoverDriversUnion', () => {
     expect(player.getProduction(Resources.MEGACREDITS)).eq(4);
   });
 });
-

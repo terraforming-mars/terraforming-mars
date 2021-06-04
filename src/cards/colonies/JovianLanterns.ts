@@ -14,7 +14,10 @@ import {Card} from '../Card';
 import {CardRenderDynamicVictoryPoints} from '../render/CardRenderDynamicVictoryPoints';
 import {CardRenderer} from '../render/CardRenderer';
 
-export class JovianLanterns extends Card implements IProjectCard, IResourceCard {
+export class JovianLanterns
+  extends Card
+  implements IProjectCard, IResourceCard
+{
   constructor() {
     super({
       cost: 20,
@@ -50,7 +53,9 @@ export class JovianLanterns extends Card implements IProjectCard, IResourceCard 
     }
 
     if (PartyHooks.shouldApplyPolicy(player.game, PartyName.REDS)) {
-      return player.canAfford(player.getCardCost(this) + REDS_RULING_POLICY_COST);
+      return player.canAfford(
+        player.getCardCost(this) + REDS_RULING_POLICY_COST
+      );
     }
 
     return true;
@@ -67,7 +72,9 @@ export class JovianLanterns extends Card implements IProjectCard, IResourceCard 
   }
 
   public play(player: Player) {
-    player.game.defer(new AddResourcesToCard(player, ResourceType.FLOATER, {count: 2}));
+    player.game.defer(
+      new AddResourcesToCard(player, ResourceType.FLOATER, {count: 2})
+    );
     player.increaseTerraformRating();
     return undefined;
   }

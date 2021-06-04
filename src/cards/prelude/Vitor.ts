@@ -21,14 +21,18 @@ export class Vitor extends Card implements CorporationCard {
 
       metadata: {
         cardNumber: 'R35',
-        description: 'You start with 45 M€. As your first action, fund an award for free.',
+        description:
+          'You start with 45 M€. As your first action, fund an award for free.',
         renderData: CardRenderer.builder((b) => {
           b.br.br;
           b.megacredits(45).nbsp.award();
           b.corpBox('effect', (ce) => {
-            ce.effect('When you play a card with a NON-NEGATIVE VP icon, including this, gain 3 M€.', (eb) => {
-              eb.vpIcon().asterix().startEffect.megacredits(3);
-            });
+            ce.effect(
+              'When you play a card with a NON-NEGATIVE VP icon, including this, gain 3 M€.',
+              (eb) => {
+                eb.vpIcon().asterix().startEffect.megacredits(3);
+              }
+            );
           });
         }),
       },
@@ -53,14 +57,22 @@ export class Vitor extends Card implements CorporationCard {
     freeAward.buttonLabel = 'Confirm';
 
     // If Vitor isn't going first and someone else funds awards, filter them out.
-    const availableAwards = game.awards.filter((award) => !game.fundedAwards.map((fa) => fa.award).includes(award));
-    freeAward.options = availableAwards.map((award) => this.selectAwardToFund(player, award));
+    const availableAwards = game.awards.filter(
+      (award) => !game.fundedAwards.map((fa) => fa.award).includes(award)
+    );
+    freeAward.options = availableAwards.map((award) =>
+      this.selectAwardToFund(player, award)
+    );
 
     return freeAward;
   }
 
   public onCardPlayed(player: Player, card: IProjectCard) {
-    if (player.isCorporation(this.name) && card.getVictoryPoints !== undefined && card.getVictoryPoints(player) >= 0) {
+    if (
+      player.isCorporation(this.name) &&
+      card.getVictoryPoints !== undefined &&
+      card.getVictoryPoints(player) >= 0
+    ) {
       player.megaCredits += 3;
     }
   }

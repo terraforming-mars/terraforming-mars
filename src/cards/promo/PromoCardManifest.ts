@@ -53,7 +53,10 @@ export const PROMO_CARD_MANIFEST = new CardManifest({
   module: GameModule.Promo,
   projectCards: [
     {cardName: CardName.PENGUINS, Factory: Penguins},
-    {cardName: CardName.SELF_REPLICATING_ROBOTS, Factory: SelfReplicatingRobots},
+    {
+      cardName: CardName.SELF_REPLICATING_ROBOTS,
+      Factory: SelfReplicatingRobots,
+    },
     {cardName: CardName.SMALL_ASTEROID, Factory: SmallAsteroid},
     {cardName: CardName.SNOW_ALGAE, Factory: SnowAlgae},
     {cardName: CardName.DUSK_LASER_MINING, Factory: DuskLaserMining},
@@ -69,7 +72,10 @@ export const PROMO_CARD_MANIFEST = new CardManifest({
     {cardName: CardName.ASTEROID_HOLLOWING, Factory: AsteroidHollowing},
     {cardName: CardName.ASTEROID_RIGHTS, Factory: AsteroidRights},
     {cardName: CardName.COMET_AIMING, Factory: CometAiming},
-    {cardName: CardName.CUTTING_EDGE_TECHNOLOGY, Factory: CuttingEdgeTechnology},
+    {
+      cardName: CardName.CUTTING_EDGE_TECHNOLOGY,
+      Factory: CuttingEdgeTechnology,
+    },
     {cardName: CardName.CRASH_SITE_CLEANUP, Factory: CrashSiteCleanup},
     {cardName: CardName.DIRECTED_IMPACTORS, Factory: DirectedImpactors},
     {cardName: CardName.FIELD_CAPPED_CITY, Factory: FieldCappedCity},
@@ -80,14 +86,20 @@ export const PROMO_CARD_MANIFEST = new CardManifest({
     {cardName: CardName.JOVIAN_EMBASSY, Factory: JovianEmbassy},
     {cardName: CardName.TOPSOIL_CONTRACT, Factory: TopsoilContract},
     {cardName: CardName.IMPORTED_NUTRIENTS, Factory: ImportedNutrients},
-    {cardName: CardName.ASTEROID_DEFLECTION_SYSTEM, Factory: AsteroidDeflectionSystem},
+    {
+      cardName: CardName.ASTEROID_DEFLECTION_SYSTEM,
+      Factory: AsteroidDeflectionSystem,
+    },
     {cardName: CardName.SUB_CRUST_MEASUREMENTS, Factory: SubCrustMeasurements},
     {cardName: CardName.POTATOES, Factory: Potatoes},
     {cardName: CardName.MEAT_INDUSTRY, Factory: MeatIndustry},
     {cardName: CardName.ADVERTISING, Factory: Advertising},
     {cardName: CardName.DEIMOS_DOWN_PROMO, Factory: DeimosDownPromo},
     {cardName: CardName.GREAT_DAM_PROMO, Factory: GreatDamPromo},
-    {cardName: CardName.MAGNETIC_FIELD_GENERATORS_PROMO, Factory: MagneticFieldGeneratorsPromo},
+    {
+      cardName: CardName.MAGNETIC_FIELD_GENERATORS_PROMO,
+      Factory: MagneticFieldGeneratorsPromo,
+    },
     {cardName: CardName.SATURN_SURFING, Factory: SaturnSurfing},
     {cardName: CardName.BIO_PRINTING_FACILITY, Factory: BioPrintingFacility},
     {cardName: CardName.BACTOVIRAL_RESEARCH, Factory: BactoviralResearch},
@@ -96,7 +108,8 @@ export const PROMO_CARD_MANIFEST = new CardManifest({
   cardsToRemove: [
     CardName.DEIMOS_DOWN,
     CardName.GREAT_DAM,
-    CardName.MAGNETIC_FIELD_GENERATORS],
+    CardName.MAGNETIC_FIELD_GENERATORS,
+  ],
 
   corporationCards: [
     {cardName: CardName.ARCADIAN_COMMUNITIES, Factory: ArcadianCommunities},
@@ -107,4 +120,5 @@ export const PROMO_CARD_MANIFEST = new CardManifest({
     {cardName: CardName.MONS_INSURANCE, Factory: MonsInsurance},
     {cardName: CardName.RECYCLON, Factory: Recyclon},
     {cardName: CardName.SPLICE, Factory: Splice},
-  ]});
+  ],
+});

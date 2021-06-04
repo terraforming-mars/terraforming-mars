@@ -27,7 +27,7 @@ export const CardContent = Vue.component('CardContent', {
     CardRenderData,
   },
   methods: {
-    getClasses: function(): string {
+    getClasses: function (): string {
       const classes: Array<string> = ['card-content'];
       if (this.isCorporation) {
         classes.push('card-content-corporation');

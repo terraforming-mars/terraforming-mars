@@ -25,17 +25,22 @@ export class OrbitalReflectors extends Card {
             pb.heat(2);
           });
         }),
-        description: 'Raise Venus 2 steps. Increase your heat production 2 steps.',
+        description:
+          'Raise Venus 2 steps. Increase your heat production 2 steps.',
       },
     });
-  };
+  }
 
   public canPlay(player: Player): boolean {
-    const remainingVenusSteps = (MAX_VENUS_SCALE - player.game.getVenusScaleLevel()) / 2;
+    const remainingVenusSteps =
+      (MAX_VENUS_SCALE - player.game.getVenusScaleLevel()) / 2;
     const stepsRaised = Math.min(remainingVenusSteps, 2);
 
     if (PartyHooks.shouldApplyPolicy(player.game, PartyName.REDS)) {
-      return player.canAfford(player.getCardCost(this) + REDS_RULING_POLICY_COST * stepsRaised, {titanium: true, floaters: true});
+      return player.canAfford(
+        player.getCardCost(this) + REDS_RULING_POLICY_COST * stepsRaised,
+        {titanium: true, floaters: true}
+      );
     }
 
     return true;

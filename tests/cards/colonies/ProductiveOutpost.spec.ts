@@ -5,8 +5,8 @@ import {Triton} from '../../../src/colonies/Triton';
 import {Game} from '../../../src/Game';
 import {TestPlayers} from '../../TestPlayers';
 
-describe('ProductiveOutpost', function() {
-  it('Should play', function() {
+describe('ProductiveOutpost', function () {
+  it('Should play', function () {
     const card = new ProductiveOutpost();
     const player = TestPlayers.BLUE.newPlayer();
     const player2 = TestPlayers.RED.newPlayer();

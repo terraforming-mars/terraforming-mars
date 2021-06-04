@@ -35,13 +35,18 @@ export class MinorityRefuge extends Card implements IProjectCard {
     }
 
     const megaCreditsProduction = player.getProduction(Resources.MEGACREDITS);
-    if (megaCreditsProduction === -4 && player.isCorporation(CardName.POSEIDON)) {
+    if (
+      megaCreditsProduction === -4 &&
+      player.isCorporation(CardName.POSEIDON)
+    ) {
       return true;
     } else if (megaCreditsProduction <= -4) {
-      const lunaIsAvailable = player.game.colonies.some((colony) =>
-        colony.name === ColonyName.LUNA &&
-        colony.isColonyFull() === false &&
-        colony.colonies.includes(player.id) === false);
+      const lunaIsAvailable = player.game.colonies.some(
+        (colony) =>
+          colony.name === ColonyName.LUNA &&
+          colony.isColonyFull() === false &&
+          colony.colonies.includes(player.id) === false
+      );
 
       if (lunaIsAvailable === false) {
         return false;
@@ -53,10 +58,20 @@ export class MinorityRefuge extends Card implements IProjectCard {
   }
 
   public play(player: Player) {
-    const openColonies = player.getProduction(Resources.MEGACREDITS) <= -4 ?
-      player.game.colonies.filter((colony) => colony.name === ColonyName.LUNA) :
-      undefined;
-    player.game.defer(new BuildColony(player, false, 'Select colony for Minority Refuge', openColonies));
+    const openColonies =
+      player.getProduction(Resources.MEGACREDITS) <= -4
+        ? player.game.colonies.filter(
+            (colony) => colony.name === ColonyName.LUNA
+          )
+        : undefined;
+    player.game.defer(
+      new BuildColony(
+        player,
+        false,
+        'Select colony for Minority Refuge',
+        openColonies
+      )
+    );
     player.addProduction(Resources.MEGACREDITS, -2);
     return undefined;
   }

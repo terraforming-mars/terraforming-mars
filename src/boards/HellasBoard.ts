@@ -10,7 +10,11 @@ import {SerializedBoard} from './SerializedBoard';
 import {Random} from '../Random';
 
 export class HellasBoard extends Board {
-  public static newInstance(shuffle: boolean, rng: Random, includeVenus: boolean): HellasBoard {
+  public static newInstance(
+    shuffle: boolean,
+    rng: Random,
+    includeVenus: boolean
+  ): HellasBoard {
     const builder = new BoardBuilder(includeVenus);
 
     const PLANT = SpaceBonus.PLANT;
@@ -21,23 +25,85 @@ export class HellasBoard extends Board {
     const TWO_PLANTS = [PLANT, PLANT];
 
     // y=0
-    builder.ocean(...TWO_PLANTS).land(...TWO_PLANTS).land(...TWO_PLANTS).land(PLANT, STEEL).land(PLANT);
+    builder
+      .ocean(...TWO_PLANTS)
+      .land(...TWO_PLANTS)
+      .land(...TWO_PLANTS)
+      .land(PLANT, STEEL)
+      .land(PLANT);
     // y=1
-    builder.ocean(...TWO_PLANTS).land(...TWO_PLANTS).land(PLANT, STEEL).land(PLANT).land(PLANT).land(PLANT);
+    builder
+      .ocean(...TWO_PLANTS)
+      .land(...TWO_PLANTS)
+      .land(PLANT, STEEL)
+      .land(PLANT)
+      .land(PLANT)
+      .land(PLANT);
     // y=2
-    builder.ocean(PLANT).land(PLANT).land(STEEL).land(STEEL).land().land(...TWO_PLANTS).land(PLANT, DRAW_CARD);
+    builder
+      .ocean(PLANT)
+      .land(PLANT)
+      .land(STEEL)
+      .land(STEEL)
+      .land()
+      .land(...TWO_PLANTS)
+      .land(PLANT, DRAW_CARD);
     // y=3
-    builder.ocean(PLANT).land(PLANT).land(STEEL).land(STEEL, STEEL).land(STEEL).ocean(PLANT).ocean(PLANT).land(PLANT);
+    builder
+      .ocean(PLANT)
+      .land(PLANT)
+      .land(STEEL)
+      .land(STEEL, STEEL)
+      .land(STEEL)
+      .ocean(PLANT)
+      .ocean(PLANT)
+      .land(PLANT);
     // y=4
-    builder.land(DRAW_CARD).land().land().land(STEEL, STEEL).land().ocean(DRAW_CARD).ocean(HEAT, HEAT, HEAT).ocean().land(PLANT);
+    builder
+      .land(DRAW_CARD)
+      .land()
+      .land()
+      .land(STEEL, STEEL)
+      .land()
+      .ocean(DRAW_CARD)
+      .ocean(HEAT, HEAT, HEAT)
+      .ocean()
+      .land(PLANT);
     // y=5
-    builder.land(TITANIUM).land().land(STEEL).land().land().ocean().ocean(STEEL).land();
+    builder
+      .land(TITANIUM)
+      .land()
+      .land(STEEL)
+      .land()
+      .land()
+      .ocean()
+      .ocean(STEEL)
+      .land();
     // y=6
-    builder.ocean(TITANIUM, TITANIUM).land().land().land(DRAW_CARD).land().land().land(TITANIUM);
+    builder
+      .ocean(TITANIUM, TITANIUM)
+      .land()
+      .land()
+      .land(DRAW_CARD)
+      .land()
+      .land()
+      .land(TITANIUM);
     // y=7
-    builder.land(STEEL).land(DRAW_CARD).land(HEAT, HEAT).land(HEAT, HEAT).land(TITANIUM).land(TITANIUM);
+    builder
+      .land(STEEL)
+      .land(DRAW_CARD)
+      .land(HEAT, HEAT)
+      .land(HEAT, HEAT)
+      .land(TITANIUM)
+      .land(TITANIUM);
     // y=8
-    builder.land().land(HEAT, HEAT).land(SpaceBonus.OCEAN).doNotShuffleLastSpace().land(HEAT, HEAT).land();
+    builder
+      .land()
+      .land(HEAT, HEAT)
+      .land(SpaceBonus.OCEAN)
+      .doNotShuffleLastSpace()
+      .land(HEAT, HEAT)
+      .land();
 
     if (shuffle) {
       builder.shuffle(rng);
@@ -47,12 +113,17 @@ export class HellasBoard extends Board {
     return new HellasBoard(spaces);
   }
 
-  public static deserialize(board: SerializedBoard, players: Array<Player>): HellasBoard {
+  public static deserialize(
+    board: SerializedBoard,
+    players: Array<Player>
+  ): HellasBoard {
     return new HellasBoard(Board.deserializeSpaces(board.spaces, players));
   }
 
   private filterHellas(player: Player, spaces: Array<ISpace>) {
-    return player.canAfford(HELLAS_BONUS_OCEAN_COST) ? spaces : spaces.filter((space) => space.id !== SpaceName.HELLAS_OCEAN_TILE);
+    return player.canAfford(HELLAS_BONUS_OCEAN_COST)
+      ? spaces
+      : spaces.filter((space) => space.id !== SpaceName.HELLAS_OCEAN_TILE);
   }
 
   public getSpaces(spaceType: SpaceType, player: Player): Array<ISpace> {
@@ -68,7 +139,10 @@ export class HellasBoard extends Board {
   }
 
   public getAvailableSpacesForGreenery(player: Player): Array<ISpace> {
-    return this.filterHellas(player, super.getAvailableSpacesForGreenery(player));
+    return this.filterHellas(
+      player,
+      super.getAvailableSpacesForGreenery(player)
+    );
   }
 
   public getVolcanicSpaceIds(): Array<string> {

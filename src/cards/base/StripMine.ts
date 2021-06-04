@@ -29,18 +29,26 @@ export class StripMine extends Card implements IProjectCard {
           }).br;
           b.oxygen(2);
         }),
-        description: 'Decrease your Energy production 2 steps. Increase your steel production 2 steps and your titanium production 1 step. Raise oxygen 2 steps.',
+        description:
+          'Decrease your Energy production 2 steps. Increase your steel production 2 steps and your titanium production 1 step. Raise oxygen 2 steps.',
       },
     });
   }
   public canPlay(player: Player): boolean {
     const hasEnergyProduction = player.getProduction(Resources.ENERGY) >= 2;
-    const remainingOxygenSteps = MAX_OXYGEN_LEVEL - player.game.getOxygenLevel();
+    const remainingOxygenSteps =
+      MAX_OXYGEN_LEVEL - player.game.getOxygenLevel();
     const stepsRaised = Math.min(remainingOxygenSteps, 2);
     const requiredMC = REDS_RULING_POLICY_COST * stepsRaised;
 
     if (PartyHooks.shouldApplyPolicy(player.game, PartyName.REDS)) {
-      return player.canAfford(player.getCardCost(this) + requiredMC, {steel: true}) && player.canAfford(requiredMC) && hasEnergyProduction;
+      return (
+        player.canAfford(player.getCardCost(this) + requiredMC, {
+          steel: true,
+        }) &&
+        player.canAfford(requiredMC) &&
+        hasEnergyProduction
+      );
     }
 
     return hasEnergyProduction;

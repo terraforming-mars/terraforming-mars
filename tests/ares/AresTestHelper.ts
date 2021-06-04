@@ -33,15 +33,23 @@ export const ALL_ADJACENCY_BONUSES = [
 
 export class AresTestHelper {
   // provides shared testing between Ecological Survey and Geological Survey
-  public static testSurveyBonus(player: Player, bonus: SpaceBonus, expectedMc: number) {
+  public static testSurveyBonus(
+    player: Player,
+    bonus: SpaceBonus,
+    expectedMc: number
+  ) {
     // tile types in this test are irrelevant.
     const firstSpace = player.game.board.getAvailableSpacesOnLand(player)[0];
     firstSpace.adjacency = {bonus: [bonus]};
-    player.game.addTile(player, SpaceType.LAND, firstSpace, {tileType: TileType.RESTRICTED_AREA});
+    player.game.addTile(player, SpaceType.LAND, firstSpace, {
+      tileType: TileType.RESTRICTED_AREA,
+    });
 
     expect(player.getResource(Resources.MEGACREDITS)).is.eq(0);
     const adjacentSpace = player.game.board.getAdjacentSpaces(firstSpace)[0];
-    player.game.addTile(player, adjacentSpace.spaceType, adjacentSpace, {tileType: TileType.GREENERY});
+    player.game.addTile(player, adjacentSpace.spaceType, adjacentSpace, {
+      tileType: TileType.GREENERY,
+    });
     expect(player.getResource(Resources.MEGACREDITS)).is.eq(expectedMc);
   }
 
@@ -58,7 +66,9 @@ export class AresTestHelper {
   }
 
   public static getHazards(game: Game): Array<ISpace> {
-    return game.board.getSpaces(SpaceType.LAND).filter((space) => AresHandler.hasHazardTile(space));
+    return game.board
+      .getSpaces(SpaceType.LAND)
+      .filter((space) => AresHandler.hasHazardTile(space));
   }
 
   public static byTileType(spaces: Array<ISpace>): Map<number, Array<ISpace>> {

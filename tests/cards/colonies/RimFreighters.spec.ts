@@ -4,8 +4,8 @@ import {Ceres} from '../../../src/colonies/Ceres';
 import {Game} from '../../../src/Game';
 import {TestPlayers} from '../../TestPlayers';
 
-describe('RimFreighters', function() {
-  it('Should play', function() {
+describe('RimFreighters', function () {
+  it('Should play', function () {
     const card = new RimFreighters();
     const player = TestPlayers.BLUE.newPlayer();
     const redPlayer = TestPlayers.RED.newPlayer();

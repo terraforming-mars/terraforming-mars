@@ -70,4 +70,3 @@ describe('LunaResort', () => {
     expect(moonData.colonyRate).eq(1);
   });
 });
-

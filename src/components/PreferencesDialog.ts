@@ -13,10 +13,9 @@ export const PreferencesDialog = Vue.component('preferences-dialog', {
       type: Object as () => GameOptionsModel,
     },
   },
-  components: {
-  },
+  components: {},
   mixins: [TranslateMixin],
-  data: function() {
+  data: function () {
     return {
       'hide_hand': false as boolean | unknown[],
       'hide_awards_and_milestones': false as boolean | unknown[],
@@ -36,9 +35,9 @@ export const PreferencesDialog = Vue.component('preferences-dialog', {
     };
   },
   methods: {
-    setPreferencesCSS: function(
+    setPreferencesCSS: function (
       val: boolean | undefined,
-      cssClassSuffix: string,
+      cssClassSuffix: string
     ): void {
       const target = document.getElementById('ts-preferences-target');
       if (!target) return;
@@ -52,10 +51,7 @@ export const PreferencesDialog = Vue.component('preferences-dialog', {
         target.classList.add('language-' + this.lang);
       }
     },
-    updatePreferencesFromStorage: function(): Map<
-            string,
-            boolean | string
-            > {
+    updatePreferencesFromStorage: function (): Map<string, boolean | string> {
       for (const k of preferences) {
         const val = PreferencesManager.load(k);
         if (k === 'lang') {
@@ -70,7 +66,7 @@ export const PreferencesDialog = Vue.component('preferences-dialog', {
       }
       return PreferencesManager.preferencesValues;
     },
-    updatePreferences: function(_evt: any): void {
+    updatePreferences: function (_evt: any): void {
       let strVal: string = '';
       for (const k of preferences) {
         const val = PreferencesManager.preferencesValues.get(k);
@@ -86,17 +82,17 @@ export const PreferencesDialog = Vue.component('preferences-dialog', {
         }
       }
     },
-    syncPreferences: function(): void {
+    syncPreferences: function (): void {
       for (const k of preferences) {
         this.$data[k] = PreferencesManager.preferencesValues.get(k);
         this.setPreferencesCSS(this.$data[k], k);
       }
     },
-    okClicked: function(): void {
+    okClicked: function (): void {
       this.$emit('okButtonClicked');
     },
   },
-  mounted: function() {
+  mounted: function () {
     this.updatePreferencesFromStorage();
   },
   template: `

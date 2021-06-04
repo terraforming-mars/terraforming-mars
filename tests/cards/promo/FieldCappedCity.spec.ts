@@ -6,8 +6,8 @@ import {Resources} from '../../../src/Resources';
 import {TileType} from '../../../src/TileType';
 import {TestPlayers} from '../../TestPlayers';
 
-describe('FieldCappedCity', function() {
-  it('Should play', function() {
+describe('FieldCappedCity', function () {
+  it('Should play', function () {
     const card = new FieldCappedCity();
     const player = TestPlayers.BLUE.newPlayer();
     const redPlayer = TestPlayers.RED.newPlayer();
@@ -16,10 +16,11 @@ describe('FieldCappedCity', function() {
     expect(action).is.not.undefined;
     expect(action instanceof SelectSpace).is.true;
     action.cb(action.availableSpaces[0]);
-    expect(action.availableSpaces[0].tile && action.availableSpaces[0].tile.tileType).to.eq(TileType.CITY);
+    expect(
+      action.availableSpaces[0].tile && action.availableSpaces[0].tile.tileType
+    ).to.eq(TileType.CITY);
     expect(player.plants).to.eq(3);
     expect(player.getProduction(Resources.ENERGY)).to.eq(1);
     expect(player.getProduction(Resources.MEGACREDITS)).to.eq(2);
   });
 });
-

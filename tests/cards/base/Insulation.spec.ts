@@ -1,12 +1,11 @@
-
 import {expect} from 'chai';
 import {Insulation} from '../../../src/cards/base/Insulation';
 import {Game} from '../../../src/Game';
 import {Resources} from '../../../src/Resources';
 import {TestPlayers} from '../../TestPlayers';
 
-describe('Insulation', function() {
-  it('Should play', function() {
+describe('Insulation', function () {
+  it('Should play', function () {
     const card = new Insulation();
     const player = TestPlayers.BLUE.newPlayer();
     const redPlayer = TestPlayers.RED.newPlayer();

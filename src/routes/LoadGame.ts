@@ -11,9 +11,13 @@ export class LoadGame extends Handler {
     super();
   }
 
-  public put(req: http.IncomingMessage, res: http.ServerResponse, ctx: IContext): void {
+  public put(
+    req: http.IncomingMessage,
+    res: http.ServerResponse,
+    ctx: IContext
+  ): void {
     let body = '';
-    req.on('data', function(data) {
+    req.on('data', function (data) {
       body += data.toString();
     });
     req.once('end', () => {

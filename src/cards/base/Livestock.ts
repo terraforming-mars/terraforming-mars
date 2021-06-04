@@ -11,7 +11,10 @@ import {CardRequirements} from '../CardRequirements';
 import {CardRenderer} from '../render/CardRenderer';
 import {CardRenderDynamicVictoryPoints} from '../render/CardRenderDynamicVictoryPoints';
 
-export class Livestock extends Card implements IActionCard, IProjectCard, IResourceCard {
+export class Livestock
+  extends Card
+  implements IActionCard, IProjectCard, IResourceCard
+{
   constructor() {
     super({
       cardType: CardType.ACTIVE,
@@ -41,24 +44,23 @@ export class Livestock extends Card implements IActionCard, IProjectCard, IResou
     });
   }
 
-    public resourceCount = 0;
-    public canPlay(player: Player): boolean {
-      return super.canPlay(player) && player.getProduction(Resources.PLANTS) >= 1;
-    }
-    public getVictoryPoints(): number {
-      return this.resourceCount;
-    }
-    public play(player: Player) {
-      player.addProduction(Resources.PLANTS, -1);
-      player.addProduction(Resources.MEGACREDITS, 2);
-      return undefined;
-    }
-    public canAct(): boolean {
-      return true;
-    }
-    public action(player: Player) {
-      player.addResourceTo(this);
-      return undefined;
-    }
+  public resourceCount = 0;
+  public canPlay(player: Player): boolean {
+    return super.canPlay(player) && player.getProduction(Resources.PLANTS) >= 1;
+  }
+  public getVictoryPoints(): number {
+    return this.resourceCount;
+  }
+  public play(player: Player) {
+    player.addProduction(Resources.PLANTS, -1);
+    player.addProduction(Resources.MEGACREDITS, 2);
+    return undefined;
+  }
+  public canAct(): boolean {
+    return true;
+  }
+  public action(player: Player) {
+    player.addResourceTo(this);
+    return undefined;
+  }
 }
-

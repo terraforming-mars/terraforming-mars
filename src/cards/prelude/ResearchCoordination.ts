@@ -14,7 +14,8 @@ export class ResearchCoordination extends Card implements IProjectCard {
 
       metadata: {
         cardNumber: 'P40',
-        description: 'After being played, when you perform an action, the wild tag counts as any tag of your choice.',
+        description:
+          'After being played, when you perform an action, the wild tag counts as any tag of your choice.',
       },
     });
   }

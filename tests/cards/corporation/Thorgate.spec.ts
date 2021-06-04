@@ -7,8 +7,8 @@ import {Game} from '../../../src/Game';
 import {Resources} from '../../../src/Resources';
 import {TestPlayers} from '../../TestPlayers';
 
-describe('Thorgate', function() {
-  it('Should play', function() {
+describe('Thorgate', function () {
+  it('Should play', function () {
     const card = new Thorgate();
     const player = TestPlayers.BLUE.newPlayer();
     const redPlayer = TestPlayers.RED.newPlayer();

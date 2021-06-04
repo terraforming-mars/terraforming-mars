@@ -23,6 +23,6 @@ export class DeferredAction {
   public priority: Priority = Priority.DEFAULT;
   constructor(
     public player: Player,
-    public execute: () => PlayerInput | undefined,
+    public execute: () => PlayerInput | undefined
   ) {}
 }

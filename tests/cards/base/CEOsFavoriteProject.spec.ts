@@ -10,21 +10,22 @@ import {SelectCard} from '../../../src/inputs/SelectCard';
 import {Player} from '../../../src/Player';
 import {TestPlayers} from '../../TestPlayers';
 
-describe('CEOsFavoriteProject', function() {
-  let card : CEOsFavoriteProject; let player : Player;
+describe('CEOsFavoriteProject', function () {
+  let card: CEOsFavoriteProject;
+  let player: Player;
 
-  beforeEach(function() {
+  beforeEach(function () {
     card = new CEOsFavoriteProject();
     player = TestPlayers.BLUE.newPlayer();
     const redPlayer = TestPlayers.RED.newPlayer();
     Game.newInstance('foobar', [player, redPlayer], player);
   });
 
-  it('Can\'t play', function() {
+  it("Can't play", function () {
     expect(card.canPlay(player)).is.not.true;
   });
 
-  it('Should play', function() {
+  it('Should play', function () {
     const searchForLife = new SearchForLife();
     const securityFleet = new SecurityFleet();
     const decomposers = new Decomposers();
@@ -49,7 +50,7 @@ describe('CEOsFavoriteProject', function() {
     expect(player.getResourcesOnCard(securityFleet)).to.eq(2);
   });
 
-  it('Can play on SelfReplicatingRobots cards', function() {
+  it('Can play on SelfReplicatingRobots cards', function () {
     const srr = new SelfReplicatingRobots();
     const birds = new Birds();
     player.playedCards.push(srr);

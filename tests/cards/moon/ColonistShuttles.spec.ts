@@ -56,4 +56,3 @@ describe('ColonistShuttles', () => {
     expect(player.megaCredits).eq(14);
   });
 });
-

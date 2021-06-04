@@ -21,7 +21,8 @@ export class StanfordTorus extends Card implements IProjectCard {
         renderData: CardRenderer.builder((b) => {
           b.city().asterix();
         }),
-        description: 'Place a city tile IN SPACE, outside and separate from the planet.',
+        description:
+          'Place a city tile IN SPACE, outside and separate from the planet.',
         victoryPoints: 2,
       },
     });

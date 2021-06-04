@@ -21,10 +21,11 @@ export class VenusGovernor extends Card {
         renderData: CardRenderer.builder((b) => {
           b.production((pb) => pb.megacredits(2));
         }),
-        description: 'Requires 2 Venus tags. Increase your M€ production 2 steps.',
+        description:
+          'Requires 2 Venus tags. Increase your M€ production 2 steps.',
       },
     });
-  };
+  }
   public play(player: Player) {
     player.addProduction(Resources.MEGACREDITS, 2);
     return undefined;

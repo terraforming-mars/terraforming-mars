@@ -7,21 +7,24 @@ import {Resources} from '../../../src/Resources';
 import {TestingUtils} from '../../TestingUtils';
 import {TestPlayers} from '../../TestPlayers';
 
-describe('ImmigrantCity', function() {
-  let card : ImmigrantCity; let player : Player; let player2 : Player; let game : Game;
+describe('ImmigrantCity', function () {
+  let card: ImmigrantCity;
+  let player: Player;
+  let player2: Player;
+  let game: Game;
 
-  beforeEach(function() {
+  beforeEach(function () {
     card = new ImmigrantCity();
     player = TestPlayers.BLUE.newPlayer();
     player2 = TestPlayers.RED.newPlayer();
     game = Game.newInstance('foobar', [player, player2], player);
   });
 
-  it('Can\'t play without energy production', function() {
+  it("Can't play without energy production", function () {
     expect(card.canPlay(player)).is.not.true;
   });
 
-  it('Should play', function() {
+  it('Should play', function () {
     player.addProduction(Resources.ENERGY, 1);
     const action = card.play(player);
     action.cb(action.availableSpaces[0]);
@@ -36,7 +39,7 @@ describe('ImmigrantCity', function() {
     expect(player.getProduction(Resources.MEGACREDITS)).to.eq(-1);
   });
 
-  it('Can play at -4 M€ production', function() {
+  it('Can play at -4 M€ production', function () {
     player.addProduction(Resources.ENERGY, 1);
     player.addProduction(Resources.MEGACREDITS, -4);
     expect(card.canPlay(player)).is.true;
@@ -55,7 +58,7 @@ describe('ImmigrantCity', function() {
     expect(player.getProduction(Resources.MEGACREDITS)).to.eq(-4);
   });
 
-  it('Tharsis can play at -5 M€ production', function() {
+  it('Tharsis can play at -5 M€ production', function () {
     player.corporationCard = new TharsisRepublic();
     player.addProduction(Resources.ENERGY, 1);
     player.addProduction(Resources.MEGACREDITS, -5);

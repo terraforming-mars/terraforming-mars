@@ -18,7 +18,9 @@ export class ScienceTagCard implements IProjectCard {
     return CardType.PROXY;
   }
   public get metadata(): CardMetadata {
-    throw new Error('ScienceTagCard is a proxy card, not a real card. Should not render');
+    throw new Error(
+      'ScienceTagCard is a proxy card, not a real card. Should not render'
+    );
   }
   public play() {
     return undefined;

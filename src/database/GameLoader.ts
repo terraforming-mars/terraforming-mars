@@ -18,7 +18,7 @@ enum State {
   /**
    * ids populated from database
    */
-  READY
+  READY,
 }
 
 type GameIdCallback = () => void;
@@ -71,15 +71,27 @@ export class GameLoader implements IGameLoader {
     }
   }
 
-  public getLoadedGameIds(): Array<{id: GameId, participants: Array<SpectatorId | PlayerId>}> {
+  public getLoadedGameIds(): Array<{
+    id: GameId;
+    participants: Array<SpectatorId | PlayerId>;
+  }> {
     const map = new MultiMap<GameId, SpectatorId | PlayerId>();
 
-    this.participantIds.forEach((gameId, participantId) => map.set(gameId, participantId));
+    this.participantIds.forEach((gameId, participantId) =>
+      map.set(gameId, participantId)
+    );
     const arry: Array<[string, Array<string>]> = Array.from(map.associations());
-    return arry.map(([id, participants]) => ({id: id, participants: participants}));
+    return arry.map(([id, participants]) => ({
+      id: id,
+      participants: participants,
+    }));
   }
 
-  public getByGameId(gameId: GameId, bypassCache: boolean, cb: LoadCallback): void {
+  public getByGameId(
+    gameId: GameId,
+    bypassCache: boolean,
+    cb: LoadCallback
+  ): void {
     this.loadAllGameIds();
     if (bypassCache === false && this.games.get(gameId) !== undefined) {
       cb(this.games.get(gameId));
@@ -93,7 +105,10 @@ export class GameLoader implements IGameLoader {
     }
   }
 
-  private getByParticipantId(id: PlayerId | SpectatorId, cb: LoadCallback): void {
+  private getByParticipantId(
+    id: PlayerId | SpectatorId,
+    cb: LoadCallback
+  ): void {
     this.loadAllGameIds();
     const gameId = this.participantIds.get(id);
     if (gameId !== undefined && this.games.get(gameId) !== undefined) {
@@ -138,7 +153,11 @@ export class GameLoader implements IGameLoader {
     }
   }
 
-  private loadGame(gameId: GameId, bypassCache: boolean, cb: LoadCallback): void {
+  private loadGame(
+    gameId: GameId,
+    bypassCache: boolean,
+    cb: LoadCallback
+  ): void {
     this.loadingGame = true;
     if (bypassCache === false && this.games.get(gameId) !== undefined) {
       cb(this.games.get(gameId));
@@ -147,7 +166,7 @@ export class GameLoader implements IGameLoader {
       cb(undefined);
     } else {
       Database.getInstance().getGame(gameId, (err: any, serializedGame?) => {
-        if (err || (serializedGame === undefined)) {
+        if (err || serializedGame === undefined) {
           console.error('GameLoader:loadGame', err);
           cb(undefined);
           return;
@@ -155,7 +174,9 @@ export class GameLoader implements IGameLoader {
         try {
           const game = Game.deserialize(serializedGame);
           this.add(game);
-          console.log(`GameLoader loaded game ${gameId} into memory from database`);
+          console.log(
+            `GameLoader loaded game ${gameId} into memory from database`
+          );
           cb(game);
         } catch (e) {
           console.error('GameLoader:loadGame', e);
@@ -222,28 +243,26 @@ export class GameLoader implements IGameLoader {
 
       let loaded = 0;
       allGameIds.forEach((gameId) => {
-        Database.getInstance().getGame(
-          gameId,
-          (err, game) => {
-            loaded++;
-            if (err || (game === undefined)) {
-              console.error(`unable to load game ${gameId}`, err);
-            } else {
-              console.log(`load game ${gameId} with ${game.spectatorId}`);
-              if (this.games.get(gameId) === undefined) {
-                this.games.set(gameId, undefined);
-                if (game.spectatorId !== undefined) {
-                  this.participantIds.set(game.spectatorId, gameId);
-                }
-                for (const player of game.players) {
-                  this.participantIds.set(player.id, gameId);
-                }
+        Database.getInstance().getGame(gameId, (err, game) => {
+          loaded++;
+          if (err || game === undefined) {
+            console.error(`unable to load game ${gameId}`, err);
+          } else {
+            console.log(`load game ${gameId} with ${game.spectatorId}`);
+            if (this.games.get(gameId) === undefined) {
+              this.games.set(gameId, undefined);
+              if (game.spectatorId !== undefined) {
+                this.participantIds.set(game.spectatorId, gameId);
+              }
+              for (const player of game.players) {
+                this.participantIds.set(player.id, gameId);
               }
             }
-            if (loaded === allGameIds.length) {
-              this.allGameIdsLoaded();
-            }
-          });
+          }
+          if (loaded === allGameIds.length) {
+            this.allGameIdsLoaded();
+          }
+        });
       });
     });
   }

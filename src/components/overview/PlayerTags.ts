@@ -22,7 +22,8 @@ const JOVIAN_MULTIPLIERS: Array<CardName> = [
 ];
 
 const hasDiscount = (tag: InterfaceTagsType, card: CardModel): boolean => {
-  if (tag === SpecialTags.COLONY_COUNT || tag === SpecialTags.CITY_COUNT) return false;
+  if (tag === SpecialTags.COLONY_COUNT || tag === SpecialTags.CITY_COUNT)
+    return false;
   if (card.discount === undefined) {
     return false;
   }
@@ -62,13 +63,19 @@ export const PLAYER_INTERFACE_TAGS_ORDER: Array<InterfaceTagsType> = [
 ];
 
 export const checkTagUsed = (tag: InterfaceTagsType, player: PlayerModel) => {
-  if (player.game.gameOptions.coloniesExtension === false && tag === SpecialTags.COLONY_COUNT) {
+  if (
+    player.game.gameOptions.coloniesExtension === false &&
+    tag === SpecialTags.COLONY_COUNT
+  ) {
     return false;
   }
   if (player.game.turmoil === undefined && tag === SpecialTags.INFLUENCE) {
     return false;
   }
-  if (player.game.gameOptions.venusNextExtension === false && tag === Tags.VENUS) {
+  if (
+    player.game.gameOptions.venusNextExtension === false &&
+    tag === Tags.VENUS
+  ) {
     return false;
   }
   if (player.game.gameOptions.moonExpansion === false && tag === Tags.MOON) {
@@ -96,45 +103,50 @@ export const PlayerTags = Vue.component('player-tags', {
   },
 
   methods: {
-    showColonyCount: function(): boolean {
+    showColonyCount: function (): boolean {
       return this.player.game.gameOptions.coloniesExtension;
     },
-    showInfluence: function(): boolean {
+    showInfluence: function (): boolean {
       return this.player.game.turmoil !== undefined;
     },
-    showVenus: function(): boolean {
+    showVenus: function (): boolean {
       return this.player.game.gameOptions.venusNextExtension;
     },
-    showMoon: function(): boolean {
+    showMoon: function (): boolean {
       return this.player.game.gameOptions.moonExpansion;
     },
-    getTagsPlaceholders: function(): Array<InterfaceTagsType> {
+    getTagsPlaceholders: function (): Array<InterfaceTagsType> {
       const tags = PLAYER_INTERFACE_TAGS_ORDER;
       return tags.filter((tag) => {
         return checkTagUsed(tag, this.player);
       });
     },
-    getCardCount: function(): number {
+    getCardCount: function (): number {
       if (this.player.cardsInHandNbr) {
         return this.player.cardsInHandNbr;
       }
       return 0;
     },
-    getTR: function(): number {
+    getTR: function (): number {
       return this.player.terraformRating;
     },
-    getVpCount: function(): number {
+    getVpCount: function (): number {
       return this.player.victoryPointsBreakdown.total;
     },
-    hideVpCount: function(): boolean {
-      return !this.player.game.gameOptions.showOtherPlayersVP && !this.isActivePlayer;
+    hideVpCount: function (): boolean {
+      return (
+        !this.player.game.gameOptions.showOtherPlayersVP && !this.isActivePlayer
+      );
     },
-    showShortTags: function(): boolean {
+    showShortTags: function (): boolean {
       if (this.hideZeroTags === true) return true;
       return isTagsViewConcise(this.$root);
     },
-    hasTagDiscount: function(tag: InterfaceTagsType): boolean {
-      for (const card of [...this.player.playedCards, this.player.corporationCard]) {
+    hasTagDiscount: function (tag: InterfaceTagsType): boolean {
+      for (const card of [
+        ...this.player.playedCards,
+        this.player.corporationCard,
+      ]) {
         if (card !== undefined) {
           if (hasDiscount(tag, card)) {
             return true;
@@ -143,42 +155,68 @@ export const PlayerTags = Vue.component('player-tags', {
       }
 
       const turmoil = this.player.game.turmoil;
-      if (tag === Tags.SPACE &&
-        turmoil && turmoil.ruling === PartyName.UNITY &&
-        turmoil.politicalAgendas?.unity.policyId === TurmoilPolicy.UNITY_POLICY_4) {
+      if (
+        tag === Tags.SPACE &&
+        turmoil &&
+        turmoil.ruling === PartyName.UNITY &&
+        turmoil.politicalAgendas?.unity.policyId ===
+          TurmoilPolicy.UNITY_POLICY_4
+      ) {
         return true;
       }
 
-      const iapetusColony = this.player.game.colonies.find((colony) => colony.name === ColonyName.IAPETUS);
-      if (tag === 'all' &&
+      const iapetusColony = this.player.game.colonies.find(
+        (colony) => colony.name === ColonyName.IAPETUS
+      );
+      if (
+        tag === 'all' &&
         iapetusColony !== undefined &&
         iapetusColony.visitor !== undefined &&
-        iapetusColony.colonies.includes(this.player.color)) {
+        iapetusColony.colonies.includes(this.player.color)
+      ) {
         return true;
       }
 
       return false;
     },
-    getTagDiscountAmount: function(tag: InterfaceTagsType): number {
+    getTagDiscountAmount: function (tag: InterfaceTagsType): number {
       let discount = 0;
-      for (const card of [...this.player.playedCards, this.player.corporationCard]) {
+      for (const card of [
+        ...this.player.playedCards,
+        this.player.corporationCard,
+      ]) {
         if (card !== undefined) {
           discount += getDiscountAmount(tag, card);
         }
       }
 
-      if (tag === Tags.SPACE && this.player.game.turmoil?.ruling === PartyName.UNITY) {
-        if (this.player.game.turmoil.politicalAgendas?.unity.policyId === TurmoilPolicy.UNITY_POLICY_4) discount += 2;
+      if (
+        tag === Tags.SPACE &&
+        this.player.game.turmoil?.ruling === PartyName.UNITY
+      ) {
+        if (
+          this.player.game.turmoil.politicalAgendas?.unity.policyId ===
+          TurmoilPolicy.UNITY_POLICY_4
+        )
+          discount += 2;
       }
 
-      const iapetusColony = this.player.game.colonies.find((colony) => colony.name === ColonyName.IAPETUS);
-      if (tag === 'all' && iapetusColony !== undefined && iapetusColony.visitor !== undefined) {
-        discount += iapetusColony.colonies.filter((owner) => owner === this.player.color).length;
+      const iapetusColony = this.player.game.colonies.find(
+        (colony) => colony.name === ColonyName.IAPETUS
+      );
+      if (
+        tag === 'all' &&
+        iapetusColony !== undefined &&
+        iapetusColony.visitor !== undefined
+      ) {
+        discount += iapetusColony.colonies.filter(
+          (owner) => owner === this.player.color
+        ).length;
       }
 
       return discount;
     },
-    getTagCount: function(tagName: InterfaceTagsType): number {
+    getTagCount: function (tagName: InterfaceTagsType): number {
       if (tagName === SpecialTags.COLONY_COUNT && this.showColonyCount()) {
         return this.player.coloniesCount || 0;
       }
@@ -192,7 +230,7 @@ export const PlayerTags = Vue.component('player-tags', {
         return this.player.noTagsCount || 0;
       }
       const basicTagFound = this.player.tags.find(
-        (tag: ITagCount) => tag.tag === tagName,
+        (tag: ITagCount) => tag.tag === tagName
       );
 
       if (basicTagFound !== undefined) {
@@ -201,13 +239,16 @@ export const PlayerTags = Vue.component('player-tags', {
 
       return 0;
     },
-    showJovianMultipliers: function(tag: InterfaceTagsType): boolean {
+    showJovianMultipliers: function (tag: InterfaceTagsType): boolean {
       return tag === Tags.JOVIAN && this.playerJovianMultipliersCount() > 0;
     },
-    playerJovianMultipliersCount: function(): number {
+    playerJovianMultipliersCount: function (): number {
       let multipliers = 0;
       for (const card of this.player.playedCards) {
-        if (card !== undefined && JOVIAN_MULTIPLIERS.includes(card.name as CardName)) {
+        if (
+          card !== undefined &&
+          JOVIAN_MULTIPLIERS.includes(card.name as CardName)
+        ) {
           multipliers += 1;
         }
       }

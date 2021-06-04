@@ -6,10 +6,11 @@ import {SelectCard} from '../../../src/inputs/SelectCard';
 import {Player} from '../../../src/Player';
 import {TestPlayers} from '../../TestPlayers';
 
-describe('Dirigibles', function() {
-  let card : Dirigibles; let player : Player;
+describe('Dirigibles', function () {
+  let card: Dirigibles;
+  let player: Player;
 
-  beforeEach(function() {
+  beforeEach(function () {
     card = new Dirigibles();
     player = TestPlayers.BLUE.newPlayer();
     const redPlayer = TestPlayers.RED.newPlayer();
@@ -17,12 +18,12 @@ describe('Dirigibles', function() {
     player.playedCards.push(card);
   });
 
-  it('Should play', function() {
+  it('Should play', function () {
     const action = card.play();
     expect(action).is.undefined;
   });
 
-  it('Should act - single target', function() {
+  it('Should act - single target', function () {
     expect(player.getFloatersCanSpend()).to.eq(0);
     const action = card.action(player);
     expect(action).is.undefined;
@@ -31,7 +32,7 @@ describe('Dirigibles', function() {
     expect(card.resourceCount).to.eq(1);
   });
 
-  it('Should act - multiple targets', function() {
+  it('Should act - multiple targets', function () {
     player.playedCards.push(new FloatingHabs());
     const action = card.action(player);
     expect(action instanceof SelectCard).is.true;

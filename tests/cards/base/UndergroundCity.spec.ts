@@ -5,22 +5,24 @@ import {Player} from '../../../src/Player';
 import {Resources} from '../../../src/Resources';
 import {TestPlayers} from '../../TestPlayers';
 
-describe('UndergroundCity', function() {
-  let card : UndergroundCity; let player : Player; let game : Game;
+describe('UndergroundCity', function () {
+  let card: UndergroundCity;
+  let player: Player;
+  let game: Game;
 
-  beforeEach(function() {
+  beforeEach(function () {
     card = new UndergroundCity();
     player = TestPlayers.BLUE.newPlayer();
     const redPlayer = TestPlayers.RED.newPlayer();
     game = Game.newInstance('foobar', [player, redPlayer], player);
   });
 
-  it('Can\'t play', function() {
+  it("Can't play", function () {
     player.addProduction(Resources.ENERGY, 1);
     expect(card.canPlay(player)).is.not.true;
   });
 
-  it('Should play', function() {
+  it('Should play', function () {
     player.addProduction(Resources.ENERGY, 2);
     expect(card.canPlay(player)).is.true;
     const action = card.play(player);

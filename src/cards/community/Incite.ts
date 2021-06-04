@@ -19,7 +19,8 @@ export class Incite extends Card implements CorporationCard {
 
       metadata: {
         cardNumber: 'R37',
-        description: 'You start with 32 M€. As your first action, place two delegates in one party.',
+        description:
+          'You start with 32 M€. As your first action, place two delegates in one party.',
         renderData: CardRenderer.builder((b) => {
           b.br.br;
           b.megacredits(32).nbsp.delegates(2);
@@ -29,9 +30,12 @@ export class Incite extends Card implements CorporationCard {
               eb.startEffect.influence(1);
             });
             ce.vSpace(Size.SMALL);
-            ce.effect('You have +1 influence. When you send a delegate using the lobbying action, you pay 2 M€ less for it.', (eb) => {
-              eb.delegates(1).startEffect.megacredits(-2);
-            });
+            ce.effect(
+              'You have +1 influence. When you send a delegate using the lobbying action, you pay 2 M€ less for it.',
+              (eb) => {
+                eb.delegates(1).startEffect.megacredits(-2);
+              }
+            );
           });
         }),
       },
@@ -47,7 +51,9 @@ export class Incite extends Card implements CorporationCard {
   public initialAction(player: Player) {
     if (player.game.turmoil) {
       const title = 'Incite first action - Select where to send two delegates';
-      player.game.defer(new SendDelegateToArea(player, title, {count: 2, source: 'reserve'}));
+      player.game.defer(
+        new SendDelegateToArea(player, title, {count: 2, source: 'reserve'})
+      );
     }
 
     return undefined;

@@ -1,13 +1,13 @@
 import Vue from 'vue';
 
 interface SelectProductionToLoseModel {
-    megacredits: number;
-    steel: number;
-    titanium: number;
-    plants: number;
-    energy: number;
-    heat: number;
-    warning: string | undefined;
+  megacredits: number;
+  steel: number;
+  titanium: number;
+  plants: number;
+  energy: number;
+  heat: number;
+  warning: string | undefined;
 }
 
 import {PaymentWidgetMixin} from './PaymentWidgetMixin';
@@ -17,113 +17,125 @@ import {IPayProductionModel} from '../models/IPayProductionUnitsModel';
 import {Units} from '../Units';
 import {TranslateMixin} from './TranslateMixin';
 
-export const SelectProductionToLose = Vue.component('select-production-to-lose', {
-  props: {
-    player: {
-      type: Object as () => PlayerModel,
+export const SelectProductionToLose = Vue.component(
+  'select-production-to-lose',
+  {
+    props: {
+      player: {
+        type: Object as () => PlayerModel,
+      },
+      playerinput: {
+        type: Object as () => Required<
+          Pick<PlayerInputModel, 'title' | 'payProduction' | 'buttonLabel'>
+        >,
+      },
+      onsave: {
+        type: Function as unknown as () => (out: Array<Array<string>>) => void,
+      },
+      showsave: {
+        type: Boolean,
+      },
+      showtitle: {
+        type: Boolean,
+      },
     },
-    playerinput: {
-      type: Object as () => Required<Pick<PlayerInputModel, 'title' | 'payProduction' | 'buttonLabel'>>,
+    data: function () {
+      return {
+        megacredits: 0,
+        steel: 0,
+        titanium: 0,
+        plants: 0,
+        energy: 0,
+        heat: 0,
+        warning: undefined,
+      } as SelectProductionToLoseModel;
     },
-    onsave: {
-      type: Function as unknown as () => (out: Array<Array<string>>) => void,
-    },
-    showsave: {
-      type: Boolean,
-    },
-    showtitle: {
-      type: Boolean,
-    },
-  },
-  data: function() {
-    return {
-      megacredits: 0,
-      steel: 0,
-      titanium: 0,
-      plants: 0,
-      energy: 0,
-      heat: 0,
-      warning: undefined,
-    } as SelectProductionToLoseModel;
-  },
-  mixins: [PaymentWidgetMixin, TranslateMixin], // for getCssClassFor. Seems over-importish
-  methods: {
-    canDeductMegaCredits: function() {
-      return this.playerinput.payProduction.units.megacredits > -5;
-    },
-    canDeductSteel: function() {
-      return this.playerinput.payProduction.units.steel > 0;
-    },
-    canDeductTitanium: function() {
-      return this.playerinput.payProduction.units.titanium > 0;
-    },
-    canDeductPlants: function() {
-      return this.playerinput.payProduction.units.plants > 0;
-    },
-    canDeductEnergy: function() {
-      return this.playerinput.payProduction.units.energy > 0;
-    },
-    canDeductHeat: function() {
-      return this.playerinput.payProduction.units.heat > 0;
-    },
-    hasWarning: function() {
-      return this.$data.warning !== undefined;
-    },
-    delta: function(type: string, direction: number) {
-      const expendableProductionQuantity = function(type: string, model: IPayProductionModel): number {
-        switch (type) {
-        case 'megacredits':
-          return model.units.megacredits + 5;
-        case 'steel':
-          return model.units.steel;
-        case 'titanium':
-          return model.units.titanium;
-        case 'plants':
-          return model.units.plants;
-        case 'energy':
-          return model.units.energy;
-        case 'heat':
-          return model.units.heat;
+    mixins: [PaymentWidgetMixin, TranslateMixin], // for getCssClassFor. Seems over-importish
+    methods: {
+      canDeductMegaCredits: function () {
+        return this.playerinput.payProduction.units.megacredits > -5;
+      },
+      canDeductSteel: function () {
+        return this.playerinput.payProduction.units.steel > 0;
+      },
+      canDeductTitanium: function () {
+        return this.playerinput.payProduction.units.titanium > 0;
+      },
+      canDeductPlants: function () {
+        return this.playerinput.payProduction.units.plants > 0;
+      },
+      canDeductEnergy: function () {
+        return this.playerinput.payProduction.units.energy > 0;
+      },
+      canDeductHeat: function () {
+        return this.playerinput.payProduction.units.heat > 0;
+      },
+      hasWarning: function () {
+        return this.$data.warning !== undefined;
+      },
+      delta: function (type: string, direction: number) {
+        const expendableProductionQuantity = function (
+          type: string,
+          model: IPayProductionModel
+        ): number {
+          switch (type) {
+            case 'megacredits':
+              return model.units.megacredits + 5;
+            case 'steel':
+              return model.units.steel;
+            case 'titanium':
+              return model.units.titanium;
+            case 'plants':
+              return model.units.plants;
+            case 'energy':
+              return model.units.energy;
+            case 'heat':
+              return model.units.heat;
+          }
+          return -1;
+        };
+        const current = this.$data[type];
+        let newValue = current + direction;
+        const lowestValue = type === 'megacredit' ? -5 : 0;
+        const expendableQuantity = expendableProductionQuantity(
+          type,
+          this.playerinput.payProduction as IPayProductionModel
+        );
+        newValue = Math.min(
+          Math.max(newValue, lowestValue),
+          expendableQuantity
+        );
+        this.$data[type] = newValue;
+      },
+      saveData: function () {
+        const htp: Units = {
+          megacredits: this.$data.megacredits,
+          steel: this.$data.steel,
+          titanium: this.$data.titanium,
+          plants: this.$data.plants,
+          energy: this.$data.energy,
+          heat: this.$data.heat,
+        };
+
+        const sum =
+          this.$data.megacredits +
+          this.$data.steel +
+          this.$data.titanium +
+          this.$data.plants +
+          this.$data.energy +
+          this.$data.heat;
+
+        if (sum !== this.playerinput.payProduction.cost) {
+          this.$data.warning = `Pay a total of ${this.playerinput.payProduction.cost} production units`;
+          return;
         }
-        return -1;
-      };
-      const current = this.$data[type];
-      let newValue = current + direction;
-      const lowestValue = (type === 'megacredit') ? -5 : 0;
-      const expendableQuantity = expendableProductionQuantity(type, this.playerinput.payProduction as IPayProductionModel);
-      newValue = Math.min(Math.max(newValue, lowestValue), expendableQuantity);
-      this.$data[type] = newValue;
+
+        this.onsave([[JSON.stringify(htp)]]);
+      },
     },
-    saveData: function() {
-      const htp: Units = {
-        megacredits: this.$data.megacredits,
-        steel: this.$data.steel,
-        titanium: this.$data.titanium,
-        plants: this.$data.plants,
-        energy: this.$data.energy,
-        heat: this.$data.heat,
-      };
 
-      const sum = this.$data.megacredits +
-                this.$data.steel +
-                this.$data.titanium +
-                this.$data.plants +
-                this.$data.energy +
-                this.$data.heat;
-
-      if (sum !== this.playerinput.payProduction.cost) {
-        this.$data.warning = `Pay a total of ${this.playerinput.payProduction.cost} production units`;
-        return;
-      }
-
-      this.onsave([[
-        JSON.stringify(htp),
-      ]]);
-    },
-  },
-
-  // TODO(chosta): consolidate repetition into a reusable component.
-  template: `<div class="wf-component wf-component--select-production-to-lose">
+    // TODO(chosta): consolidate repetition into a reusable component.
+    template: `<div class="wf-component wf-component--select-production-to-lose">
         <div v-if="showtitle === true" class="nofloat wf-component-title">{{ $t(playerinput.title) }}</div>
 
         <h3 class="payments_title" v-i18n>Which resource production would you prefer to decrease?</h3>
@@ -173,5 +185,5 @@ export const SelectProductionToLose = Vue.component('select-production-to-lose',
             <button class="btn btn-primary btn-submit" v-on:click="saveData">{{ $t(playerinput.buttonLabel) }}</button>
         </div>
     </div>`,
-});
-
+  }
+);

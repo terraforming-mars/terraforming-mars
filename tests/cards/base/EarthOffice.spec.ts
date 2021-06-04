@@ -6,10 +6,11 @@ import {Game} from '../../../src/Game';
 import {Player} from '../../../src/Player';
 import {TestPlayers} from '../../TestPlayers';
 
-describe('EarthOffice', function() {
-  let card : EarthOffice; let player : Player;
+describe('EarthOffice', function () {
+  let card: EarthOffice;
+  let player: Player;
 
-  beforeEach(function() {
+  beforeEach(function () {
     card = new EarthOffice();
     player = TestPlayers.BLUE.newPlayer();
     const redPlayer = TestPlayers.RED.newPlayer();
@@ -19,13 +20,12 @@ describe('EarthOffice', function() {
     expect(action).is.undefined;
   });
 
-  it('Should play', function() {
+  it('Should play', function () {
     expect(card.getCardDiscount(player, card)).to.eq(3);
     expect(card.getCardDiscount(player, new Birds())).to.eq(0);
   });
 
-  it('Discounts Luna Governor correctly', function() {
+  it('Discounts Luna Governor correctly', function () {
     expect(card.getCardDiscount(player, new LunaGovernor())).to.eq(6);
   });
 });
-

@@ -5,8 +5,8 @@ import {Resources} from '../../../src/Resources';
 import {TestingUtils} from '../../TestingUtils';
 import {TestPlayers} from '../../TestPlayers';
 
-describe('LakefrontResorts', function() {
-  it('Should play', function() {
+describe('LakefrontResorts', function () {
+  it('Should play', function () {
     const card2 = new LakefrontResorts();
     const player = TestPlayers.BLUE.newPlayer();
     const player2 = TestPlayers.RED.newPlayer();

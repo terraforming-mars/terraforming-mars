@@ -13,7 +13,11 @@ export class PlayerInput extends Handler {
     super();
   }
 
-  public post(req: http.IncomingMessage, res: http.ServerResponse, ctx: IContext): void {
+  public post(
+    req: http.IncomingMessage,
+    res: http.ServerResponse,
+    ctx: IContext
+  ): void {
     const playerId = ctx.url.searchParams.get('id');
 
     if (playerId === null) {
@@ -41,38 +45,57 @@ export class PlayerInput extends Handler {
     });
   }
 
-  private isWaitingForUndo(player: Player, entity: Array<Array<string>>): boolean {
+  private isWaitingForUndo(
+    player: Player,
+    entity: Array<Array<string>>
+  ): boolean {
     const waitingFor = player.getWaitingFor();
-    return entity.length > 0 && entity[0].length > 0 &&
-           waitingFor instanceof OrOptions && waitingFor.options[Number(entity[0][0])] instanceof UndoActionOption;
+    return (
+      entity.length > 0 &&
+      entity[0].length > 0 &&
+      waitingFor instanceof OrOptions &&
+      waitingFor.options[Number(entity[0][0])] instanceof UndoActionOption
+    );
   }
 
-  private performUndo(res: http.ServerResponse, ctx: IContext, player: Player): void {
+  private performUndo(
+    res: http.ServerResponse,
+    ctx: IContext,
+    player: Player
+  ): void {
     /**
      * The `lastSaveId` property is incremented during every `takeAction`.
      * The first save being decremented is the increment during `takeAction` call
      * The second save being decremented is the action that was taken
      */
     const lastSaveId = player.game.lastSaveId - 2;
-    ctx.gameLoader.restoreGameAt(player.game.id, lastSaveId, (game: Game | undefined) => {
-      if (game === undefined) {
-        player.game.log('Unable to perform undo operation. Error retrieving game from database. Please try again.', () => {}, {reservedFor: player});
-      } else {
-        // pull most recent player instance
-        player = game.getPlayerById(player.id);
+    ctx.gameLoader.restoreGameAt(
+      player.game.id,
+      lastSaveId,
+      (game: Game | undefined) => {
+        if (game === undefined) {
+          player.game.log(
+            'Unable to perform undo operation. Error retrieving game from database. Please try again.',
+            () => {},
+            {reservedFor: player}
+          );
+        } else {
+          // pull most recent player instance
+          player = game.getPlayerById(player.id);
+        }
+        ctx.route.writeJson(res, Server.getPlayerModel(player));
       }
-      ctx.route.writeJson(res, Server.getPlayerModel(player));
-    });
+    );
   }
 
   private processInput(
     req: http.IncomingMessage,
     res: http.ServerResponse,
     ctx: IContext,
-    player: Player,
+    player: Player
   ): void {
     let body = '';
-    req.on('data', function(data) {
+    req.on('data', function (data) {
       body += data.toString();
     });
     req.once('end', () => {
@@ -92,7 +115,7 @@ export class PlayerInput extends Handler {
         res.write(
           JSON.stringify({
             message: err.message,
-          }),
+          })
         );
         res.end();
       }

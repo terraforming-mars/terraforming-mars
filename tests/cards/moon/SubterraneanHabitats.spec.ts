@@ -55,14 +55,18 @@ describe('SubterraneanHabitats', () => {
     player.megaCredits = 1000;
 
     player.cardsInHand = [theWomb];
-    expect(player.getPlayableCards().map((card) => card.name)).deep.eq([CardName.THE_WOMB]);
+    expect(player.getPlayableCards().map((card) => card.name)).deep.eq([
+      CardName.THE_WOMB,
+    ]);
 
     player.titanium = 1;
     expect(player.getPlayableCards().map((card) => card.name)).is.empty;
 
     // And this one shows that with Subterranean Habitats, it needs one fewer unit of titanium.
     player.playedCards = [card];
-    expect(player.getPlayableCards().map((card) => card.name)).deep.eq([CardName.THE_WOMB]);
+    expect(player.getPlayableCards().map((card) => card.name)).deep.eq([
+      CardName.THE_WOMB,
+    ]);
   });
 
   it('applies to colony standard project', () => {

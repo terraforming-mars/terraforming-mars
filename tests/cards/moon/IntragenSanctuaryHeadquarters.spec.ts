@@ -55,4 +55,3 @@ describe('IntragenSanctuaryHeadquarters', () => {
     expect(card.getVictoryPoints()).eq(2);
   });
 });
-

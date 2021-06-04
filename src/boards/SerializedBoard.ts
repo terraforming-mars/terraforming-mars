@@ -15,7 +15,7 @@ export interface SerializedSpace {
   tile?: ITile;
   player?: PlayerId;
   bonus: Array<SpaceBonus>;
-  adjacency?: IAdjacencyBonus,
+  adjacency?: IAdjacencyBonus;
   x: number;
   y: number;
 }

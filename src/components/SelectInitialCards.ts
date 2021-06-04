@@ -1,4 +1,3 @@
-
 import Vue from 'vue';
 
 import {Button} from './common/Button';
@@ -35,7 +34,7 @@ export const SelectInitialCards = Vue.component('select-initial-cards', {
     'select-card': SelectCard,
     'confirm-dialog': ConfirmDialog,
   },
-  data: function() {
+  data: function () {
     return {
       selectedCards: [] as Array<CardName>,
       selectedCorporation: undefined as CorporationCard | undefined,
@@ -43,122 +42,131 @@ export const SelectInitialCards = Vue.component('select-initial-cards', {
     };
   },
   methods: {
-    getAfterPreludes: function() {
+    getAfterPreludes: function () {
       let result = 0;
       for (const prelude of this.selectedPrelude) {
         switch (prelude) {
-        case CardName.ALLIED_BANKS:
-          result += 3;
-          break;
-        case CardName.BUSINESS_EMPIRE:
-          result -= 6;
-          break;
-        case CardName.AQUIFER_TURBINES:
-          result -= 3;
-          break;
-        case CardName.DONATION:
-          result += 21;
-          break;
-        case CardName.GALILEAN_MINING:
-        case CardName.HUGE_ASTEROID:
-          result -= 5;
-          break;
-        case CardName.LOAN:
-          result += 30;
-          break;
-        case CardName.MARTIAN_INDUSTRIES:
-        case CardName.VALUABLE_GASES:
-          result += 6;
-          break;
-        case CardName.NITROGEN_SHIPMENT:
-          result += 5;
-          break;
-        case CardName.AEROSPACE_MISSION:
-          result -= 14;
-          break;
-        case CardName.RESEARCH_GRANT:
-          result += 8;
-          break;
-        case CardName.TRADE_ADVANCE:
-          result += 2;
-          break;
-        }
-        switch (this.selectedCorporation?.name) {
-        case CardName.MANUTECH:
-          switch (prelude) {
           case CardName.ALLIED_BANKS:
-            result += 4;
-            break;
-          case CardName.BUSINESS_EMPIRE:
-            result += 6;
-            break;
-          case CardName.DOME_FARMING:
-          case CardName.SELF_SUFFICIENT_SETTLEMENT:
-            result += 2;
-            break;
-          case CardName.METALS_COMPANY:
-          case CardName.RESEARCH_NETWORK:
-            result += 1;
-            break;
-          }
-          break;
-        case CardName.THARSIS_REPUBLIC:
-          switch (prelude) {
-          case CardName.SELF_SUFFICIENT_SETTLEMENT:
-          case CardName.EARLY_SETTLEMENT:
             result += 3;
             break;
-          }
-          break;
-        case CardName.PHARMACY_UNION:
-          switch (prelude) {
-          case CardName.BIOFUELS:
-          case CardName.ECOLOGY_EXPERTS:
-            result -= 4;
+          case CardName.BUSINESS_EMPIRE:
+            result -= 6;
             break;
-          }
-          break;
-        case CardName.SPLICE:
-          switch (prelude) {
-          case CardName.BIOFUELS:
-          case CardName.ECOLOGY_EXPERTS:
+          case CardName.AQUIFER_TURBINES:
+            result -= 3;
+            break;
+          case CardName.DONATION:
+            result += 21;
+            break;
+          case CardName.GALILEAN_MINING:
+          case CardName.HUGE_ASTEROID:
+            result -= 5;
+            break;
+          case CardName.LOAN:
+            result += 30;
+            break;
+          case CardName.MARTIAN_INDUSTRIES:
+          case CardName.VALUABLE_GASES:
+            result += 6;
+            break;
+          case CardName.NITROGEN_SHIPMENT:
+            result += 5;
+            break;
+          case CardName.AEROSPACE_MISSION:
+            result -= 14;
+            break;
+          case CardName.RESEARCH_GRANT:
+            result += 8;
+            break;
+          case CardName.TRADE_ADVANCE:
             result += 2;
             break;
-          }
-          break;
-        case CardName.APHRODITE:
-          switch (prelude) {
-          case CardName.VENUS_FIRST:
-            result += 4;
+        }
+        switch (this.selectedCorporation?.name) {
+          case CardName.MANUTECH:
+            switch (prelude) {
+              case CardName.ALLIED_BANKS:
+                result += 4;
+                break;
+              case CardName.BUSINESS_EMPIRE:
+                result += 6;
+                break;
+              case CardName.DOME_FARMING:
+              case CardName.SELF_SUFFICIENT_SETTLEMENT:
+                result += 2;
+                break;
+              case CardName.METALS_COMPANY:
+              case CardName.RESEARCH_NETWORK:
+                result += 1;
+                break;
+            }
             break;
-          }
+          case CardName.THARSIS_REPUBLIC:
+            switch (prelude) {
+              case CardName.SELF_SUFFICIENT_SETTLEMENT:
+              case CardName.EARLY_SETTLEMENT:
+                result += 3;
+                break;
+            }
+            break;
+          case CardName.PHARMACY_UNION:
+            switch (prelude) {
+              case CardName.BIOFUELS:
+              case CardName.ECOLOGY_EXPERTS:
+                result -= 4;
+                break;
+            }
+            break;
+          case CardName.SPLICE:
+            switch (prelude) {
+              case CardName.BIOFUELS:
+              case CardName.ECOLOGY_EXPERTS:
+                result += 2;
+                break;
+            }
+            break;
+          case CardName.APHRODITE:
+            switch (prelude) {
+              case CardName.VENUS_FIRST:
+                result += 4;
+                break;
+            }
         }
       }
       return result;
     },
-    getOption: function(idx: number) {
-      if (this.playerinput.options === undefined || this.playerinput.options[idx] === undefined) {
+    getOption: function (idx: number) {
+      if (
+        this.playerinput.options === undefined ||
+        this.playerinput.options[idx] === undefined
+      ) {
         throw new Error('invalid input, missing option');
       }
       return this.playerinput.options[idx];
     },
-    getStartingMegacredits: function() {
+    getStartingMegacredits: function () {
       if (this.selectedCorporation === undefined) {
         return NaN;
       }
       let starting = this.selectedCorporation.startingMegaCredits;
-      const cardCost = this.selectedCorporation.cardCost === undefined ? constants.CARD_COST : this.selectedCorporation.cardCost;
+      const cardCost =
+        this.selectedCorporation.cardCost === undefined
+          ? constants.CARD_COST
+          : this.selectedCorporation.cardCost;
       starting -= this.selectedCards.length * cardCost;
       return starting;
     },
-    saveIfConfirmed: function() {
-      if (PreferencesManager.load('show_alerts') === '1' && this.selectedCards.length === 0) {
+    saveIfConfirmed: function () {
+      if (
+        PreferencesManager.load('show_alerts') === '1' &&
+        this.selectedCards.length === 0
+      ) {
         (this.$refs['confirmation'] as any).show();
       } else {
         this.saveData();
       }
     },
-    saveData: function() {
+    saveData: function () {
       const result: Array<Array<string>> = [];
       result.push([]);
       if (this.selectedCorporation !== undefined) {
@@ -170,19 +178,24 @@ export const SelectInitialCards = Vue.component('select-initial-cards', {
       result.push(this.selectedCards);
       this.onsave(result);
     },
-    hasPrelude: function() {
-      return this.playerinput.options !== undefined && this.playerinput.options.length === 3;
+    hasPrelude: function () {
+      return (
+        this.playerinput.options !== undefined &&
+        this.playerinput.options.length === 3
+      );
     },
-    cardsChanged: function(cards: Array<CardName>) {
+    cardsChanged: function (cards: Array<CardName>) {
       this.selectedCards = cards;
     },
-    corporationChanged: function(cards: Array<CardName>) {
-      this.selectedCorporation = new CardFinder().getCorporationCardByName(cards[0]);
+    corporationChanged: function (cards: Array<CardName>) {
+      this.selectedCorporation = new CardFinder().getCorporationCardByName(
+        cards[0]
+      );
     },
-    preludesChanged: function(cards: Array<CardName>) {
+    preludesChanged: function (cards: Array<CardName>) {
       this.selectedPrelude = cards;
     },
-    confirmSelection: function() {
+    confirmSelection: function () {
       this.saveData();
     },
   },
@@ -200,4 +213,3 @@ export const SelectInitialCards = Vue.component('select-initial-cards', {
     <Button v-if="showsave" :onClick="saveIfConfirmed" type="submit" :title="playerinput.buttonLabel" />
   </div>`,
 });
-

@@ -26,20 +26,33 @@ export class ProjectWorkshop extends Card implements CorporationCard {
 
       metadata: {
         cardNumber: 'R45',
-        description: 'You start with 39 M€, 1 steel and 1 titanium. As your first action, draw a blue card.',
+        description:
+          'You start with 39 M€, 1 steel and 1 titanium. As your first action, draw a blue card.',
         renderData: CardRenderer.builder((b) => {
-          b.megacredits(39).steel(1).titanium(1).cards(1).secondaryTag(AltSecondaryTag.BLUE);
+          b.megacredits(39)
+            .steel(1)
+            .titanium(1)
+            .cards(1)
+            .secondaryTag(AltSecondaryTag.BLUE);
           b.corpBox('action', (cb) => {
             cb.vSpace(Size.LARGE);
             cb.action(undefined, (eb) => {
-              eb.text('flip', Size.SMALL, true).cards(1).secondaryTag(AltSecondaryTag.BLUE);
+              eb.text('flip', Size.SMALL, true)
+                .cards(1)
+                .secondaryTag(AltSecondaryTag.BLUE);
               eb.startAction.text('?', Size.MEDIUM, true).tr(1, Size.SMALL);
               eb.cards(2).digit;
             });
             cb.vSpace(Size.SMALL);
-            cb.action('Flip and discard a played blue card to convert any VP on it into TR and draw 2 cards, or spend 3 M€ to draw a blue card.', (eb) => {
-              eb.or().megacredits(3).startAction.cards(1).secondaryTag(AltSecondaryTag.BLUE);
-            });
+            cb.action(
+              'Flip and discard a played blue card to convert any VP on it into TR and draw 2 cards, or spend 3 M€ to draw a blue card.',
+              (eb) => {
+                eb.or()
+                  .megacredits(3)
+                  .startAction.cards(1)
+                  .secondaryTag(AltSecondaryTag.BLUE);
+              }
+            );
           });
         }),
       },
@@ -85,16 +98,20 @@ export class ProjectWorkshop extends Card implements CorporationCard {
             this.discardPlayedCard(player, foundCards[0]);
             player.drawCard(2);
             return undefined;
-          },
+          }
         );
-      },
+      }
     );
 
-    const drawBlueCard = new SelectOption('Spend 3 M€ to draw a blue card', 'Draw card', () => {
-      player.deductResource(Resources.MEGACREDITS, 3);
-      player.drawCard(1, {cardType: CardType.ACTIVE});
-      return undefined;
-    });
+    const drawBlueCard = new SelectOption(
+      'Spend 3 M€ to draw a blue card',
+      'Draw card',
+      () => {
+        player.deductResource(Resources.MEGACREDITS, 3);
+        player.drawCard(1, {cardType: CardType.ACTIVE});
+        return undefined;
+      }
+    );
 
     if (activeCards.length === 0) return drawBlueCard;
     if (!player.canAfford(3)) return flipBlueCard;
@@ -119,6 +136,8 @@ export class ProjectWorkshop extends Card implements CorporationCard {
       card.onDiscard(player);
     }
 
-    player.game.log('${0} flipped and discarded ${1}', (b) => b.player(player).card(card));
+    player.game.log('${0} flipped and discarded ${1}', (b) =>
+      b.player(player).card(card)
+    );
   }
 }

@@ -21,7 +21,13 @@ export class BusinessNetwork extends Card implements IActionCard, IProjectCard {
         cardNumber: '110',
         description: 'Decrease your M€ production 1 step.',
         renderData: CardRenderer.builder((b) => {
-          b.action(undefined, (eb) => eb.empty().startAction.empty()).text('Action: Look at the top card and either buy it or discard it', Size.SMALL, true).br;
+          b
+            .action(undefined, (eb) => eb.empty().startAction.empty())
+            .text(
+              'Action: Look at the top card and either buy it or discard it',
+              Size.SMALL,
+              true
+            ).br;
           b.production((pb) => pb.megacredits(-1));
         }),
       },

@@ -10,7 +10,10 @@ import {CardRenderer} from '../render/CardRenderer';
 import {CardRenderDynamicVictoryPoints} from '../render/CardRenderDynamicVictoryPoints';
 import {Card} from '../Card';
 
-export class StratosphericBirds extends Card implements IActionCard, IResourceCard {
+export class StratosphericBirds
+  extends Card
+  implements IActionCard, IResourceCard
+{
   constructor() {
     super({
       name: CardName.STRATOSPHERIC_BIRDS,
@@ -36,10 +39,12 @@ export class StratosphericBirds extends Card implements IActionCard, IResourceCa
         victoryPoints: CardRenderDynamicVictoryPoints.animals(1, 1),
       },
     });
-  };
+  }
   public resourceCount: number = 0;
   public canPlay(player: Player): boolean {
-    const cardsWithFloater = player.getCardsWithResources().filter((card) => card.resourceType === ResourceType.FLOATER);
+    const cardsWithFloater = player
+      .getCardsWithResources()
+      .filter((card) => card.resourceType === ResourceType.FLOATER);
     if (cardsWithFloater.length === 0) return false;
 
     const meetsGlobalRequirements = super.canPlay(player);
@@ -48,14 +53,18 @@ export class StratosphericBirds extends Card implements IActionCard, IResourceCa
       return meetsGlobalRequirements;
     } else {
       const floaterCard = cardsWithFloater[0];
-      if (floaterCard.name !== CardName.DIRIGIBLES) return meetsGlobalRequirements;
+      if (floaterCard.name !== CardName.DIRIGIBLES)
+        return meetsGlobalRequirements;
 
-      const canPayForFloater = ((floaterCard.resourceCount! - 1) * 3 + player.megaCredits) >= 12;
+      const canPayForFloater =
+        (floaterCard.resourceCount! - 1) * 3 + player.megaCredits >= 12;
       return canPayForFloater && meetsGlobalRequirements;
     }
   }
   public play(player: Player) {
-    player.game.defer(new RemoveResourcesFromCard(player, ResourceType.FLOATER, 1, true));
+    player.game.defer(
+      new RemoveResourcesFromCard(player, ResourceType.FLOATER, 1, true)
+    );
     return undefined;
   }
   public canAct(): boolean {

@@ -26,7 +26,8 @@ export class PROffice extends Card implements IProjectCard {
           b.tr(1).br;
           b.megacredits(1).slash().earth().played;
         }),
-        description: 'Requires that Unity are ruling or that you have 2 delegates there. Gain 1 TR. Gain 1 M€ for each Earth tag you have, including this.',
+        description:
+          'Requires that Unity are ruling or that you have 2 delegates there. Gain 1 TR. Gain 1 M€ for each Earth tag you have, including this.',
       },
     });
   }
@@ -36,7 +37,9 @@ export class PROffice extends Card implements IProjectCard {
       return false;
     }
     if (PartyHooks.shouldApplyPolicy(player.game, PartyName.REDS)) {
-      return player.canAfford(player.getCardCost(this) + REDS_RULING_POLICY_COST);
+      return player.canAfford(
+        player.getCardCost(this) + REDS_RULING_POLICY_COST
+      );
     }
     return true;
   }

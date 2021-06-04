@@ -7,7 +7,10 @@ import {Player} from '../../Player';
 import {CardName} from '../../CardName';
 import {CardRenderer} from '../render/CardRenderer';
 
-export class DevelopmentCenter extends Card implements IActionCard, IProjectCard {
+export class DevelopmentCenter
+  extends Card
+  implements IActionCard, IProjectCard
+{
   constructor() {
     super({
       cardType: CardType.ACTIVE,

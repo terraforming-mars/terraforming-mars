@@ -5,21 +5,22 @@ import {ImportedNutrients} from '../../../src/cards/promo/ImportedNutrients';
 import {Player} from '../../../src/Player';
 import {TestPlayers} from '../../TestPlayers';
 
-describe('ImportedNutrients', function() {
-  let card : ImportedNutrients; let player : Player;
+describe('ImportedNutrients', function () {
+  let card: ImportedNutrients;
+  let player: Player;
 
-  beforeEach(function() {
+  beforeEach(function () {
     card = new ImportedNutrients();
     player = TestPlayers.BLUE.newPlayer();
   });
 
-  it('Can play without microbe cards', function() {
+  it('Can play without microbe cards', function () {
     const action = card.play(player);
     expect(player.plants).to.eq(4);
     expect(action).is.undefined;
   });
 
-  it('Adds microbes automatically if only 1 target', function() {
+  it('Adds microbes automatically if only 1 target', function () {
     const ants = new Ants();
     player.playedCards.push(ants);
 
@@ -28,7 +29,7 @@ describe('ImportedNutrients', function() {
     expect(player.getResourcesOnCard(ants)).to.eq(4);
   });
 
-  it('Can select target if have multiple cards collecting microbes', function() {
+  it('Can select target if have multiple cards collecting microbes', function () {
     const ants = new Ants();
     const decomposers = new Decomposers();
     player.playedCards.push(ants, decomposers);
@@ -37,7 +38,7 @@ describe('ImportedNutrients', function() {
     expect(player.plants).to.eq(4);
 
     expect(action).is.not.undefined;
-        action!.cb([decomposers]);
-        expect(player.getResourcesOnCard(decomposers)).to.eq(4);
+    action!.cb([decomposers]);
+    expect(player.getResourcesOnCard(decomposers)).to.eq(4);
   });
 });

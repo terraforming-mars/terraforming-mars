@@ -1,4 +1,3 @@
-
 import {IProjectCard} from '../IProjectCard';
 import {Tags} from '../Tags';
 import {Card} from '../Card';
@@ -20,7 +19,8 @@ export class BuildingIndustries extends Card implements IProjectCard {
 
       metadata: {
         cardNumber: '065',
-        description: 'Decrease your Energy production 1 step and increase your steel production 2 steps.',
+        description:
+          'Decrease your Energy production 1 step and increase your steel production 2 steps.',
         renderData: CardRenderer.builder((b) => {
           b.production((pb) => {
             pb.minus().energy(1).br;

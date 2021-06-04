@@ -25,8 +25,11 @@ export class Mangrove extends Card implements IProjectCard {
       requirements: CardRequirements.builder((b) => b.temperature(4)),
       metadata: {
         cardNumber: '059',
-        renderData: CardRenderer.builder((b) => b.greenery(Size.MEDIUM).asterix()),
-        description: 'Requires +4 C or warmer. Place a greenery tile ON AN AREA RESERVED FOR OCEAN and raise oxygen 1 step. Disregard normal placement restrictions for this.',
+        renderData: CardRenderer.builder((b) =>
+          b.greenery(Size.MEDIUM).asterix()
+        ),
+        description:
+          'Requires +4 C or warmer. Place a greenery tile ON AN AREA RESERVED FOR OCEAN and raise oxygen 1 step. Disregard normal placement restrictions for this.',
         victoryPoints: 1,
       },
     });
@@ -36,17 +39,28 @@ export class Mangrove extends Card implements IProjectCard {
     const meetsCardRequirements = super.canPlay(player);
     const oxygenMaxed = player.game.getOxygenLevel() === MAX_OXYGEN_LEVEL;
 
-    if (PartyHooks.shouldApplyPolicy(player.game, PartyName.REDS) && !oxygenMaxed) {
-      return player.canAfford(player.getCardCost(this) + REDS_RULING_POLICY_COST, {microbes: true}) && meetsCardRequirements;
+    if (
+      PartyHooks.shouldApplyPolicy(player.game, PartyName.REDS) &&
+      !oxygenMaxed
+    ) {
+      return (
+        player.canAfford(player.getCardCost(this) + REDS_RULING_POLICY_COST, {
+          microbes: true,
+        }) && meetsCardRequirements
+      );
     }
 
     return meetsCardRequirements;
   }
 
   public play(player: Player) {
-    return new SelectSpace('Select ocean space for greenery tile', player.game.board.getAvailableSpacesForOcean(player), (foundSpace: ISpace) => {
-      return player.game.addGreenery(player, foundSpace.id, SpaceType.OCEAN);
-    });
+    return new SelectSpace(
+      'Select ocean space for greenery tile',
+      player.game.board.getAvailableSpacesForOcean(player),
+      (foundSpace: ISpace) => {
+        return player.game.addGreenery(player, foundSpace.id, SpaceType.OCEAN);
+      }
+    );
   }
   public getVictoryPoints() {
     return 1;

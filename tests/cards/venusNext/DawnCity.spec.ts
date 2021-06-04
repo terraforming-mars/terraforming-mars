@@ -5,8 +5,8 @@ import {Resources} from '../../../src/Resources';
 import {TestingUtils} from '../../TestingUtils';
 import {TestPlayers} from '../../TestPlayers';
 
-describe('DawnCity', function() {
-  it('Should play', function() {
+describe('DawnCity', function () {
+  it('Should play', function () {
     const card = new DawnCity();
     const player = TestPlayers.BLUE.newPlayer();
     const redPlayer = TestPlayers.RED.newPlayer();

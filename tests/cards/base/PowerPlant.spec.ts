@@ -3,8 +3,8 @@ import {PowerPlant} from '../../../src/cards/base/PowerPlant';
 import {Resources} from '../../../src/Resources';
 import {TestPlayers} from '../../TestPlayers';
 
-describe('PowerPlant', function() {
-  it('Should play', function() {
+describe('PowerPlant', function () {
+  it('Should play', function () {
     const card = new PowerPlant();
     const player = TestPlayers.BLUE.newPlayer();
     expect(card.play(player)).is.undefined;

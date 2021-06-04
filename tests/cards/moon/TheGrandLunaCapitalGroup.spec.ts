@@ -18,7 +18,12 @@ describe('TheGrandLunaCapitalGroup', () => {
   beforeEach(() => {
     player = TestPlayers.BLUE.newPlayer();
     otherPlayer = TestPlayers.RED.newPlayer();
-    const game = Game.newInstance('id', [player, otherPlayer], player, MOON_OPTIONS);
+    const game = Game.newInstance(
+      'id',
+      [player, otherPlayer],
+      player,
+      MOON_OPTIONS
+    );
     card = new TheGrandLunaCapitalGroup();
     moonData = MoonExpansion.moonData(game);
   });
@@ -73,4 +78,3 @@ describe('TheGrandLunaCapitalGroup', () => {
     expect(card.getVictoryPoints(player)).eq(3);
   });
 });
-

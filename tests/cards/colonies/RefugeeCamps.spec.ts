@@ -4,15 +4,16 @@ import {Player} from '../../../src/Player';
 import {Resources} from '../../../src/Resources';
 import {TestPlayers} from '../../TestPlayers';
 
-describe('RefugeeCamps', function() {
-  let card : RefugeeCamps; let player : Player;
+describe('RefugeeCamps', function () {
+  let card: RefugeeCamps;
+  let player: Player;
 
-  beforeEach(function() {
+  beforeEach(function () {
     card = new RefugeeCamps();
     player = TestPlayers.BLUE.newPlayer();
   });
 
-  it('Should play', function() {
+  it('Should play', function () {
     const action = card.play();
     expect(action).is.undefined;
 
@@ -20,12 +21,12 @@ describe('RefugeeCamps', function() {
     expect(card.getVictoryPoints()).to.eq(5);
   });
 
-  it('Can\'t act', function() {
+  it("Can't act", function () {
     player.addProduction(Resources.MEGACREDITS, -5);
     expect(card.canAct(player)).is.not.true;
   });
 
-  it('Should act', function() {
+  it('Should act', function () {
     expect(card.canAct(player)).is.true;
     card.action(player);
     expect(card.resourceCount).to.eq(1);

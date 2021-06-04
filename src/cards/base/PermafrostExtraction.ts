@@ -31,10 +31,17 @@ export class PermafrostExtraction extends Card implements IProjectCard {
 
   public canPlay(player: Player): boolean {
     const meetsTemperatureRequirements = super.canPlay(player);
-    const oceansMaxed = player.game.board.getOceansOnBoard() === MAX_OCEAN_TILES;
+    const oceansMaxed =
+      player.game.board.getOceansOnBoard() === MAX_OCEAN_TILES;
 
-    if (PartyHooks.shouldApplyPolicy(player.game, PartyName.REDS) && !oceansMaxed) {
-      return player.canAfford(player.getCardCost(this) + REDS_RULING_POLICY_COST) && meetsTemperatureRequirements;
+    if (
+      PartyHooks.shouldApplyPolicy(player.game, PartyName.REDS) &&
+      !oceansMaxed
+    ) {
+      return (
+        player.canAfford(player.getCardCost(this) + REDS_RULING_POLICY_COST) &&
+        meetsTemperatureRequirements
+      );
     }
 
     return meetsTemperatureRequirements;
@@ -45,9 +52,13 @@ export class PermafrostExtraction extends Card implements IProjectCard {
       return undefined;
     }
 
-    return new SelectSpace('Select space for ocean tile', player.game.board.getAvailableSpacesForOcean(player), (space: ISpace) => {
-      player.game.addOceanTile(player, space.id);
-      return undefined;
-    });
+    return new SelectSpace(
+      'Select space for ocean tile',
+      player.game.board.getAvailableSpacesForOcean(player),
+      (space: ISpace) => {
+        player.game.addOceanTile(player, space.id);
+        return undefined;
+      }
+    );
   }
 }

@@ -12,7 +12,10 @@ import {CardRequirements} from '../CardRequirements';
 import {CardRenderer} from '../render/CardRenderer';
 import {CardRenderDynamicVictoryPoints} from '../render/CardRenderDynamicVictoryPoints';
 
-export class Fish extends Card implements IActionCard, IProjectCard, IResourceCard {
+export class Fish
+  extends Card
+  implements IActionCard, IProjectCard, IResourceCard
+{
   constructor() {
     super({
       cardType: CardType.ACTIVE,
@@ -39,23 +42,26 @@ export class Fish extends Card implements IActionCard, IProjectCard, IResourceCa
       },
     });
   }
-    public resourceCount: number = 0;
+  public resourceCount: number = 0;
 
-    public canPlay(player: Player): boolean {
-      return super.canPlay(player) && player.game.someoneHasResourceProduction(Resources.PLANTS, 1);
-    }
-    public getVictoryPoints(): number {
-      return this.resourceCount;
-    }
-    public play(player: Player) {
-      player.game.defer(new DecreaseAnyProduction(player, Resources.PLANTS, 1));
-      return undefined;
-    }
-    public canAct(): boolean {
-      return true;
-    }
-    public action(player: Player) {
-      player.addResourceTo(this);
-      return undefined;
-    }
+  public canPlay(player: Player): boolean {
+    return (
+      super.canPlay(player) &&
+      player.game.someoneHasResourceProduction(Resources.PLANTS, 1)
+    );
+  }
+  public getVictoryPoints(): number {
+    return this.resourceCount;
+  }
+  public play(player: Player) {
+    player.game.defer(new DecreaseAnyProduction(player, Resources.PLANTS, 1));
+    return undefined;
+  }
+  public canAct(): boolean {
+    return true;
+  }
+  public action(player: Player) {
+    player.addResourceTo(this);
+    return undefined;
+  }
 }

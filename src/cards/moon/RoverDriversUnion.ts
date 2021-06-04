@@ -19,15 +19,18 @@ export class RoverDriversUnion extends Card implements IProjectCard {
       requirements: CardRequirements.builder((b) => b.logisticRate(2)),
 
       metadata: {
-        description: 'Requires 2 Logistic Rate. Raise the Logistic Rate 1 step. Increase your M€ production 1 step per Logistic Rate.',
+        description:
+          'Requires 2 Logistic Rate. Raise the Logistic Rate 1 step. Increase your M€ production 1 step per Logistic Rate.',
         cardNumber: 'M78',
         renderData: CardRenderer.builder((b) => {
           b.moonLogisticsRate().br;
-          b.production((pb) => pb.megacredits(1)).slash().moonLogisticsRate();
+          b.production((pb) => pb.megacredits(1))
+            .slash()
+            .moonLogisticsRate();
         }),
       },
     });
-  };
+  }
 
   public play(player: Player) {
     MoonExpansion.ifMoon(player.game, (moonData) => {

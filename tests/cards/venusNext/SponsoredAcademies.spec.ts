@@ -9,8 +9,8 @@ import {TestPlayers} from '../../TestPlayers';
 import {DiscardCards} from '../../../src/deferredActions/DiscardCards';
 import {DrawCards} from '../../../src/deferredActions/DrawCards';
 
-describe('SponsoredAcademies', function() {
-  it('Should play', function() {
+describe('SponsoredAcademies', function () {
+  it('Should play', function () {
     const card = new SponsoredAcademies();
     const card2 = new HousePrinting();
     const card3 = new Tardigrades();
@@ -23,11 +23,15 @@ describe('SponsoredAcademies', function() {
     expect(card.canPlay(player)).is.true;
 
     player.playCard(card);
-    const discardCard = game.deferredActions.pop()!.execute() as SelectCard<IProjectCard>;
+    const discardCard = game.deferredActions
+      .pop()!
+      .execute() as SelectCard<IProjectCard>;
     expect(discardCard instanceof SelectCard).is.true;
 
     // No SponsoredAcademies itself suggested to discard
-    expect(discardCard.cards.filter((c) => c.name === card.name)).has.lengthOf(0);
+    expect(discardCard.cards.filter((c) => c.name === card.name)).has.lengthOf(
+      0
+    );
 
     discardCard.cb([card2]);
     game.deferredActions.runAll(() => {}); // Draw cards
@@ -35,23 +39,37 @@ describe('SponsoredAcademies', function() {
     expect(player2.cardsInHand).has.lengthOf(1);
   });
 
-  it('triggers in right order', function() {
+  it('triggers in right order', function () {
     const card = new SponsoredAcademies();
 
     const player = TestPlayers.BLUE.newPlayer();
     const player2 = TestPlayers.RED.newPlayer();
     const player3 = TestPlayers.BLACK.newPlayer();
     const player4 = TestPlayers.GREEN.newPlayer();
-    const game = Game.newInstance('foobar', [player, player2, player3, player4], player);
+    const game = Game.newInstance(
+      'foobar',
+      [player, player2, player3, player4],
+      player
+    );
 
     player.cardsInHand.push(card, new HousePrinting(), new Tardigrades());
     player.playCard(card);
 
     // If something here doesn't work, it might be linked to the DeferredActionsQueue,
-    expect((game.deferredActions.pop() as DiscardCards).title).eq('Select 1 card to discard');
-    expect((game.deferredActions.pop() as DrawCards<any>).player.color).eq('blue');
-    expect((game.deferredActions.pop() as DrawCards<any>).player.color).eq('red');
-    expect((game.deferredActions.pop() as DrawCards<any>).player.color).eq('black');
-    expect((game.deferredActions.pop() as DrawCards<any>).player.color).eq('green');
+    expect((game.deferredActions.pop() as DiscardCards).title).eq(
+      'Select 1 card to discard'
+    );
+    expect((game.deferredActions.pop() as DrawCards<any>).player.color).eq(
+      'blue'
+    );
+    expect((game.deferredActions.pop() as DrawCards<any>).player.color).eq(
+      'red'
+    );
+    expect((game.deferredActions.pop() as DrawCards<any>).player.color).eq(
+      'black'
+    );
+    expect((game.deferredActions.pop() as DrawCards<any>).player.color).eq(
+      'green'
+    );
   });
 });

@@ -22,7 +22,8 @@ export class BactoviralResearch extends Card implements IProjectCard {
           b.cards(1).br.br; // double br is intentional for visual appeal
           b.microbes(1).asterix().slash().science().played;
         }),
-        description: 'Draw a card. Choose any one microbe card and add a microbe to it for each science tag you have, including this.',
+        description:
+          'Draw a card. Choose any one microbe card and add a microbe to it for each science tag you have, including this.',
       },
     });
   }
@@ -45,7 +46,7 @@ export class BactoviralResearch extends Card implements IProjectCard {
         (foundCards: Array<ICard>) => {
           player.addResourceTo(foundCards[0], {qty: scienceTags, log: true});
           return undefined;
-        },
+        }
       );
     }
     return undefined;

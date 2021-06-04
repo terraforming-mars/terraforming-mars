@@ -12,7 +12,10 @@ import {CardRenderDynamicVictoryPoints} from '../render/CardRenderDynamicVictory
 import {Size} from '../render/Size';
 import {Units} from '../../Units';
 
-export class AsteroidDeflectionSystem extends Card implements IActionCard, IProjectCard, IResourceCard {
+export class AsteroidDeflectionSystem
+  extends Card
+  implements IActionCard, IProjectCard, IResourceCard
+{
   constructor() {
     super({
       cardType: CardType.ACTIVE,
@@ -25,10 +28,22 @@ export class AsteroidDeflectionSystem extends Card implements IActionCard, IProj
       metadata: {
         cardNumber: 'X14',
         renderData: CardRenderer.builder((b) => {
-          b.action('REVEAL AND DISCARD the top card of the deck. If it has a space tag, add an asteroid here.', (eb) => {
-            eb.empty().startAction.cards(1).asterix().nbsp.space().played.colon().asteroids(1);
-          }).br;
-          b.production((pb) => pb.minus().energy(1)).text('opponents may not remove your plants', Size.SMALL, true);
+          b.action(
+            'REVEAL AND DISCARD the top card of the deck. If it has a space tag, add an asteroid here.',
+            (eb) => {
+              eb.empty()
+                .startAction.cards(1)
+                .asterix()
+                .nbsp.space()
+                .played.colon()
+                .asteroids(1);
+            }
+          ).br;
+          b.production((pb) => pb.minus().energy(1)).text(
+            'opponents may not remove your plants',
+            Size.SMALL,
+            true
+          );
         }),
         description: {
           text: 'Decrease your energy production 1 step. 1VP per asteroid on this card.',
@@ -56,7 +71,9 @@ export class AsteroidDeflectionSystem extends Card implements IActionCard, IProj
   public action(player: Player) {
     const topCard = player.game.dealer.dealCard(player.game);
     if (topCard.tags.includes(Tags.SPACE)) player.addResourceTo(this);
-    player.game.log('${0} revealed and discarded ${1}', (b) => b.player(player).card(topCard));
+    player.game.log('${0} revealed and discarded ${1}', (b) =>
+      b.player(player).card(topCard)
+    );
     player.game.dealer.discard(topCard);
     return undefined;
   }

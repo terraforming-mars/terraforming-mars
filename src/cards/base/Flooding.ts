@@ -27,17 +27,24 @@ export class Flooding extends Card implements IProjectCard {
         renderData: CardRenderer.builder((b) => {
           b.oceans(1).nbsp.minus().megacredits(4).any.asterix();
         }),
-        description: 'Place an ocean tile. IF THERE ARE TILES ADJACENT TO THIS OCEAN TILE, YOU MAY REMOVE 4 M€ FROM THE OWNER OF ONE OF THOSE TILES.',
+        description:
+          'Place an ocean tile. IF THERE ARE TILES ADJACENT TO THIS OCEAN TILE, YOU MAY REMOVE 4 M€ FROM THE OWNER OF ONE OF THOSE TILES.',
         victoryPoints: -1,
       },
     });
   }
 
   public canPlay(player: Player): boolean {
-    const oceansMaxed = player.game.board.getOceansOnBoard() === MAX_OCEAN_TILES;
+    const oceansMaxed =
+      player.game.board.getOceansOnBoard() === MAX_OCEAN_TILES;
 
-    if (PartyHooks.shouldApplyPolicy(player.game, PartyName.REDS) && !oceansMaxed) {
-      return player.canAfford(player.getCardCost(this) + REDS_RULING_POLICY_COST);
+    if (
+      PartyHooks.shouldApplyPolicy(player.game, PartyName.REDS) &&
+      !oceansMaxed
+    ) {
+      return player.canAfford(
+        player.getCardCost(this) + REDS_RULING_POLICY_COST
+      );
     }
 
     return true;
@@ -49,7 +56,8 @@ export class Flooding extends Card implements IProjectCard {
       return undefined;
     }
 
-    const oceansMaxedBeforePlacement = player.game.board.getOceansOnBoard() === MAX_OCEAN_TILES;
+    const oceansMaxedBeforePlacement =
+      player.game.board.getOceansOnBoard() === MAX_OCEAN_TILES;
     if (oceansMaxedBeforePlacement === true) return undefined;
 
     return new SelectSpace(
@@ -72,21 +80,24 @@ export class Flooding extends Card implements IProjectCard {
               'Select adjacent player to remove 4 M€ from',
               'Remove credits',
               (selectedPlayer: Player) => {
-                selectedPlayer.deductResource(Resources.MEGACREDITS, 4, {log: true, from: player});
+                selectedPlayer.deductResource(Resources.MEGACREDITS, 4, {
+                  log: true,
+                  from: player,
+                });
                 return undefined;
-              },
+              }
             ),
             new SelectOption(
-              'Don\'t remove M€ from adjacent player',
+              "Don't remove M€ from adjacent player",
               'Confirm',
               () => {
                 return undefined;
-              },
-            ),
+              }
+            )
           );
         }
         return undefined;
-      },
+      }
     );
   }
   public getVictoryPoints() {

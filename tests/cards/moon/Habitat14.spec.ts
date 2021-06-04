@@ -54,4 +54,3 @@ describe('Habitat14', () => {
     expect(player.game.deferredActions.peek()).instanceOf(PlaceMoonColonyTile);
   });
 });
-

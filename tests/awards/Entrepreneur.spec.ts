@@ -8,15 +8,19 @@ import {SpaceId} from '../../src/boards/ISpace';
 import {IAdjacencyBonus} from '../../src/ares/IAdjacencyBonus';
 import {SpaceBonus} from '../../src/SpaceBonus';
 
-function addAdjacencyBonus(player: Player, spaceId: SpaceId, adjacency: IAdjacencyBonus = {bonus: [SpaceBonus.HEAT]}): void {
+function addAdjacencyBonus(
+  player: Player,
+  spaceId: SpaceId,
+  adjacency: IAdjacencyBonus = {bonus: [SpaceBonus.HEAT]}
+): void {
   const space = player.game.board.getSpace(spaceId);
   space.tile = {tileType: TileType.GREENERY};
   space.player = player;
   space.adjacency = adjacency;
 }
 
-describe('Entrepreneur', function() {
-  it('Correctly counts ocean tiles', function() {
+describe('Entrepreneur', function () {
+  it('Correctly counts ocean tiles', function () {
     const award = new Entrepreneur();
     const player = TestPlayers.BLUE.newPlayer();
     const player2 = TestPlayers.RED.newPlayer();

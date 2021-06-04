@@ -8,10 +8,11 @@ import {SelectCard} from '../../../src/inputs/SelectCard';
 import {Player} from '../../../src/Player';
 import {TestPlayers} from '../../TestPlayers';
 
-describe('AerialMappers', function() {
-  let card : AerialMappers; let player : Player;
+describe('AerialMappers', function () {
+  let card: AerialMappers;
+  let player: Player;
 
-  beforeEach(function() {
+  beforeEach(function () {
     card = new AerialMappers();
     player = TestPlayers.BLUE.newPlayer();
     const redPlayer = TestPlayers.RED.newPlayer();
@@ -19,12 +20,12 @@ describe('AerialMappers', function() {
     player.playedCards.push(card);
   });
 
-  it('Should play', function() {
+  it('Should play', function () {
     const action = card.play();
     expect(action).is.undefined;
   });
 
-  it('Should act - multiple targets', function() {
+  it('Should act - multiple targets', function () {
     const card2 = new Dirigibles();
     player.playedCards.push(card2);
     const action = card.action(player) as SelectCard<ICard>;
@@ -41,7 +42,7 @@ describe('AerialMappers', function() {
     expect(player.cardsInHand).has.lengthOf(1);
   });
 
-  it('Should act - single target', function() {
+  it('Should act - single target', function () {
     card.action(player);
     expect(card.resourceCount).to.eq(1);
 

@@ -17,16 +17,22 @@ export class FloaterLeasing extends Card implements IProjectCard {
       metadata: {
         cardNumber: 'C10',
         renderData: CardRenderer.builder((b) => {
-          b.production((pb) => pb.megacredits(1)).slash().floaters(3).digit;
+          b
+            .production((pb) => pb.megacredits(1))
+            .slash()
+            .floaters(3).digit;
         }),
-        description: 'Increase your M€ production 1 step PER 3 floaters you have.',
+        description:
+          'Increase your M€ production 1 step PER 3 floaters you have.',
       },
     });
   }
 
   public play(player: Player) {
-    player.addProduction(Resources.MEGACREDITS, Math.floor(player.getResourceCount(ResourceType.FLOATER) / 3));
+    player.addProduction(
+      Resources.MEGACREDITS,
+      Math.floor(player.getResourceCount(ResourceType.FLOATER) / 3)
+    );
     return undefined;
   }
 }
-

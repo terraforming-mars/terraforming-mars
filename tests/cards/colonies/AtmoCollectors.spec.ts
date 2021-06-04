@@ -5,22 +5,23 @@ import {OrOptions} from '../../../src/inputs/OrOptions';
 import {Player} from '../../../src/Player';
 import {TestPlayers} from '../../TestPlayers';
 
-describe('AtmoCollectors', function() {
-  let card : AtmoCollectors; let player : Player;
+describe('AtmoCollectors', function () {
+  let card: AtmoCollectors;
+  let player: Player;
 
-  beforeEach(function() {
+  beforeEach(function () {
     card = new AtmoCollectors();
     player = TestPlayers.BLUE.newPlayer();
     const redPlayer = TestPlayers.RED.newPlayer();
     Game.newInstance('foobar', [player, redPlayer], player);
   });
 
-  it('Should play', function() {
+  it('Should play', function () {
     const action = card.play(player);
     expect(action).is.undefined;
   });
 
-  it('Should act', function() {
+  it('Should act', function () {
     player.playedCards.push(card);
     const action = card.action(player);
     expect(action).is.undefined;

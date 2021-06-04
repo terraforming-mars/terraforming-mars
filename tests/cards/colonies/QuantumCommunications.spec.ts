@@ -6,8 +6,8 @@ import {Game} from '../../../src/Game';
 import {Resources} from '../../../src/Resources';
 import {TestPlayers} from '../../TestPlayers';
 
-describe('QuantumCommunications', function() {
-  it('Should play', function() {
+describe('QuantumCommunications', function () {
+  it('Should play', function () {
     const card = new QuantumCommunications();
     const player = TestPlayers.BLUE.newPlayer();
     const player2 = TestPlayers.RED.newPlayer();
@@ -24,7 +24,10 @@ describe('QuantumCommunications', function() {
     const action = card.play(player);
     expect(action).is.undefined;
     expect(player.getProduction(Resources.MEGACREDITS)).to.eq(2);
-    player.victoryPointsBreakdown.setVictoryPoints('victoryPoints', card.getVictoryPoints());
+    player.victoryPointsBreakdown.setVictoryPoints(
+      'victoryPoints',
+      card.getVictoryPoints()
+    );
     expect(player.victoryPointsBreakdown.victoryPoints).to.eq(1);
   });
 });

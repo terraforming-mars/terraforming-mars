@@ -5,21 +5,22 @@ import {Game} from '../../../src/Game';
 import {Player} from '../../../src/Player';
 import {TestPlayers} from '../../TestPlayers';
 
-describe('SubCrustMeasurements', function() {
-  let card : SubCrustMeasurements; let player : Player;
+describe('SubCrustMeasurements', function () {
+  let card: SubCrustMeasurements;
+  let player: Player;
 
-  beforeEach(function() {
+  beforeEach(function () {
     card = new SubCrustMeasurements();
     player = TestPlayers.BLUE.newPlayer();
     const redPlayer = TestPlayers.RED.newPlayer();
     Game.newInstance('foobar', [player, redPlayer], player);
   });
 
-  it('Can\'t play if not enough science tags', function() {
+  it("Can't play if not enough science tags", function () {
     expect(card.canPlay(player)).is.not.true;
   });
 
-  it('Should play', function() {
+  it('Should play', function () {
     player.playedCards.push(new Research());
     expect(card.canPlay(player)).is.true;
 
@@ -27,7 +28,7 @@ describe('SubCrustMeasurements', function() {
     expect(card.getVictoryPoints()).to.eq(2);
   });
 
-  it('Should take action', function() {
+  it('Should take action', function () {
     expect(player.cardsInHand).has.lengthOf(0);
     card.action(player);
     expect(player.cardsInHand).has.lengthOf(1);

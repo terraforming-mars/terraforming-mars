@@ -17,7 +17,8 @@ export class Biofuels extends PreludeCard {
           b.production((pb) => pb.energy(1).plants(1)).br;
           b.plants(2);
         }),
-        description: 'Increase your energy and plant production 1 step. Gain 2 plants.',
+        description:
+          'Increase your energy and plant production 1 step. Gain 2 plants.',
       },
     });
   }
@@ -28,4 +29,3 @@ export class Biofuels extends PreludeCard {
     return undefined;
   }
 }
-

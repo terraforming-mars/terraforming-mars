@@ -26,14 +26,20 @@ export class RadChemFactory extends Card implements IProjectCard {
           b.production((pb) => pb.minus().energy(1)).br;
           b.tr(2);
         }),
-        description: 'Decrease your Energy production 1 step. Raise your TR 2 steps.',
+        description:
+          'Decrease your Energy production 1 step. Raise your TR 2 steps.',
       },
     });
   }
   public canPlay(player: Player): boolean {
     const hasEnergyProduction = player.getProduction(Resources.ENERGY) >= 1;
     if (PartyHooks.shouldApplyPolicy(player.game, PartyName.REDS)) {
-      return player.canAfford(player.getCardCost(this) + REDS_RULING_POLICY_COST * 2, {steel: true}) && hasEnergyProduction;
+      return (
+        player.canAfford(
+          player.getCardCost(this) + REDS_RULING_POLICY_COST * 2,
+          {steel: true}
+        ) && hasEnergyProduction
+      );
     }
 
     return hasEnergyProduction;

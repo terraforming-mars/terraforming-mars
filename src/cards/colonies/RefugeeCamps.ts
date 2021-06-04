@@ -22,10 +22,13 @@ export class RefugeeCamps extends Card implements IProjectCard, IResourceCard {
       metadata: {
         cardNumber: 'C33',
         renderData: CardRenderer.builder((b) => {
-          b.action('Decrease your M€ production 1 step to add a camp resource to this card.', (eb) => {
-            eb.production((pb) => pb.megacredits(1));
-            eb.startAction.camps();
-          }).br;
+          b.action(
+            'Decrease your M€ production 1 step to add a camp resource to this card.',
+            (eb) => {
+              eb.production((pb) => pb.megacredits(1));
+              eb.startAction.camps();
+            }
+          ).br;
           b.vpText('1 VP for each camp resource on this card.');
         }),
         victoryPoints: CardRenderDynamicVictoryPoints.camps(1, 1),
@@ -53,4 +56,3 @@ export class RefugeeCamps extends Card implements IProjectCard, IResourceCard {
     return this.resourceCount;
   }
 }
-

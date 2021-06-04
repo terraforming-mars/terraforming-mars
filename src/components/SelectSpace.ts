@@ -19,7 +19,7 @@ export const SelectSpace = Vue.component('select-space', {
       type: Boolean,
     },
   },
-  data: function() {
+  data: function () {
     return {
       availableSpaces: new Set(this.playerinput.availableSpaces),
       selectedTile: undefined as HTMLElement | undefined,
@@ -32,14 +32,14 @@ export const SelectSpace = Vue.component('select-space', {
   },
   mixins: [TranslateMixin],
   methods: {
-    animateSpace: function(tile: Element, activate: boolean) {
+    animateSpace: function (tile: Element, activate: boolean) {
       if (activate) {
         tile.classList.add('board-space--available');
       } else {
         tile.classList.remove('board-space--available');
       }
     },
-    animateAvailableSpaces: function(tiles: Array<Element>) {
+    animateAvailableSpaces: function (tiles: Array<Element>) {
       tiles.forEach((tile: Element) => {
         const spaceId = tile.getAttribute('data_space_id');
         if (spaceId !== null && this.availableSpaces.has(spaceId)) {
@@ -47,14 +47,14 @@ export const SelectSpace = Vue.component('select-space', {
         }
       });
     },
-    cancelPlacement: function() {
+    cancelPlacement: function () {
       if (this.selectedTile === undefined) {
         throw new Error('unexpected, no tile selected!');
       }
       this.animateSpace(this.selectedTile, false);
       this.animateAvailableSpaces(this.getSelectableSpaces());
     },
-    confirmPlacement: function() {
+    confirmPlacement: function () {
       const tiles = this.getSelectableSpaces();
       tiles.forEach((tile: Element) => {
         (tile as HTMLElement).onclick = null;
@@ -67,13 +67,16 @@ export const SelectSpace = Vue.component('select-space', {
       this.selectedTile.classList.add('board-space--selected');
       this.saveData();
     },
-    disableAvailableSpaceAnimation: function() {
+    disableAvailableSpaceAnimation: function () {
       const tiles = this.getSelectableSpaces();
       tiles.forEach((tile: Element) => {
-        tile.classList.remove('board-space--available', 'board-space--selected');
+        tile.classList.remove(
+          'board-space--available',
+          'board-space--selected'
+        );
       });
     },
-    getSelectableSpaces: function() {
+    getSelectableSpaces: function () {
       const spaces: Array<Element> = [];
 
       let board = document.getElementById('main_board');
@@ -94,22 +97,24 @@ export const SelectSpace = Vue.component('select-space', {
 
       return spaces;
     },
-    hideDialog: function(hide: boolean) {
+    hideDialog: function (hide: boolean) {
       PreferencesManager.save('hide_tile_confirmation', hide);
     },
-    onTileSelected: function(tile: HTMLElement) {
+    onTileSelected: function (tile: HTMLElement) {
       this.selectedTile = tile;
       this.disableAvailableSpaceAnimation();
       this.animateSpace(tile, true);
       tile.classList.remove('board-space--available');
-      const hideTileConfirmation = PreferencesManager.loadBoolean('hide_tile_confirmation');
+      const hideTileConfirmation = PreferencesManager.loadBoolean(
+        'hide_tile_confirmation'
+      );
       if (hideTileConfirmation) {
         this.confirmPlacement();
       } else {
         (this.$refs['confirmation'] as any).show();
       }
     },
-    saveData: function() {
+    saveData: function () {
       if (this.$data.spaceId === undefined) {
         this.$data.warning = 'Must select a space';
         return;
@@ -117,7 +122,7 @@ export const SelectSpace = Vue.component('select-space', {
       this.onsave([[this.$data.spaceId]]);
     },
   },
-  mounted: function() {
+  mounted: function () {
     this.disableAvailableSpaceAnimation();
     const tiles = this.getSelectableSpaces();
     this.animateAvailableSpaces(tiles);
@@ -126,7 +131,7 @@ export const SelectSpace = Vue.component('select-space', {
       const spaceId = tile.getAttribute('data_space_id');
       if (spaceId === null || this.availableSpaces.has(spaceId) === false) {
         continue;
-      };
+      }
 
       tile.onclick = () => this.onTileSelected(tile);
     }
@@ -143,4 +148,3 @@ export const SelectSpace = Vue.component('select-space', {
     <div v-if="warning" class="nes-container is-rounded"><span class="nes-text is-warning">{{ warning }}</span></div>
   </div>`,
 });
-

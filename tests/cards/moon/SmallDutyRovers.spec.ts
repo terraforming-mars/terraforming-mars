@@ -58,4 +58,3 @@ describe('SmallDutyRovers', () => {
     expect(player.getTerraformRating()).eq(15);
   });
 });
-

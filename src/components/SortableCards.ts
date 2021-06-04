@@ -15,7 +15,7 @@ export const SortableCards = Vue.component('sorted-cards', {
       type: String,
     },
   },
-  data: function() {
+  data: function () {
     const cache = CardOrderStorage.getCardOrder(this.playerId);
     const cardOrder: {[x: string]: number} = {};
     const keys = Object.keys(cache);
@@ -38,19 +38,16 @@ export const SortableCards = Vue.component('sorted-cards', {
     };
   },
   methods: {
-    getSortedCards: function() {
-      return CardOrderStorage.getOrdered(
-        this.cardOrder,
-        this.cards,
-      );
+    getSortedCards: function () {
+      return CardOrderStorage.getOrdered(this.cardOrder, this.cards);
     },
-    onDragStart: function(source: string): void {
+    onDragStart: function (source: string): void {
       this.dragCard = source;
     },
-    onDragEnd: function(): void {
+    onDragEnd: function (): void {
       this.dragCard = undefined;
     },
-    onDragOver: function(source: string): void {
+    onDragOver: function (source: string): void {
       if (this.dragCard !== undefined && source !== this.dragCard) {
         const temp = this.cardOrder[source];
         this.cardOrder[source] = this.cardOrder[this.dragCard];
@@ -65,4 +62,3 @@ export const SortableCards = Vue.component('sorted-cards', {
     <Card :card="card"/>
 </div></div>`,
 });
-

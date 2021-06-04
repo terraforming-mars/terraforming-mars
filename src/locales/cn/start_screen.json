@@ -1,12 +1,10 @@
 {
-    "New game": "新的游戏",
-    "Solo challenge": "单人模式挑战",
-    "Cards list": "卡牌列表",
-    "Board game": "桌游介绍",
-    "About us": "关于我们",
-    "Whats new?": "版本更新内容",
-    "Join us on Discord": "在Discord全球约玩",
-    "Create game": "创建游戏"
-       
-
+  "New game": "新的游戏",
+  "Solo challenge": "单人模式挑战",
+  "Cards list": "卡牌列表",
+  "Board game": "桌游介绍",
+  "About us": "关于我们",
+  "Whats new?": "版本更新内容",
+  "Join us on Discord": "在Discord全球约玩",
+  "Create game": "创建游戏"
 }

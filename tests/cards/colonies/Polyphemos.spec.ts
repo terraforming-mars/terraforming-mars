@@ -9,8 +9,8 @@ import {SelectCard} from '../../../src/inputs/SelectCard';
 import {Resources} from '../../../src/Resources';
 import {TestPlayers} from '../../TestPlayers';
 
-describe('Polyphemos', function() {
-  it('Should play', function() {
+describe('Polyphemos', function () {
+  it('Should play', function () {
     const card = new Polyphemos();
     const card2 = new PowerPlant();
     const card3 = new BusinessNetwork();
@@ -29,7 +29,9 @@ describe('Polyphemos', function() {
     const action = card3.action(player);
     expect(action).is.not.undefined;
     expect(action instanceof SelectCard).is.true;
-    (action as SelectCard<IProjectCard>).cb([(action as SelectCard<IProjectCard>).cards[0]]);
+    (action as SelectCard<IProjectCard>).cb([
+      (action as SelectCard<IProjectCard>).cards[0],
+    ]);
     player.game.deferredActions.runNext();
     expect(player.megaCredits).to.eq(35);
     expect(player.cardsInHand).has.lengthOf(3);

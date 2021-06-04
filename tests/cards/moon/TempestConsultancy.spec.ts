@@ -19,7 +19,12 @@ describe('TempestConsultancy', () => {
   beforeEach(() => {
     player = TestPlayers.BLUE.newPlayer();
     otherPlayer = TestPlayers.RED.newPlayer();
-    game = Game.newInstance('id', [player, otherPlayer], player, TestingUtils.setCustomGameOptions());
+    game = Game.newInstance(
+      'id',
+      [player, otherPlayer],
+      player,
+      TestingUtils.setCustomGameOptions()
+    );
     card = new TempestConsultancy();
     turmoil = game.turmoil!;
   });
@@ -75,4 +80,3 @@ describe('TempestConsultancy', () => {
     expect(player.getTerraformRating()).eq(22);
   });
 });
-

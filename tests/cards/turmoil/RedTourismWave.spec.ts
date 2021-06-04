@@ -8,13 +8,18 @@ import {PartyName} from '../../../src/turmoil/parties/PartyName';
 import {TestingUtils} from '../../TestingUtils';
 import {TestPlayers} from '../../TestPlayers';
 
-describe('RedTourismWave', function() {
-  it('Should play', function() {
+describe('RedTourismWave', function () {
+  it('Should play', function () {
     const card = new RedTourismWave();
     const player = TestPlayers.BLUE.newPlayer();
     const redPlayer = TestPlayers.RED.newPlayer();
     const gameOptions = TestingUtils.setCustomGameOptions();
-    const game = Game.newInstance('foobar', [player, redPlayer], player, gameOptions);
+    const game = Game.newInstance(
+      'foobar',
+      [player, redPlayer],
+      player,
+      gameOptions
+    );
     expect(card.canPlay(player)).is.not.true;
 
     const reds = game.turmoil!.getPartyByName(PartyName.REDS)!;
@@ -22,7 +27,9 @@ describe('RedTourismWave', function() {
     expect(card.canPlay(player)).is.true;
 
     const tharsis = game.board.getSpace(SpaceName.THARSIS_THOLUS);
-    const lands = game.board.getAdjacentSpaces(tharsis).filter((space) => space.spaceType === SpaceType.LAND);
+    const lands = game.board
+      .getAdjacentSpaces(tharsis)
+      .filter((space) => space.spaceType === SpaceType.LAND);
     game.addCityTile(player, lands[0].id);
     card.play(player);
     expect(player.getResource(Resources.MEGACREDITS)).to.eq(3);

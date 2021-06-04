@@ -16,14 +16,20 @@ export class Poseidon extends Card implements CorporationCard {
 
       metadata: {
         cardNumber: 'R02',
-        description: 'You start with 45 M€. As your first action, place a colony.',
+        description:
+          'You start with 45 M€. As your first action, place a colony.',
         renderData: CardRenderer.builder((b) => {
           b.br.br;
           b.megacredits(45).nbsp.colonies(1);
           b.corpBox('effect', (ce) => {
-            ce.effect('When any colony is placed, including this, raise your M€ production 1 step.', (eb) => {
-              eb.colonies(1).any.startEffect.production((pb) => pb.megacredits(1));
-            });
+            ce.effect(
+              'When any colony is placed, including this, raise your M€ production 1 step.',
+              (eb) => {
+                eb.colonies(1).any.startEffect.production((pb) =>
+                  pb.megacredits(1)
+                );
+              }
+            );
           });
         }),
       },
@@ -32,10 +38,16 @@ export class Poseidon extends Card implements CorporationCard {
 
   public initialAction(player: Player) {
     if (player.game.gameOptions.coloniesExtension) {
-      player.game.defer(new BuildColony(player, false, 'Poseidon first action - Select where to build colony'));
+      player.game.defer(
+        new BuildColony(
+          player,
+          false,
+          'Poseidon first action - Select where to build colony'
+        )
+      );
       return undefined;
     } else {
-      console.warn('Colonies extension isn\'t selected.');
+      console.warn("Colonies extension isn't selected.");
       return undefined;
     }
   }

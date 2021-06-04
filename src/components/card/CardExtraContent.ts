@@ -11,11 +11,20 @@ export const CardExtraContent = Vue.component('CardExtraContent', {
     },
   },
   methods: {
-    lifeFound: function(card: CardModel): boolean {
-      return card.name === CardName.SEARCH_FOR_LIFE && card.resources !== undefined && card.resources > 0;
+    lifeFound: function (card: CardModel): boolean {
+      return (
+        card.name === CardName.SEARCH_FOR_LIFE &&
+        card.resources !== undefined &&
+        card.resources > 0
+      );
     },
-    isMiningTileOnMetal: function(card: CardModel, metal: string): boolean {
-      const miningCard = [CardName.MINING_RIGHTS, CardName.MINING_AREA, CardName.MINING_RIGHTS_ARES, CardName.MINING_AREA_ARES];
+    isMiningTileOnMetal: function (card: CardModel, metal: string): boolean {
+      const miningCard = [
+        CardName.MINING_RIGHTS,
+        CardName.MINING_AREA,
+        CardName.MINING_RIGHTS_ARES,
+        CardName.MINING_AREA_ARES,
+      ];
       if (miningCard.includes(card.name)) {
         if (metal === Resources.TITANIUM) {
           return card.bonusResource === Resources.TITANIUM;
@@ -25,8 +34,12 @@ export const CardExtraContent = Vue.component('CardExtraContent', {
       }
       return false;
     },
-    miningTileOnTitanium: function(card: CardModel): boolean {
-      return card.name === CardName.SEARCH_FOR_LIFE && card.resources !== undefined && card.resources > 0;
+    miningTileOnTitanium: function (card: CardModel): boolean {
+      return (
+        card.name === CardName.SEARCH_FOR_LIFE &&
+        card.resources !== undefined &&
+        card.resources > 0
+      );
     },
   },
   template: `

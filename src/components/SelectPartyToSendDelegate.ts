@@ -5,49 +5,51 @@ import {Party} from '../components/Party';
 import {TranslateMixin} from './TranslateMixin';
 import {PartyName} from '../turmoil/parties/PartyName';
 
-export const SelectPartyToSendDelegate = Vue.component('select-party-to-send-delegate', {
-  props: {
-    playerinput: {
-      type: Object as () => PlayerInputModel,
+export const SelectPartyToSendDelegate = Vue.component(
+  'select-party-to-send-delegate',
+  {
+    props: {
+      playerinput: {
+        type: Object as () => PlayerInputModel,
+      },
+      onsave: {
+        type: Function as unknown as () => (out: Array<Array<string>>) => void,
+      },
+      showsave: {
+        type: Boolean,
+      },
+      showtitle: {
+        type: Boolean,
+      },
     },
-    onsave: {
-      type: Function as unknown as () => (out: Array<Array<string>>) => void,
+    data: function () {
+      return {
+        selectedParty: undefined as string | undefined,
+      };
     },
-    showsave: {
-      type: Boolean,
+    components: {Button, Party},
+    mixins: [TranslateMixin],
+    methods: {
+      saveData: function () {
+        const result: string[][] = [];
+        result.push([]);
+        if (this.selectedParty !== undefined) {
+          result[0].push(this.selectedParty);
+        }
+        this.onsave(result);
+      },
+      isDominant: function (partyName: PartyName): boolean {
+        return partyName === this.playerinput.turmoil?.dominant;
+      },
+      partyAvailableToSelect: function (partyName: PartyName): boolean {
+        if (this.playerinput.availableParties === undefined) {
+          return false;
+        } else {
+          return this.playerinput.availableParties.includes(partyName);
+        }
+      },
     },
-    showtitle: {
-      type: Boolean,
-    },
-  },
-  data: function() {
-    return {
-      selectedParty: undefined as string | undefined,
-    };
-  },
-  components: {Button, Party},
-  mixins: [TranslateMixin],
-  methods: {
-    saveData: function() {
-      const result: string[][] = [];
-      result.push([]);
-      if (this.selectedParty !== undefined) {
-        result[0].push(this.selectedParty);
-      }
-      this.onsave(result);
-    },
-    isDominant: function(partyName: PartyName): boolean {
-      return partyName === this.playerinput.turmoil?.dominant;
-    },
-    partyAvailableToSelect: function(partyName: PartyName): boolean {
-      if (this.playerinput.availableParties === undefined) {
-        return false;
-      } else {
-        return this.playerinput.availableParties.includes(partyName);
-      }
-    },
-  },
-  template: `
+    template: `
     <div class="wf-component wf-component--select-party">
         <div v-if="showtitle === true" class="nofloat wf-component-title">{{ $t(playerinput.title) }}</div>
         <div class="wf-component--list-party">
@@ -61,4 +63,5 @@ export const SelectPartyToSendDelegate = Vue.component('select-party-to-send-del
         </div>
     </div>
     `,
-});
+  }
+);

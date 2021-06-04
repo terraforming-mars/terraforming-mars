@@ -7,17 +7,20 @@ import {OrOptions} from '../../../src/inputs/OrOptions';
 import {Player} from '../../../src/Player';
 import {TestPlayers} from '../../TestPlayers';
 
-describe('Virus', function() {
-  let card : Virus; let player : Player; let player2 : Player; let game : Game;
+describe('Virus', function () {
+  let card: Virus;
+  let player: Player;
+  let player2: Player;
+  let game: Game;
 
-  beforeEach(function() {
+  beforeEach(function () {
     card = new Virus();
     player = TestPlayers.BLUE.newPlayer();
     player2 = TestPlayers.RED.newPlayer();
     game = Game.newInstance('foobar', [player, player2], player);
   });
 
-  it('Should play', function() {
+  it('Should play', function () {
     const birds = new Birds();
     const predators = new Predators();
     player.playedCards.push(birds, predators);
@@ -35,13 +38,13 @@ describe('Virus', function() {
     expect(player.plants).to.eq(0);
   });
 
-  it('Can play when no other player has resources', function() {
+  it('Can play when no other player has resources', function () {
     player.plants = 5;
     expect(card.play(player)).is.undefined;
     expect(player.plants).to.eq(5);
   });
 
-  it('Works in solo mode', function() {
+  it('Works in solo mode', function () {
     game = Game.newInstance('foobar', [player], player);
     expect(card.canPlay(player)).is.true;
     expect(card.play(player)).is.undefined;

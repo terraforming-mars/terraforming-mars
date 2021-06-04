@@ -3,8 +3,8 @@ import {MetalsCompany} from '../../../src/cards/prelude/MetalsCompany';
 import {Resources} from '../../../src/Resources';
 import {TestPlayers} from '../../TestPlayers';
 
-describe('MetalsCompany', function() {
-  it('Should play', function() {
+describe('MetalsCompany', function () {
+  it('Should play', function () {
     const card = new MetalsCompany();
     const player = TestPlayers.BLUE.newPlayer();
     const action = card.play(player);

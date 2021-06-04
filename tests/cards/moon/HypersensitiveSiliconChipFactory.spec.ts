@@ -57,4 +57,3 @@ describe('HypersensitiveSiliconChipFactory', () => {
     expect(player.getProduction(Resources.MEGACREDITS)).eq(4);
   });
 });
-

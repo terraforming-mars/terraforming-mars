@@ -32,17 +32,25 @@ export class LargeConvoy extends Card implements IProjectCard {
           b.oceans(1).cards(2).br;
           b.plants(5).digit.or(Size.MEDIUM).animals(4).digit.asterix();
         }),
-        description: 'Place an ocean tile and draw 2 cards. Gain 5 Plants or add 4 Animals to ANOTHER card.',
+        description:
+          'Place an ocean tile and draw 2 cards. Gain 5 Plants or add 4 Animals to ANOTHER card.',
         victoryPoints: 2,
       },
     });
   }
 
   public canPlay(player: Player): boolean {
-    const oceansMaxed = player.game.board.getOceansOnBoard() === MAX_OCEAN_TILES;
+    const oceansMaxed =
+      player.game.board.getOceansOnBoard() === MAX_OCEAN_TILES;
 
-    if (PartyHooks.shouldApplyPolicy(player.game, PartyName.REDS) && !oceansMaxed) {
-      return player.canAfford(player.getCardCost(this) + REDS_RULING_POLICY_COST, {titanium: true});
+    if (
+      PartyHooks.shouldApplyPolicy(player.game, PartyName.REDS) &&
+      !oceansMaxed
+    ) {
+      return player.canAfford(
+        player.getCardCost(this) + REDS_RULING_POLICY_COST,
+        {titanium: true}
+      );
     }
 
     return true;
@@ -53,26 +61,36 @@ export class LargeConvoy extends Card implements IProjectCard {
 
     const animalCards = player.getResourceCards(ResourceType.ANIMAL);
 
-    const gainPlants = function() {
+    const gainPlants = function () {
       player.addResource(Resources.PLANTS, 5, {log: true});
       player.game.defer(new PlaceOceanTile(player));
       return undefined;
     };
 
-    if (animalCards.length === 0 ) return gainPlants();
+    if (animalCards.length === 0) return gainPlants();
 
     const availableActions: Array<SelectOption | SelectCard<ICard>> = [];
 
-    const gainPlantsOption = new SelectOption('Gain 5 plants', 'Gain plants', gainPlants);
+    const gainPlantsOption = new SelectOption(
+      'Gain 5 plants',
+      'Gain plants',
+      gainPlants
+    );
     availableActions.push(gainPlantsOption);
 
     if (animalCards.length === 1) {
       const targetAnimalCard = animalCards[0];
-      availableActions.push(new SelectOption('Add 4 animals to ' + targetAnimalCard.name, 'Add animals', () => {
-        player.addResourceTo(targetAnimalCard, {qty: 4, log: true});
-        player.game.defer(new PlaceOceanTile(player));
-        return undefined;
-      }));
+      availableActions.push(
+        new SelectOption(
+          'Add 4 animals to ' + targetAnimalCard.name,
+          'Add animals',
+          () => {
+            player.addResourceTo(targetAnimalCard, {qty: 4, log: true});
+            player.game.defer(new PlaceOceanTile(player));
+            return undefined;
+          }
+        )
+      );
     } else {
       availableActions.push(
         new SelectCard(
@@ -83,8 +101,8 @@ export class LargeConvoy extends Card implements IProjectCard {
             player.addResourceTo(foundCards[0], {qty: 4, log: true});
             player.game.defer(new PlaceOceanTile(player));
             return undefined;
-          },
-        ),
+          }
+        )
       );
     }
 

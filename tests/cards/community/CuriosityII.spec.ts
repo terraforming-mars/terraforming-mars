@@ -9,22 +9,35 @@ import {TileType} from '../../../src/TileType';
 import {TestingUtils} from '../../TestingUtils';
 import {TestPlayers} from '../../TestPlayers';
 
-describe('CuriosityII', function() {
-  let card : CuriosityII; let player : Player; let player2 : Player; let game : Game;
+describe('CuriosityII', function () {
+  let card: CuriosityII;
+  let player: Player;
+  let player2: Player;
+  let game: Game;
 
-  beforeEach(function() {
+  beforeEach(function () {
     card = new CuriosityII();
     player = TestPlayers.BLUE.newPlayer();
     player2 = TestPlayers.RED.newPlayer();
-    game = Game.newInstance('foobar', [player, player2], player, TestingUtils.setCustomGameOptions({aresExtension: true, aresHazards: false}));
+    game = Game.newInstance(
+      'foobar',
+      [player, player2],
+      player,
+      TestingUtils.setCustomGameOptions({
+        aresExtension: true,
+        aresHazards: false,
+      })
+    );
     game.phase = Phase.ACTION;
 
     player.corporationCard = card;
     player.megaCredits = 2;
   });
 
-  it('Can pay 2 M€ to draw card when placing a tile on a non-empty space', function() {
-    const nonEmptySpace = game.board.getAvailableSpacesOnLand(player).find((space) => space.bonus.length > 0)!;
+  it('Can pay 2 M€ to draw card when placing a tile on a non-empty space', function () {
+    const nonEmptySpace = game.board
+      .getAvailableSpacesOnLand(player)
+      .find((space) => space.bonus.length > 0)!;
     game.addCityTile(player, nonEmptySpace.id);
     player.cardsInHand = [];
 
@@ -41,8 +54,10 @@ describe('CuriosityII', function() {
     expect(player.megaCredits).to.eq(0);
   });
 
-  it('Does not trigger when placing a tile on an empty space', function() {
-    const emptySpace = game.board.getAvailableSpacesOnLand(player).find((space) => space.bonus.length === 0)!;
+  it('Does not trigger when placing a tile on an empty space', function () {
+    const emptySpace = game.board
+      .getAvailableSpacesOnLand(player)
+      .find((space) => space.bonus.length === 0)!;
     game.addCityTile(player, emptySpace.id);
     TestingUtils.runAllActions(game);
 
@@ -50,8 +65,10 @@ describe('CuriosityII', function() {
     expect(player.megaCredits).to.eq(2);
   });
 
-  it('Does not trigger when opponent places a tile', function() {
-    const nonEmptySpace = game.board.getAvailableSpacesOnLand(player2).find((space) => space.bonus.length > 0)!;
+  it('Does not trigger when opponent places a tile', function () {
+    const nonEmptySpace = game.board
+      .getAvailableSpacesOnLand(player2)
+      .find((space) => space.bonus.length > 0)!;
     game.addCityTile(player2, nonEmptySpace.id);
     TestingUtils.runAllActions(game);
 
@@ -61,7 +78,9 @@ describe('CuriosityII', function() {
 
   it('Placing a tile on top of another one triggers the bonus', () => {
     // particularly when the space bonus is empty.
-    const oceanSpace = game.board.getAvailableSpacesForOcean(player2).find((space) => space.bonus.length === 0)!;
+    const oceanSpace = game.board
+      .getAvailableSpacesForOcean(player2)
+      .find((space) => space.bonus.length === 0)!;
     game.board.getSpace(oceanSpace.id).tile = {tileType: TileType.OCEAN};
 
     const oceanCity = new OceanSanctuary();

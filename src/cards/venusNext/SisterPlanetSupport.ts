@@ -15,16 +15,19 @@ export class SisterPlanetSupport extends Card {
       tags: [Tags.VENUS, Tags.EARTH],
       cost: 7,
 
-      requirements: CardRequirements.builder((b) => b.tag(Tags.VENUS).tag(Tags.EARTH)),
+      requirements: CardRequirements.builder((b) =>
+        b.tag(Tags.VENUS).tag(Tags.EARTH)
+      ),
       metadata: {
         cardNumber: '244',
         renderData: CardRenderer.builder((b) => {
           b.production((pb) => pb.megacredits(3));
         }),
-        description: 'Requires Venus and Earth tags. Increase your M€ production 3 steps.',
+        description:
+          'Requires Venus and Earth tags. Increase your M€ production 3 steps.',
       },
     });
-  };
+  }
 
   public play(player: Player) {
     player.addProduction(Resources.MEGACREDITS, 3);

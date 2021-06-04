@@ -18,9 +18,12 @@ export class StandardTechnology extends Card implements IProjectCard {
       metadata: {
         cardNumber: '156',
         renderData: CardRenderer.builder((b) => {
-          b.effect('After you pay for a standard project, except selling patents, you gain 3 M€.', (eb) => {
-            eb.plate('Standard projects').startEffect.megacredits(3);
-          });
+          b.effect(
+            'After you pay for a standard project, except selling patents, you gain 3 M€.',
+            (eb) => {
+              eb.plate('Standard projects').startEffect.megacredits(3);
+            }
+          );
         }),
       },
     });

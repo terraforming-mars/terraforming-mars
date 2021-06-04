@@ -41,7 +41,7 @@ export const LogPanel = Vue.component('log-panel', {
       type: String as () => Color,
     },
   },
-  data: function() {
+  data: function () {
     return {
       // temporary storage used when showing cards on the log line.
       cards: [] as Array<CardName>,
@@ -56,13 +56,13 @@ export const LogPanel = Vue.component('log-panel', {
     GlobalEvent,
   },
   methods: {
-    scrollToEnd: function() {
+    scrollToEnd: function () {
       const scrollablePanel = document.getElementById('logpanel-scrollable');
       if (scrollablePanel !== null) {
         scrollablePanel.scrollTop = scrollablePanel.scrollHeight;
       }
     },
-    cardToHtml: function(cardType: CardType, cardName: string) {
+    cardToHtml: function (cardType: CardType, cardName: string) {
       const cardNameString = $t(cardName);
       const suffixFreeCardName = cardNameString.split(':')[0];
       let className: string | undefined;
@@ -74,16 +74,25 @@ export const LogPanel = Vue.component('log-panel', {
         className = 'background-color-automated';
       } else if (cardType === CardType.PRELUDE) {
         className = 'background-color-prelude';
-      } else if (cardType === CardType.STANDARD_PROJECT || cardType === CardType.STANDARD_ACTION) {
+      } else if (
+        cardType === CardType.STANDARD_PROJECT ||
+        cardType === CardType.STANDARD_ACTION
+      ) {
         className = 'background-color-standard-project';
       }
 
       if (className === undefined) {
         return suffixFreeCardName;
       }
-      return '<span class="log-card '+ className + '">' + suffixFreeCardName + '</span>';
+      return (
+        '<span class="log-card ' +
+        className +
+        '">' +
+        suffixFreeCardName +
+        '</span>'
+      );
     },
-    messageDataToHTML: function(data: LogMessageData): string {
+    messageDataToHTML: function (data: LogMessageData): string {
       const translatableMessageDataTypes = [
         LogMessageDataType.STRING,
         LogMessageDataType.STANDARD_PROJECT,
@@ -99,56 +108,81 @@ export const LogPanel = Vue.component('log-panel', {
       }
 
       switch (data.type) {
-      case LogMessageDataType.PLAYER:
-        for (const player of this.players) {
-          if (data.value === player.color || data.value === player.id) {
-            return '<span class="log-player player_bg_color_'+player.color+'">'+player.name+'</span>';
+        case LogMessageDataType.PLAYER:
+          for (const player of this.players) {
+            if (data.value === player.color || data.value === player.id) {
+              return (
+                '<span class="log-player player_bg_color_' +
+                player.color +
+                '">' +
+                player.name +
+                '</span>'
+              );
+            }
           }
-        }
-        break;
+          break;
 
-      case LogMessageDataType.CARD:
-        const cardName = data.value as CardName;
-        for (const player of this.players) {
-          if (player.corporationCard !== undefined && cardName === player.corporationCard.name) {
-            return '<span class="log-card background-color-global-event">' + $t(cardName) + '</span>';
-          } else {
-            const robotCards = player.playedCards.concat(player.selfReplicatingRobotsCards);
-            for (const robotCard of robotCards) {
-              if (cardName === robotCard.name && robotCard.cardType !== undefined) {
-                return this.cardToHtml(robotCard.cardType, cardName);
+        case LogMessageDataType.CARD:
+          const cardName = data.value as CardName;
+          for (const player of this.players) {
+            if (
+              player.corporationCard !== undefined &&
+              cardName === player.corporationCard.name
+            ) {
+              return (
+                '<span class="log-card background-color-global-event">' +
+                $t(cardName) +
+                '</span>'
+              );
+            } else {
+              const robotCards = player.playedCards.concat(
+                player.selfReplicatingRobotsCards
+              );
+              for (const robotCard of robotCards) {
+                if (
+                  cardName === robotCard.name &&
+                  robotCard.cardType !== undefined
+                ) {
+                  return this.cardToHtml(robotCard.cardType, cardName);
+                }
               }
             }
           }
-        }
-        const card = new CardFinder().getCardByName<ICard>(cardName, (manifest) => [
-          manifest.projectCards,
-          manifest.preludeCards,
-          manifest.standardProjects,
-          manifest.standardActions,
-        ]);
-        if (card && card.cardType) {
-          return this.cardToHtml(card.cardType, data.value);
-        }
-        break;
+          const card = new CardFinder().getCardByName<ICard>(
+            cardName,
+            (manifest) => [
+              manifest.projectCards,
+              manifest.preludeCards,
+              manifest.standardProjects,
+              manifest.standardActions,
+            ]
+          );
+          if (card && card.cardType) {
+            return this.cardToHtml(card.cardType, data.value);
+          }
+          break;
 
-      case LogMessageDataType.GLOBAL_EVENT:
-        const globalEventName = data.value as GlobalEventName;
-        return '<span class="log-card background-color-global-event">' + $t(globalEventName) + '</span>';
+        case LogMessageDataType.GLOBAL_EVENT:
+          const globalEventName = data.value as GlobalEventName;
+          return (
+            '<span class="log-card background-color-global-event">' +
+            $t(globalEventName) +
+            '</span>'
+          );
 
-      case LogMessageDataType.TILE_TYPE:
-        const tileType: TileType = +data.value;
-        return $t(TileType.toString(tileType));
+        case LogMessageDataType.TILE_TYPE:
+          const tileType: TileType = +data.value;
+          return $t(TileType.toString(tileType));
 
-      default:
-        if (translatableMessageDataTypes.includes(data.type)) {
-          return $t(data.value);
-        }
+        default:
+          if (translatableMessageDataTypes.includes(data.type)) {
+            return $t(data.value);
+          }
       }
       return data.value;
     },
     // Called in the event that a bad log message comes down. Does its best to return something.
-    safeMessage: function(message: LogMessage) {
+    safeMessage: function (message: LogMessage) {
       try {
         if (message === undefined) {
           return 'undefined';
@@ -157,37 +191,43 @@ export const LogPanel = Vue.component('log-panel', {
           return `BUG: Unparseable message: ${message.message}`;
         }
         const data = message.data.map((datum) => {
-          return (datum === undefined) ?
-            'undefined' :
-            ('(' + datum.type + ') ' + datum.value);
+          return datum === undefined
+            ? 'undefined'
+            : '(' + datum.type + ') ' + datum.value;
         });
-        return `BUG: Unparseable message: ${message.message}, (${data.join(', ')})`;
+        return `BUG: Unparseable message: ${message.message}, (${data.join(
+          ', '
+        )})`;
       } catch (err) {
         return `BUG: Unparseable message: ${message.message} ${err.toString()}`;
       }
     },
-    messageToHTML: function(message: LogMessage) {
+    messageToHTML: function (message: LogMessage) {
       try {
         let logEntryBullet = '';
 
         if (message.type !== LogMessageType.NEW_GENERATION) {
           const when = new Date(message.timestamp).toLocaleString();
           // clock or speaking.
-          const icon = message.playerId === undefined ? '&#x1f551;' : '&#x1f4ac;';
+          const icon =
+            message.playerId === undefined ? '&#x1f551;' : '&#x1f4ac;';
           logEntryBullet = `<span title="${when}">${icon}</span>`;
         }
         if (message.type !== undefined && message.message !== undefined) {
           message.message = $t(message.message);
-          return logEntryBullet + message.message.replace(/\$\{([0-9]{1})\}/gi, (_match, idx) => {
-            return this.messageDataToHTML(message.data[idx]);
-          });
+          return (
+            logEntryBullet +
+            message.message.replace(/\$\{([0-9]{1})\}/gi, (_match, idx) => {
+              return this.messageDataToHTML(message.data[idx]);
+            })
+          );
         }
       } catch (err) {
         return this.safeMessage(message);
       }
       return '';
     },
-    messageClicked: function(message: LogMessage) {
+    messageClicked: function (message: LogMessage) {
       // TODO(kberg): add global event here, too.
       const datas = message.data;
       datas.forEach((data: LogMessageData) => {
@@ -214,20 +254,20 @@ export const LogPanel = Vue.component('log-panel', {
         }
       });
     },
-    hideMe: function() {
+    hideMe: function () {
       this.cards = [];
       this.globalEventNames = [];
     },
-    getCrossHtml: function() {
-      return '<i class=\'icon icon-cross\' />';
+    getCrossHtml: function () {
+      return "<i class='icon icon-cross' />";
     },
-    selectGeneration: function(gen: number): void {
+    selectGeneration: function (gen: number): void {
       if (gen !== this.selectedGeneration) {
         this.getLogsForGeneration(gen);
       }
       this.selectedGeneration = gen;
     },
-    getLogsForGeneration: function(generation: number): void {
+    getLogsForGeneration: function (generation: number): void {
       const messages = this.messages;
       // abort any pending requests
       if (logRequest !== undefined) {
@@ -245,7 +285,10 @@ export const LogPanel = Vue.component('log-panel', {
         if (xhr.status === 200) {
           messages.splice(0, messages.length);
           messages.push(...xhr.response);
-          if (PreferencesManager.loadBoolean('enable_sounds') && window.location.search.includes('experimental=1') ) {
+          if (
+            PreferencesManager.loadBoolean('enable_sounds') &&
+            window.location.search.includes('experimental=1')
+          ) {
             SoundManager.newLog();
           }
           if (generation === this.generation) {
@@ -258,29 +301,33 @@ export const LogPanel = Vue.component('log-panel', {
       xhr.responseType = 'json';
       xhr.send();
     },
-    getClassesGenIndicator: function(gen: number): string {
+    getClassesGenIndicator: function (gen: number): string {
       const classes = ['log-gen-indicator'];
       if (gen === this.selectedGeneration) {
         classes.push('log-gen-indicator--selected');
       }
       return classes.join(' ');
     },
-    getGenerationsRange: function(): Array<number> {
+    getGenerationsRange: function (): Array<number> {
       const generations: Array<number> = [];
       for (let i = 1; i <= this.generation; i++) {
         generations.push(i);
       }
       return generations;
     },
-    getTitleClasses: function(): string {
+    getTitleClasses: function (): string {
       const classes = ['log-title'];
       classes.push(playerColorClass(this.color.toLowerCase(), 'shadow'));
       return classes.join(' ');
     },
-    lastGenerationClass: function(): string {
-      return this.lastSoloGeneration === this.generation ? 'last-generation blink-animation' : '';
+    lastGenerationClass: function (): string {
+      return this.lastSoloGeneration === this.generation
+        ? 'last-generation blink-animation'
+        : '';
     },
-    getGlobalEvent: function(globalEventName: GlobalEventName): GlobalEventModel {
+    getGlobalEvent: function (
+      globalEventName: GlobalEventName
+    ): GlobalEventModel {
       const globalEvent = getGlobalEventByName(globalEventName);
       if (globalEvent) {
         return {
@@ -298,7 +345,7 @@ export const LogPanel = Vue.component('log-panel', {
       };
     },
   },
-  mounted: function() {
+  mounted: function () {
     this.getLogsForGeneration(this.generation);
   },
   template: `
@@ -334,4 +381,3 @@ export const LogPanel = Vue.component('log-panel', {
       </div>
     `,
 });
-

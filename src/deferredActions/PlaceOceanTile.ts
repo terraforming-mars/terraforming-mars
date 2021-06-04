@@ -8,12 +8,14 @@ import {DeferredAction, Priority} from './DeferredAction';
 export class PlaceOceanTile implements DeferredAction {
   public priority = Priority.PLACE_OCEAN_TILE;
   constructor(
-        public player: Player,
-        public title: string = 'Select space for ocean tile',
+    public player: Player,
+    public title: string = 'Select space for ocean tile'
   ) {}
 
   public execute() {
-    if (this.player.game.board.getOceansOnBoard() >= constants.MAX_OCEAN_TILES) {
+    if (
+      this.player.game.board.getOceansOnBoard() >= constants.MAX_OCEAN_TILES
+    ) {
       return undefined;
     }
 
@@ -23,7 +25,7 @@ export class PlaceOceanTile implements DeferredAction {
       (space: ISpace) => {
         this.player.game.addOceanTile(this.player, space.id, SpaceType.OCEAN);
         return undefined;
-      },
+      }
     );
   }
 }

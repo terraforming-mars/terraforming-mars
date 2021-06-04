@@ -20,12 +20,15 @@ export class FieldCappedCity extends Card implements IProjectCard {
       productionBox: Units.of({energy: 1, megacredits: 2}),
       metadata: {
         cardNumber: 'X21',
-        description: 'Increase your M€ production 2 steps, increase your energy production 1 step, gain 3 plants, and place a city tile.',
+        description:
+          'Increase your M€ production 2 steps, increase your energy production 1 step, gain 3 plants, and place a city tile.',
         renderData: CardRenderer.builder((b) => {
-          b.production((pb) => {
-            pb.megacredits(2).br;
-            pb.energy(1);
-          }).nbsp.city().br;
+          b
+            .production((pb) => {
+              pb.megacredits(2).br;
+              pb.energy(1);
+            })
+            .nbsp.city().br;
           b.plants(3);
         }),
       },
@@ -46,7 +49,7 @@ export class FieldCappedCity extends Card implements IProjectCard {
         player.addProduction(Resources.ENERGY, 1);
         player.addProduction(Resources.MEGACREDITS, 2);
         return undefined;
-      },
+      }
     );
   }
 }

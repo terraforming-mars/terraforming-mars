@@ -27,4 +27,3 @@ export class TechnologyDemonstration extends Card implements IProjectCard {
     return undefined;
   }
 }
-

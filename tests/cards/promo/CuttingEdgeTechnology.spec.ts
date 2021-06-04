@@ -6,8 +6,8 @@ import {VoteOfNoConfidence} from '../../../src/cards/turmoil/VoteOfNoConfidence'
 import {Game} from '../../../src/Game';
 import {TestPlayers} from '../../TestPlayers';
 
-describe('CuttingEdgeTechnology', function() {
-  it('Should play', function() {
+describe('CuttingEdgeTechnology', function () {
+  it('Should play', function () {
     const card = new CuttingEdgeTechnology();
     const player = TestPlayers.BLUE.newPlayer();
     const redPlayer = TestPlayers.RED.newPlayer();

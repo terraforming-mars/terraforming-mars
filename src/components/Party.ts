@@ -15,17 +15,20 @@ export const Party = Vue.component('party', {
     },
   },
   methods: {
-    partyNameToCss: function(party: PartyName | undefined): string {
+    partyNameToCss: function (party: PartyName | undefined): string {
       if (party === undefined) {
         console.warn('no party provided');
         return '';
       }
       return party.toLowerCase().split(' ').join('_');
     },
-    getDominantClass: function(): string {
-      return 'select-party-leader-spot' + (this.isDominant ? ' dominance-marker' : '');
+    getDominantClass: function (): string {
+      return (
+        'select-party-leader-spot' +
+        (this.isDominant ? ' dominance-marker' : '')
+      );
     },
-    getUnavailablePartyClass: function(): string {
+    getUnavailablePartyClass: function (): string {
       return this.isAvailable ? '' : ' unavailable-party';
     },
   },

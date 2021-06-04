@@ -1,4 +1,3 @@
-
 import {IProjectCard} from '../IProjectCard';
 import {Tags} from '../Tags';
 import {Card} from '../Card';
@@ -20,7 +19,8 @@ export class BeamFromAThoriumAsteroid extends Card implements IProjectCard {
       requirements: CardRequirements.builder((b) => b.tag(Tags.JOVIAN)),
       metadata: {
         cardNumber: '058',
-        description: 'Requires a Jovian tag. Increase your heat production and Energy production 3 steps each',
+        description:
+          'Requires a Jovian tag. Increase your heat production and Energy production 3 steps each',
         renderData: CardRenderer.builder((b) => {
           b.production((pb) => {
             pb.heat(3).br;
@@ -40,4 +40,3 @@ export class BeamFromAThoriumAsteroid extends Card implements IProjectCard {
     return 1;
   }
 }
-

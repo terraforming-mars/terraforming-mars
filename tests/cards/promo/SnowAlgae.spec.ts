@@ -6,21 +6,22 @@ import {Resources} from '../../../src/Resources';
 import {TestingUtils} from '../../TestingUtils';
 import {TestPlayers} from '../../TestPlayers';
 
-describe('SnowAlgae', function() {
-  let card : SnowAlgae; let player : Player;
+describe('SnowAlgae', function () {
+  let card: SnowAlgae;
+  let player: Player;
 
-  beforeEach(function() {
+  beforeEach(function () {
     card = new SnowAlgae();
     player = TestPlayers.BLUE.newPlayer();
     Game.newInstance('foobar', [player], player);
   });
 
-  it('Can\'t play', function() {
+  it("Can't play", function () {
     TestingUtils.maxOutOceans(player, 1);
     expect(card.canPlay(player)).is.not.true;
   });
 
-  it('Should play', function() {
+  it('Should play', function () {
     TestingUtils.maxOutOceans(player, 2);
     expect(card.canPlay(player)).is.true;
 

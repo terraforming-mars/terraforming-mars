@@ -8,19 +8,26 @@ import {expect} from 'chai';
 import {ARES_OPTIONS_NO_HAZARDS} from '../../ares/AresTestHelper';
 import {TestPlayers} from '../../TestPlayers';
 
-describe('BioengineeringEnclosure', function() {
-  let card : BioengineeringEnclosure; let player : Player; let game : Game;
+describe('BioengineeringEnclosure', function () {
+  let card: BioengineeringEnclosure;
+  let player: Player;
+  let game: Game;
   let animalHost: IProjectCard = new Birds();
 
-  beforeEach(function() {
+  beforeEach(function () {
     animalHost = new Birds();
     card = new BioengineeringEnclosure();
     player = TestPlayers.BLUE.newPlayer();
     const redPlayer = TestPlayers.RED.newPlayer();
-    game = Game.newInstance('foobar', [player, redPlayer], player, ARES_OPTIONS_NO_HAZARDS);
+    game = Game.newInstance(
+      'foobar',
+      [player, redPlayer],
+      player,
+      ARES_OPTIONS_NO_HAZARDS
+    );
   });
 
-  it('Can\'t play without a science tag', () => {
+  it("Can't play without a science tag", () => {
     expect(card.canPlay(player)).is.false;
     player.playCard(new AICentral());
     expect(card.canPlay(player)).is.true;
@@ -32,14 +39,14 @@ describe('BioengineeringEnclosure', function() {
     expect(card.resourceCount).eq(2);
   });
 
-  it('Can\'t move animal if it\'s empty', () => {
+  it("Can't move animal if it's empty", () => {
     card.play(player);
     player.playCard(animalHost);
     card.resourceCount = 0;
     expect(card.canAct(player)).is.false;
   });
 
-  it('Can\'t move animal if theres not another card', () => {
+  it("Can't move animal if theres not another card", () => {
     card.play(player);
     expect(card.canAct(player)).is.false;
   });

@@ -14,7 +14,8 @@ export class MetalRichAsteroid extends PreludeCard implements IProjectCard {
           b.temperature(1).titanium(4).br;
           b.steel(4);
         }),
-        description: 'Increase temperature 1 step. Gain 4 titanium and 4 steel.',
+        description:
+          'Increase temperature 1 step. Gain 4 titanium and 4 steel.',
       },
     });
   }
@@ -24,4 +25,3 @@ export class MetalRichAsteroid extends PreludeCard implements IProjectCard {
     return player.game.increaseTemperature(player, 1);
   }
 }
-

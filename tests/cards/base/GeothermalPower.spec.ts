@@ -3,8 +3,8 @@ import {GeothermalPower} from '../../../src/cards/base/GeothermalPower';
 import {Resources} from '../../../src/Resources';
 import {TestPlayers} from '../../TestPlayers';
 
-describe('GeothermalPower', function() {
-  it('Should play', function() {
+describe('GeothermalPower', function () {
+  it('Should play', function () {
     const card = new GeothermalPower();
     const player = TestPlayers.BLUE.newPlayer();
     const action = card.play(player);

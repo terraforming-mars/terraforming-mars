@@ -27,8 +27,8 @@ import {RandomMAOptionType} from '../src/RandomMAOptionType';
 import {SpaceBonus} from '../src/SpaceBonus';
 import {TileType} from '../src/TileType';
 
-describe('Game', function() {
-  it('should initialize with right defaults', function() {
+describe('Game', function () {
+  it('should initialize with right defaults', function () {
     const player = TestPlayers.BLUE.newPlayer();
     const player2 = TestPlayers.RED.newPlayer();
     const game = Game.newInstance('foobar', [player, player2], player);
@@ -36,10 +36,12 @@ describe('Game', function() {
     expect(game.getGeneration()).to.eq(1);
   });
 
-  it('sets starting production if corporate era not selected', function() {
+  it('sets starting production if corporate era not selected', function () {
     const player = TestPlayers.BLUE.newPlayer();
 
-    const gameOptions = TestingUtils.setCustomGameOptions({corporateEra: false});
+    const gameOptions = TestingUtils.setCustomGameOptions({
+      corporateEra: false,
+    });
 
     Game.newInstance('foobar', [player], player, gameOptions);
     expect(player.getProduction(Resources.MEGACREDITS)).to.eq(1);
@@ -50,11 +52,15 @@ describe('Game', function() {
     expect(player.getProduction(Resources.HEAT)).to.eq(1);
   });
 
-  it('correctly calculates victory points', function() {
+  it('correctly calculates victory points', function () {
     const player = TestPlayers.BLUE.newPlayer();
     const player2 = TestPlayers.RED.newPlayer();
     const player3 = TestPlayers.YELLOW.newPlayer();
-    const game = Game.newInstance('vp_game', [player, player2, player3], player);
+    const game = Game.newInstance(
+      'vp_game',
+      [player, player2, player3],
+      player
+    );
 
     game.addCityTile(player, SpaceName.ARSIA_MONS);
     game.addGreenery(player, SpaceName.PAVONIS_MONS);
@@ -112,7 +118,7 @@ describe('Game', function() {
     expect(player3.victoryPointsBreakdown.awards).to.eq(5); // one shared 1st place
   });
 
-  it('Disallows to set temperature more than allowed maximum', function() {
+  it('Disallows to set temperature more than allowed maximum', function () {
     const player = TestPlayers.BLUE.newPlayer();
     const player2 = TestPlayers.RED.newPlayer();
     const game = Game.newInstance('game-id', [player, player2], player);
@@ -133,7 +139,7 @@ describe('Game', function() {
     expect(player.getTerraformRating()).to.eq(initialTR + 1);
   });
 
-  it('Disallows to set oxygenLevel more than allowed maximum', function() {
+  it('Disallows to set oxygenLevel more than allowed maximum', function () {
     const player = TestPlayers.BLUE.newPlayer();
     const player2 = TestPlayers.RED.newPlayer();
     const game = Game.newInstance('game-id', [player, player2], player);
@@ -146,7 +152,7 @@ describe('Game', function() {
     expect(player.getTerraformRating()).to.eq(initialTR + 1);
   });
 
-  it('Draft round for 2 players', function() {
+  it('Draft round for 2 players', function () {
     const player = TestPlayers.BLUE.newPlayer();
     const player2 = TestPlayers.RED.newPlayer();
     const game = Game.newInstance('draft_game', [player, player2], player);
@@ -159,7 +165,7 @@ describe('Game', function() {
     expect(game.getGeneration()).to.eq(5);
   });
 
-  it('No draft round for 2 players', function() {
+  it('No draft round for 2 players', function () {
     const player = TestPlayers.BLUE.newPlayer();
     const player2 = TestPlayers.RED.newPlayer();
     const game = Game.newInstance('classic_game', [player, player2], player);
@@ -172,7 +178,7 @@ describe('Game', function() {
     expect(game.getGeneration()).to.eq(3);
   });
 
-  it('Solo play next generation', function() {
+  it('Solo play next generation', function () {
     const player = TestPlayers.BLUE.newPlayer();
     const game = Game.newInstance('solo game', [player], player);
     game.gameOptions.venusNextExtension = false;
@@ -181,7 +187,7 @@ describe('Game', function() {
     expect(game.getGeneration()).to.eq(2);
   });
 
-  it('Should not finish game before Venus is terraformed, if chosen', function() {
+  it('Should not finish game before Venus is terraformed, if chosen', function () {
     const player = TestPlayers.BLUE.newPlayer();
     const player2 = TestPlayers.RED.newPlayer();
     const game = Game.newInstance('venusterraform', [player, player2], player);
@@ -203,7 +209,7 @@ describe('Game', function() {
     expect(game.phase).to.eq(Phase.RESEARCH);
   });
 
-  it('Should finish game if Mars and Venus is terraformed, if chosen', function() {
+  it('Should finish game if Mars and Venus is terraformed, if chosen', function () {
     const player = TestPlayers.BLUE.newPlayer();
     const player2 = TestPlayers.RED.newPlayer();
     const game = Game.newInstance('venusterraform', [player, player2], player);
@@ -224,7 +230,7 @@ describe('Game', function() {
     expect(game.phase).to.eq(Phase.END);
   });
 
-  it('Should not finish game if Mars is not terraformed but Venus is terraformed, if chosen', function() {
+  it('Should not finish game if Mars is not terraformed but Venus is terraformed, if chosen', function () {
     const player = TestPlayers.BLUE.newPlayer();
     const player2 = TestPlayers.RED.newPlayer();
     const game = Game.newInstance('venusterraform', [player, player2], player);
@@ -245,7 +251,7 @@ describe('Game', function() {
     expect(game.phase).to.eq(Phase.RESEARCH);
   });
 
-  it('Should finish solo game in the end of last generation', function() {
+  it('Should finish solo game in the end of last generation', function () {
     const player = TestPlayers.BLUE.newPlayer();
     const game = Game.newInstance('solo1', [player], player);
     game.playerIsDoneWithGame(player);
@@ -256,7 +262,7 @@ describe('Game', function() {
     expect(game.isSoloModeWin()).is.not.true;
   });
 
-  it('Should not finish solo game before last generation if Mars is already terraformed', function() {
+  it('Should not finish solo game before last generation if Mars is already terraformed', function () {
     const player = TestPlayers.BLUE.newPlayer();
 
     const game = Game.newInstance('solo2', [player], player);
@@ -276,7 +282,7 @@ describe('Game', function() {
     expect(game.phase).to.eq(Phase.RESEARCH);
   });
 
-  it('Should not give TR or raise oxygen for final greenery placements', function() {
+  it('Should not give TR or raise oxygen for final greenery placements', function () {
     const player = TestPlayers.BLUE.newPlayer();
     const redPlayer = TestPlayers.RED.newPlayer();
 
@@ -302,7 +308,7 @@ describe('Game', function() {
     // Place second greenery
     const placeSecondGreenery = player.getWaitingFor() as OrOptions;
     const otherSpace = game.board.getSpace('30');
-    placeSecondGreenery.options[0].cb(otherSpace); ;
+    placeSecondGreenery.options[0].cb(otherSpace);
 
     // End the game
     game.playerHasPassed(player);
@@ -315,19 +321,22 @@ describe('Game', function() {
     expect(game.getOxygenLevel()).to.eq(12);
   });
 
-  it('Should return players in turn order', function() {
+  it('Should return players in turn order', function () {
     const player1 = new Player('p1', Color.BLUE, false, 0, 'p1-id');
     const player2 = new Player('p2', Color.GREEN, false, 0, 'p2-id');
     const player3 = new Player('p3', Color.YELLOW, false, 0, 'p3-id');
     const player4 = new Player('p4', Color.RED, false, 0, 'p4-id');
-    const game = Game.newInstance('gto', [player1, player2, player3, player4], player3);
+    const game = Game.newInstance(
+      'gto',
+      [player1, player2, player3, player4],
+      player3
+    );
 
     let players = game.getPlayers();
     expect(players[0].name).to.eq('p3');
     expect(players[1].name).to.eq('p4');
     expect(players[2].name).to.eq('p1');
     expect(players[3].name).to.eq('p2');
-
 
     (game as any).incrementFirstPlayer();
     players = game.getPlayers();
@@ -344,7 +353,7 @@ describe('Game', function() {
     expect(players[3].name).to.eq('p4');
   });
 
-  it('Gets card player for corporation card', function() {
+  it('Gets card player for corporation card', function () {
     const player = TestPlayers.BLUE.newPlayer();
     const game = Game.newInstance('gto', [player], player);
     const card = new SaturnSystems();
@@ -352,17 +361,18 @@ describe('Game', function() {
     expect(game.getCardPlayer(card.name)).to.eq(player);
   });
 
-  it('Does not assign player to ocean after placement', function() {
+  it('Does not assign player to ocean after placement', function () {
     const player = TestPlayers.BLUE.newPlayer();
     const game = Game.newInstance('oceanz', [player], player);
-    const spaceId: SpaceId = game.board.getAvailableSpacesForOcean(player)[0].id;
+    const spaceId: SpaceId =
+      game.board.getAvailableSpacesForOcean(player)[0].id;
     game.addOceanTile(player, spaceId);
 
     const space: ISpace = game.board.getSpace(spaceId);
     expect(space.player).is.undefined;
   });
 
-  it('Check Ecologist Milestone', function() {
+  it('Check Ecologist Milestone', function () {
     const player = TestPlayers.BLUE.newPlayer();
 
     const card1 = new ResearchNetwork();
@@ -375,74 +385,117 @@ describe('Game', function() {
     expect(ecologist.canClaim(player)).is.true;
   });
 
-  it('Removes Hellas bonus ocean space if player cannot pay', function() {
+  it('Removes Hellas bonus ocean space if player cannot pay', function () {
     const player = TestPlayers.BLUE.newPlayer();
 
     // NOTE: By setting up the two-player game, instead of a solo game as we regularly do
     // the neutral player can't claim the bonus ocean space before our player has a
     // chance.
     const secondPlayer = TestPlayers.RED.newPlayer();
-    const gameOptions = TestingUtils.setCustomGameOptions({boardName: BoardName.HELLAS});
-    const game = Game.newInstance('foobar', [player, secondPlayer], player, gameOptions);
+    const gameOptions = TestingUtils.setCustomGameOptions({
+      boardName: BoardName.HELLAS,
+    });
+    const game = Game.newInstance(
+      'foobar',
+      [player, secondPlayer],
+      player,
+      gameOptions
+    );
 
     // Ensuring that HELLAS_OCEAN_TILE will be available for the test.
-    expect(game.board.getEmptySpaces().map((s) => s.id)).to.include(SpaceName.HELLAS_OCEAN_TILE);
+    expect(game.board.getEmptySpaces().map((s) => s.id)).to.include(
+      SpaceName.HELLAS_OCEAN_TILE
+    );
 
     // Cannot afford
     player.megaCredits = 5;
     let landSpaces = game.board.getSpaces(SpaceType.LAND, player);
-    expect(landSpaces.find((space) => space.id === SpaceName.HELLAS_OCEAN_TILE)).is.undefined;
+    expect(landSpaces.find((space) => space.id === SpaceName.HELLAS_OCEAN_TILE))
+      .is.undefined;
     let availableSpacesOnLand = game.board.getAvailableSpacesOnLand(player);
-    expect(availableSpacesOnLand.map((s) => s.id)).to.not.include(SpaceName.HELLAS_OCEAN_TILE);
+    expect(availableSpacesOnLand.map((s) => s.id)).to.not.include(
+      SpaceName.HELLAS_OCEAN_TILE
+    );
 
     // Can afford
     player.megaCredits = 6;
     landSpaces = game.board.getSpaces(SpaceType.LAND, player);
-    expect(landSpaces.find((space) => space.id === SpaceName.HELLAS_OCEAN_TILE)).is.not.undefined;
+    expect(landSpaces.find((space) => space.id === SpaceName.HELLAS_OCEAN_TILE))
+      .is.not.undefined;
     availableSpacesOnLand = game.board.getAvailableSpacesOnLand(player);
-    expect(availableSpacesOnLand.map((s) => s.id)).to.include(SpaceName.HELLAS_OCEAN_TILE);
+    expect(availableSpacesOnLand.map((s) => s.id)).to.include(
+      SpaceName.HELLAS_OCEAN_TILE
+    );
   });
 
-  it('Removes Hellas bonus ocean space if Helion player cannot pay', function() {
+  it('Removes Hellas bonus ocean space if Helion player cannot pay', function () {
     const player = TestPlayers.BLUE.newPlayer();
     // NOTE: By setting up the two-player game, instead of a solo game as we regularly do
     // the neutral player can't claim the bonus ocean space before our player has a
     // chance.
     const secondPlayer = TestPlayers.RED.newPlayer();
-    const gameOptions = TestingUtils.setCustomGameOptions({boardName: BoardName.HELLAS});
-    const game = Game.newInstance('foobar', [player, secondPlayer], player, gameOptions);
+    const gameOptions = TestingUtils.setCustomGameOptions({
+      boardName: BoardName.HELLAS,
+    });
+    const game = Game.newInstance(
+      'foobar',
+      [player, secondPlayer],
+      player,
+      gameOptions
+    );
     player.corporationCard = new Helion();
     player.canUseHeatAsMegaCredits = true;
 
     // Ensuring that HELLAS_OCEAN_TILE will be available for the test.
-    expect(game.board.getEmptySpaces().map((s) => s.id)).to.include(SpaceName.HELLAS_OCEAN_TILE);
+    expect(game.board.getEmptySpaces().map((s) => s.id)).to.include(
+      SpaceName.HELLAS_OCEAN_TILE
+    );
 
     // Cannot afford
     player.heat = 2;
     player.megaCredits = 3;
     let landSpaces = game.board.getSpaces(SpaceType.LAND, player);
-    expect(landSpaces.find((space) => space.id === SpaceName.HELLAS_OCEAN_TILE)).is.undefined;
+    expect(landSpaces.find((space) => space.id === SpaceName.HELLAS_OCEAN_TILE))
+      .is.undefined;
     let availableSpacesOnLand = game.board.getAvailableSpacesOnLand(player);
-    expect(availableSpacesOnLand.map((s) => s.id)).to.not.include(SpaceName.HELLAS_OCEAN_TILE);
+    expect(availableSpacesOnLand.map((s) => s.id)).to.not.include(
+      SpaceName.HELLAS_OCEAN_TILE
+    );
 
     // Can afford
     player.megaCredits += 1;
     landSpaces = game.board.getSpaces(SpaceType.LAND, player);
-    expect(landSpaces.find((space) => space.id === SpaceName.HELLAS_OCEAN_TILE)).is.not.undefined;
+    expect(landSpaces.find((space) => space.id === SpaceName.HELLAS_OCEAN_TILE))
+      .is.not.undefined;
     availableSpacesOnLand = game.board.getAvailableSpacesOnLand(player);
-    expect(availableSpacesOnLand.map((s) => s.id)).to.include(SpaceName.HELLAS_OCEAN_TILE);
+    expect(availableSpacesOnLand.map((s) => s.id)).to.include(
+      SpaceName.HELLAS_OCEAN_TILE
+    );
   });
 
-  it('Generates random milestones and awards', function() {
+  it('Generates random milestones and awards', function () {
     const player = TestPlayers.BLUE.newPlayer();
     const player2 = TestPlayers.RED.newPlayer();
-    const gameOptions = TestingUtils.setCustomGameOptions({boardName: BoardName.HELLAS, randomMA: RandomMAOptionType.UNLIMITED});
-    const game = Game.newInstance('foobar', [player, player2], player, gameOptions);
+    const gameOptions = TestingUtils.setCustomGameOptions({
+      boardName: BoardName.HELLAS,
+      randomMA: RandomMAOptionType.UNLIMITED,
+    });
+    const game = Game.newInstance(
+      'foobar',
+      [player, player2],
+      player,
+      gameOptions
+    );
 
     const prevMilestones = game.milestones.map((m) => m.name).sort();
     const prevAwards = game.awards.map((a) => a.name).sort();
 
-    const game2 = Game.newInstance('foobar2', [player, player2], player, gameOptions);
+    const game2 = Game.newInstance(
+      'foobar2',
+      [player, player2],
+      player,
+      gameOptions
+    );
 
     const milestones = game2.milestones.map((m) => m.name).sort();
     const awards = game2.awards.map((a) => a.name).sort();
@@ -451,7 +504,7 @@ describe('Game', function() {
     expect(prevAwards).to.not.eq(awards);
   });
 
-  it('specifically-requested corps override expansion corps', function() {
+  it('specifically-requested corps override expansion corps', function () {
     const player = TestPlayers.BLUE.newPlayer();
     const player2 = TestPlayers.RED.newPlayer();
     const corpsFromTurmoil = [
@@ -460,11 +513,16 @@ describe('Game', function() {
       CardName.TERRALABS_RESEARCH,
       CardName.UTOPIA_INVEST,
     ];
-    const gameOptions = TestingUtils.setCustomGameOptions({customCorporationsList: corpsFromTurmoil, turmoilExtension: false});
+    const gameOptions = TestingUtils.setCustomGameOptions({
+      customCorporationsList: corpsFromTurmoil,
+      turmoilExtension: false,
+    });
     Game.newInstance('foobar', [player, player2], player, gameOptions);
 
-    const corpsAssignedToPlayers =
-            [...player.dealtCorporationCards, ...player2.dealtCorporationCards].map((c) => c.name);
+    const corpsAssignedToPlayers = [
+      ...player.dealtCorporationCards,
+      ...player2.dealtCorporationCards,
+    ].map((c) => c.name);
 
     expect(corpsAssignedToPlayers).has.members(corpsFromTurmoil);
   });
@@ -472,23 +530,29 @@ describe('Game', function() {
   it('fails when the same id appears in two players', () => {
     const player1 = new Player('name', Color.BLUE, false, 0, 'id3');
     const player2 = new Player('name', Color.RED, false, 0, 'id3');
-    expect(
-      () => Game.newInstance('id', [player1, player2], player1))
-      .to.throw(Error, /Duplicate player found: id3,id3/);
+    expect(() => Game.newInstance('id', [player1, player2], player1)).to.throw(
+      Error,
+      /Duplicate player found: id3,id3/
+    );
   });
 
   it('fails when first player is absent from the list of players.', () => {
-    expect(
-      () => Game.newInstance('id', [TestPlayers.RED.newPlayer(), TestPlayers.BLUE.newPlayer()], TestPlayers.YELLOW.newPlayer()))
-      .to.throw(Error, /Cannot find first player/);
+    expect(() =>
+      Game.newInstance(
+        'id',
+        [TestPlayers.RED.newPlayer(), TestPlayers.BLUE.newPlayer()],
+        TestPlayers.YELLOW.newPlayer()
+      )
+    ).to.throw(Error, /Cannot find first player/);
   });
 
   it('fails when the same color appears in two players', () => {
     const player1 = new Player('name', Color.RED, false, 0, 'id1');
     const player2 = new Player('name', Color.RED, false, 0, 'id2');
-    expect(
-      () => Game.newInstance('id', [player1, player2], player1))
-      .to.throw(Error, /Duplicate color found/);
+    expect(() => Game.newInstance('id', [player1, player2], player1)).to.throw(
+      Error,
+      /Duplicate color found/
+    );
   });
 
   it('grant space bonus sanity test', () => {
@@ -496,7 +560,14 @@ describe('Game', function() {
     const game = Game.newInstance('foobar', [player], player);
     const space = game.board.getAvailableSpacesOnLand()[0];
 
-    space.bonus = [SpaceBonus.DRAW_CARD, SpaceBonus.DRAW_CARD, SpaceBonus.DRAW_CARD, SpaceBonus.DRAW_CARD, SpaceBonus.PLANT, SpaceBonus.TITANIUM];
+    space.bonus = [
+      SpaceBonus.DRAW_CARD,
+      SpaceBonus.DRAW_CARD,
+      SpaceBonus.DRAW_CARD,
+      SpaceBonus.DRAW_CARD,
+      SpaceBonus.PLANT,
+      SpaceBonus.TITANIUM,
+    ];
     expect(player.cardsInHand).has.length(0);
     expect(player.plants).eq(0);
     expect(player.titanium).eq(0);
@@ -513,7 +584,7 @@ describe('Game', function() {
    * serialization. if this fails update SerializedGame
    * to match
    */
-  it('serializes properties', function() {
+  it('serializes properties', function () {
     const player = TestPlayers.BLUE.newPlayer();
     const game = Game.newInstance('foobar', [player], player);
     const serialized = game.serialize();
@@ -523,9 +594,14 @@ describe('Game', function() {
     expect(serializedKeys).to.have.members(gameKeys.concat('moonData'));
   });
 
-  it('serializes every property', function() {
+  it('serializes every property', function () {
     const player = TestPlayers.BLUE.newPlayer();
-    const game = Game.newInstance('foobar', [player], player, TestingUtils.setCustomGameOptions({moonExpansion: true}));
+    const game = Game.newInstance(
+      'foobar',
+      [player],
+      player,
+      TestingUtils.setCustomGameOptions({moonExpansion: true})
+    );
     const serialized = game.serialize();
     const serializedKeys = Object.keys(serialized);
     const gameKeys = Object.keys(game);
@@ -534,7 +610,12 @@ describe('Game', function() {
 
   it('deserializing a game without moon data still loads', () => {
     const player = TestPlayers.BLUE.newPlayer();
-    const game = Game.newInstance('foobar', [player], player, TestingUtils.setCustomGameOptions({moonExpansion: false}));
+    const game = Game.newInstance(
+      'foobar',
+      [player],
+      player,
+      TestingUtils.setCustomGameOptions({moonExpansion: false})
+    );
     const serialized = game.serialize();
     delete serialized['moonData'];
     const deserialized = Game.deserialize(serialized);

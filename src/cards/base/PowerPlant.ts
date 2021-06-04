@@ -32,4 +32,3 @@ export class PowerPlant extends Card implements IProjectCard {
     return undefined;
   }
 }
-

@@ -1,7 +1,10 @@
 import {expect} from 'chai';
 import {Game} from '../../../src/Game';
 import {GlobalDustStorm} from '../../../src/turmoil/globalEvents/GlobalDustStorm';
-import {GlobalEventDealer, getGlobalEventByName} from '../../../src/turmoil/globalEvents/GlobalEventDealer';
+import {
+  GlobalEventDealer,
+  getGlobalEventByName,
+} from '../../../src/turmoil/globalEvents/GlobalEventDealer';
 import {GlobalEventName} from '../../../src/turmoil/globalEvents/GlobalEventName';
 import {IGlobalEvent} from '../../../src/turmoil/globalEvents/IGlobalEvent';
 import {MinersOnStrike} from '../../../src/turmoil/globalEvents/MinersOnStrike';
@@ -27,8 +30,13 @@ describe('GlobalEventDealer', () => {
 
   it('serialize/deserialize - empty', () => {
     const dealer = new GlobalEventDealer(
-      [new SponsoredProjects(), new SuccessfulOrganisms(), new ScientificCommunity()],
-      [new GlobalDustStorm(), new WarOnEarth()]);
+      [
+        new SponsoredProjects(),
+        new SuccessfulOrganisms(),
+        new ScientificCommunity(),
+      ],
+      [new GlobalDustStorm(), new WarOnEarth()]
+    );
 
     const jsonString = JSON.stringify(dealer.serialize());
     const json = JSON.parse(jsonString) as SerializedGlobalEventDealer;
@@ -38,9 +46,11 @@ describe('GlobalEventDealer', () => {
     expect(newDealer.globalEventsDeck.map(cardName)).deep.eq([
       GlobalEventName.SPONSORED_PROJECTS,
       GlobalEventName.SUCCESSFUL_ORGANISMS,
-      GlobalEventName.SCIENTIFIC_COMMUNITY]);
+      GlobalEventName.SCIENTIFIC_COMMUNITY,
+    ]);
     expect(newDealer.discardedGlobalEvents.map(cardName)).deep.eq([
-      GlobalEventName.GLOBAL_DUST_STORM, GlobalEventName.WAR_ON_EARTH,
+      GlobalEventName.GLOBAL_DUST_STORM,
+      GlobalEventName.WAR_ON_EARTH,
     ]);
   });
 
@@ -58,12 +68,19 @@ describe('GlobalEventDealer', () => {
     const game = Game.newInstance('foobar', [player], player, gameOptions);
     const dealer = GlobalEventDealer.newInstance(game);
     for (const card of dealer.globalEventsDeck) {
-      expect(getGlobalEventByName(card.name), card.name + ' cannot be retrieved, card is probably missing from ALL_EVENTS').to.deep.eq(card);
+      expect(
+        getGlobalEventByName(card.name),
+        card.name +
+          ' cannot be retrieved, card is probably missing from ALL_EVENTS'
+      ).to.deep.eq(card);
     }
   });
 
   // TODO(bafolts): remove after 2021-05-08
   it('gets Miners On Strike by Miners Of Strike', () => {
-    expect(getGlobalEventByName('Miners Of Strike' as GlobalEventName) instanceof MinersOnStrike).is.true;
+    expect(
+      getGlobalEventByName('Miners Of Strike' as GlobalEventName) instanceof
+        MinersOnStrike
+    ).is.true;
   });
 });

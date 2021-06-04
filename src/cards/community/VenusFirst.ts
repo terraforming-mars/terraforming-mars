@@ -27,4 +27,3 @@ export class VenusFirst extends PreludeCard implements IProjectCard {
     return undefined;
   }
 }
-

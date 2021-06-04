@@ -8,8 +8,11 @@ import {SpaceId} from '../boards/ISpace';
 import {TranslateMixin} from './TranslateMixin';
 
 class GlobalParamLevel {
-  constructor(public value: number, public isActive: boolean, public strValue: string) {
-  }
+  constructor(
+    public value: number,
+    public isActive: boolean,
+    public strValue: string
+  ) {}
 }
 
 export const Board = Vue.component('board', {
@@ -45,7 +48,7 @@ export const Board = Vue.component('board', {
   components: {
     'board-space': BoardSpace,
   },
-  data: function() {
+  data: function () {
     return {
       'constants': constants,
       'isTileHidden': false,
@@ -53,26 +56,26 @@ export const Board = Vue.component('board', {
   },
   mixins: [TranslateMixin],
   methods: {
-    getAllSpacesOnMars: function(): Array<SpaceModel> {
+    getAllSpacesOnMars: function (): Array<SpaceModel> {
       const boardSpaces: Array<SpaceModel> = this.spaces;
-      boardSpaces.sort(
-        (space1: SpaceModel, space2: SpaceModel) => {
-          return parseInt(space1.id) - parseInt(space2.id);
-        },
-      );
+      boardSpaces.sort((space1: SpaceModel, space2: SpaceModel) => {
+        return parseInt(space1.id) - parseInt(space2.id);
+      });
       return boardSpaces.filter((s: SpaceModel) => {
         return s.spaceType !== SpaceType.COLONY;
       });
     },
-    getSpaceById: function(spaceId: SpaceId) {
+    getSpaceById: function (spaceId: SpaceId) {
       for (const space of this.spaces) {
         if (space.id === spaceId) {
           return space;
         }
       }
-      throw 'Board space not found by id \'' + spaceId + '\'';
+      throw "Board space not found by id '" + spaceId + "'";
     },
-    getValuesForParameter: function(targetParameter: string): Array<GlobalParamLevel> {
+    getValuesForParameter: function (
+      targetParameter: string
+    ): Array<GlobalParamLevel> {
       const values: Array<GlobalParamLevel> = [];
       let startValue: number;
       let endValue: number;
@@ -81,44 +84,45 @@ export const Board = Vue.component('board', {
       let strValue: string;
 
       switch (targetParameter) {
-      case 'oxygen':
-        startValue = constants.MIN_OXYGEN_LEVEL;
-        endValue = constants.MAX_OXYGEN_LEVEL;
-        step = 1;
-        curValue = this.oxygen_level;
-        break;
-      case 'temperature':
-        startValue = constants.MIN_TEMPERATURE;
-        endValue = constants.MAX_TEMPERATURE;
-        step = 2;
-        curValue = this.temperature;
-        break;
-      case 'venus':
-        startValue = constants.MIN_VENUS_SCALE;
-        endValue = constants.MAX_VENUS_SCALE;
-        step = 2;
-        curValue = this.venusScaleLevel;
-        break;
-      default:
-        throw 'Wrong parameter to get values from';
+        case 'oxygen':
+          startValue = constants.MIN_OXYGEN_LEVEL;
+          endValue = constants.MAX_OXYGEN_LEVEL;
+          step = 1;
+          curValue = this.oxygen_level;
+          break;
+        case 'temperature':
+          startValue = constants.MIN_TEMPERATURE;
+          endValue = constants.MAX_TEMPERATURE;
+          step = 2;
+          curValue = this.temperature;
+          break;
+        case 'venus':
+          startValue = constants.MIN_VENUS_SCALE;
+          endValue = constants.MAX_VENUS_SCALE;
+          step = 2;
+          curValue = this.venusScaleLevel;
+          break;
+        default:
+          throw 'Wrong parameter to get values from';
       }
 
       for (let value: number = endValue; value >= startValue; value -= step) {
-        strValue = (targetParameter === 'temperature' && value > 0) ? '+'+value : value.toString();
-        values.push(
-          new GlobalParamLevel(value, value === curValue, strValue),
-        );
+        strValue =
+          targetParameter === 'temperature' && value > 0
+            ? '+' + value
+            : value.toString();
+        values.push(new GlobalParamLevel(value, value === curValue, strValue));
       }
       return values;
     },
-    getScaleCSS: function(paramLevel: GlobalParamLevel): string {
+    getScaleCSS: function (paramLevel: GlobalParamLevel): string {
       let css = 'global-numbers-value val-' + paramLevel.value + ' ';
       if (paramLevel.isActive) {
         css += 'val-is-active';
       }
       return css;
     },
-    oceansValue: function() {
+    oceansValue: function () {
       const oceans_count = this.oceans_count || 0;
       const leftover = constants.MAX_OCEAN_TILES - oceans_count;
       if (leftover === 0) {
@@ -127,16 +131,18 @@ export const Board = Vue.component('board', {
         return `${oceans_count}/${constants.MAX_OCEAN_TILES}`;
       }
     },
-    getGameBoardClassName: function():string {
-      return this.venusNextExtension ? 'board-cont board-with-venus' : 'board-cont board-without-venus';
+    getGameBoardClassName: function (): string {
+      return this.venusNextExtension
+        ? 'board-cont board-with-venus'
+        : 'board-cont board-without-venus';
     },
-    toggleHideTile: function() {
+    toggleHideTile: function () {
       this.isTileHidden = !this.isTileHidden;
     },
-    toggleHideTileLabel: function(): string {
+    toggleHideTileLabel: function (): string {
       return this.isTileHidden ? 'show tiles' : 'hide tiles';
     },
-    checkHideTile: function():boolean {
+    checkHideTile: function (): boolean {
       return this.isTileHidden;
     },
   },

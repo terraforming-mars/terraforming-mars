@@ -4,8 +4,8 @@ import {SellPatentsStandardProject} from '../../../src/cards/base/standardProjec
 import {StandardTechnology} from '../../../src/cards/base/StandardTechnology';
 import {TestPlayers} from '../../TestPlayers';
 
-describe('StandardTechnology', function() {
-  it('Should play', function() {
+describe('StandardTechnology', function () {
+  it('Should play', function () {
     const card = new StandardTechnology();
     const player = TestPlayers.BLUE.newPlayer();
     const action = card.play();

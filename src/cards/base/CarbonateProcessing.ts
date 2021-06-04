@@ -1,4 +1,3 @@
-
 import {IProjectCard} from '../IProjectCard';
 import {Tags} from '../Tags';
 import {Card} from '../Card';
@@ -20,11 +19,14 @@ export class CarbonateProcessing extends Card implements IProjectCard {
 
       metadata: {
         cardNumber: '043',
-        description: 'Decrease your Energy production 1 step and increase your heat production 3 steps.',
-        renderData: CardRenderer.builder((b) => b.production((pb) => {
-          pb.minus().energy(1).br;
-          pb.plus().heat(3);
-        })),
+        description:
+          'Decrease your Energy production 1 step and increase your heat production 3 steps.',
+        renderData: CardRenderer.builder((b) =>
+          b.production((pb) => {
+            pb.minus().energy(1).br;
+            pb.plus().heat(3);
+          })
+        ),
       },
     });
   }

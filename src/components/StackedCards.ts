@@ -12,6 +12,7 @@ export const StackedCards = Vue.component('stacked-cards', {
     Card,
   },
   methods: {
+    // keep
   },
   template: `
     <div class="cardbox">

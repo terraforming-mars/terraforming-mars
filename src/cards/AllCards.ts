@@ -37,26 +37,27 @@ function allCardNames(decks: Array<Deck<ICard>>): Array<CardName> {
   return cardNames;
 }
 
-export const MANIFEST_BY_MODULE: Map<GameModule, CardManifest> =
-    new Map(ALL_CARD_MANIFESTS.map((manifest) => [manifest.module, manifest]));
+export const MANIFEST_BY_MODULE: Map<GameModule, CardManifest> = new Map(
+  ALL_CARD_MANIFESTS.map((manifest) => [manifest.module, manifest])
+);
 
 export const ALL_PROJECT_DECKS = ALL_CARD_MANIFESTS.map(
-  (deck) => deck.projectCards,
+  (deck) => deck.projectCards
 );
 const ALL_CORPORATION_DECKS = ALL_CARD_MANIFESTS.map(
-  (deck) => deck.corporationCards,
+  (deck) => deck.corporationCards
 );
 export const ALL_PRELUDE_DECKS = ALL_CARD_MANIFESTS.map(
-  (deck) => deck.preludeCards,
+  (deck) => deck.preludeCards
 );
 export const ALL_STANDARD_PROJECT_DECKS = ALL_CARD_MANIFESTS.map(
-  (deck) => deck.standardProjects,
+  (deck) => deck.standardProjects
 );
 
 export const ALL_PROJECT_CARD_NAMES = allCardNames(ALL_PROJECT_DECKS);
-export const ALL_STANDARD_PROJECT_CARD_NAMES = allCardNames(ALL_STANDARD_PROJECT_DECKS);
-
-export const ALL_CORPORATION_CARD_NAMES = allCardNames(
-  ALL_CORPORATION_DECKS,
+export const ALL_STANDARD_PROJECT_CARD_NAMES = allCardNames(
+  ALL_STANDARD_PROJECT_DECKS
 );
+
+export const ALL_CORPORATION_CARD_NAMES = allCardNames(ALL_CORPORATION_DECKS);
 export const ALL_PRELUDE_CARD_NAMES = allCardNames(ALL_PRELUDE_DECKS);

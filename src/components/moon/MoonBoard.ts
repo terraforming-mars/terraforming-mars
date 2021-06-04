@@ -6,8 +6,11 @@ import {SpaceType} from '../../SpaceType';
 import {MoonSpace} from './MoonSpace';
 
 class MoonParamLevel {
-  constructor(public value: number, public isActive: boolean, public strValue: string) {
-  }
+  constructor(
+    public value: number,
+    public isActive: boolean,
+    public strValue: string
+  ) {}
 }
 
 export const MoonBoard = Vue.component('moonboard', {
@@ -19,57 +22,54 @@ export const MoonBoard = Vue.component('moonboard', {
   components: {
     'moon-space': MoonSpace,
   },
-  data: function() {
-    return {
-    };
+  data: function () {
+    return {};
   },
   methods: {
-    getAllNonColonySpaces: function(): Array<SpaceModel> {
+    getAllNonColonySpaces: function (): Array<SpaceModel> {
       const boardSpaces: Array<SpaceModel> = this.model.spaces;
-      boardSpaces.sort(
-        (space1: SpaceModel, space2: SpaceModel) => {
-          return parseInt(space1.id) - parseInt(space2.id);
-        },
-      );
+      boardSpaces.sort((space1: SpaceModel, space2: SpaceModel) => {
+        return parseInt(space1.id) - parseInt(space2.id);
+      });
       return boardSpaces.filter((s: SpaceModel) => {
         return s.spaceType !== SpaceType.COLONY;
       });
     },
-    getSpaceById: function(spaceId: string) {
+    getSpaceById: function (spaceId: string) {
       for (const space of this.model.spaces) {
         if (space.id === spaceId) {
           return space;
         }
       }
-      throw 'Board space not found by id \'' + spaceId + '\'';
+      throw "Board space not found by id '" + spaceId + "'";
     },
-    getValuesForParameter: function(targetParameter: string): Array<MoonParamLevel> {
+    getValuesForParameter: function (
+      targetParameter: string
+    ): Array<MoonParamLevel> {
       let curValue: number;
 
       switch (targetParameter) {
-      case 'logistics':
-        curValue = this.model.logisticsRate;
-        break;
-      case 'mining':
-        curValue = this.model.miningRate;
-        break;
-      case 'colony':
-        curValue = this.model.colonyRate;
-        break;
-      default:
-        throw 'Wrong parameter to get values from';
+        case 'logistics':
+          curValue = this.model.logisticsRate;
+          break;
+        case 'mining':
+          curValue = this.model.miningRate;
+          break;
+        case 'colony':
+          curValue = this.model.colonyRate;
+          break;
+        default:
+          throw 'Wrong parameter to get values from';
       }
 
       const values: Array<MoonParamLevel> = [];
       for (let value: number = 8; value >= 0; value -= 1) {
         const strValue = value.toString();
-        values.push(
-          new MoonParamLevel(value, value === curValue, strValue),
-        );
+        values.push(new MoonParamLevel(value, value === curValue, strValue));
       }
       return values;
     },
-    getScaleCSS: function(paramLevel: MoonParamLevel): string {
+    getScaleCSS: function (paramLevel: MoonParamLevel): string {
       let css = 'global-numbers-value val-' + paramLevel.value + ' ';
       if (paramLevel.isActive) {
         css += 'val-is-active';

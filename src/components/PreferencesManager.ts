@@ -22,13 +22,20 @@ export const preferences = [
 export type Key = typeof preferences[number];
 
 export class PreferencesManager {
-  static preferencesValues: Map<Key, boolean | string> = new Map<Key, boolean | string>();
+  static preferencesValues: Map<Key, boolean | string> = new Map<
+    Key,
+    boolean | string
+  >();
   private static localStorageSupported(): boolean {
     return typeof localStorage !== 'undefined';
   }
 
-  static save(name: Key, val: string | boolean, updateMap: boolean = false): void {
-    const stringVal = typeof(val) === 'string' ? val : (val ? '1' : '0');
+  static save(
+    name: Key,
+    val: string | boolean,
+    updateMap: boolean = false
+  ): void {
+    const stringVal = typeof val === 'string' ? val : val ? '1' : '0';
     if (this.localStorageSupported()) {
       localStorage.setItem(name, stringVal);
     }

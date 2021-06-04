@@ -7,28 +7,30 @@ import {TestPlayer} from '../../TestPlayer';
 import {Resources} from '../../../src/Resources';
 import {TestPlayers} from '../../TestPlayers';
 
-describe('Shuttles', function() {
-  let card : Shuttles; let player : TestPlayer; let game : Game;
+describe('Shuttles', function () {
+  let card: Shuttles;
+  let player: TestPlayer;
+  let game: Game;
 
-  beforeEach(function() {
+  beforeEach(function () {
     card = new Shuttles();
     player = TestPlayers.BLUE.newPlayer();
     const redPlayer = TestPlayers.RED.newPlayer();
     game = Game.newInstance('foobar', [player, redPlayer], player);
   });
 
-  it('Can\'t play without energy production', function() {
+  it("Can't play without energy production", function () {
     (game as any).oxygenLevel = 5;
     expect(card.canPlay(player)).is.not.true;
   });
 
-  it('Can\'t play if oxygen level too low', function() {
+  it("Can't play if oxygen level too low", function () {
     player.addProduction(Resources.ENERGY, 1);
     (game as any).oxygenLevel = 4;
     expect(card.canPlay(player)).is.not.true;
   });
 
-  it('Should play', function() {
+  it('Should play', function () {
     (game as any).oxygenLevel = 5;
     player.addProduction(Resources.ENERGY, 1);
     expect(card.canPlay(player)).is.true;
@@ -37,7 +39,10 @@ describe('Shuttles', function() {
     expect(player.getProduction(Resources.ENERGY)).to.eq(0);
     expect(player.getProduction(Resources.MEGACREDITS)).to.eq(2);
 
-    player.victoryPointsBreakdown.setVictoryPoints('victoryPoints', card.getVictoryPoints());
+    player.victoryPointsBreakdown.setVictoryPoints(
+      'victoryPoints',
+      card.getVictoryPoints()
+    );
     expect(player.victoryPointsBreakdown.victoryPoints).to.eq(1);
 
     expect(card.getCardDiscount(player, new Bushes())).to.eq(0);

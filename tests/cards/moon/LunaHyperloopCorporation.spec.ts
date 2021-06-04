@@ -67,4 +67,3 @@ describe('LunaHyperloopCorporation', () => {
     expect(card.getVictoryPoints(player)).eq(3);
   });
 });
-

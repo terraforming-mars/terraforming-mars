@@ -6,21 +6,22 @@ import {OrOptions} from '../../../src/inputs/OrOptions';
 import {Player} from '../../../src/Player';
 import {TestPlayers} from '../../TestPlayers';
 
-describe('CrashSiteCleanup', function() {
-  let card : CrashSiteCleanup; let player : Player;
+describe('CrashSiteCleanup', function () {
+  let card: CrashSiteCleanup;
+  let player: Player;
 
-  beforeEach(function() {
+  beforeEach(function () {
     card = new CrashSiteCleanup();
     player = TestPlayers.BLUE.newPlayer();
     const redPlayer = TestPlayers.RED.newPlayer();
     Game.newInstance('foobar', [player, redPlayer], player);
   });
 
-  it('Can\'t play', function() {
+  it("Can't play", function () {
     expect(card.canPlay(player)).is.not.true;
   });
 
-  it('Can play if removed plants from another player this generation', function() {
+  it('Can play if removed plants from another player this generation', function () {
     const player2 = TestPlayers.RED.newPlayer();
     Game.newInstance('foobar', [player, player2], player);
     player2.plants = 1;
@@ -28,7 +29,9 @@ describe('CrashSiteCleanup', function() {
     const smallAsteroid = new SmallAsteroid();
     smallAsteroid.play(player);
     // Choose Remove 1 plant option
-    const orOptions = player.game.deferredActions.peek()!.execute() as OrOptions;
+    const orOptions = player.game.deferredActions
+      .peek()!
+      .execute() as OrOptions;
     orOptions.options[0].cb([player2]);
 
     expect(card.canPlay(player)).is.true;
@@ -41,7 +44,7 @@ describe('CrashSiteCleanup', function() {
     expect(player.steel).to.eq(2);
   });
 
-  it('Can play if removed plants from neutral player in solo mode', function() {
+  it('Can play if removed plants from neutral player in solo mode', function () {
     Game.newInstance('foobar', [player], player);
     const smallAsteroid = new SmallAsteroid();
     smallAsteroid.play(player);

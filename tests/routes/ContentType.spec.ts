@@ -2,7 +2,7 @@ import {expect} from 'chai';
 import {ContentType} from '../../src/routes/ContentType';
 
 describe('ContentType', () => {
-  const tests: Array<[path: string, type: string|undefined]> = [
+  const tests: Array<[path: string, type: string | undefined]> = [
     ['/path/to/foo.ico', 'image/x-icon'],
     ['/path/to/foo.js', 'text/javascript'],
     ['/path/to/foo.map', 'text/javascript'],

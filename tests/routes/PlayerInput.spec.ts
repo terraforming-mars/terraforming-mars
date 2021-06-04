@@ -11,7 +11,7 @@ import {TestPlayers} from '../TestPlayers';
 import {OrOptions} from '../../src/inputs/OrOptions';
 import {UndoActionOption} from '../../src/inputs/UndoActionOption';
 
-describe('PlayerInput', function() {
+describe('PlayerInput', function () {
   let req: http.IncomingMessage;
   let res: MockResponse;
   let ctx: IContext;
@@ -46,11 +46,18 @@ describe('PlayerInput', function() {
     player.process([['1'], ['Power Plant:SP']]);
     const options = player.getWaitingFor() as OrOptions;
     options.options.push(new UndoActionOption());
-    ctx.gameLoader.restoreGameAt = function(_gameId: string, _lastSaveId: number, cb: (game: Game | undefined) => void) {
+    ctx.gameLoader.restoreGameAt = function (
+      _gameId: string,
+      _lastSaveId: number,
+      cb: (game: Game | undefined) => void
+    ) {
       cb(undo);
     };
     PlayerInput.INSTANCE.post(req, res.hide(), ctx);
-    req.emit('data', JSON.stringify([[String(options.options.length - 1)], ['']]));
+    req.emit(
+      'data',
+      JSON.stringify([[String(options.options.length - 1)], ['']])
+    );
     req.emit('end');
     const model = JSON.parse(res.content);
     expect(game.gameAge).not.eq(undo.gameAge);
@@ -69,11 +76,18 @@ describe('PlayerInput', function() {
     player.process([['1'], ['Power Plant:SP']]);
     const options = player.getWaitingFor() as OrOptions;
     options.options.push(new UndoActionOption());
-    ctx.gameLoader.restoreGameAt = function(_gameId: string, _lastSaveId: number, cb: (game: Game | undefined) => void) {
+    ctx.gameLoader.restoreGameAt = function (
+      _gameId: string,
+      _lastSaveId: number,
+      cb: (game: Game | undefined) => void
+    ) {
       cb(undefined);
     };
     PlayerInput.INSTANCE.post(req, res.hide(), ctx);
-    req.emit('data', JSON.stringify([[String(options.options.length - 1)], ['']]));
+    req.emit(
+      'data',
+      JSON.stringify([[String(options.options.length - 1)], ['']])
+    );
     req.emit('end');
     const model = JSON.parse(res.content);
     expect(game.gameAge).not.eq(undo.gameAge);
@@ -89,6 +103,8 @@ describe('PlayerInput', function() {
     PlayerInput.INSTANCE.post(req, res.hide(), ctx);
     req.emit('data', '}{');
     req.emit('end');
-    expect(res.content).eq('{"message":"Unexpected token } in JSON at position 0"}');
+    expect(res.content).eq(
+      '{"message":"Unexpected token } in JSON at position 0"}'
+    );
   });
 });

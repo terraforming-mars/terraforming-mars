@@ -1,8 +1,5 @@
 require('dotenv').config();
-require('console-stamp')(
-  console,
-  {format: ':date(yyyy-mm-dd HH:MM:ss Z)'},
-);
+require('console-stamp')(console, {format: ':date(yyyy-mm-dd HH:MM:ss Z)'});
 
 import * as https from 'https';
 import * as http from 'http';
@@ -31,40 +28,42 @@ process.on('uncaughtException', (err: any) => {
   console.error('UNCAUGHT EXCEPTION', err);
 });
 
-const serverId = process.env.SERVER_ID || GameHandler.INSTANCE.generateRandomId('');
+const serverId =
+  process.env.SERVER_ID || GameHandler.INSTANCE.generateRandomId('');
 const route = new Route();
 
-const handlers: Map<string, IHandler> = new Map(
-  [
-    ['/', ServeApp.INSTANCE],
-    ['/api/clonablegames', ApiCloneableGames.INSTANCE],
-    ['/api/cloneablegames', ApiCloneableGames.INSTANCE],
-    ['/api/game', ApiGame.INSTANCE],
-    ['/api/game/logs', ApiGameLogs.INSTANCE],
-    ['/api/games', ApiGames.INSTANCE],
-    ['/api/player', ApiPlayer.INSTANCE],
-    ['/api/spectator', ApiSpectator.INSTANCE],
-    ['/api/waitingfor', ApiWaitingFor.INSTANCE],
-    ['/cards', ServeApp.INSTANCE],
-    ['/favicon.ico', ServeAsset.INSTANCE],
-    ['/game', GameHandler.INSTANCE],
-    ['/games-overview', GamesOverview.INSTANCE],
-    ['/help', ServeApp.INSTANCE],
-    ['/load', Load.INSTANCE],
-    ['/load_game', LoadGame.INSTANCE],
-    ['/main.js', ServeAsset.INSTANCE],
-    ['/main.js.map', ServeAsset.INSTANCE],
-    ['/new-game', ServeApp.INSTANCE],
-    ['/player', ServeApp.INSTANCE],
-    ['/player/input', PlayerInput.INSTANCE],
-    ['/solo', ServeApp.INSTANCE],
-    ['/spectator', ServeApp.INSTANCE],
-    ['/styles.css', ServeAsset.INSTANCE],
-    ['/the-end', ServeApp.INSTANCE],
-  ],
-);
+const handlers: Map<string, IHandler> = new Map([
+  ['/', ServeApp.INSTANCE],
+  ['/api/clonablegames', ApiCloneableGames.INSTANCE],
+  ['/api/cloneablegames', ApiCloneableGames.INSTANCE],
+  ['/api/game', ApiGame.INSTANCE],
+  ['/api/game/logs', ApiGameLogs.INSTANCE],
+  ['/api/games', ApiGames.INSTANCE],
+  ['/api/player', ApiPlayer.INSTANCE],
+  ['/api/spectator', ApiSpectator.INSTANCE],
+  ['/api/waitingfor', ApiWaitingFor.INSTANCE],
+  ['/cards', ServeApp.INSTANCE],
+  ['/favicon.ico', ServeAsset.INSTANCE],
+  ['/game', GameHandler.INSTANCE],
+  ['/games-overview', GamesOverview.INSTANCE],
+  ['/help', ServeApp.INSTANCE],
+  ['/load', Load.INSTANCE],
+  ['/load_game', LoadGame.INSTANCE],
+  ['/main.js', ServeAsset.INSTANCE],
+  ['/main.js.map', ServeAsset.INSTANCE],
+  ['/new-game', ServeApp.INSTANCE],
+  ['/player', ServeApp.INSTANCE],
+  ['/player/input', PlayerInput.INSTANCE],
+  ['/solo', ServeApp.INSTANCE],
+  ['/spectator', ServeApp.INSTANCE],
+  ['/styles.css', ServeAsset.INSTANCE],
+  ['/the-end', ServeApp.INSTANCE],
+]);
 
-function processRequest(req: http.IncomingMessage, res: http.ServerResponse): void {
+function processRequest(
+  req: http.IncomingMessage,
+  res: http.ServerResponse
+): void {
   if (req.url === undefined) {
     route.notFound(req, res);
     return;
@@ -85,7 +84,7 @@ function processRequest(req: http.IncomingMessage, res: http.ServerResponse): vo
 
 function requestHandler(
   req: http.IncomingMessage,
-  res: http.ServerResponse,
+  res: http.ServerResponse
 ): void {
   try {
     processRequest(req, res);
@@ -103,12 +102,12 @@ if (process.env.KEY_PATH && process.env.CERT_PATH) {
   if (!fs.existsSync(process.env.KEY_PATH)) {
     console.error(
       'TLS KEY_PATH is set in .env, but cannot find key! Check out ' +
-      httpsHowto,
+        httpsHowto
     );
   } else if (!fs.existsSync(process.env.CERT_PATH)) {
     console.error(
       'TLS CERT_PATH is set in .env, but cannot find cert! Check out' +
-      httpsHowto,
+        httpsHowto
     );
   }
   const options = {
@@ -137,11 +136,10 @@ server.listen(process.env.PORT || 8080);
 
 console.log(
   '\nThe secret serverId for this server is \x1b[1m' +
-  serverId +
-  '\x1b[0m. Use it to access the following administrative routes:\n',
+    serverId +
+    '\x1b[0m. Use it to access the following administrative routes:\n'
 );
 console.log(
-  '* Overview of existing games: /games-overview?serverId=' + serverId,
+  '* Overview of existing games: /games-overview?serverId=' + serverId
 );
 console.log('* API for game IDs: /api/games?serverId=' + serverId + '\n');
-

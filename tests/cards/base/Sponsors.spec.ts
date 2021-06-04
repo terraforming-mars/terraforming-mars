@@ -1,11 +1,10 @@
-
 import {expect} from 'chai';
 import {Sponsors} from '../../../src/cards/base/Sponsors';
 import {Resources} from '../../../src/Resources';
 import {TestPlayers} from '../../TestPlayers';
 
-describe('Sponsors', function() {
-  it('Should play', function() {
+describe('Sponsors', function () {
+  it('Should play', function () {
     const card = new Sponsors();
     const player = TestPlayers.BLUE.newPlayer();
     const action = card.play(player);

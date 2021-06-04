@@ -31,7 +31,11 @@ export class InterplanetaryCinematics extends Card implements CorporationCard {
     });
   }
   public onCardPlayed(player: Player, card: IProjectCard) {
-    if (player.corporationCard !== undefined && player.corporationCard.name === this.name && card.cardType === CardType.EVENT) {
+    if (
+      player.corporationCard !== undefined &&
+      player.corporationCard.name === this.name &&
+      card.cardType === CardType.EVENT
+    ) {
       player.megaCredits += 2;
     }
   }

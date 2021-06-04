@@ -1,13 +1,13 @@
 import {expect} from 'chai';
 import {Timer} from '../src/Timer';
 
-describe('Timer', function() {
-  it('starts at 00:00', function() {
+describe('Timer', function () {
+  it('starts at 00:00', function () {
     const timer = Timer.newInstance();
     expect(Timer.toString(timer.serialize())).eq('00:00');
   });
 
-  it('changes running with start and stop', function() {
+  it('changes running with start and stop', function () {
     const timer = Timer.newInstance();
     expect(timer.serialize().running).eq(false);
     timer.start();
@@ -18,13 +18,13 @@ describe('Timer', function() {
     expect(timer.serialize().running).eq(true);
   });
 
-  it('shows 00:01 after 1 sec', function() {
+  it('shows 00:01 after 1 sec', function () {
     const timer = Timer.newInstance();
     timer.start(); // Skipping first action
     let callCount = 0;
     const originalNow = Date.now;
     const start = originalNow();
-    Date.now = function() {
+    Date.now = function () {
       callCount++;
       if (callCount === 1) {
         return start;
@@ -39,13 +39,13 @@ describe('Timer', function() {
     Date.now = originalNow;
   });
 
-  it('shows 1:00:01 after 3601 sec', function() {
+  it('shows 1:00:01 after 3601 sec', function () {
     const timer = Timer.newInstance();
     timer.start(); // Skipping first action
     let callCount = 0;
     const originalNow = Date.now;
     const start = originalNow();
-    Date.now = function() {
+    Date.now = function () {
       callCount++;
       if (callCount === 1) {
         return start;

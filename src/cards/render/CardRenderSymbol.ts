@@ -6,7 +6,11 @@ import {CardRenderSymbolType} from './CardRenderSymbolType';
 import {Size} from './Size';
 
 export class CardRenderSymbol {
-  private constructor(public type: CardRenderSymbolType, public size: Size, public isIcon: boolean = false) {}
+  private constructor(
+    public type: CardRenderSymbolType,
+    public size: Size,
+    public isIcon: boolean = false
+  ) {}
 
   public static asterix(size: Size = Size.MEDIUM): CardRenderSymbol {
     return new CardRenderSymbol(CardRenderSymbolType.ASTERIX, size);

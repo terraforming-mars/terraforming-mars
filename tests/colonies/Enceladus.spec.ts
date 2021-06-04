@@ -7,10 +7,14 @@ import {Game} from '../../src/Game';
 import {Player} from '../../src/Player';
 import {TestPlayers} from '../TestPlayers';
 
-describe('Enceladus', function() {
-  let enceladus: Enceladus; let tardigrades: Tardigrades; let player: Player; let player2: Player; let game: Game;
+describe('Enceladus', function () {
+  let enceladus: Enceladus;
+  let tardigrades: Tardigrades;
+  let player: Player;
+  let player2: Player;
+  let game: Game;
 
-  beforeEach(function() {
+  beforeEach(function () {
     enceladus = new Enceladus();
     tardigrades = new Tardigrades();
     player = TestPlayers.BLUE.newPlayer();
@@ -20,13 +24,13 @@ describe('Enceladus', function() {
     game.colonies.push(enceladus);
   });
 
-  it('Should activate', function() {
+  it('Should activate', function () {
     expect(enceladus.isActive).is.false;
     player.playCard(tardigrades);
     expect(enceladus.isActive).is.true;
   });
 
-  it('Should build', function() {
+  it('Should build', function () {
     player.playCard(tardigrades);
     enceladus.addColony(player);
 
@@ -40,7 +44,7 @@ describe('Enceladus', function() {
     expect(tardigrades.resourceCount).to.eq(3);
   });
 
-  it('Should trade', function() {
+  it('Should trade', function () {
     player.playCard(tardigrades);
     enceladus.trade(player);
 
@@ -57,7 +61,7 @@ describe('Enceladus', function() {
     expect(tardigrades.resourceCount).to.eq(1);
   });
 
-  it('Should give trade bonus', function() {
+  it('Should give trade bonus', function () {
     const regolithEaters = new RegolithEaters();
     player.playCard(tardigrades);
     player2.playCard(regolithEaters);

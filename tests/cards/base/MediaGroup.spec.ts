@@ -4,8 +4,8 @@ import {Virus} from '../../../src/cards/base/Virus';
 import {Game} from '../../../src/Game';
 import {TestPlayers} from '../../TestPlayers';
 
-describe('MediaGroup', function() {
-  it('Should play', function() {
+describe('MediaGroup', function () {
+  it('Should play', function () {
     const card = new MediaGroup();
     const player = TestPlayers.BLUE.newPlayer();
     const redPlayer = TestPlayers.RED.newPlayer();

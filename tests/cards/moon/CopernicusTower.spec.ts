@@ -57,4 +57,3 @@ describe('CopernicusTower', () => {
     expect(card.getVictoryPoints(player)).eq(7);
   });
 });
-

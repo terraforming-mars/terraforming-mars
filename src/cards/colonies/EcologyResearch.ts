@@ -19,7 +19,8 @@ export class EcologyResearch extends Card implements IProjectCard {
       cardType: CardType.AUTOMATED,
 
       metadata: {
-        description: 'Increase your plant production 1 step for each colony you own. Add 1 animal to ANOTHER card and 2 microbes to ANOTHER card.',
+        description:
+          'Increase your plant production 1 step for each colony you own. Add 1 animal to ANOTHER card and 2 microbes to ANOTHER card.',
         cardNumber: 'C09',
         renderData: CardRenderer.builder((b) => {
           b.production((pb) => pb.plants(1).slash().colonies(1, Size.SMALL)).br;
@@ -36,12 +37,16 @@ export class EcologyResearch extends Card implements IProjectCard {
 
     const animalCards = player.getResourceCards(ResourceType.ANIMAL);
     if (animalCards.length) {
-      player.game.defer(new AddResourcesToCard(player, ResourceType.ANIMAL, {count: 1}));
+      player.game.defer(
+        new AddResourcesToCard(player, ResourceType.ANIMAL, {count: 1})
+      );
     }
 
     const microbeCards = player.getResourceCards(ResourceType.MICROBE);
     if (microbeCards.length) {
-      player.game.defer(new AddResourcesToCard(player, ResourceType.MICROBE, {count: 2}));
+      player.game.defer(
+        new AddResourcesToCard(player, ResourceType.MICROBE, {count: 2})
+      );
     }
 
     return undefined;

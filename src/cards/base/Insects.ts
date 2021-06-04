@@ -22,12 +22,15 @@ export class Insects extends Card implements IProjectCard {
         renderData: CardRenderer.builder((b) => {
           b.production((pb) => pb.plants(1).slash().plants(1).played);
         }),
-        description: 'Requires 6% oxygen. Increase your Plant production 1 step for each plant tag you have.',
+        description:
+          'Requires 6% oxygen. Increase your Plant production 1 step for each plant tag you have.',
       },
     });
   }
   public play(player: Player) {
-    player.addProduction(Resources.PLANTS, player.getTagCount(Tags.PLANT), {log: true});
+    player.addProduction(Resources.PLANTS, player.getTagCount(Tags.PLANT), {
+      log: true,
+    });
     return undefined;
   }
 }

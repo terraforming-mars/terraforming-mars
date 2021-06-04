@@ -6,10 +6,13 @@ import {SelectCard} from '../../src/inputs/SelectCard';
 import {Player} from '../../src/Player';
 import {TestPlayers} from '../TestPlayers';
 
-describe('Pluto', function() {
-  let pluto: Pluto; let player: Player; let player2: Player; let game: Game;
+describe('Pluto', function () {
+  let pluto: Pluto;
+  let player: Player;
+  let player2: Player;
+  let game: Game;
 
-  beforeEach(function() {
+  beforeEach(function () {
     pluto = new Pluto();
     player = TestPlayers.BLUE.newPlayer();
     player2 = TestPlayers.RED.newPlayer();
@@ -18,19 +21,19 @@ describe('Pluto', function() {
     game.colonies.push(pluto);
   });
 
-  it('Should build', function() {
+  it('Should build', function () {
     pluto.addColony(player);
     game.deferredActions.runAll(() => {}); // Draw cards
     expect(player.cardsInHand).has.lengthOf(2);
   });
 
-  it('Should trade', function() {
+  it('Should trade', function () {
     pluto.trade(player);
     game.deferredActions.runAll(() => {}); // Draw cards
     expect(player.cardsInHand).has.lengthOf(1);
   });
 
-  it('Should give trade bonus', function() {
+  it('Should give trade bonus', function () {
     pluto.addColony(player);
 
     pluto.trade(player2);

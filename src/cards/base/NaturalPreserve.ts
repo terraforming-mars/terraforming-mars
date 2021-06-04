@@ -21,11 +21,15 @@ export class NaturalPreserve extends Card implements IProjectCard {
     metadata: CardMetadata = {
       cardNumber: '044',
       renderData: CardRenderer.builder((b) => {
-        b.production((pb) => pb.megacredits(1)).nbsp.tile(TileType.NATURAL_PRESERVE, true).asterix();
+        b.production((pb) => pb.megacredits(1))
+          .nbsp.tile(TileType.NATURAL_PRESERVE, true)
+          .asterix();
       }),
-      description: 'Oxygen must be 4% or less. Place this tile NEXT TO NO OTHER TILE. Increase your M€ production 1 step.',
+      description:
+        'Oxygen must be 4% or less. Place this tile NEXT TO NO OTHER TILE. Increase your M€ production 1 step.',
       victoryPoints: 1,
-    }) {
+    }
+  ) {
     super({
       cardType: CardType.AUTOMATED,
       name,
@@ -38,19 +42,31 @@ export class NaturalPreserve extends Card implements IProjectCard {
     });
   }
   private getAvailableSpaces(player: Player): Array<ISpace> {
-    return player.game.board.getAvailableSpacesOnLand(player)
-      .filter((space) => player.game.board.getAdjacentSpaces(space).some((adjacentSpace) => adjacentSpace.tile !== undefined) === false);
+    return player.game.board
+      .getAvailableSpacesOnLand(player)
+      .filter(
+        (space) =>
+          player.game.board
+            .getAdjacentSpaces(space)
+            .some((adjacentSpace) => adjacentSpace.tile !== undefined) === false
+      );
   }
   public canPlay(player: Player): boolean {
     return super.canPlay(player) && this.getAvailableSpaces(player).length > 0;
   }
   public play(player: Player) {
-    return new SelectSpace('Select space for special tile next to no other tile', this.getAvailableSpaces(player), (foundSpace: ISpace) => {
-      player.game.addTile(player, foundSpace.spaceType, foundSpace, {tileType: TileType.NATURAL_PRESERVE});
-      foundSpace.adjacency = this.adjacencyBonus;
-      player.addProduction(Resources.MEGACREDITS, 1);
-      return undefined;
-    });
+    return new SelectSpace(
+      'Select space for special tile next to no other tile',
+      this.getAvailableSpaces(player),
+      (foundSpace: ISpace) => {
+        player.game.addTile(player, foundSpace.spaceType, foundSpace, {
+          tileType: TileType.NATURAL_PRESERVE,
+        });
+        foundSpace.adjacency = this.adjacencyBonus;
+        player.addProduction(Resources.MEGACREDITS, 1);
+        return undefined;
+      }
+    );
   }
   public getVictoryPoints() {
     return 1;

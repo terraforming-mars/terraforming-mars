@@ -14,7 +14,10 @@ import {CardRenderer} from '../render/CardRenderer';
 import {Size} from '../render/Size';
 import {Card} from '../Card';
 
-export class ExtractorBalloons extends Card implements IActionCard, IResourceCard {
+export class ExtractorBalloons
+  extends Card
+  implements IActionCard, IResourceCard
+{
   constructor() {
     super({
       name: CardName.EXTRACTOR_BALLOONS,
@@ -36,7 +39,7 @@ export class ExtractorBalloons extends Card implements IActionCard, IResourceCar
         }),
       },
     });
-  };
+  }
 
   public resourceCount: number = 0;
 
@@ -49,23 +52,28 @@ export class ExtractorBalloons extends Card implements IActionCard, IResourceCar
   }
   public action(player: Player) {
     const venusMaxed = player.game.getVenusScaleLevel() === MAX_VENUS_SCALE;
-    const cannotAffordRed = PartyHooks.shouldApplyPolicy(player.game, PartyName.REDS) && !player.canAfford(REDS_RULING_POLICY_COST);
+    const cannotAffordRed =
+      PartyHooks.shouldApplyPolicy(player.game, PartyName.REDS) &&
+      !player.canAfford(REDS_RULING_POLICY_COST);
     if (this.resourceCount < 2 || venusMaxed || cannotAffordRed) {
       player.addResourceTo(this, {log: true});
       return undefined;
     }
     return new OrOptions(
-      new SelectOption('Remove 2 floaters to raise Venus scale 1 step',
-        'Remove floaters', () => {
+      new SelectOption(
+        'Remove 2 floaters to raise Venus scale 1 step',
+        'Remove floaters',
+        () => {
           player.removeResourceFrom(this, 2);
           player.game.increaseVenusScaleLevel(player, 1);
-          LogHelper.logVenusIncrease( player, 1);
+          LogHelper.logVenusIncrease(player, 1);
           return undefined;
-        }),
+        }
+      ),
       new SelectOption('Add 1 floater to this card', 'Add floater', () => {
         player.addResourceTo(this, {log: true});
         return undefined;
-      }),
+      })
     );
   }
 }

@@ -27,9 +27,12 @@ export class NoctisCity extends Card implements IProjectCard {
           b.production((pb) => {
             pb.minus().energy(1).br;
             pb.plus().megacredits(3);
-          }).nbsp.city().asterix();
+          })
+            .nbsp.city()
+            .asterix();
         }),
-        description: 'Decrease your Energy production 1 step and increase your M€ production 3 steps. Place a City tile ON THE RESERVED AREA, disregarding normal placement restrictions.',
+        description:
+          'Decrease your Energy production 1 step and increase your M€ production 3 steps. Place a City tile ON THE RESERVED AREA, disregarding normal placement restrictions.',
       },
     });
   }
@@ -38,8 +41,10 @@ export class NoctisCity extends Card implements IProjectCard {
     if (player.game.gameOptions.boardName === BoardName.ORIGINAL) {
       return player.getProduction(Resources.ENERGY) >= 1;
     } else {
-      return player.getProduction(Resources.ENERGY) >= 1 &&
-            player.game.board.getAvailableSpacesForCity(player).length > 0; ;
+      return (
+        player.getProduction(Resources.ENERGY) >= 1 &&
+        player.game.board.getAvailableSpacesForCity(player).length > 0
+      );
     }
   }
   public play(player: Player) {
@@ -50,10 +55,14 @@ export class NoctisCity extends Card implements IProjectCard {
       player.game.addCityTile(player, noctisSpace.id);
       return undefined;
     } else {
-      return new SelectSpace('Select space for Noctis city', player.game.board.getAvailableSpacesForCity(player), (space: ISpace) => {
-        player.game.addCityTile(player, space.id);
-        return undefined;
-      });
+      return new SelectSpace(
+        'Select space for Noctis city',
+        player.game.board.getAvailableSpacesForCity(player),
+        (space: ISpace) => {
+          player.game.addCityTile(player, space.id);
+          return undefined;
+        }
+      );
     }
   }
 }

@@ -19,22 +19,24 @@ export class TradeAdvance extends PreludeCard implements IProjectCard {
           b.text('Trade all colonies with').br;
           b.trade().colon().text('+1');
         }),
-        description: 'Gain 2 M€ [SOLO: Gain 10 M€]. Immediately trade with all active colonies. You may increase the Colony Tile track 1 step before each of these trades.',
+        description:
+          'Gain 2 M€ [SOLO: Gain 10 M€]. Immediately trade with all active colonies. You may increase the Colony Tile track 1 step before each of these trades.',
       },
     });
   }
 
   public play(player: Player) {
-    player.game.defer(new DeferredAction(
-      player,
-      () => {
-        const openColonies = player.game.colonies.filter((colony) => colony.isActive);
+    player.game.defer(
+      new DeferredAction(player, () => {
+        const openColonies = player.game.colonies.filter(
+          (colony) => colony.isActive
+        );
         openColonies.forEach((colony) => {
           colony.trade(player, 1, false);
         });
         return undefined;
-      },
-    ));
+      })
+    );
 
     if (player.game.isSoloMode()) {
       player.megaCredits += 10;

@@ -27,38 +27,37 @@ export const PlayerResource = Vue.component('player-resource', {
       type: Number,
     },
   },
-  data: function() {
-    return {
-    };
+  data: function () {
+    return {};
   },
   methods: {
-    mainCSS: function(): string {
+    mainCSS: function (): string {
       return 'resource_item--' + this.type;
     },
-    iconCSS: function(): string {
+    iconCSS: function (): string {
       return 'resource_icon--' + this.type;
     },
-    productionSign: function(): string {
+    productionSign: function (): string {
       if (this.production > 0) return '+';
       return '';
     },
-    displayPlantsProtectedIcon: function(): boolean {
+    displayPlantsProtectedIcon: function (): boolean {
       return this.type === Resources.PLANTS && this.plantsAreProtected;
     },
-    showResourceValue: function(): boolean {
+    showResourceValue: function (): boolean {
       const learnerModeOn = PreferencesManager.load('learner_mode') === '1';
       switch (this.type) {
-      case Resources.STEEL:
-        return learnerModeOn || this.steelValue > DEFAULT_STEEL_VALUE;
-      case Resources.TITANIUM:
-        return learnerModeOn || this.titaniumValue > DEFAULT_TITANIUM_VALUE;
-      case Resources.HEAT:
-        return this.canUseHeatAsMegaCredits;
-      default:
-        return false;
+        case Resources.STEEL:
+          return learnerModeOn || this.steelValue > DEFAULT_STEEL_VALUE;
+        case Resources.TITANIUM:
+          return learnerModeOn || this.titaniumValue > DEFAULT_TITANIUM_VALUE;
+        case Resources.HEAT:
+          return this.canUseHeatAsMegaCredits;
+        default:
+          return false;
       }
     },
-    getResourceValue: function(): string {
+    getResourceValue: function (): string {
       if (this.type === Resources.STEEL) {
         return `${this.steelValue}`;
       } else if (this.type === Resources.TITANIUM) {

@@ -7,8 +7,8 @@ import {Kelvinists} from '../../src/turmoil/parties/Kelvinists';
 import {Turmoil} from '../../src/turmoil/Turmoil';
 import {TestPlayers} from '../TestPlayers';
 
-describe('CelebrityLeaders', function() {
-  it('resolve play', function() {
+describe('CelebrityLeaders', function () {
+  it('resolve play', function () {
     const card = new CelebrityLeaders();
     const player = TestPlayers.BLUE.newPlayer();
     const player2 = TestPlayers.RED.newPlayer();

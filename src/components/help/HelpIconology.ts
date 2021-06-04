@@ -1,9 +1,9 @@
 import Vue from 'vue';
 
 export const HelpIconology = Vue.component('help-iconology', {
-  components: {
-  },
+  components: {},
   methods: {
+    // keep
   },
   template: `
     <div class="help-iconology-container">

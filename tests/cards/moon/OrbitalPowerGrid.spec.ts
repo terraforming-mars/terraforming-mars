@@ -30,7 +30,9 @@ describe('OrbitalPowerGrid', () => {
   it('play', () => {
     expect(player.getProduction(Resources.ENERGY)).eq(0);
 
-    const colonySpaces = player.game.board.spaces.filter((s) => s.spaceType === SpaceType.COLONY);
+    const colonySpaces = player.game.board.spaces.filter(
+      (s) => s.spaceType === SpaceType.COLONY
+    );
     colonySpaces[0].tile = {tileType: TileType.CITY};
     colonySpaces[1].tile = {tileType: TileType.CITY};
 
@@ -42,7 +44,9 @@ describe('OrbitalPowerGrid', () => {
   it('play - ignore cities on mars', () => {
     expect(player.getProduction(Resources.ENERGY)).eq(0);
 
-    const colonySpaces = player.game.board.spaces.filter((s) => s.spaceType === SpaceType.COLONY);
+    const colonySpaces = player.game.board.spaces.filter(
+      (s) => s.spaceType === SpaceType.COLONY
+    );
     colonySpaces[0].tile = {tileType: TileType.CITY};
     colonySpaces[1].tile = {tileType: TileType.CITY};
 
@@ -56,4 +60,3 @@ describe('OrbitalPowerGrid', () => {
     expect(player.getProduction(Resources.ENERGY)).eq(2);
   });
 });
-

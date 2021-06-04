@@ -57,4 +57,3 @@ describe('LunaFirstIncorporated', () => {
     expect(player.getProduction(Resources.MEGACREDITS)).eq(2);
   });
 });
-

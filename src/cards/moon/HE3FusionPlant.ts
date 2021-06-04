@@ -19,18 +19,24 @@ export class HE3FusionPlant extends Card implements IProjectCard {
       cost: 12,
       requirements: CardRequirements.builder((b) => b.miningRate(2)),
       metadata: {
-        description: 'Requires Mining Rate of 2 or higher. ' +
-            'Increase your energy production 1 step for each mining tile on the Moon.',
+        description:
+          'Requires Mining Rate of 2 or higher. ' +
+          'Increase your energy production 1 step for each mining tile on the Moon.',
         cardNumber: 'M48',
         renderData: CardRenderer.builder((b) => {
-          b.production((pb) => pb.energy(1)).slash().moonMine().any;
+          b
+            .production((pb) => pb.energy(1))
+            .slash()
+            .moonMine().any;
         }),
       },
     });
-  };
+  }
 
   public play(player: Player) {
-    const count = MoonExpansion.tiles(player.game, TileType.MOON_MINE, {surfaceOnly: true}).length;
+    const count = MoonExpansion.tiles(player.game, TileType.MOON_MINE, {
+      surfaceOnly: true,
+    }).length;
     player.addProduction(Resources.ENERGY, count, {log: true});
     return undefined;
   }

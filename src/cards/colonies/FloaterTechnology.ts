@@ -35,7 +35,9 @@ export class FloaterTechnology extends Card implements IProjectCard {
     const floaterCards = player.getResourceCards(ResourceType.FLOATER);
 
     if (floaterCards.length) {
-      player.game.defer(new AddResourcesToCard(player, ResourceType.FLOATER, {count: 1}));
+      player.game.defer(
+        new AddResourcesToCard(player, ResourceType.FLOATER, {count: 1})
+      );
     }
 
     return undefined;
@@ -45,4 +47,3 @@ export class FloaterTechnology extends Card implements IProjectCard {
     return undefined;
   }
 }
-

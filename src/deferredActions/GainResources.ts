@@ -14,7 +14,7 @@ export class GainResources implements DeferredAction {
   constructor(
     public player: Player,
     public resource: Resources,
-    public options: GainResources.Options = {},
+    public options: GainResources.Options = {}
   ) {
     if ((options.count ?? 0) < 0) {
       throw new Error('GainResources count option must be >= 0');

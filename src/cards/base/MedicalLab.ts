@@ -22,7 +22,8 @@ export class MedicalLab extends Card implements IProjectCard {
             pb.megacredits(1).slash().building(2).played;
           });
         }),
-        description: 'Increase your M€ production 1 step for every 2 Building tags you have, including this.',
+        description:
+          'Increase your M€ production 1 step for every 2 Building tags you have, including this.',
         victoryPoints: 1,
       },
     });

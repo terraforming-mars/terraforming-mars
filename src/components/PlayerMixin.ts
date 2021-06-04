@@ -9,9 +9,9 @@ export const PlayerMixin = {
   'name': 'PlayerMixin',
   'methods': {
     sortActiveCards: sortActiveCards,
-    getCardsByType: function(
+    getCardsByType: function (
       inCards: Array<CardModel>,
-      cardType: Array<CardType>,
+      cardType: Array<CardType>
     ) {
       const cards: Array<CardModel> = [];
       for (let index = 0; index < inCards.length; index++) {
@@ -21,33 +21,31 @@ export const PlayerMixin = {
       }
       return cards.reverse();
     },
-    getPlayerCardsPlayed: function(
+    getPlayerCardsPlayed: function (
       player: PlayerModel,
-      withCorp: boolean,
+      withCorp: boolean
     ): number {
       const playedCardsNr = player.playedCards.length || 0;
       return withCorp ? playedCardsNr + 1 : playedCardsNr;
     },
-    getActiveCardType: function() {
+    getActiveCardType: function () {
       return CardType.ACTIVE;
     },
-    getEventCardType: function() {
+    getEventCardType: function () {
       return CardType.EVENT;
     },
-    getAutomatedCardType: function() {
+    getAutomatedCardType: function () {
       return CardType.AUTOMATED;
     },
-    getPreludeCardType: function() {
+    getPreludeCardType: function () {
       return CardType.PRELUDE;
     },
-    isCardActivated: function(
-      card: CardModel,
-      player: PlayerModel,
-    ): boolean {
+    isCardActivated: function (card: CardModel, player: PlayerModel): boolean {
       return (
         (player !== undefined &&
-                player.actionsThisGeneration !== undefined &&
-                player.actionsThisGeneration.includes(card.name)) || card.isDisabled
+          player.actionsThisGeneration !== undefined &&
+          player.actionsThisGeneration.includes(card.name)) ||
+        card.isDisabled
       );
     },
   },

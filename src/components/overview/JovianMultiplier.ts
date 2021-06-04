@@ -6,7 +6,9 @@ export const JovianMultiplier = Vue.component('JovianMultiplier', {
       type: Number,
     },
   },
-  methods: {},
+  methods: {
+    // keep
+  },
   template: `
     <div class="player-jovian-multiplier">{{ amount }}</div>
   `,

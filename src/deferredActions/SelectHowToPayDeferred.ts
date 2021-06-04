@@ -7,15 +7,17 @@ import {Resources} from '../Resources';
 export class SelectHowToPayDeferred implements DeferredAction {
   public priority = Priority.DEFAULT;
   constructor(
-        public player: Player,
-        public amount: number,
-        public options: SelectHowToPayDeferred.Options = {},
+    public player: Player,
+    public amount: number,
+    public options: SelectHowToPayDeferred.Options = {}
   ) {}
 
   public execute() {
-    if ((!this.player.canUseHeatAsMegaCredits || this.player.heat === 0) &&
-            (!this.options.canUseSteel || this.player.steel === 0) &&
-            (!this.options.canUseTitanium || this.player.titanium === 0)) {
+    if (
+      (!this.player.canUseHeatAsMegaCredits || this.player.heat === 0) &&
+      (!this.options.canUseSteel || this.player.steel === 0) &&
+      (!this.options.canUseTitanium || this.player.titanium === 0)
+    ) {
       this.player.deductResource(Resources.MEGACREDITS, this.amount);
       if (this.options.afterPay !== undefined) {
         this.options.afterPay();
@@ -38,7 +40,7 @@ export class SelectHowToPayDeferred implements DeferredAction {
           this.options.afterPay();
         }
         return undefined;
-      },
+      }
     );
   }
 }
@@ -49,5 +51,5 @@ export namespace SelectHowToPayDeferred {
     canUseTitanium?: boolean;
     title?: string;
     afterPay?: () => void;
-  };
+  }
 }

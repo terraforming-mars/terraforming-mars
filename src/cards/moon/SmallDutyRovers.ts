@@ -13,34 +13,42 @@ import {Size} from '../render/Size';
 
 export class SmallDutyRovers extends MoonCard implements IProjectCard {
   constructor() {
-    super({
-      name: CardName.SMALL_DUTY_ROVERS,
-      cardType: CardType.AUTOMATED,
-      tags: [Tags.MOON, Tags.SPACE],
-      cost: 9,
-      productionBox: Units.of({}),
+    super(
+      {
+        name: CardName.SMALL_DUTY_ROVERS,
+        cardType: CardType.AUTOMATED,
+        tags: [Tags.MOON, Tags.SPACE],
+        cost: 9,
+        productionBox: Units.of({}),
 
-      metadata: {
-        description: 'Spend 1 titanium. Raise the Logistic Rate 1 step. Gain 1 M€ per colony tile, mine tile and road tile on the Moon.',
-        cardNumber: 'M73',
-        renderData: CardRenderer.builder((b) => {
-          b.minus().titanium(1).moonLogisticsRate().br;
-          b.megacredits(1).slash()
-            .moonColony({size: Size.SMALL}).any
-            .moonMine({size: Size.SMALL}).any
-            .moonRoad({size: Size.SMALL}).any;
-        }),
+        metadata: {
+          description:
+            'Spend 1 titanium. Raise the Logistic Rate 1 step. Gain 1 M€ per colony tile, mine tile and road tile on the Moon.',
+          cardNumber: 'M73',
+          renderData: CardRenderer.builder((b) => {
+            b.minus().titanium(1).moonLogisticsRate().br;
+            b
+              .megacredits(1)
+              .slash()
+              .moonColony({size: Size.SMALL})
+              .any.moonMine({size: Size.SMALL})
+              .any.moonRoad({size: Size.SMALL}).any;
+          }),
+        },
       },
-    }, {
-      reserveUnits: Units.of({titanium: 1}),
-    });
-  };
+      {
+        reserveUnits: Units.of({titanium: 1}),
+      }
+    );
+  }
 
   public play(player: Player) {
     player.deductUnits(this.reserveUnits);
     MoonExpansion.raiseLogisticRate(player);
     const moonData = MoonExpansion.moonData(player.game);
-    const gain = moonData.moon.spaces.filter((s) => s.tile !== undefined && s.spaceType !== SpaceType.COLONY).length;
+    const gain = moonData.moon.spaces.filter(
+      (s) => s.tile !== undefined && s.spaceType !== SpaceType.COLONY
+    ).length;
 
     player.addResource(Resources.MEGACREDITS, gain, {log: true});
 

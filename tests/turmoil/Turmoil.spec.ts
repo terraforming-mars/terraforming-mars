@@ -28,10 +28,13 @@ import {PoliticalAgendas} from '../../src/turmoil/PoliticalAgendas';
 import {IParty} from '../../src/turmoil/parties/IParty';
 import {GreeneryStandardProject} from '../../src/cards/base/standardProjects/GreeneryStandardProject';
 
-describe('Turmoil', function() {
-  let player : TestPlayer; let player2 : Player; let game : Game; let turmoil: Turmoil;
+describe('Turmoil', function () {
+  let player: TestPlayer;
+  let player2: Player;
+  let game: Game;
+  let turmoil: Turmoil;
 
-  beforeEach(function() {
+  beforeEach(function () {
     player = TestPlayers.BLUE.newPlayer();
     player2 = TestPlayers.RED.newPlayer();
     const gameOptions = TestingUtils.setCustomGameOptions();
@@ -42,12 +45,12 @@ describe('Turmoil', function() {
     TestingUtils.resetBoard(game);
   });
 
-  it('Should initialize with right defaults', function() {
+  it('Should initialize with right defaults', function () {
     expect(turmoil.chairman).to.eq('NEUTRAL');
     expect(turmoil.rulingParty.name).to.eq(PartyName.GREENS);
   });
 
-  it('Correctly send delegate', function() {
+  it('Correctly send delegate', function () {
     const greens = turmoil.getPartyByName(PartyName.GREENS)!;
     greens.delegates = [];
 
@@ -56,8 +59,8 @@ describe('Turmoil', function() {
     expect(game.getPlayerById(greens.delegates[0])).to.eq(player);
   });
 
-  it('Counts influence correctly for dominant party', function() {
-    turmoil.parties.forEach((party) => party.delegates = []);
+  it('Counts influence correctly for dominant party', function () {
+    turmoil.parties.forEach((party) => (party.delegates = []));
 
     const greens = turmoil.getPartyByName(PartyName.GREENS)!;
     turmoil.sendDelegateToParty(player.id, PartyName.GREENS, game);
@@ -74,13 +77,13 @@ describe('Turmoil', function() {
     expect(turmoil.getPlayerInfluence(player)).to.eq(2);
   });
 
-  it('Chairman gives 1 influence', function() {
-    turmoil.parties.forEach((party) => party.delegates = []);
+  it('Chairman gives 1 influence', function () {
+    turmoil.parties.forEach((party) => (party.delegates = []));
     turmoil.chairman = player.id;
     expect(turmoil.getPlayerInfluence(player)).to.eq(1);
   });
 
-  it('Correctly set dominant party', function() {
+  it('Correctly set dominant party', function () {
     const greens = turmoil.getPartyByName(PartyName.GREENS)!;
     const reds = turmoil.getPartyByName(PartyName.REDS)!;
     greens.delegates = [];
@@ -100,17 +103,19 @@ describe('Turmoil', function() {
     expect(turmoil.dominantParty).to.eq(reds);
   });
 
-  it('Correctly set party leader', function() {
+  it('Correctly set party leader', function () {
     turmoil.sendDelegateToParty(player.id, PartyName.GREENS, game);
     turmoil.sendDelegateToParty(player.id, PartyName.GREENS, game);
     turmoil.sendDelegateToParty(player.id, PartyName.GREENS, game);
-    expect(game.getPlayerById(turmoil.getPartyByName(PartyName.GREENS)!.partyLeader!)).to.eq(player);
+    expect(
+      game.getPlayerById(turmoil.getPartyByName(PartyName.GREENS)!.partyLeader!)
+    ).to.eq(player);
   });
 
-  it('Correctly run end of generation', function() {
+  it('Correctly run end of generation', function () {
     // Eliminate the flaky cases where the current global event sends delegates to
     // parties, changing the dominant party outcome.
-    turmoil.parties.forEach((p) => p.delegates = []);
+    turmoil.parties.forEach((p) => (p.delegates = []));
 
     player.setTerraformRating(20);
     player2.setTerraformRating(21);
@@ -134,23 +139,29 @@ describe('Turmoil', function() {
 
     expect(turmoil.lobby.size).to.eq(2);
     expect(turmoil.rulingParty).to.eq(turmoil.getPartyByName(PartyName.REDS));
-    expect(turmoil.dominantParty).to.eq(turmoil.getPartyByName(PartyName.GREENS));
+    expect(turmoil.dominantParty).to.eq(
+      turmoil.getPartyByName(PartyName.GREENS)
+    );
   });
 
-  it('Does not give Mars First bonus for World Government terraforming', function() {
+  it('Does not give Mars First bonus for World Government terraforming', function () {
     setRulingParty(turmoil, game, new MarsFirst());
     game.phase = Phase.SOLAR;
 
     player.worldGovernmentTerraforming();
     const action = player.getWaitingFor() as OrOptions;
-    const placeOcean = action.options.find((option) => option.title === 'Add an ocean') as SelectSpace;
-    const steelSpace = placeOcean.availableSpaces.find((space) => space.bonus.includes(SpaceBonus.STEEL));
+    const placeOcean = action.options.find(
+      (option) => option.title === 'Add an ocean'
+    ) as SelectSpace;
+    const steelSpace = placeOcean.availableSpaces.find((space) =>
+      space.bonus.includes(SpaceBonus.STEEL)
+    );
 
     placeOcean.cb(steelSpace!);
     expect(player.steel).to.eq(0); // should not give ruling policy bonus
   });
 
-  it('Can\'t raise TR via Standard Projects if Reds are ruling and player cannot pay', function() {
+  it("Can't raise TR via Standard Projects if Reds are ruling and player cannot pay", function () {
     setRulingParty(turmoil, game, new Reds());
     player.megaCredits = 14;
     const standardProjects = player.getStandardProjectOption();
@@ -160,7 +171,7 @@ describe('Turmoil', function() {
     expect(standardProjects.enabled!.slice(1)).to.not.contain(true);
   });
 
-  it('Can do SP greenery at normal cost if Reds are ruling and oxygen is maxed', function() {
+  it('Can do SP greenery at normal cost if Reds are ruling and oxygen is maxed', function () {
     setRulingParty(turmoil, game, new Reds());
     player.megaCredits = 23;
     expect(new GreeneryStandardProject().canAct(player)).equal(false);
@@ -169,7 +180,7 @@ describe('Turmoil', function() {
     expect(new GreeneryStandardProject().canAct(player)).equal(true);
   });
 
-  it('Can\'t play cards to raise TR directly if Reds are ruling and player cannot pay', function() {
+  it("Can't play cards to raise TR directly if Reds are ruling and player cannot pay", function () {
     setRulingParty(turmoil, game, new Reds());
     player.megaCredits = 16;
     const releaseOfInertGases = new ReleaseOfInertGases();
@@ -184,7 +195,7 @@ describe('Turmoil', function() {
     expect(magneticFieldGeneratorsPromo.canPlay(player)).is.not.true; // needs 31 MC
   });
 
-  it('Can\'t play cards to raise TR via global parameters if Reds are ruling and player cannot pay', function() {
+  it("Can't play cards to raise TR via global parameters if Reds are ruling and player cannot pay", function () {
     setRulingParty(turmoil, game, new Reds());
     player.megaCredits = 25;
     const iceAsteroid = new IceAsteroid();
@@ -199,7 +210,7 @@ describe('Turmoil', function() {
     expect(iceAsteroid.canPlay(player)).is.true;
   });
 
-  it('Applies card discounts when checking canPlay while Reds are ruling', function() {
+  it('Applies card discounts when checking canPlay while Reds are ruling', function () {
     setRulingParty(turmoil, game, new Reds());
     const nitrogenFromTitan = new NitrogenFromTitan();
 
@@ -214,13 +225,16 @@ describe('Turmoil', function() {
     expect(nitrogenFromTitan.canPlay(player)).is.true; // 25 + 6 - 6
   });
 
-  it('serializes and deserializes keeping players', function() {
+  it('serializes and deserializes keeping players', function () {
     // Party delegates have to be explicitly set since game set-up draws a global event which
     // adds delegates to a party. So parties[0] can be empty or not depending on the draw.
     turmoil.parties[0].delegates = ['NEUTRAL', 'NEUTRAL', 'fancy-pants'];
     const serialized = JSON.parse(JSON.stringify(turmoil.serialize()));
     const deserialized = Turmoil.deserialize(serialized);
-    expect(deserialized.parties[0].getPresentPlayers()).to.have.members(['NEUTRAL', 'fancy-pants']);
+    expect(deserialized.parties[0].getPresentPlayers()).to.have.members([
+      'NEUTRAL',
+      'fancy-pants',
+    ]);
   });
 
   it('deserialization', () => {
@@ -229,7 +243,13 @@ describe('Turmoil', function() {
       'rulingParty': 'Greens',
       'dominantParty': 'Unity',
       'lobby': ['blue-id'],
-      'delegateReserve': ['blue-id', 'red-id', 'green-id', 'NEUTRAL', 'NEUTRAL'],
+      'delegateReserve': [
+        'blue-id',
+        'red-id',
+        'green-id',
+        'NEUTRAL',
+        'NEUTRAL',
+      ],
       'parties': [
         {'name': 'Mars First', 'delegates': []},
         {'name': 'Scientists', 'delegates': []},
@@ -245,11 +265,15 @@ describe('Turmoil', function() {
           'Spin-Off Products',
           'Dry Deserts',
           'Mud Slides',
-          'Productivity'],
-        'discarded': ['Pandemic']},
+          'Productivity',
+        ],
+        'discarded': ['Pandemic'],
+      },
       'distantGlobalEvent': 'Eco Sabotage',
       'comingGlobalEvent': 'Celebrity Leaders',
-      'politicalAgendasData': {'thisAgenda': {'bonusId': 'none', 'policyId': 'none'}},
+      'politicalAgendasData': {
+        'thisAgenda': {'bonusId': 'none', 'policyId': 'none'},
+      },
     };
     const s: SerializedTurmoil = JSON.parse(JSON.stringify(json));
     const t = Turmoil.deserialize(s);
@@ -258,9 +282,19 @@ describe('Turmoil', function() {
     expect(t.distantGlobalEvent!.revealedDelegate).eq('Greens');
     expect(t.comingGlobalEvent!.name).eq('Celebrity Leaders');
     expect(t.comingGlobalEvent!.revealedDelegate).eq('Unity');
-    expect(t.delegateReserve).deep.eq(['blue-id', 'red-id', 'green-id', 'NEUTRAL', 'NEUTRAL']);
-    expect(t.rulingParty!.description).eq('Want to see a new Earth as soon as possible.');
-    expect(t.getPartyByName(PartyName.KELVINISTS)!.description).eq('Pushes for rapid terraforming, usually employing a heat-first strategy.');
+    expect(t.delegateReserve).deep.eq([
+      'blue-id',
+      'red-id',
+      'green-id',
+      'NEUTRAL',
+      'NEUTRAL',
+    ]);
+    expect(t.rulingParty!.description).eq(
+      'Want to see a new Earth as soon as possible.'
+    );
+    expect(t.getPartyByName(PartyName.KELVINISTS)!.description).eq(
+      'Pushes for rapid terraforming, usually employing a heat-first strategy.'
+    );
   });
 
   function setRulingParty(turmoil: Turmoil, game: Game, party: IParty) {

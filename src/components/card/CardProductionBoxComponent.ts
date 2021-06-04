@@ -4,32 +4,36 @@ import {CardRenderSymbolComponent} from './CardRenderSymbolComponent';
 import {CardRenderSymbol} from '../../cards/render/CardRenderSymbol';
 import {CardRenderItem} from '../../cards/render/CardRenderItem';
 
-export const CardProductionBoxComponent = Vue.component('CardProductionBoxComponent', {
-  props: {
-    rows: {
-      type: Array as () => Array<Array<CardRenderItem>>,
-      required: true,
+export const CardProductionBoxComponent = Vue.component(
+  'CardProductionBoxComponent',
+  {
+    props: {
+      rows: {
+        type: Array as () => Array<Array<CardRenderItem>>,
+        required: true,
+      },
     },
-  },
-  components: {
-    CardRenderItemComponent,
-    CardRenderSymbolComponent,
-  },
-  methods: {
-    getClasses: function(): string {
-      const classes: Array<string> = ['card-production-box'];
-      return classes.join(' ');
+    components: {
+      CardRenderItemComponent,
+      CardRenderSymbolComponent,
     },
-    getComponentType: function(rowItem: CardRenderSymbol | CardRenderItem): string {
-      if (rowItem instanceof CardRenderSymbol) {
-        return 'symbol';
-      } else if (rowItem instanceof CardRenderItem) {
-        return 'item';
-      }
-      return '';
+    methods: {
+      getClasses: function (): string {
+        const classes: Array<string> = ['card-production-box'];
+        return classes.join(' ');
+      },
+      getComponentType: function (
+        rowItem: CardRenderSymbol | CardRenderItem
+      ): string {
+        if (rowItem instanceof CardRenderSymbol) {
+          return 'symbol';
+        } else if (rowItem instanceof CardRenderItem) {
+          return 'item';
+        }
+        return '';
+      },
     },
-  },
-  template: `
+    template: `
         <div :class="getClasses()">
             <div class="card-production-box-row" v-for="(rowData, index) in rows" :key="index">
                 <div v-for="(rowItem, rowIndex) in rowData" class="card-production-box-row-item" :key="rowIndex">
@@ -40,4 +44,5 @@ export const CardProductionBoxComponent = Vue.component('CardProductionBoxCompon
             </div>
         </div>
     `,
-});
+  }
+);

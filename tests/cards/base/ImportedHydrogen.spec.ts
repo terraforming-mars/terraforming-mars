@@ -10,17 +10,18 @@ import {SelectOption} from '../../../src/inputs/SelectOption';
 import {Player} from '../../../src/Player';
 import {TestPlayers} from '../../TestPlayers';
 
-describe('ImportedHydrogen', function() {
-  let card : ImportedHydrogen; let player : Player;
+describe('ImportedHydrogen', function () {
+  let card: ImportedHydrogen;
+  let player: Player;
 
-  beforeEach(function() {
+  beforeEach(function () {
     card = new ImportedHydrogen();
     player = TestPlayers.BLUE.newPlayer();
     const redPlayer = TestPlayers.RED.newPlayer();
     Game.newInstance('foobar', [player, redPlayer], player);
   });
 
-  it('Should play', function() {
+  it('Should play', function () {
     const pets = new Pets();
     const tardigrades = new Tardigrades();
     const decomposers = new Decomposers();
@@ -45,7 +46,7 @@ describe('ImportedHydrogen', function() {
     expect(player.getResourcesOnCard(pets)).to.eq(2);
   });
 
-  it('Should add plants directly if no microbe or animal cards available', function() {
+  it('Should add plants directly if no microbe or animal cards available', function () {
     expect(player.plants).to.eq(0);
     card.play(player);
     expect(player.plants).to.eq(3);

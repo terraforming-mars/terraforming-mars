@@ -27,4 +27,3 @@ export class AlliedBanks extends PreludeCard {
     return undefined;
   }
 }
-

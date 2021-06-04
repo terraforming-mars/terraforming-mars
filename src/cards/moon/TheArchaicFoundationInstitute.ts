@@ -8,7 +8,10 @@ import {ResourceType} from '../../ResourceType';
 import {CardRenderer} from '../render/CardRenderer';
 import {Card} from '../Card';
 
-export class TheArchaicFoundationInstitute extends Card implements CorporationCard {
+export class TheArchaicFoundationInstitute
+  extends Card
+  implements CorporationCard
+{
   constructor() {
     super({
       cardType: CardType.CORPORATION,
@@ -22,12 +25,18 @@ export class TheArchaicFoundationInstitute extends Card implements CorporationCa
         cardNumber: '',
         renderData: CardRenderer.builder((b) => {
           b.megacredits(55).br;
-          b.effect('When you play a Moon tag, add a bronze resource cube on this card.', (eb) => {
-            eb.moon().startEffect.resourceCube();
-          }).br;
-          b.effect('Automatically remove every 3 bronze resource cubes collected here and increase your TR 1 step.', (eb) => {
-            eb.resourceCube(3).startEffect.tr(1);
-          });
+          b.effect(
+            'When you play a Moon tag, add a bronze resource cube on this card.',
+            (eb) => {
+              eb.moon().startEffect.resourceCube();
+            }
+          ).br;
+          b.effect(
+            'Automatically remove every 3 bronze resource cubes collected here and increase your TR 1 step.',
+            (eb) => {
+              eb.resourceCube(3).startEffect.tr(1);
+            }
+          );
         }),
       },
     });
@@ -51,7 +60,7 @@ export class TheArchaicFoundationInstitute extends Card implements CorporationCa
         player.removeResourceFrom(this, 3, player.game, player, true);
         player.increaseTerraformRating();
       }
-    };
+    }
     return undefined;
   }
 }

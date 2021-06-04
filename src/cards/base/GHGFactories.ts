@@ -25,7 +25,8 @@ export class GHGFactories extends Card implements IProjectCard {
             pb.plus().heat(4).digit;
           });
         }),
-        description: 'Decrease your Energy production 1 step and increase your heat production 4 steps.',
+        description:
+          'Decrease your Energy production 1 step and increase your heat production 4 steps.',
       },
     });
   }

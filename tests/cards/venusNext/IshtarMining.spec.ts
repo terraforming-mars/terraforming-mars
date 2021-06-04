@@ -4,8 +4,8 @@ import {Game} from '../../../src/Game';
 import {Resources} from '../../../src/Resources';
 import {TestPlayers} from '../../TestPlayers';
 
-describe('IshtarMining', function() {
-  it('Should play', function() {
+describe('IshtarMining', function () {
+  it('Should play', function () {
     const card = new IshtarMining();
     const player = TestPlayers.BLUE.newPlayer();
     const redPlayer = TestPlayers.RED.newPlayer();

@@ -3,8 +3,8 @@ import {Pristar} from '../../../src/cards/turmoil/Pristar';
 import {Game} from '../../../src/Game';
 import {TestPlayers} from '../../TestPlayers';
 
-describe('Pristar', function() {
-  it('Should play', function() {
+describe('Pristar', function () {
+  it('Should play', function () {
     const card = new Pristar();
     const player = TestPlayers.BLUE.newPlayer();
     const redPlayer = TestPlayers.RED.newPlayer();

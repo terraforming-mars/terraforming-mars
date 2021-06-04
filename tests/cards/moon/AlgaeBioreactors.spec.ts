@@ -48,4 +48,3 @@ describe('AlgaeBioreactors', () => {
     expect(player.getTerraformRating()).eq(16);
   });
 });
-

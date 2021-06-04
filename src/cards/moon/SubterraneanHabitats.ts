@@ -9,26 +9,32 @@ import {MoonCard} from './MoonCard';
 
 export class SubterraneanHabitats extends MoonCard implements IProjectCard {
   constructor() {
-    super({
-      name: CardName.SUBTERRANEAN_HABITATS,
-      cardType: CardType.ACTIVE,
-      cost: 12,
+    super(
+      {
+        name: CardName.SUBTERRANEAN_HABITATS,
+        cardType: CardType.ACTIVE,
+        cost: 12,
 
-      metadata: {
-        description: 'Spend 2 steel. Raise the Colony Rate 1 step.',
-        cardNumber: 'M36',
-        renderData: CardRenderer.builder((b) => {
-          b.effect('When you build a colony on the Moon, you spend 1 titanium less.', (eb) => {
-            eb.startEffect.moonColony().colon().minus().titanium(1);
-          });
-          b.br;
-          b.minus().steel(2).moonColonyRate();
-        }),
+        metadata: {
+          description: 'Spend 2 steel. Raise the Colony Rate 1 step.',
+          cardNumber: 'M36',
+          renderData: CardRenderer.builder((b) => {
+            b.effect(
+              'When you build a colony on the Moon, you spend 1 titanium less.',
+              (eb) => {
+                eb.startEffect.moonColony().colon().minus().titanium(1);
+              }
+            );
+            b.br;
+            b.minus().steel(2).moonColonyRate();
+          }),
+        },
       },
-    }, {
-      reserveUnits: Units.of({steel: 2}),
-    });
-  };
+      {
+        reserveUnits: Units.of({steel: 2}),
+      }
+    );
+  }
 
   public play(player: Player) {
     super.play(player);

@@ -7,8 +7,8 @@ import {SeptumTribus} from '../../../src/cards/turmoil/SeptumTribus';
 import {Resources} from '../../../src/Resources';
 import {TestPlayers} from '../../TestPlayers';
 
-describe('CommunityServices', function() {
-  it('Should play', function() {
+describe('CommunityServices', function () {
+  it('Should play', function () {
     const card = new CommunityServices();
     const corpo = new Aridor();
     const prelude = new EccentricSponsor();
@@ -18,11 +18,14 @@ describe('CommunityServices', function() {
     player.corporationCard = corpo;
     const action = card.play(player);
     expect(action).is.undefined;
-    player.victoryPointsBreakdown.setVictoryPoints('victoryPoints', card.getVictoryPoints());
+    player.victoryPointsBreakdown.setVictoryPoints(
+      'victoryPoints',
+      card.getVictoryPoints()
+    );
     expect(player.victoryPointsBreakdown.victoryPoints).to.eq(1);
     expect(player.getProduction(Resources.MEGACREDITS)).to.eq(4);
   });
-  it('Wild Tags', function() {
+  it('Wild Tags', function () {
     const card = new CommunityServices();
     const corpo = new SeptumTribus();
     const prelude = new EccentricSponsor();
@@ -32,7 +35,10 @@ describe('CommunityServices', function() {
     player.corporationCard = corpo;
     const action = card.play(player);
     expect(action).is.undefined;
-    player.victoryPointsBreakdown.setVictoryPoints('victoryPoints', card.getVictoryPoints());
+    player.victoryPointsBreakdown.setVictoryPoints(
+      'victoryPoints',
+      card.getVictoryPoints()
+    );
     expect(player.victoryPointsBreakdown.victoryPoints).to.eq(1);
     expect(player.getProduction(Resources.MEGACREDITS)).to.eq(4);
   });

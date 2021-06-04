@@ -6,8 +6,8 @@ import {Kelvinists} from '../../src/turmoil/parties/Kelvinists';
 import {Turmoil} from '../../src/turmoil/Turmoil';
 import {TestPlayers} from '../TestPlayers';
 
-describe('GenerousFunding', function() {
-  it('resolve play', function() {
+describe('GenerousFunding', function () {
+  it('resolve play', function () {
     const card = new GenerousFunding();
     const player = TestPlayers.BLUE.newPlayer();
     const player2 = TestPlayers.RED.newPlayer();
@@ -31,7 +31,7 @@ describe('GenerousFunding', function() {
     expect(player2.getResource(Resources.MEGACREDITS)).to.eq(26);
   });
 
-  it('no negative mc give out if TR lower than 15', function() {
+  it('no negative mc give out if TR lower than 15', function () {
     const card = new GenerousFunding();
     const player = TestPlayers.BLUE.newPlayer();
     const player2 = TestPlayers.RED.newPlayer();

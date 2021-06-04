@@ -1,16 +1,13 @@
 {
-    "compilerOptions": {
-        "outDir": "../build/tests",
-        "types": ["node", "mocha", "chai"]
-    },
-    "extends": "../tsconfig.json",
-    "references": [
-        {
-            "path": "../src/tsconfig.json"
-        },
-    ],
-    "include": [
-        "utils/Vue.ts",
-        "**/*.spec.ts"
-    ]
+  "compilerOptions": {
+    "outDir": "../build/tests",
+    "types": ["node", "mocha", "chai"]
+  },
+  "extends": "../tsconfig.json",
+  "references": [
+    {
+      "path": "../src/tsconfig.json"
+    }
+  ],
+  "include": ["utils/Vue.ts", "**/*.spec.ts"]
 }

@@ -7,21 +7,23 @@ import {Resources} from '../../../src/Resources';
 import {TileType} from '../../../src/TileType';
 import {TestPlayers} from '../../TestPlayers';
 
-describe('CommercialDistrict', function() {
-  let card : CommercialDistrict; let player : Player; let game : Game;
+describe('CommercialDistrict', function () {
+  let card: CommercialDistrict;
+  let player: Player;
+  let game: Game;
 
-  beforeEach(function() {
+  beforeEach(function () {
     card = new CommercialDistrict();
     player = TestPlayers.BLUE.newPlayer();
     const redPlayer = TestPlayers.RED.newPlayer();
     game = Game.newInstance('foobar', [player, redPlayer], player);
   });
 
-  it('Can\'t play', function() {
+  it("Can't play", function () {
     expect(card.canPlay(player)).is.not.true;
   });
 
-  it('Should play', function() {
+  it('Should play', function () {
     player.addProduction(Resources.ENERGY, 1);
     expect(card.canPlay(player)).is.true;
 

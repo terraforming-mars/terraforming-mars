@@ -8,7 +8,9 @@ import {TileType} from '../../../src/TileType';
 import {TestPlayers} from '../../TestPlayers';
 
 describe('NaturalPreserve', () => {
-  let card : NaturalPreserve; let player : TestPlayer; let game : Game;
+  let card: NaturalPreserve;
+  let player: TestPlayer;
+  let game: Game;
 
   beforeEach(() => {
     card = new NaturalPreserve();
@@ -20,7 +22,9 @@ describe('NaturalPreserve', () => {
   it('Cannot play if no spaces available', () => {
     const lands = game.board.getAvailableSpacesOnLand(player);
     for (const land of lands) {
-      game.addTile(player, land.spaceType, land, {tileType: TileType.NATURAL_PRESERVE});
+      game.addTile(player, land.spaceType, land, {
+        tileType: TileType.NATURAL_PRESERVE,
+      });
     }
 
     expect(card.canPlay(player)).is.not.true;
@@ -48,7 +52,10 @@ describe('NaturalPreserve', () => {
     expect(space.tile && space.tile.tileType).to.eq(TileType.NATURAL_PRESERVE);
     expect(space.adjacency?.bonus).eq(undefined);
 
-    player.victoryPointsBreakdown.setVictoryPoints('victoryPoints', card.getVictoryPoints());
+    player.victoryPointsBreakdown.setVictoryPoints(
+      'victoryPoints',
+      card.getVictoryPoints()
+    );
     expect(player.victoryPointsBreakdown.victoryPoints).to.eq(1);
   });
 });

@@ -3,8 +3,8 @@ import {SmeltingPlant} from '../../../src/cards/prelude/SmeltingPlant';
 import {Game} from '../../../src/Game';
 import {TestPlayers} from '../../TestPlayers';
 
-describe('SmeltingPlant', function() {
-  it('Should play', function() {
+describe('SmeltingPlant', function () {
+  it('Should play', function () {
     const player = TestPlayers.BLUE.newPlayer();
     const game = Game.newInstance('bar', [player], player);
     const card = new SmeltingPlant();

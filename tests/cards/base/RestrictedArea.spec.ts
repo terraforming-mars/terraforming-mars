@@ -5,22 +5,24 @@ import {Player} from '../../../src/Player';
 import {TileType} from '../../../src/TileType';
 import {TestPlayers} from '../../TestPlayers';
 
-describe('RestrictedArea', function() {
-  let card : RestrictedArea; let player : Player; let game : Game;
+describe('RestrictedArea', function () {
+  let card: RestrictedArea;
+  let player: Player;
+  let game: Game;
 
-  beforeEach(function() {
+  beforeEach(function () {
     card = new RestrictedArea();
     player = TestPlayers.BLUE.newPlayer();
     const redPlayer = TestPlayers.RED.newPlayer();
     game = Game.newInstance('foobar', [player, redPlayer], player);
   });
 
-  it('Can\'t act if not enough MC', function() {
+  it("Can't act if not enough MC", function () {
     player.megaCredits = 1;
     expect(card.canAct(player)).is.not.true;
   });
 
-  it('Should play', function() {
+  it('Should play', function () {
     const action = card.play(player);
     expect(action).is.not.undefined;
 
@@ -31,7 +33,7 @@ describe('RestrictedArea', function() {
     expect(space.adjacency?.bonus).eq(undefined);
   });
 
-  it('Should act', function() {
+  it('Should act', function () {
     player.megaCredits = 2;
     expect(card.canAct(player)).is.true;
     card.action(player);

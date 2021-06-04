@@ -61,4 +61,3 @@ describe('TychoRoadNetwork', () => {
     expect(moonData.logisticRate).eq(1);
   });
 });
-

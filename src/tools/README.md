@@ -20,6 +20,7 @@ Check locales tool compares localizations and shows missing translations.
 How to run: `node build/src/tools/check_locales.js`
 
 Result will be something like this:
+
 ```
 Effect: When you play an animal or plant tag, including<br> this, add 1 animal<br> to this card.
     missing ru
@@ -42,6 +43,7 @@ as result you will see the warnings for Chinese and Russian languages only.
 `node build/src/tools/export_game.js <game id>`
 
 ### Description
+
 This tool extracts the entire history of a game from a database and stores it in the local filesystem database.
 
 If you plan to extract from the local SQLite database, have no environemnt variables. If you're extracting

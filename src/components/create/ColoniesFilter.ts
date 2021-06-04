@@ -56,14 +56,14 @@ export const ColoniesFilter = Vue.component('colonies-filter', {
       type: Boolean,
     },
   },
-  data: function() {
+  data: function () {
     return {
       allColonies: officialColonies.concat(communityColonies),
       officialColonies: officialColonies,
       communityColonies: communityColonies,
       selectedColonies: [
         ...officialColonies,
-        ...this.communityCardsOption ? communityColonies: [],
+        ...(this.communityCardsOption ? communityColonies : []),
       ] as Array<Colony> | boolean,
     };
   },
@@ -78,36 +78,54 @@ export const ColoniesFilter = Vue.component('colonies-filter', {
     },
   },
   watch: {
-    selectedColonies: function(value) {
+    selectedColonies: function (value) {
       const colonyNames: Array<ColonyName> = [];
-      value.forEach(function(el: any) {
+      value.forEach(function (el: any) {
         colonyNames.push(el.name);
-      } );
+      });
       this.$emit('colonies-list-changed', colonyNames);
     },
-    communityCardsOption: function(enabled) {
+    communityCardsOption: function (enabled) {
       if (enabled) {
-        this.selectedColonies = officialColonies.concat(communityColonies).slice();
-        if (this.venusNext === false) this.selectedColonies = this.selectedColonies.filter((c) => c.name !== ColonyName.VENUS);
-        if (this.turmoil === false) this.selectedColonies = this.selectedColonies.filter((c) => c.name !== ColonyName.PALLAS);
+        this.selectedColonies = officialColonies
+          .concat(communityColonies)
+          .slice();
+        if (this.venusNext === false)
+          this.selectedColonies = this.selectedColonies.filter(
+            (c) => c.name !== ColonyName.VENUS
+          );
+        if (this.turmoil === false)
+          this.selectedColonies = this.selectedColonies.filter(
+            (c) => c.name !== ColonyName.PALLAS
+          );
       } else {
         this.selectedColonies = officialColonies.slice();
       }
     },
-    venusNext: function(enabled) {
+    venusNext: function (enabled) {
       if (this.communityCardsOption && Array.isArray(this.selectedColonies)) {
         if (enabled === false) {
-          this.selectedColonies = this.selectedColonies.filter((c) => c.name !== ColonyName.VENUS);
-        } else if (this.selectedColonies.find((c) => c.name === ColonyName.VENUS) === undefined) {
+          this.selectedColonies = this.selectedColonies.filter(
+            (c) => c.name !== ColonyName.VENUS
+          );
+        } else if (
+          this.selectedColonies.find((c) => c.name === ColonyName.VENUS) ===
+          undefined
+        ) {
           this.selectedColonies.push(new Venus());
         }
       }
     },
-    turmoil: function(enabled) {
+    turmoil: function (enabled) {
       if (this.communityCardsOption && Array.isArray(this.selectedColonies)) {
         if (enabled === false) {
-          this.selectedColonies = this.selectedColonies.filter((c) => c.name !== ColonyName.PALLAS);
-        } else if (this.selectedColonies.find((c) => c.name === ColonyName.PALLAS) === undefined) {
+          this.selectedColonies = this.selectedColonies.filter(
+            (c) => c.name !== ColonyName.PALLAS
+          );
+        } else if (
+          this.selectedColonies.find((c) => c.name === ColonyName.PALLAS) ===
+          undefined
+        ) {
           this.selectedColonies.push(new Pallas());
         }
       }

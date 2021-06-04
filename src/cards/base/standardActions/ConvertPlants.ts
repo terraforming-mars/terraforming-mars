@@ -8,7 +8,6 @@ import {MAX_OXYGEN_LEVEL, REDS_RULING_POLICY_COST} from '../../../constants';
 import {SelectSpace} from '../../../inputs/SelectSpace';
 import {ISpace} from '../../../boards/ISpace';
 
-
 export class ConvertPlants extends StandardActionCard {
   constructor() {
     super({
@@ -16,9 +15,12 @@ export class ConvertPlants extends StandardActionCard {
       metadata: {
         cardNumber: 'SA2',
         renderData: CardRenderer.builder((b) =>
-          b.standardProject('Spend 8 Plants to place a greenery tile and raise oxygen 1 step.', (eb) => {
-            eb.plants(8).startAction.greenery();
-          }),
+          b.standardProject(
+            'Spend 8 Plants to place a greenery tile and raise oxygen 1 step.',
+            (eb) => {
+              eb.plants(8).startAction.greenery();
+            }
+          )
         ),
       },
     });
@@ -49,7 +51,7 @@ export class ConvertPlants extends StandardActionCard {
         player.game.addGreenery(player, space.id);
         player.plants -= player.plantsNeededForGreenery;
         return undefined;
-      },
+      }
     );
   }
 }

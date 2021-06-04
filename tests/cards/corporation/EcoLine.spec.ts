@@ -5,8 +5,8 @@ import {TestPlayers} from '../../TestPlayers';
 import {ConvertPlants} from '../../../src/cards/base/standardActions/ConvertPlants';
 import {Game} from '../../../src/Game';
 
-describe('EcoLine', function() {
-  it('Should play', function() {
+describe('EcoLine', function () {
+  it('Should play', function () {
     const card = new EcoLine();
     const player = TestPlayers.BLUE.newPlayer();
     Game.newInstance('foobar', [player], player);

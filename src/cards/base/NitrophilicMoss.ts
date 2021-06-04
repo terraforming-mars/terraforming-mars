@@ -22,17 +22,25 @@ export class NitrophilicMoss extends Card implements IProjectCard {
         renderData: CardRenderer.builder((b) => {
           b.production((pb) => {
             pb.plants(2);
-          }).nbsp.minus().plants(2);
+          })
+            .nbsp.minus()
+            .plants(2);
         }),
-        description: 'Requires 3 ocean tiles and that you lose 2 plants. Increase your plant production 2 steps.',
+        description:
+          'Requires 3 ocean tiles and that you lose 2 plants. Increase your plant production 2 steps.',
       },
     });
   }
 
   public canPlay(player: Player): boolean {
     const meetsCardRequirements = super.canPlay(player);
-    const hasViralEnhancers = player.playedCards.find((card) => card.name === CardName.VIRAL_ENHANCERS);
-    const hasEnoughPlants = player.plants >= 2 || player.isCorporation(CardName.MANUTECH) || player.plants >= 1 && hasViralEnhancers !== undefined;
+    const hasViralEnhancers = player.playedCards.find(
+      (card) => card.name === CardName.VIRAL_ENHANCERS
+    );
+    const hasEnoughPlants =
+      player.plants >= 2 ||
+      player.isCorporation(CardName.MANUTECH) ||
+      (player.plants >= 1 && hasViralEnhancers !== undefined);
 
     return meetsCardRequirements && hasEnoughPlants;
   }

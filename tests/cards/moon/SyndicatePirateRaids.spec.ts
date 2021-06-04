@@ -14,7 +14,12 @@ describe('SyndicatePirateRaids', () => {
   beforeEach(() => {
     player = TestPlayers.BLUE.newPlayer();
     otherPlayer = TestPlayers.RED.newPlayer();
-    game = Game.newInstance('id', [player, otherPlayer], player, TestingUtils.setCustomGameOptions({coloniesExtension: true}));
+    game = Game.newInstance(
+      'id',
+      [player, otherPlayer],
+      player,
+      TestingUtils.setCustomGameOptions({coloniesExtension: true})
+    );
     card = new SyndicatePirateRaids();
   });
 
@@ -88,4 +93,3 @@ describe('SyndicatePirateRaids', () => {
     expect(game.colonies[1].visitor).is.undefined;
   });
 });
-

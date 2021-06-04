@@ -6,22 +6,23 @@ import {Game} from '../../../src/Game';
 import {Player} from '../../../src/Player';
 import {TestPlayers} from '../../TestPlayers';
 
-describe('InterplanetaryCinematics', function() {
-  let card : InterplanetaryCinematics; let player : Player;
+describe('InterplanetaryCinematics', function () {
+  let card: InterplanetaryCinematics;
+  let player: Player;
 
-  beforeEach(function() {
+  beforeEach(function () {
     card = new InterplanetaryCinematics();
     player = TestPlayers.BLUE.newPlayer();
     const redPlayer = TestPlayers.RED.newPlayer();
     Game.newInstance('foobar', [player, redPlayer], player);
   });
 
-  it('Should play', function() {
+  it('Should play', function () {
     card.play(player);
     expect(player.steel).to.eq(20);
   });
 
-  it('Has onCardPlayed', function() {
+  it('Has onCardPlayed', function () {
     player.corporationCard = card;
     card.onCardPlayed(player, new Bushes());
     expect(player.megaCredits).to.eq(0);

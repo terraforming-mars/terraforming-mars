@@ -3,8 +3,8 @@ import {BeginnerCorporation} from '../../../src/cards/corporation/BeginnerCorpor
 import {Game} from '../../../src/Game';
 import {TestPlayers} from '../../TestPlayers';
 
-describe('BeginnerCorporation', function() {
-  it('Should play', function() {
+describe('BeginnerCorporation', function () {
+  it('Should play', function () {
     const card = new BeginnerCorporation();
     const player = TestPlayers.BLUE.newPlayer();
     const redPlayer = TestPlayers.RED.newPlayer();

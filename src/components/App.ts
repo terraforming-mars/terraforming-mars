@@ -19,29 +19,30 @@ import * as raw_settings from '../genfiles/settings.json';
 const dialogPolyfill = require('dialog-polyfill');
 
 interface MainAppData {
-    screen: 'create-game-form' |
-            'cards' |
-            'empty' |
-            'game-home' |
-            'games-overview' |
-            'help' |
-            'load' |
-            'player-home' |
-            'spectator-home' |
-            'start-screen' |
-            'the-end';
-    /**
-     * We set player once the app component has loaded. Vue only
-     * watches properties that exist initially. When we
-     * use this property we can't trigger vue state without
-     * a refactor.
-     */
-    player?: PlayerModel;
-    playerkey: number;
-    settings: typeof raw_settings;
-    isServerSideRequestInProgress: boolean;
-    componentsVisibility: {[x: string]: boolean};
-    game: SimpleGameModel | undefined;
+  screen:
+    | 'create-game-form'
+    | 'cards'
+    | 'empty'
+    | 'game-home'
+    | 'games-overview'
+    | 'help'
+    | 'load'
+    | 'player-home'
+    | 'spectator-home'
+    | 'start-screen'
+    | 'the-end';
+  /**
+   * We set player once the app component has loaded. Vue only
+   * watches properties that exist initially. When we
+   * use this property we can't trigger vue state without
+   * a refactor.
+   */
+  player?: PlayerModel;
+  playerkey: number;
+  settings: typeof raw_settings;
+  isServerSideRequestInProgress: boolean;
+  componentsVisibility: {[x: string]: boolean};
+  game: SimpleGameModel | undefined;
 }
 
 export const mainAppSettings = {
@@ -78,11 +79,21 @@ export const mainAppSettings = {
     'help': Help,
   },
   'methods': {
-    showAlert: function(message: string, cb: () => void = () => {}): void {
-      const dialogElement: HTMLElement | null = document.getElementById('alert-dialog');
-      const buttonElement: HTMLElement | null = document.getElementById('alert-dialog-button');
-      const messageElement: HTMLElement | null = document.getElementById('alert-dialog-message');
-      if (buttonElement !== null && messageElement !== null && dialogElement !== null && (dialogElement as HTMLDialogElement).showModal !== undefined) {
+    showAlert: function (message: string, cb: () => void = () => {}): void {
+      const dialogElement: HTMLElement | null =
+        document.getElementById('alert-dialog');
+      const buttonElement: HTMLElement | null = document.getElementById(
+        'alert-dialog-button'
+      );
+      const messageElement: HTMLElement | null = document.getElementById(
+        'alert-dialog-message'
+      );
+      if (
+        buttonElement !== null &&
+        messageElement !== null &&
+        dialogElement !== null &&
+        (dialogElement as HTMLDialogElement).showModal !== undefined
+      ) {
         messageElement.innerHTML = $t(message);
         const handler = () => {
           buttonElement.removeEventListener('click', handler);
@@ -95,24 +106,28 @@ export const mainAppSettings = {
         cb();
       }
     },
-    setVisibilityState: function(targetVar: string, isVisible: boolean) {
+    setVisibilityState: function (targetVar: string, isVisible: boolean) {
       if (isVisible === this.getVisibilityState(targetVar)) return;
-      (this as unknown as typeof mainAppSettings.data).componentsVisibility[targetVar] = isVisible;
+      (this as unknown as typeof mainAppSettings.data).componentsVisibility[
+        targetVar
+      ] = isVisible;
     },
-    getVisibilityState: function(targetVar: string): boolean {
-      return (this as unknown as typeof mainAppSettings.data).componentsVisibility[targetVar] ? true : false;
+    getVisibilityState: function (targetVar: string): boolean {
+      return (this as unknown as typeof mainAppSettings.data)
+        .componentsVisibility[targetVar]
+        ? true
+        : false;
     },
-    updatePlayer: function() {
+    updatePlayer: function () {
       const currentPathname: string = window.location.pathname;
       const xhr = new XMLHttpRequest();
       const app = this as unknown as typeof mainAppSettings.data;
 
       xhr.open(
         'GET',
-        '/api/player' +
-                    window.location.search.replace('&noredirect', ''),
+        '/api/player' + window.location.search.replace('&noredirect', '')
       );
-      xhr.onerror = function() {
+      xhr.onerror = function () {
         alert('Error getting game data');
       };
       xhr.onload = () => {
@@ -121,14 +136,14 @@ export const mainAppSettings = {
           app.playerkey++;
           if (
             app.player.game.phase === 'end' &&
-                        window.location.search.includes('&noredirect') === false
+            window.location.search.includes('&noredirect') === false
           ) {
             app.screen = 'the-end';
             if (currentPathname !== '/the-end') {
               window.history.replaceState(
                 xhr.response,
                 `${constants.APP_NAME} - Player`,
-                '/the-end?id=' + app.player.id,
+                '/the-end?id=' + app.player.id
               );
             }
           } else {
@@ -137,7 +152,7 @@ export const mainAppSettings = {
               window.history.replaceState(
                 xhr.response,
                 `${constants.APP_NAME} - Game`,
-                '/player?id=' + app.player.id,
+                '/player?id=' + app.player.id
               );
             }
           }
@@ -149,18 +164,21 @@ export const mainAppSettings = {
       xhr.send();
     },
   },
-  'mounted': function() {
+  'mounted': function () {
     document.title = constants.APP_NAME;
-    dialogPolyfill.default.registerDialog(document.getElementById('alert-dialog'));
+    dialogPolyfill.default.registerDialog(
+      document.getElementById('alert-dialog')
+    );
     const currentPathname: string = window.location.pathname;
-    const app = this as unknown as (typeof mainAppSettings.data) & (typeof mainAppSettings.methods);
+    const app = this as unknown as typeof mainAppSettings.data &
+      typeof mainAppSettings.methods;
     if (currentPathname === '/player' || currentPathname === '/the-end') {
       app.updatePlayer();
     } else if (currentPathname === '/game') {
       app.screen = 'game-home';
       const xhr = new XMLHttpRequest();
       xhr.open('GET', '/api/game' + window.location.search);
-      xhr.onerror = function() {
+      xhr.onerror = function () {
         alert('Error getting game data');
       };
       xhr.onload = () => {
@@ -168,7 +186,7 @@ export const mainAppSettings = {
           window.history.replaceState(
             xhr.response,
             `${constants.APP_NAME} - Game`,
-            '/game?id=' + xhr.response.id,
+            '/game?id=' + xhr.response.id
           );
           app.game = xhr.response as SimpleGameModel;
         } else {
@@ -179,13 +197,14 @@ export const mainAppSettings = {
       xhr.send();
     } else if (currentPathname === '/games-overview') {
       app.screen = 'games-overview';
-    } else if (
-      currentPathname === '/new-game' || currentPathname === '/solo'
-    ) {
+    } else if (currentPathname === '/new-game' || currentPathname === '/solo') {
       app.screen = 'create-game-form';
     } else if (currentPathname === '/load') {
       app.screen = 'load';
-    } else if (currentPathname === '/debug-ui' || currentPathname === '/cards') {
+    } else if (
+      currentPathname === '/debug-ui' ||
+      currentPathname === '/cards'
+    ) {
       app.screen = 'cards';
     } else if (currentPathname === '/help') {
       app.screen = 'help';

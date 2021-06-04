@@ -32,7 +32,7 @@ export class Extremophiles extends Card implements IActionCard, IResourceCard {
         victoryPoints: CardRenderDynamicVictoryPoints.microbes(1, 3),
       },
     });
-  };
+  }
 
   public resourceCount: number = 0;
 
@@ -61,7 +61,7 @@ export class Extremophiles extends Card implements IActionCard, IResourceCard {
       (foundCards: Array<ICard>) => {
         player.addResourceTo(foundCards[0], {log: true});
         return undefined;
-      },
+      }
     );
   }
 }

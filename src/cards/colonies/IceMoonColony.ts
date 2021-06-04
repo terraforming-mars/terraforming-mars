@@ -28,11 +28,18 @@ export class IceMoonColony extends Card implements IProjectCard {
   }
 
   public canPlay(player: Player): boolean {
-    const oceansMaxed = player.game.board.getOceansOnBoard() === MAX_OCEAN_TILES;
+    const oceansMaxed =
+      player.game.board.getOceansOnBoard() === MAX_OCEAN_TILES;
     const hasAvailableColonyTile = player.hasAvailableColonyTileToBuildOn();
-    const canPayForReds = player.canAfford(player.getCardCost(this) + REDS_RULING_POLICY_COST, {titanium: true});
+    const canPayForReds = player.canAfford(
+      player.getCardCost(this) + REDS_RULING_POLICY_COST,
+      {titanium: true}
+    );
 
-    if (PartyHooks.shouldApplyPolicy(player.game, PartyName.REDS) && !oceansMaxed) {
+    if (
+      PartyHooks.shouldApplyPolicy(player.game, PartyName.REDS) &&
+      !oceansMaxed
+    ) {
       return hasAvailableColonyTile && canPayForReds;
     }
 
@@ -40,8 +47,12 @@ export class IceMoonColony extends Card implements IProjectCard {
   }
 
   public play(player: Player) {
-    player.game.defer(new BuildColony(player, false, 'Select colony for Ice Moon Colony'));
-    player.game.defer(new PlaceOceanTile(player, 'Select ocean for Ice Moon Colony'));
+    player.game.defer(
+      new BuildColony(player, false, 'Select colony for Ice Moon Colony')
+    );
+    player.game.defer(
+      new PlaceOceanTile(player, 'Select ocean for Ice Moon Colony')
+    );
     return undefined;
   }
 }

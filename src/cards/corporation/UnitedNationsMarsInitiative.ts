@@ -11,7 +11,10 @@ import {CardType} from '../CardType';
 import {CardRenderer} from '../render/CardRenderer';
 import {Resources} from '../../Resources';
 
-export class UnitedNationsMarsInitiative extends Card implements IActionCard, CorporationCard {
+export class UnitedNationsMarsInitiative
+  extends Card
+  implements IActionCard, CorporationCard
+{
   constructor() {
     super({
       cardType: CardType.CORPORATION,
@@ -27,9 +30,12 @@ export class UnitedNationsMarsInitiative extends Card implements IActionCard, Co
           b.br.br.br;
           b.empty().nbsp.nbsp.nbsp.nbsp.megacredits(40);
           b.corpBox('action', (ce) => {
-            ce.action('If your Terraform Rating was raised this generation, you may pay 3 M€ to raise it 1 step more.', (eb) => {
-              eb.megacredits(3).startAction.tr(1).asterix();
-            });
+            ce.action(
+              'If your Terraform Rating was raised this generation, you may pay 3 M€ to raise it 1 step more.',
+              (eb) => {
+                eb.megacredits(3).startAction.tr(1).asterix();
+              }
+            );
           });
         }),
       },
@@ -43,7 +49,9 @@ export class UnitedNationsMarsInitiative extends Card implements IActionCard, Co
     const actionCost = 3;
 
     if (PartyHooks.shouldApplyPolicy(player.game, PartyName.REDS)) {
-      return hasIncreasedTR && player.canAfford(REDS_RULING_POLICY_COST + actionCost);
+      return (
+        hasIncreasedTR && player.canAfford(REDS_RULING_POLICY_COST + actionCost)
+      );
     }
 
     return hasIncreasedTR && player.canAfford(actionCost);

@@ -9,7 +9,7 @@ import {IContext} from '../../src/routes/IHandler';
 import {FakeGameLoader} from './FakeGameLoader';
 import {PlayerModel} from '../../src/models/PlayerModel';
 
-describe('ApiPlayer', function() {
+describe('ApiPlayer', function () {
   let req: http.IncomingMessage;
   let res: MockResponse;
   let ctx: IContext;

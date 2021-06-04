@@ -1,11 +1,10 @@
-
 import {createLocalVue, mount} from '@vue/test-utils';
 
 import {expect} from 'chai';
 import {Milestone} from '../../src/components/Milestone';
 import {ClaimedMilestoneModel} from '../../src/models/ClaimedMilestoneModel';
 
-describe('Milestone', function() {
+describe('Milestone', function () {
   const mockMilestone: ClaimedMilestoneModel = {
     milestone: {
       name: 'test',
@@ -23,13 +22,11 @@ describe('Milestone', function() {
     localVue.directive('i18n', {});
     return localVue;
   }
-  it('shows list and milestones', async function() {
+  it('shows list and milestones', async function () {
     const milestone = mount(Milestone, {
       localVue: getLocalVue(),
       propsData: {
-        milestones_list: [
-          mockMilestone,
-        ],
+        milestones_list: [mockMilestone],
       },
     });
     const toggler = milestone.find('a[class="ma-clickable"]');

@@ -8,7 +8,11 @@ export class ServeApp extends Handler {
   private constructor() {
     super();
   }
-  public get(req: http.IncomingMessage, res: http.ServerResponse, ctx: IContext): void {
+  public get(
+    req: http.IncomingMessage,
+    res: http.ServerResponse,
+    ctx: IContext
+  ): void {
     req.url = '/assets/index.html';
     ServeAsset.INSTANCE.get(req, res, ctx);
   }

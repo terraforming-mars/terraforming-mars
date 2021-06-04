@@ -1,4 +1,3 @@
-
 import {IProjectCard} from '../IProjectCard';
 import {Player} from '../../Player';
 import {Card} from '../Card';
@@ -22,7 +21,8 @@ export class CorporateStronghold extends Card implements IProjectCard {
 
       metadata: {
         cardNumber: '182',
-        description: 'Decrease your Energy production 1 step and increase your M€ production 3 steps. Place a City tile.',
+        description:
+          'Decrease your Energy production 1 step and increase your M€ production 3 steps. Place a City tile.',
         renderData: CardRenderer.builder((b) => {
           b.production((pb) => {
             pb.minus().energy(1).br;
@@ -34,8 +34,10 @@ export class CorporateStronghold extends Card implements IProjectCard {
     });
   }
   public canPlay(player: Player): boolean {
-    return player.getProduction(Resources.ENERGY) >= 1 &&
-      player.game.board.getAvailableSpacesForCity(player).length > 0;
+    return (
+      player.getProduction(Resources.ENERGY) >= 1 &&
+      player.game.board.getAvailableSpacesForCity(player).length > 0
+    );
   }
   public play(player: Player) {
     return new SelectSpace(
@@ -46,7 +48,7 @@ export class CorporateStronghold extends Card implements IProjectCard {
         player.addProduction(Resources.ENERGY, -1);
         player.addProduction(Resources.MEGACREDITS, 3);
         return undefined;
-      },
+      }
     );
   }
   public getVictoryPoints() {

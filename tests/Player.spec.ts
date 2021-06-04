@@ -21,20 +21,20 @@ import {SelfReplicatingRobots} from '../src/cards/promo/SelfReplicatingRobots';
 import {Pets} from '../src/cards/base/Pets';
 import {GlobalEventName} from '../src/turmoil/globalEvents/GlobalEventName';
 
-describe('Player', function() {
-  it('should initialize with right defaults', function() {
+describe('Player', function () {
+  it('should initialize with right defaults', function () {
     const player = TestPlayers.BLUE.newPlayer();
     expect(player.corporationCard).is.undefined;
   });
-  it('Should throw error if nothing to process', function() {
+  it('Should throw error if nothing to process', function () {
     const player = TestPlayers.BLUE.newPlayer();
     Game.newInstance('foobar', [player], player);
     (player as any).setWaitingFor(undefined, undefined);
-    expect(function() {
+    expect(function () {
       player.process([]);
     }).to.throw('Not waiting for anything');
   });
-  it('Should run select player for PowerSupplyConsortium', function() {
+  it('Should run select player for PowerSupplyConsortium', function () {
     const card = new PowerSupplyConsortium();
     const player = TestPlayers.BLUE.newPlayer();
     const player2 = TestPlayers.RED.newPlayer();
@@ -51,7 +51,7 @@ describe('Player', function() {
       expect(player.getProduction(Resources.ENERGY)).to.eq(1);
     }
   });
-  it('Should error with input for run select player for PowerSupplyConsortium', function() {
+  it('Should error with input for run select player for PowerSupplyConsortium', function () {
     const card = new PowerSupplyConsortium();
     const player = TestPlayers.BLUE.newPlayer();
     // const redPlayer = TestPlayers.RED.newPlayer();
@@ -63,18 +63,18 @@ describe('Player', function() {
     if (action !== undefined) {
       player.setWaitingFor(action);
       expect(player.getWaitingFor()).is.not.undefined;
-      expect(function() {
+      expect(function () {
         player.process([[]]);
       }).to.throw('Invalid players array provided');
-      expect(function() {
+      expect(function () {
         player.process([]);
       }).to.throw('Incorrect options provided');
-      expect(function() {
+      expect(function () {
         player.process([['bar']]);
       }).to.throw('Player not available');
     }
   });
-  it('Should run select amount for Insulation', function() {
+  it('Should run select amount for Insulation', function () {
     const card = new Insulation();
     const player = TestPlayers.BLUE.newPlayer();
     const redPlayer = TestPlayers.RED.newPlayer();
@@ -86,13 +86,13 @@ describe('Player', function() {
     if (action === undefined) return;
     player.setWaitingFor(action);
     expect(player.getWaitingFor()).is.not.undefined;
-    expect(function() {
+    expect(function () {
       player.process([[]]);
     }).to.throw('Incorrect options provided');
-    expect(function() {
+    expect(function () {
       player.process([]);
     }).to.throw('Incorrect options provided');
-    expect(function() {
+    expect(function () {
       player.process([['foobar']]);
     }).to.throw('Number not provided for amount');
     player.process([['1']]);
@@ -100,7 +100,7 @@ describe('Player', function() {
     expect(player.getProduction(Resources.MEGACREDITS)).to.eq(1);
     expect(player.getWaitingFor()).is.undefined;
   });
-  it('Runs SaturnSystems when other player plays card', function() {
+  it('Runs SaturnSystems when other player plays card', function () {
     const player1 = TestPlayers.BLUE.newPlayer();
     const player2 = TestPlayers.RED.newPlayer();
     Game.newInstance('gto', [player1, player2], player1);
@@ -111,7 +111,7 @@ describe('Player', function() {
     player2.playCard(card, undefined);
     expect(player1.getProduction(Resources.MEGACREDITS)).to.eq(1);
   });
-  it('Chains onend functions from player inputs', function(done) {
+  it('Chains onend functions from player inputs', function (done) {
     const player = TestPlayers.BLUE.newPlayer();
     Game.newInstance('foobar', [player], player);
     const mockOption3 = new SelectOption('Mock select option 3', 'Save', () => {
@@ -131,37 +131,31 @@ describe('Player', function() {
     player.process([['1']]);
     expect(player.getWaitingFor()).to.be.undefined;
   });
-  it('Omits buffer gas for non solo games', function() {
+  it('Omits buffer gas for non solo games', function () {
     const player = TestPlayers.BLUE.newPlayer();
-    const player2= TestPlayers.RED.newPlayer();
+    const player2 = TestPlayers.RED.newPlayer();
     Game.newInstance('foobar', [player, player2], player);
     const option = player.getStandardProjectOption();
-    const bufferGas = option.cards.find((card) => card.name === CardName.BUFFER_GAS_STANDARD_PROJECT);
+    const bufferGas = option.cards.find(
+      (card) => card.name === CardName.BUFFER_GAS_STANDARD_PROJECT
+    );
     expect(bufferGas).to.be.undefined;
   });
-  it('Omit buffer gas for solo games without 63 TR', function() {
+  it('Omit buffer gas for solo games without 63 TR', function () {
     const player = TestPlayers.BLUE.newPlayer();
     Game.newInstance('foobar', [player], player);
     const option = player.getStandardProjectOption();
-    const bufferGas = option.cards.find((card) => card.name === CardName.BUFFER_GAS_STANDARD_PROJECT);
+    const bufferGas = option.cards.find(
+      (card) => card.name === CardName.BUFFER_GAS_STANDARD_PROJECT
+    );
     expect(bufferGas).to.be.undefined;
   });
 
   it('wgt includes all parameters at the game start', () => {
     const player = TestPlayers.BLUE.newPlayer();
-    const gameOptions = TestingUtils.setCustomGameOptions({venusNextExtension: false});
-    Game.newInstance('foobar', [player], player, gameOptions);
-    player.worldGovernmentTerraforming();
-    const parameters = waitingForGlobalParameters(player);
-    expect(parameters).to.have.members([
-      GlobalParameter.OXYGEN,
-      GlobalParameter.TEMPERATURE,
-      GlobalParameter.OCEANS]);
-  });
-
-  it('wgt includes all parameters at the game start, with Venus', () => {
-    const player = TestPlayers.BLUE.newPlayer();
-    const gameOptions = TestingUtils.setCustomGameOptions({venusNextExtension: true});
+    const gameOptions = TestingUtils.setCustomGameOptions({
+      venusNextExtension: false,
+    });
     Game.newInstance('foobar', [player], player, gameOptions);
     player.worldGovernmentTerraforming();
     const parameters = waitingForGlobalParameters(player);
@@ -169,12 +163,31 @@ describe('Player', function() {
       GlobalParameter.OXYGEN,
       GlobalParameter.TEMPERATURE,
       GlobalParameter.OCEANS,
-      GlobalParameter.VENUS]);
+    ]);
+  });
+
+  it('wgt includes all parameters at the game start, with Venus', () => {
+    const player = TestPlayers.BLUE.newPlayer();
+    const gameOptions = TestingUtils.setCustomGameOptions({
+      venusNextExtension: true,
+    });
+    Game.newInstance('foobar', [player], player, gameOptions);
+    player.worldGovernmentTerraforming();
+    const parameters = waitingForGlobalParameters(player);
+    expect(parameters).to.have.members([
+      GlobalParameter.OXYGEN,
+      GlobalParameter.TEMPERATURE,
+      GlobalParameter.OCEANS,
+      GlobalParameter.VENUS,
+    ]);
   });
 
   it('wgt includes all parameters at the game start, with The Moon', () => {
     const player = TestPlayers.BLUE.newPlayer();
-    const gameOptions = TestingUtils.setCustomGameOptions({venusNextExtension: false, moonExpansion: true});
+    const gameOptions = TestingUtils.setCustomGameOptions({
+      venusNextExtension: false,
+      moonExpansion: true,
+    });
     Game.newInstance('foobar', [player], player, gameOptions);
     player.worldGovernmentTerraforming();
     const parameters = waitingForGlobalParameters(player);
@@ -184,15 +197,18 @@ describe('Player', function() {
       GlobalParameter.OCEANS,
       GlobalParameter.MOON_MINING_RATE,
       GlobalParameter.MOON_COLONY_RATE,
-      GlobalParameter.MOON_LOGISTICS_RATE]);
+      GlobalParameter.MOON_LOGISTICS_RATE,
+    ]);
   });
 
-  it('Include buffer gas for solo games with 63 TR', function() {
+  it('Include buffer gas for solo games with 63 TR', function () {
     const player = TestPlayers.BLUE.newPlayer();
     const game = Game.newInstance('foobar', [player], player);
     game.gameOptions.soloTR = true;
     const option = player.getStandardProjectOption();
-    const bufferGas = option.cards.find((card) => card.name === CardName.BUFFER_GAS_STANDARD_PROJECT);
+    const bufferGas = option.cards.find(
+      (card) => card.name === CardName.BUFFER_GAS_STANDARD_PROJECT
+    );
     expect(bufferGas).not.to.be.undefined;
   });
 
@@ -226,13 +242,22 @@ describe('Player', function() {
       steelValue: 14,
       canUseHeatAsMegaCredits: false,
       actionsTakenThisRound: 15,
-      actionsThisGeneration: [CardName.FACTORUM, CardName.GHG_PRODUCING_BACTERIA],
+      actionsThisGeneration: [
+        CardName.FACTORUM,
+        CardName.GHG_PRODUCING_BACTERIA,
+      ],
       corporationInitialActionDone: false,
       dealtCorporationCards: [CardName.THARSIS_REPUBLIC],
       dealtProjectCards: [CardName.FLOATER_LEASING, CardName.BUTTERFLY_EFFECT],
-      dealtPreludeCards: [CardName.MOHOLE_EXCAVATION, CardName.LAVA_TUBE_SETTLEMENT],
+      dealtPreludeCards: [
+        CardName.MOHOLE_EXCAVATION,
+        CardName.LAVA_TUBE_SETTLEMENT,
+      ],
       cardsInHand: [CardName.EARTH_ELEVATOR, CardName.DUST_SEALS],
-      preludeCardsInHand: [CardName.METAL_RICH_ASTEROID, CardName.PSYCHROPHILES],
+      preludeCardsInHand: [
+        CardName.METAL_RICH_ASTEROID,
+        CardName.PSYCHROPHILES,
+      ],
       playedCards: [], // TODO(kberg): these are SerializedCard.
       draftedCards: [CardName.FISH, CardName.EXTREME_COLD_FUNGUS],
       needsToDraft: false,
@@ -281,7 +306,7 @@ describe('Player', function() {
     expect(newPlayer.color).eq(Color.PURPLE);
     expect(newPlayer.tradesThisGeneration).eq(100);
   });
-  it('pulls self replicating robots target cards', function() {
+  it('pulls self replicating robots target cards', function () {
     const player = TestPlayers.BLUE.newPlayer();
     expect(player.getSelfReplicatingRobotsTargetCards().length).eq(0);
     const srr = new SelfReplicatingRobots();
@@ -327,7 +352,6 @@ describe('Player', function() {
     expect(player.hasUnits(units)).is.true;
   });
 
-
   it('deduct units', () => {
     function asUnits(player: Player): Units {
       return {
@@ -338,7 +362,7 @@ describe('Player', function() {
         energy: player.energy,
         heat: player.heat,
       };
-    };
+    }
 
     const player = TestPlayers.BLUE.newPlayer();
 
@@ -429,7 +453,7 @@ describe('Player', function() {
         energy: player.getProduction(Resources.ENERGY),
         heat: player.getProduction(Resources.HEAT),
       };
-    };
+    }
 
     const player = TestPlayers.BLUE.newPlayer();
 
@@ -553,8 +577,11 @@ describe('Player', function() {
     player2.megaCredits = 3;
     game.monsInsuranceOwner = player2.id;
     player1.addResource(Resources.MEGACREDITS, -3, {from: player2, log: false});
-    expect(player2.megaCredits).eq(3); ;
-    player1.addProduction(Resources.MEGACREDITS, -3, {from: player2, log: false});
+    expect(player2.megaCredits).eq(3);
+    player1.addProduction(Resources.MEGACREDITS, -3, {
+      from: player2,
+      log: false,
+    });
     expect(player2.megaCredits).eq(3);
   });
 
@@ -591,7 +618,9 @@ describe('Player', function() {
 
     player.addResource(Resources.MEGACREDITS, 12, {log: true});
     const logEntry = log[0];
-    expect(TestingUtils.formatLogMessage(logEntry)).eq('blue\'s megacredits amount increased by 12');
+    expect(TestingUtils.formatLogMessage(logEntry)).eq(
+      "blue's megacredits amount increased by 12"
+    );
   });
 
   it('addResource logging from player', () => {
@@ -604,18 +633,25 @@ describe('Player', function() {
 
     const log = game.gameLog;
     const logEntry = log[log.length - 1];
-    expect(TestingUtils.formatLogMessage(logEntry)).eq('blue\'s megacredits amount decreased by 5 by red');
+    expect(TestingUtils.formatLogMessage(logEntry)).eq(
+      "blue's megacredits amount decreased by 5 by red"
+    );
   });
 
   it('addResource logging from global event', () => {
     const player = TestPlayers.BLUE.newPlayer();
     const game = Game.newInstance('foobar', [player], player);
 
-    player.addResource(Resources.MEGACREDITS, 12, {log: true, from: GlobalEventName.ASTEROID_MINING});
+    player.addResource(Resources.MEGACREDITS, 12, {
+      log: true,
+      from: GlobalEventName.ASTEROID_MINING,
+    });
 
     const log = game.gameLog;
     const logEntry = log[log.length - 1];
-    expect(TestingUtils.formatLogMessage(logEntry)).eq('blue\'s megacredits amount increased by 12 by Global Event');
+    expect(TestingUtils.formatLogMessage(logEntry)).eq(
+      "blue's megacredits amount increased by 12 by Global Event"
+    );
   });
 
   it('addResource logs error when deducting too much', () => {
@@ -632,28 +668,32 @@ describe('Player', function() {
     console.warn = warn;
 
     expect(consoleLog.length).eq(1);
-    expect(consoleLog[0][0]).eq('Illegal state: Adjusting -12 megacredits when player has 10');
-    expect(JSON.parse(consoleLog[0][1])).deep.eq(
-      {
-        'gameId': 'foobar',
-        'lastSaveId': 0,
-        'logAge': 7,
-        'currentPlayer': 'blue-id',
-        'metadata': {
-          'player': {
-            'color': 'blue',
-            'id': 'blue-id',
-            'name': 'player-blue',
-          },
-          'resource': 'megacredits',
-          'amount': -12,
+    expect(consoleLog[0][0]).eq(
+      'Illegal state: Adjusting -12 megacredits when player has 10'
+    );
+    expect(JSON.parse(consoleLog[0][1])).deep.eq({
+      'gameId': 'foobar',
+      'lastSaveId': 0,
+      'logAge': 7,
+      'currentPlayer': 'blue-id',
+      'metadata': {
+        'player': {
+          'color': 'blue',
+          'id': 'blue-id',
+          'name': 'player-blue',
         },
-      });
+        'resource': 'megacredits',
+        'amount': -12,
+      },
+    });
   });
 });
 
 function waitingForGlobalParameters(player: Player): Array<GlobalParameter> {
-  return player.getWaitingFor()!.options!.map((o) => o.title as string).map(titlesToGlobalParameter);
+  return player
+    .getWaitingFor()!
+    .options!.map((o) => o.title as string)
+    .map(titlesToGlobalParameter);
 }
 
 function titlesToGlobalParameter(title: string): GlobalParameter {

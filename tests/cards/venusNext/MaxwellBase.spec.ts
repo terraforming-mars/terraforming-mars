@@ -11,10 +11,12 @@ import {Resources} from '../../../src/Resources';
 import {TestingUtils} from '../../TestingUtils';
 import {TestPlayers} from '../../TestPlayers';
 
-describe('MaxwellBase', function() {
-  let card : MaxwellBase; let player : Player; let game : Game;
+describe('MaxwellBase', function () {
+  let card: MaxwellBase;
+  let player: Player;
+  let game: Game;
 
-  beforeEach(function() {
+  beforeEach(function () {
     card = new MaxwellBase();
     player = TestPlayers.BLUE.newPlayer();
     const redPlayer = TestPlayers.RED.newPlayer();
@@ -22,18 +24,18 @@ describe('MaxwellBase', function() {
     game = Game.newInstance('foobar', [player, redPlayer], player, gameOptions);
   });
 
-  it('Can\'t play without energy production', function() {
+  it("Can't play without energy production", function () {
     (game as any).venusScaleLevel = 12;
     expect(card.canPlay(player)).is.not.true;
   });
 
-  it('Can\'t play if Venus requirement not met', function() {
+  it("Can't play if Venus requirement not met", function () {
     player.addProduction(Resources.ENERGY, 1);
     (game as any).venusScaleLevel = 10;
     expect(card.canPlay(player)).is.not.true;
   });
 
-  it('Should play', function() {
+  it('Should play', function () {
     player.addProduction(Resources.ENERGY, 1);
     (game as any).venusScaleLevel = 12;
     expect(card.canPlay(player)).is.true;
@@ -43,7 +45,7 @@ describe('MaxwellBase', function() {
     expect(player.getProduction(Resources.ENERGY)).to.eq(0);
   });
 
-  it('Should act - single target', function() {
+  it('Should act - single target', function () {
     const card2 = new Birds();
     const card3 = new AerialMappers();
 
@@ -56,7 +58,7 @@ describe('MaxwellBase', function() {
     expect(player.getResourcesOnCard(card3)).to.eq(1);
   });
 
-  it('Should act - multiple targets', function() {
+  it('Should act - multiple targets', function () {
     const card2 = new StratosphericBirds();
     const card3 = new AerialMappers();
     player.playedCards.push(card, card2, card3);

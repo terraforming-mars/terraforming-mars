@@ -9,14 +9,9 @@ describe('FullMoon', () => {
     const award = new FullMoon();
     const player = TestPlayers.BLUE.newPlayer();
     expect(award.getScore(player)).eq(0);
-    player.playedCards = [
-      new CoreMine(),
-    ];
+    player.playedCards = [new CoreMine()];
     expect(award.getScore(player)).eq(1);
-    player.playedCards = [
-      new CoreMine(),
-      new CoreMine(),
-    ];
+    player.playedCards = [new CoreMine(), new CoreMine()];
     expect(award.getScore(player)).eq(2);
   });
 

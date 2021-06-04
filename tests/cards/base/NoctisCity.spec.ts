@@ -7,21 +7,23 @@ import {SpaceName} from '../../../src/SpaceName';
 import {TileType} from '../../../src/TileType';
 import {TestPlayers} from '../../TestPlayers';
 
-describe('NoctisCity', function() {
-  let card : NoctisCity; let player : Player; let game : Game;
+describe('NoctisCity', function () {
+  let card: NoctisCity;
+  let player: Player;
+  let game: Game;
 
-  beforeEach(function() {
+  beforeEach(function () {
     card = new NoctisCity();
     player = TestPlayers.BLUE.newPlayer();
     const redPlayer = TestPlayers.RED.newPlayer();
     game = Game.newInstance('foobar', [player, redPlayer], player);
   });
 
-  it('Can\'t play without energy production', function() {
+  it("Can't play without energy production", function () {
     expect(card.canPlay(player)).is.not.true;
   });
 
-  it('Should play', function() {
+  it('Should play', function () {
     player.addProduction(Resources.ENERGY, 1);
     expect(card.canPlay(player)).is.true;
 

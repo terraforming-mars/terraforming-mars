@@ -1,10 +1,13 @@
 import {CardRenderer} from '../../src/cards/render/CardRenderer';
-import {CardRenderItem, AltSecondaryTag} from '../../src/cards/render/CardRenderItem';
+import {
+  CardRenderItem,
+  AltSecondaryTag,
+} from '../../src/cards/render/CardRenderItem';
 import {CardRenderItemType} from '../../src/cards/render/CardRenderItemType';
 import {Size} from '../../src/cards/render/Size';
 import {expect} from 'chai';
 
-describe('CardRenderer', function() {
+describe('CardRenderer', function () {
   describe('temperature', () => {
     it('success', () => {
       const renderer = CardRenderer.builder((b) => b.temperature(1));
@@ -119,7 +122,9 @@ describe('CardRenderer', function() {
       expect(item.amountInside).to.be.true;
     });
     it('size - s', () => {
-      const renderer = CardRenderer.builder((b) => b.megacredits(16, Size.SMALL));
+      const renderer = CardRenderer.builder((b) =>
+        b.megacredits(16, Size.SMALL)
+      );
       const item = renderer.rows[0][0] as CardRenderItem;
       expect(item.type).to.equal(CardRenderItemType.MEGACREDITS);
       expect(item.amount).to.equal(16);

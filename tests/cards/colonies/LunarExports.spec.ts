@@ -5,8 +5,8 @@ import {OrOptions} from '../../../src/inputs/OrOptions';
 import {Resources} from '../../../src/Resources';
 import {TestPlayers} from '../../TestPlayers';
 
-describe('LunarExports', function() {
-  it('Should play', function() {
+describe('LunarExports', function () {
+  it('Should play', function () {
     const card = new LunarExports();
     const player = TestPlayers.BLUE.newPlayer();
     Game.newInstance('foobar', [player], player);

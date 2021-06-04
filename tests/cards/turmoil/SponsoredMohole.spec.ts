@@ -6,13 +6,18 @@ import {PartyName} from '../../../src/turmoil/parties/PartyName';
 import {TestingUtils} from '../../TestingUtils';
 import {TestPlayers} from '../../TestPlayers';
 
-describe('SponsoredMohole', function() {
-  it('Should play', function() {
+describe('SponsoredMohole', function () {
+  it('Should play', function () {
     const card = new SponsoredMohole();
     const player = TestPlayers.BLUE.newPlayer();
     const redPlayer = TestPlayers.RED.newPlayer();
     const gameOptions = TestingUtils.setCustomGameOptions();
-    const game = Game.newInstance('foobar', [player, redPlayer], player, gameOptions);
+    const game = Game.newInstance(
+      'foobar',
+      [player, redPlayer],
+      player,
+      gameOptions
+    );
     expect(card.canPlay(player)).is.not.true;
 
     const kelvinists = game.turmoil!.getPartyByName(PartyName.KELVINISTS)!;

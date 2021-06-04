@@ -22,13 +22,17 @@ export class LunarMining extends Card implements IProjectCard {
             pb.titanium(1).slash().earth(2).played;
           });
         }),
-        description: 'Increase your titanium production 1 step for every 2 Earth tags you have in play, including this.',
+        description:
+          'Increase your titanium production 1 step for every 2 Earth tags you have in play, including this.',
       },
     });
   }
 
   public play(player: Player) {
-    player.addProduction(Resources.TITANIUM, Math.floor((player.getTagCount(Tags.EARTH)+1) / 2));
+    player.addProduction(
+      Resources.TITANIUM,
+      Math.floor((player.getTagCount(Tags.EARTH) + 1) / 2)
+    );
     return undefined;
   }
 }

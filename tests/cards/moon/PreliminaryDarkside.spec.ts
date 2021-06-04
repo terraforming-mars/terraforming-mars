@@ -44,4 +44,3 @@ describe('PreliminaryDarkside', () => {
     expect(player.steel).eq(4);
   });
 });
-

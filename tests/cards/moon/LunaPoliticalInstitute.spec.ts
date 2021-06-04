@@ -47,10 +47,11 @@ describe('LunaPoliticalInstitute', () => {
 
     expect(marsFirst.delegates.filter((d) => d === player.id)).has.lengthOf(0);
 
-    const selectParty = game.deferredActions.peek()!.execute() as SelectPartyToSendDelegate;
+    const selectParty = game.deferredActions
+      .peek()!
+      .execute() as SelectPartyToSendDelegate;
     selectParty.cb(PartyName.MARS);
 
     expect(marsFirst.delegates.filter((d) => d === player.id)).has.lengthOf(1);
   });
 });
-

@@ -49,4 +49,3 @@ describe('LunaSenate', () => {
     expect(card.getVictoryPoints(player)).eq(4);
   });
 });
-

@@ -4,8 +4,8 @@ import {Game} from '../../../src/Game';
 import {TestingUtils} from '../../TestingUtils';
 import {TestPlayers} from '../../TestPlayers';
 
-describe('Pets', function() {
-  it('Should play', function() {
+describe('Pets', function () {
+  it('Should play', function () {
     const card = new Pets();
     const player = TestPlayers.BLUE.newPlayer();
     const player2 = TestPlayers.RED.newPlayer();

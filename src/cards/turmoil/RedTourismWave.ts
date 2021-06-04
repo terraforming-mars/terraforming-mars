@@ -24,17 +24,20 @@ export class RedTourismWave extends Card implements IProjectCard {
         renderData: CardRenderer.builder((b) => {
           b.megacredits(1).slash().emptyTile('normal', Size.SMALL).asterix();
         }),
-        description: 'Requires that Reds are ruling or that you have 2 delegates there. Gain 1 M€ from each EMPTY AREA ADJACENT TO YOUR TILES',
+        description:
+          'Requires that Reds are ruling or that you have 2 delegates there. Gain 1 M€ from each EMPTY AREA ADJACENT TO YOUR TILES',
       },
     });
   }
 
   public play(player: Player) {
-    const amount = player.game.board.getEmptySpaces().filter((space) =>
-      player.game.board.getAdjacentSpaces(space).some((adj) =>
-        adj.tile !== undefined && adj.player === player,
-      ),
-    ).length;
+    const amount = player.game.board
+      .getEmptySpaces()
+      .filter((space) =>
+        player.game.board
+          .getAdjacentSpaces(space)
+          .some((adj) => adj.tile !== undefined && adj.player === player)
+      ).length;
     player.addResource(Resources.MEGACREDITS, amount);
     return undefined;
   }

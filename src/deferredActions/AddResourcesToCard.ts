@@ -20,19 +20,26 @@ export namespace AddResourcesToCard {
 export class AddResourcesToCard implements DeferredAction {
   public priority = Priority.GAIN_RESOURCE_OR_PRODUCTION;
   constructor(
-        public player: Player,
-        public resourceType: ResourceType | undefined,
-        public options: AddResourcesToCard.Options = {},
+    public player: Player,
+    public resourceType: ResourceType | undefined,
+    public options: AddResourcesToCard.Options = {}
   ) {}
 
   public execute() {
     const count = this.options.count || 1;
-    const title = this.options.title ||
-      'Select card to add ' + count + ' ' + (this.resourceType || 'resources') + '(s)';
+    const title =
+      this.options.title ||
+      'Select card to add ' +
+        count +
+        ' ' +
+        (this.resourceType || 'resources') +
+        '(s)';
     let cards = this.player.getResourceCards(this.resourceType);
 
     if (this.options.restrictedTag !== undefined) {
-      cards = cards.filter((card) => card.tags.includes(this.options.restrictedTag!));
+      cards = cards.filter((card) =>
+        card.tags.includes(this.options.restrictedTag!)
+      );
     }
     if (this.options.filter !== undefined) {
       cards = cards.filter(this.options.filter);
@@ -54,7 +61,7 @@ export class AddResourcesToCard implements DeferredAction {
       (selected: Array<ICard>) => {
         this.player.addResourceTo(selected[0], {qty: count, log: true});
         return undefined;
-      },
+      }
     );
   }
 }

@@ -6,10 +6,12 @@ import {Player} from '../../../src/Player';
 import {TestingUtils} from '../../TestingUtils';
 import {TestPlayers} from '../../TestPlayers';
 
-describe('VenusFirst', function() {
-  let card : VenusFirst; let player : Player; let game : Game;
+describe('VenusFirst', function () {
+  let card: VenusFirst;
+  let player: Player;
+  let game: Game;
 
-  beforeEach(function() {
+  beforeEach(function () {
     card = new VenusFirst();
     player = TestPlayers.BLUE.newPlayer();
     const redPlayer = TestPlayers.RED.newPlayer();
@@ -17,11 +19,13 @@ describe('VenusFirst', function() {
     game = Game.newInstance('foobar', [player, redPlayer], player, gameOptions);
   });
 
-  it('Should play', function() {
+  it('Should play', function () {
     card.play(player);
     expect(game.getVenusScaleLevel()).to.eq(4);
     expect(player.cardsInHand).has.lengthOf(2);
 
-    player.cardsInHand.forEach((card) => expect(card.tags.indexOf(Tags.VENUS)).not.to.eq(-1));
+    player.cardsInHand.forEach((card) =>
+      expect(card.tags.indexOf(Tags.VENUS)).not.to.eq(-1)
+    );
   });
 });

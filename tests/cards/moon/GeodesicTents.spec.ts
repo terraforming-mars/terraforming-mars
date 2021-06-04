@@ -46,7 +46,8 @@ describe('GeodesicTents', () => {
     expect(player.getProduction(Resources.ENERGY)).eq(0);
     expect(player.getProduction(Resources.PLANTS)).eq(1);
 
-    expect(player.game.deferredActions.peek()!).is.instanceOf(PlaceMoonColonyTile);
+    expect(player.game.deferredActions.peek()!).is.instanceOf(
+      PlaceMoonColonyTile
+    );
   });
 });
-

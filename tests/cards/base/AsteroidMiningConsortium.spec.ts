@@ -6,26 +6,29 @@ import {TestPlayer} from '../../TestPlayer';
 import {Resources} from '../../../src/Resources';
 import {TestPlayers} from '../../TestPlayers';
 
-describe('AsteroidMiningConsortium', function() {
-  let card : AsteroidMiningConsortium; let player : TestPlayer; let player2 : TestPlayer; let game : Game;
+describe('AsteroidMiningConsortium', function () {
+  let card: AsteroidMiningConsortium;
+  let player: TestPlayer;
+  let player2: TestPlayer;
+  let game: Game;
 
-  beforeEach(function() {
+  beforeEach(function () {
     card = new AsteroidMiningConsortium();
     player = TestPlayers.BLUE.newPlayer();
     player2 = TestPlayers.RED.newPlayer();
     game = Game.newInstance('foobar', [player, player2], player);
   });
 
-  it('Can\'t play if no titanium production', function() {
+  it("Can't play if no titanium production", function () {
     expect(card.canPlay(player)).is.not.true;
   });
 
-  it('Can play if player has titanium production', function() {
+  it('Can play if player has titanium production', function () {
     player.addProduction(Resources.TITANIUM, 1);
     expect(card.canPlay(player)).is.true;
   });
 
-  it('Should play - auto select if single target', function() {
+  it('Should play - auto select if single target', function () {
     player.addProduction(Resources.TITANIUM, 1);
     card.play(player); // can decrease own production
     const input = game.deferredActions.peek()!.execute();
@@ -33,7 +36,7 @@ describe('AsteroidMiningConsortium', function() {
     expect(player.getProduction(Resources.TITANIUM)).to.eq(1);
   });
 
-  it('Should play - multiple targets', function() {
+  it('Should play - multiple targets', function () {
     player.addProduction(Resources.TITANIUM, 1);
     player2.addProduction(Resources.TITANIUM, 1);
     card.play(player);
@@ -45,8 +48,11 @@ describe('AsteroidMiningConsortium', function() {
     expect(player2.getProduction(Resources.TITANIUM)).to.eq(0);
   });
 
-  it('Gives victory points', function() {
-    player.victoryPointsBreakdown.setVictoryPoints('victoryPoints', card.getVictoryPoints());
+  it('Gives victory points', function () {
+    player.victoryPointsBreakdown.setVictoryPoints(
+      'victoryPoints',
+      card.getVictoryPoints()
+    );
     expect(player.victoryPointsBreakdown.victoryPoints).to.eq(1);
   });
 });

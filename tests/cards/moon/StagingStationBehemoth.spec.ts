@@ -39,4 +39,3 @@ describe('StagingStationBehemoth', () => {
     expect(player.getTerraformRating()).eq(15);
   });
 });
-

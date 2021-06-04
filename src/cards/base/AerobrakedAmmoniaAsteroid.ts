@@ -19,7 +19,8 @@ export class AerobrakedAmmoniaAsteroid extends Card implements IProjectCard {
       cost: 26,
 
       metadata: {
-        description: 'Increase your heat production 3 steps and your plant production 1 step. Add 2 Microbes to ANOTHER card.',
+        description:
+          'Increase your heat production 3 steps and your plant production 1 step. Add 2 Microbes to ANOTHER card.',
         cardNumber: '170',
         renderData: CardRenderer.builder((b) => {
           b.production((pb) => {
@@ -44,9 +45,14 @@ export class AerobrakedAmmoniaAsteroid extends Card implements IProjectCard {
       return undefined;
     }
 
-    return new SelectCard('Select card to add 2 microbes', 'Add microbes', cardsToPick, (foundCards: Array<ICard>) => {
-      player.addResourceTo(foundCards[0], {qty: 2, log: true});
-      return undefined;
-    });
+    return new SelectCard(
+      'Select card to add 2 microbes',
+      'Add microbes',
+      cardsToPick,
+      (foundCards: Array<ICard>) => {
+        player.addResourceTo(foundCards[0], {qty: 2, log: true});
+        return undefined;
+      }
+    );
   }
 }

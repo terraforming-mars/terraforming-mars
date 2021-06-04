@@ -7,12 +7,12 @@ import {IAdjacencyBonus} from '../ares/IAdjacencyBonus';
 export type SpaceId = string;
 
 export interface ISpace {
-    id: SpaceId;
-    spaceType: SpaceType;
-    tile?: ITile;
-    player?: Player;
-    bonus: Array<SpaceBonus>;
-    adjacency?: IAdjacencyBonus,
-    x: number;
-    y: number;
+  id: SpaceId;
+  spaceType: SpaceType;
+  tile?: ITile;
+  player?: Player;
+  bonus: Array<SpaceBonus>;
+  adjacency?: IAdjacencyBonus;
+  x: number;
+  y: number;
 }

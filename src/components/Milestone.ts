@@ -13,7 +13,7 @@ export const Milestone = Vue.component('milestone', {
       default: true,
     },
   },
-  data: function() {
+  data: function () {
     const showDescription: {[x: string]: boolean} = {};
     for (const milestone of this.milestones_list) {
       showDescription[milestone.milestone.name] = false;
@@ -24,28 +24,31 @@ export const Milestone = Vue.component('milestone', {
     };
   },
   methods: {
-    getNameCss: function(milestoneName: string): string {
+    getNameCss: function (milestoneName: string): string {
       return (
         'ma-name ma-name--' + milestoneName.replace(/ /g, '-').toLowerCase()
       );
     },
-    shouldShow: function(milestone: ClaimedMilestoneModel): boolean {
+    shouldShow: function (milestone: ClaimedMilestoneModel): boolean {
       return this.showDescription[milestone.milestone.name] === true;
     },
-    shouldShowList: function(): boolean {
+    shouldShowList: function (): boolean {
       return this.showList;
     },
-    toggle: function(milestone: ClaimedMilestoneModel) {
-      this.showDescription[milestone.milestone.name] = !this.showDescription[milestone.milestone.name];
+    toggle: function (milestone: ClaimedMilestoneModel) {
+      this.showDescription[milestone.milestone.name] =
+        !this.showDescription[milestone.milestone.name];
     },
-    toggleList: function() {
+    toggleList: function () {
       this.showList = !this.showList;
     },
-    getAvailableMilestoneSpots: function(): Array<number> {
-      const count = this.milestones_list.filter((milestone) => milestone.player_name).length;
+    getAvailableMilestoneSpots: function (): Array<number> {
+      const count = this.milestones_list.filter(
+        (milestone) => milestone.player_name
+      ).length;
       return Array(MAX_MILESTONES - count).fill(MILESTONE_COST);
     },
-    isLearnerModeOn: function(): boolean {
+    isLearnerModeOn: function (): boolean {
       return PreferencesManager.load('learner_mode') === '1';
     },
   },

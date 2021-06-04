@@ -19,7 +19,8 @@ export class BiomassCombustors extends Card implements IProjectCard {
 
       requirements: CardRequirements.builder((b) => b.oxygen(6)),
       metadata: {
-        description: 'Requires 6% oxygen. Decrease any Plant production 1 step and increase your Energy production 2 steps.',
+        description:
+          'Requires 6% oxygen. Decrease any Plant production 1 step and increase your Energy production 2 steps.',
         cardNumber: '183',
         renderData: CardRenderer.builder((b) => {
           b.production((pb) => {
@@ -33,7 +34,10 @@ export class BiomassCombustors extends Card implements IProjectCard {
   }
 
   public canPlay(player: Player): boolean {
-    return super.canPlay(player) && player.game.someoneHasResourceProduction(Resources.PLANTS, 1);
+    return (
+      super.canPlay(player) &&
+      player.game.someoneHasResourceProduction(Resources.PLANTS, 1)
+    );
   }
 
   public play(player: Player) {

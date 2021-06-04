@@ -5,8 +5,8 @@ import {Game} from '../../../src/Game';
 import {Resources} from '../../../src/Resources';
 import {TestPlayers} from '../../TestPlayers';
 
-describe('NitrogenRichAsteroid', function() {
-  it('Should play', function() {
+describe('NitrogenRichAsteroid', function () {
+  it('Should play', function () {
     const card = new NitrogenRichAsteroid();
     const player = TestPlayers.BLUE.newPlayer();
     const redPlayer = TestPlayers.RED.newPlayer();

@@ -10,10 +10,11 @@ import {Player} from '../../../src/Player';
 import {Resources} from '../../../src/Resources';
 import {TestPlayers} from '../../TestPlayers';
 
-describe('AsteroidRights', function() {
-  let card : AsteroidRights; let player : Player;
+describe('AsteroidRights', function () {
+  let card: AsteroidRights;
+  let player: Player;
 
-  beforeEach(function() {
+  beforeEach(function () {
     card = new AsteroidRights();
     player = TestPlayers.BLUE.newPlayer();
     const redPlayer = TestPlayers.RED.newPlayer();
@@ -23,17 +24,17 @@ describe('AsteroidRights', function() {
     card.play();
   });
 
-  it('Should play', function() {
+  it('Should play', function () {
     expect(card.resourceCount).to.eq(2);
   });
 
-  it('Can\'t act', function() {
+  it("Can't act", function () {
     player.megaCredits = 0;
     card.resourceCount = 0;
     expect(card.canAct(player)).is.not.true;
   });
 
-  it('Should act - can auto spend asteroid resource', function() {
+  it('Should act - can auto spend asteroid resource', function () {
     player.megaCredits = 0;
     const action = card.action(player) as OrOptions;
 
@@ -46,7 +47,7 @@ describe('AsteroidRights', function() {
     expect(player.titanium).to.eq(2);
   });
 
-  it('Should play - can auto add asteroid resource to self', function() {
+  it('Should play - can auto add asteroid resource to self', function () {
     player.megaCredits = 1;
     card.resourceCount = 0;
 
@@ -56,7 +57,7 @@ describe('AsteroidRights', function() {
     expect(card.resourceCount).to.eq(1);
   });
 
-  it('Should play - can add asteroid resource to other card', function() {
+  it('Should play - can add asteroid resource to other card', function () {
     player.megaCredits = 1;
     card.resourceCount = 0;
     const cometAiming = new CometAiming();
@@ -67,7 +68,7 @@ describe('AsteroidRights', function() {
     expect(cometAiming.resourceCount).to.eq(1);
   });
 
-  it('Should play - all options available', function() {
+  it('Should play - all options available', function () {
     player.megaCredits = 1;
     const cometAiming = new CometAiming();
     player.playedCards.push(cometAiming);

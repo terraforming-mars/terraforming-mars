@@ -19,7 +19,12 @@ export class MarsFirst extends Party implements IParty {
   name = PartyName.MARS;
   description = 'Focused on Martian development and independence.';
   bonuses = [MARS_FIRST_BONUS_1, MARS_FIRST_BONUS_2];
-  policies = [MARS_FIRST_POLICY_1, MARS_FIRST_POLICY_2, MARS_FIRST_POLICY_3, MARS_FIRST_POLICY_4];
+  policies = [
+    MARS_FIRST_POLICY_1,
+    MARS_FIRST_POLICY_2,
+    MARS_FIRST_POLICY_3,
+    MARS_FIRST_POLICY_4,
+  ];
 }
 
 // TODO(nwai90): Mars First bonus IDs start with 'm' and policies start with 'mp'.
@@ -44,7 +49,11 @@ class MarsFirstBonus02 implements Bonus {
   grant(game: Game) {
     game.getPlayers().forEach((player) => {
       const tileCount = game.board.spaces.filter((space) => {
-        return space.tile !== undefined && space.player === player && space.spaceType !== SpaceType.COLONY;
+        return (
+          space.tile !== undefined &&
+          space.player === player &&
+          space.spaceType !== SpaceType.COLONY
+        );
       }).length;
 
       player.addResource(Resources.MEGACREDITS, tileCount);
@@ -58,7 +67,11 @@ class MarsFirstPolicy01 implements Policy {
   description: string = 'When you place a tile ON MARS, gain 1 steel';
 
   onTilePlaced(player: Player, space: ISpace) {
-    if (space.tile && space.spaceType !== SpaceType.COLONY && player.game.phase === Phase.ACTION) {
+    if (
+      space.tile &&
+      space.spaceType !== SpaceType.COLONY &&
+      player.game.phase === Phase.ACTION
+    ) {
       player.addResource(Resources.STEEL, 1);
     }
   }
@@ -70,7 +83,8 @@ class MarsFirstPolicy02 implements Policy {
   isDefault = false;
 
   onCardPlayed(player: Player, card: IProjectCard) {
-    if (card.tags.includes(Tags.BUILDING)) player.addResource(Resources.MEGACREDITS, 2);
+    if (card.tags.includes(Tags.BUILDING))
+      player.addResource(Resources.MEGACREDITS, 2);
   }
 }
 
@@ -82,11 +96,15 @@ class MarsFirstPolicy03 implements Policy {
 
 class MarsFirstPolicy04 implements Policy {
   id = TurmoilPolicy.MARS_FIRST_POLICY_4;
-  description: string = 'Spend 4 M€ to draw a Building card (Turmoil Mars First)';
+  description: string =
+    'Spend 4 M€ to draw a Building card (Turmoil Mars First)';
   isDefault = false;
 
   canAct(player: Player) {
-    return player.canAfford(4) && player.politicalAgendasActionUsedCount < POLITICAL_AGENDAS_MAX_ACTION_USES;
+    return (
+      player.canAfford(4) &&
+      player.politicalAgendasActionUsedCount < POLITICAL_AGENDAS_MAX_ACTION_USES
+    );
   }
 
   action(player: Player) {
@@ -94,16 +112,14 @@ class MarsFirstPolicy04 implements Policy {
     game.log('${0} used Turmoil Mars First action', (b) => b.player(player));
     player.politicalAgendasActionUsedCount += 1;
 
-    game.defer(new SelectHowToPayDeferred(
-      player,
-      4,
-      {
+    game.defer(
+      new SelectHowToPayDeferred(player, 4, {
         title: 'Select how to pay for Turmoil Mars First action',
         afterPay: () => {
           player.drawCard(1, {tag: Tags.BUILDING});
         },
-      },
-    ));
+      })
+    );
 
     return undefined;
   }

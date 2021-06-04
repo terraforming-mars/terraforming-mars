@@ -4,19 +4,20 @@ import {Player} from '../../../src/Player';
 import {Resources} from '../../../src/Resources';
 import {TestPlayers} from '../../TestPlayers';
 
-describe('GHGFactories', function() {
-  let card : GHGFactories; let player : Player;
+describe('GHGFactories', function () {
+  let card: GHGFactories;
+  let player: Player;
 
-  beforeEach(function() {
+  beforeEach(function () {
     card = new GHGFactories();
     player = TestPlayers.BLUE.newPlayer();
   });
 
-  it('Can\'t play', function() {
+  it("Can't play", function () {
     expect(card.canPlay(player)).is.not.true;
   });
 
-  it('Should play', function() {
+  it('Should play', function () {
     player.addProduction(Resources.ENERGY, 1);
     expect(card.canPlay(player)).is.true;
     card.play(player);

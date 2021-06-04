@@ -8,8 +8,8 @@ import {PartyName} from '../../../src/turmoil/parties/PartyName';
 import {TestingUtils} from '../../TestingUtils';
 import {TestPlayers} from '../../TestPlayers';
 
-describe('ParliamentHall', function() {
-  it('Should play', function() {
+describe('ParliamentHall', function () {
+  it('Should play', function () {
     const card = new ParliamentHall();
     const card2 = new DeepWellHeating();
     const card3 = new MartianRails();

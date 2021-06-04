@@ -1,4 +1,3 @@
-
 import {Card} from '../Card';
 import {CardType} from '../CardType';
 import {Tags} from '../Tags';
@@ -19,7 +18,8 @@ export class EnergySaving extends Card implements IProjectCard {
 
       metadata: {
         cardNumber: '189',
-        description: 'Increase your Energy production 1 step for each City tile in play.',
+        description:
+          'Increase your Energy production 1 step for each City tile in play.',
         renderData: CardRenderer.builder((b) => {
           b.production((pb) => pb.energy(1).slash().city(Size.SMALL).any);
         }),
@@ -28,7 +28,9 @@ export class EnergySaving extends Card implements IProjectCard {
   }
 
   public play(player: Player) {
-    player.addProduction(Resources.ENERGY, player.game.getCitiesInPlay(), {log: true});
+    player.addProduction(Resources.ENERGY, player.game.getCitiesInPlay(), {
+      log: true,
+    });
     return undefined;
   }
 }

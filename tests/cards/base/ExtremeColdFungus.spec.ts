@@ -8,7 +8,10 @@ import {Player} from '../../../src/Player';
 import {TestPlayers} from '../../TestPlayers';
 
 describe('ExtremeColdFungus', () => {
-  let card : ExtremeColdFungus; let player : Player; let player2 : Player; let game : Game;
+  let card: ExtremeColdFungus;
+  let player: Player;
+  let player2: Player;
+  let game: Game;
 
   beforeEach(() => {
     card = new ExtremeColdFungus();
@@ -40,11 +43,11 @@ describe('ExtremeColdFungus', () => {
     expect(action instanceof OrOptions).is.true;
     expect(action!.options).has.lengthOf(2);
 
-        action!.options[0].cb();
-        expect(player.getResourcesOnCard(tardigrades)).to.eq(2);
+    action!.options[0].cb();
+    expect(player.getResourcesOnCard(tardigrades)).to.eq(2);
 
-        action!.options[1].cb();
-        expect(player.plants).to.eq(1);
+    action!.options[1].cb();
+    expect(player.plants).to.eq(1);
   });
 
   it('Should act - multiple targets', () => {
@@ -56,10 +59,10 @@ describe('ExtremeColdFungus', () => {
     expect(action instanceof OrOptions).is.true;
     expect(action!.options).has.lengthOf(2);
 
-        action!.options[0].cb([tardigrades]);
-        expect(player.getResourcesOnCard(tardigrades)).to.eq(2);
+    action!.options[0].cb([tardigrades]);
+    expect(player.getResourcesOnCard(tardigrades)).to.eq(2);
 
-        action!.options[0].cb([ants]);
-        expect(player.getResourcesOnCard(ants)).to.eq(2);
+    action!.options[0].cb([ants]);
+    expect(player.getResourcesOnCard(ants)).to.eq(2);
   });
 });

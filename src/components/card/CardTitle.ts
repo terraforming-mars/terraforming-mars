@@ -18,13 +18,13 @@ export const CardTitle = Vue.component('CardTitle', {
     CardCorporationLogo,
   },
   methods: {
-    isCorporation: function(): boolean {
+    isCorporation: function (): boolean {
       return this.type === CardType.CORPORATION;
     },
-    isPrelude: function(): boolean {
+    isPrelude: function (): boolean {
       return this.type === CardType.PRELUDE;
     },
-    getClasses: function(title: string): string {
+    getClasses: function (title: string): string {
       const classes: Array<String> = ['card-title'];
 
       if (this.type === CardType.AUTOMATED) {
@@ -35,7 +35,10 @@ export const CardTitle = Vue.component('CardTitle', {
         classes.push('background-color-events');
       } else if (this.type === CardType.PRELUDE) {
         classes.push('background-color-prelude');
-      } else if (this.type === CardType.STANDARD_PROJECT || this.type === CardType.STANDARD_ACTION) {
+      } else if (
+        this.type === CardType.STANDARD_PROJECT ||
+        this.type === CardType.STANDARD_ACTION
+      ) {
         classes.push('background-color-standard-project');
       }
 
@@ -51,7 +54,10 @@ export const CardTitle = Vue.component('CardTitle', {
     },
     getMainClasses() {
       const classes: Array<String> = ['card-title'];
-      if (this.type === CardType.STANDARD_PROJECT || this.type === CardType.STANDARD_ACTION) {
+      if (
+        this.type === CardType.STANDARD_PROJECT ||
+        this.type === CardType.STANDARD_ACTION
+      ) {
         classes.push('card-title-standard-project');
       }
       return classes.join(' ');

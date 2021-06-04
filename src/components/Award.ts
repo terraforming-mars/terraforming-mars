@@ -13,7 +13,7 @@ export const Award = Vue.component('award', {
       default: true,
     },
   },
-  data: function() {
+  data: function () {
     const showDescription: {[x: string]: boolean} = {};
     for (const award of this.awards_list) {
       showDescription[award.award.name] = false;
@@ -24,33 +24,32 @@ export const Award = Vue.component('award', {
     };
   },
   methods: {
-    getNameCss: function(awardName: string): string {
-      return (
-        'ma-name ma-name--' + awardName.replace(/ /g, '-').toLowerCase()
-      );
+    getNameCss: function (awardName: string): string {
+      return 'ma-name ma-name--' + awardName.replace(/ /g, '-').toLowerCase();
     },
-    shouldShow: function(award: FundedAwardModel): boolean {
+    shouldShow: function (award: FundedAwardModel): boolean {
       return this.showDescription[award.award.name] === true;
     },
-    shouldShowList: function(): boolean {
+    shouldShowList: function (): boolean {
       return this.showList;
     },
-    toggle: function(award: FundedAwardModel) {
-      this.showDescription[award.award.name] = !this.showDescription[award.award.name];
+    toggle: function (award: FundedAwardModel) {
+      this.showDescription[award.award.name] =
+        !this.showDescription[award.award.name];
     },
-    toggleList: function() {
+    toggleList: function () {
       this.showList = !this.showList;
     },
-    getAvailableAwardSpots: function(): Array<number> {
+    getAvailableAwardSpots: function (): Array<number> {
       let numFundedAwards = 0;
-      this.awards_list.forEach((award)=>{
+      this.awards_list.forEach((award) => {
         if (award.player_name) {
           numFundedAwards++;
         }
       });
       return AWARD_COSTS.slice(numFundedAwards);
     },
-    isLearnerModeOn: function(): boolean {
+    isLearnerModeOn: function (): boolean {
       return PreferencesManager.loadBoolean('learner_mode');
     },
   },

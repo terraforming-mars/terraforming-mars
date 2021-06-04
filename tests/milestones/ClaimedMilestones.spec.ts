@@ -1,11 +1,14 @@
 import {expect} from 'chai';
-import {deserializeClaimedMilestones, serializeClaimedMilestones} from '../../src/milestones/ClaimedMilestone';
+import {
+  deserializeClaimedMilestones,
+  serializeClaimedMilestones,
+} from '../../src/milestones/ClaimedMilestone';
 import {ClaimedMilestone} from '../../src/milestones/ClaimedMilestone';
 import {Diversifier} from '../../src/milestones/Diversifier';
 import {Generalist} from '../../src/milestones/Generalist';
 import {TestPlayers} from '../TestPlayers';
 
-describe('ClaimedMilestones', function() {
+describe('ClaimedMilestones', function () {
   it('test serialization', () => {
     const bluePlayer = TestPlayers.BLUE.newPlayer();
     const redPlayer = TestPlayers.RED.newPlayer();
@@ -13,25 +16,25 @@ describe('ClaimedMilestones', function() {
       {
         milestone: new Diversifier(),
         player: bluePlayer,
-      }, {
+      },
+      {
         milestone: new Generalist(),
         player: redPlayer,
       },
     ];
     const serialized = serializeClaimedMilestones(claimedMilestones);
-    expect(serialized).to.deep.eq(
-      [
-        {'name': 'Diversifier', 'playerId': 'blue-id'},
-        {'name': 'Generalist', 'playerId': 'red-id'},
-      ],
-    );
+    expect(serialized).to.deep.eq([
+      {'name': 'Diversifier', 'playerId': 'blue-id'},
+      {'name': 'Generalist', 'playerId': 'red-id'},
+    ]);
 
     const diversifier = new Diversifier();
     const generalist = new Generalist();
     const deserialized = deserializeClaimedMilestones(
       serialized,
       [redPlayer, bluePlayer],
-      [diversifier, generalist]);
+      [diversifier, generalist]
+    );
     expect(deserialized[0].milestone === diversifier);
     expect(deserialized[0].player === bluePlayer);
     expect(deserialized[1].milestone === generalist);

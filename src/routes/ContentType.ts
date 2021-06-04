@@ -1,4 +1,7 @@
-const CONTENT_TYPES: Map<string /* file extension */, string /* content type*/> = new Map([
+const CONTENT_TYPES: Map<
+  string /* file extension */,
+  string /* content type*/
+> = new Map([
   ['ico', 'image/x-icon'],
   ['css', 'text/css'],
   ['html', 'text/html; charset=utf-8'],

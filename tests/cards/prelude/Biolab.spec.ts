@@ -4,8 +4,8 @@ import {Game} from '../../../src/Game';
 import {Resources} from '../../../src/Resources';
 import {TestPlayers} from '../../TestPlayers';
 
-describe('Biolab', function() {
-  it('Should play', function() {
+describe('Biolab', function () {
+  it('Should play', function () {
     const card = new Biolab();
     const player = TestPlayers.BLUE.newPlayer();
     Game.newInstance('foobar', [player], player);

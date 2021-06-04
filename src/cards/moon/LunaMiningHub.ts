@@ -14,42 +14,71 @@ import {Size} from '../render/Size';
 
 export class LunaMiningHub extends MoonCard {
   constructor() {
-    super({
-      name: CardName.LUNA_MINING_HUB,
-      cardType: CardType.AUTOMATED,
-      tags: [Tags.BUILDING],
-      cost: 16,
-      productionBox: Units.of({steel: 1, titanium: 1}),
+    super(
+      {
+        name: CardName.LUNA_MINING_HUB,
+        cardType: CardType.AUTOMATED,
+        tags: [Tags.BUILDING],
+        cost: 16,
+        productionBox: Units.of({steel: 1, titanium: 1}),
 
-      requirements: CardRequirements.builder((b) => b.miningRate(5)),
-      metadata: {
-        cardNumber: 'M14',
-        description: {
-          text: '2 VP PER MINING TILE ADJACENT TO THIS TILE.',
-          align: 'left',
+        requirements: CardRequirements.builder((b) => b.miningRate(5)),
+        metadata: {
+          cardNumber: 'M14',
+          description: {
+            text: '2 VP PER MINING TILE ADJACENT TO THIS TILE.',
+            align: 'left',
+          },
+          renderData: CardRenderer.builder((b) => {
+            b.text(
+              'Requires a Mining Rate of 5 or higher.',
+              Size.TINY,
+              false,
+              false
+            ).br;
+            b
+              .minus()
+              .steel(1)
+              .minus()
+              .titanium(1)
+              .production((pb) => pb.steel(1).titanium(1)).br;
+            b.text(
+              'Spend 1 steel and 1 titanium and raise your steel and titanium production 1 step.',
+              Size.TINY,
+              false,
+              false
+            ).br;
+            b.tile(TileType.LUNA_MINING_HUB, true).moonMiningRate({
+              size: Size.SMALL,
+            });
+            b.text(
+              'Place this tile on the Moon and raise the Mining Rate 1 step.',
+              Size.TINY,
+              false,
+              false
+            );
+          }),
+          victoryPoints: CardRenderDynamicVictoryPoints.moonMiningTile(2, true),
         },
-        renderData: CardRenderer.builder((b) => {
-          b.text('Requires a Mining Rate of 5 or higher.', Size.TINY, false, false).br;
-          b.minus().steel(1).minus().titanium(1).production((pb) => pb.steel(1).titanium(1)).br;
-          b.text('Spend 1 steel and 1 titanium and raise your steel and titanium production 1 step.', Size.TINY, false, false).br;
-          b.tile(TileType.LUNA_MINING_HUB, true).moonMiningRate({size: Size.SMALL});
-          b.text('Place this tile on the Moon and raise the Mining Rate 1 step.', Size.TINY, false, false);
-        }),
-        victoryPoints: CardRenderDynamicVictoryPoints.moonMiningTile(2, true),
       },
-    }, {
-      reserveUnits: Units.of({titanium: 1, steel: 1}),
-    });
-  };
+      {
+        reserveUnits: Units.of({titanium: 1, steel: 1}),
+      }
+    );
+  }
 
   public play(player: Player) {
     super.play(player);
-    player.game.defer(new PlaceSpecialMoonTile(
-      player, {
-        tileType: TileType.LUNA_MINING_HUB,
-        card: this.name,
-      },
-      'Select a space for Luna Mining Hub.'));
+    player.game.defer(
+      new PlaceSpecialMoonTile(
+        player,
+        {
+          tileType: TileType.LUNA_MINING_HUB,
+          card: this.name,
+        },
+        'Select a space for Luna Mining Hub.'
+      )
+    );
     MoonExpansion.raiseMiningRate(player);
     return undefined;
   }
@@ -59,7 +88,9 @@ export class LunaMiningHub extends MoonCard {
     const usedSpace = moonData.moon.getSpaceByTileCard(this.name);
     if (usedSpace !== undefined) {
       const adjacentSpaces = moonData.moon.getAdjacentSpaces(usedSpace);
-      const adjacentMines = adjacentSpaces.filter((s) => MoonExpansion.spaceHasType(s, TileType.MOON_MINE));
+      const adjacentMines = adjacentSpaces.filter((s) =>
+        MoonExpansion.spaceHasType(s, TileType.MOON_MINE)
+      );
       return 2 * adjacentMines.length;
     }
     return 0;

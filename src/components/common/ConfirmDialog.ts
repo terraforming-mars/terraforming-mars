@@ -13,30 +13,32 @@ export const ConfirmDialog = Vue.component('confirm-dialog', {
       default: false,
     },
   },
-  data: function() {
+  data: function () {
     return {
       hide: false as unknown[] | boolean,
     };
   },
   mixins: [TranslateMixin],
   watch: {
-    hide: function() {
+    hide: function () {
       this.$emit('hide', this.hide);
     },
   },
   methods: {
-    accept: function() {
+    accept: function () {
       this.$emit('accept');
     },
-    dismiss: function() {
+    dismiss: function () {
       this.$emit('dismiss');
     },
-    show: function() {
+    show: function () {
       (this.$refs['dialog'] as HTMLDialogElement).showModal();
     },
   },
-  mounted: function() {
-    (dialogPolyfill.default || dialogPolyfill).registerDialog(this.$refs['dialog']);
+  mounted: function () {
+    (dialogPolyfill.default || dialogPolyfill).registerDialog(
+      this.$refs['dialog']
+    );
   },
   template: `<dialog ref="dialog">
       <form method="dialog">
@@ -50,4 +52,3 @@ export const ConfirmDialog = Vue.component('confirm-dialog', {
       </form>
     </dialog>`,
 });
-

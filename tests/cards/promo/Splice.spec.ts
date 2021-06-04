@@ -9,17 +9,19 @@ import {OrOptions} from '../../../src/inputs/OrOptions';
 import {Player} from '../../../src/Player';
 import {TestPlayers} from '../../TestPlayers';
 
-describe('Splice', function() {
-  let card : Splice; let player : Player; let player2 : Player;
+describe('Splice', function () {
+  let card: Splice;
+  let player: Player;
+  let player2: Player;
 
-  beforeEach(function() {
+  beforeEach(function () {
     card = new Splice();
     player = TestPlayers.BLUE.newPlayer();
     player2 = TestPlayers.RED.newPlayer();
     Game.newInstance('foobar', [player, player2], player);
   });
 
-  it('Should play', function() {
+  it('Should play', function () {
     const card2 = new Tardigrades();
     const play = card.play();
     expect(play).is.undefined;
@@ -29,7 +31,7 @@ describe('Splice', function() {
     player2.playedCards.push(card2);
     const action = card.onCardPlayed(player2, card2);
     expect(action instanceof OrOptions).is.true;
-    if ( ! (action instanceof OrOptions)) return;
+    if (!(action instanceof OrOptions)) return;
 
     expect(action.options).has.lengthOf(2);
     const orOptions = action.options[0] as OrOptions;
@@ -39,7 +41,7 @@ describe('Splice', function() {
     expect(player.megaCredits).to.eq(2);
   });
 
-  it('Should play with multiple microbe tags', function() {
+  it('Should play with multiple microbe tags', function () {
     const card2 = new PharmacyUnion();
     const play = card.play();
     player.corporationCard = card;
@@ -54,7 +56,7 @@ describe('Splice', function() {
     expect(player2.megaCredits).to.eq(4);
   });
 
-  it('Should grant Recyclon a Microbe or 2MC', function() {
+  it('Should grant Recyclon a Microbe or 2MC', function () {
     const card2 = new Recyclon();
     // Player 1 picks Splice
     const pi = player.getWaitingFor() as AndOptions;

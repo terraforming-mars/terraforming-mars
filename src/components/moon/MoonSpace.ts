@@ -25,13 +25,12 @@ export const MoonSpace = Vue.component('moon-space', {
       type: Boolean,
     },
   },
-  data: function() {
+  data: function () {
     return {};
   },
-  components: {
-  },
+  components: {},
   methods: {
-    getVerboseTitle: function(tileType: TileType | undefined): string {
+    getVerboseTitle: function (tileType: TileType | undefined): string {
       let ret: string = '';
       if (tileType === TileType.LUNA_TRADE_STATION) {
         ret = 'Luna Trade Station';
@@ -42,7 +41,7 @@ export const MoonSpace = Vue.component('moon-space', {
       }
       return $t(ret);
     },
-    getMainClass: function(): string {
+    getMainClass: function (): string {
       let css = 'board-space moon-space-' + this.space.id.toString();
       if (this.is_selectable) {
         css += ' board-space-selectable';
@@ -50,18 +49,18 @@ export const MoonSpace = Vue.component('moon-space', {
       const tileType = this.space.tileType;
       if (tileType !== undefined) {
         switch (this.space.tileType) {
-        case TileType.MOON_COLONY:
-          css += ' board-space-tile--colony';
-          break;
-        case TileType.MOON_ROAD:
-          css += ' board-space-tile--road';
-          break;
-        case TileType.MOON_MINE:
-          css += ' board-space-tile--mine';
-          break;
-        default:
-          const cssClass = tileTypeToCssClass.get(tileType);
-          css += ' board-space-tile--' + cssClass;
+          case TileType.MOON_COLONY:
+            css += ' board-space-tile--colony';
+            break;
+          case TileType.MOON_ROAD:
+            css += ' board-space-tile--road';
+            break;
+          case TileType.MOON_MINE:
+            css += ' board-space-tile--mine';
+            break;
+          default:
+            const cssClass = tileTypeToCssClass.get(tileType);
+            css += ' board-space-tile--' + cssClass;
         }
       } else {
         if (this.space.spaceType === 'lunar_mine') {

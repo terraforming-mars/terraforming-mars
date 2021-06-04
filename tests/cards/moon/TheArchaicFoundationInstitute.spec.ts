@@ -49,7 +49,6 @@ describe('TheArchaicFoundationInstitute', () => {
     expect(card.resourceCount).eq(1);
     expect(player.getTerraformRating()).eq(15);
 
-
     card.onCardPlayed(player, new Habitat14());
     expect(card.resourceCount).eq(2);
     expect(player.getTerraformRating()).eq(15);
@@ -60,4 +59,3 @@ describe('TheArchaicFoundationInstitute', () => {
     expect(player.getTerraformRating()).eq(16);
   });
 });
-

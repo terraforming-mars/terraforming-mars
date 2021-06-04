@@ -10,7 +10,10 @@ import {IActionCard, ICard} from '../ICard';
 import {Card} from '../Card';
 import {SelectCard} from '../../inputs/SelectCard';
 
-export class DarksideObservatory extends Card implements IProjectCard, IActionCard {
+export class DarksideObservatory
+  extends Card
+  implements IProjectCard, IActionCard
+{
   constructor() {
     super({
       name: CardName.DARKSIDE_OBSERVATORY,
@@ -21,9 +24,12 @@ export class DarksideObservatory extends Card implements IProjectCard, IActionCa
       metadata: {
         cardNumber: 'M75',
         renderData: CardRenderer.builder((b) => {
-          b.action('Add 1 Science to ANY card [EXCEPT those giving 2 VP or more per science resource.]', (ab) => {
-            ab.empty().startAction.science(1).asterix();
-          }).br;
+          b.action(
+            'Add 1 Science to ANY card [EXCEPT those giving 2 VP or more per science resource.]',
+            (ab) => {
+              ab.empty().startAction.science(1).asterix();
+            }
+          ).br;
           b.or().br;
           b.action('Add 2 Data to ANY card.', (ab) => {
             ab.empty().startAction.data().data();
@@ -31,14 +37,21 @@ export class DarksideObservatory extends Card implements IProjectCard, IActionCa
         }),
       },
     });
-  };
+  }
 
   private include(card: ICard) {
-    return card.resourceType === ResourceType.DATA || MoonCards.scienceCardsWithLessThan2VP.has(card.name);
+    return (
+      card.resourceType === ResourceType.DATA ||
+      MoonCards.scienceCardsWithLessThan2VP.has(card.name)
+    );
   }
 
   public canAct(player: Player) {
-    return player.playedCards.some((c) => this.include(c)) || (player.corporationCard !== undefined && this.include(player.corporationCard));
+    return (
+      player.playedCards.some((c) => this.include(c)) ||
+      (player.corporationCard !== undefined &&
+        this.include(player.corporationCard))
+    );
   }
 
   private addResource(card: ICard, player: Player): void {
@@ -51,8 +64,13 @@ export class DarksideObservatory extends Card implements IProjectCard, IActionCa
   }
 
   public action(player: Player) {
-    const playableCards: Array<ICard> = player.playedCards.filter((c) => this.include(c));
-    if (player.corporationCard !== undefined && this.include(player.corporationCard)) {
+    const playableCards: Array<ICard> = player.playedCards.filter((c) =>
+      this.include(c)
+    );
+    if (
+      player.corporationCard !== undefined &&
+      this.include(player.corporationCard)
+    ) {
       playableCards.push(player.corporationCard);
     }
 
@@ -63,7 +81,8 @@ export class DarksideObservatory extends Card implements IProjectCard, IActionCa
       (card) => {
         this.addResource(card[0], player);
         return undefined;
-      });
+      }
+    );
   }
 
   public play() {

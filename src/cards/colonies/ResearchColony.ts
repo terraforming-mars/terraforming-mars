@@ -20,13 +20,16 @@ export class ResearchColony extends Card implements IProjectCard {
         renderData: CardRenderer.builder((b) => {
           b.colonies(1).asterix().nbsp.cards(2);
         }),
-        description: 'Place a colony. MAY BE PLACED WHERE YOU ALREADY HAVE A COLONY. Draw 2 cards.',
+        description:
+          'Place a colony. MAY BE PLACED WHERE YOU ALREADY HAVE A COLONY. Draw 2 cards.',
       },
     });
   }
 
   public play(player: Player) {
-    player.game.defer(new BuildColony(player, true, 'Select colony for Research Colony'));
+    player.game.defer(
+      new BuildColony(player, true, 'Select colony for Research Colony')
+    );
     player.drawCard(2);
     return undefined;
   }

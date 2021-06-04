@@ -1,4 +1,3 @@
-
 import Vue from 'vue';
 import {Button} from '../components/common/Button';
 import {ColorWithNeutral} from '../Color';
@@ -25,7 +24,7 @@ export const SelectPartyPlayer = Vue.component('select-party-player', {
       type: Boolean,
     },
   },
-  data: function() {
+  data: function () {
     return {
       selectedPlayer: undefined as ColorWithNeutral | undefined,
     };
@@ -36,7 +35,7 @@ export const SelectPartyPlayer = Vue.component('select-party-player', {
     'select-player-row': SelectPlayerRow,
   },
   methods: {
-    saveData: function() {
+    saveData: function () {
       const result: string[][] = [];
       result.push([]);
       if (this.selectedPlayer !== undefined) {
@@ -56,4 +55,3 @@ export const SelectPartyPlayer = Vue.component('select-party-player', {
   <Button v-if="showsave === true" size="big" :onClick="saveData" :title="$t(playerinput.buttonLabel)" />
 </div>`,
 });
-

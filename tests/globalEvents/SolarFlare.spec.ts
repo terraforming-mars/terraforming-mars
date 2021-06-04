@@ -7,8 +7,8 @@ import {Kelvinists} from '../../src/turmoil/parties/Kelvinists';
 import {Turmoil} from '../../src/turmoil/Turmoil';
 import {TestPlayers} from '../TestPlayers';
 
-describe('SolarFlare', function() {
-  it('resolve play', function() {
+describe('SolarFlare', function () {
+  it('resolve play', function () {
     const card = new SolarFlare();
     const player = TestPlayers.BLUE.newPlayer();
     const player2 = TestPlayers.RED.newPlayer();
@@ -16,7 +16,11 @@ describe('SolarFlare', function() {
     const turmoil = Turmoil.newInstance(game);
 
     player.playedCards.push(new SpaceStation());
-    player2.playedCards.push(new SpaceStation(), new SpaceStation(), new SpaceStation());
+    player2.playedCards.push(
+      new SpaceStation(),
+      new SpaceStation(),
+      new SpaceStation()
+    );
     player.megaCredits = 10;
     player2.megaCredits = 10;
 

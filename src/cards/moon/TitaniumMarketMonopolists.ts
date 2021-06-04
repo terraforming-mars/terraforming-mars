@@ -22,14 +22,25 @@ export class TitaniumMarketMonopolists extends MarketCard {
           cardNumber: 'M29',
           renderData: CardRenderer.builder((b) => {
             b.action('Spend 2X M€ to gain X titanium [max 8 M€]', (eb) => {
-              eb.megacredits(2).multiplier.startAction.text('X').titanium(1).asterix();
+              eb.megacredits(2)
+                .multiplier.startAction.text('X')
+                .titanium(1)
+                .asterix();
             }).br;
             b.or().br;
-            b.action('Spend X titanium to gain 4X M€ [max 4 titanium].', (eb) => {
-              eb.text('X').titanium(1).startAction.text('X').megacredits(4).asterix();
-            });
+            b.action(
+              'Spend X titanium to gain 4X M€ [max 4 titanium].',
+              (eb) => {
+                eb.text('X')
+                  .titanium(1)
+                  .startAction.text('X')
+                  .megacredits(4)
+                  .asterix();
+              }
+            );
           }),
         },
-      });
+      }
+    );
   }
 }

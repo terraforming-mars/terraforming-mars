@@ -10,17 +10,20 @@ import {SpaceType} from '../../../src/SpaceType';
 import {TestingUtils} from '../../TestingUtils';
 import {TestPlayers} from '../../TestPlayers';
 
-describe('Flooding', function() {
-  let card : Flooding; let player : TestPlayer; let player2 : TestPlayer; let game : Game;
+describe('Flooding', function () {
+  let card: Flooding;
+  let player: TestPlayer;
+  let player2: TestPlayer;
+  let game: Game;
 
-  beforeEach(function() {
+  beforeEach(function () {
     card = new Flooding();
     player = TestPlayers.BLUE.newPlayer();
     player2 = TestPlayers.RED.newPlayer();
     game = Game.newInstance('foobar', [player, player2], player);
   });
 
-  it('Should play', function() {
+  it('Should play', function () {
     const oceans = game.board.getAvailableSpacesForOcean(player);
     const action = card.play(player);
     expect(action instanceof SelectSpace).is.true;
@@ -39,7 +42,8 @@ describe('Flooding', function() {
     expect(subAction instanceof OrOptions).is.true;
     expect(subAction!.options).has.lengthOf(2);
     expect(subAction!.options[1].cb()).is.undefined;
-    const subActionSelectPlayer: SelectPlayer = subAction!.options[0] as SelectPlayer;
+    const subActionSelectPlayer: SelectPlayer = subAction!
+      .options[0] as SelectPlayer;
     expect(subActionSelectPlayer.players).has.lengthOf(1);
     expect(subActionSelectPlayer.players[0]).to.eq(player2);
 
@@ -47,11 +51,14 @@ describe('Flooding', function() {
     subActionSelectPlayer.cb(player2);
     expect(player2.megaCredits).to.eq(0);
 
-    player.victoryPointsBreakdown.setVictoryPoints('victoryPoints', card.getVictoryPoints());
+    player.victoryPointsBreakdown.setVictoryPoints(
+      'victoryPoints',
+      card.getVictoryPoints()
+    );
     expect(player.victoryPointsBreakdown.victoryPoints).to.eq(-1);
   });
 
-  it('Does not suggest to remove money from yourself', function() {
+  it('Does not suggest to remove money from yourself', function () {
     const oceanSpaces = game.board.getAvailableSpacesForOcean(player);
     const action = card.play(player);
 
@@ -62,15 +69,18 @@ describe('Flooding', function() {
     const subActions: OrOptions = action!.cb(oceanSpaces[0]) as OrOptions;
     expect(subActions.options).has.lengthOf(2);
 
-    const subActionSelectPlayer: SelectPlayer = subActions.options[0] as SelectPlayer;
+    const subActionSelectPlayer: SelectPlayer = subActions
+      .options[0] as SelectPlayer;
     expect(subActionSelectPlayer.players).has.lengthOf(1);
     expect(subActionSelectPlayer.players[0]).to.eq(player2);
   });
 
-  it('Does not suggest player who played Land Claim', function() {
+  it('Does not suggest player who played Land Claim', function () {
     const landClaim = new LandClaim();
     const landClaimAction = landClaim.play(player2);
-    const adjacentSpace = game.board.getAvailableSpacesOnLand(player).filter((space) => space.id === '03')[0];
+    const adjacentSpace = game.board
+      .getAvailableSpacesOnLand(player)
+      .filter((space) => space.id === '03')[0];
 
     landClaimAction.cb(adjacentSpace);
     expect(adjacentSpace.player).to.eq(player2);
@@ -81,7 +91,7 @@ describe('Flooding', function() {
     expect(action.cb(oceanSpaces[0])).is.undefined;
   });
 
-  it('Does not suggest to remove money if oceans are already maxed', function() {
+  it('Does not suggest to remove money if oceans are already maxed', function () {
     TestingUtils.maxOutOceans(player);
     expect(card.canPlay(player)).is.true;
 

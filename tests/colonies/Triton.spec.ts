@@ -4,10 +4,13 @@ import {Game} from '../../src/Game';
 import {Player} from '../../src/Player';
 import {TestPlayers} from '../TestPlayers';
 
-describe('Triton', function() {
-  let triton: Triton; let player: Player; let player2: Player; let game: Game;
+describe('Triton', function () {
+  let triton: Triton;
+  let player: Player;
+  let player2: Player;
+  let game: Game;
 
-  beforeEach(function() {
+  beforeEach(function () {
     triton = new Triton();
     player = TestPlayers.BLUE.newPlayer();
     player2 = TestPlayers.RED.newPlayer();
@@ -16,18 +19,18 @@ describe('Triton', function() {
     game.colonies.push(triton);
   });
 
-  it('Should build', function() {
+  it('Should build', function () {
     triton.addColony(player);
     expect(player.titanium).to.eq(3);
   });
 
-  it('Should trade', function() {
+  it('Should trade', function () {
     triton.trade(player);
     expect(player.titanium).to.eq(1);
     expect(player2.titanium).to.eq(0);
   });
 
-  it('Should give trade bonus', function() {
+  it('Should give trade bonus', function () {
     triton.addColony(player);
 
     triton.trade(player2);

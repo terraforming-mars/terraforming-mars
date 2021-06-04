@@ -24,159 +24,233 @@ import {Tags} from '../cards/Tags';
 import {SendDelegateToArea} from '../deferredActions/SendDelegateToArea';
 import {Game} from '../Game';
 
-export enum ShouldIncreaseTrack { YES, NO, ASK }
+export enum ShouldIncreaseTrack {
+  YES,
+  NO,
+  ASK,
+}
 
 export abstract class Colony implements SerializedColony {
-    public abstract name: ColonyName;
-    public abstract description: string;
+  public abstract name: ColonyName;
+  public abstract description: string;
 
-    public isActive: boolean = true;
-    public visitor: undefined | PlayerId = undefined;
-    public colonies: Array<PlayerId> = [];
-    public trackPosition: number = 1;
-    public resourceType?: ResourceType;
+  public isActive: boolean = true;
+  public visitor: undefined | PlayerId = undefined;
+  public colonies: Array<PlayerId> = [];
+  public trackPosition: number = 1;
+  public resourceType?: ResourceType;
 
-    public abstract buildType: ColonyBenefit;
-    public buildQuantity: Array<number> = [1, 1, 1];
-    public buildResource?: Resources;
-    public abstract tradeType: ColonyBenefit;
-    public tradeQuantity: Array<number> = [1, 1, 1, 1, 1, 1, 1];
-    public tradeResource?: Resources | Array<Resources>;
-    public abstract colonyBonusType: ColonyBenefit;
-    public colonyBonusQuantity: number = 1;
-    public colonyBonusResource?: Resources;
-    public shouldIncreaseTrack: ShouldIncreaseTrack = ShouldIncreaseTrack.YES;
+  public abstract buildType: ColonyBenefit;
+  public buildQuantity: Array<number> = [1, 1, 1];
+  public buildResource?: Resources;
+  public abstract tradeType: ColonyBenefit;
+  public tradeQuantity: Array<number> = [1, 1, 1, 1, 1, 1, 1];
+  public tradeResource?: Resources | Array<Resources>;
+  public abstract colonyBonusType: ColonyBenefit;
+  public colonyBonusQuantity: number = 1;
+  public colonyBonusResource?: Resources;
+  public shouldIncreaseTrack: ShouldIncreaseTrack = ShouldIncreaseTrack.YES;
 
-
-    public endGeneration(game: Game): void {
-      if (this.isActive) {
-        this.increaseTrack();
-      }
-      // Syndicate Pirate Raids hook. If it is in effect, then only the syndicate pirate raider will
-      // retrieve their fleets.
-      // See Player.ts for the other half of this effect, and Game.ts which disables it.
-      if (game.syndicatePirateRaider) {
-        if (game.syndicatePirateRaider === this.visitor) {
-          this.visitor = undefined;
-        }
-      } else {
+  public endGeneration(game: Game): void {
+    if (this.isActive) {
+      this.increaseTrack();
+    }
+    // Syndicate Pirate Raids hook. If it is in effect, then only the syndicate pirate raider will
+    // retrieve their fleets.
+    // See Player.ts for the other half of this effect, and Game.ts which disables it.
+    if (game.syndicatePirateRaider) {
+      if (game.syndicatePirateRaider === this.visitor) {
         this.visitor = undefined;
       }
+    } else {
+      this.visitor = undefined;
+    }
+  }
+
+  public increaseTrack(value: number = 1): void {
+    this.trackPosition = Math.min(
+      this.trackPosition + value,
+      MAX_COLONY_TRACK_POSITION
+    );
+  }
+
+  public decreaseTrack(value: number = 1): void {
+    this.trackPosition = Math.max(
+      this.trackPosition - value,
+      this.colonies.length
+    );
+  }
+
+  public isColonyFull(): boolean {
+    return this.colonies.length >= 3;
+  }
+
+  public addColony(player: Player): void {
+    player.game.log('${0} built a colony on ${1}', (b) =>
+      b.player(player).colony(this)
+    );
+
+    this.giveBonus(
+      player,
+      this.buildType,
+      this.buildQuantity[this.colonies.length],
+      this.buildResource
+    );
+
+    this.colonies.push(player.id);
+    if (this.trackPosition < this.colonies.length) {
+      this.trackPosition = this.colonies.length;
     }
 
-    public increaseTrack(value: number = 1): void {
-      this.trackPosition = Math.min(this.trackPosition + value, MAX_COLONY_TRACK_POSITION);
+    // Poseidon hook
+    const poseidon = player.game
+      .getPlayers()
+      .find((player) => player.isCorporation(CardName.POSEIDON));
+    if (poseidon !== undefined) {
+      poseidon.addProduction(Resources.MEGACREDITS, 1);
+    }
+  }
+
+  public trade(
+    player: Player,
+    bonusTradeOffset: number = 0,
+    usesTradeFleet: boolean = true,
+    decreaseTrackAfterTrade: boolean = true
+  ): void {
+    const tradeOffset = player.colonyTradeOffset + bonusTradeOffset;
+    const maxTrackPosition = Math.min(
+      this.trackPosition + tradeOffset,
+      MAX_COLONY_TRACK_POSITION
+    );
+    const steps = maxTrackPosition - this.trackPosition;
+
+    if (steps === 0 || this.shouldIncreaseTrack === ShouldIncreaseTrack.NO) {
+      // Don't increase
+      this.handleTrade(player, usesTradeFleet, decreaseTrackAfterTrade);
+      return;
     }
 
-    public decreaseTrack(value: number = 1): void {
-      this.trackPosition = Math.max(this.trackPosition - value, this.colonies.length);
+    if (
+      this.shouldIncreaseTrack === ShouldIncreaseTrack.YES ||
+      (this.tradeResource !== undefined &&
+        this.tradeResource[this.trackPosition] ===
+          this.tradeResource[maxTrackPosition])
+    ) {
+      // No point in asking the player, just increase it
+      this.increaseTrack(steps);
+      LogHelper.logColonyTrackIncrease(player, this, steps);
+      this.handleTrade(player, usesTradeFleet, decreaseTrackAfterTrade);
+      return;
     }
 
-    public isColonyFull(): boolean {
-      return this.colonies.length >= 3;
+    // Ask the player if they want to increase the track
+    player.game.defer(
+      new IncreaseColonyTrack(player, this, steps, () =>
+        this.handleTrade(player, usesTradeFleet, decreaseTrackAfterTrade)
+      )
+    );
+  }
+
+  private handleTrade(
+    player: Player,
+    usesTradeFleet: boolean,
+    decreaseTrackAfterTrade: boolean,
+    giveColonyBonuses: boolean = true
+  ) {
+    const resource = Array.isArray(this.tradeResource)
+      ? this.tradeResource[this.trackPosition]
+      : this.tradeResource;
+
+    this.giveBonus(
+      player,
+      this.tradeType,
+      this.tradeQuantity[this.trackPosition],
+      resource
+    );
+
+    if (giveColonyBonuses) {
+      player.game.defer(new GiveColonyBonus(player, this));
     }
 
-    public addColony(player: Player): void {
-      player.game.log('${0} built a colony on ${1}', (b) => b.player(player).colony(this));
-
-      this.giveBonus(player, this.buildType, this.buildQuantity[this.colonies.length], this.buildResource);
-
-      this.colonies.push(player.id);
-      if (this.trackPosition < this.colonies.length) {
-        this.trackPosition = this.colonies.length;
-      }
-
-      // Poseidon hook
-      const poseidon = player.game.getPlayers().find((player) => player.isCorporation(CardName.POSEIDON));
-      if (poseidon !== undefined) {
-        poseidon.addProduction(Resources.MEGACREDITS, 1);
-      }
+    if (usesTradeFleet) {
+      this.visitor = player.id;
+      player.tradesThisGeneration++;
     }
 
-    public trade(player: Player, bonusTradeOffset: number = 0, usesTradeFleet: boolean = true, decreaseTrackAfterTrade: boolean = true): void {
-      const tradeOffset = player.colonyTradeOffset + bonusTradeOffset;
-      const maxTrackPosition = Math.min(this.trackPosition + tradeOffset, MAX_COLONY_TRACK_POSITION);
-      const steps = maxTrackPosition - this.trackPosition;
-
-      if (steps === 0 || this.shouldIncreaseTrack === ShouldIncreaseTrack.NO) {
-        // Don't increase
-        this.handleTrade(player, usesTradeFleet, decreaseTrackAfterTrade);
-        return;
-      }
-
-      if (this.shouldIncreaseTrack === ShouldIncreaseTrack.YES || (this.tradeResource !== undefined && this.tradeResource[this.trackPosition] === this.tradeResource[maxTrackPosition])) {
-        // No point in asking the player, just increase it
-        this.increaseTrack(steps);
-        LogHelper.logColonyTrackIncrease(player, this, steps);
-        this.handleTrade(player, usesTradeFleet, decreaseTrackAfterTrade);
-        return;
-      }
-
-      // Ask the player if they want to increase the track
-      player.game.defer(new IncreaseColonyTrack(
-        player,
-        this,
-        steps,
-        () => this.handleTrade(player, usesTradeFleet, decreaseTrackAfterTrade),
-      ));
-    }
-
-    private handleTrade(player: Player, usesTradeFleet: boolean, decreaseTrackAfterTrade: boolean, giveColonyBonuses: boolean = true) {
-      const resource = Array.isArray(this.tradeResource) ? this.tradeResource[this.trackPosition] : this.tradeResource;
-
-      this.giveBonus(player, this.tradeType, this.tradeQuantity[this.trackPosition], resource);
-
-      if (giveColonyBonuses) {
-        player.game.defer(new GiveColonyBonus(player, this));
-      }
-
-      if (usesTradeFleet) {
-        this.visitor = player.id;
-        player.tradesThisGeneration++;
-      }
-
-      if (decreaseTrackAfterTrade) {
-        player.game.defer(new DeferredAction(player, () => {
+    if (decreaseTrackAfterTrade) {
+      player.game.defer(
+        new DeferredAction(player, () => {
           this.trackPosition = this.colonies.length;
           return undefined;
-        }), Priority.DECREASE_COLONY_TRACK_AFTER_TRADE);
-      }
+        }),
+        Priority.DECREASE_COLONY_TRACK_AFTER_TRADE
+      );
     }
+  }
 
-    public giveColonyBonus(player: Player, isGiveColonyBonus: boolean = false): undefined | PlayerInput {
-      return this.giveBonus(player, this.colonyBonusType!, this.colonyBonusQuantity!, this.colonyBonusResource, isGiveColonyBonus);
-    }
+  public giveColonyBonus(
+    player: Player,
+    isGiveColonyBonus: boolean = false
+  ): undefined | PlayerInput {
+    return this.giveBonus(
+      player,
+      this.colonyBonusType!,
+      this.colonyBonusQuantity!,
+      this.colonyBonusResource,
+      isGiveColonyBonus
+    );
+  }
 
+  private giveBonus(
+    player: Player,
+    bonusType: ColonyBenefit,
+    quantity: number,
+    resource: Resources | undefined,
+    isGiveColonyBonus: boolean = false
+  ): undefined | PlayerInput {
+    const game = player.game;
 
-    private giveBonus(player: Player, bonusType: ColonyBenefit, quantity: number, resource: Resources | undefined, isGiveColonyBonus: boolean = false): undefined | PlayerInput {
-      const game = player.game;
-
-      let action: undefined | DeferredAction = undefined;
-      switch (bonusType) {
+    let action: undefined | DeferredAction = undefined;
+    switch (bonusType) {
       case ColonyBenefit.ADD_RESOURCES_TO_CARD:
         const resourceType = this.resourceType!;
-        action = new AddResourcesToCard(player, resourceType, {count: quantity});
+        action = new AddResourcesToCard(player, resourceType, {
+          count: quantity,
+        });
         break;
 
       case ColonyBenefit.ADD_RESOURCES_TO_VENUS_CARD:
-        action = new AddResourcesToCard(player, undefined, {count: quantity, restrictedTag: Tags.VENUS, title: 'Select Venus card to add ' + quantity + ' resource(s)'});
+        action = new AddResourcesToCard(player, undefined, {
+          count: quantity,
+          restrictedTag: Tags.VENUS,
+          title: 'Select Venus card to add ' + quantity + ' resource(s)',
+        });
         break;
 
       case ColonyBenefit.COPY_TRADE:
         const openColonies = game.colonies.filter((colony) => colony.isActive);
-        const coloniesModel: Array<ColonyModel> = game.getColoniesModel(openColonies);
+        const coloniesModel: Array<ColonyModel> =
+          game.getColoniesModel(openColonies);
         action = new DeferredAction(
           player,
-          () => new SelectColony('Select colony to gain trade income from', 'Select', coloniesModel, (colonyName: ColonyName) => {
-            openColonies.forEach((colony) => {
-              if (colony.name === colonyName) {
-                game.log('${0} gained ${1} trade bonus', (b) => b.player(player).colony(colony));
-                colony.handleTrade(player, false, false, false);
+          () =>
+            new SelectColony(
+              'Select colony to gain trade income from',
+              'Select',
+              coloniesModel,
+              (colonyName: ColonyName) => {
+                openColonies.forEach((colony) => {
+                  if (colony.name === colonyName) {
+                    game.log('${0} gained ${1} trade bonus', (b) =>
+                      b.player(player).colony(colony)
+                    );
+                    colony.handleTrade(player, false, false, false);
+                  }
+                  return undefined;
+                });
+                return undefined;
               }
-              return undefined;
-            });
-            return undefined;
-          }),
+            )
         );
         break;
 
@@ -185,12 +259,19 @@ export abstract class Colony implements SerializedColony {
         break;
 
       case ColonyBenefit.DRAW_CARDS_AND_BUY_ONE:
-        action = DrawCards.keepSome(player, 1, {paying: true, logDrawnCard: true});
+        action = DrawCards.keepSome(player, 1, {
+          paying: true,
+          logDrawnCard: true,
+        });
         break;
 
       case ColonyBenefit.DRAW_CARDS_AND_DISCARD_ONE:
         player.drawCard();
-        action = new DiscardCards(player, 1, this.name + ' colony bonus. Select a card to discard');
+        action = new DiscardCards(
+          player,
+          1,
+          this.name + ' colony bonus. Select a card to discard'
+        );
         break;
 
       case ColonyBenefit.DRAW_CARDS_AND_KEEP_ONE:
@@ -199,16 +280,20 @@ export abstract class Colony implements SerializedColony {
 
       case ColonyBenefit.GAIN_CARD_DISCOUNT:
         player.cardDiscount += 1;
-        game.log('Cards played by ${0} cost 1 M€ less this generation', (b) => b.player(player));
+        game.log('Cards played by ${0} cost 1 M€ less this generation', (b) =>
+          b.player(player)
+        );
         break;
 
       case ColonyBenefit.GAIN_PRODUCTION:
-        if (resource === undefined) throw new Error('Resource cannot be undefined');
+        if (resource === undefined)
+          throw new Error('Resource cannot be undefined');
         player.addProduction(resource, quantity, {log: true});
         break;
 
       case ColonyBenefit.GAIN_RESOURCES:
-        if (resource === undefined) throw new Error('Resource cannot be undefined');
+        if (resource === undefined)
+          throw new Error('Resource cannot be undefined');
         player.addResource(resource, quantity, {log: true});
         break;
 
@@ -228,25 +313,38 @@ export abstract class Colony implements SerializedColony {
       case ColonyBenefit.PLACE_DELEGATES:
         if (game.turmoil !== undefined) {
           const playerHasLobbyDelegate = game.turmoil.lobby.has(player.id);
-          let availablePlayerDelegates = game.turmoil.getDelegatesInReserve(player.id);
+          let availablePlayerDelegates = game.turmoil.getDelegatesInReserve(
+            player.id
+          );
           if (playerHasLobbyDelegate) availablePlayerDelegates += 1;
 
           const qty = Math.min(quantity, availablePlayerDelegates);
 
           for (let i = 0; i < qty; i++) {
-            const fromLobby = (i === qty - 1 && qty === availablePlayerDelegates && playerHasLobbyDelegate);
-            game.defer(new SendDelegateToArea(player, 'Select where to send delegate', {source: fromLobby ? 'lobby' : 'reserve'}));
+            const fromLobby =
+              i === qty - 1 &&
+              qty === availablePlayerDelegates &&
+              playerHasLobbyDelegate;
+            game.defer(
+              new SendDelegateToArea(player, 'Select where to send delegate', {
+                source: fromLobby ? 'lobby' : 'reserve',
+              })
+            );
           }
         }
         break;
 
       case ColonyBenefit.GIVE_MC_PER_DELEGATE:
         if (game.turmoil !== undefined) {
-          let partyDelegateCount = PLAYER_DELEGATES_COUNT - game.turmoil.getDelegatesInReserve(player.id);
+          let partyDelegateCount =
+            PLAYER_DELEGATES_COUNT -
+            game.turmoil.getDelegatesInReserve(player.id);
           if (game.turmoil.lobby.has(player.id)) partyDelegateCount--;
           if (game.turmoil.chairman === player.id) partyDelegateCount--;
 
-          player.addResource(Resources.MEGACREDITS, partyDelegateCount, {log: true});
+          player.addResource(Resources.MEGACREDITS, partyDelegateCount, {
+            log: true,
+          });
         }
         break;
 
@@ -254,72 +352,86 @@ export abstract class Colony implements SerializedColony {
         if (quantity > 0) {
           player.increaseTerraformRatingSteps(quantity);
           LogHelper.logTRIncrease(player, quantity);
-        };
+        }
         break;
 
       case ColonyBenefit.GAIN_VP:
         if (quantity > 0) {
           player.colonyVictoryPoints += quantity;
-          game.log('${0} gained ${1} VP', (b) => b.player(player).number(quantity));
+          game.log('${0} gained ${1} VP', (b) =>
+            b.player(player).number(quantity)
+          );
         }
         break;
 
       case ColonyBenefit.INCREASE_VENUS_SCALE:
-        game.increaseVenusScaleLevel(player, quantity as 3|2|1);
-        game.log('${0} increased Venus scale ${1} step(s)', (b) => b.player(player).number(quantity));
+        game.increaseVenusScaleLevel(player, quantity as 3 | 2 | 1);
+        game.log('${0} increased Venus scale ${1} step(s)', (b) =>
+          b.player(player).number(quantity)
+        );
         break;
 
       case ColonyBenefit.LOSE_RESOURCES:
-        if (resource === undefined) throw new Error('Resource cannot be undefined');
+        if (resource === undefined)
+          throw new Error('Resource cannot be undefined');
         player.deductResource(resource, quantity);
         break;
 
       case ColonyBenefit.OPPONENT_DISCARD:
         if (game.isSoloMode()) break;
-        action = new DeferredAction(
-          player,
-          () => {
-            const playersWithCards = game.getPlayers().filter((p) => p.cardsInHand.length > 0);
-            if (playersWithCards.length === 0) return undefined;
-            return new SelectPlayer(
-              playersWithCards,
-              'Select player to discard a card',
-              'Select',
-              (selectedPlayer: Player) => {
-                game.defer(new DiscardCards(selectedPlayer, 1, this.name + ' colony effect. Select a card to discard'));
-                return undefined;
-              },
-            );
-          },
-        );
+        action = new DeferredAction(player, () => {
+          const playersWithCards = game
+            .getPlayers()
+            .filter((p) => p.cardsInHand.length > 0);
+          if (playersWithCards.length === 0) return undefined;
+          return new SelectPlayer(
+            playersWithCards,
+            'Select player to discard a card',
+            'Select',
+            (selectedPlayer: Player) => {
+              game.defer(
+                new DiscardCards(
+                  selectedPlayer,
+                  1,
+                  this.name + ' colony effect. Select a card to discard'
+                )
+              );
+              return undefined;
+            }
+          );
+        });
         break;
 
       case ColonyBenefit.PLACE_OCEAN_TILE:
-        action = new PlaceOceanTile(player, 'Select ocean space for ' + this.name + ' colony');
+        action = new PlaceOceanTile(
+          player,
+          'Select ocean space for ' + this.name + ' colony'
+        );
         break;
 
       case ColonyBenefit.STEAL_RESOURCES:
-        if (resource === undefined) throw new Error('Resource cannot be undefined');
+        if (resource === undefined)
+          throw new Error('Resource cannot be undefined');
         action = new StealResources(player, resource, quantity);
         break;
 
       default:
         throw new Error('Unsupported benefit type');
-      }
+    }
 
-      if (action !== undefined) {
-        if (isGiveColonyBonus) {
-          /*
-           * When this method is called from within the GiveColonyBonus deferred action
-           * we return the player input directly instead of deferring it
-           */
-          return action.execute(); // undefined | PlayerInput
-        } else {
-          game.defer(action);
-          return undefined;
-        }
+    if (action !== undefined) {
+      if (isGiveColonyBonus) {
+        /*
+         * When this method is called from within the GiveColonyBonus deferred action
+         * we return the player input directly instead of deferring it
+         */
+        return action.execute(); // undefined | PlayerInput
       } else {
+        game.defer(action);
         return undefined;
       }
+    } else {
+      return undefined;
     }
+  }
 }

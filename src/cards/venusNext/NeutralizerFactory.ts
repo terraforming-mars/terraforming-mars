@@ -26,12 +26,16 @@ export class NeutralizerFactory extends Card {
         description: 'Requires Venus 10%. Increase the Venus track 1 step.',
       },
     });
-  };
+  }
 
   public canPlay(player: Player): boolean {
     const globalRequirementsMet = super.canPlay(player);
     if (PartyHooks.shouldApplyPolicy(player.game, PartyName.REDS)) {
-      return player.canAfford(player.getCardCost(this) + REDS_RULING_POLICY_COST, {floaters: true}) && globalRequirementsMet;
+      return (
+        player.canAfford(player.getCardCost(this) + REDS_RULING_POLICY_COST, {
+          floaters: true,
+        }) && globalRequirementsMet
+      );
     }
 
     return globalRequirementsMet;

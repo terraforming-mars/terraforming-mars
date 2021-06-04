@@ -10,25 +10,29 @@ import {MoonCard} from './MoonCard';
 
 export class LunaStagingStation extends MoonCard {
   constructor() {
-    super({
-      name: CardName.LUNA_STAGING_STATION,
-      cardType: CardType.AUTOMATED,
-      tags: [Tags.MOON, Tags.BUILDING],
-      cost: 12,
+    super(
+      {
+        name: CardName.LUNA_STAGING_STATION,
+        cardType: CardType.AUTOMATED,
+        tags: [Tags.MOON, Tags.BUILDING],
+        cost: 12,
 
-      requirements: CardRequirements.builder((b) => b.logisticRate(2)),
-      metadata: {
-        description: 'Requires Logistic Rate to be 2 or higher. Spend 1 titanium. Raise the Logistic Rate 2 steps.',
-        cardNumber: 'M30',
-        renderData: CardRenderer.builder((b) => {
-          b.minus().titanium(1).br;
-          b.moonLogisticsRate({amount: 2});
-        }),
+        requirements: CardRequirements.builder((b) => b.logisticRate(2)),
+        metadata: {
+          description:
+            'Requires Logistic Rate to be 2 or higher. Spend 1 titanium. Raise the Logistic Rate 2 steps.',
+          cardNumber: 'M30',
+          renderData: CardRenderer.builder((b) => {
+            b.minus().titanium(1).br;
+            b.moonLogisticsRate({amount: 2});
+          }),
+        },
       },
-    }, {
-      reserveUnits: Units.of({titanium: 1}),
-    });
-  };
+      {
+        reserveUnits: Units.of({titanium: 1}),
+      }
+    );
+  }
 
   public play(player: Player) {
     super.play(player);

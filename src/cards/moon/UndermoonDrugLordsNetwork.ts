@@ -17,17 +17,20 @@ export class UndermoonDrugLordsNetwork extends Card implements IProjectCard {
       cost: 2,
 
       metadata: {
-        description: 'Increase your M€ production 1 step per 2 steps of Colony Rate.',
+        description:
+          'Increase your M€ production 1 step per 2 steps of Colony Rate.',
         cardNumber: 'M81',
         victoryPoints: -1,
         renderData: CardRenderer.builder((b) => {
           b.production((pb) => {
             pb.megacredits(1);
-          }).slash().moonColonyRate({amount: 2});
+          })
+            .slash()
+            .moonColonyRate({amount: 2});
         }),
       },
     });
-  };
+  }
 
   public play(player: Player) {
     const gain = Math.floor(MoonExpansion.moonData(player.game).colonyRate / 2);

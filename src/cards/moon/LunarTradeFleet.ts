@@ -16,10 +16,13 @@ export class LunarTradeFleet extends Card {
       tags: [Tags.MOON, Tags.SPACE],
       cost: 8,
 
-      requirements: CardRequirements.builder((b) => b.production(Resources.TITANIUM, 2)),
+      requirements: CardRequirements.builder((b) =>
+        b.production(Resources.TITANIUM, 2)
+      ),
       metadata: {
-        description: 'Requires that you have 2 titanium production. ' +
-        'Increase your M€ production 1 step. Raise the Logistic Rate 1 step.',
+        description:
+          'Requires that you have 2 titanium production. ' +
+          'Increase your M€ production 1 step. Raise the Logistic Rate 1 step.',
         cardNumber: 'M35',
         renderData: CardRenderer.builder((b) => {
           b.production((pb) => pb.megacredits(1));
@@ -28,7 +31,7 @@ export class LunarTradeFleet extends Card {
         }),
       },
     });
-  };
+  }
 
   public play(player: Player) {
     player.addProduction(Resources.MEGACREDITS, 1, {log: true});

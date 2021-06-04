@@ -12,7 +12,9 @@ export interface IMoonData {
 }
 
 export namespace IMoonData {
-  export function serialize(moonData: IMoonData | undefined): SerializedMoonData | undefined {
+  export function serialize(
+    moonData: IMoonData | undefined
+  ): SerializedMoonData | undefined {
     if (moonData === undefined) {
       return undefined;
     }
@@ -21,14 +23,24 @@ export namespace IMoonData {
       colonyRate: moonData.colonyRate,
       miningRate: moonData.miningRate,
       logisticRate: moonData.logisticRate,
-      lunaFirstPlayerId: moonData.lunaFirstPlayer ? moonData.lunaFirstPlayer.id : undefined,
+      lunaFirstPlayerId: moonData.lunaFirstPlayer
+        ? moonData.lunaFirstPlayer.id
+        : undefined,
       lunaProjectOfficeLastGeneration: moonData.lunaProjectOfficeLastGeneration,
     };
-  };
+  }
 
-  export function deserialize(moonData: SerializedMoonData, players: Array<Player>): IMoonData {
-    const lunaFirstPlayer = players.find((p) => p.id === moonData.lunaFirstPlayerId);
-    if (moonData.lunaFirstPlayerId !== undefined && lunaFirstPlayer === undefined) {
+  export function deserialize(
+    moonData: SerializedMoonData,
+    players: Array<Player>
+  ): IMoonData {
+    const lunaFirstPlayer = players.find(
+      (p) => p.id === moonData.lunaFirstPlayerId
+    );
+    if (
+      moonData.lunaFirstPlayerId !== undefined &&
+      lunaFirstPlayer === undefined
+    ) {
       throw new Error(`player ${moonData.lunaFirstPlayerId} not found`);
     }
     return {

@@ -3,8 +3,8 @@ import {SisterPlanetSupport} from '../../../src/cards/venusNext/SisterPlanetSupp
 import {Resources} from '../../../src/Resources';
 import {TestPlayers} from '../../TestPlayers';
 
-describe('SisterPlanetSupport', function() {
-  it('Should play', function() {
+describe('SisterPlanetSupport', function () {
+  it('Should play', function () {
     const card = new SisterPlanetSupport();
     const player = TestPlayers.BLUE.newPlayer();
     expect(card.canPlay(player)).is.not.true;

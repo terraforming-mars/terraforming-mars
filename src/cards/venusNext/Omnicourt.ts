@@ -17,21 +17,29 @@ export class Omnicourt extends Card {
       tags: [Tags.BUILDING],
       cost: 11,
 
-      requirements: CardRequirements.builder((b) => b.tag(Tags.VENUS).tag(Tags.EARTH).tag(Tags.JOVIAN)),
+      requirements: CardRequirements.builder((b) =>
+        b.tag(Tags.VENUS).tag(Tags.EARTH).tag(Tags.JOVIAN)
+      ),
       metadata: {
         cardNumber: '241',
         renderData: CardRenderer.builder((b) => {
           b.tr(2);
         }),
-        description: 'Requires Venus, Earth and Jovian tags. Increase your TR 2 steps.',
+        description:
+          'Requires Venus, Earth and Jovian tags. Increase your TR 2 steps.',
       },
     });
-  };
+  }
 
   public canPlay(player: Player): boolean {
     const hasRequiredTags = super.canPlay(player);
     if (PartyHooks.shouldApplyPolicy(player.game, PartyName.REDS)) {
-      return player.canAfford(player.getCardCost(this) + REDS_RULING_POLICY_COST * 2, {steel: true}) && hasRequiredTags;
+      return (
+        player.canAfford(
+          player.getCardCost(this) + REDS_RULING_POLICY_COST * 2,
+          {steel: true}
+        ) && hasRequiredTags
+      );
     }
 
     return hasRequiredTags;

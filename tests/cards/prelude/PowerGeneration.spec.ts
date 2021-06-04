@@ -3,9 +3,8 @@ import {PowerGeneration} from '../../../src/cards/prelude/PowerGeneration';
 import {Resources} from '../../../src/Resources';
 import {TestPlayers} from '../../TestPlayers';
 
-
-describe('PowerGeneration', function() {
-  it('Should play', function() {
+describe('PowerGeneration', function () {
+  it('Should play', function () {
     const card = new PowerGeneration();
     const player = TestPlayers.BLUE.newPlayer();
     const action = card.play(player);

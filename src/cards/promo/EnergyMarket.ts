@@ -49,24 +49,29 @@ export class EnergyMarket extends Card implements IProjectCard {
       (amount: number) => {
         if (player.canUseHeatAsMegaCredits) {
           player.addResource(Resources.ENERGY, amount);
-          player.game.defer(new SelectHowToPayDeferred(player, (amount * 2)));
+          player.game.defer(new SelectHowToPayDeferred(player, amount * 2));
         } else {
           player.addResource(Resources.ENERGY, amount);
-          player.deductResource(Resources.MEGACREDITS, (amount * 2));
+          player.deductResource(Resources.MEGACREDITS, amount * 2);
         }
 
-        player.game.log('${0} gained ${1} energy', (b) => b.player(player).number(amount));
+        player.game.log('${0} gained ${1} energy', (b) =>
+          b.player(player).number(amount)
+        );
         return undefined;
       },
       1,
-      Math.floor(availableMC / 2),
+      Math.floor(availableMC / 2)
     );
   }
 
   private getMegacreditsOption(player: Player) {
     player.addProduction(Resources.ENERGY, -1);
     player.addResource(Resources.MEGACREDITS, 8);
-    player.game.log('${0} decreased energy production 1 step to gain 8 M€', (b) => b.player(player));
+    player.game.log(
+      '${0} decreased energy production 1 step to gain 8 M€',
+      (b) => b.player(player)
+    );
     return undefined;
   }
 
@@ -77,9 +82,13 @@ export class EnergyMarket extends Card implements IProjectCard {
         new SelectOption('Spend 2X M€ to gain X energy', 'Spend M€', () => {
           return this.getEnergyOption(player, availableMC);
         }),
-        new SelectOption('Decrease energy production 1 step to gain 8 M€', 'Decrease energy', () => {
-          return this.getMegacreditsOption(player);
-        }),
+        new SelectOption(
+          'Decrease energy production 1 step to gain 8 M€',
+          'Decrease energy',
+          () => {
+            return this.getMegacreditsOption(player);
+          }
+        )
       );
     } else if (availableMC >= 2) {
       return this.getEnergyOption(player, availableMC);

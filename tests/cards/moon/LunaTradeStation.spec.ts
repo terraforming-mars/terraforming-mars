@@ -42,7 +42,9 @@ describe('LunaTradeStation', () => {
 
     expect(player.titanium).eq(1);
 
-    const lunaTradeStation = moonData.moon.getSpace(MoonSpaces.LUNA_TRADE_STATION);
+    const lunaTradeStation = moonData.moon.getSpace(
+      MoonSpaces.LUNA_TRADE_STATION
+    );
     expect(lunaTradeStation.player).eq(player);
     expect(lunaTradeStation.tile!.tileType).eq(TileType.LUNA_TRADE_STATION);
   });
@@ -70,4 +72,3 @@ describe('LunaTradeStation', () => {
     expect(player.megaCredits).eq(6);
   });
 });
-

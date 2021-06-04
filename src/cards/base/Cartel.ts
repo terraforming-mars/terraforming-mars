@@ -1,4 +1,3 @@
-
 import {IProjectCard} from '../IProjectCard';
 import {Tags} from '../Tags';
 import {Card} from '../Card';
@@ -18,15 +17,22 @@ export class Cartel extends Card implements IProjectCard {
 
       metadata: {
         cardNumber: '137',
-        description: 'Increase your M€ production 1 step for each Earth tag you have, including this.',
-        renderData: CardRenderer.builder((b) => b.production((pb) => {
-          pb.megacredits(1).slash().earth().played;
-        })),
+        description:
+          'Increase your M€ production 1 step for each Earth tag you have, including this.',
+        renderData: CardRenderer.builder((b) =>
+          b.production((pb) => {
+            pb.megacredits(1).slash().earth().played;
+          })
+        ),
       },
     });
   }
   public play(player: Player) {
-    player.addProduction(Resources.MEGACREDITS, player.getTagCount(Tags.EARTH) + 1, {log: true});
+    player.addProduction(
+      Resources.MEGACREDITS,
+      player.getTagCount(Tags.EARTH) + 1,
+      {log: true}
+    );
     return undefined;
   }
 }

@@ -4,9 +4,8 @@ import {Game} from '../../../src/Game';
 import {Resources} from '../../../src/Resources';
 import {TestPlayers} from '../../TestPlayers';
 
-
-describe('PolarIndustries', function() {
-  it('Should play', function() {
+describe('PolarIndustries', function () {
+  it('Should play', function () {
     const card = new PolarIndustries();
     const player = TestPlayers.BLUE.newPlayer();
     Game.newInstance('foobar', [player], player);

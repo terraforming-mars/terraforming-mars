@@ -28,7 +28,8 @@ export class Atmoscoop extends Card implements IProjectCard {
       requirements: CardRequirements.builder((b) => b.tag(Tags.SCIENCE, 3)),
       metadata: {
         cardNumber: '217',
-        description: 'Requires 3 Science tags. Either raise the temperature 2 steps, or raise Venus 2 steps. Add 2 Floaters to ANY card.',
+        description:
+          'Requires 3 Science tags. Either raise the temperature 2 steps, or raise Venus 2 steps. Add 2 Floaters to ANY card.',
         renderData: CardRenderer.builder((b) => {
           b.temperature(2).or(Size.SMALL).venus(2).br;
           b.floaters(2).asterix();
@@ -42,12 +43,21 @@ export class Atmoscoop extends Card implements IProjectCard {
     if (!super.canPlay(player)) {
       return false;
     }
-    const remainingTemperatureSteps = (constants.MAX_TEMPERATURE - player.game.getTemperature()) / 2;
-    const remainingVenusSteps = (constants.MAX_VENUS_SCALE - player.game.getVenusScaleLevel()) / 2;
-    const stepsRaised = Math.min(remainingTemperatureSteps, remainingVenusSteps, 2);
+    const remainingTemperatureSteps =
+      (constants.MAX_TEMPERATURE - player.game.getTemperature()) / 2;
+    const remainingVenusSteps =
+      (constants.MAX_VENUS_SCALE - player.game.getVenusScaleLevel()) / 2;
+    const stepsRaised = Math.min(
+      remainingTemperatureSteps,
+      remainingVenusSteps,
+      2
+    );
 
     if (PartyHooks.shouldApplyPolicy(player.game, PartyName.REDS)) {
-      return player.canAfford(this.cost + constants.REDS_RULING_POLICY_COST * stepsRaised, {titanium: true});
+      return player.canAfford(
+        this.cost + constants.REDS_RULING_POLICY_COST * stepsRaised,
+        {titanium: true}
+      );
     }
 
     return true;
@@ -57,18 +67,30 @@ export class Atmoscoop extends Card implements IProjectCard {
     const game = player.game;
     const floaterCards = player.getResourceCards(ResourceType.FLOATER);
 
-    if (this.temperatureIsMaxed(game) && this.venusIsMaxed(game) && floaterCards.length === 0) {
+    if (
+      this.temperatureIsMaxed(game) &&
+      this.venusIsMaxed(game) &&
+      floaterCards.length === 0
+    ) {
       return undefined;
     }
 
-    const increaseTemp = new SelectOption('Raise temperature 2 steps', 'Raise temperature', () => {
-      game.increaseTemperature(player, 2);
-      return undefined;
-    });
-    const increaseVenus = new SelectOption('Raise Venus 2 steps', 'Raise venus', () => {
-      game.increaseVenusScaleLevel(player, 2);
-      return undefined;
-    });
+    const increaseTemp = new SelectOption(
+      'Raise temperature 2 steps',
+      'Raise temperature',
+      () => {
+        game.increaseTemperature(player, 2);
+        return undefined;
+      }
+    );
+    const increaseVenus = new SelectOption(
+      'Raise Venus 2 steps',
+      'Raise venus',
+      () => {
+        game.increaseVenusScaleLevel(player, 2);
+        return undefined;
+      }
+    );
     const increaseTempOrVenus = new OrOptions(increaseTemp, increaseVenus);
     increaseTempOrVenus.title = 'Choose global parameter to raise';
 
@@ -79,7 +101,7 @@ export class Atmoscoop extends Card implements IProjectCard {
       (foundCards: Array<ICard>) => {
         player.addResourceTo(foundCards[0], {qty: 2, log: true});
         return undefined;
-      },
+      }
     );
 
     if (!this.temperatureIsMaxed(game) && this.venusIsMaxed(game)) {
@@ -89,22 +111,22 @@ export class Atmoscoop extends Card implements IProjectCard {
     }
 
     switch (floaterCards.length) {
-    case 1:
-      player.addResourceTo(floaterCards[0], {qty: 2, log: true});
+      case 1:
+        player.addResourceTo(floaterCards[0], {qty: 2, log: true});
       // Intentional fall-through
 
-    case 0:
-      if (!this.temperatureIsMaxed(game) && !this.venusIsMaxed(game)) {
-        return increaseTempOrVenus;
-      }
-      return undefined;
+      case 0:
+        if (!this.temperatureIsMaxed(game) && !this.venusIsMaxed(game)) {
+          return increaseTempOrVenus;
+        }
+        return undefined;
 
-    default:
-      if (!this.temperatureIsMaxed(game) && !this.venusIsMaxed(game)) {
-        increaseTempOrVenus.cb = () => addFloaters;
-        return increaseTempOrVenus;
-      }
-      return addFloaters;
+      default:
+        if (!this.temperatureIsMaxed(game) && !this.venusIsMaxed(game)) {
+          increaseTempOrVenus.cb = () => addFloaters;
+          return increaseTempOrVenus;
+        }
+        return addFloaters;
     }
   }
 

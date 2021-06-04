@@ -4,8 +4,8 @@ import {Ceres} from '../../../src/colonies/Ceres';
 import {Game} from '../../../src/Game';
 import {TestPlayers} from '../../TestPlayers';
 
-describe('TradeEnvoys', function() {
-  it('Should play', function() {
+describe('TradeEnvoys', function () {
+  it('Should play', function () {
     const card = new TradeEnvoys();
     const player = TestPlayers.BLUE.newPlayer();
     const redPlayer = TestPlayers.RED.newPlayer();

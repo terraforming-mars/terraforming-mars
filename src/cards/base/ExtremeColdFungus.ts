@@ -13,7 +13,10 @@ import {Resources} from '../../Resources';
 import {CardRequirements} from '../CardRequirements';
 import {CardRenderer} from '../render/CardRenderer';
 
-export class ExtremeColdFungus extends Card implements IActionCard, IProjectCard {
+export class ExtremeColdFungus
+  extends Card
+  implements IActionCard, IProjectCard
+{
   constructor() {
     super({
       cardType: CardType.ACTIVE,
@@ -51,20 +54,28 @@ export class ExtremeColdFungus extends Card implements IActionCard, IProjectCard
       return undefined;
     }
 
-    const gainPlantOption = new SelectOption('Gain 1 plant', 'Gain plant', () => {
-      player.addResource(Resources.PLANTS, 1, {log: true});
-      return undefined;
-    });
+    const gainPlantOption = new SelectOption(
+      'Gain 1 plant',
+      'Gain plant',
+      () => {
+        player.addResource(Resources.PLANTS, 1, {log: true});
+        return undefined;
+      }
+    );
 
     if (otherMicrobeCards.length === 1) {
       const targetCard = otherMicrobeCards[0];
 
       return new OrOptions(
-        new SelectOption('Add 2 microbes to ' + targetCard.name, 'Add microbes', () => {
-          player.addResourceTo(targetCard, {qty: 2, log: true});
-          return undefined;
-        }),
-        gainPlantOption,
+        new SelectOption(
+          'Add 2 microbes to ' + targetCard.name,
+          'Add microbes',
+          () => {
+            player.addResourceTo(targetCard, {qty: 2, log: true});
+            return undefined;
+          }
+        ),
+        gainPlantOption
       );
     }
 
@@ -76,9 +87,9 @@ export class ExtremeColdFungus extends Card implements IActionCard, IProjectCard
         (foundCards: Array<ICard>) => {
           player.addResourceTo(foundCards[0], {qty: 2, log: true});
           return undefined;
-        },
+        }
       ),
-      gainPlantOption,
+      gainPlantOption
     );
   }
 }

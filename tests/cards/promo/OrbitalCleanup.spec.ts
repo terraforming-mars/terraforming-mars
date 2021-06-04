@@ -8,27 +8,28 @@ import {Player} from '../../../src/Player';
 import {Resources} from '../../../src/Resources';
 import {TestPlayers} from '../../TestPlayers';
 
-describe('OrbitalCleanup', function() {
-  let card : OrbitalCleanup; let player : Player;
+describe('OrbitalCleanup', function () {
+  let card: OrbitalCleanup;
+  let player: Player;
 
-  beforeEach(function() {
+  beforeEach(function () {
     card = new OrbitalCleanup();
     player = TestPlayers.BLUE.newPlayer();
     Game.newInstance('id', [player], player);
   });
 
-  it('Can\'t play if cannot decrease MC production', function() {
+  it("Can't play if cannot decrease MC production", function () {
     player.addProduction(Resources.MEGACREDITS, -4);
     expect(card.canPlay(player)).is.not.true;
   });
 
-  it('Should play', function() {
+  it('Should play', function () {
     expect(card.canPlay(player)).is.true;
     card.play(player);
     expect(player.getProduction(Resources.MEGACREDITS)).to.eq(-2);
   });
 
-  it('Should act', function() {
+  it('Should act', function () {
     player.playedCards.push(new Research());
     player.playedCards.push(new AdvancedAlloys());
     player.playedCards.push(new ResearchCoordination());
@@ -37,7 +38,7 @@ describe('OrbitalCleanup', function() {
     expect(player.getResource(Resources.MEGACREDITS)).to.eq(4);
   });
 
-  it('Should give victory points', function() {
+  it('Should give victory points', function () {
     card.play(player);
     expect(card.getVictoryPoints()).to.eq(2);
   });

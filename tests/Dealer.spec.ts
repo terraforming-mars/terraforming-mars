@@ -3,8 +3,8 @@ import {Dealer} from '../src/Dealer';
 import {TestingUtils} from './TestingUtils';
 import {CardLoader} from '../src/CardLoader';
 
-describe('Dealer', function() {
-  it('deserializes from serialized', function() {
+describe('Dealer', function () {
+  it('deserializes from serialized', function () {
     const gameOptions = TestingUtils.setCustomGameOptions({
       corporateEra: false,
       preludeExtension: true,
@@ -19,4 +19,3 @@ describe('Dealer', function() {
     expect(dealer).to.deep.eq(Dealer.deserialize(dealer.serialize()));
   });
 });
-

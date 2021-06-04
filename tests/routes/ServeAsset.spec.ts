@@ -13,7 +13,10 @@ describe('ServeAsset', () => {
   let ctx: IContext;
 
   // Strictly speaking |parameters| can also accept a fragment.
-  const setRequest = function(parameters: string, headers: Array<Array<string>> = []) {
+  const setRequest = function (
+    parameters: string,
+    headers: Array<Array<string>> = []
+  ) {
     req.url = parameters;
     ctx.url = new URL('http://boo.com' + parameters);
     headers.forEach((entry) => {

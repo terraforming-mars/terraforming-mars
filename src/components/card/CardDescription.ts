@@ -9,7 +9,7 @@ export const CardDescription = Vue.component('CardDescription', {
     },
   },
   methods: {
-    getClasses: function(): string {
+    getClasses: function (): string {
       const classes: string[] = ['card-description'];
       if (isIDescription(this.item)) {
         if (this.item.align !== 'center') {
@@ -20,8 +20,8 @@ export const CardDescription = Vue.component('CardDescription', {
       }
       return generateClassString(classes);
     },
-    getDescription: function(): string {
-      return isIDescription(this.item) ? this.item.text : <string> this.item;
+    getDescription: function (): string {
+      return isIDescription(this.item) ? this.item.text : <string>this.item;
     },
   },
   template: `

@@ -11,7 +11,9 @@ import {TestPlayers} from '../../TestPlayers';
 import {Board} from '../../../src/boards/Board';
 
 describe('Capital', () => {
-  let card : Capital; let player : TestPlayer; let game : Game;
+  let card: Capital;
+  let player: TestPlayer;
+  let game: Game;
 
   beforeEach(() => {
     card = new Capital();
@@ -76,7 +78,9 @@ describe('Capital', () => {
     expect(game.getCitiesInPlay()).to.eq(1);
 
     // check VP
-    const greenerySpace = game.board.getAdjacentSpaces(space).find((space) => space.spaceType === SpaceType.LAND);
+    const greenerySpace = game.board
+      .getAdjacentSpaces(space)
+      .find((space) => space.spaceType === SpaceType.LAND);
     game.addGreenery(player, greenerySpace!.id);
     expect(player.getVictoryPoints().city).to.eq(1); // 1 VP for Capital city
   });

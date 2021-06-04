@@ -38,44 +38,58 @@ export class HiredRaiders extends Card implements IProjectCard {
         new SelectOption('Steal 3 M€', 'Steal M€', () => {
           player.megaCredits += 3;
           return undefined;
-        }),
+        })
       );
     }
 
-    const availablePlayerTargets = player.game.getPlayers().filter((p) => p.id !== player.id);
+    const availablePlayerTargets = player.game
+      .getPlayers()
+      .filter((p) => p.id !== player.id);
     const availableActions = new OrOptions();
 
     availablePlayerTargets.forEach((target) => {
       if (target.steel > 0 && !target.alloysAreProtected()) {
         const amountStolen = Math.min(2, target.steel);
-        const optionTitle = 'Steal ' + amountStolen + ' steel from ' + target.name;
+        const optionTitle =
+          'Steal ' + amountStolen + ' steel from ' + target.name;
 
-        availableActions.options.push(new SelectOption(optionTitle, 'Confirm', () => {
-          player.steel += amountStolen;
-          target.deductResource(Resources.STEEL, 2, {log: true, from: player});
-          return undefined;
-        }));
+        availableActions.options.push(
+          new SelectOption(optionTitle, 'Confirm', () => {
+            player.steel += amountStolen;
+            target.deductResource(Resources.STEEL, 2, {
+              log: true,
+              from: player,
+            });
+            return undefined;
+          })
+        );
       }
 
       if (target.megaCredits > 0) {
         const amountStolen = Math.min(3, target.megaCredits);
         const optionTitle = 'Steal ' + amountStolen + ' M€ from ' + target.name;
 
-        availableActions.options.push(new SelectOption(optionTitle, 'Confirm', () => {
-          player.megaCredits += amountStolen;
-          target.deductResource(Resources.MEGACREDITS, 3, {log: true, from: player});
-          return undefined;
-        }));
+        availableActions.options.push(
+          new SelectOption(optionTitle, 'Confirm', () => {
+            player.megaCredits += amountStolen;
+            target.deductResource(Resources.MEGACREDITS, 3, {
+              log: true,
+              from: player,
+            });
+            return undefined;
+          })
+        );
       }
     });
 
     if (availableActions.options.length > 0) {
-      availableActions.options.push(new SelectOption('Do not steal', 'Confirm', () => {
-        return undefined;
-      }));
+      availableActions.options.push(
+        new SelectOption('Do not steal', 'Confirm', () => {
+          return undefined;
+        })
+      );
       return availableActions;
     }
     return undefined;
   }
 }
-

@@ -11,9 +11,15 @@ import {TurmoilPolicy} from '../TurmoilPolicy';
 
 export class Kelvinists extends Party implements IParty {
   name = PartyName.KELVINISTS;
-  description = 'Pushes for rapid terraforming, usually employing a heat-first strategy.';
+  description =
+    'Pushes for rapid terraforming, usually employing a heat-first strategy.';
   bonuses = [KELVINISTS_BONUS_1, KELVINISTS_BONUS_2];
-  policies = [KELVINISTS_POLICY_1, KELVINISTS_POLICY_2, KELVINISTS_POLICY_3, KELVINISTS_POLICY_4];
+  policies = [
+    KELVINISTS_POLICY_1,
+    KELVINISTS_POLICY_2,
+    KELVINISTS_POLICY_3,
+    KELVINISTS_POLICY_4,
+  ];
 }
 
 class KelvinistsBonus01 implements Bonus {
@@ -45,7 +51,8 @@ class KelvinistsBonus02 implements Bonus {
 class KelvinistsPolicy01 implements Policy {
   isDefault = true;
   id = TurmoilPolicy.KELVINISTS_DEFAULT_POLICY;
-  description: string = 'Pay 10 M€ to increase your Energy and Heat production 1 step (Turmoil Kelvinists)';
+  description: string =
+    'Pay 10 M€ to increase your Energy and Heat production 1 step (Turmoil Kelvinists)';
 
   canAct(player: Player) {
     return player.canAfford(10);
@@ -54,18 +61,18 @@ class KelvinistsPolicy01 implements Policy {
   action(player: Player) {
     const game = player.game;
     game.log('${0} used Turmoil Kelvinists action', (b) => b.player(player));
-    game.defer(new SelectHowToPayDeferred(
-      player,
-      10,
-      {
+    game.defer(
+      new SelectHowToPayDeferred(player, 10, {
         title: 'Select how to pay for Turmoil Kelvinists action',
         afterPay: () => {
           player.addProduction(Resources.ENERGY, 1);
           player.addProduction(Resources.HEAT, 1);
-          game.log('${0} increased heat and energy production 1 step', (b) => b.player(player));
+          game.log('${0} increased heat and energy production 1 step', (b) =>
+            b.player(player)
+          );
         },
-      },
-    ));
+      })
+    );
 
     return undefined;
   }
@@ -89,7 +96,9 @@ class KelvinistsPolicy03 implements Policy {
   action(player: Player) {
     const game = player.game;
     game.log('${0} used Turmoil Kelvinists action', (b) => b.player(player));
-    game.log('${0} spent 6 heat to raise temperature 1 step', (b) => b.player(player));
+    game.log('${0} spent 6 heat to raise temperature 1 step', (b) =>
+      b.player(player)
+    );
 
     player.deductResource(Resources.HEAT, 6);
     game.increaseTemperature(player, 1);

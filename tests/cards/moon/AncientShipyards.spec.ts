@@ -18,7 +18,12 @@ describe('AncientShipyards', () => {
   beforeEach(() => {
     bluePlayer = TestPlayers.BLUE.newPlayer();
     redPlayer = TestPlayers.RED.newPlayer();
-    game = Game.newInstance('id', [bluePlayer, redPlayer], bluePlayer, MOON_OPTIONS);
+    game = Game.newInstance(
+      'id',
+      [bluePlayer, redPlayer],
+      bluePlayer,
+      MOON_OPTIONS
+    );
     card = new AncientShipyards();
   });
 
@@ -67,4 +72,3 @@ describe('AncientShipyards', () => {
     expect(card.getVictoryPoints()).eq(-2);
   });
 });
-

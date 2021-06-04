@@ -14,7 +14,7 @@ export const Tag = Vue.component('tag', {
     },
   },
   methods: {
-    getClasses: function(): string {
+    getClasses: function (): string {
       const classes = ['tag-count'];
       classes.push(`tag-${this.tag}`);
       if (this.size !== undefined) {

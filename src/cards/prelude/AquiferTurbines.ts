@@ -19,7 +19,8 @@ export class AquiferTurbines extends PreludeCard {
           b.oceans(1).production((pb) => pb.energy(2)).br;
           b.megacredits(-3);
         }),
-        description: 'Place an Ocean tile. Increase your energy production 2 steps. Pay 3 M€.',
+        description:
+          'Place an Ocean tile. Increase your energy production 2 steps. Pay 3 M€.',
       },
     });
   }
@@ -33,4 +34,3 @@ export class AquiferTurbines extends PreludeCard {
     return undefined;
   }
 }
-

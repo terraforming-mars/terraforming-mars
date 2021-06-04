@@ -77,7 +77,10 @@ export const PRELUDE_CARD_MANIFEST = new CardManifest({
     {cardName: CardName.EARLY_SETTLEMENT, Factory: EarlySettlement},
     {cardName: CardName.BIOFUELS, Factory: Biofuels},
     {cardName: CardName.POWER_GENERATION, Factory: PowerGeneration},
-    {cardName: CardName.SELF_SUFFICIENT_SETTLEMENT, Factory: SelfSufficientSettlement},
+    {
+      cardName: CardName.SELF_SUFFICIENT_SETTLEMENT,
+      Factory: SelfSufficientSettlement,
+    },
     {cardName: CardName.MINING_OPERATIONS, Factory: MiningOperations},
     {cardName: CardName.UNMI_CONTRACTOR, Factory: UNMIContractor},
     {cardName: CardName.DOME_FARMING, Factory: DomeFarming},
@@ -99,7 +102,10 @@ export const PRELUDE_CARD_MANIFEST = new CardManifest({
     {cardName: CardName.LOAN, Factory: Loan},
     {cardName: CardName.MOHOLE, Factory: Mohole},
     {cardName: CardName.METAL_RICH_ASTEROID, Factory: MetalRichAsteroid},
-    {cardName: CardName.ORBITAL_CONSTRUCTION_YARD, Factory: OrbitalConstructionYard},
+    {
+      cardName: CardName.ORBITAL_CONSTRUCTION_YARD,
+      Factory: OrbitalConstructionYard,
+    },
     {cardName: CardName.ACQUIRED_SPACE_AGENCY, Factory: AcquiredSpaceAgency},
     {cardName: CardName.RESEARCH_NETWORK, Factory: ResearchNetwork},
     {cardName: CardName.ECCENTRIC_SPONSOR, Factory: EccentricSponsor},

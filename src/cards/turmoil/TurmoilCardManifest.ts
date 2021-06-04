@@ -54,4 +54,3 @@ export const TURMOIL_CARD_MANIFEST = new CardManifest({
     {cardName: CardName.SEPTUM_TRIBUS, Factory: SeptumTribus},
   ],
 });
-

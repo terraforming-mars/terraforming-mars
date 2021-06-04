@@ -5,21 +5,23 @@ import {SelectSpace} from '../../../src/inputs/SelectSpace';
 import {TestPlayer} from '../../TestPlayer';
 import {TestPlayers} from '../../TestPlayers';
 
-describe('LakeMarineris', function() {
-  let card : LakeMarineris; let player : TestPlayer; let game : Game;
+describe('LakeMarineris', function () {
+  let card: LakeMarineris;
+  let player: TestPlayer;
+  let game: Game;
 
-  beforeEach(function() {
+  beforeEach(function () {
     card = new LakeMarineris();
     player = TestPlayers.BLUE.newPlayer();
     const redPlayer = TestPlayers.RED.newPlayer();
     game = Game.newInstance('foobar', [player, redPlayer], player);
   });
 
-  it('Can\'t play', function() {
+  it("Can't play", function () {
     expect(card.canPlay(player)).is.not.true;
   });
 
-  it('Should play', function() {
+  it('Should play', function () {
     (game as any).temperature = -0;
     expect(card.canPlay(player)).is.true;
     card.play(player);
@@ -31,7 +33,10 @@ describe('LakeMarineris', function() {
     secondOcean.cb(secondOcean.availableSpaces[1]);
     expect(player.getTerraformRating()).to.eq(22);
 
-    player.victoryPointsBreakdown.setVictoryPoints('victoryPoints', card.getVictoryPoints());
+    player.victoryPointsBreakdown.setVictoryPoints(
+      'victoryPoints',
+      card.getVictoryPoints()
+    );
     expect(player.victoryPointsBreakdown.victoryPoints).to.eq(2);
   });
 });

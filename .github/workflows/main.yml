@@ -4,29 +4,26 @@ on: [pull_request, push]
 
 jobs:
   build-linux:
-
     runs-on: ubuntu-latest
 
     steps:
-    - uses: actions/checkout@v1
-    - uses: actions/setup-node@v1
-      with:
-        node-version: '10.x'
-    - run: npm install
-    - run: npm run build
-    - run: npm test
-    - run: npm run cover
+      - uses: actions/checkout@v1
+      - uses: actions/setup-node@v1
+        with:
+          node-version: '10.x'
+      - run: npm install
+      - run: npm run build
+      - run: npm test
+      - run: npm run cover
   build-windows:
-
     runs-on: windows-latest
 
     steps:
-    - uses: actions/checkout@v1
-    - uses: actions/setup-node@v1
-      with:
-        node-version: '10.x'
-    - run: npm install
-    - run: npm run build
-    - run: npm test
-    - run: npm run cover
-
+      - uses: actions/checkout@v1
+      - uses: actions/setup-node@v1
+        with:
+          node-version: '10.x'
+      - run: npm install
+      - run: npm run build
+      - run: npm test
+      - run: npm run cover

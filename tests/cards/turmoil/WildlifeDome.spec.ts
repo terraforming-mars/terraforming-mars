@@ -8,7 +8,7 @@ import {PoliticalAgendas} from '../../../src/turmoil/PoliticalAgendas';
 import {TestingUtils} from '../../TestingUtils';
 import {TestPlayers} from '../../TestPlayers';
 
-describe('WildlifeDome', function() {
+describe('WildlifeDome', function () {
   let card: WildlifeDome;
   let player: Player;
   let redPlayer: Player;
@@ -22,13 +22,13 @@ describe('WildlifeDome', function() {
     game = Game.newInstance('foobar', [player, redPlayer], player, gameOptions);
   });
 
-  it('Should play: reds', function() {
+  it('Should play: reds', function () {
     game.turmoil!.rulingParty = game.turmoil!.getPartyByName(PartyName.REDS)!;
     PoliticalAgendas.setNextAgenda(game.turmoil!, game);
     expect(card.canPlay(player)).is.not.true;
   });
 
-  it('Should play: greens', function() {
+  it('Should play: greens', function () {
     game.phase = Phase.ACTION;
     game.turmoil!.rulingParty = game.turmoil!.getPartyByName(PartyName.REDS)!;
     PoliticalAgendas.setNextAgenda(game.turmoil!, game);

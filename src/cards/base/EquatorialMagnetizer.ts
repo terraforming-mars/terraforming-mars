@@ -11,7 +11,10 @@ import {PartyName} from '../../turmoil/parties/PartyName';
 import {REDS_RULING_POLICY_COST} from '../../constants';
 import {CardRenderer} from '../render/CardRenderer';
 
-export class EquatorialMagnetizer extends Card implements IActionCard, IProjectCard {
+export class EquatorialMagnetizer
+  extends Card
+  implements IActionCard, IProjectCard
+{
   constructor() {
     super({
       cardType: CardType.ACTIVE,
@@ -22,9 +25,12 @@ export class EquatorialMagnetizer extends Card implements IActionCard, IProjectC
       metadata: {
         cardNumber: '015',
         renderData: CardRenderer.builder((b) => {
-          b.action('Decrease your Energy production 1 step to increase your terraform rating 1 step.', (eb) => {
-            eb.production((pb) => pb.energy(1)).startAction.tr(1);
-          });
+          b.action(
+            'Decrease your Energy production 1 step to increase your terraform rating 1 step.',
+            (eb) => {
+              eb.production((pb) => pb.energy(1)).startAction.tr(1);
+            }
+          );
         }),
       },
     });
@@ -47,4 +53,3 @@ export class EquatorialMagnetizer extends Card implements IActionCard, IProjectC
     return undefined;
   }
 }
-

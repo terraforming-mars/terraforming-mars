@@ -28,11 +28,17 @@ import {SolarFarm} from './SolarFarm';
 export const ARES_CARD_MANIFEST = new CardManifest({
   module: GameModule.Ares,
   projectCards: [
-    {cardName: CardName.BIOENGINEERING_ENCLOSURE, Factory: BioengineeringEnclosure},
+    {
+      cardName: CardName.BIOENGINEERING_ENCLOSURE,
+      Factory: BioengineeringEnclosure,
+    },
     {cardName: CardName.BIOFERTILIZER_FACILITY, Factory: BiofertilizerFacility},
     {cardName: CardName.BUTTERFLY_EFFECT, Factory: ButterflyEffect},
     {cardName: CardName.CAPITAL_ARES, Factory: CapitalAres},
-    {cardName: CardName.COMMERCIAL_DISTRICT_ARES, Factory: CommercialDistrictAres},
+    {
+      cardName: CardName.COMMERCIAL_DISTRICT_ARES,
+      Factory: CommercialDistrictAres,
+    },
     {cardName: CardName.DESPERATE_MEASURES, Factory: DesperateMeasures},
     {cardName: CardName.ECOLOGICAL_SURVEY, Factory: EcologicalSurvey},
     {cardName: CardName.ECOLOGICAL_ZONE_ARES, Factory: EcologicalZoneAres},

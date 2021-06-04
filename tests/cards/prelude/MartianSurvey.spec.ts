@@ -4,10 +4,12 @@ import {Game} from '../../../src/Game';
 import {Player} from '../../../src/Player';
 import {TestPlayers} from '../../TestPlayers';
 
-describe('MartianSurvey', function() {
-  let card : MartianSurvey; let player : Player; let game : Game;
+describe('MartianSurvey', function () {
+  let card: MartianSurvey;
+  let player: Player;
+  let game: Game;
 
-  beforeEach(function() {
+  beforeEach(function () {
     card = new MartianSurvey();
     player = TestPlayers.BLUE.newPlayer();
     game = Game.newInstance('foobar', [player], player);

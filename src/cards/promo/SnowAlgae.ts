@@ -24,7 +24,8 @@ export class SnowAlgae extends Card implements IProjectCard {
             pb.plants(1).heat(1);
           });
         }),
-        description: 'Requires 2 oceans. Increase your Plant production and your heat production 1 step each.',
+        description:
+          'Requires 2 oceans. Increase your Plant production and your heat production 1 step each.',
       },
     });
   }

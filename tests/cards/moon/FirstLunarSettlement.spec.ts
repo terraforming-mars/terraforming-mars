@@ -37,4 +37,3 @@ describe('FirstLunarSettlement', () => {
     expect(player.getTerraformRating()).eq(15);
   });
 });
-

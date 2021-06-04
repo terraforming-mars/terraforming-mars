@@ -17,7 +17,8 @@ export class MicrosingularityPlant extends Card {
       requirements: CardRequirements.builder((b) => b.colonyTiles(2).any()),
 
       metadata: {
-        description: 'Requires 2 colonies on the Moon. Increase your energy production 2 steps.',
+        description:
+          'Requires 2 colonies on the Moon. Increase your energy production 2 steps.',
         cardNumber: 'M40',
         // TODO(kberg): requirements: CardRequirements.text('2 colonies @moon'),
         renderData: CardRenderer.builder((b) => {
@@ -25,7 +26,7 @@ export class MicrosingularityPlant extends Card {
         }),
       },
     });
-  };
+  }
 
   public play(player: Player) {
     player.addProduction(Resources.ENERGY, 2, {log: true});

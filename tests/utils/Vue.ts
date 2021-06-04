@@ -1,4 +1,3 @@
-
 /**
  * The vue unit test tool requires a virtual DOM to run within.
  * This script sets up that virtual DOM
@@ -15,7 +14,7 @@ const dom = new jsdom.JSDOM('<!doctype html><html><body></body></html>');
 (global as any).navigator = (global as any).window.navigator;
 
 // Attach subsequent properties to global
-Object.getOwnPropertyNames((global as any).window).forEach(function(k) {
+Object.getOwnPropertyNames((global as any).window).forEach(function (k) {
   // don't override a property which exists
   if (global.hasOwnProperty(k) === true) {
     return;
@@ -32,7 +31,7 @@ const Vue = require('vue');
 Vue.default = Vue;
 
 // don't save to database during tests
-Database.getInstance = function() {
+Database.getInstance = function () {
   return {
     cleanSaves: () => {},
     deleteGameNbrSaves: () => {},
@@ -47,4 +46,3 @@ Database.getInstance = function() {
     purgeUnfinishedGames: () => {},
   } as IDatabase;
 };
-

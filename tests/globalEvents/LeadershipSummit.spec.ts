@@ -5,8 +5,8 @@ import {Turmoil} from '../../src/turmoil/Turmoil';
 import {PartyName} from '../../src/turmoil/parties/PartyName';
 import {TestPlayers} from '../TestPlayers';
 
-describe('LeadershipSummit', function() {
-  it('resolve play', function() {
+describe('LeadershipSummit', function () {
+  it('resolve play', function () {
     const card = new LeadershipSummit();
     const player = TestPlayers.BLUE.newPlayer();
     const player2 = TestPlayers.RED.newPlayer();

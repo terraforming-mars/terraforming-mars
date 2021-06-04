@@ -11,10 +11,12 @@ import {SerializedBoard} from '../../src/boards/SerializedBoard';
 import {MoonSpaces} from '../../src/moon/MoonSpaces';
 import {Random} from '../../src/Random';
 
-describe('Board', function() {
-  let board : OriginalBoard; let player : Player; let player2 : Player;
+describe('Board', function () {
+  let board: OriginalBoard;
+  let player: Player;
+  let player2: Player;
 
-  beforeEach(function() {
+  beforeEach(function () {
     board = OriginalBoard.newInstance(false, new Random(0), false);
     player = TestPlayers.BLUE.newPlayer();
     player2 = TestPlayers.RED.newPlayer();
@@ -23,15 +25,20 @@ describe('Board', function() {
   it('getSpace', () => {
     expect(board.getSpace('01').spaceType).eq(SpaceType.COLONY);
     expect(board.getSpace('01').id).eq('01');
-    expect(() => board.getSpace(MoonSpaces.LUNA_TRADE_STATION).id).to.throw(Error, /Can't find space with id m01/);
+    expect(() => board.getSpace(MoonSpaces.LUNA_TRADE_STATION).id).to.throw(
+      Error,
+      /Can't find space with id m01/
+    );
   });
 
-  it('Can have greenery placed on any available land when player has no tile placed', function() {
+  it('Can have greenery placed on any available land when player has no tile placed', function () {
     const availableSpaces = board.getAvailableSpacesForGreenery(player);
-    expect(availableSpaces).has.lengthOf(board.getAvailableSpacesOnLand(player).length);
+    expect(availableSpaces).has.lengthOf(
+      board.getAvailableSpacesOnLand(player).length
+    );
   });
 
-  it('Can have greenery placed on any available land when player has a tile placed that is land locked', function() {
+  it('Can have greenery placed on any available land when player has a tile placed that is land locked', function () {
     board.spaces[2].player = player;
     board.spaces[2].tile = {tileType: TileType.GREENERY};
     board.spaces[7].player = player2;
@@ -39,10 +46,12 @@ describe('Board', function() {
     board.spaces[8].player = player2;
     board.spaces[8].tile = {tileType: TileType.GREENERY};
     const availableSpaces = board.getAvailableSpacesForGreenery(player);
-    expect(availableSpaces).has.lengthOf(board.getAvailableSpacesOnLand(player).length);
+    expect(availableSpaces).has.lengthOf(
+      board.getAvailableSpacesOnLand(player).length
+    );
   });
 
-  it('Can only place greenery adjacent to a tile a player owns', function() {
+  it('Can only place greenery adjacent to a tile a player owns', function () {
     board.spaces[2].player = player;
     board.spaces[2].tile = {tileType: TileType.GREENERY};
     board.spaces[7].player = player2;
@@ -125,7 +134,7 @@ describe('Board', function() {
     });
   });
 
-  it('getNthAvailableLandSpace', function() {
+  it('getNthAvailableLandSpace', function () {
     // board spaces start at 03, and the top of the map looks like this
     //
     //    l o l o o
@@ -135,36 +144,45 @@ describe('Board', function() {
     expect(board.getNthAvailableLandSpace(2, 1).id).eq('08');
     expect(board.getNthAvailableLandSpace(3, 1).id).eq('09');
     // Filter changes available spaces.
-    expect(board.getNthAvailableLandSpace(3, 1, undefined /* player */, (s) => s.id !== '09').id).eq('10');
+    expect(
+      board.getNthAvailableLandSpace(
+        3,
+        1,
+        undefined /* player */,
+        (s) => s.id !== '09'
+      ).id
+    ).eq('10');
 
-        // Filter player tokens (I'm looking at you, Land Claim)
-        board.spaces.find((s) => s.id === '05')!.player = player;
-        expect(board.getNthAvailableLandSpace(3, 1, player2).id).eq('10');
-        expect(board.getNthAvailableLandSpace(3, 1, player).id).eq('09');
+    // Filter player tokens (I'm looking at you, Land Claim)
+    board.spaces.find((s) => s.id === '05')!.player = player;
+    expect(board.getNthAvailableLandSpace(3, 1, player2).id).eq('10');
+    expect(board.getNthAvailableLandSpace(3, 1, player).id).eq('09');
 
-        // bottom ends at 63 and looks like this
-        //
-        //  l l l l l l
-        //   l l l l o
-        expect(board.getNthAvailableLandSpace(0, -1).id).eq('62');
-        expect(board.getNthAvailableLandSpace(1, -1).id).eq('61');
-        expect(board.getNthAvailableLandSpace(2, -1).id).eq('60');
-        expect(board.getNthAvailableLandSpace(3, -1).id).eq('59');
+    // bottom ends at 63 and looks like this
+    //
+    //  l l l l l l
+    //   l l l l o
+    expect(board.getNthAvailableLandSpace(0, -1).id).eq('62');
+    expect(board.getNthAvailableLandSpace(1, -1).id).eq('61');
+    expect(board.getNthAvailableLandSpace(2, -1).id).eq('60');
+    expect(board.getNthAvailableLandSpace(3, -1).id).eq('59');
   });
 
-  it('getNthAvailableLandSpace throws if no spaces available', function() {
-    expect(function() {
+  it('getNthAvailableLandSpace throws if no spaces available', function () {
+    expect(function () {
       board.getNthAvailableLandSpace(0, 1, undefined, () => false);
     }).to.throw('no spaces available');
   });
 
   function expectSpace(space: ISpace, id: string, x: number, y: number) {
     if (id !== space.id || x !== space.x || y !== space.y) {
-      expect.fail(`space ${space.id} at (${space.x}, ${space.y}) does not match [${id}, ${x}, ${y}]`);
+      expect.fail(
+        `space ${space.id} at (${space.x}, ${space.y}) does not match [${id}, ${x}, ${y}]`
+      );
     }
   }
 
-  it('getNthAvailableLandSpace positive', function() {
+  it('getNthAvailableLandSpace positive', function () {
     // First two rows look like this:
     //  - o - o o      - means land
     // - - - - - o     o means ocean
@@ -176,7 +194,7 @@ describe('Board', function() {
     expectSpace(board.getNthAvailableLandSpace(3, 1), '09', 4, 1);
   });
 
-  it('getNthAvailableLandSpace negative', function() {
+  it('getNthAvailableLandSpace negative', function () {
     // Last two rows look like this:
     // - - - - - -    - means land
     //  - - - - o     o means ocean
@@ -187,14 +205,14 @@ describe('Board', function() {
     expectSpace(board.getNthAvailableLandSpace(3, -1), '59', 4, 8);
   });
 
-  it('getNthAvailableLandSpace skips tiles', function() {
+  it('getNthAvailableLandSpace skips tiles', function () {
     const space = board.getNthAvailableLandSpace(2, 1);
     expectSpace(board.getNthAvailableLandSpace(2, 1), '08', 3, 1);
     space.tile = {tileType: TileType.GREENERY};
     expectSpace(board.getNthAvailableLandSpace(2, 1), '09', 4, 1);
   });
 
-  it('getNthAvailableLandSpace skips hazard tiles', function() {
+  it('getNthAvailableLandSpace skips hazard tiles', function () {
     const space = board.getNthAvailableLandSpace(2, 1);
     expectSpace(board.getNthAvailableLandSpace(2, 1), '08', 3, 1);
     space.tile = {tileType: TileType.DUST_STORM_MILD};
@@ -204,7 +222,7 @@ describe('Board', function() {
   // This happens with the Ares expansion and cards come out mid-game
   // after the board is already populated. Though, here, the high
   // card costs substitite for a heavily-populated board.
-  it('getNthAvailableLandSpace with a large card', function() {
+  it('getNthAvailableLandSpace with a large card', function () {
     expect(board.getNthAvailableLandSpace(46, 1).id).eq('61');
     expect(board.getNthAvailableLandSpace(47, 1).id).eq('62');
     expect(board.getNthAvailableLandSpace(48, 1).id).eq('03');
@@ -218,7 +236,7 @@ describe('Board', function() {
     expect(board.getNthAvailableLandSpace(50, -1).id).eq('60');
   });
 
-  it('getOceansOnBoard', function() {
+  it('getOceansOnBoard', function () {
     expect(board.getOceansOnBoard()).eq(0);
 
     const space1 = board.spaces[1];
@@ -239,7 +257,7 @@ describe('Board', function() {
   class TestBoard extends Board {
     public constructor(spaces: Array<ISpace>) {
       super(spaces);
-    };
+    }
 
     public getSpaceById(id: string): ISpace | undefined {
       return this.spaces.find((space) => space.id === id);
@@ -252,40 +270,55 @@ describe('Board', function() {
     public getNoctisCitySpaceIds(): Array<string> {
       return [];
     }
-  };
+  }
 
   it('deserialize', () => {
     const boardJson = {
       'spaces': [
         {
           'id': '01',
-          'spaceType': 'colony', 'bonus': [],
-          'x': -1, 'y': -1, 'player': 'name-1-id',
+          'spaceType': 'colony',
+          'bonus': [],
+          'x': -1,
+          'y': -1,
+          'player': 'name-1-id',
           'tile': {'tileType': 2},
         },
         {
           'id': '03',
-          'spaceType': 'land', 'bonus': [1, 1],
-          'x': 4, 'y': 0, 'player': 'name-2-id',
+          'spaceType': 'land',
+          'bonus': [1, 1],
+          'x': 4,
+          'y': 0,
+          'player': 'name-2-id',
           'tile': {'tileType': 0},
         },
         {
           'id': '04',
-          'spaceType': 'ocean', 'bonus': [1, 1],
-          'x': 5, 'y': 0,
+          'spaceType': 'ocean',
+          'bonus': [1, 1],
+          'x': 5,
+          'y': 0,
           'tile': {'tileType': 1},
         },
         {
           'id': '05',
-          'spaceType': 'land', 'bonus': [],
-          'x': 6, 'y': 0,
+          'spaceType': 'land',
+          'bonus': [],
+          'x': 6,
+          'y': 0,
         },
       ],
     };
     const player1 = new Player('name-1', Color.RED, false, 0, 'name-1-id');
     const player2 = new Player('name-2', Color.YELLOW, false, 0, 'name-2-id');
 
-    const board = new TestBoard(Board.deserializeSpaces((boardJson as SerializedBoard).spaces, [player1, player2]));
+    const board = new TestBoard(
+      Board.deserializeSpaces((boardJson as SerializedBoard).spaces, [
+        player1,
+        player2,
+      ])
+    );
     expect(board.getSpaceById('01')!.player).eq(player1);
     expect(board.getSpaceById('03')!.player).eq(player2);
   });

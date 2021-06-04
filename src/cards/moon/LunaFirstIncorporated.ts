@@ -21,18 +21,28 @@ export class LunaFirstIncorporated extends Card implements CorporationCard {
         cardNumber: '',
         renderData: CardRenderer.builder((b) => {
           b.megacredits(40).steel(2).titanium(2).br;
-          b.effect('When you raise any Moon Rate, increase your M€ production 1 step per step.', (eb) => {
-            eb.moonColonyRate({size: Size.SMALL}).slash()
-              .moonMiningRate({size: Size.SMALL}).slash()
-              .moonLogisticsRate({size: Size.SMALL})
-              .startEffect.production((pb) => pb.megacredits(1));
-          }).br,
-          b.effect('When any player raises any Moon Rate, gain 1M€ per step.', (eb) => {
-            eb.moonColonyRate({size: Size.SMALL}).any.slash()
-              .moonMiningRate({size: Size.SMALL}).any.slash()
-              .moonLogisticsRate({size: Size.SMALL}).any.
-              startEffect.megacredits(1);
-          }).br;
+          b.effect(
+            'When you raise any Moon Rate, increase your M€ production 1 step per step.',
+            (eb) => {
+              eb.moonColonyRate({size: Size.SMALL})
+                .slash()
+                .moonMiningRate({size: Size.SMALL})
+                .slash()
+                .moonLogisticsRate({size: Size.SMALL})
+                .startEffect.production((pb) => pb.megacredits(1));
+            }
+          ).br,
+            b.effect(
+              'When any player raises any Moon Rate, gain 1M€ per step.',
+              (eb) => {
+                eb.moonColonyRate({size: Size.SMALL})
+                  .any.slash()
+                  .moonMiningRate({size: Size.SMALL})
+                  .any.slash()
+                  .moonLogisticsRate({size: Size.SMALL})
+                  .any.startEffect.megacredits(1);
+              }
+            ).br;
         }),
       },
     });

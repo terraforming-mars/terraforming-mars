@@ -10,7 +10,10 @@ import {Player} from '../../../src/Player';
 import {TestPlayers} from '../../TestPlayers';
 
 describe('StratosphericBirds', () => {
-  let card : StratosphericBirds; let player : Player; let game : Game; let deuteriumExport: DeuteriumExport;
+  let card: StratosphericBirds;
+  let player: Player;
+  let game: Game;
+  let deuteriumExport: DeuteriumExport;
 
   beforeEach(() => {
     card = new StratosphericBirds();
@@ -69,7 +72,9 @@ describe('StratosphericBirds', () => {
     player.addResourceTo(extractorBalloons, 1);
 
     card.play(player);
-    const selectCard = game.deferredActions.pop()!.execute() as SelectCard<ICard>;
+    const selectCard = game.deferredActions
+      .pop()!
+      .execute() as SelectCard<ICard>;
     expect(selectCard.cards).has.lengthOf(2);
 
     selectCard.cb([deuteriumExport]);
@@ -89,7 +94,6 @@ describe('StratosphericBirds', () => {
     // 9 M€ + 1 Dirigibles floater: Cannot play
     expect(card.canPlay(player)).is.not.true;
 
-
     // 12 M€ + 1 Dirigibles floater: Card is playable
     player.megaCredits = 12;
     const SelectHowToPayForProjectCard = player.playProjectCard();
@@ -97,16 +101,30 @@ describe('StratosphericBirds', () => {
 
     // Try to spend floater to pay for card: Throw an error
     expect(() => {
-      SelectHowToPayForProjectCard.cb(card, {steel: 0, heat: 0, titanium: 0, megaCredits: 9, microbes: 0, floaters: 1});
+      SelectHowToPayForProjectCard.cb(card, {
+        steel: 0,
+        heat: 0,
+        titanium: 0,
+        megaCredits: 9,
+        microbes: 0,
+        floaters: 1,
+      });
     }).to.throw('Cannot spend all floaters to play Stratospheric Birds');
 
     // Pay with MC only: Can play
-    SelectHowToPayForProjectCard.cb(card, {steel: 0, heat: 0, titanium: 0, megaCredits: 12, microbes: 0, floaters: 0});
-        game.deferredActions.pop()!.execute(); // Remove floater
-        expect(dirigibles.resourceCount).to.eq(0);
+    SelectHowToPayForProjectCard.cb(card, {
+      steel: 0,
+      heat: 0,
+      titanium: 0,
+      megaCredits: 12,
+      microbes: 0,
+      floaters: 0,
+    });
+    game.deferredActions.pop()!.execute(); // Remove floater
+    expect(dirigibles.resourceCount).to.eq(0);
   });
 
-  it('Allow spending all floaters from Dirigibles if there\'s at least one other card with a floater', () => {
+  it("Allow spending all floaters from Dirigibles if there's at least one other card with a floater", () => {
     const dirigibles = new Dirigibles();
     player.playedCards.push(deuteriumExport, dirigibles);
     player.addResourceTo(deuteriumExport, 1);
@@ -119,10 +137,17 @@ describe('StratosphericBirds', () => {
     expect(card.canPlay(player)).is.true;
 
     // Spend all 3 floaters from Dirigibles to pay for the card
-    selectHowToPayForCard.cb(card, {steel: 0, heat: 0, titanium: 0, megaCredits: 3, microbes: 0, floaters: 3});
-        game.deferredActions.pop()!.execute(); // Remove floater
-        expect(player.getResourcesOnCard(dirigibles)).to.eq(0);
-        expect(player.getResourcesOnCard(deuteriumExport)).to.eq(0);
-        expect(player.megaCredits).to.eq(0);
+    selectHowToPayForCard.cb(card, {
+      steel: 0,
+      heat: 0,
+      titanium: 0,
+      megaCredits: 3,
+      microbes: 0,
+      floaters: 3,
+    });
+    game.deferredActions.pop()!.execute(); // Remove floater
+    expect(player.getResourcesOnCard(dirigibles)).to.eq(0);
+    expect(player.getResourcesOnCard(deuteriumExport)).to.eq(0);
+    expect(player.megaCredits).to.eq(0);
   });
 });

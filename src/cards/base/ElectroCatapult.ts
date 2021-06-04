@@ -58,7 +58,7 @@ export class ElectroCatapult extends Card implements IActionCard, IProjectCard {
           player.megaCredits += 7;
           this.log(player, Resources.STEEL);
           return undefined;
-        }),
+        })
       );
     } else if (player.plants > 0) {
       player.plants--;
@@ -80,6 +80,8 @@ export class ElectroCatapult extends Card implements IActionCard, IProjectCard {
   }
 
   private log(player: Player, resource: Resources) {
-    player.game.log('${0} spent 1 ${1} to gain 7 M€', (b) => b.player(player).string(resource));
+    player.game.log('${0} spent 1 ${1} to gain 7 M€', (b) =>
+      b.player(player).string(resource)
+    );
   }
 }

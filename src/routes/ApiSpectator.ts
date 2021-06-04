@@ -10,7 +10,11 @@ export class ApiSpectator extends Handler {
     super();
   }
 
-  public get(req: http.IncomingMessage, res: http.ServerResponse, ctx: IContext): void {
+  public get(
+    req: http.IncomingMessage,
+    res: http.ServerResponse,
+    ctx: IContext
+  ): void {
     const spectatorId = String(ctx.url.searchParams.get('id'));
     ctx.gameLoader.getBySpectatorId(spectatorId, (game) => {
       if (game === undefined) {

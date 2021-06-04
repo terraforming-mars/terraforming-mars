@@ -9,24 +9,37 @@ import {CardType} from '../CardType';
 import {CardRenderer} from '../render/CardRenderer';
 import {Size} from '../render/Size';
 
-export class ArcadianCommunities extends Card implements IActionCard, CorporationCard {
+export class ArcadianCommunities
+  extends Card
+  implements IActionCard, CorporationCard
+{
   constructor() {
     super({
       cardType: CardType.CORPORATION,
       name: CardName.ARCADIAN_COMMUNITIES,
       startingMegaCredits: 40,
-      initialActionText: 'Place a community (player marker) on a non-reserved area',
+      initialActionText:
+        'Place a community (player marker) on a non-reserved area',
 
       metadata: {
         cardNumber: 'R44',
-        description: 'You start with 40 M€ and 10 steel. AS YOUR FIRST ACTION, PLACE A COMMUNITY [PLAYER MARKER] ON A NON-RESERVED AREA.',
+        description:
+          'You start with 40 M€ and 10 steel. AS YOUR FIRST ACTION, PLACE A COMMUNITY [PLAYER MARKER] ON A NON-RESERVED AREA.',
         renderData: CardRenderer.builder((b) => {
           b.br;
           b.megacredits(40).nbsp.steel(10).digit.nbsp.community().asterix();
           b.corpBox('action', (ce) => {
-            ce.text('ACTION: PLACE A COMMUNITY (PLAYER MARKER) ON A NON-RESERVED AREA ADJACENT TO ONE OF YOUR TILES OR MARKED AREAS', Size.TINY, true);
+            ce.text(
+              'ACTION: PLACE A COMMUNITY (PLAYER MARKER) ON A NON-RESERVED AREA ADJACENT TO ONE OF YOUR TILES OR MARKED AREAS',
+              Size.TINY,
+              true
+            );
             ce.vSpace(Size.MEDIUM);
-            ce.text('EFFECT: MARKED AREAS ARE RESERVED FOR YOU. WHEN YOU PLACE A TILE THERE, GAIN 3 M€', Size.TINY, true);
+            ce.text(
+              'EFFECT: MARKED AREAS ARE RESERVED FOR YOU. WHEN YOU PLACE A TILE THERE, GAIN 3 M€',
+              Size.TINY,
+              true
+            );
           });
         }),
       },
@@ -40,10 +53,12 @@ export class ArcadianCommunities extends Card implements IActionCard, Corporatio
       (foundSpace: ISpace) => {
         foundSpace.player = player;
 
-        player.game.log('${0} placed a Community (player marker)', (b) => b.player(player));
+        player.game.log('${0} placed a Community (player marker)', (b) =>
+          b.player(player)
+        );
 
         return undefined;
-      },
+      }
     );
   }
 
@@ -58,7 +73,7 @@ export class ArcadianCommunities extends Card implements IActionCard, Corporatio
       (foundSpace: ISpace) => {
         foundSpace.player = player;
         return undefined;
-      },
+      }
     );
   }
 

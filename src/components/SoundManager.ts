@@ -1,24 +1,24 @@
 export namespace SoundManager {
   enum Notes {
-    G3 = 196.00,
-    A3 = 220.00,
+    G3 = 196.0,
+    A3 = 220.0,
     B3 = 246.94,
     C4 = 261.63,
     D4 = 293.66,
     E4 = 329.63,
     F4 = 349.23,
-    G4 = 392.00,
-    A4 = 440.00,
+    G4 = 392.0,
+    A4 = 440.0,
     B4 = 493.88,
     C5 = 523.25,
     D5 = 587.33,
     E5 = 659.25,
     F5 = 698.46,
     G5 = 783.99,
-    A5 = 880.00,
+    A5 = 880.0,
     B5 = 987.77,
-    C6 = 1046.50,
-  };
+    C6 = 1046.5,
+  }
 
   function setupGainNode(audioCtx: AudioContext, time: number, value: number) {
     time += audioCtx.currentTime;
@@ -31,7 +31,11 @@ export namespace SoundManager {
     return gainNode;
   }
 
-  function setupOscillator(audioCtx: AudioContext, frequency: number, gainNode: GainNode) {
+  function setupOscillator(
+    audioCtx: AudioContext,
+    frequency: number,
+    gainNode: GainNode
+  ) {
     const oscillator = audioCtx.createOscillator();
     oscillator.type = 'sine';
     oscillator.frequency.value = frequency;
@@ -40,7 +44,13 @@ export namespace SoundManager {
     return oscillator;
   }
 
-  function playSound(audioCtx: AudioContext, frequency: number, time: number, len: number, gainValue: number = 1) {
+  function playSound(
+    audioCtx: AudioContext,
+    frequency: number,
+    time: number,
+    len: number,
+    gainValue: number = 1
+  ) {
     const gainNode = setupGainNode(audioCtx, time, gainValue);
     const oscillator = setupOscillator(audioCtx, frequency, gainNode);
 
@@ -71,7 +81,7 @@ export namespace SoundManager {
 
   export function newLog() {
     playInContext((audioCtx) => {
-      playSound(audioCtx, Notes.G3, 0.02, 0.05, .1);
+      playSound(audioCtx, Notes.G3, 0.02, 0.05, 0.1);
     });
   }
 }

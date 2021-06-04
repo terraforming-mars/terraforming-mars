@@ -16,7 +16,8 @@ export class GalileanWaystation extends Card implements IProjectCard {
       cardType: CardType.AUTOMATED,
 
       metadata: {
-        description: 'Increase your M€ production 1 step for every Jovian tag in play.',
+        description:
+          'Increase your M€ production 1 step for every Jovian tag in play.',
         cardNumber: 'C13',
         renderData: CardRenderer.builder((b) => {
           b.production((pb) => pb.megacredits(1).slash().jovian().played.any);
@@ -27,8 +28,11 @@ export class GalileanWaystation extends Card implements IProjectCard {
   }
 
   public play(player: Player) {
-    const amount = player.game.getPlayers()
-      .map((aplayer) => aplayer.getTagCount(Tags.JOVIAN, false, player.id === aplayer.id))
+    const amount = player.game
+      .getPlayers()
+      .map((aplayer) =>
+        aplayer.getTagCount(Tags.JOVIAN, false, player.id === aplayer.id)
+      )
       .reduce((a, c) => a + c, 0);
     player.addProduction(Resources.MEGACREDITS, amount);
     return undefined;

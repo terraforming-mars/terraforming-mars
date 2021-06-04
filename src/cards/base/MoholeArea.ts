@@ -24,8 +24,10 @@ export class MoholeArea extends Card implements IProjectCard {
         b.production((pb) => pb.heat(4).digit).br;
         b.tile(TileType.MOHOLE_AREA, true);
       }),
-      description: 'Increase your heat production 4 steps. Place this tile ON AN AREA RESERVED FOR OCEAN.',
-    }) {
+      description:
+        'Increase your heat production 4 steps. Place this tile ON AN AREA RESERVED FOR OCEAN.',
+    }
+  ) {
     super({
       cardType: CardType.AUTOMATED,
       name,
@@ -38,11 +40,17 @@ export class MoholeArea extends Card implements IProjectCard {
   }
 
   public play(player: Player) {
-    return new SelectSpace('Select an ocean space for special tile', player.game.board.getAvailableSpacesForOcean(player), (space: ISpace) => {
-      player.game.addTile(player, SpaceType.OCEAN, space, {tileType: TileType.MOHOLE_AREA});
-      space.adjacency = this.adjacencyBonus;
-      player.addProduction(Resources.HEAT, 4);
-      return undefined;
-    });
+    return new SelectSpace(
+      'Select an ocean space for special tile',
+      player.game.board.getAvailableSpacesForOcean(player),
+      (space: ISpace) => {
+        player.game.addTile(player, SpaceType.OCEAN, space, {
+          tileType: TileType.MOHOLE_AREA,
+        });
+        space.adjacency = this.adjacencyBonus;
+        player.addProduction(Resources.HEAT, 4);
+        return undefined;
+      }
+    );
   }
 }

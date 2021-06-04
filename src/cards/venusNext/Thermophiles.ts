@@ -38,7 +38,7 @@ export class Thermophiles extends Card implements IActionCard, IResourceCard {
         description: 'Requires Venus 6%',
       },
     });
-  };
+  }
   public resourceCount: number = 0;
 
   public play() {
@@ -48,8 +48,12 @@ export class Thermophiles extends Card implements IActionCard, IResourceCard {
     return true;
   }
   public action(player: Player) {
-    const venusMicrobeCards = player.getResourceCards(ResourceType.MICROBE).filter((card) => card.tags.includes(Tags.VENUS));
-    const canRaiseVenus = this.resourceCount > 1 && player.game.getVenusScaleLevel() < MAX_VENUS_SCALE;
+    const venusMicrobeCards = player
+      .getResourceCards(ResourceType.MICROBE)
+      .filter((card) => card.tags.includes(Tags.VENUS));
+    const canRaiseVenus =
+      this.resourceCount > 1 &&
+      player.game.getVenusScaleLevel() < MAX_VENUS_SCALE;
 
     // only 1 valid target and cannot remove 2 microbes - add to itself
     if (venusMicrobeCards.length === 1 && !canRaiseVenus) {
@@ -59,11 +63,15 @@ export class Thermophiles extends Card implements IActionCard, IResourceCard {
 
     const opts: Array<SelectOption | SelectCard<ICard>> = [];
 
-    const spendResource = new SelectOption('Remove 2 microbes to raise Venus 1 step', 'Remove microbes', () => {
-      player.removeResourceFrom(this, 2);
-      player.game.increaseVenusScaleLevel(player, 1);
-      return undefined;
-    });
+    const spendResource = new SelectOption(
+      'Remove 2 microbes to raise Venus 1 step',
+      'Remove microbes',
+      () => {
+        player.removeResourceFrom(this, 2);
+        player.game.increaseVenusScaleLevel(player, 1);
+        return undefined;
+      }
+    );
 
     const addResource = new SelectCard(
       'Select a Venus card to add 1 microbe',
@@ -72,18 +80,28 @@ export class Thermophiles extends Card implements IActionCard, IResourceCard {
       (foundCards: Array<ICard>) => {
         player.addResourceTo(foundCards[0], {log: true});
         return undefined;
-      },
+      }
     );
 
-    const addResourceToSelf = new SelectOption('Add a microbe to this card', 'Add microbe', () => {
-      player.addResourceTo(venusMicrobeCards[0], {log: true});
-      return undefined;
-    });
+    const addResourceToSelf = new SelectOption(
+      'Add a microbe to this card',
+      'Add microbe',
+      () => {
+        player.addResourceTo(venusMicrobeCards[0], {log: true});
+        return undefined;
+      }
+    );
 
-    const redsAreRuling = PartyHooks.shouldApplyPolicy(player.game, PartyName.REDS);
+    const redsAreRuling = PartyHooks.shouldApplyPolicy(
+      player.game,
+      PartyName.REDS
+    );
 
     if (canRaiseVenus) {
-      if (!redsAreRuling || (redsAreRuling && player.canAfford(REDS_RULING_POLICY_COST))) {
+      if (
+        !redsAreRuling ||
+        (redsAreRuling && player.canAfford(REDS_RULING_POLICY_COST))
+      ) {
         opts.push(spendResource);
       }
     } else {
@@ -91,7 +109,9 @@ export class Thermophiles extends Card implements IActionCard, IResourceCard {
       return addResource;
     }
 
-    venusMicrobeCards.length === 1 ? opts.push(addResourceToSelf) : opts.push(addResource);
+    venusMicrobeCards.length === 1
+      ? opts.push(addResourceToSelf)
+      : opts.push(addResource);
 
     return new OrOptions(...opts);
   }

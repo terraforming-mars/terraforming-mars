@@ -42,7 +42,6 @@ describe('IronExtractionCenter', () => {
     expect(player.titanium).eq(2);
     expect(player.getProduction(Resources.STEEL)).eq(1);
 
-
     // Play a second time. Steel rate will go up by 2.
     moonData.miningRate = 4;
     card.play(player);
@@ -51,4 +50,3 @@ describe('IronExtractionCenter', () => {
     expect(player.getProduction(Resources.STEEL)).eq(3);
   });
 });
-

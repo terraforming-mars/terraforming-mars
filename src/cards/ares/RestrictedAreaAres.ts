@@ -17,7 +17,9 @@ export class RestrictedAreaAres extends RestrictedArea {
           }).br;
           b.tile(TileType.RESTRICTED_AREA, false, true);
         }),
-        description: 'Place this tile which grants an ADJACENCY BONUS of 1 card.',
-      });
+        description:
+          'Place this tile which grants an ADJACENCY BONUS of 1 card.',
+      }
+    );
   }
 }

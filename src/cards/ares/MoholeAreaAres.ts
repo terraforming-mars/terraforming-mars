@@ -15,7 +15,9 @@ export class MoholeAreaAres extends MoholeArea {
           b.production((pb) => pb.heat(4).digit).br;
           b.tile(TileType.MOHOLE_AREA, false, true);
         }),
-        description: 'Increase your heat production 4 steps. Place this tile ON AN AREA RESERVED FOR OCEAN. The tile grants an ADJACENCY BONUS of 2 heat.',
-      });
+        description:
+          'Increase your heat production 4 steps. Place this tile ON AN AREA RESERVED FOR OCEAN. The tile grants an ADJACENCY BONUS of 2 heat.',
+      }
+    );
   }
 }

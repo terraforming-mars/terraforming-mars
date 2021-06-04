@@ -9,7 +9,10 @@ import {IMoonCard} from './IMoonCard';
 import {TileType} from '../../TileType';
 import {AltSecondaryTag} from '../render/CardRenderItem';
 
-export class MoonRoadStandardProject extends StandardProjectCard implements IMoonCard {
+export class MoonRoadStandardProject
+  extends StandardProjectCard
+  implements IMoonCard
+{
   constructor() {
     super({
       name: CardName.MOON_ROAD_STANDARD_PROJECT,
@@ -17,9 +20,15 @@ export class MoonRoadStandardProject extends StandardProjectCard implements IMoo
       metadata: {
         cardNumber: '',
         renderData: CardRenderer.builder((b) =>
-          b.standardProject('Spend 18 M€ and 1 steel to place a road on the moon and raise the Logistics Rate 1 step.', (eb) => {
-            eb.megacredits(18).steel(1).startAction.moonRoad().secondaryTag(AltSecondaryTag.MOON_LOGISTICS_RATE);
-          }),
+          b.standardProject(
+            'Spend 18 M€ and 1 steel to place a road on the moon and raise the Logistics Rate 1 step.',
+            (eb) => {
+              eb.megacredits(18)
+                .steel(1)
+                .startAction.moonRoad()
+                .secondaryTag(AltSecondaryTag.MOON_LOGISTICS_RATE);
+            }
+          )
         ),
       },
     });
@@ -29,7 +38,11 @@ export class MoonRoadStandardProject extends StandardProjectCard implements IMoo
   public tilesBuilt = [TileType.MOON_ROAD];
 
   protected discount(player: Player): number {
-    if (player.playedCards.find((card) => card.name === CardName.MOONCRATE_BLOCK_FACTORY)) {
+    if (
+      player.playedCards.find(
+        (card) => card.name === CardName.MOONCRATE_BLOCK_FACTORY
+      )
+    ) {
       return 4;
     }
     return super.discount(player);
@@ -47,7 +60,10 @@ export class MoonRoadStandardProject extends StandardProjectCard implements IMoo
   }
 
   actionEssence(player: Player): void {
-    const adjustedReserveUnits = MoonExpansion.adjustedReserveCosts(player, this);
+    const adjustedReserveUnits = MoonExpansion.adjustedReserveCosts(
+      player,
+      this
+    );
     player.deductUnits(adjustedReserveUnits);
     player.game.defer(new PlaceMoonRoadTile(player));
   }

@@ -26,7 +26,8 @@ export class Plantation extends Card implements IProjectCard {
         renderData: CardRenderer.builder((b) => {
           b.greenery();
         }),
-        description: 'Requires 2 Science tags. Place a greenery tile and raise oxygen 1 step.',
+        description:
+          'Requires 2 Science tags. Place a greenery tile and raise oxygen 1 step.',
       },
     });
   }
@@ -41,16 +42,26 @@ export class Plantation extends Card implements IProjectCard {
 
     const oxygenMaxed = player.game.getOxygenLevel() === MAX_OXYGEN_LEVEL;
 
-    if (PartyHooks.shouldApplyPolicy(player.game, PartyName.REDS) && !oxygenMaxed) {
-      return player.canAfford(player.getCardCost(this) + REDS_RULING_POLICY_COST, {microbes: true});
+    if (
+      PartyHooks.shouldApplyPolicy(player.game, PartyName.REDS) &&
+      !oxygenMaxed
+    ) {
+      return player.canAfford(
+        player.getCardCost(this) + REDS_RULING_POLICY_COST,
+        {microbes: true}
+      );
     }
 
     return true;
   }
 
   public play(player: Player) {
-    return new SelectSpace('Select space for greenery tile', player.game.board.getAvailableSpacesForGreenery(player), (space: ISpace) => {
-      return player.game.addGreenery(player, space.id);
-    });
+    return new SelectSpace(
+      'Select space for greenery tile',
+      player.game.board.getAvailableSpacesForGreenery(player),
+      (space: ISpace) => {
+        return player.game.addGreenery(player, space.id);
+      }
+    );
   }
 }

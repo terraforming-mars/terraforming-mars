@@ -3,8 +3,8 @@ import {Solarnet} from '../../../src/cards/venusNext/Solarnet';
 import {Game} from '../../../src/Game';
 import {TestPlayers} from '../../TestPlayers';
 
-describe('Solarnet', function() {
-  it('Should play', function() {
+describe('Solarnet', function () {
+  it('Should play', function () {
     const card = new Solarnet();
     const player = TestPlayers.BLUE.newPlayer();
     const redPlayer = TestPlayers.RED.newPlayer();

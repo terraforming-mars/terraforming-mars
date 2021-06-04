@@ -41,7 +41,6 @@ describe('HE3ProductionQuotas', () => {
     game.turmoil!.rulingParty = new Greens();
     expect(player.getPlayableCards()).does.not.include(card);
 
-
     game.turmoil!.rulingParty = new Kelvinists();
     player.steel = 2;
     expect(player.getPlayableCards()).does.not.include(card);
@@ -69,4 +68,3 @@ describe('HE3ProductionQuotas', () => {
     expect(player.getTerraformRating()).eq(15);
   });
 });
-

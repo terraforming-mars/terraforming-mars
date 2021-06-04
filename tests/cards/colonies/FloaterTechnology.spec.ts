@@ -8,26 +8,28 @@ import {SelectCard} from '../../../src/inputs/SelectCard';
 import {Player} from '../../../src/Player';
 import {TestPlayers} from '../../TestPlayers';
 
-describe('FloaterTechnology', function() {
-  let card : FloaterTechnology; let player : Player; let game : Game;
+describe('FloaterTechnology', function () {
+  let card: FloaterTechnology;
+  let player: Player;
+  let game: Game;
 
-  beforeEach(function() {
+  beforeEach(function () {
     card = new FloaterTechnology();
     player = TestPlayers.BLUE.newPlayer();
     const redPlayer = TestPlayers.RED.newPlayer();
     game = Game.newInstance('foobar', [player, redPlayer], player);
   });
 
-  it('Can play', function() {
+  it('Can play', function () {
     const result = card.play();
     expect(result).is.undefined;
   });
 
-  it('Cannot act without targets', function() {
+  it('Cannot act without targets', function () {
     expect(card.canAct(player)).is.not.true;
   });
 
-  it('Acts automatically with single targets', function() {
+  it('Acts automatically with single targets', function () {
     const dirigibles = new Dirigibles();
     player.playedCards.push(dirigibles);
 
@@ -38,7 +40,7 @@ describe('FloaterTechnology', function() {
     expect(dirigibles.resourceCount).to.eq(1);
   });
 
-  it('Should act with multiple targets', function() {
+  it('Should act with multiple targets', function () {
     const dirigibles = new Dirigibles();
     const floatingHabs = new FloatingHabs();
     player.playedCards.push(dirigibles, floatingHabs);
@@ -46,7 +48,9 @@ describe('FloaterTechnology', function() {
     card.action(player);
     expect(game.deferredActions).has.lengthOf(1);
 
-    const selectCard = game.deferredActions.peek()!.execute() as SelectCard<ICard>;
+    const selectCard = game.deferredActions
+      .peek()!
+      .execute() as SelectCard<ICard>;
     selectCard.cb([floatingHabs]);
     expect(floatingHabs.resourceCount).to.eq(1);
     expect(dirigibles.resourceCount).to.eq(0);

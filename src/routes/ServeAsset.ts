@@ -15,9 +15,12 @@ export class ServeAsset extends Handler {
   private readonly cache = new BufferCache();
 
   // Public for tests
-  public constructor(private cacheAgeSeconds: string | number = process.env.ASSET_CACHE_MAX_AGE || 0,
+  public constructor(
+    private cacheAgeSeconds: string | number = process.env
+      .ASSET_CACHE_MAX_AGE || 0,
     // only production caches resources
-    private cacheAssets: boolean = process.env.NODE_ENV === 'production') {
+    private cacheAssets: boolean = process.env.NODE_ENV === 'production'
+  ) {
     super();
     // prime the cache with styles.css and a compressed copy of it styles.css
     const styles = fs.readFileSync('build/styles.css');
@@ -31,7 +34,11 @@ export class ServeAsset extends Handler {
     });
   }
 
-  public get(req: http.IncomingMessage, res: http.ServerResponse, ctx: IContext): void {
+  public get(
+    req: http.IncomingMessage,
+    res: http.ServerResponse,
+    ctx: IContext
+  ): void {
     if (req.url === undefined) {
       ctx.route.internalServerError(req, res, new Error('no url on request'));
       return;
@@ -41,7 +48,10 @@ export class ServeAsset extends Handler {
     const path = req.url.substring(1);
 
     const supportedEncodings = this.supportedEncodings(req);
-    const toFile: {file?: string, encoding?: Encoding } = this.toFile(path, supportedEncodings);
+    const toFile: {file?: string; encoding?: Encoding} = this.toFile(
+      path,
+      supportedEncodings
+    );
 
     if (toFile.file === undefined) {
       return ctx.route.notFound(req, res);
@@ -58,7 +68,11 @@ export class ServeAsset extends Handler {
       }
       res.setHeader('Cache-Control', 'must-revalidate');
       res.setHeader('ETag', buffer.hash);
-    } else if (this.cacheAssets === false && req.url !== '/main.js' && req.url !== '/main.js.map') {
+    } else if (
+      this.cacheAssets === false &&
+      req.url !== '/main.js' &&
+      req.url !== '/main.js.map'
+    ) {
       res.setHeader('Cache-Control', 'max-age=' + this.cacheAgeSeconds);
     }
 
@@ -89,52 +103,57 @@ export class ServeAsset extends Handler {
     });
   }
 
-  private toFile(urlPath: string, encodings: Set<Encoding>): { file?: string, encoding?: Encoding } {
+  private toFile(
+    urlPath: string,
+    encodings: Set<Encoding>
+  ): {file?: string; encoding?: Encoding} {
     switch (urlPath) {
-    case 'assets/index.html':
-    case 'assets/Prototype.ttf':
-    case 'assets/futureforces.ttf':
-      return {file: urlPath};
+      case 'assets/index.html':
+      case 'assets/Prototype.ttf':
+      case 'assets/futureforces.ttf':
+        return {file: urlPath};
 
-    case 'styles.css':
-      const compressed = this.cache.get('styles.css.gz');
-      if (compressed !== undefined && encodings.has('gzip')) {
-        return {file: urlPath + '.gz', encoding: 'gzip'};
-      }
-      return {file: urlPath};
-
-    case 'main.js':
-    case 'main.js.map':
-      let file = `build/${urlPath}`;
-      let encoding: Encoding | undefined = undefined;
-      if (encodings.has('br')) {
-        encoding = 'br';
-        file += '.br';
-      } else if (encodings.has('gzip')) {
-        encoding = 'gzip';
-        file += '.gz';
-      }
-      return {file, encoding};
-
-    case 'favicon.ico':
-      return {file: 'assets/favicon.ico'};
-
-    default:
-      if (urlPath.endsWith('.png') || urlPath.endsWith('.jpg')) {
-        const assetsRoot = path.resolve('./assets');
-        const resolvedFile = path.resolve(path.normalize(urlPath));
-
-        // Only allow assets inside of assets directory
-        if (resolvedFile.startsWith(assetsRoot)) {
-          return {file: resolvedFile};
+      case 'styles.css':
+        const compressed = this.cache.get('styles.css.gz');
+        if (compressed !== undefined && encodings.has('gzip')) {
+          return {file: urlPath + '.gz', encoding: 'gzip'};
         }
-      }
+        return {file: urlPath};
+
+      case 'main.js':
+      case 'main.js.map':
+        let file = `build/${urlPath}`;
+        let encoding: Encoding | undefined = undefined;
+        if (encodings.has('br')) {
+          encoding = 'br';
+          file += '.br';
+        } else if (encodings.has('gzip')) {
+          encoding = 'gzip';
+          file += '.gz';
+        }
+        return {file, encoding};
+
+      case 'favicon.ico':
+        return {file: 'assets/favicon.ico'};
+
+      default:
+        if (urlPath.endsWith('.png') || urlPath.endsWith('.jpg')) {
+          const assetsRoot = path.resolve('./assets');
+          const resolvedFile = path.resolve(path.normalize(urlPath));
+
+          // Only allow assets inside of assets directory
+          if (resolvedFile.startsWith(assetsRoot)) {
+            return {file: resolvedFile};
+          }
+        }
     }
 
     return {};
   }
 
   private supportedEncodings(req: http.IncomingMessage): Set<Encoding> {
-    return new Set(req.headers['accept-encoding'] as (Array<Encoding> | undefined));
+    return new Set(
+      req.headers['accept-encoding'] as Array<Encoding> | undefined
+    );
   }
 }

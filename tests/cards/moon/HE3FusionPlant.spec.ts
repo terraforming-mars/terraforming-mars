@@ -50,4 +50,3 @@ describe('HE3FusionPlant', () => {
     expect(player.getProduction(Resources.ENERGY)).eq(2);
   });
 });
-

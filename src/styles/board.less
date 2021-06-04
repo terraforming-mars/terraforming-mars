@@ -1,324 +1,338 @@
 .board {
-    width: 600px;
-    height: 488px;
-	margin: 85px 0 0 93px;
+  width: 600px;
+  height: 488px;
+  margin: 85px 0 0 93px;
 
-	.board-space {
-		clip-path: polygon(50% 0, 100% 25%, 100% 75%, 50% 100%, 0 75%, 0 25%);
-	}
+  .board-space {
+    clip-path: polygon(50% 0, 100% 25%, 100% 75%, 50% 100%, 0 75%, 0 25%);
+  }
 }
 
 .board-cont {
-	display: inline-block;
-	vertical-align: top;
-	width: 640px;
-	margin: 0 auto;
-	margin-top: 20px;
+  display: inline-block;
+  vertical-align: top;
+  width: 640px;
+  margin: 0 auto;
+  margin-top: 20px;
 }
 
-.board-with-venus{
-	background: url(assets/board/mars.png) no-repeat;
+.board-with-venus {
+  background: url(assets/board/mars.png) no-repeat;
 }
 
-.board-without-venus{
-	background: url(assets/board/mars-without-venus.png) no-repeat;
+.board-without-venus {
+  background: url(assets/board/mars-without-venus.png) no-repeat;
 }
 
 .board-legend {
-	position: absolute;
-	margin: -67px 0 0 -100px;
-	z-index: 5;
-	pointer-events: none
+  position: absolute;
+  margin: -67px 0 0 -100px;
+  z-index: 5;
+  pointer-events: none;
 }
 
 .board-caption {
-	font-family: Tahoma,Verdana,Segoe,sans-serif;
-	font-size: 10px;
-	font-weight: bold;
-	fill: white;
-	pointer-events: none;
+  font-family: Tahoma, Verdana, Segoe, sans-serif;
+  font-size: 10px;
+  font-weight: bold;
+  fill: white;
+  pointer-events: none;
 }
 
 .board-line {
-	stroke: white;
-	stroke-width: 3;
-	stroke-opacity: 0.3;
-	pointer-events: none;
+  stroke: white;
+  stroke-width: 3;
+  stroke-opacity: 0.3;
+  pointer-events: none;
 }
 
 .board-space--available:hover {
-	background: url(assets/hex_green.png) !important;
-	cursor: pointer;
+  background: url(assets/hex_green.png) !important;
+  cursor: pointer;
 }
 
 .board-space-bonus {
-	position: absolute;
-    pointer-events: none;
-    width: 16px;
-    height: 16px;
-    margin: 0 0 0 2px;
-		border-radius: 2px;
+  position: absolute;
+  pointer-events: none;
+  width: 16px;
+  height: 16px;
+  margin: 0 0 0 2px;
+  border-radius: 2px;
 
-	&.board-space-bonus-pos--1 {
-		margin: 15px 0 0 5px;
-	}
+  &.board-space-bonus-pos--1 {
+    margin: 15px 0 0 5px;
+  }
 
-	&.board-space-bonus-pos--2 {
-		margin: 15px 0 0 23px;
-	}
+  &.board-space-bonus-pos--2 {
+    margin: 15px 0 0 23px;
+  }
 
-	&.board-space-bonus-pos--3 {
-		margin: 23px 0 0 14px;
-	}
+  &.board-space-bonus-pos--3 {
+    margin: 23px 0 0 14px;
+  }
 }
 
 .board-space-bonus--plant {
-	background: url(assets/resources/plant.png);
-	background-size: 16px;
+  background: url(assets/resources/plant.png);
+  background-size: 16px;
 }
 .board-space-bonus--steel {
-	background: url(assets/resources/steel.png) no-repeat;
-	background-size: 16px;
+  background: url(assets/resources/steel.png) no-repeat;
+  background-size: 16px;
 }
 .board-space-bonus--titanium {
-	background: url(assets/resources/titanium.png) no-repeat;
-	background-size: 16px;
+  background: url(assets/resources/titanium.png) no-repeat;
+  background-size: 16px;
 }
 
 .board-space-bonus--card {
-	background: url(assets/resources/card.png) no-repeat;
-	background-size: 16px;
-	height: 20px;
+  background: url(assets/resources/card.png) no-repeat;
+  background-size: 16px;
+  height: 20px;
 }
 
 .board-space-bonus--heat {
-	background: url(assets/resources/heat.png) no-repeat;
-	background-size: 16px;
+  background: url(assets/resources/heat.png) no-repeat;
+  background-size: 16px;
 }
 
 .board-space-bonus--bonusocean {
-    background: url(assets/tiles/ocean.png), url(assets/misc/hellas-ocean-cost.png);
-    background-repeat: no-repeat, no-repeat;
-    background-size: 21px, 12px;
-    background-position: left, 23px;
-    width: 35px;
-    height: 24px;
+  background: url(assets/tiles/ocean.png),
+    url(assets/misc/hellas-ocean-cost.png);
+  background-repeat: no-repeat, no-repeat;
+  background-size: 21px, 12px;
+  background-position: left, 23px;
+  width: 35px;
+  height: 24px;
 }
 
-
 .board-space-tile--ocean {
-	background: url(assets/board_icons.png) -79px -29px no-repeat;
-	width: 46px;
+  background: url(assets/board_icons.png) -79px -29px no-repeat;
+  width: 46px;
 }
 
 .board-space-tile--city {
-	background: url(assets/board_icons.png) -29px -29px no-repeat;
+  background: url(assets/board_icons.png) -29px -29px no-repeat;
 }
 
 .board-space-tile--greenery {
-	background: url(assets/board_icons.png) -129px -29px no-repeat;
+  background: url(assets/board_icons.png) -129px -29px no-repeat;
 }
 
 .board-space-tile--capital {
-	background: url(assets/board_icons.png) -198px -83px no-repeat;
+  background: url(assets/board_icons.png) -198px -83px no-repeat;
 }
 
 .board-space-tile--mohole_area {
-	background: url(assets/board_icons.png) -438px -27px no-repeat;
+  background: url(assets/board_icons.png) -438px -27px no-repeat;
 }
 
 .board-space-tile--commercial_district {
-	background: url(assets/board_icons.png) -486px -27px no-repeat;
+  background: url(assets/board_icons.png) -486px -27px no-repeat;
 }
 
 .board-space-tile--ecological_zone {
-	background: url(assets/board_icons.png) -581px -27px no-repeat;
+  background: url(assets/board_icons.png) -581px -27px no-repeat;
 }
 
 .board-space-tile--industrial_center {
-	background: url(assets/board_icons.png) -534px -27px no-repeat;
+  background: url(assets/board_icons.png) -534px -27px no-repeat;
 }
 
 .board-space-tile--lava_flows {
-	background: url(assets/board_icons.png) -246px -27px no-repeat;
+  background: url(assets/board_icons.png) -246px -27px no-repeat;
 }
 
-.board-space-tile--mining_area, .board-space-tile--mining_rights {
-	background: url(assets/board_icons.png) -294px -27px no-repeat;
+.board-space-tile--mining_area,
+.board-space-tile--mining_rights {
+  background: url(assets/board_icons.png) -294px -27px no-repeat;
 }
 
 .board-space-tile--natural_preserve {
-	background: url(assets/board_icons.png) -390px -27px no-repeat;
+  background: url(assets/board_icons.png) -390px -27px no-repeat;
 }
 
 .board-space-tile--nuclear_zone {
-	background: url(assets/board_icons.png) -198px -27px no-repeat;
+  background: url(assets/board_icons.png) -198px -27px no-repeat;
 }
 
 .board-space-tile--restricted_area {
-	background: url(assets/board_icons.png) -342px -27px no-repeat;
+  background: url(assets/board_icons.png) -342px -27px no-repeat;
 }
 
 .board-space-tile--great_dam {
-	background: url(assets/board_icons.png) -581px -83px no-repeat;
+  background: url(assets/board_icons.png) -581px -83px no-repeat;
 }
 
 .board-space-tile--deimos_down {
-	background: url(assets/board_icons.png) -487px -83px no-repeat;
+  background: url(assets/board_icons.png) -487px -83px no-repeat;
 }
 
 .board-space-tile--magnetic_field_generators {
-	background: url(assets/board_icons.png) -535px -83px no-repeat;
+  background: url(assets/board_icons.png) -535px -83px no-repeat;
 }
 
 .board-cube {
-	position: absolute;
-	width: 21px;
-	height: 21px;
-	z-index: 3;
-	margin: 25px 0 0 15px;
-	filter: drop-shadow(2px 2px 3px black);
+  position: absolute;
+  width: 21px;
+  height: 21px;
+  z-index: 3;
+  margin: 25px 0 0 15px;
+  filter: drop-shadow(2px 2px 3px black);
 }
 
 .colony-cube {
-	transform: scale(1.6);
-	margin: 13px 0 0 15px;
+  transform: scale(1.6);
+  margin: 13px 0 0 15px;
 }
 
 .occupied-colony-space {
-	position: absolute;
-	background: rgba(0,0,0,0.7);
-	width: 53px;
+  position: absolute;
+  background: rgba(0, 0, 0, 0.7);
+  width: 53px;
   height: 46px;
-	z-index: 1;
+  z-index: 1;
 }
 
 .board-cube--red {
-	background: url(assets/board_icons.png) -24px -91px no-repeat;
+  background: url(assets/board_icons.png) -24px -91px no-repeat;
 }
 
 .board-cube--blue {
-	background: url(assets/board_icons.png) -94px -91px no-repeat;
+  background: url(assets/board_icons.png) -94px -91px no-repeat;
 }
 
 .board-cube--black {
-	background: url(assets/board_icons.png) -48px -91px no-repeat;
+  background: url(assets/board_icons.png) -48px -91px no-repeat;
 }
 
 .board-cube--yellow {
-	background: url(assets/board_icons.png) -72px -91px no-repeat;
+  background: url(assets/board_icons.png) -72px -91px no-repeat;
 }
 
 .board-cube--green {
-	background: url(assets/board_icons.png) -1px -91px no-repeat;
+  background: url(assets/board_icons.png) -1px -91px no-repeat;
 }
 .board-cube--purple {
-	background: url(assets/board_icons.png) -118px -91px no-repeat;
+  background: url(assets/board_icons.png) -118px -91px no-repeat;
 }
 
 .board-cube--orange {
-	background: url(assets/board_icons.png) -1px -117px no-repeat;
+  background: url(assets/board_icons.png) -1px -117px no-repeat;
 }
 
 .board-cube--pink {
-	background: url(assets/board_icons.png) -24px -117px no-repeat;
+  background: url(assets/board_icons.png) -24px -117px no-repeat;
 }
 
 .board-cube--bronze {
-	background: url(assets/board_icons.png) -142px -91px no-repeat;
+  background: url(assets/board_icons.png) -142px -91px no-repeat;
 }
 
 .board-outer-spaces {
-	position: absolute;
+  position: absolute;
 }
 
 .board-space {
-	width: 46px;
-	height: 51px;
-	position: absolute;
+  width: 46px;
+  height: 51px;
+  position: absolute;
 
-	.board-space-text {
-		font-size: 11px;
-		font-weight: bold;
-		line-height: 11px;
-		text-align: center;
-		position: absolute;
-		margin: -25px 0 0 -20px;
-		width: 88px;
-	}
+  .board-space-text {
+    font-size: 11px;
+    font-weight: bold;
+    line-height: 11px;
+    text-align: center;
+    position: absolute;
+    margin: -25px 0 0 -20px;
+    width: 88px;
+  }
 
-	&.board-space-69, &.board-space-70, &.board-space-71, &.board-space-72, &.board-space-73 {
-		.board-space-text {
-			margin-top: -15px;
-		}
-	}
+  &.board-space-69,
+  &.board-space-70,
+  &.board-space-71,
+  &.board-space-72,
+  &.board-space-73 {
+    .board-space-text {
+      margin-top: -15px;
+    }
+  }
 
-	.board-space-bonuses {
-		position: absolute;
-	}
+  .board-space-bonuses {
+    position: absolute;
+  }
 
-	&.board-space--available {
-		animation: board-tile-blink-animation 2s infinite;
-		cursor: pointer;
-	}
+  &.board-space--available {
+    animation: board-tile-blink-animation 2s infinite;
+    cursor: pointer;
+  }
 }
 
 @keyframes board-tile-blink-animation {
-	0% { filter: opacity(1)}
-	49% { filter: opacity(1)}
-	70% { filter: opacity(0.4)}
-	99% { filter: opacity(0.4)}
-	100% { filter: opacity(1)}
+  0% {
+    filter: opacity(1);
+  }
+  49% {
+    filter: opacity(1);
+  }
+  70% {
+    filter: opacity(0.4);
+  }
+  99% {
+    filter: opacity(0.4);
+  }
+  100% {
+    filter: opacity(1);
+  }
 }
 
 .board-space-type-land {
-	background: url(assets/hex_white.png) no-repeat;
+  background: url(assets/hex_white.png) no-repeat;
 }
 
 .board-space-type-land-volcanic {
-	background-image: url(assets/hex_volcanic.png);
-	background-color: #8303;
+  background-image: url(assets/hex_volcanic.png);
+  background-color: #8303;
 }
 
 .board-space-type-land-noctis {
-	background-color: #fff6;
+  background-color: #fff6;
 }
 
 .board-space-type-ocean {
-	background: url(assets/hex_blue.png) no-repeat;
-	clip-path: polygon(50% 0, 100% 25%, 100% 75%, 50% 100%, 0 75%, 0 25%);
-    background-color: #0af4;
+  background: url(assets/hex_blue.png) no-repeat;
+  clip-path: polygon(50% 0, 100% 25%, 100% 75%, 50% 100%, 0 75%, 0 25%);
+  background-color: #0af4;
 }
 
-.board-ocean-checkmark{
-	margin-left: 20px;
-    margin-bottom: -1px;
+.board-ocean-checkmark {
+  margin-left: 20px;
+  margin-bottom: -1px;
 }
 
-.board-hidden-tile{
-	opacity: 0.4;
+.board-hidden-tile {
+  opacity: 0.4;
 }
-
 
 .hide-tile-button-container {
-	position: relative;
-	width: 0px;
-	height: 0px;
+  position: relative;
+  width: 0px;
+  height: 0px;
 
-	.hide-tile-button {
-		position: absolute;
-		bottom: -500px;
-		text-transform: uppercase;
-		font-size: 12px;
-		color: #e6e1e1;
-		background: url(assets/hex_white.png) no-repeat;
-		background-color: #444;
-		clip-path: polygon(50% 0, 100% 25%, 100% 75%, 50% 100%, 0 75%, 0 25%);
-		cursor: pointer;
-		width: 46px;
-		height: 51px;
-		line-height: 12px;
-		padding-top: 14px;
-		text-align: center;
-	}
+  .hide-tile-button {
+    position: absolute;
+    bottom: -500px;
+    text-transform: uppercase;
+    font-size: 12px;
+    color: #e6e1e1;
+    background: url(assets/hex_white.png) no-repeat;
+    background-color: #444;
+    clip-path: polygon(50% 0, 100% 25%, 100% 75%, 50% 100%, 0 75%, 0 25%);
+    cursor: pointer;
+    width: 46px;
+    height: 51px;
+    line-height: 12px;
+    padding-top: 14px;
+    text-align: center;
+  }
 }

@@ -19,7 +19,6 @@ describe('LTFPrivileges', () => {
     card = new LTFPrivileges();
   });
 
-
   it('effect', () => {
     // This test and the next show that Mare Sernaitatis needs a steel and 2 titanium.
     player.titanium = 2;
@@ -30,7 +29,9 @@ describe('LTFPrivileges', () => {
     // TODO(kberg): Find an example that needs 2 steel. For now, hack this card to need 2 steel.
     msm.reserveUnits.steel = 2;
     player.cardsInHand = [msm];
-    expect(player.getPlayableCards().map((card) => card.name)).deep.eq([CardName.MARE_SERENITATIS_MINE]);
+    expect(player.getPlayableCards().map((card) => card.name)).deep.eq([
+      CardName.MARE_SERENITATIS_MINE,
+    ]);
 
     player.titanium = 0;
     player.steel = 0;
@@ -38,7 +39,8 @@ describe('LTFPrivileges', () => {
 
     // And this one shows that with Improved Moon Concrete, doesn't need steel.
     player.playedCards = [card];
-    expect(player.getPlayableCards().map((card) => card.name)).deep.eq([CardName.MARE_SERENITATIS_MINE]);
+    expect(player.getPlayableCards().map((card) => card.name)).deep.eq([
+      CardName.MARE_SERENITATIS_MINE,
+    ]);
   });
 });
-

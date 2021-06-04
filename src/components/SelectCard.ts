@@ -40,7 +40,7 @@ export const SelectCard = Vue.component('select-card', {
       type: Boolean,
     },
   },
-  data: function() {
+  data: function () {
     return {
       cards: [],
       warning: undefined,
@@ -52,12 +52,12 @@ export const SelectCard = Vue.component('select-card', {
   },
   mixins: [TranslateMixin],
   watch: {
-    cards: function() {
+    cards: function () {
       this.$emit('cardschanged', this.getData());
     },
   },
   methods: {
-    cardsSelected: function(): number {
+    cardsSelected: function (): number {
       if (Array.isArray(this.cards)) {
         return this.cards.length;
       } else if (this.cards === false || this.cards === undefined) {
@@ -65,7 +65,7 @@ export const SelectCard = Vue.component('select-card', {
       }
       return 1;
     },
-    getOrderedCards: function() {
+    getOrderedCards: function () {
       if (this.playerinput.cards === undefined) {
         return [];
       }
@@ -74,37 +74,44 @@ export const SelectCard = Vue.component('select-card', {
       } else {
         return CardOrderStorage.getOrdered(
           CardOrderStorage.getCardOrder(this.player.id),
-          this.playerinput.cards,
+          this.playerinput.cards
         );
       }
     },
-    hasCardWarning: function() {
+    hasCardWarning: function () {
       if (Array.isArray(this.cards)) {
         return false;
-      } else if (typeof this.cards === 'object' && this.cards.warning !== undefined) {
+      } else if (
+        typeof this.cards === 'object' &&
+        this.cards.warning !== undefined
+      ) {
         this.warning = this.cards.warning;
         return true;
       }
       return false;
     },
-    isOptionalToManyCards: function(): boolean {
-      return this.playerinput.maxCardsToSelect !== undefined &&
-             this.playerinput.maxCardsToSelect > 1 &&
-             this.playerinput.minCardsToSelect === 0;
+    isOptionalToManyCards: function (): boolean {
+      return (
+        this.playerinput.maxCardsToSelect !== undefined &&
+        this.playerinput.maxCardsToSelect > 1 &&
+        this.playerinput.minCardsToSelect === 0
+      );
     },
-    getData: function(): Array<CardName> {
-      return Array.isArray(this.$data.cards) ? this.$data.cards.map((card) => card.name) : [this.$data.cards.name];
+    getData: function (): Array<CardName> {
+      return Array.isArray(this.$data.cards)
+        ? this.$data.cards.map((card) => card.name)
+        : [this.$data.cards.name];
     },
-    saveData: function() {
+    saveData: function () {
       this.onsave([this.getData()]);
     },
-    getCardBoxClass: function(card: CardModel): string {
+    getCardBoxClass: function (card: CardModel): string {
       if (this.playerinput.showOwner && this.getOwner(card) !== undefined) {
         return 'cardbox cardbox-with-owner-label';
       }
       return 'cardbox';
     },
-    getOwner: function(card: CardModel): OwnerModel | undefined {
+    getOwner: function (card: CardModel): OwnerModel | undefined {
       for (const player of this.player.players) {
         if (player.playedCards.find((c) => c.name === card.name)) {
           return {name: player.name, color: player.color};
@@ -112,11 +119,16 @@ export const SelectCard = Vue.component('select-card', {
       }
       return undefined;
     },
-    isSelectOnlyOneCard: function() : boolean {
-      return this.playerinput.maxCardsToSelect === 1 && this.playerinput.minCardsToSelect === 1;
+    isSelectOnlyOneCard: function (): boolean {
+      return (
+        this.playerinput.maxCardsToSelect === 1 &&
+        this.playerinput.minCardsToSelect === 1
+      );
     },
-    buttonLabel: function(): string {
-      return this.isSelectOnlyOneCard() ? this.playerinput.buttonLabel : this.playerinput.buttonLabel + ' ' + this.cardsSelected();
+    buttonLabel: function (): string {
+      return this.isSelectOnlyOneCard()
+        ? this.playerinput.buttonLabel
+        : this.playerinput.buttonLabel + ' ' + this.cardsSelected();
     },
   },
   template: `<div class="wf-component wf-component--select-card">

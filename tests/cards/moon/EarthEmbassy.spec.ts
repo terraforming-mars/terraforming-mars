@@ -44,4 +44,3 @@ describe('EarthEmbassy', () => {
     expect(player.getTagCount(Tags.EARTH, false, true)).eq(5);
   });
 });
-

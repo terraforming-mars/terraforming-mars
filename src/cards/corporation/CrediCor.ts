@@ -21,16 +21,26 @@ export class CrediCor extends Card implements CorporationCard {
           b.br.br.br;
           b.megacredits(57);
           b.corpBox('effect', (ce) => {
-            ce.effect('After you pay for a card or standard project with a basic cost of 20M€ or more, you gain 4 M€.', (eb) => {
-              eb.minus().megacredits(20).startEffect.megacredits(4);
-            });
+            ce.effect(
+              'After you pay for a card or standard project with a basic cost of 20M€ or more, you gain 4 M€.',
+              (eb) => {
+                eb.minus().megacredits(20).startEffect.megacredits(4);
+              }
+            );
           });
         }),
       },
     });
   }
-  private effect(player: Player, card: IProjectCard | StandardProjectCard): void {
-    if (player.corporationCard !== undefined && player.corporationCard.name === this.name && card.cost >= 20) {
+  private effect(
+    player: Player,
+    card: IProjectCard | StandardProjectCard
+  ): void {
+    if (
+      player.corporationCard !== undefined &&
+      player.corporationCard.name === this.name &&
+      card.cost >= 20
+    ) {
       player.megaCredits += 4;
     }
   }

@@ -15,7 +15,10 @@ import {REDS_RULING_POLICY_COST} from '../../constants';
 import {DeferredAction} from '../../deferredActions/DeferredAction';
 import {CardRenderer} from '../render/CardRenderer';
 
-export class NitriteReducingBacteria extends Card implements IActionCard, IProjectCard, IResourceCard {
+export class NitriteReducingBacteria
+  extends Card
+  implements IActionCard, IProjectCard, IResourceCard
+{
   constructor() {
     super({
       cardType: CardType.ACTIVE,
@@ -41,45 +44,58 @@ export class NitriteReducingBacteria extends Card implements IActionCard, IProje
     });
   }
 
-    public resourceCount: number = 0;
+  public resourceCount: number = 0;
 
-    public play(player: Player) {
-      player.game.defer(new DeferredAction(
-        player,
-        () => {
-          player.addResourceTo(this, 3);
-          return undefined;
-        },
-      ));
+  public play(player: Player) {
+    player.game.defer(
+      new DeferredAction(player, () => {
+        player.addResourceTo(this, 3);
+        return undefined;
+      })
+    );
+    return undefined;
+  }
+  public canAct(): boolean {
+    return true;
+  }
+  public action(player: Player) {
+    if (this.resourceCount < 3) {
+      player.addResourceTo(this, {log: true});
       return undefined;
     }
-    public canAct(): boolean {
-      return true;
+
+    const orOptions = new OrOptions();
+    const redsAreRuling = PartyHooks.shouldApplyPolicy(
+      player.game,
+      PartyName.REDS
+    );
+
+    if (
+      !redsAreRuling ||
+      (redsAreRuling && player.canAfford(REDS_RULING_POLICY_COST))
+    ) {
+      orOptions.options.push(
+        new SelectOption(
+          'Remove 3 microbes to increase your terraform rating 1 step',
+          'Remove microbes',
+          () => {
+            player.removeResourceFrom(this, 3);
+            LogHelper.logRemoveResource(player, this, 3, 'gain 1 TR');
+            player.increaseTerraformRating();
+            return undefined;
+          }
+        )
+      );
     }
-    public action(player: Player) {
-      if (this.resourceCount < 3) {
+
+    orOptions.options.push(
+      new SelectOption('Add 1 microbe to this card', 'Add microbe', () => {
         player.addResourceTo(this, {log: true});
         return undefined;
-      }
+      })
+    );
 
-      const orOptions = new OrOptions();
-      const redsAreRuling = PartyHooks.shouldApplyPolicy(player.game, PartyName.REDS);
-
-      if (!redsAreRuling || (redsAreRuling && player.canAfford(REDS_RULING_POLICY_COST))) {
-        orOptions.options.push(new SelectOption('Remove 3 microbes to increase your terraform rating 1 step', 'Remove microbes', () => {
-          player.removeResourceFrom(this, 3);
-          LogHelper.logRemoveResource(player, this, 3, 'gain 1 TR');
-          player.increaseTerraformRating();
-          return undefined;
-        }));
-      }
-
-      orOptions.options.push(new SelectOption('Add 1 microbe to this card', 'Add microbe', () => {
-        player.addResourceTo(this, {log: true});
-        return undefined;
-      }));
-
-      if (orOptions.options.length === 1) return orOptions.options[0].cb();
-      return orOptions;
-    }
+    if (orOptions.options.length === 1) return orOptions.options[0].cb();
+    return orOptions;
+  }
 }

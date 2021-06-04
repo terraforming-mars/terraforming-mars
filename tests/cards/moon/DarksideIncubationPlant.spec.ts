@@ -69,4 +69,3 @@ describe('DarksideIncubationPlant', () => {
     expect(card.getVictoryPoints()).eq(2);
   });
 });
-

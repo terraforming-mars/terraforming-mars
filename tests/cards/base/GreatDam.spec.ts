@@ -7,7 +7,8 @@ import {TestingUtils} from '../../TestingUtils';
 import {TestPlayers} from '../../TestPlayers';
 
 describe('GreatDam', () => {
-  let card : GreatDam; let player : TestPlayer;
+  let card: GreatDam;
+  let player: TestPlayer;
 
   beforeEach(() => {
     card = new GreatDam();
@@ -29,7 +30,10 @@ describe('GreatDam', () => {
     card.play(player);
 
     expect(player.getProduction(Resources.ENERGY)).to.eq(2);
-    player.victoryPointsBreakdown.setVictoryPoints('victoryPoints', card.getVictoryPoints());
+    player.victoryPointsBreakdown.setVictoryPoints(
+      'victoryPoints',
+      card.getVictoryPoints()
+    );
     expect(player.victoryPointsBreakdown.victoryPoints).to.eq(1);
   });
 });

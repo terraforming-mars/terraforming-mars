@@ -9,24 +9,27 @@ import {MoonCard} from './MoonCard';
 
 export class MiningRobotsManufCenter extends MoonCard {
   constructor() {
-    super({
-      name: CardName.MINING_ROBOTS_MANUF_CENTER,
-      cardType: CardType.AUTOMATED,
-      tags: [Tags.SCIENCE, Tags.BUILDING],
-      cost: 12,
-      productionBox: Units.of({}),
+    super(
+      {
+        name: CardName.MINING_ROBOTS_MANUF_CENTER,
+        cardType: CardType.AUTOMATED,
+        tags: [Tags.SCIENCE, Tags.BUILDING],
+        cost: 12,
+        productionBox: Units.of({}),
 
-      metadata: {
-        description: 'Spend 1 titanium. Raise the Mining Rate 2 steps.',
-        cardNumber: 'M23',
-        renderData: CardRenderer.builder((b) => {
-          b.minus().titanium(1).br;
-          b.moonMiningRate({amount: 2});
-        }),
+        metadata: {
+          description: 'Spend 1 titanium. Raise the Mining Rate 2 steps.',
+          cardNumber: 'M23',
+          renderData: CardRenderer.builder((b) => {
+            b.minus().titanium(1).br;
+            b.moonMiningRate({amount: 2});
+          }),
+        },
       },
-    }, {
-      reserveUnits: Units.of({titanium: 1}),
-    });
+      {
+        reserveUnits: Units.of({titanium: 1}),
+      }
+    );
   }
 
   public play(player: Player) {

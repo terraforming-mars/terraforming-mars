@@ -11,27 +11,31 @@ import {AltSecondaryTag} from '../render/CardRenderItem';
 
 export class TychoRoadNetwork extends MoonCard {
   constructor() {
-    super({
-      name: CardName.TYCHO_ROAD_NETWORK,
-      cardType: CardType.AUTOMATED,
-      tags: [Tags.MOON],
-      cost: 15,
-      productionBox: Units.of({megacredits: 1}),
+    super(
+      {
+        name: CardName.TYCHO_ROAD_NETWORK,
+        cardType: CardType.AUTOMATED,
+        tags: [Tags.MOON],
+        cost: 15,
+        productionBox: Units.of({megacredits: 1}),
 
-      metadata: {
-        description: 'Spend 1 steel. Increase your M€ production 1 step. ' +
-        'Place a road tile on the Moon and raise the Logistics Rate 1 step.',
-        cardNumber: 'M09',
-        renderData: CardRenderer.builder((b) => {
-          b.minus().steel(1).br;
-          b.production((eb) => eb.megacredits(1)).br;
-          b.moonRoad().secondaryTag(AltSecondaryTag.MOON_LOGISTICS_RATE);
-        }),
+        metadata: {
+          description:
+            'Spend 1 steel. Increase your M€ production 1 step. ' +
+            'Place a road tile on the Moon and raise the Logistics Rate 1 step.',
+          cardNumber: 'M09',
+          renderData: CardRenderer.builder((b) => {
+            b.minus().steel(1).br;
+            b.production((eb) => eb.megacredits(1)).br;
+            b.moonRoad().secondaryTag(AltSecondaryTag.MOON_LOGISTICS_RATE);
+          }),
+        },
       },
-    }, {
-      reserveUnits: Units.of({steel: 1}),
-      tilesBuilt: [TileType.MOON_ROAD],
-    });
+      {
+        reserveUnits: Units.of({steel: 1}),
+        tilesBuilt: [TileType.MOON_ROAD],
+      }
+    );
   }
 
   public play(player: Player) {

@@ -7,48 +7,50 @@ import {SelectCard} from '../../../src/inputs/SelectCard';
 import {Player} from '../../../src/Player';
 import {TestPlayers} from '../../TestPlayers';
 
-describe('Thermophiles', function() {
-  let card : Thermophiles; let player : Player; let game : Game;
+describe('Thermophiles', function () {
+  let card: Thermophiles;
+  let player: Player;
+  let game: Game;
 
-  beforeEach(function() {
+  beforeEach(function () {
     card = new Thermophiles();
     player = TestPlayers.BLUE.newPlayer();
     const redPlayer = TestPlayers.RED.newPlayer();
     game = Game.newInstance('foobar', [player, redPlayer], player);
   });
 
-  it('Can\'t play', function() {
+  it("Can't play", function () {
     (game as any).venusScaleLevel = 4;
     expect(card.canPlay(player)).is.not.true;
   });
 
-  it('Should play', function() {
+  it('Should play', function () {
     (game as any).venusScaleLevel = 6;
     expect(card.canPlay(player)).is.true;
     const action = card.play();
     expect(action).is.undefined;
   });
 
-  it('Should act - multiple targets', function() {
+  it('Should act - multiple targets', function () {
     card.play();
     player.playedCards.push(card, new VenusianInsects());
 
     const action = card.action(player);
     expect(action instanceof SelectCard).is.true;
-        action!.cb([card]);
-        expect(card.resourceCount).to.eq(1);
+    action!.cb([card]);
+    expect(card.resourceCount).to.eq(1);
 
-        player.addResourceTo(card);
+    player.addResourceTo(card);
 
-        const orOptions = card.action(player) as OrOptions;
-        expect(orOptions).is.not.undefined;
-        expect(orOptions instanceof OrOptions).is.true;
-        orOptions.options[0].cb();
-        expect(card.resourceCount).to.eq(0);
-        expect(game.getVenusScaleLevel()).to.eq(2);
+    const orOptions = card.action(player) as OrOptions;
+    expect(orOptions).is.not.undefined;
+    expect(orOptions instanceof OrOptions).is.true;
+    orOptions.options[0].cb();
+    expect(card.resourceCount).to.eq(0);
+    expect(game.getVenusScaleLevel()).to.eq(2);
   });
 
-  it('Should act - single target', function() {
+  it('Should act - single target', function () {
     card.play();
     player.playedCards.push(card);
 

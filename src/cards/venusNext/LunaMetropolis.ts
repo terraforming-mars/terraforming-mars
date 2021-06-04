@@ -22,14 +22,23 @@ export class LunaMetropolis extends Card {
           b.production((pb) => pb.megacredits(1).slash().earth().played).br;
           b.city().asterix();
         }),
-        description: 'Increase your M€ production 1 step for each Earth tag you have, including this. Place a City tile on the RESERVED AREA',
+        description:
+          'Increase your M€ production 1 step for each Earth tag you have, including this. Place a City tile on the RESERVED AREA',
         victoryPoints: 2,
       },
     });
-  };
+  }
   public play(player: Player) {
-    player.addProduction(Resources.MEGACREDITS, player.getTagCount(Tags.EARTH) + 1, {log: true});
-    player.game.addCityTile(player, SpaceName.LUNA_METROPOLIS, SpaceType.COLONY);
+    player.addProduction(
+      Resources.MEGACREDITS,
+      player.getTagCount(Tags.EARTH) + 1,
+      {log: true}
+    );
+    player.game.addCityTile(
+      player,
+      SpaceName.LUNA_METROPOLIS,
+      SpaceType.COLONY
+    );
     return undefined;
   }
   public getVictoryPoints() {

@@ -9,21 +9,24 @@ import {SelectSpace} from '../../../src/inputs/SelectSpace';
 import {Player} from '../../../src/Player';
 import {TestPlayers} from '../../TestPlayers';
 
-describe('MoholeLake', function() {
-  let card : MoholeLake; let player : Player;
+describe('MoholeLake', function () {
+  let card: MoholeLake;
+  let player: Player;
 
-  beforeEach(function() {
+  beforeEach(function () {
     card = new MoholeLake();
     player = TestPlayers.BLUE.newPlayer();
     const redPlayer = TestPlayers.RED.newPlayer();
     Game.newInstance('foobar', [player, redPlayer], player);
   });
 
-  it('Can play', function() {
+  it('Can play', function () {
     card.play(player);
 
     expect(player.game.deferredActions).has.lengthOf(1);
-    const selectSpace = player.game.deferredActions.peek()!.execute() as SelectSpace;
+    const selectSpace = player.game.deferredActions
+      .peek()!
+      .execute() as SelectSpace;
     selectSpace.cb(selectSpace.availableSpaces[0]);
 
     expect(player.game.getTemperature()).to.eq(-28);
@@ -32,12 +35,12 @@ describe('MoholeLake', function() {
     expect(player.plants).to.eq(3);
   });
 
-  it('Can act - no target', function() {
+  it('Can act - no target', function () {
     expect(card.canAct()).is.true;
     expect(card.action(player)).is.undefined;
   });
 
-  it('Can act - single target', function() {
+  it('Can act - single target', function () {
     const fish = new Fish();
     player.playedCards.push(fish);
 
@@ -47,7 +50,7 @@ describe('MoholeLake', function() {
     expect(fish.resourceCount).to.eq(1);
   });
 
-  it('Can act - multiple targets', function() {
+  it('Can act - multiple targets', function () {
     const fish = new Fish();
     const ants = new Ants();
     player.playedCards.push(fish, ants);

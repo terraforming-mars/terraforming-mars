@@ -19,7 +19,11 @@ export class LandClaim extends Card implements IProjectCard {
       metadata: {
         cardNumber: '066',
         renderData: CardRenderer.builder((b) => {
-          b.text('Place your marker on a non-reserved area. Only you may place a tile there.', Size.SMALL, true);
+          b.text(
+            'Place your marker on a non-reserved area. Only you may place a tile there.',
+            Size.SMALL,
+            true
+          );
         }),
       },
     });
@@ -35,7 +39,7 @@ export class LandClaim extends Card implements IProjectCard {
         foundSpace.player = player;
         LogHelper.logBoardTileAction(player, foundSpace, 'land claim');
         return undefined;
-      },
+      }
     );
   }
 }

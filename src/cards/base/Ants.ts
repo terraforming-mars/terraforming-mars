@@ -12,7 +12,10 @@ import {CardRequirements} from '../CardRequirements';
 import {CardRenderer} from '../render/CardRenderer';
 import {CardRenderDynamicVictoryPoints} from '../render/CardRenderDynamicVictoryPoints';
 
-export class Ants extends Card implements IActionCard, IProjectCard, IResourceCard {
+export class Ants
+  extends Card
+  implements IActionCard, IProjectCard, IResourceCard
+{
   constructor() {
     super({
       cardType: CardType.ACTIVE,
@@ -26,9 +29,12 @@ export class Ants extends Card implements IActionCard, IProjectCard, IResourceCa
         cardNumber: '035',
         description: 'Requires 4% oxygen.',
         renderData: CardRenderer.builder((b) => {
-          b.action('Remove 1 Microbe from any card to add 1 to this card.', (eb) => {
-            eb.microbes(1).any.startAction.microbes(1);
-          }).br;
+          b.action(
+            'Remove 1 Microbe from any card to add 1 to this card.',
+            (eb) => {
+              eb.microbes(1).any.startAction.microbes(1);
+            }
+          ).br;
           b.vpText('1 VP per 2 Microbes on this card.');
         }),
         victoryPoints: CardRenderDynamicVictoryPoints.microbes(1, 2),
@@ -48,12 +54,21 @@ export class Ants extends Card implements IActionCard, IProjectCard, IResourceCa
 
   public canAct(player: Player): boolean {
     if (player.game.isSoloMode()) return true;
-    return RemoveResourcesFromCard.getAvailableTargetCards(player, this.resourceType).length > 0;
+    return (
+      RemoveResourcesFromCard.getAvailableTargetCards(player, this.resourceType)
+        .length > 0
+    );
   }
 
   public action(player: Player) {
-    player.game.defer(new RemoveResourcesFromCard(player, ResourceType.MICROBE));
-    player.game.defer(new AddResourcesToCard(player, ResourceType.MICROBE, {filter: (c) => c.name === this.name}));
+    player.game.defer(
+      new RemoveResourcesFromCard(player, ResourceType.MICROBE)
+    );
+    player.game.defer(
+      new AddResourcesToCard(player, ResourceType.MICROBE, {
+        filter: (c) => c.name === this.name,
+      })
+    );
     return undefined;
   }
 }

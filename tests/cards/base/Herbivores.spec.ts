@@ -8,7 +8,10 @@ import {TestingUtils} from '../../TestingUtils';
 import {TestPlayers} from '../../TestPlayers';
 
 describe('Herbivores', () => {
-  let card : Herbivores; let player : Player; let player2: Player; let game: Game;
+  let card: Herbivores;
+  let player: Player;
+  let player2: Player;
+  let game: Game;
 
   beforeEach(() => {
     card = new Herbivores();
@@ -17,12 +20,12 @@ describe('Herbivores', () => {
     game = Game.newInstance('foobar', [player, player2], player);
   });
 
-  it('Can\'t play if nobody has plant production', () => {
+  it("Can't play if nobody has plant production", () => {
     (game as any).oxygenLevel = 8;
     expect(card.canPlay(player)).is.not.true;
   });
 
-  it('Can\'t play if oxygen level too low', () => {
+  it("Can't play if oxygen level too low", () => {
     (game as any).oxygenLevel = 7;
     player2.addProduction(Resources.PLANTS, 1);
     expect(card.canPlay(player)).is.not.true;
@@ -63,7 +66,10 @@ describe('Herbivores', () => {
     TestingUtils.runAllActions(game);
     expect(card.resourceCount).to.eq(2);
 
-    game.addGreenery(player2, game.board.getAvailableSpacesOnLand(player2)[0].id);
+    game.addGreenery(
+      player2,
+      game.board.getAvailableSpacesOnLand(player2)[0].id
+    );
     TestingUtils.runNextAction(game);
     expect(card.resourceCount).to.eq(2); // i.e. not changed
 

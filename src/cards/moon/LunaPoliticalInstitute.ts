@@ -9,7 +9,10 @@ import {IActionCard} from '../ICard';
 import {SendDelegateToArea} from '../../deferredActions/SendDelegateToArea';
 import {Card} from '../Card';
 
-export class LunaPoliticalInstitute extends Card implements IActionCard, IProjectCard {
+export class LunaPoliticalInstitute
+  extends Card
+  implements IActionCard, IProjectCard
+{
   constructor() {
     super({
       name: CardName.LUNA_POLITICAL_INSTITUTE,
@@ -24,11 +27,12 @@ export class LunaPoliticalInstitute extends Card implements IActionCard, IProjec
         renderData: CardRenderer.builder((b) => {
           b.action(
             'Move one of your delegates from the reserve to any party.',
-            (eb) => eb.empty().startAction.delegates(1));
+            (eb) => eb.empty().startAction.delegates(1)
+          );
         }),
       },
     });
-  };
+  }
 
   public play() {
     return undefined;
@@ -39,7 +43,11 @@ export class LunaPoliticalInstitute extends Card implements IActionCard, IProjec
   }
 
   public action(player: Player) {
-    player.game.defer(new SendDelegateToArea(player, 'Select where to send a delegate', {source: 'reserve'}));
+    player.game.defer(
+      new SendDelegateToArea(player, 'Select where to send a delegate', {
+        source: 'reserve',
+      })
+    );
     return undefined;
   }
 }

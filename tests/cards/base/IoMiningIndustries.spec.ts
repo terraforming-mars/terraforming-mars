@@ -3,8 +3,8 @@ import {IoMiningIndustries} from '../../../src/cards/base/IoMiningIndustries';
 import {Resources} from '../../../src/Resources';
 import {TestPlayers} from '../../TestPlayers';
 
-describe('IoMiningIndustries', function() {
-  it('Should play', function() {
+describe('IoMiningIndustries', function () {
+  it('Should play', function () {
     const card = new IoMiningIndustries();
     const player = TestPlayers.BLUE.newPlayer();
     const action = card.play(player);

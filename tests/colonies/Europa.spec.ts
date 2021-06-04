@@ -6,10 +6,13 @@ import {Player} from '../../src/Player';
 import {Resources} from '../../src/Resources';
 import {TestPlayers} from '../TestPlayers';
 
-describe('Europa', function() {
-  let europa: Europa; let player: Player; let player2: Player; let game: Game;
+describe('Europa', function () {
+  let europa: Europa;
+  let player: Player;
+  let player2: Player;
+  let game: Game;
 
-  beforeEach(function() {
+  beforeEach(function () {
     europa = new Europa();
     player = TestPlayers.BLUE.newPlayer();
     player2 = TestPlayers.RED.newPlayer();
@@ -18,7 +21,7 @@ describe('Europa', function() {
     game.colonies.push(europa);
   });
 
-  it('Should build', function() {
+  it('Should build', function () {
     europa.addColony(player);
     expect(game.deferredActions).has.lengthOf(1);
     const action = game.deferredActions.pop()!;
@@ -26,13 +29,13 @@ describe('Europa', function() {
     expect(action.player).to.eq(player);
   });
 
-  it('Should trade', function() {
+  it('Should trade', function () {
     europa.trade(player);
     expect(player.getProduction(Resources.MEGACREDITS)).to.eq(1);
     expect(player2.getProduction(Resources.MEGACREDITS)).to.eq(0);
   });
 
-  it('Should give trade bonus', function() {
+  it('Should give trade bonus', function () {
     europa.addColony(player);
     game.deferredActions.pop();
 

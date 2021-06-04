@@ -6,8 +6,8 @@ import {PartyName} from '../../../src/turmoil/parties/PartyName';
 import {TestingUtils} from '../../TestingUtils';
 import {TestPlayers} from '../../TestPlayers';
 
-describe('MartianMediaCenter', function() {
-  it('Should play', function() {
+describe('MartianMediaCenter', function () {
+  it('Should play', function () {
     const card = new MartianMediaCenter();
     const player = TestPlayers.BLUE.newPlayer();
 

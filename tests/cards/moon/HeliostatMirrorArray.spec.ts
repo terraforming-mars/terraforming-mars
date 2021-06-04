@@ -41,4 +41,3 @@ describe('HeliostatMirrorArray', () => {
     expect(player.getProduction(Resources.ENERGY)).eq(2);
   });
 });
-

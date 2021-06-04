@@ -10,7 +10,10 @@ import {CardRequirements} from '../CardRequirements';
 import {CardRenderer} from '../render/CardRenderer';
 import {CardRenderDynamicVictoryPoints} from '../render/CardRenderDynamicVictoryPoints';
 
-export class Penguins extends Card implements IActionCard, IProjectCard, IResourceCard {
+export class Penguins
+  extends Card
+  implements IActionCard, IProjectCard, IResourceCard
+{
   constructor() {
     super({
       cardType: CardType.ACTIVE,
@@ -33,22 +36,22 @@ export class Penguins extends Card implements IActionCard, IProjectCard, IResour
       },
     });
   }
-    public resourceCount = 0;
+  public resourceCount = 0;
 
-    public play() {
-      return undefined;
-    }
+  public play() {
+    return undefined;
+  }
 
-    public canAct(): boolean {
-      return true;
-    }
+  public canAct(): boolean {
+    return true;
+  }
 
-    public action(player: Player) {
-      player.addResourceTo(this);
-      return undefined;
-    }
+  public action(player: Player) {
+    player.addResourceTo(this);
+    return undefined;
+  }
 
-    public getVictoryPoints(): number {
-      return this.resourceCount;
-    }
+  public getVictoryPoints(): number {
+    return this.resourceCount;
+  }
 }

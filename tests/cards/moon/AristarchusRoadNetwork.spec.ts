@@ -60,4 +60,3 @@ describe('AristarchusRoadNetwork', () => {
     expect(moonData.logisticRate).eq(1);
   });
 });
-

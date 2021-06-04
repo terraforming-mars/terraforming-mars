@@ -24,17 +24,26 @@ export class VenusSoils extends Card {
         cardNumber: '257',
         renderData: CardRenderer.builder((b) => {
           b.venus(1).br;
-          b.production((pb) => pb.plants(1)).microbes(2).asterix();
+          b.production((pb) => pb.plants(1))
+            .microbes(2)
+            .asterix();
         }),
-        description: 'Raise Venus 1 step. Increase your Plant production 1 step. Add 2 Microbes to ANOTHER card',
+        description:
+          'Raise Venus 1 step. Increase your Plant production 1 step. Add 2 Microbes to ANOTHER card',
       },
     });
-  };
+  }
 
   public canPlay(player: Player): boolean {
     const venusMaxed = player.game.getVenusScaleLevel() === MAX_VENUS_SCALE;
-    if (PartyHooks.shouldApplyPolicy(player.game, PartyName.REDS) && !venusMaxed) {
-      return player.canAfford(player.getCardCost(this) + REDS_RULING_POLICY_COST, {floaters: true, microbes: true});
+    if (
+      PartyHooks.shouldApplyPolicy(player.game, PartyName.REDS) &&
+      !venusMaxed
+    ) {
+      return player.canAfford(
+        player.getCardCost(this) + REDS_RULING_POLICY_COST,
+        {floaters: true, microbes: true}
+      );
     }
 
     return true;
@@ -60,7 +69,7 @@ export class VenusSoils extends Card {
       (foundCards: Array<ICard>) => {
         player.addResourceTo(foundCards[0], {qty: 2, log: true});
         return undefined;
-      },
+      }
     );
   }
 }

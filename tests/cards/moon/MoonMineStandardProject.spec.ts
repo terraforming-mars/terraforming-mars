@@ -62,4 +62,3 @@ describe('MoonMineStandardProject', () => {
     expect(player.getTerraformRating()).eq(15);
   });
 });
-

@@ -27,9 +27,10 @@ export class BiofertilizerFacility extends Card implements IProjectCard {
 
       requirements: CardRequirements.builder((b) => b.tag(Tags.SCIENCE)),
       metadata: {
-        description: 'Requires 1 science tag. Increase your plant production 1 step. ' +
-                  'Add up to 2 microbes to any card. ' +
-                  'Place this tile which grants an ADJACENCY BONUS of 1 plant and 1 microbe.',
+        description:
+          'Requires 1 science tag. Increase your plant production 1 step. ' +
+          'Add up to 2 microbes to any card. ' +
+          'Place this tile which grants an ADJACENCY BONUS of 1 plant and 1 microbe.',
         cardNumber: 'A02',
         renderData: CardRenderer.builder((b) => {
           b.production((pb) => pb.plants(1));
@@ -43,7 +44,9 @@ export class BiofertilizerFacility extends Card implements IProjectCard {
 
   public play(player: Player) {
     player.addProduction(Resources.PLANTS, 1);
-    player.game.defer(new AddResourcesToCard(player, ResourceType.MICROBE, {count: 2}));
+    player.game.defer(
+      new AddResourcesToCard(player, ResourceType.MICROBE, {count: 2})
+    );
 
     return new SelectSpace(
       'Select space for Biofertilizer Facility tile',
@@ -57,7 +60,7 @@ export class BiofertilizerFacility extends Card implements IProjectCard {
           bonus: [SpaceBonus.PLANT, SpaceBonus.MICROBE],
         };
         return undefined;
-      },
+      }
     );
   }
 }

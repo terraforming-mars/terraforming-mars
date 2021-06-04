@@ -3,19 +3,35 @@ import {CardRenderItemType} from '../../src/cards/render/CardRenderItemType';
 import {CardRenderDynamicVictoryPoints} from '../../src/cards/render/CardRenderDynamicVictoryPoints';
 import {expect} from 'chai';
 
-describe('CardRenderDynamicVictoryPoints', function() {
+describe('CardRenderDynamicVictoryPoints', function () {
   describe('getPointsHtml', () => {
     it('success - returns "?"', () => {
-      expect(new CardRenderDynamicVictoryPoints(undefined, 0, 0).getPointsHtml()).to.equal('?');
+      expect(
+        new CardRenderDynamicVictoryPoints(undefined, 0, 0).getPointsHtml()
+      ).to.equal('?');
     });
     it('success - returns points w/o item', () => {
-      expect(new CardRenderDynamicVictoryPoints(undefined, 5, 5).getPointsHtml()).to.equal('5');
+      expect(
+        new CardRenderDynamicVictoryPoints(undefined, 5, 5).getPointsHtml()
+      ).to.equal('5');
     });
     it('success - returns points with item - points = targed 10/', () => {
-      expect(new CardRenderDynamicVictoryPoints(new CardRenderItem(CardRenderItemType.ASTEROIDS), 10, 10).getPointsHtml()).to.equal('10/');
+      expect(
+        new CardRenderDynamicVictoryPoints(
+          new CardRenderItem(CardRenderItemType.ASTEROIDS),
+          10,
+          10
+        ).getPointsHtml()
+      ).to.equal('10/');
     });
     it('success - returns points with item - points = targed 5/10', () => {
-      expect(new CardRenderDynamicVictoryPoints(new CardRenderItem(CardRenderItemType.ASTEROIDS), 5, 10).getPointsHtml()).to.equal('5/10');
+      expect(
+        new CardRenderDynamicVictoryPoints(
+          new CardRenderItem(CardRenderItemType.ASTEROIDS),
+          5,
+          10
+        ).getPointsHtml()
+      ).to.equal('5/10');
     });
   });
   it('asteroids: success', () => {

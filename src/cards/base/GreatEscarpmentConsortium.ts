@@ -15,7 +15,9 @@ export class GreatEscarpmentConsortium extends Card implements IProjectCard {
       name: CardName.GREAT_ESCARPMENT_CONSORTIUM,
       cost: 6,
 
-      requirements: CardRequirements.builder((b) => b.production(Resources.STEEL)),
+      requirements: CardRequirements.builder((b) =>
+        b.production(Resources.STEEL)
+      ),
       metadata: {
         cardNumber: '061',
         renderData: CardRenderer.builder((b) => {
@@ -24,7 +26,8 @@ export class GreatEscarpmentConsortium extends Card implements IProjectCard {
             pb.plus().steel(1);
           });
         }),
-        description: 'Requires that you have steel production. Decrease any steel production 1 step and increase your own 1 step.',
+        description:
+          'Requires that you have steel production. Decrease any steel production 1 step and increase your own 1 step.',
       },
     });
   }

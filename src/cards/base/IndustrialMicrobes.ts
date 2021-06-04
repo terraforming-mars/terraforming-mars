@@ -22,7 +22,8 @@ export class IndustrialMicrobes extends Card implements IProjectCard {
         renderData: CardRenderer.builder((b) => {
           b.production((pb) => pb.energy(1).steel(1));
         }),
-        description: 'Increase your Energy production and your steel production 1 step each.',
+        description:
+          'Increase your Energy production and your steel production 1 step each.',
       },
     });
   }
@@ -32,4 +33,3 @@ export class IndustrialMicrobes extends Card implements IProjectCard {
     return undefined;
   }
 }
-

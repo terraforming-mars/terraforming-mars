@@ -11,26 +11,33 @@ import {TileType} from '../../../src/TileType';
 import {ARES_OPTIONS_NO_HAZARDS} from '../../ares/AresTestHelper';
 import {TestPlayers} from '../../TestPlayers';
 
-describe('BiofertilizerFacility', function() {
-  let card : BiofertilizerFacility; let player : Player; let game : Game;
+describe('BiofertilizerFacility', function () {
+  let card: BiofertilizerFacility;
+  let player: Player;
+  let game: Game;
 
   let scienceTagCard: IProjectCard = new AICentral();
   let microbeHost: IProjectCard = new Ants();
 
-  beforeEach(function() {
+  beforeEach(function () {
     card = new BiofertilizerFacility();
     player = TestPlayers.BLUE.newPlayer();
     const redPlayer = TestPlayers.RED.newPlayer();
-    game = Game.newInstance('foobar', [player, redPlayer], player, ARES_OPTIONS_NO_HAZARDS);
+    game = Game.newInstance(
+      'foobar',
+      [player, redPlayer],
+      player,
+      ARES_OPTIONS_NO_HAZARDS
+    );
     scienceTagCard = new AICentral();
     microbeHost = new Ants();
   });
 
-  it('Cannot play without a science tag', function() {
+  it('Cannot play without a science tag', function () {
     expect(card.canPlay(player)).is.not.true;
   });
 
-  it('Play', function() {
+  it('Play', function () {
     // Set up the cards.
     // Adds the necessary Science tag.
     player.playCard(scienceTagCard);
@@ -50,7 +57,9 @@ describe('BiofertilizerFacility', function() {
 
     expect(citySpace.player).to.eq(player);
     expect(citySpace.tile!.tileType).to.eq(TileType.BIOFERTILIZER_FACILITY);
-    expect(citySpace.adjacency).to.deep.eq({bonus: [SpaceBonus.PLANT, SpaceBonus.MICROBE]});
+    expect(citySpace.adjacency).to.deep.eq({
+      bonus: [SpaceBonus.PLANT, SpaceBonus.MICROBE],
+    });
 
     game.deferredActions.peek()!.execute();
 

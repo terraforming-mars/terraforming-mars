@@ -1,153 +1,161 @@
 .resource_items_cont {
-    display: flex;
-    flex-flow: row;
-    white-space: nowrap;
-    filter: grayscale(0.3);
+  display: flex;
+  flex-flow: row;
+  white-space: nowrap;
+  filter: grayscale(0.3);
 }
 
 .tags_item_cont {
-    display: inline-block;
-    white-space: nowrap;
-    font-family: Prototype;
-    margin-bottom: 15px;
-    padding: 5px;
+  display: inline-block;
+  white-space: nowrap;
+  font-family: Prototype;
+  margin-bottom: 15px;
+  padding: 5px;
 }
 
 .resource_item {
-    display: flex;
-    border-radius: 5px;
-    vertical-align: top;
-    font-family: Prototype;
-    background: linear-gradient(rgba(0, 0, 0, 0.8) 20%, rgba(0, 0, 0, 0.3) 50%);
-    color: #e6e1e1;
-    margin-left: 10px;
-    min-width: 70px;
-    padding: 8px 0px 4px 8px;
-    box-sizing: border-box;
+  display: flex;
+  border-radius: 5px;
+  vertical-align: top;
+  font-family: Prototype;
+  background: linear-gradient(rgba(0, 0, 0, 0.8) 20%, rgba(0, 0, 0, 0.3) 50%);
+  color: #e6e1e1;
+  margin-left: 10px;
+  min-width: 70px;
+  padding: 8px 0px 4px 8px;
+  box-sizing: border-box;
 
-    &.resource_item--energy {
-        margin-right: -9px;
-        padding-right: 9px;
-        clip-path: polygon(90% 0, 90% 50%, 100% 75%, 100% 75%, 90% 100%, 0 100%, 0 0);
-    }
+  &.resource_item--energy {
+    margin-right: -9px;
+    padding-right: 9px;
+    clip-path: polygon(
+      90% 0,
+      90% 50%,
+      100% 75%,
+      100% 75%,
+      90% 100%,
+      0 100%,
+      0 0
+    );
+  }
 }
 
 .resource_item_stock {
-    white-space: nowrap;
+  white-space: nowrap;
 }
 
 .resource_item_stock_count {
-    font-size: 30px;
-    text-align: center;
-    line-height: 1;
-    text-shadow: 0 2px 2px black;
+  font-size: 30px;
+  text-align: center;
+  line-height: 1;
+  text-shadow: 0 2px 2px black;
 }
 
 .resource_item_prod {
-    border-radius: 10px 10px 0 0;
-    color: #bb8760;
-    text-shadow: 0 0 1px black;
-    min-width: 40px;
-    text-align: center;
+  border-radius: 10px 10px 0 0;
+  color: #bb8760;
+  text-shadow: 0 0 1px black;
+  min-width: 40px;
+  text-align: center;
 }
 
 .resource_item_prod_count {
-    display: inline-block;
+  display: inline-block;
 }
 
 .resource_icon {
-    width: 36px;
-    height: 36px;
-    display: inline-block;
-    background-size: contain;
+  width: 36px;
+  height: 36px;
+  display: inline-block;
+  background-size: contain;
 }
 
 .resource_icon--rating {
-    background-image: url(assets/resources/tr.png);
+  background-image: url(assets/resources/tr.png);
 }
 
 .resource_icon--megacredits {
-    background-image: url(assets/resources/megacredit.png);
+  background-image: url(assets/resources/megacredit.png);
 }
 .resource_icon--megacredits::after {
-    position: absolute;
-    content: "€";
-    color: rgba(0,0,0,.3);
-    font-style: normal;
-    font-family: Arial;
-    font-weight: bold;
-    width: 36px;
-    height: 36px;
-    text-align: center;
-    line-height: 36px;
+  position: absolute;
+  content: '€';
+  color: rgba(0, 0, 0, 0.3);
+  font-style: normal;
+  font-family: Arial;
+  font-weight: bold;
+  width: 36px;
+  height: 36px;
+  text-align: center;
+  line-height: 36px;
 }
 
 .resource_icon--metalbonus {
-    background-image: url(assets/resources/megacredit.png);
-    background-size: 20px 20px;
-    width: 20px;
-    height: 20px;
-    color: black;
-    font-size: 15px;
-    font-style: normal;
-    font-family: Prototype;
-    text-align: center;
-    line-height: 21px;
-    margin-left: -14px;
-    margin-top: -37px;
-    text-align: center;
+  background-image: url(assets/resources/megacredit.png);
+  background-size: 20px 20px;
+  width: 20px;
+  height: 20px;
+  color: black;
+  font-size: 15px;
+  font-style: normal;
+  font-family: Prototype;
+  text-align: center;
+  line-height: 21px;
+  margin-left: -14px;
+  margin-top: -37px;
+  text-align: center;
 }
 
 .resource_icon--microbe {
-    background-image: url(assets/resources/microbe.png);
+  background-image: url(assets/resources/microbe.png);
 }
 
 .resource_icon--floater {
-    background-image: url(assets/resources/floater.png);
+  background-image: url(assets/resources/floater.png);
 }
 
 .resource_icon--titanium {
-    background-image: url(assets/resources/titanium.png);
+  background-image: url(assets/resources/titanium.png);
 }
 
 .resource_icon--steel {
-    background-image: url(assets/resources/steel.png);
+  background-image: url(assets/resources/steel.png);
 }
 
 .resource_icon--plants {
-    background-image: url(assets/resources/plant.png);
+  background-image: url(assets/resources/plant.png);
 }
 
 .resource_icon--energy {
-    background-image: url(assets/resources/power.png);
+  background-image: url(assets/resources/power.png);
 }
 
 .resource_icon--heat {
-    background-image: url(assets/resources/heat.png);
+  background-image: url(assets/resources/heat.png);
 }
 
 .resource_icon--data {
-    background-image: url(assets/resources/data.png);
+  background-image: url(assets/resources/data.png);
 }
 
 .shield_icon {
-    background-image: url(assets/misc/shield-icon.png);
-    filter: invert(1);
-    background-size: 25px;
-    width: 25px;
-    height: 25px;
-    position: relative;
-    bottom: -18%;
-    right: -20%;
+  background-image: url(assets/misc/shield-icon.png);
+  filter: invert(1);
+  background-size: 25px;
+  width: 25px;
+  height: 25px;
+  position: relative;
+  bottom: -18%;
+  right: -20%;
 }
 
 .alloys {
-    filter: brightness(2);
-    height: 30px;
-    position: relative;
-    bottom: -10%;
-    right: -5%;
-    font-size: 16px;
-    line-height: 80%;
-    transform: rotate(-180deg);
+  filter: brightness(2);
+  height: 30px;
+  position: relative;
+  bottom: -10%;
+  right: -5%;
+  font-size: 16px;
+  line-height: 80%;
+  transform: rotate(-180deg);
 }

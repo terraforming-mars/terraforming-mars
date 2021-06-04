@@ -9,17 +9,18 @@ import {SelectCard} from '../../../src/inputs/SelectCard';
 import {Player} from '../../../src/Player';
 import {TestPlayers} from '../../TestPlayers';
 
-describe('BactoviralResearch', function() {
-  let card : BactoviralResearch; let player : Player;
+describe('BactoviralResearch', function () {
+  let card: BactoviralResearch;
+  let player: Player;
 
-  beforeEach(function() {
+  beforeEach(function () {
     card = new BactoviralResearch();
     player = TestPlayers.BLUE.newPlayer();
     const redPlayer = TestPlayers.RED.newPlayer();
     Game.newInstance('foobar', [player, redPlayer], player);
   });
 
-  it('Should play with multiple microbe cards', function() {
+  it('Should play with multiple microbe cards', function () {
     const card2 = new Research();
     const card3 = new RegolithEaters();
     const card4 = new Tardigrades();
@@ -32,7 +33,7 @@ describe('BactoviralResearch', function() {
     expect(player.cardsInHand.length).to.eq(1);
   });
 
-  it('Should play with single microbe card', function() {
+  it('Should play with single microbe card', function () {
     const card2 = new RegolithEaters();
     player.playedCards.push(card2);
     card.play(player) as SelectCard<ICard>;
@@ -40,7 +41,7 @@ describe('BactoviralResearch', function() {
     expect(player.cardsInHand.length).to.eq(1);
   });
 
-  it('Should play with no microbe cards', function() {
+  it('Should play with no microbe cards', function () {
     const action = card.play(player);
     expect(action).is.undefined;
     expect(player.cardsInHand.length).to.eq(1);

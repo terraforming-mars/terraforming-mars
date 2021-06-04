@@ -28,14 +28,18 @@ export class Capital extends Card implements IProjectCard {
         align: 'left',
       },
       renderData: CardRenderer.builder((b) => {
-        b.production((pb) => {
-          pb.minus().energy(2).br;
-          pb.plus().megacredits(5);
-        }).nbsp.tile(TileType.CAPITAL, false).br;
-        b.vpText('1 additional VP for each ocean tile adjacent to this city tile.');
+        b
+          .production((pb) => {
+            pb.minus().energy(2).br;
+            pb.plus().megacredits(5);
+          })
+          .nbsp.tile(TileType.CAPITAL, false).br;
+        b.vpText(
+          '1 additional VP for each ocean tile adjacent to this city tile.'
+        );
       }),
       victoryPoints: CardRenderDynamicVictoryPoints.oceans(1, 1),
-    },
+    }
   ) {
     super({
       cardType: CardType.AUTOMATED,
@@ -50,14 +54,17 @@ export class Capital extends Card implements IProjectCard {
     });
   }
   public canPlay(player: Player): boolean {
-    return player.getProduction(Resources.ENERGY) >= 2 &&
-        super.canPlay(player) &&
-        player.game.board.getAvailableSpacesForCity(player).length > 0;
+    return (
+      player.getProduction(Resources.ENERGY) >= 2 &&
+      super.canPlay(player) &&
+      player.game.board.getAvailableSpacesForCity(player).length > 0
+    );
   }
   public getVictoryPoints(player: Player) {
     const usedSpace = player.game.board.getSpaceByTileCard(this.name);
     if (usedSpace !== undefined) {
-      return player.game.board.getAdjacentSpaces(usedSpace)
+      return player.game.board
+        .getAdjacentSpaces(usedSpace)
         .filter((s) => Board.isOceanSpace(s)).length;
     }
     return 0;
@@ -75,7 +82,7 @@ export class Capital extends Card implements IProjectCard {
         });
         space.adjacency = this.adjacencyBonus;
         return undefined;
-      },
+      }
     );
   }
 }

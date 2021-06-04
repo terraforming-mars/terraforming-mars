@@ -5,11 +5,13 @@ import {Player} from '../../src/Player';
 import {Resources} from '../../src/Resources';
 import {TestPlayers} from '../TestPlayers';
 
+describe('Callisto', function () {
+  let callisto: Callisto;
+  let player: Player;
+  let player2: Player;
+  let game: Game;
 
-describe('Callisto', function() {
-  let callisto: Callisto; let player: Player; let player2: Player; let game: Game;
-
-  beforeEach(function() {
+  beforeEach(function () {
     callisto = new Callisto();
     player = TestPlayers.BLUE.newPlayer();
     player2 = TestPlayers.RED.newPlayer();
@@ -18,19 +20,19 @@ describe('Callisto', function() {
     game.colonies.push(callisto);
   });
 
-  it('Should build', function() {
+  it('Should build', function () {
     callisto.addColony(player);
     expect(player.getProduction(Resources.ENERGY)).to.eq(1);
     expect(player2.getProduction(Resources.ENERGY)).to.eq(0);
   });
 
-  it('Should trade', function() {
+  it('Should trade', function () {
     callisto.trade(player);
     expect(player.energy).to.eq(2);
     expect(player2.energy).to.eq(0);
   });
 
-  it('Should give trade bonus', function() {
+  it('Should give trade bonus', function () {
     callisto.addColony(player);
 
     callisto.trade(player2);

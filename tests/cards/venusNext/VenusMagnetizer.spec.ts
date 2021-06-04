@@ -5,28 +5,30 @@ import {Player} from '../../../src/Player';
 import {Resources} from '../../../src/Resources';
 import {TestPlayers} from '../../TestPlayers';
 
-describe('VenusMagnetizer', function() {
-  let card : VenusMagnetizer; let player : Player; let game : Game;
+describe('VenusMagnetizer', function () {
+  let card: VenusMagnetizer;
+  let player: Player;
+  let game: Game;
 
-  beforeEach(function() {
+  beforeEach(function () {
     card = new VenusMagnetizer();
     player = TestPlayers.BLUE.newPlayer();
     const redPlayer = TestPlayers.RED.newPlayer();
     game = Game.newInstance('foobar', [player, redPlayer], player);
   });
 
-  it('Can\'t play', function() {
+  it("Can't play", function () {
     (game as any).venusScaleLevel = 8;
     expect(card.canPlay(player)).is.not.true;
   });
 
-  it('Should play', function() {
+  it('Should play', function () {
     (game as any).venusScaleLevel = 10;
     expect(card.canPlay(player)).is.true;
     expect(card.play()).is.undefined;
   });
 
-  it('Should act', function() {
+  it('Should act', function () {
     player.addProduction(Resources.ENERGY, 2);
     player.playedCards.push(card);
 

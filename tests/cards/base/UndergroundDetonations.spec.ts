@@ -5,22 +5,24 @@ import {Player} from '../../../src/Player';
 import {Resources} from '../../../src/Resources';
 import {TestPlayers} from '../../TestPlayers';
 
-describe('UndergroundDetonations', function() {
-  let card : UndergroundDetonations; let player : Player; let game : Game;
+describe('UndergroundDetonations', function () {
+  let card: UndergroundDetonations;
+  let player: Player;
+  let game: Game;
 
-  beforeEach(function() {
+  beforeEach(function () {
     card = new UndergroundDetonations();
     player = TestPlayers.BLUE.newPlayer();
     const redPlayer = TestPlayers.RED.newPlayer();
     game = Game.newInstance('foobar', [player, redPlayer], player);
   });
 
-  it('Can\'t act', function() {
+  it("Can't act", function () {
     player.megaCredits = 9;
     expect(card.canAct(player)).is.not.true;
   });
 
-  it('Should act', function() {
+  it('Should act', function () {
     player.megaCredits = 10;
     expect(card.canAct(player)).is.true;
 

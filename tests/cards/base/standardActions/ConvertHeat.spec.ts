@@ -8,23 +8,29 @@ import {Game} from '../../../../src/Game';
 import {PoliticalAgendas} from '../../../../src/turmoil/PoliticalAgendas';
 import {Reds} from '../../../../src/turmoil/parties/Reds';
 
-describe('ConvertHeat', function() {
-  let card: ConvertHeat; let player: Player;
+describe('ConvertHeat', function () {
+  let card: ConvertHeat;
+  let player: Player;
 
-  beforeEach(function() {
+  beforeEach(function () {
     card = new ConvertHeat();
     player = TestPlayers.BLUE.newPlayer();
     const player2 = TestPlayers.RED.newPlayer();
-    Game.newInstance('foobar', [player, player2], player, TestingUtils.setCustomGameOptions());
+    Game.newInstance(
+      'foobar',
+      [player, player2],
+      player,
+      TestingUtils.setCustomGameOptions()
+    );
   });
 
-  it('Can not act without heat', function() {
+  it('Can not act without heat', function () {
     expect(card.canAct(player)).eq(false);
     player.heat = 7;
     expect(card.canAct(player)).eq(false);
   });
 
-  it('Can not act with reds', function() {
+  it('Can not act with reds', function () {
     player.heat = 8;
     player.game.phase = Phase.ACTION;
     player.game.turmoil!.rulingParty = new Reds();
@@ -32,7 +38,7 @@ describe('ConvertHeat', function() {
     expect(card.canAct(player)).eq(false);
   });
 
-  it('Should play', function() {
+  it('Should play', function () {
     player.heat = 8;
     expect(card.canAct(player)).eq(true);
     expect(card.action(player)).eq(undefined);

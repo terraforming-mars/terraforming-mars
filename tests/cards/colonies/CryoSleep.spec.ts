@@ -4,8 +4,8 @@ import {Ceres} from '../../../src/colonies/Ceres';
 import {Game} from '../../../src/Game';
 import {TestPlayers} from '../../TestPlayers';
 
-describe('CryoSleep', function() {
-  it('Should play', function() {
+describe('CryoSleep', function () {
+  it('Should play', function () {
     const card = new CryoSleep();
     const player = TestPlayers.BLUE.newPlayer();
     const player2 = TestPlayers.RED.newPlayer();
@@ -15,7 +15,10 @@ describe('CryoSleep', function() {
     const ceres = new Ceres();
     ceres.trade(player);
     expect(player.steel).to.eq(2);
-    player.victoryPointsBreakdown.setVictoryPoints('victoryPoints', card.getVictoryPoints());
+    player.victoryPointsBreakdown.setVictoryPoints(
+      'victoryPoints',
+      card.getVictoryPoints()
+    );
     expect(player.victoryPointsBreakdown.victoryPoints).to.eq(1);
   });
 });

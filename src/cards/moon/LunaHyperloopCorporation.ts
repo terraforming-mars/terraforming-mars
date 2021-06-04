@@ -11,7 +11,10 @@ import {CardRenderDynamicVictoryPoints} from '../render/CardRenderDynamicVictory
 import {CardRenderer} from '../render/CardRenderer';
 import {Tags} from '../Tags';
 
-export class LunaHyperloopCorporation extends Card implements IActionCard, CorporationCard {
+export class LunaHyperloopCorporation
+  extends Card
+  implements IActionCard, CorporationCard
+{
   constructor() {
     super({
       cardType: CardType.CORPORATION,
@@ -27,7 +30,7 @@ export class LunaHyperloopCorporation extends Card implements IActionCard, Corpo
           b.action('Gain 1 M€ for each road tile on the Moon.', (eb) => {
             eb.empty().startAction.megacredits(1).slash().moonRoad().any;
           }).br,
-          b.vpText('1 VP for each road tile on the Moon.').br;
+            b.vpText('1 VP for each road tile on the Moon.').br;
         }),
         victoryPoints: CardRenderDynamicVictoryPoints.moonRoadTile(1, true),
       },
@@ -44,13 +47,17 @@ export class LunaHyperloopCorporation extends Card implements IActionCard, Corpo
   }
 
   public action(player: Player) {
-    const roadTileCount = MoonExpansion.tiles(player.game, TileType.MOON_ROAD, {surfaceOnly: true}).length;
+    const roadTileCount = MoonExpansion.tiles(player.game, TileType.MOON_ROAD, {
+      surfaceOnly: true,
+    }).length;
     player.addResource(Resources.MEGACREDITS, roadTileCount, {log: true});
 
     return undefined;
   }
 
   public getVictoryPoints(player: Player) {
-    return MoonExpansion.tiles(player.game, TileType.MOON_ROAD, {surfaceOnly: true}).length;
+    return MoonExpansion.tiles(player.game, TileType.MOON_ROAD, {
+      surfaceOnly: true,
+    }).length;
   }
 }

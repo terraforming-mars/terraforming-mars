@@ -8,17 +8,23 @@ import {CommercialDistrictAres} from '../../../src/cards/ares/CommercialDistrict
 import {ARES_OPTIONS_NO_HAZARDS} from '../../ares/AresTestHelper';
 import {TestPlayers} from '../../TestPlayers';
 
-describe('CommercialDistrictAres', function() {
-  let card : CommercialDistrictAres; let player : Player;
+describe('CommercialDistrictAres', function () {
+  let card: CommercialDistrictAres;
+  let player: Player;
 
-  beforeEach(function() {
+  beforeEach(function () {
     card = new CommercialDistrictAres();
     player = TestPlayers.BLUE.newPlayer();
     const redPlayer = TestPlayers.RED.newPlayer();
-    Game.newInstance('foobar', [player, redPlayer], player, ARES_OPTIONS_NO_HAZARDS);
+    Game.newInstance(
+      'foobar',
+      [player, redPlayer],
+      player,
+      ARES_OPTIONS_NO_HAZARDS
+    );
   });
 
-  it('Should play', function() {
+  it('Should play', function () {
     player.addProduction(Resources.ENERGY, 1);
     expect(card.canPlay(player)).is.true;
 
@@ -26,6 +32,8 @@ describe('CommercialDistrictAres', function() {
     expect(action instanceof SelectSpace);
     action.cb(action.availableSpaces[0]);
 
-    expect(action.availableSpaces[0].adjacency).to.deep.eq({bonus: [SpaceBonus.MEGACREDITS, SpaceBonus.MEGACREDITS]});
+    expect(action.availableSpaces[0].adjacency).to.deep.eq({
+      bonus: [SpaceBonus.MEGACREDITS, SpaceBonus.MEGACREDITS],
+    });
   });
 });

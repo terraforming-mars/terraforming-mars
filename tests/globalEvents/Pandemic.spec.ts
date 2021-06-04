@@ -7,8 +7,8 @@ import {Kelvinists} from '../../src/turmoil/parties/Kelvinists';
 import {Turmoil} from '../../src/turmoil/Turmoil';
 import {TestPlayers} from '../TestPlayers';
 
-describe('Pandemic', function() {
-  it('resolve play', function() {
+describe('Pandemic', function () {
+  it('resolve play', function () {
     const card = new Pandemic();
     const player = TestPlayers.BLUE.newPlayer();
     const player2 = TestPlayers.RED.newPlayer();

@@ -5,21 +5,22 @@ import {Player} from '../../../src/Player';
 import {Resources} from '../../../src/Resources';
 import {TestPlayers} from '../../TestPlayers';
 
-describe('RadChemFactory', function() {
-  let card : RadChemFactory; let player : Player;
+describe('RadChemFactory', function () {
+  let card: RadChemFactory;
+  let player: Player;
 
-  beforeEach(function() {
+  beforeEach(function () {
     card = new RadChemFactory();
     player = TestPlayers.BLUE.newPlayer();
     const redPlayer = TestPlayers.RED.newPlayer();
     Game.newInstance('foobar', [player, redPlayer], player);
   });
 
-  it('Can\'t play', function() {
+  it("Can't play", function () {
     expect(card.canPlay(player)).is.not.true;
   });
 
-  it('Should play', function() {
+  it('Should play', function () {
     player.addProduction(Resources.ENERGY, 1);
     expect(card.canPlay(player)).is.true;
 

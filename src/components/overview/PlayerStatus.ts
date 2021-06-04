@@ -5,7 +5,10 @@ import {mainAppSettings} from '../App';
 import {PlayerModel} from '../../models/PlayerModel';
 import {PlayerTimer} from './PlayerTimer';
 
-export const hidePlayerData = (root: typeof mainAppSettings.methods, playerIndex: number) => {
+export const hidePlayerData = (
+  root: typeof mainAppSettings.methods,
+  playerIndex: number
+) => {
   root.setVisibilityState('pinned_player_' + playerIndex, false);
 };
 
@@ -32,7 +35,7 @@ export const PlayerStatus = Vue.component('player-status', {
     PlayerTimer,
   },
   methods: {
-    getLabelAndTimerClasses: function(): string {
+    getLabelAndTimerClasses: function (): string {
       const classes: Array<string> = [];
       const baseClass = 'player-action-status-container';
       classes.push(baseClass);
@@ -41,12 +44,16 @@ export const PlayerStatus = Vue.component('player-status', {
       }
       if (this.actionLabel === ActionLabel.PASSED) {
         classes.push(`${baseClass}--passed`);
-      } else if (this.actionLabel === ActionLabel.ACTIVE || this.actionLabel === ActionLabel.DRAFTING || this.actionLabel === ActionLabel.RESEARCHING) {
+      } else if (
+        this.actionLabel === ActionLabel.ACTIVE ||
+        this.actionLabel === ActionLabel.DRAFTING ||
+        this.actionLabel === ActionLabel.RESEARCHING
+      ) {
         classes.push(`${baseClass}--active`);
       }
       return classes.join(' ');
     },
-    getActionStatusClasses: function(): string {
+    getActionStatusClasses: function (): string {
       const classes: Array<string> = ['player-action-status'];
       if (this.actionLabel === ActionLabel.NONE) {
         classes.push('visibility-hidden');

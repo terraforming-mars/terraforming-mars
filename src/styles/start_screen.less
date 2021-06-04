@@ -1,143 +1,146 @@
 #app {
-    position: relative;
+  position: relative;
 }
 .topmost-start-screen {
-    margin: 0px;
-    padding-bottom: 40px;
-    background: url(assets/stars.jpg);
-    min-height: 100%;
+  margin: 0px;
+  padding-bottom: 40px;
+  background: url(assets/stars.jpg);
+  min-height: 100%;
 }
 
 .start-screen {
-    width: 400px;
-    margin: 0 auto;
+  width: 400px;
+  margin: 0 auto;
 }
 
 .start-screen-game-title {
-    color: #daab63;
-    padding: 40px 0 10px 0;
-    margin: 0 auto;
-    text-align: center;
+  color: #daab63;
+  padding: 40px 0 10px 0;
+  margin: 0 auto;
+  text-align: center;
 }
 
 .start-screen-lang-switch {
-    text-align: center;
-    margin-bottom: 20px;
+  text-align: center;
+  margin-bottom: 20px;
 }
 
 .start-screen-links {
-    margin: 0 auto;
-    width: 370px;
-    padding-top: 50px;
+  margin: 0 auto;
+  width: 370px;
+  padding-top: 50px;
 }
 
 .start-screen-link {
-    text-decoration: none;
-    cursor: pointer;
-    box-shadow: inset 0 0 0px 1px #333;
-    height: 90px;
-    line-height: 28px;
-    border-radius: 10px;
+  text-decoration: none;
+  cursor: pointer;
+  box-shadow: inset 0 0 0px 1px #333;
+  height: 90px;
+  line-height: 28px;
+  border-radius: 10px;
+  color: #eee;
+  text-shadow: 0 0 2px black, 0 2px 1px black;
+  padding-left: 17px;
+  width: 369px;
+  height: 90px;
+  display: flex;
+  margin-bottom: 5px;
+  font-size: 26px;
+  text-transform: uppercase;
+  font-weight: bold;
+  letter-spacing: 1px;
+  padding-bottom: 15px;
+  flex-direction: column-reverse;
+  background-image: url('assets/buttons-homepage/planets.jpg');
+
+  &:hover,
+  &:visited,
+  &:active,
+  &:focus {
     color: #eee;
-    text-shadow: 0 0 2px black, 0 2px 1px black;
-    padding-left: 17px;
-    width: 369px;
-    height: 90px;
-    display: flex;
-    margin-bottom: 5px;
-    font-size: 26px;
-    text-transform: uppercase;
-    font-weight: bold;
-    letter-spacing: 1px;
-    padding-bottom: 15px;
-    flex-direction: column-reverse;
-    background-image: url("assets/buttons-homepage/planets.jpg");
+    text-decoration: none;
+  }
 
-    &:hover, &:visited, &:active, &:focus {
-        color: #eee;
-        text-decoration: none;
-    }
-
-    &:hover {
-        filter: brightness(120%);
-    }
+  &:hover {
+    filter: brightness(120%);
+  }
 }
 
 .start-screen-header {
-    box-shadow: inset 0 0 20px 20px black;
-    font-family: Prototype;
-    line-height: 90px;
-    font-size: 16px;
-    width: 369px;
-    height: 90px;
-    line-height: 30px;
-    color: #daab63;
-    display: block;
-    margin-bottom: 5px;
-    margin-left: 5px;
-    text-shadow: 0 0 2px black, 0 2px 2px black;
-    letter-spacing: 1px;
-    background-image: url("assets/buttons-homepage/planets.jpg");
+  box-shadow: inset 0 0 20px 20px black;
+  font-family: Prototype;
+  line-height: 90px;
+  font-size: 16px;
+  width: 369px;
+  height: 90px;
+  line-height: 30px;
+  color: #daab63;
+  display: block;
+  margin-bottom: 5px;
+  margin-left: 5px;
+  text-shadow: 0 0 2px black, 0 2px 2px black;
+  letter-spacing: 1px;
+  background-image: url('assets/buttons-homepage/planets.jpg');
 }
 
 .start-screen-title-top {
-    transform: scaleX(2);
-    margin-left: 162px;
-    padding-top: 15px;
+  transform: scaleX(2);
+  margin-left: 162px;
+  padding-top: 15px;
 }
 
 .start-screen-title-bottom {
-    transform: scaleX(2);
-    font-size: 30px;
-    margin-left: 190px;
+  transform: scaleX(2);
+  font-size: 30px;
+  margin-left: 190px;
 }
 
 .start-screen-link--new-game {
-    background-position: 0px -90px;
+  background-position: 0px -90px;
 }
 
 .start-screen-link--solo {
-    background-position: 0px -180px;
+  background-position: 0px -180px;
 }
 
 .start-screen-link--cards-list {
-    background-position: 0px -270px;
+  background-position: 0px -270px;
 }
 
 .start-screen-link--board-game {
-    background-position: 0px -360px;
+  background-position: 0px -360px;
 }
 
 .start-screen-link--about {
-    background-position: 0px -450px;
+  background-position: 0px -450px;
 }
 
 .start-screen-link--changelog {
-    background-position: 0px -540px;
+  background-position: 0px -540px;
 }
 
 .start-screen-link--chat {
-    background-position: 0px -630px;
+  background-position: 0px -630px;
 }
 
 .start-screen-link--languages {
-    padding-top: 30px;
-    background-position: 0px -720px;
+  padding-top: 30px;
+  background-position: 0px -720px;
 }
 
 .start-screen-version-cont {
-    margin-top: 10px;
-    text-align: center;
+  margin-top: 10px;
+  text-align: center;
 }
 
 .start-screen-version {
-    margin-top: -5px;
+  margin-top: -5px;
 }
 
 .notice {
-    font-size: @font_size_small;
-    position: absolute;
-    bottom: 0px;
-    right: 0px;
-    padding: 16px 24px;
+  font-size: @font_size_small;
+  position: absolute;
+  bottom: 0px;
+  right: 0px;
+  padding: 16px 24px;
 }

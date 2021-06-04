@@ -3,8 +3,8 @@ import {NeutralizerFactory} from '../../../src/cards/venusNext/NeutralizerFactor
 import {Game} from '../../../src/Game';
 import {TestPlayers} from '../../TestPlayers';
 
-describe('NeutralizerFactory', function() {
-  it('Should play', function() {
+describe('NeutralizerFactory', function () {
+  it('Should play', function () {
     const card = new NeutralizerFactory();
     const player = TestPlayers.BLUE.newPlayer();
     const redPlayer = TestPlayers.RED.newPlayer();

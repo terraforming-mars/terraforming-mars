@@ -22,9 +22,12 @@ export class UrbanDecomposers extends Card implements IProjectCard {
       metadata: {
         cardNumber: 'C48',
         renderData: CardRenderer.builder((b) => {
-          b.production((pb) => pb.plants(1)).microbes(2).asterix();
+          b.production((pb) => pb.plants(1))
+            .microbes(2)
+            .asterix();
         }),
-        description: 'Requires that you have 1 city tile and 1 colony in play. Increase your plant production 1 step, and add 2 microbes to ANOTHER card.',
+        description:
+          'Requires that you have 1 city tile and 1 colony in play. Increase your plant production 1 step, and add 2 microbes to ANOTHER card.',
       },
     });
   }
@@ -32,7 +35,9 @@ export class UrbanDecomposers extends Card implements IProjectCard {
   public canPlay(player: Player): boolean {
     let coloniesCount: number = 0;
     player.game.colonies.forEach((colony) => {
-      coloniesCount += colony.colonies.filter((owner) => owner === player.id).length;
+      coloniesCount += colony.colonies.filter(
+        (owner) => owner === player.id
+      ).length;
     });
     return coloniesCount > 0 && player.getCitiesCount() > 0;
   }
@@ -42,7 +47,9 @@ export class UrbanDecomposers extends Card implements IProjectCard {
 
     const microbeCards = player.getResourceCards(ResourceType.MICROBE);
     if (microbeCards.length) {
-      player.game.defer(new AddResourcesToCard(player, ResourceType.MICROBE, {count: 2}));
+      player.game.defer(
+        new AddResourcesToCard(player, ResourceType.MICROBE, {count: 2})
+      );
     }
 
     return undefined;

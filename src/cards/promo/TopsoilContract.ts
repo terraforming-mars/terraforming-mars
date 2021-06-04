@@ -17,9 +17,12 @@ export class TopsoilContract extends Card implements IProjectCard {
       metadata: {
         cardNumber: 'X30',
         renderData: CardRenderer.builder((b) => {
-          b.effect('When you gain a microbe to ANY CARD, also gain 1 M€.', (eb) => {
-            eb.microbes(1).asterix().startEffect.megacredits(1);
-          }).br;
+          b.effect(
+            'When you gain a microbe to ANY CARD, also gain 1 M€.',
+            (eb) => {
+              eb.microbes(1).asterix().startEffect.megacredits(1);
+            }
+          ).br;
           b.plants(3);
         }),
         description: 'Gain 3 plants.',

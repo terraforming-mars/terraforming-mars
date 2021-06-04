@@ -27,14 +27,18 @@ export class ImportedNitrogen extends Card implements IProjectCard {
           b.microbes(3).digit.asterix().nbsp;
           b.animals(2).digit.asterix();
         }),
-        description: 'Raise your TR 1 step and gain 4 Plants. Add 3 Microbes to ANOTHER card and 2 Animals to ANOTHER card.',
+        description:
+          'Raise your TR 1 step and gain 4 Plants. Add 3 Microbes to ANOTHER card and 2 Animals to ANOTHER card.',
       },
     });
   }
 
   public canPlay(player: Player): boolean {
     if (PartyHooks.shouldApplyPolicy(player.game, PartyName.REDS)) {
-      return player.canAfford(player.getCardCost(this) + REDS_RULING_POLICY_COST, {titanium: true});
+      return player.canAfford(
+        player.getCardCost(this) + REDS_RULING_POLICY_COST,
+        {titanium: true}
+      );
     }
 
     return true;
@@ -43,8 +47,12 @@ export class ImportedNitrogen extends Card implements IProjectCard {
   public play(player: Player) {
     player.plants += 4;
     player.increaseTerraformRating();
-    player.game.defer(new AddResourcesToCard(player, ResourceType.MICROBE, {count: 3}));
-    player.game.defer(new AddResourcesToCard(player, ResourceType.ANIMAL, {count: 2}));
+    player.game.defer(
+      new AddResourcesToCard(player, ResourceType.MICROBE, {count: 3})
+    );
+    player.game.defer(
+      new AddResourcesToCard(player, ResourceType.ANIMAL, {count: 2})
+    );
     return undefined;
   }
 }

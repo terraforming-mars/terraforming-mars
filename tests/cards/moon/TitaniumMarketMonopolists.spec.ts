@@ -49,7 +49,6 @@ describe('TitaniumMarketMonopolists', () => {
     expect(card.canAct(player)).eq(true);
   });
 
-
   it('sell titanium', () => {
     player.megaCredits = 1;
     player.titanium = 2;
@@ -96,4 +95,3 @@ describe('TitaniumMarketMonopolists', () => {
     expect(selectAmount.max).eq(4);
   });
 });
-

@@ -43,4 +43,3 @@ describe('MiningRobotsManufCenter', () => {
     expect(moonData.miningRate).eq(2);
   });
 });
-

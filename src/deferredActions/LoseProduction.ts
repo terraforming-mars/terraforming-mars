@@ -16,7 +16,7 @@ export class LoseProduction implements DeferredAction {
   constructor(
     public player: Player,
     public resource: Resources,
-    public options: LoseProduction.Options = {},
+    public options: LoseProduction.Options = {}
   ) {}
 
   public execute() {

@@ -12,14 +12,19 @@ import {Resources} from '../../../src/Resources';
 import {TestingUtils} from '../../TestingUtils';
 import {TestPlayers} from '../../TestPlayers';
 
-describe('EcologyResearch', function() {
-  let card : EcologyResearch; let player : Player; let game : Game; let colony1: Luna;
+describe('EcologyResearch', function () {
+  let card: EcologyResearch;
+  let player: Player;
+  let game: Game;
+  let colony1: Luna;
 
-  beforeEach(function() {
+  beforeEach(function () {
     card = new EcologyResearch();
     player = TestPlayers.BLUE.newPlayer();
     const redPlayer = TestPlayers.RED.newPlayer();
-    const gameOptions = TestingUtils.setCustomGameOptions({coloniesExtension: true});
+    const gameOptions = TestingUtils.setCustomGameOptions({
+      coloniesExtension: true,
+    });
     game = Game.newInstance('foobar', [player, redPlayer], player, gameOptions);
 
     colony1 = new Luna();
@@ -27,14 +32,14 @@ describe('EcologyResearch', function() {
     player.game.colonies.push(colony1);
   });
 
-  it('Should play without targets', function() {
+  it('Should play without targets', function () {
     const action = card.play(player);
     expect(action).is.undefined;
     expect(player.getProduction(Resources.PLANTS)).to.eq(1);
     expect(card.getVictoryPoints()).to.eq(1);
   });
 
-  it('Should play with single targets', function() {
+  it('Should play with single targets', function () {
     const tardigrades = new Tardigrades();
     const fish = new Fish();
     player.playedCards.push(tardigrades, fish);
@@ -53,7 +58,7 @@ describe('EcologyResearch', function() {
     expect(player.getProduction(Resources.PLANTS)).to.eq(1);
   });
 
-  it('Should play with multiple targets', function() {
+  it('Should play with multiple targets', function () {
     const tardigrades = new Tardigrades();
     const ants = new Ants();
     player.playedCards.push(tardigrades, ants);
@@ -62,7 +67,9 @@ describe('EcologyResearch', function() {
     expect(game.deferredActions).has.lengthOf(1);
 
     // add two microbes to Ants
-    const selectCard = game.deferredActions.peek()!.execute() as SelectCard<ICard>;
+    const selectCard = game.deferredActions
+      .peek()!
+      .execute() as SelectCard<ICard>;
     selectCard.cb([ants]);
 
     expect(ants.resourceCount).to.eq(2);

@@ -13,9 +13,12 @@ export class SellPatentsStandardProject extends StandardProjectCard {
       metadata: {
         cardNumber: 'SP8',
         renderData: CardRenderer.builder((b) =>
-          b.standardProject('Discard any number of cards to gain that amount of M€.', (eb) => {
-            eb.text('X').cards(1).startAction.megacredits(0).multiplier;
-          }),
+          b.standardProject(
+            'Discard any number of cards to gain that amount of M€.',
+            (eb) => {
+              eb.text('X').cards(1).startAction.megacredits(0).multiplier;
+            }
+          )
         ),
       },
     });
@@ -46,9 +49,12 @@ export class SellPatentsStandardProject extends StandardProjectCard {
           player.game.dealer.discard(card);
         });
         this.projectPlayed(player);
-        player.game.log('${0} sold ${1} patents', (b) => b.player(player).number(foundCards.length));
+        player.game.log('${0} sold ${1} patents', (b) =>
+          b.player(player).number(foundCards.length)
+        );
         return undefined;
-      }, player.cardsInHand.length,
+      },
+      player.cardsInHand.length
     );
   }
 }

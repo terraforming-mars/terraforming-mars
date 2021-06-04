@@ -12,12 +12,23 @@ class Space implements ISpace {
     public spaceType: SpaceType,
     public x: number,
     public y: number,
-    public bonus: Array<SpaceBonus>) { }
+    public bonus: Array<SpaceBonus>
+  ) {}
 
-  public static mine(id: string, x: number, y: number, bonus: Array<SpaceBonus>) {
+  public static mine(
+    id: string,
+    x: number,
+    y: number,
+    bonus: Array<SpaceBonus>
+  ) {
     return new Space(id, SpaceType.LUNAR_MINE, x, y, bonus);
   }
-  public static surface(id: string, x: number, y: number, bonus: Array<SpaceBonus>) {
+  public static surface(
+    id: string,
+    x: number,
+    y: number,
+    bonus: Array<SpaceBonus>
+  ) {
     return new Space(id, SpaceType.LAND, x, y, bonus);
   }
   public static colony(id: string) {
@@ -35,7 +46,8 @@ export class MoonBoard extends Board {
 
   public getAvailableSpacesForMine(player: Player): Array<ISpace> {
     const spaces = this.spaces.filter((space) => {
-      const val = space.tile === undefined &&
+      const val =
+        space.tile === undefined &&
         space.spaceType === SpaceType.LUNAR_MINE &&
         space.id !== MoonSpaces.MARE_IMBRIUM &&
         space.id !== MoonSpaces.MARE_SERENITATIS &&
@@ -55,17 +67,46 @@ export class MoonBoard extends Board {
     const b = new Builder();
     b.colony(); // Luna Trade Station
     b.row(2).land().land(STEEL, DRAW_CARD).land().mine(TITANIUM);
-    b.row(1).mine(TITANIUM, TITANIUM).mine(/* Mare Imbrium */).land(STEEL).land().land();
-    b.row(0).mine().land(STEEL).land(STEEL, TITANIUM).mine(/* Mare Serenatis*/).mine(TITANIUM).land(STEEL, STEEL);
+    b.row(1)
+      .mine(TITANIUM, TITANIUM)
+      .mine(/* Mare Imbrium */)
+      .land(STEEL)
+      .land()
+      .land();
+    b.row(0)
+      .mine()
+      .land(STEEL)
+      .land(STEEL, TITANIUM)
+      .mine(/* Mare Serenatis*/)
+      .mine(TITANIUM)
+      .land(STEEL, STEEL);
     b.row(0).land(STEEL).land().land().mine(TITANIUM).mine(TITANIUM);
-    b.row(0).land().mine(TITANIUM).mine(/* Mare Nubium */).land().mine(/* Mare Nectaris */).land(STEEL);
-    b.row(1).land().land(STEEL).land(STEEL).land(DRAW_CARD, DRAW_CARD).land(STEEL);
-    b.row(2).land(DRAW_CARD, DRAW_CARD).mine(TITANIUM).mine(TITANIUM, TITANIUM).land();
+    b.row(0)
+      .land()
+      .mine(TITANIUM)
+      .mine(/* Mare Nubium */)
+      .land()
+      .mine(/* Mare Nectaris */)
+      .land(STEEL);
+    b.row(1)
+      .land()
+      .land(STEEL)
+      .land(STEEL)
+      .land(DRAW_CARD, DRAW_CARD)
+      .land(STEEL);
+    b.row(2)
+      .land(DRAW_CARD, DRAW_CARD)
+      .mine(TITANIUM)
+      .mine(TITANIUM, TITANIUM)
+      .land();
     b.colony();
     return new MoonBoard(b.spaces);
   }
 
-  public static deserialize(board: SerializedBoard, players: Array<Player>): MoonBoard {
+  public static deserialize(
+    board: SerializedBoard,
+    players: Array<Player>
+  ): MoonBoard {
     const spaces = Board.deserializeSpaces(board.spaces, players);
     return new MoonBoard(spaces);
   }
@@ -93,17 +134,26 @@ class Builder {
 }
 
 class Row {
-  constructor(private builder: Builder) {
-  }
+  constructor(private builder: Builder) {}
 
   land(...bonuses: SpaceBonus[]): Row {
-    const space = Space.surface(this.builder.nextId(), this.builder.x++, this.builder.y, bonuses);
+    const space = Space.surface(
+      this.builder.nextId(),
+      this.builder.x++,
+      this.builder.y,
+      bonuses
+    );
     this.builder.spaces.push(space);
     return this;
   }
 
   mine(...bonuses: SpaceBonus[]): Row {
-    const space = Space.mine(this.builder.nextId(), this.builder.x++, this.builder.y, bonuses);
+    const space = Space.mine(
+      this.builder.nextId(),
+      this.builder.x++,
+      this.builder.y,
+      bonuses
+    );
     this.builder.spaces.push(space);
     return this;
   }

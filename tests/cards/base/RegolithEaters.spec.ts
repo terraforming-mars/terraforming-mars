@@ -5,17 +5,19 @@ import {OrOptions} from '../../../src/inputs/OrOptions';
 import {Player} from '../../../src/Player';
 import {TestPlayers} from '../../TestPlayers';
 
-describe('RegolithEaters', function() {
-  let card : RegolithEaters; let player : Player; let game : Game;
+describe('RegolithEaters', function () {
+  let card: RegolithEaters;
+  let player: Player;
+  let game: Game;
 
-  beforeEach(function() {
+  beforeEach(function () {
     card = new RegolithEaters();
     player = TestPlayers.BLUE.newPlayer();
     const redPlayer = TestPlayers.RED.newPlayer();
     game = Game.newInstance('foobar', [player, redPlayer], player);
   });
 
-  it('Should act', function() {
+  it('Should act', function () {
     player.playedCards.push(card);
     const action = card.action(player);
     expect(action).is.undefined;
@@ -26,11 +28,11 @@ describe('RegolithEaters', function() {
     const orOptions = card.action(player) as OrOptions;
     expect(orOptions instanceof OrOptions).is.true;
 
-        orOptions!.options[1].cb();
-        expect(card.resourceCount).to.eq(3);
+    orOptions!.options[1].cb();
+    expect(card.resourceCount).to.eq(3);
 
-        orOptions!.options[0].cb();
-        expect(card.resourceCount).to.eq(1);
-        expect(game.getOxygenLevel()).to.eq(1);
+    orOptions!.options[0].cb();
+    expect(card.resourceCount).to.eq(1);
+    expect(game.getOxygenLevel()).to.eq(1);
   });
 });

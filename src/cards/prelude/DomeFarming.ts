@@ -18,7 +18,8 @@ export class DomeFarming extends PreludeCard {
         renderData: CardRenderer.builder((b) => {
           b.production((pb) => pb.megacredits(2).plants(1));
         }),
-        description: 'Increase your M€ production 2 steps and plant production 1 step.',
+        description:
+          'Increase your M€ production 2 steps and plant production 1 step.',
       },
     });
   }
@@ -28,4 +29,3 @@ export class DomeFarming extends PreludeCard {
     return undefined;
   }
 }
-

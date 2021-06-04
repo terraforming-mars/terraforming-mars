@@ -4,20 +4,21 @@ import {Player} from '../../../src/Player';
 import {Resources} from '../../../src/Resources';
 import {TestPlayers} from '../../TestPlayers';
 
-describe('Loan', function() {
-  let card : Loan; let player : Player;
+describe('Loan', function () {
+  let card: Loan;
+  let player: Player;
 
-  beforeEach(function() {
+  beforeEach(function () {
     card = new Loan();
     player = TestPlayers.BLUE.newPlayer();
   });
 
-  it('Can\'t play', function() {
+  it("Can't play", function () {
     player.addProduction(Resources.MEGACREDITS, -4);
     expect(card.canPlay(player)).is.not.true;
   });
 
-  it('Should play', function() {
+  it('Should play', function () {
     expect(card.canPlay(player)).is.true;
     card.play(player);
 

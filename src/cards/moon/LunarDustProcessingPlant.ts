@@ -11,28 +11,37 @@ import {MoonCard} from './MoonCard';
 
 export class LunarDustProcessingPlant extends MoonCard implements IProjectCard {
   constructor() {
-    super({
-      name: CardName.LUNAR_DUST_PROCESSING_PLANT,
-      cardType: CardType.ACTIVE,
-      tags: [Tags.BUILDING],
-      cost: 6,
-      productionBox: Units.of({}),
+    super(
+      {
+        name: CardName.LUNAR_DUST_PROCESSING_PLANT,
+        cardType: CardType.ACTIVE,
+        tags: [Tags.BUILDING],
+        cost: 6,
+        productionBox: Units.of({}),
 
-      metadata: {
-        description: 'Spend 1 titanium. Raise the Logistic Rate 1 step.',
-        cardNumber: 'M17',
-        renderData: CardRenderer.builder((b) => {
-          b.effect('When you place a road tile on the Moon, you spend no steel on it.', (eb) => {
-            eb.startEffect.tile(TileType.MOON_ROAD, false).colon().text('0').steel(1);
-          }).br;
-          b.minus().titanium(1).moonLogisticsRate();
-        }),
+        metadata: {
+          description: 'Spend 1 titanium. Raise the Logistic Rate 1 step.',
+          cardNumber: 'M17',
+          renderData: CardRenderer.builder((b) => {
+            b.effect(
+              'When you place a road tile on the Moon, you spend no steel on it.',
+              (eb) => {
+                eb.startEffect
+                  .tile(TileType.MOON_ROAD, false)
+                  .colon()
+                  .text('0')
+                  .steel(1);
+              }
+            ).br;
+            b.minus().titanium(1).moonLogisticsRate();
+          }),
+        },
       },
-    }, {
-      reserveUnits: Units.of({titanium: 1}),
-    });
-  };
-
+      {
+        reserveUnits: Units.of({titanium: 1}),
+      }
+    );
+  }
 
   public play(player: Player) {
     super.play(player);

@@ -1,12 +1,11 @@
-
 import {expect} from 'chai';
 import {Soletta} from '../../../src/cards/base/Soletta';
 import {Game} from '../../../src/Game';
 import {Resources} from '../../../src/Resources';
 import {TestPlayers} from '../../TestPlayers';
 
-describe('Soletta', function() {
-  it('Should play', function() {
+describe('Soletta', function () {
+  it('Should play', function () {
     const card = new Soletta();
     const player = TestPlayers.BLUE.newPlayer();
     const redPlayer = TestPlayers.RED.newPlayer();

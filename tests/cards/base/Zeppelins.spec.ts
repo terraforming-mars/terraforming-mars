@@ -5,21 +5,23 @@ import {TestPlayer} from '../../TestPlayer';
 import {Resources} from '../../../src/Resources';
 import {TestPlayers} from '../../TestPlayers';
 
-describe('Zeppelins', function() {
-  let card : Zeppelins; let player : TestPlayer; let game : Game;
+describe('Zeppelins', function () {
+  let card: Zeppelins;
+  let player: TestPlayer;
+  let game: Game;
 
-  beforeEach(function() {
+  beforeEach(function () {
     card = new Zeppelins();
     player = TestPlayers.BLUE.newPlayer();
     const redPlayer = TestPlayers.RED.newPlayer();
     game = Game.newInstance('foobar', [player, redPlayer], player);
   });
 
-  it('Can\'t play', function() {
+  it("Can't play", function () {
     (game as any).oxygenLevel = 4;
     expect(card.canPlay(player)).is.not.true;
   });
-  it('Should play', function() {
+  it('Should play', function () {
     (game as any).oxygenLevel = 5;
     expect(card.canPlay(player)).is.true;
 
@@ -28,7 +30,10 @@ describe('Zeppelins', function() {
 
     card.play(player);
     expect(player.getProduction(Resources.MEGACREDITS)).to.eq(1);
-    player.victoryPointsBreakdown.setVictoryPoints('victoryPoints', card.getVictoryPoints());
+    player.victoryPointsBreakdown.setVictoryPoints(
+      'victoryPoints',
+      card.getVictoryPoints()
+    );
     expect(player.victoryPointsBreakdown.victoryPoints).to.eq(1);
   });
 });

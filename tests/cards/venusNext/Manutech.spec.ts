@@ -6,10 +6,12 @@ import {Player} from '../../../src/Player';
 import {Resources} from '../../../src/Resources';
 import {TestPlayers} from '../../TestPlayers';
 
-describe('Manutech', function() {
-  let card : Manutech; let player : Player; let game : Game;
+describe('Manutech', function () {
+  let card: Manutech;
+  let player: Player;
+  let game: Game;
 
-  beforeEach(function() {
+  beforeEach(function () {
     card = new Manutech();
     player = TestPlayers.BLUE.newPlayer();
     const redPlayer = TestPlayers.RED.newPlayer();
@@ -17,13 +19,13 @@ describe('Manutech', function() {
     player.corporationCard = card;
   });
 
-  it('Should play', function() {
+  it('Should play', function () {
     card.play(player);
     expect(player.getProduction(Resources.STEEL)).to.eq(1);
     expect(player.steel).to.eq(1);
   });
 
-  it('Should add energy resources by Power Plant standard project', function() {
+  it('Should add energy resources by Power Plant standard project', function () {
     new PowerPlantStandardProject().action(player);
     game.deferredActions.pop()!.execute();
     expect(player.getResource(Resources.ENERGY)).to.eq(1);

@@ -1,4 +1,3 @@
-
 import Vue from 'vue';
 import {HowToPay} from '../inputs/HowToPay';
 import {PaymentWidgetMixin} from './PaymentWidgetMixin';
@@ -9,14 +8,14 @@ import {Button} from '../components/common/Button';
 import {TranslateMixin} from './TranslateMixin';
 
 interface SelectHowToPayModel {
-    cost: number;
-    heat: number;
-    megaCredits: number;
-    steel: number;
-    titanium: number;
-    microbes: number;
-    floaters: number;
-    warning: string | undefined;
+  cost: number;
+  heat: number;
+  megaCredits: number;
+  steel: number;
+  titanium: number;
+  microbes: number;
+  floaters: number;
+  warning: string | undefined;
 }
 
 export const SelectHowToPay = Vue.component('select-how-to-pay', {
@@ -40,7 +39,7 @@ export const SelectHowToPay = Vue.component('select-how-to-pay', {
   components: {
     'Button': Button,
   },
-  data: function() {
+  data: function () {
     return {
       cost: 0,
       heat: 0,
@@ -53,9 +52,9 @@ export const SelectHowToPay = Vue.component('select-how-to-pay', {
     } as SelectHowToPayModel;
   },
   mixins: [PaymentWidgetMixin, TranslateMixin],
-  mounted: function() {
+  mounted: function () {
     const app = this;
-    Vue.nextTick(function() {
+    Vue.nextTick(function () {
       app.setInitialCost();
       app.$data.megaCredits = (app as any).getMegaCreditsMax();
 
@@ -65,23 +64,29 @@ export const SelectHowToPay = Vue.component('select-how-to-pay', {
     });
   },
   methods: {
-    hasWarning: function() {
+    hasWarning: function () {
       return this.$data.warning !== undefined;
     },
-    setInitialCost: function() {
+    setInitialCost: function () {
       this.$data.cost = this.playerinput.amount;
     },
-    setDefaultSteelValue: function() {
+    setDefaultSteelValue: function () {
       // automatically use available steel to pay if not enough MC
       if (!this.canAffordWithMcOnly() && this.canUseSteel()) {
-        let requiredSteelQty = Math.ceil(Math.max(this.$data.cost - this.player.megaCredits, 0) / this.player.steelValue);
+        let requiredSteelQty = Math.ceil(
+          Math.max(this.$data.cost - this.player.megaCredits, 0) /
+            this.player.steelValue
+        );
 
         if (requiredSteelQty > this.player.steel) {
           this.$data.steel = this.player.steel;
         } else {
           // use as much steel as possible without overpaying by default
           let currentSteelValue = requiredSteelQty * this.player.steelValue;
-          while (currentSteelValue <= this.$data.cost - this.player.steelValue && requiredSteelQty < this.player.steel) {
+          while (
+            currentSteelValue <= this.$data.cost - this.player.steelValue &&
+            requiredSteelQty < this.player.steel
+          ) {
             requiredSteelQty++;
             currentSteelValue = requiredSteelQty * this.player.steelValue;
           }
@@ -89,59 +94,86 @@ export const SelectHowToPay = Vue.component('select-how-to-pay', {
           this.$data.steel = requiredSteelQty;
         }
 
-        const discountedCost = this.$data.cost - (this.$data.steel * this.player.steelValue);
+        const discountedCost =
+          this.$data.cost - this.$data.steel * this.player.steelValue;
         this.$data.megaCredits = Math.max(discountedCost, 0);
       } else {
         this.$data.steel = 0;
       }
     },
-    setDefaultTitaniumValue: function() {
+    setDefaultTitaniumValue: function () {
       // automatically use available titanium to pay if not enough MC
       if (!this.canAffordWithMcOnly() && this.canUseTitanium()) {
-        let requiredTitaniumQty = Math.ceil(Math.max(this.$data.cost - this.player.megaCredits - (this.$data.steel * this.player.steelValue), 0) / this.player.titaniumValue);
+        let requiredTitaniumQty = Math.ceil(
+          Math.max(
+            this.$data.cost -
+              this.player.megaCredits -
+              this.$data.steel * this.player.steelValue,
+            0
+          ) / this.player.titaniumValue
+        );
 
         if (requiredTitaniumQty > this.player.titanium) {
           this.$data.titanium = this.player.titanium;
         } else {
           // use as much titanium as possible without overpaying by default
-          let currentTitaniumValue = requiredTitaniumQty * this.player.titaniumValue;
-          while (currentTitaniumValue <= this.$data.cost - this.player.titaniumValue && requiredTitaniumQty < this.player.titanium) {
+          let currentTitaniumValue =
+            requiredTitaniumQty * this.player.titaniumValue;
+          while (
+            currentTitaniumValue <=
+              this.$data.cost - this.player.titaniumValue &&
+            requiredTitaniumQty < this.player.titanium
+          ) {
             requiredTitaniumQty++;
-            currentTitaniumValue = requiredTitaniumQty * this.player.titaniumValue;
+            currentTitaniumValue =
+              requiredTitaniumQty * this.player.titaniumValue;
           }
 
           this.$data.titanium = requiredTitaniumQty;
         }
 
-        const discountedCost = this.$data.cost - (this.$data.steel * this.player.steelValue) - (this.$data.titanium * this.player.titaniumValue);
+        const discountedCost =
+          this.$data.cost -
+          this.$data.steel * this.player.steelValue -
+          this.$data.titanium * this.player.titaniumValue;
         this.$data.megaCredits = Math.max(discountedCost, 0);
       } else {
         this.$data.titanium = 0;
       }
     },
-    setDefaultHeatValue: function() {
+    setDefaultHeatValue: function () {
       // automatically use available heat for Helion if not enough MC
       if (!this.canAffordWithMcOnly() && this.canUseHeat()) {
-        this.$data.heat = Math.max(this.$data.cost - this.player.megaCredits - (this.$data.steel * this.player.steelValue) - (this.$data.titanium * this.player.titaniumValue), 0);
+        this.$data.heat = Math.max(
+          this.$data.cost -
+            this.player.megaCredits -
+            this.$data.steel * this.player.steelValue -
+            this.$data.titanium * this.player.titaniumValue,
+          0
+        );
       } else {
         this.$data.heat = 0;
       }
-      const discountedCost = this.$data.cost - (this.$data.steel * this.player.steelValue) - (this.$data.titanium * this.player.titaniumValue) - this.$data.heat;
+      const discountedCost =
+        this.$data.cost -
+        this.$data.steel * this.player.steelValue -
+        this.$data.titanium * this.player.titaniumValue -
+        this.$data.heat;
       this.$data.megaCredits = Math.max(discountedCost, 0);
     },
-    canAffordWithMcOnly: function() {
+    canAffordWithMcOnly: function () {
       return this.player.megaCredits >= this.$data.cost;
     },
-    canUseHeat: function() {
+    canUseHeat: function () {
       return this.playerinput.canUseHeat && this.player.heat > 0;
     },
-    canUseSteel: function() {
+    canUseSteel: function () {
       return this.playerinput.canUseSteel && this.player.steel > 0;
     },
-    canUseTitanium: function() {
+    canUseTitanium: function () {
       return this.playerinput.canUseTitanium && this.player.titanium > 0;
     },
-    saveData: function() {
+    saveData: function () {
       const htp: HowToPay = {
         heat: this.$data.heat,
         megaCredits: this.$data.megaCredits,
@@ -152,27 +184,33 @@ export const SelectHowToPay = Vue.component('select-how-to-pay', {
       };
 
       if (htp.megaCredits > this.player.megaCredits) {
-        this.$data.warning = 'You don\'t have that many M€';
+        this.$data.warning = "You don't have that many M€";
         return;
       }
       if (htp.heat > this.player.heat) {
-        this.$data.warning = 'You don\'t have enough heat';
+        this.$data.warning = "You don't have enough heat";
         return;
       }
       if (htp.titanium > this.player.titanium) {
-        this.$data.warning = 'You don\'t have enough titanium';
+        this.$data.warning = "You don't have enough titanium";
         return;
       }
       if (htp.steel > this.player.steel) {
-        this.$data.warning = 'You don\'t have enough steel';
+        this.$data.warning = "You don't have enough steel";
         return;
       }
 
       const requiredAmt = this.playerinput.amount || 0;
-      const totalSpentAmt = htp.heat + htp.megaCredits + (htp.steel * this.player.steelValue) + (htp.titanium * this.player.titaniumValue) + (htp.microbes * 2) + (htp.floaters * 3);
+      const totalSpentAmt =
+        htp.heat +
+        htp.megaCredits +
+        htp.steel * this.player.steelValue +
+        htp.titanium * this.player.titaniumValue +
+        htp.microbes * 2 +
+        htp.floaters * 3;
 
       if (requiredAmt > 0 && totalSpentAmt < requiredAmt) {
-        this.$data.warning = 'Haven\'t spent enough';
+        this.$data.warning = "Haven't spent enough";
         return;
       }
 
@@ -264,4 +302,3 @@ export const SelectHowToPay = Vue.component('select-how-to-pay', {
   </section>
 </div>`,
 });
-

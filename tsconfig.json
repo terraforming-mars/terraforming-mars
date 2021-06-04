@@ -1,32 +1,30 @@
 // A base configuration for src and tests, and also the config
 // Visual Studio Code reads
 {
-    // Compiler options are mostly for the sub-configurations
-    "compilerOptions": {
-        "declaration": true,
-        "declarationMap": true,
-        "lib": ["dom"],
-        "incremental": true,
+  // Compiler options are mostly for the sub-configurations
+  "compilerOptions": {
+    "declaration": true,
+    "declarationMap": true,
+    "lib": ["dom"],
+    "incremental": true,
 
-        "module": "commonjs",
+    "module": "commonjs",
 
-        "strict": true,
-        "noImplicitAny": true,
-        "noImplicitReturns": true,
-        "noUnusedLocals": true,
-        "noUnusedParameters": true,
-        "removeComments": true,
-        "preserveConstEnums": true,
-        "skipLibCheck": true,
-        "sourceMap": true,
-        "target": "es5",
-        "types": ["node"],
-        "moduleResolution": "node",
-        "resolveJsonModule": true,
-        "allowUnreachableCode": false,
-    },
-    // This gives the VS Code IDE its magic.
-    "include": [
-        "**/*.ts",
-    ]
+    "strict": true,
+    "noImplicitAny": true,
+    "noImplicitReturns": true,
+    "noUnusedLocals": true,
+    "noUnusedParameters": true,
+    "removeComments": true,
+    "preserveConstEnums": true,
+    "skipLibCheck": true,
+    "sourceMap": true,
+    "target": "es5",
+    "types": ["node"],
+    "moduleResolution": "node",
+    "resolveJsonModule": true,
+    "allowUnreachableCode": false
+  },
+  // This gives the VS Code IDE its magic.
+  "include": ["**/*.ts"]
 }

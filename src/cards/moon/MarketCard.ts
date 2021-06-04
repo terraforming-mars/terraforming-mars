@@ -8,9 +8,9 @@ import {Card, StaticCardProperties} from '../Card';
 import {IActionCard} from '../ICard';
 
 export interface Terms {
-  from: number,
-  to: number,
-  limit: number
+  from: number;
+  to: number;
+  limit: number;
 }
 
 // An abstract base class for SteelMarketMonopolists and TitaniumMarketMonopolists
@@ -19,7 +19,8 @@ export abstract class MarketCard extends Card implements IActionCard {
     public readonly tradeResource: Resources,
     public readonly buyingTerms: Terms,
     public readonly sellingTerms: Terms,
-    properties: StaticCardProperties) {
+    properties: StaticCardProperties
+  ) {
     super(properties);
   }
 
@@ -28,7 +29,9 @@ export abstract class MarketCard extends Card implements IActionCard {
   }
 
   private canBuy(player: Player) {
-    const availableMC = (player.canUseHeatAsMegaCredits) ? player.megaCredits + player.heat : player.megaCredits;
+    const availableMC = player.canUseHeatAsMegaCredits
+      ? player.megaCredits + player.heat
+      : player.megaCredits;
     return availableMC >= this.buyingTerms.from;
   }
 
@@ -45,8 +48,12 @@ export abstract class MarketCard extends Card implements IActionCard {
     const offerSell = this.canSell(player);
     if (offerBuy && offerSell) {
       return new OrOptions(
-        new SelectOption(`Buy ${this.tradeResource}`, 'Buy', () => this.getBuyingOption(player)),
-        new SelectOption(`Sell ${this.tradeResource}`, 'Sell', () => this.getSellingOption(player)),
+        new SelectOption(`Buy ${this.tradeResource}`, 'Buy', () =>
+          this.getBuyingOption(player)
+        ),
+        new SelectOption(`Sell ${this.tradeResource}`, 'Sell', () =>
+          this.getSellingOption(player)
+        )
       );
     } else if (offerBuy) {
       return this.getBuyingOption(player);
@@ -57,7 +64,9 @@ export abstract class MarketCard extends Card implements IActionCard {
   }
 
   private getBuyingOption(player: Player): SelectAmount {
-    const availableMC = (player.canUseHeatAsMegaCredits) ? player.megaCredits + player.heat : player.megaCredits;
+    const availableMC = player.canUseHeatAsMegaCredits
+      ? player.megaCredits + player.heat
+      : player.megaCredits;
     const terms = this.buyingTerms;
     let limit = Math.floor(availableMC / terms.from);
     limit = Math.min(limit, terms.limit);
@@ -69,20 +78,24 @@ export abstract class MarketCard extends Card implements IActionCard {
         const cashDue = tradesRequested * terms.from;
         const unitsEarned = tradesRequested * terms.to;
         if (player.canUseHeatAsMegaCredits) {
-          const howToPay = new SelectHowToPayDeferred(player, cashDue, {afterPay: () => {
-            player.addResource(this.tradeResource, unitsEarned);
-          }});
+          const howToPay = new SelectHowToPayDeferred(player, cashDue, {
+            afterPay: () => {
+              player.addResource(this.tradeResource, unitsEarned);
+            },
+          });
           player.game.defer(howToPay);
         } else {
           player.deductResource(Resources.MEGACREDITS, cashDue);
           player.addResource(this.tradeResource, unitsEarned);
         }
 
-        player.game.log('${0} gained ${1} ${2}', (b) => b.player(player).number(tradesRequested).string(this.tradeResource));
+        player.game.log('${0} gained ${1} ${2}', (b) =>
+          b.player(player).number(tradesRequested).string(this.tradeResource)
+        );
         return undefined;
       },
       1,
-      limit,
+      limit
     );
   }
 
@@ -102,11 +115,13 @@ export abstract class MarketCard extends Card implements IActionCard {
         player.addResource(Resources.MEGACREDITS, cashEarned);
         player.deductResource(this.tradeResource, unitsSold);
 
-        player.game.log('${0} sold ${1} ${2}', (b) => b.player(player).number(unitsSold).string(this.tradeResource));
+        player.game.log('${0} sold ${1} ${2}', (b) =>
+          b.player(player).number(unitsSold).string(this.tradeResource)
+        );
         return undefined;
       },
       1,
-      limit,
+      limit
     );
   }
 }

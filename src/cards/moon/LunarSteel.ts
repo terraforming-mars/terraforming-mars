@@ -24,7 +24,7 @@ export class LunarSteel extends Card implements IProjectCard {
         }),
       },
     });
-  };
+  }
 
   public play(player: Player) {
     player.increaseSteelValue();

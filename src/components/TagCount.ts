@@ -6,7 +6,7 @@ import {SpecialTags} from '../cards/SpecialTags';
 export const TagCount = Vue.component('tag-count', {
   props: {
     tag: {
-      type: String as () => Tags|SpecialTags,
+      type: String as () => Tags | SpecialTags,
     },
     count: {
       type: Number,
@@ -26,14 +26,14 @@ export const TagCount = Vue.component('tag-count', {
     'tag': Tag,
   },
   methods: {
-    getClasses: function(): string {
+    getClasses: function (): string {
       const classes = ['tag-display'];
       if (this.count === 0) {
         classes.push('tag-no-show');
       }
       return classes.join(' ');
     },
-    getCountClasses: function(): string {
+    getCountClasses: function (): string {
       const classes = ['tag-count-display'];
       if (this.count === 0) {
         classes.push('tag-count-no-show');
@@ -41,7 +41,7 @@ export const TagCount = Vue.component('tag-count', {
 
       return classes.join(' ');
     },
-    getCount: function(): number | string {
+    getCount: function (): number | string {
       return this.hideCount === true ? '?' : this.count;
     },
   },

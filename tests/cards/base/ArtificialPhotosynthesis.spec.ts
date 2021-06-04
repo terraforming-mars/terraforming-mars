@@ -1,12 +1,11 @@
-
 import {expect} from 'chai';
 import {ArtificialPhotosynthesis} from '../../../src/cards/base/ArtificialPhotosynthesis';
 import {OrOptions} from '../../../src/inputs/OrOptions';
 import {Resources} from '../../../src/Resources';
 import {TestPlayers} from '../../TestPlayers';
 
-describe('ArtificialPhotosynthesis', function() {
-  it('Should play', function() {
+describe('ArtificialPhotosynthesis', function () {
+  it('Should play', function () {
     const card = new ArtificialPhotosynthesis();
     const player = TestPlayers.BLUE.newPlayer();
     const action = card.play(player);

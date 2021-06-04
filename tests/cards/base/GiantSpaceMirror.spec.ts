@@ -3,8 +3,8 @@ import {GiantSpaceMirror} from '../../../src/cards/base/GiantSpaceMirror';
 import {Resources} from '../../../src/Resources';
 import {TestPlayers} from '../../TestPlayers';
 
-describe('GiantSpaceMirror', function() {
-  it('Should play', function() {
+describe('GiantSpaceMirror', function () {
+  it('Should play', function () {
     const card = new GiantSpaceMirror();
     const player = TestPlayers.BLUE.newPlayer();
     const action = card.play(player);

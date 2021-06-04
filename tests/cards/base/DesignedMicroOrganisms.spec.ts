@@ -5,27 +5,29 @@ import {Player} from '../../../src/Player';
 import {Resources} from '../../../src/Resources';
 import {TestPlayers} from '../../TestPlayers';
 
-describe('DesignedMicroOrganisms', function() {
-  let card : DesignedMicroOrganisms; let player : Player; let game : Game;
+describe('DesignedMicroOrganisms', function () {
+  let card: DesignedMicroOrganisms;
+  let player: Player;
+  let game: Game;
 
-  beforeEach(function() {
+  beforeEach(function () {
     card = new DesignedMicroOrganisms();
     player = TestPlayers.BLUE.newPlayer();
     const redPlayer = TestPlayers.RED.newPlayer();
     game = Game.newInstance('foobar', [player, redPlayer], player);
   });
 
-  it('Cannot play', function() {
+  it('Cannot play', function () {
     (game as any).temperature = -12;
     expect(card.canPlay(player)).is.not.true;
   });
 
-  it('Can play', function() {
+  it('Can play', function () {
     (game as any).temperature = -14;
     expect(card.canPlay(player)).is.true;
   });
 
-  it('Should play', function() {
+  it('Should play', function () {
     (game as any).temperature = -14;
     expect(card.canPlay(player)).is.true;
     card.play(player);

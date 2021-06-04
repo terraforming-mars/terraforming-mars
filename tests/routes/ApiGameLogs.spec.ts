@@ -8,7 +8,7 @@ import {MockResponse} from './HttpMocks';
 import {IContext} from '../../src/routes/IHandler';
 import {FakeGameLoader} from './FakeGameLoader';
 
-describe('ApiGameLogs', function() {
+describe('ApiGameLogs', function () {
   let req: http.IncomingMessage;
   let res: MockResponse;
   let ctx: IContext;
@@ -28,7 +28,9 @@ describe('ApiGameLogs', function() {
     req.url = '/api/game/logs';
     ctx.url = new URL('http://boo.com' + req.url);
     ApiGameLogs.INSTANCE.get(req, res.hide(), ctx);
-    expect(res.content).eq('Bad request: must provide player id as the id parameter');
+    expect(res.content).eq(
+      'Bad request: must provide player id as the id parameter'
+    );
   });
 
   it('fails when game not found', () => {
@@ -90,7 +92,11 @@ describe('ApiGameLogs', function() {
     expect(messages.length).eq(0);
   });
 
-  [{idx: 0, color: 'Yellow'}, {idx: 1, color: 'Orange'}, {idx: 2, color: 'Blue'}].forEach((entry) => {
+  [
+    {idx: 0, color: 'Yellow'},
+    {idx: 1, color: 'Orange'},
+    {idx: 2, color: 'Blue'},
+  ].forEach((entry) => {
     it('omits private logs for other players: ' + entry.color, () => {
       const yellowPlayer = TestPlayers.YELLOW.newPlayer();
       const orangePlayer = TestPlayers.ORANGE.newPlayer();
@@ -105,8 +111,12 @@ describe('ApiGameLogs', function() {
       // Remove logs to-date to simplify the test
       game.gameLog.length = 0;
       game.log('All players see this.');
-      game.log('Yellow player sees this.', (_b) => {}, {reservedFor: yellowPlayer});
-      game.log('Orange player sees this.', (_b) => {}, {reservedFor: orangePlayer});
+      game.log('Yellow player sees this.', (_b) => {}, {
+        reservedFor: yellowPlayer,
+      });
+      game.log('Orange player sees this.', (_b) => {}, {
+        reservedFor: orangePlayer,
+      });
       game.log('Blue player sees this.', (_b) => {}, {reservedFor: bluePlayer});
 
       req.url = '/api/game/logs?id=' + playerUnderTest.id;

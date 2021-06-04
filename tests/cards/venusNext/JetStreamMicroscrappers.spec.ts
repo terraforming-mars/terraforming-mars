@@ -5,22 +5,24 @@ import {OrOptions} from '../../../src/inputs/OrOptions';
 import {Player} from '../../../src/Player';
 import {TestPlayers} from '../../TestPlayers';
 
-describe('JetStreamMicroscrappers', function() {
-  let card : JetStreamMicroscrappers; let player : Player; let game : Game;
+describe('JetStreamMicroscrappers', function () {
+  let card: JetStreamMicroscrappers;
+  let player: Player;
+  let game: Game;
 
-  beforeEach(function() {
+  beforeEach(function () {
     card = new JetStreamMicroscrappers();
     player = TestPlayers.BLUE.newPlayer();
     const redPlayer = TestPlayers.RED.newPlayer();
     game = Game.newInstance('foobar', [player, redPlayer], player);
   });
 
-  it('Should play', function() {
+  it('Should play', function () {
     const action = card.play();
     expect(action).is.undefined;
   });
 
-  it('Should act', function() {
+  it('Should act', function () {
     player.playedCards.push(card);
     player.titanium = 2;
 

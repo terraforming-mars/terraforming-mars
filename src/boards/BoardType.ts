@@ -1,4 +1,4 @@
 export enum BoardType {
   MARS = 'mars',
-  MOON = 'moon'
+  MOON = 'moon',
 }

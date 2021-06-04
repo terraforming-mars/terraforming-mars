@@ -30,9 +30,12 @@ export class NitrogenFromTitan extends Card implements IProjectCard {
     });
   }
 
-  public canPlay(player: Player) : boolean {
+  public canPlay(player: Player): boolean {
     if (PartyHooks.shouldApplyPolicy(player.game, PartyName.REDS)) {
-      return player.canAfford(player.getCardCost(this) + REDS_RULING_POLICY_COST * 2, {titanium: true});
+      return player.canAfford(
+        player.getCardCost(this) + REDS_RULING_POLICY_COST * 2,
+        {titanium: true}
+      );
     }
 
     return true;
@@ -40,11 +43,15 @@ export class NitrogenFromTitan extends Card implements IProjectCard {
 
   public play(player: Player) {
     player.increaseTerraformRatingSteps(2);
-    player.game.defer(new AddResourcesToCard(player, ResourceType.FLOATER, {count: 2, restrictedTag: Tags.JOVIAN}));
+    player.game.defer(
+      new AddResourcesToCard(player, ResourceType.FLOATER, {
+        count: 2,
+        restrictedTag: Tags.JOVIAN,
+      })
+    );
     return undefined;
   }
   public getVictoryPoints() {
     return 1;
   }
 }
-

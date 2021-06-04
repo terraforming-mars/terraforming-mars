@@ -6,13 +6,13 @@ export const isTagsViewConcise = (root: any): boolean => {
 
 export const OverviewSettings = Vue.component('overview-settings', {
   methods: {
-    toggleTagsView: function() {
+    toggleTagsView: function () {
       (this.$root as any).setVisibilityState(
         'tags_concise',
-        !(this.$root as any).getVisibilityState('tags_concise'),
+        !(this.$root as any).getVisibilityState('tags_concise')
       );
     },
-    getTagToggleLabel: function(): string {
+    getTagToggleLabel: function (): string {
       return isTagsViewConcise(this.$root) ? 'full' : 'concise';
     },
   },

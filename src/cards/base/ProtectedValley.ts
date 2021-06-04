@@ -29,7 +29,8 @@ export class ProtectedValley extends Card implements IProjectCard {
           b.production((pb) => pb.megacredits(2)).nbsp;
           b.greenery().asterix();
         }),
-        description: 'Increase your M€ production 2 steps. Place on a greenery tile ON AN AREA RESERVED FOR OCEAN, disregarding normal placement restrictions, and increase oxygen 1 step.',
+        description:
+          'Increase your M€ production 2 steps. Place on a greenery tile ON AN AREA RESERVED FOR OCEAN, disregarding normal placement restrictions, and increase oxygen 1 step.',
       },
     });
   }
@@ -37,8 +38,14 @@ export class ProtectedValley extends Card implements IProjectCard {
   public canPlay(player: Player): boolean {
     const oxygenMaxed = player.game.getOxygenLevel() === MAX_OXYGEN_LEVEL;
 
-    if (PartyHooks.shouldApplyPolicy(player.game, PartyName.REDS) && !oxygenMaxed) {
-      return player.canAfford(player.getCardCost(this) + REDS_RULING_POLICY_COST, {steel: true, microbes: true});
+    if (
+      PartyHooks.shouldApplyPolicy(player.game, PartyName.REDS) &&
+      !oxygenMaxed
+    ) {
+      return player.canAfford(
+        player.getCardCost(this) + REDS_RULING_POLICY_COST,
+        {steel: true, microbes: true}
+      );
     }
 
     return true;
@@ -51,7 +58,7 @@ export class ProtectedValley extends Card implements IProjectCard {
       (space: ISpace) => {
         player.addProduction(Resources.MEGACREDITS, 2);
         return player.game.addGreenery(player, space.id, SpaceType.OCEAN);
-      },
+      }
     );
   }
 }

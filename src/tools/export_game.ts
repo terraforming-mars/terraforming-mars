@@ -8,7 +8,9 @@ if (gameId === undefined) {
   throw new Error('missing game id');
 }
 if (process.env.LOCAL_FS_DB !== undefined) {
-  throw new Error('Do not run exportGame on local filesystem. Just access the files themselves');
+  throw new Error(
+    'Do not run exportGame on local filesystem. Just access the files themselves'
+  );
 }
 
 const db = Database.getInstance();
@@ -33,4 +35,3 @@ db.getGame(gameId, (err: Error | undefined, game?: SerializedGame) => {
     });
   }
 });
-

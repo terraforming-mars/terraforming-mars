@@ -9,7 +9,11 @@ import {ResourceType} from '../../ResourceType';
 import {SelectCard} from '../../inputs/SelectCard';
 import {PartyHooks} from '../../turmoil/parties/PartyHooks';
 import {PartyName} from '../../turmoil/parties/PartyName';
-import {REDS_RULING_POLICY_COST, MAX_TEMPERATURE, MAX_OCEAN_TILES} from '../../constants';
+import {
+  REDS_RULING_POLICY_COST,
+  MAX_TEMPERATURE,
+  MAX_OCEAN_TILES,
+} from '../../constants';
 import {PlaceOceanTile} from '../../deferredActions/PlaceOceanTile';
 import {CardRenderer} from '../render/CardRenderer';
 
@@ -30,18 +34,23 @@ export class MoholeLake extends Card implements IActionCard, IProjectCard {
           }).br;
           b.plants(3).temperature(1).oceans(1);
         }),
-        description: 'Gain 3 plants. Raise temperature 1 step, and place 1 ocean tile.',
+        description:
+          'Gain 3 plants. Raise temperature 1 step, and place 1 ocean tile.',
       },
     });
   }
 
   public canPlay(player: Player): boolean {
-    const temperatureStep = player.game.getTemperature() < MAX_TEMPERATURE ? 1 : 0;
-    const oceanStep = player.game.board.getOceansOnBoard() < MAX_OCEAN_TILES ? 1 : 0;
+    const temperatureStep =
+      player.game.getTemperature() < MAX_TEMPERATURE ? 1 : 0;
+    const oceanStep =
+      player.game.board.getOceansOnBoard() < MAX_OCEAN_TILES ? 1 : 0;
     const totalSteps = temperatureStep + oceanStep;
 
     if (PartyHooks.shouldApplyPolicy(player.game, PartyName.REDS)) {
-      return player.canAfford(REDS_RULING_POLICY_COST * totalSteps, {steel: true});
+      return player.canAfford(REDS_RULING_POLICY_COST * totalSteps, {
+        steel: true,
+      });
     }
 
     return true;
@@ -59,7 +68,9 @@ export class MoholeLake extends Card implements IActionCard, IProjectCard {
   }
 
   public action(player: Player) {
-    const availableCards = player.getResourceCards(ResourceType.MICROBE).concat(player.getResourceCards(ResourceType.ANIMAL));
+    const availableCards = player
+      .getResourceCards(ResourceType.MICROBE)
+      .concat(player.getResourceCards(ResourceType.ANIMAL));
 
     if (availableCards.length === 0) {
       return undefined;
@@ -70,9 +81,14 @@ export class MoholeLake extends Card implements IActionCard, IProjectCard {
       return undefined;
     }
 
-    return new SelectCard('Select card to add microbe or animal', 'Add resource', availableCards, (foundCards: Array<ICard>) => {
-      player.addResourceTo(foundCards[0], {log: true});
-      return undefined;
-    });
+    return new SelectCard(
+      'Select card to add microbe or animal',
+      'Add resource',
+      availableCards,
+      (foundCards: Array<ICard>) => {
+        player.addResourceTo(foundCards[0], {log: true});
+        return undefined;
+      }
+    );
   }
 }

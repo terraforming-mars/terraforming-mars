@@ -6,22 +6,26 @@ import {Player} from '../../../src/Player';
 import {Resources} from '../../../src/Resources';
 import {TestPlayers} from '../../TestPlayers';
 
-describe('SmallAsteroid', function() {
-  let card : SmallAsteroid; let player : Player; let player2 : Player;
+describe('SmallAsteroid', function () {
+  let card: SmallAsteroid;
+  let player: Player;
+  let player2: Player;
 
-  beforeEach(function() {
+  beforeEach(function () {
     card = new SmallAsteroid();
     player = TestPlayers.BLUE.newPlayer();
     player2 = TestPlayers.RED.newPlayer();
     Game.newInstance('foobar', [player, player2], player);
   });
 
-  it('Should play', function() {
+  it('Should play', function () {
     player2.addResource(Resources.PLANTS, 3);
     card.play(player);
     expect(player.game.deferredActions).has.lengthOf(1);
 
-    const orOptions = player.game.deferredActions.peek()!.execute() as OrOptions;
+    const orOptions = player.game.deferredActions
+      .peek()!
+      .execute() as OrOptions;
     orOptions.options[1].cb(); // do nothing
     expect(player2.plants).to.eq(3);
 
@@ -30,14 +34,14 @@ describe('SmallAsteroid', function() {
     expect(player.game.getTemperature()).to.eq(-28);
   });
 
-  it('Doesn\'t remove plants in solo mode', function() {
+  it("Doesn't remove plants in solo mode", function () {
     player.addResource(Resources.PLANTS, 3);
     Game.newInstance('solo', [player], player);
     card.play(player);
     expect(player.getResource(Resources.PLANTS)).to.eq(3);
   });
 
-  it('Works correctly with multiple targets', function() {
+  it('Works correctly with multiple targets', function () {
     const player3 = TestPlayers.YELLOW.newPlayer();
     Game.newInstance('foobar', [player, player2, player3], player);
     player2.addResource(Resources.PLANTS, 3);
@@ -46,7 +50,9 @@ describe('SmallAsteroid', function() {
     card.play(player);
     expect(player.game.deferredActions).has.lengthOf(1);
 
-    const orOptions = player.game.deferredActions.peek()!.execute() as OrOptions;
+    const orOptions = player.game.deferredActions
+      .peek()!
+      .execute() as OrOptions;
     expect(orOptions.options).has.lengthOf(3);
 
     orOptions.options[2].cb(); // do nothing

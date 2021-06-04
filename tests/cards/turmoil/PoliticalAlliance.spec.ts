@@ -7,10 +7,13 @@ import {Turmoil} from '../../../src/turmoil/Turmoil';
 import {TestingUtils} from '../../TestingUtils';
 import {TestPlayers} from '../../TestPlayers';
 
-describe('PoliticalAlliance', function() {
-  let card : PoliticalAlliance; let player : Player; let game : Game; let turmoil: Turmoil;
+describe('PoliticalAlliance', function () {
+  let card: PoliticalAlliance;
+  let player: Player;
+  let game: Game;
+  let turmoil: Turmoil;
 
-  beforeEach(function() {
+  beforeEach(function () {
     card = new PoliticalAlliance();
     player = TestPlayers.BLUE.newPlayer();
     const redPlayer = TestPlayers.RED.newPlayer();
@@ -19,13 +22,13 @@ describe('PoliticalAlliance', function() {
     turmoil = game.turmoil!;
   });
 
-  it('Can\'t play', function() {
+  it("Can't play", function () {
     const greens = turmoil.getPartyByName(PartyName.GREENS)!;
     greens.partyLeader = player.id;
     expect(card.canPlay(player)).is.not.true;
   });
 
-  it('Should play', function() {
+  it('Should play', function () {
     const greens = turmoil.getPartyByName(PartyName.GREENS)!;
     const reds = turmoil.getPartyByName(PartyName.REDS)!;
     greens.partyLeader = player.id;

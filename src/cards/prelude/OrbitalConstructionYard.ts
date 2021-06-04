@@ -6,7 +6,10 @@ import {Resources} from '../../Resources';
 import {CardName} from '../../CardName';
 import {CardRenderer} from '../render/CardRenderer';
 
-export class OrbitalConstructionYard extends PreludeCard implements IProjectCard {
+export class OrbitalConstructionYard
+  extends PreludeCard
+  implements IProjectCard
+{
   constructor() {
     super({
       name: CardName.ORBITAL_CONSTRUCTION_YARD,
@@ -18,7 +21,8 @@ export class OrbitalConstructionYard extends PreludeCard implements IProjectCard
           b.production((pb) => pb.titanium(1)).br;
           b.titanium(4);
         }),
-        description: 'Increase your titanium production 1 step. Gain 4 titanium.',
+        description:
+          'Increase your titanium production 1 step. Gain 4 titanium.',
       },
     });
   }

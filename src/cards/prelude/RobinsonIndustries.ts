@@ -9,7 +9,10 @@ import {CardName} from '../../CardName';
 import {CardType} from '../CardType';
 import {CardRenderer} from '../render/CardRenderer';
 
-export class RobinsonIndustries extends Card implements IActionCard, CorporationCard {
+export class RobinsonIndustries
+  extends Card
+  implements IActionCard, CorporationCard
+{
   constructor() {
     super({
       cardType: CardType.CORPORATION,
@@ -23,9 +26,14 @@ export class RobinsonIndustries extends Card implements IActionCard, Corporation
           b.br.br.br;
           b.megacredits(47);
           b.corpBox('action', (ce) => {
-            ce.action('Spend 4 M€ to increase (one of) your LOWEST production 1 step.', (eb) => {
-              eb.megacredits(4).startAction.production((pb) => pb.wild(1).asterix());
-            });
+            ce.action(
+              'Spend 4 M€ to increase (one of) your LOWEST production 1 step.',
+              (eb) => {
+                eb.megacredits(4).startAction.production((pb) =>
+                  pb.wild(1).asterix()
+                );
+              }
+            );
           });
         }),
       },
@@ -43,12 +51,23 @@ export class RobinsonIndustries extends Card implements IActionCard, Corporation
     let minimum = player.getProduction(Resources.MEGACREDITS);
     let lowest: Array<SelectOption> = [];
 
-    [Resources.MEGACREDITS, Resources.STEEL, Resources.TITANIUM, Resources.PLANTS, Resources.ENERGY, Resources.HEAT].forEach((resource) => {
-      const option = new SelectOption('Increase ' + resource + ' production 1 step', 'Select', () => {
-        player.deductResource(Resources.MEGACREDITS, 4);
-        player.addProduction(resource, 1, {log: true});
-        return undefined;
-      });
+    [
+      Resources.MEGACREDITS,
+      Resources.STEEL,
+      Resources.TITANIUM,
+      Resources.PLANTS,
+      Resources.ENERGY,
+      Resources.HEAT,
+    ].forEach((resource) => {
+      const option = new SelectOption(
+        'Increase ' + resource + ' production 1 step',
+        'Select',
+        () => {
+          player.deductResource(Resources.MEGACREDITS, 4);
+          player.addProduction(resource, 1, {log: true});
+          return undefined;
+        }
+      );
 
       if (player.getProduction(resource) < minimum) {
         lowest = [];

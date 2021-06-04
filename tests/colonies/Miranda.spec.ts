@@ -7,10 +7,14 @@ import {Game} from '../../src/Game';
 import {Player} from '../../src/Player';
 import {TestPlayers} from '../TestPlayers';
 
-describe('Miranda', function() {
-  let miranda: Miranda; let pets: Pets; let player: Player; let player2: Player; let game: Game;
+describe('Miranda', function () {
+  let miranda: Miranda;
+  let pets: Pets;
+  let player: Player;
+  let player2: Player;
+  let game: Game;
 
-  beforeEach(function() {
+  beforeEach(function () {
     miranda = new Miranda();
     pets = new Pets();
     player = TestPlayers.BLUE.newPlayer();
@@ -20,13 +24,13 @@ describe('Miranda', function() {
     game.colonies.push(miranda);
   });
 
-  it('Should activate', function() {
+  it('Should activate', function () {
     expect(miranda.isActive).is.false;
     player.playCard(pets);
     expect(miranda.isActive).is.true;
   });
 
-  it('Should build', function() {
+  it('Should build', function () {
     player.playCard(pets);
     miranda.addColony(player);
 
@@ -40,7 +44,7 @@ describe('Miranda', function() {
     expect(pets.resourceCount).to.eq(2); // Pets starts with 1 resource
   });
 
-  it('Should trade', function() {
+  it('Should trade', function () {
     player.playCard(pets);
     miranda.trade(player);
 
@@ -57,7 +61,7 @@ describe('Miranda', function() {
     expect(pets.resourceCount).to.eq(2);
   });
 
-  it('Should give trade bonus', function() {
+  it('Should give trade bonus', function () {
     const predators = new Predators();
     player.playCard(pets);
     player2.playCard(predators);

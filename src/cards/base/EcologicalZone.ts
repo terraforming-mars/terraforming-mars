@@ -15,7 +15,10 @@ import {CardRequirements} from '../CardRequirements';
 import {CardRenderer} from '../render/CardRenderer';
 import {CardRenderDynamicVictoryPoints} from '../render/CardRenderDynamicVictoryPoints';
 
-export class EcologicalZone extends Card implements IProjectCard, IResourceCard {
+export class EcologicalZone
+  extends Card
+  implements IProjectCard, IResourceCard
+{
   constructor(
     name: CardName = CardName.ECOLOGICAL_ZONE,
     cost: number = 12,
@@ -27,13 +30,21 @@ export class EcologicalZone extends Card implements IProjectCard, IResourceCard 
       },
       cardNumber: '128',
       renderData: CardRenderer.builder((b) => {
-        b.effect('When you play an animal or plant tag /including these/, add an animal to this card.', (eb) => {
-          eb.animals(1).played.slash().plants(1).played.startEffect.animals(1);
-        }).br;
-        b.vpText('1 VP per 2 Animals on this card.').tile(TileType.ECOLOGICAL_ZONE, true).asterix();
+        b.effect(
+          'When you play an animal or plant tag /including these/, add an animal to this card.',
+          (eb) => {
+            eb.animals(1)
+              .played.slash()
+              .plants(1)
+              .played.startEffect.animals(1);
+          }
+        ).br;
+        b.vpText('1 VP per 2 Animals on this card.')
+          .tile(TileType.ECOLOGICAL_ZONE, true)
+          .asterix();
       }),
       victoryPoints: CardRenderDynamicVictoryPoints.animals(1, 2),
-    },
+    }
   ) {
     super({
       cardType: CardType.ACTIVE,
@@ -51,19 +62,28 @@ export class EcologicalZone extends Card implements IProjectCard, IResourceCard 
   public resourceCount: number = 0;
 
   private getAvailableSpaces(player: Player): Array<ISpace> {
-    return player.game.board.getAvailableSpacesOnLand(player)
+    return player.game.board
+      .getAvailableSpacesOnLand(player)
       .filter(
-        (space) => player.game.board.getAdjacentSpaces(space).filter(
-          (adjacentSpace) => adjacentSpace.tile !== undefined &&
-              adjacentSpace.tile.tileType === TileType.GREENERY,
-        ).length > 0,
+        (space) =>
+          player.game.board
+            .getAdjacentSpaces(space)
+            .filter(
+              (adjacentSpace) =>
+                adjacentSpace.tile !== undefined &&
+                adjacentSpace.tile.tileType === TileType.GREENERY
+            ).length > 0
       );
   }
   public canPlay(player: Player): boolean {
     return super.canPlay(player) && this.getAvailableSpaces(player).length > 0;
   }
   public onCardPlayed(player: Player, card: IProjectCard): void {
-    player.addResourceTo(this, card.tags.filter((tag) => tag === Tags.ANIMAL || tag === Tags.PLANT).length);
+    player.addResourceTo(
+      this,
+      card.tags.filter((tag) => tag === Tags.ANIMAL || tag === Tags.PLANT)
+        .length
+    );
   }
   public getVictoryPoints(): number {
     return Math.floor(this.resourceCount / 2);
@@ -78,7 +98,7 @@ export class EcologicalZone extends Card implements IProjectCard, IResourceCard 
         });
         requestedSpace.adjacency = this.adjacencyBonus;
         return undefined;
-      },
+      }
     );
   }
 }

@@ -4,11 +4,11 @@ import {SisterPlanetSupport} from '../../../src/cards/venusNext/SisterPlanetSupp
 import {Resources} from '../../../src/Resources';
 import {TestPlayers} from '../../TestPlayers';
 
-describe('MiningQuota', function() {
-  it('Should play', function() {
+describe('MiningQuota', function () {
+  it('Should play', function () {
     const card = new MiningQuota();
     const player = TestPlayers.BLUE.newPlayer();
-    player.playedCards.push(new SisterPlanetSupport);
+    player.playedCards.push(new SisterPlanetSupport());
     expect(card.canPlay(player)).is.not.true;
 
     player.tagsForTest = {venus: 1};

@@ -5,8 +5,8 @@ import {Riots} from '../../src/turmoil/globalEvents/Riots';
 import {Turmoil} from '../../src/turmoil/Turmoil';
 import {TestPlayers} from '../TestPlayers';
 
-describe('Riots', function() {
-  it('resolve play', function() {
+describe('Riots', function () {
+  it('resolve play', function () {
     const card = new Riots();
     const player = TestPlayers.BLUE.newPlayer();
     const game = Game.newInstance('foobar', [player], player);

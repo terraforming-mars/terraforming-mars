@@ -6,8 +6,8 @@ import {Resources} from '../../../src/Resources';
 import {TileType} from '../../../src/TileType';
 import {TestPlayers} from '../../TestPlayers';
 
-describe('MoholeArea', function() {
-  it('Should play', function() {
+describe('MoholeArea', function () {
+  it('Should play', function () {
     const card = new MoholeArea();
     const player = TestPlayers.BLUE.newPlayer();
     const redPlayer = TestPlayers.RED.newPlayer();

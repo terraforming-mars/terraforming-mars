@@ -7,11 +7,14 @@ import {IActionCard, ICard} from './ICard';
 import {PlayerInput} from '../PlayerInput';
 
 interface StaticStandardActionCardProperties {
-  name: CardName,
-  metadata: CardMetadata,
+  name: CardName;
+  metadata: CardMetadata;
 }
 
-export abstract class StandardActionCard extends Card implements IActionCard, ICard {
+export abstract class StandardActionCard
+  extends Card
+  implements IActionCard, ICard
+{
   constructor(properties: StaticStandardActionCardProperties) {
     super({
       cardType: CardType.STANDARD_ACTION,
@@ -19,12 +22,14 @@ export abstract class StandardActionCard extends Card implements IActionCard, IC
     });
   }
 
-  public abstract canAct(player: Player): boolean
+  public abstract canAct(player: Player): boolean;
 
-  public abstract action(player: Player): PlayerInput | undefined
+  public abstract action(player: Player): PlayerInput | undefined;
 
   protected actionUsed(player: Player) {
-    player.game.log('${0} used ${1} standard action', (b) => b.player(player).card(this));
+    player.game.log('${0} used ${1} standard action', (b) =>
+      b.player(player).card(this)
+    );
   }
 
   public play() {

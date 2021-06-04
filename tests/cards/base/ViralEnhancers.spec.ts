@@ -9,17 +9,19 @@ import {OrOptions} from '../../../src/inputs/OrOptions';
 import {Player} from '../../../src/Player';
 import {TestPlayers} from '../../TestPlayers';
 
-describe('ViralEnhancers', function() {
-  let card : ViralEnhancers; let player : Player; let game : Game;
+describe('ViralEnhancers', function () {
+  let card: ViralEnhancers;
+  let player: Player;
+  let game: Game;
 
-  beforeEach(function() {
+  beforeEach(function () {
     card = new ViralEnhancers();
     player = TestPlayers.BLUE.newPlayer();
     const redPlayer = TestPlayers.RED.newPlayer();
     game = Game.newInstance('foobar', [player, redPlayer], player);
   });
 
-  it('Should play', function() {
+  it('Should play', function () {
     card.play();
 
     const ants = new Ants();
@@ -46,7 +48,7 @@ describe('ViralEnhancers', function() {
     expect(player.plants).to.eq(2);
   });
 
-  it('Should play for each tag', function() {
+  it('Should play for each tag', function () {
     card.play();
 
     const ecologicalZone = new EcologicalZone();

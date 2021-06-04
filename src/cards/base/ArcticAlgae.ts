@@ -25,7 +25,9 @@ export class ArcticAlgae extends Card implements IProjectCard {
         description: 'It must be -12 C or colder to play. Gain 1 plant.',
         cardNumber: '023',
         renderData: CardRenderer.builder((b) => {
-          b.effect('When anyone places an ocean tile, gain 2 plants.', (be) => be.oceans(1).any.startEffect.plants(2)).br;
+          b.effect('When anyone places an ocean tile, gain 2 plants.', (be) =>
+            be.oceans(1).any.startEffect.plants(2)
+          ).br;
           b.plants(1);
         }),
       },
@@ -37,11 +39,12 @@ export class ArcticAlgae extends Card implements IProjectCard {
       cardOwner.game.defer(
         new GainResources(cardOwner, Resources.PLANTS, {
           count: 2,
-          cb: () => activePlayer.game.log(
-            '${0} gained 2 ${1} from ${2}',
-            (b) => b.player(cardOwner).string(Resources.PLANTS).cardName(this.name)),
+          cb: () =>
+            activePlayer.game.log('${0} gained 2 ${1} from ${2}', (b) =>
+              b.player(cardOwner).string(Resources.PLANTS).cardName(this.name)
+            ),
         }),
-        cardOwner.id !== activePlayer.id ? Priority.OPPONENT_TRIGGER : undefined,
+        cardOwner.id !== activePlayer.id ? Priority.OPPONENT_TRIGGER : undefined
       );
     }
   }

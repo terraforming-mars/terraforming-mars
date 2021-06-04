@@ -24,7 +24,8 @@ export class RoboticWorkforce extends Card implements IProjectCard {
           b.text('Copy A', Size.SMALL, true).nbsp;
           b.production((pb) => pb.building().played);
         }),
-        description: 'Duplicate only the production box of one of your building cards.',
+        description:
+          'Duplicate only the production box of one of your building cards.',
       },
     });
   }
@@ -45,14 +46,20 @@ export class RoboticWorkforce extends Card implements IProjectCard {
 
     if (card.produce !== undefined) return true;
 
-    if (card.productionBox === undefined || card.productionBox === Units.EMPTY) return false;
+    if (card.productionBox === undefined || card.productionBox === Units.EMPTY)
+      return false;
 
     return player.canAdjustProduction(card.productionBox);
   }
 
   private getAvailableCards(player: Player): Array<ICard> {
-    const availableCards: Array<ICard> = player.playedCards.filter((card) => this.isCardApplicable(card, player));
-    if (player.corporationCard !== undefined && this.isCardApplicable(player.corporationCard, player)) {
+    const availableCards: Array<ICard> = player.playedCards.filter((card) =>
+      this.isCardApplicable(card, player)
+    );
+    if (
+      player.corporationCard !== undefined &&
+      this.isCardApplicable(player.corporationCard, player)
+    ) {
       availableCards.push(player.corporationCard);
     }
 
@@ -66,20 +73,28 @@ export class RoboticWorkforce extends Card implements IProjectCard {
       return undefined;
     }
 
-    return new SelectCard('Select builder card to copy', 'Copy', availableCards, (selectedCards: Array<ICard>) => {
-      const card: ICard = selectedCards[0];
+    return new SelectCard(
+      'Select builder card to copy',
+      'Copy',
+      availableCards,
+      (selectedCards: Array<ICard>) => {
+        const card: ICard = selectedCards[0];
 
-      player.game.log('${0} copied ${1} production with ${2}', (b) =>
-        b.player(player).card(card).card(this));
+        player.game.log('${0} copied ${1} production with ${2}', (b) =>
+          b.player(player).card(card).card(this)
+        );
 
-      if (card.produce) {
-        card.produce(player);
-      } else if (card.productionBox) {
-        player.adjustProduction(card.productionBox);
-      } else {
-        throw new Error(`Card ${card.name} is not a valid Robotic Workforce card.`);
+        if (card.produce) {
+          card.produce(player);
+        } else if (card.productionBox) {
+          player.adjustProduction(card.productionBox);
+        } else {
+          throw new Error(
+            `Card ${card.name} is not a valid Robotic Workforce card.`
+          );
+        }
+        return undefined;
       }
-      return undefined;
-    });
+    );
   }
 }

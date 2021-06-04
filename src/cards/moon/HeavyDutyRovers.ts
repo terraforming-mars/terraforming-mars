@@ -17,10 +17,15 @@ export class HeavyDutyRovers extends Card implements IProjectCard {
       cost: 12,
 
       metadata: {
-        description: 'Gain 4 M€ for each mining tile adjacent to a road tile. Raise the Logistic Rate 1 step.',
+        description:
+          'Gain 4 M€ for each mining tile adjacent to a road tile. Raise the Logistic Rate 1 step.',
         cardNumber: 'M39',
         renderData: CardRenderer.builder((b) => {
-          b.megacredits(4).slash().moonRoad({size: Size.SMALL}).any.moonMine({size: Size.SMALL}).any;
+          b
+            .megacredits(4)
+            .slash()
+            .moonRoad({size: Size.SMALL})
+            .any.moonMine({size: Size.SMALL}).any;
           b.br;
           b.moonLogisticsRate({size: Size.SMALL});
         }),
@@ -33,7 +38,9 @@ export class HeavyDutyRovers extends Card implements IProjectCard {
       const mines = MoonExpansion.tiles(player.game, TileType.MOON_MINE);
       const minesNextToRoads = mines.filter((mine) => {
         const spacesNextToMine = moonData.moon.getAdjacentSpaces(mine);
-        const firstRoad = spacesNextToMine.find((s) => MoonExpansion.spaceHasType(s, TileType.MOON_ROAD));
+        const firstRoad = spacesNextToMine.find((s) =>
+          MoonExpansion.spaceHasType(s, TileType.MOON_ROAD)
+        );
         return firstRoad !== undefined;
       });
       const count = minesNextToRoads.length;

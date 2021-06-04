@@ -15,9 +15,12 @@ export class AsteroidStandardProject extends StandardProjectCard {
       metadata: {
         cardNumber: 'SP9',
         renderData: CardRenderer.builder((b) =>
-          b.standardProject('Spend 14 M€ to raise temperature 1 step.', (eb) => {
-            eb.megacredits(14).startAction.temperature(1);
-          }),
+          b.standardProject(
+            'Spend 14 M€ to raise temperature 1 step.',
+            (eb) => {
+              eb.megacredits(14).startAction.temperature(1);
+            }
+          )
         ),
       },
     });
@@ -25,9 +28,13 @@ export class AsteroidStandardProject extends StandardProjectCard {
 
   public canAct(player: Player): boolean {
     let asteroidCost = this.cost;
-    if (PartyHooks.shouldApplyPolicy(player.game, PartyName.REDS)) asteroidCost += REDS_RULING_POLICY_COST;
+    if (PartyHooks.shouldApplyPolicy(player.game, PartyName.REDS))
+      asteroidCost += REDS_RULING_POLICY_COST;
 
-    return player.canAfford(asteroidCost) && player.game.getTemperature() < constants.MAX_TEMPERATURE;
+    return (
+      player.canAfford(asteroidCost) &&
+      player.game.getTemperature() < constants.MAX_TEMPERATURE
+    );
   }
 
   actionEssence(player: Player): void {

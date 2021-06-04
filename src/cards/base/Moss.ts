@@ -20,9 +20,12 @@ export class Moss extends Card implements IProjectCard {
       metadata: {
         cardNumber: '122',
         renderData: CardRenderer.builder((b) => {
-          b.production((pb) => pb.plants(1)).nbsp.minus().plants(1);
+          b.production((pb) => pb.plants(1))
+            .nbsp.minus()
+            .plants(1);
         }),
-        description: 'Requires 3 ocean tiles and that you lose 1 plant. Increase your plant production 1 step.',
+        description:
+          'Requires 3 ocean tiles and that you lose 1 plant. Increase your plant production 1 step.',
       },
     });
   }
@@ -32,8 +35,13 @@ export class Moss extends Card implements IProjectCard {
       return false;
     }
 
-    const hasViralEnhancers = player.playedCards.find((card) => card.name === CardName.VIRAL_ENHANCERS);
-    const hasEnoughPlants = player.plants >= 1 || hasViralEnhancers !== undefined || player.isCorporation(CardName.MANUTECH);
+    const hasViralEnhancers = player.playedCards.find(
+      (card) => card.name === CardName.VIRAL_ENHANCERS
+    );
+    const hasEnoughPlants =
+      player.plants >= 1 ||
+      hasViralEnhancers !== undefined ||
+      player.isCorporation(CardName.MANUTECH);
 
     return hasEnoughPlants;
   }
@@ -43,4 +51,3 @@ export class Moss extends Card implements IProjectCard {
     return undefined;
   }
 }
-

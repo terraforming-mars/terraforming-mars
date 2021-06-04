@@ -1,27 +1,35 @@
 import Vue from 'vue';
 import {TranslateMixin} from './TranslateMixin';
-import {MAXIMUM_COLONY_RATE, MAXIMUM_LOGISTICS_RATE, MAXIMUM_MINING_RATE} from '../constants';
+import {
+  MAXIMUM_COLONY_RATE,
+  MAXIMUM_LOGISTICS_RATE,
+  MAXIMUM_MINING_RATE,
+} from '../constants';
 import {MoonModel} from '../models/MoonModel';
 
-export const MoonGlobalParameterValue = Vue.component('moon-global-parameter-value', {
-  props: {
-    moonData: {
-      type: Object as () => MoonModel,
+export const MoonGlobalParameterValue = Vue.component(
+  'moon-global-parameter-value',
+  {
+    props: {
+      moonData: {
+        type: Object as () => MoonModel,
+      },
     },
-  },
-  mixins: [TranslateMixin],
-  methods: {
-    // TODO(kberg): prettier description of the rates. This is minimally acceptable.
-    value: function(): string {
-      return `${this.moonData.colonyRate}/${this.moonData.miningRate}/${this.moonData.logisticsRate}`;
+    mixins: [TranslateMixin],
+    methods: {
+      // TODO(kberg): prettier description of the rates. This is minimally acceptable.
+      value: function (): string {
+        return `${this.moonData.colonyRate}/${this.moonData.miningRate}/${this.moonData.logisticsRate}`;
+      },
+      isMax: function (): boolean {
+        return (
+          this.moonData.colonyRate >= MAXIMUM_COLONY_RATE &&
+          this.moonData.miningRate >= MAXIMUM_MINING_RATE &&
+          this.moonData.logisticsRate >= MAXIMUM_LOGISTICS_RATE
+        );
+      },
     },
-    isMax: function(): boolean {
-      return this.moonData.colonyRate >= MAXIMUM_COLONY_RATE &&
-      this.moonData.miningRate >= MAXIMUM_MINING_RATE &&
-      this.moonData.logisticsRate >= MAXIMUM_LOGISTICS_RATE;
-    },
-  },
-  template: `
+    template: `
 <div>
   <div class="moon-tile"></div>
   <div>
@@ -34,4 +42,5 @@ export const MoonGlobalParameterValue = Vue.component('moon-global-parameter-val
   </div>
 </div>
   `,
-});
+  }
+);

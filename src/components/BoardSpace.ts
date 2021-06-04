@@ -64,14 +64,14 @@ export const BoardSpace = Vue.component('board-space', {
       type: Boolean,
     },
   },
-  data: function() {
+  data: function () {
     return {};
   },
   components: {
     'bonus': Bonus,
   },
   methods: {
-    getVerboseTitle: function(tileType: TileType | undefined): string {
+    getVerboseTitle: function (tileType: TileType | undefined): string {
       let ret: string = '';
       if (tileType === TileType.MOHOLE_AREA) {
         ret = 'Mohole Area';
@@ -132,33 +132,36 @@ export const BoardSpace = Vue.component('board-space', {
       }
       return $t(ret);
     },
-    getMainClass: function(): string {
+    getMainClass: function (): string {
       let css = 'board-space board-space-' + this.space.id.toString();
       if (this.is_selectable) {
         css += ' board-space-selectable';
       }
       return css;
     },
-    getTileClass: function(): string {
+    getTileClass: function (): string {
       let css = 'board-space';
       const tileType = this.space.tileType;
       if (tileType !== undefined) {
         switch (this.space.tileType) {
-        case TileType.OCEAN:
-          css += ' board-space-tile--ocean';
-          break;
-        case TileType.CITY:
-          css += ' board-space-tile--city';
-          break;
-        case TileType.GREENERY:
-          css += ' board-space-tile--greenery';
-          break;
-        default:
-          let cssClass = tileTypeToCssClass.get(tileType);
-          if (this.aresExtension && tileTypeToCssClassAresOverride.has(tileType)) {
-            cssClass = tileTypeToCssClassAresOverride.get(tileType);
-          }
-          css += ' board-space-tile--' + cssClass;
+          case TileType.OCEAN:
+            css += ' board-space-tile--ocean';
+            break;
+          case TileType.CITY:
+            css += ' board-space-tile--city';
+            break;
+          case TileType.GREENERY:
+            css += ' board-space-tile--greenery';
+            break;
+          default:
+            let cssClass = tileTypeToCssClass.get(tileType);
+            if (
+              this.aresExtension &&
+              tileTypeToCssClassAresOverride.has(tileType)
+            ) {
+              cssClass = tileTypeToCssClassAresOverride.get(tileType);
+            }
+            css += ' board-space-tile--' + cssClass;
         }
       } else {
         if (this.space.spaceType === SpaceType.OCEAN) {

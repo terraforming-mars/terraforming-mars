@@ -20,7 +20,10 @@ export class DeferredActionsQueue {
     let j = -1;
     for (let i = this.queue.length - 1; i >= 0; i--) {
       const a = this.queue[i];
-      if (a.player.id === player.id && (b === undefined || this.hasHigherPriority(a, b))) {
+      if (
+        a.player.id === player.id &&
+        (b === undefined || this.hasHigherPriority(a, b))
+      ) {
         b = a;
         j = i;
       }
@@ -34,7 +37,10 @@ export class DeferredActionsQueue {
   }
 
   private hasHigherPriority(a: DeferredAction, b: DeferredAction) {
-    return a.priority < b.priority || (a.priority === b.priority && a.queueId! < b.queueId!);
+    return (
+      a.priority < b.priority ||
+      (a.priority === b.priority && a.queueId! < b.queueId!)
+    );
   }
 
   private nextItemIndex(): number {

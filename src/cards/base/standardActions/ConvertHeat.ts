@@ -4,8 +4,11 @@ import {CardRenderer} from '../../render/CardRenderer';
 import {Player} from '../../../Player';
 import {PartyHooks} from '../../../turmoil/parties/PartyHooks';
 import {PartyName} from '../../../turmoil/parties/PartyName';
-import {HEAT_FOR_TEMPERATURE, MAX_TEMPERATURE, REDS_RULING_POLICY_COST} from '../../../constants';
-
+import {
+  HEAT_FOR_TEMPERATURE,
+  MAX_TEMPERATURE,
+  REDS_RULING_POLICY_COST,
+} from '../../../constants';
 
 export class ConvertHeat extends StandardActionCard {
   constructor() {
@@ -14,9 +17,12 @@ export class ConvertHeat extends StandardActionCard {
       metadata: {
         cardNumber: 'SA2',
         renderData: CardRenderer.builder((b) =>
-          b.standardProject('Spend 8 Heat to raise temperature 1 step.', (eb) => {
-            eb.heat(8).startAction.temperature(1);
-          }),
+          b.standardProject(
+            'Spend 8 Heat to raise temperature 1 step.',
+            (eb) => {
+              eb.heat(8).startAction.temperature(1);
+            }
+          )
         ),
       },
     });
@@ -31,8 +37,11 @@ export class ConvertHeat extends StandardActionCard {
     }
 
     if (PartyHooks.shouldApplyPolicy(player.game, PartyName.REDS)) {
-      return (!player.isCorporation(CardName.HELION) && player.canAfford(REDS_RULING_POLICY_COST)) ||
-        player.canAfford(REDS_RULING_POLICY_COST + 8);
+      return (
+        (!player.isCorporation(CardName.HELION) &&
+          player.canAfford(REDS_RULING_POLICY_COST)) ||
+        player.canAfford(REDS_RULING_POLICY_COST + 8)
+      );
     }
     return true;
   }

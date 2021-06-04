@@ -3,8 +3,8 @@ import {IoSulphurResearch} from '../../../src/cards/venusNext/IoSulphurResearch'
 import {Game} from '../../../src/Game';
 import {TestPlayers} from '../../TestPlayers';
 
-describe('IoSulphurResearch', function() {
-  it('Should play', function() {
+describe('IoSulphurResearch', function () {
+  it('Should play', function () {
     const card = new IoSulphurResearch();
     const player = TestPlayers.BLUE.newPlayer();
     const redPlayer = TestPlayers.RED.newPlayer();

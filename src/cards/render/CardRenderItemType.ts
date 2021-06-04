@@ -30,7 +30,7 @@ export enum CardRenderItemType {
   PARTY_LEADERS = 'party_leaders',
   DELEGATES = 'delegates',
   INFLUENCE = 'influence',
-  NO_TAGS ='no_tags',
+  NO_TAGS = 'no_tags',
   PRESERVATION = 'preservation',
   WILD = 'wild',
   FIGHTER = 'fighter',

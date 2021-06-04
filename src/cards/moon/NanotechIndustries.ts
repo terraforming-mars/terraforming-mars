@@ -12,7 +12,10 @@ import {MoonCards} from '../../moon/MoonCards';
 import {PlayerInput} from '../../PlayerInput';
 import {Card} from '../Card';
 
-export class NanotechIndustries extends Card implements IActionCard, CorporationCard {
+export class NanotechIndustries
+  extends Card
+  implements IActionCard, CorporationCard
+{
   constructor() {
     super({
       cardType: CardType.CORPORATION,
@@ -26,11 +29,15 @@ export class NanotechIndustries extends Card implements IActionCard, Corporation
         cardNumber: 'MC1',
         renderData: CardRenderer.builder((b) => {
           b.megacredits(42).cards(3).minus().cards(1).br;
-          b.action('Add 1 science resource to ANY card [except those giving 2 or more VP per 1 science resource.]', (eb) => {
-            eb.empty().startAction.science(1).asterix();
-          });
+          b.action(
+            'Add 1 science resource to ANY card [except those giving 2 or more VP per 1 science resource.]',
+            (eb) => {
+              eb.empty().startAction.science(1).asterix();
+            }
+          );
         }),
-        description: 'You start with 42 M€. As your first action, draw 3 cards. Take 2 of them into hand, and discard the rest. ' +
+        description:
+          'You start with 42 M€. As your first action, draw 3 cards. Take 2 of them into hand, and discard the rest. ' +
           '1 VP for every 2 science resources here.',
         victoryPoints: CardRenderDynamicVictoryPoints.science(1, 2),
       },
@@ -52,11 +59,12 @@ export class NanotechIndustries extends Card implements IActionCard, Corporation
   }
 
   public action(player: Player) {
-    player.game.defer(new AddResourcesToCard(
-      player,
-      ResourceType.SCIENCE,
-      {filter: (card): boolean => MoonCards.scienceCardsWithLessThan2VP.has(card.name)},
-    ));
+    player.game.defer(
+      new AddResourcesToCard(player, ResourceType.SCIENCE, {
+        filter: (card): boolean =>
+          MoonCards.scienceCardsWithLessThan2VP.has(card.name),
+      })
+    );
     return undefined;
   }
 

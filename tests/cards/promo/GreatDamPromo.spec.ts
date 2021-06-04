@@ -8,21 +8,22 @@ import {TileType} from '../../../src/TileType';
 import {TestingUtils} from '../../TestingUtils';
 import {TestPlayers} from '../../TestPlayers';
 
-describe('GreatDamPromo', function() {
-  let card : GreatDamPromo; let player : Player;
+describe('GreatDamPromo', function () {
+  let card: GreatDamPromo;
+  let player: Player;
 
-  beforeEach(function() {
+  beforeEach(function () {
     card = new GreatDamPromo();
     player = TestPlayers.BLUE.newPlayer();
     const redPlayer = TestPlayers.RED.newPlayer();
     Game.newInstance('foobar', [player, redPlayer], player);
   });
 
-  it('Can\'t play without meeting requirements', function() {
+  it("Can't play without meeting requirements", function () {
     expect(card.canPlay(player)).is.not.true;
   });
 
-  it('Should play', function() {
+  it('Should play', function () {
     TestingUtils.maxOutOceans(player, 4);
 
     const action = card.play(player);
@@ -31,8 +32,10 @@ describe('GreatDamPromo', function() {
     expect(card.getVictoryPoints()).to.eq(1);
   });
 
-  it('Works with Ares', function() {
-    TestingUtils.maxOutOceans(player, 4).forEach((space) => space.tile = {tileType: TileType.OCEAN_CITY});
+  it('Works with Ares', function () {
+    TestingUtils.maxOutOceans(player, 4).forEach(
+      (space) => (space.tile = {tileType: TileType.OCEAN_CITY})
+    );
 
     const action = card.play(player);
     expect(action instanceof SelectSpace).is.true;

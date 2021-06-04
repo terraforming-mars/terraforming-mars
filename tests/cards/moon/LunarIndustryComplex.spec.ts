@@ -56,4 +56,3 @@ describe('LunarIndustryComplex', () => {
     expect(player.getProduction(Resources.HEAT)).eq(1);
   });
 });
-

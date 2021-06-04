@@ -4,8 +4,8 @@ import {Game} from '../../../src/Game';
 import {Resources} from '../../../src/Resources';
 import {TestPlayers} from '../../TestPlayers';
 
-describe('VestaShipyard', function() {
-  it('Should play', function() {
+describe('VestaShipyard', function () {
+  it('Should play', function () {
     const card = new VestaShipyard();
     const player = TestPlayers.BLUE.newPlayer();
     const redPlayer = TestPlayers.RED.newPlayer();

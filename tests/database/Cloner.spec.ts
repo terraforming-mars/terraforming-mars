@@ -5,19 +5,43 @@ import {Player} from '../../src/Player';
 import {TestingUtils} from '../TestingUtils';
 import {Color} from '../../src/Color';
 
-describe('Cloner', function() {
+describe('Cloner', function () {
   it('solo game preserved', () => {
-    const player = new Player('old-player1', Color.YELLOW, true, 9, 'old-player1-id');
+    const player = new Player(
+      'old-player1',
+      Color.YELLOW,
+      true,
+      9,
+      'old-player1-id'
+    );
     const game = Game.newInstance(
-      'old-game-id', [player], player, TestingUtils.setCustomGameOptions({}), -5179823149812374);
+      'old-game-id',
+      [player],
+      player,
+      TestingUtils.setCustomGameOptions({}),
+      -5179823149812374
+    );
 
-    const newPlayer = new Player('new-player1', Color.RED, false, 3, 'new-player1-id');
+    const newPlayer = new Player(
+      'new-player1',
+      Color.RED,
+      false,
+      3,
+      'new-player1-id'
+    );
     let newGame: Game | undefined = undefined;
-    Cloner.clone('new-id', [newPlayer], 0, undefined, game.serialize(), (err, deserialized) => {
-      expect(err).is.undefined;
-      expect(deserialized).is.not.undefined;
-      newGame = deserialized;
-    });
+    Cloner.clone(
+      'new-id',
+      [newPlayer],
+      0,
+      undefined,
+      game.serialize(),
+      (err, deserialized) => {
+        expect(err).is.undefined;
+        expect(deserialized).is.not.undefined;
+        newGame = deserialized;
+      }
+    );
 
     expect(newGame!.id).eq('new-id');
     expect(game.getPlayerById('old-player1-id')).is.not.undefined;
@@ -37,13 +61,27 @@ describe('Cloner', function() {
     expect(player.terraformRatingAtGenerationStart).eq(14);
     expect(newPlayerZero.handicap).eq(3);
 
-    expect(player.dealtCorporationCards, 'dealtCorporationCards').deep.eq(newPlayerZero.dealtCorporationCards);
-    expect(player.dealtProjectCards, 'dealtProjectCards').deep.eq(newPlayerZero.dealtProjectCards);
-    expect(player.dealtPreludeCards, 'dealtPreludeCards').deep.eq(newPlayerZero.dealtPreludeCards);
-    expect(player.cardsInHand, 'cardsInHand').deep.eq(newPlayerZero.cardsInHand);
-    expect(player.preludeCardsInHand, 'preludeCardsInHand').deep.eq(newPlayerZero.preludeCardsInHand);
-    expect(player.playedCards, 'playedCards').deep.eq(newPlayerZero.playedCards);
-    expect(player.draftedCards, 'draftedCards').deep.eq(newPlayerZero.draftedCards);
+    expect(player.dealtCorporationCards, 'dealtCorporationCards').deep.eq(
+      newPlayerZero.dealtCorporationCards
+    );
+    expect(player.dealtProjectCards, 'dealtProjectCards').deep.eq(
+      newPlayerZero.dealtProjectCards
+    );
+    expect(player.dealtPreludeCards, 'dealtPreludeCards').deep.eq(
+      newPlayerZero.dealtPreludeCards
+    );
+    expect(player.cardsInHand, 'cardsInHand').deep.eq(
+      newPlayerZero.cardsInHand
+    );
+    expect(player.preludeCardsInHand, 'preludeCardsInHand').deep.eq(
+      newPlayerZero.preludeCardsInHand
+    );
+    expect(player.playedCards, 'playedCards').deep.eq(
+      newPlayerZero.playedCards
+    );
+    expect(player.draftedCards, 'draftedCards').deep.eq(
+      newPlayerZero.draftedCards
+    );
 
     expect(game.seed).eq(newGame!.seed);
     expect(game.gameAge).eq(newGame!.gameAge);
@@ -51,7 +89,6 @@ describe('Cloner', function() {
     expect(game.dealer, 'dealer').to.deep.eq(newGame!.dealer);
     expect(game.milestones, 'milestones').to.deep.eq(newGame!.milestones);
     expect(game.awards, 'awards').to.deep.eq(newGame!.awards);
-
 
     // validating two boards across two games as equal is a little tricky because player IDs have changed, so
     // doing a test in this manner instead.

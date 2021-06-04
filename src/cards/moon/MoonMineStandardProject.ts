@@ -10,7 +10,10 @@ import {IMoonCard} from './IMoonCard';
 import {TileType} from '../../TileType';
 import {AltSecondaryTag} from '../render/CardRenderItem';
 
-export class MoonMineStandardProject extends StandardProjectCard implements IMoonCard {
+export class MoonMineStandardProject
+  extends StandardProjectCard
+  implements IMoonCard
+{
   constructor() {
     super({
       name: CardName.MOON_MINE_STANDARD_PROJECT,
@@ -18,9 +21,16 @@ export class MoonMineStandardProject extends StandardProjectCard implements IMoo
       metadata: {
         cardNumber: '',
         renderData: CardRenderer.builder((b) =>
-          b.standardProject('Spend 20 M€ and 1 titanium to place a mine on the moon, raise the Mining Rate 1 step, and raise steel production 1 step.', (eb) => {
-            eb.megacredits(20).titanium(1).startAction.moonMine().secondaryTag(AltSecondaryTag.MOON_MINING_RATE).production((pb) => pb.steel(1));
-          }),
+          b.standardProject(
+            'Spend 20 M€ and 1 titanium to place a mine on the moon, raise the Mining Rate 1 step, and raise steel production 1 step.',
+            (eb) => {
+              eb.megacredits(20)
+                .titanium(1)
+                .startAction.moonMine()
+                .secondaryTag(AltSecondaryTag.MOON_MINING_RATE)
+                .production((pb) => pb.steel(1));
+            }
+          )
         ),
       },
     });
@@ -30,7 +40,11 @@ export class MoonMineStandardProject extends StandardProjectCard implements IMoo
   public tilesBuilt = [TileType.MOON_MINE];
 
   protected discount(player: Player): number {
-    if (player.playedCards.find((card) => card.name === CardName.MOONCRATE_BLOCK_FACTORY)) {
+    if (
+      player.playedCards.find(
+        (card) => card.name === CardName.MOONCRATE_BLOCK_FACTORY
+      )
+    ) {
       return 4;
     }
     return super.discount(player);
@@ -48,7 +62,10 @@ export class MoonMineStandardProject extends StandardProjectCard implements IMoo
   }
 
   actionEssence(player: Player): void {
-    const adjustedReserveUnits = MoonExpansion.adjustedReserveCosts(player, this);
+    const adjustedReserveUnits = MoonExpansion.adjustedReserveCosts(
+      player,
+      this
+    );
     player.deductUnits(adjustedReserveUnits);
     player.game.defer(new PlaceMoonMineTile(player));
     player.addProduction(Resources.STEEL, 1, {log: true});

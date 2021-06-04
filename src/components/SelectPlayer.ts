@@ -1,4 +1,3 @@
-
 import Vue from 'vue';
 import {Button} from './common/Button';
 import {ColorWithNeutral} from '../Color';
@@ -26,7 +25,7 @@ export const SelectPlayer = Vue.component('select-player', {
       type: Boolean,
     },
   },
-  data: function() {
+  data: function () {
     return {
       selectedPlayer: undefined as VueModelRadio<ColorWithNeutral>,
     };
@@ -37,7 +36,7 @@ export const SelectPlayer = Vue.component('select-player', {
   },
   mixins: [TranslateMixin],
   methods: {
-    saveData: function() {
+    saveData: function () {
       const result: string[][] = [];
       result.push([]);
       if (this.selectedPlayer !== undefined) {
@@ -56,4 +55,3 @@ export const SelectPlayer = Vue.component('select-player', {
   <Button v-if="showsave === true" size="big" :onClick="saveData" :title="$t(playerinput.buttonLabel)" />
 </div>`,
 });
-

@@ -14,7 +14,11 @@ export class _AresHazardPlacement {
     space.tile = {tileType: tileType, protectedHazard: false};
   }
 
-  public static randomlyPlaceHazard(game: Game, tileType: TileType, direction: 1 | -1) {
+  public static randomlyPlaceHazard(
+    game: Game,
+    tileType: TileType,
+    direction: 1 | -1
+  ) {
     const space = game.getSpaceByOffset(direction, tileType);
     this.putHazardAt(space, tileType);
     return space;
@@ -29,7 +33,9 @@ export class _AresHazardPlacement {
         }
       });
 
-    game.log('${0} have upgraded to ${1}', (b) => b.string(TileType.toString(from)).string(TileType.toString(to)));
+    game.log('${0} have upgraded to ${1}', (b) =>
+      b.string(TileType.toString(from)).string(TileType.toString(to))
+    );
   }
 
   public static onTemperatureChange(game: Game, aresData: IAresData) {
@@ -40,7 +46,7 @@ export class _AresHazardPlacement {
       game.getTemperature(),
       () => {
         this.makeSevere(game, TileType.EROSION_MILD, TileType.EROSION_SEVERE);
-      },
+      }
     );
   }
 
@@ -50,9 +56,17 @@ export class _AresHazardPlacement {
   }
 
   public static onOxygenChange(game: Game, aresData: IAresData) {
-    this.testConstraint(aresData.hazardData.severeDustStormOxygen, game.getOxygenLevel(), () => {
-      this.makeSevere(game, TileType.DUST_STORM_MILD, TileType.DUST_STORM_SEVERE);
-    });
+    this.testConstraint(
+      aresData.hazardData.severeDustStormOxygen,
+      game.getOxygenLevel(),
+      () => {
+        this.makeSevere(
+          game,
+          TileType.DUST_STORM_MILD,
+          TileType.DUST_STORM_SEVERE
+        );
+      }
+    );
   }
 
   private static testToPlaceErosionTiles(aresData: IAresData, player: Player) {
@@ -74,7 +88,7 @@ export class _AresHazardPlacement {
         [space1, space2].forEach((space) => {
           LogHelper.logTilePlacement(player, space, type);
         });
-      },
+      }
     );
   }
 
@@ -84,7 +98,10 @@ export class _AresHazardPlacement {
       player.game.board.getOceansOnBoard(),
       () => {
         player.game.board.spaces.forEach((space) => {
-          if (space.tile?.tileType === TileType.DUST_STORM_MILD || space.tile?.tileType === TileType.DUST_STORM_SEVERE) {
+          if (
+            space.tile?.tileType === TileType.DUST_STORM_MILD ||
+            space.tile?.tileType === TileType.DUST_STORM_SEVERE
+          ) {
             if (space.tile.protectedHazard !== true) {
               space.tile = undefined;
             }
@@ -93,13 +110,20 @@ export class _AresHazardPlacement {
 
         if (player.game.phase !== Phase.SOLAR) {
           player.increaseTerraformRating();
-          player.game.log('${0}\'s TR increases 1 step for eliminating dust storms.', (b) => b.player(player));
+          player.game.log(
+            "${0}'s TR increases 1 step for eliminating dust storms.",
+            (b) => b.player(player)
+          );
         }
-      },
+      }
     );
   }
 
-  private static testConstraint(constraint: IHazardConstraint, testValue: number, cb: () => void) {
+  private static testConstraint(
+    constraint: IHazardConstraint,
+    testValue: number,
+    cb: () => void
+  ) {
     if (!constraint.available) {
       return;
     }

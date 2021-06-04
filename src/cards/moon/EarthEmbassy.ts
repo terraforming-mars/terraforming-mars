@@ -16,13 +16,16 @@ export class EarthEmbassy extends Card implements IProjectCard {
       metadata: {
         cardNumber: 'M77',
         renderData: CardRenderer.builder((b) => {
-          b.effect('After being played, when you perform an action, your Moon tags count as Earth tags, but not vice versa.', (eb) => {
-            eb.empty().startEffect.moon().equals().earth().played;
-          });
+          b.effect(
+            'After being played, when you perform an action, your Moon tags count as Earth tags, but not vice versa.',
+            (eb) => {
+              eb.empty().startEffect.moon().equals().earth().played;
+            }
+          );
         }),
       },
     });
-  };
+  }
 
   // Behavior is baked into `Player.getTagCount`
   public play() {

@@ -22,7 +22,7 @@ export class GrandLunaAcademy extends Card implements IProjectCard {
         }),
       },
     });
-  };
+  }
 
   public play(player: Player) {
     const tags = player.getTagCount(Tags.MOON);

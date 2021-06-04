@@ -27,7 +27,9 @@ export class MaxwellBase extends Card implements IActionCard {
           b.action('Add 1 resource to ANOTHER VENUS CARD.', (eb) => {
             eb.empty().startAction.wild(1).secondaryTag(Tags.VENUS);
           }).br;
-          b.production((pb) => pb.minus().energy(1)).nbsp.city().asterix();
+          b.production((pb) => pb.minus().energy(1))
+            .nbsp.city()
+            .asterix();
         }),
         description: {
           text: 'Requires Venus 12%. Decrease your energy production 1 step. Place a City tile ON THE RESERVED AREA.',
@@ -36,7 +38,7 @@ export class MaxwellBase extends Card implements IActionCard {
         victoryPoints: 3,
       },
     });
-  };
+  }
   public canPlay(player: Player): boolean {
     return player.getProduction(Resources.ENERGY) >= 1 && super.canPlay(player);
   }
@@ -51,8 +53,12 @@ export class MaxwellBase extends Card implements IActionCard {
 
   public getResCards(player: Player): ICard[] {
     let resourceCards = player.getResourceCards(ResourceType.FLOATER);
-    resourceCards = resourceCards.concat(player.getResourceCards(ResourceType.MICROBE));
-    resourceCards = resourceCards.concat(player.getResourceCards(ResourceType.ANIMAL));
+    resourceCards = resourceCards.concat(
+      player.getResourceCards(ResourceType.MICROBE)
+    );
+    resourceCards = resourceCards.concat(
+      player.getResourceCards(ResourceType.ANIMAL)
+    );
     return resourceCards.filter((card) => card.tags.includes(Tags.VENUS));
   }
 
@@ -75,7 +81,7 @@ export class MaxwellBase extends Card implements IActionCard {
       (foundCards: Array<ICard>) => {
         player.addResourceTo(foundCards[0], {log: true});
         return undefined;
-      },
+      }
     );
   }
 }

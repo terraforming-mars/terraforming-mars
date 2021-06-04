@@ -11,12 +11,23 @@ import {CardRenderCorpBoxComponent} from './CardRenderCorpBoxComponent';
 import {CardRenderTileComponent} from './CardRenderTileComponent';
 import {CardDescription} from './CardDescription';
 import {CardRenderSymbolComponent} from './CardRenderSymbolComponent';
-import {CardRenderEffect, CardRenderCorpBoxEffect, CardRenderCorpBoxAction} from '../../cards/render/CardRenderer';
+import {
+  CardRenderEffect,
+  CardRenderCorpBoxEffect,
+  CardRenderCorpBoxAction,
+} from '../../cards/render/CardRenderer';
 
 export const CardRowComponent = Vue.component('CardRowComponent', {
   props: {
     componentData: {
-      type: Object as () => CardRenderItem | CardRenderProductionBox | CardRenderSymbol | CardRenderEffect | CardRenderTile | CardRenderCorpBoxEffect | CardRenderCorpBoxAction,
+      type: Object as () =>
+        | CardRenderItem
+        | CardRenderProductionBox
+        | CardRenderSymbol
+        | CardRenderEffect
+        | CardRenderTile
+        | CardRenderCorpBoxEffect
+        | CardRenderCorpBoxAction,
       required: true,
     },
   },
@@ -30,28 +41,35 @@ export const CardRowComponent = Vue.component('CardRowComponent', {
     CardDescription,
   },
   methods: {
-    isItem: function(): boolean {
+    isItem: function (): boolean {
       return this.componentData instanceof CardRenderItem;
     },
-    isSymbol: function(): boolean {
+    isSymbol: function (): boolean {
       return this.componentData instanceof CardRenderSymbol;
     },
-    isProduction: function(): boolean {
+    isProduction: function (): boolean {
       return this.componentData instanceof CardRenderProductionBox;
     },
-    isEffect: function(): boolean {
+    isEffect: function (): boolean {
       return this.componentData instanceof CardRenderEffect;
     },
-    isDescription: function(): boolean {
-      return typeof this.componentData === 'string' || this.componentData instanceof String || isIDescription(this.componentData);
+    isDescription: function (): boolean {
+      return (
+        typeof this.componentData === 'string' ||
+        this.componentData instanceof String ||
+        isIDescription(this.componentData)
+      );
     },
-    isTile: function(): boolean {
+    isTile: function (): boolean {
       return this.componentData instanceof CardRenderTile;
     },
-    isCorpBox: function(): boolean {
-      return this.componentData instanceof CardRenderCorpBoxEffect || this.componentData instanceof CardRenderCorpBoxAction;
+    isCorpBox: function (): boolean {
+      return (
+        this.componentData instanceof CardRenderCorpBoxEffect ||
+        this.componentData instanceof CardRenderCorpBoxAction
+      );
     },
-    corpBoxLabel: function(): string {
+    corpBoxLabel: function (): string {
       if (this.componentData instanceof CardRenderCorpBoxEffect) {
         return 'effect';
       } else if (this.componentData instanceof CardRenderCorpBoxAction) {
@@ -59,7 +77,6 @@ export const CardRowComponent = Vue.component('CardRowComponent', {
       }
       return 'n/a';
     },
-
   },
   template: ` 
         <CardRenderItemComponent v-if="isItem()" :item="componentData"/>

@@ -6,8 +6,8 @@ import {TestPlayers} from '../../TestPlayers';
 import {OrOptions} from '../../../src/inputs/OrOptions';
 import {SelectPlayer} from '../../../src/inputs/SelectPlayer';
 
-describe('CometForVenus', function() {
-  it('Should play', function() {
+describe('CometForVenus', function () {
+  it('Should play', function () {
     const card = new CometForVenus();
     const card2 = new AerialMappers();
     const player = TestPlayers.BLUE.newPlayer();
@@ -21,7 +21,8 @@ describe('CometForVenus', function() {
 
     expect(action.options).has.lengthOf(2);
 
-    const subActionSelectPlayer: SelectPlayer = action!.options[0] as SelectPlayer;
+    const subActionSelectPlayer: SelectPlayer = action!
+      .options[0] as SelectPlayer;
 
     expect(subActionSelectPlayer.players).has.lengthOf(1);
     expect(subActionSelectPlayer.players[0]).to.eq(player2);

@@ -14,7 +14,10 @@ const isPinned = (root: any, playerIndex: number): boolean => {
 const showPlayerData = (root: any, playerIndex: number) => {
   (root as any).setVisibilityState('pinned_player_' + playerIndex, true);
 };
-export const hidePlayerData = (root: typeof mainAppSettings.methods, playerIndex: number) => {
+export const hidePlayerData = (
+  root: typeof mainAppSettings.methods,
+  playerIndex: number
+) => {
   root.setVisibilityState('pinned_player_' + playerIndex, false);
 };
 export const PlayerInfo = Vue.component('player-info', {
@@ -45,19 +48,19 @@ export const PlayerInfo = Vue.component('player-info', {
   },
   mixins: [PlayerMixin],
   methods: {
-    getClasses: function(): string {
+    getClasses: function (): string {
       const classes = ['player-info'];
       classes.push(playerColorClass(this.player.color, 'bg_transparent'));
       return classes.join(' ');
     },
-    getPlayerStatusAndResClasses: function(): string {
+    getPlayerStatusAndResClasses: function (): string {
       const classes = ['player-status-and-res'];
       return classes.join(' ');
     },
-    getIsActivePlayer: function(): boolean {
+    getIsActivePlayer: function (): boolean {
       return this.player.color === this.activePlayer.color;
     },
-    pinPlayer: function() {
+    pinPlayer: function () {
       let hiddenPlayersIndexes: Array<Number> = [];
       const playerPinned = isPinned(this.$root, this.playerIndex);
 
@@ -66,23 +69,26 @@ export const PlayerInfo = Vue.component('player-info', {
       if (!playerPinned) {
         showPlayerData(this.$root, this.playerIndex);
         hiddenPlayersIndexes = hiddenPlayersIndexes.filter(
-          (index) => index !== this.playerIndex,
+          (index) => index !== this.playerIndex
         );
       }
       for (let i = 0; i < hiddenPlayersIndexes.length; i++) {
         if (hiddenPlayersIndexes.includes(i)) {
-          hidePlayerData(this.$root as unknown as typeof mainAppSettings.methods, i);
+          hidePlayerData(
+            this.$root as unknown as typeof mainAppSettings.methods,
+            i
+          );
         }
       }
     },
-    buttonLabel: function(): string {
+    buttonLabel: function (): string {
       return isPinned(this.$root, this.playerIndex) ? 'hide' : 'show';
     },
-    togglePlayerDetails: function() {
+    togglePlayerDetails: function () {
       // for active player => scroll to cards UI
       if (this.player.color === this.activePlayer.color) {
         const el: HTMLElement = document.getElementsByClassName(
-          'sidebar_icon--cards',
+          'sidebar_icon--cards'
         )[0] as HTMLElement;
         el.click();
 
@@ -91,10 +97,10 @@ export const PlayerInfo = Vue.component('player-info', {
       // any other player show cards container and hide all other
       this.pinPlayer();
     },
-    getNrPlayedCards: function(): number {
+    getNrPlayedCards: function (): number {
       return this.player.playedCards.length;
     },
-    getAvailableBlueActionCount: function(): number {
+    getAvailableBlueActionCount: function (): number {
       return this.player.availableBlueCardActionCount;
     },
   },

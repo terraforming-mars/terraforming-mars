@@ -7,8 +7,8 @@ import {Kelvinists} from '../../src/turmoil/parties/Kelvinists';
 import {Turmoil} from '../../src/turmoil/Turmoil';
 import {TestPlayers} from '../TestPlayers';
 
-describe('VenusInfrastructure', function() {
-  it('resolve play', function() {
+describe('VenusInfrastructure', function () {
+  it('resolve play', function () {
     const card = new VenusInfrastructure();
     const player = TestPlayers.BLUE.newPlayer();
     const player2 = TestPlayers.RED.newPlayer();
@@ -16,7 +16,11 @@ describe('VenusInfrastructure', function() {
     const turmoil = Turmoil.newInstance(game);
 
     player.playedCards.push(new CorroderSuits());
-    player2.playedCards.push(new CorroderSuits(), new CorroderSuits(), new CorroderSuits());
+    player2.playedCards.push(
+      new CorroderSuits(),
+      new CorroderSuits(),
+      new CorroderSuits()
+    );
 
     turmoil.chairman = player2.id;
     turmoil.dominantParty = new Kelvinists();

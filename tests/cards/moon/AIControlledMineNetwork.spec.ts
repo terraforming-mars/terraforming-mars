@@ -42,4 +42,3 @@ describe('AIControlledMineNetwork', () => {
     expect(player.getTerraformRating()).eq(15);
   });
 });
-

@@ -4,11 +4,10 @@ import {SpectatorModel} from '../../src/models/SpectatorModel';
 
 import * as raw_settings from '../genfiles/settings.json';
 
-export interface SpectatorHomeModel {
-}
+export interface SpectatorHomeModel {}
 
 export const SpectatorHome = Vue.component('spectator-home', {
-  data: function(): SpectatorHomeModel {
+  data: function (): SpectatorHomeModel {
     return {
       spectator: undefined as SpectatorModel | undefined,
     };
@@ -18,11 +17,11 @@ export const SpectatorHome = Vue.component('spectator-home', {
       type: Object as () => typeof raw_settings,
     },
   },
-  components: {
-  },
+  components: {},
   methods: {
+    // keep
   },
-  mounted: function() {
+  mounted: function () {
     // TODO load this spectator with XHR
     fetch('/api/spectator' + window.location.search)
       .then((response) => response.json())

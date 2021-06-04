@@ -6,21 +6,29 @@ import {Player} from '../../../src/Player';
 import {TestingUtils} from '../../TestingUtils';
 import {TestPlayers} from '../../TestPlayers';
 
-describe('TradeAdvance', function() {
-  let card : TradeAdvance; let player : Player; let game : Game;
+describe('TradeAdvance', function () {
+  let card: TradeAdvance;
+  let player: Player;
+  let game: Game;
 
-  beforeEach(function() {
+  beforeEach(function () {
     card = new TradeAdvance();
     player = TestPlayers.BLUE.newPlayer();
     const redPlayer = TestPlayers.RED.newPlayer();
     const gameOptions = TestingUtils.setCustomGameOptions({
       coloniesExtension: true,
-      customColoniesList: [ColonyName.LUNA, ColonyName.CALLISTO, ColonyName.CERES, ColonyName.IO, ColonyName.TITAN],
+      customColoniesList: [
+        ColonyName.LUNA,
+        ColonyName.CALLISTO,
+        ColonyName.CERES,
+        ColonyName.IO,
+        ColonyName.TITAN,
+      ],
     });
     game = Game.newInstance('foobar', [player, redPlayer], player, gameOptions);
   });
 
-  it('Should play', function() {
+  it('Should play', function () {
     card.play(player);
 
     player.game.deferredActions.runAll(() => {});

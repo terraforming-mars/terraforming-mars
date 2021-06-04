@@ -39,4 +39,3 @@ describe('LTFHeadquarters', () => {
     expect(player.getFleetSize()).eq(2);
   });
 });
-

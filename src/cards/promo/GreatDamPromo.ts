@@ -26,9 +26,12 @@ export class GreatDamPromo extends Card implements IProjectCard {
       metadata: {
         cardNumber: 'X32',
         renderData: CardRenderer.builder((b) => {
-          b.production((pb) => pb.energy(2)).tile(TileType.GREAT_DAM, true, false).asterix();
+          b.production((pb) => pb.energy(2))
+            .tile(TileType.GREAT_DAM, true, false)
+            .asterix();
         }),
-        description: 'Requires 4 ocean tiles. Increase your Energy production 2 steps. Place this tile ADJACENT TO an ocean tile.',
+        description:
+          'Requires 4 ocean tiles. Increase your Energy production 2 steps. Place this tile ADJACENT TO an ocean tile.',
         victoryPoints: 1,
       },
     });
@@ -47,10 +50,16 @@ export class GreatDamPromo extends Card implements IProjectCard {
     const availableSpaces = this.getAvailableSpaces(player);
     if (availableSpaces.length < 1) return undefined;
 
-    return new SelectSpace('Select space for tile', availableSpaces, (foundSpace: ISpace) => {
-      player.game.addTile(player, foundSpace.spaceType, foundSpace, {tileType: TileType.GREAT_DAM});
-      return undefined;
-    });
+    return new SelectSpace(
+      'Select space for tile',
+      availableSpaces,
+      (foundSpace: ISpace) => {
+        player.game.addTile(player, foundSpace.spaceType, foundSpace, {
+          tileType: TileType.GREAT_DAM,
+        });
+        return undefined;
+      }
+    );
   }
 
   public getVictoryPoints() {
@@ -58,12 +67,14 @@ export class GreatDamPromo extends Card implements IProjectCard {
   }
 
   private getAvailableSpaces(player: Player): Array<ISpace> {
-    return player.game.board.getAvailableSpacesOnLand(player)
+    return player.game.board
+      .getAvailableSpacesOnLand(player)
       .filter(
-        (space) => player.game.board.getAdjacentSpaces(space).filter(
-          (adjacentSpace) => Board.isOceanSpace(adjacentSpace),
-        ).length > 0,
+        (space) =>
+          player.game.board
+            .getAdjacentSpaces(space)
+            .filter((adjacentSpace) => Board.isOceanSpace(adjacentSpace))
+            .length > 0
       );
   }
 }
-

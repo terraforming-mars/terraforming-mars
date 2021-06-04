@@ -60,7 +60,8 @@
     "test": "mocha --file build/tests/utils/Vue.js --recursive build/tests",
     "pretest": "npm run prebuild && tsc --build tests/tsconfig.json",
     "watch": "WATCH_IT=1 npm run webpack",
-    "webpack": "webpack --config webpack.config.js"
+    "webpack": "webpack --config webpack.config.js",
+    "format": "prettier --write ."
   },
   "repository": {
     "type": "git",

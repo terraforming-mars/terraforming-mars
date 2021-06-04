@@ -24,15 +24,22 @@ export class SmallAsteroid extends Card implements IProjectCard {
           b.temperature(1).br;
           b.minus().plants(2).any;
         }),
-        description: 'Increase temperature 1 step. Remove up to 2 plants from any player.',
+        description:
+          'Increase temperature 1 step. Remove up to 2 plants from any player.',
       },
     });
   }
 
   public canPlay(player: Player): boolean {
     const canRaiseTemperature = player.game.getTemperature() < MAX_TEMPERATURE;
-    if (PartyHooks.shouldApplyPolicy(player.game, PartyName.REDS) && canRaiseTemperature) {
-      return player.canAfford(player.getCardCost(this) + REDS_RULING_POLICY_COST, {titanium: true});
+    if (
+      PartyHooks.shouldApplyPolicy(player.game, PartyName.REDS) &&
+      canRaiseTemperature
+    ) {
+      return player.canAfford(
+        player.getCardCost(this) + REDS_RULING_POLICY_COST,
+        {titanium: true}
+      );
     }
 
     return true;

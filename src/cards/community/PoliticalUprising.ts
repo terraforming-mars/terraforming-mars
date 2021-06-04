@@ -27,7 +27,11 @@ export class PoliticalUprising extends PreludeCard implements IProjectCard {
     this.drawTurmoilCard(player);
 
     for (let i = 0; i < 4; i++) {
-      player.game.defer(new SendDelegateToArea(player, 'Select where to send delegate', {source: 'reserve'}));
+      player.game.defer(
+        new SendDelegateToArea(player, 'Select where to send delegate', {
+          source: 'reserve',
+        })
+      );
     }
 
     return undefined;
@@ -35,15 +39,23 @@ export class PoliticalUprising extends PreludeCard implements IProjectCard {
 
   private drawTurmoilCard(player: Player) {
     const turmoilCards: Array<CardName> = [];
-    TURMOIL_CARD_MANIFEST.projectCards.factories.forEach((cf) => turmoilCards.push(cf.cardName));
-    const drawnCard = player.game.dealer.deck.find((card) => turmoilCards.includes(card.name));
+    TURMOIL_CARD_MANIFEST.projectCards.factories.forEach((cf) =>
+      turmoilCards.push(cf.cardName)
+    );
+    const drawnCard = player.game.dealer.deck.find((card) =>
+      turmoilCards.includes(card.name)
+    );
 
     if (drawnCard) {
-      const cardIndex = player.game.dealer.deck.findIndex((c) => c.name === drawnCard.name);
+      const cardIndex = player.game.dealer.deck.findIndex(
+        (c) => c.name === drawnCard.name
+      );
       player.game.dealer.deck.splice(cardIndex, 1);
 
       player.cardsInHand.push(drawnCard);
-      player.game.log('${0} drew ${1}', (b) => b.player(player).card(drawnCard));
+      player.game.log('${0} drew ${1}', (b) =>
+        b.player(player).card(drawnCard)
+      );
     }
 
     return undefined;

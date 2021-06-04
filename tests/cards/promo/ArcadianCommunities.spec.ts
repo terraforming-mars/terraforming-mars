@@ -5,9 +5,8 @@ import {SelectSpace} from '../../../src/inputs/SelectSpace';
 import {TestingUtils} from '../../TestingUtils';
 import {TestPlayers} from '../../TestPlayers';
 
-
-describe('ArcadianCommunities', function() {
-  it('Should play', function() {
+describe('ArcadianCommunities', function () {
+  it('Should play', function () {
     const card = new ArcadianCommunities();
     const player = TestPlayers.BLUE.newPlayer();
     const player2 = TestPlayers.RED.newPlayer();
@@ -21,7 +20,7 @@ describe('ArcadianCommunities', function() {
     initLands[1].player = player;
     const action = card.action(player);
     expect(action instanceof SelectSpace).is.true;
-    if ( ! (action instanceof SelectSpace)) return;
+    if (!(action instanceof SelectSpace)) return;
 
     const lands = player.game.board.getAvailableSpacesForMarker(player);
     action.cb(lands[0]);

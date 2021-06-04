@@ -6,8 +6,8 @@ import {Kelvinists} from '../../src/turmoil/parties/Kelvinists';
 import {Turmoil} from '../../src/turmoil/Turmoil';
 import {TestPlayers} from '../TestPlayers';
 
-describe('CloudSocieties', function() {
-  it('resolve play', function() {
+describe('CloudSocieties', function () {
+  it('resolve play', function () {
     const card = new CloudSocieties();
     const player = TestPlayers.BLUE.newPlayer();
     const game = Game.newInstance('foobar', [player], player);

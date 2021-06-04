@@ -12,7 +12,10 @@ import {OrOptions} from '../../inputs/OrOptions';
 import {SelectOption} from '../../inputs/SelectOption';
 import {CardRenderer} from '../render/CardRenderer';
 
-export class BioPrintingFacility extends Card implements IActionCard, IProjectCard {
+export class BioPrintingFacility
+  extends Card
+  implements IActionCard, IProjectCard
+{
   constructor() {
     super({
       cardType: CardType.ACTIVE,
@@ -23,10 +26,13 @@ export class BioPrintingFacility extends Card implements IActionCard, IProjectCa
       metadata: {
         cardNumber: 'X36',
         renderData: CardRenderer.builder((b) => {
-          b.action('Spend 2 energy to gain 2 plants OR to add 1 animal to ANOTHER card.', (eb) => {
-            eb.energy(2).digit.startAction.plants(2);
-            eb.or().animals(1).asterix();
-          });
+          b.action(
+            'Spend 2 energy to gain 2 plants OR to add 1 animal to ANOTHER card.',
+            (eb) => {
+              eb.energy(2).digit.startAction.plants(2);
+              eb.or().animals(1).asterix();
+            }
+          );
         }),
       },
     });
@@ -44,26 +50,33 @@ export class BioPrintingFacility extends Card implements IActionCard, IProjectCa
     const availableAnimalCards = player.getResourceCards(ResourceType.ANIMAL);
     player.deductResource(Resources.ENERGY, 2);
 
-
     if (availableAnimalCards.length === 0) {
       player.addResource(Resources.PLANTS, 2, {log: true});
       return undefined;
     }
 
-    const gainPlantOption = new SelectOption('Gain 2 plants', 'Gain plants', () => {
-      player.addResource(Resources.PLANTS, 2, {log: true});
-      return undefined;
-    });
+    const gainPlantOption = new SelectOption(
+      'Gain 2 plants',
+      'Gain plants',
+      () => {
+        player.addResource(Resources.PLANTS, 2, {log: true});
+        return undefined;
+      }
+    );
 
     if (availableAnimalCards.length === 1) {
       const targetCard = availableAnimalCards[0];
 
       return new OrOptions(
-        new SelectOption('Add 1 animal to ' + targetCard.name, 'Add animal', () => {
-          player.addResourceTo(targetCard, {log: true});
-          return undefined;
-        }),
-        gainPlantOption,
+        new SelectOption(
+          'Add 1 animal to ' + targetCard.name,
+          'Add animal',
+          () => {
+            player.addResourceTo(targetCard, {log: true});
+            return undefined;
+          }
+        ),
+        gainPlantOption
       );
     }
 
@@ -75,9 +88,9 @@ export class BioPrintingFacility extends Card implements IActionCard, IProjectCa
         (foundCards: Array<ICard>) => {
           player.addResourceTo(foundCards[0], {log: true});
           return undefined;
-        },
+        }
       ),
-      gainPlantOption,
+      gainPlantOption
     );
   }
 }

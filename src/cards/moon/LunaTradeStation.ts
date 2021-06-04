@@ -14,41 +14,50 @@ import {Resources} from '../../Resources';
 
 export class LunaTradeStation extends MoonCard implements IActionCard {
   constructor() {
-    super({
-      name: CardName.LUNA_TRADE_STATION,
-      cardType: CardType.ACTIVE,
-      tags: [Tags.MOON, Tags.MOON, Tags.SPACE],
-      cost: 10,
-      productionBox: Units.of({}),
+    super(
+      {
+        name: CardName.LUNA_TRADE_STATION,
+        cardType: CardType.ACTIVE,
+        tags: [Tags.MOON, Tags.MOON, Tags.SPACE],
+        cost: 10,
+        productionBox: Units.of({}),
 
-      metadata: {
-        description: 'Spend 2 titanium. Place this tile ON THE RESERVED AREA.',
-        cardNumber: 'M13',
-        renderData: CardRenderer.builder((b) => {
-          b.action('Gain 2 M€ for each colony tile on the Moon.', (eb) =>
-            eb.empty().startAction.megacredits(2).slash().moonColony().any);
-          b.br.minus().titanium(2).tile(TileType.LUNA_TRADE_STATION, true).asterix();
-        }),
+        metadata: {
+          description:
+            'Spend 2 titanium. Place this tile ON THE RESERVED AREA.',
+          cardNumber: 'M13',
+          renderData: CardRenderer.builder((b) => {
+            b.action(
+              'Gain 2 M€ for each colony tile on the Moon.',
+              (eb) =>
+                eb.empty().startAction.megacredits(2).slash().moonColony().any
+            );
+            b.br
+              .minus()
+              .titanium(2)
+              .tile(TileType.LUNA_TRADE_STATION, true)
+              .asterix();
+          }),
+        },
       },
-    }, {
-      reserveUnits: Units.of({titanium: 2}),
-    });
-  };
+      {
+        reserveUnits: Units.of({titanium: 2}),
+      }
+    );
+  }
 
   public play(player: Player) {
     super.play(player);
-    MoonExpansion.addTile(
-      player,
-      MoonSpaces.LUNA_TRADE_STATION,
-      {
-        tileType: TileType.LUNA_TRADE_STATION,
-        card: this.name,
-      });
+    MoonExpansion.addTile(player, MoonSpaces.LUNA_TRADE_STATION, {
+      tileType: TileType.LUNA_TRADE_STATION,
+      card: this.name,
+    });
     return undefined;
   }
 
   private surfaceColonyCount(game: Game): number {
-    return MoonExpansion.tiles(game, TileType.MOON_COLONY, {surfaceOnly: true}).length;
+    return MoonExpansion.tiles(game, TileType.MOON_COLONY, {surfaceOnly: true})
+      .length;
   }
 
   public canAct(player: Player): boolean {

@@ -7,17 +7,25 @@ import {TileType} from '../../../src/TileType';
 import {ARES_OPTIONS_NO_HAZARDS} from '../../ares/AresTestHelper';
 import {TestPlayers} from '../../TestPlayers';
 
-describe('MetallicAsteroid', function() {
-  let card: MetallicAsteroid; let player: Player; let otherPlayer: Player; let game: Game;
+describe('MetallicAsteroid', function () {
+  let card: MetallicAsteroid;
+  let player: Player;
+  let otherPlayer: Player;
+  let game: Game;
 
-  beforeEach(function() {
+  beforeEach(function () {
     card = new MetallicAsteroid();
     player = TestPlayers.BLUE.newPlayer();
     otherPlayer = TestPlayers.RED.newPlayer();
-    game = Game.newInstance('foobar', [player, otherPlayer], player, ARES_OPTIONS_NO_HAZARDS);
+    game = Game.newInstance(
+      'foobar',
+      [player, otherPlayer],
+      player,
+      ARES_OPTIONS_NO_HAZARDS
+    );
   });
 
-  it('Play', function() {
+  it('Play', function () {
     otherPlayer.plants = 5;
 
     expect(player.titanium).eq(0);

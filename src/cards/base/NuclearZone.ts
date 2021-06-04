@@ -27,7 +27,8 @@ export class NuclearZone extends Card implements IProjectCard {
       }),
       description: 'Place this tile and raise temperature 2 steps.',
       victoryPoints: -2,
-    }) {
+    }
+  ) {
     super({
       cardType: CardType.AUTOMATED,
       name,
@@ -38,12 +39,18 @@ export class NuclearZone extends Card implements IProjectCard {
     });
   }
   public canPlay(player: Player): boolean {
-    const canPlaceTile = player.game.board.getAvailableSpacesOnLand(player).length > 0;
-    const remainingTemperatureSteps = (MAX_TEMPERATURE - player.game.getTemperature()) / 2;
+    const canPlaceTile =
+      player.game.board.getAvailableSpacesOnLand(player).length > 0;
+    const remainingTemperatureSteps =
+      (MAX_TEMPERATURE - player.game.getTemperature()) / 2;
     const stepsRaised = Math.min(remainingTemperatureSteps, 2);
 
     if (PartyHooks.shouldApplyPolicy(player.game, PartyName.REDS)) {
-      return player.canAfford(player.getCardCost(this) + REDS_RULING_POLICY_COST * stepsRaised) && canPlaceTile;
+      return (
+        player.canAfford(
+          player.getCardCost(this) + REDS_RULING_POLICY_COST * stepsRaised
+        ) && canPlaceTile
+      );
     }
 
     return canPlaceTile;
@@ -51,11 +58,17 @@ export class NuclearZone extends Card implements IProjectCard {
 
   public play(player: Player) {
     player.game.increaseTemperature(player, 2);
-    return new SelectSpace('Select space for special tile', player.game.board.getAvailableSpacesOnLand(player), (foundSpace: ISpace) => {
-      player.game.addTile(player, foundSpace.spaceType, foundSpace, {tileType: TileType.NUCLEAR_ZONE});
-      foundSpace.adjacency = this.adjacencyBonus;
-      return undefined;
-    });
+    return new SelectSpace(
+      'Select space for special tile',
+      player.game.board.getAvailableSpacesOnLand(player),
+      (foundSpace: ISpace) => {
+        player.game.addTile(player, foundSpace.spaceType, foundSpace, {
+          tileType: TileType.NUCLEAR_ZONE,
+        });
+        foundSpace.adjacency = this.adjacencyBonus;
+        return undefined;
+      }
+    );
   }
 
   public getVictoryPoints() {

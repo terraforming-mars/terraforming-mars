@@ -26,7 +26,8 @@ export class RestrictedArea extends Card implements IActionCard, IProjectCard {
         b.tile(TileType.RESTRICTED_AREA, true);
       }),
       description: 'Place this tile.',
-    }) {
+    }
+  ) {
     super({
       cardType: CardType.ACTIVE,
       name,
@@ -41,17 +42,27 @@ export class RestrictedArea extends Card implements IActionCard, IProjectCard {
     return player.game.board.getAvailableSpacesOnLand(player).length > 0;
   }
   public play(player: Player) {
-    return new SelectSpace('Select space for tile', player.game.board.getAvailableSpacesOnLand(player), (foundSpace: ISpace) => {
-      player.game.addTile(player, foundSpace.spaceType, foundSpace, {tileType: TileType.RESTRICTED_AREA});
-      foundSpace.adjacency = this.adjacencyBonus;
-      return undefined;
-    });
+    return new SelectSpace(
+      'Select space for tile',
+      player.game.board.getAvailableSpacesOnLand(player),
+      (foundSpace: ISpace) => {
+        player.game.addTile(player, foundSpace.spaceType, foundSpace, {
+          tileType: TileType.RESTRICTED_AREA,
+        });
+        foundSpace.adjacency = this.adjacencyBonus;
+        return undefined;
+      }
+    );
   }
   public canAct(player: Player): boolean {
     return player.canAfford(2);
   }
   public action(player: Player) {
-    player.game.defer(new SelectHowToPayDeferred(player, 2, {title: 'Select how to pay for action'}));
+    player.game.defer(
+      new SelectHowToPayDeferred(player, 2, {
+        title: 'Select how to pay for action',
+      })
+    );
     player.drawCard();
     return undefined;
   }

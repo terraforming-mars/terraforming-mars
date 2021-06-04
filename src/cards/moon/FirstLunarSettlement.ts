@@ -15,10 +15,13 @@ export class FirstLunarSettlement extends PreludeCard implements IProjectCard {
       name: CardName.FIRST_LUNAR_SETTLEMENT,
       tags: [Tags.CITY, Tags.MOON],
       metadata: {
-        description: 'Place a colony tile on the Moon and Raise the Colony Rate 1 step. Increase your M€ production 1 step.',
+        description:
+          'Place a colony tile on the Moon and Raise the Colony Rate 1 step. Increase your M€ production 1 step.',
         cardNumber: '',
         renderData: CardRenderer.builder((b) => {
-          b.production((pb) => pb.megacredits(1)).moonColony().secondaryTag(AltSecondaryTag.MOON_COLONY_RATE);
+          b.production((pb) => pb.megacredits(1))
+            .moonColony()
+            .secondaryTag(AltSecondaryTag.MOON_COLONY_RATE);
         }),
       },
     });

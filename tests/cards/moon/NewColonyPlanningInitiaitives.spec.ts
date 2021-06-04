@@ -42,4 +42,3 @@ describe('NewColonyPlanningInitiaitives', () => {
     expect(moonData.colonyRate).eq(3);
   });
 });
-

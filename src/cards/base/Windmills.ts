@@ -25,7 +25,8 @@ export class Windmills extends Card implements IProjectCard {
         renderData: CardRenderer.builder((b) => {
           b.production((pb) => pb.energy(1));
         }),
-        description: 'Requires 7% oxygen. Increase your Energy production 1 step.',
+        description:
+          'Requires 7% oxygen. Increase your Energy production 1 step.',
         victoryPoints: 1,
       },
     });

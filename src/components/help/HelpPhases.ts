@@ -1,9 +1,9 @@
 import Vue from 'vue';
 
 export const HelpPhases = Vue.component('help-phases', {
-  components: {
-  },
+  components: {},
   methods: {
+    // keep
   },
   template: `
     <div class="help-phases-container">

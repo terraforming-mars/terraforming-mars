@@ -7,10 +7,12 @@ import {OrOptions} from '../../../src/inputs/OrOptions';
 import {Player} from '../../../src/Player';
 import {TestPlayers} from '../../TestPlayers';
 
-describe('BioPrintingFacility', function() {
-  let card : BioPrintingFacility; let player : Player; let player2 : Player;
+describe('BioPrintingFacility', function () {
+  let card: BioPrintingFacility;
+  let player: Player;
+  let player2: Player;
 
-  beforeEach(function() {
+  beforeEach(function () {
     card = new BioPrintingFacility();
     player = TestPlayers.BLUE.newPlayer();
     player2 = TestPlayers.RED.newPlayer();
@@ -18,23 +20,22 @@ describe('BioPrintingFacility', function() {
     player.playedCards.push(card);
   });
 
-  it('Should play', function() {
+  it('Should play', function () {
     const action = card.play();
     expect(action).is.undefined;
   });
 
-
-  it('Can\'t act', function() {
+  it("Can't act", function () {
     player.energy = 1;
     expect(card.canAct(player)).is.not.true;
   });
 
-  it('Can act', function() {
+  it('Can act', function () {
     player.energy = 3;
     expect(card.canAct(player));
   });
 
-  it('Should act - single target', function() {
+  it('Should act - single target', function () {
     const smallanimals = new SmallAnimals();
     player.playedCards.push(smallanimals);
 
@@ -49,7 +50,7 @@ describe('BioPrintingFacility', function() {
     expect(player.plants).to.eq(2);
   });
 
-  it('Should act - multiple targets', function() {
+  it('Should act - multiple targets', function () {
     const smallanimals = new SmallAnimals();
     const fish = new Fish();
     player.playedCards.push(smallanimals, fish);

@@ -25,7 +25,8 @@ export class PeroxidePower extends Card implements IProjectCard {
             pb.plus().energy(2);
           });
         }),
-        description: 'Decrease your M€ production 1 step and increase your Energy production 2 steps.',
+        description:
+          'Decrease your M€ production 1 step and increase your Energy production 2 steps.',
       },
     });
   }

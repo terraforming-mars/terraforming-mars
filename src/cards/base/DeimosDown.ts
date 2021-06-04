@@ -20,7 +20,8 @@ export class DeimosDown extends Card implements IProjectCard {
 
       metadata: {
         cardNumber: '039',
-        description: 'Raise temperature 3 steps and gain 4 steel. Remove up to 8 Plants from any player.',
+        description:
+          'Raise temperature 3 steps and gain 4 steel. Remove up to 8 Plants from any player.',
         renderData: CardRenderer.builder((b) => {
           b.temperature(3).br;
           b.steel(4).br;
@@ -31,11 +32,15 @@ export class DeimosDown extends Card implements IProjectCard {
   }
 
   public canPlay(player: Player): boolean {
-    const remainingTemperatureSteps = (MAX_TEMPERATURE - player.game.getTemperature()) / 2;
+    const remainingTemperatureSteps =
+      (MAX_TEMPERATURE - player.game.getTemperature()) / 2;
     const stepsRaised = Math.min(remainingTemperatureSteps, 3);
 
     if (PartyHooks.shouldApplyPolicy(player.game, PartyName.REDS)) {
-      return player.canAfford(player.getCardCost(this) + REDS_RULING_POLICY_COST * stepsRaised, {titanium: true});
+      return player.canAfford(
+        player.getCardCost(this) + REDS_RULING_POLICY_COST * stepsRaised,
+        {titanium: true}
+      );
     }
 
     return true;

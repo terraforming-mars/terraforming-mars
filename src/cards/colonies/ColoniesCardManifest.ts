@@ -77,9 +77,15 @@ export const COLONIES_CARD_MANIFEST = new CardManifest({
     {cardName: CardName.HEAVY_TAXATION, Factory: HeavyTaxation},
     {cardName: CardName.ICE_MOON_COLONY, Factory: IceMoonColony},
     {cardName: CardName.IMPACTOR_SWARM, Factory: ImpactorSwarm},
-    {cardName: CardName.INTERPLANETARY_COLONY_SHIP, Factory: InterplanetaryColonyShip},
+    {
+      cardName: CardName.INTERPLANETARY_COLONY_SHIP,
+      Factory: InterplanetaryColonyShip,
+    },
     {cardName: CardName.JOVIAN_LANTERNS, Factory: JovianLanterns},
-    {cardName: CardName.JUPITER_FLOATING_STATION, Factory: JupiterFloatingStation},
+    {
+      cardName: CardName.JUPITER_FLOATING_STATION,
+      Factory: JupiterFloatingStation,
+    },
     {cardName: CardName.LUNA_GOVERNOR, Factory: LunaGovernor},
     {cardName: CardName.LUNAR_EXPORTS, Factory: LunarExports},
     {cardName: CardName.LUNAR_MINING, Factory: LunarMining},
@@ -104,7 +110,10 @@ export const COLONIES_CARD_MANIFEST = new CardManifest({
     {cardName: CardName.SPINOFF_DEPARTMENT, Factory: SpinoffDepartment},
     {cardName: CardName.SUBZERO_SALT_FISH, Factory: SubZeroSaltFish},
     {cardName: CardName.TITAN_AIRSCRAPPING, Factory: TitanAirScrapping},
-    {cardName: CardName.TITAN_FLOATING_LAUNCHPAD, Factory: TitanFloatingLaunchPad},
+    {
+      cardName: CardName.TITAN_FLOATING_LAUNCHPAD,
+      Factory: TitanFloatingLaunchPad,
+    },
     {cardName: CardName.TITAN_SHUTTLES, Factory: TitanShuttles},
     {cardName: CardName.TRADING_COLONY, Factory: TradingColony},
     {cardName: CardName.TRADE_ENVOYS, Factory: TradeEnvoys},
@@ -112,12 +121,19 @@ export const COLONIES_CARD_MANIFEST = new CardManifest({
     {cardName: CardName.WARP_DRIVE, Factory: WarpDrive},
   ],
   standardProjects: [
-    {cardName: CardName.BUILD_COLONY_STANDARD_PROJECT, Factory: BuildColonyStandardProject},
+    {
+      cardName: CardName.BUILD_COLONY_STANDARD_PROJECT,
+      Factory: BuildColonyStandardProject,
+    },
   ],
   corporationCards: [
     {cardName: CardName.ARIDOR, Factory: Aridor},
     {cardName: CardName.ARKLIGHT, Factory: Arklight},
     {cardName: CardName.POLYPHEMOS, Factory: Polyphemos},
     {cardName: CardName.POSEIDON, Factory: Poseidon},
-    {cardName: CardName.STORMCRAFT_INCORPORATED, Factory: StormCraftIncorporated},
-  ]});
+    {
+      cardName: CardName.STORMCRAFT_INCORPORATED,
+      Factory: StormCraftIncorporated,
+    },
+  ],
+});

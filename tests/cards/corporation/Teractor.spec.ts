@@ -7,10 +7,11 @@ import {Game} from '../../../src/Game';
 import {Player} from '../../../src/Player';
 import {TestPlayers} from '../../TestPlayers';
 
-describe('Teractor', function() {
-  let card : Teractor; let player : Player;
+describe('Teractor', function () {
+  let card: Teractor;
+  let player: Player;
 
-  beforeEach(function() {
+  beforeEach(function () {
     card = new Teractor();
     player = TestPlayers.BLUE.newPlayer();
     const redPlayer = TestPlayers.RED.newPlayer();
@@ -20,13 +21,12 @@ describe('Teractor', function() {
     expect(action).is.undefined;
   });
 
-
-  it('Should play', function() {
+  it('Should play', function () {
     expect(card.getCardDiscount(player, new Cartel())).to.eq(3);
     expect(card.getCardDiscount(player, new Birds())).to.eq(0);
   });
 
-  it('Discounts Luna Governor correctly', function() {
+  it('Discounts Luna Governor correctly', function () {
     expect(card.getCardDiscount(player, new LunaGovernor())).to.eq(6);
   });
 });

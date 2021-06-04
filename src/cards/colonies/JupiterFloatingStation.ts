@@ -14,7 +14,10 @@ import {Card} from '../Card';
 import {CardRenderer} from '../render/CardRenderer';
 import {Size} from '../render/Size';
 
-export class JupiterFloatingStation extends Card implements IProjectCard, IResourceCard {
+export class JupiterFloatingStation
+  extends Card
+  implements IProjectCard, IResourceCard
+{
   constructor() {
     super({
       cost: 9,
@@ -54,15 +57,22 @@ export class JupiterFloatingStation extends Card implements IProjectCard, IResou
   public action(player: Player) {
     return new OrOptions(
       new SelectOption('Add 1 floater to a Jovian card', 'Add floater', () => {
-        player.game.defer(new AddResourcesToCard(player, ResourceType.FLOATER, {
-          restrictedTag: Tags.JOVIAN, title: 'Add 1 floater to a Jovian card',
-        }));
+        player.game.defer(
+          new AddResourcesToCard(player, ResourceType.FLOATER, {
+            restrictedTag: Tags.JOVIAN,
+            title: 'Add 1 floater to a Jovian card',
+          })
+        );
         return undefined;
       }),
       new SelectOption('Gain 1 M€ per floater here (max 4) ', 'Gain M€', () => {
-        player.addResource(Resources.MEGACREDITS, Math.min(this.resourceCount, 4), {log: true});
+        player.addResource(
+          Resources.MEGACREDITS,
+          Math.min(this.resourceCount, 4),
+          {log: true}
+        );
         return undefined;
-      }),
+      })
     );
   }
 

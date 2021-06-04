@@ -41,77 +41,90 @@ import {SerializedGlobalEventDealer} from './SerializedGlobalEventDealer';
 import {ISerializable} from '../../ISerializable';
 import {LeadershipSummit} from './LeadershipSummit';
 
-const COLONY_ONLY_POSITIVE_GLOBAL_EVENTS = new Map<GlobalEventName, new() => IGlobalEvent>([
-  [GlobalEventName.JOVIAN_TAX_RIGHTS, JovianTaxRights],
-]);
+const COLONY_ONLY_POSITIVE_GLOBAL_EVENTS = new Map<
+  GlobalEventName,
+  new () => IGlobalEvent
+>([[GlobalEventName.JOVIAN_TAX_RIGHTS, JovianTaxRights]]);
 
-const COLONY_ONLY_NEGATIVE_GLOBAL_EVENTS = new Map<GlobalEventName, new() => IGlobalEvent>([
-  [GlobalEventName.MICROGRAVITY_HEALTH_PROBLEMS, MicrogravityHealthProblems],
-]);
+const COLONY_ONLY_NEGATIVE_GLOBAL_EVENTS = new Map<
+  GlobalEventName,
+  new () => IGlobalEvent
+>([[GlobalEventName.MICROGRAVITY_HEALTH_PROBLEMS, MicrogravityHealthProblems]]);
 
-const VENUS_COLONY_POSITIVE_GLOBAL_EVENTS = new Map<GlobalEventName, new() => IGlobalEvent>([
-  [GlobalEventName.CLOUD_SOCIETIES, CloudSocieties],
-]);
+const VENUS_COLONY_POSITIVE_GLOBAL_EVENTS = new Map<
+  GlobalEventName,
+  new () => IGlobalEvent
+>([[GlobalEventName.CLOUD_SOCIETIES, CloudSocieties]]);
 
-const VENUS_COLONY_NEGATIVE_GLOBAL_EVENTS = new Map<GlobalEventName, new() => IGlobalEvent>([
-  [GlobalEventName.CORROSIVE_RAIN, CorrosiveRain],
-]);
+const VENUS_COLONY_NEGATIVE_GLOBAL_EVENTS = new Map<
+  GlobalEventName,
+  new () => IGlobalEvent
+>([[GlobalEventName.CORROSIVE_RAIN, CorrosiveRain]]);
 
-const VENUS_POSITIVE_GLOBAL_EVENTS = new Map<GlobalEventName, new() => IGlobalEvent>([
-  [GlobalEventName.VENUS_INFRASTRUCTURE, VenusInfrastructure],
-]);
+const VENUS_POSITIVE_GLOBAL_EVENTS = new Map<
+  GlobalEventName,
+  new () => IGlobalEvent
+>([[GlobalEventName.VENUS_INFRASTRUCTURE, VenusInfrastructure]]);
 
 // ALL POSITIVE GLOBAL EVENTS
-const POSITIVE_GLOBAL_EVENTS = new Map<GlobalEventName, new() => IGlobalEvent>([
-  [GlobalEventName.SPONSORED_PROJECTS, SponsoredProjects],
-  [GlobalEventName.ASTEROID_MINING, AsteroidMining],
-  [GlobalEventName.GENEROUS_FUNDING, GenerousFunding],
-  [GlobalEventName.SUCCESSFUL_ORGANISMS, SuccessfulOrganisms],
-  [GlobalEventName.PRODUCTIVITY, Productivity],
-  [GlobalEventName.HOMEWORLD_SUPPORT, HomeworldSupport],
-  [GlobalEventName.VOLCANIC_ERUPTIONS, VolcanicEruptions],
-  [GlobalEventName.DIVERSITY, Diversity],
-  [GlobalEventName.IMPROVED_ENERGY_TEMPLATES, ImprovedEnergyTemplates],
-  [GlobalEventName.INTERPLANETARY_TRADE, InterplanetaryTrade],
-  [GlobalEventName.CELEBRITY_LEADERS, CelebrityLeaders],
-  [GlobalEventName.SPINOFF_PRODUCTS, SpinoffProducts],
-  [GlobalEventName.ELECTION, Election],
-  [GlobalEventName.AQUIFER_RELEASED_BY_PUBLIC_COUNCIL, AquiferReleasedByPublicCouncil],
-  [GlobalEventName.SCIENTIFIC_COMMUNITY, ScientificCommunity],
-  [GlobalEventName.STRONG_SOCIETY, StrongSociety],
-]);
+const POSITIVE_GLOBAL_EVENTS = new Map<GlobalEventName, new () => IGlobalEvent>(
+  [
+    [GlobalEventName.SPONSORED_PROJECTS, SponsoredProjects],
+    [GlobalEventName.ASTEROID_MINING, AsteroidMining],
+    [GlobalEventName.GENEROUS_FUNDING, GenerousFunding],
+    [GlobalEventName.SUCCESSFUL_ORGANISMS, SuccessfulOrganisms],
+    [GlobalEventName.PRODUCTIVITY, Productivity],
+    [GlobalEventName.HOMEWORLD_SUPPORT, HomeworldSupport],
+    [GlobalEventName.VOLCANIC_ERUPTIONS, VolcanicEruptions],
+    [GlobalEventName.DIVERSITY, Diversity],
+    [GlobalEventName.IMPROVED_ENERGY_TEMPLATES, ImprovedEnergyTemplates],
+    [GlobalEventName.INTERPLANETARY_TRADE, InterplanetaryTrade],
+    [GlobalEventName.CELEBRITY_LEADERS, CelebrityLeaders],
+    [GlobalEventName.SPINOFF_PRODUCTS, SpinoffProducts],
+    [GlobalEventName.ELECTION, Election],
+    [
+      GlobalEventName.AQUIFER_RELEASED_BY_PUBLIC_COUNCIL,
+      AquiferReleasedByPublicCouncil,
+    ],
+    [GlobalEventName.SCIENTIFIC_COMMUNITY, ScientificCommunity],
+    [GlobalEventName.STRONG_SOCIETY, StrongSociety],
+  ]
+);
 
 // ALL NEGATIVE GLOBAL EVENTS
-const NEGATIVE_GLOBAL_EVENTS = new Map<GlobalEventName, new() => IGlobalEvent>([
-  [GlobalEventName.GLOBAL_DUST_STORM, GlobalDustStorm],
-  [GlobalEventName.ECO_SABOTAGE, EcoSabotage],
-  [GlobalEventName.MINERS_ON_STRIKE, MinersOnStrike],
-  [GlobalEventName.MUD_SLIDES, MudSlides],
-  [GlobalEventName.REVOLUTION, Revolution],
-  [GlobalEventName.RIOTS, Riots],
-  [GlobalEventName.SABOTAGE, Sabotage],
-  [GlobalEventName.SNOW_COVER, SnowCover],
-  [GlobalEventName.PANDEMIC, Pandemic],
-  [GlobalEventName.WAR_ON_EARTH, WarOnEarth],
-  [GlobalEventName.PARADIGM_BREAKDOWN, ParadigmBreakdown],
-  [GlobalEventName.DRY_DESERTS, DryDeserts],
-  [GlobalEventName.RED_INFLUENCE, RedInfluence],
-  [GlobalEventName.SOLARNET_SHUTDOWN, SolarnetShutdown],
-  [GlobalEventName.SOLAR_FLARE, SolarFlare],
-]);
+const NEGATIVE_GLOBAL_EVENTS = new Map<GlobalEventName, new () => IGlobalEvent>(
+  [
+    [GlobalEventName.GLOBAL_DUST_STORM, GlobalDustStorm],
+    [GlobalEventName.ECO_SABOTAGE, EcoSabotage],
+    [GlobalEventName.MINERS_ON_STRIKE, MinersOnStrike],
+    [GlobalEventName.MUD_SLIDES, MudSlides],
+    [GlobalEventName.REVOLUTION, Revolution],
+    [GlobalEventName.RIOTS, Riots],
+    [GlobalEventName.SABOTAGE, Sabotage],
+    [GlobalEventName.SNOW_COVER, SnowCover],
+    [GlobalEventName.PANDEMIC, Pandemic],
+    [GlobalEventName.WAR_ON_EARTH, WarOnEarth],
+    [GlobalEventName.PARADIGM_BREAKDOWN, ParadigmBreakdown],
+    [GlobalEventName.DRY_DESERTS, DryDeserts],
+    [GlobalEventName.RED_INFLUENCE, RedInfluence],
+    [GlobalEventName.SOLARNET_SHUTDOWN, SolarnetShutdown],
+    [GlobalEventName.SOLAR_FLARE, SolarFlare],
+  ]
+);
 
-const COMMUNITY_GLOBAL_EVENTS = new Map<GlobalEventName, new() => IGlobalEvent>([
-  [GlobalEventName.LEADERSHIP_SUMMIT, LeadershipSummit],
-]);
+const COMMUNITY_GLOBAL_EVENTS = new Map<
+  GlobalEventName,
+  new () => IGlobalEvent
+>([[GlobalEventName.LEADERSHIP_SUMMIT, LeadershipSummit]]);
 
 // When renaming, add the rename here and add a TODO (like the example below)
 // And remember to add a test in GlobalEventDealer.spec.ts
-const RENAMED_GLOBAL_EVENTS = new Map<GlobalEventName, new() => IGlobalEvent>([
+const RENAMED_GLOBAL_EVENTS = new Map<GlobalEventName, new () => IGlobalEvent>([
   // TODO(bafolts): remove after 2021-05-08
   ['Miners Of Strike' as GlobalEventName, MinersOnStrike],
 ]);
 
-const ALL_EVENTS = new Map<GlobalEventName, new() => IGlobalEvent>([
+const ALL_EVENTS = new Map<GlobalEventName, new () => IGlobalEvent>([
   ...Array.from(POSITIVE_GLOBAL_EVENTS),
   ...Array.from(NEGATIVE_GLOBAL_EVENTS),
   ...Array.from(COLONY_ONLY_POSITIVE_GLOBAL_EVENTS),
@@ -124,43 +137,58 @@ const ALL_EVENTS = new Map<GlobalEventName, new() => IGlobalEvent>([
 ]);
 
 // Function to return a global event object by its name
-export function getGlobalEventByName(globalEventName: GlobalEventName): IGlobalEvent | undefined {
+export function getGlobalEventByName(
+  globalEventName: GlobalEventName
+): IGlobalEvent | undefined {
   const Factory = ALL_EVENTS.get(globalEventName);
 
   if (Factory !== undefined) return new Factory();
   return undefined;
 }
 
-export class GlobalEventDealer implements ISerializable<SerializedGlobalEventDealer> {
+export class GlobalEventDealer
+  implements ISerializable<SerializedGlobalEventDealer>
+{
   constructor(
     public readonly globalEventsDeck: Array<IGlobalEvent>,
-    public readonly discardedGlobalEvents: Array<IGlobalEvent>) {}
+    public readonly discardedGlobalEvents: Array<IGlobalEvent>
+  ) {}
 
   public static newInstance(game: Game): GlobalEventDealer {
     const events = Array.from(POSITIVE_GLOBAL_EVENTS);
 
     if (!game.gameOptions.removeNegativeGlobalEventsOption) {
       events.push(...Array.from(NEGATIVE_GLOBAL_EVENTS));
-      if (game.gameOptions.coloniesExtension) events.push(...Array.from(COLONY_ONLY_NEGATIVE_GLOBAL_EVENTS));
+      if (game.gameOptions.coloniesExtension)
+        events.push(...Array.from(COLONY_ONLY_NEGATIVE_GLOBAL_EVENTS));
 
-      if (game.gameOptions.venusNextExtension && game.gameOptions.coloniesExtension) {
+      if (
+        game.gameOptions.venusNextExtension &&
+        game.gameOptions.coloniesExtension
+      ) {
         events.push(...Array.from(VENUS_COLONY_NEGATIVE_GLOBAL_EVENTS));
-      };
+      }
     }
 
-    if (game.gameOptions.venusNextExtension) events.push(...Array.from(VENUS_POSITIVE_GLOBAL_EVENTS));
+    if (game.gameOptions.venusNextExtension)
+      events.push(...Array.from(VENUS_POSITIVE_GLOBAL_EVENTS));
 
-    if (game.gameOptions.coloniesExtension) events.push(...Array.from(COLONY_ONLY_POSITIVE_GLOBAL_EVENTS));
+    if (game.gameOptions.coloniesExtension)
+      events.push(...Array.from(COLONY_ONLY_POSITIVE_GLOBAL_EVENTS));
 
-    if (game.gameOptions.venusNextExtension && game.gameOptions.coloniesExtension) {
+    if (
+      game.gameOptions.venusNextExtension &&
+      game.gameOptions.coloniesExtension
+    ) {
       events.push(...Array.from(VENUS_COLONY_POSITIVE_GLOBAL_EVENTS));
     }
 
-    if (game.gameOptions.communityCardsOption) events.push(...Array.from(COMMUNITY_GLOBAL_EVENTS));
+    if (game.gameOptions.communityCardsOption)
+      events.push(...Array.from(COMMUNITY_GLOBAL_EVENTS));
 
-    const globalEventsDeck = this.shuffle(events.map((cf) => new cf[1]));
+    const globalEventsDeck = this.shuffle(events.map((cf) => new cf[1]()));
     return new GlobalEventDealer(globalEventsDeck, []);
-  };
+  }
 
   private static shuffle(cards: Array<IGlobalEvent>): Array<IGlobalEvent> {
     const deck: Array<IGlobalEvent> = [];

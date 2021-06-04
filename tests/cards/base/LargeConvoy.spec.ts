@@ -8,26 +8,30 @@ import {TestPlayer} from '../../TestPlayer';
 import {TestingUtils} from '../../TestingUtils';
 import {TestPlayers} from '../../TestPlayers';
 
-describe('LargeConvoy', function() {
-  let card : LargeConvoy; let player : TestPlayer;
+describe('LargeConvoy', function () {
+  let card: LargeConvoy;
+  let player: TestPlayer;
 
-  beforeEach(function() {
+  beforeEach(function () {
     card = new LargeConvoy();
     player = TestPlayers.BLUE.newPlayer();
     const redPlayer = TestPlayers.RED.newPlayer();
     Game.newInstance('foobar', [player, redPlayer], player);
   });
 
-  it('Should play without animal cards', function() {
+  it('Should play without animal cards', function () {
     card.play(player);
 
-    player.victoryPointsBreakdown.setVictoryPoints('victoryPoints', card.getVictoryPoints());
+    player.victoryPointsBreakdown.setVictoryPoints(
+      'victoryPoints',
+      card.getVictoryPoints()
+    );
     expect(player.victoryPointsBreakdown.victoryPoints).to.eq(2);
     expect(player.cardsInHand).has.lengthOf(2);
     expect(player.plants).to.eq(5);
   });
 
-  it('Should play with single animal target', function() {
+  it('Should play with single animal target', function () {
     const pets = new Pets();
     player.playedCards.push(pets);
 
@@ -42,7 +46,7 @@ describe('LargeConvoy', function() {
     expect(player.plants).to.eq(0);
   });
 
-  it('Should play with multiple animal targets', function() {
+  it('Should play with multiple animal targets', function () {
     const pets = new Pets();
     const fish = new Fish();
     player.playedCards.push(pets, fish);
@@ -50,7 +54,10 @@ describe('LargeConvoy', function() {
     const action = card.play(player);
     expect(action).is.not.undefined;
 
-    player.victoryPointsBreakdown.setVictoryPoints('victoryPoints', card.getVictoryPoints());
+    player.victoryPointsBreakdown.setVictoryPoints(
+      'victoryPoints',
+      card.getVictoryPoints()
+    );
     expect(player.victoryPointsBreakdown.victoryPoints).to.eq(2);
     expect(player.cardsInHand).has.lengthOf(2);
     expect(player.plants).to.eq(0);
@@ -59,7 +66,7 @@ describe('LargeConvoy', function() {
     expect(player.getResourcesOnCard(pets)).to.eq(4);
   });
 
-  it('Should play without oceans', function() {
+  it('Should play without oceans', function () {
     const pets = new Pets();
     player.playedCards.push(pets);
     TestingUtils.maxOutOceans(player);
@@ -69,7 +76,10 @@ describe('LargeConvoy', function() {
     const action = card.play(player);
     expect(action).is.not.undefined;
 
-    player.victoryPointsBreakdown.setVictoryPoints('victoryPoints', card.getVictoryPoints());
+    player.victoryPointsBreakdown.setVictoryPoints(
+      'victoryPoints',
+      card.getVictoryPoints()
+    );
     expect(player.victoryPointsBreakdown.victoryPoints).to.eq(2);
     expect(player.cardsInHand).has.lengthOf(cardsInHand + 2);
 

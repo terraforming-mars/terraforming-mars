@@ -5,14 +5,19 @@ import {PartyName} from '../../../src/turmoil/parties/PartyName';
 import {TestingUtils} from '../../TestingUtils';
 import {TestPlayers} from '../../TestPlayers';
 
-describe('SeptumTribus', function() {
-  it('Should play', function() {
+describe('SeptumTribus', function () {
+  it('Should play', function () {
     const card = new SeptumTribus();
     const player = TestPlayers.BLUE.newPlayer();
     const player2 = TestPlayers.RED.newPlayer();
 
     const gameOptions = TestingUtils.setCustomGameOptions();
-    const game = Game.newInstance('foobar', [player, player2], player, gameOptions);
+    const game = Game.newInstance(
+      'foobar',
+      [player, player2],
+      player,
+      gameOptions
+    );
     card.play();
 
     player.corporationCard = card;
@@ -35,11 +40,13 @@ describe('SeptumTribus', function() {
     }
   });
 
-  it('Cannot act without Turmoil expansion', function() {
+  it('Cannot act without Turmoil expansion', function () {
     const card = new SeptumTribus();
     const player = TestPlayers.BLUE.newPlayer();
 
-    const gameOptions = TestingUtils.setCustomGameOptions({turmoilExtension: false});
+    const gameOptions = TestingUtils.setCustomGameOptions({
+      turmoilExtension: false,
+    });
     Game.newInstance('foobar', [player], player, gameOptions);
     card.play();
 

@@ -24,7 +24,7 @@ export class Supplier extends PreludeCard {
 
   public play(player: Player) {
     player.addProduction(Resources.ENERGY, 2);
-    player.steel +=4;
+    player.steel += 4;
     return undefined;
   }
 }

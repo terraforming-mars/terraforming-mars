@@ -21,11 +21,10 @@ export const DynamicTitle = Vue.component('dynamic-title', {
     },
   },
   methods: {
-    getClasses: function(): string {
-      return [
-        playerColorClass(this.color, 'shadow'),
-        'dynamic-title',
-      ].join(' ');
+    getClasses: function (): string {
+      return [playerColorClass(this.color, 'shadow'), 'dynamic-title'].join(
+        ' '
+      );
     },
   },
 

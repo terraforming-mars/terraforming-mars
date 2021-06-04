@@ -1,4 +1,3 @@
-
 import {IProjectCard} from '../IProjectCard';
 import {Tags} from '../Tags';
 import {Card} from '../Card';
@@ -24,7 +23,8 @@ export class CupolaCity extends Card implements IProjectCard {
       requirements: CardRequirements.builder((b) => b.oxygen(9).max()),
       metadata: {
         cardNumber: '029',
-        description: 'Oxygen must be 9% or less. Place a City tile. Decrease your Energy production 1 step and increase your M€ production 3 steps.',
+        description:
+          'Oxygen must be 9% or less. Place a City tile. Decrease your Energy production 1 step and increase your M€ production 3 steps.',
         renderData: CardRenderer.builder((b) => {
           b.production((pb) => {
             pb.minus().energy(1).br;
@@ -35,9 +35,11 @@ export class CupolaCity extends Card implements IProjectCard {
     });
   }
   public canPlay(player: Player): boolean {
-    return super.canPlay(player) &&
-        player.getProduction(Resources.ENERGY) >= 1 &&
-        player.game.board.getAvailableSpacesForCity(player).length > 0;
+    return (
+      super.canPlay(player) &&
+      player.getProduction(Resources.ENERGY) >= 1 &&
+      player.game.board.getAvailableSpacesForCity(player).length > 0
+    );
   }
   public play(player: Player) {
     return new SelectSpace(
@@ -48,7 +50,7 @@ export class CupolaCity extends Card implements IProjectCard {
         player.addProduction(Resources.ENERGY, -1);
         player.addProduction(Resources.MEGACREDITS, 3);
         return undefined;
-      },
+      }
     );
   }
 }

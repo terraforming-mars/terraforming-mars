@@ -8,8 +8,8 @@ import {AndOptions} from '../../../src/inputs/AndOptions';
 import {SelectCard} from '../../../src/inputs/SelectCard';
 import {TestPlayers} from '../../TestPlayers';
 
-describe('TerralabsResearch', function() {
-  it('Should play', function() {
+describe('TerralabsResearch', function () {
+  it('Should play', function () {
     const card = new TerralabsResearch();
     const card2 = new PowerPlant();
     const card3 = new BusinessNetwork();
@@ -29,7 +29,9 @@ describe('TerralabsResearch', function() {
     const action = card3.action(player);
     expect(action).is.not.undefined;
     expect(action instanceof SelectCard).is.true;
-    (action as SelectCard<IProjectCard>).cb([(action as SelectCard<IProjectCard>).cards[0]]);
+    (action as SelectCard<IProjectCard>).cb([
+      (action as SelectCard<IProjectCard>).cards[0],
+    ]);
     game.deferredActions.runNext();
     expect(player.megaCredits).to.eq(11);
     expect(player.cardsInHand).has.lengthOf(3);

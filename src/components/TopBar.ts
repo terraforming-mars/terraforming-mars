@@ -12,7 +12,7 @@ export const TopBar = Vue.component('top-bar', {
   components: {
     PlayerInfo,
   },
-  data: function() {
+  data: function () {
     return {
       componentKey: 0,
     };
@@ -30,7 +30,7 @@ export const TopBar = Vue.component('top-bar', {
     },
     formatCssClass(): string {
       const cssClasses = ['top-bar'];
-      if ( ! this.isExpanded()) {
+      if (!this.isExpanded()) {
         cssClasses.push('top-bar-collapsed');
       }
       return cssClasses.join(' ');

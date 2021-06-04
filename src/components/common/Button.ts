@@ -46,7 +46,7 @@ export const Button = Vue.component('Button', {
     },
   },
   methods: {
-    getOuterClass: function(): string {
+    getOuterClass: function (): string {
       const classes: Array<string> = ['btn'];
 
       // size
@@ -86,25 +86,24 @@ export const Button = Vue.component('Button', {
 
       return classes.join(' ');
     },
-    getDisabled: function(): boolean {
+    getDisabled: function (): boolean {
       if (this.disableOnServerBusy) {
         return (
-          this.disabled ||
-                    (this.$root as any).isServerSideRequestInProgress
+          this.disabled || (this.$root as any).isServerSideRequestInProgress
         );
       }
       return this.disabled;
     },
-    getInnerClass: function(): string {
+    getInnerClass: function (): string {
       switch (this.type) {
-      case 'close':
-        return 'icon icon-cross';
-      case 'back':
-        return 'icon icon-back';
-      case 'plus':
-        return 'icon icon-plus';
-      case 'minus':
-        return 'icon icon-minus';
+        case 'close':
+          return 'icon icon-cross';
+        case 'back':
+          return 'icon icon-back';
+        case 'plus':
+          return 'icon icon-plus';
+        case 'minus':
+          return 'icon icon-minus';
       }
       return '';
     },

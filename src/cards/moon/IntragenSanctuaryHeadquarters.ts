@@ -11,7 +11,10 @@ import {PlaceMoonColonyTile} from '../../moon/PlaceMoonColonyTile';
 import {CardRenderDynamicVictoryPoints} from '../render/CardRenderDynamicVictoryPoints';
 import {Card} from '../Card';
 
-export class IntragenSanctuaryHeadquarters extends Card implements CorporationCard {
+export class IntragenSanctuaryHeadquarters
+  extends Card
+  implements CorporationCard
+{
   constructor() {
     super({
       cardType: CardType.CORPORATION,
@@ -22,15 +25,19 @@ export class IntragenSanctuaryHeadquarters extends Card implements CorporationCa
       initialActionText: 'Place a colony tile on the Moon.',
 
       metadata: {
-        description: 'You start with 38 M€. ' +
-        'As your first action, place a colony tile on the Moon and raise the Colony Rate 1 step.',
+        description:
+          'You start with 38 M€. ' +
+          'As your first action, place a colony tile on the Moon and raise the Colony Rate 1 step.',
         cardNumber: '',
         renderData: CardRenderer.builder((b) => {
           b.megacredits(38).br;
-          b.effect('When any player plays an animal tag (including this), add 1 animal on this card.', (eb) => {
-            eb.animals(1).played.startEffect.animals(1);
-          }).br,
-          b.text('1 VP for every 2 animals on this card.').br;
+          b.effect(
+            'When any player plays an animal tag (including this), add 1 animal on this card.',
+            (eb) => {
+              eb.animals(1).played.startEffect.animals(1);
+            }
+          ).br,
+            b.text('1 VP for every 2 animals on this card.').br;
         }),
         victoryPoints: CardRenderDynamicVictoryPoints.animals(1, 2),
       },
@@ -48,7 +55,7 @@ export class IntragenSanctuaryHeadquarters extends Card implements CorporationCa
     // Gains the initial resource from its own tag.
     this.resourceCount = 1;
     return undefined;
-  };
+  }
 
   public onCorpCardPlayed(player: Player, card: CorporationCard) {
     return this.onCardPlayed(player, card as ICard as IProjectCard);

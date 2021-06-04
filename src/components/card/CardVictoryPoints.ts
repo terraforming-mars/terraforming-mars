@@ -12,10 +12,10 @@ export const CardVictoryPoints = Vue.component('CardPoints', {
     CardRenderItemComponent,
   },
   methods: {
-    getClasses: function(): string {
+    getClasses: function (): string {
       const classes: string[] = ['card-points'];
       if (this.isObject()) {
-        const item = <CardRenderDynamicVictoryPoints> this.victoryPoints;
+        const item = <CardRenderDynamicVictoryPoints>this.victoryPoints;
         if (item.anyPlayer) {
           classes.push('card-points-big');
           classes.push('red-outline');
@@ -27,7 +27,7 @@ export const CardVictoryPoints = Vue.component('CardPoints', {
       }
       return classes.join(' ');
     },
-    isObject: function(): boolean {
+    isObject: function (): boolean {
       return this.victoryPoints instanceof CardRenderDynamicVictoryPoints;
     },
   },

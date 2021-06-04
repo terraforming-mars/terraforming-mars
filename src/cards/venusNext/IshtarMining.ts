@@ -18,8 +18,11 @@ export class IshtarMining extends Card {
       requirements: CardRequirements.builder((b) => b.venus(8)),
       metadata: {
         cardNumber: '233',
-        renderData: CardRenderer.builder((b) => b.production((pb) => pb.titanium(1))),
-        description: 'Requires Venus 8%. Increase your titanium production 1 step.',
+        renderData: CardRenderer.builder((b) =>
+          b.production((pb) => pb.titanium(1))
+        ),
+        description:
+          'Requires Venus 8%. Increase your titanium production 1 step.',
       },
     });
   }

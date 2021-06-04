@@ -51,4 +51,3 @@ describe('MiningComplex', () => {
     expect(player.getTerraformRating()).eq(16);
   });
 });
-

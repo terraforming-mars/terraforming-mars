@@ -6,22 +6,24 @@ import {SelectCard} from '../../../src/inputs/SelectCard';
 import {Player} from '../../../src/Player';
 import {TestPlayers} from '../../TestPlayers';
 
-describe('InventorsGuild', function() {
-  let card : InventorsGuild; let player : Player; let game : Game;
+describe('InventorsGuild', function () {
+  let card: InventorsGuild;
+  let player: Player;
+  let game: Game;
 
-  beforeEach(function() {
+  beforeEach(function () {
     card = new InventorsGuild();
     player = TestPlayers.BLUE.newPlayer();
     const redPlayer = TestPlayers.RED.newPlayer();
     game = Game.newInstance('foobar', [player, redPlayer], player);
   });
 
-  it('Should play', function() {
+  it('Should play', function () {
     const action = card.play(player);
     expect(action).is.undefined;
   });
 
-  it('Should act', function() {
+  it('Should act', function () {
     player.megaCredits = 3;
     const action = card.action(player);
     expect(action instanceof SelectCard).is.true;
@@ -31,13 +33,15 @@ describe('InventorsGuild', function() {
     expect(player.megaCredits).to.eq(3);
     player.megaCredits = 3;
 
-    (action as SelectCard<IProjectCard>).cb([(action as SelectCard<IProjectCard>).cards[0]]);
+    (action as SelectCard<IProjectCard>).cb([
+      (action as SelectCard<IProjectCard>).cards[0],
+    ]);
     game.deferredActions.runNext();
     expect(player.megaCredits).to.eq(0);
     expect(player.cardsInHand).has.lengthOf(1);
   });
 
-  it('Cannot buy card if cannot pay', function() {
+  it('Cannot buy card if cannot pay', function () {
     player.megaCredits = 2;
     const selectCard = card.action(player) as SelectCard<IProjectCard>;
     expect(selectCard.maxCardsToSelect).to.eq(0);

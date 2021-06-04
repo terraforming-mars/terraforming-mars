@@ -38,12 +38,10 @@ describe('HE3Refinery', () => {
     card.action(player);
     expect(player.megaCredits).eq(1);
 
-
     player.megaCredits = 0;
     moonData.miningRate = 3;
     card.action(player);
     expect(player.megaCredits).eq(3);
-
 
     player.megaCredits = 0;
     moonData.miningRate = 4;
@@ -51,4 +49,3 @@ describe('HE3Refinery', () => {
     expect(player.megaCredits).eq(4);
   });
 });
-

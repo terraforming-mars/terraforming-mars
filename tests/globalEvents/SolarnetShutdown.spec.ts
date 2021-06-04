@@ -8,8 +8,8 @@ import {Kelvinists} from '../../src/turmoil/parties/Kelvinists';
 import {Turmoil} from '../../src/turmoil/Turmoil';
 import {TestPlayers} from '../TestPlayers';
 
-describe('SolarnetShutdown', function() {
-  it('resolve play', function() {
+describe('SolarnetShutdown', function () {
+  it('resolve play', function () {
     const card = new SolarnetShutdown();
     const player = TestPlayers.BLUE.newPlayer();
     const player2 = TestPlayers.RED.newPlayer();
@@ -18,7 +18,11 @@ describe('SolarnetShutdown', function() {
 
     player.playedCards.push(new InventorsGuild());
     player.playedCards.push(new ColonizerTrainingCamp());
-    player2.playedCards.push(new InventorsGuild(), new InventorsGuild(), new InventorsGuild());
+    player2.playedCards.push(
+      new InventorsGuild(),
+      new InventorsGuild(),
+      new InventorsGuild()
+    );
     player.megaCredits = 10;
     player2.megaCredits = 10;
 

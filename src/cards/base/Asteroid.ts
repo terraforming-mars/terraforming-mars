@@ -19,7 +19,8 @@ export class Asteroid extends Card implements IProjectCard {
       cost: 14,
 
       metadata: {
-        description: 'Raise temperature 1 step and gain 2 titanium. Remove up to 3 Plants from any player.',
+        description:
+          'Raise temperature 1 step and gain 2 titanium. Remove up to 3 Plants from any player.',
         cardNumber: '009',
         renderData: CardRenderer.builder((b) => {
           b.temperature(1).br;
@@ -32,8 +33,14 @@ export class Asteroid extends Card implements IProjectCard {
 
   public canPlay(player: Player): boolean {
     const temperatureMaxed = player.game.getTemperature() === MAX_TEMPERATURE;
-    if (PartyHooks.shouldApplyPolicy(player.game, PartyName.REDS) && !temperatureMaxed) {
-      return player.canAfford(player.getCardCost(this) + REDS_RULING_POLICY_COST, {titanium: true});
+    if (
+      PartyHooks.shouldApplyPolicy(player.game, PartyName.REDS) &&
+      !temperatureMaxed
+    ) {
+      return player.canAfford(
+        player.getCardCost(this) + REDS_RULING_POLICY_COST,
+        {titanium: true}
+      );
     }
 
     return true;

@@ -7,21 +7,22 @@ import {Game} from '../../../src/Game';
 import {Player} from '../../../src/Player';
 import {TestPlayers} from '../../TestPlayers';
 
-describe('DiversitySupport', function() {
-  let card : DiversitySupport; let player : Player;
+describe('DiversitySupport', function () {
+  let card: DiversitySupport;
+  let player: Player;
 
-  beforeEach(function() {
+  beforeEach(function () {
     card = new DiversitySupport();
     player = TestPlayers.BLUE.newPlayer();
     const redPlayer = TestPlayers.RED.newPlayer();
     Game.newInstance('foobar', [player, redPlayer], player);
   });
 
-  it('Can\'t play', function() {
+  it("Can't play", function () {
     expect(card.canPlay(player)).is.not.true;
   });
 
-  it('Can play', function() {
+  it('Can play', function () {
     // 3 non-standard resources
     const ants = new Ants();
     const fish = new Fish();

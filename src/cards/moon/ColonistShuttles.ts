@@ -12,30 +12,38 @@ import {Resources} from '../../Resources';
 
 export class ColonistShuttles extends MoonCard {
   constructor() {
-    super({
-      name: CardName.COLONIST_SHUTTLES,
-      cardType: CardType.AUTOMATED,
-      tags: [Tags.SPACE],
-      cost: 12,
+    super(
+      {
+        name: CardName.COLONIST_SHUTTLES,
+        cardType: CardType.AUTOMATED,
+        tags: [Tags.SPACE],
+        cost: 12,
 
-      metadata: {
-        description: 'Spend 1 titanium. Raise the Colony Rate 1 step. Gain 2M€ for each colony tile on the Moon.',
-        cardNumber: 'M16',
-        renderData: CardRenderer.builder((b) => {
-          b.minus().titanium(1).moonColonyRate().br;
-          b.megacredits(2).slash().moonColony({size: Size.SMALL}).any;
-        }),
+        metadata: {
+          description:
+            'Spend 1 titanium. Raise the Colony Rate 1 step. Gain 2M€ for each colony tile on the Moon.',
+          cardNumber: 'M16',
+          renderData: CardRenderer.builder((b) => {
+            b.minus().titanium(1).moonColonyRate().br;
+            b.megacredits(2).slash().moonColony({size: Size.SMALL}).any;
+          }),
+        },
       },
-    }, {
-      reserveUnits: Units.of({titanium: 1}),
-      tilesBuilt: [TileType.MOON_COLONY],
-    });
-  };
+      {
+        reserveUnits: Units.of({titanium: 1}),
+        tilesBuilt: [TileType.MOON_COLONY],
+      }
+    );
+  }
 
   public play(player: Player) {
     super.play(player);
     MoonExpansion.raiseColonyRate(player);
-    const surfaceColonies = MoonExpansion.tiles(player.game, TileType.MOON_COLONY, {surfaceOnly: true}).length;
+    const surfaceColonies = MoonExpansion.tiles(
+      player.game,
+      TileType.MOON_COLONY,
+      {surfaceOnly: true}
+    ).length;
     player.addResource(Resources.MEGACREDITS, surfaceColonies * 2, {log: true});
 
     return undefined;

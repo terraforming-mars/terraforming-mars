@@ -7,17 +7,18 @@ import {Player} from '../../../src/Player';
 import {Resources} from '../../../src/Resources';
 import {TestPlayers} from '../../TestPlayers';
 
-describe('PointLuna', function() {
-  let card : PointLuna; let player : Player;
+describe('PointLuna', function () {
+  let card: PointLuna;
+  let player: Player;
 
-  beforeEach(function() {
+  beforeEach(function () {
     card = new PointLuna();
     player = TestPlayers.BLUE.newPlayer();
     Game.newInstance('foobar', [player], player);
     player.corporationCard = card;
   });
 
-  it('Gets card when earth tag played', function() {
+  it('Gets card when earth tag played', function () {
     card.onCardPlayed(player, new Ants());
     expect(player.cardsInHand).has.lengthOf(0);
 
@@ -25,7 +26,7 @@ describe('PointLuna', function() {
     expect(player.cardsInHand).has.lengthOf(1);
   });
 
-  it('Should play', function() {
+  it('Should play', function () {
     card.play(player);
     expect(player.getProduction(Resources.TITANIUM)).to.eq(1);
     expect(player.cardsInHand).has.lengthOf(1);

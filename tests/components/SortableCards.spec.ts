@@ -1,37 +1,27 @@
-
 import {createLocalVue, mount} from '@vue/test-utils';
 
 import {expect} from 'chai';
 import {CardName} from '../../src/CardName';
 import {SortableCards} from '../../src/components/SortableCards';
+import {FakeLocalStorage} from './FakeLocalStorage';
 
-describe('SortableCards', function() {
+describe('SortableCards', () => {
+  let localStorage: FakeLocalStorage;
+
+  beforeEach(() => {
+    localStorage = new FakeLocalStorage();
+    FakeLocalStorage.register(localStorage);
+  });
+  afterEach(() => {
+    FakeLocalStorage.deregister(localStorage);
+  });
+
   function getLocalVue() {
     const localVue = createLocalVue();
     localVue.directive('i18n', {});
     return localVue;
   }
-  let expectedStorage: {[x: string]: string} = {};
-  before(function() {
-    (global as any).localStorage = {
-      getItem: function(key: string) {
-        if (expectedStorage[key] === undefined) {
-          return null;
-        }
-        return expectedStorage[key];
-      },
-      setItem: function(key: string, value: string) {
-        expectedStorage[key] = value;
-      },
-    };
-  });
-  after(function() {
-    (global as any).localStorage = undefined;
-  });
-  beforeEach(function() {
-    expectedStorage = {};
-  });
-  it('allows sorting after initial loading with no local storage', async function() {
+  it('allows sorting after initial loading with no local storage', async () => {
     const sortable = mount(SortableCards, {
       localVue: getLocalVue(),
       propsData: {
@@ -60,18 +50,19 @@ describe('SortableCards', function() {
     });
     expect(cards.at(0).props().card.name).to.eq(CardName.CARTEL);
     expect(cards.at(1).props().card.name).to.eq(CardName.ANTS);
-    expect(expectedStorage['cardOrderfoo']).not.to.be.undefined;
-    expect(JSON.parse(expectedStorage['cardOrderfoo'])).to.deep.eq({
+    const order = localStorage.getItem('cardOrderfoo');
+    expect(order).not.to.be.undefined;
+    expect(JSON.parse(order!)).to.deep.eq({
       [CardName.ANTS]: 2,
       [CardName.CARTEL]: 1,
     });
   });
-  it('puts new cards at end of order and removes old', async function() {
-    expectedStorage['cardOrderfoo'] = JSON.stringify({
+  it('puts new cards at end of order and removes old', async () => {
+    localStorage.setItem('cardOrderfoo', JSON.stringify({
       [CardName.ANTS]: 2,
       [CardName.CARTEL]: 1,
       [CardName.DECOMPOSERS]: 3,
-    });
+    }));
     const sortable = mount(SortableCards, {
       localVue: getLocalVue(),
       propsData: {
@@ -104,8 +95,9 @@ describe('SortableCards', function() {
     expect(cards.at(0).props().card.name).to.eq(CardName.ANTS);
     expect(cards.at(1).props().card.name).to.eq(CardName.CARTEL);
     expect(cards.at(2).props().card.name).to.eq(CardName.BIRDS);
-    expect(expectedStorage['cardOrderfoo']).not.to.be.undefined;
-    expect(JSON.parse(expectedStorage['cardOrderfoo'])).to.deep.eq({
+    const order = localStorage.getItem('cardOrderfoo');
+    expect(order).not.to.be.undefined;
+    expect(JSON.parse(order!)).to.deep.eq({
       [CardName.ANTS]: 1,
       [CardName.CARTEL]: 2,
       [CardName.BIRDS]: 3,

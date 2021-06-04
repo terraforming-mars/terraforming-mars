@@ -34,9 +34,11 @@
     "@types/mocha": "^5.2.6",
     "@vue/test-utils": "^1.1.1",
     "chai": "^4.2.0",
+    "eslint-config-prettier": "^8.3.0",
     "jsdom": "^16.4.0",
     "mocha": "^8.3.2",
-    "nyc": "^14.1.1"
+    "nyc": "^14.1.1",
+    "prettier": "^2.3.0"
   },
   "nyc": {
     "extends": "@istanbuljs/nyc-config-typescript"

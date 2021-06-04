@@ -3,19 +3,13 @@ module.exports = {
     'browser': true,
     'es6': true,
   },
-  'extends': [
-    'google',
-    'plugin:vue/essential'
-  ],
+  'extends': ['google', 'plugin:vue/essential', 'prettier'],
   'parserOptions': {
     'ecmaVersion': 2018,
     'parser': '@typescript-eslint/parser',
     'sourceType': 'module',
   },
-  'plugins': [
-    'vue',
-    '@typescript-eslint',
-  ],
+  'plugins': ['vue', '@typescript-eslint'],
   'rules': {
     'camelcase': 'off',
     'eqeqeq': ['error', 'always'],
@@ -25,6 +19,6 @@ module.exports = {
     'no-var': 'error',
     'prefer-const': 'error',
     'indent': ['error', 2],
-    'require-jsdoc': 'off'
+    'require-jsdoc': 'off',
   },
 };

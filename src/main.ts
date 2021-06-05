@@ -1,4 +1,3 @@
-
 import Vue from 'vue';
 
 import {translateTextNode} from './directives/i18n';

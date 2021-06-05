@@ -1,0 +1,33 @@
+<template>
+  <div class="language-switcher">
+            <div
+                v-for="lang in languages"
+                :class="'language-icon language-icon--'+lang.id"
+                :title="lang.title"
+                v-on:click="switchLanguageTo(lang.id, true)"></div>
+        </div>
+</template>
+
+<script lang="ts">
+import Vue from 'vue';
+import {LANGUAGES} from '../constants';
+import {PreferencesManager} from './PreferencesManager';
+
+export default Vue.extend({
+  name: 'LanguageSwitcher',
+  data: function() {
+    return {
+      'languages': LANGUAGES,
+    };
+  },
+  methods: {
+    switchLanguageTo: function(langId: string, reloadThePage: boolean = false) {
+      PreferencesManager.save('lang', langId);
+      if (reloadThePage) window.location = window.location;
+    },
+  },
+});
+</script>
+
+<style lang="less" scoped>
+</style>

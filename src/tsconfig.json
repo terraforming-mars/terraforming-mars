@@ -6,6 +6,6 @@
     "extends": "../tsconfig.json",
     "include": [
         "**/*.ts",
-        "genfiles/*.json",
+        "genfiles/*.json", "components/vue-shims.d.ts",
     ]
 }

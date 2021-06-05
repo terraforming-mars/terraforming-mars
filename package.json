@@ -63,7 +63,7 @@
     "pretest": "npm run prebuild && tsc --build tests/tsconfig.json",
     "watch": "webpack --watch --mode=development",
     "webpack": "webpack --no-stats",
-    "check-templates": "vtc --workspace . --srcDir ./src/components/card --onlyTemplate"
+    "check-templates": "vtc --workspace . --srcDir ./src/components/ --onlyTemplate"
   },
   "repository": {
     "type": "git",

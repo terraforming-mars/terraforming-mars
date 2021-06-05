@@ -56,7 +56,7 @@
     "start": "node build/src/server.js",
     "test": "mocha --file build/tests/utils/Vue.js --recursive build/tests",
     "pretest": "npm run prebuild && tsc --build tests/tsconfig.json",
-    "watch": "webpack --devtool --watch --mode=development",
+    "watch": "webpack --watch --mode=development",
     "webpack": "webpack --no-stats"
   },
   "repository": {

@@ -3,7 +3,7 @@ import {createLocalVue, mount} from '@vue/test-utils';
 import {expect} from 'chai';
 import {CardName} from '../../src/CardName';
 import {CardType} from '../../src/cards/CardType';
-import {SelectHowToPayForProjectCard} from '../../src/components/SelectHowToPayForProjectCard';
+import SelectHowToPayForProjectCard from '../../src/components/SelectHowToPayForProjectCard.vue';
 import {PlayerInputModel} from '../../src/models/PlayerInputModel';
 import {PlayerModel} from '../../src/models/PlayerModel';
 import {Units} from '../../src/Units';
@@ -77,6 +77,7 @@ describe('SelectHowToPayForProjectCard', () => {
     const vm = wrapper.vm;
     await vm.$nextTick();
 
+    // @ts-ignore
     expect(vm.heat).eq(3);
     const heatTextBox = wrapper.find('[title~=Heat] ~ input').element as HTMLInputElement;
     expect(heatTextBox.value).eq('3');
@@ -92,6 +93,7 @@ describe('SelectHowToPayForProjectCard', () => {
     const vm = wrapper.vm;
     await vm.$nextTick();
 
+    // @ts-ignore
     expect(vm.microbes).eq(2);
     const microbesTextBox = wrapper.find('[title~=Microbes] ~ input').element as HTMLInputElement;
     expect(microbesTextBox.value).eq('2');
@@ -107,6 +109,7 @@ describe('SelectHowToPayForProjectCard', () => {
     const vm = wrapper.vm;
     await vm.$nextTick();
 
+    // @ts-ignore
     expect(vm.floaters).eq(2);
     const floatersTextBox = wrapper.find('[title~=Floaters] ~ input').element as HTMLInputElement;
     expect(floatersTextBox.value).eq('2');
@@ -123,6 +126,7 @@ describe('SelectHowToPayForProjectCard', () => {
     const vm = wrapper.vm;
     await vm.$nextTick();
 
+    // @ts-ignore
     expect(vm.steel).eq(2);
     const steelTextBox = wrapper.find('[title~=Steel] ~ input').element as HTMLInputElement;
     expect(steelTextBox.value).eq('2');
@@ -144,7 +148,9 @@ describe('SelectHowToPayForProjectCard', () => {
     const vm = wrapper.vm;
     await vm.$nextTick();
 
+    // @ts-ignore
     expect(vm.megaCredits).eq(0);
+    // @ts-ignore
     expect(vm.titanium).eq(2);
     const titaniumTextBox = wrapper.find('[title~=Titanium] ~ input').element as HTMLInputElement;
     expect(titaniumTextBox.value).eq('2');
@@ -166,8 +172,11 @@ describe('SelectHowToPayForProjectCard', () => {
     const vm = wrapper.vm;
     await vm.$nextTick();
 
+    // @ts-ignore
     expect(vm.megaCredits).eq(0);
+    // @ts-ignore
     expect(vm.steel).eq(3);
+    // @ts-ignore
     expect(vm.titanium).eq(3);
     const steelTextBox = wrapper.find('[title~=Steel] ~ input').element as HTMLInputElement;
     expect(steelTextBox.value).eq('3');
@@ -191,8 +200,11 @@ describe('SelectHowToPayForProjectCard', () => {
     const vm = wrapper.vm;
     await vm.$nextTick();
 
+    // @ts-ignore
     expect(vm.megaCredits).eq(0);
+    // @ts-ignore
     expect(vm.steel).eq(4);
+    // @ts-ignore
     expect(vm.microbes).eq(4);
     const steelTextBox = wrapper.find('[title~=Steel] ~ input').element as HTMLInputElement;
     expect(steelTextBox.value).eq('4');
@@ -215,8 +227,11 @@ describe('SelectHowToPayForProjectCard', () => {
     const vm = wrapper.vm;
     await vm.$nextTick();
 
+    // @ts-ignore
     expect(vm.megaCredits).eq(1);
+    // @ts-ignore
     expect(vm.microbes).eq(5);
+    // @ts-ignore
     expect(vm.floaters).eq(1);
     const microbesTextBox = wrapper.find('[title~=Microbes] ~ input').element as HTMLInputElement;
     expect(microbesTextBox.value).eq('5');
@@ -239,8 +254,11 @@ describe('SelectHowToPayForProjectCard', () => {
     const vm = wrapper.vm;
     await vm.$nextTick();
 
+    // @ts-ignore
     expect(vm.megaCredits).eq(0);
+    // @ts-ignore
     expect(vm.floaters).eq(7);
+    // @ts-ignore
     expect(vm.titanium).eq(1);
     const floatersTextBox = wrapper.find('[title~=Floaters] ~ input').element as HTMLInputElement;
     expect(floatersTextBox.value).eq('7');
@@ -268,12 +286,16 @@ describe('SelectHowToPayForProjectCard', () => {
     const vm = wrapper.vm;
     await vm.$nextTick();
 
+    // @ts-ignore
     expect(vm.megaCredits).eq(20);
+    // @ts-ignore
     expect(vm.steel).eq(0);
     const maxButton = wrapper.find('[title~=Steel] ~ .btn-max');
     await maxButton.trigger('click');
 
+    // @ts-ignore
     expect(vm.megaCredits).eq(16);
+    // @ts-ignore
     expect(vm.steel).eq(2);
   });
 
@@ -295,8 +317,11 @@ describe('SelectHowToPayForProjectCard', () => {
     const vm = wrapper.vm;
     await vm.$nextTick();
 
+    // @ts-ignore
     expect(vm.megaCredits).eq(6);
+    // @ts-ignore
     expect(vm.titanium).eq(7);
+    // @ts-ignore
     expect(vm.steel).eq(0);
     const titaniumTextBox = wrapper.find('[title~=Titanium] ~ input').element as HTMLInputElement;
     expect(titaniumTextBox.value).eq('7');

@@ -59,7 +59,7 @@
     "makeCss": "lessc src/styles/common.less build/styles.css",
     "makeJson": "node make_static_json.js",
     "start": "node build/src/server.js",
-    "test": "mocha --file build/tests/utils/Vue.js --recursive build/tests",
+    "test": "rm -rf build/tests/components/ && mocha --file build/tests/utils/Vue.js --recursive build/tests",
     "pretest": "npm run prebuild && tsc --build tests/tsconfig.json",
     "watch": "webpack --watch --mode=development",
     "webpack": "webpack --no-stats",

@@ -2,6 +2,9 @@
   "name": "terraforming-mars",
   "version": "1.0.0",
   "description": "Terraforming Mars Game",
+  "engines": {
+    "node": "14.x"
+  },
   "private": true,
   "dependencies": {
     "@types/node": "^10.17.47",

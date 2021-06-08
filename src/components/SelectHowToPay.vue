@@ -104,14 +104,13 @@ export default Vue.extend({
   },
   mixins: [PaymentWidgetMixin, TranslateMixin],
   mounted: function() {
-    const app = this;
-    Vue.nextTick(function() {
-      app.setInitialCost();
-      app.$data.megaCredits = (app as any).getMegaCreditsMax();
+    Vue.nextTick(() => {
+      this.setInitialCost();
+      this.$data.megaCredits = (this as any).getMegaCreditsMax();
 
-      app.setDefaultSteelValue();
-      app.setDefaultTitaniumValue();
-      app.setDefaultHeatValue();
+      this.setDefaultSteelValue();
+      this.setDefaultTitaniumValue();
+      this.setDefaultHeatValue();
     });
   },
   methods: {

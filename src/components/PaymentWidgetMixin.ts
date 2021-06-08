@@ -9,14 +9,6 @@ export const PaymentWidgetMixin = {
     getMegaCreditsMax: function(): number {
       return Math.min((this as any).player.megaCredits, (this as any).$data.cost);
     },
-    getCssClassFor: function(action: string, target: string): string {
-      const currentValue: number = (this as any)[target];
-      const maxValue: number = (this as any).player[target];
-      const disablingLimit = (action === '<') ? 0 : maxValue;
-
-      if (currentValue === disablingLimit) return 'is-disabled';
-      return 'is-primary';
-    },
     getResourceRate: function(resourceName: string): number {
       let rate = 1; // one resource == one money
       if (resourceName === 'titanium') {

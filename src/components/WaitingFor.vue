@@ -129,15 +129,13 @@ export default Vue.extend({
     },
   },
   render: function(createElement) {
-    console.log('render function in WaitingFor is fired!');
-
     document.title = $t(constants.APP_NAME);
     window.clearInterval(documentTitleTimer);
     if (this.waitingfor === undefined) {
       this.waitForUpdate();
       return createElement('div', $t('Not your turn to take any actions'));
     }
-    console.log('1');
+
     if (this.player.players.length > 1 && this.player.waitingFor !== undefined) {
       documentTitleTimer = window.setInterval(() => this.animateTitle(), 1000);
     }

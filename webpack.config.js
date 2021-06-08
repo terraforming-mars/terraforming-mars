@@ -1,7 +1,8 @@
 const {VueLoaderPlugin} = require('vue-loader');
+const CompressionPlugin = require('compression-webpack-plugin');
+const zlib = require('zlib');
 
 module.exports = {
-  mode: 'production',
   entry: './src/main.ts',
   resolve: {
     extensions: ['.ts', '.tsx', '.js', '.vue'],
@@ -22,25 +23,24 @@ module.exports = {
       },
       {
         test: /.css$/,
-        use: [
-          'vue-style-loader',
-          'css-loader',
-        ],
+        use: ['vue-style-loader', 'css-loader'],
       },
       {
         test: /\.less$/,
-        use: [
-          'vue-style-loader',
-          'css-loader',
-          'less-loader',
-        ],
+        use: ['vue-style-loader', 'css-loader', 'less-loader'],
       },
     ],
   },
+  plugins: [
+    new CompressionPlugin(),
+    new CompressionPlugin({
+      algorithm: 'brotliCompress',
+      filename: '[path][base].br',
+      compressionOptions: {params: {[zlib.constants.BROTLI_PARAM_QUALITY]: zlib.constants.BROTLI_MAX_QUALITY}},
+    }),
+  ],
   output: {
     path: __dirname + '/build',
   },
-  plugins: [
-    new VueLoaderPlugin(),
-  ],
+  plugins: [new VueLoaderPlugin()],
 };

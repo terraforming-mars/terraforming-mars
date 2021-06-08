@@ -32,6 +32,7 @@ module.exports = {
     ],
   },
   plugins: [
+    new VueLoaderPlugin(),
     new CompressionPlugin(),
     new CompressionPlugin({
       algorithm: 'brotliCompress',
@@ -42,5 +43,4 @@ module.exports = {
   output: {
     path: __dirname + '/build',
   },
-  plugins: [new VueLoaderPlugin()],
 };

@@ -88,14 +88,13 @@ export const SelectHowToPayForProjectCard = Vue.component('select-how-to-pay-for
   },
   mixins: [PaymentWidgetMixin, TranslateMixin],
   mounted: function() {
-    const app = this;
-    Vue.nextTick(function() {
-      app.$data.card = app.getCard();
-      app.$data.cost = app.$data.card.calculatedCost;
-      app.$data.tags = app.getCardTags(),
-      app.$data.megaCredits = (app as unknown as typeof PaymentWidgetMixin.methods).getMegaCreditsMax();
+    Vue.nextTick(() => {
+      this.$data.card = this.getCard();
+      this.$data.cost = this.$data.card.calculatedCost;
+      this.$data.tags = this.getCardTags(),
+      this.$data.megaCredits = (this as unknown as typeof PaymentWidgetMixin.methods).getMegaCreditsMax();
 
-      app.setDefaultValues();
+      this.setDefaultValues();
     });
   },
   methods: {

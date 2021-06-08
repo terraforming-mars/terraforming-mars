@@ -1,4 +1,5 @@
 import {expect} from 'chai';
+import {IndenturedWorkers} from '../../../src/cards/base/IndenturedWorkers';
 import {ICard} from '../../../src/cards/ICard';
 import {DeuteriumExport} from '../../../src/cards/venusNext/DeuteriumExport';
 import {Dirigibles} from '../../../src/cards/venusNext/Dirigibles';
@@ -124,5 +125,18 @@ describe('StratosphericBirds', () => {
         expect(player.getResourcesOnCard(dirigibles)).to.eq(0);
         expect(player.getResourcesOnCard(deuteriumExport)).to.eq(0);
         expect(player.megaCredits).to.eq(0);
+  });
+
+  it('Can play with discounts and single Dirigibles floater', () => {
+    const dirigibles = new Dirigibles();
+    player.playedCards.push(dirigibles);
+    player.addResourceTo(dirigibles, 1);
+    player.megaCredits = 4;
+    (game as any).venusScaleLevel = 12;
+
+    const indentured = new IndenturedWorkers();
+    player.playCard(indentured);
+    card.play(player);
+    expect(card.canPlay(player)).is.true;
   });
 });

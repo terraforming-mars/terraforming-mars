@@ -1067,13 +1067,28 @@ export class Game implements ISerializable<SerializedGame> {
 
     const players: Player[] = [];
 
+    // Mark players as done if they cannot convert plant, with an exception of Philares
     this.players.forEach((player) => {
+      if (player.isCorporation(CardName.PHILARES)) return;
+
       if (this.canPlaceGreenery(player)) {
         players.push(player);
       } else {
         this.donePlayers.add(player.id);
       }
     });
+
+    // Special case for Philares
+    const philares = this.players.find((player) => player.isCorporation(CardName.PHILARES));
+    if (philares !== undefined) {
+      // Mark philares as done IF AND ONLY IF it does not have enough plants and everyone else is done
+      if (this.canPlaceGreenery(philares) === false && this.donePlayers.size >= this.players.length - 1) {
+        this.donePlayers.add(philares.id);
+      // Allow the possibility of Philares going first in final greenery placement only if Philares already have enough plants
+      } else if (this.canPlaceGreenery(philares)) {
+        players.push(philares);
+      }
+    }
 
     // If no players can place greeneries we are done
     if (players.length === 0) {

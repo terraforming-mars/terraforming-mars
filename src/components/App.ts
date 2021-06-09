@@ -4,12 +4,12 @@ import GameHome from './GameHome.vue';
 import GamesOverview from './GamesOverview.vue';
 import PlayerHome from './PlayerHome.vue';
 import SpectatorHome from './SpectatorHome.vue';
-import PlayerModel from '../models/PlayerModel.vue';
 import StartScreen from './StartScreen.vue';
 import LoadGameForm from './LoadGameForm.vue';
 import DebugUI from './DebugUI.vue';
 import Help from './help/Help.vue';
 
+import {PlayerModel} from '../models/PlayerModel';
 import {SimpleGameModel} from '../models/SimpleGameModel';
 import {$t} from '../directives/i18n';
 
@@ -120,7 +120,6 @@ export const mainAppSettings = {
           app.player = xhr.response as PlayerModel;
           app.playerkey++;
           if (
-            // @ts-ignore
             app.player.game.phase === 'end' &&
                         window.location.search.includes('&noredirect') === false
           ) {
@@ -129,7 +128,6 @@ export const mainAppSettings = {
               window.history.replaceState(
                 xhr.response,
                 `${constants.APP_NAME} - Player`,
-                // @ts-ignore
                 '/the-end?id=' + app.player.id,
               );
             }
@@ -139,7 +137,6 @@ export const mainAppSettings = {
               window.history.replaceState(
                 xhr.response,
                 `${constants.APP_NAME} - Game`,
-                // @ts-ignore
                 '/player?id=' + app.player.id,
               );
             }

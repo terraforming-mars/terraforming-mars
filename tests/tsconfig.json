@@ -10,7 +10,7 @@
         },
     ],
     "include": [
-        "utils/Vue.ts",
+        "utils/setup.ts",
         "**/*.spec.ts"
     ]
 }

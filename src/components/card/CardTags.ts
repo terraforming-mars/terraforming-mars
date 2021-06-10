@@ -1,12 +1,12 @@
 import Vue from 'vue';
-import {CardTag} from './CardTag';
+const CardTag = require('./CardTag.vue');
 
 export const CardTags = Vue.component('CardTags', {
   props: {
     tags: Array,
   },
   components: {
-    CardTag,
+    CardTag: CardTag.default,
   },
   template: `
         <div class="card-tags">

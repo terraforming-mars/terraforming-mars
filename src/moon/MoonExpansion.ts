@@ -317,7 +317,7 @@ export class MoonExpansion {
 
     steel = Math.max(steel, 0);
     titanium = Math.max(titanium, 0);
-    return Units.of({steel, titanium});
+    return Units.of({steel: steel, titanium: titanium});
   }
 
   public static calculateVictoryPoints(player: Player, vpb: VictoryPointsBreakdown): void {

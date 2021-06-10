@@ -18,6 +18,7 @@ export class LunarIndustryComplex extends MoonCard implements IProjectCard {
       tags: [Tags.ENERGY, Tags.BUILDING],
       cost: 28,
       productionBox: Units.of({steel: 1, titanium: 1, energy: 2, heat: 1}),
+      reserveUnits: Units.of({titanium: 2}),
 
       metadata: {
         description: 'Spend 2 Titanium. Place a mine tile on the Moon and raise the Mining Rate 1 step. ' +
@@ -29,7 +30,6 @@ export class LunarIndustryComplex extends MoonCard implements IProjectCard {
         }),
       },
     }, {
-      reserveUnits: Units.of({titanium: 2}),
       tilesBuilt: [TileType.MOON_MINE],
     });
   };

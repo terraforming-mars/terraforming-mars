@@ -17,6 +17,7 @@ export class GeodesicTents extends MoonCard {
       tags: [Tags.PLANT, Tags.CITY, Tags.MOON],
       cost: 13,
       productionBox: Units.of({energy: -1, plants: 1}),
+      reserveUnits: Units.of({titanium: 1}),
 
       metadata: {
         description: 'Decrease your energy production 1 step and increase your plant production 1 step. ' +
@@ -31,7 +32,6 @@ export class GeodesicTents extends MoonCard {
         }),
       },
     }, {
-      reserveUnits: Units.of({titanium: 1}),
       tilesBuilt: [TileType.MOON_COLONY],
     });
   }

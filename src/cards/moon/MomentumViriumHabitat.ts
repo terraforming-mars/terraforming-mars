@@ -18,6 +18,7 @@ export class MomentumViriumHabitat extends MoonCard {
       tags: [Tags.CITY, Tags.SPACE],
       cost: 23,
       productionBox: Units.of({heat: 2, megacredits: 3}),
+      reserveUnits: Units.of({titanium: 1}),
 
       metadata: {
         description: 'Spend 1 titanium. Increase your heat production 2 steps and your M€ production 3 steps. ' +
@@ -32,7 +33,6 @@ export class MomentumViriumHabitat extends MoonCard {
         }),
       },
     }, {
-      reserveUnits: Units.of({titanium: 1}),
       tilesBuilt: [TileType.MOON_COLONY],
     });
   };

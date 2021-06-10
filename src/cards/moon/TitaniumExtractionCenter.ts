@@ -16,6 +16,7 @@ export class TitaniumExtractionCenter extends MoonCard {
       tags: [Tags.BUILDING],
       cost: 14,
       productionBox: Units.of({}),
+      reserveUnits: Units.of({titanium: 2}),
 
       metadata: {
         description: 'Spend 2 titanium. Increase your titanium production 1 step for every 2 raised steps of Mining Rate.',
@@ -25,8 +26,6 @@ export class TitaniumExtractionCenter extends MoonCard {
           b.production((pb) => pb.titanium(1)).slash().moonMiningRate({amount: 2});
         }),
       },
-    }, {
-      reserveUnits: Units.of({titanium: 2}),
     });
   }
 

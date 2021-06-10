@@ -14,6 +14,8 @@ export class MoonRoadStandardProject extends StandardProjectCard implements IMoo
     super({
       name: CardName.MOON_ROAD_STANDARD_PROJECT,
       cost: 18,
+      reserveUnits: Units.of({steel: 1}),
+
       metadata: {
         cardNumber: '',
         renderData: CardRenderer.builder((b) =>
@@ -25,7 +27,6 @@ export class MoonRoadStandardProject extends StandardProjectCard implements IMoo
     });
   }
 
-  public reserveUnits = Units.of({steel: 1});
   public tilesBuilt = [TileType.MOON_ROAD];
 
   protected discount(player: Player): number {

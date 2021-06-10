@@ -20,6 +20,7 @@ export class LunaTradeStation extends MoonCard implements IActionCard {
       tags: [Tags.MOON, Tags.MOON, Tags.SPACE],
       cost: 10,
       productionBox: Units.of({}),
+      reserveUnits: Units.of({titanium: 2}),
 
       metadata: {
         description: 'Spend 2 titanium. Place this tile ON THE RESERVED AREA.',
@@ -30,8 +31,6 @@ export class LunaTradeStation extends MoonCard implements IActionCard {
           b.br.minus().titanium(2).tile(TileType.LUNA_TRADE_STATION, true).asterix();
         }),
       },
-    }, {
-      reserveUnits: Units.of({titanium: 2}),
     });
   };
 

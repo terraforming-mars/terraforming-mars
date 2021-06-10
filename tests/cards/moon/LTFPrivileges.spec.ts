@@ -5,7 +5,7 @@ import {TestPlayers} from '../../TestPlayers';
 import {LTFPrivileges} from '../../../src/cards/moon/LTFPrivileges';
 import {expect} from 'chai';
 import {CardName} from '../../../src/CardName';
-import {MareSerenitatisMine} from '../../../src/cards/moon/MareSerenitatisMine';
+import {AristarchusRoadNetwork} from '../../../src/cards/moon/AristarchusRoadNetwork';
 
 const MOON_OPTIONS = TestingUtils.setCustomGameOptions({moonExpansion: true});
 
@@ -26,11 +26,9 @@ describe('LTFPrivileges', () => {
     player.steel = 2;
     player.megaCredits = 1000;
 
-    const msm = new MareSerenitatisMine();
-    // TODO(kberg): Find an example that needs 2 steel. For now, hack this card to need 2 steel.
-    msm.reserveUnits.steel = 2;
-    player.cardsInHand = [msm];
-    expect(player.getPlayableCards().map((card) => card.name)).deep.eq([CardName.MARE_SERENITATIS_MINE]);
+    const arn = new AristarchusRoadNetwork();
+    player.cardsInHand = [arn];
+    expect(player.getPlayableCards().map((card) => card.name)).deep.eq([CardName.ARISTARCHUS_ROAD_NETWORK]);
 
     player.titanium = 0;
     player.steel = 0;
@@ -38,7 +36,7 @@ describe('LTFPrivileges', () => {
 
     // And this one shows that with Improved Moon Concrete, doesn't need steel.
     player.playedCards = [card];
-    expect(player.getPlayableCards().map((card) => card.name)).deep.eq([CardName.MARE_SERENITATIS_MINE]);
+    expect(player.getPlayableCards().map((card) => card.name)).deep.eq([CardName.ARISTARCHUS_ROAD_NETWORK]);
   });
 });
 

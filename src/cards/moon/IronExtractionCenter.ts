@@ -16,6 +16,7 @@ export class IronExtractionCenter extends MoonCard {
       tags: [Tags.BUILDING],
       cost: 10,
       productionBox: Units.of({}),
+      reserveUnits: Units.of({titanium: 1}),
 
       metadata: {
         description: 'Spend 1 titanium. Increase your steel production 1 step for every 2 raised steps of mining rate.',
@@ -25,8 +26,6 @@ export class IronExtractionCenter extends MoonCard {
           b.production((pb) => pb.steel(1)).slash().moonMiningRate({amount: 2});
         }),
       },
-    }, {
-      reserveUnits: Units.of({titanium: 1}),
     });
   }
 

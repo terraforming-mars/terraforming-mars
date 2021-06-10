@@ -14,6 +14,7 @@ export class HeliostatMirrorArray extends MoonCard {
       cardType: CardType.AUTOMATED,
       name: CardName.HELIOSTAT_MIRROR_ARRAY,
       productionBox: Units.of({energy: 2}),
+      reserveUnits: Units.of({titanium: 1}),
 
       metadata: {
         description: 'Spend 1 titanium. Gain 1 heat. Increase your energy production 2 steps.',
@@ -24,8 +25,6 @@ export class HeliostatMirrorArray extends MoonCard {
           b.production((pb) => pb.energy(2));
         }),
       },
-    }, {
-      reserveUnits: Units.of({titanium: 1}),
     });
   };
 

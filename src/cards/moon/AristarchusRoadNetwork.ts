@@ -17,6 +17,7 @@ export class AristarchusRoadNetwork extends MoonCard {
       tags: [Tags.MOON],
       cost: 15,
       productionBox: Units.of({megacredits: 2}),
+      reserveUnits: Units.of({steel: 2}),
 
       metadata: {
         description: 'Spend 2 steel. Increase your M€ production 2 steps. ' +
@@ -28,7 +29,6 @@ export class AristarchusRoadNetwork extends MoonCard {
         }),
       },
     }, {
-      reserveUnits: Units.of({steel: 2}),
       tilesBuilt: [TileType.MOON_ROAD],
     });
   };

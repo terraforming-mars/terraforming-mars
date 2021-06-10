@@ -10,6 +10,7 @@ import {ICard} from '../ICard';
 import {CardName} from '../../CardName';
 import {Resources} from '../../Resources';
 import {CardRenderer} from '../render/CardRenderer';
+import {Units} from '../../Units';
 
 export class LocalHeatTrapping extends Card implements IProjectCard {
   constructor() {
@@ -17,6 +18,7 @@ export class LocalHeatTrapping extends Card implements IProjectCard {
       cardType: CardType.EVENT,
       name: CardName.LOCAL_HEAT_TRAPPING,
       cost: 1,
+      reserveUnits: Units.of({heat: 5}),
 
       metadata: {
         cardNumber: '190',
@@ -28,16 +30,6 @@ export class LocalHeatTrapping extends Card implements IProjectCard {
         description: 'Spend 5 heat to gain either 4 Plants, or to add 2 Animals to ANOTHER card.',
       },
     });
-  }
-  public canPlay(player: Player): boolean {
-    const requiredHeatAmt = 5;
-
-    // Helion must be able to pay for both the card and its effect
-    if (player.canUseHeatAsMegaCredits) {
-      return (player.heat >= requiredHeatAmt) && (player.heat + player.megaCredits >= requiredHeatAmt + player.getCardCost(this));
-    }
-
-    return player.availableHeat >= requiredHeatAmt;
   }
   public play(player: Player) {
     const animalCards: Array<ICard> = player.getResourceCards(ResourceType.ANIMAL);

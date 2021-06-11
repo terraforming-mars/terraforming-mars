@@ -9,6 +9,7 @@ import {IResourceCard} from '../ICard';
 import {CardRequirements} from '../CardRequirements';
 import {CardRenderer} from '../render/CardRenderer';
 import {CardRenderDynamicVictoryPoints} from '../render/CardRenderDynamicVictoryPoints';
+import {Phase} from '../../Phase';
 
 export class Decomposers extends Card implements IProjectCard, IResourceCard {
   constructor() {
@@ -43,7 +44,11 @@ export class Decomposers extends Card implements IProjectCard, IResourceCard {
     public getVictoryPoints(): number {
       return Math.floor(this.resourceCount / 3);
     }
-    public play() {
+    public play(player: Player) {
+      // Get two extra microbes from EcoExperts if played during prelude while having just played EcoExperts
+      if (player.game.phase === Phase.PRELUDES && player.playedCards.length > 0 && player.playedCards[player.playedCards.length-1].name === CardName.ECOLOGY_EXPERTS) {
+        player.addResourceTo(this, 2);
+      }
       return undefined;
     }
 }

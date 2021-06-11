@@ -1,7 +1,9 @@
 import {expect} from 'chai';
 import {EcologicalZone} from '../../../src/cards/base/EcologicalZone';
+import {EcologyExperts} from '../../../src/cards/prelude/EcologyExperts';
 import {Game} from '../../../src/Game';
 import {SelectSpace} from '../../../src/inputs/SelectSpace';
+import {Phase} from '../../../src/Phase';
 import {Player} from '../../../src/Player';
 import {TileType} from '../../../src/TileType';
 import {TestPlayers} from '../../TestPlayers';
@@ -36,6 +38,20 @@ describe('EcologicalZone', function() {
     expect(card.resourceCount).to.eq(2);
     expect(card.getVictoryPoints()).to.eq(1);
     expect(adjacentSpace.adjacency?.bonus).eq(undefined);
+  });
+
+  it('Should get triggered by EcoExperts if played together', function() {
+    game.phase = Phase.PRELUDES;
+
+    const landSpace = game.board.getAvailableSpacesOnLand(player)[0];
+    game.addGreenery(player, landSpace.id);
+
+    const ecoExpertCard = new EcologyExperts();
+    player.playCard(ecoExpertCard);
+    expect(card.canPlay(player)).is.true;
+
+    player.playCard(card);
+    expect(card.resourceCount).to.eq(3);
   });
 });
 

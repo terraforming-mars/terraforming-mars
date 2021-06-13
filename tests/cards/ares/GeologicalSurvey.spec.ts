@@ -14,18 +14,21 @@ import {MarsFirst} from '../../../src/turmoil/parties/MarsFirst';
 import {TestingUtils} from '../../TestingUtils';
 import {TestPlayers} from '../../TestPlayers';
 
-describe('GeologicalSurvey', function() {
-  let card : GeologicalSurvey; let player : Player; let game : Game;
+describe('GeologicalSurvey', () => {
+  let card : GeologicalSurvey;
+  let player : Player;
+  let redPlayer : Player;
+  let game : Game;
 
-  beforeEach(function() {
+  beforeEach(() => {
     card = new GeologicalSurvey();
     player = TestPlayers.BLUE.newPlayer();
-    const redPlayer = TestPlayers.RED.newPlayer();
+    redPlayer = TestPlayers.RED.newPlayer();
     game = Game.newInstance('foobar', [player, redPlayer], player, ARES_OPTIONS_NO_HAZARDS);
     game.board = EmptyBoard.newInstance();
   });
 
-  it('Can play', function() {
+  it('Can play', () => {
     AresTestHelper.addGreenery(player);
     expect(card.canPlay(player)).is.true;
 
@@ -46,7 +49,7 @@ describe('GeologicalSurvey', function() {
   });
 
 
-  it('Bonus in the field', function() {
+  it('Bonus in the field', () => {
     // tile types in this test are irrelevant.
     // What's key is that this space has a weird behavior - it grants all the bonuses.
     // Only three of them will grant additional bonuses: steel, titanium, and heat.
@@ -98,7 +101,7 @@ describe('GeologicalSurvey', function() {
     expect(animalCard.resourceCount).eq(1);
   });
 
-  it('Works with Mars First policy', function() {
+  it('Works with Mars First policy', () => {
     player = TestPlayers.BLUE.newPlayer();
     const gameOptions = TestingUtils.setCustomGameOptions();
     game = Game.newInstance('foobar', [player], player, gameOptions);
@@ -120,5 +123,19 @@ describe('GeologicalSurvey', function() {
     game.addGreenery(player, '11');
     TestingUtils.runAllActions(game);
     expect(player.steel).eq(2);
+  });
+
+  it('Bonus not granted when overplacing', () => {
+    player.playedCards.push(card);
+
+    // Hand-placing an ocean to make things easy, since this test suite relies on an otherwise empty board.
+    game.board.spaces[5].spaceType = SpaceType.OCEAN;
+    game.board.spaces[5].bonus = [SpaceBonus.HEAT];
+    game.simpleAddTile(redPlayer, game.board.spaces[5], {tileType: TileType.OCEAN});
+
+    player.heat = 0;
+    game.addTile(player, SpaceType.OCEAN, game.board.spaces[5], {tileType: TileType.OCEAN_CITY});
+    TestingUtils.runAllActions(game);
+    expect(player.heat).eq(0);
   });
 });

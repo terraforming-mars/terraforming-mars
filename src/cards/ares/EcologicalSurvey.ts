@@ -42,6 +42,10 @@ export class EcologicalSurvey extends Card implements IProjectCard {
     return player.game.board.getAdjacentSpaces(space).some((adj) => adj.adjacency?.bonus.includes(bonus));
   }
 
+  private grantsBonusNow(space: ISpace, bonus: SpaceBonus) {
+    return space.tile?.covers !== undefined && space.bonus.includes(bonus);
+  }
+
   public onTilePlaced(cardOwner: Player, activePlayer: Player, space: ISpace, boardType: BoardType) {
     // Adjacency bonuses are only available on Mars.
     if (boardType !== BoardType.MARS) {
@@ -52,7 +56,7 @@ export class EcologicalSurvey extends Card implements IProjectCard {
     }
 
     // Plants
-    if (space.bonus.includes(SpaceBonus.PLANT) ||
+    if (this.grantsBonusNow(space, SpaceBonus.PLANT) ||
         this.anyAdjacentSpaceGivesBonus(cardOwner, space, SpaceBonus.PLANT) ||
         (space.tile?.tileType === TileType.OCEAN && cardOwner.playedCards.some((card) => card.name === CardName.ARCTIC_ALGAE))) {
       cardOwner.game.defer(new GainResources(
@@ -68,7 +72,7 @@ export class EcologicalSurvey extends Card implements IProjectCard {
     // Microbes and Animals
     ([[ResourceType.MICROBE, SpaceBonus.MICROBE], [ResourceType.ANIMAL, SpaceBonus.ANIMAL]] as [ResourceType, SpaceBonus][]).forEach(([resource, bonus]) => {
       if (cardOwner.playedCards.some((card) => card.resourceType === resource) &&
-          (space.bonus.includes(bonus) || this.anyAdjacentSpaceGivesBonus(cardOwner, space, bonus))) {
+          (this.grantsBonusNow(space, bonus) || this.anyAdjacentSpaceGivesBonus(cardOwner, space, bonus))) {
         cardOwner.game.defer(new AddResourcesToCard(
           cardOwner,
           resource,

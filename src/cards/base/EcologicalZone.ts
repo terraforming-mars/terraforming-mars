@@ -14,6 +14,7 @@ import {CardMetadata} from '../CardMetadata';
 import {CardRequirements} from '../CardRequirements';
 import {CardRenderer} from '../render/CardRenderer';
 import {CardRenderDynamicVictoryPoints} from '../render/CardRenderDynamicVictoryPoints';
+import {Phase} from '../../Phase';
 
 export class EcologicalZone extends Card implements IProjectCard, IResourceCard {
   constructor(
@@ -69,6 +70,11 @@ export class EcologicalZone extends Card implements IProjectCard, IResourceCard 
     return Math.floor(this.resourceCount / 2);
   }
   public play(player: Player) {
+    // Get one extra animal from EcoExperts if played during prelude while having just played EcoExperts
+    if (player.game.phase === Phase.PRELUDES && player.playedCards.length > 0 && player.playedCards[player.playedCards.length-1].name === CardName.ECOLOGY_EXPERTS) {
+      player.addResourceTo(this, 1);
+    }
+
     return new SelectSpace(
       'Select space next to greenery for special tile',
       this.getAvailableSpaces(player),

@@ -82,6 +82,29 @@ describe('SelectHowToPayForProjectCard', () => {
     expect(heatTextBox.value).eq('3');
   });
 
+  it('select how to pay uses heat with reserve', async () => {
+    // Birds will cost 10. Player has 10 MC and 4 heat. It will select 10MC
+    //
+    // Then when clicking the 'max' button for heat, the algorithm will switch to 8 M€ and 2 heat.
+
+    const wrapper = setupCardForPurchase(
+      CardName.BIRDS, 10,
+      {heat: 4, megaCredits: 10, titaniumValue: 1, steelValue: 1},
+      {canUseHeat: true},
+      Units.of({heat: 2}));
+
+    const vm = wrapper.vm;
+    await vm.$nextTick();
+
+    expect(vm.megaCredits).eq(10);
+    expect(vm.heat).eq(0);
+    const maxButton = wrapper.find('[title~=Heat] ~ .btn-max');
+    await maxButton.trigger('click');
+
+    expect(vm.megaCredits).eq(8);
+    expect(vm.heat).eq(2);
+  });
+
   it('select how to pay uses microbes', async () => {
     // Moss will cost 10. Player has 7M€ and will 2 of the 4 available microbes units.
     const wrapper = setupCardForPurchase(

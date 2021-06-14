@@ -3,6 +3,8 @@ const CompressionPlugin = require('compression-webpack-plugin');
 const zlib = require('zlib');
 
 module.exports = {
+  devtool: 'source-map',
+  mode: process.env.NODE_ENV === 'production' ? 'production' : 'development',
   entry: './src/main.ts',
   resolve: {
     extensions: ['.ts', '.vue', '.js'],

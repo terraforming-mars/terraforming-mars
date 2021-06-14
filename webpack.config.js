@@ -1,18 +1,25 @@
+const {VueLoaderPlugin} = require('vue-loader');
 const CompressionPlugin = require('compression-webpack-plugin');
 const zlib = require('zlib');
 
 module.exports = {
+  devtool: 'source-map',
+  mode: process.env.NODE_ENV === 'production' ? 'production' : 'development',
   entry: './src/main.ts',
   resolve: {
-    extensions: ['.ts', '.tsx', '.js'],
+    extensions: ['.ts', '.vue', '.js'],
     alias: {
       'vue$': 'vue/dist/vue.esm.js',
     },
   },
   module: {
-    rules: [{test: /\.tsx?$/, loader: 'ts-loader'}],
+    rules: [
+      {test: /\.vue$/, loader: 'vue-loader'},
+      {test: /\.tsx?$/, loader: 'ts-loader', options: {appendTsSuffixTo: [/\.vue$/]}}
+    ],
   },
   plugins: [
+    new VueLoaderPlugin(),
     new CompressionPlugin(),
     new CompressionPlugin({
       algorithm: 'brotliCompress',

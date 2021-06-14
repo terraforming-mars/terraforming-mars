@@ -16,6 +16,7 @@ jobs:
     - run: npm run build
     - run: npm test
     - run: npm run cover
+    - run: npm run test:components
   build-windows:
 
     runs-on: windows-latest
@@ -29,4 +30,5 @@ jobs:
     - run: npm run build
     - run: npm test
     - run: npm run cover
+    - run: npm run test:components
 

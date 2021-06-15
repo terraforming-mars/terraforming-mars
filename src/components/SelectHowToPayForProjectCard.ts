@@ -192,7 +192,7 @@ export const SelectHowToPayForProjectCard = Vue.component('select-how-to-pay-for
       }
     },
     canUseHeat: function(): boolean {
-      return (this.playerinput.canUseHeat ?? true) && this.player.heat > 0;
+      return this.playerinput.canUseHeat === true && this.player.heat > 0;
     },
     canUseSteel: function() {
       if (this.card !== undefined && this.available.steel > 0) {

@@ -1,6 +1,5 @@
 import {Philares} from '../../../src/cards/promo/Philares';
 import {Game} from '../../../src/Game';
-import {Player} from '../../../src/Player';
 import {TestPlayers} from '../../TestPlayers';
 import {SpaceType} from '../../../src/SpaceType';
 import {EmptyBoard} from '../../ares/EmptyBoard';
@@ -8,11 +7,14 @@ import {TileType} from '../../../src/TileType';
 import {ISpace} from '../../../src/boards/ISpace';
 import {expect} from 'chai';
 import {Phase} from '../../../src/Phase';
+import {AndOptions} from '../../../src/inputs/AndOptions';
+import {TestPlayer} from '../../TestPlayer';
+import {Units} from '../../../src/Units';
 
 describe('Philares', () => {
   let card : Philares;
-  let player : Player;
-  let redPlayer: Player;
+  let player : TestPlayer;
+  let redPlayer: TestPlayer;
   let game: Game;
   let space: ISpace;
   let adjacentSpace: ISpace;
@@ -72,6 +74,34 @@ describe('Philares', () => {
     game.phase = Phase.SOLAR;
     game.addTile(redPlayer, SpaceType.LAND, adjacentSpace, {tileType: TileType.GREENERY});
     expect(game.deferredActions).has.length(0);
+  });
+
+  it('one tile one bonus', () => {
+    game.addTile(player, SpaceType.LAND, space, {tileType: TileType.GREENERY});
+    expect(game.deferredActions).has.length(0);
+    game.addTile(redPlayer, SpaceType.LAND, adjacentSpace, {tileType: TileType.GREENERY});
+    expect(game.deferredActions).has.length(1);
+    const action = game.deferredActions.pop();
+    const options = action?.execute() as AndOptions;
+    // Options are ordered 0-5, MC to heat.
+    expect(player.purse()).deep.eq(Units.EMPTY);
+    options.options[0].cb(1);
+    options.cb();
+    expect(player.purse()).deep.eq(Units.of({megacredits: 1}));
+  });
+
+  it('one tile one bonus - someone is greedy', () => {
+    game.addTile(player, SpaceType.LAND, space, {tileType: TileType.GREENERY});
+    expect(game.deferredActions).has.length(0);
+    game.addTile(redPlayer, SpaceType.LAND, adjacentSpace, {tileType: TileType.GREENERY});
+    expect(game.deferredActions).has.length(1);
+    const action = game.deferredActions.pop();
+    const options = action?.execute() as AndOptions;
+    // Options are ordered 0-5, MC to heat.
+    expect(player.purse()).deep.eq(Units.EMPTY);
+    options.options[0].cb(1);
+    options.options[1].cb(1);
+    expect(() => options.cb()).to.throw('Need to select 1 resource(s)');
   });
 
   it('Multiple bonuses when placing next to multiple tiles', () => {

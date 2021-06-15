@@ -37,11 +37,11 @@ export class TestPlayer extends Player {
     return this.victoryPointsBreakdown;
   }
 
-  public tagsForTest: Partial<TagsForTest> | undefined = undefined;
-
   public getStandardProjectOption() {
     return super.getStandardProjectOption();
   }
+
+  public tagsForTest: Partial<TagsForTest> | undefined = undefined;
 
   public getTagCount(tag: Tags, includeEventsTags:boolean = false, includeWildcardTags:boolean = true): number {
     if (this.tagsForTest !== undefined) {
@@ -52,6 +52,17 @@ export class TestPlayer extends Player {
 
   public runInput(input: ReadonlyArray<ReadonlyArray<string>>, pi: PlayerInput): void {
     super.runInput(input, pi);
+  }
+
+  public purse(): Units {
+    return Units.of({
+      megacredits: this.megaCredits,
+      steel: this.steel,
+      titanium: this.titanium,
+      plants: this.plants,
+      energy: this.energy,
+      heat: this.heat,
+    });
   }
 }
 

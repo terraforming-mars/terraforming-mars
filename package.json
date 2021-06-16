@@ -64,9 +64,9 @@
     "makeJson": "node make_static_json.js",
     "start": "node build/src/server.js",
     "test": "npm run test:server && npm run test:components",
-    "test:server": "rm -rf build/tests/components/ && mocha --require build/tests/utils/setup.js --recursive build/tests",
+    "test:server": "mocha --require build/tests/utils/setup.js --recursive build/tests --exclude 'build/tests/components/**'",
+    "pretest:server": "tsc --build tests/tsconfig.json",
     "test:components": "vti diagnostics && npm run compile && mochapack --mode development --webpack-config webpack.config.js --require tests/components/setup.ts tests/components/*.spec.ts",
-    "pretest:server": "rm -rf build && npm run prebuild && tsc --build tests/tsconfig.json",
     "watch": "webpack --watch --mode=development",
     "webpack": "webpack"
   },

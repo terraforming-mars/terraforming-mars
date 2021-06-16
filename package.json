@@ -63,9 +63,10 @@
     "makeCss": "lessc src/styles/common.less build/styles.css",
     "makeJson": "node make_static_json.js",
     "start": "node build/src/server.js",
-    "test": "rm -rf build/tests/components/ && mocha --require build/tests/utils/setup.js --recursive build/tests",
+    "test": "npm run test:server && npm run test:components",
+    "test:server": "rm -rf build/tests/components/ && mocha --require build/tests/utils/setup.js --recursive build/tests",
     "test:components": "vti diagnostics && npm run compile && mochapack --mode development --webpack-config webpack.config.js --require tests/components/setup.ts tests/components/*.spec.ts",
-    "pretest": "rm -rf build && npm run prebuild && tsc --build tests/tsconfig.json",
+    "pretest:server": "rm -rf build && npm run prebuild && tsc --build tests/tsconfig.json",
     "watch": "webpack --watch --mode=development",
     "webpack": "webpack"
   },

@@ -108,7 +108,6 @@ export class Philares extends Card implements CorporationCard {
   }
 
   public onTilePlaced(cardOwner: Player, activePlayer: Player, space: ISpace, boardType: BoardType) {
-    // TODO(kberg): Clarify that this is nerfed for The Moon.
     // Nerfing on The Moon.
     if (boardType !== BoardType.MARS) {
       return;
@@ -117,20 +116,17 @@ export class Philares extends Card implements CorporationCard {
     if (space.player === undefined) {
       return;
     }
-    let bonusResource: number = 0;
-    if (cardOwner.id === activePlayer.id) {
-      bonusResource = cardOwner.game.board.getAdjacentSpaces(space)
-        .filter((space) => space.tile !== undefined && space.player !== undefined && space.player.id !== cardOwner.id)
-        .length;
-    } else {
-      bonusResource = cardOwner.game.board.getAdjacentSpaces(space)
-        .filter((space) => space.tile !== undefined && space.player !== undefined && space.player.id === cardOwner.id)
-        .length;
-    }
-    if (bonusResource > 0) {
+    const adjacentSpaces = cardOwner.game.board.getAdjacentSpaces(space);
+    const adjacentSpacesWithPlayerTiles = adjacentSpaces.filter((space) => space.tile !== undefined && space.player !== undefined);
+
+    const eligibleTiles = (cardOwner.id === activePlayer.id) ?
+      adjacentSpacesWithPlayerTiles.filter((space) => space.player?.id !== cardOwner.id) :
+      adjacentSpacesWithPlayerTiles.filter((space) => space.player?.id === cardOwner.id);
+
+    if (eligibleTiles.length > 0) {
       cardOwner.game.defer(
         new DeferredAction(cardOwner, () => {
-          return this.selectResources(cardOwner, bonusResource);
+          return this.selectResources(cardOwner, eligibleTiles.length);
         }),
         cardOwner.id !== activePlayer.id ? Priority.OPPONENT_TRIGGER : Priority.GAIN_RESOURCE_OR_PRODUCTION,
       );

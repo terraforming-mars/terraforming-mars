@@ -1,9 +1,19 @@
+<template>
+    <div :class="getClasses()">
+        <Tag :tag="tag" :size="size" :type="type"/>
+        <span :class="getCountClasses()">{{ getCount() }}</span>
+    </div>
+</template>
+
+<script lang="ts">
+
 import Vue from 'vue';
-import {Tag} from './Tag';
+import Tag from './Tag.vue';
 import {Tags} from '../cards/Tags';
 import {SpecialTags} from '../cards/SpecialTags';
 
-export const TagCount = Vue.component('tag-count', {
+export default Vue.extend({
+  name: 'tag-count',
   props: {
     tag: {
       type: String as () => Tags|SpecialTags,
@@ -23,7 +33,7 @@ export const TagCount = Vue.component('tag-count', {
     },
   },
   components: {
-    'tag': Tag,
+    Tag,
   },
   methods: {
     getClasses: function(): string {
@@ -45,8 +55,6 @@ export const TagCount = Vue.component('tag-count', {
       return this.hideCount === true ? '?' : this.count;
     },
   },
-  template: `<div :class="getClasses()">
-        <tag :tag="tag" :size="size" :type="type"/>
-        <span :class="getCountClasses()">{{ getCount() }}</span>
-    </div>`,
 });
+</script>
+

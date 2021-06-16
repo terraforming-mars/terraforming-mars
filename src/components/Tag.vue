@@ -1,7 +1,14 @@
+<template>
+  <div :class="getClasses()" />
+</template>
+
+<script lang="ts">
+
 import Vue from 'vue';
 import {Tags} from '../cards/Tags';
 
-export const Tag = Vue.component('tag', {
+export default Vue.extend({
+  name: 'Tag',
   props: {
     tag: {
       type: String as () => Tags,
@@ -26,5 +33,5 @@ export const Tag = Vue.component('tag', {
       return classes.join(' ');
     },
   },
-  template: '<div :class="getClasses()" />',
 });
+</script>

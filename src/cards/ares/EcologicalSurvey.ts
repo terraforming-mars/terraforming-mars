@@ -1,22 +1,16 @@
-import {Card} from '../Card';
 import {CardName} from '../../CardName';
 import {CardType} from '../CardType';
 import {Player} from '../../Player';
 import {ISpace} from '../../boards/ISpace';
 import {SpaceBonus} from '../../SpaceBonus';
-import {TileType} from '../../TileType';
 import {Resources} from '../../Resources';
 import {ResourceType} from '../../ResourceType';
-import {AddResourcesToCard} from '../../deferredActions/AddResourcesToCard';
-import {GainResources} from '../../deferredActions/GainResources';
-import {Phase} from '../../Phase';
-import {IProjectCard} from '../IProjectCard';
 import {Tags} from '../Tags';
 import {CardRequirements} from '../CardRequirements';
 import {CardRenderer} from '../render/CardRenderer';
-import {BoardType} from '../../boards/BoardType';
+import {SurveyCard} from './SurveyCard';
 
-export class EcologicalSurvey extends Card implements IProjectCard {
+export class EcologicalSurvey extends SurveyCard {
   constructor() {
     super({
       cardType: CardType.ACTIVE,
@@ -38,53 +32,9 @@ export class EcologicalSurvey extends Card implements IProjectCard {
     });
   }
 
-  private anyAdjacentSpaceGivesBonus(player: Player, space: ISpace, bonus: SpaceBonus): boolean {
-    return player.game.board.getAdjacentSpaces(space).some((adj) => adj.adjacency?.bonus.includes(bonus));
-  }
-
-  private grantsBonusNow(space: ISpace, bonus: SpaceBonus) {
-    return space.tile?.covers !== undefined && space.bonus.includes(bonus);
-  }
-
-  public onTilePlaced(cardOwner: Player, activePlayer: Player, space: ISpace, boardType: BoardType) {
-    // Adjacency bonuses are only available on Mars.
-    if (boardType !== BoardType.MARS) {
-      return;
-    }
-    if (cardOwner.game.phase === Phase.SOLAR || cardOwner.id !== activePlayer.id) {
-      return;
-    }
-
-    // Plants
-    if (this.grantsBonusNow(space, SpaceBonus.PLANT) ||
-        this.anyAdjacentSpaceGivesBonus(cardOwner, space, SpaceBonus.PLANT) ||
-        (space.tile?.tileType === TileType.OCEAN && cardOwner.playedCards.some((card) => card.name === CardName.ARCTIC_ALGAE))) {
-      cardOwner.game.defer(new GainResources(
-        cardOwner,
-        Resources.PLANTS,
-        {
-          cb: () => activePlayer.game.log(
-            '${0} gained a bonus ${1} because of ${2}',
-            (b) => b.player(cardOwner).string(Resources.PLANTS).cardName(this.name)),
-        }));
-    }
-
-    // Microbes and Animals
-    ([[ResourceType.MICROBE, SpaceBonus.MICROBE], [ResourceType.ANIMAL, SpaceBonus.ANIMAL]] as [ResourceType, SpaceBonus][]).forEach(([resource, bonus]) => {
-      if (cardOwner.playedCards.some((card) => card.resourceType === resource) &&
-          (this.grantsBonusNow(space, bonus) || this.anyAdjacentSpaceGivesBonus(cardOwner, space, bonus))) {
-        cardOwner.game.defer(new AddResourcesToCard(
-          cardOwner,
-          resource,
-          {
-            logMessage: '${0} gained a bonus ${1} because of ${2}',
-            logBuilder: (b) => b.player(cardOwner).string(resource).cardName(this.name),
-          }));
-      }
-    });
-  }
-
-  public play() {
-    return undefined;
+  public checkForBonuses(cardOwner: Player, space: ISpace) {
+    super.testForStandardResource(cardOwner, space, Resources.PLANTS, SpaceBonus.PLANT);
+    super.testForCardResource(cardOwner, space, ResourceType.MICROBE, SpaceBonus.MICROBE);
+    super.testForCardResource(cardOwner, space, ResourceType.ANIMAL, SpaceBonus.ANIMAL);
   }
 }

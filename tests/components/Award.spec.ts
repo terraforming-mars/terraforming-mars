@@ -2,7 +2,7 @@
 import {createLocalVue, mount} from '@vue/test-utils';
 
 import {expect} from 'chai';
-import {Award} from '../../src/components/Award';
+import Award from '../../src/components/Award.vue';
 import {FundedAwardModel} from '../../src/models/FundedAwardModel';
 
 describe('Award', function() {

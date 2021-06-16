@@ -10,7 +10,8 @@
         },
     ],
     "include": [
-        "utils/Vue.ts",
-        "**/*.spec.ts"
+        "utils/setup.ts",
+        "**/*.spec.ts",
+        "vue-shims.d.ts",
     ]
 }

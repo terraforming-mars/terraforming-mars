@@ -2,7 +2,7 @@
 import {createLocalVue, mount} from '@vue/test-utils';
 
 import {expect} from 'chai';
-import {Milestone} from '../../src/components/Milestone';
+import Milestone from '../../src/components/Milestone.vue';
 import {ClaimedMilestoneModel} from '../../src/models/ClaimedMilestoneModel';
 
 describe('Milestone', function() {

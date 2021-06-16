@@ -2,7 +2,7 @@ import Vue from 'vue';
 
 import {Board} from './Board';
 import {Card} from './card/Card';
-import {Milestone} from './Milestone';
+import Milestone from './Milestone.vue';
 import Award from './Award.vue';
 import {PlayersOverview} from './overview/PlayersOverview';
 import {WaitingFor} from './WaitingFor';
@@ -67,7 +67,7 @@ export const PlayerHome = Vue.component('player-home', {
     Card,
     'players-overview': PlayersOverview,
     'waiting-for': WaitingFor,
-    'milestone': Milestone,
+    Milestone,
     Award,
     'sidebar': Sidebar,
     'colony': Colony,
@@ -241,7 +241,7 @@ export const PlayerHome = Vue.component('player-home', {
                     <moonboard v-if="player.game.gameOptions.moonExpansion" :model="player.game.moon"></moonboard>
 
                     <div v-if="player.players.length > 1" class="player_home_block--milestones-and-awards">
-                        <milestone :milestones_list="player.game.milestones" />
+                        <Milestone :milestones_list="player.game.milestones" />
                         <Award :awards_list="player.game.awards" />
                     </div>
                 </div>
@@ -358,7 +358,7 @@ export const PlayerHome = Vue.component('player-home', {
                 <dynamic-title title="Game details" :color="player.color"/>
 
                 <div class="player_home_block" v-if="player.players.length > 1">
-                    <milestone :show_scores="false" :milestones_list="player.game.milestones" />
+                    <Milestone :show_scores="false" :milestones_list="player.game.milestones" />
                     <Award :show_scores="false" :awards_list="player.game.awards" />
                 </div>
 

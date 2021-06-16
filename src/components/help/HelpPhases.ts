@@ -118,7 +118,7 @@ export const HelpPhases = Vue.component('help-phases', {
                       <span v-i18n>3. New Government</span>
                       <ul>
                         <li v-i18n>Change policy tile</li>
-                        <li v-i18n>Rerform the ruling bonus of the dominant party</li>
+                        <li v-i18n>Perform the ruling bonus of the dominant party</li>
                         <li v-i18n>The dominant party leader becomes chairman, earning 1 TR.</li>
                         <li v-i18n>Move the old chairman and all other delegates from the dominant party to the reserves.</li>
                         <li v-i18n>Shift the dominance marker. In case of tie, the party closest to the left of the previous dominant party becomes dominant.</li>

@@ -12,6 +12,7 @@ import {DeferredAction, Priority} from '../../deferredActions/DeferredAction';
 import {CardRenderer} from '../render/CardRenderer';
 import {Size} from '../render/Size';
 import {BoardType} from '../../boards/BoardType';
+import {Resources} from '../../Resources';
 
 export class Philares extends Card implements CorporationCard {
   constructor() {
@@ -94,12 +95,12 @@ export class Philares extends Card implements CorporationCard {
         ) {
           throw new Error('Need to select ' + resourceCount + ' resource(s)');
         }
-        philaresPlayer.megaCredits += megacreditsAmount;
-        philaresPlayer.steel += steelAmount;
-        philaresPlayer.titanium += titaniumAmount;
-        philaresPlayer.plants += plantsAmount;
-        philaresPlayer.energy += energyAmount;
-        philaresPlayer.heat += heatAmount;
+        philaresPlayer.addResource(Resources.MEGACREDITS, megacreditsAmount, {log: true});
+        philaresPlayer.addResource(Resources.STEEL, steelAmount, {log: true});
+        philaresPlayer.addResource(Resources.TITANIUM, titaniumAmount, {log: true});
+        philaresPlayer.addResource(Resources.PLANTS, plantsAmount, {log: true});
+        philaresPlayer.addResource(Resources.ENERGY, energyAmount, {log: true});
+        philaresPlayer.addResource(Resources.HEAT, heatAmount, {log: true});
         return undefined;
       }, selectMegacredit, selectSteel, selectTitanium, selectPlants, selectEnergy, selectHeat);
     selectResources.title = 'Philares effect: select ' + resourceCount + ' resource(s)';

@@ -1691,6 +1691,14 @@ export class Player implements ISerializable<SerializedPlayer> {
   }
 
   public takeActionForFinalGreenery(): void {
+    // Resolve any deferredAction before placing the next greenery
+    // Otherwise if two tiles are placed next to Philares, only the last benefit is triggered
+    // if Philares does not accept the first bonus before the second tile is down
+    if (this.game.deferredActions.length > 0) {
+      this.resolveFinalGreeneryDeferredActions();
+      return;
+    }
+
     if (this.game.canPlaceGreenery(this)) {
       const action: OrOptions = new OrOptions();
       action.title = 'Place any final greenery from plants';

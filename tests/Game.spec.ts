@@ -219,6 +219,12 @@ describe('Game', function() {
     // Pass last turn
     game.playerHasPassed(player);
     game.playerHasPassed(player2);
+
+    // Must remove waitingFor or playerIsFinishedTakingActions
+    // will pre-emptively exit -- you can't end the game
+    // if the game is waiting for a player to do something!
+    (player as any).waitingFor = undefined;
+    (player2 as any).waitingFor = undefined;
     game.playerIsFinishedTakingActions();
     // Now game should be in end state
     expect(game.phase).to.eq(Phase.END);
@@ -278,15 +284,21 @@ describe('Game', function() {
 
   it('Should not give TR or raise oxygen for final greenery placements', function() {
     const player = TestPlayers.BLUE.newPlayer();
-    const redPlayer = TestPlayers.RED.newPlayer();
+    const otherPlayer = TestPlayers.RED.newPlayer();
 
-    const game = Game.newInstance('foobar', [player, redPlayer], player);
+    const game = Game.newInstance('foobar', [player, otherPlayer], player);
     game.generation = 14;
 
     // Terraform
     (game as any).temperature = constants.MAX_TEMPERATURE;
     (game as any).oxygenLevel = constants.MAX_OXYGEN_LEVEL - 2;
     TestingUtils.maxOutOceans(player);
+
+    // Must remove waitingFor or playerIsFinishedTakingActions
+    // will pre-emptively exit -- you can't end the game
+    // if the game is waiting for a player to do something!
+    (player as any).waitingFor = undefined;
+    (otherPlayer as any).waitingFor = undefined;
 
     // Trigger end game
     player.setTerraformRating(20);

@@ -56,7 +56,7 @@
     "clean": "rm -r ./build/ ./src/genfiles/ || true",
     "compile": "tsc --build src/tsconfig.json",
     "precompile": "npm run makeJson",
-    "cover": "nyc mocha --file build/tests/utils/setup.js --recursive build/tests",
+    "cover": "nyc mocha --file build/tests/utils/setup.js --recursive build/tests --exclude 'build/tests/components/**'",
     "precover": "tsc --build tests/tsconfig.json",
     "fix": "eslint --fix src tests --ext ts --ext vue",
     "lint": "eslint --cache src tests --ext ts --ext vue",

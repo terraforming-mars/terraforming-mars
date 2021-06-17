@@ -1068,7 +1068,8 @@ export class Game implements ISerializable<SerializedGame> {
   // Well, this isn't just "go to the final greenery placement". It finds the next player
   // who might be able to place a final greenery.
   // Rename to takeNextFinalGreeneryAction?
-  public gotoFinalGreeneryPlacement(): void {
+
+  public /* for testing */ gotoFinalGreeneryPlacement(): void {
     // this.getPlayers returns in turn order -- a necessary rule for final greenery placement.
     const players = this.getPlayers();
     for (let idx = 0; idx < players.length; idx++) {

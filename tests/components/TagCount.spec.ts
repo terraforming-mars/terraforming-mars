@@ -2,7 +2,7 @@
 import {createLocalVue, mount} from '@vue/test-utils';
 
 import {expect} from 'chai';
-import {TagCount} from '../../src/components/TagCount';
+import TagCount from '../../src/components/TagCount.vue';
 
 describe('TagCount', function() {
   function getLocalVue() {

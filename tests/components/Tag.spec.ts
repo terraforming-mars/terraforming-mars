@@ -2,7 +2,7 @@
 import {createLocalVue, mount} from '@vue/test-utils';
 
 import {expect} from 'chai';
-import {Tag} from '../../src/components/Tag';
+import Tag from '../../src/components/Tag.vue';
 
 describe('Tag', function() {
   function getLocalVue() {

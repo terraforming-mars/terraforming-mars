@@ -1,5 +1,5 @@
 import Vue from 'vue';
-import {TagCount} from '../TagCount';
+import TagCount from '../TagCount.vue';
 import {ITagCount} from '../../ITagCount';
 import {PlayerModel} from '../../models/PlayerModel';
 import {Tags} from '../../cards/Tags';

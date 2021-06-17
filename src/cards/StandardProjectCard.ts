@@ -15,11 +15,13 @@ import {CardName} from '../CardName';
 import {SelectHowToPayDeferred} from '../deferredActions/SelectHowToPayDeferred';
 import {Card} from './Card';
 import {MoonExpansion} from '../moon/MoonExpansion';
+import {Units} from '../Units';
 
 interface StaticStandardProjectCardProperties {
   name: CardName,
   cost: number,
   metadata: CardMetadata,
+  reserveUnits?: Units,
 }
 
 export abstract class StandardProjectCard extends Card implements IActionCard, ICard {

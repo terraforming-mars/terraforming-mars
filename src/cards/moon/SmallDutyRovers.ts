@@ -8,10 +8,10 @@ import {MoonExpansion} from '../../moon/MoonExpansion';
 import {SpaceType} from '../../SpaceType';
 import {Resources} from '../../Resources';
 import {Units} from '../../Units';
-import {MoonCard} from './MoonCard';
 import {Size} from '../render/Size';
+import {Card} from '../Card';
 
-export class SmallDutyRovers extends MoonCard implements IProjectCard {
+export class SmallDutyRovers extends Card implements IProjectCard {
   constructor() {
     super({
       name: CardName.SMALL_DUTY_ROVERS,
@@ -19,6 +19,7 @@ export class SmallDutyRovers extends MoonCard implements IProjectCard {
       tags: [Tags.MOON, Tags.SPACE],
       cost: 9,
       productionBox: Units.of({}),
+      reserveUnits: Units.of({titanium: 1}),
 
       metadata: {
         description: 'Spend 1 titanium. Raise the Logistic Rate 1 step. Gain 1 M€ per colony tile, mine tile and road tile on the Moon.',
@@ -31,8 +32,6 @@ export class SmallDutyRovers extends MoonCard implements IProjectCard {
             .moonRoad({size: Size.SMALL}).any;
         }),
       },
-    }, {
-      reserveUnits: Units.of({titanium: 1}),
     });
   };
 

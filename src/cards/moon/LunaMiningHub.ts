@@ -20,6 +20,7 @@ export class LunaMiningHub extends MoonCard {
       tags: [Tags.BUILDING],
       cost: 16,
       productionBox: Units.of({steel: 1, titanium: 1}),
+      reserveUnits: Units.of({steel: 1, titanium: 1}),
 
       requirements: CardRequirements.builder((b) => b.miningRate(5)),
       metadata: {
@@ -37,8 +38,6 @@ export class LunaMiningHub extends MoonCard {
         }),
         victoryPoints: CardRenderDynamicVictoryPoints.moonMiningTile(2, true),
       },
-    }, {
-      reserveUnits: Units.of({titanium: 1, steel: 1}),
     });
   };
 

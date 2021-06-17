@@ -16,6 +16,7 @@ export class LunaResort extends MoonCard {
       tags: [Tags.MOON],
       cost: 11,
       productionBox: Units.of({energy: -1, megacredits: 3}),
+      reserveUnits: Units.of({titanium: 2}),
 
       requirements: CardRequirements.builder((b) => b.colonyTiles(2).any()),
       metadata: {
@@ -29,8 +30,6 @@ export class LunaResort extends MoonCard {
           b.moonColonyRate();
         }),
       },
-    }, {
-      reserveUnits: Units.of({titanium: 2}),
     });
   };
 

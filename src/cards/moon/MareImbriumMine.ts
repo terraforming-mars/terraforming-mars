@@ -20,6 +20,7 @@ export class MareImbriumMine extends MoonCard implements IProjectCard, IMoonCard
       tags: [Tags.MOON, Tags.BUILDING],
       cost: 19,
       productionBox: Units.of({steel: 1, titanium: 1}),
+      reserveUnits: Units.of({titanium: 1}),
 
       metadata: {
         description: 'Spend 1 titanium. Increase your steel production 1 step and your titanium production 1 step. Place a mine ON THE RESERVED AREA and raise the Mining Rate 1 step.',
@@ -31,7 +32,6 @@ export class MareImbriumMine extends MoonCard implements IProjectCard, IMoonCard
         }),
       },
     }, {
-      reserveUnits: Units.of({titanium: 1}),
       tilesBuilt: [TileType.MOON_MINE],
     });
   }

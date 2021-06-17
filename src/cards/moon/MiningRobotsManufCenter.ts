@@ -15,6 +15,7 @@ export class MiningRobotsManufCenter extends MoonCard {
       tags: [Tags.SCIENCE, Tags.BUILDING],
       cost: 12,
       productionBox: Units.of({}),
+      reserveUnits: Units.of({titanium: 1}),
 
       metadata: {
         description: 'Spend 1 titanium. Raise the Mining Rate 2 steps.',
@@ -24,8 +25,6 @@ export class MiningRobotsManufCenter extends MoonCard {
           b.moonMiningRate({amount: 2});
         }),
       },
-    }, {
-      reserveUnits: Units.of({titanium: 1}),
     });
   }
 

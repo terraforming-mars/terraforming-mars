@@ -22,6 +22,7 @@ export class DarksideIncubationPlant extends MoonCard implements IActionCard, IP
       tags: [Tags.MICROBE, Tags.MOON],
       cost: 11,
       resourceType: ResourceType.MICROBE,
+      reserveUnits: Units.of({titanium: 1}),
 
       metadata: {
         description: {
@@ -42,8 +43,6 @@ export class DarksideIncubationPlant extends MoonCard implements IActionCard, IP
         }),
         victoryPoints: CardRenderDynamicVictoryPoints.microbes(1, 2),
       },
-    }, {
-      reserveUnits: Units.of({titanium: 1}),
     });
   };
   public resourceCount = 0;

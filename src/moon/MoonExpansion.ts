@@ -292,12 +292,16 @@ export class MoonExpansion {
    * Reservation units adjusted for cards in a player's hand that might reduce or eliminate these costs.
    */
   public static adjustedReserveCosts(player: Player, card: IProjectCard) : Units {
+    // This is a bit hacky and uncoordinated only because this returns early when there's a moon card with LTF Privileges
+    // even though the heat component below could be considered (and is, for LocalHeatTrapping.)
+
     if (player.cardIsInEffect(CardName.LTF_PRIVILEGES) && card.tags.includes(Tags.MOON)) {
       return Units.EMPTY;
     }
 
     const reserveUnits: Units = card.reserveUnits || Units.EMPTY;
 
+    const heat = reserveUnits.heat || 0;
     let steel = reserveUnits.steel || 0;
     let titanium = reserveUnits.titanium || 0;
 
@@ -317,7 +321,7 @@ export class MoonExpansion {
 
     steel = Math.max(steel, 0);
     titanium = Math.max(titanium, 0);
-    return Units.of({steel, titanium});
+    return Units.of({steel, titanium, heat});
   }
 
   public static calculateVictoryPoints(player: Player, vpb: VictoryPointsBreakdown): void {

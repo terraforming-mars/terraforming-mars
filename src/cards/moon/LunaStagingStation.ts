@@ -15,6 +15,7 @@ export class LunaStagingStation extends MoonCard {
       cardType: CardType.AUTOMATED,
       tags: [Tags.MOON, Tags.BUILDING],
       cost: 12,
+      reserveUnits: Units.of({titanium: 1}),
 
       requirements: CardRequirements.builder((b) => b.logisticRate(2)),
       metadata: {
@@ -25,8 +26,6 @@ export class LunaStagingStation extends MoonCard {
           b.moonLogisticsRate({amount: 2});
         }),
       },
-    }, {
-      reserveUnits: Units.of({titanium: 1}),
     });
   };
 

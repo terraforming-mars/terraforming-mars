@@ -19,6 +19,7 @@ export class PrideoftheEarthArkship extends MoonCard implements IActionCard {
       cost: 22,
       resourceType: ResourceType.SCIENCE,
       requirements: CardRequirements.builder((b) => b.tag(Tags.SCIENCE).tag(Tags.SPACE, 2)),
+      reserveUnits: Units.of({titanium: 2}),
 
       metadata: {
         description: 'Requires 1 science and 2 space tags. Spend 2 titanium. 1 VP per science resource here.',
@@ -31,8 +32,6 @@ export class PrideoftheEarthArkship extends MoonCard implements IActionCard {
         }),
         victoryPoints: CardRenderDynamicVictoryPoints.science(1, 1),
       },
-    }, {
-      reserveUnits: Units.of({titanium: 2}),
     });
   };
   public resourceCount = 0;

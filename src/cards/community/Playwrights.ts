@@ -11,6 +11,7 @@ import {SelectHowToPayDeferred} from '../../deferredActions/SelectHowToPayDeferr
 import {DeferredAction} from '../../deferredActions/DeferredAction';
 import {CardRenderer} from '../render/CardRenderer';
 import {Size} from '../render/Size';
+import {MoonExpansion} from '../../moon/MoonExpansion';
 
 export class Playwrights extends Card implements CorporationCard {
   constructor() {
@@ -113,7 +114,9 @@ export class Playwrights extends Card implements CorporationCard {
       player.game.getPlayers().forEach((p) => {
         playedEvents.push(...p.playedCards.filter((card) => {
           return card.cardType === CardType.EVENT &&
-            player.canAfford(player.getCardCost(card)) &&
+            player.canAfford(player.getCardCost(card), {
+              reserveUnits: MoonExpansion.adjustedReserveCosts(player, card),
+            }) &&
             (card.canPlay === undefined || card.canPlay(player));
         }));
       });

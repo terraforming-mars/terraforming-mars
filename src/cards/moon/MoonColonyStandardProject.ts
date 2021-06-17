@@ -15,6 +15,8 @@ export class MoonColonyStandardProject extends StandardProjectCard implements IM
     super({
       name: CardName.MOON_COLONY_STANDARD_PROJECT,
       cost: 22,
+      reserveUnits: Units.of({titanium: 1}),
+
       metadata: {
         cardNumber: '',
         renderData: CardRenderer.builder((b) =>
@@ -26,7 +28,6 @@ export class MoonColonyStandardProject extends StandardProjectCard implements IM
     });
   }
 
-  public reserveUnits = Units.of({titanium: 1});
   public tilesBuilt = [TileType.MOON_COLONY];
 
   protected discount(player: Player): number {

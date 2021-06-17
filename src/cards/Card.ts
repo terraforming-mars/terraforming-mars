@@ -23,6 +23,7 @@ export interface StaticCardProperties {
   tags?: Array<Tags>;
   productionBox?: Units;
   cardDiscount?: CardDiscount;
+  reserveUnits?: Units,
 }
 
 export const staticCardProperties = new Map<CardName, StaticCardProperties>();
@@ -83,6 +84,9 @@ export abstract class Card {
   }
   public get cardDiscount() {
     return this.properties.cardDiscount;
+  }
+  public get reserveUnits(): Units {
+    return this.properties.reserveUnits || Units.EMPTY;
   }
   public canPlay(player: Player) {
     if (this.properties.requirements === undefined) {

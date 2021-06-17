@@ -15,6 +15,7 @@ export class WaterTreatmentComplex extends MoonCard {
       cardType: CardType.AUTOMATED,
       cost: 12,
       requirements: CardRequirements.builder((b) => b.colonyTiles(1).any()),
+      reserveUnits: Units.of({titanium: 1}),
 
       metadata: {
         description: 'Requires 1 colony tile on the Moon. Spend 1 titanium. Raise the Colony Rate 2 steps.',
@@ -22,8 +23,6 @@ export class WaterTreatmentComplex extends MoonCard {
         // requirements: CardRequirements.builder((b) => b.text('1 colony on Moon')),// TODO(kberg):
         renderData: CardRenderer.builder((b) => b.minus().titanium(1).br.moonColonyRate({amount: 2})),
       },
-    }, {
-      reserveUnits: Units.of({titanium: 1}),
     });
   };
 

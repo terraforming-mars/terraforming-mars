@@ -15,6 +15,8 @@ export class MoonMineStandardProject extends StandardProjectCard implements IMoo
     super({
       name: CardName.MOON_MINE_STANDARD_PROJECT,
       cost: 20,
+      reserveUnits: Units.of({titanium: 1}),
+
       metadata: {
         cardNumber: '',
         renderData: CardRenderer.builder((b) =>
@@ -26,7 +28,6 @@ export class MoonMineStandardProject extends StandardProjectCard implements IMoo
     });
   }
 
-  public reserveUnits = Units.of({titanium: 1});
   public tilesBuilt = [TileType.MOON_MINE];
 
   protected discount(player: Player): number {

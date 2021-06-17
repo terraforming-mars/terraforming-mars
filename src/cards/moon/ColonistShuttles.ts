@@ -17,6 +17,7 @@ export class ColonistShuttles extends MoonCard {
       cardType: CardType.AUTOMATED,
       tags: [Tags.SPACE],
       cost: 12,
+      reserveUnits: Units.of({titanium: 1}),
 
       metadata: {
         description: 'Spend 1 titanium. Raise the Colony Rate 1 step. Gain 2M€ for each colony tile on the Moon.',
@@ -27,7 +28,6 @@ export class ColonistShuttles extends MoonCard {
         }),
       },
     }, {
-      reserveUnits: Units.of({titanium: 1}),
       tilesBuilt: [TileType.MOON_COLONY],
     });
   };

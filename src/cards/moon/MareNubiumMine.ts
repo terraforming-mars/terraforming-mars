@@ -1,18 +1,16 @@
 import {CardName} from '../../CardName';
 import {Player} from '../../Player';
 import {CardType} from '../CardType';
-import {IProjectCard} from '../IProjectCard';
 import {Tags} from '../Tags';
 import {CardRenderer} from '../render/CardRenderer';
 import {MoonSpaces} from '../../moon/MoonSpaces';
 import {MoonExpansion} from '../../moon/MoonExpansion';
 import {Units} from '../../Units';
 import {TileType} from '../../TileType';
-import {IMoonCard} from './IMoonCard';
 import {MoonCard} from './MoonCard';
 import {AltSecondaryTag} from '../render/CardRenderItem';
 
-export class MareNubiumMine extends MoonCard implements IProjectCard, IMoonCard {
+export class MareNubiumMine extends MoonCard {
   constructor() {
     super({
       name: CardName.MARE_NUBIUM_MINE,
@@ -20,6 +18,7 @@ export class MareNubiumMine extends MoonCard implements IProjectCard, IMoonCard 
       tags: [Tags.MOON, Tags.BUILDING],
       cost: 17,
       productionBox: Units.of({titanium: 1}),
+      reserveUnits: Units.of({titanium: 1}),
 
       metadata: {
         description: 'Spend 1 titanium. Increase your titanium production 1 step. Place a mine ON THE RESERVED AREA and raise the Mining Rate 1 step.',
@@ -30,7 +29,6 @@ export class MareNubiumMine extends MoonCard implements IProjectCard, IMoonCard 
         }),
       },
     }, {
-      reserveUnits: Units.of({titanium: 1}),
       tilesBuilt: [TileType.MOON_MINE],
     });
   }

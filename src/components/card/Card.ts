@@ -2,13 +2,13 @@ import Vue from 'vue';
 
 import {ICard} from '../../cards/ICard';
 import {CardModel} from '../../models/CardModel';
-import {CardTitle} from './CardTitle';
+import CardTitle from './CardTitle.vue';
 import {CardNumber} from './CardNumber';
 import {CardResourceCounter} from './CardResourceCounter';
-import {CardCost} from './CardCost';
+import CardCost from './CardCost.vue';
 import {CardExtraContent} from './CardExtraContent';
 import {CardExpansion} from './CardExpansion';
-import {CardTags} from './CardTags';
+import CardTags from './CardTags.vue';
 import {CardType} from '../../cards/CardType';
 import {CardContent} from './CardContent';
 import {CardMetadata} from '../../cards/CardMetadata';

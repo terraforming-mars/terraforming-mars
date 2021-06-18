@@ -612,7 +612,7 @@ export const CreateGameForm = Vue.component('create-game-form', {
                             <input type="checkbox" name="themoon" id="themoon-checkbox" v-model="moonExpansion">
                             <label for="themoon-checkbox" class="expansion-button">
                                 <div class="create-game-expansion-icon expansion-icon-themoon"></div>
-                                <span v-i18n>The Moon</span>&nbsp;<span style="font-size: small;">(&beta;)</span>&nbsp;<a href="https://github.com/bafolts/terraforming-mars/wiki/The-Moon" class="tooltip" target="_blank">&#9432;</a>
+                                <span v-i18n>The Moon</span>&nbsp;<a href="https://github.com/bafolts/terraforming-mars/wiki/The-Moon" class="tooltip" target="_blank">&#9432;</a>
                             </label>
 
                             <template v-if="moonExpansion">

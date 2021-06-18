@@ -1071,9 +1071,7 @@ export class Game implements ISerializable<SerializedGame> {
 
   public /* for testing */ gotoFinalGreeneryPlacement(): void {
     // this.getPlayers returns in turn order -- a necessary rule for final greenery placement.
-    const players = this.getPlayers();
-    for (let idx = 0; idx < players.length; idx++) {
-      const player = players[idx];
+    for (const player of this.getPlayers()) {
       if (this.donePlayers.has(player.id)) {
         continue;
       }

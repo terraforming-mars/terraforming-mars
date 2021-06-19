@@ -1,8 +1,20 @@
+<template>
+  <div :class="getMainClasses()">
+    <div v-if="isPrelude()" class="prelude-label">prelude</div>
+    <div v-if="isCorporation()" class="corporation-label">corporation</div>
+    <CardCorporationLogo v-if="isCorporation()" :title="title"/>
+    <div v-else :class="getClasses(title)">{{ getCardTitleWithoutSuffix(title) }}</div>
+  </div>
+</template>
+
+<script lang="ts">
+
 import Vue from 'vue';
 import {CardType} from '../../cards/CardType';
 import {CardCorporationLogo} from './CardCorporationLogo';
 
-export const CardTitle = Vue.component('CardTitle', {
+export default Vue.extend({
+  name: 'CardTitle',
   props: {
     title: {
       type: String,
@@ -60,12 +72,6 @@ export const CardTitle = Vue.component('CardTitle', {
       return title.split(':')[0];
     },
   },
-  template: `
-      <div :class="getMainClasses()">
-          <div v-if="isPrelude()" class="prelude-label">prelude</div>
-          <div v-if="isCorporation()" class="corporation-label">corporation</div>
-          <CardCorporationLogo v-if="isCorporation()" :title="title"/>
-          <div v-else :class="getClasses(title)">{{ getCardTitleWithoutSuffix(title) }}</div>
-      </div>
-  `,
 });
+
+</script>

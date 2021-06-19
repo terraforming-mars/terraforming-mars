@@ -1,7 +1,20 @@
+<template>
+  <div>
+    <div :class="getClasses()">{{ amount === null ? 0 : amount }}</div>
+    <template v-if="displayTwoCosts()">
+      <div class="card-cost-transition"></div>
+      <div class="card-old-cost">{{ newCost }}</div>
+    </template>
+  </div>
+</template>
+
+<script lang="ts">
+
 import Vue from 'vue';
 import {PreferencesManager} from './../PreferencesManager';
 
-export const CardCost = Vue.component('CardCost', {
+export default Vue.extend({
+  name: 'CardCost',
   props: {
     amount: {
       type: Number as () => number | undefined,
@@ -23,13 +36,7 @@ export const CardCost = Vue.component('CardCost', {
       return this.newCost !== undefined && this.newCost !== this.amount && !hideDiscount;
     },
   },
-  template: `
-    <div>
-        <div :class="getClasses()">{{ amount === null ? 0 : amount }}</div>
-        <template v-if="displayTwoCosts()">
-          <div class="card-cost-transition"></div>
-          <div class="card-old-cost">{{ newCost }}</div>
-        </template>
-    </div>
-    `,
 });
+
+</script>
+

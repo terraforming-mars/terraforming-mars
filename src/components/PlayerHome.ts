@@ -16,7 +16,7 @@ import {playerColorClass} from '../utils/utils';
 import {DynamicTitle} from './common/DynamicTitle';
 import {Button} from './common/Button';
 import {SortableCards} from './SortableCards';
-import {TopBar} from './TopBar';
+import TopBar from './TopBar.vue';
 import {PreferencesManager} from './PreferencesManager';
 import {KeyboardNavigation} from '../../src/KeyboardNavigation';
 import {MoonBoard} from './moon/MoonBoard';

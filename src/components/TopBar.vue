@@ -1,9 +1,21 @@
+<template>
+    <div :class="formatCssClass()" :key="componentKey">
+      <PlayerInfo v-show="isExpanded()" :player="player" :activePlayer="player" actionLabel="" :playerIndex="0" :hideZeroTags="true"/>
+      <div class="top-bar-collapser" v-on:click="toggleBar()">
+        <img src="/assets/arrows_left.png">
+      </div>
+    </div>
+</template>
+
+<script lang="ts">
+
 import Vue from 'vue';
 import {PlayerModel} from '../models/PlayerModel';
 import {PlayerInfo} from './overview/PlayerInfo';
 import {PreferencesManager} from './PreferencesManager';
 
-export const TopBar = Vue.component('top-bar', {
+export default Vue.extend({
+  name: 'top-bar',
   props: {
     player: {
       type: Object as () => PlayerModel,
@@ -36,12 +48,6 @@ export const TopBar = Vue.component('top-bar', {
       return cssClasses.join(' ');
     },
   },
-  template: `
-    <div :class="formatCssClass()" :key="componentKey">
-      <PlayerInfo v-show="isExpanded()" :player="player" :activePlayer="player" actionLabel="" :playerIndex="0" :hideZeroTags="true"/>
-      <div class="top-bar-collapser" v-on:click="toggleBar()">
-        <img src="/assets/arrows_left.png">
-      </div>
-    </div>
-  `,
 });
+</script>
+

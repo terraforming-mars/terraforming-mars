@@ -10,7 +10,7 @@ import {CardExtraContent} from './CardExtraContent';
 import {CardExpansion} from './CardExpansion';
 import CardTags from './CardTags.vue';
 import {CardType} from '../../cards/CardType';
-import {CardContent} from './CardContent';
+import CardContent from './CardContent.vue';
 import {CardMetadata} from '../../cards/CardMetadata';
 import {Tags} from '../../cards/Tags';
 import {ALL_CARD_MANIFESTS} from '../../cards/AllCards';

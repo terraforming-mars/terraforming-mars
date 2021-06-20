@@ -7,7 +7,7 @@ import {CardRenderTileComponent} from './CardRenderTileComponent';
 import {CardRenderSymbol} from '../../cards/render/CardRenderSymbol';
 import {CardRenderItem} from '../../cards/render/CardRenderItem';
 
-import {CardDescription} from './CardDescription';
+import CardDescription from './CardDescription.vue';
 
 export const CardRenderEffectBoxComponent = Vue.component('CardRenderEffectBoxComponent', {
   props: {

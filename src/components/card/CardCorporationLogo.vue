@@ -1,6 +1,14 @@
+<template>
+  <div class="card-corporation-logo" v-html="getHtmlContent()"></div>
+</template>
+
+<script lang="ts">
+
 import Vue from 'vue';
 import {CardName} from '../../CardName';
-export const CardCorporationLogo = Vue.component('CardCorporationLogo', {
+
+export default Vue.extend({
+  name: 'CardCorporationLogo',
   props: {
     title: {
       type: String as () => CardName,
@@ -165,5 +173,7 @@ export const CardCorporationLogo = Vue.component('CardCorporationLogo', {
       return '';
     },
   },
-  template: '<div class="card-corporation-logo" v-html="getHtmlContent()"></div>',
 });
+
+</script>
+

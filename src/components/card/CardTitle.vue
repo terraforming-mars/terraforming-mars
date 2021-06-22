@@ -11,7 +11,7 @@
 
 import Vue from 'vue';
 import {CardType} from '../../cards/CardType';
-import {CardCorporationLogo} from './CardCorporationLogo';
+import CardCorporationLogo from './CardCorporationLogo.vue';
 
 export default Vue.extend({
   name: 'CardTitle',

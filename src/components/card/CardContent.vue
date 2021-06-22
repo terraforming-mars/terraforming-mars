@@ -1,12 +1,24 @@
+<template>
+  <div :class="getClasses()">
+    <CardRequirementsComponent v-if="requirements !== undefined" :requirements="requirements"/>
+    <CardRenderData v-if="metadata.renderData !== undefined" :renderData="metadata.renderData" />
+    <CardDescription v-if="metadata.description !== undefined" :item="metadata.description" />
+    <CardVictoryPoints v-if="metadata.victoryPoints !== undefined" :victoryPoints="metadata.victoryPoints" />
+  </div>
+</template>
+
+<script lang="ts">
+
 import Vue from 'vue';
 import {CardMetadata} from '../../cards/CardMetadata';
 import {CardRequirementsComponent} from './CardRequirementsComponent';
 import {CardVictoryPoints} from './CardVictoryPoints';
-import {CardDescription} from './CardDescription';
+import CardDescription from './CardDescription.vue';
 import {CardRenderData} from './CardRenderData';
 import {CardRequirements} from '../../cards/CardRequirements';
 
-export const CardContent = Vue.component('CardContent', {
+export default Vue.extend({
+  name: 'CardContent',
   props: {
     metadata: {
       type: Object as () => CardMetadata,
@@ -35,12 +47,7 @@ export const CardContent = Vue.component('CardContent', {
       return classes.join(' ');
     },
   },
-  template: `
-        <div :class="getClasses()">
-            <CardRequirementsComponent v-if="requirements !== undefined" :requirements="requirements"/>
-            <CardRenderData v-if="metadata.renderData !== undefined" :renderData="metadata.renderData" />
-            <CardDescription v-if="metadata.description !== undefined" :item="metadata.description" />
-            <CardVictoryPoints v-if="metadata.victoryPoints !== undefined" :victoryPoints="metadata.victoryPoints" />
-        </div>
-    `,
 });
+
+</script>
+

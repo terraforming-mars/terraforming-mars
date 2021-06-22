@@ -9,7 +9,7 @@ import {CardProductionBoxComponent} from './CardProductionBoxComponent';
 import {CardRenderEffectBoxComponent} from './CardRenderEffectBoxComponent';
 import {CardRenderCorpBoxComponent} from './CardRenderCorpBoxComponent';
 import {CardRenderTileComponent} from './CardRenderTileComponent';
-import {CardDescription} from './CardDescription';
+import CardDescription from './CardDescription.vue';
 import {CardRenderSymbolComponent} from './CardRenderSymbolComponent';
 import {CardRenderEffect, CardRenderCorpBoxEffect, CardRenderCorpBoxAction} from '../../cards/render/CardRenderer';
 

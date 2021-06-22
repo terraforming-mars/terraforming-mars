@@ -1,8 +1,15 @@
+<template>
+  <div :class="getClasses()">({{ getDescription() }})</div>
+</template>
+
+<script lang="ts">
+
 import Vue from 'vue';
 import {isIDescription} from '../../cards/render/ICardRenderDescription';
 import {generateClassString} from '../../utils/utils';
 
-export const CardDescription = Vue.component('CardDescription', {
+export default Vue.extend({
+  name: 'CardDescription',
   props: {
     item: {
       required: true,
@@ -21,10 +28,10 @@ export const CardDescription = Vue.component('CardDescription', {
       return generateClassString(classes);
     },
     getDescription: function(): string {
-      return isIDescription(this.item) ? this.item.text : <string> this.item;
+      return isIDescription(this.item) ? this.item.text : String(this.item);
     },
   },
-  template: `
-      <div :class="getClasses()">({{ getDescription() }})</div>
-  `,
 });
+
+</script>
+

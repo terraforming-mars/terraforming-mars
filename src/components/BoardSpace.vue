@@ -1,5 +1,17 @@
+<template>
+  <div :class="getMainClass()" :data_space_id="space.id">
+    <div :class="getTileClass()" :title="getVerboseTitle(space.tileType)"></div>
+    <div class="board-space-text" v-if="text" v-i18n>{{ text }}</div>
+    <bonus :bonus="space.bonus" v-if="space.tileType === undefined"></bonus>
+    <bonus :bonus="space.bonus" v-if="space.tileType !== undefined && isTileHidden"></bonus>
+    <div :class="'board-cube board-cube--'+space.color" v-if="space.color !== undefined && !isTileHidden "></div>
+  </div>
+</template>
+
+<script lang="ts">
+
 import Vue from 'vue';
-import {Bonus} from './Bonus';
+import Bonus from './Bonus.vue';
 import {SpaceModel} from '../models/SpaceModel';
 import {SpaceType} from '../SpaceType';
 import {TileType} from '../TileType';
@@ -46,7 +58,8 @@ const tileTypeToCssClassAresOverride = new Map<TileType, string>([
   [TileType.RESTRICTED_AREA, 'restricted-area-ares'],
 ]);
 
-export const BoardSpace = Vue.component('board-space', {
+export default Vue.extend({
+  name: 'board-space',
   props: {
     space: {
       type: Object as () => SpaceModel,
@@ -178,13 +191,7 @@ export const BoardSpace = Vue.component('board-space', {
       return css;
     },
   },
-  template: `
-        <div :class="getMainClass()" :data_space_id="space.id">
-            <div :class="getTileClass()" :title="getVerboseTitle(space.tileType)"></div>
-            <div class="board-space-text" v-if="text" v-i18n>{{ text }}</div>
-            <bonus :bonus="space.bonus" v-if="space.tileType === undefined"></bonus>
-            <bonus :bonus="space.bonus" v-if="space.tileType !== undefined && isTileHidden"></bonus>
-            <div :class="'board-cube board-cube--'+space.color" v-if="space.color !== undefined && !isTileHidden "></div>
-        </div>
-    `,
 });
+
+</script>
+

@@ -1,146 +1,4 @@
-import Vue from 'vue';
-import * as constants from '../constants';
-import {BoardSpace} from './BoardSpace';
-import {IAresData} from '../ares/IAresData';
-import {SpaceModel} from '../models/SpaceModel';
-import {SpaceType} from '../SpaceType';
-import {SpaceId} from '../boards/ISpace';
-import {TranslateMixin} from './TranslateMixin';
-
-class GlobalParamLevel {
-  constructor(public value: number, public isActive: boolean, public strValue: string) {
-  }
-}
-
-export const Board = Vue.component('board', {
-  props: {
-    spaces: {
-      type: Array as () => Array<SpaceModel>,
-    },
-    venusNextExtension: {
-      type: Boolean,
-    },
-    venusScaleLevel: {
-      type: Number,
-    },
-    boardName: {
-      type: String,
-    },
-    oceans_count: {
-      type: Number,
-    },
-    oxygen_level: {
-      type: Number,
-    },
-    temperature: {
-      type: Number,
-    },
-    aresExtension: {
-      type: Boolean,
-    },
-    aresData: {
-      type: Object as () => IAresData | undefined,
-    },
-  },
-  components: {
-    'board-space': BoardSpace,
-  },
-  data: function() {
-    return {
-      'constants': constants,
-      'isTileHidden': false,
-    };
-  },
-  mixins: [TranslateMixin],
-  methods: {
-    getAllSpacesOnMars: function(): Array<SpaceModel> {
-      const boardSpaces: Array<SpaceModel> = this.spaces;
-      boardSpaces.sort(
-        (space1: SpaceModel, space2: SpaceModel) => {
-          return parseInt(space1.id) - parseInt(space2.id);
-        },
-      );
-      return boardSpaces.filter((s: SpaceModel) => {
-        return s.spaceType !== SpaceType.COLONY;
-      });
-    },
-    getSpaceById: function(spaceId: SpaceId) {
-      for (const space of this.spaces) {
-        if (space.id === spaceId) {
-          return space;
-        }
-      }
-      throw 'Board space not found by id \'' + spaceId + '\'';
-    },
-    getValuesForParameter: function(targetParameter: string): Array<GlobalParamLevel> {
-      const values: Array<GlobalParamLevel> = [];
-      let startValue: number;
-      let endValue: number;
-      let step: number;
-      let curValue: number;
-      let strValue: string;
-
-      switch (targetParameter) {
-      case 'oxygen':
-        startValue = constants.MIN_OXYGEN_LEVEL;
-        endValue = constants.MAX_OXYGEN_LEVEL;
-        step = 1;
-        curValue = this.oxygen_level;
-        break;
-      case 'temperature':
-        startValue = constants.MIN_TEMPERATURE;
-        endValue = constants.MAX_TEMPERATURE;
-        step = 2;
-        curValue = this.temperature;
-        break;
-      case 'venus':
-        startValue = constants.MIN_VENUS_SCALE;
-        endValue = constants.MAX_VENUS_SCALE;
-        step = 2;
-        curValue = this.venusScaleLevel;
-        break;
-      default:
-        throw 'Wrong parameter to get values from';
-      }
-
-      for (let value: number = endValue; value >= startValue; value -= step) {
-        strValue = (targetParameter === 'temperature' && value > 0) ? '+'+value : value.toString();
-        values.push(
-          new GlobalParamLevel(value, value === curValue, strValue),
-        );
-      }
-      return values;
-    },
-    getScaleCSS: function(paramLevel: GlobalParamLevel): string {
-      let css = 'global-numbers-value val-' + paramLevel.value + ' ';
-      if (paramLevel.isActive) {
-        css += 'val-is-active';
-      }
-      return css;
-    },
-    oceansValue: function() {
-      const oceans_count = this.oceans_count || 0;
-      const leftover = constants.MAX_OCEAN_TILES - oceans_count;
-      if (leftover === 0) {
-        return '<img width="26" src="/assets/misc/circle-checkmark.png" class="board-ocean-checkmark" :alt="$t(\'Completed!\')">';
-      } else {
-        return `${oceans_count}/${constants.MAX_OCEAN_TILES}`;
-      }
-    },
-    getGameBoardClassName: function():string {
-      return this.venusNextExtension ? 'board-cont board-with-venus' : 'board-cont board-without-venus';
-    },
-    toggleHideTile: function() {
-      this.isTileHidden = !this.isTileHidden;
-    },
-    toggleHideTileLabel: function(): string {
-      return this.isTileHidden ? 'show tiles' : 'hide tiles';
-    },
-    checkHideTile: function():boolean {
-      return this.isTileHidden;
-    },
-  },
-  template: `
+<template>
     <div :class="getGameBoardClassName()">
         <div class="hide-tile-button-container">
         <div class="hide-tile-button" v-on:click.prevent="toggleHideTile()">{{ toggleHideTileLabel() }}</div>
@@ -157,15 +15,15 @@ export const Board = Vue.component('board', {
 
         <div class="global-numbers">
             <div class="global-numbers-temperature">
-                <div :class="getScaleCSS(lvl)" v-for="lvl in getValuesForParameter('temperature')">{{ lvl.strValue }}</div>
+                <div :class="getScaleCSS(lvl)" v-for="(lvl, idx) in getValuesForParameter('temperature')" :key="idx">{{ lvl.strValue }}</div>
             </div>
 
             <div class="global-numbers-oxygen">
-                <div :class="getScaleCSS(lvl)" v-for="lvl in getValuesForParameter('oxygen')">{{ lvl.strValue }}</div>
+                <div :class="getScaleCSS(lvl)" v-for="(lvl, idx) in getValuesForParameter('oxygen')" :key="idx">{{ lvl.strValue }}</div>
             </div>
 
             <div class="global-numbers-venus" v-if="venusNextExtension">
-                <div :class="getScaleCSS(lvl)" v-for="lvl in getValuesForParameter('venus')">{{ lvl.strValue }}</div>
+                <div :class="getScaleCSS(lvl)" v-for="(lvl, idx) in getValuesForParameter('venus')" :key="idx">{{ lvl.strValue }}</div>
             </div>
 
             <div class="global-numbers-oceans">
@@ -276,5 +134,154 @@ export const Board = Vue.component('board', {
             </svg>
         </div>
     </div>
-    `,
+</template>
+
+<script lang="ts">
+
+import Vue from 'vue';
+import * as constants from '../constants';
+import BoardSpace from './BoardSpace.vue';
+import {IAresData} from '../ares/IAresData';
+import {SpaceModel} from '../models/SpaceModel';
+import {SpaceType} from '../SpaceType';
+import {SpaceId} from '../boards/ISpace';
+import {TranslateMixin} from './TranslateMixin';
+import {$t} from '../directives/i18n';
+
+class GlobalParamLevel {
+  constructor(public value: number, public isActive: boolean, public strValue: string) {
+  }
+}
+
+export default Vue.extend({
+  name: 'board',
+  props: {
+    spaces: {
+      type: Array as () => Array<SpaceModel>,
+    },
+    venusNextExtension: {
+      type: Boolean,
+    },
+    venusScaleLevel: {
+      type: Number,
+    },
+    boardName: {
+      type: String,
+    },
+    oceans_count: {
+      type: Number,
+    },
+    oxygen_level: {
+      type: Number,
+    },
+    temperature: {
+      type: Number,
+    },
+    aresExtension: {
+      type: Boolean,
+    },
+    aresData: {
+      type: Object as () => IAresData | undefined,
+    },
+  },
+  components: {
+    'board-space': BoardSpace,
+  },
+  data: function() {
+    return {
+      'constants': constants,
+      'isTileHidden': false,
+    };
+  },
+  methods: Object.assign(TranslateMixin.methods, {
+    getAllSpacesOnMars: function(): Array<SpaceModel> {
+      const boardSpaces: Array<SpaceModel> = this.spaces;
+      boardSpaces.sort(
+        (space1: SpaceModel, space2: SpaceModel) => {
+          return parseInt(space1.id) - parseInt(space2.id);
+        },
+      );
+      return boardSpaces.filter((s: SpaceModel) => {
+        return s.spaceType !== SpaceType.COLONY;
+      });
+    },
+    getSpaceById: function(spaceId: SpaceId) {
+      for (const space of this.spaces) {
+        if (space.id === spaceId) {
+          return space;
+        }
+      }
+      throw 'Board space not found by id \'' + spaceId + '\'';
+    },
+    getValuesForParameter: function(targetParameter: string): Array<GlobalParamLevel> {
+      const values: Array<GlobalParamLevel> = [];
+      let startValue: number;
+      let endValue: number;
+      let step: number;
+      let curValue: number;
+      let strValue: string;
+
+      switch (targetParameter) {
+      case 'oxygen':
+        startValue = constants.MIN_OXYGEN_LEVEL;
+        endValue = constants.MAX_OXYGEN_LEVEL;
+        step = 1;
+        curValue = this.oxygen_level;
+        break;
+      case 'temperature':
+        startValue = constants.MIN_TEMPERATURE;
+        endValue = constants.MAX_TEMPERATURE;
+        step = 2;
+        curValue = this.temperature;
+        break;
+      case 'venus':
+        startValue = constants.MIN_VENUS_SCALE;
+        endValue = constants.MAX_VENUS_SCALE;
+        step = 2;
+        curValue = this.venusScaleLevel;
+        break;
+      default:
+        throw 'Wrong parameter to get values from';
+      }
+
+      for (let value: number = endValue; value >= startValue; value -= step) {
+        strValue = (targetParameter === 'temperature' && value > 0) ? '+'+value : value.toString();
+        values.push(
+          new GlobalParamLevel(value, value === curValue, strValue),
+        );
+      }
+      return values;
+    },
+    getScaleCSS: function(paramLevel: GlobalParamLevel): string {
+      let css = 'global-numbers-value val-' + paramLevel.value + ' ';
+      if (paramLevel.isActive) {
+        css += 'val-is-active';
+      }
+      return css;
+    },
+    oceansValue: function() {
+      const oceans_count = this.oceans_count || 0;
+      const leftover = constants.MAX_OCEAN_TILES - oceans_count;
+      if (leftover === 0) {
+        return '<img width="26" src="/assets/misc/circle-checkmark.png" class="board-ocean-checkmark" :alt="$t(\'Completed!\')">';
+      } else {
+        return `${oceans_count}/${constants.MAX_OCEAN_TILES}`;
+      }
+    },
+    getGameBoardClassName: function():string {
+      return this.venusNextExtension ? 'board-cont board-with-venus' : 'board-cont board-without-venus';
+    },
+    toggleHideTile: function() {
+      this.isTileHidden = !this.isTileHidden;
+    },
+    toggleHideTileLabel: function(): string {
+      return this.isTileHidden ? 'show tiles' : 'hide tiles';
+    },
+    checkHideTile: function():boolean {
+      return this.isTileHidden;
+    },
+  }),
 });
+
+</script>
+

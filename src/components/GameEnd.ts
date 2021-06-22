@@ -1,6 +1,6 @@
 import Vue from 'vue';
 import {PlayerModel, PublicPlayerModel} from '../models/PlayerModel';
-import {Board} from './Board';
+import Board from './Board.vue';
 import {LogPanel} from './LogPanel';
 import {Button} from '../components/common/Button';
 import {playerColorClass} from '../utils/utils';

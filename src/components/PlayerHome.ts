@@ -1,6 +1,6 @@
 import Vue from 'vue';
 
-import {Board} from './Board';
+import Board from './Board.vue';
 import {Card} from './card/Card';
 import Milestone from './Milestone.vue';
 import Award from './Award.vue';
@@ -8,7 +8,7 @@ import {PlayersOverview} from './overview/PlayersOverview';
 import {WaitingFor} from './WaitingFor';
 import {Sidebar} from './Sidebar';
 import {PlayerModel, PublicPlayerModel} from '../models/PlayerModel';
-import {Colony} from './Colony';
+import Colony from './Colony.vue';
 import {LogPanel} from './LogPanel';
 import {PlayerMixin} from './PlayerMixin';
 import {Turmoil} from './Turmoil';

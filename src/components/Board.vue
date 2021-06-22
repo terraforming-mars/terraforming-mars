@@ -146,7 +146,6 @@ import {SpaceModel} from '../models/SpaceModel';
 import {SpaceType} from '../SpaceType';
 import {SpaceId} from '../boards/ISpace';
 import {TranslateMixin} from './TranslateMixin';
-import {$t} from '../directives/i18n';
 
 class GlobalParamLevel {
   constructor(public value: number, public isActive: boolean, public strValue: string) {
@@ -193,7 +192,8 @@ export default Vue.extend({
       'isTileHidden': false,
     };
   },
-  methods: Object.assign(TranslateMixin.methods, {
+  methods: {
+    ...TranslateMixin.methods,
     getAllSpacesOnMars: function(): Array<SpaceModel> {
       const boardSpaces: Array<SpaceModel> = this.spaces;
       boardSpaces.sort(
@@ -280,7 +280,7 @@ export default Vue.extend({
     checkHideTile: function():boolean {
       return this.isTileHidden;
     },
-  }),
+  },
 });
 
 </script>

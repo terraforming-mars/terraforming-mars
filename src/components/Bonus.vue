@@ -16,9 +16,6 @@ export default Vue.extend({
       type: Array as () => Array<SpaceBonus>,
     },
   },
-  data: function() {
-    return {};
-  },
   methods: {
     getClass: function(idx: number, bonus: SpaceBonus): string {
       let ret = 'board-space-bonus board-space-bonus--';

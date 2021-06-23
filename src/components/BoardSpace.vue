@@ -11,7 +11,7 @@
 <script lang="ts">
 
 import Vue from 'vue';
-import {Bonus} from './Bonus';
+import Bonus from './Bonus.vue';
 import {SpaceModel} from '../models/SpaceModel';
 import {SpaceType} from '../SpaceType';
 import {TileType} from '../TileType';

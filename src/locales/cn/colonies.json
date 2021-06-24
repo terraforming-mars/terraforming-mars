@@ -1,24 +1,24 @@
 {
   "Aridor":"阿里多尔",
   "You start with 40 M€. As your first action, put an additional Colony Tile of your choice into play":"您从40 M€开始游戏。 作为您的第一个动作，请选择一个额外的殖民地板块加入游戏",
-  "Effect: When you get a new type of tag in play [event cards do not count], increase your M€ production 1 step.":"效果：当您在玩耍中获得新的卡牌标签时[事件卡不计入]，请增加MC产量1步。",
+  "Effect: When you get a new type of tag in play [event cards do not count], increase your M€ production 1 step.":"效果：当您在玩耍中获得新的卡牌标签时[事件卡不计入]，请增加M€产量1级。",
 
   "Arklight":"弧光",
-  "You start with 45 M€. Increase your M€ production 2 steps. 1 VP per 2 animals on this card.":"你起始获得45 M€。提升你的MC产能2级。牌上每2个动物资源1分",
-  "Effect: When you play an animal or plant tag, including<br> this, add 1 animal<br> to this card.":"效果:当你打出动物或植物标志时(包括本牌),在此牌上放置1个动物资源",
+  "You start with 45 M€. Increase your M€ production 2 steps. 1 VP per 2 animals on this card.":"你起始获得45 M€。提升你的M€产量2级。牌上每2个动物资源1分",
+  "Effect: When you play an animal or plant tag, including<br> this, add 1 animal<br> to this card.":"效果：当你打出动物或植物标志时(包括本牌),在此牌上放置1个动物资源",
 
   "Polyphemos":"波呂斐摩斯",
-  "You start with 50 M€. Increase your M€ production 5 steps. Gain 5 titanium.":"起始获得50 M€。提升你的MC产能5级,获得5个钛合金",
-  "Effect: When you buy a card to hand, pay 5M€ instead of 3, including the starting hand.":"效果:当你购买手牌时,你需要支付5 M€而非原本的3 M€,包括起始的手牌",
+  "You start with 50 M€. Increase your M€ production 5 steps. Gain 5 titanium.":"起始获得50 M€。提升你的M€产量5级,获得5个钛",
+  "Effect: When you buy a card to hand, pay 5M€ instead of 3, including the starting hand.":"效果：当你购买手牌时,你需要支付5 M€而非原本的3 M€,包括起始的手牌",
 
   "Poseidon":"波塞頓",
   "You start with 45 M€. As your first action, place a colony.":"起始获得45 M€。作为你的第一个行动,放置一个殖民地",
-  "Effect: When any colony is placed, including this, raise your M€ production 1 step.":"任何殖民地放置时，增加你的MC产能1级，包括目前放置这个 豆子",
+  "Effect: When any colony is placed, including this, raise your M€ production 1 step.":"任何殖民地放置时，包括这个，增加你的M€产量1级。",
 
   "Stormcraft Incorporated":"暴风舰公司",
   "You start with 48 M€.":"起始获得48 M€",
   "Action: Add a floater to ANY card.":"行动：增加云资源到任意卡牌",
-  "Effect: Floaters on this card may be used as 2 heat each.":"效果:本卡上的云资源能当做2个热能资源使用",
+  "Effect: Floaters on this card may be used as 2 heat each.":"效果：本卡上的云资源能当做2个热能资源使用",
 
 
 
@@ -30,7 +30,7 @@
   "Requires 2 Jovian tags. Gain 12 heat. Remove up to 2 plants from any player.": "（需要两个木星图标 ）增加12点热能 移除任一玩家两点植物",
 
   "Market Manipulation": "操控市场",
-  "Increase one colony tile track 1 step. Decrease another colony tile track 1 step.":"提升一个殖民地标志一步,降低另一个殖民地标志一步",
+  "Increase one colony tile track 1 step. Decrease another colony tile track 1 step.":"提升一个殖民地标志一级,降低另一个殖民地标志一级",
 
 
   "Research Colony": "研究殖民地",
@@ -38,17 +38,17 @@
 
   "Urban Decomposers": "都市分解者",
   "City": "城市",
-  "Requires that you have 1 city tile and 1 colony in play. Increase your plant production 1 step, and add 2 microbes to ANOTHER card.": "（需要你有1个殖民地和1个城市）增加1点自身植物产能 增加2个微生物标志到其他卡上",
+  "Requires that you have 1 city tile and 1 colony in play. Increase your plant production 1 step, and add 2 microbes to ANOTHER card.": "（需要你有1个殖民地和1个城市）增加1点自身植物产量 增加2个微生物标志到其他卡上",
 
   "Trading Colony": "交易殖民地",
-  "Effect: When you trade, you may first increase that Colony Tile track 1 step.": "效果：当你进行交易时，可先提升1步殖民地标志",
+  "Effect: When you trade, you may first increase that Colony Tile track 1 step.": "效果：当你进行交易时，可先提升1级殖民地标志",
   "Place a colony.": "放置1个殖民地",
 
   "Lunar Mining": "月球挖掘",
-  "Increase your titanium production 1 step for every 2 Earth tags you have in play, including this.": "每拥有2个地球图标，增加自身1点钛产能包括此卡",
+  "Increase your titanium production 1 step for every 2 Earth tags you have in play, including this.": "每拥有2个地球图标，增加自身1点钛产量包括此卡",
 
   "Floater Leasing": "漂浮物租贷",
-  "Increase your M€ production 1 step PER 3 floaters you have.": "每有3个云资源，增加自身1点MC产能",
+  "Increase your M€ production 1 step PER 3 floaters you have.": "每有3个云资源，增加自身1点M€产量",
 
   "Martian Zoo": "火星动物园",
   "Effect: When you play an Earth tag, place an animal here.": "效果：每当你打出地球标时，在此卡上放1个动物标志",
@@ -59,10 +59,10 @@
 
   "Luna Governor":"月球政府",
   "3 Earth":"3 地球",
-  "Requires 3 Earth tags. Increase your M€ production 2 steps.":"（需要：三个地球图标）增加自身2点MC产能",
+  "Requires 3 Earth tags. Increase your M€ production 2 steps.":"（需要：三个地球图标）增加自身2点M€产量",
 
   "Minority Refuge":"少数民族难民",
-  "Decrease your M€ production 2 steps. Place a colony.":"降低自身2点MC产能，放置1个殖民地",
+  "Decrease your M€ production 2 steps. Place a colony.":"降低自身2点M€产量，放置1个殖民地",
 
   "Floater Technology":"漂浮物科技",
   "Action: Add 1 floater to ANOTHER card.":"行动：增加1点云资源到任意卡上",
@@ -78,7 +78,7 @@
   "Trade Envoys":"贸易特使",
 
   "Earth Elevator": "地球太空梯",
-  "Increase your titanium production 3 steps.": "增加自身3点钛产能",
+  "Increase your titanium production 3 steps.": "增加自身3点钛产量",
 
   "Titan Floating Launch-pad": "泰坦漂浮物起飞平台",
   "Action: Add 1 floater to ANY JOVIAN CARD or spend 1 floater here to trade for free.": "行动：增加1点云资源到任意木星卡上或消耗此卡上的1点云资源来免费交易一次",
@@ -86,10 +86,10 @@
 
   "Heavy Taxation": "重税",
   "2 Earth": "2 地球",
-  "Requires 2 Earth tags. Increase your M€ production 2 steps, and gain 4 M€.": "（需要两个地球图标）增加自身2点MC产能 获得4块钱",
+  "Requires 2 Earth tags. Increase your M€ production 2 steps, and gain 4 M€.": "（需要两个地球图标）增加自身2点M€产量 获得4块钱",
 
   "Refugee Camp": "难民营",
-  "Action: Decrease your M€ production 1 step to add a camp resource to this card.": "行动：降低自身1点MC产能，增加1点营地资源到此卡上",
+  "Action: Decrease your M€ production 1 step to add a camp resource to this card.": "行动：降低自身1点M€产量，增加1点营地资源到此卡上",
   "1 VP for each camp resource on this card.": "每1点营地资源，获得1VP",
 
   "Solar Reflectors": "太阳反射器",
@@ -197,7 +197,7 @@
   "Effect: When you play a Space card, you pay 4 M€ less for it.":"效果：当你打出1张太空牌时，少支付4块钱。",
   "Requires 5 Science tags.":"需求：5个科技标志。",
 
-  "Effect: When you play an animal or plant tag, including this, add 1 animal to this card.":"效果: 当你打出1个动物标志或植物标志(包括本牌)时,增加1个动物资源到本卡",
+  "Effect: When you play an animal or plant tag, including this, add 1 animal to this card.":"效果： 当你打出1个动物标志或植物标志(包括本牌)时,增加1个动物资源到本卡",
 
       "Callisto":"木卫四",
     "Ceres":"谷神星",

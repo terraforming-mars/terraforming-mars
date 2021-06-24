@@ -14,9 +14,9 @@
     "Magnify card descriptions on hover": "放大鼠标悬停卡牌介绍",
     "Show in-game alerts": "显示游戏内报警",
     "Hide Milestones / Awards scores": "隐藏里程碑 / 奖项分数",
-    "Enable sounds": "允许轮次提示音",
-    "Hide tile confirmation":"影藏板块确认信息",
-    "Show card numbers (req. refresh)":"显示卡牌编号(需要刷新页面)",
+    "Enable sounds": "启用轮次提示音",
+    "Hide tile confirmation":"隐藏板块确认信息",
+    "Show card numbers (req. refresh)":"显示卡牌编号（需要刷新页面）",
     "Language": "语言",
     "refresh page": "选择以下语言后<点我>或者刷新页面,",
     "to see changes": "来查看改变",
@@ -26,9 +26,4 @@
     "Russian": "俄语",
     "Chinese": "中文",
     "Ok": "好的"
-
-
-
-
-
 }

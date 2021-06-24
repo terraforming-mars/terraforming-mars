@@ -1,4 +1,4 @@
-import {GameEnd} from './GameEnd';
+import GameEnd from './GameEnd.vue';
 import {CreateGameForm} from './create/CreateGameForm';
 import {GameHome} from './GameHome';
 import {GamesOverview} from './GamesOverview';
@@ -72,7 +72,7 @@ export const mainAppSettings = {
     'game-home': GameHome,
     'player-home': PlayerHome,
     'spectator-home': SpectatorHome,
-    'player-end': GameEnd,
+    'game-end': GameEnd,
     'games-overview': GamesOverview,
     'debug-ui': DebugUI,
     'help': Help,

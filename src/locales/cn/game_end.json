@@ -5,7 +5,7 @@
     "Also, take into account these small hints to win:": "另外，请考虑以下小技巧以取胜：",
     "Concentrate more on Global parameters, not on Victory Points": "更多地关注全局参数，而不是得分",
     "Don't be greedy on cards selection": "不要贪图卡牌选择",
-    "Try to increase Heat production, not Megacredits": "尝试增加热量产能，而不是MC”",
+    "Try to increase Heat production, not Megacredits": "尝试增加热量产量，而不是M€”",
     "Try to start with Beginner corporation": "尝试用新手公司开始游戏",
     
     "You win!": "你赢了！",
@@ -25,7 +25,8 @@
     "TR": "TR",
     "VP": "VP",
     "Total": "合计",
-    "Victory points details for": "获胜点数详情：",
+    "Victory points details":"胜利点数详情",
+    "Victory points details for": "胜利点数详情：",
     "Final situation on the board": "最终游戏版图情况",
     "Final game log": "最终游戏日志"
 }

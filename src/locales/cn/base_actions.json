@@ -1,0 +1,15 @@
+{
+    
+    "Convert heat":"转换热量",
+    "CONVERT HEAT":"转换热量",
+    "Convert Heat":"升温",
+    "Spend 8 Heat to raise temperature 1 step.":"花费8热量来提升温度1级。",
+    "Convert 7 heat into temperature": "支付7热量转换为温度",
+    "Convert 8 heat into temperature": "支付8热量转换为温度",
+
+    "Convert Plants": "绿化",
+    "CONVERT PLANTS": "绿化",
+    "Spend 8 Plants to place a greenery tile and raise oxygen 1 step.": "花费8植物来放置一个森林板块，并提升氧气1级。",  
+    "Convert 8 plants into greenery": "支付8植物放置森林",
+    "Convert 7 plants into greenery": "支付7植物放置森林"
+}

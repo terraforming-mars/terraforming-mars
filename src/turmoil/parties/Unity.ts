@@ -29,12 +29,14 @@ class UnityBonus01 implements Bonus {
   description = 'Gain 1 M€ for each Venus, Earth and Jovian tag you have';
   isDefault = true;
 
+  getScore(player: Player) {
+    const tags = [Tags.VENUS, Tags.EARTH, Tags.JOVIAN];
+    return tags.map((tag) => player.getTagCount(tag, false, false)).reduce((acc, count) => acc + count, 0);
+  }
+
   grant(game: Game) {
     game.getPlayers().forEach((player) => {
-      const tags = [Tags.VENUS, Tags.EARTH, Tags.JOVIAN];
-      const tagCount = tags.map((tag) => player.getTagCount(tag, false, false)).reduce((acc, count) => acc + count, 0);
-
-      player.addResource(Resources.MEGACREDITS, tagCount);
+      player.addResource(Resources.MEGACREDITS, this.getScore(player));
     });
   }
 }
@@ -44,10 +46,13 @@ class UnityBonus02 implements Bonus {
   description = 'Gain 1 M€ for each Space tag you have';
   isDefault = false;
 
+  getScore(player: Player) {
+    return player.getTagCount(Tags.SPACE, false, false);
+  }
+
   grant(game: Game) {
     game.getPlayers().forEach((player) => {
-      const tagCount = player.getTagCount(Tags.SPACE, false, false);
-      player.addResource(Resources.MEGACREDITS, tagCount);
+      player.addResource(Resources.MEGACREDITS, this.getScore(player));
     });
   }
 }

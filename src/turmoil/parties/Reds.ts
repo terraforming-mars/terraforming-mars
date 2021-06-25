@@ -26,6 +26,19 @@ class RedsBonus01 implements Bonus {
   description = 'The player(s) with the lowest TR gains 1 TR';
   isDefault = true;
 
+  getScore(player: Player) {
+    const game = player.game;
+    const players = game.getPlayers();
+
+    if (game.isSoloMode() && players[0].getTerraformRating() <= 20) return 1;
+
+    players.sort((p1, p2) => p1.getTerraformRating() - p2.getTerraformRating());
+    const min = players[0].getTerraformRating();
+
+    if (player.getTerraformRating() === min) return 1;
+    return 0;
+  }
+
   grant(game: Game) {
     const players = game.getPlayers();
 
@@ -47,6 +60,19 @@ class RedsBonus02 implements Bonus {
   id = 'rb02';
   description = 'The player(s) with the highest TR loses 1 TR';
   isDefault = false;
+
+  getScore(player: Player) {
+    const game = player.game;
+    const players = game.getPlayers();
+
+    if (game.isSoloMode() && players[0].getTerraformRating() > 20) return -1;
+
+    players.sort((p1, p2) => p2.getTerraformRating() - p1.getTerraformRating());
+    const max = players[0].getTerraformRating();
+
+    if (player.getTerraformRating() === max) return -1;
+    return 0;
+  }
 
   grant(game: Game) {
     const players = game.getPlayers();

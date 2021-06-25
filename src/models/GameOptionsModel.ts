@@ -27,5 +27,7 @@ export interface GameOptionsModel {
   randomMA: RandomMAOptionType,
   turmoilExtension: boolean,
   venusNextExtension: boolean,
+  requiresMoonTrackCompletion: boolean,
   requiresVenusTrackCompletion: boolean,
+  undoOption: boolean,
 }

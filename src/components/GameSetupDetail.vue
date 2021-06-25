@@ -1,47 +1,4 @@
-import Vue from 'vue';
-import {GameOptionsModel} from '../models/GameOptionsModel';
-import {BoardName} from '../boards/BoardName';
-import {RandomMAOptionType} from '../RandomMAOptionType';
-import {AgendaStyle} from '../turmoil/PoliticalAgendas';
-
-export const GameSetupDetail = Vue.component('game-setup-detail', {
-  props: {
-    playerNumber: {
-      type: Number,
-    },
-    gameOptions: {
-      type: Object as () => GameOptionsModel,
-    },
-    lastSoloGeneration: {
-      type: Number,
-    },
-  },
-  methods: {
-    isPoliticalAgendasOn: function(): boolean {
-      return (this.gameOptions.politicalAgendasExtension !== AgendaStyle.STANDARD);
-    },
-    getBoardColorClass: function(boardName: string): string {
-      if (boardName === BoardName.ORIGINAL) {
-        return 'game-config board-tharsis map';
-      } else if (boardName === BoardName.HELLAS) {
-        return 'game-config board-hellas map';
-      } else if (boardName === BoardName.ELYSIUM) {
-        return 'game-config board-elysium map';
-      } else {
-        return 'game-config board-other map';
-      }
-    },
-    isRandomMANone: function(): boolean {
-      return this.gameOptions.randomMA === RandomMAOptionType.NONE;
-    },
-    isRandomMALimited: function(): boolean {
-      return this.gameOptions.randomMA === RandomMAOptionType.LIMITED;
-    },
-    isRandomMAUnlimited: function(): boolean {
-      return this.gameOptions.randomMA === RandomMAOptionType.UNLIMITED;
-    },
-  },
-  template: `
+<template>
         <div id="game-setup-detail" class="game-setup-detail-container">
           <ul>
             <li><div class="setup-item" v-i18n>Expansion:</div>
@@ -109,5 +66,55 @@ export const GameSetupDetail = Vue.component('game-setup-detail', {
             <li v-if="gameOptions.cardsBlackList.length > 0"><div class="setup-item" v-i18n>Banned cards:</div>{{ gameOptions.cardsBlackList.join(', ') }}</li>
           </ul>
         </div>
-    `,
+</template>
+
+<script lang="ts">
+
+import Vue from 'vue';
+import {GameOptionsModel} from '../models/GameOptionsModel';
+import {BoardName} from '../boards/BoardName';
+import {RandomMAOptionType} from '../RandomMAOptionType';
+import {AgendaStyle} from '../turmoil/PoliticalAgendas';
+
+export default Vue.extend({
+  name: 'game-setup-detail',
+  props: {
+    playerNumber: {
+      type: Number,
+    },
+    gameOptions: {
+      type: Object as () => GameOptionsModel,
+    },
+    lastSoloGeneration: {
+      type: Number,
+    },
+  },
+  methods: {
+    isPoliticalAgendasOn: function(): boolean {
+      return (this.gameOptions.politicalAgendasExtension !== AgendaStyle.STANDARD);
+    },
+    getBoardColorClass: function(boardName: string): string {
+      if (boardName === BoardName.ORIGINAL) {
+        return 'game-config board-tharsis map';
+      } else if (boardName === BoardName.HELLAS) {
+        return 'game-config board-hellas map';
+      } else if (boardName === BoardName.ELYSIUM) {
+        return 'game-config board-elysium map';
+      } else {
+        return 'game-config board-other map';
+      }
+    },
+    isRandomMANone: function(): boolean {
+      return this.gameOptions.randomMA === RandomMAOptionType.NONE;
+    },
+    isRandomMALimited: function(): boolean {
+      return this.gameOptions.randomMA === RandomMAOptionType.LIMITED;
+    },
+    isRandomMAUnlimited: function(): boolean {
+      return this.gameOptions.randomMA === RandomMAOptionType.UNLIMITED;
+    },
+  },
 });
+
+</script>
+

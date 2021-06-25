@@ -4,7 +4,7 @@ import {PreferencesManager} from './PreferencesManager';
 import {LANGUAGES} from '../constants';
 import {TurmoilModel} from '../models/TurmoilModel';
 import {PartyName} from '../turmoil/parties/PartyName';
-import {GameSetupDetail} from './GameSetupDetail';
+import GameSetupDetail from './GameSetupDetail.vue';
 import {GameOptionsModel} from '../models/GameOptionsModel';
 import {TranslateMixin} from './TranslateMixin';
 import {GlobalParameterValue} from './GlobalParameterValue';

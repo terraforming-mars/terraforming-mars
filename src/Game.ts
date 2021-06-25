@@ -111,8 +111,8 @@ export interface GameOptions {
   customCorporationsList: Array<CardName>;
   cardsBlackList: Array<CardName>;
   customColoniesList: Array<ColonyName>;
-  requiresVenusTrackCompletion: boolean; // Venus must be completed to end the game
   requiresMoonTrackCompletion: boolean; // Moon must be completed to end the game
+  requiresVenusTrackCompletion: boolean; // Venus must be completed to end the game
 }
 
 const DEFAULT_GAME_OPTIONS: GameOptions = {

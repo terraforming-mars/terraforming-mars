@@ -41,18 +41,11 @@ class RedsBonus01 implements Bonus {
 
   grant(game: Game) {
     const players = game.getPlayers();
+    const scores = players.map((player) => this.getScore(player));
 
-    if (game.isSoloMode() && players[0].getTerraformRating() <= 20) {
-      players[0].increaseTerraformRating();
-    } else {
-      players.sort((p1, p2) => p1.getTerraformRating() - p2.getTerraformRating());
-      const min = players[0].getTerraformRating();
-
-      while (players.length > 0 && players[0].getTerraformRating() === min) {
-        players[0].increaseTerraformRating();
-        players.shift();
-      }
-    }
+    players.forEach((player, idx) => {
+      if (scores[idx] > 0) player.increaseTerraformRating();
+    });
   }
 }
 
@@ -76,18 +69,11 @@ class RedsBonus02 implements Bonus {
 
   grant(game: Game) {
     const players = game.getPlayers();
+    const scores = players.map((player) => this.getScore(player));
 
-    if (game.isSoloMode() && players[0].getTerraformRating() > 20) {
-      players[0].decreaseTerraformRating();
-    } else {
-      players.sort((p1, p2) => p2.getTerraformRating() - p1.getTerraformRating());
-      const max = players[0].getTerraformRating();
-
-      while (players.length > 0 && players[0].getTerraformRating() === max) {
-        players[0].decreaseTerraformRating();
-        players.shift();
-      }
-    }
+    players.forEach((player, idx) => {
+      if (scores[idx] < 0) player.decreaseTerraformRating();
+    });
   }
 }
 

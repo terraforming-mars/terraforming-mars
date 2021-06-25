@@ -19,8 +19,7 @@ export class ChoosePoliticalAgenda implements DeferredAction {
   public execute(): PlayerInput {
     const players = this.player.game.getPlayers();
     const bonuses: Array<SelectOption> = this.party.bonuses.map((bonus) => {
-      let description = bonus.description + ' (';
-      description += players.map((player) => player.name + ': ' + bonus.getScore(player)).join(' / ') + ')';
+      const description = bonus.description + ' (' + players.map((player) => player.name + ': ' + bonus.getScore(player)).join(' / ') + ')';
 
       return new SelectOption(description, 'Select', () => {
         this.bonusCb(bonus.id);

@@ -558,7 +558,9 @@ export class Server {
       randomMA: options.randomMA,
       turmoilExtension: options.turmoilExtension,
       venusNextExtension: options.venusNextExtension,
+      requiresMoonTrackCompletion: options.requiresMoonTrackCompletion,
       requiresVenusTrackCompletion: options.requiresVenusTrackCompletion,
+      undoOption: options.undoOption,
     };
   }
 }

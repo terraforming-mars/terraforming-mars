@@ -1,8 +1,32 @@
+<template>
+      <div id="game-home" class="game-home-container">
+        <h1><span v-i18n>Terraforming mars</span> [game id: <span>{{getGameId()}}</span>]</h1>
+        <h4 v-i18n>Instructions: To start the game, separately copy and share the links with all players, and then click on your name. <br/>Save this page in case you or one of your opponents loses a link.</h4>
+        <ul>
+          <li v-for="(player, index) in (game === undefined ? [] : game.players)" :key="player.color">
+            <span class="turn-order">{{getTurnOrder(index)}}</span>
+            <span :class="'color-square ' + getPlayerCubeColorClass(player.color)"></span>
+            <span class="player-name"><a :href="getHref(player.id)">{{player.name}}</a></span>
+            <Button title="copy" size="tiny" :onClick="_=>copyUrl(player.id)"/>
+            <span v-if="isPlayerUrlCopied(player.id)" class="copied-notice">Playable link for {{player.name}} copied to clipboard <span class="dismissed" @click="setCopiedIdToDefault" >dismiss</span></span>
+          </li>
+        </ul>
+
+        <div class="spacing-setup"></div>
+        <div v-if="game !== undefined">
+          <h1 v-i18n>Game settings</h1>
+          <game-setup-detail :gameOptions="game.gameOptions" :playerNumber="game.players.length" :lastSoloGeneration="game.lastSoloGeneration"></game-setup-detail>
+        </div>
+      </div>
+</template>
+
+<script lang="ts">
+
 import Vue from 'vue';
 import {SimpleGameModel} from '../models/SimpleGameModel';
 import {Button} from '../components/common/Button';
 import {playerColorClass} from '../utils/utils';
-import {GameSetupDetail} from '../components/GameSetupDetail';
+import GameSetupDetail from '../components/GameSetupDetail.vue';
 
 // taken from https://stackoverflow.com/a/46215202/83336
 // The solution to copying to the clipboard in this case is
@@ -21,7 +45,8 @@ function copyToClipboard(text: string): void {
 }
 const DEFAULT_COPIED_PLAYER_ID = '-1';
 
-export const GameHome = Vue.component('game-home', {
+export default Vue.extend({
+  name: 'game-home',
   props: {
     game: {
       type: Object as () => SimpleGameModel | undefined,
@@ -71,25 +96,7 @@ export const GameHome = Vue.component('game-home', {
       return playerId === this.urlCopiedPlayerId;
     },
   },
-  template: `
-      <div id="game-home" class="game-home-container">
-        <h1><span v-i18n>Terraforming mars</span> [game id: <span>{{getGameId()}}</span>]</h1>
-        <h4 v-i18n>Instructions: To start the game, separately copy and share the links with all players, and then click on your name. <br/>Save this page in case you or one of your opponents loses a link.</h4>
-        <ul>
-          <li v-for="(player, index) in (game === undefined ? [] : game.players)">
-            <span class="turn-order">{{getTurnOrder(index)}}</span>
-            <span :class="'color-square ' + getPlayerCubeColorClass(player.color)"></span>
-            <span class="player-name"><a :href="getHref(player.id)">{{player.name}}</a></span>
-            <Button title="copy" size="tiny" :onClick="_=>copyUrl(player.id)"/>
-            <span v-if="isPlayerUrlCopied(player.id)" class="copied-notice">Playable link for {{player.name}} copied to clipboard <span class="dismissed" @click="setCopiedIdToDefault" >dismiss</span></span>
-          </li>
-        </ul>
-
-        <div class="spacing-setup"></div>
-        <div v-if="game !== undefined">
-          <h1 v-i18n>Game settings</h1>
-          <game-setup-detail :gameOptions="game.gameOptions" :playerNumber="game.players.length" :lastSoloGeneration="game.lastSoloGeneration"></game-setup-detail>
-        </div>
-      </div>
-    `,
 });
+
+</script>
+

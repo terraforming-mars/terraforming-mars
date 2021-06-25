@@ -66,7 +66,7 @@ describe('ApiGame', () => {
           },
         ],
         'gameOptions': {
-          'aresExtension': false, 'boardName': 'tharsis', 'cardsBlackList': [], 'coloniesExtension': false, 'communityCardsOption': false, 'corporateEra': true, 'draftVariant': false, 'fastModeOption': false, 'includeVenusMA': true, 'initialDraftVariant': false, 'moonExpansion': false, 'preludeExtension': false, 'promoCardsOption': false, 'politicalAgendasExtension': 'Standard', 'removeNegativeGlobalEvents': false, 'showOtherPlayersVP': false, 'showTimers': true, 'shuffleMapOption': false, 'solarPhaseOption': false, 'soloTR': false, 'randomMA': 'No randomization', 'turmoilExtension': false, 'venusNextExtension': false, 'requiresVenusTrackCompletion': false,
+          'aresExtension': false, 'boardName': 'tharsis', 'cardsBlackList': [], 'coloniesExtension': false, 'communityCardsOption': false, 'corporateEra': true, 'draftVariant': false, 'fastModeOption': false, 'includeVenusMA': true, 'initialDraftVariant': false, 'moonExpansion': false, 'preludeExtension': false, 'promoCardsOption': false, 'politicalAgendasExtension': 'Standard', 'removeNegativeGlobalEvents': false, 'requiresMoonTrackCompletion': false, 'showOtherPlayersVP': false, 'showTimers': true, 'shuffleMapOption': false, 'solarPhaseOption': false, 'soloTR': false, 'randomMA': 'No randomization', 'turmoilExtension': false, 'undoOption': false, 'venusNextExtension': false, 'requiresVenusTrackCompletion': false,
         },
       },
     );

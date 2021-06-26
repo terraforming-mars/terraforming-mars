@@ -7,7 +7,7 @@ import {SpectatorHome} from './SpectatorHome';
 import {PlayerModel} from '../models/PlayerModel';
 import {StartScreen} from './StartScreen';
 import {LoadGameForm} from './LoadGameForm';
-import {DebugUI} from './DebugUI';
+import DebugUI from './DebugUI.vue';
 import {SimpleGameModel} from '../models/SimpleGameModel';
 import {Help} from './help/Help';
 
@@ -185,7 +185,7 @@ export const mainAppSettings = {
       app.screen = 'create-game-form';
     } else if (currentPathname === '/load') {
       app.screen = 'load';
-    } else if (currentPathname === '/debug-ui' || currentPathname === '/cards') {
+    } else if (currentPathname === '/cards') {
       app.screen = 'cards';
     } else if (currentPathname === '/help') {
       app.screen = 'help';

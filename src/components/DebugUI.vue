@@ -1,3 +1,118 @@
+<template>
+        <div class="debug-ui-container" :class="getLanguageCssClass()">
+            <h1>Cards List</h1>
+            <div class="legacy-anchor">
+              <a href="https://ssimeonoff.github.io/cards-list" target="_blank">legacy card UI</a>
+            </div>
+            <div class="form-group">
+              <input class="form-input form-input-line" placeholder="filter" v-model="filterText">
+              <input type="checkbox" name="filterDescription" id="filterDescription-checkbox" v-model="filterDescription">
+              <label for="filterDescription-checkbox">
+                  <span v-i18n>Filter description</span>
+              </label>
+              <input type="checkbox" name="sortById" id="sortById-checkbox" v-model="sortById">
+              <label for="sortById-checkbox">
+                  <span v-i18n>Sort by ID (work in progress)</span>
+              </label>
+            </div>
+
+            <div class="create-game-page-column" style = "flex-flow: inherit; ">
+            <button id="toggle-checkbox" v-on:click="toggleAll()">
+                <span v-i18n>Toggle all</span>
+            </button>
+
+            <input type="checkbox" name="base" id="base-checkbox" v-model="base">
+              <label for="base-checkbox" class="expansion-button">
+                  <span v-i18n>Base</span>
+              </label>
+
+              <input type="checkbox" name="corporateEra" id="corporateEra-checkbox" v-model="corporateEra">
+              <label for="corporateEra-checkbox" class="expansion-button">
+                  <div class="create-game-expansion-icon expansion-icon-CE"></div>
+                  <span v-i18n>Corporate Era</span>
+              </label>
+
+              <input type="checkbox" name="prelude" id="prelude-checkbox" v-model="prelude">
+              <label for="prelude-checkbox" class="expansion-button">
+                  <div class="create-game-expansion-icon expansion-icon-prelude"></div>
+                  <span v-i18n>Prelude</span>
+              </label>
+
+              <input type="checkbox" name="venusNext" id="venusNext-checkbox" v-model="venusNext">
+              <label for="venusNext-checkbox" class="expansion-button">
+              <div class="create-game-expansion-icon expansion-icon-venus"></div>
+                  <span v-i18n>Venus Next</span>
+              </label>
+
+              <input type="checkbox" name="colonies" id="colonies-checkbox" v-model="colonies">
+              <label for="colonies-checkbox" class="expansion-button">
+              <div class="create-game-expansion-icon expansion-icon-colony"></div>
+                  <span v-i18n>Colonies</span>
+              </label>
+
+              <input type="checkbox" name="turmoil" id="turmoil-checkbox" v-model="turmoil">
+              <label for="turmoil-checkbox" class="expansion-button">
+                  <div class="create-game-expansion-icon expansion-icon-turmoil"></div>
+                  <span v-i18n>Turmoil</span>
+              </label>
+
+              <input type="checkbox" name="promo" id="promo-checkbox" v-model="promo">
+              <label for="promo-checkbox" class="expansion-button">
+                  <div class="create-game-expansion-icon expansion-icon-promo"></div>
+                  <span v-i18n>Promos</span>
+              </label>
+
+              <input type="checkbox" name="ares" id="ares-checkbox" v-model="ares">
+              <label for="ares-checkbox" class="expansion-button">
+                  <div class="create-game-expansion-icon expansion-icon-ares"></div>
+                  <span v-i18n>Ares</span>
+              </label>
+
+              <input type="checkbox" name="community" id="community-checkbox" v-model="community">
+              <label for="community-checkbox" class="expansion-button">
+                  <div class="create-game-expansion-icon expansion-icon-community"></div>
+                  <span v-i18n>Community</span>
+              </label><span/>
+
+              <input type="checkbox" name="moon" id="moon-checkbox" v-model="moon">
+              <label for="moon-checkbox" class="expansion-button">
+                <div class="create-game-expansion-icon expansion-icon-themoon"></div>
+                <span v-i18n>The Moon</span>
+              </label><span/>
+            </div>
+
+            <section class="debug-ui-cards-list">
+                <h2>Project Cards</h2>
+                <div class="cardbox" v-for="card in getAllProjectCards()" :key="card">
+                    <Card v-show="filtered(card)" :card="{'name': card}" />
+                </div>
+            </section>
+            <br>
+            <section class="debug-ui-cards-list">
+                <h2>Corporations</h2>
+                <div class="cardbox" v-for="card in getAllCorporationCards()" :key="card">
+                    <Card v-show="filtered(card)" :card="{'name': card}" />
+                </div>
+            </section>
+            <br>
+            <section class="debug-ui-cards-list">
+                <h2>Preludes</h2>
+                <div class="cardbox" v-for="card in getAllPreludeCards()" :key="card">
+                    <Card v-show="filtered(card)" :card="{'name': card}" />
+                </div>
+            </section>
+            <br>
+            <section class="debug-ui-cards-list">
+              <h2>Standard Projects</h2>
+              <div class="cardbox" v-for="card in getAllStandardProjectCards()" :key="card">
+                  <Card v-show="filtered(card)" :card="{'name': card}" />
+              </div>
+            </section>
+        </div>
+</template>
+
+<script lang="ts">
+
 import Vue from 'vue';
 import {Card} from './card/Card';
 import {
@@ -47,7 +162,8 @@ export interface DebugUIModel {
   promo: boolean | unknown[],
 }
 
-export const DebugUI = Vue.component('debug-ui', {
+export default Vue.extend({
+  name: 'debug-ui',
   components: {
     Card,
   },
@@ -170,116 +286,7 @@ export const DebugUI = Vue.component('debug-ui', {
       return 'language-' + language;
     },
   },
-  template: `
-        <div class="debug-ui-container" :class="getLanguageCssClass()">
-            <h1>Cards List</h1>
-            <div class="legacy-anchor">
-              <a href="https://ssimeonoff.github.io/cards-list" target="_blank">legacy card UI</a>
-            </div>
-            <div class="form-group">
-              <input class="form-input form-input-line" placeholder="filter" v-model="filterText">
-              <input type="checkbox" name="filterDescription" id="filterDescription-checkbox" v-model="filterDescription">
-              <label for="filterDescription-checkbox">
-                  <span v-i18n>Filter description</span>
-              </label>
-              <input type="checkbox" name="sortById" id="sortById-checkbox" v-model="sortById">
-              <label for="sortById-checkbox">
-                  <span v-i18n>Sort by ID (work in progress)</span>
-              </label>
-            </div>
-
-            <div class="create-game-page-column" style = "flex-flow: inherit; ">
-            <button id="toggle-checkbox" v-on:click="toggleAll()">
-                <span v-i18n>Toggle all</span>
-            </button>
-
-            <input type="checkbox" name="base" id="base-checkbox" v-model="base">
-              <label for="base-checkbox" class="expansion-button">
-                  <span v-i18n>Base</span>
-              </label>
-
-              <input type="checkbox" name="corporateEra" id="corporateEra-checkbox" v-model="corporateEra">
-              <label for="corporateEra-checkbox" class="expansion-button">
-                  <div class="create-game-expansion-icon expansion-icon-CE"></div>
-                  <span v-i18n>Corporate Era</span>
-              </label>
-
-              <input type="checkbox" name="prelude" id="prelude-checkbox" v-model="prelude">
-              <label for="prelude-checkbox" class="expansion-button">
-                  <div class="create-game-expansion-icon expansion-icon-prelude"></div>
-                  <span v-i18n>Prelude</span>
-              </label>
-
-              <input type="checkbox" name="venusNext" id="venusNext-checkbox" v-model="venusNext">
-              <label for="venusNext-checkbox" class="expansion-button">
-              <div class="create-game-expansion-icon expansion-icon-venus"></div>
-                  <span v-i18n>Venus Next</span>
-              </label>
-
-              <input type="checkbox" name="colonies" id="colonies-checkbox" v-model="colonies">
-              <label for="colonies-checkbox" class="expansion-button">
-              <div class="create-game-expansion-icon expansion-icon-colony"></div>
-                  <span v-i18n>Colonies</span>
-              </label>
-
-              <input type="checkbox" name="turmoil" id="turmoil-checkbox" v-model="turmoil">
-              <label for="turmoil-checkbox" class="expansion-button">
-                  <div class="create-game-expansion-icon expansion-icon-turmoil"></div>
-                  <span v-i18n>Turmoil</span>
-              </label>
-
-              <input type="checkbox" name="promo" id="promo-checkbox" v-model="promo">
-              <label for="promo-checkbox" class="expansion-button">
-                  <div class="create-game-expansion-icon expansion-icon-promo"></div>
-                  <span v-i18n>Promos</span>
-              </label>
-
-              <input type="checkbox" name="ares" id="ares-checkbox" v-model="ares">
-              <label for="ares-checkbox" class="expansion-button">
-                  <div class="create-game-expansion-icon expansion-icon-ares"></div>
-                  <span v-i18n>Ares</span>
-              </label>
-
-              <input type="checkbox" name="community" id="community-checkbox" v-model="community">
-              <label for="community-checkbox" class="expansion-button">
-                  <div class="create-game-expansion-icon expansion-icon-community"></div>
-                  <span v-i18n>Community</span>
-              </label><span/>
-
-              <input type="checkbox" name="moon" id="moon-checkbox" v-model="moon">
-              <label for="moon-checkbox" class="expansion-button">
-                <div class="create-game-expansion-icon expansion-icon-themoon"></div>
-                <span v-i18n>The Moon</span>
-              </label><span/>
-            </div>
-
-            <section class="debug-ui-cards-list">
-                <h2>Project Cards</h2>
-                <div class="cardbox" v-for="card in getAllProjectCards()">
-                    <Card v-show="filtered(card)" :card="{'name': card}" />
-                </div>
-            </section>
-            <br>
-            <section class="debug-ui-cards-list">
-                <h2>Corporations</h2>
-                <div class="cardbox" v-for="card in getAllCorporationCards()">
-                    <Card v-show="filtered(card)" :card="{'name': card}" />
-                </div>
-            </section>
-            <br>
-            <section class="debug-ui-cards-list">
-                <h2>Preludes</h2>
-                <div class="cardbox" v-for="card in getAllPreludeCards()">
-                    <Card v-show="filtered(card)" :card="{'name': card}" />
-                </div>
-            </section>
-            <br>
-            <section class="debug-ui-cards-list">
-              <h2>Standard Projects</h2>
-              <div class="cardbox" v-for="card in getAllStandardProjectCards()">
-                  <Card v-show="filtered(card)" :card="{'name': card}" />
-              </div>
-            </section>
-        </div>
-    `,
 });
+
+</script>
+

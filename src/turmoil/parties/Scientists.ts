@@ -22,10 +22,13 @@ class ScientistsBonus01 implements Bonus {
   isDefault = true;
   description: string = 'Gain 1 M€ for each Science tag you have';
 
+  getScore(player: Player) {
+    return player.getTagCount(Tags.SCIENCE, false, false);
+  }
+
   grant(game: Game) {
     game.getPlayers().forEach((player) => {
-      const tagCount = player.getTagCount(Tags.SCIENCE, false, false);
-      player.addResource(Resources.MEGACREDITS, tagCount);
+      player.addResource(Resources.MEGACREDITS, this.getScore(player));
     });
   }
 }
@@ -35,10 +38,13 @@ class ScientistsBonus02 implements Bonus {
   description: string = 'Gain 1 M€ for every 3 cards in hand';
   isDefault = false;
 
+  getScore(player: Player) {
+    return Math.floor(player.cardsInHand.length / 3);
+  }
+
   grant(game: Game) {
     game.getPlayers().forEach((player) => {
-      const amount = Math.floor(player.cardsInHand.length / 3);
-      player.addResource(Resources.MEGACREDITS, amount);
+      player.addResource(Resources.MEGACREDITS, this.getScore(player));
     });
   }
 }

@@ -33,10 +33,15 @@ class GreensBonus01 implements Bonus {
   id = 'gb01';
   description: string = 'Gain 1 M€ for each Plant, Microbe and Animal tag you have';
 
+  getScore(player: Player) {
+    return player.getTagCount(Tags.PLANT, false, false) +
+      player.getTagCount(Tags.MICROBE, false, false) +
+      player.getTagCount(Tags.ANIMAL, false, false);
+  }
+
   grant(game: Game) {
     game.getPlayers().forEach((player) => {
-      const tagCount = player.getTagCount(Tags.PLANT, false, false) + player.getTagCount(Tags.MICROBE, false, false) + player.getTagCount(Tags.ANIMAL, false, false);
-      player.addResource(Resources.MEGACREDITS, tagCount);
+      player.addResource(Resources.MEGACREDITS, this.getScore(player));
     });
   }
 }
@@ -46,13 +51,15 @@ class GreensBonus02 implements Bonus {
   description: string = 'Gain 2 M€ for each greenery tile you have';
   isDefault = false;
 
+  getScore(player: Player) {
+    const boardSpaces = player.game.board.spaces;
+    const count = boardSpaces.filter((space) => space.tile && space.tile.tileType === TileType.GREENERY && space.player !== undefined && space.player.id === player.id).length;
+    return count * 2;
+  }
+
   grant(game: Game) {
     game.getPlayers().forEach((player) => {
-      const count = game.board.spaces.filter((space) => {
-        return space.tile && space.tile.tileType === TileType.GREENERY && space.player !== undefined && space.player.id === player.id;
-      }).length;
-
-      player.addResource(Resources.MEGACREDITS, count * 2);
+      player.addResource(Resources.MEGACREDITS, this.getScore(player));
     });
   }
 }

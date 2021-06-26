@@ -17,10 +17,16 @@ export class ChoosePoliticalAgenda implements DeferredAction {
   ) {}
 
   public execute(): PlayerInput {
-    const bonuses: Array<SelectOption> = this.party.bonuses.map((bonus) => new SelectOption(bonus.description, 'Select', () => {
-      this.bonusCb(bonus.id);
-      return undefined;
-    }));
+    const players = this.player.game.getPlayers();
+    const bonuses: Array<SelectOption> = this.party.bonuses.map((bonus) => {
+      const description = bonus.description + ' (' + players.map((player) => player.name + ': ' + bonus.getScore(player)).join(' / ') + ')';
+
+      return new SelectOption(description, 'Select', () => {
+        this.bonusCb(bonus.id);
+        return undefined;
+      });
+    });
+
     const orBonuses = new OrOptions(...bonuses);
     orBonuses.title = 'Select a ' + this.party.name + ' bonus.';
 

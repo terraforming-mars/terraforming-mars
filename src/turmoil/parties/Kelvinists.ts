@@ -21,10 +21,13 @@ class KelvinistsBonus01 implements Bonus {
   isDefault = true;
   description = 'Gain 1 M€ for each Heat production you have';
 
+  getScore(player: Player) {
+    return player.getProduction(Resources.HEAT);
+  }
+
   grant(game: Game) {
     game.getPlayers().forEach((player) => {
-      const heatProduction = player.getProduction(Resources.HEAT);
-      player.addResource(Resources.MEGACREDITS, heatProduction);
+      player.addResource(Resources.MEGACREDITS, this.getScore(player));
     });
   }
 }
@@ -34,10 +37,13 @@ class KelvinistsBonus02 implements Bonus {
   description = 'Gain 1 heat for each Heat production you have';
   isDefault = false;
 
+  getScore(player: Player) {
+    return player.getProduction(Resources.HEAT);
+  }
+
   grant(game: Game) {
     game.getPlayers().forEach((player) => {
-      const heatProduction = player.getProduction(Resources.HEAT);
-      player.addResource(Resources.HEAT, heatProduction);
+      player.addResource(Resources.HEAT, this.getScore(player));
     });
   }
 }

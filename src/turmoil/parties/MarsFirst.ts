@@ -28,10 +28,13 @@ class MarsFirstBonus01 implements Bonus {
   description = 'Gain 1 M€ for each Building tag you have';
   isDefault = true;
 
+  getScore(player: Player) {
+    return player.getTagCount(Tags.BUILDING, false, false);
+  }
+
   grant(game: Game) {
     game.getPlayers().forEach((player) => {
-      const tagCount = player.getTagCount(Tags.BUILDING, false, false);
-      player.addResource(Resources.MEGACREDITS, tagCount);
+      player.addResource(Resources.MEGACREDITS, this.getScore(player));
     });
   }
 }
@@ -41,13 +44,14 @@ class MarsFirstBonus02 implements Bonus {
   description = 'Gain 1 M€ for each tile you have ON MARS';
   isDefault = false;
 
+  getScore(player: Player) {
+    const boardSpaces = player.game.board.spaces;
+    return boardSpaces.filter((space) => space.tile !== undefined && space.player === player && space.spaceType !== SpaceType.COLONY).length;
+  }
+
   grant(game: Game) {
     game.getPlayers().forEach((player) => {
-      const tileCount = game.board.spaces.filter((space) => {
-        return space.tile !== undefined && space.player === player && space.spaceType !== SpaceType.COLONY;
-      }).length;
-
-      player.addResource(Resources.MEGACREDITS, tileCount);
+      player.addResource(Resources.MEGACREDITS, this.getScore(player));
     });
   }
 }

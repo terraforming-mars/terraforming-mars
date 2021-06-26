@@ -30,6 +30,15 @@ describe('Reds', function() {
     expect(secondPlayer.getTerraformRating()).to.eq(secondPlayerInitialTR + 1);
   });
 
+  it('Ruling bonus 1: Ties for lowest TR are resolved correctly', function() {
+    const initialPlayerTR = player.getTerraformRating();
+    const bonus = REDS_BONUS_1;
+
+    bonus.grant(game);
+    expect(player.getTerraformRating()).to.eq(initialPlayerTR + 1);
+    expect(secondPlayer.getTerraformRating()).to.eq(initialPlayerTR + 1);
+  });
+
   it('Ruling bonus 2: The player(s) with the highest TR loses 1 TR', function() {
     player.increaseTerraformRating();
 
@@ -37,6 +46,15 @@ describe('Reds', function() {
     const bonus = REDS_BONUS_2;
     bonus.grant(game);
     expect(player.getTerraformRating()).to.eq(playerInitialTR - 1);
+  });
+
+  it('Ruling bonus 2: Ties for highest TR are resolved correctly', function() {
+    const initialPlayerTR = player.getTerraformRating();
+    const bonus = REDS_BONUS_2;
+
+    bonus.grant(game);
+    expect(player.getTerraformRating()).to.eq(initialPlayerTR - 1);
+    expect(secondPlayer.getTerraformRating()).to.eq(initialPlayerTR - 1);
   });
 
   it('Ruling policy 1: When you take an action that raises TR, you MUST pay 3 M€ per step raised', function() {

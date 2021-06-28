@@ -151,7 +151,7 @@ export const mainAppSettings = {
   },
   'mounted': function() {
     document.title = constants.APP_NAME;
-    dialogPolyfill.default.registerDialog(document.getElementById('alert-dialog'));
+    if (!window.HTMLDialogElement) dialogPolyfill.default.registerDialog(document.getElementById('alert-dialog'));
     const currentPathname: string = window.location.pathname;
     const app = this as unknown as (typeof mainAppSettings.data) & (typeof mainAppSettings.methods);
     if (currentPathname === '/player' || currentPathname === '/the-end') {

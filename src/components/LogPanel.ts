@@ -16,7 +16,7 @@ import {Color} from '../Color';
 import {SoundManager} from './SoundManager';
 import {PreferencesManager} from './PreferencesManager';
 import {GlobalEventName} from '../turmoil/globalEvents/GlobalEventName';
-import {GlobalEvent} from './GlobalEvent';
+import GlobalEvent from './GlobalEvent.vue';
 import {getGlobalEventByName} from '../turmoil/globalEvents/GlobalEventDealer';
 import {GlobalEventModel} from '../models/TurmoilModel';
 import {PartyName} from '../turmoil/parties/PartyName';

@@ -7,7 +7,7 @@ import {PartyName} from '../turmoil/parties/PartyName';
 import GameSetupDetail from './GameSetupDetail.vue';
 import {GameOptionsModel} from '../models/GameOptionsModel';
 import {TranslateMixin} from './TranslateMixin';
-import {GlobalParameterValue} from './GlobalParameterValue';
+import GlobalParameterValue from './GlobalParameterValue.vue';
 import {MoonGlobalParameterValue} from './MoonGlobalParameterValue';
 import {GlobalParameter} from '../GlobalParameter';
 import {MoonModel} from '../models/MoonModel';

@@ -1,7 +1,18 @@
+<template>
+  <div :class="getClass()">
+    <div class="event-party event-party--top" :class="partyNameClass(globalEvent.revealed)" v-i18n>{{ globalEvent.revealed }}</div>
+    <div class="event-party event-party--bottom" :class="partyNameClass(globalEvent.current)" v-i18n>{{ globalEvent.current }}</div>
+    <div class="event-content"><div class="event-text" v-i18n>{{ globalEvent.description }}</div></div>
+  </div>
+</template>
+
+<script lang="ts">
+
 import Vue from 'vue';
 import {GlobalEventModel} from '../models/TurmoilModel';
 
-export const GlobalEvent = Vue.component('global-event', {
+export default Vue.extend({
+  name: 'global-event',
   props: {
     globalEvent: {
       type: Object as () => GlobalEventModel,
@@ -29,12 +40,6 @@ export const GlobalEvent = Vue.component('global-event', {
       }
     },
   },
-  // TODO  make event-text optional.
-  template: `
-    <div :class="getClass()">
-      <div class="event-party event-party--top" :class="partyNameClass(globalEvent.revealed)" v-i18n>{{ globalEvent.revealed }}</div>
-      <div class="event-party event-party--bottom" :class="partyNameClass(globalEvent.current)" v-i18n>{{ globalEvent.current }}</div>
-      <div class="event-content"><div class="event-text" v-i18n>{{ globalEvent.description }}</div></div>
-    </div>
-    `,
 });
+
+</script>

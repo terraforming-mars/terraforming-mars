@@ -36,7 +36,7 @@ export const ConfirmDialog = Vue.component('confirm-dialog', {
     },
   },
   mounted: function() {
-    (dialogPolyfill.default || dialogPolyfill).registerDialog(this.$refs['dialog']);
+    if (!window.HTMLDialogElement) dialogPolyfill.default.registerDialog(this.$refs['dialog']);
   },
   template: `<dialog ref="dialog">
       <form method="dialog">

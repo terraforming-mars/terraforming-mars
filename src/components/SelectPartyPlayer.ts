@@ -1,6 +1,6 @@
 
 import Vue from 'vue';
-import {Button} from '../components/common/Button';
+import Button from '../components/common/Button.vue';
 import {ColorWithNeutral} from '../Color';
 import {PlayerInputModel} from '../models/PlayerInputModel';
 import {PlayerModel} from '../models/PlayerModel';
@@ -32,7 +32,7 @@ export const SelectPartyPlayer = Vue.component('select-party-player', {
   },
   mixins: [TranslateMixin],
   components: {
-    'Button': Button,
+    Button,
     'select-player-row': SelectPlayerRow,
   },
   methods: {

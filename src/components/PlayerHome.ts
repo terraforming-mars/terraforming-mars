@@ -14,7 +14,7 @@ import {PlayerMixin} from './PlayerMixin';
 import {Turmoil} from './Turmoil';
 import {playerColorClass} from '../utils/utils';
 import {DynamicTitle} from './common/DynamicTitle';
-import {Button} from './common/Button';
+import Button from './common/Button.vue';
 import {SortableCards} from './SortableCards';
 import TopBar from './TopBar.vue';
 import {PreferencesManager} from './PreferencesManager';
@@ -73,7 +73,7 @@ export const PlayerHome = Vue.component('player-home', {
     'colony': Colony,
     'log-panel': LogPanel,
     'turmoil': Turmoil,
-    'Button': Button,
+    Button,
     'sortable-cards': SortableCards,
     'top-bar': TopBar,
     'moonboard': MoonBoard,

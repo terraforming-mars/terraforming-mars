@@ -20,6 +20,7 @@ import GlobalEvent from './GlobalEvent.vue';
 import {getGlobalEventByName} from '../turmoil/globalEvents/GlobalEventDealer';
 import {GlobalEventModel} from '../models/TurmoilModel';
 import {PartyName} from '../turmoil/parties/PartyName';
+import Button from './common/Button.vue';
 
 let logRequest: XMLHttpRequest | undefined;
 
@@ -52,6 +53,7 @@ export const LogPanel = Vue.component('log-panel', {
     };
   },
   components: {
+    Button,
     Card,
     GlobalEvent,
   },

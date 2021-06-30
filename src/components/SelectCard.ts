@@ -1,5 +1,5 @@
 import Vue from 'vue';
-import {Button} from '../components/common/Button';
+import Button from '../components/common/Button.vue';
 import {Message} from '../Message';
 import {CardOrderStorage} from './CardOrderStorage';
 import {PlayerModel} from '../models/PlayerModel';

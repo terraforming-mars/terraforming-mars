@@ -8,7 +8,7 @@ import {IGameData} from '../../database/IDatabase';
 import {ColoniesFilter} from './ColoniesFilter';
 import {ColonyName} from '../../colonies/ColonyName';
 import {CardsFilter} from './CardsFilter';
-import {Button} from '../common/Button';
+import Button from '../common/Button.vue';
 import {playerColorClass} from '../../utils/utils';
 import {RandomMAOptionType} from '../../RandomMAOptionType';
 import {GameId} from '../../Game';
@@ -142,7 +142,7 @@ export const CreateGameForm = Vue.component('create-game-form', {
     'corporations-filter': CorporationsFilter,
     'colonies-filter': ColoniesFilter,
     'cards-filter': CardsFilter,
-    'Button': Button,
+    Button,
   },
   mounted: function() {
     if (window.location.pathname === '/solo') {

@@ -6,6 +6,7 @@ import {PlayerModel} from '../models/PlayerModel';
 import {hidePlayerData} from './overview/PlayerStatus';
 import {mainAppSettings} from './App';
 import {Card} from './card/Card';
+import Button from './common/Button.vue';
 
 export const OtherPlayer = Vue.component('other-player', {
   props: {
@@ -17,6 +18,7 @@ export const OtherPlayer = Vue.component('other-player', {
     },
   },
   components: {
+    Button,
     'stacked-cards': StackedCards,
     Card,
   },

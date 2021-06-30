@@ -1,5 +1,5 @@
 import Vue from 'vue';
-import {Button} from '../components/common/Button';
+import Button from '../components/common/Button.vue';
 import {PlayerInputModel} from '../models/PlayerInputModel';
 import {Party} from '../components/Party';
 import {TranslateMixin} from './TranslateMixin';

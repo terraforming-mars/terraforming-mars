@@ -2,7 +2,7 @@ import Vue, {VNode} from 'vue';
 import {PlayerInputFactory} from './PlayerInputFactory';
 import {PlayerModel} from '../models/PlayerModel';
 import {PlayerInputModel} from '../models/PlayerInputModel';
-import {Button} from '../components/common/Button';
+import Button from '../components/common/Button.vue';
 import {$t} from '../directives/i18n';
 
 export const AndOptions = Vue.component('and-options', {

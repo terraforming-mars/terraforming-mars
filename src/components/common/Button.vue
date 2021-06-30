@@ -1,9 +1,20 @@
+<template>
+  <button v-on:click.prevent="onClick" :class="getOuterClass()" :disabled="getDisabled()" v-i18n>
+    <span v-if="getInnerClass() !== ''" :class="getInnerClass()"></span>
+    <span v-else>{{this.title}}</span>
+  </button>
+</template>
+
+<script lang="ts">
+
 import Vue from 'vue';
 
-export const Button = Vue.component('Button', {
+export default Vue.extend({
+  name: 'Button',
   props: {
     title: {
       type: String,
+      required: false,
     },
     disabled: {
       type: Boolean,
@@ -12,6 +23,7 @@ export const Button = Vue.component('Button', {
     align: {
       type: String,
       validator: (align) => ['right', 'left'].includes(align),
+      required: false,
     },
     size: {
       type: String,
@@ -109,10 +121,7 @@ export const Button = Vue.component('Button', {
       return '';
     },
   },
-  template: `
-        <button v-on:click.prevent="onClick" :class="getOuterClass()" :disabled="getDisabled()" v-i18n>
-          <span v-if="getInnerClass() !== ''" :class="getInnerClass()"></span>
-          <span v-else>{{this.title}}</span>
-        </button>
-    `,
 });
+
+</script>
+

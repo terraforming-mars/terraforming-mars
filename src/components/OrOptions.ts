@@ -1,7 +1,7 @@
 import Vue, {VNode} from 'vue';
 import {PlayerInputFactory} from './PlayerInputFactory';
 import {$t} from '../directives/i18n';
-import {Button} from '../components/common/Button';
+import Button from '../components/common/Button.vue';
 import {PlayerModel} from '../models/PlayerModel';
 import {PlayerInputModel} from '../models/PlayerInputModel';
 import {PreferencesManager} from './PreferencesManager';

@@ -1,7 +1,7 @@
 
 import Vue from 'vue';
 
-import {Button} from './common/Button';
+import Button from './common/Button.vue';
 import {CardFinder} from '../CardFinder';
 import {CardName} from '../CardName';
 import * as constants from '../constants';

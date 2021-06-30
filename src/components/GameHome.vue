@@ -24,7 +24,7 @@
 
 import Vue from 'vue';
 import {SimpleGameModel} from '../models/SimpleGameModel';
-import {Button} from '../components/common/Button';
+import Button from '../components/common/Button.vue';
 import {playerColorClass} from '../utils/utils';
 import GameSetupDetail from '../components/GameSetupDetail.vue';
 

@@ -66,7 +66,8 @@
     "test": "npm run test:server && npm run test:components",
     "test:server": "mocha --require build/tests/utils/setup.js --recursive build/tests --exclude 'build/tests/components/**'",
     "pretest:server": "tsc --build tests/tsconfig.json",
-    "test:components": "vti diagnostics && npm run compile && mochapack --mode development --webpack-config webpack.config.js --require tests/components/setup.ts tests/components/*.spec.ts",
+    "test:components": "vti diagnostics && mochapack --require tests/components/setup.ts tests/components/*.spec.ts",
+    "test:components:watch": "mochapack --watch --require tests/components/setup.ts tests/components/*.spec.ts",
     "watch": "webpack --watch --mode=development",
     "webpack": "webpack"
   },

@@ -15,6 +15,7 @@ export default Vue.extend({
     title: {
       type: String,
       required: false,
+      default: '',
     },
     disabled: {
       type: Boolean,
@@ -22,8 +23,9 @@ export default Vue.extend({
     },
     align: {
       type: String,
-      validator: (align) => ['right', 'left'].includes(align),
+      validator: (align) => ['right', 'left', 'center'].includes(align),
       required: false,
+      default: 'center',
     },
     size: {
       type: String,

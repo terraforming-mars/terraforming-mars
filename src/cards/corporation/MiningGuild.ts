@@ -40,12 +40,15 @@ export class MiningGuild extends Card implements CorporationCard {
   }
 
   public onTilePlaced(cardOwner: Player, activePlayer: Player, space: ISpace, boardType: BoardType) {
-    // TODO(kberg): Clarify that this is nerfed for The Moon.
     // Nerfing on The Moon.
     if (boardType !== BoardType.MARS) {
       return;
     }
     if (cardOwner.id !== activePlayer.id || cardOwner.game.phase === Phase.SOLAR) {
+      return;
+    }
+    // Don't grant a bonus if the card is overplaced (like Ares Ocean City)
+    if (space?.tile?.covers !== undefined) {
       return;
     }
     if (space.bonus.some((bonus) => bonus === SpaceBonus.STEEL || bonus === SpaceBonus.TITANIUM)) {

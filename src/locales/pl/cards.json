@@ -17,7 +17,7 @@
     "Oxygen must be 6% or less.": "Poziom Tlenu musi wynosić maximum 6%.",
 
     "Inventors Guild": "Gildia Wynalazców",
-    "Action: Look at the top card and either buy it or discard it": "AKCJA: PODEJRZYJ WIERZCHNIĄ KARTĘ Z TALII PROJETKÓW, A NASTĘPNIE KUP JĄ ALBO ODRZUĆ.",
+    "Action: Look at the top card and either buy it or discard it": "AKCJA: PODEJRZYJ WIERZCHNIĄ KARTĘ Z TALII PROJEKTÓW, A NASTĘPNIE KUP JĄ ALBO ODRZUĆ.",
 
     "Martian Rails": "Kolej Marsjańska",
     "Action: Spend 1 Energy to gain 1 M€ for each City tile ON MARS.": "Akcja: Wydaj 1 jednostkę energii, żeby otrzymać po 1 jednostce M€ za każdy obszar miasta NA POWIERZCHNI PLANETY",
@@ -128,7 +128,7 @@
     "Effect: When any City tile is placed, gain 2 M€.": "Efekt trwały: Za każdym razem, gdy któryś z graczy umieści na planszy obszar miasta, otrzymujesz 2 M€.",
 
     "Deimos Down": "Upadek Deimosa",
-    "Raise temperature 3 steps and gain 4 steel. Remove up to 8 Plants from any player.": "Podnieś Temperaturę o 6°C. Otrzymujesz 4 jednostki stali. Usuń do 8 jednostek roslinności dowolnego gracza.",
+    "Raise temperature 3 steps and gain 4 steel. Remove up to 8 Plants from any player.": "Podnieś Temperaturę o 6°C. Otrzymujesz 4 jednostki stali. Usuń do 8 jednostek roślinności dowolnego gracza.",
 
     "Asteroid Mining": "Górnictwo Kosmiczne",
     "Increase your titanium production 2 steps.": "Podnieś swoją produkcję tytanu o 2 poziomy.",
@@ -412,7 +412,7 @@
     "Place 1 ocean tile.": "Umieść na planszy obszar oceanu.",
 
     "Ecological Zone": "Strefa Ekologiczna",
-    "Effect: When you play an animal or plant tag (including these), add an animal to this card.": "Efekt trwały: Za każdy zagrywany przez Ciebie symbol zwierząt lub roslinności (z tymi włącznie), umieść 1 jednostkę zwierząt na tej karcie.",
+    "Effect: When you play an animal or plant tag (including these), add an animal to this card.": "Efekt trwały: Za każdy zagrywany przez Ciebie symbol zwierząt lub roślinności (z tymi włącznie), umieść 1 jednostkę zwierząt na tej karcie.",
     "1 VP per 2 Animals on this card.": "Otrzymujesz po 1 PZ za każde 2 jednostki zwierząt na tej karcie.",
     "Requires that you have a greenery tile. Place this tile adjacent to any greenery tile. 1 VP per 2 Animals on this card.": "Musisz posiadać przynajmniej 1 obszar zieleni. Umieść ten obszar na polu sąsiadującym z obszarem zieleni. Otrzymujesz po 1 PZ za każde 2 jednostki zwierząt na tej karcie.",
 
@@ -452,7 +452,7 @@
     "Decrease your Energy production 2 steps. Increase your steel production 2 steps and your titanium production 1 step. Raise oxygen 2 steps.": "Obniż swoją produkcję energii o 2 poziomy. Podnieś swoją produkcję stali o 2 poziomy i swoją produkcję tytanu o 1 poziom. Podnieś Poziom Tlenu o 2%.",
 
     "Wave Power": "Energia Fal Morskich",
-    "Requires 3 ocean tiles. Increase your energy production 1 step.": "Na planszy musza się znajdować przynajmniej 3 obszary oceanów. Podnieś swoją produkcję energii o 1 poziom.",
+    "Requires 3 ocean tiles. Increase your energy production 1 step.": "Na planszy muszą się znajdować przynajmniej 3 obszary oceanów. Podnieś swoją produkcję energii o 1 poziom.",
 
     "Lava Flows": "Strumienie Lawy",
     "Raise temperature 2 steps and place this tile ON EITHER THARSIS THOLUS, ASCRAEUS MONS, PAVONIS MONS OR ARSIA MONS.": "Podnieś Temperaturę o 4°C. Umieść ten obszar na jednym z wymienionych obszarów: THARSIS TOLUS, ASCRAEUS MONS, PAVONIS MONS, ARSIA MONS.",

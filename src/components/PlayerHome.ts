@@ -11,7 +11,7 @@ import {PlayerModel, PublicPlayerModel} from '../models/PlayerModel';
 import Colony from './Colony.vue';
 import {LogPanel} from './LogPanel';
 import {PlayerMixin} from './PlayerMixin';
-import {Turmoil} from './Turmoil';
+import Turmoil from './Turmoil.vue';
 import {playerColorClass} from '../utils/utils';
 import {DynamicTitle} from './common/DynamicTitle';
 import {Button} from './common/Button';

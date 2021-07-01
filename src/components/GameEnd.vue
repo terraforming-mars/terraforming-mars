@@ -148,7 +148,7 @@ import Vue from 'vue';
 import {PlayerModel, PublicPlayerModel} from '../models/PlayerModel';
 import Board from './Board.vue';
 import {LogPanel} from './LogPanel';
-import {Button} from '../components/common/Button';
+import Button from '../components/common/Button.vue';
 import {playerColorClass} from '../utils/utils';
 import {Timer} from '../Timer';
 
@@ -169,7 +169,7 @@ export default Vue.extend({
   components: {
     'board': Board,
     'log-panel': LogPanel,
-    'Button': Button,
+    Button,
   },
   methods: {
     getEndGamePlayerRowColorClass: function(color: string): string {

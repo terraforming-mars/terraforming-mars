@@ -1,11 +1,11 @@
 import Vue from 'vue';
-import {Button} from '../components/common/Button';
+import Button from '../components/common/Button.vue';
 import {PlayerInputModel} from '../models/PlayerInputModel';
 import {TranslateMixin} from './TranslateMixin';
 
 export const SelectAmount = Vue.component('select-amount', {
   components: {
-    'Button': Button,
+    Button,
   },
   mixins: [TranslateMixin],
   props: {

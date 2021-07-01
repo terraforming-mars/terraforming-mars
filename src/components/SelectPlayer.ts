@@ -1,6 +1,6 @@
 
 import Vue from 'vue';
-import {Button} from './common/Button';
+import Button from './common/Button.vue';
 import {ColorWithNeutral} from '../Color';
 import {PlayerInputModel} from '../models/PlayerInputModel';
 import {PlayerModel} from '../models/PlayerModel';

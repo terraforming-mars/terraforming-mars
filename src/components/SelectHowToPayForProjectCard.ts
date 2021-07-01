@@ -1,6 +1,6 @@
 
 import Vue from 'vue';
-import {Button} from './common/Button';
+import Button from './common/Button.vue';
 
 interface SelectHowToPayForProjectCardModel {
   cardName: CardName;

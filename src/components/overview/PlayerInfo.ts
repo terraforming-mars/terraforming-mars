@@ -7,6 +7,7 @@ import {playerColorClass} from '../../utils/utils';
 import {mainAppSettings} from '../App';
 import {range} from '../../utils/utils';
 import {PlayerMixin} from '../PlayerMixin';
+import Button from '../common/Button.vue';
 
 const isPinned = (root: any, playerIndex: number): boolean => {
   return (root as any).getVisibilityState('pinned_player_' + playerIndex);
@@ -39,6 +40,7 @@ export const PlayerInfo = Vue.component('player-info', {
     },
   },
   components: {
+    Button,
     'player-resources': PlayerResources,
     'player-tags': PlayerTags,
     'player-status': PlayerStatus,

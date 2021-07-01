@@ -1,6 +1,6 @@
 import Vue from 'vue';
 import {ActionLabel} from './ActionLabel';
-import {Button} from '../common/Button';
+import Button from '../common/Button.vue';
 import {mainAppSettings} from '../App';
 import {PlayerModel} from '../../models/PlayerModel';
 import {PlayerTimer} from './PlayerTimer';

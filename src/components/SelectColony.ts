@@ -1,6 +1,6 @@
 import Vue from 'vue';
 import Colony from './Colony.vue';
-import {Button} from '../components/common/Button';
+import Button from '../components/common/Button.vue';
 import {PlayerInputModel} from '../models/PlayerInputModel';
 import {TranslateMixin} from './TranslateMixin';
 
@@ -27,7 +27,7 @@ export const SelectColony = Vue.component('select-colony', {
   },
   components: {
     'colony': Colony,
-    'Button': Button,
+    Button,
   },
   methods: {
     saveData: function() {

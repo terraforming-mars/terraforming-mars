@@ -1,6 +1,6 @@
 
 import Vue from 'vue';
-import {Button} from '../components/common/Button';
+import Button from '../components/common/Button.vue';
 import {SimpleGameModel} from '../models/SimpleGameModel';
 import {mainAppSettings} from './App';
 
@@ -8,7 +8,7 @@ import * as constants from '../constants';
 
 export const LoadGameForm = Vue.component('load-game-form', {
   components: {
-    'Button': Button,
+    Button,
   },
   data: function() {
     return {

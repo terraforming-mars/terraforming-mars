@@ -40,21 +40,17 @@ export default Vue.extend({
 .language-icon {
   margin-left: 10px;
   cursor: pointer;
-  transition: transform 0.15s;
-
-  &:hover {
-    transform: scale(1.1);
-  }
-}
-
-.language-icon {
   display: inline-block;
   width: 44px;
   height: 30px;
   border-radius: 50%;
   background: url(assets/flags_responsive.png) no-repeat;
-  background-size: 100%;
   box-shadow: 0 2px 2px black;
+  transition: transform 0.15s;
+
+  &:hover {
+    transform: scale(1.1);
+  }
 
   &--en {
     background-position: 0 92.561983%;

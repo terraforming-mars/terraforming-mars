@@ -1,3 +1,6 @@
+
+<script lang="ts">
+
 import Vue from 'vue';
 
 import {AndOptions} from './AndOptions';
@@ -30,7 +33,8 @@ import * as raw_settings from '../genfiles/settings.json';
 let ui_update_timeout_id: number | undefined;
 let documentTitleTimer: number | undefined;
 
-export const WaitingFor = Vue.component('waiting-for', {
+export default Vue.extend({
+  name: 'waiting-for',
   props: {
     player: {
       type: Object as () => PlayerModel,
@@ -172,4 +176,6 @@ export const WaitingFor = Vue.component('waiting-for', {
     return createElement('div', {'class': 'wf-root'}, [input]);
   },
 });
+
+</script>
 

@@ -5,7 +5,7 @@ import {Card} from './card/Card';
 import Milestone from './Milestone.vue';
 import Award from './Award.vue';
 import {PlayersOverview} from './overview/PlayersOverview';
-import {WaitingFor} from './WaitingFor';
+import WaitingFor from './WaitingFor.vue';
 import {Sidebar} from './Sidebar';
 import {PlayerModel, PublicPlayerModel} from '../models/PlayerModel';
 import Colony from './Colony.vue';

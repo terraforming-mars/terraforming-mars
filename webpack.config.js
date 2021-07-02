@@ -11,11 +11,29 @@ module.exports = {
     alias: {
       'vue$': 'vue/dist/vue.esm.js',
     },
+    fallback: {
+      util: false,
+    },
   },
   module: {
     rules: [
-      {test: /\.vue$/, loader: 'vue-loader'},
-      {test: /\.tsx?$/, loader: 'ts-loader', options: {appendTsSuffixTo: [/\.vue$/]}}
+      {
+        test: /\.vue$/,
+        loader: 'vue-loader',
+      },
+      {
+        test: /\.tsx?$/,
+        loader: 'ts-loader',
+        options: {appendTsSuffixTo: [/\.vue$/]},
+      },
+      {
+        test: /\.css$/,
+        use: ['vue-style-loader', 'css-loader?url=false'],
+      },
+      {
+        test: /\.less$/,
+        use: ['vue-style-loader', 'css-loader?url=false', 'less-loader'],
+      },
     ],
   },
   plugins: [

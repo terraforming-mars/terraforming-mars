@@ -38,6 +38,7 @@ import {IronExtractionCenter} from './IronExtractionCenter';
 import {LTFHeadquarters} from './LTFHeadquarters';
 import {LTFPrivileges} from './LTFPrivileges';
 import {LunaConference} from './LunaConference';
+import {LunaEcumenopolis} from './LunaEcumenopolis';
 import {LunaFirstIncorporated} from './LunaFirstIncorporated';
 import {LunaHyperloopCorporation} from './LunaHyperloopCorporation';
 import {LunaMiningHub} from './LunaMiningHub';
@@ -193,7 +194,7 @@ export const MOON_CARD_MANIFEST = new CardManifest({
     {cardName: CardName.UNDERMOON_DRUG_LORDS_NETWORK, Factory: UndermoonDrugLordsNetwork},
     {cardName: CardName.LTF_PRIVILEGES, Factory: LTFPrivileges},
     {cardName: CardName.GRAND_LUNA_ACADEMY, Factory: GrandLunaAcademy},
-    // // {cardName: CardName.LUNA_ECUMENOPOLIS, Factory: LunaEcumenopolis},
+    {cardName: CardName.LUNA_ECUMENOPOLIS, Factory: LunaEcumenopolis},
     {cardName: CardName.ORBITAL_POWER_GRID, Factory: OrbitalPowerGrid},
     {cardName: CardName.PROCESSOR_FACTORY, Factory: ProcessorFactory},
     {cardName: CardName.LUNAR_STEEL, Factory: LunarSteel},

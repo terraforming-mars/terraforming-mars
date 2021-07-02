@@ -73,7 +73,7 @@ Thanks goes to these wonderful people:
     </tr>
     <tr>
       <td><img src="https://avatars2.githubusercontent.com/u/394311?v=3" width="50px;" alt=""/></td>
-      <td><a href="https://github.com/alrusdi"><b>alrusdi</b></a>: Front End</td>
+      <td><a href="https://github.com/alrusdi"><b>alrusdi</b></a>: Front End, internationalization</td>
     </tr>
     <tr>
       <td><img src="https://avatars3.githubusercontent.com/u/6917565?s=460&v=4" width="50px;" alt=""/></td>

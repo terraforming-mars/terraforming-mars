@@ -1,5 +1,4 @@
 import Vue, {VNode} from 'vue';
-import {PlayerInputFactory} from './PlayerInputFactory';
 import {$t} from '../directives/i18n';
 import Button from '../components/common/Button.vue';
 import {PlayerModel} from '../models/PlayerModel';
@@ -38,7 +37,7 @@ export const OrOptions = Vue.component('or-options', {
     saveData: function() {
       const componentInstance = this.$data.childComponents[
         this.$data.selectedOption
-      ].componentInstance;
+      ].componentInstance.$children[0];
       if (componentInstance !== undefined) {
         if ((componentInstance as any).saveData instanceof Function) {
           (componentInstance as any).saveData();
@@ -92,21 +91,20 @@ export const OrOptions = Vue.component('or-options', {
         ]),
       );
       this.$data.childComponents.push(
-        new PlayerInputFactory().getPlayerInput(
-          createElement,
-          this.players,
-          this.player,
-          option,
-          (out: Array<Array<string>>) => {
+        createElement('player-input-factory', {attrs: {
+          players: this.players,
+          player: this.player,
+          playerinput: option,
+          onsave: (out: Array<Array<string>>) => {
             const copy = [[String(idx)]];
             for (let i = 0; i < out.length; i++) {
               copy.push(out[i].slice());
             }
             this.onsave(copy);
           },
-          false,
-          false,
-        ),
+          showsave: false,
+          showtitle: false,
+        }}),
       );
       subchildren.push(
         createElement(

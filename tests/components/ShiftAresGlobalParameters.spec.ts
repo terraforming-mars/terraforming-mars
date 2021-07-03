@@ -26,6 +26,7 @@ describe('ShiftAresGlobalParameters', function() {
     max: undefined,
     microbes: undefined,
     floaters: undefined,
+    science: undefined,
     coloniesModel: undefined,
     payProduction: undefined,
     aresData: {

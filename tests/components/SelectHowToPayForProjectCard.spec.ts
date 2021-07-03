@@ -50,8 +50,10 @@ describe('SelectHowToPayForProjectCard', () => {
           title: 'foo',
           cards: [{
             name: CardName.ANTS,
+            reserveUnits: Units.of({}),
           }, {
             name: CardName.BIRDS,
+            reserveUnits: Units.of({}),
           }],
         },
         onsave: () => {},

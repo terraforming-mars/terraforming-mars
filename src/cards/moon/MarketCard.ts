@@ -95,7 +95,7 @@ export abstract class MarketCard extends Card implements IActionCard {
     limit = Math.min(limit, terms.limit);
 
     return new SelectAmount(
-      `Select a number of trades (${terms.from} ${this.tradeResource} => ${terms.to} MC, max ${limit})`,
+      `Select a number of trades (${terms.from} ${this.tradeResource} => ${terms.to} M€, max ${limit})`,
       `Sell ${this.tradeResource}`,
       (unitsSold: number) => {
         const cashEarned = unitsSold * terms.to;

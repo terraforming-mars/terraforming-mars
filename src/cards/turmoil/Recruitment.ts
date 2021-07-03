@@ -5,6 +5,7 @@ import {CardType} from '../CardType';
 import {Player} from '../../Player';
 import {SendDelegateToArea} from '../../deferredActions/SendDelegateToArea';
 import {CardRenderer} from '../render/CardRenderer';
+import {Turmoil} from '../../turmoil/Turmoil';
 
 export class Recruitment extends Card implements IProjectCard {
   constructor() {
@@ -24,11 +25,12 @@ export class Recruitment extends Card implements IProjectCard {
   }
 
   public canPlay(player: Player): boolean {
-    if (player.game.turmoil === undefined || player.game.turmoil.hasAvailableDelegates(player.id) === false) {
+    const turmoil = Turmoil.getTurmoil(player.game);
+    if (turmoil.hasAvailableDelegates(player.id) === false) {
       return false;
     }
 
-    return player.game.turmoil.parties.some((party) => {
+    return turmoil.parties.some((party) => {
       const neutralDelegates = party.getDelegates('NEUTRAL');
       return neutralDelegates > 1 || (neutralDelegates === 1 && party.partyLeader !== 'NEUTRAL');
     });

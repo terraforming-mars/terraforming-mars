@@ -34,16 +34,4 @@ describe('SeptumTribus', function() {
       expect(player.megaCredits).to.eq(6);
     }
   });
-
-  it('Cannot act without Turmoil expansion', function() {
-    const card = new SeptumTribus();
-    const player = TestPlayers.BLUE.newPlayer();
-
-    const gameOptions = TestingUtils.setCustomGameOptions({turmoilExtension: false});
-    Game.newInstance('foobar', [player], player, gameOptions);
-    card.play();
-
-    player.corporationCard = card;
-    expect(card.canAct(player)).is.not.true;
-  });
 });

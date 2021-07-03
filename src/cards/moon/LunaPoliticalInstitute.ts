@@ -8,6 +8,7 @@ import {CardRequirements} from '../CardRequirements';
 import {IActionCard} from '../ICard';
 import {SendDelegateToArea} from '../../deferredActions/SendDelegateToArea';
 import {Card} from '../Card';
+import {Turmoil} from '../../turmoil/Turmoil';
 
 export class LunaPoliticalInstitute extends Card implements IActionCard, IProjectCard {
   constructor() {
@@ -35,7 +36,7 @@ export class LunaPoliticalInstitute extends Card implements IActionCard, IProjec
   }
 
   public canAct(player: Player) {
-    return player.game.turmoil?.hasAvailableDelegates(player.id) || false;
+    return Turmoil.getTurmoil(player.game).hasAvailableDelegates(player.id);
   }
 
   public action(player: Player) {

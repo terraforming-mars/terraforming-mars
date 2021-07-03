@@ -8,6 +8,7 @@ import {REDS_RULING_POLICY_COST} from '../../constants';
 import {Card} from '../Card';
 import {CardRequirements} from '../CardRequirements';
 import {CardRenderer} from '../render/CardRenderer';
+import {Turmoil} from '../../turmoil/Turmoil';
 
 export class VoteOfNoConfidence extends Card implements IProjectCard {
   constructor() {
@@ -34,31 +35,28 @@ export class VoteOfNoConfidence extends Card implements IProjectCard {
     if (!super.canPlay(player)) {
       return false;
     }
-    if (player.game.turmoil !== undefined) {
-      if (!player.game.turmoil.hasAvailableDelegates(player.id)) return false;
+    const turmoil = Turmoil.getTurmoil(player.game);
+    if (!turmoil.hasAvailableDelegates(player.id)) return false;
 
-      const chairmanIsNeutral = player.game.turmoil.chairman === 'NEUTRAL';
-      if (chairmanIsNeutral === false) {
-        return false;
-      }
-
-      if (PartyHooks.shouldApplyPolicy(player.game, PartyName.REDS)) {
-        return player.canAfford(player.getCardCost(this) + REDS_RULING_POLICY_COST);
-      }
-      return true;
+    const chairmanIsNeutral = turmoil.chairman === 'NEUTRAL';
+    if (chairmanIsNeutral === false) {
+      return false;
     }
-    return false;
+
+    if (PartyHooks.shouldApplyPolicy(player.game, PartyName.REDS)) {
+      return player.canAfford(player.getCardCost(this) + REDS_RULING_POLICY_COST);
+    }
+    return true;
   }
 
   public play(player: Player) {
-    if (player.game.turmoil !== undefined) {
-            player.game.turmoil.chairman! = player.id;
-            const index = player.game.turmoil.delegateReserve.indexOf(player.id);
-            if (index > -1) {
-              player.game.turmoil.delegateReserve.splice(index, 1);
-            }
-            player.increaseTerraformRating();
+    const turmoil = Turmoil.getTurmoil(player.game);
+    turmoil.chairman = player.id;
+    const index = turmoil.delegateReserve.indexOf(player.id);
+    if (index > -1) {
+      turmoil.delegateReserve.splice(index, 1);
     }
+    player.increaseTerraformRating();
     return undefined;
   }
 }

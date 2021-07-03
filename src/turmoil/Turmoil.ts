@@ -97,6 +97,34 @@ export class Turmoil implements ISerializable<SerializedTurmoil> {
       return turmoil;
     }
 
+    public static getTurmoil(game: Game): Turmoil {
+      if (game.turmoil === undefined) {
+        throw new Error(`Assertion error: Turmoil not defined for ${game.id}`);
+      }
+      return game.turmoil;
+    }
+
+    public static ifTurmoil(game: Game, cb: (turmoil: Turmoil) => void) {
+      if (game.gameOptions.turmoilExtension !== false) {
+        if (game.turmoil === undefined) {
+          console.log(`Assertion failure: game.turmoil is undefined for ${game.id}`);
+        } else {
+          return cb(game.turmoil);
+        }
+      }
+    }
+
+    public static ifTurmoilElse<T>(game: Game, cb: (turmoil: Turmoil) => T, elseCb: () => T): T {
+      if (game.gameOptions.turmoilExtension !== false) {
+        if (game.turmoil === undefined) {
+          console.log(`Assertion failure: game.turmoil is undefined for ${game.id}`);
+        } else {
+          return cb(game.turmoil);
+        }
+      }
+      return elseCb();
+    }
+
     public initGlobalEvent(game: Game) {
       // Draw the first global event to setup the game
       this.comingGlobalEvent = this.globalEventDealer.draw();

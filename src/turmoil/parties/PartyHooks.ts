@@ -9,6 +9,7 @@ import {ISpace} from '../../boards/ISpace';
 import {GREENS_POLICY_1} from './Greens';
 import {TurmoilPolicy} from '../TurmoilPolicy';
 import {PoliticalAgendas} from '../PoliticalAgendas';
+import {Turmoil} from '../Turmoil';
 
 export class PartyHooks {
   static applyMarsFirstRulingPolicy(player: Player, spaceType: SpaceType) {
@@ -28,25 +29,22 @@ export class PartyHooks {
   // Return true when the supplied policy is active. When `policyId` is inactive, it selects
   // the default policy for `partyName`.
   static shouldApplyPolicy(game: Game, partyName: PartyName, policyId?: PolicyId): boolean {
-    if (!game.gameOptions.turmoilExtension) return false;
+    return Turmoil.ifTurmoilElse(game, (turmoil) => {
+      if (game.phase !== Phase.ACTION) return false;
 
-    if (game.phase !== Phase.ACTION) return false;
+      const rulingParty = turmoil.rulingParty;
+      if (rulingParty === undefined) return false;
 
-    const turmoil = game.turmoil!;
-    if (!turmoil) return false;
+      // Set the default policy if not given
+      if (policyId === undefined) {
+        policyId = rulingParty.policies[0].id;
+      }
 
-    const rulingParty = turmoil.rulingParty;
-    if (rulingParty === undefined) return false;
+      const currentPolicyId: PolicyId = (turmoil.politicalAgendasData === undefined) ?
+        rulingParty.policies[0].id :
+        PoliticalAgendas.currentAgenda(turmoil).policyId;
 
-    // Set the default policy if not given
-    if (policyId === undefined) {
-      policyId = rulingParty.policies[0].id;
-    }
-
-    const currentPolicyId: PolicyId = (turmoil.politicalAgendasData === undefined) ?
-      rulingParty.policies[0].id :
-      PoliticalAgendas.currentAgenda(turmoil).policyId;
-
-    return rulingParty.name === partyName && currentPolicyId === policyId;
+      return rulingParty.name === partyName && currentPolicyId === policyId;
+    }, () => false);
   }
 }

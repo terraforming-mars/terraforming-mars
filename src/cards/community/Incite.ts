@@ -7,6 +7,7 @@ import {CardType} from '../CardType';
 import {SendDelegateToArea} from '../../deferredActions/SendDelegateToArea';
 import {CardRenderer} from '../render/CardRenderer';
 import {Size} from '../render/Size';
+import {Turmoil} from '../../turmoil/Turmoil';
 
 export class Incite extends Card implements CorporationCard {
   constructor() {
@@ -38,17 +39,13 @@ export class Incite extends Card implements CorporationCard {
     });
   }
   public play(player: Player) {
-    if (player.game.turmoil) {
-      player.game.turmoil.addInfluenceBonus(player);
-    }
+    Turmoil.getTurmoil(player.game).addInfluenceBonus(player);
     return undefined;
   }
 
   public initialAction(player: Player) {
-    if (player.game.turmoil) {
-      const title = 'Incite first action - Select where to send two delegates';
-      player.game.defer(new SendDelegateToArea(player, title, {count: 2, source: 'reserve'}));
-    }
+    const title = 'Incite first action - Select where to send two delegates';
+    player.game.defer(new SendDelegateToArea(player, title, {count: 2, source: 'reserve'}));
 
     return undefined;
   }

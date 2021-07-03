@@ -23,6 +23,7 @@ import {StealResources} from '../deferredActions/StealResources';
 import {Tags} from '../cards/Tags';
 import {SendDelegateToArea} from '../deferredActions/SendDelegateToArea';
 import {Game} from '../Game';
+import {Turmoil} from '../turmoil/Turmoil';
 
 export enum ShouldIncreaseTrack { YES, NO, ASK }
 
@@ -219,16 +220,16 @@ export abstract class Colony implements SerializedColony {
         break;
 
       case ColonyBenefit.GAIN_INFLUENCE:
-        if (game.turmoil !== undefined) {
-          game.turmoil.addInfluenceBonus(player);
+        Turmoil.ifTurmoil(game, (turmoil) => {
+          turmoil.addInfluenceBonus(player);
           game.log('${0} gained 1 influence', (b) => b.player(player));
-        }
+        });
         break;
 
       case ColonyBenefit.PLACE_DELEGATES:
-        if (game.turmoil !== undefined) {
-          const playerHasLobbyDelegate = game.turmoil.lobby.has(player.id);
-          let availablePlayerDelegates = game.turmoil.getDelegatesInReserve(player.id);
+        Turmoil.ifTurmoil(game, (turmoil) => {
+          const playerHasLobbyDelegate = turmoil.lobby.has(player.id);
+          let availablePlayerDelegates = turmoil.getDelegatesInReserve(player.id);
           if (playerHasLobbyDelegate) availablePlayerDelegates += 1;
 
           const qty = Math.min(quantity, availablePlayerDelegates);
@@ -237,17 +238,17 @@ export abstract class Colony implements SerializedColony {
             const fromLobby = (i === qty - 1 && qty === availablePlayerDelegates && playerHasLobbyDelegate);
             game.defer(new SendDelegateToArea(player, 'Select where to send delegate', {source: fromLobby ? 'lobby' : 'reserve'}));
           }
-        }
+        });
         break;
 
       case ColonyBenefit.GIVE_MC_PER_DELEGATE:
-        if (game.turmoil !== undefined) {
-          let partyDelegateCount = PLAYER_DELEGATES_COUNT - game.turmoil.getDelegatesInReserve(player.id);
-          if (game.turmoil.lobby.has(player.id)) partyDelegateCount--;
-          if (game.turmoil.chairman === player.id) partyDelegateCount--;
+        Turmoil.ifTurmoil(game, (turmoil) => {
+          let partyDelegateCount = PLAYER_DELEGATES_COUNT - turmoil.getDelegatesInReserve(player.id);
+          if (turmoil.lobby.has(player.id)) partyDelegateCount--;
+          if (turmoil.chairman === player.id) partyDelegateCount--;
 
           player.addResource(Resources.MEGACREDITS, partyDelegateCount, {log: true});
-        }
+        });
         break;
 
       case ColonyBenefit.GAIN_TR:

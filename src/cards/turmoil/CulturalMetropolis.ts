@@ -11,6 +11,7 @@ import {SendDelegateToArea} from '../../deferredActions/SendDelegateToArea';
 import {CardRequirements} from '../CardRequirements';
 import {CardRenderer} from '../render/CardRenderer';
 import {Units} from '../../Units';
+import {Turmoil} from '../../turmoil/Turmoil';
 
 export class CulturalMetropolis extends Card implements IProjectCard {
   constructor() {
@@ -36,7 +37,7 @@ export class CulturalMetropolis extends Card implements IProjectCard {
   }
 
   public canPlay(player: Player): boolean {
-    if ( ! super.canPlay(player)) {
+    if (!super.canPlay(player)) {
       return false;
     }
 
@@ -45,14 +46,10 @@ export class CulturalMetropolis extends Card implements IProjectCard {
     }
 
     // This card requires player has 2 delegates available
-    const turmoil = player.game.turmoil;
-    if (turmoil !== undefined) {
-      const hasEnoughDelegates = turmoil.getDelegatesInReserve(player.id) > 1 ||
-        (turmoil.getDelegatesInReserve(player.id) === 1 && turmoil.lobby.has(player.id));
-      return hasEnoughDelegates;
-    }
-
-    return false;
+    const turmoil = Turmoil.getTurmoil(player.game);
+    const hasEnoughDelegates = turmoil.getDelegatesInReserve(player.id) > 1 ||
+      (turmoil.getDelegatesInReserve(player.id) === 1 && turmoil.lobby.has(player.id));
+    return hasEnoughDelegates;
   }
 
   public play(player: Player) {
@@ -61,9 +58,10 @@ export class CulturalMetropolis extends Card implements IProjectCard {
     player.game.defer(new PlaceCityTile(player));
     const title = 'Select where to send two delegates';
 
-    if (player.game.turmoil!.getDelegatesInReserve(player.id) > 1) {
+    const turmoil = Turmoil.getTurmoil(player.game);
+    if (turmoil.getDelegatesInReserve(player.id) > 1) {
       player.game.defer(new SendDelegateToArea(player, title, {count: 2, source: 'reserve'}));
-    } else if (player.game.turmoil!.getDelegatesInReserve(player.id) === 1 && player.game.turmoil!.lobby.has(player.id)) {
+    } else if (turmoil.getDelegatesInReserve(player.id) === 1 && turmoil.lobby.has(player.id)) {
       player.game.defer(new SendDelegateToArea(player, title, {count: 2, source: 'lobby'}));
     }
     return undefined;

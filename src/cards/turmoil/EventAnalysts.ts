@@ -7,6 +7,7 @@ import {Player} from '../../Player';
 import {PartyName} from '../../turmoil/parties/PartyName';
 import {CardRenderer} from '../render/CardRenderer';
 import {CardRequirements} from '../CardRequirements';
+import {Turmoil} from '../../turmoil/Turmoil';
 
 export class EventAnalysts extends Card implements IProjectCard {
   constructor() {
@@ -28,9 +29,7 @@ export class EventAnalysts extends Card implements IProjectCard {
   }
 
   public play(player: Player) {
-    if (player.game.turmoil) {
-      player.game.turmoil.addInfluenceBonus(player);
-    }
+    Turmoil.getTurmoil(player.game).addInfluenceBonus(player);
     return undefined;
   }
 }

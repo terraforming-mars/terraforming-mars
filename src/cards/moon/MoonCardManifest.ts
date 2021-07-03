@@ -4,6 +4,7 @@ import {CardManifest} from '../CardManifest';
 import {AIControlledMineNetwork} from './AIControlledMineNetwork';
 import {AlgaeBioreactors} from './AlgaeBioreactors';
 import {AncientShipyards} from './AncientShipyards';
+import {AnOfferYouCantRefuse} from './AnOfferYouCantRefuse';
 import {ArchimedesHydroponicsStation} from './ArchimedesHydroponicsStation';
 import {AristarchusRoadNetwork} from './AristarchusRoadNetwork';
 import {BasicInfrastructure} from './BasicInfrastructure';
@@ -173,7 +174,7 @@ export const MOON_CARD_MANIFEST = new CardManifest({
     {cardName: CardName.WE_GROW_AS_ONE, Factory: WeGrowAsOne, compatibility: [GameModule.Turmoil, GameModule.Colonies]},
     {cardName: CardName.MOONCRATE_CONVOYS_TO_MARS, Factory: MooncrateConvoysToMars, compatibility: [GameModule.Turmoil]},
     // // {cardName: CardName.LUNAR_INDEPENDENCE_WAR, Factory: LunarIndependenceWar},
-    //   // {cardName: CardName.AN_OFFER_HE_CANNOT_REFUSE, Factory: AnOfferHeCannotRefuse, compatibility: GameModule.Turmoil},
+    {cardName: CardName.AN_OFFER_YOU_CANT_REFUSE, Factory: AnOfferYouCantRefuse, compatibility: GameModule.Turmoil},
     {cardName: CardName.PRELIMINARY_DARKSIDE, Factory: PreliminaryDarkside},
     //   {cardName: CardName.HOSTILE_TAKEOVER, Factory: HostileTakeover},
     {cardName: CardName.SYNDICATE_PIRATE_RAIDS, Factory: SyndicatePirateRaids, compatibility: GameModule.Colonies},

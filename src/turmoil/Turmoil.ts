@@ -63,6 +63,13 @@ export class Turmoil implements ISerializable<SerializedTurmoil> {
       this.globalEventDealer = globalEventDealer;
     }
 
+    public static getTurmoil(game: Game): Turmoil {
+      if (game.turmoil === undefined) {
+        throw new Error('Turmoil not defined');
+      }
+      return game.turmoil;
+    }
+
     public static newInstance(game: Game, agendaStyle: AgendaStyle = AgendaStyle.STANDARD): Turmoil {
       const dealer = GlobalEventDealer.newInstance(game);
 

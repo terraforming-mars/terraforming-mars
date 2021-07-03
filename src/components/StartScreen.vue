@@ -1,31 +1,4 @@
-import Vue from 'vue';
-import LanguageSwitcher from './LanguageSwitcher.vue';
-
-import * as raw_settings from '../genfiles/settings.json';
-
-export const StartScreen = Vue.component('start-screen', {
-  props: {
-    version: {
-      type: String as () => typeof raw_settings.version,
-    },
-  },
-  components: {
-    LanguageSwitcher,
-  },
-  methods: {
-    getAppVersion(): string {
-      const versionParts = this.version.split(' ');
-      return versionParts[0];
-    },
-    getAppDate(): string {
-      const versionParts = this.version.split(' ');
-      if (versionParts.length > 1) {
-        return versionParts.slice(1).join(' ');
-      }
-      return '';
-    },
-  },
-  template: `
+<template>
 <div class="start-screen">
   <div v-i18n class="start-screen-links">
     <div class="start-screen-header start-screen-link--title">
@@ -47,5 +20,39 @@ export const StartScreen = Vue.component('start-screen', {
       </div>
     </div>
   </div>
-</div>`,
+</div>
+</template>
+
+<script lang="ts">
+
+import Vue from 'vue';
+import LanguageSwitcher from './LanguageSwitcher.vue';
+
+import * as raw_settings from '../genfiles/settings.json';
+
+export default Vue.extend({
+  name: 'start-screen',
+  props: {
+    version: {
+      type: String as () => typeof raw_settings.version,
+    },
+  },
+  components: {
+    LanguageSwitcher,
+  },
+  methods: {
+    getAppVersion(): string {
+      const versionParts = this.version.split(' ');
+      return versionParts[0];
+    },
+    getAppDate(): string {
+      const versionParts = this.version.split(' ');
+      if (versionParts.length > 1) {
+        return versionParts.slice(1).join(' ');
+      }
+      return '';
+    },
+  },
 });
+
+</script>

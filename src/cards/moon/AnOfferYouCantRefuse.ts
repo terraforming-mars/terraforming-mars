@@ -38,7 +38,7 @@ export class AnOfferYouCantRefuse extends ProjectCard {
     if (!hasDelegate) return false;
 
     return turmoil.parties.some((party) =>
-      party.delegates.some((delegate) => !this.isReplaceableDelegate(delegate, player, party)));
+      party.delegates.some((delegate) => this.isReplaceableDelegate(delegate, player, party)));
   }
 
   private moveToAnotherParty(game: Game, from: PartyName, delegate: PlayerId): OrOptions {
@@ -47,13 +47,13 @@ export class AnOfferYouCantRefuse extends ProjectCard {
 
     turmoil.parties.forEach((party) => {
       if (party.name === from) {
-        orOptions.options.push(new SelectOption(`Keep at ${party.name}`, '', () => {
+        orOptions.options.push(new SelectOption('Do not move', '', () => {
           return undefined;
         }));
       } else {
         orOptions.options.push(new SelectOption(party.name, 'Select', () => {
           turmoil.removeDelegateFromParty(delegate, from, game);
-          turmoil.sendDelegateToParty(delegate, party.name, game);
+          turmoil.sendDelegateToParty(delegate, party.name, game, 'reserve');
           return undefined;
         }));
       }
@@ -72,12 +72,12 @@ export class AnOfferYouCantRefuse extends ProjectCard {
         .forEach((delegate) => {
           if (!this.isReplaceableDelegate(delegate, player, party)) return;
 
-          const playerName = game.getPlayerById(delegate);
+          const playerName = game.getPlayerById(delegate).name;
           const option = new SelectOption(`${party.name} / ${playerName}`, 'Select', () => {
             const source = turmoil.hasAvailableDelegates(player.id) ? 'reserve' : 'lobby';
             turmoil.replaceDelegateFromParty(delegate, player.id, source, party.name, game);
             turmoil.checkDominantParty(party); // Check dominance right after replacement (replace doesn't check dominance.)
-            return this.moveToAnotherParty(game, party.name, delegate);
+            return this.moveToAnotherParty(game, party.name, player.id);
           });
           orOptions.options.push(option);
         });

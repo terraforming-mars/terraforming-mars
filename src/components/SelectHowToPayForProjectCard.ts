@@ -1,4 +1,3 @@
-
 import Vue from 'vue';
 import Button from './common/Button.vue';
 
@@ -14,6 +13,7 @@ interface SelectHowToPayForProjectCardModel {
   titanium: number;
   microbes: number;
   floaters: number;
+  science: number;
   warning: string | undefined;
   available: Units;
 }
@@ -76,6 +76,7 @@ export const SelectHowToPayForProjectCard = Vue.component('select-how-to-pay-for
       steel: 0,
       titanium: 0,
       microbes: 0,
+      science: 0,
       floaters: 0,
       warning: undefined,
       available: Units.of({}),
@@ -114,6 +115,7 @@ export const SelectHowToPayForProjectCard = Vue.component('select-how-to-pay-for
     setDefaultValues: function() {
       this.microbes = 0;
       this.floaters = 0;
+      this.science = 0;
       this.steel = 0;
       this.titanium = 0;
       this.heat = 0;
@@ -164,6 +166,11 @@ export const SelectHowToPayForProjectCard = Vue.component('select-how-to-pay-for
       if (megacreditBalance > 0 && this.canUseFloaters()) {
         this.floaters = deductUnits(this.playerinput.floaters, 3);
       }
+
+      if (megacreditBalance > 0 && this.canUseScience()) {
+        this.science = deductUnits(this.playerinput.science, 1);
+      }
+
       this.available.steel = Math.max(this.player.steel - this.card.reserveUnits.steel, 0);
       if (megacreditBalance > 0 && this.canUseSteel()) {
         this.steel = deductUnits(this.available.steel, this.player.steelValue, true);
@@ -188,6 +195,7 @@ export const SelectHowToPayForProjectCard = Vue.component('select-how-to-pay-for
         this.steel -= saveOverSpendingUnits(this.steel, this.player.steelValue);
         this.floaters -= saveOverSpendingUnits(this.floaters, 3);
         this.microbes -= saveOverSpendingUnits(this.microbes, 2);
+        this.science -= saveOverSpendingUnits(this.science, 1);
         this.megaCredits -= saveOverSpendingUnits(this.megaCredits, 1);
       }
     },
@@ -228,6 +236,15 @@ export const SelectHowToPayForProjectCard = Vue.component('select-how-to-pay-for
       }
       return false;
     },
+    canUseScience: function() {
+      // FYI Science Resources are limited to the Luna Archive card, which allows spending its science resources for Moon cards.
+      if (this.card !== undefined && (this.playerinput.science ?? 0) > 0) {
+        if (this.tags.find((tag) => tag === Tags.MOON) !== undefined) {
+          return true;
+        }
+      }
+      return false;
+    },
     cardChanged: function() {
       this.card = this.getCard();
       this.cost = this.card.calculatedCost || 0;
@@ -260,6 +277,7 @@ export const SelectHowToPayForProjectCard = Vue.component('select-how-to-pay-for
         titanium: this.titanium,
         microbes: this.microbes,
         floaters: this.floaters,
+        science: this.science,
       };
       if (htp.megaCredits > this.player.megaCredits) {
         this.warning = 'You don\'t have that many M€';
@@ -271,6 +289,10 @@ export const SelectHowToPayForProjectCard = Vue.component('select-how-to-pay-for
       }
       if (this.playerinput.floaters !== undefined && htp.floaters > this.playerinput.floaters) {
         this.warning = 'You don\'t have enough floaters';
+        return;
+      }
+      if (this.playerinput.science !== undefined && htp.science > this.playerinput.science) {
+        this.warning = 'You don\'t have enough science resources';
         return;
       }
       if (htp.heat > this.player.heat) {
@@ -286,7 +308,14 @@ export const SelectHowToPayForProjectCard = Vue.component('select-how-to-pay-for
         return;
       }
 
-      const totalSpentAmt = (3 * htp.floaters) + (2 * htp.microbes) + htp.heat + htp.megaCredits + (htp.steel * this.player.steelValue) + (htp.titanium * this.player.titaniumValue);
+      const totalSpentAmt =
+        (3 * htp.floaters) +
+        (2 * htp.microbes) +
+        htp.science +
+        htp.heat +
+        htp.megaCredits +
+        (htp.steel * this.player.steelValue) +
+        (htp.titanium * this.player.titaniumValue);
 
       if (totalSpentAmt < this.cost) {
         this.warning = 'Haven\'t spent enough';
@@ -309,6 +338,10 @@ export const SelectHowToPayForProjectCard = Vue.component('select-how-to-pay-for
         }
         if (htp.microbes && diff >= 2) {
           this.warning = 'You cannot overspend microbes';
+          return;
+        }
+        if (htp.science && diff >= 1) {
+          this.warning = 'You cannot overspend science resources';
           return;
         }
         if (htp.heat && diff >= 1) {
@@ -404,6 +437,14 @@ export const SelectHowToPayForProjectCard = Vue.component('select-how-to-pay-for
       <input class="form-input form-inline payments_input" v-model.number="floaters" />
       <Button type="plus" :onClick="_=>addValue('floaters', 1)" />
       <Button type="max" :onClick="_=>setMaxValue('floaters')" title="MAX" />
+    </div>
+
+    <div class="payments_type input-group" v-if="canUseScience()">
+      <i class="resource_icon resource_icon--science payments_type_icon" :title="$t('Pay by Science Resources')"></i>
+      <Button type="minus" :onClick="_=>reduceValue('science', 1)" />
+      <input class="form-input form-inline payments_input" v-model.number="science" />
+      <Button type="plus" :onClick="_=>addValue('science', 1)" />
+      <Button type="max" :onClick="_=>setMaxValue('science')" title="MAX" />
     </div>
 
     <div class="payments_type input-group">

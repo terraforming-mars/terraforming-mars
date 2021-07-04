@@ -93,16 +93,16 @@ describe('StratosphericBirds', () => {
 
     // 12 M€ + 1 Dirigibles floater: Card is playable
     player.megaCredits = 12;
-    const SelectHowToPayForProjectCard = player.playProjectCard();
+    const selectHowToPayForProjectCard = player.playProjectCard();
     expect(card.canPlay(player)).is.true;
 
     // Try to spend floater to pay for card: Throw an error
     expect(() => {
-      SelectHowToPayForProjectCard.cb(card, {steel: 0, heat: 0, titanium: 0, megaCredits: 9, microbes: 0, floaters: 1});
+      selectHowToPayForProjectCard.cb(card, {steel: 0, heat: 0, titanium: 0, megaCredits: 9, microbes: 0, floaters: 1});
     }).to.throw('Cannot spend all floaters to play Stratospheric Birds');
 
     // Pay with MC only: Can play
-    SelectHowToPayForProjectCard.cb(card, {steel: 0, heat: 0, titanium: 0, megaCredits: 12, microbes: 0, floaters: 0});
+    selectHowToPayForProjectCard.cb(card, {steel: 0, heat: 0, titanium: 0, megaCredits: 12, microbes: 0, floaters: 0});
         game.deferredActions.pop()!.execute(); // Remove floater
         expect(dirigibles.resourceCount).to.eq(0);
   });

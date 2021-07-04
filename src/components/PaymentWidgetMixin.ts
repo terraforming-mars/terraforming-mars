@@ -47,6 +47,7 @@ export const PaymentWidgetMixin = {
         maxValue = (this as any).playerinput.floaters;
         if (this.isStratosphericBirdsEdgeCase()) maxValue--;
       }
+      if (target === 'science') maxValue = (this as any).playerinput.science;
       if (currentValue === maxValue) return;
 
       const realTo = (currentValue + to <= maxValue) ? to : maxValue - currentValue;
@@ -62,7 +63,8 @@ export const PaymentWidgetMixin = {
               (this as any)['titanium'] * this.getResourceRate('titanium') -
               (this as any)['steel'] * this.getResourceRate('steel') -
               (this as any)['microbes'] * this.getResourceRate('microbes') -
-              (this as any)['floaters'] * this.getResourceRate('floaters');
+              (this as any)['floaters'] * this.getResourceRate('floaters') -
+              (this as any)['science'];
 
       (this as any)['megaCredits'] = Math.max(0, Math.min(this.getMegaCreditsMax(), remainingMC));
     },
@@ -81,6 +83,7 @@ export const PaymentWidgetMixin = {
         amountHave = (this as any).playerinput.floaters;
         if (this.isStratosphericBirdsEdgeCase()) amountHave--;
       }
+      if (target === 'science') amountHave = (this as any).playerinput.science;
 
       while (currentValue < amountHave && currentValue < amountNeed) {
         this.addValue(target, 1, max);

@@ -147,7 +147,7 @@
 import Vue from 'vue';
 import {PlayerModel, PublicPlayerModel} from '../models/PlayerModel';
 import Board from './Board.vue';
-import {LogPanel} from './LogPanel';
+import LogPanel from './LogPanel.vue';
 import Button from '../components/common/Button.vue';
 import {playerColorClass} from '../utils/utils';
 import {Timer} from '../Timer';

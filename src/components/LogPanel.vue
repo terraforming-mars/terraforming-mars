@@ -1,3 +1,38 @@
+<template>
+      <div class="log-container">
+        <div class="log-generations">
+          <h2 :class="getTitleClasses()">
+              <span v-i18n>Game log</span>
+          </h2>
+          <div class="log-gen-title">Gen: </div>
+          <div class="log-gen-numbers">
+            <div v-for="n in getGenerationsRange()" :key="n" :class="getClassesGenIndicator(n)" v-on:click.prevent="selectGeneration(n)">
+              {{ n }}
+            </div>
+          </div>
+          <span class="label-additional" v-if="players.length === 1"><span :class="lastGenerationClass">of {{this.lastSoloGeneration}}</span></span>
+        </div>
+        <div class="panel log-panel">
+          <div id="logpanel-scrollable" class="panel-body">
+            <ul v-if="messages">
+              <li v-for="(message, index) in messages" :key="index" v-on:click.prevent="messageClicked(message)" v-html="messageToHTML(message)"></li>
+            </ul>
+          </div>
+        </div>
+        <div class="card-panel" v-if="cards.length > 0 || globalEventNames.length > 0">
+          <Button size="big" type="close" :disableOnServerBusy="false" :onClick="hideMe" align="right"/>
+          <div id="log_panel_card" class="cardbox" v-for="card in cards" :key="card">
+            <Card :card="{name: card}"/>
+          </div>
+          <div id="log_panel_card" class="cardbox" v-for="globalEventName in globalEventNames" :key="globalEventName">
+            <global-event :globalEvent="getGlobalEvent(globalEventName)" type="prior"></global-event>
+          </div>
+        </div>
+      </div>
+</template>
+
+<script lang="ts">
+
 import Vue from 'vue';
 import {CardType} from '../cards/CardType';
 import {LogMessage} from '../LogMessage';
@@ -24,7 +59,8 @@ import Button from './common/Button.vue';
 
 let logRequest: XMLHttpRequest | undefined;
 
-export const LogPanel = Vue.component('log-panel', {
+export default Vue.extend({
+  name: 'log-panel',
   props: {
     id: {
       type: String,
@@ -303,37 +339,7 @@ export const LogPanel = Vue.component('log-panel', {
   mounted: function() {
     this.getLogsForGeneration(this.generation);
   },
-  template: `
-      <div class="log-container">
-        <div class="log-generations">
-          <h2 :class="getTitleClasses()">
-              <span v-i18n>Game log</span>
-          </h2>
-          <div class="log-gen-title">Gen: </div>
-          <div class="log-gen-numbers">
-            <div v-for="n in getGenerationsRange()" :class="getClassesGenIndicator(n)" v-on:click.prevent="selectGeneration(n)">
-              {{ n }}
-            </div>
-          </div>
-          <span class="label-additional" v-if="players.length === 1"><span :class="lastGenerationClass">of {{this.lastSoloGeneration}}</span></span>
-        </div>
-        <div class="panel log-panel">
-          <div id="logpanel-scrollable" class="panel-body">
-            <ul v-if="messages">
-              <li v-for="message in messages" v-on:click.prevent="messageClicked(message)" v-html="messageToHTML(message)"></li>
-            </ul>
-          </div>
-        </div>
-        <div class="card-panel" v-if="cards.length > 0 || globalEventNames.length > 0">
-          <Button size="big" type="close" :disableOnServerBusy="false" :onClick="hideMe" align="right"/>
-          <div id="log_panel_card" class="cardbox" v-for="(card, index) in cards" :key="card">
-            <Card :card="{name: card}"/>
-          </div>
-          <div id="log_panel_card" class="cardbox" v-for="(globalEventName, index) in globalEventNames" :key="globalEventName">
-            <global-event :globalEvent="getGlobalEvent(globalEventName)" type="prior"></global-event>
-          </div>
-        </div>
-      </div>
-    `,
 });
+
+</script>
 

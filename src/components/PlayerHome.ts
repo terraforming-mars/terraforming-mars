@@ -9,7 +9,7 @@ import WaitingFor from './WaitingFor.vue';
 import {Sidebar} from './Sidebar';
 import {PlayerModel, PublicPlayerModel} from '../models/PlayerModel';
 import Colony from './Colony.vue';
-import {LogPanel} from './LogPanel';
+import LogPanel from './LogPanel.vue';
 import {PlayerMixin} from './PlayerMixin';
 import Turmoil from './Turmoil.vue';
 import {playerColorClass} from '../utils/utils';

@@ -5,7 +5,7 @@ import GamesOverview from './GamesOverview.vue';
 import {PlayerHome} from './PlayerHome';
 import {SpectatorHome} from './SpectatorHome';
 import {PlayerModel} from '../models/PlayerModel';
-import {StartScreen} from './StartScreen';
+import StartScreen from './StartScreen.vue';
 import {LoadGameForm} from './LoadGameForm';
 import DebugUI from './DebugUI.vue';
 import {SimpleGameModel} from '../models/SimpleGameModel';

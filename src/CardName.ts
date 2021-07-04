@@ -573,7 +573,7 @@ export enum CardName {
     WE_GROW_AS_ONE = 'We Grow As One',
     MOONCRATE_CONVOYS_TO_MARS = 'Mooncrate Convoys To Mars',
     LUNAR_INDEPENDENCE_WAR = 'Lunar Independence War',
-    AN_OFFER_HE_CANNOT_REFUSE = 'An Offer He Cannot Refuse',
+    AN_OFFER_YOU_CANT_REFUSE = 'An Offer You Can\'t Refuse',
     PRELIMINARY_DARKSIDE = 'Preliminary Darkside',
     HOSTILE_TAKEOVER = 'Hostile Takeover',
     SYNDICATE_PIRATE_RAIDS = 'Syndicate Pirate Raids',

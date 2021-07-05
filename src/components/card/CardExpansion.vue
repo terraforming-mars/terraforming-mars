@@ -1,7 +1,13 @@
+<template>
+  <div :class="getClasses()"></div>
+</template>
+
+<script lang="ts">
+
 import Vue from 'vue';
 import {GameModule} from '../../GameModule';
 
-const MODULE_TO_CSS: Map<string, string> = new Map([
+const MODULE_TO_CSS: Map<GameModule, string> = new Map([
   [GameModule.CorpEra, 'corporate-icon'],
   [GameModule.Promo, 'promo-icon'],
   [GameModule.Venus, 'venus-icon'],
@@ -12,10 +18,11 @@ const MODULE_TO_CSS: Map<string, string> = new Map([
   [GameModule.Ares, 'ares-icon'],
   [GameModule.Moon, 'moon-icon']],
 );
-export const CardExpansion = Vue.component('CardExpansion', {
+export default Vue.extend({
+  name: 'CardExpansion',
   props: {
     expansion: {
-      type: String,
+      type: String as () => GameModule,
       required: true,
     },
     isCorporation: {
@@ -37,7 +44,7 @@ export const CardExpansion = Vue.component('CardExpansion', {
       return classes.join(' ');
     },
   },
-  template: `
-        <div :class="getClasses()"></div>
-    `,
 });
+
+</script>
+

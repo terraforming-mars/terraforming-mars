@@ -41,9 +41,7 @@ export class HydrogenToVenus extends Card {
 
   public play(player: Player) {
     const jovianTags: number = player.getTagCount(Tags.JOVIAN);
-    const floatersCards = player.getResourceCards(ResourceType.FLOATER).filter((card) => {
-      return card.tags.filter((cardTag) => cardTag === Tags.VENUS).length > 0
-    });
+    const floatersCards = player.getResourceCards(ResourceType.FLOATER).filter((card) => card.tags.includes(Tags.VENUS));
     if (jovianTags > 0) {
       if (floatersCards.length === 1) {
         player.addResourceTo(floatersCards[0], {qty: jovianTags, log: true});

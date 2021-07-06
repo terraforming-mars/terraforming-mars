@@ -30,19 +30,6 @@ export class HydrogenToVenus extends Card {
     });
   };
 
-  private static readonly venusCardsWithFloaters: Set<CardName> = new Set<CardName>([
-    CardName.AERIAL_MAPPERS,
-    CardName.CELESTIC,
-    CardName.DEUTERIUM_EXPORT,
-    CardName.DIRIGIBLES,
-    CardName.EXTRACTOR_BALLOONS,
-    CardName.FLOATING_HABS,
-    CardName.FORCED_PRECIPITATION,
-    CardName.JET_STREAM_MICROSCRAPPERS,
-    CardName.LOCAL_SHADING,
-    CardName.STRATOPOLIS,
-  ]);
-
   public canPlay(player: Player): boolean {
     const venusMaxed = player.game.getVenusScaleLevel() === MAX_VENUS_SCALE;
     if (PartyHooks.shouldApplyPolicy(player.game, PartyName.REDS) && !venusMaxed) {
@@ -55,7 +42,7 @@ export class HydrogenToVenus extends Card {
   public play(player: Player) {
     const jovianTags: number = player.getTagCount(Tags.JOVIAN);
     const floatersCards = player.getResourceCards(ResourceType.FLOATER).filter((card) => {
-      return HydrogenToVenus.venusCardsWithFloaters.has(card.name);
+      return card.tags.filter((cardTag) => cardTag === Tags.VENUS).length > 0
     });
     if (jovianTags > 0) {
       if (floatersCards.length === 1) {

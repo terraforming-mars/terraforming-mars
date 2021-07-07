@@ -38,10 +38,8 @@ export class TempestConsultancy extends Card implements CorporationCard {
   }
 
   public initialAction(player: Player) {
-    if (player.game.turmoil) {
-      const title = 'Tempest Consultancy first action - Select where to send two delegates';
-      player.game.defer(new SendDelegateToArea(player, title, {count: 2, source: 'reserve'}));
-    }
+    const title = 'Tempest Consultancy first action - Select where to send two delegates';
+    player.game.defer(new SendDelegateToArea(player, title, {count: 2, source: 'reserve'}));
 
     return undefined;
   }

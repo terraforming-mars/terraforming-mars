@@ -30,7 +30,7 @@ import {
 } from './ClaimedMilestoneModel';
 import {FundedAwardModel, IAwardScore} from './FundedAwardModel';
 import {
-  getTurmoil,
+  getTurmoilModel,
 } from './TurmoilModel';
 import {SelectDelegate} from '../inputs/SelectDelegate';
 import {SelectColony} from '../inputs/SelectColony';
@@ -41,6 +41,7 @@ import {MoonModel} from './MoonModel';
 import {Units} from '../Units';
 import {SelectPartyToSendDelegate} from '../inputs/SelectPartyToSendDelegate';
 import {GameModel} from './GameModel';
+import {Turmoil} from '../turmoil/Turmoil';
 
 export class Server {
   public static getGameModel(game: Game): SimpleGameModel {
@@ -59,7 +60,7 @@ export class Server {
   }
 
   public static getCommonGameModel(game: Game): GameModel {
-    const turmoil = getTurmoil(game);
+    const turmoil = getTurmoilModel(game);
 
     return {
       aresData: game.aresData,
@@ -89,7 +90,6 @@ export class Server {
 
   public static getPlayerModel(player: Player): PlayerModel {
     const game = player.game;
-    const turmoil = getTurmoil(game);
 
     return {
       actionsTakenThisRound: player.actionsTakenThisRound,
@@ -113,7 +113,7 @@ export class Server {
       heat: player.heat,
       heatProduction: player.getProduction(Resources.HEAT),
       id: player.id,
-      influence: turmoil ? game.turmoil!.getPlayerInfluence(player) : 0,
+      influence: Turmoil.ifTurmoilElse(game, (turmoil) => turmoil.getPlayerInfluence(player), () => 0),
       isActive: player.id === game.activePlayer,
       megaCredits: player.megaCredits,
       megaCreditProduction: player.getProduction(Resources.MEGACREDITS),
@@ -345,7 +345,7 @@ export class Server {
     case PlayerInputTypes.SELECT_PARTY_TO_SEND_DELEGATE:
       playerInputModel.availableParties = (waitingFor as SelectPartyToSendDelegate).availableParties;
       if (player.game !== undefined) {
-        playerInputModel.turmoil = getTurmoil(player.game);
+        playerInputModel.turmoil = getTurmoilModel(player.game);
       }
       break;
     case PlayerInputTypes.SELECT_PRODUCTION_TO_LOSE:
@@ -393,8 +393,6 @@ export class Server {
     }));
   }
   public static getPlayers(players: Array<Player>, game: Game): Array<PlayerModel> {
-    const turmoil = getTurmoil(game);
-
     const gameModel = this.getCommonGameModel(game);
 
     return players.map((player) => {
@@ -414,7 +412,7 @@ export class Server {
         heat: player.heat,
         heatProduction: player.getProduction(Resources.HEAT),
         id: game.phase === Phase.END ? player.id : player.color,
-        influence: turmoil ? game.turmoil!.getPlayerInfluence(player) : 0,
+        influence: Turmoil.ifTurmoilElse(game, (turmoil) => turmoil.getPlayerInfluence(player), () => 0),
         isActive: player.id === game.activePlayer,
         megaCredits: player.megaCredits,
         megaCreditProduction: player.getProduction(Resources.MEGACREDITS),

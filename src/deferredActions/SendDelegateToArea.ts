@@ -2,7 +2,7 @@ import {Player, PlayerId} from '../Player';
 import {SelectPartyToSendDelegate} from '../inputs/SelectPartyToSendDelegate';
 import {DeferredAction, Priority} from './DeferredAction';
 import {SelectHowToPayDeferred} from './SelectHowToPayDeferred';
-import {NeutralPlayer} from '../turmoil/Turmoil';
+import {NeutralPlayer, Turmoil} from '../turmoil/Turmoil';
 import {PartyName} from '../turmoil/parties/PartyName';
 
 export class SendDelegateToArea implements DeferredAction {
@@ -14,10 +14,7 @@ export class SendDelegateToArea implements DeferredAction {
   ) {}
 
   public execute() {
-    const turmoil = this.player.game.turmoil;
-    if (turmoil === undefined) {
-      throw new Error(`Turmoil not defined in game ${this.player.game.id}`);
-    }
+    const turmoil = Turmoil.getTurmoil(this.player.game);
 
     // All parties are eligible, unless this action is used to replace a delegate.
     let parties = turmoil.parties;

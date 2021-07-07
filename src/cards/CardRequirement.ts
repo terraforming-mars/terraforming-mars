@@ -7,6 +7,7 @@ import {ResourceType} from '../ResourceType';
 import {TileType} from '../TileType';
 import {GlobalParameter} from '../GlobalParameter';
 import {MoonExpansion} from '../moon/MoonExpansion';
+import {Turmoil} from '../turmoil/Turmoil';
 
 const firstLetterUpperCase = (s: string): string => s.charAt(0).toUpperCase() + s.slice(1);
 
@@ -91,7 +92,7 @@ export class CardRequirement {
   public satisfies(player: Player): boolean {
     switch (this.type) {
     case RequirementType.CHAIRMAN:
-      return player.game.turmoil?.chairman === player.id;
+      return Turmoil.getTurmoil(player.game).chairman === player.id;
 
     case RequirementType.CITIES:
       if (this._isAny) {
@@ -117,11 +118,9 @@ export class CardRequirement {
       return this.satisfiesInequality(greeneries);
 
     case RequirementType.PARTY_LEADERS:
-      if (player.game.turmoil !== undefined) {
-        const parties = player.game.turmoil.parties.filter((party) => party.partyLeader === player.id).length;
-        return this.satisfiesInequality(parties);
-      }
-      return false;
+      const turmoil = Turmoil.getTurmoil(player.game);
+      const parties = turmoil.parties.filter((party) => party.partyLeader === player.id).length;
+      return this.satisfiesInequality(parties);
 
     case RequirementType.OCEANS:
       return this.checkGlobalRequirement(player, GlobalParameter.OCEANS, this.amount, this.isMax);
@@ -257,9 +256,6 @@ export class PartyCardRequirement extends CardRequirement {
     return this.party.toLowerCase();
   }
   public satisfies(player: Player): boolean {
-    if (player.game.turmoil !== undefined) {
-      return player.game.turmoil.canPlay(player, this.party);
-    }
-    return false;
+    return Turmoil.getTurmoil(player.game).canPlay(player, this.party);
   }
 }

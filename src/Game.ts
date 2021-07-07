@@ -794,9 +794,9 @@ export class Game implements ISerializable<SerializedGame> {
       this.syndicatePirateRaider = undefined;
     }
 
-    if (this.gameOptions.turmoilExtension) {
-      this.turmoil?.endGeneration(this);
-    }
+    Turmoil.ifTurmoil(this, (turmoil) => {
+      turmoil.endGeneration(this);
+    });
 
     // Resolve Turmoil deferred actions
     if (this.deferredActions.length > 0) {

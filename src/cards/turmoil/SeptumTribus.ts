@@ -7,6 +7,7 @@ import {CardName} from '../../CardName';
 import {CardType} from '../CardType';
 import {CardRenderer} from '../render/CardRenderer';
 import {Resources} from '../../Resources';
+import {Turmoil} from '../../turmoil/Turmoil';
 
 export class SeptumTribus extends Card implements IActionCard, CorporationCard {
   constructor() {
@@ -36,15 +37,14 @@ export class SeptumTribus extends Card implements IActionCard, CorporationCard {
     return undefined;
   }
 
-  public canAct(player: Player): boolean {
-    return player.game.gameOptions.turmoilExtension;
+  public canAct(): boolean {
+    return true;
   }
 
   public action(player: Player) {
-    if (player.game.turmoil !== undefined) {
-      const partiesWithPresence = player.game.turmoil.parties.filter((party) => party.delegates.includes(player.id));
-      player.addResource(Resources.MEGACREDITS, partiesWithPresence.length * 2, {log: true});
-    }
+    const turmoil = Turmoil.getTurmoil(player.game);
+    const partiesWithPresence = turmoil.parties.filter((party) => party.delegates.includes(player.id));
+    player.addResource(Resources.MEGACREDITS, partiesWithPresence.length * 2, {log: true});
 
     return undefined;
   }

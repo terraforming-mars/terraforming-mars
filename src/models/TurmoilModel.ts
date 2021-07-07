@@ -4,6 +4,7 @@ import {GlobalEventName} from '../turmoil/globalEvents/GlobalEventName';
 import {Game} from '../Game';
 import {Agenda, PoliticalAgendas} from '../turmoil/PoliticalAgendas';
 import {IGlobalEvent} from '../turmoil/globalEvents/IGlobalEvent';
+import {Turmoil} from '../turmoil/Turmoil';
 
 export interface TurmoilModel {
   dominant: PartyName | undefined;
@@ -53,10 +54,9 @@ export interface PoliticalAgendasModel {
   kelvinists: Agenda;
 }
 
-export function getTurmoil(game: Game): TurmoilModel | undefined {
-  if (game.gameOptions.turmoilExtension && game.turmoil) {
+export function getTurmoilModel(game: Game): TurmoilModel | undefined {
+  return Turmoil.ifTurmoilElse(game, (turmoil) => {
     const parties = getParties(game);
-    const turmoil = game.turmoil;
     let chairman; let dominant; let ruling;
 
     if (turmoil.chairman) {
@@ -126,9 +126,8 @@ export function getTurmoil(game: Game): TurmoilModel | undefined {
       politicalAgendas,
       policyActionUsers,
     };
-  } else {
-    return undefined;
-  }
+  },
+  () => undefined);
 }
 
 function globalEventToModel(globalEvent: IGlobalEvent | undefined): GlobalEventModel | undefined {
@@ -144,35 +143,36 @@ function globalEventToModel(globalEvent: IGlobalEvent | undefined): GlobalEventM
 }
 
 function getParties(game: Game): Array<PartyModel> {
-  if (game.gameOptions.turmoilExtension && game.turmoil) {
-    return game.turmoil.parties.map(function(party) {
-      const delegates: Array<DelegatesModel> = [];
-      party.getPresentPlayers().forEach((player) => {
-        const number = party.getDelegates(player);
-        if (player !== 'NEUTRAL') {
-          delegates.push({
-            color: game.getPlayerById(player).color,
-            number: number,
-          });
-        } else {
-          delegates.push({color: Color.NEUTRAL, number: number});
+  return Turmoil.ifTurmoilElse(game,
+    (turmoil) => {
+      return turmoil.parties.map(function(party) {
+        const delegates: Array<DelegatesModel> = [];
+        party.getPresentPlayers().forEach((player) => {
+          const number = party.getDelegates(player);
+          if (player !== 'NEUTRAL') {
+            delegates.push({
+              color: game.getPlayerById(player).color,
+              number: number,
+            });
+          } else {
+            delegates.push({color: Color.NEUTRAL, number: number});
+          }
+        });
+        let partyLeader;
+        if (party.partyLeader) {
+          if (party.partyLeader === 'NEUTRAL') {
+            partyLeader = Color.NEUTRAL;
+          } else {
+            partyLeader = game.getPlayerById(party.partyLeader).color;
+          }
         }
+        return {
+          name: party.name,
+          description: party.description,
+          partyLeader: partyLeader,
+          delegates: delegates,
+        };
       });
-      let partyLeader;
-      if (party.partyLeader) {
-        if (party.partyLeader === 'NEUTRAL') {
-          partyLeader = Color.NEUTRAL;
-        } else {
-          partyLeader = game.getPlayerById(party.partyLeader).color;
-        }
-      }
-      return {
-        name: party.name,
-        description: party.description,
-        partyLeader: partyLeader,
-        delegates: delegates,
-      };
-    });
-  }
-  return [];
+    },
+    () => []);
 }

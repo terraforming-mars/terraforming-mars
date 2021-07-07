@@ -3,7 +3,7 @@ import {Player} from '../../Player';
 import {PreludeCard} from '../prelude/PreludeCard';
 import {IProjectCard} from '../IProjectCard';
 import {CardName} from '../../CardName';
-import {ALL_PARTIES} from '../../turmoil/Turmoil';
+import {ALL_PARTIES, Turmoil} from '../../turmoil/Turmoil';
 import {SelectOption} from '../../inputs/SelectOption';
 import {OrOptions} from '../../inputs/OrOptions';
 import {DeferredAction} from '../../deferredActions/DeferredAction';
@@ -27,14 +27,13 @@ export class ByElection extends PreludeCard implements IProjectCard {
       },
     });
   }
-  public canPlay(player: Player) {
-    return player.game.turmoil !== undefined;
+  public canPlay() {
+    return true;
   }
+
   public play(player: Player) {
-    const turmoil = player.game.turmoil;
-    if (turmoil === undefined) {
-      return;
-    }
+    const turmoil = Turmoil.getTurmoil(player.game);
+
     turmoil.addInfluenceBonus(player);
     const setRulingParty = new OrOptions();
 

@@ -11,6 +11,7 @@
 
 import Vue from 'vue';
 import {CardType} from '../../cards/CardType';
+import {translateText} from '../../directives/i18n';
 import CardCorporationLogo from './CardCorporationLogo.vue';
 
 export default Vue.extend({
@@ -51,11 +52,11 @@ export default Vue.extend({
         classes.push('background-color-standard-project');
       }
 
-      const trimmedTitle = this.getCardTitleWithoutSuffix(title);
+      const localeSpecificTitle = translateText(this.getCardTitleWithoutSuffix(title));
 
-      if (trimmedTitle.length > 26) {
+      if (localeSpecificTitle.length > 26) {
         classes.push('title-smaller');
-      } else if (trimmedTitle.length > 23) {
+      } else if (localeSpecificTitle.length > 23) {
         classes.push('title-small');
       }
 

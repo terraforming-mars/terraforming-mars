@@ -65,6 +65,10 @@ const handlers: Map<string, IHandler> = new Map(
 );
 
 function processRequest(req: http.IncomingMessage, res: http.ServerResponse): void {
+  if (req.method === 'HEAD') {
+    res.end();
+    return;
+  }
   if (req.url === undefined) {
     route.notFound(req, res);
     return;

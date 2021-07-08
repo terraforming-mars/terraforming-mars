@@ -1,10 +1,25 @@
+<template>
+        <div :class="getClasses()">
+            <div class="card-production-box-row" v-for="(rowData, index) in rows" :key="index">
+                <div v-for="(rowItem, rowIndex) in rowData" class="card-production-box-row-item" :key="rowIndex">
+                    <CardRenderItemComponent v-if="getComponentType(rowItem) === 'item'" :item="rowItem"/>
+                    <CardRenderSymbolComponent v-else-if="getComponentType(rowItem) === 'symbol'" :item="rowItem" />
+                    <div v-else>n/a</div>
+                </div>
+            </div>
+        </div>
+</template>
+
+<script lang="ts">
+
 import Vue from 'vue';
 import {CardRenderItemComponent} from './CardRenderItemComponent';
 import {CardRenderSymbolComponent} from './CardRenderSymbolComponent';
 import {CardRenderSymbol} from '../../cards/render/CardRenderSymbol';
 import {CardRenderItem} from '../../cards/render/CardRenderItem';
 
-export const CardProductionBoxComponent = Vue.component('CardProductionBoxComponent', {
+export default Vue.extend({
+  name: 'CardProductionBoxComponent',
   props: {
     rows: {
       type: Array as () => Array<Array<CardRenderItem>>,
@@ -29,15 +44,7 @@ export const CardProductionBoxComponent = Vue.component('CardProductionBoxCompon
       return '';
     },
   },
-  template: `
-        <div :class="getClasses()">
-            <div class="card-production-box-row" v-for="(rowData, index) in rows" :key="index">
-                <div v-for="(rowItem, rowIndex) in rowData" class="card-production-box-row-item" :key="rowIndex">
-                    <CardRenderItemComponent v-if="getComponentType(rowItem) === 'item'" :item="rowItem"/>
-                    <CardRenderSymbolComponent v-else-if="getComponentType(rowItem) === 'symbol'" :item="rowItem" />
-                    <div v-else>n/a</div>
-                </div>
-            </div>
-        </div>
-    `,
 });
+
+</script>
+

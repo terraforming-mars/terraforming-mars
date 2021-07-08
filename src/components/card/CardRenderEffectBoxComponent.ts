@@ -2,7 +2,7 @@ import Vue from 'vue';
 import {CardRenderItemComponent} from './CardRenderItemComponent';
 import {CardRenderSymbolComponent} from './CardRenderSymbolComponent';
 import {CardRenderEffect, CardRenderProductionBox, CardRenderTile} from '../../cards/render/CardRenderer';
-import {CardProductionBoxComponent} from './CardProductionBoxComponent';
+import CardProductionBoxComponent from './CardProductionBoxComponent.vue';
 import {CardRenderTileComponent} from './CardRenderTileComponent';
 import {CardRenderSymbol} from '../../cards/render/CardRenderSymbol';
 import {CardRenderItem} from '../../cards/render/CardRenderItem';

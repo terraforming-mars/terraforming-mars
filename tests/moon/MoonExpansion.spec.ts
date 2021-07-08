@@ -152,9 +152,9 @@ describe('MoonExpansion', () => {
 
   it('Raise colony rate bonus 5-6', () => {
     moonData.colonyRate = 5;
-    player.cardsInHand = [];
+    player.setProductionForTest({energy: 0});
     MoonExpansion.raiseColonyRate(player, 1);
-    expect(player.cardsInHand).has.length(1);
+    expect(player.getProduction(Resources.ENERGY)).eq(1);
   });
 
   it('Moon parameters are global parameters', () => {

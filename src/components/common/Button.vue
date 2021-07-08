@@ -74,6 +74,10 @@ export default Vue.extend({
       // type
       if (this.type === 'max') {
         classes.push('btn-max'); // #TODO max_button?
+      } else if (this.type === 'plus') {
+        classes.push('btn-plus');
+      } else if (this.type === 'minus') {
+        classes.push('btn-minus');
       } else if (this.type === 'success') {
         classes.push('btn-success');
       } else if (this.type === 'error') {

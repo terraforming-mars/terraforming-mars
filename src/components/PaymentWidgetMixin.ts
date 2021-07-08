@@ -63,7 +63,7 @@ export const PaymentWidgetMixin = {
       const heatMc = ta['heat'] ?? 0;
       const titaniumMc = (ta['titanium'] ?? 0) * this.getResourceRate('titanium');
       const steelMc = (ta['steel'] ?? 0) * this.getResourceRate('steel');
-      const microbesMc = (ta['microbes'] ?? 0) * this.getResourceRate('steel');
+      const microbesMc = (ta['microbes'] ?? 0) * this.getResourceRate('microbes');
       const floatersMc = (ta['floaters'] ?? 0) * this.getResourceRate('floaters');
       const scienceMc = ta['science'] ?? 0;
 
@@ -72,14 +72,14 @@ export const PaymentWidgetMixin = {
 
       ta['megaCredits'] = Math.max(0, Math.min(this.getMegaCreditsMax(), remainingMC));
     },
-    setMaxValue: function(target: ResourcesWithRates | 'science', max?: number): void {
+    setMaxValue: function(target: ResourcesWithRates | 'science' | 'heat', max?: number): void {
       let currentValue: number = (this as any)[target];
       const cardCost: number = (this as any).$data.cost;
       let amountHave: number = max ?? (this as any).player[target];
 
-      let amountNeed: number = cardCost;
-      if (!(target === 'science')) {
-        amountNeed = Math.floor(cardCost/this.getResourceRate(target));
+      let amountNeed = cardCost;
+      if (target !== 'science' && target !== 'heat') {
+        amountNeed = Math.floor(cardCost / this.getResourceRate(target));
       }
 
       if (target === 'microbes') amountHave = (this as any).playerinput.microbes;

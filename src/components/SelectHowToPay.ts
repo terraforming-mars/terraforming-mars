@@ -8,14 +8,15 @@ import {PreferencesManager} from './PreferencesManager';
 import Button from '../components/common/Button.vue';
 import {TranslateMixin} from './TranslateMixin';
 
-interface SelectHowToPayModel {
+// Exported for testing
+export interface SelectHowToPayModel {
     cost: number;
     heat: number;
     megaCredits: number;
     steel: number;
     titanium: number;
-    microbes: number;
-    floaters: number;
+    microbes: number; // Microbes are not actually used in this component. It's just to satisfy the mixin.
+    floaters: number; // Floaters are not actually used in this component. It's just to satisfy the mixin.
     warning: string | undefined;
 }
 
@@ -169,7 +170,7 @@ export const SelectHowToPay = Vue.component('select-how-to-pay', {
       }
 
       const requiredAmt = this.playerinput.amount || 0;
-      const totalSpentAmt = htp.heat + htp.megaCredits + (htp.steel * this.player.steelValue) + (htp.titanium * this.player.titaniumValue) + (htp.microbes * 2) + (htp.floaters * 3);
+      const totalSpentAmt = htp.heat + htp.megaCredits + (htp.steel * this.player.steelValue) + (htp.titanium * this.player.titaniumValue);
 
       if (requiredAmt > 0 && totalSpentAmt < requiredAmt) {
         this.$data.warning = 'Haven\'t spent enough';

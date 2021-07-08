@@ -11,10 +11,6 @@ export const MoonGlobalParameterValue = Vue.component('moon-global-parameter-val
   },
   mixins: [TranslateMixin],
   methods: {
-    // TODO(kberg): prettier description of the rates. This is minimally acceptable.
-    value: function(): string {
-      return `${this.moonData.colonyRate}/${this.moonData.miningRate}/${this.moonData.logisticsRate}`;
-    },
     isMax: function(): boolean {
       return this.moonData.colonyRate >= MAXIMUM_COLONY_RATE &&
       this.moonData.miningRate >= MAXIMUM_MINING_RATE &&
@@ -29,7 +25,9 @@ export const MoonGlobalParameterValue = Vue.component('moon-global-parameter-val
       <img src="/assets/misc/checkmark.png" class="checkmark" :alt="$t('Completed!')">
     </div>
     <div v-else class="moon_params_value">
-      {{this.value()}}
+      <span class="colony">{{this.moonData.colonyRate}}</span>
+      <span class="logistics">{{this.moonData.logisticsRate}}</span>
+      <span class="mining">{{this.moonData.miningRate}}</span>
     </div>
   </div>
 </div>

@@ -1,21 +1,13 @@
 import {CardType} from './CardType';
 import {Player} from '../Player';
 import {IActionCard, ICard} from './ICard';
-import {OrOptions} from '../inputs/OrOptions';
-import {SelectAmount} from '../inputs/SelectAmount';
-import {SelectHowToPay} from '../inputs/SelectHowToPay';
-import {SelectOption} from '../inputs/SelectOption';
-import {IProjectCard} from './IProjectCard';
-import {SelectPlayer} from '../inputs/SelectPlayer';
-import {AndOptions} from '../inputs/AndOptions';
-import {SelectCard} from '../inputs/SelectCard';
-import {SelectSpace} from '../inputs/SelectSpace';
 import {CardMetadata} from './CardMetadata';
 import {CardName} from '../CardName';
 import {SelectHowToPayDeferred} from '../deferredActions/SelectHowToPayDeferred';
 import {Card} from './Card';
 import {MoonExpansion} from '../moon/MoonExpansion';
 import {Units} from '../Units';
+import {PlayerInputs} from '../inputs/PlayerInputs';
 
 interface StaticStandardProjectCardProperties {
   name: CardName,
@@ -63,7 +55,7 @@ export abstract class StandardProjectCard extends Card implements IActionCard, I
     this.onStandardProject(player);
   }
 
-  public action(player: Player): OrOptions | SelectOption | AndOptions | SelectAmount | SelectCard<ICard> | SelectCard<IProjectCard> | SelectHowToPay | SelectPlayer | SelectSpace | undefined {
+  public action(player: Player): PlayerInputs | undefined {
     player.game.defer(new SelectHowToPayDeferred(
       player,
       this.cost - this.discount(player),

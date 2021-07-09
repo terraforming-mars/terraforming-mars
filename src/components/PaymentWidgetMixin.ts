@@ -14,8 +14,8 @@ export interface SelectHowToPayModel {
     megaCredits: number;
     steel: number;
     titanium: number;
-    microbes: number;
-    floaters: number;
+    microbes: number; // Microbes are not actually used in this component. It's just to satisfy the mixin.
+    floaters: number; // Floaters are not actually used in this component. It's just to satisfy the mixin.
     warning: string | undefined;
 }
 
@@ -40,13 +40,14 @@ interface PaymentWidgetModel extends SelectHowToPayModel {
   playerinput: PlayerInputModel;
 }
 
+type ResourcesWithRates = 'titanium' | 'steel' | 'microbes' |'floaters';
 export const PaymentWidgetMixin = {
   'name': 'PaymentWidgetMixin',
   'methods': {
     getMegaCreditsMax: function(): number {
       return Math.min((this as unknown as PaymentWidgetModel).player.megaCredits, (this as unknown as PaymentWidgetModel).$data.cost);
     },
-    getResourceRate: function(resourceName: 'steel' | 'titanium' | 'heat' | 'microbes' | 'floaters' | 'science'): number {
+    getResourceRate: function(resourceName: ResourcesWithRates): number {
       let rate = 1; // one resource == one money
       if (resourceName === 'titanium') {
         rate = (this as unknown as PaymentWidgetModel).player.titaniumValue;
@@ -112,17 +113,20 @@ export const PaymentWidgetMixin = {
       this.setRemainingMCValue();
     },
     setRemainingMCValue: function(): void {
-      const remainingMC: number = (this as unknown as PaymentWidgetModel).$data.cost -
-              (this as unknown as PaymentWidgetModel)['heat'] -
-              (this as unknown as PaymentWidgetModel)['titanium'] * this.getResourceRate('titanium') -
-              (this as unknown as PaymentWidgetModel)['steel'] * this.getResourceRate('steel') -
-              (this as unknown as PaymentWidgetModel)['microbes'] * this.getResourceRate('microbes') -
-              (this as unknown as PaymentWidgetModel)['floaters'] * this.getResourceRate('floaters') -
-              ((this as unknown as PaymentWidgetModel)['science'] ?? 0);
+      const ta = this as any;
+      const heatMc = ta['heat'] ?? 0;
+      const titaniumMc = (ta['titanium'] ?? 0) * this.getResourceRate('titanium');
+      const steelMc = (ta['steel'] ?? 0) * this.getResourceRate('steel');
+      const microbesMc = (ta['microbes'] ?? 0) * this.getResourceRate('microbes');
+      const floatersMc = (ta['floaters'] ?? 0) * this.getResourceRate('floaters');
+      const scienceMc = ta['science'] ?? 0;
 
-      (this as unknown as PaymentWidgetModel)['megaCredits'] = Math.max(0, Math.min(this.getMegaCreditsMax(), remainingMC));
+      const remainingMC: number =
+          ta.$data.cost - heatMc - titaniumMc - steelMc - microbesMc - floatersMc - scienceMc;
+
+      ta['megaCredits'] = Math.max(0, Math.min(this.getMegaCreditsMax(), remainingMC));
     },
-    setMaxValue: function(target: 'steel' | 'titanium' | 'heat' | 'microbes' | 'floaters' | 'science', max?: number): void {
+    setMaxValue: function(target: ResourcesWithRates | 'science' | 'heat', max?: number): void {
       let currentValue: number | undefined = (this as unknown as PaymentWidgetModel)[target];
       if (currentValue === undefined) {
         throw new Error(`can not setMaxValue for ${target} on this`);
@@ -133,9 +137,9 @@ export const PaymentWidgetMixin = {
         amountHave = (this as unknown as PaymentWidgetModel).player[target];
       }
 
-      let amountNeed: number = cardCost;
-      if (['titanium', 'steel', 'microbes', 'floaters'].includes(target)) {
-        amountNeed = Math.floor(cardCost/this.getResourceRate(target));
+      let amountNeed = cardCost;
+      if (target !== 'science' && target !== 'heat') {
+        amountNeed = Math.floor(cardCost / this.getResourceRate(target));
       }
 
       if (target === 'microbes') amountHave = (this as unknown as PaymentWidgetModel).playerinput.microbes;

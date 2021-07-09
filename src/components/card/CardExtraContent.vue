@@ -1,9 +1,20 @@
+<template>
+    <div class="card-extra-content-container">
+      <div v-if="lifeFound(card)" class="little-green-men" />
+      <div v-if="isMiningTileOnMetal(card,'steel')" class="mined-metal mined-steel" />
+      <div v-if="isMiningTileOnMetal(card,'titanium')" class="mined-metal mined-titanium" />
+    </div>
+</template>
+
+<script lang="ts">
+
 import Vue from 'vue';
 import {CardModel} from '../../models/CardModel';
 import {CardName} from '../../CardName';
 import {Resources} from '../../Resources';
 
-export const CardExtraContent = Vue.component('CardExtraContent', {
+export default Vue.extend({
+  name: 'CardExtraContent',
   props: {
     card: {
       type: Object,
@@ -29,11 +40,7 @@ export const CardExtraContent = Vue.component('CardExtraContent', {
       return card.name === CardName.SEARCH_FOR_LIFE && card.resources !== undefined && card.resources > 0;
     },
   },
-  template: `
-    <div class="card-extra-content-container">
-      <div v-if="lifeFound(card)" class="little-green-men" />
-      <div v-if="isMiningTileOnMetal(card,'steel')" class="mined-metal mined-steel" />
-      <div v-if="isMiningTileOnMetal(card,'titanium')" class="mined-metal mined-titanium" />
-    </div>
-    `,
 });
+
+</script>
+

@@ -158,7 +158,7 @@ export const SelectHowToPay = Vue.component('select-how-to-pay', {
       }
 
       const requiredAmt = this.playerinput.amount || 0;
-      const totalSpentAmt = htp.heat + htp.megaCredits + (htp.steel * this.player.steelValue) + (htp.titanium * this.player.titaniumValue) + (htp.microbes * 2) + (htp.floaters * 3);
+      const totalSpentAmt = htp.heat + htp.megaCredits + (htp.steel * this.player.steelValue) + (htp.titanium * this.player.titaniumValue);
 
       if (requiredAmt > 0 && totalSpentAmt < requiredAmt) {
         this.$data.warning = 'Haven\'t spent enough';

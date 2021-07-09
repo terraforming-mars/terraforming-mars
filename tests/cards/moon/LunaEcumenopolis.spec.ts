@@ -45,7 +45,7 @@ describe('LunaEcumenopolis', () => {
     expect(game.deferredActions.pop()!.execute()).is.undefined;
     expect(player.getTerraformRating()).eq(14);
     game.deferredActions.runAll(() => {});
-    expect(player.getTerraformRating()).eq(16);
+    expect(player.getTerraformRating()).eq(15);
   });
 
   // The part of the moon map being used for this test
@@ -82,7 +82,7 @@ describe('LunaEcumenopolis', () => {
     input1.cb(moon.getSpace('m13'));
     expect(moonData.colonyRate).eq(4);
     game.deferredActions.runAll(() => {});
-    expect(player.getTerraformRating()).eq(20);
+    expect(player.getTerraformRating()).eq(18);
   });
 });
 

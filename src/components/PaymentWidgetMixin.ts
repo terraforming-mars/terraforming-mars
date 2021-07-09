@@ -44,15 +44,23 @@ type ResourcesWithRates = 'titanium' | 'steel' | 'microbes' |'floaters';
 export const PaymentWidgetMixin = {
   'name': 'PaymentWidgetMixin',
   'methods': {
+    // Please don't copy this pattern. This
+    // is being used as an interim solution
+    // until there is better typing on the
+    // SelectHowToPay components.
+    asModel: function(): PaymentWidgetModel {
+      return this as unknown as PaymentWidgetModel;
+    },
     getMegaCreditsMax: function(): number {
-      return Math.min((this as unknown as PaymentWidgetModel).player.megaCredits, (this as unknown as PaymentWidgetModel).$data.cost);
+      const model = this.asModel();
+      return Math.min(model.player.megaCredits, model.$data.cost);
     },
     getResourceRate: function(resourceName: ResourcesWithRates): number {
       let rate = 1; // one resource == one money
       if (resourceName === 'titanium') {
-        rate = (this as unknown as PaymentWidgetModel).player.titaniumValue;
+        rate = this.asModel().player.titaniumValue;
       } else if (resourceName === 'steel') {
-        rate = (this as unknown as PaymentWidgetModel).player.steelValue;
+        rate = this.asModel().player.steelValue;
       } else if (resourceName === 'microbes') {
         rate = 2;
       } else if (resourceName === 'floaters') {
@@ -60,8 +68,8 @@ export const PaymentWidgetMixin = {
       }
       return rate;
     },
-    reduceValue: function(target: 'steel' | 'titanium' | 'heat' | 'megaCredits' | 'microbes' | 'floaters' | 'science', to: number): void {
-      const currentValue: number | undefined = (this as unknown as PaymentWidgetModel)[target];
+    reduceValue: function(target: ResourcesWithRates | 'heat' | 'megaCredits' | 'science', to: number): void {
+      const currentValue: number | undefined = this.asModel()[target];
 
       if (currentValue === undefined) {
         throw new Error(`can not reduceValue for ${target} on this`);
@@ -70,14 +78,14 @@ export const PaymentWidgetMixin = {
       if (currentValue === 0) return;
 
       const realTo = Math.min(to, currentValue);
-      (this as unknown as PaymentWidgetModel)[target] -= realTo;
+      this.asModel()[target] -= realTo;
 
       if (target === 'megaCredits' || realTo === 0) return;
 
       this.setRemainingMCValue();
     },
-    addValue: function(target: 'steel' | 'titanium' | 'heat' | 'megaCredits' | 'microbes' | 'floaters' | 'science', to: number, max?: number): void {
-      const currentValue: number | undefined = (this as unknown as PaymentWidgetModel)[target];
+    addValue: function(target: ResourcesWithRates | 'heat' | 'megaCredits' | 'science', to: number, max?: number): void {
+      const currentValue: number | undefined = this.asModel()[target];
 
       if (currentValue === undefined) {
         throw new Error(`can not addValue for ${target} on this`);
@@ -86,19 +94,19 @@ export const PaymentWidgetMixin = {
       let maxValue: number | undefined = max;
 
       if (maxValue === undefined && target !== 'microbes' && target !== 'floaters' && target !== 'science') {
-        maxValue = (this as unknown as PaymentWidgetModel).player[target];
+        maxValue = this.asModel().player[target];
       }
 
       if (target === 'megaCredits') {
         maxValue = this.getMegaCreditsMax();
       }
 
-      if (target === 'microbes') maxValue = (this as unknown as PaymentWidgetModel).playerinput.microbes;
+      if (target === 'microbes') maxValue = this.asModel().playerinput.microbes;
       if (target === 'floaters') {
-        maxValue = (this as unknown as PaymentWidgetModel).playerinput.floaters;
+        maxValue = this.asModel().playerinput.floaters;
         if (maxValue !== undefined && this.isStratosphericBirdsEdgeCase()) maxValue--;
       }
-      if (target === 'science') maxValue = (this as unknown as PaymentWidgetModel).playerinput.science;
+      if (target === 'science') maxValue = this.asModel().playerinput.science;
       if (currentValue === maxValue) return;
 
       if (maxValue === undefined) {
@@ -106,14 +114,14 @@ export const PaymentWidgetMixin = {
       }
 
       const realTo = (currentValue + to <= maxValue) ? to : maxValue - currentValue;
-      (this as unknown as PaymentWidgetModel)[target] += realTo;
+      this.asModel()[target] += realTo;
 
       if (target === 'megaCredits' || realTo === 0) return;
 
       this.setRemainingMCValue();
     },
     setRemainingMCValue: function(): void {
-      const ta = this as any;
+      const ta = this.asModel();
       const heatMc = ta['heat'] ?? 0;
       const titaniumMc = (ta['titanium'] ?? 0) * this.getResourceRate('titanium');
       const steelMc = (ta['steel'] ?? 0) * this.getResourceRate('steel');
@@ -127,14 +135,14 @@ export const PaymentWidgetMixin = {
       ta['megaCredits'] = Math.max(0, Math.min(this.getMegaCreditsMax(), remainingMC));
     },
     setMaxValue: function(target: ResourcesWithRates | 'science' | 'heat', max?: number): void {
-      let currentValue: number | undefined = (this as unknown as PaymentWidgetModel)[target];
+      let currentValue: number | undefined = this.asModel()[target];
       if (currentValue === undefined) {
         throw new Error(`can not setMaxValue for ${target} on this`);
       }
-      const cardCost: number = (this as unknown as PaymentWidgetModel).$data.cost;
+      const cardCost: number = this.asModel().$data.cost;
       let amountHave: number | undefined = max;
       if (max === undefined && target !== 'microbes' && target !== 'floaters' && target !== 'science') {
-        amountHave = (this as unknown as PaymentWidgetModel).player[target];
+        amountHave = this.asModel().player[target];
       }
 
       let amountNeed = cardCost;
@@ -142,12 +150,12 @@ export const PaymentWidgetMixin = {
         amountNeed = Math.floor(cardCost / this.getResourceRate(target));
       }
 
-      if (target === 'microbes') amountHave = (this as unknown as PaymentWidgetModel).playerinput.microbes;
+      if (target === 'microbes') amountHave = this.asModel().playerinput.microbes;
       if (target === 'floaters') {
-        amountHave = (this as unknown as PaymentWidgetModel).playerinput.floaters;
+        amountHave = this.asModel().playerinput.floaters;
         if (amountHave !== undefined && this.isStratosphericBirdsEdgeCase()) amountHave--;
       }
-      if (target === 'science') amountHave = (this as unknown as PaymentWidgetModel).playerinput.science;
+      if (target === 'science') amountHave = this.asModel().playerinput.science;
 
       if (amountHave === undefined) {
         throw new Error(`unable to find amountHave for setMaxValue for ${target}`);
@@ -159,8 +167,8 @@ export const PaymentWidgetMixin = {
       }
     },
     isStratosphericBirdsEdgeCase: function(): boolean {
-      if ((this as unknown as PaymentWidgetModel).$data.card?.name === CardName.STRATOSPHERIC_BIRDS) {
-        const playedCards = (this as unknown as PaymentWidgetModel).player.playedCards as Array<CardModel>;
+      if (this.asModel().$data.card?.name === CardName.STRATOSPHERIC_BIRDS) {
+        const playedCards = this.asModel().player.playedCards as Array<CardModel>;
         const cardsWithFloaters = playedCards.filter((card) => card.resourceType === ResourceType.FLOATER && card.resources);
         return cardsWithFloaters.length === 1;
       }

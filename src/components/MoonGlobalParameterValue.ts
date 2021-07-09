@@ -16,6 +16,15 @@ export const MoonGlobalParameterValue = Vue.component('moon-global-parameter-val
       this.moonData.miningRate >= MAXIMUM_MINING_RATE &&
       this.moonData.logisticsRate >= MAXIMUM_LOGISTICS_RATE;
     },
+    colonyRate: function(): number {
+      return this.moonData.colonyRate;
+    },
+    logisticsRate: function(): number {
+      return this.moonData.logisticsRate;
+    },
+    miningRate: function(): number {
+      return this.moonData.miningRate;
+    },
   },
   template: `
 <div>
@@ -25,9 +34,9 @@ export const MoonGlobalParameterValue = Vue.component('moon-global-parameter-val
       <img src="/assets/misc/checkmark.png" class="checkmark" :alt="$t('Completed!')">
     </div>
     <div v-else class="moon_params_value">
-      <span class="colony">{{this.moonData.colonyRate}}</span>
-      <span class="logistics">{{this.moonData.logisticsRate}}</span>
-      <span class="mining">{{this.moonData.miningRate}}</span>
+      <span class="colony">{{colonyRate()}}</span>
+      <span class="logistics">{{logisticsRate()}}</span>
+      <span class="mining">{{miningRate()}}</span>
     </div>
   </div>
 </div>

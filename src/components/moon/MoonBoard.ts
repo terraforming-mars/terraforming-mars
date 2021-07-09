@@ -3,7 +3,7 @@ import {MoonModel} from '../../models/MoonModel';
 
 import {SpaceModel} from '../../models/SpaceModel';
 import {SpaceType} from '../../SpaceType';
-import {MoonSpace} from './MoonSpace';
+import MoonSpace from './MoonSpace.vue';
 
 class MoonParamLevel {
   constructor(public value: number, public isActive: boolean, public strValue: string) {
@@ -17,7 +17,7 @@ export const MoonBoard = Vue.component('moonboard', {
     },
   },
   components: {
-    'moon-space': MoonSpace,
+    MoonSpace,
   },
   data: function() {
     return {
@@ -140,7 +140,7 @@ export const MoonBoard = Vue.component('moonboard', {
       </div>
 
       <div class="board" id="moon_board">
-        <moon-space :space="curSpace" :is_selectable="true" :key="'moon-space-'+curSpace.id" v-for="curSpace in getAllNonColonySpaces()"></moon-space>
+        <MoonSpace :space="curSpace" :is_selectable="true" :key="'moon-space-'+curSpace.id" v-for="curSpace in getAllNonColonySpaces()"></moon-space>
       </div>
     </div>
     `,

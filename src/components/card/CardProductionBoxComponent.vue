@@ -13,7 +13,7 @@
 <script lang="ts">
 
 import Vue from 'vue';
-import {CardRenderItemComponent} from './CardRenderItemComponent';
+import CardRenderItemComponent from './CardRenderItemComponent.vue';
 import {CardRenderSymbolComponent} from './CardRenderSymbolComponent';
 import {CardRenderSymbol} from '../../cards/render/CardRenderSymbol';
 import {CardRenderItem} from '../../cards/render/CardRenderItem';

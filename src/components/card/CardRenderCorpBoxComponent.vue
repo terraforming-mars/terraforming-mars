@@ -12,8 +12,8 @@
 <script lang="ts">
 
 import Vue from 'vue';
-import {CardRenderItemComponent} from './CardRenderItemComponent';
-import {CardRenderEffectBoxComponent} from './CardRenderEffectBoxComponent';
+import CardRenderItemComponent from './CardRenderItemComponent.vue';
+import CardRenderEffectBoxComponent from './CardRenderEffectBoxComponent.vue';
 import {CardRenderSymbolComponent} from './CardRenderSymbolComponent';
 import {CardRenderEffect} from '../../cards/render/CardRenderer';
 import {CardRenderItem} from '../../cards/render/CardRenderItem';

@@ -1,4 +1,64 @@
+  // TODO(chosta): consolidate repetition into a reusable component.
+<template>
+  <div class="wf-component wf-component--select-production-to-lose">
+    <div v-if="showtitle === true" class="nofloat wf-component-title">{{ $t(playerinput.title) }}</div>
+
+    <h3 class="payments_title" v-i18n>Which resource production would you prefer to decrease?</h3>
+
+    <div class="payments_type input-group" v-if="canDeductMegaCredits()">
+      <div class="production-box"><div class="production resource_icon--megacredits" style="background-size:contain;"></div></div>
+      <button class="btn btn-primary" v-on:click="delta('megacredits', -1)"><i class="icon icon-minus" /></button>
+      <input class="form-input form-inline payments_input" v-model.number="megacredits" />
+      <button class="btn btn-primary" v-on:click="delta('megacredits', 1)"><i class="icon icon-plus" /></button>
+    </div>
+    <div class="payments_type input-group" v-if="canDeductSteel()">
+      <div class="production-box"><div class="production steel"></div></div>
+      <button class="btn btn-primary" v-on:click="delta('steel', -1)"><i class="icon icon-minus" /></button>
+      <input class="form-input form-inline payments_input" v-model.number="steel" />
+      <button class="btn btn-primary" v-on:click="delta('steel', 1)"><i class="icon icon-plus" /></button>
+    </div >
+    <div class="payments_type input-group" v-if="canDeductTitanium()" >
+      <div class="production-box"><div class="production titanium"></div></div>
+      <button class="btn btn-primary" v-on:click="delta('titanium', -1)"><i class="icon icon-minus" /></button>
+      <input class="form-input form-inline payments_input" v-model.number="titanium" />
+      <button class="btn btn-primary" v-on:click="delta('titanium', 1)"><i class="icon icon-plus" /></button>
+    </div >
+    <div class="payments_type input-group" v-if="canDeductPlants()" >
+      <div class="production-box"><div class="production plant"></div></div>
+      <button class="btn btn-primary" v-on:click="delta('plants', -1)"><i class="icon icon-minus" /></button>
+      <input class="form-input form-inline payments_input" v-model.number="plants" />
+      <button class="btn btn-primary" v-on:click="delta('plants', 1)"><i class="icon icon-plus" /></button>
+    </div >
+    <div class="payments_type input-group" v-if="canDeductEnergy()" >
+      <div class="production-box"><div class="production energy"></div></div>
+      <button class="btn btn-primary" v-on:click="delta('energy', -1)"><i class="icon icon-minus" /></button>
+      <input class="form-input form-inline payments_input" v-model.number="energy" />
+      <button class="btn btn-primary" v-on:click="delta('energy', 1)"><i class="icon icon-plus" /></button>
+    </div >
+    <div class="payments_type input-group" v-if="canDeductHeat()" >
+      <div class="production-box"><div class="production heat"></div></div>
+      <button class="btn btn-primary" v-on:click="delta('heat', -1)"><i class="icon icon-minus" /></button>
+      <input class="form-input form-inline payments_input" v-model.number="heat" />
+      <button class="btn btn-primary" v-on:click="delta('heat', 1)"><i class="icon icon-plus" /></button>
+    </div >
+
+    <div v-if="hasWarning()" class="tm-warning">
+      <label class="label label-error">{{ $t(warning) }}</label>
+    </div>
+
+    <div v-if="showsave === true" class="nofloat">
+        <button class="btn btn-primary btn-submit" v-on:click="saveData">{{ $t(playerinput.buttonLabel) }}</button>
+    </div>
+  </div>
+</template>
+<script lang="ts">
 import Vue from 'vue';
+
+import {PlayerInputModel} from '../models/PlayerInputModel';
+import {PlayerModel} from '../models/PlayerModel';
+import {IPayProductionModel} from '../models/IPayProductionUnitsModel';
+import {Units} from '../Units';
+import {TranslateMixin} from './TranslateMixin';
 
 interface SelectProductionToLoseModel {
     megacredits: number;
@@ -10,13 +70,8 @@ interface SelectProductionToLoseModel {
     warning: string | undefined;
 }
 
-import {PlayerInputModel} from '../models/PlayerInputModel';
-import {PlayerModel} from '../models/PlayerModel';
-import {IPayProductionModel} from '../models/IPayProductionUnitsModel';
-import {Units} from '../Units';
-import {TranslateMixin} from './TranslateMixin';
-
-export const SelectProductionToLose = Vue.component('select-production-to-lose', {
+export default Vue.extend({
+  name: 'SelectProductionToLose',
   props: {
     player: {
       type: Object as () => PlayerModel,
@@ -45,8 +100,8 @@ export const SelectProductionToLose = Vue.component('select-production-to-lose',
       warning: undefined,
     } as SelectProductionToLoseModel;
   },
-  mixins: [TranslateMixin],
   methods: {
+    ...TranslateMixin.methods,
     canDeductMegaCredits: function() {
       return this.playerinput.payProduction.units.megacredits > -5;
     },
@@ -120,57 +175,5 @@ export const SelectProductionToLose = Vue.component('select-production-to-lose',
       ]]);
     },
   },
-
-  // TODO(chosta): consolidate repetition into a reusable component.
-  template: `<div class="wf-component wf-component--select-production-to-lose">
-        <div v-if="showtitle === true" class="nofloat wf-component-title">{{ $t(playerinput.title) }}</div>
-
-        <h3 class="payments_title" v-i18n>Which resource production would you prefer to decrease?</h3>
-
-        <div class="payments_type input-group" v-if="canDeductMegaCredits()">
-          <div class="production-box"><div class="production resource_icon--megacredits" style="background-size:contain;"></div></div>
-          <button class="btn btn-primary" v-on:click="delta('megacredits', -1)"><i class="icon icon-minus" /></button>
-          <input class="form-input form-inline payments_input" v-model.number="megacredits" />
-          <button class="btn btn-primary" v-on:click="delta('megacredits', 1)"><i class="icon icon-plus" /></button>
-        </div>
-        <div class="payments_type input-group" v-if="canDeductSteel()">
-          <div class="production-box"><div class="production steel"></div></div>
-          <button class="btn btn-primary" v-on:click="delta('steel', -1)"><i class="icon icon-minus" /></button>
-          <input class="form-input form-inline payments_input" v-model.number="steel" />
-          <button class="btn btn-primary" v-on:click="delta('steel', 1)"><i class="icon icon-plus" /></button>
-        </div >
-        <div class="payments_type input-group" v-if="canDeductTitanium()" >
-          <div class="production-box"><div class="production titanium"></div></div>
-          <button class="btn btn-primary" v-on:click="delta('titanium', -1)"><i class="icon icon-minus" /></button>
-          <input class="form-input form-inline payments_input" v-model.number="titanium" />
-          <button class="btn btn-primary" v-on:click="delta('titanium', 1)"><i class="icon icon-plus" /></button>
-        </div >
-        <div class="payments_type input-group" v-if="canDeductPlants()" >
-          <div class="production-box"><div class="production plant"></div></div>
-          <button class="btn btn-primary" v-on:click="delta('plants', -1)"><i class="icon icon-minus" /></button>
-          <input class="form-input form-inline payments_input" v-model.number="plants" />
-          <button class="btn btn-primary" v-on:click="delta('plants', 1)"><i class="icon icon-plus" /></button>
-        </div >
-        <div class="payments_type input-group" v-if="canDeductEnergy()" >
-          <div class="production-box"><div class="production energy"></div></div>
-          <button class="btn btn-primary" v-on:click="delta('energy', -1)"><i class="icon icon-minus" /></button>
-          <input class="form-input form-inline payments_input" v-model.number="energy" />
-          <button class="btn btn-primary" v-on:click="delta('energy', 1)"><i class="icon icon-plus" /></button>
-        </div >
-        <div class="payments_type input-group" v-if="canDeductHeat()" >
-          <div class="production-box"><div class="production heat"></div></div>
-          <button class="btn btn-primary" v-on:click="delta('heat', -1)"><i class="icon icon-minus" /></button>
-          <input class="form-input form-inline payments_input" v-model.number="heat" />
-          <button class="btn btn-primary" v-on:click="delta('heat', 1)"><i class="icon icon-plus" /></button>
-        </div >
-
-        <div v-if="hasWarning()" class="tm-warning">
-          <label class="label label-error">{{ $t(warning) }}</label>
-        </div>
-
-        <div v-if="showsave === true" class="nofloat">
-            <button class="btn btn-primary btn-submit" v-on:click="saveData">{{ $t(playerinput.buttonLabel) }}</button>
-        </div>
-    </div>`,
 });
-
+</script>

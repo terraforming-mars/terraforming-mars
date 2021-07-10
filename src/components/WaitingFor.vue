@@ -23,8 +23,8 @@ import {PlayerModel} from '../models/PlayerModel';
 import {PreferencesManager} from './PreferencesManager';
 import {SoundManager} from './SoundManager';
 import {SelectColony} from './SelectColony';
-import {SelectProductionToLose} from './SelectProductionToLose';
-import {ShiftAresGlobalParameters} from './ShiftAresGlobalParameters';
+import SelectProductionToLose from './SelectProductionToLose.vue';
+import ShiftAresGlobalParameters from './ShiftAresGlobalParameters.vue';
 import {WaitingForModel} from '../models/WaitingForModel';
 
 import * as constants from '../constants';
@@ -68,8 +68,8 @@ export default Vue.extend({
     'select-party-player': SelectPartyPlayer,
     'select-party-to-send-delegate': SelectPartyToSendDelegate,
     'select-colony': SelectColony,
-    'select-production-to-lose': SelectProductionToLose,
-    'shift-ares-global-parameters': ShiftAresGlobalParameters,
+    SelectProductionToLose,
+    ShiftAresGlobalParameters,
   },
   methods: {
     animateTitle: function() {

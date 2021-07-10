@@ -17,7 +17,6 @@ export class LunarObservationPost extends MoonCard implements IActionCard {
       cardType: CardType.ACTIVE,
       tags: [Tags.SCIENCE, Tags.SCIENCE],
       cost: 7,
-      productionBox: Units.of({}),
       resourceType: ResourceType.DATA,
       reserveUnits: Units.of({titanium: 1}),
 

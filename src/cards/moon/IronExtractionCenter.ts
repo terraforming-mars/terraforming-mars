@@ -15,7 +15,6 @@ export class IronExtractionCenter extends MoonCard {
       cardType: CardType.AUTOMATED,
       tags: [Tags.BUILDING],
       cost: 10,
-      productionBox: Units.of({}),
       reserveUnits: Units.of({titanium: 1}),
 
       metadata: {
@@ -29,12 +28,15 @@ export class IronExtractionCenter extends MoonCard {
     });
   }
 
+  public produce(player: Player) {
+    const miningRate = MoonExpansion.moonData(player.game).miningRate;
+    const productionIncrease = Math.floor(miningRate / 2);
+    player.addProduction(Resources.STEEL, productionIncrease, {log: true});
+  }
 
   public play(player: Player) {
     super.play(player);
-    const miningRate = MoonExpansion.moonData(player.game).miningRate;
-    const productionIncrease = Math.floor(miningRate / 2);
-    player.addProduction(Resources.STEEL, productionIncrease);
+    this.produce(player);
     return undefined;
   }
 }

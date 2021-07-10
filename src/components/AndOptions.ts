@@ -32,7 +32,7 @@ export const AndOptions = Vue.component('and-options', {
     saveData: function() {
       for (let i = 0; i < this.$data.childComponents.length; i++) {
         const componentInstance = this.$data.childComponents[i]
-          .componentInstance.$children[0];
+          .componentInstance;
         if (componentInstance !== undefined) {
           if (
             (componentInstance as any).saveData instanceof Function

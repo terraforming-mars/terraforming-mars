@@ -63,6 +63,9 @@ export default Vue.component('player-input-factory', {
     'shift-ares-global-parameters': ShiftAresGlobalParameters,
   },
   methods: {
+    saveData: function() {
+      (this.$children[0] as any).saveData();
+    },
     getComponentName(inputType: PlayerInputTypes): string {
       switch (inputType) {
       case PlayerInputTypes.AND_OPTIONS:

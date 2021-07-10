@@ -37,7 +37,7 @@ export const OrOptions = Vue.component('or-options', {
     saveData: function() {
       const componentInstance = this.$data.childComponents[
         this.$data.selectedOption
-      ].componentInstance.$children[0];
+      ].componentInstance;
       if (componentInstance !== undefined) {
         if ((componentInstance as any).saveData instanceof Function) {
           (componentInstance as any).saveData();

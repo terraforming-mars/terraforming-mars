@@ -133,6 +133,7 @@
                         :oceans_count="player.game.oceans"
                         :oxygen_level="player.game.oxygenLevel"
                         :temperature="player.game.temperature"></board>
+                  <MoonBoard v-if="player.game.gameOptions.moonExpansion" :model="player.game.moon"></MoonBoard>
                 </div>
                 <div class="game_end_block--log game-end-column">
                   <log-panel :color="player.color" :generation="player.game.generation" :id="player.id" :lastSoloGeneration="player.game.lastSoloGeneration" :players="player.players"></log-panel>
@@ -147,6 +148,7 @@
 import Vue from 'vue';
 import {PlayerModel, PublicPlayerModel} from '../models/PlayerModel';
 import Board from './Board.vue';
+import MoonBoard from './moon/MoonBoard.vue';
 import LogPanel from './LogPanel.vue';
 import Button from '../components/common/Button.vue';
 import {playerColorClass} from '../utils/utils';
@@ -170,6 +172,7 @@ export default Vue.extend({
     'board': Board,
     'log-panel': LogPanel,
     Button,
+    MoonBoard,
   },
   methods: {
     getEndGamePlayerRowColorClass: function(color: string): string {

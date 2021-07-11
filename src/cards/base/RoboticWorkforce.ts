@@ -42,6 +42,9 @@ export class RoboticWorkforce extends Card implements IProjectCard {
     if (card.name === CardName.HEAT_TRAPPERS) {
       return player.game.someoneHasResourceProduction(Resources.HEAT, 2);
     }
+    if (card.name === CardName.GYROPOLIS) {
+      return player.getProduction(Resources.ENERGY) >= 2;
+    }
 
     if (card.produce !== undefined) return true;
 

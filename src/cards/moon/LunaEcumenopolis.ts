@@ -23,12 +23,12 @@ export class LunaEcumenopolis extends MoonCard {
       metadata: {
         description: 'Spend 2 Titanium. ' +
         'Place 2 colony tiles adjacent to at least 2 other colony tiles and raise Colony rate 2 steps. ' +
-        'Increase your TR 1 step for each step of the colony rate.',
+        'Increase your TR 1 step for each 2 steps of the colony rate.',
         cardNumber: 'M84',
         renderData: CardRenderer.builder((b) => {
           b.minus().titanium(2).nbsp;
           b.text('2').moonColony().secondaryTag(AltSecondaryTag.MOON_COLONY_RATE).asterix().br;
-          b.tr(1).slash().moonColonyRate();
+          b.tr(1).slash().moonColonyRate().moonColonyRate();
         }),
       },
     }, {
@@ -42,7 +42,7 @@ export class LunaEcumenopolis extends MoonCard {
     player.game.defer(new CustomPlaceMoonTile(player));
     player.game.defer(new DeferredAction(player, () => {
       const colonyRate = MoonExpansion.moonData(player.game).colonyRate;
-      player.increaseTerraformRatingSteps(colonyRate);
+      player.increaseTerraformRatingSteps(Math.floor(colonyRate / 2));
       return undefined;
     }));
     return undefined;

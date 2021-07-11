@@ -25,6 +25,8 @@ import {Units} from '../../../src/Units';
 import {fail} from 'assert';
 import {SolarWindPower} from '../../../src/cards/base/SolarWindPower';
 import {MarsUniversity} from '../../../src/cards/base/MarsUniversity';
+import {Gyropolis} from '../../../src/cards/venusNext/Gyropolis';
+import {VenusGovernor} from '../../../src/cards/venusNext/VenusGovernor';
 
 describe('RoboticWorkforce', () => {
   let card : RoboticWorkforce; let player : TestPlayer; let game : Game;
@@ -67,6 +69,22 @@ describe('RoboticWorkforce', () => {
     expect(action).is.not.undefined;
     action!.cb([noctisFarming]);
     expect(player.getProduction(Resources.MEGACREDITS)).to.eq(1);
+  });
+
+  it('Should work with gyropolis', () => {
+    const gyropolis = new Gyropolis();
+    const venusgov = new VenusGovernor();
+    player.playedCards.push(gyropolis, venusgov);
+
+    const action = card.play(player);
+    expect(action).is.undefined; // Not enough energy production for gyropolis, no other building card to copy
+
+    player.addProduction(Resources.ENERGY, 2);
+    const selectCard = card.play(player);
+    expect(selectCard).is.not.undefined;
+    selectCard!.cb([gyropolis]);
+    expect(player.getProduction(Resources.ENERGY)).to.eq(0);
+    expect(player.getProduction(Resources.MEGACREDITS)).to.eq(2);
   });
 
   it('Should work with capital', () => {

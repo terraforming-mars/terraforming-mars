@@ -5,7 +5,7 @@ import {CardRenderItemType} from './CardRenderItemType';
 import {TileType} from '../../TileType';
 import {Tags} from '../Tags';
 
-type ItemType = CardRenderItem | CardRenderProductionBox | CardRenderSymbol | CardRenderEffect | CardRenderTile | string | undefined;
+export type ItemType = CardRenderItem | CardRenderProductionBox | CardRenderSymbol | CardRenderEffect | CardRenderTile | string | undefined;
 
 export class CardRenderer {
   constructor(protected _rows: Array<Array<ItemType>> = [[]]) {}

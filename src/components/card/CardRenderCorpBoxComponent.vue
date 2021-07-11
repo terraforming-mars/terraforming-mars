@@ -1,12 +1,26 @@
+<template>
+      <div :class="getClasses()">
+          <div class="card-corporation-label">{{ label }}</div>
+          <div v-for="(rowData, index) in rows[0]" :key="index">
+            <CardRenderItemComponent v-if="getComponentType(rowData) === 'item'" :item="rowData" />
+            <CardRenderSymbolComponent v-else-if="getComponentType(rowData) === 'symbol'" :item="rowData" />
+            <CardRenderEffectBoxComponent v-if="getComponentType(rowData) === 'effect'" :effectData="rowData" />
+          </div>
+      </div>
+</template>
+
+<script lang="ts">
+
 import Vue from 'vue';
-import {CardRenderItemComponent} from './CardRenderItemComponent';
-import {CardRenderEffectBoxComponent} from './CardRenderEffectBoxComponent';
+import CardRenderItemComponent from './CardRenderItemComponent.vue';
+import CardRenderEffectBoxComponent from './CardRenderEffectBoxComponent.vue';
 import {CardRenderSymbolComponent} from './CardRenderSymbolComponent';
 import {CardRenderEffect} from '../../cards/render/CardRenderer';
 import {CardRenderItem} from '../../cards/render/CardRenderItem';
 import {CardRenderSymbol} from '../../cards/render/CardRenderSymbol';
 
-export const CardRenderCorpBoxComponent = Vue.component('CardRenderCorpBoxComponent', {
+export default Vue.extend({
+  name: 'CardRenderCorpBoxComponent',
   props: {
     rows: {
       type: Array as () => Array<CardRenderEffect | CardRenderItem | CardRenderSymbol>,
@@ -38,14 +52,7 @@ export const CardRenderCorpBoxComponent = Vue.component('CardRenderCorpBoxCompon
       return '';
     },
   },
-  template: `
-      <div :class="getClasses()">
-          <div class="card-corporation-label">{{ label }}</div>
-          <div v-for="(rowData, index) in rows[0]" :key="index">
-            <CardRenderItemComponent v-if="getComponentType(rowData) === 'item'" :item="rowData" />
-            <CardRenderSymbolComponent v-else-if="getComponentType(rowData) === 'symbol'" :item="rowData" />
-            <CardRenderEffectBoxComponent v-if="getComponentType(rowData) === 'effect'" :effectData="rowData" />
-          </div>
-      </div>
-    `,
 });
+
+</script>
+

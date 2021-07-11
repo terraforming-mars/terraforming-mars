@@ -3,13 +3,14 @@ import {CardName} from '../CardName';
 import {CardModel} from '../models/CardModel';
 import {ResourceType} from '../ResourceType';
 
+type ResourcesWithRates = 'titanium' | 'steel' | 'microbes' |'floaters';
 export const PaymentWidgetMixin = {
   'name': 'PaymentWidgetMixin',
   'methods': {
     getMegaCreditsMax: function(): number {
       return Math.min((this as any).player.megaCredits, (this as any).$data.cost);
     },
-    getResourceRate: function(resourceName: string): number {
+    getResourceRate: function(resourceName: ResourcesWithRates): number {
       let rate = 1; // one resource == one money
       if (resourceName === 'titanium') {
         rate = (this as any).player.titaniumValue;
@@ -58,24 +59,27 @@ export const PaymentWidgetMixin = {
       this.setRemainingMCValue();
     },
     setRemainingMCValue: function(): void {
-      const remainingMC: number = (this as any).$data.cost -
-              (this as any)['heat'] -
-              (this as any)['titanium'] * this.getResourceRate('titanium') -
-              (this as any)['steel'] * this.getResourceRate('steel') -
-              (this as any)['microbes'] * this.getResourceRate('microbes') -
-              (this as any)['floaters'] * this.getResourceRate('floaters') -
-              ((this as any)['science'] ?? 0);
+      const ta = this as any;
+      const heatMc = ta['heat'] ?? 0;
+      const titaniumMc = (ta['titanium'] ?? 0) * this.getResourceRate('titanium');
+      const steelMc = (ta['steel'] ?? 0) * this.getResourceRate('steel');
+      const microbesMc = (ta['microbes'] ?? 0) * this.getResourceRate('microbes');
+      const floatersMc = (ta['floaters'] ?? 0) * this.getResourceRate('floaters');
+      const scienceMc = ta['science'] ?? 0;
 
-      (this as any)['megaCredits'] = Math.max(0, Math.min(this.getMegaCreditsMax(), remainingMC));
+      const remainingMC: number =
+          ta.$data.cost - heatMc - titaniumMc - steelMc - microbesMc - floatersMc - scienceMc;
+
+      ta['megaCredits'] = Math.max(0, Math.min(this.getMegaCreditsMax(), remainingMC));
     },
-    setMaxValue: function(target: string, max?: number): void {
+    setMaxValue: function(target: ResourcesWithRates | 'science' | 'heat', max?: number): void {
       let currentValue: number = (this as any)[target];
       const cardCost: number = (this as any).$data.cost;
       let amountHave: number = max ?? (this as any).player[target];
 
-      let amountNeed: number = cardCost;
-      if (['titanium', 'steel', 'microbes', 'floaters'].includes(target)) {
-        amountNeed = Math.floor(cardCost/this.getResourceRate(target));
+      let amountNeed = cardCost;
+      if (target !== 'science' && target !== 'heat') {
+        amountNeed = Math.floor(cardCost / this.getResourceRate(target));
       }
 
       if (target === 'microbes') amountHave = (this as any).playerinput.microbes;

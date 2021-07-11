@@ -14,7 +14,7 @@ export class MomentumViriumHabitat extends MoonCard {
   constructor() {
     super({
       name: CardName.MOMENTUM_VIRUM_HABITAT,
-      cardType: CardType.ACTIVE,
+      cardType: CardType.AUTOMATED,
       tags: [Tags.CITY, Tags.SPACE],
       cost: 23,
       productionBox: Units.of({heat: 2, megacredits: 3}),

@@ -194,7 +194,7 @@ export class MoonExpansion {
             player.drawCard();
           });
           this.bonus(moonData.colonyRate, increment, 6, () => {
-            player.drawCard();
+            player.addProduction(Resources.ENERGY, 1, {log: true});
           });
           this.activateLunaFirst(player, player.game, count);
         }

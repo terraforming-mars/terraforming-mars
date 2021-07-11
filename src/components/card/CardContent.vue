@@ -14,7 +14,7 @@ import {CardMetadata} from '../../cards/CardMetadata';
 import {CardRequirementsComponent} from './CardRequirementsComponent';
 import CardVictoryPoints from './CardVictoryPoints.vue';
 import CardDescription from './CardDescription.vue';
-import {CardRenderData} from './CardRenderData';
+import CardRenderData from './CardRenderData.vue';
 import {CardRequirements} from '../../cards/CardRequirements';
 
 export default Vue.extend({

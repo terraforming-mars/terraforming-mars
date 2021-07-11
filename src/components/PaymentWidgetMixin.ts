@@ -97,16 +97,22 @@ export const PaymentWidgetMixin = {
         maxValue = this.asModel().player[target];
       }
 
-      if (target === 'megaCredits') {
+      switch (target) {
+      case 'megaCredits':
         maxValue = this.getMegaCreditsMax();
-      }
-
-      if (target === 'microbes') maxValue = this.asModel().playerinput.microbes;
-      if (target === 'floaters') {
+        break;
+      case 'microbes':
+        maxValue = this.asModel().playerinput.microbes;
+        break;
+      case 'floaters':
         maxValue = this.asModel().playerinput.floaters;
         if (maxValue !== undefined && this.isStratosphericBirdsEdgeCase()) maxValue--;
+        break;
+      case 'science':
+        maxValue = this.asModel().playerinput.science;
+        break;
       }
-      if (target === 'science') maxValue = this.asModel().playerinput.science;
+
       if (currentValue === maxValue) return;
 
       if (maxValue === undefined) {

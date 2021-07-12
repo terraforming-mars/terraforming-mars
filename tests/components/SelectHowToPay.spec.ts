@@ -1,6 +1,7 @@
 import {createLocalVue, mount} from '@vue/test-utils';
 import {expect} from 'chai';
-import {SelectHowToPay, SelectHowToPayModel} from '../../src/components/SelectHowToPay';
+import {SelectHowToPay} from '../../src/components/SelectHowToPay';
+import {SelectHowToPayModel} from '../../src/components/PaymentWidgetMixin';
 import {PlayerInputModel} from '../../src/models/PlayerInputModel';
 import {PlayerModel} from '../../src/models/PlayerModel';
 

@@ -1,35 +1,17 @@
 import Vue from 'vue';
 import Button from './common/Button.vue';
 
-interface SelectHowToPayForProjectCardModel {
-  cardName: CardName;
-  card: CardModel;
-  cards: Array<CardModel>;
-  cost: number;
-  tags: Array<Tags>
-  heat: number;
-  megaCredits: number;
-  steel: number;
-  titanium: number;
-  microbes: number;
-  floaters: number;
-  science: number;
-  warning: string | undefined;
-  available: Units;
-}
-
 import {HowToPay} from '../inputs/HowToPay';
 import {Card} from './card/Card';
 import {CardFinder} from '../CardFinder';
-import {Tags} from '../cards/Tags';
 import {CardModel} from '../models/CardModel';
 import {CardOrderStorage} from './CardOrderStorage';
-import {PaymentWidgetMixin} from './PaymentWidgetMixin';
+import {PaymentWidgetMixin, SelectHowToPayForProjectCardModel} from './PaymentWidgetMixin';
 import {PlayerInputModel} from '../models/PlayerInputModel';
 import {PlayerModel} from '../models/PlayerModel';
 import {PreferencesManager} from './PreferencesManager';
+import {Tags} from '../cards/Tags';
 import {TranslateMixin} from './TranslateMixin';
-import {CardName} from '../CardName';
 import {Units} from '../Units';
 
 export const SelectHowToPayForProjectCard = Vue.component('select-how-to-pay-for-project-card', {

@@ -205,6 +205,9 @@ describe('RoboticWorkforce', () => {
       game = Game.newInstance('foobar', [player, redPlayer], player, gameOptions);
       player.setProductionForTest({megacredits: 2, steel: 2, titanium: 2, plants: 2, energy: 2, heat: 2});
       redPlayer.setProductionForTest({megacredits: 2, steel: 2, titanium: 2, plants: 2, energy: 2, heat: 2});
+      game.moonData!.miningRate = 3;
+      game.moonData!.colonyRate = 3;
+      game.moonData!.logisticRate = 3;
 
       // place some tiles
       TestingUtils.resetBoard(game);
@@ -240,7 +243,7 @@ describe('RoboticWorkforce', () => {
         }
       }
 
-      // Now if any of the production changed, that means the card has a production box
+      // Now if any of the production changed, that means the card has a production change
       include = productions.filter((prod) => player.getProduction(prod) !== 2).length > 0;
     }
 
@@ -248,6 +251,7 @@ describe('RoboticWorkforce', () => {
       return u.megacredits === 0 && u.steel === 0 && u.titanium === 0 && u.plants === 0 && u.energy === 0 && u.heat === 0;
     };
 
+    console.log(`${card.name}: ${include}`);
     // The card must have a productionBox or produce method.
     if (include) {
       if (card.produce === undefined) {

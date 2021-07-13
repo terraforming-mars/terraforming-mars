@@ -1373,7 +1373,7 @@ export class Game implements ISerializable<SerializedGame> {
     } else if (spaceBonus === SpaceBonus.HEAT) {
       player.addResource(Resources.HEAT, count, {log: true});
     } else {
-      throw new Error('Space type ' + spaceBonus + ' is not supported yet.');
+      throw new Error('Space bonus ' + spaceBonus + ' is not supported yet.');
     }
   }
 

@@ -21,8 +21,8 @@ import {SelectSpace} from './SelectSpace';
 import {SelectPartyPlayer} from './SelectPartyPlayer';
 import {SelectPartyToSendDelegate} from './SelectPartyToSendDelegate';
 import {SelectColony} from './SelectColony';
-import {SelectProductionToLose} from './SelectProductionToLose';
-import {ShiftAresGlobalParameters} from './ShiftAresGlobalParameters';
+import SelectProductionToLose from './SelectProductionToLose.vue';
+import ShiftAresGlobalParameters from './ShiftAresGlobalParameters.vue';
 
 export default Vue.component('player-input-factory', {
   props: {
@@ -59,8 +59,8 @@ export default Vue.component('player-input-factory', {
     'select-party-player': SelectPartyPlayer,
     'select-party-to-send-delegate': SelectPartyToSendDelegate,
     'select-colony': SelectColony,
-    'select-production-to-lose': SelectProductionToLose,
-    'shift-ares-global-parameters': ShiftAresGlobalParameters,
+    SelectProductionToLose,
+    ShiftAresGlobalParameters,
   },
   methods: {
     saveData: function() {

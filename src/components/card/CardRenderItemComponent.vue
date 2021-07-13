@@ -1,10 +1,18 @@
+<template>
+  <div class="card-item-container">
+    <div class="card-res-amount" v-if="item.showDigit">{{ getAmountAbs() }}</div>
+    <div :class="getComponentClasses()" v-for="index in itemsToShow()" v-html="itemHtmlContent()" :key="index"/>
+  </div>
+</template>
+
+<script lang="ts">
+
 import Vue from 'vue';
 import {generateClassString} from '../../utils/utils';
 import {AltSecondaryTag, CardRenderItem} from '../../cards/render/CardRenderItem';
 import {CardRenderItemType} from '../../cards/render/CardRenderItemType';
 import {CardRenderSymbol} from '../../cards/render/CardRenderSymbol';
 import {Size} from '../../cards/render/Size';
-import {CardRenderSymbolComponent} from './CardRenderSymbolComponent';
 import {Tags} from '../../cards/Tags';
 
 // microbe, animal and plant tag could be used both as a resource and played tag
@@ -14,14 +22,12 @@ const RESOURCE_AND_TAG_TYPES = [
   CardRenderItemType.MICROBES,
   CardRenderItemType.SCIENCE];
 
-export const CardRenderItemComponent = Vue.component('CardRenderItemComponent', {
+export default Vue.extend({
+  name: 'CardRenderItemComponent',
   props: {
     item: {
       type: Object as () => CardRenderItem,
     },
-  },
-  components: {
-    CardRenderSymbolComponent,
   },
   methods: {
     getComponentClasses: function(): string {
@@ -332,10 +338,7 @@ export const CardRenderItemComponent = Vue.component('CardRenderItemComponent', 
       return result;
     },
   },
-  template: `
-        <div class="card-item-container">
-            <div class="card-res-amount" v-if="item.showDigit">{{ getAmountAbs() }}</div>
-            <div :class="getComponentClasses()" v-for="index in itemsToShow()" v-html="itemHtmlContent()" :key="index"/>
-        </div>
-    `,
 });
+
+</script>
+

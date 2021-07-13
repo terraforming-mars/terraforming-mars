@@ -109,7 +109,7 @@ export class TestingUtils {
 
   // Provides a readable version of a log message for easier testing.
   public static formatLogMessage(message: LogMessage): string {
-    return message.message.replace(/\$\{([0-9]{1})\}/gi, (_match, idx) => {
+    return message.message.replace(/\$\{(\d{1,2})\}/gi, (_match, idx) => {
       return message.data[idx].value;
     });
   }

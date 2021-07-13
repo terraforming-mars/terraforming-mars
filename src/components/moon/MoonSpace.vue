@@ -1,3 +1,12 @@
+<template>
+        <div :class="getMainClass()" :data_space_id="space.id" :title="getVerboseTitle(space.tileType)">
+            <div class="board-space-text" v-if="text" v-i18n>{{ text }}</div>
+            <bonus :bonus="space.bonus" v-if="space.tileType === undefined"></bonus>
+            <div :class="'board-cube board-cube--'+space.color" v-if="space.color !== undefined"></div>
+        </div>
+</template>
+
+<script lang="ts">
 import Vue from 'vue';
 import {SpaceModel} from '../../models/SpaceModel';
 import {TileType} from '../../TileType';
@@ -14,7 +23,8 @@ const tileTypeToCssClass = new Map<TileType, string>([
   [TileType.LUNAR_MINE_URBANIZATION, 'lunar-mine-urbanization'],
 ]);
 
-export const MoonSpace = Vue.component('moon-space', {
+export default Vue.extend({
+  name: 'MoonSpace',
   props: {
     space: {
       type: Object as () => SpaceModel,
@@ -76,11 +86,5 @@ export const MoonSpace = Vue.component('moon-space', {
       return css;
     },
   },
-  template: `
-        <div :class="getMainClass()" :data_space_id="space.id" :title="getVerboseTitle(space.tileType)">
-            <div class="board-space-text" v-if="text" v-i18n>{{ text }}</div>
-            <bonus :bonus="space.bonus" v-if="space.tileType === undefined"></bonus>
-            <div :class="'board-cube board-cube--'+space.color" v-if="space.color !== undefined"></div>
-        </div>
-    `,
 });
+</script>

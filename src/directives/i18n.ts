@@ -8,7 +8,7 @@ import {LogMessageData} from '../LogMessageData';
 const TM_translations: {[x: string]: {[x: string]: string}} = raw_translations;
 
 export function translateMessage(message: Message): string {
-  return translateText(message.message).replace(/\$\{([0-9]{1})\}/gi, (_match, idx) => {
+  return translateText(message.message).replace(/\$\{(\d{1,2})\}/gi, (_match, idx) => {
     if (message.data[idx] !== undefined && message.data[idx].type === LogMessageDataType.RAW_STRING) {
       return message.data[idx].value;
     }

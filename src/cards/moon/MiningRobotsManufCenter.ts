@@ -14,7 +14,6 @@ export class MiningRobotsManufCenter extends MoonCard {
       cardType: CardType.AUTOMATED,
       tags: [Tags.SCIENCE, Tags.BUILDING],
       cost: 12,
-      productionBox: Units.of({}),
       reserveUnits: Units.of({titanium: 1}),
 
       metadata: {

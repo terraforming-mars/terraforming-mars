@@ -25,6 +25,8 @@ import {Units} from '../../../src/Units';
 import {fail} from 'assert';
 import {SolarWindPower} from '../../../src/cards/base/SolarWindPower';
 import {MarsUniversity} from '../../../src/cards/base/MarsUniversity';
+import {Gyropolis} from '../../../src/cards/venusNext/Gyropolis';
+import {VenusGovernor} from '../../../src/cards/venusNext/VenusGovernor';
 
 describe('RoboticWorkforce', () => {
   let card : RoboticWorkforce; let player : TestPlayer; let game : Game;
@@ -67,6 +69,22 @@ describe('RoboticWorkforce', () => {
     expect(action).is.not.undefined;
     action!.cb([noctisFarming]);
     expect(player.getProduction(Resources.MEGACREDITS)).to.eq(1);
+  });
+
+  it('Should work with gyropolis', () => {
+    const gyropolis = new Gyropolis();
+    const venusgov = new VenusGovernor();
+    player.playedCards.push(gyropolis, venusgov);
+
+    const action = card.play(player);
+    expect(action).is.undefined; // Not enough energy production for gyropolis, no other building card to copy
+
+    player.addProduction(Resources.ENERGY, 2);
+    const selectCard = card.play(player);
+    expect(selectCard).is.not.undefined;
+    selectCard!.cb([gyropolis]);
+    expect(player.getProduction(Resources.ENERGY)).to.eq(0);
+    expect(player.getProduction(Resources.MEGACREDITS)).to.eq(2);
   });
 
   it('Should work with capital', () => {
@@ -187,6 +205,9 @@ describe('RoboticWorkforce', () => {
       game = Game.newInstance('foobar', [player, redPlayer], player, gameOptions);
       player.setProductionForTest({megacredits: 2, steel: 2, titanium: 2, plants: 2, energy: 2, heat: 2});
       redPlayer.setProductionForTest({megacredits: 2, steel: 2, titanium: 2, plants: 2, energy: 2, heat: 2});
+      game.moonData!.miningRate = 3;
+      game.moonData!.colonyRate = 3;
+      game.moonData!.logisticRate = 3;
 
       // place some tiles
       TestingUtils.resetBoard(game);
@@ -222,7 +243,7 @@ describe('RoboticWorkforce', () => {
         }
       }
 
-      // Now if any of the production changed, that means the card has a production box
+      // Now if any of the production changed, that means the card has a production change
       include = productions.filter((prod) => player.getProduction(prod) !== 2).length > 0;
     }
 
@@ -230,6 +251,7 @@ describe('RoboticWorkforce', () => {
       return u.megacredits === 0 && u.steel === 0 && u.titanium === 0 && u.plants === 0 && u.energy === 0 && u.heat === 0;
     };
 
+    console.log(`${card.name}: ${include}`);
     // The card must have a productionBox or produce method.
     if (include) {
       if (card.produce === undefined) {

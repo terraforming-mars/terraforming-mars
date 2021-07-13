@@ -16,7 +16,6 @@ export class LunarDustProcessingPlant extends MoonCard implements IProjectCard {
       cardType: CardType.ACTIVE,
       tags: [Tags.BUILDING],
       cost: 6,
-      productionBox: Units.of({}),
       reserveUnits: Units.of({titanium: 1}),
 
       metadata: {

@@ -18,7 +18,6 @@ export class SmallDutyRovers extends Card implements IProjectCard {
       cardType: CardType.AUTOMATED,
       tags: [Tags.MOON, Tags.SPACE],
       cost: 9,
-      productionBox: Units.of({}),
       reserveUnits: Units.of({titanium: 1}),
 
       metadata: {

@@ -13,6 +13,7 @@ import {SpaceType} from '../../../src/SpaceType';
 import {Phase} from '../../../src/Phase';
 import {TestingUtils} from '../../TestingUtils';
 import {TestPlayers} from '../../TestPlayers';
+import {OceanCity} from '../../../src/cards/ares/OceanCity';
 
 describe('EcologicalSurvey', () => {
   let card : EcologicalSurvey;
@@ -41,7 +42,7 @@ describe('EcologicalSurvey', () => {
 
   // This doesn't test anything about this card, but about the behavior this card provides, from
   // AresHandler.
-  it('Bonus in the field', () => {
+  it('Works with Adjacency Bonuses', () => {
     // tile types in this test are irrelevant.
     // What's key is that this space has a weird behavior - it grants all the bonuses.
     // Only three of them will grant additional bonuses: plants, animals, and microbes.
@@ -91,17 +92,49 @@ describe('EcologicalSurvey', () => {
     expect(animalCard.resourceCount).eq(2);
   });
 
+  it('Works with Space Bonuses', () => {
+    // tile types in this test are irrelevant.
+    // What's key is that this space has a weird behavior - it grants all the bonuses.
+    // Only three of them will grant additional bonuses: steel, titanium, and heat.
+
+    expect(player.titanium).eq(0);
+    expect(player.steel).eq(0);
+    expect(player.heat).eq(0);
+    expect(player.plants).eq(0);
+    expect(player.cardsInHand).is.length(0);
+
+    const space = game.board.getAvailableSpacesOnLand(player)[0];
+    space.bonus = [
+      SpaceBonus.TITANIUM,
+      SpaceBonus.STEEL,
+      SpaceBonus.PLANT,
+      SpaceBonus.DRAW_CARD,
+      SpaceBonus.HEAT,
+    ],
+    player.playedCards = [card];
+    game.addTile(player, SpaceType.LAND, space, {tileType: TileType.RESTRICTED_AREA});
+
+    TestingUtils.runAllActions(game);
+
+    expect(player.titanium).eq(1);
+    expect(player.steel).eq(1);
+    expect(player.heat).eq(1);
+    expect(player.plants).eq(2);
+    expect(player.cardsInHand).is.length(1);
+  });
+
   it('Bonus not granted when overplacing', () => {
     player.playedCards.push(card);
+    const space = game.board.spaces[5];
 
     // Hand-placing an ocean to make things easy, since this test suite relies on an otherwise empty board.
-    game.board.spaces[5].spaceType = SpaceType.OCEAN;
-    game.board.spaces[5].bonus = [SpaceBonus.PLANT];
-    game.simpleAddTile(redPlayer, game.board.spaces[5], {tileType: TileType.OCEAN});
+    space.spaceType = SpaceType.OCEAN;
+    space.bonus = [SpaceBonus.PLANT];
+    game.simpleAddTile(redPlayer, space, {tileType: TileType.OCEAN});
 
     player.plants = 0;
-    game.addTile(player, SpaceType.OCEAN, game.board.spaces[5], {tileType: TileType.OCEAN_CITY});
-    TestingUtils.runAllActions(game);
+    const selectSpace = new OceanCity().play(player);
+    selectSpace.cb(space);
     expect(player.plants).eq(0);
   });
 

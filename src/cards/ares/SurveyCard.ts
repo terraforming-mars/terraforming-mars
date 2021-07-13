@@ -26,7 +26,7 @@ export abstract class SurveyCard extends Card implements IProjectCard {
   }
 
   private grantsBonusNow(space: ISpace, bonus: SpaceBonus) {
-    return space.tile?.covers !== undefined && space.bonus.includes(bonus);
+    return space.tile?.covers === undefined && space.bonus.includes(bonus);
   }
 
   public onTilePlaced(cardOwner: Player, activePlayer: Player, space: ISpace, boardType: BoardType) {

@@ -18,7 +18,7 @@ describe('EcologicalZone', function() {
     game = Game.newInstance('foobar', [player, redPlayer], player);
   });
 
-  it('Can\'t play', function() {
+  it('Cannot play', function() {
     expect(card.canPlay(player)).is.not.true;
   });
 

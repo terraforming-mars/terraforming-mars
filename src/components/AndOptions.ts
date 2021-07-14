@@ -1,5 +1,4 @@
 import Vue, {VNode} from 'vue';
-import {PlayerInputFactory} from './PlayerInputFactory';
 import {PlayerModel} from '../models/PlayerModel';
 import {PlayerInputModel} from '../models/PlayerInputModel';
 import Button from '../components/common/Button.vue';
@@ -66,17 +65,16 @@ export const AndOptions = Vue.component('and-options', {
       options.forEach((option, idx: number) => {
         if (this.$data.responded[idx] === undefined) {
           children.push(
-            new PlayerInputFactory().getPlayerInput(
-              createElement,
-              this.players,
-              this.player,
-              option,
-              (out: Array<Array<string>>) => {
+            createElement('player-input-factory', {attrs: {
+              players: this.players,
+              player: this.player,
+              playerinput: option,
+              onsave: (out: Array<Array<string>>) => {
                 this.$data.responded[idx] = out[0];
               },
-              false,
-              true,
-            ),
+              showsave: false,
+              showtitle: true,
+            }}),
           );
           this.$data.childComponents.push(
             children[children.length - 1],

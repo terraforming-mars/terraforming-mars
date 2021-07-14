@@ -3,6 +3,7 @@ import {CreateGameForm} from './create/CreateGameForm';
 import GameHome from './GameHome.vue';
 import GamesOverview from './GamesOverview.vue';
 import {PlayerHome} from './PlayerHome';
+import PlayerInputFactory from './PlayerInputFactory.vue';
 import {SpectatorHome} from './SpectatorHome';
 import {PlayerModel} from '../models/PlayerModel';
 import StartScreen from './StartScreen.vue';
@@ -66,6 +67,7 @@ export const mainAppSettings = {
     logPaused: false,
   } as MainAppData,
   'components': {
+    'player-input-factory': PlayerInputFactory,
     'start-screen': StartScreen,
     'create-game-form': CreateGameForm,
     'load-game-form': LoadGameForm,

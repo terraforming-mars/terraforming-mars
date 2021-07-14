@@ -1,30 +1,26 @@
+<template>
+  <div v-if="waitingfor === undefined">{{ $t('Not your turn to take any actions') }}</div>
+  <div v-else class="wf-root">
+    <player-input-factory :players="players"
+                          :player="player"
+                          :playerinput="waitingfor"
+                          :onsave="onsave"
+                          :showsave="true"
+                          :showtitle="true" />
+  </div>
+</template>
 
 <script lang="ts">
 
 import Vue from 'vue';
 
-import {AndOptions} from './AndOptions';
 import {mainAppSettings} from './App';
-import {OrOptions} from './OrOptions';
-import {PlayerInputFactory} from './PlayerInputFactory';
-import {SelectAmount} from './SelectAmount';
-import {SelectCard} from './SelectCard';
-import {SelectHowToPay} from './SelectHowToPay';
-import {SelectHowToPayForProjectCard} from './SelectHowToPayForProjectCard';
-import {SelectInitialCards} from './SelectInitialCards';
-import {SelectOption} from './SelectOption';
-import {SelectPlayer} from './SelectPlayer';
-import {SelectSpace} from './SelectSpace';
 import {$t} from '../directives/i18n';
-import {SelectPartyPlayer} from './SelectPartyPlayer';
-import {SelectPartyToSendDelegate} from './SelectPartyToSendDelegate';
 import {PlayerInputModel} from '../models/PlayerInputModel';
 import {PlayerModel} from '../models/PlayerModel';
 import {PreferencesManager} from './PreferencesManager';
 import {SoundManager} from './SoundManager';
-import {SelectColony} from './SelectColony';
-import SelectProductionToLose from './SelectProductionToLose.vue';
-import ShiftAresGlobalParameters from './ShiftAresGlobalParameters.vue';
+import {TranslateMixin} from './TranslateMixin';
 import {WaitingForModel} from '../models/WaitingForModel';
 
 import * as constants from '../constants';
@@ -54,24 +50,8 @@ export default Vue.extend({
       waitingForTimeout: this.settings.waitingForTimeout as typeof raw_settings.waitingForTimeout,
     };
   },
-  components: {
-    'and-options': AndOptions,
-    'or-options': OrOptions,
-    'select-amount': SelectAmount,
-    'select-card': SelectCard,
-    'select-option': SelectOption,
-    'select-how-to-pay': SelectHowToPay,
-    'select-how-to-pay-for-project-card': SelectHowToPayForProjectCard,
-    'select-initial-cards': SelectInitialCards,
-    'select-player': SelectPlayer,
-    'select-space': SelectSpace,
-    'select-party-player': SelectPartyPlayer,
-    'select-party-to-send-delegate': SelectPartyToSendDelegate,
-    'select-colony': SelectColony,
-    SelectProductionToLose,
-    ShiftAresGlobalParameters,
-  },
   methods: {
+    ...TranslateMixin.methods,
     animateTitle: function() {
       const sequence = '\u25D1\u25D2\u25D0\u25D3';
       const first = document.title[0];
@@ -81,6 +61,39 @@ export default Vue.extend({
         next = sequence[position + 1];
       }
       document.title = next + ' ' + $t(constants.APP_NAME);
+    },
+    onsave: function(out: Array<Array<string>>) {
+      const xhr = new XMLHttpRequest();
+      const root = this.$root as unknown as typeof mainAppSettings.data;
+      const showAlert = (this.$root as unknown as typeof mainAppSettings.methods).showAlert;
+      if (root.isServerSideRequestInProgress) {
+        console.warn('Server request in progress');
+        return;
+      }
+
+      root.isServerSideRequestInProgress = true;
+      xhr.open('POST', '/player/input?id=' + this.player.id);
+      xhr.responseType = 'json';
+      xhr.onload = () => {
+        if (xhr.status === 200) {
+          root.screen = 'empty';
+          root.player = xhr.response;
+          root.playerkey++;
+          root.screen = 'player-home';
+          if (this.player.game.phase === 'end' && window.location.pathname !== '/the-end') {
+            (window).location = (window).location;
+          }
+        } else if (xhr.status === 400 && xhr.responseType === 'json') {
+          showAlert(xhr.response.message);
+        } else {
+          showAlert('Unexpected response from server. Please try again.');
+        }
+        root.isServerSideRequestInProgress = false;
+      };
+      xhr.send(JSON.stringify(out));
+      xhr.onerror = function() {
+        root.isServerSideRequestInProgress = false;
+      };
     },
     waitForUpdate: function() {
       const vueApp = this;
@@ -129,51 +142,15 @@ export default Vue.extend({
       ui_update_timeout_id = window.setTimeout(askForUpdate, this.waitingForTimeout);
     },
   },
-  render: function(createElement) {
+  mounted: function() {
     document.title = $t(constants.APP_NAME);
     window.clearInterval(documentTitleTimer);
     if (this.waitingfor === undefined) {
       this.waitForUpdate();
-      return createElement('div', $t('Not your turn to take any actions'));
     }
     if (this.player.players.length > 1 && this.player.waitingFor !== undefined) {
       documentTitleTimer = window.setInterval(() => this.animateTitle(), 1000);
     }
-    const input = new PlayerInputFactory().getPlayerInput(createElement, this.players, this.player, this.waitingfor, (out: Array<Array<string>>) => {
-      const xhr = new XMLHttpRequest();
-      const root = this.$root as unknown as typeof mainAppSettings.data;
-      const showAlert = (this.$root as unknown as typeof mainAppSettings.methods).showAlert;
-      if (root.isServerSideRequestInProgress) {
-        console.warn('Server request in progress');
-        return;
-      }
-
-      root.isServerSideRequestInProgress = true;
-      xhr.open('POST', '/player/input?id=' + this.player.id);
-      xhr.responseType = 'json';
-      xhr.onload = () => {
-        if (xhr.status === 200) {
-          root.screen = 'empty';
-          root.player = xhr.response;
-          root.playerkey++;
-          root.screen = 'player-home';
-          if (this.player.game.phase === 'end' && window.location.pathname !== '/the-end') {
-            (window).location = (window).location;
-          }
-        } else if (xhr.status === 400 && xhr.responseType === 'json') {
-          showAlert(xhr.response.message);
-        } else {
-          showAlert('Unexpected response from server. Please try again.');
-        }
-        root.isServerSideRequestInProgress = false;
-      };
-      xhr.send(JSON.stringify(out));
-      xhr.onerror = function() {
-        root.isServerSideRequestInProgress = false;
-      };
-    }, true, true);
-
-    return createElement('div', {'class': 'wf-root'}, [input]);
   },
 });
 

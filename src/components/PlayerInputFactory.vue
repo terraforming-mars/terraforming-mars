@@ -15,7 +15,7 @@ import {SelectCard} from './SelectCard';
 import {SelectHowToPay} from './SelectHowToPay';
 import {SelectHowToPayForProjectCard} from './SelectHowToPayForProjectCard';
 import {SelectInitialCards} from './SelectInitialCards';
-import {SelectOption} from './SelectOption';
+import SelectOption from './SelectOption.vue';
 import {SelectPlayer} from './SelectPlayer';
 import {SelectSpace} from './SelectSpace';
 import {SelectPartyPlayer} from './SelectPartyPlayer';

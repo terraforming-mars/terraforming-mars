@@ -8,7 +8,7 @@ import Vue from 'vue';
 import {PlayerInputTypes} from '../PlayerInputTypes';
 import {PlayerModel} from '../models/PlayerModel';
 import {PlayerInputModel} from '../models/PlayerInputModel';
-import {AndOptions} from './AndOptions';
+import AndOptions from './AndOptions.vue';
 import {OrOptions} from './OrOptions';
 import {SelectAmount} from './SelectAmount';
 import {SelectCard} from './SelectCard';

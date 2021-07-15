@@ -1,10 +1,30 @@
-import Vue, {VNode} from 'vue';
+<template>
+  <div class='wf-options'>
+    <div v-if="showtitle" class="wf-title">{{ $t(playerinput.title) }}</div>
+    <player-input-factory v-for="(option, idx) in (playerinput.options || [])"
+      :key="idx"
+      :players="players"
+      :player="player"
+      :playerinput="option"
+      :onsave="playerFactorySaved(idx)"
+      :showsave="false"
+      :showtitle="true" />
+    <div v-if="showsave" class="wf-action">
+      <Button :title="playerinput.buttonLabel" type="submit" size="normal" :onClick="saveData" />
+    </div>
+  </div>
+</template>
+
+<script lang="ts">
+
+import Vue from 'vue';
 import {PlayerModel} from '../models/PlayerModel';
 import {PlayerInputModel} from '../models/PlayerInputModel';
 import Button from '../components/common/Button.vue';
-import {$t} from '../directives/i18n';
+import {TranslateMixin} from '../components/TranslateMixin';
 
-export const AndOptions = Vue.component('and-options', {
+export default Vue.extend({
+  name: 'and-options',
   props: {
     player: {
       type: Object as () => PlayerModel,
@@ -25,78 +45,36 @@ export const AndOptions = Vue.component('and-options', {
       type: Boolean,
     },
   },
+  components: {
+    Button,
+  },
   data: function() {
-    return {};
+    if (this.playerinput.options === undefined) {
+      throw new Error('options must be defined');
+    }
+    return {
+      responded: this.playerinput.options.map(() => undefined),
+    };
   },
   methods: {
+    ...TranslateMixin.methods,
+    playerFactorySaved: function(idx: number) {
+      return (out: Array<Array<string>>) => {
+        console.log('setting the value to', out[0]);
+        this.$data.responded[idx] = out[0];
+      };
+    },
     saveData: function() {
-      for (let i = 0; i < this.$data.childComponents.length; i++) {
-        const componentInstance = this.$data.childComponents[i]
-          .componentInstance;
-        if (componentInstance !== undefined) {
-          if (
-            (componentInstance as any).saveData instanceof Function
-          ) {
-            (componentInstance as any).saveData();
-          }
+      console.log(this);
+      for (const child of this.$children) {
+        if ((child as any).saveData instanceof Function) {
+          (child as any).saveData();
         }
       }
-      const res: Array<Array<string>> = [];
-      if (this.playerinput.options !== undefined) {
-        for (let i = 0; i < this.playerinput.options.length; i++) {
-          res.push(this.$data.responded['' + i]);
-        }
-      }
-      this.onsave(res);
+      this.onsave(this.$data.responded);
     },
   },
-  render: function(createElement) {
-    const playerInput = this.playerinput;
-    const children: Array<VNode> = [];
-    this.$data.childComponents = [];
-    this.$data.responded = [];
-    if (this.showtitle) {
-      children.push(
-        createElement('div', {'class': 'wf-title'}, $t(playerInput.title)),
-      );
-    }
-    if (playerInput.options !== undefined) {
-      const options = playerInput.options;
-      options.forEach((option, idx: number) => {
-        if (this.$data.responded[idx] === undefined) {
-          children.push(
-            createElement('player-input-factory', {attrs: {
-              players: this.players,
-              player: this.player,
-              playerinput: option,
-              onsave: (out: Array<Array<string>>) => {
-                this.$data.responded[idx] = out[0];
-              },
-              showsave: false,
-              showtitle: true,
-            }}),
-          );
-          this.$data.childComponents.push(
-            children[children.length - 1],
-          );
-        }
-      });
-    }
-    if (this.showsave) {
-      const saveBtn = createElement(Button, {
-        props: {
-          title: playerInput.buttonLabel,
-          type: 'submit',
-          size: 'normal',
-          onClick: () => {
-            this.saveData();
-          },
-        },
-      });
-      children.push(
-        createElement('div', {'class': 'wf-action'}, [saveBtn]),
-      );
-    }
-    return createElement('div', {'class': 'wf-options'}, children);
-  },
 });
+
+</script>
+

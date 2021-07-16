@@ -1,4 +1,3 @@
-
 import {LogMessageData} from './LogMessageData';
 
 export interface Message {

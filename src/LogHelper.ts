@@ -62,15 +62,17 @@ export class LogHelper {
 
   static logDiscardedCards(game: Game, cards: Array<ICard> | Array<CardName>) {
     game.log('${0} card(s) were discarded', (b) => {
-      b.rawString(cards.length.toString());
-      for (const card of cards) {
-        if (typeof card === 'string') {
-          b.cardName(card);
-        } else {
-          b.card(card);
-        }
-      }
+      b.number(cards.length);
     });
+    //   b.rawString(cards.length.toString());
+    //   for (const card of cards) {
+    //     if (typeof card === 'string') {
+    //       b.cardName(card);
+    //     } else {
+    //       b.card(card);
+    //     }
+    //   }
+    // });
   }
 
   static logDrawnCards(player: Player, cards: Array<ICard> | Array<CardName>, privateMessage: boolean = false) {

@@ -66,6 +66,7 @@ import {Random} from './Random';
 import {MilestoneAwardSelector} from './MilestoneAwardSelector';
 import {BoardType} from './boards/BoardType';
 import {Multiset} from './utils/Multiset';
+import {Log} from './Log';
 
 export type GameId = string;
 export type SpectatorId = string;
@@ -1477,7 +1478,19 @@ export class Game implements ISerializable<SerializedGame> {
     if (f) {
       f(builder);
     }
+
+    const intest = typeof (global as any).it === 'function';
     const logMessage = builder.build();
+    if (intest) {
+      const idxs = new Set<number>();
+      Log.applyData(logMessage, (_, idx) => {
+        idxs.add(idx);
+        return '';
+      });
+      if (idxs.size !== logMessage.data.length) {
+        throw new Error('Log parameter mismatch: ' + logMessage.message);
+      }
+    }
     logMessage.playerId = options?.reservedFor?.id;
     this.gameLog.push(logMessage);
     this.gameAge++;

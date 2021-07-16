@@ -672,10 +672,10 @@ function titlesToGlobalParameter(title: string): GlobalParameter {
   if (title.includes('colony')) {
     return GlobalParameter.MOON_COLONY_RATE;
   }
-  if (title.includes('mine')) {
+  if (title.includes('mining')) {
     return GlobalParameter.MOON_MINING_RATE;
   }
-  if (title.includes('road')) {
+  if (title.includes('logistics')) {
     return GlobalParameter.MOON_LOGISTICS_RATE;
   }
   throw new Error('title does not match any description: ' + title);

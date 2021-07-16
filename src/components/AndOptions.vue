@@ -60,12 +60,10 @@ export default Vue.extend({
     ...TranslateMixin.methods,
     playerFactorySaved: function(idx: number) {
       return (out: Array<Array<string>>) => {
-        console.log('setting the value to', out[0]);
         this.$data.responded[idx] = out[0];
       };
     },
     saveData: function() {
-      console.log(this);
       for (const child of this.$children) {
         if ((child as any).saveData instanceof Function) {
           (child as any).saveData();

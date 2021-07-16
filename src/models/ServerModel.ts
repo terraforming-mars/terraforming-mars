@@ -393,8 +393,6 @@ export class Server {
     }));
   }
   public static getPlayers(players: Array<Player>, game: Game): Array<PlayerModel> {
-    const gameModel = this.getCommonGameModel(game);
-
     return players.map((player) => {
       return {
         actionsTakenThisRound: player.actionsTakenThisRound,
@@ -449,30 +447,6 @@ export class Server {
         players: [],
         preludeCardsInHand: [],
         waitingFor: undefined,
-
-        // Remove these after 2021-05-05
-        aresData: gameModel.aresData,
-        awards: gameModel.awards,
-        colonies: gameModel.colonies,
-        deckSize: gameModel.deckSize,
-        gameAge: gameModel.gameAge,
-        gameOptions: gameModel.gameOptions,
-        generation: gameModel.generation,
-        isSoloModeWin: gameModel.isSoloModeWin,
-        isTerraformed: gameModel.isTerraformed,
-        lastSoloGeneration: gameModel.lastSoloGeneration,
-        milestones: gameModel.milestones,
-        moon: gameModel.moon,
-        oceans: gameModel.oceans,
-        oxygenLevel: gameModel.oxygenLevel,
-        passedPlayers: gameModel.passedPlayers,
-        phase: gameModel.phase,
-        spaces: gameModel.spaces,
-        spectatorId: gameModel.spectatorId,
-        temperature: gameModel.temperature,
-        turmoil: gameModel.turmoil,
-        undoCount: gameModel.undoCount,
-        venusScaleLevel: gameModel.venusScaleLevel,
       };
     });
   }

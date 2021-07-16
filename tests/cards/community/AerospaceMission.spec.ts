@@ -26,6 +26,7 @@ describe('AerospaceMission', function() {
   });
 
   it('Should play', function() {
+    player.megaCredits = 14;
     card.play(player);
     expect(game.deferredActions).has.lengthOf(2);
 

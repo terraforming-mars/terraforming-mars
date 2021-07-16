@@ -52,6 +52,10 @@ export class Localfilesystem implements IDatabase {
     }
   }
 
+  getGameId(_playerId: string, _cb: (err: Error | undefined, gameId?: GameId) => void): void {
+    throw new Error('Not implemented');
+  }
+
   getGameVersion(_game_id: GameId, _save_id: number, _cb: DbLoadCallback<SerializedGame>): void {
     throw new Error('Not implemented');
   }

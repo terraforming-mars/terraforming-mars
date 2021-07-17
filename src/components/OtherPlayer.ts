@@ -1,6 +1,6 @@
 import Vue from 'vue';
 
-import {StackedCards} from './StackedCards';
+import StackedCards from './StackedCards.vue';
 import {PlayerMixin} from './PlayerMixin';
 import {PlayerModel} from '../models/PlayerModel';
 import {hidePlayerData} from './overview/PlayerStatus';

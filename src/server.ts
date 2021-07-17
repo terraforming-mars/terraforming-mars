@@ -139,10 +139,11 @@ console.log('version 0.X');
 
 server.listen(process.env.PORT || 8080);
 
+console.log();
 console.log(
-  '\nThe secret serverId for this server is \x1b[1m' +
+  'The secret serverId for this server is \x1b[1m' +
   serverId +
-  '\x1b[0m. Use it to access the following administrative routes:\n',
+  '\x1b[0m. Use it to access the following administrative routes:',
 );
 console.log(
   '* Overview of existing games: /games-overview?serverId=' + serverId,

@@ -50,19 +50,13 @@ export interface PublicPlayerModel {
 }
 
 export interface PlayerModel extends PublicPlayerModel {
-  availableBlueCardActionCount: number;
-  cardCost: number;
   cardsInHand: Array<CardModel>;
-  corporationCard: CardModel | undefined;
   dealtCorporationCards: Array<CardModel>;
   dealtPreludeCards: Array<CardModel>;
   dealtProjectCards: Array<CardModel>;
   draftedCards: Array<CardModel>;
   game: GameModel;
-  influence: number;
   pickedCorporationCard: Array<CardModel>; // Why Array?
   players: Array<PublicPlayerModel>;
-  preludeCardsInHand: Array<CardModel>;
-  timer: SerializedTimer;
   waitingFor: PlayerInputModel | undefined;
 }

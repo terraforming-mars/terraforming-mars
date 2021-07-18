@@ -55,7 +55,7 @@ export const PlayerHome = Vue.component('player-home', {
     },
   },
   props: {
-    player: {
+    playerView: {
       type: Object as () => PlayerViewModel,
     },
     settings: {
@@ -157,7 +157,7 @@ export const PlayerHome = Vue.component('player-home', {
       return false;
     },
     isInitialDraftingPhase(): boolean {
-      return (this.player.game.phase === Phase.INITIALDRAFTING) && this.player.game.gameOptions.initialDraftVariant;
+      return (this.playerView.game.phase === Phase.INITIALDRAFTING) && this.playerView.game.gameOptions.initialDraftVariant;
     },
     getToggleLabel: function(hideType: string): string {
       if (hideType === 'ACTIVE') {
@@ -188,7 +188,7 @@ export const PlayerHome = Vue.component('player-home', {
   },
   mounted: function() {
     window.addEventListener('keydown', this.navigatePage);
-    if (this.player.game.isTerraformed && TerraformedAlertDialog.shouldAlert && PreferencesManager.load('show_alerts') === '1') {
+    if (this.playerView.game.isTerraformed && TerraformedAlertDialog.shouldAlert && PreferencesManager.load('show_alerts') === '1') {
       alert('Mars is Terraformed!');
       // Avoids repeated calls.
       TerraformedAlertDialog.shouldAlert = false;
@@ -196,7 +196,7 @@ export const PlayerHome = Vue.component('player-home', {
   },
   template: `
         <div id="player-home" :class="(player.game.turmoil ? 'with-turmoil': '')">
-            <top-bar :player="player" />
+            <top-bar :playerView="playerView" />
 
             <div v-if="player.game.phase === 'end'">
                 <div class="player_home_block">
@@ -248,7 +248,7 @@ export const PlayerHome = Vue.component('player-home', {
                     </div>
                 </div>
 
-                <players-overview class="player_home_block player_home_block--players nofloat:" :player="player" v-trim-whitespace id="shortkey-playersoverview"/>
+                <players-overview class="player_home_block player_home_block--players nofloat:" :playerView="playerView" v-trim-whitespace id="shortkey-playersoverview"/>
 
                 <div class="player_home_block nofloat">
                     <log-panel :id="player.id" :players="player.players" :generation="player.game.generation" :lastSoloGeneration="player.game.lastSoloGeneration" :color="player.color"></log-panel>
@@ -257,7 +257,7 @@ export const PlayerHome = Vue.component('player-home', {
                 <div class="player_home_block player_home_block--actions nofloat">
                     <a name="actions" class="player_home_anchor"></a>
                     <dynamic-title title="Actions" :color="player.color"/>
-                    <waiting-for v-if="player.game.phase !== 'end'" :players="player.players" :player="player" :settings="settings" :waitingfor="player.waitingFor"></waiting-for>
+                    <waiting-for v-if="player.game.phase !== 'end'" :players="player.players" :playerView="playerView" :settings="settings" :waitingfor="player.waitingFor"></waiting-for>
                 </div>
 
                 <div class="player_home_block player_home_block--hand" v-if="player.draftedCards.length > 0">
@@ -355,7 +355,7 @@ export const PlayerHome = Vue.component('player-home', {
                 </template>
 
                 <dynamic-title v-if="player.pickedCorporationCard.length === 0" title="Select initial cards:" :color="player.color"/>
-                <waiting-for v-if="player.game.phase !== 'end'" :players="player.players" :player="player" :settings="settings" :waitingfor="player.waitingFor"></waiting-for>
+                <waiting-for v-if="player.game.phase !== 'end'" :players="player.players" :playerView="playerView" :settings="settings" :waitingfor="player.waitingFor"></waiting-for>
 
                 <dynamic-title title="Game details" :color="player.color"/>
 

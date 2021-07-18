@@ -16,7 +16,7 @@ import {Units} from '../Units';
 
 export const SelectHowToPayForProjectCard = Vue.component('select-how-to-pay-for-project-card', {
   props: {
-    player: {
+    playerView: {
       type: Object as () => PlayerViewModel,
     },
     playerinput: {
@@ -39,7 +39,7 @@ export const SelectHowToPayForProjectCard = Vue.component('select-how-to-pay-for
             this.playerinput.cards !== undefined &&
             this.playerinput.cards.length > 0) {
       cards = CardOrderStorage.getOrdered(
-        CardOrderStorage.getCardOrder(this.player.id),
+        CardOrderStorage.getCardOrder(this.playerView.id),
         this.playerinput.cards,
       );
       card = cards[0];
@@ -81,7 +81,7 @@ export const SelectHowToPayForProjectCard = Vue.component('select-how-to-pay-for
   },
   methods: {
     getCard: function() {
-      const card = this.cards.find((c) => c.name === this.cardName); // this.player.cardsInHand.concat(this.player.selfReplicatingRobotsCards).find((c) => c.name === this.cardName);
+      const card = this.cards.find((c) => c.name === this.cardName); // this.playerView.cardsInHand.concat(this.playerView.selfReplicatingRobotsCards).find((c) => c.name === this.cardName);
       if (card === undefined) {
         throw new Error(`card not found ${this.cardName}`);
       }
@@ -102,7 +102,7 @@ export const SelectHowToPayForProjectCard = Vue.component('select-how-to-pay-for
       this.titanium = 0;
       this.heat = 0;
 
-      let megacreditBalance = Math.max(this.cost - this.player.megaCredits, 0);
+      let megacreditBalance = Math.max(this.cost - this.playerView.megaCredits, 0);
 
       // Calcualtes the optimal number of units to use given the unit value.
       //
@@ -153,17 +153,17 @@ export const SelectHowToPayForProjectCard = Vue.component('select-how-to-pay-for
         this.science = deductUnits(this.playerinput.science, 1);
       }
 
-      this.available.steel = Math.max(this.player.steel - this.card.reserveUnits.steel, 0);
+      this.available.steel = Math.max(this.playerView.steel - this.card.reserveUnits.steel, 0);
       if (megacreditBalance > 0 && this.canUseSteel()) {
-        this.steel = deductUnits(this.available.steel, this.player.steelValue, true);
+        this.steel = deductUnits(this.available.steel, this.playerView.steelValue, true);
       }
 
-      this.available.titanium = Math.max(this.player.titanium - this.card.reserveUnits.titanium, 0);
+      this.available.titanium = Math.max(this.playerView.titanium - this.card.reserveUnits.titanium, 0);
       if (megacreditBalance > 0 && this.canUseTitanium()) {
-        this.titanium = deductUnits(this.available.titanium, this.player.titaniumValue, true);
+        this.titanium = deductUnits(this.available.titanium, this.playerView.titaniumValue, true);
       }
 
-      this.available.heat = Math.max(this.player.heat - this.card.reserveUnits.heat, 0);
+      this.available.heat = Math.max(this.playerView.heat - this.card.reserveUnits.heat, 0);
       if (megacreditBalance > 0 && this.canUseHeat()) {
         this.heat = deductUnits(this.available.heat, 1);
       }
@@ -174,7 +174,7 @@ export const SelectHowToPayForProjectCard = Vue.component('select-how-to-pay-for
         // We need not try to save heat since heat is paid last at value 1. We will never overspend in heat.
         // We do not need to save Ti either because Ti is paid last before heat. If we overspend, it is because of Ti.
         // We cannot reduce the amount of Ti and still pay enough.
-        this.steel -= saveOverSpendingUnits(this.steel, this.player.steelValue);
+        this.steel -= saveOverSpendingUnits(this.steel, this.playerView.steelValue);
         this.floaters -= saveOverSpendingUnits(this.floaters, 3);
         this.microbes -= saveOverSpendingUnits(this.microbes, 2);
         this.science -= saveOverSpendingUnits(this.science, 1);
@@ -182,7 +182,7 @@ export const SelectHowToPayForProjectCard = Vue.component('select-how-to-pay-for
       }
     },
     canUseHeat: function(): boolean {
-      return this.playerinput.canUseHeat === true && this.player.heat > 0;
+      return this.playerinput.canUseHeat === true && this.playerView.heat > 0;
     },
     canUseSteel: function() {
       if (this.card !== undefined && this.available.steel > 0) {
@@ -261,7 +261,7 @@ export const SelectHowToPayForProjectCard = Vue.component('select-how-to-pay-for
         floaters: this.floaters,
         science: this.science,
       };
-      if (htp.megaCredits > this.player.megaCredits) {
+      if (htp.megaCredits > this.playerView.megaCredits) {
         this.warning = 'You don\'t have that many M€';
         return;
       }
@@ -277,15 +277,15 @@ export const SelectHowToPayForProjectCard = Vue.component('select-how-to-pay-for
         this.warning = 'You don\'t have enough science resources';
         return;
       }
-      if (htp.heat > this.player.heat) {
+      if (htp.heat > this.playerView.heat) {
         this.warning = 'You don\'t have enough heat';
         return;
       }
-      if (htp.titanium > this.player.titanium) {
+      if (htp.titanium > this.playerView.titanium) {
         this.warning = 'You don\'t have enough titanium';
         return;
       }
-      if (htp.steel > this.player.steel) {
+      if (htp.steel > this.playerView.steel) {
         this.warning = 'You don\'t have enough steel';
         return;
       }
@@ -296,8 +296,8 @@ export const SelectHowToPayForProjectCard = Vue.component('select-how-to-pay-for
         htp.science +
         htp.heat +
         htp.megaCredits +
-        (htp.steel * this.player.steelValue) +
-        (htp.titanium * this.player.titaniumValue);
+        (htp.steel * this.playerView.steelValue) +
+        (htp.titanium * this.playerView.titaniumValue);
 
       if (totalSpentAmt < this.cost) {
         this.warning = 'Haven\'t spent enough';
@@ -306,11 +306,11 @@ export const SelectHowToPayForProjectCard = Vue.component('select-how-to-pay-for
 
       if (totalSpentAmt > this.cost) {
         const diff = totalSpentAmt - this.cost;
-        if (htp.titanium && diff >= this.player.titaniumValue) {
+        if (htp.titanium && diff >= this.playerView.titaniumValue) {
           this.warning = 'You cannot overspend titanium';
           return;
         }
-        if (htp.steel && diff >= this.player.steelValue) {
+        if (htp.steel && diff >= this.playerView.steelValue) {
           this.warning = 'You cannot overspend steel';
           return;
         }

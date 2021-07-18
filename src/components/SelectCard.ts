@@ -24,7 +24,7 @@ export interface OwnerModel {
 
 export const SelectCard = Vue.component('select-card', {
   props: {
-    player: {
+    playerView: {
       type: Object as () => PlayerViewModel,
     },
     playerinput: {
@@ -73,7 +73,7 @@ export const SelectCard = Vue.component('select-card', {
         return sortActiveCards(this.playerinput.cards);
       } else {
         return CardOrderStorage.getOrdered(
-          CardOrderStorage.getCardOrder(this.player.id),
+          CardOrderStorage.getCardOrder(this.playerView.id),
           this.playerinput.cards,
         );
       }
@@ -105,7 +105,7 @@ export const SelectCard = Vue.component('select-card', {
       return 'cardbox';
     },
     getOwner: function(card: CardModel): OwnerModel | undefined {
-      for (const player of this.player.players) {
+      for (const player of this.playerView.players) {
         if (player.playedCards.find((c) => c.name === card.name)) {
           return {name: player.name, color: player.color};
         }

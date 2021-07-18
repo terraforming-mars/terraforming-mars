@@ -1,5 +1,5 @@
 import Vue from 'vue';
-import {PlayerViewModel} from '../../models/PlayerModel';
+import {PlayerViewModel, PublicPlayerModel} from '../../models/PlayerModel';
 import {PlayerResources} from './PlayerResources';
 import {PlayerTags} from './PlayerTags';
 import {PlayerStatus} from './PlayerStatus';
@@ -20,11 +20,11 @@ export const hidePlayerData = (root: typeof mainAppSettings.methods, playerIndex
 };
 export const PlayerInfo = Vue.component('player-info', {
   props: {
-    player: {
+    playerView: {
       type: Object as () => PlayerViewModel,
     },
     activePlayer: {
-      type: Object as () => PlayerViewModel,
+      type: Object as () => PublicPlayerModel,
     },
     firstForGen: {
       type: Boolean,
@@ -49,7 +49,7 @@ export const PlayerInfo = Vue.component('player-info', {
   methods: {
     getClasses: function(): string {
       const classes = ['player-info'];
-      classes.push(playerColorClass(this.player.color, 'bg_transparent'));
+      classes.push(playerColorClass(this.playerView.color, 'bg_transparent'));
       return classes.join(' ');
     },
     getPlayerStatusAndResClasses: function(): string {
@@ -57,14 +57,14 @@ export const PlayerInfo = Vue.component('player-info', {
       return classes.join(' ');
     },
     getIsActivePlayer: function(): boolean {
-      return this.player.color === this.activePlayer.color;
+      return this.playerView.color === this.activePlayer.color;
     },
     pinPlayer: function() {
       let hiddenPlayersIndexes: Array<Number> = [];
       const playerPinned = isPinned(this.$root, this.playerIndex);
 
       // if player is already pinned, add to hidden players (toggle)
-      hiddenPlayersIndexes = range(this.activePlayer.players.length - 1);
+      hiddenPlayersIndexes = range(this.playerView.players.length - 1);
       if (!playerPinned) {
         showPlayerData(this.$root, this.playerIndex);
         hiddenPlayersIndexes = hiddenPlayersIndexes.filter(
@@ -82,7 +82,7 @@ export const PlayerInfo = Vue.component('player-info', {
     },
     togglePlayerDetails: function() {
       // for active player => scroll to cards UI
-      if (this.player.color === this.activePlayer.color) {
+      if (this.playerView.color === this.activePlayer.color) {
         const el: HTMLElement = document.getElementsByClassName(
           'sidebar_icon--cards',
         )[0] as HTMLElement;
@@ -94,10 +94,10 @@ export const PlayerInfo = Vue.component('player-info', {
       this.pinPlayer();
     },
     getNrPlayedCards: function(): number {
-      return this.player.playedCards.length;
+      return this.playerView.playedCards.length;
     },
     getAvailableBlueActionCount: function(): number {
-      return this.player.availableBlueCardActionCount;
+      return this.playerView.availableBlueCardActionCount;
     },
   },
   template: `
@@ -109,9 +109,9 @@ export const PlayerInfo = Vue.component('player-info', {
             <div class="icon-first-player" v-if="firstForGen && activePlayer.players.length > 1">1st</div>
             <div class="player-info-corp" v-if="player.corporationCard !== undefined" :title="player.corporationCard.name">{{ player.corporationCard.name }}</div>
           </div>
-          <player-status :player="player" :activePlayer="activePlayer" :firstForGen="firstForGen" v-trim-whitespace :actionLabel="actionLabel" :playerIndex="playerIndex"/>
+          <player-status :playerView="playerView" :activePlayer="activePlayer" :firstForGen="firstForGen" v-trim-whitespace :actionLabel="actionLabel" :playerIndex="playerIndex"/>
         </div>
-          <player-resources :player="player" v-trim-whitespace />
+          <player-resources :playerView="playerView" v-trim-whitespace />
           <div class="player-played-cards">
             <div class="player-played-cards-top">
               <div class="played-cards-elements">
@@ -135,7 +135,7 @@ export const PlayerInfo = Vue.component('player-info', {
             <span class="tag-count-display">{{ getAvailableBlueActionCount() }}</span>
           </div>
         </div>
-        <player-tags :player="player" v-trim-whitespace :isActivePlayer="getIsActivePlayer()" :hideZeroTags="hideZeroTags" />
+        <player-tags :playerView="playerView" v-trim-whitespace :isActivePlayer="getIsActivePlayer()" :hideZeroTags="hideZeroTags" />
       </div>
     `,
 });

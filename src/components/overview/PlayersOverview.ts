@@ -24,7 +24,7 @@ export const getCurrentPlayerIndex = (
 
 export const PlayersOverview = Vue.component('players-overview', {
   props: {
-    player: {
+    playerView: {
       type: Object as () => PlayerViewModel,
     },
   },
@@ -38,23 +38,23 @@ export const PlayersOverview = Vue.component('players-overview', {
   },
   methods: {
     hasPlayers: function(): boolean {
-      return this.player.players.length > 0;
+      return this.playerView.players.length > 0;
     },
     getPlayerOnFocus: function(): PublicPlayerModel {
-      return this.player.players.filter(
-        (p: PublicPlayerModel) => p.color === this.player.color,
+      return this.playerView.players.filter(
+        (p: PublicPlayerModel) => p.color === this.playerView.color,
       )[0];
     },
     getIsFirstForGen: function(player: PublicPlayerModel): boolean {
-      return getCurrentPlayerIndex(player.color, this.player.players) === 0;
+      return getCurrentPlayerIndex(player.color, this.playerView.players) === 0;
     },
     getPlayersInOrder: function(): Array<PublicPlayerModel> {
-      const players = this.player.players;
+      const players = this.playerView.players;
       let result: Array<PublicPlayerModel> = [];
       let currentPlayerOffset: number = 0;
       const currentPlayerIndex: number = getCurrentPlayerIndex(
-        this.player.color,
-        this.player.players,
+        this.playerView.color,
+        this.playerView.players,
       );
 
       // shift the array by putting the player on focus at the tail
@@ -66,25 +66,25 @@ export const PlayersOverview = Vue.component('players-overview', {
       return result.slice(0, -1);
     },
     getActionLabel(player: PublicPlayerModel): string {
-      if (this.player.game.phase === Phase.DRAFTING) {
+      if (this.playerView.game.phase === Phase.DRAFTING) {
         if (player.needsToDraft) {
           return ActionLabel.DRAFTING;
         } else {
           return ActionLabel.NONE;
         }
-      } else if (this.player.game.phase === Phase.RESEARCH) {
+      } else if (this.playerView.game.phase === Phase.RESEARCH) {
         if (player.needsToResearch) {
           return ActionLabel.RESEARCHING;
         } else {
           return ActionLabel.NONE;
         }
       }
-      if (this.player.game.passedPlayers.includes(player.color)) {
+      if (this.playerView.game.passedPlayers.includes(player.color)) {
         return ActionLabel.PASSED;
       }
       if (player.isActive) return ActionLabel.ACTIVE;
-      const notPassedPlayers = this.player.players.filter(
-        (p: PublicPlayerModel) => !this.player.game.passedPlayers.includes(p.color),
+      const notPassedPlayers = this.playerView.players.filter(
+        (p: PublicPlayerModel) => !this.playerView.game.passedPlayers.includes(p.color),
       );
 
       const currentPlayerIndex: number = getCurrentPlayerIndex(
@@ -97,7 +97,7 @@ export const PlayersOverview = Vue.component('players-overview', {
                   currentPlayerIndex - 1;
       const isNext = notPassedPlayers[prevPlayerIndex].isActive;
 
-      if (isNext && this.player.players.length > SHOW_NEXT_LABEL_MIN) {
+      if (isNext && this.playerView.players.length > SHOW_NEXT_LABEL_MIN) {
         return ActionLabel.NEXT;
       }
 

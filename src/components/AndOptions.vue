@@ -4,7 +4,7 @@
     <player-input-factory v-for="(option, idx) in (playerinput.options || [])"
       :key="idx"
       :players="players"
-      :player="player"
+      :playerView="playerView"
       :playerinput="option"
       :onsave="playerFactorySaved(idx)"
       :showsave="false"
@@ -26,7 +26,7 @@ import {TranslateMixin} from '../components/TranslateMixin';
 export default Vue.extend({
   name: 'and-options',
   props: {
-    player: {
+    playerView: {
       type: Object as () => PlayerViewModel,
     },
     players: {

@@ -34,14 +34,14 @@
                 ></game-home>
                 <player-home
                     v-else-if="screen === 'player-home'"
-                    :player="player"
+                    :playerView="playerView"
                     :key="playerkey"
                     :settings="settings"
                 ></player-home>
                 <spectator-home v-else-if="screen === 'spectator-home'"></spectator-home>
                 <game-end
                     v-else-if="screen === 'the-end'"
-                    :player="player"
+                    :playerView="playerView"
                 ></game-end>
                 <games-overview
                     v-else-if="screen === 'games-overview'"

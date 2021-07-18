@@ -16,7 +16,7 @@ describe('AndOptions', function() {
     const component = mount(AndOptions, {
       localVue: getLocalVue(),
       propsData: {
-        player: {
+        playerView: {
           id: 'foo',
         },
         playerinput: {

@@ -73,7 +73,7 @@ interface SelectProductionToLoseModel {
 export default Vue.extend({
   name: 'SelectProductionToLose',
   props: {
-    player: {
+    playerView: {
       type: Object as () => PlayerViewModel,
     },
     playerinput: {

@@ -35,7 +35,7 @@ describe('SelectHowToPayForProjectCard', () => {
     const sortable = mount(SelectHowToPayForProjectCard, {
       localVue: getLocalVue(),
       propsData: {
-        player: {
+        playerView: {
           cardsInHand: [{
             calculatedCost: 4,
             name: CardName.ANTS,
@@ -348,15 +348,15 @@ describe('SelectHowToPayForProjectCard', () => {
   const setupCardForPurchase = function(
     cardName: CardName,
     cardCost: number,
-    playerFields: Partial<PlayerViewModel>,
+    playerViewFields: Partial<PlayerViewModel>,
     playerInputFields: Partial<PlayerInputModel>,
     reserveUnits: Units = Units.EMPTY) {
-    const player: Partial<PlayerViewModel> = Object.assign({
+    const playerView: Partial<PlayerViewModel> = Object.assign({
       cards: [{name: cardName, calculatedCost: cardCost}],
       id: 'foo',
       steel: 0,
       titanium: 0,
-    }, playerFields);
+    }, playerViewFields);
 
     const playerInput: Partial<PlayerInputModel> = {
       title: 'foo',
@@ -375,7 +375,7 @@ describe('SelectHowToPayForProjectCard', () => {
     return mount(SelectHowToPayForProjectCard, {
       localVue: getLocalVue(),
       propsData: {
-        player: player,
+        playerView: playerView,
         playerinput: playerInput,
         onsave: () => {},
         showsave: true,

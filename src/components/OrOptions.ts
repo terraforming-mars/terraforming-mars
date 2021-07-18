@@ -9,7 +9,7 @@ let unique: number = 0;
 
 export const OrOptions = Vue.component('or-options', {
   props: {
-    player: {
+    playerView: {
       type: Object as () => PlayerViewModel,
     },
     players: {
@@ -93,7 +93,7 @@ export const OrOptions = Vue.component('or-options', {
       this.$data.childComponents.push(
         createElement('player-input-factory', {attrs: {
           players: this.players,
-          player: this.player,
+          playerView: this.playerView,
           playerinput: option,
           onsave: (out: Array<Array<string>>) => {
             const copy = [[String(idx)]];

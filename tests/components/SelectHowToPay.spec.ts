@@ -80,16 +80,16 @@ describe('SelectHowToPay', () => {
 
   const setupBill = function(
     amount: number,
-    playerFields: Partial<PlayerViewModel>,
+    playerViewFields: Partial<PlayerViewModel>,
     playerInputFields: Partial<PlayerInputModel>) {
-    const player: Partial<PlayerViewModel> = Object.assign({
+    const playerView: Partial<PlayerViewModel> = Object.assign({
       id: 'foo',
       steel: 0,
       titanium: 0,
       heat: 0,
       steelValue: 2,
       titaniumValue: 3,
-    }, playerFields);
+    }, playerViewFields);
 
     const playerInput: Partial<PlayerInputModel> = Object.assign({
       amount: amount,
@@ -102,7 +102,7 @@ describe('SelectHowToPay', () => {
     return mount(SelectHowToPay, {
       localVue: getLocalVue(),
       propsData: {
-        player: player,
+        playerView: playerView,
         playerinput: playerInput,
         onsave: () => {},
         showsave: true,

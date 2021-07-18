@@ -10,7 +10,7 @@ import Button from './common/Button.vue';
 
 export const OtherPlayer = Vue.component('other-player', {
   props: {
-    player: {
+    playerView: {
       type: Object as () => PlayerViewModel,
     },
     playerIndex: {
@@ -46,8 +46,8 @@ export const OtherPlayer = Vue.component('other-player', {
                             <Card :card="card" :actionUsed="isCardActivated(card, player)"/>
                         </div>
 
-                        <stacked-cards :cards="getCardsByType(player.playedCards, [getAutomatedCardType(), getPreludeCardType()])" :player="player"></stacked-cards>
-                        <stacked-cards :cards="getCardsByType(player.playedCards, [getEventCardType()])" :player="player"></stacked-cards>
+                        <stacked-cards :cards="getCardsByType(player.playedCards, [getAutomatedCardType(), getPreludeCardType()])" :playerView="playerView"></stacked-cards>
+                        <stacked-cards :cards="getCardsByType(player.playedCards, [getEventCardType()])" :playerView="playerView"></stacked-cards>
                     </div>
                 </div>
                 <div v-if="player.selfReplicatingRobotsCards.length > 0" class="player_home_block">

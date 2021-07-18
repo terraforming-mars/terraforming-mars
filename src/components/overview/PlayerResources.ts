@@ -6,7 +6,7 @@ import {Resources} from '../../Resources';
 
 export const PlayerResources = Vue.component('player-resources', {
   props: {
-    player: {
+    playerView: {
       type: Object as () => PlayerViewModel,
     },
   },
@@ -17,7 +17,7 @@ export const PlayerResources = Vue.component('player-resources', {
   },
   methods: {
     canUseHeatAsMegaCredits: function(): boolean {
-      return this.player.corporationCard?.name === CardName.HELION;
+      return this.playerView.corporationCard?.name === CardName.HELION;
     },
   },
   components: {

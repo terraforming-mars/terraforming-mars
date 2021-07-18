@@ -1,5 +1,5 @@
 <template>
-  <component :is="getComponentName(playerinput.inputType)" :players="players" :player="player" :playerinput="playerinput" :onsave="onsave" :showsave="showsave" :showtitle="showtitle" />
+  <component :is="getComponentName(playerinput.inputType)" :players="players" :playerView="playerView" :playerinput="playerinput" :onsave="onsave" :showsave="showsave" :showtitle="showtitle" />
 </template>
 
 <script lang="ts">
@@ -29,7 +29,7 @@ export default Vue.component('player-input-factory', {
     players: {
       type: Array as () => Array<PublicPlayerModel>,
     },
-    player: {
+    playerView: {
       type: Object as () => PlayerViewModel,
     },
     playerinput: {

@@ -12,7 +12,7 @@ import {Player} from '../Player';
 import {PlayerInput} from '../PlayerInput';
 import {PlayerInputModel} from './PlayerInputModel';
 import {PlayerInputTypes} from '../PlayerInputTypes';
-import {PlayerViewModel} from './PlayerModel';
+import {PlayerViewModel, PublicPlayerModel} from './PlayerModel';
 import {SelectAmount} from '../inputs/SelectAmount';
 import {SelectCard} from '../inputs/SelectCard';
 import {SelectHowToPay} from '../inputs/SelectHowToPay';
@@ -392,7 +392,7 @@ export class Server {
       discount: card.cardDiscount,
     }));
   }
-  public static getPlayers(players: Array<Player>, game: Game): Array<PlayerViewModel> {
+  public static getPlayers(players: Array<Player>, game: Game): Array<PublicPlayerModel> {
     return players.map((player) => {
       return {
         actionsTakenThisRound: player.actionsTakenThisRound,
@@ -434,19 +434,6 @@ export class Server {
         titaniumValue: player.getTitaniumValue(),
         tradesThisGeneration: player.tradesThisGeneration,
         victoryPointsBreakdown: player.getVictoryPoints(),
-
-        // TODO(kberg): Move commonGameData out of this version of getPlayers()
-        game: this.getCommonGameModel(player.game),
-        // Fields that will be removed once this has its own private model.
-        cardsInHand: [],
-        dealtCorporationCards: [],
-        dealtPreludeCards: [],
-        dealtProjectCards: [],
-        draftedCards: [],
-        pickedCorporationCard: [],
-        players: [],
-        preludeCardsInHand: [],
-        waitingFor: undefined,
       };
     });
   }

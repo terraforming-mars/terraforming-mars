@@ -34,7 +34,6 @@ export interface PublicPlayerModel {
   plantProduction: number;
   plantsAreProtected: boolean;
   playedCards: Array<CardModel>;
-  preludeCardsInHand: Array<CardModel>;
   selfReplicatingRobotsCards: Array<CardModel>;
   steel: number;
   steelProduction: number;
@@ -58,5 +57,6 @@ export interface PlayerViewModel extends PublicPlayerModel {
   game: GameModel;
   pickedCorporationCard: Array<CardModel>; // Why Array?
   players: Array<PublicPlayerModel>;
+  preludeCardsInHand: Array<CardModel>;
   waitingFor: PlayerInputModel | undefined;
 }

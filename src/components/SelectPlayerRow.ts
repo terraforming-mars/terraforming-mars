@@ -1,11 +1,11 @@
 
 import Vue from 'vue';
-import {PlayerModel} from '../models/PlayerModel';
+import {PlayerViewModel} from '../models/PlayerModel';
 
 export const SelectPlayerRow = Vue.component('select-player-row', {
   props: {
     player: {
-      type: Object as () => PlayerModel | undefined,
+      type: Object as () => PlayerViewModel | undefined,
     },
   },
   methods: {

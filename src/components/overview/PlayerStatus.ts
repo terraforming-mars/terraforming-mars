@@ -2,7 +2,7 @@ import Vue from 'vue';
 import {ActionLabel} from './ActionLabel';
 import Button from '../common/Button.vue';
 import {mainAppSettings} from '../App';
-import {PlayerModel} from '../../models/PlayerModel';
+import {PlayerViewModel} from '../../models/PlayerModel';
 import {PlayerTimer} from './PlayerTimer';
 
 export const hidePlayerData = (root: typeof mainAppSettings.methods, playerIndex: number) => {
@@ -12,10 +12,10 @@ export const hidePlayerData = (root: typeof mainAppSettings.methods, playerIndex
 export const PlayerStatus = Vue.component('player-status', {
   props: {
     player: {
-      type: Object as () => PlayerModel,
+      type: Object as () => PlayerViewModel,
     },
     activePlayer: {
-      type: Object as () => PlayerModel,
+      type: Object as () => PlayerViewModel,
     },
     firstForGen: {
       type: Boolean,

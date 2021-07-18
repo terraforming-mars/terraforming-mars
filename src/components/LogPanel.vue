@@ -39,7 +39,7 @@ import {LogMessage} from '../LogMessage';
 import {LogMessageType} from '../LogMessageType';
 import {LogMessageData} from '../LogMessageData';
 import {LogMessageDataType} from '../LogMessageDataType';
-import {PlayerModel} from '../models/PlayerModel';
+import {PublicPlayerModel} from '../models/PlayerModel';
 import {Card} from './card/Card';
 import {$t} from '../directives/i18n';
 import {CardFinder} from './../CardFinder';
@@ -72,7 +72,7 @@ export default Vue.extend({
       type: Number,
     },
     players: {
-      type: Array as () => Array<PlayerModel>,
+      type: Array as () => Array<PublicPlayerModel>,
     },
     color: {
       type: String as () => Color,

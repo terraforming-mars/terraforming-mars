@@ -2,7 +2,7 @@ import Vue from 'vue';
 import Button from '../components/common/Button.vue';
 import {Message} from '../Message';
 import {CardOrderStorage} from './CardOrderStorage';
-import {PlayerModel} from '../models/PlayerModel';
+import {PlayerViewModel} from '../models/PlayerModel';
 import {VueModelCheckbox, VueModelRadio} from './VueTypes';
 import {Card} from './card/Card';
 import {CardModel} from '../models/CardModel';
@@ -25,7 +25,7 @@ export interface OwnerModel {
 export const SelectCard = Vue.component('select-card', {
   props: {
     player: {
-      type: Object as () => PlayerModel,
+      type: Object as () => PlayerViewModel,
     },
     playerinput: {
       type: Object as () => PlayerInputModel,

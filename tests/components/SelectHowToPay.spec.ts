@@ -3,7 +3,7 @@ import {expect} from 'chai';
 import {SelectHowToPay} from '../../src/components/SelectHowToPay';
 import {SelectHowToPayModel} from '../../src/components/PaymentWidgetMixin';
 import {PlayerInputModel} from '../../src/models/PlayerInputModel';
-import {PlayerModel} from '../../src/models/PlayerModel';
+import {PlayerViewModel} from '../../src/models/PlayerModel';
 
 export type Unit = 'heat' | 'steel' | 'titanium' | 'floaters' | 'microbes' | 'megaCredits';
 
@@ -80,9 +80,9 @@ describe('SelectHowToPay', () => {
 
   const setupBill = function(
     amount: number,
-    playerFields: Partial<PlayerModel>,
+    playerFields: Partial<PlayerViewModel>,
     playerInputFields: Partial<PlayerInputModel>) {
-    const player: Partial<PlayerModel> = Object.assign({
+    const player: Partial<PlayerViewModel> = Object.assign({
       id: 'foo',
       steel: 0,
       titanium: 0,

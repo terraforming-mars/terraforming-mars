@@ -1,13 +1,13 @@
 import Vue from 'vue';
 import {CardName} from '../../CardName';
-import {PlayerModel} from '../../models/PlayerModel';
+import {PlayerViewModel} from '../../models/PlayerModel';
 import {PlayerResource} from './PlayerResource';
 import {Resources} from '../../Resources';
 
 export const PlayerResources = Vue.component('player-resources', {
   props: {
     player: {
-      type: Object as () => PlayerModel,
+      type: Object as () => PlayerViewModel,
     },
   },
   data: function() {

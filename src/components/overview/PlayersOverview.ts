@@ -2,7 +2,7 @@ import Vue from 'vue';
 import {PlayerInfo} from './PlayerInfo';
 import {OverviewSettings} from './OverviewSettings';
 import {OtherPlayer} from '../OtherPlayer';
-import {PlayerModel, PublicPlayerModel} from '../../models/PlayerModel';
+import {PlayerViewModel, PublicPlayerModel} from '../../models/PlayerModel';
 import {ActionLabel} from './ActionLabel';
 import {Phase} from '../../Phase';
 import {Color} from '../../Color';
@@ -25,7 +25,7 @@ export const getCurrentPlayerIndex = (
 export const PlayersOverview = Vue.component('players-overview', {
   props: {
     player: {
-      type: Object as () => PlayerModel,
+      type: Object as () => PlayerViewModel,
     },
   },
   components: {

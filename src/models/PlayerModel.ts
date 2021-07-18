@@ -49,7 +49,7 @@ export interface PublicPlayerModel {
   victoryPointsBreakdown: VictoryPointsBreakdown;
 }
 
-export interface PlayerModel extends PublicPlayerModel {
+export interface PlayerViewModel extends PublicPlayerModel {
   cardsInHand: Array<CardModel>;
   dealtCorporationCards: Array<CardModel>;
   dealtPreludeCards: Array<CardModel>;

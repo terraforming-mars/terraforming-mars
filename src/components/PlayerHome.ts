@@ -7,7 +7,7 @@ import Award from './Award.vue';
 import {PlayersOverview} from './overview/PlayersOverview';
 import WaitingFor from './WaitingFor.vue';
 import Sidebar from './Sidebar.vue';
-import {PlayerModel, PublicPlayerModel} from '../models/PlayerModel';
+import {PlayerViewModel, PublicPlayerModel} from '../models/PlayerModel';
 import Colony from './Colony.vue';
 import LogPanel from './LogPanel.vue';
 import {PlayerMixin} from './PlayerMixin';
@@ -56,7 +56,7 @@ export const PlayerHome = Vue.component('player-home', {
   },
   props: {
     player: {
-      type: Object as () => PlayerModel,
+      type: Object as () => PlayerViewModel,
     },
     settings: {
       type: Object as () => typeof raw_settings,
@@ -109,7 +109,7 @@ export const PlayerHome = Vue.component('player-home', {
         }
       }
     },
-    isPlayerActing: function(player: PlayerModel) : boolean {
+    isPlayerActing: function(player: PlayerViewModel) : boolean {
       return player.players.length > 1 && player.waitingFor !== undefined;
     },
     getPlayerCssForTurnOrder: (

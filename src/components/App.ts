@@ -5,7 +5,7 @@ import GamesOverview from './GamesOverview.vue';
 import {PlayerHome} from './PlayerHome';
 import PlayerInputFactory from './PlayerInputFactory.vue';
 import {SpectatorHome} from './SpectatorHome';
-import {PlayerModel} from '../models/PlayerModel';
+import {PlayerViewModel} from '../models/PlayerModel';
 import StartScreen from './StartScreen.vue';
 import {LoadGameForm} from './LoadGameForm';
 import DebugUI from './DebugUI.vue';
@@ -37,7 +37,7 @@ interface MainAppData {
      * use this property we can't trigger vue state without
      * a refactor.
      */
-    player?: PlayerModel;
+    player?: PlayerViewModel;
     playerkey: number;
     settings: typeof raw_settings;
     isServerSideRequestInProgress: boolean;
@@ -119,7 +119,7 @@ export const mainAppSettings = {
       };
       xhr.onload = () => {
         if (xhr.status === 200) {
-          app.player = xhr.response as PlayerModel;
+          app.player = xhr.response as PlayerViewModel;
           app.playerkey++;
           if (
             app.player.game.phase === 'end' &&

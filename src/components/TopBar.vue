@@ -10,7 +10,7 @@
 <script lang="ts">
 
 import Vue from 'vue';
-import {PlayerModel} from '../models/PlayerModel';
+import {PlayerViewModel} from '../models/PlayerModel';
 import {PlayerInfo} from './overview/PlayerInfo';
 import {PreferencesManager} from './PreferencesManager';
 
@@ -18,7 +18,7 @@ export default Vue.extend({
   name: 'top-bar',
   props: {
     player: {
-      type: Object as () => PlayerModel,
+      type: Object as () => PlayerViewModel,
     },
   },
   components: {

@@ -1,7 +1,7 @@
 import Vue, {VNode} from 'vue';
 import {$t} from '../directives/i18n';
 import Button from '../components/common/Button.vue';
-import {PlayerModel} from '../models/PlayerModel';
+import {PlayerViewModel} from '../models/PlayerModel';
 import {PlayerInputModel} from '../models/PlayerInputModel';
 import {PreferencesManager} from './PreferencesManager';
 
@@ -10,10 +10,10 @@ let unique: number = 0;
 export const OrOptions = Vue.component('or-options', {
   props: {
     player: {
-      type: Object as () => PlayerModel,
+      type: Object as () => PlayerViewModel,
     },
     players: {
-      type: Array as () => Array<PlayerModel>,
+      type: Array as () => Array<PlayerViewModel>,
     },
     playerinput: {
       type: Object as () => PlayerInputModel,

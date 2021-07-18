@@ -2,7 +2,7 @@
 import {CardName} from '../CardName';
 import {CardModel} from '../models/CardModel';
 import {PlayerInputModel} from '../models/PlayerInputModel';
-import {PlayerModel} from '../models/PlayerModel';
+import {PlayerViewModel} from '../models/PlayerModel';
 import {ResourceType} from '../ResourceType';
 import {Tags} from '../cards/Tags';
 import {Units} from '../Units';
@@ -36,7 +36,7 @@ interface PaymentWidgetModel extends SelectHowToPayModel {
   science?: number;
   available?: Units;
   $data: SelectHowToPayModel | SelectHowToPayForProjectCardModel;
-  player: PlayerModel;
+  player: PlayerViewModel;
   playerinput: PlayerInputModel;
 }
 

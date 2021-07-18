@@ -6,7 +6,7 @@ import Milestone from './Milestone.vue';
 import Award from './Award.vue';
 import {PlayersOverview} from './overview/PlayersOverview';
 import WaitingFor from './WaitingFor.vue';
-import {Sidebar} from './Sidebar';
+import Sidebar from './Sidebar.vue';
 import {PlayerModel, PublicPlayerModel} from '../models/PlayerModel';
 import Colony from './Colony.vue';
 import LogPanel from './LogPanel.vue';

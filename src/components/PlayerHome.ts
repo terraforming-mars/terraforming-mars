@@ -198,7 +198,7 @@ export const PlayerHome = Vue.component('player-home', {
         <div id="player-home" :class="(playerView.game.turmoil ? 'with-turmoil': '')">
             <top-bar :playerView="playerView" />
 
-            <div v-if="player.game.phase === 'end'">
+            <div v-if="playerView.game.phase === 'end'">
                 <div class="player_home_block">
                     <dynamic-title title="This game is over!" :color="player.me.color"/>
                     <a :href="'/the-end?id='+ player.id" v-i18n>Go to game results</a>
@@ -207,23 +207,22 @@ export const PlayerHome = Vue.component('player-home', {
 
             <sidebar v-trim-whitespace
               :acting_player="isPlayerActing(player)"
-              :player_color="player.me.color"
-              :generation="player.game.generation"
-              :coloniesCount="player.game.colonies.length"
-              :temperature = "player.game.temperature"
-              :oxygen = "player.game.oxygenLevel"
-              :oceans = "player.game.oceans"
-              :venus = "player.game.venusScaleLevel"
-              :turmoil = "player.game.turmoil"
-              :moonData="player.game.moon"
-              :gameOptions = "player.game.gameOptions"
+              :player_color="playerView.me.color"
+              :generation="playerView.game.generation"
+              :coloniesCount="playerView.game.colonies.length"
+              :temperature = "playerView.game.temperature"
+              :oxygen = "playerView.game.oxygenLevel"
+              :oceans = "playerView.game.oceans"
+              :venus = "playerView.game.venusScaleLevel"
+              :turmoil = "playerView.game.turmoil"
+              :moonData="playerView.game.moon"
+              :gameOptions = "playerView.game.gameOptions"
               :playerNumber = "playerView.players.length"
-              :lastSoloGeneration = "player.game.lastSoloGeneration">
-                <div class="deck-size">{{ player.game.deckSize }}</div>
+              :lastSoloGeneration = "playerView.game.lastSoloGeneration">
+                <div class="deck-size">{{ playerView.game.deckSize }}</div>
             </sidebar>
 
             <div v-if="player.me.private.corporationCard">
-
                 <div class="player_home_block">
                     <a name="board" class="player_home_anchor"></a>
                     <board

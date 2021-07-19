@@ -36,7 +36,7 @@ import {SelectDelegate} from '../inputs/SelectDelegate';
 import {SelectColony} from '../inputs/SelectColony';
 import {SelectProductionToLose} from '../inputs/SelectProductionToLose';
 import {ShiftAresGlobalParameters} from '../inputs/ShiftAresGlobalParameters';
-import {SpectatorModel} from './SpectatorModel';
+import {SpectatorViewModel} from './SpectatorModel';
 import {MoonModel} from './MoonModel';
 import {Units} from '../Units';
 import {SelectPartyToSendDelegate} from '../inputs/SelectPartyToSendDelegate';
@@ -110,9 +110,10 @@ export class Server {
     };
   }
 
-  public static getSpectatorModel(game: Game): SpectatorModel {
+  public static getSpectatorModel(game: Game): SpectatorViewModel {
     return {
-      generation: game.generation,
+      game: this.getCommonGameModel(game),
+      players: this.getPlayers(game.getPlayers(), game),
     };
   }
 

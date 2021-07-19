@@ -65,3 +65,4 @@ export interface PrivatePlayerModel {
   pickedCorporationCard: Array<CardModel>; // Why Array?
   preludeCardsInHand: Array<CardModel>;
 }
+

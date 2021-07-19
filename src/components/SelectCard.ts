@@ -73,7 +73,7 @@ export const SelectCard = Vue.component('select-card', {
         return sortActiveCards(this.playerinput.cards);
       } else {
         return CardOrderStorage.getOrdered(
-          CardOrderStorage.getCardOrder(this.playerView.id),
+          CardOrderStorage.getCardOrder(this.playerView.me.id),
           this.playerinput.cards,
         );
       }

@@ -40,6 +40,6 @@ describe('ApiPlayer', function() {
     ctx.gameLoader.add(game);
     ApiPlayer.INSTANCE.get(req, res.hide(), ctx);
     const response: PlayerViewModel = JSON.parse(res.content);
-    expect(response.id).eq(player.id);
+    expect(response.me.id).eq(player.id);
   });
 });

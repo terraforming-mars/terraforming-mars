@@ -72,12 +72,12 @@ export default Vue.extend({
       }
 
       root.isServerSideRequestInProgress = true;
-      xhr.open('POST', '/player/input?id=' + this.playerView.id);
+      xhr.open('POST', '/player/input?id=' + this.playerView.me.id);
       xhr.responseType = 'json';
       xhr.onload = () => {
         if (xhr.status === 200) {
           root.screen = 'empty';
-          root.player = xhr.response;
+          root.playerView = xhr.response;
           root.playerkey++;
           root.screen = 'player-home';
           if (this.playerView.game.phase === 'end' && window.location.pathname !== '/the-end') {

@@ -17,7 +17,9 @@ describe('SelectInitialCards', function() {
       localVue: getLocalVue(),
       propsData: {
         playerView: {
-          id: 'foo',
+          me: {
+            id: 'foo',
+          },
         },
         playerinput: {
           title: 'foo',
@@ -52,7 +54,9 @@ describe('SelectInitialCards', function() {
       localVue: getLocalVue(),
       propsData: {
         playerView: {
-          id: 'foo',
+          me: {
+            id: 'foo',
+          },
         },
         playerinput: {
           title: 'foo',

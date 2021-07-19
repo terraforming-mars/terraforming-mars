@@ -5,7 +5,7 @@ import {CardName} from '../../src/CardName';
 import {CardType} from '../../src/cards/CardType';
 import {SelectHowToPayForProjectCard} from '../../src/components/SelectHowToPayForProjectCard';
 import {PlayerInputModel} from '../../src/models/PlayerInputModel';
-import {PlayerViewModel} from '../../src/models/PlayerModel';
+import {PlayerViewModel, PublicPlayerModel} from '../../src/models/PlayerModel';
 import {Units} from '../../src/Units';
 import {FakeLocalStorage} from './FakeLocalStorage';
 
@@ -43,8 +43,10 @@ describe('SelectHowToPayForProjectCard', () => {
             calculatedCost: 3,
             name: CardName.BIRDS,
           }],
-          id: 'foo',
-          selfReplicatingRobotCards: [],
+          me: {
+            id: 'foo',
+            selfReplicatingRobotCards: [],
+          },
         },
         playerinput: {
           title: 'foo',
@@ -348,16 +350,18 @@ describe('SelectHowToPayForProjectCard', () => {
   const setupCardForPurchase = function(
     cardName: CardName,
     cardCost: number,
-    playerViewFields: Partial<PlayerViewModel>,
+    meFields: Partial<PublicPlayerModel>,
     playerInputFields: Partial<PlayerInputModel>,
     reserveUnits: Units = Units.EMPTY) {
-    const playerView: Partial<PlayerViewModel> = Object.assign({
-      cards: [{name: cardName, calculatedCost: cardCost}],
+    const me: Partial<PublicPlayerModel> = Object.assign({
       id: 'foo',
       steel: 0,
       titanium: 0,
-    }, playerViewFields);
-
+    }, meFields);
+    const playerView: Partial<PlayerViewModel> = {
+      // cards: [{name: cardName, calculatedCost: cardCost}],
+      me: me as PublicPlayerModel,
+    };
     const playerInput: Partial<PlayerInputModel> = {
       title: 'foo',
       cards: [{

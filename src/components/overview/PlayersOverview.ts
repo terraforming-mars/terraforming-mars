@@ -42,7 +42,7 @@ export const PlayersOverview = Vue.component('players-overview', {
     },
     getPlayerOnFocus: function(): PublicPlayerModel {
       return this.playerView.players.filter(
-        (p: PublicPlayerModel) => p.color === this.playerView.color,
+        (p: PublicPlayerModel) => p.color === this.playerView.me.color,
       )[0];
     },
     getIsFirstForGen: function(player: PublicPlayerModel): boolean {
@@ -53,7 +53,7 @@ export const PlayersOverview = Vue.component('players-overview', {
       let result: Array<PublicPlayerModel> = [];
       let currentPlayerOffset: number = 0;
       const currentPlayerIndex: number = getCurrentPlayerIndex(
-        this.playerView.color,
+        this.playerView.me.color,
         this.playerView.players,
       );
 

@@ -48,7 +48,7 @@ export interface PublicPlayerModel {
   victoryPointsBreakdown: VictoryPointsBreakdown;
 }
 
-export interface PlayerViewModel extends PublicPlayerModel {
+export interface PlayerViewModel {
   cardsInHand: Array<CardModel>;
   dealtCorporationCards: Array<CardModel>;
   dealtPreludeCards: Array<CardModel>;
@@ -59,4 +59,5 @@ export interface PlayerViewModel extends PublicPlayerModel {
   players: Array<PublicPlayerModel>;
   preludeCardsInHand: Array<CardModel>;
   waitingFor: PlayerInputModel | undefined;
+  me: PublicPlayerModel;
 }

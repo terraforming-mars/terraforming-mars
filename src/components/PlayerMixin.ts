@@ -25,7 +25,7 @@ export const PlayerMixin = {
       player: PlayerViewModel,
       withCorp: boolean,
     ): number {
-      const playedCardsNr = player.playedCards.length || 0;
+      const playedCardsNr = player.me.playedCards.length || 0;
       return withCorp ? playedCardsNr + 1 : playedCardsNr;
     },
     getActiveCardType: function() {
@@ -46,8 +46,8 @@ export const PlayerMixin = {
     ): boolean {
       return (
         (player !== undefined &&
-                player.actionsThisGeneration !== undefined &&
-                player.actionsThisGeneration.includes(card.name)) || card.isDisabled
+                player.me.actionsThisGeneration !== undefined &&
+                player.me.actionsThisGeneration.includes(card.name)) || card.isDisabled
       );
     },
   },

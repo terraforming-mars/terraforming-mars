@@ -139,7 +139,9 @@ describe('PlayerInputFactory', function() {
         propsData: {
           players: [],
           playerView: {
-            id: 'foo',
+            me: {
+              id: 'foo',
+            },
           },
           playerinput,
           onsave: function() {

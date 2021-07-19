@@ -130,7 +130,7 @@ export const mainAppSettings = {
               window.history.replaceState(
                 xhr.response,
                 `${constants.APP_NAME} - Player`,
-                '/the-end?id=' + app.playerView.id,
+                '/the-end?id=' + app.playerView.me.id,
               );
             }
           } else {
@@ -139,7 +139,7 @@ export const mainAppSettings = {
               window.history.replaceState(
                 xhr.response,
                 `${constants.APP_NAME} - Game`,
-                '/player?id=' + app.playerView.id,
+                '/player?id=' + app.playerView.me.id,
               );
             }
           }

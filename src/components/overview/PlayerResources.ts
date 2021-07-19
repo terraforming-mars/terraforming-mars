@@ -17,7 +17,7 @@ export const PlayerResources = Vue.component('player-resources', {
   },
   methods: {
     canUseHeatAsMegaCredits: function(): boolean {
-      return this.playerView.corporationCard?.name === CardName.HELION;
+      return this.playerView.me.corporationCard?.name === CardName.HELION;
     },
   },
   components: {

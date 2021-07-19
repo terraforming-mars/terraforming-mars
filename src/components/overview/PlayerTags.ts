@@ -115,16 +115,16 @@ export const PlayerTags = Vue.component('player-tags', {
       });
     },
     getCardCount: function(): number {
-      if (this.playerView.cardsInHandNbr) {
-        return this.playerView.cardsInHandNbr;
+      if (this.playerView.me.cardsInHandNbr) {
+        return this.playerView.me.cardsInHandNbr;
       }
       return 0;
     },
     getTR: function(): number {
-      return this.playerView.terraformRating;
+      return this.playerView.me.terraformRating;
     },
     getVpCount: function(): number {
-      return this.playerView.victoryPointsBreakdown.total;
+      return this.playerView.me.victoryPointsBreakdown.total;
     },
     hideVpCount: function(): boolean {
       return !this.playerView.game.gameOptions.showOtherPlayersVP && !this.isActivePlayer;
@@ -134,7 +134,7 @@ export const PlayerTags = Vue.component('player-tags', {
       return isTagsViewConcise(this.$root);
     },
     hasTagDiscount: function(tag: InterfaceTagsType): boolean {
-      for (const card of [...this.playerView.playedCards, this.playerView.corporationCard]) {
+      for (const card of [...this.playerView.me.playedCards, this.playerView.me.corporationCard]) {
         if (card !== undefined) {
           if (hasDiscount(tag, card)) {
             return true;
@@ -153,7 +153,7 @@ export const PlayerTags = Vue.component('player-tags', {
       if (tag === 'all' &&
         iapetusColony !== undefined &&
         iapetusColony.visitor !== undefined &&
-        iapetusColony.colonies.includes(this.playerView.color)) {
+        iapetusColony.colonies.includes(this.playerView.me.color)) {
         return true;
       }
 
@@ -161,7 +161,7 @@ export const PlayerTags = Vue.component('player-tags', {
     },
     getTagDiscountAmount: function(tag: InterfaceTagsType): number {
       let discount = 0;
-      for (const card of [...this.playerView.playedCards, this.playerView.corporationCard]) {
+      for (const card of [...this.playerView.me.playedCards, this.playerView.me.corporationCard]) {
         if (card !== undefined) {
           discount += getDiscountAmount(tag, card);
         }
@@ -173,25 +173,25 @@ export const PlayerTags = Vue.component('player-tags', {
 
       const iapetusColony = this.playerView.game.colonies.find((colony) => colony.name === ColonyName.IAPETUS);
       if (tag === 'all' && iapetusColony !== undefined && iapetusColony.visitor !== undefined) {
-        discount += iapetusColony.colonies.filter((owner) => owner === this.playerView.color).length;
+        discount += iapetusColony.colonies.filter((owner) => owner === this.playerView.me.color).length;
       }
 
       return discount;
     },
     getTagCount: function(tagName: InterfaceTagsType): number {
       if (tagName === SpecialTags.COLONY_COUNT && this.showColonyCount()) {
-        return this.playerView.coloniesCount || 0;
+        return this.playerView.me.coloniesCount || 0;
       }
       if (tagName === SpecialTags.INFLUENCE && this.showInfluence()) {
-        return this.playerView.influence || 0;
+        return this.playerView.me.influence || 0;
       }
       if (tagName === SpecialTags.CITY_COUNT) {
-        return this.playerView.citiesCount || 0;
+        return this.playerView.me.citiesCount || 0;
       }
       if (tagName === SpecialTags.NONE) {
-        return this.playerView.noTagsCount || 0;
+        return this.playerView.me.noTagsCount || 0;
       }
-      const basicTagFound = this.playerView.tags.find(
+      const basicTagFound = this.playerView.me.tags.find(
         (tag: ITagCount) => tag.tag === tagName,
       );
 
@@ -206,7 +206,7 @@ export const PlayerTags = Vue.component('player-tags', {
     },
     playerJovianMultipliersCount: function(): number {
       let multipliers = 0;
-      for (const card of this.playerView.playedCards) {
+      for (const card of this.playerView.me.playedCards) {
         if (card !== undefined && JOVIAN_MULTIPLIERS.includes(card.name as CardName)) {
           multipliers += 1;
         }

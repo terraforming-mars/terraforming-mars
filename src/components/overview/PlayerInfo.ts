@@ -49,7 +49,7 @@ export const PlayerInfo = Vue.component('player-info', {
   methods: {
     getClasses: function(): string {
       const classes = ['player-info'];
-      classes.push(playerColorClass(this.playerView.color, 'bg_transparent'));
+      classes.push(playerColorClass(this.playerView.me.color, 'bg_transparent'));
       return classes.join(' ');
     },
     getPlayerStatusAndResClasses: function(): string {
@@ -57,7 +57,7 @@ export const PlayerInfo = Vue.component('player-info', {
       return classes.join(' ');
     },
     getIsActivePlayer: function(): boolean {
-      return this.playerView.color === this.activePlayer.color;
+      return this.playerView.me.color === this.activePlayer.color;
     },
     pinPlayer: function() {
       let hiddenPlayersIndexes: Array<Number> = [];
@@ -82,7 +82,7 @@ export const PlayerInfo = Vue.component('player-info', {
     },
     togglePlayerDetails: function() {
       // for active player => scroll to cards UI
-      if (this.playerView.color === this.activePlayer.color) {
+      if (this.playerView.me.color === this.activePlayer.color) {
         const el: HTMLElement = document.getElementsByClassName(
           'sidebar_icon--cards',
         )[0] as HTMLElement;
@@ -94,10 +94,10 @@ export const PlayerInfo = Vue.component('player-info', {
       this.pinPlayer();
     },
     getNrPlayedCards: function(): number {
-      return this.playerView.playedCards.length;
+      return this.playerView.me.playedCards.length;
     },
     getAvailableBlueActionCount: function(): number {
-      return this.playerView.availableBlueCardActionCount;
+      return this.playerView.me.availableBlueCardActionCount;
     },
   },
   template: `

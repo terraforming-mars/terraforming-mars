@@ -106,7 +106,7 @@ export const PlayerInfo = Vue.component('player-info', {
         <div class="player-status">
           <div class="player-info-details">
             <div class="player-info-name">{{ player.name }}</div>
-            <div class="icon-first-player" v-if="firstForGen && activePlayer.players.length > 1">1st</div>
+            <div class="icon-first-player" v-if="firstForGen && activeplayerView.players.length > 1">1st</div>
             <div class="player-info-corp" v-if="player.corporationCard !== undefined" :title="player.corporationCard.name">{{ player.corporationCard.name }}</div>
           </div>
           <player-status :playerView="playerView" :activePlayer="activePlayer" :firstForGen="firstForGen" v-trim-whitespace :actionLabel="actionLabel" :playerIndex="playerIndex"/>

@@ -49,15 +49,19 @@ export interface PublicPlayerModel {
 }
 
 export interface PlayerViewModel {
+  game: GameModel;
+  players: Array<PublicPlayerModel>;
+  waitingFor: PlayerInputModel | undefined;
+  me: PublicPlayerModel;
+  private: PrivatePlayerModel;
+}
+
+export interface PrivatePlayerModel {
   cardsInHand: Array<CardModel>;
   dealtCorporationCards: Array<CardModel>;
   dealtPreludeCards: Array<CardModel>;
   dealtProjectCards: Array<CardModel>;
   draftedCards: Array<CardModel>;
-  game: GameModel;
   pickedCorporationCard: Array<CardModel>; // Why Array?
-  players: Array<PublicPlayerModel>;
   preludeCardsInHand: Array<CardModel>;
-  waitingFor: PlayerInputModel | undefined;
-  me: PublicPlayerModel;
 }

@@ -109,8 +109,8 @@ export const PlayerHome = Vue.component('player-home', {
         }
       }
     },
-    isPlayerActing: function(player: PlayerViewModel) : boolean {
-      return player.players.length > 1 && player.waitingFor !== undefined;
+    isPlayerActing: function(playerView: PlayerViewModel) : boolean {
+      return playerView.players.length > 1 && playerView.waitingFor !== undefined;
     },
     getPlayerCssForTurnOrder: (
       player: PublicPlayerModel,
@@ -195,19 +195,19 @@ export const PlayerHome = Vue.component('player-home', {
     };
   },
   template: `
-        <div id="player-home" :class="(player.game.turmoil ? 'with-turmoil': '')">
+        <div id="player-home" :class="(playerView.game.turmoil ? 'with-turmoil': '')">
             <top-bar :playerView="playerView" />
 
             <div v-if="player.game.phase === 'end'">
                 <div class="player_home_block">
-                    <dynamic-title title="This game is over!" :color="player.color"/>
+                    <dynamic-title title="This game is over!" :color="player.me.color"/>
                     <a :href="'/the-end?id='+ player.id" v-i18n>Go to game results</a>
                 </div>
             </div>
 
             <sidebar v-trim-whitespace
               :acting_player="isPlayerActing(player)"
-              :player_color="player.color"
+              :player_color="player.me.color"
               :generation="player.game.generation"
               :coloniesCount="player.game.colonies.length"
               :temperature = "player.game.temperature"
@@ -217,12 +217,12 @@ export const PlayerHome = Vue.component('player-home', {
               :turmoil = "player.game.turmoil"
               :moonData="player.game.moon"
               :gameOptions = "player.game.gameOptions"
-              :playerNumber = "player.players.length"
+              :playerNumber = "playerView.players.length"
               :lastSoloGeneration = "player.game.lastSoloGeneration">
                 <div class="deck-size">{{ player.game.deckSize }}</div>
             </sidebar>
 
-            <div v-if="player.corporationCard">
+            <div v-if="player.me.private.corporationCard">
 
                 <div class="player_home_block">
                     <a name="board" class="player_home_anchor"></a>
@@ -242,7 +242,7 @@ export const PlayerHome = Vue.component('player-home', {
 
                     <MoonBoard v-if="player.game.gameOptions.moonExpansion" :model="player.game.moon"></MoonBoard>
 
-                    <div v-if="player.players.length > 1" class="player_home_block--milestones-and-awards">
+                    <div v-if="playerView.players.length > 1" class="player_home_block--milestones-and-awards">
                         <Milestone :milestones_list="player.game.milestones" />
                         <Award :awards_list="player.game.awards" />
                     </div>
@@ -251,13 +251,13 @@ export const PlayerHome = Vue.component('player-home', {
                 <players-overview class="player_home_block player_home_block--players nofloat:" :playerView="playerView" v-trim-whitespace id="shortkey-playersoverview"/>
 
                 <div class="player_home_block nofloat">
-                    <log-panel :id="player.id" :players="player.players" :generation="player.game.generation" :lastSoloGeneration="player.game.lastSoloGeneration" :color="player.color"></log-panel>
+                    <log-panel :id="player.id" :players="playerView.players" :generation="player.game.generation" :lastSoloGeneration="player.game.lastSoloGeneration" :color="player.color"></log-panel>
                 </div>
 
                 <div class="player_home_block player_home_block--actions nofloat">
                     <a name="actions" class="player_home_anchor"></a>
                     <dynamic-title title="Actions" :color="player.color"/>
-                    <waiting-for v-if="player.game.phase !== 'end'" :players="player.players" :playerView="playerView" :settings="settings" :waitingfor="player.waitingFor"></waiting-for>
+                    <waiting-for v-if="player.game.phase !== 'end'" :players="playerView.players" :playerView="playerView" :settings="settings" :waitingfor="player.waitingFor"></waiting-for>
                 </div>
 
                 <div class="player_home_block player_home_block--hand" v-if="player.draftedCards.length > 0">
@@ -318,7 +318,7 @@ export const PlayerHome = Vue.component('player-home', {
 
             <div class="player_home_block player_home_block--setup nofloat"  v-if="!player.corporationCard">
 
-                <div v-for="card in player.dealtCorporationCards" :key="card.name" class="cardbox" v-if="isInitialDraftingPhase()">
+                <div v-for="card in player.private.dealtCorporationCards" :key="card.name" class="cardbox" v-if="isInitialDraftingPhase()">
                     <Card :card="card"/>
                 </div>
 
@@ -355,22 +355,22 @@ export const PlayerHome = Vue.component('player-home', {
                 </template>
 
                 <dynamic-title v-if="player.pickedCorporationCard.length === 0" title="Select initial cards:" :color="player.color"/>
-                <waiting-for v-if="player.game.phase !== 'end'" :players="player.players" :playerView="playerView" :settings="settings" :waitingfor="player.waitingFor"></waiting-for>
+                <waiting-for v-if="player.game.phase !== 'end'" :players="playerView.players" :playerView="playerView" :settings="settings" :waitingfor="player.waitingFor"></waiting-for>
 
                 <dynamic-title title="Game details" :color="player.color"/>
 
-                <div class="player_home_block" v-if="player.players.length > 1">
+                <div class="player_home_block" v-if="playerView.players.length > 1">
                     <Milestone :show_scores="false" :milestones_list="player.game.milestones" />
                     <Award :show_scores="false" :awards_list="player.game.awards" />
                 </div>
 
-                <div class="player_home_block player_home_block--turnorder nofloat" v-if="player.players.length>1">
+                <div class="player_home_block player_home_block--turnorder nofloat" v-if="playerView.players.length>1">
                     <dynamic-title title="Turn order" :color="player.color"/>
-                    <div class="player_item" v-for="(p, idx) in player.players" v-trim-whitespace>
+                    <div class="player_item" v-for="(p, idx) in playerView.players" v-trim-whitespace>
                         <div class="player_name_cont" :class="getPlayerCssForTurnOrder(p, true)">
                             <span class="player_number">{{ idx+1 }}.</span><span class="player_name" :class="getPlayerCssForTurnOrder(p, false)" href="#">{{ p.name }}</span>
                         </div>
-                        <div class="player_separator" v-if="idx !== player.players.length - 1">⟶</div>
+                        <div class="player_separator" v-if="idx !== playerView.players.length - 1">⟶</div>
                     </div>
                 </div>
 
@@ -403,7 +403,7 @@ export const PlayerHome = Vue.component('player-home', {
                 <a name="colonies" class="player_home_anchor"></a>
                 <dynamic-title title="Colonies" :color="player.color"/>
                 <div class="colonies-fleets-cont" v-if="player.corporationCard">
-                    <div class="colonies-player-fleets" v-for="colonyPlayer in player.players">
+                    <div class="colonies-player-fleets" v-for="colonyPlayer in playerView.players">
                         <div :class="'colonies-fleet colonies-fleet-'+ colonyPlayer.color" v-for="idx in getFleetsCountRange(colonyPlayer)"></div>
                     </div>
                 </div>

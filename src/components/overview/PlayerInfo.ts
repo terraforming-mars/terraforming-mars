@@ -20,11 +20,11 @@ export const hidePlayerData = (root: typeof mainAppSettings.methods, playerIndex
 };
 export const PlayerInfo = Vue.component('player-info', {
   props: {
+    player: {
+      type: Object as () => PublicPlayerModel,
+    },
     playerView: {
       type: Object as () => PlayerViewModel,
-    },
-    activePlayer: {
-      type: Object as () => PublicPlayerModel,
     },
     firstForGen: {
       type: Boolean,
@@ -49,7 +49,7 @@ export const PlayerInfo = Vue.component('player-info', {
   methods: {
     getClasses: function(): string {
       const classes = ['player-info'];
-      classes.push(playerColorClass(this.playerView.me.color, 'bg_transparent'));
+      classes.push(playerColorClass(this.player.color, 'bg_transparent'));
       return classes.join(' ');
     },
     getPlayerStatusAndResClasses: function(): string {
@@ -57,7 +57,7 @@ export const PlayerInfo = Vue.component('player-info', {
       return classes.join(' ');
     },
     getIsActivePlayer: function(): boolean {
-      return this.playerView.me.color === this.activePlayer.color;
+      return this.player.color === this.playerView.me.color;
     },
     pinPlayer: function() {
       let hiddenPlayersIndexes: Array<Number> = [];
@@ -82,7 +82,7 @@ export const PlayerInfo = Vue.component('player-info', {
     },
     togglePlayerDetails: function() {
       // for active player => scroll to cards UI
-      if (this.playerView.me.color === this.activePlayer.color) {
+      if (this.player.color === this.playerView.me.color) {
         const el: HTMLElement = document.getElementsByClassName(
           'sidebar_icon--cards',
         )[0] as HTMLElement;
@@ -94,10 +94,10 @@ export const PlayerInfo = Vue.component('player-info', {
       this.pinPlayer();
     },
     getNrPlayedCards: function(): number {
-      return this.playerView.me.playedCards.length;
+      return this.player.playedCards.length;
     },
     getAvailableBlueActionCount: function(): number {
-      return this.playerView.me.availableBlueCardActionCount;
+      return this.player.availableBlueCardActionCount;
     },
   },
   template: `
@@ -106,7 +106,7 @@ export const PlayerInfo = Vue.component('player-info', {
         <div class="player-status">
           <div class="player-info-details">
             <div class="player-info-name">{{ player.name }}</div>
-            <div class="icon-first-player" v-if="firstForGen && activeplayerView.players.length > 1">1st</div>
+            <div class="icon-first-player" v-if="firstForGen && playerView.players.length > 1">1st</div>
             <div class="player-info-corp" v-if="player.corporationCard !== undefined" :title="player.corporationCard.name">{{ player.corporationCard.name }}</div>
           </div>
           <player-status :playerView="playerView" :activePlayer="activePlayer" :firstForGen="firstForGen" v-trim-whitespace :actionLabel="actionLabel" :playerIndex="playerIndex"/>

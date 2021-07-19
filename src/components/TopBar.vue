@@ -1,6 +1,6 @@
 <template>
     <div :class="formatCssClass()" :key="componentKey">
-      <PlayerInfo v-show="isExpanded()" :playerView="playerView" :activePlayer="playerView" actionLabel="" :playerIndex="0" :hideZeroTags="true"/>
+      <PlayerInfo v-show="isExpanded()" :playerView="playerView" :player="playerView.me" actionLabel="" :playerIndex="0" :hideZeroTags="true"/>
       <div class="top-bar-collapser" v-on:click="toggleBar()">
         <img src="/assets/arrows_left.png">
       </div>

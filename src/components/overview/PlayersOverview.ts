@@ -40,11 +40,6 @@ export const PlayersOverview = Vue.component('players-overview', {
     hasPlayers: function(): boolean {
       return this.playerView.players.length > 0;
     },
-    getPlayerOnFocus: function(): PublicPlayerModel {
-      return this.playerView.players.filter(
-        (p: PublicPlayerModel) => p.color === this.playerView.me.color,
-      )[0];
-    },
     getIsFirstForGen: function(player: PublicPlayerModel): boolean {
       return getCurrentPlayerIndex(player.color, this.playerView.players) === 0;
     },
@@ -113,7 +108,7 @@ export const PlayersOverview = Vue.component('players-overview', {
                 </div>
             </div>
             <player-info v-for="(p, index) in getPlayersInOrder()"
-              :activePlayer="player"
+              :playerView="playerView"
               :player="p"
               :key="p.id"
               :firstForGen="getIsFirstForGen(p)"
@@ -121,8 +116,8 @@ export const PlayersOverview = Vue.component('players-overview', {
               :playerIndex="index"/>
             <div v-if="playerView.players.length > 1" class="player-divider" />
             <player-info
-              :player="getPlayerOnFocus()"
-              :activePlayer="player"
+              :player="playerView.me"
+              :playerView="playerView"
               :key="playerView.players.length - 1"
               :firstForGen="getIsFirstForGen(player)"
               :actionLabel="getActionLabel(player)"

@@ -223,7 +223,7 @@ export const SpectatorHome = Vue.component('spectator-home', {
     };
   },
   template: `
-        <div id="player-home" :class="(spectatorView.game.turmoil ? 'with-turmoil': '')">
+        <div id="spectator-home" :class="(spectatorView.game.turmoil ? 'with-turmoil': '')">
             <top-bar :playerView="playerView" />
 
             <div v-if="spectatorView.game.phase === 'end'">

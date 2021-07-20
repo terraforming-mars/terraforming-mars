@@ -24,6 +24,7 @@ export const OtherPlayer = Vue.component('other-player', {
   mixins: [PlayerMixin],
   methods: {
     hideMe: function() {
+      // TODO find a better way to share methods with this.$root for type safety
       (this.$root as unknown as typeof mainAppSettings.methods).setVisibilityState('pinned_player_' + this.playerIndex, false);
     },
     isVisible: function() {

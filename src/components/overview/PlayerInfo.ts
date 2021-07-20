@@ -70,6 +70,7 @@ export const PlayerInfo = Vue.component('player-info', {
       }
       for (let i = 0; i < hiddenPlayersIndexes.length; i++) {
         if (hiddenPlayersIndexes.includes(i)) {
+          // TODO find a better way to share methods with this.$root for type safety
           (this.$root as unknown as typeof mainAppSettings.methods).setVisibilityState('pinned_player_' + i, false);
         }
       }

@@ -14,9 +14,6 @@ export const PlayerStatus = Vue.component('player-status', {
     player: {
       type: Object as () => PlayerModel,
     },
-    activePlayer: {
-      type: Object as () => PlayerModel,
-    },
     firstForGen: {
       type: Boolean,
     },

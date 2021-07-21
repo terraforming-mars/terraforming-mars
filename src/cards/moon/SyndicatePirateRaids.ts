@@ -18,7 +18,7 @@ export class SyndicatePirateRaids extends Card implements IProjectCard {
         description: 'DURING THE NEXT SOLAR PHASE, ALL OPPONENTS\' TRADE FLEETS WILL REMAIN ON THE COLONY TILES THEY OCCUPY.',
         cardNumber: 'M65',
         renderData: CardRenderer.builder((b) => {
-          b.tradeFleet().any.asterix();
+          b.tradeFleet()./* any.*/asterix(); // any and asterix both have filters, and one clobbers the other.
         }),
       },
     });

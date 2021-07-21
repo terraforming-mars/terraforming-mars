@@ -1,9 +1,8 @@
 import Vue from 'vue';
 
-import {StackedCards} from './StackedCards';
+import StackedCards from './StackedCards.vue';
 import {PlayerMixin} from './PlayerMixin';
 import {PlayerModel} from '../models/PlayerModel';
-import {hidePlayerData} from './overview/PlayerStatus';
 import {mainAppSettings} from './App';
 import {Card} from './card/Card';
 import Button from './common/Button.vue';
@@ -25,7 +24,8 @@ export const OtherPlayer = Vue.component('other-player', {
   mixins: [PlayerMixin],
   methods: {
     hideMe: function() {
-      hidePlayerData(this.$root as unknown as typeof mainAppSettings.methods, this.playerIndex);
+      // TODO find a better way to share methods with this.$root for type safety
+      (this.$root as unknown as typeof mainAppSettings.methods).setVisibilityState('pinned_player_' + this.playerIndex, false);
     },
     isVisible: function() {
       return (this.$root as unknown as typeof mainAppSettings.methods).getVisibilityState(

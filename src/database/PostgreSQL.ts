@@ -116,6 +116,26 @@ export class PostgreSQL implements IDatabase {
     });
   }
 
+  // TODO(kberg): throw an error if two game ids exist.
+  getGameId(playerId: string, cb: (err: Error | undefined, gameId?: GameId) => void): void {
+    const sql =
+      `SELECT game_id
+      FROM games, json_array_elements(CAST(game AS JSON)->'players') AS e
+      WHERE save_id = 0 AND e->>'id' = $1`;
+
+    this.client.query(sql, [playerId], (err: Error | null, res: QueryResult<any>) => {
+      if (err) {
+        console.error('PostgreSQL:getGameId', err);
+        return cb(err ?? undefined);
+      }
+      if (res.rowCount === 0) {
+        return cb(new Error('Game not found'));
+      }
+      const gameId = res.rows[0].game_id;
+      cb(undefined, gameId);
+    });
+  }
+
   getGameVersion(game_id: GameId, save_id: number, cb: DbLoadCallback<SerializedGame>): void {
     this.client.query('SELECT game game FROM games WHERE game_id = $1 and save_id = $2', [game_id, save_id], (err: Error | null, res: QueryResult<any>) => {
       if (err) {

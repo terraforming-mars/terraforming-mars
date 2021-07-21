@@ -95,6 +95,17 @@ export class SQLite implements IDatabase {
     });
   }
 
+  // TODO(kberg): throw an error if two game ids exist.
+  getGameId(playerId: string, cb: (err: Error | undefined, gameId?: GameId) => void): void {
+    const sql = 'SELECT game_id from games, json_each(games.game, \'$.players\') e where json_extract(e.value, \'$.id\') = ?';
+    this.db.get(sql, [playerId], (err: Error | null, row: { gameId: any; }) => {
+      if (err) {
+        return cb(err ?? undefined);
+      }
+      cb(undefined, row.gameId);
+    });
+  }
+
   getGameVersion(game_id: GameId, save_id: number, cb: DbLoadCallback<SerializedGame>): void {
     this.db.get('SELECT game game FROM games WHERE game_id = ? and save_id = ?', [game_id, save_id], (err: Error | null, row: { game: any; }) => {
       if (err) {

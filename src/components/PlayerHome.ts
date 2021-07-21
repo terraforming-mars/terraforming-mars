@@ -6,7 +6,7 @@ import Milestone from './Milestone.vue';
 import Award from './Award.vue';
 import {PlayersOverview} from './overview/PlayersOverview';
 import WaitingFor from './WaitingFor.vue';
-import {Sidebar} from './Sidebar';
+import Sidebar from './Sidebar.vue';
 import {PlayerModel, PublicPlayerModel} from '../models/PlayerModel';
 import Colony from './Colony.vue';
 import LogPanel from './LogPanel.vue';
@@ -21,6 +21,7 @@ import {PreferencesManager} from './PreferencesManager';
 import {KeyboardNavigation} from '../../src/KeyboardNavigation';
 import MoonBoard from './moon/MoonBoard.vue';
 import {Phase} from '../../src/Phase';
+import StackedCards from './StackedCards.vue';
 
 import * as raw_settings from '../genfiles/settings.json';
 
@@ -77,6 +78,7 @@ export const PlayerHome = Vue.component('player-home', {
     'sortable-cards': SortableCards,
     'top-bar': TopBar,
     MoonBoard,
+    'stacked-cards': StackedCards,
   },
   mixins: [PlayerMixin],
   methods: {

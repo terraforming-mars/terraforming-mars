@@ -8,6 +8,7 @@ Database.getInstance = function() {
     deleteGameNbrSaves: () => {},
     getClonableGames: () => {},
     getGame: () => {},
+    getGameId: () => {},
     getGameVersion: () => {},
     getGames: () => {},
     restoreGame: () => {},

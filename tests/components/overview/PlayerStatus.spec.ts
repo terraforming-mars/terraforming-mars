@@ -1,8 +1,7 @@
-/*
 import {createLocalVue, mount} from '@vue/test-utils';
 
 import {expect} from 'chai';
-import {PlayerStatus} from '../../../src/components/overview/PlayerStatus';
+import PlayerStatus from '../../../src/components/overview/PlayerStatus.vue';
 
 describe('PlayerStatus', function() {
   function getLocalVue() {
@@ -19,9 +18,6 @@ describe('PlayerStatus', function() {
         },
       },
       propsData: {
-        activePlayer: {
-          id: 'foobar',
-        },
         player: {
           corporationCard: {},
           id: 'foobar',
@@ -36,4 +32,3 @@ describe('PlayerStatus', function() {
     expect(test.text()).to.eq('1');
   });
 });
-*/

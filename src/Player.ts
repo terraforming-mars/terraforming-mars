@@ -65,9 +65,6 @@ import {ConvertPlants} from './cards/base/standardActions/ConvertPlants';
 import {ConvertHeat} from './cards/base/standardActions/ConvertHeat';
 import {Manutech} from './cards/venusNext/Manutech';
 import {LunaProjectOffice} from './cards/moon/LunaProjectOffice';
-import {PlaceMoonMineTile} from './moon/PlaceMoonMineTile';
-import {PlaceMoonColonyTile} from './moon/PlaceMoonColonyTile';
-import {PlaceMoonRoadTile} from './moon/PlaceMoonRoadTile';
 import {GlobalParameter} from './GlobalParameter';
 import {GlobalEventName} from './turmoil/globalEvents/GlobalEventName';
 import {LogHelper} from './LogHelper';
@@ -1124,8 +1121,8 @@ export class Player implements ISerializable<SerializedPlayer> {
     MoonExpansion.ifMoon(game, (moonData) => {
       if (moonData.colonyRate < constants.MAXIMUM_COLONY_RATE) {
         action.options.push(
-          new SelectOption('Place a colony tile on the Moon', 'Increase', () => {
-            game.defer(new PlaceMoonColonyTile(this));
+          new SelectOption('Increase the Moon colony rate', 'Increase', () => {
+            MoonExpansion.raiseColonyRate(this, 1);
             return undefined;
           }),
         );
@@ -1133,8 +1130,8 @@ export class Player implements ISerializable<SerializedPlayer> {
 
       if (moonData.miningRate < constants.MAXIMUM_MINING_RATE) {
         action.options.push(
-          new SelectOption('Place a mine tile on the Moon', 'Increase', () => {
-            game.defer(new PlaceMoonMineTile(this));
+          new SelectOption('Increase the Moon mining rate', 'Increase', () => {
+            MoonExpansion.raiseMiningRate(this, 1);
             return undefined;
           }),
         );
@@ -1142,8 +1139,8 @@ export class Player implements ISerializable<SerializedPlayer> {
 
       if (moonData.logisticRate < constants.MAXIMUM_LOGISTICS_RATE) {
         action.options.push(
-          new SelectOption('Place a road tile on the Moon', 'Increase', () => {
-            game.defer(new PlaceMoonRoadTile(this));
+          new SelectOption('Increase the Moon logistics rate', 'Increase', () => {
+            MoonExpansion.raiseLogisticRate(this, 1);
             return undefined;
           }),
         );

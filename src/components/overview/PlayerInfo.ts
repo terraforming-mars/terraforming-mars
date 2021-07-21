@@ -2,7 +2,7 @@ import Vue from 'vue';
 import {PlayerModel} from '../../models/PlayerModel';
 import {PlayerResources} from './PlayerResources';
 import {PlayerTags} from './PlayerTags';
-import {PlayerStatus} from './PlayerStatus';
+import PlayerStatus from './PlayerStatus.vue';
 import {playerColorClass} from '../../utils/utils';
 import {mainAppSettings} from '../App';
 import {range} from '../../utils/utils';
@@ -14,9 +14,6 @@ const isPinned = (root: any, playerIndex: number): boolean => {
 };
 const showPlayerData = (root: any, playerIndex: number) => {
   (root as any).setVisibilityState('pinned_player_' + playerIndex, true);
-};
-export const hidePlayerData = (root: typeof mainAppSettings.methods, playerIndex: number) => {
-  root.setVisibilityState('pinned_player_' + playerIndex, false);
 };
 export const PlayerInfo = Vue.component('player-info', {
   props: {
@@ -73,7 +70,8 @@ export const PlayerInfo = Vue.component('player-info', {
       }
       for (let i = 0; i < hiddenPlayersIndexes.length; i++) {
         if (hiddenPlayersIndexes.includes(i)) {
-          hidePlayerData(this.$root as unknown as typeof mainAppSettings.methods, i);
+          // TODO find a better way to share methods with this.$root for type safety
+          (this.$root as unknown as typeof mainAppSettings.methods).setVisibilityState('pinned_player_' + i, false);
         }
       }
     },
@@ -109,7 +107,7 @@ export const PlayerInfo = Vue.component('player-info', {
             <div class="icon-first-player" v-if="firstForGen && activePlayer.players.length > 1">1st</div>
             <div class="player-info-corp" v-if="player.corporationCard !== undefined" :title="player.corporationCard.name">{{ player.corporationCard.name }}</div>
           </div>
-          <player-status :player="player" :activePlayer="activePlayer" :firstForGen="firstForGen" v-trim-whitespace :actionLabel="actionLabel" :playerIndex="playerIndex"/>
+          <player-status :player="player" :firstForGen="firstForGen" v-trim-whitespace :actionLabel="actionLabel" :playerIndex="playerIndex"/>
         </div>
           <player-resources :player="player" v-trim-whitespace />
           <div class="player-played-cards">

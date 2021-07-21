@@ -15,10 +15,10 @@ export class SyndicatePirateRaids extends Card implements IProjectCard {
       cost: 8,
 
       metadata: {
-        description: 'ALL OPPONENTS CANNOT RETRIEVE THEIR TRADE FLEETS THIS GENERATION',
+        description: 'DURING THE NEXT SOLAR PHASE, ALL OPPONENTS\' TRADE FLEETS WILL REMAIN ON THE COLONY TILES THEY OCCUPY.',
         cardNumber: 'M65',
         renderData: CardRenderer.builder((b) => {
-          b.tradeFleet().asterix;
+          b.tradeFleet().any.asterix();
         }),
       },
     });
@@ -29,7 +29,7 @@ export class SyndicatePirateRaids extends Card implements IProjectCard {
     game.syndicatePirateRaider = player.id;
 
     game.log(
-      'All players except ${0} may not retrieve their trade fleets this generation.',
+      'All players except ${0} will keep their trade fleets on the colony tiles they occupy this solar phase.',
       (b) => b.player(player));
     return undefined;
   }

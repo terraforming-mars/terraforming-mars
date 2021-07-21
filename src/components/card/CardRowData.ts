@@ -1,5 +1,5 @@
 import Vue from 'vue';
-import {CardRowComponent} from './CardRowComponent';
+import CardRowComponent from './CardRowComponent.vue';
 
 export const CardRowData = Vue.component('CardRowData', {
   props: {

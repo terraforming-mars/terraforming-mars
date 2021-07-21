@@ -11,6 +11,7 @@ import {IParty} from '../src/turmoil/parties/IParty';
 import {Turmoil} from '../src/turmoil/Turmoil';
 import {TurmoilPolicy} from '../src/turmoil/TurmoilPolicy';
 import {LogMessage} from '../src/LogMessage';
+import {Log} from '../src/Log';
 
 export class TestingUtils {
   // Returns the oceans created during this operation which may not reflect all oceans.
@@ -109,8 +110,6 @@ export class TestingUtils {
 
   // Provides a readable version of a log message for easier testing.
   public static formatLogMessage(message: LogMessage): string {
-    return message.message.replace(/\$\{(\d{1,2})\}/gi, (_match, idx) => {
-      return message.data[idx].value;
-    });
+    return Log.applyData(message, (datum) => datum.value);
   }
 }

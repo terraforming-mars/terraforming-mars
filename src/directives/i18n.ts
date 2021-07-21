@@ -1,16 +1,17 @@
-
 import {LogMessageDataType} from '../LogMessageDataType';
 import {Message} from '../Message';
 import {PreferencesManager} from '../components/PreferencesManager';
 import * as raw_translations from '../genfiles/translations.json';
 import {LogMessageData} from '../LogMessageData';
+import {Log} from '../Log';
 
 const TM_translations: {[x: string]: {[x: string]: string}} = raw_translations;
 
 export function translateMessage(message: Message): string {
-  return translateText(message.message).replace(/\$\{(\d{1,2})\}/gi, (_match, idx) => {
-    if (message.data[idx] !== undefined && message.data[idx].type === LogMessageDataType.RAW_STRING) {
-      return message.data[idx].value;
+  message.message = translateText(message.message);
+  return Log.applyData(message, (datum) => {
+    if (datum !== undefined && datum.type === LogMessageDataType.RAW_STRING) {
+      return datum.value;
     }
     return '';
   });

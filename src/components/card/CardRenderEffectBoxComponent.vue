@@ -27,10 +27,10 @@
 
 import Vue from 'vue';
 import CardRenderItemComponent from './CardRenderItemComponent.vue';
-import {CardRenderSymbolComponent} from './CardRenderSymbolComponent';
+import CardRenderSymbolComponent from './CardRenderSymbolComponent.vue';
 import {ItemType, CardRenderEffect, CardRenderProductionBox, CardRenderTile} from '../../cards/render/CardRenderer';
 import CardProductionBoxComponent from './CardProductionBoxComponent.vue';
-import {CardRenderTileComponent} from './CardRenderTileComponent';
+import CardRenderTileComponent from './CardRenderTileComponent.vue';
 import {CardRenderSymbol} from '../../cards/render/CardRenderSymbol';
 import {CardRenderItem} from '../../cards/render/CardRenderItem';
 

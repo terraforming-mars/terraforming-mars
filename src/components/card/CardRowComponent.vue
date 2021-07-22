@@ -21,9 +21,9 @@ import CardRenderItemComponent from './CardRenderItemComponent.vue';
 import CardProductionBoxComponent from './CardProductionBoxComponent.vue';
 import CardRenderEffectBoxComponent from './CardRenderEffectBoxComponent.vue';
 import CardRenderCorpBoxComponent from './CardRenderCorpBoxComponent.vue';
-import {CardRenderTileComponent} from './CardRenderTileComponent';
+import CardRenderTileComponent from './CardRenderTileComponent.vue';
 import CardDescription from './CardDescription.vue';
-import {CardRenderSymbolComponent} from './CardRenderSymbolComponent';
+import CardRenderSymbolComponent from './CardRenderSymbolComponent.vue';
 import {CardRenderEffect, CardRenderCorpBoxEffect, CardRenderCorpBoxAction} from '../../cards/render/CardRenderer';
 
 export default Vue.extend({

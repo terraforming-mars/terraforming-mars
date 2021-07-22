@@ -1,9 +1,16 @@
+<template>
+  <div :class="getClasses()">{{ getContent() }}</div>
+</template>
+
+<script lang="ts">
+
 import Vue from 'vue';
 import {CardRenderSymbolType} from '../../cards/render/CardRenderSymbolType';
 import {CardRenderSymbol} from '../../cards/render/CardRenderSymbol';
 import {Size} from '../../cards/render/Size';
 
-export const CardRenderSymbolComponent = Vue.component('CardRenderSymbolComponent', {
+export default Vue.extend({
+  name: 'CardRenderSymbolComponent',
   props: {
     item: {
       type: Object as () => CardRenderSymbol,
@@ -64,5 +71,6 @@ export const CardRenderSymbolComponent = Vue.component('CardRenderSymbolComponen
       return this.item.isIcon ? '' : this.item.type;
     },
   },
-  template: '<div :class="getClasses()">{{ getContent() }}</div>',
 });
+
+</script>

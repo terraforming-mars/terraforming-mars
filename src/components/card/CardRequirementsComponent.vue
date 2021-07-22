@@ -1,7 +1,21 @@
+<template>
+        <div v-if="requirements.hasParty()" :class="getClasses()">
+            <span class="party">{{ requirements.getRequirementsText() }}</span>
+        </div>
+        <div v-else-if="requirements.hasPlantsRemoved()" :class="getClasses()">
+            <div class="card-special card-minus"></div>
+            <div class="card-resource card-resource-plant red-outline"></div>
+        </div>
+        <div v-else :class="getClasses()">{{ requirements.getRequirementsText() }}</div>
+</template>
+
+<script lang="ts">
+
 import Vue from 'vue';
 import {CardRequirements} from '../../cards/CardRequirements';
 
-export const CardRequirementsComponent = Vue.component('CardRequirements', {
+export default Vue.extend({
+  name: 'CardRequirementsComponent',
   props: {
     requirements: {
       type: Object as () => CardRequirements,
@@ -17,14 +31,7 @@ export const CardRequirementsComponent = Vue.component('CardRequirements', {
       return classes.join(' ');
     },
   },
-  template: `
-        <div v-if="requirements.hasParty()" :class="getClasses()">
-            <span class="party">{{ requirements.getRequirementsText() }}</span>
-        </div>
-        <div v-else-if="requirements.hasPlantsRemoved()" :class="getClasses()"> 
-            <div class="card-special card-minus"></div>
-            <div class="card-resource card-resource-plant red-outline"></div>
-        </div>
-        <div v-else :class="getClasses()">{{ requirements.getRequirementsText() }}</div>
-    `,
 });
+
+</script>
+

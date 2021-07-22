@@ -1,3 +1,9 @@
+<template>
+    <div :class="getTiles()"><div :class="getSymbols()"></div></div>
+</template>
+
+<script lang="ts">
+
 import Vue from 'vue';
 import {CardRenderTile} from '../../cards/render/CardRenderer';
 import {generateClassString} from '../../utils/utils';
@@ -113,7 +119,8 @@ const TILE_CLASSES: Map<TileType, Classes> = new Map([
   }],
 ]);
 
-export const CardRenderTileComponent = Vue.component('CardRenderTileComponent', {
+export default Vue.extend({
+  name: 'CardRenderTileComponent',
   props: {
     item: {
       type: Object as () => CardRenderTile,
@@ -147,7 +154,7 @@ export const CardRenderTileComponent = Vue.component('CardRenderTileComponent', 
       return generateClassString(classes);
     },
   },
-  template: `
-    <div :class="getTiles()"><div :class="getSymbols()"></div></div>
-  `,
 });
+
+</script>
+

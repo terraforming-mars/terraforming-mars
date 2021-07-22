@@ -4,7 +4,7 @@ import {ICard} from '../../cards/ICard';
 import {CardModel} from '../../models/CardModel';
 import CardTitle from './CardTitle.vue';
 import CardNumber from './CardNumber.vue';
-import {CardResourceCounter} from './CardResourceCounter';
+import CardResourceCounter from './CardResourceCounter.vue';
 import CardCost from './CardCost.vue';
 import CardExtraContent from './CardExtraContent.vue';
 import CardExpansion from './CardExpansion.vue';

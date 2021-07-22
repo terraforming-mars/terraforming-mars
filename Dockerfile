@@ -9,7 +9,7 @@ LABEL maintainer="bafolts" \
 RUN mkdir -p /usr/src/app/db \
    && addgroup -S tfm \
    && adduser -S -D -h /usr/src/app tfm tfm \
-   && apk add --no-cache git
+   && apk add --no-cache --virtual .gyp git python make g++
 
 WORKDIR /usr/src/app
 
@@ -17,12 +17,11 @@ COPY package*.json ./
 
 RUN npm install
 
-COPY . .
+COPY --chown=tfm:tfm . .
 
-RUN chown -R tfm:tfm /usr/src/app \
-   && npm run build \
+RUN npm run build  \
    && rm -rf .git \
-   && apk del git
+   && apk del git .gyp
 
 USER tfm
 

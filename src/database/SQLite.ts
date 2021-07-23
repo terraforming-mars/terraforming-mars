@@ -132,14 +132,14 @@ export class SQLite implements IDatabase {
   }
 
   purgeUnfinishedGames(): void {
-    // Purge unfinished games older than MAX_GAME_DAYS days. If this .env variable is not present, unfinished games will not be purged.
-    if (process.env.MAX_GAME_DAYS) {
-      this.db.run('DELETE FROM games WHERE created_time < strftime(\'%s\',date(\'now\', \'-? day\')) and status = \'running\'', [process.env.MAX_GAME_DAYS], function(err: Error | null) {
-        if (err) {
-          return console.warn(err.message);
-        }
-      });
-    }
+    // Purge unfinished games older than MAX_GAME_DAYS days. If this environment variable is absent, it uses the default of 10 days.
+    const envDays = parseInt(process.env.MAX_GAME_DAYS || '');
+    const days = Number.isInteger(envDays) ? envDays : 10;
+    this.db.run('DELETE FROM games WHERE created_time < strftime(\'%s\',date(\'now\', \'-\' || ? || \' day\')) and status = \'running\'', [days.toString()], function(err: Error | null) {
+      if (err) {
+        return console.warn(err.message);
+      }
+    });
   }
 
   restoreGame(game_id: GameId, save_id: number, cb: DbLoadCallback<Game>): void {

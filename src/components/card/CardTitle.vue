@@ -22,9 +22,8 @@ export default Vue.extend({
       required: true,
     },
     type: {
-      type: String,
+      type: String as () => CardType,
       required: true,
-      validator: (card: CardType) => Object.values(CardType).includes(card),
     },
   },
   components: {

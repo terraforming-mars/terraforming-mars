@@ -4,7 +4,7 @@ import {Message} from '../Message';
 import {CardOrderStorage} from './CardOrderStorage';
 import {PlayerModel} from '../models/PlayerModel';
 import {VueModelCheckbox, VueModelRadio} from './VueTypes';
-import {Card} from './card/Card';
+import Card from './card/Card.vue';
 import {CardModel} from '../models/CardModel';
 import {CardName} from '../CardName';
 import {PlayerInputModel} from '../models/PlayerInputModel';

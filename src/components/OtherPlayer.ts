@@ -4,7 +4,7 @@ import StackedCards from './StackedCards.vue';
 import {PlayerMixin} from './PlayerMixin';
 import {PlayerModel} from '../models/PlayerModel';
 import {mainAppSettings} from './App';
-import {Card} from './card/Card';
+import Card from './card/Card.vue';
 import Button from './common/Button.vue';
 
 export const OtherPlayer = Vue.component('other-player', {

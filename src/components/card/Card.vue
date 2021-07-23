@@ -1,3 +1,27 @@
+<template>
+        <div :class="getCardClasses(card)">
+            <div class="card-content-wrapper" v-i18n>
+                <div v-if="!isStandardProject()" class="card-cost-and-tags">
+                    <CardCost :amount="getCost()" :newCost="getReducedCost()" />
+                    <CardTags :tags="getTags()" />
+                </div>
+                <CardTitle :title="card.name" :type="getCardType()"/>
+                <CardContent v-if="getCardMetadata() !== undefined" :metadata="getCardMetadata()" :requirements="getCardRequirements()" :isCorporation="isCorporationCard()"/>
+                <CardNumber v-if="getCardMetadata() !== undefined" :number="getCardNumber()"/>
+            </div>
+            <CardExpansion :expansion="getCardExpansion()" :isCorporation="isCorporationCard()"/>
+            <CardResourceCounter v-if="card.resources !== undefined" :amount="getResourceAmount(card)" />
+            <CardExtraContent :card="card" />
+            <template v-if="owner !== undefined">
+              <div :class="'card-owner-label player_translucent_bg_color_'+ owner.color">
+                {{owner.name}}
+              </div>
+            </template>
+        </div>
+</template>
+
+<script lang="ts">
+
 import Vue from 'vue';
 
 import {ICard} from '../../cards/ICard';
@@ -19,8 +43,8 @@ import {CardRequirements} from '../../cards/CardRequirements';
 import {PreferencesManager} from '../PreferencesManager';
 import {OwnerModel} from '../../components/SelectCard';
 
-
-export const Card = Vue.component('card', {
+export default Vue.extend({
+  name: 'Card',
   components: {
     CardTitle,
     CardResourceCounter,
@@ -38,9 +62,13 @@ export const Card = Vue.component('card', {
     },
     'actionUsed': {
       type: Boolean,
+      required: false,
+      default: false,
     },
     'owner': {
       type: Object as () => OwnerModel | undefined,
+      required: false,
+      default: undefined,
     },
   },
   data: function() {
@@ -110,8 +138,8 @@ export const Card = Vue.component('card', {
     getCardType: function(): CardType | undefined {
       return this.getCard()?.cardType;
     },
-    getCardNumber: function(): string | undefined {
-      return this.getCardMetadata()?.cardNumber;
+    getCardNumber: function(): string {
+      return String(this.getCardMetadata()?.cardNumber);
     },
     getCardClasses: function(card: CardModel): string {
       const classes = ['card-container', 'filterDiv', 'hover-hide-res'];
@@ -145,25 +173,6 @@ export const Card = Vue.component('card', {
       return this.getCardType() === CardType.STANDARD_PROJECT || this.getCardType() === CardType.STANDARD_ACTION;
     },
   },
-  template: `
-        <div :class="getCardClasses(card)">
-            <div class="card-content-wrapper" v-i18n>
-                <div v-if="!isStandardProject()" class="card-cost-and-tags">
-                    <CardCost :amount="getCost()" :newCost="getReducedCost()" />
-                    <CardTags :tags="getTags()" />
-                </div>
-                <CardTitle :title="card.name" :type="getCardType()"/>
-                <CardContent v-if="getCardMetadata() !== undefined" :metadata="getCardMetadata()" :requirements="getCardRequirements()" :isCorporation="isCorporationCard()"/>
-                <CardNumber v-if="getCardMetadata() !== undefined" :number="getCardNumber()"/>
-            </div>
-            <CardExpansion :expansion="getCardExpansion()" :isCorporation="isCorporationCard()"/>
-            <CardResourceCounter v-if="card.resources !== undefined" :amount="getResourceAmount(card)" />
-            <CardExtraContent :card="card" />
-            <template v-if="owner !== undefined">
-              <div :class="'card-owner-label player_translucent_bg_color_'+ owner.color">
-                {{owner.name}}
-              </div>
-            </template>
-        </div>
-    `,
 });
+
+</script>

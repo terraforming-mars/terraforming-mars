@@ -114,7 +114,7 @@
 <script lang="ts">
 
 import Vue from 'vue';
-import {Card} from './card/Card';
+import Card from './card/Card.vue';
 import {
   ALL_CARD_MANIFESTS,
   ALL_CORPORATION_CARD_NAMES,

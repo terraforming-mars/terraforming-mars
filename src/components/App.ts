@@ -10,7 +10,7 @@ import StartScreen from './StartScreen.vue';
 import {LoadGameForm} from './LoadGameForm';
 import DebugUI from './DebugUI.vue';
 import {SimpleGameModel} from '../models/SimpleGameModel';
-import {Help} from './help/Help';
+import Help from './help/Help.vue';
 
 import {$t} from '../directives/i18n';
 
@@ -77,7 +77,7 @@ export const mainAppSettings = {
     'game-end': GameEnd,
     'games-overview': GamesOverview,
     'debug-ui': DebugUI,
-    'help': Help,
+    Help,
   },
   'methods': {
     showAlert: function(message: string, cb: () => void = () => {}): void {

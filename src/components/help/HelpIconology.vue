@@ -5,7 +5,7 @@ export const HelpIconology = Vue.component('help-iconology', {
   },
   methods: {
   },
-  template: `
+<template>
     <div class="help-iconology-container">
         <div class="help-icons-column">
             <div>
@@ -208,5 +208,10 @@ export const HelpIconology = Vue.component('help-iconology', {
             </div>
         </div>
     </div>
-    `,
+</template>
+<script lang="ts">
+import Vue from 'vue';
+export default Vue.extend({
+  name: 'HelpIconology',
 });
+</script>

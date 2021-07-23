@@ -19,7 +19,10 @@ describe('MiningGuild', () => {
     card = new MiningGuild();
     player = TestPlayers.BLUE.newPlayer();
     player2 = TestPlayers.RED.newPlayer();
-    game = Game.newInstance('foobar', [player, player2], player);
+    game = Game.newInstance('foobar', [player, player2], player, TestingUtils.setCustomGameOptions({
+      aresExtension: true,
+      aresHazards: false,
+    }));
 
     player.corporationCard = card;
   });
@@ -79,7 +82,6 @@ describe('MiningGuild', () => {
   });
 
   it('Does not give bonus when overplacing', () => {
-    game.gameOptions.aresExtension = true; // Well this is a hack.
     const space = game.board.getSpaces(SpaceType.OCEAN, player).find((space) => space.bonus.includes(SpaceBonus.STEEL))!;
     game.addOceanTile(player, space.id);
     TestingUtils.runAllActions(game);

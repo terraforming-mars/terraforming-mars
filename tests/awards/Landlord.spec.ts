@@ -13,7 +13,7 @@ import {TileType} from '../../src/TileType';
 import {LandClaim} from '../../src/cards/base/LandClaim';
 import {TestingUtils} from '../TestingUtils';
 
-describe('Lanbdlord', () => {
+describe('Landlord', () => {
   let player: Player; let otherPlayer: Player; let game : Game;
   const award = new Landlord();
 

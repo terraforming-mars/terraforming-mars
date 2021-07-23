@@ -1,6 +1,6 @@
 import Vue from 'vue';
 import {PlayerInfo} from './PlayerInfo';
-import {OverviewSettings} from './OverviewSettings';
+import OverviewSettings from './OverviewSettings.vue';
 import {OtherPlayer} from '../OtherPlayer';
 import {PlayerModel, PublicPlayerModel} from '../../models/PlayerModel';
 import {ActionLabel} from './ActionLabel';

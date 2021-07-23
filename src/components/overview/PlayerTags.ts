@@ -5,13 +5,13 @@ import {PlayerModel} from '../../models/PlayerModel';
 import {Tags} from '../../cards/Tags';
 import {CardName} from '../../CardName';
 import {SpecialTags} from '../../cards/SpecialTags';
-import {isTagsViewConcise} from './OverviewSettings';
 import {PlayerTagDiscount} from './PlayerTagDiscount';
 import {JovianMultiplier} from './JovianMultiplier';
 import {PartyName} from '../../turmoil/parties/PartyName';
 import {TurmoilPolicy} from '../../turmoil/TurmoilPolicy';
 import {ColonyName} from '../../colonies/ColonyName';
 import {CardModel} from '../../models/CardModel';
+import {Shared} from './Shared';
 
 type InterfaceTagsType = Tags | SpecialTags | 'all' | 'separator';
 
@@ -131,7 +131,7 @@ export const PlayerTags = Vue.component('player-tags', {
     },
     showShortTags: function(): boolean {
       if (this.hideZeroTags === true) return true;
-      return isTagsViewConcise(this.$root);
+      return Shared.isTagsViewConcise(this.$root);
     },
     hasTagDiscount: function(tag: InterfaceTagsType): boolean {
       for (const card of [...this.player.playedCards, this.player.corporationCard]) {

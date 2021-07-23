@@ -1,5 +1,5 @@
 import Vue from 'vue';
-import {Card} from './../card/Card';
+import Card from './../card/Card.vue';
 import {CardName} from './../../CardName';
 
 export const HelpStandardProjects = Vue.component('help-standard-projects', {

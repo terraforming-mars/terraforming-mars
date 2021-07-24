@@ -1,7 +1,7 @@
 import Vue from 'vue';
 import {PlayerModel} from '../../models/PlayerModel';
 import {PlayerResources} from './PlayerResources';
-import {PlayerTags} from './PlayerTags';
+import PlayerTags from './PlayerTags.vue';
 import PlayerStatus from './PlayerStatus.vue';
 import {playerColorClass} from '../../utils/utils';
 import {mainAppSettings} from '../App';
@@ -39,7 +39,7 @@ export const PlayerInfo = Vue.component('player-info', {
   components: {
     Button,
     'player-resources': PlayerResources,
-    'player-tags': PlayerTags,
+    PlayerTags,
     'player-status': PlayerStatus,
   },
   mixins: [PlayerMixin],
@@ -133,7 +133,7 @@ export const PlayerInfo = Vue.component('player-info', {
             <span class="tag-count-display">{{ getAvailableBlueActionCount() }}</span>
           </div>
         </div>
-        <player-tags :player="player" v-trim-whitespace :isActivePlayer="getIsActivePlayer()" :hideZeroTags="hideZeroTags" />
+        <PlayerTags :player="player" v-trim-whitespace :isActivePlayer="getIsActivePlayer()" :hideZeroTags="hideZeroTags" />
       </div>
     `,
 });

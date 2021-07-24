@@ -2,7 +2,6 @@ import {CardName} from '../../CardName';
 import {Player} from '../../Player';
 import {CardType} from '../CardType';
 import {MoonExpansion} from '../../moon/MoonExpansion';
-import {Resources} from '../../Resources';
 import {CardRenderer} from '../render/CardRenderer';
 import {Units} from '../../Units';
 import {MoonCard} from './MoonCard';
@@ -28,7 +27,6 @@ export class WaterTreatmentComplex extends MoonCard {
 
   public play(player: Player) {
     super.play(player);
-    player.addProduction(Resources.PLANTS, -1, {log: true});
     MoonExpansion.raiseColonyRate(player, 2);
     return undefined;
   }

@@ -1,11 +1,4 @@
-import Vue from 'vue';
-
-export const HelpPhases = Vue.component('help-phases', {
-  components: {
-  },
-  methods: {
-  },
-  template: `
+<template>
     <div class="help-phases-container">
       <ul>
         <li>
@@ -153,5 +146,10 @@ export const HelpPhases = Vue.component('help-phases', {
         </li>
       </ul>
     </div>
-    `,
+</template>
+<script lang="ts">
+import Vue from 'vue';
+export default Vue.extend({
+  name: 'HelpPhases',
 });
+</script>

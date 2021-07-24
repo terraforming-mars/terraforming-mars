@@ -1,8 +1,31 @@
+<template>
+    <div class="help-standard-projects-container">
+
+      <h2 v-i18n>Standard Projects</h2>
+      <div class="cardbox" v-for="card in getBasicStandardProjects()" v-bind:key="card">
+        <Card :card="{'name': card}" />
+      </div>
+
+      <h2 v-i18n>Standard Projects from Expansions and Solo Mode</h2>
+      <div class="cardbox" v-for="card in getExpansionStandardProjects()" v-bind:key="card">
+        <Card :card="{'name': card}" />
+      </div>
+
+      <h2 v-i18n>Standard Project from Fan-made Expansions</h2>
+      <div class="cardbox" v-for="card in getFanMadeStandardProjects()" v-bind:key="card">
+        <Card :card="{'name': card}" />
+      </div>
+
+    </div>
+</template>
+<script lang="ts">
+
 import Vue from 'vue';
 import Card from './../card/Card.vue';
 import {CardName} from './../../CardName';
 
-export const HelpStandardProjects = Vue.component('help-standard-projects', {
+export default Vue.extend({
+  name: 'HelpStandardProjects',
   components: {
     Card,
   },
@@ -26,24 +49,5 @@ export const HelpStandardProjects = Vue.component('help-standard-projects', {
       CardName.MOON_ROAD_STANDARD_PROJECT,
     ],
   },
-  template: `
-    <div class="help-standard-projects-container">
-
-      <h2 v-i18n>Standard Projects</h2>
-      <div class="cardbox" v-for="card in getBasicStandardProjects()">
-        <Card :card="{'name': card}" />
-      </div>
-
-      <h2 v-i18n>Standard Projects from Expansions and Solo Mode</h2>
-      <div class="cardbox" v-for="card in getExpansionStandardProjects()">
-        <Card :card="{'name': card}" />
-      </div>
-
-      <h2 v-i18n>Standard Project from Fan-made Expansions</h2>
-      <div class="cardbox" v-for="card in getFanMadeStandardProjects()">
-        <Card :card="{'name': card}" />
-      </div>
-
-    </div>
-    `,
 });
+</script>

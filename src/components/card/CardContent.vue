@@ -11,7 +11,7 @@
 
 import Vue from 'vue';
 import {CardMetadata} from '../../cards/CardMetadata';
-import {CardRequirementsComponent} from './CardRequirementsComponent';
+import CardRequirementsComponent from './CardRequirementsComponent.vue';
 import CardVictoryPoints from './CardVictoryPoints.vue';
 import CardDescription from './CardDescription.vue';
 import CardRenderData from './CardRenderData.vue';

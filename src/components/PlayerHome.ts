@@ -1,7 +1,7 @@
 import Vue from 'vue';
 
 import Board from './Board.vue';
-import {Card} from './card/Card';
+import Card from './card/Card.vue';
 import Milestone from './Milestone.vue';
 import Award from './Award.vue';
 import {PlayersOverview} from './overview/PlayersOverview';

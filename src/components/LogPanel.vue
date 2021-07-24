@@ -40,7 +40,7 @@ import {LogMessageType} from '../LogMessageType';
 import {LogMessageData} from '../LogMessageData';
 import {LogMessageDataType} from '../LogMessageDataType';
 import {PlayerModel} from '../models/PlayerModel';
-import {Card} from './card/Card';
+import Card from './card/Card.vue';
 import {$t} from '../directives/i18n';
 import {CardFinder} from './../CardFinder';
 import {ICard} from '../cards/ICard';

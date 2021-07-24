@@ -6,6 +6,7 @@ import {Tags} from '../Tags';
 import {Player} from '../../Player';
 import {Resources} from '../../Resources';
 import {CardRenderer} from '../../cards/render/CardRenderer';
+import {DEFAULT_TAG_COUNT} from '../../constants';
 
 export class InterplanetaryTrade extends Card implements IProjectCard {
   constructor() {
@@ -30,8 +31,10 @@ export class InterplanetaryTrade extends Card implements IProjectCard {
   public play(player: Player) {
     // This card tag is counting as well
     const availableTags = player.getDistinctTagCount(true, Tags.SPACE);
-    // Only count wildcards up to the max amount of tag types existing (minus events and wildcards)
-    const existingTags = Object.keys(Tags).length - 2;
+    // There is only 10 tags in the base game. One more for Venus and one more for Moon.
+    let existingTags = DEFAULT_TAG_COUNT;
+    if (player.game.gameOptions.venusNextExtension) existingTags++;
+    if (player.game.gameOptions.moonExpansion) existingTags++;
     player.addProduction(Resources.MEGACREDITS, Math.min(availableTags, existingTags), {log: true});
     return undefined;
   }

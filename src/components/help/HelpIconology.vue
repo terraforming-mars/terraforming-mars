@@ -1,10 +1,3 @@
-import Vue from 'vue';
-
-export const HelpIconology = Vue.component('help-iconology', {
-  components: {
-  },
-  methods: {
-  },
 <template>
     <div class="help-iconology-container">
         <div class="help-icons-column">

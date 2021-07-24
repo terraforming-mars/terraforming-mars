@@ -2,6 +2,7 @@ import {Game, GameId, SpectatorId} from '../Game';
 import {PlayerId} from '../Player';
 
 type LoadCallback = (game: Game | undefined) => void;
+type ListLoadCallback = (list: Array<{id: GameId, participants: Array<SpectatorId | PlayerId>}> | undefined) => void;
 
 /**
  * Loads games from javascript memory or database
@@ -9,7 +10,7 @@ type LoadCallback = (game: Game | undefined) => void;
  */
 export interface IGameLoader {
   add(game: Game): void;
-  getLoadedGameIds(): Array<{id: GameId, participants: Array<SpectatorId | PlayerId>}>;
+  getLoadedGameIds(cb: ListLoadCallback): void;
   /**
    * Gets a game from javascript memory or pulls from database if needed.
    * @param {GameId} gameId the id of the game to retrieve

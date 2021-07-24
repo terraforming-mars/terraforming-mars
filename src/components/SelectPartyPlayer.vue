@@ -44,12 +44,12 @@ export default Vue.extend({
       selectedPlayer: undefined as ColorWithNeutral | undefined,
     };
   },
-  mixins: [TranslateMixin],
   components: {
     Button,
     'select-player-row': SelectPlayerRow,
   },
   methods: {
+    ...TranslateMixin.methods,
     saveData: function() {
       const result: string[][] = [];
       result.push([]);

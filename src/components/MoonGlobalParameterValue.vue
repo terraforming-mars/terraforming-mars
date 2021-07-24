@@ -28,7 +28,6 @@ export default Vue.extend({
       type: Object as () => MoonModel,
     },
   },
-  mixins: [TranslateMixin],
   methods: {
     ...TranslateMixin.methods,
     isMax: function(): boolean {

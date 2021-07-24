@@ -1,4 +1,17 @@
+<template>
+  <div>
+    <div v-if="showtitle === true">{{ $t(playerinput.title) }}</div>
+    <label v-for="player in (playerinput.players || [])" :key="player" class="form-radio form-inline">
+      <input type="radio" v-model="selectedPlayer" :value="player" />
+      <i class="form-icon"></i>
+      <span v-if="player === 'NEUTRAL'" >Neutral</span>
+      <select-player-row v-else :player="players.find((otherPlayer) => otherPlayer.color === player)"></select-player-row>
+    </label>
+    <Button v-if="showsave === true" size="big" :onClick="saveData" :title="$t(playerinput.buttonLabel)" />
+  </div>
+</template>
 
+<script lang="ts">
 import Vue from 'vue';
 import Button from '../components/common/Button.vue';
 import {ColorWithNeutral} from '../Color';
@@ -7,7 +20,8 @@ import {PlayerModel} from '../models/PlayerModel';
 import {SelectPlayerRow} from './SelectPlayerRow';
 import {TranslateMixin} from './TranslateMixin';
 
-export const SelectPartyPlayer = Vue.component('select-party-player', {
+export default Vue.extend({
+  name: 'SelectPartyPlayer',
   props: {
     players: {
       type: Array as () => Array<PlayerModel>,
@@ -30,12 +44,12 @@ export const SelectPartyPlayer = Vue.component('select-party-player', {
       selectedPlayer: undefined as ColorWithNeutral | undefined,
     };
   },
-  mixins: [TranslateMixin],
   components: {
     Button,
     'select-player-row': SelectPlayerRow,
   },
   methods: {
+    ...TranslateMixin.methods,
     saveData: function() {
       const result: string[][] = [];
       result.push([]);
@@ -45,15 +59,5 @@ export const SelectPartyPlayer = Vue.component('select-party-player', {
       this.onsave(result);
     },
   },
-  template: `<div>
-  <div v-if="showtitle === true">{{ $t(playerinput.title) }}</div>
-  <label v-for="player in (playerinput.players || [])" :key="player" class="form-radio form-inline">
-    <input type="radio" v-model="selectedPlayer" :value="player" />
-    <i class="form-icon"></i>
-    <span v-if="player === 'NEUTRAL'" >Neutral</span>
-    <select-player-row v-else :player="players.find((otherPlayer) => otherPlayer.color === player)"></select-player-row>
-  </label>
-  <Button v-if="showsave === true" size="big" :onClick="saveData" :title="$t(playerinput.buttonLabel)" />
-</div>`,
 });
-
+</script>

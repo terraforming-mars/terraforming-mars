@@ -1,6 +1,16 @@
+<template>
+  <div class="player-tag-discount">
+    <div class="megacredits-container">
+      <div class="megacredits">{{ getAmount() }}</div>
+    </div>
+  </div>
+</template>
+
+<script lang="ts">
 import Vue from 'vue';
 
-export const PlayerTagDiscount = Vue.component('PlayerTagDiscount', {
+export default Vue.extend({
+  name: 'PlayerTagDiscount',
   props: {
     amount: {
       type: Number,
@@ -11,11 +21,5 @@ export const PlayerTagDiscount = Vue.component('PlayerTagDiscount', {
       return this.amount * -1;
     },
   },
-  template: `
-    <div class="player-tag-discount">
-      <div class="megacredits-container">
-        <div class="megacredits">{{ getAmount() }}</div>
-      </div>
-    </div>
-  `,
 });
+</script>

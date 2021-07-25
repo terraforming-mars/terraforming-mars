@@ -17,7 +17,7 @@ import PlayerResource from './PlayerResource.vue';
 import {Resources} from '../../Resources';
 
 export default Vue.extend({
-  name: ' PlayerResources',
+  name: 'PlayerResources',
   props: {
     player: {
       type: Object as () => PlayerModel,

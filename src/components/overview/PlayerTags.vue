@@ -41,7 +41,7 @@ import {PlayerModel} from '../../models/PlayerModel';
 import {Tags} from '../../cards/Tags';
 import {CardName} from '../../CardName';
 import {SpecialTags} from '../../cards/SpecialTags';
-import {PlayerTagDiscount} from './PlayerTagDiscount';
+import PlayerTagDiscount from './PlayerTagDiscount.vue';
 import JovianMultiplier from './JovianMultiplier.vue';
 import {PartyName} from '../../turmoil/parties/PartyName';
 import {TurmoilPolicy} from '../../turmoil/TurmoilPolicy';

@@ -1,13 +1,41 @@
-import Vue, {VNode} from 'vue';
-import {$t} from '../directives/i18n';
+<template>
+  <div class='wf-options'>
+    <label v-if="showtitle"><div>{{ $t(playerinput.title) }}</div></label>
+    <div v-for="(option, idx) in displayedOptions" :key="idx">
+      <label class="form-radio">
+        <input v-model="selectedOption" type="radio" value="option" />
+        <i class="form-icon" />
+        <span>{{ $t(option.title) }}</span>
+      </label>
+      <div v-if="selectedOption === option" style="margin-left: 30px">
+        <player-input-factory ref="inputfactory"
+                              :players="players"
+                              :player="player"
+                              :playerinput="option"
+                              :onsave="playerFactorySaved()"
+                              :showsave="false"
+                              :showtitle="true" />
+      </div>
+    </div>
+    <div v-if="showsave">
+      <div style="margin: 5px 30px 10px" class="wf-action">
+        <Button :title="$t(selectedOption.buttonLabel)" type="submit" size="normal" :onClick="saveData" />
+      </div>
+    </div>
+  </div>
+</template>
+
+<script lang="ts">
+
+import Vue from 'vue';
 import Button from '../components/common/Button.vue';
 import {PlayerModel} from '../models/PlayerModel';
 import {PlayerInputModel} from '../models/PlayerInputModel';
 import {PreferencesManager} from './PreferencesManager';
+import {TranslateMixin} from '../components/TranslateMixin';
 
-let unique: number = 0;
-
-export const OrOptions = Vue.component('or-options', {
+export default Vue.extend({
+  name: 'or-options',
   props: {
     player: {
       type: Object as () => PlayerModel,
@@ -28,132 +56,39 @@ export const OrOptions = Vue.component('or-options', {
       type: Boolean,
     },
   },
+  components: {
+    Button,
+  },
   data: function() {
-    return {
-      selectedOption: 0,
-    };
-  },
-  methods: {
-    saveData: function() {
-      const componentInstance = this.$data.childComponents[
-        this.$data.selectedOption
-      ].componentInstance;
-      if (componentInstance !== undefined) {
-        if ((componentInstance as any).saveData instanceof Function) {
-          (componentInstance as any).saveData();
-          return;
-        }
-      }
-      throw new Error('Unexpected unable to save data');
-    },
-  },
-  render: function(createElement) {
-    unique++;
-    this.$data.childComponents = [];
-    const children: Array<VNode> = [];
-    if (this.showtitle) {
-      children.push(
-        createElement('label', [
-          createElement('div', $t(this.playerinput.title)),
-        ]),
-      );
-    }
-    const optionElements: Array<VNode> = [];
     if (this.playerinput.options === undefined) {
       throw new Error('no options provided for OrOptions');
     }
-    this.playerinput.options.forEach((option: any, idx: number) => {
-      const domProps: { [key: string]: any } = {
-        name: 'selectOption' + unique,
-        type: 'radio',
-        value: String(idx),
-      };
-      const displayStyle: string =
-                this.$data.selectedOption === idx ? 'block' : 'none';
-      const subchildren: Array<VNode> = [];
-      if (this.$data.selectedOption === idx) {
-        domProps.checked = true;
+    const displayedOptions = this.playerinput.options.filter((o) => o.showOnlyInLearnerMode === false || PreferencesManager.loadBoolean('learner_mode')),
+    return {
+      displayedOptions,
+      selectedOption: displayedOptions[0],
+    };
+  },
+  methods: {
+    ...TranslateMixin.methods,
+    playerFactorySaved: function() {
+      const idx = this.playerinput.options?.indexOf(this.selectedOption);
+      if (idx === undefined || idx === -1) {
+        throw new Error("option not found!");
       }
-      subchildren.push(
-        createElement('label', {'class': 'form-radio'}, [
-          createElement('input', {
-            domProps,
-            on: {
-              change: (event: any) => {
-                this.selectedOption = Number(
-                  event.target.value,
-                );
-              },
-            },
-          }),
-          createElement('i', {'class': 'form-icon'}),
-          createElement('span', $t(option.title)),
-        ]),
-      );
-      this.$data.childComponents.push(
-        createElement('player-input-factory', {attrs: {
-          players: this.players,
-          player: this.player,
-          playerinput: option,
-          onsave: (out: Array<Array<string>>) => {
-            const copy = [[String(idx)]];
-            for (let i = 0; i < out.length; i++) {
-              copy.push(out[i].slice());
-            }
-            this.onsave(copy);
-          },
-          showsave: false,
-          showtitle: false,
-        }}),
-      );
-      subchildren.push(
-        createElement(
-          'div',
-          {style: {display: displayStyle, marginLeft: '30px'}},
-          [
-            this.$data.childComponents[
-              this.$data.childComponents.length - 1
-            ],
-          ],
-        ),
-      );
-      optionElements.push(subchildren[subchildren.length - 1]);
-
-      // Show all option by default unless it is told to show only in learner mode
-      let showOption = true;
-      if (option.showOnlyInLearnerMode && !PreferencesManager.loadBoolean('learner_mode')) {
-        showOption = false;
-      }
-
-      // Only push this orOption element if we are showing it
-      if (showOption) {
-        children.push(createElement('div', subchildren));
-
-        if (this.showsave && this.$data.selectedOption === idx) {
-          children.push(
-            createElement(
-              'div',
-              {
-                'style': {'margin': '5px 30px 10px'},
-                'class': 'wf-action',
-              },
-              [
-                createElement(Button, {
-                  props: {
-                    title: $t(option.buttonLabel),
-                    type: 'submit',
-                    size: 'normal',
-                    onClick: () => {
-                      this.saveData();
-                    },
-                  },
-                }),
-              ],
-            ),
-          );
+      return (out: Array<Array<string>>) => {
+        const copy = [[String(idx)]];
+        for (let i = 0; i < out.length; i++) {
+          copy.push(out[i].slice());
         }
-      }
-    });
-    return createElement('div', {'class': 'wf-options'}, children);
+        this.onsave(copy);
+      };
+    },
+    saveData: function() {
+      (this.$refs['inputfactory'] as any).saveData();
+    },
   },
 });
+
+</script>
+

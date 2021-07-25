@@ -9,7 +9,7 @@ import {PlayerInputTypes} from '../PlayerInputTypes';
 import {PlayerModel} from '../models/PlayerModel';
 import {PlayerInputModel} from '../models/PlayerInputModel';
 import AndOptions from './AndOptions.vue';
-import {OrOptions} from './OrOptions';
+import OrOptions from './OrOptions.vue';
 import {SelectAmount} from './SelectAmount';
 import {SelectCard} from './SelectCard';
 import {SelectHowToPay} from './SelectHowToPay';

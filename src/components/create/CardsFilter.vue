@@ -1,3 +1,29 @@
+<template>
+    <div class="cards-filter">
+        <h2 v-i18n>Cards to exclude from the game</h2>
+        <div class="cards-filter-results-cont" v-if="selectedCardNames.length">
+            <div class="cards-filter-result" v-for="cardName in selectedCardNames" v-bind:key="cardName">
+                <label>{{ cardName }}<i class="create-game-expansion-icon expansion-icon-prelude" title="This card is prelude" v-if="isPrelude(cardName)"></i></label>
+                <Button size="small" type="close" :onClick="_=>removeCard(cardName)" />
+            </div>
+        </div>
+        <div class="cards-filter-input">
+            <div>
+                <input class="form-input" :placeholder="$t('Start typing the card name to exclude')" v-model="searchTerm" />
+            </div>
+            <div class="cards-filter-suggest" v-if="foundCardNames.length">
+                <div class="cards-filter-suggest-item" v-for="cardName in foundCardNames" v-bind:key="cardName">
+                    <a href="#" v-on:click.prevent="addCard(cardName)">
+                      {{ cardName }}
+                      <i class="create-game-expansion-icon expansion-icon-prelude" title="This card is prelude" v-if="isPrelude(cardName)"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</template>
+
+<script lang="ts">
 import Vue from 'vue';
 import {CardName} from '../../CardName';
 import {ALL_PRELUDE_CARD_NAMES, ALL_PROJECT_CARD_NAMES} from '../../cards/AllCards';
@@ -12,7 +38,8 @@ interface CardsFilterModel {
     searchTerm: string;
 }
 
-export const CardsFilter = Vue.component('cards-filter', {
+export default Vue.extend({
+  name: 'CardsFilter',
   props: {},
   data: function() {
     return {
@@ -22,8 +49,8 @@ export const CardsFilter = Vue.component('cards-filter', {
     } as CardsFilterModel;
   },
   components: {Button},
-  mixins: [TranslateMixin],
   methods: {
+    ...TranslateMixin.methods,
     isPrelude: function(cardName: CardName) {
       return ALL_PRELUDE_CARD_NAMES.includes(cardName);
     },
@@ -61,28 +88,5 @@ export const CardsFilter = Vue.component('cards-filter', {
       this.foundCardNames = newCardNames.slice(0, 5);
     },
   },
-  template: `
-    <div class="cards-filter">
-        <h2 v-i18n>Cards to exclude from the game</h2>
-        <div class="cards-filter-results-cont" v-if="selectedCardNames.length">
-            <div class="cards-filter-result" v-for="cardName in selectedCardNames">
-                <label>{{ cardName }}<i class="create-game-expansion-icon expansion-icon-prelude" title="This card is prelude" v-if="isPrelude(cardName)"></i></label>
-                <Button size="small" type="close" :onClick="_=>removeCard(cardName)" /> 
-            </div>
-        </div>
-        <div class="cards-filter-input">
-            <div>
-                <input class="form-input" :placeholder="$t('Start typing the card name to exclude')" v-model="searchTerm" />
-            </div>
-            <div class="cards-filter-suggest" v-if="foundCardNames.length">
-                <div class="cards-filter-suggest-item" v-for="cardName in foundCardNames">
-                    <a href="#" v-on:click.prevent="addCard(cardName)">
-                      {{ cardName }}
-                      <i class="create-game-expansion-icon expansion-icon-prelude" title="This card is prelude" v-if="isPrelude(cardName)"></i>
-                    </a> 
-                </div>
-            </div>
-        </div>
-    </div>
-    `,
 });
+</script>

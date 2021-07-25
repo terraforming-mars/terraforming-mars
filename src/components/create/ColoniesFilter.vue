@@ -1,3 +1,26 @@
+<template>
+    <div class="colonies-filter">
+        <div>
+            <h2 v-i18n>Colonies</h2>
+        </div>
+        <div class="colonies-filter-list">
+            <h2 v-i18n>Official</h2>
+            <label class="form-checkbox" v-for="colony in officialColonies" v-bind:key="colony.name">
+                <input type="checkbox" v-model="selectedColonies" :value="colony">
+                <i class="form-icon"></i><span v-i18n>{{ colony.name }} - ({{ colony.description }})</span>
+            </label>
+        </div>
+        <div class="colonies-filter-list">
+            <h2 v-i18n>Community</h2>
+            <label class="form-checkbox" v-for="colony in communityColonies" v-bind:key="colony.name">
+                <input type="checkbox" v-model="selectedColonies" :value="colony">
+                <i class="form-icon"></i><span v-i18n>{{ colony.name }} - ({{ colony.description }})</span>
+            </label>
+        </div>
+    </div>
+</template>
+
+<script lang="ts">
 import Vue from 'vue';
 import {Callisto} from '../../colonies/Callisto';
 import {Ceres} from '../../colonies/Ceres';
@@ -20,7 +43,7 @@ import {Venus} from '../../cards/community/Venus';
 import {Leavitt} from '../../cards/community/Leavitt';
 import {Pallas} from '../../cards/community/Pallas';
 
-const officialColonies: Array<Colony> = [
+const OFFICIAL_COLONIES: Array<Colony> = [
   new Callisto(),
   new Ceres(),
   new Enceladus(),
@@ -34,7 +57,7 @@ const officialColonies: Array<Colony> = [
   new Triton(),
 ];
 
-const communityColonies: Array<Colony> = [
+const COMMUNITY_COLONIES: Array<Colony> = [
   new Iapetus(),
   new Mercury(),
   new Hygiea(),
@@ -44,7 +67,8 @@ const communityColonies: Array<Colony> = [
   new Pallas(),
 ];
 
-export const ColoniesFilter = Vue.component('colonies-filter', {
+export default Vue.extend({
+  name: 'ColoniesFilter',
   props: {
     communityCardsOption: {
       type: Boolean,
@@ -58,13 +82,13 @@ export const ColoniesFilter = Vue.component('colonies-filter', {
   },
   data: function() {
     return {
-      allColonies: officialColonies.concat(communityColonies),
-      officialColonies: officialColonies,
-      communityColonies: communityColonies,
+      allColonies: OFFICIAL_COLONIES.concat(COMMUNITY_COLONIES),
+      officialColonies: OFFICIAL_COLONIES,
+      communityColonies: COMMUNITY_COLONIES,
       selectedColonies: [
-        ...officialColonies,
-        ...this.communityCardsOption ? communityColonies: [],
-      ] as Array<Colony> | boolean,
+        ...OFFICIAL_COLONIES,
+        ...this.communityCardsOption ? COMMUNITY_COLONIES: [],
+      ],
     };
   },
   methods: {
@@ -87,11 +111,11 @@ export const ColoniesFilter = Vue.component('colonies-filter', {
     },
     communityCardsOption: function(enabled) {
       if (enabled) {
-        this.selectedColonies = officialColonies.concat(communityColonies).slice();
+        this.selectedColonies = OFFICIAL_COLONIES.concat(COMMUNITY_COLONIES).slice();
         if (this.venusNext === false) this.selectedColonies = this.selectedColonies.filter((c) => c.name !== ColonyName.VENUS);
         if (this.turmoil === false) this.selectedColonies = this.selectedColonies.filter((c) => c.name !== ColonyName.PALLAS);
       } else {
-        this.selectedColonies = officialColonies.slice();
+        this.selectedColonies = OFFICIAL_COLONIES.slice();
       }
     },
     venusNext: function(enabled) {
@@ -113,25 +137,5 @@ export const ColoniesFilter = Vue.component('colonies-filter', {
       }
     },
   },
-  template: `
-    <div class="colonies-filter">
-        <div>
-            <h2 v-i18n>Colonies</h2>
-        </div>
-        <div class="colonies-filter-list">
-            <h2 v-i18n>Official</h2>
-            <label class="form-checkbox" v-for="colony in officialColonies">
-                <input type="checkbox" v-model="selectedColonies" :value="colony"/>
-                <i class="form-icon"></i><span v-i18n>{{ colony.name }} - ({{ colony.description }})</span>
-            </label>
-        </div>
-        <div class="colonies-filter-list">
-            <h2 v-i18n>Community</h2>
-            <label class="form-checkbox" v-for="colony in communityColonies">
-                <input type="checkbox" v-model="selectedColonies" :value="colony"/>
-                <i class="form-icon"></i><span v-i18n>{{ colony.name }} - ({{ colony.description }})</span>
-            </label>
-        </div>
-    </div>
-    `,
 });
+</script>

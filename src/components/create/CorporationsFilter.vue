@@ -1,3 +1,35 @@
+<template>
+    <div class="corporations-filter">
+        <div class="corporations-filter-toolbox-cont">
+            <h2 v-i18n>Corporations</h2>
+            <div class="corporations-filter-toolbox corporations-filter-toolbox--topmost">
+                <a href="#" v-i18n v-on:click.prevent="selectAll('All')">All*</a> |
+                <a href="#" v-i18n v-on:click.prevent="selectNone('All')">None*</a> |
+                <a href="#" v-i18n v-on:click.prevent="invertSelection('All')">Invert*</a>
+            </div>
+        </div>
+        <br/>
+          <div class="corporations-filter-group" v-for="entry in corpsByModule" v-bind:key="entry[0]">
+            <div v-if="entry[1].length > 0">
+              <div class="corporations-filter-toolbox-cont">
+                  <div class="corporations-filter-toolbox">
+                      <a href="#" v-i18n v-on:click.prevent="selectAll(entry[0])">All</a> |
+                      <a href="#" v-i18n v-on:click.prevent="selectNone(entry[0])">None</a> |
+                      <a href="#" v-i18n v-on:click.prevent="invertSelection(entry[0])">Invert</a>
+                  </div>
+              </div>
+              <div v-for="corporation in entry[1]" v-bind:key="corporation">
+                  <label class="form-checkbox">
+                      <input type="checkbox" v-model="selectedCorporations" :value="corporation"/>
+                      <i class="form-icon"></i>{{ corporation }}
+                  </label>
+              </div>
+          </div>
+        </div>
+    </div>
+</template>
+
+<script lang="ts">
 import Vue from 'vue';
 
 import {CardName} from '../../CardName';
@@ -27,7 +59,8 @@ ALL_CARD_MANIFESTS.forEach((manifest) => {
   });
 });
 
-export const CorporationsFilter = Vue.component('corporations-filter', {
+export default Vue.extend({
+  name: 'CorporationsFilter',
   props: {
     corporateEra: {
       type: Boolean,
@@ -154,32 +187,5 @@ export const CorporationsFilter = Vue.component('corporations-filter', {
       enabled ? this.selectAll(GameModule.Moon) : this.selectNone(GameModule.Moon);
     },
   },
-  template: `
-    <div class="corporations-filter">
-        <div class="corporations-filter-toolbox-cont">
-            <h2 v-i18n>Corporations</h2>
-            <div class="corporations-filter-toolbox corporations-filter-toolbox--topmost">
-                <a href="#" v-i18n v-on:click.prevent="selectAll('All')">All*</a> |
-                <a href="#" v-i18n v-on:click.prevent="selectNone('All')">None*</a> |
-                <a href="#" v-i18n v-on:click.prevent="invertSelection('All')">Invert*</a>
-            </div>
-        </div>
-        <br/>
-        <div class="corporations-filter-group" v-for="entry in corpsByModule" v-if="entry[1].length > 0">
-            <div class="corporations-filter-toolbox-cont">
-                <div class="corporations-filter-toolbox">
-                    <a href="#" v-i18n v-on:click.prevent="selectAll(entry[0])">All</a> |
-                    <a href="#" v-i18n v-on:click.prevent="selectNone(entry[0])">None</a> |
-                    <a href="#" v-i18n v-on:click.prevent="invertSelection(entry[0])">Invert</a>
-                </div>
-            </div>
-            <div v-for="corporation in entry[1]">
-                <label class="form-checkbox">
-                    <input type="checkbox" v-model="selectedCorporations" :value="corporation"/>
-                    <i class="form-icon"></i>{{ corporation }}
-                </label>
-            </div>
-        </div>
-    </div>
-    `,
 });
+</script>

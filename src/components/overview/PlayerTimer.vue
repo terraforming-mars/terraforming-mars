@@ -1,8 +1,22 @@
+<template>
+  <div class="player-timer">
+    <template v-if="hasHours()">
+        <div class="player-timer-hours time-part">{{ getHours() }}</div>
+        <div class="timer-delimiter">:</div>
+    </template>
+    <div class="player-timer-minutes time-part">{{ getMinutes() }}</div>
+    <div class="timer-delimiter">:</div>
+    <div class="player-timer-seconds time-part">{{ getSeconds() }}</div>
+  </div>
+</template>
+
+<script lang="ts">
 import Vue from 'vue';
 import {Timer} from '../../Timer';
 import {SerializedTimer} from '../../SerializedTimer';
 
-export const PlayerTimer = Vue.component('player-timer', {
+export default Vue.extend({
+  name: 'PlayerTimer',
   props: {
     timer: {
       type: Object as () => SerializedTimer,
@@ -54,15 +68,5 @@ export const PlayerTimer = Vue.component('player-timer', {
       return this.timerText.split(':')[1];
     },
   },
-  template: `
-    <div class="player-timer">
-      <template v-if="hasHours()">
-         <div class="player-timer-hours time-part">{{ getHours() }}</div>
-         <div class="timer-delimiter">:</div>
-      </template>   
-      <div class="player-timer-minutes time-part">{{ getMinutes() }}</div>
-      <div class="timer-delimiter">:</div>
-      <div class="player-timer-seconds time-part">{{ getSeconds() }}</div>
-    </div>
-  `,
 });
+</script>

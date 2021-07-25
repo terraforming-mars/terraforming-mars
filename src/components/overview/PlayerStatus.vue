@@ -15,7 +15,7 @@ import Vue from 'vue';
 import {ActionLabel} from './ActionLabel';
 import {mainAppSettings} from '../App';
 import {PlayerModel} from '../../models/PlayerModel';
-import {PlayerTimer} from './PlayerTimer';
+import PlayerTimer from './PlayerTimer.vue';
 
 export const hidePlayerData = (root: typeof mainAppSettings.methods, playerIndex: number) => {
   root.setVisibilityState('pinned_player_' + playerIndex, false);

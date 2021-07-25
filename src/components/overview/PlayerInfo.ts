@@ -38,7 +38,7 @@ export const PlayerInfo = Vue.component('player-info', {
   },
   components: {
     Button,
-    'player-resources': PlayerResources,
+    PlayerResources,
     PlayerTags,
     'player-status': PlayerStatus,
   },
@@ -109,7 +109,7 @@ export const PlayerInfo = Vue.component('player-info', {
           </div>
           <player-status :player="player" :firstForGen="firstForGen" v-trim-whitespace :actionLabel="actionLabel" :playerIndex="playerIndex"/>
         </div>
-          <player-resources :player="player" v-trim-whitespace />
+          <PlayerResources :player="player" v-trim-whitespace />
           <div class="player-played-cards">
             <div class="player-played-cards-top">
               <div class="played-cards-elements">

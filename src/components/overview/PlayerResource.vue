@@ -41,11 +41,11 @@ export default Vue.extend({
     },
     steelValue: {
       type: Number,
-      default: 2,
+      default: DEFAULT_STEEL_VALUE,
     },
     titaniumValue: {
       type: Number,
-      default: 3,
+      default: DEFAULT_TITANIUM_VALUE,
     },
   },
   data: function() {

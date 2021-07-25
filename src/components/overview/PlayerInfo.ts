@@ -1,6 +1,6 @@
 import Vue from 'vue';
 import {PlayerModel} from '../../models/PlayerModel';
-import {PlayerResources} from './PlayerResources';
+import PlayerResources from './PlayerResources.vue';
 import PlayerTags from './PlayerTags.vue';
 import PlayerStatus from './PlayerStatus.vue';
 import {playerColorClass} from '../../utils/utils';

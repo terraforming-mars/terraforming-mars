@@ -1,34 +1,4 @@
-import Vue from 'vue';
-import {HelpIconology} from './HelpIconology';
-import {HelpPhases} from './HelpPhases';
-import {HelpStandardProjects} from './HelpStandardProjects';
-
-type Tab = 'iconology' | 'standard projects' | 'phases' | 'hotkeys';
-
-export interface HelpPageModel {
-    currentPage: Tab;
-}
-
-export const Help = Vue.component('help', {
-  data: function(): HelpPageModel {
-    return {
-      currentPage: 'iconology',
-    };
-  },
-  components: {
-    'iconology': HelpIconology,
-    'standard-projects': HelpStandardProjects,
-    'phases': HelpPhases,
-  },
-  methods: {
-    setTab: function(tab: Tab): void {
-      this.currentPage = tab;
-    },
-    isOpen: function(tab: Tab): boolean {
-      return tab === this.currentPage;
-    },
-  },
-  template: `
+<template>
     <div class="help-container">
 
         <div class="help-tabs">
@@ -50,11 +20,11 @@ export const Help = Vue.component('help', {
             </label>
         </div>
 
-        <help-iconology v-if="isOpen('iconology')"></help-iconology>
+        <HelpIconology v-if="isOpen('iconology')"></HelpIconology>
 
-        <help-standard-projects v-if="isOpen('standard projects')"></help-standard-projects>
+        <HelpStandardProjects v-if="isOpen('standard projects')"></HelpStandardProjects>
 
-        <help-phases v-if="isOpen('phases')"></help-phases>
+        <HelpPhases v-if="isOpen('phases')"></HelpPhases>
 
         <div v-if="isOpen('hotkeys')">
           <div class="help-hotkeys">
@@ -67,7 +37,41 @@ export const Help = Vue.component('help', {
           </div>
           <div class="help-hotkeys-example"></div>
         </div>
-        
+
     </div>
-    `,
+</template>
+<script lang="ts">
+import Vue from 'vue';
+import HelpIconology from './HelpIconology.vue';
+import HelpPhases from './HelpPhases.vue';
+import HelpStandardProjects from './HelpStandardProjects.vue';
+
+type Tab = 'iconology' | 'standard projects' | 'phases' | 'hotkeys';
+
+export interface HelpPageModel {
+    currentPage: Tab;
+}
+
+export default Vue.extend({
+  name: 'Help',
+  data: function(): HelpPageModel {
+    return {
+      currentPage: 'iconology',
+    };
+  },
+  components: {
+    HelpIconology,
+    HelpStandardProjects,
+    HelpPhases,
+  },
+  methods: {
+    setTab: function(tab: Tab): void {
+      this.currentPage = tab;
+    },
+    isOpen: function(tab: Tab): boolean {
+      return tab === this.currentPage;
+    },
+  },
+
 });
+</script>

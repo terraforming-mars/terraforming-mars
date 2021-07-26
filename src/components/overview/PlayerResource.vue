@@ -1,15 +1,33 @@
+<template>
+  <div class="resource_item" :class="mainCSS()">
+      <div class="resource_item_stock">
+          <i class="resource_icon" :class="iconCSS()"></i>
+          <div class="resource_item_stock_count">{{ count }}</div>
+      </div>
+      <div class="resource_item_prod">
+          <span class="resource_item_prod_count">{{ productionSign() }}{{ production }}</span>
+          <div v-if="displayPlantsProtectedIcon()" class="shield_icon"></div>
+          <div v-if="showResourceValue()" class="resource_icon--metalbonus">{{ getResourceValue() }}</div>
+      </div>
+  </div>
+</template>
+
+<script lang="ts">
+
 import Vue from 'vue';
 import {DEFAULT_STEEL_VALUE, DEFAULT_TITANIUM_VALUE} from '../../constants';
 import {Resources} from '../../Resources';
 import {PreferencesManager} from '../PreferencesManager';
 
-export const PlayerResource = Vue.component('player-resource', {
+export default Vue.extend({
+  name: 'PlayerResource',
   props: {
     type: {
       type: String as () => Resources,
     },
     canUseHeatAsMegaCredits: {
-      type: Boolean || undefined,
+      type: Boolean,
+      default: false,
     },
     count: {
       type: Number,
@@ -18,13 +36,16 @@ export const PlayerResource = Vue.component('player-resource', {
       type: Number,
     },
     plantsAreProtected: {
-      type: Boolean || undefined,
+      type: Boolean,
+      default: false,
     },
     steelValue: {
       type: Number,
+      default: DEFAULT_STEEL_VALUE,
     },
     titaniumValue: {
       type: Number,
+      default: DEFAULT_TITANIUM_VALUE,
     },
   },
   data: function() {
@@ -70,17 +91,5 @@ export const PlayerResource = Vue.component('player-resource', {
       }
     },
   },
-  template: `
-        <div class="resource_item" :class="mainCSS()">
-            <div class="resource_item_stock">
-                <i class="resource_icon" :class="iconCSS()"></i>
-                <div class="resource_item_stock_count">{{ count }}</div>
-            </div>
-            <div class="resource_item_prod">
-                <span class="resource_item_prod_count">{{ productionSign() }}{{ production }}</span>
-                <div v-if="displayPlantsProtectedIcon()" class="shield_icon"></div>
-                <div v-if="showResourceValue()" class="resource_icon--metalbonus">{{ getResourceValue() }}</div>
-            </div>
-        </div>
-    `,
 });
+</script>

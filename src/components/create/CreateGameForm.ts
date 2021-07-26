@@ -2,12 +2,12 @@ import Vue from 'vue';
 import {Color} from '../../Color';
 import {BoardName} from '../../boards/BoardName';
 import {CardName} from '../../CardName';
-import {CorporationsFilter} from './CorporationsFilter';
+import CorporationsFilter from './CorporationsFilter.vue';
 import {translateTextWithParams} from '../../directives/i18n';
 import {IGameData} from '../../database/IDatabase';
-import {ColoniesFilter} from './ColoniesFilter';
+import ColoniesFilter from './ColoniesFilter.vue';
 import {ColonyName} from '../../colonies/ColonyName';
-import {CardsFilter} from './CardsFilter';
+import CardsFilter from './CardsFilter.vue';
 import Button from '../common/Button.vue';
 import {playerColorClass} from '../../utils/utils';
 import {RandomMAOptionType} from '../../RandomMAOptionType';
@@ -139,10 +139,10 @@ export const CreateGameForm = Vue.component('create-game-form', {
     };
   },
   components: {
-    'corporations-filter': CorporationsFilter,
-    'colonies-filter': ColoniesFilter,
-    'cards-filter': CardsFilter,
     Button,
+    CardsFilter,
+    ColoniesFilter,
+    CorporationsFilter,
   },
   mounted: function() {
     if (window.location.pathname === '/solo') {
@@ -866,7 +866,7 @@ export const CreateGameForm = Vue.component('create-game-form', {
 
 
             <div class="create-game--block" v-if="showCorporationList">
-              <corporations-filter
+              <CorporationsFilter
                   ref="corporationsFilter"
                   v-on:corporation-list-changed="updateCustomCorporationsList"
                   v-bind:corporateEra="corporateEra"
@@ -877,24 +877,24 @@ export const CreateGameForm = Vue.component('create-game-form', {
                   v-bind:promoCardsOption="promoCardsOption"
                   v-bind:communityCardsOption="communityCardsOption"
                   v-bind:moonExpansion="moonExpansion"
-              ></corporations-filter>
+              ></CorporationsFilter>
             </div>
 
             <div class="create-game--block" v-if="showColoniesList">
-              <colonies-filter
+              <ColoniesFilter
                   ref="coloniesFilter"
                   v-on:colonies-list-changed="updateCustomColoniesList"
                   v-bind:venusNext="venusNext"
                   v-bind:turmoil="turmoil"
                   v-bind:communityCardsOption="communityCardsOption"
-              ></colonies-filter>
+              ></ColoniesFilter>
             </div>
 
             <div class="create-game--block" v-if="showCardsBlackList">
-              <cards-filter
+              <CardsFilter
                   ref="cardsFilter"
                   v-on:cards-list-changed="updateCardsBlackList"
-              ></cards-filter>
+              ></CardsFilter>
             </div>
         </div>
     `,

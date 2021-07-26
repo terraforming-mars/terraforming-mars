@@ -1,5 +1,6 @@
 const {VueLoaderPlugin} = require('vue-loader');
 const CompressionPlugin = require('compression-webpack-plugin');
+const ForkTsCheckerWebpackPlugin = require('fork-ts-checker-webpack-plugin');
 const zlib = require('zlib');
 
 module.exports = {
@@ -24,7 +25,7 @@ module.exports = {
       {
         test: /\.tsx?$/,
         loader: 'ts-loader',
-        options: {appendTsSuffixTo: [/\.vue$/]},
+        options: {appendTsSuffixTo: [/\.vue$/], transpileOnly: true},
       },
       {
         test: /\.css$/,
@@ -37,6 +38,18 @@ module.exports = {
     ],
   },
   plugins: [
+    new ForkTsCheckerWebpackPlugin({
+      typescript: {
+        configOverwrite: {
+          exclude: [
+            "tests/**/*.ts"
+          ],
+        },
+        extensions: {
+          vue: true
+        }
+      }
+    }),
     new VueLoaderPlugin(),
     new CompressionPlugin(),
     new CompressionPlugin({

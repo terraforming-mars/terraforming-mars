@@ -831,7 +831,10 @@ export class Player implements ISerializable<SerializedPlayer> {
       }
     }
     if (countWild) {
-      return uniqueTags.size + wildcardCount;
+      let maxTagCount = 10;
+      if (this.game.gameOptions.venusNextExtension) maxTagCount++;
+      if (this.game.gameOptions.moonExpansion) maxTagCount++;
+      return Math.min(uniqueTags.size + wildcardCount, maxTagCount);
     } else {
       return uniqueTags.size;
     }

@@ -67,9 +67,10 @@ export const mainAppSettings = {
     logPaused: false,
   } as MainAppData,
   'components': {
+    // These component keys match the screen values, and their entries in index.html.
     'player-input-factory': PlayerInputFactory,
     'start-screen': StartScreen,
-    CreateGameForm,
+    'create-game-form': CreateGameForm,
     'load-game-form': LoadGameForm,
     'game-home': GameHome,
     'player-home': PlayerHome,
@@ -77,7 +78,7 @@ export const mainAppSettings = {
     'game-end': GameEnd,
     'games-overview': GamesOverview,
     'debug-ui': DebugUI,
-    Help,
+    'help': Help,
   },
   'methods': {
     showAlert: function(message: string, cb: () => void = () => {}): void {

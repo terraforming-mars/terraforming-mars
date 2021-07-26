@@ -24,7 +24,9 @@
             </section>
             <div class="main-container">
                 <start-screen v-if="screen === 'start-screen'" :version="settings.version"></start-screen>
-                <CreateGameForm v-else-if="screen === 'create-game-form'"></CreateGameForm>
+                <create-game-form
+                    v-else-if="screen === 'create-game-form'"
+                ></create-game-form>
                 <load-game-form v-else-if="screen === 'load'"></load-game-form>
                 <game-home
                     v-else-if="screen === 'game-home'"

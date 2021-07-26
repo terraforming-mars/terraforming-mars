@@ -13,7 +13,7 @@ import LogPanel from './LogPanel.vue';
 import {PlayerMixin} from './PlayerMixin';
 import Turmoil from './Turmoil.vue';
 import {playerColorClass} from '../utils/utils';
-import {DynamicTitle} from './common/DynamicTitle';
+import DynamicTitle from './common/DynamicTitle.vue';
 import Button from './common/Button.vue';
 import {SortableCards} from './SortableCards';
 import TopBar from './TopBar.vue';
@@ -64,7 +64,7 @@ export const PlayerHome = Vue.component('player-home', {
   },
   components: {
     'board': Board,
-    'dynamic-title': DynamicTitle,
+    DynamicTitle,
     Card,
     'players-overview': PlayersOverview,
     'waiting-for': WaitingFor,
@@ -200,7 +200,7 @@ export const PlayerHome = Vue.component('player-home', {
 
             <div v-if="player.game.phase === 'end'">
                 <div class="player_home_block">
-                    <dynamic-title title="This game is over!" :color="player.color"/>
+                    <DynamicTitle title="This game is over!" :color="player.color"/>
                     <a :href="'/the-end?id='+ player.id" v-i18n>Go to game results</a>
                 </div>
             </div>

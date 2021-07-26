@@ -39,6 +39,7 @@
     "chai": "^4.2.0",
     "compression-webpack-plugin": "^8.0.0",
     "css-loader": "^5.2.6",
+    "fork-ts-checker-webpack-plugin": "^6.2.13",
     "jsdom": "^16.6.0",
     "jsdom-global": "^3.0.2",
     "less-loader": "^10.0.0",

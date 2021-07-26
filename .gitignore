@@ -14,6 +14,7 @@ dist/
 pid
 *.log
 .eslintcache
+tsconfig.tsbuildinfo
 
 # Local Packages
 node_modules/

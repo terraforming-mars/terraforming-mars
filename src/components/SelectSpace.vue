@@ -1,10 +1,26 @@
+<template>
+  <div>
+    <confirm-dialog
+        message="Place your tile here?\n(This confirmation can be disabled in preferences)."
+        :enableDontShowAgainCheckbox="true"
+        ref="confirmation"
+        v-on:accept="confirmPlacement"
+        v-on:dismiss="cancelPlacement"
+        v-on:hide="hideDialog" />
+    <div v-if="showtitle" class="wf-select-space">{{ $t(playerinput.title) }}</div>
+    <div v-if="warning" class="nes-container is-rounded"><span class="nes-text is-warning">{{ warning }}</span></div>
+  </div>
+</template>
+
+<script lang="ts">
 import Vue from 'vue';
 import {ConfirmDialog} from './common/ConfirmDialog';
 import {PlayerInputModel} from '../models/PlayerInputModel';
 import {PreferencesManager} from './PreferencesManager';
 import {TranslateMixin} from './TranslateMixin';
 
-export const SelectSpace = Vue.component('select-space', {
+export default Vue.extend({
+  name: 'SelectSpace',
   props: {
     playerinput: {
       type: Object as () => PlayerInputModel,
@@ -30,8 +46,8 @@ export const SelectSpace = Vue.component('select-space', {
   components: {
     'confirm-dialog': ConfirmDialog,
   },
-  mixins: [TranslateMixin],
   methods: {
+    ...TranslateMixin.methods,
     animateSpace: function(tile: Element, activate: boolean) {
       if (activate) {
         tile.classList.add('board-space--available');
@@ -131,16 +147,7 @@ export const SelectSpace = Vue.component('select-space', {
       tile.onclick = () => this.onTileSelected(tile);
     }
   },
-  template: `<div>
-    <confirm-dialog
-        message="Place your tile here?\n(This confirmation can be disabled in preferences)."
-        :enableDontShowAgainCheckbox="true"
-        ref="confirmation"
-        v-on:accept="confirmPlacement"
-        v-on:dismiss="cancelPlacement"
-        v-on:hide="hideDialog" />
-    <div v-if="showtitle" class="wf-select-space">{{ $t(playerinput.title) }}</div>
-    <div v-if="warning" class="nes-container is-rounded"><span class="nes-text is-warning">{{ warning }}</span></div>
-  </div>`,
+  template: ``,
 });
 
+</script>

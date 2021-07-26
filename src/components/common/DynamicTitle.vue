@@ -1,7 +1,13 @@
+<template>
+  <div :class="getClasses()"><span v-i18n>{{ title }}</span><span v-if="withAdditional" class="label-additional">{{ additional }}</span></div>
+</template>
+
+<script lang="ts">
 import Vue from 'vue';
 import {playerColorClass} from '../../utils/utils';
 
-export const DynamicTitle = Vue.component('dynamic-title', {
+export default Vue.extend({
+  name: 'DynamicTitle',
   props: {
     title: {
       type: String,
@@ -28,8 +34,5 @@ export const DynamicTitle = Vue.component('dynamic-title', {
       ].join(' ');
     },
   },
-
-  template: `
-        <div :class="getClasses()"><span v-i18n>{{ title }}</span><span v-if="withAdditional" class="label-additional">{{ additional }}</span></div>
-    `,
 });
+</script>

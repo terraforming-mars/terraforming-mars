@@ -3,7 +3,7 @@
     <label v-if="showtitle"><div>{{ $t(playerinput.title) }}</div></label>
     <div v-for="(option, idx) in displayedOptions" :key="idx">
       <label class="form-radio">
-        <input v-model="selectedOption" type="radio" value="option" />
+        <input v-model="selectedOption" type="radio" :value="option" />
         <i class="form-icon" />
         <span>{{ $t(option.title) }}</span>
       </label>
@@ -14,10 +14,10 @@
                               :playerinput="option"
                               :onsave="playerFactorySaved()"
                               :showsave="false"
-                              :showtitle="true" />
+                              :showtitle="false" />
       </div>
     </div>
-    <div v-if="showsave">
+    <div v-if="showsave && selectedOption">
       <div style="margin: 5px 30px 10px" class="wf-action">
         <Button :title="$t(selectedOption.buttonLabel)" type="submit" size="normal" :onClick="saveData" />
       </div>
@@ -63,7 +63,7 @@ export default Vue.extend({
     if (this.playerinput.options === undefined) {
       throw new Error('no options provided for OrOptions');
     }
-    const displayedOptions = this.playerinput.options.filter((o) => o.showOnlyInLearnerMode === false || PreferencesManager.loadBoolean('learner_mode')),
+    const displayedOptions = this.playerinput.options.filter((o) => Boolean(o.showOnlyInLearnerMode) === false || PreferencesManager.loadBoolean('learner_mode'));
     return {
       displayedOptions,
       selectedOption: displayedOptions[0],
@@ -74,7 +74,7 @@ export default Vue.extend({
     playerFactorySaved: function() {
       const idx = this.playerinput.options?.indexOf(this.selectedOption);
       if (idx === undefined || idx === -1) {
-        throw new Error("option not found!");
+        throw new Error('option not found!');
       }
       return (out: Array<Array<string>>) => {
         const copy = [[String(idx)]];
@@ -85,7 +85,11 @@ export default Vue.extend({
       };
     },
     saveData: function() {
-      (this.$refs['inputfactory'] as any).saveData();
+      let ref = this.$refs['inputfactory'];
+      if (Array.isArray(ref)) {
+        ref = ref[0];
+      }
+      (ref as any).saveData();
     },
   },
 });

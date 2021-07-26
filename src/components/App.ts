@@ -1,5 +1,5 @@
 import GameEnd from './GameEnd.vue';
-import {CreateGameForm} from './create/CreateGameForm';
+import CreateGameForm from './create/CreateGameForm.vue';
 import GameHome from './GameHome.vue';
 import GamesOverview from './GamesOverview.vue';
 import {PlayerHome} from './PlayerHome';
@@ -69,7 +69,7 @@ export const mainAppSettings = {
   'components': {
     'player-input-factory': PlayerInputFactory,
     'start-screen': StartScreen,
-    'create-game-form': CreateGameForm,
+    CreateGameForm,
     'load-game-form': LoadGameForm,
     'game-home': GameHome,
     'player-home': PlayerHome,

@@ -44,7 +44,7 @@ describe('OrOptions', function() {
     await buttons.at(0).findAllComponents({
       name: 'button',
     }).at(0).trigger('click');
-    expect(savedData).to.deep.eq([['1'],['1']]);
+    expect(savedData).to.deep.eq([['1'], ['1']]);
   });
   it('moves and selects 2nd option', async function() {
     let savedData: Array<Array<string>> | undefined;
@@ -77,6 +77,6 @@ describe('OrOptions', function() {
     await buttons.at(0).findAllComponents({
       name: 'button',
     }).at(0).trigger('click');
-    expect(savedData).to.deep.eq([['1'],['1']]);
+    expect(savedData).to.deep.eq([['1'], ['1']]);
   });
 });

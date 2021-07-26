@@ -4,7 +4,6 @@ export const MILESTONE_COST: number = 8;
 export const MAX_MILESTONES = 3;
 export const AWARD_COSTS: Array<number> = [8, 14, 20];
 export const MAX_AWARDS = 3;
-export const DEFAULT_TAG_COUNT = 10;
 
 export const DEFAULT_STEEL_VALUE: number = 2;
 export const DEFAULT_TITANIUM_VALUE: number = 3;

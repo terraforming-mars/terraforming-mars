@@ -831,7 +831,7 @@ export class Player implements ISerializable<SerializedPlayer> {
       }
     }
     if (countWild) {
-      let maxTagCount = constants.DEFAULT_TAG_COUNT;
+      let maxTagCount = 10;
       if (this.game.gameOptions.venusNextExtension) maxTagCount++;
       if (this.game.gameOptions.moonExpansion) maxTagCount++;
       return Math.min(uniqueTags.size + wildcardCount, maxTagCount);

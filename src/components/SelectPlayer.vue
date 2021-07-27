@@ -60,7 +60,6 @@ export default Vue.extend({
       this.onsave(result);
     },
   },
-  template: ``,
 });
 
 </script>

@@ -33,9 +33,10 @@ export class GameIds extends EventEmitter {
   }
 
   private async getAllInstances(allGameIds: Array<GameId>) : Promise<void> {
-    for (const gameId of allGameIds) {
-      await this.getInstance(gameId);
-    }
+    const promises = allGameIds.map((x) => {
+      this.getInstance(x);
+    });
+    await Promise.all(promises);
   }
 
   public load() : void {

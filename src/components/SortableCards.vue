@@ -1,9 +1,11 @@
+<script lang="ts">
 import Vue from 'vue';
 import Card from './card/Card.vue';
 import {CardModel} from '../models/CardModel';
 import {CardOrderStorage} from './CardOrderStorage';
 
-export const SortableCards = Vue.component('sorted-cards', {
+export default Vue.extend({
+  name: 'SortableCards',
   components: {
     Card,
   },
@@ -59,10 +61,13 @@ export const SortableCards = Vue.component('sorted-cards', {
       }
     },
   },
-  template: `
-  <div>
-<div ref="cardbox" v-for="card in getSortedCards()" :key="card.name" class="cardbox" draggable="true" v-on:dragend="onDragEnd()" v-on:dragstart="onDragStart(card.name)" v-on:dragover="onDragOver(card.name)">
-    <Card :card="card"/>
-</div></div>`,
 });
-
+</script>
+<template>
+  <div>
+    <div ref="cardbox" class="cardbox"
+      v-for="card in getSortedCards()" :key="card.name"
+      draggable="true" v-on:dragend="onDragEnd()" v-on:dragstart="onDragStart(card.name)" v-on:dragover="onDragOver(card.name)">
+    <Card :card="card"/>
+  </div></div>
+</template>

@@ -9,7 +9,7 @@ import {CorporationCard} from '../cards/corporation/CorporationCard';
 import {PlayerInputModel} from '../models/PlayerInputModel';
 import {PlayerModel} from '../models/PlayerModel';
 import {SelectCard} from './SelectCard';
-import {ConfirmDialog} from './common/ConfirmDialog';
+import ConfirmDialog from './common/ConfirmDialog.vue';
 import {PreferencesManager} from './PreferencesManager';
 
 export const SelectInitialCards = Vue.component('select-initial-cards', {

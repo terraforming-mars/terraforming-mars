@@ -1,16 +1,27 @@
+<template>
+  <div id="spectator-home">
+    <template v-if="spectator !== undefined">
+      Generation: {{spectator.generation}}
+    </template>
+  </div>
+</template>
+<script lang="ts">
 import Vue from 'vue';
 
+import {TranslateMixin} from './TranslateMixin';
 import {SpectatorModel} from '../../src/models/SpectatorModel';
 
 import * as raw_settings from '../genfiles/settings.json';
 
 export interface SpectatorHomeModel {
+  spectator: SpectatorModel | undefined,
 }
 
-export const SpectatorHome = Vue.component('spectator-home', {
+export default Vue.extend({
+  name: 'SpectatorHome',
   data: function(): SpectatorHomeModel {
     return {
-      spectator: undefined as SpectatorModel | undefined,
+      spectator: undefined,
     };
   },
   props: {
@@ -21,6 +32,7 @@ export const SpectatorHome = Vue.component('spectator-home', {
   components: {
   },
   methods: {
+    ...TranslateMixin.methods,
   },
   mounted: function() {
     // TODO load this spectator with XHR
@@ -33,9 +45,5 @@ export const SpectatorHome = Vue.component('spectator-home', {
         alert('error pulling information for spectator');
       });
   },
-  template: `<div id="spectator-home">
-    <template v-if="spectator !== undefined">
-      Generation: {{spectator.generation}}
-    </template>
-  </div>`,
 });
+</script>

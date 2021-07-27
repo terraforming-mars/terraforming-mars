@@ -4,7 +4,7 @@
         <div class="wf-component--list-party" v-if="playerinput.turmoil !== undefined">
           <label v-for="party in playerinput.turmoil.parties" :key="party.name">
               <input type="radio" v-model="selectedParty" :value="party.name" v-if="partyAvailableToSelect(party.name)"/>
-              <party :party="party" :isDominant="isDominant(party.name)" :isAvailable="partyAvailableToSelect(party.name)"/>
+              <Party :party="party" :isDominant="isDominant(party.name)" :isAvailable="partyAvailableToSelect(party.name)"/>
           </label>
         </div>
         <div v-if="showsave === true" class="nofloat">
@@ -16,7 +16,7 @@
 import Vue from 'vue';
 import Button from '../components/common/Button.vue';
 import {PlayerInputModel} from '../models/PlayerInputModel';
-import {Party} from '../components/Party';
+import Party from './Party.vue';
 import {TranslateMixin} from './TranslateMixin';
 import {PartyName} from '../turmoil/parties/PartyName';
 

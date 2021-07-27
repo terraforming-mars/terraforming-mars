@@ -4,7 +4,7 @@ import GameHome from './GameHome.vue';
 import GamesOverview from './GamesOverview.vue';
 import {PlayerHome} from './PlayerHome';
 import PlayerInputFactory from './PlayerInputFactory.vue';
-import {SpectatorHome} from './SpectatorHome';
+import SpectatorHome from './SpectatorHome.vue';
 import {PlayerModel} from '../models/PlayerModel';
 import StartScreen from './StartScreen.vue';
 import {LoadGameForm} from './LoadGameForm';

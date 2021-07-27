@@ -3,7 +3,7 @@
     <label v-if="showtitle"><div>{{ $t(playerinput.title) }}</div></label>
     <div v-for="(option, idx) in displayedOptions" :key="idx">
       <label class="form-radio">
-        <input v-model="selectedOption" type="radio" :value="option" />
+        <input v-model="selectedOption" type="radio" :name="radioElementName" :value="option" />
         <i class="form-icon" />
         <span>{{ $t(option.title) }}</span>
       </label>
@@ -33,6 +33,8 @@ import {PlayerModel} from '../models/PlayerModel';
 import {PlayerInputModel} from '../models/PlayerInputModel';
 import {PreferencesManager} from './PreferencesManager';
 import {TranslateMixin} from '../components/TranslateMixin';
+
+let unique = 0;
 
 export default Vue.extend({
   name: 'or-options',
@@ -66,6 +68,7 @@ export default Vue.extend({
     const displayedOptions = this.playerinput.options.filter((o) => Boolean(o.showOnlyInLearnerMode) === false || PreferencesManager.loadBoolean('learner_mode'));
     return {
       displayedOptions,
+      radioElementName: 'selectOption' + unique++,
       selectedOption: displayedOptions[0],
     };
   },

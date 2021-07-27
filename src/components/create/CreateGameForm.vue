@@ -34,12 +34,14 @@
                     <div class="create-game-page-container">
                         <div class="create-game-page-column" v-if="! isSoloModePage">
                             <h4 v-i18n>№ of Players</h4>
-                                <template v-for="pCount in [1,2,3,4,5,6]">
-                                    <input type="radio" :value="pCount" name="playersCount" v-model="playersCount" :id="pCount+'-radio'" v-bind:key="pCount">
-                                    <label :for="pCount+'-radio'"  v-bind:key="pCount">
-                                        <span v-html="pCount === 1 ? 'Solo' : pCount"></span>
-                                    </label>
-                                </template>
+                            <template v-for="pCount in [1,2,3,4,5,6]">
+                              <div v-bind:key="pCount">
+                                <input type="radio" :value="pCount" name="playersCount" v-model="playersCount" :id="pCount+'-radio'">
+                                <label :for="pCount+'-radio'">
+                                    <span v-html="pCount === 1 ? 'Solo' : pCount"></span>
+                                </label>
+                              </div>
+                            </template>
                         </div>
 
                         <div class="create-game-page-column">
@@ -142,10 +144,12 @@
                             <h4 v-i18n>Board</h4>
 
                             <template v-for="boardName in boards">
-                                <input type="radio" :value="boardName" name="board" v-model="board" :id="boardName+'-checkbox'"  v-bind:key="boardName">
-                                <label :for="boardName+'-checkbox'" class="expansion-button"  v-bind:key="boardName">
+                              <div v-bind:key="boardName">
+                                <input type="radio" :value="boardName" name="board" v-model="board" :id="boardName+'-checkbox'">
+                                <label :for="boardName+'-checkbox'" class="expansion-button">
                                     <span :class="getBoardColorClass(boardName)">&#x2B22;</span><span class="capitalized" v-i18n>{{ boardName }}</span>
                                 </label>
+                              </div>
                             </template>
                         </div>
 
@@ -302,39 +306,43 @@
                         <div class="create-game-players-cont" v-if="playersCount > 1">
                             <div class="container">
                                 <div class="columns">
-                                    <template v-for="newPlayer in getPlayers()">
-                                    <div :class="'form-group col6 create-game-player '+getPlayerContainerColorClass(newPlayer.color)" v-bind:key="newPlayer.index">
-                                        <div>
-                                            <input class="form-input form-inline create-game-player-name" :placeholder="getPlayerNamePlaceholder(newPlayer)" v-model="newPlayer.name" />
-                                        </div>
-                                        <div class="create-game-page-color-row">
-                                            <template v-for="color in ['Red', 'Green', 'Yellow', 'Blue', 'Black', 'Purple', 'Orange', 'Pink']">
-                                                <input type="radio" :value="color.toLowerCase()" :name="'playerColor' + newPlayer.index" v-model="newPlayer.color" :id="'radioBox' + color + newPlayer.index"  v-bind:key="color">
-                                                <label :for="'radioBox' + color + newPlayer.index" v-bind:key="color">
-                                                    <div :class="'create-game-colorbox '+getPlayerCubeColorClass(color)"></div>
-                                                </label>
-                                            </template>
-                                        </div>
-                                        <div>
-                                            <template v-if="beginnerOption">
-                                                <label v-if="isBeginnerToggleEnabled()" class="form-switch form-inline create-game-beginner-option-label">
-                                                    <input type="checkbox" v-model="newPlayer.beginner">
-                                                    <i class="form-icon"></i> <span v-i18n>Beginner?</span>&nbsp;<a href="https://github.com/bafolts/terraforming-mars/wiki/Variants#beginner-corporation" class="tooltip" target="_blank">&#9432;</a>
-                                                </label>
+                                  <template v-for="newPlayer in getPlayers()">
+                                    <div v-bind:key="newPlayer.index">
+                                      <div :class="'form-group col6 create-game-player '+getPlayerContainerColorClass(newPlayer.color)">
+                                          <div>
+                                              <input class="form-input form-inline create-game-player-name" :placeholder="getPlayerNamePlaceholder(newPlayer)" v-model="newPlayer.name" />
+                                          </div>
+                                          <div class="create-game-page-color-row">
+                                              <template v-for="color in ['Red', 'Green', 'Yellow', 'Blue', 'Black', 'Purple', 'Orange', 'Pink']">
+                                                <div v-bind:key="color">
+                                                  <input type="radio" :value="color.toLowerCase()" :name="'playerColor' + newPlayer.index" v-model="newPlayer.color" :id="'radioBox' + color + newPlayer.index">
+                                                  <label :for="'radioBox' + color + newPlayer.index">
+                                                      <div :class="'create-game-colorbox '+getPlayerCubeColorClass(color)"></div>
+                                                  </label>
+                                                </div>
+                                              </template>
+                                          </div>
+                                          <div>
+                                              <template v-if="beginnerOption">
+                                                  <label v-if="isBeginnerToggleEnabled()" class="form-switch form-inline create-game-beginner-option-label">
+                                                      <input type="checkbox" v-model="newPlayer.beginner">
+                                                      <i class="form-icon"></i> <span v-i18n>Beginner?</span>&nbsp;<a href="https://github.com/bafolts/terraforming-mars/wiki/Variants#beginner-corporation" class="tooltip" target="_blank">&#9432;</a>
+                                                  </label>
 
-                                                <label class="form-label">
-                                                    <input type="number" class="form-input form-inline player-handicap" value="0" min="0" :max="10" v-model.number="newPlayer.handicap" />
-                                                    <i class="form-icon"></i><span v-i18n>TR Boost</span>&nbsp;<a href="https://github.com/bafolts/terraforming-mars/wiki/Variants#tr-boost" class="tooltip" target="_blank">&#9432;</a>
-                                                </label>
-                                            </template>
+                                                  <label class="form-label">
+                                                      <input type="number" class="form-input form-inline player-handicap" value="0" min="0" :max="10" v-model.number="newPlayer.handicap" />
+                                                      <i class="form-icon"></i><span v-i18n>TR Boost</span>&nbsp;<a href="https://github.com/bafolts/terraforming-mars/wiki/Variants#tr-boost" class="tooltip" target="_blank">&#9432;</a>
+                                                  </label>
+                                              </template>
 
-                                            <label class="form-radio form-inline" v-if="!randomFirstPlayer">
-                                                <input type="radio" name="firstIndex" :value="newPlayer.index" v-model="firstIndex">
-                                                <i class="form-icon"></i> <span v-i18n>Goes First?</span>
-                                            </label>
-                                        </div>
+                                              <label class="form-radio form-inline" v-if="!randomFirstPlayer">
+                                                  <input type="radio" name="firstIndex" :value="newPlayer.index" v-model="firstIndex">
+                                                  <i class="form-icon"></i> <span v-i18n>Goes First?</span>
+                                              </label>
+                                          </div>
+                                      </div>
                                     </div>
-                                    </template>
+                                  </template>
                                 </div>
                             </div>
                         </div>

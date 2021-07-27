@@ -4,7 +4,7 @@ import Board from './Board.vue';
 import Card from './card/Card.vue';
 import Milestone from './Milestone.vue';
 import Award from './Award.vue';
-import {PlayersOverview} from './overview/PlayersOverview';
+import PlayersOverview from './overview/PlayersOverview.vue';
 import WaitingFor from './WaitingFor.vue';
 import Sidebar from './Sidebar.vue';
 import {PlayerModel, PublicPlayerModel} from '../models/PlayerModel';

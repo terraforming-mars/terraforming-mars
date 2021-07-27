@@ -1,3 +1,4 @@
+<script lang="ts">
 import Vue from 'vue';
 import {PlayerModel} from '../../models/PlayerModel';
 import PlayerResources from './PlayerResources.vue';
@@ -15,7 +16,8 @@ const isPinned = (root: any, playerIndex: number): boolean => {
 const showPlayerData = (root: any, playerIndex: number) => {
   (root as any).setVisibilityState('pinned_player_' + playerIndex, true);
 };
-export const PlayerInfo = Vue.component('player-info', {
+export default Vue.extend({
+  name: 'PlayerInfo',
   props: {
     player: {
       type: Object as () => PlayerModel,
@@ -25,15 +27,18 @@ export const PlayerInfo = Vue.component('player-info', {
     },
     firstForGen: {
       type: Boolean,
+      default: false,
     },
     actionLabel: {
       type: String,
+      default: '',
     },
     playerIndex: {
       type: Number,
     },
     hideZeroTags: {
       type: Boolean,
+      default: false,
     },
   },
   components: {
@@ -98,7 +103,10 @@ export const PlayerInfo = Vue.component('player-info', {
       return this.player.availableBlueCardActionCount;
     },
   },
-  template: `
+});
+</script>
+
+<template>
       <div :class="getClasses()">
         <div :class="getPlayerStatusAndResClasses()">
         <div class="player-status">
@@ -135,5 +143,4 @@ export const PlayerInfo = Vue.component('player-info', {
         </div>
         <PlayerTags :player="player" v-trim-whitespace :isActivePlayer="getIsActivePlayer()" :hideZeroTags="hideZeroTags" />
       </div>
-    `,
-});
+</template>

@@ -2,7 +2,7 @@ import {createLocalVue, mount} from '@vue/test-utils';
 
 import {expect} from 'chai';
 import {CardName} from '../../src/CardName';
-import {SortableCards} from '../../src/components/SortableCards';
+import SortableCards from '../../src/components/SortableCards.vue';
 import {FakeLocalStorage} from './FakeLocalStorage';
 
 describe('SortableCards', () => {

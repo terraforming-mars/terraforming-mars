@@ -15,7 +15,7 @@ import Turmoil from './Turmoil.vue';
 import {playerColorClass} from '../utils/utils';
 import DynamicTitle from './common/DynamicTitle.vue';
 import Button from './common/Button.vue';
-import {SortableCards} from './SortableCards';
+import SortableCards from './SortableCards.vue';
 import TopBar from './TopBar.vue';
 import {PreferencesManager} from './PreferencesManager';
 import {KeyboardNavigation} from '../../src/KeyboardNavigation';

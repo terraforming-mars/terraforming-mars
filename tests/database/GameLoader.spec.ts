@@ -21,7 +21,6 @@ describe('GameLoader', function() {
     };
     const database = {
       getGame: function(gameId: string, theCb: (err: unknown, serializedGame?: SerializedGame) => void) {
-        console.log('getGame original');
         if (gameId === 'foobar') {
           theCb(undefined, game.serialize());
         } else {
@@ -115,7 +114,6 @@ describe('GameLoader', function() {
     GameLoader.getInstance().getByGameId('never', false, (game1) => {
       expect(game1).is.undefined;
       Database.getInstance().getGame = function(_gameId: string, cb: (err: any, serializedGame?: SerializedGame) => void) {
-        console.log('getGame test');
         cb(undefined, undefined);
       };
     });
@@ -131,7 +129,6 @@ describe('GameLoader', function() {
     GameLoader.getInstance().getByGameId('never', false, (game1) => {
       expect(game1).is.undefined;
       Database.getInstance().getGame = function(_gameId: string, cb: (err: any, serializedGame?: SerializedGame) => void) {
-        console.log('getGame test');
         cb(undefined, undefined);
       };
     });

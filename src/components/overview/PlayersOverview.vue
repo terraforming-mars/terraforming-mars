@@ -2,7 +2,7 @@
 import Vue from 'vue';
 import PlayerInfo from './PlayerInfo.vue';
 import OverviewSettings from './OverviewSettings.vue';
-import {OtherPlayer} from '../OtherPlayer';
+import OtherPlayer from '../OtherPlayer.vue';
 import {PlayerModel, PublicPlayerModel} from '../../models/PlayerModel';
 import {ActionLabel} from './ActionLabel';
 import {Phase} from '../../Phase';

@@ -45,7 +45,5 @@ export default Vue.extend({
       return this.moonData.miningRate;
     },
   },
-  template: `
-  `,
 });
 </script>

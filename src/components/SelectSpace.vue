@@ -1,7 +1,7 @@
 <template>
   <div>
     <confirm-dialog
-        message="Place your tile here?\n(This confirmation can be disabled in preferences)."
+        message="Place your tile here?"
         :enableDontShowAgainCheckbox="true"
         ref="confirmation"
         v-on:accept="confirmPlacement"
@@ -147,7 +147,6 @@ export default Vue.extend({
       tile.onclick = () => this.onTileSelected(tile);
     }
   },
-  template: ``,
 });
 
 </script>

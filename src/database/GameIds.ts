@@ -32,11 +32,10 @@ export class GameIds extends EventEmitter {
     });
   }
 
-  private async getAllInstances(allGameIds: Array<GameId>) : Promise<void> {
-    const promises = allGameIds.map((x) => {
-      this.getInstance(x);
-    });
-    await Promise.all(promises);
+  private async getAllInstances(allGameIds: Array<GameId>) : Promise<void[]> {
+    return Promise.all(allGameIds.map((x) => {
+      return this.getInstance(x);
+    }));
   }
 
   public load() : void {

@@ -5,6 +5,7 @@ import {GameLoader} from '../../src/database/GameLoader';
 import {Player} from '../../src/Player';
 import {SerializedGame} from '../../src/SerializedGame';
 import {TestPlayers} from '../TestPlayers';
+import {Color} from '../../src/Color';
 
 describe('GameLoader', function() {
   const expectedGameIds: Array<string> = ['alpha', 'foobar'];
@@ -227,6 +228,39 @@ describe('GameLoader', function() {
         Database.getInstance().getGames = workingGetGames;
         done();
       });
+    });
+  });
+
+  it('waits for games to finish loading', function(done) {
+    const numberOfGames : number = 10;
+    const workingGetGames = Database.getInstance().getGames;
+    const workingGetGame = Database.getInstance().getGame;
+    Database.getInstance().getGames = function(cb: (err: any, games: Array<string>) => void) {
+      const gameList : Array<string> = [];
+      for (let i = 0; i < numberOfGames; i++) {
+        gameList.push('game' + i.toString());
+      }
+      cb(undefined, gameList);
+    };
+    Database.getInstance().getGame = function(gameId: string, theCb: (err: Error | undefined, game?: SerializedGame | undefined) => void) {
+      const delay : number = 500;
+      const player = new Player(gameId + 'player-' + Color.BLUE, Color.BLUE, false, 0, gameId + 'player-' + Color.BLUE);
+      const player2 = new Player(gameId + 'player-' + Color.RED, Color.RED, false, 0, gameId + 'player-' + Color.RED);
+      setTimeout(function() {
+        theCb(undefined, Game.newInstance(gameId, [player, player2], player).serialize());
+      }, delay);
+    };
+    (GameLoader.getInstance() as GameLoader).reset();
+    GameLoader.getInstance().getLoadedGameIds((list) => {
+      try {
+        expect(list).not.is.undefined;
+        expect(list!.length).eq(numberOfGames);
+        Database.getInstance().getGames = workingGetGames;
+        Database.getInstance().getGame = workingGetGame;
+        done();
+      } catch (error) {
+        done(error);
+      }
     });
   });
 });

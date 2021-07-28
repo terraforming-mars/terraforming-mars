@@ -14,7 +14,7 @@
 
 <script lang="ts">
 import Vue from 'vue';
-import {ConfirmDialog} from './common/ConfirmDialog';
+import ConfirmDialog from './common/ConfirmDialog.vue';
 import {PlayerInputModel} from '../models/PlayerInputModel';
 import {PreferencesManager} from './PreferencesManager';
 import {TranslateMixin} from './TranslateMixin';

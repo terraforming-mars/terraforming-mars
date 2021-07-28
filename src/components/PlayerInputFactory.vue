@@ -20,7 +20,7 @@ import SelectPlayer from './SelectPlayer.vue';
 import SelectSpace from './SelectSpace.vue';
 import SelectPartyPlayer from './SelectPartyPlayer.vue';
 import SelectPartyToSendDelegate from './SelectPartyToSendDelegate.vue';
-import {SelectColony} from './SelectColony';
+import SelectColony from './SelectColony.vue';
 import SelectProductionToLose from './SelectProductionToLose.vue';
 import ShiftAresGlobalParameters from './ShiftAresGlobalParameters.vue';
 

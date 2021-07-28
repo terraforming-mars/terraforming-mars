@@ -11,7 +11,7 @@
 
 import Vue from 'vue';
 import {PlayerModel} from '../models/PlayerModel';
-import {PlayerInfo} from './overview/PlayerInfo';
+import PlayerInfo from './overview/PlayerInfo.vue';
 import {PreferencesManager} from './PreferencesManager';
 
 export default Vue.extend({

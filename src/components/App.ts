@@ -7,7 +7,7 @@ import PlayerInputFactory from './PlayerInputFactory.vue';
 import SpectatorHome from './SpectatorHome.vue';
 import {PlayerModel} from '../models/PlayerModel';
 import StartScreen from './StartScreen.vue';
-import {LoadGameForm} from './LoadGameForm';
+import LoadGameForm from './LoadGameForm.vue';
 import DebugUI from './DebugUI.vue';
 import {SimpleGameModel} from '../models/SimpleGameModel';
 import Help from './help/Help.vue';

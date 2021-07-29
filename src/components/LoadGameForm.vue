@@ -1,4 +1,4 @@
-
+<script lang="ts">
 import Vue from 'vue';
 import Button from '../components/common/Button.vue';
 import {SimpleGameModel} from '../models/SimpleGameModel';
@@ -6,7 +6,8 @@ import {mainAppSettings} from './App';
 
 import * as constants from '../constants';
 
-export const LoadGameForm = Vue.component('load-game-form', {
+export default Vue.extend({
+  name: 'LoadGameForm',
   components: {
     Button,
   },
@@ -48,22 +49,22 @@ export const LoadGameForm = Vue.component('load-game-form', {
       }));
     },
   },
-  template: `
-        <div id="load-game">
-            <h1><span v-i18n>{{ constants.APP_NAME }}</span> — <span v-i18n>Load Game</span></h1>
-
-            <div class="load-game-form load-game--block">
-                <div class="container load-game-options">
-                    <div >
-                        <label for="gameId">Game Id to reload:</label><br/>
-                        <input class="form-input form-inline load-game-id" :placeholder="'Game Id'" v-model="gameId" /><br/>
-                        <label for="rollbackCount">Number of saves to delete before loading:</label><br/>
-                        <input class="form-input form-inline load-game-id" value="0" v-model="rollbackCount" /><br/>
-                        <Button title="Load Game" size="big" type="success" :onClick="loadGame" />
-                    </div>
-                </div>
-            </div>
-        </div>
-    `,
 });
+</script>
+<template>
+  <div id="load-game">
+      <h1><span v-i18n>{{ constants.APP_NAME }}</span> — <span v-i18n>Load Game</span></h1>
 
+      <div class="load-game-form load-game--block">
+          <div class="container load-game-options">
+              <div >
+                  <label for="gameId">Game Id to reload:</label><br/>
+                  <input class="form-input form-inline load-game-id" :placeholder="'Game Id'" v-model="gameId" /><br/>
+                  <label for="rollbackCount">Number of saves to delete before loading:</label><br/>
+                  <input class="form-input form-inline load-game-id" value="0" v-model="rollbackCount" /><br/>
+                  <Button title="Load Game" size="big" type="success" :onClick="loadGame" />
+              </div>
+          </div>
+      </div>
+  </div>
+</template>

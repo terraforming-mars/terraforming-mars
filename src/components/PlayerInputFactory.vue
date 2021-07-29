@@ -11,7 +11,7 @@ import {PlayerInputModel} from '../models/PlayerInputModel';
 import AndOptions from './AndOptions.vue';
 import OrOptions from './OrOptions.vue';
 import SelectAmount from './SelectAmount.vue';
-import {SelectCard} from './SelectCard';
+import SelectCard from './SelectCard.vue';
 import {SelectHowToPay} from './SelectHowToPay';
 import {SelectHowToPayForProjectCard} from './SelectHowToPayForProjectCard';
 import {SelectInitialCards} from './SelectInitialCards';
@@ -49,7 +49,7 @@ export default Vue.component('player-input-factory', {
     'and-options': AndOptions,
     'or-options': OrOptions,
     'select-amount': SelectAmount,
-    'select-card': SelectCard,
+    SelectCard,
     'select-option': SelectOption,
     'select-how-to-pay': SelectHowToPay,
     'select-how-to-pay-for-project-card': SelectHowToPayForProjectCard,
@@ -71,7 +71,7 @@ export default Vue.component('player-input-factory', {
       case PlayerInputTypes.AND_OPTIONS:
         return 'and-options';
       case PlayerInputTypes.SELECT_CARD:
-        return 'select-card';
+        return 'SelectCard';
       case PlayerInputTypes.SELECT_HOW_TO_PAY_FOR_PROJECT_CARD:
         return 'select-how-to-pay-for-project-card';
       case PlayerInputTypes.SELECT_INITIAL_CARDS:

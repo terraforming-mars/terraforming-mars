@@ -1,13 +1,14 @@
+<script lang="ts">
 import Vue from 'vue';
 import Button from '../components/common/Button.vue';
 import {PlayerInputModel} from '../models/PlayerInputModel';
 import {TranslateMixin} from './TranslateMixin';
 
-export const SelectAmount = Vue.component('select-amount', {
+export default Vue.extend({
+  name: 'SelectAmount',
   components: {
     Button,
   },
-  mixins: [TranslateMixin],
   props: {
     playerinput: {
       type: Object as () => PlayerInputModel,
@@ -28,6 +29,7 @@ export const SelectAmount = Vue.component('select-amount', {
     };
   },
   methods: {
+    ...TranslateMixin.methods,
     saveData: function() {
       this.onsave([[String(parseInt(this.amount))]]);
     },
@@ -35,13 +37,15 @@ export const SelectAmount = Vue.component('select-amount', {
       this.amount = String(this.playerinput.max);
     },
   },
-  template: `
-    <div>
-        <div v-if="showtitle === true">{{ $t(playerinput.title) }}</div>
-        <div class="flex">
-            <input type="number" class="nes-input" value="playerinput.min" :min="playerinput.min" :max="playerinput.max" v-model="amount" />
-            <Button size="big" type="max" :onClick="setMaxValue" title="MAX" />
-            <Button v-if="showsave === true" size="big" :onClick="saveData" :title="playerinput.buttonLabel" />
-        </div>
-    </div>`,
 });
+</script>
+<template>
+  <div>
+    <div v-if="showtitle === true">{{ $t(playerinput.title) }}</div>
+    <div class="flex">
+      <input type="number" class="nes-input" value="playerinput.min" :min="playerinput.min" :max="playerinput.max" v-model="amount" />
+      <Button size="big" type="max" :onClick="setMaxValue" title="MAX" />
+      <Button v-if="showsave === true" size="big" :onClick="saveData" :title="playerinput.buttonLabel" />
+    </div>
+  </div>
+</template>

@@ -10,7 +10,7 @@ import {PlayerModel} from '../models/PlayerModel';
 import {PlayerInputModel} from '../models/PlayerInputModel';
 import AndOptions from './AndOptions.vue';
 import OrOptions from './OrOptions.vue';
-import {SelectAmount} from './SelectAmount';
+import SelectAmount from './SelectAmount.vue';
 import {SelectCard} from './SelectCard';
 import {SelectHowToPay} from './SelectHowToPay';
 import {SelectHowToPayForProjectCard} from './SelectHowToPayForProjectCard';

@@ -1,5 +1,5 @@
 import GameEnd from './GameEnd.vue';
-import {CreateGameForm} from './create/CreateGameForm';
+import CreateGameForm from './create/CreateGameForm.vue';
 import GameHome from './GameHome.vue';
 import GamesOverview from './GamesOverview.vue';
 import {PlayerHome} from './PlayerHome';
@@ -67,6 +67,7 @@ export const mainAppSettings = {
     logPaused: false,
   } as MainAppData,
   'components': {
+    // These component keys match the screen values, and their entries in index.html.
     'player-input-factory': PlayerInputFactory,
     'start-screen': StartScreen,
     'create-game-form': CreateGameForm,
@@ -77,7 +78,7 @@ export const mainAppSettings = {
     'game-end': GameEnd,
     'games-overview': GamesOverview,
     'debug-ui': DebugUI,
-    Help,
+    'help': Help,
   },
   'methods': {
     showAlert: function(message: string, cb: () => void = () => {}): void {

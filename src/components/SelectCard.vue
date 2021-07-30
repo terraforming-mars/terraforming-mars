@@ -51,6 +51,8 @@ export default Vue.extend({
     },
     showsave: {
       type: Boolean,
+      required: false,
+      default: false,
     },
     showtitle: {
       type: Boolean,

@@ -23,7 +23,7 @@ import Vue from 'vue';
 import Button from '../components/common/Button.vue';
 import {Message} from '../Message';
 import {CardOrderStorage} from './CardOrderStorage';
-import {PlayerModel} from '../models/PlayerModel';
+import {BasePlayerModel, PlayerModel} from '../models/PlayerModel';
 import {VueModelCheckbox, VueModelRadio} from './VueTypes';
 import Card from './card/Card.vue';
 import {CardModel} from '../models/CardModel';
@@ -31,7 +31,6 @@ import {CardName} from '../CardName';
 import {PlayerInputModel} from '../models/PlayerInputModel';
 import {sortActiveCards} from '../components/ActiveCardsSortingOrder';
 import {TranslateMixin} from './TranslateMixin';
-import {OwnerModel} from './OwnerModel';
 
 interface SelectCardModel {
   cards: VueModelRadio<CardModel> | VueModelCheckbox<Array<CardModel>>;
@@ -121,7 +120,7 @@ export default Vue.extend({
       }
       return 'cardbox';
     },
-    getOwner: function(card: CardModel): OwnerModel | undefined {
+    getOwner: function(card: CardModel): BasePlayerModel | undefined {
       for (const player of this.player.players) {
         if (player.playedCards.find((c) => c.name === card.name)) {
           return {name: player.name, color: player.color};

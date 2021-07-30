@@ -41,7 +41,7 @@ import {ALL_CARD_MANIFESTS} from '../../cards/AllCards';
 import {GameModule} from '../../GameModule';
 import {CardRequirements} from '../../cards/CardRequirements';
 import {PreferencesManager} from '../PreferencesManager';
-import {OwnerModel} from '../../components/SelectCard';
+import {BasePlayerModel} from '../../models/PlayerModel';
 
 export default Vue.extend({
   name: 'Card',
@@ -66,7 +66,7 @@ export default Vue.extend({
       default: false,
     },
     'owner': {
-      type: Object as () => OwnerModel | undefined,
+      type: Object as () => BasePlayerModel | undefined,
       required: false,
       default: undefined,
     },

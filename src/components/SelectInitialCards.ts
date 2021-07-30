@@ -8,7 +8,7 @@ import * as constants from '../constants';
 import {CorporationCard} from '../cards/corporation/CorporationCard';
 import {PlayerInputModel} from '../models/PlayerInputModel';
 import {PlayerModel} from '../models/PlayerModel';
-import {SelectCard} from './SelectCard';
+import SelectCard from './SelectCard.vue';
 import ConfirmDialog from './common/ConfirmDialog.vue';
 import {PreferencesManager} from './PreferencesManager';
 
@@ -32,7 +32,7 @@ export const SelectInitialCards = Vue.component('select-initial-cards', {
   },
   components: {
     Button,
-    'select-card': SelectCard,
+    SelectCard,
     'confirm-dialog': ConfirmDialog,
   },
   data: function() {
@@ -192,9 +192,9 @@ export const SelectInitialCards = Vue.component('select-initial-cards', {
       message="Continue without buying initial cards?"
       ref="confirmation"
       v-on:accept="confirmSelection" />
-    <select-card :player="player" :playerinput="getOption(0)" :showtitle="true" v-on:cardschanged="corporationChanged" />
-    <select-card v-if="hasPrelude()" :player="player" :playerinput="getOption(1)" :showtitle="true" v-on:cardschanged="preludesChanged" />
-    <select-card :player="player" :playerinput="getOption(hasPrelude() ? 2 : 1)" :showtitle="true" v-on:cardschanged="cardsChanged" />
+    <SelectCard :player="player" :playerinput="getOption(0)" :showtitle="true" v-on:cardschanged="corporationChanged" />
+    <SelectCard v-if="hasPrelude()" :player="player" :playerinput="getOption(1)" :showtitle="true" v-on:cardschanged="preludesChanged" />
+    <SelectCard :player="player" :playerinput="getOption(hasPrelude() ? 2 : 1)" :showtitle="true" v-on:cardschanged="cardsChanged" />
     <div v-if="selectedCorporation" v-i18n>Starting Megacredits: <div class="megacredits">{{getStartingMegacredits()}}</div></div>
     <div v-if="selectedCorporation && hasPrelude()" v-i18n>After Preludes: <div class="megacredits">{{getStartingMegacredits() + getAfterPreludes()}}</div></div>
     <Button v-if="showsave" :onClick="saveIfConfirmed" type="submit" :title="playerinput.buttonLabel" />

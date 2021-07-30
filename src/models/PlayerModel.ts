@@ -6,7 +6,12 @@ import {PlayerInputModel} from './PlayerInputModel';
 import {SerializedTimer} from '../SerializedTimer';
 import {GameModel} from './GameModel';
 
-export interface PublicPlayerModel {
+export interface BasePlayerModel {
+  name: string;
+  color: Color;
+}
+
+export interface PublicPlayerModel extends BasePlayerModel {
   actionsTakenThisRound: number;
   actionsThisGeneration: Array<string /* CardName */>;
   availableBlueCardActionCount: number;
@@ -14,7 +19,6 @@ export interface PublicPlayerModel {
   cardsInHandNbr: number;
   citiesCount: number;
   coloniesCount: number;
-  color: Color;
   corporationCard: CardModel | undefined;
   energy: number;
   energyProduction: number;
@@ -26,7 +30,6 @@ export interface PublicPlayerModel {
   isActive: boolean;
   megaCredits: number;
   megaCreditProduction: number;
-  name: string;
   needsToDraft: boolean | undefined;
   needsToResearch: boolean | undefined;
   noTagsCount: number;

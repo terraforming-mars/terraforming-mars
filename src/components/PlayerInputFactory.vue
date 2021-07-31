@@ -12,7 +12,7 @@ import AndOptions from './AndOptions.vue';
 import OrOptions from './OrOptions.vue';
 import SelectAmount from './SelectAmount.vue';
 import SelectCard from './SelectCard.vue';
-import {SelectHowToPay} from './SelectHowToPay';
+import SelectHowToPay from './SelectHowToPay.vue';
 import {SelectHowToPayForProjectCard} from './SelectHowToPayForProjectCard';
 import SelectInitialCards from './SelectInitialCards.vue';
 import SelectOption from './SelectOption.vue';
@@ -51,7 +51,7 @@ export default Vue.component('player-input-factory', {
     'select-amount': SelectAmount,
     SelectCard,
     'select-option': SelectOption,
-    'select-how-to-pay': SelectHowToPay,
+    SelectHowToPay,
     'select-how-to-pay-for-project-card': SelectHowToPayForProjectCard,
     SelectInitialCards,
     'select-player': SelectPlayer,
@@ -81,7 +81,7 @@ export default Vue.component('player-input-factory', {
       case PlayerInputTypes.SELECT_OPTION:
         return 'select-option';
       case PlayerInputTypes.SELECT_HOW_TO_PAY:
-        return 'select-how-to-pay';
+        return 'SelectHowToPay';
       case PlayerInputTypes.SELECT_SPACE:
         return 'select-space';
       case PlayerInputTypes.SELECT_PLAYER:
@@ -104,6 +104,4 @@ export default Vue.component('player-input-factory', {
     },
   },
 });
-
 </script>
-

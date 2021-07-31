@@ -28,7 +28,7 @@ export interface SelectHowToPayForProjectCardModel extends SelectHowToPayModel {
   available: Units;
 }
 
-interface PaymentWidgetModel extends SelectHowToPayModel {
+export interface PaymentWidgetModel extends SelectHowToPayModel {
   cardName?: CardName;
   card?: CardModel;
   cards?: Array<CardModel>;

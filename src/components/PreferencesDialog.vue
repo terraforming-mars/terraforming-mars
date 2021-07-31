@@ -172,7 +172,7 @@ export default Vue.extend({
       <div class="preferences_panel_item form-group">
         <label class="form-label"><span v-i18n>Language</span> (<a href="javascript:document.location.reload(true);" v-i18n>refresh page</a> <span v-i18n>to see changes</span>)</label>
         <div class="preferences_panel_langs">
-          <label class="form-radio" v-for="language in langs" :key="language">
+          <label class="form-radio" v-for="language in langs" :key="language.id">
             <input name="lang" type="radio" v-on:change="updatePreferences" v-model="lang" :value="language.id">
             <i class="form-icon"></i> {{ language.title }}
           </label>

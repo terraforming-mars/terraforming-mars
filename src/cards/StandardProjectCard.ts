@@ -63,12 +63,16 @@ export abstract class StandardProjectCard extends Card implements IActionCard, I
     this.onStandardProject(player);
   }
 
+  private suffixFreeCardName(cardName: CardName): string {
+    return cardName.split(':')[0];
+  };
+
   public action(player: Player): OrOptions | SelectOption | AndOptions | SelectAmount | SelectCard<ICard> | SelectCard<IProjectCard> | SelectHowToPay | SelectPlayer | SelectSpace | undefined {
     player.game.defer(new SelectHowToPayDeferred(
       player,
       this.cost - this.discount(player),
       {
-        title: `Select how to pay for ${this.name} project`,
+        title: `Select how to pay for ${this.suffixFreeCardName(this.name)} standard project`,
         afterPay: () => {
           this.actionEssence(player);
         },

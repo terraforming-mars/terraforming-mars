@@ -1,21 +1,11 @@
+<script lang="ts">
 import Vue from 'vue';
 import {preferences, PreferencesManager} from './PreferencesManager';
 import {LANGUAGES} from '../constants';
-import {GameOptionsModel} from '../models/GameOptionsModel';
 import {TranslateMixin} from './TranslateMixin';
 
-export const PreferencesDialog = Vue.component('preferences-dialog', {
-  props: {
-    playerNumber: {
-      type: Number,
-    },
-    gameOptions: {
-      type: Object as () => GameOptionsModel,
-    },
-  },
-  components: {
-  },
-  mixins: [TranslateMixin],
+export default Vue.extend({
+  name: 'PreferencesDialog',
   data: function() {
     return {
       'hide_hand': false as boolean | unknown[],
@@ -36,6 +26,7 @@ export const PreferencesDialog = Vue.component('preferences-dialog', {
     };
   },
   methods: {
+    ...TranslateMixin.methods,
     setPreferencesCSS: function(
       val: boolean | undefined,
       cssClassSuffix: string,
@@ -99,7 +90,10 @@ export const PreferencesDialog = Vue.component('preferences-dialog', {
   mounted: function() {
     this.updatePreferencesFromStorage();
   },
-  template: `
+});
+</script>
+
+<template>
     <div class="preferences_panel" :data="syncPreferences()">
       <div class="preferences_panel_item">
         <label class="form-switch">
@@ -178,7 +172,7 @@ export const PreferencesDialog = Vue.component('preferences-dialog', {
       <div class="preferences_panel_item form-group">
         <label class="form-label"><span v-i18n>Language</span> (<a href="javascript:document.location.reload(true);" v-i18n>refresh page</a> <span v-i18n>to see changes</span>)</label>
         <div class="preferences_panel_langs">
-          <label class="form-radio" v-for="language in langs">
+          <label class="form-radio" v-for="language in langs" :key="language">
             <input name="lang" type="radio" v-on:change="updatePreferences" v-model="lang" :value="language.id">
             <i class="form-icon"></i> {{ language.title }}
           </label>
@@ -190,6 +184,4 @@ export const PreferencesDialog = Vue.component('preferences-dialog', {
         <button class="btn btn-lg btn-primary" v-on:click="okClicked">Ok</button>
       </div>
     </div>
-  </div>
-    `,
-});
+</template>

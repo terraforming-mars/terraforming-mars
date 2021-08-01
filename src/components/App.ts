@@ -2,7 +2,7 @@ import GameEnd from './GameEnd.vue';
 import CreateGameForm from './create/CreateGameForm.vue';
 import GameHome from './GameHome.vue';
 import GamesOverview from './GamesOverview.vue';
-import {PlayerHome} from './PlayerHome';
+import PlayerHome from './PlayerHome.vue';
 import PlayerInputFactory from './PlayerInputFactory.vue';
 import SpectatorHome from './SpectatorHome.vue';
 import {PlayerModel} from '../models/PlayerModel';

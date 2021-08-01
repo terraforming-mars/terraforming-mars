@@ -17,6 +17,7 @@ export interface SelectHowToPayModel {
     microbes: number; // Microbes are not actually used in this component. It's just to satisfy the mixin.
     floaters: number; // Floaters are not actually used in this component. It's just to satisfy the mixin.
     warning: string | undefined;
+    science?: number; // Science isn't used in this component, but it simplifies testing.
 }
 
 export interface SelectHowToPayForProjectCardModel extends SelectHowToPayModel {
@@ -33,7 +34,6 @@ export interface PaymentWidgetModel extends SelectHowToPayModel {
   card?: CardModel;
   cards?: Array<CardModel>;
   tags?: Array<Tags>;
-  science?: number;
   available?: Units;
   $data: SelectHowToPayModel | SelectHowToPayForProjectCardModel;
   player: PlayerModel;

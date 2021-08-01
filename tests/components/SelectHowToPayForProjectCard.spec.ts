@@ -8,6 +8,7 @@ import {PlayerInputModel} from '../../src/models/PlayerInputModel';
 import {PlayerModel} from '../../src/models/PlayerModel';
 import {Units} from '../../src/Units';
 import {FakeLocalStorage} from './FakeLocalStorage';
+import {PaymentTester} from './PaymentTester';
 
 describe('SelectHowToPayForProjectCard', () => {
   let localStorage: FakeLocalStorage;
@@ -76,12 +77,10 @@ describe('SelectHowToPayForProjectCard', () => {
       {heat: 4, megaCredits: 7},
       {canUseHeat: true});
 
-    const vm = wrapper.vm;
-    await vm.$nextTick();
+    const tester = new PaymentTester(wrapper);
+    await tester.nextTick();
 
-    expect(vm.heat).eq(3);
-    const heatTextBox = wrapper.find('[title~=Heat] ~ input').element as HTMLInputElement;
-    expect(heatTextBox.value).eq('3');
+    tester.expectValue('heat', 3);
   });
 
   it('select how to pay uses heat with reserve', async () => {
@@ -95,16 +94,16 @@ describe('SelectHowToPayForProjectCard', () => {
       {canUseHeat: true},
       Units.of({heat: 2}));
 
-    const vm = wrapper.vm;
-    await vm.$nextTick();
+    const tester = new PaymentTester(wrapper);
+    await tester.nextTick();
 
-    expect(vm.megaCredits).eq(10);
-    expect(vm.heat).eq(0);
-    const maxButton = wrapper.find('[title~=Heat] ~ .btn-max');
-    await maxButton.trigger('click');
+    tester.expectValue('megaCredits', 10);
+    tester.expectValue('heat', 0);
 
-    expect(vm.megaCredits).eq(8);
-    expect(vm.heat).eq(2);
+    await tester.clickMax('heat');
+
+    tester.expectValue('megaCredits', 8);
+    tester.expectValue('heat', 2);
   });
 
   it('select how to pay uses microbes', async () => {
@@ -114,12 +113,10 @@ describe('SelectHowToPayForProjectCard', () => {
       {megaCredits: 7},
       {microbes: 4});
 
-    const vm = wrapper.vm;
-    await vm.$nextTick();
+    const tester = new PaymentTester(wrapper);
+    await tester.nextTick();
 
-    expect(vm.microbes).eq(2);
-    const microbesTextBox = wrapper.find('[title~=Microbes] ~ input').element as HTMLInputElement;
-    expect(microbesTextBox.value).eq('2');
+    tester.expectValue('microbes', 2);
   });
 
   it('select how to pay uses floaters', async () => {
@@ -129,12 +126,10 @@ describe('SelectHowToPayForProjectCard', () => {
       {megaCredits: 6},
       {floaters: 4});
 
-    const vm = wrapper.vm;
-    await vm.$nextTick();
+    const tester = new PaymentTester(wrapper);
+    await tester.nextTick();
 
-    expect(vm.floaters).eq(2);
-    const floatersTextBox = wrapper.find('[title~=Floaters] ~ input').element as HTMLInputElement;
-    expect(floatersTextBox.value).eq('2');
+    tester.expectValue('floaters', 2);
   });
 
   it('select how to pay uses steel', async () => {
@@ -145,12 +140,10 @@ describe('SelectHowToPayForProjectCard', () => {
       {steel: 4, megaCredits: 7, steelValue: 2},
       {canUseSteel: true});
 
-    const vm = wrapper.vm;
-    await vm.$nextTick();
+    const tester = new PaymentTester(wrapper);
+    await tester.nextTick();
 
-    expect(vm.steel).eq(2);
-    const steelTextBox = wrapper.find('[title~=Steel] ~ input').element as HTMLInputElement;
-    expect(steelTextBox.value).eq('2');
+    tester.expectValue('steel', 2);
   });
 
   it('select how to pay uses titanium metal bonus', async () => {
@@ -166,13 +159,11 @@ describe('SelectHowToPayForProjectCard', () => {
       {megaCredits: 2, titanium: 4, titaniumValue: 7},
       {canUseTitanium: true});
 
-    const vm = wrapper.vm;
-    await vm.$nextTick();
+    const tester = new PaymentTester(wrapper);
+    await tester.nextTick();
 
-    expect(vm.megaCredits).eq(0);
-    expect(vm.titanium).eq(2);
-    const titaniumTextBox = wrapper.find('[title~=Titanium] ~ input').element as HTMLInputElement;
-    expect(titaniumTextBox.value).eq('2');
+    tester.expectValue('megaCredits', 0);
+    tester.expectValue('titanium', 2);
   });
 
   it('select how to pay uses steel and titanium with metal bonus', async () => {
@@ -188,16 +179,12 @@ describe('SelectHowToPayForProjectCard', () => {
       {megaCredits: 1, steel: 4, steelValue: 3, titanium: 6, titaniumValue: 6},
       {canUseSteel: true, canUseTitanium: true});
 
-    const vm = wrapper.vm;
-    await vm.$nextTick();
+    const tester = new PaymentTester(wrapper);
+    await tester.nextTick();
 
-    expect(vm.megaCredits).eq(0);
-    expect(vm.steel).eq(3);
-    expect(vm.titanium).eq(3);
-    const steelTextBox = wrapper.find('[title~=Steel] ~ input').element as HTMLInputElement;
-    expect(steelTextBox.value).eq('3');
-    const titaniumTextBox = wrapper.find('[title~=Titanium] ~ input').element as HTMLInputElement;
-    expect(titaniumTextBox.value).eq('3');
+    tester.expectValue('megaCredits', 0);
+    tester.expectValue('steel', 3);
+    tester.expectValue('titanium', 3);
   });
 
   it('select how to pay uses steel and microbes', async () => {
@@ -213,16 +200,12 @@ describe('SelectHowToPayForProjectCard', () => {
       {megaCredits: 0, steel: 10, steelValue: 4},
       {canUseSteel: true, microbes: 5});
 
-    const vm = wrapper.vm;
-    await vm.$nextTick();
+    const tester = new PaymentTester(wrapper);
+    await tester.nextTick();
 
-    expect(vm.megaCredits).eq(0);
-    expect(vm.steel).eq(4);
-    expect(vm.microbes).eq(4);
-    const steelTextBox = wrapper.find('[title~=Steel] ~ input').element as HTMLInputElement;
-    expect(steelTextBox.value).eq('4');
-    const microbesTextBox = wrapper.find('[title~=Microbes] ~ input').element as HTMLInputElement;
-    expect(microbesTextBox.value).eq('4');
+    tester.expectValue('megaCredits', 0);
+    tester.expectValue('steel', 4);
+    tester.expectValue('microbes', 4);
   });
 
   it('select how to pay uses floater and microbes', async () => {
@@ -237,16 +220,12 @@ describe('SelectHowToPayForProjectCard', () => {
       {megaCredits: 1},
       {microbes: 5, floaters: 3});
 
-    const vm = wrapper.vm;
-    await vm.$nextTick();
+    const tester = new PaymentTester(wrapper);
+    await tester.nextTick();
 
-    expect(vm.megaCredits).eq(1);
-    expect(vm.microbes).eq(5);
-    expect(vm.floaters).eq(1);
-    const microbesTextBox = wrapper.find('[title~=Microbes] ~ input').element as HTMLInputElement;
-    expect(microbesTextBox.value).eq('5');
-    const floatersTextBox = wrapper.find('[title~=Floaters] ~ input').element as HTMLInputElement;
-    expect(floatersTextBox.value).eq('1');
+    tester.expectValue('megaCredits', 1);
+    tester.expectValue('microbes', 5);
+    tester.expectValue('floaters', 1);
   });
 
   it('select how to pay uses floater and titanium', async () => {
@@ -261,16 +240,12 @@ describe('SelectHowToPayForProjectCard', () => {
       {megaCredits: 1, titanium: 6, titaniumValue: 7},
       {canUseTitanium: true, floaters: 8});
 
-    const vm = wrapper.vm;
-    await vm.$nextTick();
+    const tester = new PaymentTester(wrapper);
+    await tester.nextTick();
 
-    expect(vm.megaCredits).eq(0);
-    expect(vm.floaters).eq(7);
-    expect(vm.titanium).eq(1);
-    const floatersTextBox = wrapper.find('[title~=Floaters] ~ input').element as HTMLInputElement;
-    expect(floatersTextBox.value).eq('7');
-    const titaniumTextBox = wrapper.find('[title~=Titanium] ~ input').element as HTMLInputElement;
-    expect(titaniumTextBox.value).eq('1');
+    tester.expectValue('megaCredits', 0);
+    tester.expectValue('floaters', 7);
+    tester.expectValue('titanium', 1);
   });
 
   it('select Luna Train Station limits how much steel you can use', async () => {
@@ -290,16 +265,15 @@ describe('SelectHowToPayForProjectCard', () => {
       {canUseSteel: true},
       Units.of({steel: 2}));
 
-    const vm = wrapper.vm;
-    await vm.$nextTick();
+    const tester = new PaymentTester(wrapper);
+    await tester.nextTick();
 
-    expect(vm.megaCredits).eq(20);
-    expect(vm.steel).eq(0);
-    const maxButton = wrapper.find('[title~=Steel] ~ .btn-max');
-    await maxButton.trigger('click');
+    tester.expectValue('megaCredits', 20);
+    tester.expectValue('steel', 0);
+    await tester.clickMax('steel');
 
-    expect(vm.megaCredits).eq(16);
-    expect(vm.steel).eq(2);
+    tester.expectValue('megaCredits', 16);
+    tester.expectValue('steel', 2);
   });
 
   it('select how to pay uses titanium metal bonus without using steel', async () => {
@@ -317,14 +291,13 @@ describe('SelectHowToPayForProjectCard', () => {
       {megaCredits: 10, titanium: 13, titaniumValue: 5, steel: 2, steelValue: 4},
       {canUseTitanium: true});
 
-    const vm = wrapper.vm;
-    await vm.$nextTick();
+    const tester = new PaymentTester(wrapper);
+    await tester.nextTick();
 
-    expect(vm.megaCredits).eq(6);
-    expect(vm.titanium).eq(7);
-    expect(vm.steel).eq(0);
-    const titaniumTextBox = wrapper.find('[title~=Titanium] ~ input').element as HTMLInputElement;
-    expect(titaniumTextBox.value).eq('7');
+    tester.expectValue('megaCredits', 6);
+    tester.expectValue('titanium', 7);
+    expect((wrapper.vm as any).steel).eq(0);
+    tester.expectIsAvailable('steel', false);
   });
 
   it('select how to pay uses science', async () => {
@@ -337,12 +310,11 @@ describe('SelectHowToPayForProjectCard', () => {
       },
       {science: 10});
 
-    const vm = wrapper.vm;
-    await vm.$nextTick();
+    const tester = new PaymentTester(wrapper);
+    await tester.nextTick();
 
-    expect(vm.science).eq(8);
-    const scienceTextBox = wrapper.find('[title~=Science] ~ input').element as HTMLInputElement;
-    expect(scienceTextBox.value).eq('8');
+    tester.expectIsAvailable('science', true);
+    tester.expectValue('science', 8);
   });
 
   const setupCardForPurchase = function(

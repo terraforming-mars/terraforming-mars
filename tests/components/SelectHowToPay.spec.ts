@@ -1,6 +1,6 @@
 import {createLocalVue, mount} from '@vue/test-utils';
 import {expect} from 'chai';
-import {SelectHowToPay} from '../../src/components/SelectHowToPay';
+import SelectHowToPay from '../../src/components/SelectHowToPay.vue';
 import {SelectHowToPayModel} from '../../src/components/PaymentWidgetMixin';
 import {PlayerInputModel} from '../../src/models/PlayerInputModel';
 import {PlayerModel} from '../../src/models/PlayerModel';
@@ -131,7 +131,8 @@ describe('SelectHowToPay', () => {
     await button.trigger('click');
   };
 
-  const expectValue = function(model: SelectHowToPayModel, wrapper: any, type: Unit, amount: number) {
+  const expectValue = function(vc: unknown, wrapper: any, type: Unit, amount: number) {
+    const model = vc as SelectHowToPayModel;
     let vmVal: number | undefined;
     switch (type) {
     case 'heat':

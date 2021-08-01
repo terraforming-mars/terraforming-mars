@@ -1,4 +1,4 @@
-
+<script lang="ts">
 import Vue from 'vue';
 import {HowToPay} from '../inputs/HowToPay';
 import {PaymentWidgetMixin, SelectHowToPayModel} from './PaymentWidgetMixin';
@@ -8,7 +8,8 @@ import {PreferencesManager} from './PreferencesManager';
 import Button from '../components/common/Button.vue';
 import {TranslateMixin} from './TranslateMixin';
 
-export const SelectHowToPay = Vue.component('select-how-to-pay', {
+export default Vue.extend({
+  name: 'SelectHowToPay',
   props: {
     player: {
       type: Object as () => PlayerModel,
@@ -41,7 +42,6 @@ export const SelectHowToPay = Vue.component('select-how-to-pay', {
       warning: undefined,
     } as SelectHowToPayModel;
   },
-  mixins: [PaymentWidgetMixin, TranslateMixin],
   mounted: function() {
     Vue.nextTick(() => {
       this.setInitialCost();
@@ -53,6 +53,8 @@ export const SelectHowToPay = Vue.component('select-how-to-pay', {
     });
   },
   methods: {
+    ...PaymentWidgetMixin.methods,
+    ...TranslateMixin.methods,
     hasWarning: function() {
       return this.$data.warning !== undefined;
     },
@@ -206,9 +208,11 @@ export const SelectHowToPay = Vue.component('select-how-to-pay', {
       }
     },
   },
-  template: `<div class="payments_cont">
+});
+</script>
+<template>
+<div class="payments_cont">
   <section v-trim-whitespace>
-
     <h3 class="payments_title">{{ $t(playerinput.title) }}</h3>
 
     <div class="payments_type input-group" v-if="playerinput.canUseSteel">
@@ -251,6 +255,5 @@ export const SelectHowToPay = Vue.component('select-how-to-pay', {
     </div>
 
   </section>
-</div>`,
-});
-
+</div>
+</template>

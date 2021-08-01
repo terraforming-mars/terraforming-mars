@@ -83,7 +83,7 @@ import GlobalParameterValue from './GlobalParameterValue.vue';
 import MoonGlobalParameterValue from './MoonGlobalParameterValue.vue';
 import {GlobalParameter} from '../GlobalParameter';
 import {MoonModel} from '../models/MoonModel';
-import {PreferencesDialog} from './PreferencesDialog';
+import PreferencesDialog from './PreferencesDialog.vue';
 
 export default Vue.extend({
   name: 'sidebar',

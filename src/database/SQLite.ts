@@ -22,7 +22,6 @@ export class SQLite implements IDatabase {
 
   initialize(): Promise<void> {
     return new Promise((resolve, reject) => {
-      console.log('calling to initialize');
       this.db.run('CREATE TABLE IF NOT EXISTS games(game_id varchar, players integer, save_id integer, game text, status text default \'running\', created_time timestamp default (strftime(\'%s\', \'now\')), PRIMARY KEY (game_id, save_id))', (err) => {
         if (err) {
           reject(err);
@@ -33,7 +32,6 @@ export class SQLite implements IDatabase {
             reject(err2);
             return;
           }
-          console.log('we have connected!');
           resolve();
         });
       });

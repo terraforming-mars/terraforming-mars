@@ -13,7 +13,7 @@ import OrOptions from './OrOptions.vue';
 import SelectAmount from './SelectAmount.vue';
 import SelectCard from './SelectCard.vue';
 import SelectHowToPay from './SelectHowToPay.vue';
-import {SelectHowToPayForProjectCard} from './SelectHowToPayForProjectCard';
+import SelectHowToPayForProjectCard from './SelectHowToPayForProjectCard.vue';
 import SelectInitialCards from './SelectInitialCards.vue';
 import SelectOption from './SelectOption.vue';
 import SelectPlayer from './SelectPlayer.vue';
@@ -52,7 +52,7 @@ export default Vue.component('player-input-factory', {
     SelectCard,
     'select-option': SelectOption,
     SelectHowToPay,
-    'select-how-to-pay-for-project-card': SelectHowToPayForProjectCard,
+    SelectHowToPayForProjectCard,
     SelectInitialCards,
     'select-player': SelectPlayer,
     'select-space': SelectSpace,
@@ -73,7 +73,7 @@ export default Vue.component('player-input-factory', {
       case PlayerInputTypes.SELECT_CARD:
         return 'SelectCard';
       case PlayerInputTypes.SELECT_HOW_TO_PAY_FOR_PROJECT_CARD:
-        return 'select-how-to-pay-for-project-card';
+        return 'SelectHowToPayForProjectCard';
       case PlayerInputTypes.SELECT_INITIAL_CARDS:
         return 'SelectInitialCards';
       case PlayerInputTypes.OR_OPTIONS:

@@ -1,3 +1,4 @@
+<script lang="ts">
 import Vue from 'vue';
 import Button from './common/Button.vue';
 
@@ -14,7 +15,8 @@ import {Tags} from '../cards/Tags';
 import {TranslateMixin} from './TranslateMixin';
 import {Units} from '../Units';
 
-export const SelectHowToPayForProjectCard = Vue.component('select-how-to-pay-for-project-card', {
+export default Vue.extend({
+  name: 'SelectHowToPayForProjectCard',
   props: {
     player: {
       type: Object as () => PlayerModel,
@@ -68,7 +70,6 @@ export const SelectHowToPayForProjectCard = Vue.component('select-how-to-pay-for
     Card,
     Button,
   },
-  mixins: [PaymentWidgetMixin, TranslateMixin],
   mounted: function() {
     Vue.nextTick(() => {
       this.$data.card = this.getCard();
@@ -80,6 +81,8 @@ export const SelectHowToPayForProjectCard = Vue.component('select-how-to-pay-for
     });
   },
   methods: {
+    ...PaymentWidgetMixin.methods,
+    ...TranslateMixin.methods,
     getCard: function() {
       const card = this.cards.find((c) => c.name === this.cardName); // this.player.cardsInHand.concat(this.player.selfReplicatingRobotsCards).find((c) => c.name === this.cardName);
       if (card === undefined) {
@@ -358,11 +361,14 @@ export const SelectHowToPayForProjectCard = Vue.component('select-how-to-pay-for
       }
     },
   },
-  template: `<div class="payments_cont">
+});
+</script>
+<template>
+<div class="payments_cont">
 
   <div v-if="showtitle === true">{{ $t(playerinput.title) }}</div>
 
-  <label v-for="availableCard in cards" class="payments_cards">
+  <label v-for="availableCard in cards" class="payments_cards" :key="availableCard.name">
     <input class="hidden" type="radio" v-model="cardName" v-on:change="cardChanged()" :value="availableCard.name" />
     <Card class="cardbox" :card="availableCard" />
   </label>
@@ -444,5 +450,5 @@ export const SelectHowToPayForProjectCard = Vue.component('select-how-to-pay-for
       <Button size="big" :onClick="saveData" :title="playerinput.buttonLabel" />
     </div>
   </section>
-</div>`,
-});
+</div>
+</template>

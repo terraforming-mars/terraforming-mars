@@ -3,7 +3,7 @@ import {createLocalVue, mount} from '@vue/test-utils';
 import {expect} from 'chai';
 import {CardName} from '../../src/CardName';
 import {CardType} from '../../src/cards/CardType';
-import {SelectHowToPayForProjectCard} from '../../src/components/SelectHowToPayForProjectCard';
+import SelectHowToPayForProjectCard from '../../src/components/SelectHowToPayForProjectCard.vue';
 import {PlayerInputModel} from '../../src/models/PlayerInputModel';
 import {PlayerModel} from '../../src/models/PlayerModel';
 import {Units} from '../../src/Units';

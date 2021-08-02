@@ -13,7 +13,7 @@ type ListLoadCallback = (list: Array<{id: GameId, participants: Array<SpectatorI
  * Loads games from database sequentially as needed
  */
 export class GameLoader implements IGameLoader {
-  private static readonly instance = new GameLoader();
+  private static instance?: GameLoader;
 
   private idsContainer = new GameIds();
 
@@ -27,6 +27,9 @@ export class GameLoader implements IGameLoader {
   }
 
   public static getInstance(): IGameLoader {
+    if (GameLoader.instance === undefined) {
+      GameLoader.instance = new GameLoader();
+    }
     return GameLoader.instance;
   }
 

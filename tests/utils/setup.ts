@@ -11,6 +11,7 @@ Database.getInstance = function() {
     getGameId: () => {},
     getGameVersion: () => {},
     getGames: () => {},
+    initialize: () => Promise.resolve(),
     restoreGame: () => {},
     loadCloneableGame: () => {},
     saveGameResults: () => {},

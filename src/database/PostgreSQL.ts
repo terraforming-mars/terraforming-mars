@@ -42,6 +42,10 @@ export class PostgreSQL implements IDatabase {
     });
   }
 
+  async initialize(): Promise<void> {
+
+  }
+
   getClonableGames(cb: (err: Error | undefined, allGames: Array<IGameData>) => void) {
     const allGames: Array<IGameData> = [];
     const sql = 'SELECT distinct game_id game_id, players players FROM games WHERE save_id = 0 order by game_id asc';

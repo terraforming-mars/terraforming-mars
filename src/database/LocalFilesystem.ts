@@ -20,6 +20,10 @@ export class Localfilesystem implements IDatabase {
     }
   }
 
+  async initialize(): Promise<void> {
+
+  }
+
   _filename(gameId: string): string {
     return path.resolve(dbFolder, `${gameId}.json`);
   }

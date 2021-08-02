@@ -43,6 +43,11 @@ export type DbLoadCallback<T> = (err: Error | undefined, game: T | undefined) =>
 export interface IDatabase {
 
     /**
+     * Creates any tables needed
+     */
+    initialize(): Promise<void>;
+
+    /**
      * Pulls most recent version of game
      * @param game_id the game id to load
      * @param cb called with game if exists. If game is undefined err will be truthy.

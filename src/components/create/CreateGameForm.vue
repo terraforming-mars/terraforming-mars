@@ -119,7 +119,7 @@
                                 <input type="checkbox" name="politicalAgendas" id="politicalAgendas-checkbox" v-on:change="politicalAgendasExtensionToggle()">
                                 <label for="politicalAgendas-checkbox" class="expansion-button">
                                     <div class="create-game-expansion-icon expansion-icon-agendas"></div>
-                                    <span v-i18n>Agendas</span>&nbsp;<a href="https://github.com/bafolts/terraforming-mars/wiki/Variants#political-agendas" class="tooltip" target="_blank">&#9432;</a>
+                                    <span v-i18n>Agendas</span>&nbsp;<a href="https://www.notion.so/Political-Agendas-8c6b0b018a884692be29b3ef44b340a9" class="tooltip" target="_blank">&#9432;</a>
                                 </label>
 
                                 <div class="create-game-page-column-row" v-if="isPoliticalAgendasExtensionEnabled()">

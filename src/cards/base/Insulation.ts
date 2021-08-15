@@ -35,8 +35,8 @@ export class Insulation extends Card implements IProjectCard {
       'Select amount of heat production to decrease',
       'Decrease',
       (amount: number) => {
-        player.addProduction(Resources.HEAT, -amount);
-        player.addProduction(Resources.MEGACREDITS, amount);
+        player.addProduction(Resources.HEAT, -amount, {log: true});
+        player.addProduction(Resources.MEGACREDITS, amount, {log: true});
         return undefined;
       },
       1,

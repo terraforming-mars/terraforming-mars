@@ -32,7 +32,7 @@ export class MedicalLab extends Card implements IProjectCard {
     // Include this when the card is first played, and not when it is called by Robotic Workforce.
     const includeThis = !player.cardIsInEffect(this.name);
     const tagCount = player.getTagCount(Tags.BUILDING) + (includeThis ? 1 : 0);
-    player.addProduction(Resources.MEGACREDITS, Math.floor(tagCount / 2));
+    player.addProduction(Resources.MEGACREDITS, Math.floor(tagCount / 2), {log: true});
   }
   public play(player: Player) {
     this.produce(player);

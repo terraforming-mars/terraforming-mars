@@ -4,6 +4,7 @@ import {CommunityServices} from '../../../src/cards/colonies/CommunityServices';
 import {EccentricSponsor} from '../../../src/cards/prelude/EccentricSponsor';
 import {ResearchCoordination} from '../../../src/cards/prelude/ResearchCoordination';
 import {SeptumTribus} from '../../../src/cards/turmoil/SeptumTribus';
+import {Game} from '../../../src/Game';
 import {Resources} from '../../../src/Resources';
 import {TestPlayers} from '../../TestPlayers';
 
@@ -14,6 +15,7 @@ describe('CommunityServices', function() {
     const prelude = new EccentricSponsor();
     const researchCoordination = new ResearchCoordination();
     const player = TestPlayers.BLUE.newPlayer();
+    Game.newInstance('foobar', [player], player);
     player.playedCards.push(prelude, researchCoordination);
     player.corporationCard = corpo;
     const action = card.play(player);
@@ -28,6 +30,7 @@ describe('CommunityServices', function() {
     const prelude = new EccentricSponsor();
     const researchCoordination = new ResearchCoordination();
     const player = TestPlayers.BLUE.newPlayer();
+    Game.newInstance('foobar', [player], player);
     player.playedCards.push(prelude, researchCoordination);
     player.corporationCard = corpo;
     const action = card.play(player);

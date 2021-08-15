@@ -43,7 +43,7 @@ export class SaturnSystems extends Card implements CorporationCard {
   private _onCardPlayed(player: Player, card: IProjectCard | CorporationCard) {
     for (const tag of card.tags) {
       if (tag === Tags.JOVIAN) {
-        player.game.getCardPlayer(this.name).addProduction(Resources.MEGACREDITS, 1);
+        player.game.getCardPlayer(this.name).addProduction(Resources.MEGACREDITS, 1, {log: true});
       }
     }
   }

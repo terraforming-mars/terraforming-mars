@@ -28,7 +28,7 @@ export class LunarMining extends Card implements IProjectCard {
   }
 
   public play(player: Player) {
-    player.addProduction(Resources.TITANIUM, Math.floor((player.getTagCount(Tags.EARTH)+1) / 2));
+    player.addProduction(Resources.TITANIUM, Math.floor((player.getTagCount(Tags.EARTH)+1) / 2), {log: true});
     return undefined;
   }
 }

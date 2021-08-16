@@ -37,7 +37,7 @@
 import Vue from 'vue';
 import TagCount from '../TagCount.vue';
 import {ITagCount} from '../../ITagCount';
-import {PlayerModel} from '../../models/PlayerModel';
+import {PlayerViewModel} from '../../models/PlayerModel';
 import {Tags} from '../../cards/Tags';
 import {CardName} from '../../CardName';
 import {SpecialTags} from '../../cards/SpecialTags';
@@ -97,7 +97,7 @@ export const PLAYER_INTERFACE_TAGS_ORDER: Array<InterfaceTagsType> = [
   SpecialTags.COLONY_COUNT,
 ];
 
-const checkTagUsed = (tag: InterfaceTagsType, player: PlayerModel) => {
+const checkTagUsed = (tag: InterfaceTagsType, player: PlayerViewModel) => {
   if (player.game.gameOptions.coloniesExtension === false && tag === SpecialTags.COLONY_COUNT) {
     return false;
   }
@@ -117,7 +117,7 @@ export default Vue.extend({
   name: 'PlayerTags',
   props: {
     player: {
-      type: Object as () => PlayerModel,
+      type: Object as () => PlayerViewModel,
     },
     isActivePlayer: {
       type: Boolean,

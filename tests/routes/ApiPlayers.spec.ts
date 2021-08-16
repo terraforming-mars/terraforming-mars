@@ -7,7 +7,7 @@ import {TestPlayers} from '../TestPlayers';
 import {MockResponse} from './HttpMocks';
 import {IContext} from '../../src/routes/IHandler';
 import {FakeGameLoader} from './FakeGameLoader';
-import {PlayerModel} from '../../src/models/PlayerModel';
+import {PlayerViewModel} from '../../src/models/PlayerModel';
 
 describe('ApiPlayer', function() {
   let req: http.IncomingMessage;
@@ -39,7 +39,7 @@ describe('ApiPlayer', function() {
     const game = Game.newInstance('game-id', [player], player);
     ctx.gameLoader.add(game);
     ApiPlayer.INSTANCE.get(req, res.hide(), ctx);
-    const response: PlayerModel = JSON.parse(res.content);
+    const response: PlayerViewModel = JSON.parse(res.content);
     expect(response.id).eq(player.id);
   });
 });

@@ -1,6 +1,6 @@
 import {CardModel} from '../models/CardModel';
 import {CardType} from '../cards/CardType';
-import {PlayerModel} from '../models/PlayerModel';
+import {PlayerViewModel} from '../models/PlayerModel';
 import {sortActiveCards} from '../components/ActiveCardsSortingOrder';
 
 // Common code for player layouts
@@ -22,7 +22,7 @@ export const PlayerMixin = {
       return cards.reverse();
     },
     getPlayerCardsPlayed: function(
-      player: PlayerModel,
+      player: PlayerViewModel,
       withCorp: boolean,
     ): number {
       const playedCardsNr = player.playedCards.length || 0;
@@ -42,7 +42,7 @@ export const PlayerMixin = {
     },
     isCardActivated: function(
       card: CardModel,
-      player: PlayerModel,
+      player: PlayerViewModel,
     ): boolean {
       return (
         (player !== undefined &&

@@ -9,7 +9,7 @@ import {CardModel} from '../models/CardModel';
 import {CardOrderStorage} from './CardOrderStorage';
 import {PaymentWidgetMixin, SelectHowToPayForProjectCardModel} from './PaymentWidgetMixin';
 import {PlayerInputModel} from '../models/PlayerInputModel';
-import {PlayerModel} from '../models/PlayerModel';
+import {PlayerViewModel} from '../models/PlayerModel';
 import {PreferencesManager} from './PreferencesManager';
 import {Tags} from '../cards/Tags';
 import {TranslateMixin} from './TranslateMixin';
@@ -19,7 +19,7 @@ export default Vue.extend({
   name: 'SelectHowToPayForProjectCard',
   props: {
     player: {
-      type: Object as () => PlayerModel,
+      type: Object as () => PlayerViewModel,
     },
     playerinput: {
       type: Object as () => PlayerInputModel,

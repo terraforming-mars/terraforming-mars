@@ -23,7 +23,7 @@ import {CardName} from '../CardName';
 import * as constants from '../constants';
 import {CorporationCard} from '../cards/corporation/CorporationCard';
 import {PlayerInputModel} from '../models/PlayerInputModel';
-import {PlayerModel} from '../models/PlayerModel';
+import {PlayerViewModel} from '../models/PlayerModel';
 import SelectCard from './SelectCard.vue';
 import ConfirmDialog from './common/ConfirmDialog.vue';
 import {PreferencesManager} from './PreferencesManager';
@@ -32,7 +32,7 @@ export default Vue.extend({
   name: 'SelectInitialCards',
   props: {
     player: {
-      type: Object as () => PlayerModel,
+      type: Object as () => PlayerViewModel,
     },
     playerinput: {
       type: Object as () => PlayerInputModel,

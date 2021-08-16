@@ -1,6 +1,6 @@
 <script lang="ts">
 import Vue from 'vue';
-import {PlayerModel} from '../../models/PlayerModel';
+import {PlayerViewModel} from '../../models/PlayerModel';
 import PlayerResources from './PlayerResources.vue';
 import PlayerTags from './PlayerTags.vue';
 import PlayerStatus from './PlayerStatus.vue';
@@ -20,10 +20,10 @@ export default Vue.extend({
   name: 'PlayerInfo',
   props: {
     player: {
-      type: Object as () => PlayerModel,
+      type: Object as () => PlayerViewModel,
     },
     activePlayer: {
-      type: Object as () => PlayerModel,
+      type: Object as () => PlayerViewModel,
     },
     firstForGen: {
       type: Boolean,

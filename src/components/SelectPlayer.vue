@@ -16,7 +16,7 @@ import Vue from 'vue';
 import Button from './common/Button.vue';
 import {ColorWithNeutral} from '../Color';
 import {PlayerInputModel} from '../models/PlayerInputModel';
-import {PlayerModel} from '../models/PlayerModel';
+import {PlayerViewModel} from '../models/PlayerModel';
 import SelectPlayerRow from './SelectPlayerRow.vue';
 import {VueModelRadio} from './VueTypes';
 import {TranslateMixin} from './TranslateMixin';
@@ -25,7 +25,7 @@ export default Vue.extend({
   name: 'SelectPlayer',
   props: {
     players: {
-      type: Array as () => Array<PlayerModel>,
+      type: Array as () => Array<PlayerViewModel>,
     },
     playerinput: {
       type: Object as () => PlayerInputModel,

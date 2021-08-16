@@ -18,7 +18,7 @@
 <script lang="ts">
 
 import Vue from 'vue';
-import {PlayerModel} from '../models/PlayerModel';
+import {PlayerViewModel} from '../models/PlayerModel';
 import {PlayerInputModel} from '../models/PlayerInputModel';
 import Button from '../components/common/Button.vue';
 import {TranslateMixin} from '../components/TranslateMixin';
@@ -27,10 +27,10 @@ export default Vue.extend({
   name: 'and-options',
   props: {
     player: {
-      type: Object as () => PlayerModel,
+      type: Object as () => PlayerViewModel,
     },
     players: {
-      type: Array as () => Array<PlayerModel>,
+      type: Array as () => Array<PlayerViewModel>,
     },
     playerinput: {
       type: Object as () => PlayerInputModel,

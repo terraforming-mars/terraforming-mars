@@ -3,7 +3,7 @@ import Vue from 'vue';
 import PlayerInfo from './PlayerInfo.vue';
 import OverviewSettings from './OverviewSettings.vue';
 import OtherPlayer from '../OtherPlayer.vue';
-import {PlayerModel, PublicPlayerModel} from '../../models/PlayerModel';
+import {PlayerViewModel, PublicPlayerModel} from '../../models/PlayerModel';
 import {ActionLabel} from './ActionLabel';
 import {Phase} from '../../Phase';
 import {Color} from '../../Color';
@@ -27,7 +27,7 @@ export default Vue.extend({
   name: 'PlayersOverview',
   props: {
     player: {
-      type: Object as () => PlayerModel,
+      type: Object as () => PlayerViewModel,
     },
   },
   components: {

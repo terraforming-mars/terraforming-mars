@@ -36,7 +36,7 @@ export class ParliamentHall extends Card implements IProjectCard {
     const includeThis = !player.cardIsInEffect(this.name);
     const tagCount = player.getTagCount(Tags.BUILDING) + (includeThis ? 1 : 0);
     const amount = Math.floor(tagCount / 3);
-    player.addProduction(Resources.MEGACREDITS, amount);
+    player.addProduction(Resources.MEGACREDITS, amount, {log: true});
   }
 
   public play(player: Player) {

@@ -46,9 +46,9 @@ export class NitrogenRichAsteroid extends Card implements IProjectCard {
   public play(player: Player) {
     player.increaseTerraformRatingSteps(2);
     if (player.getTagCount(Tags.PLANT) < 3) {
-      player.addProduction(Resources.PLANTS, 1);
+      player.addProduction(Resources.PLANTS, 1, {log: true});
     } else {
-      player.addProduction(Resources.PLANTS, 4);
+      player.addProduction(Resources.PLANTS, 4, {log: true});
     }
     return player.game.increaseTemperature(player, 1);
   }

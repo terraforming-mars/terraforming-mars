@@ -2344,12 +2344,13 @@ export class Player implements ISerializable<SerializedPlayer> {
   public hasAvailableColonyTileToBuildOn(): boolean {
     if (this.game.gameOptions.coloniesExtension === false) return false;
 
+    const availableColonyTiles = this.game.colonies.filter((colony) => colony.isActive);
     let colonyTilesAlreadyBuiltOn: number = 0;
 
-    this.game.colonies.forEach((colony) => {
+    availableColonyTiles.forEach((colony) => {
       if (colony.colonies.includes(this.id)) colonyTilesAlreadyBuiltOn++;
     });
 
-    return colonyTilesAlreadyBuiltOn < this.game.colonies.length;
+    return colonyTilesAlreadyBuiltOn < availableColonyTiles.length;
   }
 }

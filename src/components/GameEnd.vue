@@ -146,7 +146,7 @@
 <script lang="ts">
 
 import Vue from 'vue';
-import {PlayerModel, PublicPlayerModel} from '../models/PlayerModel';
+import {PlayerViewModel, PublicPlayerModel} from '../models/PlayerModel';
 import Board from './Board.vue';
 import MoonBoard from './moon/MoonBoard.vue';
 import LogPanel from './LogPanel.vue';
@@ -160,7 +160,7 @@ export default Vue.extend({
   name: 'game-end',
   props: {
     player: {
-      type: Object as () => PlayerModel,
+      type: Object as () => PlayerViewModel,
     },
   },
   data: function() {

@@ -23,7 +23,7 @@ import Vue from 'vue';
 import Button from '../components/common/Button.vue';
 import {Message} from '../Message';
 import {CardOrderStorage} from './CardOrderStorage';
-import {BasePlayerModel, PlayerModel} from '../models/PlayerModel';
+import {BasePlayerModel, PlayerViewModel} from '../models/PlayerModel';
 import {VueModelCheckbox, VueModelRadio} from './VueTypes';
 import Card from './card/Card.vue';
 import {CardModel} from '../models/CardModel';
@@ -41,7 +41,7 @@ export default Vue.extend({
   name: 'SelectCard',
   props: {
     player: {
-      type: Object as () => PlayerModel,
+      type: Object as () => PlayerViewModel,
     },
     playerinput: {
       type: Object as () => PlayerInputModel,

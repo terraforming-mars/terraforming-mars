@@ -12,7 +12,7 @@ import {Player} from '../Player';
 import {PlayerInput} from '../PlayerInput';
 import {PlayerInputModel} from './PlayerInputModel';
 import {PlayerInputTypes} from '../PlayerInputTypes';
-import {PlayerModel} from './PlayerModel';
+import {PlayerViewModel} from './PlayerModel';
 import {SelectAmount} from '../inputs/SelectAmount';
 import {SelectCard} from '../inputs/SelectCard';
 import {SelectHowToPay} from '../inputs/SelectHowToPay';
@@ -88,7 +88,7 @@ export class Server {
     };
   }
 
-  public static getPlayerModel(player: Player): PlayerModel {
+  public static getPlayerModel(player: Player): PlayerViewModel {
     const game = player.game;
 
     return {
@@ -392,7 +392,7 @@ export class Server {
       discount: card.cardDiscount,
     }));
   }
-  public static getPlayers(players: Array<Player>, game: Game): Array<PlayerModel> {
+  public static getPlayers(players: Array<Player>, game: Game): Array<PlayerViewModel> {
     return players.map((player) => {
       return {
         actionsTakenThisRound: player.actionsTakenThisRound,

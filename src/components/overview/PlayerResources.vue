@@ -12,7 +12,7 @@
 <script lang="ts">
 import Vue from 'vue';
 import {CardName} from '../../CardName';
-import {PlayerModel} from '../../models/PlayerModel';
+import {PlayerViewModel} from '../../models/PlayerModel';
 import PlayerResource from './PlayerResource.vue';
 import {Resources} from '../../Resources';
 
@@ -20,7 +20,7 @@ export default Vue.extend({
   name: 'PlayerResources',
   props: {
     player: {
-      type: Object as () => PlayerModel,
+      type: Object as () => PlayerViewModel,
     },
   },
   data: function() {

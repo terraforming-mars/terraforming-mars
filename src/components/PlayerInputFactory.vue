@@ -6,7 +6,7 @@
 
 import Vue from 'vue';
 import {PlayerInputTypes} from '../PlayerInputTypes';
-import {PlayerModel} from '../models/PlayerModel';
+import {PlayerViewModel} from '../models/PlayerModel';
 import {PlayerInputModel} from '../models/PlayerInputModel';
 import AndOptions from './AndOptions.vue';
 import OrOptions from './OrOptions.vue';
@@ -27,10 +27,10 @@ import ShiftAresGlobalParameters from './ShiftAresGlobalParameters.vue';
 export default Vue.component('player-input-factory', {
   props: {
     players: {
-      type: Array as () => Array<PlayerModel>,
+      type: Array as () => Array<PlayerViewModel>,
     },
     player: {
-      type: Object as () => PlayerModel,
+      type: Object as () => PlayerViewModel,
     },
     playerinput: {
       type: Object as () => PlayerInputModel,

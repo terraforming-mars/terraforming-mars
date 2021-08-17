@@ -17,7 +17,7 @@ import Vue from 'vue';
 import {mainAppSettings} from './App';
 import {$t} from '../directives/i18n';
 import {PlayerInputModel} from '../models/PlayerInputModel';
-import {PlayerModel} from '../models/PlayerModel';
+import {PlayerViewModel} from '../models/PlayerModel';
 import {PreferencesManager} from './PreferencesManager';
 import {SoundManager} from './SoundManager';
 import {TranslateMixin} from './TranslateMixin';
@@ -33,10 +33,10 @@ export default Vue.extend({
   name: 'waiting-for',
   props: {
     player: {
-      type: Object as () => PlayerModel,
+      type: Object as () => PlayerViewModel,
     },
     players: {
-      type: Array as () => Array<PlayerModel>,
+      type: Array as () => Array<PlayerViewModel>,
     },
     settings: {
       type: Object as () => typeof raw_settings,

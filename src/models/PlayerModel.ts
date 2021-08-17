@@ -11,6 +11,7 @@ export interface BasePlayerModel {
   color: Color;
 }
 
+/** The public information about a player */
 export interface PublicPlayerModel extends BasePlayerModel {
   actionsTakenThisRound: number;
   actionsThisGeneration: Array<string /* CardName */>;
@@ -52,7 +53,8 @@ export interface PublicPlayerModel extends BasePlayerModel {
   victoryPointsBreakdown: VictoryPointsBreakdown;
 }
 
-export interface PlayerModel extends PublicPlayerModel {
+/** A player's view of the game, including their secret information. */
+export interface PlayerViewModel extends PublicPlayerModel {
   cardsInHand: Array<CardModel>;
   dealtCorporationCards: Array<CardModel>;
   dealtPreludeCards: Array<CardModel>;

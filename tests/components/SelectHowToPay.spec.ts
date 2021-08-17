@@ -1,7 +1,7 @@
 import {createLocalVue, mount} from '@vue/test-utils';
 import SelectHowToPay from '../../src/components/SelectHowToPay.vue';
 import {PlayerInputModel} from '../../src/models/PlayerInputModel';
-import {PlayerModel} from '../../src/models/PlayerModel';
+import {PlayerViewModel} from '../../src/models/PlayerModel';
 import {PaymentTester} from './PaymentTester';
 
 describe('SelectHowToPay', () => {
@@ -73,9 +73,9 @@ describe('SelectHowToPay', () => {
 
   const setupBill = function(
     amount: number,
-    playerFields: Partial<PlayerModel>,
+    playerFields: Partial<PlayerViewModel>,
     playerInputFields: Partial<PlayerInputModel>) {
-    const player: Partial<PlayerModel> = Object.assign({
+    const player: Partial<PlayerViewModel> = Object.assign({
       id: 'foo',
       steel: 0,
       titanium: 0,

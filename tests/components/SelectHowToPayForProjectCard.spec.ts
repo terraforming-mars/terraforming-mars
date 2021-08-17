@@ -5,7 +5,7 @@ import {CardName} from '../../src/CardName';
 import {CardType} from '../../src/cards/CardType';
 import SelectHowToPayForProjectCard from '../../src/components/SelectHowToPayForProjectCard.vue';
 import {PlayerInputModel} from '../../src/models/PlayerInputModel';
-import {PlayerModel} from '../../src/models/PlayerModel';
+import {PlayerViewModel} from '../../src/models/PlayerModel';
 import {Units} from '../../src/Units';
 import {FakeLocalStorage} from './FakeLocalStorage';
 import {PaymentTester} from './PaymentTester';
@@ -320,10 +320,10 @@ describe('SelectHowToPayForProjectCard', () => {
   const setupCardForPurchase = function(
     cardName: CardName,
     cardCost: number,
-    playerFields: Partial<PlayerModel>,
+    playerFields: Partial<PlayerViewModel>,
     playerInputFields: Partial<PlayerInputModel>,
     reserveUnits: Units = Units.EMPTY) {
-    const player: Partial<PlayerModel> = Object.assign({
+    const player: Partial<PlayerViewModel> = Object.assign({
       cards: [{name: cardName, calculatedCost: cardCost}],
       id: 'foo',
       steel: 0,

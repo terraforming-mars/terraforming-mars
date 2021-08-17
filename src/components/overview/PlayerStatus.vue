@@ -14,7 +14,7 @@
 import Vue from 'vue';
 import {ActionLabel} from './ActionLabel';
 import {mainAppSettings} from '../App';
-import {PlayerModel} from '../../models/PlayerModel';
+import {PlayerViewModel} from '../../models/PlayerModel';
 import PlayerTimer from './PlayerTimer.vue';
 
 export const hidePlayerData = (root: typeof mainAppSettings.methods, playerIndex: number) => {
@@ -25,7 +25,7 @@ export default Vue.extend({
   name: 'player-status',
   props: {
     player: {
-      type: Object as () => PlayerModel,
+      type: Object as () => PlayerViewModel,
     },
     firstForGen: {
       type: Boolean,

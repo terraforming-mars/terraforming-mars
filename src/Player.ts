@@ -846,6 +846,8 @@ export class Player implements ISerializable<SerializedPlayer> {
     tags.forEach((tag) => {
       if (this.getTagCount(tag, false, false) > 0) {
         distinctCount++;
+      } else if (tag === Tags.SCIENCE && this.hasTurmoilScienceTagBonus) {
+        distinctCount++;
       }
     });
     if (distinctCount + this.getTagCount(Tags.WILDCARD) >= tags.length) {

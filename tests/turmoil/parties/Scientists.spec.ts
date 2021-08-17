@@ -8,6 +8,9 @@ import {Scientists, SCIENTISTS_BONUS_1, SCIENTISTS_BONUS_2, SCIENTISTS_POLICY_1,
 import {SearchForLife} from '../../../src/cards/base/SearchForLife';
 import {Research} from '../../../src/cards/base/Research';
 import {GeneRepair} from '../../../src/cards/base/GeneRepair';
+import {PrideoftheEarthArkship} from '../../../src/cards/moon/PrideoftheEarthArkship';
+import {SpaceStation} from '../../../src/cards/base/SpaceStation';
+import {Satellites} from '../../../src/cards/base/Satellites';
 
 describe('Scientists', function() {
   let player : Player; let game : Game; let turmoil: Turmoil; let scientists: Scientists;
@@ -81,6 +84,20 @@ describe('Scientists', function() {
     const scientistsPolicy = SCIENTISTS_POLICY_4;
     scientistsPolicy.apply(game);
     player.playedCards.push(new Research());
+    expect(card.canPlay(player)).to.be.true;
+  });
+
+  it('Ruling policy 4: Cards with multiple tag requirements may be played with 1 less Science tag', function() {
+    TestingUtils.setRulingPartyAndRulingPolicy(game, turmoil, scientists, scientists.policies[3].id);
+
+    // Meet all card requirements except the Science tag
+    player.playedCards.push(new SpaceStation(), new Satellites());
+    player.titanium = 2;
+    const card = new PrideoftheEarthArkship();
+    expect(card.canPlay(player)).to.be.false;
+
+    const scientistsPolicy = SCIENTISTS_POLICY_4;
+    scientistsPolicy.apply(game);
     expect(card.canPlay(player)).to.be.true;
   });
 });

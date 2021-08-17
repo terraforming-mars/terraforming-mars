@@ -55,7 +55,6 @@
 import Vue from 'vue';
 
 import {PlayerInputModel} from '../models/PlayerInputModel';
-import {PlayerViewModel} from '../models/PlayerModel';
 import {IPayProductionModel} from '../models/IPayProductionUnitsModel';
 import {Units} from '../Units';
 import {TranslateMixin} from './TranslateMixin';
@@ -73,9 +72,6 @@ interface SelectProductionToLoseModel {
 export default Vue.extend({
   name: 'SelectProductionToLose',
   props: {
-    player: {
-      type: Object as () => PlayerViewModel,
-    },
     playerinput: {
       type: Object as () => Required<Pick<PlayerInputModel, 'title' | 'payProduction' | 'buttonLabel'>>,
     },

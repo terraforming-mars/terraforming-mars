@@ -18,7 +18,7 @@
 <script lang="ts">
 
 import Vue from 'vue';
-import {PlayerViewModel} from '../models/PlayerModel';
+import {PlayerViewModel, PublicPlayerModel} from '../models/PlayerModel';
 import {PlayerInputModel} from '../models/PlayerInputModel';
 import Button from '../components/common/Button.vue';
 import {TranslateMixin} from '../components/TranslateMixin';
@@ -30,7 +30,7 @@ export default Vue.extend({
       type: Object as () => PlayerViewModel,
     },
     players: {
-      type: Array as () => Array<PlayerViewModel>,
+      type: Array as () => Array<PublicPlayerModel>,
     },
     playerinput: {
       type: Object as () => PlayerInputModel,

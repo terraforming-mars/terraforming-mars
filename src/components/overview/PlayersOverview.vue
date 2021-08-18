@@ -118,17 +118,17 @@ export default Vue.extend({
                 </div>
             </div>
             <player-info v-for="(p, index) in getPlayersInOrder()"
-              :activePlayer="player"
               :player="p"
               :key="p.id"
+              :playerView="player"
               :firstForGen="getIsFirstForGen(p)"
               :actionLabel="getActionLabel(p)"
               :playerIndex="index"/>
             <div v-if="player.players.length > 1" class="player-divider" />
             <player-info
               :player="getPlayerOnFocus()"
-              :activePlayer="player"
-              :key="player.players.length - 1"
+              :key="player.id"
+              :playerView="player"
               :firstForGen="getIsFirstForGen(player)"
               :actionLabel="getActionLabel(player)"
               :playerIndex="-1"/>

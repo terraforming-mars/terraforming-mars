@@ -17,7 +17,7 @@ import Vue from 'vue';
 import {mainAppSettings} from './App';
 import {$t} from '../directives/i18n';
 import {PlayerInputModel} from '../models/PlayerInputModel';
-import {PlayerViewModel} from '../models/PlayerModel';
+import {PlayerViewModel, PublicPlayerModel} from '../models/PlayerModel';
 import {PreferencesManager} from './PreferencesManager';
 import {SoundManager} from './SoundManager';
 import {TranslateMixin} from './TranslateMixin';
@@ -36,7 +36,7 @@ export default Vue.extend({
       type: Object as () => PlayerViewModel,
     },
     players: {
-      type: Array as () => Array<PlayerViewModel>,
+      type: Array as () => Array<PublicPlayerModel>,
     },
     settings: {
       type: Object as () => typeof raw_settings,

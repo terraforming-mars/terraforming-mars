@@ -132,6 +132,11 @@ export default Vue.extend({
     PlayerTagDiscount,
     JovianMultiplier,
   },
+  computed: {
+    isThisPlayer: function(): boolean {
+      return this.player.color === this.playerView.color;
+    },
+  },
 
   methods: {
     showColonyCount: function(): boolean {
@@ -152,9 +157,6 @@ export default Vue.extend({
         return isTagInGame(tag, this.playerView.game);
       });
     },
-    isThisPlayer: function(): boolean {
-      return this.player.color === this.playerView.color;
-    },
     getCardCount: function(): number {
       if (this.player.cardsInHandNbr) {
         return this.player.cardsInHandNbr;
@@ -168,7 +170,7 @@ export default Vue.extend({
       return this.player.victoryPointsBreakdown.total;
     },
     hideVpCount: function(): boolean {
-      return !this.playerView.game.gameOptions.showOtherPlayersVP && !this.isThisPlayer();
+      return !this.playerView.game.gameOptions.showOtherPlayersVP && !this.isThisPlayer;
     },
     showShortTags: function(): boolean {
       if (this.hideZeroTags === true) return true;

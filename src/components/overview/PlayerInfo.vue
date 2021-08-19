@@ -1,6 +1,6 @@
 <script lang="ts">
 import Vue from 'vue';
-import {PlayerViewModel} from '../../models/PlayerModel';
+import {PlayerViewModel, PublicPlayerModel} from '../../models/PlayerModel';
 import PlayerResources from './PlayerResources.vue';
 import PlayerTags from './PlayerTags.vue';
 import PlayerStatus from './PlayerStatus.vue';
@@ -20,9 +20,9 @@ export default Vue.extend({
   name: 'PlayerInfo',
   props: {
     player: {
-      type: Object as () => PlayerViewModel,
+      type: Object as () => PublicPlayerModel,
     },
-    activePlayer: {
+    playerView: {
       type: Object as () => PlayerViewModel,
     },
     firstForGen: {
@@ -58,15 +58,12 @@ export default Vue.extend({
       const classes = ['player-status-and-res'];
       return classes.join(' ');
     },
-    getIsActivePlayer: function(): boolean {
-      return this.player.color === this.activePlayer.color;
-    },
     pinPlayer: function() {
       let hiddenPlayersIndexes: Array<Number> = [];
       const playerPinned = isPinned(this.$root, this.playerIndex);
 
       // if player is already pinned, add to hidden players (toggle)
-      hiddenPlayersIndexes = range(this.activePlayer.players.length - 1);
+      hiddenPlayersIndexes = range(this.playerView.players.length - 1);
       if (!playerPinned) {
         showPlayerData(this.$root, this.playerIndex);
         hiddenPlayersIndexes = hiddenPlayersIndexes.filter(
@@ -84,8 +81,8 @@ export default Vue.extend({
       return isPinned(this.$root, this.playerIndex) ? 'hide' : 'show';
     },
     togglePlayerDetails: function() {
-      // for active player => scroll to cards UI
-      if (this.player.color === this.activePlayer.color) {
+      // for the player viewing this page => scroll to cards UI
+      if (this.player.color === this.playerView.color) {
         const el: HTMLElement = document.getElementsByClassName(
           'sidebar_icon--cards',
         )[0] as HTMLElement;
@@ -112,7 +109,7 @@ export default Vue.extend({
         <div class="player-status">
           <div class="player-info-details">
             <div class="player-info-name">{{ player.name }}</div>
-            <div class="icon-first-player" v-if="firstForGen && activePlayer.players.length > 1">1st</div>
+            <div class="icon-first-player" v-if="firstForGen && playerView.players.length > 1">1st</div>
             <div class="player-info-corp" v-if="player.corporationCard !== undefined" :title="player.corporationCard.name">{{ player.corporationCard.name }}</div>
           </div>
           <player-status :player="player" :firstForGen="firstForGen" v-trim-whitespace :actionLabel="actionLabel" :playerIndex="playerIndex"/>
@@ -141,6 +138,6 @@ export default Vue.extend({
             <span class="tag-count-display">{{ getAvailableBlueActionCount() }}</span>
           </div>
         </div>
-        <PlayerTags :player="player" v-trim-whitespace :isActivePlayer="getIsActivePlayer()" :hideZeroTags="hideZeroTags" />
+        <PlayerTags :player="player" :playerView="playerView" :hideZeroTags="hideZeroTags" />
       </div>
 </template>

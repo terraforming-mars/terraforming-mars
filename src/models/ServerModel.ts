@@ -91,6 +91,10 @@ export class Server {
   public static getPlayerModel(player: Player): PlayerViewModel {
     const game = player.game;
 
+    const players = this.getPlayers(game.getPlayers(), game);
+    const thisPlayerIndex = players.findIndex((p) => p.id === player.id);
+    const thisPlayer = players[thisPlayerIndex];
+
     return {
       actionsTakenThisRound: player.actionsTakenThisRound,
       actionsThisGeneration: Array.from(player.getActionsThisGeneration()),
@@ -126,7 +130,7 @@ export class Server {
       plantProduction: player.getProduction(Resources.PLANTS),
       plantsAreProtected: player.plantsAreProtected(),
       playedCards: this.getCards(player, player.playedCards, {showResources: true}),
-      players: this.getPlayers(game.getPlayers(), game),
+      players: players,
       preludeCardsInHand: this.getCards(player, player.preludeCardsInHand),
       selfReplicatingRobotsCards: this.getSelfReplicatingRobotsTargetCards(player),
       steel: player.steel,
@@ -134,6 +138,8 @@ export class Server {
       steelValue: player.getSteelValue(),
       tags: player.getAllTags(),
       terraformRating: player.getTerraformRating(),
+      thisPlayer: thisPlayer,
+      thisPlayerIndex: thisPlayerIndex,
       timer: player.timer.serialize(),
       titanium: player.titanium,
       titaniumProduction: player.getProduction(Resources.TITANIUM),

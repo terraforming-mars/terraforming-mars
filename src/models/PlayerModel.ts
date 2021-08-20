@@ -17,6 +17,7 @@ export interface PublicPlayerModel extends BasePlayerModel {
   actionsThisGeneration: Array<string /* CardName */>;
   availableBlueCardActionCount: number;
   cardCost: number;
+  cardDiscount: number;
   cardsInHandNbr: number;
   citiesCount: number;
   coloniesCount: number;

@@ -20,7 +20,7 @@ describe('PlayerStatus', function() {
       propsData: {
         player: {
           corporationCard: {},
-          id: 'foobar',
+          id: 'blue',
           playedCards: [],
           gameOptions: {
             showTimers: false,

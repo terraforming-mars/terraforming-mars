@@ -9,7 +9,7 @@ import {CardModel} from '../models/CardModel';
 import {CardOrderStorage} from './CardOrderStorage';
 import {PaymentWidgetMixin, SelectHowToPayForProjectCardModel} from './PaymentWidgetMixin';
 import {PlayerInputModel} from '../models/PlayerInputModel';
-import {PlayerViewModel} from '../models/PlayerModel';
+import {PlayerViewModel, PublicPlayerModel} from '../models/PlayerModel';
 import {PreferencesManager} from './PreferencesManager';
 import {Tags} from '../cards/Tags';
 import {TranslateMixin} from './TranslateMixin';
@@ -32,6 +32,11 @@ export default Vue.extend({
     },
     showtitle: {
       type: Boolean,
+    },
+  },
+  computed: {
+    thisPlayer: function(): PublicPlayerModel {
+      return this.player.thisPlayer;
     },
   },
   data: function(): SelectHowToPayForProjectCardModel {
@@ -105,7 +110,7 @@ export default Vue.extend({
       this.titanium = 0;
       this.heat = 0;
 
-      let megacreditBalance = Math.max(this.cost - this.player.megaCredits, 0);
+      let megacreditBalance = Math.max(this.cost - this.thisPlayer.megaCredits, 0);
 
       // Calcualtes the optimal number of units to use given the unit value.
       //
@@ -156,17 +161,17 @@ export default Vue.extend({
         this.science = deductUnits(this.playerinput.science, 1);
       }
 
-      this.available.steel = Math.max(this.player.steel - this.card.reserveUnits.steel, 0);
+      this.available.steel = Math.max(this.thisPlayer.steel - this.card.reserveUnits.steel, 0);
       if (megacreditBalance > 0 && this.canUseSteel()) {
-        this.steel = deductUnits(this.available.steel, this.player.steelValue, true);
+        this.steel = deductUnits(this.available.steel, this.thisPlayer.steelValue, true);
       }
 
-      this.available.titanium = Math.max(this.player.titanium - this.card.reserveUnits.titanium, 0);
+      this.available.titanium = Math.max(this.thisPlayer.titanium - this.card.reserveUnits.titanium, 0);
       if (megacreditBalance > 0 && this.canUseTitanium()) {
-        this.titanium = deductUnits(this.available.titanium, this.player.titaniumValue, true);
+        this.titanium = deductUnits(this.available.titanium, this.thisPlayer.titaniumValue, true);
       }
 
-      this.available.heat = Math.max(this.player.heat - this.card.reserveUnits.heat, 0);
+      this.available.heat = Math.max(this.thisPlayer.heat - this.card.reserveUnits.heat, 0);
       if (megacreditBalance > 0 && this.canUseHeat()) {
         this.heat = deductUnits(this.available.heat, 1);
       }
@@ -177,7 +182,7 @@ export default Vue.extend({
         // We need not try to save heat since heat is paid last at value 1. We will never overspend in heat.
         // We do not need to save Ti either because Ti is paid last before heat. If we overspend, it is because of Ti.
         // We cannot reduce the amount of Ti and still pay enough.
-        this.steel -= saveOverSpendingUnits(this.steel, this.player.steelValue);
+        this.steel -= saveOverSpendingUnits(this.steel, this.thisPlayer.steelValue);
         this.floaters -= saveOverSpendingUnits(this.floaters, 3);
         this.microbes -= saveOverSpendingUnits(this.microbes, 2);
         this.science -= saveOverSpendingUnits(this.science, 1);
@@ -185,7 +190,7 @@ export default Vue.extend({
       }
     },
     canUseHeat: function(): boolean {
-      return this.playerinput.canUseHeat === true && this.player.heat > 0;
+      return this.playerinput.canUseHeat === true && this.thisPlayer.heat > 0;
     },
     canUseSteel: function() {
       if (this.card !== undefined && this.available.steel > 0) {
@@ -264,7 +269,7 @@ export default Vue.extend({
         floaters: this.floaters,
         science: this.science,
       };
-      if (htp.megaCredits > this.player.megaCredits) {
+      if (htp.megaCredits > this.thisPlayer.megaCredits) {
         this.warning = 'You don\'t have that many M€';
         return;
       }
@@ -280,15 +285,15 @@ export default Vue.extend({
         this.warning = 'You don\'t have enough science resources';
         return;
       }
-      if (htp.heat > this.player.heat) {
+      if (htp.heat > this.thisPlayer.heat) {
         this.warning = 'You don\'t have enough heat';
         return;
       }
-      if (htp.titanium > this.player.titanium) {
+      if (htp.titanium > this.thisPlayer.titanium) {
         this.warning = 'You don\'t have enough titanium';
         return;
       }
-      if (htp.steel > this.player.steel) {
+      if (htp.steel > this.thisPlayer.steel) {
         this.warning = 'You don\'t have enough steel';
         return;
       }
@@ -299,8 +304,8 @@ export default Vue.extend({
         htp.science +
         htp.heat +
         htp.megaCredits +
-        (htp.steel * this.player.steelValue) +
-        (htp.titanium * this.player.titaniumValue);
+        (htp.steel * this.thisPlayer.steelValue) +
+        (htp.titanium * this.thisPlayer.titaniumValue);
 
       if (totalSpentAmt < this.cost) {
         this.warning = 'Haven\'t spent enough';
@@ -309,11 +314,11 @@ export default Vue.extend({
 
       if (totalSpentAmt > this.cost) {
         const diff = totalSpentAmt - this.cost;
-        if (htp.titanium && diff >= this.player.titaniumValue) {
+        if (htp.titanium && diff >= this.thisPlayer.titaniumValue) {
           this.warning = 'You cannot overspend titanium';
           return;
         }
-        if (htp.steel && diff >= this.player.steelValue) {
+        if (htp.steel && diff >= this.thisPlayer.steelValue) {
           this.warning = 'You cannot overspend steel';
           return;
         }

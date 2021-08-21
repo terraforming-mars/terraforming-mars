@@ -91,6 +91,10 @@ export class Server {
   public static getPlayerModel(player: Player): PlayerViewModel {
     const game = player.game;
 
+    const players: Array<PublicPlayerModel> = this.getPlayers(game.getPlayers(), game);
+    const thisPlayerIndex: number = players.findIndex((p) => p.color === player.color);
+    const thisPlayer: PublicPlayerModel = players[thisPlayerIndex];
+
     return {
       actionsTakenThisRound: player.actionsTakenThisRound,
       actionsThisGeneration: Array.from(player.getActionsThisGeneration()),
@@ -135,6 +139,7 @@ export class Server {
       steelValue: player.getSteelValue(),
       tags: player.getAllTags(),
       terraformRating: player.getTerraformRating(),
+      thisPlayer: thisPlayer,
       timer: player.timer.serialize(),
       titanium: player.titanium,
       titaniumProduction: player.getProduction(Resources.TITANIUM),

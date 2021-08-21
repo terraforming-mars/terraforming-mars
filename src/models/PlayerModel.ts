@@ -64,5 +64,6 @@ export interface PlayerViewModel extends PublicPlayerModel {
   game: GameModel;
   pickedCorporationCard: Array<CardModel>; // Why Array?
   players: Array<PublicPlayerModel>;
+  thisPlayer: PublicPlayerModel;
   waitingFor: PlayerInputModel | undefined;
 }

@@ -4,7 +4,7 @@ import Vue from 'vue';
 
 import StackedCards from './StackedCards.vue';
 import {PlayerMixin} from './PlayerMixin';
-import {PlayerViewModel} from '../models/PlayerModel';
+import {PublicPlayerModel} from '../models/PlayerModel';
 import {mainAppSettings} from './App';
 import Card from './card/Card.vue';
 import Button from './common/Button.vue';
@@ -13,7 +13,7 @@ export default Vue.extend({
   name: 'OtherPlayer',
   props: {
     player: {
-      type: Object as () => PlayerViewModel,
+      type: Object as () => PublicPlayerModel,
     },
     playerIndex: {
       type: Number,

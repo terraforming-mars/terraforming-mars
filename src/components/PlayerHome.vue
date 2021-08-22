@@ -1,8 +1,8 @@
 <template>
-        <div id="player-home" :class="(player.game.turmoil ? 'with-turmoil': '')">
+        <div id="player-home" :class="(game.turmoil ? 'with-turmoil': '')">
             <top-bar :player="player" />
 
-            <div v-if="player.game.phase === 'end'">
+            <div v-if="game.phase === 'end'">
                 <div class="player_home_block">
                     <DynamicTitle title="This game is over!" :color="player.color"/>
                     <a :href="'/the-end?id='+ player.id" v-i18n>Go to game results</a>
@@ -12,18 +12,18 @@
             <sidebar v-trim-whitespace
               :acting_player="isPlayerActing(player)"
               :player_color="player.color"
-              :generation="player.game.generation"
-              :coloniesCount="player.game.colonies.length"
-              :temperature = "player.game.temperature"
-              :oxygen = "player.game.oxygenLevel"
-              :oceans = "player.game.oceans"
-              :venus = "player.game.venusScaleLevel"
-              :turmoil = "player.game.turmoil"
-              :moonData="player.game.moon"
-              :gameOptions = "player.game.gameOptions"
+              :generation="game.generation"
+              :coloniesCount="game.colonies.length"
+              :temperature = "game.temperature"
+              :oxygen = "game.oxygenLevel"
+              :oceans = "game.oceans"
+              :venus = "game.venusScaleLevel"
+              :turmoil = "game.turmoil"
+              :moonData="game.moon"
+              :gameOptions = "game.gameOptions"
               :playerNumber = "player.players.length"
-              :lastSoloGeneration = "player.game.lastSoloGeneration">
-                <div class="deck-size">{{ player.game.deckSize }}</div>
+              :lastSoloGeneration = "game.lastSoloGeneration">
+                <div class="deck-size">{{ game.deckSize }}</div>
             </sidebar>
 
             <div v-if="player.corporationCard">
@@ -31,37 +31,37 @@
                 <div class="player_home_block">
                     <a name="board" class="player_home_anchor"></a>
                     <board
-                        :spaces="player.game.spaces"
-                        :venusNextExtension="player.game.gameOptions.venusNextExtension"
-                        :venusScaleLevel="player.game.venusScaleLevel"
-                        :boardName ="player.game.gameOptions.boardName"
-                        :oceans_count="player.game.oceans"
-                        :oxygen_level="player.game.oxygenLevel"
-                        :temperature="player.game.temperature"
-                        :aresExtension="player.game.gameOptions.aresExtension"
-                        :aresData="player.game.aresData"
+                        :spaces="game.spaces"
+                        :venusNextExtension="game.gameOptions.venusNextExtension"
+                        :venusScaleLevel="game.venusScaleLevel"
+                        :boardName ="game.gameOptions.boardName"
+                        :oceans_count="game.oceans"
+                        :oxygen_level="game.oxygenLevel"
+                        :temperature="game.temperature"
+                        :aresExtension="game.gameOptions.aresExtension"
+                        :aresData="game.aresData"
                         id="shortkey-board"></board>
 
-                    <turmoil v-if="player.game.turmoil" :turmoil="player.game.turmoil"></turmoil>
+                    <turmoil v-if="game.turmoil" :turmoil="game.turmoil"></turmoil>
 
-                    <MoonBoard v-if="player.game.gameOptions.moonExpansion" :model="player.game.moon"></MoonBoard>
+                    <MoonBoard v-if="game.gameOptions.moonExpansion" :model="game.moon"></MoonBoard>
 
                     <div v-if="player.players.length > 1" class="player_home_block--milestones-and-awards">
-                        <Milestone :milestones_list="player.game.milestones" />
-                        <Award :awards_list="player.game.awards" />
+                        <Milestone :milestones_list="game.milestones" />
+                        <Award :awards_list="game.awards" />
                     </div>
                 </div>
 
                 <players-overview class="player_home_block player_home_block--players nofloat:" :player="player" v-trim-whitespace id="shortkey-playersoverview"/>
 
                 <div class="player_home_block nofloat">
-                    <log-panel :id="player.id" :players="player.players" :generation="player.game.generation" :lastSoloGeneration="player.game.lastSoloGeneration" :color="player.color"></log-panel>
+                    <log-panel :id="player.id" :players="player.players" :generation="game.generation" :lastSoloGeneration="game.lastSoloGeneration" :color="player.color"></log-panel>
                 </div>
 
                 <div class="player_home_block player_home_block--actions nofloat">
                     <a name="actions" class="player_home_anchor"></a>
                     <dynamic-title title="Actions" :color="player.color"/>
-                    <waiting-for v-if="player.game.phase !== 'end'" :players="player.players" :player="player" :settings="settings" :waitingfor="player.waitingFor"></waiting-for>
+                    <waiting-for v-if="game.phase !== 'end'" :players="player.players" :player="player" :settings="settings" :waitingfor="player.waitingFor"></waiting-for>
                 </div>
 
                 <div class="player_home_block player_home_block--hand" v-if="player.draftedCards.length > 0">
@@ -148,7 +148,7 @@
                     <div class="cardbox">
                       <Card :card="player.pickedCorporationCard[0]"/>
                     </div>
-                    <template v-if="player.game.gameOptions.preludeExtension">
+                    <template v-if="game.gameOptions.preludeExtension">
                       <div v-for="card in player.preludeCardsInHand" :key="card.name" class="cardbox">
                         <Card :card="card"/>
                       </div>
@@ -162,13 +162,13 @@
                 </template>
 
                 <dynamic-title v-if="player.pickedCorporationCard.length === 0" title="Select initial cards:" :color="player.color"/>
-                <waiting-for v-if="player.game.phase !== 'end'" :players="player.players" :player="player" :settings="settings" :waitingfor="player.waitingFor"></waiting-for>
+                <waiting-for v-if="game.phase !== 'end'" :players="player.players" :player="player" :settings="settings" :waitingfor="player.waitingFor"></waiting-for>
 
                 <dynamic-title title="Game details" :color="player.color"/>
 
                 <div class="player_home_block" v-if="player.players.length > 1">
-                    <Milestone :show_scores="false" :milestones_list="player.game.milestones" />
-                    <Award :show_scores="false" :awards_list="player.game.awards" />
+                    <Milestone :show_scores="false" :milestones_list="game.milestones" />
+                    <Award :show_scores="false" :awards_list="game.awards" />
                 </div>
 
                 <div class="player_home_block player_home_block--turnorder nofloat" v-if="player.players.length>1">
@@ -190,23 +190,23 @@
                     </summary>
                     <div class="accordion-body">
                         <board
-                          :spaces="player.game.spaces"
-                          :venusNextExtension="player.game.gameOptions.venusNextExtension"
-                          :venusScaleLevel="player.game.venusScaleLevel"
-                          :boardName ="player.game.gameOptions.boardName"
-                          :aresExtension="player.game.gameOptions.aresExtension"
-                          :aresData="player.game.aresData">
+                          :spaces="game.spaces"
+                          :venusNextExtension="game.gameOptions.venusNextExtension"
+                          :venusScaleLevel="game.venusScaleLevel"
+                          :boardName ="game.gameOptions.boardName"
+                          :aresExtension="game.gameOptions.aresExtension"
+                          :aresData="game.aresData">
                         </board>
 
-                        <turmoil v-if="player.game.turmoil" :turmoil="player.game.turmoil"></turmoil>
+                        <turmoil v-if="game.turmoil" :turmoil="game.turmoil"></turmoil>
 
-                        <MoonBoard v-if="player.game.gameOptions.moonExpansion" :model="player.game.moon"></MoonBoard>
+                        <MoonBoard v-if="game.gameOptions.moonExpansion" :model="game.moon"></MoonBoard>
 
                     </div>
                 </details>
             </div>
 
-            <div v-if="player.game.colonies.length > 0" class="player_home_block" ref="colonies" id="shortkey-colonies">
+            <div v-if="game.colonies.length > 0" class="player_home_block" ref="colonies" id="shortkey-colonies">
                 <a name="colonies" class="player_home_anchor"></a>
                 <dynamic-title title="Colonies" :color="player.color"/>
                 <div class="colonies-fleets-cont" v-if="player.corporationCard">
@@ -215,7 +215,7 @@
                     </div>
                 </div>
                 <div class="player_home_colony_cont">
-                    <div class="player_home_colony" v-for="colony in player.game.colonies" :key="colony.name">
+                    <div class="player_home_colony" v-for="colony in game.colonies" :key="colony.name">
                         <colony :colony="colony"></colony>
                     </div>
                 </div>
@@ -234,7 +234,6 @@ import Award from './Award.vue';
 import PlayersOverview from './overview/PlayersOverview.vue';
 import WaitingFor from './WaitingFor.vue';
 import Sidebar from './Sidebar.vue';
-import {PlayerViewModel, PublicPlayerModel} from '../models/PlayerModel';
 import Colony from './Colony.vue';
 import LogPanel from './LogPanel.vue';
 import {PlayerMixin} from './PlayerMixin';
@@ -248,6 +247,8 @@ import {KeyboardNavigation} from '../../src/KeyboardNavigation';
 import MoonBoard from './moon/MoonBoard.vue';
 import {Phase} from '../../src/Phase';
 import StackedCards from './StackedCards.vue';
+import {GameModel} from '../models/GameModel';
+import {PlayerViewModel, PublicPlayerModel} from '../models/PlayerModel';
 
 import * as raw_settings from '../genfiles/settings.json';
 
@@ -287,6 +288,14 @@ export default Vue.extend({
     },
     settings: {
       type: Object as () => typeof raw_settings,
+    },
+  },
+  computed: {
+    thisPlayer: function(): PublicPlayerModel {
+      return this.player.thisPlayer;
+    },
+    game: function(): GameModel {
+      return this.player.game;
     },
   },
   components: {
@@ -384,7 +393,7 @@ export default Vue.extend({
       return false;
     },
     isInitialDraftingPhase(): boolean {
-      return (this.player.game.phase === Phase.INITIALDRAFTING) && this.player.game.gameOptions.initialDraftVariant;
+      return (this.game.phase === Phase.INITIALDRAFTING) && this.game.gameOptions.initialDraftVariant;
     },
     getToggleLabel: function(hideType: string): string {
       if (hideType === 'ACTIVE') {
@@ -415,7 +424,7 @@ export default Vue.extend({
   },
   mounted: function() {
     window.addEventListener('keydown', this.navigatePage);
-    if (this.player.game.isTerraformed && TerraformedAlertDialog.shouldAlert && PreferencesManager.load('show_alerts') === '1') {
+    if (this.game.isTerraformed && TerraformedAlertDialog.shouldAlert && PreferencesManager.load('show_alerts') === '1') {
       alert('Mars is Terraformed!');
       // Avoids repeated calls.
       TerraformedAlertDialog.shouldAlert = false;

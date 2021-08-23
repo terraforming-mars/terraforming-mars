@@ -27,7 +27,7 @@ export interface PublicPlayerModel extends BasePlayerModel {
   fleetSize: number;
   heat: number;
   heatProduction: number;
-  id: string; // PlayerId
+  id: string; // Color
   influence: number;
   isActive: boolean;
   megaCredits: number;
@@ -62,7 +62,9 @@ export interface PlayerViewModel extends PublicPlayerModel {
   dealtProjectCards: Array<CardModel>;
   draftedCards: Array<CardModel>;
   game: GameModel;
+  id: string; // PlayerId
   pickedCorporationCard: Array<CardModel>; // Why Array?
   players: Array<PublicPlayerModel>;
+  thisPlayer: PublicPlayerModel;
   waitingFor: PlayerInputModel | undefined;
 }

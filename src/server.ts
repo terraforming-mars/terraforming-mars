@@ -124,29 +124,27 @@ if (process.env.KEY_PATH && process.env.CERT_PATH) {
   server = http.createServer(requestHandler);
 }
 
-console.log('Starting server on port ' + (process.env.PORT || 8080));
+Database.getInstance().initialize()
+  .then(() => {
+    Database.getInstance().purgeUnfinishedGames();
 
-try {
-  // The first call to Database.getInstance also intiailizes a connection to the database. Better to
-  // fail here than after the server opens to process requests.
-  Database.getInstance().purgeUnfinishedGames();
-} catch (err) {
-  console.error('Cannot connect to database:', err);
-  throw err;
-}
+    console.log('Starting server on port ' + (process.env.PORT || 8080));
+    console.log('version 0.X');
 
-console.log('version 0.X');
+    server.listen(process.env.PORT || 8080);
 
-server.listen(process.env.PORT || 8080);
-
-console.log();
-console.log(
-  'The secret serverId for this server is \x1b[1m' +
-  serverId +
-  '\x1b[0m. Use it to access the following administrative routes:',
-);
-console.log(
-  '* Overview of existing games: /games-overview?serverId=' + serverId,
-);
-console.log('* API for game IDs: /api/games?serverId=' + serverId + '\n');
-
+    console.log();
+    console.log(
+      'The secret serverId for this server is \x1b[1m' +
+      serverId +
+      '\x1b[0m. Use it to access the following administrative routes:',
+    );
+    console.log(
+      '* Overview of existing games: /games-overview?serverId=' + serverId,
+    );
+    console.log('* API for game IDs: /api/games?serverId=' + serverId + '\n');
+  })
+  .catch((err) => {
+    console.error('Cannot connect to database:', err);
+    throw err;
+  });

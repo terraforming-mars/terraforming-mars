@@ -18,8 +18,24 @@ export class SQLite implements IDatabase {
       fs.mkdirSync(dbFolder);
     }
     this.db = new sqlite3.Database(dbPath);
-    this.db.run('CREATE TABLE IF NOT EXISTS games(game_id varchar, players integer, save_id integer, game text, status text default \'running\', created_time timestamp default (strftime(\'%s\', \'now\')), PRIMARY KEY (game_id, save_id))');
-    this.db.run('CREATE TABLE IF NOT EXISTS game_results(game_id varchar not null, seed_game_id varchar, players integer, generations integer, game_options text, scores text, PRIMARY KEY (game_id))');
+  }
+
+  initialize(): Promise<void> {
+    return new Promise((resolve, reject) => {
+      this.db.run('CREATE TABLE IF NOT EXISTS games(game_id varchar, players integer, save_id integer, game text, status text default \'running\', created_time timestamp default (strftime(\'%s\', \'now\')), PRIMARY KEY (game_id, save_id))', (err) => {
+        if (err) {
+          reject(err);
+          return;
+        }
+        this.db.run('CREATE TABLE IF NOT EXISTS game_results(game_id varchar not null, seed_game_id varchar, players integer, generations integer, game_options text, scores text, PRIMARY KEY (game_id))', (err2) => {
+          if (err2) {
+            reject(err2);
+            return;
+          }
+          resolve();
+        });
+      });
+    });
   }
 
   getClonableGames(cb: (err: Error | undefined, allGames: Array<IGameData>) => void) {
@@ -50,8 +66,8 @@ export class SQLite implements IDatabase {
         rows.forEach((row) => {
           allGames.push(row.game_id);
         });
-        return cb(err ?? undefined, allGames);
       }
+      return cb(err ?? undefined, allGames);
     });
   }
 

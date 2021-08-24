@@ -44,7 +44,7 @@ export default Vue.extend({
     },
     getPlayerOnFocus: function(): PublicPlayerModel {
       return this.player.players.filter(
-        (p: PublicPlayerModel) => p.color === this.player.color,
+        (p: PublicPlayerModel) => p.color === this.player.thisPlayer.color,
       )[0];
     },
     getIsFirstForGen: function(player: PublicPlayerModel): boolean {
@@ -55,7 +55,7 @@ export default Vue.extend({
       let result: Array<PublicPlayerModel> = [];
       let currentPlayerOffset: number = 0;
       const currentPlayerIndex: number = getCurrentPlayerIndex(
-        this.player.color,
+        this.player.thisPlayer.color,
         this.player.players,
       );
 
@@ -129,8 +129,8 @@ export default Vue.extend({
               :player="getPlayerOnFocus()"
               :key="player.id"
               :playerView="player"
-              :firstForGen="getIsFirstForGen(player)"
-              :actionLabel="getActionLabel(player)"
+              :firstForGen="getIsFirstForGen(player.thisPlayer)"
+              :actionLabel="getActionLabel(player.thisPlayer)"
               :playerIndex="-1"/>
         </div>
 </template>

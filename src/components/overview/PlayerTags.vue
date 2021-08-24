@@ -133,7 +133,7 @@ export default Vue.extend({
   },
   computed: {
     isThisPlayer: function(): boolean {
-      return this.player.color === this.playerView.color;
+      return this.player.color === this.playerView.thisPlayer.color;
     },
   },
 

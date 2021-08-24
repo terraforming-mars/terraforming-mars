@@ -82,7 +82,7 @@ export default Vue.extend({
     },
     togglePlayerDetails: function() {
       // for the player viewing this page => scroll to cards UI
-      if (this.player.color === this.playerView.color) {
+      if (this.player.color === this.playerView.thisPlayer.color) {
         const el: HTMLElement = document.getElementsByClassName(
           'sidebar_icon--cards',
         )[0] as HTMLElement;

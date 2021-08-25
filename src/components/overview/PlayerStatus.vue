@@ -3,7 +3,7 @@
         <div class="player-status-bottom">
           <div :class="getLabelAndTimerClasses()">
             <div :class="getActionStatusClasses()">{{ actionLabel }}</div>
-            <div class="player-status-timer" v-if="player.game.gameOptions.showTimers"><player-timer :timer="player.thisPlayer.timer"/></div>
+            <div class="player-status-timer" v-if="playerView.game.gameOptions.showTimers"><player-timer :timer="playerView.thisPlayer.timer"/></div>
           </div>
         </div>
       </div>
@@ -24,7 +24,7 @@ export const hidePlayerData = (root: typeof mainAppSettings.methods, playerIndex
 export default Vue.extend({
   name: 'player-status',
   props: {
-    player: {
+    playerView: {
       type: Object as () => PlayerViewModel,
     },
     firstForGen: {
@@ -45,7 +45,7 @@ export default Vue.extend({
       const classes: Array<string> = [];
       const baseClass = 'player-action-status-container';
       classes.push(baseClass);
-      if (!this.player.game.gameOptions.showTimers) {
+      if (!this.playerView.game.gameOptions.showTimers) {
         classes.push('no-timer');
       }
       if (this.actionLabel === ActionLabel.PASSED) {

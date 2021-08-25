@@ -112,7 +112,7 @@ export default Vue.extend({
             <div class="icon-first-player" v-if="firstForGen && playerView.players.length > 1">1st</div>
             <div class="player-info-corp" v-if="player.corporationCard !== undefined" :title="player.corporationCard.name">{{ player.corporationCard.name }}</div>
           </div>
-          <player-status :player="player" :firstForGen="firstForGen" v-trim-whitespace :actionLabel="actionLabel" :playerIndex="playerIndex"/>
+          <player-status :playerView="playerView" :firstForGen="firstForGen" v-trim-whitespace :actionLabel="actionLabel" :playerIndex="playerIndex"/>
         </div>
           <PlayerResources :player="player" v-trim-whitespace />
           <div class="player-played-cards">

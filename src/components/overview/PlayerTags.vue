@@ -133,7 +133,7 @@ export default Vue.extend({
   },
   computed: {
     isThisPlayer: function(): boolean {
-      return this.player.color === this.playerView.color;
+      return this.player.color === this.playerView.thisPlayer.color;
     },
   },
 
@@ -191,7 +191,7 @@ export default Vue.extend({
         return true;
       }
 
-      if (tag === 'all' && this.playerView.cardDiscount > 0) {
+      if (tag === 'all' && this.playerView.thisPlayer.cardDiscount > 0) {
         return true;
       }
 
@@ -210,7 +210,7 @@ export default Vue.extend({
       }
 
       if (tag === 'all') {
-        discount += this.playerView.cardDiscount;
+        discount += this.playerView.thisPlayer.cardDiscount;
       }
 
       return discount;

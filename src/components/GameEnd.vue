@@ -15,7 +15,7 @@
                             <ul class="game_end_list">
                                 <li v-i18n>Try to win with expansions enabled</li>
                                 <li v-i18n>Try to win before the last generation comes</li>
-                                <li><span v-i18n>Can you get</span> {{ player.victoryPointsBreakdown.total + 10 }}<span v-i18n>+ Victory Points?</span></li>
+                                <li><span v-i18n>Can you get</span> {{ player.thisPlayer.victoryPointsBreakdown.total + 10 }}<span v-i18n>+ Victory Points?</span></li>
                             </ul>
                         </div>
                     </div>
@@ -136,7 +136,7 @@
                   <MoonBoard v-if="player.game.gameOptions.moonExpansion" :model="player.game.moon"></MoonBoard>
                 </div>
                 <div class="game_end_block--log game-end-column">
-                  <log-panel :color="player.color" :generation="player.game.generation" :id="player.id" :lastSoloGeneration="player.game.lastSoloGeneration" :players="player.players"></log-panel>
+                  <log-panel :color="player.thisPlayer.color" :generation="player.game.generation" :id="player.id" :lastSoloGeneration="player.game.lastSoloGeneration" :players="player.players"></log-panel>
                 </div>
               </div>
             </div>

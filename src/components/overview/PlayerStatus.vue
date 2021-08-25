@@ -3,7 +3,7 @@
         <div class="player-status-bottom">
           <div :class="getLabelAndTimerClasses()">
             <div :class="getActionStatusClasses()">{{ actionLabel }}</div>
-            <div class="player-status-timer" v-if="player.game.gameOptions.showTimers"><player-timer :timer="player.timer"/></div>
+            <div class="player-status-timer" v-if="player.game.gameOptions.showTimers"><player-timer :timer="player.thisPlayer.timer"/></div>
           </div>
         </div>
       </div>

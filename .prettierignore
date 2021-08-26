@@ -1,0 +1,8 @@
+# exclude everything
+*
+
+# except /src/components/**/*
+!src/
+src/*
+!/src/components
+!/src/components/**/*

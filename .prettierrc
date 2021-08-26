@@ -1,0 +1,7 @@
+{
+  "quoteProps": "as-needed",
+  "bracketSpacing": false,
+  "singleQuote": true,
+  "trailingComma": "all",
+  "printWidth": 120
+}

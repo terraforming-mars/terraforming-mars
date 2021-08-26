@@ -81,7 +81,7 @@ export const mainAppSettings = {
     'help': Help,
   },
   'methods': {
-    showAlert: function(message: string, cb: () => void = () => {}): void {
+    showAlert(message: string, cb: () => void = () => {}): void {
       const dialogElement: HTMLElement | null = document.getElementById('alert-dialog');
       const buttonElement: HTMLElement | null = document.getElementById('alert-dialog-button');
       const messageElement: HTMLElement | null = document.getElementById('alert-dialog-message');
@@ -98,14 +98,14 @@ export const mainAppSettings = {
         cb();
       }
     },
-    setVisibilityState: function(targetVar: string, isVisible: boolean) {
+    setVisibilityState(targetVar: string, isVisible: boolean) {
       if (isVisible === this.getVisibilityState(targetVar)) return;
       (this as unknown as typeof mainAppSettings.data).componentsVisibility[targetVar] = isVisible;
     },
-    getVisibilityState: function(targetVar: string): boolean {
+    getVisibilityState(targetVar: string): boolean {
       return (this as unknown as typeof mainAppSettings.data).componentsVisibility[targetVar] ? true : false;
     },
-    updatePlayer: function() {
+    updatePlayer() {
       const currentPathname: string = window.location.pathname;
       const xhr = new XMLHttpRequest();
       const app = this as unknown as typeof mainAppSettings.data;
@@ -152,7 +152,7 @@ export const mainAppSettings = {
       xhr.send();
     },
   },
-  'mounted': function() {
+  mounted() {
     document.title = constants.APP_NAME;
     if (!window.HTMLDialogElement) dialogPolyfill.default.registerDialog(document.getElementById('alert-dialog'));
     const currentPathname: string = window.location.pathname;

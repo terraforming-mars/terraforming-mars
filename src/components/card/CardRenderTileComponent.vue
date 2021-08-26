@@ -128,7 +128,7 @@ export default Vue.extend({
     },
   },
   methods: {
-    getTiles: function(): string {
+    getTiles(): string {
       const classes: string[] = ['card-tile'];
       if (this.item.hasSymbol) {
         classes.push('card-tile-canvas');
@@ -142,7 +142,7 @@ export default Vue.extend({
       return generateClassString(classes);
     },
     // Symbols for tiles go on top of the tile canvas
-    getSymbols: function(): string {
+    getSymbols(): string {
       const classes: string[] = [];
       if (this.item.hasSymbol) {
         const symbolClass = TILE_CLASSES.get(this.item.tile);

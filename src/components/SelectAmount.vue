@@ -23,17 +23,17 @@ export default Vue.extend({
       type: Boolean,
     },
   },
-  data: function() {
+  data() {
     return {
       amount: this.playerinput.maxByDefault ? String(this.playerinput.max) : String(this.playerinput.min),
     };
   },
   methods: {
     ...TranslateMixin.methods,
-    saveData: function() {
+    saveData() {
       this.onsave([[String(parseInt(this.amount))]]);
     },
-    setMaxValue: function() {
+    setMaxValue() {
       this.amount = String(this.playerinput.max);
     },
   },

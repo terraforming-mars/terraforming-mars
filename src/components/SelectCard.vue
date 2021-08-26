@@ -58,7 +58,7 @@ export default Vue.extend({
       type: Boolean,
     },
   },
-  data: function() {
+  data() {
     return {
       cards: [],
       warning: undefined,
@@ -69,13 +69,13 @@ export default Vue.extend({
     Button,
   },
   watch: {
-    cards: function() {
+    cards() {
       this.$emit('cardschanged', this.getData());
     },
   },
   methods: {
     ...TranslateMixin.methods,
-    cardsSelected: function(): number {
+    cardsSelected(): number {
       if (Array.isArray(this.cards)) {
         return this.cards.length;
       } else if (this.cards === false || this.cards === undefined) {
@@ -83,7 +83,7 @@ export default Vue.extend({
       }
       return 1;
     },
-    getOrderedCards: function() {
+    getOrderedCards() {
       if (this.playerinput.cards === undefined) {
         return [];
       }
@@ -96,7 +96,7 @@ export default Vue.extend({
         );
       }
     },
-    hasCardWarning: function() {
+    hasCardWarning() {
       if (Array.isArray(this.cards)) {
         return false;
       } else if (typeof this.cards === 'object' && this.cards.warning !== undefined) {
@@ -105,24 +105,24 @@ export default Vue.extend({
       }
       return false;
     },
-    isOptionalToManyCards: function(): boolean {
+    isOptionalToManyCards(): boolean {
       return this.playerinput.maxCardsToSelect !== undefined &&
              this.playerinput.maxCardsToSelect > 1 &&
              this.playerinput.minCardsToSelect === 0;
     },
-    getData: function(): Array<CardName> {
+    getData(): Array<CardName> {
       return Array.isArray(this.$data.cards) ? this.$data.cards.map((card) => card.name) : [this.$data.cards.name];
     },
-    saveData: function() {
+    saveData() {
       this.onsave([this.getData()]);
     },
-    getCardBoxClass: function(card: CardModel): string {
+    getCardBoxClass(card: CardModel): string {
       if (this.playerinput.showOwner && this.getOwner(card) !== undefined) {
         return 'cardbox cardbox-with-owner-label';
       }
       return 'cardbox';
     },
-    getOwner: function(card: CardModel): BasePlayerModel | undefined {
+    getOwner(card: CardModel): BasePlayerModel | undefined {
       for (const player of this.player.players) {
         if (player.playedCards.find((c) => c.name === card.name)) {
           return {name: player.name, color: player.color};
@@ -130,10 +130,10 @@ export default Vue.extend({
       }
       return undefined;
     },
-    isSelectOnlyOneCard: function() : boolean {
+    isSelectOnlyOneCard() : boolean {
       return this.playerinput.maxCardsToSelect === 1 && this.playerinput.minCardsToSelect === 1;
     },
-    buttonLabel: function(): string {
+    buttonLabel(): string {
       return this.isSelectOnlyOneCard() ? this.playerinput.buttonLabel : this.playerinput.buttonLabel + ' ' + this.cardsSelected();
     },
   },

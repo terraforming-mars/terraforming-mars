@@ -35,22 +35,22 @@ export default Vue.extend({
     'overview-settings': OverviewSettings,
     'other-player': OtherPlayer,
   },
-  data: function() {
+  data() {
     return {};
   },
   methods: {
-    hasPlayers: function(): boolean {
+    hasPlayers(): boolean {
       return this.player.players.length > 0;
     },
-    getPlayerOnFocus: function(): PublicPlayerModel {
+    getPlayerOnFocus(): PublicPlayerModel {
       return this.player.players.filter(
         (p: PublicPlayerModel) => p.color === this.player.thisPlayer.color,
       )[0];
     },
-    getIsFirstForGen: function(player: PublicPlayerModel): boolean {
+    getIsFirstForGen(player: PublicPlayerModel): boolean {
       return getCurrentPlayerIndex(player.color, this.player.players) === 0;
     },
-    getPlayersInOrder: function(): Array<PublicPlayerModel> {
+    getPlayersInOrder(): Array<PublicPlayerModel> {
       const players = this.player.players;
       let result: Array<PublicPlayerModel> = [];
       let currentPlayerOffset: number = 0;

@@ -34,7 +34,7 @@ export default Vue.extend({
       type: Boolean,
     },
   },
-  data: function(): SelectHowToPayForProjectCardModel {
+  data(): SelectHowToPayForProjectCardModel {
     let card: CardModel | undefined;
     let cards: Array<CardModel> = [];
     if (this.playerinput !== undefined &&
@@ -70,7 +70,7 @@ export default Vue.extend({
     Card,
     Button,
   },
-  mounted: function() {
+  mounted() {
     Vue.nextTick(() => {
       this.$data.card = this.getCard();
       this.$data.cost = this.$data.card.calculatedCost;
@@ -83,21 +83,21 @@ export default Vue.extend({
   methods: {
     ...PaymentWidgetMixin.methods,
     ...TranslateMixin.methods,
-    getCard: function() {
+    getCard() {
       const card = this.cards.find((c) => c.name === this.cardName); // this.player.cardsInHand.concat(this.player.selfReplicatingRobotsCards).find((c) => c.name === this.cardName);
       if (card === undefined) {
         throw new Error(`card not found ${this.cardName}`);
       }
       return card;
     },
-    getCardTags: function() {
+    getCardTags() {
       const card = new CardFinder().getProjectCardByName(this.cardName);
       if (card === undefined) {
         throw new Error(`card not found ${this.cardName}`);
       }
       return card.tags;
     },
-    setDefaultValues: function() {
+    setDefaultValues() {
       this.microbes = 0;
       this.floaters = 0;
       this.science = 0;
@@ -184,10 +184,10 @@ export default Vue.extend({
         this.megaCredits -= saveOverSpendingUnits(this.megaCredits, 1);
       }
     },
-    canUseHeat: function(): boolean {
+    canUseHeat(): boolean {
       return this.playerinput.canUseHeat === true && this.player.heat > 0;
     },
-    canUseSteel: function() {
+    canUseSteel() {
       if (this.card !== undefined && this.available.steel > 0) {
         if (this.tags.find((tag) => tag === Tags.BUILDING) !== undefined) {
           return true;
@@ -195,7 +195,7 @@ export default Vue.extend({
       }
       return false;
     },
-    canUseTitanium: function() {
+    canUseTitanium() {
       if (this.card !== undefined && this.available.titanium > 0) {
         if (this.tags.find((tag) => tag === Tags.SPACE) !== undefined) {
           return true;
@@ -203,7 +203,7 @@ export default Vue.extend({
       }
       return false;
     },
-    canUseMicrobes: function() {
+    canUseMicrobes() {
       // FYI Microbes are limited to the Psychrophiles card, which allows spending microbes for Plant cards.
       if (this.card !== undefined && this.playerinput.microbes !== undefined && this.playerinput.microbes > 0) {
         if (this.tags.find((tag) => tag === Tags.PLANT) !== undefined) {
@@ -212,7 +212,7 @@ export default Vue.extend({
       }
       return false;
     },
-    canUseFloaters: function() {
+    canUseFloaters() {
       // FYI Floaters are limited to the DIRIGIBLES card.
       if (this.card !== undefined && this.playerinput.floaters !== undefined && this.playerinput.floaters > 0) {
         if (this.tags.find((tag) => tag === Tags.VENUS) !== undefined) {
@@ -221,7 +221,7 @@ export default Vue.extend({
       }
       return false;
     },
-    canUseScience: function() {
+    canUseScience() {
       // FYI Science Resources are limited to the Luna Archive card, which allows spending its science resources for Moon cards.
       if (this.card !== undefined && (this.playerinput.science ?? 0) > 0) {
         if (this.tags.find((tag) => tag === Tags.MOON) !== undefined) {
@@ -230,7 +230,7 @@ export default Vue.extend({
       }
       return false;
     },
-    cardChanged: function() {
+    cardChanged() {
       this.card = this.getCard();
       this.cost = this.card.calculatedCost || 0;
       this.tags = this.getCardTags();
@@ -239,22 +239,22 @@ export default Vue.extend({
 
       this.setDefaultValues();
     },
-    hasWarning: function(): boolean {
+    hasWarning(): boolean {
       return this.warning !== undefined;
     },
-    hasCardWarning: function(): boolean {
+    hasCardWarning(): boolean {
       return this.card !== undefined && this.card.warning !== undefined;
     },
-    showReserveSteelWarning: function(): boolean {
+    showReserveSteelWarning(): boolean {
       return this.card?.reserveUnits?.steel > 0 && this.canUseSteel();
     },
-    showReserveTitaniumWarning: function(): boolean {
+    showReserveTitaniumWarning(): boolean {
       return this.card?.reserveUnits?.titanium > 0 && this.canUseTitanium();
     },
-    showReserveHeatWarning: function(): boolean {
+    showReserveHeatWarning(): boolean {
       return this.card?.reserveUnits?.heat > 0 && this.canUseHeat();
     },
-    saveData: function() {
+    saveData() {
       const htp: HowToPay = {
         heat: this.heat,
         megaCredits: this.megaCredits,

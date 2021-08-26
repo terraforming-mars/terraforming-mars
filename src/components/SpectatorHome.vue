@@ -19,7 +19,7 @@ export interface SpectatorHomeModel {
 
 export default Vue.extend({
   name: 'SpectatorHome',
-  data: function(): SpectatorHomeModel {
+  data(): SpectatorHomeModel {
     return {
       spectator: undefined,
     };
@@ -34,7 +34,7 @@ export default Vue.extend({
   methods: {
     ...TranslateMixin.methods,
   },
-  mounted: function() {
+  mounted() {
     // TODO load this spectator with XHR
     fetch('/api/spectator' + window.location.search)
       .then((response) => response.json())

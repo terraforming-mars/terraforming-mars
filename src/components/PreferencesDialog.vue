@@ -6,7 +6,7 @@ import {TranslateMixin} from './TranslateMixin';
 
 export default Vue.extend({
   name: 'PreferencesDialog',
-  data: function() {
+  data() {
     return {
       'hide_hand': false as boolean | unknown[],
       'hide_awards_and_milestones': false as boolean | unknown[],
@@ -27,7 +27,7 @@ export default Vue.extend({
   },
   methods: {
     ...TranslateMixin.methods,
-    setPreferencesCSS: function(
+    setPreferencesCSS(
       val: boolean | undefined,
       cssClassSuffix: string,
     ): void {
@@ -43,7 +43,7 @@ export default Vue.extend({
         target.classList.add('language-' + this.lang);
       }
     },
-    updatePreferencesFromStorage: function(): Map<
+    updatePreferencesFromStorage(): Map<
             string,
             boolean | string
             > {
@@ -61,7 +61,7 @@ export default Vue.extend({
       }
       return PreferencesManager.preferencesValues;
     },
-    updatePreferences: function(_evt: any): void {
+    updatePreferences(_evt: any): void {
       let strVal: string = '';
       for (const k of preferences) {
         const val = PreferencesManager.preferencesValues.get(k);
@@ -77,17 +77,17 @@ export default Vue.extend({
         }
       }
     },
-    syncPreferences: function(): void {
+    syncPreferences(): void {
       for (const k of preferences) {
         this.$data[k] = PreferencesManager.preferencesValues.get(k);
         this.setPreferencesCSS(this.$data[k], k);
       }
     },
-    okClicked: function(): void {
+    okClicked(): void {
       this.$emit('okButtonClicked');
     },
   },
-  mounted: function() {
+  mounted() {
     this.updatePreferencesFromStorage();
   },
 });

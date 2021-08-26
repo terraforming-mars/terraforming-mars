@@ -39,7 +39,7 @@ export default Vue.extend({
     CardRenderData,
   },
   methods: {
-    getClasses: function(): string {
+    getClasses(): string {
       const classes: Array<string> = ['card-content'];
       if (this.isCorporation) {
         classes.push('card-content-corporation');

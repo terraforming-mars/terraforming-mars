@@ -52,22 +52,22 @@ export default Vue.extend({
     CardDescription,
   },
   methods: {
-    getClasses: function(): string {
+    getClasses(): string {
       return 'card-effect-box';
     },
-    isItem: function(rowItem: ItemType): rowItem is CardRenderItem {
+    isItem(rowItem: ItemType): rowItem is CardRenderItem {
       return rowItem instanceof CardRenderItem;
     },
-    isSymbol: function(rowItem: ItemType): rowItem is CardRenderSymbol {
+    isSymbol(rowItem: ItemType): rowItem is CardRenderSymbol {
       return rowItem instanceof CardRenderSymbol;
     },
-    isProductionBox: function(rowItem: ItemType): rowItem is CardRenderProductionBox {
+    isProductionBox(rowItem: ItemType): rowItem is CardRenderProductionBox {
       return rowItem instanceof CardRenderProductionBox;
     },
-    isTile: function(rowItem: ItemType): rowItem is CardRenderTile {
+    isTile(rowItem: ItemType): rowItem is CardRenderTile {
       return rowItem instanceof CardRenderTile;
     },
-    hasDescription: function(): boolean {
+    hasDescription(): boolean {
       return this.effectData.description !== undefined;
     },
   },

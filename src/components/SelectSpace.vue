@@ -35,7 +35,7 @@ export default Vue.extend({
       type: Boolean,
     },
   },
-  data: function() {
+  data() {
     return {
       availableSpaces: new Set(this.playerinput.availableSpaces),
       selectedTile: undefined as HTMLElement | undefined,
@@ -48,14 +48,14 @@ export default Vue.extend({
   },
   methods: {
     ...TranslateMixin.methods,
-    animateSpace: function(tile: Element, activate: boolean) {
+    animateSpace(tile: Element, activate: boolean) {
       if (activate) {
         tile.classList.add('board-space--available');
       } else {
         tile.classList.remove('board-space--available');
       }
     },
-    animateAvailableSpaces: function(tiles: Array<Element>) {
+    animateAvailableSpaces(tiles: Array<Element>) {
       tiles.forEach((tile: Element) => {
         const spaceId = tile.getAttribute('data_space_id');
         if (spaceId !== null && this.availableSpaces.has(spaceId)) {
@@ -63,14 +63,14 @@ export default Vue.extend({
         }
       });
     },
-    cancelPlacement: function() {
+    cancelPlacement() {
       if (this.selectedTile === undefined) {
         throw new Error('unexpected, no tile selected!');
       }
       this.animateSpace(this.selectedTile, false);
       this.animateAvailableSpaces(this.getSelectableSpaces());
     },
-    confirmPlacement: function() {
+    confirmPlacement() {
       const tiles = this.getSelectableSpaces();
       tiles.forEach((tile: Element) => {
         (tile as HTMLElement).onclick = null;
@@ -83,13 +83,13 @@ export default Vue.extend({
       this.selectedTile.classList.add('board-space--selected');
       this.saveData();
     },
-    disableAvailableSpaceAnimation: function() {
+    disableAvailableSpaceAnimation() {
       const tiles = this.getSelectableSpaces();
       tiles.forEach((tile: Element) => {
         tile.classList.remove('board-space--available', 'board-space--selected');
       });
     },
-    getSelectableSpaces: function() {
+    getSelectableSpaces() {
       const spaces: Array<Element> = [];
 
       let board = document.getElementById('main_board');
@@ -110,10 +110,10 @@ export default Vue.extend({
 
       return spaces;
     },
-    hideDialog: function(hide: boolean) {
+    hideDialog(hide: boolean) {
       PreferencesManager.save('hide_tile_confirmation', hide);
     },
-    onTileSelected: function(tile: HTMLElement) {
+    onTileSelected(tile: HTMLElement) {
       this.selectedTile = tile;
       this.disableAvailableSpaceAnimation();
       this.animateSpace(tile, true);
@@ -125,7 +125,7 @@ export default Vue.extend({
         (this.$refs['confirmation'] as any).show();
       }
     },
-    saveData: function() {
+    saveData() {
       if (this.$data.spaceId === undefined) {
         this.$data.warning = 'Must select a space';
         return;
@@ -133,7 +133,7 @@ export default Vue.extend({
       this.onsave([[this.$data.spaceId]]);
     },
   },
-  mounted: function() {
+  mounted() {
     this.disableAvailableSpaceAnimation();
     const tiles = this.getSelectableSpaces();
     this.animateAvailableSpaces(tiles);

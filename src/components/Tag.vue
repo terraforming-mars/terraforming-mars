@@ -21,7 +21,7 @@ export default Vue.extend({
     },
   },
   methods: {
-    getClasses: function(): string {
+    getClasses(): string {
       const classes = ['tag-count'];
       classes.push(`tag-${this.tag}`);
       if (this.size !== undefined) {

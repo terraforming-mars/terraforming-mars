@@ -49,16 +49,16 @@ export default Vue.extend({
   },
   mixins: [PlayerMixin],
   methods: {
-    getClasses: function(): string {
+    getClasses(): string {
       const classes = ['player-info'];
       classes.push(playerColorClass(this.player.color, 'bg_transparent'));
       return classes.join(' ');
     },
-    getPlayerStatusAndResClasses: function(): string {
+    getPlayerStatusAndResClasses(): string {
       const classes = ['player-status-and-res'];
       return classes.join(' ');
     },
-    pinPlayer: function() {
+    pinPlayer() {
       let hiddenPlayersIndexes: Array<Number> = [];
       const playerPinned = isPinned(this.$root, this.playerIndex);
 
@@ -77,10 +77,10 @@ export default Vue.extend({
         }
       }
     },
-    buttonLabel: function(): string {
+    buttonLabel(): string {
       return isPinned(this.$root, this.playerIndex) ? 'hide' : 'show';
     },
-    togglePlayerDetails: function() {
+    togglePlayerDetails() {
       // for the player viewing this page => scroll to cards UI
       if (this.player.color === this.playerView.thisPlayer.color) {
         const el: HTMLElement = document.getElementsByClassName(
@@ -93,10 +93,10 @@ export default Vue.extend({
       // any other player show cards container and hide all other
       this.pinPlayer();
     },
-    getNrPlayedCards: function(): number {
+    getNrPlayedCards(): number {
       return this.player.playedCards.length;
     },
-    getAvailableBlueActionCount: function(): number {
+    getAvailableBlueActionCount(): number {
       return this.player.availableBlueCardActionCount;
     },
   },

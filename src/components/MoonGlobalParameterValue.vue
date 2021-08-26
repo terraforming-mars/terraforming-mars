@@ -30,18 +30,18 @@ export default Vue.extend({
   },
   methods: {
     ...TranslateMixin.methods,
-    isMax: function(): boolean {
+    isMax(): boolean {
       return this.moonData.colonyRate >= MAXIMUM_COLONY_RATE &&
       this.moonData.miningRate >= MAXIMUM_MINING_RATE &&
       this.moonData.logisticsRate >= MAXIMUM_LOGISTICS_RATE;
     },
-    colonyRate: function(): number {
+    colonyRate(): number {
       return this.moonData.colonyRate;
     },
-    logisticsRate: function(): number {
+    logisticsRate(): number {
       return this.moonData.logisticsRate;
     },
-    miningRate: function(): number {
+    miningRate(): number {
       return this.moonData.miningRate;
     },
   },

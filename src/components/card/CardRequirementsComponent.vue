@@ -23,7 +23,7 @@ export default Vue.extend({
     },
   },
   methods: {
-    getClasses: function(): string {
+    getClasses(): string {
       const classes: Array<string> = ['card-requirements'];
       if (this.requirements.hasMax()) {
         classes.push('card-requirements-max');

@@ -22,10 +22,10 @@ export default Vue.extend({
     },
   },
   methods: {
-    lifeFound: function(card: CardModel): boolean {
+    lifeFound(card: CardModel): boolean {
       return card.name === CardName.SEARCH_FOR_LIFE && card.resources !== undefined && card.resources > 0;
     },
-    isMiningTileOnMetal: function(card: CardModel, metal: string): boolean {
+    isMiningTileOnMetal(card: CardModel, metal: string): boolean {
       const miningCard = [CardName.MINING_RIGHTS, CardName.MINING_AREA, CardName.MINING_RIGHTS_ARES, CardName.MINING_AREA_ARES];
       if (miningCard.includes(card.name)) {
         if (metal === Resources.TITANIUM) {
@@ -36,7 +36,7 @@ export default Vue.extend({
       }
       return false;
     },
-    miningTileOnTitanium: function(card: CardModel): boolean {
+    miningTileOnTitanium(card: CardModel): boolean {
       return card.name === CardName.SEARCH_FOR_LIFE && card.resources !== undefined && card.resources > 0;
     },
   },

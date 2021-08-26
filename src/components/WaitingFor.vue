@@ -45,14 +45,14 @@ export default Vue.extend({
       type: Object as () => PlayerInputModel | undefined,
     },
   },
-  data: function() {
+  data() {
     return {
       waitingForTimeout: this.settings.waitingForTimeout as typeof raw_settings.waitingForTimeout,
     };
   },
   methods: {
     ...TranslateMixin.methods,
-    animateTitle: function() {
+    animateTitle() {
       const sequence = '\u25D1\u25D2\u25D0\u25D3';
       const first = document.title[0];
       const position = sequence.indexOf(first);
@@ -62,7 +62,7 @@ export default Vue.extend({
       }
       document.title = next + ' ' + $t(constants.APP_NAME);
     },
-    onsave: function(out: Array<Array<string>>) {
+    onsave(out: Array<Array<string>>) {
       const xhr = new XMLHttpRequest();
       const root = this.$root as unknown as typeof mainAppSettings.data;
       const showAlert = (this.$root as unknown as typeof mainAppSettings.methods).showAlert;
@@ -95,7 +95,7 @@ export default Vue.extend({
         root.isServerSideRequestInProgress = false;
       };
     },
-    waitForUpdate: function() {
+    waitForUpdate() {
       const vueApp = this;
       const root = this.$root as unknown as typeof mainAppSettings.methods;
       clearTimeout(ui_update_timeout_id);
@@ -142,7 +142,7 @@ export default Vue.extend({
       ui_update_timeout_id = window.setTimeout(askForUpdate, this.waitingForTimeout);
     },
   },
-  mounted: function() {
+  mounted() {
     document.title = $t(constants.APP_NAME);
     window.clearInterval(documentTitleTimer);
     if (this.waitingfor === undefined) {

@@ -30,7 +30,7 @@ export default Vue.extend({
   components: {
     Button,
   },
-  data: function() {
+  data() {
     return {
       cost: 0,
       heat: 0,
@@ -42,7 +42,7 @@ export default Vue.extend({
       warning: undefined,
     } as SelectHowToPayModel;
   },
-  mounted: function() {
+  mounted() {
     Vue.nextTick(() => {
       this.setInitialCost();
       this.$data.megaCredits = (this as any).getMegaCreditsMax();
@@ -55,13 +55,13 @@ export default Vue.extend({
   methods: {
     ...PaymentWidgetMixin.methods,
     ...TranslateMixin.methods,
-    hasWarning: function() {
+    hasWarning() {
       return this.$data.warning !== undefined;
     },
-    setInitialCost: function() {
+    setInitialCost() {
       this.$data.cost = this.playerinput.amount;
     },
-    setDefaultSteelValue: function() {
+    setDefaultSteelValue() {
       // automatically use available steel to pay if not enough MC
       if (!this.canAffordWithMcOnly() && this.canUseSteel()) {
         let requiredSteelQty = Math.ceil(Math.max(this.$data.cost - this.player.megaCredits, 0) / this.player.steelValue);
@@ -85,7 +85,7 @@ export default Vue.extend({
         this.$data.steel = 0;
       }
     },
-    setDefaultTitaniumValue: function() {
+    setDefaultTitaniumValue() {
       // automatically use available titanium to pay if not enough MC
       if (!this.canAffordWithMcOnly() && this.canUseTitanium()) {
         let requiredTitaniumQty = Math.ceil(Math.max(this.$data.cost - this.player.megaCredits - (this.$data.steel * this.player.steelValue), 0) / this.player.titaniumValue);
@@ -109,7 +109,7 @@ export default Vue.extend({
         this.$data.titanium = 0;
       }
     },
-    setDefaultHeatValue: function() {
+    setDefaultHeatValue() {
       // automatically use available heat for Helion if not enough MC
       if (!this.canAffordWithMcOnly() && this.canUseHeat()) {
         this.$data.heat = Math.max(this.$data.cost - this.player.megaCredits - (this.$data.steel * this.player.steelValue) - (this.$data.titanium * this.player.titaniumValue), 0);
@@ -119,19 +119,19 @@ export default Vue.extend({
       const discountedCost = this.$data.cost - (this.$data.steel * this.player.steelValue) - (this.$data.titanium * this.player.titaniumValue) - this.$data.heat;
       this.$data.megaCredits = Math.max(discountedCost, 0);
     },
-    canAffordWithMcOnly: function() {
+    canAffordWithMcOnly() {
       return this.player.megaCredits >= this.$data.cost;
     },
-    canUseHeat: function() {
+    canUseHeat() {
       return this.playerinput.canUseHeat && this.player.heat > 0;
     },
-    canUseSteel: function() {
+    canUseSteel() {
       return this.playerinput.canUseSteel && this.player.steel > 0;
     },
-    canUseTitanium: function() {
+    canUseTitanium() {
       return this.playerinput.canUseTitanium && this.player.titanium > 0;
     },
-    saveData: function() {
+    saveData() {
       const htp: HowToPay = {
         heat: this.$data.heat,
         megaCredits: this.$data.megaCredits,

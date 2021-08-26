@@ -63,7 +63,7 @@ export default Vue.component('player-input-factory', {
     ShiftAresGlobalParameters,
   },
   methods: {
-    saveData: function() {
+    saveData() {
       (this.$children[0] as any).saveData();
     },
     getComponentName(inputType: PlayerInputTypes): string {

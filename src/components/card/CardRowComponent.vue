@@ -44,28 +44,28 @@ export default Vue.extend({
     CardDescription,
   },
   methods: {
-    isItem: function(): boolean {
+    isItem(): boolean {
       return this.componentData instanceof CardRenderItem;
     },
-    isSymbol: function(): boolean {
+    isSymbol(): boolean {
       return this.componentData instanceof CardRenderSymbol;
     },
-    isProduction: function(item: ItemType): item is CardRenderProductionBox {
+    isProduction(item: ItemType): item is CardRenderProductionBox {
       return item instanceof CardRenderProductionBox;
     },
-    isEffect: function(): boolean {
+    isEffect(): boolean {
       return this.componentData instanceof CardRenderEffect;
     },
-    isDescription: function(): boolean {
+    isDescription(): boolean {
       return typeof this.componentData === 'string' || this.componentData instanceof String || isIDescription(this.componentData);
     },
-    isTile: function(): boolean {
+    isTile(): boolean {
       return this.componentData instanceof CardRenderTile;
     },
-    isCorpBox: function(item: ItemType): item is CardRenderCorpBoxEffect | CardRenderCorpBoxAction {
+    isCorpBox(item: ItemType): item is CardRenderCorpBoxEffect | CardRenderCorpBoxAction {
       return item instanceof CardRenderCorpBoxEffect || item instanceof CardRenderCorpBoxAction;
     },
-    corpBoxLabel: function(): string {
+    corpBoxLabel(): string {
       if (this.componentData instanceof CardRenderCorpBoxEffect) {
         return 'effect';
       } else if (this.componentData instanceof CardRenderCorpBoxAction) {

@@ -16,7 +16,7 @@ export default Vue.extend({
     },
   },
   methods: {
-    showCardNumber: function(): boolean {
+    showCardNumber(): boolean {
       return PreferencesManager.load('show_card_number') === '1';
     },
   },

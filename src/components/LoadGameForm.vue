@@ -11,7 +11,7 @@ export default Vue.extend({
   components: {
     Button,
   },
-  data: function() {
+  data() {
     return {
       constants,
       gameId: '',
@@ -19,7 +19,7 @@ export default Vue.extend({
     };
   },
   methods: {
-    loadGame: function() {
+    loadGame() {
       const gameId = this.$data.gameId;
       const rollbackCount = this.$data.rollbackCount;
       const xhr = new XMLHttpRequest();

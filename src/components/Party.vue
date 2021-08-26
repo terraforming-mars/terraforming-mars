@@ -36,17 +36,17 @@ export default Vue.extend({
     },
   },
   methods: {
-    partyNameToCss: function(party: PartyName | undefined): string {
+    partyNameToCss(party: PartyName | undefined): string {
       if (party === undefined) {
         console.warn('no party provided');
         return '';
       }
       return party.toLowerCase().split(' ').join('_');
     },
-    getDominantClass: function(): string {
+    getDominantClass(): string {
       return 'select-party-leader-spot' + (this.isDominant ? ' dominance-marker' : '');
     },
-    getUnavailablePartyClass: function(): string {
+    getUnavailablePartyClass(): string {
       return this.isAvailable ? '' : ' unavailable-party';
     },
   },

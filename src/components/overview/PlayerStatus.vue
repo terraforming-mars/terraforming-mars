@@ -41,7 +41,7 @@ export default Vue.extend({
     PlayerTimer,
   },
   methods: {
-    getLabelAndTimerClasses: function(): string {
+    getLabelAndTimerClasses(): string {
       const classes: Array<string> = [];
       const baseClass = 'player-action-status-container';
       classes.push(baseClass);
@@ -55,7 +55,7 @@ export default Vue.extend({
       }
       return classes.join(' ');
     },
-    getActionStatusClasses: function(): string {
+    getActionStatusClasses(): string {
       const classes: Array<string> = ['player-action-status'];
       if (this.actionLabel === ActionLabel.NONE) {
         classes.push('visibility-hidden');

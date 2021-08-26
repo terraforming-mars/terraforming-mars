@@ -52,7 +52,7 @@ export default Vue.extend({
     SelectCard,
     'confirm-dialog': ConfirmDialog,
   },
-  data: function() {
+  data() {
     return {
       selectedCards: [] as Array<CardName>,
       selectedCorporation: undefined as CorporationCard | undefined,
@@ -60,10 +60,10 @@ export default Vue.extend({
     };
   },
   methods: {
-    noop: function() {
+    noop() {
       throw new Error('should not be called');
     },
-    getAfterPreludes: function() {
+    getAfterPreludes() {
       let result = 0;
       for (const prelude of this.selectedPrelude) {
         switch (prelude) {
@@ -156,13 +156,13 @@ export default Vue.extend({
       }
       return result;
     },
-    getOption: function(idx: number) {
+    getOption(idx: number) {
       if (this.playerinput.options === undefined || this.playerinput.options[idx] === undefined) {
         throw new Error('invalid input, missing option');
       }
       return this.playerinput.options[idx];
     },
-    getStartingMegacredits: function() {
+    getStartingMegacredits() {
       if (this.selectedCorporation === undefined) {
         return NaN;
       }
@@ -171,14 +171,14 @@ export default Vue.extend({
       starting -= this.selectedCards.length * cardCost;
       return starting;
     },
-    saveIfConfirmed: function() {
+    saveIfConfirmed() {
       if (PreferencesManager.load('show_alerts') === '1' && this.selectedCards.length === 0) {
         (this.$refs['confirmation'] as any).show();
       } else {
         this.saveData();
       }
     },
-    saveData: function() {
+    saveData() {
       const result: Array<Array<string>> = [];
       result.push([]);
       if (this.selectedCorporation !== undefined) {
@@ -190,19 +190,19 @@ export default Vue.extend({
       result.push(this.selectedCards);
       this.onsave(result);
     },
-    hasPrelude: function() {
+    hasPrelude() {
       return this.playerinput.options !== undefined && this.playerinput.options.length === 3;
     },
-    cardsChanged: function(cards: Array<CardName>) {
+    cardsChanged(cards: Array<CardName>) {
       this.selectedCards = cards;
     },
-    corporationChanged: function(cards: Array<CardName>) {
+    corporationChanged(cards: Array<CardName>) {
       this.selectedCorporation = new CardFinder().getCorporationCardByName(cards[0]);
     },
-    preludesChanged: function(cards: Array<CardName>) {
+    preludesChanged(cards: Array<CardName>) {
       this.selectedPrelude = cards;
     },
-    confirmSelection: function() {
+    confirmSelection() {
       this.saveData();
     },
   },

@@ -41,7 +41,7 @@ interface CardsFilterModel {
 export default Vue.extend({
   name: 'CardsFilter',
   props: {},
-  data: function() {
+  data() {
     return {
       selectedCardNames: [],
       foundCardNames: [],
@@ -51,13 +51,13 @@ export default Vue.extend({
   components: {Button},
   methods: {
     ...TranslateMixin.methods,
-    isPrelude: function(cardName: CardName) {
+    isPrelude(cardName: CardName) {
       return ALL_PRELUDE_CARD_NAMES.includes(cardName);
     },
-    removeCard: function(cardNameToRemove: CardName) {
+    removeCard(cardNameToRemove: CardName) {
       this.selectedCardNames = this.selectedCardNames.filter((curCardName) => curCardName !== cardNameToRemove).sort();
     },
-    addCard: function(cardNameToAdd: CardName) {
+    addCard(cardNameToAdd: CardName) {
       if (this.selectedCardNames.includes(cardNameToAdd)) return;
       this.selectedCardNames.push(cardNameToAdd);
       this.selectedCardNames.sort();
@@ -65,10 +65,10 @@ export default Vue.extend({
     },
   },
   watch: {
-    selectedCardNames: function(value) {
+    selectedCardNames(value) {
       this.$emit('cards-list-changed', value);
     },
-    searchTerm: function(value: string) {
+    searchTerm(value: string) {
       if (value === '') {
         this.foundCardNames = [];
         return;

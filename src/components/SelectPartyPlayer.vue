@@ -39,7 +39,7 @@ export default Vue.extend({
       type: Boolean,
     },
   },
-  data: function() {
+  data() {
     return {
       selectedPlayer: undefined as ColorWithNeutral | undefined,
     };
@@ -50,7 +50,7 @@ export default Vue.extend({
   },
   methods: {
     ...TranslateMixin.methods,
-    saveData: function() {
+    saveData() {
       const result: string[][] = [];
       result.push([]);
       if (this.selectedPlayer !== undefined) {

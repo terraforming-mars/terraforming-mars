@@ -48,7 +48,7 @@ export default Vue.extend({
   components: {
     Button,
   },
-  data: function() {
+  data() {
     if (this.playerinput.options === undefined) {
       throw new Error('options must be defined');
     }
@@ -58,12 +58,12 @@ export default Vue.extend({
   },
   methods: {
     ...TranslateMixin.methods,
-    playerFactorySaved: function(idx: number) {
+    playerFactorySaved(idx: number) {
       return (out: Array<Array<string>>) => {
         this.$data.responded[idx] = out[0];
       };
     },
-    saveData: function() {
+    saveData() {
       for (const child of this.$children) {
         if ((child as any).saveData instanceof Function) {
           (child as any).saveData();

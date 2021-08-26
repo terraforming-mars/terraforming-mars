@@ -27,7 +27,7 @@ export default Vue.extend({
     },
   },
   methods: {
-    getClasses: function(): string {
+    getClasses(): string {
       return [
         playerColorClass(this.color, 'shadow'),
         'dynamic-title',

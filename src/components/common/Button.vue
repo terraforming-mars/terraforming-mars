@@ -60,7 +60,7 @@ export default Vue.extend({
     },
   },
   methods: {
-    getOuterClass: function(): string {
+    getOuterClass(): string {
       const classes: Array<string> = ['btn'];
 
       // size
@@ -104,7 +104,7 @@ export default Vue.extend({
 
       return classes.join(' ');
     },
-    getDisabled: function(): boolean {
+    getDisabled(): boolean {
       if (this.disableOnServerBusy) {
         return (
           this.disabled ||
@@ -113,7 +113,7 @@ export default Vue.extend({
       }
       return this.disabled;
     },
-    getInnerClass: function(): string {
+    getInnerClass(): string {
       switch (this.type) {
       case 'close':
         return 'icon icon-cross';

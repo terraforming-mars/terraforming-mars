@@ -80,7 +80,7 @@ export default Vue.extend({
       type: Boolean,
     },
   },
-  data: function() {
+  data() {
     return {
       allColonies: OFFICIAL_COLONIES.concat(COMMUNITY_COLONIES),
       officialColonies: OFFICIAL_COLONIES,
@@ -102,14 +102,14 @@ export default Vue.extend({
     },
   },
   watch: {
-    selectedColonies: function(value) {
+    selectedColonies(value) {
       const colonyNames: Array<ColonyName> = [];
       value.forEach(function(el: any) {
         colonyNames.push(el.name);
       } );
       this.$emit('colonies-list-changed', colonyNames);
     },
-    communityCardsOption: function(enabled) {
+    communityCardsOption(enabled) {
       if (enabled) {
         this.selectedColonies = OFFICIAL_COLONIES.concat(COMMUNITY_COLONIES).slice();
         if (this.venusNext === false) this.selectedColonies = this.selectedColonies.filter((c) => c.name !== ColonyName.VENUS);
@@ -118,7 +118,7 @@ export default Vue.extend({
         this.selectedColonies = OFFICIAL_COLONIES.slice();
       }
     },
-    venusNext: function(enabled) {
+    venusNext(enabled) {
       if (this.communityCardsOption && Array.isArray(this.selectedColonies)) {
         if (enabled === false) {
           this.selectedColonies = this.selectedColonies.filter((c) => c.name !== ColonyName.VENUS);
@@ -127,7 +127,7 @@ export default Vue.extend({
         }
       }
     },
-    turmoil: function(enabled) {
+    turmoil(enabled) {
       if (this.communityCardsOption && Array.isArray(this.selectedColonies)) {
         if (enabled === false) {
           this.selectedColonies = this.selectedColonies.filter((c) => c.name !== ColonyName.PALLAS);

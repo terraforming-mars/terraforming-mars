@@ -22,13 +22,13 @@ export default Vue.extend({
     },
   },
   methods: {
-    partyNameClass: function(partyName: string): string {
+    partyNameClass(partyName: string): string {
       if (partyName === undefined) {
         return '';
       }
       return 'event-party--' + partyName.toLowerCase().split(' ').join('_');
     },
-    getClass: function(): string {
+    getClass(): string {
       const common = 'global-event';
       switch (this.type) {
       case 'coming':

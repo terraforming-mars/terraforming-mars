@@ -54,6 +54,7 @@ export class Server {
         id: player.id,
         name: player.name,
       })),
+      spectatorId: game.spectatorId,
       gameOptions: this.getGameOptionsAsModel(game.gameOptions),
       lastSoloGeneration: game.lastSoloGeneration(),
     };

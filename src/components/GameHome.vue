@@ -10,6 +10,13 @@
             <Button title="copy" size="tiny" :onClick="_=>copyUrl(player.id)"/>
             <span v-if="isPlayerUrlCopied(player.id)" class="copied-notice">Playable link for {{player.name}} copied to clipboard <span class="dismissed" @click="setCopiedIdToDefault" >dismiss</span></span>
           </li>
+          <li v-if="game.spectatorId">
+            <p/>
+            <span class="turn-order"></span>
+            <span class="color-square"></span>
+            <span class="player-name"><a :href="getHref(game.spectatorId)">Spectator</a></span>
+            <Button title="copy" size="tiny" :onClick="_=>copyUrl(game.spectatorId || 'unreachable')"/>
+          </li>
         </ul>
 
         <div class="spacing-setup"></div>
@@ -27,6 +34,8 @@ import {SimpleGameModel} from '../models/SimpleGameModel';
 import Button from '../components/common/Button.vue';
 import {playerColorClass} from '../utils/utils';
 import GameSetupDetail from '../components/GameSetupDetail.vue';
+import {SpectatorId} from '../Game';
+import {PlayerId} from '../Player';
 
 // taken from https://stackoverflow.com/a/46215202/83336
 // The solution to copying to the clipboard in this case is
@@ -49,7 +58,7 @@ export default Vue.extend({
   name: 'game-home',
   props: {
     game: {
-      type: Object as () => SimpleGameModel | undefined,
+      type: Object as () => SimpleGameModel,
     },
   },
   components: {
@@ -85,10 +94,13 @@ export default Vue.extend({
     getPlayerCubeColorClass: function(color: string): string {
       return playerColorClass(color.toLowerCase(), 'bg');
     },
-    getHref: function(playerId: string): string {
+    getHref: function(playerId: PlayerId | SpectatorId): string {
+      if (playerId === this.game.spectatorId) {
+        return `/spectator?id=${playerId}`;
+      }
       return `/player?id=${playerId}`;
     },
-    copyUrl: function(playerId: string): void {
+    copyUrl: function(playerId: PlayerId | SpectatorId): void {
       copyToClipboard(window.location.origin + this.getHref(playerId));
       this.urlCopiedPlayerId = playerId;
     },

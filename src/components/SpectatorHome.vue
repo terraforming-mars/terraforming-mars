@@ -41,8 +41,10 @@ export default Vue.extend({
       .then((json) => {
         this.$data.spectator = json;
       })
-      .catch(() => {
+      .catch((e) => {
         alert('error pulling information for spectator');
+        alert(e);
+        console.log(e);
       });
   },
 });

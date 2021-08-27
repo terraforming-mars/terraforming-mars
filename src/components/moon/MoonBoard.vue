@@ -47,21 +47,28 @@
 
     <div class="global-numbers">
       <div class="global-numbers-colony">
-        <div :class="getScaleCSS(lvl)" v-for="lvl in getValuesForParameter('colony')" :key="lvl">{{ lvl.strValue }}</div>
+        <div :class="getScaleCSS(lvl)" v-for="(lvl, i) in getValuesForParameter('colony')" :key="i">{{ lvl.strValue }}</div>
       </div>
 
       <div class="global-numbers-logistics">
-        <div :class="getScaleCSS(lvl)" v-for="lvl in getValuesForParameter('logistics')" :key="lvl">{{ lvl.strValue }}</div>
+        <div :class="getScaleCSS(lvl)" v-for="(lvl, i) in getValuesForParameter('logistics')" :key="i">{{ lvl.strValue }}</div>
       </div>
 
       <div class="global-numbers-mining">
-        <div :class="getScaleCSS(lvl)" v-for="lvl in getValuesForParameter('mining')" :key="lvl">{{ lvl.strValue }}</div>
+        <div :class="getScaleCSS(lvl)" v-for="(lvl, i) in getValuesForParameter('mining')" :key="i">{{ lvl.strValue }}</div>
       </div>
 
     </div>
 
     <div class="board" id="moon_board">
-      <MoonSpace :space="curSpace" :is_selectable="true" :key="'moon-space-'+curSpace.id" v-for="curSpace in getAllNonColonySpaces()"></MoonSpace>
+      <MoonSpace
+        v-for="curSpace in getAllNonColonySpaces()"
+        :key="curSpace.id"
+        :space="curSpace"
+        :is_selectable="true"
+        :isTileHidden="isTileHidden"
+        data-test="moon-board-space"
+      />
     </div>
   </div>
 </template>
@@ -69,7 +76,6 @@
 
 import Vue from 'vue';
 import {MoonModel} from '../../models/MoonModel';
-
 import {SpaceModel} from '../../models/SpaceModel';
 import {SpaceType} from '../../SpaceType';
 import MoonSpace from './MoonSpace.vue';
@@ -85,13 +91,13 @@ export default Vue.extend({
     model: {
       type: Object as () => MoonModel,
     },
+    isTileHidden: {
+      type: Boolean,
+      default: false,
+    },
   },
   components: {
     MoonSpace,
-  },
-  data() {
-    return {
-    };
   },
   methods: {
     getAllNonColonySpaces(): Array<SpaceModel> {

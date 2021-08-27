@@ -1,9 +1,14 @@
 <template>
-        <div :class="getMainClass()" :data_space_id="space.id" :title="getVerboseTitle(space.tileType)">
-            <div class="board-space-text" v-if="text" v-i18n>{{ text }}</div>
-            <bonus :bonus="space.bonus" v-if="space.tileType === undefined"></bonus>
-            <div :class="'board-cube board-cube--'+space.color" v-if="space.color !== undefined"></div>
-        </div>
+  <div :class="mainClass" :data_space_id="space.id" :title="verboseTitle">
+    <div :class="tileClass" data-test="tile"/>
+    <div class="board-space-text" v-if="text" v-i18n>{{ text }}</div>
+    <bonus v-if="space.tileType === undefined || isTileHidden" :bonus="space.bonus" />
+    <div
+      v-if="space.color !== undefined && !isTileHidden"
+      class="board-cube"
+      :class="`board-cube--${space.color}`"
+    />
+  </div>
 </template>
 
 <script lang="ts">
@@ -35,31 +40,45 @@ export default Vue.extend({
     is_selectable: {
       type: Boolean,
     },
-  },
-  data() {
-    return {};
+    isTileHidden: {
+      type: Boolean,
+      default: false,
+    },
   },
   components: {
-    'bonus': Bonus,
+    Bonus,
   },
-  methods: {
-    getVerboseTitle(tileType: TileType | undefined): string {
-      let ret: string = '';
-      if (tileType === TileType.LUNA_TRADE_STATION) {
+  computed: {
+    verboseTitle(): string {
+      let ret = '';
+      if (this.space.tileType === TileType.LUNA_TRADE_STATION) {
         ret = 'Luna Trade Station';
-      } else if (tileType === TileType.LUNA_MINING_HUB) {
+      } else if (this.space.tileType === TileType.LUNA_MINING_HUB) {
         ret = 'Luna Mining Hub';
-      } else if (tileType === TileType.LUNA_TRAIN_STATION) {
+      } else if (this.space.tileType === TileType.LUNA_TRAIN_STATION) {
         ret = 'Luna Train Station';
       }
       return $t(ret);
     },
-    getMainClass(): string {
+    mainClass(): string {
       let css = 'board-space moon-space-' + this.space.id.toString();
+
       if (this.is_selectable) {
         css += ' board-space-selectable';
       }
+
+      if (this.space.spaceType === 'lunar_mine') {
+        css += ' moon-space-type-mine';
+      } else {
+        css += ' moon-space-type-other';
+      }
+
+      return css;
+    },
+    tileClass(): string {
+      let css = 'board-space';
       const tileType = this.space.tileType;
+
       if (tileType !== undefined) {
         switch (this.space.tileType) {
         case TileType.MOON_COLONY:
@@ -75,12 +94,10 @@ export default Vue.extend({
           const cssClass = tileTypeToCssClass.get(tileType);
           css += ' board-space-tile--' + cssClass;
         }
-      } else {
-        if (this.space.spaceType === 'lunar_mine') {
-          css += ' moon-space-type-mine';
-        } else {
-          css += ' moon-space-type-other';
-        }
+      }
+
+      if (this.isTileHidden) {
+        css += ' board-hidden-tile';
       }
 
       return css;

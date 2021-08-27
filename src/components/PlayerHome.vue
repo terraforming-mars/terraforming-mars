@@ -31,20 +31,23 @@
                 <div class="player_home_block">
                     <a name="board" class="player_home_anchor"></a>
                     <board
-                        :spaces="game.spaces"
-                        :venusNextExtension="game.gameOptions.venusNextExtension"
-                        :venusScaleLevel="game.venusScaleLevel"
-                        :boardName ="game.gameOptions.boardName"
-                        :oceans_count="game.oceans"
-                        :oxygen_level="game.oxygenLevel"
-                        :temperature="game.temperature"
-                        :aresExtension="game.gameOptions.aresExtension"
-                        :aresData="game.aresData"
-                        id="shortkey-board"></board>
+                      :spaces="game.spaces"
+                      :venusNextExtension="game.gameOptions.venusNextExtension"
+                      :venusScaleLevel="game.venusScaleLevel"
+                      :boardName ="game.gameOptions.boardName"
+                      :oceans_count="game.oceans"
+                      :oxygen_level="game.oxygenLevel"
+                      :temperature="game.temperature"
+                      :aresExtension="game.gameOptions.aresExtension"
+                      :aresData="game.aresData"
+                      :isTileHidden="isTileHidden"
+                      @toggleTileHidden="isTileHidden = !isTileHidden"
+                      id="shortkey-board"
+                    />
 
-                    <turmoil v-if="game.turmoil" :turmoil="game.turmoil"></turmoil>
+                    <turmoil v-if="game.turmoil" :turmoil="game.turmoil"/>
 
-                    <MoonBoard v-if="game.gameOptions.moonExpansion" :model="game.moon"></MoonBoard>
+                    <MoonBoard v-if="game.gameOptions.moonExpansion" :model="game.moon" :isTileHidden="isTileHidden"/>
 
                     <div v-if="player.players.length > 1" class="player_home_block--milestones-and-awards">
                         <Milestone :milestones_list="game.milestones" />
@@ -224,7 +227,6 @@
 </template>
 
 <script lang="ts">
-
 import Vue from 'vue';
 
 import Board from './Board.vue';
@@ -256,6 +258,7 @@ export interface PlayerHomeModel {
   showActiveCards: boolean;
   showAutomatedCards: boolean;
   showEventCards: boolean;
+  isTileHidden: boolean;
 }
 
 class TerraformedAlertDialog {
@@ -269,6 +272,7 @@ export default Vue.extend({
       showActiveCards: !PreferencesManager.loadBoolean('hide_active_cards'),
       showAutomatedCards: !PreferencesManager.loadBoolean('hide_automated_cards'),
       showEventCards: !PreferencesManager.loadBoolean('hide_event_cards'),
+      isTileHidden: false,
     };
   },
   watch: {

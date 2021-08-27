@@ -1,0 +1,98 @@
+import {createLocalVue, shallowMount} from '@vue/test-utils';
+import {expect} from 'chai';
+import MoonBoard from '../../../src/components/moon/MoonBoard.vue';
+import MoonSpace from '../../../src/components/moon/MoonSpace.vue';
+import {MoonModel} from '../../../src/models/MoonModel';
+import {SpaceType} from '../../../src/SpaceType';
+
+const model: MoonModel = {
+  colonyRate: 0,
+  logisticsRate: 0,
+  miningRate: 0,
+  spaces: [
+    {
+      id: 'm01',
+      x: 1,
+      y: 1,
+      bonus: [],
+      spaceType: SpaceType.COLONY,
+      color: undefined,
+      highlight: undefined,
+      tileType: undefined,
+    },
+    {
+      id: 'm37',
+      x: 2,
+      y: 1,
+      bonus: [],
+      spaceType: SpaceType.COLONY,
+      color: undefined,
+      highlight: undefined,
+      tileType: undefined,
+    },
+    {
+      id: 'm02',
+      x: 3,
+      y: 1,
+      bonus: [],
+      spaceType: SpaceType.LUNAR_MINE,
+      color: undefined,
+      highlight: undefined,
+      tileType: undefined,
+    },
+    {
+      id: 'm03',
+      x: 3,
+      y: 1,
+      bonus: [],
+      spaceType: SpaceType.LAND,
+      color: undefined,
+      highlight: undefined,
+      tileType: undefined,
+    },
+  ],
+};
+
+
+describe('MoonBoard', () => {
+  function getLocalVue() {
+    const localVue = createLocalVue();
+    localVue.directive('trim-whitespace', {});
+    localVue.directive('i18n', {});
+    return localVue;
+  }
+
+  it('has visible tiles on the board', async () => {
+    const isTileHidden = true;
+
+    const wrapper = shallowMount(MoonBoard, {
+      localVue: getLocalVue(),
+      propsData: {model, isTileHidden},
+    });
+
+    const boardSpacesWrappers = wrapper.findAllComponents(MoonSpace).wrappers.filter((wrapper) => {
+      return wrapper.attributes('data-test') === 'moon-board-space';
+    });
+
+    expect(
+      boardSpacesWrappers.every((wrapper) => wrapper.props('isTileHidden') === isTileHidden),
+    ).to.be.true;
+  });
+
+  it('has hidden tiles on the board', async () => {
+    const isTileHidden = false;
+
+    const wrapper = shallowMount(MoonBoard, {
+      localVue: getLocalVue(),
+      propsData: {model, isTileHidden},
+    });
+
+    const boardSpacesWrappers = wrapper.findAllComponents(MoonSpace).wrappers.filter((wrapper) => {
+      return wrapper.attributes('data-test') === 'moon-board-space';
+    });
+
+    expect(
+      boardSpacesWrappers.every((wrapper) => wrapper.props('isTileHidden') === isTileHidden),
+    ).to.be.true;
+  });
+});

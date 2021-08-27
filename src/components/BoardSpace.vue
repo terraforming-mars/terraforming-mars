@@ -1,10 +1,10 @@
 <template>
   <div :class="getMainClass()" :data_space_id="space.id">
-    <div :class="getTileClass()" :title="getVerboseTitle(space.tileType)"></div>
+    <div :class="getTileClass()" :title="getVerboseTitle(space.tileType)" data-test="tile"/>
     <div class="board-space-text" v-if="text" v-i18n>{{ text }}</div>
     <bonus :bonus="space.bonus" v-if="space.tileType === undefined"></bonus>
     <bonus :bonus="space.bonus" v-if="space.tileType !== undefined && isTileHidden"></bonus>
-    <div :class="'board-cube board-cube--'+space.color" v-if="space.color !== undefined && !isTileHidden "></div>
+    <div :class="'board-cube board-cube--'+space.color" v-if="space.color !== undefined && !isTileHidden"></div>
   </div>
 </template>
 

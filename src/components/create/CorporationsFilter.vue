@@ -87,7 +87,7 @@ export default Vue.extend({
       type: Boolean,
     },
   },
-  data: function() {
+  data() {
     const cardsByModuleMap: Map<GameModule, Array<CardName>> =
             new Map(ALL_CARD_MANIFESTS.map((m) => [m.module, corpCardNames(m.module)]));
     return {
@@ -108,14 +108,14 @@ export default Vue.extend({
     };
   },
   methods: {
-    getSelected: function(): Array<CardName> {
+    getSelected(): Array<CardName> {
       if (Array.isArray(this.selectedCorporations)) {
         return this.selectedCorporations;
       }
       console.warn('unexpectedly got boolean for selectedCorporations');
       return [];
     },
-    getItemsByGroup: function(group: string): Array<CardName> {
+    getItemsByGroup(group: string): Array<CardName> {
       if (group === 'All') return allItems.slice();
 
       const corps = this.cardsByModuleMap.get(group as GameModule);
@@ -126,7 +126,7 @@ export default Vue.extend({
         return corps.slice();
       }
     },
-    selectAll: function(group: string) {
+    selectAll(group: string) {
       const items = this.getItemsByGroup(group);
       for (const item of items) {
         if (this.getSelected().includes(item) === false) {
@@ -134,19 +134,19 @@ export default Vue.extend({
         }
       }
     },
-    removeFromSelection: function(cardName: CardName) {
+    removeFromSelection(cardName: CardName) {
       const itemIdx = this.getSelected().indexOf(cardName);
       if (itemIdx !== -1) {
         this.getSelected().splice(itemIdx, 1);
       }
     },
-    selectNone: function(group: string) {
+    selectNone(group: string) {
       const items = this.getItemsByGroup(group);
       for (const item of items) {
         this.removeFromSelection(item);
       }
     },
-    invertSelection: function(group: string) {
+    invertSelection(group: string) {
       const items = this.getItemsByGroup(group);
 
       for (const idx in items) {
@@ -159,31 +159,31 @@ export default Vue.extend({
     },
   },
   watch: {
-    selectedCorporations: function(value) {
+    selectedCorporations(value) {
       this.$emit('corporation-list-changed', value);
     },
-    corporateEra: function(enabled) {
+    corporateEra(enabled) {
       enabled ? this.selectAll(GameModule.CorpEra) : this.selectNone(GameModule.CorpEra);
     },
-    prelude: function(enabled) {
+    prelude(enabled) {
       enabled ? this.selectAll(GameModule.Prelude) : this.selectNone(GameModule.Prelude);
     },
-    venusNext: function(enabled) {
+    venusNext(enabled) {
       enabled ? this.selectAll(GameModule.Venus) : this.selectNone(GameModule.Venus);
     },
-    colonies: function(enabled) {
+    colonies(enabled) {
       enabled ? this.selectAll(GameModule.Colonies) : this.selectNone(GameModule.Colonies);
     },
-    turmoil: function(enabled) {
+    turmoil(enabled) {
       enabled ? this.selectAll(GameModule.Turmoil) : this.selectNone(GameModule.Turmoil);
     },
-    promoCardsOption: function(enabled) {
+    promoCardsOption(enabled) {
       enabled ? this.selectAll(GameModule.Promo) : this.selectNone(GameModule.Promo);
     },
-    communityCardsOption: function(enabled) {
+    communityCardsOption(enabled) {
       enabled ? this.selectAll(GameModule.Community) : this.selectNone(GameModule.Community);
     },
-    moonExpansion: function(enabled) {
+    moonExpansion(enabled) {
       enabled ? this.selectAll(GameModule.Moon) : this.selectNone(GameModule.Moon);
     },
   },

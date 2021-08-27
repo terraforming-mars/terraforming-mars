@@ -31,7 +31,7 @@ export default Vue.extend({
   },
   methods: {
     ...TranslateMixin.methods,
-    isMax: function(): boolean {
+    isMax(): boolean {
       switch (this.param as GlobalParameter) {
       case GlobalParameter.TEMPERATURE:
         return this.value === MAX_TEMPERATURE;
@@ -45,7 +45,7 @@ export default Vue.extend({
         return false;
       }
     },
-    getIconClass: function(): string {
+    getIconClass(): string {
       switch (this.param as GlobalParameter) {
       case GlobalParameter.TEMPERATURE:
         return 'temperature-tile';
@@ -59,7 +59,7 @@ export default Vue.extend({
         return '';
       }
     },
-    suffix: function(): string {
+    suffix(): string {
       return this.param === GlobalParameter.OXYGEN ? '%' : '';
     },
   },

@@ -163,7 +163,7 @@ export default Vue.extend({
       type: Object as () => PlayerViewModel,
     },
   },
-  data: function() {
+  data() {
     return {
       constants,
     };
@@ -175,13 +175,13 @@ export default Vue.extend({
     MoonBoard,
   },
   methods: {
-    getEndGamePlayerRowColorClass: function(color: string): string {
+    getEndGamePlayerRowColorClass(color: string): string {
       return playerColorClass(color.toLowerCase(), 'bg_transparent');
     },
-    getTimer: function(p: PublicPlayerModel): string {
+    getTimer(p: PublicPlayerModel): string {
       return Timer.toString(p.timer);
     },
-    getSortedPlayers: function() {
+    getSortedPlayers() {
       this.player.players.sort(function(a:PublicPlayerModel, b:PublicPlayerModel) {
         if (a.victoryPointsBreakdown.total < b.victoryPointsBreakdown.total) return -1;
         if (a.victoryPointsBreakdown.total > b.victoryPointsBreakdown.total) return 1;
@@ -191,7 +191,7 @@ export default Vue.extend({
       });
       return this.player.players.reverse();
     },
-    getWinners: function() {
+    getWinners() {
       const sortedPlayers = this.getSortedPlayers();
       const firstWinner = sortedPlayers[0];
       const winners: PublicPlayerModel[] = [firstWinner];
@@ -203,7 +203,7 @@ export default Vue.extend({
       }
       return winners;
     },
-    isSoloGame: function(): boolean {
+    isSoloGame(): boolean {
       return this.player.players.length === 1;
     },
   },

@@ -509,7 +509,7 @@ export default Vue.extend({
       type: Object as () => ColonyModel,
     },
   },
-  data: function() {
+  data() {
     return {
       PLUTO: ColonyName.PLUTO,
       GANYMEDE: ColonyName.GANYMEDE,

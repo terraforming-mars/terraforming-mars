@@ -40,28 +40,28 @@ export default Vue.extend({
     },
   },
   methods: {
-    updateTimer: function() {
+    updateTimer() {
       this.timerText = Timer.toString(this.timer);
     },
-    hasHours: function() {
+    hasHours() {
       if (this.timerText.split(':').length > 2) {
         return 1;
       }
       return 0;
     },
-    getHours: function(): string {
+    getHours(): string {
       if (this.hasHours()) {
         return this.timerText.split(':')[0];
       }
       return '';
     },
-    getMinutes: function(): string {
+    getMinutes(): string {
       if (this.hasHours()) {
         return this.timerText.split(':')[1];
       }
       return this.timerText.split(':')[0];
     },
-    getSeconds: function(): string {
+    getSeconds(): string {
       if (this.hasHours()) {
         return this.timerText.split(':')[2];
       }

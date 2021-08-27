@@ -48,25 +48,25 @@ export default Vue.extend({
       default: DEFAULT_TITANIUM_VALUE,
     },
   },
-  data: function() {
+  data() {
     return {
     };
   },
   methods: {
-    mainCSS: function(): string {
+    mainCSS(): string {
       return 'resource_item--' + this.type;
     },
-    iconCSS: function(): string {
+    iconCSS(): string {
       return 'resource_icon--' + this.type;
     },
-    productionSign: function(): string {
+    productionSign(): string {
       if (this.production > 0) return '+';
       return '';
     },
-    displayPlantsProtectedIcon: function(): boolean {
+    displayPlantsProtectedIcon(): boolean {
       return this.type === Resources.PLANTS && this.plantsAreProtected;
     },
-    showResourceValue: function(): boolean {
+    showResourceValue(): boolean {
       const learnerModeOn = PreferencesManager.load('learner_mode') === '1';
       switch (this.type) {
       case Resources.STEEL:
@@ -79,7 +79,7 @@ export default Vue.extend({
         return false;
       }
     },
-    getResourceValue: function(): string {
+    getResourceValue(): string {
       if (this.type === Resources.STEEL) {
         return `${this.steelValue}`;
       } else if (this.type === Resources.TITANIUM) {

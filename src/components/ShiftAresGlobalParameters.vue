@@ -62,7 +62,7 @@ export default Vue.extend({
       type: Boolean,
     },
   },
-  data: function() {
+  data() {
     const hazardData = this.playerinput.aresData.hazardData;
     return {
       hazardData: hazardData,
@@ -74,7 +74,7 @@ export default Vue.extend({
     };
   },
   methods: {
-    saveData: function() {
+    saveData() {
       const response: IAresGlobalParametersResponse = {
         lowOceanDelta: this.$data.lowOceanDelta,
         highOceanDelta: this.$data.highOceanDelta,

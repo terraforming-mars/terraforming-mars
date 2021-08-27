@@ -54,7 +54,7 @@ export interface HelpPageModel {
 
 export default Vue.extend({
   name: 'Help',
-  data: function(): HelpPageModel {
+  data(): HelpPageModel {
     return {
       currentPage: 'iconology',
     };
@@ -65,10 +65,10 @@ export default Vue.extend({
     HelpPhases,
   },
   methods: {
-    setTab: function(tab: Tab): void {
+    setTab(tab: Tab): void {
       this.currentPage = tab;
     },
-    isOpen: function(tab: Tab): boolean {
+    isOpen(tab: Tab): boolean {
       return tab === this.currentPage;
     },
   },

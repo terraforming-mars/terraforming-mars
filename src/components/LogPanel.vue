@@ -79,7 +79,7 @@ export default Vue.extend({
       type: String as () => Color,
     },
   },
-  data: function() {
+  data() {
     return {
       // temporary storage used when showing cards on the log line.
       cards: [] as Array<CardName>,
@@ -95,13 +95,13 @@ export default Vue.extend({
     GlobalEvent,
   },
   methods: {
-    scrollToEnd: function() {
+    scrollToEnd() {
       const scrollablePanel = document.getElementById('logpanel-scrollable');
       if (scrollablePanel !== null) {
         scrollablePanel.scrollTop = scrollablePanel.scrollHeight;
       }
     },
-    cardToHtml: function(cardType: CardType, cardName: string) {
+    cardToHtml(cardType: CardType, cardName: string) {
       const cardNameString = $t(cardName);
       const suffixFreeCardName = cardNameString.split(':')[0];
       let className: string | undefined;
@@ -122,7 +122,7 @@ export default Vue.extend({
       }
       return '<span class="log-card '+ className + '">' + suffixFreeCardName + '</span>';
     },
-    messageDataToHTML: function(data: LogMessageData): string {
+    messageDataToHTML(data: LogMessageData): string {
       const translatableMessageDataTypes = [
         LogMessageDataType.STRING,
         LogMessageDataType.STANDARD_PROJECT,
@@ -187,7 +187,7 @@ export default Vue.extend({
       return data.value;
     },
     // Called in the event that a bad log message comes down. Does its best to return something.
-    safeMessage: function(message: LogMessage) {
+    safeMessage(message: LogMessage) {
       try {
         if (message === undefined) {
           return 'undefined';
@@ -205,7 +205,7 @@ export default Vue.extend({
         return `BUG: Unparseable message: ${message.message} ${err.toString()}`;
       }
     },
-    messageToHTML: function(message: LogMessage) {
+    messageToHTML(message: LogMessage) {
       try {
         let logEntryBullet = '';
 
@@ -224,7 +224,7 @@ export default Vue.extend({
       }
       return '';
     },
-    messageClicked: function(message: LogMessage) {
+    messageClicked(message: LogMessage) {
       // TODO(kberg): add global event here, too.
       const datas = message.data;
       datas.forEach((data: LogMessageData) => {
@@ -251,20 +251,20 @@ export default Vue.extend({
         }
       });
     },
-    hideMe: function() {
+    hideMe() {
       this.cards = [];
       this.globalEventNames = [];
     },
-    getCrossHtml: function() {
+    getCrossHtml() {
       return '<i class=\'icon icon-cross\' />';
     },
-    selectGeneration: function(gen: number): void {
+    selectGeneration(gen: number): void {
       if (gen !== this.selectedGeneration) {
         this.getLogsForGeneration(gen);
       }
       this.selectedGeneration = gen;
     },
-    getLogsForGeneration: function(generation: number): void {
+    getLogsForGeneration(generation: number): void {
       const messages = this.messages;
       // abort any pending requests
       if (logRequest !== undefined) {
@@ -295,29 +295,29 @@ export default Vue.extend({
       xhr.responseType = 'json';
       xhr.send();
     },
-    getClassesGenIndicator: function(gen: number): string {
+    getClassesGenIndicator(gen: number): string {
       const classes = ['log-gen-indicator'];
       if (gen === this.selectedGeneration) {
         classes.push('log-gen-indicator--selected');
       }
       return classes.join(' ');
     },
-    getGenerationsRange: function(): Array<number> {
+    getGenerationsRange(): Array<number> {
       const generations: Array<number> = [];
       for (let i = 1; i <= this.generation; i++) {
         generations.push(i);
       }
       return generations;
     },
-    getTitleClasses: function(): string {
+    getTitleClasses(): string {
       const classes = ['log-title'];
       classes.push(playerColorClass(this.color.toLowerCase(), 'shadow'));
       return classes.join(' ');
     },
-    lastGenerationClass: function(): string {
+    lastGenerationClass(): string {
       return this.lastSoloGeneration === this.generation ? 'last-generation blink-animation' : '';
     },
-    getGlobalEvent: function(globalEventName: GlobalEventName): GlobalEventModel {
+    getGlobalEvent(globalEventName: GlobalEventName): GlobalEventModel {
       const globalEvent = getGlobalEventByName(globalEventName);
       if (globalEvent) {
         return {
@@ -335,7 +335,7 @@ export default Vue.extend({
       };
     },
   },
-  mounted: function() {
+  mounted() {
     this.getLogsForGeneration(this.generation);
   },
 });

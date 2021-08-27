@@ -167,7 +167,7 @@ export default Vue.extend({
   components: {
     Card,
   },
-  data: function() {
+  data() {
     return {
       filterText: '',
       filterDescription: false,
@@ -200,7 +200,7 @@ export default Vue.extend({
     },
   },
   methods: {
-    toggleAll: function() {
+    toggleAll() {
       const data = this.$data;
       data.base = !data.base;
       data.corporateEra = !data.corporateEra;
@@ -213,7 +213,7 @@ export default Vue.extend({
       data.ares = !data.ares;
       data.moon = !data.moon;
     },
-    sort: function(names: Array<CardName>): Array<CardName> {
+    sort(names: Array<CardName>): Array<CardName> {
       if (this.$data.sortById) {
         return names.sort((a: CardName, b: CardName) => {
           const an = cards.get(a)?.cardNumber || '';
@@ -224,19 +224,19 @@ export default Vue.extend({
         return names.sort();
       }
     },
-    getAllStandardProjectCards: function() {
+    getAllStandardProjectCards() {
       return this.sort(ALL_STANDARD_PROJECT_CARD_NAMES);
     },
-    getAllProjectCards: function() {
+    getAllProjectCards() {
       return this.sort(ALL_PROJECT_CARD_NAMES);
     },
-    getAllCorporationCards: function() {
+    getAllCorporationCards() {
       return this.sort(ALL_CORPORATION_CARD_NAMES);
     },
-    getAllPreludeCards: function() {
+    getAllPreludeCards() {
       return this.sort(ALL_PRELUDE_CARD_NAMES);
     },
-    filtered: function(cardName: CardName): boolean {
+    filtered(cardName: CardName): boolean {
       const card = cards.get(cardName);
       const filterText = this.$data.filterText.toUpperCase();
       if (this.$data.filterText.length > 0) {

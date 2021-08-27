@@ -27,19 +27,19 @@ import * as constants from '../constants';
 
 export default Vue.extend({
   name: 'games-overview',
-  data: function() {
+  data() {
     return {
       constants,
       serverId: '',
       games: {},
     };
   },
-  mounted: function() {
+  mounted() {
     this.serverId = (new URL(location.href)).searchParams.get('serverId') || '';
     this.getGames();
   },
   methods: {
-    getGames: function() {
+    getGames() {
       const vueApp = this;
       const xhr = new XMLHttpRequest();
       xhr.open('GET', '/api/games?serverId='+this.serverId);
@@ -63,7 +63,7 @@ export default Vue.extend({
       xhr.responseType = 'json';
       xhr.send();
     },
-    getGame: function(gameId: string) {
+    getGame(gameId: string) {
       const vueApp = this;
       const xhr = new XMLHttpRequest();
       xhr.open('GET', '/api/game?id='+gameId);
@@ -85,7 +85,7 @@ export default Vue.extend({
       xhr.responseType = 'json';
       xhr.send();
     },
-    isGameRunning: function(gamePhase: string): boolean {
+    isGameRunning(gamePhase: string): boolean {
       return (gamePhase === Phase.END) ? false : true;
     },
   },

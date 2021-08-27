@@ -18,7 +18,7 @@ export default Vue.extend({
     },
   },
   methods: {
-    getClasses: function(): string {
+    getClasses(): string {
       const type: CardRenderSymbolType = this.item.type;
       const size: Size = this.item.size;
       const classes: Array<string> = ['card-special'];
@@ -67,7 +67,7 @@ export default Vue.extend({
 
       return classes.join(' ');
     },
-    getContent: function(): string {
+    getContent(): string {
       return this.item.isIcon ? '' : this.item.type;
     },
   },

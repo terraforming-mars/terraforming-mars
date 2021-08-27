@@ -61,7 +61,7 @@ export default Vue.extend({
   components: {
     Button,
   },
-  data: function() {
+  data() {
     if (this.playerinput.options === undefined) {
       throw new Error('no options provided for OrOptions');
     }
@@ -74,7 +74,7 @@ export default Vue.extend({
   },
   methods: {
     ...TranslateMixin.methods,
-    playerFactorySaved: function() {
+    playerFactorySaved() {
       const idx = this.playerinput.options?.indexOf(this.selectedOption);
       if (idx === undefined || idx === -1) {
         throw new Error('option not found!');
@@ -87,7 +87,7 @@ export default Vue.extend({
         this.onsave(copy);
       };
     },
-    saveData: function() {
+    saveData() {
       let ref = this.$refs['inputfactory'];
       if (Array.isArray(ref)) {
         ref = ref[0];

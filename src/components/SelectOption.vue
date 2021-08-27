@@ -33,7 +33,7 @@ export default Vue.extend({
   },
   methods: {
     ...TranslateMixin.methods,
-    saveData: function() {
+    saveData() {
       this.onsave([['1']]);
     },
   },

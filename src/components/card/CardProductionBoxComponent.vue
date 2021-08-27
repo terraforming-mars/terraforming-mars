@@ -31,11 +31,11 @@ export default Vue.extend({
     CardRenderSymbolComponent,
   },
   methods: {
-    getClasses: function(): string {
+    getClasses(): string {
       const classes: Array<string> = ['card-production-box'];
       return classes.join(' ');
     },
-    getComponentType: function(rowItem: CardRenderSymbol | CardRenderItem): string {
+    getComponentType(rowItem: CardRenderSymbol | CardRenderItem): string {
       if (rowItem instanceof CardRenderSymbol) {
         return 'symbol';
       } else if (rowItem instanceof CardRenderItem) {

@@ -36,7 +36,7 @@ export default Vue.extend({
       type: Boolean,
     },
   },
-  data: function() {
+  data() {
     return {
       selectedParty: undefined as string | undefined,
     };
@@ -44,7 +44,7 @@ export default Vue.extend({
   components: {Button, Party},
   methods: {
     ...TranslateMixin.methods,
-    saveData: function() {
+    saveData() {
       const result: string[][] = [];
       result.push([]);
       if (this.selectedParty !== undefined) {
@@ -52,10 +52,10 @@ export default Vue.extend({
       }
       this.onsave(result);
     },
-    isDominant: function(partyName: PartyName): boolean {
+    isDominant(partyName: PartyName): boolean {
       return partyName === this.playerinput.turmoil?.dominant;
     },
-    partyAvailableToSelect: function(partyName: PartyName): boolean {
+    partyAvailableToSelect(partyName: PartyName): boolean {
       if (this.playerinput.availableParties === undefined) {
         return false;
       } else {

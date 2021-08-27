@@ -25,7 +25,7 @@ export default Vue.extend({
     CardRenderItemComponent,
   },
   methods: {
-    getClasses: function(): string {
+    getClasses(): string {
       const classes: string[] = ['card-points'];
       if (this.isObject(this.victoryPoints)) {
         const item = this.victoryPoints;
@@ -40,7 +40,7 @@ export default Vue.extend({
       }
       return classes.join(' ');
     },
-    isObject: function(item: any): item is CardRenderDynamicVictoryPoints {
+    isObject(item: any): item is CardRenderDynamicVictoryPoints {
       return item instanceof CardRenderDynamicVictoryPoints;
     },
   },

@@ -36,14 +36,14 @@ export default Vue.extend({
       type: Boolean,
     },
   },
-  data: function() {
+  data() {
     return {};
   },
   components: {
     'bonus': Bonus,
   },
   methods: {
-    getVerboseTitle: function(tileType: TileType | undefined): string {
+    getVerboseTitle(tileType: TileType | undefined): string {
       let ret: string = '';
       if (tileType === TileType.LUNA_TRADE_STATION) {
         ret = 'Luna Trade Station';
@@ -54,7 +54,7 @@ export default Vue.extend({
       }
       return $t(ret);
     },
-    getMainClass: function(): string {
+    getMainClass(): string {
       let css = 'board-space moon-space-' + this.space.id.toString();
       if (this.is_selectable) {
         css += ' board-space-selectable';

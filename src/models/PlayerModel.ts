@@ -5,6 +5,7 @@ import {ITagCount} from '../ITagCount';
 import {PlayerInputModel} from './PlayerInputModel';
 import {SerializedTimer} from '../SerializedTimer';
 import {GameModel} from './GameModel';
+import {PlayerId} from '../Player';
 
 export interface BasePlayerModel {
   name: string;
@@ -39,7 +40,6 @@ export interface PublicPlayerModel extends BasePlayerModel {
   plantProduction: number;
   plantsAreProtected: boolean;
   playedCards: Array<CardModel>;
-  preludeCardsInHand: Array<CardModel>;
   selfReplicatingRobotsCards: Array<CardModel>;
   steel: number;
   steelProduction: number;
@@ -55,16 +55,17 @@ export interface PublicPlayerModel extends BasePlayerModel {
 }
 
 /** A player's view of the game, including their secret information. */
-export interface PlayerViewModel extends PublicPlayerModel {
+export interface PlayerViewModel {
   cardsInHand: Array<CardModel>;
   dealtCorporationCards: Array<CardModel>;
   dealtPreludeCards: Array<CardModel>;
   dealtProjectCards: Array<CardModel>;
   draftedCards: Array<CardModel>;
   game: GameModel;
-  id: string; // PlayerId
+  id: PlayerId;
   pickedCorporationCard: Array<CardModel>; // Why Array?
   players: Array<PublicPlayerModel>;
+  preludeCardsInHand: Array<CardModel>;
   thisPlayer: PublicPlayerModel;
   waitingFor: PlayerInputModel | undefined;
 }

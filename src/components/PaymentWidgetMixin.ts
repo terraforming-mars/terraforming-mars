@@ -53,14 +53,14 @@ export const PaymentWidgetMixin = {
     },
     getMegaCreditsMax(): number {
       const model = this.asModel();
-      return Math.min(model.player.megaCredits, model.$data.cost);
+      return Math.min(model.player.thisPlayer.megaCredits, model.$data.cost);
     },
     getResourceRate(resourceName: ResourcesWithRates): number {
       let rate = 1; // one resource == one money
       if (resourceName === 'titanium') {
-        rate = this.asModel().player.titaniumValue;
+        rate = this.asModel().player.thisPlayer.titaniumValue;
       } else if (resourceName === 'steel') {
-        rate = this.asModel().player.steelValue;
+        rate = this.asModel().player.thisPlayer.steelValue;
       } else if (resourceName === 'microbes') {
         rate = 2;
       } else if (resourceName === 'floaters') {
@@ -94,7 +94,7 @@ export const PaymentWidgetMixin = {
       let maxValue: number | undefined = max;
 
       if (maxValue === undefined && target !== 'microbes' && target !== 'floaters' && target !== 'science') {
-        maxValue = this.asModel().player[target];
+        maxValue = this.asModel().player.thisPlayer[target];
       }
 
       switch (target) {
@@ -148,7 +148,7 @@ export const PaymentWidgetMixin = {
       const cardCost: number = this.asModel().$data.cost;
       let amountHave: number | undefined = max;
       if (max === undefined && target !== 'microbes' && target !== 'floaters' && target !== 'science') {
-        amountHave = this.asModel().player[target];
+        amountHave = this.asModel().player.thisPlayer[target];
       }
 
       let amountNeed = cardCost;
@@ -174,7 +174,7 @@ export const PaymentWidgetMixin = {
     },
     isStratosphericBirdsEdgeCase(): boolean {
       if (this.asModel().$data.card?.name === CardName.STRATOSPHERIC_BIRDS) {
-        const playedCards = this.asModel().player.playedCards as Array<CardModel>;
+        const playedCards = this.asModel().player.thisPlayer.playedCards as Array<CardModel>;
         const cardsWithFloaters = playedCards.filter((card) => card.resourceType === ResourceType.FLOATER && card.resources);
         return cardsWithFloaters.length === 1;
       }

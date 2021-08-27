@@ -65,17 +65,17 @@ export default Vue.extend({
     Button,
     'game-setup-detail': GameSetupDetail,
   },
-  data: function() {
+  data() {
     return {
       // Variable to keep the state for the current copied player id. Used to display message of which button and which player playable link is currently in the clipboard
       urlCopiedPlayerId: DEFAULT_COPIED_PLAYER_ID as string,
     };
   },
   methods: {
-    getGameId: function(): string {
+    getGameId(): string {
       return this.game !== undefined ? this.game.id.toString() : 'n/a';
     },
-    getTurnOrder: function(index: number): string {
+    getTurnOrder(index: number): string {
       if (index === 0) {
         return '1st';
       } else if (index === 1) {
@@ -88,23 +88,23 @@ export default Vue.extend({
         return 'n/a';
       }
     },
-    setCopiedIdToDefault: function() {
+    setCopiedIdToDefault() {
       this.urlCopiedPlayerId = DEFAULT_COPIED_PLAYER_ID;
     },
-    getPlayerCubeColorClass: function(color: string): string {
+    getPlayerCubeColorClass(color: string): string {
       return playerColorClass(color.toLowerCase(), 'bg');
     },
-    getHref: function(playerId: PlayerId | SpectatorId): string {
+    getHref(playerId: PlayerId | SpectatorId): string {
       if (playerId === this.game.spectatorId) {
         return `/spectator?id=${playerId}`;
       }
       return `/player?id=${playerId}`;
     },
-    copyUrl: function(playerId: PlayerId | SpectatorId): void {
+    copyUrl(playerId: PlayerId | SpectatorId): void {
       copyToClipboard(window.location.origin + this.getHref(playerId));
       this.urlCopiedPlayerId = playerId;
     },
-    isPlayerUrlCopied: function(playerId: string): boolean {
+    isPlayerUrlCopied(playerId: string): boolean {
       return playerId === this.urlCopiedPlayerId;
     },
   },

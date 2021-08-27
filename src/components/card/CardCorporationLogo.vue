@@ -16,7 +16,7 @@ export default Vue.extend({
     },
   },
   methods: {
-    getHtmlContent: function(): string {
+    getHtmlContent(): string {
       const title: CardName = this.title;
       // TODO(chosta): refactor to include only the exceptions and DRY the code
 

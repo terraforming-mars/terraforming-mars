@@ -17,7 +17,7 @@ export default Vue.extend({
     },
   },
   methods: {
-    getAmount: function(): number {
+    getAmount(): number {
       return this.amount * -1;
     },
   },

@@ -31,7 +31,7 @@ export default Vue.extend({
     },
   },
   methods: {
-    getClasses: function(): string {
+    getClasses(): string {
       const classes = ['card-expansion', 'project-icon'];
       const expansionClass = MODULE_TO_CSS.get(this.expansion);
       if (expansionClass !== undefined) {

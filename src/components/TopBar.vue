@@ -24,7 +24,7 @@ export default Vue.extend({
   components: {
     PlayerInfo,
   },
-  data: function() {
+  data() {
     return {
       componentKey: 0,
     };

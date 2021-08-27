@@ -264,7 +264,7 @@ class TerraformedAlertDialog {
 
 export default Vue.extend({
   name: 'player-home',
-  data: function(): PlayerHomeModel {
+  data(): PlayerHomeModel {
     return {
       showActiveCards: !PreferencesManager.loadBoolean('hide_active_cards'),
       showAutomatedCards: !PreferencesManager.loadBoolean('hide_automated_cards'),
@@ -272,13 +272,13 @@ export default Vue.extend({
     };
   },
   watch: {
-    hide_active_cards: function() {
+    hide_active_cards() {
       PreferencesManager.save('hide_active_cards', !this.showActiveCards);
     },
-    hide_automated_cards: function() {
+    hide_automated_cards() {
       PreferencesManager.save('hide_automated_cards', !this.showAutomatedCards);
     },
-    hide_event_cards: function() {
+    hide_event_cards() {
       PreferencesManager.save('hide_event_cards', !this.showEventCards);
     },
   },
@@ -291,10 +291,10 @@ export default Vue.extend({
     },
   },
   computed: {
-    thisPlayer: function(): PublicPlayerModel {
+    thisPlayer(): PublicPlayerModel {
       return this.player.thisPlayer;
     },
-    game: function(): GameModel {
+    game(): GameModel {
       return this.player.game;
     },
   },
@@ -318,7 +318,7 @@ export default Vue.extend({
   mixins: [PlayerMixin],
   methods: {
     ...PlayerMixin.methods,
-    navigatePage: function(event: KeyboardEvent) {
+    navigatePage(event: KeyboardEvent) {
       const inputSource = event.target as Element;
       if (inputSource.nodeName.toLowerCase() !== 'input') {
         let idSuffix: string | undefined = undefined;
@@ -345,7 +345,7 @@ export default Vue.extend({
         }
       }
     },
-    isPlayerActing: function(player: PlayerViewModel) : boolean {
+    isPlayerActing(player: PlayerViewModel) : boolean {
       return player.players.length > 1 && player.waitingFor !== undefined;
     },
     getPlayerCssForTurnOrder: (
@@ -361,7 +361,7 @@ export default Vue.extend({
       }
       return classes.join(' ');
     },
-    getFleetsCountRange: function(player: PublicPlayerModel): Array<number> {
+    getFleetsCountRange(player: PublicPlayerModel): Array<number> {
       const fleetsRange: Array<number> = [];
       for (let i = 0; i < player.fleetSize - player.tradesThisGeneration; i++) {
         fleetsRange.push(i);
@@ -395,7 +395,7 @@ export default Vue.extend({
     isInitialDraftingPhase(): boolean {
       return (this.game.phase === Phase.INITIALDRAFTING) && this.game.gameOptions.initialDraftVariant;
     },
-    getToggleLabel: function(hideType: string): string {
+    getToggleLabel(hideType: string): string {
       if (hideType === 'ACTIVE') {
         return (this.showActiveCards? '✔' : '');
       } else if (hideType === 'AUTOMATED') {
@@ -406,7 +406,7 @@ export default Vue.extend({
         return '';
       }
     },
-    getHideButtonClass: function(hideType: string): string {
+    getHideButtonClass(hideType: string): string {
       const prefix = 'hiding-card-button ';
       if (hideType === 'ACTIVE') {
         return prefix + (this.showActiveCards ? 'active' : 'active-transparent');
@@ -419,10 +419,10 @@ export default Vue.extend({
       }
     },
   },
-  destroyed: function() {
+  destroyed() {
     window.removeEventListener('keydown', this.navigatePage);
   },
-  mounted: function() {
+  mounted() {
     window.addEventListener('keydown', this.navigatePage);
     if (this.game.isTerraformed && TerraformedAlertDialog.shouldAlert && PreferencesManager.load('show_alerts') === '1') {
       alert('Mars is Terraformed!');

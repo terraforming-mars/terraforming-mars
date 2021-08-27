@@ -37,11 +37,11 @@ export default Vue.extend({
     CardRenderEffectBoxComponent,
   },
   methods: {
-    getClasses: function(): string {
+    getClasses(): string {
       const classes: Array<string> = ['card-corporation-box'];
       return classes.join(' ');
     },
-    getComponentType: function(rowItem: CardRenderEffect | CardRenderItem | CardRenderSymbol): string {
+    getComponentType(rowItem: CardRenderEffect | CardRenderItem | CardRenderSymbol): string {
       if (rowItem instanceof CardRenderSymbol) {
         return 'symbol';
       } else if (rowItem instanceof CardRenderEffect) {

@@ -26,11 +26,11 @@ export default Vue.extend({
   },
   methods: {
     ...PlayerMixin.methods,
-    hideMe: function() {
+    hideMe() {
       // TODO find a better way to share methods with this.$root for type safety
       (this.$root as unknown as typeof mainAppSettings.methods).setVisibilityState('pinned_player_' + this.playerIndex, false);
     },
-    isVisible: function() {
+    isVisible() {
       return (this.$root as unknown as typeof mainAppSettings.methods).getVisibilityState(
         'pinned_player_' + this.playerIndex,
       );

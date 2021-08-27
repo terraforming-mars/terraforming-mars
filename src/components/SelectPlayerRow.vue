@@ -16,7 +16,7 @@ export default Vue.extend({
   },
   methods: {
   },
-  data: function() {
+  data() {
     return {};
   },
 });

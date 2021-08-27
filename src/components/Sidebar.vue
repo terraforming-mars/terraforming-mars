@@ -134,7 +134,7 @@ export default Vue.extend({
     MoonGlobalParameterValue,
     'preferences-dialog': PreferencesDialog,
   },
-  data: function() {
+  data() {
     return {
       'ui': {
         'preferences_panel_open': false,
@@ -160,23 +160,23 @@ export default Vue.extend({
   },
   methods: {
     ...TranslateMixin.methods,
-    getPlayerColorCubeClass: function(): string {
+    getPlayerColorCubeClass(): string {
       return this.acting_player && (PreferencesManager.loadBoolean('hide_animated_sidebar') === false) ? 'preferences_player_inner active' : 'preferences_player_inner';
     },
-    getSideBarClass: function(): string {
+    getSideBarClass(): string {
       return this.acting_player && (PreferencesManager.loadBoolean('hide_animated_sidebar') === false) ? 'preferences_acting_player' : 'preferences_nonacting_player';
     },
-    getGenMarker: function(): string {
+    getGenMarker(): string {
       return `${this.generation}`;
     },
-    rulingPartyToCss: function(): string {
+    rulingPartyToCss(): string {
       if (this.turmoil.ruling === undefined) {
         console.warn('no party provided');
         return '';
       }
       return this.turmoil.ruling.toLowerCase().split(' ').join('_');
     },
-    getRulingParty: function(): string {
+    getRulingParty(): string {
       const rulingPartyName = this.turmoil.ruling;
       if (rulingPartyName === PartyName.MARS) {
         return 'Mars';

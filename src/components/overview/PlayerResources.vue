@@ -23,13 +23,13 @@ export default Vue.extend({
       type: Object as () => PublicPlayerModel,
     },
   },
-  data: function() {
+  data() {
     return {
       resources: Resources,
     };
   },
   methods: {
-    canUseHeatAsMegaCredits: function(): boolean {
+    canUseHeatAsMegaCredits(): boolean {
       return this.player.corporationCard?.name === CardName.HELION;
     },
   },

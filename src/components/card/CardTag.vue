@@ -22,7 +22,7 @@ export default Vue.extend({
     },
   },
   methods: {
-    getClasses: function(): string {
+    getClasses(): string {
       const classes = ['card-tag'];
       classes.push(`tag-${this.type.toLocaleLowerCase()}`);
 

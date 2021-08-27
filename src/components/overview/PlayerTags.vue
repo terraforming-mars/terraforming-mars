@@ -132,50 +132,50 @@ export default Vue.extend({
     JovianMultiplier,
   },
   computed: {
-    isThisPlayer: function(): boolean {
+    isThisPlayer(): boolean {
       return this.player.color === this.playerView.thisPlayer.color;
     },
   },
 
   methods: {
-    showColonyCount: function(): boolean {
+    showColonyCount(): boolean {
       return this.playerView.game.gameOptions.coloniesExtension;
     },
-    showInfluence: function(): boolean {
+    showInfluence(): boolean {
       return this.playerView.game.turmoil !== undefined;
     },
-    showVenus: function(): boolean {
+    showVenus(): boolean {
       return this.playerView.game.gameOptions.venusNextExtension;
     },
-    showMoon: function(): boolean {
+    showMoon(): boolean {
       return this.playerView.game.gameOptions.moonExpansion;
     },
-    getTagsPlaceholders: function(): Array<InterfaceTagsType> {
+    getTagsPlaceholders(): Array<InterfaceTagsType> {
       const tags = PLAYER_INTERFACE_TAGS_ORDER;
       return tags.filter((tag) => {
         return isTagInGame(tag, this.playerView.game);
       });
     },
-    getCardCount: function(): number {
+    getCardCount(): number {
       if (this.player.cardsInHandNbr) {
         return this.player.cardsInHandNbr;
       }
       return 0;
     },
-    getTR: function(): number {
+    getTR(): number {
       return this.player.terraformRating;
     },
-    getVpCount: function(): number {
+    getVpCount(): number {
       return this.player.victoryPointsBreakdown.total;
     },
-    hideVpCount: function(): boolean {
+    hideVpCount(): boolean {
       return !this.playerView.game.gameOptions.showOtherPlayersVP && !this.isThisPlayer;
     },
-    showShortTags: function(): boolean {
+    showShortTags(): boolean {
       if (this.hideZeroTags === true) return true;
       return Shared.isTagsViewConcise(this.$root);
     },
-    hasTagDiscount: function(tag: InterfaceTagsType): boolean {
+    hasTagDiscount(tag: InterfaceTagsType): boolean {
       for (const card of [...this.player.playedCards, this.player.corporationCard]) {
         if (card !== undefined) {
           if (hasDiscount(tag, card)) {
@@ -197,7 +197,7 @@ export default Vue.extend({
 
       return false;
     },
-    getTagDiscountAmount: function(tag: InterfaceTagsType): number {
+    getTagDiscountAmount(tag: InterfaceTagsType): number {
       let discount = 0;
       for (const card of [...this.player.playedCards, this.player.corporationCard]) {
         if (card !== undefined) {
@@ -215,7 +215,7 @@ export default Vue.extend({
 
       return discount;
     },
-    getTagCount: function(tagName: InterfaceTagsType): number {
+    getTagCount(tagName: InterfaceTagsType): number {
       if (tagName === SpecialTags.COLONY_COUNT && this.showColonyCount()) {
         return this.player.coloniesCount || 0;
       }
@@ -238,10 +238,10 @@ export default Vue.extend({
 
       return 0;
     },
-    showJovianMultipliers: function(tag: InterfaceTagsType): boolean {
+    showJovianMultipliers(tag: InterfaceTagsType): boolean {
       return tag === Tags.JOVIAN && this.playerJovianMultipliersCount() > 0;
     },
-    playerJovianMultipliersCount: function(): number {
+    playerJovianMultipliersCount(): number {
       let multipliers = 0;
       for (const card of this.player.playedCards) {
         if (card !== undefined && JOVIAN_MULTIPLIERS.includes(card.name as CardName)) {

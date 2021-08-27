@@ -89,12 +89,12 @@ export default Vue.extend({
   components: {
     MoonSpace,
   },
-  data: function() {
+  data() {
     return {
     };
   },
   methods: {
-    getAllNonColonySpaces: function(): Array<SpaceModel> {
+    getAllNonColonySpaces(): Array<SpaceModel> {
       const boardSpaces: Array<SpaceModel> = this.model.spaces;
       boardSpaces.sort(
         (space1: SpaceModel, space2: SpaceModel) => {
@@ -105,7 +105,7 @@ export default Vue.extend({
         return s.spaceType !== SpaceType.COLONY;
       });
     },
-    getSpaceById: function(spaceId: string) {
+    getSpaceById(spaceId: string) {
       for (const space of this.model.spaces) {
         if (space.id === spaceId) {
           return space;
@@ -113,7 +113,7 @@ export default Vue.extend({
       }
       throw 'Board space not found by id \'' + spaceId + '\'';
     },
-    getValuesForParameter: function(targetParameter: string): Array<MoonParamLevel> {
+    getValuesForParameter(targetParameter: string): Array<MoonParamLevel> {
       let curValue: number;
 
       switch (targetParameter) {
@@ -139,7 +139,7 @@ export default Vue.extend({
       }
       return values;
     },
-    getScaleCSS: function(paramLevel: MoonParamLevel): string {
+    getScaleCSS(paramLevel: MoonParamLevel): string {
       let css = 'global-numbers-value val-' + paramLevel.value + ' ';
       if (paramLevel.isActive) {
         css += 'val-is-active';

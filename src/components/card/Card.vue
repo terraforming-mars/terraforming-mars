@@ -71,7 +71,7 @@ export default Vue.extend({
       default: undefined,
     },
   },
-  data: function() {
+  data() {
     let cardInstance: ICard | undefined;
     const cardName = this.card.name;
     let expansion: GameModule | undefined;
@@ -106,13 +106,13 @@ export default Vue.extend({
     };
   },
   methods: {
-    getCardExpansion: function(): string {
+    getCardExpansion(): string {
       return this.expansion;
     },
-    getCard: function(): ICard | undefined {
+    getCard(): ICard | undefined {
       return this.cardInstance;
     },
-    getTags: function(): Array<string> {
+    getTags(): Array<string> {
       let result: Array<string> = [];
       const type = this.getCardType();
       const tags = this.getCard()?.tags;
@@ -125,23 +125,23 @@ export default Vue.extend({
 
       return result;
     },
-    getCost: function(): number | undefined {
+    getCost(): number | undefined {
       const cost = this.getCard()?.cost;
       const type = this.getCardType();
       return cost === undefined || type === CardType.PRELUDE || type === CardType.CORPORATION ? undefined : cost;
     },
-    getReducedCost: function(): number | undefined {
+    getReducedCost(): number | undefined {
       const cost = this.card.calculatedCost;
       const type = this.getCardType();
       return cost === undefined || type === CardType.PRELUDE || type === CardType.CORPORATION ? undefined : cost;
     },
-    getCardType: function(): CardType | undefined {
+    getCardType(): CardType | undefined {
       return this.getCard()?.cardType;
     },
-    getCardNumber: function(): string {
+    getCardNumber(): string {
       return String(this.getCardMetadata()?.cardNumber);
     },
-    getCardClasses: function(card: CardModel): string {
+    getCardClasses(card: CardModel): string {
       const classes = ['card-container', 'filterDiv', 'hover-hide-res'];
       classes.push('card-' + card.name.toLowerCase().replace(/ /g, '-'));
 
@@ -157,19 +157,19 @@ export default Vue.extend({
       }
       return classes.join(' ');
     },
-    getCardMetadata: function(): CardMetadata | undefined {
+    getCardMetadata(): CardMetadata | undefined {
       return this.getCard()?.metadata;
     },
-    getCardRequirements: function(): CardRequirements | undefined {
+    getCardRequirements(): CardRequirements | undefined {
       return this.getCard()?.requirements;
     },
-    getResourceAmount: function(card: CardModel): number {
+    getResourceAmount(card: CardModel): number {
       return card.resources !== undefined ? card.resources : 0;
     },
-    isCorporationCard: function() : boolean {
+    isCorporationCard() : boolean {
       return this.getCardType() === CardType.CORPORATION;
     },
-    isStandardProject: function() : boolean {
+    isStandardProject() : boolean {
       return this.getCardType() === CardType.STANDARD_PROJECT || this.getCardType() === CardType.STANDARD_ACTION;
     },
   },

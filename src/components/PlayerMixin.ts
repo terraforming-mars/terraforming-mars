@@ -9,7 +9,7 @@ export const PlayerMixin = {
   'name': 'PlayerMixin',
   'methods': {
     sortActiveCards: sortActiveCards,
-    getCardsByType: function(
+    getCardsByType(
       inCards: Array<CardModel>,
       cardType: Array<CardType>,
     ) {
@@ -21,26 +21,26 @@ export const PlayerMixin = {
       }
       return cards.reverse();
     },
-    getPlayerCardsPlayed: function(
+    getPlayerCardsPlayed(
       player: PublicPlayerModel,
       withCorp: boolean,
     ): number {
       const playedCardsNr = player.playedCards.length || 0;
       return withCorp ? playedCardsNr + 1 : playedCardsNr;
     },
-    getActiveCardType: function() {
+    getActiveCardType() {
       return CardType.ACTIVE;
     },
-    getEventCardType: function() {
+    getEventCardType() {
       return CardType.EVENT;
     },
-    getAutomatedCardType: function() {
+    getAutomatedCardType() {
       return CardType.AUTOMATED;
     },
-    getPreludeCardType: function() {
+    getPreludeCardType() {
       return CardType.PRELUDE;
     },
-    isCardActivated: function(
+    isCardActivated(
       card: CardModel,
       player: PublicPlayerModel,
     ): boolean {

@@ -186,7 +186,7 @@ export default Vue.extend({
   components: {
     'board-space': BoardSpace,
   },
-  data: function() {
+  data() {
     return {
       'constants': constants,
       'isTileHidden': false,
@@ -194,7 +194,7 @@ export default Vue.extend({
   },
   methods: {
     ...TranslateMixin.methods,
-    getAllSpacesOnMars: function(): Array<SpaceModel> {
+    getAllSpacesOnMars(): Array<SpaceModel> {
       const boardSpaces: Array<SpaceModel> = this.spaces;
       boardSpaces.sort(
         (space1: SpaceModel, space2: SpaceModel) => {
@@ -205,7 +205,7 @@ export default Vue.extend({
         return s.spaceType !== SpaceType.COLONY;
       });
     },
-    getSpaceById: function(spaceId: SpaceId) {
+    getSpaceById(spaceId: SpaceId) {
       for (const space of this.spaces) {
         if (space.id === spaceId) {
           return space;
@@ -213,7 +213,7 @@ export default Vue.extend({
       }
       throw 'Board space not found by id \'' + spaceId + '\'';
     },
-    getValuesForParameter: function(targetParameter: string): Array<GlobalParamLevel> {
+    getValuesForParameter(targetParameter: string): Array<GlobalParamLevel> {
       const values: Array<GlobalParamLevel> = [];
       let startValue: number;
       let endValue: number;
@@ -252,14 +252,14 @@ export default Vue.extend({
       }
       return values;
     },
-    getScaleCSS: function(paramLevel: GlobalParamLevel): string {
+    getScaleCSS(paramLevel: GlobalParamLevel): string {
       let css = 'global-numbers-value val-' + paramLevel.value + ' ';
       if (paramLevel.isActive) {
         css += 'val-is-active';
       }
       return css;
     },
-    oceansValue: function() {
+    oceansValue() {
       const oceans_count = this.oceans_count || 0;
       const leftover = constants.MAX_OCEAN_TILES - oceans_count;
       if (leftover === 0) {
@@ -268,16 +268,16 @@ export default Vue.extend({
         return `${oceans_count}/${constants.MAX_OCEAN_TILES}`;
       }
     },
-    getGameBoardClassName: function():string {
+    getGameBoardClassName(): string {
       return this.venusNextExtension ? 'board-cont board-with-venus' : 'board-cont board-without-venus';
     },
-    toggleHideTile: function() {
+    toggleHideTile() {
       this.isTileHidden = !this.isTileHidden;
     },
-    toggleHideTileLabel: function(): string {
+    toggleHideTileLabel(): string {
       return this.isTileHidden ? 'show tiles' : 'hide tiles';
     },
-    checkHideTile: function():boolean {
+    checkHideTile(): boolean {
       return this.isTileHidden;
     },
   },

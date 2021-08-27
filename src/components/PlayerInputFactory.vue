@@ -1,5 +1,11 @@
 <template>
-  <component :is="getComponentName(playerinput.inputType)" :players="players" :player="player" :playerinput="playerinput" :onsave="onsave" :showsave="showsave" :showtitle="showtitle" />
+  <component :is="getComponentName(playerinput.inputType)"
+    :players="players"
+    :player="player"
+    :playerinput="playerinput"
+    :onsave="onsave"
+    :showsave="showsave"
+    :showtitle="showtitle"/>
 </template>
 
 <script lang="ts">
@@ -65,6 +71,10 @@ export default Vue.component('player-input-factory', {
   methods: {
     saveData() {
       (this.$children[0] as any).saveData();
+    },
+    canSave(): boolean {
+      const canSave = (this.$children[0] as any).canSave;
+      return canSave ? canSave() : true;
     },
     getComponentName(inputType: PlayerInputTypes): string {
       switch (inputType) {

@@ -10,3 +10,9 @@ export const playerColorClass = (color: string, type: 'shadow' | 'bg' | 'bg_tran
 
 export const range = (n: number): Array<number> => Array.from(Array(n).keys());
 export const generateClassString = (classes: Array<string>): string => classes.join(' ').trimStart();
+
+// https://stackoverflow.com/questions/47914536/use-partial-in-nested-property-with-typescript
+// Recursive partials are useful for nested partial objects.
+export type RecursivePartial<T> = {
+  [P in keyof T]?: RecursivePartial<T[P]>;
+};

@@ -90,9 +90,11 @@ function generateTranslations() {
     fs.mkdirSync(destinationPath);
   }
 
+  const isJSONExt = (fileName) => fileName.endsWith('.json');
+
   localesCodes.forEach((localeCode) => {
     const localeDir = path.join(localesDir, localeCode);
-    const localeFiles = fs.readdirSync(localeDir);
+    const localeFiles = fs.readdirSync(localeDir).filter(isJSONExt);
 
     const localeObject = localeFiles.reduce((localeObject, localeFile) => {
       const filePath = path.join(localeDir, localeFile);

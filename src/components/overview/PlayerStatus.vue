@@ -14,13 +14,13 @@
 import Vue from 'vue';
 import {ActionLabel} from './ActionLabel';
 import PlayerTimer from './PlayerTimer.vue';
-import {SerializedTimer} from '../../SerializedTimer';
+import {TimerModel} from '../../models/TimerModel';
 
 export default Vue.extend({
   name: 'player-status',
   props: {
     timer: {
-      type: Object as () => SerializedTimer,
+      type: Object as () => TimerModel,
     },
     actionLabel: {
       type: String,

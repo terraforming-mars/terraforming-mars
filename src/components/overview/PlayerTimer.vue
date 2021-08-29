@@ -13,13 +13,13 @@
 <script lang="ts">
 import Vue from 'vue';
 import {Timer} from '../../Timer';
-import {SerializedTimer} from '../../SerializedTimer';
+import {TimerModel} from '../../models/TimerModel';
 
 export default Vue.extend({
   name: 'PlayerTimer',
   props: {
     timer: {
-      type: Object as () => SerializedTimer,
+      type: Object as () => TimerModel,
     },
   },
   data() {

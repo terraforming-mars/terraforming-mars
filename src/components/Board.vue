@@ -1,7 +1,7 @@
 <template>
     <div :class="getGameBoardClassName()">
         <div class="hide-tile-button-container">
-          <div class="hide-tile-button" @click="$emit('toggleTileHidden')" data-test="hide-tiles-button">
+          <div class="hide-tile-button" @click="$emit('toggleHideTiles')" data-test="hide-tiles-button">
             {{ isTileHidden ? 'show' : 'hide' }} tiles
           </div>
         </div>

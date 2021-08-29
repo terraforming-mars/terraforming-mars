@@ -41,7 +41,7 @@
                       :aresExtension="game.gameOptions.aresExtension"
                       :aresData="game.aresData"
                       :isTileHidden="isTileHidden"
-                      @toggleTileHidden="isTileHidden = !isTileHidden"
+                      @toggleHideTiles="isTileHidden = !isTileHidden"
                       id="shortkey-board"
                     />
 

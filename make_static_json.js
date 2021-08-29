@@ -77,3 +77,32 @@ fs.writeFileSync('src/genfiles/settings.json', JSON.stringify({
 fs.writeFileSync('src/genfiles/translations.json', JSON.stringify(
   getAllTranslations(),
 ));
+
+/**
+ * Generate translation files in `/assets/locales/*.json` to load them async by the client
+ */
+function generateTranslations() {
+  const localesDir = path.join(__dirname, 'src/locales');
+  const localesCodes = fs.readdirSync(localesDir);
+  const destinationPath = path.join(__dirname, 'assets/locales');
+
+  if (!fs.existsSync(destinationPath)) {
+    fs.mkdirSync(destinationPath);
+  }
+
+  localesCodes.forEach((localeCode) => {
+    const localeDir = path.join(localesDir, localeCode);
+    const localeFiles = fs.readdirSync(localeDir);
+
+    const localeObject = localeFiles.reduce((localeObject, localeFile) => {
+      const filePath = path.join(localeDir, localeFile);
+      Object.assign(localeObject, require(filePath));
+      return localeObject;
+    }, {});
+
+    const destinationFile = path.join(destinationPath, `${localeCode}.json`);
+    fs.writeFileSync(destinationFile, JSON.stringify(localeObject));
+  });
+}
+
+generateTranslations();

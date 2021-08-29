@@ -1541,7 +1541,6 @@ export class Player implements ISerializable<SerializedPlayer> {
   }
 
   private tradeWithColony(openColonies: Array<Colony>): PlayerInput {
-    const opts: Array<OrOptions | SelectColony> = [];
     let payWith: Resources | ResourceType | undefined = undefined;
     const coloniesModel: Array<ColonyModel> = this.game.getColoniesModel(openColonies);
     const titanFloatingLaunchPad = this.playedCards.find((card) => card.name === CardName.TITAN_FLOATING_LAUNCHPAD);
@@ -1616,14 +1615,12 @@ export class Player implements ISerializable<SerializedPlayer> {
     if (this.titanium >= titaniumTradeAmount) howToPayForTrade.options.push(payWithTitanium);
     if (this.canAfford(mcTradeAmount)) howToPayForTrade.options.push(payWithMC);
 
-    opts.push(howToPayForTrade);
-    opts.push(selectColony);
-
     const trade = new AndOptions(
       () => {
         return undefined;
       },
-      ...opts,
+      howToPayForTrade,
+      selectColony,
     );
 
     trade.title = 'Trade with a colony tile';

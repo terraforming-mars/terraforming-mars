@@ -10,7 +10,7 @@
       :showsave="false"
       :showtitle="true" />
     <div v-if="showsave" class="wf-action">
-      <Button :title="playerinput.buttonLabel" type="submit" size="normal" :onClick="saveData" />
+      <Button :title="playerinput.buttonLabel" type="submit" size="normal" :onClick="saveData" :disabled="!canSave()"/>
     </div>
   </div>
 </template>
@@ -63,7 +63,22 @@ export default Vue.extend({
         this.$data.responded[idx] = out[0];
       };
     },
+    canSave(): boolean {
+      for (const child of this.$children) {
+        const canSave = (child as any).canSave;
+        if (canSave instanceof Function) {
+          if (canSave() === false) {
+            return false;
+          }
+        }
+      }
+      return true;
+    },
     saveData() {
+      if (this.canSave() === false) {
+        alert('Not all options selected');
+        return;
+      }
       for (const child of this.$children) {
         if ((child as any).saveData instanceof Function) {
           (child as any).saveData();

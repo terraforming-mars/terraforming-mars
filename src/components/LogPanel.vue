@@ -20,7 +20,7 @@
           </div>
         </div>
         <div class="card-panel" v-if="cards.length > 0 || globalEventNames.length > 0">
-          <Button size="big" type="close" :disableOnServerBusy="false" :onClick="hideMe" align="right"/>
+          <Button size="big" type="close" :disableOnServerBusy="false" @click="hideMe" align="right"/>
           <div id="log_panel_card" class="cardbox" v-for="card in cards" :key="card">
             <Card :card="{name: card}"/>
           </div>

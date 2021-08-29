@@ -222,33 +222,33 @@ export default Vue.extend({
 
     <div class="payments_type input-group" v-if="playerinput.canUseSteel">
       <i class="resource_icon resource_icon--steel payments_type_icon" :title="$t('Pay by Steel')"></i>
-      <Button type="minus" :onClick="_=>reduceValue('steel', 1)" />
+      <Button type="minus" @click="reduceValue('steel', 1)" />
       <input class="form-input form-inline payments_input" v-model.number="steel" />
-      <Button type="plus" :onClick="_=>addValue('steel', 1)" />
-      <Button type="max" :onClick="_=>setMaxValue('steel')" title="MAX" />
+      <Button type="plus" @click="addValue('steel', 1)" />
+      <Button type="max" @click="setMaxValue('steel')" title="MAX" />
     </div>
 
     <div class="payments_type input-group" v-if="playerinput.canUseTitanium">
       <i class="resource_icon resource_icon--titanium payments_type_icon" :title="$t('Pay by Titanium')"></i>
-      <Button type="minus" :onClick="_=>reduceValue('titanium', 1)" />
+      <Button type="minus" @click="reduceValue('titanium', 1)" />
       <input class="form-input form-inline payments_input" v-model.number="titanium" />
-      <Button type="plus" :onClick="_=>addValue('titanium', 1)" />
-      <Button type="max" :onClick="_=>setMaxValue('titanium')" title="MAX" />
+      <Button type="plus" @click="addValue('titanium', 1)" />
+      <Button type="max" @click="setMaxValue('titanium')" title="MAX" />
     </div>
 
     <div class="payments_type input-group" v-if="playerinput.canUseHeat">
       <i class="resource_icon resource_icon--heat payments_type_icon" :title="$t('Pay by Heat')"></i>
-      <Button type="minus" :onClick="_=>reduceValue('heat', 1)" />
+      <Button type="minus" @click="reduceValue('heat', 1)" />
       <input class="form-input form-inline payments_input" v-model.number="heat" />
-      <Button type="plus" :onClick="_=>addValue('heat', 1)" />
-      <Button type="max" :onClick="_=>setMaxValue('heat')" title="MAX" />
+      <Button type="plus" @click="addValue('heat', 1)" />
+      <Button type="max" @click="setMaxValue('heat')" title="MAX" />
     </div>
 
     <div class="payments_type input-group">
       <i class="resource_icon resource_icon--megacredits payments_type_icon" :title="$t('Pay by Megacredits')"></i>
-      <Button type="minus" :onClick="_=>reduceValue('megaCredits', 1)" />
+      <Button type="minus" @click="reduceValue('megaCredits', 1)" />
       <input class="form-input form-inline payments_input" v-model.number="megaCredits" />
-      <Button type="plus" :onClick="_=>addValue('megaCredits', 1)" />
+      <Button type="plus" @click="addValue('megaCredits', 1)" />
     </div>
 
     <div v-if="hasWarning()" class="tm-warning">
@@ -256,7 +256,7 @@ export default Vue.extend({
     </div>
 
     <div v-if="showsave === true" class="payments_save">
-      <Button size="big" :onClick="saveData" :title="$t(playerinput.buttonLabel)" />
+      <Button size="big" @click="saveData" :title="$t(playerinput.buttonLabel)" />
     </div>
 
   </section>

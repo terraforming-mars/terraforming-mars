@@ -10,7 +10,7 @@
       :showsave="false"
       :showtitle="true" />
     <div v-if="showsave" class="wf-action">
-      <Button :title="playerinput.buttonLabel" type="submit" size="normal" :onClick="saveData" :disabled="!canSave()"/>
+      <Button :title="playerinput.buttonLabel" type="submit" size="normal" @click="saveData" :disabled="!canSave()"/>
     </div>
   </div>
 </template>

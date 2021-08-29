@@ -91,14 +91,14 @@ describe('MoonBoard', () => {
     ).to.be.true;
   });
 
-  it('emits toggleTileHidden on toggle button click', async () => {
+  it('emits toggleHideTiles on toggle button click', async () => {
     const wrapper = shallowMount(Board, {
       localVue: getLocalVue(),
       propsData: {spaces},
     });
 
     await wrapper.find('[data-test=hide-tiles-button]').trigger('click');
-    expect(wrapper.emitted('toggleTileHidden')?.length).to.be.eq(1);
+    expect(wrapper.emitted('toggleHideTiles')?.length).to.be.eq(1);
   });
 
   it('renders "show tiles" in toggle button if tiles are hidden', () => {

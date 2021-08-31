@@ -8,7 +8,7 @@
           </label>
         </div>
         <div v-if="showsave === true" class="nofloat">
-            <Button :onClick="saveData" :title="playerinput.buttonLabel" />
+            <Button @click="saveData" :title="playerinput.buttonLabel" />
         </div>
     </div>
 </template>

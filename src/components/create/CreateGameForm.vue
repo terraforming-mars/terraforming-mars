@@ -348,7 +348,7 @@
                         </div>
 
                         <div class="create-game-action">
-                            <Button title="Create game" size="big" :onClick="createGame"/>
+                            <Button title="Create game" size="big" @click="createGame"/>
 
                             <label>
                                 <div class="btn btn-primary btn-action btn-lg"><i class="icon icon-upload"></i></div>

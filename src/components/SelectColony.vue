@@ -6,7 +6,7 @@
       <colony :colony="colony"></colony>
     </label>
     <div v-if="showsave === true" class="nofloat">
-      <Button :onClick="saveData" :title="playerinput.buttonLabel" :disabled="!canSave()"/>
+      <Button @click="saveData" :title="playerinput.buttonLabel" :disabled="!canSave()"/>
     </div>
   </div>
 </template>

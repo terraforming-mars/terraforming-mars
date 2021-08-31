@@ -40,7 +40,7 @@ export default Vue.extend({
 </script>
 <template>
   <div v-show="isVisible()" class="other_player_cont menu">
-      <Button size="big" type="close" :onClick="hideMe" :disableOnServerBusy="false" align="right" />
+      <Button size="big" type="close" @click="hideMe" :disableOnServerBusy="false" align="right" />
       <div v-if="player.playedCards.length > 0 || player.corporationCard !== undefined" class="player_home_block">
           <span class="player_name" :class="'player_bg_color_' + player.color"> {{ player.name }} played cards </span>
           <div>

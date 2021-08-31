@@ -7,7 +7,7 @@
       <span v-if="player === 'NEUTRAL'" >Neutral</span>
       <select-player-row v-else :player="players.find((otherPlayer) => otherPlayer.color === player)"></select-player-row>
     </label>
-    <Button v-if="showsave === true" size="big" :onClick="saveData" :title="$t(playerinput.buttonLabel)" />
+    <Button v-if="showsave === true" size="big" @click="saveData" :title="$t(playerinput.buttonLabel)" />
   </div>
 </template>
 

@@ -63,11 +63,11 @@ describe('MoonBoard', () => {
   }
 
   it('has visible tiles on the board', async () => {
-    const isTileHidden = true;
+    const hideTiles = true;
 
     const wrapper = shallowMount(MoonBoard, {
       localVue: getLocalVue(),
-      propsData: {model, isTileHidden},
+      propsData: {model, hideTiles},
     });
 
     const boardSpacesWrappers = wrapper.findAllComponents(MoonSpace).wrappers.filter((wrapper) => {
@@ -75,16 +75,16 @@ describe('MoonBoard', () => {
     });
 
     expect(
-      boardSpacesWrappers.every((wrapper) => wrapper.props('isTileHidden') === isTileHidden),
+      boardSpacesWrappers.every((wrapper) => wrapper.props('hideTiles') === hideTiles),
     ).to.be.true;
   });
 
   it('has hidden tiles on the board', async () => {
-    const isTileHidden = false;
+    const hideTiles = false;
 
     const wrapper = shallowMount(MoonBoard, {
       localVue: getLocalVue(),
-      propsData: {model, isTileHidden},
+      propsData: {model, hideTiles},
     });
 
     const boardSpacesWrappers = wrapper.findAllComponents(MoonSpace).wrappers.filter((wrapper) => {
@@ -92,7 +92,7 @@ describe('MoonBoard', () => {
     });
 
     expect(
-      boardSpacesWrappers.every((wrapper) => wrapper.props('isTileHidden') === isTileHidden),
+      boardSpacesWrappers.every((wrapper) => wrapper.props('hideTiles') === hideTiles),
     ).to.be.true;
   });
 });

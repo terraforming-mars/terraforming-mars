@@ -58,11 +58,11 @@ describe('MoonBoard', () => {
   }
 
   it('has visible tiles on the board', () => {
-    const isTileHidden = false;
+    const hideTiles = false;
 
     const wrapper = shallowMount(Board, {
       localVue: getLocalVue(),
-      propsData: {spaces, isTileHidden},
+      propsData: {spaces, hideTiles},
     });
 
     const boardSpacesWrappers = wrapper.findAllComponents(BoardSpace).wrappers.filter((wrapper) => {
@@ -70,16 +70,16 @@ describe('MoonBoard', () => {
     });
 
     expect(
-      boardSpacesWrappers.every((wrapper) => wrapper.props('isTileHidden') === isTileHidden),
+      boardSpacesWrappers.every((wrapper) => wrapper.props('hideTiles') === hideTiles),
     ).to.be.true;
   });
 
   it('has hidden tiles on the board', () => {
-    const isTileHidden = true;
+    const hideTiles = true;
 
     const wrapper = shallowMount(Board, {
       localVue: getLocalVue(),
-      propsData: {spaces, isTileHidden},
+      propsData: {spaces, hideTiles},
     });
 
     const boardSpacesWrappers = wrapper.findAllComponents(BoardSpace).wrappers.filter((wrapper) => {
@@ -87,7 +87,7 @@ describe('MoonBoard', () => {
     });
 
     expect(
-      boardSpacesWrappers.every((wrapper) => wrapper.props('isTileHidden') === isTileHidden),
+      boardSpacesWrappers.every((wrapper) => wrapper.props('hideTiles') === hideTiles),
     ).to.be.true;
   });
 
@@ -104,7 +104,7 @@ describe('MoonBoard', () => {
   it('renders "show tiles" in toggle button if tiles are hidden', () => {
     const wrapper = shallowMount(Board, {
       localVue: getLocalVue(),
-      propsData: {spaces, isTileHidden: true},
+      propsData: {spaces, hideTiles: true},
     });
 
     expect(wrapper.find('[data-test=hide-tiles-button]').text()).to.be.eq('show tiles');
@@ -113,7 +113,7 @@ describe('MoonBoard', () => {
   it('renders "hide tiles" in toggle button if tiles are visible', () => {
     const wrapper = shallowMount(Board, {
       localVue: getLocalVue(),
-      propsData: {spaces, isTileHidden: false},
+      propsData: {spaces, hideTiles: false},
     });
 
     expect(wrapper.find('[data-test=hide-tiles-button]').text()).to.be.eq('hide tiles');

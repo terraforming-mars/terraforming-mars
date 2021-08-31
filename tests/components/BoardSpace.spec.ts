@@ -26,7 +26,7 @@ describe('BoardSpace', () => {
       localVue: getLocalVue(),
       propsData: {
         space: {id: 'm1'},
-        isTileHidden: true,
+        hideTiles: true,
       },
     });
 

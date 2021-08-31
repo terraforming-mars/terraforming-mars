@@ -2,9 +2,9 @@
   <div :class="mainClass" :data_space_id="space.id" :title="verboseTitle">
     <div :class="tileClass" data-test="tile"/>
     <div class="board-space-text" v-if="text" v-i18n>{{ text }}</div>
-    <bonus v-if="space.tileType === undefined || isTileHidden" :bonus="space.bonus" />
+    <bonus v-if="space.tileType === undefined || hideTiles" :bonus="space.bonus" />
     <div
-      v-if="space.color !== undefined && !isTileHidden"
+      v-if="space.color !== undefined && !hideTiles"
       class="board-cube"
       :class="`board-cube--${space.color}`"
     />
@@ -40,7 +40,7 @@ export default Vue.extend({
     is_selectable: {
       type: Boolean,
     },
-    isTileHidden: {
+    hideTiles: {
       type: Boolean,
       default: false,
     },
@@ -97,7 +97,7 @@ export default Vue.extend({
         }
       }
 
-      if (this.isTileHidden) {
+      if (this.hideTiles) {
         css += ' board-hidden-tile';
       }
 

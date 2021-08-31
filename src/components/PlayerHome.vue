@@ -40,14 +40,14 @@
                       :temperature="game.temperature"
                       :aresExtension="game.gameOptions.aresExtension"
                       :aresData="game.aresData"
-                      :isTileHidden="isTileHidden"
-                      @toggleHideTiles="isTileHidden = !isTileHidden"
+                      :hideTiles="hideTiles"
+                      @toggleHideTiles="hideTiles = !hideTiles"
                       id="shortkey-board"
                     />
 
                     <turmoil v-if="game.turmoil" :turmoil="game.turmoil"/>
 
-                    <MoonBoard v-if="game.gameOptions.moonExpansion" :model="game.moon" :isTileHidden="isTileHidden"/>
+                    <MoonBoard v-if="game.gameOptions.moonExpansion" :model="game.moon" :hideTiles="hideTiles"/>
 
                     <div v-if="player.players.length > 1" class="player_home_block--milestones-and-awards">
                         <Milestone :milestones_list="game.milestones" />
@@ -258,7 +258,7 @@ export interface PlayerHomeModel {
   showActiveCards: boolean;
   showAutomatedCards: boolean;
   showEventCards: boolean;
-  isTileHidden: boolean;
+  hideTiles: boolean;
 }
 
 class TerraformedAlertDialog {
@@ -272,7 +272,7 @@ export default Vue.extend({
       showActiveCards: !PreferencesManager.loadBoolean('hide_active_cards'),
       showAutomatedCards: !PreferencesManager.loadBoolean('hide_automated_cards'),
       showEventCards: !PreferencesManager.loadBoolean('hide_event_cards'),
-      isTileHidden: false,
+      hideTiles: false,
     };
   },
   watch: {

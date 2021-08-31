@@ -3,7 +3,7 @@
         <div class="hide-tile-button-container">
           <div class="hide-tile-button" @click="$emit('toggleHideTiles')" data-test="hide-tiles-button">
             <!-- TODO - Add i18n for this button -->
-            {{ isTileHidden ? 'show' : 'hide' }} tiles
+            {{ hideTiles ? 'show' : 'hide' }} tiles
           </div>
         </div>
         <div class="board-outer-spaces">
@@ -65,7 +65,7 @@
               :space="curSpace"
               :is_selectable="true"
               :aresExtension="aresExtension"
-              :isTileHidden="isTileHidden"
+              :hideTiles="hideTiles"
               data-test="board-space"
             />
 
@@ -193,7 +193,7 @@ export default Vue.extend({
     aresData: {
       type: Object as () => IAresData | undefined,
     },
-    isTileHidden: {
+    hideTiles: {
       type: Boolean,
       default: false,
     },

@@ -66,7 +66,7 @@
         :key="curSpace.id"
         :space="curSpace"
         :is_selectable="true"
-        :isTileHidden="isTileHidden"
+        :hideTiles="hideTiles"
         data-test="moon-board-space"
       />
     </div>
@@ -91,7 +91,7 @@ export default Vue.extend({
     model: {
       type: Object as () => MoonModel,
     },
-    isTileHidden: {
+    hideTiles: {
       type: Boolean,
       default: false,
     },

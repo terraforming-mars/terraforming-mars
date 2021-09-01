@@ -7,6 +7,7 @@ import {IContext} from './IHandler';
 import {BufferCache} from './BufferCache';
 import {ContentType} from './ContentType';
 import {Handler} from './Handler';
+import {isProduction} from '../utils/server';
 
 type Encoding = 'gzip' | 'br';
 
@@ -17,7 +18,7 @@ export class ServeAsset extends Handler {
   // Public for tests
   public constructor(private cacheAgeSeconds: string | number = process.env.ASSET_CACHE_MAX_AGE || 0,
     // only production caches resources
-    private cacheAssets: boolean = process.env.NODE_ENV === 'production') {
+    private cacheAssets: boolean = isProduction()) {
     super();
     // prime the cache with styles.css and a compressed copy of it styles.css
     const styles = fs.readFileSync('build/styles.css');

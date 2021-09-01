@@ -1,10 +1,10 @@
 <template>
   <div :class="getMainClass()" :data_space_id="space.id">
-    <div :class="getTileClass()" :title="getVerboseTitle(space.tileType)"></div>
+    <div :class="getTileClass()" :title="getVerboseTitle(space.tileType)" data-test="tile"/>
     <div class="board-space-text" v-if="text" v-i18n>{{ text }}</div>
     <bonus :bonus="space.bonus" v-if="space.tileType === undefined"></bonus>
-    <bonus :bonus="space.bonus" v-if="space.tileType !== undefined && isTileHidden"></bonus>
-    <div :class="'board-cube board-cube--'+space.color" v-if="space.color !== undefined && !isTileHidden "></div>
+    <bonus :bonus="space.bonus" v-if="space.tileType !== undefined && hideTiles"></bonus>
+    <div :class="'board-cube board-cube--'+space.color" v-if="space.color !== undefined && !hideTiles"></div>
   </div>
 </template>
 
@@ -73,7 +73,7 @@ export default Vue.extend({
     aresExtension: {
       type: Boolean,
     },
-    isTileHidden: {
+    hideTiles: {
       type: Boolean,
     },
   },
@@ -185,7 +185,7 @@ export default Vue.extend({
           }
         }
       }
-      if (this.isTileHidden) {
+      if (this.hideTiles) {
         css += ' board-hidden-tile';
       }
       return css;

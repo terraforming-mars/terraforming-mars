@@ -1,7 +1,10 @@
 <template>
     <div :class="getGameBoardClassName()">
         <div class="hide-tile-button-container">
-        <div class="hide-tile-button" v-on:click.prevent="toggleHideTile()">{{ toggleHideTileLabel() }}</div>
+          <div class="hide-tile-button" @click="$emit('toggleHideTiles')" data-test="hide-tiles-button">
+            <!-- TODO - Add i18n for this button -->
+            {{ hideTiles ? 'show' : 'hide' }} tiles
+          </div>
         </div>
         <div class="board-outer-spaces">
             <board-space :space="getSpaceById('01')" text="Ganymede Colony"></board-space>
@@ -56,7 +59,16 @@
         </div>
 
         <div class="board" id="main_board">
-            <board-space :space="curSpace" :is_selectable="true" :key="'board-space-'+curSpace.id" :aresExtension="aresExtension" :isTileHidden="checkHideTile()" v-for="curSpace in getAllSpacesOnMars()"></board-space>
+            <board-space
+              v-for="curSpace in getAllSpacesOnMars()"
+              :key="curSpace.id"
+              :space="curSpace"
+              :is_selectable="true"
+              :aresExtension="aresExtension"
+              :hideTiles="hideTiles"
+              data-test="board-space"
+            />
+
             <svg id="board_legend" height="550" width="630" class="board-legend">
                 <g v-if="boardName === 'tharsis'" id="ascraeus_mons" transform="translate(95, 192)">
                     <text class="board-caption">
@@ -137,7 +149,6 @@
 </template>
 
 <script lang="ts">
-
 import Vue from 'vue';
 import * as constants from '../constants';
 import BoardSpace from './BoardSpace.vue';
@@ -182,14 +193,17 @@ export default Vue.extend({
     aresData: {
       type: Object as () => IAresData | undefined,
     },
+    hideTiles: {
+      type: Boolean,
+      default: false,
+    },
   },
   components: {
-    'board-space': BoardSpace,
+    BoardSpace,
   },
   data() {
     return {
-      'constants': constants,
-      'isTileHidden': false,
+      constants,
     };
   },
   methods: {
@@ -271,17 +285,6 @@ export default Vue.extend({
     getGameBoardClassName(): string {
       return this.venusNextExtension ? 'board-cont board-with-venus' : 'board-cont board-without-venus';
     },
-    toggleHideTile() {
-      this.isTileHidden = !this.isTileHidden;
-    },
-    toggleHideTileLabel(): string {
-      return this.isTileHidden ? 'show tiles' : 'hide tiles';
-    },
-    checkHideTile(): boolean {
-      return this.isTileHidden;
-    },
   },
 });
-
 </script>
-

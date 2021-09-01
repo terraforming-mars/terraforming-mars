@@ -6,7 +6,7 @@
       <colony :colony="colony"></colony>
     </label>
     <div v-if="showsave === true" class="nofloat">
-      <Button :onClick="saveData" :title="playerinput.buttonLabel" />
+      <Button @click="saveData" :title="playerinput.buttonLabel" :disabled="!canSave()"/>
     </div>
   </div>
 </template>
@@ -44,11 +44,14 @@ export default Vue.extend({
   },
   methods: {
     ...TranslateMixin.methods,
+    canSave() {
+      return this.selectedColony !== undefined;
+    },
     saveData() {
       const result: string[][] = [];
       result.push([]);
-      if (this.selectedColony !== undefined) {
-        result[0].push(this.selectedColony);
+      if (this.canSave()) {
+        result[0].push(this.selectedColony ?? '');
       }
       this.onsave(result);
     },

@@ -3,7 +3,7 @@ import {Color} from '../Color';
 import {VictoryPointsBreakdown} from '../VictoryPointsBreakdown';
 import {ITagCount} from '../ITagCount';
 import {PlayerInputModel} from './PlayerInputModel';
-import {SerializedTimer} from '../SerializedTimer';
+import {TimerModel} from './TimerModel';
 import {GameModel} from './GameModel';
 import {PlayerId} from '../Player';
 
@@ -46,7 +46,7 @@ export interface PublicPlayerModel extends BasePlayerModel {
   steelValue: number;
   tags: Array<ITagCount>;
   terraformRating: number;
-  timer: SerializedTimer;
+  timer: TimerModel;
   titanium: number;
   titaniumProduction: number;
   titaniumValue: number;

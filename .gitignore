@@ -15,6 +15,7 @@ pid
 *.log
 .eslintcache
 tsconfig.tsbuildinfo
+assets/locales
 
 # Local Packages
 node_modules/

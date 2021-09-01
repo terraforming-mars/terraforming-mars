@@ -62,7 +62,7 @@ export default Vue.extend({
                   <input class="form-input form-inline load-game-id" :placeholder="'Game Id'" v-model="gameId" /><br/>
                   <label for="rollbackCount">Number of saves to delete before loading:</label><br/>
                   <input class="form-input form-inline load-game-id" value="0" v-model="rollbackCount" /><br/>
-                  <Button title="Load Game" size="big" type="success" :onClick="loadGame" />
+                  <Button title="Load Game" size="big" type="success" @click="loadGame" />
               </div>
           </div>
       </div>

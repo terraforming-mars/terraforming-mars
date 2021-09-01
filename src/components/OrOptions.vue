@@ -19,7 +19,7 @@
     </div>
     <div v-if="showsave && selectedOption">
       <div style="margin: 5px 30px 10px" class="wf-action">
-        <Button :title="$t(selectedOption.buttonLabel)" type="submit" size="normal" :onClick="saveData" />
+        <Button :title="$t(selectedOption.buttonLabel)" type="submit" size="normal" @click="saveData" />
       </div>
     </div>
   </div>

@@ -112,7 +112,7 @@ export default Vue.extend({
             <div class="icon-first-player" v-if="firstForGen && playerView.players.length > 1">1st</div>
             <div class="player-info-corp" v-if="player.corporationCard !== undefined" :title="player.corporationCard.name">{{ player.corporationCard.name }}</div>
           </div>
-          <player-status :playerView="playerView" :firstForGen="firstForGen" v-trim-whitespace :actionLabel="actionLabel" :playerIndex="playerIndex"/>
+          <player-status :timer="player.timer" :showTimers="playerView.game.gameOptions.showTimers" :firstForGen="firstForGen" v-trim-whitespace :actionLabel="actionLabel" />
         </div>
           <PlayerResources :player="player" v-trim-whitespace />
           <div class="player-played-cards">
@@ -128,7 +128,7 @@ export default Vue.extend({
                 </div>
               </div>
             </div>
-            <Button class="played-cards-button" size="tiny" :onClick="togglePlayerDetails" :title="buttonLabel()" />
+            <Button class="played-cards-button" size="tiny" @click="togglePlayerDetails" :title="buttonLabel()" />
           </div>
           <div class="tag-display player-board-blue-action-counter tooltip tooltip-top" data-tooltip="The number of available actions on active cards">
             <div class="tag-count tag-action-card">

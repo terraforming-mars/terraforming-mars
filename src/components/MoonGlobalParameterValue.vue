@@ -1,21 +1,26 @@
 <template>
   <div>
-    <div class="moon-tile"></div>
+    <div class="moon-tile"/>
     <div>
-      <div v-if="isMax()" class="global_params_value">
-        <img src="/assets/misc/checkmark.png" class="checkmark" :alt="$t('Completed!')">
+      <div v-if="isMax" class="global_params_value">
+        <img
+          src="/assets/misc/checkmark.png"
+          class="checkmark"
+          :alt="$t('Completed!')"
+          :title="$t('Completed!')"
+          data-test="completed-checkmark"
+        >
       </div>
       <div v-else class="moon_params_value">
-        <span class="colony">{{colonyRate()}}</span>
-        <span class="logistics">{{logisticsRate()}}</span>
-        <span class="mining">{{miningRate()}}</span>
+        <span class="colony">{{ moonData.colonyRate }}</span>
+        <span class="logistics">{{ moonData.logisticsRate }}</span>
+        <span class="mining">{{ moonData.miningRate }}</span>
       </div>
     </div>
   </div>
 </template>
 
 <script lang="ts">
-
 import Vue from 'vue';
 import {TranslateMixin} from './TranslateMixin';
 import {MAXIMUM_COLONY_RATE, MAXIMUM_LOGISTICS_RATE, MAXIMUM_MINING_RATE} from '../constants';
@@ -28,21 +33,14 @@ export default Vue.extend({
       type: Object as () => MoonModel,
     },
   },
-  methods: {
-    ...TranslateMixin.methods,
+  methods: TranslateMixin.methods,
+  computed: {
     isMax(): boolean {
-      return this.moonData.colonyRate >= MAXIMUM_COLONY_RATE &&
-      this.moonData.miningRate >= MAXIMUM_MINING_RATE &&
-      this.moonData.logisticsRate >= MAXIMUM_LOGISTICS_RATE;
-    },
-    colonyRate(): number {
-      return this.moonData.colonyRate;
-    },
-    logisticsRate(): number {
-      return this.moonData.logisticsRate;
-    },
-    miningRate(): number {
-      return this.moonData.miningRate;
+      return (
+        this.moonData.colonyRate >= MAXIMUM_COLONY_RATE &&
+        this.moonData.miningRate >= MAXIMUM_MINING_RATE &&
+        this.moonData.logisticsRate >= MAXIMUM_LOGISTICS_RATE
+      );
     },
   },
 });

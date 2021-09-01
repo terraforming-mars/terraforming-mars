@@ -52,7 +52,7 @@
                     </div>
                 </div>
 
-                <players-overview class="player_home_block player_home_block--players nofloat:" :player="player" v-trim-whitespace id="shortkey-playersoverview"/>
+                <players-overview class="player_home_block player_home_block--players nofloat:" :playerView="player" v-trim-whitespace id="shortkey-playersoverview"/>
 
                 <div class="player_home_block nofloat">
                     <log-panel :id="player.id" :players="player.players" :generation="game.generation" :lastSoloGeneration="game.lastSoloGeneration" :color="thisPlayer.color"></log-panel>

@@ -15,7 +15,7 @@
             <span class="turn-order"></span>
             <span class="color-square"></span>
             <span class="player-name"><a :href="getHref(game.spectatorId)">Spectator</a></span>
-            <Button title="copy" size="tiny" :onClick="_=>copyUrl(game.spectatorId || 'unreachable')"/>
+            <Button title="copy" size="tiny" @click="copyUrl(game.spectatorId || 'unreachable')"/>
           </li>
         </ul>
 

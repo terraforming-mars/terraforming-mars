@@ -117,21 +117,21 @@ export default Vue.extend({
             <overview-settings />
             <div class="other_player" v-if="players.length > 1">
                 <div v-for="(otherPlayer, index) in getPlayersInOrder()" :key="otherPlayer.id">
-                    <other-player v-if="otherPlayer.id !== player.id" :player="otherPlayer" :playerIndex="index"/>
+                    <other-player v-if="otherPlayer.id !== playerView.thisPlayer.id" :player="otherPlayer" :playerIndex="index"/>
                 </div>
             </div>
             <player-info v-for="(p, index) in getPlayersInOrder()"
               :player="p"
               :key="p.id"
-              :playerView="player"
+              :playerView="playerView"
               :firstForGen="getIsFirstForGen(p)"
               :actionLabel="getActionLabel(p)"
               :playerIndex="index"/>
-            <div v-if="player.players.length > 1" class="player-divider" />
+            <div v-if="playerView.players.length > 1" class="player-divider" />
             <player-info
               :player="thisPlayer"
               :key="thisPlayer.id"
-              :playerView="player"
+              :playerView="playerView"
               :firstForGen="getIsFirstForGen(thisPlayer)"
               :actionLabel="getActionLabel(thisPlayer)"
               :playerIndex="-1"/>

@@ -77,7 +77,7 @@ export default Vue.extend({
       xhr.onload = () => {
         if (xhr.status === 200) {
           root.screen = 'empty';
-          root.player = xhr.response;
+          root.playerView = xhr.response;
           root.playerkey++;
           root.screen = 'player-home';
           if (this.player.game.phase === 'end' && window.location.pathname !== '/the-end') {

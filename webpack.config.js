@@ -3,31 +3,6 @@ const CompressionPlugin = require('compression-webpack-plugin');
 const ForkTsCheckerWebpackPlugin = require('fork-ts-checker-webpack-plugin');
 const zlib = require('zlib');
 
-const plugins = [
-  new ForkTsCheckerWebpackPlugin({
-    typescript: {
-      configOverwrite: {
-        exclude: [
-          'tests/**/*.ts',
-        ],
-      },
-      extensions: {
-        vue: true,
-      },
-    },
-  }),
-  new VueLoaderPlugin(),
-];
-
-if (process.env.NODE_ENV === 'production') {
-  plugins.push(new CompressionPlugin());
-  plugins.push(new CompressionPlugin({
-    algorithm: 'brotliCompress',
-    filename: '[path][base].br',
-    compressionOptions: {params: {[zlib.constants.BROTLI_PARAM_QUALITY]: zlib.constants.BROTLI_MAX_QUALITY}},
-  }));
-}
-
 module.exports = {
   devtool: 'source-map',
   mode: process.env.NODE_ENV === 'production' ? 'production' : 'development',
@@ -62,7 +37,27 @@ module.exports = {
       },
     ],
   },
-  plugins,
+  plugins: [
+    new ForkTsCheckerWebpackPlugin({
+      typescript: {
+        configOverwrite: {
+          exclude: [
+            "tests/**/*.ts"
+          ],
+        },
+        extensions: {
+          vue: true
+        }
+      }
+    }),
+    new VueLoaderPlugin(),
+    new CompressionPlugin(),
+    new CompressionPlugin({
+      algorithm: 'brotliCompress',
+      filename: '[path][base].br',
+      compressionOptions: {params: {[zlib.constants.BROTLI_PARAM_QUALITY]: zlib.constants.BROTLI_MAX_QUALITY}},
+    }),
+  ],
   output: {
     path: __dirname + '/build',
   },

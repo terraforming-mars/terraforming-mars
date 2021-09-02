@@ -64,7 +64,7 @@
                 <div class="player_home_block player_home_block--actions nofloat">
                     <a name="actions" class="player_home_anchor"></a>
                     <dynamic-title title="Actions" :color="thisPlayer.color"/>
-                    <waiting-for v-if="game.phase !== 'end'" :players="playerView.players" :player="playerView" :settings="settings" :waitingfor="playerView.waitingFor"></waiting-for>
+                    <waiting-for v-if="game.phase !== 'end'" :players="playerView.players" :playerView="playerView" :settings="settings" :waitingfor="playerView.waitingFor"></waiting-for>
                 </div>
 
                 <div class="player_home_block player_home_block--hand" v-if="playerView.draftedCards.length > 0">

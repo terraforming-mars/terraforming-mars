@@ -2,7 +2,7 @@
   <div v-if="waitingfor === undefined">{{ $t('Not your turn to take any actions') }}</div>
   <div v-else class="wf-root">
     <player-input-factory :players="players"
-                          :player="player"
+                          :playerView="playerView"
                           :playerinput="waitingfor"
                           :onsave="onsave"
                           :showsave="true"
@@ -32,7 +32,7 @@ let documentTitleTimer: number | undefined;
 export default Vue.extend({
   name: 'waiting-for',
   props: {
-    player: {
+    playerView: {
       type: Object as () => PlayerViewModel,
     },
     players: {
@@ -72,7 +72,7 @@ export default Vue.extend({
       }
 
       root.isServerSideRequestInProgress = true;
-      xhr.open('POST', '/player/input?id=' + this.player.id);
+      xhr.open('POST', '/player/input?id=' + this.playerView.id);
       xhr.responseType = 'json';
       xhr.onload = () => {
         if (xhr.status === 200) {
@@ -80,7 +80,7 @@ export default Vue.extend({
           root.playerView = xhr.response;
           root.playerkey++;
           root.screen = 'player-home';
-          if (this.player.game.phase === 'end' && window.location.pathname !== '/the-end') {
+          if (this.playerView.game.phase === 'end' && window.location.pathname !== '/the-end') {
             (window).location = (window).location;
           }
         } else if (xhr.status === 400 && xhr.responseType === 'json') {
@@ -101,7 +101,7 @@ export default Vue.extend({
       clearTimeout(ui_update_timeout_id);
       const askForUpdate = () => {
         const xhr = new XMLHttpRequest();
-        xhr.open('GET', '/api/waitingfor' + window.location.search + '&gameAge=' + this.player.game.gameAge + '&undoCount=' + this.player.game.undoCount);
+        xhr.open('GET', '/api/waitingfor' + window.location.search + '&gameAge=' + this.playerView.game.gameAge + '&undoCount=' + this.playerView.game.undoCount);
         xhr.onerror = function() {
           root.showAlert('Unable to reach the server. The server may be restarting or down for maintenance.', () => vueApp.waitForUpdate());
         };
@@ -148,7 +148,7 @@ export default Vue.extend({
     if (this.waitingfor === undefined) {
       this.waitForUpdate();
     }
-    if (this.player.players.length > 1 && this.player.waitingFor !== undefined) {
+    if (this.playerView.players.length > 1 && this.playerView.waitingFor !== undefined) {
       documentTitleTimer = window.setInterval(() => this.animateTitle(), 1000);
     }
   },

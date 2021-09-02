@@ -16,7 +16,7 @@ describe('SelectInitialCards', function() {
     const component = mount(SelectInitialCards, {
       localVue: getLocalVue(),
       propsData: {
-        player: {
+        playerView: {
           id: 'foo',
         },
         playerinput: {
@@ -51,7 +51,7 @@ describe('SelectInitialCards', function() {
     const component = mount(SelectInitialCards, {
       localVue: getLocalVue(),
       propsData: {
-        player: {
+        playerView: {
           id: 'foo',
         },
         playerinput: {

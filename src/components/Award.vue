@@ -1,5 +1,5 @@
 <template>
-  <div @click="toggleDescription" class="ma-block" title="Press to show or hide the description">
+  <div @click="toggleDescription" class="ma-block" title="press to show or hide the description">
     <div class="ma-player" v-if="award.player_name">
       <i :title="award.player_name" class="board-cube" :class="`board-cube--${award.player_color}`" />
     </div>

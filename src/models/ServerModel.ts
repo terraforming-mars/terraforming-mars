@@ -116,6 +116,7 @@ export class Server {
 
   public static getSpectatorModel(game: Game): SpectatorModel {
     return {
+      color: Color.NEUTRAL,
       id: game.spectatorId ?? '',
       game: this.getCommonGameModel(game),
       players: this.getPlayers(game),

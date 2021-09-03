@@ -1,4 +1,9 @@
+import {GameModel} from './GameModel';
+import {PublicPlayerModel} from './PlayerModel';
+import {SpectatorId} from '../Game';
 
 export interface SpectatorModel {
-  generation: number;
+  id: SpectatorId;
+  game: GameModel;
+  players: Array<PublicPlayerModel>;
 }

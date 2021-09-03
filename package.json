@@ -48,6 +48,7 @@
     "mochapack": "^2.1.2",
     "mutation-observer": "^1.0.3",
     "nyc": "^14.1.1",
+    "rimraf": "^3.0.2",
     "sinon": "^11.1.1",
     "ts-loader": "^9.2.2",
     "vue-loader": "^15.9.7",
@@ -75,6 +76,7 @@
     "pretest:server": "tsc --build tests/tsconfig.json",
     "test:components": "cross-env NODE_ENV=development vti diagnostics && mochapack --require tests/components/setup.ts 'tests/components/**/*.spec.ts'",
     "test:components:watch": "cross-env NODE_ENV=development mochapack --watch --require tests/components/setup.ts 'tests/components/**/*.spec.ts'",
+    "prewatch": "rimraf build/main.js*.{br,gz}",
     "watch": "cross-env NODE_ENV=development webpack --watch",
     "webpack": "cross-env NODE_ENV=production webpack"
   },

@@ -73,13 +73,15 @@ import {mainAppSettings} from './App';
 
 import * as raw_settings from '../genfiles/settings.json';
 import {SpectatorModel} from '../models/SpectatorModel';
-import Sidebar from './Sidebar.vue';
-import LogPanel from './LogPanel.vue';
-import Colony from './Colony.vue';
+import Award from './Award.vue';
 import Board from './Board.vue';
+import Colony from './Colony.vue';
+import DynamicTitle from './common/DynamicTitle.vue';
+import LogPanel from './LogPanel.vue';
 import MoonBoard from './moon/MoonBoard.vue';
 import Milestone from './Milestone.vue';
-import Award from './Award.vue';
+import Sidebar from './Sidebar.vue';
+import Turmoil from './Turmoil.vue';
 import {range} from '../utils/utils';
 
 let refreshTimeoutId: number = -1;
@@ -112,10 +114,12 @@ export default Vue.extend({
     Award,
     Board,
     Colony,
+    DynamicTitle,
     LogPanel,
     Milestone,
     MoonBoard,
     Sidebar,
+    Turmoil,
   },
   methods: {
     ...TranslateMixin.methods,

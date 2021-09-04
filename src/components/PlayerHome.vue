@@ -51,7 +51,7 @@
 
                     <div v-if="playerView.players.length > 1" class="player_home_block--milestones-and-awards">
                         <Milestone :milestones_list="game.milestones" />
-                        <Awards :awards="game.awards" />
+                        <Awards :awards="game.awards" show-scores/>
                     </div>
                 </div>
 
@@ -171,7 +171,7 @@
 
                 <div class="player_home_block" v-if="playerView.players.length > 1">
                     <Milestone :show_scores="false" :milestones_list="game.milestones" />
-                    <Award :show_scores="false" :awards_list="game.awards" />
+                    <Awards :awards="game.awards" />
                 </div>
 
                 <div class="player_home_block player_home_block--turnorder nofloat" v-if="playerView.players.length>1">

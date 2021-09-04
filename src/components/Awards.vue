@@ -41,7 +41,12 @@
       </div>
 
       <div v-show="showAwards">
-        <Award v-for="award in awards" :key="award.award.name" :award="award" />
+        <Award
+          v-for="award in awards"
+          :key="award.award.name"
+          :award="award"
+          :showScores="showScores"
+        />
       </div>
     </div>
   </div>
@@ -61,6 +66,10 @@ export default Vue.extend({
     awards: {
       type: Array as () => FundedAwardModel[],
       required: true,
+    },
+    showScores: {
+      type: Boolean,
+      default: false,
     },
   },
   data() {

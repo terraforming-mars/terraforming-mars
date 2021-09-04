@@ -22,7 +22,7 @@ export class ApiGame extends Handler {
         ctx.route.notFound(req, res, 'game not found');
         return;
       }
-      const model = Server.getGameModel(game);
+      const model = Server.getSimpleGameModel(game);
       ctx.route.writeJson(res, model);
     });
   }

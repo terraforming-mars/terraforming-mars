@@ -112,14 +112,14 @@ export class GameHandler extends Handler {
                 throw new Error(`game ${gameOptions.clonedGamedId} not cloned`); // how to nest errs in the way Java nests exceptions?
               }
               GameLoader.getInstance().add(game);
-              ctx.route.writeJson(res, Server.getGameModel(game));
+              ctx.route.writeJson(res, Server.getSimpleGameModel(game));
             });
           });
         } else {
           const seed = Math.random();
           const game = Game.newInstance(gameId, players, players[firstPlayerIdx], gameOptions, seed, spectatorId);
           GameLoader.getInstance().add(game);
-          ctx.route.writeJson(res, Server.getGameModel(game));
+          ctx.route.writeJson(res, Server.getSimpleGameModel(game));
         }
       } catch (error) {
         ctx.route.internalServerError(req, res, error);

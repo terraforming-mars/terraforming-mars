@@ -82,7 +82,7 @@ describe('SelectHowToPay', () => {
       steelValue: 2,
       titaniumValue: 3,
     }, playerFields);
-    const player: Partial<PlayerViewModel> = {
+    const playerView: Partial<PlayerViewModel> = {
       thisPlayer: thisPlayer as PublicPlayerModel,
       id: 'foo',
     };
@@ -98,7 +98,7 @@ describe('SelectHowToPay', () => {
     return mount(SelectHowToPay, {
       localVue: getLocalVue(),
       propsData: {
-        player: player,
+        playerView: playerView,
         playerinput: playerInput,
         onsave: () => {},
         showsave: true,

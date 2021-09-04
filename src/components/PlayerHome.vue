@@ -51,7 +51,7 @@
 
                     <div v-if="player.players.length > 1" class="player_home_block--milestones-and-awards">
                         <Milestone :milestones_list="game.milestones" />
-                        <Award :awards_list="game.awards" />
+                        <Awards :awards="game.awards" />
                     </div>
                 </div>
 
@@ -232,7 +232,7 @@ import Vue from 'vue';
 import Board from './Board.vue';
 import Card from './card/Card.vue';
 import Milestone from './Milestone.vue';
-import Award from './Award.vue';
+import Awards from './Awards.vue';
 import PlayersOverview from './overview/PlayersOverview.vue';
 import WaitingFor from './WaitingFor.vue';
 import Sidebar from './Sidebar.vue';
@@ -309,7 +309,7 @@ export default Vue.extend({
     'players-overview': PlayersOverview,
     'waiting-for': WaitingFor,
     Milestone,
-    Award,
+    Awards,
     'sidebar': Sidebar,
     'colony': Colony,
     'log-panel': LogPanel,

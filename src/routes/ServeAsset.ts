@@ -115,6 +115,13 @@ export class ServeAsset extends Handler {
         encoding = 'gzip';
         file += '.gz';
       }
+
+      // Return not-compressed .js files for development mode
+      if (!fs.existsSync(file)) {
+        encoding = undefined;
+        file = `build/${urlPath}`;
+      }
+
       return {file, encoding};
 
     case 'favicon.ico':

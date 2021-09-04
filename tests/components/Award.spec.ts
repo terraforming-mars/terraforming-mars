@@ -1,40 +1,121 @@
-
 import {createLocalVue, mount} from '@vue/test-utils';
-
 import {expect} from 'chai';
 import Award from '../../src/components/Award.vue';
 import {FundedAwardModel} from '../../src/models/FundedAwardModel';
+import {Color} from '../../src/Color';
 
-describe('Award', function() {
-  const mockAward: FundedAwardModel = {
+function getLocalVue() {
+  const localVue = createLocalVue();
+  localVue.directive('trim-whitespace', {});
+  localVue.directive('i18n', {});
+  return localVue;
+}
+
+function createAward(
+  {funded, scores = []}:
+  {funded: boolean, scores?: FundedAwardModel['scores']},
+): FundedAwardModel {
+  return {
     award: {
-      name: 'test',
-      description: 'a test',
+      name: `Award name`,
+      description: `Award description`,
       getScore: () => 0,
     },
-    player_name: 'foo',
-    player_color: 'blue',
-    scores: [],
+    player_name: funded ? 'Foo' : '',
+    player_color: funded ? 'red': '',
+    scores,
   };
-  function getLocalVue() {
-    const localVue = createLocalVue();
-    localVue.directive('trim-whitespace', {});
-    localVue.directive('i18n', {});
-    return localVue;
-  }
-  it('shows list and award', async function() {
-    const award = mount(Award, {
+}
+
+describe('Award', () => {
+  it('shows passed award', () => {
+    const award = createAward({funded: false});
+    const wrapper = mount(Award, {
       localVue: getLocalVue(),
-      propsData: {
-        awards_list: [
-          mockAward,
-        ],
-      },
+      propsData: {award},
     });
-    const toggler = award.find('a[class="ma-clickable awards-padding"]');
-    await toggler.trigger('click');
-    const test = award.find('div[class*="ma-name--awards"]');
-    expect(test.classes()).to.contain('ma-name');
-    expect(test.classes()).to.contain('ma-name--test');
+
+    expect(wrapper.text()).to.includes(award.award.name);
+  });
+
+  it(`doesn't show award's description`, () => {
+    const award = createAward({funded: false});
+    const wrapper = mount(Award, {
+      localVue: getLocalVue(),
+      propsData: {award},
+    });
+
+    expect(wrapper.text()).to.not.includes(award.award.description);
+  });
+
+  it(`shows award's description on click`, async () => {
+    const award = createAward({funded: false});
+    const wrapper = mount(Award, {
+      localVue: getLocalVue(),
+      propsData: {award},
+    });
+
+    await wrapper.trigger('click');
+
+    expect(wrapper.text()).to.include(award.award.description);
+  });
+
+  it(`colors player's score`, () => {
+    const award = createAward({
+      funded: true,
+      scores: [
+        {playerColor: Color.RED, playerScore: 2},
+      ],
+    });
+
+    const wrapper = mount(Award, {
+      localVue: getLocalVue(),
+      propsData: {award},
+    });
+
+    const scoreWrapper = wrapper.find('[data-test=player-score]');
+    expect(scoreWrapper.classes()).to.includes(`player_bg_color_${award.scores[0].playerColor}`);
+  });
+
+  it('shows sorted players scores', () => {
+    const award = createAward({
+      funded: false,
+      scores: [
+        {playerColor: Color.RED, playerScore: 2},
+        {playerColor: Color.BLUE, playerScore: 4},
+        {playerColor: Color.YELLOW, playerScore: 0},
+        {playerColor: Color.GREEN, playerScore: 4},
+      ],
+    });
+
+    const wrapper = mount(Award, {
+      localVue: getLocalVue(),
+      propsData: {award},
+    });
+
+    const scores = wrapper.findAll('[data-test=player-score]')
+      .wrappers.map((scoreWrapper) => parseInt(scoreWrapper.text()));
+
+    expect(scores).to.be.deep.eq([4, 4, 2, 0]);
+  });
+
+  it(`shows player's cube if award is funded`, () => {
+    const award = createAward({funded: true});
+    const wrapper = mount(Award, {
+      localVue: getLocalVue(),
+      propsData: {award},
+    });
+
+    expect(wrapper.find(`.board-cube--${award.player_color}`).exists()).to.be.true;
+  });
+
+  it(`creates correct css class from award's name`, () => {
+    const award = createAward({funded: true});
+    const wrapper = mount(Award, {
+      localVue: getLocalVue(),
+      propsData: {award},
+    });
+
+    expect(wrapper.find('.ma-name--award-name').exists()).to.be.true;
   });
 });

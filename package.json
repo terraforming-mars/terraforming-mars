@@ -13,6 +13,7 @@
     "@typescript-eslint/eslint-plugin": "^4.8.2",
     "@typescript-eslint/parser": "^4.8.2",
     "console-stamp": "3.0.0-rc4.2",
+    "cross-env": "^7.0.3",
     "dialog-polyfill": "^0.5.1",
     "dotenv": "^8.2.0",
     "eslint": "^6.6.0",
@@ -47,6 +48,7 @@
     "mochapack": "^2.1.2",
     "mutation-observer": "^1.0.3",
     "nyc": "^14.1.1",
+    "rimraf": "^3.0.2",
     "sinon": "^11.1.1",
     "ts-loader": "^9.2.2",
     "vue-loader": "^15.9.7",
@@ -72,10 +74,11 @@
     "test": "npm run test:server && npm run test:components",
     "test:server": "mocha --require build/tests/utils/setup.js --recursive build/tests --exclude 'build/tests/components/**'",
     "pretest:server": "tsc --build tests/tsconfig.json",
-    "test:components": "vti diagnostics && mochapack --require tests/components/setup.ts tests/components",
-    "test:components:watch": "mochapack --watch --require tests/components/setup.ts tests/components",
-    "watch": "webpack --watch --mode=development",
-    "webpack": "webpack"
+    "test:components": "cross-env NODE_ENV=development vti diagnostics && mochapack --require tests/components/setup.ts 'tests/components/**/*.spec.ts'",
+    "test:components:watch": "cross-env NODE_ENV=development mochapack --watch --require tests/components/setup.ts 'tests/components/**/*.spec.ts'",
+    "prewatch": "rimraf build/main.js*.{br,gz}",
+    "watch": "cross-env NODE_ENV=development webpack --watch",
+    "webpack": "cross-env NODE_ENV=production webpack"
   },
   "repository": {
     "type": "git",

@@ -88,6 +88,7 @@ let refreshTimeoutId: number = -1;
 
 export interface SpectatorHomeModel {
   hideTiles: boolean;
+  waitingForTimeout: number;
 }
 
 export default Vue.extend({
@@ -95,6 +96,7 @@ export default Vue.extend({
   data(): SpectatorHomeModel {
     return {
       hideTiles: false,
+      waitingForTimeout: this.settings.waitingForTimeout as typeof raw_settings.waitingForTimeout,
     };
   },
   props: {
@@ -135,7 +137,7 @@ export default Vue.extend({
     window.clearInterval(refreshTimeoutId);
   },
   mounted() {
-    refreshTimeoutId = window.setInterval(this.forceRerender, 5000);
+    refreshTimeoutId = window.setInterval(this.forceRerender, this.waitingForTimeout);
   },
 });
 </script>

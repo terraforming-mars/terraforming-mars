@@ -67,7 +67,6 @@ export const mainAppSettings = {
     } as {[x: string]: boolean},
     game: undefined as SimpleGameModel | undefined,
     logPaused: false,
-    spectator: undefined,
   } as MainAppData,
   'components': {
     // These component keys match the screen values, and their entries in index.html.

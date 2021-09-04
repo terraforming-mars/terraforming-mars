@@ -24,9 +24,13 @@
         "moduleResolution": "node",
         "resolveJsonModule": true,
         "allowUnreachableCode": false,
+        "baseUrl": ".",
+        "paths": {
+            "@/*": ["./src/*"]
+        }
     },
     // This gives the VS Code IDE its magic.
     "include": [
         "**/*.ts",
-    ]
+    ],
 }

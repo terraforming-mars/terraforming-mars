@@ -40,7 +40,7 @@ interface SelectCardModel {
 export default Vue.extend({
   name: 'SelectCard',
   props: {
-    player: {
+    playerView: {
       type: Object as () => PlayerViewModel,
     },
     playerinput: {
@@ -63,6 +63,12 @@ export default Vue.extend({
       cards: [],
       warning: undefined,
     } as SelectCardModel;
+  },
+  computed: {
+    // TODO(kberg): Remove after everything becomes playerView.
+    player(): PlayerViewModel {
+      return this.playerView;
+    },
   },
   components: {
     Card,

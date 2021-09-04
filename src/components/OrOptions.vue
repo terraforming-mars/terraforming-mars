@@ -10,7 +10,7 @@
       <div v-if="selectedOption === option" style="margin-left: 30px">
         <player-input-factory ref="inputfactory"
                               :players="players"
-                              :player="player"
+                              :playerView="playerView"
                               :playerinput="option"
                               :onsave="playerFactorySaved()"
                               :showsave="false"
@@ -39,7 +39,7 @@ let unique = 0;
 export default Vue.extend({
   name: 'or-options',
   props: {
-    player: {
+    playerView: {
       type: Object as () => PlayerViewModel,
     },
     players: {

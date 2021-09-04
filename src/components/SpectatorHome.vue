@@ -43,7 +43,7 @@
 
     <div v-if="spectator.players.length > 1" class="player_home_block--milestones-and-awards">
         <Milestone :milestones_list="game.milestones" />
-        <Award :awards_list="game.awards" />
+        <Awards :awards="game.awards" />
     </div>
 
     <!-- TODO(kberg): add the spectator tab. -->
@@ -73,7 +73,7 @@ import {mainAppSettings} from './App';
 
 import * as raw_settings from '../genfiles/settings.json';
 import {SpectatorModel} from '../models/SpectatorModel';
-import Award from './Award.vue';
+import Awards from './Awards.vue';
 import Board from './Board.vue';
 import Colony from './Colony.vue';
 import DynamicTitle from './common/DynamicTitle.vue';
@@ -113,7 +113,7 @@ export default Vue.extend({
     },
   },
   components: {
-    Award,
+    Awards,
     Board,
     Colony,
     DynamicTitle,

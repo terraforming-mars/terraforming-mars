@@ -165,7 +165,7 @@
                 </template>
 
                 <dynamic-title v-if="playerView.pickedCorporationCard.length === 0" title="Select initial cards:" :color="thisPlayer.color"/>
-                <waiting-for v-if="game.phase !== 'end'" :players="playerView.players" :player="playerView" :settings="settings" :waitingfor="playerView.waitingFor"></waiting-for>
+                <waiting-for v-if="game.phase !== 'end'" :players="playerView.players" :playerView="playerView" :settings="settings" :waitingfor="playerView.waitingFor"></waiting-for>
 
                 <dynamic-title title="Game details" :color="thisPlayer.color"/>
 

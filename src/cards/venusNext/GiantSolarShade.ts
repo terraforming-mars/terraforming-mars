@@ -36,7 +36,8 @@ export class GiantSolarShade extends Card {
   }
 
   public play(player: Player) {
-    return player.game.increaseVenusScaleLevel(player, 3);
+    player.game.increaseVenusScaleLevel(player, 3);
+    return undefined;
   }
 }
 

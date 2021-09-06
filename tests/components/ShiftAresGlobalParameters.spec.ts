@@ -1,10 +1,10 @@
 import {createLocalVue, mount} from '@vue/test-utils';
 
 import {expect} from 'chai';
-import ShiftAresGlobalParameters from '../../src/components/ShiftAresGlobalParameters.vue';
-import {PlayerInputModel} from '../../src/models/PlayerInputModel';
-import {PlayerInputTypes} from '../../src/PlayerInputTypes';
-import {PartyName} from '../../src/turmoil/parties/PartyName';
+import ShiftAresGlobalParameters from '@/components/ShiftAresGlobalParameters.vue';
+import {PlayerInputModel} from '@/models/PlayerInputModel';
+import {PlayerInputTypes} from '@/PlayerInputTypes';
+import {PartyName} from '@/turmoil/parties/PartyName';
 
 describe('ShiftAresGlobalParameters', function() {
   const mockPlayerModel: PlayerInputModel = {

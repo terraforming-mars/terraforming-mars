@@ -1,11 +1,11 @@
 import {createLocalVue, mount} from '@vue/test-utils';
 
 import {expect} from 'chai';
-import {CardName} from '../../../src/CardName';
-import {Color} from '../../../src/Color';
-import PlayerInfo from '../../../src/components/overview/PlayerInfo.vue';
-import {PlayerViewModel, PublicPlayerModel} from '../../../src/models/PlayerModel';
-import {RecursivePartial} from '../../../src/utils/utils';
+import {CardName} from '@/CardName';
+import {Color} from '@/Color';
+import PlayerInfo from '@/components/overview/PlayerInfo.vue';
+import {PlayerViewModel, PublicPlayerModel} from '@/models/PlayerModel';
+import {RecursivePartial} from '@/utils/utils';
 
 describe('PlayerInfo', function() {
   function getLocalVue() {

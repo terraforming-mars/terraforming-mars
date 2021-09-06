@@ -1,8 +1,8 @@
 import {createLocalVue, mount} from '@vue/test-utils';
 import {expect} from 'chai';
-import Award from '../../src/components/Award.vue';
-import {FundedAwardModel} from '../../src/models/FundedAwardModel';
-import {Color} from '../../src/Color';
+import Award from '@/components/Award.vue';
+import {FundedAwardModel} from '@/models/FundedAwardModel';
+import {Color} from '@/Color';
 
 function getLocalVue() {
   const localVue = createLocalVue();

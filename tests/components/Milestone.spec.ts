@@ -2,8 +2,8 @@
 import {createLocalVue, mount} from '@vue/test-utils';
 
 import {expect} from 'chai';
-import Milestone from '../../src/components/Milestone.vue';
-import {ClaimedMilestoneModel} from '../../src/models/ClaimedMilestoneModel';
+import Milestone from '@/components/Milestone.vue';
+import {ClaimedMilestoneModel} from '@/models/ClaimedMilestoneModel';
 
 describe('Milestone', function() {
   const mockMilestone: ClaimedMilestoneModel = {

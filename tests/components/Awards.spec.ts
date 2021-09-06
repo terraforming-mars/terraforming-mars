@@ -180,4 +180,36 @@ describe('Awards', () => {
 
     expect(wrapper.find('[data-test=spot-price]').exists()).to.be.false;
   });
+
+  it('shows Awards with hidden scores', () => {
+    const awards = [
+      createAward({id: 1, funded: true}),
+      createAward({id: 2, funded: false}),
+    ];
+
+    const wrapper = shallowMount(Awards, {
+      localVue: getLocalVue(),
+      propsData: {awards, showScores: false},
+    });
+
+    wrapper.findAllComponents(Award).wrappers.forEach((awardWrapper) => {
+      expect(awardWrapper.props('showScores')).to.be.false;
+    });
+  });
+
+  it('shows Awards with scores', () => {
+    const awards = [
+      createAward({id: 1, funded: true}),
+      createAward({id: 2, funded: false}),
+    ];
+
+    const wrapper = shallowMount(Awards, {
+      localVue: getLocalVue(),
+      propsData: {awards, showScores: true},
+    });
+
+    wrapper.findAllComponents(Award).wrappers.forEach((awardWrapper) => {
+      expect(awardWrapper.props('showScores')).to.be.true;
+    });
+  });
 });

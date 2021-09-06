@@ -113,6 +113,11 @@
                               <label for="requiresMoonTrackCompletion-checkbox">
                                   <span v-i18n>Mandatory Moon Terraforming</span>
                               </label>
+
+                              <input type="checkbox" v-model="moonStandardProjectVariant" id="moonStandardProjectVariant-checkbox">
+                              <label for="moonStandardProjectVariant-checkbox">
+                                  <span v-i18n>Standard Project Variant</span>&nbsp;<a href="https://github.com/bafolts/terraforming-mars/wiki/Variants#moon-standard-project-variant" class="tooltip" target="_blank">&#9432;</a>
+                              </label>
                             </template>
 
                             <template v-if="turmoil">
@@ -463,6 +468,7 @@ export interface CreateGameModel {
     cloneGameData: Array<IGameData>;
     requiresVenusTrackCompletion: boolean;
     requiresMoonTrackCompletion: boolean;
+    moonStandardProjectVariant: boolean;
     seededGame: boolean;
 }
 
@@ -538,6 +544,7 @@ export default Vue.extend({
       allOfficialExpansions: false,
       requiresVenusTrackCompletion: false,
       requiresMoonTrackCompletion: false,
+      moonStandardProjectVariant: false,
     };
   },
   components: {
@@ -809,7 +816,6 @@ export default Vue.extend({
       const beginnerOption = component.beginnerOption;
       const randomFirstPlayer = component.randomFirstPlayer;
       const requiresVenusTrackCompletion = component.requiresVenusTrackCompletion;
-      const requiresMoonTrackCompletion = component.requiresMoonTrackCompletion;
       let clonedGamedId: undefined | GameId = undefined;
 
       // Check custom colony count
@@ -884,7 +890,8 @@ export default Vue.extend({
         beginnerOption,
         randomFirstPlayer,
         requiresVenusTrackCompletion,
-        requiresMoonTrackCompletion,
+        requiresMoonTrackCompletion: component.requiresMoonTrackCompletion,
+        moonStandardProjectVariant: component.moonStandardProjectVariant,
       }, undefined, 4);
       return dataToSend;
     },

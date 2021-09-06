@@ -113,6 +113,7 @@ export interface GameOptions {
   customColoniesList: Array<ColonyName>;
   requiresMoonTrackCompletion: boolean; // Moon must be completed to end the game
   requiresVenusTrackCompletion: boolean; // Venus must be completed to end the game
+  moonStandardProjectVariant: boolean;
 }
 
 const DEFAULT_GAME_OPTIONS: GameOptions = {
@@ -131,6 +132,7 @@ const DEFAULT_GAME_OPTIONS: GameOptions = {
   includeVenusMA: true,
   initialDraftVariant: false,
   moonExpansion: false,
+  moonStandardProjectVariant: false,
   politicalAgendasExtension: AgendaStyle.STANDARD,
   preludeExtension: false,
   promoCardsOption: false,

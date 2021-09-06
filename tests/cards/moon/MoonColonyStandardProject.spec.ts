@@ -27,8 +27,19 @@ describe('MoonColonyStandardProject', () => {
   });
 
   it('can act', () => {
-    // 1. Have the money? And the titanium?
-    // 2. Are there spaces on the moon for a colony?
+    player.titanium = 0;
+    player.megaCredits = 22;
+    expect(player.canPlay(card)).is.false;
+
+    player.titanium = 1;
+    player.megaCredits = 21;
+    expect(player.canPlay(card)).is.false;
+
+    player.titanium = 1;
+    player.megaCredits = 22;
+    expect(player.canPlay(card)).is.true;
+
+    // TODO(kberg): Are there spaces on the moon for a colony?
   });
 
   it('has discount', () => {

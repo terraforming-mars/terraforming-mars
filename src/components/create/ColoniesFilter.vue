@@ -22,26 +22,26 @@
 
 <script lang="ts">
 import Vue from 'vue';
-import {Callisto} from '../../colonies/Callisto';
-import {Ceres} from '../../colonies/Ceres';
-import {Colony} from '../../colonies/Colony';
-import {Europa} from '../../colonies/Europa';
-import {Ganymede} from '../../colonies/Ganymede';
-import {Io} from '../../colonies/Io';
-import {Luna} from '../../colonies/Luna';
-import {Miranda} from '../../colonies/Miranda';
-import {Pluto} from '../../colonies/Pluto';
-import {Titan} from '../../colonies/Titan';
-import {Triton} from '../../colonies/Triton';
-import {Enceladus} from '../../colonies/Enceladus';
-import {ColonyName} from '../../colonies/ColonyName';
-import {Iapetus} from '../../cards/community/Iapetus';
-import {Mercury} from '../../cards/community/Mercury';
-import {Hygiea} from '../../cards/community/Hygiea';
-import {Titania} from '../../cards/community/Titania';
-import {Venus} from '../../cards/community/Venus';
-import {Leavitt} from '../../cards/community/Leavitt';
-import {Pallas} from '../../cards/community/Pallas';
+import {Callisto} from '@/colonies/Callisto';
+import {Ceres} from '@/colonies/Ceres';
+import {Colony} from '@/colonies/Colony';
+import {Europa} from '@/colonies/Europa';
+import {Ganymede} from '@/colonies/Ganymede';
+import {Io} from '@/colonies/Io';
+import {Luna} from '@/colonies/Luna';
+import {Miranda} from '@/colonies/Miranda';
+import {Pluto} from '@/colonies/Pluto';
+import {Titan} from '@/colonies/Titan';
+import {Triton} from '@/colonies/Triton';
+import {Enceladus} from '@/colonies/Enceladus';
+import {ColonyName} from '@/colonies/ColonyName';
+import {Iapetus} from '@/cards/community/Iapetus';
+import {Mercury} from '@/cards/community/Mercury';
+import {Hygiea} from '@/cards/community/Hygiea';
+import {Titania} from '@/cards/community/Titania';
+import {Venus} from '@/cards/community/Venus';
+import {Leavitt} from '@/cards/community/Leavitt';
+import {Pallas} from '@/cards/community/Pallas';
 
 const OFFICIAL_COLONIES: Array<Colony> = [
   new Callisto(),

@@ -8,7 +8,7 @@
 <script lang="ts">
 
 import Vue from 'vue';
-import {Shared} from './Shared';
+import {Shared} from '@/components/overview/Shared';
 
 export default Vue.extend({
   name: 'OverviewSettings',

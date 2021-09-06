@@ -1,19 +1,19 @@
 <script lang="ts">
 import Vue from 'vue';
-import Button from './common/Button.vue';
+import Button from '@/components/common/Button.vue';
 
-import {HowToPay} from '../inputs/HowToPay';
-import Card from './card/Card.vue';
-import {CardFinder} from '../CardFinder';
-import {CardModel} from '../models/CardModel';
-import {CardOrderStorage} from './CardOrderStorage';
-import {PaymentWidgetMixin, SelectHowToPayForProjectCardModel} from './PaymentWidgetMixin';
-import {PlayerInputModel} from '../models/PlayerInputModel';
-import {PlayerViewModel, PublicPlayerModel} from '../models/PlayerModel';
-import {PreferencesManager} from './PreferencesManager';
-import {Tags} from '../cards/Tags';
-import {TranslateMixin} from './TranslateMixin';
-import {Units} from '../Units';
+import {HowToPay} from '@/inputs/HowToPay';
+import Card from '@/components/card/Card.vue';
+import {CardFinder} from '@/CardFinder';
+import {CardModel} from '@/models/CardModel';
+import {CardOrderStorage} from '@/components/CardOrderStorage';
+import {PaymentWidgetMixin, SelectHowToPayForProjectCardModel} from '@/components/PaymentWidgetMixin';
+import {PlayerInputModel} from '@/models/PlayerInputModel';
+import {PlayerViewModel, PublicPlayerModel} from '@/models/PlayerModel';
+import {PreferencesManager} from '@/components/PreferencesManager';
+import {Tags} from '@/cards/Tags';
+import {TranslateMixin} from '@/components/TranslateMixin';
+import {Units} from '@/Units';
 
 export default Vue.extend({
   name: 'SelectHowToPayForProjectCard',

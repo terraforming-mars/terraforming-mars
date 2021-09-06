@@ -17,16 +17,16 @@
 
 import Vue from 'vue';
 
-import Button from './common/Button.vue';
-import {CardFinder} from '../CardFinder';
-import {CardName} from '../CardName';
-import * as constants from '../constants';
-import {CorporationCard} from '../cards/corporation/CorporationCard';
-import {PlayerInputModel} from '../models/PlayerInputModel';
-import {PlayerViewModel} from '../models/PlayerModel';
-import SelectCard from './SelectCard.vue';
-import ConfirmDialog from './common/ConfirmDialog.vue';
-import {PreferencesManager} from './PreferencesManager';
+import Button from '@/components/common/Button.vue';
+import {CardFinder} from '@/CardFinder';
+import {CardName} from '@/CardName';
+import * as constants from '@/constants';
+import {CorporationCard} from '@/cards/corporation/CorporationCard';
+import {PlayerInputModel} from '@/models/PlayerInputModel';
+import {PlayerViewModel} from '@/models/PlayerModel';
+import SelectCard from '@/components/SelectCard.vue';
+import ConfirmDialog from '@/components/common/ConfirmDialog.vue';
+import {PreferencesManager} from '@/components/PreferencesManager';
 
 export default Vue.extend({
   name: 'SelectInitialCards',

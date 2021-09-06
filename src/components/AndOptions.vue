@@ -18,10 +18,10 @@
 <script lang="ts">
 
 import Vue from 'vue';
-import {PlayerViewModel, PublicPlayerModel} from '../models/PlayerModel';
-import {PlayerInputModel} from '../models/PlayerInputModel';
-import Button from '../components/common/Button.vue';
-import {TranslateMixin} from '../components/TranslateMixin';
+import {PlayerViewModel, PublicPlayerModel} from '@/models/PlayerModel';
+import {PlayerInputModel} from '@/models/PlayerInputModel';
+import Button from '@/components/common/Button.vue';
+import {TranslateMixin} from '@/components/TranslateMixin';
 
 export default Vue.extend({
   name: 'and-options',

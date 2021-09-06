@@ -15,9 +15,9 @@
 <script lang="ts">
 
 import Vue from 'vue';
-import {DEFAULT_STEEL_VALUE, DEFAULT_TITANIUM_VALUE} from '../../constants';
-import {Resources} from '../../Resources';
-import {PreferencesManager} from '../PreferencesManager';
+import {DEFAULT_STEEL_VALUE, DEFAULT_TITANIUM_VALUE} from '@/constants';
+import {Resources} from '@/Resources';
+import {PreferencesManager} from '@/components/PreferencesManager';
 
 export default Vue.extend({
   name: 'PlayerResource',

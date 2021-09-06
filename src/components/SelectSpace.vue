@@ -14,10 +14,10 @@
 
 <script lang="ts">
 import Vue from 'vue';
-import ConfirmDialog from './common/ConfirmDialog.vue';
-import {PlayerInputModel} from '../models/PlayerInputModel';
-import {PreferencesManager} from './PreferencesManager';
-import {TranslateMixin} from './TranslateMixin';
+import ConfirmDialog from '@/components/common/ConfirmDialog.vue';
+import {PlayerInputModel} from '@/models/PlayerInputModel';
+import {PreferencesManager} from '@/components/PreferencesManager';
+import {TranslateMixin} from '@/components/TranslateMixin';
 
 export default Vue.extend({
   name: 'SelectSpace',

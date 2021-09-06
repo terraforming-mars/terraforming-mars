@@ -79,12 +79,12 @@
 <script lang="ts">
 
 import Vue from 'vue';
-import {PartyName} from '../turmoil/parties/PartyName';
-import {$t} from '../directives/i18n';
-import {TurmoilModel} from '../models/TurmoilModel';
-import {BonusId} from '../turmoil/Bonus';
-import {PolicyId} from '../turmoil/Policy';
-import GlobalEvent from './GlobalEvent.vue';
+import {PartyName} from '@/turmoil/parties/PartyName';
+import {$t} from '@/directives/i18n';
+import {TurmoilModel} from '@/models/TurmoilModel';
+import {BonusId} from '@/turmoil/Bonus';
+import {PolicyId} from '@/turmoil/Policy';
+import GlobalEvent from '@/components/GlobalEvent.vue';
 
 const AGENDA_HTML: Map<BonusId | PolicyId, string> = new Map([
   ['mb01',

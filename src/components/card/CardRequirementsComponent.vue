@@ -12,7 +12,7 @@
 <script lang="ts">
 
 import Vue from 'vue';
-import {CardRequirements} from '../../cards/CardRequirements';
+import {CardRequirements} from '@/cards/CardRequirements';
 
 export default Vue.extend({
   name: 'CardRequirementsComponent',

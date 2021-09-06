@@ -19,8 +19,8 @@
 </template>
 <script lang="ts">
 import Vue from 'vue';
-import {PartyModel} from '../models/TurmoilModel';
-import {PartyName} from '../turmoil/parties/PartyName';
+import {PartyModel} from '@/models/TurmoilModel';
+import {PartyName} from '@/turmoil/parties/PartyName';
 
 export default Vue.extend({
   name: 'Party',

@@ -21,8 +21,8 @@
 <script lang="ts">
 
 import Vue from 'vue';
-import Card from './../card/Card.vue';
-import {CardName} from './../../CardName';
+import Card from '@/components/card/Card.vue';
+import {CardName} from '@/CardName';
 
 export default Vue.extend({
   name: 'HelpStandardProjects',

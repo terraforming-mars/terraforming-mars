@@ -1,8 +1,8 @@
 <script lang="ts">
 import Vue from 'vue';
-import Button from '../components/common/Button.vue';
-import {PlayerInputModel} from '../models/PlayerInputModel';
-import {TranslateMixin} from './TranslateMixin';
+import Button from '@/components/common/Button.vue';
+import {PlayerInputModel} from '@/models/PlayerInputModel';
+import {TranslateMixin} from '@/components/TranslateMixin';
 
 export default Vue.extend({
   name: 'SelectAmount',

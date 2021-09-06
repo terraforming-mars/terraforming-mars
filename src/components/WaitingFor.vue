@@ -14,17 +14,17 @@
 
 import Vue from 'vue';
 
-import {mainAppSettings} from './App';
-import {$t} from '../directives/i18n';
-import {PlayerInputModel} from '../models/PlayerInputModel';
-import {PlayerViewModel, PublicPlayerModel} from '../models/PlayerModel';
-import {PreferencesManager} from './PreferencesManager';
-import {SoundManager} from './SoundManager';
-import {TranslateMixin} from './TranslateMixin';
-import {WaitingForModel} from '../models/WaitingForModel';
+import {mainAppSettings} from '@/components/App';
+import {$t} from '@/directives/i18n';
+import {PlayerInputModel} from '@/models/PlayerInputModel';
+import {PlayerViewModel, PublicPlayerModel} from '@/models/PlayerModel';
+import {PreferencesManager} from '@/components/PreferencesManager';
+import {SoundManager} from '@/components/SoundManager';
+import {TranslateMixin} from '@/components/TranslateMixin';
+import {WaitingForModel} from '@/models/WaitingForModel';
 
-import * as constants from '../constants';
-import * as raw_settings from '../genfiles/settings.json';
+import * as constants from '@/constants';
+import * as raw_settings from '@/genfiles/settings.json';
 
 let ui_update_timeout_id: number | undefined;
 let documentTitleTimer: number | undefined;

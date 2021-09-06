@@ -12,10 +12,10 @@
 </template>
 <script lang="ts">
 import Vue from 'vue';
-import Colony from './Colony.vue';
-import Button from '../components/common/Button.vue';
-import {PlayerInputModel} from '../models/PlayerInputModel';
-import {TranslateMixin} from './TranslateMixin';
+import Colony from '@/components/Colony.vue';
+import Button from '@/components/common/Button.vue';
+import {PlayerInputModel} from '@/models/PlayerInputModel';
+import {TranslateMixin} from '@/components/TranslateMixin';
 
 export default Vue.extend({
   name: 'SelectColony',

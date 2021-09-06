@@ -9,7 +9,7 @@
 <script lang="ts">
 
 import Vue from 'vue';
-import {GlobalEventModel} from '../models/TurmoilModel';
+import {GlobalEventModel} from '@/models/TurmoilModel';
 
 export default Vue.extend({
   name: 'global-event',

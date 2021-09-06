@@ -26,7 +26,7 @@
 
 <script lang="ts">
 import Vue from 'vue';
-import {FundedAwardModel, IAwardScore} from '../models/FundedAwardModel';
+import {FundedAwardModel, IAwardScore} from '@/models/FundedAwardModel';
 
 export default Vue.extend({
   name: 'Award',

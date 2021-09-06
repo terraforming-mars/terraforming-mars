@@ -9,9 +9,9 @@
 <script lang="ts">
 
 import Vue from 'vue';
-import {CardModel} from '../../models/CardModel';
-import {CardName} from '../../CardName';
-import {Resources} from '../../Resources';
+import {CardModel} from '@/models/CardModel';
+import {CardName} from '@/CardName';
+import {Resources} from '@/Resources';
 
 export default Vue.extend({
   name: 'CardExtraContent',

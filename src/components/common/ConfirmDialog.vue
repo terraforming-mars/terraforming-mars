@@ -1,6 +1,6 @@
 <script lang="ts">
 import Vue from 'vue';
-import {TranslateMixin} from '../TranslateMixin';
+import {TranslateMixin} from '@/components/TranslateMixin';
 
 const dialogPolyfill = require('dialog-polyfill');
 

@@ -7,7 +7,7 @@
 <script lang="ts">
 
 import Vue from 'vue';
-import CardRowComponent from './CardRowComponent.vue';
+import CardRowComponent from '@/components/card/CardRowComponent.vue';
 
 export default Vue.extend({
   name: 'CardRowData',

@@ -13,12 +13,12 @@
 
 <script lang="ts">
 import Vue from 'vue';
-import Button from '../components/common/Button.vue';
-import {ColorWithNeutral} from '../Color';
-import {PlayerInputModel} from '../models/PlayerInputModel';
-import {PublicPlayerModel} from '../models/PlayerModel';
-import SelectPlayerRow from './SelectPlayerRow.vue';
-import {TranslateMixin} from './TranslateMixin';
+import Button from '@/components/common/Button.vue';
+import {ColorWithNeutral} from '@/Color';
+import {PlayerInputModel} from '@/models/PlayerInputModel';
+import {PublicPlayerModel} from '@/models/PlayerModel';
+import SelectPlayerRow from '@/components/SelectPlayerRow.vue';
+import {TranslateMixin} from '@/components/TranslateMixin';
 
 export default Vue.extend({
   name: 'SelectPartyPlayer',

@@ -2,12 +2,12 @@
 
 import Vue from 'vue';
 
-import StackedCards from './StackedCards.vue';
-import {PlayerMixin} from './PlayerMixin';
-import {PublicPlayerModel} from '../models/PlayerModel';
-import {mainAppSettings} from './App';
-import Card from './card/Card.vue';
-import Button from './common/Button.vue';
+import StackedCards from '@/components/StackedCards.vue';
+import {PlayerMixin} from '@/components/PlayerMixin';
+import {PublicPlayerModel} from '@/models/PlayerModel';
+import {mainAppSettings} from '@/components/App';
+import Card from '@/components/card/Card.vue';
+import Button from '@/components/common/Button.vue';
 
 export default Vue.extend({
   name: 'OtherPlayer',

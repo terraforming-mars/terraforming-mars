@@ -12,9 +12,9 @@
 <script lang="ts">
 
 import Vue from 'vue';
-import {ActionLabel} from './ActionLabel';
-import PlayerTimer from './PlayerTimer.vue';
-import {TimerModel} from '../../models/TimerModel';
+import {ActionLabel} from '@/components/overview/ActionLabel';
+import PlayerTimer from '@/components/overview/PlayerTimer.vue';
+import {TimerModel} from '@/models/TimerModel';
 
 export default Vue.extend({
   name: 'player-status',

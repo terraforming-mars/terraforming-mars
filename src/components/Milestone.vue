@@ -34,9 +34,9 @@
 <script lang="ts">
 
 import Vue from 'vue';
-import {MILESTONE_COST, MAX_MILESTONES} from '../constants';
-import {ClaimedMilestoneModel} from '../models/ClaimedMilestoneModel';
-import {PreferencesManager} from './PreferencesManager';
+import {MILESTONE_COST, MAX_MILESTONES} from '@/constants';
+import {ClaimedMilestoneModel} from '@/models/ClaimedMilestoneModel';
+import {PreferencesManager} from '@/components/PreferencesManager';
 
 export default Vue.extend({
   name: 'Milestone',

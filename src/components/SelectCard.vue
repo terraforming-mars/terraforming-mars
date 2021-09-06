@@ -20,17 +20,17 @@
 <script lang="ts">
 
 import Vue from 'vue';
-import Button from '../components/common/Button.vue';
-import {Message} from '../Message';
-import {CardOrderStorage} from './CardOrderStorage';
-import {BasePlayerModel, PlayerViewModel} from '../models/PlayerModel';
-import {VueModelCheckbox, VueModelRadio} from './VueTypes';
-import Card from './card/Card.vue';
-import {CardModel} from '../models/CardModel';
-import {CardName} from '../CardName';
-import {PlayerInputModel} from '../models/PlayerInputModel';
-import {sortActiveCards} from '../components/ActiveCardsSortingOrder';
-import {TranslateMixin} from './TranslateMixin';
+import Button from '@/components/common/Button.vue';
+import {Message} from '@/Message';
+import {CardOrderStorage} from '@/components/CardOrderStorage';
+import {BasePlayerModel, PlayerViewModel} from '@/models/PlayerModel';
+import {VueModelCheckbox, VueModelRadio} from '@/components/VueTypes';
+import Card from '@/components/card/Card.vue';
+import {CardModel} from '@/models/CardModel';
+import {CardName} from '@/CardName';
+import {PlayerInputModel} from '@/models/PlayerInputModel';
+import {sortActiveCards} from '@/components/ActiveCardsSortingOrder';
+import {TranslateMixin} from '@/components/TranslateMixin';
 
 interface SelectCardModel {
   cards: VueModelRadio<CardModel> | VueModelCheckbox<Array<CardModel>>;

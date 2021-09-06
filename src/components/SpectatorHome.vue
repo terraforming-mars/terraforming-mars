@@ -8,10 +8,10 @@
 <script lang="ts">
 import Vue from 'vue';
 
-import {TranslateMixin} from './TranslateMixin';
-import {SpectatorModel} from '../../src/models/SpectatorModel';
+import {TranslateMixin} from '@/components/TranslateMixin';
+import {SpectatorModel} from '@/models/SpectatorModel';
 
-import * as raw_settings from '../genfiles/settings.json';
+import * as raw_settings from '@/genfiles/settings.json';
 
 export interface SpectatorHomeModel {
   spectator: SpectatorModel | undefined,

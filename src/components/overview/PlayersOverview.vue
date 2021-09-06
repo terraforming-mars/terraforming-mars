@@ -1,12 +1,12 @@
 <script lang="ts">
 import Vue from 'vue';
-import PlayerInfo from './PlayerInfo.vue';
-import OverviewSettings from './OverviewSettings.vue';
-import OtherPlayer from '../OtherPlayer.vue';
-import {PlayerViewModel, PublicPlayerModel} from '../../models/PlayerModel';
-import {ActionLabel} from './ActionLabel';
-import {Phase} from '../../Phase';
-import {Color} from '../../Color';
+import PlayerInfo from '@/components/overview/PlayerInfo.vue';
+import OverviewSettings from '@/components/overview/OverviewSettings.vue';
+import OtherPlayer from '@/components/OtherPlayer.vue';
+import {PlayerViewModel, PublicPlayerModel} from '@/models/PlayerModel';
+import {ActionLabel} from '@/components/overview/ActionLabel';
+import {Phase} from '@/Phase';
+import {Color} from '@/Color';
 
 const SHOW_NEXT_LABEL_MIN = 2;
 

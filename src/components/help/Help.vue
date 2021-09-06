@@ -42,9 +42,9 @@
 </template>
 <script lang="ts">
 import Vue from 'vue';
-import HelpIconology from './HelpIconology.vue';
-import HelpPhases from './HelpPhases.vue';
-import HelpStandardProjects from './HelpStandardProjects.vue';
+import HelpIconology from '@/components/help/HelpIconology.vue';
+import HelpPhases from '@/components/help/HelpPhases.vue';
+import HelpStandardProjects from '@/components/help/HelpStandardProjects.vue';
 
 type Tab = 'iconology' | 'standard projects' | 'phases' | 'hotkeys';
 

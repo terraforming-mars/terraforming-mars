@@ -11,24 +11,24 @@
 <script lang="ts">
 
 import Vue from 'vue';
-import {PlayerInputTypes} from '../PlayerInputTypes';
-import {PlayerViewModel, PublicPlayerModel} from '../models/PlayerModel';
-import {PlayerInputModel} from '../models/PlayerInputModel';
-import AndOptions from './AndOptions.vue';
-import OrOptions from './OrOptions.vue';
-import SelectAmount from './SelectAmount.vue';
-import SelectCard from './SelectCard.vue';
-import SelectHowToPay from './SelectHowToPay.vue';
-import SelectHowToPayForProjectCard from './SelectHowToPayForProjectCard.vue';
-import SelectInitialCards from './SelectInitialCards.vue';
-import SelectOption from './SelectOption.vue';
-import SelectPlayer from './SelectPlayer.vue';
-import SelectSpace from './SelectSpace.vue';
-import SelectPartyPlayer from './SelectPartyPlayer.vue';
-import SelectPartyToSendDelegate from './SelectPartyToSendDelegate.vue';
-import SelectColony from './SelectColony.vue';
-import SelectProductionToLose from './SelectProductionToLose.vue';
-import ShiftAresGlobalParameters from './ShiftAresGlobalParameters.vue';
+import {PlayerInputTypes} from '@/PlayerInputTypes';
+import {PlayerViewModel, PublicPlayerModel} from '@/models/PlayerModel';
+import {PlayerInputModel} from '@/models/PlayerInputModel';
+import AndOptions from '@/components/AndOptions.vue';
+import OrOptions from '@/components/OrOptions.vue';
+import SelectAmount from '@/components/SelectAmount.vue';
+import SelectCard from '@/components/SelectCard.vue';
+import SelectHowToPay from '@/components/SelectHowToPay.vue';
+import SelectHowToPayForProjectCard from '@/components/SelectHowToPayForProjectCard.vue';
+import SelectInitialCards from '@/components/SelectInitialCards.vue';
+import SelectOption from '@/components/SelectOption.vue';
+import SelectPlayer from '@/components/SelectPlayer.vue';
+import SelectSpace from '@/components/SelectSpace.vue';
+import SelectPartyPlayer from '@/components/SelectPartyPlayer.vue';
+import SelectPartyToSendDelegate from '@/components/SelectPartyToSendDelegate.vue';
+import SelectColony from '@/components/SelectColony.vue';
+import SelectProductionToLose from '@/components/SelectProductionToLose.vue';
+import ShiftAresGlobalParameters from '@/components/ShiftAresGlobalParameters.vue';
 
 export default Vue.component('player-input-factory', {
   props: {

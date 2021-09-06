@@ -9,8 +9,8 @@
 <script lang="ts">
 
 import Vue from 'vue';
-import Card from './card/Card.vue';
-import {CardModel} from '../models/CardModel';
+import Card from '@/components/card/Card.vue';
+import {CardModel} from '@/models/CardModel';
 
 export default Vue.extend({
   name: 'stacked-cards',

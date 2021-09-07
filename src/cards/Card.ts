@@ -1,4 +1,4 @@
-import {CardMetadata} from './CardMetadata';
+import {ICardMetadata} from './CardMetadata';
 import {CardName} from '../CardName';
 import {CardType} from './CardType';
 import {IAdjacencyBonus} from '../ares/IAdjacencyBonus';
@@ -15,7 +15,7 @@ export interface StaticCardProperties {
   cardType: CardType;
   cost?: number;
   initialActionText?: string;
-  metadata: CardMetadata;
+  metadata: ICardMetadata;
   requirements?: CardRequirements;
   name: CardName;
   resourceType?: ResourceType;

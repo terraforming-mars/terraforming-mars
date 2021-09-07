@@ -15,7 +15,7 @@ import {OrOptions} from '../inputs/OrOptions';
 import {SelectOption} from '../inputs/SelectOption';
 import {ResourceType} from '../ResourceType';
 import {CardName} from '../CardName';
-import {CardMetadata} from './CardMetadata';
+import {ICardMetadata} from './CardMetadata';
 import {StandardProjectCard} from './StandardProjectCard';
 import {CardRequirements} from './CardRequirements';
 import {GlobalParameter} from '../GlobalParameter';
@@ -57,7 +57,7 @@ export interface ICard {
     cost?: number;
     cardType: CardType;
     requirements?: CardRequirements;
-    metadata: CardMetadata;
+    metadata: ICardMetadata;
     warning?: string | Message;
     productionBox?: Units;
     produce?: (player: Player) => void;

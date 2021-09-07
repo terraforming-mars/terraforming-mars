@@ -8,7 +8,7 @@ import {Tags} from '../../../src/cards/Tags';
 import {CardType} from '../../../src/cards/CardType';
 import {CardName} from '../../../src/CardName';
 import {IProjectCard} from '../../../src/cards/IProjectCard';
-import {CardMetadata} from '../../../src/cards/CardMetadata';
+import {ICardMetadata} from '../../../src/cards/CardMetadata';
 
 const MOON_OPTIONS = TestingUtils.setCustomGameOptions({moonExpansion: true});
 
@@ -29,7 +29,7 @@ describe('EarthEmbassy', () => {
       cardType: CardType.AUTOMATED,
       name: CardName.ZEPPELINS,
       tags: tags,
-      metadata: {} as CardMetadata,
+      metadata: {} as ICardMetadata,
       play: () => undefined,
     };
 

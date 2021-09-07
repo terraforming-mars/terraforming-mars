@@ -146,6 +146,8 @@ ALL_CARD_MANIFESTS.forEach((manifest) => {
   });
 });
 
+const ALL_MODULES = 'bcpvot*ram';
+
 export interface DebugUIModel {
   filterText: string,
   filterDescription: boolean | unknown[],
@@ -190,16 +192,80 @@ export default Vue.extend({
     if (searchString) {
       this.filterText = searchString;
     }
+    const modules = urlParams.get('m') || ALL_MODULES;
+    this.base = modules.includes('b');
+    this.corporateEra = modules.includes('c');
+    this.prelude = modules.includes('p');
+    this.venusNext = modules.includes('v');
+    this.colonies = modules.includes('o');
+    this.turmoil = modules.includes('t');
+    this.community = modules.includes('*');
+    this.promo = modules.includes('r');
+    this.ares = modules.includes('a');
+    this.moon = modules.includes('m');
   },
   watch: {
-    filterText(newSearchString) {
-      if (window.history.pushState) {
-        const newurl = window.location.protocol + '//' + window.location.host + window.location.pathname + '?search=' + newSearchString;
-        window.history.pushState({path: newurl}, '', newurl);
-      }
+    filterText(newSearchString: string) {
+      this.updateUrl(newSearchString);
+    },
+    base() {
+      this.updateUrl();
+    },
+    corporateEra() {
+      this.updateUrl();
+    },
+    prelude() {
+      this.updateUrl();
+    },
+    venusNext() {
+      this.updateUrl();
+    },
+    colonies() {
+      this.updateUrl();
+    },
+    turmoil() {
+      this.updateUrl();
+    },
+    community() {
+      this.updateUrl();
+    },
+    ares() {
+      this.updateUrl();
+    },
+    moon() {
+      this.updateUrl();
+    },
+    promo() {
+      this.updateUrl();
     },
   },
   methods: {
+    updateUrl(search?: string) {
+      if (window.history.pushState) {
+        let url = window.location.protocol + '//' + window.location.host + window.location.pathname;
+        if (search) {
+          url = url + '?search=' + search;
+        }
+
+        let m = '';
+        if (this.base) m += 'b';
+        if (this.corporateEra) m += 'c';
+        if (this.prelude) m += 'p';
+        if (this.venusNext) m += 'v';
+        if (this.colonies) m += 'o';
+        if (this.turmoil) m += 't';
+        if (this.community) m += '*';
+        if (this.promo) m += 'r';
+        if (this.ares) m += 'a';
+        if (this.moon) m += 'm';
+        if (m === '') m = '-'; // - means no modules.
+
+        if (m !== ALL_MODULES) {
+          url = url + '?m=' + m;
+        }
+        window.history.pushState({path: url}, '', url);
+      }
+    },
     toggleAll() {
       const data = this.$data;
       data.base = !data.base;

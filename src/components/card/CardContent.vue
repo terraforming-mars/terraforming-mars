@@ -10,7 +10,7 @@
 <script lang="ts">
 
 import Vue from 'vue';
-import {ICardMetadata} from '../../cards/CardMetadata';
+import {ICardMetadata} from '../../cards/ICardMetadata';
 import CardRequirementsComponent from './CardRequirementsComponent.vue';
 import CardVictoryPoints from './CardVictoryPoints.vue';
 import CardDescription from './CardDescription.vue';

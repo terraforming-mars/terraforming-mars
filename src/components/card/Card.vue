@@ -35,7 +35,7 @@ import CardExpansion from './CardExpansion.vue';
 import CardTags from './CardTags.vue';
 import {CardType} from '../../cards/CardType';
 import CardContent from './CardContent.vue';
-import {ICardMetadata} from '../../cards/CardMetadata';
+import {ICardMetadata} from '../../cards/ICardMetadata';
 import {Tags} from '../../cards/Tags';
 import {ALL_CARD_MANIFESTS} from '../../cards/AllCards';
 import {GameModule} from '../../GameModule';

@@ -1,4 +1,4 @@
-import {CardRenderer} from '../cards/render/CardRenderer';
+import {CardRenderer} from './render/CardRenderer';
 import {CardRenderDynamicVictoryPoints} from './render/CardRenderDynamicVictoryPoints';
 import {ICardRenderDescription} from './render/ICardRenderDescription';
 

@@ -11,7 +11,7 @@ import {Resources} from '../../Resources';
 import {CardName} from '../../CardName';
 import {IAdjacencyBonus} from '../../ares/IAdjacencyBonus';
 import {Board} from '../../boards/Board';
-import {ICardMetadata} from '../CardMetadata';
+import {ICardMetadata} from '../ICardMetadata';
 import {CardRequirements} from '../CardRequirements';
 import {CardRenderer} from '../render/CardRenderer';
 import {CardRenderDynamicVictoryPoints} from '../render/CardRenderDynamicVictoryPoints';

@@ -2,7 +2,7 @@ import {IProjectCard} from '../IProjectCard';
 import {Tags} from '../Tags';
 import {CardType} from '../CardType';
 import {CardName} from '../../CardName';
-import {ICardMetadata} from '../CardMetadata';
+import {ICardMetadata} from '../ICardMetadata';
 
 export class ScienceTagCard implements IProjectCard {
   public get cost() {

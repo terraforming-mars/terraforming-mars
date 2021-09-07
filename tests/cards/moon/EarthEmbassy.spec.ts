@@ -8,7 +8,7 @@ import {Tags} from '../../../src/cards/Tags';
 import {CardType} from '../../../src/cards/CardType';
 import {CardName} from '../../../src/CardName';
 import {IProjectCard} from '../../../src/cards/IProjectCard';
-import {ICardMetadata} from '../../../src/cards/CardMetadata';
+import {ICardMetadata} from '../../../src/cards/ICardMetadata';
 
 const MOON_OPTIONS = TestingUtils.setCustomGameOptions({moonExpansion: true});
 

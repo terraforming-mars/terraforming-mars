@@ -10,7 +10,7 @@ import {ISpace} from '../../boards/ISpace';
 import {CardName} from '../../CardName';
 import {IResourceCard} from '../ICard';
 import {IAdjacencyBonus} from '../../ares/IAdjacencyBonus';
-import {ICardMetadata} from '../CardMetadata';
+import {ICardMetadata} from '../ICardMetadata';
 import {CardRequirements} from '../CardRequirements';
 import {CardRenderer} from '../render/CardRenderer';
 import {CardRenderDynamicVictoryPoints} from '../render/CardRenderDynamicVictoryPoints';

@@ -4,9 +4,9 @@
       message="Continue without buying initial cards?"
       ref="confirmation"
       v-on:accept="confirmSelection" />
-    <SelectCard :player="player" :playerinput="getOption(0)" :showtitle="true" :onsave="noop" v-on:cardschanged="corporationChanged" />
-    <SelectCard v-if="hasPrelude()" :player="player" :playerinput="getOption(1)" :onsave="noop" :showtitle="true" v-on:cardschanged="preludesChanged" />
-    <SelectCard :player="player" :playerinput="getOption(hasPrelude() ? 2 : 1)" :onsave="noop" :showtitle="true" v-on:cardschanged="cardsChanged" />
+    <SelectCard :playerView="playerView" :playerinput="getOption(0)" :showtitle="true" :onsave="noop" v-on:cardschanged="corporationChanged" />
+    <SelectCard v-if="hasPrelude()" :playerView="playerView" :playerinput="getOption(1)" :onsave="noop" :showtitle="true" v-on:cardschanged="preludesChanged" />
+    <SelectCard :playerView="playerView" :playerinput="getOption(hasPrelude() ? 2 : 1)" :onsave="noop" :showtitle="true" v-on:cardschanged="cardsChanged" />
     <div v-if="selectedCorporation" v-i18n>Starting Megacredits: <div class="megacredits">{{getStartingMegacredits()}}</div></div>
     <div v-if="selectedCorporation && hasPrelude()" v-i18n>After Preludes: <div class="megacredits">{{getStartingMegacredits() + getAfterPreludes()}}</div></div>
     <Button v-if="showsave" @click="saveIfConfirmed" type="submit" :title="playerinput.buttonLabel" />
@@ -31,7 +31,7 @@ import {PreferencesManager} from './PreferencesManager';
 export default Vue.extend({
   name: 'SelectInitialCards',
   props: {
-    player: {
+    playerView: {
       type: Object as () => PlayerViewModel,
     },
     playerinput: {

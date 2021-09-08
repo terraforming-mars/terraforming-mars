@@ -40,7 +40,7 @@ interface SelectCardModel {
 export default Vue.extend({
   name: 'SelectCard',
   props: {
-    player: {
+    playerView: {
       type: Object as () => PlayerViewModel,
     },
     playerinput: {
@@ -91,7 +91,7 @@ export default Vue.extend({
         return sortActiveCards(this.playerinput.cards);
       } else {
         return CardOrderStorage.getOrdered(
-          CardOrderStorage.getCardOrder(this.player.id),
+          CardOrderStorage.getCardOrder(this.playerView.id),
           this.playerinput.cards,
         );
       }
@@ -123,7 +123,7 @@ export default Vue.extend({
       return 'cardbox';
     },
     getOwner(card: CardModel): BasePlayerModel | undefined {
-      for (const player of this.player.players) {
+      for (const player of this.playerView.players) {
         if (player.playedCards.find((c) => c.name === card.name)) {
           return {name: player.name, color: player.color};
         }

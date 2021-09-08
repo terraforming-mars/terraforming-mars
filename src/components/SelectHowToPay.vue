@@ -11,7 +11,7 @@ import {TranslateMixin} from './TranslateMixin';
 export default Vue.extend({
   name: 'SelectHowToPay',
   props: {
-    player: {
+    playerView: {
       type: Object as () => PlayerViewModel,
     },
     playerinput: {
@@ -29,7 +29,7 @@ export default Vue.extend({
   },
   computed: {
     thisPlayer: function(): PublicPlayerModel {
-      return this.player.thisPlayer;
+      return this.playerView.thisPlayer;
     },
   },
   components: {

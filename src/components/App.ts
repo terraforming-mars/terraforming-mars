@@ -38,8 +38,8 @@ interface MainAppData {
      * use this property we can't trigger vue state without
      * a refactor.
      */
-    player?: PlayerViewModel;
     spectator?: SpectatorModel;
+    playerView?: PlayerViewModel;
     playerkey: number;
     settings: typeof raw_settings;
     isServerSideRequestInProgress: boolean;
@@ -122,10 +122,10 @@ export const mainAppSettings = {
       };
       xhr.onload = () => {
         if (xhr.status === 200) {
-          app.player = xhr.response as PlayerViewModel;
+          app.playerView = xhr.response as PlayerViewModel;
           app.playerkey++;
           if (
-            app.player.game.phase === 'end' &&
+            app.playerView.game.phase === 'end' &&
                         window.location.search.includes('&noredirect') === false
           ) {
             app.screen = 'the-end';
@@ -133,7 +133,7 @@ export const mainAppSettings = {
               window.history.replaceState(
                 xhr.response,
                 `${constants.APP_NAME} - Player`,
-                '/the-end?id=' + app.player.id,
+                '/the-end?id=' + app.playerView.id,
               );
             }
           } else {
@@ -142,7 +142,7 @@ export const mainAppSettings = {
               window.history.replaceState(
                 xhr.response,
                 `${constants.APP_NAME} - Game`,
-                '/player?id=' + app.player.id,
+                '/player?id=' + app.playerView.id,
               );
             }
           }

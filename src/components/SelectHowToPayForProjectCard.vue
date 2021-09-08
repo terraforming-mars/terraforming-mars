@@ -18,7 +18,7 @@ import {Units} from '../Units';
 export default Vue.extend({
   name: 'SelectHowToPayForProjectCard',
   props: {
-    player: {
+    playerView: {
       type: Object as () => PlayerViewModel,
     },
     playerinput: {
@@ -36,7 +36,7 @@ export default Vue.extend({
   },
   computed: {
     thisPlayer: function(): PublicPlayerModel {
-      return this.player.thisPlayer;
+      return this.playerView.thisPlayer;
     },
   },
   data(): SelectHowToPayForProjectCardModel {
@@ -46,7 +46,7 @@ export default Vue.extend({
             this.playerinput.cards !== undefined &&
             this.playerinput.cards.length > 0) {
       cards = CardOrderStorage.getOrdered(
-        CardOrderStorage.getCardOrder(this.player.id),
+        CardOrderStorage.getCardOrder(this.playerView.id),
         this.playerinput.cards,
       );
       card = cards[0];

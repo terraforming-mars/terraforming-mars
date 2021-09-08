@@ -138,7 +138,7 @@ describe('PlayerInputFactory', function() {
         localVue: getLocalVue(),
         propsData: {
           players: [],
-          player: {
+          playerView: {
             id: 'foo',
           },
           playerinput,

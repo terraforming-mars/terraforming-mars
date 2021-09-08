@@ -1,16 +1,16 @@
 <template>
         <div id="player-home" :class="(game.turmoil ? 'with-turmoil': '')">
-            <top-bar :player="player" />
+            <top-bar :playerView="playerView" />
 
             <div v-if="game.phase === 'end'">
                 <div class="player_home_block">
                     <DynamicTitle title="This game is over!" :color="thisPlayer.color"/>
-                    <a :href="'/the-end?id='+ player.id" v-i18n>Go to game results</a>
+                    <a :href="'/the-end?id='+ playerView.id" v-i18n>Go to game results</a>
                 </div>
             </div>
 
             <sidebar v-trim-whitespace
-              :acting_player="isPlayerActing(player)"
+              :acting_player="isPlayerActing(playerView)"
               :player_color="thisPlayer.color"
               :generation="game.generation"
               :coloniesCount="game.colonies.length"
@@ -21,7 +21,7 @@
               :turmoil = "game.turmoil"
               :moonData="game.moon"
               :gameOptions = "game.gameOptions"
-              :playerNumber = "player.players.length"
+              :playerNumber = "playerView.players.length"
               :lastSoloGeneration = "game.lastSoloGeneration">
                 <div class="deck-size">{{ game.deckSize }}</div>
             </sidebar>
@@ -49,35 +49,35 @@
 
                     <MoonBoard v-if="game.gameOptions.moonExpansion" :model="game.moon" :hideTiles="hideTiles"/>
 
-                    <div v-if="player.players.length > 1" class="player_home_block--milestones-and-awards">
+                    <div v-if="playerView.players.length > 1" class="player_home_block--milestones-and-awards">
                         <Milestone :milestones_list="game.milestones" />
-                        <Awards :awards="game.awards" />
+                        <Awards :awards="game.awards" show-scores/>
                     </div>
                 </div>
 
-                <players-overview class="player_home_block player_home_block--players nofloat:" :playerView="player" v-trim-whitespace id="shortkey-playersoverview"/>
+                <players-overview class="player_home_block player_home_block--players nofloat:" :playerView="playerView" v-trim-whitespace id="shortkey-playersoverview"/>
 
                 <div class="player_home_block nofloat">
-                    <log-panel :id="player.id" :players="player.players" :generation="game.generation" :lastSoloGeneration="game.lastSoloGeneration" :color="thisPlayer.color"></log-panel>
+                    <log-panel :id="playerView.id" :players="playerView.players" :generation="game.generation" :lastSoloGeneration="game.lastSoloGeneration" :color="thisPlayer.color"></log-panel>
                 </div>
 
                 <div class="player_home_block player_home_block--actions nofloat">
                     <a name="actions" class="player_home_anchor"></a>
                     <dynamic-title title="Actions" :color="thisPlayer.color"/>
-                    <waiting-for v-if="game.phase !== 'end'" :players="player.players" :player="player" :settings="settings" :waitingfor="player.waitingFor"></waiting-for>
+                    <waiting-for v-if="game.phase !== 'end'" :players="playerView.players" :playerView="playerView" :settings="settings" :waitingfor="playerView.waitingFor"></waiting-for>
                 </div>
 
-                <div class="player_home_block player_home_block--hand" v-if="player.draftedCards.length > 0">
+                <div class="player_home_block player_home_block--hand" v-if="playerView.draftedCards.length > 0">
                     <dynamic-title title="Drafted cards" :color="thisPlayer.color" />
-                    <div v-for="card in player.draftedCards" :key="card.name" class="cardbox">
+                    <div v-for="card in playerView.draftedCards" :key="card.name" class="cardbox">
                         <Card :card="card"/>
                     </div>
                 </div>
 
                 <a name="cards" class="player_home_anchor"></a>
-                <div class="player_home_block player_home_block--hand" v-if="player.cardsInHand.length + player.preludeCardsInHand.length > 0" id="shortkey-hand">
-                    <dynamic-title title="Cards In Hand" :color="thisPlayer.color" :withAdditional="true" :additional="(thisPlayer.cardsInHandNbr + player.preludeCardsInHand.length).toString()" />
-                    <sortable-cards :playerId="player.id" :cards="player.preludeCardsInHand.concat(player.cardsInHand)" />
+                <div class="player_home_block player_home_block--hand" v-if="playerView.cardsInHand.length + playerView.preludeCardsInHand.length > 0" id="shortkey-hand">
+                    <dynamic-title title="Cards In Hand" :color="thisPlayer.color" :withAdditional="true" :additional="(thisPlayer.cardsInHandNbr + playerView.preludeCardsInHand.length).toString()" />
+                    <sortable-cards :playerId="playerView.id" :cards="playerView.preludeCardsInHand.concat(playerView.cardsInHand)" />
                 </div>
 
                 <div class="player_home_block player_home_block--cards">
@@ -126,61 +126,61 @@
             <div class="player_home_block player_home_block--setup nofloat"  v-if="!thisPlayer.corporationCard">
 
                 <template v-if="isInitialDraftingPhase()">
-                  <div v-for="card in player.dealtCorporationCards" :key="card.name" class="cardbox">
+                  <div v-for="card in playerView.dealtCorporationCards" :key="card.name" class="cardbox">
                     <Card :card="card"/>
                   </div>
 
-                  <div v-for="card in player.dealtPreludeCards" :key="card.name" class="cardbox">
+                  <div v-for="card in playerView.dealtPreludeCards" :key="card.name" class="cardbox">
                     <Card :card="card"/>
                   </div>
 
-                  <div v-for="card in player.dealtProjectCards" :key="card.name" class="cardbox">
+                  <div v-for="card in playerView.dealtProjectCards" :key="card.name" class="cardbox">
                     <Card :card="card"/>
                   </div>
                 </template>
-                <div class="player_home_block player_home_block--hand" v-if="player.draftedCards.length > 0">
+                <div class="player_home_block player_home_block--hand" v-if="playerView.draftedCards.length > 0">
                     <dynamic-title title="Drafted Cards" :color="thisPlayer.color"/>
-                    <div v-for="card in player.draftedCards" :key="card.name" class="cardbox">
+                    <div v-for="card in playerView.draftedCards" :key="card.name" class="cardbox">
                         <Card :card="card"/>
                     </div>
                 </div>
 
-                <template v-if="player.pickedCorporationCard.length === 1">
+                <template v-if="playerView.pickedCorporationCard.length === 1">
                   <dynamic-title title="Your selected cards:" :color="thisPlayer.color"/>
                   <div>
                     <div class="cardbox">
-                      <Card :card="player.pickedCorporationCard[0]"/>
+                      <Card :card="playerView.pickedCorporationCard[0]"/>
                     </div>
                     <template v-if="game.gameOptions.preludeExtension">
-                      <div v-for="card in player.preludeCardsInHand" :key="card.name" class="cardbox">
+                      <div v-for="card in playerView.preludeCardsInHand" :key="card.name" class="cardbox">
                         <Card :card="card"/>
                       </div>
                     </template>
                   </div>
                   <div>
-                    <div v-for="card in player.cardsInHand" :key="card.name" class="cardbox">
+                    <div v-for="card in playerView.cardsInHand" :key="card.name" class="cardbox">
                       <Card :card="card"/>
                     </div>
                   </div>
                 </template>
 
-                <dynamic-title v-if="player.pickedCorporationCard.length === 0" title="Select initial cards:" :color="thisPlayer.color"/>
-                <waiting-for v-if="game.phase !== 'end'" :players="player.players" :player="player" :settings="settings" :waitingfor="player.waitingFor"></waiting-for>
+                <dynamic-title v-if="playerView.pickedCorporationCard.length === 0" title="Select initial cards:" :color="thisPlayer.color"/>
+                <waiting-for v-if="game.phase !== 'end'" :players="playerView.players" :playerView="playerView" :settings="settings" :waitingfor="playerView.waitingFor"></waiting-for>
 
                 <dynamic-title title="Game details" :color="thisPlayer.color"/>
 
-                <div class="player_home_block" v-if="player.players.length > 1">
+                <div class="player_home_block" v-if="playerView.players.length > 1">
                     <Milestone :show_scores="false" :milestones_list="game.milestones" />
                     <Awards :awards="game.awards" />
                 </div>
 
-                <div class="player_home_block player_home_block--turnorder nofloat" v-if="player.players.length>1">
+                <div class="player_home_block player_home_block--turnorder nofloat" v-if="playerView.players.length>1">
                     <dynamic-title title="Turn order" :color="thisPlayer.color"/>
-                    <div class="player_item" v-for="(p, idx) in player.players" :key="idx" v-trim-whitespace>
+                    <div class="player_item" v-for="(p, idx) in playerView.players" :key="idx" v-trim-whitespace>
                         <div class="player_name_cont" :class="getPlayerCssForTurnOrder(p, true)">
                             <span class="player_number">{{ idx+1 }}.</span><span class="player_name" :class="getPlayerCssForTurnOrder(p, false)" href="#">{{ p.name }}</span>
                         </div>
-                        <div class="player_separator" v-if="idx !== player.players.length - 1">⟶</div>
+                        <div class="player_separator" v-if="idx !== playerView.players.length - 1">⟶</div>
                     </div>
                 </div>
 
@@ -213,7 +213,7 @@
                 <a name="colonies" class="player_home_anchor"></a>
                 <dynamic-title title="Colonies" :color="thisPlayer.color"/>
                 <div class="colonies-fleets-cont" v-if="thisPlayer.corporationCard">
-                    <div class="colonies-player-fleets" v-for="colonyPlayer in player.players" :key="colonyPlayer.color">
+                    <div class="colonies-player-fleets" v-for="colonyPlayer in playerView.players" :key="colonyPlayer.color">
                         <div :class="'colonies-fleet colonies-fleet-'+ colonyPlayer.color" v-for="idx in getFleetsCountRange(colonyPlayer)" :key="idx"></div>
                     </div>
                 </div>
@@ -287,7 +287,7 @@ export default Vue.extend({
     },
   },
   props: {
-    player: {
+    playerView: {
       type: Object as () => PlayerViewModel,
     },
     settings: {
@@ -296,10 +296,10 @@ export default Vue.extend({
   },
   computed: {
     thisPlayer(): PublicPlayerModel {
-      return this.player.thisPlayer;
+      return this.playerView.thisPlayer;
     },
     game(): GameModel {
-      return this.player.game;
+      return this.playerView.game;
     },
   },
   components: {
@@ -349,8 +349,8 @@ export default Vue.extend({
         }
       }
     },
-    isPlayerActing(player: PlayerViewModel) : boolean {
-      return player.players.length > 1 && player.waitingFor !== undefined;
+    isPlayerActing(playerView: PlayerViewModel) : boolean {
+      return playerView.players.length > 1 && playerView.waitingFor !== undefined;
     },
     getPlayerCssForTurnOrder: (
       player: PublicPlayerModel,

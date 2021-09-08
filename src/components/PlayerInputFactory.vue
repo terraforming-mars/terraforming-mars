@@ -1,7 +1,7 @@
 <template>
   <component :is="getComponentName(playerinput.inputType)"
     :players="players"
-    :player="player"
+    :playerView="playerView"
     :playerinput="playerinput"
     :onsave="onsave"
     :showsave="showsave"
@@ -35,7 +35,7 @@ export default Vue.component('player-input-factory', {
     players: {
       type: Array as () => Array<PublicPlayerModel>,
     },
-    player: {
+    playerView: {
       type: Object as () => PlayerViewModel,
     },
     playerinput: {

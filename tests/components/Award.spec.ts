@@ -60,7 +60,7 @@ describe('Award', () => {
     expect(wrapper.text()).to.include(award.award.description);
   });
 
-  it(`colors player's score`, () => {
+  it(`doesn't show scores`, () => {
     const award = createAward({
       funded: true,
       scores: [
@@ -71,6 +71,38 @@ describe('Award', () => {
     const wrapper = mount(Award, {
       localVue: getLocalVue(),
       propsData: {award},
+    });
+
+    expect(wrapper.find('[data-test=player-score]').exists()).to.be.false;
+  });
+
+  it(`shows scores if showScores is passed`, () => {
+    const award = createAward({
+      funded: true,
+      scores: [
+        {playerColor: Color.RED, playerScore: 2},
+      ],
+    });
+
+    const wrapper = mount(Award, {
+      localVue: getLocalVue(),
+      propsData: {award, showScores: true},
+    });
+
+    expect(wrapper.find('[data-test=player-score]').exists()).to.be.true;
+  });
+
+  it(`colors player's score`, () => {
+    const award = createAward({
+      funded: true,
+      scores: [
+        {playerColor: Color.RED, playerScore: 2},
+      ],
+    });
+
+    const wrapper = mount(Award, {
+      localVue: getLocalVue(),
+      propsData: {award, showScores: true},
     });
 
     const scoreWrapper = wrapper.find('[data-test=player-score]');
@@ -90,7 +122,7 @@ describe('Award', () => {
 
     const wrapper = mount(Award, {
       localVue: getLocalVue(),
-      propsData: {award},
+      propsData: {award, showScores: true},
     });
 
     const scores = wrapper.findAll('[data-test=player-score]')

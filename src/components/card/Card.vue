@@ -26,16 +26,16 @@ import Vue from 'vue';
 
 import {ICard} from '@/cards/ICard';
 import {CardModel} from '@/models/CardModel';
-import CardTitle from '@/components/card/CardTitle.vue';
-import CardNumber from '@/components/card/CardNumber.vue';
-import CardResourceCounter from '@/components/card/CardResourceCounter.vue';
-import CardCost from '@/components/card/CardCost.vue';
-import CardExtraContent from '@/components/card/CardExtraContent.vue';
-import CardExpansion from '@/components/card/CardExpansion.vue';
-import CardTags from '@/components/card/CardTags.vue';
+import CardTitle from './CardTitle.vue';
+import CardNumber from './CardNumber.vue';
+import CardResourceCounter from './CardResourceCounter.vue';
+import CardCost from './CardCost.vue';
+import CardExtraContent from './CardExtraContent.vue';
+import CardExpansion from './CardExpansion.vue';
+import CardTags from './CardTags.vue';
 import {CardType} from '@/cards/CardType';
-import CardContent from '@/components/card/CardContent.vue';
-import {CardMetadata} from '@/cards/CardMetadata';
+import CardContent from './CardContent.vue';
+import {ICardMetadata} from '@/cards/ICardMetadata';
 import {Tags} from '@/cards/Tags';
 import {ALL_CARD_MANIFESTS} from '@/cards/AllCards';
 import {GameModule} from '@/GameModule';
@@ -157,7 +157,7 @@ export default Vue.extend({
       }
       return classes.join(' ');
     },
-    getCardMetadata(): CardMetadata | undefined {
+    getCardMetadata(): ICardMetadata | undefined {
       return this.getCard()?.metadata;
     },
     getCardRequirements(): CardRequirements | undefined {

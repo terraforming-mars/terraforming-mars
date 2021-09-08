@@ -8,6 +8,12 @@ export const playerColorClass = (color: string, type: 'shadow' | 'bg' | 'bg_tran
   return `${prefix}${color}`;
 };
 
+/**
+ * Creates a range from 0 to n.
+ *
+ * @param {number} n maximum value in the range.
+ * @return {Array<number>} an Array of numbers from 0 to n, inclusive.
+ */
 export const range = (n: number): Array<number> => Array.from(Array(n).keys());
 export const generateClassString = (classes: Array<string>): string => classes.join(' ').trimStart();
 

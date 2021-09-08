@@ -10,7 +10,6 @@ import {ISpace} from '../../boards/ISpace';
 import {Resources} from '../../Resources';
 import {CardName} from '../../CardName';
 import {IAdjacencyBonus} from '../../ares/IAdjacencyBonus';
-import {CardMetadata} from '../CardMetadata';
 import {CardRenderer} from '../render/CardRenderer';
 import {Units} from '../../Units';
 
@@ -18,7 +17,7 @@ export class MoholeArea extends Card implements IProjectCard {
   constructor(
     name: CardName = CardName.MOHOLE_AREA,
     adjacencyBonus: IAdjacencyBonus | undefined = undefined,
-    metadata: CardMetadata = {
+    metadata = {
       cardNumber: '142',
       renderData: CardRenderer.builder((b) => {
         b.production((pb) => pb.heat(4).digit).br;

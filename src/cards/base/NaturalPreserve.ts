@@ -9,7 +9,6 @@ import {SelectSpace} from '../../inputs/SelectSpace';
 import {Resources} from '../../Resources';
 import {CardName} from '../../CardName';
 import {IAdjacencyBonus} from '../../ares/IAdjacencyBonus';
-import {CardMetadata} from '../CardMetadata';
 import {CardRequirements} from '../CardRequirements';
 import {CardRenderer} from '../render/CardRenderer';
 import {Units} from '../../Units';
@@ -18,7 +17,7 @@ export class NaturalPreserve extends Card implements IProjectCard {
   constructor(
     name: CardName = CardName.NATURAL_PRESERVE,
     adjacencyBonus: IAdjacencyBonus | undefined = undefined,
-    metadata: CardMetadata = {
+    metadata = {
       cardNumber: '044',
       renderData: CardRenderer.builder((b) => {
         b.production((pb) => pb.megacredits(1)).nbsp.tile(TileType.NATURAL_PRESERVE, true).asterix();

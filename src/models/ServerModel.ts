@@ -42,7 +42,6 @@ import {Units} from '../Units';
 import {SelectPartyToSendDelegate} from '../inputs/SelectPartyToSendDelegate';
 import {GameModel} from './GameModel';
 import {Turmoil} from '../turmoil/Turmoil';
-import {isProduction} from '../utils/server';
 
 export class Server {
   public static getGameModel(game: Game): SimpleGameModel {
@@ -55,8 +54,7 @@ export class Server {
         id: player.id,
         name: player.name,
       })),
-      // Disabled for production
-      spectatorId: isProduction() ? undefined : game.spectatorId,
+      spectatorId: game.spectatorId,
       gameOptions: this.getGameOptionsAsModel(game.gameOptions),
       lastSoloGeneration: game.lastSoloGeneration(),
     };
@@ -94,7 +92,7 @@ export class Server {
   public static getPlayerModel(player: Player): PlayerViewModel {
     const game = player.game;
 
-    const players: Array<PublicPlayerModel> = this.getPlayers(game.getPlayers(), game);
+    const players: Array<PublicPlayerModel> = this.getPlayers(game);
     const thisPlayerIndex: number = players.findIndex((p) => p.color === player.color);
     const thisPlayer: PublicPlayerModel = players[thisPlayerIndex];
 
@@ -110,13 +108,16 @@ export class Server {
       preludeCardsInHand: this.getCards(player, player.preludeCardsInHand),
       thisPlayer: thisPlayer,
       waitingFor: this.getWaitingFor(player, player.getWaitingFor()),
-      players: this.getPlayers(game.getPlayers(), game),
+      players: this.getPlayers(game),
     };
   }
 
   public static getSpectatorModel(game: Game): SpectatorModel {
     return {
-      generation: game.generation,
+      color: Color.NEUTRAL,
+      id: game.spectatorId ?? '',
+      game: this.getCommonGameModel(game),
+      players: this.getPlayers(game),
     };
   }
 
@@ -362,7 +363,8 @@ export class Server {
       discount: card.cardDiscount,
     }));
   }
-  public static getPlayers(players: Array<Player>, game: Game): Array<PublicPlayerModel> {
+  public static getPlayers(game: Game): Array<PublicPlayerModel> {
+    const players: Array<Player> = game.getPlayers();
     return players.map((player) => {
       return {
         actionsTakenThisRound: player.actionsTakenThisRound,

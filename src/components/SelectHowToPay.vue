@@ -28,12 +28,8 @@ export default Vue.extend({
     },
   },
   computed: {
-    // TODO(kberg): Remove after everything becomes playerView.
-    player(): PlayerViewModel {
-      return this.playerView;
-    },
     thisPlayer: function(): PublicPlayerModel {
-      return this.player.thisPlayer;
+      return this.playerView.thisPlayer;
     },
   },
   components: {

@@ -16,6 +16,7 @@ import {$t} from '@/directives/i18n';
 
 import * as constants from '@/constants';
 import * as raw_settings from '@/genfiles/settings.json';
+import {SpectatorModel} from '@/models/SpectatorModel';
 
 const dialogPolyfill = require('dialog-polyfill');
 
@@ -32,11 +33,12 @@ interface MainAppData {
             'start-screen' |
             'the-end';
     /**
-     * We set player once the app component has loaded. Vue only
-     * watches properties that exist initially. When we
+     * player or spectator are set once the app component has loaded.
+     * Vue only watches properties that exist initially. When we
      * use this property we can't trigger vue state without
      * a refactor.
      */
+    spectator?: SpectatorModel;
     playerView?: PlayerViewModel;
     playerkey: number;
     settings: typeof raw_settings;
@@ -53,7 +55,7 @@ export const mainAppSettings = {
     settings: raw_settings,
     isServerSideRequestInProgress: false,
     componentsVisibility: {
-      'millestones_list': true,
+      'milestones_list': true,
       'awards_list': true,
       'tags_concise': false,
       'pinned_player_0': false,
@@ -145,7 +147,31 @@ export const mainAppSettings = {
             }
           }
         } else {
-          alert('Unexpected server response');
+          alert('Unexpected server response: ' + xhr.statusText);
+        }
+      };
+      xhr.responseType = 'json';
+      xhr.send();
+    },
+    updateSpectator: function() {
+      const xhr = new XMLHttpRequest();
+      const app = this as unknown as typeof mainAppSettings.data;
+
+      xhr.open('GET', '/api/spectator' + window.location.search);
+      xhr.onerror = function() {
+        alert('Error getting game data');
+      };
+      xhr.onload = () => {
+        if (xhr.status === 200) {
+          app.spectator = xhr.response as SpectatorModel;
+          app.screen = 'spectator-home';
+          window.history.replaceState(
+            xhr.response,
+            `${constants.APP_NAME} - Game`,
+            '/spectator?id=' + app.spectator.id,
+          );
+        } else {
+          alert('Unexpected server response: ' + xhr.statusText);
         }
       };
       xhr.responseType = 'json';
@@ -193,7 +219,7 @@ export const mainAppSettings = {
     } else if (currentPathname === '/help') {
       app.screen = 'help';
     } else if (currentPathname === '/spectator') {
-      app.screen = 'spectator-home';
+      app.updateSpectator();
     } else {
       app.screen = 'start-screen';
     }

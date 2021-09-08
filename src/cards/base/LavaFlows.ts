@@ -13,14 +13,13 @@ import {MAX_TEMPERATURE, REDS_RULING_POLICY_COST} from '../../constants';
 import {PartyHooks} from '../../turmoil/parties/PartyHooks';
 import {PartyName} from '../../turmoil/parties/PartyName';
 import {IAdjacencyBonus} from '../../ares/IAdjacencyBonus';
-import {CardMetadata} from '../CardMetadata';
 import {CardRenderer} from '../render/CardRenderer';
 
 export class LavaFlows extends Card implements IProjectCard {
   constructor(
     name: CardName = CardName.LAVA_FLOWS,
     adjacencyBonus: IAdjacencyBonus | undefined = undefined,
-    metadata: CardMetadata = {
+    metadata = {
       cardNumber: '140',
       renderData: CardRenderer.builder((b) => {
         b.temperature(2).br;

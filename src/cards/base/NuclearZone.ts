@@ -11,7 +11,6 @@ import {MAX_TEMPERATURE, REDS_RULING_POLICY_COST} from '../../constants';
 import {PartyHooks} from '../../turmoil/parties/PartyHooks';
 import {PartyName} from '../../turmoil/parties/PartyName';
 import {IAdjacencyBonus} from '../../ares/IAdjacencyBonus';
-import {CardMetadata} from '../CardMetadata';
 import {CardRenderer} from '../render/CardRenderer';
 
 export class NuclearZone extends Card implements IProjectCard {
@@ -19,7 +18,7 @@ export class NuclearZone extends Card implements IProjectCard {
     name: CardName = CardName.NUCLEAR_ZONE,
     cost: number = 10,
     adjacencyBonus: IAdjacencyBonus | undefined = undefined,
-    metadata: CardMetadata = {
+    metadata = {
       cardNumber: '097',
       renderData: CardRenderer.builder((b) => {
         b.tile(TileType.NUCLEAR_ZONE, true).br;

@@ -10,7 +10,6 @@ import {Resources} from '../../Resources';
 import {CardName} from '../../CardName';
 import {Board} from '../../boards/Board';
 import {IAdjacencyBonus} from '../../ares/IAdjacencyBonus';
-import {CardMetadata} from '../CardMetadata';
 import {CardRenderer} from '../render/CardRenderer';
 import {CardRenderDynamicVictoryPoints} from '../render/CardRenderDynamicVictoryPoints';
 import {Units} from '../../Units';
@@ -19,7 +18,7 @@ export class CommercialDistrict extends Card implements IProjectCard {
   constructor(
     name: CardName = CardName.COMMERCIAL_DISTRICT,
     adjacencyBonus: IAdjacencyBonus | undefined = undefined,
-    metadata: CardMetadata = {
+    metadata = {
       cardNumber: '085',
       description: 'Place this tile. Decrease your energy production 1 step and increase your M€ production 4 steps.',
       renderData: CardRenderer.builder((b) => {

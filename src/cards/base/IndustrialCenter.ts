@@ -12,14 +12,13 @@ import {CardName} from '../../CardName';
 import {Board} from '../../boards/Board';
 import {SelectHowToPayDeferred} from '../../deferredActions/SelectHowToPayDeferred';
 import {IAdjacencyBonus} from '../../ares/IAdjacencyBonus';
-import {CardMetadata} from '../CardMetadata';
 import {CardRenderer} from '../render/CardRenderer';
 
 export class IndustrialCenter extends Card implements IActionCard, IProjectCard {
   constructor(
     name: CardName = CardName.INDUSTRIAL_CENTER,
     adjacencyBonus: IAdjacencyBonus | undefined = undefined,
-    metadata: CardMetadata = {
+    metadata = {
       cardNumber: '123',
       renderData: CardRenderer.builder((b) => {
         b.action('Spend 7 M€ to increase your steel production 1 step.', (eb) => {

@@ -10,14 +10,13 @@ import {ISpace} from '../../boards/ISpace';
 import {CardName} from '../../CardName';
 import {SelectHowToPayDeferred} from '../../deferredActions/SelectHowToPayDeferred';
 import {IAdjacencyBonus} from '../../ares/IAdjacencyBonus';
-import {CardMetadata} from '../CardMetadata';
 import {CardRenderer} from '../render/CardRenderer';
 
 export class RestrictedArea extends Card implements IActionCard, IProjectCard {
   constructor(
     name: CardName = CardName.RESTRICTED_AREA,
     adjacencyBonus: IAdjacencyBonus | undefined = undefined,
-    metadata: CardMetadata = {
+    metadata = {
       cardNumber: '199',
       renderData: CardRenderer.builder((b) => {
         b.action('Spend 2 M€ to draw a card.', (eb) => {

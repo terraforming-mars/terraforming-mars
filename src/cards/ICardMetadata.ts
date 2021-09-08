@@ -1,8 +1,8 @@
-import {CardRenderer} from '../cards/render/CardRenderer';
+import {CardRenderer} from './render/CardRenderer';
 import {CardRenderDynamicVictoryPoints} from './render/CardRenderDynamicVictoryPoints';
 import {ICardRenderDescription} from './render/ICardRenderDescription';
 
-export interface CardMetadata {
+export interface ICardMetadata {
   cardNumber: string;
   description?: string | ICardRenderDescription;
   renderData?: CardRenderer;

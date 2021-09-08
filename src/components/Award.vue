@@ -6,7 +6,7 @@
 
     <div class="ma-name ma-name--awards award-block" :class="maAwardClass" v-i18n>
       {{ award.award.name }}
-      <div class="ma-scores player_home_block--milestones-and-awards-scores">
+      <div class="ma-scores player_home_block--milestones-and-awards-scores" v-if="showScores">
         <p
           v-for="score in sortedScores"
           :key="score.playerColor"
@@ -34,6 +34,10 @@ export default Vue.extend({
     award: {
       type: Object as () => FundedAwardModel,
       required: true,
+    },
+    showScores: {
+      type: Boolean,
+      default: false,
     },
   },
   data() {

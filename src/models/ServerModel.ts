@@ -42,7 +42,6 @@ import {Units} from '../Units';
 import {SelectPartyToSendDelegate} from '../inputs/SelectPartyToSendDelegate';
 import {GameModel} from './GameModel';
 import {Turmoil} from '../turmoil/Turmoil';
-import {isProduction} from '../utils/server';
 
 export class Server {
   public static getSimpleGameModel(game: Game): SimpleGameModel {
@@ -55,8 +54,7 @@ export class Server {
         id: player.id,
         name: player.name,
       })),
-      // Disabled for production
-      spectatorId: isProduction() ? undefined : game.spectatorId,
+      spectatorId: game.spectatorId,
       gameOptions: this.getGameOptionsAsModel(game.gameOptions),
       lastSoloGeneration: game.lastSoloGeneration(),
     };
@@ -116,7 +114,10 @@ export class Server {
 
   public static getSpectatorModel(game: Game): SpectatorModel {
     return {
-      generation: game.generation,
+      color: Color.NEUTRAL,
+      id: game.spectatorId ?? '',
+      game: this.getGameModel(game),
+      players: game.getPlayers().map(this.getPlayer),
     };
   }
 

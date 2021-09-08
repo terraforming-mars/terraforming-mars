@@ -10,7 +10,7 @@ import {SelectPlayer} from '../inputs/SelectPlayer';
 import {AndOptions} from '../inputs/AndOptions';
 import {SelectCard} from '../inputs/SelectCard';
 import {SelectSpace} from '../inputs/SelectSpace';
-import {CardMetadata} from './CardMetadata';
+import {ICardMetadata} from './ICardMetadata';
 import {CardName} from '../CardName';
 import {SelectHowToPayDeferred} from '../deferredActions/SelectHowToPayDeferred';
 import {Card} from './Card';
@@ -20,7 +20,7 @@ import {Units} from '../Units';
 interface StaticStandardProjectCardProperties {
   name: CardName,
   cost: number,
-  metadata: CardMetadata,
+  metadata: ICardMetadata,
   reserveUnits?: Units,
 }
 

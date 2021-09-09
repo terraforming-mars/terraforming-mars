@@ -2,8 +2,8 @@ import {shallowMount} from '@vue/test-utils';
 import {LANGUAGES} from '@/constants';
 import {expect} from 'chai';
 import * as sinon from 'sinon';
-import LanguageSwitcher from '@/components/LanguageSwitcher.vue';
-import {PreferencesManager} from '@/components/PreferencesManager';
+import LanguageSwitcher from '@/client/components/LanguageSwitcher.vue';
+import {PreferencesManager} from '@/client/components/PreferencesManager';
 
 describe('LanguageSwitcher', () => {
   it('renders all available languages', () => {

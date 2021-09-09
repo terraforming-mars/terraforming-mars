@@ -2,7 +2,7 @@
 import {createLocalVue, mount} from '@vue/test-utils';
 
 import {expect} from 'chai';
-import AndOptions from '@/components/AndOptions.vue';
+import AndOptions from '@/client/components/AndOptions.vue';
 import {PlayerInputTypes} from '@/PlayerInputTypes';
 
 describe('AndOptions', function() {

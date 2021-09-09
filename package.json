@@ -64,7 +64,7 @@
     "extends": "@istanbuljs/nyc-config-typescript"
   },
   "scripts": {
-    "build": "npm run compile && npm run webpack && npm run lint",
+    "build": "npm run compile && npm run webpack",
     "prebuild": "npm run makeCss",
     "clean": "rm -r ./build/ ./src/genfiles/ || true",
     "compile": "tsc --build src/tsconfig.json",

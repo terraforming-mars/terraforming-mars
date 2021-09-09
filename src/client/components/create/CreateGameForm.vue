@@ -404,7 +404,7 @@ import {Color} from '@/Color';
 import {BoardName} from '@/boards/BoardName';
 import {CardName} from '@/CardName';
 import CorporationsFilter from '@/client/components/create/CorporationsFilter.vue';
-import {translateTextWithParams} from '@/directives/i18n';
+import {translateTextWithParams} from '@/client/directives/i18n';
 import {IGameData} from '@/database/IDatabase';
 import ColoniesFilter from '@/client/components/create/ColoniesFilter.vue';
 import {ColonyName} from '@/colonies/ColonyName';
@@ -416,7 +416,7 @@ import {GameId} from '@/Game';
 import {AgendaStyle} from '@/turmoil/PoliticalAgendas';
 
 import * as constants from '@/constants';
-import {$t} from '@/directives/i18n';
+import {$t} from '@/client/directives/i18n';
 
 export interface CreateGameModel {
     constants: typeof constants;

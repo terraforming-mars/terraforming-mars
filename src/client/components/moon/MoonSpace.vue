@@ -15,7 +15,7 @@
 import Vue from 'vue';
 import {SpaceModel} from '@/models/SpaceModel';
 import {TileType} from '@/TileType';
-import {$t} from '@/directives/i18n';
+import {$t} from '@/client/directives/i18n';
 import Bonus from '@/client/components/Bonus.vue';
 
 const tileTypeToCssClass = new Map<TileType, string>([

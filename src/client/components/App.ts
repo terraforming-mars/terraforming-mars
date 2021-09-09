@@ -12,7 +12,7 @@ import DebugUI from '@/client/components/DebugUI.vue';
 import {SimpleGameModel} from '@/models/SimpleGameModel';
 import Help from '@/client/components/help/Help.vue';
 
-import {$t} from '@/directives/i18n';
+import {$t} from '@/client/directives/i18n';
 
 import * as constants from '@/constants';
 import * as raw_settings from '@/genfiles/settings.json';

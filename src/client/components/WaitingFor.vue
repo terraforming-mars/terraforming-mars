@@ -15,7 +15,7 @@
 import Vue from 'vue';
 
 import {mainAppSettings} from '@/client/components/App';
-import {$t} from '@/directives/i18n';
+import {$t} from '@/client/directives/i18n';
 import {PlayerInputModel} from '@/models/PlayerInputModel';
 import {PlayerViewModel, PublicPlayerModel} from '@/models/PlayerModel';
 import {PreferencesManager} from '@/client/components/PreferencesManager';

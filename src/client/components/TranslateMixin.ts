@@ -1,4 +1,4 @@
-import {$t} from '@/directives/i18n';
+import {$t} from '@/client/directives/i18n';
 
 /*
 This mixin indended to be used in templates

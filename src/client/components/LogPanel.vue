@@ -41,7 +41,7 @@ import {LogMessageData} from '@/LogMessageData';
 import {LogMessageDataType} from '@/LogMessageDataType';
 import {PublicPlayerModel} from '@/models/PlayerModel';
 import Card from '@/client/components/card/Card.vue';
-import {$t} from '@/directives/i18n';
+import {$t} from '@/client/directives/i18n';
 import {CardFinder} from '@/CardFinder';
 import {ICard} from '@/cards/ICard';
 import {CardName} from '@/CardName';

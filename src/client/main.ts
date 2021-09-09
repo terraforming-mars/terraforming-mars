@@ -1,7 +1,7 @@
 import Vue from 'vue';
 
-import {translateTextNode} from '@/directives/i18n';
-import {trimEmptyTextNodes} from '@/directives/TrimWhitespace';
+import {translateTextNode} from '@/client/directives/i18n';
+import {trimEmptyTextNodes} from '@/client/directives/TrimWhitespace';
 import {mainAppSettings} from '@/client/components/App';
 import {PreferencesManager} from '@/client/components/PreferencesManager';
 

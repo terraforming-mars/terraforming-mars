@@ -80,7 +80,7 @@
 
 import Vue from 'vue';
 import {PartyName} from '@/turmoil/parties/PartyName';
-import {$t} from '@/directives/i18n';
+import {$t} from '@/client/directives/i18n';
 import {TurmoilModel} from '@/models/TurmoilModel';
 import {BonusId} from '@/turmoil/Bonus';
 import {PolicyId} from '@/turmoil/Policy';

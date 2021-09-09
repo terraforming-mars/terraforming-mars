@@ -11,7 +11,7 @@
 
 import Vue from 'vue';
 import {CardType} from '@/cards/CardType';
-import {translateText} from '@/directives/i18n';
+import {translateText} from '@/client/directives/i18n';
 import CardCorporationLogo from '@/client/components/card/CardCorporationLogo.vue';
 
 export default Vue.extend({

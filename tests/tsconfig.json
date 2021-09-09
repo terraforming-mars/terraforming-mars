@@ -4,11 +4,6 @@
         "types": ["node", "mocha", "chai"]
     },
     "extends": "../tsconfig.json",
-    "references": [
-        {
-            "path": "../src/tsconfig.json"
-        }
-    ],
     "include": [
         "utils/setup.ts",
         "**/*.spec.ts",

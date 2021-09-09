@@ -33,7 +33,7 @@ export class LoadGame extends Handler {
             ctx.route.notFound(req, res, 'game_id not found');
             return;
           }
-          ctx.route.writeJson(res, Server.getGameModel(game));
+          ctx.route.writeJson(res, Server.getSimpleGameModel(game));
         });
       } catch (error) {
         ctx.route.internalServerError(req, res, error);

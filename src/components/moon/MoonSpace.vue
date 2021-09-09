@@ -13,10 +13,10 @@
 
 <script lang="ts">
 import Vue from 'vue';
-import {SpaceModel} from '../../models/SpaceModel';
-import {TileType} from '../../TileType';
-import {$t} from '../../directives/i18n';
-import Bonus from '../Bonus.vue';
+import {SpaceModel} from '@/models/SpaceModel';
+import {TileType} from '@/TileType';
+import {$t} from '@/directives/i18n';
+import Bonus from '@/components/Bonus.vue';
 
 const tileTypeToCssClass = new Map<TileType, string>([
   [TileType.MOON_ROAD, 'road'],

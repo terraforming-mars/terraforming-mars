@@ -10,8 +10,8 @@
 <script lang="ts">
 
 import Vue from 'vue';
-import {CardRenderDynamicVictoryPoints} from '../../cards/render/CardRenderDynamicVictoryPoints';
-import CardRenderItemComponent from './CardRenderItemComponent.vue';
+import {CardRenderDynamicVictoryPoints} from '@/cards/render/CardRenderDynamicVictoryPoints';
+import CardRenderItemComponent from '@/components/card/CardRenderItemComponent.vue';
 
 export default Vue.extend({
   name: 'CardVictoryPoints',

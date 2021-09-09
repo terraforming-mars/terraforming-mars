@@ -34,29 +34,29 @@
 <script lang="ts">
 
 import Vue from 'vue';
-import {CardType} from '../cards/CardType';
-import {LogMessage} from '../LogMessage';
-import {LogMessageType} from '../LogMessageType';
-import {LogMessageData} from '../LogMessageData';
-import {LogMessageDataType} from '../LogMessageDataType';
-import {PublicPlayerModel} from '../models/PlayerModel';
-import Card from './card/Card.vue';
-import {$t} from '../directives/i18n';
-import {CardFinder} from './../CardFinder';
-import {ICard} from '../cards/ICard';
-import {CardName} from '../CardName';
-import {TileType} from '../TileType';
-import {playerColorClass} from '../utils/utils';
-import {Color} from '../Color';
-import {SoundManager} from './SoundManager';
-import {PreferencesManager} from './PreferencesManager';
-import {GlobalEventName} from '../turmoil/globalEvents/GlobalEventName';
-import GlobalEvent from './GlobalEvent.vue';
-import {getGlobalEventByName} from '../turmoil/globalEvents/GlobalEventDealer';
-import {GlobalEventModel} from '../models/TurmoilModel';
-import {PartyName} from '../turmoil/parties/PartyName';
-import Button from './common/Button.vue';
-import {Log} from '../Log';
+import {CardType} from '@/cards/CardType';
+import {LogMessage} from '@/LogMessage';
+import {LogMessageType} from '@/LogMessageType';
+import {LogMessageData} from '@/LogMessageData';
+import {LogMessageDataType} from '@/LogMessageDataType';
+import {PublicPlayerModel} from '@/models/PlayerModel';
+import Card from '@/components/card/Card.vue';
+import {$t} from '@/directives/i18n';
+import {CardFinder} from '@/CardFinder';
+import {ICard} from '@/cards/ICard';
+import {CardName} from '@/CardName';
+import {TileType} from '@/TileType';
+import {playerColorClass} from '@/utils/utils';
+import {Color} from '@/Color';
+import {SoundManager} from '@/components/SoundManager';
+import {PreferencesManager} from '@/components/PreferencesManager';
+import {GlobalEventName} from '@/turmoil/globalEvents/GlobalEventName';
+import GlobalEvent from '@/components/GlobalEvent.vue';
+import {getGlobalEventByName} from '@/turmoil/globalEvents/GlobalEventDealer';
+import {GlobalEventModel} from '@/models/TurmoilModel';
+import {PartyName} from '@/turmoil/parties/PartyName';
+import Button from '@/components/common/Button.vue';
+import {Log} from '@/Log';
 
 let logRequest: XMLHttpRequest | undefined;
 

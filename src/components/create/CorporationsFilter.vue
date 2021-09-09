@@ -32,9 +32,9 @@
 <script lang="ts">
 import Vue from 'vue';
 
-import {CardName} from '../../CardName';
-import {ALL_CARD_MANIFESTS, MANIFEST_BY_MODULE} from '../../cards/AllCards';
-import {GameModule} from '../../GameModule';
+import {CardName} from '@/CardName';
+import {ALL_CARD_MANIFESTS, MANIFEST_BY_MODULE} from '@/cards/AllCards';
+import {GameModule} from '@/GameModule';
 
 function corpCardNames(module: GameModule): Array<CardName> {
   const manifest = MANIFEST_BY_MODULE.get(module);

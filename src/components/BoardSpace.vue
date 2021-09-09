@@ -11,11 +11,11 @@
 <script lang="ts">
 
 import Vue from 'vue';
-import Bonus from './Bonus.vue';
-import {SpaceModel} from '../models/SpaceModel';
-import {SpaceType} from '../SpaceType';
-import {TileType} from '../TileType';
-import {$t} from '../directives/i18n';
+import Bonus from '@/components/Bonus.vue';
+import {SpaceModel} from '@/models/SpaceModel';
+import {SpaceType} from '@/SpaceType';
+import {TileType} from '@/TileType';
+import {$t} from '@/directives/i18n';
 
 const tileTypeToCssClass = new Map<TileType, string>([
   [TileType.COMMERCIAL_DISTRICT, 'commercial_district'],

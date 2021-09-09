@@ -54,10 +54,10 @@
 
 <script lang="ts">
 import Vue from 'vue';
-import Award from './Award.vue';
-import {AWARD_COSTS} from '../constants';
-import {FundedAwardModel} from '../models/FundedAwardModel';
-import {PreferencesManager} from './PreferencesManager';
+import Award from '@/components/Award.vue';
+import {AWARD_COSTS} from '@/constants';
+import {FundedAwardModel} from '@/models/FundedAwardModel';
+import {PreferencesManager} from '@/components/PreferencesManager';
 
 export default Vue.extend({
   name: 'Awards',

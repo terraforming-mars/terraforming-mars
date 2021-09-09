@@ -1,22 +1,22 @@
-import GameEnd from './GameEnd.vue';
-import CreateGameForm from './create/CreateGameForm.vue';
-import GameHome from './GameHome.vue';
-import GamesOverview from './GamesOverview.vue';
-import PlayerHome from './PlayerHome.vue';
-import PlayerInputFactory from './PlayerInputFactory.vue';
-import SpectatorHome from './SpectatorHome.vue';
-import {PlayerViewModel} from '../models/PlayerModel';
-import StartScreen from './StartScreen.vue';
-import LoadGameForm from './LoadGameForm.vue';
-import DebugUI from './DebugUI.vue';
-import {SimpleGameModel} from '../models/SimpleGameModel';
-import Help from './help/Help.vue';
+import GameEnd from '@/components/GameEnd.vue';
+import CreateGameForm from '@/components/create/CreateGameForm.vue';
+import GameHome from '@/components/GameHome.vue';
+import GamesOverview from '@/components/GamesOverview.vue';
+import PlayerHome from '@/components/PlayerHome.vue';
+import PlayerInputFactory from '@/components/PlayerInputFactory.vue';
+import SpectatorHome from '@/components/SpectatorHome.vue';
+import {PlayerViewModel} from '@/models/PlayerModel';
+import StartScreen from '@/components/StartScreen.vue';
+import LoadGameForm from '@/components/LoadGameForm.vue';
+import DebugUI from '@/components/DebugUI.vue';
+import {SimpleGameModel} from '@/models/SimpleGameModel';
+import Help from '@/components/help/Help.vue';
 
-import {$t} from '../directives/i18n';
+import {$t} from '@/directives/i18n';
 
-import * as constants from '../constants';
-import * as raw_settings from '../genfiles/settings.json';
-import {SpectatorModel} from '../models/SpectatorModel';
+import * as constants from '@/constants';
+import * as raw_settings from '@/genfiles/settings.json';
+import {SpectatorModel} from '@/models/SpectatorModel';
 
 const dialogPolyfill = require('dialog-polyfill');
 

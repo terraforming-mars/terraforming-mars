@@ -1,7 +1,7 @@
 import Vue from 'vue';
 import {Wrapper} from '@vue/test-utils';
 import {expect} from 'chai';
-import {SelectHowToPayModel} from '../../src/components/PaymentWidgetMixin';
+import {SelectHowToPayModel} from '@/components/PaymentWidgetMixin';
 
 export type Unit = 'heat' | 'steel' | 'titanium' | 'floaters' | 'microbes' | 'megaCredits' | 'science';
 

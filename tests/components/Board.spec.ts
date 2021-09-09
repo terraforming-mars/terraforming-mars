@@ -1,9 +1,9 @@
 import {createLocalVue, shallowMount} from '@vue/test-utils';
 import {expect} from 'chai';
-import Board from '../../src/components/Board.vue';
-import BoardSpace from '../../src/components/BoardSpace.vue';
-import {SpaceModel} from '../../src/models/SpaceModel';
-import {SpaceType} from '../../src/SpaceType';
+import Board from '@/components/Board.vue';
+import BoardSpace from '@/components/BoardSpace.vue';
+import {SpaceModel} from '@/models/SpaceModel';
+import {SpaceType} from '@/SpaceType';
 
 const spaces: SpaceModel[] = [
   {

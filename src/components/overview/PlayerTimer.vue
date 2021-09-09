@@ -12,8 +12,8 @@
 
 <script lang="ts">
 import Vue from 'vue';
-import {Timer} from '../../Timer';
-import {TimerModel} from '../../models/TimerModel';
+import {Timer} from '@/Timer';
+import {TimerModel} from '@/models/TimerModel';
 
 export default Vue.extend({
   name: 'PlayerTimer',

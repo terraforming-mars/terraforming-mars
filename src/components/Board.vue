@@ -150,13 +150,13 @@
 
 <script lang="ts">
 import Vue from 'vue';
-import * as constants from '../constants';
-import BoardSpace from './BoardSpace.vue';
-import {IAresData} from '../ares/IAresData';
-import {SpaceModel} from '../models/SpaceModel';
-import {SpaceType} from '../SpaceType';
-import {SpaceId} from '../boards/ISpace';
-import {TranslateMixin} from './TranslateMixin';
+import * as constants from '@/constants';
+import BoardSpace from '@/components/BoardSpace.vue';
+import {IAresData} from '@/ares/IAresData';
+import {SpaceModel} from '@/models/SpaceModel';
+import {SpaceType} from '@/SpaceType';
+import {SpaceId} from '@/boards/ISpace';
+import {TranslateMixin} from '@/components/TranslateMixin';
 
 class GlobalParamLevel {
   constructor(public value: number, public isActive: boolean, public strValue: string) {

@@ -229,30 +229,30 @@
 <script lang="ts">
 import Vue from 'vue';
 
-import Board from './Board.vue';
-import Card from './card/Card.vue';
-import Milestone from './Milestone.vue';
-import Awards from './Awards.vue';
-import PlayersOverview from './overview/PlayersOverview.vue';
-import WaitingFor from './WaitingFor.vue';
-import Sidebar from './Sidebar.vue';
-import Colony from './Colony.vue';
-import LogPanel from './LogPanel.vue';
-import {PlayerMixin} from './PlayerMixin';
-import Turmoil from './Turmoil.vue';
-import {playerColorClass} from '../utils/utils';
-import DynamicTitle from './common/DynamicTitle.vue';
-import SortableCards from './SortableCards.vue';
-import TopBar from './TopBar.vue';
-import {PreferencesManager} from './PreferencesManager';
-import {KeyboardNavigation} from '../../src/KeyboardNavigation';
-import MoonBoard from './moon/MoonBoard.vue';
-import {Phase} from '../../src/Phase';
-import StackedCards from './StackedCards.vue';
-import {GameModel} from '../models/GameModel';
-import {PlayerViewModel, PublicPlayerModel} from '../models/PlayerModel';
+import Board from '@/components/Board.vue';
+import Card from '@/components/card/Card.vue';
+import Milestone from '@/components/Milestone.vue';
+import Awards from '@/components/Awards.vue';
+import PlayersOverview from '@/components/overview/PlayersOverview.vue';
+import WaitingFor from '@/components/WaitingFor.vue';
+import Sidebar from '@/components/Sidebar.vue';
+import Colony from '@/components/Colony.vue';
+import LogPanel from '@/components/LogPanel.vue';
+import {PlayerMixin} from '@/components/PlayerMixin';
+import Turmoil from '@/components/Turmoil.vue';
+import {playerColorClass} from '@/utils/utils';
+import DynamicTitle from '@/components/common/DynamicTitle.vue';
+import SortableCards from '@/components/SortableCards.vue';
+import TopBar from '@/components/TopBar.vue';
+import {PreferencesManager} from '@/components/PreferencesManager';
+import {KeyboardNavigation} from '@/KeyboardNavigation';
+import MoonBoard from '@/components/moon/MoonBoard.vue';
+import {Phase} from '@/Phase';
+import StackedCards from '@/components/StackedCards.vue';
+import {GameModel} from '@/models/GameModel';
+import {PlayerViewModel, PublicPlayerModel} from '@/models/PlayerModel';
 
-import * as raw_settings from '../genfiles/settings.json';
+import * as raw_settings from '@/genfiles/settings.json';
 
 export interface PlayerHomeModel {
   showActiveCards: boolean;

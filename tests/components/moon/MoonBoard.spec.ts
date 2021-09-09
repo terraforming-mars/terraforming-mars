@@ -1,9 +1,9 @@
 import {createLocalVue, shallowMount} from '@vue/test-utils';
 import {expect} from 'chai';
-import MoonBoard from '../../../src/components/moon/MoonBoard.vue';
-import MoonSpace from '../../../src/components/moon/MoonSpace.vue';
-import {MoonModel} from '../../../src/models/MoonModel';
-import {SpaceType} from '../../../src/SpaceType';
+import MoonBoard from '@/components/moon/MoonBoard.vue';
+import MoonSpace from '@/components/moon/MoonSpace.vue';
+import {MoonModel} from '@/models/MoonModel';
+import {SpaceType} from '@/SpaceType';
 
 const model: MoonModel = {
   colonyRate: 0,

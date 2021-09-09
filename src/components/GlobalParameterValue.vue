@@ -15,9 +15,9 @@
 <script lang="ts">
 
 import Vue from 'vue';
-import {TranslateMixin} from './TranslateMixin';
-import {MAX_OCEAN_TILES, MAX_OXYGEN_LEVEL, MAX_TEMPERATURE, MAX_VENUS_SCALE} from '../constants';
-import {GlobalParameter} from '../GlobalParameter';
+import {TranslateMixin} from '@/components/TranslateMixin';
+import {MAX_OCEAN_TILES, MAX_OXYGEN_LEVEL, MAX_TEMPERATURE, MAX_VENUS_SCALE} from '@/constants';
+import {GlobalParameter} from '@/GlobalParameter';
 
 export default Vue.extend({
   name: 'global-parameter-value',

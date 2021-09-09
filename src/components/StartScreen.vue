@@ -26,9 +26,9 @@
 <script lang="ts">
 
 import Vue from 'vue';
-import LanguageSwitcher from './LanguageSwitcher.vue';
+import LanguageSwitcher from '@/components/LanguageSwitcher.vue';
 
-import * as raw_settings from '../genfiles/settings.json';
+import * as raw_settings from '@/genfiles/settings.json';
 
 export default Vue.extend({
   name: 'start-screen',

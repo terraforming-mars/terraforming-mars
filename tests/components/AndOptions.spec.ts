@@ -2,8 +2,8 @@
 import {createLocalVue, mount} from '@vue/test-utils';
 
 import {expect} from 'chai';
-import AndOptions from '../../src/components/AndOptions.vue';
-import {PlayerInputTypes} from '../../src/PlayerInputTypes';
+import AndOptions from '@/components/AndOptions.vue';
+import {PlayerInputTypes} from '@/PlayerInputTypes';
 
 describe('AndOptions', function() {
   function getLocalVue() {

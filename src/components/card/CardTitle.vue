@@ -10,9 +10,9 @@
 <script lang="ts">
 
 import Vue from 'vue';
-import {CardType} from '../../cards/CardType';
-import {translateText} from '../../directives/i18n';
-import CardCorporationLogo from './CardCorporationLogo.vue';
+import {CardType} from '@/cards/CardType';
+import {translateText} from '@/directives/i18n';
+import CardCorporationLogo from '@/components/card/CardCorporationLogo.vue';
 
 export default Vue.extend({
   name: 'CardTitle',

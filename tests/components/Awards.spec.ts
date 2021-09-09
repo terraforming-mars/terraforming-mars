@@ -1,10 +1,10 @@
 
 import {createLocalVue, shallowMount} from '@vue/test-utils';
 import {expect} from 'chai';
-import Awards from '../../src/components/Awards.vue';
-import Award from '../../src/components/Award.vue';
-import {FundedAwardModel} from '../../src/models/FundedAwardModel';
-import {AWARD_COSTS} from '../../src/constants';
+import Awards from '@/components/Awards.vue';
+import Award from '@/components/Award.vue';
+import {FundedAwardModel} from '@/models/FundedAwardModel';
+import {AWARD_COSTS} from '@/constants';
 
 function getLocalVue() {
   const localVue = createLocalVue();

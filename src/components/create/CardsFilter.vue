@@ -25,10 +25,10 @@
 
 <script lang="ts">
 import Vue from 'vue';
-import {CardName} from '../../CardName';
-import {ALL_PRELUDE_CARD_NAMES, ALL_PROJECT_CARD_NAMES} from '../../cards/AllCards';
-import {TranslateMixin} from '../TranslateMixin';
-import Button from '../common/Button.vue';
+import {CardName} from '@/CardName';
+import {ALL_PRELUDE_CARD_NAMES, ALL_PROJECT_CARD_NAMES} from '@/cards/AllCards';
+import {TranslateMixin} from '@/components/TranslateMixin';
+import Button from '@/components/common/Button.vue';
 
 const allItems: Array<CardName> = ALL_PROJECT_CARD_NAMES.concat(ALL_PRELUDE_CARD_NAMES).sort();
 

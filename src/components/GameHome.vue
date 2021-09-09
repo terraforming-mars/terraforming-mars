@@ -30,12 +30,12 @@
 <script lang="ts">
 
 import Vue from 'vue';
-import {SimpleGameModel} from '../models/SimpleGameModel';
-import Button from '../components/common/Button.vue';
-import {playerColorClass} from '../utils/utils';
-import GameSetupDetail from '../components/GameSetupDetail.vue';
-import {SpectatorId} from '../Game';
-import {PlayerId} from '../Player';
+import {SimpleGameModel} from '@/models/SimpleGameModel';
+import Button from '@/components/common/Button.vue';
+import {playerColorClass} from '@/utils/utils';
+import GameSetupDetail from '@/components/GameSetupDetail.vue';
+import {SpectatorId} from '@/Game';
+import {PlayerId} from '@/Player';
 
 // taken from https://stackoverflow.com/a/46215202/83336
 // The solution to copying to the clipboard in this case is

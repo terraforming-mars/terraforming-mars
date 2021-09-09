@@ -5,7 +5,7 @@
 <script lang="ts">
 
 import Vue from 'vue';
-import {Tags} from '../../cards/Tags';
+import {Tags} from '@/cards/Tags';
 
 export default Vue.extend({
   name: 'CardTag',

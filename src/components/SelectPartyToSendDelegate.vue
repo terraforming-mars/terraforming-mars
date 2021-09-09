@@ -14,11 +14,11 @@
 </template>
 <script lang="ts">
 import Vue from 'vue';
-import Button from '../components/common/Button.vue';
-import {PlayerInputModel} from '../models/PlayerInputModel';
-import Party from './Party.vue';
-import {TranslateMixin} from './TranslateMixin';
-import {PartyName} from '../turmoil/parties/PartyName';
+import Button from '@/components/common/Button.vue';
+import {PlayerInputModel} from '@/models/PlayerInputModel';
+import Party from '@/components/Party.vue';
+import {TranslateMixin} from '@/components/TranslateMixin';
+import {PartyName} from '@/turmoil/parties/PartyName';
 
 export default Vue.extend({
   name: 'SelectPartyToSendDelegate',

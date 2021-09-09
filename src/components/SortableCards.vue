@@ -1,8 +1,8 @@
 <script lang="ts">
 import Vue from 'vue';
-import Card from './card/Card.vue';
-import {CardModel} from '../models/CardModel';
-import {CardOrderStorage} from './CardOrderStorage';
+import Card from '@/components/card/Card.vue';
+import {CardModel} from '@/models/CardModel';
+import {CardOrderStorage} from '@/components/CardOrderStorage';
 
 export default Vue.extend({
   name: 'SortableCards',

@@ -12,19 +12,19 @@
 <script lang="ts">
 
 import Vue from 'vue';
-import {CardRenderItem} from '../../cards/render/CardRenderItem';
-import {isIDescription} from '../../cards/render/ICardRenderDescription';
-import {CardRenderSymbol} from '../../cards/render/CardRenderSymbol';
-import {CardRenderProductionBox, ItemType} from '../../cards/render/CardRenderer';
-import {CardRenderTile} from '../../cards/render/CardRenderer';
-import CardRenderItemComponent from './CardRenderItemComponent.vue';
-import CardProductionBoxComponent from './CardProductionBoxComponent.vue';
-import CardRenderEffectBoxComponent from './CardRenderEffectBoxComponent.vue';
-import CardRenderCorpBoxComponent from './CardRenderCorpBoxComponent.vue';
-import CardRenderTileComponent from './CardRenderTileComponent.vue';
-import CardDescription from './CardDescription.vue';
-import CardRenderSymbolComponent from './CardRenderSymbolComponent.vue';
-import {CardRenderEffect, CardRenderCorpBoxEffect, CardRenderCorpBoxAction} from '../../cards/render/CardRenderer';
+import {CardRenderItem} from '@/cards/render/CardRenderItem';
+import {isIDescription} from '@/cards/render/ICardRenderDescription';
+import {CardRenderSymbol} from '@/cards/render/CardRenderSymbol';
+import {CardRenderProductionBox, ItemType} from '@/cards/render/CardRenderer';
+import {CardRenderTile} from '@/cards/render/CardRenderer';
+import CardRenderItemComponent from '@/components/card/CardRenderItemComponent.vue';
+import CardProductionBoxComponent from '@/components/card/CardProductionBoxComponent.vue';
+import CardRenderEffectBoxComponent from '@/components/card/CardRenderEffectBoxComponent.vue';
+import CardRenderCorpBoxComponent from '@/components/card/CardRenderCorpBoxComponent.vue';
+import CardRenderTileComponent from '@/components/card/CardRenderTileComponent.vue';
+import CardDescription from '@/components/card/CardDescription.vue';
+import CardRenderSymbolComponent from '@/components/card/CardRenderSymbolComponent.vue';
+import {CardRenderEffect, CardRenderCorpBoxEffect, CardRenderCorpBoxAction} from '@/cards/render/CardRenderer';
 
 export default Vue.extend({
   name: 'CardRowComponent',

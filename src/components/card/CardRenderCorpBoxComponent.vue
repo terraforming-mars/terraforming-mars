@@ -12,12 +12,12 @@
 <script lang="ts">
 
 import Vue from 'vue';
-import CardRenderItemComponent from './CardRenderItemComponent.vue';
-import CardRenderEffectBoxComponent from './CardRenderEffectBoxComponent.vue';
-import CardRenderSymbolComponent from './CardRenderSymbolComponent.vue';
-import {CardRenderEffect} from '../../cards/render/CardRenderer';
-import {CardRenderItem} from '../../cards/render/CardRenderItem';
-import {CardRenderSymbol} from '../../cards/render/CardRenderSymbol';
+import CardRenderItemComponent from '@/components/card/CardRenderItemComponent.vue';
+import CardRenderEffectBoxComponent from '@/components/card/CardRenderEffectBoxComponent.vue';
+import CardRenderSymbolComponent from '@/components/card/CardRenderSymbolComponent.vue';
+import {CardRenderEffect} from '@/cards/render/CardRenderer';
+import {CardRenderItem} from '@/cards/render/CardRenderItem';
+import {CardRenderSymbol} from '@/cards/render/CardRenderSymbol';
 
 export default Vue.extend({
   name: 'CardRenderCorpBoxComponent',

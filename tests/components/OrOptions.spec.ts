@@ -2,8 +2,8 @@
 import {createLocalVue, mount} from '@vue/test-utils';
 
 import {expect} from 'chai';
-import OrOptions from '../../src/components/OrOptions.vue';
-import {PlayerInputTypes} from '../../src/PlayerInputTypes';
+import OrOptions from '@/components/OrOptions.vue';
+import {PlayerInputTypes} from '@/PlayerInputTypes';
 
 describe('OrOptions', function() {
   function getLocalVue() {

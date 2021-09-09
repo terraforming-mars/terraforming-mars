@@ -7,8 +7,8 @@
 <script lang="ts">
 
 import Vue from 'vue';
-import {CardRenderer} from '../../cards/render/CardRenderer';
-import CardRowData from './CardRowData.vue';
+import {CardRenderer} from '@/cards/render/CardRenderer';
+import CardRowData from '@/components/card/CardRowData.vue';
 
 export default Vue.extend({
   name: 'CardRenderData',

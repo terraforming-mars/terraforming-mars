@@ -10,12 +10,12 @@
 <script lang="ts">
 
 import Vue from 'vue';
-import {ICardMetadata} from '../../cards/ICardMetadata';
+import {ICardMetadata} from '@/cards/ICardMetadata';
 import CardRequirementsComponent from './CardRequirementsComponent.vue';
 import CardVictoryPoints from './CardVictoryPoints.vue';
 import CardDescription from './CardDescription.vue';
 import CardRenderData from './CardRenderData.vue';
-import {CardRequirements} from '../../cards/CardRequirements';
+import {CardRequirements} from '@/cards/CardRequirements';
 
 export default Vue.extend({
   name: 'CardContent',

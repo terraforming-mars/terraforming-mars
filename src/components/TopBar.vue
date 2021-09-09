@@ -10,9 +10,9 @@
 <script lang="ts">
 
 import Vue from 'vue';
-import {PlayerViewModel} from '../models/PlayerModel';
-import PlayerInfo from './overview/PlayerInfo.vue';
-import {PreferencesManager} from './PreferencesManager';
+import {PlayerViewModel} from '@/models/PlayerModel';
+import PlayerInfo from '@/components/overview/PlayerInfo.vue';
+import {PreferencesManager} from '@/components/PreferencesManager';
 
 export default Vue.extend({
   name: 'top-bar',

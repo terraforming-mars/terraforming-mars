@@ -114,7 +114,7 @@
 <script lang="ts">
 
 import Vue from 'vue';
-import Card from './card/Card.vue';
+import Card from '@/components/card/Card.vue';
 import {
   ALL_CARD_MANIFESTS,
   ALL_CORPORATION_CARD_NAMES,
@@ -122,12 +122,12 @@ import {
   ALL_PROJECT_CARD_NAMES,
   ALL_STANDARD_PROJECT_CARD_NAMES,
 } from '../cards/AllCards';
-import {GameModule} from '../GameModule';
-import {ICard} from '../cards/ICard';
-import {ICardRenderDescription, isIDescription} from '../cards/render/ICardRenderDescription';
-import {CardName} from '../CardName';
-import {ICardFactory} from '../cards/ICardFactory';
-import {PreferencesManager} from './PreferencesManager';
+import {GameModule} from '@/GameModule';
+import {ICard} from '@/cards/ICard';
+import {ICardRenderDescription, isIDescription} from '@/cards/render/ICardRenderDescription';
+import {CardName} from '@/CardName';
+import {ICardFactory} from '@/cards/ICardFactory';
+import {PreferencesManager} from '@/components/PreferencesManager';
 
 const cards: Map<CardName, {card: ICard, module: GameModule, cardNumber: string}> = new Map();
 

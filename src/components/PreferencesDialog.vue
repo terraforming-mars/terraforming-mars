@@ -1,8 +1,8 @@
 <script lang="ts">
 import Vue from 'vue';
-import {preferences, PreferencesManager} from './PreferencesManager';
-import {LANGUAGES} from '../constants';
-import {TranslateMixin} from './TranslateMixin';
+import {preferences, PreferencesManager} from '@/components/PreferencesManager';
+import {LANGUAGES} from '@/constants';
+import {TranslateMixin} from '@/components/TranslateMixin';
 
 export default Vue.extend({
   name: 'PreferencesDialog',

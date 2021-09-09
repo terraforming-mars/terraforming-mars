@@ -28,11 +28,11 @@
 <script lang="ts">
 
 import Vue from 'vue';
-import Button from '../components/common/Button.vue';
-import {PlayerViewModel, PublicPlayerModel} from '../models/PlayerModel';
-import {PlayerInputModel} from '../models/PlayerInputModel';
-import {PreferencesManager} from './PreferencesManager';
-import {TranslateMixin} from '../components/TranslateMixin';
+import Button from '@/components/common/Button.vue';
+import {PlayerViewModel, PublicPlayerModel} from '@/models/PlayerModel';
+import {PlayerInputModel} from '@/models/PlayerInputModel';
+import {PreferencesManager} from '@/components/PreferencesManager';
+import {TranslateMixin} from '@/components/TranslateMixin';
 
 let unique = 0;
 

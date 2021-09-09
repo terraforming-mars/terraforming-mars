@@ -24,8 +24,8 @@
 
 import Vue from 'vue';
 
-import {ICard} from '../../cards/ICard';
-import {CardModel} from '../../models/CardModel';
+import {ICard} from '@/cards/ICard';
+import {CardModel} from '@/models/CardModel';
 import CardTitle from './CardTitle.vue';
 import CardNumber from './CardNumber.vue';
 import CardResourceCounter from './CardResourceCounter.vue';
@@ -33,15 +33,15 @@ import CardCost from './CardCost.vue';
 import CardExtraContent from './CardExtraContent.vue';
 import CardExpansion from './CardExpansion.vue';
 import CardTags from './CardTags.vue';
-import {CardType} from '../../cards/CardType';
+import {CardType} from '@/cards/CardType';
 import CardContent from './CardContent.vue';
-import {ICardMetadata} from '../../cards/ICardMetadata';
-import {Tags} from '../../cards/Tags';
-import {ALL_CARD_MANIFESTS} from '../../cards/AllCards';
-import {GameModule} from '../../GameModule';
-import {CardRequirements} from '../../cards/CardRequirements';
-import {PreferencesManager} from '../PreferencesManager';
-import {BasePlayerModel} from '../../models/PlayerModel';
+import {ICardMetadata} from '@/cards/ICardMetadata';
+import {Tags} from '@/cards/Tags';
+import {ALL_CARD_MANIFESTS} from '@/cards/AllCards';
+import {GameModule} from '@/GameModule';
+import {CardRequirements} from '@/cards/CardRequirements';
+import {PreferencesManager} from '@/components/PreferencesManager';
+import {BasePlayerModel} from '@/models/PlayerModel';
 
 export default Vue.extend({
   name: 'Card',

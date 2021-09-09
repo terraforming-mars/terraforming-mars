@@ -24,9 +24,17 @@
         "moduleResolution": "node",
         "resolveJsonModule": true,
         "allowUnreachableCode": false,
+        "baseUrl": ".",
+        "paths": {
+            "@/*": ["./src/*"]
+        },
+        "plugins": [
+            { "transform": "transformer-module" },
+        ]
+
     },
     // This gives the VS Code IDE its magic.
     "include": [
         "**/*.ts",
-    ]
+    ],
 }

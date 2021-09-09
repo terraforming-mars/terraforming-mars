@@ -35,19 +35,19 @@
 <script lang="ts">
 
 import Vue from 'vue';
-import TagCount from '../TagCount.vue';
-import {ITagCount} from '../../ITagCount';
-import {PlayerViewModel, PublicPlayerModel} from '../../models/PlayerModel';
-import {GameModel} from '../../models/GameModel';
-import {Tags} from '../../cards/Tags';
-import {CardName} from '../../CardName';
-import {SpecialTags} from '../../cards/SpecialTags';
-import PlayerTagDiscount from './PlayerTagDiscount.vue';
-import JovianMultiplier from './JovianMultiplier.vue';
-import {PartyName} from '../../turmoil/parties/PartyName';
-import {TurmoilPolicy} from '../../turmoil/TurmoilPolicy';
-import {CardModel} from '../../models/CardModel';
-import {Shared} from './Shared';
+import TagCount from '@/components/TagCount.vue';
+import {ITagCount} from '@/ITagCount';
+import {PlayerViewModel, PublicPlayerModel} from '@/models/PlayerModel';
+import {GameModel} from '@/models/GameModel';
+import {Tags} from '@/cards/Tags';
+import {CardName} from '@/CardName';
+import {SpecialTags} from '@/cards/SpecialTags';
+import PlayerTagDiscount from '@/components/overview/PlayerTagDiscount.vue';
+import JovianMultiplier from '@/components/overview/JovianMultiplier.vue';
+import {PartyName} from '@/turmoil/parties/PartyName';
+import {TurmoilPolicy} from '@/turmoil/TurmoilPolicy';
+import {CardModel} from '@/models/CardModel';
+import {Shared} from '@/components/overview/Shared';
 
 type InterfaceTagsType = Tags | SpecialTags | 'all' | 'separator';
 

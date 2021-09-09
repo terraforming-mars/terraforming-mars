@@ -71,19 +71,19 @@
 <script lang="ts">
 
 import Vue from 'vue';
-import {Color} from '../Color';
-import {PreferencesManager} from './PreferencesManager';
-import {LANGUAGES} from '../constants';
-import {TurmoilModel} from '../models/TurmoilModel';
-import {PartyName} from '../turmoil/parties/PartyName';
-import GameSetupDetail from './GameSetupDetail.vue';
-import {GameOptionsModel} from '../models/GameOptionsModel';
-import {TranslateMixin} from './TranslateMixin';
-import GlobalParameterValue from './GlobalParameterValue.vue';
-import MoonGlobalParameterValue from './MoonGlobalParameterValue.vue';
-import {GlobalParameter} from '../GlobalParameter';
-import {MoonModel} from '../models/MoonModel';
-import PreferencesDialog from './PreferencesDialog.vue';
+import {Color} from '@/Color';
+import {PreferencesManager} from '@/components/PreferencesManager';
+import {LANGUAGES} from '@/constants';
+import {TurmoilModel} from '@/models/TurmoilModel';
+import {PartyName} from '@/turmoil/parties/PartyName';
+import GameSetupDetail from '@/components/GameSetupDetail.vue';
+import {GameOptionsModel} from '@/models/GameOptionsModel';
+import {TranslateMixin} from '@/components/TranslateMixin';
+import GlobalParameterValue from '@/components/GlobalParameterValue.vue';
+import MoonGlobalParameterValue from '@/components/MoonGlobalParameterValue.vue';
+import {GlobalParameter} from '@/GlobalParameter';
+import {MoonModel} from '@/models/MoonModel';
+import PreferencesDialog from '@/components/PreferencesDialog.vue';
 
 export default Vue.extend({
   name: 'sidebar',

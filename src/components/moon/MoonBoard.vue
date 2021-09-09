@@ -75,10 +75,10 @@
 <script lang="ts">
 
 import Vue from 'vue';
-import {MoonModel} from '../../models/MoonModel';
-import {SpaceModel} from '../../models/SpaceModel';
-import {SpaceType} from '../../SpaceType';
-import MoonSpace from './MoonSpace.vue';
+import {MoonModel} from '@/models/MoonModel';
+import {SpaceModel} from '@/models/SpaceModel';
+import {SpaceType} from '@/SpaceType';
+import MoonSpace from '@/components/moon/MoonSpace.vue';
 
 class MoonParamLevel {
   constructor(public value: number, public isActive: boolean, public strValue: string) {

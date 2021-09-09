@@ -54,10 +54,10 @@
 <script lang="ts">
 import Vue from 'vue';
 
-import {PlayerInputModel} from '../models/PlayerInputModel';
-import {IPayProductionModel} from '../models/IPayProductionUnitsModel';
-import {Units} from '../Units';
-import {TranslateMixin} from './TranslateMixin';
+import {PlayerInputModel} from '@/models/PlayerInputModel';
+import {IPayProductionModel} from '@/models/IPayProductionUnitsModel';
+import {Units} from '@/Units';
+import {TranslateMixin} from '@/components/TranslateMixin';
 
 interface SelectProductionToLoseModel {
     megacredits: number;

@@ -67,22 +67,22 @@
 <script lang="ts">
 import Vue from 'vue';
 
-import {TranslateMixin} from './TranslateMixin';
-import {GameModel} from '../models/GameModel';
+import {TranslateMixin} from '@/components/TranslateMixin';
+import {GameModel} from '@/models/GameModel';
 import {mainAppSettings} from './App';
 
-import * as raw_settings from '../genfiles/settings.json';
-import {SpectatorModel} from '../models/SpectatorModel';
-import Awards from './Awards.vue';
-import Board from './Board.vue';
-import Colony from './Colony.vue';
-import DynamicTitle from './common/DynamicTitle.vue';
-import LogPanel from './LogPanel.vue';
-import MoonBoard from './moon/MoonBoard.vue';
-import Milestone from './Milestone.vue';
-import Sidebar from './Sidebar.vue';
-import Turmoil from './Turmoil.vue';
-import {range} from '../utils/utils';
+import * as raw_settings from '@/genfiles/settings.json';
+import {SpectatorModel} from '@/models/SpectatorModel';
+import Awards from '@/components/Awards.vue';
+import Board from '@/components/Board.vue';
+import Colony from '@/components/Colony.vue';
+import DynamicTitle from '@/components/common/DynamicTitle.vue';
+import LogPanel from '@/components/LogPanel.vue';
+import MoonBoard from '@/components/moon/MoonBoard.vue';
+import Milestone from '@/components/Milestone.vue';
+import Sidebar from '@/components/Sidebar.vue';
+import Turmoil from '@/components/Turmoil.vue';
+import {range} from '@/utils/utils';
 
 let refreshTimeoutId: number = -1;
 

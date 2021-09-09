@@ -146,16 +146,16 @@
 <script lang="ts">
 
 import Vue from 'vue';
-import {GameModel} from '../models/GameModel';
-import {PlayerViewModel, PublicPlayerModel} from '../models/PlayerModel';
-import Board from './Board.vue';
-import MoonBoard from './moon/MoonBoard.vue';
-import LogPanel from './LogPanel.vue';
-import Button from '../components/common/Button.vue';
-import {playerColorClass} from '../utils/utils';
-import {Timer} from '../Timer';
+import {GameModel} from '@/models/GameModel';
+import {PlayerViewModel, PublicPlayerModel} from '@/models/PlayerModel';
+import Board from '@/components/Board.vue';
+import MoonBoard from '@/components/moon/MoonBoard.vue';
+import LogPanel from '@/components/LogPanel.vue';
+import Button from '@/components/common/Button.vue';
+import {playerColorClass} from '@/utils/utils';
+import {Timer} from '@/Timer';
 
-import * as constants from '../constants';
+import * as constants from '@/constants';
 
 export default Vue.extend({
   name: 'game-end',

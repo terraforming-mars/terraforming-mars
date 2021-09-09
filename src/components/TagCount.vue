@@ -8,9 +8,9 @@
 <script lang="ts">
 
 import Vue from 'vue';
-import Tag from './Tag.vue';
-import {Tags} from '../cards/Tags';
-import {SpecialTags} from '../cards/SpecialTags';
+import Tag from '@/components/Tag.vue';
+import {Tags} from '@/cards/Tags';
+import {SpecialTags} from '@/cards/SpecialTags';
 
 export default Vue.extend({
   name: 'tag-count',

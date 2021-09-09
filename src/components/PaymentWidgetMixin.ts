@@ -1,11 +1,11 @@
 // Common code for SelectHowToPay and SelectHowToPayForProjectCard
-import {CardName} from '../CardName';
-import {CardModel} from '../models/CardModel';
-import {PlayerInputModel} from '../models/PlayerInputModel';
-import {PlayerViewModel} from '../models/PlayerModel';
-import {ResourceType} from '../ResourceType';
-import {Tags} from '../cards/Tags';
-import {Units} from '../Units';
+import {CardName} from '@/CardName';
+import {CardModel} from '@/models/CardModel';
+import {PlayerInputModel} from '@/models/PlayerInputModel';
+import {PlayerViewModel} from '@/models/PlayerModel';
+import {ResourceType} from '@/ResourceType';
+import {Tags} from '@/cards/Tags';
+import {Units} from '@/Units';
 
 export interface SelectHowToPayModel {
     card?: CardModel;

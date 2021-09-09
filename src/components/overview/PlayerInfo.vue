@@ -1,14 +1,14 @@
 <script lang="ts">
 import Vue from 'vue';
-import {PlayerViewModel, PublicPlayerModel} from '../../models/PlayerModel';
-import PlayerResources from './PlayerResources.vue';
-import PlayerTags from './PlayerTags.vue';
-import PlayerStatus from './PlayerStatus.vue';
-import {playerColorClass} from '../../utils/utils';
-import {mainAppSettings} from '../App';
-import {range} from '../../utils/utils';
-import {PlayerMixin} from '../PlayerMixin';
-import Button from '../common/Button.vue';
+import {PlayerViewModel, PublicPlayerModel} from '@/models/PlayerModel';
+import PlayerResources from '@/components/overview/PlayerResources.vue';
+import PlayerTags from '@/components/overview/PlayerTags.vue';
+import PlayerStatus from '@/components/overview/PlayerStatus.vue';
+import {playerColorClass} from '@/utils/utils';
+import {mainAppSettings} from '@/components/App';
+import {range} from '@/utils/utils';
+import {PlayerMixin} from '@/components/PlayerMixin';
+import Button from '@/components/common/Button.vue';
 
 const isPinned = (root: any, playerIndex: number): boolean => {
   return (root as any).getVisibilityState('pinned_player_' + playerIndex);

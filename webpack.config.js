@@ -1,6 +1,8 @@
 const {VueLoaderPlugin} = require('vue-loader');
 const CompressionPlugin = require('compression-webpack-plugin');
 const ForkTsCheckerWebpackPlugin = require('fork-ts-checker-webpack-plugin');
+const TsconfigPathsPlugin = require('tsconfig-paths-webpack-plugin');
+
 const zlib = require('zlib');
 
 const plugins = [
@@ -33,6 +35,7 @@ module.exports = {
   mode: process.env.NODE_ENV === 'production' ? 'production' : 'development',
   entry: './src/main.ts',
   resolve: {
+    plugins: [new TsconfigPathsPlugin()],
     extensions: ['.ts', '.vue', '.js'],
     alias: {
       'vue$': 'vue/dist/vue.esm.js',

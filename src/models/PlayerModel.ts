@@ -12,8 +12,14 @@ export interface BasePlayerModel {
   color: Color;
 }
 
+export interface AppModel {
+  game: GameModel;
+  players: Array<PublicPlayerModel>;
+  id: string; // PlayerId or SpectatorId, as determined by the app.
+}
+
 /** The public information about a player */
-export interface PublicPlayerModel extends BasePlayerModel {
+export interface PublicPlayerModel {
   actionsTakenThisRound: number;
   actionsThisGeneration: Array<string /* CardName */>;
   availableBlueCardActionCount: number;
@@ -22,17 +28,20 @@ export interface PublicPlayerModel extends BasePlayerModel {
   cardsInHandNbr: number;
   citiesCount: number;
   coloniesCount: number;
+  color: Color;
   corporationCard: CardModel | undefined;
   energy: number;
   energyProduction: number;
   fleetSize: number;
   heat: number;
   heatProduction: number;
+  // TODO(kberg): this is removeable now.
   id: string; // Color
   influence: number;
   isActive: boolean;
   megaCredits: number;
   megaCreditProduction: number;
+  name: string;
   needsToDraft: boolean | undefined;
   needsToResearch: boolean | undefined;
   noTagsCount: number;
@@ -55,16 +64,14 @@ export interface PublicPlayerModel extends BasePlayerModel {
 }
 
 /** A player's view of the game, including their secret information. */
-export interface PlayerViewModel {
+export interface PlayerViewModel extends AppModel {
   cardsInHand: Array<CardModel>;
   dealtCorporationCards: Array<CardModel>;
   dealtPreludeCards: Array<CardModel>;
   dealtProjectCards: Array<CardModel>;
   draftedCards: Array<CardModel>;
-  game: GameModel;
   id: PlayerId;
   pickedCorporationCard: Array<CardModel>; // Why Array?
-  players: Array<PublicPlayerModel>;
   preludeCardsInHand: Array<CardModel>;
   thisPlayer: PublicPlayerModel;
   waitingFor: PlayerInputModel | undefined;

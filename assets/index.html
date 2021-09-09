@@ -33,13 +33,13 @@
                     :game="game"
                 ></game-home>
                 <player-home
-                    v-else-if="screen === 'player-home'"
+                    v-else-if="screen === 'player-home' && playerView !== undefined"
                     :player-view="playerView"
                     :key="playerkey"
                     :settings="settings"
                 ></player-home>
                 <spectator-home
-                    v-else-if="screen === 'spectator-home'"
+                    v-else-if="screen === 'spectator-home' && spectator !== undefined"
                     :spectator="spectator"
                     :key="playerkey"
                     :settings="settings"

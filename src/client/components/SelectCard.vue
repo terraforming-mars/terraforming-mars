@@ -24,7 +24,7 @@ import Button from '@/client/components/common/Button.vue';
 import {Message} from '@/Message';
 import {CardOrderStorage} from '@/client/utils/CardOrderStorage';
 import {BasePlayerModel, PlayerViewModel} from '@/models/PlayerModel';
-import {VueModelCheckbox, VueModelRadio} from '@/client/components/VueTypes';
+import {VueModelCheckbox, VueModelRadio} from '@/client/types';
 import Card from '@/client/components/card/Card.vue';
 import {CardModel} from '@/models/CardModel';
 import {CardName} from '@/CardName';

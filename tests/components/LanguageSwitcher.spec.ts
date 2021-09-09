@@ -3,7 +3,7 @@ import {LANGUAGES} from '@/constants';
 import {expect} from 'chai';
 import * as sinon from 'sinon';
 import LanguageSwitcher from '@/client/components/LanguageSwitcher.vue';
-import {PreferencesManager} from '@/client/components/PreferencesManager';
+import {PreferencesManager} from '@/client/utils/PreferencesManager';
 
 describe('LanguageSwitcher', () => {
   it('renders all available languages', () => {

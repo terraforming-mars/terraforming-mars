@@ -18,9 +18,9 @@ import {mainAppSettings} from '@/client/components/App';
 import {$t} from '@/client/directives/i18n';
 import {PlayerInputModel} from '@/models/PlayerInputModel';
 import {PlayerViewModel, PublicPlayerModel} from '@/models/PlayerModel';
-import {PreferencesManager} from '@/client/components/PreferencesManager';
-import {SoundManager} from '@/client/components/SoundManager';
-import {TranslateMixin} from '@/client/components/TranslateMixin';
+import {PreferencesManager} from '@/client/utils/PreferencesManager';
+import {SoundManager} from '@/client/utils/SoundManager';
+import {TranslateMixin} from '@/client/mixins/TranslateMixin';
 import {WaitingForModel} from '@/models/WaitingForModel';
 
 import * as constants from '@/constants';

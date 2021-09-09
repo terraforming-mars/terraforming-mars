@@ -57,7 +57,7 @@ import Vue from 'vue';
 import Award from '@/client/components/Award.vue';
 import {AWARD_COSTS} from '@/constants';
 import {FundedAwardModel} from '@/models/FundedAwardModel';
-import {PreferencesManager} from '@/client/components/PreferencesManager';
+import {PreferencesManager} from '@/client/utils/PreferencesManager';
 
 export default Vue.extend({
   name: 'Awards',

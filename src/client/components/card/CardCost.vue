@@ -11,7 +11,7 @@
 <script lang="ts">
 
 import Vue from 'vue';
-import {PreferencesManager} from '@/client/components/PreferencesManager';
+import {PreferencesManager} from '@/client/utils/PreferencesManager';
 
 export default Vue.extend({
   name: 'CardCost',

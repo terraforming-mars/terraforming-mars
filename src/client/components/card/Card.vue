@@ -40,7 +40,7 @@ import {Tags} from '@/cards/Tags';
 import {ALL_CARD_MANIFESTS} from '@/cards/AllCards';
 import {GameModule} from '@/GameModule';
 import {CardRequirements} from '@/cards/CardRequirements';
-import {PreferencesManager} from '@/client/components/PreferencesManager';
+import {PreferencesManager} from '@/client/utils/PreferencesManager';
 import {BasePlayerModel} from '@/models/PlayerModel';
 
 export default Vue.extend({

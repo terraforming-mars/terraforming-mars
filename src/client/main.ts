@@ -3,7 +3,7 @@ import Vue from 'vue';
 import {translateTextNode} from '@/client/directives/i18n';
 import {trimEmptyTextNodes} from '@/client/directives/TrimWhitespace';
 import {mainAppSettings} from '@/client/components/App';
-import {PreferencesManager} from '@/client/components/PreferencesManager';
+import {PreferencesManager} from '@/client/utils/PreferencesManager';
 
 declare global {
   interface Window {

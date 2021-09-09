@@ -72,13 +72,13 @@
 
 import Vue from 'vue';
 import {Color} from '@/Color';
-import {PreferencesManager} from '@/client/components/PreferencesManager';
+import {PreferencesManager} from '@/client/utils/PreferencesManager';
 import {LANGUAGES} from '@/constants';
 import {TurmoilModel} from '@/models/TurmoilModel';
 import {PartyName} from '@/turmoil/parties/PartyName';
 import GameSetupDetail from '@/client/components/GameSetupDetail.vue';
 import {GameOptionsModel} from '@/models/GameOptionsModel';
-import {TranslateMixin} from '@/client/components/TranslateMixin';
+import {TranslateMixin} from '@/client/mixins/TranslateMixin';
 import GlobalParameterValue from '@/client/components/GlobalParameterValue.vue';
 import MoonGlobalParameterValue from '@/client/components/MoonGlobalParameterValue.vue';
 import {GlobalParameter} from '@/GlobalParameter';

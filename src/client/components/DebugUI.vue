@@ -127,7 +127,7 @@ import {ICard} from '@/cards/ICard';
 import {ICardRenderDescription, isIDescription} from '@/cards/render/ICardRenderDescription';
 import {CardName} from '@/CardName';
 import {ICardFactory} from '@/cards/ICardFactory';
-import {PreferencesManager} from '@/client/components/PreferencesManager';
+import {PreferencesManager} from '@/client/utils/PreferencesManager';
 
 const cards: Map<CardName, {card: ICard, module: GameModule, cardNumber: string}> = new Map();
 

@@ -1,6 +1,6 @@
 import {LogMessageDataType} from '@/LogMessageDataType';
 import {Message} from '@/Message';
-import {PreferencesManager} from '@/client/components/PreferencesManager';
+import {PreferencesManager} from '@/client/utils/PreferencesManager';
 import {LogMessageData} from '@/LogMessageData';
 import {Log} from '@/Log';
 

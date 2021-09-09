@@ -1,12 +1,12 @@
 <script lang="ts">
 import Vue from 'vue';
 import {HowToPay} from '@/inputs/HowToPay';
-import {PaymentWidgetMixin, SelectHowToPayModel} from '@/client/components/PaymentWidgetMixin';
+import {PaymentWidgetMixin, SelectHowToPayModel} from '@/client/mixins/PaymentWidgetMixin';
 import {PlayerInputModel} from '@/models/PlayerInputModel';
 import {PlayerViewModel, PublicPlayerModel} from '@/models/PlayerModel';
-import {PreferencesManager} from '@/client/components/PreferencesManager';
+import {PreferencesManager} from '@/client/utils/PreferencesManager';
 import Button from '@/client/components/common/Button.vue';
-import {TranslateMixin} from '@/client/components/TranslateMixin';
+import {TranslateMixin} from '@/client/mixins/TranslateMixin';
 
 export default Vue.extend({
   name: 'SelectHowToPay',

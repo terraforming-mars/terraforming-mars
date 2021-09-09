@@ -15,7 +15,7 @@ import Vue from 'vue';
 import Colony from '@/client/components/Colony.vue';
 import Button from '@/client/components/common/Button.vue';
 import {PlayerInputModel} from '@/models/PlayerInputModel';
-import {TranslateMixin} from '@/client/components/TranslateMixin';
+import {TranslateMixin} from '@/client/mixins/TranslateMixin';
 
 export default Vue.extend({
   name: 'SelectColony',

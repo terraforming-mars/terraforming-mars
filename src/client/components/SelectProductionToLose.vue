@@ -57,7 +57,7 @@ import Vue from 'vue';
 import {PlayerInputModel} from '@/models/PlayerInputModel';
 import {IPayProductionModel} from '@/models/IPayProductionUnitsModel';
 import {Units} from '@/Units';
-import {TranslateMixin} from '@/client/components/TranslateMixin';
+import {TranslateMixin} from '@/client/mixins/TranslateMixin';
 
 interface SelectProductionToLoseModel {
     megacredits: number;

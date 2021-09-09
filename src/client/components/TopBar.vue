@@ -12,7 +12,7 @@
 import Vue from 'vue';
 import {PlayerViewModel} from '@/models/PlayerModel';
 import PlayerInfo from '@/client/components/overview/PlayerInfo.vue';
-import {PreferencesManager} from '@/client/components/PreferencesManager';
+import {PreferencesManager} from '@/client/utils/PreferencesManager';
 
 export default Vue.extend({
   name: 'top-bar',

@@ -26,7 +26,7 @@ import {PlayerInputModel} from '@/models/PlayerInputModel';
 import {PlayerViewModel} from '@/models/PlayerModel';
 import SelectCard from '@/client/components/SelectCard.vue';
 import ConfirmDialog from '@/client/components/common/ConfirmDialog.vue';
-import {PreferencesManager} from '@/client/components/PreferencesManager';
+import {PreferencesManager} from '@/client/utils/PreferencesManager';
 
 export default Vue.extend({
   name: 'SelectInitialCards',

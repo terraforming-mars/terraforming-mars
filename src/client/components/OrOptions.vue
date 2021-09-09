@@ -31,8 +31,8 @@ import Vue from 'vue';
 import Button from '@/client/components/common/Button.vue';
 import {PlayerViewModel, PublicPlayerModel} from '@/models/PlayerModel';
 import {PlayerInputModel} from '@/models/PlayerInputModel';
-import {PreferencesManager} from '@/client/components/PreferencesManager';
-import {TranslateMixin} from '@/client/components/TranslateMixin';
+import {PreferencesManager} from '@/client/utils/PreferencesManager';
+import {TranslateMixin} from '@/client/mixins/TranslateMixin';
 
 let unique = 0;
 

@@ -1,7 +1,7 @@
 import {CardModel} from '@/models/CardModel';
 import {CardType} from '@/cards/CardType';
 import {PublicPlayerModel} from '@/models/PlayerModel';
-import {sortActiveCards} from '@/client/components/ActiveCardsSortingOrder';
+import {sortActiveCards} from '@/client/utils/ActiveCardsSortingOrder';
 
 // Common code for player layouts
 

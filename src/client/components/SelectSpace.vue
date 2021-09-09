@@ -16,8 +16,8 @@
 import Vue from 'vue';
 import ConfirmDialog from '@/client/components/common/ConfirmDialog.vue';
 import {PlayerInputModel} from '@/models/PlayerInputModel';
-import {PreferencesManager} from '@/client/components/PreferencesManager';
-import {TranslateMixin} from '@/client/components/TranslateMixin';
+import {PreferencesManager} from '@/client/utils/PreferencesManager';
+import {TranslateMixin} from '@/client/mixins/TranslateMixin';
 
 export default Vue.extend({
   name: 'SelectSpace',

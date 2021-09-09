@@ -67,7 +67,7 @@
 <script lang="ts">
 import Vue from 'vue';
 
-import {TranslateMixin} from '@/client/components/TranslateMixin';
+import {TranslateMixin} from '@/client/mixins/TranslateMixin';
 import {GameModel} from '@/models/GameModel';
 import {mainAppSettings} from './App';
 

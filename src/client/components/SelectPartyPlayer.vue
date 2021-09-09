@@ -18,7 +18,7 @@ import {ColorWithNeutral} from '@/Color';
 import {PlayerInputModel} from '@/models/PlayerInputModel';
 import {PublicPlayerModel} from '@/models/PlayerModel';
 import SelectPlayerRow from '@/client/components/SelectPlayerRow.vue';
-import {TranslateMixin} from '@/client/components/TranslateMixin';
+import {TranslateMixin} from '@/client/mixins/TranslateMixin';
 
 export default Vue.extend({
   name: 'SelectPartyPlayer',

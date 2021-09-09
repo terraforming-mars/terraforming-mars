@@ -22,7 +22,7 @@
 
 <script lang="ts">
 import Vue from 'vue';
-import {TranslateMixin} from '@/client/components/TranslateMixin';
+import {TranslateMixin} from '@/client/mixins/TranslateMixin';
 import {MAXIMUM_COLONY_RATE, MAXIMUM_LOGISTICS_RATE, MAXIMUM_MINING_RATE} from '@/constants';
 import {MoonModel} from '@/models/MoonModel';
 

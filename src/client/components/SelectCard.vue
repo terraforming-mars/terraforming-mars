@@ -22,15 +22,15 @@
 import Vue from 'vue';
 import Button from '@/client/components/common/Button.vue';
 import {Message} from '@/Message';
-import {CardOrderStorage} from '@/client/components/CardOrderStorage';
+import {CardOrderStorage} from '@/client/utils/CardOrderStorage';
 import {BasePlayerModel, PlayerViewModel} from '@/models/PlayerModel';
 import {VueModelCheckbox, VueModelRadio} from '@/client/components/VueTypes';
 import Card from '@/client/components/card/Card.vue';
 import {CardModel} from '@/models/CardModel';
 import {CardName} from '@/CardName';
 import {PlayerInputModel} from '@/models/PlayerInputModel';
-import {sortActiveCards} from '@/client/components/ActiveCardsSortingOrder';
-import {TranslateMixin} from '@/client/components/TranslateMixin';
+import {sortActiveCards} from '@/client/utils/ActiveCardsSortingOrder';
+import {TranslateMixin} from '@/client/mixins/TranslateMixin';
 
 interface SelectCardModel {
   cards: VueModelRadio<CardModel> | VueModelCheckbox<Array<CardModel>>;

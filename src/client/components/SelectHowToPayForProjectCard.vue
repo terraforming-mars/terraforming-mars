@@ -6,13 +6,13 @@ import {HowToPay} from '@/inputs/HowToPay';
 import Card from '@/client/components/card/Card.vue';
 import {CardFinder} from '@/CardFinder';
 import {CardModel} from '@/models/CardModel';
-import {CardOrderStorage} from '@/client/components/CardOrderStorage';
-import {PaymentWidgetMixin, SelectHowToPayForProjectCardModel} from '@/client/components/PaymentWidgetMixin';
+import {CardOrderStorage} from '@/client/utils/CardOrderStorage';
+import {PaymentWidgetMixin, SelectHowToPayForProjectCardModel} from '@/client/mixins/PaymentWidgetMixin';
 import {PlayerInputModel} from '@/models/PlayerInputModel';
 import {PlayerViewModel, PublicPlayerModel} from '@/models/PlayerModel';
-import {PreferencesManager} from '@/client/components/PreferencesManager';
+import {PreferencesManager} from '@/client/utils/PreferencesManager';
 import {Tags} from '@/cards/Tags';
-import {TranslateMixin} from '@/client/components/TranslateMixin';
+import {TranslateMixin} from '@/client/mixins/TranslateMixin';
 import {Units} from '@/Units';
 
 export default Vue.extend({

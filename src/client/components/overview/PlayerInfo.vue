@@ -7,7 +7,7 @@ import PlayerStatus from '@/client/components/overview/PlayerStatus.vue';
 import {playerColorClass} from '@/utils/utils';
 import {mainAppSettings} from '@/client/components/App';
 import {range} from '@/utils/utils';
-import {PlayerMixin} from '@/client/components/PlayerMixin';
+import {PlayerMixin} from '@/client/mixins/PlayerMixin';
 import Button from '@/client/components/common/Button.vue';
 
 const isPinned = (root: any, playerIndex: number): boolean => {

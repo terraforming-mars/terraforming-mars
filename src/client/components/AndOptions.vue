@@ -21,7 +21,7 @@ import Vue from 'vue';
 import {PlayerViewModel, PublicPlayerModel} from '@/models/PlayerModel';
 import {PlayerInputModel} from '@/models/PlayerInputModel';
 import Button from '@/client/components/common/Button.vue';
-import {TranslateMixin} from '@/client/components/TranslateMixin';
+import {TranslateMixin} from '@/client/mixins/TranslateMixin';
 
 export default Vue.extend({
   name: 'and-options',

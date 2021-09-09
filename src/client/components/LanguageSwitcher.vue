@@ -13,7 +13,7 @@
 <script lang="ts">
 import Vue from 'vue';
 import {LANGUAGES} from '@/constants';
-import {PreferencesManager} from '@/client/components/PreferencesManager';
+import {PreferencesManager} from '@/client/utils/PreferencesManager';
 
 export default Vue.extend({
   name: 'language-switcher',

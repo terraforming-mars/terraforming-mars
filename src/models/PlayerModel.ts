@@ -12,7 +12,7 @@ export interface BasePlayerModel {
   color: Color;
 }
 
-export interface AppModel {
+export interface ViewModel {
   game: GameModel;
   players: Array<PublicPlayerModel>;
   id: string; // PlayerId or SpectatorId, as determined by the app.
@@ -64,7 +64,7 @@ export interface PublicPlayerModel {
 }
 
 /** A player's view of the game, including their secret information. */
-export interface PlayerViewModel extends AppModel {
+export interface PlayerViewModel extends ViewModel {
   cardsInHand: Array<CardModel>;
   dealtCorporationCards: Array<CardModel>;
   dealtPreludeCards: Array<CardModel>;

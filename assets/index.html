@@ -47,6 +47,7 @@
                 <game-end
                     v-else-if="screen === 'the-end'"
                     :player-view="playerView"
+                    :spectator="spectator"
                 ></game-end>
                 <games-overview
                     v-else-if="screen === 'games-overview'"

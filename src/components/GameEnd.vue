@@ -3,7 +3,7 @@
             <h1>{{ constants.APP_NAME }} - Game finished!</h1>
             <div class="game_end">
                 <div v-if="isSoloGame()">
-                    <div v-if="playerView.game.isSoloModeWin">
+                    <div v-if="game.isSoloModeWin">
                         <div class="game_end_success">
                             <h2 v-i18n>You win!</h2>
                             <div class="game_end_solo_img">
@@ -15,7 +15,7 @@
                             <ul class="game_end_list">
                                 <li v-i18n>Try to win with expansions enabled</li>
                                 <li v-i18n>Try to win before the last generation comes</li>
-                                <li><span v-i18n>Can you get</span> {{ playerView.thisPlayer.victoryPointsBreakdown.total + 10 }}<span v-i18n>+ Victory Points?</span></li>
+                                <li><span v-i18n>Can you get</span> {{ players[0].victoryPointsBreakdown.total + 10 }}<span v-i18n>+ Victory Points?</span></li>
                             </ul>
                         </div>
                     </div>
@@ -41,7 +41,7 @@
                         Go to main page
                     </a>
                 </div>
-                <div v-if="!isSoloGame() || game.isSoloModeWin" class="game-end-winer-announcement">
+                <div v-if="!isSoloGame || game.isSoloModeWin" class="game-end-winer-announcement">
                     <span v-for="p in getWinners()" :key="p.color"><span :class="'log-player ' + getEndGamePlayerRowColorClass(p.color)">{{ p.name }}</span></span> won!
                 </div>
                 <div class="game_end_victory_points">
@@ -136,7 +136,7 @@
                   <MoonBoard v-if="game.gameOptions.moonExpansion" :model="game.moon"></MoonBoard>
                 </div>
                 <div class="game_end_block--log game-end-column">
-                  <log-panel :color="playerView.thisPlayer.color" :generation="game.generation" :id="playerView.id" :lastSoloGeneration="game.lastSoloGeneration" :players="playerView.players"></log-panel>
+                  <log-panel :color="color" :generation="game.generation" :id="viewModel.id" :lastSoloGeneration="game.lastSoloGeneration" :players="players"></log-panel>
                 </div>
               </div>
             </div>
@@ -147,7 +147,7 @@
 
 import Vue from 'vue';
 import {GameModel} from '@/models/GameModel';
-import {PlayerViewModel, PublicPlayerModel} from '@/models/PlayerModel';
+import {PlayerViewModel, PublicPlayerModel, ViewModel} from '@/models/PlayerModel';
 import Board from '@/components/Board.vue';
 import MoonBoard from '@/components/moon/MoonBoard.vue';
 import LogPanel from '@/components/LogPanel.vue';
@@ -156,17 +156,39 @@ import {playerColorClass} from '@/utils/utils';
 import {Timer} from '@/Timer';
 
 import * as constants from '@/constants';
+import {SpectatorModel} from '@/models/SpectatorModel';
+import {Color} from '@/Color';
+
+function getViewModel(playerView: ViewModel | undefined, spectator: ViewModel | undefined): ViewModel {
+  if (playerView !== undefined) return playerView;
+  if (spectator !== undefined) return spectator;
+  throw new Error('Neither playerView nor spectator are defined');
+}
 
 export default Vue.extend({
   name: 'game-end',
   props: {
     playerView: {
-      type: Object as () => PlayerViewModel,
+      type: Object as () => PlayerViewModel | undefined,
+    },
+    spectator: {
+      type: Object as () => SpectatorModel | undefined,
     },
   },
   computed: {
+    viewModel(): ViewModel {
+      return getViewModel(this.playerView, this.spectator);
+    },
     game(): GameModel {
-      return this.playerView.game;
+      return getViewModel(this.playerView, this.spectator).game;
+    },
+    players(): Array<PublicPlayerModel> {
+      return getViewModel(this.playerView, this.spectator).players;
+    },
+    color(): Color {
+      if (this.playerView !== undefined) return this.playerView.thisPlayer.color;
+      if (this.spectator !== undefined) return this.spectator.color;
+      throw new Error('Neither playerView nor spectator are defined');
     },
   },
   data() {
@@ -188,14 +210,14 @@ export default Vue.extend({
       return Timer.toString(p.timer);
     },
     getSortedPlayers() {
-      this.playerView.players.sort(function(a:PublicPlayerModel, b:PublicPlayerModel) {
+      this.viewModel.players.sort(function(a:PublicPlayerModel, b:PublicPlayerModel) {
         if (a.victoryPointsBreakdown.total < b.victoryPointsBreakdown.total) return -1;
         if (a.victoryPointsBreakdown.total > b.victoryPointsBreakdown.total) return 1;
         if (a.megaCredits < b.megaCredits) return -1;
         if (a.megaCredits > b.megaCredits) return 1;
         return 0;
       });
-      return this.playerView.players.reverse();
+      return this.viewModel.players.reverse();
     },
     getWinners() {
       const sortedPlayers = this.getSortedPlayers();
@@ -210,7 +232,7 @@ export default Vue.extend({
       return winners;
     },
     isSoloGame(): boolean {
-      return this.playerView.players.length === 1;
+      return this.players.length === 1;
     },
   },
 });

@@ -5,7 +5,7 @@ import GamesOverview from '@/components/GamesOverview.vue';
 import PlayerHome from '@/components/PlayerHome.vue';
 import PlayerInputFactory from '@/components/PlayerInputFactory.vue';
 import SpectatorHome from '@/components/SpectatorHome.vue';
-import {AppModel, PlayerViewModel} from '@/models/PlayerModel';
+import {ViewModel, PlayerViewModel} from '@/models/PlayerModel';
 import StartScreen from '@/components/StartScreen.vue';
 import LoadGameForm from '@/components/LoadGameForm.vue';
 import DebugUI from '@/components/DebugUI.vue';
@@ -112,7 +112,7 @@ export const mainAppSettings = {
     getVisibilityState(targetVar: string): boolean {
       return (this as unknown as typeof mainAppSettings.data).componentsVisibility[targetVar] ? true : false;
     },
-    updateX(path: '/player' | '/spectator'): void {
+    update(path: '/player' | '/spectator'): void {
       const currentPathname: string = window.location.pathname;
       const xhr = new XMLHttpRequest();
       const app = this as unknown as typeof mainAppSettings.data;
@@ -125,12 +125,10 @@ export const mainAppSettings = {
       xhr.onload = function() {
         try {
           if (xhr.status === 200) {
-            const model = xhr.response as AppModel;
+            const model = xhr.response as ViewModel;
             if (path === '/player') {
-              console.log('updating player');
               app.playerView = model as PlayerViewModel;
             } else if (path === '/spectator') {
-              console.log('spectator');
               app.spectator = model as SpectatorModel;
             }
             app.playerkey++;
@@ -171,10 +169,10 @@ export const mainAppSettings = {
       xhr.send();
     },
     updatePlayer() {
-      this.updateX('/player');
+      this.update('/player');
     },
     updateSpectator: function() {
-      this.updateX('/spectator');
+      this.update('/spectator');
     },
   },
   mounted() {
@@ -182,8 +180,18 @@ export const mainAppSettings = {
     if (!window.HTMLDialogElement) dialogPolyfill.default.registerDialog(document.getElementById('alert-dialog'));
     const currentPathname: string = window.location.pathname;
     const app = this as unknown as (typeof mainAppSettings.data) & (typeof mainAppSettings.methods);
-    if (currentPathname === '/player' || currentPathname === '/the-end') {
+    if (currentPathname === '/player') {
       app.updatePlayer();
+    } else if (currentPathname === '/the-end') {
+      const urlParams = new URLSearchParams(window.location.search);
+      const id = urlParams.get('id');
+      if (id?.charAt(0) === 'p') {
+        app.updatePlayer();
+      } else if (id?.charAt(0) === 's') {
+        app.updateSpectator();
+      } else {
+        alert('Bad id URL parameter.');
+      }
     } else if (currentPathname === '/game') {
       app.screen = 'game-home';
       const xhr = new XMLHttpRequest();

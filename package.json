@@ -53,6 +53,7 @@
     "ts-loader": "^9.2.2",
     "ts-mocha": "^8.0.0",
     "ts-node": "^10.2.1",
+    "ts-node-dev": "^1.1.8",
     "tsconfig-paths": "^3.11.0",
     "tsconfig-paths-webpack-plugin": "^3.5.1",
     "vue-loader": "^15.9.7",
@@ -78,8 +79,8 @@
     "test:server": "ts-mocha -p tests/tsconfig.json -r tests/utils/setup.ts \"tests/!(components)/**/*.spec.ts\"",
     "test:components": "cross-env NODE_ENV=development vti diagnostics && mochapack --require tests/components/setup.ts \"tests/components/**/*.spec.ts\"",
     "test:components:watch": "cross-env NODE_ENV=development mochapack --watch --require tests/components/setup.ts \"tests/components/**/*.spec.ts\"",
-    "prewatch": "rimraf build/main.js*.{br,gz}",
-    "watch": "cross-env NODE_ENV=development webpack --watch",
+    "dev:client": "cross-env NODE_ENV=development webpack --watch",
+    "dev:server": "cross-env NODE_ENV=development tsnd src/server.ts",
     "webpack": "cross-env NODE_ENV=production webpack"
   },
   "repository": {

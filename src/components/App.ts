@@ -40,6 +40,9 @@ interface MainAppData {
      */
     spectator?: SpectatorModel;
     playerView?: PlayerViewModel;
+    // playerKey might seem to serve no function, but it's basically an arbitrary value used
+    // to force a rerender / refresh.
+    // See https://michaelnthiessen.com/force-re-render/
     playerkey: number;
     settings: typeof raw_settings;
     isServerSideRequestInProgress: boolean;
@@ -164,12 +167,15 @@ export const mainAppSettings = {
       xhr.onload = () => {
         if (xhr.status === 200) {
           app.spectator = xhr.response as SpectatorModel;
+          app.playerkey++;
           app.screen = 'spectator-home';
-          window.history.replaceState(
-            xhr.response,
-            `${constants.APP_NAME} - Game`,
-            '/spectator?id=' + app.spectator.id,
-          );
+          if (window.location.pathname !== '/spectator') {
+            window.history.replaceState(
+              xhr.response,
+              `${constants.APP_NAME} - Game`,
+              '/spectator?id=' + app.spectator.id,
+            );
+          }
         } else {
           alert('Unexpected server response: ' + xhr.statusText);
         }

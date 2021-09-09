@@ -12,11 +12,7 @@
             <CardExpansion :expansion="getCardExpansion()" :isCorporation="isCorporationCard()"/>
             <CardResourceCounter v-if="card.resources !== undefined" :amount="getResourceAmount(card)" />
             <CardExtraContent :card="card" />
-            <template v-if="owner !== undefined">
-              <div :class="'card-owner-label player_translucent_bg_color_'+ owner.color">
-                {{owner.name}}
-              </div>
-            </template>
+            <slot></slot>
         </div>
 </template>
 
@@ -41,7 +37,6 @@ import {ALL_CARD_MANIFESTS} from '@/cards/AllCards';
 import {GameModule} from '@/GameModule';
 import {CardRequirements} from '@/cards/CardRequirements';
 import {PreferencesManager} from '@/components/PreferencesManager';
-import {BasePlayerModel} from '@/models/PlayerModel';
 
 export default Vue.extend({
   name: 'Card',
@@ -64,11 +59,6 @@ export default Vue.extend({
       type: Boolean,
       required: false,
       default: false,
-    },
-    'owner': {
-      type: Object as () => BasePlayerModel | undefined,
-      required: false,
-      default: undefined,
     },
   },
   data() {

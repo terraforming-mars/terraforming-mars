@@ -126,6 +126,7 @@ export default Vue.extend({
   methods: {
     ...TranslateMixin.methods,
     forceRerender() {
+      // TODO(kberg): this is very inefficient. It pulls down the entire state, ignoring the value of 'waitingFor' which only fetches a short state.
       const root = this.$root as unknown as typeof mainAppSettings.methods;
       root.updateSpectator();
     },

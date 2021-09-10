@@ -146,6 +146,19 @@ ALL_CARD_MANIFESTS.forEach((manifest) => {
   });
 });
 
+const BASE = 'b';
+const CORP = 'c';
+const PRELUDE = 'p';
+const VENUS = 'v';
+const COLONIES = 'o';
+const TURMOIL = 't';
+const COMMUNITY = '*';
+const PROMO = 'r';
+const ARES = 'a';
+const MOON = 'm';
+
+const ALL_MODULES = `${BASE}${CORP}${PRELUDE}${VENUS}${COLONIES}${TURMOIL}${COMMUNITY}${PROMO}${ARES}${MOON}`;
+
 export interface DebugUIModel {
   filterText: string,
   filterDescription: boolean | unknown[],
@@ -190,16 +203,80 @@ export default Vue.extend({
     if (searchString) {
       this.filterText = searchString;
     }
+    const modules = urlParams.get('m') || ALL_MODULES;
+    this.base = modules.includes(BASE);
+    this.corporateEra = modules.includes(CORP);
+    this.prelude = modules.includes(PRELUDE);
+    this.venusNext = modules.includes(VENUS);
+    this.colonies = modules.includes(COLONIES);
+    this.turmoil = modules.includes(TURMOIL);
+    this.community = modules.includes(COMMUNITY);
+    this.promo = modules.includes(PROMO);
+    this.ares = modules.includes(ARES);
+    this.moon = modules.includes(MOON);
   },
   watch: {
-    filterText(newSearchString) {
-      if (window.history.pushState) {
-        const newurl = window.location.protocol + '//' + window.location.host + window.location.pathname + '?search=' + newSearchString;
-        window.history.pushState({path: newurl}, '', newurl);
-      }
+    filterText(newSearchString: string) {
+      this.updateUrl(newSearchString);
+    },
+    base() {
+      this.updateUrl();
+    },
+    corporateEra() {
+      this.updateUrl();
+    },
+    prelude() {
+      this.updateUrl();
+    },
+    venusNext() {
+      this.updateUrl();
+    },
+    colonies() {
+      this.updateUrl();
+    },
+    turmoil() {
+      this.updateUrl();
+    },
+    community() {
+      this.updateUrl();
+    },
+    ares() {
+      this.updateUrl();
+    },
+    moon() {
+      this.updateUrl();
+    },
+    promo() {
+      this.updateUrl();
     },
   },
   methods: {
+    updateUrl(search?: string) {
+      if (window.history.pushState) {
+        let url = window.location.protocol + '//' + window.location.host + window.location.pathname;
+        if (search) {
+          url = url + '?search=' + search;
+        }
+
+        let m = '';
+        if (this.base) m += BASE;
+        if (this.corporateEra) m += CORP;
+        if (this.prelude) m += PRELUDE;
+        if (this.venusNext) m += VENUS;
+        if (this.colonies) m += COLONIES;
+        if (this.turmoil) m += TURMOIL;
+        if (this.community) m += COMMUNITY;
+        if (this.promo) m += PROMO;
+        if (this.ares) m += ARES;
+        if (this.moon) m += MOON;
+        if (m === '') m = '-'; // - means no modules.
+
+        if (m !== ALL_MODULES) {
+          url = url + '?m=' + m;
+        }
+        window.history.pushState({path: url}, '', url);
+      }
+    },
     toggleAll() {
       const data = this.$data;
       data.base = !data.base;

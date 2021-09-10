@@ -61,6 +61,7 @@
           </div>
         </div>
       </div>
+      <waiting-for v-show="false" v-if="game.phase !== 'end'" :players="spectator.players" :playerView="spectator" :settings="settings" :waitingfor="undefined"></waiting-for>
     </div>
 </template>
 
@@ -82,9 +83,8 @@ import MoonBoard from '@/components/moon/MoonBoard.vue';
 import Milestone from '@/components/Milestone.vue';
 import Sidebar from '@/components/Sidebar.vue';
 import Turmoil from '@/components/Turmoil.vue';
+import WaitingFor from './WaitingFor.vue';
 import {range} from '@/utils/utils';
-
-let refreshTimeoutId: number = -1;
 
 export interface SpectatorHomeModel {
   hideTiles: boolean;
@@ -122,6 +122,7 @@ export default Vue.extend({
     MoonBoard,
     Sidebar,
     Turmoil,
+    WaitingFor,
   },
   methods: {
     ...TranslateMixin.methods,
@@ -133,12 +134,6 @@ export default Vue.extend({
     range(n: number): Array<number> {
       return range(n);
     },
-  },
-  beforeDestroy() {
-    window.clearInterval(refreshTimeoutId);
-  },
-  mounted() {
-    refreshTimeoutId = window.setInterval(this.forceRerender, this.waitingForTimeout);
   },
 });
 </script>

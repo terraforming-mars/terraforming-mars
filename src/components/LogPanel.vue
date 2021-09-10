@@ -334,15 +334,13 @@ export default Vue.extend({
         current: PartyName.GREENS,
       };
     },
-    getResourcesOnCard: function(cardName: CardName) {
-      let resourceCount = undefined;
-
+    getResourcesOnCard(cardName: CardName) {
       for (const player of this.players) {
         const foundCard = player.playedCards.find((card) => card.name === cardName);
-        if (foundCard !== undefined) resourceCount = foundCard.resources;
+        if (foundCard !== undefined) return foundCard.resources;
       }
 
-      return resourceCount;
+      return undefined;
     },
   },
   mounted() {

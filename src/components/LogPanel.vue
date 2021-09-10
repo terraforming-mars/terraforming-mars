@@ -22,7 +22,7 @@
         <div class="card-panel" v-if="cards.length > 0 || globalEventNames.length > 0">
           <Button size="big" type="close" :disableOnServerBusy="false" @click="hideMe" align="right"/>
           <div id="log_panel_card" class="cardbox" v-for="card in cards" :key="card">
-            <Card :card="{name: card}"/>
+            <Card :card="{name: card, resources: getResourcesOnCard(card)}"/>
           </div>
           <div id="log_panel_card" class="cardbox" v-for="globalEventName in globalEventNames" :key="globalEventName">
             <global-event :globalEvent="getGlobalEvent(globalEventName)" type="prior"></global-event>
@@ -333,6 +333,16 @@ export default Vue.extend({
         revealed: PartyName.GREENS,
         current: PartyName.GREENS,
       };
+    },
+    getResourcesOnCard: function(cardName: CardName) {
+      let resourceCount = undefined;
+
+      for (const player of this.players) {
+        const foundCard = player.playedCards.find((card) => card.name === cardName);
+        if (foundCard !== undefined) resourceCount = foundCard.resources;
+      }
+
+      return resourceCount;
     },
   },
   mounted() {

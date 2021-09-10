@@ -12,7 +12,7 @@
             <CardExpansion :expansion="getCardExpansion()" :isCorporation="isCorporationCard()"/>
             <CardResourceCounter v-if="card.resources !== undefined" :amount="getResourceAmount(card)" />
             <CardExtraContent :card="card" />
-            <slot></slot>
+            <slot/>
         </div>
 </template>
 

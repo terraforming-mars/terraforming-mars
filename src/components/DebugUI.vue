@@ -146,7 +146,18 @@ ALL_CARD_MANIFESTS.forEach((manifest) => {
   });
 });
 
-const ALL_MODULES = 'bcpvot*ram';
+const BASE = 'b';
+const CORP = 'c';
+const PRELUDE = 'p';
+const VENUS = 'v';
+const COLONIES = 'o';
+const TURMOIL = 't';
+const COMMUNITY = '*';
+const PROMO = 'r';
+const ARES = 'a';
+const MOON = 'm';
+
+const ALL_MODULES = `${BASE}${CORP}${PRELUDE}${VENUS}${COLONIES}${TURMOIL}${COMMUNITY}${PROMO}${ARES}${MOON}`;
 
 export interface DebugUIModel {
   filterText: string,
@@ -193,16 +204,16 @@ export default Vue.extend({
       this.filterText = searchString;
     }
     const modules = urlParams.get('m') || ALL_MODULES;
-    this.base = modules.includes('b');
-    this.corporateEra = modules.includes('c');
-    this.prelude = modules.includes('p');
-    this.venusNext = modules.includes('v');
-    this.colonies = modules.includes('o');
-    this.turmoil = modules.includes('t');
-    this.community = modules.includes('*');
-    this.promo = modules.includes('r');
-    this.ares = modules.includes('a');
-    this.moon = modules.includes('m');
+    this.base = modules.includes(BASE);
+    this.corporateEra = modules.includes(CORP);
+    this.prelude = modules.includes(PRELUDE);
+    this.venusNext = modules.includes(VENUS);
+    this.colonies = modules.includes(COLONIES);
+    this.turmoil = modules.includes(TURMOIL);
+    this.community = modules.includes(COMMUNITY);
+    this.promo = modules.includes(PROMO);
+    this.ares = modules.includes(ARES);
+    this.moon = modules.includes(MOON);
   },
   watch: {
     filterText(newSearchString: string) {
@@ -248,16 +259,16 @@ export default Vue.extend({
         }
 
         let m = '';
-        if (this.base) m += 'b';
-        if (this.corporateEra) m += 'c';
-        if (this.prelude) m += 'p';
-        if (this.venusNext) m += 'v';
-        if (this.colonies) m += 'o';
-        if (this.turmoil) m += 't';
-        if (this.community) m += '*';
-        if (this.promo) m += 'r';
-        if (this.ares) m += 'a';
-        if (this.moon) m += 'm';
+        if (this.base) m += BASE;
+        if (this.corporateEra) m += CORP;
+        if (this.prelude) m += PRELUDE;
+        if (this.venusNext) m += VENUS;
+        if (this.colonies) m += COLONIES;
+        if (this.turmoil) m += TURMOIL;
+        if (this.community) m += COMMUNITY;
+        if (this.promo) m += PROMO;
+        if (this.ares) m += ARES;
+        if (this.moon) m += MOON;
         if (m === '') m = '-'; // - means no modules.
 
         if (m !== ALL_MODULES) {

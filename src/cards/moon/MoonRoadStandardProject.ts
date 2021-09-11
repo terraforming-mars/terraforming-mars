@@ -10,7 +10,7 @@ import {TileType} from '../../TileType';
 import {AltSecondaryTag} from '../render/CardRenderItem';
 
 export class MoonRoadStandardProject extends StandardProjectCard implements IMoonCard {
-  private static PROPERTIES = {
+  constructor(properties = {
     name: CardName.MOON_ROAD_STANDARD_PROJECT,
     cost: 18,
     reserveUnits: Units.of({steel: 1}),
@@ -23,9 +23,7 @@ export class MoonRoadStandardProject extends StandardProjectCard implements IMoo
         }),
       ),
     },
-  }
-
-  constructor(properties = MoonRoadStandardProject.PROPERTIES) {
+  }) {
     super(properties);
   }
 

@@ -4,14 +4,9 @@
         "types": ["node", "mocha", "chai"]
     },
     "extends": "../tsconfig.json",
-    "references": [
-        {
-            "path": "../src/tsconfig.json"
-        },
-    ],
     "include": [
         "utils/setup.ts",
         "**/*.spec.ts",
-        "vue-shims.d.ts",
+        "vue-shims.d.ts"
     ]
 }

@@ -83,8 +83,8 @@
 
             <div class="create-game-page-column" style = "flex-flow: inherit; ">
               <span v-for="type in allTypes" :key="type">
-                <input type="checkbox" :name="type" :id="`${type}-checkbox`" v-model="types[type]">
-                <label :for="`${type}-checkbox`" class="expansion-button">
+                <input type="checkbox" :name="`${type}-cardType`" :id="`${type}-cardType-checkbox`" v-model="types[type]">
+                <label :for="`${type}-cardType-checkbox`" class="expansion-button">
                     <span v-i18n>{{type}}</span>
                 </label>
               </span>
@@ -169,9 +169,6 @@ const MODULE_MOON = 'm';
 
 const ALL_MODULES = `${MODULE_BASE}${MODULE_CORP}${MODULE_PRELUDE}${MODULE_VENUS}${MODULE_COLONIES}${MODULE_TURMOIL}${MODULE_COMMUNITY}${MODULE_PROMO}${MODULE_ARES}${MODULE_MOON}`;
 
-// This view does not show standard actions.
-type MostCardTypes = Omit<Record<CardType, boolean>, CardType.STANDARD_ACTION>;
-
 export interface DebugUIModel {
   filterText: string,
   filterDescription: boolean,
@@ -186,7 +183,7 @@ export interface DebugUIModel {
   ares: boolean,
   moon: boolean,
   promo: boolean,
-  types: MostCardTypes,
+  types: Record<CardType, boolean>,
 }
 
 export default Vue.extend({
@@ -276,7 +273,7 @@ export default Vue.extend({
     },
   },
   computed: {
-    allTypes(): Array<MostCardTypes> {
+    allTypes(): Array<CardType> {
       return [
         CardType.EVENT,
         CardType.ACTIVE,

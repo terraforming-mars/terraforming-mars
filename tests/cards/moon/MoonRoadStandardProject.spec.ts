@@ -26,7 +26,18 @@ describe('MoonRoadStandardProject', () => {
   });
 
   it('can act', () => {
-    // 1. Have the money? And the steel?
+    player.steel = 0;
+    player.megaCredits = 18;
+    expect(player.canPlay(card)).is.false;
+
+    player.steel = 1;
+    player.megaCredits = 17;
+    expect(player.canPlay(card)).is.false;
+
+    player.steel = 1;
+    player.megaCredits = 18;
+    expect(player.canPlay(card)).is.true;
+
     // 2. Are there spaces on the moon for a Road?
   });
 

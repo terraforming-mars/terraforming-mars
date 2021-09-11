@@ -3,13 +3,9 @@
 {
     // Compiler options are mostly for the sub-configurations
     "compilerOptions": {
-        "declaration": true,
-        "declarationMap": true,
         "lib": ["dom"],
         "incremental": true,
-
         "module": "commonjs",
-
         "strict": true,
         "noImplicitAny": true,
         "noImplicitReturns": true,
@@ -18,7 +14,6 @@
         "removeComments": true,
         "preserveConstEnums": true,
         "skipLibCheck": true,
-        "sourceMap": true,
         "target": "es5",
         "types": ["node"],
         "moduleResolution": "node",

@@ -70,6 +70,7 @@ export class TestingUtils {
       politicalAgendasExtension: AgendaStyle.STANDARD,
       moonExpansion: false,
       requiresMoonTrackCompletion: false,
+      moonStandardProjectVariant: false,
     };
 
     return Object.assign(defaultOptions, options);

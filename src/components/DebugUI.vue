@@ -169,6 +169,9 @@ const MODULE_MOON = 'm';
 
 const ALL_MODULES = `${MODULE_BASE}${MODULE_CORP}${MODULE_PRELUDE}${MODULE_VENUS}${MODULE_COLONIES}${MODULE_TURMOIL}${MODULE_COMMUNITY}${MODULE_PROMO}${MODULE_ARES}${MODULE_MOON}`;
 
+// This view does not show standard actions.
+type MostCardTypes = Omit<Record<CardType, boolean>, CardType.STANDARD_ACTION>;
+
 export interface DebugUIModel {
   filterText: string,
   filterDescription: boolean,
@@ -183,7 +186,7 @@ export interface DebugUIModel {
   ares: boolean,
   moon: boolean,
   promo: boolean,
-  types: Omit<Record<CardType, boolean>, CardType.STANDARD_ACTION>,
+  types: MostCardTypes,
 }
 
 export default Vue.extend({
@@ -273,7 +276,7 @@ export default Vue.extend({
     },
   },
   computed: {
-    allTypes(): Array<CardType> {
+    allTypes(): Array<MostCardTypes> {
       return [
         CardType.EVENT,
         CardType.ACTIVE,

@@ -81,6 +81,15 @@
               </label><span/>
             </div>
 
+            <div class="create-game-page-column" style = "flex-flow: inherit; ">
+              <span v-for="type in allTypes" :key="type">
+                <input type="checkbox" :name="type" :id="`${type}-checkbox`" v-model="types[type]">
+                <label :for="`${type}-checkbox`" class="expansion-button">
+                    <span v-i18n>{{type}}</span>
+                </label>
+              </span>
+            </div>
+
             <section class="debug-ui-cards-list">
                 <h2>Project Cards</h2>
                 <div class="cardbox" v-for="card in getAllProjectCards()" :key="card">
@@ -124,6 +133,7 @@ import {
 } from '../cards/AllCards';
 import {GameModule} from '@/GameModule';
 import {ICard} from '@/cards/ICard';
+import {CardType} from '@/cards/CardType';
 import {ICardRenderDescription, isIDescription} from '@/cards/render/ICardRenderDescription';
 import {CardName} from '@/CardName';
 import {ICardFactory} from '@/cards/ICardFactory';
@@ -146,33 +156,34 @@ ALL_CARD_MANIFESTS.forEach((manifest) => {
   });
 });
 
-const BASE = 'b';
-const CORP = 'c';
-const PRELUDE = 'p';
-const VENUS = 'v';
-const COLONIES = 'o';
-const TURMOIL = 't';
-const COMMUNITY = '*';
-const PROMO = 'r';
-const ARES = 'a';
-const MOON = 'm';
+const MODULE_BASE = 'b';
+const MODULE_CORP = 'c';
+const MODULE_PRELUDE = 'p';
+const MODULE_VENUS = 'v';
+const MODULE_COLONIES = 'o';
+const MODULE_TURMOIL = 't';
+const MODULE_COMMUNITY = '*';
+const MODULE_PROMO = 'r';
+const MODULE_ARES = 'a';
+const MODULE_MOON = 'm';
 
-const ALL_MODULES = `${BASE}${CORP}${PRELUDE}${VENUS}${COLONIES}${TURMOIL}${COMMUNITY}${PROMO}${ARES}${MOON}`;
+const ALL_MODULES = `${MODULE_BASE}${MODULE_CORP}${MODULE_PRELUDE}${MODULE_VENUS}${MODULE_COLONIES}${MODULE_TURMOIL}${MODULE_COMMUNITY}${MODULE_PROMO}${MODULE_ARES}${MODULE_MOON}`;
 
 export interface DebugUIModel {
   filterText: string,
-  filterDescription: boolean | unknown[],
-  sortById: boolean | unknown[],
-  base: boolean | unknown[],
-  corporateEra: boolean | unknown[],
-  prelude: boolean | unknown[],
-  venusNext: boolean | unknown[],
-  colonies: boolean | unknown[],
-  turmoil: boolean | unknown[],
-  community: boolean | unknown[],
-  ares: boolean | unknown[],
-  moon: boolean | unknown[],
-  promo: boolean | unknown[],
+  filterDescription: boolean,
+  sortById: boolean,
+  base: boolean,
+  corporateEra: boolean,
+  prelude: boolean,
+  venusNext: boolean,
+  colonies: boolean,
+  turmoil: boolean,
+  community: boolean,
+  ares: boolean,
+  moon: boolean,
+  promo: boolean,
+  types: Omit<Record<CardType, boolean>, CardType.STANDARD_ACTION>,
 }
 
 export default Vue.extend({
@@ -195,6 +206,14 @@ export default Vue.extend({
       ares: true,
       moon: true,
       promo: true,
+      types: {
+        event: true,
+        active: true,
+        automated: true,
+        prelude: true,
+        corporation: true,
+        standard_project: true,
+      },
     } as DebugUIModel;
   },
   mounted() {
@@ -204,16 +223,16 @@ export default Vue.extend({
       this.filterText = searchString;
     }
     const modules = urlParams.get('m') || ALL_MODULES;
-    this.base = modules.includes(BASE);
-    this.corporateEra = modules.includes(CORP);
-    this.prelude = modules.includes(PRELUDE);
-    this.venusNext = modules.includes(VENUS);
-    this.colonies = modules.includes(COLONIES);
-    this.turmoil = modules.includes(TURMOIL);
-    this.community = modules.includes(COMMUNITY);
-    this.promo = modules.includes(PROMO);
-    this.ares = modules.includes(ARES);
-    this.moon = modules.includes(MOON);
+    this.base = modules.includes(MODULE_BASE);
+    this.corporateEra = modules.includes(MODULE_CORP);
+    this.prelude = modules.includes(MODULE_PRELUDE);
+    this.venusNext = modules.includes(MODULE_VENUS);
+    this.colonies = modules.includes(MODULE_COLONIES);
+    this.turmoil = modules.includes(MODULE_TURMOIL);
+    this.community = modules.includes(MODULE_COMMUNITY);
+    this.promo = modules.includes(MODULE_PROMO);
+    this.ares = modules.includes(MODULE_ARES);
+    this.moon = modules.includes(MODULE_MOON);
   },
   watch: {
     filterText(newSearchString: string) {
@@ -249,6 +268,21 @@ export default Vue.extend({
     promo() {
       this.updateUrl();
     },
+    types() {
+      this.updateUrl();
+    },
+  },
+  computed: {
+    allTypes(): Array<CardType> {
+      return [
+        CardType.EVENT,
+        CardType.ACTIVE,
+        CardType.AUTOMATED,
+        CardType.PRELUDE,
+        CardType.CORPORATION,
+        CardType.STANDARD_PROJECT,
+      ];
+    },
   },
   methods: {
     updateUrl(search?: string) {
@@ -259,16 +293,16 @@ export default Vue.extend({
         }
 
         let m = '';
-        if (this.base) m += BASE;
-        if (this.corporateEra) m += CORP;
-        if (this.prelude) m += PRELUDE;
-        if (this.venusNext) m += VENUS;
-        if (this.colonies) m += COLONIES;
-        if (this.turmoil) m += TURMOIL;
-        if (this.community) m += COMMUNITY;
-        if (this.promo) m += PROMO;
-        if (this.ares) m += ARES;
-        if (this.moon) m += MOON;
+        if (this.base) m += MODULE_BASE;
+        if (this.corporateEra) m += MODULE_CORP;
+        if (this.prelude) m += MODULE_PRELUDE;
+        if (this.venusNext) m += MODULE_VENUS;
+        if (this.colonies) m += MODULE_COLONIES;
+        if (this.turmoil) m += MODULE_TURMOIL;
+        if (this.community) m += MODULE_COMMUNITY;
+        if (this.promo) m += MODULE_PROMO;
+        if (this.ares) m += MODULE_ARES;
+        if (this.moon) m += MODULE_MOON;
         if (m === '') m = '-'; // - means no modules.
 
         if (m !== ALL_MODULES) {
@@ -315,11 +349,15 @@ export default Vue.extend({
     },
     filtered(cardName: CardName): boolean {
       const card = cards.get(cardName);
+      if (card === undefined) {
+        return false;
+      }
+
       const filterText = this.$data.filterText.toUpperCase();
       if (this.$data.filterText.length > 0) {
         if (cardName.toUpperCase().includes(filterText) === false) {
           if (this.$data.filterDescription) {
-            let desc: string | ICardRenderDescription | undefined = card?.card.metadata?.description;
+            let desc: string | ICardRenderDescription | undefined = card.card.metadata?.description;
             if (isIDescription(desc)) {
               desc = desc.text;
             }
@@ -333,7 +371,9 @@ export default Vue.extend({
         }
       }
 
-      switch (card?.module) {
+      if (!(this.types as any)[card.card.cardType]) return false;
+
+      switch (card.module) {
       case GameModule.Base:
         return this.base === true;
       case GameModule.CorpEra:

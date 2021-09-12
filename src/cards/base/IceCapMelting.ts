@@ -26,9 +26,6 @@ export class IceCapMelting extends Card implements IProjectCard {
     });
   }
   public canPlay(player: Player): boolean {
-    if (!super.canPlay(player)) {
-      return false;
-    }
     const oceansMaxed = player.game.board.getOceansOnBoard() === MAX_OCEAN_TILES;
 
     if (PartyHooks.shouldApplyPolicy(player.game, PartyName.REDS) && !oceansMaxed) {

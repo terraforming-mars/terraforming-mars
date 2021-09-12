@@ -31,13 +31,13 @@ describe('EcologicalSurvey', () => {
 
   it('Can play', () => {
     AresTestHelper.addGreenery(player);
-    expect(card.canPlay(player)).is.false;
+    expect(player.canPlayForFree(card)).is.false;
 
     AresTestHelper.addGreenery(player);
-    expect(card.canPlay(player)).is.false;
+    expect(player.canPlayForFree(card)).is.false;
 
     AresTestHelper.addGreenery(player);
-    expect(card.canPlay(player)).is.true;
+    expect(player.canPlayForFree(card)).is.true;
   });
 
   // This doesn't test anything about this card, but about the behavior this card provides, from

@@ -34,9 +34,6 @@ export class HE3ProductionQuotas extends Card implements IProjectCard {
   };
 
   public canPlay(player: Player): boolean {
-    if (super.canPlay(player) === false) {
-      return false;
-    }
     const moonTiles = MoonExpansion.tiles(player.game, TileType.MOON_MINE, {surfaceOnly: true});
     if (player.steel < moonTiles.length) {
       return false;

@@ -51,7 +51,6 @@ export class Capital extends Card implements IProjectCard {
   }
   public canPlay(player: Player): boolean {
     return player.getProduction(Resources.ENERGY) >= 2 &&
-        super.canPlay(player) &&
         player.game.board.getAvailableSpacesForCity(player).length > 0;
   }
   public getVictoryPoints(player: Player) {

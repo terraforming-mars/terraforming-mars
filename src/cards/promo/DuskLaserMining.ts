@@ -31,7 +31,7 @@ export class DuskLaserMining extends Card implements IProjectCard {
   }
 
   public canPlay(player: Player): boolean {
-    return super.canPlay(player) && player.getProduction(Resources.ENERGY) >= 1;
+    return player.getProduction(Resources.ENERGY) >= 1;
   }
 
   public play(player: Player) {

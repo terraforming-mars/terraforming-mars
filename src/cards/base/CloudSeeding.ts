@@ -28,7 +28,6 @@ export class CloudSeeding extends Card implements IProjectCard {
   }
   public canPlay(player: Player): boolean {
     return player.getProduction(Resources.MEGACREDITS) > -5 &&
-        super.canPlay(player) &&
         player.game.someoneHasResourceProduction(Resources.HEAT, 1);
   }
 

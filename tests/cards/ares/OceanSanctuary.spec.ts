@@ -20,19 +20,19 @@ describe('OceanSanctuary', function() {
 
   it('Can play', function() {
     AresTestHelper.addOcean(game, player);
-    expect(card.canPlay(player)).is.false;
+    expect(player.canPlayForFree(card)).is.false;
 
     AresTestHelper.addOcean(game, player);
-    expect(card.canPlay(player)).is.false;
+    expect(player.canPlayForFree(card)).is.false;
 
     AresTestHelper.addOcean(game, player);
-    expect(card.canPlay(player)).is.false;
+    expect(player.canPlayForFree(card)).is.false;
 
     AresTestHelper.addOcean(game, player);
-    expect(card.canPlay(player)).is.false;
+    expect(player.canPlayForFree(card)).is.false;
 
     AresTestHelper.addOcean(game, player);
-    expect(card.canPlay(player)).is.true;
+    expect(player.canPlayForFree(card)).is.true;
   });
 
   it('Play', function() {

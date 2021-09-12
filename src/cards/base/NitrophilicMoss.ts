@@ -30,11 +30,10 @@ export class NitrophilicMoss extends Card implements IProjectCard {
   }
 
   public canPlay(player: Player): boolean {
-    const meetsCardRequirements = super.canPlay(player);
     const hasViralEnhancers = player.playedCards.find((card) => card.name === CardName.VIRAL_ENHANCERS);
     const hasEnoughPlants = player.plants >= 2 || player.isCorporation(CardName.MANUTECH) || player.plants >= 1 && hasViralEnhancers !== undefined;
 
-    return meetsCardRequirements && hasEnoughPlants;
+    return hasEnoughPlants;
   }
   public play(player: Player) {
     player.plants -= 2;

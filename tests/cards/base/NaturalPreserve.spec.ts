@@ -23,21 +23,21 @@ describe('NaturalPreserve', () => {
       game.addTile(player, land.spaceType, land, {tileType: TileType.NATURAL_PRESERVE});
     }
 
-    expect(card.canPlay(player)).is.not.true;
+    expect(player.canPlayForFree(card)).is.not.true;
   });
 
   it('Cannot play if oxygen level too high', () => {
     (game as any).oxygenLevel = 5;
-    expect(card.canPlay(player)).is.not.true;
+    expect(player.canPlayForFree(card)).is.not.true;
   });
 
   it('Can play', () => {
     (game as any).oxygenLevel = 4;
-    expect(card.canPlay(player)).is.true;
+    expect(player.canPlayForFree(card)).is.true;
   });
 
   it('Should play', () => {
-    expect(card.canPlay(player)).is.true;
+    expect(player.canPlayForFree(card)).is.true;
     const action = card.play(player);
     expect(action).is.not.undefined;
     expect(action instanceof SelectSpace).is.true;

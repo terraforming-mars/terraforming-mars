@@ -34,7 +34,7 @@ export class FreyjaBiodomes extends Card {
     });
   };
   public canPlay(player: Player): boolean {
-    return player.getProduction(Resources.ENERGY) >= 1 && super.canPlay(player);
+    return player.getProduction(Resources.ENERGY) >= 1;
   }
   public getResCards(player: Player): ICard[] {
     let resourceCards = player.getResourceCards(ResourceType.ANIMAL);

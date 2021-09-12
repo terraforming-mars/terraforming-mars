@@ -1791,7 +1791,18 @@ export class Player implements ISerializable<SerializedPlayer> {
         reserveUnits: MoonExpansion.adjustedReserveCosts(this, card),
       });
 
-    return canAfford && (card.canPlay === undefined || card.canPlay(this));
+    if (!canAfford) {
+      return false;
+    }
+
+    return this.canPlayForFree(card);
+  }
+
+  public canPlayForFree(card: IProjectCard): boolean {
+    if (card.requirements !== undefined && !card.requirements.satisfies(this)) {
+      return false;
+    }
+    return card.canPlay === undefined || card.canPlay(this);
   }
 
   // Checks if the player can afford to pay `cost` mc (possibly replaceable with steel, titanium etc.)

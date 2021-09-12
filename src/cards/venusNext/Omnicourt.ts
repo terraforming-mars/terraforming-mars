@@ -29,12 +29,11 @@ export class Omnicourt extends Card {
   };
 
   public canPlay(player: Player): boolean {
-    const hasRequiredTags = super.canPlay(player);
     if (PartyHooks.shouldApplyPolicy(player.game, PartyName.REDS)) {
-      return player.canAfford(player.getCardCost(this) + REDS_RULING_POLICY_COST * 2, {steel: true}) && hasRequiredTags;
+      return player.canAfford(player.getCardCost(this) + REDS_RULING_POLICY_COST * 2, {steel: true});
     }
 
-    return hasRequiredTags;
+    return true;
   }
 
   public play(player: Player) {

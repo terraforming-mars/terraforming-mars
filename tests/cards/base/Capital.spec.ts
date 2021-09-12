@@ -23,19 +23,19 @@ describe('Capital', () => {
   it('Cannot play without 2 energy production', () => {
     TestingUtils.maxOutOceans(player, 4);
     player.addProduction(Resources.ENERGY, 1);
-    expect(card.canPlay(player)).is.not.true;
+    expect(player.canPlayForFree(card)).is.not.true;
   });
 
   it('Cannot play if oceans requirement not met', () => {
     TestingUtils.maxOutOceans(player, 3);
     player.addProduction(Resources.ENERGY, 2);
-    expect(card.canPlay(player)).is.not.true;
+    expect(player.canPlayForFree(card)).is.not.true;
   });
 
   it('Can play', () => {
     TestingUtils.maxOutOceans(player, 4);
     player.addProduction(Resources.ENERGY, 2);
-    expect(card.canPlay(player)).is.true;
+    expect(player.canPlayForFree(card)).is.true;
   });
 
   it('Should play', () => {
@@ -44,7 +44,7 @@ describe('Capital', () => {
       oceanSpaces[i].tile = {tileType: TileType.OCEAN};
     }
     player.addProduction(Resources.ENERGY, 2);
-    expect(card.canPlay(player)).is.true;
+    expect(player.canPlayForFree(card)).is.true;
 
     const action = card.play(player);
     expect(action instanceof SelectSpace).is.true;

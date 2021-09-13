@@ -161,18 +161,18 @@ const ALL_MODULES = `${BASE}${CORP}${PRELUDE}${VENUS}${COLONIES}${TURMOIL}${COMM
 
 export interface DebugUIModel {
   filterText: string,
-  filterDescription: boolean | unknown[],
-  sortById: boolean | unknown[],
-  base: boolean | unknown[],
-  corporateEra: boolean | unknown[],
-  prelude: boolean | unknown[],
-  venusNext: boolean | unknown[],
-  colonies: boolean | unknown[],
-  turmoil: boolean | unknown[],
-  community: boolean | unknown[],
-  ares: boolean | unknown[],
-  moon: boolean | unknown[],
-  promo: boolean | unknown[],
+  filterDescription: boolean,
+  sortById: boolean,
+  base: boolean,
+  corporateEra: boolean,
+  prelude: boolean,
+  venusNext: boolean,
+  colonies: boolean,
+  turmoil: boolean,
+  community: boolean,
+  ares: boolean,
+  moon: boolean,
+  promo: boolean,
 }
 
 export default Vue.extend({

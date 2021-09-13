@@ -1,7 +1,7 @@
 <template>
   <button @click="$emit('click')" class="btn" :class="outerClass" :disabled="isDisabled" v-i18n>
     <span v-if="hasIcon" class="icon" :class="iconClass" data-test="icon"/>
-    <span v-else>{{ title }}</span>
+    <span v-i18n v-else>{{ title }}</span>
   </button>
 </template>
 
@@ -30,6 +30,10 @@ export default Vue.extend({
       type: String,
       default: 'normal',
       validator: (item) => ['tiny', 'small', 'normal', 'big', 'jumbo'].includes(item),
+    },
+    rounded: {
+      type: Boolean,
+      default: true,
     },
     disableOnServerBusy: {
       type: Boolean,
@@ -83,6 +87,8 @@ export default Vue.extend({
         // align
         'float-left': this.align === 'left',
         'float-right': this.align === 'right',
+
+        'btn-rounded': this.rounded === true,
 
         // loading
         'loading': this.isDisabledDueToServerBusy,

@@ -17,7 +17,7 @@ export default Vue.extend({
   },
   data() {
     return {
-      hide: false as unknown[] | boolean,
+      hide: false,
     };
   },
   mixins: [TranslateMixin],

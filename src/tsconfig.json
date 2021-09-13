@@ -1,6 +1,7 @@
 {
     "compilerOptions": {
         "outDir": "../build/src",
+        "composite": true,
     },
     "extends": "../tsconfig.json",
     "include": [

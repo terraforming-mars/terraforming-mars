@@ -12,11 +12,10 @@ jobs:
     - uses: actions/setup-node@v1
       with:
         node-version: '10.x'
-    - run: npm ci
-    - run: npm run lint
-    - run: npm run lint:sfc
+    - run: npm install
     - run: npm run build
     - run: npm test
+    - run: npm run cover
   build-windows:
 
     runs-on: windows-latest
@@ -26,9 +25,8 @@ jobs:
     - uses: actions/setup-node@v1
       with:
         node-version: '10.x'
-    - run: npm ci
-    - run: npm run lint
-    - run: npm run lint:sfc
+    - run: npm install
     - run: npm run build
     - run: npm test
+    - run: npm run cover
 

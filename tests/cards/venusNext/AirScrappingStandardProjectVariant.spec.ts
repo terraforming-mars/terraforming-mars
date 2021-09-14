@@ -1,5 +1,5 @@
 import {CardName} from '@/CardName';
-import {AirScrappingStandardProjectVariant} from '@/cards/venusNext/AirScrappingStandardProjectVariant';
+import {AirScrappingStandardProjectVariant} from '../../../src/cards/venusNext/AirScrappingStandardProjectVariant';
 import {expect} from 'chai';
 import {TestingUtils} from 'tests/TestingUtils';
 import {TestPlayer} from 'tests/TestPlayer';

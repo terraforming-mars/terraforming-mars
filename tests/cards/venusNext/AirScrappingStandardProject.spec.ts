@@ -1,4 +1,4 @@
-import {AirScrappingStandardProject} from '@/cards/venusNext/AirScrappingStandardProject';
+import {AirScrappingStandardProject} from '../../../src/cards/venusNext/AirScrappingStandardProject';
 import {expect} from 'chai';
 import {TestingUtils} from 'tests/TestingUtils';
 import {TestPlayer} from 'tests/TestPlayer';

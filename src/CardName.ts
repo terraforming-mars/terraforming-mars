@@ -9,6 +9,7 @@ export enum CardName {
     GREENERY_STANDARD_PROJECT = 'Greenery',
     CITY_STANDARD_PROJECT = 'City',
     AIR_SCRAPPING_STANDARD_PROJECT = 'Air Scrapping',
+    AIR_SCRAPPING_STANDARD_PROJECT_VARIANT = 'Air Scrapping (Var)',
 
     // Standard actions:
     CONVERT_PLANTS = 'Convert Plants',

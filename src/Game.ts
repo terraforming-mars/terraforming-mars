@@ -113,9 +113,11 @@ export interface GameOptions {
   requiresMoonTrackCompletion: boolean; // Moon must be completed to end the game
   requiresVenusTrackCompletion: boolean; // Venus must be completed to end the game
   moonStandardProjectVariant: boolean;
+  altVenusBoard: boolean;
 }
 
 const DEFAULT_GAME_OPTIONS: GameOptions = {
+  altVenusBoard: false,
   aresExtension: false,
   aresHazards: true,
   boardName: BoardName.ORIGINAL,

@@ -38,7 +38,7 @@ export class TestingUtils {
   };
 
   public static setCustomGameOptions(options: Partial<GameOptions> = {}): GameOptions {
-    const defaultOptions = {
+    const defaultOptions: GameOptions = {
       draftVariant: false,
       initialDraftVariant: false,
       corporateEra: true,
@@ -71,6 +71,7 @@ export class TestingUtils {
       moonExpansion: false,
       requiresMoonTrackCompletion: false,
       moonStandardProjectVariant: false,
+      altVenusBoard: false,
     };
 
     return Object.assign(defaultOptions, options);

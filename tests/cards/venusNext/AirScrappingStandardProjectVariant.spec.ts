@@ -1,8 +1,8 @@
-import {CardName} from '@/CardName';
-import {AirScrappingStandardProjectVariant} from '../../../src/cards/venusNext/AirScrappingStandardProjectVariant';
 import {expect} from 'chai';
-import {TestingUtils} from 'tests/TestingUtils';
-import {TestPlayer} from 'tests/TestPlayer';
+import {CardName} from '../../../src/CardName';
+import {AirScrappingStandardProjectVariant} from '../../../src/cards/venusNext/AirScrappingStandardProjectVariant';
+import {TestingUtils} from '../../TestingUtils';
+import {TestPlayer} from '../../TestPlayer';
 import {Game} from '../../../src/Game';
 import {TestPlayers} from '../../TestPlayers';
 

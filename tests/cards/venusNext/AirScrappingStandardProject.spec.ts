@@ -1,7 +1,7 @@
-import {AirScrappingStandardProject} from '../../../src/cards/venusNext/AirScrappingStandardProject';
 import {expect} from 'chai';
-import {TestingUtils} from 'tests/TestingUtils';
-import {TestPlayer} from 'tests/TestPlayer';
+import {AirScrappingStandardProject} from '../../../src/cards/venusNext/AirScrappingStandardProject';
+import {TestingUtils} from '../../TestingUtils';
+import {TestPlayer} from '../../TestPlayer';
 import {Game} from '../../../src/Game';
 import {TestPlayers} from '../../TestPlayers';
 

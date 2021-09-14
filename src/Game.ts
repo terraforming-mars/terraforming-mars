@@ -115,7 +115,7 @@ export interface GameOptions {
   moonStandardProjectVariant: boolean;
 }
 
-const DEFAULT_GAME_OPTIONS: GameOptions = {
+export const DEFAULT_GAME_OPTIONS: GameOptions = {
   aresExtension: false,
   aresHazards: true,
   boardName: BoardName.ORIGINAL,

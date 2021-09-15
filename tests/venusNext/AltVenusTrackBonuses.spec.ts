@@ -8,7 +8,7 @@ import {TestingUtils} from '../TestingUtils';
 import {TestPlayers} from '../TestPlayers';
 import {GrantVenusAltTrackBonusDeferred} from '../../src/venusNext/GrantVenusAltTrackBonusDeferred';
 
-describe('AltVenusTrackresourcees', function() {
+describe('AltVenusTrackresources', function() {
   let player: Player;
   let game: Game;
 
@@ -56,10 +56,10 @@ describe('AltVenusTrackresourcees', function() {
   });
 
 
-  it('Going from 24-30 grants 2 standard and 1 wild resources.', () => {
+  it('Going from 24-30 grants 3 standard and 1 wild resources.', () => {
     (game as any).venusScaleLevel = 24;
     game.increaseVenusScaleLevel(player, 3);
-    expect(getAction(game)).to.deep.eq({standardResourceCount: 2, wildResource: true});
+    expect(getAction(game)).to.deep.eq({standardResourceCount: 3, wildResource: true});
   });
 
   it('Going from 30-28 does not gain any resources', () => {

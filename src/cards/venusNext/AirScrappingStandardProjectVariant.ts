@@ -3,6 +3,7 @@ import {CardName} from '../../CardName';
 import {CardRenderer} from '../render/CardRenderer';
 import {Tags} from '../Tags';
 import {AirScrappingStandardProject} from './AirScrappingStandardProject';
+import {Size} from '../render/Size';
 
 export class AirScrappingStandardProjectVariant extends AirScrappingStandardProject {
   constructor() {
@@ -15,7 +16,7 @@ export class AirScrappingStandardProjectVariant extends AirScrappingStandardProj
           b.standardProject('Spend 15M€, less 1M€ per Venus tag you have, to raise Venus 1 step.', (eb) => {
             eb.megacredits(15).text('(').megacredits(-1).slash().venus(1).played.text(')').startAction.venus(1);
           });
-          b.br.text('(max -5M€');
+          b.br.text('(max -5M€)', Size.SMALL);
         }),
       },
     });

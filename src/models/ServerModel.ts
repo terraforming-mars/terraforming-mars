@@ -42,7 +42,6 @@ import {Units} from '../Units';
 import {SelectPartyToSendDelegate} from '../inputs/SelectPartyToSendDelegate';
 import {GameModel} from './GameModel';
 import {Turmoil} from '../turmoil/Turmoil';
-import {SelectDistinctResources} from '../inputs/SelectDistinctResources';
 
 export class Server {
   public static getSimpleGameModel(game: Game): SimpleGameModel {
@@ -336,9 +335,6 @@ export class Server {
       break;
     case PlayerInputTypes.SHIFT_ARES_GLOBAL_PARAMETERS:
       playerInputModel.aresData = (waitingFor as ShiftAresGlobalParameters).aresData;
-      break;
-    case PlayerInputTypes.SELECT_DISTINCT_RESOURCES:
-      playerInputModel.amount = (waitingFor as SelectDistinctResources).standardResourceCount;
       break;
     };
     return playerInputModel;

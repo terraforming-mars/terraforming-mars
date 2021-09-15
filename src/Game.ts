@@ -1164,8 +1164,7 @@ export class Game implements ISerializable<SerializedGame> {
 
         const newValue = this.venusScaleLevel + steps * 2;
         const minimalBaseline = Math.max(this.venusScaleLevel, 16);
-        // Level going from 28-30, the player will get that extra resource separately.
-        const maximumBaseline = Math.min(newValue, 28);
+        const maximumBaseline = Math.min(newValue, 30);
         const standardResourcesGranted = Math.max((maximumBaseline - minimalBaseline) / 2, 0);
 
         const grantWildResource = this.venusScaleLevel + (steps * 2) >= 30;

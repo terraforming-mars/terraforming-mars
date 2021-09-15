@@ -56,6 +56,17 @@
                     :class="'global-ares-severe-dust-storms-'+aresData.hazardData.severeDustStormOxygen.threshold"></div>
                 </div>
             </div>
+
+            <div v-if="altVenusBoard" class="global-alt-venus">
+              <div class="std-wild-resource p18"/>
+              <div class="std-wild-resource p20"/>
+              <div class="std-wild-resource p22"/>
+              <div class="std-wild-resource p24"/>
+              <div class="std-wild-resource p26"/>
+              <div class="std-wild-resource p28"/>
+              <div class="std-wild-resource p30"/>
+              <div class="wild-resource p30b"/>
+            </div>
         </div>
 
         <div class="board" id="main_board">
@@ -174,6 +185,9 @@ export default Vue.extend({
     },
     venusScaleLevel: {
       type: Number,
+    },
+    altVenusBoard: {
+      type: Boolean,
     },
     boardName: {
       type: String,

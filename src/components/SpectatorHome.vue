@@ -31,6 +31,7 @@
       :oxygen_level="game.oxygenLevel"
       :temperature="game.temperature"
       :aresExtension="game.gameOptions.aresExtension"
+      :altVenusBoard="game.gameOptions.altVenusBoard"
       :aresData="game.aresData"
       :hideTiles="hideTiles"
       @toggleHideTiles="hideTiles = !hideTiles"

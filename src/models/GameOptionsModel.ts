@@ -29,5 +29,6 @@ export interface GameOptionsModel {
   venusNextExtension: boolean,
   requiresMoonTrackCompletion: boolean,
   requiresVenusTrackCompletion: boolean,
+  altVenusBoard: boolean,
   undoOption: boolean,
 }

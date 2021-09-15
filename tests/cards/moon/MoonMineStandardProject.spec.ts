@@ -27,7 +27,18 @@ describe('MoonMineStandardProject', () => {
   });
 
   it('can act', () => {
-    // 1. Have the money? And the titanium?
+    player.titanium = 1;
+    player.megaCredits = 19;
+    expect(player.canPlay(card)).is.false;
+
+    player.titanium = 0;
+    player.megaCredits = 20;
+    expect(player.canPlay(card)).is.false;
+
+    player.titanium = 1;
+    player.megaCredits = 20;
+    expect(player.canPlay(card)).is.true;
+
     // 2. Are there spaces on the moon for a Mine?
   });
 

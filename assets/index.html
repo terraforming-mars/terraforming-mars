@@ -41,6 +41,7 @@
                 <spectator-home
                     v-else-if="screen === 'spectator-home'"
                     :spectator="spectator"
+                    :key="playerkey"
                     :settings="settings"
                 ></spectator-home>
                 <game-end

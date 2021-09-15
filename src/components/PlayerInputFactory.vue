@@ -29,7 +29,6 @@ import SelectPartyToSendDelegate from '@/components/SelectPartyToSendDelegate.vu
 import SelectColony from '@/components/SelectColony.vue';
 import SelectProductionToLose from '@/components/SelectProductionToLose.vue';
 import ShiftAresGlobalParameters from '@/components/ShiftAresGlobalParameters.vue';
-import SelectDistinctResources from '@/components/SelectDistinctResources.vue';
 
 export default Vue.component('player-input-factory', {
   props: {
@@ -68,7 +67,6 @@ export default Vue.component('player-input-factory', {
     'select-colony': SelectColony,
     SelectProductionToLose,
     ShiftAresGlobalParameters,
-    SelectDistinctResources,
   },
   methods: {
     saveData() {
@@ -110,8 +108,6 @@ export default Vue.component('player-input-factory', {
         return 'select-production-to-lose';
       case PlayerInputTypes.SHIFT_ARES_GLOBAL_PARAMETERS:
         return 'shift-ares-global-parameters';
-      case PlayerInputTypes.SELECT_DISTINCT_RESOURCES:
-        return 'select-distinct-resources';
       default:
         throw 'Unsupported input type: ' + inputType;
       }

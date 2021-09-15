@@ -1,4 +1,4 @@
-import {createLocalVue, shallowMount} from '@vue/test-utils';
+import {createLocalVue, shallowMount, mount} from '@vue/test-utils';
 import {getInputElement, click} from './utils/VueUtils';
 import {expect} from 'chai';
 import SelectNumber from '@/components/SelectNumber.vue';
@@ -12,7 +12,7 @@ function getLocalVue() {
 
 describe('SelectNumber', () => {
   it('shows result', () => {
-    const wrapper = shallowMount(SelectNumber, {
+    const wrapper = mount(SelectNumber, {
       localVue: getLocalVue(),
       propsData: {'value': 5},
     });
@@ -22,7 +22,7 @@ describe('SelectNumber', () => {
   });
 
   it('plus works', async () => {
-    const wrapper = shallowMount(SelectNumber, {
+    const wrapper = mount(SelectNumber, {
       localVue: getLocalVue(),
       propsData: {'value': 5},
     });
@@ -33,7 +33,7 @@ describe('SelectNumber', () => {
   });
 
   it('plus does not exceed max', async () => {
-    const wrapper = shallowMount(SelectNumber, {
+    const wrapper = mount(SelectNumber, {
       localVue: getLocalVue(),
       propsData: {'value': 5, 'max': 7},
     });
@@ -49,7 +49,7 @@ describe('SelectNumber', () => {
   });
 
   it('minus works', async () => {
-    const wrapper = shallowMount(SelectNumber, {
+    const wrapper = mount(SelectNumber, {
       localVue: getLocalVue(),
       propsData: {'value': 5},
     });
@@ -60,7 +60,7 @@ describe('SelectNumber', () => {
   });
 
   it('minus does not exceed min', async () => {
-    const wrapper = shallowMount(SelectNumber, {
+    const wrapper = mount(SelectNumber, {
       localVue: getLocalVue(),
       propsData: {'value': 5, 'min': 3},
     });

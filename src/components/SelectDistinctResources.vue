@@ -1,8 +1,6 @@
   // TODO(kberg): merge with dry deserts.
 <template>
   <div class="wf-component wf-component--select-production-to-lose">
-    <!-- <div v-if="showtitle === true" class="nofloat wf-component-title">{{ $t(playerinput.title) }}</div> -->
-
     <h3 class="payments_title" v-i18n>You may gain up to {{playerinput.amount}} distinct resources.</h3>
 
     <div class="payments_type input-group">
@@ -35,7 +33,7 @@
     </div>
 
     <div v-if="showsave === true" class="nofloat">
-        <button class="btn btn-primary btn-submit" v-on:click="saveData" v-i18n>Save</button>
+        <button class="btn btn-primary btn-submit" v-on:click="saveData" data-test="save" v-i18n>Save</button>
     </div>
   </div>
 </template>
@@ -92,7 +90,6 @@ export default Vue.extend({
         heat: this.$data.heat,
       };
 
-      // TODO(kberg): handle the weird outlier when someome could in theory gain 7 of these.
       const elems = [units.megacredits, units.steel, units.titanium, units.plants, units.energy, units.heat];
       if (elems.some((n) => n < 0 || n > 1)) {
         this.$data.warning = 'Each resource must be distinct';

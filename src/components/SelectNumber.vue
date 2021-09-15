@@ -1,11 +1,12 @@
 <template>
   <span>
-    <button class="btn btn-primary" @click="delta(-1)"><i class="icon icon-minus" /></button>
+    <button class="btn btn-primary" @click="delta(-1)" data-test="minus"><i class="icon icon-minus" /></button>
     <input type="text" :maxlength="maxlength" class="form-input form-inline payments_input"
       v-bind:value="componentValue"
       @input="$emit('change', parseInt($event.target.value))"
+      data-test="textbox"
       />
-    <button class="btn btn-primary" @click="delta(1)"><i class="icon icon-plus" /></button>
+    <button class="btn btn-primary" @click="delta(1)" data-test="plus"><i class="icon icon-plus" /></button>
   </span>
 </template>
 <script lang="ts">
@@ -44,7 +45,7 @@ export default Vue.extend({
   },
   methods: {
     delta(direction: number) {
-      this.componentValue = Math.min(Math.max(this.value + direction, this.min), this.max);
+      this.componentValue = Math.min(Math.max(this.componentValue + direction, this.min), this.max);
       this.$emit('change', this.componentValue);
       this.$forceUpdate(); // Use case: Type a 1 in the text box, click the minus button. The model is correct but the text box is not.
     },

@@ -143,6 +143,13 @@
                                     </div>
                                 </div>
                             </template>
+
+                            <template v-if="venusNext">
+                                <input type="checkbox" v-model="altVenusBoard" id="altVenusBoard-checkbox">
+                                <label for="altVenusBoard-checkbox">
+                                    <span v-i18n>Alternate Venus Board</span> &nbsp;<a href="https://github.com/bafolts/terraforming-mars/wiki/Variants#alt-venus" class="tooltip" target="_blank">&#9432;</a>
+                                </label>
+                            </template>
                         </div>
 
                         <div class="create-game-page-column">
@@ -469,6 +476,7 @@ export interface CreateGameModel {
     requiresVenusTrackCompletion: boolean;
     requiresMoonTrackCompletion: boolean;
     moonStandardProjectVariant: boolean;
+    altVenusBoard: boolean;
     seededGame: boolean;
 }
 
@@ -545,6 +553,7 @@ export default Vue.extend({
       requiresVenusTrackCompletion: false,
       requiresMoonTrackCompletion: false,
       moonStandardProjectVariant: false,
+      altVenusBoard: false,
     };
   },
   components: {
@@ -892,6 +901,7 @@ export default Vue.extend({
         requiresVenusTrackCompletion,
         requiresMoonTrackCompletion: component.requiresMoonTrackCompletion,
         moonStandardProjectVariant: component.moonStandardProjectVariant,
+        altVenusBoard: component.altVenusBoard,
       }, undefined, 4);
       return dataToSend;
     },

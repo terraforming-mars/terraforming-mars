@@ -72,6 +72,7 @@ import {UndoActionOption} from './inputs/UndoActionOption';
 import {LawSuit} from './cards/promo/LawSuit';
 import {CrashSiteCleanup} from './cards/promo/CrashSiteCleanup';
 import {Turmoil} from './turmoil/Turmoil';
+import {SelectDistinctResources} from './inputs/SelectDistinctResources';
 
 export type PlayerId = string;
 
@@ -1027,6 +1028,10 @@ export class Player implements ISerializable<SerializedPlayer> {
         throw new Error('No party selected');
       }
       this.runInputCb(pi.cb(party));
+    } else if (pi instanceof SelectDistinctResources) {
+      // Input validation occurs in the callback.
+      const units: Units = JSON.parse(input[0][0]);
+      pi.cb(units);
     } else {
       throw new Error('Unsupported waitingFor');
     }

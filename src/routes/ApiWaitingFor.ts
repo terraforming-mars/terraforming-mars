@@ -17,10 +17,18 @@ export class ApiWaitingFor extends Handler {
   }
 
   // When player is undefined, caller is a spectator.
-  private getWaitingForModel(player: Player | undefined, game: Game, gameAge: number, undoCount: number): WaitingForModel {
-    if (player !== undefined && this.timeToGo(player)) {
+  private getPlayerWaitingForModel(player: Player, game: Game, gameAge: number, undoCount: number): WaitingForModel {
+    if (this.timeToGo(player)) {
       return {result: 'GO'};
     } else if (game.gameAge > gameAge || game.undoCount > undoCount) {
+      return {result: 'REFRESH'};
+    }
+    return {result: 'WAIT'};
+  }
+
+  // When player is undefined, caller is a spectator.
+  private getSpectatorWaitingForModel(game: Game, gameAge: number, undoCount: number): WaitingForModel {
+    if (game.gameAge > gameAge || game.undoCount > undoCount) {
       return {result: 'REFRESH'};
     }
     return {result: 'WAIT'};
@@ -39,7 +47,11 @@ export class ApiWaitingFor extends Handler {
       }
       try {
         const player = id.charAt(0) === 'p' ? game.getPlayerById(id) : undefined;
-        ctx.route.writeJson(res, this.getWaitingForModel(player, game, gameAge, undoCount));
+        if (player !== undefined) {
+          ctx.route.writeJson(res, this.getPlayerWaitingForModel(player, game, gameAge, undoCount));
+        } else {
+          ctx.route.writeJson(res, this.getSpectatorWaitingForModel(game, gameAge, undoCount));
+        }
       } catch (err) {
         // This is basically impossible since getPlayerById ensures that the player is on that game.
         console.warn(`unable to find player ${id}`, err);

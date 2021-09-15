@@ -1,5 +1,5 @@
 import {createLocalVue, mount} from '@vue/test-utils';
-import SelectHowToPay from '@/components/SelectHowToPay.vue';
+import SelectHowToPay from '@/client/components/SelectHowToPay.vue';
 import {PlayerInputModel} from '@/models/PlayerInputModel';
 import {PlayerViewModel, PublicPlayerModel} from '@/models/PlayerModel';
 import {PaymentTester} from './PaymentTester';

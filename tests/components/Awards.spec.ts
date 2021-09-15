@@ -1,8 +1,8 @@
 
 import {createLocalVue, shallowMount} from '@vue/test-utils';
 import {expect} from 'chai';
-import Awards from '@/components/Awards.vue';
-import Award from '@/components/Award.vue';
+import Awards from '@/client/components/Awards.vue';
+import Award from '@/client/components/Award.vue';
 import {FundedAwardModel} from '@/models/FundedAwardModel';
 import {AWARD_COSTS} from '@/constants';
 

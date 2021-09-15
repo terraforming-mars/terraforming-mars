@@ -1,16 +1,20 @@
 <template>
   <span>
-    <button class="btn btn-primary" @click="delta(-1)" data-test="minus"><i class="icon icon-minus" /></button>
+    <Button type="minus" class="btn btn-primary" @click="delta(-1)" data-test="minus" />
+    <!-- TODO(kberg): get rid of style: width; why is this necessary when it's not in SelectHowToPay? -->
     <input type="text" :maxlength="maxlength" class="form-input form-inline payments_input"
       v-bind:value="componentValue"
       @input="$emit('change', parseInt($event.target.value))"
       data-test="textbox"
+      style="width: 80px;"
       />
-    <button class="btn btn-primary" @click="delta(1)" data-test="plus"><i class="icon icon-plus" /></button>
+    <Button type="plus" class="btn btn-primary" @click="delta(1)" data-test="plus" />
   </span>
 </template>
+
 <script lang="ts">
 import Vue from 'vue';
+import Button from '@/components/common/Button.vue';
 
 export default Vue.extend({
   name: 'SelectNumber',
@@ -37,6 +41,9 @@ export default Vue.extend({
       required: false,
       default: 2,
     },
+  },
+  components: {
+    Button,
   },
   data() {
     return {

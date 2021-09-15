@@ -1,40 +1,42 @@
   // TODO(kberg): merge with dry deserts.
 <template>
-  <div class="wf-component wf-component--select-production-to-lose">
+  <div class="wf-component wf-component--select-distinct-resources payments_cont">
     <h3 class="payments_title" v-i18n>You may gain up to {{playerinput.amount}} distinct resources.</h3>
 
-    <div class="payments_type input-group">
-      <div class="production resource_icon--megacredits" style="background-size:contain;"></div>
-      <select-number :min="0" :max="1" v-model="megacredits"/>
-    </div>
-    <div class="payments_type input-group">
-      <div class="production steel"></div>
-      <select-number :min="0" :max="1" v-model="steel"/>
-    </div >
-    <div class="payments_type input-group">
-      <div class="production titanium"></div>
-      <select-number :min="0" :max="1" v-model="titanium"/>
-    </div >
-    <div class="payments_type input-group">
-      <div class="production plant"></div>
-      <select-number :min="0" :max="1" v-model="plants"/>
-    </div >
-    <div class="payments_type input-group">
-      <div class="production energy"></div>
-      <select-number :min="0" :max="1" v-model="energy"/>
-    </div >
-    <div class="payments_type input-group">
-      <div class="production heat"></div>
-      <select-number :min="0" :max="1" v-model="heat"/>
-    </div >
+    <section v-trim-whitespace>
+      <div class="payments_type input-group">
+        <div class="production resource_icon--megacredits" style="background-size:contain;"></div>
+        <select-number :min="0" :max="1" v-model="megacredits"/>
+      </div>
+      <div class="payments_type input-group">
+        <div class="production steel"></div>
+        <select-number :min="0" :max="1" v-model="steel"/>
+      </div >
+      <div class="payments_type input-group">
+        <div class="production titanium"></div>
+        <select-number :min="0" :max="1" v-model="titanium"/>
+      </div >
+      <div class="payments_type input-group">
+        <div class="production plant"></div>
+        <select-number :min="0" :max="1" v-model="plants"/>
+      </div >
+      <div class="payments_type input-group">
+        <div class="production energy"></div>
+        <select-number :min="0" :max="1" v-model="energy"/>
+      </div >
+      <div class="payments_type input-group">
+        <div class="production heat"></div>
+        <select-number :min="0" :max="1" v-model="heat"/>
+      </div >
 
-    <div v-if="hasWarning()" class="tm-warning">
-      <label class="label label-error">{{ $t(warning) }}</label>
-    </div>
+      <div v-if="hasWarning()" class="tm-warning">
+        <label class="label label-error">{{ $t(warning) }}</label>
+      </div>
 
-    <div v-if="showsave === true" class="nofloat">
-        <button class="btn btn-primary btn-submit" v-on:click="saveData" data-test="save" v-i18n>Save</button>
-    </div>
+      <div v-if="showsave === true" class="nofloat">
+          <button class="btn btn-primary btn-submit" v-on:click="saveData" data-test="save" v-i18n>Save</button>
+      </div>
+    </section>
   </div>
 </template>
 <script lang="ts">

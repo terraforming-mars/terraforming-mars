@@ -41,7 +41,7 @@
                         Go to main page
                     </a>
                 </div>
-                <div v-if="!isSoloGame || game.isSoloModeWin" class="game-end-winer-announcement">
+                <div v-if="!isSoloGame() || game.isSoloModeWin" class="game-end-winer-announcement">
                     <span v-for="p in getWinners()" :key="p.color"><span :class="'log-player ' + getEndGamePlayerRowColorClass(p.color)">{{ p.name }}</span></span> won!
                 </div>
                 <div class="game_end_victory_points">

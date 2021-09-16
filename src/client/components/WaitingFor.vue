@@ -15,7 +15,6 @@
 import Vue from 'vue';
 
 import {mainAppSettings} from '@/client/components/App';
-import {$t} from '@/client/directives/i18n';
 import {PlayerInputModel} from '@/models/PlayerInputModel';
 import {PlayerViewModel, PublicPlayerModel} from '@/models/PlayerModel';
 import {PreferencesManager} from '@/client/utils/PreferencesManager';
@@ -58,7 +57,7 @@ export default Vue.extend({
       if (position !== -1 && position < sequence.length - 1) {
         next = sequence[position + 1];
       }
-      document.title = next + ' ' + $t(constants.APP_NAME);
+      document.title = next + ' ' + this.$t(constants.APP_NAME);
     },
     onsave(out: Array<Array<string>>) {
       const xhr = new XMLHttpRequest();
@@ -141,7 +140,7 @@ export default Vue.extend({
     },
   },
   mounted() {
-    document.title = $t(constants.APP_NAME);
+    document.title = this.$t(constants.APP_NAME);
     window.clearInterval(documentTitleTimer);
     if (this.waitingfor === undefined) {
       this.waitForUpdate();

@@ -15,7 +15,6 @@ import Bonus from '@/client/components/Bonus.vue';
 import {SpaceModel} from '@/models/SpaceModel';
 import {SpaceType} from '@/SpaceType';
 import {TileType} from '@/TileType';
-import {$t} from '@/client/directives/i18n';
 
 const tileTypeToCssClass = new Map<TileType, string>([
   [TileType.COMMERCIAL_DISTRICT, 'commercial_district'],
@@ -143,7 +142,7 @@ export default Vue.extend({
       } else if (tileType === TileType.MINING_TITANIUM_BONUS) {
         ret = 'Mining: titanium bonus';
       }
-      return $t(ret);
+      return this.$t(ret);
     },
     getMainClass(): string {
       let css = 'board-space board-space-' + this.space.id.toString();

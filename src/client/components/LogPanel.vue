@@ -41,7 +41,6 @@ import {LogMessageData} from '@/LogMessageData';
 import {LogMessageDataType} from '@/LogMessageDataType';
 import {PublicPlayerModel} from '@/models/PlayerModel';
 import Card from '@/client/components/card/Card.vue';
-import {$t} from '@/client/directives/i18n';
 import {CardFinder} from '@/CardFinder';
 import {ICard} from '@/cards/ICard';
 import {CardName} from '@/CardName';
@@ -102,7 +101,7 @@ export default Vue.extend({
       }
     },
     cardToHtml(cardType: CardType, cardName: string) {
-      const cardNameString = $t(cardName);
+      const cardNameString = this.$t(cardName);
       const suffixFreeCardName = cardNameString.split(':')[0];
       let className: string | undefined;
       if (cardType === CardType.EVENT) {
@@ -150,7 +149,7 @@ export default Vue.extend({
         const cardName = data.value as CardName;
         for (const player of this.players) {
           if (player.corporationCard !== undefined && cardName === player.corporationCard.name) {
-            return '<span class="log-card background-color-global-event">' + $t(cardName) + '</span>';
+            return '<span class="log-card background-color-global-event">' + this.$t(cardName) + '</span>';
           } else {
             const robotCards = player.playedCards.concat(player.selfReplicatingRobotsCards);
             for (const robotCard of robotCards) {
@@ -173,15 +172,15 @@ export default Vue.extend({
 
       case LogMessageDataType.GLOBAL_EVENT:
         const globalEventName = data.value as GlobalEventName;
-        return '<span class="log-card background-color-global-event">' + $t(globalEventName) + '</span>';
+        return '<span class="log-card background-color-global-event">' + this.$t(globalEventName) + '</span>';
 
       case LogMessageDataType.TILE_TYPE:
         const tileType: TileType = +data.value;
-        return $t(TileType.toString(tileType));
+        return this.$t(TileType.toString(tileType));
 
       default:
         if (translatableMessageDataTypes.includes(data.type)) {
-          return $t(data.value);
+          return this.$t(data.value);
         }
       }
       return data.value;
@@ -216,7 +215,7 @@ export default Vue.extend({
           logEntryBullet = `<span title="${when}">${icon}</span>`;
         }
         if (message.type !== undefined && message.message !== undefined) {
-          message.message = $t(message.message);
+          message.message = this.$t(message.message);
           return logEntryBullet + Log.applyData(message, this.messageDataToHTML);
         }
       } catch (err) {

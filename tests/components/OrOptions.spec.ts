@@ -2,7 +2,7 @@
 import {createLocalVue, mount} from '@vue/test-utils';
 
 import {expect} from 'chai';
-import OrOptions from '@/components/OrOptions.vue';
+import OrOptions from '@/client/components/OrOptions.vue';
 import {PlayerInputTypes} from '@/PlayerInputTypes';
 
 describe('OrOptions', function() {

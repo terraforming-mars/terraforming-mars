@@ -1,6 +1,5 @@
 <script lang="ts">
 import Vue from 'vue';
-import {TranslateMixin} from '@/client/mixins/TranslateMixin';
 
 const dialogPolyfill = require('dialog-polyfill');
 
@@ -20,7 +19,6 @@ export default Vue.extend({
       hide: false,
     };
   },
-  mixins: [TranslateMixin],
   watch: {
     hide() {
       this.$emit('hide', this.hide);

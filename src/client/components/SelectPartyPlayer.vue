@@ -18,7 +18,6 @@ import {ColorWithNeutral} from '@/Color';
 import {PlayerInputModel} from '@/models/PlayerInputModel';
 import {PublicPlayerModel} from '@/models/PlayerModel';
 import SelectPlayerRow from '@/client/components/SelectPlayerRow.vue';
-import {TranslateMixin} from '@/client/mixins/TranslateMixin';
 
 export default Vue.extend({
   name: 'SelectPartyPlayer',
@@ -49,7 +48,6 @@ export default Vue.extend({
     'select-player-row': SelectPlayerRow,
   },
   methods: {
-    ...TranslateMixin.methods,
     saveData() {
       const result: string[][] = [];
       result.push([]);

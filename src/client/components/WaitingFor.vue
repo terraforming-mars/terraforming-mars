@@ -20,7 +20,6 @@ import {PlayerInputModel} from '@/models/PlayerInputModel';
 import {PlayerViewModel, PublicPlayerModel} from '@/models/PlayerModel';
 import {PreferencesManager} from '@/client/utils/PreferencesManager';
 import {SoundManager} from '@/client/utils/SoundManager';
-import {TranslateMixin} from '@/client/mixins/TranslateMixin';
 import {WaitingForModel} from '@/models/WaitingForModel';
 
 import * as constants from '@/constants';
@@ -51,7 +50,6 @@ export default Vue.extend({
     };
   },
   methods: {
-    ...TranslateMixin.methods,
     animateTitle() {
       const sequence = '\u25D1\u25D2\u25D0\u25D3';
       const first = document.title[0];

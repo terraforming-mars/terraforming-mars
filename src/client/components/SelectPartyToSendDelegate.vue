@@ -17,7 +17,6 @@ import Vue from 'vue';
 import Button from '@/client/components/common/Button.vue';
 import {PlayerInputModel} from '@/models/PlayerInputModel';
 import Party from '@/client/components/Party.vue';
-import {TranslateMixin} from '@/client/mixins/TranslateMixin';
 import {PartyName} from '@/turmoil/parties/PartyName';
 
 export default Vue.extend({
@@ -43,7 +42,6 @@ export default Vue.extend({
   },
   components: {Button, Party},
   methods: {
-    ...TranslateMixin.methods,
     saveData() {
       const result: string[][] = [];
       result.push([]);

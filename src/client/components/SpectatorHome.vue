@@ -67,7 +67,6 @@
 <script lang="ts">
 import Vue from 'vue';
 
-import {TranslateMixin} from '@/client/mixins/TranslateMixin';
 import {GameModel} from '@/models/GameModel';
 import {mainAppSettings} from './App';
 
@@ -124,7 +123,6 @@ export default Vue.extend({
     Turmoil,
   },
   methods: {
-    ...TranslateMixin.methods,
     forceRerender() {
       const root = this.$root as unknown as typeof mainAppSettings.methods;
       root.updateSpectator();

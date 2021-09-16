@@ -6,7 +6,6 @@ import {PlayerInputModel} from '@/models/PlayerInputModel';
 import {PlayerViewModel, PublicPlayerModel} from '@/models/PlayerModel';
 import {PreferencesManager} from '@/client/utils/PreferencesManager';
 import Button from '@/client/components/common/Button.vue';
-import {TranslateMixin} from '@/client/mixins/TranslateMixin';
 
 export default Vue.extend({
   name: 'SelectHowToPay',
@@ -59,7 +58,6 @@ export default Vue.extend({
   },
   methods: {
     ...PaymentWidgetMixin.methods,
-    ...TranslateMixin.methods,
     hasWarning() {
       return this.$data.warning !== undefined;
     },

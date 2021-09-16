@@ -7,11 +7,6 @@ import {TimerModel} from './TimerModel';
 import {GameModel} from './GameModel';
 import {PlayerId} from '../Player';
 
-export interface BasePlayerModel {
-  name: string;
-  color: Color;
-}
-
 export interface ViewModel {
   game: GameModel;
   players: Array<PublicPlayerModel>;

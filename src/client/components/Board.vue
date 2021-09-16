@@ -209,7 +209,7 @@ export default Vue.extend({
   methods: {
     ...TranslateMixin.methods,
     getAllSpacesOnMars(): Array<SpaceModel> {
-      const boardSpaces: Array<SpaceModel> = this.spaces;
+      const boardSpaces: Array<SpaceModel> = [...this.spaces];
       boardSpaces.sort(
         (space1: SpaceModel, space2: SpaceModel) => {
           return parseInt(space1.id) - parseInt(space2.id);
@@ -219,7 +219,7 @@ export default Vue.extend({
         return s.spaceType !== SpaceType.COLONY;
       });
     },
-    getSpaceById(spaceId: SpaceId) {
+    getSpaceById(spaceId: SpaceId): SpaceModel {
       for (const space of this.spaces) {
         if (space.id === spaceId) {
           return space;

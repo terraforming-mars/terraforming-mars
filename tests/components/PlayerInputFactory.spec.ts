@@ -2,7 +2,7 @@
 import {createLocalVue, mount} from '@vue/test-utils';
 
 import {expect} from 'chai';
-import PlayerInputFactory from '@/components/PlayerInputFactory.vue';
+import PlayerInputFactory from '@/client/components/PlayerInputFactory.vue';
 import {PlayerInputTypes} from '@/PlayerInputTypes';
 import {CardModel} from '@/models/CardModel';
 import {PlayerInputModel} from '@/models/PlayerInputModel';

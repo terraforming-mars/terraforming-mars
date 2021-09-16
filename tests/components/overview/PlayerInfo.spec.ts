@@ -3,7 +3,7 @@ import {createLocalVue, mount} from '@vue/test-utils';
 import {expect} from 'chai';
 import {CardName} from '@/CardName';
 import {Color} from '@/Color';
-import PlayerInfo from '@/components/overview/PlayerInfo.vue';
+import PlayerInfo from '@/client/components/overview/PlayerInfo.vue';
 import {PlayerViewModel, PublicPlayerModel} from '@/models/PlayerModel';
 import {RecursivePartial} from '@/utils/utils';
 

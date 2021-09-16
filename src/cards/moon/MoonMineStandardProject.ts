@@ -11,7 +11,7 @@ import {TileType} from '../../TileType';
 import {AltSecondaryTag} from '../render/CardRenderItem';
 
 export class MoonMineStandardProject extends StandardProjectCard implements IMoonCard {
-  private static PROPERTIES = {
+  constructor(properties = {
     name: CardName.MOON_MINE_STANDARD_PROJECT,
     cost: 20,
     reserveUnits: Units.of({titanium: 1}),
@@ -24,9 +24,7 @@ export class MoonMineStandardProject extends StandardProjectCard implements IMoo
         }),
       ),
     },
-  }
-
-  constructor(properties = MoonMineStandardProject.PROPERTIES) {
+  }) {
     super(properties);
   }
 

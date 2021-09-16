@@ -1,6 +1,6 @@
 import {createLocalVue, mount} from '@vue/test-utils';
 import {expect} from 'chai';
-import Award from '@/components/Award.vue';
+import Award from '@/client/components/Award.vue';
 import {FundedAwardModel} from '@/models/FundedAwardModel';
 import {Color} from '@/Color';
 

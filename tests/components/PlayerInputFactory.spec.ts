@@ -1,6 +1,6 @@
 
-import {createLocalVue, mount} from '@vue/test-utils';
-
+import {mount} from '@vue/test-utils';
+import {getLocalVue} from './getLocalVue';
 import {expect} from 'chai';
 import PlayerInputFactory from '@/client/components/PlayerInputFactory.vue';
 import {PlayerInputTypes} from '@/PlayerInputTypes';
@@ -127,11 +127,6 @@ const typesToTest: PlayerInputModel[] = [
 ];
 
 describe('PlayerInputFactory', function() {
-  function getLocalVue() {
-    const localVue = createLocalVue();
-    localVue.directive('i18n', {});
-    return localVue;
-  }
   for (const playerinput of typesToTest) {
     it(`saves data for ${playerinput.inputType}`, async function() {
       const component = mount(PlayerInputFactory, {

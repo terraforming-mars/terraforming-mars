@@ -1,4 +1,5 @@
-import {createLocalVue, mount, Wrapper} from '@vue/test-utils';
+import {mount, Wrapper} from '@vue/test-utils';
+import {getLocalVue} from './getLocalVue';
 import {expect} from 'chai';
 import {Color} from '@/Color';
 import SelectPlayer from '@/client/components/SelectPlayer.vue';
@@ -17,10 +18,6 @@ describe('SelectPlayer', () => {
   ];
 
   beforeEach(() => {
-    const localVue = createLocalVue();
-    localVue.directive('i18n', {});
-    localVue.directive('trim-whitespace', {});
-
     const playerInput: Partial<PlayerInputModel> = {
       title: '',
       buttonLabel: '',
@@ -30,7 +27,7 @@ describe('SelectPlayer', () => {
     };
 
     wrapper = mount(SelectPlayer, {
-      localVue: localVue,
+      localVue: getLocalVue(),
       propsData: {
         players: players,
         playerinput: playerInput,

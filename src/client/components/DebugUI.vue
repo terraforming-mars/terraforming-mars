@@ -291,14 +291,15 @@ export default Vue.extend({
       data.moon = !data.moon;
     },
     sort(names: Array<CardName>): Array<CardName> {
+      const copy = [...names];
       if (this.$data.sortById) {
-        return names.sort((a: CardName, b: CardName) => {
+        return copy.sort((a: CardName, b: CardName) => {
           const an = cards.get(a)?.cardNumber || '';
           const bn = cards.get(b)?.cardNumber || '';
           return an.localeCompare(bn);
         });
       } else {
-        return names.sort();
+        return copy.sort();
       }
     },
     getAllStandardProjectCards() {

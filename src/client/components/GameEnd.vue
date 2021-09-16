@@ -188,14 +188,15 @@ export default Vue.extend({
       return Timer.toString(p.timer);
     },
     getSortedPlayers() {
-      this.playerView.players.sort(function(a:PublicPlayerModel, b:PublicPlayerModel) {
+      const copy = [...this.playerView.players];
+      copy.sort(function(a:PublicPlayerModel, b:PublicPlayerModel) {
         if (a.victoryPointsBreakdown.total < b.victoryPointsBreakdown.total) return -1;
         if (a.victoryPointsBreakdown.total > b.victoryPointsBreakdown.total) return 1;
         if (a.megaCredits < b.megaCredits) return -1;
         if (a.megaCredits > b.megaCredits) return 1;
         return 0;
       });
-      return this.playerView.players.reverse();
+      return copy.reverse();
     },
     getWinners() {
       const sortedPlayers = this.getSortedPlayers();

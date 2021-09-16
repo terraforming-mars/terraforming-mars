@@ -5,6 +5,7 @@ import {Phase} from '../Phase';
 import {Player} from '../Player';
 import {WaitingForModel} from '../models/WaitingForModel';
 import {Game} from '@/Game';
+import {isPlayerId, isSpectatorId} from '../utils/utils';
 
 export class ApiWaitingFor extends Handler {
   public static readonly INSTANCE = new ApiWaitingFor();
@@ -37,7 +38,7 @@ export class ApiWaitingFor extends Handler {
     const id = String(ctx.url.searchParams.get('id'));
     const gameAge = Number(ctx.url.searchParams.get('gameAge'));
     const undoCount = Number(ctx.url.searchParams.get('undoCount'));
-    const loader = id.charAt(0) === 'p' ? ctx.gameLoader.getByPlayerId : ctx.gameLoader.getBySpectatorId;
+    const loader = isPlayerId(id) ? ctx.gameLoader.getByPlayerId : ctx.gameLoader.getBySpectatorId;
 
     loader.call(ctx.gameLoader, id, (game) => {
       if (game === undefined) {
@@ -45,11 +46,12 @@ export class ApiWaitingFor extends Handler {
         return;
       }
       try {
-        const player = id.charAt(0) === 'p' ? game.getPlayerById(id) : undefined;
-        if (player !== undefined) {
-          ctx.route.writeJson(res, this.getPlayerWaitingForModel(player, game, gameAge, undoCount));
-        } else {
+        if (isPlayerId(id)) {
+          ctx.route.writeJson(res, this.getPlayerWaitingForModel(game.getPlayerById(id), game, gameAge, undoCount));
+        } else if (isSpectatorId(id)) {
           ctx.route.writeJson(res, this.getSpectatorWaitingForModel(game, gameAge, undoCount));
+        } else {
+          ctx.route.internalServerError(req, res, 'id not found');
         }
       } catch (err) {
         // This is basically impossible since getPlayerById ensures that the player is on that game.

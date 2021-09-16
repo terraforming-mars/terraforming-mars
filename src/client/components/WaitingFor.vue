@@ -25,6 +25,7 @@ import {WaitingForModel} from '@/models/WaitingForModel';
 
 import * as constants from '@/constants';
 import * as raw_settings from '@/genfiles/settings.json';
+import {isPlayerId} from '@/utils/utils';
 
 let ui_update_timeout_id: number | undefined;
 let documentTitleTimer: number | undefined;
@@ -128,7 +129,7 @@ export default Vue.extend({
               return;
             } else if (result.result === 'REFRESH') {
               // Something changed, let's refresh UI
-              if (this.playerView.id.charAt(0) === 'p') {
+              if (isPlayerId(this.playerView.id)) {
                 root.updatePlayer();
               } else {
                 root.updateSpectator();

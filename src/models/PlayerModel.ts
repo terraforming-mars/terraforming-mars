@@ -6,11 +6,12 @@ import {PlayerInputModel} from './PlayerInputModel';
 import {TimerModel} from './TimerModel';
 import {GameModel} from './GameModel';
 import {PlayerId} from '../Player';
+import {SpectatorId} from '../Game';
 
 export interface ViewModel {
   game: GameModel;
   players: Array<PublicPlayerModel>;
-  id: string; // PlayerId or SpectatorId, as determined by the app.
+  id: PlayerId | SpectatorId;
 }
 
 /** The public information about a player */

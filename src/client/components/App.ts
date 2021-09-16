@@ -17,6 +17,7 @@ import {$t} from '@/client/directives/i18n';
 import * as constants from '@/constants';
 import * as raw_settings from '@/genfiles/settings.json';
 import {SpectatorModel} from '@/models/SpectatorModel';
+import {isPlayerId, isSpectatorId} from '@/utils/utils';
 
 const dialogPolyfill = require('dialog-polyfill');
 
@@ -184,10 +185,10 @@ export const mainAppSettings = {
       app.updatePlayer();
     } else if (currentPathname === '/the-end') {
       const urlParams = new URLSearchParams(window.location.search);
-      const id = urlParams.get('id');
-      if (id?.charAt(0) === 'p') {
+      const id = urlParams.get('id') || '';
+      if (isPlayerId(id)) {
         app.updatePlayer();
-      } else if (id?.charAt(0) === 's') {
+      } else if (isSpectatorId(id)) {
         app.updateSpectator();
       } else {
         alert('Bad id URL parameter.');

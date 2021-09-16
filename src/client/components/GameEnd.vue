@@ -211,7 +211,7 @@ export default Vue.extend({
       return Timer.toString(p.timer);
     },
     getSortedPlayers() {
-      this.viewModel.players.sort(function(a:PublicPlayerModel, b:PublicPlayerModel) {
+      [...this.viewModel.players].sort(function(a:PublicPlayerModel, b:PublicPlayerModel) {
         if (a.victoryPointsBreakdown.total < b.victoryPointsBreakdown.total) return -1;
         if (a.victoryPointsBreakdown.total > b.victoryPointsBreakdown.total) return 1;
         if (a.megaCredits < b.megaCredits) return -1;

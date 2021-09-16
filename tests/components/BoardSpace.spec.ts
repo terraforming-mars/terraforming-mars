@@ -1,6 +1,6 @@
 import {createLocalVue, mount} from '@vue/test-utils';
 import {expect} from 'chai';
-import BoardSpace from '@/components/BoardSpace.vue';
+import BoardSpace from '@/client/components/BoardSpace.vue';
 
 describe('BoardSpace', () => {
   function getLocalVue() {

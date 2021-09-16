@@ -7,13 +7,8 @@ import {TimerModel} from './TimerModel';
 import {GameModel} from './GameModel';
 import {PlayerId} from '../Player';
 
-export interface BasePlayerModel {
-  name: string;
-  color: Color;
-}
-
 /** The public information about a player */
-export interface PublicPlayerModel extends BasePlayerModel {
+export interface PublicPlayerModel {
   actionsTakenThisRound: number;
   actionsThisGeneration: Array<string /* CardName */>;
   availableBlueCardActionCount: number;
@@ -22,6 +17,7 @@ export interface PublicPlayerModel extends BasePlayerModel {
   cardsInHandNbr: number;
   citiesCount: number;
   coloniesCount: number;
+  color: Color;
   corporationCard: CardModel | undefined;
   energy: number;
   energyProduction: number;
@@ -33,6 +29,7 @@ export interface PublicPlayerModel extends BasePlayerModel {
   isActive: boolean;
   megaCredits: number;
   megaCreditProduction: number;
+  name: string;
   needsToDraft: boolean | undefined;
   needsToResearch: boolean | undefined;
   noTagsCount: number;

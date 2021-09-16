@@ -1,7 +1,7 @@
 import {createLocalVue, mount, Wrapper} from '@vue/test-utils';
 import {expect} from 'chai';
 import {Color} from '@/Color';
-import SelectPlayer from '@/components/SelectPlayer.vue';
+import SelectPlayer from '@/client/components/SelectPlayer.vue';
 import {PlayerInputModel} from '@/models/PlayerInputModel';
 import {PublicPlayerModel} from '@/models/PlayerModel';
 

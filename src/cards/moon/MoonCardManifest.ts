@@ -71,10 +71,13 @@ import {MiningComplex} from './MiningComplex';
 import {MiningRobotsManufCenter} from './MiningRobotsManufCenter';
 import {MomentumViriumHabitat} from './MomentumViriumHabitat';
 import {MoonColonyStandardProject} from './MoonColonyStandardProject';
+import {MoonColonyStandardProjectVariant2} from './MoonStandardProjectVariants';
 import {MooncrateBlockFactory} from './MooncrateBlockFactory';
 import {MooncrateConvoysToMars} from './MooncrateConvoysToMars';
 import {MoonMineStandardProject} from './MoonMineStandardProject';
+import {MoonMineStandardProjectVariant2} from './MoonStandardProjectVariants';
 import {MoonRoadStandardProject} from './MoonRoadStandardProject';
+import {MoonRoadStandardProjectVariant2} from './MoonStandardProjectVariants';
 import {MoonTether} from './MoonTether';
 import {NanotechIndustries} from './NanotechIndustries';
 import {NewColonyPlanningInitiaitives} from './NewColonyPlanningInitiaitives';
@@ -218,8 +221,11 @@ export const MOON_CARD_MANIFEST = new CardManifest({
   ],
   standardProjects: [
     {cardName: CardName.MOON_COLONY_STANDARD_PROJECT, Factory: MoonColonyStandardProject},
+    {cardName: CardName.MOON_COLONY_STANDARD_PROJECT_V2, Factory: MoonColonyStandardProjectVariant2},
     {cardName: CardName.MOON_MINE_STANDARD_PROJECT, Factory: MoonMineStandardProject},
+    {cardName: CardName.MOON_MINE_STANDARD_PROJECT_V2, Factory: MoonMineStandardProjectVariant2},
     {cardName: CardName.MOON_ROAD_STANDARD_PROJECT, Factory: MoonRoadStandardProject},
+    {cardName: CardName.MOON_ROAD_STANDARD_PROJECT_V2, Factory: MoonRoadStandardProjectVariant2},
   ],
   preludeCards: [
     {cardName: CardName.FIRST_LUNAR_SETTLEMENT, Factory: FirstLunarSettlement},

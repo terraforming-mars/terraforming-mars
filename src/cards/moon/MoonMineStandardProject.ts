@@ -11,21 +11,21 @@ import {TileType} from '../../TileType';
 import {AltSecondaryTag} from '../render/CardRenderItem';
 
 export class MoonMineStandardProject extends StandardProjectCard implements IMoonCard {
-  constructor() {
-    super({
-      name: CardName.MOON_MINE_STANDARD_PROJECT,
-      cost: 20,
-      reserveUnits: Units.of({titanium: 1}),
+  constructor(properties = {
+    name: CardName.MOON_MINE_STANDARD_PROJECT,
+    cost: 20,
+    reserveUnits: Units.of({titanium: 1}),
 
-      metadata: {
-        cardNumber: '',
-        renderData: CardRenderer.builder((b) =>
-          b.standardProject('Spend 20 M€ and 1 titanium to place a mine on the moon, raise the Mining Rate 1 step, and raise steel production 1 step.', (eb) => {
-            eb.megacredits(20).titanium(1).startAction.moonMine().secondaryTag(AltSecondaryTag.MOON_MINING_RATE).production((pb) => pb.steel(1));
-          }),
-        ),
-      },
-    });
+    metadata: {
+      cardNumber: '',
+      renderData: CardRenderer.builder((b) =>
+        b.standardProject('Spend 20 M€ and 1 titanium to place a mine on the moon, raise the Mining Rate 1 step, and raise steel production 1 step.', (eb) => {
+          eb.megacredits(20).titanium(1).startAction.moonMine().secondaryTag(AltSecondaryTag.MOON_MINING_RATE).production((pb) => pb.steel(1));
+        }),
+      ),
+    },
+  }) {
+    super(properties);
   }
 
   public tilesBuilt = [TileType.MOON_MINE];

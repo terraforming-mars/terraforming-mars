@@ -10,22 +10,23 @@ import {IMoonCard} from './IMoonCard';
 import {TileType} from '../../TileType';
 import {AltSecondaryTag} from '../render/CardRenderItem';
 
-export class MoonColonyStandardProject extends StandardProjectCard implements IMoonCard {
-  constructor() {
-    super({
-      name: CardName.MOON_COLONY_STANDARD_PROJECT,
-      cost: 22,
-      reserveUnits: Units.of({titanium: 1}),
 
-      metadata: {
-        cardNumber: '',
-        renderData: CardRenderer.builder((b) =>
-          b.standardProject('Spend 22 M€ and 1 titanium to place a colony on the moon and raise your M€ production 1 step.', (eb) => {
-            eb.megacredits(22).titanium(1).startAction.moonColony().secondaryTag(AltSecondaryTag.MOON_COLONY_RATE).production((pb) => pb.megacredits(1));
-          }),
-        ),
-      },
-    });
+export class MoonColonyStandardProject extends StandardProjectCard implements IMoonCard {
+  constructor(properties = {
+    name: CardName.MOON_COLONY_STANDARD_PROJECT,
+    cost: 22,
+    reserveUnits: Units.of({titanium: 1}),
+
+    metadata: {
+      cardNumber: '',
+      renderData: CardRenderer.builder((b) =>
+        b.standardProject('Spend 22 M€ and 1 titanium to place a colony on the moon and raise your M€ production 1 step.', (eb) => {
+          eb.megacredits(22).titanium(1).startAction.moonColony().secondaryTag(AltSecondaryTag.MOON_COLONY_RATE).production((pb) => pb.megacredits(1));
+        }),
+      ),
+    },
+  }) {
+    super(properties);
   }
 
   public tilesBuilt = [TileType.MOON_COLONY];

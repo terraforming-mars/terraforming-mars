@@ -1,7 +1,7 @@
 import {createLocalVue, shallowMount} from '@vue/test-utils';
 import {expect} from 'chai';
-import MoonBoard from '@/components/moon/MoonBoard.vue';
-import MoonSpace from '@/components/moon/MoonSpace.vue';
+import MoonBoard from '@/client/components/moon/MoonBoard.vue';
+import MoonSpace from '@/client/components/moon/MoonSpace.vue';
 import {MoonModel} from '@/models/MoonModel';
 import {SpaceType} from '@/SpaceType';
 

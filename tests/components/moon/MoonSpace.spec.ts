@@ -1,6 +1,6 @@
 import {createLocalVue, mount} from '@vue/test-utils';
 import {expect} from 'chai';
-import MoonSpace from '@/components/moon/MoonSpace.vue';
+import MoonSpace from '@/client/components/moon/MoonSpace.vue';
 
 describe('MoonSpace', () => {
   function getLocalVue() {

@@ -1,6 +1,6 @@
 import {createLocalVue, shallowMount} from '@vue/test-utils';
 import {expect} from 'chai';
-import Button from '@/components/common/Button.vue';
+import Button from '@/client/components/common/Button.vue';
 
 function getLocalVue() {
   const localVue = createLocalVue();

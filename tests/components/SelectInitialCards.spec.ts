@@ -3,7 +3,7 @@ import {createLocalVue, mount} from '@vue/test-utils';
 
 import {expect} from 'chai';
 import {CardName} from '@/CardName';
-import SelectInitialCards from '@/components/SelectInitialCards.vue';
+import SelectInitialCards from '@/client/components/SelectInitialCards.vue';
 
 describe('SelectInitialCards', function() {
   function getLocalVue() {

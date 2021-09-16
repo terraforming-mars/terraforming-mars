@@ -191,7 +191,7 @@ describe('GameLoader', function() {
         GameLoader.getInstance().getLoadedGameIds((list) => {
           try {
             expect(list).to.deep.eq(
-              [{'id': 'foobar', 'participants': ['blue-id', 'red-id']}],
+              [{'id': 'foobar', 'participants': ['p-blue-id', 'p-red-id']}],
             );
             done();
           } catch (error) {

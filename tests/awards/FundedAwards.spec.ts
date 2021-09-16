@@ -21,8 +21,8 @@ describe('FundedAwards', function() {
     const serialized = serializeFundedAwards(FundedAwards);
     expect(serialized).to.deep.eq(
       [
-        {'name': 'Cultivator', 'playerId': 'blue-id'},
-        {'name': 'Industrialist', 'playerId': 'red-id'},
+        {'name': 'Cultivator', 'playerId': 'p-blue-id'},
+        {'name': 'Industrialist', 'playerId': 'p-red-id'},
       ],
     );
 

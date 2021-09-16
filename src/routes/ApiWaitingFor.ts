@@ -26,7 +26,6 @@ export class ApiWaitingFor extends Handler {
     return {result: 'WAIT'};
   }
 
-  // When player is undefined, caller is a spectator.
   private getSpectatorWaitingForModel(game: Game, gameAge: number, undoCount: number): WaitingForModel {
     if (game.gameAge > gameAge || game.undoCount > undoCount) {
       return {result: 'REFRESH'};

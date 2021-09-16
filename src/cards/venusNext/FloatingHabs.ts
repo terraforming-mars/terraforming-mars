@@ -29,7 +29,7 @@ export class FloatingHabs extends Card implements IActionCard, IResourceCard {
           }).br;
           b.vpText('1 VP for every 2nd Floater on this card.');
         }),
-        description: 'Requires 2 Science tags. 1 VP for every 2nd Floater on this card',
+        description: 'Requires 2 Science tags.',
         victoryPoints: CardRenderDynamicVictoryPoints.floaters(1, 2),
       },
     });

@@ -48,21 +48,21 @@
 
     <!-- TODO(kberg): add the spectator tab. -->
     <div v-if="spectator.game.colonies.length > 0 /* && getCurrentSpectatorTab() === 'colonies' */" class="player_home_block" ref="colonies" id="shortkey-colonies">
-        <a name="colonies" class="player_home_anchor"></a>
-        <dynamic-title title="Colonies" :color="spectator.color"/>
-        <div class="colonies-fleets-cont">
-          <div class="colonies-player-fleets" v-for="player in spectator.players" v-bind:key="player.color">
-              <div :class="'colonies-fleet colonies-fleet-'+ player.color" v-for="idx in range(player.fleetSize - player.tradesThisGeneration)" v-bind:key="idx"></div>
-          </div>
-        </div>
-        <div class="player_home_colony_cont">
-          <div class="player_home_colony" v-for="colony in spectator.game.colonies" :key="colony.name">
-              <colony :colony="colony"></colony>
-          </div>
+      <a name="colonies" class="player_home_anchor"></a>
+      <dynamic-title title="Colonies" :color="spectator.color"/>
+      <div class="colonies-fleets-cont">
+        <div class="colonies-player-fleets" v-for="player in spectator.players" v-bind:key="player.color">
+            <div :class="'colonies-fleet colonies-fleet-'+ player.color" v-for="idx in range(player.fleetSize - player.tradesThisGeneration)" v-bind:key="idx"></div>
         </div>
       </div>
-      <waiting-for v-show="false" v-if="game.phase !== 'end'" :players="spectator.players" :playerView="spectator" :settings="settings" :waitingfor="undefined"></waiting-for>
+      <div class="player_home_colony_cont">
+        <div class="player_home_colony" v-for="colony in spectator.game.colonies" :key="colony.name">
+            <colony :colony="colony"></colony>
+        </div>
+      </div>
     </div>
+    <waiting-for v-show="false" v-if="game.phase !== 'end'" :players="spectator.players" :playerView="spectator" :settings="settings" :waitingfor="undefined"></waiting-for>
+  </div>
 </template>
 
 <script lang="ts">

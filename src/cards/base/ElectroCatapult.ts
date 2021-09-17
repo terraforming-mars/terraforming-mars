@@ -45,31 +45,26 @@ export class ElectroCatapult extends Card implements IActionCard, IProjectCard {
     return player.plants > 0 || player.steel > 0;
   }
   public action(player: Player) {
-    if (player.plants > 0 && player.steel > 0) {
-      return new OrOptions(
+    const orOptions = new OrOptions();
+    if (player.plants > 0) {
+      orOptions.options.push(
         new SelectOption('Spend 1 plant to gain 7 M€', 'Spend plant', () => {
           player.plants--;
           player.megaCredits += 7;
           this.log(player, Resources.PLANTS);
           return undefined;
-        }),
+        }));
+    }
+    if (player.steel > 0) {
+      orOptions.options.push(
         new SelectOption('Spend 1 steel to gain 7 M€', 'Spend steel', () => {
           player.steel--;
           player.megaCredits += 7;
           this.log(player, Resources.STEEL);
           return undefined;
-        }),
-      );
-    } else if (player.plants > 0) {
-      player.plants--;
-      this.log(player, Resources.PLANTS);
-      player.megaCredits += 7;
-    } else if (player.steel > 0) {
-      player.steel--;
-      this.log(player, Resources.STEEL);
-      player.megaCredits += 7;
+        }));
     }
-    return undefined;
+    return orOptions;
   }
   public play(player: Player) {
     player.addProduction(Resources.ENERGY, -1);

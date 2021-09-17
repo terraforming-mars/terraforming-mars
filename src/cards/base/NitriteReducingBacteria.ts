@@ -79,7 +79,6 @@ export class NitriteReducingBacteria extends Card implements IActionCard, IProje
         return undefined;
       }));
 
-      if (orOptions.options.length === 1) return orOptions.options[0].cb();
       return orOptions;
     }
 }

@@ -29,8 +29,10 @@ describe('LocalHeatTrapping', () => {
     player.cardsInHand = [card];
     expect(player.getPlayableCards()).does.include(card);
 
-    card.play(player);
-    player.playedCards.push(card);
+    const action = card.play(player) as OrOptions;
+    expect(action.options).has.length(1);
+    action.options[0].cb();
+    // player.playedCards.push(card);
     expect(player.plants).to.eq(4);
     expect(player.heat).to.eq(0);
   });

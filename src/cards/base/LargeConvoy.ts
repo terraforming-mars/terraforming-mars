@@ -51,44 +51,40 @@ export class LargeConvoy extends Card implements IProjectCard {
   public play(player: Player): PlayerInput | undefined {
     player.drawCard(2);
 
-    const animalCards = player.getResourceCards(ResourceType.ANIMAL);
+    const orOptions = new OrOptions();
 
-    const gainPlants = function() {
+    orOptions.options.push(new SelectOption('Gain 5 plants', 'Gain plants', function() {
       player.addResource(Resources.PLANTS, 5, {log: true});
-      player.game.defer(new PlaceOceanTile(player));
       return undefined;
-    };
+    }));
 
-    if (animalCards.length === 0 ) return gainPlants();
-
-    const availableActions: Array<SelectOption | SelectCard<ICard>> = [];
-
-    const gainPlantsOption = new SelectOption('Gain 5 plants', 'Gain plants', gainPlants);
-    availableActions.push(gainPlantsOption);
-
+    const animalCards = player.getResourceCards(ResourceType.ANIMAL);
     if (animalCards.length === 1) {
       const targetAnimalCard = animalCards[0];
-      availableActions.push(new SelectOption('Add 4 animals to ' + targetAnimalCard.name, 'Add animals', () => {
+      orOptions.options.push(new SelectOption('Add 4 animals to ' + targetAnimalCard.name, 'Add animals', () => {
         player.addResourceTo(targetAnimalCard, {qty: 4, log: true});
-        player.game.defer(new PlaceOceanTile(player));
         return undefined;
       }));
-    } else {
-      availableActions.push(
+    } else if (animalCards.length > 1) {
+      orOptions.options.push(
         new SelectCard(
           'Select card to add 4 animals',
           'Add animals',
           animalCards,
           (foundCards: Array<ICard>) => {
             player.addResourceTo(foundCards[0], {qty: 4, log: true});
-            player.game.defer(new PlaceOceanTile(player));
             return undefined;
           },
         ),
       );
     }
 
-    return new OrOptions(...availableActions);
+    orOptions.cb = () => {
+      player.game.defer(new PlaceOceanTile(player));
+      return undefined;
+    };
+
+    return orOptions;
   }
   public getVictoryPoints() {
     return 2;

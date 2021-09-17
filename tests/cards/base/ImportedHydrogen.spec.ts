@@ -45,9 +45,11 @@ describe('ImportedHydrogen', function() {
     expect(player.getResourcesOnCard(pets)).to.eq(2);
   });
 
-  it('Should add plants directly if no microbe or animal cards available', function() {
+  it('Only plants option is available if no microbe or animal cards available', function() {
     expect(player.plants).to.eq(0);
-    card.play(player);
+    const action = card.play(player) as OrOptions;
+    expect(action.options).has.lengthOf(1);
+    action.options[0].cb();
     expect(player.plants).to.eq(3);
   });
 });

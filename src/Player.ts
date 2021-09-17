@@ -623,9 +623,7 @@ export class Player implements ISerializable<SerializedPlayer> {
   }
 
   public getResourcesOnCard(card: ICard): number | undefined {
-    if (card.resourceCount !== undefined) {
-      return card.resourceCount;
-    } else return undefined;
+    return card.resourceCount;
   }
 
   public getResourcesOnCorporation():number {
@@ -1439,12 +1437,7 @@ export class Player implements ISerializable<SerializedPlayer> {
 
     // Play the card
     const action = selectedCard.play(this);
-    if (action !== undefined) {
-      this.game.defer(new DeferredAction(
-        this,
-        () => action,
-      ));
-    }
+    this.queueAction(action);
 
     // Remove card from hand
     const projectCardIndex = this.cardsInHand.findIndex((card) => card.name === selectedCard.name);
@@ -1508,16 +1501,32 @@ export class Player implements ISerializable<SerializedPlayer> {
         const foundCard = foundCards[0];
         this.game.log('${0} used ${1} action', (b) => b.player(this).card(foundCard));
         const action = foundCard.action!(this);
-        if (action !== undefined) {
-          this.game.defer(new DeferredAction(
-            this,
-            () => action,
-          ));
-        }
+        this.queueAction(action);
         this.actionsThisGeneration.add(foundCard.name);
         return undefined;
       }, 1, 1, true,
     );
+  }
+
+  private queueAction(action: PlayerInput | undefined): void {
+    if (action === undefined) return;
+    let queuedAction = action;
+    if (action instanceof OrOptions || action instanceof AndOptions) {
+      if (action.options.length === 0) {
+        return;
+      }
+      if (action.options.length === 1) {
+        queuedAction = action.options[0];
+      }
+    }
+
+    // For a single SelectOption, run it now, do not defer.
+    // TODO(kberg): consider moving this, and all the input optomizations to DeferredActionQueue
+    if (queuedAction instanceof SelectOption) {
+      queuedAction.cb();
+    } else {
+      this.game.defer(new DeferredAction(this, () => queuedAction));
+    }
   }
 
   public drawCard(count?: number, options?: DrawCards.DrawOptions): undefined {

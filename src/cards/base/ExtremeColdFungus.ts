@@ -44,41 +44,36 @@ export class ExtremeColdFungus extends Card implements IActionCard, IProjectCard
     return true;
   }
   public action(player: Player) {
+    const orOptions = new OrOptions();
+
     const otherMicrobeCards = player.getResourceCards(ResourceType.MICROBE);
-
-    if (otherMicrobeCards.length === 0) {
-      player.addResource(Resources.PLANTS, 1, {log: true});
-      return undefined;
-    }
-
-    const gainPlantOption = new SelectOption('Gain 1 plant', 'Gain plant', () => {
-      player.addResource(Resources.PLANTS, 1, {log: true});
-      return undefined;
-    });
-
     if (otherMicrobeCards.length === 1) {
       const targetCard = otherMicrobeCards[0];
-
-      return new OrOptions(
+      orOptions.options.push(
         new SelectOption('Add 2 microbes to ' + targetCard.name, 'Add microbes', () => {
           player.addResourceTo(targetCard, {qty: 2, log: true});
           return undefined;
-        }),
-        gainPlantOption,
-      );
+        }));
+    }
+    if (otherMicrobeCards.length > 1) {
+      orOptions.options.push(
+        new SelectCard(
+          'Select card to add 2 microbes',
+          'Add microbes',
+          otherMicrobeCards,
+          (foundCards: Array<ICard>) => {
+            player.addResourceTo(foundCards[0], {qty: 2, log: true});
+            return undefined;
+          },
+        ));
     }
 
-    return new OrOptions(
-      new SelectCard(
-        'Select card to add 2 microbes',
-        'Add microbes',
-        otherMicrobeCards,
-        (foundCards: Array<ICard>) => {
-          player.addResourceTo(foundCards[0], {qty: 2, log: true});
-          return undefined;
-        },
-      ),
-      gainPlantOption,
-    );
+    orOptions.options.push(
+      new SelectOption('Gain 1 plant', 'Gain plant', () => {
+        player.addResource(Resources.PLANTS, 1, {log: true});
+        return undefined;
+      }));
+
+    return orOptions;
   }
 }

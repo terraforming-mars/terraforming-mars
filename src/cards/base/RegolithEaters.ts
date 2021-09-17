@@ -68,7 +68,6 @@ export class RegolithEaters extends Card implements IActionCard, IProjectCard, I
         return undefined;
       }));
 
-      if (orOptions.options.length === 1) return orOptions.options[0].cb();
       return orOptions;
     }
 }

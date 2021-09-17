@@ -20,6 +20,8 @@ import {Units} from '../src/Units';
 import {SelfReplicatingRobots} from '../src/cards/promo/SelfReplicatingRobots';
 import {Pets} from '../src/cards/base/Pets';
 import {GlobalEventName} from '../src/turmoil/globalEvents/GlobalEventName';
+import {LargeConvoy} from '../src/cards/base/LargeConvoy';
+import {OrOptions} from '@/inputs/OrOptions';
 
 describe('Player', function() {
   it('should initialize with right defaults', function() {
@@ -649,6 +651,24 @@ describe('Player', function() {
           'amount': -12,
         },
       });
+  });
+
+  it('optimize orOptions', () => {
+    const player = TestPlayers.BLUE.newPlayer();
+    Game.newInstance('foobar', [player], player);
+
+    const card = new LargeConvoy();
+    player.cardsInHand.push(card);
+
+    // This card will return OrOptions[SelectOption], which is optimized to
+    // SelectOption, which is opptimized to running the option.
+    const action = card.play(player) as OrOptions;
+    expect(action.options).has.length(1);
+    expect(action.options).instanceOf(SelectOption);
+    expect(player.plants).eq(0);
+
+    player.playCard(card);
+    expect(player.plants).eq(5);
   });
 });
 

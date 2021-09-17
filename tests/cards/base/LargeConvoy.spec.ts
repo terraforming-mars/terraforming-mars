@@ -19,12 +19,16 @@ describe('LargeConvoy', function() {
   });
 
   it('Should play without animal cards', function() {
-    card.play(player);
+    const action = card.play(player) as OrOptions;
+    expect(action.options).has.length(1);
+    action.options[0].cb();
 
-    player.victoryPointsBreakdown.setVictoryPoints('victoryPoints', card.getVictoryPoints());
-    expect(player.victoryPointsBreakdown.victoryPoints).to.eq(2);
     expect(player.cardsInHand).has.lengthOf(2);
     expect(player.plants).to.eq(5);
+
+    player.playedCards.push(card);
+    player.getVictoryPoints();
+    expect(player.victoryPointsBreakdown.victoryPoints).to.eq(2);
   });
 
   it('Should play with single animal target', function() {

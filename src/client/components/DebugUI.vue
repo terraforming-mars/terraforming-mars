@@ -371,7 +371,7 @@ export default Vue.extend({
         }
       }
 
-      if (!(this.types as any)[card.card.cardType]) return false;
+      if (!this.types[card.card.cardType]) return false;
 
       switch (card.module) {
       case GameModule.Base:

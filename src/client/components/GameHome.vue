@@ -14,7 +14,7 @@
             <p/>
             <span class="turn-order"></span>
             <span class="color-square"></span>
-            <span class="player-name"><a :href="getHref(game.spectatorId)">Spectator</a></span> <b>!! Preview Mode Only !!</b>&nbsp;
+            <span class="player-name"><a :href="getHref(game.spectatorId)">Spectator</a></span>
             <Button title="copy" size="tiny" @click="copyUrl(game.spectatorId || 'unreachable')"/>
           </li>
         </ul>

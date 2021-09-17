@@ -1,11 +1,8 @@
-import {GameModel} from './GameModel';
-import {PublicPlayerModel} from './PlayerModel';
 import {SpectatorId} from '../Game';
 import {Color} from '../Color';
+import {ViewModel} from './PlayerModel';
 
-export interface SpectatorModel {
+export interface SpectatorModel extends ViewModel {
   id: SpectatorId;
   color: Color;
-  game: GameModel;
-  players: Array<PublicPlayerModel>;
 }

@@ -6,6 +6,13 @@ import {PlayerInputModel} from './PlayerInputModel';
 import {TimerModel} from './TimerModel';
 import {GameModel} from './GameModel';
 import {PlayerId} from '../Player';
+import {SpectatorId} from '../Game';
+
+export interface ViewModel {
+  game: GameModel;
+  players: Array<PublicPlayerModel>;
+  id: PlayerId | SpectatorId;
+}
 
 /** The public information about a player */
 export interface PublicPlayerModel {
@@ -24,6 +31,7 @@ export interface PublicPlayerModel {
   fleetSize: number;
   heat: number;
   heatProduction: number;
+  // TODO(kberg): this is removeable now.
   id: string; // Color
   influence: number;
   isActive: boolean;
@@ -52,16 +60,14 @@ export interface PublicPlayerModel {
 }
 
 /** A player's view of the game, including their secret information. */
-export interface PlayerViewModel {
+export interface PlayerViewModel extends ViewModel {
   cardsInHand: Array<CardModel>;
   dealtCorporationCards: Array<CardModel>;
   dealtPreludeCards: Array<CardModel>;
   dealtProjectCards: Array<CardModel>;
   draftedCards: Array<CardModel>;
-  game: GameModel;
   id: PlayerId;
   pickedCorporationCard: Array<CardModel>; // Why Array?
-  players: Array<PublicPlayerModel>;
   preludeCardsInHand: Array<CardModel>;
   thisPlayer: PublicPlayerModel;
   waitingFor: PlayerInputModel | undefined;

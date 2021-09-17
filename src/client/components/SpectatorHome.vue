@@ -48,20 +48,21 @@
 
     <!-- TODO(kberg): add the spectator tab. -->
     <div v-if="spectator.game.colonies.length > 0 /* && getCurrentSpectatorTab() === 'colonies' */" class="player_home_block" ref="colonies" id="shortkey-colonies">
-        <a name="colonies" class="player_home_anchor"></a>
-        <dynamic-title title="Colonies" :color="spectator.color"/>
-        <div class="colonies-fleets-cont">
-          <div class="colonies-player-fleets" v-for="player in spectator.players" v-bind:key="player.color">
-              <div :class="'colonies-fleet colonies-fleet-'+ player.color" v-for="idx in range(player.fleetSize - player.tradesThisGeneration)" v-bind:key="idx"></div>
-          </div>
+      <a name="colonies" class="player_home_anchor"></a>
+      <dynamic-title title="Colonies" :color="spectator.color"/>
+      <div class="colonies-fleets-cont">
+        <div class="colonies-player-fleets" v-for="player in spectator.players" v-bind:key="player.color">
+            <div :class="'colonies-fleet colonies-fleet-'+ player.color" v-for="idx in range(player.fleetSize - player.tradesThisGeneration)" v-bind:key="idx"></div>
         </div>
-        <div class="player_home_colony_cont">
-          <div class="player_home_colony" v-for="colony in spectator.game.colonies" :key="colony.name">
-              <colony :colony="colony"></colony>
-          </div>
+      </div>
+      <div class="player_home_colony_cont">
+        <div class="player_home_colony" v-for="colony in spectator.game.colonies" :key="colony.name">
+            <colony :colony="colony"></colony>
         </div>
       </div>
     </div>
+    <waiting-for v-show="false" v-if="game.phase !== 'end'" :players="spectator.players" :playerView="spectator" :settings="settings" :waitingfor="undefined"></waiting-for>
+  </div>
 </template>
 
 <script lang="ts">
@@ -82,9 +83,8 @@ import MoonBoard from '@/client/components/moon/MoonBoard.vue';
 import Milestone from '@/client/components/Milestone.vue';
 import Sidebar from '@/client/components/Sidebar.vue';
 import Turmoil from '@/client/components/Turmoil.vue';
+import WaitingFor from '@/client/components/WaitingFor.vue';
 import {range} from '@/utils/utils';
-
-let refreshTimeoutId: number = -1;
 
 export interface SpectatorHomeModel {
   hideTiles: boolean;
@@ -122,22 +122,18 @@ export default Vue.extend({
     MoonBoard,
     Sidebar,
     Turmoil,
+    WaitingFor,
   },
   methods: {
     ...TranslateMixin.methods,
     forceRerender() {
+      // TODO(kberg): this is very inefficient. It pulls down the entire state, ignoring the value of 'waitingFor' which only fetches a short state.
       const root = this.$root as unknown as typeof mainAppSettings.methods;
       root.updateSpectator();
     },
     range(n: number): Array<number> {
       return range(n);
     },
-  },
-  beforeDestroy() {
-    window.clearInterval(refreshTimeoutId);
-  },
-  mounted() {
-    refreshTimeoutId = window.setInterval(this.forceRerender, this.waitingForTimeout);
   },
 });
 </script>

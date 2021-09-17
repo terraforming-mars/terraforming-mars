@@ -664,7 +664,7 @@ describe('Player', function() {
     // SelectOption, which is opptimized to running the option.
     const action = card.play(player) as OrOptions;
     expect(action.options).has.length(1);
-    expect(action.options).instanceOf(SelectOption);
+    expect(action.options[0]).instanceOf(SelectOption);
     expect(player.plants).eq(0);
 
     player.playCard(card);

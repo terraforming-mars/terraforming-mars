@@ -7,15 +7,18 @@ import {OrOptions} from '../../../src/inputs/OrOptions';
 import {TestPlayer} from '../../TestPlayer';
 import {TestingUtils} from '../../TestingUtils';
 import {TestPlayers} from '../../TestPlayers';
+import {PlaceOceanTile} from '../../../src/deferredActions/PlaceOceanTile';
 
 describe('LargeConvoy', function() {
-  let card : LargeConvoy; let player : TestPlayer;
+  let card : LargeConvoy;
+  let player : TestPlayer;
+  let game : Game;
 
   beforeEach(function() {
     card = new LargeConvoy();
     player = TestPlayers.BLUE.newPlayer();
     const redPlayer = TestPlayers.RED.newPlayer();
-    Game.newInstance('foobar', [player, redPlayer], player);
+    game = Game.newInstance('foobar', [player, redPlayer], player);
   });
 
   it('Should play without animal cards', function() {
@@ -25,6 +28,8 @@ describe('LargeConvoy', function() {
 
     expect(player.cardsInHand).has.lengthOf(2);
     expect(player.plants).to.eq(5);
+
+    expect(game.deferredActions.peek()).instanceOf(PlaceOceanTile);
 
     player.playedCards.push(card);
     player.getVictoryPoints();

@@ -117,7 +117,7 @@ export interface GameOptions {
   altVenusBoard: boolean;
 }
 
-const DEFAULT_GAME_OPTIONS: GameOptions = {
+export const DEFAULT_GAME_OPTIONS: GameOptions = {
   altVenusBoard: false,
   aresExtension: false,
   aresHazards: true,

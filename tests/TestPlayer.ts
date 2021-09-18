@@ -8,7 +8,7 @@ import {VictoryPointsBreakdown} from '../src/VictoryPointsBreakdown';
 export class TestPlayer extends Player {
   public victoryPointsBreakdown = new VictoryPointsBreakdown();
   constructor(color: Color) {
-    super('player-' + color, color, false, 0, color + '-id');
+    super('player-' + color, color, false, 0, 'p-' + color + '-id');
   }
 
   public setProductionForTest(units: Partial<Units>) {

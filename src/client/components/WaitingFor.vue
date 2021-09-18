@@ -17,7 +17,7 @@ import Vue from 'vue';
 import {mainAppSettings} from '@/client/components/App';
 import {$t} from '@/client/directives/i18n';
 import {PlayerInputModel} from '@/models/PlayerInputModel';
-import {PlayerViewModel, PublicPlayerModel} from '@/models/PlayerModel';
+import {ViewModel, PublicPlayerModel} from '@/models/PlayerModel';
 import {PreferencesManager} from '@/client/utils/PreferencesManager';
 import {SoundManager} from '@/client/utils/SoundManager';
 import {TranslateMixin} from '@/client/mixins/TranslateMixin';
@@ -25,6 +25,7 @@ import {WaitingForModel} from '@/models/WaitingForModel';
 
 import * as constants from '@/constants';
 import * as raw_settings from '@/genfiles/settings.json';
+import {isPlayerId} from '@/utils/utils';
 
 let ui_update_timeout_id: number | undefined;
 let documentTitleTimer: number | undefined;
@@ -33,7 +34,7 @@ export default Vue.extend({
   name: 'waiting-for',
   props: {
     playerView: {
-      type: Object as () => PlayerViewModel,
+      type: Object as () => ViewModel,
     },
     players: {
       type: Array as () => Array<PublicPlayerModel>,
@@ -109,6 +110,7 @@ export default Vue.extend({
           if (xhr.status === 200) {
             const result = xhr.response as WaitingForModel;
             if (result.result === 'GO') {
+              // Will only apply to player, not spectator.
               root.updatePlayer();
 
               if (Notification.permission !== 'granted') {
@@ -127,7 +129,11 @@ export default Vue.extend({
               return;
             } else if (result.result === 'REFRESH') {
               // Something changed, let's refresh UI
-              root.updatePlayer();
+              if (isPlayerId(this.playerView.id)) {
+                root.updatePlayer();
+              } else {
+                root.updateSpectator();
+              }
 
               return;
             }
@@ -148,7 +154,7 @@ export default Vue.extend({
     if (this.waitingfor === undefined) {
       this.waitForUpdate();
     }
-    if (this.playerView.players.length > 1 && this.playerView.waitingFor !== undefined) {
+    if (this.playerView.players.length > 1 && this.waitingfor !== undefined) {
       documentTitleTimer = window.setInterval(() => this.animateTitle(), 1000);
     }
   },

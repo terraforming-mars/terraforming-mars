@@ -444,6 +444,18 @@ export class Player implements ISerializable<SerializedPlayer> {
       this.heat - units.heat >= 0;
   }
 
+  public addUnits(units: Partial<Units>, options? : {
+    log?: boolean,
+    from? : Player | GlobalEventName,
+  }) {
+    this.addResource(Resources.MEGACREDITS, units.megacredits || 0, options);
+    this.addResource(Resources.STEEL, units.steel || 0, options);
+    this.addResource(Resources.TITANIUM, units.titanium || 0, options);
+    this.addResource(Resources.PLANTS, units.plants || 0, options);
+    this.addResource(Resources.ENERGY, units.energy || 0, options);
+    this.addResource(Resources.HEAT, units.heat || 0, options);
+  }
+
   public deductUnits(units: Units) {
     this.deductResource(Resources.MEGACREDITS, units.megacredits);
     this.deductResource(Resources.STEEL, units.steel);

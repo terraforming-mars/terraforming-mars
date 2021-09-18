@@ -204,7 +204,7 @@ describe('Player', function() {
   });
   it('serialization test', () => {
     const json = {
-      id: 'blue-id',
+      id: 'p-blue-id',
       pickedCorporationCard: 'Tharsis Republic',
       terraformRating: 20,
       corporationCard: undefined,
@@ -729,11 +729,11 @@ describe('Player', function() {
         'gameId': 'foobar',
         'lastSaveId': 0,
         'logAge': 7,
-        'currentPlayer': 'blue-id',
+        'currentPlayer': 'p-blue-id',
         'metadata': {
           'player': {
             'color': 'blue',
-            'id': 'blue-id',
+            'id': 'p-blue-id',
             'name': 'player-blue',
           },
           'resource': 'megacredits',

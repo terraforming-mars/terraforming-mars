@@ -19,7 +19,7 @@
                     <div class="ma-name--milestones" :class="getNameCss(milestone.milestone.name)" v-i18n>
                         {{milestone.milestone.name}}
                         <div v-if="show_scores" class="ma-scores player_home_block--milestones-and-awards-scores">
-                            <p v-for="score in milestone.scores.sort(
+                            <p v-for="score in [...milestone.scores].sort(
                                 (s1, s2) => s2.playerScore - s1.playerScore
                             )" :key="score.playerColor" :class="'ma-score player_bg_color_'+score.playerColor">{{ score.playerScore }}</p>
                         </div>

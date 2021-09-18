@@ -58,6 +58,5 @@ export class SelectResources extends AndOptions {
       },
       ...SelectResources.makeOptions(count, units),
     );
-    this.title = this.title;
   }
 }

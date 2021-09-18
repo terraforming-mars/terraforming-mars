@@ -5,7 +5,7 @@ import GamesOverview from '@/client/components/GamesOverview.vue';
 import PlayerHome from '@/client/components/PlayerHome.vue';
 import PlayerInputFactory from '@/client/components/PlayerInputFactory.vue';
 import SpectatorHome from '@/client/components/SpectatorHome.vue';
-import {PlayerViewModel} from '@/models/PlayerModel';
+import {ViewModel, PlayerViewModel} from '@/models/PlayerModel';
 import StartScreen from '@/client/components/StartScreen.vue';
 import LoadGameForm from '@/client/components/LoadGameForm.vue';
 import DebugUI from '@/client/components/DebugUI.vue';
@@ -17,6 +17,7 @@ import {$t} from '@/client/directives/i18n';
 import * as constants from '@/constants';
 import * as raw_settings from '@/genfiles/settings.json';
 import {SpectatorModel} from '@/models/SpectatorModel';
+import {isPlayerId, isSpectatorId} from '@/utils/utils';
 
 const dialogPolyfill = require('dialog-polyfill');
 
@@ -69,6 +70,8 @@ export const mainAppSettings = {
       'turmoil_parties': false,
     } as {[x: string]: boolean},
     game: undefined as SimpleGameModel | undefined,
+    playerView: undefined,
+    spectator: undefined,
     logPaused: false,
   } as MainAppData,
   'components': {
@@ -110,78 +113,67 @@ export const mainAppSettings = {
     getVisibilityState(targetVar: string): boolean {
       return (this as unknown as typeof mainAppSettings.data).componentsVisibility[targetVar] ? true : false;
     },
-    updatePlayer() {
+    update(path: '/player' | '/spectator'): void {
       const currentPathname: string = window.location.pathname;
       const xhr = new XMLHttpRequest();
       const app = this as unknown as typeof mainAppSettings.data;
 
-      xhr.open(
-        'GET',
-        '/api/player' +
-                    window.location.search.replace('&noredirect', ''),
-      );
+      const url = '/api' + path + window.location.search.replace('&noredirect', '');
+      xhr.open('GET', url);
       xhr.onerror = function() {
         alert('Error getting game data');
       };
-      xhr.onload = () => {
-        if (xhr.status === 200) {
-          app.playerView = xhr.response as PlayerViewModel;
-          app.playerkey++;
-          if (
-            app.playerView.game.phase === 'end' &&
-                        window.location.search.includes('&noredirect') === false
-          ) {
-            app.screen = 'the-end';
-            if (currentPathname !== '/the-end') {
-              window.history.replaceState(
-                xhr.response,
-                `${constants.APP_NAME} - Player`,
-                '/the-end?id=' + app.playerView.id,
-              );
+      xhr.onload = function() {
+        try {
+          if (xhr.status === 200) {
+            const model = xhr.response as ViewModel;
+            if (path === '/player') {
+              app.playerView = model as PlayerViewModel;
+            } else if (path === '/spectator') {
+              app.spectator = model as SpectatorModel;
+            }
+            app.playerkey++;
+            if (
+              model.game.phase === 'end' &&
+              window.location.search.includes('&noredirect') === false
+            ) {
+              app.screen = 'the-end';
+              if (currentPathname !== '/the-end') {
+                window.history.replaceState(
+                  xhr.response,
+                  `${constants.APP_NAME} - Player`,
+                  '/the-end?id=' + model.id,
+                );
+              }
+            } else {
+              if (path === '/player') {
+                app.screen = 'player-home';
+              } else if (path === '/spectator') {
+                app.screen = 'spectator-home';
+              }
+              if (currentPathname !== path) {
+                window.history.replaceState(
+                  xhr.response,
+                  `${constants.APP_NAME} - Game`,
+                  path + '?id=' + model.id,
+                );
+              }
             }
           } else {
-            app.screen = 'player-home';
-            if (currentPathname !== '/player') {
-              window.history.replaceState(
-                xhr.response,
-                `${constants.APP_NAME} - Game`,
-                '/player?id=' + app.playerView.id,
-              );
-            }
+            alert('Unexpected server response: ' + xhr.statusText);
           }
-        } else {
-          alert('Unexpected server response: ' + xhr.statusText);
+        } catch (e) {
+          console.log('Error processing XHR response: ' + e);
         }
       };
       xhr.responseType = 'json';
       xhr.send();
     },
+    updatePlayer() {
+      this.update('/player');
+    },
     updateSpectator: function() {
-      const xhr = new XMLHttpRequest();
-      const app = this as unknown as typeof mainAppSettings.data;
-
-      xhr.open('GET', '/api/spectator' + window.location.search);
-      xhr.onerror = function() {
-        alert('Error getting game data');
-      };
-      xhr.onload = () => {
-        if (xhr.status === 200) {
-          app.spectator = xhr.response as SpectatorModel;
-          app.playerkey++;
-          app.screen = 'spectator-home';
-          if (window.location.pathname !== '/spectator') {
-            window.history.replaceState(
-              xhr.response,
-              `${constants.APP_NAME} - Game`,
-              '/spectator?id=' + app.spectator.id,
-            );
-          }
-        } else {
-          alert('Unexpected server response: ' + xhr.statusText);
-        }
-      };
-      xhr.responseType = 'json';
-      xhr.send();
+      this.update('/spectator');
     },
   },
   mounted() {
@@ -189,8 +181,18 @@ export const mainAppSettings = {
     if (!window.HTMLDialogElement) dialogPolyfill.default.registerDialog(document.getElementById('alert-dialog'));
     const currentPathname: string = window.location.pathname;
     const app = this as unknown as (typeof mainAppSettings.data) & (typeof mainAppSettings.methods);
-    if (currentPathname === '/player' || currentPathname === '/the-end') {
+    if (currentPathname === '/player') {
       app.updatePlayer();
+    } else if (currentPathname === '/the-end') {
+      const urlParams = new URLSearchParams(window.location.search);
+      const id = urlParams.get('id') || '';
+      if (isPlayerId(id)) {
+        app.updatePlayer();
+      } else if (isSpectatorId(id)) {
+        app.updateSpectator();
+      } else {
+        alert('Bad id URL parameter.');
+      }
     } else if (currentPathname === '/game') {
       app.screen = 'game-home';
       const xhr = new XMLHttpRequest();
@@ -198,7 +200,7 @@ export const mainAppSettings = {
       xhr.onerror = function() {
         alert('Error getting game data');
       };
-      xhr.onload = () => {
+      xhr.onload = function() {
         if (xhr.status === 200) {
           window.history.replaceState(
             xhr.response,

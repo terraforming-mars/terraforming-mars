@@ -21,8 +21,8 @@ describe('ClaimedMilestones', function() {
     const serialized = serializeClaimedMilestones(claimedMilestones);
     expect(serialized).to.deep.eq(
       [
-        {'name': 'Diversifier', 'playerId': 'blue-id'},
-        {'name': 'Generalist', 'playerId': 'red-id'},
+        {'name': 'Diversifier', 'playerId': 'p-blue-id'},
+        {'name': 'Generalist', 'playerId': 'p-red-id'},
       ],
     );
 

@@ -6,8 +6,13 @@
               <input v-if="isSelectOnlyOneCard()" type="radio" v-model="cards" :value="card" />
               <input v-else type="checkbox" v-model="cards" :value="card" :disabled="playerinput.maxCardsToSelect !== undefined && Array.isArray(cards) && cards.length >= playerinput.maxCardsToSelect && cards.includes(card) === false" />
             </template>
-            <Card v-if="playerinput.showOwner && getOwner(card) !== undefined" :card="card" :owner="getOwner(card)" />
-            <Card v-else :card="card"  />
+            <Card :card="card">
+              <template v-if="playerinput.showOwner">
+                <div :class="'card-owner-label player_translucent_bg_color_'+ getOwner(card).color">
+                  {{getOwner(card).name}}
+                </div>
+              </template>
+            </Card>
         </label>
         <div v-if="hasCardWarning()" class="card-warning">{{ $t(warning) }}</div>
         <div v-if="showsave === true" class="nofloat">
@@ -21,9 +26,10 @@
 
 import Vue from 'vue';
 import Button from '@/client/components/common/Button.vue';
+import {Color} from '@/Color';
 import {Message} from '@/Message';
 import {CardOrderStorage} from '@/client/utils/CardOrderStorage';
-import {BasePlayerModel, PlayerViewModel} from '@/models/PlayerModel';
+import {PlayerViewModel} from '@/models/PlayerModel';
 import {VueModelCheckbox, VueModelRadio} from '@/client/types';
 import Card from '@/client/components/card/Card.vue';
 import {CardModel} from '@/models/CardModel';
@@ -32,9 +38,15 @@ import {PlayerInputModel} from '@/models/PlayerInputModel';
 import {sortActiveCards} from '@/client/utils/ActiveCardsSortingOrder';
 import {TranslateMixin} from '@/client/mixins/TranslateMixin';
 
+interface Owner {
+  name: string;
+  color: Color;
+}
+
 interface SelectCardModel {
   cards: VueModelRadio<CardModel> | VueModelCheckbox<Array<CardModel>>;
   warning: string | Message | undefined;
+  owners: Map<CardName, Owner>,
 }
 
 export default Vue.extend({
@@ -62,6 +74,7 @@ export default Vue.extend({
     return {
       cards: [],
       warning: undefined,
+      owners: new Map(),
     } as SelectCardModel;
   },
   components: {
@@ -83,18 +96,28 @@ export default Vue.extend({
       }
       return 1;
     },
-    getOrderedCards() {
-      if (this.playerinput.cards === undefined) {
-        return [];
+    getOrderedCards(): Array<CardModel> {
+      let cards: Array<CardModel> = [];
+      if (this.playerinput.cards !== undefined) {
+        if (this.playerinput.selectBlueCardAction) {
+          cards = sortActiveCards(this.playerinput.cards);
+        } else {
+          cards = CardOrderStorage.getOrdered(
+            CardOrderStorage.getCardOrder(this.playerView.id),
+            this.playerinput.cards,
+          );
+        }
+      };
+
+      if (this.playerinput.showOwner) {
+        // Optimization so getOwners isn't repeatedly called.
+        this.owners.clear();
+        this.playerinput.cards?.forEach((card) => {
+          const owner = this.findOwner(card);
+          if (owner !== undefined) this.owners.set(card.name, owner);
+        });
       }
-      if (this.playerinput.selectBlueCardAction) {
-        return sortActiveCards(this.playerinput.cards);
-      } else {
-        return CardOrderStorage.getOrdered(
-          CardOrderStorage.getCardOrder(this.playerView.id),
-          this.playerinput.cards,
-        );
-      }
+      return cards;
     },
     hasCardWarning() {
       if (Array.isArray(this.cards)) {
@@ -122,13 +145,16 @@ export default Vue.extend({
       }
       return 'cardbox';
     },
-    getOwner(card: CardModel): BasePlayerModel | undefined {
+    findOwner(card: CardModel): Owner | undefined {
       for (const player of this.playerView.players) {
         if (player.playedCards.find((c) => c.name === card.name)) {
           return {name: player.name, color: player.color};
         }
       }
       return undefined;
+    },
+    getOwner(card: CardModel): Owner {
+      return this.owners.get(card.name) ?? {name: 'unknown', color: Color.NEUTRAL};
     },
     isSelectOnlyOneCard() : boolean {
       return this.playerinput.maxCardsToSelect === 1 && this.playerinput.minCardsToSelect === 1;

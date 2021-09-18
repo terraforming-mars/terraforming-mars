@@ -28,8 +28,14 @@ export class FakeGameLoader implements IGameLoader {
     }
     cb(undefined);
   }
-  getBySpectatorId(_spectatorId: string, _cb: (game: Game | undefined) => void): void {
-    throw new Error('Method not implemented.');
+  getBySpectatorId(spectatorId: string, cb: (game: Game | undefined) => void): void {
+    for (const game of Array.from(this.games.values())) {
+      if (game.spectatorId === spectatorId) {
+        cb(game);
+        return;
+      }
+    }
+    cb(undefined);
   }
   restoreGameAt(_gameId: string, _saveId: number, _cb: (game: Game | undefined) => void): void {
     throw new Error('Method not implemented.');

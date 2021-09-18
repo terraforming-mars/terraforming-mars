@@ -22,7 +22,7 @@ export class RedTourismWave extends Card implements IProjectCard {
       metadata: {
         cardNumber: 'T12',
         renderData: CardRenderer.builder((b) => {
-          b.megacredits(1).slash().emptyTile('normal', Size.SMALL).asterix();
+          b.megacredits(1).slash().emptyTile('normal', {size: Size.SMALL}).asterix();
         }),
         description: 'Requires that Reds are ruling or that you have 2 delegates there. Gain 1 M€ from each EMPTY AREA ADJACENT TO YOUR TILES',
       },

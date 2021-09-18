@@ -9,6 +9,7 @@ import {Card} from '../Card';
 import {CardRequirements} from '../CardRequirements';
 import {CardRenderer} from '../render/CardRenderer';
 import {Turmoil} from '../../turmoil/Turmoil';
+import {all} from '../Options';
 
 export class VoteOfNoConfidence extends Card implements IProjectCard {
   constructor() {
@@ -21,7 +22,7 @@ export class VoteOfNoConfidence extends Card implements IProjectCard {
       metadata: {
         cardNumber: 'T16',
         renderData: CardRenderer.builder((b) => {
-          b.minus().chairman().any.asterix();
+          b.minus().chairman({all}).asterix();
           b.nbsp.plus().partyLeaders().br;
           b.tr(1);
         }),

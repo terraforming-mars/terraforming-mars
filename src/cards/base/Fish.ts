@@ -11,6 +11,7 @@ import {DecreaseAnyProduction} from '../../deferredActions/DecreaseAnyProduction
 import {CardRequirements} from '../CardRequirements';
 import {CardRenderer} from '../render/CardRenderer';
 import {CardRenderDynamicVictoryPoints} from '../render/CardRenderDynamicVictoryPoints';
+import {all} from '../Options';
 
 export class Fish extends Card implements IActionCard, IProjectCard, IResourceCard {
   constructor() {
@@ -28,7 +29,7 @@ export class Fish extends Card implements IActionCard, IProjectCard, IResourceCa
           b.action('Add 1 Animal to this card.', (eb) => {
             eb.empty().startAction.animals(1);
           }).br;
-          b.production((pb) => pb.minus().plants(1).any).br;
+          b.production((pb) => pb.minus().plants(1, {all})).br;
           b.vpText('1 VP for each Animal on this card.');
         }),
         description: {

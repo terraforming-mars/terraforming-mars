@@ -9,6 +9,7 @@ import {PartyHooks} from '../../turmoil/parties/PartyHooks';
 import {PartyName} from '../../turmoil/parties/PartyName';
 import {RemoveAnyPlants} from '../../deferredActions/RemoveAnyPlants';
 import {CardRenderer} from '../render/CardRenderer';
+import {all} from '../Options';
 
 export class DeimosDown extends Card implements IProjectCard {
   constructor() {
@@ -24,7 +25,7 @@ export class DeimosDown extends Card implements IProjectCard {
         renderData: CardRenderer.builder((b) => {
           b.temperature(3).br;
           b.steel(4).br;
-          b.minus().plants(-8).any;
+          b.minus().plants(-8, {all});
         }),
       },
     });

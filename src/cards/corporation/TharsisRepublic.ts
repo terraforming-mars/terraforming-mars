@@ -14,6 +14,7 @@ import {Board} from '../../boards/Board';
 import {CardType} from '../CardType';
 import {CardRenderer} from '../render/CardRenderer';
 import {Size} from '../render/Size';
+import {all} from '../Options';
 
 export class TharsisRepublic extends Card implements CorporationCard {
   constructor() {
@@ -32,9 +33,9 @@ export class TharsisRepublic extends Card implements CorporationCard {
           b.megacredits(40).nbsp.city();
           b.corpBox('effect', (ce) => {
             ce.effect('When any city tile is placed ON MARS, increase your M€ production 1 step. When you place a city tile, gain 3 M€.', (eb) => {
-              eb.city(Size.SMALL).any.asterix().colon();
+              eb.city({size: Size.SMALL, all}).asterix().colon();
               eb.production((pb) => pb.megacredits(1)).nbsp;
-              eb.city(Size.SMALL).startEffect.megacredits(3);
+              eb.city({size: Size.SMALL}).startEffect.megacredits(3);
             });
           });
         }),

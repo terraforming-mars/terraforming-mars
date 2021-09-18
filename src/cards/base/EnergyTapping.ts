@@ -7,6 +7,7 @@ import {Resources} from '../../Resources';
 import {CardName} from '../../CardName';
 import {DecreaseAnyProduction} from '../../deferredActions/DecreaseAnyProduction';
 import {CardRenderer} from '../render/CardRenderer';
+import {all} from '../Options';
 
 export class EnergyTapping extends Card implements IProjectCard {
   constructor() {
@@ -21,7 +22,7 @@ export class EnergyTapping extends Card implements IProjectCard {
         description: 'Decrease any Energy production 1 step and increase your own 1 step.',
         renderData: CardRenderer.builder((b) => {
           b.production((pb) => {
-            pb.minus().energy(1).any.br;
+            pb.minus().energy(1, {all}).br;
             pb.plus().energy(1);
           });
         }),

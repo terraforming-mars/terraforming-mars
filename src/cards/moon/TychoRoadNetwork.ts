@@ -26,7 +26,7 @@ export class TychoRoadNetwork extends MoonCard {
         renderData: CardRenderer.builder((b) => {
           b.minus().steel(1).br;
           b.production((eb) => eb.megacredits(1)).br;
-          b.moonRoad().secondaryTag(AltSecondaryTag.MOON_LOGISTICS_RATE);
+          b.moonRoad({secondaryTag: AltSecondaryTag.MOON_LOGISTICS_RATE});
         }),
       },
     }, {

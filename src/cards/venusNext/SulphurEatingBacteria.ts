@@ -11,6 +11,7 @@ import {LogHelper} from '../../LogHelper';
 import {CardRequirements} from '../CardRequirements';
 import {CardRenderer} from '../render/CardRenderer';
 import {Card} from '../Card';
+import {multiplier} from '../Options';
 
 export class SulphurEatingBacteria extends Card implements IActionCard, IResourceCard {
   constructor() {
@@ -30,7 +31,7 @@ export class SulphurEatingBacteria extends Card implements IActionCard, IResourc
           }).br;
           b.or().br;
           b.action('Spend any number of Microbes here to gain triple amount of MC.', (eb) => {
-            eb.text('x').microbes(1).startAction.megacredits(3).multiplier;
+            eb.text('x').microbes(1).startAction.megacredits(3, {multiplier});
           });
         }),
         description: 'Requires Venus 6%',

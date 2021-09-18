@@ -11,6 +11,7 @@ import {IProjectCard} from '../IProjectCard';
 import {Tags} from '../Tags';
 import {RemoveAnyPlants} from '../../deferredActions/RemoveAnyPlants';
 import {CardRenderer} from '../render/CardRenderer';
+import {all, digit} from '../Options';
 
 export class MetallicAsteroid extends Card implements IProjectCard {
   constructor() {
@@ -24,7 +25,7 @@ export class MetallicAsteroid extends Card implements IProjectCard {
         cardNumber: 'A13',
         renderData: CardRenderer.builder((b) => {
           b.temperature(1).titanium(1).br;
-          b.minus().plants(4).digit.any;
+          b.minus().plants(4, {digit, all});
           b.tile(TileType.METALLIC_ASTEROID, false, true);
         }),
         description: 'Raise temperature 1 step and gain 1 titanium. Remove up to 4 plants from any player. Place this tile which grants an ADJACENCY BONUS of 1 titanium.',

@@ -6,6 +6,7 @@ import {Tags} from '../Tags';
 import {Player} from '../../Player';
 import {Resources} from '../../Resources';
 import {CardRenderer} from '../render/CardRenderer';
+import {played} from '../Options';
 
 export class OrbitalCleanup extends Card implements IProjectCard {
   constructor() {
@@ -19,7 +20,7 @@ export class OrbitalCleanup extends Card implements IProjectCard {
         cardNumber: 'X08',
         renderData: CardRenderer.builder((b) => {
           b.action('Gain 1 M€ per Science tag you have.', (eb) => {
-            eb.empty().startAction.megacredits(1).slash().science().played;
+            eb.empty().startAction.megacredits(1).slash().science(1, {played});
           }).br;
           b.production((pb) => {
             pb.megacredits(-2);

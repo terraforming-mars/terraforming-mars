@@ -26,8 +26,8 @@ export class VenusianPlants extends Card implements IProjectCard {
         cardNumber: '261',
         renderData: CardRenderer.builder((b) => {
           b.venus(1).br.br; // intentional double br
-          b.microbes(1).secondaryTag(Tags.VENUS).nbsp;
-          b.or().nbsp.animals(1).secondaryTag(Tags.VENUS);
+          b.microbes(1, {secondaryTag: Tags.VENUS}).nbsp;
+          b.or().nbsp.animals(1, {secondaryTag: Tags.VENUS});
         }),
         description: {
           text: 'Requires Venus 16%. Raise Venus 1 step. Add 1 Microbe or 1 Animal to ANOTHER VENUS CARD',

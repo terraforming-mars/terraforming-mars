@@ -8,6 +8,7 @@ import {MoonExpansion} from '../../moon/MoonExpansion';
 import {CardRenderer} from '../render/CardRenderer';
 import {CardRenderDynamicVictoryPoints} from '../render/CardRenderDynamicVictoryPoints';
 import {Card} from '../Card';
+import {all} from '../Options';
 
 export class OffWorldCityLiving extends Card implements IProjectCard {
   constructor() {
@@ -22,7 +23,7 @@ export class OffWorldCityLiving extends Card implements IProjectCard {
         description: 'Increase your M€ production 1 step per city tile NOT ON MARS. Increase Colony Rate 1 step.',
         cardNumber: 'M53',
         renderData: CardRenderer.builder((b) => {
-          b.production((pb) => pb.megacredits(1)).slash().city().any.secondaryTag(Tags.SPACE).br;
+          b.production((pb) => pb.megacredits(1)).slash().city({all, secondaryTag: Tags.SPACE}).br;
           b.moonColonyRate().br;
           b.vpText('1 VP for each 3 city tiles in play.');
         }),

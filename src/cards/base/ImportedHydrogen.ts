@@ -16,6 +16,7 @@ import {PartyHooks} from '../../turmoil/parties/PartyHooks';
 import {PartyName} from '../../turmoil/parties/PartyName';
 import {PlaceOceanTile} from '../../deferredActions/PlaceOceanTile';
 import {CardRenderer} from '../render/CardRenderer';
+import {digit} from '../Options';
 
 export class ImportedHydrogen extends Card implements IProjectCard {
   constructor() {
@@ -28,10 +29,10 @@ export class ImportedHydrogen extends Card implements IProjectCard {
       metadata: {
         cardNumber: '019',
         renderData: CardRenderer.builder((b) => {
-          b.plants(3).digit;
+          b.plants(3, {digit});
           b.or();
-          b.microbes(3).digit.asterix().or();
-          b.animals(2).digit.asterix().br;
+          b.microbes(3, {digit}).asterix().or();
+          b.animals(2, {digit}).asterix().br;
           b.oceans(1);
         }),
         description: 'Gain 3 Plants, or add 3 Microbes or 2 Animals to ANOTHER card. Place an ocean tile.',

@@ -9,6 +9,7 @@ import {PartyHooks} from '../../turmoil/parties/PartyHooks';
 import {PartyName} from '../../turmoil/parties/PartyName';
 import {RemoveAnyPlants} from '../../deferredActions/RemoveAnyPlants';
 import {CardRenderer} from '../../cards/render/CardRenderer';
+import {all} from '../Options';
 
 export class BigAsteroid extends Card implements IProjectCard {
   constructor() {
@@ -24,7 +25,7 @@ export class BigAsteroid extends Card implements IProjectCard {
         renderData: CardRenderer.builder((b) => {
           b.temperature(2).br;
           b.titanium(4).br;
-          b.minus().plants(-4).any;
+          b.minus().plants(-4, {all});
         }),
       },
     });

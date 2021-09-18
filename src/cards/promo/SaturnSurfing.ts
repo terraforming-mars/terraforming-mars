@@ -8,6 +8,7 @@ import {ResourceType} from '../../ResourceType';
 import {CardName} from '../../CardName';
 import {Resources} from '../../Resources';
 import {CardRenderer} from '../render/CardRenderer';
+import {played} from '../Options';
 
 export class SaturnSurfing extends Card implements IActionCard, IProjectCard, IResourceCard {
   constructor() {
@@ -25,7 +26,7 @@ export class SaturnSurfing extends Card implements IActionCard, IProjectCard, IR
             eb.floaters(1).startAction.megacredits(1).slash().floaters(1);
             eb.asterix().text('max 5');
           }).br;
-          b.floaters(1).slash().earth().played;
+          b.floaters(1).slash().earth(1, {played});
         }),
         description: 'Add 1 floater here for every Earth tag you have, including this.',
         victoryPoints: 1,

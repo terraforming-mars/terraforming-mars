@@ -11,6 +11,7 @@ import {Units} from '../../Units';
 import {MoonCard} from './MoonCard';
 import {Game} from '../../Game';
 import {Resources} from '../../Resources';
+import {all} from '../Options';
 
 export class LunaTradeStation extends MoonCard implements IActionCard {
   constructor() {
@@ -26,7 +27,7 @@ export class LunaTradeStation extends MoonCard implements IActionCard {
         cardNumber: 'M13',
         renderData: CardRenderer.builder((b) => {
           b.action('Gain 2 M€ for each colony tile on the Moon.', (eb) =>
-            eb.empty().startAction.megacredits(2).slash().moonColony().any);
+            eb.empty().startAction.megacredits(2).slash().moonColony({all}));
           b.br.minus().titanium(2).tile(TileType.LUNA_TRADE_STATION, true).asterix();
         }),
       },

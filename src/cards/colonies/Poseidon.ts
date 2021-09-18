@@ -5,6 +5,7 @@ import {CardName} from '../../CardName';
 import {CardType} from '../CardType';
 import {BuildColony} from '../../deferredActions/BuildColony';
 import {CardRenderer} from '../render/CardRenderer';
+import {all} from '../Options';
 
 export class Poseidon extends Card implements CorporationCard {
   constructor() {
@@ -22,7 +23,7 @@ export class Poseidon extends Card implements CorporationCard {
           b.megacredits(45).nbsp.colonies(1);
           b.corpBox('effect', (ce) => {
             ce.effect('When any colony is placed, including this, raise your M€ production 1 step.', (eb) => {
-              eb.colonies(1).any.startEffect.production((pb) => pb.megacredits(1));
+              eb.colonies(1, {all}).startEffect.production((pb) => pb.megacredits(1));
             });
           });
         }),

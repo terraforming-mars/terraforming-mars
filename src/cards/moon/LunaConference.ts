@@ -11,6 +11,7 @@ import {CardRequirements} from '../CardRequirements';
 import {Card} from '../Card';
 import {Size} from '../render/Size';
 import {Resources} from '../../Resources';
+import {all} from '../Options';
 
 export class LunaConference extends Card implements IProjectCard {
   constructor() {
@@ -26,8 +27,8 @@ export class LunaConference extends Card implements IProjectCard {
         'Gain 2 M€ per road tile on the Moon. Gain 2M€ per colony tile on the Moon.',
         cardNumber: 'M58',
         renderData: CardRenderer.builder((b) => {
-          b.megacredits(2).slash().moonRoad({size: Size.SMALL}).any.br;
-          b.megacredits(2).slash().moonColony({size: Size.SMALL}).any.br;
+          b.megacredits(2).slash().moonRoad({size: Size.SMALL, all}).br;
+          b.megacredits(2).slash().moonColony({size: Size.SMALL, all}).br;
         }),
       },
     });

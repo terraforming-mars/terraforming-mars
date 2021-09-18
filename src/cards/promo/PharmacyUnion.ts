@@ -15,6 +15,7 @@ import {DeferredAction} from '../../deferredActions/DeferredAction';
 import {CardRenderer} from '../render/CardRenderer';
 import {Size} from '../render/Size';
 import {Resources} from '../../Resources';
+import {all, digit, played} from '../Options';
 
 export class PharmacyUnion extends Card implements CorporationCard {
   constructor() {
@@ -27,18 +28,18 @@ export class PharmacyUnion extends Card implements CorporationCard {
       metadata: {
         cardNumber: 'R39',
         renderData: CardRenderer.builder((b) => {
-          b.megacredits(54).cards(1).secondaryTag(Tags.SCIENCE);
+          b.megacredits(54).cards(1, {secondaryTag: Tags.SCIENCE});
           // blank space after MC is on purpose
           b.text('(You start with 54 M€ . Draw a Science card.)', Size.TINY, false, false);
           b.corpBox('effect', (ce) => {
             ce.vSpace(Size.LARGE);
             ce.effect(undefined, (eb) => {
-              eb.microbes(1).any.played.startEffect.disease().megacredits(-4);
+              eb.microbes(1, {all, played}).startEffect.disease().megacredits(-4);
             });
             ce.vSpace();
             ce.effect('When ANY microbe tag is played, add a disease here and lose 4 M€ or as much as possible. When you play a science tag, remove a disease here and gain 1 TR OR if there are no diseases here, you MAY put this card face down in your EVENTS PILE to gain 3 TR.', (eb) => {
-              eb.science(1).played.startEffect.minus().disease();
-              eb.tr(1, Size.SMALL).slash().tr(3, Size.SMALL).digit;
+              eb.science(1, {played}).startEffect.minus().disease();
+              eb.tr(1, {size: Size.SMALL}).slash().tr(3, {size: Size.SMALL, digit});
             });
           });
         }),

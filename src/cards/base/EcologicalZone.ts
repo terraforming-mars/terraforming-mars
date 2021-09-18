@@ -15,6 +15,7 @@ import {CardRequirements} from '../CardRequirements';
 import {CardRenderer} from '../render/CardRenderer';
 import {CardRenderDynamicVictoryPoints} from '../render/CardRenderDynamicVictoryPoints';
 import {Phase} from '../../Phase';
+import {played} from '../Options';
 
 export class EcologicalZone extends Card implements IProjectCard, IResourceCard {
   constructor(
@@ -29,7 +30,7 @@ export class EcologicalZone extends Card implements IProjectCard, IResourceCard 
       cardNumber: '128',
       renderData: CardRenderer.builder((b) => {
         b.effect('When you play an animal or plant tag /including these/, add an animal to this card.', (eb) => {
-          eb.animals(1).played.slash().plants(1).played.startEffect.animals(1);
+          eb.animals(1, {played}).slash().plants(1, {played}).startEffect.animals(1);
         }).br;
         b.vpText('1 VP per 2 Animals on this card.').tile(TileType.ECOLOGICAL_ZONE, true).asterix();
       }),

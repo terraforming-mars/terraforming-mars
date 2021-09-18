@@ -11,6 +11,7 @@ import {DecreaseAnyProduction} from '../../deferredActions/DecreaseAnyProduction
 import {CardRequirements} from '../CardRequirements';
 import {CardRenderer} from '../render/CardRenderer';
 import {CardRenderDynamicVictoryPoints} from '../render/CardRenderDynamicVictoryPoints';
+import {all} from '../Options';
 
 export class SmallAnimals extends Card implements IActionCard, IProjectCard, IResourceCard {
   constructor() {
@@ -28,7 +29,7 @@ export class SmallAnimals extends Card implements IActionCard, IProjectCard, IRe
           b.action('Add 1 Animal to this card.', (eb) => {
             eb.empty().startAction.animals(1);
           }).br;
-          b.production((pb) => pb.minus().plants(1).any).br;
+          b.production((pb) => pb.minus().plants(1, {all})).br;
           b.vpText('1 VP per 2 Animals on this card.');
         }),
         description: {

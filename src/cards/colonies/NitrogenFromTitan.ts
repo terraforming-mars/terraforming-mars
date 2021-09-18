@@ -22,7 +22,7 @@ export class NitrogenFromTitan extends Card implements IProjectCard {
       metadata: {
         cardNumber: 'C28',
         renderData: CardRenderer.builder((b) => {
-          b.tr(2).floaters(2).secondaryTag(Tags.JOVIAN);
+          b.tr(2).floaters(2, {secondaryTag: Tags.JOVIAN});
         }),
         description: 'Raise your TR 2 steps. Add 2 floaters to a JOVIAN CARD.',
         victoryPoints: 1,

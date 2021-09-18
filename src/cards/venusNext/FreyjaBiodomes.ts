@@ -22,7 +22,7 @@ export class FreyjaBiodomes extends Card {
       metadata: {
         cardNumber: '227',
         renderData: CardRenderer.builder((b) => {
-          b.microbes(2).secondaryTag(Tags.VENUS).or().animals(2).secondaryTag(Tags.VENUS).br;
+          b.microbes(2, {secondaryTag: Tags.VENUS}).or().animals(2, {secondaryTag: Tags.VENUS}).br;
           b.production((pb) => pb.minus().energy(1).nbsp.plus().megacredits(2));
         }),
         description: {

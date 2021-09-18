@@ -6,6 +6,7 @@ import {CardRequirements} from '../CardRequirements';
 import {CardRenderer} from '../render/CardRenderer';
 import {Size} from '../render/Size';
 import {Card} from '../Card';
+import {all} from '../Options';
 
 
 export class AerosportTournament extends Card {
@@ -20,7 +21,7 @@ export class AerosportTournament extends Card {
         cardNumber: '214',
         description: 'Requires that you have 5 Floaters. Gain 1 M€ per each City tile in play.',
         renderData: CardRenderer.builder((b) => {
-          b.megacredits(1).slash().city(Size.SMALL).any;
+          b.megacredits(1).slash().city({size: Size.SMALL, all});
         }),
         victoryPoints: 1,
       },

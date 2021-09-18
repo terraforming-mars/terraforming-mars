@@ -8,6 +8,7 @@ import {SelectCard} from '../../inputs/SelectCard';
 import {ResourceType} from '../../ResourceType';
 import {CardName} from '../../CardName';
 import {CardRenderer} from '../render/CardRenderer';
+import {digit} from '../Options';
 
 export class ImportedNutrients extends Card implements IProjectCard {
   constructor() {
@@ -20,7 +21,7 @@ export class ImportedNutrients extends Card implements IProjectCard {
       metadata: {
         cardNumber: 'X22',
         renderData: CardRenderer.builder((b) => {
-          b.plants(4).digit.nbsp.microbes(4).digit.asterix();
+          b.plants(4, {digit}).nbsp.microbes(4, {digit}).asterix();
         }),
         description: 'Gain 4 plants and add 4 microbes to ANOTHER CARD.',
       },

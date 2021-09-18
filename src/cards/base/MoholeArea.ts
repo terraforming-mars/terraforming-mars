@@ -12,6 +12,7 @@ import {CardName} from '../../CardName';
 import {IAdjacencyBonus} from '../../ares/IAdjacencyBonus';
 import {CardRenderer} from '../render/CardRenderer';
 import {Units} from '../../Units';
+import {digit} from '../Options';
 
 export class MoholeArea extends Card implements IProjectCard {
   constructor(
@@ -20,7 +21,7 @@ export class MoholeArea extends Card implements IProjectCard {
     metadata = {
       cardNumber: '142',
       renderData: CardRenderer.builder((b) => {
-        b.production((pb) => pb.heat(4).digit).br;
+        b.production((pb) => pb.heat(4, {digit})).br;
         b.tile(TileType.MOHOLE_AREA, true);
       }),
       description: 'Increase your heat production 4 steps. Place this tile ON AN AREA RESERVED FOR OCEAN.',

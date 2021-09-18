@@ -28,7 +28,7 @@ export class MareNectarisMine extends MoonCard implements IProjectCard, IMoonCar
         renderData: CardRenderer.builder((b) => {
           b.minus().titanium(1).nbsp;
           b.production((pb) => pb.steel(1));
-          b.moonMine().secondaryTag(AltSecondaryTag.MOON_MINING_RATE).asterix();
+          b.moonMine({secondaryTag: AltSecondaryTag.MOON_MINING_RATE}).asterix();
         }),
       },
     }, {

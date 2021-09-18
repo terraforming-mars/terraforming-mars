@@ -23,7 +23,7 @@ export class CorroderSuits extends Card {
         renderData: CardRenderer.builder((b) => {
           b.production((pb) => {
             pb.megacredits(2);
-          }).wild(1).secondaryTag(Tags.VENUS);
+          }).wild(1, {secondaryTag: Tags.VENUS});
         }),
       },
     });

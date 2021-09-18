@@ -7,6 +7,7 @@ import {PartyName} from '../../turmoil/parties/PartyName';
 import {MoonExpansion} from '../../moon/MoonExpansion';
 import {Player} from '../../Player';
 import {SellSteel} from '../../moon/SellSteel';
+import {all} from '../Options';
 
 export class MooncrateConvoysToMars extends Card {
   constructor() {
@@ -22,7 +23,7 @@ export class MooncrateConvoysToMars extends Card {
         cardNumber: 'M60',
         renderData: CardRenderer.builder((b) => {
           b.moonLogisticsRate().br;
-          b.text('X').steel(1).any.colon().text('X').megacredits(3);
+          b.text('X').steel(1, {all}).colon().text('X').megacredits(3);
         }),
       },
     });

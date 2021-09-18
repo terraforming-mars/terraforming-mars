@@ -28,12 +28,12 @@ export class TitanFloatingLaunchPad extends Card implements IProjectCard, IResou
         cardNumber: 'C44',
         renderData: CardRenderer.builder((b) => {
           b.action(undefined, (eb) => {
-            eb.empty().startAction.floaters(1).secondaryTag(Tags.JOVIAN).nbsp.or();
+            eb.empty().startAction.floaters(1, {secondaryTag: Tags.JOVIAN}).nbsp.or();
           }).br;
           b.action('Add 1 floater to ANY JOVIAN CARD or spend 1 floater here to trade for free.', (eb) => {
             eb.floaters(1).startAction.trade();
           }).br.br;
-          b.floaters(2).secondaryTag(Tags.JOVIAN);
+          b.floaters(2, {secondaryTag: Tags.JOVIAN});
         }),
         description: {
           text: 'Add two floaters to ANY JOVIAN CARD.',

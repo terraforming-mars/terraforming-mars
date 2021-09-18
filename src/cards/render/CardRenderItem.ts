@@ -26,6 +26,12 @@ export enum AltSecondaryTag {
 export interface ItemOptions {
   size?: Size;
   amount?: number;
+  all?: boolean;
+  digit?: boolean;
+  played?: boolean;
+  secondaryTag?: Tags | AltSecondaryTag;
+  multiplier?: boolean; /** Mark any amount to be a multiplier 'X' */
+  cancelled?: boolean;
 }
 
 export class CardRenderItem {
@@ -46,12 +52,11 @@ export class CardRenderItem {
   // add a symbol on top of the item to show it's cancelled or negated in some way (usually X)
   public cancelled?: boolean = false;
   // amount defaults to -1 meaning no digit is displayed but the CardRenderItem icon is shown
-  constructor(public type: CardRenderItemType, public amount: number = -1) {
+  constructor(public type: CardRenderItemType, public amount: number = -1, options?: ItemOptions) {
     if (Math.abs(this.amount) > 5) {
       this.showDigit = true;
     }
-  }
-  public withOptions(options: ItemOptions | undefined): CardRenderItem {
+
     if (options === undefined) {
       return this;
     }
@@ -59,6 +64,18 @@ export class CardRenderItem {
     if (options.amount !== undefined) {
       this.amount = options.amount;
     }
+    this.anyPlayer = options.all ?? false;
+    this.showDigit = options.digit ?? false;
+    this.isPlayed = options.played ?? false;
+    this.secondaryTag = options.secondaryTag;
+
+    if ((options.multiplier ?? false) === true) {
+      this.amountInside = true;
+      this.multiplier = true;
+    }
+
+    this.cancelled = options.cancelled ?? false;
+
     return this;
   }
 }

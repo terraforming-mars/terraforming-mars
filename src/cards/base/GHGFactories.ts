@@ -7,6 +7,7 @@ import {Resources} from '../../Resources';
 import {CardName} from '../../CardName';
 import {CardRenderer} from '../render/CardRenderer';
 import {Units} from '../../Units';
+import {digit} from '../Options';
 
 export class GHGFactories extends Card implements IProjectCard {
   constructor() {
@@ -22,7 +23,7 @@ export class GHGFactories extends Card implements IProjectCard {
         renderData: CardRenderer.builder((b) => {
           b.production((pb) => {
             pb.minus().energy(1).br;
-            pb.plus().heat(4).digit;
+            pb.plus().heat(4, {digit});
           });
         }),
         description: 'Decrease your Energy production 1 step and increase your heat production 4 steps.',

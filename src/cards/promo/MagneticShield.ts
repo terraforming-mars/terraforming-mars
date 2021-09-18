@@ -9,6 +9,7 @@ import {PartyName} from '../../turmoil/parties/PartyName';
 import {REDS_RULING_POLICY_COST} from '../../constants';
 import {CardRequirements} from '../CardRequirements';
 import {CardRenderer} from '../render/CardRenderer';
+import {digit} from '../Options';
 
 export class MagneticShield extends Card implements IProjectCard {
   constructor() {
@@ -21,7 +22,7 @@ export class MagneticShield extends Card implements IProjectCard {
       requirements: CardRequirements.builder((b) => b.tag(Tags.ENERGY, 3)),
       metadata: {
         cardNumber: 'X24',
-        renderData: CardRenderer.builder((b) => b.tr(4).digit),
+        renderData: CardRenderer.builder((b) => b.tr(4, {digit})),
         description: 'Requires 3 power tags. Raise your TR 4 steps.',
       },
     });

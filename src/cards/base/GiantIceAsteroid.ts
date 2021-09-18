@@ -10,6 +10,7 @@ import {PartyName} from '../../turmoil/parties/PartyName';
 import {PlaceOceanTile} from '../../deferredActions/PlaceOceanTile';
 import {RemoveAnyPlants} from '../../deferredActions/RemoveAnyPlants';
 import {CardRenderer} from '../render/CardRenderer';
+import {all} from '../Options';
 
 export class GiantIceAsteroid extends Card implements IProjectCard {
   constructor() {
@@ -25,7 +26,7 @@ export class GiantIceAsteroid extends Card implements IProjectCard {
         renderData: CardRenderer.builder((b) => {
           b.temperature(2).br;
           b.oceans(2).br;
-          b.minus().plants(-6).any;
+          b.minus().plants(-6, {all});
         }),
       },
     });

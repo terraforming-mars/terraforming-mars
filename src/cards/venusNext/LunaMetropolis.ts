@@ -7,6 +7,7 @@ import {Resources} from '../../Resources';
 import {CardName} from '../../CardName';
 import {CardRenderer} from '../render/CardRenderer';
 import {Card} from '../Card';
+import {played} from '../Options';
 
 export class LunaMetropolis extends Card {
   constructor() {
@@ -19,7 +20,7 @@ export class LunaMetropolis extends Card {
       metadata: {
         cardNumber: '236',
         renderData: CardRenderer.builder((b) => {
-          b.production((pb) => pb.megacredits(1).slash().earth().played).br;
+          b.production((pb) => pb.megacredits(1).slash().earth(1, {played})).br;
           b.city().asterix();
         }),
         description: 'Increase your M€ production 1 step for each Earth tag you have, including this. Place a City tile on the RESERVED AREA',

@@ -1,11 +1,8 @@
 import {Player} from '../src/Player';
-import {Game, GameOptions} from '../src/Game';
+import {DEFAULT_GAME_OPTIONS, Game, GameOptions} from '../src/Game';
 import * as constants from '../src/constants';
 import {SpaceType} from '../src/SpaceType';
-import {BoardName} from '../src/boards/BoardName';
-import {RandomMAOptionType} from '../src/RandomMAOptionType';
 import {ISpace} from '../src/boards/ISpace';
-import {AgendaStyle} from '../src/turmoil/PoliticalAgendas';
 import {Phase} from '../src/Phase';
 import {IParty} from '../src/turmoil/parties/IParty';
 import {Turmoil} from '../src/turmoil/Turmoil';
@@ -38,40 +35,13 @@ export class TestingUtils {
   };
 
   public static setCustomGameOptions(options: Partial<GameOptions> = {}): GameOptions {
-    const defaultOptions: GameOptions = {
-      draftVariant: false,
-      initialDraftVariant: false,
-      corporateEra: true,
-      randomMA: RandomMAOptionType.NONE,
-      preludeExtension: false,
+    const defaultOptions = {
+      ...DEFAULT_GAME_OPTIONS,
       venusNextExtension: true,
-      coloniesExtension: false,
       turmoilExtension: true,
-      boardName: BoardName.ORIGINAL,
-      showOtherPlayersVP: false,
-      customCorporationsList: [],
-      solarPhaseOption: false,
-      shuffleMapOption: false,
-      promoCardsOption: false,
-      communityCardsOption: false,
-      undoOption: false,
       showTimers: false,
-      startingCorporations: 2,
       includeVenusMA: true,
-      soloTR: false,
-      clonedGamedId: undefined,
-      cardsBlackList: [],
-      aresExtension: false,
       aresHazards: false,
-      fastModeOption: false,
-      removeNegativeGlobalEventsOption: false,
-      customColoniesList: [],
-      requiresVenusTrackCompletion: false,
-      politicalAgendasExtension: AgendaStyle.STANDARD,
-      moonExpansion: false,
-      requiresMoonTrackCompletion: false,
-      moonStandardProjectVariant: false,
-      altVenusBoard: false,
     };
 
     return Object.assign(defaultOptions, options);

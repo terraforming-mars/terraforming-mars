@@ -15,7 +15,6 @@
 import Vue from 'vue';
 import {SpaceModel} from '@/models/SpaceModel';
 import {TileType} from '@/TileType';
-import {$t} from '@/client/directives/i18n';
 import Bonus from '@/client/components/Bonus.vue';
 
 const tileTypeToCssClass = new Map<TileType, string>([
@@ -59,7 +58,7 @@ export default Vue.extend({
       } else if (this.space.tileType === TileType.LUNA_TRAIN_STATION) {
         ret = 'Luna Train Station';
       }
-      return $t(ret);
+      return this.$t(ret);
     },
     mainClass(): string {
       let css = 'board-space moon-space-' + this.space.id.toString();

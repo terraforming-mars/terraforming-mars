@@ -1,15 +1,9 @@
-import {createLocalVue, mount} from '@vue/test-utils';
+import {mount} from '@vue/test-utils';
+import {getLocalVue} from './getLocalVue';
 import {expect} from 'chai';
 import MoonGlobalParameterValue from '@/client/components/MoonGlobalParameterValue.vue';
 import {MoonModel} from '@/models/MoonModel';
 import {MAXIMUM_COLONY_RATE, MAXIMUM_LOGISTICS_RATE, MAXIMUM_MINING_RATE} from '@/constants';
-
-function getLocalVue() {
-  const localVue = createLocalVue();
-  localVue.directive('trim-whitespace', {});
-  localVue.directive('i18n', {});
-  return localVue;
-}
 
 const moonData: MoonModel = {
   colonyRate: 1,

@@ -80,7 +80,6 @@
 
 import Vue from 'vue';
 import {PartyName} from '@/turmoil/parties/PartyName';
-import {$t} from '@/client/directives/i18n';
 import {TurmoilModel} from '@/models/TurmoilModel';
 import {BonusId} from '@/turmoil/Bonus';
 import {PolicyId} from '@/turmoil/Policy';
@@ -300,7 +299,7 @@ export default Vue.extend({
         const policy = AGENDA_HTML.get(policyId);
         return policy || `No ruling Policy`;
       }
-      return '<p>' + $t('No ruling Policy') + '</p>';
+      return '<p>' + this.$t('No ruling Policy') + '</p>';
     },
     toggleMe() {
       const currentState: boolean = this.isVisible();

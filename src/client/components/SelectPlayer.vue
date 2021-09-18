@@ -17,7 +17,6 @@ import Button from '@/client/components/common/Button.vue';
 import {PlayerInputModel} from '@/models/PlayerInputModel';
 import {PublicPlayerModel} from '@/models/PlayerModel';
 import SelectPlayerRow from '@/client/components/SelectPlayerRow.vue';
-import {TranslateMixin} from '@/client/mixins/TranslateMixin';
 
 export default Vue.extend({
   name: 'SelectPlayer',
@@ -48,7 +47,6 @@ export default Vue.extend({
     Button,
   },
   methods: {
-    ...TranslateMixin.methods,
     saveData() {
       const result: string[][] = [];
       result.push([]);

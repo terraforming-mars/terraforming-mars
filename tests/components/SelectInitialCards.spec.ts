@@ -1,16 +1,11 @@
 
-import {createLocalVue, mount} from '@vue/test-utils';
-
+import {mount} from '@vue/test-utils';
+import {getLocalVue} from './getLocalVue';
 import {expect} from 'chai';
 import {CardName} from '@/CardName';
 import SelectInitialCards from '@/client/components/SelectInitialCards.vue';
 
 describe('SelectInitialCards', function() {
-  function getLocalVue() {
-    const localVue = createLocalVue();
-    localVue.directive('i18n', {});
-    return localVue;
-  }
   it('saves data without prelude', async function() {
     let savedData: Array<Array<string>> | undefined;
     const component = mount(SelectInitialCards, {

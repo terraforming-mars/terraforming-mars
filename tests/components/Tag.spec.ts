@@ -1,14 +1,10 @@
 
-import {createLocalVue, mount} from '@vue/test-utils';
-
+import {mount} from '@vue/test-utils';
+import {getLocalVue} from './getLocalVue';
 import {expect} from 'chai';
 import Tag from '@/client/components/Tag.vue';
 
 describe('Tag', function() {
-  function getLocalVue() {
-    const localVue = createLocalVue();
-    return localVue;
-  }
   it('getClasses with only tag', function() {
     const tag = mount(Tag, {
       localVue: getLocalVue(),

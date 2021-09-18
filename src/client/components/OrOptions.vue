@@ -32,7 +32,6 @@ import Button from '@/client/components/common/Button.vue';
 import {PlayerViewModel, PublicPlayerModel} from '@/models/PlayerModel';
 import {PlayerInputModel} from '@/models/PlayerInputModel';
 import {PreferencesManager} from '@/client/utils/PreferencesManager';
-import {TranslateMixin} from '@/client/mixins/TranslateMixin';
 
 let unique = 0;
 
@@ -73,7 +72,6 @@ export default Vue.extend({
     };
   },
   methods: {
-    ...TranslateMixin.methods,
     playerFactorySaved() {
       const idx = this.playerinput.options?.indexOf(this.selectedOption);
       if (idx === undefined || idx === -1) {

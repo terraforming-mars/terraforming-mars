@@ -68,7 +68,6 @@
 <script lang="ts">
 import Vue from 'vue';
 
-import {TranslateMixin} from '@/client/mixins/TranslateMixin';
 import {GameModel} from '@/models/GameModel';
 import {mainAppSettings} from './App';
 
@@ -125,7 +124,6 @@ export default Vue.extend({
     WaitingFor,
   },
   methods: {
-    ...TranslateMixin.methods,
     forceRerender() {
       // TODO(kberg): this is very inefficient. It pulls down the entire state, ignoring the value of 'waitingFor' which only fetches a short state.
       const root = this.$root as unknown as typeof mainAppSettings.methods;

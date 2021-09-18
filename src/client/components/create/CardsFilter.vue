@@ -27,7 +27,6 @@
 import Vue from 'vue';
 import {CardName} from '@/CardName';
 import {ALL_PRELUDE_CARD_NAMES, ALL_PROJECT_CARD_NAMES} from '@/cards/AllCards';
-import {TranslateMixin} from '@/client/mixins/TranslateMixin';
 import Button from '@/client/components/common/Button.vue';
 
 const allItems: Array<CardName> = ALL_PROJECT_CARD_NAMES.concat(ALL_PRELUDE_CARD_NAMES).sort();
@@ -50,7 +49,6 @@ export default Vue.extend({
   },
   components: {Button},
   methods: {
-    ...TranslateMixin.methods,
     isPrelude(cardName: CardName) {
       return ALL_PRELUDE_CARD_NAMES.includes(cardName);
     },

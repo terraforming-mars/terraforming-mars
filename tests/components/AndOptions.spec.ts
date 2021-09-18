@@ -1,16 +1,12 @@
 
-import {createLocalVue, mount} from '@vue/test-utils';
+import {mount} from '@vue/test-utils';
+import {getLocalVue} from './getLocalVue';
 
 import {expect} from 'chai';
 import AndOptions from '@/client/components/AndOptions.vue';
 import {PlayerInputTypes} from '@/PlayerInputTypes';
 
 describe('AndOptions', function() {
-  function getLocalVue() {
-    const localVue = createLocalVue();
-    localVue.directive('i18n', {});
-    return localVue;
-  }
   it('saves the options', async function() {
     let savedData: Array<Array<string>> | undefined;
     const component = mount(AndOptions, {

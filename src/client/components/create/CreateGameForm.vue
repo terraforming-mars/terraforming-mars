@@ -421,7 +421,6 @@ import {GameId} from '@/Game';
 import {AgendaStyle} from '@/turmoil/PoliticalAgendas';
 
 import * as constants from '@/constants';
-import {$t} from '@/client/directives/i18n';
 
 export interface CreateGameModel {
     constants: typeof constants;
@@ -848,7 +847,7 @@ export default Vue.extend({
       if (component.clonedGameData !== undefined && component.seededGame) {
         clonedGamedId = component.clonedGameData.gameId;
         if (component.clonedGameData.playerCount !== players.length) {
-          window.alert($t('Player count mismatch'));
+          window.alert(this.$t('Player count mismatch'));
           this.$data.playersCount = component.clonedGameData.playerCount;
           return;
         }

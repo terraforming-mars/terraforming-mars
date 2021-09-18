@@ -156,7 +156,6 @@ import {IAresData} from '@/ares/IAresData';
 import {SpaceModel} from '@/models/SpaceModel';
 import {SpaceType} from '@/SpaceType';
 import {SpaceId} from '@/boards/ISpace';
-import {TranslateMixin} from '@/client/mixins/TranslateMixin';
 
 class GlobalParamLevel {
   constructor(public value: number, public isActive: boolean, public strValue: string) {
@@ -207,7 +206,6 @@ export default Vue.extend({
     };
   },
   methods: {
-    ...TranslateMixin.methods,
     getAllSpacesOnMars(): Array<SpaceModel> {
       const boardSpaces: Array<SpaceModel> = [...this.spaces];
       boardSpaces.sort(

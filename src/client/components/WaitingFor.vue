@@ -15,12 +15,10 @@
 import Vue from 'vue';
 
 import {mainAppSettings} from '@/client/components/App';
-import {$t} from '@/client/directives/i18n';
 import {PlayerInputModel} from '@/models/PlayerInputModel';
 import {ViewModel, PublicPlayerModel} from '@/models/PlayerModel';
 import {PreferencesManager} from '@/client/utils/PreferencesManager';
 import {SoundManager} from '@/client/utils/SoundManager';
-import {TranslateMixin} from '@/client/mixins/TranslateMixin';
 import {WaitingForModel} from '@/models/WaitingForModel';
 
 import * as constants from '@/constants';
@@ -52,7 +50,6 @@ export default Vue.extend({
     };
   },
   methods: {
-    ...TranslateMixin.methods,
     animateTitle() {
       const sequence = '\u25D1\u25D2\u25D0\u25D3';
       const first = document.title[0];
@@ -61,7 +58,7 @@ export default Vue.extend({
       if (position !== -1 && position < sequence.length - 1) {
         next = sequence[position + 1];
       }
-      document.title = next + ' ' + $t(constants.APP_NAME);
+      document.title = next + ' ' + this.$t(constants.APP_NAME);
     },
     onsave(out: Array<Array<string>>) {
       const xhr = new XMLHttpRequest();
@@ -149,7 +146,7 @@ export default Vue.extend({
     },
   },
   mounted() {
-    document.title = $t(constants.APP_NAME);
+    document.title = this.$t(constants.APP_NAME);
     window.clearInterval(documentTitleTimer);
     if (this.waitingfor === undefined) {
       this.waitForUpdate();

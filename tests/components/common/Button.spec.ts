@@ -1,12 +1,7 @@
-import {createLocalVue, shallowMount} from '@vue/test-utils';
+import {shallowMount} from '@vue/test-utils';
+import {getLocalVue} from '../getLocalVue';
 import {expect} from 'chai';
 import Button from '@/client/components/common/Button.vue';
-
-function getLocalVue() {
-  const localVue = createLocalVue();
-  localVue.directive('i18n', {});
-  return localVue;
-}
 
 describe('Button', () => {
   it('emits click event on click', async () => {

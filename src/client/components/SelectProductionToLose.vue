@@ -57,7 +57,6 @@ import Vue from 'vue';
 import {PlayerInputModel} from '@/models/PlayerInputModel';
 import {IPayProductionModel} from '@/models/IPayProductionUnitsModel';
 import {Units} from '@/Units';
-import {TranslateMixin} from '@/client/mixins/TranslateMixin';
 
 interface SelectProductionToLoseModel {
     megacredits: number;
@@ -97,7 +96,6 @@ export default Vue.extend({
     } as SelectProductionToLoseModel;
   },
   methods: {
-    ...TranslateMixin.methods,
     canDeductMegaCredits() {
       return this.playerinput.payProduction.units.megacredits > -5;
     },

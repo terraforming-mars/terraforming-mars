@@ -2,7 +2,6 @@
 import Vue from 'vue';
 import {preferences, PreferencesManager} from '@/client/utils/PreferencesManager';
 import {LANGUAGES} from '@/constants';
-import {TranslateMixin} from '@/client/mixins/TranslateMixin';
 
 export default Vue.extend({
   name: 'PreferencesDialog',
@@ -26,7 +25,6 @@ export default Vue.extend({
     };
   },
   methods: {
-    ...TranslateMixin.methods,
     setPreferencesCSS(
       val: boolean | undefined,
       cssClassSuffix: string,

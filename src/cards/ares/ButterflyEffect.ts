@@ -16,7 +16,7 @@ export class ButterflyEffect extends Card implements IProjectCard {
 
       metadata: {
         cardNumber: 'A03',
-        description: 'Effect: Gain 1 TR. Move each individual hazard marker up to 1 step up or down.',
+        description: 'Gain 1 TR. Move each individual hazard marker up to 1 step up or down.',
         renderData: CardRenderer.builder((b) => {
           b.tr(1).br;
           b.plate('All hazard markers').colon().text('-1 / 0 / +1', Size.SMALL);

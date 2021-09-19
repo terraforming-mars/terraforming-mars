@@ -101,7 +101,7 @@ export default Vue.extend({
   },
   methods: {
     getAllNonColonySpaces(): Array<SpaceModel> {
-      const boardSpaces: Array<SpaceModel> = this.model.spaces;
+      const boardSpaces: Array<SpaceModel> = [...this.model.spaces];
       boardSpaces.sort(
         (space1: SpaceModel, space2: SpaceModel) => {
           return parseInt(space1.id) - parseInt(space2.id);

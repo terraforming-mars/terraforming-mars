@@ -37,12 +37,10 @@ export interface CardDiscount {
   amount: number
  }
 
-export interface ICard {
+export interface ICard extends Partial<IActionCard>, Partial<IResourceCard> {
     name: CardName;
     tags: Array<Tags>;
     play: (player: Player) => PlayerInput | undefined;
-    action?: (player: Player) => OrOptions | SelectOption | AndOptions | SelectAmount | SelectCard<ICard> | SelectCard<IProjectCard> | SelectHowToPay | SelectPlayer | SelectSpace | undefined;
-    canAct?: (player: Player) => boolean;
     getCardDiscount?: (player: Player, card: IProjectCard) => number;
     cardDiscount?: CardDiscount;
     // parameter is a Morningstar Inc. special case.
@@ -52,8 +50,6 @@ export interface ICard {
     onStandardProject?: (player: Player, projectType: StandardProjectCard) => void;
     onTilePlaced?: (cardOwner: Player, activePlayer: Player, space: ISpace, boardType: BoardType) => void;
     onDiscard?: (player: Player) => void;
-    resourceType?: ResourceType;
-    resourceCount?: number;
     cost?: number;
     cardType: CardType;
     requirements?: CardRequirements;

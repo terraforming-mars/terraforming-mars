@@ -199,8 +199,8 @@
                           :venusScaleLevel="game.venusScaleLevel"
                           :boardName ="game.gameOptions.boardName"
                           :aresExtension="game.gameOptions.aresExtension"
-                          :aresData="game.aresData">
-                          :altVenusBoard="game.gameOptions.altVenusBoard"
+                          :aresData="game.aresData"
+                          :altVenusBoard="game.gameOptions.altVenusBoard">
                         </board>
 
                         <turmoil v-if="game.turmoil" :turmoil="game.turmoil"></turmoil>

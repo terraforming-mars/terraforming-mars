@@ -57,13 +57,6 @@ export class BioengineeringEnclosure extends Card implements IProjectCard, IActi
           return undefined;
         }
 
-        if (resourceCards.length === 1) {
-          this.resourceCount--;
-          player.addResourceTo(resourceCards[0], 1);
-          player.game.log('${0} moved 1 animal from Bioengineering Enclosure to ${1}.', (b) => b.player(player).card(resourceCards[0]));
-          return undefined;
-        }
-
         return new SelectCard(
           'Select card to add 1 animal',
           'Add animal',

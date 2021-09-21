@@ -20,7 +20,7 @@ describe('BioengineeringEnclosure', function() {
     game = Game.newInstance('foobar', [player, redPlayer], player, ARES_OPTIONS_NO_HAZARDS);
   });
 
-  it('Can\'t play without a science tag', () => {
+  it('Cannot play without a science tag', () => {
     expect(card.canPlay(player)).is.false;
     player.playCard(new AICentral());
     expect(card.canPlay(player)).is.true;
@@ -32,14 +32,14 @@ describe('BioengineeringEnclosure', function() {
     expect(card.resourceCount).eq(2);
   });
 
-  it('Can\'t move animal if it\'s empty', () => {
+  it('Cannot move animal if it is empty', () => {
     card.play(player);
     player.playCard(animalHost);
     card.resourceCount = 0;
     expect(card.canAct(player)).is.false;
   });
 
-  it('Can\'t move animal if theres not another card', () => {
+  it('Cannot move animal if theres not another card', () => {
     card.play(player);
     expect(card.canAct(player)).is.false;
   });

@@ -1512,23 +1512,7 @@ export class Player implements ISerializable<SerializedPlayer> {
 
   private queueAction(action: PlayerInput | undefined): void {
     if (action === undefined) return;
-    let queuedAction = action;
-    if (action instanceof OrOptions || action instanceof AndOptions) {
-      if (action.options.length === 0) {
-        return;
-      }
-      if (action.options.length === 1) {
-        queuedAction = action.options[0];
-      }
-    }
-
-    // For a single SelectOption, run it now, do not defer.
-    // TODO(kberg): consider moving this, and all the input optomizations to DeferredActionQueue
-    if (queuedAction instanceof SelectOption) {
-      queuedAction.cb();
-    } else {
-      this.game.defer(new DeferredAction(this, () => queuedAction));
-    }
+    this.game.defer(new DeferredAction(this, () => action));
   }
 
   public drawCard(count?: number, options?: DrawCards.DrawOptions): undefined {
@@ -2108,9 +2092,41 @@ export class Player implements ISerializable<SerializedPlayer> {
     return this.waitingFor;
   }
   public setWaitingFor(input: PlayerInput, cb: () => void = () => {}): void {
-    this.timer.start();
-    this.waitingFor = input;
-    this.waitingForCb = cb;
+    const optimized = this.optimize(input);
+    if (optimized !== undefined) {
+      this.timer.start();
+      this.waitingFor = input;
+      this.waitingForCb = cb;
+    } else {
+      cb();
+    }
+  }
+
+  private optimize(input: PlayerInput | undefined): PlayerInput | undefined {
+    if (input === undefined) return undefined;
+    let optimized = input;
+    if (input instanceof OrOptions || input instanceof AndOptions) {
+      if (input.options.length === 0) {
+        return undefined;
+      }
+      if (input.options.length === 1) {
+        optimized = input.options[0];
+      }
+    }
+
+    // For a single SelectOption, run it now, do not defer.
+    if (optimized instanceof SelectOption) {
+      return this.optimize(optimized.cb());
+    }
+
+    // Simple case of asking the player to select one card when only one card is available.
+    if (optimized instanceof SelectCard) {
+      if (optimized.cards.length === 1 && optimized.minCardsToSelect === 1 && optimized.maxCardsToSelect === 1) {
+        return optimized.cb(optimized.cards[0]);
+      }
+    }
+
+    return optimized;
   }
 
   private serializePlayedCards(): Array<SerializedCard> {

@@ -58,14 +58,14 @@
             </div>
 
             <div v-if="altVenusBoard" class="global-alt-venus">
-              <div class="std-wild-resource p18"/>
-              <div class="std-wild-resource p20"/>
-              <div class="std-wild-resource p22"/>
-              <div class="std-wild-resource p24"/>
-              <div class="std-wild-resource p26"/>
-              <div class="std-wild-resource p28"/>
-              <div class="std-wild-resource p30"/>
-              <div class="wild-resource p30b"/>
+              <div class="std-wild-resource p18"></div>
+              <div class="std-wild-resource p20"></div>
+              <div class="std-wild-resource p22"></div>
+              <div class="std-wild-resource p24"></div>
+              <div class="std-wild-resource p26"></div>
+              <div class="std-wild-resource p28"></div>
+              <div class="std-wild-resource p30"></div>
+              <div class="wild-resource p30b"></div>
             </div>
         </div>
 

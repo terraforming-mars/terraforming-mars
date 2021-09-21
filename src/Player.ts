@@ -623,7 +623,9 @@ export class Player implements ISerializable<SerializedPlayer> {
   }
 
   public getResourcesOnCard(card: ICard): number | undefined {
-    return card.resourceCount;
+    if (card.resourceCount !== undefined) {
+      return card.resourceCount;
+    } else return undefined;
   }
 
   public getResourcesOnCorporation():number {

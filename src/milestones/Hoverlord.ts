@@ -8,7 +8,7 @@ export class Hoverlord implements IMilestone {
     public getScore(player: Player): number {
       let floaterResources: number = 0;
       player.getCardsWithResources().filter((card) => card.resourceType === ResourceType.FLOATER).forEach((card) => {
-        floaterResources += player.getResourcesOnCard(card)!;
+        floaterResources += (player.getResourcesOnCard(card) ?? 0);
       });
       return floaterResources;
     }

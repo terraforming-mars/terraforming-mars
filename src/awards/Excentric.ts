@@ -8,7 +8,7 @@ export class Excentric implements IAward {
       let score: number = 0;
 
       player.getCardsWithResources().forEach((card) => {
-        score += player.getResourcesOnCard(card)!;
+        score += (player.getResourcesOnCard(card) ?? 0);
       });
 
       return score;

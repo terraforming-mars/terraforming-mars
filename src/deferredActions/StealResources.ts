@@ -19,6 +19,7 @@ export class StealResources implements DeferredAction {
   public execute() {
     if (this.player.game.isSoloMode()) {
       this.player.addResource(this.resource, this.count);
+      this.stealComplete();
       return undefined;
     }
 

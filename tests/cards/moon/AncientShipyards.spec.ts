@@ -55,6 +55,21 @@ describe('AncientShipyards', () => {
     expect(card.resourceCount).eq(1);
   });
 
+  it('act solo', () => {
+    redPlayer = TestPlayers.RED.newPlayer();
+    game = Game.newInstance('id', [redPlayer], redPlayer, MOON_OPTIONS);
+
+    expect(card.resourceCount).eq(0);
+    redPlayer.megaCredits = 10;
+
+    card.action(redPlayer);
+    const options = game.deferredActions.pop()!.execute();
+    expect(options).to.be.undefined;
+
+    expect(redPlayer.megaCredits).eq(18);
+    expect(card.resourceCount).eq(1);
+  });
+
   it('victory points', () => {
     expect(card.getVictoryPoints()).eq(0);
     card.resourceCount = 1;

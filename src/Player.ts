@@ -444,6 +444,18 @@ export class Player implements ISerializable<SerializedPlayer> {
       this.heat - units.heat >= 0;
   }
 
+  public addUnits(units: Partial<Units>, options? : {
+    log?: boolean,
+    from? : Player | GlobalEventName,
+  }) {
+    this.addResource(Resources.MEGACREDITS, units.megacredits || 0, options);
+    this.addResource(Resources.STEEL, units.steel || 0, options);
+    this.addResource(Resources.TITANIUM, units.titanium || 0, options);
+    this.addResource(Resources.PLANTS, units.plants || 0, options);
+    this.addResource(Resources.ENERGY, units.energy || 0, options);
+    this.addResource(Resources.HEAT, units.heat || 0, options);
+  }
+
   public deductUnits(units: Units) {
     this.deductResource(Resources.MEGACREDITS, units.megacredits);
     this.deductResource(Resources.STEEL, units.steel);
@@ -1826,15 +1838,20 @@ export class Player implements ISerializable<SerializedPlayer> {
     return new CardLoader(this.game.gameOptions)
       .getStandardProjects()
       .filter((card) => {
+        switch (card.name) {
         // sell patents is not displayed as a card
-        if (card.name === CardName.SELL_PATENTS_STANDARD_PROJECT) {
+        case CardName.SELL_PATENTS_STANDARD_PROJECT:
           return false;
-        }
         // For buffer gas, show ONLY IF in solo AND 63TR mode
-        if (card.name === CardName.BUFFER_GAS_STANDARD_PROJECT) {
-          return (this.game.isSoloMode() && this.game.gameOptions.soloTR);
-        }
-        return true;
+        case CardName.BUFFER_GAS_STANDARD_PROJECT:
+          return this.game.isSoloMode() && this.game.gameOptions.soloTR;
+        case CardName.AIR_SCRAPPING_STANDARD_PROJECT:
+          return this.game.gameOptions.altVenusBoard === false;
+        case CardName.AIR_SCRAPPING_STANDARD_PROJECT_VARIANT:
+          return this.game.gameOptions.altVenusBoard === true;
+        default:
+          return true;
+        };
       })
       .sort((a, b) => a.cost - b.cost);
   }

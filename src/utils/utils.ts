@@ -22,3 +22,11 @@ export const generateClassString = (classes: Array<string>): string => classes.j
 export type RecursivePartial<T> = {
   [P in keyof T]?: RecursivePartial<T[P]>;
 };
+
+export function isPlayerId(id: string): boolean {
+  return id.charAt(0) === 'p';
+}
+
+export function isSpectatorId(id: string): boolean {
+  return id.charAt(0) === 's';
+}

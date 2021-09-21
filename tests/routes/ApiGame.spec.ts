@@ -61,7 +61,7 @@ describe('ApiGame', () => {
         'players': [
           {
             'color': 'black',
-            'id': 'black-id',
+            'id': 'p-black-id',
             'name': 'player-black',
           },
         ],

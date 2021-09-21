@@ -1,18 +1,13 @@
-import {createLocalVue, mount} from '@vue/test-utils';
-
+import {mount} from '@vue/test-utils';
+import {getLocalVue} from '../getLocalVue';
 import {expect} from 'chai';
 import {CardName} from '@/CardName';
 import {Color} from '@/Color';
-import PlayerInfo from '@/components/overview/PlayerInfo.vue';
+import PlayerInfo from '@/client/components/overview/PlayerInfo.vue';
 import {PlayerViewModel, PublicPlayerModel} from '@/models/PlayerModel';
 import {RecursivePartial} from '@/utils/utils';
 
 describe('PlayerInfo', function() {
-  function getLocalVue() {
-    const localVue = createLocalVue();
-    localVue.directive('i18n', {});
-    return localVue;
-  }
   it('Played card count test', function() {
     const thisPlayer: RecursivePartial<PublicPlayerModel> = {
       corporationCard: {

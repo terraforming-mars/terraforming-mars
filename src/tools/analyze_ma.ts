@@ -117,6 +117,7 @@ function simpleGameOptions(): GameOptions {
     requiresVenusTrackCompletion: false, // Venus must be completed to end the game
     requiresMoonTrackCompletion: false, // Moon must be completed to end the game
     moonStandardProjectVariant: false,
+    altVenusBoard: false,
 
     // The options that can change, should be parameters.
     boardName: BoardName.ORIGINAL,

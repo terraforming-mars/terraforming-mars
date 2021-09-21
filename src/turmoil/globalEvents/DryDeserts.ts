@@ -4,7 +4,7 @@ import {PartyName} from '../parties/PartyName';
 import {Game} from '../../Game';
 import {Turmoil} from '../Turmoil';
 import {RemoveOceanTile} from '../../deferredActions/RemoveOceanTile';
-import {DryDesertsDeferredAction} from '../../deferredActions/DryDesertsDeferredAction';
+import {SelectResourcesDeferred} from '../../deferredActions/SelectResourcesDeferred';
 import {MAX_OCEAN_TILES} from '../../constants';
 
 export class DryDeserts implements IGlobalEvent {
@@ -21,10 +21,12 @@ export class DryDeserts implements IGlobalEvent {
       }
 
       game.getPlayers().forEach((player) => {
-        if (turmoil.getPlayerInfluence(player) > 0) {
-          game.defer(new DryDesertsDeferredAction(
+        const count = turmoil.getPlayerInfluence(player);
+        if (count > 0) {
+          game.defer(new SelectResourcesDeferred(
             player,
-            turmoil.getPlayerInfluence(player),
+            count,
+            'Dry Deserts Global Event - Gain ' + count + ' resource(s) for influence',
           ));
         }
       });

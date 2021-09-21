@@ -1,9 +1,9 @@
-import {createLocalVue, mount} from '@vue/test-utils';
-
+import {mount} from '@vue/test-utils';
+import {getLocalVue} from './getLocalVue';
 import {expect} from 'chai';
 import {CardName} from '@/CardName';
 import {CardType} from '@/cards/CardType';
-import SelectHowToPayForProjectCard from '@/components/SelectHowToPayForProjectCard.vue';
+import SelectHowToPayForProjectCard from '@/client/components/SelectHowToPayForProjectCard.vue';
 import {PlayerInputModel} from '@/models/PlayerInputModel';
 import {PlayerViewModel, PublicPlayerModel} from '@/models/PlayerModel';
 import {Units} from '@/Units';
@@ -20,13 +20,6 @@ describe('SelectHowToPayForProjectCard', () => {
   afterEach(() => {
     FakeLocalStorage.deregister(localStorage);
   });
-
-  function getLocalVue() {
-    const localVue = createLocalVue();
-    localVue.directive('i18n', {});
-    localVue.directive('trim-whitespace', {});
-    return localVue;
-  }
 
   it('uses sort order for cards', async () => {
     localStorage.setItem('cardOrderfoo', JSON.stringify({

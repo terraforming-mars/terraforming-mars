@@ -204,7 +204,7 @@ describe('Player', function() {
   });
   it('serialization test', () => {
     const json = {
-      id: 'blue-id',
+      id: 'p-blue-id',
       pickedCorporationCard: 'Tharsis Republic',
       terraformRating: 20,
       corporationCard: undefined,
@@ -327,6 +327,97 @@ describe('Player', function() {
     expect(player.hasUnits(units)).is.true;
   });
 
+
+  it('add units', () => {
+    function asUnits(player: Player): Units {
+      return {
+        megacredits: player.megaCredits,
+        steel: player.steel,
+        titanium: player.titanium,
+        plants: player.plants,
+        energy: player.energy,
+        heat: player.heat,
+      };
+    };
+
+    const player = TestPlayers.BLUE.newPlayer();
+
+    expect(asUnits(player)).deep.eq({
+      megacredits: 0,
+      steel: 0,
+      titanium: 0,
+      plants: 0,
+      energy: 0,
+      heat: 0,
+    });
+
+    player.megaCredits = 20;
+    player.steel = 19;
+    player.titanium = 18;
+    player.plants = 17;
+    player.energy = 16;
+    player.heat = 15;
+
+    player.addUnits(Units.of({megacredits: 10}));
+    expect(asUnits(player)).deep.eq({
+      megacredits: 30,
+      steel: 19,
+      titanium: 18,
+      plants: 17,
+      energy: 16,
+      heat: 15,
+    });
+
+    player.addUnits(Units.of({steel: 10}));
+    expect(asUnits(player)).deep.eq({
+      megacredits: 30,
+      steel: 29,
+      titanium: 18,
+      plants: 17,
+      energy: 16,
+      heat: 15,
+    });
+
+    player.addUnits(Units.of({titanium: 10}));
+    expect(asUnits(player)).deep.eq({
+      megacredits: 30,
+      steel: 29,
+      titanium: 28,
+      plants: 17,
+      energy: 16,
+      heat: 15,
+    });
+
+    player.addUnits(Units.of({plants: 10}));
+    expect(asUnits(player)).deep.eq({
+      megacredits: 30,
+      steel: 29,
+      titanium: 28,
+      plants: 27,
+      energy: 16,
+      heat: 15,
+    });
+
+    player.addUnits(Units.of({energy: 10}));
+    expect(asUnits(player)).deep.eq({
+      megacredits: 30,
+      steel: 29,
+      titanium: 28,
+      plants: 27,
+      energy: 26,
+      heat: 15,
+    });
+
+    player.addUnits(Units.of({heat: 10}));
+    expect(asUnits(player)).deep.eq({
+      megacredits: 30,
+      steel: 29,
+      titanium: 28,
+      plants: 27,
+      energy: 26,
+      heat: 25,
+    });
+  });
 
   it('deduct units', () => {
     function asUnits(player: Player): Units {
@@ -638,11 +729,11 @@ describe('Player', function() {
         'gameId': 'foobar',
         'lastSaveId': 0,
         'logAge': 7,
-        'currentPlayer': 'blue-id',
+        'currentPlayer': 'p-blue-id',
         'metadata': {
           'player': {
             'color': 'blue',
-            'id': 'blue-id',
+            'id': 'p-blue-id',
             'name': 'player-blue',
           },
           'resource': 'megacredits',

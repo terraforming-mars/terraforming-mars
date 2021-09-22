@@ -336,7 +336,7 @@ export class Server {
     case PlayerInputTypes.SHIFT_ARES_GLOBAL_PARAMETERS:
       playerInputModel.aresData = (waitingFor as ShiftAresGlobalParameters).aresData;
       break;
-    }
+    };
     return playerInputModel;
   }
 
@@ -468,6 +468,7 @@ export class Server {
 
   public static getGameOptionsAsModel(options: GameOptions): GameOptionsModel {
     return {
+      altVenusBoard: options.altVenusBoard,
       aresExtension: options.aresExtension,
       boardName: options.boardName,
       cardsBlackList: options.cardsBlackList,

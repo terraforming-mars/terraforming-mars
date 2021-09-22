@@ -39,6 +39,7 @@
                       :oxygen_level="game.oxygenLevel"
                       :temperature="game.temperature"
                       :aresExtension="game.gameOptions.aresExtension"
+                      :altVenusBoard="game.gameOptions.altVenusBoard"
                       :aresData="game.aresData"
                       :hideTiles="hideTiles"
                       @toggleHideTiles="hideTiles = !hideTiles"
@@ -198,7 +199,8 @@
                           :venusScaleLevel="game.venusScaleLevel"
                           :boardName ="game.gameOptions.boardName"
                           :aresExtension="game.gameOptions.aresExtension"
-                          :aresData="game.aresData">
+                          :aresData="game.aresData"
+                          :altVenusBoard="game.gameOptions.altVenusBoard">
                         </board>
 
                         <turmoil v-if="game.turmoil" :turmoil="game.turmoil"></turmoil>

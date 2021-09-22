@@ -41,10 +41,6 @@ describe('LunaArchives', () => {
     expect(player.canPlay(ee)).is.false;
     card.resourceCount = 2;
     expect(player.canPlay(ee)).is.true;
- });
-
-  it('pay for non-moon card', () => {
-    card.resourceCount = 2;
   });
 });
 

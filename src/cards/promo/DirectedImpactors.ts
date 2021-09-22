@@ -52,7 +52,7 @@ export class DirectedImpactors extends Card implements IActionCard, IProjectCard
       if (player.game.getTemperature() === MAX_TEMPERATURE && cardHasResources) return true;
       if (canPayForAsteroid) return true;
 
-      if (PartyHooks.shouldApplyPolicy(player.game, PartyName.REDS)) {
+      if (PartyHooks.shouldApplyPolicy(player, PartyName.REDS)) {
         return player.canAfford(REDS_RULING_POLICY_COST) && cardHasResources;
       }
 
@@ -65,7 +65,7 @@ export class DirectedImpactors extends Card implements IActionCard, IProjectCard
 
       const addResource = new SelectOption('Pay 6 to add 1 asteroid to a card', 'Pay', () => this.addResource(player, asteroidCards));
       const spendResource = new SelectOption('Remove 1 asteroid to raise temperature 1 step', 'Remove asteroid', () => this.spendResource(player));
-      const redsAreRuling = PartyHooks.shouldApplyPolicy(player.game, PartyName.REDS);
+      const redsAreRuling = PartyHooks.shouldApplyPolicy(player, PartyName.REDS);
       const temperatureIsMaxed = player.game.getTemperature() === MAX_TEMPERATURE;
 
       if (this.resourceCount > 0) {

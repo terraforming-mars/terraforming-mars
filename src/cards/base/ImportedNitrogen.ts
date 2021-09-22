@@ -33,7 +33,7 @@ export class ImportedNitrogen extends Card implements IProjectCard {
   }
 
   public canPlay(player: Player): boolean {
-    if (PartyHooks.shouldApplyPolicy(player.game, PartyName.REDS)) {
+    if (PartyHooks.shouldApplyPolicy(player, PartyName.REDS)) {
       return player.canAfford(player.getCardCost(this) + REDS_RULING_POLICY_COST, {titanium: true});
     }
 

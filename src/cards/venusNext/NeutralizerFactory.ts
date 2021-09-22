@@ -30,7 +30,7 @@ export class NeutralizerFactory extends Card {
 
   public canPlay(player: Player): boolean {
     const globalRequirementsMet = super.canPlay(player);
-    if (PartyHooks.shouldApplyPolicy(player.game, PartyName.REDS)) {
+    if (PartyHooks.shouldApplyPolicy(player, PartyName.REDS)) {
       return player.canAfford(player.getCardCost(this) + REDS_RULING_POLICY_COST, {floaters: true}) && globalRequirementsMet;
     }
 

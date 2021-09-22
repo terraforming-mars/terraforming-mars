@@ -47,7 +47,7 @@ export class ForcedPrecipitation extends Card implements IActionCard, IResourceC
     const venusMaxed = player.game.getVenusScaleLevel() === MAX_VENUS_SCALE;
     const canSpendResource = this.resourceCount > 1 && !venusMaxed;
 
-    if (PartyHooks.shouldApplyPolicy(player.game, PartyName.REDS) && !venusMaxed) {
+    if (PartyHooks.shouldApplyPolicy(player, PartyName.REDS) && !venusMaxed) {
       return player.canAfford(2) || (canSpendResource && player.canAfford(REDS_RULING_POLICY_COST));
     }
 
@@ -59,7 +59,7 @@ export class ForcedPrecipitation extends Card implements IActionCard, IResourceC
 
     const addResource = new SelectOption('Pay 2 to add 1 floater to this card', 'Pay', () => this.addResource(player));
     const spendResource = new SelectOption('Remove 2 floaters to raise Venus 1 step', 'Remove floaters', () => this.spendResource(player));
-    const canAffordRed = !PartyHooks.shouldApplyPolicy(player.game, PartyName.REDS) || player.canAfford(REDS_RULING_POLICY_COST);
+    const canAffordRed = !PartyHooks.shouldApplyPolicy(player, PartyName.REDS) || player.canAfford(REDS_RULING_POLICY_COST);
     if (this.resourceCount > 1 && player.game.getVenusScaleLevel() < MAX_VENUS_SCALE && canAffordRed) {
       opts.push(spendResource);
     } else {

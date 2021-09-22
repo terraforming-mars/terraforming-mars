@@ -28,7 +28,7 @@ export class AquiferStandardProject extends StandardProjectCard {
     }
 
     let additionalCost = 0;
-    if (PartyHooks.shouldApplyPolicy(player.game, PartyName.REDS)) {
+    if (PartyHooks.shouldApplyPolicy(player, PartyName.REDS)) {
       additionalCost += REDS_RULING_POLICY_COST;
     }
 

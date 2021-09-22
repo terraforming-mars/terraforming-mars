@@ -353,4 +353,15 @@ export class MoonExpansion {
       });
     });
   }
+
+  static spendableLunaArchiveResources(player: Player, card: IProjectCard): number {
+    if (card.tags.includes(Tags.MOON) === true) {
+      for (const playedCard of player.playedCards) {
+        if (playedCard.name === CardName.LUNA_ARCHIVES) {
+          return playedCard.resourceCount ?? 0;
+        }
+      }
+    }
+    return 0;
+  }
 }

@@ -27,7 +27,7 @@ export class GreeneryStandardProject extends StandardProjectCard {
   public canAct(player: Player): boolean {
     let greeneryCost = this.cost;
     const oxygenNotMaxed = player.game.getOxygenLevel() < constants.MAX_OXYGEN_LEVEL;
-    if (PartyHooks.shouldApplyPolicy(player.game, PartyName.REDS) && oxygenNotMaxed) greeneryCost += REDS_RULING_POLICY_COST;
+    if (PartyHooks.shouldApplyPolicy(player, PartyName.REDS) && oxygenNotMaxed) greeneryCost += REDS_RULING_POLICY_COST;
 
     return player.canAfford(greeneryCost) && player.game.board.getAvailableSpacesForGreenery(player).length > 0;
   }

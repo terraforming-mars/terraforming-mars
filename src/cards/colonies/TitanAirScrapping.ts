@@ -44,7 +44,7 @@ export class TitanAirScrapping extends Card implements IProjectCard, IResourceCa
     const hasTitanium = player.titanium > 0;
     const hasResources = this.resourceCount >= 2;
 
-    if (PartyHooks.shouldApplyPolicy(player.game, PartyName.REDS)) {
+    if (PartyHooks.shouldApplyPolicy(player, PartyName.REDS)) {
       return hasTitanium || (player.canAfford(REDS_RULING_POLICY_COST) && hasResources);
     }
 
@@ -58,7 +58,7 @@ export class TitanAirScrapping extends Card implements IProjectCard, IResourceCa
     const spendResource = new SelectOption('Remove 2 floaters on this card to increase your TR 1 step', 'Remove floaters', () => this.spendResource(player));
 
     if (this.resourceCount >= 2 && player.titanium > 0) {
-      const redsAreRuling = PartyHooks.shouldApplyPolicy(player.game, PartyName.REDS);
+      const redsAreRuling = PartyHooks.shouldApplyPolicy(player, PartyName.REDS);
       if (!redsAreRuling || (redsAreRuling && player.canAfford(REDS_RULING_POLICY_COST))) {
         opts.push(spendResource);
       }

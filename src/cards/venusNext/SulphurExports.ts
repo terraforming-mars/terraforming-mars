@@ -30,7 +30,7 @@ export class SulphurExports extends Card {
 
   public canPlay(player: Player): boolean {
     const venusMaxed = player.game.getVenusScaleLevel() === MAX_VENUS_SCALE;
-    if (PartyHooks.shouldApplyPolicy(player.game, PartyName.REDS) && !venusMaxed) {
+    if (PartyHooks.shouldApplyPolicy(player, PartyName.REDS) && !venusMaxed) {
       return player.canAfford(player.getCardCost(this) + REDS_RULING_POLICY_COST, {titanium: true, floaters: true});
     }
 

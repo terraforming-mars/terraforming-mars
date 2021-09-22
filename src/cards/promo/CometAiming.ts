@@ -49,7 +49,7 @@ export class CometAiming extends Card implements IActionCard, IProjectCard, IRes
       const hasTitanium = player.titanium > 0;
       const canPlaceOcean = this.resourceCount > 0 && player.game.board.getOceansOnBoard() < MAX_OCEAN_TILES;
 
-      if (PartyHooks.shouldApplyPolicy(player.game, PartyName.REDS)) {
+      if (PartyHooks.shouldApplyPolicy(player, PartyName.REDS)) {
         return hasTitanium || (player.canAfford(REDS_RULING_POLICY_COST) && canPlaceOcean);
       }
 
@@ -91,7 +91,7 @@ export class CometAiming extends Card implements IActionCard, IProjectCard, IRes
       if (player.titanium === 0) return spendAsteroidResource();
 
       const availableActions: Array<SelectOption | SelectCard<ICard>> = [];
-      const redsAreRuling = PartyHooks.shouldApplyPolicy(player.game, PartyName.REDS);
+      const redsAreRuling = PartyHooks.shouldApplyPolicy(player, PartyName.REDS);
       const canPlaceOcean = player.game.board.getOceansOnBoard() < MAX_OCEAN_TILES;
 
       if (canPlaceOcean && !redsAreRuling || (redsAreRuling && player.canAfford(REDS_RULING_POLICY_COST))) {

@@ -40,7 +40,7 @@ export class MagneticFieldGeneratorsPromo extends Card implements IProjectCard {
     const meetsEnergyRequirements = player.getProduction(Resources.ENERGY) >= 4;
     const canPlaceTile = player.game.board.getAvailableSpacesOnLand(player).length > 0;
 
-    if (PartyHooks.shouldApplyPolicy(player.game, PartyName.REDS)) {
+    if (PartyHooks.shouldApplyPolicy(player, PartyName.REDS)) {
       return player.canAfford(player.getCardCost(this) + REDS_RULING_POLICY_COST * 3, {steel: true}) && meetsEnergyRequirements && canPlaceTile;
     }
 

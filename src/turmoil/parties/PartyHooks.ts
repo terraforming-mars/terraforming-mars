@@ -1,5 +1,4 @@
 import {Player} from '../../Player';
-import {Game} from '../../Game';
 import {PartyName} from './PartyName';
 import {SpaceType} from '../../SpaceType';
 import {Phase} from '../../Phase';
@@ -13,14 +12,14 @@ import {Turmoil} from '../Turmoil';
 
 export class PartyHooks {
   static applyMarsFirstRulingPolicy(player: Player, spaceType: SpaceType) {
-    if (this.shouldApplyPolicy(player.game, PartyName.MARS, TurmoilPolicy.MARS_FIRST_DEFAULT_POLICY) &&
+    if (this.shouldApplyPolicy(player, PartyName.MARS, TurmoilPolicy.MARS_FIRST_DEFAULT_POLICY) &&
         spaceType !== SpaceType.COLONY) {
       player.addResource(Resources.STEEL, 1);
     }
   }
 
   static applyGreensRulingPolicy(player: Player, space: ISpace) {
-    if (this.shouldApplyPolicy(player.game, PartyName.GREENS, TurmoilPolicy.GREENS_DEFAULT_POLICY)) {
+    if (this.shouldApplyPolicy(player, PartyName.GREENS, TurmoilPolicy.GREENS_DEFAULT_POLICY)) {
       const greensPolicy = GREENS_POLICY_1;
       greensPolicy.onTilePlaced(player, space);
     }
@@ -28,7 +27,8 @@ export class PartyHooks {
 
   // Return true when the supplied policy is active. When `policyId` is inactive, it selects
   // the default policy for `partyName`.
-  static shouldApplyPolicy(game: Game, partyName: PartyName, policyId?: PolicyId): boolean {
+  static shouldApplyPolicy(player: Player, partyName: PartyName, policyId?: PolicyId): boolean {
+    const game = player.game;
     return Turmoil.ifTurmoilElse(game, (turmoil) => {
       if (game.phase !== Phase.ACTION) return false;
 

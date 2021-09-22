@@ -38,7 +38,7 @@ export class AquiferPumping extends Card implements IActionCard, IProjectCard {
 
     if (oceansMaxed) return player.canAfford(oceanCost, {steel: true});
 
-    if (PartyHooks.shouldApplyPolicy(player.game, PartyName.REDS)) {
+    if (PartyHooks.shouldApplyPolicy(player, PartyName.REDS)) {
       return player.canAfford(oceanCost + REDS_RULING_POLICY_COST, {steel: true});
     }
 

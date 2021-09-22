@@ -32,7 +32,7 @@ export class DeepWellHeating extends Card implements IProjectCard {
 
   public canPlay(player: Player): boolean {
     const temperatureMaxed = player.game.getVenusScaleLevel() === MAX_TEMPERATURE;
-    if (PartyHooks.shouldApplyPolicy(player.game, PartyName.REDS) && !temperatureMaxed) {
+    if (PartyHooks.shouldApplyPolicy(player, PartyName.REDS) && !temperatureMaxed) {
       return player.canAfford(player.getCardCost(this) + REDS_RULING_POLICY_COST, {steel: true});
     }
 

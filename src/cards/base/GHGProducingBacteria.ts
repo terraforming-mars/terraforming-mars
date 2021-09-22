@@ -56,7 +56,7 @@ export class GHGProducingBacteria extends Card implements IActionCard, IProjectC
       }
 
       const orOptions = new OrOptions();
-      const redsAreRuling = PartyHooks.shouldApplyPolicy(player.game, PartyName.REDS);
+      const redsAreRuling = PartyHooks.shouldApplyPolicy(player, PartyName.REDS);
 
       if (!redsAreRuling || (redsAreRuling && player.canAfford(REDS_RULING_POLICY_COST))) {
         orOptions.options.push(new SelectOption('Remove 2 microbes to raise temperature 1 step', 'Remove microbes', () => {

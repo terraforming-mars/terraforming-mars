@@ -27,7 +27,7 @@ export class AirScrappingStandardProject extends StandardProjectCard {
     if (player.game.getVenusScaleLevel() >= constants.MAX_VENUS_SCALE) return false;
     let cost = this.cost;
     cost -= this.discount(player);
-    if (PartyHooks.shouldApplyPolicy(player.game, PartyName.REDS)) cost += REDS_RULING_POLICY_COST;
+    if (PartyHooks.shouldApplyPolicy(player, PartyName.REDS)) cost += REDS_RULING_POLICY_COST;
     return player.canAfford(cost);
   }
 

@@ -36,7 +36,7 @@ export class OreProcessor extends Card implements IActionCard, IProjectCard {
     const hasEnoughEnergy = player.energy >= 4;
     const oxygenMaxed = player.game.getOxygenLevel() === MAX_OXYGEN_LEVEL;
 
-    if (PartyHooks.shouldApplyPolicy(player.game, PartyName.REDS) && !oxygenMaxed) {
+    if (PartyHooks.shouldApplyPolicy(player, PartyName.REDS) && !oxygenMaxed) {
       return player.canAfford(REDS_RULING_POLICY_COST) && hasEnoughEnergy;
     }
 

@@ -39,7 +39,7 @@ export class StripMine extends Card implements IProjectCard {
     const stepsRaised = Math.min(remainingOxygenSteps, 2);
     const requiredMC = REDS_RULING_POLICY_COST * stepsRaised;
 
-    if (PartyHooks.shouldApplyPolicy(player.game, PartyName.REDS)) {
+    if (PartyHooks.shouldApplyPolicy(player, PartyName.REDS)) {
       return player.canAfford(player.getCardCost(this) + requiredMC, {steel: true}) && player.canAfford(requiredMC) && hasEnergyProduction;
     }
 

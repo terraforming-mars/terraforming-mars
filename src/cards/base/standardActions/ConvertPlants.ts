@@ -34,7 +34,7 @@ export class ConvertPlants extends StandardActionCard {
     if (player.game.getOxygenLevel() === MAX_OXYGEN_LEVEL) {
       return true;
     }
-    if (PartyHooks.shouldApplyPolicy(player.game, PartyName.REDS)) {
+    if (PartyHooks.shouldApplyPolicy(player, PartyName.REDS)) {
       return player.canAfford(REDS_RULING_POLICY_COST);
     }
     return true;

@@ -1,5 +1,5 @@
-
 import * as http from 'http';
+import {escape} from 'html-escaper';
 
 export class Route {
   public badRequest(req: http.IncomingMessage, res: http.ServerResponse, err?: string): void {
@@ -32,9 +32,19 @@ export class Route {
     req: http.IncomingMessage,
     res: http.ServerResponse,
     err: unknown): void {
-    console.warn('internal server error', req.url, err);
+    console.warn('internal server error: ', req.url, err);
     res.writeHead(500);
-    res.write('Internal server error ' + err);
+
+    res.write('Internal server error: ');
+
+    if (err instanceof Error) {
+      res.write(escape(err.message));
+    } else if (typeof(err) === 'string') {
+      res.write(escape(err));
+    } else {
+      res.write('unknown error');
+    }
+
     res.end();
   }
   public notAuthorized(req: http.IncomingMessage, res: http.ServerResponse): void {

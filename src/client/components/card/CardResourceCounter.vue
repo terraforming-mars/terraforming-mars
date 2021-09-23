@@ -1,8 +1,7 @@
 <template>
   <div class="card-resources-counter">
-      <span class="card-resource" :class="getClass"></span>
-      <span class="card-resources-counter-label">:</span>
       <span class="card-resources-counter-number"> {{ amount }}</span>
+      <span class="card-resource" :class="getClass"></span>
   </div>
 </template>
 

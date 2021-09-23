@@ -37,7 +37,7 @@
 import Vue from 'vue';
 import TagCount from '@/client/components/TagCount.vue';
 import {ITagCount} from '@/ITagCount';
-import {PlayerViewModel, PublicPlayerModel} from '@/models/PlayerModel';
+import {ViewModel, PublicPlayerModel} from '@/models/PlayerModel';
 import {GameModel} from '@/models/GameModel';
 import {Tags} from '@/cards/Tags';
 import {CardName} from '@/CardName';
@@ -117,7 +117,7 @@ export default Vue.extend({
   name: 'PlayerTags',
   props: {
     playerView: {
-      type: Object as () => PlayerViewModel,
+      type: Object as () => ViewModel,
     },
     player: {
       type: Object as () => PublicPlayerModel,
@@ -133,7 +133,7 @@ export default Vue.extend({
   },
   computed: {
     isThisPlayer(): boolean {
-      return this.player.color === this.playerView.thisPlayer.color;
+      return this.player.color === this.playerView.thisPlayer?.color;
     },
   },
 
@@ -191,7 +191,7 @@ export default Vue.extend({
         return true;
       }
 
-      if (tag === 'all' && this.playerView.thisPlayer.cardDiscount > 0) {
+      if (tag === 'all' && (this.playerView.thisPlayer?.cardDiscount ?? 0) > 0) {
         return true;
       }
 
@@ -210,7 +210,7 @@ export default Vue.extend({
       }
 
       if (tag === 'all') {
-        discount += this.playerView.thisPlayer.cardDiscount;
+        discount += this.playerView.thisPlayer?.cardDiscount ?? 0;
       }
 
       return discount;

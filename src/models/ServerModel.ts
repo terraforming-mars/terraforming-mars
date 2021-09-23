@@ -118,6 +118,7 @@ export class Server {
       id: game.spectatorId ?? '',
       game: this.getGameModel(game),
       players: game.getPlayers().map(this.getPlayer),
+      thisPlayer: undefined,
     };
   }
 

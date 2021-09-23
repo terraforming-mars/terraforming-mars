@@ -27,7 +27,8 @@
 
     "Geological Survey": "地质调查",
     "Any max 5 Greeneries": "至多 5 森林",
-    "Effect: When placing a tile grants you any steel, titanium, or heat, you gain one additional of each of those resources that you gain.": "效果：当你因为放置一个板块获得钢铁，钛，热能资源时，你额外获得一个同种类型的资源",
+    "Effect: When placing a tile ON MARS grants you any steel, titanium, or heat, you gain one additional of each of those resources that you gain.": "效果：当你因为放在火星上置一个板块获得钢铁，钛，热能资源时，你额外获得一个同种类型的资源",
+
     "Requires 5 or fewer greeneries on Mars.": "需要火星上不能有超过5片森林板块",
 
     "Industrial Center": "工业中心",

@@ -74,7 +74,7 @@
     "lint": "eslint --cache src tests --ext ts --ext vue",
     "lint:fix": "eslint --fix src tests --ext ts --ext vue",
     "lint:sfc": "vti diagnostics",
-    "make:css": "lessc src/styles/common.less build/styles.css",
+    "make:css": "lessc src/styles/common.less build/styles.css && gzip -9 --force --keep build/styles.css",
     "make:json": "node make_static_json.js",
     "make:static": "npm run make:css && npm run make:json",
     "test": "npm run test:server && npm run test:client",

@@ -1295,6 +1295,10 @@ export class Player implements ISerializable<SerializedPlayer> {
     return card.tags.includes(Tags.VENUS);
   }
 
+  private canUseScience(card: ICard): boolean {
+    return card.tags.includes(Tags.MOON);
+  }
+
   private getMcTradeCost(): number {
     return MC_TRADE_COST - this.colonyTradeDiscount;
   }
@@ -1793,15 +1797,14 @@ export class Player implements ISerializable<SerializedPlayer> {
   }
 
   public canPlay(card: IProjectCard): boolean {
-    const cost = this.getCardCost(card) - MoonExpansion.spendableLunaArchiveResources(this, card);
-
     const canAfford = this.canAfford(
-      cost,
+      this.getCardCost(card),
       {
         steel: this.canUseSteel(card),
         titanium: this.canUseTitanium(card),
         floaters: this.canUseFloaters(card),
         microbes: this.canUseMicrobes(card),
+        science: this.canUseScience(card),
         reserveUnits: MoonExpansion.adjustedReserveCosts(this, card),
       });
 
@@ -1815,6 +1818,7 @@ export class Player implements ISerializable<SerializedPlayer> {
     titanium?: boolean,
     floaters?: boolean,
     microbes?: boolean,
+    science?: boolean,
     reserveUnits?: Units
   }) {
     const reserveUnits = options?.reserveUnits ?? Units.EMPTY;
@@ -1826,6 +1830,7 @@ export class Player implements ISerializable<SerializedPlayer> {
     const canUseTitanium: boolean = options?.titanium ?? false;
     const canUseFloaters: boolean = options?.floaters ?? false;
     const canUseMicrobes: boolean = options?.microbes ?? false;
+    const canUseScience: boolean = options?.science ?? false;
 
     return cost <=
       this.megaCredits - reserveUnits.megacredits +
@@ -1833,7 +1838,8 @@ export class Player implements ISerializable<SerializedPlayer> {
       (canUseSteel ? (this.steel - reserveUnits.steel) * this.getSteelValue() : 0) +
       (canUseTitanium ? (this.titanium - reserveUnits.titanium) * this.getTitaniumValue() : 0) +
       (canUseFloaters ? this.getFloatersCanSpend() * 3 : 0) +
-      (canUseMicrobes ? this.getMicrobesCanSpend() * 2 : 0);
+      (canUseMicrobes ? this.getMicrobesCanSpend() * 2 : 0) +
+      (canUseScience ? this.getSpendableScienceResources() : 0);
   }
 
   private getStandardProjects(): Array<StandardProjectCard> {

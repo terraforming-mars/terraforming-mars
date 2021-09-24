@@ -9,6 +9,8 @@ import {Turmoil} from '../src/turmoil/Turmoil';
 import {TurmoilPolicy} from '../src/turmoil/TurmoilPolicy';
 import {LogMessage} from '../src/LogMessage';
 import {Log} from '../src/Log';
+import {PlayerInput} from '../src/PlayerInput';
+import {DeferredAction} from '../src/deferredActions/DeferredAction';
 
 export class TestingUtils {
   // Returns the oceans created during this operation which may not reflect all oceans.
@@ -72,6 +74,12 @@ export class TestingUtils {
       throw new Error('No action in queue.');
     }
     return action.execute();
+  }
+
+  public static queueAction(player: Player, action: PlayerInput | undefined) {
+    if (action !== undefined) {
+      player.game.defer(new DeferredAction(player, () => action));
+    }
   }
 
   public static forceGenerationEnd(game: Game) {

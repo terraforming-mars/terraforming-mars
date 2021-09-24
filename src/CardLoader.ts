@@ -7,7 +7,7 @@ import {VENUS_CARD_MANIFEST} from './cards/venusNext/VenusCardManifest';
 import {COMMUNITY_CARD_MANIFEST} from './cards/community/CommunityCardManifest';
 import {ARES_CARD_MANIFEST} from './cards/ares/AresCardManifest';
 import {MOON_CARD_MANIFEST} from './cards/moon/MoonCardManifest';
-// import {PATHFINDERS_CARD_MANIFEST} from './cards/pathfinders/PathfindersCardManifest';
+import {PATHFINDERS_CARD_MANIFEST} from './cards/pathfinders/PathfindersCardManifest';
 import {CardManifest} from './cards/CardManifest';
 import {CardName} from './CardName';
 import {ICard} from './cards/ICard';
@@ -34,7 +34,7 @@ export class CardLoader {
       [gameOptions.promoCardsOption, PROMO_CARD_MANIFEST],
       [gameOptions.communityCardsOption, COMMUNITY_CARD_MANIFEST],
       [gameOptions.moonExpansion, MOON_CARD_MANIFEST],
-      // [gameOptions.pathfindersExpansion, PATHFINDERS_CARD_MANIFEST],
+      [gameOptions.pathfindersExpansion, PATHFINDERS_CARD_MANIFEST],
     ];
 
     this.manifests = manifests.filter((a) => a[0]).map((a) => a[1]);
@@ -54,8 +54,7 @@ export class CardLoader {
       case GameModule.Turmoil:
         return gameOptions.turmoilExtension;
       case GameModule.Pathfinders:
-        // return gameOptions.pathfindersExpansion;
-        return false;
+        return gameOptions.pathfindersExpansion;
       default:
         throw new Error(`Unhandled expansion type ${expansion} for card ${cf.cardName}`);
       }

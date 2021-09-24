@@ -14,6 +14,7 @@ import {COMMUNITY_CARD_MANIFEST} from './cards/community/CommunityCardManifest';
 import {ARES_CARD_MANIFEST} from './cards/ares/AresCardManifest';
 import {MOON_CARD_MANIFEST} from './cards/moon/MoonCardManifest';
 import {Deck} from './Deck';
+import {PATHFINDERS_CARD_MANIFEST} from './cards/pathfinders/PathfindersCardManifest';
 
 export class CardFinder {
     private static decks: undefined | Array<CardManifest>;
@@ -30,6 +31,7 @@ export class CardFinder {
           ARES_CARD_MANIFEST,
           COMMUNITY_CARD_MANIFEST,
           MOON_CARD_MANIFEST,
+          PATHFINDERS_CARD_MANIFEST,
         ];
       }
       return CardFinder.decks;

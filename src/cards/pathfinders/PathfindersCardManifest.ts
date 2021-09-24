@@ -1,5 +1,5 @@
 import {CardManifest} from '../CardManifest';
-// import {CardName} from '../../CardName';
+import {CardName} from '../../CardName';
 import {GameModule} from '../../GameModule';
 
 // import {AdvancedPowerGrid} from './AdvancedPowerGrid';
@@ -7,7 +7,7 @@ import {GameModule} from '../../GameModule';
 // import {Anthozoa} from './Anthozoa';
 // import {AntidesertificationTechniques} from './AntidesertificationTechniques';
 // import {AsteroidResources} from './AsteroidResources';
-// import {BreedingFarms} from './BreedingFarms';
+import {BreedingFarms} from './BreedingFarms';
 // import {CassiniStation} from './CassiniStation';
 // import {CeresSpaceport} from './CeresSpaceport';
 // import {CO2Reducers} from './CO2Reducers';
@@ -76,7 +76,7 @@ import {GameModule} from '../../GameModule';
 export const PATHFINDERS_CARD_MANIFEST = new CardManifest({
   module: GameModule.Pathfinders,
   projectCards: [
-    // {cardName: CardName.BREEDING_FARMS, Factory: BreedingFarms},
+    {cardName: CardName.BREEDING_FARMS, Factory: BreedingFarms},
     // {cardName: CardName.PREFABRICATION_OF_HUMAN_HABITATS, Factory: PrefabricationofHumanHabitats},
     // {cardName: CardName.NEW_VENICE, Factory: NewVenice},
     // {cardName: CardName.AGRO_DRONES, Factory: AgroDrones},

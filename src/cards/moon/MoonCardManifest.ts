@@ -66,6 +66,7 @@ import {MareImbriumMine} from './MareImbriumMine';
 import {MareNectarisMine} from './MareNectarisMine';
 import {MareNubiumMine} from './MareNubiumMine';
 import {MareSerenitatisMine} from './MareSerenitatisMine';
+import {MartianEmbassy} from './MartianEmbassy';
 import {MicrosingularityPlant} from './MicrosingularityPlant';
 import {MiningComplex} from './MiningComplex';
 import {MiningRobotsManufCenter} from './MiningRobotsManufCenter';
@@ -192,7 +193,7 @@ export const MOON_CARD_MANIFEST = new CardManifest({
     {cardName: CardName.SMALL_DUTY_ROVERS, Factory: SmallDutyRovers},
     {cardName: CardName.LUNAR_INDUSTRY_COMPLEX, Factory: LunarIndustryComplex},
     {cardName: CardName.DARKSIDE_OBSERVATORY, Factory: DarksideObservatory},
-    // // {cardName: CardName.MARTIAN_EMBASSY, Factory: MartianEmbassy, compatibility: GameModule.Pathfinders},
+    {cardName: CardName.MARTIAN_EMBASSY, Factory: MartianEmbassy, compatibility: GameModule.Pathfinders},
     {cardName: CardName.EARTH_EMBASSY, Factory: EarthEmbassy},
     {cardName: CardName.ROVER_DRIVERS_UNION, Factory: RoverDriversUnion},
     {cardName: CardName.LTF_HEADQUARTERS, Factory: LTFHeadquarters, compatibility: GameModule.Colonies},

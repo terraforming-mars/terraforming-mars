@@ -8,10 +8,11 @@ import {SpaceType} from '../SpaceType';
 import {BoardBuilder} from './BoardBuilder';
 import {SerializedBoard} from './SerializedBoard';
 import {Random} from '../Random';
+import {GameOptions} from '../Game';
 
 export class HellasBoard extends Board {
-  public static newInstance(shuffle: boolean, rng: Random, includeVenus: boolean): HellasBoard {
-    const builder = new BoardBuilder(includeVenus);
+  public static newInstance(gameOptions: GameOptions, rng: Random): HellasBoard {
+    const builder = new BoardBuilder(gameOptions.venusNextExtension, gameOptions.pathfindersExpansion);
 
     const PLANT = SpaceBonus.PLANT;
     const STEEL = SpaceBonus.STEEL;
@@ -39,7 +40,7 @@ export class HellasBoard extends Board {
     // y=8
     builder.land().land(HEAT, HEAT).land(SpaceBonus.OCEAN).doNotShuffleLastSpace().land(HEAT, HEAT).land();
 
-    if (shuffle) {
+    if (gameOptions.shuffleMapOption) {
       builder.shuffle(rng);
     }
 

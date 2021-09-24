@@ -175,6 +175,8 @@ export default Vue.extend({
       } else {
         if (this.space.spaceType === SpaceType.OCEAN) {
           css += ' board-space-type-ocean';
+        } else if (this.space.spaceType === SpaceType.COVE) {
+          css += ' board-space-type-cove';
         } else {
           css += ` board-space-type-land`;
 

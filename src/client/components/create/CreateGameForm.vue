@@ -144,6 +144,12 @@
                                 </div>
                             </template>
 
+                            <!-- <input type="checkbox" name="pathfinders" id="pathfinders-checkbox" v-model="pathfindersExpansion">
+                            <label for="pathfinders-checkbox" class="expansion-button">
+                                <div class="create-game-expansion-icon expansion-icon-pathfinders"></div>
+                                <span v-i18n>Pathfinders</span>&nbsp;<a href="https://github.com/bafolts/terraforming-mars/wiki/Pathfinders" class="tooltip" target="_blank">&#9432;</a>
+                            </label>
+ -->
                             <template v-if="venusNext">
                                 <input type="checkbox" v-model="altVenusBoard" id="altVenusBoard-checkbox">
                                 <label for="altVenusBoard-checkbox">
@@ -463,6 +469,7 @@ export interface CreateGameModel {
     aresExtension: boolean;
     politicalAgendasExtension: AgendaStyle;
     moonExpansion: boolean;
+    // pathfindersExpansion: boolean;
     undoOption: boolean;
     showTimers: boolean;
     fastModeOption: boolean;
@@ -528,6 +535,7 @@ export default Vue.extend({
         BoardName.ORIGINAL,
         BoardName.HELLAS,
         BoardName.ELYSIUM,
+        BoardName.ARABIA_TERRA,
         'random',
       ],
       seed: Math.random(),
@@ -539,6 +547,7 @@ export default Vue.extend({
       aresExtension: false,
       politicalAgendasExtension: AgendaStyle.STANDARD,
       moonExpansion: false,
+      // pathfindersExpansion: false,
       undoOption: false,
       showTimers: true,
       fastModeOption: false,
@@ -738,6 +747,8 @@ export default Vue.extend({
         return 'create-game-board-hexagon create-game-hellas';
       } else if (boardName === BoardName.ELYSIUM) {
         return 'create-game-board-hexagon create-game-elysium';
+      } else if (boardName === BoardName.ARABIA_TERRA) {
+        return 'create-game-board-hexagon create-game-arabia-terra';
       } else {
         return 'create-game-board-hexagon create-game-random';
       }
@@ -814,6 +825,7 @@ export default Vue.extend({
       const aresExtension = component.aresExtension;
       const politicalAgendasExtension = this.politicalAgendasExtension;
       const moonExpansion = component.moonExpansion;
+      // const pathfindersExpansion = component.pathfindersExpansion;
       const undoOption = component.undoOption;
       const showTimers = component.showTimers;
       const fastModeOption = component.fastModeOption;
@@ -884,6 +896,7 @@ export default Vue.extend({
         aresExtension: aresExtension,
         politicalAgendasExtension: politicalAgendasExtension,
         moonExpansion: moonExpansion,
+        // pathfindersExpansion: pathfindersExpansion,
         undoOption,
         showTimers,
         fastModeOption,

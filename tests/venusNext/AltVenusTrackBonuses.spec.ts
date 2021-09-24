@@ -8,7 +8,7 @@ import {TestingUtils} from '../TestingUtils';
 import {TestPlayers} from '../TestPlayers';
 import {GrantVenusAltTrackBonusDeferred} from '../../src/venusNext/GrantVenusAltTrackBonusDeferred';
 
-describe('AltVenusTrackresources', function() {
+describe('AltVenusTrackBonuses', function() {
   let player: Player;
   let game: Game;
 

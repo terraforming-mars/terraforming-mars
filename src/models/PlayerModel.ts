@@ -12,6 +12,7 @@ export interface ViewModel {
   game: GameModel;
   players: Array<PublicPlayerModel>;
   id: PlayerId | SpectatorId;
+  thisPlayer: PublicPlayerModel | undefined;
 }
 
 /** The public information about a player */

@@ -21,7 +21,7 @@
         <log-panel :id="spectator.id" :players="spectator.players" :generation="game.generation" :lastSoloGeneration="game.lastSoloGeneration" :color="spectator.color"></log-panel>
     </div>
 
-    <players-overview class="player_home_block player_home_block--players nofloat:" :playerView="spectator" v-trim-whitespace id="shortkey-playersoverview"/>
+    <players-overview class="player_home_block player_home_block--players nofloat" :playerView="spectator" v-trim-whitespace id="shortkey-playersoverview"/>
 
     <a name="board" class="player_home_anchor"></a>
     <board

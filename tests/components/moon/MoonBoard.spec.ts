@@ -1,4 +1,5 @@
-import {createLocalVue, shallowMount} from '@vue/test-utils';
+import {shallowMount} from '@vue/test-utils';
+import {getLocalVue} from '../getLocalVue';
 import {expect} from 'chai';
 import MoonBoard from '@/client/components/moon/MoonBoard.vue';
 import MoonSpace from '@/client/components/moon/MoonSpace.vue';
@@ -55,13 +56,6 @@ const model: MoonModel = {
 
 
 describe('MoonBoard', () => {
-  function getLocalVue() {
-    const localVue = createLocalVue();
-    localVue.directive('trim-whitespace', {});
-    localVue.directive('i18n', {});
-    return localVue;
-  }
-
   it('has visible tiles on the board', async () => {
     const hideTiles = true;
 

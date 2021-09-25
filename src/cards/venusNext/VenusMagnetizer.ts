@@ -39,7 +39,7 @@ export class VenusMagnetizer extends Card implements IActionCard {
     const venusMaxed = player.game.getVenusScaleLevel() === MAX_VENUS_SCALE;
     const hasEnergyProduction = player.getProduction(Resources.ENERGY) > 0;
 
-    if (PartyHooks.shouldApplyPolicy(player.game, PartyName.REDS)) {
+    if (PartyHooks.shouldApplyPolicy(player, PartyName.REDS)) {
       return player.canAfford(REDS_RULING_POLICY_COST) && hasEnergyProduction && !venusMaxed;
     }
 

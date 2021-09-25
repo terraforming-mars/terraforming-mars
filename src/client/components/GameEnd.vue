@@ -129,6 +129,7 @@
                         :venusNextExtension="game.gameOptions.venusNextExtension"
                         :venusScaleLevel="game.venusScaleLevel"
                         :aresExtension="game.gameOptions.aresExtension"
+                        :altVenusBoard="game.gameOptions.altVenusBoard"
                         :boardName ="game.gameOptions.boardName"
                         :oceans_count="game.oceans"
                         :oxygen_level="game.oxygenLevel"
@@ -240,4 +241,3 @@ export default Vue.extend({
 });
 
 </script>
-

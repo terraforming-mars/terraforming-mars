@@ -14,10 +14,10 @@
     "(Spend 15 M€ to raise Venus 1 step.)": "Wydaj 14 M€, aby podnieść terraformację Wenus o 1 poziom",
     "(Spend 18 M€ to place an ocean tile.)": "Wydaj 18 M€, aby położyć obszar oceanu na planszy.",
 
-    "Build Moon Colony": "",
-    "(Spend 22 M€ and 1 titanium to place a colony on the moon and raise your M€ production 1 step.)": "",
-    "Build Moon Mine": "",
-    "(Spend 20 M€ and 1 titanium to place a mine on the moon and raise steel production 1 step.)": "",
-    "Build Moon Road": "",
-    "(Spend 18 M€ and 1 steel to place a road on the moon and raise the Logistics Rate 1 step.)": ""
+    "Build Moon Colony": "Zbuduj kolonię na Księżycu",
+    "(Spend 22 M€ and 1 titanium to place a colony on the moon and raise your M€ production 1 step.)": "(Wydaj 22 M€ i 1 Tytan, aby wybudować kolonię na Księżycu i podnieść produkcję M€ o 1 poziom.)",
+    "Build Moon Mine": "Zbuduj kopalnię na Księżycu",
+    "(Spend 20 M€ and 1 titanium to place a mine on the moon and raise steel production 1 step.)": "(Wydaj 20 M€ i 1 Tytan, aby wybudować kopalnię na Księżycu i podnieść produkcję Tytanu o 1 poziom.)",
+    "Build Moon Road": "Zbuduj drogę na Księżycu",
+    "(Spend 18 M€ and 1 steel to place a road on the moon and raise the Logistics Rate 1 step.)": "(Wydaj 18 M€ i 1 Stal, aby wybudować drogę na Księżycu i podnieść Współczynnik Logistyki 1 poziom.)"
 }

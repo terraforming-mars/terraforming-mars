@@ -197,7 +197,7 @@ export class Player implements ISerializable<SerializedPlayer> {
   }
 
   public getTitaniumValue(): number {
-    if (PartyHooks.shouldApplyPolicy(this.game, PartyName.UNITY)) return this.titaniumValue + 1;
+    if (PartyHooks.shouldApplyPolicy(this, PartyName.UNITY)) return this.titaniumValue + 1;
     return this.titaniumValue;
   }
 
@@ -216,7 +216,7 @@ export class Player implements ISerializable<SerializedPlayer> {
   }
 
   public getSteelValue(): number {
-    if (PartyHooks.shouldApplyPolicy(this.game, PartyName.MARS, TurmoilPolicy.MARS_FIRST_POLICY_3)) return this.steelValue + 1;
+    if (PartyHooks.shouldApplyPolicy(this, PartyName.MARS, TurmoilPolicy.MARS_FIRST_POLICY_3)) return this.steelValue + 1;
     return this.steelValue;
   }
 
@@ -246,7 +246,7 @@ export class Player implements ISerializable<SerializedPlayer> {
     }
 
     // Turmoil Reds capacity
-    if (PartyHooks.shouldApplyPolicy(this.game, PartyName.REDS)) {
+    if (PartyHooks.shouldApplyPolicy(this, PartyName.REDS)) {
       if (this.canAfford(REDS_RULING_POLICY_COST)) {
         this.game.defer(new SelectHowToPayDeferred(this, REDS_RULING_POLICY_COST, {title: 'Select how to pay for TR increase'}));
       } else {
@@ -576,8 +576,8 @@ export class Player implements ISerializable<SerializedPlayer> {
   }
 
   public cardIsInEffect(cardName: CardName): boolean {
-    return this.playedCards.find(
-      (playedCard) => playedCard.name === cardName) !== undefined;
+    return this.playedCards.some(
+      (playedCard) => playedCard.name === cardName);
   }
 
   public hasProtectedHabitats(): boolean {
@@ -606,11 +606,11 @@ export class Player implements ISerializable<SerializedPlayer> {
   public getNoTagsCount() {
     let noTagsCount: number = 0;
 
-    if (this.corporationCard !== undefined && this.corporationCard.tags.filter((tag) => tag !== Tags.WILDCARD).length === 0) {
+    if (this.corporationCard !== undefined && this.corporationCard.tags.every((tag) => tag === Tags.WILDCARD)) {
       noTagsCount++;
     }
 
-    noTagsCount += this.playedCards.filter((card) => card.cardType !== CardType.EVENT && card.tags.filter((tag) => tag !== Tags.WILDCARD).length === 0).length;
+    noTagsCount += this.playedCards.filter((card) => card.cardType !== CardType.EVENT && card.tags.every((tag) => tag === Tags.WILDCARD)).length;
 
     return noTagsCount;
   }
@@ -635,9 +635,7 @@ export class Player implements ISerializable<SerializedPlayer> {
   }
 
   public getResourcesOnCard(card: ICard): number | undefined {
-    if (card.resourceCount !== undefined) {
-      return card.resourceCount;
-    } else return undefined;
+    return card.resourceCount;
   }
 
   public getResourcesOnCorporation():number {
@@ -662,7 +660,7 @@ export class Player implements ISerializable<SerializedPlayer> {
     }
 
     // PoliticalAgendas Scientists P2 hook
-    if (PartyHooks.shouldApplyPolicy(this.game, PartyName.SCIENTISTS, TurmoilPolicy.SCIENTISTS_POLICY_2)) {
+    if (PartyHooks.shouldApplyPolicy(this, PartyName.SCIENTISTS, TurmoilPolicy.SCIENTISTS_POLICY_2)) {
       requirementsBonus += 2;
     }
 
@@ -746,7 +744,7 @@ export class Player implements ISerializable<SerializedPlayer> {
   public getResourceCount(resource: ResourceType): number {
     let count: number = 0;
     this.getCardsWithResources(resource).forEach((card) => {
-      count += this.getResourcesOnCard(card)!;
+      count += (this.getResourcesOnCard(card) ?? 0);
     });
     return count;
   }
@@ -1272,7 +1270,7 @@ export class Player implements ISerializable<SerializedPlayer> {
     });
 
     // PoliticalAgendas Unity P4 hook
-    if (card.tags.includes(Tags.SPACE) && PartyHooks.shouldApplyPolicy(this.game, PartyName.UNITY, TurmoilPolicy.UNITY_POLICY_4)) {
+    if (card.tags.includes(Tags.SPACE) && PartyHooks.shouldApplyPolicy(this, PartyName.UNITY, TurmoilPolicy.UNITY_POLICY_4)) {
       cost -= 2;
     }
 
@@ -1293,6 +1291,10 @@ export class Player implements ISerializable<SerializedPlayer> {
 
   private canUseFloaters(card: ICard): boolean {
     return card.tags.includes(Tags.VENUS);
+  }
+
+  private canUseScience(card: ICard): boolean {
+    return card.tags.includes(Tags.MOON);
   }
 
   private getMcTradeCost(): number {
@@ -1387,23 +1389,23 @@ export class Player implements ISerializable<SerializedPlayer> {
 
   public getMicrobesCanSpend(): number {
     const psychrophiles = this.playedCards.find((card) => card.name === CardName.PSYCHROPHILES);
-    if (psychrophiles !== undefined) return this.getResourcesOnCard(psychrophiles)!;
-
-    return 0;
+    return psychrophiles !== undefined ?
+      this.getResourcesOnCard(psychrophiles) ?? 0 :
+      0;
   }
 
   public getFloatersCanSpend(): number {
     const dirigibles = this.playedCards.find((card) => card.name === CardName.DIRIGIBLES);
-    if (dirigibles !== undefined) return this.getResourcesOnCard(dirigibles)!;
-
-    return 0;
+    return dirigibles !== undefined ?
+      this.getResourcesOnCard(dirigibles) ?? 0 :
+      0;
   }
 
   public getSpendableScienceResources(): number {
     const lunaArchives = this.playedCards.find((card) => card.name === CardName.LUNA_ARCHIVES);
-    if (lunaArchives !== undefined) return this.getResourcesOnCard(lunaArchives)!;
-
-    return 0;
+    return lunaArchives !== undefined ?
+      this.getResourcesOnCard(lunaArchives) ?? 0 :
+      0;
   }
 
   public playCard(selectedCard: IProjectCard, howToPay?: HowToPay, addToPlayedCards: boolean = true): undefined {
@@ -1800,6 +1802,7 @@ export class Player implements ISerializable<SerializedPlayer> {
         titanium: this.canUseTitanium(card),
         floaters: this.canUseFloaters(card),
         microbes: this.canUseMicrobes(card),
+        science: this.canUseScience(card),
         reserveUnits: MoonExpansion.adjustedReserveCosts(this, card),
       });
 
@@ -1813,6 +1816,7 @@ export class Player implements ISerializable<SerializedPlayer> {
     titanium?: boolean,
     floaters?: boolean,
     microbes?: boolean,
+    science?: boolean,
     reserveUnits?: Units
   }) {
     const reserveUnits = options?.reserveUnits ?? Units.EMPTY;
@@ -1824,6 +1828,7 @@ export class Player implements ISerializable<SerializedPlayer> {
     const canUseTitanium: boolean = options?.titanium ?? false;
     const canUseFloaters: boolean = options?.floaters ?? false;
     const canUseMicrobes: boolean = options?.microbes ?? false;
+    const canUseScience: boolean = options?.science ?? false;
 
     return cost <=
       this.megaCredits - reserveUnits.megacredits +
@@ -1831,7 +1836,8 @@ export class Player implements ISerializable<SerializedPlayer> {
       (canUseSteel ? (this.steel - reserveUnits.steel) * this.getSteelValue() : 0) +
       (canUseTitanium ? (this.titanium - reserveUnits.titanium) * this.getTitaniumValue() : 0) +
       (canUseFloaters ? this.getFloatersCanSpend() * 3 : 0) +
-      (canUseMicrobes ? this.getMicrobesCanSpend() * 2 : 0);
+      (canUseMicrobes ? this.getMicrobesCanSpend() * 2 : 0) +
+      (canUseScience ? this.getSpendableScienceResources() : 0);
   }
 
   private getStandardProjects(): Array<StandardProjectCard> {

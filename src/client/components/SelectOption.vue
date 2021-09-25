@@ -10,7 +10,6 @@
 import Vue from 'vue';
 import Button from '@/client/components/common/Button.vue';
 import {PlayerInputModel} from '@/models/PlayerInputModel';
-import {TranslateMixin} from '@/client/mixins/TranslateMixin';
 
 export default Vue.extend({
   name: 'select-option',
@@ -32,7 +31,6 @@ export default Vue.extend({
     Button,
   },
   methods: {
-    ...TranslateMixin.methods,
     saveData() {
       this.onsave([['1']]);
     },

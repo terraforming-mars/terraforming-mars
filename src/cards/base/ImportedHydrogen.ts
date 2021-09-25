@@ -43,7 +43,7 @@ export class ImportedHydrogen extends Card implements IProjectCard {
   public canPlay(player: Player): boolean {
     const oceansMaxed = player.game.board.getOceansOnBoard() === MAX_OCEAN_TILES;
 
-    if (PartyHooks.shouldApplyPolicy(player.game, PartyName.REDS) && !oceansMaxed) {
+    if (PartyHooks.shouldApplyPolicy(player, PartyName.REDS) && !oceansMaxed) {
       return player.canAfford(player.getCardCost(this) + REDS_RULING_POLICY_COST, {titanium: true});
     }
 

@@ -1,17 +1,11 @@
 
-import {createLocalVue, shallowMount} from '@vue/test-utils';
+import {shallowMount} from '@vue/test-utils';
+import {getLocalVue} from './getLocalVue';
 import {expect} from 'chai';
 import Awards from '@/client/components/Awards.vue';
 import Award from '@/client/components/Award.vue';
 import {FundedAwardModel} from '@/models/FundedAwardModel';
 import {AWARD_COSTS} from '@/constants';
-
-function getLocalVue() {
-  const localVue = createLocalVue();
-  localVue.directive('trim-whitespace', {});
-  localVue.directive('i18n', {});
-  return localVue;
-}
 
 function createAward({id = 1, funded = false}): FundedAwardModel {
   return {

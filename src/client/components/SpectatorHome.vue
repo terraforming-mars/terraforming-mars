@@ -21,6 +21,8 @@
         <log-panel :id="spectator.id" :players="spectator.players" :generation="game.generation" :lastSoloGeneration="game.lastSoloGeneration" :color="spectator.color"></log-panel>
     </div>
 
+    <players-overview class="player_home_block player_home_block--players nofloat" :playerView="spectator" v-trim-whitespace id="shortkey-playersoverview"/>
+
     <a name="board" class="player_home_anchor"></a>
     <board
       :spaces="game.spaces"
@@ -31,6 +33,7 @@
       :oxygen_level="game.oxygenLevel"
       :temperature="game.temperature"
       :aresExtension="game.gameOptions.aresExtension"
+      :altVenusBoard="game.gameOptions.altVenusBoard"
       :aresData="game.aresData"
       :hideTiles="hideTiles"
       @toggleHideTiles="hideTiles = !hideTiles"
@@ -68,7 +71,6 @@
 <script lang="ts">
 import Vue from 'vue';
 
-import {TranslateMixin} from '@/client/mixins/TranslateMixin';
 import {GameModel} from '@/models/GameModel';
 import {mainAppSettings} from './App';
 
@@ -84,6 +86,7 @@ import Milestone from '@/client/components/Milestone.vue';
 import Sidebar from '@/client/components/Sidebar.vue';
 import Turmoil from '@/client/components/Turmoil.vue';
 import WaitingFor from '@/client/components/WaitingFor.vue';
+import PlayersOverview from '@/client/components/overview/PlayersOverview.vue';
 import {range} from '@/utils/utils';
 
 export interface SpectatorHomeModel {
@@ -120,12 +123,12 @@ export default Vue.extend({
     LogPanel,
     Milestone,
     MoonBoard,
+    PlayersOverview,
     Sidebar,
     Turmoil,
     WaitingFor,
   },
   methods: {
-    ...TranslateMixin.methods,
     forceRerender() {
       // TODO(kberg): this is very inefficient. It pulls down the entire state, ignoring the value of 'waitingFor' which only fetches a short state.
       const root = this.$root as unknown as typeof mainAppSettings.methods;

@@ -27,7 +27,7 @@ export interface ItemOptions {
   size?: Size;
   amount?: number;
   all?: boolean;
-  digit?: boolean;
+  digit?: true | false | 'large';
   played?: boolean;
   secondaryTag?: Tags | AltSecondaryTag;
   multiplier?: boolean; /** Mark any amount to be a multiplier 'X' */
@@ -53,8 +53,15 @@ export class CardRenderItem {
   public cancelled?: boolean = false;
   // amount defaults to -1 meaning no digit is displayed but the CardRenderItem icon is shown
   constructor(public type: CardRenderItemType, public amount: number = -1, options?: ItemOptions) {
-    if (Math.abs(this.amount) > 5) {
+    switch (options?.digit) {
+    case true:
       this.showDigit = true;
+      break;
+    case false:
+      break; // it's undefined
+    case 'large':
+    default:
+      this.showDigit = Math.abs(this.amount) > 5 ? true : undefined;
     }
 
     if (options === undefined) {
@@ -64,9 +71,8 @@ export class CardRenderItem {
     if (options.amount !== undefined) {
       this.amount = options.amount;
     }
-    this.anyPlayer = options.all ?? false;
-    this.showDigit = options.digit ?? false;
-    this.isPlayed = options.played ?? false;
+    this.anyPlayer = options.all;
+    this.isPlayed = options.played;
     this.secondaryTag = options.secondaryTag;
 
     if ((options.multiplier ?? false) === true) {

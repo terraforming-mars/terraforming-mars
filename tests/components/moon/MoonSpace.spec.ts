@@ -1,15 +1,9 @@
-import {createLocalVue, mount} from '@vue/test-utils';
+import {mount} from '@vue/test-utils';
+import {getLocalVue} from '../getLocalVue';
 import {expect} from 'chai';
 import MoonSpace from '@/client/components/moon/MoonSpace.vue';
 
 describe('MoonSpace', () => {
-  function getLocalVue() {
-    const localVue = createLocalVue();
-    localVue.directive('trim-whitespace', {});
-    localVue.directive('i18n', {});
-    return localVue;
-  }
-
   it('has visible tile', async () => {
     const wrapper = mount(MoonSpace, {
       localVue: getLocalVue(),

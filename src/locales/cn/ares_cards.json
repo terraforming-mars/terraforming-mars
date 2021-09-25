@@ -8,11 +8,11 @@
     "Requires 1 science tag to play. Add 2 animals to this card. OTHERS MAY NOT REMOVE ANIMALS FROM THIS CARD.": "需要你有1个科学标志。添加2个动物资源到此卡。此卡上的动物资源不能被其他玩家移除",
 
     "Butterfly Effect": "蝴蝶效应",
-    "Effect: Gain 1 TR. Move each individual hazard marker up to 1 step up or down.": "效果：获得1TR。移动每个危机标志往上1格或往下1格",
+    "Gain 1 TR. Move each individual hazard marker up to 1 step up or down.": "效果：获得1TR。移动每个危机标志往上1格或往下1格",
     "All hazard markers": "所有危机标志",
 
     "Desperate Measures": "绝望措施",
-    "Effect: Place a bronze cube on a dust storm tile and raise oxygen 1 step, or place a bronze cube on an erosion tile and raise the temperature 1 step. The hazard tile with the bronze cube cannot be removed.": "效果：放置一个资源方块在一个沙尘暴板块上并提升氧气1级，或放置一个资源方块在一个腐蚀板块上并提升温度1级。有资源方块的的危机板块不能被移除",
+    "Place a bronze cube on a dust storm tile and raise oxygen 1 step, or place a bronze cube on an erosion tile and raise the temperature 1 step. The hazard tile with the bronze cube cannot be removed.": "效果：放置一个资源方块在一个沙尘暴板块上并提升氧气1级，或放置一个资源方块在一个腐蚀板块上并提升温度1级。有资源方块的的危机板块不能被移除",
 
     "Ecological Survey": "生态调查",
     "Any 3 Greeneries": "任意 3 森林",
@@ -27,7 +27,8 @@
 
     "Geological Survey": "地质调查",
     "Any max 5 Greeneries": "至多 5 森林",
-    "Effect: When placing a tile grants you any steel, titanium, or heat, you gain one additional of each of those resources that you gain.": "效果：当你因为放置一个板块获得钢铁，钛，热能资源时，你额外获得一个同种类型的资源",
+    "Effect: When placing a tile ON MARS grants you any steel, titanium, or heat, you gain one additional of each of those resources that you gain.": "效果：当你因为放在火星上置一个板块获得钢铁，钛，热能资源时，你额外获得一个同种类型的资源",
+
     "Requires 5 or fewer greeneries on Mars.": "需要火星上不能有超过5片森林板块",
 
     "Industrial Center": "工业中心",

@@ -56,6 +56,17 @@
                     :class="'global-ares-severe-dust-storms-'+aresData.hazardData.severeDustStormOxygen.threshold"></div>
                 </div>
             </div>
+
+            <div v-if="altVenusBoard" class="global-alt-venus">
+              <div class="std-wild-resource p18"></div>
+              <div class="std-wild-resource p20"></div>
+              <div class="std-wild-resource p22"></div>
+              <div class="std-wild-resource p24"></div>
+              <div class="std-wild-resource p26"></div>
+              <div class="std-wild-resource p28"></div>
+              <div class="std-wild-resource p30"></div>
+              <div class="wild-resource p30b"></div>
+            </div>
         </div>
 
         <div class="board" id="main_board">
@@ -156,7 +167,6 @@ import {IAresData} from '@/ares/IAresData';
 import {SpaceModel} from '@/models/SpaceModel';
 import {SpaceType} from '@/SpaceType';
 import {SpaceId} from '@/boards/ISpace';
-import {TranslateMixin} from '@/client/mixins/TranslateMixin';
 
 class GlobalParamLevel {
   constructor(public value: number, public isActive: boolean, public strValue: string) {
@@ -174,6 +184,9 @@ export default Vue.extend({
     },
     venusScaleLevel: {
       type: Number,
+    },
+    altVenusBoard: {
+      type: Boolean,
     },
     boardName: {
       type: String,
@@ -207,7 +220,6 @@ export default Vue.extend({
     };
   },
   methods: {
-    ...TranslateMixin.methods,
     getAllSpacesOnMars(): Array<SpaceModel> {
       const boardSpaces: Array<SpaceModel> = [...this.spaces];
       boardSpaces.sort(

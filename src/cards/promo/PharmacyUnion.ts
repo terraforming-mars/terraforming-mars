@@ -79,7 +79,7 @@ export class PharmacyUnion extends Card implements CorporationCard {
       const hasScienceTag = card.tags.includes(Tags.SCIENCE);
       const hasMicrobesTag = card.tags.includes(Tags.MICROBE);
       const isPharmacyUnion = player.isCorporation(CardName.PHARMACY_UNION);
-      const redsAreRuling = PartyHooks.shouldApplyPolicy(game, PartyName.REDS);
+      const redsAreRuling = PartyHooks.shouldApplyPolicy(player, PartyName.REDS);
 
       // Edge case, let player pick order of resolution (see https://github.com/bafolts/terraforming-mars/issues/1286)
       if (isPharmacyUnion && hasScienceTag && hasMicrobesTag && this.resourceCount === 0) {

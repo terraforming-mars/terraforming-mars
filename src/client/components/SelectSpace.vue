@@ -17,7 +17,6 @@ import Vue from 'vue';
 import ConfirmDialog from '@/client/components/common/ConfirmDialog.vue';
 import {PlayerInputModel} from '@/models/PlayerInputModel';
 import {PreferencesManager} from '@/client/utils/PreferencesManager';
-import {TranslateMixin} from '@/client/mixins/TranslateMixin';
 
 export default Vue.extend({
   name: 'SelectSpace',
@@ -47,7 +46,6 @@ export default Vue.extend({
     'confirm-dialog': ConfirmDialog,
   },
   methods: {
-    ...TranslateMixin.methods,
     animateSpace(tile: Element, activate: boolean) {
       if (activate) {
         tile.classList.add('board-space--available');

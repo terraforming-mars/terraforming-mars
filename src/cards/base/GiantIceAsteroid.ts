@@ -37,7 +37,7 @@ export class GiantIceAsteroid extends Card implements IProjectCard {
     const remainingTemperatureSteps = (MAX_TEMPERATURE - player.game.getTemperature()) / 2;
     const stepsRaised = Math.min(remainingTemperatureSteps, 2) + Math.min(remainingOceans, 2);
 
-    if (PartyHooks.shouldApplyPolicy(player.game, PartyName.REDS)) {
+    if (PartyHooks.shouldApplyPolicy(player, PartyName.REDS)) {
       return player.canAfford(player.getCardCost(this) + REDS_RULING_POLICY_COST * stepsRaised, {titanium: true});
     }
 

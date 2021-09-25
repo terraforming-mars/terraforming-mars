@@ -1,5 +1,5 @@
-import {createLocalVue, mount} from '@vue/test-utils';
-
+import {mount} from '@vue/test-utils';
+import {getLocalVue} from './getLocalVue';
 import {expect} from 'chai';
 import {CardName} from '@/CardName';
 import SortableCards from '@/client/components/SortableCards.vue';
@@ -16,11 +16,6 @@ describe('SortableCards', () => {
     FakeLocalStorage.deregister(localStorage);
   });
 
-  function getLocalVue() {
-    const localVue = createLocalVue();
-    localVue.directive('i18n', {});
-    return localVue;
-  }
   it('allows sorting after initial loading with no local storage', async () => {
     const sortable = mount(SortableCards, {
       localVue: getLocalVue(),

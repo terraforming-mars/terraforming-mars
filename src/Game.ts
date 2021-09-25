@@ -498,9 +498,9 @@ export class Game implements ISerializable<SerializedGame> {
   }
 
   public milestoneClaimed(milestone: IMilestone): boolean {
-    return this.claimedMilestones.find(
+    return this.claimedMilestones.some(
       (claimedMilestone) => claimedMilestone.milestone.name === milestone.name,
-    ) !== undefined;
+    );
   }
 
   public noOceansAvailable(): boolean {
@@ -590,9 +590,9 @@ export class Game implements ISerializable<SerializedGame> {
   }
 
   public hasBeenFunded(award: IAward): boolean {
-    return this.fundedAwards.find(
+    return this.fundedAwards.some(
       (fundedAward) => fundedAward.award.name === award.name,
-    ) !== undefined;
+    );
   }
 
   public allAwardsFunded(): boolean {
@@ -1516,8 +1516,8 @@ export class Game implements ISerializable<SerializedGame> {
     const space = this.board.getNthAvailableLandSpace(distance, direction, undefined /* player */,
       (space) => {
         const adjacentSpaces = this.board.getAdjacentSpaces(space);
-        return adjacentSpaces.filter((sp) => sp.tile?.tileType === TileType.CITY).length === 0 && // no cities nearby
-            adjacentSpaces.find((sp) => this.board.canPlaceTile(sp)) !== undefined; // can place forest nearby
+        return adjacentSpaces.every((sp) => sp.tile?.tileType !== TileType.CITY) && // no cities nearby
+            adjacentSpaces.some((sp) => this.board.canPlaceTile(sp)); // can place forest nearby
       });
     if (space === undefined) {
       throw new Error('Couldn\'t find space when card cost is ' + cost);
@@ -1527,6 +1527,10 @@ export class Game implements ISerializable<SerializedGame> {
 
   public static deserialize(d: SerializedGame): Game {
     const gameOptions = d.gameOptions;
+    // TODO(kberg): Remove by 2021-10-15
+    if (d.gameOptions.altVenusBoard === undefined) {
+      d.gameOptions.altVenusBoard = false;
+    }
 
     const players = d.players.map((element: SerializedPlayer) => Player.deserialize(element));
     const first = players.find((player) => player.id === d.first);

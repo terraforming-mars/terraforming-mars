@@ -6,7 +6,7 @@ import {Dirent} from 'fs';
 
 const path = require('path');
 const fs = require('fs');
-const dbFolder = path.resolve(__dirname, '../../../db/files');
+const dbFolder = path.resolve(process.cwd(), './db/files');
 const historyFolder = path.resolve(dbFolder, 'history');
 
 export class Localfilesystem implements IDatabase {

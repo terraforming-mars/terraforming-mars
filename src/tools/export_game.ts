@@ -48,10 +48,26 @@ function load(gameId: string) {
     }
 
     console.log(`Last version is ${game.lastSaveId}`);
+    let errors = 0;
+    let writes = 0;
+
+    // The output might not be returned in order, because the
+    // inner call is async, but it is faster than forcing the
+    // results to come in order.
     for (let version = 0; version <= game.lastSaveId; version++) {
-      db.getGameVersion(gameId, version, (_err, serialized) => {
-        console.log(`Storing version ${version}`);
-        localDb.saveSerializedGame(serialized!);
+      db.getGameVersion(gameId, version, (err, serialized) => {
+        if (serialized === undefined) {
+          console.log(`failed to read version ${version}: ${err}`);
+          errors++;
+        } else {
+          console.log(`Storing version ${version}`);
+          localDb.saveSerializedGame(serialized!);
+          writes++;
+        }
+        if (errors + writes === game.lastSaveId + 1) {
+          // This is the last one.
+          console.log(`Wrote ${writes} records and had ${errors} failures.`);
+        }
       });
     }
   });

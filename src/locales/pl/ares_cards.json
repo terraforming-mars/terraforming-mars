@@ -1,7 +1,7 @@
 {
 
     "Desperate Measures": "Desperackie Środki",
-    "Effect: Place a bronze cube on a dust storm tile and raise oxygen 1 step, or place a bronze cube on an erosion tile and raise the temperature 1 step. The hazard tile with the bronze cube cannot be removed.": "Umieść brązową kostkę na kaflu burzy pyłowej i podnieś Poziom Tlenu o 1% albo umieść brązową kostkę na kaflu erozji i podnieś Temperaturę o 2°C. Kafel zagrożenia z brązową kostką nie może zostać usunięty.",
+    "Place a bronze cube on a dust storm tile and raise oxygen 1 step, or place a bronze cube on an erosion tile and raise the temperature 1 step. The hazard tile with the bronze cube cannot be removed.": "Umieść brązową kostkę na kaflu burzy pyłowej i podnieś Poziom Tlenu o 1% albo umieść brązową kostkę na kaflu erozji i podnieś Temperaturę o 2°C. Kafel zagrożenia z brązową kostką nie może zostać usunięty.",
 
     "Mining Area": "Obszar Górniczy",
     "Place one of these tiles on an area with a steel or titanium placement bonus, ADJACENT TO ANOTHER OF YOUR TILES. This tile provides an ADJACENCY BONUS of the same resource as the area. Increase your production of that resource 1 step.": "Umieść ten obszar obok innych swoich obszarów, na polu zawierającym premię stali albo tytanu. Wybierz kafel z premią sąsiedztwa taką samą jak premia na wybranym polu. Podnieś swoją produkcję tego zasobu o 1 poziom. Gdy dowolny gracz umieści obszar obok tego obszaru, otrzymuje oznaczoną premię.",
@@ -19,12 +19,12 @@
     "Requires 1 science tag to play. Add 2 animals to this card. OTHERS MAY NOT REMOVE ANIMALS FROM THIS CARD.": "Musisz posiadać przynajmniej 1 symbol nauki. Umieść na tej karcie 2 jednostki zwierząt. PRZECIWNICY NIE MOGĄ USUWAĆ JEDNOSTEK ZWIERZĄT Z TEJ KARTY.",
 
     "Butterfly Effect": "Efekt Motyla",
-    "Effect: Gain 1 TR. Move each individual hazard marker up to 1 step up or down.": "Przesuń każdy ze znaczników zagrożenia maksymalnie o 1 poziom w górę lub w dół. Podnieś swój WT o 1 poziom.",
+    "Gain 1 TR. Move each individual hazard marker up to 1 step up or down.": "Przesuń każdy ze znaczników zagrożenia maksymalnie o 1 poziom w górę lub w dół. Podnieś swój WT o 1 poziom.",
     "All hazard markers": "Znaczniki zagrożenia",
 
     "Geological Survey": "Geologiczne Pomiary",
     "Any max 5 Greeneries": "Max 5 obszarów zieleni",
-    "Effect: When placing a tile grants you any steel, titanium, or heat, you gain one additional of each of those resources that you gain.": "Efekt trwały: Gdy umieszczasz dowolny obszar na planszy i otrzymujesz zasoby stali, tytanu lub ciepła, zyskujesz 1 dodatkową jednostkę z każdego zdobytego rodzaju zasobów.",
+    "Effect: When placing a tile ON MARS grants you any steel, titanium, or heat, you gain one additional of each of those resources that you gain.": "Efekt trwały: Gdy umieszczasz dowolny obszar NA MARSIE i otrzymujesz zasoby stali, tytanu lub ciepła, zyskujesz 1 dodatkową jednostkę z każdego zdobytego rodzaju zasobów.",
     "Requires 5 or fewer greeneries on Mars.": "Na planszy musi się znajdować co najwyżej 5 obszarów zieleni.",
 
     "Ecological Survey": "Badania Ekologiczne",

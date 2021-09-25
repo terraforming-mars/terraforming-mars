@@ -78,7 +78,6 @@ import {TurmoilModel} from '@/models/TurmoilModel';
 import {PartyName} from '@/turmoil/parties/PartyName';
 import GameSetupDetail from '@/client/components/GameSetupDetail.vue';
 import {GameOptionsModel} from '@/models/GameOptionsModel';
-import {TranslateMixin} from '@/client/mixins/TranslateMixin';
 import GlobalParameterValue from '@/client/components/GlobalParameterValue.vue';
 import MoonGlobalParameterValue from '@/client/components/MoonGlobalParameterValue.vue';
 import {GlobalParameter} from '@/GlobalParameter';
@@ -159,7 +158,6 @@ export default Vue.extend({
     };
   },
   methods: {
-    ...TranslateMixin.methods,
     getPlayerColorCubeClass(): string {
       return this.acting_player && (PreferencesManager.loadBoolean('hide_animated_sidebar') === false) ? 'preferences_player_inner active' : 'preferences_player_inner';
     },

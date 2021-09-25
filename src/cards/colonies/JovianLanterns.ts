@@ -49,7 +49,7 @@ export class JovianLanterns extends Card implements IProjectCard, IResourceCard 
       return false;
     }
 
-    if (PartyHooks.shouldApplyPolicy(player.game, PartyName.REDS)) {
+    if (PartyHooks.shouldApplyPolicy(player, PartyName.REDS)) {
       return player.canAfford(player.getCardCost(this) + REDS_RULING_POLICY_COST);
     }
 

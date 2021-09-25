@@ -30,7 +30,7 @@ export class BuildColonyStandardProject extends StandardProjectCard {
       colony.isActive);
 
     // TODO: Europa sometimes costs additional 3.
-    if (PartyHooks.shouldApplyPolicy(player.game, PartyName.REDS) && !player.canAfford(this.cost + constants.REDS_RULING_POLICY_COST)) {
+    if (PartyHooks.shouldApplyPolicy(player, PartyName.REDS) && !player.canAfford(this.cost + constants.REDS_RULING_POLICY_COST)) {
       openColonies = openColonies.filter((colony) => colony.name !== ColonyName.VENUS);
     }
 

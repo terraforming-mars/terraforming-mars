@@ -2,6 +2,7 @@ import {Game} from '../../../src/Game';
 import {TestingUtils} from '../../TestingUtils';
 import {TestPlayers} from '../../TestPlayers';
 import {LunaArchives} from '../../../src/cards/moon/LunaArchives';
+import {EarthEmbassy} from '../../../src/cards/moon/EarthEmbassy';
 import {expect} from 'chai';
 import {TestPlayer} from '../../TestPlayer';
 
@@ -28,6 +29,18 @@ describe('LunaArchives', () => {
     card.action(player);
     expect(card.resourceCount).eq(5);
     expect(player.getSpendableScienceResources()).eq(5);
+  });
+
+  it('pay for moon card', () => {
+    const ee = new EarthEmbassy();
+    player.megaCredits = ee.cost;
+    expect(player.canPlay(ee)).is.true;
+    player.megaCredits-=2;
+    expect(player.canPlay(ee)).is.false;
+    card.resourceCount = 1;
+    expect(player.canPlay(ee)).is.false;
+    card.resourceCount = 2;
+    expect(player.canPlay(ee)).is.true;
   });
 });
 

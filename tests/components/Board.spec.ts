@@ -1,4 +1,5 @@
-import {createLocalVue, shallowMount} from '@vue/test-utils';
+import {shallowMount} from '@vue/test-utils';
+import {getLocalVue} from './getLocalVue';
 import {expect} from 'chai';
 import Board from '@/client/components/Board.vue';
 import BoardSpace from '@/client/components/BoardSpace.vue';
@@ -50,13 +51,6 @@ const spaces: SpaceModel[] = [
 
 
 describe('MoonBoard', () => {
-  function getLocalVue() {
-    const localVue = createLocalVue();
-    localVue.directive('trim-whitespace', {});
-    localVue.directive('i18n', {});
-    return localVue;
-  }
-
   it('has visible tiles on the board', () => {
     const hideTiles = false;
 

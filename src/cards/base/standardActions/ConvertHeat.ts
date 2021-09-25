@@ -30,7 +30,7 @@ export class ConvertHeat extends StandardActionCard {
       return false;
     }
 
-    if (PartyHooks.shouldApplyPolicy(player.game, PartyName.REDS)) {
+    if (PartyHooks.shouldApplyPolicy(player, PartyName.REDS)) {
       return (!player.isCorporation(CardName.HELION) && player.canAfford(REDS_RULING_POLICY_COST)) ||
         player.canAfford(REDS_RULING_POLICY_COST + 8);
     }

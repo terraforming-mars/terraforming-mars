@@ -37,7 +37,7 @@ export class NitrogenRichAsteroid extends Card implements IProjectCard {
     let steps = 2;
     if (player.game.getTemperature() < MAX_TEMPERATURE) steps++;
 
-    if (PartyHooks.shouldApplyPolicy(player.game, PartyName.REDS)) {
+    if (PartyHooks.shouldApplyPolicy(player, PartyName.REDS)) {
       return player.canAfford(player.getCardCost(this) + REDS_RULING_POLICY_COST * steps, {titanium: true});
     }
 

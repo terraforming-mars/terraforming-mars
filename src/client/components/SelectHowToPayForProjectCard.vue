@@ -12,7 +12,6 @@ import {PlayerInputModel} from '@/models/PlayerInputModel';
 import {PlayerViewModel, PublicPlayerModel} from '@/models/PlayerModel';
 import {PreferencesManager} from '@/client/utils/PreferencesManager';
 import {Tags} from '@/cards/Tags';
-import {TranslateMixin} from '@/client/mixins/TranslateMixin';
 import {Units} from '@/Units';
 
 export default Vue.extend({
@@ -87,7 +86,6 @@ export default Vue.extend({
   },
   methods: {
     ...PaymentWidgetMixin.methods,
-    ...TranslateMixin.methods,
     getCard() {
       const card = this.cards.find((c) => c.name === this.cardName); // this.player.cardsInHand.concat(this.player.selfReplicatingRobotsCards).find((c) => c.name === this.cardName);
       if (card === undefined) {

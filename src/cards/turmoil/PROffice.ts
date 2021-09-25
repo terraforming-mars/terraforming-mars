@@ -36,7 +36,7 @@ export class PROffice extends Card implements IProjectCard {
     if (!super.canPlay(player)) {
       return false;
     }
-    if (PartyHooks.shouldApplyPolicy(player.game, PartyName.REDS)) {
+    if (PartyHooks.shouldApplyPolicy(player, PartyName.REDS)) {
       return player.canAfford(player.getCardCost(this) + REDS_RULING_POLICY_COST);
     }
     return true;

@@ -46,7 +46,7 @@ export class JetStreamMicroscrappers extends Card implements IActionCard, IResou
     const venusMaxed = player.game.getVenusScaleLevel() === MAX_VENUS_SCALE;
     const canSpendResource = this.resourceCount > 1 && !venusMaxed;
 
-    if (PartyHooks.shouldApplyPolicy(player.game, PartyName.REDS) && !venusMaxed) {
+    if (PartyHooks.shouldApplyPolicy(player, PartyName.REDS) && !venusMaxed) {
       return player.titanium > 0 || (canSpendResource && player.canAfford(REDS_RULING_POLICY_COST));
     }
 

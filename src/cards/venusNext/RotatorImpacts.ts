@@ -48,7 +48,7 @@ export class RotatorImpacts extends Card implements IActionCard, IResourceCard {
     const venusMaxed = player.game.getVenusScaleLevel() === MAX_VENUS_SCALE;
     const canSpendResource = this.resourceCount > 0 && !venusMaxed;
 
-    if (PartyHooks.shouldApplyPolicy(player.game, PartyName.REDS) && !venusMaxed) {
+    if (PartyHooks.shouldApplyPolicy(player, PartyName.REDS) && !venusMaxed) {
       return player.canAfford(6, {titanium: true}) || (canSpendResource && player.canAfford(REDS_RULING_POLICY_COST));
     }
 

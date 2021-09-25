@@ -49,7 +49,7 @@ export class ExtractorBalloons extends Card implements IActionCard, IResourceCar
   }
   public action(player: Player) {
     const venusMaxed = player.game.getVenusScaleLevel() === MAX_VENUS_SCALE;
-    const cannotAffordRed = PartyHooks.shouldApplyPolicy(player.game, PartyName.REDS) && !player.canAfford(REDS_RULING_POLICY_COST);
+    const cannotAffordRed = PartyHooks.shouldApplyPolicy(player, PartyName.REDS) && !player.canAfford(REDS_RULING_POLICY_COST);
     if (this.resourceCount < 2 || venusMaxed || cannotAffordRed) {
       player.addResourceTo(this, {log: true});
       return undefined;

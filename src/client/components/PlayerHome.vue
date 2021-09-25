@@ -39,6 +39,7 @@
                       :oxygen_level="game.oxygenLevel"
                       :temperature="game.temperature"
                       :aresExtension="game.gameOptions.aresExtension"
+                      :altVenusBoard="game.gameOptions.altVenusBoard"
                       :aresData="game.aresData"
                       :hideTiles="hideTiles"
                       @toggleHideTiles="hideTiles = !hideTiles"
@@ -55,7 +56,7 @@
                     </div>
                 </div>
 
-                <players-overview class="player_home_block player_home_block--players nofloat:" :playerView="playerView" v-trim-whitespace id="shortkey-playersoverview"/>
+                <players-overview class="player_home_block player_home_block--players nofloat" :playerView="playerView" v-trim-whitespace id="shortkey-playersoverview"/>
 
                 <div class="player_home_block nofloat">
                     <log-panel :id="playerView.id" :players="playerView.players" :generation="game.generation" :lastSoloGeneration="game.lastSoloGeneration" :color="thisPlayer.color"></log-panel>
@@ -198,7 +199,8 @@
                           :venusScaleLevel="game.venusScaleLevel"
                           :boardName ="game.gameOptions.boardName"
                           :aresExtension="game.gameOptions.aresExtension"
-                          :aresData="game.aresData">
+                          :aresData="game.aresData"
+                          :altVenusBoard="game.gameOptions.altVenusBoard">
                         </board>
 
                         <turmoil v-if="game.turmoil" :turmoil="game.turmoil"></turmoil>

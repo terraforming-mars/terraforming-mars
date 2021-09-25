@@ -1,9 +1,9 @@
 import Vue from 'vue';
 
-import {translateTextNode} from '@/client/directives/i18n';
 import {trimEmptyTextNodes} from '@/client/directives/TrimWhitespace';
 import {mainAppSettings} from '@/client/components/App';
 import {PreferencesManager} from '@/client/utils/PreferencesManager';
+import i18nPlugin from '@/client/plugins/i18n.plugin';
 
 declare global {
   interface Window {
@@ -23,15 +23,13 @@ async function bootstrap() {
     }
   }
 
+  Vue.use(i18nPlugin);
+
   Vue.directive('trim-whitespace', {
     inserted: trimEmptyTextNodes,
     componentUpdated: trimEmptyTextNodes,
   });
 
-  Vue.directive('i18n', {
-    inserted: translateTextNode,
-    componentUpdated: translateTextNode,
-  });
 
   new Vue(mainAppSettings);
 }

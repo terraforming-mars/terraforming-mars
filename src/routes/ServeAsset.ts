@@ -1,7 +1,6 @@
 import * as http from 'http';
 import * as fs from 'fs';
 import * as path from 'path';
-import * as zlib from 'zlib';
 
 import {IContext} from './IHandler';
 import {BufferCache} from './BufferCache';
@@ -11,6 +10,21 @@ import {isProduction} from '../utils/server';
 
 type Encoding = 'gzip' | 'br';
 
+export class FileAPI {
+  public static readonly INSTANCE: FileAPI = new FileAPI();
+
+  protected constructor() {}
+
+  public readFileSync(path: string): Buffer {
+    return fs.readFileSync(path);
+  }
+  public readFile(path: string, cb: (err: NodeJS.ErrnoException | null, data: Buffer) => void): void {
+    fs.readFile(path, cb);
+  }
+  public existsSync(path: string): boolean {
+    return fs.existsSync(path);
+  }
+}
 export class ServeAsset extends Handler {
   public static readonly INSTANCE: ServeAsset = new ServeAsset();
   private readonly cache = new BufferCache();
@@ -18,18 +32,14 @@ export class ServeAsset extends Handler {
   // Public for tests
   public constructor(private cacheAgeSeconds: string | number = process.env.ASSET_CACHE_MAX_AGE || 0,
     // only production caches resources
-    private cacheAssets: boolean = isProduction()) {
+    private cacheAssets: boolean = isProduction(),
+    private fileApi: FileAPI = FileAPI.INSTANCE) {
     super();
     // prime the cache with styles.css and a compressed copy of it styles.css
-    const styles = fs.readFileSync('build/styles.css');
-    this.cache.set('styles.css', styles);
-    zlib.gzip(styles, (err, compressed) => {
-      if (err !== null) {
-        console.warn('error compressing styles', err);
-        return;
-      }
-      this.cache.set('styles.css.gz', compressed);
-    });
+    const styles = fileApi.readFileSync('build/styles.css');
+    this.cache.set('build/styles.css', styles);
+    const compressed = fileApi.readFileSync('build/styles.css.gz');
+    this.cache.set('build/styles.css.gz', compressed);
   }
 
   public get(req: http.IncomingMessage, res: http.ServerResponse, ctx: IContext): void {
@@ -51,7 +61,7 @@ export class ServeAsset extends Handler {
     const file = toFile.file;
 
     // asset caching
-    const buffer = this.cache.get(file);
+    const buffer = this.cacheAssets ? this.cache.get(file) : undefined;
     if (buffer !== undefined) {
       if (req.headers['if-none-match'] === buffer.hash) {
         ctx.route.notModified(res);
@@ -78,9 +88,10 @@ export class ServeAsset extends Handler {
       return;
     }
 
-    fs.readFile(file, (err, data) => {
+    this.fileApi.readFile(file, (err, data) => {
       if (err) {
-        return ctx.route.internalServerError(req, res, err);
+        console.log(err);
+        return ctx.route.internalServerError(req, res, 'Cannot serve ' + path);
       }
       res.setHeader('Content-Length', data.length);
       res.end(data);
@@ -98,11 +109,10 @@ export class ServeAsset extends Handler {
       return {file: urlPath};
 
     case 'styles.css':
-      const compressed = this.cache.get('styles.css.gz');
-      if (compressed !== undefined && encodings.has('gzip')) {
-        return {file: urlPath + '.gz', encoding: 'gzip'};
+      if (encodings.has('gzip')) {
+        return {file: 'build/styles.css.gz', encoding: 'gzip'};
       }
-      return {file: urlPath};
+      return {file: 'build/styles.css'};
 
     case 'main.js':
     case 'main.js.map':
@@ -117,7 +127,7 @@ export class ServeAsset extends Handler {
       }
 
       // Return not-compressed .js files for development mode
-      if (!fs.existsSync(file)) {
+      if (!this.fileApi.existsSync(file)) {
         encoding = undefined;
         file = `build/${urlPath}`;
       }

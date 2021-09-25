@@ -1,5 +1,6 @@
 
-import {createLocalVue, mount} from '@vue/test-utils';
+import {mount} from '@vue/test-utils';
+import {getLocalVue} from './getLocalVue';
 
 import {expect} from 'chai';
 import Milestone from '@/client/components/Milestone.vue';
@@ -17,12 +18,7 @@ describe('Milestone', function() {
     player_color: 'blue',
     scores: [],
   };
-  function getLocalVue() {
-    const localVue = createLocalVue();
-    localVue.directive('trim-whitespace', {});
-    localVue.directive('i18n', {});
-    return localVue;
-  }
+
   it('shows list and milestones', async function() {
     const milestone = mount(Milestone, {
       localVue: getLocalVue(),

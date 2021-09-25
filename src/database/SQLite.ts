@@ -6,8 +6,8 @@ import {SerializedGame} from '../SerializedGame';
 import sqlite3 = require('sqlite3');
 const path = require('path');
 const fs = require('fs');
-const dbFolder = path.resolve(__dirname, '../../../db');
-const dbPath = path.resolve(__dirname, '../../../db/game.db');
+const dbFolder = path.resolve(process.cwd(), './db');
+const dbPath = path.resolve(dbFolder, 'game.db');
 
 export class SQLite implements IDatabase {
   private db: sqlite3.Database;

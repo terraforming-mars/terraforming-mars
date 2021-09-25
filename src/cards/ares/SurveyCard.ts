@@ -49,7 +49,7 @@ export abstract class SurveyCard extends Card implements IProjectCard {
       switch (resource) {
       case Resources.STEEL:
         grant = space.spaceType !== SpaceType.COLONY &&
-            PartyHooks.shouldApplyPolicy(cardOwner.game, PartyName.MARS, TurmoilPolicy.MARS_FIRST_DEFAULT_POLICY);
+            PartyHooks.shouldApplyPolicy(cardOwner, PartyName.MARS, TurmoilPolicy.MARS_FIRST_DEFAULT_POLICY);
         break;
       case Resources.PLANTS:
         grant = space.tile?.tileType === TileType.OCEAN &&

@@ -42,7 +42,7 @@ export class UnitedNationsMarsInitiative extends Card implements IActionCard, Co
     const hasIncreasedTR = player.hasIncreasedTerraformRatingThisGeneration;
     const actionCost = 3;
 
-    if (PartyHooks.shouldApplyPolicy(player.game, PartyName.REDS)) {
+    if (PartyHooks.shouldApplyPolicy(player, PartyName.REDS)) {
       return hasIncreasedTR && player.canAfford(REDS_RULING_POLICY_COST + actionCost);
     }
 

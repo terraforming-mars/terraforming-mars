@@ -24,7 +24,7 @@ export class BufferGasStandardProject extends StandardProjectCard {
 
   public canAct(player: Player): boolean {
     let cost = this.cost;
-    if (PartyHooks.shouldApplyPolicy(player.game, PartyName.REDS)) cost += REDS_RULING_POLICY_COST;
+    if (PartyHooks.shouldApplyPolicy(player, PartyName.REDS)) cost += REDS_RULING_POLICY_COST;
 
     return player.canAfford(cost);
   }

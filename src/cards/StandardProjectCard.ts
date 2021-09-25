@@ -74,10 +74,10 @@ export abstract class StandardProjectCard extends Card implements IActionCard, I
       {
         title: `Select how to pay for ${this.suffixFreeCardName(this.name)} standard project`,
         afterPay: () => {
+          this.projectPlayed(player);
           this.actionEssence(player);
         },
       }));
-    this.projectPlayed(player);
     return undefined;
   }
 }

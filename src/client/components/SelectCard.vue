@@ -36,7 +36,6 @@ import {CardModel} from '@/models/CardModel';
 import {CardName} from '@/CardName';
 import {PlayerInputModel} from '@/models/PlayerInputModel';
 import {sortActiveCards} from '@/client/utils/ActiveCardsSortingOrder';
-import {TranslateMixin} from '@/client/mixins/TranslateMixin';
 
 interface Owner {
   name: string;
@@ -87,7 +86,6 @@ export default Vue.extend({
     },
   },
   methods: {
-    ...TranslateMixin.methods,
     cardsSelected(): number {
       if (Array.isArray(this.cards)) {
         return this.cards.length;

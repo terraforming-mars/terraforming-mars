@@ -738,6 +738,7 @@ export default Vue.extend({
     deselectMoonCompletion() {
       if (this.$data.moonExpansion === false) {
         this.requiresMoonTrackCompletion = false;
+        this.moonStandardProjectVariant = false;
       }
     },
     getBoardColorClass(boardName: string): string {

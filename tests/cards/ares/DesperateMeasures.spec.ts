@@ -18,7 +18,7 @@ describe('DesperateMeasures', function() {
   });
 
   it('play on top of dust storm', function() {
-    const tiles = AresTestHelper.byTileType(AresTestHelper.getHazards(player, game));
+    const tiles = AresTestHelper.byTileType(AresTestHelper.getHazards(player));
     const protectedDustStorm = tiles.get(TileType.DUST_STORM_MILD)![0];
 
     const priorTr = player.getTerraformRating();
@@ -35,7 +35,7 @@ describe('DesperateMeasures', function() {
     TestingUtils.addOcean(player);
     TestingUtils.addOcean(player);
 
-    const tiles = AresTestHelper.byTileType(AresTestHelper.getHazards(player, game));
+    const tiles = AresTestHelper.byTileType(AresTestHelper.getHazards(player));
     const protectedErosion = tiles.get(TileType.EROSION_MILD)![0];
 
     const priorTr = player.getTerraformRating();
@@ -48,7 +48,7 @@ describe('DesperateMeasures', function() {
   });
 
   it('hazard tile with player marker cannot be played on', function() {
-    const tiles = AresTestHelper.byTileType(AresTestHelper.getHazards(player, game));
+    const tiles = AresTestHelper.byTileType(AresTestHelper.getHazards(player));
     const protectedDustStorm = tiles.get(TileType.DUST_STORM_MILD)![0];
     expect(game.board.getAvailableSpacesOnLand(player).map((s) => s.id)).contains(protectedDustStorm.id);
 
@@ -58,7 +58,7 @@ describe('DesperateMeasures', function() {
   });
 
   it('hazard tile with player marker is not removed after placing the sixth ocean', function() {
-    const tiles = AresTestHelper.byTileType(AresTestHelper.getHazards(player, game));
+    const tiles = AresTestHelper.byTileType(AresTestHelper.getHazards(player));
     const protectedDustStorm = tiles.get(TileType.DUST_STORM_MILD)![0];
     card.play(player).cb(protectedDustStorm);
 
@@ -69,10 +69,10 @@ describe('DesperateMeasures', function() {
     TestingUtils.addOcean(player);
     TestingUtils.addOcean(player);
 
-    let mildDustStorms = AresTestHelper.byTileType(AresTestHelper.getHazards(player, game)).get(TileType.DUST_STORM_MILD);
+    let mildDustStorms = AresTestHelper.byTileType(AresTestHelper.getHazards(player)).get(TileType.DUST_STORM_MILD);
     expect(mildDustStorms).has.length(3);
     TestingUtils.addOcean(player);
-    mildDustStorms = AresTestHelper.byTileType(AresTestHelper.getHazards(player, game)).get(TileType.DUST_STORM_MILD);
+    mildDustStorms = AresTestHelper.byTileType(AresTestHelper.getHazards(player)).get(TileType.DUST_STORM_MILD);
     expect(mildDustStorms).has.length(1);
     expect(mildDustStorms![0].id).eq(protectedDustStorm.id);
   });

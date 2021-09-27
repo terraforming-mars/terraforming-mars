@@ -1,7 +1,7 @@
 import {expect} from 'chai';
 import {SpaceBonus} from '../../src/SpaceBonus';
 import {Player} from '../../src/Player';
-import {Game} from '../../src/Game';
+import {DEFAULT_GAME_OPTIONS, Game} from '../../src/Game';
 import {ARES_OPTIONS_NO_HAZARDS, AresTestHelper, ARES_OPTIONS_WITH_HAZARDS} from './AresTestHelper';
 import {EmptyBoard} from './EmptyBoard';
 import {TileType} from '../../src/TileType';
@@ -157,7 +157,7 @@ describe('AresHandler', function() {
     try {
       game.addTile(player, adjacentSpace.spaceType, adjacentSpace, {tileType: TileType.GREENERY});
     } catch (err) {
-      expect(err.toString()).includes('Placing here costs 2 units of production');
+      expect((err as any).toString()).includes('Placing here costs 2 units of production');
     }
 
     player.addProduction(Resources.PLANTS, 7);
@@ -354,7 +354,7 @@ describe('AresHandler', function() {
   });
 
   it('Placing on top of an ocean doesn\'t regrant bonuses', function() {
-    game.board = OriginalBoard.newInstance(false, new Random(0), false);
+    game.board = OriginalBoard.newInstance(DEFAULT_GAME_OPTIONS, new Random(0));
     const space = game.board.getSpaces(SpaceType.OCEAN, player).find((space) => {
       return space.bonus.length > 0 && space.bonus[0] === SpaceBonus.PLANT;
     })!;

@@ -3,7 +3,7 @@ import {BoardBuilder} from '../../src/boards/BoardBuilder';
 
 export class EmptyBoard extends Board {
   public static newInstance() {
-    const builder = new BoardBuilder(false);
+    const builder = new BoardBuilder(false, false);
 
     // y=0
     builder.land().land().land().land().land();

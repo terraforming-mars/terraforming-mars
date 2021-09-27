@@ -1,7 +1,6 @@
 import {Player} from '../src/Player';
 import {DEFAULT_GAME_OPTIONS, Game, GameOptions} from '../src/Game';
 import * as constants from '../src/constants';
-import {SpaceType} from '../src/SpaceType';
 import {ISpace} from '../src/boards/ISpace';
 import {Phase} from '../src/Phase';
 import {IParty} from '../src/turmoil/parties/IParty';
@@ -18,14 +17,23 @@ export class TestingUtils {
       toValue = constants.MAX_OCEAN_TILES;
     }
 
-    for (const space of player.game.board.getSpaces(SpaceType.OCEAN, player)) {
-      if (space.tile !== undefined) continue;
-      if (player.game.board.getOceansOnBoard() >= toValue) break;
-      player.game.addOceanTile(player, space.id);
-      oceans.push(space);
+    while (player.game.board.getOceansOnBoard() < toValue) {
+      oceans.push(TestingUtils.addOcean(player));
     }
     return oceans;
   };
+
+  public static addGreenery(player: Player): ISpace {
+    const space = player.game.board.getAvailableSpacesForGreenery(player)[0];
+    player.game.addGreenery(player, space.id);
+    return space;
+  }
+
+  public static addOcean(player: Player): ISpace {
+    const space = player.game.board.getAvailableSpacesForOcean(player)[0];
+    player.game.addOceanTile(player, space.id);
+    return space;
+  }
 
   public static resetBoard(game: Game): void {
     game.board.spaces.forEach((space) => {

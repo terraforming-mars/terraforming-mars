@@ -55,7 +55,12 @@ export abstract class StandardProjectCard extends Card implements IActionCard, I
   }
 
   public canAct(player: Player): boolean {
-    return player.canAfford(this.cost - this.discount(player), {reserveUnits: MoonExpansion.adjustedReserveCosts(player, this)});
+    const canPayWith = this.canPayWith(player);
+    return player.canAfford(this.cost - this.discount(player), {...canPayWith, reserveUnits: MoonExpansion.adjustedReserveCosts(player, this)});
+  }
+
+  public canPayWith(_player: Player): {steel?: boolean, titanium?: boolean} {
+    return {};
   }
 
   protected projectPlayed(player: Player) {
@@ -68,10 +73,13 @@ export abstract class StandardProjectCard extends Card implements IActionCard, I
   };
 
   public action(player: Player): OrOptions | SelectOption | AndOptions | SelectAmount | SelectCard<ICard> | SelectCard<IProjectCard> | SelectHowToPay | SelectPlayer | SelectSpace | undefined {
+    const canPayWith = this.canPayWith(player);
     player.game.defer(new SelectHowToPayDeferred(
       player,
       this.cost - this.discount(player),
       {
+        canUseSteel: canPayWith.steel,
+        canUseTitanium: canPayWith.titanium,
         title: `Select how to pay for ${this.suffixFreeCardName(this.name)} standard project`,
         afterPay: () => {
           this.projectPlayed(player);

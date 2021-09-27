@@ -599,7 +599,7 @@ describe('Game', () => {
   it('grant space bonus sanity test', () => {
     const player = TestPlayers.BLUE.newPlayer();
     const game = Game.newInstance('foobar', [player], player);
-    const space = game.board.getAvailableSpacesOnLand()[0];
+    const space = game.board.getAvailableSpacesOnLand(player)[0];
 
     space.bonus = [SpaceBonus.DRAW_CARD, SpaceBonus.DRAW_CARD, SpaceBonus.DRAW_CARD, SpaceBonus.DRAW_CARD, SpaceBonus.PLANT, SpaceBonus.TITANIUM];
     expect(player.cardsInHand).has.length(0);

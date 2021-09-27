@@ -66,6 +66,9 @@ import {MilestoneAwardSelector} from './MilestoneAwardSelector';
 import {BoardType} from './boards/BoardType';
 import {Multiset} from './utils/Multiset';
 import {GrantVenusAltTrackBonusDeferred} from './venusNext/GrantVenusAltTrackBonusDeferred';
+import {ArabiaTerraBoard} from './boards/ArabiaTerraBoard';
+import {AddResourcesToCard} from './deferredActions/AddResourcesToCard';
+import {isProduction} from './utils/server';
 
 export type GameId = string;
 export type SpectatorId = string;
@@ -100,6 +103,8 @@ export interface GameOptions {
   removeNegativeGlobalEventsOption: boolean;
   includeVenusMA: boolean;
   moonExpansion: boolean;
+  pathfindersExpansion: boolean;
+
 
   // Variants
   draftVariant: boolean;
@@ -135,6 +140,7 @@ export const DEFAULT_GAME_OPTIONS: GameOptions = {
   initialDraftVariant: false,
   moonExpansion: false,
   moonStandardProjectVariant: false,
+  pathfindersExpansion: false,
   politicalAgendasExtension: AgendaStyle.STANDARD,
   preludeExtension: false,
   promoCardsOption: false,
@@ -253,7 +259,7 @@ export class Game implements ISerializable<SerializedGame> {
     }
 
     const rng = new Random(seed);
-    const board = GameSetup.newBoard(gameOptions.boardName, gameOptions.shuffleMapOption, rng, gameOptions.venusNextExtension);
+    const board = GameSetup.newBoard(gameOptions, rng);
     const cardFinder = new CardFinder();
     const cardLoader = new CardLoader(gameOptions);
     const dealer = Dealer.newInstance(cardLoader);
@@ -1285,11 +1291,15 @@ export class Game implements ISerializable<SerializedGame> {
       throw new Error('This space is land claimed by ' + space.player.name);
     }
 
-    if (space.spaceType !== spaceType) {
-      throw new Error(
-        `Select a valid location ${space.spaceType} is not ${spaceType}`,
-      );
+    let validSpaceType = space.spaceType === spaceType;
+    if (space.spaceType === SpaceType.COVE && (spaceType === SpaceType.LAND || spaceType === SpaceType.OCEAN)) {
+      // Cove is a valid type for land and also ocean.
+      validSpaceType = true;
     }
+    if (!validSpaceType) {
+      throw new Error(`Select a valid location: ${space.spaceType} is not ${spaceType}`);
+    }
+
     AresHandler.ifAres(this, () => {
       if (!AresHandler.canCover(space, tile)) {
         throw new Error('Selected space is occupied: ' + space.id);
@@ -1386,6 +1396,22 @@ export class Game implements ISerializable<SerializedGame> {
       player.addResource(Resources.TITANIUM, count, {log: true});
     } else if (spaceBonus === SpaceBonus.HEAT) {
       player.addResource(Resources.HEAT, count, {log: true});
+    } else if (spaceBonus === SpaceBonus.OCEAN) {
+      // ignore
+    } else if (spaceBonus === SpaceBonus.MICROBE) {
+      this.defer(new AddResourcesToCard(player, ResourceType.MICROBE, {count: count}));
+    } else if (spaceBonus === SpaceBonus.DATA) {
+      this.defer(new AddResourcesToCard(player, ResourceType.DATA, {count: count}));
+    } else if (spaceBonus === SpaceBonus.ENERGY_PRODUCTION) {
+      player.addProduction(Resources.ENERGY, count);
+    } else if (spaceBonus === SpaceBonus.SCIENCE) {
+      this.defer(new AddResourcesToCard(player, ResourceType.SCIENCE, {count: count}));
+    } else {
+      // TODO(kberg): Remove the isProduction condition after 2022-01-01.
+      // I tried this once and broke the server, so I'm wrapping it in isProduction for now.
+      if (!isProduction()) {
+        throw new Error('Unhandled space bonus ' + spaceBonus);
+      }
     }
   }
 
@@ -1544,6 +1570,8 @@ export class Game implements ISerializable<SerializedGame> {
       board = ElysiumBoard.deserialize(d.board, playersForBoard);
     } else if (gameOptions.boardName === BoardName.HELLAS) {
       board = HellasBoard.deserialize(d.board, playersForBoard);
+    } else if (gameOptions.boardName === BoardName.ARABIA_TERRA) {
+      board = ArabiaTerraBoard.deserialize(d.board, playersForBoard);
     } else {
       board = OriginalBoard.deserialize(d.board, playersForBoard);
     }

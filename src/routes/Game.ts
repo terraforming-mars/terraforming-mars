@@ -82,6 +82,7 @@ export class GameHandler extends Handler {
           aresHazards: true, // Not a runtime option.
           politicalAgendasExtension: gameReq.politicalAgendasExtension,
           moonExpansion: gameReq.moonExpansion,
+          pathfindersExpansion: gameReq.pathfindersExpansion,
           promoCardsOption: gameReq.promoCardsOption,
           communityCardsOption: gameReq.communityCardsOption,
           solarPhaseOption: gameReq.solarPhaseOption,

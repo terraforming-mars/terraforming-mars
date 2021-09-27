@@ -26,7 +26,7 @@ describe('WaterTreatmentComplex', () => {
     player.cardsInHand = [card];
     player.megaCredits = card.cost;
 
-    const space = moonData.moon.getAvailableSpacesOnLand()[0];
+    const space = moonData.moon.getAvailableSpacesOnLand(player)[0];
 
     player.titanium = 1;
     space.tile = {tileType: TileType.MOON_COLONY};

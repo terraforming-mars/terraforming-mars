@@ -34,7 +34,7 @@ describe('LunarSecurityStations', () => {
     player.cardsInHand = [lunaSecurityStations];
     player.megaCredits = lunaSecurityStations.cost;
 
-    const spaces = moonData.moon.getAvailableSpacesOnLand();
+    const spaces = moonData.moon.getAvailableSpacesOnLand(player);
     spaces[0].tile = {tileType: TileType.MOON_ROAD};
     spaces[1].tile = {tileType: TileType.MOON_ROAD};
     spaces[2].tile = {tileType: TileType.MOON_ROAD};

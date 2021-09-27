@@ -27,7 +27,7 @@ describe('LunarMineUrbanization', () => {
     player.cardsInHand = [card];
     player.megaCredits = card.cost;
 
-    const space = moonData.moon.getAvailableSpacesOnLand()[0];
+    const space = moonData.moon.getAvailableSpacesOnLand(player)[0];
 
     space.tile = {tileType: TileType.MOON_MINE};
     space.player = player;
@@ -38,7 +38,7 @@ describe('LunarMineUrbanization', () => {
   });
 
   it('play', () => {
-    const space = moonData.moon.getAvailableSpacesOnLand()[0];
+    const space = moonData.moon.getAvailableSpacesOnLand(player)[0];
     space.tile = {tileType: TileType.MOON_MINE};
     space.player = player;
 

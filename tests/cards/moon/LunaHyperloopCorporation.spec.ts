@@ -22,7 +22,7 @@ describe('LunaHyperloopCorporation', () => {
   });
 
   it('action', () => {
-    const spaces = moonData.moon.getAvailableSpacesOnLand();
+    const spaces = moonData.moon.getAvailableSpacesOnLand(player);
     player.megaCredits = 0;
     MoonExpansion.addRoadTile(player, spaces[0].id);
     card.action(player);
@@ -45,7 +45,7 @@ describe('LunaHyperloopCorporation', () => {
   });
 
   it('victory points', () => {
-    const spaces = moonData.moon.getAvailableSpacesOnLand();
+    const spaces = moonData.moon.getAvailableSpacesOnLand(player);
     player.megaCredits = 0;
     MoonExpansion.addRoadTile(player, spaces[0].id);
     card.action(player);

@@ -57,8 +57,8 @@ export class AresTestHelper {
     return space;
   }
 
-  public static getHazards(game: Game): Array<ISpace> {
-    return game.board.getSpaces(SpaceType.LAND).filter((space) => AresHandler.hasHazardTile(space));
+  public static getHazards(player: Player, game: Game): Array<ISpace> {
+    return game.board.getSpaces(SpaceType.LAND, player).filter((space) => AresHandler.hasHazardTile(space));
   }
 
   public static byTileType(spaces: Array<ISpace>): Map<number, Array<ISpace>> {

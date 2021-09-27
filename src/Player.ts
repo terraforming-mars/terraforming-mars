@@ -635,9 +635,7 @@ export class Player implements ISerializable<SerializedPlayer> {
   }
 
   public getResourcesOnCard(card: ICard): number | undefined {
-    if (card.resourceCount !== undefined) {
-      return card.resourceCount;
-    } else return undefined;
+    return card.resourceCount;
   }
 
   public getResourcesOnCorporation():number {
@@ -746,7 +744,7 @@ export class Player implements ISerializable<SerializedPlayer> {
   public getResourceCount(resource: ResourceType): number {
     let count: number = 0;
     this.getCardsWithResources(resource).forEach((card) => {
-      count += this.getResourcesOnCard(card)!;
+      count += (this.getResourcesOnCard(card) ?? 0);
     });
     return count;
   }
@@ -1391,23 +1389,23 @@ export class Player implements ISerializable<SerializedPlayer> {
 
   public getMicrobesCanSpend(): number {
     const psychrophiles = this.playedCards.find((card) => card.name === CardName.PSYCHROPHILES);
-    if (psychrophiles !== undefined) return this.getResourcesOnCard(psychrophiles)!;
-
-    return 0;
+    return psychrophiles !== undefined ?
+      this.getResourcesOnCard(psychrophiles) ?? 0 :
+      0;
   }
 
   public getFloatersCanSpend(): number {
     const dirigibles = this.playedCards.find((card) => card.name === CardName.DIRIGIBLES);
-    if (dirigibles !== undefined) return this.getResourcesOnCard(dirigibles)!;
-
-    return 0;
+    return dirigibles !== undefined ?
+      this.getResourcesOnCard(dirigibles) ?? 0 :
+      0;
   }
 
   public getSpendableScienceResources(): number {
     const lunaArchives = this.playedCards.find((card) => card.name === CardName.LUNA_ARCHIVES);
-    if (lunaArchives !== undefined) return this.getResourcesOnCard(lunaArchives)!;
-
-    return 0;
+    return lunaArchives !== undefined ?
+      this.getResourcesOnCard(lunaArchives) ?? 0 :
+      0;
   }
 
   public playCard(selectedCard: IProjectCard, howToPay?: HowToPay, addToPlayedCards: boolean = true): undefined {

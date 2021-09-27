@@ -370,7 +370,7 @@
 
                             <label>
                                 <div class="btn btn-primary btn-action btn-lg"><i class="icon icon-upload"></i></div>
-                                <input style="display: none" type="file" id="settings-file" ref="file" v-on:change="handleSettingsUpload()"/>
+                                <input style="display: none" type="file" accept=".json" id="settings-file" ref="file" v-on:change="handleSettingsUpload()"/>
                             </label>
 
                             <label>
@@ -738,6 +738,7 @@ export default Vue.extend({
     deselectMoonCompletion() {
       if (this.$data.moonExpansion === false) {
         this.requiresMoonTrackCompletion = false;
+        this.moonStandardProjectVariant = false;
       }
     },
     getBoardColorClass(boardName: string): string {

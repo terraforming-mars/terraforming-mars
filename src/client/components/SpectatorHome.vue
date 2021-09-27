@@ -21,6 +21,8 @@
         <log-panel :id="spectator.id" :players="spectator.players" :generation="game.generation" :lastSoloGeneration="game.lastSoloGeneration" :color="spectator.color"></log-panel>
     </div>
 
+    <players-overview class="player_home_block player_home_block--players nofloat" :playerView="spectator" v-trim-whitespace id="shortkey-playersoverview"/>
+
     <a name="board" class="player_home_anchor"></a>
     <board
       :spaces="game.spaces"
@@ -84,6 +86,7 @@ import Milestone from '@/client/components/Milestone.vue';
 import Sidebar from '@/client/components/Sidebar.vue';
 import Turmoil from '@/client/components/Turmoil.vue';
 import WaitingFor from '@/client/components/WaitingFor.vue';
+import PlayersOverview from '@/client/components/overview/PlayersOverview.vue';
 import {range} from '@/utils/utils';
 
 export interface SpectatorHomeModel {
@@ -120,6 +123,7 @@ export default Vue.extend({
     LogPanel,
     Milestone,
     MoonBoard,
+    PlayersOverview,
     Sidebar,
     Turmoil,
     WaitingFor,

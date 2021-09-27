@@ -3,38 +3,37 @@ import Vue from 'vue';
 import PlayerInfo from '@/client/components/overview/PlayerInfo.vue';
 import OverviewSettings from '@/client/components/overview/OverviewSettings.vue';
 import OtherPlayer from '@/client/components/OtherPlayer.vue';
-import {PlayerViewModel, PublicPlayerModel} from '@/models/PlayerModel';
+import {ViewModel, PublicPlayerModel} from '@/models/PlayerModel';
 import {ActionLabel} from '@/client/components/overview/ActionLabel';
 import {Phase} from '@/Phase';
 import {Color} from '@/Color';
 
 const SHOW_NEXT_LABEL_MIN = 2;
 
-export const getCurrentPlayerIndex = (
-  currentPlayerColor: Color,
+export const playerIndex = (
+  color: Color,
   players: Array<PublicPlayerModel>,
 ): number => {
-  let currentPlayerIndex: number = 0;
-  players.forEach((p: PublicPlayerModel, index: number) => {
-    if (p.color === currentPlayerColor) {
-      currentPlayerIndex = index;
+  for (let idx = 0; idx < players.length; idx++) {
+    if (players[idx].color === color) {
+      return idx;
     }
-  });
-  return currentPlayerIndex;
+  }
+  return -1;
 };
 
 export default Vue.extend({
   name: 'PlayersOverview',
   props: {
     playerView: {
-      type: Object as () => PlayerViewModel,
+      type: Object as () => ViewModel,
     },
   },
   computed: {
     players(): Array<PublicPlayerModel> {
       return this.playerView.players;
     },
-    thisPlayer(): PublicPlayerModel {
+    thisPlayer(): PublicPlayerModel | undefined {
       return this.playerView.thisPlayer;
     },
   },
@@ -51,13 +50,17 @@ export default Vue.extend({
       return this.players.length > 0;
     },
     getIsFirstForGen(player: PublicPlayerModel): boolean {
-      return getCurrentPlayerIndex(player.color, this.players) === 0;
+      return playerIndex(player.color, this.players) === 0;
     },
     getPlayersInOrder(): Array<PublicPlayerModel> {
       const players = this.players;
+      if (this.thisPlayer === undefined) {
+        return players;
+      }
+
       let result: Array<PublicPlayerModel> = [];
       let currentPlayerOffset: number = 0;
-      const currentPlayerIndex: number = getCurrentPlayerIndex(
+      const currentPlayerIndex: number = playerIndex(
         this.thisPlayer.color,
         this.players,
       );
@@ -92,10 +95,15 @@ export default Vue.extend({
         (p: PublicPlayerModel) => !this.playerView.game.passedPlayers.includes(p.color),
       );
 
-      const currentPlayerIndex: number = getCurrentPlayerIndex(
+      const currentPlayerIndex: number = playerIndex(
         player.color,
         notPassedPlayers,
       );
+
+      if (currentPlayerIndex === -1) {
+        return ActionLabel.NONE;
+      }
+
       const prevPlayerIndex =
                 currentPlayerIndex === 0 ?
                   notPassedPlayers.length - 1 :
@@ -117,7 +125,7 @@ export default Vue.extend({
             <overview-settings />
             <div class="other_player" v-if="players.length > 1">
                 <div v-for="(otherPlayer, index) in getPlayersInOrder()" :key="otherPlayer.id">
-                    <other-player v-if="otherPlayer.id !== playerView.thisPlayer.id" :player="otherPlayer" :playerIndex="index"/>
+                    <other-player v-if="thisPlayer !== undefined && otherPlayer.id !== thisPlayer.id" :player="otherPlayer" :playerIndex="index"/>
                 </div>
             </div>
             <player-info v-for="(p, index) in getPlayersInOrder()"
@@ -127,8 +135,9 @@ export default Vue.extend({
               :firstForGen="getIsFirstForGen(p)"
               :actionLabel="getActionLabel(p)"
               :playerIndex="index"/>
-            <div v-if="playerView.players.length > 1" class="player-divider" />
+            <div v-if="playerView.players.length > 1 && thisPlayer !== undefined" class="player-divider" />
             <player-info
+              v-if="thisPlayer !== undefined"
               :player="thisPlayer"
               :key="thisPlayer.id"
               :playerView="playerView"

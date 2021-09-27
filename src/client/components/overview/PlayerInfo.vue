@@ -1,6 +1,6 @@
 <script lang="ts">
 import Vue from 'vue';
-import {PlayerViewModel, PublicPlayerModel} from '@/models/PlayerModel';
+import {ViewModel, PublicPlayerModel} from '@/models/PlayerModel';
 import PlayerResources from '@/client/components/overview/PlayerResources.vue';
 import PlayerTags from '@/client/components/overview/PlayerTags.vue';
 import PlayerStatus from '@/client/components/overview/PlayerStatus.vue';
@@ -23,7 +23,7 @@ export default Vue.extend({
       type: Object as () => PublicPlayerModel,
     },
     playerView: {
-      type: Object as () => PlayerViewModel,
+      type: Object as () => ViewModel,
     },
     firstForGen: {
       type: Boolean,
@@ -82,7 +82,7 @@ export default Vue.extend({
     },
     togglePlayerDetails() {
       // for the player viewing this page => scroll to cards UI
-      if (this.player.color === this.playerView.thisPlayer.color) {
+      if (this.player.color === this.playerView.thisPlayer?.color) {
         const el: HTMLElement = document.getElementsByClassName(
           'sidebar_icon--cards',
         )[0] as HTMLElement;

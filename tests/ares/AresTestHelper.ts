@@ -45,20 +45,8 @@ export class AresTestHelper {
     expect(player.getResource(Resources.MEGACREDITS)).is.eq(expectedMc);
   }
 
-  public static addGreenery(player: Player): ISpace {
-    const space = player.game.board.getAvailableSpacesForGreenery(player)[0];
-    player.game.addGreenery(player, space.id);
-    return space;
-  }
-
-  public static addOcean(game: Game, player: Player): ISpace {
-    const space = game.board.getAvailableSpacesForOcean(player)[0];
-    game.addOceanTile(player, space.id);
-    return space;
-  }
-
-  public static getHazards(game: Game): Array<ISpace> {
-    return game.board.getSpaces(SpaceType.LAND).filter((space) => AresHandler.hasHazardTile(space));
+  public static getHazards(player: Player, game: Game): Array<ISpace> {
+    return game.board.getSpaces(SpaceType.LAND, player).filter((space) => AresHandler.hasHazardTile(space));
   }
 
   public static byTileType(spaces: Array<ISpace>): Map<number, Array<ISpace>> {

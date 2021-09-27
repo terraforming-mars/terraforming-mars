@@ -46,7 +46,7 @@ describe('OrbitalPowerGrid', () => {
     colonySpaces[0].tile = {tileType: TileType.CITY};
     colonySpaces[1].tile = {tileType: TileType.CITY};
 
-    const landSpaces = player.game.board.getAvailableSpacesOnLand();
+    const landSpaces = player.game.board.getAvailableSpacesOnLand(player);
     landSpaces[0].tile = {tileType: TileType.CITY};
     landSpaces[1].tile = {tileType: TileType.CITY};
     landSpaces[2].tile = {tileType: TileType.CITY};

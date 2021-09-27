@@ -5,7 +5,8 @@ import {Player} from '../../src/Player';
 import {SpaceType} from '../../src/SpaceType';
 import {TileType} from '../../src/TileType';
 import {TestPlayers} from '../TestPlayers';
-import {AresTestHelper, ARES_OPTIONS_NO_HAZARDS} from './AresTestHelper';
+import {ARES_OPTIONS_NO_HAZARDS} from './AresTestHelper';
+import {TestingUtils} from '../TestingUtils';
 
 describe('OtherAresTests', function() {
   let player : Player;
@@ -20,7 +21,7 @@ describe('OtherAresTests', function() {
     const oceanSpace = game.board.getAvailableSpacesForOcean(player).filter((s) => s.y >= 5)[0];
     game.addOceanTile(player, oceanSpace.id);
     for (let n = 0; n < 8; n++) {
-      AresTestHelper.addOcean(game, player);
+      TestingUtils.addOcean(player);
     }
 
     const award = new DesertSettler();

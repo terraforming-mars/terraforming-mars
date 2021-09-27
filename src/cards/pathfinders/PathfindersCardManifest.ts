@@ -3,7 +3,7 @@ import {CardName} from '../../CardName';
 import {GameModule} from '../../GameModule';
 
 // import {AdvancedPowerGrid} from './AdvancedPowerGrid';
-// import {AgroDrones} from './AgroDrones';
+import {AgroDrones} from './AgroDrones';
 // import {Anthozoa} from './Anthozoa';
 // import {AntidesertificationTechniques} from './AntidesertificationTechniques';
 // import {AsteroidResources} from './AsteroidResources';
@@ -22,7 +22,7 @@ import {BreedingFarms} from './BreedingFarms';
 // import {DeepSpaceOperations} from './DeepSpaceOperations';
 // import {DesignCompany} from './DesignCompany';
 // import {DesignedOrganisms} from './DesignedOrganisms';
-// import {DustStorm} from './DustStorm';
+import {DustStorm} from './DustStorm';
 // import {DysonScreens} from './DysonScreens';
 // import {EarlyExpedition} from './EarlyExpedition';
 // import {EconomicEspionage} from './EconomicEspionage';
@@ -45,16 +45,16 @@ import {BreedingFarms} from './BreedingFarms';
 // import {MartianRepository} from './MartianRepository';
 // import {MicrobiologyPatents} from './MicrobiologyPatents';
 // import {MuseumofEarlyColonisation} from './MuseumofEarlyColonisation';
-// import {NewVenice} from './NewVenice';
+import {NewVenice} from './NewVenice';
 // import {NobelLabs} from './NobelLabs';
-// import {OrbitalLaboratories} from './OrbitalLaboratories';
+import {OrbitalLaboratories} from './OrbitalLaboratories';
 // import {OzoneGenerators} from './OzoneGenerators';
 // import {PersonalAgenda} from './PersonalAgenda';
 // import {Pollinators} from './Pollinators';
 // import {PowerPlant} from './PowerPlant';
 // import {PrefabricationofHumanHabitats} from './PrefabricationofHumanHabitats';
 // import {PublicSponsoredGrant} from './PublicSponsoredGrant';
-// import {RareEarthElements} from './RareEarthElements';
+import {RareEarthElements} from './RareEarthElements';
 // import {ResearchGrant} from './ResearchGrant';
 // import {ReturntoAbandonedTechnology} from './ReturntoAbandonedTechnology';
 // import {RichDeposits} from './RichDeposits';
@@ -78,12 +78,12 @@ export const PATHFINDERS_CARD_MANIFEST = new CardManifest({
   projectCards: [
     {cardName: CardName.BREEDING_FARMS, Factory: BreedingFarms},
     // {cardName: CardName.PREFABRICATION_OF_HUMAN_HABITATS, Factory: PrefabricationofHumanHabitats},
-    // {cardName: CardName.NEW_VENICE, Factory: NewVenice},
-    // {cardName: CardName.AGRO_DRONES, Factory: AgroDrones},
+    {cardName: CardName.NEW_VENICE, Factory: NewVenice},
+    {cardName: CardName.AGRO_DRONES, Factory: AgroDrones},
     // // {cardName: CardName.WETLANDS, Factory: Wetlands},                                    // NEW TILE
-    // {cardName: CardName.RARE_EARTH_ELEMENTS, Factory: RareEarthElements},
-    // {cardName: CardName.ORBITAL_LABORATORIES, Factory: OrbitalLaboratories},
-    // {cardName: CardName.DUST_STORM, Factory: DustStorm},
+    {cardName: CardName.RARE_EARTH_ELEMENTS, Factory: RareEarthElements},
+    {cardName: CardName.ORBITAL_LABORATORIES, Factory: OrbitalLaboratories},
+    {cardName: CardName.DUST_STORM, Factory: DustStorm},
     // {cardName: CardName.MARTIAN_MONUMENTS, Factory: MartianMonuments},
     // {cardName: CardName.MARTIAN_NATURE_WONDERS, Factory: MartianNatureWonders},
     // {cardName: CardName.MUSEUM_OF_EARLY_COLONISATION, Factory: MuseumofEarlyColonisation},

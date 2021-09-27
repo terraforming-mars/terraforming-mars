@@ -20,6 +20,7 @@ import {_AresHazardPlacement} from '../../src/ares/AresHazards';
 import {AresSetup} from '../../src/ares/AresSetup';
 import {Random} from '../../src/Random';
 import {Units} from '../../src/Units';
+import {TestingUtils} from '../TestingUtils';
 
 // oddly, this no longer tests AresHandler calls. So that's interesting.
 // TODO(kberg): break up tests, but no rush.
@@ -97,13 +98,13 @@ describe('AresHandler', function() {
 
     const adjacentSpace = game.board.getAdjacentSpaces(firstSpace)[0];
     game.addTile(player, adjacentSpace.spaceType, adjacentSpace, {tileType: TileType.GREENERY});
-        game.deferredActions.peek()!.execute();
+    game.deferredActions.peek()!.execute();
 
-        // player who placed next to Nuclear zone, loses two money.
-        expect(player.megaCredits).is.eq(0);
+    // player who placed next to Nuclear zone, loses two money.
+    expect(player.megaCredits).is.eq(0);
 
-        // player who owns Nuclear zone doesn't get an adjacency bonus.
-        expect(otherPlayer.megaCredits).is.eq(0);
+    // player who owns Nuclear zone doesn't get an adjacency bonus.
+    expect(otherPlayer.megaCredits).is.eq(0);
   });
 
   it('Can\'t afford adjacency costs', function() {
@@ -213,13 +214,13 @@ describe('AresHandler', function() {
 
   it('erosion appears after the third ocean', function() {
     game = Game.newInstance('foobar', [player, otherPlayer], player, ARES_OPTIONS_WITH_HAZARDS);
-    AresTestHelper.addOcean(game, player);
-    AresTestHelper.addOcean(game, player);
+    TestingUtils.addOcean(player);
+    TestingUtils.addOcean(player);
 
     let tiles = AresTestHelper.byTileType(AresTestHelper.getHazards(player, game));
     expect(tiles.get(TileType.EROSION_MILD)).has.lengthOf(0);
 
-    AresTestHelper.addOcean(game, player);
+    TestingUtils.addOcean(player);
 
     tiles = AresTestHelper.byTileType(AresTestHelper.getHazards(player, game));
     expect(tiles.get(TileType.EROSION_MILD)).has.lengthOf(2);
@@ -227,18 +228,18 @@ describe('AresHandler', function() {
 
   it('dust storms disappear after the sixth ocean', function() {
     game = Game.newInstance('foobar', [player, otherPlayer], player, ARES_OPTIONS_WITH_HAZARDS);
-    AresTestHelper.addOcean(game, player);
-    AresTestHelper.addOcean(game, player);
-    AresTestHelper.addOcean(game, player);
-    AresTestHelper.addOcean(game, player);
-    AresTestHelper.addOcean(game, player);
+    TestingUtils.addOcean(player);
+    TestingUtils.addOcean(player);
+    TestingUtils.addOcean(player);
+    TestingUtils.addOcean(player);
+    TestingUtils.addOcean(player);
 
     let tiles = AresTestHelper.byTileType(AresTestHelper.getHazards(player, game));
     expect(tiles.get(TileType.DUST_STORM_MILD)).has.lengthOf(3);
     expect(tiles.get(TileType.DUST_STORM_SEVERE)).has.lengthOf(0);
     const prior = player.getTerraformRating();
 
-    AresTestHelper.addOcean(game, player);
+    TestingUtils.addOcean(player);
 
     tiles = AresTestHelper.byTileType(AresTestHelper.getHazards(player, game));
     expect(tiles.get(TileType.DUST_STORM_MILD)).has.lengthOf(0);
@@ -248,11 +249,11 @@ describe('AresHandler', function() {
 
   it('dust storms disappear after the sixth ocean, desperate measures changes that', function() {
     game = Game.newInstance('foobar', [player, otherPlayer], player, ARES_OPTIONS_WITH_HAZARDS);
-    AresTestHelper.addOcean(game, player);
-    AresTestHelper.addOcean(game, player);
-    AresTestHelper.addOcean(game, player);
-    AresTestHelper.addOcean(game, player);
-    AresTestHelper.addOcean(game, player);
+    TestingUtils.addOcean(player);
+    TestingUtils.addOcean(player);
+    TestingUtils.addOcean(player);
+    TestingUtils.addOcean(player);
+    TestingUtils.addOcean(player);
 
     let tiles = AresTestHelper.byTileType(AresTestHelper.getHazards(player, game));
     expect(tiles.get(TileType.DUST_STORM_MILD)).has.lengthOf(3);
@@ -264,7 +265,7 @@ describe('AresHandler', function() {
 
     const priorTr = player.getTerraformRating();
 
-    AresTestHelper.addOcean(game, player);
+    TestingUtils.addOcean(player);
 
     tiles = AresTestHelper.byTileType(AresTestHelper.getHazards(player, game));
     expect(tiles.get(TileType.DUST_STORM_MILD)).has.lengthOf(1);
@@ -314,9 +315,9 @@ describe('AresHandler', function() {
     while (game.getTemperature() < -6) {
       game.increaseTemperature(player, 1);
     }
-    AresTestHelper.addOcean(game, player);
-    AresTestHelper.addOcean(game, player);
-    AresTestHelper.addOcean(game, player);
+    TestingUtils.addOcean(player);
+    TestingUtils.addOcean(player);
+    TestingUtils.addOcean(player);
 
     let tiles = AresTestHelper.byTileType(AresTestHelper.getHazards(player, game));
     expect(tiles.get(TileType.EROSION_MILD)).has.lengthOf(2);
@@ -334,8 +335,8 @@ describe('AresHandler', function() {
     while (game.getTemperature() < -6) {
       game.increaseTemperature(player, 1);
     }
-    AresTestHelper.addOcean(game, player);
-    AresTestHelper.addOcean(game, player);
+    TestingUtils.addOcean(player);
+    TestingUtils.addOcean(player);
 
     let tiles = AresTestHelper.byTileType(AresTestHelper.getHazards(player, game));
     expect(tiles.get(TileType.EROSION_MILD)).has.lengthOf(0);
@@ -346,7 +347,7 @@ describe('AresHandler', function() {
     expect(tiles.get(TileType.EROSION_MILD)).has.lengthOf(0);
     expect(tiles.get(TileType.EROSION_SEVERE)).has.lengthOf(0);
 
-    AresTestHelper.addOcean(game, player);
+    TestingUtils.addOcean(player);
 
     tiles = AresTestHelper.byTileType(AresTestHelper.getHazards(player, game));
     expect(tiles.get(TileType.EROSION_MILD)).has.lengthOf(0);

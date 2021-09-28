@@ -79,9 +79,10 @@
     "make:json": "node make_static_json.js",
     "make:static": "npm run make:css && npm run make:json",
     "test": "npm run test:server && npm run test:client",
+    "test:server": "ts-mocha -p tests/tsconfig.json -r tests/utils/setup.ts \"tests/*.spec.ts\" \"tests/!(components)/**/*.spec.ts\"",
+    "pretest:server": "npx tsc --build tests/tsconfig.json",
     "test:client": "cross-env NODE_ENV=development mochapack --require tests/components/setup.ts \"tests/components/**/*.spec.ts\"",
     "test:client:watch": "cross-env NODE_ENV=development mochapack --watch --require tests/components/setup.ts \"tests/components/**/*.spec.ts\"",
-    "test:server": "ts-mocha -p tests/tsconfig.json -r tests/utils/setup.ts \"tests/*.spec.ts\" \"tests/!(components)/**/*.spec.ts\"",
     "cover": "nyc ts-mocha -p tests/tsconfig.json -r tests/utils/setup.ts \"tests/*.spec.ts\" \"tests/!(components)/**/*.spec.ts\"",
     "dev:client": "cross-env NODE_ENV=development webpack --watch",
     "dev:server": "npm run make:static && cross-env NODE_ENV=development tsnd src/server.ts"

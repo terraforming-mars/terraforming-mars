@@ -16,7 +16,8 @@ export function translateMessage(message: Message): string {
 
 export function translateText(englishText: string): string {
   const lang = PreferencesManager.load('lang') || 'en';
-  if (lang === 'en' || window._translations === undefined) {
+  const translations: {[key: string]: string} | undefined = (window as any)._translations;
+  if (lang === 'en' || translations === undefined) {
     return englishText;
   }
 
@@ -27,14 +28,14 @@ export function translateText(englishText: string): string {
     return englishText;
   }
 
-  let translatedText = window._translations[englishText];
+  let translatedText = translations[englishText];
 
   // Check if translated word is in brackets
   if (translatedText === undefined) {
     const isTextInBrackets = englishText.startsWith('(') && englishText.endsWith(')');
 
     if (isTextInBrackets) {
-      const translationAttempt = window._translations[englishText.slice(1, -1)];
+      const translationAttempt = translations[englishText.slice(1, -1)];
       if (translationAttempt) {
         translatedText = `(${translationAttempt})`;
       }

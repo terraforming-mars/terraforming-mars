@@ -1,13 +1,14 @@
 import {Game} from '../../../src/Game';
 import {Player} from '../../../src/Player';
 import {OceanFarm} from '../../../src/cards/ares/OceanFarm';
-import {AresTestHelper, ARES_OPTIONS_NO_HAZARDS} from '../../ares/AresTestHelper';
+import {ARES_OPTIONS_NO_HAZARDS} from '../../ares/AresTestHelper';
 import {expect} from 'chai';
 import {TileType} from '../../../src/TileType';
 import {SpaceBonus} from '../../../src/SpaceBonus';
 import {Resources} from '../../../src/Resources';
 import {SpaceType} from '../../../src/SpaceType';
 import {TestPlayers} from '../../TestPlayers';
+import {TestingUtils} from '../../TestingUtils';
 
 describe('OceanFarm', () => {
   let card : OceanFarm; let player : Player; let otherPlayer: Player; let game : Game;
@@ -20,16 +21,16 @@ describe('OceanFarm', () => {
   });
 
   it('Can play', () => {
-    AresTestHelper.addOcean(game, player);
+    TestingUtils.addOcean(player);
     expect(card.canPlay(player)).is.false;
 
-    AresTestHelper.addOcean(game, player);
+    TestingUtils.addOcean(player);
     expect(card.canPlay(player)).is.false;
 
-    AresTestHelper.addOcean(game, player);
+    TestingUtils.addOcean(player);
     expect(card.canPlay(player)).is.false;
 
-    AresTestHelper.addOcean(game, player);
+    TestingUtils.addOcean(player);
     expect(card.canPlay(player)).is.true;
   });
 
@@ -37,7 +38,7 @@ describe('OceanFarm', () => {
     expect(player.getProduction(Resources.HEAT)).eq(0);
     expect(player.getProduction(Resources.PLANTS)).eq(0);
 
-    const oceanSpace = AresTestHelper.addOcean(game, player);
+    const oceanSpace = TestingUtils.addOcean(player);
     const action = card.play(player);
 
     expect(player.getProduction(Resources.HEAT)).eq(1);
@@ -51,7 +52,7 @@ describe('OceanFarm', () => {
   });
 
   it('Ocean Farm counts as ocean for adjacency', () => {
-    const oceanSpace = AresTestHelper.addOcean(game, player);
+    const oceanSpace = TestingUtils.addOcean(player);
     const action = card.play(player);
     action.cb(oceanSpace);
     const greenery = game.board.getAdjacentSpaces(oceanSpace).filter((space) => space.spaceType === SpaceType.LAND)[0];

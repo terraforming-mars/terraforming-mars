@@ -15,6 +15,7 @@ import {
 import {TURMOIL_CARD_MANIFEST} from './turmoil/TurmoilCardManifest';
 import {VENUS_CARD_MANIFEST} from './venusNext/VenusCardManifest';
 import {MOON_CARD_MANIFEST} from './moon/MoonCardManifest';
+import {PATHFINDERS_CARD_MANIFEST} from './pathfinders/PathfindersCardManifest';
 
 export const ALL_CARD_MANIFESTS: Array<CardManifest> = [
   BASE_CARD_MANIFEST,
@@ -27,6 +28,7 @@ export const ALL_CARD_MANIFESTS: Array<CardManifest> = [
   COMMUNITY_CARD_MANIFEST,
   ARES_CARD_MANIFEST,
   MOON_CARD_MANIFEST,
+  PATHFINDERS_CARD_MANIFEST,
 ];
 
 function allCardNames(decks: Array<Deck<ICard>>): Array<CardName> {

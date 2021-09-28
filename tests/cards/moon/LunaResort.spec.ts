@@ -28,7 +28,7 @@ describe('LunaResort', () => {
     player.cardsInHand = [card];
     player.megaCredits = card.cost;
 
-    const spaces = moonData.moon.getAvailableSpacesOnLand();
+    const spaces = moonData.moon.getAvailableSpacesOnLand(player);
 
     spaces[0].tile = {tileType: TileType.MOON_COLONY};
     spaces[1].tile = {tileType: TileType.MOON_COLONY};

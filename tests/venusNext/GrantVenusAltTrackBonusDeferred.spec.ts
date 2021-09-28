@@ -7,11 +7,10 @@ import {AndOptions} from '@/inputs/AndOptions';
 
 describe('GrantVenusAltTrackBonusDeferred', function() {
   let player: Player;
-  let game: Game;
 
   beforeEach(() => {
     player = TestPlayers.BLUE.newPlayer();
-    game = Game.newInstance('x', [player], player);
+    Game.newInstance('x', [player], player);
   });
 
   it('grant single bonus', () => {

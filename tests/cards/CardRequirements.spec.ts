@@ -7,7 +7,6 @@ import {Game} from '../../src/Game';
 import {AdaptationTechnology} from '../../src/cards/base/AdaptationTechnology';
 import {TileType} from '../../src/TileType';
 import {Ants} from '../../src/cards/base/Ants';
-import {AresTestHelper} from '../ares/AresTestHelper';
 import {Ceres} from '../../src/colonies/Ceres';
 import {Celestic} from '../../src/cards/venusNext/Celestic';
 import {PartyName} from '../../src/turmoil/parties/PartyName';
@@ -110,13 +109,13 @@ describe('CardRequirements', function() {
   it('satisfies properly for greeneries', function() {
     const requirements = CardRequirements.builder((b) => b.greeneries(2).max());
     expect(requirements.satisfies(player)).eq(true);
-    AresTestHelper.addGreenery(player);
+    TestingUtils.addGreenery(player);
     expect(requirements.satisfies(player)).eq(true);
-    AresTestHelper.addGreenery(player);
+    TestingUtils.addGreenery(player);
     expect(requirements.satisfies(player)).eq(true);
-    AresTestHelper.addGreenery(player2);
+    TestingUtils.addGreenery(player2);
     expect(requirements.satisfies(player)).eq(true);
-    AresTestHelper.addGreenery(player);
+    TestingUtils.addGreenery(player);
     expect(requirements.satisfies(player)).eq(false);
   });
 

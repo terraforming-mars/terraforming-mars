@@ -10,6 +10,7 @@ import {TileType} from '../../TileType';
 import {MoonExpansion} from '../../moon/MoonExpansion';
 import {PlaceMoonColonyTile} from '../../moon/PlaceMoonColonyTile';
 import {DeferredAction} from '../../deferredActions/DeferredAction';
+import {ISpace} from '../../boards/ISpace';
 
 export class LunaEcumenopolis extends MoonCard {
   constructor() {
@@ -35,6 +36,45 @@ export class LunaEcumenopolis extends MoonCard {
       tilesBuilt: [TileType.MOON_COLONY],
     });
   };
+
+  public canPlay(player: Player) {
+    if (!super.canPlay(player)) {
+      return false;
+    }
+
+    const moonData = MoonExpansion.moonData(player.game);
+    const spaces = moonData.moon.getAvailableSpacesOnLand(player);
+    const len = spaces.length;
+
+    let firstSpaceId: string = '';
+
+    // This function returns true when this space is next to two colonies. Don't try to understand firstSpaceId yet.
+    const nextToTwoColonies = function(space: ISpace): boolean {
+      const adjacentSpaces = moonData.moon.getAdjacentSpaces(space).filter((adjacentSpace) => {
+        return adjacentSpace.tile?.tileType === TileType.MOON_COLONY || adjacentSpace.id === firstSpaceId;
+      });
+      return adjacentSpaces.length >= 2;
+    };
+
+    // Go through every available land space.
+    for (let x = 0; x < len; x++) {
+      const first = spaces[x];
+      // If it's next to two colonies
+      if (nextToTwoColonies(first) === true) {
+        // Remember it.
+        firstSpaceId = first.id;
+        // Now go through all the land spaces again (actually as an optimization, just continue with the space after.)
+        for (let y = x + 1; y < len; y++) {
+          const second = spaces[y];
+          // Now if it's next to two colonies, it includes the first colony you placed. That's what firstSpaceId is for.
+          if (nextToTwoColonies(second) === true) {
+            return true;
+          }
+        }
+      }
+    }
+    return false;
+  }
 
   public play(player: Player) {
     // These all have the same priority: Default.

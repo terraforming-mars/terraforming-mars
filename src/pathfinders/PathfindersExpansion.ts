@@ -12,7 +12,7 @@ import {IPathfindersData} from './IPathfindersData';
 // import {PlaceMoonRoadTile} from '../moon/PlaceMoonRoadTile';
 // import {PlaceOceanTile} from '../deferredActions/PlaceOceanTile';
 // import {PlanetaryTrack} from './PlanetaryTrack';
-// import {PlanetaryTracks} from './PlanetaryTracks';
+import {PlanetaryTracks} from './PlanetaryTracks';
 import {Player} from '../Player';
 // import {Resources} from '../Resources';
 // import {ResourceType} from '../ResourceType';
@@ -23,8 +23,9 @@ import {Tags} from '../cards/Tags';
 // import {Turmoil} from '../turmoil/Turmoil';
 // import {VictoryPointsBreakdown} from '@/VictoryPointsBreakdown';
 
-// const VALID_TAGS = [Tags.VENUS, Tags.EARTH, Tags.MARS, Tags.JOVIAN, Tags.MOON];
-// const TRACKS = PlanetaryTracks.initialize();
+// DELETE THE LINE BELOW THIS: const VALID_TAGS = [Tags.VENUS, Tags.EARTH, Tags.MARS, Tags.JOVIAN, Tags.MOON];
+// @ts-ignore TODO remove this when valid_tags is revealed.
+const TRACKS = PlanetaryTracks.initialize();
 
 export class PathfindersExpansion {
   private constructor() {

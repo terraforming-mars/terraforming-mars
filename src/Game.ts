@@ -66,6 +66,8 @@ import {MilestoneAwardSelector} from './MilestoneAwardSelector';
 import {BoardType} from './boards/BoardType';
 import {Multiset} from './utils/Multiset';
 import {GrantVenusAltTrackBonusDeferred} from './venusNext/GrantVenusAltTrackBonusDeferred';
+import {PathfindersExpansion} from './pathfinders/PathfindersExpansion';
+import {IPathfindersData} from './pathfinders/IPathfindersData';
 import {ArabiaTerraBoard} from './boards/ArabiaTerraBoard';
 import {AddResourcesToCard} from './deferredActions/AddResourcesToCard';
 import {isProduction} from './utils/server';
@@ -104,7 +106,6 @@ export interface GameOptions {
   includeVenusMA: boolean;
   moonExpansion: boolean;
   pathfindersExpansion: boolean;
-
 
   // Variants
   draftVariant: boolean;
@@ -205,6 +206,7 @@ export class Game implements ISerializable<SerializedGame> {
   public turmoil: Turmoil | undefined;
   public aresData: IAresData | undefined;
   public moonData: IMoonData | undefined;
+  public pathfindersData: IPathfindersData | undefined;
 
   // Card-specific data
   // Mons Insurance promo corp
@@ -314,6 +316,10 @@ export class Game implements ISerializable<SerializedGame> {
 
     if (gameOptions.moonExpansion) {
       game.moonData = MoonExpansion.initialize();
+    }
+
+    if (gameOptions.pathfindersExpansion) {
+      game.pathfindersData = PathfindersExpansion.initialize(gameOptions);
     }
 
     // Setup custom corporation list
@@ -432,6 +438,7 @@ export class Game implements ISerializable<SerializedGame> {
       moonData: IMoonData.serialize(this.moonData),
       oxygenLevel: this.oxygenLevel,
       passedPlayers: Array.from(this.passedPlayers),
+      pathfindersData: IPathfindersData.serialize(this.pathfindersData),
       phase: this.phase,
       players: this.players.map((p) => p.serialize()),
       researchedPlayers: Array.from(this.researchedPlayers),
@@ -1627,6 +1634,10 @@ export class Game implements ISerializable<SerializedGame> {
     // Reload moon elements if needed
     if (d.moonData !== undefined && gameOptions.moonExpansion === true) {
       game.moonData = IMoonData.deserialize(d.moonData, players);
+    }
+
+    if (d.pathfindersData !== undefined && gameOptions.pathfindersExpansion === true) {
+      game.pathfindersData = IPathfindersData.deserialize(d.pathfindersData);
     }
 
     game.passedPlayers = new Set<PlayerId>(d.passedPlayers);

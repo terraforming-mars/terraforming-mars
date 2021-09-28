@@ -2,10 +2,10 @@
 // import {CardName} from '../CardName';
 // import {CardType} from '../cards/CardType';
 // import {CommunicationCenter} from '../cards/pathfinders/CommunicationCenter';
-// import {GameOptions} from '../Game';
-// import {GrantWildResourceDeferred} from './GrantWildResourceDeferred';
+import {GameOptions} from '../Game';
+// import {GrantResourceDeferred} from './GrantResourceDeferred';
 // import {ICard} from '../cards/ICard';
-// import {IPathfindersData} from './IPathfindersData';
+import {IPathfindersData} from './IPathfindersData';
 // import {PlaceCityTile} from '../deferredActions/PlaceCityTile';
 // import {PlaceGreeneryTile} from '../deferredActions/PlaceGreeneryTile';
 // import {PlaceMoonMineTile} from '../moon/PlaceMoonMineTile';
@@ -21,6 +21,7 @@ import {Player} from '../Player';
 // import {SendDelegateToArea} from '../deferredActions/SendDelegateToArea';
 import {Tags} from '../cards/Tags';
 // import {Turmoil} from '../turmoil/Turmoil';
+// import {VictoryPointsBreakdown} from '@/VictoryPointsBreakdown';
 
 // const VALID_TAGS = [Tags.VENUS, Tags.EARTH, Tags.MARS, Tags.JOVIAN, Tags.MOON];
 // const TRACKS = PlanetaryTracks.initialize();
@@ -29,15 +30,16 @@ export class PathfindersExpansion {
   private constructor() {
   }
 
-  // public static initialize(gameOptions: GameOptions): IPathfindersData {
-  //   return {
-  //     venus: gameOptions.venusNextExtension ? 0 : -1,
-  //     earth: 0,
-  //     mars: 0,
-  //     jovian: 0,
-  //     moon: gameOptions.moonExpansion ? 0 : -1,
-  //   };
-  // }
+  public static initialize(gameOptions: GameOptions): IPathfindersData {
+    return {
+      venus: gameOptions.venusNextExtension ? 0 : -1,
+      earth: 0,
+      mars: 0,
+      jovian: 0,
+      moon: gameOptions.moonExpansion ? 0 : -1,
+      vps: [],
+    };
+  }
 
   // public static onCardPlayed(player: Player, card: ICard) {
   //   if (player.game.gameOptions.pathfindersExpansion === false) {
@@ -137,11 +139,12 @@ export class PathfindersExpansion {
 
   //   switch (reward) {
   //   case '1vp':
-  //     player.getVictoryPoints().setVictoryPoints('planetary tracks', 1);
-  //     // TODO(kberg): log victory points.
+  //     game.pathfindersData?.vps.push({id: player.id, tag, points: 1});
+  //     game.log('${0} has the most ${1} tags and earns 1VP', (b) => b.player(player).string(tag));
   //     break;
   //   case '2vp':
-  //     player.getVictoryPoints().setVictoryPoints('planetary tracks', 2);
+  //     game.pathfindersData?.vps.push({id: player.id, tag, points: 2});
+  //     game.log('${0} has the most ${1} tags and earns 2VP', (b) => b.player(player).string(tag));
   //     break;
   //   case '3mc':
   //     player.addResource(Resources.MEGACREDITS, 3, {log: true});
@@ -242,5 +245,15 @@ export class PathfindersExpansion {
   //   const filtered = counts.filter((c) => c.count === max);
   //   const result = filtered.map((c) => c.player);
   //   return result;
+  // }
+
+  // public static calculateVictoryPoints(player: Player, victoryPointsBreakdown: VictoryPointsBreakdown) {
+  //   const data = player.game.pathfindersData;
+  //   if (data === undefined) {
+  //     return;
+  //   }
+  //   data.vps
+  //     .filter((vp) => vp.id === player.id)
+  //     .forEach((vp) => victoryPointsBreakdown.setVictoryPoints('planetary tracks', vp.points, vp.tag));
   // }
 }

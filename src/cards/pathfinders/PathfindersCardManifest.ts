@@ -52,7 +52,7 @@ import {BreedingFarms} from './BreedingFarms';
 // import {PersonalAgenda} from './PersonalAgenda';
 // import {Pollinators} from './Pollinators';
 // import {PowerPlant} from './PowerPlant';
-// import {PrefabricationofHumanHabitats} from './PrefabricationofHumanHabitats';
+import {PrefabricationofHumanHabitats} from './PrefabricationofHumanHabitats';
 // import {PublicSponsoredGrant} from './PublicSponsoredGrant';
 // import {RareEarthElements} from './RareEarthElements';
 // import {ResearchGrant} from './ResearchGrant';
@@ -77,7 +77,7 @@ export const PATHFINDERS_CARD_MANIFEST = new CardManifest({
   module: GameModule.Pathfinders,
   projectCards: [
     {cardName: CardName.BREEDING_FARMS, Factory: BreedingFarms},
-    // {cardName: CardName.PREFABRICATION_OF_HUMAN_HABITATS, Factory: PrefabricationofHumanHabitats},
+    {cardName: CardName.PREFABRICATION_OF_HUMAN_HABITATS, Factory: PrefabricationofHumanHabitats},
     // {cardName: CardName.NEW_VENICE, Factory: NewVenice},
     // {cardName: CardName.AGRO_DRONES, Factory: AgroDrones},
     // // {cardName: CardName.WETLANDS, Factory: Wetlands},                                    // NEW TILE

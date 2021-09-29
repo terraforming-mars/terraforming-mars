@@ -40,11 +40,11 @@ import {DustStorm} from './DustStorm';
 // import {LuxuryEstate} from './LuxuryEstate';
 // import {MartianCulture} from './MartianCulture';
 // import {MartianDustProcessingPlant} from './MartianDustProcessingPlant';
-// import {MartianMonuments} from './MartianMonuments';
+import {MartianMonuments} from './MartianMonuments';
 // import {MartianNatureWonders} from './MartianNatureWonders';
 // import {MartianRepository} from './MartianRepository';
 // import {MicrobiologyPatents} from './MicrobiologyPatents';
-// import {MuseumofEarlyColonisation} from './MuseumofEarlyColonisation';
+import {MuseumofEarlyColonisation} from './MuseumofEarlyColonisation';
 import {NewVenice} from './NewVenice';
 // import {NobelLabs} from './NobelLabs';
 import {OrbitalLaboratories} from './OrbitalLaboratories';
@@ -67,7 +67,7 @@ import {RareEarthElements} from './RareEarthElements';
 // import {SolarStorm} from './SolarStorm';
 // import {SpaceDebrisCleaningOperation} from './SpaceDebrisCleaningOperation';
 // import {SpaceRelay} from './SpaceRelay';
-// import {TerraformingControlStation} from './TerraformingControlStation';
+import {TerraformingControlStation} from './TerraformingControlStation';
 // import {TerraformingRobots} from './TerraformingRobots';
 // import {ValuableGases} from './ValuableGases';
 // import {VeneraBase} from './VeneraBase';
@@ -84,10 +84,10 @@ export const PATHFINDERS_CARD_MANIFEST = new CardManifest({
     {cardName: CardName.RARE_EARTH_ELEMENTS, Factory: RareEarthElements},
     {cardName: CardName.ORBITAL_LABORATORIES, Factory: OrbitalLaboratories},
     {cardName: CardName.DUST_STORM, Factory: DustStorm},
-    // {cardName: CardName.MARTIAN_MONUMENTS, Factory: MartianMonuments},
+    {cardName: CardName.MARTIAN_MONUMENTS, Factory: MartianMonuments},
     // {cardName: CardName.MARTIAN_NATURE_WONDERS, Factory: MartianNatureWonders},
-    // {cardName: CardName.MUSEUM_OF_EARLY_COLONISATION, Factory: MuseumofEarlyColonisation},
-    // {cardName: CardName.TERRAFORMING_CONTROL_STATION, Factory: TerraformingControlStation, compatibility: GameModule.Venus},
+    {cardName: CardName.MUSEUM_OF_EARLY_COLONISATION, Factory: MuseumofEarlyColonisation},
+    {cardName: CardName.TERRAFORMING_CONTROL_STATION, Factory: TerraformingControlStation, compatibility: GameModule.Venus},
     // // {cardName: CardName.MARTIAN_TRANSHIPMENT_STATION, Factory: MartianTranshipmentStation},  // COMPLICATED EFFECT.
     // {cardName: CardName.CERES_SPACEPORT, Factory: CeresSpaceport},
     // {cardName: CardName.DYSON_SCREENS, Factory: DysonScreens},

@@ -37,6 +37,12 @@ export class TestingUtils {
     return space;
   }
 
+  public static addCity(player: Player): ISpace {
+    const space = player.game.board.getAvailableSpacesForCity(player)[0];
+    player.game.addCityTile(player, space.id);
+    return space;
+  }
+
   public static resetBoard(game: Game): void {
     game.board.spaces.forEach((space) => {
       space.player = undefined;

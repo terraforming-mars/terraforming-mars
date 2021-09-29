@@ -390,6 +390,11 @@ class Builder {
     return this._appendToRow(new CardRenderItem(CardRenderItemType.SYNDICATE_FLEET, amount));
   }
 
+  public mars(amount: number): Builder {
+    this._appendToRow(new CardRenderItem(CardRenderItemType.MARS, amount));
+    return this;
+  }
+
   public emptyTile(type: 'normal' | 'golden' = 'normal', size: Size = Size.MEDIUM) {
     if (type === 'normal') {
       const normal = new CardRenderItem(CardRenderItemType.EMPTY_TILE, -1);

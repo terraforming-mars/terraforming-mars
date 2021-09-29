@@ -28,6 +28,6 @@ describe('MartianMonuments', function() {
   it('play', function() {
     player.tagsForTest = {mars: 8};
     card.play(player);
-    expect(player.getProductionForTest()).eq(Units.of({megacredits: 9})); // "including this"
+    expect(player.getProductionForTest()).deep.eq(Units.of({megacredits: 9})); // "including this"
   });
 });

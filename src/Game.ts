@@ -1282,7 +1282,7 @@ export class Game implements ISerializable<SerializedGame> {
     space: ISpace, tile: ITile): void {
     // Part 1, basic validation checks.
 
-    if (space.tile !== undefined && !this.gameOptions.aresExtension) {
+    if (space.tile !== undefined && !(this.gameOptions.aresExtension || this.gameOptions.pathfindersExpansion)) {
       throw new Error('Selected space is occupied');
     }
 

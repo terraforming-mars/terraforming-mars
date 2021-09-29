@@ -28,13 +28,13 @@ export class RareEarthElements extends Card implements IProjectCard {
   }
 
 
-  private static INVALID_TILES = [TileType.GREENERY, TileType.OCEAN, TileType.CITY];
+  private static INVALID_TILES: Set<TileType> = new Set([TileType.GREENERY, TileType.OCEAN, TileType.CITY]);
 
   public play(player: Player) {
     const spaces = player.game.board.spaces.filter((space) => {
       return space.player?.id === player.id &&
         space?.tile !== undefined &&
-        RareEarthElements.INVALID_TILES.includes(space.tile.tileType) === false;
+        RareEarthElements.INVALID_TILES.has(space.tile.tileType) === false;
     });
 
     player.addProduction(Resources.MEGACREDITS, spaces.length, {log: true});

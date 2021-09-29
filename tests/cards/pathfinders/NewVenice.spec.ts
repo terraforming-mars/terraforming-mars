@@ -33,10 +33,10 @@ describe('NewVenice', function() {
     TestingUtils.addOcean(player);
     expect(card.canPlay(player)).is.false;
 
-    player.plants = 2;
+    player.plants = 1;
     expect(card.canPlay(player)).is.false;
 
-    player.plants = 3;
+    player.plants = 2;
     expect(card.canPlay(player)).is.true;
   });
 

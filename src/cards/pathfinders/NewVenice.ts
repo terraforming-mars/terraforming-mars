@@ -36,7 +36,7 @@ export class NewVenice extends Card implements IProjectCard {
   }
 
   public canPlay(player: Player): boolean {
-    return super.canPlay(player) && (player.plants > 2);
+    return super.canPlay(player) && (player.plants >= 2);
   }
 
   public play(player: Player) {

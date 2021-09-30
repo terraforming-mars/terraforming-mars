@@ -5,6 +5,7 @@ import {TestingUtils} from '../../../TestingUtils';
 import {TestPlayers} from '../../../TestPlayers';
 import {Game} from '../../../../src/Game';
 import {StandardTechnology} from '../../../../src/cards/base/StandardTechnology';
+import {Resources} from '../../../../src/Resources';
 
 describe('PowerPlantStandardProjects', function() {
   let card: PowerPlantStandardProject; let player: Player;
@@ -25,7 +26,7 @@ describe('PowerPlantStandardProjects', function() {
     expect(game.deferredActions.length).eq(1);
     expect(player.megaCredits).eq(11);
     game.deferredActions.runNext();
-    expect(player.energyProduction).eq(1);
+    expect(player.getProduction(Resources.ENERGY)).eq(1);
     expect(player.megaCredits).eq(3);
   });
 });

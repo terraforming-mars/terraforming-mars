@@ -81,4 +81,6 @@ export interface TagsForTest {
   wild: number;
   moon: number;
   event: number;
+  mars: number;
+  clone: number;
 }

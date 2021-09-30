@@ -1,3 +1,4 @@
+import {DEFAULT_GAME_OPTIONS} from '../../src/Game';
 import {expect} from 'chai';
 import {OriginalBoard} from '../../src/boards/OriginalBoard';
 import {Random} from '../../src/Random';
@@ -5,7 +6,7 @@ import {SpaceType} from '../../src/SpaceType';
 
 describe('OriginalBoard', function() {
   it('has error with input while calling getAdjacentSpaces', function() {
-    const board = OriginalBoard.newInstance(false, new Random(0), false);
+    const board = OriginalBoard.newInstance(DEFAULT_GAME_OPTIONS, new Random(0));
     expect(function() {
       board.getAdjacentSpaces({
         x: 0,

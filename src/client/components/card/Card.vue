@@ -10,7 +10,7 @@
                 <CardNumber v-if="getCardMetadata() !== undefined" :number="getCardNumber()"/>
             </div>
             <CardExpansion :expansion="getCardExpansion()" :isCorporation="isCorporationCard()"/>
-            <CardResourceCounter v-if="card.resources !== undefined" :amount="getResourceAmount(card)" :type="card.resourceType" />
+            <CardResourceCounter v-if="card.resources !== undefined" :amount="getResourceAmount(card)" :type="resourceType" />
             <CardExtraContent :card="card" />
             <slot/>
         </div>
@@ -37,6 +37,7 @@ import {ALL_CARD_MANIFESTS} from '@/cards/AllCards';
 import {GameModule} from '@/GameModule';
 import {CardRequirements} from '@/cards/CardRequirements';
 import {PreferencesManager} from '@/client/utils/PreferencesManager';
+import {ResourceType} from '@/ResourceType';
 
 export default Vue.extend({
   name: 'Card',
@@ -161,6 +162,13 @@ export default Vue.extend({
     },
     isStandardProject() : boolean {
       return this.getCardType() === CardType.STANDARD_PROJECT || this.getCardType() === CardType.STANDARD_ACTION;
+    },
+  },
+  computed: {
+    resourceType(): ResourceType {
+      if (this.card.resourceType !== undefined) return this.card.resourceType;
+      if (this.cardInstance.resourceType !== undefined) return this.cardInstance.resourceType;
+      return ResourceType.RESOURCE_CUBE;
     },
   },
 });

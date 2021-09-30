@@ -12,30 +12,36 @@ export class BoardBuilder {
   // "Beloved, " I said "watch me scare you though." said she,
   // "Able am I, Son."
 
-    private oceans: Array<boolean> = [];
+    private spaceTypes: Array<SpaceType> = [];
     private bonuses: Array<Array<SpaceBonus>> = [];
     private spaces: Array<ISpace> = [];
     private unshufflableSpaces: Array<number> = [];
 
-    constructor(private includeVenus: boolean) {
+    constructor(private includeVenus: boolean, private includePathfinders: boolean) {
       this.spaces.push(Space.colony(SpaceName.GANYMEDE_COLONY));
       this.spaces.push(Space.colony(SpaceName.PHOBOS_SPACE_HAVEN));
     }
 
     ocean(...bonus: Array<SpaceBonus>) {
-      this.oceans.push(true);
+      this.spaceTypes.push(SpaceType.OCEAN);
+      this.bonuses.push(bonus);
+      return this;
+    }
+
+    cove(...bonus: Array<SpaceBonus>) {
+      this.spaceTypes.push(SpaceType.COVE);
       this.bonuses.push(bonus);
       return this;
     }
 
     land(...bonus: Array<SpaceBonus>) {
-      this.oceans.push(false);
+      this.spaceTypes.push(SpaceType.LAND);
       this.bonuses.push(bonus);
       return this;
     }
 
     doNotShuffleLastSpace() {
-      this.unshufflableSpaces.push(this.oceans.length - 1);
+      this.unshufflableSpaces.push(this.spaceTypes.length - 1);
       return this;
     }
 
@@ -49,7 +55,9 @@ export class BoardBuilder {
         const tilesInThisRow = tilesPerRow[row];
         const xOffset = 9 - tilesInThisRow;
         for (let i = 0; i < tilesInThisRow; i++) {
-          const space = this.newTile(idx + idOffset, xOffset + i, row, this.oceans[idx], this.bonuses[idx]);
+          const spaceId = idx + idOffset;
+          const xCoordinate = xOffset + i;
+          const space = new Space(BoardBuilder.spaceId(spaceId), this.spaceTypes[idx], this.bonuses[idx], xCoordinate, row);
           this.spaces.push(space);
           idx++;
         }
@@ -62,6 +70,15 @@ export class BoardBuilder {
           Space.colony(SpaceName.LUNA_METROPOLIS),
           Space.colony(SpaceName.MAXWELL_BASE),
           Space.colony(SpaceName.STRATOPOLIS),
+        );
+      }
+      if (this.includePathfinders) {
+        this.spaces.push(
+          // Space.colony(SpaceName.MARTIAN_TRANSHIPMENT_STATION),
+          Space.colony(SpaceName.CERES_SPACEPORT),
+          Space.colony(SpaceName.DYSON_SCREENS),
+          Space.colony(SpaceName.LUNAR_EMBASSY),
+          Space.colony(SpaceName.VENERA_BASE),
         );
       }
 
@@ -85,7 +102,7 @@ export class BoardBuilder {
     // Shuffle the ocean spaces and bonus spaces. But protect the land spaces supplied by
     // |lands| so that those IDs most definitely have land spaces.
     public shuffle(rng: Random, ...lands: Array<SpaceName>) {
-      this.shuffleArray(rng, this.oceans);
+      this.shuffleArray(rng, this.spaceTypes);
       this.shuffleArray(rng, this.bonuses);
       let safety = 0;
       while (safety < 1000) {
@@ -93,10 +110,10 @@ export class BoardBuilder {
         for (const land of lands) {
           // Why -3?
           const land_id = Number(land) - 3;
-          while (this.oceans[land_id]) {
+          while (this.spaceTypes[land_id] === SpaceType.OCEAN) {
             satisfy = false;
-            const idx = rng.nextInt(this.oceans.length + 1);
-            [this.oceans[land_id], this.oceans[idx]] = [this.oceans[idx], this.oceans[land_id]];
+            const idx = rng.nextInt(this.spaceTypes.length + 1);
+            [this.spaceTypes[land_id], this.spaceTypes[idx]] = [this.spaceTypes[idx], this.spaceTypes[land_id]];
           }
         }
         if (satisfy) return;
@@ -105,18 +122,17 @@ export class BoardBuilder {
       throw new Error('infinite loop detected');
     }
 
-    private newTile(idx: number, pos_x: number, pos_y: number, is_ocean: boolean, bonus: Array<SpaceBonus>) {
-      const id = idx.toString().padStart(2, '0');
-      if (is_ocean) {
-        return Space.ocean(id, pos_x, pos_y, bonus);
-      } else {
-        return Space.land(id, pos_x, pos_y, bonus);
+    private static spaceId(id: number): SpaceId {
+      let strId = id.toString();
+      if (id < 10) {
+        strId = '0'+strId;
       }
+      return strId;
     }
 }
 
 class Space implements ISpace {
-  private constructor(public id: SpaceId, public spaceType: SpaceType, public bonus: Array<SpaceBonus>, public x: number, public y: number ) {
+  constructor(public id: SpaceId, public spaceType: SpaceType, public bonus: Array<SpaceBonus>, public x: number, public y: number ) {
   }
 
   static colony(id: SpaceId) {

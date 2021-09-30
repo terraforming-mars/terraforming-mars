@@ -10,16 +10,20 @@ import {ColonyName} from './colonies/ColonyName';
 import {Color} from './Color';
 import {TileType} from './TileType';
 import {Random} from './Random';
+import {ArabiaTerraBoard} from './boards/ArabiaTerraBoard';
 
 export class GameSetup {
   // Function to construct the board and milestones/awards list
-  public static newBoard(boardName: BoardName, shuffle: boolean, rng: Random, includeVenus: boolean): Board {
-    if (boardName === BoardName.ELYSIUM) {
-      return ElysiumBoard.newInstance(shuffle, rng, includeVenus);
-    } else if (boardName === BoardName.HELLAS) {
-      return HellasBoard.newInstance(shuffle, rng, includeVenus);
-    } else {
-      return OriginalBoard.newInstance(shuffle, rng, includeVenus);
+  public static newBoard(gameOptions: GameOptions, rng: Random): Board {
+    switch (gameOptions.boardName) {
+    case BoardName.ELYSIUM:
+      return ElysiumBoard.newInstance(gameOptions, rng);
+    case BoardName.HELLAS:
+      return HellasBoard.newInstance(gameOptions, rng);
+    case BoardName.ARABIA_TERRA:
+      return ArabiaTerraBoard.newInstance(gameOptions, rng);
+    default:
+      return OriginalBoard.newInstance(gameOptions, rng);
     }
   }
 

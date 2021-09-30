@@ -5,6 +5,7 @@ import {Player} from '../../../src/Player';
 import {TileType} from '../../../src/TileType';
 import {AresTestHelper, ARES_OPTIONS_WITH_HAZARDS} from '../../ares/AresTestHelper';
 import {TestPlayers} from '../../TestPlayers';
+import {TestingUtils} from '../../TestingUtils';
 
 describe('DesperateMeasures', function() {
   let card : DesperateMeasures; let player : Player; let game : Game;
@@ -17,7 +18,7 @@ describe('DesperateMeasures', function() {
   });
 
   it('play on top of dust storm', function() {
-    const tiles = AresTestHelper.byTileType(AresTestHelper.getHazards(game));
+    const tiles = AresTestHelper.byTileType(AresTestHelper.getHazards(player));
     const protectedDustStorm = tiles.get(TileType.DUST_STORM_MILD)![0];
 
     const priorTr = player.getTerraformRating();
@@ -30,11 +31,11 @@ describe('DesperateMeasures', function() {
 
   it('play on top of erosion tile', function() {
     // 3 oceans brings out the erosion tiles
-    AresTestHelper.addOcean(game, player);
-    AresTestHelper.addOcean(game, player);
-    AresTestHelper.addOcean(game, player);
+    TestingUtils.addOcean(player);
+    TestingUtils.addOcean(player);
+    TestingUtils.addOcean(player);
 
-    const tiles = AresTestHelper.byTileType(AresTestHelper.getHazards(game));
+    const tiles = AresTestHelper.byTileType(AresTestHelper.getHazards(player));
     const protectedErosion = tiles.get(TileType.EROSION_MILD)![0];
 
     const priorTr = player.getTerraformRating();
@@ -47,7 +48,7 @@ describe('DesperateMeasures', function() {
   });
 
   it('hazard tile with player marker cannot be played on', function() {
-    const tiles = AresTestHelper.byTileType(AresTestHelper.getHazards(game));
+    const tiles = AresTestHelper.byTileType(AresTestHelper.getHazards(player));
     const protectedDustStorm = tiles.get(TileType.DUST_STORM_MILD)![0];
     expect(game.board.getAvailableSpacesOnLand(player).map((s) => s.id)).contains(protectedDustStorm.id);
 
@@ -57,21 +58,21 @@ describe('DesperateMeasures', function() {
   });
 
   it('hazard tile with player marker is not removed after placing the sixth ocean', function() {
-    const tiles = AresTestHelper.byTileType(AresTestHelper.getHazards(game));
+    const tiles = AresTestHelper.byTileType(AresTestHelper.getHazards(player));
     const protectedDustStorm = tiles.get(TileType.DUST_STORM_MILD)![0];
     card.play(player).cb(protectedDustStorm);
 
     // The sixth ocean removes dust storms.
-    AresTestHelper.addOcean(game, player);
-    AresTestHelper.addOcean(game, player);
-    AresTestHelper.addOcean(game, player);
-    AresTestHelper.addOcean(game, player);
-    AresTestHelper.addOcean(game, player);
+    TestingUtils.addOcean(player);
+    TestingUtils.addOcean(player);
+    TestingUtils.addOcean(player);
+    TestingUtils.addOcean(player);
+    TestingUtils.addOcean(player);
 
-    let mildDustStorms = AresTestHelper.byTileType(AresTestHelper.getHazards(game)).get(TileType.DUST_STORM_MILD);
+    let mildDustStorms = AresTestHelper.byTileType(AresTestHelper.getHazards(player)).get(TileType.DUST_STORM_MILD);
     expect(mildDustStorms).has.length(3);
-    AresTestHelper.addOcean(game, player);
-    mildDustStorms = AresTestHelper.byTileType(AresTestHelper.getHazards(game)).get(TileType.DUST_STORM_MILD);
+    TestingUtils.addOcean(player);
+    mildDustStorms = AresTestHelper.byTileType(AresTestHelper.getHazards(player)).get(TileType.DUST_STORM_MILD);
     expect(mildDustStorms).has.length(1);
     expect(mildDustStorms![0].id).eq(protectedDustStorm.id);
   });

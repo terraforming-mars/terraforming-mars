@@ -120,7 +120,7 @@ export abstract class Board {
     }
   }
 
-  public getSpaces(spaceType: SpaceType, _player?: Player): Array<ISpace> {
+  public getSpaces(spaceType: SpaceType, _player : Player): Array<ISpace> {
     return this.spaces.filter((space) => space.spaceType === spaceType);
   }
 
@@ -166,7 +166,7 @@ export abstract class Board {
       );
   }
 
-  public getAvailableSpacesOnLand(player?: Player): Array<ISpace> {
+  public getAvailableSpacesOnLand(player: Player): Array<ISpace> {
     const landSpaces = this.getSpaces(SpaceType.LAND, player).filter((space) => {
       const hasPlayerMarker = space.player !== undefined;
       // A space is available if it doesn't have a player marker on it or it belongs to |player|

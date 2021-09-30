@@ -27,8 +27,8 @@ describe('HypersensitiveSiliconChipFactory', () => {
     player.cardsInHand = [card];
     player.megaCredits = card.cost;
 
-    const space1 = moonData.moon.getAvailableSpacesOnLand()[0];
-    const space2 = moonData.moon.getAvailableSpacesOnLand()[1];
+    const space1 = moonData.moon.getAvailableSpacesOnLand(player)[0];
+    const space2 = moonData.moon.getAvailableSpacesOnLand(player)[1];
 
     space1.tile = {tileType: TileType.MOON_MINE};
     space2.tile = {tileType: TileType.MOON_MINE};

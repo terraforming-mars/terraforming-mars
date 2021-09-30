@@ -79,6 +79,12 @@
                 <div class="create-game-expansion-icon expansion-icon-themoon"></div>
                 <span v-i18n>The Moon</span>
               </label><span/>
+
+              <input type="checkbox" name="pathfinders" id="pathfinders-checkbox" v-model="pathfinders">
+              <label for="pathfinders-checkbox" class="expansion-button">
+                <div class="create-game-expansion-icon expansion-icon-pathfinders"></div>
+                <span v-i18n>Pathfinders</span>
+              </label><span/>
             </div>
 
             <div class="create-game-page-column" style = "flex-flow: inherit; ">
@@ -182,6 +188,7 @@ export interface DebugUIModel {
   community: boolean,
   ares: boolean,
   moon: boolean,
+  pathfinders: boolean,
   promo: boolean,
   types: Record<CardType, boolean>,
 }
@@ -206,6 +213,7 @@ export default Vue.extend({
       ares: true,
       moon: true,
       promo: true,
+      pathfinders: true,
       types: {
         event: true,
         active: true,
@@ -323,6 +331,7 @@ export default Vue.extend({
       data.promo = !data.promo;
       data.ares = !data.ares;
       data.moon = !data.moon;
+      data.pathfinders = !data.pathfinders;
     },
     sort(names: Array<CardName>): Array<CardName> {
       const copy = [...names];
@@ -395,6 +404,8 @@ export default Vue.extend({
         return this.ares === true;
       case GameModule.Moon:
         return this.moon === true;
+      case GameModule.Pathfinders:
+        return this.pathfinders === true;
       default:
         return true;
       }

@@ -75,7 +75,7 @@ export class CardRenderItem {
     this.isPlayed = options.played;
     this.secondaryTag = options.secondaryTag;
 
-    if ((options.multiplier ?? false) === true) {
+    if (options.multiplier === true) {
       this.amountInside = true;
       this.multiplier = true;
     }

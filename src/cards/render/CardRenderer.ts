@@ -116,7 +116,6 @@ export class CardRenderCorpBoxAction extends CardRenderer {
 
 class Builder {
   protected _data: Array<Array<ItemType>> = [[]];
-  played: any;
 
   public build(): CardRenderer {
     return new CardRenderer(this._data);

@@ -65,7 +65,7 @@ import {Random} from './Random';
 import {MilestoneAwardSelector} from './MilestoneAwardSelector';
 import {BoardType} from './boards/BoardType';
 import {Multiset} from './utils/Multiset';
-import {GrantVenusAltTrackBonusDeferred} from './deferredActions/GrantVenusAltTrackBonusDeferred';
+import {SelectAnyResourceDeferred} from './deferredActions/SelectAnyResourceDeferred';
 import {PathfindersExpansion} from './pathfinders/PathfindersExpansion';
 import {IPathfindersData} from './pathfinders/IPathfindersData';
 import {ArabiaTerraBoard} from './boards/ArabiaTerraBoard';
@@ -1182,7 +1182,7 @@ export class Game implements ISerializable<SerializedGame> {
 
         const grantWildResource = this.venusScaleLevel + (steps * 2) >= 30;
         if (grantWildResource || standardResourcesGranted > 0) {
-          this.defer(new GrantVenusAltTrackBonusDeferred(player, standardResourcesGranted, grantWildResource));
+          this.defer(new SelectAnyResourceDeferred(player, standardResourcesGranted, grantWildResource));
         }
       }
       TurmoilHandler.onGlobalParameterIncrease(player, GlobalParameter.VENUS, steps);

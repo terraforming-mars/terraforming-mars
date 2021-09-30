@@ -5,7 +5,7 @@ import {DeferredAction, Priority} from './DeferredAction';
 import {Player} from '../Player';
 import {SelectResources} from '../inputs/SelectResources';
 
-export class GrantVenusAltTrackBonusDeferred implements DeferredAction {
+export class SelectAnyResourceDeferred implements DeferredAction {
   public priority = Priority.GAIN_RESOURCE_OR_PRODUCTION;
   constructor(
     public player: Player,

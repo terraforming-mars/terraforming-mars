@@ -6,7 +6,7 @@ import {Player} from '../../src/Player';
 import {Game} from '../../src/Game';
 import {TestingUtils} from '../TestingUtils';
 import {TestPlayers} from '../TestPlayers';
-import {GrantVenusAltTrackBonusDeferred} from '../../src/deferredActions/GrantVenusAltTrackBonusDeferred';
+import {SelectAnyResourceDeferred} from '../../src/deferredActions/SelectAnyResourceDeferred';
 
 describe('AltVenusTrackBonuses', function() {
   let player: Player;
@@ -19,8 +19,8 @@ describe('AltVenusTrackBonuses', function() {
 
   function getAction(game: Game) {
     const action = game.deferredActions.pop();
-    expect(action).is.instanceOf(GrantVenusAltTrackBonusDeferred);
-    const deferred = action as GrantVenusAltTrackBonusDeferred;
+    expect(action).is.instanceOf(SelectAnyResourceDeferred);
+    const deferred = action as SelectAnyResourceDeferred;
     return {standardResourceCount: deferred.standardResourceCount, wildResource: deferred.wildResource};
   }
 

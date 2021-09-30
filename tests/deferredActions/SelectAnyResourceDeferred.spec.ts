@@ -2,10 +2,10 @@ import {expect} from 'chai';
 import {Player} from '../../src/Player';
 import {Game} from '../../src/Game';
 import {TestPlayers} from '../TestPlayers';
-import {GrantVenusAltTrackBonusDeferred} from '../../src/deferredActions/GrantVenusAltTrackBonusDeferred';
-import {AndOptions} from '../../src/SelectHowToPayForProjectCard/inputs/AndOptions';
+import {SelectAnyResourceDeferred} from '../../src/deferredActions/SelectAnyResourceDeferred';
+import {AndOptions} from '../../src/inputs/AndOptions';
 
-describe('GrantVenusAltTrackBonusDeferred', function() {
+describe('SelectAnyResourceDeferred', function() {
   let player: Player;
 
   beforeEach(() => {
@@ -14,7 +14,7 @@ describe('GrantVenusAltTrackBonusDeferred', function() {
   });
 
   it('grant single bonus', () => {
-    const input = new GrantVenusAltTrackBonusDeferred(player, 1, false).execute() as AndOptions;
+    const input = new SelectAnyResourceDeferred(player, 1, false).execute() as AndOptions;
     input.options[0].cb(0);
     input.options[0].cb(0);
     input.options[0].cb(0);
@@ -31,7 +31,7 @@ describe('GrantVenusAltTrackBonusDeferred', function() {
   });
 
   it('reject too many bonuses', () => {
-    const input = new GrantVenusAltTrackBonusDeferred(player, 2, false).execute() as AndOptions;
+    const input = new SelectAnyResourceDeferred(player, 2, false).execute() as AndOptions;
     input.options[0].cb(0);
     input.options[0].cb(0);
     input.options[0].cb(0);

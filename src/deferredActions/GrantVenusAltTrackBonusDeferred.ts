@@ -1,7 +1,7 @@
 import {ICard} from '../cards/ICard';
 import {OrOptions} from '../inputs/OrOptions';
 import {SelectCard} from '../inputs/SelectCard';
-import {DeferredAction, Priority} from '../deferredActions/DeferredAction';
+import {DeferredAction, Priority} from './DeferredAction';
 import {Player} from '../Player';
 import {SelectResources} from '../inputs/SelectResources';
 

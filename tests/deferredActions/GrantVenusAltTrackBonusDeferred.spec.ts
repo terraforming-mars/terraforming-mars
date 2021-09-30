@@ -2,8 +2,8 @@ import {expect} from 'chai';
 import {Player} from '../../src/Player';
 import {Game} from '../../src/Game';
 import {TestPlayers} from '../TestPlayers';
-import {GrantVenusAltTrackBonusDeferred} from '../../src/venusNext/GrantVenusAltTrackBonusDeferred';
-import {AndOptions} from '@/inputs/AndOptions';
+import {GrantVenusAltTrackBonusDeferred} from '../../src/deferredActions/GrantVenusAltTrackBonusDeferred';
+import {AndOptions} from '../../src/SelectHowToPayForProjectCard/inputs/AndOptions';
 
 describe('GrantVenusAltTrackBonusDeferred', function() {
   let player: Player;

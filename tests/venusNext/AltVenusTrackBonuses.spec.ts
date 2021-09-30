@@ -6,7 +6,7 @@ import {Player} from '../../src/Player';
 import {Game} from '../../src/Game';
 import {TestingUtils} from '../TestingUtils';
 import {TestPlayers} from '../TestPlayers';
-import {GrantVenusAltTrackBonusDeferred} from '../../src/venusNext/GrantVenusAltTrackBonusDeferred';
+import {GrantVenusAltTrackBonusDeferred} from '../../src/deferredActions/GrantVenusAltTrackBonusDeferred';
 
 describe('AltVenusTrackBonuses', function() {
   let player: Player;

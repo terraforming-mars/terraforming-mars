@@ -65,7 +65,7 @@ import {Random} from './Random';
 import {MilestoneAwardSelector} from './MilestoneAwardSelector';
 import {BoardType} from './boards/BoardType';
 import {Multiset} from './utils/Multiset';
-import {GrantVenusAltTrackBonusDeferred} from './venusNext/GrantVenusAltTrackBonusDeferred';
+import {GrantVenusAltTrackBonusDeferred} from './deferredActions/GrantVenusAltTrackBonusDeferred';
 import {PathfindersExpansion} from './pathfinders/PathfindersExpansion';
 import {IPathfindersData} from './pathfinders/IPathfindersData';
 import {ArabiaTerraBoard} from './boards/ArabiaTerraBoard';

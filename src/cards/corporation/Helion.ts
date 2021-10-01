@@ -6,6 +6,7 @@ import {Resources} from '../../Resources';
 import {CardName} from '../../CardName';
 import {CardType} from '../CardType';
 import {CardRenderer} from '../render/CardRenderer';
+import {multiplier} from '../Options';
 
 export class Helion extends Card implements CorporationCard {
   constructor() {
@@ -23,7 +24,7 @@ export class Helion extends Card implements CorporationCard {
           b.production((pb) => pb.heat(3)).nbsp.megacredits(42);
           b.corpBox('effect', (ce) => {
             ce.effect('You may use heat as MC. You may not use M€ as heat.', (eb) => {
-              eb.startEffect.text('x').heat(1).equals().megacredits(0).multiplier;
+              eb.startEffect.text('x').heat(1).equals().megacredits(0, {multiplier});
             });
           });
         }),

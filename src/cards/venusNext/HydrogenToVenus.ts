@@ -10,6 +10,7 @@ import {PartyHooks} from '../../turmoil/parties/PartyHooks';
 import {PartyName} from '../../turmoil/parties/PartyName';
 import {CardRenderer} from '../render/CardRenderer';
 import {Card} from '../Card';
+import {played} from '../Options';
 
 export class HydrogenToVenus extends Card {
   constructor() {
@@ -23,7 +24,7 @@ export class HydrogenToVenus extends Card {
         cardNumber: '231',
         renderData: CardRenderer.builder((b) => {
           b.venus(1).br.br; // double br is intentional for visual appeal
-          b.floaters(1).secondaryTag(Tags.VENUS).slash().jovian().played;
+          b.floaters(1, {secondaryTag: Tags.VENUS}).slash().jovian({played});
         }),
         description: 'Raise Venus 1 step. Add 1 Floater to A Venus CARD for each Jovian tag you have.',
       },

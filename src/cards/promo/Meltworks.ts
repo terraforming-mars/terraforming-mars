@@ -6,6 +6,7 @@ import {CardType} from '../CardType';
 import {Player} from '../../Player';
 import {CardName} from '../../CardName';
 import {CardRenderer} from '../render/CardRenderer';
+import {digit} from '../Options';
 
 export class Meltworks extends Card implements IActionCard, IProjectCard {
   constructor() {
@@ -19,7 +20,7 @@ export class Meltworks extends Card implements IActionCard, IProjectCard {
         cardNumber: 'X26',
         renderData: CardRenderer.builder((b) => {
           b.action('Spend 5 heat to gain 3 steel.', (eb) => {
-            eb.heat(5).digit.startAction.steel(3);
+            eb.heat(5, {digit}).startAction.steel(3);
           });
         }),
       },

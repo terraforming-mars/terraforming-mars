@@ -10,6 +10,7 @@ import {Resources} from '../../Resources';
 import {Units} from '../../Units';
 import {Size} from '../render/Size';
 import {Card} from '../Card';
+import {all} from '../Options';
 
 export class SmallDutyRovers extends Card implements IProjectCard {
   constructor() {
@@ -26,9 +27,9 @@ export class SmallDutyRovers extends Card implements IProjectCard {
         renderData: CardRenderer.builder((b) => {
           b.minus().titanium(1).moonLogisticsRate().br;
           b.megacredits(1).slash()
-            .moonColony({size: Size.SMALL}).any
-            .moonMine({size: Size.SMALL}).any
-            .moonRoad({size: Size.SMALL}).any;
+            .moonColony({size: Size.SMALL, all})
+            .moonMine({size: Size.SMALL, all})
+            .moonRoad({size: Size.SMALL, all});
         }),
       },
     });

@@ -9,6 +9,7 @@ import {OrOptions} from '../../inputs/OrOptions';
 import {SelectOption} from '../../inputs/SelectOption';
 import {Resources} from '../../Resources';
 import {Card} from '../Card';
+import {digit} from '../Options';
 
 export class PreliminaryDarkside extends Card implements IProjectCard {
   constructor() {
@@ -22,7 +23,7 @@ export class PreliminaryDarkside extends Card implements IProjectCard {
         description: 'Gain 3 titanium or 4 steel. Raise the Mining Rate 1 step.',
         cardNumber: 'M63',
         renderData: CardRenderer.builder((b) => {
-          b.titanium(3).digit.or().steel(4).digit.br;
+          b.titanium(3, {digit}).or().steel(4, {digit}).br;
           b.moonMiningRate();
         }),
       },

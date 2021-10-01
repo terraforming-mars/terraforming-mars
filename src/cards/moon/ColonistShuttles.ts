@@ -9,6 +9,7 @@ import {Units} from '../../Units';
 import {MoonCard} from './MoonCard';
 import {Size} from '../render/Size';
 import {Resources} from '../../Resources';
+import {all} from '../Options';
 
 export class ColonistShuttles extends MoonCard {
   constructor() {
@@ -24,7 +25,7 @@ export class ColonistShuttles extends MoonCard {
         cardNumber: 'M16',
         renderData: CardRenderer.builder((b) => {
           b.minus().titanium(1).moonColonyRate().br;
-          b.megacredits(2).slash().moonColony({size: Size.SMALL}).any;
+          b.megacredits(2).slash().moonColony({size: Size.SMALL, all});
         }),
       },
     }, {

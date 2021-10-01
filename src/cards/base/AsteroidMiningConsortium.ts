@@ -8,6 +8,7 @@ import {CardName} from '../../CardName';
 import {DecreaseAnyProduction} from '../../deferredActions/DecreaseAnyProduction';
 import {CardRequirements} from '../CardRequirements';
 import {CardRenderer} from '../render/CardRenderer';
+import {all} from '../Options';
 
 export class AsteroidMiningConsortium extends Card implements IProjectCard {
   constructor() {
@@ -23,7 +24,7 @@ export class AsteroidMiningConsortium extends Card implements IProjectCard {
         cardNumber: '002',
         renderData: CardRenderer.builder((b) => {
           b.production((pb) => {
-            pb.minus().titanium(-1).any.br;
+            pb.minus().titanium(-1, {all}).br;
             pb.plus().titanium(1);
           });
         }),

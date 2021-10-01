@@ -23,7 +23,7 @@ export class SphereHabitats extends MoonCard {
         cardNumber: 'M07',
         renderData: CardRenderer.builder((b) => {
           b.minus().titanium(1).br;
-          b.moonColony().secondaryTag(AltSecondaryTag.MOON_COLONY_RATE);
+          b.moonColony({secondaryTag: AltSecondaryTag.MOON_COLONY_RATE});
         }),
       },
     }, {

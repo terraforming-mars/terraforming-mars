@@ -25,7 +25,7 @@ export class AristarchusRoadNetwork extends MoonCard {
         cardNumber: 'M10',
         renderData: CardRenderer.builder((b) => {
           b.minus().steel(2).nbsp.production((eb) => eb.megacredits(2)).br;
-          b.moonRoad().secondaryTag(AltSecondaryTag.MOON_LOGISTICS_RATE);
+          b.moonRoad({secondaryTag: AltSecondaryTag.MOON_LOGISTICS_RATE});
         }),
       },
     }, {

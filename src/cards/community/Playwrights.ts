@@ -12,6 +12,7 @@ import {DeferredAction} from '../../deferredActions/DeferredAction';
 import {CardRenderer} from '../render/CardRenderer';
 import {Size} from '../render/Size';
 import {MoonExpansion} from '../../moon/MoonExpansion';
+import {all} from '../Options';
 
 export class Playwrights extends Card implements CorporationCard {
   constructor() {
@@ -33,7 +34,7 @@ export class Playwrights extends Card implements CorporationCard {
               // use 1000 as an id to tell Vue to render the '?'
               eb.megacredits(1000).startAction;
               eb.text('replay', Size.SMALL, true);
-              eb.nbsp.cards(1).any.secondaryTag(Tags.EVENT);
+              eb.nbsp.cards(1, {all, secondaryTag: Tags.EVENT});
             });
           });
         }),

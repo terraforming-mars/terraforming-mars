@@ -11,6 +11,7 @@ import {CardRenderer} from '../render/CardRenderer';
 import {Card} from '../Card';
 import {OrOptions} from '../../inputs/OrOptions';
 import {SelectOption} from '../../inputs/SelectOption';
+import {all} from '../Options';
 
 export class CometForVenus extends Card {
   constructor() {
@@ -24,7 +25,7 @@ export class CometForVenus extends Card {
         description: 'Raise Venus 1 step. Remove up to 4M€ from any player WITH A VENUS TAG IN PLAY.',
         cardNumber: '218',
         renderData: CardRenderer.builder((b) => {
-          b.venus(1).nbsp.nbsp.minus().megacredits(4).secondaryTag(Tags.VENUS).any;
+          b.venus(1).nbsp.nbsp.minus().megacredits(4, {all, secondaryTag: Tags.VENUS});
         }),
       },
     });

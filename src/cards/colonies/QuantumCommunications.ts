@@ -8,6 +8,7 @@ import {CardRenderer} from '../render/CardRenderer';
 import {CardRequirements} from '../CardRequirements';
 import {Card} from '../Card';
 import {Size} from '../render/Size';
+import {all} from '../Options';
 
 export class QuantumCommunications extends Card implements IProjectCard {
   constructor() {
@@ -21,7 +22,7 @@ export class QuantumCommunications extends Card implements IProjectCard {
         cardNumber: '079',
         renderData: CardRenderer.builder((b) => {
           b.production((pb) => {
-            pb.megacredits(1).slash().colonies(1, Size.SMALL).any;
+            pb.megacredits(1).slash().colonies(1, {size: Size.SMALL, all});
           });
         }),
         description: 'Requires 4 Science tags. Increase your M€ production 1 step for each colony in play.',

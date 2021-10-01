@@ -10,6 +10,7 @@ import {MoonExpansion} from '../../moon/MoonExpansion';
 import {TileType} from '../../TileType';
 import {Card} from '../Card';
 import {Size} from '../render/Size';
+import {all} from '../Options';
 
 export class HE3ProductionQuotas extends Card implements IProjectCard {
   constructor() {
@@ -25,8 +26,8 @@ export class HE3ProductionQuotas extends Card implements IProjectCard {
         'Pay 1 steel per mine tile on the Moon to gain 4 heat per mine tile on the Moon. Raise the Mining Rate 1 step.',
         cardNumber: 'M57',
         renderData: CardRenderer.builder((b) => {
-          b.minus().steel(1).slash().moonMine({size: Size.SMALL}).any
-            .colon().text('4').heat(1).slash().moonMine({size: Size.SMALL}).any.br;
+          b.minus().steel(1).slash().moonMine({size: Size.SMALL, all})
+            .colon().text('4').heat(1).slash().moonMine({size: Size.SMALL, all}).br;
           b.moonMiningRate();
         }),
       },

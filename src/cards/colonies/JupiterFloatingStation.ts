@@ -28,7 +28,7 @@ export class JupiterFloatingStation extends Card implements IProjectCard, IResou
         cardNumber: 'C19',
         renderData: CardRenderer.builder((b) => {
           b.action('Add 1 floater to a JOVIAN CARD.', (eb) => {
-            eb.empty().startAction.floaters(1).secondaryTag(Tags.JOVIAN);
+            eb.empty().startAction.floaters(1, {secondaryTag: Tags.JOVIAN});
           }).br;
           b.or().br;
           b.action('Gain 1 M€ for every floater here [MAX 4].', (eb) => {

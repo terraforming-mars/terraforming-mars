@@ -39,7 +39,7 @@ export class CuriosityII extends Card implements CorporationCard {
               'When you place a tile on an area that has a RESOURCE placement bonus, ' +
               'or on top of another tile, you may pay 2 M€ to draw a card.',
               (eb) => {
-                eb.emptyTile('normal', Size.SMALL).nbsp.asterix().startEffect.megacredits(-2).cards(1);
+                eb.emptyTile('normal', {size: Size.SMALL}).nbsp.asterix().startEffect.megacredits(-2).cards(1);
               });
           });
         }),

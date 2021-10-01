@@ -27,7 +27,7 @@ export class Stratopolis extends Card implements IActionCard, IResourceCard {
         cardNumber: '248',
         renderData: CardRenderer.builder((b) => {
           b.action('Add 2 floaters to ANY VENUS CARD.', (eb) => {
-            eb.empty().startAction.floaters(2).secondaryTag(Tags.VENUS);
+            eb.empty().startAction.floaters(2, {secondaryTag: Tags.VENUS});
           }).br;
           b.production((pb) => pb.megacredits(2)).city().asterix();
           b.vpText('1 VP for every 3rd Floater on this card.');

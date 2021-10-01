@@ -13,6 +13,7 @@ import {PartyName} from '../../turmoil/parties/PartyName';
 import {REDS_RULING_POLICY_COST} from '../../constants';
 import {CardRenderer} from '../render/CardRenderer';
 import {Units} from '../../Units';
+import {digit} from '../Options';
 
 export class MagneticFieldGeneratorsPromo extends Card implements IProjectCard {
   constructor() {
@@ -27,10 +28,10 @@ export class MagneticFieldGeneratorsPromo extends Card implements IProjectCard {
         cardNumber: 'X33',
         renderData: CardRenderer.builder((b) => {
           b.production((pb) => {
-            pb.minus().energy(4).digit.br;
+            pb.minus().energy(4, {digit}).br;
             pb.plus().plants(2);
           }).br;
-          b.tr(3).digit.tile(TileType.MAGNETIC_FIELD_GENERATORS, true).asterix();
+          b.tr(3, {digit}).tile(TileType.MAGNETIC_FIELD_GENERATORS, true).asterix();
         }),
         description: 'Decrease your Energy production 4 steps and increase your Plant production 2 steps. Raise your TR 3 steps.',
       },

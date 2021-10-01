@@ -10,6 +10,7 @@ import {PartyName} from '../../turmoil/parties/PartyName';
 import {PlaceOceanTile} from '../../deferredActions/PlaceOceanTile';
 import {RemoveAnyPlants} from '../../deferredActions/RemoveAnyPlants';
 import {CardRenderer} from '../render/CardRenderer';
+import {all} from '../Options';
 
 export class Comet extends Card implements IProjectCard {
   constructor() {
@@ -24,7 +25,7 @@ export class Comet extends Card implements IProjectCard {
         description: 'Raise temperature 1 step and place an ocean tile. Remove up to 3 Plants from any player.',
         renderData: CardRenderer.builder((b) => {
           b.temperature(1).oceans(1).br;
-          b.minus().plants(-3).any;
+          b.minus().plants(-3, {all});
         }),
       },
     });

@@ -16,7 +16,7 @@ export class PoliticalUprising extends PreludeCard implements IProjectCard {
         cardNumber: 'Y03',
         renderData: CardRenderer.builder((b) => {
           b.delegates(4).br.br;
-          b.cards(1).secondaryTag(AltSecondaryTag.TURMOIL);
+          b.cards(1, {secondaryTag: AltSecondaryTag.TURMOIL});
         }),
         description: 'Place 4 delegates. Draw a Turmoil card.',
       },

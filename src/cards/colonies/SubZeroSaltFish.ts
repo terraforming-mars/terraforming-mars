@@ -11,6 +11,7 @@ import {CardRenderer} from '../render/CardRenderer';
 import {CardRequirements} from '../CardRequirements';
 import {Card} from '../Card';
 import {CardRenderDynamicVictoryPoints} from '../render/CardRenderDynamicVictoryPoints';
+import {all} from '../Options';
 
 export class SubZeroSaltFish extends Card implements IProjectCard, IResourceCard {
   constructor() {
@@ -28,7 +29,7 @@ export class SubZeroSaltFish extends Card implements IProjectCard, IResourceCard
           b.action('Add 1 Animal to this card.', (eb) => {
             eb.empty().startAction.animals(1);
           }).br;
-          b.production((pb) => pb.minus().plants(1).any).br;
+          b.production((pb) => pb.minus().plants(1, {all})).br;
           b.vpText('1 VP per 2 Animals on this card.');
         }),
         description: {

@@ -6,6 +6,7 @@ import {CardName} from '../../CardName';
 import {CardRenderer} from '../render/CardRenderer';
 import {Resources} from '../../Resources';
 import {Tags} from '../Tags';
+import {all} from '../Options';
 
 export class DustStorm extends Card implements IProjectCard {
   constructor() {
@@ -18,7 +19,7 @@ export class DustStorm extends Card implements IProjectCard {
       metadata: {
         cardNumber: 'Pf08',
         renderData: CardRenderer.builder((b) => {
-          b.minus().energy(1).any.asterix();
+          b.minus().energy(1, {all}).asterix();
           b.br;
           b.temperature(2);
         }),

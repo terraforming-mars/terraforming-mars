@@ -11,6 +11,7 @@ import {RemoveResourcesFromCard} from '../../deferredActions/RemoveResourcesFrom
 import {CardRequirements} from '../CardRequirements';
 import {CardRenderer} from '../render/CardRenderer';
 import {CardRenderDynamicVictoryPoints} from '../render/CardRenderDynamicVictoryPoints';
+import {all} from '../Options';
 
 export class Ants extends Card implements IActionCard, IProjectCard, IResourceCard {
   constructor() {
@@ -27,7 +28,7 @@ export class Ants extends Card implements IActionCard, IProjectCard, IResourceCa
         description: 'Requires 4% oxygen.',
         renderData: CardRenderer.builder((b) => {
           b.action('Remove 1 Microbe from any card to add 1 to this card.', (eb) => {
-            eb.microbes(1).any.startAction.microbes(1);
+            eb.microbes(1, {all}).startAction.microbes(1);
           }).br;
           b.vpText('1 VP per 2 Microbes on this card.');
         }),

@@ -25,7 +25,7 @@ export class MaxwellBase extends Card implements IActionCard {
         cardNumber: '238',
         renderData: CardRenderer.builder((b) => {
           b.action('Add 1 resource to ANOTHER VENUS CARD.', (eb) => {
-            eb.empty().startAction.wild(1).secondaryTag(Tags.VENUS);
+            eb.empty().startAction.wild(1, {secondaryTag: Tags.VENUS});
           }).br;
           b.production((pb) => pb.minus().energy(1)).nbsp.city().asterix();
         }),

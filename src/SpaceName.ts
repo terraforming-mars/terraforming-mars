@@ -21,7 +21,7 @@ export enum SpaceName {
     // Pathfinders
     TIKHONAROV = '20',
     LADON = '55',
-    FLAUGERGUES = '60',
+    FLAUGERGUES = '58',
     CHARYBDIS = '63',
 
     CERES_SPACEPORT = '75',

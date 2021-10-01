@@ -7,6 +7,7 @@ import {CardRenderer} from '../render/CardRenderer';
 import {Resources} from '../../Resources';
 import {Tags} from '../Tags';
 import {CardRequirements} from '../CardRequirements';
+import {played} from '../Options';
 
 export class MartianMonuments extends Card implements IProjectCard {
   constructor() {
@@ -20,7 +21,7 @@ export class MartianMonuments extends Card implements IProjectCard {
       metadata: {
         cardNumber: 'Pf09',
         renderData: CardRenderer.builder((b) => {
-          b.production(((pb) => pb.megacredits(1))).slash().mars(1).played;
+          b.production(((pb) => pb.megacredits(1))).slash().mars(1, {played});
         }),
         description: 'Requires that you own a city on Mars. Raise your M€ production 1 step for every Mars tag you own (including this.)',
       },

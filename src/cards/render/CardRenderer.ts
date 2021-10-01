@@ -383,8 +383,8 @@ class Builder {
     return this._appendToRow(new CardRenderItem(CardRenderItemType.SYNDICATE_FLEET, amount));
   }
 
-  public mars(amount: number): Builder {
-    this._appendToRow(new CardRenderItem(CardRenderItemType.MARS, amount));
+  public mars(amount: number, options?: ItemOptions): Builder {
+    this._appendToRow(new CardRenderItem(CardRenderItemType.MARS, amount, options));
     return this;
   }
 

@@ -32,10 +32,9 @@ export class ResearchOutpost extends Card implements IProjectCard {
   }
   private getAvailableSpaces(player: Player): Array<ISpace> {
     return player.game.board.getAvailableSpacesOnLand(player)
-      .filter((space) => {
-        const adjacentSpaces = player.game.board.getAdjacentSpaces(space);
-        return adjacentSpaces.filter((space) => space.tile !== undefined).length === 0;
-      });
+      .filter((space) => player.game.board.getAdjacentSpaces(space)
+        .every((space) => space.tile === undefined),
+      );
   }
   public canPlay(player: Player): boolean {
     return this.getAvailableSpaces(player).length > 0;

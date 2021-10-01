@@ -383,6 +383,11 @@ class Builder {
     return this._appendToRow(new CardRenderItem(CardRenderItemType.SYNDICATE_FLEET, amount));
   }
 
+  public mars(amount: number, options?: ItemOptions): Builder {
+    this._appendToRow(new CardRenderItem(CardRenderItemType.MARS, amount, options));
+    return this;
+  }
+
   public emptyTile(type: 'normal' | 'golden' = 'normal', options?: ItemOptions) {
     if (type === 'normal') {
       const normal = new CardRenderItem(CardRenderItemType.EMPTY_TILE, -1, options);

@@ -32,6 +32,17 @@ export class TestPlayer extends Player {
     }
   }
 
+  public getProductionForTest(): Units {
+    return {
+      megacredits: this.megaCreditProduction,
+      steel: this.steelProduction,
+      titanium: this.titaniumProduction,
+      plants: this.plantProduction,
+      energy: this.energyProduction,
+      heat: this.heatProduction,
+    };
+  }
+
   public getVictoryPoints(): VictoryPointsBreakdown {
     this.victoryPointsBreakdown = super.getVictoryPoints();
     return this.victoryPointsBreakdown;

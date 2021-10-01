@@ -223,6 +223,10 @@ export default Vue.extend({
           classes.push('card-tag-earth');
         } else if (type === CardRenderItemType.BUILDING) {
           classes.push('card-tag-building');
+        } else if (type === CardRenderItemType.CITY) {
+          classes.push('card-tag tag-city');
+        } else if (this.item.type === CardRenderItemType.MARS) {
+          classes.push('card-tag tag-mars');
         }
       }
 

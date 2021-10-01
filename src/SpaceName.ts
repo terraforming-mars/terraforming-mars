@@ -19,6 +19,11 @@ export enum SpaceName {
     STANFORD_TORUS = '69',
 
     // Pathfinders
+    TIKHONAROV = '20',
+    LADON = '55',
+    FLAUGERGUES = '60',
+    CHARYBDIS = '63',
+
     CERES_SPACEPORT = '75',
     DYSON_SCREENS = '76',
     LUNAR_EMBASSY = '77',

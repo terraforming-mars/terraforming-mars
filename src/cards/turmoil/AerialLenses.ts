@@ -8,6 +8,7 @@ import {PartyName} from '../../turmoil/parties/PartyName';
 import {RemoveAnyPlants} from '../../deferredActions/RemoveAnyPlants';
 import {CardRequirements} from '../CardRequirements';
 import {CardRenderer} from '../render/CardRenderer';
+import {all} from '../Options';
 
 export class AerialLenses extends Card implements IProjectCard {
   constructor() {
@@ -20,7 +21,7 @@ export class AerialLenses extends Card implements IProjectCard {
       metadata: {
         description: 'Requires that Kelvinists are ruling or that you have 2 delegates there. Remove up to 2 plants from any player. Increase your heat production 2 steps.',
         cardNumber: 'T01',
-        renderData: CardRenderer.builder((b) => b.minus().plants(-2).any.production((pb) => pb.heat(2))),
+        renderData: CardRenderer.builder((b) => b.minus().plants(-2, {all}).production((pb) => pb.heat(2))),
         victoryPoints: -1,
       },
     });

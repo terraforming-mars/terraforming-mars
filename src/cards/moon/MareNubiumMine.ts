@@ -25,7 +25,7 @@ export class MareNubiumMine extends MoonCard {
         cardNumber: 'M02',
         renderData: CardRenderer.builder((b) => {
           b.minus().titanium(1);
-          b.production((pb) => pb.titanium(1)).moonMine().secondaryTag(AltSecondaryTag.MOON_MINING_RATE).asterix();
+          b.production((pb) => pb.titanium(1)).moonMine({secondaryTag: AltSecondaryTag.MOON_MINING_RATE}).asterix();
         }),
       },
     }, {

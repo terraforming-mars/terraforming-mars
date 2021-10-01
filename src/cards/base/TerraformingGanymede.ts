@@ -9,6 +9,7 @@ import {PartyName} from '../../turmoil/parties/PartyName';
 import {REDS_RULING_POLICY_COST} from '../../constants';
 import {LogHelper} from '../../LogHelper';
 import {CardRenderer} from '../render/CardRenderer';
+import {played} from '../Options';
 
 export class TerraformingGanymede extends Card implements IProjectCard {
   constructor() {
@@ -21,7 +22,7 @@ export class TerraformingGanymede extends Card implements IProjectCard {
       metadata: {
         cardNumber: '197',
         renderData: CardRenderer.builder((b) => {
-          b.tr(1).slash().jovian().played;
+          b.tr(1).slash().jovian({played});
         }),
         description: 'Raise your TR 1 step for each Jovian tag you have, including this.',
         victoryPoints: 2,

@@ -10,6 +10,7 @@ import {PartyHooks} from '../../turmoil/parties/PartyHooks';
 import {PartyName} from '../../turmoil/parties/PartyName';
 import {REDS_RULING_POLICY_COST} from '../../constants';
 import {CardRenderer} from '../render/CardRenderer';
+import {digit} from '../Options';
 
 export class ImportedNitrogen extends Card implements IProjectCard {
   constructor() {
@@ -23,9 +24,9 @@ export class ImportedNitrogen extends Card implements IProjectCard {
         cardNumber: '163',
         renderData: CardRenderer.builder((b) => {
           b.tr(1).br;
-          b.plants(4).digit;
-          b.microbes(3).digit.asterix().nbsp;
-          b.animals(2).digit.asterix();
+          b.plants(4, {digit});
+          b.microbes(3, {digit}).asterix().nbsp;
+          b.animals(2, {digit}).asterix();
         }),
         description: 'Raise your TR 1 step and gain 4 Plants. Add 3 Microbes to ANOTHER card and 2 Animals to ANOTHER card.',
       },

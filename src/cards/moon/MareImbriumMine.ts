@@ -28,7 +28,7 @@ export class MareImbriumMine extends MoonCard implements IProjectCard, IMoonCard
         renderData: CardRenderer.builder((b) => {
           b.minus().titanium(1);
           b.production((pb) => pb.steel(1).titanium(1)).br;
-          b.moonMine().secondaryTag(AltSecondaryTag.MOON_MINING_RATE).asterix();
+          b.moonMine({secondaryTag: AltSecondaryTag.MOON_MINING_RATE}).asterix();
         }),
       },
     }, {

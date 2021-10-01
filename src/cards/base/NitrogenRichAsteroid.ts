@@ -9,6 +9,7 @@ import {MAX_TEMPERATURE, REDS_RULING_POLICY_COST} from '../../constants';
 import {PartyHooks} from '../../turmoil/parties/PartyHooks';
 import {PartyName} from '../../turmoil/parties/PartyName';
 import {CardRenderer} from '../render/CardRenderer';
+import {digit, played} from '../Options';
 
 export class NitrogenRichAsteroid extends Card implements IProjectCard {
   constructor() {
@@ -23,7 +24,7 @@ export class NitrogenRichAsteroid extends Card implements IProjectCard {
         renderData: CardRenderer.builder((b) => {
           b.production((pb) => {
             pb.plants(1).nbsp.or().br;
-            pb.plants(3).played.digit.colon().nbsp.plants(4).digit;
+            pb.plants(3, {played, digit}).colon().nbsp.plants(4, {digit});
           }).br;
           b.tr(2).temperature(1);
         }),

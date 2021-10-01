@@ -16,6 +16,7 @@ import {IAresData} from './ares/IAresData';
 import {LogMessage} from './LogMessage';
 import {SerializedBoard} from './boards/SerializedBoard';
 import {SerializedMoonData} from './moon/SerializedMoonData';
+import {SerializedPathfindersData} from './pathfinders/SerializedPathfindersData';
 
 export interface SerializedGame {
     activePlayer: PlayerId;
@@ -43,6 +44,7 @@ export interface SerializedGame {
     milestones: Array<IMilestone>;
     monsInsuranceOwner: PlayerId | undefined;
     moonData: SerializedMoonData | undefined;
+    pathfindersData: SerializedPathfindersData | undefined;
     oxygenLevel: number;
     passedPlayers: Array<PlayerId>;
     phase: Phase;

@@ -11,6 +11,7 @@ import {DecreaseAnyProduction} from '../../deferredActions/DecreaseAnyProduction
 import {CardRequirements} from '../CardRequirements';
 import {CardRenderer} from '../render/CardRenderer';
 import {CardRenderDynamicVictoryPoints} from '../render/CardRenderDynamicVictoryPoints';
+import {all} from '../Options';
 
 export class Birds extends Card implements IActionCard, IProjectCard, IResourceCard {
   constructor() {
@@ -29,7 +30,7 @@ export class Birds extends Card implements IActionCard, IProjectCard, IResourceC
             eb.empty().startAction.animals(1);
           }).br;
           b.production((pb) => {
-            pb.minus().plants(-2).any;
+            pb.minus().plants(-2, {all});
           });
         }),
         victoryPoints: CardRenderDynamicVictoryPoints.animals(1, 1),

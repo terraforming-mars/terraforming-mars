@@ -11,6 +11,7 @@ import {RemoveResourcesFromCard} from '../../deferredActions/RemoveResourcesFrom
 import {CardRequirements} from '../CardRequirements';
 import {CardRenderer} from '../render/CardRenderer';
 import {CardRenderDynamicVictoryPoints} from '../render/CardRenderDynamicVictoryPoints';
+import {all} from '../Options';
 
 export class Predators extends Card implements IProjectCard, IActionCard, IResourceCard {
   constructor() {
@@ -26,7 +27,7 @@ export class Predators extends Card implements IProjectCard, IActionCard, IResou
         cardNumber: '024',
         renderData: CardRenderer.builder((b) => {
           b.action('Remove 1 Animal from any card and add it to this card.', (eb) => {
-            eb.animals(1).any.startAction.animals(1);
+            eb.animals(1, {all}).startAction.animals(1);
           }).br;
           b.vpText('1 VP per Animal on this card.');
         }),

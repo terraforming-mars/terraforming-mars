@@ -6,6 +6,7 @@ import {CardRenderer} from '../render/CardRenderer';
 import {Card} from '../Card';
 import {ResourceType} from '../../ResourceType';
 import {IActionCard, IResourceCard} from '../ICard';
+import {played} from '../Options';
 
 export class LunaArchives extends Card implements IResourceCard, IActionCard {
   constructor() {
@@ -23,7 +24,7 @@ export class LunaArchives extends Card implements IResourceCard, IActionCard {
             (ab) => ab.empty().startAction.science().slash().moon());
           b.br;
           b.effect('When playing a Moon tag, Science resources here may be used as payment, and are worth 1M€ each.',
-            (eb) => eb.moon().played.startEffect.science().equals().megacredits(1));
+            (eb) => eb.moon(1, {played}).startEffect.science().equals().megacredits(1));
         }),
       },
     });

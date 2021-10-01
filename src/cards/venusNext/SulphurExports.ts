@@ -8,6 +8,7 @@ import {PartyHooks} from '../../turmoil/parties/PartyHooks';
 import {PartyName} from '../../turmoil/parties/PartyName';
 import {CardRenderer} from '../render/CardRenderer';
 import {Card} from '../Card';
+import {played} from '../Options';
 
 export class SulphurExports extends Card {
   constructor() {
@@ -21,7 +22,7 @@ export class SulphurExports extends Card {
         cardNumber: '250',
         renderData: CardRenderer.builder((b) => {
           b.venus(1).br;
-          b.production((pb) => pb.megacredits(1).slash().venus(1).played);
+          b.production((pb) => pb.megacredits(1).slash().venus(1, {played}));
         }),
         description: 'Increase Venus 1 step. Increase your M€ production 1 step for each Venus tag you have, including this.',
       },

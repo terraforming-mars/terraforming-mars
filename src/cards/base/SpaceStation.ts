@@ -5,6 +5,7 @@ import {Card} from '../Card';
 import {CardType} from '../CardType';
 import {CardName} from '../../CardName';
 import {CardRenderer} from '../render/CardRenderer';
+import {played} from '../Options';
 
 export class SpaceStation extends Card implements IProjectCard {
   constructor() {
@@ -19,7 +20,7 @@ export class SpaceStation extends Card implements IProjectCard {
         cardNumber: '025',
         renderData: CardRenderer.builder((b) => {
           b.effect('When you play a Space card, you pay 2 M€ less for it.', (eb) => {
-            eb.space().played.startEffect.megacredits(-2);
+            eb.space({played}).startEffect.megacredits(-2);
           });
         }),
         victoryPoints: 1,

@@ -12,6 +12,7 @@ import {GainProduction} from '../../deferredActions/GainProduction';
 import {CardRenderer} from '../render/CardRenderer';
 import {Units} from '../../Units';
 import {BoardType} from '../../boards/BoardType';
+import {digit} from '../Options';
 
 export class MiningGuild extends Card implements CorporationCard {
   constructor() {
@@ -27,7 +28,7 @@ export class MiningGuild extends Card implements CorporationCard {
         description: 'You start with 30 M€, 5 steel and 1 steel production.',
         renderData: CardRenderer.builder((b) => {
           b.br.br;
-          b.megacredits(30).nbsp.steel(5).digit.nbsp.production((pb) => pb.steel(1));
+          b.megacredits(30).nbsp.steel(5, {digit}).nbsp.production((pb) => pb.steel(1));
           b.corpBox('effect', (ce) => {
             ce.effect('Each time you get any steel or titanium as a placement bonus on the map, increase your steel production 1 step.', (eb) => {
               eb.steel(1).asterix().slash().titanium(1).asterix();

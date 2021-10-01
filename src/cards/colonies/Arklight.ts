@@ -10,6 +10,7 @@ import {IResourceCard} from '../ICard';
 import {Card} from '../Card';
 import {CardRenderer} from '../render/CardRenderer';
 import {CardRenderDynamicVictoryPoints} from '../render/CardRenderDynamicVictoryPoints';
+import {played} from '../Options';
 
 export class Arklight extends Card implements CorporationCard, IResourceCard {
   constructor() {
@@ -27,7 +28,7 @@ export class Arklight extends Card implements CorporationCard, IResourceCard {
           b.megacredits(45).nbsp.production((pb) => pb.megacredits(2));
           b.corpBox('effect', (ce) => {
             ce.effect('When you play an animal or plant tag, including this, add 1 animal to this card.', (eb) => {
-              eb.animals(1).played.slash().plants(1).played.startEffect.animals(1);
+              eb.animals(1, {played}).slash().plants(1, {played}).startEffect.animals(1);
             });
             ce.vSpace(); // to offset the description to the top a bit so it can be readable
           });

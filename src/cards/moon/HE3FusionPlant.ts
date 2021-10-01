@@ -9,6 +9,7 @@ import {Resources} from '../../Resources';
 import {CardRenderer} from '../render/CardRenderer';
 import {CardRequirements} from '../CardRequirements';
 import {Card} from '../Card';
+import {all} from '../Options';
 
 export class HE3FusionPlant extends Card implements IProjectCard {
   constructor() {
@@ -23,7 +24,7 @@ export class HE3FusionPlant extends Card implements IProjectCard {
             'Increase your energy production 1 step for each mining tile on the Moon.',
         cardNumber: 'M48',
         renderData: CardRenderer.builder((b) => {
-          b.production((pb) => pb.energy(1)).slash().moonMine().any;
+          b.production((pb) => pb.energy(1)).slash().moonMine({all});
         }),
       },
     });

@@ -3,7 +3,6 @@ import {CardRenderSymbol} from './CardRenderSymbol';
 import {Size} from './Size';
 import {CardRenderItemType} from './CardRenderItemType';
 import {TileType} from '../../TileType';
-import {Tags} from '../Tags';
 
 export type ItemType = CardRenderItem | CardRenderProductionBox | CardRenderSymbol | CardRenderEffect | CardRenderTile | string | undefined;
 
@@ -53,7 +52,7 @@ export class CardRenderEffect extends CardRenderer {
    */
   protected _validate(): void {
     if (this.rows.length !== 3) {
-      throw new Error('Card effect must have 3 arrays representing cause, delimiter and effect');
+      throw new Error('Card effect must have 3 arrays representing cause, delimiter and effect. If there is no cause, start with `empty`.');
     }
     if (this.rows[1].length !== 1) {
       throw new Error('Card effect delimiter array must contain exactly 1 item');
@@ -138,9 +137,11 @@ class Builder {
     return this._appendToRow(new CardRenderItem(CardRenderItemType.TEMPERATURE, amount));
   }
 
-  public oceans(amount: number, size: Size = Size.MEDIUM): Builder {
-    const item = new CardRenderItem(CardRenderItemType.OCEANS, amount);
-    item.size = size;
+  public oceans(amount: number, options?: ItemOptions): Builder {
+    // Is this necessary?
+    const opts = options ?? {size: Size.MEDIUM};
+    opts.size = opts.size ?? Size.MEDIUM;
+    const item = new CardRenderItem(CardRenderItemType.OCEANS, amount, options);
     return this._appendToRow(item);
   }
 
@@ -148,93 +149,85 @@ class Builder {
     return this._appendToRow(new CardRenderItem(CardRenderItemType.OXYGEN, amount));
   }
 
-  public venus(amount: number): Builder {
-    return this._appendToRow(new CardRenderItem(CardRenderItemType.VENUS, amount));
+  public venus(amount: number, options?: ItemOptions): Builder {
+    return this._appendToRow(new CardRenderItem(CardRenderItemType.VENUS, amount, options));
   }
 
-  public plants(amount: number): Builder {
-    return this._appendToRow(new CardRenderItem(CardRenderItemType.PLANTS, amount));
+  public plants(amount: number, options?: ItemOptions): Builder {
+    return this._appendToRow(new CardRenderItem(CardRenderItemType.PLANTS, amount, options));
   }
 
-  public microbes(amount: number): Builder {
-    return this._appendToRow(new CardRenderItem(CardRenderItemType.MICROBES, amount));
+  public microbes(amount: number, options?: ItemOptions): Builder {
+    return this._appendToRow(new CardRenderItem(CardRenderItemType.MICROBES, amount, options));
   }
 
-  public animals(amount: number): Builder {
-    return this._appendToRow(new CardRenderItem(CardRenderItemType.ANIMALS, amount));
+  public animals(amount: number, options?: ItemOptions): Builder {
+    return this._appendToRow(new CardRenderItem(CardRenderItemType.ANIMALS, amount, options));
   }
 
-  public heat(amount: number): Builder {
-    return this._appendToRow(new CardRenderItem(CardRenderItemType.HEAT, amount));
+  public heat(amount: number, options?: ItemOptions): Builder {
+    return this._appendToRow(new CardRenderItem(CardRenderItemType.HEAT, amount, options));
   }
 
-  public energy(amount: number): Builder {
-    return this._appendToRow(new CardRenderItem(CardRenderItemType.ENERGY, amount));
+  public energy(amount: number, options?: ItemOptions): Builder {
+    return this._appendToRow(new CardRenderItem(CardRenderItemType.ENERGY, amount, options));
   }
 
-  public titanium(amount: number, bigAmountShowDigit: boolean = true): Builder {
-    const item = new CardRenderItem(CardRenderItemType.TITANIUM, amount);
-    // override default showing a digit for items with amount > 5
-    // Done as an exception for 'Acquired Space Agency'
-    if (amount > 5 && bigAmountShowDigit === false) {
-      item.showDigit = false;
-    }
+  public titanium(amount: number, options?: ItemOptions): Builder {
+    const item = new CardRenderItem(CardRenderItemType.TITANIUM, amount, options);
     return this._appendToRow(item);
   }
 
-  public steel(amount: number): Builder {
-    return this._appendToRow(new CardRenderItem(CardRenderItemType.STEEL, amount));
+  public steel(amount: number, options?: ItemOptions): Builder {
+    return this._appendToRow(new CardRenderItem(CardRenderItemType.STEEL, amount, options));
   }
 
-  public tr(amount: number, size: Size = Size.MEDIUM, cancelled: boolean = false): Builder {
-    const item = new CardRenderItem(CardRenderItemType.TR, amount);
-    item.size = size;
-    item.cancelled = cancelled;
-    return this._appendToRow(item);
+  public tr(amount: number, options?: ItemOptions): Builder {
+    return this._appendToRow(new CardRenderItem(CardRenderItemType.TR, amount, options));
   }
 
-  public megacredits(amount: number, size: Size = Size.MEDIUM): Builder {
-    const item = new CardRenderItem(CardRenderItemType.MEGACREDITS, amount);
+  public megacredits(amount: number, options?: ItemOptions): Builder {
+    const item = new CardRenderItem(CardRenderItemType.MEGACREDITS, amount, options);
     item.amountInside = true;
     item.showDigit = false;
-    item.size = size;
+    item.size = options?.size ?? Size.MEDIUM;
     return this._appendToRow(item);
   }
 
-  public cards(amount: number): Builder {
-    return this._appendToRow(new CardRenderItem(CardRenderItemType.CARDS, amount));
+  public cards(amount: number, options?: ItemOptions): Builder {
+    return this._appendToRow(new CardRenderItem(CardRenderItemType.CARDS, amount, options));
   }
 
-  public floaters(amount: number): Builder {
-    return this._appendToRow(new CardRenderItem(CardRenderItemType.FLOATERS, amount));
+  public floaters(amount: number, options?: ItemOptions): Builder {
+    return this._appendToRow(new CardRenderItem(CardRenderItemType.FLOATERS, amount, options));
   }
 
-  public asteroids(amount: number): Builder {
-    return this._appendToRow(new CardRenderItem(CardRenderItemType.ASTEROIDS, amount));
+  public asteroids(amount: number, options?: ItemOptions): Builder {
+    return this._appendToRow(new CardRenderItem(CardRenderItemType.ASTEROIDS, amount, options));
   }
 
-  public event(): Builder {
-    return this._appendToRow(new CardRenderItem(CardRenderItemType.EVENT));
+  public event(options?: ItemOptions): Builder {
+    return this._appendToRow(new CardRenderItem(CardRenderItemType.EVENT, -1, options));
   }
 
-  public space(): Builder {
-    return this._appendToRow(new CardRenderItem(CardRenderItemType.SPACE));
+  public space(options?: ItemOptions): Builder {
+    return this._appendToRow(new CardRenderItem(CardRenderItemType.SPACE, -1, options));
   }
 
-  public earth(amount: number = -1): Builder {
-    return this._appendToRow(new CardRenderItem(CardRenderItemType.EARTH, amount));
+  public earth(amount: number = -1, options?: ItemOptions): Builder {
+    return this._appendToRow(new CardRenderItem(CardRenderItemType.EARTH, amount, options));
   }
 
-  public building(amount: number = -1): Builder {
-    return this._appendToRow(new CardRenderItem(CardRenderItemType.BUILDING, amount));
+  public building(amount: number = -1, options?: ItemOptions): Builder {
+    return this._appendToRow(new CardRenderItem(CardRenderItemType.BUILDING, amount, options));
   }
 
-  public jovian(): Builder {
-    return this._appendToRow(new CardRenderItem(CardRenderItemType.JOVIAN));
+  public jovian(options?: ItemOptions): Builder {
+    return this._appendToRow(new CardRenderItem(CardRenderItemType.JOVIAN, -1, options));
   }
 
-  public science(amount: number = 1): Builder {
-    return this._appendToRow(new CardRenderItem(CardRenderItemType.SCIENCE, amount));
+  public science(amount: number = 1, options?: ItemOptions): Builder {
+    return this._appendToRow(new CardRenderItem(CardRenderItemType.SCIENCE, amount, options));
   }
 
   public trade(): Builder {
@@ -244,9 +237,9 @@ class Builder {
     return this._appendToRow(new CardRenderItem(CardRenderItemType.TRADE_FLEET));
   }
 
-  public colonies(amount: number = 1, size: Size = Size.MEDIUM): Builder {
-    const item = new CardRenderItem(CardRenderItemType.COLONIES, amount);
-    item.size = size;
+  public colonies(amount: number = 1, options?: ItemOptions): Builder {
+    const item = new CardRenderItem(CardRenderItemType.COLONIES, amount, options);
+    item.size = options?.size ?? Size.MEDIUM;
     return this._appendToRow(item);
   }
 
@@ -256,17 +249,17 @@ class Builder {
     return this._appendToRow(item);
   }
 
-  public placeColony(): Builder {
-    return this._appendToRow(new CardRenderItem(CardRenderItemType.PLACE_COLONY));
+  public placeColony(options?: ItemOptions): Builder {
+    return this._appendToRow(new CardRenderItem(CardRenderItemType.PLACE_COLONY, -1, options));
   }
 
   public influence(amount: number): Builder {
     return this._appendToRow(new CardRenderItem(CardRenderItemType.INFLUENCE, amount));
   }
 
-  public city(size: Size = Size.MEDIUM) {
-    const item = new CardRenderItem(CardRenderItemType.CITY);
-    item.size = size;
+  public city(options?: ItemOptions) {
+    const item = new CardRenderItem(CardRenderItemType.CITY, -1, options);
+    item.size = options?.size ?? Size.MEDIUM;
     return this._appendToRow(item);
   }
 
@@ -279,24 +272,24 @@ class Builder {
     return this._appendToRow(item);
   }
 
-  public delegates(amount: number) {
-    return this._appendToRow(new CardRenderItem(CardRenderItemType.DELEGATES, amount));
+  public delegates(amount: number, options?: ItemOptions) {
+    return this._appendToRow(new CardRenderItem(CardRenderItemType.DELEGATES, amount, options));
   }
 
   public partyLeaders(amount: number = -1) {
     return this._appendToRow(new CardRenderItem(CardRenderItemType.PARTY_LEADERS, amount));
   }
 
-  public chairman() {
-    return this._appendToRow(new CardRenderItem(CardRenderItemType.CHAIRMAN));
+  public chairman(options?: ItemOptions) {
+    return this._appendToRow(new CardRenderItem(CardRenderItemType.CHAIRMAN, -1, options));
   }
 
   public noTags() {
     return this._appendToRow(new CardRenderItem(CardRenderItemType.NO_TAGS, -1));
   }
 
-  public wild(amount: number) {
-    return this._appendToRow(new CardRenderItem(CardRenderItemType.WILD, amount));
+  public wild(amount: number, options?: ItemOptions) {
+    return this._appendToRow(new CardRenderItem(CardRenderItemType.WILD, amount, options));
   }
 
   public preservation(amount: number) {
@@ -353,8 +346,8 @@ class Builder {
     return this._appendToRow(description);
   }
 
-  public moon(amount: number = -1): Builder {
-    return this._appendToRow(new CardRenderItem(CardRenderItemType.MOON, amount));
+  public moon(amount: number = -1, options?: ItemOptions): Builder {
+    return this._appendToRow(new CardRenderItem(CardRenderItemType.MOON, amount, options));
   }
 
   public resourceCube(amount = 1): Builder {
@@ -362,28 +355,28 @@ class Builder {
   }
 
   public moonColony(options?: ItemOptions | undefined): Builder {
-    return this._appendToRow(new CardRenderItem(CardRenderItemType.MOON_COLONY).withOptions(options));
+    return this._appendToRow(new CardRenderItem(CardRenderItemType.MOON_COLONY, 1, options));
   }
 
   public moonColonyRate(options?: ItemOptions): Builder {
-    return this._appendToRow(new CardRenderItem(CardRenderItemType.MOON_COLONY_RATE).withOptions(options));
+    return this._appendToRow(new CardRenderItem(CardRenderItemType.MOON_COLONY_RATE, 1, options));
   }
 
   // TODO(kberg): Replace moon road image with JUST a road, and add an altsecondary tag to support it.
   public moonRoad(options?: ItemOptions): Builder {
-    return this._appendToRow(new CardRenderItem(CardRenderItemType.MOON_ROAD).withOptions(options));
+    return this._appendToRow(new CardRenderItem(CardRenderItemType.MOON_ROAD, 1, options));
   }
 
   public moonLogisticsRate(options?: ItemOptions): Builder {
-    return this._appendToRow(new CardRenderItem(CardRenderItemType.MOON_LOGISTICS_RATE).withOptions(options));
+    return this._appendToRow(new CardRenderItem(CardRenderItemType.MOON_LOGISTICS_RATE, 1, options));
   }
 
   public moonMine(options?: ItemOptions): Builder {
-    return this._appendToRow(new CardRenderItem(CardRenderItemType.MOON_MINE).withOptions(options));
+    return this._appendToRow(new CardRenderItem(CardRenderItemType.MOON_MINE, 1, options));
   }
 
   public moonMiningRate(options?: ItemOptions): Builder {
-    return this._appendToRow(new CardRenderItem(CardRenderItemType.MOON_MINING_RATE).withOptions(options));
+    return this._appendToRow(new CardRenderItem(CardRenderItemType.MOON_MINING_RATE, 1, options));
   }
 
   public syndicateFleet(amount: number = 1): Builder {
@@ -395,15 +388,15 @@ class Builder {
     return this;
   }
 
-  public emptyTile(type: 'normal' | 'golden' = 'normal', size: Size = Size.MEDIUM) {
+  public emptyTile(type: 'normal' | 'golden' = 'normal', options?: ItemOptions) {
     if (type === 'normal') {
-      const normal = new CardRenderItem(CardRenderItemType.EMPTY_TILE, -1);
-      normal.size = size;
-      return this._appendToRow(normal);
+      const normal = new CardRenderItem(CardRenderItemType.EMPTY_TILE, -1, options);
+      normal.size = options?.size ?? Size.MEDIUM;
+      this._appendToRow(normal);
     } else if (type === 'golden') {
-      const golden = new CardRenderItem(CardRenderItemType.EMPTY_TILE_GOLDEN, -1);
-      golden.size = size;
-      return this._appendToRow(golden);
+      const golden = new CardRenderItem(CardRenderItemType.EMPTY_TILE_GOLDEN, -1, options);
+      golden.size = options?.size ?? Size.MEDIUM;
+      this._appendToRow(golden);
     }
     return this;
   }
@@ -526,108 +519,12 @@ class Builder {
     return this._appendToRow(CardRenderSymbol.vSpace(size));
   }
 
-  public get any(): Builder {
-    const row = this._currentRow();
-    const item = row.pop();
-    if (item === undefined) {
-      throw new Error('Called "any" without a CardRenderItem.');
-    }
-    if (!(item instanceof CardRenderItem)) {
-      throw new Error('"any" could be called on CardRenderItem only');
-    }
-
-    item.anyPlayer = true;
-    row.push(item);
-
-    return this;
+  public get openBrackets(): Builder {
+    return this._appendToRow(CardRenderSymbol.bracketOpen());
   }
 
-  /**
-   * Mark the last item in the queue as 'isPlayed'
-   * e.g. titanium().played will result in a resource circle instead of square
-   */
-  public get played(): Builder {
-    const row = this._currentRow();
-    const item = row.pop();
-    if (item === undefined) {
-      throw new Error('Called "played" without a CardRenderItem.');
-    }
-    if (!(item instanceof CardRenderItem)) {
-      throw new Error('"played" could be called on CardRenderItem only');
-    }
-
-    item.isPlayed = true;
-    row.push(item);
-
-    return this;
-  }
-
-  public get digit(): Builder {
-    const row = this._currentRow();
-    const item = row.pop();
-    if (item === undefined) {
-      throw new Error('Called "digit" without a CardRenderItem.');
-    }
-    if (!(item instanceof CardRenderItem)) {
-      throw new Error('"digit" could be called on CardRenderItem only');
-    }
-
-    item.showDigit = true;
-    row.push(item);
-
-    return this;
-  }
-
-  /**
-   * Mark any amount to be a multiplier 'X'
-   */
-  public get multiplier(): Builder {
-    const row = this._currentRow();
-    const item = row.pop();
-    if (item === undefined) {
-      throw new Error('Called "multiplier" without a CardRenderItem.');
-    }
-    if (!(item instanceof CardRenderItem)) {
-      throw new Error('"multiplier" could be called on CardRenderItem only');
-    }
-
-    item.amountInside = true;
-    item.multiplier = true;
-    row.push(item);
-
-    return this;
-  }
-
-  public secondaryTag(tag: Tags | AltSecondaryTag): Builder {
-    const row = this._currentRow();
-    const item = row.pop();
-    if (item === undefined) {
-      throw new Error('Called "secondaryTag" without a CardRenderItem.');
-    }
-    if (!(item instanceof CardRenderItem)) {
-      throw new Error('"secondaryTag" could be called on CardRenderItem only');
-    }
-
-    item.secondaryTag = tag;
-    row.push(item);
-
-    return this;
-  }
-  public get brackets(): Builder {
-    const row = this._currentRow();
-    const item = row.pop();
-    if (!(item instanceof CardRenderItem)) {
-      throw new Error('"brackets" could be called on CardRenderItem only');
-    }
-
-    if (item === undefined) {
-      throw new Error('Called "brackets" without a CardRenderItem.');
-    }
-    row.push(CardRenderSymbol.bracketOpen());
-    row.push(item);
-    row.push(CardRenderSymbol.bracketClose());
-
-    return this;
+  public get closeBrackets(): Builder {
+    return this._appendToRow(CardRenderSymbol.bracketClose());
   }
 
   /**

@@ -10,6 +10,7 @@ import {CardName} from '../../CardName';
 import {CardType} from '../CardType';
 import {CardRenderer} from '../render/CardRenderer';
 import {Units} from '../../Units';
+import {digit} from '../Options';
 
 export class UtopiaInvest extends Card implements IActionCard, CorporationCard {
   constructor() {
@@ -28,7 +29,7 @@ export class UtopiaInvest extends Card implements IActionCard, CorporationCard {
           b.megacredits(40).nbsp.production((pb) => pb.steel(1).titanium(1));
           b.corpBox('action', (ce) => {
             ce.action('Decrease any production to gain 4 resources of that kind.', (eb) => {
-              eb.production((eb) => eb.wild(1)).startAction.wild(4).digit;
+              eb.production((eb) => eb.wild(1)).startAction.wild(4, {digit});
             });
           });
         }),

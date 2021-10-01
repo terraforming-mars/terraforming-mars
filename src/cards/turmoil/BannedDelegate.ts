@@ -9,6 +9,7 @@ import {IParty} from '../../turmoil/parties/IParty';
 import {CardRequirements} from '../CardRequirements';
 import {CardRenderer} from '../render/CardRenderer';
 import {NeutralPlayer, Turmoil} from '../../turmoil/Turmoil';
+import {all} from '../Options';
 
 export class BannedDelegate extends Card implements IProjectCard {
   constructor() {
@@ -22,7 +23,7 @@ export class BannedDelegate extends Card implements IProjectCard {
         cardNumber: 'T02',
         description: 'Requires that you are Chairman. Remove any NON-LEADER delegate.',
         renderData: CardRenderer.builder((b) => {
-          b.minus().delegates(1).any;
+          b.minus().delegates(1, {all});
         }),
       },
     });

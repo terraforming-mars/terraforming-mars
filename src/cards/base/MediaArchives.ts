@@ -6,6 +6,7 @@ import {Player} from '../../Player';
 import {CardName} from '../../CardName';
 import {Resources} from '../../Resources';
 import {CardRenderer} from '../render/CardRenderer';
+import {all, played} from '../Options';
 
 export class MediaArchives extends Card implements IProjectCard {
   constructor() {
@@ -18,7 +19,7 @@ export class MediaArchives extends Card implements IProjectCard {
       metadata: {
         cardNumber: '107',
         renderData: CardRenderer.builder((b) => {
-          b.megacredits(1).slash().event().played.any;
+          b.megacredits(1).slash().event({played, all});
         }),
         description: 'Gain 1 M€ for each event EVER PLAYED by all players.',
       },

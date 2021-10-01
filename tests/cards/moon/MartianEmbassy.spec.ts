@@ -7,7 +7,7 @@ import {expect} from 'chai';
 
 const MOON_OPTIONS = TestingUtils.setCustomGameOptions({moonExpansion: true, pathfindersExpansion: true});
 
-describe('MicrosingularityPlant', () => {
+describe('MartianEmbassy', () => {
   let player: TestPlayer;
   let card: MartianEmbassy;
 

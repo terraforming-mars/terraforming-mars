@@ -60,7 +60,7 @@ export class GameHandler extends Handler {
         }
 
         if (gameReq.board === 'random') {
-          const boards = Object.values(BoardName);
+          const boards = Object.values(BoardName).filter((name) => name !== BoardName.ARABIA_TERRA);
           gameReq.board = boards[Math.floor(Math.random() * boards.length)];
         }
 

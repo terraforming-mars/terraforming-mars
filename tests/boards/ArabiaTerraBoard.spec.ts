@@ -13,6 +13,8 @@ import {ProcessorFactory} from '../../src/cards/moon/ProcessorFactory';
 import {SearchForLife} from '../../src/cards/base/SearchForLife';
 import {Decomposers} from '../../src/cards/base/Decomposers';
 import {Resources} from '../../src/Resources';
+import {LandClaim} from '../../src/cards/base/LandClaim';
+import {SelectSpace} from '../../src/inputs/SelectSpace';
 
 describe('Board', function() {
   let board : ArabiaTerraBoard;
@@ -91,5 +93,20 @@ describe('Board', function() {
     TestingUtils.runAllActions(game);
 
     expect(card.resourceCount).eq(2);
+  });
+
+  it('Can land-claim, and then place on, a cove space', () => {
+    const landClaim = new LandClaim();
+    const selectSpace = landClaim.play(player) as SelectSpace;
+    const space = board.getSpaces(SpaceType.COVE)[0];
+    expect(selectSpace.availableSpaces.map((space) => space.id)).contains(space.id);
+
+    selectSpace.cb(space);
+
+    expect(space.player?.id).equals(player.id);
+
+    player.game.addOceanTile(player, space.id);
+
+    expect(player.game.board.getSpace(space.id).tile?.tileType).equals(TileType.OCEAN);
   });
 });

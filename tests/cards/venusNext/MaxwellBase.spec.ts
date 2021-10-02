@@ -10,6 +10,11 @@ import {Player} from '../../../src/Player';
 import {Resources} from '../../../src/Resources';
 import {TestingUtils} from '../../TestingUtils';
 import {TestPlayers} from '../../TestPlayers';
+import {CardName} from '../../../src/CardName';
+import {Tags} from '../../../src/cards/Tags';
+import {CardType} from '../../../src/cards/CardType';
+import {ResourceType} from '../../../src/ResourceType';
+import {IProjectCard} from '../../../src/cards/IProjectCard';
 
 describe('MaxwellBase', function() {
   let card : MaxwellBase; let player : Player; let game : Game;
@@ -66,5 +71,28 @@ describe('MaxwellBase', function() {
     expect(action instanceof SelectCard).is.true;
     (action as SelectCard<ICard>).cb([card2]);
     expect(player.getResourcesOnCard(card2)).to.eq(1);
+  });
+
+  // This may seem like a weird test, but it's just verifying that a change
+  // removing legacy code works correctly.
+  //
+  // TODO(kberg): Replace this hand-made card with Floater Urbanism.
+  it('can Play - for a Venus card with an unusual resource', function() {
+    expect(card.canAct(player)).is.false;
+
+    const fakeCard: IProjectCard = {
+      name: 'HELLO' as CardName,
+      cost: 1,
+      tags: [Tags.VENUS],
+      play: () => undefined,
+      cardType: CardType.ACTIVE,
+      metadata: {
+        cardNumber: '1',
+      },
+      resourceType: ResourceType.SYNDICATE_FLEET,
+    };
+    player.playedCards.push(fakeCard);
+
+    expect(card.canAct(player)).is.true;
   });
 });

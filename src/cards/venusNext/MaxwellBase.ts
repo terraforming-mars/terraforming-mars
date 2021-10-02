@@ -5,7 +5,6 @@ import {SpaceName} from '../../SpaceName';
 import {SpaceType} from '../../SpaceType';
 import {Resources} from '../../Resources';
 import {IActionCard, ICard} from '../ICard';
-import {ResourceType} from '../../ResourceType';
 import {SelectCard} from '../../inputs/SelectCard';
 import {CardName} from '../../CardName';
 import {CardRequirements} from '../CardRequirements';
@@ -50,10 +49,7 @@ export class MaxwellBase extends Card implements IActionCard {
   }
 
   public getResCards(player: Player): ICard[] {
-    let resourceCards = player.getResourceCards(ResourceType.FLOATER);
-    resourceCards = resourceCards.concat(player.getResourceCards(ResourceType.MICROBE));
-    resourceCards = resourceCards.concat(player.getResourceCards(ResourceType.ANIMAL));
-    return resourceCards.filter((card) => card.tags.includes(Tags.VENUS));
+    return player.getResourceCards().filter((card) => card.tags.includes(Tags.VENUS));
   }
 
   public canAct(player: Player): boolean {

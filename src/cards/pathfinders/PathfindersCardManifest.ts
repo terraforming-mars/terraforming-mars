@@ -35,6 +35,7 @@ import {DustStorm} from './DustStorm';
 // import {HydrogenProcessingPlant} from './HydrogenProcessingPlant';
 // import {InterplanetaryTransport} from './InterplanetaryTransport';
 // import {Kickstarter} from './Kickstarter';
+import {LastResortIngenuity} from './LastResortIngenuity';
 // import {LobbyHalls} from './LobbyHalls';
 // import {LunarEmbassy} from './LunarEmbassy';
 // import {LuxuryEstate} from './LuxuryEstate';
@@ -122,7 +123,7 @@ export const PATHFINDERS_CARD_MANIFEST = new CardManifest({
     // {cardName: CardName.MARTIAN_DUST_PROCESSING_PLANT, Factory: MartianDustProcessingPlant},
     // {cardName: CardName.CULTIVATION_OF_VENUS, Factory: CultivationofVenus, compatibility: GameModule.Venus},
     // {cardName: CardName.EXPEDITION_TO_THE_SURFACE_VENUS, Factory: ExpeditiontotheSurfaceVenus, compatibility: GameModule.Venus},
-    // // {cardName: CardName.LAST_RESORT_INGENUITY, Factory: LastResortIngenuity},             // COMPLICATED PAYMENT RULES
+    {cardName: CardName.LAST_RESORT_INGENUITY, Factory: LastResortIngenuity},
     // // {cardName: CardName.CRASHLANDING, Factory: Crashlanding},                             // COMPLICATED ADJACENCY BONUS RULES
     // // {cardName: CardName.THINK_TANK, Factory: ThinkTank},                                  // COMPLICATED REQUIREMENT RULES
     // // {cardName: CardName.BOTANICAL_EXPERIENCE, Factory: BotanicalExperience},              // AUTOMATIC INCREASE, TARGETING RULES.

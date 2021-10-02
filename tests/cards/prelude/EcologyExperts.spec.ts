@@ -16,7 +16,7 @@ describe('EcologyExperts', function() {
 
   it('Gets requirement bonus', function() {
     expect(card.getRequirementBonus(player)).to.eq(0);
-    player.lastCardPlayed = card;
+    player.lastCardPlayed = card.name;
     expect(card.getRequirementBonus(player)).to.eq(50);
   });
 

@@ -114,7 +114,7 @@ export class Player implements ISerializable<SerializedPlayer> {
   // This generation / this round
   public actionsTakenThisRound: number = 0;
   private actionsThisGeneration: Set<CardName> = new Set();
-  public lastCardPlayed: IProjectCard | undefined;
+  public lastCardPlayed: CardName | undefined;
   private corporationInitialActionDone: boolean = false;
 
   // Cards
@@ -1447,7 +1447,7 @@ export class Player implements ISerializable<SerializedPlayer> {
     }
 
     if (selectedCard.cardType !== CardType.PROXY) {
-      this.lastCardPlayed = selectedCard;
+      this.lastCardPlayed = selectedCard.name;
       this.game.log('${0} played ${1}', (b) => b.player(this).card(selectedCard));
     }
 
@@ -2223,7 +2223,7 @@ export class Player implements ISerializable<SerializedPlayer> {
       timer: this.timer.serialize(),
     };
     if (this.lastCardPlayed !== undefined) {
-      result.lastCardPlayed = this.lastCardPlayed.name;
+      result.lastCardPlayed = this.lastCardPlayed;
     }
     return result;
   }
@@ -2267,9 +2267,7 @@ export class Player implements ISerializable<SerializedPlayer> {
     player.turmoilPolicyActionUsed = d.turmoilPolicyActionUsed;
     player.politicalAgendasActionUsedCount = d.politicalAgendasActionUsedCount;
 
-    player.lastCardPlayed = d.lastCardPlayed !== undefined ?
-      cardFinder.getProjectCardByName(d.lastCardPlayed) :
-      undefined;
+    player.lastCardPlayed = d.lastCardPlayed;
 
     // Rebuild removed from play cards (Playwrights)
     player.removedFromPlayCards = cardFinder.cardsFromJSON(d.removedFromPlayCards);

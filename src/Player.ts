@@ -727,7 +727,7 @@ export class Player implements ISerializable<SerializedPlayer> {
     return result;
   }
 
-  public getResourceCards(resource: ResourceType | undefined = undefined): Array<ICard> {
+  public getResourceCards(resource?: ResourceType): Array<ICard> {
     let result: Array<ICard> = this.playedCards.filter((card) => card.resourceType !== undefined);
 
     if (this.corporationCard !== undefined && this.corporationCard.resourceType !== undefined) {

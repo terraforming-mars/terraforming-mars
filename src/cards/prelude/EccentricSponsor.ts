@@ -19,7 +19,7 @@ export class EccentricSponsor extends PreludeCard {
     });
   }
   public getCardDiscount(player: Player) {
-    if (player.lastCardPlayed !== undefined && player.lastCardPlayed.name === this.name) {
+    if (player.lastCardPlayed === this.name) {
       return 25;
     }
     return 0;

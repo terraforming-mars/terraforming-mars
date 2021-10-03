@@ -7,6 +7,7 @@ import {TimerModel} from './TimerModel';
 import {GameModel} from './GameModel';
 import {PlayerId} from '../Player';
 import {SpectatorId} from '../Game';
+import {CardName} from '@/CardName';
 
 export interface ViewModel {
   game: GameModel;
@@ -36,6 +37,7 @@ export interface PublicPlayerModel {
   id: string; // Color
   influence: number;
   isActive: boolean;
+  lastCardPlayed?: CardName;
   megaCredits: number;
   megaCreditProduction: number;
   name: string;

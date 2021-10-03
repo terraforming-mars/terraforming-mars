@@ -29,7 +29,7 @@ export class Conscription extends Card implements IProjectCard {
   }
 
   public getCardDiscount(player: Player) {
-    if (player.lastCardPlayed !== undefined && player.lastCardPlayed.name === this.name) {
+    if (player.lastCardPlayed === this.name) {
       return 16;
     }
     return 0;

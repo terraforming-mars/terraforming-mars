@@ -154,6 +154,36 @@
                         <tspan x="4" dy="12">Mons</tspan>
                     </text>
                 </g>
+
+                <g v-if="boardName === 'arabia terra'" id="tikhonarov" transform="translate(487, 185)">
+                    <text class="board-caption">
+                        <tspan>Tikhonarov</tspan>
+                    </text>
+                    <line x1="15" y1="5" x2="3" y2="20" class="board-line"></line>
+                    <text x="1" y="22" class="board-caption board_caption--black">&#x25cf;</text>
+                </g>
+                <g v-if="boardName === 'arabia terra'" id="ladon" transform="translate(286, 496)">
+                    <text class="board-caption">
+                        <tspan>Ladon</tspan>
+                    </text>
+                    <line x1="20" y1="-12" x2="17" y2="-70" class="board-line"></line>
+                    <text x="14" y="-68" class="board-caption board_caption--black">&#x25cf;</text>
+                </g>
+                <g v-if="boardName === 'arabia terra'" id="flaugergues" transform="translate(480, 405)">
+                    <text class="board-caption">
+                        <tspan>Flaugergues</tspan>
+                    </text>
+                    <line x1="0" y1="2" x2="-15" y2="10" class="board-line"></line>
+                    <text x="-17" y="12" class="board-caption board_caption--black">&#x25cf;</text>
+                </g>
+                <g v-if="boardName === 'arabia terra'" id="charybdis" transform="translate(455, 450)">
+                    <text class="board-caption">
+                        <tspan>Charybdis</tspan>
+                    </text>
+                    <line x1="0" y1="2" x2="-15" y2="10" class="board-line"></line>
+                    <text x="-17" y="12" class="board-caption board_caption--black">&#x25cf;</text>
+                </g>
+
             </svg>
         </div>
     </div>

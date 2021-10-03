@@ -2,6 +2,7 @@ import {GameOptions} from '../Game';
 import {Player} from '../Player';
 import {Random} from '../Random';
 import {SpaceBonus} from '../SpaceBonus';
+import {SpaceName} from '../SpaceName';
 import {SpaceType} from '../SpaceType';
 import {Board} from './Board';
 import {BoardBuilder} from './BoardBuilder';
@@ -22,11 +23,11 @@ export class ArabiaTerraBoard extends Board {
     const SCIENCE = SpaceBonus.SCIENCE;
 
     // y=0
-    builder.ocean().ocean(PLANT).land().land().land(DRAW_CARD, DRAW_CARD);
+    builder.ocean().ocean(PLANT).land().land().ocean(DRAW_CARD, DRAW_CARD);
     // y=1
     builder.ocean(MICROBE, MICROBE, DRAW_CARD).ocean(PLANT).land(PLANT, PLANT).land().land(PLANT).land(PLANT);
     // y=2
-    builder.land(PLANT, STEEL).land(PLANT).land(DATA, DATA, DRAW_CARD).land(STEEL).land(STEEL).land(STEEL, PLANT).cove(STEEL, TITANIUM);
+    builder.land(PLANT, STEEL).ocean(PLANT).land(DATA, DATA, DRAW_CARD).land(STEEL).land(STEEL).land(STEEL, PLANT).cove(STEEL, TITANIUM);
     // y=3
     builder.land(PLANT, PLANT).land(PLANT).ocean(PLANT, PLANT).land().land().land().land(STEEL, STEEL).land();
     // y=4
@@ -52,7 +53,12 @@ export class ArabiaTerraBoard extends Board {
     return [];
   }
   public getVolcanicSpaceIds() {
-    return [];
+    return [
+      SpaceName.TIKHONAROV,
+      SpaceName.LADON,
+      SpaceName.FLAUGERGUES,
+      SpaceName.CHARYBDIS,
+    ];
   }
 
   public getSpaces(spaceType: SpaceType): Array<ISpace> {

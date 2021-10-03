@@ -16,5 +16,5 @@ export interface CardModel {
     isDisabled: boolean;
     warning?: string | Message;
     reserveUnits: Readonly<Units>;
-    bonusResource?: Resources | undefined;
+    bonusResource?: Array<Resources.STEEL | Resources.TITANIUM>;
 }

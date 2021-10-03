@@ -4,7 +4,7 @@ import {Tags} from './cards/Tags';
 
 export interface SerializedCard {
   allTags?: Array<Tags>;
-  bonusResource?: Resources;
+  bonusResource?: (Resources.STEEL | Resources.TITANIUM) | Array<Resources.STEEL | Resources.TITANIUM>;
   isDisabled?: boolean;
   name: CardName;
   resourceCount?: number;

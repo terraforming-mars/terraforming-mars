@@ -2338,7 +2338,7 @@ export class Player implements ISerializable<SerializedPlayer> {
         });
       }
       if (card instanceof MiningCard && element.bonusResource !== undefined) {
-        card.bonusResource = element.bonusResource;
+        card.bonusResource = Array.isArray(element.bonusResource) ? element.bonusResource : [element.bonusResource];
       }
       return card;
     });

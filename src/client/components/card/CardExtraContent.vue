@@ -29,9 +29,9 @@ export default Vue.extend({
       const miningCard = [CardName.MINING_RIGHTS, CardName.MINING_AREA, CardName.MINING_RIGHTS_ARES, CardName.MINING_AREA_ARES];
       if (miningCard.includes(card.name)) {
         if (metal === Resources.TITANIUM) {
-          return card.bonusResource === Resources.TITANIUM;
+          return card.bonusResource?.includes(Resources.TITANIUM) === true;
         } else if (metal === Resources.STEEL) {
-          return card.bonusResource === Resources.STEEL;
+          return card.bonusResource?.includes(Resources.STEEL) === true;
         }
       }
       return false;

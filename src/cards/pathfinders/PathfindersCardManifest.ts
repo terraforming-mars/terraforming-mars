@@ -9,7 +9,7 @@ import {AgroDrones} from './AgroDrones';
 // import {AsteroidResources} from './AsteroidResources';
 import {BreedingFarms} from './BreedingFarms';
 // import {CassiniStation} from './CassiniStation';
-// import {CeresSpaceport} from './CeresSpaceport';
+import {CeresSpaceport} from './CeresSpaceport';
 // import {CO2Reducers} from './CO2Reducers';
 // import {CommunicationCenter} from './CommunicationCenter';
 // import {ControlledBloom} from './ControlledBloom';
@@ -23,7 +23,7 @@ import {BreedingFarms} from './BreedingFarms';
 // import {DesignCompany} from './DesignCompany';
 // import {DesignedOrganisms} from './DesignedOrganisms';
 import {DustStorm} from './DustStorm';
-// import {DysonScreens} from './DysonScreens';
+import {DysonScreens} from './DysonScreens';
 // import {EarlyExpedition} from './EarlyExpedition';
 // import {EconomicEspionage} from './EconomicEspionage';
 // import {EconomicHelp} from './EconomicHelp';
@@ -36,7 +36,7 @@ import {DustStorm} from './DustStorm';
 // import {InterplanetaryTransport} from './InterplanetaryTransport';
 // import {Kickstarter} from './Kickstarter';
 // import {LobbyHalls} from './LobbyHalls';
-// import {LunarEmbassy} from './LunarEmbassy';
+import {LunarEmbassy} from './LunarEmbassy';
 // import {LuxuryEstate} from './LuxuryEstate';
 // import {MartianCulture} from './MartianCulture';
 // import {MartianDustProcessingPlant} from './MartianDustProcessingPlant';
@@ -89,9 +89,9 @@ export const PATHFINDERS_CARD_MANIFEST = new CardManifest({
     {cardName: CardName.MUSEUM_OF_EARLY_COLONISATION, Factory: MuseumofEarlyColonisation},
     {cardName: CardName.TERRAFORMING_CONTROL_STATION, Factory: TerraformingControlStation, compatibility: GameModule.Venus},
     // // {cardName: CardName.MARTIAN_TRANSHIPMENT_STATION, Factory: MartianTranshipmentStation},  // COMPLICATED EFFECT.
-    // {cardName: CardName.CERES_SPACEPORT, Factory: CeresSpaceport},
-    // {cardName: CardName.DYSON_SCREENS, Factory: DysonScreens},
-    // {cardName: CardName.LUNAR_EMBASSY, Factory: LunarEmbassy},
+    {cardName: CardName.CERES_SPACEPORT, Factory: CeresSpaceport},
+    {cardName: CardName.DYSON_SCREENS, Factory: DysonScreens},
+    {cardName: CardName.LUNAR_EMBASSY, Factory: LunarEmbassy},
     // // {cardName: CardName.GEOLOGICAL_EXPEDITION, Factory: GeologicalExpedition},               // Touches tile placement.
     // {cardName: CardName.EARLY_EXPEDITION, Factory: EarlyExpedition},
     // {cardName: CardName.HYDROGEN_PROCESSING_PLANT, Factory: HydrogenProcessingPlant},

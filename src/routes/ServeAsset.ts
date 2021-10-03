@@ -40,6 +40,8 @@ export class ServeAsset extends Handler {
     this.cache.set('build/styles.css', styles);
     const compressed = fileApi.readFileSync('build/styles.css.gz');
     this.cache.set('build/styles.css.gz', compressed);
+    const brotli = fileApi.readFileSync('build/styles.css.br');
+    this.cache.set('build/styles.css.br', brotli);
   }
 
   public get(req: http.IncomingMessage, res: http.ServerResponse, ctx: IContext): void {
@@ -109,6 +111,9 @@ export class ServeAsset extends Handler {
       return {file: urlPath};
 
     case 'styles.css':
+      if (encodings.has('br')) {
+        return {file: 'build/styles.css.br', encoding: 'br'};
+      }
       if (encodings.has('gzip')) {
         return {file: 'build/styles.css.gz', encoding: 'gzip'};
       }

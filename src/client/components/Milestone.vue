@@ -55,7 +55,7 @@ export default Vue.extend({
       showDescription[milestone.milestone.name] = false;
     }
     return {
-      showList: this.milestones_list.filter((milestone) => milestone.player_name).length === MAX_MILESTONES ? false : true,
+      showList: this.milestones_list.filter((milestone) => milestone.player_name !== undefined).length === MAX_MILESTONES ? false : true,
       showDescription,
     };
   },

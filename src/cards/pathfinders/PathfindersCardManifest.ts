@@ -21,10 +21,10 @@ import {BreedingFarms} from './BreedingFarms';
 // import {DeclarationofIndependence} from './DeclarationofIndependence';
 // import {DeepSpaceOperations} from './DeepSpaceOperations';
 // import {DesignCompany} from './DesignCompany';
-// import {DesignedOrganisms} from './DesignedOrganisms';
+import {DesignedOrganisms} from './DesignedOrganisms';
 import {DustStorm} from './DustStorm';
 // import {DysonScreens} from './DysonScreens';
-// import {EarlyExpedition} from './EarlyExpedition';
+import {EarlyExpedition} from './EarlyExpedition';
 // import {EconomicEspionage} from './EconomicEspionage';
 // import {EconomicHelp} from './EconomicHelp';
 // import {ExpeditiontotheSurfaceVenus} from './ExpeditiontotheSurfaceVenus';
@@ -32,12 +32,12 @@ import {DustStorm} from './DustStorm';
 // import {FloaterUrbanism} from './FloaterUrbanism';
 // import {HighTempSuperconductors} from './HighTempSuperconductors';
 // import {HydrogenBombardment} from './HydrogenBombardment';
-// import {HydrogenProcessingPlant} from './HydrogenProcessingPlant';
+import {HydrogenProcessingPlant} from './HydrogenProcessingPlant';
 // import {InterplanetaryTransport} from './InterplanetaryTransport';
 // import {Kickstarter} from './Kickstarter';
 // import {LobbyHalls} from './LobbyHalls';
 // import {LunarEmbassy} from './LunarEmbassy';
-// import {LuxuryEstate} from './LuxuryEstate';
+import {LuxuryEstate} from './LuxuryEstate';
 // import {MartianCulture} from './MartianCulture';
 // import {MartianDustProcessingPlant} from './MartianDustProcessingPlant';
 import {MartianMonuments} from './MartianMonuments';
@@ -51,12 +51,12 @@ import {OrbitalLaboratories} from './OrbitalLaboratories';
 // import {OzoneGenerators} from './OzoneGenerators';
 // import {PersonalAgenda} from './PersonalAgenda';
 // import {Pollinators} from './Pollinators';
-// import {PowerPlant} from './PowerPlant';
+import {PowerPlant} from './PowerPlant';
 import {PrefabricationofHumanHabitats} from './PrefabricationofHumanHabitats';
 // import {PublicSponsoredGrant} from './PublicSponsoredGrant';
 import {RareEarthElements} from './RareEarthElements';
 // import {ResearchGrant} from './ResearchGrant';
-// import {ReturntoAbandonedTechnology} from './ReturntoAbandonedTechnology';
+import {ReturntoAbandonedTechnology} from './ReturntoAbandonedTechnology';
 // import {RichDeposits} from './RichDeposits';
 // import {SecretLabs} from './SecretLabs';
 // import {SmallComet} from './SmallComet';
@@ -65,7 +65,7 @@ import {RareEarthElements} from './RareEarthElements';
 // import {SoilDetoxification} from './SoilDetoxification';
 // import {Solarpedia} from './Solarpedia';
 // import {SolarStorm} from './SolarStorm';
-// import {SpaceDebrisCleaningOperation} from './SpaceDebrisCleaningOperation';
+import {SpaceDebrisCleaningOperation} from './SpaceDebrisCleaningOperation';
 // import {SpaceRelay} from './SpaceRelay';
 import {TerraformingControlStation} from './TerraformingControlStation';
 // import {TerraformingRobots} from './TerraformingRobots';
@@ -93,13 +93,13 @@ export const PATHFINDERS_CARD_MANIFEST = new CardManifest({
     // {cardName: CardName.DYSON_SCREENS, Factory: DysonScreens},
     // {cardName: CardName.LUNAR_EMBASSY, Factory: LunarEmbassy},
     // // {cardName: CardName.GEOLOGICAL_EXPEDITION, Factory: GeologicalExpedition},               // Touches tile placement.
-    // {cardName: CardName.EARLY_EXPEDITION, Factory: EarlyExpedition},
-    // {cardName: CardName.HYDROGEN_PROCESSING_PLANT, Factory: HydrogenProcessingPlant},
-    // {cardName: CardName.POWER_PLANT_PATHFINDERS, Factory: PowerPlant},
-    // {cardName: CardName.LUXURY_ESTATE, Factory: LuxuryEstate},
-    // {cardName: CardName.RETURN_TO_ABANDONED_TECHNOLOGY, Factory: ReturntoAbandonedTechnology},
-    // {cardName: CardName.DESIGNED_ORGANISMS, Factory: DesignedOrganisms},
-    // {cardName: CardName.SPACE_DEBRIS_CLEANING_OPERATION, Factory: SpaceDebrisCleaningOperation},
+    {cardName: CardName.EARLY_EXPEDITION, Factory: EarlyExpedition},
+    {cardName: CardName.HYDROGEN_PROCESSING_PLANT, Factory: HydrogenProcessingPlant},
+    {cardName: CardName.POWER_PLANT_PATHFINDERS, Factory: PowerPlant},
+    {cardName: CardName.LUXURY_ESTATE, Factory: LuxuryEstate},
+    {cardName: CardName.RETURN_TO_ABANDONED_TECHNOLOGY, Factory: ReturntoAbandonedTechnology},
+    {cardName: CardName.DESIGNED_ORGANISMS, Factory: DesignedOrganisms},
+    {cardName: CardName.SPACE_DEBRIS_CLEANING_OPERATION, Factory: SpaceDebrisCleaningOperation},
     // // {cardName: CardName.PRIVATE_SECURITY, Factory: PrivateSecurity},                        // PROTECTING RESOURCES
     // {cardName: CardName.SECRET_LABS, Factory: SecretLabs},
     // {cardName: CardName.CYANOBACTERIA, Factory: Cyanobacteria},

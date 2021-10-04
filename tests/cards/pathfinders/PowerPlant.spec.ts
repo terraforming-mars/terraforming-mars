@@ -8,12 +8,11 @@ import {Units} from '../../../src/Units';
 describe('PowerPlant', function() {
   let card: PowerPlant;
   let player: TestPlayer;
-  let game: Game;
 
   beforeEach(function() {
     card = new PowerPlant();
     player = TestPlayers.BLUE.newPlayer();
-    game = Game.newInstance('foobar', [player], player);
+    Game.newInstance('foobar', [player], player);
     player.playedCards.push(card);
   });
 

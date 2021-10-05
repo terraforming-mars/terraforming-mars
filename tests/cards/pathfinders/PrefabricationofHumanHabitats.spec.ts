@@ -18,13 +18,13 @@ describe('PrefabricationofHumanHabitats', function() {
   });
 
   it('canPlay', function() {
-    expect(card.canPlay(player)).is.false;
+    expect(player.canPlayForFree(card)).is.false;
 
     player.setProductionForTest({steel: 0});
-    expect(card.canPlay(player)).is.false;
+    expect(player.canPlayForFree(card)).is.false;
 
     player.setProductionForTest({steel: 1});
-    expect(card.canPlay(player)).is.true;
+    expect(player.canPlayForFree(card)).is.true;
   });
 
   it('play', function() {

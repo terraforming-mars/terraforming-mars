@@ -1813,6 +1813,7 @@ export class Player implements ISerializable<SerializedPlayer> {
     return this.canPlayForFree(card);
   }
 
+  // Verify if requirements for the card can be met, ignoring the project cost.
   public canPlayForFree(card: IProjectCard): boolean {
     if (card.requirements !== undefined && !card.requirements.satisfies(this)) {
       return false;

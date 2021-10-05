@@ -16,12 +16,12 @@ describe('Penguins', function() {
 
   it('Can\'t play', function() {
     TestingUtils.maxOutOceans(player, 7);
-    expect(card.canPlay(player)).is.not.true;
+    expect(player.canPlayForFree(card)).is.not.true;
   });
 
   it('Should play', function() {
     TestingUtils.maxOutOceans(player, 8);
-    expect(card.canPlay(player)).is.true;
+    expect(player.canPlayForFree(card)).is.true;
   });
 
   it('Should act', function() {

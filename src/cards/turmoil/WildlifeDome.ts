@@ -32,9 +32,6 @@ export class WildlifeDome extends Card implements IProjectCard {
   }
 
   public canPlay(player: Player): boolean {
-    if (!super.canPlay(player)) {
-      return false;
-    }
     const canPlaceTile = player.game.board.getAvailableSpacesForGreenery(player).length > 0;
     const oxygenMaxed = player.game.getOxygenLevel() === MAX_OXYGEN_LEVEL;
 

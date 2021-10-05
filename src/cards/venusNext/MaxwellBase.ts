@@ -37,7 +37,7 @@ export class MaxwellBase extends Card implements IActionCard {
     });
   };
   public canPlay(player: Player): boolean {
-    return player.getProduction(Resources.ENERGY) >= 1 && super.canPlay(player);
+    return player.getProduction(Resources.ENERGY) >= 1;
   }
   public play(player: Player) {
     player.addProduction(Resources.ENERGY, -1);

@@ -17,12 +17,12 @@ describe('KelpFarming', function() {
   });
 
   it('Can\'t play', function() {
-    expect(card.canPlay(player)).is.not.true;
+    expect(player.canPlayForFree(card)).is.not.true;
   });
 
   it('Should play', function() {
     TestingUtils.maxOutOceans(player, 6);
-    expect(card.canPlay(player)).is.true;
+    expect(player.canPlayForFree(card)).is.true;
 
     const plantsCount = player.plants;
     card.play(player);

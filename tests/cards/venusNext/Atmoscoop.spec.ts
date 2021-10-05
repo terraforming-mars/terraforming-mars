@@ -26,12 +26,12 @@ describe('Atmoscoop', function() {
 
   it('Can\'t play', function() {
     player.playedCards.push(new Research());
-    expect(card.canPlay(player)).is.not.true;
+    expect(player.canPlayForFree(card)).is.not.true;
   });
 
   it('Should play - no targets', function() {
     player.playedCards.push(new Research(), new SearchForLife());
-    expect(card.canPlay(player)).is.true;
+    expect(player.canPlayForFree(card)).is.true;
 
     const action = card.play(player) as OrOptions;
     expect(action instanceof OrOptions).is.true;

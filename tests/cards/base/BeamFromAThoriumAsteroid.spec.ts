@@ -13,12 +13,12 @@ describe('BeamFromAThoriumAsteroid', function() {
   });
 
   it('Cannot play without a Jovian tag', function() {
-    expect(card.canPlay(player)).is.not.true;
+    expect(player.canPlayForFree(card)).is.not.true;
   });
 
   it('Should play', function() {
     player.playedCards.push(card);
-    expect(card.canPlay(player)).is.true;
+    expect(player.canPlayForFree(card)).is.true;
 
     card.play(player);
     expect(player.getProduction(Resources.HEAT)).to.eq(3);

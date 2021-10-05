@@ -12,12 +12,12 @@ describe('EventAnalysts', function() {
 
     const gameOptions = TestingUtils.setCustomGameOptions();
     const game = Game.newInstance('foobar', [player], player, gameOptions);
-    expect(card.canPlay(player)).is.not.true;
+    expect(player.canPlayForFree(card)).is.not.true;
 
         game.turmoil!.sendDelegateToParty(player.id, PartyName.SCIENTISTS, game);
         game.turmoil!.sendDelegateToParty(player.id, PartyName.SCIENTISTS, game);
         game.turmoil!.sendDelegateToParty(player.id, PartyName.SCIENTISTS, game);
-        expect(card.canPlay(player)).is.true;
+        expect(player.canPlayForFree(card)).is.true;
 
         card.play(player);
         expect(game.turmoil!.getPlayerInfluence(player)).to.eq(3);

@@ -88,10 +88,7 @@ export abstract class Card {
   public get reserveUnits(): Units {
     return this.properties.reserveUnits || Units.EMPTY;
   }
-  public canPlay(player: Player) {
-    if (this.properties.requirements === undefined) {
-      return true;
-    }
-    return this.properties.requirements.satisfies(player);
+  public canPlay(_player: Player) {
+    return true;
   }
 }

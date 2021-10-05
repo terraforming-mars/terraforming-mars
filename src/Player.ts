@@ -1278,11 +1278,11 @@ export class Player implements ISerializable<SerializedPlayer> {
   }
 
   private canUseSteel(card: ICard): boolean {
-    return card.tags.includes(Tags.BUILDING);
+    return this.lastCardPlayed === CardName.LAST_RESORT_INGENUITY || card.tags.includes(Tags.BUILDING);
   }
 
   private canUseTitanium(card: ICard): boolean {
-    return card.tags.includes(Tags.SPACE);
+    return this.lastCardPlayed === CardName.LAST_RESORT_INGENUITY || card.tags.includes(Tags.SPACE);
   }
 
   private canUseMicrobes(card: ICard): boolean {
@@ -1324,8 +1324,8 @@ export class Player implements ISerializable<SerializedPlayer> {
     const cardCost: number = this.getCardCost(selectedCard);
     let totalToPay: number = 0;
 
-    const canUseSteel: boolean = this.canUseSteel(selectedCard);
-    const canUseTitanium: boolean = this.canUseTitanium(selectedCard);
+    const canUseSteel = this.canUseSteel(selectedCard);
+    const canUseTitanium = this.canUseTitanium(selectedCard);
 
     if (canUseSteel && howToPay.steel > 0) {
       if (howToPay.steel > this.steel) {

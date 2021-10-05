@@ -4,7 +4,6 @@ import {GlobalDustStorm} from '../../../src/turmoil/globalEvents/GlobalDustStorm
 import {GlobalEventDealer, getGlobalEventByName} from '../../../src/turmoil/globalEvents/GlobalEventDealer';
 import {GlobalEventName} from '../../../src/turmoil/globalEvents/GlobalEventName';
 import {IGlobalEvent} from '../../../src/turmoil/globalEvents/IGlobalEvent';
-import {MinersOnStrike} from '../../../src/turmoil/globalEvents/MinersOnStrike';
 import {ScientificCommunity} from '../../../src/turmoil/globalEvents/ScientificCommunity';
 import {SerializedGlobalEventDealer} from '../../../src/turmoil/globalEvents/SerializedGlobalEventDealer';
 import {SponsoredProjects} from '../../../src/turmoil/globalEvents/SponsoredProjects';

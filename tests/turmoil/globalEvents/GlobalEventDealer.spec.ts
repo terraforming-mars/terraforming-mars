@@ -61,9 +61,4 @@ describe('GlobalEventDealer', () => {
       expect(getGlobalEventByName(card.name), card.name + ' cannot be retrieved, card is probably missing from ALL_EVENTS').to.deep.eq(card);
     }
   });
-
-  // TODO(bafolts): remove after 2021-05-08
-  it('gets Miners On Strike by Miners Of Strike', () => {
-    expect(getGlobalEventByName('Miners Of Strike' as GlobalEventName) instanceof MinersOnStrike).is.true;
-  });
 });

@@ -17,11 +17,11 @@ describe('ParliamentHall', function() {
 
     const gameOptions = TestingUtils.setCustomGameOptions();
     const game = Game.newInstance('foobar', [player], player, gameOptions);
-    expect(card.canPlay(player)).is.not.true;
+    expect(player.canPlayIgnoringCost(card)).is.not.true;
 
     const mars = game.turmoil!.getPartyByName(PartyName.MARS)!;
     mars.delegates.push(player.id, player.id);
-    expect(card.canPlay(player)).is.true;
+    expect(player.canPlayIgnoringCost(card)).is.true;
 
     player.playedCards.push(card2, card3);
     card.play(player);

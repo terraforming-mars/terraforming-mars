@@ -21,11 +21,11 @@ describe('AerialLenses', function() {
   });
 
   it('Can play', function() {
-    expect(card.canPlay(player)).is.not.true;
+    expect(player.canPlayIgnoringCost(card)).is.not.true;
 
     const kelvinists = game.turmoil!.getPartyByName(PartyName.KELVINISTS)!;
     kelvinists.delegates.push(player.id, player.id);
-    expect(card.canPlay(player)).is.true;
+    expect(player.canPlayIgnoringCost(card)).is.true;
   });
 
   it('Should play without plants', function() {

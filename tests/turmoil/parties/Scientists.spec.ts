@@ -60,7 +60,7 @@ describe('Scientists', function() {
 
     const card = new SearchForLife();
     (game as any).oxygenLevel = 8;
-    expect(card.canPlay(player)).to.be.true;
+    expect(player.canPlayIgnoringCost(card)).to.be.true;
   });
 
   it('Ruling policy 3: When you raise a global parameter, draw a card per step raised', function() {
@@ -79,12 +79,12 @@ describe('Scientists', function() {
     TestingUtils.setRulingPartyAndRulingPolicy(game, turmoil, scientists, SCIENTISTS_POLICY_4.id);
 
     const card = new GeneRepair();
-    expect(card.canPlay(player)).to.be.false;
+    expect(player.canPlayIgnoringCost(card)).to.be.false;
 
     const scientistsPolicy = SCIENTISTS_POLICY_4;
     scientistsPolicy.apply(game);
     player.playedCards.push(new Research());
-    expect(card.canPlay(player)).to.be.true;
+    expect(player.canPlayIgnoringCost(card)).to.be.true;
   });
 
   it('Ruling policy 4: Cards with multiple tag requirements may be played with 1 less Science tag', function() {
@@ -94,10 +94,10 @@ describe('Scientists', function() {
     player.playedCards.push(new SpaceStation(), new Satellites());
     player.titanium = 2;
     const card = new PrideoftheEarthArkship();
-    expect(card.canPlay(player)).to.be.false;
+    expect(player.canPlayIgnoringCost(card)).to.be.false;
 
     const scientistsPolicy = SCIENTISTS_POLICY_4;
     scientistsPolicy.apply(game);
-    expect(card.canPlay(player)).to.be.true;
+    expect(player.canPlayIgnoringCost(card)).to.be.true;
   });
 });

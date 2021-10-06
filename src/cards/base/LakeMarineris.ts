@@ -27,9 +27,6 @@ export class LakeMarineris extends Card implements IProjectCard {
     });
   }
   public canPlay(player: Player): boolean {
-    if (!super.canPlay(player)) {
-      return false;
-    }
     const remainingOceans = MAX_OCEAN_TILES - player.game.board.getOceansOnBoard();
     const oceansPlaced = Math.min(remainingOceans, 2);
 

@@ -17,11 +17,11 @@ describe('PROffice', function() {
 
     const gameOptions = TestingUtils.setCustomGameOptions();
     const game = Game.newInstance('foobar', [player], player, gameOptions);
-    expect(card.canPlay(player)).is.not.true;
+    expect(player.canPlayIgnoringCost(card)).is.not.true;
 
     const unity = game.turmoil!.getPartyByName(PartyName.UNITY)!;
     unity.delegates.push(player.id, player.id);
-    expect(card.canPlay(player)).is.true;
+    expect(player.canPlayIgnoringCost(card)).is.true;
 
     player.playedCards.push(card2, card3);
     card.play(player);

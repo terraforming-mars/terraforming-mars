@@ -17,9 +17,9 @@ describe('GHGProducingBacteria', () => {
 
   it('Can play', () => {
     (game as any).oxygenLevel = 3;
-    expect(card.canPlay(player)).is.not.true;
+    expect(player.canPlayIgnoringCost(card)).is.not.true;
     (game as any).oxygenLevel = 4;
-    expect(card.canPlay(player)).is.true;
+    expect(player.canPlayIgnoringCost(card)).is.true;
   });
 
   it('Should play', () => {

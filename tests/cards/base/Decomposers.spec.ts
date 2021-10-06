@@ -19,12 +19,12 @@ describe('Decomposers', function() {
   });
 
   it('Can\'t play', function() {
-    expect(card.canPlay(player)).is.not.true;
+    expect(player.canPlayIgnoringCost(card)).is.not.true;
   });
 
   it('Should play', function() {
     (game as any).oxygenLevel = 3;
-    expect(card.canPlay(player)).is.true;
+    expect(player.canPlayIgnoringCost(card)).is.true;
     card.play(player);
 
     card.onCardPlayed(player, new Birds());
@@ -41,7 +41,7 @@ describe('Decomposers', function() {
     const ecoExpertCard = new EcologyExperts();
     game.phase = Phase.PRELUDES;
     player.playCard(ecoExpertCard);
-    expect(card.canPlay(player)).is.true;
+    expect(player.canPlayIgnoringCost(card)).is.true;
     player.playCard(card);
     expect(card.resourceCount).to.eq(3);
   });

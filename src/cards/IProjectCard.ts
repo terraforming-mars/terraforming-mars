@@ -4,7 +4,7 @@ import {Resources} from '../Resources';
 import {Units} from '../Units';
 
 export interface IProjectCard extends ICard {
-    canPlay?: (player: Player) => boolean;
+    canPlay: (player: Player) => boolean;
     cost: number;
 
     // A field dedicated to Robotic Workforce which tracks whether a card has an additional production

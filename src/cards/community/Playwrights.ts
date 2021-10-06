@@ -54,7 +54,7 @@ export class Playwrights extends Card implements CorporationCard {
       return replayableEvents.length > 0;
     }
 
-    public action(player: Player) {
+    public action(player: Player): SelectCard<IProjectCard> | undefined {
       const players = player.game.getPlayers();
       const replayableEvents = this.getReplayableEvents(player);
 

@@ -84,6 +84,7 @@ describe('MaxwellBase', function() {
       name: 'HELLO' as CardName,
       cost: 1,
       tags: [Tags.VENUS],
+      canPlay: () => true,
       play: () => undefined,
       cardType: CardType.ACTIVE,
       metadata: {

@@ -1819,7 +1819,7 @@ export class Player implements ISerializable<SerializedPlayer> {
     if (card.requirements !== undefined && !card.requirements.satisfies(this)) {
       return false;
     }
-    return card.canPlay === undefined || card.canPlay(this);
+    return card.canPlay(this);
   }
 
   // Checks if the player can afford to pay `cost` mc (possibly replaceable with steel, titanium etc.)

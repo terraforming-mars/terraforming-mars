@@ -107,8 +107,7 @@ const COMMUNITY_GLOBAL_EVENTS = new Map<GlobalEventName, new() => IGlobalEvent>(
 // When renaming, add the rename here and add a TODO (like the example below)
 // And remember to add a test in GlobalEventDealer.spec.ts
 const RENAMED_GLOBAL_EVENTS = new Map<GlobalEventName, new() => IGlobalEvent>([
-  // TODO(bafolts): remove after 2021-05-08
-  ['Miners Of Strike' as GlobalEventName, MinersOnStrike],
+  // ['Miners Of Strike' as GlobalEventName, MinersOnStrike],
 ]);
 
 const ALL_EVENTS = new Map<GlobalEventName, new() => IGlobalEvent>([

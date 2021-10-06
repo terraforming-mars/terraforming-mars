@@ -31,22 +31,22 @@ describe('GeologicalSurvey', () => {
 
   it('Can play', () => {
     TestingUtils.addGreenery(player);
-    expect(player.canPlayForFree(card)).is.true;
+    expect(player.canPlayIgnoringCost(card)).is.true;
 
     TestingUtils.addGreenery(player);
-    expect(player.canPlayForFree(card)).is.true;
+    expect(player.canPlayIgnoringCost(card)).is.true;
 
     TestingUtils.addGreenery(player);
-    expect(player.canPlayForFree(card)).is.true;
+    expect(player.canPlayIgnoringCost(card)).is.true;
 
     TestingUtils.addGreenery(player);
-    expect(player.canPlayForFree(card)).is.true;
+    expect(player.canPlayIgnoringCost(card)).is.true;
 
     TestingUtils.addGreenery(player);
-    expect(player.canPlayForFree(card)).is.true;
+    expect(player.canPlayIgnoringCost(card)).is.true;
 
     TestingUtils.addGreenery(player);
-    expect(player.canPlayForFree(card)).is.false;
+    expect(player.canPlayIgnoringCost(card)).is.false;
   });
 
 

@@ -15,15 +15,15 @@ describe('MartianSurvey', function() {
 
   it('Cannot play', () => {
     (game as any).oxygenLevel = 5;
-    expect(player.canPlayForFree(card)).is.not.true;
+    expect(player.canPlayIgnoringCost(card)).is.not.true;
   });
   it('Can play', () => {
     (game as any).oxygenLevel = 4;
-    expect(player.canPlayForFree(card)).is.true;
+    expect(player.canPlayIgnoringCost(card)).is.true;
   });
 
   it('Should play', () => {
-    expect(player.canPlayForFree(card)).is.true;
+    expect(player.canPlayIgnoringCost(card)).is.true;
     card.play(player);
 
     expect(card.getVictoryPoints()).to.eq(1);

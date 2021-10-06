@@ -12,14 +12,14 @@ describe('VoteOfNoConfidence', function() {
 
     const gameOptions = TestingUtils.setCustomGameOptions();
     const game = Game.newInstance('foobar', [player], player, gameOptions);
-    expect(player.canPlayForFree(card)).is.not.true;
+    expect(player.canPlayIgnoringCost(card)).is.not.true;
 
         game.turmoil!.chairman = 'NEUTRAL';
-        expect(player.canPlayForFree(card)).is.not.true;
+        expect(player.canPlayIgnoringCost(card)).is.not.true;
 
         const greens = game.turmoil!.getPartyByName(PartyName.GREENS)!;
         greens.partyLeader = player.id;
-        expect(player.canPlayForFree(card)).is.true;
+        expect(player.canPlayIgnoringCost(card)).is.true;
 
         card.play(player);
         expect(game.getPlayerById(game.turmoil!.chairman)).to.eq(player);

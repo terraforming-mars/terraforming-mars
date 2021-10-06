@@ -17,11 +17,11 @@ describe('Windmills', function() {
 
   it('Can\'t play', function() {
     (game as any).oxygenLevel = 6;
-    expect(player.canPlayForFree(card)).is.not.true;
+    expect(player.canPlayIgnoringCost(card)).is.not.true;
   });
   it('Should play', function() {
     (game as any).oxygenLevel = 7;
-    expect(player.canPlayForFree(card)).is.true;
+    expect(player.canPlayIgnoringCost(card)).is.true;
 
     card.play(player);
     expect(player.getProduction(Resources.ENERGY)).to.eq(1);

@@ -17,7 +17,7 @@ describe('Algae', function() {
   });
 
   it('Can\'t play', function() {
-    expect(player.canPlayForFree(card)).is.not.true;
+    expect(player.canPlayIgnoringCost(card)).is.not.true;
   });
 
   it('Should play', function() {
@@ -26,7 +26,7 @@ describe('Algae', function() {
       oceanSpaces[i].tile = {tileType: TileType.OCEAN};
     }
 
-    expect(player.canPlayForFree(card)).is.true;
+    expect(player.canPlayIgnoringCost(card)).is.true;
 
     card.play(player);
     expect(player.plants).to.eq(1);

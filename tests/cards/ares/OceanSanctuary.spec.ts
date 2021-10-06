@@ -21,19 +21,19 @@ describe('OceanSanctuary', function() {
 
   it('Can play', function() {
     TestingUtils.addOcean(player);
-    expect(player.canPlayForFree(card)).is.false;
+    expect(player.canPlayIgnoringCost(card)).is.false;
 
     TestingUtils.addOcean(player);
-    expect(player.canPlayForFree(card)).is.false;
+    expect(player.canPlayIgnoringCost(card)).is.false;
 
     TestingUtils.addOcean(player);
-    expect(player.canPlayForFree(card)).is.false;
+    expect(player.canPlayIgnoringCost(card)).is.false;
 
     TestingUtils.addOcean(player);
-    expect(player.canPlayForFree(card)).is.false;
+    expect(player.canPlayIgnoringCost(card)).is.false;
 
     TestingUtils.addOcean(player);
-    expect(player.canPlayForFree(card)).is.true;
+    expect(player.canPlayIgnoringCost(card)).is.true;
   });
 
   it('Play', function() {

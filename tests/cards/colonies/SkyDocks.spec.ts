@@ -6,7 +6,7 @@ describe('SkyDocks', function() {
   it('Should play', function() {
     const card = new SkyDocks();
     const player = TestPlayers.BLUE.newPlayer();
-    expect(player.canPlayForFree(card)).is.not.true;
+    expect(player.canPlayIgnoringCost(card)).is.not.true;
     const action = card.play(player);
     expect(action).is.undefined;
     expect(player.getFleetSize()).to.eq(2);

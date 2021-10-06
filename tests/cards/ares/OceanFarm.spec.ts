@@ -22,16 +22,16 @@ describe('OceanFarm', () => {
 
   it('Can play', () => {
     TestingUtils.addOcean(player);
-    expect(player.canPlayForFree(card)).is.false;
+    expect(player.canPlayIgnoringCost(card)).is.false;
 
     TestingUtils.addOcean(player);
-    expect(player.canPlayForFree(card)).is.false;
+    expect(player.canPlayIgnoringCost(card)).is.false;
 
     TestingUtils.addOcean(player);
-    expect(player.canPlayForFree(card)).is.false;
+    expect(player.canPlayIgnoringCost(card)).is.false;
 
     TestingUtils.addOcean(player);
-    expect(player.canPlayForFree(card)).is.true;
+    expect(player.canPlayIgnoringCost(card)).is.true;
   });
 
   it('Play', () => {

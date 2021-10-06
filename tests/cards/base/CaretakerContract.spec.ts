@@ -15,13 +15,13 @@ describe('CaretakerContract', function() {
   });
 
   it('Can\'t play or act', function() {
-    expect(player.canPlayForFree(card)).is.not.true;
+    expect(player.canPlayIgnoringCost(card)).is.not.true;
     expect(card.canAct(player)).is.not.true;
   });
 
   it('Should play', function() {
     (game as any).temperature = 0;
-    expect(player.canPlayForFree(card)).is.true;
+    expect(player.canPlayIgnoringCost(card)).is.true;
   });
 
   it('Should act', function() {

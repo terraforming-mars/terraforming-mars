@@ -17,11 +17,11 @@ describe('DustSeals', function() {
 
   it('Can\'t play', function() {
     TestingUtils.maxOutOceans(player, 4);
-    expect(player.canPlayForFree(card)).is.not.true;
+    expect(player.canPlayIgnoringCost(card)).is.not.true;
   });
 
   it('Should play', function() {
-    expect(player.canPlayForFree(card)).is.true;
+    expect(player.canPlayIgnoringCost(card)).is.true;
     card.play();
     player.victoryPointsBreakdown.setVictoryPoints('victoryPoints', card.getVictoryPoints());
     expect(player.victoryPointsBreakdown.victoryPoints).to.eq(1);

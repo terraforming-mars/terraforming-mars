@@ -1810,11 +1810,12 @@ export class Player implements ISerializable<SerializedPlayer> {
       return false;
     }
 
-    return this.canPlayForFree(card);
+    return this.canPlayIgnoringCost(card);
   }
 
   // Verify if requirements for the card can be met, ignoring the project cost.
-  public canPlayForFree(card: IProjectCard): boolean {
+  // Only made public for tests.
+  public canPlayIgnoringCost(card: IProjectCard): boolean {
     if (card.requirements !== undefined && !card.requirements.satisfies(this)) {
       return false;
     }

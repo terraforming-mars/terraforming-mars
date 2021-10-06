@@ -16,12 +16,12 @@ describe('WaterSplittingPlant', function() {
   });
 
   it('Can\'t play', function() {
-    expect(player.canPlayForFree(card)).is.not.true;
+    expect(player.canPlayIgnoringCost(card)).is.not.true;
   });
 
   it('Can play', function() {
     TestingUtils.maxOutOceans(player, 2);
-    expect(player.canPlayForFree(card)).is.true;
+    expect(player.canPlayIgnoringCost(card)).is.true;
   });
 
   it('Can\'t act', function() {

@@ -27,7 +27,7 @@ describe('BiofertilizerFacility', function() {
   });
 
   it('Cannot play without a science tag', function() {
-    expect(player.canPlayForFree(card)).is.not.true;
+    expect(player.canPlayIgnoringCost(card)).is.not.true;
   });
 
   it('Play', function() {
@@ -41,7 +41,7 @@ describe('BiofertilizerFacility', function() {
     expect(microbeHost.resourceCount || 0).is.eq(0);
     expect(game.deferredActions).has.lengthOf(0);
 
-    expect(player.canPlayForFree(card)).is.true;
+    expect(player.canPlayIgnoringCost(card)).is.true;
     const action = card.play(player);
     expect(player.getProduction(Resources.PLANTS)).is.eq(1);
 

@@ -19,10 +19,10 @@ describe('MartianMonuments', function() {
   });
 
   it('can play', function() {
-    expect(player.canPlayForFree(card)).is.false;
+    expect(player.canPlayIgnoringCost(card)).is.false;
     TestingUtils.addCity(player);
-    expect(player.canPlayForFree(card)).is.true;
-    expect(player2.canPlayForFree(card)).is.false;
+    expect(player.canPlayIgnoringCost(card)).is.true;
+    expect(player2.canPlayIgnoringCost(card)).is.false;
   });
 
   it('play', function() {

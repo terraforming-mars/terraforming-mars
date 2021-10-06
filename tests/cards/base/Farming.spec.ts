@@ -16,12 +16,12 @@ describe('Farming', function() {
   });
 
   it('Can\'t play', function() {
-    expect(player.canPlayForFree(card)).is.not.true;
+    expect(player.canPlayIgnoringCost(card)).is.not.true;
   });
 
   it('Should play', function() {
     (game as any).temperature = 4;
-    expect(player.canPlayForFree(card)).is.true;
+    expect(player.canPlayIgnoringCost(card)).is.true;
     card.play(player);
 
     expect(player.getProduction(Resources.MEGACREDITS)).to.eq(2);

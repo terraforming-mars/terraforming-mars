@@ -19,12 +19,12 @@ describe('ExtremeColdFungus', () => {
 
   it('Cannot play', () => {
     (game as any).temperature = -8;
-    expect(player.canPlayForFree(card)).is.not.true;
+    expect(player.canPlayIgnoringCost(card)).is.not.true;
   });
 
   it('Can play', () => {
     (game as any).temperature = -12;
-    expect(player.canPlayForFree(card)).is.true;
+    expect(player.canPlayIgnoringCost(card)).is.true;
   });
 
   it('Should play', () => {

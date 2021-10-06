@@ -16,9 +16,9 @@ describe('AerosportTournament', function() {
     corp.action(player);
     corp.action(player);
     corp.action(player);
-    expect(player.canPlayForFree(card)).is.not.true;
+    expect(player.canPlayIgnoringCost(card)).is.not.true;
     corp.action(player);
-    expect(player.canPlayForFree(card)).is.true;
+    expect(player.canPlayIgnoringCost(card)).is.true;
 
     game.addCityTile(player, '03');
 

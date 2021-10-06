@@ -21,16 +21,16 @@ describe('BreedingFarms', function() {
 
   it('canPlay', function() {
     player.tagsForTest = {};
-    expect(player.canPlayForFree(card)).is.false;
+    expect(player.canPlayIgnoringCost(card)).is.false;
 
     player.tagsForTest = {science: 1};
-    expect(player.canPlayForFree(card)).is.false;
+    expect(player.canPlayIgnoringCost(card)).is.false;
 
     player.tagsForTest = {animal: 1};
-    expect(player.canPlayForFree(card)).is.false;
+    expect(player.canPlayIgnoringCost(card)).is.false;
 
     player.tagsForTest = {science: 1, animal: 1};
-    expect(player.canPlayForFree(card)).is.true;
+    expect(player.canPlayIgnoringCost(card)).is.true;
   });
 
   it('play', function() {

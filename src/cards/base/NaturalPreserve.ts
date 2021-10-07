@@ -12,6 +12,7 @@ import {IAdjacencyBonus} from '../../ares/IAdjacencyBonus';
 import {CardRequirements} from '../CardRequirements';
 import {CardRenderer} from '../render/CardRenderer';
 import {Units} from '../../Units';
+import {nextToNoOtherTileFn} from '../../boards/Board';
 
 export class NaturalPreserve extends Card implements IProjectCard {
   constructor(
@@ -38,10 +39,10 @@ export class NaturalPreserve extends Card implements IProjectCard {
   }
   private getAvailableSpaces(player: Player): Array<ISpace> {
     return player.game.board.getAvailableSpacesOnLand(player)
-      .filter((space) => player.game.board.getAdjacentSpaces(space).some((adjacentSpace) => adjacentSpace.tile !== undefined) === false);
+      .filter(nextToNoOtherTileFn(player.game.board));
   }
   public canPlay(player: Player): boolean {
-    return super.canPlay(player) && this.getAvailableSpaces(player).length > 0;
+    return this.getAvailableSpaces(player).length > 0;
   }
   public play(player: Player) {
     return new SelectSpace('Select space for special tile next to no other tile', this.getAvailableSpaces(player), (foundSpace: ISpace) => {

@@ -39,9 +39,6 @@ export class VenusianPlants extends Card implements IProjectCard {
   }
 
   public canPlay(player: Player): boolean {
-    if (!super.canPlay(player)) {
-      return false;
-    }
     const venusMaxed = player.game.getVenusScaleLevel() === MAX_VENUS_SCALE;
 
     if (PartyHooks.shouldApplyPolicy(player, PartyName.REDS) && !venusMaxed) {

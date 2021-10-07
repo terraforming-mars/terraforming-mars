@@ -33,14 +33,13 @@ export class Mangrove extends Card implements IProjectCard {
   }
 
   public canPlay(player: Player): boolean {
-    const meetsCardRequirements = super.canPlay(player);
     const oxygenMaxed = player.game.getOxygenLevel() === MAX_OXYGEN_LEVEL;
 
     if (PartyHooks.shouldApplyPolicy(player, PartyName.REDS) && !oxygenMaxed) {
-      return player.canAfford(player.getCardCost(this) + REDS_RULING_POLICY_COST, {microbes: true}) && meetsCardRequirements;
+      return player.canAfford(player.getCardCost(this) + REDS_RULING_POLICY_COST, {microbes: true});
     }
 
-    return meetsCardRequirements;
+    return true;
   }
 
   public play(player: Player) {

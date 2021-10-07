@@ -23,7 +23,7 @@ export class EcologyExperts extends PreludeCard {
     });
   }
   public getRequirementBonus(player: Player): number {
-    if (player.lastCardPlayed !== undefined && player.lastCardPlayed.name === this.name) {
+    if (player.lastCardPlayed === this.name) {
       // Magic number high enough to always ignore requirements.
       return 50;
     }

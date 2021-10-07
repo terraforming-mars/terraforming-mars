@@ -209,7 +209,7 @@ export abstract class Board {
 
   public getNonReservedLandSpaces(): Array<ISpace> {
     return this.spaces.filter((space) => {
-      return space.spaceType === SpaceType.LAND &&
+      return (space.spaceType === SpaceType.LAND || space.spaceType === SpaceType.COVE) &&
         (space.tile === undefined || AresHandler.hasHazardTile(space)) &&
         space.player === undefined;
     });
@@ -274,3 +274,7 @@ export abstract class Board {
     return spaces.map((space) => Board.deserializeSpace(space, players));
   }
 }
+
+export function nextToNoOtherTileFn(board: Board): (space: ISpace) => boolean {
+  return (space: ISpace) => board.getAdjacentSpaces(space).every((space) => space.tile === undefined);
+};

@@ -16,12 +16,12 @@ describe('LakeMarineris', function() {
   });
 
   it('Can\'t play', function() {
-    expect(card.canPlay(player)).is.not.true;
+    expect(player.canPlayIgnoringCost(card)).is.not.true;
   });
 
   it('Should play', function() {
     (game as any).temperature = -0;
-    expect(card.canPlay(player)).is.true;
+    expect(player.canPlayIgnoringCost(card)).is.true;
     card.play(player);
 
     expect(game.deferredActions).has.lengthOf(2);

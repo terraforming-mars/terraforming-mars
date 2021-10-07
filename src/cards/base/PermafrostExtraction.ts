@@ -30,14 +30,13 @@ export class PermafrostExtraction extends Card implements IProjectCard {
   }
 
   public canPlay(player: Player): boolean {
-    const meetsTemperatureRequirements = super.canPlay(player);
     const oceansMaxed = player.game.board.getOceansOnBoard() === MAX_OCEAN_TILES;
 
     if (PartyHooks.shouldApplyPolicy(player, PartyName.REDS) && !oceansMaxed) {
-      return player.canAfford(player.getCardCost(this) + REDS_RULING_POLICY_COST) && meetsTemperatureRequirements;
+      return player.canAfford(player.getCardCost(this) + REDS_RULING_POLICY_COST);
     }
 
-    return meetsTemperatureRequirements;
+    return true;
   }
 
   public play(player: Player) {

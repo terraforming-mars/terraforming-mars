@@ -41,7 +41,7 @@ export class Birds extends Card implements IActionCard, IProjectCard, IResourceC
     public resourceCount = 0;
 
     public canPlay(player: Player): boolean {
-      return super.canPlay(player) && player.game.someoneHasResourceProduction(Resources.PLANTS, 2);
+      return player.game.someoneHasResourceProduction(Resources.PLANTS, 2);
     }
     public getVictoryPoints(): number {
       return this.resourceCount;

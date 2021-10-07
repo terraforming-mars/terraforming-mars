@@ -41,8 +41,7 @@ export class DomedCrater extends Card implements IProjectCard {
   }
 
   public canPlay(player: Player): boolean {
-    return super.canPlay(player) &&
-      player.getProduction(Resources.ENERGY) >= 1 &&
+    return player.getProduction(Resources.ENERGY) >= 1 &&
       player.game.board.getAvailableSpacesForCity(player).length > 0;
   }
   public play(player: Player) {

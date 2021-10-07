@@ -4,7 +4,6 @@ import {GlobalDustStorm} from '../../../src/turmoil/globalEvents/GlobalDustStorm
 import {GlobalEventDealer, getGlobalEventByName} from '../../../src/turmoil/globalEvents/GlobalEventDealer';
 import {GlobalEventName} from '../../../src/turmoil/globalEvents/GlobalEventName';
 import {IGlobalEvent} from '../../../src/turmoil/globalEvents/IGlobalEvent';
-import {MinersOnStrike} from '../../../src/turmoil/globalEvents/MinersOnStrike';
 import {ScientificCommunity} from '../../../src/turmoil/globalEvents/ScientificCommunity';
 import {SerializedGlobalEventDealer} from '../../../src/turmoil/globalEvents/SerializedGlobalEventDealer';
 import {SponsoredProjects} from '../../../src/turmoil/globalEvents/SponsoredProjects';
@@ -60,10 +59,5 @@ describe('GlobalEventDealer', () => {
     for (const card of dealer.globalEventsDeck) {
       expect(getGlobalEventByName(card.name), card.name + ' cannot be retrieved, card is probably missing from ALL_EVENTS').to.deep.eq(card);
     }
-  });
-
-  // TODO(bafolts): remove after 2021-05-08
-  it('gets Miners On Strike by Miners Of Strike', () => {
-    expect(getGlobalEventByName('Miners Of Strike' as GlobalEventName) instanceof MinersOnStrike).is.true;
   });
 });

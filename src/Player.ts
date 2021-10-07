@@ -114,7 +114,7 @@ export class Player implements ISerializable<SerializedPlayer> {
   // This generation / this round
   public actionsTakenThisRound: number = 0;
   private actionsThisGeneration: Set<CardName> = new Set();
-  public lastCardPlayed: IProjectCard | undefined;
+  public lastCardPlayed: CardName | undefined;
   private corporationInitialActionDone: boolean = false;
 
   // Cards
@@ -1278,11 +1278,11 @@ export class Player implements ISerializable<SerializedPlayer> {
   }
 
   private canUseSteel(card: ICard): boolean {
-    return card.tags.includes(Tags.BUILDING);
+    return this.lastCardPlayed === CardName.LAST_RESORT_INGENUITY || card.tags.includes(Tags.BUILDING);
   }
 
   private canUseTitanium(card: ICard): boolean {
-    return card.tags.includes(Tags.SPACE);
+    return this.lastCardPlayed === CardName.LAST_RESORT_INGENUITY || card.tags.includes(Tags.SPACE);
   }
 
   private canUseMicrobes(card: ICard): boolean {
@@ -1324,8 +1324,8 @@ export class Player implements ISerializable<SerializedPlayer> {
     const cardCost: number = this.getCardCost(selectedCard);
     let totalToPay: number = 0;
 
-    const canUseSteel: boolean = this.canUseSteel(selectedCard);
-    const canUseTitanium: boolean = this.canUseTitanium(selectedCard);
+    const canUseSteel = this.canUseSteel(selectedCard);
+    const canUseTitanium = this.canUseTitanium(selectedCard);
 
     if (canUseSteel && howToPay.steel > 0) {
       if (howToPay.steel > this.steel) {
@@ -1447,7 +1447,7 @@ export class Player implements ISerializable<SerializedPlayer> {
     }
 
     if (selectedCard.cardType !== CardType.PROXY) {
-      this.lastCardPlayed = selectedCard;
+      this.lastCardPlayed = selectedCard.name;
       this.game.log('${0} played ${1}', (b) => b.player(this).card(selectedCard));
     }
 
@@ -1806,7 +1806,20 @@ export class Player implements ISerializable<SerializedPlayer> {
         reserveUnits: MoonExpansion.adjustedReserveCosts(this, card),
       });
 
-    return canAfford && (card.canPlay === undefined || card.canPlay(this));
+    if (!canAfford) {
+      return false;
+    }
+
+    return this.canPlayIgnoringCost(card);
+  }
+
+  // Verify if requirements for the card can be met, ignoring the project cost.
+  // Only made public for tests.
+  public canPlayIgnoringCost(card: IProjectCard): boolean {
+    if (card.requirements !== undefined && !card.requirements.satisfies(this)) {
+      return false;
+    }
+    return card.canPlay(this);
   }
 
   // Checks if the player can afford to pay `cost` mc (possibly replaceable with steel, titanium etc.)
@@ -2223,7 +2236,7 @@ export class Player implements ISerializable<SerializedPlayer> {
       timer: this.timer.serialize(),
     };
     if (this.lastCardPlayed !== undefined) {
-      result.lastCardPlayed = this.lastCardPlayed.name;
+      result.lastCardPlayed = this.lastCardPlayed;
     }
     return result;
   }
@@ -2267,9 +2280,7 @@ export class Player implements ISerializable<SerializedPlayer> {
     player.turmoilPolicyActionUsed = d.turmoilPolicyActionUsed;
     player.politicalAgendasActionUsedCount = d.politicalAgendasActionUsedCount;
 
-    player.lastCardPlayed = d.lastCardPlayed !== undefined ?
-      cardFinder.getProjectCardByName(d.lastCardPlayed) :
-      undefined;
+    player.lastCardPlayed = d.lastCardPlayed;
 
     // Rebuild removed from play cards (Playwrights)
     player.removedFromPlayCards = cardFinder.cardsFromJSON(d.removedFromPlayCards);

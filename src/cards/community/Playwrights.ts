@@ -54,7 +54,7 @@ export class Playwrights extends Card implements CorporationCard {
       return replayableEvents.length > 0;
     }
 
-    public action(player: Player) {
+    public action(player: Player): SelectCard<IProjectCard> | undefined {
       const players = player.game.getPlayers();
       const replayableEvents = this.getReplayableEvents(player);
 
@@ -115,10 +115,10 @@ export class Playwrights extends Card implements CorporationCard {
       player.game.getPlayers().forEach((p) => {
         playedEvents.push(...p.playedCards.filter((card) => {
           return card.cardType === CardType.EVENT &&
+            // Can player.canPlay(card) replace this?
             player.canAfford(player.getCardCost(card), {
               reserveUnits: MoonExpansion.adjustedReserveCosts(player, card),
-            }) &&
-            (card.canPlay === undefined || card.canPlay(player));
+            }) && player.canPlayIgnoringCost(card);
         }));
       });
       this.checkLoops--;

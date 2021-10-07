@@ -17,18 +17,18 @@ describe('SubZeroSaltFish', function() {
 
   it('Can\'t play if no one has plant production', function() {
     (game as any).temperature = 2;
-    expect(card.canPlay(player)).is.not.true;
+    expect(player.canPlayIgnoringCost(card)).is.not.true;
   });
 
   it('Can\'t play if temperature requirement not met', function() {
     player2.addProduction(Resources.PLANTS, 1);
-    expect(card.canPlay(player)).is.not.true;
+    expect(player.canPlayIgnoringCost(card)).is.not.true;
   });
 
   it('Should play', function() {
     (game as any).temperature = 2;
     player2.addProduction(Resources.PLANTS, 1);
-    expect(card.canPlay(player)).is.true;
+    expect(player.canPlayIgnoringCost(card)).is.true;
 
     card.play(player);
     player.addResourceTo(card, 5);

@@ -2,7 +2,7 @@ import * as http from 'http';
 import {Handler} from './Handler';
 import {IContext} from './IHandler';
 import {Database} from '../database/Database';
-import {BoardName} from '../boards/BoardName';
+import {BoardName, RandomBoardOption} from '../boards/BoardName';
 import {Cloner} from '../database/Cloner';
 import {GameLoader} from '../database/GameLoader';
 import {Game, GameOptions} from '../Game';
@@ -23,6 +23,14 @@ export class GameHandler extends Handler {
   public generateRandomId(prefix: string): string {
     // 281474976710656 possible values.
     return prefix + Math.floor(Math.random() * Math.pow(16, 12)).toString(16);
+  }
+
+  public static boardOptions(board: string) {
+    const allBoards = Object.values(BoardName);
+
+    if (board === RandomBoardOption.ALL) return allBoards;
+    if (board === RandomBoardOption.OFFICIAL) return allBoards.filter((name) => name !== BoardName.ARABIA_TERRA);
+    return [board];
   }
 
   public get(req: http.IncomingMessage, res: http.ServerResponse, ctx: IContext): void {
@@ -59,10 +67,8 @@ export class GameHandler extends Handler {
           }
         }
 
-        if (gameReq.board === 'random') {
-          const boards = Object.values(BoardName).filter((name) => name !== BoardName.ARABIA_TERRA);
-          gameReq.board = boards[Math.floor(Math.random() * boards.length)];
-        }
+        const boards = GameHandler.boardOptions(gameReq.board);
+        gameReq.board = boards[Math.floor(Math.random() * boards.length)];
 
         const gameOptions: GameOptions = {
           boardName: gameReq.board,

@@ -48,7 +48,7 @@ export class SubZeroSaltFish extends Card implements IProjectCard, IResourceCard
   }
 
   public canPlay(player: Player): boolean {
-    return super.canPlay(player) && player.game.someoneHasResourceProduction(Resources.PLANTS, 1);
+    return player.game.someoneHasResourceProduction(Resources.PLANTS, 1);
   }
 
   public action(player: Player) {

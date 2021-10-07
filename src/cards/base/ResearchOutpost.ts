@@ -8,6 +8,7 @@ import {ISpace} from '../../boards/ISpace';
 import {PlayerInput} from '../../PlayerInput';
 import {CardName} from '../../CardName';
 import {CardRenderer} from '../render/CardRenderer';
+import {nextToNoOtherTileFn} from '../../boards/Board';
 
 export class ResearchOutpost extends Card implements IProjectCard {
   constructor() {
@@ -32,9 +33,7 @@ export class ResearchOutpost extends Card implements IProjectCard {
   }
   private getAvailableSpaces(player: Player): Array<ISpace> {
     return player.game.board.getAvailableSpacesOnLand(player)
-      .filter((space) => player.game.board.getAdjacentSpaces(space)
-        .every((space) => space.tile === undefined),
-      );
+      .filter(nextToNoOtherTileFn(player.game.board));
   }
   public canPlay(player: Player): boolean {
     return this.getAvailableSpaces(player).length > 0;

@@ -274,3 +274,7 @@ export abstract class Board {
     return spaces.map((space) => Board.deserializeSpace(space, players));
   }
 }
+
+export function nextToNoOtherTileFn(board: Board): (space: ISpace) => boolean {
+  return (space: ISpace) => board.getAdjacentSpaces(space).every((space) => space.tile === undefined);
+};

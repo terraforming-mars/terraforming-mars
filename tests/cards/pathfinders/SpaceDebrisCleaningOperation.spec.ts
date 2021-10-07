@@ -23,10 +23,10 @@ describe('SpaceDebrisCleaningOperation', function() {
 
   it('canPlay', function() {
     player.tagsForTest = {space: 3};
-    expect(card.canPlay(player)).is.false;
+    expect(player.canPlayIgnoringCost(card)).is.false;
 
     player.tagsForTest = {space: 4};
-    expect(card.canPlay(player)).is.true;
+    expect(player.canPlayIgnoringCost(card)).is.true;
   });
 
   it('play', function() {

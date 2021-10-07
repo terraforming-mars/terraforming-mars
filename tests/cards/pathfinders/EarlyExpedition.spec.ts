@@ -23,15 +23,15 @@ describe('EarlyExpedition', function() {
   it('canPlay', function() {
     (game as any).temperature = -16;
     player.setProductionForTest({energy: 1});
-    expect(card.canPlay(player)).is.false;
+    expect(player.canPlayIgnoringCost(card)).is.false;
 
     (game as any).temperature = -18;
     player.setProductionForTest({energy: 0});
-    expect(card.canPlay(player)).is.false;
+    expect(player.canPlayIgnoringCost(card)).is.false;
 
     (game as any).temperature = -18;
     player.setProductionForTest({energy: 1});
-    expect(card.canPlay(player)).is.true;
+    expect(player.canPlayIgnoringCost(card)).is.true;
   });
 
   it('play', function() {

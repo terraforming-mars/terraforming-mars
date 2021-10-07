@@ -21,10 +21,10 @@ describe('LuxuryEstate', function() {
 
   it('canPlay', function() {
     (game as any).oxygenLevel = 6;
-    expect(card.canPlay(player)).is.false;
+    expect(player.canPlayIgnoringCost(card)).is.false;
 
     (game as any).oxygenLevel = 7;
-    expect(card.canPlay(player)).is.true;
+    expect(player.canPlayIgnoringCost(card)).is.true;
   });
 
   it('play', function() {

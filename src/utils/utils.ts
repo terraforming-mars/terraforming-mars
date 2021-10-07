@@ -15,6 +15,18 @@ export const playerColorClass = (color: string, type: 'shadow' | 'bg' | 'bg_tran
  * @return {Array<number>} an Array of numbers from 0 to n, inclusive.
  */
 export const range = (n: number): Array<number> => Array.from(Array(n).keys());
+
+/**
+ * Returns a new array consisting of elements only in both and b.
+ *
+ * @param {Array<T>} a: the first array
+ * @param {Array<T>} b: the second array
+ * @return {Array<T>} the intersection of both array elements
+ */
+export function intersection<T>(a: Array<T>, b: Array<T>) {
+  return a.filter((e) => b.includes(e));
+};
+
 export const generateClassString = (classes: Array<string>): string => classes.join(' ').trimStart();
 
 // https://stackoverflow.com/questions/47914536/use-partial-in-nested-property-with-typescript

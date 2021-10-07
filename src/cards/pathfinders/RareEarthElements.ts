@@ -6,7 +6,7 @@ import {CardName} from '../../CardName';
 import {CardRenderer} from '../render/CardRenderer';
 import {Resources} from '../../Resources';
 import {Tags} from '../Tags';
-import {TileType} from '../../TileType';
+import {isSpecialTile, playerTileFn} from '../../boards/Board';
 
 export class RareEarthElements extends Card implements IProjectCard {
   constructor() {
@@ -28,14 +28,10 @@ export class RareEarthElements extends Card implements IProjectCard {
   }
 
 
-  private static INVALID_TILES: Set<TileType> = new Set([TileType.GREENERY, TileType.OCEAN, TileType.CITY]);
-
   public play(player: Player) {
-    const spaces = player.game.board.spaces.filter((space) => {
-      return space.player?.id === player.id &&
-        space?.tile !== undefined &&
-        RareEarthElements.INVALID_TILES.has(space.tile.tileType) === false;
-    });
+    const spaces = player.game.board.spaces
+      .filter(playerTileFn(player))
+      .filter(isSpecialTile);
 
     player.addProduction(Resources.MEGACREDITS, spaces.length, {log: true});
     return undefined;

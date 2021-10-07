@@ -18,6 +18,11 @@ import {Contractor} from './Contractor';
 import {Entrepreneur} from './Entrepreneur';
 import {FullMoon} from '../moon/FullMoon';
 import {LunarMagnate} from '../moon/LunarMagnate';
+import {CosmicSettler} from './CosmicSettler';
+import {Botanist} from './Botanist';
+import {Coordinator} from './Coordinator';
+import {Zoologist} from './Zoologist';
+import {Manufacturer} from './Manufacturer';
 
 export const ORIGINAL_AWARDS: Array<IAward> = [
   new Landlord(),
@@ -56,13 +61,22 @@ export const MOON_AWARDS: Array<IAward> = [
   new LunarMagnate(),
 ];
 
+export const ARABIA_TERRA_AWARDS = [
+  new CosmicSettler(),
+  new Botanist(),
+  new Coordinator(),
+  new Zoologist(),
+  new Manufacturer(),
+];
+
 export const ALL_AWARDS: Array<IAward> = [
   ...ORIGINAL_AWARDS,
   ...ELYSIUM_AWARDS,
   ...HELLAS_AWARDS,
   ...VENUS_AWARDS,
   ...ARES_AWARDS,
-  ...MOON_AWARDS];
+  ...MOON_AWARDS,
+  ...ARABIA_TERRA_AWARDS];
 
 export namespace Awards {
   export const ALL = ALL_AWARDS;

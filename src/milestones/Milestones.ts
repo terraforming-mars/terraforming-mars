@@ -18,6 +18,11 @@ import {RimSettler} from './RimSettler';
 import {Networker} from './Networker';
 import {OneGiantStep} from '../moon/OneGiantStep';
 import {Lunarchitect} from '../moon/Lunarchitect';
+import {Economizer} from './Economizer';
+import {Pioneer} from './Pioneer';
+import {LandSpecialist} from './LandSpecialist';
+import {Martian} from './Martian';
+import {Businessperson} from './Businessperson';
 
 export const ORIGINAL_MILESTONES: Array<IMilestone> = [
   new Terraformer(),
@@ -56,13 +61,22 @@ export const MOON_MILESTONES: Array<IMilestone> = [
   new Lunarchitect(),
 ];
 
+export const ARABIA_TERRA_MILESTONES = [
+  new Economizer(),
+  new Pioneer(),
+  new LandSpecialist(),
+  new Martian(),
+  new Businessperson(),
+];
+
 export const ALL_MILESTONES: Array<IMilestone> = [
   ...ORIGINAL_MILESTONES,
   ...ELYSIUM_MILESTONES,
   ...HELLAS_MILESTONES,
   ...VENUS_MILESTONES,
   ...ARES_MILESTONES,
-  ...MOON_MILESTONES];
+  ...MOON_MILESTONES,
+  ...ARABIA_TERRA_MILESTONES];
 
 export namespace Milestones {
   export const ALL = ALL_MILESTONES;

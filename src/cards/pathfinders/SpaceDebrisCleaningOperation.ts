@@ -27,7 +27,9 @@ export class SpaceDebrisCleaningOperation extends Card implements IProjectCard {
           b.wild(1).asterix().data(1).cards(1);
         }),
         // Nerfed by disallowing science resources (rather than the one The Moon does just to keep the text smaller.)
-        description: 'Requires 4 space tags. Gain 3 titanium. Add 1 resource to any card (not ANIMAL card or SCIENCE card.) Add 1 data to any card. Draw 1 card.',
+        description: 'Requires 4 space tags. Gain 3 titanium. ' +
+          'Add 1 resource to any card (not cards that take ANIMAL or SCIENCE resources.) ' +
+          'Add 1 data to any card. Draw 1 card.',
       },
     });
   }

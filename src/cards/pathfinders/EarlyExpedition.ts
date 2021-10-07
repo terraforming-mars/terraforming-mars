@@ -9,6 +9,7 @@ import {CardRequirements} from '../CardRequirements';
 import {Units} from '../../Units';
 import {AddResourcesToCard} from '../../deferredActions/AddResourcesToCard';
 import {ResourceType} from '../../ResourceType';
+import {nextToNoOtherTileFn} from '../../boards/Board';
 import {ISpace} from '../../boards/ISpace';
 import {SelectSpace} from '../../inputs/SelectSpace';
 
@@ -39,14 +40,11 @@ export class EarlyExpedition extends Card implements IProjectCard {
 
   private getAvailableSpaces(player: Player): Array<ISpace> {
     return player.game.board.getAvailableSpacesOnLand(player)
-      .filter((space) => {
-        const adjacentSpaces = player.game.board.getAdjacentSpaces(space);
-        return adjacentSpaces.filter((space) => space.tile !== undefined).length === 0;
-      });
+      .filter(nextToNoOtherTileFn(player.game.board));
   }
 
   public canPlay(player: Player) {
-    return super.canPlay(player) && player.canAdjustProduction(this.productionBox) && this.getAvailableSpaces(player).length > 0;
+    return player.canAdjustProduction(this.productionBox) && this.getAvailableSpaces(player).length > 0;
   }
 
   public play(player: Player) {

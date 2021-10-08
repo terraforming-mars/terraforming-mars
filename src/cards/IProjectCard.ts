@@ -11,7 +11,7 @@ export interface IProjectCard extends ICard {
     // bonus besides the obvious ones printed on the card. Mining Rights and Mining Area are the only
     // two that use this field at the time (though don't expect this comment to be kept up to date if
     // that changes.)
-    bonusResource?: Resources | undefined;
+    bonusResource?: Array<Resources>;
 
     // Represents resources held in reserve when paying for a card.
     // Cards that require a unit of steel while playing, for instance.

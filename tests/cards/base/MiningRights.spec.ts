@@ -54,7 +54,7 @@ describe('MiningRights', () => {
     expect(steelSpace!.adjacency?.bonus).eq(undefined);
   });
 
-  it('Should play when steel and titanium', () => {
+  it('Should play when space bonus is both steel and titanium', () => {
     const action = card.play(player);
     expect(action instanceof SelectSpace).is.true;
     const space = action.availableSpaces.find((space) => space.tile === undefined && space.bonus.includes(SpaceBonus.TITANIUM) && space.bonus.includes(SpaceBonus.STEEL) === false) as ISpace;

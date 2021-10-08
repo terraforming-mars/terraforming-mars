@@ -16,12 +16,12 @@ describe('CardRequirements', function() {
     );
   });
   it('oceans: success - max 3', function() {
-    expect(CardRequirements.builder((b) => b.oceans(3).max()).getRequirementsText()).to.equal(
+    expect(CardRequirements.builder((b) => b.oceans(3, {max: true})).getRequirementsText()).to.equal(
       'max 3 Oceans',
     );
   });
   it('ocean: success - max 1', function() {
-    expect(CardRequirements.builder((b) => b.oceans(1).max()).getRequirementsText()).to.equal(
+    expect(CardRequirements.builder((b) => b.oceans(1, {max: true})).getRequirementsText()).to.equal(
       'max 1 Ocean',
     );
   });
@@ -47,7 +47,7 @@ describe('CardRequirements', function() {
   });
   it('temperature (-): success - max', function() {
     expect(
-      CardRequirements.builder((b) => b.temperature(4).max()).getRequirementsText(),
+      CardRequirements.builder((b) => b.temperature(4, {max: true})).getRequirementsText(),
     ).to.equal('max 4° C');
   });
   it('venus: success', function() {
@@ -56,7 +56,7 @@ describe('CardRequirements', function() {
     );
   });
   it('venus-max: success', function() {
-    expect(CardRequirements.builder((b) => b.venus(4).max()).getRequirementsText()).to.equal(
+    expect(CardRequirements.builder((b) => b.venus(4, {max: true})).getRequirementsText()).to.equal(
       'max 4% Venus',
     );
   });
@@ -64,7 +64,7 @@ describe('CardRequirements', function() {
     expect(CardRequirements.builder((b) => b.tr(25)).getRequirementsText()).to.equal('25 TR');
   });
   it('TR-max: success', function() {
-    expect(CardRequirements.builder((b) => b.tr(4).max()).getRequirementsText()).to.equal(
+    expect(CardRequirements.builder((b) => b.tr(4, {max: true})).getRequirementsText()).to.equal(
       'max 4 TR',
     );
   });
@@ -82,12 +82,12 @@ describe('CardRequirements', function() {
     );
   });
   it('Any Cities-plural: success', function() {
-    expect(CardRequirements.builder((b) => b.cities(2).any()).getRequirementsText()).to.equal(
+    expect(CardRequirements.builder((b) => b.cities(2, {all: true})).getRequirementsText()).to.equal(
       'Any 2 Cities',
     );
   });
   it('Cities-max: success', function() {
-    expect(CardRequirements.builder((b) => b.cities(4).max()).getRequirementsText()).to.equal(
+    expect(CardRequirements.builder((b) => b.cities(4, {max: true})).getRequirementsText()).to.equal(
       'max 4 Cities',
     );
   });
@@ -97,7 +97,7 @@ describe('CardRequirements', function() {
     );
   });
   it('Colonies-plural: max- success', function() {
-    expect(CardRequirements.builder((b) => b.colonies(2).max()).getRequirementsText()).to.equal(
+    expect(CardRequirements.builder((b) => b.colonies(2, {max: true})).getRequirementsText()).to.equal(
       'max 2 Colonies',
     );
   });
@@ -107,7 +107,7 @@ describe('CardRequirements', function() {
     );
   });
   it('Greenerys-max: success', function() {
-    expect(CardRequirements.builder((b) => b.greeneries(2).max()).getRequirementsText()).to.equal(
+    expect(CardRequirements.builder((b) => b.greeneries(2, {max: true})).getRequirementsText()).to.equal(
       'max 2 Greeneries',
     );
   });
@@ -122,18 +122,18 @@ describe('CardRequirements', function() {
     );
   });
   it('Floaters-max: success', function() {
-    expect(CardRequirements.builder((b) => b.floaters(2).max()).getRequirementsText()).to.equal(
+    expect(CardRequirements.builder((b) => b.floaters(2, {max: true})).getRequirementsText()).to.equal(
       'max 2 Floaters',
     );
   });
   it('Floater-max-1: success', function() {
-    expect(CardRequirements.builder((b) => b.floaters(1).max()).getRequirementsText()).to.equal(
+    expect(CardRequirements.builder((b) => b.floaters(1, {max: true})).getRequirementsText()).to.equal(
       'max 1 Floater',
     );
   });
   it('Res type-max: success', function() {
     expect(
-      CardRequirements.builder((b) => b.resourceTypes(1).max()).getRequirementsText(),
+      CardRequirements.builder((b) => b.resourceTypes(1, {max: true})).getRequirementsText(),
     ).to.equal('max 1 Resource type');
   });
   it('Res types: success', function() {
@@ -197,10 +197,5 @@ describe('CardRequirements', function() {
     expect(CardRequirements.builder((b) => b.partyLeaders()).getRequirementsText()).to.equal(
       'Party leader',
     );
-  });
-  it('Throws error on max w/o requirement', function() {
-    expect(() => {
-      CardRequirements.builder((b) => b.max());
-    }).to.throw();
   });
 });

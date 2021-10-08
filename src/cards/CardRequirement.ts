@@ -8,11 +8,17 @@ import {TileType} from '../TileType';
 import {GlobalParameter} from '../GlobalParameter';
 import {MoonExpansion} from '../moon/MoonExpansion';
 import {Turmoil} from '../turmoil/Turmoil';
+import {Options} from './CardRequirements';
 
 const firstLetterUpperCase = (s: string): string => s.charAt(0).toUpperCase() + s.slice(1);
 
 export class CardRequirement {
-  constructor(private _type: RequirementType, protected _amount: number = 1, private _isMax: boolean = false, private _isAny: boolean = false) {}
+  private _isMax: boolean = false;
+  protected _isAny: boolean = false;
+  constructor(private _type: RequirementType, protected _amount: number = 1, options?: Options) {
+    this._isMax = options?.max ?? false;
+    this._isAny = options?.all ?? false;
+  }
 
   private amountToString(): string {
     if (this._type === RequirementType.OXYGEN || this._type === RequirementType.VENUS) {
@@ -57,16 +63,6 @@ export class CardRequirement {
     result += this.parseType();
 
     return result;
-  }
-
-  public max(): CardRequirement {
-    this._isMax = true;
-    return this;
-  }
-
-  public any(): CardRequirement {
-    this._isAny = true;
-    return this;
   }
 
   public get isMax(): boolean {
@@ -219,8 +215,8 @@ export class CardRequirement {
 }
 
 export class TagCardRequirement extends CardRequirement {
-  constructor(public tag: Tags, amount: number = 1) {
-    super(RequirementType.TAG, amount);
+  constructor(public tag: Tags, amount: number, options?: Options) {
+    super(RequirementType.TAG, amount, options);
   }
 
   protected parseType(): string {
@@ -236,8 +232,8 @@ export class TagCardRequirement extends CardRequirement {
 }
 
 export class ProductionCardRequirement extends CardRequirement {
-  constructor(private resource: Resources, amount: number = 1) {
-    super(RequirementType.RESOURCE_TYPES, amount);
+  constructor(private resource: Resources, amount: number, options?: Options) {
+    super(RequirementType.RESOURCE_TYPES, amount, options);
   }
 
   protected parseType(): string {

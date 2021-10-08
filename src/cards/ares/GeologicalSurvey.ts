@@ -8,6 +8,7 @@ import {Tags} from '../Tags';
 import {CardRequirements} from '../CardRequirements';
 import {CardRenderer} from '../render/CardRenderer';
 import {SurveyCard} from './SurveyCard';
+import {all, max} from '../Options';
 
 export class GeologicalSurvey extends SurveyCard {
   constructor() {
@@ -17,7 +18,7 @@ export class GeologicalSurvey extends SurveyCard {
       tags: [Tags.SCIENCE],
       cost: 8,
 
-      requirements: CardRequirements.builder((b) => b.greeneries(5).any().max()),
+      requirements: CardRequirements.builder((b) => b.greeneries(5, {all, max})),
       metadata: {
         cardNumber: 'A09',
         renderData: CardRenderer.builder((b) => {

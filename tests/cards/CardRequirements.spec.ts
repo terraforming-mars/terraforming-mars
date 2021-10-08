@@ -42,7 +42,7 @@ describe('CardRequirements', function() {
   });
 
   it('satisfies properly for temperature max', function() {
-    const requirements = CardRequirements.builder((b) => b.temperature(-10).max());
+    const requirements = CardRequirements.builder((b) => b.temperature(-10, {max: true}));
     expect(requirements.satisfies(player)).eq(true);
     (player.game as any).temperature = -10;
     expect(requirements.satisfies(player)).eq(true);
@@ -93,7 +93,7 @@ describe('CardRequirements', function() {
   });
 
   it('satisfies properly for resourceTypes', function() {
-    const requirements = CardRequirements.builder((b) => b.resourceTypes(3).max());
+    const requirements = CardRequirements.builder((b) => b.resourceTypes(3, {max: true}));
     expect(requirements.satisfies(player)).eq(true);
     player.megaCredits = 10;
     player.steel = 2;
@@ -107,7 +107,7 @@ describe('CardRequirements', function() {
   });
 
   it('satisfies properly for greeneries', function() {
-    const requirements = CardRequirements.builder((b) => b.greeneries(2).max());
+    const requirements = CardRequirements.builder((b) => b.greeneries(2, {max: true}));
     expect(requirements.satisfies(player)).eq(true);
     TestingUtils.addGreenery(player);
     expect(requirements.satisfies(player)).eq(true);
@@ -120,7 +120,7 @@ describe('CardRequirements', function() {
   });
 
   it('satisfies properly for cities', function() {
-    const requirements = CardRequirements.builder((b) => b.cities(2).any());
+    const requirements = CardRequirements.builder((b) => b.cities(2, {all: true}));
     expect(requirements.satisfies(player)).eq(false);
     player.game.addCityTile(player2, player.game.board.getAvailableSpacesForCity(player)[0].id);
     expect(requirements.satisfies(player)).eq(false);

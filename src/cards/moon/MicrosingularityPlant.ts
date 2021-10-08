@@ -6,6 +6,7 @@ import {Resources} from '../../Resources';
 import {CardRenderer} from '../render/CardRenderer';
 import {Card} from '../Card';
 import {CardRequirements} from '../CardRequirements';
+import {all} from '../Options';
 
 export class MicrosingularityPlant extends Card {
   constructor() {
@@ -14,7 +15,7 @@ export class MicrosingularityPlant extends Card {
       cardType: CardType.AUTOMATED,
       tags: [Tags.ENERGY],
       cost: 10,
-      requirements: CardRequirements.builder((b) => b.colonyTiles(2).any()),
+      requirements: CardRequirements.builder((b) => b.colonyTiles(2, {all})),
 
       metadata: {
         description: 'Requires 2 colonies on the Moon. Increase your energy production 2 steps.',

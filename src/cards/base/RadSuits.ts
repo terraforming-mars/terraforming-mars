@@ -6,6 +6,7 @@ import {Resources} from '../../Resources';
 import {CardName} from '../../CardName';
 import {CardRequirements} from '../CardRequirements';
 import {CardRenderer} from '../render/CardRenderer';
+import {all} from '../Options';
 
 export class RadSuits extends Card implements IProjectCard {
   constructor() {
@@ -14,7 +15,7 @@ export class RadSuits extends Card implements IProjectCard {
       name: CardName.RAD_SUITS,
       cost: 6,
 
-      requirements: CardRequirements.builder((b) => b.cities(2).any()),
+      requirements: CardRequirements.builder((b) => b.cities(2, {all})),
       metadata: {
         cardNumber: '186',
         renderData: CardRenderer.builder((b) => {

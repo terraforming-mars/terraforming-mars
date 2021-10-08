@@ -11,6 +11,7 @@ import {CardName} from '../../CardName';
 import {CardRequirements} from '../CardRequirements';
 import {CardRenderer} from '../render/CardRenderer';
 import {Units} from '../../Units';
+import {max} from '../Options';
 
 export class ElectroCatapult extends Card implements IActionCard, IProjectCard {
   constructor() {
@@ -21,7 +22,7 @@ export class ElectroCatapult extends Card implements IActionCard, IProjectCard {
       cost: 17,
       productionBox: Units.of({energy: -1}),
 
-      requirements: CardRequirements.builder((b) => b.oxygen(8).max()),
+      requirements: CardRequirements.builder((b) => b.oxygen(8, {max})),
       metadata: {
         cardNumber: '069',
         description: {

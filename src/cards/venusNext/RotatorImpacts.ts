@@ -13,6 +13,7 @@ import {SelectHowToPayDeferred} from '../../deferredActions/SelectHowToPayDeferr
 import {CardRequirements} from '../CardRequirements';
 import {CardRenderer} from '../render/CardRenderer';
 import {Card} from '../Card';
+import {max} from '../Options';
 
 export class RotatorImpacts extends Card implements IActionCard, IResourceCard {
   constructor() {
@@ -23,7 +24,7 @@ export class RotatorImpacts extends Card implements IActionCard, IResourceCard {
       cost: 6,
       resourceType: ResourceType.ASTEROID,
 
-      requirements: CardRequirements.builder((b) => b.venus(14).max()),
+      requirements: CardRequirements.builder((b) => b.venus(14, {max})),
       metadata: {
         cardNumber: '243',
         renderData: CardRenderer.builder((b) => {

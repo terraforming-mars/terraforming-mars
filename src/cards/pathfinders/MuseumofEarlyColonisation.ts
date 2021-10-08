@@ -7,6 +7,7 @@ import {CardRenderer} from '../render/CardRenderer';
 import {Tags} from '../Tags';
 import {CardRequirements} from '../CardRequirements';
 import {Units} from '../../Units';
+import {all} from '../Options';
 
 export class MuseumofEarlyColonisation extends Card implements IProjectCard {
   constructor() {
@@ -15,7 +16,7 @@ export class MuseumofEarlyColonisation extends Card implements IProjectCard {
       name: CardName.MUSEUM_OF_EARLY_COLONISATION,
       cost: 20,
       tags: [Tags.BUILDING, Tags.MARS],
-      requirements: CardRequirements.builder((b) => b.oceans(1).cities(1).any().greeneries(1).any()),
+      requirements: CardRequirements.builder((b) => b.oceans(1).cities(1, {all}).greeneries(1, {all})),
       productionBox: Units.of({energy: -1, steel: 1, titanium: 1, plants: 1}),
 
       metadata: {

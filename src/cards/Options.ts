@@ -11,3 +11,4 @@ export const all = true;
 export const digit = true;
 export const played = true;
 export const multiplier = true;
+export const max = true;

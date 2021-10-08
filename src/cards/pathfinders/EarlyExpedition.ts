@@ -12,6 +12,7 @@ import {ResourceType} from '../../ResourceType';
 import {nextToNoOtherTileFn} from '../../boards/Board';
 import {ISpace} from '../../boards/ISpace';
 import {SelectSpace} from '../../inputs/SelectSpace';
+import {max} from '../Options';
 
 export class EarlyExpedition extends Card implements IProjectCard {
   // This card repeats the NEXT TO NO OTHER TILE behavior from Research Outpost, and Philares
@@ -23,7 +24,7 @@ export class EarlyExpedition extends Card implements IProjectCard {
       name: CardName.EARLY_EXPEDITION,
       cost: 15,
       tags: [Tags.SCIENCE, Tags.SPACE, Tags.CITY],
-      requirements: CardRequirements.builder((b) => b.temperature(-18).max()),
+      requirements: CardRequirements.builder((b) => b.temperature(-18, {max})),
       productionBox: Units.of({energy: -1, megacredits: 3}),
 
       metadata: {

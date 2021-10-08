@@ -20,7 +20,7 @@ export class HE3ProductionQuotas extends Card implements IProjectCard {
       tags: [Tags.MOON],
       cost: 10,
 
-      requirements: CardRequirements.builder((b) => b.party(PartyName.KELVINISTS).miningTiles(1).any()),
+      requirements: CardRequirements.builder((b) => b.party(PartyName.KELVINISTS).miningTiles(1, {all})),
       metadata: {
         description: 'Requires that Kelvinists are ruling or that you have 2 delegates there, and 1 mine tile on the Moon. ' +
         'Pay 1 steel per mine tile on the Moon to gain 4 heat per mine tile on the Moon. Raise the Mining Rate 1 step.',

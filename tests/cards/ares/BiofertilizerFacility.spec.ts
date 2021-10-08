@@ -4,24 +4,25 @@ import {Ants} from '../../../src/cards/base/Ants';
 import {BiofertilizerFacility} from '../../../src/cards/ares/BiofertilizerFacility';
 import {IProjectCard} from '../../../src/cards/IProjectCard';
 import {Game} from '../../../src/Game';
-import {Player} from '../../../src/Player';
 import {Resources} from '../../../src/Resources';
 import {SpaceBonus} from '../../../src/SpaceBonus';
 import {TileType} from '../../../src/TileType';
+import {TestPlayer} from '../../TestPlayer';
+import {getTestPlayer, newTestGame} from '../../TestGame';
 import {ARES_OPTIONS_NO_HAZARDS} from '../../ares/AresTestHelper';
-import {TestPlayers} from '../../TestPlayers';
 
 describe('BiofertilizerFacility', function() {
-  let card : BiofertilizerFacility; let player : Player; let game : Game;
+  let card : BiofertilizerFacility;
+  let player: TestPlayer;
+  let game: Game;
 
   let scienceTagCard: IProjectCard = new AICentral();
   let microbeHost: IProjectCard = new Ants();
 
   beforeEach(function() {
     card = new BiofertilizerFacility();
-    player = TestPlayers.BLUE.newPlayer();
-    const redPlayer = TestPlayers.RED.newPlayer();
-    game = Game.newInstance('foobar', [player, redPlayer], player, ARES_OPTIONS_NO_HAZARDS);
+    game = newTestGame(2, ARES_OPTIONS_NO_HAZARDS);
+    player = getTestPlayer(game, 0);
     scienceTagCard = new AICentral();
     microbeHost = new Ants();
   });

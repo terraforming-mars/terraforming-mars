@@ -25,16 +25,8 @@ export default Vue.extend({
     lifeFound(card: CardModel): boolean {
       return card.name === CardName.SEARCH_FOR_LIFE && card.resources !== undefined && card.resources > 0;
     },
-    isMiningTileOnMetal(card: CardModel, metal: string): boolean {
-      const miningCard = [CardName.MINING_RIGHTS, CardName.MINING_AREA, CardName.MINING_RIGHTS_ARES, CardName.MINING_AREA_ARES];
-      if (miningCard.includes(card.name)) {
-        if (metal === Resources.TITANIUM) {
-          return card.bonusResource?.includes(Resources.TITANIUM) === true;
-        } else if (metal === Resources.STEEL) {
-          return card.bonusResource?.includes(Resources.STEEL) === true;
-        }
-      }
-      return false;
+    isMiningTileOnMetal(card: CardModel, metal: Resources): boolean {
+      return card.bonusResource?.includes(metal) === true;
     },
     miningTileOnTitanium(card: CardModel): boolean {
       return card.name === CardName.SEARCH_FOR_LIFE && card.resources !== undefined && card.resources > 0;

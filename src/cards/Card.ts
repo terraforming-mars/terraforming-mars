@@ -7,7 +7,7 @@ import {Tags} from './Tags';
 import {Player} from '../Player';
 import {Units} from '../Units';
 import {CardRequirements} from './CardRequirements';
-import {CardDiscount} from './ICard';
+import {CardDiscount, TRSource} from './ICard';
 
 export interface StaticCardProperties {
   adjacencyBonus?: IAdjacencyBonus;
@@ -24,6 +24,7 @@ export interface StaticCardProperties {
   productionBox?: Units;
   cardDiscount?: CardDiscount;
   reserveUnits?: Units,
+  tr?: TRSource,
 }
 
 export const staticCardProperties = new Map<CardName, StaticCardProperties>();
@@ -87,6 +88,9 @@ export abstract class Card {
   }
   public get reserveUnits(): Units {
     return this.properties.reserveUnits || Units.EMPTY;
+  }
+  public get tr(): TRSource {
+    return this.properties.tr || {};
   }
   public canPlay(_player: Player) {
     return true;

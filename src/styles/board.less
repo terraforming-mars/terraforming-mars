@@ -116,9 +116,11 @@
 }
 
 .board-space-bonus--energy-production {
-	// TODO(kberg): change to production
-	background: url(assets/resources/power.png) no-repeat;
-	background-size: 16px;
+	background: url(assets/pathfinders/energy-production.png) no-repeat;
+	// The production box and viz border require a size change.
+	background-size: 20px;
+	width: 20px;
+	height: 20px;
 }
 
 .board-space-bonus--science {
@@ -311,7 +313,7 @@
 }
 
 .board-space-type-cove {
-	background: url(assets/cove.png) no-repeat;
+	background: url(assets/pathfinders/cove.png) no-repeat;
 	clip-path: polygon(50% 0, 100% 25%, 100% 75%, 50% 100%, 0 75%, 0 25%);
 }
 

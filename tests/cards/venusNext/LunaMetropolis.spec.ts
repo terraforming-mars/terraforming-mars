@@ -10,7 +10,6 @@ describe('LunaMetropolis', function() {
     const card = new LunaMetropolis();
     const player = TestPlayers.BLUE.newPlayer();
     const redPlayer = TestPlayers.RED.newPlayer();
-    const gameOptions = TestingUtils.setCustomGameOptions();
     Game.newInstance('foobar', [player, redPlayer], player, gameOptions);
 
     const action = card.play(player);

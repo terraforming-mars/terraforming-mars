@@ -16,7 +16,6 @@ describe('Stratopolis', function() {
     card = new Stratopolis();
     player = TestPlayers.BLUE.newPlayer();
     const redPlayer = TestPlayers.RED.newPlayer();
-    const gameOptions = TestingUtils.setCustomGameOptions();
     Game.newInstance('foobar', [player, redPlayer], player, gameOptions);
   });
 

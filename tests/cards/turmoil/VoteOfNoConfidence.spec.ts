@@ -10,7 +10,6 @@ describe('VoteOfNoConfidence', function() {
     const card = new VoteOfNoConfidence();
     const player = TestPlayers.BLUE.newPlayer();
 
-    const gameOptions = TestingUtils.setCustomGameOptions();
     const game = Game.newInstance('foobar', [player], player, gameOptions);
     expect(player.canPlayIgnoringCost(card)).is.not.true;
 

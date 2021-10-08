@@ -2,7 +2,6 @@ import {expect} from 'chai';
 import {Recruitment} from '../../../src/cards/turmoil/Recruitment';
 import {Game} from '../../../src/Game';
 import {PartyName} from '../../../src/turmoil/parties/PartyName';
-import {TestingUtils} from '../../TestingUtils';
 import {TestPlayers} from '../../TestPlayers';
 
 describe('Recruitment', function() {
@@ -10,8 +9,7 @@ describe('Recruitment', function() {
     const card = new Recruitment();
     const player = TestPlayers.BLUE.newPlayer();
 
-    const gameOptions = TestingUtils.setCustomGameOptions();
-    const game = Game.newInstance('foobar', [player], player, gameOptions);
+    const game = Game.newInstance('foobar', [player], player);
 
         game.turmoil!.parties.forEach((party) => {
           party.delegates = [];

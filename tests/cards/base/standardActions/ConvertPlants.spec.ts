@@ -15,7 +15,7 @@ describe('ConvertPlants', function() {
     card = new ConvertPlants();
     player = TestPlayers.BLUE.newPlayer();
     const player2 = TestPlayers.RED.newPlayer();
-    Game.newInstance('foobar', [player, player2], player, TestingUtils.setCustomGameOptions());
+    Game.newInstance('foobar', [player, player2], player, );
   });
 
   it('Can not act without plants', function() {

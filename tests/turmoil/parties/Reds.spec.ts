@@ -13,8 +13,7 @@ describe('Reds', function() {
   beforeEach(function() {
     player = TestPlayers.BLUE.newPlayer();
     secondPlayer = TestPlayers.RED.newPlayer();
-    const gameOptions = TestingUtils.setCustomGameOptions();
-    game = Game.newInstance('foobar', [player, secondPlayer], player, gameOptions);
+    game = Game.newInstance('foobar', [player, secondPlayer], player);
     turmoil = game.turmoil!;
     reds = new Reds();
 

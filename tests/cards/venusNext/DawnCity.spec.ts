@@ -10,7 +10,6 @@ describe('DawnCity', function() {
     const card = new DawnCity();
     const player = TestPlayers.BLUE.newPlayer();
     const redPlayer = TestPlayers.RED.newPlayer();
-    const gameOptions = TestingUtils.setCustomGameOptions();
     Game.newInstance('foobar', [player, redPlayer], player, gameOptions);
     player.addProduction(Resources.ENERGY, 1);
     expect(player.canPlayIgnoringCost(card)).is.not.true;

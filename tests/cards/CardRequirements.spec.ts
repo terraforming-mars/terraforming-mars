@@ -23,9 +23,8 @@ describe('CardRequirements', function() {
   beforeEach(function() {
     player = TestPlayers.BLUE.newPlayer();
     player2 = TestPlayers.RED.newPlayer();
-    const gameOptions = TestingUtils.setCustomGameOptions();
 
-    Game.newInstance('foobar', [player, player2], player, gameOptions);
+    Game.newInstance('foobar', [player, player2], player);
   });
 
   it('satisfies properly for oceans', function() {

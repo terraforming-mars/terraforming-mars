@@ -7,7 +7,6 @@ import {Player} from '../../../src/Player';
 import {Resources} from '../../../src/Resources';
 import {PartyName} from '../../../src/turmoil/parties/PartyName';
 import {Turmoil} from '../../../src/turmoil/Turmoil';
-import {TestingUtils} from '../../TestingUtils';
 import {TestPlayers} from '../../TestPlayers';
 
 describe('Cultural Metropolis', function() {
@@ -18,8 +17,7 @@ describe('Cultural Metropolis', function() {
     player = TestPlayers.BLUE.newPlayer();
     player2 = TestPlayers.RED.newPlayer();
 
-    const gameOptions = TestingUtils.setCustomGameOptions();
-    game = Game.newInstance('foobar', [player, player2], player, gameOptions);
+    game = Game.newInstance('foobar', [player, player2], player);
     turmoil = game.turmoil!;
   });
 

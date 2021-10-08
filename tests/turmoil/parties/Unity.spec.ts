@@ -16,8 +16,7 @@ describe('Unity', function() {
 
   beforeEach(function() {
     player = TestPlayers.BLUE.newPlayer();
-    const gameOptions = TestingUtils.setCustomGameOptions();
-    game = Game.newInstance('foobar', [player], player, gameOptions);
+    game = Game.newInstance('foobar', [player], player);
     turmoil = game.turmoil!;
     unity = new Unity();
 

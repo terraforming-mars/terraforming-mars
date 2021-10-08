@@ -11,7 +11,6 @@ describe('SponsoredMohole', function() {
     const card = new SponsoredMohole();
     const player = TestPlayers.BLUE.newPlayer();
     const redPlayer = TestPlayers.RED.newPlayer();
-    const gameOptions = TestingUtils.setCustomGameOptions();
     const game = Game.newInstance('foobar', [player, redPlayer], player, gameOptions);
     expect(player.canPlayIgnoringCost(card)).is.not.true;
 

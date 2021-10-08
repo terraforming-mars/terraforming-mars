@@ -7,7 +7,6 @@ import {TestPlayer} from '../../TestPlayer';
 import {TestPlayers} from '../../TestPlayers';
 import {SendDelegateToArea} from '../../../src/deferredActions/SendDelegateToArea';
 import {Greens} from '../../../src/turmoil/parties/Greens';
-import {TestingUtils} from '../../TestingUtils';
 
 describe('TempestConsultancy', () => {
   let player: TestPlayer;
@@ -19,7 +18,7 @@ describe('TempestConsultancy', () => {
   beforeEach(() => {
     player = TestPlayers.BLUE.newPlayer();
     otherPlayer = TestPlayers.RED.newPlayer();
-    game = Game.newInstance('id', [player, otherPlayer], player, TestingUtils.setCustomGameOptions());
+    game = Game.newInstance('id', [player, otherPlayer], player);
     card = new TempestConsultancy();
     turmoil = game.turmoil!;
   });

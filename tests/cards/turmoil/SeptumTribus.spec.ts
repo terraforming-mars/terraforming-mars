@@ -11,7 +11,6 @@ describe('SeptumTribus', function() {
     const player = TestPlayers.BLUE.newPlayer();
     const player2 = TestPlayers.RED.newPlayer();
 
-    const gameOptions = TestingUtils.setCustomGameOptions();
     const game = Game.newInstance('foobar', [player, player2], player, gameOptions);
     card.play();
 

@@ -134,8 +134,7 @@ describe('GeologicalSurvey', () => {
 
   it('Works with Mars First policy', () => {
     player = TestPlayers.BLUE.newPlayer();
-    const gameOptions = TestingUtils.setCustomGameOptions();
-    game = Game.newInstance('foobar', [player], player, gameOptions);
+    game = Game.newInstance('foobar', [player], player);
     const turmoil = game.turmoil!;
     const marsFirst = new MarsFirst();
 

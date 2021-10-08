@@ -59,7 +59,7 @@ import {RareEarthElements} from './RareEarthElements';
 // import {ResearchGrant} from './ResearchGrant';
 import {ReturntoAbandonedTechnology} from './ReturntoAbandonedTechnology';
 // import {RichDeposits} from './RichDeposits';
-// import {SecretLabs} from './SecretLabs';
+import {SecretLabs} from './SecretLabs';
 // import {SmallComet} from './SmallComet';
 // import {SmallOpenPitMine} from './SmallOpenPitMine';
 // import {SocialEvents} from './SocialEvents';
@@ -102,7 +102,7 @@ export const PATHFINDERS_CARD_MANIFEST = new CardManifest({
     {cardName: CardName.DESIGNED_ORGANISMS, Factory: DesignedOrganisms},
     {cardName: CardName.SPACE_DEBRIS_CLEANING_OPERATION, Factory: SpaceDebrisCleaningOperation},
     // // {cardName: CardName.PRIVATE_SECURITY, Factory: PrivateSecurity},                        // PROTECTING RESOURCES
-    // {cardName: CardName.SECRET_LABS, Factory: SecretLabs},
+    {cardName: CardName.SECRET_LABS, Factory: SecretLabs},
     // {cardName: CardName.CYANOBACTERIA, Factory: Cyanobacteria},
     // {cardName: CardName.COMMUNICATION_CENTER, Factory: CommunicationCenter},
     // {cardName: CardName.MARTIAN_REPOSITORY, Factory: MartianRepository},

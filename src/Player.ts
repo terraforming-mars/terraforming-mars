@@ -1868,7 +1868,7 @@ export class Player implements ISerializable<SerializedPlayer> {
 
     if (tr.temperature !== undefined) {
       const availableSteps = Math.floor((constants.MAX_TEMPERATURE - this.game.getTemperature()) / 2);
-      const steps = Math.min(availableSteps, tr.temperature)
+      const steps = Math.min(availableSteps, tr.temperature);
       total = total + steps;
       if (this.game.getTemperature() < 0 && this.game.getTemperature() + (steps * 2) > 0) {
         total++; // Placing an ocean

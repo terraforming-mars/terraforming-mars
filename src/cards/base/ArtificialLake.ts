@@ -7,9 +7,7 @@ import {ISpace} from '../../boards/ISpace';
 import {SelectSpace} from '../../inputs/SelectSpace';
 import {SpaceType} from '../../SpaceType';
 import {CardName} from '../../CardName';
-import {PartyHooks} from '../../turmoil/parties/PartyHooks';
-import {PartyName} from '../../turmoil/parties/PartyName';
-import {MAX_OCEAN_TILES, REDS_RULING_POLICY_COST} from '../../constants';
+import {MAX_OCEAN_TILES} from '../../constants';
 import {CardRequirements} from '../CardRequirements';
 import {CardRenderer} from '../render/CardRenderer';
 
@@ -20,6 +18,7 @@ export class ArtificialLake extends Card implements IProjectCard {
       name: CardName.ARTIFICIAL_LAKE,
       tags: [Tags.BUILDING],
       cost: 15,
+      tr: {oceans: 1},
 
       requirements: CardRequirements.builder((b) => b.temperature(-6)),
       metadata: {
@@ -29,15 +28,6 @@ export class ArtificialLake extends Card implements IProjectCard {
         victoryPoints: 1,
       },
     });
-  }
-  public canPlay(player: Player): boolean {
-    const oceansMaxed = player.game.board.getOceansOnBoard() === MAX_OCEAN_TILES;
-
-    if (PartyHooks.shouldApplyPolicy(player, PartyName.REDS) && !oceansMaxed) {
-      return player.canAfford(player.getCardCost(this) + REDS_RULING_POLICY_COST, {steel: true});
-    }
-
-    return true;
   }
 
   public play(player: Player) {

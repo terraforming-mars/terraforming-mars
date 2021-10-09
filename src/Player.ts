@@ -1858,6 +1858,9 @@ export class Player implements ISerializable<SerializedPlayer> {
       (canUseScience ? this.getSpendableScienceResources() : 0);
   }
 
+  // TODO(kberg): Move this to somewhere in turmoil/
+  // TODO(kberg): Add a test where if you raise oxygen to max temperature but temperature is maxed you do not have to pay for it.
+  // It works, but4 a test would be helpful.
   private computeTerraformRatingBump(card: IProjectCard): number {
     if (!PartyHooks.shouldApplyPolicy(this, PartyName.REDS)) return 0;
 
@@ -1877,7 +1880,6 @@ export class Player implements ISerializable<SerializedPlayer> {
         tr.temperature = (tr.temperature ?? 0) + 1;
       }
     }
-
 
     if (tr.temperature !== undefined) {
       const availableSteps = Math.floor((constants.MAX_TEMPERATURE - this.game.getTemperature()) / 2);

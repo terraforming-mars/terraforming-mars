@@ -7,7 +7,6 @@ import {HiredRaiders} from '../../../src/cards/base/HiredRaiders';
 import {OrOptions} from '../../../src/inputs/OrOptions';
 
 describe('PrivateSecurity', function() {
-  let game: Game;
   let card: PrivateSecurity;
   let player: TestPlayer;
   let opponent1: TestPlayer;
@@ -18,7 +17,7 @@ describe('PrivateSecurity', function() {
     player = TestPlayers.BLUE.newPlayer();
     opponent1 = TestPlayers.RED.newPlayer();
     opponent2 = TestPlayers.GREEN.newPlayer();
-    game = Game.newInstance('id', [player, opponent1, opponent2], player);
+    Game.newInstance('id', [player, opponent1, opponent2], player);
   });
 
   it('protects against Hired Raiders', function() {

@@ -21,6 +21,7 @@ import {SelfReplicatingRobots} from '../src/cards/promo/SelfReplicatingRobots';
 import {Pets} from '../src/cards/base/Pets';
 import {GlobalEventName} from '../src/turmoil/globalEvents/GlobalEventName';
 import {ArtificialLake} from '../src/cards/base/ArtificialLake';
+import {LavaFlows} from '../src/cards/base/LavaFlows';
 import {PoliticalAgendas} from '../src/turmoil/PoliticalAgendas';
 import {Reds} from '../src/turmoil/parties/Reds';
 import {Greens} from '../src/turmoil/parties/Greens';
@@ -746,6 +747,63 @@ describe('Player', function() {
         },
       });
   });
+});
+
+it('canPlay: reds tax applies by default when raising temperature', function() {
+  // LavaFlows raises the temperature two steps.
+  const card = new LavaFlows();
+  const player = TestPlayers.BLUE.newPlayer();
+  const game = Game.newInstance('foobar', [player], player, TestingUtils.setCustomGameOptions());
+  const turmoil = game.turmoil!;
+  game.phase = Phase.ACTION;
+
+  turmoil.rulingParty = new Greens();
+  PoliticalAgendas.setNextAgenda(turmoil, game);
+  player.megaCredits = card.cost;
+  expect(player.canPlay(card)).is.true;
+
+  turmoil.rulingParty = new Reds();
+  PoliticalAgendas.setNextAgenda(turmoil, game);
+  player.megaCredits = card.cost;
+  expect(player.canPlay(card)).is.false;
+
+  player.megaCredits = card.cost + 5;
+  expect(player.canPlay(card)).is.false;
+  player.megaCredits = card.cost + 6;
+  expect(player.canPlay(card)).is.true;
+
+  // Set temperature so it only raises one step.
+  (game as any).temperature = 6;
+
+  player.megaCredits = card.cost;
+  expect(player.canPlay(card)).is.false;
+  player.megaCredits = card.cost + 3;
+  expect(player.canPlay(card)).is.true;
+
+  (game as any).temperature = 8;
+
+  player.megaCredits = card.cost;
+  expect(player.canPlay(card)).is.true;
+});
+
+it('canPlay: when paying reds tax for temperature, include the cost for the 0° ocean.', function() {
+  // LavaFlows raises the temperature two steps.
+  const card = new LavaFlows();
+  const player = TestPlayers.BLUE.newPlayer();
+  const game = Game.newInstance('foobar', [player], player, TestingUtils.setCustomGameOptions());
+  const turmoil = game.turmoil!;
+  game.phase = Phase.ACTION;
+
+  turmoil.rulingParty = new Reds();
+  PoliticalAgendas.setNextAgenda(turmoil, game);
+
+  // Raising to 0
+  (game as any).temperature = -2;
+
+  player.megaCredits = card.cost + 8;
+  expect(player.canPlay(card)).is.false;
+  player.megaCredits = card.cost + 9;
+  expect(player.canPlay(card)).is.true;
 });
 
 it('canPlay: reds tax applies by default when placing oceans', function() {

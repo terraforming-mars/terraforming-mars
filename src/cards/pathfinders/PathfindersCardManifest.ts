@@ -43,7 +43,7 @@ import {LuxuryEstate} from './LuxuryEstate';
 // import {MartianDustProcessingPlant} from './MartianDustProcessingPlant';
 import {MartianMonuments} from './MartianMonuments';
 // import {MartianNatureWonders} from './MartianNatureWonders';
-// import {MartianRepository} from './MartianRepository';
+import {MartianRepository} from './MartianRepository';
 // import {MicrobiologyPatents} from './MicrobiologyPatents';
 import {MuseumofEarlyColonisation} from './MuseumofEarlyColonisation';
 import {NewVenice} from './NewVenice';
@@ -105,7 +105,7 @@ export const PATHFINDERS_CARD_MANIFEST = new CardManifest({
     // {cardName: CardName.SECRET_LABS, Factory: SecretLabs},
     // {cardName: CardName.CYANOBACTERIA, Factory: Cyanobacteria},
     // {cardName: CardName.COMMUNICATION_CENTER, Factory: CommunicationCenter},
-    // {cardName: CardName.MARTIAN_REPOSITORY, Factory: MartianRepository},
+    {cardName: CardName.MARTIAN_REPOSITORY, Factory: MartianRepository},
     // {cardName: CardName.DATA_LEAK, Factory: DataLeak},
     // {cardName: CardName.SMALL_OPEN_PIT_MINE, Factory: SmallOpenPitMine},
     // {cardName: CardName.SOLAR_STORM, Factory: SolarStorm},

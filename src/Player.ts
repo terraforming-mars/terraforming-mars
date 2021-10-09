@@ -1861,24 +1861,32 @@ export class Player implements ISerializable<SerializedPlayer> {
   private computeTerraformRatingBump(card: IProjectCard): number {
     if (!PartyHooks.shouldApplyPolicy(this, PartyName.REDS)) return 0;
 
-    const tr = card.tr;
+    let tr = card.tr;
     if (tr === undefined) return 0;
 
+    // Local copy
+    tr = {...tr};
     let total = tr.tr ?? 0;
+
+    if (tr.oxygen !== undefined) {
+      const availableSteps = constants.MAX_OXYGEN_LEVEL - this.game.getOxygenLevel();
+      const steps = Math.min(availableSteps, tr.oxygen);
+      total = total + steps;
+      // TODO(kberg): Add constants for these constraints.
+      if (this.game.getOxygenLevel() < 8 && this.game.getOxygenLevel() + steps >= 8) {
+        tr.temperature = (tr.temperature ?? 0) + 1;
+      }
+    }
+
 
     if (tr.temperature !== undefined) {
       const availableSteps = Math.floor((constants.MAX_TEMPERATURE - this.game.getTemperature()) / 2);
       const steps = Math.min(availableSteps, tr.temperature);
       total = total + steps;
-      if (this.game.getTemperature() < 0 && this.game.getTemperature() + (steps * 2) > 0) {
-        total++; // Placing an ocean
+      if (this.game.getTemperature() < 0 && this.game.getTemperature() + (steps * 2) >= 0) {
+        tr.oceans = (tr.oceans ?? 0) + 1;
       }
     }
-
-    // if (tr.oxygen !== undefined) {
-    //   const availableSteps = constants.MAX_OXYGEN_LEVEL - this.game.getOxygenLevel();
-    //   total = total + Math.min(availableSteps, tr.oxygen);
-    // }
 
     if (tr.oceans !== undefined) {
       const availableSteps = constants.MAX_OCEAN_TILES - this.game.board.getOceansOnBoard();

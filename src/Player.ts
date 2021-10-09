@@ -1848,8 +1848,11 @@ export class Player implements ISerializable<SerializedPlayer> {
     const canUseMicrobes: boolean = options?.microbes ?? false;
     const canUseScience: boolean = options?.science ?? false;
 
-    return cost <=
-    this.megaCredits - (reserveUnits.megacredits + (options?.redsCost ?? 0)) +
+    const availableMegacredits = this.megaCredits - (reserveUnits.megacredits + (options?.redsCost ?? 0));
+    if (availableMegacredits < 0) {
+      return false;
+    }
+    return cost <= availableMegacredits +
       (this.canUseHeatAsMegaCredits ? this.heat - reserveUnits.heat : 0) +
       (canUseSteel ? (this.steel - reserveUnits.steel) * this.getSteelValue() : 0) +
       (canUseTitanium ? (this.titanium - reserveUnits.titanium) * this.getTitaniumValue() : 0) +

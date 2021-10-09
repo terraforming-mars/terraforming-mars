@@ -30,12 +30,16 @@ export class LawSuit extends Card implements IProjectCard {
     });
   }
 
+  private targets(player: Player) {
+    return player.game.getPlayersById(player.removingPlayers).filter((player) => !player.megaCreditsAreProtected());
+  }
+
   public canPlay(player: Player) {
-    return player.removingPlayers.length > 0;
+    return this.targets(player).length > 0;
   }
 
   public play(player: Player) {
-    return new SelectPlayer(player.game.getPlayersById(player.removingPlayers), 'Select player to sue (steal 3 M€ from)', 'Steal M€', (suedPlayer: Player) => {
+    return new SelectPlayer(this.targets(player), 'Select player to sue (steal 3 M€ from)', 'Steal M€', (suedPlayer: Player) => {
       const amount = Math.min(3, suedPlayer.megaCredits);
       player.addResource(Resources.MEGACREDITS, amount);
       suedPlayer.deductResource(Resources.MEGACREDITS, amount, {log: true, from: player});

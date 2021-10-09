@@ -30,6 +30,9 @@ export class StealResources implements DeferredAction {
     if (this.resource === Resources.STEEL || this.resource === Resources.TITANIUM) {
       candidates = candidates.filter((p) => !p.alloysAreProtected());
     }
+    if (this.resource === Resources.MEGACREDITS) {
+      candidates = candidates.filter((p) => !p.megaCreditsAreProtected());
+    }
 
     if (candidates.length === 0) {
       return undefined;

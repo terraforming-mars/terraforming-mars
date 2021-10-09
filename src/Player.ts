@@ -592,6 +592,10 @@ export class Player implements ISerializable<SerializedPlayer> {
     return this.cardIsInEffect(CardName.LUNAR_SECURITY_STATIONS);
   }
 
+  public megaCreditsAreProtected(): boolean {
+    return this.cardIsInEffect(CardName.PRIVATE_SECURITY);
+  }
+
   // TODO(kberg): counting cities on the board is done in 3 different places, consolidate.
   // Search for uses of TileType.OCEAN_CITY for reference.
   public getCitiesCount() {

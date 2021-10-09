@@ -1796,7 +1796,7 @@ export class Player implements ISerializable<SerializedPlayer> {
 
   public canPlay(card: IProjectCard): boolean {
     const baseCost = this.getCardCost(card);
-    const redsCost = this.computeTRBump(card) * REDS_RULING_POLICY_COST;
+    const redsCost = this.computeTerraformRatingBump(card) * REDS_RULING_POLICY_COST;
 
     const canAfford = this.canAfford(
       baseCost,
@@ -1858,7 +1858,7 @@ export class Player implements ISerializable<SerializedPlayer> {
       (canUseScience ? this.getSpendableScienceResources() : 0);
   }
 
-  private computeTRBump(card: IProjectCard): number {
+  private computeTerraformRatingBump(card: IProjectCard): number {
     if (!PartyHooks.shouldApplyPolicy(this, PartyName.REDS)) return 0;
 
     const tr = card.tr;

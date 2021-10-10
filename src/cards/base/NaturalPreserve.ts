@@ -13,6 +13,7 @@ import {CardRequirements} from '../CardRequirements';
 import {CardRenderer} from '../render/CardRenderer';
 import {Units} from '../../Units';
 import {nextToNoOtherTileFn} from '../../boards/Board';
+import {max} from '../Options';
 
 export class NaturalPreserve extends Card implements IProjectCard {
   constructor(
@@ -33,7 +34,7 @@ export class NaturalPreserve extends Card implements IProjectCard {
       cost: 9,
       productionBox: Units.of({megacredits: 1}),
       adjacencyBonus,
-      requirements: CardRequirements.builder((b) => b.oxygen(4).max()),
+      requirements: CardRequirements.builder((b) => b.oxygen(4, {max})),
       metadata,
     });
   }

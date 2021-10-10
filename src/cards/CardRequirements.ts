@@ -50,6 +50,8 @@ export class CardRequirements {
   }
 }
 
+export type Options = {max?: boolean, all?: boolean};
+
 class Builder {
   private reqs: Array<CardRequirement> = [];
 
@@ -57,43 +59,47 @@ class Builder {
     return new CardRequirements(this.reqs);
   }
 
-  public oceans(amount: number): Builder {
-    if (amount <= 0 || amount > MAX_OCEAN_TILES) {
+  public oceans(amount: number = 1, options?: Options): Builder {
+    const req = new CardRequirement(RequirementType.OCEANS, amount, options);
+    if (req.amount <= 0 || req.amount > MAX_OCEAN_TILES) {
       throw new Error('Ocean tiles must be above 0 and below ' + MAX_OCEAN_TILES);
     }
-    this.reqs.push(new CardRequirement(RequirementType.OCEANS, amount));
+    this.reqs.push(req);
     return this;
   }
 
-  public oxygen(amount: number): Builder {
-    if (amount < MIN_OXYGEN_LEVEL || amount > MAX_OXYGEN_LEVEL) {
+  public oxygen(amount: number = 1, options?: Options): Builder {
+    const req = new CardRequirement(RequirementType.OXYGEN, amount, options);
+    if (req.amount < MIN_OXYGEN_LEVEL || req.amount > MAX_OXYGEN_LEVEL) {
       throw new Error('Oxygen must be above ' + MIN_OXYGEN_LEVEL + ' and below ' + MAX_OXYGEN_LEVEL);
     }
-    this.reqs.push(new CardRequirement(RequirementType.OXYGEN, amount));
+    this.reqs.push(req);
     return this;
   }
 
-  public temperature(amount: number): Builder {
-    if (amount < MIN_TEMPERATURE || amount > MAX_TEMPERATURE) {
+  public temperature(amount: number = 1, options?: Options): Builder {
+    const req = new CardRequirement(RequirementType.TEMPERATURE, amount, options);
+    if (req.amount < MIN_TEMPERATURE || req.amount > MAX_TEMPERATURE) {
       throw new Error('Temperature must be above ' + MIN_TEMPERATURE + ' and below ' + MAX_TEMPERATURE);
     }
-    if (amount % 2 !== 0) {
+    if (req.amount % 2 !== 0) {
       throw new Error('Temperature must be even');
     }
-    this.reqs.push(new CardRequirement(RequirementType.TEMPERATURE, amount));
+    this.reqs.push(req);
     return this;
   }
 
-  public venus(amount: number): Builder {
-    if (amount < MIN_VENUS_SCALE || amount > MAX_VENUS_SCALE) {
+  public venus(amount: number = 1, options?: Options): Builder {
+    const req =new CardRequirement(RequirementType.VENUS, amount, options);
+    if (req.amount < MIN_VENUS_SCALE || req.amount > MAX_VENUS_SCALE) {
       throw new Error('Venus must be above ' + MIN_VENUS_SCALE + ' and below ' + MAX_VENUS_SCALE);
     }
-    this.reqs.push(new CardRequirement(RequirementType.VENUS, amount));
+    this.reqs.push(req);
     return this;
   }
 
-  public tr(amount: number): Builder {
-    this.reqs.push(new CardRequirement(RequirementType.TR, amount));
+  public tr(amount: number = 1, options?: Options): Builder {
+    this.reqs.push(new CardRequirement(RequirementType.TR, amount, options));
     return this;
   }
 
@@ -102,43 +108,43 @@ class Builder {
     return this;
   }
 
-  public resourceTypes(amount: number): Builder {
-    this.reqs.push(new CardRequirement(RequirementType.RESOURCE_TYPES, amount));
+  public resourceTypes(amount: number = 1, options?: Options): Builder {
+    this.reqs.push(new CardRequirement(RequirementType.RESOURCE_TYPES, amount, options));
     return this;
   }
 
-  public greeneries(amount?: number): Builder {
-    this.reqs.push(new CardRequirement(RequirementType.GREENERIES, amount));
+  public greeneries(amount: number = 1, options?: Options): Builder {
+    this.reqs.push(new CardRequirement(RequirementType.GREENERIES, amount, options));
     return this;
   }
 
-  public cities(amount?: number): Builder {
-    this.reqs.push(new CardRequirement(RequirementType.CITIES, amount));
+  public cities(amount: number = 1, options?: Options): Builder {
+    this.reqs.push(new CardRequirement(RequirementType.CITIES, amount, options));
     return this;
   }
 
-  public colonies(amount?: number): Builder {
-    this.reqs.push(new CardRequirement(RequirementType.COLONIES, amount));
+  public colonies(amount: number = 1, options?: Options): Builder {
+    this.reqs.push(new CardRequirement(RequirementType.COLONIES, amount, options));
     return this;
   }
 
-  public floaters(amount?: number): Builder {
-    this.reqs.push(new CardRequirement(RequirementType.FLOATERS, amount));
+  public floaters(amount: number = 1, options?: Options): Builder {
+    this.reqs.push(new CardRequirement(RequirementType.FLOATERS, amount, options));
     return this;
   }
 
-  public partyLeaders(amount?: number): Builder {
-    this.reqs.push(new CardRequirement(RequirementType.PARTY_LEADERS, amount));
+  public partyLeaders(amount: number = 1, options?: Options): Builder {
+    this.reqs.push(new CardRequirement(RequirementType.PARTY_LEADERS, amount, options));
     return this;
   }
 
-  public tag(tag: Tags, amount?: number): Builder {
-    this.reqs.push(new TagCardRequirement(tag, amount));
+  public tag(tag: Tags, amount: number = 1, options?: Options): Builder {
+    this.reqs.push(new TagCardRequirement(tag, amount, options));
     return this;
   }
 
-  public production(resource: Resources, amount?: number): Builder {
-    this.reqs.push(new ProductionCardRequirement(resource, amount));
+  public production(resource: Resources, amount: number = 1, options?: Options): Builder {
+    this.reqs.push(new ProductionCardRequirement(resource, amount, options));
     return this;
   }
 
@@ -152,51 +158,33 @@ class Builder {
     return this;
   }
 
-  public colonyRate(amount: number): Builder {
-    this.reqs.push(new CardRequirement(RequirementType.COLONY_RATE, amount));
+  public colonyRate(amount: number = 1, options?: Options): Builder {
+    this.reqs.push(new CardRequirement(RequirementType.COLONY_RATE, amount, options));
     return this;
   }
 
-  public miningRate(amount: number): Builder {
-    this.reqs.push(new CardRequirement(RequirementType.MINING_RATE, amount));
+  public miningRate(amount: number = 1, options?: Options): Builder {
+    this.reqs.push(new CardRequirement(RequirementType.MINING_RATE, amount, options));
     return this;
   }
 
-  public logisticRate(amount: number): Builder {
-    this.reqs.push(new CardRequirement(RequirementType.LOGISTIC_RATE, amount));
+  public logisticRate(amount: number = 1, options?: Options): Builder {
+    this.reqs.push(new CardRequirement(RequirementType.LOGISTIC_RATE, amount, options));
     return this;
   }
 
-  public colonyTiles(amount: number): Builder {
-    this.reqs.push(new CardRequirement(RequirementType.COLONY_TILES, amount));
+  public colonyTiles(amount: number = 1, options?: Options): Builder {
+    this.reqs.push(new CardRequirement(RequirementType.COLONY_TILES, amount, options));
     return this;
   }
 
-  public miningTiles(amount: number): Builder {
-    this.reqs.push(new CardRequirement(RequirementType.MINING_TILES, amount));
+  public miningTiles(amount: number = 1, options?: Options): Builder {
+    this.reqs.push(new CardRequirement(RequirementType.MINING_TILES, amount, options));
     return this;
   }
 
-  public roadTiles(amount: number): Builder {
-    this.reqs.push(new CardRequirement(RequirementType.ROAD_TILES, amount));
-    return this;
-  }
-
-  public max(): Builder {
-    const req = this.reqs.pop();
-    if (req === undefined) {
-      throw new Error('Called max without a CardRequirement.');
-    }
-    this.reqs.push(req.max());
-    return this;
-  }
-
-  public any(): Builder {
-    const req = this.reqs.pop();
-    if (req === undefined) {
-      throw new Error('Called any without a CardRequirement.');
-    }
-    this.reqs.push(req.any());
+  public roadTiles(amount: number = 1, options?: Options): Builder {
+    this.reqs.push(new CardRequirement(RequirementType.ROAD_TILES, amount, options));
     return this;
   }
 }

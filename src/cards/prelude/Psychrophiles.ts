@@ -8,7 +8,7 @@ import {ResourceType} from '../../ResourceType';
 import {CardName} from '../../CardName';
 import {CardRequirements} from '../CardRequirements';
 import {CardRenderer} from '../render/CardRenderer';
-import {played} from '../Options';
+import {max, played} from '../Options';
 
 export class Psychrophiles extends Card implements IActionCard, IProjectCard, IResourceCard {
   constructor() {
@@ -19,7 +19,7 @@ export class Psychrophiles extends Card implements IActionCard, IProjectCard, IR
       cost: 2,
       resourceType: ResourceType.MICROBE,
 
-      requirements: CardRequirements.builder((b) => b.temperature(-20).max()),
+      requirements: CardRequirements.builder((b) => b.temperature(-20, {max})),
       metadata: {
         cardNumber: 'P39',
         renderData: CardRenderer.builder((b) => {

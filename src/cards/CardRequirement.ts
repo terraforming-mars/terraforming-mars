@@ -223,7 +223,8 @@ export class TagCardRequirement extends CardRequirement {
     return firstLetterUpperCase(this.tag);
   }
   public satisfies(player: Player): boolean {
-    let tagCount = player.getTagCount(this.tag);
+    const includeWildTags = this.isMax !== true;
+    let tagCount = player.getTagCount(this.tag, false, includeWildTags);
     // PoliticalAgendas Scientists P4 hook
     if (this.tag === Tags.SCIENCE && player.hasTurmoilScienceTagBonus) tagCount += 1;
 

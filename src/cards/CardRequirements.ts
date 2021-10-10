@@ -41,7 +41,11 @@ export class CardRequirements {
     return this.requirements.some((req) => req.type === RequirementType.REMOVED_PLANTS);
   }
   public satisfies(player: Player): boolean {
-    const tags = this.requirements.filter((requirement) => requirement.type === RequirementType.TAG)
+    // Process tags separately, though max tag criteria will be processed later.
+    // This pre-computation takes the wild tag into account.
+    const tags = this.requirements
+      .filter((requirement) => requirement.type === RequirementType.TAG)
+      .filter((requirement) => requirement.isMax !== true)
       .map((requirement) => (requirement as TagCardRequirement).tag);
     if (!player.checkMultipleTagPresence(tags)) {
       return false;

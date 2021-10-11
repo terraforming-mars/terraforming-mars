@@ -6,6 +6,6 @@ export class Coordinator implements IAward {
     public name: string = 'Coordinator';
     public description: string = 'Having the most event cards in play'
     public getScore(player: Player): number {
-      return player.playedCards.filter((card) => card.cardType === CardType.EVENT).length;
+      return player.getCardsByCardType(CardType.EVENT).length;
     }
 }

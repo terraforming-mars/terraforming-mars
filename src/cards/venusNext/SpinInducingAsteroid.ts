@@ -9,6 +9,7 @@ import {REDS_RULING_POLICY_COST} from '../../constants';
 import {CardRequirements} from '../CardRequirements';
 import {CardRenderer} from '../render/CardRenderer';
 import {Card} from '../Card';
+import {max} from '../Options';
 
 export class SpinInducingAsteroid extends Card implements IProjectCard {
   constructor() {
@@ -18,7 +19,7 @@ export class SpinInducingAsteroid extends Card implements IProjectCard {
       cost: 16,
       tags: [Tags.SPACE],
 
-      requirements: CardRequirements.builder((b) => b.venus(10).max()),
+      requirements: CardRequirements.builder((b) => b.venus(10, {max})),
       metadata: {
         cardNumber: '246',
         renderData: CardRenderer.builder((b) => {

@@ -43,6 +43,17 @@ export class TestPlayer extends Player {
     };
   }
 
+  public getResourcesForTest(): Units {
+    return {
+      megacredits: this.megaCredits,
+      steel: this.steel,
+      titanium: this.titanium,
+      plants: this.plants,
+      energy: this.energy,
+      heat: this.heat,
+    };
+  }
+
   public getVictoryPoints(): VictoryPointsBreakdown {
     this.victoryPointsBreakdown = super.getVictoryPoints();
     return this.victoryPointsBreakdown;
@@ -56,7 +67,11 @@ export class TestPlayer extends Player {
 
   public getTagCount(tag: Tags, includeEventsTags:boolean = false, includeWildcardTags:boolean = true): number {
     if (this.tagsForTest !== undefined) {
-      return this.tagsForTest[tag] || 0;
+      let count = this.tagsForTest[tag] ?? 0;
+      if (tag !== Tags.WILDCARD && includeWildcardTags === true) {
+        count += this.tagsForTest[Tags.WILDCARD] ?? 0;
+      }
+      return count;
     }
     return super.getTagCount(tag, includeEventsTags, includeWildcardTags);
   }

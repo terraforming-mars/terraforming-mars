@@ -59,10 +59,6 @@ export class TitanFloatingLaunchPad extends Card implements IProjectCard, IResou
     }
 
     return new OrOptions(
-      new SelectOption('Add 1 floater to a Jovian card', 'Add floater', () => {
-        player.game.defer(new AddResourcesToCard(player, ResourceType.FLOATER, {restrictedTag: Tags.JOVIAN}));
-        return undefined;
-      }),
       new SelectOption('Remove 1 floater on this card to trade for free', 'Remove floater', () => {
         const coloniesModel: Array<ColonyModel> = player.game.getColoniesModel(openColonies);
 
@@ -84,6 +80,10 @@ export class TitanFloatingLaunchPad extends Card implements IProjectCard, IResou
           }),
         ));
 
+        return undefined;
+      }),
+      new SelectOption('Add 1 floater to a Jovian card', 'Add floater', () => {
+        player.game.defer(new AddResourcesToCard(player, ResourceType.FLOATER, {restrictedTag: Tags.JOVIAN}));
         return undefined;
       }),
     );

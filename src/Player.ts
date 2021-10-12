@@ -1848,8 +1848,11 @@ export class Player implements ISerializable<SerializedPlayer> {
     const canUseMicrobes: boolean = options?.microbes ?? false;
     const canUseScience: boolean = options?.science ?? false;
 
-    return cost <=
-    this.megaCredits - (reserveUnits.megacredits + (options?.redsCost ?? 0)) +
+    const availableMegacredits = this.megaCredits - (reserveUnits.megacredits + (options?.redsCost ?? 0));
+    if (availableMegacredits < 0) {
+      return false;
+    }
+    return cost <= availableMegacredits +
       (this.canUseHeatAsMegaCredits ? this.heat - reserveUnits.heat : 0) +
       (canUseSteel ? (this.steel - reserveUnits.steel) * this.getSteelValue() : 0) +
       (canUseTitanium ? (this.titanium - reserveUnits.titanium) * this.getTitaniumValue() : 0) +
@@ -1858,27 +1861,37 @@ export class Player implements ISerializable<SerializedPlayer> {
       (canUseScience ? this.getSpendableScienceResources() : 0);
   }
 
+  // TODO(kberg): Move this to somewhere in turmoil/
+  // TODO(kberg): Add a test where if you raise oxygen to max temperature but temperature is maxed you do not have to pay for it.
+  // It works, but4 a test would be helpful.
   private computeTerraformRatingBump(card: IProjectCard): number {
     if (!PartyHooks.shouldApplyPolicy(this, PartyName.REDS)) return 0;
 
-    const tr = card.tr;
+    let tr = card.tr;
     if (tr === undefined) return 0;
 
+    // Local copy
+    tr = {...tr};
     let total = tr.tr ?? 0;
+
+    if (tr.oxygen !== undefined) {
+      const availableSteps = constants.MAX_OXYGEN_LEVEL - this.game.getOxygenLevel();
+      const steps = Math.min(availableSteps, tr.oxygen);
+      total = total + steps;
+      // TODO(kberg): Add constants for these constraints.
+      if (this.game.getOxygenLevel() < 8 && this.game.getOxygenLevel() + steps >= 8) {
+        tr.temperature = (tr.temperature ?? 0) + 1;
+      }
+    }
 
     if (tr.temperature !== undefined) {
       const availableSteps = Math.floor((constants.MAX_TEMPERATURE - this.game.getTemperature()) / 2);
       const steps = Math.min(availableSteps, tr.temperature);
       total = total + steps;
-      if (this.game.getTemperature() < 0 && this.game.getTemperature() + (steps * 2) > 0) {
-        total++; // Placing an ocean
+      if (this.game.getTemperature() < 0 && this.game.getTemperature() + (steps * 2) >= 0) {
+        tr.oceans = (tr.oceans ?? 0) + 1;
       }
     }
-
-    // if (tr.oxygen !== undefined) {
-    //   const availableSteps = constants.MAX_OXYGEN_LEVEL - this.game.getOxygenLevel();
-    //   total = total + Math.min(availableSteps, tr.oxygen);
-    // }
 
     if (tr.oceans !== undefined) {
       const availableSteps = constants.MAX_OCEAN_TILES - this.game.board.getOceansOnBoard();

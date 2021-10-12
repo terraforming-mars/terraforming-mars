@@ -22,10 +22,12 @@ import {Pets} from '../src/cards/base/Pets';
 import {GlobalEventName} from '../src/turmoil/globalEvents/GlobalEventName';
 import {ArtificialLake} from '../src/cards/base/ArtificialLake';
 import {LavaFlows} from '../src/cards/base/LavaFlows';
+import {StripMine} from '../src/cards/base/StripMine';
 import {PoliticalAgendas} from '../src/turmoil/PoliticalAgendas';
 import {Reds} from '../src/turmoil/parties/Reds';
 import {Greens} from '../src/turmoil/parties/Greens';
 import {Phase} from '../src/Phase';
+import {MAX_OXYGEN_LEVEL, MAX_TEMPERATURE} from '../src/constants';
 
 describe('Player', function() {
   it('should initialize with right defaults', function() {
@@ -749,6 +751,87 @@ describe('Player', function() {
   });
 });
 
+// TODO(kberg): Move tests and code to the turmoil branch.
+it('canPlay: reds tax applies by default when raising oxygen', function() {
+  // Strip Mine raises the oxygen level two steps.
+  const card = new StripMine();
+  const player = TestPlayers.BLUE.newPlayer();
+  const game = Game.newInstance('foobar', [player], player, TestingUtils.setCustomGameOptions());
+  const turmoil = game.turmoil!;
+  game.phase = Phase.ACTION;
+  player.setProductionForTest({energy: 2}); // Card requirement.
+
+  turmoil.rulingParty = new Greens();
+  PoliticalAgendas.setNextAgenda(turmoil, game);
+  player.megaCredits = card.cost;
+  expect(player.canPlay(card)).is.true;
+
+  turmoil.rulingParty = new Reds();
+  PoliticalAgendas.setNextAgenda(turmoil, game);
+  player.megaCredits = card.cost;
+  expect(player.canPlay(card)).is.false;
+
+  player.megaCredits = card.cost + 5;
+  expect(player.canPlay(card)).is.false;
+  player.megaCredits = card.cost + 6;
+  expect(player.canPlay(card)).is.true;
+
+  (game as any).oxygenLevel = MAX_OXYGEN_LEVEL - 1;
+  player.megaCredits = card.cost + 2;
+  expect(player.canPlay(card)).is.false;
+  player.megaCredits = card.cost + 3;
+  expect(player.canPlay(card)).is.true;
+
+  (game as any).oxygenLevel = MAX_OXYGEN_LEVEL;
+
+  player.megaCredits = card.cost;
+  expect(player.canPlay(card)).is.true;
+});
+
+it('canPlay: when paying reds tax for oxygen, include the cost for the 8% temperature bump.', function() {
+  // Strip Mine raises the oxygen level two steps.
+  const card = new StripMine();
+  const player = TestPlayers.BLUE.newPlayer();
+  const game = Game.newInstance('foobar', [player], player, TestingUtils.setCustomGameOptions());
+  const turmoil = game.turmoil!;
+  game.phase = Phase.ACTION;
+  player.setProductionForTest({energy: 2}); // Card requirement.
+
+  turmoil.rulingParty = new Reds();
+  PoliticalAgendas.setNextAgenda(turmoil, game);
+
+  // Raising to 8%
+  (game as any).oxygenLevel = 7;
+
+  player.megaCredits = card.cost + 8;
+  expect(player.canPlay(card)).is.false;
+  player.megaCredits = card.cost + 9;
+  expect(player.canPlay(card)).is.true;
+});
+
+it('canPlay: when paying reds tax for oxygen, include the cost for the 8% temperature bump, which triggers 0° ocean bump.', function() {
+  // Strip Mine raises the oxygen level two steps.
+  const card = new StripMine();
+  const player = TestPlayers.BLUE.newPlayer();
+  const game = Game.newInstance('foobar', [player], player, TestingUtils.setCustomGameOptions());
+  const turmoil = game.turmoil!;
+  game.phase = Phase.ACTION;
+  player.setProductionForTest({energy: 2}); // Card requirement.
+
+  turmoil.rulingParty = new Reds();
+  PoliticalAgendas.setNextAgenda(turmoil, game);
+
+  // Raising to 8%
+  (game as any).oxygenLevel = 7;
+  // Raising to 0
+  (game as any).temperature = -2;
+
+  player.megaCredits = card.cost + 11;
+  expect(player.canPlay(card)).is.false;
+  player.megaCredits = card.cost + 12;
+  expect(player.canPlay(card)).is.true;
+});
+
 it('canPlay: reds tax applies by default when raising temperature', function() {
   // LavaFlows raises the temperature two steps.
   const card = new LavaFlows();
@@ -773,20 +856,20 @@ it('canPlay: reds tax applies by default when raising temperature', function() {
   expect(player.canPlay(card)).is.true;
 
   // Set temperature so it only raises one step.
-  (game as any).temperature = 6;
+  (game as any).temperature = MAX_TEMPERATURE - 2;
 
   player.megaCredits = card.cost;
   expect(player.canPlay(card)).is.false;
   player.megaCredits = card.cost + 3;
   expect(player.canPlay(card)).is.true;
 
-  (game as any).temperature = 8;
+  (game as any).temperature = MAX_TEMPERATURE;
 
   player.megaCredits = card.cost;
   expect(player.canPlay(card)).is.true;
 });
 
-it('canPlay: when paying reds tax for temperature, include the cost for the 0° ocean.', function() {
+it('canPlay: when paying reds tax for temperature, include the cost for the 0° ocean bump.', function() {
   // LavaFlows raises the temperature two steps.
   const card = new LavaFlows();
   const player = TestPlayers.BLUE.newPlayer();
@@ -832,6 +915,8 @@ it('canPlay: reds tax applies by default when placing oceans', function() {
   player.megaCredits = card.cost;
   expect(player.canPlay(card)).is.true;
 });
+
+// TODO(kberg): Use Towing a Comet as an example of a multi-TR thing.
 
 function waitingForGlobalParameters(player: Player): Array<GlobalParameter> {
   return player.getWaitingFor()!.options!.map((o) => o.title as string).map(titlesToGlobalParameter);

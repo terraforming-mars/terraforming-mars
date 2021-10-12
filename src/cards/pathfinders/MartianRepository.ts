@@ -30,7 +30,7 @@ export class MartianRepository extends Card implements IProjectCard {
           }).br;
           b.minus().production((pb) => pb.energy(1));
         }),
-        description: 'Decrease your energy production 1 step. 1VP for every 3 data here.',
+        description: 'Decrease your energy production 1 step. 1 VP for every 3 data here.',
         victoryPoints: CardRenderDynamicVictoryPoints.data(1, 3),
       },
     });

@@ -26,7 +26,7 @@ export class MartianRepository extends Card implements IProjectCard {
         cardNumber: 'Pf29',
         renderData: CardRenderer.builder((b) => {
           b.effect('For every science or Mars tag you play (including these) add 1 data to this card.', (eb) => {
-            eb.science(1, {played}).mars(1, {played}).startEffect.data(1);
+            eb.science(1, {played}).mars(1, {played}).startEffect.data();
           }).br;
           b.minus().production((pb) => pb.energy(1));
         }),

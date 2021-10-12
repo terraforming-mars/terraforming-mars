@@ -584,16 +584,42 @@ export class Player implements ISerializable<SerializedPlayer> {
     return this.cardIsInEffect(CardName.PROTECTED_HABITATS);
   }
 
+  // TODO(kberg): Remove once the ServerModel is fixed.
   public plantsAreProtected(): boolean {
     return this.hasProtectedHabitats() || this.cardIsInEffect(CardName.ASTEROID_DEFLECTION_SYSTEM);
   }
 
-  public alloysAreProtected(): boolean {
-    return this.cardIsInEffect(CardName.LUNAR_SECURITY_STATIONS);
+  public canRemoveProduction(type: Resources, amount: number | undefined = undefined) {
+    const amt = (amount === undefined) ?
+      (type === Resources.MEGACREDITS ? -4 : 1):
+      amount;
+
+    if (this.getProduction(type) < amt) {
+      return false;
+    }
+    return (!this.isProtected(type));
   }
 
-  public megaCreditsAreProtected(): boolean {
-    return this.cardIsInEffect(CardName.PRIVATE_SECURITY);
+  public canRemoveResource(type: Resources, amount: number = 1) {
+    if (this.getResource(type) < amount) {
+      return false;
+    }
+    return (!this.isProtected(type));
+  }
+
+  public isProtected(type: Resources) {
+    switch (type) {
+    case Resources.PLANTS:
+      return this.cardIsInEffect(CardName.PROTECTED_HABITATS) &&
+            this.cardIsInEffect(CardName.ASTEROID_DEFLECTION_SYSTEM);
+    case Resources.STEEL:
+    case Resources.TITANIUM:
+      return this.cardIsInEffect(CardName.LUNAR_SECURITY_STATIONS);
+    case Resources.MEGACREDITS:
+      return this.cardIsInEffect(CardName.PRIVATE_SECURITY);
+    default:
+      return false;
+    }
   }
 
   // TODO(kberg): counting cities on the board is done in 3 different places, consolidate.

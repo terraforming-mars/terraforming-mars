@@ -23,16 +23,8 @@ export class StealResources implements DeferredAction {
       return undefined;
     }
 
-    let candidates: Array<Player> = this.player.game.getPlayers().filter((p) => p.id !== this.player.id && p.getResource(this.resource) > 0);
-    if (this.resource === Resources.PLANTS) {
-      candidates = candidates.filter((p) => !p.plantsAreProtected());
-    }
-    if (this.resource === Resources.STEEL || this.resource === Resources.TITANIUM) {
-      candidates = candidates.filter((p) => !p.alloysAreProtected());
-    }
-    if (this.resource === Resources.MEGACREDITS) {
-      candidates = candidates.filter((p) => !p.megaCreditsAreProtected());
-    }
+    const candidates: Array<Player> = this.player.game.getPlayers()
+      .filter((p) => p.id !== this.player.id && p.canRemoveResource(this.resource));
 
     if (candidates.length === 0) {
       return undefined;

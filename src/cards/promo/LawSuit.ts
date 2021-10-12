@@ -31,7 +31,12 @@ export class LawSuit extends Card implements IProjectCard {
   }
 
   private targets(player: Player) {
-    return player.game.getPlayersById(player.removingPlayers).filter((player) => !player.megaCreditsAreProtected());
+    // The 0 parameter basically means that all players are eligible if they're not
+    // protected. Normally, calls to player.canRemoveResource() are to determine whom
+    // to attack. But you might want to play LawSuit even if your attacker has no MC
+    // (eg, to get the side effects of playing a card of this type.)
+    return player.game.getPlayersById(player.removingPlayers)
+      .filter((player) => player.canRemoveResource(Resources.MEGACREDITS, 0));
   }
 
   public canPlay(player: Player) {

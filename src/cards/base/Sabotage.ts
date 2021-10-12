@@ -35,7 +35,7 @@ export class Sabotage extends Card implements IProjectCard {
     const availableActions = new OrOptions();
 
     availablePlayerTargets.forEach((target) => {
-      if (target.titanium > 0 && !target.alloysAreProtected()) {
+      if (target.canRemoveResource(Resources.TITANIUM)) {
         const amountRemoved = Math.min(3, target.titanium);
         const optionTitle = 'Remove ' + amountRemoved + ' titanium from ' + target.name;
 
@@ -45,7 +45,7 @@ export class Sabotage extends Card implements IProjectCard {
         }));
       }
 
-      if (target.steel > 0 && !target.alloysAreProtected()) {
+      if (target.canRemoveResource(Resources.STEEL)) {
         const amountRemoved = Math.min(4, target.steel);
         const optionTitle = 'Remove ' + amountRemoved + ' steel from ' + target.name;
 
@@ -55,7 +55,7 @@ export class Sabotage extends Card implements IProjectCard {
         }));
       }
 
-      if (target.megaCredits > 0 && (!target.megaCreditsAreProtected())) {
+      if (target.canRemoveResource(Resources.MEGACREDITS)) {
         const amountRemoved = Math.min(7, target.megaCredits);
         const optionTitle = 'Remove ' + amountRemoved + ' M€ from ' + target.name;
 

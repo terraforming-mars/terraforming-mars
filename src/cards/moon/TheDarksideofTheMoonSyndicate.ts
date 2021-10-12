@@ -96,7 +96,7 @@ export class TheDarksideofTheMoonSyndicate extends Card implements CorporationCa
       const costs = new Multiset<Player>();
       MoonExpansion.moonData(game).moon.getAdjacentSpaces(space).forEach((space) => {
         if (space.tile !== undefined && space.player !== undefined && space.player !== activePlayer) {
-          if (!space.player.megaCreditsAreProtected()) {
+          if (space.player.canRemoveResource(Resources.MEGACREDITS)) {
             costs.add(space.player, 2);
           }
         }

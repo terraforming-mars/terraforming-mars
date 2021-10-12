@@ -1,6 +1,5 @@
 import {expect} from 'chai';
 import {CardRequirements} from '../../src/cards/CardRequirements';
-import {Player} from '../../src/Player';
 import {TestingUtils} from '../TestingUtils';
 import {TestPlayers} from '../TestPlayers';
 import {Game} from '../../src/Game';
@@ -15,9 +14,10 @@ import {ResearchCoordination} from '../../src/cards/prelude/ResearchCoordination
 import {Resources} from '../../src/Resources';
 import {SmallAsteroid} from '../../src/cards/promo/SmallAsteroid';
 import {OrOptions} from '../../src/inputs/OrOptions';
+import {TestPlayer} from '../TestPlayer';
 
 describe('CardRequirements', function() {
-  let player: Player; let player2: Player;
+  let player: TestPlayer; let player2: TestPlayer;
   const adaptationTechnology = new AdaptationTechnology();
 
   beforeEach(function() {
@@ -172,14 +172,26 @@ describe('CardRequirements', function() {
   it('satisfies properly for different tags', function() {
     const requirements = CardRequirements.builder((b) => b.tag(Tags.MICROBE).tag(Tags.ANIMAL));
 
-    const researchCoordination = new ResearchCoordination();
-    player.playedCards.push(researchCoordination);
+    player.tagsForTest = {wild: 1};
     expect(requirements.satisfies(player)).eq(false);
 
-    const ants = new Ants();
-    player.playedCards.push(ants);
+    player.tagsForTest = {wild: 1, microbe: 1};
     expect(requirements.satisfies(player)).eq(true);
   });
+
+  it('satisfies properly for max tag requirement', function() {
+    const requirements = CardRequirements.builder((b) => b.tag(Tags.MICROBE, 1, {max: true}));
+
+    player.tagsForTest = {microbe: 1};
+    expect(requirements.satisfies(player)).eq(true);
+
+    player.tagsForTest = {microbe: 2};
+    expect(requirements.satisfies(player)).eq(false);
+
+    player.tagsForTest = {microbe: 1, wild: 1};
+    expect(requirements.satisfies(player)).eq(true);
+  });
+
 
   it('satisfies properly for production', function() {
     const requirements = CardRequirements.builder((b) => b.production(Resources.PLANTS));

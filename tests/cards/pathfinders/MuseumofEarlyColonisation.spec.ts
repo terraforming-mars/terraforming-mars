@@ -11,13 +11,12 @@ describe('MuseumofEarlyColonisation', function() {
   let card: MuseumofEarlyColonisation;
   let player: TestPlayer;
   let player2: TestPlayer;
-  let game: Game;
 
   beforeEach(function() {
     card = new MuseumofEarlyColonisation();
     player = TestPlayers.BLUE.newPlayer();
     player2 = TestPlayers.RED.newPlayer();
-    game = Game.newInstance('foobar', [player, player2], player);
+    Game.newInstance('foobar', [player, player2], player);
   });
 
   it('canPlay', function() {
@@ -25,25 +24,25 @@ describe('MuseumofEarlyColonisation', function() {
     const greenery = TestingUtils.addGreenery(player2);
     const city = TestingUtils.addCity(player2);
     player.setProductionForTest({energy: 1});
-    expect(card.canPlay(player)).is.true;
+    expect(player.canPlayIgnoringCost(card)).is.true;
 
     player.setProductionForTest({energy: 0});
-    expect(card.canPlay(player)).is.false;
+    expect(player.canPlayIgnoringCost(card)).is.false;
 
     player.setProductionForTest({energy: 1});
-    expect(card.canPlay(player)).is.true;
-    ocean.tile.tileType = TileType.BIOFERTILIZER_FACILITY;
-    expect(card.canPlay(player)).is.false;
+    expect(player.canPlayIgnoringCost(card)).is.true;
+    ocean.tile!.tileType = TileType.BIOFERTILIZER_FACILITY;
+    expect(player.canPlayIgnoringCost(card)).is.false;
 
-    ocean.tile.tileType = TileType.OCEAN;
-    expect(card.canPlay(player)).is.true;
-    greenery.tile.tileType = TileType.BIOFERTILIZER_FACILITY;
-    expect(card.canPlay(player)).is.false;
+    ocean.tile!.tileType = TileType.OCEAN;
+    expect(player.canPlayIgnoringCost(card)).is.true;
+    greenery.tile!.tileType = TileType.BIOFERTILIZER_FACILITY;
+    expect(player.canPlayIgnoringCost(card)).is.false;
 
-    greenery.tile.tileType = TileType.GREENERY;
-    expect(card.canPlay(player)).is.true;
-    city.tile.tileType = TileType.BIOFERTILIZER_FACILITY;
-    expect(card.canPlay(player)).is.false;
+    greenery.tile!.tileType = TileType.GREENERY;
+    expect(player.canPlayIgnoringCost(card)).is.true;
+    city.tile!.tileType = TileType.BIOFERTILIZER_FACILITY;
+    expect(player.canPlayIgnoringCost(card)).is.false;
   });
 
   it('play', function() {
@@ -52,7 +51,7 @@ describe('MuseumofEarlyColonisation', function() {
 
     card.play(player);
 
-    expect(player.getProductionForTest()).eq(Units.of({steel: 1, titanium: 1, plants: 1}));
+    expect(player.getProductionForTest()).deep.eq(Units.of({steel: 1, titanium: 1, plants: 1}));
     expect(player.getTerraformRating()).eq(21);
   });
 });

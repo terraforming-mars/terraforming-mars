@@ -7,6 +7,7 @@ import {CardRenderer} from '../render/CardRenderer';
 import {CardRequirements} from '../CardRequirements';
 import {Units} from '../../Units';
 import {MoonCard} from './MoonCard';
+import {all} from '../Options';
 
 export class LunaResort extends MoonCard {
   constructor() {
@@ -18,7 +19,7 @@ export class LunaResort extends MoonCard {
       productionBox: Units.of({energy: -1, megacredits: 3}),
       reserveUnits: Units.of({titanium: 2}),
 
-      requirements: CardRequirements.builder((b) => b.colonyTiles(2).any()),
+      requirements: CardRequirements.builder((b) => b.colonyTiles(2, {all})),
       metadata: {
         description:
           'Requires 2 colonies on the Moon. Spend 2 titanium. Decrease your energy production 1 step and increase your M€ production 3 steps. Raise the Colony Rate 1 step.',

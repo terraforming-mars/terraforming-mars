@@ -73,14 +73,14 @@ describe('TitanFloatingLaunchPad', function() {
 
     const orOptions = card.action(player) as OrOptions;
 
-    orOptions.options[0].cb(); // Add resource
+    orOptions.options[1].cb(); // Add resource
     expect(game.deferredActions).has.lengthOf(1);
     const selectCard = game.deferredActions.peek()!.execute() as SelectCard<ICard>;
     game.deferredActions.pop();
     selectCard.cb([card]);
     expect(card.resourceCount).to.eq(8);
 
-    orOptions.options[1].cb(); // Trade for free
+    orOptions.options[0].cb(); // Trade for free
     expect(game.deferredActions).has.lengthOf(1);
     const selectColony = game.deferredActions.peek()!.execute() as SelectColony;
     selectColony.cb((<any>ColonyName)[selectColony.coloniesModel[0].name.toUpperCase()]);

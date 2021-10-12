@@ -3,6 +3,11 @@ import {GlobalEventName} from './GlobalEventName';
 import {PartyName} from '../parties/PartyName';
 import {Game} from '../../Game';
 import {Turmoil} from '../Turmoil';
+import {CardRenderer} from '../../cards/render/CardRenderer';
+
+const RENDER_DATA = CardRenderer.builder((b) => {
+  b.cards(1).slash().partyLeaders(1).plus().influence();
+});
 
 export class LeadershipSummit implements IGlobalEvent {
     public name = GlobalEventName.LEADERSHIP_SUMMIT;
@@ -15,4 +20,5 @@ export class LeadershipSummit implements IGlobalEvent {
         player.drawCard(Math.min(5, partyLeaderCount) + turmoil.getPlayerInfluence(player));
       });
     }
+    public renderData = RENDER_DATA;
 }

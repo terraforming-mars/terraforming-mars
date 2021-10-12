@@ -3,6 +3,12 @@ import {GlobalEventName} from './GlobalEventName';
 import {PartyName} from '../parties/PartyName';
 import {Game} from '../../Game';
 import {Turmoil} from '../Turmoil';
+import {CardRenderer} from '../../cards/render/CardRenderer';
+import {Size} from '../../cards/render/Size';
+
+const RENDER_DATA = CardRenderer.builder((b) => {
+  b.minus().text('4').tr(1).influence({size: Size.SMALL});
+});
 
 export class WarOnEarth implements IGlobalEvent {
     public name = GlobalEventName.WAR_ON_EARTH;
@@ -14,4 +20,5 @@ export class WarOnEarth implements IGlobalEvent {
         player.decreaseTerraformRatingSteps(4 - turmoil.getPlayerInfluence(player));
       });
     }
+    public renderData = RENDER_DATA;
 }

@@ -5,6 +5,12 @@ import {Game} from '../../Game';
 import {Resources} from '../../Resources';
 import {Turmoil} from '../Turmoil';
 import {Board} from '../../boards/Board';
+import {CardRenderer} from '../../cards/render/CardRenderer';
+import {Size} from '../../cards/render/Size';
+
+const RENDER_DATA = CardRenderer.builder((b) => {
+  b.minus().megacredits(4).slash().city().influence({size: Size.SMALL});
+});
 
 export class Riots implements IGlobalEvent {
     public name = GlobalEventName.RIOTS;
@@ -23,4 +29,5 @@ export class Riots implements IGlobalEvent {
         }
       });
     }
+    public renderData = RENDER_DATA;
 }

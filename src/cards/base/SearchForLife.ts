@@ -10,7 +10,7 @@ import {SelectHowToPayDeferred} from '../../deferredActions/SelectHowToPayDeferr
 import {CardRequirements} from '../CardRequirements';
 import {CardRenderer} from '../render/CardRenderer';
 import {CardRenderDynamicVictoryPoints} from '../render/CardRenderDynamicVictoryPoints';
-import {played} from '../Options';
+import {max, played} from '../Options';
 
 export class SearchForLife extends Card implements IActionCard, IProjectCard, IResourceCard {
   constructor() {
@@ -21,7 +21,7 @@ export class SearchForLife extends Card implements IActionCard, IProjectCard, IR
       cost: 3,
       resourceType: ResourceType.SCIENCE,
 
-      requirements: CardRequirements.builder((b) => b.oxygen(6).max()),
+      requirements: CardRequirements.builder((b) => b.oxygen(6, {max})),
       metadata: {
         cardNumber: '005',
         description: 'Oxygen must be 6% or less.',

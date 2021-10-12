@@ -1,4 +1,4 @@
-import {ARES_AWARDS, Awards, ELYSIUM_AWARDS, HELLAS_AWARDS, MOON_AWARDS, ORIGINAL_AWARDS, VENUS_AWARDS} from './awards/Awards';
+import {ARABIA_TERRA_AWARDS, ARES_AWARDS, Awards, ELYSIUM_AWARDS, HELLAS_AWARDS, MOON_AWARDS, ORIGINAL_AWARDS, VENUS_AWARDS} from './awards/Awards';
 import {Banker} from './awards/Banker';
 import {Benefactor} from './awards/Benefactor';
 import {Celebrity} from './awards/Celebrity';
@@ -29,7 +29,7 @@ import {Generalist} from './milestones/Generalist';
 import {Hoverlord} from './milestones/Hoverlord';
 import {IMilestone} from './milestones/IMilestone';
 import {Mayor} from './milestones/Mayor';
-import {ARES_MILESTONES, ELYSIUM_MILESTONES, HELLAS_MILESTONES, Milestones, MOON_MILESTONES, ORIGINAL_MILESTONES, VENUS_MILESTONES} from './milestones/Milestones';
+import {ARABIA_TERRA_MILESTONES, ARES_MILESTONES, ELYSIUM_MILESTONES, HELLAS_MILESTONES, Milestones, MOON_MILESTONES, ORIGINAL_MILESTONES, VENUS_MILESTONES} from './milestones/Milestones';
 import {Networker} from './milestones/Networker';
 import {Planner} from './milestones/Planner';
 import {PolarExplorer} from './milestones/PolarExplorer';
@@ -252,6 +252,10 @@ export namespace MilestoneAwardSelector {
         drawnMilestonesAndAwards.milestones.push(...ELYSIUM_MILESTONES);
         drawnMilestonesAndAwards.awards.push(...ELYSIUM_AWARDS);
         break;
+      case BoardName.ARABIA_TERRA:
+        drawnMilestonesAndAwards.milestones.push(...ARABIA_TERRA_MILESTONES);
+        drawnMilestonesAndAwards.awards.push(...ARABIA_TERRA_AWARDS);
+        break;
       }
       if (includeVenus) {
         drawnMilestonesAndAwards.milestones.push(...VENUS_MILESTONES);
@@ -318,6 +322,8 @@ export namespace MilestoneAwardSelector {
       candidateMilestones.push(...MOON_MILESTONES.map(toName));
       candidateAwards.push(...MOON_AWARDS.map(toName));
     }
+
+    // TODO(kberg): Find a way to add the Arabia Terra milestones and awards in.
     const shuffledMilestones = shuffle(candidateMilestones);
     const shuffledAwards = shuffle(candidateAwards);
 

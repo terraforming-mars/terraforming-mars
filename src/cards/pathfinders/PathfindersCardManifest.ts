@@ -16,7 +16,7 @@ import {CeresSpaceport} from './CeresSpaceport';
 // import {CrewTraining} from './CrewTraining';
 // import {Cryptocurrency} from './Cryptocurrency';
 // import {CultivationofVenus} from './CultivationofVenus';
-// import {Cyanobacteria} from './Cyanobacteria';
+import {Cyanobacteria} from './Cyanobacteria';
 // import {DataLeak} from './DataLeak';
 // import {DeclarationofIndependence} from './DeclarationofIndependence';
 // import {DeepSpaceOperations} from './DeepSpaceOperations';
@@ -102,9 +102,9 @@ export const PATHFINDERS_CARD_MANIFEST = new CardManifest({
     {cardName: CardName.RETURN_TO_ABANDONED_TECHNOLOGY, Factory: ReturntoAbandonedTechnology},
     {cardName: CardName.DESIGNED_ORGANISMS, Factory: DesignedOrganisms},
     {cardName: CardName.SPACE_DEBRIS_CLEANING_OPERATION, Factory: SpaceDebrisCleaningOperation},
-    {cardName: CardName.SECRET_LABS, Factory: SecretLabs},
     {cardName: CardName.PRIVATE_SECURITY, Factory: PrivateSecurity},
-    // {cardName: CardName.CYANOBACTERIA, Factory: Cyanobacteria},
+    {cardName: CardName.SECRET_LABS, Factory: SecretLabs},
+    {cardName: CardName.CYANOBACTERIA, Factory: Cyanobacteria},
     // {cardName: CardName.COMMUNICATION_CENTER, Factory: CommunicationCenter},
     {cardName: CardName.MARTIAN_REPOSITORY, Factory: MartianRepository},
     // {cardName: CardName.DATA_LEAK, Factory: DataLeak},

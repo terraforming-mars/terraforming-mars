@@ -9,7 +9,7 @@ import {CardRequirements} from '../CardRequirements';
 import {Card} from '../Card';
 import {CardRenderer} from '../render/CardRenderer';
 import {Resources} from '../../Resources';
-import {played} from '../Options';
+import {all, played} from '../Options';
 
 export class MartianZoo extends Card implements IProjectCard, IResourceCard {
   constructor() {
@@ -20,7 +20,7 @@ export class MartianZoo extends Card implements IProjectCard, IResourceCard {
       cardType: CardType.ACTIVE,
       resourceType: ResourceType.ANIMAL,
 
-      requirements: CardRequirements.builder((b) => b.cities(2).any()),
+      requirements: CardRequirements.builder((b) => b.cities(2, {all})),
       metadata: {
         cardNumber: 'C24',
         renderData: CardRenderer.builder((b) => {

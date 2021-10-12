@@ -28,7 +28,7 @@ import {EarlyExpedition} from './EarlyExpedition';
 // import {EconomicEspionage} from './EconomicEspionage';
 // import {EconomicHelp} from './EconomicHelp';
 // import {ExpeditiontotheSurfaceVenus} from './ExpeditiontotheSurfaceVenus';
-// import {FlatMarsTheory} from './FlatMarsTheory';
+import {FlatMarsTheory} from './FlatMarsTheory';
 // import {FloaterUrbanism} from './FloaterUrbanism';
 // import {HighTempSuperconductors} from './HighTempSuperconductors';
 // import {HydrogenBombardment} from './HydrogenBombardment';
@@ -59,7 +59,7 @@ import {RareEarthElements} from './RareEarthElements';
 // import {ResearchGrant} from './ResearchGrant';
 import {ReturntoAbandonedTechnology} from './ReturntoAbandonedTechnology';
 // import {RichDeposits} from './RichDeposits';
-// import {SecretLabs} from './SecretLabs';
+import {SecretLabs} from './SecretLabs';
 // import {SmallComet} from './SmallComet';
 // import {SmallOpenPitMine} from './SmallOpenPitMine';
 // import {SocialEvents} from './SocialEvents';
@@ -102,7 +102,7 @@ export const PATHFINDERS_CARD_MANIFEST = new CardManifest({
     {cardName: CardName.DESIGNED_ORGANISMS, Factory: DesignedOrganisms},
     {cardName: CardName.SPACE_DEBRIS_CLEANING_OPERATION, Factory: SpaceDebrisCleaningOperation},
     // // {cardName: CardName.PRIVATE_SECURITY, Factory: PrivateSecurity},                        // PROTECTING RESOURCES
-    // {cardName: CardName.SECRET_LABS, Factory: SecretLabs},
+    {cardName: CardName.SECRET_LABS, Factory: SecretLabs},
     // {cardName: CardName.CYANOBACTERIA, Factory: Cyanobacteria},
     // {cardName: CardName.COMMUNICATION_CENTER, Factory: CommunicationCenter},
     // {cardName: CardName.MARTIAN_REPOSITORY, Factory: MartianRepository},
@@ -115,7 +115,7 @@ export const PATHFINDERS_CARD_MANIFEST = new CardManifest({
     // {cardName: CardName.OZONE_GENERATORS, Factory: OzoneGenerators},
     // {cardName: CardName.SMALL_COMET, Factory: SmallComet},
     // {cardName: CardName.ECONOMIC_ESPIONAGE, Factory: EconomicEspionage},
-    // {cardName: CardName.FLAT_MARS_THEORY, Factory: FlatMarsTheory},
+    {cardName: CardName.FLAT_MARS_THEORY, Factory: FlatMarsTheory},
     // {cardName: CardName.ASTEROID_RESOURCES, Factory: AsteroidResources},
     // {cardName: CardName.KICKSTARTER, Factory: Kickstarter},
     // {cardName: CardName.ECONOMIC_HELP, Factory: EconomicHelp},

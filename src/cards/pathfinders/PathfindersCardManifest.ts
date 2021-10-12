@@ -60,12 +60,12 @@ import {RareEarthElements} from './RareEarthElements';
 import {ReturntoAbandonedTechnology} from './ReturntoAbandonedTechnology';
 // import {RichDeposits} from './RichDeposits';
 import {SecretLabs} from './SecretLabs';
-// import {SmallComet} from './SmallComet';
+import {SmallComet} from './SmallComet';
 // import {SmallOpenPitMine} from './SmallOpenPitMine';
 // import {SocialEvents} from './SocialEvents';
 // import {SoilDetoxification} from './SoilDetoxification';
 // import {Solarpedia} from './Solarpedia';
-// import {SolarStorm} from './SolarStorm';
+import {SolarStorm} from './SolarStorm';
 import {SpaceDebrisCleaningOperation} from './SpaceDebrisCleaningOperation';
 // import {SpaceRelay} from './SpaceRelay';
 import {TerraformingControlStation} from './TerraformingControlStation';
@@ -108,12 +108,12 @@ export const PATHFINDERS_CARD_MANIFEST = new CardManifest({
     {cardName: CardName.MARTIAN_REPOSITORY, Factory: MartianRepository},
     // {cardName: CardName.DATA_LEAK, Factory: DataLeak},
     // {cardName: CardName.SMALL_OPEN_PIT_MINE, Factory: SmallOpenPitMine},
-    // {cardName: CardName.SOLAR_STORM, Factory: SolarStorm},
+    {cardName: CardName.SOLAR_STORM, Factory: SolarStorm},
     // {cardName: CardName.SPACE_RELAY, Factory: SpaceRelay},
     // {cardName: CardName.DECLARATION_OF_INDEPENDENCE, Factory: DeclarationofIndependence, compatibility: GameModule.Turmoil},
     // {cardName: CardName.MARTIAN_CULTURE, Factory: MartianCulture},
     // {cardName: CardName.OZONE_GENERATORS, Factory: OzoneGenerators},
-    // {cardName: CardName.SMALL_COMET, Factory: SmallComet},
+    {cardName: CardName.SMALL_COMET, Factory: SmallComet},
     // {cardName: CardName.ECONOMIC_ESPIONAGE, Factory: EconomicEspionage},
     {cardName: CardName.FLAT_MARS_THEORY, Factory: FlatMarsTheory},
     // {cardName: CardName.ASTEROID_RESOURCES, Factory: AsteroidResources},

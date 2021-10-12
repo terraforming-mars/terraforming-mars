@@ -27,7 +27,8 @@ import {PoliticalAgendas} from '../src/turmoil/PoliticalAgendas';
 import {Reds} from '../src/turmoil/parties/Reds';
 import {Greens} from '../src/turmoil/parties/Greens';
 import {Phase} from '../src/Phase';
-import {MAX_OXYGEN_LEVEL, MAX_TEMPERATURE} from '../src/constants';
+import {MAX_OXYGEN_LEVEL, MAX_TEMPERATURE, MAX_VENUS_SCALE} from '../src/constants';
+import {GiantSolarShade} from '../src/cards/venusNext/GiantSolarShade';
 
 describe('Player', function() {
   it('should initialize with right defaults', function() {
@@ -917,6 +918,63 @@ it('canPlay: reds tax applies by default when placing oceans', function() {
 });
 
 // TODO(kberg): Use Towing a Comet as an example of a multi-TR thing.
+
+it('canPlay: reds tax applies by default when raising the venus scale.', function() {
+  // GiantSolarShade raises venus three steps.
+  const card = new GiantSolarShade();
+  const player = TestPlayers.BLUE.newPlayer();
+  const game = Game.newInstance('foobar', [player], player, TestingUtils.setCustomGameOptions());
+  const turmoil = game.turmoil!;
+  game.phase = Phase.ACTION;
+
+  turmoil.rulingParty = new Greens();
+  PoliticalAgendas.setNextAgenda(turmoil, game);
+  player.megaCredits = card.cost;
+  expect(player.canPlay(card)).is.true;
+
+  turmoil.rulingParty = new Reds();
+  PoliticalAgendas.setNextAgenda(turmoil, game);
+  player.megaCredits = card.cost;
+  expect(player.canPlay(card)).is.false;
+
+  player.megaCredits = card.cost + 8;
+  expect(player.canPlay(card)).is.false;
+  player.megaCredits = card.cost + 9;
+  expect(player.canPlay(card)).is.true;
+
+  // Set Venus so it only raises one step.
+  (game as any).venusScaleLevel = MAX_VENUS_SCALE - 2;
+
+  player.megaCredits = card.cost;
+  expect(player.canPlay(card)).is.false;
+  player.megaCredits = card.cost + 3;
+  expect(player.canPlay(card)).is.true;
+
+  (game as any).venusScaleLevel = MAX_VENUS_SCALE;
+
+  player.megaCredits = card.cost;
+  expect(player.canPlay(card)).is.true;
+});
+
+it('canPlay: when paying reds tax for venus, include the cost for the 16% TR', function() {
+  // GiantSolarShade raises venus three steps.
+  const card = new GiantSolarShade();
+  const player = TestPlayers.BLUE.newPlayer();
+  const game = Game.newInstance('foobar', [player], player, TestingUtils.setCustomGameOptions());
+  const turmoil = game.turmoil!;
+  game.phase = Phase.ACTION;
+
+  turmoil.rulingParty = new Reds();
+  PoliticalAgendas.setNextAgenda(turmoil, game);
+
+  // Raising to or above 16%
+  (game as any).venusScaleLevel = 14;
+
+  player.megaCredits = card.cost + 11;
+  expect(player.canPlay(card)).is.false;
+  player.megaCredits = card.cost + 12;
+  expect(player.canPlay(card)).is.true;
+});
 
 function waitingForGlobalParameters(player: Player): Array<GlobalParameter> {
   return player.getWaitingFor()!.options!.map((o) => o.title as string).map(titlesToGlobalParameter);

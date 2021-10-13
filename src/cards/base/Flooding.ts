@@ -9,9 +9,7 @@ import {SelectSpace} from '../../inputs/SelectSpace';
 import {ISpace} from '../../boards/ISpace';
 import {CardName} from '../../CardName';
 import {Resources} from '../../Resources';
-import {MAX_OCEAN_TILES, REDS_RULING_POLICY_COST} from '../../constants';
-import {PartyHooks} from '../../turmoil/parties/PartyHooks';
-import {PartyName} from '../../turmoil/parties/PartyName';
+import {MAX_OCEAN_TILES} from '../../constants';
 import {PlaceOceanTile} from '../../deferredActions/PlaceOceanTile';
 import {CardRenderer} from '../render/CardRenderer';
 import {all} from '../Options';
@@ -22,6 +20,7 @@ export class Flooding extends Card implements IProjectCard {
       cardType: CardType.EVENT,
       name: CardName.FLOODING,
       cost: 7,
+      tr: {oceans: 1},
 
       metadata: {
         cardNumber: '188',
@@ -32,16 +31,6 @@ export class Flooding extends Card implements IProjectCard {
         victoryPoints: -1,
       },
     });
-  }
-
-  public canPlay(player: Player): boolean {
-    const oceansMaxed = player.game.board.getOceansOnBoard() === MAX_OCEAN_TILES;
-
-    if (PartyHooks.shouldApplyPolicy(player, PartyName.REDS) && !oceansMaxed) {
-      return player.canAfford(player.getCardCost(this) + REDS_RULING_POLICY_COST);
-    }
-
-    return true;
   }
 
   public play(player: Player) {

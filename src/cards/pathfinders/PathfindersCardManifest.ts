@@ -16,8 +16,8 @@ import {CeresSpaceport} from './CeresSpaceport';
 // import {CrewTraining} from './CrewTraining';
 // import {Cryptocurrency} from './Cryptocurrency';
 // import {CultivationofVenus} from './CultivationofVenus';
-// import {Cyanobacteria} from './Cyanobacteria';
-// import {DataLeak} from './DataLeak';
+import {Cyanobacteria} from './Cyanobacteria';
+import {DataLeak} from './DataLeak';
 // import {DeclarationofIndependence} from './DeclarationofIndependence';
 // import {DeepSpaceOperations} from './DeepSpaceOperations';
 // import {DesignCompany} from './DesignCompany';
@@ -43,7 +43,7 @@ import {LuxuryEstate} from './LuxuryEstate';
 // import {MartianDustProcessingPlant} from './MartianDustProcessingPlant';
 import {MartianMonuments} from './MartianMonuments';
 // import {MartianNatureWonders} from './MartianNatureWonders';
-// import {MartianRepository} from './MartianRepository';
+import {MartianRepository} from './MartianRepository';
 // import {MicrobiologyPatents} from './MicrobiologyPatents';
 import {MuseumofEarlyColonisation} from './MuseumofEarlyColonisation';
 import {NewVenice} from './NewVenice';
@@ -54,6 +54,7 @@ import {OrbitalLaboratories} from './OrbitalLaboratories';
 // import {Pollinators} from './Pollinators';
 import {PowerPlant} from './PowerPlant';
 import {PrefabricationofHumanHabitats} from './PrefabricationofHumanHabitats';
+import {PrivateSecurity} from './PrivateSecurity';
 // import {PublicSponsoredGrant} from './PublicSponsoredGrant';
 import {RareEarthElements} from './RareEarthElements';
 // import {ResearchGrant} from './ResearchGrant';
@@ -61,7 +62,7 @@ import {ReturntoAbandonedTechnology} from './ReturntoAbandonedTechnology';
 // import {RichDeposits} from './RichDeposits';
 import {SecretLabs} from './SecretLabs';
 // import {SmallComet} from './SmallComet';
-// import {SmallOpenPitMine} from './SmallOpenPitMine';
+import {SmallOpenPitMine} from './SmallOpenPitMine';
 // import {SocialEvents} from './SocialEvents';
 // import {SoilDetoxification} from './SoilDetoxification';
 // import {Solarpedia} from './Solarpedia';
@@ -101,13 +102,13 @@ export const PATHFINDERS_CARD_MANIFEST = new CardManifest({
     {cardName: CardName.RETURN_TO_ABANDONED_TECHNOLOGY, Factory: ReturntoAbandonedTechnology},
     {cardName: CardName.DESIGNED_ORGANISMS, Factory: DesignedOrganisms},
     {cardName: CardName.SPACE_DEBRIS_CLEANING_OPERATION, Factory: SpaceDebrisCleaningOperation},
-    // // {cardName: CardName.PRIVATE_SECURITY, Factory: PrivateSecurity},                        // PROTECTING RESOURCES
+    {cardName: CardName.PRIVATE_SECURITY, Factory: PrivateSecurity},
     {cardName: CardName.SECRET_LABS, Factory: SecretLabs},
-    // {cardName: CardName.CYANOBACTERIA, Factory: Cyanobacteria},
+    {cardName: CardName.CYANOBACTERIA, Factory: Cyanobacteria},
     // {cardName: CardName.COMMUNICATION_CENTER, Factory: CommunicationCenter},
-    // {cardName: CardName.MARTIAN_REPOSITORY, Factory: MartianRepository},
-    // {cardName: CardName.DATA_LEAK, Factory: DataLeak},
-    // {cardName: CardName.SMALL_OPEN_PIT_MINE, Factory: SmallOpenPitMine},
+    {cardName: CardName.MARTIAN_REPOSITORY, Factory: MartianRepository},
+    {cardName: CardName.DATA_LEAK, Factory: DataLeak},
+    {cardName: CardName.SMALL_OPEN_PIT_MINE, Factory: SmallOpenPitMine},
     // {cardName: CardName.SOLAR_STORM, Factory: SolarStorm},
     // {cardName: CardName.SPACE_RELAY, Factory: SpaceRelay},
     // {cardName: CardName.DECLARATION_OF_INDEPENDENCE, Factory: DeclarationofIndependence, compatibility: GameModule.Turmoil},

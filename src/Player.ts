@@ -1876,7 +1876,7 @@ export class Player implements ISerializable<SerializedPlayer> {
 
     // Local copy
     tr = {...tr};
-    let total = tr.tr ?? 0;
+    let total = 0;
 
     if (tr.oxygen !== undefined) {
       const availableSteps = constants.MAX_OXYGEN_LEVEL - this.game.getOxygenLevel();
@@ -1903,10 +1903,14 @@ export class Player implements ISerializable<SerializedPlayer> {
       total = total + steps;
     }
 
-    // if (tr.venus !== undefined) {
-    //   const availableSteps = Math.floor((constants.MAX_VENUS_SCALE - this.game.getVenusScaleLevel()) / 2);
-    //   total = total + Math.min(availableSteps, tr.venus);
-    // }
+    if (tr.venus !== undefined) {
+      const availableSteps = Math.floor((constants.MAX_VENUS_SCALE - this.game.getVenusScaleLevel()) / 2);
+      const steps = Math.min(availableSteps, tr.venus);
+      total = total + steps;
+      if (this.game.getVenusScaleLevel() < 16 && this.game.getVenusScaleLevel() + (steps * 2) >= 16) {
+        tr.tr = (tr.tr ?? 0) + 1;
+      }
+    }
 
     // MoonExpansion.ifMoon(this.game, (moonData) => {
     //   if (tr.moonColony !== undefined) {
@@ -1923,6 +1927,9 @@ export class Player implements ISerializable<SerializedPlayer> {
     //     const availableSteps = constants.MAXIMUM_LOGISTICS_RATE - moonData.logisticRate;
     //     total = total + Math.min(availableSteps, tr.moonLogistics);
     //   }
+
+    total += tr.tr ?? 0;
+
     return total;
   }
 

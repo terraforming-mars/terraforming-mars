@@ -186,17 +186,18 @@ describe('Turmoil', function() {
 
   it('Can\'t play cards to raise TR via global parameters if Reds are ruling and player cannot pay', function() {
     setRulingParty(turmoil, game, new Reds());
-    player.megaCredits = 25;
+    // Both of these cards cost 23MC.
     const iceAsteroid = new IceAsteroid();
     const protectedValley = new ProtectedValley();
+    player.megaCredits = 25;
 
-    expect(iceAsteroid.canPlay(player)).is.not.true; // needs 29 MC
-    expect(protectedValley.canPlay(player)).is.not.true; // needs 26 MC
+    expect(player.canPlay(iceAsteroid)).is.not.true; // needs 29 MC
+    expect(player.canPlay(protectedValley)).is.not.true; // needs 26 MC
 
     // can play if won't gain TR from raising global parameter
     TestingUtils.maxOutOceans(player, 9);
-    expect(protectedValley.canPlay(player)).is.true;
-    expect(iceAsteroid.canPlay(player)).is.true;
+    expect(player.canPlay(protectedValley)).is.true;
+    expect(player.canPlay(iceAsteroid)).is.true;
   });
 
   it('Applies card discounts when checking canPlay while Reds are ruling', function() {

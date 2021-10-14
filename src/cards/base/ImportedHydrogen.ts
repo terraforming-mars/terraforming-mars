@@ -11,9 +11,6 @@ import {PlayerInput} from '../../PlayerInput';
 import {ResourceType} from '../../ResourceType';
 import {CardName} from '../../CardName';
 import {Resources} from '../../Resources';
-import {MAX_OCEAN_TILES, REDS_RULING_POLICY_COST} from '../../constants';
-import {PartyHooks} from '../../turmoil/parties/PartyHooks';
-import {PartyName} from '../../turmoil/parties/PartyName';
 import {PlaceOceanTile} from '../../deferredActions/PlaceOceanTile';
 import {CardRenderer} from '../render/CardRenderer';
 import {digit} from '../Options';
@@ -25,6 +22,7 @@ export class ImportedHydrogen extends Card implements IProjectCard {
       name: CardName.IMPORTED_HYDROGEN,
       tags: [Tags.EARTH, Tags.SPACE],
       cost: 16,
+      tr: {oceans: 1},
 
       metadata: {
         cardNumber: '019',
@@ -38,16 +36,6 @@ export class ImportedHydrogen extends Card implements IProjectCard {
         description: 'Gain 3 Plants, or add 3 Microbes or 2 Animals to ANOTHER card. Place an ocean tile.',
       },
     });
-  }
-
-  public canPlay(player: Player): boolean {
-    const oceansMaxed = player.game.board.getOceansOnBoard() === MAX_OCEAN_TILES;
-
-    if (PartyHooks.shouldApplyPolicy(player, PartyName.REDS) && !oceansMaxed) {
-      return player.canAfford(player.getCardCost(this) + REDS_RULING_POLICY_COST, {titanium: true});
-    }
-
-    return true;
   }
 
   public play(player: Player): undefined | PlayerInput {

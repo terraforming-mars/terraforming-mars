@@ -7,9 +7,6 @@ import {Player} from '../../Player';
 import {CardName} from '../../CardName';
 import {ResourceType} from '../../ResourceType';
 import {SelectCard} from '../../inputs/SelectCard';
-import {PartyHooks} from '../../turmoil/parties/PartyHooks';
-import {PartyName} from '../../turmoil/parties/PartyName';
-import {REDS_RULING_POLICY_COST, MAX_TEMPERATURE, MAX_OCEAN_TILES} from '../../constants';
 import {PlaceOceanTile} from '../../deferredActions/PlaceOceanTile';
 import {CardRenderer} from '../render/CardRenderer';
 
@@ -20,6 +17,7 @@ export class MoholeLake extends Card implements IActionCard, IProjectCard {
       name: CardName.MOHOLE_LAKE,
       tags: [Tags.BUILDING],
       cost: 31,
+      tr: {temperature: 1, oceans: 1},
 
       metadata: {
         cardNumber: 'X27',
@@ -33,18 +31,6 @@ export class MoholeLake extends Card implements IActionCard, IProjectCard {
         description: 'Gain 3 plants. Raise temperature 1 step, and place 1 ocean tile.',
       },
     });
-  }
-
-  public canPlay(player: Player): boolean {
-    const temperatureStep = player.game.getTemperature() < MAX_TEMPERATURE ? 1 : 0;
-    const oceanStep = player.game.board.getOceansOnBoard() < MAX_OCEAN_TILES ? 1 : 0;
-    const totalSteps = temperatureStep + oceanStep;
-
-    if (PartyHooks.shouldApplyPolicy(player, PartyName.REDS)) {
-      return player.canAfford(REDS_RULING_POLICY_COST * totalSteps, {steel: true});
-    }
-
-    return true;
   }
 
   public play(player: Player) {

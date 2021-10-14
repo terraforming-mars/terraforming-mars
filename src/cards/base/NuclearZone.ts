@@ -7,9 +7,6 @@ import {SelectSpace} from '../../inputs/SelectSpace';
 import {TileType} from '../../TileType';
 import {ISpace} from '../../boards/ISpace';
 import {CardName} from '../../CardName';
-import {MAX_TEMPERATURE, REDS_RULING_POLICY_COST} from '../../constants';
-import {PartyHooks} from '../../turmoil/parties/PartyHooks';
-import {PartyName} from '../../turmoil/parties/PartyName';
 import {IAdjacencyBonus} from '../../ares/IAdjacencyBonus';
 import {CardRenderer} from '../render/CardRenderer';
 
@@ -34,18 +31,11 @@ export class NuclearZone extends Card implements IProjectCard {
       cost,
       adjacencyBonus,
       metadata,
+      tr: {temperature: 2},
     });
   }
   public canPlay(player: Player): boolean {
-    const canPlaceTile = player.game.board.getAvailableSpacesOnLand(player).length > 0;
-    const remainingTemperatureSteps = (MAX_TEMPERATURE - player.game.getTemperature()) / 2;
-    const stepsRaised = Math.min(remainingTemperatureSteps, 2);
-
-    if (PartyHooks.shouldApplyPolicy(player, PartyName.REDS)) {
-      return player.canAfford(player.getCardCost(this) + REDS_RULING_POLICY_COST * stepsRaised) && canPlaceTile;
-    }
-
-    return canPlaceTile;
+    return player.game.board.getAvailableSpacesOnLand(player).length > 0;
   }
 
   public play(player: Player) {

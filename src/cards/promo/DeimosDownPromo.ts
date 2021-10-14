@@ -7,9 +7,6 @@ import {CardName} from '../../CardName';
 import {SelectSpace} from '../../inputs/SelectSpace';
 import {TileType} from '../../TileType';
 import {ISpace} from '../../boards/ISpace';
-import {PartyHooks} from '../../turmoil/parties/PartyHooks';
-import {PartyName} from '../../turmoil/parties/PartyName';
-import {REDS_RULING_POLICY_COST, MAX_TEMPERATURE} from '../../constants';
 import {RemoveAnyPlants} from '../../deferredActions/RemoveAnyPlants';
 import {CardRenderer} from '../render/CardRenderer';
 import {all, digit} from '../Options';
@@ -21,6 +18,7 @@ export class DeimosDownPromo extends Card implements IProjectCard {
       name: CardName.DEIMOS_DOWN_PROMO,
       tags: [Tags.SPACE],
       cost: 31,
+      tr: {temperature: 3},
 
       metadata: {
         cardNumber: 'X31',
@@ -35,15 +33,7 @@ export class DeimosDownPromo extends Card implements IProjectCard {
   }
 
   public canPlay(player: Player): boolean {
-    const canPlaceTile = player.game.board.getAvailableSpacesForCity(player).length > 0;
-    const remainingTemperatureSteps = (MAX_TEMPERATURE - player.game.getTemperature()) / 2;
-    const stepsRaised = Math.min(remainingTemperatureSteps, 3);
-
-    if (PartyHooks.shouldApplyPolicy(player, PartyName.REDS)) {
-      return player.canAfford(player.getCardCost(this) + REDS_RULING_POLICY_COST * stepsRaised, {titanium: true}) && canPlaceTile;
-    }
-
-    return canPlaceTile;
+    return player.game.board.getAvailableSpacesForCity(player).length > 0;
   }
 
   public play(player: Player) {

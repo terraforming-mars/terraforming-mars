@@ -4,9 +4,6 @@ import {CardType} from '../CardType';
 import {Player} from '../../Player';
 import {CardName} from '../../CardName';
 import {ResourceType} from '../../ResourceType';
-import {PartyHooks} from '../../turmoil/parties/PartyHooks';
-import {PartyName} from '../../turmoil/parties/PartyName';
-import {REDS_RULING_POLICY_COST} from '../../constants';
 import {AddResourcesToCard} from '../../deferredActions/AddResourcesToCard';
 import {CardRenderer} from '../render/CardRenderer';
 import {Card} from '../Card';
@@ -18,6 +15,7 @@ export class NitrogenFromTitan extends Card implements IProjectCard {
       tags: [Tags.JOVIAN, Tags.SPACE],
       name: CardName.NITROGEN_FROM_TITAN,
       cardType: CardType.AUTOMATED,
+      tr: {tr: 2},
 
       metadata: {
         cardNumber: 'C28',
@@ -28,14 +26,6 @@ export class NitrogenFromTitan extends Card implements IProjectCard {
         victoryPoints: 1,
       },
     });
-  }
-
-  public canPlay(player: Player) : boolean {
-    if (PartyHooks.shouldApplyPolicy(player, PartyName.REDS)) {
-      return player.canAfford(player.getCardCost(this) + REDS_RULING_POLICY_COST * 2, {titanium: true});
-    }
-
-    return true;
   }
 
   public play(player: Player) {

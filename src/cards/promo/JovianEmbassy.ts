@@ -4,9 +4,6 @@ import {Card} from '../Card';
 import {CardType} from './../CardType';
 import {Player} from '../../Player';
 import {CardName} from '../../CardName';
-import {PartyHooks} from '../../turmoil/parties/PartyHooks';
-import {PartyName} from '../../turmoil/parties/PartyName';
-import {REDS_RULING_POLICY_COST} from '../../constants';
 import {CardRenderer} from '../render/CardRenderer';
 
 export class JovianEmbassy extends Card implements IProjectCard {
@@ -16,6 +13,7 @@ export class JovianEmbassy extends Card implements IProjectCard {
       name: CardName.JOVIAN_EMBASSY,
       tags: [Tags.JOVIAN, Tags.BUILDING],
       cost: 14,
+      tr: {tr: 1},
 
       metadata: {
         cardNumber: 'X23',
@@ -26,14 +24,6 @@ export class JovianEmbassy extends Card implements IProjectCard {
         victoryPoints: 1,
       },
     });
-  }
-
-  public canPlay(player: Player): boolean {
-    if (PartyHooks.shouldApplyPolicy(player, PartyName.REDS)) {
-      return player.canAfford(player.getCardCost(this) + REDS_RULING_POLICY_COST, {steel: true});
-    }
-
-    return true;
   }
 
   public play(player: Player) {

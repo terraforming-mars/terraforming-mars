@@ -35,10 +35,10 @@ describe('WildlifeDome', function() {
 
     const greens = game.turmoil!.getPartyByName(PartyName.GREENS)!;
     greens.delegates.push(player.id, player.id);
-    expect(player.canPlayIgnoringCost(card)).is.not.true;
+    expect(player.canPlay(card)).is.not.true;
 
     player.megaCredits = 18;
-    expect(player.canPlayIgnoringCost(card)).is.true;
+    expect(player.canPlay(card)).is.true;
 
     const action = card.play(player);
     expect(action).is.not.undefined;

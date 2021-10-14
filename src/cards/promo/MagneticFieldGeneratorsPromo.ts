@@ -8,9 +8,6 @@ import {CardName} from '../../CardName';
 import {SelectSpace} from '../../inputs/SelectSpace';
 import {TileType} from '../../TileType';
 import {ISpace} from '../../boards/ISpace';
-import {PartyHooks} from '../../turmoil/parties/PartyHooks';
-import {PartyName} from '../../turmoil/parties/PartyName';
-import {REDS_RULING_POLICY_COST} from '../../constants';
 import {CardRenderer} from '../render/CardRenderer';
 import {Units} from '../../Units';
 import {digit} from '../Options';
@@ -23,6 +20,7 @@ export class MagneticFieldGeneratorsPromo extends Card implements IProjectCard {
       tags: [Tags.BUILDING],
       cost: 22,
       productionBox: Units.of({energy: -4, plants: 2}),
+      tr: {tr: 3},
 
       metadata: {
         cardNumber: 'X33',
@@ -40,10 +38,6 @@ export class MagneticFieldGeneratorsPromo extends Card implements IProjectCard {
   public canPlay(player: Player): boolean {
     const meetsEnergyRequirements = player.getProduction(Resources.ENERGY) >= 4;
     const canPlaceTile = player.game.board.getAvailableSpacesOnLand(player).length > 0;
-
-    if (PartyHooks.shouldApplyPolicy(player, PartyName.REDS)) {
-      return player.canAfford(player.getCardCost(this) + REDS_RULING_POLICY_COST * 3, {steel: true}) && meetsEnergyRequirements && canPlaceTile;
-    }
 
     return meetsEnergyRequirements && canPlaceTile;
   }

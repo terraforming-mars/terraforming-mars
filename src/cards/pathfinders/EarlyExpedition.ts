@@ -31,7 +31,7 @@ export class EarlyExpedition extends Card implements IProjectCard {
         cardNumber: 'Pf18',
         renderData: CardRenderer.builder((b) => {
           b.minus().production((pb) => pb.energy(1)).production((pb) => pb.megacredits(3)).br;
-          b.data(1).city().asterix();
+          b.data().city().asterix();
         }),
         description: 'Temperature must be -18 C or lower. Decrease your energy production 1 step and ' +
           'Raise your MC production 3 steps. Add 1 data to ANY CARD. Place a city tile on Mars NEXT TO NO OTHER TILE.',

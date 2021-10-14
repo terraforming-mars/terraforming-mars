@@ -52,10 +52,10 @@ describe('Ants', function() {
     const selectCard = game.deferredActions.pop()!.execute() as SelectCard<ICard>;
     expect(selectCard.cards).has.lengthOf(2);
     selectCard.cb([selectCard.cards[0]]);
-        game.deferredActions.pop()!.execute(); // Add microbe to ants
+    game.deferredActions.pop()!.execute(); // Add microbe to ants
 
-        expect(card.resourceCount).to.eq(1);
-        expect(tardigrades.resourceCount).to.eq(0);
+    expect(card.resourceCount).to.eq(1);
+    expect(tardigrades.resourceCount).to.eq(0);
   });
 
   it('Respects protected habitats', function() {

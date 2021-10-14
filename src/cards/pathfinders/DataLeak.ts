@@ -16,7 +16,7 @@ export class DataLeak extends Card implements IProjectCard {
 
       metadata: {
         cardNumber: 'Pf30',
-        renderData: CardRenderer.builder((b) => b.data(5)),
+        renderData: CardRenderer.builder((b) => b.data({amount: 5})),
         description: 'Add 5 data to ANY card.',
       },
     });

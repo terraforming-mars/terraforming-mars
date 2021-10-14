@@ -6,6 +6,7 @@ export namespace GainResources {
   export interface Options {
     count?: number;
     cb?: () => void;
+    log?: boolean;
   }
 }
 
@@ -25,7 +26,7 @@ export class GainResources implements DeferredAction {
     if (this.options.count === 0) {
       return undefined;
     }
-    this.player.addResource(this.resource, this.options.count ?? 1);
+    this.player.addResource(this.resource, this.options.count ?? 1, {log: this.options.log});
     if (this.options.cb) {
       this.options.cb();
     }

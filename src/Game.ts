@@ -1500,16 +1500,6 @@ export class Game implements ISerializable<SerializedGame> {
     }
     throw new Error('No player has played requested card');
   }
-  public getCard(name: string): IProjectCard | undefined {
-    for (let i = 0; i < this.players.length; i++) {
-      for (let j = 0; j < this.players[i].playedCards.length; j++) {
-        if (this.players[i].playedCards[j].name === name) {
-          return this.players[i].playedCards[j];
-        }
-      }
-    }
-    return undefined;
-  }
 
   public getCardsInHandByResource(player: Player, resourceType: ResourceType) {
     return player.cardsInHand.filter((card) => card.resourceType === resourceType);

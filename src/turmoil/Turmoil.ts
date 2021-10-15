@@ -488,8 +488,6 @@ export class Turmoil implements ISerializable<SerializedTurmoil> {
 
       turmoil.playersInfluenceBonus = new Map<string, number>(d.playersInfluenceBonus);
 
-      turmoil.playersInfluenceBonus = new Map<string, number>(d.playersInfluenceBonus);
-
       if (d.distantGlobalEvent) {
         turmoil.distantGlobalEvent = getGlobalEventByName(d.distantGlobalEvent);
       }

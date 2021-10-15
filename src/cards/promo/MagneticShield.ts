@@ -4,9 +4,6 @@ import {CardName} from '../../CardName';
 import {CardType} from '../CardType';
 import {Tags} from '../Tags';
 import {Player} from '../../Player';
-import {PartyHooks} from '../../turmoil/parties/PartyHooks';
-import {PartyName} from '../../turmoil/parties/PartyName';
-import {REDS_RULING_POLICY_COST} from '../../constants';
 import {CardRequirements} from '../CardRequirements';
 import {CardRenderer} from '../render/CardRenderer';
 import {digit} from '../Options';
@@ -18,6 +15,7 @@ export class MagneticShield extends Card implements IProjectCard {
       name: CardName.MAGNETIC_SHIELD,
       tags: [Tags.SPACE],
       cost: 24,
+      tr: {tr: 4},
 
       requirements: CardRequirements.builder((b) => b.tag(Tags.ENERGY, 3)),
       metadata: {
@@ -26,13 +24,6 @@ export class MagneticShield extends Card implements IProjectCard {
         description: 'Requires 3 power tags. Raise your TR 4 steps.',
       },
     });
-  }
-
-  public canPlay(player: Player): boolean {
-    if (PartyHooks.shouldApplyPolicy(player, PartyName.REDS)) {
-      return player.canAfford(player.getCardCost(this) + REDS_RULING_POLICY_COST * 4, {titanium: true});
-    }
-    return true;
   }
 
   public play(player: Player) {

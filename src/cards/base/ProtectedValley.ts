@@ -8,9 +8,6 @@ import {SelectSpace} from '../../inputs/SelectSpace';
 import {ISpace} from '../../boards/ISpace';
 import {Resources} from '../../Resources';
 import {CardName} from '../../CardName';
-import {MAX_OXYGEN_LEVEL, REDS_RULING_POLICY_COST} from '../../constants';
-import {PartyHooks} from '../../turmoil/parties/PartyHooks';
-import {PartyName} from '../../turmoil/parties/PartyName';
 import {CardRenderer} from '../render/CardRenderer';
 import {Units} from '../../Units';
 
@@ -22,6 +19,7 @@ export class ProtectedValley extends Card implements IProjectCard {
       tags: [Tags.PLANT, Tags.BUILDING],
       cost: 23,
       productionBox: Units.of({megacredits: 2}),
+      tr: {oxygen: 1},
 
       metadata: {
         cardNumber: '174',
@@ -32,16 +30,6 @@ export class ProtectedValley extends Card implements IProjectCard {
         description: 'Increase your M€ production 2 steps. Place on a greenery tile ON AN AREA RESERVED FOR OCEAN, disregarding normal placement restrictions, and increase oxygen 1 step.',
       },
     });
-  }
-
-  public canPlay(player: Player): boolean {
-    const oxygenMaxed = player.game.getOxygenLevel() === MAX_OXYGEN_LEVEL;
-
-    if (PartyHooks.shouldApplyPolicy(player, PartyName.REDS) && !oxygenMaxed) {
-      return player.canAfford(player.getCardCost(this) + REDS_RULING_POLICY_COST, {steel: true, microbes: true});
-    }
-
-    return true;
   }
 
   public play(player: Player) {

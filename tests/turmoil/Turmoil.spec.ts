@@ -175,13 +175,13 @@ describe('Turmoil', function() {
     const releaseOfInertGases = new ReleaseOfInertGases();
     const jovianEmbassy = new JovianEmbassy();
 
-    expect(releaseOfInertGases.canPlay(player)).is.not.true; // needs 20 MC
-    expect(jovianEmbassy.canPlay(player)).is.not.true; // needs 17 MC
+    expect(player.canPlay(releaseOfInertGases)).is.not.true; // needs 20 MC
+    expect(player.canPlay(jovianEmbassy)).is.not.true; // needs 17 MC
 
     player.addProduction(Resources.ENERGY, 4);
     player.megaCredits = 30;
     const magneticFieldGeneratorsPromo = new MagneticFieldGeneratorsPromo();
-    expect(magneticFieldGeneratorsPromo.canPlay(player)).is.not.true; // needs 31 MC
+    expect(player.canPlay(magneticFieldGeneratorsPromo)).is.not.true; // needs 31 MC
   });
 
   it('Can\'t play cards to raise TR via global parameters if Reds are ruling and player cannot pay', function() {
@@ -205,14 +205,14 @@ describe('Turmoil', function() {
     const nitrogenFromTitan = new NitrogenFromTitan();
 
     player.megaCredits = 29;
-    expect(nitrogenFromTitan.canPlay(player)).is.not.true; // needs 31 MC
+    expect(player.canPlay(nitrogenFromTitan)).is.not.true; // needs 31 MC
 
     player.playedCards.push(new SpaceStation());
-    expect(nitrogenFromTitan.canPlay(player)).is.true; // 25 + 6 - 2
+    expect(player.canPlay(nitrogenFromTitan)).is.true; // 25 + 6 - 2
 
     player.playedCards.push(new EarthCatapult(), new QuantumExtractor());
     player.megaCredits = 25;
-    expect(nitrogenFromTitan.canPlay(player)).is.true; // 25 + 6 - 6
+    expect(player.canPlay(nitrogenFromTitan)).is.true; // 25 + 6 - 6
   });
 
   it('serializes and deserializes keeping players', function() {

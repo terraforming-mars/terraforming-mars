@@ -34,7 +34,7 @@ export class VoteOfNoConfidence extends Card implements IProjectCard {
     const turmoil = Turmoil.getTurmoil(player.game);
     if (!turmoil.hasAvailableDelegates(player.id)) return false;
 
-    return turmoil.chairman === 'NEUTRAL' ? true : false;
+    return turmoil.chairman === 'NEUTRAL';
   }
 
   public play(player: Player) {

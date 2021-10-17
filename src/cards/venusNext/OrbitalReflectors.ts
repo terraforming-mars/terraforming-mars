@@ -13,7 +13,7 @@ export class OrbitalReflectors extends Card {
       cardType: CardType.AUTOMATED,
       tags: [Tags.VENUS, Tags.SPACE],
       cost: 26,
-      tr: {tr: 2},
+      tr: {venus: 2},
 
       metadata: {
         cardNumber: '242',

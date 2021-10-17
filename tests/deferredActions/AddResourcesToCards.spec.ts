@@ -1,55 +1,50 @@
 import {expect} from 'chai';
-import {Cyanobacteria} from '../../../src/cards/pathfinders/Cyanobacteria';
-import {Game} from '../../../src/Game';
-import {TestPlayer} from '../../TestPlayer';
-import {TestPlayers} from '../../TestPlayers';
-import {TestingUtils} from '../../TestingUtils';
-import {AndOptions} from '../../../src/inputs/AndOptions';
-import {GHGProducingBacteria} from '../../../src/cards/base/GHGProducingBacteria';
-import {Tardigrades} from '../../../src/cards/base/Tardigrades';
-import {Ants} from '../../../src/cards/base/Ants';
+import {Ants} from '../../src/cards/base/Ants';
+import {GHGProducingBacteria} from '../../src/cards/base/GHGProducingBacteria';
+import {Tardigrades} from '../../src/cards/base/Tardigrades';
+import {AddResourcesToCards} from '../../src/deferredActions/AddResourcesToCards';
+import {Game} from '../../src/Game';
+import {TestPlayers} from '../TestPlayers';
+import {TestPlayer} from '../TestPlayer';
+import {ResourceType} from '../../src/ResourceType';
+import {AndOptions} from '../../src/inputs/AndOptions';
 
-describe('Cyanobacteria', function() {
-  let card: Cyanobacteria;
+describe('AddResourcesToCards', function() {
   let player: TestPlayer;
   let ghgProducingBacteria: GHGProducingBacteria;
   let tardigrades: Tardigrades;
   let ants: Ants;
 
   beforeEach(function() {
-    card = new Cyanobacteria();
     player = TestPlayers.BLUE.newPlayer();
     Game.newInstance('foobar', [player], player);
     ghgProducingBacteria = new GHGProducingBacteria();
     tardigrades = new Tardigrades();
     ants = new Ants();
-    TestingUtils.maxOutOceans(player);
   });
 
-  it('play -- the simple part', function() {
-    expect(player.game.getOxygenLevel()).eq(0);
-
-    const options = card.play(player);
-
-    expect(player.game.getOxygenLevel()).eq(1);
-    expect(options).is.undefined;
+  it('0 cards in hand no action', function() {
+    const action = new AddResourcesToCards(player, ResourceType.MICROBE, 5);
+    expect(action.execute()).is.undefined;
   });
 
-  it('play, one microbe card', function() {
+  it('0 resources no action', function() {
     player.playedCards = [ghgProducingBacteria];
-    const options = card.play(player);
-    expect(options).is.undefined;
-    // 9 oceans, so, maxed out.
-    TestingUtils.runAllActions(player.game);
-    expect(ghgProducingBacteria.resourceCount).eq(9);
+    const action = new AddResourcesToCards(player, ResourceType.MICROBE, 0);
+    expect(action.execute()).is.undefined;
   });
 
-  it('play, many microbe cards', function() {
+  it('one card autofill', function() {
+    player.playedCards = [ghgProducingBacteria];
+    const options = new AddResourcesToCards(player, ResourceType.MICROBE, 5).execute();
+    expect(options).is.undefined;
+    expect(ghgProducingBacteria.resourceCount).eq(5);
+  });
+
+  it('many microbe cards', function() {
     player.playedCards = [ghgProducingBacteria, tardigrades, ants];
 
-    expect(card.play(player)).is.undefined;
-
-    const options = player.game.deferredActions.peek()!.execute();
+    const options = new AddResourcesToCards(player, ResourceType.MICROBE, 9).execute();
     expect(options).instanceOf(AndOptions);
 
     if (options instanceof AndOptions) {
@@ -65,11 +60,10 @@ describe('Cyanobacteria', function() {
     }
   });
 
-  it('play, many microbe cards, wrong input', function() {
+  it('many microbe cards, wrong input', function() {
     player.playedCards = [ghgProducingBacteria, tardigrades, ants];
 
-    card.play(player);
-    const options = player.game.deferredActions.peek()!.execute();
+    const options = new AddResourcesToCards(player, ResourceType.MICROBE, 9).execute();
     expect(options).instanceOf(AndOptions);
 
     if (options instanceof AndOptions) {

@@ -4,9 +4,6 @@ import {Tags} from '../Tags';
 import {IProjectCard} from '../IProjectCard';
 import {Player} from '../../Player';
 import {CardName} from '../../CardName';
-import {MAX_OXYGEN_LEVEL, REDS_RULING_POLICY_COST} from '../../constants';
-import {PartyHooks} from '../../turmoil/parties/PartyHooks';
-import {PartyName} from '../../turmoil/parties/PartyName';
 import {CardRequirements} from '../CardRequirements';
 import {CardRenderer} from '../render/CardRenderer';
 
@@ -34,14 +31,7 @@ export class WaterSplittingPlant extends Card implements IProjectCard {
     return undefined;
   }
   public canAct(player: Player): boolean {
-    const hasEnoughEnergy = player.energy >= 3;
-    const oxygenMaxed = player.game.getOxygenLevel() === MAX_OXYGEN_LEVEL;
-
-    if (PartyHooks.shouldApplyPolicy(player, PartyName.REDS) && !oxygenMaxed) {
-      return player.canAfford(REDS_RULING_POLICY_COST) && hasEnoughEnergy;
-    }
-
-    return hasEnoughEnergy;
+    return player.energy >= 3 && player.canAfford(0, {tr: {oxygen: 1}});
   }
   public action(player: Player) {
     player.energy -= 3;

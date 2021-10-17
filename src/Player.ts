@@ -441,7 +441,8 @@ export class Player implements ISerializable<SerializedPlayer> {
       this.titanium - units.titanium >= 0 &&
       this.plants - units.plants >= 0 &&
       this.energy - units.energy >= 0 &&
-      this.heat - units.heat >= 0;
+      // Stormcraft Incorporated can supply heat, so use `availableHeat`
+      this.availableHeat - units.heat >= 0;
   }
 
   public addUnits(units: Partial<Units>, options? : {
@@ -1853,12 +1854,18 @@ export class Player implements ISerializable<SerializedPlayer> {
 
     const redsCost = TurmoilHandler.computeTerraformRatingBump(this, options?.tr) * REDS_RULING_POLICY_COST;
 
-    const availableMegacredits = this.megaCredits - (reserveUnits.megacredits + redsCost);
+    let availableMegacredits = this.megaCredits;
+    if (this.canUseHeatAsMegaCredits) {
+      availableMegacredits += this.heat;
+      availableMegacredits -= reserveUnits.heat;
+    }
+    availableMegacredits -= reserveUnits.megacredits;
+    availableMegacredits -= redsCost;
+
     if (availableMegacredits < 0) {
       return false;
     }
     return cost <= availableMegacredits +
-      (this.canUseHeatAsMegaCredits ? this.heat - reserveUnits.heat : 0) +
       (canUseSteel ? (this.steel - reserveUnits.steel) * this.getSteelValue() : 0) +
       (canUseTitanium ? (this.titanium - reserveUnits.titanium) * this.getTitaniumValue() : 0) +
       (canUseFloaters ? this.getFloatersCanSpend() * 3 : 0) +

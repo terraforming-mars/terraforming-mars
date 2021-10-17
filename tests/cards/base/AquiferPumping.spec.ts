@@ -1,4 +1,3 @@
-import {PoliticalAgendas} from '../../../src/turmoil/PoliticalAgendas';
 import {expect} from 'chai';
 import {AquiferPumping, OCEAN_COST} from '../../../src/cards/base/AquiferPumping';
 import {Game} from '../../../src/Game';
@@ -8,6 +7,7 @@ import {TestPlayers} from '../../TestPlayers';
 import {Phase} from '../../../src/Phase';
 import {Greens} from '../../../src/turmoil/parties/Greens';
 import {Reds} from '../../../src/turmoil/parties/Reds';
+import {PoliticalAgendas} from '../../../src/turmoil/PoliticalAgendas';
 
 describe('AquiferPumping', function() {
   let card : AquiferPumping; let player : Player; let game : Game;

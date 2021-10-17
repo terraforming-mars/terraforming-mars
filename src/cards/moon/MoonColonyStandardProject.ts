@@ -16,6 +16,7 @@ export class MoonColonyStandardProject extends StandardProjectCard implements IM
     name: CardName.MOON_COLONY_STANDARD_PROJECT,
     cost: 22,
     reserveUnits: Units.of({titanium: 1}),
+    tr: {moonColony: 1},
 
     metadata: {
       cardNumber: '',
@@ -43,10 +44,6 @@ export class MoonColonyStandardProject extends StandardProjectCard implements IM
     const spaces = moonData.moon.getAvailableSpacesOnLand(player);
 
     if (spaces.length === 0) {
-      return false;
-    }
-
-    if (!player.canAfford(0, {tr: {moonColony: 1}})) {
       return false;
     }
 

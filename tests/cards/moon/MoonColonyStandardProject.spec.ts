@@ -10,6 +10,10 @@ import {Resources} from '../../../src/Resources';
 import {SelectHowToPayDeferred} from '../../../src/deferredActions/SelectHowToPayDeferred';
 import {PlaceMoonColonyTile} from '../../../src/moon/PlaceMoonColonyTile';
 import {MooncrateBlockFactory} from '../../../src/cards/moon/MooncrateBlockFactory';
+import {Phase} from '../../../src/Phase';
+import {Greens} from '../../../src/turmoil/parties/Greens';
+import {PoliticalAgendas} from '../../../src/turmoil/PoliticalAgendas';
+import {Reds} from '../../../src/turmoil/parties/Reds';
 
 const MOON_OPTIONS = TestingUtils.setCustomGameOptions({moonExpansion: true});
 
@@ -72,6 +76,35 @@ describe('MoonColonyStandardProject', () => {
 
     expect(moonData.colonyRate).eq(1);
     expect(player.getTerraformRating()).eq(15);
+  });
+
+  it('can act when Reds are in power.', () => {
+    const player = TestPlayers.BLUE.newPlayer();
+    const game = Game.newInstance('foobar', [player], player, MOON_OPTIONS);
+    const turmoil = game.turmoil!;
+    const moonData = MoonExpansion.moonData(game);
+    game.phase = Phase.ACTION;
+
+    player.titanium = 1;
+    player.megaCredits = card.cost;
+    expect(card.canAct(player)).is.true;
+
+    turmoil.rulingParty = new Greens();
+    PoliticalAgendas.setNextAgenda(turmoil, game);
+    player.megaCredits = card.cost;
+    expect(card.canAct(player)).is.true;
+
+    turmoil.rulingParty = new Reds();
+    PoliticalAgendas.setNextAgenda(turmoil, game);
+    player.megaCredits = card.cost;
+    expect(card.canAct(player)).is.false;
+    player.megaCredits = card.cost + 3;
+    expect(card.canAct(player)).is.true;
+
+    moonData.colonyRate = 8;
+
+    player.megaCredits = card.cost;
+    expect(card.canAct(player)).is.true;
   });
 });
 

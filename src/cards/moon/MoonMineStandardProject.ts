@@ -15,6 +15,7 @@ export class MoonMineStandardProject extends StandardProjectCard implements IMoo
     name: CardName.MOON_MINE_STANDARD_PROJECT,
     cost: 20,
     reserveUnits: Units.of({titanium: 1}),
+    tr: {moonMining: 1},
 
     metadata: {
       cardNumber: '',
@@ -42,10 +43,6 @@ export class MoonMineStandardProject extends StandardProjectCard implements IMoo
     const spaces = moonData.moon.getAvailableSpacesForMine(player);
 
     if (spaces.length === 0) {
-      return false;
-    }
-
-    if (!player.canAfford(0, {tr: {moonMining: 1}})) {
       return false;
     }
 

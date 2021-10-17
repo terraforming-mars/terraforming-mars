@@ -1,6 +1,6 @@
 import {CardType} from './CardType';
 import {Player} from '../Player';
-import {IActionCard, ICard} from './ICard';
+import {IActionCard, ICard, TRSource} from './ICard';
 import {OrOptions} from '../inputs/OrOptions';
 import {SelectAmount} from '../inputs/SelectAmount';
 import {SelectHowToPay} from '../inputs/SelectHowToPay';
@@ -22,6 +22,7 @@ interface StaticStandardProjectCardProperties {
   cost: number,
   metadata: ICardMetadata,
   reserveUnits?: Units,
+  tr?: TRSource,
 }
 
 export abstract class StandardProjectCard extends Card implements IActionCard, ICard {
@@ -56,10 +57,15 @@ export abstract class StandardProjectCard extends Card implements IActionCard, I
 
   public canAct(player: Player): boolean {
     const canPayWith = this.canPayWith(player);
-    return player.canAfford(this.cost - this.discount(player), {...canPayWith, reserveUnits: MoonExpansion.adjustedReserveCosts(player, this)});
+    return player.canAfford(
+      this.cost - this.discount(player), {
+        ...canPayWith,
+        tr: this.tr,
+        reserveUnits: MoonExpansion.adjustedReserveCosts(player, this),
+      });
   }
 
-  public canPayWith(_player: Player): {steel?: boolean, titanium?: boolean} {
+  public canPayWith(_player: Player): {steel?: boolean, titanium?: boolean, tr?: TRSource} {
     return {};
   }
 

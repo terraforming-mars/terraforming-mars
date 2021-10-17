@@ -280,7 +280,7 @@ describe('Turmoil', function() {
   });
 
   it('canPlay: when paying reds tax for oxygen, include the cost for the 8% temperature bump, which triggers 0° ocean bump.', function() {
-  // Strip Mine raises the oxygen level two steps.
+    // Strip Mine raises the oxygen level two steps.
     const card = new StripMine();
     const player = TestPlayers.BLUE.newPlayer();
     const game = Game.newInstance('foobar', [player], player, TestingUtils.setCustomGameOptions());
@@ -303,7 +303,7 @@ describe('Turmoil', function() {
   });
 
   it('canPlay: reds tax applies by default when raising temperature', function() {
-  // LavaFlows raises the temperature two steps.
+    // LavaFlows raises the temperature two steps.
     const card = new LavaFlows();
     const player = TestPlayers.BLUE.newPlayer();
     const game = Game.newInstance('foobar', [player], player, TestingUtils.setCustomGameOptions());
@@ -340,7 +340,7 @@ describe('Turmoil', function() {
   });
 
   it('canPlay: when paying reds tax for temperature, include the cost for the 0° ocean bump.', function() {
-  // LavaFlows raises the temperature two steps.
+    // LavaFlows raises the temperature two steps.
     const card = new LavaFlows();
     const player = TestPlayers.BLUE.newPlayer();
     const game = Game.newInstance('foobar', [player], player, TestingUtils.setCustomGameOptions());
@@ -360,7 +360,7 @@ describe('Turmoil', function() {
   });
 
   it('canPlay: reds tax applies by default when placing oceans', function() {
-  // ArtificialLake uses trSource.
+    // ArtificialLake uses trSource.
     const card = new ArtificialLake();
     const player = TestPlayers.BLUE.newPlayer();
     const game = Game.newInstance('foobar', [player], player, TestingUtils.setCustomGameOptions());
@@ -389,7 +389,7 @@ describe('Turmoil', function() {
   // TODO(kberg): Use Towing a Comet as an example of a multi-TR thing.
 
   it('canPlay: reds tax applies by default when raising the venus scale.', function() {
-  // GiantSolarShade raises venus three steps.
+    // GiantSolarShade raises venus three steps.
     const card = new GiantSolarShade();
     const player = TestPlayers.BLUE.newPlayer();
     const game = Game.newInstance('foobar', [player], player, TestingUtils.setCustomGameOptions());
@@ -426,7 +426,7 @@ describe('Turmoil', function() {
   });
 
   it('canPlay: when paying reds tax for venus, include the cost for the 16% TR', function() {
-  // GiantSolarShade raises venus three steps.
+    // GiantSolarShade raises venus three steps.
     const card = new GiantSolarShade();
     const player = TestPlayers.BLUE.newPlayer();
     const game = Game.newInstance('foobar', [player], player, TestingUtils.setCustomGameOptions());

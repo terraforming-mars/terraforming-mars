@@ -18,6 +18,8 @@ export class PreliminaryDarkside extends Card implements IProjectCard {
       cardType: CardType.EVENT,
       tags: [Tags.MOON],
       cost: 13,
+      tr: {moonMining: 1},
+
 
       metadata: {
         description: 'Gain 3 titanium or 4 steel. Raise the Mining Rate 1 step.',

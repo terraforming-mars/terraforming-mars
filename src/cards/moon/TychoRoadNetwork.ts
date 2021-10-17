@@ -18,6 +18,7 @@ export class TychoRoadNetwork extends MoonCard {
       cost: 15,
       productionBox: Units.of({megacredits: 1}),
       reserveUnits: Units.of({steel: 1}),
+      tr: {moonLogistics: 1},
 
       metadata: {
         description: 'Spend 1 steel. Increase your M€ production 1 step. ' +

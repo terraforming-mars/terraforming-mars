@@ -14,6 +14,7 @@ export class LTFHeadquarters extends Card {
       cardType: CardType.AUTOMATED,
       tags: [Tags.SPACE],
       cost: 31,
+      tr: {moonColony: 1},
 
       metadata: {
         description: 'Raise the Colony Rate 1 step. Place a colony. Gain 1 trade fleet.',

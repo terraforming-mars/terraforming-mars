@@ -32,6 +32,11 @@ import {ArtificialLake} from '../../src/cards/base/ArtificialLake';
 import {LavaFlows} from '../../src/cards/base/LavaFlows';
 import {StripMine} from '../../src/cards/base/StripMine';
 import {GiantSolarShade} from '../../src/cards/venusNext/GiantSolarShade';
+import {WaterTreatmentComplex} from '../../src/cards/moon/WaterTreatmentComplex';
+import {DarksideMeteorBombardment} from '../../src/cards/moon/DarksideMeteorBombardment';
+import {LunaStagingStation} from '../../src/cards/moon/LunaStagingStation';
+import {MoonExpansion} from '../../src/moon/MoonExpansion';
+import {TileType} from '../../src/TileType';
 
 describe('Turmoil', function() {
   let player : TestPlayer; let player2 : Player; let game : Game; let turmoil: Turmoil;
@@ -442,6 +447,122 @@ describe('Turmoil', function() {
     player.megaCredits = card.cost + 11;
     expect(player.canPlay(card)).is.false;
     player.megaCredits = card.cost + 12;
+    expect(player.canPlay(card)).is.true;
+  });
+
+  it('canPlay: reds tax applies by default when raising moon colony rate', function() {
+    // Raises the colony rate two steps.
+    const card = new WaterTreatmentComplex();
+    const player = TestPlayers.BLUE.newPlayer();
+    const game = Game.newInstance('foobar', [player], player, TestingUtils.setCustomGameOptions({moonExpansion: true}));
+    const turmoil = game.turmoil!;
+    const moonData = MoonExpansion.moonData(game);
+    game.phase = Phase.ACTION;
+
+    // Card requirements.
+    moonData.moon.getAvailableSpacesOnLand(player)[0].tile = {tileType: TileType.MOON_COLONY};
+    player.titanium = 1;
+
+    turmoil.rulingParty = new Greens();
+    PoliticalAgendas.setNextAgenda(turmoil, game);
+    player.megaCredits = card.cost;
+    expect(player.canPlay(card)).is.true;
+
+    turmoil.rulingParty = new Reds();
+    PoliticalAgendas.setNextAgenda(turmoil, game);
+    player.megaCredits = card.cost;
+    expect(player.canPlay(card)).is.false;
+
+    player.megaCredits = card.cost + 5;
+    expect(player.canPlay(card)).is.false;
+    player.megaCredits = card.cost + 6;
+    expect(player.canPlay(card)).is.true;
+
+    moonData.colonyRate = 7;
+    player.megaCredits = card.cost + 2;
+    expect(player.canPlay(card)).is.false;
+    player.megaCredits = card.cost + 3;
+    expect(player.canPlay(card)).is.true;
+
+    moonData.colonyRate = 8;
+
+    player.megaCredits = card.cost;
+    expect(player.canPlay(card)).is.true;
+  });
+
+  it('canPlay: reds tax applies by default when raising moon mining rate', function() {
+    // Raises the mining rate two steps.
+    const card = new DarksideMeteorBombardment();
+    const player = TestPlayers.BLUE.newPlayer();
+    const game = Game.newInstance('foobar', [player], player, TestingUtils.setCustomGameOptions({moonExpansion: true}));
+    const turmoil = game.turmoil!;
+    const moonData = MoonExpansion.moonData(game);
+    game.phase = Phase.ACTION;
+
+    turmoil.rulingParty = new Greens();
+    PoliticalAgendas.setNextAgenda(turmoil, game);
+    player.megaCredits = card.cost;
+    expect(player.canPlay(card)).is.true;
+
+    turmoil.rulingParty = new Reds();
+    PoliticalAgendas.setNextAgenda(turmoil, game);
+    player.megaCredits = card.cost;
+    expect(player.canPlay(card)).is.false;
+
+    player.megaCredits = card.cost + 5;
+    expect(player.canPlay(card)).is.false;
+    player.megaCredits = card.cost + 6;
+    expect(player.canPlay(card)).is.true;
+
+    moonData.miningRate = 7;
+    player.megaCredits = card.cost + 2;
+    expect(player.canPlay(card)).is.false;
+    player.megaCredits = card.cost + 3;
+    expect(player.canPlay(card)).is.true;
+
+    moonData.miningRate = 8;
+
+    player.megaCredits = card.cost;
+    expect(player.canPlay(card)).is.true;
+  });
+
+  it('canPlay: reds tax applies by default when raising moon logistic rate', function() {
+    // Raises the logistic rate two steps.
+    const card = new LunaStagingStation();
+    const player = TestPlayers.BLUE.newPlayer();
+    const game = Game.newInstance('foobar', [player], player, TestingUtils.setCustomGameOptions({moonExpansion: true}));
+    const turmoil = game.turmoil!;
+    const moonData = MoonExpansion.moonData(game);
+    game.phase = Phase.ACTION;
+
+    // Card requirements
+    moonData.logisticRate = 2;
+    player.titanium = 1;
+
+    turmoil.rulingParty = new Greens();
+    PoliticalAgendas.setNextAgenda(turmoil, game);
+    player.megaCredits = card.cost;
+    expect(player.canPlay(card)).is.true;
+
+    turmoil.rulingParty = new Reds();
+    PoliticalAgendas.setNextAgenda(turmoil, game);
+    player.megaCredits = card.cost;
+    expect(player.canPlay(card)).is.false;
+
+    player.megaCredits = card.cost + 5;
+    expect(player.canPlay(card)).is.false;
+    player.megaCredits = card.cost + 6;
+    expect(player.canPlay(card)).is.true;
+
+    moonData.logisticRate = 7;
+    player.megaCredits = card.cost + 2;
+    expect(player.canPlay(card)).is.false;
+    player.megaCredits = card.cost + 3;
+    expect(player.canPlay(card)).is.true;
+
+    moonData.logisticRate = 8;
+
+    player.megaCredits = card.cost;
     expect(player.canPlay(card)).is.true;
   });
 

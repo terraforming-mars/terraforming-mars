@@ -44,6 +44,10 @@ export class MoonRoadStandardProject extends StandardProjectCard implements IMoo
       return false;
     }
 
+    if (!player.canAfford(0, {tr: {moonLogistics: 1}})) {
+      return false;
+    }
+
     return super.canAct(player);
   }
 

@@ -22,6 +22,7 @@ export class LunaTrainStation extends MoonCard {
       productionBox: Units.of({megacredits: 4}),
       requirements: CardRequirements.builder((b) => b.logisticRate(5)),
       reserveUnits: Units.of({steel: 2}),
+      tr: {moonLogistics: 1},
 
       metadata: {
         description: 'Requires a Logistic Rate of 5 or higher. Spend 2 steel. ' +

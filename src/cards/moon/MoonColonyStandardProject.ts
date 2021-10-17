@@ -46,6 +46,10 @@ export class MoonColonyStandardProject extends StandardProjectCard implements IM
       return false;
     }
 
+    if (!player.canAfford(0, {tr: {moonColony: 1}})) {
+      return false;
+    }
+
     return super.canAct(player);
   }
 

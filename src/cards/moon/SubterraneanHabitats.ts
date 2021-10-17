@@ -14,6 +14,7 @@ export class SubterraneanHabitats extends MoonCard implements IProjectCard {
       cardType: CardType.ACTIVE,
       cost: 12,
       reserveUnits: Units.of({steel: 2}),
+      tr: {moonColony: 1},
 
       metadata: {
         description: 'Spend 2 steel. Raise the Colony Rate 1 step.',

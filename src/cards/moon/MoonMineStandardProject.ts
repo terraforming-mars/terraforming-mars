@@ -45,6 +45,10 @@ export class MoonMineStandardProject extends StandardProjectCard implements IMoo
       return false;
     }
 
+    if (!player.canAfford(0, {tr: {moonMining: 1}})) {
+      return false;
+    }
+
     return super.canAct(player);
   }
 

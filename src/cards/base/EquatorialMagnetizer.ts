@@ -6,9 +6,6 @@ import {IActionCard} from '../ICard';
 import {IProjectCard} from '../IProjectCard';
 import {Resources} from '../../Resources';
 import {CardName} from '../../CardName';
-import {PartyHooks} from '../../turmoil/parties/PartyHooks';
-import {PartyName} from '../../turmoil/parties/PartyName';
-import {REDS_RULING_POLICY_COST} from '../../constants';
 import {CardRenderer} from '../render/CardRenderer';
 
 export class EquatorialMagnetizer extends Card implements IActionCard, IProjectCard {
@@ -33,13 +30,7 @@ export class EquatorialMagnetizer extends Card implements IActionCard, IProjectC
     return undefined;
   }
   public canAct(player: Player): boolean {
-    const hasEnergyProduction = player.getProduction(Resources.ENERGY) >= 1;
-
-    if (PartyHooks.shouldApplyPolicy(player, PartyName.REDS)) {
-      return player.canAfford(REDS_RULING_POLICY_COST) && hasEnergyProduction;
-    }
-
-    return hasEnergyProduction;
+    return player.getProduction(Resources.ENERGY) >= 1 && player.canAfford(0, {tr: {tr: 1}});
   }
   public action(player: Player) {
     player.addProduction(Resources.ENERGY, -1);

@@ -18,6 +18,7 @@ export class LunaResort extends MoonCard {
       cost: 11,
       productionBox: Units.of({energy: -1, megacredits: 3}),
       reserveUnits: Units.of({titanium: 2}),
+      tr: {moonColony: 1},
 
       requirements: CardRequirements.builder((b) => b.colonyTiles(2, {all})),
       metadata: {

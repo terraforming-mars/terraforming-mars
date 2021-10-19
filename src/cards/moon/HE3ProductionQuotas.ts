@@ -19,6 +19,7 @@ export class HE3ProductionQuotas extends Card implements IProjectCard {
       cardType: CardType.EVENT,
       tags: [Tags.MOON],
       cost: 10,
+      tr: {moonMining: 1},
 
       requirements: CardRequirements.builder((b) => b.party(PartyName.KELVINISTS).miningTiles(1, {all})),
       metadata: {

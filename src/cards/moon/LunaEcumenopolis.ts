@@ -37,8 +37,34 @@ export class LunaEcumenopolis extends MoonCard {
     });
   };
 
+  private canAffordTRBump(player: Player) {
+    // Note for someone paying close attention:
+    //
+    // In the real world, this card can be resolved in one of two orders:
+    // 1. Raise the TR rate before raising the colony rate
+    // 2. Raise the colony rate before the TR rate.
+    // In the first case, the player will get fewer TR, but also is more likely to afford the costs.
+    // In the second case, the player will get the most TR, but will have to pay up to 3 more MC, the cost
+    // of that additional TR bump.
+    //
+    // This algorithm assumes the second case.
+    //
+    // If someone wants to optimize for this, they can change this algorithm to use the current colony rate instead
+    // of the expected colony rate, but then they must also change the order in which the player gains those bonuses
+    // in play().
+    //
+    const moonData = MoonExpansion.moonData(player.game);
+    const expectedColonyRate = Math.min(moonData.colonyRate + 2, 8);
+    const expectedTRBump = Math.floor(expectedColonyRate / 2);
+    return player.canAfford(0, {tr: {moonColony: 2, tr: expectedTRBump}});
+  }
+
   public canPlay(player: Player) {
     if (!super.canPlay(player)) {
+      return false;
+    }
+
+    if (!this.canAffordTRBump(player)) {
       return false;
     }
 

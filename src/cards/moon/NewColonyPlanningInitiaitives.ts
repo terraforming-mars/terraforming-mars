@@ -12,6 +12,7 @@ export class NewColonyPlanningInitiaitives extends Card {
       name: CardName.NEW_COLONY_PLANNING_INITIAITIVES,
       cardType: CardType.AUTOMATED,
       cost: 6,
+      tr: {moonColony: 1},
 
       requirements: CardRequirements.builder((b) => b.colonyRate(2)),
       metadata: {

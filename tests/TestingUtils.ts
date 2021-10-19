@@ -1,3 +1,4 @@
+import {expect} from 'chai';
 import {Player} from '../src/Player';
 import {DEFAULT_GAME_OPTIONS, Game, GameOptions} from '../src/Game';
 import * as constants from '../src/constants';
@@ -10,6 +11,9 @@ import {LogMessage} from '../src/LogMessage';
 import {Log} from '../src/Log';
 import {PlayerInput} from '../src/PlayerInput';
 import {DeferredAction} from '../src/deferredActions/DeferredAction';
+import {Greens} from '../src/turmoil/parties/Greens';
+import {PoliticalAgendas} from '../src/turmoil/PoliticalAgendas';
+import {Reds} from '../src/turmoil/parties/Reds';
 
 export class TestingUtils {
   // Returns the oceans created during this operation which may not reflect all oceans.
@@ -105,5 +109,19 @@ export class TestingUtils {
   // Provides a readable version of a log message for easier testing.
   public static formatLogMessage(message: LogMessage): string {
     return Log.applyData(message, (datum) => datum.value);
+  }
+
+  public static testRedsCosts(cb: () => boolean, player: Player, initialMegacredits: number, passingDelta: number) {
+    const turmoil = player.game.turmoil!;
+    turmoil.rulingParty = new Greens();
+    PoliticalAgendas.setNextAgenda(turmoil, player.game);
+    player.megaCredits = initialMegacredits;
+    expect(cb(), 'Greens in power').is.true;
+    turmoil.rulingParty = new Reds();
+    PoliticalAgendas.setNextAgenda(turmoil, player.game);
+    player.megaCredits = initialMegacredits + passingDelta - 1;
+    expect(cb(), 'Reds in power, not enough money').is.false;
+    player.megaCredits = initialMegacredits + passingDelta;
+    expect(cb(), 'Reds in power, enough money').is.true;
   }
 }

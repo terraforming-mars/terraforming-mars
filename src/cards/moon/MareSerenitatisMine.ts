@@ -21,6 +21,7 @@ export class MareSerenitatisMine extends MoonCard {
       cost: 21,
       productionBox: Units.of({steel: 1, titanium: 1}),
       reserveUnits: Units.of({steel: 1, titanium: 2}),
+      tr: {moonMining: 1, moonLogistics: 1},
 
       metadata: {
         description: 'Spend 2 titanium and 1 steel. Increase your steel and titanium production 1 step ' +

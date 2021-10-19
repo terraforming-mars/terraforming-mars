@@ -18,6 +18,7 @@ export class Habitat14 extends MoonCard {
       cost: 5,
       productionBox: Units.of({energy: -1, megacredits: -1}),
       reserveUnits: Units.of({titanium: 1}),
+      tr: {moonColony: 1},
 
       metadata: {
         description: 'Decrease your energy production 1 step and your M€ production 1 step. Spend 1 titanium. Place a colony tile on the Moon and raise the Colony Rate 1 step.',

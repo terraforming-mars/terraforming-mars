@@ -13,6 +13,7 @@ export class DarksideMeteorBombardment extends Card {
       cardType: CardType.EVENT,
       tags: [Tags.SPACE],
       cost: 20,
+      tr: {moonMining: 2},
 
       metadata: {
         description: 'Gain 2 steel and 2 titanium. Raise the Mining Rate 2 steps.',

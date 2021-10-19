@@ -14,6 +14,7 @@ export class AIControlledMineNetwork extends Card {
       cardType: CardType.AUTOMATED,
       tags: [Tags.SCIENCE],
       cost: 6,
+      tr: {moonLogistics: 1},
 
       requirements: CardRequirements.builder((b) => b.logisticRate(2)),
       metadata: {

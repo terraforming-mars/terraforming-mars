@@ -18,6 +18,7 @@ export class AristarchusRoadNetwork extends MoonCard {
       cost: 15,
       productionBox: Units.of({megacredits: 2}),
       reserveUnits: Units.of({steel: 2}),
+      tr: {moonLogistics: 1},
 
       metadata: {
         description: 'Spend 2 steel. Increase your M€ production 2 steps. ' +

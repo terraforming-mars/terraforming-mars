@@ -16,6 +16,7 @@ export class MoonColonyStandardProject extends StandardProjectCard implements IM
     name: CardName.MOON_COLONY_STANDARD_PROJECT,
     cost: 22,
     reserveUnits: Units.of({titanium: 1}),
+    tr: {moonColony: 1},
 
     metadata: {
       cardNumber: '',

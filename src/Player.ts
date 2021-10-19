@@ -2080,9 +2080,9 @@ export class Player implements ISerializable<SerializedPlayer> {
       let sendDelegate;
       if (turmoil.lobby.has(this.id)) {
         sendDelegate = new SendDelegateToArea(this, 'Send a delegate in an area (from lobby)');
-      } else if (this.isCorporation(CardName.INCITE) && this.canAfford(3) && turmoil.getDelegatesInReserve(this.id) > 0) {
+      } else if (this.isCorporation(CardName.INCITE) && this.canAfford(3) && turmoil.hasAvailableDelegates(this.id)) {
         sendDelegate = new SendDelegateToArea(this, 'Send a delegate in an area (3 M€)', {cost: 3});
-      } else if (this.canAfford(5) && turmoil.getDelegatesInReserve(this.id) > 0) {
+      } else if (this.canAfford(5) && turmoil.hasAvailableDelegates(this.id)) {
         sendDelegate = new SendDelegateToArea(this, 'Send a delegate in an area (5 M€)', {cost: 5});
       }
       if (sendDelegate) {

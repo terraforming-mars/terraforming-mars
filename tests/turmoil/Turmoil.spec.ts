@@ -57,13 +57,39 @@ describe('Turmoil', function() {
     expect(turmoil.rulingParty.name).to.eq(PartyName.GREENS);
   });
 
-  it('Correctly send delegate', function() {
+  it('Correctly send delegate from the lobby', function() {
     const greens = turmoil.getPartyByName(PartyName.GREENS)!;
     greens.delegates = [];
 
+    expect(turmoil.lobby).contains(player.id);
+
     turmoil.sendDelegateToParty(player.id, PartyName.GREENS, game);
+
     expect(greens.delegates).has.lengthOf(1);
     expect(game.getPlayerById(greens.delegates[0])).to.eq(player);
+    expect(turmoil.lobby).does.not.contain(player.id);
+  });
+
+  it('Correctly send delegate from the reserve', function() {
+    const greens = turmoil.getPartyByName(PartyName.GREENS)!;
+    greens.delegates = [];
+    expect(turmoil.lobby).contains(player.id);
+
+    turmoil.sendDelegateToParty(player.id, PartyName.GREENS, game, 'reserve');
+
+    expect(greens.delegates).has.lengthOf(1);
+    expect(game.getPlayerById(greens.delegates[0])).to.eq(player);
+    expect(turmoil.lobby).contains(player.id);
+  });
+
+
+  it('Do not send delegate from reserve when reserve is empty', function() {
+    const greens = turmoil.getPartyByName(PartyName.GREENS)!;
+    greens.delegates = [];
+    turmoil.delegateReserve = [];
+
+    turmoil.sendDelegateToParty(player.id, PartyName.GREENS, game, 'reserve');
+    expect(greens.delegates).has.lengthOf(0);
   });
 
   it('Counts influence correctly for dominant party', function() {
@@ -226,7 +252,6 @@ describe('Turmoil', function() {
   });
 
 
-  // TODO(kberg): Move tests and code to the turmoil branch.
   it('canPlay: reds tax applies by default when raising oxygen', function() {
   // Strip Mine raises the oxygen level two steps.
     const card = new StripMine();

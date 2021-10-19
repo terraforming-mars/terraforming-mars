@@ -202,10 +202,8 @@ export class TurmoilHandler {
 
   // TODO(kberg): Add a test where if you raise oxygen to max temperature but temperature is maxed you do not have to pay for it.
   // It works, but4 a test would be helpful.
-  public static computeTerraformRatingBump(player: Player, tr?: TRSource): number {
+  public static computeTerraformRatingBump(player: Player, tr: TRSource = {}): number {
     if (!PartyHooks.shouldApplyPolicy(player, PartyName.REDS)) return 0;
-
-    if (tr === undefined) return 0;
 
     // Local copy
     tr = {...tr};
@@ -246,7 +244,6 @@ export class TurmoilHandler {
     }
 
     MoonExpansion.ifMoon(player.game, (moonData) => {
-      if (tr === undefined) return; // The compiler isn't smart enough.
       if (tr.moonColony !== undefined) {
         const availableSteps = constants.MAXIMUM_COLONY_RATE - moonData.colonyRate;
         total = total + Math.min(availableSteps, tr.moonColony);

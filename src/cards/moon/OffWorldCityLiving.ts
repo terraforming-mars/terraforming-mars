@@ -17,6 +17,7 @@ export class OffWorldCityLiving extends Card implements IProjectCard {
       cardType: CardType.AUTOMATED,
       tags: [Tags.CITY, Tags.SPACE],
       cost: 35,
+      tr: {moonColony: 1},
 
       metadata: {
         // Check the card for a clever icon.

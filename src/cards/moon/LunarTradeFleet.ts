@@ -15,6 +15,7 @@ export class LunarTradeFleet extends Card {
       cardType: CardType.AUTOMATED,
       tags: [Tags.MOON, Tags.SPACE],
       cost: 8,
+      tr: {moonLogistics: 1},
 
       requirements: CardRequirements.builder((b) => b.production(Resources.TITANIUM, 2)),
       metadata: {

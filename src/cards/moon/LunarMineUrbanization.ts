@@ -22,6 +22,8 @@ export class LunarMineUrbanization extends Card implements IProjectCard {
       productionBox: Units.of({megacredits: 1}),
       // NOTE(kberg): Rules were that it says it Requires 1 mine tile. Changing to "Requires you have 1 mine tile."
       requirements: CardRequirements.builder((b) => b.miningTiles(1)),
+      tr: {moonColony: 1},
+
       metadata: {
         description: 'Requires you have 1 mine tile. Increase your M€ production 1 step. Replace one of your mine tiles ' +
         'with this special tile. Raise the Colony Rate 1 step. This tile counts both as a colony and a mine tile.',

@@ -14,6 +14,7 @@ export class MoonRoadStandardProject extends StandardProjectCard implements IMoo
     name: CardName.MOON_ROAD_STANDARD_PROJECT,
     cost: 18,
     reserveUnits: Units.of({steel: 1}),
+    tr: {moonLogistics: 1},
 
     metadata: {
       cardNumber: '',

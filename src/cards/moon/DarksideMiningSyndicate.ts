@@ -15,6 +15,7 @@ export class DarksideMiningSyndicate extends Card implements IProjectCard {
       cardType: CardType.AUTOMATED,
       tags: [Tags.MOON, Tags.SPACE],
       cost: 18,
+      tr: {moonMining: 1},
 
       metadata: {
         description: 'Increase your Titanium production 2 steps, or ' +

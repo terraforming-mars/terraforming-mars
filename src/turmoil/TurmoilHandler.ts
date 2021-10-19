@@ -15,7 +15,8 @@ import {SCIENTISTS_POLICY_1} from './parties/Scientists';
 import {UNITY_POLICY_2, UNITY_POLICY_3} from './parties/Unity';
 import {TurmoilPolicy} from './TurmoilPolicy';
 import * as constants from '../constants';
-import {TRSource} from '@/cards/ICard';
+import {TRSource} from '../cards/ICard';
+import {MoonExpansion} from '../moon/MoonExpansion';
 
 export class TurmoilHandler {
   private constructor() {}
@@ -244,21 +245,23 @@ export class TurmoilHandler {
       }
     }
 
-    // MoonExpansion.ifMoon(this.game, (moonData) => {
-    //   if (tr.moonColony !== undefined) {
-    //     const availableSteps = constants.MAXIMUM_COLONY_RATE - moonData.colonyRate;
-    //     total = total + Math.min(availableSteps, tr.moonColony);
-    //   }
+    MoonExpansion.ifMoon(player.game, (moonData) => {
+      if (tr === undefined) return; // The compiler isn't smart enough.
+      if (tr.moonColony !== undefined) {
+        const availableSteps = constants.MAXIMUM_COLONY_RATE - moonData.colonyRate;
+        total = total + Math.min(availableSteps, tr.moonColony);
+      }
 
-    //   if (tr.moonMining !== undefined) {
-    //     const availableSteps = constants.MAXIMUM_MINING_RATE - moonData.miningRate;
-    //     total = total + Math.min(availableSteps, tr.moonMining);
-    //   }
+      if (tr.moonMining !== undefined) {
+        const availableSteps = constants.MAXIMUM_MINING_RATE - moonData.miningRate;
+        total = total + Math.min(availableSteps, tr.moonMining);
+      }
 
-    //   if (tr.moonLogistics !== undefined) {
-    //     const availableSteps = constants.MAXIMUM_LOGISTICS_RATE - moonData.logisticRate;
-    //     total = total + Math.min(availableSteps, tr.moonLogistics);
-    //   }
+      if (tr.moonLogistics !== undefined) {
+        const availableSteps = constants.MAXIMUM_LOGISTICS_RATE - moonData.logisticRate;
+        total = total + Math.min(availableSteps, tr.moonLogistics);
+      }
+    });
 
     total += tr.tr ?? 0;
 

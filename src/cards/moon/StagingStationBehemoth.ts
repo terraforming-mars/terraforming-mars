@@ -14,6 +14,7 @@ export class StagingStationBehemoth extends Card implements IProjectCard {
       cardType: CardType.AUTOMATED,
       tags: [Tags.SPACE],
       cost: 24,
+      tr: {moonLogistics: 1},
 
       metadata: {
         description: 'Gain 2 trade fleets. Raise the Logistic Rate 1 step.',

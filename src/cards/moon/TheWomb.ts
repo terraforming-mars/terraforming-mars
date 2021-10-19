@@ -18,6 +18,7 @@ export class TheWomb extends MoonCard {
       cost: 16,
       productionBox: Units.of({energy: -2, megacredits: 4}),
       reserveUnits: Units.of({titanium: 2}),
+      tr: {moonColony: 1},
 
       metadata: {
         description: 'Decrease your energy production 2 steps and increase your M€ production 4 steps. ' +

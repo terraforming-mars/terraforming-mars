@@ -238,7 +238,7 @@ export class Player implements ISerializable<SerializedPlayer> {
     this.terraformRating--;
   }
 
-  public increaseTerraformRating() {
+  public increaseTerraformRating(opts: {log?: boolean} = {}) {
     if (!this.game.gameOptions.turmoilExtension) {
       this.terraformRating++;
       this.hasIncreasedTerraformRatingThisGeneration = true;
@@ -257,11 +257,18 @@ export class Player implements ISerializable<SerializedPlayer> {
 
     this.terraformRating++;
     this.hasIncreasedTerraformRatingThisGeneration = true;
+    if (opts.log === true) {
+      this.game.log('${0} gained 1 TR', (b) => b.player(this));
+    }
   }
 
-  public increaseTerraformRatingSteps(value: number) {
-    for (let i = 0; i < value; i++) {
+  public increaseTerraformRatingSteps(steps: number, opts: {log?: boolean} = {}) {
+    for (let i = 0; i < steps; i++) {
       this.increaseTerraformRating();
+    }
+
+    if (opts.log === true) {
+      this.game.log('${0} gained ${1} TR', (b) => b.player(this).number(steps));
     }
   }
 

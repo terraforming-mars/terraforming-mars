@@ -6,7 +6,6 @@ import {Tags} from '../../cards/Tags';
 import {Turmoil} from '../Turmoil';
 import {Player} from '../../Player';
 import {Board} from '../../boards/Board';
-import {LogHelper} from '../../LogHelper';
 
 export class Election implements IGlobalEvent {
     public name = GlobalEventName.ELECTION;
@@ -28,24 +27,20 @@ export class Election implements IGlobalEvent {
 
         // We have one rank 1 player
         if (this.getScore(players[0], turmoil, game) > this.getScore(players[1], turmoil, game)) {
-          players[0].increaseTerraformRatingSteps(2);
-          LogHelper.logTRIncrease(players[0], 2);
+          players[0].increaseTerraformRatingSteps(2, {log: true});
           players.shift();
 
           if (players.length === 1) {
-            players[0].increaseTerraformRatingSteps(1);
-            LogHelper.logTRIncrease(players[0], 1);
+            players[0].increaseTerraformRatingSteps(1, {log: true});
           } else if (players.length > 1) {
             // We have one rank 2 player
             if (this.getScore(players[0], turmoil, game) > this.getScore(players[1], turmoil, game)) {
-              players[0].increaseTerraformRatingSteps(1);
-              LogHelper.logTRIncrease(players[0], 1);
+              players[0].increaseTerraformRatingSteps(1, {log: true});
               // We have at least two rank 2 players
             } else {
               const score = this.getScore(players[0], turmoil, game);
               while (players.length > 0 && this.getScore(players[0], turmoil, game) === score) {
-                players[0].increaseTerraformRatingSteps(1);
-                LogHelper.logTRIncrease(players[0], 1);
+                players[0].increaseTerraformRatingSteps(1, {log: true});
                 players.shift();
               }
             }
@@ -54,8 +49,7 @@ export class Election implements IGlobalEvent {
         } else {
           const score = this.getScore(players[0], turmoil, game);
           while (players.length > 0 && this.getScore(players[0], turmoil, game) === score) {
-            players[0].increaseTerraformRatingSteps(2);
-            LogHelper.logTRIncrease(players[0], 2);
+            players[0].increaseTerraformRatingSteps(2, {log: true});
             players.shift();
           }
         }

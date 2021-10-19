@@ -52,10 +52,6 @@ export class LogHelper {
       b.player(player).colony(colony).number(steps));
   }
 
-  static logTRIncrease(player: Player, steps: number) {
-    player.game.log('${0} gained ${1} TR', (b) => b.player(player).number(steps));
-  }
-
   static logVenusIncrease(player: Player, steps: number) {
     player.game.log('${0} increased Venus scale ${1} step(s)', (b) => b.player(player).number(steps));
   }

@@ -1203,12 +1203,12 @@ export class Game implements ISerializable<SerializedGame> {
   }
 
   public increaseTemperature(player: Player, increments: -2 | -1 | 1 | 2 | 3): undefined {
-    if (increments === -2 || increments === -1) {
-      this.temperature = Math.max(constants.MIN_TEMPERATURE, this.temperature + increments * 2);
+    if (this.temperature >= constants.MAX_TEMPERATURE) {
       return undefined;
     }
 
-    if (this.temperature >= constants.MAX_TEMPERATURE) {
+    if (increments === -2 || increments === -1) {
+      this.temperature = Math.max(constants.MIN_TEMPERATURE, this.temperature + increments * 2);
       return undefined;
     }
 

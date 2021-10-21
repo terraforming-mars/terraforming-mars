@@ -8,13 +8,12 @@ import {TestingUtils} from '../../TestingUtils';
 describe('EconomicEspionage', function() {
   let card: EconomicEspionage;
   let player: TestPlayer;
-  let game: Game;
 
   beforeEach(function() {
     card = new EconomicEspionage();
     player = TestPlayers.BLUE.newPlayer();
     const redPlayer = TestPlayers.RED.newPlayer();
-    game = Game.newInstance('foobar', [player, redPlayer], player);
+    Game.newInstance('foobar', [player, redPlayer], player);
     player.playedCards.push(card);
   });
 

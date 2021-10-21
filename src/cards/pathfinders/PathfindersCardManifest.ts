@@ -18,14 +18,14 @@ import {CeresSpaceport} from './CeresSpaceport';
 // import {CultivationofVenus} from './CultivationofVenus';
 import {Cyanobacteria} from './Cyanobacteria';
 import {DataLeak} from './DataLeak';
-// import {DeclarationofIndependence} from './DeclarationofIndependence';
+import {DeclarationofIndependence} from './DeclarationofIndependence';
 // import {DeepSpaceOperations} from './DeepSpaceOperations';
 // import {DesignCompany} from './DesignCompany';
 import {DesignedOrganisms} from './DesignedOrganisms';
 import {DustStorm} from './DustStorm';
 import {DysonScreens} from './DysonScreens';
 import {EarlyExpedition} from './EarlyExpedition';
-// import {EconomicEspionage} from './EconomicEspionage';
+import {EconomicEspionage} from './EconomicEspionage';
 // import {EconomicHelp} from './EconomicHelp';
 // import {ExpeditiontotheSurfaceVenus} from './ExpeditiontotheSurfaceVenus';
 import {FlatMarsTheory} from './FlatMarsTheory';
@@ -39,7 +39,7 @@ import {LastResortIngenuity} from './LastResortIngenuity';
 // import {LobbyHalls} from './LobbyHalls';
 import {LunarEmbassy} from './LunarEmbassy';
 import {LuxuryEstate} from './LuxuryEstate';
-// import {MartianCulture} from './MartianCulture';
+import {MartianCulture} from './MartianCulture';
 // import {MartianDustProcessingPlant} from './MartianDustProcessingPlant';
 import {MartianMonuments} from './MartianMonuments';
 // import {MartianNatureWonders} from './MartianNatureWonders';
@@ -49,7 +49,7 @@ import {MuseumofEarlyColonisation} from './MuseumofEarlyColonisation';
 import {NewVenice} from './NewVenice';
 // import {NobelLabs} from './NobelLabs';
 import {OrbitalLaboratories} from './OrbitalLaboratories';
-// import {OzoneGenerators} from './OzoneGenerators';
+import {OzoneGenerators} from './OzoneGenerators';
 // import {PersonalAgenda} from './PersonalAgenda';
 // import {Pollinators} from './Pollinators';
 import {PowerPlant} from './PowerPlant';
@@ -68,7 +68,7 @@ import {SmallComet} from './SmallComet';
 // import {Solarpedia} from './Solarpedia';
 import {SolarStorm} from './SolarStorm';
 import {SpaceDebrisCleaningOperation} from './SpaceDebrisCleaningOperation';
-// import {SpaceRelay} from './SpaceRelay';
+import {SpaceRelay} from './SpaceRelay';
 import {TerraformingControlStation} from './TerraformingControlStation';
 // import {TerraformingRobots} from './TerraformingRobots';
 // import {ValuableGases} from './ValuableGases';
@@ -110,12 +110,12 @@ export const PATHFINDERS_CARD_MANIFEST = new CardManifest({
     {cardName: CardName.DATA_LEAK, Factory: DataLeak},
     {cardName: CardName.SMALL_OPEN_PIT_MINE, Factory: SmallOpenPitMine},
     {cardName: CardName.SOLAR_STORM, Factory: SolarStorm},
-    // {cardName: CardName.SPACE_RELAY, Factory: SpaceRelay},
-    // {cardName: CardName.DECLARATION_OF_INDEPENDENCE, Factory: DeclarationofIndependence, compatibility: GameModule.Turmoil},
-    // {cardName: CardName.MARTIAN_CULTURE, Factory: MartianCulture},
-    // {cardName: CardName.OZONE_GENERATORS, Factory: OzoneGenerators},
+    {cardName: CardName.SPACE_RELAY, Factory: SpaceRelay},
+    {cardName: CardName.DECLARATION_OF_INDEPENDENCE, Factory: DeclarationofIndependence, compatibility: GameModule.Turmoil},
+    {cardName: CardName.MARTIAN_CULTURE, Factory: MartianCulture},
+    {cardName: CardName.OZONE_GENERATORS, Factory: OzoneGenerators},
     {cardName: CardName.SMALL_COMET, Factory: SmallComet},
-    // {cardName: CardName.ECONOMIC_ESPIONAGE, Factory: EconomicEspionage},
+    {cardName: CardName.ECONOMIC_ESPIONAGE, Factory: EconomicEspionage},
     {cardName: CardName.FLAT_MARS_THEORY, Factory: FlatMarsTheory},
     // {cardName: CardName.ASTEROID_RESOURCES, Factory: AsteroidResources},
     // {cardName: CardName.KICKSTARTER, Factory: Kickstarter},

@@ -1,6 +1,5 @@
 import {expect} from 'chai';
 import {DeclarationOfIndependence} from '../../../src/cards/pathfinders/DeclarationOfIndependence';
-import {Resources} from '../../../src/Resources';
 import {Game} from '../../../src/Game';
 import {TestPlayer} from '../../TestPlayer';
 import {TestPlayers} from '../../TestPlayers';

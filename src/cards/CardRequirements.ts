@@ -41,12 +41,15 @@ export class CardRequirements {
     return this.requirements.some((req) => req.type === RequirementType.REMOVED_PLANTS);
   }
   public satisfies(player: Player): boolean {
-    // Process tags separately, though max tag criteria will be processed later.
+    // Process tags separately, though max & any tag criteria will be processed later.
     // This pre-computation takes the wild tag into account.
-    const tags = this.requirements
-      .filter((requirement) => requirement.type === RequirementType.TAG)
-      .filter((requirement) => requirement.isMax !== true)
-      .map((requirement) => (requirement as TagCardRequirement).tag);
+    const tags: Array<Tags> = [];
+    this.requirements.forEach((requirement) => {
+      if ((requirement.type === RequirementType.TAG) &&
+      requirement.isAny !== true && requirement.isMax !== true) {
+        tags.push((requirement as TagCardRequirement).tag);
+      }
+    });
     if (!player.checkMultipleTagPresence(tags)) {
       return false;
     }

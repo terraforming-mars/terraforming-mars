@@ -225,6 +225,15 @@ export class TagCardRequirement extends CardRequirement {
   public satisfies(player: Player): boolean {
     const includeWildTags = this.isMax !== true;
     let tagCount = player.getTagCount(this.tag, false, includeWildTags);
+
+    if (this._isAny) {
+      player.game.getPlayers().forEach((p) => {
+        if (p.id !== player.id) {
+          // Don't include opponents' wild tags because they are not performing the action.
+          tagCount += p.getTagCount(this.tag, false, false);
+        }
+      });
+    }
     // PoliticalAgendas Scientists P4 hook
     if (this.tag === Tags.SCIENCE && player.hasTurmoilScienceTagBonus) tagCount += 1;
 

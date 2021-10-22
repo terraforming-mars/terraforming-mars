@@ -7,8 +7,7 @@ import {CardName} from '../../CardName';
 import {RemoveResourcesFromCard} from '../../deferredActions/RemoveResourcesFromCard';
 import {CardRequirements} from '../CardRequirements';
 import {CardRenderer} from '../render/CardRenderer';
-import {CardRenderDynamicVictoryPoints} from '../render/CardRenderDynamicVictoryPoints';
-import {Card} from '../Card';
+import {Card, VictoryPoints} from '../Card';
 
 export class StratosphericBirds extends Card implements IActionCard, IResourceCard {
   constructor() {
@@ -18,6 +17,7 @@ export class StratosphericBirds extends Card implements IActionCard, IResourceCa
       tags: [Tags.VENUS, Tags.ANIMAL],
       cost: 12,
       resourceType: ResourceType.ANIMAL,
+      victoryPoints: VictoryPoints.resource(1, 1),
 
       requirements: CardRequirements.builder((b) => b.venus(12)),
       metadata: {
@@ -33,7 +33,6 @@ export class StratosphericBirds extends Card implements IActionCard, IResourceCa
           text: 'Requires Venus 12% and that you spend 1 Floater from any card.',
           align: 'left',
         },
-        victoryPoints: CardRenderDynamicVictoryPoints.animals(1, 1),
       },
     });
   };

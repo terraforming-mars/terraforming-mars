@@ -6,8 +6,7 @@ import {Tags} from '../Tags';
 import {IActionCard} from '../ICard';
 import {ResourceType} from '../../ResourceType';
 import {CardRenderer} from '../render/CardRenderer';
-import {Card} from '../Card';
-import {CardRenderDynamicVictoryPoints} from '../render/CardRenderDynamicVictoryPoints';
+import {Card, VictoryPoints} from '../Card';
 import {Resources} from '../../Resources';
 
 export class RustEatingBacteria extends Card implements IActionCard, IProjectCard {
@@ -17,11 +16,12 @@ export class RustEatingBacteria extends Card implements IActionCard, IProjectCar
       cardType: CardType.ACTIVE,
       tags: [Tags.MICROBE],
       cost: 7,
+
       resourceType: ResourceType.MICROBE,
+      victoryPoints: VictoryPoints.resource(1, 3),
 
       metadata: {
         cardNumber: 'M88',
-        victoryPoints: CardRenderDynamicVictoryPoints.microbes(1, 3),
         renderData: CardRenderer.builder((b) => {
           b.action('Spend 1 steel to add 2 Microbes here.', (eb) => {
             eb.startAction.steel(1).arrow().microbes(2);

@@ -13,12 +13,12 @@ export class LagrangeObservatory extends Card implements IProjectCard {
       name: CardName.LAGRANGE_OBSERVATORY,
       tags: [Tags.SCIENCE, Tags.SPACE],
       cost: 9,
+      victoryPoints: 1,
 
       metadata: {
         cardNumber: '196',
         renderData: CardRenderer.builder((b) => b.cards(1)),
         description: 'Draw 1 card.',
-        victoryPoints: 1,
       },
     });
   }

@@ -14,6 +14,7 @@ export class VenusWaystation extends Card {
       cardType: CardType.ACTIVE,
       tags: [Tags.VENUS, Tags.SPACE],
       cost: 9,
+      victoryPoints: 1,
 
       cardDiscount: {tag: Tags.VENUS, amount: 2},
       metadata: {
@@ -23,7 +24,6 @@ export class VenusWaystation extends Card {
             eb.venus(1, {played}).startEffect.megacredits(-2);
           });
         }),
-        victoryPoints: 1,
       },
     });
   };

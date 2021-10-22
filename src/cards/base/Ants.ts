@@ -1,7 +1,7 @@
 import {IActionCard, IResourceCard} from '../ICard';
 import {IProjectCard} from '../IProjectCard';
 import {Tags} from '../Tags';
-import {Card} from '../Card';
+import {Card, VictoryPoints} from '../Card';
 import {CardType} from '../CardType';
 import {Player} from '../../Player';
 import {ResourceType} from '../../ResourceType';
@@ -10,7 +10,6 @@ import {AddResourcesToCard} from '../../deferredActions/AddResourcesToCard';
 import {RemoveResourcesFromCard} from '../../deferredActions/RemoveResourcesFromCard';
 import {CardRequirements} from '../CardRequirements';
 import {CardRenderer} from '../render/CardRenderer';
-import {CardRenderDynamicVictoryPoints} from '../render/CardRenderDynamicVictoryPoints';
 import {all} from '../Options';
 
 export class Ants extends Card implements IActionCard, IProjectCard, IResourceCard {
@@ -20,9 +19,11 @@ export class Ants extends Card implements IActionCard, IProjectCard, IResourceCa
       name: CardName.ANTS,
       tags: [Tags.MICROBE],
       cost: 9,
-      resourceType: ResourceType.MICROBE,
 
+      resourceType: ResourceType.MICROBE,
+      victoryPoints: VictoryPoints.resource(1, 2),
       requirements: CardRequirements.builder((b) => b.oxygen(4)),
+
       metadata: {
         cardNumber: '035',
         description: 'Requires 4% oxygen.',
@@ -32,7 +33,6 @@ export class Ants extends Card implements IActionCard, IProjectCard, IResourceCa
           }).br;
           b.vpText('1 VP per 2 Microbes on this card.');
         }),
-        victoryPoints: CardRenderDynamicVictoryPoints.microbes(1, 2),
       },
     });
   }

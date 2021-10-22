@@ -17,4 +17,6 @@ export interface IProjectCard extends ICard {
     // Cards that require a unit of steel while playing, for instance.
     // Added for the expansion The Moon.
     reserveUnits?: Units;
+
+    victoryPoints?: number;
 }

@@ -1,6 +1,7 @@
 import {CardRenderItemType} from './CardRenderItemType';
 import {CardRenderItem} from './CardRenderItem';
 import {Size} from './Size';
+import {ResourceType} from '../../ResourceType';
 
 export class CardRenderDynamicVictoryPoints {
   public targetOneOrMore: boolean = false; // marking target to be one or more res (Search for Life)
@@ -15,6 +16,28 @@ export class CardRenderDynamicVictoryPoints {
   }
   public static asteroids(points: number, target: number): CardRenderDynamicVictoryPoints {
     return new CardRenderDynamicVictoryPoints(new CardRenderItem(CardRenderItemType.ASTEROIDS), points, target);
+  }
+
+  // Remove all of the builder methods; they're no longer necessary. Keep some
+  // version of the tests, though.
+  public static resource(type: ResourceType, points: number, target: number): CardRenderDynamicVictoryPoints {
+    const map: any = new Map([
+      [ResourceType.MICROBE, CardRenderItemType.MICROBES],
+      [ResourceType.ANIMAL, CardRenderItemType.ANIMALS],
+      [ResourceType.CAMP, CardRenderItemType.CAMPS],
+      [ResourceType.DATA, CardRenderItemType.DATA_RESOURCE],
+      [ResourceType.SCIENCE, CardRenderItemType.SCIENCE],
+      [ResourceType.RESOURCE_CUBE, CardRenderItemType.RESOURCE_CUBE],
+      [ResourceType.PRESERVATION, CardRenderItemType.PRESERVATION],
+      [ResourceType.ASTEROID, CardRenderItemType.ASTEROIDS],
+      [ResourceType.FIGHTER, CardRenderItemType.FIGHTER],
+      [ResourceType.FLOATER, CardRenderItemType.FLOATERS],
+    ]);
+    const itemType = map.get(type);
+    if (itemType === undefined) {
+      throw new Error('Unknown item type ' + type);
+    }
+    return new CardRenderDynamicVictoryPoints(new CardRenderItem(itemType), points, target);
   }
   public static microbes(points: number, target: number): CardRenderDynamicVictoryPoints {
     return new CardRenderDynamicVictoryPoints(new CardRenderItem(CardRenderItemType.MICROBES), points, target);

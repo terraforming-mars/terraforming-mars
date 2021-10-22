@@ -18,8 +18,9 @@ export class PioneerSettlement extends Card implements IProjectCard {
       tags: [Tags.SPACE],
       name: CardName.PIONEER_SETTLEMENT,
       cardType: CardType.AUTOMATED,
-
       requirements: CardRequirements.builder((b) => b.colonies(1, {max})),
+      victoryPoints: 2,
+
       metadata: {
         cardNumber: 'C29',
         renderData: CardRenderer.builder((b) => {
@@ -27,7 +28,6 @@ export class PioneerSettlement extends Card implements IProjectCard {
           b.nbsp.colonies(1);
         }),
         description: 'Requires that you have no more than 1 colony. Decrease your M€ production 2 steps. Place a colony.',
-        victoryPoints: 2,
       },
     });
   }

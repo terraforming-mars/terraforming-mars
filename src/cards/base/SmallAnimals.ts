@@ -1,7 +1,7 @@
 import {IActionCard, IResourceCard} from '../ICard';
 import {IProjectCard} from '../IProjectCard';
 import {Tags} from '../Tags';
-import {Card} from '../Card';
+import {Card, VictoryPoints} from '../Card';
 import {CardType} from '../CardType';
 import {Player} from '../../Player';
 import {ResourceType} from '../../ResourceType';
@@ -10,7 +10,6 @@ import {CardName} from '../../CardName';
 import {DecreaseAnyProduction} from '../../deferredActions/DecreaseAnyProduction';
 import {CardRequirements} from '../CardRequirements';
 import {CardRenderer} from '../render/CardRenderer';
-import {CardRenderDynamicVictoryPoints} from '../render/CardRenderDynamicVictoryPoints';
 import {all} from '../Options';
 
 export class SmallAnimals extends Card implements IActionCard, IProjectCard, IResourceCard {
@@ -20,9 +19,11 @@ export class SmallAnimals extends Card implements IActionCard, IProjectCard, IRe
       name: CardName.SMALL_ANIMALS,
       tags: [Tags.ANIMAL],
       cost: 6,
-      resourceType: ResourceType.ANIMAL,
 
+      resourceType: ResourceType.ANIMAL,
+      victoryPoints: VictoryPoints.resource(1, 2),
       requirements: CardRequirements.builder((b) => b.oxygen(6)),
+
       metadata: {
         cardNumber: '054',
         renderData: CardRenderer.builder((b) => {
@@ -36,7 +37,6 @@ export class SmallAnimals extends Card implements IActionCard, IProjectCard, IRe
           text: 'Requires 6% oxygen. Decrease any Plant production 1 step.',
           align: 'left',
         },
-        victoryPoints: CardRenderDynamicVictoryPoints.animals(1, 2),
       },
     });
   }

@@ -1,6 +1,6 @@
 import {IProjectCard} from '../IProjectCard';
 import {IActionCard, IResourceCard} from '../ICard';
-import {Card} from '../Card';
+import {Card, VictoryPoints} from '../Card';
 import {CardName} from '../../CardName';
 import {CardType} from '../CardType';
 import {ResourceType} from '../../ResourceType';
@@ -8,7 +8,6 @@ import {Tags} from '../Tags';
 import {Player} from '../../Player';
 import {Resources} from '../../Resources';
 import {CardRenderer} from '../render/CardRenderer';
-import {CardRenderDynamicVictoryPoints} from '../render/CardRenderDynamicVictoryPoints';
 import {Size} from '../render/Size';
 import {Units} from '../../Units';
 import {played} from '../Options';
@@ -20,7 +19,9 @@ export class AsteroidDeflectionSystem extends Card implements IActionCard, IProj
       name: CardName.ASTEROID_DEFLECTION_SYSTEM,
       tags: [Tags.SPACE, Tags.EARTH, Tags.BUILDING],
       cost: 13,
+
       resourceType: ResourceType.ASTEROID,
+      victoryPoints: VictoryPoints.resource(1, 1),
       productionBox: Units.of({energy: -1}),
 
       metadata: {
@@ -35,7 +36,6 @@ export class AsteroidDeflectionSystem extends Card implements IActionCard, IProj
           text: 'Decrease your energy production 1 step. 1VP per asteroid on this card.',
           align: 'left',
         },
-        victoryPoints: CardRenderDynamicVictoryPoints.asteroids(1, 1),
       },
     });
   }

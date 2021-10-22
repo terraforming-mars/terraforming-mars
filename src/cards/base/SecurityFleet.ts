@@ -1,13 +1,12 @@
 import {IActionCard, IResourceCard} from '../ICard';
 import {IProjectCard} from '../IProjectCard';
 import {Tags} from '../Tags';
-import {Card} from '../Card';
+import {Card, VictoryPoints} from '../Card';
 import {CardType} from '../CardType';
 import {Player} from '../../Player';
 import {ResourceType} from '../../ResourceType';
 import {CardName} from '../../CardName';
 import {CardRenderer} from '../render/CardRenderer';
-import {CardRenderDynamicVictoryPoints} from '../render/CardRenderDynamicVictoryPoints';
 
 export class SecurityFleet extends Card implements IActionCard, IProjectCard, IResourceCard {
   constructor() {
@@ -18,6 +17,8 @@ export class SecurityFleet extends Card implements IActionCard, IProjectCard, IR
       cost: 12,
       resourceType: ResourceType.FIGHTER,
 
+      victoryPoints: VictoryPoints.resource(1, 1),
+
       metadata: {
         cardNumber: '028',
         renderData: CardRenderer.builder((b) => {
@@ -26,7 +27,6 @@ export class SecurityFleet extends Card implements IActionCard, IProjectCard, IR
           }).br;
           b.vpText('1 VP for each fighter resource on this card.');
         }),
-        victoryPoints: CardRenderDynamicVictoryPoints.fighter(1, 1),
       },
     });
   }

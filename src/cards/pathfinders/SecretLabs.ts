@@ -21,6 +21,7 @@ export class SecretLabs extends Card implements IProjectCard {
       cost: 21,
       tags: [Tags.JOVIAN, Tags.BUILDING, Tags.SPACE],
       requirements: CardRequirements.builder((b) => b.tag(Tags.SCIENCE).tag(Tags.JOVIAN)),
+      victoryPoints: 1,
 
       metadata: {
         cardNumber: 'Pf26',
@@ -32,7 +33,6 @@ export class SecretLabs extends Card implements IProjectCard {
           'Place an ocean tile. Add 2 microbes on any card. ' +
           'OR Raise temperature 1 step. Gain 3 plants. ' +
           'OR Raise oxygen level 1 step. Add 2 floaters on any card.',
-        victoryPoints: 1,
       },
     });
   }

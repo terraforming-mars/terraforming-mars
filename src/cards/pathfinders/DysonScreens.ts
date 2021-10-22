@@ -18,6 +18,7 @@ export class DysonScreens extends Card implements IProjectCard, IActionCard {
       name: CardName.DYSON_SCREENS,
       tags: [Tags.SCIENCE, Tags.VENUS, Tags.ENERGY, Tags.SPACE],
       cost: 28,
+      victoryPoints: 1,
 
       metadata: {
         cardNumber: 'Pf15',
@@ -27,7 +28,6 @@ export class DysonScreens extends Card implements IProjectCard, IActionCard {
             (ab) => ab.titanium(2, {digit}).startAction.production((pb) => pb.heat(1).energy(1))).br;
           b.temperature(1).cards(1).city().asterix().br;
         }),
-        victoryPoints: 1,
         description: 'Raise the temperature 1 step. Draw a card. Place a city tile ON THE RESERVED AREA.',
       },
     });

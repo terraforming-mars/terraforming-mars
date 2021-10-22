@@ -14,6 +14,7 @@ export class SolarProbe extends Card implements IProjectCard {
       tags: [Tags.SPACE, Tags.SCIENCE],
       name: CardName.SOLAR_PROBE,
       cardType: CardType.EVENT,
+      victoryPoints: 1,
 
       metadata: {
         cardNumber: 'C37',
@@ -21,7 +22,6 @@ export class SolarProbe extends Card implements IProjectCard {
           b.cards(1).slash().science(3, {digit, played});
         }),
         description: 'Draw 1 card for every 3 science tags you have, including this.',
-        victoryPoints: 1,
       },
     });
   }

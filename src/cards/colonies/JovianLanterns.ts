@@ -7,8 +7,7 @@ import {ResourceType} from '../../ResourceType';
 import {IResourceCard} from '../ICard';
 import {AddResourcesToCard} from '../../deferredActions/AddResourcesToCard';
 import {CardRequirements} from '../CardRequirements';
-import {Card} from '../Card';
-import {CardRenderDynamicVictoryPoints} from '../render/CardRenderDynamicVictoryPoints';
+import {Card, VictoryPoints} from '../Card';
 import {CardRenderer} from '../render/CardRenderer';
 
 export class JovianLanterns extends Card implements IProjectCard, IResourceCard {
@@ -18,10 +17,12 @@ export class JovianLanterns extends Card implements IProjectCard, IResourceCard 
       tags: [Tags.JOVIAN],
       name: CardName.JOVIAN_LANTERNS,
       cardType: CardType.ACTIVE,
-      resourceType: ResourceType.FLOATER,
-      tr: {tr: 1},
 
+      resourceType: ResourceType.FLOATER,
+      victoryPoints: VictoryPoints.resource(1, 2),
+      tr: {tr: 1},
       requirements: CardRequirements.builder((b) => b.tag(Tags.JOVIAN)),
+
       metadata: {
         cardNumber: 'C18',
         renderData: CardRenderer.builder((b) => {
@@ -35,7 +36,6 @@ export class JovianLanterns extends Card implements IProjectCard, IResourceCard 
           text: 'Requires 1 Jovian tag. Increase your TR 1 step. Add 2 floaters to ANY card.',
           align: 'left',
         },
-        victoryPoints: CardRenderDynamicVictoryPoints.floaters(1, 2),
       },
     });
   }

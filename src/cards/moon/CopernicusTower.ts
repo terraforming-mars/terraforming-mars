@@ -10,8 +10,7 @@ import {CardRequirements} from '../CardRequirements';
 import {IActionCard} from '../ICard';
 import {OrOptions} from '../../inputs/OrOptions';
 import {SelectOption} from '../../inputs/SelectOption';
-import {Card} from '../Card';
-import {CardRenderDynamicVictoryPoints} from '../render/CardRenderDynamicVictoryPoints';
+import {Card, VictoryPoints} from '../Card';
 import {Size} from '../render/Size';
 
 export class CopernicusTower extends Card implements IActionCard, IProjectCard {
@@ -21,12 +20,13 @@ export class CopernicusTower extends Card implements IActionCard, IProjectCard {
       cardType: CardType.ACTIVE,
       tags: [Tags.SCIENCE, Tags.MOON],
       cost: 36,
+
       resourceType: ResourceType.SCIENCE,
       requirements: CardRequirements.builder((b) => b.production(Resources.TITANIUM, 2)),
+      victoryPoints: VictoryPoints.tags(Tags.MOON, 1, 1),
 
       metadata: {
         cardNumber: 'M72',
-        victoryPoints: CardRenderDynamicVictoryPoints.moon(1, 1),
         renderData: CardRenderer.builder((b) => {
           b.text('Requires you have 2 titanium production.', Size.TINY, false, false).br;
           b.action('Add 1 Science resource here, or spend 1 Science resource here to raise your TR 1 step.', (eb) => {

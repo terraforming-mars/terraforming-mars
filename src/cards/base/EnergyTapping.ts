@@ -16,6 +16,7 @@ export class EnergyTapping extends Card implements IProjectCard {
       name: CardName.ENERGY_TAPPING,
       tags: [Tags.ENERGY],
       cost: 3,
+      victoryPoints: -1,
 
       metadata: {
         cardNumber: '201',
@@ -26,7 +27,6 @@ export class EnergyTapping extends Card implements IProjectCard {
             pb.plus().energy(1);
           });
         }),
-        victoryPoints: -1,
       },
     });
   }

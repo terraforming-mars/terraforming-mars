@@ -6,8 +6,7 @@ import {ResourceType} from '../../ResourceType';
 import {CardName} from '../../CardName';
 import {CardRequirements} from '../CardRequirements';
 import {CardRenderer} from '../render/CardRenderer';
-import {CardRenderDynamicVictoryPoints} from '../render/CardRenderDynamicVictoryPoints';
-import {Card} from '../Card';
+import {Card, VictoryPoints} from '../Card';
 
 export class VenusianInsects extends Card implements IActionCard, IResourceCard {
   constructor() {
@@ -17,6 +16,7 @@ export class VenusianInsects extends Card implements IActionCard, IResourceCard 
       tags: [Tags.VENUS, Tags.MICROBE],
       cost: 5,
       resourceType: ResourceType.MICROBE,
+      victoryPoints: VictoryPoints.resource(1, 2),
 
       requirements: CardRequirements.builder((b) => b.venus(12)),
       metadata: {
@@ -28,7 +28,6 @@ export class VenusianInsects extends Card implements IActionCard, IResourceCard 
           b.vpText('1 VP for every 2nd Microbe on this card.');
         }),
         description: 'Requires Venus 12%.',
-        victoryPoints: CardRenderDynamicVictoryPoints.microbes(1, 2),
       },
     });
   };

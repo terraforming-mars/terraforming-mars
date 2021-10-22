@@ -21,6 +21,7 @@ export class ElectroCatapult extends Card implements IActionCard, IProjectCard {
       tags: [Tags.BUILDING],
       cost: 17,
       productionBox: Units.of({energy: -1}),
+      victoryPoints: 1,
 
       requirements: CardRequirements.builder((b) => b.oxygen(8, {max})),
       metadata: {
@@ -35,7 +36,6 @@ export class ElectroCatapult extends Card implements IActionCard, IProjectCard {
           }).br;
           b.production((pb) => pb.minus().energy(1));
         }),
-        victoryPoints: 1,
       },
     });
   }

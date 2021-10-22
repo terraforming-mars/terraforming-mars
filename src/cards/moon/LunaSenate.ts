@@ -6,8 +6,7 @@ import {Tags} from '../Tags';
 import {CardRenderer} from '../render/CardRenderer';
 import {Resources} from '../../Resources';
 import {CardRequirements} from '../CardRequirements';
-import {CardRenderDynamicVictoryPoints} from '../render/CardRenderDynamicVictoryPoints';
-import {Card} from '../Card';
+import {Card, VictoryPoints} from '../Card';
 import {all} from '../Options';
 
 export class LunaSenate extends Card implements IProjectCard {
@@ -17,6 +16,8 @@ export class LunaSenate extends Card implements IProjectCard {
       cardType: CardType.AUTOMATED,
       tags: [Tags.MOON, Tags.MOON],
       cost: 32,
+
+      victoryPoints: VictoryPoints.tags(Tags.MOON, 1, 1),
       requirements: CardRequirements.builder((b) => b.tag(Tags.MOON, 3)),
 
       metadata: {
@@ -26,7 +27,6 @@ export class LunaSenate extends Card implements IProjectCard {
           b.production((pb) => pb.megacredits(1)).slash().moon(1, {all});
           b.vpText('1 VP per Moon tag you have.');
         }),
-        victoryPoints: CardRenderDynamicVictoryPoints.moon(1, 1),
       },
     });
   };

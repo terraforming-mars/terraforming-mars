@@ -13,11 +13,12 @@ export class SFMemorial extends Card implements IProjectCard {
       name: CardName.SF_MEMORIAL,
       tags: [Tags.BUILDING],
       cost: 7,
+      victoryPoints: 1,
+
       metadata: {
         cardNumber: 'P41',
         renderData: CardRenderer.builder((b) => b.cards(1)),
         description: 'Draw 1 card.',
-        victoryPoints: 1,
       },
     });
   }

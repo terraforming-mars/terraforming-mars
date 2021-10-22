@@ -11,6 +11,20 @@ import {CardDiscount, IResourceCard, TRSource} from './ICard';
 import {CardRenderDynamicVictoryPoints} from './render/CardRenderDynamicVictoryPoints';
 import {CardRenderItemType} from './render/CardRenderItemType';
 
+export interface VictoryPoints {
+  type: 'resource' | Tags,
+  points: number,
+  per: number,
+}
+
+export namespace VictoryPoints {
+  export function resource(points: number, per: number): VictoryPoints {
+    return {type: 'resource', points, per};
+  }
+  export function tags(tag: Tags, points: number, per: number): VictoryPoints {
+    return {type: tag, points, per};
+  }
+}
 export interface StaticCardProperties {
   adjacencyBonus?: IAdjacencyBonus;
   cardCost?: number;
@@ -27,8 +41,28 @@ export interface StaticCardProperties {
   cardDiscount?: CardDiscount;
   reserveUnits?: Units,
   tr?: TRSource,
+  victoryPoints?: number | VictoryPoints,
 }
 
+function inferVictoryPoints(properties: StaticCardProperties) {
+  const vps = properties.victoryPoints;
+  if (vps === undefined) {
+    return;
+  }
+  if (properties.metadata.victoryPoints !== undefined) {
+    throw new Error('card.victoryPoints and metadata.victoryPoints cannot be on the same card');
+  }
+  if (typeof(vps) === 'number') {
+    properties.metadata.victoryPoints = vps;
+    return;
+  }
+  if (vps.type === 'resource') {
+    if (properties.resourceType === undefined) {
+      throw new Error('When defining a card-resource based VP, resourceType must be defined.');
+    }
+    properties.metadata.victoryPoints = CardRenderDynamicVictoryPoints.resource(properties.resourceType, vps.points, vps.per);
+  }
+}
 export const staticCardProperties = new Map<CardName, StaticCardProperties>();
 
 export abstract class Card {
@@ -44,6 +78,9 @@ export abstract class Card {
           throw new Error(`${properties.name} must have a cost property`);
         }
       }
+      // TODO(kberg): apply these changes in CardVictoryPoints.vue and remove this conditional altogether.
+      inferVictoryPoints(properties);
+
       staticCardProperties.set(properties.name, properties);
       staticInstance = properties;
     }
@@ -95,15 +132,35 @@ export abstract class Card {
   public get tr(): TRSource {
     return this.properties.tr || {};
   }
+  public get victoryPoints(): number {
+    return this.victoryPoints;
+  }
   public canPlay(_player: Player) {
     return true;
   }
+
   // player is optional to support historical tests.
   public getVictoryPoints(player?: Player): number {
+    const vp1 = this.properties.victoryPoints;
+    if (vp1 !== undefined) {
+      if (typeof(vp1) === 'number') {
+        return vp1;
+      }
+      if (vp1.type === 'resource') {
+        return vp1.points * Math.floor(this.resourceCount / vp1.per);
+      } else {
+        const tag = vp1.type;
+        const count = player?.getTagCount(tag, true, false) ?? 0;
+        return vp1.points * Math.floor(count / vp1.per);
+      }
+    }
+
     const vps = this.properties.metadata.victoryPoints;
     if (vps === undefined) {
       return 0;
     }
+
+    // This will go away.
     if (!(vps instanceof CardRenderDynamicVictoryPoints)) {
       return vps;
     }
@@ -142,62 +199,3 @@ export abstract class Card {
     return vps.points * Math.floor(units / vps.target);
   }
 }
-
-
-// TEMPERATURE = 'temperature',
-// OXYGEN = 'oxygen',
-// OCEANS = 'oceans',
-// PLANTS = 'plants',
-// TR = 'tr',
-// HEAT = 'heat',
-// ENERGY = 'energy',
-// TITANIUM = 'titanium',
-// STEEL = 'steel',
-// MEGACREDITS = 'megacredits',
-// CARDS = 'cards',
-// EVENT = 'event',
-// SPACE = 'space',
-// EARTH = 'earth',
-// BUILDING = 'building',
-// COLONIES = 'colonies',
-// SCIENCE = 'science',
-// TRADE = 'trade',
-// TRADE_DISCOUNT = 'trade_discount',
-// TRADE_FLEET = 'trade_fleet',
-// PLACE_COLONY = 'place_colony',
-// CHAIRMAN = 'chairman',
-// PARTY_LEADERS = 'party_leaders',
-// DELEGATES = 'delegates',
-// INFLUENCE = 'influence',
-// NO_TAGS ='no_tags',
-// PRESERVATION = 'preservation',
-// WILD = 'wild',
-// FIGHTER = 'fighter',
-// CAMPS = 'camps',
-// DIVERSE_TAG = 'diverse_tag',
-// CITY = 'city',
-// GREENERY = 'greenery',
-// PLATE = 'plate',
-// TEXT = 'text',
-// NBSP = 'nbsp',
-// EMPTY_TILE = 'empty_tile',
-// EMPTY_TILE_GOLDEN = 'empty_tile_golden',
-// SELF_REPLICATING = 'self_replicating',
-// MULTIPLIER_WHITE = 'multiplier_white',
-// PROJECT_REQUIREMENTS = 'project_requirements',
-// PRELUDE = 'prelude',
-// AWARD = 'award',
-// VP = 'vp',
-// COMMUNITY = 'community',
-// DISEASE = 'disease',
-// MOON = 'moon',
-// RESOURCE_CUBE = 'resource_cube',
-// DATA_RESOURCE = 'data resource',
-// MOON_COLONY = 'moon-colony',
-// MOON_COLONY_RATE = 'moon-colony-rate',
-// MOON_ROAD = 'moon-road',
-// MOON_LOGISTICS_RATE = 'moon-logistics-rate',
-// MOON_MINE = 'moon-mine',
-// MOON_MINING_RATE = 'moon-mine-rate',
-// SYNDICATE_FLEET = 'syndicate-fleet',
-// MARS = 'mars',

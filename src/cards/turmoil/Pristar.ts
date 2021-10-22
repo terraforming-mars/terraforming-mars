@@ -3,11 +3,10 @@ import {Player} from '../../Player';
 import {ResourceType} from '../../ResourceType';
 import {CardName} from '../../CardName';
 import {IResourceCard} from '../ICard';
-import {Card} from '../Card';
+import {Card, VictoryPoints} from '../Card';
 import {CardType} from '../CardType';
 import {CardRenderer} from '../render/CardRenderer';
 import {Size} from '../render/Size';
-import {CardRenderDynamicVictoryPoints} from '../render/CardRenderDynamicVictoryPoints';
 
 export class Pristar extends Card implements CorporationCard, IResourceCard {
   constructor() {
@@ -17,9 +16,12 @@ export class Pristar extends Card implements CorporationCard, IResourceCard {
       resourceType: ResourceType.PRESERVATION,
       cardType: CardType.CORPORATION,
 
+      victoryPoints: VictoryPoints.resource(1, 1),
+
       metadata: {
         cardNumber: 'R07',
         description: 'You start with 53 M€. Decrease your TR 2 steps. 1 VP per preservation resource here.',
+
         renderData: CardRenderer.builder((b) => {
           b.br.br.br;
           b.megacredits(53).nbsp.nbsp.minus().tr(2, {size: Size.SMALL});
@@ -29,7 +31,6 @@ export class Pristar extends Card implements CorporationCard, IResourceCard {
             });
           });
         }),
-        victoryPoints: CardRenderDynamicVictoryPoints.preservation(1, 1),
       },
     });
   }

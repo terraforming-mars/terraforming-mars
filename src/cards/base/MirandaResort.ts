@@ -15,6 +15,7 @@ export class MirandaResort extends Card implements IProjectCard {
       name: CardName.MIRANDA_RESORT,
       tags: [Tags.JOVIAN, Tags.SPACE],
       cost: 12,
+      victoryPoints: 1,
 
       metadata: {
         cardNumber: '051',
@@ -24,7 +25,6 @@ export class MirandaResort extends Card implements IProjectCard {
           });
         }),
         description: 'Increase your M€ production 1 step for each Earth tag you have.',
-        victoryPoints: 1,
       },
     });
   }

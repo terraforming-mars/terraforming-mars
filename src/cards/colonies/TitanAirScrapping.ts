@@ -21,6 +21,7 @@ export class TitanAirScrapping extends Card implements IProjectCard, IResourceCa
       name: CardName.TITAN_AIRSCRAPPING,
       cardType: CardType.ACTIVE,
       resourceType: ResourceType.FLOATER,
+      victoryPoints: 2,
 
       metadata: {
         cardNumber: 'C43',
@@ -33,7 +34,6 @@ export class TitanAirScrapping extends Card implements IProjectCard, IResourceCa
             eb.floaters(2).startAction.tr(1);
           });
         }),
-        victoryPoints: 2,
       },
     });
   }

@@ -17,6 +17,8 @@ export class LunaMetropolis extends Card {
       tags: [Tags.CITY, Tags.SPACE, Tags.EARTH],
       cost: 21,
 
+      victoryPoints: 2,
+
       metadata: {
         cardNumber: '236',
         renderData: CardRenderer.builder((b) => {
@@ -24,7 +26,6 @@ export class LunaMetropolis extends Card {
           b.city().asterix();
         }),
         description: 'Increase your M€ production 1 step for each Earth tag you have, including this. Place a City tile on the RESERVED AREA',
-        victoryPoints: 2,
       },
     });
   };

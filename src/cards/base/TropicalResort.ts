@@ -16,6 +16,7 @@ export class TropicalResort extends Card implements IProjectCard {
       tags: [Tags.BUILDING],
       cost: 13,
       productionBox: Units.of({megacredits: 3, heat: -2}),
+      victoryPoints: 2,
 
       metadata: {
         cardNumber: '098',
@@ -26,7 +27,6 @@ export class TropicalResort extends Card implements IProjectCard {
           });
         }),
         description: 'Reduce your heat production 2 steps and increase your M€ production 3 steps.',
-        victoryPoints: 2,
       },
     });
   }

@@ -7,9 +7,8 @@ import {Resources} from '../../Resources';
 import {CardType} from '../CardType';
 import {CardName} from '../../CardName';
 import {IResourceCard} from '../ICard';
-import {Card} from '../Card';
+import {Card, VictoryPoints} from '../Card';
 import {CardRenderer} from '../render/CardRenderer';
-import {CardRenderDynamicVictoryPoints} from '../render/CardRenderDynamicVictoryPoints';
 import {played} from '../Options';
 
 export class Arklight extends Card implements CorporationCard, IResourceCard {
@@ -20,6 +19,7 @@ export class Arklight extends Card implements CorporationCard, IResourceCard {
       startingMegaCredits: 45,
       resourceType: ResourceType.ANIMAL,
       cardType: CardType.CORPORATION,
+      victoryPoints: VictoryPoints.resource(1, 2),
 
       metadata: {
         cardNumber: 'R04',
@@ -33,7 +33,6 @@ export class Arklight extends Card implements CorporationCard, IResourceCard {
             ce.vSpace(); // to offset the description to the top a bit so it can be readable
           });
         }),
-        victoryPoints: CardRenderDynamicVictoryPoints.animals(1, 2),
       },
     });
   }

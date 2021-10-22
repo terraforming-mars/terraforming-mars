@@ -23,6 +23,7 @@ export class TitanFloatingLaunchPad extends Card implements IProjectCard, IResou
       name: CardName.TITAN_FLOATING_LAUNCHPAD,
       cardType: CardType.ACTIVE,
       resourceType: ResourceType.FLOATER,
+      victoryPoints: 1,
 
       metadata: {
         cardNumber: 'C44',
@@ -39,7 +40,6 @@ export class TitanFloatingLaunchPad extends Card implements IProjectCard, IResou
           text: 'Add two floaters to ANY JOVIAN CARD.',
           align: 'left',
         },
-        victoryPoints: 1,
       },
     });
   }

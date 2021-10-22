@@ -4,11 +4,10 @@ import {Tags} from '../Tags';
 import {ResourceType} from '../../ResourceType';
 import {IActionCard, ICard, IResourceCard} from '../ICard';
 import {SelectCard} from '../../inputs/SelectCard';
-import {Card} from '../Card';
+import {Card, VictoryPoints} from '../Card';
 import {CardName} from '../../CardName';
 import {CardType} from '../CardType';
 import {CardRenderer} from '../render/CardRenderer';
-import {CardRenderDynamicVictoryPoints} from '../render/CardRenderDynamicVictoryPoints';
 import {AltSecondaryTag} from '../render/CardRenderItem';
 
 export class Celestic extends Card implements IActionCard, CorporationCard, IResourceCard {
@@ -20,6 +19,7 @@ export class Celestic extends Card implements IActionCard, CorporationCard, IRes
       resourceType: ResourceType.FLOATER,
       cardType: CardType.CORPORATION,
       initialActionText: 'Draw 2 cards with a floater icon on it',
+      victoryPoints: VictoryPoints.resource(1, 3),
 
       metadata: {
         cardNumber: 'R05',
@@ -33,7 +33,6 @@ export class Celestic extends Card implements IActionCard, CorporationCard, IRes
             ce.vSpace(); // to offset the description to the top a bit so it can be readable
           });
         }),
-        victoryPoints: CardRenderDynamicVictoryPoints.floaters(1, 3),
       },
     });
   }

@@ -14,6 +14,7 @@ export class RegoPlastics extends Card implements IProjectCard {
       name: CardName.REGO_PLASTICS,
       tags: [Tags.BUILDING],
       cost: 10,
+      victoryPoints: 1,
 
       metadata: {
         cardNumber: 'X10',
@@ -22,7 +23,6 @@ export class RegoPlastics extends Card implements IProjectCard {
             eb.steel(1).startEffect.plus(Size.SMALL).megacredits(1);
           });
         }),
-        victoryPoints: 1,
       },
     });
   }

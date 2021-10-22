@@ -12,6 +12,7 @@ export class EarthCatapult extends Card implements IProjectCard {
       name: CardName.EARTH_CATAPULT,
       tags: [Tags.EARTH],
       cost: 23,
+      victoryPoints: 2,
 
       cardDiscount: {amount: 2},
       metadata: {
@@ -21,7 +22,6 @@ export class EarthCatapult extends Card implements IProjectCard {
             eb.empty().startEffect.megacredits(-2);
           });
         }),
-        victoryPoints: 2,
       },
     });
   }

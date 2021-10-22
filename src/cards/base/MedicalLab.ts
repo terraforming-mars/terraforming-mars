@@ -15,6 +15,7 @@ export class MedicalLab extends Card implements IProjectCard {
       name: CardName.MEDICAL_LAB,
       tags: [Tags.SCIENCE, Tags.BUILDING],
       cost: 13,
+      victoryPoints: 1,
 
       metadata: {
         cardNumber: '207',
@@ -24,7 +25,6 @@ export class MedicalLab extends Card implements IProjectCard {
           });
         }),
         description: 'Increase your M€ production 1 step for every 2 Building tags you have, including this.',
-        victoryPoints: 1,
       },
     });
   }

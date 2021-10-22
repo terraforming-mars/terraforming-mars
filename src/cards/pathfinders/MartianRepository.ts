@@ -1,6 +1,6 @@
 import {IProjectCard} from '../IProjectCard';
 import {Player} from '../../Player';
-import {Card} from '../Card';
+import {Card, VictoryPoints} from '../Card';
 import {CardType} from '../CardType';
 import {CardName} from '../../CardName';
 import {CardRenderer} from '../render/CardRenderer';
@@ -8,7 +8,6 @@ import {Tags} from '../Tags';
 import {ResourceType} from '../../ResourceType';
 import {Resources} from '../../Resources';
 import {Units} from '../../Units';
-import {CardRenderDynamicVictoryPoints} from '../render/CardRenderDynamicVictoryPoints';
 import {ICard} from '../ICard';
 import {played} from '../Options';
 
@@ -21,6 +20,7 @@ export class MartianRepository extends Card implements IProjectCard {
       tags: [Tags.MARS, Tags.MARS, Tags.BUILDING],
       resourceType: ResourceType.DATA,
       productionBox: Units.of({energy: -1}),
+      victoryPoints: VictoryPoints.resource(1, 3),
 
       metadata: {
         cardNumber: 'Pf29',
@@ -31,7 +31,6 @@ export class MartianRepository extends Card implements IProjectCard {
           b.minus().production((pb) => pb.energy(1));
         }),
         description: 'Decrease your energy production 1 step. 1 VP for every 3 data here.',
-        victoryPoints: CardRenderDynamicVictoryPoints.data(1, 3),
       },
     });
   }

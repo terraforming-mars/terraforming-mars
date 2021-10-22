@@ -14,6 +14,7 @@ export class Hackers extends Card implements IProjectCard {
       cardType: CardType.AUTOMATED,
       name: CardName.HACKERS,
       cost: 3,
+      victoryPoints: -1,
 
       metadata: {
         cardNumber: '125',
@@ -24,7 +25,6 @@ export class Hackers extends Card implements IProjectCard {
           });
         }),
         description: 'Decrease your energy production 1 step and any M€ production 2 steps. increase your M€ production 2 steps.',
-        victoryPoints: -1,
       },
     });
   }

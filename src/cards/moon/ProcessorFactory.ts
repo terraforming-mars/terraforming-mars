@@ -6,8 +6,7 @@ import {Tags} from '../Tags';
 import {ResourceType} from '../../ResourceType';
 import {AddResourcesToCard} from '../../deferredActions/AddResourcesToCard';
 import {CardRenderer} from '../render/CardRenderer';
-import {CardRenderDynamicVictoryPoints} from '../render/CardRenderDynamicVictoryPoints';
-import {Card} from '../Card';
+import {Card, VictoryPoints} from '../Card';
 
 export class ProcessorFactory extends Card implements IProjectCard {
   constructor() {
@@ -16,7 +15,9 @@ export class ProcessorFactory extends Card implements IProjectCard {
       cardType: CardType.ACTIVE,
       tags: [Tags.MOON, Tags.BUILDING],
       cost: 8,
+
       resourceType: ResourceType.DATA,
+      victoryPoints: VictoryPoints.resource(1, 3),
 
       metadata: {
         cardNumber: 'M86',
@@ -25,7 +26,6 @@ export class ProcessorFactory extends Card implements IProjectCard {
           b.br;
           b.vpText('1 VP for every 3 data resources here.');
         }),
-        victoryPoints: CardRenderDynamicVictoryPoints.data(1, 3),
       },
     });
   };

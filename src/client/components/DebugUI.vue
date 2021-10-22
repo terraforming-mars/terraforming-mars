@@ -127,7 +127,8 @@
             <section class="debug-ui-cards-list">
               <h2>Global Events</h2>
               <div class="cardbox" v-for="globalEventName in getAllGlobalEvents()" :key="globalEventName">
-                <global-event :globalEvent="getGlobalEvent(globalEventName)" type="prior"></global-event>
+                <global-event :globalEvent="getGlobalEvent(globalEventName)" type="prior" :showIcons="false"></global-event>
+                <global-event :globalEvent="getGlobalEvent(globalEventName)" type="prior" :showIcons="true"></global-event>
               </div>
             </section>
         </div>

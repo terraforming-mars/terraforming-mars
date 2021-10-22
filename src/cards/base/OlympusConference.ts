@@ -66,7 +66,4 @@ export class OlympusConference extends Card implements IProjectCard, IResourceCa
     public play() {
       return undefined;
     }
-    public getVictoryPoints() {
-      return 1;
-    }
 }

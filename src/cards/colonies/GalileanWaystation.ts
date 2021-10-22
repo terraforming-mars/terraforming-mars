@@ -34,8 +34,4 @@ export class GalileanWaystation extends Card implements IProjectCard {
     player.addProduction(Resources.MEGACREDITS, amount, {log: true});
     return undefined;
   }
-
-  public getVictoryPoints() {
-    return 1;
-  }
 }

@@ -32,7 +32,4 @@ export class Trees extends Card implements IProjectCard {
     player.plants++;
     return undefined;
   }
-  public getVictoryPoints() {
-    return 1;
-  }
 }

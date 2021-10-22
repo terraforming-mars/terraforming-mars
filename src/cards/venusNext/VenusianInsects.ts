@@ -44,7 +44,4 @@ export class VenusianInsects extends Card implements IActionCard, IResourceCard 
     player.addResourceTo(this);
     return undefined;
   }
-  public getVictoryPoints(): number {
-    return Math.floor(this.resourceCount / 2);
-  }
 }

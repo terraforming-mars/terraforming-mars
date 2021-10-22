@@ -28,7 +28,4 @@ export class InterstellarColonyShip extends Card implements IProjectCard {
     }
     return undefined;
   }
-  public getVictoryPoints() {
-    return 4;
-  }
 }

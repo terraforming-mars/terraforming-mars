@@ -38,7 +38,4 @@ export class FoodFactory extends Card implements IProjectCard {
     player.addProduction(Resources.MEGACREDITS, 4);
     return undefined;
   }
-  public getVictoryPoints() {
-    return 1;
-  }
 }

@@ -37,8 +37,4 @@ export class MolecularPrinting extends Card implements IProjectCard {
     player.addResource(Resources.MEGACREDITS, player.game.getCitiesInPlay() + coloniesCount, {log: true});
     return undefined;
   }
-
-  public getVictoryPoints() {
-    return 1;
-  }
 }

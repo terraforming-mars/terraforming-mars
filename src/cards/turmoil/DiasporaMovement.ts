@@ -37,8 +37,4 @@ export class DiasporaMovement extends Card implements IProjectCard {
     player.addResource(Resources.MEGACREDITS, amount + 1, {log: true});
     return undefined;
   }
-
-  public getVictoryPoints() {
-    return 1;
-  }
 }

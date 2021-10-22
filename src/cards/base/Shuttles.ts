@@ -54,7 +54,4 @@ export class Shuttles extends Card implements IProjectCard {
     player.addProduction(Resources.MEGACREDITS, 2);
     return undefined;
   }
-  public getVictoryPoints() {
-    return 1;
-  }
 }

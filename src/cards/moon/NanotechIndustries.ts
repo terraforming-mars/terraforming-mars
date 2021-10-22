@@ -59,8 +59,4 @@ export class NanotechIndustries extends Card implements IActionCard, Corporation
     ));
     return undefined;
   }
-
-  public getVictoryPoints() {
-    return Math.floor(this.resourceCount / 2);
-  }
 }

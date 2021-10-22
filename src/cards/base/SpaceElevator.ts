@@ -43,8 +43,5 @@ export class SpaceElevator extends Card implements IActionCard, IProjectCard {
     player.megaCredits += 5;
     return undefined;
   }
-  public getVictoryPoints() {
-    return 2;
-  }
 }
 

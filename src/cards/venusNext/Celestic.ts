@@ -69,10 +69,6 @@ export class Celestic extends Card implements IActionCard, CorporationCard, IRes
       return true;
     }
 
-    public getVictoryPoints(): number {
-      return Math.floor(this.resourceCount / 3);
-    }
-
     public action(player: Player) {
       const floaterCards = player.getResourceCards(ResourceType.FLOATER);
       if (floaterCards.length === 1) {

@@ -41,10 +41,6 @@ export class Pristar extends Card implements CorporationCard, IResourceCard {
       return undefined;
     }
 
-    public getVictoryPoints(): number {
-      return Math.floor(this.resourceCount);
-    }
-
     public onProductionPhase(player: Player) {
       if (!(player.hasIncreasedTerraformRatingThisGeneration)) {
         player.megaCredits += 6;

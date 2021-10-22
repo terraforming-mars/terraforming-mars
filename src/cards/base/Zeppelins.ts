@@ -34,8 +34,5 @@ export class Zeppelins extends Card implements IProjectCard {
     player.addProduction(Resources.MEGACREDITS, player.game.getCitiesInPlayOnMars(), {log: true});
     return undefined;
   }
-  public getVictoryPoints() {
-    return 1;
-  }
 }
 

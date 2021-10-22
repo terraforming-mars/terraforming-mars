@@ -91,6 +91,7 @@ describe('MaxwellBase', function() {
         cardNumber: '1',
       },
       resourceType: ResourceType.SYNDICATE_FLEET,
+      resourceCount: 0,
     };
     player.playedCards.push(fakeCard);
 

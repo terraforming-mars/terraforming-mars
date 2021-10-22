@@ -28,7 +28,7 @@ export interface IActionCard {
 }
 
 export interface IResourceCard {
-    resourceCount?: number;
+    resourceCount: number;
     resourceType?: ResourceType;
 }
 
@@ -50,7 +50,7 @@ export interface TRSource {
     moonLogistics?: number,
   }
 
-export interface ICard extends Partial<IActionCard>, Partial<IResourceCard> {
+export interface ICard extends Partial<IActionCard>, IResourceCard {
     name: CardName;
     tags: Array<Tags>;
     play: (player: Player) => PlayerInput | undefined;

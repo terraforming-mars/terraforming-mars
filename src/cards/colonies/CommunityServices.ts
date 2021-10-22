@@ -30,8 +30,4 @@ export class CommunityServices extends Card implements IProjectCard {
     player.addProduction(Resources.MEGACREDITS, player.getNoTagsCount() + 1, {log: true});
     return undefined;
   }
-
-  public getVictoryPoints() {
-    return 1;
-  }
 }

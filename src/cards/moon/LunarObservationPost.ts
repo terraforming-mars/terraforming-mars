@@ -50,8 +50,4 @@ export class LunarObservationPost extends MoonCard implements IActionCard {
     player.game.defer(new AddResourcesToCard(player, ResourceType.DATA));
     return undefined;
   }
-
-  public getVictoryPoints() {
-    return Math.floor(this.resourceCount / 3);
-  }
 }

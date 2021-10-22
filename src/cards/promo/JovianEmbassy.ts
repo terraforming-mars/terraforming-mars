@@ -30,8 +30,4 @@ export class JovianEmbassy extends Card implements IProjectCard {
     player.increaseTerraformRating();
     return undefined;
   }
-
-  public getVictoryPoints() {
-    return 1;
-  }
 }

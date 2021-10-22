@@ -44,8 +44,4 @@ export class ProcessorFactory extends Card implements IProjectCard {
     player.game.defer(new AddResourcesToCard(player, ResourceType.DATA, {count: 2}));
     return undefined;
   }
-
-  public getVictoryPoints() {
-    return Math.floor(this.resourceCount / 3);
-  }
 }

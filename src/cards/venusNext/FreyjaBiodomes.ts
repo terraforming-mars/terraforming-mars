@@ -67,8 +67,4 @@ export class FreyjaBiodomes extends Card {
     player.addProduction(Resources.MEGACREDITS, 2);
     return undefined;
   }
-
-  public getVictoryPoints() {
-    return 2;
-  }
 }

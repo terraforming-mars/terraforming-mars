@@ -31,7 +31,4 @@ export class SolarPower extends Card implements IProjectCard {
     player.addProduction(Resources.ENERGY, 1);
     return undefined;
   }
-  public getVictoryPoints() {
-    return 1;
-  }
 }

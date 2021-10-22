@@ -37,7 +37,4 @@ export class NoctisFarming extends Card implements IProjectCard {
     player.plants += 2;
     return undefined;
   }
-  public getVictoryPoints() {
-    return 1;
-  }
 }

@@ -51,8 +51,4 @@ export class Arklight extends Card implements CorporationCard, IResourceCard {
         player.addResourceTo(this, card.tags.filter((cardTag) => cardTag === Tags.ANIMAL || cardTag === Tags.PLANT).length);
       }
     }
-
-    public getVictoryPoints(): number {
-      return Math.floor(this.resourceCount / 2);
-    }
 }

@@ -36,7 +36,4 @@ export class TundraFarming extends Card implements IProjectCard {
     player.plants++;
     return undefined;
   }
-  public getVictoryPoints() {
-    return 2;
-  }
 }

@@ -73,8 +73,4 @@ export class TitanShuttles extends Card implements IProjectCard, IResourceCard {
   public play() {
     return undefined;
   }
-
-  public getVictoryPoints(): number {
-    return 1;
-  }
 }

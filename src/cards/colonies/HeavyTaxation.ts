@@ -33,8 +33,4 @@ export class HeavyTaxation extends Card implements IProjectCard {
     player.megaCredits += 4;
     return undefined;
   }
-
-  public getVictoryPoints() {
-    return -1;
-  }
 }

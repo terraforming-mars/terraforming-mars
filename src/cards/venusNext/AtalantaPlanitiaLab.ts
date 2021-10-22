@@ -28,8 +28,4 @@ export class AtalantaPlanitiaLab extends Card {
     player.drawCard(2);
     return undefined;
   }
-
-  public getVictoryPoints() {
-    return 2;
-  }
 }

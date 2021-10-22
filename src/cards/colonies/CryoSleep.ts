@@ -29,10 +29,6 @@ export class CryoSleep extends Card implements IProjectCard {
     return undefined;
   }
 
-  public getVictoryPoints() {
-    return 1;
-  }
-
   public onDiscard(player: Player): void {
     player.colonyTradeDiscount--;
   }

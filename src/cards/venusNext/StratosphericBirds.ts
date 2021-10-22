@@ -59,9 +59,6 @@ export class StratosphericBirds extends Card implements IActionCard, IResourceCa
   public canAct(): boolean {
     return true;
   }
-  public getVictoryPoints(): number {
-    return this.resourceCount;
-  }
   public action(player: Player) {
     player.addResourceTo(this);
     return undefined;

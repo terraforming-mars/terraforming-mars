@@ -46,8 +46,4 @@ export class EcologyResearch extends Card implements IProjectCard {
 
     return undefined;
   }
-
-  public getVictoryPoints() {
-    return 1;
-  }
 }

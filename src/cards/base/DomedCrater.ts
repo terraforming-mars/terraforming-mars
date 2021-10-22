@@ -57,7 +57,4 @@ export class DomedCrater extends Card implements IProjectCard {
       },
     );
   }
-  public getVictoryPoints() {
-    return 1;
-  }
 }

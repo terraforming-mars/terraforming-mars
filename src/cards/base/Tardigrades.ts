@@ -31,9 +31,7 @@ export class Tardigrades extends Card implements IProjectCard, IResourceCard {
     });
   }
     public resourceCount = 0;
-    public getVictoryPoints(): number {
-      return Math.floor(this.resourceCount / 4);
-    }
+
     public play() {
       return undefined;
     }

@@ -51,8 +51,4 @@ export class EosChasmaNationalPark extends Card implements IProjectCard {
       return undefined;
     });
   }
-
-  public getVictoryPoints() {
-    return 1;
-  }
 }

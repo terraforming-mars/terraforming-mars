@@ -33,7 +33,4 @@ export class RadSuits extends Card implements IProjectCard {
     player.addProduction(Resources.MEGACREDITS, 1);
     return undefined;
   }
-  public getVictoryPoints() {
-    return 1;
-  }
 }

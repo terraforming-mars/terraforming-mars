@@ -33,8 +33,5 @@ export class GreatDam extends Card implements IProjectCard {
     player.addProduction(Resources.ENERGY, 2);
     return undefined;
   }
-  public getVictoryPoints() {
-    return 1;
-  }
 }
 

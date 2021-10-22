@@ -28,8 +28,4 @@ export class LuxuryFoods extends Card {
   public play() {
     return undefined;
   }
-
-  public getVictoryPoints() {
-    return 2;
-  }
 }

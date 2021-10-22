@@ -47,8 +47,4 @@ export class RustEatingBacteria extends Card implements IActionCard, IProjectCar
     player.addResourceTo(this, 2);
     return undefined;
   }
-
-  public getVictoryPoints() {
-    return Math.floor(this.resourceCount / 3);
-  }
 }

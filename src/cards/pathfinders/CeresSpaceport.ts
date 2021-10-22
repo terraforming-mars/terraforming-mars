@@ -34,10 +34,6 @@ export class CeresSpaceport extends Card implements IProjectCard {
     });
   }
 
-  public getVictoryPoints() {
-    return 1;
-  }
-
   public play(player: Player) {
     const game = player.game;
     player.addProduction(Resources.MEGACREDITS, 2);

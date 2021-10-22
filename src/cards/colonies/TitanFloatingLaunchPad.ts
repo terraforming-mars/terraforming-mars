@@ -93,8 +93,4 @@ export class TitanFloatingLaunchPad extends Card implements IProjectCard, IResou
     player.game.defer(new AddResourcesToCard(player, ResourceType.FLOATER, {count: 2, restrictedTag: Tags.JOVIAN}));
     return undefined;
   }
-
-  public getVictoryPoints(): number {
-    return 1;
-  }
 }

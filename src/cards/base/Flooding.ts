@@ -79,7 +79,4 @@ export class Flooding extends Card implements IProjectCard {
       },
     );
   }
-  public getVictoryPoints() {
-    return -1;
-  }
 }

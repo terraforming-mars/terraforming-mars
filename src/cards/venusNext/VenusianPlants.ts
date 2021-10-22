@@ -57,10 +57,6 @@ export class VenusianPlants extends Card implements IProjectCard {
     );
   }
 
-  public getVictoryPoints() {
-    return 1;
-  }
-
   public getResCards(player: Player): ICard[] {
     let resourceCards = player.getResourceCards(ResourceType.MICROBE);
     resourceCards = resourceCards.concat(player.getResourceCards(ResourceType.ANIMAL));

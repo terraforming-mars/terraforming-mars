@@ -30,7 +30,4 @@ export class HousePrinting extends Card {
     player.addProduction(Resources.STEEL, 1);
     return undefined;
   }
-  public getVictoryPoints() {
-    return 1;
-  }
 }

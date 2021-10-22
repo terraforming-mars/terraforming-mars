@@ -36,10 +36,6 @@ export class OceanSanctuary extends Card implements IResourceCard {
   }
   public resourceCount = 0;
 
-  public getVictoryPoints(): number {
-    return Math.floor(this.resourceCount);
-  }
-
   public play(player: Player) {
     player.addResourceTo(this, 1);
     return new SelectSpace(

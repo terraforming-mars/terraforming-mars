@@ -38,10 +38,6 @@ export class SubCrustMeasurements extends Card implements IActionCard, IProjectC
     return true;
   }
 
-  public getVictoryPoints() {
-    return 2;
-  }
-
   public action(player: Player) {
     player.drawCard();
     return undefined;

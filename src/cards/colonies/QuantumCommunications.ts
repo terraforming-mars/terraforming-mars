@@ -39,8 +39,4 @@ export class QuantumCommunications extends Card implements IProjectCard {
     player.addProduction(Resources.MEGACREDITS, coloniesCount, {log: true});
     return undefined;
   }
-
-  public getVictoryPoints() {
-    return 1;
-  }
 }

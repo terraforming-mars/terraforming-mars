@@ -39,10 +39,6 @@ export class Predators extends Card implements IProjectCard, IActionCard, IResou
 
     public resourceCount: number = 0;
 
-    public getVictoryPoints(): number {
-      return this.resourceCount;
-    }
-
     public play() {
       return undefined;
     }

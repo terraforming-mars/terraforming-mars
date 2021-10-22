@@ -35,7 +35,4 @@ export class Mangrove extends Card implements IProjectCard {
       return player.game.addGreenery(player, foundSpace.id, SpaceType.OCEAN);
     });
   }
-  public getVictoryPoints() {
-    return 1;
-  }
 }

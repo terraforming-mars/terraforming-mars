@@ -21,7 +21,4 @@ export class TransNeptuneProbe extends Card implements IProjectCard {
   public play() {
     return undefined;
   }
-  public getVictoryPoints() {
-    return 1;
-  }
 }

@@ -87,8 +87,4 @@ export class TitanAirScrapping extends Card implements IProjectCard, IResourceCa
   public play() {
     return undefined;
   }
-
-  public getVictoryPoints(): number {
-    return 2;
-  }
 }

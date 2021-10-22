@@ -69,8 +69,4 @@ export class JupiterFloatingStation extends Card implements IProjectCard, IResou
   public play() {
     return undefined;
   }
-
-  public getVictoryPoints(): number {
-    return 1;
-  }
 }

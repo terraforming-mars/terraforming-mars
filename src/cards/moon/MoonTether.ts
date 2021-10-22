@@ -37,8 +37,4 @@ export class MoonTether extends Card implements IProjectCard {
   public getCardDiscount() {
     return 2;
   }
-
-  public getVictoryPoints() {
-    return 1;
-  }
 }

@@ -50,10 +50,6 @@ export class GreatDamPromo extends Card implements IProjectCard {
     });
   }
 
-  public getVictoryPoints() {
-    return 1;
-  }
-
   private getAvailableSpaces(player: Player): Array<ISpace> {
     return player.game.board.getAvailableSpacesOnLand(player)
       .filter(

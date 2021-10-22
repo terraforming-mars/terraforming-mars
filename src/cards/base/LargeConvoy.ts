@@ -79,7 +79,4 @@ export class LargeConvoy extends Card implements IProjectCard {
 
     return new OrOptions(...availableActions);
   }
-  public getVictoryPoints() {
-    return 2;
-  }
 }

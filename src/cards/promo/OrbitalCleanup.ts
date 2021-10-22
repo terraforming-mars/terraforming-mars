@@ -49,8 +49,4 @@ export class OrbitalCleanup extends Card implements IProjectCard {
     player.addResource(Resources.MEGACREDITS, player.getTagCount(Tags.SCIENCE), {log: true});
     return undefined;
   }
-
-  public getVictoryPoints() {
-    return 2;
-  }
 }

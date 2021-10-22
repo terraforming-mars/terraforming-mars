@@ -48,8 +48,4 @@ export class AsteroidHollowing extends Card implements IActionCard, IProjectCard
 
     return undefined;
   }
-
-  public getVictoryPoints(): number {
-    return Math.floor(this.resourceCount / 2);
-  }
 }

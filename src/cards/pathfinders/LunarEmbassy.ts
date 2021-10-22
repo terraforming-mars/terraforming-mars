@@ -33,10 +33,6 @@ export class LunarEmbassy extends Card implements IProjectCard {
     });
   }
 
-  public getVictoryPoints() {
-    return 2;
-  }
-
   public play(player: Player) {
     player.addProduction(Resources.MEGACREDITS, 3);
     player.addProduction(Resources.PLANTS, Math.floor((1 + player.getTagCount(Tags.EARTH)) / 2), {log: true});

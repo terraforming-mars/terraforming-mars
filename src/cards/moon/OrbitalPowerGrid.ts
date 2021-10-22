@@ -32,8 +32,4 @@ export class OrbitalPowerGrid extends Card implements IProjectCard {
     player.addProduction(Resources.ENERGY, amount, {log: true});
     return undefined;
   }
-
-  public getVictoryPoints() {
-    return 1;
-  }
 }

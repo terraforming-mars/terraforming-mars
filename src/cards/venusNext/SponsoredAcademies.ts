@@ -41,8 +41,4 @@ export class SponsoredAcademies extends Card {
     }
     return undefined;
   }
-
-  public getVictoryPoints() {
-    return 1;
-  }
 }

@@ -67,9 +67,6 @@ export class EcologicalZone extends Card implements IProjectCard, IResourceCard 
   public onCardPlayed(player: Player, card: IProjectCard): void {
     player.addResourceTo(this, card.tags.filter((tag) => tag === Tags.ANIMAL || tag === Tags.PLANT).length);
   }
-  public getVictoryPoints(): number {
-    return Math.floor(this.resourceCount / 2);
-  }
   public play(player: Player) {
     // Get one extra animal from EcoExperts if played during prelude while having just played EcoExperts
     if (player.game.phase === Phase.PRELUDES && player.playedCards.length > 0 && player.playedCards[player.playedCards.length-1].name === CardName.ECOLOGY_EXPERTS) {

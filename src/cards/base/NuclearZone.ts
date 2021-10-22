@@ -46,8 +46,4 @@ export class NuclearZone extends Card implements IProjectCard {
       return undefined;
     });
   }
-
-  public getVictoryPoints() {
-    return -2;
-  }
 }

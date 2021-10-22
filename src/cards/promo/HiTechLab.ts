@@ -49,8 +49,4 @@ export class HiTechLab extends Card implements IProjectCard {
       player.energy,
     );
   }
-
-  public getVictoryPoints() {
-    return 1;
-  }
 }

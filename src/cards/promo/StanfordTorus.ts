@@ -31,8 +31,4 @@ export class StanfordTorus extends Card implements IProjectCard {
     player.game.addCityTile(player, SpaceName.STANFORD_TORUS, SpaceType.COLONY);
     return undefined;
   }
-
-  public getVictoryPoints() {
-    return 2;
-  }
 }

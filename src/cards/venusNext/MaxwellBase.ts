@@ -44,9 +44,6 @@ export class MaxwellBase extends Card implements IActionCard {
     player.game.addCityTile(player, SpaceName.MAXWELL_BASE, SpaceType.COLONY);
     return undefined;
   }
-  public getVictoryPoints() {
-    return 3;
-  }
 
   public getResCards(player: Player): ICard[] {
     return player.getResourceCards().filter((card) => card.tags.includes(Tags.VENUS));

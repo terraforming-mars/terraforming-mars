@@ -33,7 +33,4 @@ export class TectonicStressPower extends Card implements IProjectCard {
     player.addProduction(Resources.ENERGY, 3);
     return undefined;
   }
-  public getVictoryPoints() {
-    return 1;
-  }
 }

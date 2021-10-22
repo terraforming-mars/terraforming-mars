@@ -33,7 +33,4 @@ export class LunaMetropolis extends Card {
     player.game.addCityTile(player, SpaceName.LUNA_METROPOLIS, SpaceType.COLONY);
     return undefined;
   }
-  public getVictoryPoints() {
-    return 2;
-  }
 }

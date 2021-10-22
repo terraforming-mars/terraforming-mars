@@ -40,7 +40,4 @@ export class DawnCity extends Card {
     player.game.addCityTile(player, SpaceName.DAWN_CITY, SpaceType.COLONY);
     return undefined;
   }
-  public getVictoryPoints() {
-    return 3;
-  }
 }

@@ -44,9 +44,6 @@ export class AICentral extends Card implements IActionCard, IProjectCard {
   public canAct(): boolean {
     return true;
   }
-  public getVictoryPoints() {
-    return 1;
-  }
   public action(player: Player) {
     player.drawCard(2);
     return undefined;

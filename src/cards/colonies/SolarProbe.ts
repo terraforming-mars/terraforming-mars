@@ -30,8 +30,4 @@ export class SolarProbe extends Card implements IProjectCard {
     player.drawCard(Math.floor((player.getTagCount(Tags.SCIENCE) + 1) / 3));
     return undefined;
   }
-
-  public getVictoryPoints() {
-    return 1;
-  }
 }

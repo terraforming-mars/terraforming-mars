@@ -53,8 +53,4 @@ export class AncientShipyards extends MoonCard {
     player.game.defer(deferredAction);
     return undefined;
   }
-
-  public getVictoryPoints() {
-    return -Math.floor(this.resourceCount / 2);
-  }
 }

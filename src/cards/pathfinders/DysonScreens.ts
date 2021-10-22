@@ -33,10 +33,6 @@ export class DysonScreens extends Card implements IProjectCard, IActionCard {
     });
   }
 
-  public getVictoryPoints() {
-    return 1;
-  }
-
   public canAct(player: Player) {
     return player.titanium >= 2;
   }

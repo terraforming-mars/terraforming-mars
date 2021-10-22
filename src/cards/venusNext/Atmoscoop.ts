@@ -105,10 +105,6 @@ export class Atmoscoop extends Card implements IProjectCard {
     }
   }
 
-  public getVictoryPoints() {
-    return 1;
-  }
-
   private temperatureIsMaxed(game: Game) {
     return game.getTemperature() === constants.MAX_TEMPERATURE;
   }

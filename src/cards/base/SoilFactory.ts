@@ -38,7 +38,4 @@ export class SoilFactory extends Card implements IProjectCard {
     player.addProduction(Resources.PLANTS, 1);
     return undefined;
   }
-  public getVictoryPoints() {
-    return 1;
-  }
 }

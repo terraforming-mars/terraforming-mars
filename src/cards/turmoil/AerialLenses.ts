@@ -32,8 +32,4 @@ export class AerialLenses extends Card implements IProjectCard {
     player.game.defer(new RemoveAnyPlants(player, 2));
     return undefined;
   }
-
-  public getVictoryPoints() {
-    return -1;
-  }
 }

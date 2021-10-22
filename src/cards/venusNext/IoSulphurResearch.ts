@@ -31,7 +31,4 @@ export class IoSulphurResearch extends Card {
     player.drawCard(player.getTagCount(Tags.VENUS) >= 3 ? 3 : 1);
     return undefined;
   }
-  public getVictoryPoints() {
-    return 2;
-  }
 }

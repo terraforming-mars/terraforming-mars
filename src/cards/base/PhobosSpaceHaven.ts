@@ -33,7 +33,4 @@ export class PhobosSpaceHaven extends Card implements IProjectCard {
     player.addProduction(Resources.TITANIUM, 1);
     return undefined;
   }
-  public getVictoryPoints() {
-    return 3;
-  }
 }

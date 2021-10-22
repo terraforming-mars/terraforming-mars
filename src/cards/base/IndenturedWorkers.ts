@@ -33,7 +33,4 @@ export class IndenturedWorkers extends Card implements IProjectCard {
   public play() {
     return undefined;
   }
-  public getVictoryPoints() {
-    return -1;
-  }
 }

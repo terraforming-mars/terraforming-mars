@@ -36,8 +36,4 @@ export class EnergyTapping extends Card implements IProjectCard {
     player.game.defer(new DecreaseAnyProduction(player, Resources.ENERGY, 1));
     return undefined;
   }
-
-  public getVictoryPoints() {
-    return -1;
-  }
 }

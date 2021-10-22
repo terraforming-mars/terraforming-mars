@@ -60,8 +60,4 @@ export class SubZeroSaltFish extends Card implements IProjectCard, IResourceCard
     player.game.defer(new DecreaseAnyProduction(player, Resources.PLANTS, 1));
     return undefined;
   }
-
-  public getVictoryPoints(): number {
-    return Math.floor(this.resourceCount / 2);
-  }
 }

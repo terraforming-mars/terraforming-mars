@@ -44,9 +44,6 @@ export class AerialMappers extends Card implements IActionCard, IResourceCard {
   public canAct(): boolean {
     return true;
   }
-  public getVictoryPoints() {
-    return 1;
-  }
   public action(player: Player) {
     const floaterCards = player.getResourceCards(ResourceType.FLOATER);
     const opts: Array<SelectOption | SelectCard<ICard>> = [];

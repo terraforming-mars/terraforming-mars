@@ -48,9 +48,5 @@ export class RefugeeCamps extends Card implements IProjectCard, IResourceCard {
   public play() {
     return undefined;
   }
-
-  public getVictoryPoints(): number {
-    return this.resourceCount;
-  }
 }
 

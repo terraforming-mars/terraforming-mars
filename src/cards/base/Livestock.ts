@@ -45,9 +45,6 @@ export class Livestock extends Card implements IActionCard, IProjectCard, IResou
     public canPlay(player: Player): boolean {
       return player.getProduction(Resources.PLANTS) >= 1;
     }
-    public getVictoryPoints(): number {
-      return this.resourceCount;
-    }
     public play(player: Player) {
       player.addProduction(Resources.PLANTS, -1);
       player.addProduction(Resources.MEGACREDITS, 2);

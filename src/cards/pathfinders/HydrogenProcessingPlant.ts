@@ -30,10 +30,6 @@ export class HydrogenProcessingPlant extends Card implements IProjectCard {
     });
   }
 
-  public getVictoryPoints() {
-    return -1;
-  }
-
   public produce(player: Player) {
     player.addProduction(Resources.ENERGY, Math.floor(player.game.board.getOceansOnBoard() / 2), {log: true});
   }

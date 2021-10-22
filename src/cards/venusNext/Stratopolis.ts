@@ -47,9 +47,6 @@ export class Stratopolis extends Card implements IActionCard, IResourceCard {
     player.game.addCityTile(player, SpaceName.STRATOPOLIS, SpaceType.COLONY);
     return undefined;
   }
-  public getVictoryPoints(): number {
-    return Math.floor(this.resourceCount / 3);
-  }
 
   public getResCards(player: Player): ICard[] {
     const resourceCards = player.getResourceCards(ResourceType.FLOATER);

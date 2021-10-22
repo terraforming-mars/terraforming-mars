@@ -32,6 +32,7 @@ describe('EarthEmbassy', () => {
       metadata: {} as ICardMetadata,
       canPlay: () => true,
       play: () => undefined,
+      resourceCount: 0,
     };
 
     player.playedCards = [fakeCard];

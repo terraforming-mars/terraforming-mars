@@ -51,8 +51,4 @@ export class MartianRepository extends Card implements IProjectCard {
     player.addProduction(Resources.ENERGY, -1);
     return undefined;
   }
-
-  public getVictoryPoints() {
-    return Math.floor(this.resourceCount / 3);
-  }
 }

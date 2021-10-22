@@ -57,8 +57,4 @@ export class JovianLanterns extends Card implements IProjectCard, IResourceCard 
     player.increaseTerraformRating();
     return undefined;
   }
-
-  public getVictoryPoints(): number {
-    return Math.floor(this.resourceCount / 2);
-  }
 }

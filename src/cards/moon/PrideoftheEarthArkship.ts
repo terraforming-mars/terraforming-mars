@@ -52,8 +52,4 @@ export class PrideoftheEarthArkship extends MoonCard implements IActionCard {
 
     return undefined;
   }
-
-  public getVictoryPoints() {
-    return this.resourceCount;
-  }
 }

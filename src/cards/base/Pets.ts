@@ -42,10 +42,6 @@ export class Pets extends Card implements IProjectCard, IResourceCard {
 
   public resourceCount: number = 0;
 
-  public getVictoryPoints(): number {
-    return Math.floor(this.resourceCount / 2);
-  }
-
   public onTilePlaced(cardOwner: Player, activePlayer: Player, space: ISpace) {
     if (Board.isCitySpace(space)) {
       cardOwner.game.defer(

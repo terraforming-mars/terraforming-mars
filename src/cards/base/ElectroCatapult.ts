@@ -76,9 +76,6 @@ export class ElectroCatapult extends Card implements IActionCard, IProjectCard {
     player.addProduction(Resources.ENERGY, -1);
     return undefined;
   }
-  public getVictoryPoints() {
-    return 1;
-  }
 
   private log(player: Player, resource: Resources) {
     player.game.log('${0} spent 1 ${1} to gain 7 M€', (b) => b.player(player).string(resource));

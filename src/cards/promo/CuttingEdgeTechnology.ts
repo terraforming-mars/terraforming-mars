@@ -35,8 +35,4 @@ export class CuttingEdgeTechnology extends Card implements IProjectCard {
     if (card.requirements !== undefined) return 2;
     return 0;
   }
-
-  public getVictoryPoints() {
-    return 1;
-  }
 }

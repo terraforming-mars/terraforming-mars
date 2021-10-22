@@ -43,10 +43,6 @@ export class Extremophiles extends Card implements IActionCard, IResourceCard {
     return true;
   }
 
-  public getVictoryPoints(): number {
-    return Math.floor(this.resourceCount / 3);
-  }
-
   public action(player: Player) {
     const microbeCards = player.getResourceCards(ResourceType.MICROBE);
     if (microbeCards.length === 1) {

@@ -39,10 +39,6 @@ export class Ants extends Card implements IActionCard, IProjectCard, IResourceCa
 
   public resourceCount = 0;
 
-  public getVictoryPoints(): number {
-    return Math.floor(this.resourceCount / 2);
-  }
-
   public play() {
     return undefined;
   }

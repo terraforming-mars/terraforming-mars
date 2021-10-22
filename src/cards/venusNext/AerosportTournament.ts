@@ -32,8 +32,4 @@ export class AerosportTournament extends Card {
     player.addResource(Resources.MEGACREDITS, player.game.getCitiesInPlay(), {log: true});
     return undefined;
   }
-
-  public getVictoryPoints() {
-    return 1;
-  }
 }

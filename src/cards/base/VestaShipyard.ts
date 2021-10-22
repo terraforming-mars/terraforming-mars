@@ -25,9 +25,6 @@ export class VestaShipyard extends Card implements IProjectCard {
       },
     });
   }
-  public getVictoryPoints(): number {
-    return 1;
-  }
   public play(player: Player): undefined {
     player.addProduction(Resources.TITANIUM, 1);
     return undefined;

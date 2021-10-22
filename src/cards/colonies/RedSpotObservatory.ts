@@ -77,8 +77,4 @@ export class RedSpotObservatory extends Card implements IProjectCard, IResourceC
     player.drawCard(2);
     return undefined;
   }
-
-  public getVictoryPoints(): number {
-    return 2;
-  }
 }

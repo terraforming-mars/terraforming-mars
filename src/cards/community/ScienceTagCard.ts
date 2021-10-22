@@ -26,4 +26,7 @@ export class ScienceTagCard implements IProjectCard {
   public play() {
     return undefined;
   }
+  public get resourceCount() {
+    return 0;
+  }
 }

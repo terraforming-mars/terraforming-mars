@@ -30,7 +30,4 @@ export class EarthElevator extends Card implements IProjectCard {
     player.addProduction(Resources.TITANIUM, 3);
     return undefined;
   }
-  public getVictoryPoints() {
-    return 4;
-  }
 }

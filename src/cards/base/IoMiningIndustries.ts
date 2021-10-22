@@ -28,9 +28,6 @@ export class IoMiningIndustries extends Card implements IProjectCard {
     });
   }
 
-  public getVictoryPoints(player: Player) {
-    return player.getTagCount(Tags.JOVIAN, false, false);
-  }
   public play(player: Player) {
     player.addProduction(Resources.TITANIUM, 2);
     player.addProduction(Resources.MEGACREDITS, 2);

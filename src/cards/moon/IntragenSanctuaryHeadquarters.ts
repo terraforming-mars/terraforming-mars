@@ -60,8 +60,4 @@ export class IntragenSanctuaryHeadquarters extends Card implements CorporationCa
     player.addResourceTo(this, count);
     return undefined;
   }
-
-  public getVictoryPoints() {
-    return Math.floor(this.resourceCount / 2);
-  }
 }

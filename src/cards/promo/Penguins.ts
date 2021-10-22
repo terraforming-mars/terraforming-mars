@@ -47,8 +47,4 @@ export class Penguins extends Card implements IActionCard, IProjectCard, IResour
       player.addResourceTo(this);
       return undefined;
     }
-
-    public getVictoryPoints(): number {
-      return this.resourceCount;
-    }
 }

@@ -82,8 +82,4 @@ export class DarksideIncubationPlant extends MoonCard implements IActionCard, IP
       return new OrOptions(...options);
     }
   }
-
-  public getVictoryPoints() {
-    return Math.floor(this.resourceCount / 2);
-  }
 }

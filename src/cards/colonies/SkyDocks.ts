@@ -40,10 +40,6 @@ export class SkyDocks extends Card implements IProjectCard {
     return 1;
   }
 
-  public getVictoryPoints() {
-    return 2;
-  }
-
   public onDiscard(player: Player): void {
     player.decreaseFleetSize();
   }

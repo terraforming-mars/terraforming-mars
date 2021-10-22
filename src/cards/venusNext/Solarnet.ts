@@ -29,7 +29,4 @@ export class Solarnet extends Card {
     player.drawCard(2);
     return undefined;
   }
-  public getVictoryPoints() {
-    return 1;
-  }
 }

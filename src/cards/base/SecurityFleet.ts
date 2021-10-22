@@ -32,9 +32,6 @@ export class SecurityFleet extends Card implements IActionCard, IProjectCard, IR
   }
     public resourceCount = 0;
 
-    public getVictoryPoints(): number {
-      return this.resourceCount;
-    }
     public play() {
       return undefined;
     }

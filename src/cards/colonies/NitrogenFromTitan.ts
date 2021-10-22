@@ -33,8 +33,5 @@ export class NitrogenFromTitan extends Card implements IProjectCard {
     player.game.defer(new AddResourcesToCard(player, ResourceType.FLOATER, {count: 2, restrictedTag: Tags.JOVIAN}));
     return undefined;
   }
-  public getVictoryPoints() {
-    return 1;
-  }
 }
 

@@ -40,8 +40,4 @@ export class CrescentResearchAssociation extends Card implements CorporationCard
     }
     return player.getTagCount(Tags.MOON, false, true);
   }
-
-  public getVictoryPoints(player: Player) {
-    return Math.floor(player.getTagCount(Tags.MOON, true, false) / 3);
-  }
 }

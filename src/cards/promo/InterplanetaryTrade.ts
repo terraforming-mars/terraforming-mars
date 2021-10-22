@@ -33,8 +33,4 @@ export class InterplanetaryTrade extends Card implements IProjectCard {
     player.addProduction(Resources.MEGACREDITS, availableTags, {log: true});
     return undefined;
   }
-
-  public getVictoryPoints() {
-    return 1;
-  }
 }

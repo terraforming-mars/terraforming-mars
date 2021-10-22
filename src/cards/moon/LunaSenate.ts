@@ -38,8 +38,4 @@ export class LunaSenate extends Card implements IProjectCard {
     player.addProduction(Resources.MEGACREDITS, count + 2, {log: true});
     return undefined;
   }
-
-  public getVictoryPoints(player: Player) {
-    return player.getTagCount(Tags.MOON, true, false);
-  }
 }

@@ -34,7 +34,4 @@ export class Airliners extends Card implements IProjectCard {
     player.game.defer(new AddResourcesToCard(player, ResourceType.FLOATER, {count: 2}));
     return undefined;
   }
-  public getVictoryPoints() {
-    return 1;
-  }
 }

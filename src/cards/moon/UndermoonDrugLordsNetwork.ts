@@ -34,8 +34,4 @@ export class UndermoonDrugLordsNetwork extends Card implements IProjectCard {
     player.addProduction(Resources.MEGACREDITS, gain, {log: true});
     return undefined;
   }
-
-  public getVictoryPoints() {
-    return -1;
-  }
 }

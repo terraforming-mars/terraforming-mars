@@ -44,8 +44,4 @@ export class ParliamentHall extends Card implements IProjectCard {
     this.produce(player);
     return undefined;
   }
-
-  public getVictoryPoints() {
-    return 1;
-  }
 }

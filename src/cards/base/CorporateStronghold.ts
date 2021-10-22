@@ -49,7 +49,4 @@ export class CorporateStronghold extends Card implements IProjectCard {
       },
     );
   }
-  public getVictoryPoints() {
-    return -2;
-  }
 }

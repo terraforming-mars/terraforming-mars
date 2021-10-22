@@ -58,9 +58,5 @@ export class CrashSiteCleanup extends Card implements IProjectCard {
       player.game.someoneHasRemovedOtherPlayersPlants = true;
     }
   }
-
-  public getVictoryPoints() {
-    return 1;
-  }
 }
 

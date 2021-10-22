@@ -43,10 +43,6 @@ export class FloatingHabs extends Card implements IActionCard, IResourceCard {
     return player.canAfford(2);
   }
 
-  public getVictoryPoints(): number {
-    return Math.floor(this.resourceCount / 2);
-  }
-
   public action(player: Player) {
     const floaterCards = player.getResourceCards(ResourceType.FLOATER);
 

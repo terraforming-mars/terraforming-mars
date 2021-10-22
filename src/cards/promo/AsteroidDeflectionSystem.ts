@@ -61,8 +61,4 @@ export class AsteroidDeflectionSystem extends Card implements IActionCard, IProj
     player.game.dealer.discard(topCard);
     return undefined;
   }
-
-  public getVictoryPoints(): number {
-    return this.resourceCount;
-  }
 }

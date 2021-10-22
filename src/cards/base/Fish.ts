@@ -45,9 +45,6 @@ export class Fish extends Card implements IActionCard, IProjectCard, IResourceCa
     public canPlay(player: Player): boolean {
       return player.game.someoneHasResourceProduction(Resources.PLANTS, 1);
     }
-    public getVictoryPoints(): number {
-      return this.resourceCount;
-    }
     public play(player: Player) {
       player.game.defer(new DecreaseAnyProduction(player, Resources.PLANTS, 1));
       return undefined;

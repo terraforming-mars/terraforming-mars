@@ -10,8 +10,8 @@
         <div class="card-content" style="width: 320px;">
           <CardParty class="card-party--revealed" :party="globalEvent.revealed" />
           <CardParty class="card-party--current" :party="globalEvent.current" />
-          <br>
           <CardRenderData v-if="renderData !== undefined" :renderData="renderData" />
+          <CardDescription :item='globalEvent.description' />
         </div>
      </div>
     </div>
@@ -28,12 +28,14 @@ import CardParty from '@/client/components/card/CardParty.vue';
 import {IGlobalEvent} from '@/turmoil/globalEvents/IGlobalEvent';
 import {CardRenderer} from '@/cards/render/CardRenderer';
 import {getGlobalEventByName} from '@/turmoil/globalEvents/GlobalEventDealer';
+import CardDescription from '@/client/components/card/CardDescription.vue';
 
 export default Vue.extend({
   name: 'global-event',
   components: {
     CardRenderData,
     CardParty,
+    CardDescription,
   },
   props: {
     globalEvent: {

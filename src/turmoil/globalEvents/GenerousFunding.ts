@@ -8,7 +8,7 @@ import {CardRenderer} from '../../cards/render/CardRenderer';
 import {digit} from '../../cards/Options';
 
 const RENDER_DATA = CardRenderer.builder((b) => {
-  b.megacredits(2).slash().influence().plus().tr(5, {digit, over: 15});
+  b.megacredits(2).slash().influence().plus().tr(5, {digit, over: 15}).br.br;
 });
 
 export class GenerousFunding implements IGlobalEvent {

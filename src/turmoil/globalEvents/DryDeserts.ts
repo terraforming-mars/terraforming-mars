@@ -9,7 +9,7 @@ import {MAX_OCEAN_TILES} from '../../constants';
 import {CardRenderer} from '../../cards/render/CardRenderer';
 
 const RENDER_DATA = CardRenderer.builder((b) => {
-  b.minus().oceans(1).nbsp.wild(1).slash().influence();
+  b.minus().oceans(1).br.wild(1).slash().influence();
 });
 
 export class DryDeserts implements IGlobalEvent {

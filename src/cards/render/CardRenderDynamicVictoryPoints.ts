@@ -11,7 +11,7 @@ export class CardRenderDynamicVictoryPoints {
   public getPointsHtml(): string {
     if (this.item === undefined && this.points === 0 && this.target === 0) return '?';
     if (this.item === undefined) return `${this.points}`;
-    if (this.target === this.points) return `${this.target}/`;
+    if (this.target === this.points || this.target === 1) return `${this.points}/`;
     return `${this.points}/${this.target}`;
   }
   public static asteroids(points: number, target: number): CardRenderDynamicVictoryPoints {

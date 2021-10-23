@@ -56,7 +56,7 @@ describe('CardRenderDynamicVictoryPoints', function() {
     expect(item.anyPlayer).to.be.true;
   });
   it('jovians: success', () => {
-    const vp = CardRenderDynamicVictoryPoints.jovians(2, 2);
+    const vp = CardRenderDynamicVictoryPoints.jovians(2, 1);
     const item = vp.item as CardRenderItem;
     expect(vp.getPointsHtml()).to.equal('2/');
     expect(item.type).to.equal(CardRenderItemType.JOVIAN);

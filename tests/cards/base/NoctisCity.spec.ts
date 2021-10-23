@@ -6,6 +6,8 @@ import {Resources} from '../../../src/Resources';
 import {SpaceName} from '../../../src/SpaceName';
 import {TileType} from '../../../src/TileType';
 import {TestPlayers} from '../../TestPlayers';
+import {newTestGame} from '../../TestGame';
+import {BoardName} from '../../../src/boards/BoardName';
 
 describe('NoctisCity', function() {
   let card : NoctisCity; let player : Player; let game : Game;
@@ -17,8 +19,17 @@ describe('NoctisCity', function() {
     game = Game.newInstance('foobar', [player, redPlayer], player);
   });
 
-  it('Can\'t play without energy production', function() {
+  it('Cannot play without energy production', function() {
     expect(card.canPlay(player)).is.not.true;
+  });
+
+  it('All land spaces are available on Hellas', function() {
+    // With two players, there's no solo setup, so all spaces will be available.
+    const game = newTestGame(2, {boardName: BoardName.HELLAS});
+    const player = game.getPlayers()[0];
+
+    const action = card.play(player);
+    expect(action!.availableSpaces).deep.eq(game.board.getAvailableSpacesForCity(player));
   });
 
   it('Should play', function() {

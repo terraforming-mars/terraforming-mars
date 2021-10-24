@@ -3,7 +3,6 @@ import {Player} from '../../Player';
 import {Tags} from '../Tags';
 import {CardName} from '../../CardName';
 import {CardType} from '../CardType';
-import {LogHelper} from '../../LogHelper';
 import {IProjectCard} from '../IProjectCard';
 import {SelectCard} from '../../inputs/SelectCard';
 import {ICard} from '../ICard';
@@ -106,8 +105,7 @@ export class ProjectWorkshop extends Card implements CorporationCard {
   private convertCardPointsToTR(player: Player, card: ICard) {
     if (card.getVictoryPoints !== undefined) {
       const steps = card.getVictoryPoints(player);
-      player.increaseTerraformRatingSteps(steps);
-      LogHelper.logTRIncrease(player, steps);
+      player.increaseTerraformRatingSteps(steps, {log: true});
     }
   }
 

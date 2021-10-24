@@ -158,6 +158,9 @@ export class Turmoil implements ISerializable<SerializedTurmoil> {
         const index = this.delegateReserve.indexOf(playerId);
         if (index > -1) {
           this.delegateReserve.splice(index, 1);
+        } else {
+          console.log(`${playerId}/${game.id} tried to get a delegate from an empty reserve.`);
+          return;
         }
       }
       party.sendDelegate(playerId, game);
@@ -267,7 +270,7 @@ export class Turmoil implements ISerializable<SerializedTurmoil> {
       this.lobby = new Set<string>();
 
       game.getPlayers().forEach((player) => {
-        if (this.getDelegatesInReserve(player.id) > 0) {
+        if (this.hasAvailableDelegates(player.id)) {
           const index = this.delegateReserve.indexOf(player.id);
           if (index > -1) {
             this.delegateReserve.splice(index, 1);
@@ -406,11 +409,7 @@ export class Turmoil implements ISerializable<SerializedTurmoil> {
       }
 
       const party = this.getPartyByName(partyName);
-      if (party.getDelegates(player.id) >= 2) {
-        return true;
-      }
-
-      return false;
+      return party.getDelegates(player.id) >= 2;
     }
 
     // List players present in the reserve
@@ -485,8 +484,6 @@ export class Turmoil implements ISerializable<SerializedTurmoil> {
         tp.delegates = sp.delegates;
         tp.partyLeader = sp.partyLeader;
       });
-
-      turmoil.playersInfluenceBonus = new Map<string, number>(d.playersInfluenceBonus);
 
       turmoil.playersInfluenceBonus = new Map<string, number>(d.playersInfluenceBonus);
 

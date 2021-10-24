@@ -14,6 +14,9 @@ import {REDS_POLICY_2, REDS_POLICY_3} from './parties/Reds';
 import {SCIENTISTS_POLICY_1} from './parties/Scientists';
 import {UNITY_POLICY_2, UNITY_POLICY_3} from './parties/Unity';
 import {TurmoilPolicy} from './TurmoilPolicy';
+import * as constants from '../constants';
+import {TRSource} from '../cards/ICard';
+import {MoonExpansion} from '../moon/MoonExpansion';
 
 export class TurmoilHandler {
   private constructor() {}
@@ -195,5 +198,70 @@ export class TurmoilHandler {
     if (PartyHooks.shouldApplyPolicy(player, PartyName.SCIENTISTS, TurmoilPolicy.SCIENTISTS_POLICY_3)) {
       player.drawCard(steps);
     }
+  }
+
+  // TODO(kberg): Add a test where if you raise oxygen to max temperature but temperature is maxed you do not have to pay for it.
+  // It works, but4 a test would be helpful.
+  public static computeTerraformRatingBump(player: Player, tr: TRSource = {}): number {
+    if (!PartyHooks.shouldApplyPolicy(player, PartyName.REDS)) return 0;
+
+    // Local copy
+    tr = {...tr};
+    let total = 0;
+
+    if (tr.oxygen !== undefined) {
+      const availableSteps = constants.MAX_OXYGEN_LEVEL - player.game.getOxygenLevel();
+      const steps = Math.min(availableSteps, tr.oxygen);
+      total = total + steps;
+      // TODO(kberg): Add constants for these constraints.
+      if (player.game.getOxygenLevel() < 8 && player.game.getOxygenLevel() + steps >= 8) {
+        tr.temperature = (tr.temperature ?? 0) + 1;
+      }
+    }
+
+    if (tr.temperature !== undefined) {
+      const availableSteps = Math.floor((constants.MAX_TEMPERATURE - player.game.getTemperature()) / 2);
+      const steps = Math.min(availableSteps, tr.temperature);
+      total = total + steps;
+      if (player.game.getTemperature() < 0 && player.game.getTemperature() + (steps * 2) >= 0) {
+        tr.oceans = (tr.oceans ?? 0) + 1;
+      }
+    }
+
+    if (tr.oceans !== undefined) {
+      const availableSteps = constants.MAX_OCEAN_TILES - player.game.board.getOceansOnBoard();
+      const steps = Math.min(availableSteps, tr.oceans);
+      total = total + steps;
+    }
+
+    if (tr.venus !== undefined) {
+      const availableSteps = Math.floor((constants.MAX_VENUS_SCALE - player.game.getVenusScaleLevel()) / 2);
+      const steps = Math.min(availableSteps, tr.venus);
+      total = total + steps;
+      if (player.game.getVenusScaleLevel() < 16 && player.game.getVenusScaleLevel() + (steps * 2) >= 16) {
+        tr.tr = (tr.tr ?? 0) + 1;
+      }
+    }
+
+    MoonExpansion.ifMoon(player.game, (moonData) => {
+      if (tr.moonColony !== undefined) {
+        const availableSteps = constants.MAXIMUM_COLONY_RATE - moonData.colonyRate;
+        total = total + Math.min(availableSteps, tr.moonColony);
+      }
+
+      if (tr.moonMining !== undefined) {
+        const availableSteps = constants.MAXIMUM_MINING_RATE - moonData.miningRate;
+        total = total + Math.min(availableSteps, tr.moonMining);
+      }
+
+      if (tr.moonLogistics !== undefined) {
+        const availableSteps = constants.MAXIMUM_LOGISTICS_RATE - moonData.logisticRate;
+        total = total + Math.min(availableSteps, tr.moonLogistics);
+      }
+    });
+
+    total += tr.tr ?? 0;
+
+    return total;
   }
 }

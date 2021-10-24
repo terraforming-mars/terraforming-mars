@@ -24,7 +24,7 @@ export class SpaceDebrisCleaningOperation extends Card implements IProjectCard {
         cardNumber: 'Pf24',
         renderData: CardRenderer.builder((b) => {
           b.titanium(3).br;
-          b.wild(1).asterix().data(1).cards(1);
+          b.wild(1).asterix().data().cards(1);
         }),
         // Nerfed by disallowing science resources (rather than the one The Moon does just to keep the text smaller.)
         description: 'Requires 4 space tags. Gain 3 titanium. ' +

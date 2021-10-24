@@ -40,41 +40,48 @@ describe('Cyanobacteria', function() {
     const options = card.play(player);
     expect(options).is.undefined;
     // 9 oceans, so, maxed out.
+    TestingUtils.runAllActions(player.game);
     expect(ghgProducingBacteria.resourceCount).eq(9);
   });
 
   it('play, many microbe cards', function() {
     player.playedCards = [ghgProducingBacteria, tardigrades, ants];
 
-    const options = card.play(player);
+    expect(card.play(player)).is.undefined;
 
+    const options = player.game.deferredActions.peek()!.execute();
     expect(options).instanceOf(AndOptions);
-    expect(options?.options.length).eq(3);
 
-    options?.options[0].cb(1);
-    options?.options[1].cb(3);
-    options?.options[2].cb(5);
-    options?.cb();
+    if (options instanceof AndOptions) {
+      expect(options.options.length).eq(3);
+      options?.options[0].cb(1);
+      options?.options[1].cb(3);
+      options?.options[2].cb(5);
+      options?.cb();
 
-    expect(ghgProducingBacteria.resourceCount).eq(1);
-    expect(tardigrades.resourceCount).eq(3);
-    expect(ants.resourceCount).eq(5);
+      expect(ghgProducingBacteria.resourceCount).eq(1);
+      expect(tardigrades.resourceCount).eq(3);
+      expect(ants.resourceCount).eq(5);
+    }
   });
 
   it('play, many microbe cards, wrong input', function() {
     player.playedCards = [ghgProducingBacteria, tardigrades, ants];
 
-    const options = card.play(player);
-
+    card.play(player);
+    const options = player.game.deferredActions.peek()!.execute();
     expect(options).instanceOf(AndOptions);
-    expect(options?.options.length).eq(3);
 
-    options?.options[0].cb(1);
-    options?.options[1].cb(3);
-    options?.options[2].cb(6);
-    expect(() => options?.cb()).to.throw(/Expecting 9 microbes, got 10/);
+    if (options instanceof AndOptions) {
+      expect(options?.options.length).eq(3);
 
-    options?.options[2].cb(4);
-    expect(() => options?.cb()).to.throw(/Expecting 9 microbes, got 8/);
+      options?.options[0].cb(1);
+      options?.options[1].cb(3);
+      options?.options[2].cb(6);
+      expect(() => options?.cb()).to.throw(/Expecting 9 .*, got 10/);
+
+      options?.options[2].cb(4);
+      expect(() => options?.cb()).to.throw(/Expecting 9 .*, got 8/);
+    }
   });
 });

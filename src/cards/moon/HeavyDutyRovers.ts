@@ -16,6 +16,7 @@ export class HeavyDutyRovers extends Card implements IProjectCard {
       cardType: CardType.AUTOMATED,
       name: CardName.HEAVY_DUTY_ROVERS,
       cost: 12,
+      tr: {moonLogistics: 1},
 
       metadata: {
         description: 'Gain 4 M€ for each mining tile adjacent to a road tile. Raise the Logistic Rate 1 step.',

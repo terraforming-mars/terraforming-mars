@@ -14,6 +14,7 @@ export class ImprovedMoonConcrete extends MoonCard implements IProjectCard {
       cardType: CardType.AUTOMATED,
       cost: 12,
       reserveUnits: Units.of({steel: 2}),
+      tr: {moonMining: 1},
 
       metadata: {
         description: 'Spend 2 steel. Raise the Mining Rate 1 step.',

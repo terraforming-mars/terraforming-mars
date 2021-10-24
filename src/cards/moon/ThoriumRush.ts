@@ -10,6 +10,7 @@ import {PlaceMoonMineTile} from '../../moon/PlaceMoonMineTile';
 import {Card} from '../Card';
 import {AltSecondaryTag} from '../render/CardRenderItem';
 
+// TODO(kberg): Add a test for how this card operates with Reds. It will be a good verification.
 export class ThoriumRush extends Card implements IProjectCard {
   constructor() {
     super({
@@ -17,6 +18,7 @@ export class ThoriumRush extends Card implements IProjectCard {
       cardType: CardType.EVENT,
       tags: [Tags.MOON, Tags.BUILDING],
       cost: 39,
+      tr: {moonColony: 1, moonMining: 1, moonLogistics: 1},
 
       metadata: {
         description: 'Place 1 colony tile, 1 mining tile and 1 road tile on the Moon. ' +

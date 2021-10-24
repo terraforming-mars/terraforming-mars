@@ -19,6 +19,7 @@ export class MareNubiumMine extends MoonCard {
       cost: 17,
       productionBox: Units.of({titanium: 1}),
       reserveUnits: Units.of({titanium: 1}),
+      tr: {moonMining: 1},
 
       metadata: {
         description: 'Spend 1 titanium. Increase your titanium production 1 step. Place a mine ON THE RESERVED AREA and raise the Mining Rate 1 step.',

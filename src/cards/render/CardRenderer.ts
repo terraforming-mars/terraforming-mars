@@ -334,8 +334,8 @@ class Builder {
     return this._appendToRow(new CardRenderItem(CardRenderItemType.DISEASE));
   }
 
-  public data(amount: number = 1) {
-    return this._appendToRow(new CardRenderItem(CardRenderItemType.DATA_RESOURCE, amount));
+  public data(options?: ItemOptions | undefined) {
+    return this._appendToRow(new CardRenderItem(CardRenderItemType.DATA_RESOURCE, 1, options));
   }
 
   public multiplierWhite() {

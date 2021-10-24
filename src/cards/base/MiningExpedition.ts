@@ -3,9 +3,6 @@ import {CardType} from '../CardType';
 import {Player} from '../../Player';
 import {Card} from '../Card';
 import {CardName} from '../../CardName';
-import {MAX_OXYGEN_LEVEL, REDS_RULING_POLICY_COST} from '../../constants';
-import {PartyHooks} from '../../turmoil/parties/PartyHooks';
-import {PartyName} from '../../turmoil/parties/PartyName';
 import {RemoveAnyPlants} from '../../deferredActions/RemoveAnyPlants';
 import {CardRenderer} from '../render/CardRenderer';
 import {all} from '../Options';
@@ -16,6 +13,7 @@ export class MiningExpedition extends Card implements IProjectCard {
       cardType: CardType.EVENT,
       name: CardName.MINING_EXPEDITION,
       cost: 12,
+      tr: {oxygen: 1},
 
       metadata: {
         cardNumber: '063',
@@ -27,16 +25,6 @@ export class MiningExpedition extends Card implements IProjectCard {
         description: 'Raise oxygen 1 step. Remove 2 plants from any player. Gain 2 steel.',
       },
     });
-  }
-
-  public canPlay(player: Player): boolean {
-    const oxygenMaxed = player.game.getOxygenLevel() === MAX_OXYGEN_LEVEL;
-
-    if (PartyHooks.shouldApplyPolicy(player, PartyName.REDS) && !oxygenMaxed) {
-      return player.canAfford(player.getCardCost(this) + REDS_RULING_POLICY_COST);
-    }
-
-    return true;
   }
 
   public play(player: Player) {

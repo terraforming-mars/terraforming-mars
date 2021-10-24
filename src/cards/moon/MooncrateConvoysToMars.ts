@@ -16,6 +16,7 @@ export class MooncrateConvoysToMars extends Card {
       cardType: CardType.EVENT,
       cost: 13,
       requirements: CardRequirements.builder((b) => b.party(PartyName.MARS)),
+      tr: {moonLogistics: 1},
 
       metadata: {
         description: 'Requires that Mars First are ruling or that you have 2 delegates there. ' +

@@ -5,9 +5,6 @@ import {CardType} from '../CardType';
 import {Player} from '../../Player';
 import {Resources} from '../../Resources';
 import {CardName} from '../../CardName';
-import {MAX_TEMPERATURE, REDS_RULING_POLICY_COST} from '../../constants';
-import {PartyHooks} from '../../turmoil/parties/PartyHooks';
-import {PartyName} from '../../turmoil/parties/PartyName';
 import {CardRenderer} from '../render/CardRenderer';
 import {digit, played} from '../Options';
 
@@ -18,6 +15,7 @@ export class NitrogenRichAsteroid extends Card implements IProjectCard {
       name: CardName.NITROGEN_RICH_ASTEROID,
       tags: [Tags.SPACE],
       cost: 31,
+      tr: {tr: 2, temperature: 1},
 
       metadata: {
         cardNumber: '037',
@@ -31,17 +29,6 @@ export class NitrogenRichAsteroid extends Card implements IProjectCard {
         description: 'Raise your terraforming rating 2 steps and temperature 1 step. Increase your Plant production 1 step, or 4 steps if you have 3 Plant tags.',
       },
     });
-  }
-
-  public canPlay(player: Player): boolean {
-    let steps = 2;
-    if (player.game.getTemperature() < MAX_TEMPERATURE) steps++;
-
-    if (PartyHooks.shouldApplyPolicy(player, PartyName.REDS)) {
-      return player.canAfford(player.getCardCost(this) + REDS_RULING_POLICY_COST * steps, {titanium: true});
-    }
-
-    return true;
   }
 
   public play(player: Player) {

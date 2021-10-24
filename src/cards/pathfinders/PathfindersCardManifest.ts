@@ -17,7 +17,7 @@ import {CeresSpaceport} from './CeresSpaceport';
 // import {Cryptocurrency} from './Cryptocurrency';
 // import {CultivationofVenus} from './CultivationofVenus';
 import {Cyanobacteria} from './Cyanobacteria';
-// import {DataLeak} from './DataLeak';
+import {DataLeak} from './DataLeak';
 // import {DeclarationofIndependence} from './DeclarationofIndependence';
 // import {DeepSpaceOperations} from './DeepSpaceOperations';
 // import {DesignCompany} from './DesignCompany';
@@ -61,12 +61,12 @@ import {RareEarthElements} from './RareEarthElements';
 import {ReturntoAbandonedTechnology} from './ReturntoAbandonedTechnology';
 // import {RichDeposits} from './RichDeposits';
 import {SecretLabs} from './SecretLabs';
-// import {SmallComet} from './SmallComet';
-// import {SmallOpenPitMine} from './SmallOpenPitMine';
+import {SmallOpenPitMine} from './SmallOpenPitMine';
+import {SmallComet} from './SmallComet';
 // import {SocialEvents} from './SocialEvents';
 // import {SoilDetoxification} from './SoilDetoxification';
 // import {Solarpedia} from './Solarpedia';
-// import {SolarStorm} from './SolarStorm';
+import {SolarStorm} from './SolarStorm';
 import {SpaceDebrisCleaningOperation} from './SpaceDebrisCleaningOperation';
 // import {SpaceRelay} from './SpaceRelay';
 import {TerraformingControlStation} from './TerraformingControlStation';
@@ -107,14 +107,14 @@ export const PATHFINDERS_CARD_MANIFEST = new CardManifest({
     {cardName: CardName.CYANOBACTERIA, Factory: Cyanobacteria},
     // {cardName: CardName.COMMUNICATION_CENTER, Factory: CommunicationCenter},
     {cardName: CardName.MARTIAN_REPOSITORY, Factory: MartianRepository},
-    // {cardName: CardName.DATA_LEAK, Factory: DataLeak},
-    // {cardName: CardName.SMALL_OPEN_PIT_MINE, Factory: SmallOpenPitMine},
-    // {cardName: CardName.SOLAR_STORM, Factory: SolarStorm},
+    {cardName: CardName.DATA_LEAK, Factory: DataLeak},
+    {cardName: CardName.SMALL_OPEN_PIT_MINE, Factory: SmallOpenPitMine},
+    {cardName: CardName.SOLAR_STORM, Factory: SolarStorm},
     // {cardName: CardName.SPACE_RELAY, Factory: SpaceRelay},
     // {cardName: CardName.DECLARATION_OF_INDEPENDENCE, Factory: DeclarationofIndependence, compatibility: GameModule.Turmoil},
     // {cardName: CardName.MARTIAN_CULTURE, Factory: MartianCulture},
     // {cardName: CardName.OZONE_GENERATORS, Factory: OzoneGenerators},
-    // {cardName: CardName.SMALL_COMET, Factory: SmallComet},
+    {cardName: CardName.SMALL_COMET, Factory: SmallComet},
     // {cardName: CardName.ECONOMIC_ESPIONAGE, Factory: EconomicEspionage},
     {cardName: CardName.FLAT_MARS_THEORY, Factory: FlatMarsTheory},
     // {cardName: CardName.ASTEROID_RESOURCES, Factory: AsteroidResources},

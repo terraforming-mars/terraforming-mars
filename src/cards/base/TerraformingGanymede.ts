@@ -4,10 +4,6 @@ import {Card} from '../Card';
 import {CardType} from '../CardType';
 import {Player} from '../../Player';
 import {CardName} from '../../CardName';
-import {PartyHooks} from '../../turmoil/parties/PartyHooks';
-import {PartyName} from '../../turmoil/parties/PartyName';
-import {REDS_RULING_POLICY_COST} from '../../constants';
-import {LogHelper} from '../../LogHelper';
 import {CardRenderer} from '../render/CardRenderer';
 import {played} from '../Options';
 
@@ -31,17 +27,11 @@ export class TerraformingGanymede extends Card implements IProjectCard {
   }
   public canPlay(player: Player): boolean {
     const steps = 1 + player.getTagCount(Tags.JOVIAN);
-
-    if (PartyHooks.shouldApplyPolicy(player, PartyName.REDS)) {
-      return player.canAfford(player.getCardCost(this) + REDS_RULING_POLICY_COST * steps, {titanium: true});
-    }
-
-    return true;
+    return player.canAfford(player.getCardCost(this), {titanium: true, tr: {tr: steps}});
   }
   public play(player: Player) {
     const steps = 1 + player.getTagCount(Tags.JOVIAN);
-    player.increaseTerraformRatingSteps(steps);
-    LogHelper.logTRIncrease(player, steps);
+    player.increaseTerraformRatingSteps(steps, {log: true});
 
     return undefined;
   }

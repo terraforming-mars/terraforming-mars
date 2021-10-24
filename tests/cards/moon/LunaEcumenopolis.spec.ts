@@ -8,6 +8,7 @@ import {LunaEcumenopolis} from '../../../src/cards/moon/LunaEcumenopolis';
 import {expect} from 'chai';
 import {TileType} from '../../../src/TileType';
 import {SelectSpace} from '../../../src/inputs/SelectSpace';
+// import {Phase} from '../../../src/Phase';
 
 const MOON_OPTIONS = TestingUtils.setCustomGameOptions({moonExpansion: true});
 
@@ -75,4 +76,20 @@ describe('LunaEcumenopolis', () => {
     game.deferredActions.runAll(() => {});
     expect(player.getTerraformRating()).eq(18);
   });
+
+  // it('canPlay when Reds are in power', () => {
+  //   const player = TestPlayers.BLUE.newPlayer();
+  //   const game = Game.newInstance('foobar', [player], player, MOON_OPTIONS);
+  //   const moonData = MoonExpansion.moonData(game);
+  //   game.phase = Phase.ACTION;
+
+  //   // Card requirements
+  //   player.setProductionForTest({plants: 1});
+
+  //   TestingUtils.testRedsCosts(() => player.canPlay(card), player, card.cost, 6);
+  //   moonData.colonyRate = 8;
+  //   TestingUtils.testRedsCosts(() => player.canPlay(card), player, card.cost, 3);
+  //   (game as any).oxygenLevel = MAX_OXYGEN_LEVEL;
+  //   TestingUtils.testRedsCosts(() => player.canPlay(card), player, card.cost, 0);
+  // });
 });

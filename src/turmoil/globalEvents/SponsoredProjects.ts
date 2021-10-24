@@ -3,6 +3,11 @@ import {GlobalEventName} from './GlobalEventName';
 import {PartyName} from '../parties/PartyName';
 import {Game} from '../../Game';
 import {Turmoil} from '../Turmoil';
+import {CardRenderer} from '../../cards/render/CardRenderer';
+
+const RENDER_DATA = CardRenderer.builder((b) => {
+  b.cards(1).text('w/rsrs').colon().wild(1).br.cards(1).slash().influence();
+});
 
 export class SponsoredProjects implements IGlobalEvent {
     public name = GlobalEventName.SPONSORED_PROJECTS;
@@ -15,4 +20,5 @@ export class SponsoredProjects implements IGlobalEvent {
         player.drawCard(turmoil.getPlayerInfluence(player));
       });
     }
+    public renderData = RENDER_DATA;
 }

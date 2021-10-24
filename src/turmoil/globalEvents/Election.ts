@@ -6,6 +6,14 @@ import {Tags} from '../../cards/Tags';
 import {Turmoil} from '../Turmoil';
 import {Player} from '../../Player';
 import {Board} from '../../boards/Board';
+import {CardRenderer} from '../../cards/render/CardRenderer';
+import {played} from '../../cards/Options';
+import {Size} from '../../cards/render/Size';
+
+const RENDER_DATA = CardRenderer.builder((b) => {
+  b.influence().plus().building(1, {played}).plus().city().colon().br;
+  b.text('1st: ').tr(2, {size: Size.SMALL}).nbsp.text('2nd: ').tr(1, {size: Size.SMALL});
+});
 
 export class Election implements IGlobalEvent {
     public name = GlobalEventName.ELECTION;
@@ -65,4 +73,5 @@ export class Election implements IGlobalEvent {
 
       return score + cities;
     }
+    public renderData = RENDER_DATA;
 }

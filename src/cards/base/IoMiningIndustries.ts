@@ -1,11 +1,12 @@
 import {IProjectCard} from '../IProjectCard';
 import {Tags} from '../Tags';
-import {Card, VictoryPoints} from '../Card';
+import {Card} from '../Card';
 import {CardType} from '../CardType';
 import {Player} from '../../Player';
 import {Resources} from '../../Resources';
 import {CardName} from '../../CardName';
 import {CardRenderer} from '../render/CardRenderer';
+import {VictoryPoints} from '../ICard';
 
 export class IoMiningIndustries extends Card implements IProjectCard {
   constructor() {

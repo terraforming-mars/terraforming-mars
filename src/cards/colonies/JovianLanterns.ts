@@ -7,7 +7,8 @@ import {ResourceType} from '../../ResourceType';
 import {IResourceCard} from '../ICard';
 import {AddResourcesToCard} from '../../deferredActions/AddResourcesToCard';
 import {CardRequirements} from '../CardRequirements';
-import {Card, VictoryPoints} from '../Card';
+import {Card} from '../Card';
+import {VictoryPoints} from '../ICard';
 import {CardRenderer} from '../render/CardRenderer';
 
 export class JovianLanterns extends Card implements IProjectCard, IResourceCard {

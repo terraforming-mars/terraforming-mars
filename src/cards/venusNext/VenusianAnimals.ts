@@ -7,7 +7,8 @@ import {CardName} from '../../CardName';
 import {IResourceCard} from '../ICard';
 import {CardRequirements} from '../CardRequirements';
 import {CardRenderer} from '../render/CardRenderer';
-import {Card, VictoryPoints} from '../Card';
+import {Card} from '../Card';
+import {VictoryPoints} from '../ICard';
 import {played} from '../Options';
 
 export class VenusianAnimals extends Card implements IResourceCard {

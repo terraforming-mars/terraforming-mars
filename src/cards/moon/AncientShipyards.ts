@@ -9,7 +9,7 @@ import {CardRenderer} from '../render/CardRenderer';
 import {Units} from '../../Units';
 import {MoonCard} from './MoonCard';
 import {all} from '../Options';
-import {VictoryPoints} from '../Card';
+import {VictoryPoints} from '../ICard';
 
 export class AncientShipyards extends MoonCard {
   constructor() {

@@ -7,7 +7,8 @@ import {Resources} from '../../Resources';
 import {CardType} from '../CardType';
 import {CardName} from '../../CardName';
 import {IResourceCard} from '../ICard';
-import {Card, VictoryPoints} from '../Card';
+import {Card} from '../Card';
+import {VictoryPoints} from '../ICard';
 import {CardRenderer} from '../render/CardRenderer';
 import {played} from '../Options';
 

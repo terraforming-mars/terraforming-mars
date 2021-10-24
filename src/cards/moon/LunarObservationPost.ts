@@ -8,7 +8,7 @@ import {IActionCard} from '../ICard';
 import {CardRenderer} from '../render/CardRenderer';
 import {Units} from '../../Units';
 import {MoonCard} from './MoonCard';
-import {VictoryPoints} from '../Card';
+import {VictoryPoints} from '../ICard';
 
 export class LunarObservationPost extends MoonCard implements IActionCard {
   constructor() {

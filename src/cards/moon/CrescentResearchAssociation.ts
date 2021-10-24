@@ -1,6 +1,7 @@
 import {CardName} from '../../CardName';
 import {Player} from '../../Player';
-import {Card, VictoryPoints} from '../Card';
+import {Card} from '../Card';
+import {VictoryPoints} from '../ICard';
 import {CardType} from '../CardType';
 import {CorporationCard} from '../corporation/CorporationCard';
 import {IProjectCard} from '../IProjectCard';

@@ -10,7 +10,8 @@ import {CardRequirements} from '../CardRequirements';
 import {IActionCard} from '../ICard';
 import {OrOptions} from '../../inputs/OrOptions';
 import {SelectOption} from '../../inputs/SelectOption';
-import {Card, VictoryPoints} from '../Card';
+import {Card} from '../Card';
+import {VictoryPoints} from '../ICard';
 import {Size} from '../render/Size';
 
 export class CopernicusTower extends Card implements IActionCard, IProjectCard {

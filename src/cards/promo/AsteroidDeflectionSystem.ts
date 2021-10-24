@@ -1,6 +1,7 @@
 import {IProjectCard} from '../IProjectCard';
 import {IActionCard, IResourceCard} from '../ICard';
-import {Card, VictoryPoints} from '../Card';
+import {Card} from '../Card';
+import {VictoryPoints} from '../ICard';
 import {CardName} from '../../CardName';
 import {CardType} from '../CardType';
 import {ResourceType} from '../../ResourceType';

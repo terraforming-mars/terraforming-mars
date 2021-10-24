@@ -32,6 +32,7 @@ describe('EarthEmbassy', () => {
       metadata: {} as ICardMetadata,
       canPlay: () => true,
       play: () => undefined,
+      getVictoryPoints: () => 0,
       resourceCount: 0,
     };
 

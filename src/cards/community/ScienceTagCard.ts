@@ -29,4 +29,7 @@ export class ScienceTagCard implements IProjectCard {
   public get resourceCount() {
     return 0;
   }
+  public getVictoryPoints() {
+    return 0;
+  }
 }

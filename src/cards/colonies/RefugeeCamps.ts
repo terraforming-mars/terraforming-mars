@@ -7,7 +7,8 @@ import {ResourceType} from '../../ResourceType';
 import {Resources} from '../../Resources';
 import {IResourceCard} from '../ICard';
 import {CardRenderer} from '../render/CardRenderer';
-import {Card, VictoryPoints} from '../Card';
+import {Card} from '../Card';
+import {VictoryPoints} from '../ICard';
 
 export class RefugeeCamps extends Card implements IProjectCard, IResourceCard {
   constructor() {

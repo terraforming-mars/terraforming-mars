@@ -7,24 +7,10 @@ import {Tags} from './Tags';
 import {Player} from '../Player';
 import {Units} from '../Units';
 import {CardRequirements} from './CardRequirements';
-import {CardDiscount, IResourceCard, TRSource} from './ICard';
+import {CardDiscount, IResourceCard, TRSource, VictoryPoints} from './ICard';
 import {CardRenderDynamicVictoryPoints} from './render/CardRenderDynamicVictoryPoints';
 import {CardRenderItemType} from './render/CardRenderItemType';
 
-export interface VictoryPoints {
-  type: 'resource' | Tags,
-  points: number,
-  per: number,
-}
-
-export namespace VictoryPoints {
-  export function resource(points: number, per: number): VictoryPoints {
-    return {type: 'resource', points, per};
-  }
-  export function tags(tag: Tags, points: number, per: number): VictoryPoints {
-    return {type: tag, points, per};
-  }
-}
 export interface StaticCardProperties {
   adjacencyBonus?: IAdjacencyBonus;
   cardCost?: number;
@@ -132,8 +118,8 @@ export abstract class Card {
   public get tr(): TRSource {
     return this.properties.tr || {};
   }
-  public get victoryPoints(): number {
-    return this.victoryPoints;
+  public get victoryPoints(): number | VictoryPoints | undefined {
+    return this.properties.victoryPoints;
   }
   public canPlay(_player: Player) {
     return true;

@@ -6,7 +6,8 @@ import {Tags} from '../Tags';
 import {CardRenderer} from '../render/CardRenderer';
 import {Resources} from '../../Resources';
 import {CardRequirements} from '../CardRequirements';
-import {Card, VictoryPoints} from '../Card';
+import {Card} from '../Card';
+import {VictoryPoints} from '../ICard';
 import {all} from '../Options';
 
 export class LunaSenate extends Card implements IProjectCard {

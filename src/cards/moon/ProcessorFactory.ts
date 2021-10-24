@@ -6,7 +6,8 @@ import {Tags} from '../Tags';
 import {ResourceType} from '../../ResourceType';
 import {AddResourcesToCard} from '../../deferredActions/AddResourcesToCard';
 import {CardRenderer} from '../render/CardRenderer';
-import {Card, VictoryPoints} from '../Card';
+import {Card} from '../Card';
+import {VictoryPoints} from '../ICard';
 
 export class ProcessorFactory extends Card implements IProjectCard {
   constructor() {

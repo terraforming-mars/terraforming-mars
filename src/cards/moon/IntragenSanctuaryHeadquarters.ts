@@ -8,7 +8,8 @@ import {IProjectCard} from '../IProjectCard';
 import {ICard} from '../ICard';
 import {ResourceType} from '../../ResourceType';
 import {PlaceMoonColonyTile} from '../../moon/PlaceMoonColonyTile';
-import {Card, VictoryPoints} from '../Card';
+import {Card} from '../Card';
+import {VictoryPoints} from '../ICard';
 import {played} from '../Options';
 
 export class IntragenSanctuaryHeadquarters extends Card implements CorporationCard {

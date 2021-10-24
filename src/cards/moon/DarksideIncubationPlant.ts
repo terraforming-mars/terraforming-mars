@@ -12,7 +12,7 @@ import {CardRenderer} from '../render/CardRenderer';
 import {Units} from '../../Units';
 import {MoonCard} from './MoonCard';
 import {LogHelper} from '../../LogHelper';
-import {VictoryPoints} from '../Card';
+import {VictoryPoints} from '../ICard';
 
 export class DarksideIncubationPlant extends MoonCard implements IActionCard, IProjectCard {
   constructor() {

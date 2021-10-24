@@ -6,7 +6,8 @@ import {Tags} from '../Tags';
 import {IActionCard} from '../ICard';
 import {ResourceType} from '../../ResourceType';
 import {CardRenderer} from '../render/CardRenderer';
-import {Card, VictoryPoints} from '../Card';
+import {Card} from '../Card';
+import {VictoryPoints} from '../ICard';
 import {Resources} from '../../Resources';
 
 export class RustEatingBacteria extends Card implements IActionCard, IProjectCard {

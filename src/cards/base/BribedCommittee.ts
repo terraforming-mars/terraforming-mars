@@ -28,5 +28,4 @@ export class BribedCommittee extends Card implements IProjectCard {
     player.increaseTerraformRatingSteps(2);
     return undefined;
   }
-
 }

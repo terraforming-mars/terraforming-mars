@@ -9,7 +9,8 @@ import {IResourceCard} from '../ICard';
 import {DecreaseAnyProduction} from '../../deferredActions/DecreaseAnyProduction';
 import {CardRenderer} from '../render/CardRenderer';
 import {CardRequirements} from '../CardRequirements';
-import {Card, VictoryPoints} from '../Card';
+import {Card} from '../Card';
+import {VictoryPoints} from '../ICard';
 import {all} from '../Options';
 
 export class SubZeroSaltFish extends Card implements IProjectCard, IResourceCard {

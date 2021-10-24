@@ -1,6 +1,7 @@
 import {IProjectCard} from '../IProjectCard';
 import {Player} from '../../Player';
-import {Card, VictoryPoints} from '../Card';
+import {Card} from '../Card';
+import {VictoryPoints} from '../ICard';
 import {CardType} from '../CardType';
 import {CardName} from '../../CardName';
 import {CardRenderer} from '../render/CardRenderer';

@@ -28,15 +28,16 @@ describe('SecretLabs', function() {
   });
 
   it('canPlay', function() {
-    player.tagsForTest= {jovian: 1, science: 1};
-    expect(player.canPlayIgnoringCost(card)).is.true;
+    player.megaCredits = card.cost;
+    player.tagsForTest = {jovian: 1, science: 1};
+    expect(player.canPlay(card)).is.true;
 
-    player.tagsForTest= {jovian: 1, science: 0};
-    expect(player.canPlayIgnoringCost(card)).is.false;
+    player.tagsForTest = {jovian: 1, science: 0};
+    expect(player.canPlay(card)).is.false;
 
 
-    player.tagsForTest= {jovian: 0, science: 1};
-    expect(player.canPlayIgnoringCost(card)).is.false;
+    player.tagsForTest = {jovian: 0, science: 1};
+    expect(player.canPlay(card)).is.false;
   });
 
   it('play - place an ocean tile', function() {

@@ -18,6 +18,7 @@ export class DysonScreens extends Card implements IProjectCard, IActionCard {
       name: CardName.DYSON_SCREENS,
       tags: [Tags.SCIENCE, Tags.VENUS, Tags.ENERGY, Tags.SPACE],
       cost: 28,
+      tr: {temperature: 1},
 
       metadata: {
         cardNumber: 'Pf15',

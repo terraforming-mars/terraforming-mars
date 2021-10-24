@@ -25,7 +25,7 @@
             <Card :card="{name: card, resources: getResourcesOnCard(card)}"/>
           </div>
           <div id="log_panel_card" class="cardbox" v-for="globalEventName in globalEventNames" :key="globalEventName">
-            <global-event :globalEvent="getGlobalEvent(globalEventName)" type="prior"></global-event>
+            <global-event :globalEvent="getGlobalEvent(globalEventName)" type="prior" :showIcons="false"></global-event>
           </div>
         </div>
       </div>

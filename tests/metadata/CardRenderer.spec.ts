@@ -223,7 +223,7 @@ describe('CardRenderer', function() {
     expect(item.amount).to.equal(-1);
   });
   it('influence: success', () => {
-    const renderer = CardRenderer.builder((b) => b.influence(1));
+    const renderer = CardRenderer.builder((b) => b.influence());
     const item = renderer.rows[0][0] as CardRenderItem;
     expect(item.type).to.equal(CardRenderItemType.INFLUENCE);
     expect(item.amount).to.equal(1);

@@ -4,6 +4,13 @@ import {PartyName} from '../parties/PartyName';
 import {Game} from '../../Game';
 import {Resources} from '../../Resources';
 import {Turmoil} from '../Turmoil';
+import {CardRenderer} from '../../cards/render/CardRenderer';
+import {Size} from '../../cards/render/Size';
+
+const RENDER_DATA = CardRenderer.builder((b) => {
+  b.production((pb) => pb.minus().energy(1).steel(1)).br;
+  b.steel(1).slash().nbsp.influence({size: Size.SMALL});
+});
 
 export class Sabotage implements IGlobalEvent {
     public name = GlobalEventName.SABOTAGE;
@@ -22,4 +29,5 @@ export class Sabotage implements IGlobalEvent {
         player.addResource(Resources.STEEL, turmoil.getPlayerInfluence(player), {log: true, from: this.name});
       });
     }
+    public renderData = RENDER_DATA;
 }

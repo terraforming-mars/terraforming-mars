@@ -5,6 +5,12 @@ import {Game} from '../../Game';
 import {Resources} from '../../Resources';
 import {Turmoil} from '../Turmoil';
 import {TileType} from '../../TileType';
+import {CardRenderer} from '../../cards/render/CardRenderer';
+import {Size} from '../../cards/render/Size';
+
+const RENDER_DATA = CardRenderer.builder((b) => {
+  b.minus().megacredits(4).slash().oceans(1).emptyTile().influence({size: Size.SMALL});
+});
 
 export class MudSlides implements IGlobalEvent {
     public name = GlobalEventName.MUD_SLIDES;
@@ -24,4 +30,5 @@ export class MudSlides implements IGlobalEvent {
         }
       });
     }
+    public renderData = RENDER_DATA;
 }

@@ -1,8 +1,21 @@
 <template>
   <div :class="getClass()">
-    <div class="event-party event-party--top" :class="partyNameClass(globalEvent.revealed)" v-i18n>{{ globalEvent.revealed }}</div>
-    <div class="event-party event-party--bottom" :class="partyNameClass(globalEvent.current)" v-i18n>{{ globalEvent.current }}</div>
-    <div class="event-content"><div class="event-text" v-i18n>{{ globalEvent.description }}</div></div>
+    <div v-if="showIcons === false">
+      <div class="event-party event-party--revealed" :class="partyNameClass(globalEvent.revealed)" v-i18n>{{ globalEvent.revealed }}</div>
+      <div class="event-party event-party--current" :class="partyNameClass(globalEvent.current)" v-i18n>{{ globalEvent.current }}</div>
+      <div class="event-content"><div class="event-text" v-i18n>{{ globalEvent.description }}</div></div>
+    </div>
+    <div v-else class="card-container">
+      <div class="card-content-wrapper" v-i18n>
+        <div class="card-content" style="width: 320px;">
+          <CardParty class="card-party--revealed" :party="globalEvent.revealed" />
+          <CardParty class="card-party--current" :party="globalEvent.current" />
+          <CardRenderData v-if="renderData !== undefined" :renderData="renderData" />
+          <CardDescription :item='globalEvent.description' />
+        </div>
+     </div>
+    </div>
+    <slot/>
   </div>
 </template>
 
@@ -10,9 +23,20 @@
 
 import Vue from 'vue';
 import {GlobalEventModel} from '@/models/TurmoilModel';
+import CardRenderData from '@/client/components/card/CardRenderData.vue';
+import CardParty from '@/client/components/card/CardParty.vue';
+import {IGlobalEvent} from '@/turmoil/globalEvents/IGlobalEvent';
+import {CardRenderer} from '@/cards/render/CardRenderer';
+import {getGlobalEventByName} from '@/turmoil/globalEvents/GlobalEventDealer';
+import CardDescription from '@/client/components/card/CardDescription.vue';
 
 export default Vue.extend({
   name: 'global-event',
+  components: {
+    CardRenderData,
+    CardParty,
+    CardDescription,
+  },
   props: {
     globalEvent: {
       type: Object as () => GlobalEventModel,
@@ -20,8 +44,24 @@ export default Vue.extend({
     type: {
       type: String,
     },
+    showIcons: {
+      type: Boolean,
+    },
+  },
+  data() {
+    const globalEvent: IGlobalEvent | undefined = getGlobalEventByName(this.globalEvent.name);
+    if (globalEvent === undefined) {
+      throw new Error(`Can't find card ${this.globalEvent.name}`);
+    }
+
+    return {
+      renderData: globalEvent.renderData,
+    };
   },
   methods: {
+    getCardRenderer(): CardRenderer | undefined {
+      return this.renderData;
+    },
     partyNameClass(partyName: string): string {
       if (partyName === undefined) {
         return '';

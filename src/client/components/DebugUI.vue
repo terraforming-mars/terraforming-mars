@@ -123,6 +123,14 @@
                   <Card v-show="filtered(card)" :card="{'name': card}" />
               </div>
             </section>
+
+            <section class="debug-ui-cards-list">
+              <h2>Global Events</h2>
+              <div class="cardbox" v-for="globalEventName in getAllGlobalEvents()" :key="globalEventName">
+                <!-- <global-event :globalEvent="getGlobalEvent(globalEventName)" type="prior" :showIcons="false"></global-event> -->
+                <global-event :globalEvent="getGlobalEvent(globalEventName)" type="prior" :showIcons="true"></global-event>
+              </div>
+            </section>
         </div>
 </template>
 
@@ -144,6 +152,11 @@ import {ICardRenderDescription, isIDescription} from '@/cards/render/ICardRender
 import {CardName} from '@/CardName';
 import {ICardFactory} from '@/cards/ICardFactory';
 import {PreferencesManager} from '@/client/utils/PreferencesManager';
+import {GlobalEventName} from '@/turmoil/globalEvents/GlobalEventName';
+import {GlobalEventModel} from '@/models/TurmoilModel';
+import {PartyName} from '@/turmoil/parties/PartyName';
+import {ALL_EVENTS, getGlobalEventByName} from '@/turmoil/globalEvents/GlobalEventDealer';
+import GlobalEvent from '@/client/components/GlobalEvent.vue';
 
 const cards: Map<CardName, {card: ICard, module: GameModule, cardNumber: string}> = new Map();
 
@@ -197,6 +210,7 @@ export default Vue.extend({
   name: 'debug-ui',
   components: {
     Card,
+    GlobalEvent,
   },
   data() {
     return {
@@ -357,6 +371,27 @@ export default Vue.extend({
     getAllPreludeCards() {
       return this.sort(ALL_PRELUDE_CARD_NAMES);
     },
+    getAllGlobalEvents() {
+      return ALL_EVENTS.keys();
+    },
+    // Copied from LogPanel.vue
+    getGlobalEvent(globalEventName: GlobalEventName): GlobalEventModel {
+      const globalEvent = getGlobalEventByName(globalEventName);
+      if (globalEvent) {
+        return {
+          name: globalEvent.name,
+          description: globalEvent.description,
+          revealed: globalEvent.revealedDelegate,
+          current: globalEvent.currentDelegate,
+        };
+      }
+      return {
+        name: globalEventName,
+        description: 'global event not found',
+        revealed: PartyName.GREENS,
+        current: PartyName.GREENS,
+      };
+    },
     filtered(cardName: CardName): boolean {
       const card = cards.get(cardName);
       if (card === undefined) {
@@ -418,4 +453,3 @@ export default Vue.extend({
 });
 
 </script>
-

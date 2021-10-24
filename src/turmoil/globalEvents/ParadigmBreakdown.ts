@@ -5,6 +5,11 @@ import {Game} from '../../Game';
 import {Resources} from '../../Resources';
 import {Turmoil} from '../Turmoil';
 import {DiscardCards} from '../../deferredActions/DiscardCards';
+import {CardRenderer} from '../../cards/render/CardRenderer';
+
+const RENDER_DATA = CardRenderer.builder((b) => {
+  b.minus().cards(2).br.megacredits(2).influence();
+});
 
 export class ParadigmBreakdown implements IGlobalEvent {
     public name = GlobalEventName.PARADIGM_BREAKDOWN;
@@ -21,4 +26,5 @@ export class ParadigmBreakdown implements IGlobalEvent {
         player.addResource(Resources.MEGACREDITS, 2 * (turmoil.getPlayerInfluence(player)), {log: true, from: this.name});
       });
     }
+    public renderData = RENDER_DATA;
 }

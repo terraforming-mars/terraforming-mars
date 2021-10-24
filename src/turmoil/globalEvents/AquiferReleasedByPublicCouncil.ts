@@ -5,6 +5,11 @@ import {Game} from '../../Game';
 import {Resources} from '../../Resources';
 import {Turmoil} from '../Turmoil';
 import {PlaceOceanTile} from '../../deferredActions/PlaceOceanTile';
+import {CardRenderer} from '../../cards/render/CardRenderer';
+
+const RENDER_DATA = CardRenderer.builder((b) => {
+  b.oceans(1).br.plants(1).steel(1).slash().influence();
+});
 
 export class AquiferReleasedByPublicCouncil implements IGlobalEvent {
     public name = GlobalEventName.AQUIFER_RELEASED_BY_PUBLIC_COUNCIL;
@@ -18,4 +23,5 @@ export class AquiferReleasedByPublicCouncil implements IGlobalEvent {
         player.addResource(Resources.STEEL, turmoil.getPlayerInfluence(player), {log: true, from: GlobalEventName.CORROSIVE_RAIN});
       });
     }
+    public renderData = RENDER_DATA;
 }

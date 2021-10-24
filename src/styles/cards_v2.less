@@ -1142,6 +1142,14 @@
                 background-size: 40px 40px;
                 vertical-align: middle;
             }
+            .card-influence--size-S {
+                height: 25px;
+                width: 25px;
+                background-size: 25px;
+                position: relative;
+                top: -10px;
+                left: -7px;
+            }
             /*tags*/
             .card-resource-tag {
                 position: relative;
@@ -1819,6 +1827,36 @@
         position: relative;
         top: -16px;
     }
+}
+
+.card-party {
+  display: inherit;
+}
+
+.card-party--revealed {
+  display: inherit;
+  position: absolute;
+  margin: -7px 0 0 -285px;
+}
+
+.card-party--current {
+  display: inherit;
+  position: absolute;
+  margin: 129px 0 0 280px;
+}
+
+@parties: greens, kelvinists, mars-first, reds, scientists, unity;
+each(@parties, {
+  .card-party--@{value} {
+    background-image: url("./assets/parties/@{value}.png");
+    background-size: 41px 30px;
+    width: 41px;
+    height: 30px;
+  }
+})
+
+.card-over {
+   margin: 0px 0 -59px -59px;
 }
 
 .card-resources-counter {

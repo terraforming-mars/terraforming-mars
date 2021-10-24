@@ -27,7 +27,7 @@ export class Incite extends Card implements CorporationCard {
           b.corpBox('effect', (ce) => {
             ce.vSpace(Size.LARGE);
             ce.effect(undefined, (eb) => {
-              eb.startEffect.influence(1);
+              eb.startEffect.influence();
             });
             ce.vSpace(Size.SMALL);
             ce.effect('You have +1 influence. When you send a delegate using the lobbying action, you pay 2 M€ less for it.', (eb) => {

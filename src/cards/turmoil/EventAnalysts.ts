@@ -22,7 +22,7 @@ export class EventAnalysts extends Card implements IProjectCard {
         description: 'Requires that Scientists are ruling or that you have 2 delegates there.',
         cardNumber: 'T05',
         renderData: CardRenderer.builder((b) => b.effect('You have +1 influence.', (be) => {
-          be.startEffect.influence(1);
+          be.startEffect.influence();
         })),
       },
     });

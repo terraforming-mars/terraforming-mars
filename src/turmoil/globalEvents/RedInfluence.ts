@@ -4,6 +4,13 @@ import {PartyName} from '../parties/PartyName';
 import {Game} from '../../Game';
 import {Resources} from '../../Resources';
 import {Turmoil} from '../Turmoil';
+import {CardRenderer} from '../../cards/render/CardRenderer';
+import {digit} from '../../cards/Options';
+
+const RENDER_DATA = CardRenderer.builder((b) => {
+  b.megacredits(-3).slash().tr(5, {digit, over: 10}).br.br.production((pb) => pb.megacredits(1)).slash().influence();
+});
+
 
 export class RedInfluence implements IGlobalEvent {
     public name = GlobalEventName.RED_INFLUENCE;
@@ -19,4 +26,5 @@ export class RedInfluence implements IGlobalEvent {
         player.addProduction(Resources.MEGACREDITS, turmoil.getPlayerInfluence(player), {log: true, from: this.name});
       });
     }
+    public renderData = RENDER_DATA;
 }

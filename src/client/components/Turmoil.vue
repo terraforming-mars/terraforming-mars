@@ -6,7 +6,7 @@
         <global-event v-if="turmoil.coming" :globalEvent="turmoil.coming" type="coming" :showIcons="showIcons"></global-event>
         <global-event v-if="turmoil.current" :globalEvent="turmoil.current" type="current" :showIcons="showIcons"></global-event>
       </div>
-      <div v-if="showIcons === true"  @click='toggleGlobalEventView'>T</div><div v-else  @click='toggleGlobalEventView'>I</div>
+      <div @click='toggleGlobalEventView'>{{ showIcons ? "T" : "I" }}</div>
 
       <div class="turmoil-board">
         <div class="turmoil-header">

@@ -18,7 +18,7 @@ import {CeresSpaceport} from './CeresSpaceport';
 // import {CultivationofVenus} from './CultivationofVenus';
 import {Cyanobacteria} from './Cyanobacteria';
 import {DataLeak} from './DataLeak';
-import {DeclarationofIndependence} from './DeclarationofIndependence';
+import {DeclarationOfIndependence} from './DeclarationOfIndependence';
 // import {DeepSpaceOperations} from './DeepSpaceOperations';
 // import {DesignCompany} from './DesignCompany';
 import {DesignedOrganisms} from './DesignedOrganisms';
@@ -111,7 +111,7 @@ export const PATHFINDERS_CARD_MANIFEST = new CardManifest({
     {cardName: CardName.SMALL_OPEN_PIT_MINE, Factory: SmallOpenPitMine},
     {cardName: CardName.SOLAR_STORM, Factory: SolarStorm},
     {cardName: CardName.SPACE_RELAY, Factory: SpaceRelay},
-    {cardName: CardName.DECLARATION_OF_INDEPENDENCE, Factory: DeclarationofIndependence, compatibility: GameModule.Turmoil},
+    {cardName: CardName.DECLARATION_OF_INDEPENDENCE, Factory: DeclarationOfIndependence, compatibility: GameModule.Turmoil},
     {cardName: CardName.MARTIAN_CULTURE, Factory: MartianCulture},
     {cardName: CardName.OZONE_GENERATORS, Factory: OzoneGenerators},
     {cardName: CardName.SMALL_COMET, Factory: SmallComet},

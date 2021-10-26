@@ -1,6 +1,5 @@
 import {expect} from 'chai';
 import {StripMine} from '../../../src/cards/base/StripMine';
-import {REDS_RULING_POLICY_COST} from '../../../src/constants';
 import {Game} from '../../../src/Game';
 import {Phase} from '../../../src/Phase';
 import {Player} from '../../../src/Player';
@@ -49,7 +48,7 @@ describe('StripMine', function() {
     PoliticalAgendas.setNextAgenda(turmoil, game);
     expect(player.canPlay(card)).is.false;
 
-    player.megaCredits += REDS_RULING_POLICY_COST * 2; // Payment for Reds tax
+    player.megaCredits += 6; // Payment for Reds tax
     expect(player.canPlay(card)).is.true;
 
     player.megaCredits = 5; // Cannot play as cannot afford Reds tax in MC

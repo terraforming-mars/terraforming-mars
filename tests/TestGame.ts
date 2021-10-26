@@ -13,7 +13,7 @@ export function newTestGame(count: number, customOptions?: Partial<GameOptions>)
     TestPlayers.PURPLE.newPlayer(),
     TestPlayers.ORANGE.newPlayer(),
     TestPlayers.PINK.newPlayer(),
-  ].slice(0, count - 1);
+  ].slice(0, count);
 
   const options: GameOptions | undefined = customOptions === undefined ?
     undefined :

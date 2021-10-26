@@ -192,6 +192,23 @@ describe('CardRequirements', function() {
     expect(requirements.satisfies(player)).eq(true);
   });
 
+  it('satisfies properly for any tag requirement', function() {
+    const requirements = CardRequirements.builder((b) => b.tag(Tags.MICROBE, 2, {all: true}));
+
+    player.tagsForTest = {microbe: 2};
+    expect(requirements.satisfies(player)).is.true;
+
+    player.tagsForTest = {microbe: 1};
+    expect(requirements.satisfies(player)).is.false;
+
+    player.tagsForTest = {microbe: 1};
+    player2.tagsForTest = {microbe: 1};
+    expect(requirements.satisfies(player)).is.true;
+
+    player.tagsForTest = {microbe: 0};
+    player2.tagsForTest = {microbe: 2};
+    expect(requirements.satisfies(player)).is.true;
+  });
 
   it('satisfies properly for production', function() {
     const requirements = CardRequirements.builder((b) => b.production(Resources.PLANTS));

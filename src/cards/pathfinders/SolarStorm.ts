@@ -17,6 +17,7 @@ export class SolarStorm extends Card implements IProjectCard {
       name: CardName.SOLAR_STORM,
       cost: 12,
       tags: [Tags.SPACE],
+      tr: {temperature: 1},
 
       metadata: {
         cardNumber: 'Pf32',

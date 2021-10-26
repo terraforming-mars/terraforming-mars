@@ -7,6 +7,8 @@ import {SpaceType} from '../../../src/SpaceType';
 import {TileType} from '../../../src/TileType';
 import {TestingUtils} from '../../TestingUtils';
 import {TestPlayers} from '../../TestPlayers';
+import {newTestGame} from '../../TestGame';
+import {BoardName} from '../../../src/boards/BoardName';
 
 describe('LavaFlows', function() {
   let card : LavaFlows; let player : Player; let game : Game;
@@ -19,14 +21,25 @@ describe('LavaFlows', function() {
     TestingUtils.resetBoard(game);
   });
 
-  it('Can\'t play if no available spaces', function() {
+  it('Cannot play if no available spaces', function() {
     game.addTile(player, SpaceType.LAND, game.board.getSpace(SpaceName.THARSIS_THOLUS), {tileType: TileType.LAVA_FLOWS});
     game.addTile(player, SpaceType.LAND, game.board.getSpace(SpaceName.ARSIA_MONS), {tileType: TileType.LAVA_FLOWS});
     game.addTile(player, SpaceType.LAND, game.board.getSpace(SpaceName.PAVONIS_MONS), {tileType: TileType.LAVA_FLOWS});
 
+    expect(card.canPlay(player)).is.true;
+
     const anotherPlayer = TestPlayers.RED.newPlayer();
     game.board.getSpace(SpaceName.ASCRAEUS_MONS).player = anotherPlayer; // land claim
     expect(card.canPlay(player)).is.not.true;
+  });
+
+  it('All land spaces are available on Hellas', function() {
+    // With two players, there's no solo setup, so all spaces will be available.
+    const game = newTestGame(2, {boardName: BoardName.HELLAS});
+    const player = game.getPlayers()[0];
+
+    const action = card.play(player);
+    expect(action.availableSpaces).deep.eq(game.board.getAvailableSpacesOnLand(player));
   });
 
   it('Should play', function() {

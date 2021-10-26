@@ -18,6 +18,7 @@ export class MuseumofEarlyColonisation extends Card implements IProjectCard {
       tags: [Tags.BUILDING, Tags.MARS],
       requirements: CardRequirements.builder((b) => b.oceans(1).cities(1, {all}).greeneries(1, {all})),
       productionBox: Units.of({energy: -1, steel: 1, titanium: 1, plants: 1}),
+      tr: {tr: 1},
 
       metadata: {
         cardNumber: 'Pf11',

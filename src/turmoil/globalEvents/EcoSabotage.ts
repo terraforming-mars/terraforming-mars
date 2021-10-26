@@ -4,6 +4,12 @@ import {PartyName} from '../parties/PartyName';
 import {Game} from '../../Game';
 import {Resources} from '../../Resources';
 import {Turmoil} from '../Turmoil';
+import {CardRenderer} from '../../cards/render/CardRenderer';
+import {Size} from '../../cards/render/Size';
+
+const RENDER_DATA = CardRenderer.builder((b) => {
+  b.text('max 3').plants(1).influence({size: Size.SMALL});
+});
 
 export class EcoSabotage implements IGlobalEvent {
     public name = GlobalEventName.ECO_SABOTAGE;
@@ -18,4 +24,5 @@ export class EcoSabotage implements IGlobalEvent {
         player.deductResource(Resources.PLANTS, plantDecrease, {log: true, from: this.name});
       });
     }
+    public renderData = RENDER_DATA;
 }

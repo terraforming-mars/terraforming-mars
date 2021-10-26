@@ -7,6 +7,7 @@ import {CorporationCard} from '../corporation/CorporationCard';
 import {CardRenderer} from '../render/CardRenderer';
 import {Size} from '../render/Size';
 import {Tags} from '../Tags';
+import {Turmoil} from '../../turmoil/Turmoil';
 
 export class TempestConsultancy extends Card implements CorporationCard {
   constructor() {
@@ -51,11 +52,13 @@ export class TempestConsultancy extends Card implements CorporationCard {
   public action(player: Player) {
     let count = Math.floor(player.getTagCount(Tags.MOON) / 5);
     count = Math.min(count, 3);
-    player.game.defer(new SendDelegateToArea(
-      player,
-      `Select a party to send ${count} delegate(s) to`,
-      {count: count, source: 'reserve'}));
-
+    count = Math.min(count, Turmoil.getTurmoil(player.game).getDelegatesInReserve(player.id));
+    if (count > 0) {
+      player.game.defer(new SendDelegateToArea(
+        player,
+        `Select a party to send ${count} delegate(s) to`,
+        {count: count, source: 'reserve'}));
+    }
     return undefined;
   };
 }

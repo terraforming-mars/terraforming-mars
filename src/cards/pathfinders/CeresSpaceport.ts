@@ -18,6 +18,7 @@ export class CeresSpaceport extends Card implements IProjectCard {
       name: CardName.CERES_SPACEPORT,
       tags: [Tags.JOVIAN, Tags.JOVIAN, Tags.CITY, Tags.SPACE],
       cost: 36,
+      tr: {oceans: 1},
 
       metadata: {
         cardNumber: 'Pf14',

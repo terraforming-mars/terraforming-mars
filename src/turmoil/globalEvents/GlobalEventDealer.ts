@@ -110,7 +110,7 @@ const RENAMED_GLOBAL_EVENTS = new Map<GlobalEventName, new() => IGlobalEvent>([
   // ['Miners Of Strike' as GlobalEventName, MinersOnStrike],
 ]);
 
-const ALL_EVENTS = new Map<GlobalEventName, new() => IGlobalEvent>([
+export const ALL_EVENTS = new Map<GlobalEventName, new() => IGlobalEvent>([
   ...Array.from(POSITIVE_GLOBAL_EVENTS),
   ...Array.from(NEGATIVE_GLOBAL_EVENTS),
   ...Array.from(COLONY_ONLY_POSITIVE_GLOBAL_EVENTS),

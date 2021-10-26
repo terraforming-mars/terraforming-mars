@@ -4,6 +4,12 @@ import {PartyName} from '../parties/PartyName';
 import {Game} from '../../Game';
 import {Resources} from '../../Resources';
 import {Turmoil} from '../Turmoil';
+import {CardRenderer} from '../../cards/render/CardRenderer';
+
+const RENDER_DATA = CardRenderer.builder((b) => {
+  b.production((pb) => pb.megacredits(1)).slash().colonies(1).br;
+  b.titanium(1).slash().influence();
+});
 
 export class JovianTaxRights implements IGlobalEvent {
     public name = GlobalEventName.JOVIAN_TAX_RIGHTS;
@@ -20,4 +26,5 @@ export class JovianTaxRights implements IGlobalEvent {
         player.addResource(Resources.TITANIUM, turmoil.getPlayerInfluence(player), {log: true, from: this.name});
       });
     }
+    public renderData = RENDER_DATA;
 }

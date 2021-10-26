@@ -4,7 +4,6 @@ import {Card} from '../Card';
 import {CardType} from '../CardType';
 import {Player} from '../../Player';
 import {CardName} from '../../CardName';
-import {LogHelper} from '../../LogHelper';
 import {CardRenderer} from '../render/CardRenderer';
 import {played} from '../Options';
 
@@ -32,8 +31,7 @@ export class TerraformingGanymede extends Card implements IProjectCard {
   }
   public play(player: Player) {
     const steps = 1 + player.getTagCount(Tags.JOVIAN);
-    player.increaseTerraformRatingSteps(steps);
-    LogHelper.logTRIncrease(player, steps);
+    player.increaseTerraformRatingSteps(steps, {log: true});
 
     return undefined;
   }

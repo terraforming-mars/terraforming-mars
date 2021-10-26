@@ -15,12 +15,12 @@ describe('MercurianAlloys', function() {
   });
 
   it('Can\'t play if not enough science tags available', function() {
-    expect(card.canPlay(player)).is.not.true;
+    expect(player.canPlayIgnoringCost(card)).is.not.true;
   });
 
   it('Should play', function() {
     player.playedCards.push(new Research());
-    expect(card.canPlay(player)).is.true;
+    expect(player.canPlayIgnoringCost(card)).is.true;
 
     card.play(player);
     expect(player.getTitaniumValue()).to.eq(4);

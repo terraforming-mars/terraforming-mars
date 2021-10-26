@@ -2,13 +2,11 @@ import {IProjectCard} from '../IProjectCard';
 import {CardName} from '../../CardName';
 import {CardType} from '../CardType';
 import {Player} from '../../Player';
-import {PartyHooks} from '../../turmoil/parties/PartyHooks';
-import {PartyName} from '../../turmoil/parties/PartyName';
-import {REDS_RULING_POLICY_COST} from '../../constants';
 import {Card} from '../Card';
 import {CardRequirements} from '../CardRequirements';
 import {CardRenderer} from '../render/CardRenderer';
 import {Turmoil} from '../../turmoil/Turmoil';
+import {all} from '../Options';
 
 export class VoteOfNoConfidence extends Card implements IProjectCard {
   constructor() {
@@ -16,12 +14,13 @@ export class VoteOfNoConfidence extends Card implements IProjectCard {
       name: CardName.VOTE_OF_NO_CONFIDENCE,
       cardType: CardType.EVENT,
       cost: 5,
+      tr: {tr: 1},
 
       requirements: CardRequirements.builder((b) => b.partyLeaders()),
       metadata: {
         cardNumber: 'T16',
         renderData: CardRenderer.builder((b) => {
-          b.minus().chairman().any.asterix();
+          b.minus().chairman({all}).asterix();
           b.nbsp.plus().partyLeaders().br;
           b.tr(1);
         }),
@@ -32,21 +31,10 @@ export class VoteOfNoConfidence extends Card implements IProjectCard {
   }
 
   public canPlay(player: Player): boolean {
-    if (!super.canPlay(player)) {
-      return false;
-    }
     const turmoil = Turmoil.getTurmoil(player.game);
     if (!turmoil.hasAvailableDelegates(player.id)) return false;
 
-    const chairmanIsNeutral = turmoil.chairman === 'NEUTRAL';
-    if (chairmanIsNeutral === false) {
-      return false;
-    }
-
-    if (PartyHooks.shouldApplyPolicy(player, PartyName.REDS)) {
-      return player.canAfford(player.getCardCost(this) + REDS_RULING_POLICY_COST);
-    }
-    return true;
+    return turmoil.chairman === 'NEUTRAL';
   }
 
   public play(player: Player) {

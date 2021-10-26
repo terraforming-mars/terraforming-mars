@@ -18,6 +18,7 @@ export class DecreaseAnyProduction implements DeferredAction {
     let candidates: Array<Player> = [];
     if (this.resource === Resources.MEGACREDITS) {
       candidates = this.player.game.getPlayers().filter((p) => p.getProduction(this.resource) >= this.count - 5);
+      candidates = candidates.filter((candidate) => !candidate.megaCreditsAreProtected());
     } else {
       candidates = this.player.game.getPlayers().filter((p) => p.getProduction(this.resource) >= this.count);
     }

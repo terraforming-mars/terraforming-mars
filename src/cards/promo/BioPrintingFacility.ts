@@ -11,6 +11,7 @@ import {SelectCard} from '../../inputs/SelectCard';
 import {OrOptions} from '../../inputs/OrOptions';
 import {SelectOption} from '../../inputs/SelectOption';
 import {CardRenderer} from '../render/CardRenderer';
+import {digit} from '../Options';
 
 export class BioPrintingFacility extends Card implements IActionCard, IProjectCard {
   constructor() {
@@ -24,7 +25,7 @@ export class BioPrintingFacility extends Card implements IActionCard, IProjectCa
         cardNumber: 'X36',
         renderData: CardRenderer.builder((b) => {
           b.action('Spend 2 energy to gain 2 plants OR to add 1 animal to ANOTHER card.', (eb) => {
-            eb.energy(2).digit.startAction.plants(2);
+            eb.energy(2, {digit}).startAction.plants(2);
             eb.or().animals(1).asterix();
           });
         }),

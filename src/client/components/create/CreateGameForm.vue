@@ -163,6 +163,7 @@
 
                             <template v-for="boardName in boards">
                               <div v-bind:key="boardName">
+                                <div v-if="boardName==='arabia terra'" class="create-game-subsection-label" v-i18n>Fan-made</div>
                                 <input type="radio" :value="boardName" name="board" v-model="board" :id="boardName+'-checkbox'">
                                 <label :for="boardName+'-checkbox'" class="expansion-button">
                                     <span :class="getBoardColorClass(boardName)">&#x2B22;</span><span class="capitalized" v-i18n>{{ boardName }}</span>
@@ -419,7 +420,7 @@
 <script lang="ts">
 import Vue from 'vue';
 import {Color} from '@/Color';
-import {BoardName} from '@/boards/BoardName';
+import {BoardName, RandomBoardOption} from '@/boards/BoardName';
 import {CardName} from '@/CardName';
 import CorporationsFilter from '@/client/components/create/CorporationsFilter.vue';
 import {translateTextWithParams} from '@/client/directives/i18n';
@@ -434,6 +435,8 @@ import {GameId} from '@/Game';
 import {AgendaStyle} from '@/turmoil/PoliticalAgendas';
 
 import * as constants from '@/constants';
+
+type BoardNameType = BoardName | RandomBoardOption;
 
 export interface CreateGameModel {
     constants: typeof constants;
@@ -459,8 +462,8 @@ export interface CreateGameModel {
     showColoniesList: boolean;
     showCardsBlackList: boolean;
     isSoloModePage: boolean;
-    board: BoardName | 'random';
-    boards: Array<BoardName | 'random'>;
+    board: BoardNameType;
+    boards: Array<BoardNameType>;
     seed: number;
     solarPhaseOption: boolean;
     shuffleMapOption: boolean;
@@ -535,8 +538,9 @@ export default Vue.extend({
         BoardName.ORIGINAL,
         BoardName.HELLAS,
         BoardName.ELYSIUM,
+        RandomBoardOption.OFFICIAL,
         BoardName.ARABIA_TERRA,
-        'random',
+        RandomBoardOption.ALL,
       ],
       seed: Math.random(),
       seededGame: false,

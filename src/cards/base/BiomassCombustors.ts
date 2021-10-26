@@ -8,6 +8,7 @@ import {CardName} from '../../CardName';
 import {DecreaseAnyProduction} from '../../deferredActions/DecreaseAnyProduction';
 import {CardRenderer} from '../render/CardRenderer';
 import {CardRequirements} from '../CardRequirements';
+import {all} from '../Options';
 
 export class BiomassCombustors extends Card implements IProjectCard {
   constructor() {
@@ -23,8 +24,8 @@ export class BiomassCombustors extends Card implements IProjectCard {
         cardNumber: '183',
         renderData: CardRenderer.builder((b) => {
           b.production((pb) => {
-            pb.minus().plants(-1).any.br;
-            pb.energy(2);
+            pb.minus().plants(-1, {all}).br;
+            pb.plus().energy(2);
           });
         }),
         victoryPoints: -1,
@@ -33,7 +34,7 @@ export class BiomassCombustors extends Card implements IProjectCard {
   }
 
   public canPlay(player: Player): boolean {
-    return super.canPlay(player) && player.game.someoneHasResourceProduction(Resources.PLANTS, 1);
+    return player.game.someoneHasResourceProduction(Resources.PLANTS, 1);
   }
 
   public play(player: Player) {

@@ -22,7 +22,7 @@ export class MiningComplex extends PreludeCard {
         'Pay 7 M€.',
         cardNumber: '',
         renderData: CardRenderer.builder((b) =>
-          b.moonMine().secondaryTag(AltSecondaryTag.MOON_MINING_RATE).moonRoad().secondaryTag(AltSecondaryTag.MOON_LOGISTICS_RATE).asterix().br.minus().megacredits(7),
+          b.moonMine({secondaryTag: AltSecondaryTag.MOON_MINING_RATE}).moonRoad({secondaryTag: AltSecondaryTag.MOON_LOGISTICS_RATE}).asterix().br.minus().megacredits(7),
         ),
       },
     });

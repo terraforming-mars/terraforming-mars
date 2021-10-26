@@ -5,9 +5,6 @@ import {Player} from '../../Player';
 import {CardName} from '../../CardName';
 import {ResourceType} from '../../ResourceType';
 import {IResourceCard} from '../ICard';
-import {PartyHooks} from '../../turmoil/parties/PartyHooks';
-import {PartyName} from '../../turmoil/parties/PartyName';
-import {REDS_RULING_POLICY_COST} from '../../constants';
 import {AddResourcesToCard} from '../../deferredActions/AddResourcesToCard';
 import {CardRequirements} from '../CardRequirements';
 import {Card} from '../Card';
@@ -22,6 +19,7 @@ export class JovianLanterns extends Card implements IProjectCard, IResourceCard 
       name: CardName.JOVIAN_LANTERNS,
       cardType: CardType.ACTIVE,
       resourceType: ResourceType.FLOATER,
+      tr: {tr: 1},
 
       requirements: CardRequirements.builder((b) => b.tag(Tags.JOVIAN)),
       metadata: {
@@ -43,18 +41,6 @@ export class JovianLanterns extends Card implements IProjectCard, IResourceCard 
   }
 
   public resourceCount: number = 0;
-
-  public canPlay(player: Player): boolean {
-    if (!super.canPlay(player)) {
-      return false;
-    }
-
-    if (PartyHooks.shouldApplyPolicy(player, PartyName.REDS)) {
-      return player.canAfford(player.getCardCost(this) + REDS_RULING_POLICY_COST);
-    }
-
-    return true;
-  }
 
   public canAct(player: Player): boolean {
     return player.titanium > 0;

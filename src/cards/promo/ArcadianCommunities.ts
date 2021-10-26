@@ -8,6 +8,7 @@ import {CardName} from '../../CardName';
 import {CardType} from '../CardType';
 import {CardRenderer} from '../render/CardRenderer';
 import {Size} from '../render/Size';
+import {digit} from '../Options';
 
 export class ArcadianCommunities extends Card implements IActionCard, CorporationCard {
   constructor() {
@@ -22,7 +23,7 @@ export class ArcadianCommunities extends Card implements IActionCard, Corporatio
         description: 'You start with 40 M€ and 10 steel. AS YOUR FIRST ACTION, PLACE A COMMUNITY [PLAYER MARKER] ON A NON-RESERVED AREA.',
         renderData: CardRenderer.builder((b) => {
           b.br;
-          b.megacredits(40).nbsp.steel(10).digit.nbsp.community().asterix();
+          b.megacredits(40).nbsp.steel(10, {digit}).nbsp.community().asterix();
           b.corpBox('action', (ce) => {
             ce.text('ACTION: PLACE A COMMUNITY (PLAYER MARKER) ON A NON-RESERVED AREA ADJACENT TO ONE OF YOUR TILES OR MARKED AREAS', Size.TINY, true);
             ce.vSpace(Size.MEDIUM);

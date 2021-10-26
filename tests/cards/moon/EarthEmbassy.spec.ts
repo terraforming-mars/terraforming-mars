@@ -30,6 +30,7 @@ describe('EarthEmbassy', () => {
       name: CardName.ZEPPELINS,
       tags: tags,
       metadata: {} as ICardMetadata,
+      canPlay: () => true,
       play: () => undefined,
     };
 

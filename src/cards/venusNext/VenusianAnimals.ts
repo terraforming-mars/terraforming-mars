@@ -9,6 +9,7 @@ import {CardRequirements} from '../CardRequirements';
 import {CardRenderer} from '../render/CardRenderer';
 import {CardRenderDynamicVictoryPoints} from '../render/CardRenderDynamicVictoryPoints';
 import {Card} from '../Card';
+import {played} from '../Options';
 
 export class VenusianAnimals extends Card implements IResourceCard {
   constructor() {
@@ -24,7 +25,7 @@ export class VenusianAnimals extends Card implements IResourceCard {
         cardNumber: '259',
         renderData: CardRenderer.builder((b) => {
           b.effect('When you play a Science tag, including this, add 1 Animal to this card.', (eb)=> {
-            eb.science().played.startEffect.animals(1);
+            eb.science(1, {played}).startEffect.animals(1);
           }).br;
           b.vpText('1 VP per Animal on this card.');
         }),

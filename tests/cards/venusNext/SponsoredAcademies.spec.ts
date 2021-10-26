@@ -18,9 +18,9 @@ describe('SponsoredAcademies', function() {
     const player2 = TestPlayers.RED.newPlayer();
     const game = Game.newInstance('foobar', [player, player2], player);
     player.cardsInHand.push(card);
-    expect(card.canPlay(player)).is.not.true;
+    expect(player.canPlayIgnoringCost(card)).is.not.true;
     player.cardsInHand.push(card2, card3);
-    expect(card.canPlay(player)).is.true;
+    expect(player.canPlayIgnoringCost(card)).is.true;
 
     player.playCard(card);
     const discardCard = game.deferredActions.pop()!.execute() as SelectCard<IProjectCard>;

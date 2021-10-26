@@ -6,6 +6,7 @@ import {CardRenderer} from '../render/CardRenderer';
 import {Units} from '../../Units';
 import {MoonCard} from './MoonCard';
 import {CardRequirements} from '../CardRequirements';
+import {all} from '../Options';
 
 export class WaterTreatmentComplex extends MoonCard {
   constructor() {
@@ -13,8 +14,9 @@ export class WaterTreatmentComplex extends MoonCard {
       name: CardName.WATER_TREATMENT_COMPLEX,
       cardType: CardType.AUTOMATED,
       cost: 12,
-      requirements: CardRequirements.builder((b) => b.colonyTiles(1).any()),
+      requirements: CardRequirements.builder((b) => b.colonyTiles(1, {all})),
       reserveUnits: Units.of({titanium: 1}),
+      tr: {moonColony: 2},
 
       metadata: {
         description: 'Requires 1 colony tile on the Moon. Spend 1 titanium. Raise the Colony Rate 2 steps.',

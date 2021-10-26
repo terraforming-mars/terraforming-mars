@@ -6,6 +6,7 @@ import {Card} from '../Card';
 import {CardName} from '../../CardName';
 import {CardRequirements} from '../CardRequirements';
 import {CardRenderer} from '../render/CardRenderer';
+import {max} from '../Options';
 
 export class MartianSurvey extends Card implements IProjectCard {
   constructor() {
@@ -15,7 +16,7 @@ export class MartianSurvey extends Card implements IProjectCard {
       tags: [Tags.SCIENCE],
       cost: 9,
 
-      requirements: CardRequirements.builder((b) => b.oxygen(4).max()),
+      requirements: CardRequirements.builder((b) => b.oxygen(4, {max})),
       metadata: {
         cardNumber: 'P38',
         renderData: CardRenderer.builder((b) => {

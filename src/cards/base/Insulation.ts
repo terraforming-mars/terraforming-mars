@@ -6,6 +6,7 @@ import {SelectAmount} from '../../inputs/SelectAmount';
 import {Resources} from '../../Resources';
 import {CardName} from '../../CardName';
 import {CardRenderer} from '../render/CardRenderer';
+import {multiplier} from '../Options';
 
 export class Insulation extends Card implements IProjectCard {
   constructor() {
@@ -18,7 +19,7 @@ export class Insulation extends Card implements IProjectCard {
         cardNumber: '152',
         renderData: CardRenderer.builder((b) => {
           b.production((pb) => {
-            pb.text('-X').heat(1).nbsp.text('+').megacredits(0).multiplier;
+            pb.text('-X').heat(1).nbsp.text('+').megacredits(0, {multiplier});
           });
         }),
         description: 'Decrease your heat production any number of steps and increase your M€ production the same number of steps.',

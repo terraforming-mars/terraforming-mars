@@ -5,7 +5,6 @@ import {SpaceName} from '../../SpaceName';
 import {SpaceType} from '../../SpaceType';
 import {Resources} from '../../Resources';
 import {IActionCard, ICard} from '../ICard';
-import {ResourceType} from '../../ResourceType';
 import {SelectCard} from '../../inputs/SelectCard';
 import {CardName} from '../../CardName';
 import {CardRequirements} from '../CardRequirements';
@@ -25,7 +24,7 @@ export class MaxwellBase extends Card implements IActionCard {
         cardNumber: '238',
         renderData: CardRenderer.builder((b) => {
           b.action('Add 1 resource to ANOTHER VENUS CARD.', (eb) => {
-            eb.empty().startAction.wild(1).secondaryTag(Tags.VENUS);
+            eb.empty().startAction.wild(1, {secondaryTag: Tags.VENUS});
           }).br;
           b.production((pb) => pb.minus().energy(1)).nbsp.city().asterix();
         }),
@@ -38,7 +37,7 @@ export class MaxwellBase extends Card implements IActionCard {
     });
   };
   public canPlay(player: Player): boolean {
-    return player.getProduction(Resources.ENERGY) >= 1 && super.canPlay(player);
+    return player.getProduction(Resources.ENERGY) >= 1;
   }
   public play(player: Player) {
     player.addProduction(Resources.ENERGY, -1);
@@ -50,10 +49,7 @@ export class MaxwellBase extends Card implements IActionCard {
   }
 
   public getResCards(player: Player): ICard[] {
-    let resourceCards = player.getResourceCards(ResourceType.FLOATER);
-    resourceCards = resourceCards.concat(player.getResourceCards(ResourceType.MICROBE));
-    resourceCards = resourceCards.concat(player.getResourceCards(ResourceType.ANIMAL));
-    return resourceCards.filter((card) => card.tags.includes(Tags.VENUS));
+    return player.getResourceCards().filter((card) => card.tags.includes(Tags.VENUS));
   }
 
   public canAct(player: Player): boolean {

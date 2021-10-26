@@ -21,6 +21,7 @@ export class LunaMiningHub extends MoonCard {
       cost: 16,
       productionBox: Units.of({steel: 1, titanium: 1}),
       reserveUnits: Units.of({steel: 1, titanium: 1}),
+      tr: {moonMining: 1},
 
       requirements: CardRequirements.builder((b) => b.miningRate(5)),
       metadata: {

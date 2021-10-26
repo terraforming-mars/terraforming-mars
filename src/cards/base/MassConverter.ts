@@ -7,6 +7,7 @@ import {Resources} from '../../Resources';
 import {CardName} from '../../CardName';
 import {CardRequirements} from '../CardRequirements';
 import {CardRenderer} from '../render/CardRenderer';
+import {played} from '../Options';
 
 export class MassConverter extends Card implements IProjectCard {
   constructor() {
@@ -22,7 +23,7 @@ export class MassConverter extends Card implements IProjectCard {
         cardNumber: '094',
         renderData: CardRenderer.builder((b) => {
           b.effect('When you play a Space card, you pay 2 M€ less for it.', (eb) => {
-            eb.space().played.startEffect.megacredits(-2);
+            eb.space({played}).startEffect.megacredits(-2);
           }).br;
           b.production((pb) => pb.energy(6));
         }),

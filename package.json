@@ -24,7 +24,7 @@
     "mnemonist": "^0.38.1",
     "pg": "^8.2.1",
     "spectre.css": "^0.5.8",
-    "sqlite3": "^5.0.0",
+    "sqlite3": "^4.2.0",
     "typescript": "^4.1.2",
     "vti": "^0.1.3",
     "vue": "2.6.10",
@@ -68,12 +68,13 @@
   "scripts": {
     "start": "node build/src/server.js",
     "build": "npm run make:static && npm run build:server && npm run build:client",
-    "build:server": "tsc --build src/tsconfig.json",
     "build:client": "cross-env NODE_ENV=production webpack",
+    "build:server": "tsc --build src/tsconfig.json",
     "clean": "rm -r ./build/ ./src/genfiles/ || true",
-    "lint": "eslint --cache src tests --ext ts --ext vue",
+    "lint": "npm run lint:server && npm run lint:client",
+    "lint:client": "vti diagnostics",
+    "lint:server": "eslint --cache src tests --ext ts --ext vue",
     "lint:fix": "eslint --fix src tests --ext ts --ext vue",
-    "lint:sfc": "vti diagnostics",
     "make:css": "lessc src/styles/common.less build/styles.css && node src/tools/gzip.js",
     "make:json": "node make_static_json.js",
     "make:static": "npm run make:css && npm run make:json",
@@ -83,8 +84,10 @@
     "test:client": "cross-env NODE_ENV=development mochapack --require tests/components/setup.ts \"tests/components/**/*.spec.ts\"",
     "test:client:watch": "cross-env NODE_ENV=development mochapack --watch --require tests/components/setup.ts \"tests/components/**/*.spec.ts\"",
     "cover": "nyc ts-mocha -p tests/tsconfig.json -r tests/utils/setup.ts \"tests/*.spec.ts\" \"tests/!(components)/**/*.spec.ts\"",
-    "dev:client": "cross-env NODE_ENV=development webpack --watch",
-    "dev:server": "npm run make:static && cross-env NODE_ENV=development tsnd src/server.ts"
+    "//": "When the zipped versions of JS are available dev:client and dev:server do not refresh automatically",
+    "dev:prepare": "rm build/main.js.gz build/main.js.br || true",
+    "dev:client": "npm run dev:prepare && cross-env NODE_ENV=development webpack --watch",
+    "dev:server": "npm run dev:prepare && npm run make:static && cross-env NODE_ENV=development tsnd src/server.ts"
   },
   "repository": {
     "type": "git",

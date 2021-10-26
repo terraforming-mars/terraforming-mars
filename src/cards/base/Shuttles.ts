@@ -7,6 +7,7 @@ import {Resources} from '../../Resources';
 import {CardName} from '../../CardName';
 import {CardRenderer} from '../render/CardRenderer';
 import {CardRequirements} from '../CardRequirements';
+import {played} from '../Options';
 
 export class Shuttles extends Card implements IProjectCard {
   constructor() {
@@ -22,7 +23,7 @@ export class Shuttles extends Card implements IProjectCard {
         cardNumber: '166',
         renderData: CardRenderer.builder((b) => {
           b.effect('When you play a Space card, you pay 2 M€ less for it.', (eb) => {
-            eb.space().played.startEffect.megacredits(-2);
+            eb.space({played}).startEffect.megacredits(-2);
           }).br;
           b.production((pb) => {
             pb.minus().energy(1).nbsp;
@@ -38,7 +39,7 @@ export class Shuttles extends Card implements IProjectCard {
     });
   }
   public canPlay(player: Player): boolean {
-    return super.canPlay(player) && player.getProduction(Resources.ENERGY) >= 1;
+    return player.getProduction(Resources.ENERGY) >= 1;
   }
 
 

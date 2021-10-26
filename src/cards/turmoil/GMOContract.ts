@@ -9,6 +9,7 @@ import {Resources} from '../../Resources';
 import {DeferredAction} from '../../deferredActions/DeferredAction';
 import {CardRenderer} from '../render/CardRenderer';
 import {CardRequirements} from '../CardRequirements';
+import {played} from '../Options';
 
 export class GMOContract extends Card implements IProjectCard {
   constructor() {
@@ -24,7 +25,7 @@ export class GMOContract extends Card implements IProjectCard {
         cardNumber: 'T06',
         renderData: CardRenderer.builder((b) => {
           b.effect('Each time you play a plant, animal or microbe tag, including this, gain 2 M€.', (be) => {
-            be.animals(1).played.slash().plants(1).played.slash().microbes(1).played;
+            be.animals(1, {played}).slash().plants(1, {played}).slash().microbes(1, {played});
             be.startEffect.megacredits(2);
           });
         }),

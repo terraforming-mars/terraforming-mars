@@ -13,6 +13,7 @@ import {LoseProduction} from '../../deferredActions/LoseProduction';
 import {Board} from '../../boards/Board';
 import {CardRenderer} from '../render/CardRenderer';
 import {Units} from '../../Units';
+import {all} from '../Options';
 
 export class ImmigrantCity extends Card implements IProjectCard {
   constructor() {
@@ -27,7 +28,7 @@ export class ImmigrantCity extends Card implements IProjectCard {
         cardNumber: '200',
         renderData: CardRenderer.builder((b) => {
           b.effect('When a City tile is placed, including this, increase your M€ production 1 step.', (eb) => {
-            eb.city().any.startEffect.production((pb) => pb.megacredits(1));
+            eb.city({all}).startEffect.production((pb) => pb.megacredits(1));
           }).br;
           b.production((pb) => pb.minus().energy(1).megacredits(-2)).city();
         }),

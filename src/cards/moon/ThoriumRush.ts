@@ -10,6 +10,7 @@ import {PlaceMoonMineTile} from '../../moon/PlaceMoonMineTile';
 import {Card} from '../Card';
 import {AltSecondaryTag} from '../render/CardRenderItem';
 
+// TODO(kberg): Add a test for how this card operates with Reds. It will be a good verification.
 export class ThoriumRush extends Card implements IProjectCard {
   constructor() {
     super({
@@ -17,15 +18,16 @@ export class ThoriumRush extends Card implements IProjectCard {
       cardType: CardType.EVENT,
       tags: [Tags.MOON, Tags.BUILDING],
       cost: 39,
+      tr: {moonColony: 1, moonMining: 1, moonLogistics: 1},
 
       metadata: {
         description: 'Place 1 colony tile, 1 mining tile and 1 road tile on the Moon. ' +
         'Raise the Colony Rate, Mining Rate and Logistic Rate 1 step.',
         cardNumber: 'M56',
         renderData: CardRenderer.builder((b) => {
-          b.moonColony().secondaryTag(AltSecondaryTag.MOON_COLONY_RATE)
-            .moonMine().secondaryTag(AltSecondaryTag.MOON_MINING_RATE)
-            .moonRoad().secondaryTag(AltSecondaryTag.MOON_LOGISTICS_RATE);
+          b.moonColony({secondaryTag: AltSecondaryTag.MOON_COLONY_RATE})
+            .moonMine({secondaryTag: AltSecondaryTag.MOON_MINING_RATE})
+            .moonRoad({secondaryTag: AltSecondaryTag.MOON_LOGISTICS_RATE});
         }),
       },
     });

@@ -17,24 +17,24 @@ describe('BiomassCombustors', function() {
 
   it('Cannot play if oxygen requirement not met', function() {
     player2.addProduction(Resources.PLANTS, 1);
-    expect(card.canPlay(player)).is.not.true;
+    expect(player.canPlayIgnoringCost(card)).is.not.true;
   });
 
   it('Cannot play if no one has plant production', function() {
     (game as any).oxygenLevel = 6;
-    expect(card.canPlay(player)).is.not.true;
+    expect(player.canPlayIgnoringCost(card)).is.not.true;
   });
 
   it('Can play in solo mode if oxygen requirement is met', function() {
     const game = Game.newInstance('foobar', [player], player);
     (game as any).oxygenLevel = 6;
-    expect(card.canPlay(player)).is.true;
+    expect(player.canPlayIgnoringCost(card)).is.true;
   });
 
   it('Should play', function() {
     (game as any).oxygenLevel = 6;
     player2.addProduction(Resources.PLANTS, 1);
-    expect(card.canPlay(player)).is.true;
+    expect(player.canPlayIgnoringCost(card)).is.true;
 
     card.play(player);
     const input = game.deferredActions.peek()!.execute();

@@ -32,6 +32,14 @@ describe('TempestConsultancy', () => {
     expect(card.canAct(player)).is.false;
   });
 
+  it('can act, not enough delegates', () => {
+    player.tagsForTest = {moon: 5};
+    expect(card.canAct(player)).is.true;
+    turmoil.delegateReserve = [];
+    // Can still play, just ... no delegates
+    expect(card.canAct(player)).is.true;
+  });
+
   it('action, 1 delegate', () => {
     player.tagsForTest = {moon: 5};
     expect(turmoil.getDelegatesInReserve(player.id)).eq(6);
@@ -60,6 +68,24 @@ describe('TempestConsultancy', () => {
 
     expect(turmoil.getDelegatesInReserve(player.id)).eq(3);
     expect(marsFirst.getDelegates(player.id)).eq(3);
+  });
+
+  it('action, 3 delegates, only 2 available', () => {
+    player.tagsForTest = {moon: 16};
+    turmoil.delegateReserve = [player.id, player.id];
+    expect(turmoil.getDelegatesInReserve(player.id)).eq(2);
+    // This test is brittle - it assumes mars first will be orOptions[0]. But OK.
+    const marsFirst = turmoil.getPartyByName(PartyName.MARS)!;
+    expect(marsFirst.getDelegates(player.id)).eq(0);
+
+    card.action(player);
+
+    const action = player.game.deferredActions.pop() as SendDelegateToArea;
+    const options = action.execute();
+    options.cb(marsFirst.name);
+
+    expect(turmoil.getDelegatesInReserve(player.id)).eq(0);
+    expect(marsFirst.getDelegates(player.id)).eq(2);
   });
 
   it('new chairman', () => {

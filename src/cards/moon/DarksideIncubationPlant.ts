@@ -56,6 +56,10 @@ export class DarksideIncubationPlant extends MoonCard implements IActionCard, IP
     return true;
   }
 
+  private canRaiseColonyRate(player: Player) {
+    return this.resourceCount >= 2 && player.canAfford(0, {tr: {moonColony: 1}});
+  }
+
   public action(player: Player) {
     const options: Array<SelectOption> = [];
     options.push(new SelectOption('Add 1 microbe to this card', 'Select', () => {
@@ -63,7 +67,7 @@ export class DarksideIncubationPlant extends MoonCard implements IActionCard, IP
       return undefined;
     }));
     MoonExpansion.ifMoon(player.game, (moonData) => {
-      if (this.resourceCount >= 2 && moonData.colonyRate < 8) {
+      if (this.canRaiseColonyRate(player) && moonData.colonyRate < 8) {
         options.push(new SelectOption('Spend 2 microbes to raise the Colony Rate 1 step.', 'Select', () => {
           player.removeResourceFrom(this, 2);
           LogHelper.logRemoveResource(player, this, 2, 'raise the Colony Rate');

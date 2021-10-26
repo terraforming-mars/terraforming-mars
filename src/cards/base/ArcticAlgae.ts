@@ -11,6 +11,7 @@ import {Priority} from '../../deferredActions/DeferredAction';
 import {GainResources} from '../../deferredActions/GainResources';
 import {CardRequirements} from '../CardRequirements';
 import {CardRenderer} from '../render/CardRenderer';
+import {all, max} from '../Options';
 
 export class ArcticAlgae extends Card implements IProjectCard {
   constructor() {
@@ -20,12 +21,12 @@ export class ArcticAlgae extends Card implements IProjectCard {
       tags: [Tags.PLANT],
       cost: 12,
 
-      requirements: CardRequirements.builder((b) => b.temperature(-12).max()),
+      requirements: CardRequirements.builder((b) => b.temperature(-12, {max})),
       metadata: {
         description: 'It must be -12 C or colder to play. Gain 1 plant.',
         cardNumber: '023',
         renderData: CardRenderer.builder((b) => {
-          b.effect('When anyone places an ocean tile, gain 2 plants.', (be) => be.oceans(1).any.startEffect.plants(2)).br;
+          b.effect('When anyone places an ocean tile, gain 2 plants.', (be) => be.oceans(1, {all}).startEffect.plants(2)).br;
           b.plants(1);
         }),
       },

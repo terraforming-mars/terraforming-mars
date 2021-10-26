@@ -128,7 +128,7 @@ describe('PharmacyUnion', function() {
     const advancedEcosystems = new AdvancedEcosystems();
     player.playedCards.push(new Fish());
     player.playedCards.push(new Lichen());
-    expect(advancedEcosystems.canPlay(player)).is.true;
+    expect(player.canPlayIgnoringCost(advancedEcosystems)).is.true;
 
     card.resourceCount = 0;
     card.onCardPlayed(player, new SearchForLife());
@@ -137,7 +137,7 @@ describe('PharmacyUnion', function() {
     orOptions.options[0].cb();
     expect(card.isDisabled).is.true;
     expect(player.getTagCount(Tags.MICROBE)).to.eq(0);
-    expect(advancedEcosystems.canPlay(player)).is.not.true;
+    expect(player.canPlayIgnoringCost(advancedEcosystems)).is.not.true;
   });
 
   it('Edge Case - Let player pick the tag resolution order', function() {

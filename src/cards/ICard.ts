@@ -37,6 +37,19 @@ export interface CardDiscount {
   amount: number
  }
 
+// TRSource represents the ways an action will gain TR. This is used exclusively to compute
+// tax when Reds are in power.
+export interface TRSource {
+    oxygen?: number,
+    temperature?: number,
+    oceans?: number,
+    tr?: number,
+    venus?: number
+    moonColony?: number,
+    moonMining?: number,
+    moonLogistics?: number,
+  }
+
 export interface ICard extends Partial<IActionCard>, Partial<IResourceCard> {
     name: CardName;
     tags: Array<Tags>;
@@ -57,5 +70,6 @@ export interface ICard extends Partial<IActionCard>, Partial<IResourceCard> {
     warning?: string | Message;
     productionBox?: Units;
     produce?: (player: Player) => void;
+    tr?: TRSource,
 }
 

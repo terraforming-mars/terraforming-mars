@@ -9,6 +9,7 @@ import {SelectOption} from '../../inputs/SelectOption';
 import {OrOptions} from '../../inputs/OrOptions';
 import {Game} from '../../Game';
 import {IParty} from '../../turmoil/parties/IParty';
+import {all} from '../Options';
 
 export class AnOfferYouCantRefuse extends ProjectCard {
   constructor() {
@@ -21,7 +22,7 @@ export class AnOfferYouCantRefuse extends ProjectCard {
         description: 'Exchange a NON-NEUTRAL NON-LEADER delegate with one of your own from the reserve. You may then move your delegate to another party.',
         cardNumber: 'M62',
         renderData: CardRenderer.builder((b) => {
-          b.minus().delegates(1).any.asterix().nbsp.plus().delegates(1);
+          b.minus().delegates(1, {all}).asterix().nbsp.plus().delegates(1);
         }),
       },
     });

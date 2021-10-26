@@ -13,6 +13,7 @@ import {PlayerViewModel, PublicPlayerModel} from '@/models/PlayerModel';
 import {PreferencesManager} from '@/client/utils/PreferencesManager';
 import {Tags} from '@/cards/Tags';
 import {Units} from '@/Units';
+import {CardName} from '@/CardName';
 
 export default Vue.extend({
   name: 'SelectHowToPayForProjectCard',
@@ -192,7 +193,7 @@ export default Vue.extend({
     },
     canUseSteel() {
       if (this.card !== undefined && this.available.steel > 0) {
-        if (this.tags.find((tag) => tag === Tags.BUILDING) !== undefined) {
+        if (this.tags.includes(Tags.BUILDING) || this.thisPlayer.lastCardPlayed === CardName.LAST_RESORT_INGENUITY) {
           return true;
         }
       }
@@ -200,7 +201,7 @@ export default Vue.extend({
     },
     canUseTitanium() {
       if (this.card !== undefined && this.available.titanium > 0) {
-        if (this.tags.find((tag) => tag === Tags.SPACE) !== undefined) {
+        if (this.tags.includes(Tags.SPACE) || this.thisPlayer.lastCardPlayed === CardName.LAST_RESORT_INGENUITY) {
           return true;
         }
       }
@@ -209,7 +210,7 @@ export default Vue.extend({
     canUseMicrobes() {
       // FYI Microbes are limited to the Psychrophiles card, which allows spending microbes for Plant cards.
       if (this.card !== undefined && this.playerinput.microbes !== undefined && this.playerinput.microbes > 0) {
-        if (this.tags.find((tag) => tag === Tags.PLANT) !== undefined) {
+        if (this.tags.includes(Tags.PLANT)) {
           return true;
         }
       }
@@ -218,7 +219,7 @@ export default Vue.extend({
     canUseFloaters() {
       // FYI Floaters are limited to the DIRIGIBLES card.
       if (this.card !== undefined && this.playerinput.floaters !== undefined && this.playerinput.floaters > 0) {
-        if (this.tags.find((tag) => tag === Tags.VENUS) !== undefined) {
+        if (this.tags.includes(Tags.VENUS)) {
           return true;
         }
       }
@@ -227,7 +228,7 @@ export default Vue.extend({
     canUseScience() {
       // FYI Science Resources are limited to the Luna Archive card, which allows spending its science resources for Moon cards.
       if (this.card !== undefined && (this.playerinput.science ?? 0) > 0) {
-        if (this.tags.find((tag) => tag === Tags.MOON) !== undefined) {
+        if (this.tags.includes(Tags.MOON)) {
           return true;
         }
       }

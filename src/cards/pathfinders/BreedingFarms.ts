@@ -18,6 +18,7 @@ export class BreedingFarms extends Card implements IProjectCard, IActionCard {
       name: CardName.BREEDING_FARMS,
       cost: 16,
       tags: [Tags.SCIENCE, Tags.ANIMAL, Tags.BUILDING],
+      tr: {temperature: 1},
 
       requirements: CardRequirements.builder((b) => b.tag(Tags.SCIENCE).tag(Tags.ANIMAL)),
       metadata: {

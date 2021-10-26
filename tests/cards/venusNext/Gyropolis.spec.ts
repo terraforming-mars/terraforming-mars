@@ -19,7 +19,7 @@ describe('Gyropolis', function() {
 
     player.playedCards.push(card1, card2);
     player.addProduction(Resources.ENERGY, 2);
-    expect(card.canPlay(player)).is.true;
+    expect(player.canPlayIgnoringCost(card)).is.true;
     const action = card.play(player) as SelectSpace;
     expect(action).is.not.undefined;
     expect(action.cb(action.availableSpaces[0])).is.undefined;

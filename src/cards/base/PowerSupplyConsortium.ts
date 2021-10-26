@@ -8,6 +8,7 @@ import {CardName} from '../../CardName';
 import {DecreaseAnyProduction} from '../../deferredActions/DecreaseAnyProduction';
 import {CardRequirements} from '../CardRequirements';
 import {CardRenderer} from '../render/CardRenderer';
+import {all} from '../Options';
 
 export class PowerSupplyConsortium extends Card implements IProjectCard {
   constructor() {
@@ -22,7 +23,7 @@ export class PowerSupplyConsortium extends Card implements IProjectCard {
         cardNumber: '160',
         renderData: CardRenderer.builder((b) => {
           b.production((pb) => {
-            pb.minus().energy(1).any.br;
+            pb.minus().energy(1, {all}).br;
             pb.plus().energy(1);
           });
         }),

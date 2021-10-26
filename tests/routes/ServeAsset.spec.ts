@@ -88,7 +88,7 @@ describe('ServeAsset', () => {
   it('styles.css: uncached', () => {
     instance = new ServeAsset(undefined, false, fileApi);
     // Primes the cache.
-    expect(fileApi.counts).deep.eq({readFile: 0, readFileSync: 2, existsSync: 0});
+    expect(fileApi.counts).deep.eq({readFile: 0, readFileSync: 3, existsSync: 0});
 
     setRequest('/styles.css', [['accept-encoding', '']]);
     instance.get(req, res.hide(), ctx);
@@ -96,7 +96,7 @@ describe('ServeAsset', () => {
     expect(res.content).eq('data: build/styles.css');
     expect(fileApi.counts).deep.eq({
       readFile: 1, // Still read.
-      readFileSync: 2,
+      readFileSync: 3,
       existsSync: 0,
     });
   });
@@ -104,7 +104,7 @@ describe('ServeAsset', () => {
   it('styles.css.gz: cached', () => {
     instance = new ServeAsset(undefined, true, fileApi);
     // Primes the cache.
-    expect(fileApi.counts).deep.eq({readFile: 0, readFileSync: 2, existsSync: 0});
+    expect(fileApi.counts).deep.eq({readFile: 0, readFileSync: 3, existsSync: 0});
 
     setRequest('/styles.css', [['accept-encoding', 'gzip']]);
     instance.get(req, res.hide(), ctx);
@@ -112,7 +112,7 @@ describe('ServeAsset', () => {
     expect(res.content).eq('data: build/styles.css.gz');
     expect(fileApi.counts).deep.eq({
       readFile: 0, // Does not change
-      readFileSync: 2,
+      readFileSync: 3,
       existsSync: 0,
     });
   });

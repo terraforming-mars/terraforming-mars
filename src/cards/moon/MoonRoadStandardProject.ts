@@ -14,12 +14,13 @@ export class MoonRoadStandardProject extends StandardProjectCard implements IMoo
     name: CardName.MOON_ROAD_STANDARD_PROJECT,
     cost: 18,
     reserveUnits: Units.of({steel: 1}),
+    tr: {moonLogistics: 1},
 
     metadata: {
       cardNumber: '',
       renderData: CardRenderer.builder((b) =>
         b.standardProject('Spend 18 M€ and 1 steel to place a road on the moon and raise the Logistics Rate 1 step.', (eb) => {
-          eb.megacredits(18).steel(1).startAction.moonRoad().secondaryTag(AltSecondaryTag.MOON_LOGISTICS_RATE);
+          eb.megacredits(18).steel(1).startAction.moonRoad({secondaryTag: AltSecondaryTag.MOON_LOGISTICS_RATE});
         }),
       ),
     },

@@ -16,14 +16,14 @@ describe('MartianZoo', function() {
   });
 
   it('Can\'t play', function() {
-    expect(card.canPlay(player)).is.not.true;
+    expect(player.canPlayIgnoringCost(card)).is.not.true;
   });
 
   it('Should play', function() {
     const lands = player.game.board.getAvailableSpacesOnLand(player);
     player.game.addCityTile(player, lands[0].id);
     player.game.addCityTile(player, lands[1].id);
-    expect(card.canPlay(player)).is.true;
+    expect(player.canPlayIgnoringCost(card)).is.true;
 
     const action = card.play();
     expect(action).is.undefined;

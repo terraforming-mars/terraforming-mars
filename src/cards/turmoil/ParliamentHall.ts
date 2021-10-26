@@ -8,6 +8,7 @@ import {PartyName} from '../../turmoil/parties/PartyName';
 import {Resources} from '../../Resources';
 import {CardRequirements} from '../CardRequirements';
 import {CardRenderer} from '../render/CardRenderer';
+import {played} from '../Options';
 
 export class ParliamentHall extends Card implements IProjectCard {
   constructor() {
@@ -22,7 +23,7 @@ export class ParliamentHall extends Card implements IProjectCard {
         cardNumber: 'T08',
         renderData: CardRenderer.builder((b) => {
           b.production((pb) => {
-            pb.megacredits(1).slash().building(3).played;
+            pb.megacredits(1).slash().building(3, {played});
           });
         }),
         description: 'Requires that Mars First are ruling or that you have 2 delegates there. Increase your M€ production 1 step for every 3 Building tags you have, including this.',

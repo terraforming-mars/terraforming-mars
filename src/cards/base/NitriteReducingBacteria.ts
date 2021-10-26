@@ -9,9 +9,6 @@ import {ResourceType} from '../../ResourceType';
 import {SelectOption} from '../../inputs/SelectOption';
 import {CardName} from '../../CardName';
 import {LogHelper} from '../../LogHelper';
-import {PartyHooks} from '../../turmoil/parties/PartyHooks';
-import {PartyName} from '../../turmoil/parties/PartyName';
-import {REDS_RULING_POLICY_COST} from '../../constants';
 import {DeferredAction} from '../../deferredActions/DeferredAction';
 import {CardRenderer} from '../render/CardRenderer';
 
@@ -63,9 +60,8 @@ export class NitriteReducingBacteria extends Card implements IActionCard, IProje
       }
 
       const orOptions = new OrOptions();
-      const redsAreRuling = PartyHooks.shouldApplyPolicy(player, PartyName.REDS);
 
-      if (!redsAreRuling || (redsAreRuling && player.canAfford(REDS_RULING_POLICY_COST))) {
+      if (player.canAfford(0, {tr: {tr: 1}})) {
         orOptions.options.push(new SelectOption('Remove 3 microbes to increase your terraform rating 1 step', 'Remove microbes', () => {
           player.removeResourceFrom(this, 3);
           LogHelper.logRemoveResource(player, this, 3, 'gain 1 TR');

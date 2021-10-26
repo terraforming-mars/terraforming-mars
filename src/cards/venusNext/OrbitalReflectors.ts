@@ -3,9 +3,6 @@ import {CardType} from '../CardType';
 import {Player} from '../../Player';
 import {Resources} from '../../Resources';
 import {CardName} from '../../CardName';
-import {MAX_VENUS_SCALE, REDS_RULING_POLICY_COST} from '../../constants';
-import {PartyHooks} from '../../turmoil/parties/PartyHooks';
-import {PartyName} from '../../turmoil/parties/PartyName';
 import {CardRenderer} from '../render/CardRenderer';
 import {Card} from '../Card';
 
@@ -16,6 +13,7 @@ export class OrbitalReflectors extends Card {
       cardType: CardType.AUTOMATED,
       tags: [Tags.VENUS, Tags.SPACE],
       cost: 26,
+      tr: {venus: 2},
 
       metadata: {
         cardNumber: '242',
@@ -29,17 +27,6 @@ export class OrbitalReflectors extends Card {
       },
     });
   };
-
-  public canPlay(player: Player): boolean {
-    const remainingVenusSteps = (MAX_VENUS_SCALE - player.game.getVenusScaleLevel()) / 2;
-    const stepsRaised = Math.min(remainingVenusSteps, 2);
-
-    if (PartyHooks.shouldApplyPolicy(player, PartyName.REDS)) {
-      return player.canAfford(player.getCardCost(this) + REDS_RULING_POLICY_COST * stepsRaised, {titanium: true, floaters: true});
-    }
-
-    return true;
-  }
 
   public play(player: Player) {
     player.game.increaseVenusScaleLevel(player, 2);

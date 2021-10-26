@@ -10,6 +10,7 @@ import {TileType} from '../../TileType';
 import {MoonExpansion} from '../../moon/MoonExpansion';
 import {PlaceMoonColonyTile} from '../../moon/PlaceMoonColonyTile';
 import {DeferredAction} from '../../deferredActions/DeferredAction';
+import {ISpace} from '../../boards/ISpace';
 
 export class LunaEcumenopolis extends MoonCard {
   constructor() {
@@ -27,7 +28,7 @@ export class LunaEcumenopolis extends MoonCard {
         cardNumber: 'M84',
         renderData: CardRenderer.builder((b) => {
           b.minus().titanium(2).nbsp;
-          b.text('2').moonColony().secondaryTag(AltSecondaryTag.MOON_COLONY_RATE).asterix().br;
+          b.text('2').moonColony({secondaryTag: AltSecondaryTag.MOON_COLONY_RATE}).asterix().br;
           b.tr(1).slash().moonColonyRate().moonColonyRate();
         }),
       },
@@ -35,6 +36,71 @@ export class LunaEcumenopolis extends MoonCard {
       tilesBuilt: [TileType.MOON_COLONY],
     });
   };
+
+  private canAffordTRBump(player: Player) {
+    // Note for someone paying close attention:
+    //
+    // In the real world, this card can be resolved in one of two orders:
+    // 1. Raise the TR rate before raising the colony rate
+    // 2. Raise the colony rate before the TR rate.
+    // In the first case, the player will get fewer TR, but also is more likely to afford the costs.
+    // In the second case, the player will get the most TR, but will have to pay up to 3 more MC, the cost
+    // of that additional TR bump.
+    //
+    // This algorithm assumes the second case.
+    //
+    // If someone wants to optimize for this, they can change this algorithm to use the current colony rate instead
+    // of the expected colony rate, but then they must also change the order in which the player gains those bonuses
+    // in play().
+    //
+    const moonData = MoonExpansion.moonData(player.game);
+    const expectedColonyRate = Math.min(moonData.colonyRate + 2, 8);
+    const expectedTRBump = Math.floor(expectedColonyRate / 2);
+    return player.canAfford(0, {tr: {moonColony: 2, tr: expectedTRBump}});
+  }
+
+  public canPlay(player: Player) {
+    if (!super.canPlay(player)) {
+      return false;
+    }
+
+    if (!this.canAffordTRBump(player)) {
+      return false;
+    }
+
+    const moonData = MoonExpansion.moonData(player.game);
+    const spaces = moonData.moon.getAvailableSpacesOnLand(player);
+    const len = spaces.length;
+
+    let firstSpaceId: string = '';
+
+    // This function returns true when this space is next to two colonies. Don't try to understand firstSpaceId yet.
+    const nextToTwoColonies = function(space: ISpace): boolean {
+      const adjacentSpaces = moonData.moon.getAdjacentSpaces(space).filter((adjacentSpace) => {
+        return adjacentSpace.tile?.tileType === TileType.MOON_COLONY || adjacentSpace.id === firstSpaceId;
+      });
+      return adjacentSpaces.length >= 2;
+    };
+
+    // Go through every available land space.
+    for (let x = 0; x < len; x++) {
+      const first = spaces[x];
+      // If it's next to two colonies
+      if (nextToTwoColonies(first) === true) {
+        // Remember it.
+        firstSpaceId = first.id;
+        // Now go through all the land spaces again (actually as an optimization, just continue with the space after.)
+        for (let y = x + 1; y < len; y++) {
+          const second = spaces[y];
+          // Now if it's next to two colonies, it includes the first colony you placed. That's what firstSpaceId is for.
+          if (nextToTwoColonies(second) === true) {
+            return true;
+          }
+        }
+      }
+    }
+    return false;
+  }
 
   public play(player: Player) {
     // These all have the same priority: Default.

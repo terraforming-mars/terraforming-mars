@@ -18,6 +18,7 @@ export class SinusIridiumRoadNetwork extends MoonCard {
       cost: 15,
       productionBox: Units.of({energy: -1, megacredits: 3}),
       reserveUnits: Units.of({steel: 1}),
+      tr: {moonLogistics: 1},
 
       metadata: {
         description: 'Decrease your energy production 1 step and increase your M€ production 3 steps. ' +
@@ -29,7 +30,7 @@ export class SinusIridiumRoadNetwork extends MoonCard {
           b.production((pb) => {
             pb.minus().energy(1).nbsp.megacredits(3);
           }).br;
-          b.moonRoad().secondaryTag(AltSecondaryTag.MOON_LOGISTICS_RATE);
+          b.moonRoad({secondaryTag: AltSecondaryTag.MOON_LOGISTICS_RATE});
         }),
       },
     }, {

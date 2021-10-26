@@ -25,7 +25,7 @@ export class Celestic extends Card implements IActionCard, CorporationCard, IRes
         cardNumber: 'R05',
         description: 'You start with 42 M€. As your first action, reveal cards from the deck until you have revealed 2 cards with a floater icon on it. Take them into hand and discard the rest.',
         renderData: CardRenderer.builder((b) => {
-          b.megacredits(42).nbsp.cards(2).secondaryTag(AltSecondaryTag.FLOATER);
+          b.megacredits(42).nbsp.cards(2, {secondaryTag: AltSecondaryTag.FLOATER});
           b.corpBox('action', (ce) => {
             ce.action('Add a floater to ANY card. 1 VP per 3 floaters on this card.', (eb) => {
               eb.empty().startAction.floaters(1).asterix();

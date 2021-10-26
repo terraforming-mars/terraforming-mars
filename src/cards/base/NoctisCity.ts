@@ -3,11 +3,9 @@ import {Tags} from '../Tags';
 import {Card} from '../Card';
 import {CardType} from '../CardType';
 import {Player} from '../../Player';
-import {SpaceName} from '../../SpaceName';
 import {Resources} from '../../Resources';
 import {SelectSpace} from '../../inputs/SelectSpace';
 import {ISpace} from '../../boards/ISpace';
-import {BoardName} from '../../boards/BoardName';
 import {CardName} from '../../CardName';
 import {CardRenderer} from '../render/CardRenderer';
 import {Units} from '../../Units';
@@ -35,25 +33,27 @@ export class NoctisCity extends Card implements IProjectCard {
   }
 
   public canPlay(player: Player): boolean {
-    if (player.game.gameOptions.boardName === BoardName.ORIGINAL) {
-      return player.getProduction(Resources.ENERGY) >= 1;
+    if (player.getProduction(Resources.ENERGY) < 1) {
+      return false;
+    }
+    if (player.game.board.getNoctisCitySpaceIds().length > 0) {
+      return true;
     } else {
-      return player.getProduction(Resources.ENERGY) >= 1 &&
-            player.game.board.getAvailableSpacesForCity(player).length > 0; ;
+      return player.game.board.getAvailableSpacesForCity(player).length > 0; ;
     }
   }
   public play(player: Player) {
-    const noctisSpace = player.game.board.getSpace(SpaceName.NOCTIS_CITY);
     player.addProduction(Resources.ENERGY, -1);
     player.addProduction(Resources.MEGACREDITS, 3);
-    if (player.game.gameOptions.boardName === BoardName.ORIGINAL) {
-      player.game.addCityTile(player, noctisSpace.id);
+    const noctisCitySpaceIds = player.game.board.getNoctisCitySpaceIds();
+    if (noctisCitySpaceIds.length !== 0) {
+      // It doesn't have more than one space.
+      player.game.addCityTile(player, noctisCitySpaceIds[0]);
       return undefined;
-    } else {
-      return new SelectSpace('Select space for Noctis city', player.game.board.getAvailableSpacesForCity(player), (space: ISpace) => {
-        player.game.addCityTile(player, space.id);
-        return undefined;
-      });
     }
+    return new SelectSpace('Select space for Noctis city', player.game.board.getAvailableSpacesForCity(player), (space: ISpace) => {
+      player.game.addCityTile(player, space.id);
+      return undefined;
+    });
   }
 }

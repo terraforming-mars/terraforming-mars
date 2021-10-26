@@ -3,6 +3,7 @@ import {Card} from '../Card';
 import {CardType} from '../CardType';
 import {CardName} from '../../CardName';
 import {CardRequirements} from '../CardRequirements';
+import {max} from '../Options';
 
 export class DustSeals extends Card implements IProjectCard {
   constructor() {
@@ -11,7 +12,7 @@ export class DustSeals extends Card implements IProjectCard {
       name: CardName.DUST_SEALS,
       cost: 2,
 
-      requirements: CardRequirements.builder((b) => b.oceans(3).max()),
+      requirements: CardRequirements.builder((b) => b.oceans(3, {max})),
       metadata: {
         description: 'Requires 3 or less ocean tiles.',
         cardNumber: '119',

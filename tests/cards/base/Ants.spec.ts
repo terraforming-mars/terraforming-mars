@@ -23,12 +23,12 @@ describe('Ants', function() {
 
   it('Can\'t play without oxygen', function() {
     (game as any).oxygenLevel = 3;
-    expect(card.canPlay(player)).is.not.true;
+    expect(player.canPlayIgnoringCost(card)).is.not.true;
   });
 
   it('Should play', function() {
     (game as any).oxygenLevel = 4;
-    expect(card.canPlay(player)).is.true;
+    expect(player.canPlayIgnoringCost(card)).is.true;
 
     card.play();
     card.resourceCount += 5;
@@ -52,10 +52,10 @@ describe('Ants', function() {
     const selectCard = game.deferredActions.pop()!.execute() as SelectCard<ICard>;
     expect(selectCard.cards).has.lengthOf(2);
     selectCard.cb([selectCard.cards[0]]);
-        game.deferredActions.pop()!.execute(); // Add microbe to ants
+    game.deferredActions.pop()!.execute(); // Add microbe to ants
 
-        expect(card.resourceCount).to.eq(1);
-        expect(tardigrades.resourceCount).to.eq(0);
+    expect(card.resourceCount).to.eq(1);
+    expect(tardigrades.resourceCount).to.eq(0);
   });
 
   it('Respects protected habitats', function() {

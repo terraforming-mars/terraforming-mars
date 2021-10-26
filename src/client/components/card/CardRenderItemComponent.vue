@@ -2,6 +2,7 @@
   <div class="card-item-container">
     <div class="card-res-amount" v-if="item.showDigit">{{ getAmountAbs() }}</div>
     <div :class="getComponentClasses()" v-for="index in itemsToShow()" v-html="itemHtmlContent()" :key="index"/>
+    <div class="card-over" v-if="this.item.over !== undefined">over {{this.item.over}}</div>
   </div>
 </template>
 
@@ -133,6 +134,7 @@ export default Vue.extend({
         classes.push('card-delegate');
       } else if (type === CardRenderItemType.INFLUENCE) {
         classes.push('card-influence');
+        classes.push(`card-influence--size-${this.item.size}`);
       } else if (type === CardRenderItemType.NO_TAGS) {
         classes.push('card-resource-tag');
         classes.push('card-community-services');
@@ -223,6 +225,10 @@ export default Vue.extend({
           classes.push('card-tag-earth');
         } else if (type === CardRenderItemType.BUILDING) {
           classes.push('card-tag-building');
+        } else if (type === CardRenderItemType.CITY) {
+          classes.push('card-tag tag-city');
+        } else if (this.item.type === CardRenderItemType.MARS) {
+          classes.push('card-tag tag-mars');
         }
       }
 

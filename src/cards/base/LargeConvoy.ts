@@ -11,12 +11,10 @@ import {PlayerInput} from '../../PlayerInput';
 import {ResourceType} from '../../ResourceType';
 import {CardName} from '../../CardName';
 import {Resources} from '../../Resources';
-import {MAX_OCEAN_TILES, REDS_RULING_POLICY_COST} from '../../constants';
-import {PartyHooks} from '../../turmoil/parties/PartyHooks';
-import {PartyName} from '../../turmoil/parties/PartyName';
 import {PlaceOceanTile} from '../../deferredActions/PlaceOceanTile';
 import {CardRenderer} from '../render/CardRenderer';
 import {Size} from '../render/Size';
+import {digit} from '../Options';
 
 export class LargeConvoy extends Card implements IProjectCard {
   constructor() {
@@ -25,27 +23,18 @@ export class LargeConvoy extends Card implements IProjectCard {
       name: CardName.LARGE_CONVOY,
       tags: [Tags.EARTH, Tags.SPACE],
       cost: 36,
+      tr: {oceans: 1},
 
       metadata: {
         cardNumber: '143',
         renderData: CardRenderer.builder((b) => {
           b.oceans(1).cards(2).br;
-          b.plants(5).digit.or(Size.MEDIUM).animals(4).digit.asterix();
+          b.plants(5, {digit}).or(Size.MEDIUM).animals(4, {digit}).asterix();
         }),
         description: 'Place an ocean tile and draw 2 cards. Gain 5 Plants or add 4 Animals to ANOTHER card.',
         victoryPoints: 2,
       },
     });
-  }
-
-  public canPlay(player: Player): boolean {
-    const oceansMaxed = player.game.board.getOceansOnBoard() === MAX_OCEAN_TILES;
-
-    if (PartyHooks.shouldApplyPolicy(player, PartyName.REDS) && !oceansMaxed) {
-      return player.canAfford(player.getCardCost(this) + REDS_RULING_POLICY_COST, {titanium: true});
-    }
-
-    return true;
   }
 
   public play(player: Player): PlayerInput | undefined {

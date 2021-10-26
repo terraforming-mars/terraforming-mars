@@ -17,12 +17,12 @@ describe('GreatEscarpmentConsortium', function() {
   });
 
   it('Cannot play without steel production', function() {
-    expect(card.canPlay(player)).is.not.true;
+    expect(player.canPlayIgnoringCost(card)).is.not.true;
   });
 
   it('Can play if player has steel production', function() {
     player.addProduction(Resources.STEEL, 1);
-    expect(card.canPlay(player)).is.true;
+    expect(player.canPlayIgnoringCost(card)).is.true;
   });
 
   it('Should play - auto select if single target', function() {

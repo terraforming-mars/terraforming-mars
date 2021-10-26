@@ -15,7 +15,7 @@ describe('EccentricSponsor', function() {
 
   it('Gets card discount', function() {
     expect(card.getCardDiscount(player)).to.eq(0);
-    player.lastCardPlayed = card;
+    player.lastCardPlayed = card.name;
     expect(card.getCardDiscount(player)).to.eq(25);
   });
 

@@ -22,7 +22,7 @@ export class FreyjaBiodomes extends Card {
       metadata: {
         cardNumber: '227',
         renderData: CardRenderer.builder((b) => {
-          b.microbes(2).secondaryTag(Tags.VENUS).or().animals(2).secondaryTag(Tags.VENUS).br;
+          b.microbes(2, {secondaryTag: Tags.VENUS}).or().animals(2, {secondaryTag: Tags.VENUS}).br;
           b.production((pb) => pb.minus().energy(1).nbsp.plus().megacredits(2));
         }),
         description: {
@@ -34,7 +34,7 @@ export class FreyjaBiodomes extends Card {
     });
   };
   public canPlay(player: Player): boolean {
-    return player.getProduction(Resources.ENERGY) >= 1 && super.canPlay(player);
+    return player.getProduction(Resources.ENERGY) >= 1;
   }
   public getResCards(player: Player): ICard[] {
     let resourceCards = player.getResourceCards(ResourceType.ANIMAL);

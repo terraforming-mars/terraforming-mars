@@ -1203,12 +1203,12 @@ export class Game implements ISerializable<SerializedGame> {
   }
 
   public increaseTemperature(player: Player, increments: -2 | -1 | 1 | 2 | 3): undefined {
-    if (increments === -2 || increments === -1) {
-      this.temperature = Math.max(constants.MIN_TEMPERATURE, this.temperature + increments * 2);
+    if (this.temperature >= constants.MAX_TEMPERATURE) {
       return undefined;
     }
 
-    if (this.temperature >= constants.MAX_TEMPERATURE) {
+    if (increments === -2 || increments === -1) {
+      this.temperature = Math.max(constants.MIN_TEMPERATURE, this.temperature + increments * 2);
       return undefined;
     }
 
@@ -1289,7 +1289,7 @@ export class Game implements ISerializable<SerializedGame> {
     space: ISpace, tile: ITile): void {
     // Part 1, basic validation checks.
 
-    if (space.tile !== undefined && !this.gameOptions.aresExtension) {
+    if (space.tile !== undefined && !(this.gameOptions.aresExtension || this.gameOptions.pathfindersExpansion)) {
       throw new Error('Selected space is occupied');
     }
 
@@ -1499,16 +1499,6 @@ export class Game implements ISerializable<SerializedGame> {
       }
     }
     throw new Error('No player has played requested card');
-  }
-  public getCard(name: string): IProjectCard | undefined {
-    for (let i = 0; i < this.players.length; i++) {
-      for (let j = 0; j < this.players[i].playedCards.length; j++) {
-        if (this.players[i].playedCards[j].name === name) {
-          return this.players[i].playedCards[j];
-        }
-      }
-    }
-    return undefined;
   }
 
   public getCardsInHandByResource(player: Player, resourceType: ResourceType) {

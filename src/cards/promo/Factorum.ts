@@ -30,7 +30,7 @@ export class Factorum extends Card implements IActionCard, CorporationCard {
             ce.vSpace(Size.LARGE);
             ce.action('Increase your energy production 1 step IF YOU HAVE NO ENERGY RESOURCES, or spend 3M€ to draw a building card.', (eb) => {
               eb.empty().arrow().production((pb) => pb.energy(1));
-              eb.or().megacredits(3).startAction.cards(1).secondaryTag(Tags.BUILDING);
+              eb.or().megacredits(3).startAction.cards(1, {secondaryTag: Tags.BUILDING});
             });
           });
         }),

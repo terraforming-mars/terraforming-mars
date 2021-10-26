@@ -23,8 +23,23 @@ export class CityStandardProject extends StandardProjectCard {
     });
   }
 
+  protected discount(player: Player): number {
+    if (player.playedCards.find((card) => card.name === CardName.PREFABRICATION_OF_HUMAN_HABITATS)) {
+      return 2 + super.discount(player);
+    }
+    return super.discount(player);
+  }
+
+  public canPayWith(player: Player) {
+    if (player.playedCards.find((card) => card.name === CardName.PREFABRICATION_OF_HUMAN_HABITATS)) {
+      return {steel: true};
+    } else {
+      return {};
+    }
+  }
+
   public canAct(player: Player): boolean {
-    return player.canAfford(this.cost) && player.game.board.getAvailableSpacesForCity(player).length > 0;
+    return super.canAct(player) && player.game.board.getAvailableSpacesForCity(player).length > 0;
   }
 
   actionEssence(player: Player): void {

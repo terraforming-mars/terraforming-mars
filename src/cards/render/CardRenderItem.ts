@@ -21,11 +21,21 @@ export enum AltSecondaryTag {
   MOON_MINING_RATE = 'moon-mine',
   MOON_COLONY_RATE = 'moon-colony',
   MOON_LOGISTICS_RATE = 'moon-road',
+
+  // Used for Turmoil.
+  INFLUENCE = 'influence',
 }
 
 export interface ItemOptions {
   size?: Size;
   amount?: number;
+  all?: boolean;
+  digit?: true | false | 'large';
+  played?: boolean;
+  secondaryTag?: Tags | AltSecondaryTag;
+  multiplier?: boolean; /** Mark any amount to be a multiplier 'X' */
+  cancelled?: boolean;
+  over?: number; /** Used for global events. */
 }
 
 export class CardRenderItem {
@@ -45,13 +55,21 @@ export class CardRenderItem {
   public multiplier?: boolean = false;
   // add a symbol on top of the item to show it's cancelled or negated in some way (usually X)
   public cancelled?: boolean = false;
+  // over is used for rendering under TR for global events.
+  over?: number;
   // amount defaults to -1 meaning no digit is displayed but the CardRenderItem icon is shown
-  constructor(public type: CardRenderItemType, public amount: number = -1) {
-    if (Math.abs(this.amount) > 5) {
+  constructor(public type: CardRenderItemType, public amount: number = -1, options?: ItemOptions) {
+    switch (options?.digit) {
+    case true:
       this.showDigit = true;
+      break;
+    case false:
+      break; // it's undefined
+    case 'large':
+    default:
+      this.showDigit = Math.abs(this.amount) > 5 ? true : undefined;
     }
-  }
-  public withOptions(options: ItemOptions | undefined): CardRenderItem {
+
     if (options === undefined) {
       return this;
     }
@@ -59,6 +77,18 @@ export class CardRenderItem {
     if (options.amount !== undefined) {
       this.amount = options.amount;
     }
+    this.anyPlayer = options.all;
+    this.isPlayed = options.played;
+    this.secondaryTag = options.secondaryTag;
+
+    if (options.multiplier === true) {
+      this.amountInside = true;
+      this.multiplier = true;
+    }
+
+    this.cancelled = options.cancelled ?? false;
+    this.over = options.over;
+
     return this;
   }
 }

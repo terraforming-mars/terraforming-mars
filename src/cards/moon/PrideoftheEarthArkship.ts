@@ -9,6 +9,7 @@ import {CardRenderDynamicVictoryPoints} from '../render/CardRenderDynamicVictory
 import {Units} from '../../Units';
 import {MoonCard} from './MoonCard';
 import {CardRequirements} from '../CardRequirements';
+import {played} from '../Options';
 
 export class PrideoftheEarthArkship extends MoonCard implements IActionCard {
   constructor() {
@@ -26,7 +27,7 @@ export class PrideoftheEarthArkship extends MoonCard implements IActionCard {
         cardNumber: 'M24',
         renderData: CardRenderer.builder((b) => {
           b.action('Add 1 science resource here per every 5 science tags you have.', (eb) => {
-            eb.empty().startAction.science(1).slash().text('5').science().played;
+            eb.empty().startAction.science(1).slash().text('5').science(1, {played});
           }).br;
           b.minus().titanium(2);
         }),

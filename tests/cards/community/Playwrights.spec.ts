@@ -4,7 +4,7 @@ import {IndenturedWorkers} from '../../../src/cards/base/IndenturedWorkers';
 import {LocalHeatTrapping} from '../../../src/cards/base/LocalHeatTrapping';
 import {ReleaseOfInertGases} from '../../../src/cards/base/ReleaseOfInertGases';
 import {Playwrights} from '../../../src/cards/community/Playwrights';
-import {ICard} from '../../../src/cards/ICard';
+import {IProjectCard} from '../../../src/cards/IProjectCard';
 import {MartianSurvey} from '../../../src/cards/prelude/MartianSurvey';
 import {LawSuit} from '../../../src/cards/promo/LawSuit';
 import {Game} from '../../../src/Game';
@@ -44,7 +44,7 @@ describe('Playwrights', () => {
     player.megaCredits = event.cost;
     expect(card.canAct(player)).is.true;
 
-    const selectCard = card.action(player) as SelectCard<ICard>;
+    const selectCard = card.action(player) as SelectCard<IProjectCard>;
     selectCard.cb([event]);
 
     game.deferredActions.pop()!.execute(); // SelectHowToPay
@@ -64,7 +64,7 @@ describe('Playwrights', () => {
 
     player.megaCredits = event.cost;
     expect(card.canAct(player)).is.true;
-    const selectCard = card.action(player) as SelectCard<ICard>;
+    const selectCard = card.action(player) as SelectCard<IProjectCard>;
     selectCard.cb([event]);
 
     game.deferredActions.pop()!.execute(); // SelectHowToPay
@@ -89,7 +89,7 @@ describe('Playwrights', () => {
     const indenturedWorkers = new IndenturedWorkers();
     player.playedCards.push(indenturedWorkers);
 
-    const selectCard = card.action(player) as SelectCard<ICard>;
+    const selectCard = card.action(player) as SelectCard<IProjectCard>;
     selectCard.cb([indenturedWorkers]);
     // SelectHowToPay
     game.deferredActions.pop()!.execute();
@@ -109,7 +109,7 @@ describe('Playwrights', () => {
     player.removingPlayers = [player2.id];
     expect(card.canAct(player)).is.true;
 
-    const selectCard = card.action(player) as SelectCard<ICard>;
+    const selectCard = card.action(player) as SelectCard<IProjectCard>;
     selectCard.cb([event]);
 
     game.deferredActions.pop()!.execute(); // SelectHowToPay

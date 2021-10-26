@@ -10,6 +10,7 @@ import {Resources} from '../../../src/Resources';
 import {SelectHowToPayDeferred} from '../../../src/deferredActions/SelectHowToPayDeferred';
 import {PlaceMoonColonyTile} from '../../../src/moon/PlaceMoonColonyTile';
 import {MooncrateBlockFactory} from '../../../src/cards/moon/MooncrateBlockFactory';
+import {Phase} from '../../../src/Phase';
 
 const MOON_OPTIONS = TestingUtils.setCustomGameOptions({moonExpansion: true});
 
@@ -72,6 +73,21 @@ describe('MoonColonyStandardProject', () => {
 
     expect(moonData.colonyRate).eq(1);
     expect(player.getTerraformRating()).eq(15);
+  });
+
+  it('can act when Reds are in power.', () => {
+    const player = TestPlayers.BLUE.newPlayer();
+    const game = Game.newInstance('foobar', [player], player, MOON_OPTIONS);
+    const moonData = MoonExpansion.moonData(game);
+    game.phase = Phase.ACTION;
+
+
+    // Card requirements
+    player.titanium = 1;
+
+    TestingUtils.testRedsCosts(() => card.canAct(player), player, card.cost, 3);
+    moonData.colonyRate = 8;
+    TestingUtils.testRedsCosts(() => card.canAct(player), player, card.cost, 0);
   });
 });
 

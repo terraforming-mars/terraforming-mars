@@ -188,7 +188,7 @@ describe('MoonExpansion', () => {
 
     // Gives a +2/-2 on the next action
     player.playedCards = [specialDesign];
-    player.lastCardPlayed = specialDesign;
+    player.lastCardPlayed = specialDesign.name;
 
     expect(player.getPlayableCards()).does.include(card);
   });

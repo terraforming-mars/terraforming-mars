@@ -9,6 +9,7 @@ import {CardRenderer} from '../render/CardRenderer';
 import {CardRenderDynamicVictoryPoints} from '../render/CardRenderDynamicVictoryPoints';
 import {Units} from '../../Units';
 import {MoonCard} from './MoonCard';
+import {all} from '../Options';
 
 export class AncientShipyards extends MoonCard {
   constructor() {
@@ -25,7 +26,7 @@ export class AncientShipyards extends MoonCard {
         cardNumber: 'M19',
         renderData: CardRenderer.builder((b) => {
           b.action('Steal 8 M€ from any player and add a resource cube here.', (eb) => {
-            eb.empty().startAction.text('Steal').nbsp.megacredits(8).any.colon().resourceCube(1);
+            eb.empty().startAction.text('Steal').nbsp.megacredits(8, {all}).colon().resourceCube(1);
           }).br.br;
           b.minus().titanium(3);
         }),

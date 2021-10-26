@@ -4,11 +4,9 @@ import {Card} from '../Card';
 import {CardType} from '../CardType';
 import {Player} from '../../Player';
 import {CardName} from '../../CardName';
-import {MAX_TEMPERATURE, REDS_RULING_POLICY_COST} from '../../constants';
-import {PartyHooks} from '../../turmoil/parties/PartyHooks';
-import {PartyName} from '../../turmoil/parties/PartyName';
 import {RemoveAnyPlants} from '../../deferredActions/RemoveAnyPlants';
 import {CardRenderer} from '../render/CardRenderer';
+import {all} from '../Options';
 
 export class DeimosDown extends Card implements IProjectCard {
   constructor() {
@@ -17,6 +15,7 @@ export class DeimosDown extends Card implements IProjectCard {
       name: CardName.DEIMOS_DOWN,
       tags: [Tags.SPACE],
       cost: 31,
+      tr: {temperature: 3},
 
       metadata: {
         cardNumber: '039',
@@ -24,21 +23,10 @@ export class DeimosDown extends Card implements IProjectCard {
         renderData: CardRenderer.builder((b) => {
           b.temperature(3).br;
           b.steel(4).br;
-          b.minus().plants(-8).any;
+          b.minus().plants(-8, {all});
         }),
       },
     });
-  }
-
-  public canPlay(player: Player): boolean {
-    const remainingTemperatureSteps = (MAX_TEMPERATURE - player.game.getTemperature()) / 2;
-    const stepsRaised = Math.min(remainingTemperatureSteps, 3);
-
-    if (PartyHooks.shouldApplyPolicy(player, PartyName.REDS)) {
-      return player.canAfford(player.getCardCost(this) + REDS_RULING_POLICY_COST * stepsRaised, {titanium: true});
-    }
-
-    return true;
   }
 
   public play(player: Player) {

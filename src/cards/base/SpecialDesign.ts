@@ -24,7 +24,7 @@ export class SpecialDesign extends Card implements IProjectCard {
     });
   }
   public getRequirementBonus(player: Player): number {
-    if (player.lastCardPlayed !== undefined && player.lastCardPlayed.name === this.name) {
+    if (player.lastCardPlayed === this.name) {
       return 2;
     }
     return 0;

@@ -7,6 +7,7 @@ import {CardRenderer} from '../render/CardRenderer';
 import {PartyName} from '../../turmoil/parties/PartyName';
 import {CardRequirements} from '../CardRequirements';
 import {Card} from '../Card';
+import {all} from '../Options';
 
 export class WeGrowAsOne extends Card implements IProjectCard {
   constructor() {
@@ -23,7 +24,7 @@ export class WeGrowAsOne extends Card implements IProjectCard {
         'Increase each Colony Tile Track 1 step if you have a colony on that Colony Tile.',
         cardNumber: 'M59',
         renderData: CardRenderer.builder((b) => {
-          b.placeColony().any.text('+1').br;
+          b.placeColony({all}).text('+1').br;
           b.colonies(1).asterix().slash().placeColony().text('+1');
         }),
       },

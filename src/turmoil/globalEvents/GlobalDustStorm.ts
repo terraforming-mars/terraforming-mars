@@ -5,6 +5,14 @@ import {Game} from '../../Game';
 import {Resources} from '../../Resources';
 import {Tags} from '../../cards/Tags';
 import {Turmoil} from '../Turmoil';
+import {CardRenderer} from '../../cards/render/CardRenderer';
+import {Size} from '../../cards/render/Size';
+import {played} from '../../cards/Options';
+
+
+const RENDER_DATA = CardRenderer.builder((b) => {
+  b.text('lose all').heat(1).br.megacredits(-2).slash().building(1, {played}).influence({size: Size.SMALL});
+});
 
 export class GlobalDustStorm implements IGlobalEvent {
     public name = GlobalEventName.GLOBAL_DUST_STORM;
@@ -20,4 +28,5 @@ export class GlobalDustStorm implements IGlobalEvent {
         player.deductResource(Resources.MEGACREDITS, 2 * Math.max(0, maxedSteelTags - turmoil.getPlayerInfluence(player)), {log: true, from: this.name});
       });
     }
+    public renderData = RENDER_DATA;
 }

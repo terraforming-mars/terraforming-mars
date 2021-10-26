@@ -8,6 +8,7 @@ import {CardRenderer} from '../render/CardRenderer';
 import {ResourceType} from '../../ResourceType';
 import {SelectCard} from '../../inputs/SelectCard';
 import {ICard} from '../ICard';
+import {played} from '../Options';
 
 export class BactoviralResearch extends Card implements IProjectCard {
   constructor() {
@@ -20,7 +21,7 @@ export class BactoviralResearch extends Card implements IProjectCard {
         cardNumber: 'X35',
         renderData: CardRenderer.builder((b) => {
           b.cards(1).br.br; // double br is intentional for visual appeal
-          b.microbes(1).asterix().slash().science().played;
+          b.microbes(1).asterix().slash().science(1, {played});
         }),
         description: 'Draw 1 card. Choose 1 of your played cards and add 1 microbe to it for each science tag you have, including this.',
       },

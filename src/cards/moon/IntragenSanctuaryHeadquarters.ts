@@ -10,6 +10,7 @@ import {ResourceType} from '../../ResourceType';
 import {PlaceMoonColonyTile} from '../../moon/PlaceMoonColonyTile';
 import {CardRenderDynamicVictoryPoints} from '../render/CardRenderDynamicVictoryPoints';
 import {Card} from '../Card';
+import {played} from '../Options';
 
 export class IntragenSanctuaryHeadquarters extends Card implements CorporationCard {
   constructor() {
@@ -28,7 +29,7 @@ export class IntragenSanctuaryHeadquarters extends Card implements CorporationCa
         renderData: CardRenderer.builder((b) => {
           b.megacredits(38).br;
           b.effect('When any player plays an animal tag (including this), add 1 animal on this card.', (eb) => {
-            eb.animals(1).played.startEffect.animals(1);
+            eb.animals(1, {played}).startEffect.animals(1);
           }).br,
           b.text('1 VP for every 2 animals on this card.').br;
         }),

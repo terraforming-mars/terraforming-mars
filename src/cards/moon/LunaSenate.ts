@@ -8,6 +8,7 @@ import {Resources} from '../../Resources';
 import {CardRequirements} from '../CardRequirements';
 import {CardRenderDynamicVictoryPoints} from '../render/CardRenderDynamicVictoryPoints';
 import {Card} from '../Card';
+import {all} from '../Options';
 
 export class LunaSenate extends Card implements IProjectCard {
   constructor() {
@@ -22,7 +23,7 @@ export class LunaSenate extends Card implements IProjectCard {
         description: 'Requires that you have 3 Moon tags. Increase your M€ production 1 step per Moon tag in the game (including these.)',
         cardNumber: 'M70',
         renderData: CardRenderer.builder((b) => {
-          b.production((pb) => pb.megacredits(1)).slash().moon().any;
+          b.production((pb) => pb.megacredits(1)).slash().moon(1, {all});
           b.vpText('1 VP per Moon tag you have.');
         }),
         victoryPoints: CardRenderDynamicVictoryPoints.moon(1, 1),

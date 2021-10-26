@@ -7,6 +7,7 @@ import {Card} from '../Card';
 import {CardName} from '../../CardName';
 import {CardType} from '../CardType';
 import {CardRenderer} from '../render/CardRenderer';
+import {played} from '../Options';
 
 export class PointLuna extends Card implements CorporationCard {
   constructor() {
@@ -24,7 +25,7 @@ export class PointLuna extends Card implements CorporationCard {
           b.production((pb) => pb.titanium(1)).nbsp.megacredits(38);
           b.corpBox('effect', (ce) => {
             ce.effect('When you play an Earth tag, including this, draw a card.', (eb) => {
-              eb.earth().played.startEffect.cards(1);
+              eb.earth(1, {played}).startEffect.cards(1);
             });
           });
         }),

@@ -6,6 +6,7 @@ import {Resources} from '../../Resources';
 import {CardName} from '../../CardName';
 import {DecreaseAnyProduction} from '../../deferredActions/DecreaseAnyProduction';
 import {CardRenderer} from '../render/CardRenderer';
+import {all} from '../Options';
 
 export class Hackers extends Card implements IProjectCard {
   constructor() {
@@ -18,7 +19,7 @@ export class Hackers extends Card implements IProjectCard {
         cardNumber: '125',
         renderData: CardRenderer.builder((b) => {
           b.production((pb) => {
-            pb.minus().energy(1).megacredits(2).any.br;
+            pb.minus().energy(1).megacredits(2, {all}).br;
             pb.plus().megacredits(2);
           });
         }),

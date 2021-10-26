@@ -7,6 +7,7 @@ import {CardRenderer} from '../render/CardRenderer';
 import {MoonExpansion} from '../../moon/MoonExpansion';
 import {Size} from '../render/Size';
 import {Card} from '../Card';
+import {all} from '../Options';
 
 export class LunaFirstIncorporated extends Card implements CorporationCard {
   constructor() {
@@ -28,10 +29,10 @@ export class LunaFirstIncorporated extends Card implements CorporationCard {
               .startEffect.production((pb) => pb.megacredits(1));
           }).br,
           b.effect('When any player raises any Moon Rate, gain 1M€ per step.', (eb) => {
-            eb.moonColonyRate({size: Size.SMALL}).any.slash()
-              .moonMiningRate({size: Size.SMALL}).any.slash()
-              .moonLogisticsRate({size: Size.SMALL}).any.
-              startEffect.megacredits(1);
+            eb.moonColonyRate({size: Size.SMALL, all}).slash()
+              .moonMiningRate({size: Size.SMALL, all}).slash()
+              .moonLogisticsRate({size: Size.SMALL, all})
+              .startEffect.megacredits(1);
           }).br;
         }),
       },

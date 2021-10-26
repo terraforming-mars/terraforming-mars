@@ -3,9 +3,6 @@ import {Card} from '../Card';
 import {CardType} from '../CardType';
 import {Player} from '../../Player';
 import {CardName} from '../../CardName';
-import {MAX_OCEAN_TILES, REDS_RULING_POLICY_COST} from '../../constants';
-import {PartyHooks} from '../../turmoil/parties/PartyHooks';
-import {PartyName} from '../../turmoil/parties/PartyName';
 import {PlaceOceanTile} from '../../deferredActions/PlaceOceanTile';
 import {CardRequirements} from '../CardRequirements';
 import {CardRenderer} from '../render/CardRenderer';
@@ -16,7 +13,7 @@ export class LakeMarineris extends Card implements IProjectCard {
       cardType: CardType.AUTOMATED,
       name: CardName.LAKE_MARINERIS,
       cost: 18,
-
+      tr: {oceans: 2},
       requirements: CardRequirements.builder((b) => b.temperature(0)),
       metadata: {
         cardNumber: '053',
@@ -25,19 +22,6 @@ export class LakeMarineris extends Card implements IProjectCard {
         victoryPoints: 2,
       },
     });
-  }
-  public canPlay(player: Player): boolean {
-    if (!super.canPlay(player)) {
-      return false;
-    }
-    const remainingOceans = MAX_OCEAN_TILES - player.game.board.getOceansOnBoard();
-    const oceansPlaced = Math.min(remainingOceans, 2);
-
-    if (PartyHooks.shouldApplyPolicy(player, PartyName.REDS)) {
-      return player.canAfford(player.getCardCost(this) + REDS_RULING_POLICY_COST * oceansPlaced);
-    }
-
-    return true;
   }
 
   public play(player: Player) {

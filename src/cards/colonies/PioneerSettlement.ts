@@ -9,6 +9,7 @@ import {BuildColony} from '../../deferredActions/BuildColony';
 import {CardRenderer} from '../render/CardRenderer';
 import {CardRequirements} from '../CardRequirements';
 import {Card} from '../Card';
+import {max} from '../Options';
 
 export class PioneerSettlement extends Card implements IProjectCard {
   constructor() {
@@ -18,7 +19,7 @@ export class PioneerSettlement extends Card implements IProjectCard {
       name: CardName.PIONEER_SETTLEMENT,
       cardType: CardType.AUTOMATED,
 
-      requirements: CardRequirements.builder((b) => b.colonies(1).max()),
+      requirements: CardRequirements.builder((b) => b.colonies(1, {max})),
       metadata: {
         cardNumber: 'C29',
         renderData: CardRenderer.builder((b) => {

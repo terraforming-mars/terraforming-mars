@@ -14,7 +14,7 @@ export class VenusFirst extends PreludeCard implements IProjectCard {
         cardNumber: 'Y07',
         renderData: CardRenderer.builder((b) => {
           b.venus(2).br.br;
-          b.cards(2).secondaryTag(Tags.VENUS);
+          b.cards(2, {secondaryTag: Tags.VENUS});
         }),
         description: 'Raise Venus 2 steps. Draw 2 Venus cards from the deck.',
       },

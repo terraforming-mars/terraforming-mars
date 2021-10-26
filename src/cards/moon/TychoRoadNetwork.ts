@@ -18,6 +18,7 @@ export class TychoRoadNetwork extends MoonCard {
       cost: 15,
       productionBox: Units.of({megacredits: 1}),
       reserveUnits: Units.of({steel: 1}),
+      tr: {moonLogistics: 1},
 
       metadata: {
         description: 'Spend 1 steel. Increase your M€ production 1 step. ' +
@@ -26,7 +27,7 @@ export class TychoRoadNetwork extends MoonCard {
         renderData: CardRenderer.builder((b) => {
           b.minus().steel(1).br;
           b.production((eb) => eb.megacredits(1)).br;
-          b.moonRoad().secondaryTag(AltSecondaryTag.MOON_LOGISTICS_RATE);
+          b.moonRoad({secondaryTag: AltSecondaryTag.MOON_LOGISTICS_RATE});
         }),
       },
     }, {

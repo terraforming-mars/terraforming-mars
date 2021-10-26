@@ -656,7 +656,7 @@ describe('Game', () => {
     expect(deserialized.gameOptions.altVenusBoard).is.false;
   });
 
-  it('deserializing a game without pathfinders has a default value', () => {
+  it('deserializing a game without pathfinders still loads', () => {
     const player = TestPlayers.BLUE.newPlayer();
     const game = Game.newInstance('foobar', [player], player, TestingUtils.setCustomGameOptions({pathfindersExpansion: false}));
     const serialized = game.serialize();

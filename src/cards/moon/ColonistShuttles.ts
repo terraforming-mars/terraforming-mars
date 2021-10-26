@@ -9,6 +9,7 @@ import {Units} from '../../Units';
 import {MoonCard} from './MoonCard';
 import {Size} from '../render/Size';
 import {Resources} from '../../Resources';
+import {all} from '../Options';
 
 export class ColonistShuttles extends MoonCard {
   constructor() {
@@ -18,13 +19,14 @@ export class ColonistShuttles extends MoonCard {
       tags: [Tags.SPACE],
       cost: 12,
       reserveUnits: Units.of({titanium: 1}),
+      tr: {moonColony: 1},
 
       metadata: {
         description: 'Spend 1 titanium. Raise the Colony Rate 1 step. Gain 2M€ for each colony tile on the Moon.',
         cardNumber: 'M16',
         renderData: CardRenderer.builder((b) => {
           b.minus().titanium(1).moonColonyRate().br;
-          b.megacredits(2).slash().moonColony({size: Size.SMALL}).any;
+          b.megacredits(2).slash().moonColony({size: Size.SMALL, all});
         }),
       },
     }, {

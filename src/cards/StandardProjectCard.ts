@@ -1,6 +1,6 @@
 import {CardType} from './CardType';
 import {Player} from '../Player';
-import {IActionCard, ICard} from './ICard';
+import {IActionCard, ICard, TRSource} from './ICard';
 import {OrOptions} from '../inputs/OrOptions';
 import {SelectAmount} from '../inputs/SelectAmount';
 import {SelectHowToPay} from '../inputs/SelectHowToPay';
@@ -22,6 +22,7 @@ interface StaticStandardProjectCardProperties {
   cost: number,
   metadata: ICardMetadata,
   reserveUnits?: Units,
+  tr?: TRSource,
 }
 
 export abstract class StandardProjectCard extends Card implements IActionCard, ICard {
@@ -55,7 +56,17 @@ export abstract class StandardProjectCard extends Card implements IActionCard, I
   }
 
   public canAct(player: Player): boolean {
-    return player.canAfford(this.cost - this.discount(player), {reserveUnits: MoonExpansion.adjustedReserveCosts(player, this)});
+    const canPayWith = this.canPayWith(player);
+    return player.canAfford(
+      this.cost - this.discount(player), {
+        ...canPayWith,
+        tr: this.tr,
+        reserveUnits: MoonExpansion.adjustedReserveCosts(player, this),
+      });
+  }
+
+  public canPayWith(_player: Player): {steel?: boolean, titanium?: boolean, tr?: TRSource} {
+    return {};
   }
 
   protected projectPlayed(player: Player) {
@@ -68,10 +79,13 @@ export abstract class StandardProjectCard extends Card implements IActionCard, I
   };
 
   public action(player: Player): OrOptions | SelectOption | AndOptions | SelectAmount | SelectCard<ICard> | SelectCard<IProjectCard> | SelectHowToPay | SelectPlayer | SelectSpace | undefined {
+    const canPayWith = this.canPayWith(player);
     player.game.defer(new SelectHowToPayDeferred(
       player,
       this.cost - this.discount(player),
       {
+        canUseSteel: canPayWith.steel,
+        canUseTitanium: canPayWith.titanium,
         title: `Select how to pay for ${this.suffixFreeCardName(this.name)} standard project`,
         afterPay: () => {
           this.projectPlayed(player);

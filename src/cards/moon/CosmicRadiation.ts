@@ -9,6 +9,7 @@ import {CardRenderer} from '../render/CardRenderer';
 import {CardRequirements} from '../CardRequirements';
 import {Card} from '../Card';
 import {Size} from '../render/Size';
+import {all} from '../Options';
 
 export class CosmicRadiation extends Card implements IProjectCard {
   constructor() {
@@ -23,7 +24,7 @@ export class CosmicRadiation extends Card implements IProjectCard {
         description: 'Requires 4 Mining Rate. All players pay 4M€ for each mining tile they own.',
         cardNumber: 'M52',
         renderData: CardRenderer.builder((b) => {
-          b.minus().megacredits(4).any.slash().moonMine({size: Size.SMALL}).any;
+          b.minus().megacredits(4, {all}).slash().moonMine({size: Size.SMALL, all});
         }),
       },
     });

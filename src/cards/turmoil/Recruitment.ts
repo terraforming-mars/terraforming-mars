@@ -6,6 +6,7 @@ import {Player} from '../../Player';
 import {SendDelegateToArea} from '../../deferredActions/SendDelegateToArea';
 import {CardRenderer} from '../render/CardRenderer';
 import {Turmoil} from '../../turmoil/Turmoil';
+import {all} from '../Options';
 
 export class Recruitment extends Card implements IProjectCard {
   constructor() {
@@ -17,7 +18,7 @@ export class Recruitment extends Card implements IProjectCard {
       metadata: {
         cardNumber: 'T11',
         renderData: CardRenderer.builder((b) => {
-          b.minus().delegates(1).any.asterix().nbsp.plus().delegates(1);
+          b.minus().delegates(1, {all}).asterix().nbsp.plus().delegates(1);
         }),
         description: 'Exchange one NEUTRAL NON-LEADER delegate with one of your own from the reserve.',
       },

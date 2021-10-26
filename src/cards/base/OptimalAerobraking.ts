@@ -5,6 +5,7 @@ import {CardType} from '../CardType';
 import {Player} from '../../Player';
 import {CardName} from '../../CardName';
 import {CardRenderer} from '../render/CardRenderer';
+import {played} from '../Options';
 
 export class OptimalAerobraking extends Card implements IProjectCard {
   constructor() {
@@ -17,7 +18,7 @@ export class OptimalAerobraking extends Card implements IProjectCard {
       metadata: {
         cardNumber: '031',
         renderData: CardRenderer.builder((b) => b.effect('When you play a Space Event, you gain 3 M€ and 3 heat.', (be) => {
-          be.space().played.event().played.startEffect.megacredits(3).heat(3);
+          be.space({played}).event({played}).startEffect.megacredits(3).heat(3);
         })),
       },
     });

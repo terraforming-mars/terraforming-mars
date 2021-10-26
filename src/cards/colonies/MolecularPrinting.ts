@@ -7,6 +7,7 @@ import {CardRenderer} from '../render/CardRenderer';
 import {Card} from '../Card';
 import {Size} from '../render/Size';
 import {Resources} from '../../Resources';
+import {all} from '../Options';
 
 export class MolecularPrinting extends Card implements IProjectCard {
   constructor() {
@@ -19,8 +20,8 @@ export class MolecularPrinting extends Card implements IProjectCard {
       metadata: {
         cardNumber: 'C27',
         renderData: CardRenderer.builder((b) => {
-          b.megacredits(1).slash().city(Size.SMALL).any.br;
-          b.megacredits(1).slash().colonies(1, Size.SMALL).any;
+          b.megacredits(1).slash().city({size: Size.SMALL, all}).br;
+          b.megacredits(1).slash().colonies(1, {size: Size.SMALL, all});
         }),
         description: 'Gain 1 M€ for each city tile in play. Gain 1 M€ for each colony in play.',
         victoryPoints: 1,

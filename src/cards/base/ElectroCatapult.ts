@@ -11,6 +11,7 @@ import {CardName} from '../../CardName';
 import {CardRequirements} from '../CardRequirements';
 import {CardRenderer} from '../render/CardRenderer';
 import {Units} from '../../Units';
+import {max} from '../Options';
 
 export class ElectroCatapult extends Card implements IActionCard, IProjectCard {
   constructor() {
@@ -21,7 +22,7 @@ export class ElectroCatapult extends Card implements IActionCard, IProjectCard {
       cost: 17,
       productionBox: Units.of({energy: -1}),
 
-      requirements: CardRequirements.builder((b) => b.oxygen(8).max()),
+      requirements: CardRequirements.builder((b) => b.oxygen(8, {max})),
       metadata: {
         cardNumber: '069',
         description: {
@@ -39,7 +40,7 @@ export class ElectroCatapult extends Card implements IActionCard, IProjectCard {
     });
   }
   public canPlay(player: Player): boolean {
-    return player.getProduction(Resources.ENERGY) >= 1 && super.canPlay(player);
+    return player.getProduction(Resources.ENERGY) >= 1;
   }
   public canAct(player: Player): boolean {
     return player.plants > 0 || player.steel > 0;

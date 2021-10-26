@@ -8,6 +8,7 @@ import {CardRenderer} from '../render/CardRenderer';
 import {Size} from '../render/Size';
 import {Card} from '../Card';
 import {Resources} from '../../Resources';
+import {all} from '../Options';
 
 export class HeavyDutyRovers extends Card implements IProjectCard {
   constructor() {
@@ -15,12 +16,14 @@ export class HeavyDutyRovers extends Card implements IProjectCard {
       cardType: CardType.AUTOMATED,
       name: CardName.HEAVY_DUTY_ROVERS,
       cost: 12,
+      tr: {moonLogistics: 1},
 
       metadata: {
         description: 'Gain 4 M€ for each mining tile adjacent to a road tile. Raise the Logistic Rate 1 step.',
         cardNumber: 'M39',
         renderData: CardRenderer.builder((b) => {
-          b.megacredits(4).slash().moonRoad({size: Size.SMALL}).any.moonMine({size: Size.SMALL}).any;
+          b.megacredits(4).slash().moonRoad({size: Size.SMALL, all})
+            .moonMine({size: Size.SMALL, all});
           b.br;
           b.moonLogisticsRate({size: Size.SMALL});
         }),

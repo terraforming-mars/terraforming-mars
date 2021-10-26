@@ -6,9 +6,6 @@ import {Player} from '../../Player';
 import {SelectSpace} from '../../inputs/SelectSpace';
 import {ISpace} from '../../boards/ISpace';
 import {CardName} from '../../CardName';
-import {MAX_OXYGEN_LEVEL, REDS_RULING_POLICY_COST} from '../../constants';
-import {PartyHooks} from '../../turmoil/parties/PartyHooks';
-import {PartyName} from '../../turmoil/parties/PartyName';
 import {CardRequirements} from '../CardRequirements';
 import {CardRenderer} from '../render/CardRenderer';
 
@@ -19,6 +16,7 @@ export class Plantation extends Card implements IProjectCard {
       name: CardName.PLANTATION,
       tags: [Tags.PLANT],
       cost: 15,
+      tr: {oxygen: 1},
 
       requirements: CardRequirements.builder((b) => b.tag(Tags.SCIENCE, 2)),
       metadata: {
@@ -32,19 +30,9 @@ export class Plantation extends Card implements IProjectCard {
   }
 
   public canPlay(player: Player): boolean {
-    if (!super.canPlay(player)) {
-      return false;
-    }
     if (player.game.board.getAvailableSpacesOnLand(player).length === 0) {
       return false;
     }
-
-    const oxygenMaxed = player.game.getOxygenLevel() === MAX_OXYGEN_LEVEL;
-
-    if (PartyHooks.shouldApplyPolicy(player, PartyName.REDS) && !oxygenMaxed) {
-      return player.canAfford(player.getCardCost(this) + REDS_RULING_POLICY_COST, {microbes: true});
-    }
-
     return true;
   }
 

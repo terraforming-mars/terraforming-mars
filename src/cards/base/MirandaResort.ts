@@ -6,6 +6,7 @@ import {Player} from '../../Player';
 import {Resources} from '../../Resources';
 import {CardName} from '../../CardName';
 import {CardRenderer} from '../render/CardRenderer';
+import {played} from '../Options';
 
 export class MirandaResort extends Card implements IProjectCard {
   constructor() {
@@ -19,7 +20,7 @@ export class MirandaResort extends Card implements IProjectCard {
         cardNumber: '051',
         renderData: CardRenderer.builder((b) => {
           b.production((pb) => {
-            pb.megacredits(1).slash().earth().played;
+            pb.megacredits(1).slash().earth(1, {played});
           });
         }),
         description: 'Increase your M€ production 1 step for each Earth tag you have.',

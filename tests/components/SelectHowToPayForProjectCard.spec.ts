@@ -310,6 +310,24 @@ describe('SelectHowToPayForProjectCard', () => {
     tester.expectValue('science', 8);
   });
 
+  it('select how to pay allows with Last Restort Ingenuity', async () => {
+    // Earth Office costs 1, but has no building tag or space tag.
+    const wrapper = setupCardForPurchase(
+      CardName.EARTH_OFFICE, 0, {
+        megaCredits: 0,
+        steel: 4,
+        titanium: 4,
+        lastCardPlayed: CardName.LAST_RESORT_INGENUITY,
+      },
+      {canUseSteel: false, canUseTitanium: false});
+
+    const tester = new PaymentTester(wrapper);
+    await tester.nextTick();
+
+    tester.expectIsAvailable('steel', true);
+    tester.expectIsAvailable('titanium', true);
+  });
+
   const setupCardForPurchase = function(
     cardName: CardName,
     cardCost: number,

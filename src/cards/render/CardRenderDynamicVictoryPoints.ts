@@ -76,6 +76,12 @@ export class CardRenderDynamicVictoryPoints {
   public static camps(points: number, target: number): CardRenderDynamicVictoryPoints {
     return new CardRenderDynamicVictoryPoints(new CardRenderItem(CardRenderItemType.CAMPS), points, target);
   }
+  public static venusianHabitats(points: number, target: number) {
+    return new CardRenderDynamicVictoryPoints(new CardRenderItem(CardRenderItemType.VENUSIAN_HABITAT), points, target);
+  }
+  public static specializedRobots(points: number, target: number) {
+    return new CardRenderDynamicVictoryPoints(new CardRenderItem(CardRenderItemType.SPECIALIZED_ROBOT), points, target);
+  }
   public static colonies(points: number, target: number, any: boolean = false): CardRenderDynamicVictoryPoints {
     const item = new CardRenderItem(CardRenderItemType.COLONIES);
     item.size = Size.SMALL;
@@ -113,6 +119,12 @@ export class CardRenderDynamicVictoryPoints {
     item.size = Size.SMALL;
     item.anyPlayer = any;
     return new CardRenderDynamicVictoryPoints(item, points, 1);
+  }
+  public static venus(points: number, target: number): CardRenderDynamicVictoryPoints {
+    const item = new CardRenderItem(CardRenderItemType.VENUS);
+    item.isPlayed = true;
+    item.size = Size.SMALL;
+    return new CardRenderDynamicVictoryPoints(item, points, target);
   }
   public static questionmark(): CardRenderDynamicVictoryPoints {
     return new CardRenderDynamicVictoryPoints(undefined, 0, 0);

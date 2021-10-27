@@ -15,6 +15,7 @@ export class Cyanobacteria extends Card implements IProjectCard {
       name: CardName.CYANOBACTERIA,
       cost: 12,
       tags: [Tags.MICROBE, Tags.MARS],
+      tr: {oxygen: 1},
 
       metadata: {
         cardNumber: 'Pf27',

@@ -4,6 +4,12 @@ import {PartyName} from '../parties/PartyName';
 import {Game} from '../../Game';
 import {Resources} from '../../Resources';
 import {Turmoil} from '../Turmoil';
+import {CardRenderer} from '../../cards/render/CardRenderer';
+import {Size} from '../../cards/render/Size';
+
+const RENDER_DATA = CardRenderer.builder((b) => {
+  b.megacredits(1).slash().cards(1).influence({size: Size.SMALL});
+});
 
 export class ScientificCommunity implements IGlobalEvent {
     public name = GlobalEventName.SCIENTIFIC_COMMUNITY;
@@ -16,4 +22,5 @@ export class ScientificCommunity implements IGlobalEvent {
         player.addResource(Resources.MEGACREDITS, amount, {log: true, from: this.name});
       });
     }
+    public renderData = RENDER_DATA;
 }

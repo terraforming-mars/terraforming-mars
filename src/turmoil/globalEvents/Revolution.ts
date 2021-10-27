@@ -5,6 +5,15 @@ import {Game} from '../../Game';
 import {Turmoil} from '../Turmoil';
 import {Tags} from '../../cards/Tags';
 import {Player} from '../../Player';
+import {CardRenderer} from '../../cards/render/CardRenderer';
+import {played} from '../../cards/Options';
+import {Size} from '../../cards/render/Size';
+
+const RENDER_DATA = CardRenderer.builder((b) => {
+  b.earth(1, {played}).plus().influence().colon().br;
+  b.text('1st: ').minus().tr(2, {size: Size.SMALL}).nbsp;
+  b.text('2nd: ').minus().tr(1, {size: Size.SMALL});
+});
 
 export class Revolution implements IGlobalEvent {
     public name = GlobalEventName.REVOLUTION;
@@ -59,4 +68,5 @@ export class Revolution implements IGlobalEvent {
     public getScore(player: Player, turmoil: Turmoil) {
       return player.getTagCount(Tags.EARTH, false, false) + turmoil.getPlayerInfluence(player);
     }
+    public renderData = RENDER_DATA;
 }

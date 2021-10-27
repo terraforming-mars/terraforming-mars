@@ -253,8 +253,8 @@ class Builder {
     return this._appendToRow(new CardRenderItem(CardRenderItemType.PLACE_COLONY, -1, options));
   }
 
-  public influence(amount: number): Builder {
-    return this._appendToRow(new CardRenderItem(CardRenderItemType.INFLUENCE, amount));
+  public influence(options?: ItemOptions): Builder {
+    return this._appendToRow(new CardRenderItem(CardRenderItemType.INFLUENCE, 1, options));
   }
 
   public city(options?: ItemOptions) {

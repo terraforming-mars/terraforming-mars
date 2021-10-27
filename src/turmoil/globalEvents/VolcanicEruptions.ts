@@ -4,6 +4,11 @@ import {PartyName} from '../parties/PartyName';
 import {Game} from '../../Game';
 import {Resources} from '../../Resources';
 import {Turmoil} from '../Turmoil';
+import {CardRenderer} from '../../cards/render/CardRenderer';
+
+const RENDER_DATA = CardRenderer.builder((b) => {
+  b.temperature(2).nbsp.production((pb)=>pb.heat(1)).slash().influence();
+});
 
 export class VolcanicEruptions implements IGlobalEvent {
     public name = GlobalEventName.VOLCANIC_ERUPTIONS;
@@ -19,4 +24,5 @@ export class VolcanicEruptions implements IGlobalEvent {
         }
       });
     }
+    public renderData = RENDER_DATA;
 }

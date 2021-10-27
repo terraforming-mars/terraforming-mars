@@ -6,6 +6,11 @@ import {Turmoil} from '../Turmoil';
 import {RemoveOceanTile} from '../../deferredActions/RemoveOceanTile';
 import {SelectResourcesDeferred} from '../../deferredActions/SelectResourcesDeferred';
 import {MAX_OCEAN_TILES} from '../../constants';
+import {CardRenderer} from '../../cards/render/CardRenderer';
+
+const RENDER_DATA = CardRenderer.builder((b) => {
+  b.minus().oceans(1).br.wild(1).slash().influence();
+});
 
 export class DryDeserts implements IGlobalEvent {
     public name = GlobalEventName.DRY_DESERTS;
@@ -31,4 +36,5 @@ export class DryDeserts implements IGlobalEvent {
         }
       });
     }
+    public renderData = RENDER_DATA;
 }

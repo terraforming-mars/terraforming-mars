@@ -2102,9 +2102,16 @@ export class Player implements ISerializable<SerializedPlayer> {
       );
     }
 
-    if (this.canAfford(this.game.getAwardFundingCost()) && !this.game.allAwardsFunded()) {
+    const fundingCost = this.game.getAwardFundingCost();
+    if (this.canAfford(fundingCost) && !this.game.allAwardsFunded()) {
       const remainingAwards = new OrOptions();
-      remainingAwards.title = 'Fund an award';
+      remainingAwards.title = {
+        data: [{
+          type: LogMessageDataType.RAW_STRING,
+          value: String(fundingCost),
+        }],
+        message: 'Fund an award (${0} M€)',
+      };
       remainingAwards.buttonLabel = 'Confirm';
       remainingAwards.options = this.game.awards
         .filter((award: IAward) => this.game.hasBeenFunded(award) === false)

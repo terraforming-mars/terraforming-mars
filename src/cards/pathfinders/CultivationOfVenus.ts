@@ -24,7 +24,7 @@ export class CultivationOfVenus extends Card implements IProjectCard {
           }).br;
         }),
         victoryPoints: CardRenderDynamicVictoryPoints.venus(1, 2),
-        description: '1 VP for evry 2 Venus tags you own.',
+        description: '1 VP for every 2 Venus tags you own.',
       },
     });
   }

@@ -6,7 +6,7 @@ import {GameModule} from '../../GameModule';
 import {AgroDrones} from './AgroDrones';
 // import {Anthozoa} from './Anthozoa';
 // import {AntidesertificationTechniques} from './AntidesertificationTechniques';
-// import {AsteroidResources} from './AsteroidResources';
+import {AsteroidResources} from './AsteroidResources';
 import {BreedingFarms} from './BreedingFarms';
 // import {CassiniStation} from './CassiniStation';
 import {CeresSpaceport} from './CeresSpaceport';
@@ -15,7 +15,7 @@ import {CeresSpaceport} from './CeresSpaceport';
 // import {ControlledBloom} from './ControlledBloom';
 // import {CrewTraining} from './CrewTraining';
 // import {Cryptocurrency} from './Cryptocurrency';
-// import {CultivationofVenus} from './CultivationofVenus';
+import {CultivationOfVenus} from './CultivationOfVenus';
 import {Cyanobacteria} from './Cyanobacteria';
 import {DataLeak} from './DataLeak';
 import {DeclarationOfIndependence} from './DeclarationOfIndependence';
@@ -33,14 +33,14 @@ import {FlatMarsTheory} from './FlatMarsTheory';
 // import {HighTempSuperconductors} from './HighTempSuperconductors';
 // import {HydrogenBombardment} from './HydrogenBombardment';
 import {HydrogenProcessingPlant} from './HydrogenProcessingPlant';
-// import {InterplanetaryTransport} from './InterplanetaryTransport';
+import {InterplanetaryTransport} from './InterplanetaryTransport';
 // import {Kickstarter} from './Kickstarter';
 import {LastResortIngenuity} from './LastResortIngenuity';
 // import {LobbyHalls} from './LobbyHalls';
 import {LunarEmbassy} from './LunarEmbassy';
 import {LuxuryEstate} from './LuxuryEstate';
 import {MartianCulture} from './MartianCulture';
-// import {MartianDustProcessingPlant} from './MartianDustProcessingPlant';
+import {MartianDustProcessingPlant} from './MartianDustProcessingPlant';
 import {MartianMonuments} from './MartianMonuments';
 // import {MartianNatureWonders} from './MartianNatureWonders';
 import {MartianRepository} from './MartianRepository';
@@ -117,12 +117,12 @@ export const PATHFINDERS_CARD_MANIFEST = new CardManifest({
     {cardName: CardName.SMALL_COMET, Factory: SmallComet},
     {cardName: CardName.ECONOMIC_ESPIONAGE, Factory: EconomicEspionage},
     {cardName: CardName.FLAT_MARS_THEORY, Factory: FlatMarsTheory},
-    // {cardName: CardName.ASTEROID_RESOURCES, Factory: AsteroidResources},
+    {cardName: CardName.ASTEROID_RESOURCES, Factory: AsteroidResources},
     // {cardName: CardName.KICKSTARTER, Factory: Kickstarter},
     // {cardName: CardName.ECONOMIC_HELP, Factory: EconomicHelp},
-    // {cardName: CardName.INTERPLANETARY_TRANSPORT, Factory: InterplanetaryTransport},
-    // {cardName: CardName.MARTIAN_DUST_PROCESSING_PLANT, Factory: MartianDustProcessingPlant},
-    // {cardName: CardName.CULTIVATION_OF_VENUS, Factory: CultivationofVenus, compatibility: GameModule.Venus},
+    {cardName: CardName.INTERPLANETARY_TRANSPORT, Factory: InterplanetaryTransport},
+    {cardName: CardName.MARTIAN_DUST_PROCESSING_PLANT, Factory: MartianDustProcessingPlant},
+    {cardName: CardName.CULTIVATION_OF_VENUS, Factory: CultivationOfVenus, compatibility: GameModule.Venus},
     // {cardName: CardName.EXPEDITION_TO_THE_SURFACE_VENUS, Factory: ExpeditiontotheSurfaceVenus, compatibility: GameModule.Venus},
     {cardName: CardName.LAST_RESORT_INGENUITY, Factory: LastResortIngenuity},
     // // {cardName: CardName.CRASHLANDING, Factory: Crashlanding},                             // COMPLICATED ADJACENCY BONUS RULES

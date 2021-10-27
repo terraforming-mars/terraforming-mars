@@ -17,6 +17,7 @@ export class InterplanetaryTransport extends Card implements IProjectCard {
       name: CardName.INTERPLANETARY_TRANSPORT,
       cost: 15,
       tags: [Tags.EARTH, Tags.JOVIAN, Tags.SPACE],
+      victoryPoints: 1,
 
       metadata: {
         cardNumber: 'Pf43',
@@ -24,7 +25,6 @@ export class InterplanetaryTransport extends Card implements IProjectCard {
           b.production((pb) => pb.megacredits(1)).slash().city({all, secondaryTag: Tags.SPACE}).asterix;
         }),
         description: 'Increase your MC production 1 step for every offworld city tile.',
-        victoryPoints: 1,
       },
     });
   }

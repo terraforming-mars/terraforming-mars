@@ -27,7 +27,7 @@ export interface StaticCardProperties {
   cardDiscount?: CardDiscount;
   reserveUnits?: Units,
   tr?: TRSource,
-  victoryPoints?: number | VictoryPoints,
+  victoryPoints?: number | 'special' | VictoryPoints,
 }
 
 function inferVictoryPoints(properties: StaticCardProperties) {
@@ -35,9 +35,18 @@ function inferVictoryPoints(properties: StaticCardProperties) {
   if (vps === undefined) {
     return;
   }
-  if (properties.metadata.victoryPoints !== undefined) {
-    throw new Error('card.victoryPoints and metadata.victoryPoints cannot be on the same card');
+
+  if (vps === 'special') {
+    if (properties.metadata.victoryPoints === undefined) {
+      throw new Error('When card.victoryPoints is \'special\', metadata.vp and getVictoryPoints must be supplied');
+    }
+    return;
+  } else {
+    if (properties.metadata.victoryPoints !== undefined) {
+      throw new Error('card.victoryPoints and metadata.victoryPoints cannot be on the same card');
+    }
   }
+
   if (typeof(vps) === 'number') {
     properties.metadata.victoryPoints = vps;
     return;
@@ -47,6 +56,9 @@ function inferVictoryPoints(properties: StaticCardProperties) {
       throw new Error('When defining a card-resource based VP, resourceType must be defined.');
     }
     properties.metadata.victoryPoints = CardRenderDynamicVictoryPoints.resource(properties.resourceType, vps.points, vps.per);
+    return;
+  } else {
+    properties.metadata.victoryPoints = CardRenderDynamicVictoryPoints.tag(vps.type, vps.points, vps.per);
   }
 }
 export const staticCardProperties = new Map<CardName, StaticCardProperties>();
@@ -118,7 +130,7 @@ export abstract class Card {
   public get tr(): TRSource {
     return this.properties.tr || {};
   }
-  public get victoryPoints(): number | VictoryPoints | undefined {
+  public get victoryPoints(): number | 'special' | VictoryPoints | undefined {
     return this.properties.victoryPoints;
   }
   public canPlay(_player: Player) {
@@ -128,6 +140,9 @@ export abstract class Card {
   // player is optional to support historical tests.
   public getVictoryPoints(player?: Player): number {
     const vp1 = this.properties.victoryPoints;
+    if (vp1 === 'special') {
+      throw new Error('When victoryPoints is \'special\', override getVictoryPoints');
+    }
     if (vp1 !== undefined) {
       if (typeof(vp1) === 'number') {
         return vp1;

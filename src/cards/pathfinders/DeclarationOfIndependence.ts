@@ -17,12 +17,12 @@ export class DeclarationOfIndependence extends Card implements IProjectCard {
       cost: 20,
       tags: [Tags.MARS],
       requirements: CardRequirements.builder((b) => b.tag(Tags.MARS, 6)),
+      victoryPoints: 4,
 
       metadata: {
         cardNumber: 'Pf34',
         renderData: CardRenderer.builder((b) => b.delegates(2).asterix),
         description: 'Have at least 6 Mars tags in play. Place 2 delegates in 1 party.',
-        victoryPoints: 4,
       },
     });
   }

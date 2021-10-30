@@ -20,7 +20,6 @@ import {IMilestone} from './milestones/IMilestone';
 import {IProjectCard} from './cards/IProjectCard';
 import {ITagCount} from './ITagCount';
 import {LogMessageDataType} from './LogMessageDataType';
-import {MiningCard} from './cards/base/MiningCard';
 import {OrOptions} from './inputs/OrOptions';
 import {PartyHooks} from './turmoil/parties/PartyHooks';
 import {PartyName} from './turmoil/parties/PartyName';
@@ -72,6 +71,7 @@ import {UndoActionOption} from './inputs/UndoActionOption';
 import {LawSuit} from './cards/promo/LawSuit';
 import {CrashSiteCleanup} from './cards/promo/CrashSiteCleanup';
 import {Turmoil} from './turmoil/Turmoil';
+import {deserializeProjectCard, serializeProjectCard} from './cards/CardSerialization';
 
 export type PlayerId = string;
 
@@ -2165,29 +2165,6 @@ export class Player implements ISerializable<SerializedPlayer> {
     this.waitingForCb = cb;
   }
 
-  private serializePlayedCards(): Array<SerializedCard> {
-    return this.playedCards.map((c) => {
-      const result: SerializedCard = {
-        name: c.name,
-      };
-      if (c.bonusResource !== undefined) {
-        result.bonusResource = c.bonusResource;
-      }
-      if (c.resourceCount !== undefined) {
-        result.resourceCount = c.resourceCount;
-      }
-      if (c instanceof SelfReplicatingRobots) {
-        result.targetCards = c.targetCards.map((t) => {
-          return {
-            card: {name: t.card.name},
-            resourceCount: t.resourceCount,
-          };
-        });
-      }
-      return result;
-    });
-  }
-
   public serialize(): SerializedPlayer {
     const result: SerializedPlayer = {
       id: this.id,
@@ -2231,7 +2208,7 @@ export class Player implements ISerializable<SerializedPlayer> {
       dealtPreludeCards: this.dealtPreludeCards.map((c) => c.name),
       cardsInHand: this.cardsInHand.map((c) => c.name),
       preludeCardsInHand: this.preludeCardsInHand.map((c) => c.name),
-      playedCards: this.serializePlayedCards(),
+      playedCards: this.playedCards.map(serializeProjectCard),
       draftedCards: this.draftedCards.map((c) => c.name),
       cardCost: this.cardCost,
       needsToDraft: this.needsToDraft,
@@ -2356,30 +2333,7 @@ export class Player implements ISerializable<SerializedPlayer> {
     player.preludeCardsInHand = cardFinder.cardsFromJSON(d.preludeCardsInHand);
 
     // Rebuild each played card
-    player.playedCards = d.playedCards.map((element: SerializedCard) => {
-      const card = cardFinder.getProjectCardByName(element.name)!;
-      if (element.resourceCount !== undefined) {
-        card.resourceCount = element.resourceCount;
-      }
-      if (card instanceof SelfReplicatingRobots && element.targetCards !== undefined) {
-        card.targetCards = [];
-        element.targetCards.forEach((targetCard) => {
-          const foundTargetCard = cardFinder.getProjectCardByName(targetCard.card.name);
-          if (foundTargetCard !== undefined) {
-            card.targetCards.push({
-              card: foundTargetCard,
-              resourceCount: targetCard.resourceCount,
-            });
-          } else {
-            console.warn('did not find card for SelfReplicatingRobots', targetCard);
-          }
-        });
-      }
-      if (card instanceof MiningCard && element.bonusResource !== undefined) {
-        card.bonusResource = Array.isArray(element.bonusResource) ? element.bonusResource : [element.bonusResource];
-      }
-      return card;
-    });
+    player.playedCards = d.playedCards.map((element: SerializedCard) => deserializeProjectCard(element, cardFinder));
 
     // Rebuild each drafted cards
     player.draftedCards = cardFinder.cardsFromJSON(d.draftedCards);

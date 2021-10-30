@@ -78,8 +78,8 @@ export function getTurmoilModel(game: Game): TurmoilModel | undefined {
       (player) => game.getPlayerById(player).color,
     );
 
-    const reserve = turmoil.getPresentPlayers().map((player) => {
-      const number = turmoil.getDelegatesInReserve(player);
+    const reserve = turmoil.getPresentPlayersInReserve().map((player) => {
+      const number = turmoil.getAvailableDelegateCount(player, 'reserve');
       if (player !== 'NEUTRAL') {
         return {
           color: game.getPlayerById(player).color,

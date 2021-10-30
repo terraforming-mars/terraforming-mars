@@ -21,14 +21,14 @@ export class DeclarationOfIndependence extends Card implements IProjectCard {
       metadata: {
         cardNumber: 'Pf34',
         renderData: CardRenderer.builder((b) => b.delegates(2).asterix),
-        description: 'Have at least 6 Mars tags in play. Place 2 delegates in 1 party.',
+        description: 'Have at least 6 Mars tags in play. Place 2 delegates from the reserve in 1 party.',
         victoryPoints: 4,
       },
     });
   }
 
   public canPlay(player: Player) {
-    return Turmoil.getTurmoil(player.game).getDelegatesInReserve(player.id) >= 2;
+    return Turmoil.getTurmoil(player.game).getAvailableDelegateCount(player.id, 'reserve') >= 2;
   }
   public play(player: Player) {
     const title = 'Select a party to place 2 delegates.';

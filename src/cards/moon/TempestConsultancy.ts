@@ -52,7 +52,7 @@ export class TempestConsultancy extends Card implements CorporationCard {
   public action(player: Player) {
     let count = Math.floor(player.getTagCount(Tags.MOON) / 5);
     count = Math.min(count, 3);
-    count = Math.min(count, Turmoil.getTurmoil(player.game).getDelegatesInReserve(player.id));
+    count = Math.min(count, Turmoil.getTurmoil(player.game).getAvailableDelegateCount(player.id, 'reserve'));
     if (count > 0) {
       player.game.defer(new SendDelegateToArea(
         player,

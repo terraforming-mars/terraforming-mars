@@ -21,6 +21,10 @@ with FryxGames, Asmodee Digital or Steam in any way.**
 
 The board game is great and this repository highly recommends [purchasing it](https://www.amazon.com/Stronghold-Games-6005SG-Terraforming-Board/dp/B01GSYA4K2) for personal use.
 
+**Note**: This project has no affiliation with "Rebalanced Mars", whose author has refused to open-source.
+We believe this is both a violation of our GPL3 license, and also of the spirit of collaboration that this project tries
+to foster. Note that any new features you see on this repo made available on that server are without our permission.
+
 ## ⬤ I want to join the community!
 [Join us over on Discord!](https://discord.gg/VR8TbrD).
 

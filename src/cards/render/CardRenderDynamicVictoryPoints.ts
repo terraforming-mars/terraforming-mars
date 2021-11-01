@@ -4,6 +4,19 @@ import {Size} from './Size';
 import {ResourceType} from '../../ResourceType';
 import {Tags} from '../../cards/Tags';
 
+const RESOURCE_TO_ITEM_TYPE = new Map([
+  [ResourceType.MICROBE, CardRenderItemType.MICROBES],
+  [ResourceType.ANIMAL, CardRenderItemType.ANIMALS],
+  [ResourceType.CAMP, CardRenderItemType.CAMPS],
+  [ResourceType.DATA, CardRenderItemType.DATA_RESOURCE],
+  [ResourceType.SCIENCE, CardRenderItemType.SCIENCE],
+  [ResourceType.RESOURCE_CUBE, CardRenderItemType.RESOURCE_CUBE],
+  [ResourceType.PRESERVATION, CardRenderItemType.PRESERVATION],
+  [ResourceType.ASTEROID, CardRenderItemType.ASTEROIDS],
+  [ResourceType.FIGHTER, CardRenderItemType.FIGHTER],
+  [ResourceType.FLOATER, CardRenderItemType.FLOATERS],
+]);
+
 export class CardRenderDynamicVictoryPoints {
   public targetOneOrMore: boolean = false; // marking target to be one or more res (Search for Life)
   public anyPlayer: boolean = false; // Law Suit
@@ -22,19 +35,7 @@ export class CardRenderDynamicVictoryPoints {
   // Remove all of the builder methods; they're no longer necessary. Keep some
   // version of the tests, though.
   public static resource(type: ResourceType, points: number, target: number): CardRenderDynamicVictoryPoints {
-    const map: any = new Map([
-      [ResourceType.MICROBE, CardRenderItemType.MICROBES],
-      [ResourceType.ANIMAL, CardRenderItemType.ANIMALS],
-      [ResourceType.CAMP, CardRenderItemType.CAMPS],
-      [ResourceType.DATA, CardRenderItemType.DATA_RESOURCE],
-      [ResourceType.SCIENCE, CardRenderItemType.SCIENCE],
-      [ResourceType.RESOURCE_CUBE, CardRenderItemType.RESOURCE_CUBE],
-      [ResourceType.PRESERVATION, CardRenderItemType.PRESERVATION],
-      [ResourceType.ASTEROID, CardRenderItemType.ASTEROIDS],
-      [ResourceType.FIGHTER, CardRenderItemType.FIGHTER],
-      [ResourceType.FLOATER, CardRenderItemType.FLOATERS],
-    ]);
-    const itemType = map.get(type);
+    const itemType = RESOURCE_TO_ITEM_TYPE.get(type);
     if (itemType === undefined) {
       throw new Error('Unknown item type ' + type);
     }

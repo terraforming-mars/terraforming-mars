@@ -7,7 +7,7 @@ import {Tags} from './Tags';
 import {Player} from '../Player';
 import {Units} from '../Units';
 import {CardRequirements} from './CardRequirements';
-import {CardDiscount, IResourceCard, TRSource, VictoryPoints} from './ICard';
+import {CardDiscount, TRSource, VictoryPoints} from './ICard';
 import {CardRenderDynamicVictoryPoints} from './render/CardRenderDynamicVictoryPoints';
 import {CardRenderItemType} from './render/CardRenderItemType';
 
@@ -30,37 +30,6 @@ export interface StaticCardProperties {
   victoryPoints?: number | 'special' | VictoryPoints,
 }
 
-function inferVictoryPoints(properties: StaticCardProperties) {
-  const vps = properties.victoryPoints;
-  if (vps === undefined) {
-    return;
-  }
-
-  if (vps === 'special') {
-    if (properties.metadata.victoryPoints === undefined) {
-      throw new Error('When card.victoryPoints is \'special\', metadata.vp and getVictoryPoints must be supplied');
-    }
-    return;
-  } else {
-    if (properties.metadata.victoryPoints !== undefined) {
-      throw new Error('card.victoryPoints and metadata.victoryPoints cannot be on the same card');
-    }
-  }
-
-  if (typeof(vps) === 'number') {
-    properties.metadata.victoryPoints = vps;
-    return;
-  }
-  if (vps.type === 'resource') {
-    if (properties.resourceType === undefined) {
-      throw new Error('When defining a card-resource based VP, resourceType must be defined.');
-    }
-    properties.metadata.victoryPoints = CardRenderDynamicVictoryPoints.resource(properties.resourceType, vps.points, vps.per);
-    return;
-  } else {
-    properties.metadata.victoryPoints = CardRenderDynamicVictoryPoints.tag(vps.type, vps.points, vps.per);
-  }
-}
 export const staticCardProperties = new Map<CardName, StaticCardProperties>();
 
 export abstract class Card {
@@ -77,7 +46,7 @@ export abstract class Card {
         }
       }
       // TODO(kberg): apply these changes in CardVictoryPoints.vue and remove this conditional altogether.
-      inferVictoryPoints(properties);
+      Card.autopopulateMetadataVictoryPoints(properties);
 
       staticCardProperties.set(properties.name, properties);
       staticInstance = properties;
@@ -183,13 +152,13 @@ export abstract class Card {
     case CardRenderItemType.RESOURCE_CUBE:
     case CardRenderItemType.SCIENCE:
     case CardRenderItemType.CAMPS:
-      units = (this as unknown as IResourceCard).resourceCount ?? 0;
+      units = this.resourceCount ?? 0;
       break;
 
-    case 'jovian':
+    case CardRenderItemType.JOVIAN:
       units = player?.getTagCount(Tags.JOVIAN, true, false);
       break;
-    case 'moon':
+    case CardRenderItemType.MOON:
       units = player?.getTagCount(Tags.MOON, true, false);
       break;
     }
@@ -198,5 +167,37 @@ export abstract class Card {
       throw new Error('Not yet handled');
     }
     return vps.points * Math.floor(units / vps.target);
+  }
+
+  private static autopopulateMetadataVictoryPoints(properties: StaticCardProperties) {
+    const vps = properties.victoryPoints;
+    if (vps === undefined) {
+      return;
+    }
+
+    if (vps === 'special') {
+      if (properties.metadata.victoryPoints === undefined) {
+        throw new Error('When card.victoryPoints is \'special\', metadata.vp and getVictoryPoints must be supplied');
+      }
+      return;
+    } else {
+      if (properties.metadata.victoryPoints !== undefined) {
+        throw new Error('card.victoryPoints and metadata.victoryPoints cannot be on the same card');
+      }
+    }
+
+    if (typeof(vps) === 'number') {
+      properties.metadata.victoryPoints = vps;
+      return;
+    }
+    if (vps.type === 'resource') {
+      if (properties.resourceType === undefined) {
+        throw new Error('When defining a card-resource based VP, resourceType must be defined.');
+      }
+      properties.metadata.victoryPoints = CardRenderDynamicVictoryPoints.resource(properties.resourceType, vps.points, vps.per);
+      return;
+    } else {
+      properties.metadata.victoryPoints = CardRenderDynamicVictoryPoints.tag(vps.type, vps.points, vps.per);
+    }
   }
 }

@@ -13,6 +13,7 @@ export class MoonTether extends Card implements IProjectCard {
       cardType: CardType.ACTIVE,
       tags: [Tags.MOON, Tags.SPACE],
       cost: 18,
+      victoryPoints: 1,
 
       requirements: CardRequirements.builder((b) => b.tag(Tags.SPACE, 6)),
       cardDiscount: {amount: 2},
@@ -24,7 +25,6 @@ export class MoonTether extends Card implements IProjectCard {
           }).br;
         }),
         description: 'Requires 6 Space tags.',
-        victoryPoints: 1,
       },
     });
   };
@@ -36,9 +36,5 @@ export class MoonTether extends Card implements IProjectCard {
 
   public getCardDiscount() {
     return 2;
-  }
-
-  public getVictoryPoints() {
-    return 1;
   }
 }

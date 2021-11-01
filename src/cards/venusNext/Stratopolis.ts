@@ -10,8 +10,8 @@ import {SelectCard} from '../../inputs/SelectCard';
 import {CardName} from '../../CardName';
 import {CardRequirements} from '../CardRequirements';
 import {CardRenderer} from '../render/CardRenderer';
-import {CardRenderDynamicVictoryPoints} from '../render/CardRenderDynamicVictoryPoints';
 import {Card} from '../Card';
+import {VictoryPoints} from '../ICard';
 
 export class Stratopolis extends Card implements IActionCard, IResourceCard {
   constructor() {
@@ -20,9 +20,11 @@ export class Stratopolis extends Card implements IActionCard, IResourceCard {
       cardType: CardType.ACTIVE,
       tags: [Tags.CITY, Tags.VENUS],
       cost: 22,
-      resourceType: ResourceType.FLOATER,
 
+      resourceType: ResourceType.FLOATER,
+      victoryPoints: VictoryPoints.resource(1, 3),
       requirements: CardRequirements.builder((b) => b.tag(Tags.SCIENCE, 2)),
+
       metadata: {
         cardNumber: '248',
         renderData: CardRenderer.builder((b) => {
@@ -36,7 +38,6 @@ export class Stratopolis extends Card implements IActionCard, IResourceCard {
           text: 'Requires 2 science tags. Increase your M€ production 2 steps. Place a City tile ON THE RESERVED AREA',
           align: 'left',
         },
-        victoryPoints: CardRenderDynamicVictoryPoints.floaters(1, 3),
       },
     });
   };
@@ -46,9 +47,6 @@ export class Stratopolis extends Card implements IActionCard, IResourceCard {
     player.addProduction(Resources.MEGACREDITS, 2);
     player.game.addCityTile(player, SpaceName.STRATOPOLIS, SpaceType.COLONY);
     return undefined;
-  }
-  public getVictoryPoints(): number {
-    return Math.floor(this.resourceCount / 3);
   }
 
   public getResCards(player: Player): ICard[] {

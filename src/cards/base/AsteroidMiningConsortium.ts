@@ -17,6 +17,7 @@ export class AsteroidMiningConsortium extends Card implements IProjectCard {
       name: CardName.ASTEROID_MINING_CONSORTIUM,
       tags: [Tags.JOVIAN],
       cost: 13,
+      victoryPoints: 1,
 
       requirements: CardRequirements.builder((b) => b.production(Resources.TITANIUM)),
       metadata: {
@@ -28,7 +29,6 @@ export class AsteroidMiningConsortium extends Card implements IProjectCard {
             pb.plus().titanium(1);
           });
         }),
-        victoryPoints: 1,
       },
     });
   }
@@ -37,8 +37,5 @@ export class AsteroidMiningConsortium extends Card implements IProjectCard {
     player.game.defer(new DecreaseAnyProduction(player, Resources.TITANIUM, 1));
     player.addProduction(Resources.TITANIUM, 1);
     return undefined;
-  }
-  public getVictoryPoints() {
-    return 1;
   }
 }

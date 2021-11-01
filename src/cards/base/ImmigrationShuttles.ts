@@ -15,6 +15,7 @@ export class ImmigrationShuttles extends Card implements IProjectCard {
       name: CardName.IMMIGRATION_SHUTTLES,
       tags: [Tags.EARTH, Tags.SPACE],
       cost: 31,
+      victoryPoints: 'special',
 
       metadata: {
         cardNumber: '198',

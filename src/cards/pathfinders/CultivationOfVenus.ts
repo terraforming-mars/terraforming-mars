@@ -6,7 +6,7 @@ import {CardName} from '../../CardName';
 import {CardRenderer} from '../render/CardRenderer';
 import {Tags} from '../Tags';
 import {Resources} from '../../Resources';
-import {CardRenderDynamicVictoryPoints} from '../render/CardRenderDynamicVictoryPoints';
+import {VictoryPoints} from '../ICard';
 
 export class CultivationOfVenus extends Card implements IProjectCard {
   constructor() {
@@ -15,6 +15,7 @@ export class CultivationOfVenus extends Card implements IProjectCard {
       name: CardName.CULTIVATION_OF_VENUS,
       cost: 18,
       tags: [Tags.PLANT, Tags.VENUS],
+      victoryPoints: VictoryPoints.tags(Tags.VENUS, 1, 2),
 
       metadata: {
         cardNumber: 'Pf45',
@@ -23,7 +24,6 @@ export class CultivationOfVenus extends Card implements IProjectCard {
             eb.plants(3).startAction.venus(1);
           }).br;
         }),
-        victoryPoints: CardRenderDynamicVictoryPoints.venus(1, 2),
         description: '1 VP for every 2 Venus tags you own.',
       },
     });
@@ -42,10 +42,6 @@ export class CultivationOfVenus extends Card implements IProjectCard {
 
   public play() {
     return undefined;
-  }
-
-  public getVictoryPoints(player: Player) {
-    return Math.floor(player.getTagCount(Tags.VENUS, true, false) / 2);
   }
 }
 

@@ -15,15 +15,15 @@ export class CrashSiteCleanup extends Card implements IProjectCard {
       cardType: CardType.EVENT,
       name: CardName.CRASH_SITE_CLEANUP,
       cost: 4,
-
       requirements: CardRequirements.builder((b) => b.plantsRemoved()),
+      victoryPoints: 1,
+
       metadata: {
         description: 'Requires that a player removed ANOTHER PLAYER\'s plants this generation. Gain 1 titanium or 2 steel.',
         cardNumber: 'X17',
         renderData: CardRenderer.builder((b) => {
           b.titanium(1).nbsp.or().nbsp.steel(2);
         }),
-        victoryPoints: 1,
       },
     });
   }
@@ -57,10 +57,6 @@ export class CrashSiteCleanup extends Card implements IProjectCard {
     if (resource === Resources.PLANTS && amount < 0) {
       player.game.someoneHasRemovedOtherPlayersPlants = true;
     }
-  }
-
-  public getVictoryPoints() {
-    return 1;
   }
 }
 

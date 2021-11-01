@@ -15,6 +15,7 @@ export class HiTechLab extends Card implements IProjectCard {
       name: CardName.HI_TECH_LAB,
       tags: [Tags.SCIENCE, Tags.BUILDING],
       cost: 17,
+      victoryPoints: 1,
 
       metadata: {
         cardNumber: 'X04',
@@ -23,7 +24,6 @@ export class HiTechLab extends Card implements IProjectCard {
             eb.text('X').energy(1).startAction.text('X').cards(1).asterix();
           });
         }),
-        victoryPoints: 1,
       },
     });
   }
@@ -48,9 +48,5 @@ export class HiTechLab extends Card implements IProjectCard {
       1,
       player.energy,
     );
-  }
-
-  public getVictoryPoints() {
-    return 1;
   }
 }

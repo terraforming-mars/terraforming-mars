@@ -18,6 +18,7 @@ export class AICentral extends Card implements IActionCard, IProjectCard {
       tags: [Tags.SCIENCE, Tags.BUILDING],
       cost: 21,
       productionBox: Units.of({energy: -1}),
+      victoryPoints: 1,
 
       requirements: CardRequirements.builder((b) => b.tag(Tags.SCIENCE, 3)),
       metadata: {
@@ -30,7 +31,6 @@ export class AICentral extends Card implements IActionCard, IProjectCard {
           b.action('Draw 2 cards.', (ab) => ab.empty().startAction.cards(2)).br;
           b.production((pb) => pb.minus().energy(1));
         }),
-        victoryPoints: 1,
       },
     });
   }
@@ -43,9 +43,6 @@ export class AICentral extends Card implements IActionCard, IProjectCard {
   }
   public canAct(): boolean {
     return true;
-  }
-  public getVictoryPoints() {
-    return 1;
   }
   public action(player: Player) {
     player.drawCard(2);

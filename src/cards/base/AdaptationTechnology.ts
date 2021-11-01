@@ -12,6 +12,7 @@ export class AdaptationTechnology extends Card implements IProjectCard {
       name: CardName.ADAPTATION_TECHNOLOGY,
       tags: [Tags.SCIENCE],
       cost: 12,
+      victoryPoints: 1,
 
       metadata: {
         cardNumber: '153',
@@ -20,7 +21,6 @@ export class AdaptationTechnology extends Card implements IProjectCard {
             eb.plate('Global requirements').startEffect.text('+/- 2');
           });
         }),
-        victoryPoints: 1,
       },
     });
   }
@@ -29,8 +29,5 @@ export class AdaptationTechnology extends Card implements IProjectCard {
   }
   public play() {
     return undefined;
-  }
-  public getVictoryPoints() {
-    return 1;
   }
 }

@@ -1,6 +1,7 @@
 import {IProjectCard} from '../IProjectCard';
 import {Tags} from '../Tags';
 import {Card} from '../Card';
+import {VictoryPoints} from '../ICard';
 import {CardType} from '../CardType';
 import {Player} from '../../Player';
 import {ISpace} from '../../boards/ISpace';
@@ -13,7 +14,6 @@ import {AddResourcesToCard} from '../../deferredActions/AddResourcesToCard';
 import {DecreaseAnyProduction} from '../../deferredActions/DecreaseAnyProduction';
 import {CardRenderer} from '../render/CardRenderer';
 import {CardRequirements} from '../CardRequirements';
-import {CardRenderDynamicVictoryPoints} from '../render/CardRenderDynamicVictoryPoints';
 import {Size} from '../render/Size';
 import {all} from '../Options';
 
@@ -24,9 +24,11 @@ export class Herbivores extends Card implements IProjectCard, IResourceCard {
       name: CardName.HERBIVORES,
       tags: [Tags.ANIMAL],
       cost: 12,
-      resourceType: ResourceType.ANIMAL,
 
+      resourceType: ResourceType.ANIMAL,
+      victoryPoints: VictoryPoints.resource(1, 2),
       requirements: CardRequirements.builder((b) => b.oxygen(8)),
+
       metadata: {
         cardNumber: '147',
         renderData: CardRenderer.builder((b) => {
@@ -41,7 +43,6 @@ export class Herbivores extends Card implements IProjectCard, IResourceCard {
           text: 'Requires 8% oxygen. +1 animal to this card. -1 any plant production',
           align: 'left',
         },
-        victoryPoints: CardRenderDynamicVictoryPoints.animals(1, 2),
       },
     });
   }
@@ -49,10 +50,6 @@ export class Herbivores extends Card implements IProjectCard, IResourceCard {
 
     public canPlay(player: Player): boolean {
       return player.game.someoneHasResourceProduction(Resources.PLANTS, 1);
-    }
-
-    public getVictoryPoints(): number {
-      return Math.floor(this.resourceCount / 2);
     }
 
     public onTilePlaced(cardOwner: Player, activePlayer: Player, space: ISpace) {

@@ -19,7 +19,9 @@ export class SearchForLife extends Card implements IActionCard, IProjectCard, IR
       name: CardName.SEARCH_FOR_LIFE,
       tags: [Tags.SCIENCE],
       cost: 3,
+
       resourceType: ResourceType.SCIENCE,
+      victoryPoints: 'special',
 
       requirements: CardRequirements.builder((b) => b.oxygen(6, {max})),
       metadata: {

@@ -16,6 +16,7 @@ export class SoilFactory extends Card implements IProjectCard {
       tags: [Tags.BUILDING],
       cost: 9,
       productionBox: Units.of({energy: -1, plants: 1}),
+      victoryPoints: 1,
 
       metadata: {
         cardNumber: '179',
@@ -26,7 +27,6 @@ export class SoilFactory extends Card implements IProjectCard {
           });
         }),
         description: 'Decrease your Energy production 1 step and increase your Plant production 1 step.',
-        victoryPoints: 1,
       },
     });
   }
@@ -37,8 +37,5 @@ export class SoilFactory extends Card implements IProjectCard {
     player.addProduction(Resources.ENERGY, -1);
     player.addProduction(Resources.PLANTS, 1);
     return undefined;
-  }
-  public getVictoryPoints() {
-    return 1;
   }
 }

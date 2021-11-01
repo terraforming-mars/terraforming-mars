@@ -22,7 +22,6 @@ export class NuclearZone extends Card implements IProjectCard {
         b.temperature(2);
       }),
       description: 'Place this tile and raise temperature 2 steps.',
-      victoryPoints: -2,
     }) {
     super({
       cardType: CardType.AUTOMATED,
@@ -31,6 +30,7 @@ export class NuclearZone extends Card implements IProjectCard {
       cost,
       adjacencyBonus,
       metadata,
+      victoryPoints: -2,
       tr: {temperature: 2},
     });
   }
@@ -45,9 +45,5 @@ export class NuclearZone extends Card implements IProjectCard {
       foundSpace.adjacency = this.adjacencyBonus;
       return undefined;
     });
-  }
-
-  public getVictoryPoints() {
-    return -2;
   }
 }

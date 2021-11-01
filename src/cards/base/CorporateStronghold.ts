@@ -19,6 +19,7 @@ export class CorporateStronghold extends Card implements IProjectCard {
       tags: [Tags.CITY, Tags.BUILDING],
       cost: 11,
       productionBox: Units.of({energy: -1, megacredits: 3}),
+      victoryPoints: -2,
 
       metadata: {
         cardNumber: '182',
@@ -29,7 +30,6 @@ export class CorporateStronghold extends Card implements IProjectCard {
             pb.plus().megacredits(3);
           }).nbsp.nbsp.city();
         }),
-        victoryPoints: -2,
       },
     });
   }
@@ -48,8 +48,5 @@ export class CorporateStronghold extends Card implements IProjectCard {
         return undefined;
       },
     );
-  }
-  public getVictoryPoints() {
-    return -2;
   }
 }

@@ -10,7 +10,7 @@ import {DecreaseAnyProduction} from '../../deferredActions/DecreaseAnyProduction
 import {CardRenderer} from '../render/CardRenderer';
 import {CardRequirements} from '../CardRequirements';
 import {Card} from '../Card';
-import {CardRenderDynamicVictoryPoints} from '../render/CardRenderDynamicVictoryPoints';
+import {VictoryPoints} from '../ICard';
 import {all} from '../Options';
 
 export class SubZeroSaltFish extends Card implements IProjectCard, IResourceCard {
@@ -20,9 +20,11 @@ export class SubZeroSaltFish extends Card implements IProjectCard, IResourceCard
       tags: [Tags.ANIMAL],
       name: CardName.SUBZERO_SALT_FISH,
       cardType: CardType.ACTIVE,
-      resourceType: ResourceType.ANIMAL,
 
+      resourceType: ResourceType.ANIMAL,
+      victoryPoints: VictoryPoints.resource(1, 2),
       requirements: CardRequirements.builder((b) => b.temperature(-6)),
+
       metadata: {
         cardNumber: 'C42',
         renderData: CardRenderer.builder((b) => {
@@ -36,7 +38,6 @@ export class SubZeroSaltFish extends Card implements IProjectCard, IResourceCard
           text: 'Requires -6 C. Decrease any Plant production 1 step.',
           align: 'left',
         },
-        victoryPoints: CardRenderDynamicVictoryPoints.animals(1, 2),
       },
     });
   }
@@ -59,9 +60,5 @@ export class SubZeroSaltFish extends Card implements IProjectCard, IResourceCard
   public play(player: Player) {
     player.game.defer(new DecreaseAnyProduction(player, Resources.PLANTS, 1));
     return undefined;
-  }
-
-  public getVictoryPoints(): number {
-    return Math.floor(this.resourceCount / 2);
   }
 }

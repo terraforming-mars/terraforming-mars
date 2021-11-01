@@ -15,6 +15,7 @@ export class KelpFarming extends Card implements IProjectCard {
       name: CardName.KELP_FARMING,
       tags: [Tags.PLANT],
       cost: 17,
+      victoryPoints: 1,
 
       requirements: CardRequirements.builder((b) => b.oceans(6)),
       metadata: {
@@ -26,7 +27,6 @@ export class KelpFarming extends Card implements IProjectCard {
           }).nbsp.plants(2);
         }),
         description: 'Requires 6 ocean tiles. Increase your M€ production 2 steps and your Plant production 3 steps. Gain 2 Plants.',
-        victoryPoints: 1,
       },
     });
   }
@@ -36,8 +36,5 @@ export class KelpFarming extends Card implements IProjectCard {
     player.addProduction(Resources.PLANTS, 3);
     player.plants += 2;
     return undefined;
-  }
-  public getVictoryPoints() {
-    return 1;
   }
 }

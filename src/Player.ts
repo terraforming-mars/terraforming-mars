@@ -521,13 +521,13 @@ export class Player implements ISerializable<SerializedPlayer> {
     const victoryPointsBreakdown = new VictoryPointsBreakdown();
 
     // Victory points from corporations
-    if (this.corporationCard !== undefined && this.corporationCard.getVictoryPoints !== undefined) {
+    if (this.corporationCard !== undefined && this.corporationCard.victoryPoints !== undefined) {
       victoryPointsBreakdown.setVictoryPoints('victoryPoints', this.corporationCard.getVictoryPoints(this), this.corporationCard.name);
     }
 
     // Victory points from cards
     for (const playedCard of this.playedCards) {
-      if (playedCard.getVictoryPoints !== undefined) {
+      if (playedCard.victoryPoints !== undefined) {
         victoryPointsBreakdown.setVictoryPoints('victoryPoints', playedCard.getVictoryPoints(this), playedCard.name);
       }
     }
@@ -701,7 +701,7 @@ export class Player implements ISerializable<SerializedPlayer> {
     }
   }
 
-  public addResourceTo(card: IResourceCard & ICard, options: number | {qty?: number, log?: boolean} = 1): void {
+  public addResourceTo(card: ICard, options: number | {qty?: number, log?: boolean} = 1): void {
     const count = typeof(options) === 'number' ? options : (options.qty ?? 1);
 
     if (card.resourceCount !== undefined) {

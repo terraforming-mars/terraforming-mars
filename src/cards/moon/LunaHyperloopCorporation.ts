@@ -20,6 +20,8 @@ export class LunaHyperloopCorporation extends Card implements IActionCard, Corpo
       tags: [Tags.MOON, Tags.BUILDING],
       startingMegaCredits: 38,
 
+      victoryPoints: 'special',
+
       metadata: {
         description: 'You start with 38 M€ and 4 steel.',
         cardNumber: '',

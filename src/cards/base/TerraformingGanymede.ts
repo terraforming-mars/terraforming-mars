@@ -14,6 +14,7 @@ export class TerraformingGanymede extends Card implements IProjectCard {
       name: CardName.TERRAFORMING_GANYMEDE,
       tags: [Tags.JOVIAN, Tags.SPACE],
       cost: 33,
+      victoryPoints: 2,
 
       metadata: {
         cardNumber: '197',
@@ -21,7 +22,6 @@ export class TerraformingGanymede extends Card implements IProjectCard {
           b.tr(1).slash().jovian({played});
         }),
         description: 'Raise your TR 1 step for each Jovian tag you have, including this.',
-        victoryPoints: 2,
       },
     });
   }
@@ -34,8 +34,5 @@ export class TerraformingGanymede extends Card implements IProjectCard {
     player.increaseTerraformRatingSteps(steps, {log: true});
 
     return undefined;
-  }
-  public getVictoryPoints() {
-    return 2;
   }
 }

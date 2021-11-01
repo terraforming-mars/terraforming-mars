@@ -16,8 +16,9 @@ export class QuantumCommunications extends Card implements IProjectCard {
       cost: 8,
       name: CardName.QUANTUM_COMMUNICATIONS,
       cardType: CardType.AUTOMATED,
-
       requirements: CardRequirements.builder((b) => b.tag(Tags.SCIENCE, 4)),
+      victoryPoints: 1,
+
       metadata: {
         cardNumber: '079',
         renderData: CardRenderer.builder((b) => {
@@ -26,7 +27,6 @@ export class QuantumCommunications extends Card implements IProjectCard {
           });
         }),
         description: 'Requires 4 Science tags. Increase your M€ production 1 step for each colony in play.',
-        victoryPoints: 1,
       },
     });
   }
@@ -38,9 +38,5 @@ export class QuantumCommunications extends Card implements IProjectCard {
     });
     player.addProduction(Resources.MEGACREDITS, coloniesCount, {log: true});
     return undefined;
-  }
-
-  public getVictoryPoints() {
-    return 1;
   }
 }

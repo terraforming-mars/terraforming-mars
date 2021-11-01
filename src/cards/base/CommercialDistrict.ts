@@ -38,6 +38,7 @@ export class CommercialDistrict extends Card implements IProjectCard {
       cost: 16,
       adjacencyBonus,
       productionBox: Units.of({energy: -1, megacredits: 4}),
+      victoryPoints: 'special',
       metadata,
     });
   }

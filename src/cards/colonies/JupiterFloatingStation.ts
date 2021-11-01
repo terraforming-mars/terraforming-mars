@@ -22,8 +22,9 @@ export class JupiterFloatingStation extends Card implements IProjectCard, IResou
       name: CardName.JUPITER_FLOATING_STATION,
       cardType: CardType.ACTIVE,
       resourceType: ResourceType.FLOATER,
-
       requirements: CardRequirements.builder((b) => b.tag(Tags.SCIENCE, 3)),
+      victoryPoints: 1,
+
       metadata: {
         cardNumber: 'C19',
         renderData: CardRenderer.builder((b) => {
@@ -40,7 +41,6 @@ export class JupiterFloatingStation extends Card implements IProjectCard, IResou
           text: 'Requires 3 Science tags.',
           align: 'left',
         },
-        victoryPoints: 1,
       },
     });
   }
@@ -68,9 +68,5 @@ export class JupiterFloatingStation extends Card implements IProjectCard, IResou
 
   public play() {
     return undefined;
-  }
-
-  public getVictoryPoints(): number {
-    return 1;
   }
 }

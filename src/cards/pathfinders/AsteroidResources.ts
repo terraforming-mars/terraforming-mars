@@ -21,6 +21,7 @@ export class AsteroidResources extends Card implements IProjectCard {
       cost: 17,
       tags: [Tags.JOVIAN, Tags.SPACE],
       reserveUnits: Units.of({energy: 3}),
+      victoryPoints: 1,
 
       metadata: {
         cardNumber: 'Pf40',
@@ -31,7 +32,6 @@ export class AsteroidResources extends Card implements IProjectCard {
         }),
         description: 'Spend 3 energy. Either increase your steel and titanium production one step, OR ' +
           'place an ocean, and gain 2 steel and one titanium.',
-        victoryPoints: 1,
       },
     });
   }

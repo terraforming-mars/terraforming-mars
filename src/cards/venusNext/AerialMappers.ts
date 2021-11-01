@@ -20,6 +20,7 @@ export class AerialMappers extends Card implements IActionCard, IResourceCard {
       tags: [Tags.VENUS],
       cost: 11,
       resourceType: ResourceType.FLOATER,
+      victoryPoints: 1,
 
       metadata: {
         cardNumber: '213',
@@ -32,7 +33,6 @@ export class AerialMappers extends Card implements IActionCard, IResourceCard {
             be.floaters(1).startAction.cards(1);
           });
         }),
-        victoryPoints: 1,
       },
     });
   };
@@ -43,9 +43,6 @@ export class AerialMappers extends Card implements IActionCard, IResourceCard {
   }
   public canAct(): boolean {
     return true;
-  }
-  public getVictoryPoints() {
-    return 1;
   }
   public action(player: Player) {
     const floaterCards = player.getResourceCards(ResourceType.FLOATER);

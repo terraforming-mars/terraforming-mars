@@ -2,13 +2,13 @@ import {IActionCard} from '../ICard';
 import {IProjectCard} from '../IProjectCard';
 import {Tags} from '../Tags';
 import {Card} from '../Card';
+import {VictoryPoints} from '../ICard';
 import {CardType} from '../CardType';
 import {Player} from '../../Player';
 import {CardName} from '../../CardName';
 import {PlaceOceanTile} from '../../deferredActions/PlaceOceanTile';
 import {SelectHowToPayDeferred} from '../../deferredActions/SelectHowToPayDeferred';
 import {CardRenderer} from '../render/CardRenderer';
-import {CardRenderDynamicVictoryPoints} from '../render/CardRenderDynamicVictoryPoints';
 
 const ACTION_COST = 12;
 export class WaterImportFromEuropa extends Card implements IActionCard, IProjectCard {
@@ -19,6 +19,8 @@ export class WaterImportFromEuropa extends Card implements IActionCard, IProject
       tags: [Tags.JOVIAN, Tags.SPACE],
       cost: 25,
 
+      victoryPoints: VictoryPoints.tags(Tags.JOVIAN, 1, 1),
+
       metadata: {
         cardNumber: '012',
         renderData: CardRenderer.builder((b) => {
@@ -27,12 +29,8 @@ export class WaterImportFromEuropa extends Card implements IActionCard, IProject
           }).br;
           b.vpText('1 VP for each Jovian tag you have.');
         }),
-        victoryPoints: CardRenderDynamicVictoryPoints.jovians(1, 1),
       },
     });
-  }
-  public getVictoryPoints(player: Player) {
-    return player.getTagCount(Tags.JOVIAN, false, false);
   }
   public play() {
     return undefined;

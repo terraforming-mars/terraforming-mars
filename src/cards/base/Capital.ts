@@ -46,6 +46,7 @@ export class Capital extends Card implements IProjectCard {
       productionBox: Units.of({energy: -2, megacredits: 5}),
 
       requirements: CardRequirements.builder((b) => b.oceans(4)),
+      victoryPoints: 'special',
       metadata,
     });
   }

@@ -7,8 +7,8 @@ import {CardName} from '../../CardName';
 import {IResourceCard} from '../ICard';
 import {CardRequirements} from '../CardRequirements';
 import {CardRenderer} from '../render/CardRenderer';
-import {CardRenderDynamicVictoryPoints} from '../render/CardRenderDynamicVictoryPoints';
 import {Card} from '../Card';
+import {VictoryPoints} from '../ICard';
 import {played} from '../Options';
 
 export class VenusianAnimals extends Card implements IResourceCard {
@@ -19,6 +19,7 @@ export class VenusianAnimals extends Card implements IResourceCard {
       tags: [Tags.VENUS, Tags.ANIMAL, Tags.SCIENCE],
       cost: 15,
       resourceType: ResourceType.ANIMAL,
+      victoryPoints: VictoryPoints.resource(1, 1),
 
       requirements: CardRequirements.builder((b) => b.venus(18)),
       metadata: {
@@ -30,7 +31,6 @@ export class VenusianAnimals extends Card implements IResourceCard {
           b.vpText('1 VP per Animal on this card.');
         }),
         description: 'Requires Venus 18%',
-        victoryPoints: CardRenderDynamicVictoryPoints.animals(1, 1),
       },
     });
   };
@@ -40,8 +40,5 @@ export class VenusianAnimals extends Card implements IResourceCard {
   }
   public onCardPlayed(player: Player, card: IProjectCard): void {
     player.addResourceTo(this, card.tags.filter((tag) => tag === Tags.SCIENCE).length);
-  }
-  public getVictoryPoints(): number {
-    return this.resourceCount;
   }
 }

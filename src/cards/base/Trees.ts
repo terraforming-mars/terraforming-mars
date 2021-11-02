@@ -15,6 +15,7 @@ export class Trees extends Card implements IProjectCard {
       name: CardName.TREES,
       tags: [Tags.PLANT],
       cost: 13,
+      victoryPoints: 1,
 
       requirements: CardRequirements.builder((b) => b.temperature(-4)),
       metadata: {
@@ -23,7 +24,6 @@ export class Trees extends Card implements IProjectCard {
           b.production((pb) => pb.plants(3)).plants(1);
         }),
         description: 'Requires -4 C or warmer. Increase your Plant production 3 steps. Gain 1 Plant.',
-        victoryPoints: 1,
       },
     });
   }
@@ -31,8 +31,5 @@ export class Trees extends Card implements IProjectCard {
     player.addProduction(Resources.PLANTS, 3);
     player.plants++;
     return undefined;
-  }
-  public getVictoryPoints() {
-    return 1;
   }
 }

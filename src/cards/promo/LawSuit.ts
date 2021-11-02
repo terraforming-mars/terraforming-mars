@@ -18,6 +18,7 @@ export class LawSuit extends Card implements IProjectCard {
       name: CardName.LAW_SUIT,
       tags: [Tags.EARTH],
       cost: 2,
+      victoryPoints: 'special',
 
       metadata: {
         cardNumber: 'X06',
@@ -47,7 +48,6 @@ export class LawSuit extends Card implements IProjectCard {
       return undefined;
     });
   }
-
   public getVictoryPoints() {
     return -1;
   }

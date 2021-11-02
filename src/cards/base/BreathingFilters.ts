@@ -12,19 +12,16 @@ export class BreathingFilters extends Card implements IProjectCard {
       name: CardName.BREATHING_FILTERS,
       tags: [Tags.SCIENCE],
       cost: 11,
+      victoryPoints: 2,
 
       requirements: CardRequirements.builder((b) => b.oxygen(7)),
       metadata: {
         description: 'Requires 7% oxygen.',
         cardNumber: '114',
-        victoryPoints: 2,
       },
     });
   }
   public play() {
     return undefined;
-  }
-  public getVictoryPoints() {
-    return 2;
   }
 }

@@ -21,6 +21,7 @@ export class DomedCrater extends Card implements IProjectCard {
       tags: [Tags.CITY, Tags.BUILDING],
       cost: 24,
       productionBox: Units.of({energy: -1, megacredits: 3}),
+      victoryPoints: 1,
 
       requirements: CardRequirements.builder((b) => b.oxygen(7, {max})),
       metadata: {
@@ -35,7 +36,6 @@ export class DomedCrater extends Card implements IProjectCard {
             pb.plus().megacredits(3);
           }).nbsp.city().plants(3, {digit}).br;
         }),
-        victoryPoints: 1,
       },
     });
   }
@@ -56,8 +56,5 @@ export class DomedCrater extends Card implements IProjectCard {
         return undefined;
       },
     );
-  }
-  public getVictoryPoints() {
-    return 1;
   }
 }

@@ -86,11 +86,13 @@ describe('MaxwellBase', function() {
       tags: [Tags.VENUS],
       canPlay: () => true,
       play: () => undefined,
+      getVictoryPoints: () => 0,
       cardType: CardType.ACTIVE,
       metadata: {
         cardNumber: '1',
       },
       resourceType: ResourceType.SYNDICATE_FLEET,
+      resourceCount: 0,
     };
     player.playedCards.push(fakeCard);
 

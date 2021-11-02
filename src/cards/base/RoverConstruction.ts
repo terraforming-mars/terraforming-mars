@@ -20,6 +20,7 @@ export class RoverConstruction extends Card implements IProjectCard {
       name: CardName.ROVER_CONSTRUCTION,
       tags: [Tags.BUILDING],
       cost: 8,
+      victoryPoints: 1,
 
       metadata: {
         cardNumber: '038',
@@ -28,7 +29,6 @@ export class RoverConstruction extends Card implements IProjectCard {
             eb.city({size: Size.SMALL, all}).startEffect.megacredits(2);
           });
         }),
-        victoryPoints: 1,
       },
     });
   }
@@ -44,9 +44,5 @@ export class RoverConstruction extends Card implements IProjectCard {
 
   public play() {
     return undefined;
-  }
-
-  public getVictoryPoints() {
-    return 1;
   }
 }

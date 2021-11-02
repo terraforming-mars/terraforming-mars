@@ -15,6 +15,7 @@ export class Conscription extends Card implements IProjectCard {
       cost: 5,
       tags: [Tags.EARTH],
       name: CardName.CONSCRIPTION,
+      victoryPoints: -1,
 
       requirements: CardRequirements.builder((b) => b.tag(Tags.EARTH, 2)),
       metadata: {
@@ -23,7 +24,6 @@ export class Conscription extends Card implements IProjectCard {
           b.text('next card', Size.SMALL, true).colon().megacredits(-16);
         }),
         description: 'Requires 2 Earth tags. The next card you play this generation costs 16 M€ less.',
-        victoryPoints: -1,
       },
     });
   }
@@ -36,8 +36,5 @@ export class Conscription extends Card implements IProjectCard {
   }
   public play() {
     return undefined;
-  }
-  public getVictoryPoints() {
-    return -1;
   }
 }

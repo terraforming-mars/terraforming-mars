@@ -97,14 +97,16 @@ export class ProjectWorkshop extends Card implements CorporationCard {
     });
 
     if (activeCards.length === 0) return drawBlueCard;
+    // TODO(kberg): Take reds into account
     if (!player.canAfford(3)) return flipBlueCard;
 
     return new OrOptions(drawBlueCard, flipBlueCard);
   }
 
   private convertCardPointsToTR(player: Player, card: ICard) {
-    if (card.getVictoryPoints !== undefined) {
-      const steps = card.getVictoryPoints(player);
+    const steps = card.getVictoryPoints(player);
+    // TODO(kberg): this doesn't reduce VPs below 0. What to do?
+    if (steps !== 0) {
       player.increaseTerraformRatingSteps(steps, {log: true});
     }
   }

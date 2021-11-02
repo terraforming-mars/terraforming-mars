@@ -19,6 +19,8 @@ export class FreyjaBiodomes extends Card {
       cost: 14,
 
       requirements: CardRequirements.builder((b) => b.venus(10)),
+      victoryPoints: 2,
+
       metadata: {
         cardNumber: '227',
         renderData: CardRenderer.builder((b) => {
@@ -29,7 +31,6 @@ export class FreyjaBiodomes extends Card {
           text: 'Requires 10% on the Venus track. Add 2 Microbes or 2 Animals to another Venus card. Production: energy -1, M€ +2.',
           align: 'left',
         },
-        victoryPoints: 2,
       },
     });
   };
@@ -66,9 +67,5 @@ export class FreyjaBiodomes extends Card {
     player.addProduction(Resources.ENERGY, -1);
     player.addProduction(Resources.MEGACREDITS, 2);
     return undefined;
-  }
-
-  public getVictoryPoints() {
-    return 2;
   }
 }

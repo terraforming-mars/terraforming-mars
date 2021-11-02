@@ -14,6 +14,7 @@ export class CuttingEdgeTechnology extends Card implements IProjectCard {
       name: CardName.CUTTING_EDGE_TECHNOLOGY,
       tags: [Tags.SCIENCE],
       cost: 12,
+      victoryPoints: 1,
 
       metadata: {
         cardNumber: 'X18',
@@ -22,7 +23,6 @@ export class CuttingEdgeTechnology extends Card implements IProjectCard {
             eb.cards(1, {secondaryTag: AltSecondaryTag.REQ}).startEffect.megacredits(-2);
           });
         }),
-        victoryPoints: 1,
       },
     });
   }
@@ -34,9 +34,5 @@ export class CuttingEdgeTechnology extends Card implements IProjectCard {
   public getCardDiscount(_player: Player, card: IProjectCard) {
     if (card.requirements !== undefined) return 2;
     return 0;
-  }
-
-  public getVictoryPoints() {
-    return 1;
   }
 }

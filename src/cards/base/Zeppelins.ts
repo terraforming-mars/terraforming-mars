@@ -15,6 +15,7 @@ export class Zeppelins extends Card implements IProjectCard {
       cardType: CardType.AUTOMATED,
       name: CardName.ZEPPELINS,
       cost: 13,
+      victoryPoints: 1,
 
       requirements: CardRequirements.builder((b) => b.oxygen(5)),
       metadata: {
@@ -26,16 +27,12 @@ export class Zeppelins extends Card implements IProjectCard {
           });
         }),
         description: 'Requires 5% oxygen. Increase your M€ production 1 step for each City tile ON MARS.',
-        victoryPoints: 1,
       },
     });
   }
   public play(player: Player) {
     player.addProduction(Resources.MEGACREDITS, player.game.getCitiesInPlayOnMars(), {log: true});
     return undefined;
-  }
-  public getVictoryPoints() {
-    return 1;
   }
 }
 

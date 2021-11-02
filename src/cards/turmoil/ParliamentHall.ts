@@ -17,8 +17,9 @@ export class ParliamentHall extends Card implements IProjectCard {
       name: CardName.PARLIAMENT_HALL,
       tags: [Tags.BUILDING],
       cost: 8,
-
       requirements: CardRequirements.builder((b) => b.party(PartyName.MARS)),
+      victoryPoints: 1,
+
       metadata: {
         cardNumber: 'T08',
         renderData: CardRenderer.builder((b) => {
@@ -27,7 +28,6 @@ export class ParliamentHall extends Card implements IProjectCard {
           });
         }),
         description: 'Requires that Mars First are ruling or that you have 2 delegates there. Increase your M€ production 1 step for every 3 Building tags you have, including this.',
-        victoryPoints: 1,
       },
     });
   }
@@ -43,9 +43,5 @@ export class ParliamentHall extends Card implements IProjectCard {
   public play(player: Player) {
     this.produce(player);
     return undefined;
-  }
-
-  public getVictoryPoints() {
-    return 1;
   }
 }

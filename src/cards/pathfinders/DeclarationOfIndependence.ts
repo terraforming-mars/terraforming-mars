@@ -17,6 +17,7 @@ export class DeclarationOfIndependence extends Card implements IProjectCard {
       cost: 20,
       tags: [Tags.MARS],
       requirements: CardRequirements.builder((b) => b.tag(Tags.MARS, 6)),
+      victoryPoints: 4,
 
       metadata: {
         cardNumber: 'Pf34',

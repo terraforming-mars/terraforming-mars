@@ -18,6 +18,8 @@ export class AgricolaInc extends Card implements CorporationCard {
       startingMegaCredits: 40,
       cardType: CardType.CORPORATION,
 
+      victoryPoints: 'special',
+
       metadata: {
         cardNumber: 'R36',
         description: 'You start with 1 plant production, 1 M€ production and 40 M€.',

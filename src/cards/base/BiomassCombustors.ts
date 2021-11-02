@@ -17,6 +17,7 @@ export class BiomassCombustors extends Card implements IProjectCard {
       name: CardName.BIOMASS_COMBUSTORS,
       tags: [Tags.ENERGY, Tags.BUILDING],
       cost: 4,
+      victoryPoints: -1,
 
       requirements: CardRequirements.builder((b) => b.oxygen(6)),
       metadata: {
@@ -28,7 +29,6 @@ export class BiomassCombustors extends Card implements IProjectCard {
             pb.plus().energy(2);
           });
         }),
-        victoryPoints: -1,
       },
     });
   }
@@ -45,9 +45,5 @@ export class BiomassCombustors extends Card implements IProjectCard {
   public produce(player: Player) {
     player.addProduction(Resources.ENERGY, 2);
     player.game.defer(new DecreaseAnyProduction(player, Resources.PLANTS, 1));
-  }
-
-  public getVictoryPoints() {
-    return -1;
   }
 }

@@ -5,11 +5,11 @@ import {Tags} from '../Tags';
 import {IActionCard} from '../ICard';
 import {ResourceType} from '../../ResourceType';
 import {CardRenderer} from '../render/CardRenderer';
-import {CardRenderDynamicVictoryPoints} from '../render/CardRenderDynamicVictoryPoints';
 import {Units} from '../../Units';
 import {MoonCard} from './MoonCard';
 import {CardRequirements} from '../CardRequirements';
 import {played} from '../Options';
+import {VictoryPoints} from '../ICard';
 
 export class PrideoftheEarthArkship extends MoonCard implements IActionCard {
   constructor() {
@@ -18,7 +18,9 @@ export class PrideoftheEarthArkship extends MoonCard implements IActionCard {
       cardType: CardType.ACTIVE,
       tags: [Tags.SCIENCE, Tags.SCIENCE, Tags.SPACE],
       cost: 22,
+
       resourceType: ResourceType.SCIENCE,
+      victoryPoints: VictoryPoints.resource(1, 1),
       requirements: CardRequirements.builder((b) => b.tag(Tags.SCIENCE).tag(Tags.SPACE, 2)),
       reserveUnits: Units.of({titanium: 2}),
 
@@ -31,7 +33,6 @@ export class PrideoftheEarthArkship extends MoonCard implements IActionCard {
           }).br;
           b.minus().titanium(2);
         }),
-        victoryPoints: CardRenderDynamicVictoryPoints.science(1, 1),
       },
     });
   };
@@ -51,9 +52,5 @@ export class PrideoftheEarthArkship extends MoonCard implements IActionCard {
     player.addResourceTo(this, count);
 
     return undefined;
-  }
-
-  public getVictoryPoints() {
-    return this.resourceCount;
   }
 }

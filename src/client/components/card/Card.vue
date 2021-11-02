@@ -10,7 +10,7 @@
                 <CardNumber v-if="getCardMetadata() !== undefined" :number="getCardNumber()"/>
             </div>
             <CardExpansion :expansion="getCardExpansion()" :isCorporation="isCorporationCard()"/>
-            <CardResourceCounter v-if="card.resources !== undefined" :amount="getResourceAmount(card)" :type="resourceType" />
+            <CardResourceCounter v-if="card.resourceType !== undefined" :amount="getResourceAmount(card)" :type="resourceType" />
             <CardExtraContent :card="card" />
             <slot/>
         </div>

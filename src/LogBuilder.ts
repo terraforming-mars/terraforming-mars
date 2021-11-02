@@ -13,6 +13,7 @@ import {TileType} from './TileType';
 import {SpaceBonus} from './SpaceBonus';
 import {IGlobalEvent} from './turmoil/globalEvents/IGlobalEvent';
 import {GlobalEventName} from './turmoil/globalEvents/GlobalEventName';
+import {PartyName} from './turmoil/parties/PartyName';
 
 export class LogBuilder {
     private message: string;
@@ -85,6 +86,11 @@ export class LogBuilder {
 
     public party(value: IParty): LogBuilder {
       this.parameters.push(new LogMessageData(LogMessageDataType.PARTY, value.name));
+      return this;
+    }
+
+    public partyName(value: PartyName): LogBuilder {
+      this.parameters.push(new LogMessageData(LogMessageDataType.PARTY, value));
       return this;
     }
 

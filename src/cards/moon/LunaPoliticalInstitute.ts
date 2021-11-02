@@ -36,7 +36,7 @@ export class LunaPoliticalInstitute extends Card implements IActionCard, IProjec
   }
 
   public canAct(player: Player) {
-    return Turmoil.getTurmoil(player.game).hasAvailableDelegates(player.id);
+    return Turmoil.getTurmoil(player.game).hasDelegatesInReserve(player.id);
   }
 
   public action(player: Player) {

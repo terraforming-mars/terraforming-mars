@@ -42,7 +42,7 @@ describe('Cultural Metropolis', function() {
     for (let i = 0; i < PLAYER_DELEGATES_COUNT - 3; i++) {
       turmoil.sendDelegateToParty(player.id, PartyName.REDS, game, 'reserve');
     }
-    expect(turmoil.getDelegatesInReserve(player.id)).to.equal(1);
+    expect(turmoil.getAvailableDelegateCount(player.id, 'reserve')).to.equal(1);
     expect(player.canPlayIgnoringCost(card)).is.not.true;
   });
 
@@ -55,7 +55,7 @@ describe('Cultural Metropolis', function() {
     turmoil.sendDelegateToParty(player.id, PartyName.UNITY, game, 'reserve');
 
     expect(unity.delegates).has.lengthOf(startingUnityDelegateCount + 2);
-    expect(turmoil.getDelegatesInReserve(player.id)).to.equal(5);
+    expect(turmoil.getAvailableDelegateCount(player.id, 'reserve')).to.equal(5);
     expect(player.canPlayIgnoringCost(card)).is.true;
 
     card.play(player);
@@ -63,7 +63,7 @@ describe('Cultural Metropolis', function() {
     player.game.deferredActions.pop(); // Pop out the city placement deferred action
     const action = player.game.deferredActions.pop() as SendDelegateToArea;
     const options = action.execute();
-    options.cb(PartyName.UNITY);
+    options!.cb(PartyName.UNITY);
 
     expect(player.getProduction(Resources.ENERGY)).to.eq(0);
     expect(player.getProduction(Resources.MEGACREDITS)).to.eq(3);

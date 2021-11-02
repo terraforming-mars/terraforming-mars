@@ -15,6 +15,8 @@ const RESOURCE_TO_ITEM_TYPE = new Map([
   [ResourceType.ASTEROID, CardRenderItemType.ASTEROIDS],
   [ResourceType.FIGHTER, CardRenderItemType.FIGHTER],
   [ResourceType.FLOATER, CardRenderItemType.FLOATERS],
+  [ResourceType.VENUSIAN_HABITAT, CardRenderItemType.VENUSIAN_HABITAT],
+  [ResourceType.SPECIALIZED_ROBOT, CardRenderItemType.SPECIALIZED_ROBOT],
 ]);
 
 export class CardRenderDynamicVictoryPoints {

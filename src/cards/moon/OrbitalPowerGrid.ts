@@ -15,6 +15,7 @@ export class OrbitalPowerGrid extends Card implements IProjectCard {
       cardType: CardType.AUTOMATED,
       tags: [Tags.ENERGY, Tags.SPACE],
       cost: 19,
+      victoryPoints: 1,
 
       metadata: {
         description: 'Increase your energy production 1 step per city tile NOT ON MARS.',
@@ -22,7 +23,6 @@ export class OrbitalPowerGrid extends Card implements IProjectCard {
         renderData: CardRenderer.builder((b) => {
           b.production((pb) => pb.energy(1)).slash().city({all, secondaryTag: Tags.SPACE});
         }),
-        victoryPoints: 1,
       },
     });
   };
@@ -31,9 +31,5 @@ export class OrbitalPowerGrid extends Card implements IProjectCard {
     const amount = player.game.getCitiesInPlay() - player.game.getCitiesInPlayOnMars();
     player.addProduction(Resources.ENERGY, amount, {log: true});
     return undefined;
-  }
-
-  public getVictoryPoints() {
-    return 1;
   }
 }

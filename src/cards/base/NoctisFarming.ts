@@ -17,8 +17,9 @@ export class NoctisFarming extends Card implements IProjectCard {
       tags: [Tags.PLANT, Tags.BUILDING],
       cost: 10,
       productionBox: Units.of({megacredits: 1}),
-
       requirements: CardRequirements.builder((b) => b.temperature(-20)),
+      victoryPoints: 1,
+
       metadata: {
         cardNumber: '176',
         renderData: CardRenderer.builder((b) => {
@@ -27,7 +28,6 @@ export class NoctisFarming extends Card implements IProjectCard {
           }).nbsp.plants(2);
         }),
         description: 'Requires -20 C or warmer. Increase your M€ production 1 step and gain 2 Plants.',
-        victoryPoints: 1,
       },
     });
   }
@@ -36,8 +36,5 @@ export class NoctisFarming extends Card implements IProjectCard {
     player.addProduction(Resources.MEGACREDITS, 1);
     player.plants += 2;
     return undefined;
-  }
-  public getVictoryPoints() {
-    return 1;
   }
 }

@@ -24,6 +24,7 @@ export class LargeConvoy extends Card implements IProjectCard {
       tags: [Tags.EARTH, Tags.SPACE],
       cost: 36,
       tr: {oceans: 1},
+      victoryPoints: 2,
 
       metadata: {
         cardNumber: '143',
@@ -32,7 +33,6 @@ export class LargeConvoy extends Card implements IProjectCard {
           b.plants(5, {digit}).or(Size.MEDIUM).animals(4, {digit}).asterix();
         }),
         description: 'Place an ocean tile and draw 2 cards. Gain 5 Plants or add 4 Animals to ANOTHER card.',
-        victoryPoints: 2,
       },
     });
   }
@@ -78,8 +78,5 @@ export class LargeConvoy extends Card implements IProjectCard {
     }
 
     return new OrOptions(...availableActions);
-  }
-  public getVictoryPoints() {
-    return 2;
   }
 }

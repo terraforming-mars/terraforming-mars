@@ -15,6 +15,7 @@ export class MethaneFromTitan extends Card implements IProjectCard {
       name: CardName.METHANE_FROM_TITAN,
       tags: [Tags.JOVIAN, Tags.SPACE],
       cost: 28,
+      victoryPoints: 2,
 
       requirements: CardRequirements.builder((b) => b.oxygen(2)),
       metadata: {
@@ -24,7 +25,6 @@ export class MethaneFromTitan extends Card implements IProjectCard {
           pb.heat(2).br;
           pb.plants(2);
         })),
-        victoryPoints: 2,
       },
     });
   }
@@ -33,8 +33,5 @@ export class MethaneFromTitan extends Card implements IProjectCard {
     player.addProduction(Resources.HEAT, 2);
     player.addProduction(Resources.PLANTS, 2);
     return undefined;
-  }
-  public getVictoryPoints() {
-    return 2;
   }
 }

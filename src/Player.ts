@@ -521,13 +521,13 @@ export class Player implements ISerializable<SerializedPlayer> {
     const victoryPointsBreakdown = new VictoryPointsBreakdown();
 
     // Victory points from corporations
-    if (this.corporationCard !== undefined && this.corporationCard.getVictoryPoints !== undefined) {
+    if (this.corporationCard !== undefined && this.corporationCard.victoryPoints !== undefined) {
       victoryPointsBreakdown.setVictoryPoints('victoryPoints', this.corporationCard.getVictoryPoints(this), this.corporationCard.name);
     }
 
     // Victory points from cards
     for (const playedCard of this.playedCards) {
-      if (playedCard.getVictoryPoints !== undefined) {
+      if (playedCard.victoryPoints !== undefined) {
         victoryPointsBreakdown.setVictoryPoints('victoryPoints', playedCard.getVictoryPoints(this), playedCard.name);
       }
     }
@@ -701,7 +701,7 @@ export class Player implements ISerializable<SerializedPlayer> {
     }
   }
 
-  public addResourceTo(card: IResourceCard & ICard, options: number | {qty?: number, log?: boolean} = 1): void {
+  public addResourceTo(card: ICard, options: number | {qty?: number, log?: boolean} = 1): void {
     const count = typeof(options) === 'number' ? options : (options.qty ?? 1);
 
     if (card.resourceCount !== undefined) {
@@ -2080,9 +2080,9 @@ export class Player implements ISerializable<SerializedPlayer> {
       let sendDelegate;
       if (turmoil.lobby.has(this.id)) {
         sendDelegate = new SendDelegateToArea(this, 'Send a delegate in an area (from lobby)');
-      } else if (this.isCorporation(CardName.INCITE) && this.canAfford(3) && turmoil.hasAvailableDelegates(this.id)) {
+      } else if (this.isCorporation(CardName.INCITE) && this.canAfford(3) && turmoil.hasDelegatesInReserve(this.id)) {
         sendDelegate = new SendDelegateToArea(this, 'Send a delegate in an area (3 M€)', {cost: 3});
-      } else if (this.canAfford(5) && turmoil.hasAvailableDelegates(this.id)) {
+      } else if (this.canAfford(5) && turmoil.hasDelegatesInReserve(this.id)) {
         sendDelegate = new SendDelegateToArea(this, 'Send a delegate in an area (5 M€)', {cost: 5});
       }
       if (sendDelegate) {
@@ -2102,9 +2102,16 @@ export class Player implements ISerializable<SerializedPlayer> {
       );
     }
 
-    if (this.canAfford(this.game.getAwardFundingCost()) && !this.game.allAwardsFunded()) {
+    const fundingCost = this.game.getAwardFundingCost();
+    if (this.canAfford(fundingCost) && !this.game.allAwardsFunded()) {
       const remainingAwards = new OrOptions();
-      remainingAwards.title = 'Fund an award';
+      remainingAwards.title = {
+        data: [{
+          type: LogMessageDataType.RAW_STRING,
+          value: String(fundingCost),
+        }],
+        message: 'Fund an award (${0} M€)',
+      };
       remainingAwards.buttonLabel = 'Confirm';
       remainingAwards.options = this.game.awards
         .filter((award: IAward) => this.game.hasBeenFunded(award) === false)

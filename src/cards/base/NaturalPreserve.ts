@@ -25,7 +25,6 @@ export class NaturalPreserve extends Card implements IProjectCard {
         b.production((pb) => pb.megacredits(1)).nbsp.tile(TileType.NATURAL_PRESERVE, true).asterix();
       }),
       description: 'Oxygen must be 4% or less. Place this tile NEXT TO NO OTHER TILE. Increase your M€ production 1 step.',
-      victoryPoints: 1,
     }) {
     super({
       cardType: CardType.AUTOMATED,
@@ -35,6 +34,7 @@ export class NaturalPreserve extends Card implements IProjectCard {
       productionBox: Units.of({megacredits: 1}),
       adjacencyBonus,
       requirements: CardRequirements.builder((b) => b.oxygen(4, {max})),
+      victoryPoints: 1,
       metadata,
     });
   }
@@ -52,8 +52,5 @@ export class NaturalPreserve extends Card implements IProjectCard {
       player.addProduction(Resources.MEGACREDITS, 1);
       return undefined;
     });
-  }
-  public getVictoryPoints() {
-    return 1;
   }
 }

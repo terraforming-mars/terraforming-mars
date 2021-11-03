@@ -11,17 +11,14 @@ export class TransNeptuneProbe extends Card implements IProjectCard {
       name: CardName.TRANS_NEPTUNE_PROBE,
       tags: [Tags.SCIENCE, Tags.SPACE],
       cost: 6,
+      victoryPoints: 1,
 
       metadata: {
         cardNumber: '084',
-        victoryPoints: 1,
       },
     });
   }
   public play() {
     return undefined;
-  }
-  public getVictoryPoints() {
-    return 1;
   }
 }

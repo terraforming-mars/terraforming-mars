@@ -13,6 +13,7 @@ export class Research extends Card implements IProjectCard {
       name: CardName.RESEARCH,
       tags: [Tags.SCIENCE, Tags.SCIENCE],
       cost: 11,
+      victoryPoints: 1,
 
       metadata: {
         cardNumber: '090',
@@ -20,7 +21,6 @@ export class Research extends Card implements IProjectCard {
           b.cards(2);
         }),
         description: 'Counts as playing 2 science cards. Draw 2 cards.',
-        victoryPoints: 1,
       },
     });
   }
@@ -28,8 +28,5 @@ export class Research extends Card implements IProjectCard {
   public play(player: Player) {
     player.drawCard(2);
     return undefined;
-  }
-  public getVictoryPoints() {
-    return 1;
   }
 }

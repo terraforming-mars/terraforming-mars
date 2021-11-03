@@ -229,7 +229,7 @@ export abstract class Colony implements SerializedColony {
       case ColonyBenefit.PLACE_DELEGATES:
         Turmoil.ifTurmoil(game, (turmoil) => {
           const playerHasLobbyDelegate = turmoil.lobby.has(player.id);
-          let availablePlayerDelegates = turmoil.getDelegatesInReserve(player.id);
+          let availablePlayerDelegates = turmoil.getAvailableDelegateCount(player.id, 'reserve');
           if (playerHasLobbyDelegate) availablePlayerDelegates += 1;
 
           const qty = Math.min(quantity, availablePlayerDelegates);
@@ -243,7 +243,7 @@ export abstract class Colony implements SerializedColony {
 
       case ColonyBenefit.GIVE_MC_PER_DELEGATE:
         Turmoil.ifTurmoil(game, (turmoil) => {
-          let partyDelegateCount = PLAYER_DELEGATES_COUNT - turmoil.getDelegatesInReserve(player.id);
+          let partyDelegateCount = PLAYER_DELEGATES_COUNT - turmoil.getAvailableDelegateCount(player.id, 'reserve');
           if (turmoil.lobby.has(player.id)) partyDelegateCount--;
           if (turmoil.chairman === player.id) partyDelegateCount--;
 

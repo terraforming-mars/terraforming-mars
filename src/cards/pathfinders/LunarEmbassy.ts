@@ -17,6 +17,7 @@ export class LunarEmbassy extends Card implements IProjectCard {
       name: CardName.LUNAR_EMBASSY,
       tags: [Tags.EARTH, Tags.MARS, Tags.CITY, Tags.SPACE],
       cost: 28,
+      victoryPoints: 2,
 
       metadata: {
         cardNumber: 'Pf16',
@@ -26,15 +27,10 @@ export class LunarEmbassy extends Card implements IProjectCard {
             .br
             .cards(1).city().asterix().br;
         }),
-        victoryPoints: 2,
         description: 'Increase your MC production 2 steps, and plant production 1 step for every 2 earth tags (including this.) ' +
           'Draw a card. Place a city tile ON THE RESERVED AREA.',
       },
     });
-  }
-
-  public getVictoryPoints() {
-    return 2;
   }
 
   public play(player: Player) {

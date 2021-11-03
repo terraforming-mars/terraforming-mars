@@ -13,13 +13,13 @@ export class CryoSleep extends Card implements IProjectCard {
       tags: [Tags.SCIENCE],
       name: CardName.CRYO_SLEEP,
       cardType: CardType.ACTIVE,
+      victoryPoints: 1,
 
       metadata: {
         cardNumber: 'C07',
         renderData: CardRenderer.builder((b) => b.effect('When you trade, you pay 1 less resource for it.', (be) => {
           be.trade().startEffect.tradeDiscount(1);
         })),
-        victoryPoints: 1,
       },
     });
   }
@@ -27,10 +27,6 @@ export class CryoSleep extends Card implements IProjectCard {
   public play(player: Player) {
     player.colonyTradeDiscount++;
     return undefined;
-  }
-
-  public getVictoryPoints() {
-    return 1;
   }
 
   public onDiscard(player: Player): void {

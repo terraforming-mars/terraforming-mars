@@ -15,6 +15,7 @@ export class TundraFarming extends Card implements IProjectCard {
       name: CardName.TUNDRA_FARMING,
       tags: [Tags.PLANT],
       cost: 16,
+      victoryPoints: 2,
 
       requirements: CardRequirements.builder((b) => b.temperature(-6)),
       metadata: {
@@ -25,7 +26,6 @@ export class TundraFarming extends Card implements IProjectCard {
           }).plants(1);
         }),
         description: 'Requires -6° C or warmer. Increase your Plant production 1 step and your M€ production 2 steps. Gain 1 Plant.',
-        victoryPoints: 2,
       },
     });
   }
@@ -35,8 +35,5 @@ export class TundraFarming extends Card implements IProjectCard {
     player.addProduction(Resources.MEGACREDITS, 2);
     player.plants++;
     return undefined;
-  }
-  public getVictoryPoints() {
-    return 2;
   }
 }

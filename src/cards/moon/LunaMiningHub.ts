@@ -19,11 +19,13 @@ export class LunaMiningHub extends MoonCard {
       cardType: CardType.AUTOMATED,
       tags: [Tags.BUILDING],
       cost: 16,
+
       productionBox: Units.of({steel: 1, titanium: 1}),
       reserveUnits: Units.of({steel: 1, titanium: 1}),
       tr: {moonMining: 1},
-
+      victoryPoints: 'special',
       requirements: CardRequirements.builder((b) => b.miningRate(5)),
+
       metadata: {
         cardNumber: 'M14',
         description: {

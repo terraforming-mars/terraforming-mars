@@ -270,7 +270,7 @@ export class Turmoil implements ISerializable<SerializedTurmoil> {
       this.lobby = new Set<string>();
 
       game.getPlayers().forEach((player) => {
-        if (this.hasAvailableDelegates(player.id)) {
+        if (this.hasDelegatesInReserve(player.id)) {
           const index = this.delegateReserve.indexOf(player.id);
           if (index > -1) {
             this.delegateReserve.splice(index, 1);
@@ -413,19 +413,29 @@ export class Turmoil implements ISerializable<SerializedTurmoil> {
     }
 
     // List players present in the reserve
-    public getPresentPlayers(): Array<PlayerId | NeutralPlayer> {
+    public getPresentPlayersInReserve(): Array<PlayerId | NeutralPlayer> {
       return Array.from(new Set(this.delegateReserve));
     }
 
-    // Return number of delegates in reserve
-    public getDelegatesInReserve(playerId: PlayerId | NeutralPlayer): number {
-      const delegates = this.delegateReserve.filter((p) => p === playerId).length;
-      return delegates;
+    // Return number of delegates
+    // TODO(kberg): Find a way to remove the default value for source.
+    public getAvailableDelegateCount(playerId: PlayerId | NeutralPlayer, source: 'lobby' | 'reserve' | 'both'): number {
+      const delegatesInReserve = this.delegateReserve.filter((p) => p === playerId).length;
+      const delegatesInLobby = this.lobby.has(playerId) ? 1: 0;
+
+      switch (source) {
+      case 'lobby':
+        return delegatesInLobby;
+      case 'reserve':
+        return delegatesInReserve;
+      case 'both':
+        return delegatesInLobby + delegatesInReserve;
+      }
     }
 
     // Check if player has delegates available
-    public hasAvailableDelegates(playerId: PlayerId | NeutralPlayer): boolean {
-      return this.getDelegatesInReserve(playerId) > 0;
+    public hasDelegatesInReserve(playerId: PlayerId | NeutralPlayer): boolean {
+      return this.getAvailableDelegateCount(playerId, 'reserve') > 0;
     }
 
     // Get Victory Points

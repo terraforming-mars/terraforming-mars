@@ -20,6 +20,7 @@ export class TitanShuttles extends Card implements IProjectCard, IResourceCard {
       name: CardName.TITAN_SHUTTLES,
       cardType: CardType.ACTIVE,
       resourceType: ResourceType.FLOATER,
+      victoryPoints: 1,
 
       metadata: {
         cardNumber: 'C45',
@@ -32,7 +33,6 @@ export class TitanShuttles extends Card implements IProjectCard, IResourceCard {
             eb.text('x').floaters(1).startAction.text('x').titanium(1);
           }).br;
         }),
-        victoryPoints: 1,
       },
     });
   }
@@ -72,9 +72,5 @@ export class TitanShuttles extends Card implements IProjectCard, IResourceCard {
 
   public play() {
     return undefined;
-  }
-
-  public getVictoryPoints(): number {
-    return 1;
   }
 }

@@ -44,7 +44,7 @@ export class MartianMediaCenter extends Card implements IProjectCard {
   }
 
   public canAct(player: Player): boolean {
-    return player.canAfford(3) && Turmoil.getTurmoil(player.game).hasAvailableDelegates(player.id);
+    return player.canAfford(3) && Turmoil.getTurmoil(player.game).hasDelegatesInReserve(player.id);
   }
 
   public action(player: Player) {

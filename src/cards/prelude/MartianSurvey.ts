@@ -15,6 +15,7 @@ export class MartianSurvey extends Card implements IProjectCard {
       name: CardName.MARTIAN_SURVEY,
       tags: [Tags.SCIENCE],
       cost: 9,
+      victoryPoints: 1,
 
       requirements: CardRequirements.builder((b) => b.oxygen(4, {max})),
       metadata: {
@@ -23,7 +24,6 @@ export class MartianSurvey extends Card implements IProjectCard {
           b.cards(2);
         }),
         description: 'Oxygen must be 4% or lower. Draw two cards.',
-        victoryPoints: 1,
       },
     });
   }
@@ -31,9 +31,5 @@ export class MartianSurvey extends Card implements IProjectCard {
   public play(player: Player) {
     player.drawCard(2);
     return undefined;
-  }
-
-  public getVictoryPoints() {
-    return 1;
   }
 }

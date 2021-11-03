@@ -17,6 +17,8 @@ export class SponsoredAcademies extends Card {
       tags: [Tags.EARTH, Tags.SCIENCE],
       cost: 9,
 
+      victoryPoints: 1,
+
       metadata: {
         cardNumber: '247',
         renderData: CardRenderer.builder((b) => {
@@ -24,7 +26,6 @@ export class SponsoredAcademies extends Card {
           b.plus().cards(3, {digit}).asterix().nbsp.plus().cards(1, {all}).asterix();
         }),
         description: 'Discard 1 card from your hand and THEN draw 3 cards. All OPPONENTS draw 1 card.',
-        victoryPoints: 1,
       },
     });
   };
@@ -40,9 +41,5 @@ export class SponsoredAcademies extends Card {
       player.game.defer(DrawCards.keepAll(p));
     }
     return undefined;
-  }
-
-  public getVictoryPoints() {
-    return 1;
   }
 }

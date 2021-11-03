@@ -16,6 +16,7 @@ export class FoodFactory extends Card implements IProjectCard {
       tags: [Tags.BUILDING],
       cost: 12,
       productionBox: Units.of({megacredits: 4, plants: -1}),
+      victoryPoints: 1,
 
       metadata: {
         cardNumber: '041',
@@ -26,7 +27,6 @@ export class FoodFactory extends Card implements IProjectCard {
           });
         }),
         description: 'Decrease your Plant production 1 step and increase your M€ production 4 steps',
-        victoryPoints: 1,
       },
     });
   }
@@ -37,8 +37,5 @@ export class FoodFactory extends Card implements IProjectCard {
     player.addProduction(Resources.PLANTS, -1);
     player.addProduction(Resources.MEGACREDITS, 4);
     return undefined;
-  }
-  public getVictoryPoints() {
-    return 1;
   }
 }

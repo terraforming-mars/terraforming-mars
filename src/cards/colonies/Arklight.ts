@@ -8,8 +8,8 @@ import {CardType} from '../CardType';
 import {CardName} from '../../CardName';
 import {IResourceCard} from '../ICard';
 import {Card} from '../Card';
+import {VictoryPoints} from '../ICard';
 import {CardRenderer} from '../render/CardRenderer';
-import {CardRenderDynamicVictoryPoints} from '../render/CardRenderDynamicVictoryPoints';
 import {played} from '../Options';
 
 export class Arklight extends Card implements CorporationCard, IResourceCard {
@@ -20,6 +20,7 @@ export class Arklight extends Card implements CorporationCard, IResourceCard {
       startingMegaCredits: 45,
       resourceType: ResourceType.ANIMAL,
       cardType: CardType.CORPORATION,
+      victoryPoints: VictoryPoints.resource(1, 2),
 
       metadata: {
         cardNumber: 'R04',
@@ -33,7 +34,6 @@ export class Arklight extends Card implements CorporationCard, IResourceCard {
             ce.vSpace(); // to offset the description to the top a bit so it can be readable
           });
         }),
-        victoryPoints: CardRenderDynamicVictoryPoints.animals(1, 2),
       },
     });
   }
@@ -50,9 +50,5 @@ export class Arklight extends Card implements CorporationCard, IResourceCard {
       if (player.isCorporation(CardName.ARKLIGHT)) {
         player.addResourceTo(this, card.tags.filter((cardTag) => cardTag === Tags.ANIMAL || cardTag === Tags.PLANT).length);
       }
-    }
-
-    public getVictoryPoints(): number {
-      return Math.floor(this.resourceCount / 2);
     }
 }

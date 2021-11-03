@@ -1,6 +1,7 @@
 import {IProjectCard} from '../IProjectCard';
 import {Tags} from '../Tags';
 import {Card} from '../Card';
+import {VictoryPoints} from '../ICard';
 import {CardType} from '../CardType';
 import {Player} from '../../Player';
 import {TileType} from '../../TileType';
@@ -13,7 +14,6 @@ import {IAdjacencyBonus} from '../../ares/IAdjacencyBonus';
 import {ICardMetadata} from '../ICardMetadata';
 import {CardRequirements} from '../CardRequirements';
 import {CardRenderer} from '../render/CardRenderer';
-import {CardRenderDynamicVictoryPoints} from '../render/CardRenderDynamicVictoryPoints';
 import {Phase} from '../../Phase';
 import {played} from '../Options';
 
@@ -34,7 +34,6 @@ export class EcologicalZone extends Card implements IProjectCard, IResourceCard 
         }).br;
         b.vpText('1 VP per 2 Animals on this card.').tile(TileType.ECOLOGICAL_ZONE, true).asterix();
       }),
-      victoryPoints: CardRenderDynamicVictoryPoints.animals(1, 2),
     },
   ) {
     super({
@@ -44,6 +43,7 @@ export class EcologicalZone extends Card implements IProjectCard, IResourceCard 
       cost,
       resourceType: ResourceType.ANIMAL,
       adjacencyBonus,
+      victoryPoints: VictoryPoints.resource(1, 2),
 
       requirements: CardRequirements.builder((b) => b.greeneries()),
       metadata,
@@ -66,9 +66,6 @@ export class EcologicalZone extends Card implements IProjectCard, IResourceCard 
   }
   public onCardPlayed(player: Player, card: IProjectCard): void {
     player.addResourceTo(this, card.tags.filter((tag) => tag === Tags.ANIMAL || tag === Tags.PLANT).length);
-  }
-  public getVictoryPoints(): number {
-    return Math.floor(this.resourceCount / 2);
   }
   public play(player: Player) {
     // Get one extra animal from EcoExperts if played during prelude while having just played EcoExperts

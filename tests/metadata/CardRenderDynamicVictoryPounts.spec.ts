@@ -1,7 +1,8 @@
+import {expect} from 'chai';
 import {CardRenderItem} from '../../src/cards/render/CardRenderItem';
 import {CardRenderItemType} from '../../src/cards/render/CardRenderItemType';
 import {CardRenderDynamicVictoryPoints} from '../../src/cards/render/CardRenderDynamicVictoryPoints';
-import {expect} from 'chai';
+import {ResourceType} from '../../src/ResourceType';
 
 describe('CardRenderDynamicVictoryPoints', function() {
   describe('getPointsHtml', () => {
@@ -25,13 +26,13 @@ describe('CardRenderDynamicVictoryPoints', function() {
     expect(item.type).to.equal(CardRenderItemType.ASTEROIDS);
   });
   it('microbes: success', () => {
-    const vp = CardRenderDynamicVictoryPoints.microbes(1, 3);
+    const vp = CardRenderDynamicVictoryPoints.resource(ResourceType.MICROBE, 1, 3);
     const item = vp.item as CardRenderItem;
     expect(vp.getPointsHtml()).to.equal('1/3');
     expect(item.type).to.equal(CardRenderItemType.MICROBES);
   });
   it('animals: success', () => {
-    const vp = CardRenderDynamicVictoryPoints.animals(1, 1);
+    const vp = CardRenderDynamicVictoryPoints.resource(ResourceType.ANIMAL, 1, 1);
     const item = vp.item as CardRenderItem;
     expect(vp.getPointsHtml()).to.equal('1/');
     expect(item.type).to.equal(CardRenderItemType.ANIMALS);
@@ -55,14 +56,8 @@ describe('CardRenderDynamicVictoryPoints', function() {
     expect(item.type).to.equal(CardRenderItemType.CITY);
     expect(item.anyPlayer).to.be.true;
   });
-  it('jovians: success', () => {
-    const vp = CardRenderDynamicVictoryPoints.jovians(2, 2);
-    const item = vp.item as CardRenderItem;
-    expect(vp.getPointsHtml()).to.equal('2/');
-    expect(item.type).to.equal(CardRenderItemType.JOVIAN);
-  });
   it('floaters: success', () => {
-    const vp = CardRenderDynamicVictoryPoints.floaters(1, 2);
+    const vp = CardRenderDynamicVictoryPoints.resource(ResourceType.FLOATER, 1, 2);
     const item = vp.item as CardRenderItem;
     expect(vp.getPointsHtml()).to.equal('1/2');
     expect(item.type).to.equal(CardRenderItemType.FLOATERS);
@@ -76,13 +71,13 @@ describe('CardRenderDynamicVictoryPoints', function() {
     expect(item.type).to.equal(CardRenderItemType.SCIENCE);
   });
   it('fighter: success', () => {
-    const vp = CardRenderDynamicVictoryPoints.fighter(1, 1);
+    const vp = CardRenderDynamicVictoryPoints.resource(ResourceType.FIGHTER, 1, 1);
     const item = vp.item as CardRenderItem;
     expect(vp.getPointsHtml()).to.equal('1/');
     expect(item.type).to.equal(CardRenderItemType.FIGHTER);
   });
   it('camps: success', () => {
-    const vp = CardRenderDynamicVictoryPoints.camps(1, 1);
+    const vp = CardRenderDynamicVictoryPoints.resource(ResourceType.CAMP, 1, 1);
     const item = vp.item as CardRenderItem;
     expect(vp.getPointsHtml()).to.equal('1/');
     expect(item.type).to.equal(CardRenderItemType.CAMPS);

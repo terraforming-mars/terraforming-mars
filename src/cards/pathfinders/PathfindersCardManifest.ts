@@ -14,7 +14,7 @@ import {CeresSpaceport} from './CeresSpaceport';
 // import {CommunicationCenter} from './CommunicationCenter';
 // import {ControlledBloom} from './ControlledBloom';
 // import {CrewTraining} from './CrewTraining';
-// import {Cryptocurrency} from './Cryptocurrency';
+import {Cryptocurrency} from './Cryptocurrency';
 import {CultivationOfVenus} from './CultivationOfVenus';
 import {Cyanobacteria} from './Cyanobacteria';
 import {DataLeak} from './DataLeak';
@@ -59,7 +59,7 @@ import {PrivateSecurity} from './PrivateSecurity';
 import {RareEarthElements} from './RareEarthElements';
 // import {ResearchGrant} from './ResearchGrant';
 import {ReturntoAbandonedTechnology} from './ReturntoAbandonedTechnology';
-// import {RichDeposits} from './RichDeposits';
+import {RichDeposits} from './RichDeposits';
 import {SecretLabs} from './SecretLabs';
 import {SmallOpenPitMine} from './SmallOpenPitMine';
 import {SmallComet} from './SmallComet';
@@ -129,8 +129,8 @@ export const PATHFINDERS_CARD_MANIFEST = new CardManifest({
     // // {cardName: CardName.CRASHLANDING, Factory: Crashlanding},                             // COMPLICATED ADJACENCY BONUS RULES
     // // {cardName: CardName.THINK_TANK, Factory: ThinkTank},                                  // COMPLICATED REQUIREMENT RULES
     // // {cardName: CardName.BOTANICAL_EXPERIENCE, Factory: BotanicalExperience},              // AUTOMATIC INCREASE, TARGETING RULES.
-    // {cardName: CardName.CRYPTOCURRENCY, Factory: Cryptocurrency},
-    // {cardName: CardName.RICH_DEPOSITS, Factory: RichDeposits},
+    {cardName: CardName.CRYPTOCURRENCY, Factory: Cryptocurrency},
+    {cardName: CardName.RICH_DEPOSITS, Factory: RichDeposits},
     // // *** {cardName: CardName.OUMUAMUA_TYPE_OBJECT_SURVEY, Factory: OumuamuaTypeObjectSurvey},
     // {cardName: CardName.SOLARPEDIA, Factory: Solarpedia, compatibility: GameModule.Venus},
     // {cardName: CardName.ANTHOZOA, Factory: Anthozoa},

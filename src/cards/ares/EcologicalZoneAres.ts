@@ -3,7 +3,6 @@ import {EcologicalZone} from '../base/EcologicalZone';
 import {SpaceBonus} from '../../SpaceBonus';
 import {TileType} from '../../TileType';
 import {CardRenderer} from '../render/CardRenderer';
-import {CardRenderDynamicVictoryPoints} from '../render/CardRenderDynamicVictoryPoints';
 import {played} from '../Options';
 
 export class EcologicalZoneAres extends EcologicalZone {
@@ -25,7 +24,6 @@ export class EcologicalZoneAres extends EcologicalZone {
           }).br;
           b.vpText('The tile grants an ADJACENCY BONUS of 1 animal. 1 VP per 2 Animals on this card.');
         }),
-        victoryPoints: CardRenderDynamicVictoryPoints.animals(1, 2),
       },
     );
   }

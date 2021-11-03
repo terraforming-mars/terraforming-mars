@@ -12,6 +12,7 @@ export class CommunityServices extends Card implements IProjectCard {
       cost: 13,
       name: CardName.COMMUNITY_SERVICES,
       cardType: CardType.AUTOMATED,
+      victoryPoints: 1,
 
       metadata: {
         cardNumber: 'C04',
@@ -21,7 +22,6 @@ export class CommunityServices extends Card implements IProjectCard {
             pb.megacredits(1);
           }).slash().noTags();
         }),
-        victoryPoints: 1,
       },
     });
   }
@@ -29,9 +29,5 @@ export class CommunityServices extends Card implements IProjectCard {
   public play(player: Player) {
     player.addProduction(Resources.MEGACREDITS, player.getNoTagsCount() + 1, {log: true});
     return undefined;
-  }
-
-  public getVictoryPoints() {
-    return 1;
   }
 }

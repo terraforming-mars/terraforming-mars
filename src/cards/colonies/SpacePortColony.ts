@@ -18,6 +18,8 @@ export class SpacePortColony extends Card implements IProjectCard {
       cardType: CardType.AUTOMATED,
 
       requirements: CardRequirements.builder((b) => b.colonies()),
+      victoryPoints: 'special',
+
       metadata: {
         cardNumber: 'C39',
         renderData: CardRenderer.builder((b) => {

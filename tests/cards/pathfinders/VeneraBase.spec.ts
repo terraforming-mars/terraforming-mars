@@ -12,7 +12,7 @@ import {SpaceName} from '../../../src/SpaceName';
 import {IProjectCard} from '../../../src/cards/IProjectCard';
 import {TitanShuttles} from '../../../src/cards/colonies/TitanShuttles';
 import {FloatingHabs} from '../../../src/cards/venusNext/FloatingHabs';
-import {Stratopolis} from '../../../src/cards/venusNext/Stratopolis'
+import {Stratopolis} from '../../../src/cards/venusNext/Stratopolis';
 import {MartianCulture} from '../../../src/cards/pathfinders/MartianCulture';
 import {SelectCard} from '../../../src/inputs/SelectCard';
 

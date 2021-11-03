@@ -14,6 +14,9 @@ import {DeferredAction} from '../src/deferredActions/DeferredAction';
 import {Greens} from '../src/turmoil/parties/Greens';
 import {PoliticalAgendas} from '../src/turmoil/PoliticalAgendas';
 import {Reds} from '../src/turmoil/parties/Reds';
+import {IProjectCard} from '../src/cards/IProjectCard';
+import {CardName} from '../src/CardName';
+import {CardType} from '../src/cards/CardType';
 
 export class TestingUtils {
   // Returns the oceans created during this operation which may not reflect all oceans.
@@ -123,5 +126,22 @@ export class TestingUtils {
     expect(cb(), 'Reds in power, not enough money').is.false;
     player.megaCredits = initialMegacredits + passingDelta;
     expect(cb(), 'Reds in power, enough money').is.true;
+  }
+
+  public static fakeCard(card: Partial<IProjectCard>) {
+    const template: IProjectCard = {
+      name: 'HELLO' as CardName,
+      cost: 0,
+      tags: [],
+      canPlay: () => true,
+      play: () => undefined,
+      getVictoryPoints: () => 0,
+      cardType: CardType.ACTIVE,
+      metadata: {
+        cardNumber: '1',
+      },
+      resourceCount: 0,
+    };
+    return Object.assign(template, card);
   }
 }

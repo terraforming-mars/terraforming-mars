@@ -2,9 +2,9 @@ import {CardManifest} from '../CardManifest';
 import {CardName} from '../../CardName';
 import {GameModule} from '../../GameModule';
 
-// import {AdvancedPowerGrid} from './AdvancedPowerGrid';
+import {AdvancedPowerGrid} from './AdvancedPowerGrid';
 import {AgroDrones} from './AgroDrones';
-// import {Anthozoa} from './Anthozoa';
+import {Anthozoa} from './Anthozoa';
 // import {AntidesertificationTechniques} from './AntidesertificationTechniques';
 import {AsteroidResources} from './AsteroidResources';
 import {BreedingFarms} from './BreedingFarms';
@@ -65,7 +65,7 @@ import {SmallOpenPitMine} from './SmallOpenPitMine';
 import {SmallComet} from './SmallComet';
 // import {SocialEvents} from './SocialEvents';
 // import {SoilDetoxification} from './SoilDetoxification';
-// import {Solarpedia} from './Solarpedia';
+import {Solarpedia} from './Solarpedia';
 import {SolarStorm} from './SolarStorm';
 import {SpaceDebrisCleaningOperation} from './SpaceDebrisCleaningOperation';
 import {SpaceRelay} from './SpaceRelay';
@@ -132,9 +132,9 @@ export const PATHFINDERS_CARD_MANIFEST = new CardManifest({
     {cardName: CardName.CRYPTOCURRENCY, Factory: Cryptocurrency},
     {cardName: CardName.RICH_DEPOSITS, Factory: RichDeposits},
     // // *** {cardName: CardName.OUMUAMUA_TYPE_OBJECT_SURVEY, Factory: OumuamuaTypeObjectSurvey},
-    // {cardName: CardName.SOLARPEDIA, Factory: Solarpedia, compatibility: GameModule.Venus},
-    // {cardName: CardName.ANTHOZOA, Factory: Anthozoa},
-    // {cardName: CardName.ADVANCED_POWER_GRID, Factory: AdvancedPowerGrid},
+    {cardName: CardName.SOLARPEDIA, Factory: Solarpedia, compatibility: GameModule.Venus},
+    {cardName: CardName.ANTHOZOA, Factory: Anthozoa},
+    {cardName: CardName.ADVANCED_POWER_GRID, Factory: AdvancedPowerGrid},
     // // {cardName: CardName.SPECIALIZED_SETTLEMENT, Factory: SpecializedSettlement},          // ROBOTIC WORKFORCE COMPLICATION
     // // *** {cardName: CardName.CHARITY_DONATION, Factory: CharityDonation},
     // // {cardName: CardName.CURIOSITY_LABS, Factory: CuriosityLabs},                          // TWO RESOURCE TYPES

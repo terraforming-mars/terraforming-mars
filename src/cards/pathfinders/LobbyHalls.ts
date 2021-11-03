@@ -40,7 +40,7 @@ export class LobbyHalls extends Card implements IProjectCard, ICloneTagCard {
     player.game.defer(new DeclareCloneTag(player, this, 'Select the clone tag\'s new tag'));
     player.adjustProduction(this.productionBox);
     const turmoil = Turmoil.getTurmoil(player.game);
-    if (turmoil.getDelegatesInReserve(player.id) > 0) {
+    if (turmoil.getAvailableDelegateCount(player.id, 'reserve') > 0) {
       player.game.defer(new SendDelegateToArea(player, undefined, {source: 'reserve'}));
     }
     return undefined;

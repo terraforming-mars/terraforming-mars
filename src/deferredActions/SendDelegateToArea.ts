@@ -82,7 +82,6 @@ export namespace SendDelegateToArea {
     replace?: PlayerId | NeutralPlayer | undefined,
     /** Cost for sending this delegate. Default is no cost. */
     cost?: number,
-    // TODO(kberg): add 'both'
     /** Source of the delegates being added. Default is 'lobby' */
     source?: 'lobby' | 'reserve'
   }

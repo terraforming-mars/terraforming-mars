@@ -45,7 +45,7 @@ describe('LobbyHalls', function() {
   });
 
   it('play, has a delegate', () => {
-    expect(turmoil.getDelegatesInReserve(player.id)).eq(6);
+    expect(turmoil.getAvailableDelegateCount(player.id, 'reserve')).eq(6);
     expect(card.tags).deep.eq([Tags.CLONE, Tags.BUILDING]);
 
     card.play(player);
@@ -70,14 +70,14 @@ describe('LobbyHalls', function() {
   function assertAddDelegateAction(action: DeferredAction) {
     const marsFirst = turmoil.getPartyByName(PartyName.MARS)!;
 
-    expect(turmoil.getDelegatesInReserve(player.id)).eq(6);
+    expect(turmoil.getAvailableDelegateCount(player.id, 'reserve')).eq(6);
     expect(marsFirst.getDelegates(player.id)).eq(0);
 
     expect(action).instanceOf(SendDelegateToArea);
     const options = action.execute()! as SelectPartyToSendDelegate;
     options.cb(marsFirst.name);
 
-    expect(turmoil.getDelegatesInReserve(player.id)).eq(5);
+    expect(turmoil.getAvailableDelegateCount(player.id, 'reserve')).eq(5);
     expect(marsFirst.getDelegates(player.id)).eq(1);
   }
 });

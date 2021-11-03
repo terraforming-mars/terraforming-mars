@@ -16,6 +16,7 @@ export class HeatTrappers extends Card implements IProjectCard {
       name: CardName.HEAT_TRAPPERS,
       tags: [Tags.ENERGY, Tags.BUILDING],
       cost: 6,
+      victoryPoints: -1,
 
       metadata: {
         cardNumber: '178',
@@ -26,7 +27,6 @@ export class HeatTrappers extends Card implements IProjectCard {
           });
         }),
         description: 'Decrease any heat production 2 steps and increase your Energy production 1 step.',
-        victoryPoints: -1,
       },
     });
   }
@@ -43,8 +43,5 @@ export class HeatTrappers extends Card implements IProjectCard {
   public play(player: Player) {
     this.produce(player);
     return undefined;
-  }
-  public getVictoryPoints() {
-    return -1;
   }
 }

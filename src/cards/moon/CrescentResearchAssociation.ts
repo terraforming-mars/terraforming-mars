@@ -1,10 +1,10 @@
 import {CardName} from '../../CardName';
 import {Player} from '../../Player';
 import {Card} from '../Card';
+import {VictoryPoints} from '../ICard';
 import {CardType} from '../CardType';
 import {CorporationCard} from '../corporation/CorporationCard';
 import {IProjectCard} from '../IProjectCard';
-import {CardRenderDynamicVictoryPoints} from '../render/CardRenderDynamicVictoryPoints';
 import {CardRenderer} from '../render/CardRenderer';
 import {Tags} from '../Tags';
 
@@ -16,6 +16,8 @@ export class CrescentResearchAssociation extends Card implements CorporationCard
       tags: [Tags.SCIENCE, Tags.MOON],
       startingMegaCredits: 50,
 
+      victoryPoints: VictoryPoints.tags(Tags.MOON, 1, 3),
+
       metadata: {
         description: 'You start with 50 M€. 1 VP for every 3 Moon tags you have.',
         cardNumber: '',
@@ -25,7 +27,6 @@ export class CrescentResearchAssociation extends Card implements CorporationCard
             eb.moon().startEffect.megacredits(1).slash().moon();
           });
         }),
-        victoryPoints: CardRenderDynamicVictoryPoints.moon(1, 3),
       },
     });
   }
@@ -39,9 +40,5 @@ export class CrescentResearchAssociation extends Card implements CorporationCard
       return 0;
     }
     return player.getTagCount(Tags.MOON, false, true);
-  }
-
-  public getVictoryPoints(player: Player) {
-    return Math.floor(player.getTagCount(Tags.MOON, true, false) / 3);
   }
 }

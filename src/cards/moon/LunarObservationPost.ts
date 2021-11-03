@@ -6,9 +6,9 @@ import {ResourceType} from '../../ResourceType';
 import {AddResourcesToCard} from '../../deferredActions/AddResourcesToCard';
 import {IActionCard} from '../ICard';
 import {CardRenderer} from '../render/CardRenderer';
-import {CardRenderDynamicVictoryPoints} from '../render/CardRenderDynamicVictoryPoints';
 import {Units} from '../../Units';
 import {MoonCard} from './MoonCard';
+import {VictoryPoints} from '../ICard';
 
 export class LunarObservationPost extends MoonCard implements IActionCard {
   constructor() {
@@ -17,7 +17,9 @@ export class LunarObservationPost extends MoonCard implements IActionCard {
       cardType: CardType.ACTIVE,
       tags: [Tags.SCIENCE, Tags.SCIENCE],
       cost: 7,
+
       resourceType: ResourceType.DATA,
+      victoryPoints: VictoryPoints.resource(1, 3),
       reserveUnits: Units.of({titanium: 1}),
 
       metadata: {
@@ -30,7 +32,6 @@ export class LunarObservationPost extends MoonCard implements IActionCard {
           b.br;
           b.minus().titanium(1);
         }),
-        victoryPoints: CardRenderDynamicVictoryPoints.data(1, 3),
       },
     });
   }
@@ -49,9 +50,5 @@ export class LunarObservationPost extends MoonCard implements IActionCard {
   public action(player: Player) {
     player.game.defer(new AddResourcesToCard(player, ResourceType.DATA));
     return undefined;
-  }
-
-  public getVictoryPoints() {
-    return Math.floor(this.resourceCount / 3);
   }
 }

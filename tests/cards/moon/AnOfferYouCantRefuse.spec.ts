@@ -70,14 +70,14 @@ describe('AnOfferYouCantRefuse', () => {
 
     // Now do a delegate exchange
     // Swap with Reds / red
-    expect(turmoil.getDelegatesInReserve(player.id)).eq(6);
-    expect(turmoil.getDelegatesInReserve(redPlayer.id)).eq(6);
+    expect(turmoil.getAvailableDelegateCount(player.id, 'reserve')).eq(6);
+    expect(turmoil.getAvailableDelegateCount(redPlayer.id, 'reserve')).eq(6);
     expect(parties.reds.delegates).to.have.members(['NEUTRAL', 'NEUTRAL', redPlayer.id, redPlayer.id]);
 
     const switchParties = options.options[2].cb() as OrOptions;
 
-    expect(turmoil.getDelegatesInReserve(player.id)).eq(5);
-    expect(turmoil.getDelegatesInReserve(redPlayer.id)).eq(7);
+    expect(turmoil.getAvailableDelegateCount(player.id, 'reserve')).eq(5);
+    expect(turmoil.getAvailableDelegateCount(redPlayer.id, 'reserve')).eq(7);
     expect(parties.reds.delegates).to.have.members(['NEUTRAL', 'NEUTRAL', redPlayer.id, player.id]);
 
     // Now player may switch parties.

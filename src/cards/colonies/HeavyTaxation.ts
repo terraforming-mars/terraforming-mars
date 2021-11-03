@@ -15,6 +15,7 @@ export class HeavyTaxation extends Card implements IProjectCard {
       tags: [Tags.EARTH],
       name: CardName.HEAVY_TAXATION,
       cardType: CardType.AUTOMATED,
+      victoryPoints: -1,
 
       requirements: CardRequirements.builder((b) => b.tag(Tags.EARTH, 2)),
       metadata: {
@@ -23,7 +24,6 @@ export class HeavyTaxation extends Card implements IProjectCard {
           b.production((pb) => pb.megacredits(2)).nbsp.megacredits(4);
         }),
         description: 'Requires 2 Earth tags. Increase your M€ production 2 steps, and gain 4 M€.',
-        victoryPoints: -1,
       },
     });
   }
@@ -32,9 +32,5 @@ export class HeavyTaxation extends Card implements IProjectCard {
     player.addProduction(Resources.MEGACREDITS, 2);
     player.megaCredits += 4;
     return undefined;
-  }
-
-  public getVictoryPoints() {
-    return -1;
   }
 }

@@ -15,11 +15,12 @@ export class LakeMarineris extends Card implements IProjectCard {
       cost: 18,
       tr: {oceans: 2},
       requirements: CardRequirements.builder((b) => b.temperature(0)),
+      victoryPoints: 2,
+
       metadata: {
         cardNumber: '053',
         renderData: CardRenderer.builder((b) => b.oceans(2)),
         description: 'Requires 0° C or warmer. Place 2 ocean tiles.',
-        victoryPoints: 2,
       },
     });
   }
@@ -28,8 +29,5 @@ export class LakeMarineris extends Card implements IProjectCard {
     player.game.defer(new PlaceOceanTile(player, 'Select space for first ocean'));
     player.game.defer(new PlaceOceanTile(player, 'Select space for second ocean'));
     return undefined;
-  }
-  public getVictoryPoints() {
-    return 2;
   }
 }

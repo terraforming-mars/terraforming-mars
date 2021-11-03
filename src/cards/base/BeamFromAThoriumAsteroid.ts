@@ -16,6 +16,7 @@ export class BeamFromAThoriumAsteroid extends Card implements IProjectCard {
       name: CardName.BEAM_FROM_A_THORIUM_ASTEROID,
       tags: [Tags.JOVIAN, Tags.SPACE, Tags.ENERGY],
       cost: 32,
+      victoryPoints: 1,
 
       requirements: CardRequirements.builder((b) => b.tag(Tags.JOVIAN)),
       metadata: {
@@ -27,7 +28,6 @@ export class BeamFromAThoriumAsteroid extends Card implements IProjectCard {
             pb.energy(3);
           });
         }),
-        victoryPoints: 1,
       },
     });
   }
@@ -35,9 +35,6 @@ export class BeamFromAThoriumAsteroid extends Card implements IProjectCard {
     player.addProduction(Resources.HEAT, 3);
     player.addProduction(Resources.ENERGY, 3);
     return undefined;
-  }
-  public getVictoryPoints() {
-    return 1;
   }
 }
 

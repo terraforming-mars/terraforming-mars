@@ -20,6 +20,8 @@ export class VenusianPlants extends Card implements IProjectCard {
       tr: {venus: 1},
 
       requirements: CardRequirements.builder((b) => b.venus(16)),
+      victoryPoints: 1,
+
       metadata: {
         cardNumber: '261',
         renderData: CardRenderer.builder((b) => {
@@ -31,7 +33,6 @@ export class VenusianPlants extends Card implements IProjectCard {
           text: 'Requires Venus 16%. Raise Venus 1 step. Add 1 Microbe or 1 Animal to ANOTHER VENUS CARD',
           align: 'left',
         },
-        victoryPoints: 1,
       },
     });
   }
@@ -55,10 +56,6 @@ export class VenusianPlants extends Card implements IProjectCard {
         return undefined;
       },
     );
-  }
-
-  public getVictoryPoints() {
-    return 1;
   }
 
   public getResCards(player: Player): ICard[] {

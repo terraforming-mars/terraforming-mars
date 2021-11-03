@@ -16,6 +16,7 @@ export class DesperateMeasures extends Card implements IProjectCard {
       cardType: CardType.EVENT,
       name: CardName.DESPERATE_MEASURES,
       cost: 1,
+      victoryPoints: -2,
 
       metadata: {
         cardNumber: 'A04',
@@ -24,7 +25,6 @@ export class DesperateMeasures extends Card implements IProjectCard {
           b.resourceCube().asterix().br;
           b.temperature(1).slash().oxygen(1);
         }),
-        victoryPoints: -2,
       },
     });
   }
@@ -50,9 +50,5 @@ export class DesperateMeasures extends Card implements IProjectCard {
         }
         return undefined;
     });
-  }
-
-  public getVictoryPoints() {
-    return -2;
   }
 }

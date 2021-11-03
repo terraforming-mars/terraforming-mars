@@ -14,6 +14,7 @@ export class InterplanetaryTrade extends Card implements IProjectCard {
       name: CardName.INTERPLANETARY_TRADE,
       tags: [Tags.SPACE],
       cost: 27,
+      victoryPoints: 1,
 
       metadata: {
         cardNumber: 'X05',
@@ -22,7 +23,6 @@ export class InterplanetaryTrade extends Card implements IProjectCard {
           b.slash().diverseTag();
         }),
         description: 'Increase your M€ production 1 step per different tag you have in play, including this.',
-        victoryPoints: 1,
       },
     });
   }
@@ -32,9 +32,5 @@ export class InterplanetaryTrade extends Card implements IProjectCard {
     const availableTags = player.getDistinctTagCount(true, Tags.SPACE);
     player.addProduction(Resources.MEGACREDITS, availableTags, {log: true});
     return undefined;
-  }
-
-  public getVictoryPoints() {
-    return 1;
   }
 }

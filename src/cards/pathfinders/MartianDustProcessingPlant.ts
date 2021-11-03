@@ -16,6 +16,7 @@ export class MartianDustProcessingPlant extends Card implements IProjectCard {
       tags: [Tags.MARS, Tags.BUILDING],
       productionBox: Units.of({energy: -1, steel: 2}),
       tr: {tr: 1},
+      victoryPoints: 1,
 
       metadata: {
         cardNumber: 'Pf44',
@@ -24,7 +25,6 @@ export class MartianDustProcessingPlant extends Card implements IProjectCard {
           b.tr(1);
         }),
         description: 'Decrease your energy production 1 step, and raise your steel production 2 steps. Gain 1 TR.',
-        victoryPoints: 1,
       },
     });
   }

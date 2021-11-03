@@ -19,8 +19,9 @@ export class MartianZoo extends Card implements IProjectCard, IResourceCard {
       name: CardName.MARTIAN_ZOO,
       cardType: CardType.ACTIVE,
       resourceType: ResourceType.ANIMAL,
-
       requirements: CardRequirements.builder((b) => b.cities(2, {all})),
+      victoryPoints: 1,
+
       metadata: {
         cardNumber: 'C24',
         renderData: CardRenderer.builder((b) => {
@@ -35,7 +36,6 @@ export class MartianZoo extends Card implements IProjectCard, IResourceCard {
           text: 'Requires 2 city tiles in play.',
           align: 'left',
         },
-        victoryPoints: 1,
       },
     });
   }
@@ -59,9 +59,5 @@ export class MartianZoo extends Card implements IProjectCard, IResourceCard {
 
   public play() {
     return undefined;
-  }
-
-  public getVictoryPoints(): number {
-    return 1;
   }
 }

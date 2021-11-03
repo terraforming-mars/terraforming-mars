@@ -34,9 +34,9 @@ import {FlatMarsTheory} from './FlatMarsTheory';
 // import {HydrogenBombardment} from './HydrogenBombardment';
 import {HydrogenProcessingPlant} from './HydrogenProcessingPlant';
 import {InterplanetaryTransport} from './InterplanetaryTransport';
-// import {Kickstarter} from './Kickstarter';
+import {Kickstarter} from './Kickstarter';
 import {LastResortIngenuity} from './LastResortIngenuity';
-// import {LobbyHalls} from './LobbyHalls';
+import {LobbyHalls} from './LobbyHalls';
 import {LunarEmbassy} from './LunarEmbassy';
 import {LuxuryEstate} from './LuxuryEstate';
 import {MartianCulture} from './MartianCulture';
@@ -70,6 +70,7 @@ import {SolarStorm} from './SolarStorm';
 import {SpaceDebrisCleaningOperation} from './SpaceDebrisCleaningOperation';
 import {SpaceRelay} from './SpaceRelay';
 import {TerraformingControlStation} from './TerraformingControlStation';
+import {ExpeditionToTheSurfaceVenus} from './ExpeditionToTheSurfaceVenus';
 // import {TerraformingRobots} from './TerraformingRobots';
 // import {ValuableGases} from './ValuableGases';
 // import {VeneraBase} from './VeneraBase';
@@ -118,12 +119,12 @@ export const PATHFINDERS_CARD_MANIFEST = new CardManifest({
     {cardName: CardName.ECONOMIC_ESPIONAGE, Factory: EconomicEspionage},
     {cardName: CardName.FLAT_MARS_THEORY, Factory: FlatMarsTheory},
     {cardName: CardName.ASTEROID_RESOURCES, Factory: AsteroidResources},
-    // {cardName: CardName.KICKSTARTER, Factory: Kickstarter},
+    {cardName: CardName.KICKSTARTER, Factory: Kickstarter},
     // {cardName: CardName.ECONOMIC_HELP, Factory: EconomicHelp},
     {cardName: CardName.INTERPLANETARY_TRANSPORT, Factory: InterplanetaryTransport},
     {cardName: CardName.MARTIAN_DUST_PROCESSING_PLANT, Factory: MartianDustProcessingPlant},
     {cardName: CardName.CULTIVATION_OF_VENUS, Factory: CultivationOfVenus, compatibility: GameModule.Venus},
-    // {cardName: CardName.EXPEDITION_TO_THE_SURFACE_VENUS, Factory: ExpeditiontotheSurfaceVenus, compatibility: GameModule.Venus},
+    {cardName: CardName.EXPEDITION_TO_THE_SURFACE_VENUS, Factory: ExpeditionToTheSurfaceVenus, compatibility: GameModule.Venus},
     {cardName: CardName.LAST_RESORT_INGENUITY, Factory: LastResortIngenuity},
     // // {cardName: CardName.CRASHLANDING, Factory: Crashlanding},                             // COMPLICATED ADJACENCY BONUS RULES
     // // {cardName: CardName.THINK_TANK, Factory: ThinkTank},                                  // COMPLICATED REQUIREMENT RULES
@@ -142,7 +143,7 @@ export const PATHFINDERS_CARD_MANIFEST = new CardManifest({
     // {cardName: CardName.CASSINI_STATION, Factory: CassiniStation, compatibility: GameModule.Colonies},
     // {cardName: CardName.MICROBIOLOGY_PATENTS, Factory: MicrobiologyPatents},
     // // {cardName: CardName.COORDINATED_RAID, Factory: CoordinatedRaid, compatibility: GameModule.Colonies},       // TRICKY WORK
-    // {cardName: CardName.LOBBY_HALLS, Factory: LobbyHalls, compatibility: GameModule.Turmoil},
+    {cardName: CardName.LOBBY_HALLS, Factory: LobbyHalls, compatibility: GameModule.Turmoil},
     // // {cardName: CardName.RED_CITY, Factory: RedCity, compatibility: GameModule.Turmoil},                        // AVAILABLE GREENERY SPACES
     // {cardName: CardName.VENERA_BASE, Factory: VeneraBase, compatibility: [GameModule.Turmoil, GameModule.Venus]},
     // // {cardName: CardName.GATEWAY_STATION, Factory: GatewayStation, compatibility: GameModule.Turmoil},

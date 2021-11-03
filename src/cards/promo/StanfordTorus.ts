@@ -15,6 +15,7 @@ export class StanfordTorus extends Card implements IProjectCard {
       name: CardName.STANFORD_TORUS,
       tags: [Tags.SPACE, Tags.CITY],
       cost: 12,
+      victoryPoints: 2,
 
       metadata: {
         cardNumber: 'X12',
@@ -22,7 +23,6 @@ export class StanfordTorus extends Card implements IProjectCard {
           b.city().asterix();
         }),
         description: 'Place a city tile IN SPACE, outside and separate from the planet.',
-        victoryPoints: 2,
       },
     });
   }
@@ -30,9 +30,5 @@ export class StanfordTorus extends Card implements IProjectCard {
   public play(player: Player) {
     player.game.addCityTile(player, SpaceName.STANFORD_TORUS, SpaceType.COLONY);
     return undefined;
-  }
-
-  public getVictoryPoints() {
-    return 2;
   }
 }

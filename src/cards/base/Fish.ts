@@ -2,6 +2,7 @@ import {IActionCard, IResourceCard} from '../ICard';
 import {IProjectCard} from '../IProjectCard';
 import {Tags} from '../Tags';
 import {Card} from '../Card';
+import {VictoryPoints} from '../ICard';
 import {CardType} from '../CardType';
 import {ResourceType} from '../../ResourceType';
 import {Player} from '../../Player';
@@ -10,7 +11,6 @@ import {CardName} from '../../CardName';
 import {DecreaseAnyProduction} from '../../deferredActions/DecreaseAnyProduction';
 import {CardRequirements} from '../CardRequirements';
 import {CardRenderer} from '../render/CardRenderer';
-import {CardRenderDynamicVictoryPoints} from '../render/CardRenderDynamicVictoryPoints';
 import {all} from '../Options';
 
 export class Fish extends Card implements IActionCard, IProjectCard, IResourceCard {
@@ -20,9 +20,11 @@ export class Fish extends Card implements IActionCard, IProjectCard, IResourceCa
       name: CardName.FISH,
       tags: [Tags.ANIMAL],
       cost: 9,
-      resourceType: ResourceType.ANIMAL,
 
+      resourceType: ResourceType.ANIMAL,
+      victoryPoints: VictoryPoints.resource(1, 1),
       requirements: CardRequirements.builder((b) => b.temperature(2)),
+
       metadata: {
         cardNumber: '052',
         renderData: CardRenderer.builder((b) => {
@@ -36,7 +38,6 @@ export class Fish extends Card implements IActionCard, IProjectCard, IResourceCa
           text: 'Requires +2 C° or warmer. Decrease any Plant production 1 step.',
           align: 'left',
         },
-        victoryPoints: CardRenderDynamicVictoryPoints.animals(1, 1),
       },
     });
   }
@@ -44,9 +45,6 @@ export class Fish extends Card implements IActionCard, IProjectCard, IResourceCa
 
     public canPlay(player: Player): boolean {
       return player.game.someoneHasResourceProduction(Resources.PLANTS, 1);
-    }
-    public getVictoryPoints(): number {
-      return this.resourceCount;
     }
     public play(player: Player) {
       player.game.defer(new DecreaseAnyProduction(player, Resources.PLANTS, 1));

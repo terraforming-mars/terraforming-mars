@@ -23,6 +23,7 @@ export class LunaTrainStation extends MoonCard {
       requirements: CardRequirements.builder((b) => b.logisticRate(5)),
       reserveUnits: Units.of({steel: 2}),
       tr: {moonLogistics: 1},
+      victoryPoints: 'special',
 
       metadata: {
         description: 'Requires a Logistic Rate of 5 or higher. Spend 2 steel. ' +

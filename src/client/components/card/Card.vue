@@ -10,7 +10,7 @@
                 <CardNumber v-if="getCardMetadata() !== undefined" :number="getCardNumber()"/>
             </div>
             <CardExpansion :expansion="getCardExpansion()" :isCorporation="isCorporationCard()"/>
-            <CardResourceCounter v-if="card.resources !== undefined" :amount="getResourceAmount(card)" :type="resourceType" />
+            <CardResourceCounter v-if="card.resourceType !== undefined" :amount="getResourceAmount(card)" :type="resourceType" />
             <CardExtraContent :card="card" />
             <slot/>
         </div>
@@ -104,17 +104,19 @@ export default Vue.extend({
       return this.cardInstance;
     },
     getTags(): Array<string> {
-      let result: Array<string> = [];
       const type = this.getCardType();
-      const tags = this.getCard()?.tags;
-      if (tags !== undefined) {
-        result = result.concat(tags);
-      }
+      const tags = [...this.getCard()?.tags || []];
+      tags.forEach((tag, idx) => {
+        // Clone are changed on card implementations but that's not passed down directly through the
+        // model, however, it sends down the `cloneTag` field. So this function does the substitution.
+        if (tag === Tags.CLONE && this.card.cloneTag !== undefined) {
+          tags[idx] = this.card.cloneTag;
+        }
+      });
       if (type === CardType.EVENT) {
-        result.push(Tags.EVENT);
+        tags.push(Tags.EVENT);
       }
-
-      return result;
+      return tags;
     },
     getCost(): number | undefined {
       const cost = this.getCard()?.cost;

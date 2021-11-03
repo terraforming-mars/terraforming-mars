@@ -2,6 +2,7 @@ import {IActionCard, IResourceCard} from '../ICard';
 import {IProjectCard} from '../IProjectCard';
 import {Tags} from '../Tags';
 import {Card} from '../Card';
+import {VictoryPoints} from '../ICard';
 import {CardType} from '../CardType';
 import {Player} from '../../Player';
 import {ResourceType} from '../../ResourceType';
@@ -10,7 +11,6 @@ import {CardName} from '../../CardName';
 import {DecreaseAnyProduction} from '../../deferredActions/DecreaseAnyProduction';
 import {CardRequirements} from '../CardRequirements';
 import {CardRenderer} from '../render/CardRenderer';
-import {CardRenderDynamicVictoryPoints} from '../render/CardRenderDynamicVictoryPoints';
 import {all} from '../Options';
 
 export class Birds extends Card implements IActionCard, IProjectCard, IResourceCard {
@@ -20,8 +20,11 @@ export class Birds extends Card implements IActionCard, IProjectCard, IResourceC
       name: CardName.BIRDS,
       tags: [Tags.ANIMAL],
       cost: 10,
+
       resourceType: ResourceType.ANIMAL,
       requirements: CardRequirements.builder((b) => b.oxygen(13)),
+      victoryPoints: VictoryPoints.resource(1, 1),
+
       metadata: {
         cardNumber: '072',
         description: 'Requires 13% oxygen. Decrease any plant production 2 steps. 1 VP per Animal on this card.',
@@ -33,7 +36,6 @@ export class Birds extends Card implements IActionCard, IProjectCard, IResourceC
             pb.minus().plants(-2, {all});
           });
         }),
-        victoryPoints: CardRenderDynamicVictoryPoints.animals(1, 1),
       },
     });
   }
@@ -42,9 +44,6 @@ export class Birds extends Card implements IActionCard, IProjectCard, IResourceC
 
     public canPlay(player: Player): boolean {
       return player.game.someoneHasResourceProduction(Resources.PLANTS, 2);
-    }
-    public getVictoryPoints(): number {
-      return this.resourceCount;
     }
     public play(player: Player) {
       player.game.defer(new DecreaseAnyProduction(player, Resources.PLANTS, 2));

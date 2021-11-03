@@ -1,6 +1,7 @@
 import {IProjectCard} from '../IProjectCard';
 import {Tags} from '../Tags';
 import {Card} from '../Card';
+import {VictoryPoints} from '../ICard';
 import {CardType} from '../CardType';
 import {Player} from '../../Player';
 import {ISpace} from '../../boards/ISpace';
@@ -11,7 +12,6 @@ import {AddResourcesToCard} from '../../deferredActions/AddResourcesToCard';
 import {IResourceCard} from '../ICard';
 import {Board} from '../../boards/Board';
 import {CardRenderer} from '../render/CardRenderer';
-import {CardRenderDynamicVictoryPoints} from '../render/CardRenderDynamicVictoryPoints';
 import {Size} from '../render/Size';
 import {all} from '../Options';
 
@@ -24,6 +24,8 @@ export class Pets extends Card implements IProjectCard, IResourceCard {
       cost: 10,
       resourceType: ResourceType.ANIMAL,
 
+      victoryPoints: VictoryPoints.resource(1, 2),
+
       metadata: {
         cardNumber: '172',
         renderData: CardRenderer.builder((b) => {
@@ -35,16 +37,11 @@ export class Pets extends Card implements IProjectCard, IResourceCard {
           b.vpText('1 VP per 2 Animals here.');
         }),
         description: {text: 'Add 1 Animal to this card.', align: 'left'},
-        victoryPoints: CardRenderDynamicVictoryPoints.animals(1, 2),
       },
     });
   }
 
   public resourceCount: number = 0;
-
-  public getVictoryPoints(): number {
-    return Math.floor(this.resourceCount / 2);
-  }
 
   public onTilePlaced(cardOwner: Player, activePlayer: Player, space: ISpace) {
     if (Board.isCitySpace(space)) {

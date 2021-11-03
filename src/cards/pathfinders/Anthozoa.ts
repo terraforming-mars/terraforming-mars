@@ -4,11 +4,10 @@ import {Card} from '../Card';
 import {CardType} from '../CardType';
 import {CardName} from '../../CardName';
 import {CardRenderer} from '../render/CardRenderer';
-import {IActionCard} from '../ICard';
+import {IActionCard, VictoryPoints} from '../ICard';
 import {Resources} from '../../Resources';
 import {Tags} from '../Tags';
 import {CardRequirements} from '../CardRequirements';
-import {CardRenderDynamicVictoryPoints} from '../render/CardRenderDynamicVictoryPoints';
 import {ResourceType} from '../../ResourceType';
 
 export class Anthozoa extends Card implements IProjectCard, IActionCard {
@@ -20,6 +19,7 @@ export class Anthozoa extends Card implements IProjectCard, IActionCard {
       tags: [Tags.PLANT, Tags.ANIMAL, Tags.MARS],
       requirements: CardRequirements.builder((b) => b.oceans(3)),
       resourceType: ResourceType.ANIMAL,
+      victoryPoints: VictoryPoints.resource(1, 2),
 
       metadata: {
         cardNumber: 'Pf55',
@@ -28,7 +28,6 @@ export class Anthozoa extends Card implements IProjectCard, IActionCard {
             eb.plants(1).startAction.animals(1);
           });
         }),
-        victoryPoints: CardRenderDynamicVictoryPoints.animals(1, 2),
         description: 'Requires 3 oceans on Mars. 1 VP per 2 animals on this card',
       },
     });
@@ -49,10 +48,6 @@ export class Anthozoa extends Card implements IProjectCard, IActionCard {
 
   public play() {
     return undefined;
-  }
-
-  public getVictoryPoints() {
-    return Math.floor(this.resourceCount / 2);
   }
 }
 

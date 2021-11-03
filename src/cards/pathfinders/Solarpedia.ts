@@ -5,10 +5,9 @@ import {IProjectCard} from '../IProjectCard';
 import {Tags} from '../Tags';
 import {CardRenderer} from '../render/CardRenderer';
 import {ResourceType} from '../../ResourceType';
-import {IActionCard} from '../ICard';
+import {IActionCard, VictoryPoints} from '../ICard';
 import {Card} from '../Card';
 import {CardRequirements} from '../CardRequirements';
-import {CardRenderDynamicVictoryPoints} from '../render/CardRenderDynamicVictoryPoints';
 import {AddResourcesToCard} from '../../deferredActions/AddResourcesToCard';
 
 export class Solarpedia extends Card implements IProjectCard, IActionCard {
@@ -20,6 +19,7 @@ export class Solarpedia extends Card implements IProjectCard, IActionCard {
       cost: 12,
       requirements: CardRequirements.builder((b) => b.tag(Tags.VENUS).tag(Tags.EARTH).tag(Tags.MARS).tag(Tags.JOVIAN)),
       resourceType: ResourceType.DATA,
+      victoryPoints: VictoryPoints.resource(1, 6),
 
       metadata: {
         cardNumber: 'Pf54',
@@ -30,7 +30,6 @@ export class Solarpedia extends Card implements IProjectCard, IActionCard {
           b.data({amount: 2}).asterix();
         }),
         description: 'Requires 1 Venus, Earth, Mars, and Jovian Tag. Add 2 data to any card. 1 VP for every 6 data resources here.',
-        victoryPoints: CardRenderDynamicVictoryPoints.data(1, 6),
       },
     });
   };
@@ -49,10 +48,5 @@ export class Solarpedia extends Card implements IProjectCard, IActionCard {
   public play(player: Player) {
     player.game.defer(new AddResourcesToCard(player, ResourceType.DATA, {count: 2}));
     return undefined;
-  }
-
-
-  public getVictoryPoints() {
-    return Math.floor(this.resourceCount / 6);
   }
 }

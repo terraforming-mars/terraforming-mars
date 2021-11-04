@@ -32,8 +32,8 @@ export class NobelLabs extends Card implements IProjectCard, IActionCard {
     });
   }
 
-  private static RESOURCE_TYPES: Array<ResourceType | undefined> = [ResourceType.MICROBE, ResourceType.DATA, ResourceType.FLOATER];
-  private static PREDICATE = (card: ICard) => NobelLabs.RESOURCE_TYPES.includes(card.resourceType);
+  private static RESOURCE_TYPES: Array<ResourceType> = [ResourceType.MICROBE, ResourceType.DATA, ResourceType.FLOATER];
+  private static PREDICATE = (card: ICard) => card.resourceType !== undefined && NobelLabs.RESOURCE_TYPES.includes(card.resourceType);
 
   public canAct(player: Player) {
     return player.getResourceCards().some(NobelLabs.PREDICATE);

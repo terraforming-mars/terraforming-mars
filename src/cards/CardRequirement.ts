@@ -255,7 +255,7 @@ export class ProductionCardRequirement extends CardRequirement {
 }
 
 export class PartyCardRequirement extends CardRequirement {
-  constructor(private party: PartyName) {
+  constructor(public party: PartyName) {
     super(RequirementType.PARTY);
   }
   protected parseType(): string {

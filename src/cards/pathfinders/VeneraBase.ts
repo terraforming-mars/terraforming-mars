@@ -40,9 +40,7 @@ export class VeneraBase extends Card implements IProjectCard, IActionCard {
   }
 
   public canAct(player: Player) {
-    return player.getResourceCards(ResourceType.FLOATER)
-      .filter((card) => card.tags.includes(Tags.VENUS))
-      .length > 0;
+    return player.getResourceCards(ResourceType.FLOATER).some((card) => card.tags.includes(Tags.VENUS));
   }
 
   public action(player: Player) {

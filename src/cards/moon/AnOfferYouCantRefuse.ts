@@ -35,7 +35,7 @@ export class AnOfferYouCantRefuse extends ProjectCard {
   // You can play this if you have an available delegate, and if there are non-neutral non-leader delegates available to swap with.
   public canPlay(player: Player) {
     const turmoil = Turmoil.getTurmoil(player.game);
-    const hasDelegate = turmoil.hasAvailableDelegates(player.id) || turmoil.lobby.has(player.id);
+    const hasDelegate = turmoil.hasDelegatesInReserve(player.id) || turmoil.lobby.has(player.id);
     if (!hasDelegate) return false;
 
     return turmoil.parties.some((party) =>
@@ -75,7 +75,7 @@ export class AnOfferYouCantRefuse extends ProjectCard {
 
           const playerName = game.getPlayerById(delegate).name;
           const option = new SelectOption(`${party.name} / ${playerName}`, 'Select', () => {
-            const source = turmoil.hasAvailableDelegates(player.id) ? 'reserve' : 'lobby';
+            const source = turmoil.hasDelegatesInReserve(player.id) ? 'reserve' : 'lobby';
             turmoil.replaceDelegateFromParty(delegate, player.id, source, party.name, game);
             turmoil.checkDominantParty(party); // Check dominance right after replacement (replace doesn't check dominance.)
             return this.moveToAnotherParty(game, party.name, player.id);

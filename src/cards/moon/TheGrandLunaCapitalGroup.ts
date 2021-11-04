@@ -23,6 +23,7 @@ export class TheGrandLunaCapitalGroup extends Card implements CorporationCard {
       tags: [Tags.CITY, Tags.MOON],
       startingMegaCredits: 32,
       initialActionText: 'Place a colony tile',
+      victoryPoints: 'special',
 
       metadata: {
         description: {

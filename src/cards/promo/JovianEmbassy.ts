@@ -14,6 +14,7 @@ export class JovianEmbassy extends Card implements IProjectCard {
       tags: [Tags.JOVIAN, Tags.BUILDING],
       cost: 14,
       tr: {tr: 1},
+      victoryPoints: 1,
 
       metadata: {
         cardNumber: 'X23',
@@ -21,7 +22,6 @@ export class JovianEmbassy extends Card implements IProjectCard {
           b.tr(1);
         }),
         description: 'Raise your TR 1 step.',
-        victoryPoints: 1,
       },
     });
   }
@@ -29,9 +29,5 @@ export class JovianEmbassy extends Card implements IProjectCard {
   public play(player: Player) {
     player.increaseTerraformRating();
     return undefined;
-  }
-
-  public getVictoryPoints() {
-    return 1;
   }
 }

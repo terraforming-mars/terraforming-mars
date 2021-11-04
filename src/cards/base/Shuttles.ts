@@ -16,6 +16,7 @@ export class Shuttles extends Card implements IProjectCard {
       name: CardName.SHUTTLES,
       tags: [Tags.SPACE],
       cost: 10,
+      victoryPoints: 1,
 
       requirements: CardRequirements.builder((b) => b.oxygen(5)),
       cardDiscount: {tag: Tags.SPACE, amount: 2},
@@ -34,7 +35,6 @@ export class Shuttles extends Card implements IProjectCard {
           text: 'Requires 5% oxygen. Decrease your Energy production 1 step and increase your M€ production 2 steps.',
           align: 'left',
         },
-        victoryPoints: 1,
       },
     });
   }
@@ -53,8 +53,5 @@ export class Shuttles extends Card implements IProjectCard {
     player.addProduction(Resources.ENERGY, -1);
     player.addProduction(Resources.MEGACREDITS, 2);
     return undefined;
-  }
-  public getVictoryPoints() {
-    return 1;
   }
 }

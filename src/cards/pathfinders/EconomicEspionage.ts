@@ -5,9 +5,8 @@ import {CardName} from '../../CardName';
 import {CardRenderer} from '../render/CardRenderer';
 import {Tags} from '../Tags';
 import {ResourceType} from '../../ResourceType';
-import {CardRenderDynamicVictoryPoints} from '../render/CardRenderDynamicVictoryPoints';
 import {Player} from '../../Player';
-import {IActionCard} from '../ICard';
+import {IActionCard, VictoryPoints} from '../ICard';
 import {AddResourcesToCard} from '../../deferredActions/AddResourcesToCard';
 import {SelectHowToPayDeferred} from '../../deferredActions/SelectHowToPayDeferred';
 
@@ -19,6 +18,7 @@ export class EconomicEspionage extends Card implements IProjectCard, IActionCard
       cost: 8,
       tags: [Tags.EARTH],
       resourceType: ResourceType.DATA,
+      victoryPoints: VictoryPoints.resource(1, 3),
 
       metadata: {
         cardNumber: 'Pf37',
@@ -28,7 +28,6 @@ export class EconomicEspionage extends Card implements IProjectCard, IActionCard
           }).br;
         }),
         description: '1VP for every 3 data here.',
-        victoryPoints: CardRenderDynamicVictoryPoints.data(1, 3),
       },
     });
   }
@@ -51,9 +50,5 @@ export class EconomicEspionage extends Card implements IProjectCard, IActionCard
 
   public play() {
     return undefined;
-  }
-
-  public getVictoryPoints() {
-    return Math.floor(this.resourceCount / 3);
   }
 }

@@ -2,20 +2,20 @@ import {CardManifest} from '../CardManifest';
 import {CardName} from '../../CardName';
 import {GameModule} from '../../GameModule';
 
-// import {AdvancedPowerGrid} from './AdvancedPowerGrid';
+import {AdvancedPowerGrid} from './AdvancedPowerGrid';
 import {AgroDrones} from './AgroDrones';
-// import {Anthozoa} from './Anthozoa';
+import {Anthozoa} from './Anthozoa';
 // import {AntidesertificationTechniques} from './AntidesertificationTechniques';
-// import {AsteroidResources} from './AsteroidResources';
+import {AsteroidResources} from './AsteroidResources';
 import {BreedingFarms} from './BreedingFarms';
-// import {CassiniStation} from './CassiniStation';
+import {CassiniStation} from './CassiniStation';
 import {CeresSpaceport} from './CeresSpaceport';
 // import {CO2Reducers} from './CO2Reducers';
 // import {CommunicationCenter} from './CommunicationCenter';
 // import {ControlledBloom} from './ControlledBloom';
 // import {CrewTraining} from './CrewTraining';
-// import {Cryptocurrency} from './Cryptocurrency';
-// import {CultivationofVenus} from './CultivationofVenus';
+import {Cryptocurrency} from './Cryptocurrency';
+import {CultivationOfVenus} from './CultivationOfVenus';
 import {Cyanobacteria} from './Cyanobacteria';
 import {DataLeak} from './DataLeak';
 import {DeclarationOfIndependence} from './DeclarationOfIndependence';
@@ -29,25 +29,25 @@ import {EconomicEspionage} from './EconomicEspionage';
 // import {EconomicHelp} from './EconomicHelp';
 // import {ExpeditiontotheSurfaceVenus} from './ExpeditiontotheSurfaceVenus';
 import {FlatMarsTheory} from './FlatMarsTheory';
-// import {FloaterUrbanism} from './FloaterUrbanism';
+import {FloaterUrbanism} from './FloaterUrbanism';
 // import {HighTempSuperconductors} from './HighTempSuperconductors';
 // import {HydrogenBombardment} from './HydrogenBombardment';
 import {HydrogenProcessingPlant} from './HydrogenProcessingPlant';
-// import {InterplanetaryTransport} from './InterplanetaryTransport';
-// import {Kickstarter} from './Kickstarter';
+import {InterplanetaryTransport} from './InterplanetaryTransport';
+import {Kickstarter} from './Kickstarter';
 import {LastResortIngenuity} from './LastResortIngenuity';
-// import {LobbyHalls} from './LobbyHalls';
+import {LobbyHalls} from './LobbyHalls';
 import {LunarEmbassy} from './LunarEmbassy';
 import {LuxuryEstate} from './LuxuryEstate';
 import {MartianCulture} from './MartianCulture';
-// import {MartianDustProcessingPlant} from './MartianDustProcessingPlant';
+import {MartianDustProcessingPlant} from './MartianDustProcessingPlant';
 import {MartianMonuments} from './MartianMonuments';
 // import {MartianNatureWonders} from './MartianNatureWonders';
 import {MartianRepository} from './MartianRepository';
-// import {MicrobiologyPatents} from './MicrobiologyPatents';
+import {MicrobiologyPatents} from './MicrobiologyPatents';
 import {MuseumofEarlyColonisation} from './MuseumofEarlyColonisation';
 import {NewVenice} from './NewVenice';
-// import {NobelLabs} from './NobelLabs';
+import {NobelLabs} from './NobelLabs';
 import {OrbitalLaboratories} from './OrbitalLaboratories';
 import {OzoneGenerators} from './OzoneGenerators';
 // import {PersonalAgenda} from './PersonalAgenda';
@@ -59,20 +59,21 @@ import {PrivateSecurity} from './PrivateSecurity';
 import {RareEarthElements} from './RareEarthElements';
 // import {ResearchGrant} from './ResearchGrant';
 import {ReturntoAbandonedTechnology} from './ReturntoAbandonedTechnology';
-// import {RichDeposits} from './RichDeposits';
+import {RichDeposits} from './RichDeposits';
 import {SecretLabs} from './SecretLabs';
 import {SmallOpenPitMine} from './SmallOpenPitMine';
 import {SmallComet} from './SmallComet';
 // import {SocialEvents} from './SocialEvents';
 // import {SoilDetoxification} from './SoilDetoxification';
-// import {Solarpedia} from './Solarpedia';
+import {Solarpedia} from './Solarpedia';
 import {SolarStorm} from './SolarStorm';
 import {SpaceDebrisCleaningOperation} from './SpaceDebrisCleaningOperation';
 import {SpaceRelay} from './SpaceRelay';
 import {TerraformingControlStation} from './TerraformingControlStation';
+import {ExpeditionToTheSurfaceVenus} from './ExpeditionToTheSurfaceVenus';
 // import {TerraformingRobots} from './TerraformingRobots';
 // import {ValuableGases} from './ValuableGases';
-// import {VeneraBase} from './VeneraBase';
+import {VeneraBase} from './VeneraBase';
 // import {VenusFirst} from './VenusFirst';
 
 export const PATHFINDERS_CARD_MANIFEST = new CardManifest({
@@ -117,36 +118,36 @@ export const PATHFINDERS_CARD_MANIFEST = new CardManifest({
     {cardName: CardName.SMALL_COMET, Factory: SmallComet},
     {cardName: CardName.ECONOMIC_ESPIONAGE, Factory: EconomicEspionage},
     {cardName: CardName.FLAT_MARS_THEORY, Factory: FlatMarsTheory},
-    // {cardName: CardName.ASTEROID_RESOURCES, Factory: AsteroidResources},
-    // {cardName: CardName.KICKSTARTER, Factory: Kickstarter},
+    {cardName: CardName.ASTEROID_RESOURCES, Factory: AsteroidResources},
+    {cardName: CardName.KICKSTARTER, Factory: Kickstarter},
     // {cardName: CardName.ECONOMIC_HELP, Factory: EconomicHelp},
-    // {cardName: CardName.INTERPLANETARY_TRANSPORT, Factory: InterplanetaryTransport},
-    // {cardName: CardName.MARTIAN_DUST_PROCESSING_PLANT, Factory: MartianDustProcessingPlant},
-    // {cardName: CardName.CULTIVATION_OF_VENUS, Factory: CultivationofVenus, compatibility: GameModule.Venus},
-    // {cardName: CardName.EXPEDITION_TO_THE_SURFACE_VENUS, Factory: ExpeditiontotheSurfaceVenus, compatibility: GameModule.Venus},
+    {cardName: CardName.INTERPLANETARY_TRANSPORT, Factory: InterplanetaryTransport},
+    {cardName: CardName.MARTIAN_DUST_PROCESSING_PLANT, Factory: MartianDustProcessingPlant},
+    {cardName: CardName.CULTIVATION_OF_VENUS, Factory: CultivationOfVenus, compatibility: GameModule.Venus},
+    {cardName: CardName.EXPEDITION_TO_THE_SURFACE_VENUS, Factory: ExpeditionToTheSurfaceVenus, compatibility: GameModule.Venus},
     {cardName: CardName.LAST_RESORT_INGENUITY, Factory: LastResortIngenuity},
     // // {cardName: CardName.CRASHLANDING, Factory: Crashlanding},                             // COMPLICATED ADJACENCY BONUS RULES
     // // {cardName: CardName.THINK_TANK, Factory: ThinkTank},                                  // COMPLICATED REQUIREMENT RULES
     // // {cardName: CardName.BOTANICAL_EXPERIENCE, Factory: BotanicalExperience},              // AUTOMATIC INCREASE, TARGETING RULES.
-    // {cardName: CardName.CRYPTOCURRENCY, Factory: Cryptocurrency},
-    // {cardName: CardName.RICH_DEPOSITS, Factory: RichDeposits},
+    {cardName: CardName.CRYPTOCURRENCY, Factory: Cryptocurrency},
+    {cardName: CardName.RICH_DEPOSITS, Factory: RichDeposits},
     // // *** {cardName: CardName.OUMUAMUA_TYPE_OBJECT_SURVEY, Factory: OumuamuaTypeObjectSurvey},
-    // {cardName: CardName.SOLARPEDIA, Factory: Solarpedia, compatibility: GameModule.Venus},
-    // {cardName: CardName.ANTHOZOA, Factory: Anthozoa},
-    // {cardName: CardName.ADVANCED_POWER_GRID, Factory: AdvancedPowerGrid},
+    {cardName: CardName.SOLARPEDIA, Factory: Solarpedia, compatibility: GameModule.Venus},
+    {cardName: CardName.ANTHOZOA, Factory: Anthozoa},
+    {cardName: CardName.ADVANCED_POWER_GRID, Factory: AdvancedPowerGrid},
     // // {cardName: CardName.SPECIALIZED_SETTLEMENT, Factory: SpecializedSettlement},          // ROBOTIC WORKFORCE COMPLICATION
     // // *** {cardName: CardName.CHARITY_DONATION, Factory: CharityDonation},
     // // {cardName: CardName.CURIOSITY_LABS, Factory: CuriosityLabs},                          // TWO RESOURCE TYPES
-    // {cardName: CardName.NOBEL_LABS, Factory: NobelLabs},
+    {cardName: CardName.NOBEL_LABS, Factory: NobelLabs},
     // // {cardName: CardName.HUYGENS_OBSERVATORY, Factory: HuygensObservatory, compatibility: GameModule.Colonies}, // TRICKY WORK
-    // {cardName: CardName.CASSINI_STATION, Factory: CassiniStation, compatibility: GameModule.Colonies},
-    // {cardName: CardName.MICROBIOLOGY_PATENTS, Factory: MicrobiologyPatents},
+    {cardName: CardName.CASSINI_STATION, Factory: CassiniStation, compatibility: GameModule.Colonies},
+    {cardName: CardName.MICROBIOLOGY_PATENTS, Factory: MicrobiologyPatents},
     // // {cardName: CardName.COORDINATED_RAID, Factory: CoordinatedRaid, compatibility: GameModule.Colonies},       // TRICKY WORK
-    // {cardName: CardName.LOBBY_HALLS, Factory: LobbyHalls, compatibility: GameModule.Turmoil},
+    {cardName: CardName.LOBBY_HALLS, Factory: LobbyHalls, compatibility: GameModule.Turmoil},
     // // {cardName: CardName.RED_CITY, Factory: RedCity, compatibility: GameModule.Turmoil},                        // AVAILABLE GREENERY SPACES
-    // {cardName: CardName.VENERA_BASE, Factory: VeneraBase, compatibility: [GameModule.Turmoil, GameModule.Venus]},
+    {cardName: CardName.VENERA_BASE, Factory: VeneraBase, compatibility: [GameModule.Turmoil, GameModule.Venus]},
     // // {cardName: CardName.GATEWAY_STATION, Factory: GatewayStation, compatibility: GameModule.Turmoil},
-    // {cardName: CardName.FLOATER_URBANISM, Factory: FloaterUrbanism, compatibility: GameModule.Venus},
+    {cardName: CardName.FLOATER_URBANISM, Factory: FloaterUrbanism, compatibility: GameModule.Venus},
     // {cardName: CardName.SOIL_DETOXIFICATION, Factory: SoilDetoxification, compatibility: GameModule.Turmoil},
     // {cardName: CardName.HIGH_TEMP_SUPERCONDUCTORS, Factory: HighTempSuperconductors, compatibility: GameModule.Turmoil},
     // {cardName: CardName.PUBLIC_SPONSORED_GRANT, Factory: PublicSponsoredGrant, compatibility: GameModule.Turmoil},

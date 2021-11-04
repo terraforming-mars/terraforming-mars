@@ -16,6 +16,7 @@ export class NitrogenFromTitan extends Card implements IProjectCard {
       name: CardName.NITROGEN_FROM_TITAN,
       cardType: CardType.AUTOMATED,
       tr: {tr: 2},
+      victoryPoints: 1,
 
       metadata: {
         cardNumber: 'C28',
@@ -23,7 +24,6 @@ export class NitrogenFromTitan extends Card implements IProjectCard {
           b.tr(2).floaters(2, {secondaryTag: Tags.JOVIAN});
         }),
         description: 'Raise your TR 2 steps. Add 2 floaters to a JOVIAN CARD.',
-        victoryPoints: 1,
       },
     });
   }
@@ -32,9 +32,6 @@ export class NitrogenFromTitan extends Card implements IProjectCard {
     player.increaseTerraformRatingSteps(2);
     player.game.defer(new AddResourcesToCard(player, ResourceType.FLOATER, {count: 2, restrictedTag: Tags.JOVIAN}));
     return undefined;
-  }
-  public getVictoryPoints() {
-    return 1;
   }
 }
 

@@ -13,12 +13,12 @@ export class InterstellarColonyShip extends Card implements IProjectCard {
       name: CardName.INTERSTELLAR_COLONY_SHIP,
       tags: [Tags.EARTH, Tags.SPACE],
       cost: 24,
+      victoryPoints: 4,
 
       requirements: CardRequirements.builder((b) => b.tag(Tags.SCIENCE, 5)),
       metadata: {
         description: 'Requires that you have 5 Science tags.',
         cardNumber: '027',
-        victoryPoints: 4,
       },
     });
   }
@@ -27,8 +27,5 @@ export class InterstellarColonyShip extends Card implements IProjectCard {
       throw 'Requires 5 science tags.';
     }
     return undefined;
-  }
-  public getVictoryPoints() {
-    return 4;
   }
 }

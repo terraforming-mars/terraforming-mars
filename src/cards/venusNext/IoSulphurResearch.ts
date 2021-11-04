@@ -14,6 +14,8 @@ export class IoSulphurResearch extends Card {
       tags: [Tags.SCIENCE, Tags.JOVIAN],
       cost: 17,
 
+      victoryPoints: 2,
+
       metadata: {
         cardNumber: '232',
         renderData: CardRenderer.builder((b) => {
@@ -22,7 +24,6 @@ export class IoSulphurResearch extends Card {
           b.venus(3, {played, digit}).colon().cards(3);
         }),
         description: 'Draw 1 card, or draw 3 if you have at least 3 Venus tags.',
-        victoryPoints: 2,
       },
     });
   };
@@ -30,8 +31,5 @@ export class IoSulphurResearch extends Card {
   public play(player: Player) {
     player.drawCard(player.getTagCount(Tags.VENUS) >= 3 ? 3 : 1);
     return undefined;
-  }
-  public getVictoryPoints() {
-    return 2;
   }
 }

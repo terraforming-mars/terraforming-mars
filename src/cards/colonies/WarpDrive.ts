@@ -15,6 +15,7 @@ export class WarpDrive extends Card implements IProjectCard {
       tags: [Tags.SCIENCE],
       name: CardName.WARP_DRIVE,
       cardType: CardType.ACTIVE,
+      victoryPoints: 2,
 
       requirements: CardRequirements.builder((b) => b.tag(Tags.SCIENCE, 5)),
       cardDiscount: {tag: Tags.SPACE, amount: 4},
@@ -26,7 +27,6 @@ export class WarpDrive extends Card implements IProjectCard {
           });
         }),
         description: 'Requires 5 Science tags.',
-        victoryPoints: 2,
       },
     });
   }
@@ -40,9 +40,5 @@ export class WarpDrive extends Card implements IProjectCard {
 
   public play() {
     return undefined;
-  }
-
-  public getVictoryPoints() {
-    return 2;
   }
 }

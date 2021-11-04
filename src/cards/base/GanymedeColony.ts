@@ -1,13 +1,13 @@
 import {IProjectCard} from '../IProjectCard';
 import {Tags} from '../Tags';
 import {Card} from '../Card';
+import {VictoryPoints} from '../ICard';
 import {CardType} from '../CardType';
 import {Player} from '../../Player';
 import {SpaceName} from '../../SpaceName';
 import {SpaceType} from '../../SpaceType';
 import {CardName} from '../../CardName';
 import {CardRenderer} from '../render/CardRenderer';
-import {CardRenderDynamicVictoryPoints} from '../render/CardRenderDynamicVictoryPoints';
 
 export class GanymedeColony extends Card implements IProjectCard {
   constructor() {
@@ -17,6 +17,8 @@ export class GanymedeColony extends Card implements IProjectCard {
       tags: [Tags.JOVIAN, Tags.SPACE, Tags.CITY],
       cost: 20,
 
+      victoryPoints: VictoryPoints.tags(Tags.JOVIAN, 1, 1),
+
       metadata: {
         description: 'Place a city tile ON THE RESERVED AREA.',
         cardNumber: '081',
@@ -24,12 +26,8 @@ export class GanymedeColony extends Card implements IProjectCard {
           b.city().asterix().br;
           b.vpText('1 VP per Jovian tag you have.');
         }),
-        victoryPoints: CardRenderDynamicVictoryPoints.jovians(1, 1),
       },
     });
-  }
-  public getVictoryPoints(player: Player) {
-    return player.getTagCount(Tags.JOVIAN, false, false);
   }
   public play(player: Player) {
     player.game.addCityTile(player, SpaceName.GANYMEDE_COLONY, SpaceType.COLONY);

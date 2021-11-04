@@ -338,6 +338,16 @@ class Builder {
     return this._appendToRow(new CardRenderItem(CardRenderItemType.DATA_RESOURCE, 1, options));
   }
 
+  public venusianHabitat(amount: number): Builder {
+    this._appendToRow(new CardRenderItem(CardRenderItemType.VENUSIAN_HABITAT, amount));
+    return this;
+  }
+
+  public specializedRobot(amount: number): Builder {
+    this._appendToRow(new CardRenderItem(CardRenderItemType.SPECIALIZED_ROBOT, amount));
+    return this;
+  }
+
   public multiplierWhite() {
     return this._appendToRow(new CardRenderItem(CardRenderItemType.MULTIPLIER_WHITE));
   }
@@ -386,6 +396,11 @@ class Builder {
   public mars(amount: number, options?: ItemOptions): Builder {
     this._appendToRow(new CardRenderItem(CardRenderItemType.MARS, amount, options));
     return this;
+  }
+
+  public specialTile(options?: ItemOptions) {
+    // TODO(kberg): replace with special tile.
+    return this.emptyTile('normal', options);
   }
 
   public emptyTile(type: 'normal' | 'golden' = 'normal', options?: ItemOptions) {

@@ -6,6 +6,7 @@ import {SimpleGameModel} from './SimpleGameModel';
 import {GameOptionsModel} from './GameOptionsModel';
 import {ICard} from '../cards/ICard';
 import {IProjectCard} from '../cards/IProjectCard';
+import {isICloneTagCard} from '../cards/pathfinders/ICloneTagCard';
 import {Board} from '../boards/Board';
 import {ISpace} from '../boards/ISpace';
 import {Player} from '../Player';
@@ -362,6 +363,7 @@ export class Server {
       reserveUnits: options.reserveUnits ? options.reserveUnits[index] : Units.EMPTY,
       bonusResource: (card as IProjectCard).bonusResource,
       discount: card.cardDiscount,
+      cloneTag: isICloneTagCard(card) ? card.cloneTag : undefined,
     }));
   }
 

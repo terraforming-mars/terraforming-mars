@@ -14,6 +14,7 @@ export class SpaceStation extends Card implements IProjectCard {
       name: CardName.SPACE_STATION,
       tags: [Tags.SPACE],
       cost: 10,
+      victoryPoints: 1,
 
       cardDiscount: {tag: Tags.SPACE, amount: 2},
       metadata: {
@@ -23,7 +24,6 @@ export class SpaceStation extends Card implements IProjectCard {
             eb.space({played}).startEffect.megacredits(-2);
           });
         }),
-        victoryPoints: 1,
       },
     });
   }
@@ -36,9 +36,6 @@ export class SpaceStation extends Card implements IProjectCard {
   }
   public play() {
     return undefined;
-  }
-  public getVictoryPoints() {
-    return 1;
   }
 }
 

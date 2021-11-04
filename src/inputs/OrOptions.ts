@@ -10,12 +10,13 @@ import {ICard} from '../cards/ICard';
 import {IProjectCard} from '../cards/IProjectCard';
 import {SelectDelegate} from './SelectDelegate';
 import {SelectColony} from './SelectColony';
+import {Message} from '../Message';
 
 export class OrOptions implements PlayerInput {
   public cb(): PlayerInput | undefined {
     return undefined;
   }
-    public title = 'Select one option';
+    public title: string | Message = 'Select one option';
     public buttonLabel: string = 'Save';
     public options: Array<PlayerInput>;
     public inputType: PlayerInputTypes = PlayerInputTypes.OR_OPTIONS;

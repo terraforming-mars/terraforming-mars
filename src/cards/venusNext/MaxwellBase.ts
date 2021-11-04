@@ -20,6 +20,8 @@ export class MaxwellBase extends Card implements IActionCard {
       cost: 18,
 
       requirements: CardRequirements.builder((b) => b.venus(12)),
+      victoryPoints: 3,
+
       metadata: {
         cardNumber: '238',
         renderData: CardRenderer.builder((b) => {
@@ -32,7 +34,6 @@ export class MaxwellBase extends Card implements IActionCard {
           text: 'Requires Venus 12%. Decrease your energy production 1 step. Place a City tile ON THE RESERVED AREA.',
           align: 'left',
         },
-        victoryPoints: 3,
       },
     });
   };
@@ -43,9 +44,6 @@ export class MaxwellBase extends Card implements IActionCard {
     player.addProduction(Resources.ENERGY, -1);
     player.game.addCityTile(player, SpaceName.MAXWELL_BASE, SpaceType.COLONY);
     return undefined;
-  }
-  public getVictoryPoints() {
-    return 3;
   }
 
   public getResCards(player: Player): ICard[] {

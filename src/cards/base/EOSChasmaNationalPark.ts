@@ -20,6 +20,7 @@ export class EosChasmaNationalPark extends Card implements IProjectCard {
       tags: [Tags.PLANT, Tags.BUILDING],
       cost: 16,
       productionBox: Units.of({energy: 2}),
+      victoryPoints: 1,
 
       requirements: CardRequirements.builder((b) => b.temperature(-12)),
       metadata: {
@@ -29,7 +30,6 @@ export class EosChasmaNationalPark extends Card implements IProjectCard {
           b.animals(1).asterix().plants(3).br;
           b.production((pb) => pb.megacredits(2));
         }),
-        victoryPoints: 1,
       },
     });
   }
@@ -50,9 +50,5 @@ export class EosChasmaNationalPark extends Card implements IProjectCard {
       player.addResourceTo(foundCards[0], {log: true});
       return undefined;
     });
-  }
-
-  public getVictoryPoints() {
-    return 1;
   }
 }

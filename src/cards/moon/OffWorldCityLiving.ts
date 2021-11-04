@@ -18,6 +18,7 @@ export class OffWorldCityLiving extends Card implements IProjectCard {
       tags: [Tags.CITY, Tags.SPACE],
       cost: 35,
       tr: {moonColony: 1},
+      victoryPoints: 'special',
 
       metadata: {
         // Check the card for a clever icon.

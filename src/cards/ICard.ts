@@ -28,7 +28,7 @@ export interface IActionCard {
 }
 
 export interface IResourceCard {
-    resourceCount?: number;
+    resourceCount: number;
     resourceType?: ResourceType;
 }
 
@@ -36,6 +36,20 @@ export interface CardDiscount {
   tag?: Tags, // When absent, discount applies to all cards.
   amount: number
  }
+export interface VictoryPoints {
+    type: 'resource' | Tags,
+    points: number,
+    per: number,
+  }
+
+export namespace VictoryPoints {
+  export function resource(points: number, per: number): VictoryPoints {
+    return {type: 'resource', points, per};
+  }
+  export function tags(tag: Tags, points: number, per: number): VictoryPoints {
+    return {type: tag, points, per};
+  }
+}
 
 // TRSource represents the ways an action will gain TR. This is used exclusively to compute
 // tax when Reds are in power.
@@ -50,7 +64,7 @@ export interface TRSource {
     moonLogistics?: number,
   }
 
-export interface ICard extends Partial<IActionCard>, Partial<IResourceCard> {
+export interface ICard extends Partial<IActionCard>, IResourceCard {
     name: CardName;
     tags: Array<Tags>;
     play: (player: Player) => PlayerInput | undefined;
@@ -58,7 +72,8 @@ export interface ICard extends Partial<IActionCard>, Partial<IResourceCard> {
     cardDiscount?: CardDiscount;
     // parameter is a Morningstar Inc. special case.
     getRequirementBonus?: (player: Player, parameter: GlobalParameter) => number;
-    getVictoryPoints?: (player: Player) => number;
+    victoryPoints?: number | 'special' | VictoryPoints,
+    getVictoryPoints: (player: Player) => number;
     onCardPlayed?: (player: Player, card: IProjectCard) => OrOptions | void;
     onStandardProject?: (player: Player, projectType: StandardProjectCard) => void;
     onTilePlaced?: (cardOwner: Player, activePlayer: Player, space: ISpace, boardType: BoardType) => void;

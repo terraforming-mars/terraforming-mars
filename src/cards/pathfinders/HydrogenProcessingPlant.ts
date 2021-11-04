@@ -16,6 +16,7 @@ export class HydrogenProcessingPlant extends Card implements IProjectCard {
       cost: 9,
       tags: [Tags.BUILDING, Tags.ENERGY],
       requirements: CardRequirements.builder((b) => b.oxygen(3)),
+      victoryPoints: -1,
 
       metadata: {
         cardNumber: 'Pf19',
@@ -23,15 +24,10 @@ export class HydrogenProcessingPlant extends Card implements IProjectCard {
           b.production((pb) => pb.energy(1)).slash().oceans(2).br;
           b.minus().oxygen(1).br;
         }),
-        victoryPoints: -1,
         description: 'Oxygen level must be 3% or higher. Decrease oxygen level 1% ' +
           'Raise your energy production 1 step for every two ocean tiles on Mars.',
       },
     });
-  }
-
-  public getVictoryPoints() {
-    return -1;
   }
 
   public produce(player: Player) {

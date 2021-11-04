@@ -18,6 +18,7 @@ export class CeresSpaceport extends Card implements IProjectCard {
       name: CardName.CERES_SPACEPORT,
       tags: [Tags.JOVIAN, Tags.JOVIAN, Tags.CITY, Tags.SPACE],
       cost: 36,
+      victoryPoints: 1,
       tr: {oceans: 1},
 
       metadata: {
@@ -28,15 +29,10 @@ export class CeresSpaceport extends Card implements IProjectCard {
             .br
             .cards(1).oceans(1).city().asterix().br;
         }),
-        victoryPoints: 1,
         description: 'Increase your MC production 2 steps, and titanium production 1 step for every 2 jovian tags (including these.) ' +
           'Draw a card. Place an ocean tile. Place a city tile ON THE RESERVED AREA.',
       },
     });
-  }
-
-  public getVictoryPoints() {
-    return 1;
   }
 
   public play(player: Player) {

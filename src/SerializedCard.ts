@@ -4,8 +4,9 @@ import {Tags} from './cards/Tags';
 
 export interface SerializedCard {
   allTags?: Array<Tags>;
-  bonusResource?: Resources | Array<Resources>;
-  isDisabled?: boolean;
+  bonusResource?: Resources | Array<Resources>; // For Robotic Workforce / Mining Area / Mining Rights
+  cloneTag?: Tags; // For Pathfinders' clone tag
+  isDisabled?: boolean; // For Pharmacy Union
   name: CardName;
   resourceCount?: number;
   targetCards?: Array<SerializedRobotCard>;

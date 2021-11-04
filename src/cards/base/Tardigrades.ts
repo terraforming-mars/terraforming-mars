@@ -1,13 +1,13 @@
 import {IProjectCard} from '../IProjectCard';
 import {Tags} from '../Tags';
 import {Card} from '../Card';
+import {VictoryPoints} from '../ICard';
 import {CardType} from '../CardType';
 import {ResourceType} from '../../ResourceType';
 import {CardName} from '../../CardName';
 import {IResourceCard} from '../ICard';
 import {Player} from '../../Player';
 import {CardRenderer} from '../render/CardRenderer';
-import {CardRenderDynamicVictoryPoints} from '../render/CardRenderDynamicVictoryPoints';
 
 export class Tardigrades extends Card implements IProjectCard, IResourceCard {
   constructor() {
@@ -16,7 +16,9 @@ export class Tardigrades extends Card implements IProjectCard, IResourceCard {
       name: CardName.TARDIGRADES,
       tags: [Tags.MICROBE],
       cost: 4,
+
       resourceType: ResourceType.MICROBE,
+      victoryPoints: VictoryPoints.resource(1, 4),
 
       metadata: {
         cardNumber: '049',
@@ -26,14 +28,11 @@ export class Tardigrades extends Card implements IProjectCard, IResourceCard {
           }).br;
           b.vpText('1 VP per 4 Microbes on this card.');
         }),
-        victoryPoints: CardRenderDynamicVictoryPoints.microbes(1, 4),
       },
     });
   }
     public resourceCount = 0;
-    public getVictoryPoints(): number {
-      return Math.floor(this.resourceCount / 4);
-    }
+
     public play() {
       return undefined;
     }

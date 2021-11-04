@@ -8,7 +8,7 @@ import {Resources} from '../../Resources';
 import {IResourceCard} from '../ICard';
 import {CardRenderer} from '../render/CardRenderer';
 import {Card} from '../Card';
-import {CardRenderDynamicVictoryPoints} from '../render/CardRenderDynamicVictoryPoints';
+import {VictoryPoints} from '../ICard';
 
 export class RefugeeCamps extends Card implements IProjectCard, IResourceCard {
   constructor() {
@@ -18,6 +18,7 @@ export class RefugeeCamps extends Card implements IProjectCard, IResourceCard {
       name: CardName.REFUGEE_CAMP,
       cardType: CardType.ACTIVE,
       resourceType: ResourceType.CAMP,
+      victoryPoints: VictoryPoints.resource(1, 1),
 
       metadata: {
         cardNumber: 'C33',
@@ -28,7 +29,6 @@ export class RefugeeCamps extends Card implements IProjectCard, IResourceCard {
           }).br;
           b.vpText('1 VP for each camp resource on this card.');
         }),
-        victoryPoints: CardRenderDynamicVictoryPoints.camps(1, 1),
       },
     });
   }
@@ -47,10 +47,6 @@ export class RefugeeCamps extends Card implements IProjectCard, IResourceCard {
 
   public play() {
     return undefined;
-  }
-
-  public getVictoryPoints(): number {
-    return this.resourceCount;
   }
 }
 

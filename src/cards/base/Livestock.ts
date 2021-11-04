@@ -2,6 +2,7 @@ import {IActionCard, IResourceCard} from '../ICard';
 import {IProjectCard} from '../IProjectCard';
 import {Tags} from '../Tags';
 import {Card} from '../Card';
+import {VictoryPoints} from '../ICard';
 import {CardType} from '../CardType';
 import {Player} from '../../Player';
 import {ResourceType} from '../../ResourceType';
@@ -9,7 +10,6 @@ import {Resources} from '../../Resources';
 import {CardName} from '../../CardName';
 import {CardRequirements} from '../CardRequirements';
 import {CardRenderer} from '../render/CardRenderer';
-import {CardRenderDynamicVictoryPoints} from '../render/CardRenderDynamicVictoryPoints';
 
 export class Livestock extends Card implements IActionCard, IProjectCard, IResourceCard {
   constructor() {
@@ -18,9 +18,11 @@ export class Livestock extends Card implements IActionCard, IProjectCard, IResou
       name: CardName.LIVESTOCK,
       tags: [Tags.ANIMAL],
       cost: 13,
-      resourceType: ResourceType.ANIMAL,
 
+      resourceType: ResourceType.ANIMAL,
+      victoryPoints: VictoryPoints.resource(1, 1),
       requirements: CardRequirements.builder((b) => b.oxygen(9)),
+
       metadata: {
         cardNumber: '184',
         renderData: CardRenderer.builder((b) => {
@@ -36,7 +38,6 @@ export class Livestock extends Card implements IActionCard, IProjectCard, IResou
           text: 'Requires 9% oxygen. Decrease your Plant production 1 step and increase your M€ production 2 steps',
           align: 'left',
         },
-        victoryPoints: CardRenderDynamicVictoryPoints.animals(1, 1),
       },
     });
   }
@@ -44,9 +45,6 @@ export class Livestock extends Card implements IActionCard, IProjectCard, IResou
     public resourceCount = 0;
     public canPlay(player: Player): boolean {
       return player.getProduction(Resources.PLANTS) >= 1;
-    }
-    public getVictoryPoints(): number {
-      return this.resourceCount;
     }
     public play(player: Player) {
       player.addProduction(Resources.PLANTS, -1);

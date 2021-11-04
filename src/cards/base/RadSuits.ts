@@ -14,6 +14,7 @@ export class RadSuits extends Card implements IProjectCard {
       cardType: CardType.AUTOMATED,
       name: CardName.RAD_SUITS,
       cost: 6,
+      victoryPoints: 1,
 
       requirements: CardRequirements.builder((b) => b.cities(2, {all})),
       metadata: {
@@ -22,7 +23,6 @@ export class RadSuits extends Card implements IProjectCard {
           b.production((pb) => pb.megacredits(1));
         }),
         description: 'Requires two cities in play. Increase your M€ production 1 step.',
-        victoryPoints: 1,
       },
     });
   }
@@ -32,8 +32,5 @@ export class RadSuits extends Card implements IProjectCard {
     }
     player.addProduction(Resources.MEGACREDITS, 1);
     return undefined;
-  }
-  public getVictoryPoints() {
-    return 1;
   }
 }

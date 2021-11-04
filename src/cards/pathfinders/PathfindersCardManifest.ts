@@ -8,7 +8,7 @@ import {Anthozoa} from './Anthozoa';
 // import {AntidesertificationTechniques} from './AntidesertificationTechniques';
 import {AsteroidResources} from './AsteroidResources';
 import {BreedingFarms} from './BreedingFarms';
-// import {CassiniStation} from './CassiniStation';
+import {CassiniStation} from './CassiniStation';
 import {CeresSpaceport} from './CeresSpaceport';
 // import {CO2Reducers} from './CO2Reducers';
 // import {CommunicationCenter} from './CommunicationCenter';
@@ -29,7 +29,7 @@ import {EconomicEspionage} from './EconomicEspionage';
 // import {EconomicHelp} from './EconomicHelp';
 // import {ExpeditiontotheSurfaceVenus} from './ExpeditiontotheSurfaceVenus';
 import {FlatMarsTheory} from './FlatMarsTheory';
-// import {FloaterUrbanism} from './FloaterUrbanism';
+import {FloaterUrbanism} from './FloaterUrbanism';
 // import {HighTempSuperconductors} from './HighTempSuperconductors';
 // import {HydrogenBombardment} from './HydrogenBombardment';
 import {HydrogenProcessingPlant} from './HydrogenProcessingPlant';
@@ -44,10 +44,10 @@ import {MartianDustProcessingPlant} from './MartianDustProcessingPlant';
 import {MartianMonuments} from './MartianMonuments';
 // import {MartianNatureWonders} from './MartianNatureWonders';
 import {MartianRepository} from './MartianRepository';
-// import {MicrobiologyPatents} from './MicrobiologyPatents';
+import {MicrobiologyPatents} from './MicrobiologyPatents';
 import {MuseumofEarlyColonisation} from './MuseumofEarlyColonisation';
 import {NewVenice} from './NewVenice';
-// import {NobelLabs} from './NobelLabs';
+import {NobelLabs} from './NobelLabs';
 import {OrbitalLaboratories} from './OrbitalLaboratories';
 import {OzoneGenerators} from './OzoneGenerators';
 // import {PersonalAgenda} from './PersonalAgenda';
@@ -73,7 +73,7 @@ import {TerraformingControlStation} from './TerraformingControlStation';
 import {ExpeditionToTheSurfaceVenus} from './ExpeditionToTheSurfaceVenus';
 // import {TerraformingRobots} from './TerraformingRobots';
 // import {ValuableGases} from './ValuableGases';
-// import {VeneraBase} from './VeneraBase';
+import {VeneraBase} from './VeneraBase';
 // import {VenusFirst} from './VenusFirst';
 
 export const PATHFINDERS_CARD_MANIFEST = new CardManifest({
@@ -138,16 +138,16 @@ export const PATHFINDERS_CARD_MANIFEST = new CardManifest({
     // // {cardName: CardName.SPECIALIZED_SETTLEMENT, Factory: SpecializedSettlement},          // ROBOTIC WORKFORCE COMPLICATION
     // // *** {cardName: CardName.CHARITY_DONATION, Factory: CharityDonation},
     // // {cardName: CardName.CURIOSITY_LABS, Factory: CuriosityLabs},                          // TWO RESOURCE TYPES
-    // {cardName: CardName.NOBEL_LABS, Factory: NobelLabs},
+    {cardName: CardName.NOBEL_LABS, Factory: NobelLabs},
     // // {cardName: CardName.HUYGENS_OBSERVATORY, Factory: HuygensObservatory, compatibility: GameModule.Colonies}, // TRICKY WORK
-    // {cardName: CardName.CASSINI_STATION, Factory: CassiniStation, compatibility: GameModule.Colonies},
-    // {cardName: CardName.MICROBIOLOGY_PATENTS, Factory: MicrobiologyPatents},
+    {cardName: CardName.CASSINI_STATION, Factory: CassiniStation, compatibility: GameModule.Colonies},
+    {cardName: CardName.MICROBIOLOGY_PATENTS, Factory: MicrobiologyPatents},
     // // {cardName: CardName.COORDINATED_RAID, Factory: CoordinatedRaid, compatibility: GameModule.Colonies},       // TRICKY WORK
     {cardName: CardName.LOBBY_HALLS, Factory: LobbyHalls, compatibility: GameModule.Turmoil},
     // // {cardName: CardName.RED_CITY, Factory: RedCity, compatibility: GameModule.Turmoil},                        // AVAILABLE GREENERY SPACES
-    // {cardName: CardName.VENERA_BASE, Factory: VeneraBase, compatibility: [GameModule.Turmoil, GameModule.Venus]},
+    {cardName: CardName.VENERA_BASE, Factory: VeneraBase, compatibility: [GameModule.Turmoil, GameModule.Venus]},
     // // {cardName: CardName.GATEWAY_STATION, Factory: GatewayStation, compatibility: GameModule.Turmoil},
-    // {cardName: CardName.FLOATER_URBANISM, Factory: FloaterUrbanism, compatibility: GameModule.Venus},
+    {cardName: CardName.FLOATER_URBANISM, Factory: FloaterUrbanism, compatibility: GameModule.Venus},
     // {cardName: CardName.SOIL_DETOXIFICATION, Factory: SoilDetoxification, compatibility: GameModule.Turmoil},
     // {cardName: CardName.HIGH_TEMP_SUPERCONDUCTORS, Factory: HighTempSuperconductors, compatibility: GameModule.Turmoil},
     // {cardName: CardName.PUBLIC_SPONSORED_GRANT, Factory: PublicSponsoredGrant, compatibility: GameModule.Turmoil},

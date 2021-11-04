@@ -1,4 +1,3 @@
-
 export enum ResourceType {
     ANIMAL = 'Animal',
     MICROBE = 'Microbe',
@@ -12,5 +11,6 @@ export enum ResourceType {
     RESOURCE_CUBE = 'Resource cube',
     DATA = 'Data',
     SYNDICATE_FLEET = 'Syndicate Fleet',
+    VENUSIAN_HABITAT = 'Venusian Habitat',
+    SPECIALIZED_ROBOT = 'Specialized Robot',
 }
-

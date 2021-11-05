@@ -28,6 +28,7 @@ export interface GameModel {
   phase: Phase;
   spaces: Array<SpaceModel>;
   spectatorId?: string;
+  step: number;
   temperature: number;
   isTerraformed: boolean;
   turmoil: TurmoilModel | undefined;

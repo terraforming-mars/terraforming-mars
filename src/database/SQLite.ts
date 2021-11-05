@@ -32,7 +32,19 @@ export class SQLite implements IDatabase {
             reject(err2);
             return;
           }
-          resolve();
+          this.db.run(`
+          CREATE TABLE IF NOT EXISTS purges(
+            game_id varchar not null,
+            last_save_id number not null,
+            completed_time timestamp not null default (strftime('%s', 'now')),
+            PRIMARY KEY (game_id)
+          )`, (err3) => {
+            if (err3) {
+              reject(err3);
+              return;
+            }
+            resolve();
+          });
         });
       });
     });
@@ -132,30 +144,33 @@ export class SQLite implements IDatabase {
   }
 
   cleanSaves(game_id: GameId, save_id: number): void {
-    // DELETE all saves except initial and last one
-    this.db.run('DELETE FROM games WHERE game_id = ? AND save_id < ? AND save_id > 0', [game_id, save_id], function(err: Error | null) {
-      if (err) {
-        return console.warn(err.message);
-      }
-    });
-    // Flag game as finished
-    this.db.run('UPDATE games SET status = \'finished\' WHERE game_id = ?', [game_id], function(err: Error | null) {
-      if (err) {
-        return console.warn(err.message);
-      }
-    });
+    this.runQuietly('INSERT into purges (game_id, last_save_id) values ?', [game_id, save_id]);
+    this.runQuietly('UPDATE games SET status = \'finished\' WHERE game_id = ?', [game_id]);
     this.purgeUnfinishedGames();
   }
 
   purgeUnfinishedGames(): void {
     // Purge unfinished games older than MAX_GAME_DAYS days. If this .env variable is not present, unfinished games will not be purged.
     if (process.env.MAX_GAME_DAYS) {
-      this.db.run(`DELETE FROM games WHERE created_time < strftime('%s',date('now', '-' || ? || ' day')) and status = 'running'`, [process.env.MAX_GAME_DAYS], function(err: Error | null) {
+      this.runQuietly(`DELETE FROM games WHERE created_time < strftime('%s',date('now', '-' || ? || ' day')) and status = 'running'`, [process.env.MAX_GAME_DAYS]);
+    }
+    this.db.all(
+      `SELECT game_id, last_save_id FROM purges where completed_time < created_time < strftime('%s',date('now', '-' || ? || ' day'))`, [process.env.MAX_GAME_DAYS], (err, rows) => {
         if (err) {
-          return console.warn(err.message);
+          console.log('purge failed', err);
+          throw err;
+        }
+        if (rows) {
+          const purges: Array<[string, number]> = [];
+          rows.forEach((row) => {
+            purges.push([row.game_id, row.last_save_id]);
+          });
+          purges.forEach(([gameId, saveId]) => {
+            this.runQuietly('DELETE from purges where game_id = ?', [gameId]);
+            this.runQuietly('DELETE FROM games WHERE game_id = ? AND save_id < ? AND save_id > 0', [gameId, saveId]);
+          });
         }
       });
-    }
   }
 
   restoreGame(game_id: GameId, save_id: number, cb: DbLoadCallback<Game>): void {
@@ -179,16 +194,9 @@ export class SQLite implements IDatabase {
   saveGame(game: Game): void {
     const gameJSON = game.toJSON();
     // Insert
-    this.db.run(
+    this.runQuietly(
       'INSERT INTO games (game_id, save_id, game, players) VALUES (?, ?, ?, ?) ON CONFLICT (game_id, save_id) DO UPDATE SET game = ?',
-      [game.id, game.lastSaveId, gameJSON, game.getPlayers().length, gameJSON],
-      (err: Error | null) => {
-        if (err) {
-          console.error(err.message);
-          return;
-        }
-      },
-    );
+      [game.id, game.lastSaveId, gameJSON, game.getPlayers().length, gameJSON]);
 
     // This must occur after the save.
     game.lastSaveId++;
@@ -196,11 +204,19 @@ export class SQLite implements IDatabase {
 
   deleteGameNbrSaves(game_id: GameId, rollbackCount: number): void {
     if (rollbackCount > 0) {
-      this.db.run('DELETE FROM games WHERE rowid IN (SELECT rowid FROM games WHERE game_id = ? ORDER BY save_id DESC LIMIT ?)', [game_id, rollbackCount], function(err: Error | null) {
-        if (err) {
-          return console.warn(err.message);
-        }
-      });
+      this.runQuietly('DELETE FROM games WHERE rowid IN (SELECT rowid FROM games WHERE game_id = ? ORDER BY save_id DESC LIMIT ?)', [game_id, rollbackCount]);
     }
+  }
+
+  runQuietly(sql: string, params: any) {
+    this.db.run(
+      sql, params,
+      (err: Error | null) => {
+        if (err) {
+          console.error(err.message);
+          return;
+        }
+      },
+    );
   }
 }

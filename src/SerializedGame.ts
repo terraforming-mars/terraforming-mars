@@ -21,7 +21,7 @@ import {SerializedPathfindersData} from './pathfinders/SerializedPathfindersData
 export interface SerializedGame {
     activePlayer: PlayerId;
     aresData?: IAresData;
-    awards: Array<IAward>;
+    awards: Array<IAward> | Array<string>;
     board: SerializedBoard;
     claimedMilestones: Array<SerializedClaimedMilestone>;
     clonedGamedId?: string;

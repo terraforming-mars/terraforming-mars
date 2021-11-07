@@ -23,10 +23,14 @@ export class PowerPlantStandardProject extends StandardProjectCard {
   }
 
   protected discount(player: Player): number {
+    let discount = 0;
     if (player.isCorporation(CardName.THORGATE)) {
-      return 3;
+      discount += 3;
     }
-    return super.discount(player);
+    if (player.playedCards.some((card) => card.name === CardName.HIGH_TEMP_SUPERCONDUCTORS)) {
+      discount += 3;
+    }
+    return discount;
   }
 
   actionEssence(player: Player): void {

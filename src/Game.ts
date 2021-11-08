@@ -414,7 +414,7 @@ export class Game implements ISerializable<SerializedGame> {
   public serialize(): SerializedGame {
     const result: SerializedGame = {
       activePlayer: this.activePlayer,
-      awards: this.awards,
+      awards: this.awards.map((a) => a.name),
       board: this.board.serialize(),
       claimedMilestones: serializeClaimedMilestones(this.claimedMilestones),
       colonies: this.colonies,
@@ -1591,12 +1591,12 @@ export class Game implements ISerializable<SerializedGame> {
     game.claimedMilestones = deserializeClaimedMilestones(d.claimedMilestones, players, milestones);
 
     const awards: Array<IAward> = [];
-    d.awards.forEach((element: IAward) => {
-      ALL_AWARDS.forEach((award: IAward) => {
-        if (award.name === element.name) {
-          awards.push(award);
-        }
-      });
+    d.awards.forEach((element: IAward | string) => {
+      const awardName = typeof element === 'string' ? element : element.name;
+      const foundAward = ALL_AWARDS.find((award) => award.name === awardName);
+      if (foundAward !== undefined) {
+        awards.push(foundAward);
+      }
     });
 
     game.awards = awards;

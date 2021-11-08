@@ -14,7 +14,7 @@ import {
 } from '../constants';
 
 export class CardRequirements {
-  constructor(private requirements: Array<CardRequirement>) {}
+  constructor(public requirements: Array<CardRequirement>) {}
 
   public static builder(f: (builder: Builder) => void): CardRequirements {
     const builder = new Builder();

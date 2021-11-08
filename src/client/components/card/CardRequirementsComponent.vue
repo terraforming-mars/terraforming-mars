@@ -1,7 +1,7 @@
 <template>
-  <div class="card-requirements">
-    <div v-for="(req, idx) in requirements" :key="idx">
-      <card-requirement :requirement="req[0]" />
+  <div class="card-requirements" :class="getClasses">
+    <div v-for="(req, idx) in requirements.requirements" :key="idx">
+      <card-requirement :requirement="req" />
     </div>
   </div>
   <!-- <div v-if="requirements.hasParty()" :class="getClasses()">
@@ -33,11 +33,10 @@ export default Vue.extend({
   },
   methods: {
     getClasses(): string {
-      const classes: Array<string> = ['card-requirements'];
       if (this.requirements.hasMax()) {
-        classes.push('card-requirements-max');
+        return 'card-requirements-max';
       }
-      return classes.join(' ');
+      return '';
     },
   },
 });

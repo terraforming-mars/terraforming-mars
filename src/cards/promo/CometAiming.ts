@@ -9,10 +9,8 @@ import {Player} from '../../Player';
 import {SelectCard} from '../../inputs/SelectCard';
 import {SelectOption} from '../../inputs/SelectOption';
 import {OrOptions} from '../../inputs/OrOptions';
-import {MAX_OCEAN_TILES, REDS_RULING_POLICY_COST} from '../../constants';
+import {MAX_OCEAN_TILES} from '../../constants';
 import {LogHelper} from '../../LogHelper';
-import {PartyHooks} from '../../turmoil/parties/PartyHooks';
-import {PartyName} from '../../turmoil/parties/PartyName';
 import {PlaceOceanTile} from '../../deferredActions/PlaceOceanTile';
 import {CardRenderer} from '../render/CardRenderer';
 
@@ -45,15 +43,16 @@ export class CometAiming extends Card implements IActionCard, IProjectCard, IRes
       return undefined;
     }
 
+    private canPlaceOcean(player: Player) {
+      return player.game.board.getOceansOnBoard() < MAX_OCEAN_TILES &&
+        player.canAfford(0, {tr: {oceans: 1}});
+    }
+
     public canAct(player: Player): boolean {
-      const hasTitanium = player.titanium > 0;
-      const canPlaceOcean = this.resourceCount > 0 && player.game.board.getOceansOnBoard() < MAX_OCEAN_TILES;
-
-      if (PartyHooks.shouldApplyPolicy(player, PartyName.REDS)) {
-        return hasTitanium || (player.canAfford(REDS_RULING_POLICY_COST) && canPlaceOcean);
+      if (player.titanium > 0) {
+        return true;
       }
-
-      return hasTitanium || canPlaceOcean;
+      return this.resourceCount > 0 && this.canPlaceOcean(player);
     }
 
     public action(player: Player) {
@@ -91,10 +90,8 @@ export class CometAiming extends Card implements IActionCard, IProjectCard, IRes
       if (player.titanium === 0) return spendAsteroidResource();
 
       const availableActions: Array<SelectOption | SelectCard<ICard>> = [];
-      const redsAreRuling = PartyHooks.shouldApplyPolicy(player, PartyName.REDS);
-      const canPlaceOcean = player.game.board.getOceansOnBoard() < MAX_OCEAN_TILES;
 
-      if (canPlaceOcean && !redsAreRuling || (redsAreRuling && player.canAfford(REDS_RULING_POLICY_COST))) {
+      if (this.canPlaceOcean(player)) {
         availableActions.push(new SelectOption('Remove an asteroid resource to place an ocean', 'Remove asteroid', spendAsteroidResource));
       }
 

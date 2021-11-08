@@ -2,10 +2,10 @@
   <div class="card-requirement">
       <div class="card-item-container">
         <span v-if="requirement.isMax">MAX&nbsp;</span>
-        <!-- Must show the number if it is temperature or other global requirement?-->
-        <span v-if="requirement.isMax || requirement.amount != 0">{{requirement.amount}}</span>
+        {{amount()}}{{suffix()}}
         <div :class="getComponentClasses()" />
-        <!-- span>{{requirement.getLabel()}}</span -->
+        {{getText()}}
+        <CardParty v-if="isPartyRequirement()" class="" :party="getParty()" />
       </div>
   </div>
 </template>
@@ -13,9 +13,11 @@
 <script lang="ts">
 
 import Vue from 'vue';
-import {CardRequirement, TagCardRequirement} from '@/cards/CardRequirement';
+import {CardRequirement, PartyCardRequirement, TagCardRequirement} from '@/cards/CardRequirement';
 import {RequirementType} from '@/cards/RequirementType';
 import {generateClassString} from '@/utils/utils';
+import CardParty from '@/client/components/card/CardParty.vue';
+import {PartyName} from '@/turmoil/parties/PartyName';
 
 export default Vue.extend({
   name: 'CardRequirementComponent',
@@ -26,9 +28,38 @@ export default Vue.extend({
     },
   },
   components: {
-    // 'card-requirement': CardRequirementComponent,
+    CardParty,
   },
   methods: {
+    amount(): string | number {
+      // <span v-if="requirement.isMax || requirement.amount != 0">{{requirement.amount}}</span>
+      switch (this.requirement.type) {
+      case RequirementType.TEMPERATURE:
+      case RequirementType.OXYGEN:
+      case RequirementType.VENUS:
+      case RequirementType.COLONY_RATE:
+      case RequirementType.MINING_RATE:
+      case RequirementType.LOGISTIC_RATE:
+        return this.requirement.amount;
+      }
+      if (this.requirement.isMax) {
+        return this.requirement.amount;
+      }
+      if (this.requirement.amount !== 1) {
+        return this.requirement.amount;
+      }
+      return '';
+    },
+    suffix(): string {
+      switch (this.requirement.type) {
+      case RequirementType.OXYGEN:
+      case RequirementType.VENUS:
+        return '%';
+      case RequirementType.TEMPERATURE:
+        return '°C';
+      }
+      return '';
+    },
     isAny(): string {
       return this.requirement.isAny ? 'red-outline' : '';
     },
@@ -70,7 +101,6 @@ export default Vue.extend({
         const tagRequirement = this.requirement as TagCardRequirement;
         return ['card-resource-tag', 'card-tag-' + tagRequirement.tag];
       case RequirementType.PRODUCTION:
-      case RequirementType.PARTY:
       case RequirementType.REMOVED_PLANTS:
       case RequirementType.COLONY_RATE:
       case RequirementType.MINING_RATE:
@@ -80,6 +110,30 @@ export default Vue.extend({
       case RequirementType.ROAD_TILES:
       }
       return [];
+    },
+    getText(): string {
+      switch (this.requirement.type) {
+      case RequirementType.REMOVED_PLANTS:
+      case RequirementType.COLONY_RATE:
+      case RequirementType.MINING_RATE:
+      case RequirementType.LOGISTIC_RATE:
+      case RequirementType.COLONY_TILES:
+      case RequirementType.MINING_TILES:
+      case RequirementType.ROAD_TILES:
+        return this.requirement.type;
+      }
+      return '';
+    },
+    isPartyRequirement(): boolean {
+      return this.requirement.type === RequirementType.PARTY;
+    },
+    getParty(): PartyName {
+      if (this.isPartyRequirement()) {
+        return (this.requirement as PartyCardRequirement).party;
+      } else {
+        // Doesn't matter what this value is, as it is ignored.
+        return PartyName.GREENS;
+      }
     },
   },
 });

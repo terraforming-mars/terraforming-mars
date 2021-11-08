@@ -21,13 +21,6 @@ export class CardRequirements {
     f(builder);
     return builder.build();
   }
-  public getRequirementsText(): string {
-    const reqTexts: Array<string> = this.requirements.map((req) => req.getLabel());
-    if (this.hasAny()) {
-      reqTexts.unshift('Any');
-    }
-    return reqTexts.join(' ');
-  }
   public hasMax(): boolean {
     return this.requirements.some((req) => req.isMax);
   }

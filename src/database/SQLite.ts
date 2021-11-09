@@ -83,7 +83,8 @@ export class SQLite implements IDatabase {
         return cb(err ?? undefined, json);
       } catch (exception) {
         console.error(`unable to load game ${game_id} at save point 0`, exception);
-        cb(exception, undefined);
+        const error = exception instanceof Error ? exception : new Error(String(exception));
+        cb(error, undefined);
         return;
       }
     });
@@ -170,8 +171,9 @@ export class SQLite implements IDatabase {
         const json = JSON.parse(row.game);
         const game = Game.deserialize(json);
         cb(undefined, game);
-      } catch (err) {
-        cb(err, undefined);
+      } catch (e) {
+        const error = e instanceof Error ? e : new Error(String(e));
+        cb(error, undefined);
       }
     });
   }

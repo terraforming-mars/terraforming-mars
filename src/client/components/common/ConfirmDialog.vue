@@ -1,5 +1,6 @@
 <script lang="ts">
 import Vue from 'vue';
+import {showModal, windowHasHTMLDialogElement} from '@/client/components/HTMLDialogElementCompatibility';
 
 const dialogPolyfill = require('dialog-polyfill');
 
@@ -32,11 +33,11 @@ export default Vue.extend({
       this.$emit('dismiss');
     },
     show() {
-      (this.$refs['dialog'] as HTMLDialogElement).showModal();
+      showModal(this.$refs['dialog'] as HTMLElement);
     },
   },
   mounted() {
-    if (!window.HTMLDialogElement) dialogPolyfill.default.registerDialog(this.$refs['dialog']);
+    if (!windowHasHTMLDialogElement()) dialogPolyfill.default.registerDialog(this.$refs['dialog']);
   },
 });
 </script>

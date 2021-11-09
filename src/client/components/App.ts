@@ -18,6 +18,7 @@ import * as constants from '@/constants';
 import * as raw_settings from '@/genfiles/settings.json';
 import {SpectatorModel} from '@/models/SpectatorModel';
 import {isPlayerId, isSpectatorId} from '@/utils/utils';
+import {hasShowModal, showModal, windowHasHTMLDialogElement} from './HTMLDialogElementCompatibility';
 
 const dialogPolyfill = require('dialog-polyfill');
 
@@ -93,14 +94,14 @@ export const mainAppSettings = {
       const dialogElement: HTMLElement | null = document.getElementById('alert-dialog');
       const buttonElement: HTMLElement | null = document.getElementById('alert-dialog-button');
       const messageElement: HTMLElement | null = document.getElementById('alert-dialog-message');
-      if (buttonElement !== null && messageElement !== null && dialogElement !== null && (dialogElement as HTMLDialogElement).showModal !== undefined) {
+      if (buttonElement !== null && messageElement !== null && dialogElement !== null && hasShowModal(dialogElement)) {
         messageElement.innerHTML = $t(message);
         const handler = () => {
           buttonElement.removeEventListener('click', handler);
           cb();
         };
         buttonElement.addEventListener('click', handler);
-        (dialogElement as HTMLDialogElement).showModal();
+        showModal(dialogElement);
       } else {
         alert(message);
         cb();
@@ -178,7 +179,7 @@ export const mainAppSettings = {
   },
   mounted() {
     document.title = constants.APP_NAME;
-    if (!window.HTMLDialogElement) dialogPolyfill.default.registerDialog(document.getElementById('alert-dialog'));
+    if (!windowHasHTMLDialogElement()) dialogPolyfill.default.registerDialog(document.getElementById('alert-dialog'));
     const currentPathname: string = window.location.pathname;
     const app = this as unknown as (typeof mainAppSettings.data) & (typeof mainAppSettings.methods);
     if (currentPathname === '/player') {

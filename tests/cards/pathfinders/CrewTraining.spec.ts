@@ -30,7 +30,7 @@ describe('CrewTraining', function() {
     const action = game.deferredActions.pop();
     expect(action).instanceOf(DeclareCloneTag);
     const options = action!.execute() as OrOptions;
-    expect(() => options.options[0].cb()).to.throw(/Not implemented/);
+    expect(() => options.options[0].cb()).to.throw(/Pathfinders not defined/);
     expect(card.tags).deep.eq([Tags.EARTH, Tags.EARTH]);
   });
 });

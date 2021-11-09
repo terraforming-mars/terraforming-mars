@@ -32,7 +32,7 @@ export class LawSuit extends Card implements IProjectCard {
   }
 
   private targets(player: Player) {
-    return player.game.getPlayersById(player.removingPlayers).filter((player) => !player.megaCreditsAreProtected());
+    return player.game.getPlayersById(player.removingPlayers);
   }
 
   public canPlay(player: Player) {

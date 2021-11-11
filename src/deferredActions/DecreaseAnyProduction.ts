@@ -15,12 +15,12 @@ export class DecreaseAnyProduction implements DeferredAction {
   public execute() {
     if (this.player.game.isSoloMode()) return undefined;
 
-    let candidates: Array<Player> = [];
+    let candidates: Array<Player> = this.player.game.getPlayers().filter((p) => !p.productionIsProtected());
+
     if (this.resource === Resources.MEGACREDITS) {
-      candidates = this.player.game.getPlayers().filter((p) => p.getProduction(this.resource) >= this.count - 5);
-      candidates = candidates.filter((candidate) => !candidate.megaCreditsAreProtected());
+      candidates = candidates.filter((p) => p.getProduction(this.resource) >= this.count - 5);
     } else {
-      candidates = this.player.game.getPlayers().filter((p) => p.getProduction(this.resource) >= this.count);
+      candidates = candidates.filter((p) => p.getProduction(this.resource) >= this.count);
     }
 
     if (this.resource === Resources.STEEL || this.resource === Resources.TITANIUM) {

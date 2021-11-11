@@ -600,7 +600,7 @@ export class Player implements ISerializable<SerializedPlayer> {
     return this.cardIsInEffect(CardName.LUNAR_SECURITY_STATIONS);
   }
 
-  public megaCreditsAreProtected(): boolean {
+  public productionIsProtected(): boolean {
     return this.cardIsInEffect(CardName.PRIVATE_SECURITY);
   }
 

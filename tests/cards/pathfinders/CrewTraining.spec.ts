@@ -14,7 +14,7 @@ describe('CrewTraining', function() {
 
   beforeEach(function() {
     card = new CrewTraining();
-    game = newTestGame(1);
+    game = newTestGame(1, {pathfindersExpansion: true});
     player = getTestPlayer(game, 0);
   });
 
@@ -30,7 +30,27 @@ describe('CrewTraining', function() {
     const action = game.deferredActions.pop();
     expect(action).instanceOf(DeclareCloneTag);
     const options = action!.execute() as OrOptions;
-    expect(() => options.options[0].cb()).to.throw(/Not implemented/);
+
+    expect(options.options[0].title).to.match(/earth/);
+    expect(game.pathfindersData).deep.eq({
+      venus: 0,
+      earth: 0,
+      mars: 0,
+      jovian: 0,
+      moon: -1,
+      vps: [],
+    });
+
+    options.options[0].cb();
+
+    expect(game.pathfindersData).deep.eq({
+      venus: 0,
+      earth: 2,
+      mars: 0,
+      jovian: 0,
+      moon: -1,
+      vps: [],
+    });
     expect(card.tags).deep.eq([Tags.EARTH, Tags.EARTH]);
   });
 });

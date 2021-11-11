@@ -207,7 +207,7 @@ export default Vue.extend({
         });
         return `BUG: Unparseable message: ${message.message}, (${data.join(', ')})`;
       } catch (err) {
-        return `BUG: Unparseable message: ${message.message} ${err.toString()}`;
+        return `BUG: Unparseable message: ${message.message} ${String(err)}`;
       }
     },
     messageToHTML(message: LogMessage) {

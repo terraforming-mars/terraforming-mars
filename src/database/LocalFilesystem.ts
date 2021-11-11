@@ -51,8 +51,9 @@ export class Localfilesystem implements IDatabase {
       const text = fs.readFileSync(this._filename(game_id));
       const serializedGame = JSON.parse(text);
       cb(undefined, serializedGame);
-    } catch (err) {
-      cb(err, undefined);
+    } catch (e) {
+      const error = e instanceof Error ? e : new Error(String(e));
+      cb(error, undefined);
     }
   }
 
@@ -82,8 +83,9 @@ export class Localfilesystem implements IDatabase {
       const text = fs.readFileSync(this._historyFilename(game_id, 0));
       const serializedGame = JSON.parse(text);
       cb(undefined, serializedGame);
-    } catch (err) {
-      cb(err, undefined);
+    } catch (e) {
+      const error = e instanceof Error ? e : new Error(String(e));
+      cb(error, undefined);
     }
   }
 

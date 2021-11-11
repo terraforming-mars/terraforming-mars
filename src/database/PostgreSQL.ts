@@ -99,8 +99,9 @@ export class PostgreSQL implements IDatabase {
         const json = JSON.parse(res.rows[0].game);
         return cb(undefined, json);
       } catch (exception) {
-        console.error(`Unable to restore game ${game_id}`, exception);
-        cb(exception, undefined);
+        const error = exception instanceof Error ? exception : new Error(String(exception));
+        console.error(`Unable to restore game ${game_id}`, error);
+        cb(error, undefined);
         return;
       }
     });
@@ -209,8 +210,9 @@ export class PostgreSQL implements IDatabase {
         const json = JSON.parse(res.rows[0].game);
         const game = Game.deserialize(json);
         cb(undefined, game);
-      } catch (err) {
-        cb(err, undefined);
+      } catch (e) {
+        const error = e instanceof Error ? e : new Error(String(e));
+        cb(error, undefined);
       }
     });
   }

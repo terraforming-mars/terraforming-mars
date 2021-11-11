@@ -84,16 +84,14 @@ export class PlayerInput extends Handler {
         }
         player.process(entity);
         ctx.route.writeJson(res, Server.getPlayerModel(player));
-      } catch (err) {
+      } catch (e) {
         res.writeHead(400, {
           'Content-Type': 'application/json',
         });
-        console.warn('Error processing input from player', err);
-        res.write(
-          JSON.stringify({
-            message: err.message,
-          }),
-        );
+
+        console.warn('Error processing input from player', e);
+        const message = e instanceof Error ? e.message : String(e);
+        res.write(JSON.stringify({message}));
         res.end();
       }
     });

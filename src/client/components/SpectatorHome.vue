@@ -33,6 +33,7 @@
       :oxygen_level="game.oxygenLevel"
       :temperature="game.temperature"
       :aresExtension="game.gameOptions.aresExtension"
+      :pathfindersExpansion="game.gameOptions.pathfindersExpansion"
       :altVenusBoard="game.gameOptions.altVenusBoard"
       :aresData="game.aresData"
       :hideTiles="hideTiles"
@@ -63,6 +64,9 @@
             <colony :colony="colony"></colony>
         </div>
       </div>
+        <div v-if="game.gameOptions.pathfindersExpansion">
+          <PlanetaryTracks :tracks="game.pathfinders" :gameOptions="game.gameOptions"/>
+        </div>
     </div>
     <waiting-for v-show="false" v-if="game.phase !== 'end'" :players="spectator.players" :playerView="spectator" :settings="settings" :waitingfor="undefined"></waiting-for>
   </div>
@@ -79,6 +83,7 @@ import {SpectatorModel} from '@/models/SpectatorModel';
 import Awards from '@/client/components/Awards.vue';
 import Board from '@/client/components/Board.vue';
 import Colony from '@/client/components/Colony.vue';
+import PlanetaryTracks from '@/client/components/pathfinders/PlanetaryTracks.vue';
 import DynamicTitle from '@/client/components/common/DynamicTitle.vue';
 import LogPanel from '@/client/components/LogPanel.vue';
 import MoonBoard from '@/client/components/moon/MoonBoard.vue';
@@ -123,6 +128,7 @@ export default Vue.extend({
     LogPanel,
     Milestone,
     MoonBoard,
+    PlanetaryTracks,
     PlayersOverview,
     Sidebar,
     Turmoil,

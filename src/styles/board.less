@@ -11,7 +11,7 @@
 .board-cont {
 	display: inline-block;
 	vertical-align: top;
-	width: 640px;
+	width: 670px;
 	margin: 0 auto;
 	margin-top: 20px;
 }
@@ -23,6 +23,11 @@
 .board-without-venus{
 	background: url(assets/board/mars-without-venus.png) no-repeat;
 }
+
+// // Not used yet.
+// .board-with-pathfinders {
+// 	width: 670px!;
+// }
 
 .board-legend {
 	position: absolute;
@@ -234,6 +239,7 @@
 .board-cube--green {
 	background: url(assets/board_icons.png) -1px -91px no-repeat;
 }
+
 .board-cube--purple {
 	background: url(assets/board_icons.png) -118px -91px no-repeat;
 }
@@ -247,6 +253,11 @@
 }
 
 .board-cube--bronze {
+	background: url(assets/board_icons.png) -142px -91px no-repeat;
+}
+
+// TODO(kberg): this only works at the moment because I've made the neutral cube bronze.
+.board-cube--neutral {
 	background: url(assets/board_icons.png) -142px -91px no-repeat;
 }
 
@@ -269,9 +280,17 @@
 		width: 88px;
 	}
 
-	&.board-space-69, &.board-space-70, &.board-space-71, &.board-space-72, &.board-space-73 {
+	&.board-space-69, &.board-space-70, &.board-space-71, &.board-space-72, &.board-space-73, &.board-space-75, &.board-space-76, &.board-space-77, &.board-space-78 {
 		.board-space-text {
 			margin-top: -15px;
+		}
+	}
+
+	&.board-space-74 {
+		.board-space-text {
+			margin-top: -33px;
+			font-size: 10px;
+			line-height: 10px;
 		}
 	}
 
@@ -325,7 +344,6 @@
 .board-hidden-tile{
 	opacity: 0.4;
 }
-
 
 .hide-tile-button-container {
 	position: relative;

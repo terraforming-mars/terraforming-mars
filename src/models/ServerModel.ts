@@ -43,6 +43,7 @@ import {Units} from '../Units';
 import {SelectPartyToSendDelegate} from '../inputs/SelectPartyToSendDelegate';
 import {GameModel} from './GameModel';
 import {Turmoil} from '../turmoil/Turmoil';
+import {PathfindersModel} from './PathfindersModel';
 
 export class Server {
   public static getSimpleGameModel(game: Game): SimpleGameModel {
@@ -79,6 +80,7 @@ export class Server {
       oceans: game.board.getOceansOnBoard(),
       oxygenLevel: game.getOxygenLevel(),
       passedPlayers: game.getPassedPlayers(),
+      pathfinders: PathfindersModel.serialize(game),
       phase: game.phase,
       spaces: this.getSpaces(game.board),
       spectatorId: game.spectatorId,

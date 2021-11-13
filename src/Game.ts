@@ -433,7 +433,7 @@ export class Game implements ISerializable<SerializedGame> {
       id: this.id,
       initialDraftIteration: this.initialDraftIteration,
       lastSaveId: this.lastSaveId,
-      milestones: this.milestones,
+      milestones: this.milestones.map((m) => m.name),
       monsInsuranceOwner: this.monsInsuranceOwner,
       moonData: IMoonData.serialize(this.moonData),
       oxygenLevel: this.oxygenLevel,
@@ -1579,12 +1579,12 @@ export class Game implements ISerializable<SerializedGame> {
     game.spectatorId = d.spectatorId;
 
     const milestones: Array<IMilestone> = [];
-    d.milestones.forEach((element: IMilestone) => {
-      ALL_MILESTONES.forEach((ms: IMilestone) => {
-        if (ms.name === element.name) {
-          milestones.push(ms);
-        }
-      });
+    d.milestones.forEach((element: IMilestone | string) => {
+      const milestoneName = typeof element === 'string' ? element : element.name;
+      const foundMilestone = ALL_MILESTONES.find((milestone) => milestone.name === milestoneName);
+      if (foundMilestone !== undefined) {
+        milestones.push(foundMilestone);
+      }
     });
 
     game.milestones = milestones;

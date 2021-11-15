@@ -96,7 +96,7 @@ export interface IDatabase {
      * Saves the current state of the game. at a supplied save point. Used for
      * interim game updates.
      */
-    saveGame(game: Game): void;
+    saveGame(game: Game): Promise<void>;
 
     /**
      * Stores the results of a game in perpetuity in a separate table from normal

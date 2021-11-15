@@ -33,10 +33,11 @@ export class Localfilesystem implements IDatabase {
     return path.resolve(historyFolder, `${gameId}-${saveIdString}.json`);
   }
 
-  saveGame(game: Game): void {
+  saveGame(game: Game): Promise<void> {
     console.log(`saving ${game.id} at position ${game.lastSaveId}`);
     this.saveSerializedGame(game.serialize());
     game.lastSaveId++;
+    return Promise.resolve();
   }
 
   saveSerializedGame(serializedGame: SerializedGame): void {

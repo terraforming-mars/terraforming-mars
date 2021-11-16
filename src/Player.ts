@@ -788,15 +788,15 @@ export class Player implements ISerializable<SerializedPlayer> {
    * Get the number of tags a player has, depending on certain conditions.
    *
    * 'raw': count face-up tags literally.
-   * 'default': Same as raw, but include the events.
-   * 'award': Same as raw but includes special conditions for awards (Chimera)
+   * 'default': Same as raw, but include the wild tags.
+   * 'ma': Same as raw but includes special conditions for awards & milestones (Chimera)
    * 'vps': Same as raw, but include event tags.
    */
-  public getTagCount(tag: Tags, mode: 'default' | 'raw' | 'award' | 'vps' = 'default') {
+  public getTagCount(tag: Tags, mode: 'default' | 'raw' | 'ma' | 'vps' = 'default') {
     switch (mode) {
     case 'default': return this.getTagCountOld(tag, false, true);
     case 'raw': return this.getTagCountOld(tag, false, false);
-    case 'award': return this.getTagCountOld(tag, false, false); // TODO(include Chimera)
+    case 'ma': return this.getTagCountOld(tag, false, false); // TODO(include Chimera)
     case 'vps': return this.getTagCountOld(tag, true, false);
     }
   }

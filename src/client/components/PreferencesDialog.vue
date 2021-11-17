@@ -59,7 +59,7 @@ export default Vue.extend({
       }
       return PreferencesManager.preferencesValues;
     },
-    updatePreferences(_evt: any): void {
+    updatePreferences(): void {
       let strVal: string = '';
       for (const k of preferences) {
         const val = PreferencesManager.preferencesValues.get(k);

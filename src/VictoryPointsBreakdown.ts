@@ -1,4 +1,6 @@
-export type VictoryPoints = 'terraformRating' | 'milestones' | 'awards' | 'greenery' | 'city' | 'moon colony' | 'moon mine' | 'moon road' | 'victoryPoints';
+import {Tags} from './cards/Tags';
+
+export type VictoryPoints = 'terraformRating' | 'milestones' | 'awards' | 'greenery' | 'city' | 'moon colony' | 'moon mine' | 'moon road' | 'planetary tracks' | 'victoryPoints';
 
 export class VictoryPointsBreakdown {
     public terraformRating: number = 0;
@@ -9,11 +11,13 @@ export class VictoryPointsBreakdown {
     public moonColonies: number = 0;
     public moonMines: number = 0;
     public moonRoads: number = 0;
+    public planetaryTracks: number = 0;
     public victoryPoints = 0;
     public total = 0;
     public detailsCards: Array<{cardName: string, victoryPoint: number}> = [];
     public detailsMilestones: Array<string> = [];
     public detailsAwards: Array<string> = [];
+    public detailsPlanetaryTracks: Array<{tag: Tags, points: number}> = [];
 
     public updateTotal(): void {
       this.total = 0;
@@ -25,6 +29,7 @@ export class VictoryPointsBreakdown {
       this.total += this.moonColonies;
       this.total += this.moonMines;
       this.total += this.moonRoads;
+      this.total += this.planetaryTracks;
       this.total += this.victoryPoints;
     }
 
@@ -59,6 +64,10 @@ export class VictoryPointsBreakdown {
         break;
       case 'moon road':
         this.moonRoads += points;
+        break;
+      case 'planetary tracks':
+        this.planetaryTracks += points;
+        if (message !== undefined) this.detailsPlanetaryTracks.push({tag: message as Tags, points});
         break;
       default:
         console.warn('Unknown victory point constraint ' + key);

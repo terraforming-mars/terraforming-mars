@@ -71,6 +71,7 @@ import {UndoActionOption} from './inputs/UndoActionOption';
 import {LawSuit} from './cards/promo/LawSuit';
 import {CrashSiteCleanup} from './cards/promo/CrashSiteCleanup';
 import {Turmoil} from './turmoil/Turmoil';
+import {PathfindersExpansion} from './pathfinders/PathfindersExpansion';
 import {deserializeProjectCard, serializeProjectCard} from './cards/CardSerialization';
 
 export type PlayerId = string;
@@ -578,6 +579,7 @@ export class Player implements ISerializable<SerializedPlayer> {
     }
 
     MoonExpansion.calculateVictoryPoints(this, victoryPointsBreakdown);
+    PathfindersExpansion.calculateVictoryPoints(this, victoryPointsBreakdown);
 
     victoryPointsBreakdown.updateTotal();
     return victoryPointsBreakdown;

@@ -39,6 +39,6 @@ export class CrescentResearchAssociation extends Card implements CorporationCard
     if (card.tags.indexOf(Tags.MOON) === -1) {
       return 0;
     }
-    return player.getTagCount(Tags.MOON, false, true);
+    return player.getTagCount(Tags.MOON);
   }
 }

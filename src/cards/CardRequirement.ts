@@ -210,14 +210,14 @@ export class TagCardRequirement extends CardRequirement {
     return firstLetterUpperCase(this.tag);
   }
   public satisfies(player: Player): boolean {
-    const includeWildTags = this.isMax !== true;
-    let tagCount = player.getTagCount(this.tag, false, includeWildTags);
+    const mode = this.isMax !== true ? 'default' : 'raw';
+    let tagCount = player.getTagCount(this.tag, mode);
 
     if (this.isAny) {
       player.game.getPlayers().forEach((p) => {
         if (p.id !== player.id) {
           // Don't include opponents' wild tags because they are not performing the action.
-          tagCount += p.getTagCount(this.tag, false, false);
+          tagCount += p.getTagCount(this.tag, 'raw');
         }
       });
     }

@@ -20,7 +20,7 @@ export class HomeworldSupport implements IGlobalEvent {
     public currentDelegate = PartyName.UNITY;
     public resolve(game: Game, turmoil: Turmoil) {
       game.getPlayers().forEach((player) => {
-        const amount = Math.min(5, player.getTagCount(Tags.EARTH, false, false)) + turmoil.getPlayerInfluence(player);
+        const amount = Math.min(5, player.getTagCount(Tags.EARTH, 'raw')) + turmoil.getPlayerInfluence(player);
         if (amount > 0) {
           player.addResource(Resources.MEGACREDITS, 2 * amount, {log: true, from: this.name});
         }

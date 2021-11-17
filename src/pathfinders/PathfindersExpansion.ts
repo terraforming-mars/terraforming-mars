@@ -112,10 +112,6 @@ export class PathfindersExpansion {
       IPathfindersData.setValue(data, tag, space);
       const rewards = track.spaces[space];
 
-      if (rewards === undefined) {
-        console.log();
-      }
-
       if (from instanceof Player) {
         rewards.risingPlayer.forEach((reward) => {
           PathfindersExpansion.grant(reward, from, tag);

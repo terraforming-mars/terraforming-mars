@@ -37,14 +37,14 @@ describe('EarthEmbassy', () => {
     };
 
     player.playedCards = [fakeCard];
-    expect(player.getTagCount(Tags.EARTH, false, false)).eq(1);
-    expect(player.getTagCount(Tags.EARTH, false, true)).eq(1);
+    expect(player.getTagCount(Tags.EARTH, 'raw')).eq(1);
+    expect(player.getTagCount(Tags.EARTH, 'default')).eq(1);
 
     // This changes the results because Earth Embassy has one earth tag and one moon tag.
     // [ Earth Embassy: earth/moon, Fake Card: earth/moon/moon ]
     player.playedCards.push(earthEmbassy);
-    expect(player.getTagCount(Tags.EARTH, false, false)).eq(2);
-    expect(player.getTagCount(Tags.EARTH, false, true)).eq(5);
+    expect(player.getTagCount(Tags.EARTH, 'raw')).eq(2);
+    expect(player.getTagCount(Tags.EARTH, 'default')).eq(5);
   });
 });
 

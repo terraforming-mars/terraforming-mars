@@ -31,7 +31,7 @@ class UnityBonus01 implements Bonus {
 
   getScore(player: Player) {
     const tags = [Tags.VENUS, Tags.EARTH, Tags.JOVIAN];
-    return tags.map((tag) => player.getTagCount(tag, false, false)).reduce((acc, count) => acc + count, 0);
+    return tags.map((tag) => player.getTagCount(tag, 'raw')).reduce((acc, count) => acc + count, 0);
   }
 
   grant(game: Game) {
@@ -47,7 +47,7 @@ class UnityBonus02 implements Bonus {
   isDefault = false;
 
   getScore(player: Player) {
-    return player.getTagCount(Tags.SPACE, false, false);
+    return player.getTagCount(Tags.SPACE, 'raw');
   }
 
   grant(game: Game) {

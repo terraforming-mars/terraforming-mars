@@ -800,7 +800,7 @@ export class Player implements ISerializable<SerializedPlayer> {
     case 'vps': return this.getTagCountOld(tag, true, false);
     }
   }
-  public getTagCountOld(tag: Tags, includeEventsTags:boolean = false, includeTagSubstitutions:boolean = true): number {
+  protected getTagCountOld(tag: Tags, includeEventsTags:boolean = false, includeTagSubstitutions:boolean = true): number {
     let tagCount = 0;
 
     this.playedCards.forEach((card: IProjectCard) => {

@@ -1,6 +1,7 @@
 <script lang="ts">
 import Vue from 'vue';
 import Button from '@/client/components/common/Button.vue';
+import {LoadGameFormModel} from '@/models/LoadGameFormModel';
 import {SimpleGameModel} from '@/models/SimpleGameModel';
 import {mainAppSettings} from '@/client/components/App';
 
@@ -42,11 +43,12 @@ export default Vue.extend({
           alert('Unexpected server response');
         }
       };
-      xhr.responseType = 'json';
-      xhr.send(JSON.stringify({
+      const loadGameFormModel: LoadGameFormModel = {
         game_id: gameId,
         rollbackCount: rollbackCount,
-      }));
+      };
+      xhr.responseType = 'json';
+      xhr.send(JSON.stringify(loadGameFormModel));
     },
   },
 });

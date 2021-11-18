@@ -39,7 +39,7 @@ Unfinished solo games are flushed after one day. We continue to make stability a
 but to make sure your game remains, we highly recommended to host your own web server.
 
 ## ⬤ I want to learn how to play
-There are far too many good tutorials online.
+There are far too many good tutorials online. [Here are the rulebooks, though.](https://github.com/terraforming-mars/terraforming-mars/wiki/Rulebooks)
 
 ## ⬤ I want to run a copy of the server locally
 Check out our [Local setup wiki page](https://github.com/bafolts/terraforming-mars/wiki/Local-Setup)

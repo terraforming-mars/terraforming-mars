@@ -725,7 +725,7 @@ export enum CardName {
     PLANET_PR = 'planet pr',
     AMBIENT = 'Ambient',
     RINGCOM = 'Ringcom',
-    CHIIMERA = 'Chiimera',
+    CHIMERA = 'Chimera',
     SISTEMAS_SEEBECK = 'Sistemas Seebeck',
     SPIRE = 'Spire',
     SOYLENT_SEEDLING_SYSTEMS = 'Soylent Seedling Systems',

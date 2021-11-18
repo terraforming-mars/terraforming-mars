@@ -36,4 +36,43 @@ export namespace IPathfindersData {
       vps: pathfindersData.vps,
     };
   }
+
+  export function getValue(pathfindersData: IPathfindersData, tag: Tags): number {
+    switch (tag) {
+    case Tags.VENUS:
+      return pathfindersData.venus;
+    case Tags.EARTH:
+      return pathfindersData.earth;
+    case Tags.MARS:
+      return pathfindersData.mars;
+    case Tags.JOVIAN:
+      return pathfindersData.jovian;
+    case Tags.MOON:
+      return pathfindersData.moon;
+    default:
+      return -1;
+    }
+  }
+
+  export function setValue(pathfindersData: IPathfindersData, tag: Tags, value: number): void {
+    switch (tag) {
+    case Tags.VENUS:
+      pathfindersData.venus = value;
+      break;
+    case Tags.EARTH:
+      pathfindersData.earth = value;
+      break;
+    case Tags.MARS:
+      pathfindersData.mars = value;
+      break;
+    case Tags.JOVIAN:
+      pathfindersData.jovian = value;
+      break;
+    case Tags.MOON:
+      pathfindersData.moon = value;
+      break;
+    }
+  }
+
+
 }

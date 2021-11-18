@@ -2,7 +2,7 @@ import {Database} from '../../src/database/Database';
 import {IDatabase} from '../../src/database/IDatabase';
 
 const FAKE_DATABASE: IDatabase = {
-  cleanSaves: () => {},
+  cleanSaves: () => Promise.resolve(),
   deleteGameNbrSaves: () => {},
   getClonableGames: () => {},
   getGame: () => {},
@@ -14,7 +14,7 @@ const FAKE_DATABASE: IDatabase = {
   loadCloneableGame: () => {},
   saveGameResults: () => {},
   saveGame: () => Promise.resolve(),
-  purgeUnfinishedGames: () => {},
+  purgeUnfinishedGames: () => Promise.resolve(),
 };
 
 let databaseUnderTest: IDatabase = FAKE_DATABASE;

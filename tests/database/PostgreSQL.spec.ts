@@ -1,15 +1,18 @@
 import {expect} from 'chai';
 import {Game, GameId} from '../../src/Game';
 import {TestPlayers} from '../TestPlayers';
-import {IN_MEMORY_SQLITE_PATH, SQLite} from '../../src/database/SQLite';
+import {PostgreSQL} from '../../src/database/PostgreSQL';
 import {Database} from '../../src/database/Database';
 import {restoreTestDatabase} from '../utils/setup';
 
-class TestSQLite extends SQLite {
+class TestPostgreSQL extends PostgreSQL {
   public saveGamePromise: Promise<void> = Promise.resolve();
 
   constructor() {
-    super(IN_MEMORY_SQLITE_PATH, true);
+    super({
+      database: 'tmtest',
+      host: 'localhost',
+    }, true);
   }
 
   public saveGame(game: Game): Promise<void> {
@@ -18,29 +21,23 @@ class TestSQLite extends SQLite {
   };
 
   public getSaveIds(gameId: GameId): Promise<Array<number>> {
-    return new Promise((resolve, reject) => {
-      const allSaveIds: Array<number> = [];
-      const sql: string = 'SELECT distinct save_id FROM games WHERE game_id = ?';
-      this.db.all(sql, [gameId], (err, rows) => {
-        if (err) {
-          reject(err);
-          return;
-        }
-        if (rows) {
-          rows.forEach((row) => {
+    return new Promise(() => {
+      this.runQuietly('getSaveIds', 'SELECT distinct save_id FROM games WHERE game_id = $1', [gameId]).then(
+        (res) => {
+          const allSaveIds: Array<number> = [];
+          res.rows.forEach((row) => {
             allSaveIds.push(row.save_id);
           });
-        }
-        resolve(allSaveIds);
-      });
+          return Promise.resolve(allSaveIds);
+        });
     });
   }
 }
 
-describe('SQLite', () => {
-  let db: TestSQLite;
+describe('PostgreSQL', () => {
+  let db: TestPostgreSQL;
   beforeEach(() => {
-    db = new TestSQLite();
+    db = new TestPostgreSQL();
     Database.getInstance = () => db;
     return db.initialize();
   });

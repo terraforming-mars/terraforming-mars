@@ -143,7 +143,7 @@ export interface IDatabase {
     // TODO(kberg): rename to represent that it's closing out
     // this game. Also consider not needing the save_id, and
     // also to make the maintenance behavior a first-class method.
-    cleanSaves(game_id: GameId, save_id: number): void;
+    cleanSaves(game_id: GameId, save_id: number): Promise<void>;
 
     /**
      * A maintenance task that purges abandoned solo games older
@@ -156,5 +156,5 @@ export interface IDatabase {
      * * In Sqlite, it doesn't purge
      * * This whole method is ignored in LocalFilesystem.
      */
-    purgeUnfinishedGames(): void;
+    purgeUnfinishedGames(): Promise<void>;
 }

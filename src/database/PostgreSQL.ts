@@ -8,10 +8,11 @@ import {Pool, ClientConfig, QueryResult} from 'pg';
 export class PostgreSQL implements IDatabase {
   private client: Pool;
 
-  constructor() {
-    const config: ClientConfig = {
+  constructor(
+    config: ClientConfig = {
       connectionString: process.env.POSTGRES_HOST,
-    };
+    },
+    private beLoud: boolean = false) {
     if (config.connectionString !== undefined && config.connectionString.startsWith('postgres')) {
       config.ssl = {
         // heroku uses self-signed certificates
@@ -19,31 +20,13 @@ export class PostgreSQL implements IDatabase {
       };
     }
     this.client = new Pool(config);
-    this.client.query('CREATE TABLE IF NOT EXISTS games(game_id varchar, players integer, save_id integer, game text, status text default \'running\', created_time timestamp default now(), PRIMARY KEY (game_id, save_id))', (err) => {
-      if (err) {
-        throw err;
-      }
-    });
-    this.client.query('CREATE TABLE IF NOT EXISTS game_results(game_id varchar not null, seed_game_id varchar, players integer, generations integer, game_options text, scores text, PRIMARY KEY (game_id))', (err) => {
-      if (err) {
-        throw err;
-      }
-    });
-
-    this.client.query('CREATE INDEX IF NOT EXISTS games_i1 on games(save_id)', (err) => {
-      if (err) {
-        throw err;
-      }
-    });
-    this.client.query('CREATE INDEX IF NOT EXISTS games_i2 on games(created_time )', (err) => {
-      if (err) {
-        throw err;
-      }
-    });
   }
 
   async initialize(): Promise<void> {
-
+    this.runLoudly('initialize1', 'CREATE TABLE IF NOT EXISTS games(game_id varchar, players integer, save_id integer, game text, status text default \'running\', created_time timestamp default now(), PRIMARY KEY (game_id, save_id))')
+      .then(() => this.runLoudly('initialize2', 'CREATE TABLE IF NOT EXISTS game_results(game_id varchar not null, seed_game_id varchar, players integer, generations integer, game_options text, scores text, PRIMARY KEY (game_id))'))
+      .then(() => this.runLoudly('initialize3', 'CREATE INDEX IF NOT EXISTS games_i1 on games(save_id)'))
+      .then(() => this.runLoudly('initialize4', 'CREATE INDEX IF NOT EXISTS games_i2 on games(created_time )'));
   }
 
   getClonableGames(cb: (err: Error | undefined, allGames: Array<IGameData>) => void) {
@@ -152,44 +135,25 @@ export class PostgreSQL implements IDatabase {
   }
 
   saveGameResults(game_id: GameId, players: number, generations: number, gameOptions: GameOptions, scores: Array<Score>): void {
-    this.client.query('INSERT INTO game_results (game_id, seed_game_id, players, generations, game_options, scores) VALUES($1, $2, $3, $4, $5, $6)', [game_id, gameOptions.clonedGamedId, players, generations, gameOptions, JSON.stringify(scores)], (err) => {
-      if (err) {
-        console.error('PostgreSQL:saveGameResults', err);
-        throw err;
-      }
-    });
+    this.runQuietly('saveGameResults', 'INSERT INTO game_results (game_id, seed_game_id, players, generations, game_options, scores) VALUES($1, $2, $3, $4, $5, $6)', [game_id, gameOptions.clonedGamedId, players, generations, gameOptions, JSON.stringify(scores)]);
   }
 
-  cleanSaves(game_id: GameId, save_id: number): void {
+  cleanSaves(game_id: GameId, save_id: number): Promise<void> {
     // DELETE all saves except initial and last one
-    this.client.query('DELETE FROM games WHERE game_id = $1 AND save_id < $2 AND save_id > 0', [game_id, save_id], (err) => {
-      if (err) {
-        console.error('PostgreSQL:cleanSaves', err);
-        throw err;
-      }
-      // Flag game as finished
-      this.client.query('UPDATE games SET status = \'finished\' WHERE game_id = $1', [game_id], (err2) => {
-        if (err2) {
-          console.error('PostgreSQL:cleanSaves2', err2);
-          throw err2;
-        }
-      });
-    });
-    this.purgeUnfinishedGames();
+    const cleanGame = this.runQuietly('cleanSaves', 'DELETE FROM games WHERE game_id = $1 AND save_id < $2 AND save_id > 0', [game_id, save_id]);
+    // Flag game as finished
+    const setStatus = this.runQuietly('cleanSaves2', 'UPDATE games SET status = \'finished\' WHERE game_id = $1', [game_id]);
+    return cleanGame
+      .then(() => setStatus)
+      .then(this.purgeUnfinishedGames);
   }
 
   // Purge unfinished games older than MAX_GAME_DAYS days. If this environment variable is absent, it uses the default of 10 days.
-  purgeUnfinishedGames(): void {
+  purgeUnfinishedGames(): Promise<void> {
     const envDays = parseInt(process.env.MAX_GAME_DAYS || '');
     const days = Number.isInteger(envDays) ? envDays : 10;
-    this.client.query('DELETE FROM games WHERE created_time < now() - interval \'1 day\' * $1', [days], function(err?: Error, res?: QueryResult<any>) {
-      if (res) {
-        console.log(`Purged ${res.rowCount} rows`);
-      }
-      if (err) {
-        return console.warn(err.message);
-      }
-    });
+    return this.runQuietly('purgeUnfinishedGames', 'DELETE FROM games WHERE created_time < now() - interval \'1 day\' * $1', [days])
+      .then((res: QueryResult<any>) => console.log(`Purged ${res.rowCount} rows`));
   }
 
   restoreGame(game_id: GameId, save_id: number, cb: DbLoadCallback<Game>): void {
@@ -217,30 +181,44 @@ export class PostgreSQL implements IDatabase {
     });
   }
 
-  saveGame(game: Game): Promise<void> {
+  async saveGame(game: Game): Promise<void> {
     const gameJSON = game.toJSON();
-    this.client.query(
+    return this.runQuietly('saveGame',
       'INSERT INTO games (game_id, save_id, game, players) VALUES ($1, $2, $3, $4) ON CONFLICT (game_id, save_id) DO UPDATE SET game = $3',
-      [game.id, game.lastSaveId, gameJSON, game.getPlayers().length], (err) => {
-        if (err) {
-          console.error('PostgreSQL:saveGame', err);
-          return;
-        }
-      },
-    );
-
-    // This must occur after the save.
-    game.lastSaveId++;
-    return Promise.resolve();
+      [game.id, game.lastSaveId, gameJSON, game.getPlayers().length]).then(() => {
+      // This must occur after the save.
+      game.lastSaveId++;
+    });
   }
 
   deleteGameNbrSaves(game_id: GameId, rollbackCount: number): void {
     if (rollbackCount > 0) {
-      this.client.query('DELETE FROM games WHERE ctid IN (SELECT ctid FROM games WHERE game_id = $1 ORDER BY save_id DESC LIMIT $2)', [game_id, rollbackCount], (err) => {
-        if (err) {
-          return console.warn(err.message);
-        }
-      });
+      this.runQuietly('deleteGameNbrSaves', 'DELETE FROM games WHERE ctid IN (SELECT ctid FROM games WHERE game_id = $1 ORDER BY save_id DESC LIMIT $2)', [game_id, rollbackCount]);
     }
+  }
+
+  runLoudly(source: string, sql: string, params: any = []): Promise<QueryResult<any>> {
+    return this.run(source, sql, params, true);
+  }
+  runQuietly(source: string, sql: string, params: any = []): Promise<QueryResult<any>> {
+    return this.run(source, sql, params, false);
+  }
+  run(source: string, sql: string, params: any, loud: boolean): Promise<QueryResult<any>> {
+    return new Promise((resolve, reject) => {
+      this.client.query(
+        sql, params,
+        (err: Error, res: QueryResult<any>) => {
+          if (err) {
+            console.error('PostgreSQL ' + source + ': ' + err);
+            if (loud || this.beLoud) {
+              reject(err);
+              return;
+            }
+          } else {
+            resolve(res);
+          }
+        },
+      );
+    });
   }
 }

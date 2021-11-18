@@ -147,28 +147,26 @@ export class SQLite implements IDatabase {
     });
   }
 
-  cleanSaves(game_id: GameId, save_id: number): void {
+  async cleanSaves(game_id: GameId, save_id: number): Promise<void> {
     // Purges isn't used yet
-    this.runQuietly('INSERT into purges (game_id, last_save_id) values (?, ?)', [game_id, save_id]);
+    const registerPurge = this.runQuietly('INSERT into purges (game_id, last_save_id) values (?, ?)', [game_id, save_id]);
     // DELETE all saves except initial and last one
-    this.db.run('DELETE FROM games WHERE game_id = ? AND save_id < ? AND save_id > 0', [game_id, save_id], function(err: Error | null) {
-      if (err) {
-        return console.warn(err.message);
-      }
-    });
+    const cleanGame = this.runQuietly('DELETE FROM games WHERE game_id = ? AND save_id < ? AND save_id > 0', [game_id, save_id]);
     // Flag game as finished
-    this.db.run('UPDATE games SET status = \'finished\' WHERE game_id = ?', [game_id], function(err: Error | null) {
-      if (err) {
-        return console.warn(err.message);
-      }
-    });
-    this.purgeUnfinishedGames();
+    const setStatus = this.runQuietly('UPDATE games SET status = \'finished\' WHERE game_id = ?', [game_id]);
+
+    return registerPurge
+      .then(() => cleanGame)
+      .then(() => setStatus)
+      .then(this.purgeUnfinishedGames);
   }
 
-  purgeUnfinishedGames(): void {
+  async purgeUnfinishedGames(): Promise<void> {
     // Purge unfinished games older than MAX_GAME_DAYS days. If this .env variable is not present, unfinished games will not be purged.
     if (process.env.MAX_GAME_DAYS) {
-      this.runQuietly(`DELETE FROM games WHERE created_time < strftime('%s',date('now', '-' || ? || ' day')) and status = 'running'`, [process.env.MAX_GAME_DAYS]);
+      return this.runQuietly(`DELETE FROM games WHERE created_time < strftime('%s',date('now', '-' || ? || ' day')) and status = 'running'`, [process.env.MAX_GAME_DAYS]);
+    } else {
+      return Promise.resolve();
     }
   }
 

@@ -8,7 +8,7 @@ export class OneGiantStep implements IMilestone {
     // was before the deck got 100% larger.
     public description: string = 'Have at least 6 moon tags in play'
     public getScore(player: Player): number {
-      return player.getTagCount(Tags.MOON);
+      return player.getTagCount(Tags.MOON, 'milestone');
     }
     public canClaim(player: Player): boolean {
       return this.getScore(player) >= 6;

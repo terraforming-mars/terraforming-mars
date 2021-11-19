@@ -794,11 +794,12 @@ export class Player implements ISerializable<SerializedPlayer> {
    * 'ma': Same as raw but includes special conditions for awards & milestones (Chimera)
    * 'vps': Same as raw, but include event tags.
    */
-  public getTagCount(tag: Tags, mode: 'default' | 'raw' | 'ma' | 'vps' = 'default') {
+  public getTagCount(tag: Tags, mode: 'default' | 'raw' | 'milestone' | 'award' | 'vps' = 'default') {
     switch (mode) {
     case 'default': return this.getTagCountOld(tag, false, true);
     case 'raw': return this.getTagCountOld(tag, false, false);
-    case 'ma': return this.getTagCountOld(tag, false, false); // TODO(include Chimera)
+    case 'milestone': return this.getTagCountOld(tag, false, true); // TODO(include Chimera)
+    case 'award': return this.getTagCountOld(tag, false, false); // TODO(include Chimera)
     case 'vps': return this.getTagCountOld(tag, true, false);
     }
   }

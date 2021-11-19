@@ -10,7 +10,7 @@
                 <CardNumber v-if="getCardMetadata() !== undefined" :number="getCardNumber()"/>
             </div>
             <CardExpansion :expansion="getCardExpansion()" :isCorporation="isCorporationCard()"/>
-            <CardResourceCounter v-if="card.resourceType !== undefined" :amount="getResourceAmount(card)" :type="resourceType" />
+            <CardResourceCounter v-if="hasResourceType" :amount="getResourceAmount(card)" :type="resourceType" />
             <CardExtraContent :card="card" />
             <slot/>
         </div>
@@ -167,6 +167,9 @@ export default Vue.extend({
     },
   },
   computed: {
+    hasResourceType(): boolean {
+      return this.card.resourceType !== undefined || this.cardInstance.resourceType !== undefined;
+    },
     resourceType(): ResourceType {
       if (this.card.resourceType !== undefined) return this.card.resourceType;
       if (this.cardInstance.resourceType !== undefined) return this.cardInstance.resourceType;

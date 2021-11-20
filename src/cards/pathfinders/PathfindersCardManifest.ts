@@ -10,6 +10,7 @@ import {AsteroidResources} from './AsteroidResources';
 import {BreedingFarms} from './BreedingFarms';
 import {CassiniStation} from './CassiniStation';
 import {CeresSpaceport} from './CeresSpaceport';
+import {Chimera} from './Chimera';
 import {CO2Reducers} from './CO2Reducers';
 // import {CommunicationCenter} from './CommunicationCenter';
 import {ControlledBloom} from './ControlledBloom';
@@ -160,7 +161,7 @@ export const PATHFINDERS_CARD_MANIFEST = new CardManifest({
     // {cardName: CardName.PLANET_PR, Factory: planetpr},
     // {cardName: CardName.AMBIENT, Factory: Ambient},
     // {cardName: CardName.RINGCOM, Factory: Ringcom},
-    // {cardName: CardName.CHIIMERA, Factory: Chiimera},
+    {cardName: CardName.CHIMERA, Factory: Chimera},
     // {cardName: CardName.SISTEMAS_SEEBECK, Factory: SistemasSeebeck},
     // {cardName: CardName.SPIRE, Factory: Spire},
     // {cardName: CardName.SOYLENT_SEEDLING_SYSTEMS, Factory: SoylentSeedlingSystems},

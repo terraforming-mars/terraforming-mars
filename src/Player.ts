@@ -819,8 +819,13 @@ export class Player implements ISerializable<SerializedPlayer> {
 
     // Chimera hook
     if (this.corporationCard?.name === CardName.CHIMERA) {
-      if (mode === 'award' || mode === 'milestone') {
+      // Milestones don't count wild tags, so in this case one will be added.
+      if (mode === 'award') {
         tagCount++;
+      };
+      // Milestones count wild tags, so in this case one will be deducted.
+      if (mode === 'milestone') {
+        tagCount--;
       }
     }
     return tagCount;

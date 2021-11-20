@@ -147,7 +147,15 @@ export abstract class Board {
   }
 
   public getAvailableSpacesForGreenery(player: Player): Array<ISpace> {
-    const spacesForGreenery = this.getAvailableSpacesOnLand(player)
+    let spacesOnLand = this.getAvailableSpacesOnLand(player);
+    // Spaces next to Red City are always unavialable.
+    if (player.game.gameOptions.pathfindersExpansion === true) {
+      spacesOnLand = spacesOnLand.filter((space) => {
+        return !this.getAdjacentSpaces(space).some((neighbor) => neighbor.tile?.tileType === TileType.RED_CITY);
+      });
+    }
+
+    const spacesForGreenery = spacesOnLand
       .filter((space) => this.getAdjacentSpaces(space).find((adj) => adj.tile !== undefined && adj.player === player && adj.tile.tileType !== TileType.OCEAN) !== undefined);
 
     // Spaces next to tiles you own
@@ -155,7 +163,7 @@ export abstract class Board {
       return spacesForGreenery;
     }
     // Place anywhere if no space owned
-    return this.getAvailableSpacesOnLand(player);
+    return spacesOnLand;
   }
 
   public getAvailableSpacesForOcean(player: Player): Array<ISpace> {

@@ -57,6 +57,7 @@ import {PrefabricationofHumanHabitats} from './PrefabricationofHumanHabitats';
 import {PrivateSecurity} from './PrivateSecurity';
 import {PublicSponsoredGrant} from './PublicSponsoredGrant';
 import {RareEarthElements} from './RareEarthElements';
+import {RedCity} from './RedCity';
 import {ResearchGrant} from './ResearchGrant';
 import {ReturntoAbandonedTechnology} from './ReturntoAbandonedTechnology';
 import {RichDeposits} from './RichDeposits';
@@ -143,7 +144,7 @@ export const PATHFINDERS_CARD_MANIFEST = new CardManifest({
     {cardName: CardName.MICROBIOLOGY_PATENTS, Factory: MicrobiologyPatents},
     // // {cardName: CardName.COORDINATED_RAID, Factory: CoordinatedRaid, compatibility: GameModule.Colonies},       // TRICKY WORK
     {cardName: CardName.LOBBY_HALLS, Factory: LobbyHalls, compatibility: GameModule.Turmoil},
-    // // {cardName: CardName.RED_CITY, Factory: RedCity, compatibility: GameModule.Turmoil},                        // AVAILABLE GREENERY SPACES
+    {cardName: CardName.RED_CITY, Factory: RedCity, compatibility: GameModule.Turmoil},
     {cardName: CardName.VENERA_BASE, Factory: VeneraBase, compatibility: [GameModule.Turmoil, GameModule.Venus]},
     // // {cardName: CardName.GATEWAY_STATION, Factory: GatewayStation, compatibility: GameModule.Turmoil},
     {cardName: CardName.FLOATER_URBANISM, Factory: FloaterUrbanism, compatibility: GameModule.Venus},

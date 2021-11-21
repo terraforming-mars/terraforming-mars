@@ -74,6 +74,10 @@ export class PathfindersExpansion {
   ]);
 
   public static raiseTrack(tag: Tags, player: Player, steps: number = 1): void {
+    if (player.game.gameOptions.pathfindersExpansion === false) {
+      return;
+    }
+
     //   PathfindersExpansion.raiseTrack2(tag, player, player.game, steps);
     // }
 

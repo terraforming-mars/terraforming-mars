@@ -26,6 +26,8 @@ import {Color} from '../src/Color';
 import {RandomMAOptionType} from '../src/RandomMAOptionType';
 import {SpaceBonus} from '../src/SpaceBonus';
 import {TileType} from '../src/TileType';
+import {ALL_AWARDS} from '../src/awards/Awards';
+import {ALL_MILESTONES} from '../src/milestones/Milestones';
 
 describe('Game', () => {
   it('should initialize with right defaults', () => {
@@ -663,5 +665,23 @@ describe('Game', () => {
     (serialized.gameOptions as any).pathfindersData = undefined;
     const deserialized = Game.deserialize(serialized);
     expect(deserialized.pathfindersData).is.undefined;
+  });
+
+  it('deserializing a game with award as an object', () => {
+    const player = TestPlayers.BLUE.newPlayer();
+    const game = Game.newInstance('foobar', [player], player, TestingUtils.setCustomGameOptions({pathfindersExpansion: false}));
+    const serialized = game.serialize();
+    serialized.awards = serialized.awards.map((a) => ALL_AWARDS.find((b) => b.name === a)!);
+    const deserialized = Game.deserialize(serialized);
+    expect(deserialized.awards).deep.eq(game.awards);
+  });
+
+  it('deserializing a game with milestone as an object', () => {
+    const player = TestPlayers.BLUE.newPlayer();
+    const game = Game.newInstance('foobar', [player], player, TestingUtils.setCustomGameOptions({pathfindersExpansion: false}));
+    const serialized = game.serialize();
+    serialized.milestones = serialized.milestones.map((a) => ALL_MILESTONES.find((b) => b.name === a)!);
+    const deserialized = Game.deserialize(serialized);
+    expect(deserialized.milestones).deep.eq(game.milestones);
   });
 });

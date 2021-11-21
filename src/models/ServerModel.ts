@@ -87,6 +87,7 @@ export class Server {
       turmoil: turmoil,
       undoCount: game.undoCount,
       venusScaleLevel: game.getVenusScaleLevel(),
+      step: game.lastSaveId,
     };
   }
 

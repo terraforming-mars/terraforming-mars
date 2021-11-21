@@ -414,7 +414,7 @@ export class Game implements ISerializable<SerializedGame> {
   public serialize(): SerializedGame {
     const result: SerializedGame = {
       activePlayer: this.activePlayer,
-      awards: this.awards,
+      awards: this.awards.map((a) => a.name),
       board: this.board.serialize(),
       claimedMilestones: serializeClaimedMilestones(this.claimedMilestones),
       colonies: this.colonies,
@@ -433,7 +433,7 @@ export class Game implements ISerializable<SerializedGame> {
       id: this.id,
       initialDraftIteration: this.initialDraftIteration,
       lastSaveId: this.lastSaveId,
-      milestones: this.milestones,
+      milestones: this.milestones.map((m) => m.name),
       monsInsuranceOwner: this.monsInsuranceOwner,
       moonData: IMoonData.serialize(this.moonData),
       oxygenLevel: this.oxygenLevel,
@@ -1579,24 +1579,24 @@ export class Game implements ISerializable<SerializedGame> {
     game.spectatorId = d.spectatorId;
 
     const milestones: Array<IMilestone> = [];
-    d.milestones.forEach((element: IMilestone) => {
-      ALL_MILESTONES.forEach((ms: IMilestone) => {
-        if (ms.name === element.name) {
-          milestones.push(ms);
-        }
-      });
+    d.milestones.forEach((element: IMilestone | string) => {
+      const milestoneName = typeof element === 'string' ? element : element.name;
+      const foundMilestone = ALL_MILESTONES.find((milestone) => milestone.name === milestoneName);
+      if (foundMilestone !== undefined) {
+        milestones.push(foundMilestone);
+      }
     });
 
     game.milestones = milestones;
     game.claimedMilestones = deserializeClaimedMilestones(d.claimedMilestones, players, milestones);
 
     const awards: Array<IAward> = [];
-    d.awards.forEach((element: IAward) => {
-      ALL_AWARDS.forEach((award: IAward) => {
-        if (award.name === element.name) {
-          awards.push(award);
-        }
-      });
+    d.awards.forEach((element: IAward | string) => {
+      const awardName = typeof element === 'string' ? element : element.name;
+      const foundAward = ALL_AWARDS.find((award) => award.name === awardName);
+      if (foundAward !== undefined) {
+        awards.push(foundAward);
+      }
     });
 
     game.awards = awards;

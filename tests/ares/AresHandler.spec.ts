@@ -11,7 +11,6 @@ import {Resources} from '../../src/Resources';
 import {SelectProductionToLose} from '../../src/inputs/SelectProductionToLose';
 import {OriginalBoard} from '../../src/boards/OriginalBoard';
 import {DesperateMeasures} from '../../src/cards/ares/DesperateMeasures';
-import {fail} from 'assert';
 import {Decomposers} from '../../src/cards/base/Decomposers';
 import {EnergyTapping} from '../../src/cards/base/EnergyTapping';
 import {Phase} from '../../src/Phase';
@@ -116,12 +115,9 @@ describe('AresHandler', function() {
 
     const adjacentSpace = game.board.getAdjacentSpaces(firstSpace)[0];
 
-    try {
+    expect(() => {
       game.addTile(player, adjacentSpace.spaceType, adjacentSpace, {tileType: TileType.GREENERY});
-      fail('should not reach here.');
-    } catch (err) {
-      expect(err.toString().includes('Placing here costs 2 M€')).is.true;
-    }
+    }).to.throw(/Placing here costs 2 M€/);
   });
 
   it('Pay adjacent hazard costs - mild', function() {
@@ -132,12 +128,9 @@ describe('AresHandler', function() {
     player.addProduction(Resources.MEGACREDITS, -5);
 
     const adjacentSpace = game.board.getAdjacentSpaces(firstSpace)[0];
-    try {
+    expect(() => {
       game.addTile(player, adjacentSpace.spaceType, adjacentSpace, {tileType: TileType.GREENERY});
-      fail('should not reach here.');
-    } catch (err) {
-      expect(err.toString()).includes('Placing here costs 1 units of production');
-    }
+    }).to.throw(/Placing here costs 1 units of production/);
 
     player.addProduction(Resources.PLANTS, 7);
     game.addTile(player, adjacentSpace.spaceType, adjacentSpace, {tileType: TileType.GREENERY});

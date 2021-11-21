@@ -42,7 +42,7 @@ export class Cloner {
         response.game = Game.deserialize(serialized);
       }
     } catch (e) {
-      response.err = e;
+      response.err = e instanceof Error ? e : new Error(String(e));
     }
     cb(response.err, response.game);
   }

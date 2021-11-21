@@ -5,33 +5,33 @@ import {GameModule} from '../../GameModule';
 import {AdvancedPowerGrid} from './AdvancedPowerGrid';
 import {AgroDrones} from './AgroDrones';
 import {Anthozoa} from './Anthozoa';
-// import {AntidesertificationTechniques} from './AntidesertificationTechniques';
+import {AntidesertificationTechniques} from './AntidesertificationTechniques';
 import {AsteroidResources} from './AsteroidResources';
 import {BreedingFarms} from './BreedingFarms';
 import {CassiniStation} from './CassiniStation';
 import {CeresSpaceport} from './CeresSpaceport';
-// import {CO2Reducers} from './CO2Reducers';
+import {CO2Reducers} from './CO2Reducers';
 // import {CommunicationCenter} from './CommunicationCenter';
-// import {ControlledBloom} from './ControlledBloom';
-// import {CrewTraining} from './CrewTraining';
+import {ControlledBloom} from './ControlledBloom';
+import {CrewTraining} from './CrewTraining';
 import {Cryptocurrency} from './Cryptocurrency';
 import {CultivationOfVenus} from './CultivationOfVenus';
 import {Cyanobacteria} from './Cyanobacteria';
 import {DataLeak} from './DataLeak';
 import {DeclarationOfIndependence} from './DeclarationOfIndependence';
-// import {DeepSpaceOperations} from './DeepSpaceOperations';
-// import {DesignCompany} from './DesignCompany';
+import {DeepSpaceOperations} from './DeepSpaceOperations';
+import {DesignCompany} from './DesignCompany';
 import {DesignedOrganisms} from './DesignedOrganisms';
 import {DustStorm} from './DustStorm';
 import {DysonScreens} from './DysonScreens';
 import {EarlyExpedition} from './EarlyExpedition';
 import {EconomicEspionage} from './EconomicEspionage';
 // import {EconomicHelp} from './EconomicHelp';
-// import {ExpeditiontotheSurfaceVenus} from './ExpeditiontotheSurfaceVenus';
+import {ExpeditionToTheSurfaceVenus} from './ExpeditionToTheSurfaceVenus';
 import {FlatMarsTheory} from './FlatMarsTheory';
 import {FloaterUrbanism} from './FloaterUrbanism';
-// import {HighTempSuperconductors} from './HighTempSuperconductors';
-// import {HydrogenBombardment} from './HydrogenBombardment';
+import {HighTempSuperconductors} from './HighTempSuperconductors';
+import {HydrogenBombardment} from './HydrogenBombardment';
 import {HydrogenProcessingPlant} from './HydrogenProcessingPlant';
 import {InterplanetaryTransport} from './InterplanetaryTransport';
 import {Kickstarter} from './Kickstarter';
@@ -50,31 +50,30 @@ import {NewVenice} from './NewVenice';
 import {NobelLabs} from './NobelLabs';
 import {OrbitalLaboratories} from './OrbitalLaboratories';
 import {OzoneGenerators} from './OzoneGenerators';
-// import {PersonalAgenda} from './PersonalAgenda';
-// import {Pollinators} from './Pollinators';
+import {PersonalAgenda} from './PersonalAgenda';
+import {Pollinators} from './Pollinators';
 import {PowerPlant} from './PowerPlant';
 import {PrefabricationofHumanHabitats} from './PrefabricationofHumanHabitats';
 import {PrivateSecurity} from './PrivateSecurity';
-// import {PublicSponsoredGrant} from './PublicSponsoredGrant';
+import {PublicSponsoredGrant} from './PublicSponsoredGrant';
 import {RareEarthElements} from './RareEarthElements';
-// import {ResearchGrant} from './ResearchGrant';
+import {ResearchGrant} from './ResearchGrant';
 import {ReturntoAbandonedTechnology} from './ReturntoAbandonedTechnology';
 import {RichDeposits} from './RichDeposits';
 import {SecretLabs} from './SecretLabs';
 import {SmallOpenPitMine} from './SmallOpenPitMine';
 import {SmallComet} from './SmallComet';
-// import {SocialEvents} from './SocialEvents';
-// import {SoilDetoxification} from './SoilDetoxification';
+import {SocialEvents} from './SocialEvents';
+import {SoilDetoxification} from './SoilDetoxification';
 import {Solarpedia} from './Solarpedia';
 import {SolarStorm} from './SolarStorm';
 import {SpaceDebrisCleaningOperation} from './SpaceDebrisCleaningOperation';
 import {SpaceRelay} from './SpaceRelay';
 import {TerraformingControlStation} from './TerraformingControlStation';
-import {ExpeditionToTheSurfaceVenus} from './ExpeditionToTheSurfaceVenus';
-// import {TerraformingRobots} from './TerraformingRobots';
+import {TerraformingRobots} from './TerraformingRobots';
 // import {ValuableGases} from './ValuableGases';
 import {VeneraBase} from './VeneraBase';
-// import {VenusFirst} from './VenusFirst';
+import {VenusFirst} from './VenusFirst';
 
 export const PATHFINDERS_CARD_MANIFEST = new CardManifest({
   module: GameModule.Pathfinders,
@@ -148,13 +147,13 @@ export const PATHFINDERS_CARD_MANIFEST = new CardManifest({
     {cardName: CardName.VENERA_BASE, Factory: VeneraBase, compatibility: [GameModule.Turmoil, GameModule.Venus]},
     // // {cardName: CardName.GATEWAY_STATION, Factory: GatewayStation, compatibility: GameModule.Turmoil},
     {cardName: CardName.FLOATER_URBANISM, Factory: FloaterUrbanism, compatibility: GameModule.Venus},
-    // {cardName: CardName.SOIL_DETOXIFICATION, Factory: SoilDetoxification, compatibility: GameModule.Turmoil},
-    // {cardName: CardName.HIGH_TEMP_SUPERCONDUCTORS, Factory: HighTempSuperconductors, compatibility: GameModule.Turmoil},
-    // {cardName: CardName.PUBLIC_SPONSORED_GRANT, Factory: PublicSponsoredGrant, compatibility: GameModule.Turmoil},
-    // {cardName: CardName.POLLINATORS, Factory: Pollinators},
-    // {cardName: CardName.SOCIAL_EVENTS, Factory: SocialEvents},
-    // {cardName: CardName.CONTROLLED_BLOOM, Factory: ControlledBloom},
-    // {cardName: CardName.TERRAFORMING_ROBOTS, Factory: TerraformingRobots},
+    {cardName: CardName.SOIL_DETOXIFICATION, Factory: SoilDetoxification, compatibility: GameModule.Turmoil},
+    {cardName: CardName.HIGH_TEMP_SUPERCONDUCTORS, Factory: HighTempSuperconductors, compatibility: GameModule.Turmoil},
+    {cardName: CardName.PUBLIC_SPONSORED_GRANT, Factory: PublicSponsoredGrant, compatibility: GameModule.Turmoil},
+    {cardName: CardName.POLLINATORS, Factory: Pollinators},
+    {cardName: CardName.SOCIAL_EVENTS, Factory: SocialEvents},
+    {cardName: CardName.CONTROLLED_BLOOM, Factory: ControlledBloom},
+    {cardName: CardName.TERRAFORMING_ROBOTS, Factory: TerraformingRobots},
   ],
   corporationCards: [
     // {cardName: CardName.POLARIS, Factory: Polaris},
@@ -182,22 +181,22 @@ export const PATHFINDERS_CARD_MANIFEST = new CardManifest({
     // {cardName: CardName.ADHAI_HIGH_ORBIT_CONSTRUCTION, Factory: AdhaiHighOrbitConstruction},
   ],
   preludeCards: [
-    // {cardName: CardName.VENUS_FIRST_PATHFINDERS, Factory: VenusFirst, compatibility: GameModule.Venus},
+    {cardName: CardName.VENUS_FIRST_PATHFINDERS, Factory: VenusFirst, compatibility: GameModule.Venus},
     // {cardName: CardName.VALUABLE_GASES_PATHFINDERS, Factory: ValuableGases, compatibility: GameModule.Venus},
-    // {cardName: CardName.CO2_REDUCERS, Factory: CO2Reducers, compatibility: GameModule.Venus},
-    // {cardName: CardName.HYDROGEN_BOMBARDMENT, Factory: HydrogenBombardment, compatibility: GameModule.Venus},
-    // {cardName: CardName.RESEARCH_GRANT_PATHFINDERS, Factory: ResearchGrant},
-    // {cardName: CardName.CREW_TRAINING, Factory: CrewTraining},
-    // // {cardName: CardName.SURVEY_MISSION, Factory: SurveyMission},
-    // {cardName: CardName.DESIGN_COMPANY, Factory: DesignCompany},
-    // // {cardName: CardName.CONSOLIDATION, Factory: Consolidation},
-    // {cardName: CardName.PERSONAL_AGENDA, Factory: PersonalAgenda},
-    // // {cardName: CardName.VITAL_COLONY, Factory: VitalColony, compatibility: GameModule.Colonies},
-    // // {cardName: CardName.STRATEGIC_BASE_PLANNING, Factory: StrategicBasePlanning, compatibility: GameModule.Colonies},
-    // {cardName: CardName.DEEP_SPACE_OPERATIONS, Factory: DeepSpaceOperations},
-    // {cardName: CardName.ANTI_DESERTIFICATION_TECHNIQUES, Factory: AntidesertificationTechniques},
-    // // {cardName: CardName.EXPERIENCED_MARTIANS, Factory: ExperiencedMartians, compatibility: GameModule.Turmoil},
-    // // {cardName: CardName.THE_NEW_SPACE_RACE, Factory: TheNewSpaceRace},
+    {cardName: CardName.CO2_REDUCERS, Factory: CO2Reducers, compatibility: GameModule.Venus},
+    {cardName: CardName.HYDROGEN_BOMBARDMENT, Factory: HydrogenBombardment, compatibility: GameModule.Venus},
+    {cardName: CardName.RESEARCH_GRANT_PATHFINDERS, Factory: ResearchGrant},
+    {cardName: CardName.CREW_TRAINING, Factory: CrewTraining},
+    // {cardName: CardName.SURVEY_MISSION, Factory: SurveyMission},
+    {cardName: CardName.DESIGN_COMPANY, Factory: DesignCompany},
+    // {cardName: CardName.CONSOLIDATION, Factory: Consolidation},
+    {cardName: CardName.PERSONAL_AGENDA, Factory: PersonalAgenda},
+    // {cardName: CardName.VITAL_COLONY, Factory: VitalColony, compatibility: GameModule.Colonies},
+    // {cardName: CardName.STRATEGIC_BASE_PLANNING, Factory: StrategicBasePlanning, compatibility: GameModule.Colonies},
+    {cardName: CardName.DEEP_SPACE_OPERATIONS, Factory: DeepSpaceOperations},
+    {cardName: CardName.ANTI_DESERTIFICATION_TECHNIQUES, Factory: AntidesertificationTechniques},
+    // {cardName: CardName.EXPERIENCED_MARTIANS, Factory: ExperiencedMartians, compatibility: GameModule.Turmoil},
+    // {cardName: CardName.THE_NEW_SPACE_RACE, Factory: TheNewSpaceRace},
   ],
 
   // Perhaps these community cards should just move to this manifest, but only if it becomes

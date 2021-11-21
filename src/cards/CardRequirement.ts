@@ -13,48 +13,48 @@ import {Options} from './CardRequirements';
 const firstLetterUpperCase = (s: string): string => s.charAt(0).toUpperCase() + s.slice(1);
 
 export class CardRequirement {
-  private _isMax: boolean = false;
-  protected _isAny: boolean = false;
-  constructor(private _type: RequirementType, protected _amount: number = 1, options?: Options) {
-    this._isMax = options?.max ?? false;
-    this._isAny = options?.all ?? false;
+  public readonly isMax: boolean = false;
+  public readonly isAny: boolean = false;
+  constructor(public type: RequirementType, public amount: number = 1, options?: Options) {
+    this.isMax = options?.max ?? false;
+    this.isAny = options?.all ?? false;
   }
 
   private amountToString(): string {
-    if (this._type === RequirementType.OXYGEN || this._type === RequirementType.VENUS) {
-      return `${this._amount}%`;
-    } else if (this._type === RequirementType.TEMPERATURE) {
-      return `${this._amount}°`;
+    if (this.type === RequirementType.OXYGEN || this.type === RequirementType.VENUS) {
+      return `${this.amount}%`;
+    } else if (this.type === RequirementType.TEMPERATURE) {
+      return `${this.amount}°`;
     } else {
-      return (this._amount !== 1 || this._isMax) ? this._amount.toString() : '';
+      return (this.amount !== 1 || this.isMax) ? this.amount.toString() : '';
     }
   }
 
   protected parseType(): string {
     const withPlural: Array<string> = [RequirementType.OCEANS, RequirementType.FLOATERS, RequirementType.GREENERIES, RequirementType.CITIES, RequirementType.COLONIES, RequirementType.RESOURCE_TYPES, RequirementType.PARTY_LEADERS];
 
-    if (this._amount > 1 && withPlural.includes(this._type)) {
+    if (this.amount > 1 && withPlural.includes(this.type)) {
       return this.getTypePlural();
     }
 
-    return this._type;
+    return this.type;
   }
 
   // TODO (chosta): add to a top level class - preferrably translatable
   public getTypePlural(): string {
-    if (this._type === RequirementType.CITIES) {
+    if (this.type === RequirementType.CITIES) {
       return 'Cities';
-    } else if (this._type === RequirementType.COLONIES) {
+    } else if (this.type === RequirementType.COLONIES) {
       return 'Colonies';
-    } else if (this._type === RequirementType.GREENERIES) {
+    } else if (this.type === RequirementType.GREENERIES) {
       return 'Greeneries';
     } else {
-      return `${this._type}s`;
+      return `${this.type}s`;
     }
   }
 
   public getLabel(): string {
-    let result: string = this._isMax ? 'max ' : '';
+    let result: string = this.isMax ? 'max ' : '';
     const amount = this.amountToString();
     if (amount !== '') {
       result += amount;
@@ -63,19 +63,6 @@ export class CardRequirement {
     result += this.parseType();
 
     return result;
-  }
-
-  public get isMax(): boolean {
-    return this._isMax;
-  }
-  public get isAny(): boolean {
-    return this._isAny;
-  }
-  public get type(): RequirementType {
-    return this._type;
-  }
-  public get amount(): number {
-    return this._amount;
   }
 
   protected satisfiesInequality(calculated: number) : boolean {
@@ -91,7 +78,7 @@ export class CardRequirement {
       return Turmoil.getTurmoil(player.game).chairman === player.id;
 
     case RequirementType.CITIES:
-      if (this._isAny) {
+      if (this.isAny) {
         return this.satisfiesInequality(player.game.getCitiesInPlay());
       } else {
         return this.satisfiesInequality(player.getCitiesCount());
@@ -109,7 +96,7 @@ export class CardRequirement {
       const greeneries = player.game.board.spaces.filter(
         (space) => space.tile !== undefined &&
             space.tile.tileType === TileType.GREENERY &&
-            (space.player === player || this._isAny),
+            (space.player === player || this.isAny),
       ).length;
       return this.satisfiesInequality(greeneries);
 
@@ -153,15 +140,15 @@ export class CardRequirement {
 
     case RequirementType.COLONY_TILES:
       return this.satisfiesInequality(
-        MoonExpansion.tiles(player.game, TileType.MOON_COLONY, {surfaceOnly: true, ownedBy: this._isAny ? undefined : player}).length);
+        MoonExpansion.tiles(player.game, TileType.MOON_COLONY, {surfaceOnly: true, ownedBy: this.isAny ? undefined : player}).length);
 
     case RequirementType.MINING_TILES:
       return this.satisfiesInequality(
-        MoonExpansion.tiles(player.game, TileType.MOON_MINE, {surfaceOnly: true, ownedBy: this._isAny ? undefined : player}).length);
+        MoonExpansion.tiles(player.game, TileType.MOON_MINE, {surfaceOnly: true, ownedBy: this.isAny ? undefined : player}).length);
 
     case RequirementType.ROAD_TILES:
       return this.satisfiesInequality(
-        MoonExpansion.tiles(player.game, TileType.MOON_ROAD, {surfaceOnly: true, ownedBy: this._isAny ? undefined : player}).length);
+        MoonExpansion.tiles(player.game, TileType.MOON_ROAD, {surfaceOnly: true, ownedBy: this.isAny ? undefined : player}).length);
 
     case RequirementType.TAG:
     case RequirementType.PARTY:
@@ -223,14 +210,14 @@ export class TagCardRequirement extends CardRequirement {
     return firstLetterUpperCase(this.tag);
   }
   public satisfies(player: Player): boolean {
-    const includeWildTags = this.isMax !== true;
-    let tagCount = player.getTagCount(this.tag, false, includeWildTags);
+    const mode = this.isMax !== true ? 'default' : 'raw';
+    let tagCount = player.getTagCount(this.tag, mode);
 
-    if (this._isAny) {
+    if (this.isAny) {
       player.game.getPlayers().forEach((p) => {
         if (p.id !== player.id) {
           // Don't include opponents' wild tags because they are not performing the action.
-          tagCount += p.getTagCount(this.tag, false, false);
+          tagCount += p.getTagCount(this.tag, 'raw');
         }
       });
     }
@@ -255,7 +242,7 @@ export class ProductionCardRequirement extends CardRequirement {
 }
 
 export class PartyCardRequirement extends CardRequirement {
-  constructor(private party: PartyName) {
+  constructor(public readonly party: PartyName) {
     super(RequirementType.PARTY);
   }
   protected parseType(): string {

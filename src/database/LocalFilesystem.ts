@@ -33,10 +33,11 @@ export class Localfilesystem implements IDatabase {
     return path.resolve(historyFolder, `${gameId}-${saveIdString}.json`);
   }
 
-  saveGame(game: Game): void {
+  saveGame(game: Game): Promise<void> {
     console.log(`saving ${game.id} at position ${game.lastSaveId}`);
     this.saveSerializedGame(game.serialize());
     game.lastSaveId++;
+    return Promise.resolve();
   }
 
   saveSerializedGame(serializedGame: SerializedGame): void {
@@ -51,8 +52,9 @@ export class Localfilesystem implements IDatabase {
       const text = fs.readFileSync(this._filename(game_id));
       const serializedGame = JSON.parse(text);
       cb(undefined, serializedGame);
-    } catch (err) {
-      cb(err, undefined);
+    } catch (e) {
+      const error = e instanceof Error ? e : new Error(String(e));
+      cb(error, undefined);
     }
   }
 
@@ -82,8 +84,9 @@ export class Localfilesystem implements IDatabase {
       const text = fs.readFileSync(this._historyFilename(game_id, 0));
       const serializedGame = JSON.parse(text);
       cb(undefined, serializedGame);
-    } catch (err) {
-      cb(err, undefined);
+    } catch (e) {
+      const error = e instanceof Error ? e : new Error(String(e));
+      cb(error, undefined);
     }
   }
 

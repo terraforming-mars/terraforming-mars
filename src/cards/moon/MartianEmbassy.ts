@@ -17,7 +17,7 @@ export class MartianEmbassy extends Card implements IProjectCard {
 
       metadata: {
         cardNumber: 'M76',
-        description: 'Raise the Mars Planetary Track 1 step for each 3 Moon tags you have.',
+        description: 'Raise the Mars Planetary Track 1 step for each 3 Moon tags you have, including this.',
         renderData: CardRenderer.builder((b) => {
           b.text('mars track').slash().moon(3);
         }),
@@ -26,7 +26,8 @@ export class MartianEmbassy extends Card implements IProjectCard {
   };
 
   public play(player: Player) {
-    const tags = player.getTagCount(Tags.MOON);
+    // The +1 is "including this".
+    const tags = player.getTagCount(Tags.MOON) + 1;
     const rate = Math.floor(tags / 3);
     PathfindersExpansion.raiseTrack(Tags.MARS, player, rate);
     return undefined;

@@ -3,8 +3,9 @@ import {PrivateSecurity} from '../../../src/cards/pathfinders/PrivateSecurity';
 import {Game} from '../../../src/Game';
 import {TestPlayer} from '../../TestPlayer';
 import {TestPlayers} from '../../TestPlayers';
-import {HiredRaiders} from '../../../src/cards/base/HiredRaiders';
-import {OrOptions} from '../../../src/inputs/OrOptions';
+import {Fish} from '../../../src/cards/base/Fish';
+import {SelectPlayer} from '../../../src/inputs/SelectPlayer';
+import {Resources} from '../../../src/Resources';
 
 describe('PrivateSecurity', function() {
   let card: PrivateSecurity;
@@ -20,28 +21,25 @@ describe('PrivateSecurity', function() {
     Game.newInstance('id', [player, opponent1, opponent2], player);
   });
 
-  it('protects against Hired Raiders', function() {
-    opponent1.steel = 5;
-    opponent2.steel = 5;
-    opponent1.megaCredits = 5;
-    opponent2.megaCredits = 5;
+  it('protects against Fish', function() {
+    opponent1.setProductionForTest({plants: 2});
+    opponent2.setProductionForTest({plants: 4});
 
-    const hiredRaiders = new HiredRaiders();
+    const fish = new Fish();
 
     opponent2.playedCards = [];
-    let action = hiredRaiders.play(player) as OrOptions;
+    fish.play(player);
+    let action = player.game.deferredActions.pop()?.execute()! as SelectPlayer;
     // Options for both opponents.
-    expect(action.options).has.lengthOf(5);
+    expect(action.players).has.lengthOf(2);
 
     // Opponent 2 has Private Security
     opponent2.playedCards = [card];
-    action = hiredRaiders.play(player) as OrOptions;
+    fish.play(player);
+    action = player.game.deferredActions.pop()?.execute()! as SelectPlayer;
     // Options for only one opponent.
-    expect(action.options).has.lengthOf(4);
-    const filtered = action.options.filter((option) => option.title.toString().includes('M€'));
-    expect(filtered).has.lengthOf(1);
-    filtered[0].cb();
+    expect(action).is.undefined;
     // And it's the one without Private Security.
-    expect(opponent1.megaCredits).to.eq(2);
+    expect(opponent1.getProduction(Resources.PLANTS)).to.eq(1);
   });
 });

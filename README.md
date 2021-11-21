@@ -17,6 +17,10 @@
 This is an open-source online implementation of the great board game Terraforming mars. **It is not affiliated
 with FryxGames, Asmodee Digital or Steam in any way.**
 
+**Note**: This project has no affiliation with "Rebalanced Mars", whose authors have refused to open-source their code.
+We believe this is both a violation of our GPL3 license, and also of the spirit of collaboration that this project tries
+to foster. Note that any new features you see on this repo made available on that server are without our permission.
+
 **Buy The Board Game**
 
 The board game is great and this repository highly recommends [purchasing it](https://www.amazon.com/Stronghold-Games-6005SG-Terraforming-Board/dp/B01GSYA4K2) for personal use.
@@ -25,17 +29,17 @@ The board game is great and this repository highly recommends [purchasing it](ht
 [Join us over on Discord!](https://discord.gg/VR8TbrD).
 
 ## ⬤ I want to play!
-There's a demo instance at https://terraforming-mars.herokuapp.com/. It's generally reliable, but read more below.
+There's a instance available at https://terraforming-mars.herokuapp.com/. It's generally reliable, but read more below.
 
 There's also this excellent
 [YouTube playlist](https://youtube.com/playlist?list=PLCGE78n9vCqhhmRe9YCrRh2GLNMPB_3j1) focused on tutorials custom for this app.
 
-NOTE: This demo site is restarted daily. A multiplayer game will remain available for 10 days, after which it will be flushed from the database.
-Unfinished solo games are flushed after one day. We continue to make stability and scalability improvements as in step with growth and popularity,
+NOTE: This site is restarted daily. A multiplayer game will remain available for 10 days, after which it will be flushed from the database.
+Unfinished solo games are flushed after one day. We continue to make stability and scalability improvements in step with growth and popularity,
 but to make sure your game remains, we highly recommended to host your own web server.
 
 ## ⬤ I want to learn how to play
-There are far too many good tutorials online.
+There are far too many good tutorials online. [Here are the rulebooks, though.](https://github.com/terraforming-mars/terraforming-mars/wiki/Rulebooks)
 
 ## ⬤ I want to run a copy of the server locally
 Check out our [Local setup wiki page](https://github.com/bafolts/terraforming-mars/wiki/Local-Setup)

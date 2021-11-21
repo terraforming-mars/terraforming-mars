@@ -593,10 +593,12 @@ export class Player implements ISerializable<SerializedPlayer> {
       if (threshold !== undefined && period !== undefined && elapsedTimeInMinutes > threshold) {
         const overTimeInMinutes = Math.max(elapsedTimeInMinutes - threshold - (this.actionsTakenThisGame * (constants.BONUS_SECONDS_PER_ACTION/60)), 0);
         // Don't lose more VP that what is available
-        this.victoryPointsBreakdown.updateTotal();
-        const totalBeforeEscapeVelocity = this.victoryPointsBreakdown.total;
+        const victoryPoints = this.getVictoryPoints();
+        victoryPoints.updateTotal();
+
+        const totalBeforeEscapeVelocity = victoryPoints.total;
         const penaltyTotal = Math.min(penaltyPerMin * Math.floor(overTimeInMinutes / period), totalBeforeEscapeVelocity);
-        this.victoryPointsBreakdown.setVictoryPoints('escapeVelocity penalty', -penaltyTotal, 'Escape Velocity Penalty');
+        victoryPoints.setVictoryPoints('escapeVelocity penalty', -penaltyTotal, 'Escape Velocity Penalty');
       }
     }
 

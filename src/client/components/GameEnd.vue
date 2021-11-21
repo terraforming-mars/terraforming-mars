@@ -59,7 +59,7 @@
                                 <th v-if="game.moon !== undefined"><div class="table-moon-colony-tile"></div></th>
                                 <th v-if="game.moon !== undefined"><div class="table-moon-mine-tile"></div></th>
                                 <th><div class="vp">VP</div></th>
-                                <th v-if="player.gameOptions.escapeVelocityMode" class="clock-icon tooltip tooltip-top" data-tooltip="Escape Velocity penalty">&#x23F3;</th>
+                                <th v-if="game.gameOptions.escapeVelocityMode" class="clock-icon tooltip tooltip-top" data-tooltip="Escape Velocity penalty">&#x23F3;</th>
                                 <th class="game-end-total"><div class="game-end-total-column">Total</div></th>
                                 <th><div class="mc-icon"></div></th>
                                 <th v-if="game.gameOptions.showTimers" class="clock-icon">&#x1F551;</th>
@@ -81,7 +81,7 @@
                                 <td v-if="game.moon !== undefined">{{ p.victoryPointsBreakdown.moonColonies }}</td>
                                 <td v-if="game.moon !== undefined">{{ p.victoryPointsBreakdown.moonMines }}</td>
                                 <td>{{ p.victoryPointsBreakdown.victoryPoints }}</td>
-                                <td v-if="player.gameOptions.escapeVelocityMode">{{ p.victoryPointsBreakdown.escapeVelocity }}</td>
+                                <td v-if="game.gameOptions.escapeVelocityMode">{{ p.victoryPointsBreakdown.escapeVelocity }}</td>
                                 <td class="game-end-total">{{ p.victoryPointsBreakdown.total }}</td>
                                 <td class="game-end-mc">
                                   <div>{{ p.megaCredits }}</div>

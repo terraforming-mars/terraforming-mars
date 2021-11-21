@@ -55,6 +55,11 @@ export class Timer implements ISerializable<SerializedTimer> {
     this.sumElapsed += Timer.lastStoppedAt - this.startedAt;
   }
 
+  public getElapsedTimeInMinutes(): number {
+    const elapsedTimeInMin = (this.sumElapsed + (this.running ? Date.now() - this.startedAt : 0)) / (60 * 1000);
+    return elapsedTimeInMin;
+  }
+
   // Converts Timer to [hhh:]mm:ss format based on current time. Used to display the timer.
   public static toString(d: SerializedTimer) : string {
     const elapsed = d.sumElapsed + (d.running ? Date.now() - d.startedAt : 0);

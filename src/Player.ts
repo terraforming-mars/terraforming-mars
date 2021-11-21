@@ -159,6 +159,9 @@ export class Player implements ISerializable<SerializedPlayer> {
   // cards that provide 'next card' discounts. This will clear between turns.
   public removedFromPlayCards: Array<IProjectCard> = [];
 
+  // Stats
+  public actionsTakenThisGame: number = 0;
+
   constructor(
     public name: string,
     public color: Color,
@@ -580,6 +583,22 @@ export class Player implements ISerializable<SerializedPlayer> {
 
     MoonExpansion.calculateVictoryPoints(this, victoryPointsBreakdown);
     PathfindersExpansion.calculateVictoryPoints(this, victoryPointsBreakdown);
+
+    // Escape velocity VP penalty
+    if (this.game.gameOptions.escapeVelocityMode) {
+      const threshold = this.game.gameOptions.escapeVelocityThreshold;
+      const period = this.game.gameOptions.escapeVelocityPeriod;
+      const penaltyPerMin = this.game.gameOptions.escapeVelocityPenalty ?? 1;
+      const elapsedTimeInMinutes = this.timer.getElapsedTimeInMinutes();
+      if (threshold !== undefined && period !== undefined && elapsedTimeInMinutes > threshold) {
+        const overTimeInMinutes = Math.max(elapsedTimeInMinutes - threshold - (this.actionsTakenThisGame * (constants.BONUS_SECONDS_PER_ACTION/60)), 0);
+        // Don't lose more VP that what is available
+        this.victoryPointsBreakdown.updateTotal();
+        const totalBeforeEscapeVelocity = this.victoryPointsBreakdown.total;
+        const penaltyTotal = Math.min(penaltyPerMin * Math.floor(overTimeInMinutes / period), totalBeforeEscapeVelocity);
+        this.victoryPointsBreakdown.setVictoryPoints('escapeVelocity penalty', -penaltyTotal, 'Escape Velocity Penalty');
+      }
+    }
 
     victoryPointsBreakdown.updateTotal();
     return victoryPointsBreakdown;
@@ -2020,6 +2039,7 @@ export class Player implements ISerializable<SerializedPlayer> {
       );
       this.setWaitingFor(initialActionOrPass, () => {
         this.actionsTakenThisRound++;
+        this.actionsTakenThisGame++;
         this.takeAction();
       });
       return;
@@ -2027,6 +2047,7 @@ export class Player implements ISerializable<SerializedPlayer> {
 
     this.setWaitingFor(this.getActions(), () => {
       this.actionsTakenThisRound++;
+      this.actionsTakenThisGame++;
       this.takeAction();
     });
   }
@@ -2264,6 +2285,8 @@ export class Player implements ISerializable<SerializedPlayer> {
       beginner: this.beginner,
       handicap: this.handicap,
       timer: this.timer.serialize(),
+      // Stats
+      actionsTakenThisGame: this.actionsTakenThisGame,
     };
     if (this.lastCardPlayed !== undefined) {
       result.lastCardPlayed = this.lastCardPlayed;
@@ -2275,6 +2298,7 @@ export class Player implements ISerializable<SerializedPlayer> {
     const player = new Player(d.name, d.color, d.beginner, Number(d.handicap), d.id);
     const cardFinder = new CardFinder();
 
+    player.actionsTakenThisGame = d.actionsTakenThisGame;
     player.actionsTakenThisRound = d.actionsTakenThisRound;
     player.canUseHeatAsMegaCredits = d.canUseHeatAsMegaCredits;
     player.cardCost = d.cardCost;

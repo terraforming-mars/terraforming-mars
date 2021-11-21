@@ -973,6 +973,10 @@
                 color: #0000 !important;
                 background-image: url(./assets/resources/syndicate-fleet.png);
             }
+            .card-resource-venusian-habitat {
+                color: #0000 !important;
+                background-image: url(./assets/resources/venusian-habitat.png);
+            }
             .card-resource-cube {
                 color: #0000 !important;
                 background-image: url(./assets/cube.png);
@@ -1870,7 +1874,7 @@ each(@parties, {
         vertical-align: middle;
     }
 
-    @resource_types: microbe, animal, science, floater, fighter, camp, asteroid, disease, preservation, data, syndicate-fleet, cube;
+    @resource_types: microbe, animal, science, floater, fighter, camp, asteroid, disease, preservation, data, syndicate-fleet, cube, venusian-habitat;
     each(@resource_types, {
       .card-resource-@{value} {
         background-image: url("./assets/resources/@{value}.png");

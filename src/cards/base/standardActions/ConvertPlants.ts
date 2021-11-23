@@ -31,6 +31,8 @@ export class ConvertPlants extends StandardActionCard {
       return false;
     }
     if (player.game.getOxygenLevel() === MAX_OXYGEN_LEVEL) {
+      // The level is maximized, and that means you don't have to try to figure out if the
+      // player can afford the reds tax when increasing the oxygen level.
       return true;
     }
     return player.canAfford(0, {

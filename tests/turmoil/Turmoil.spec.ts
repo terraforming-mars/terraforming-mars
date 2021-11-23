@@ -218,7 +218,6 @@ describe('Turmoil', function() {
     player.megaCredits = 30;
     const magneticFieldGeneratorsPromo = new MagneticFieldGeneratorsPromo();
     expect(player.canPlay(magneticFieldGeneratorsPromo)).is.not.true; // needs 31 MC
-    expect(1).eq(2); // DO NOT MERGE THIS UNTIL I WRITE MORE TESTS.
   });
 
   it('Can\'t play cards to raise TR via global parameters if Reds are ruling and player cannot pay', function() {

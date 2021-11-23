@@ -42,6 +42,7 @@ import {LunarEmbassy} from './LunarEmbassy';
 import {LuxuryEstate} from './LuxuryEstate';
 import {MartianCulture} from './MartianCulture';
 import {MartianDustProcessingPlant} from './MartianDustProcessingPlant';
+import {MartianInsuranceGroup} from './MartianInsuranceGroup';
 import {MartianMonuments} from './MartianMonuments';
 // import {MartianNatureWonders} from './MartianNatureWonders';
 import {MartianRepository} from './MartianRepository';
@@ -59,6 +60,7 @@ import {PrivateSecurity} from './PrivateSecurity';
 import {PublicSponsoredGrant} from './PublicSponsoredGrant';
 import {RareEarthElements} from './RareEarthElements';
 import {RedCity} from './RedCity';
+import {Ringcom} from './Ringcom';
 import {ResearchGrant} from './ResearchGrant';
 import {ReturntoAbandonedTechnology} from './ReturntoAbandonedTechnology';
 import {RichDeposits} from './RichDeposits';
@@ -161,7 +163,7 @@ export const PATHFINDERS_CARD_MANIFEST = new CardManifest({
     // {cardName: CardName.POLARIS, Factory: Polaris},
     // {cardName: CardName.PLANET_PR, Factory: planetpr},
     // {cardName: CardName.AMBIENT, Factory: Ambient},
-    // {cardName: CardName.RINGCOM, Factory: Ringcom},
+    {cardName: CardName.RINGCOM, Factory: Ringcom},
     {cardName: CardName.CHIMERA, Factory: Chimera},
     // {cardName: CardName.SISTEMAS_SEEBECK, Factory: SistemasSeebeck},
     // {cardName: CardName.SPIRE, Factory: Spire},
@@ -169,7 +171,7 @@ export const PATHFINDERS_CARD_MANIFEST = new CardManifest({
     // {cardName: CardName.STEELARIS, Factory: Steelaris},
     // {cardName: CardName.MARS_MATHS, Factory: MarsMaths},
     // {cardName: CardName.MARS_DIRECT, Factory: MarsDirect},
-    // {cardName: CardName.MARTIAN_INSURANCE_GROUP, Factory: MartianInsuranceGroup},
+    {cardName: CardName.MARTIAN_INSURANCE_GROUP, Factory: MartianInsuranceGroup},
     // {cardName: CardName.SOLBANK, Factory: SolBank},
     // {cardName: CardName.BIO_SOL, Factory: BioSol},
     // {cardName: CardName.AURORAI, Factory: Aurorai},

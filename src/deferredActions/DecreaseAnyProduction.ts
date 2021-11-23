@@ -10,6 +10,7 @@ export class DecreaseAnyProduction implements DeferredAction {
         public resource: Resources,
         public count: number = 1,
         public title: string = 'Select player to decrease ' + resource + ' production by ' + count + ' step(s)',
+        public isStealing = false
   ) {}
 
   public execute() {
@@ -32,7 +33,7 @@ export class DecreaseAnyProduction implements DeferredAction {
     }
 
     if (candidates.length === 1) {
-      candidates[0].addProduction(this.resource, -this.count, {log: true, from: this.player});
+      candidates[0].addProduction(this.resource, -this.count, {log: true, from: this.player, isStealing: this.isStealing});
       return undefined;
     }
 
@@ -41,7 +42,7 @@ export class DecreaseAnyProduction implements DeferredAction {
       this.title,
       'Decrease',
       (found: Player) => {
-        found.addProduction(this.resource, -this.count, {log: true, from: this.player});
+        found.addProduction(this.resource, -this.count, {log: true, from: this.player, isStealing: this.isStealing});
         return undefined;
       },
     );

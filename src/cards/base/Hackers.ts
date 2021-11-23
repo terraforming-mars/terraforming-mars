@@ -34,7 +34,9 @@ export class Hackers extends Card implements IProjectCard {
   }
 
   public play(player: Player) {
-    player.game.defer(new DecreaseAnyProduction(player, Resources.MEGACREDITS, 2));
+    const decreaseAction = new DecreaseAnyProduction(player, Resources.MEGACREDITS, 2);
+    decreaseAction.isStealing = true;
+    player.game.defer(decreaseAction);
     player.addProduction(Resources.MEGACREDITS, 2);
     player.addProduction(Resources.ENERGY, -1);
     return undefined;

@@ -31,7 +31,9 @@ export class GreatEscarpmentConsortium extends Card implements IProjectCard {
   }
 
   public play(player: Player) {
-    player.game.defer(new DecreaseAnyProduction(player, Resources.STEEL, 1));
+    const decreaseAction = new DecreaseAnyProduction(player, Resources.STEEL, 1);
+    decreaseAction.isStealing = true;
+    player.game.defer(decreaseAction);
     player.addProduction(Resources.STEEL, 1);
     return undefined;
   }

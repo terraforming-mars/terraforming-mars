@@ -1,11 +1,7 @@
 import {Player} from '../../../Player';
 import {CardName} from '../../../CardName';
 import {CardRenderer} from '../../render/CardRenderer';
-import {REDS_RULING_POLICY_COST} from '../../../constants';
 import {StandardProjectCard} from '../../StandardProjectCard';
-import {PartyHooks} from '../../../turmoil/parties/PartyHooks';
-import {PartyName} from '../../../turmoil/parties/PartyName';
-import * as constants from '../../../constants';
 import {PlaceGreeneryTile} from '../../../deferredActions/PlaceGreeneryTile';
 
 export class GreeneryStandardProject extends StandardProjectCard {
@@ -13,6 +9,7 @@ export class GreeneryStandardProject extends StandardProjectCard {
     super({
       name: CardName.GREENERY_STANDARD_PROJECT,
       cost: 23,
+      tr: {oxygen: 1},
       metadata: {
         cardNumber: 'SP6',
         renderData: CardRenderer.builder((b) =>
@@ -25,11 +22,8 @@ export class GreeneryStandardProject extends StandardProjectCard {
   }
 
   public canAct(player: Player): boolean {
-    let greeneryCost = this.cost;
-    const oxygenNotMaxed = player.game.getOxygenLevel() < constants.MAX_OXYGEN_LEVEL;
-    if (PartyHooks.shouldApplyPolicy(player, PartyName.REDS) && oxygenNotMaxed) greeneryCost += REDS_RULING_POLICY_COST;
-
-    return player.canAfford(greeneryCost) && player.game.board.getAvailableSpacesForGreenery(player).length > 0;
+    if (player.game.board.getAvailableSpacesForGreenery(player).length === 0) return false;
+    return super.canAct(player);
   }
 
   actionEssence(player: Player): void {

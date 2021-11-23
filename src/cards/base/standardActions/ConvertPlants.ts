@@ -2,11 +2,10 @@ import {StandardActionCard} from '../../StandardActionCard';
 import {CardName} from '../../../CardName';
 import {CardRenderer} from '../../render/CardRenderer';
 import {Player} from '../../../Player';
-import {PartyHooks} from '../../../turmoil/parties/PartyHooks';
-import {PartyName} from '../../../turmoil/parties/PartyName';
-import {MAX_OXYGEN_LEVEL, REDS_RULING_POLICY_COST} from '../../../constants';
+import {MAX_OXYGEN_LEVEL} from '../../../constants';
 import {SelectSpace} from '../../../inputs/SelectSpace';
 import {ISpace} from '../../../boards/ISpace';
+import {Units} from '../../../Units';
 
 
 export class ConvertPlants extends StandardActionCard {
@@ -32,12 +31,14 @@ export class ConvertPlants extends StandardActionCard {
       return false;
     }
     if (player.game.getOxygenLevel() === MAX_OXYGEN_LEVEL) {
+      // The level is maximized, and that means you don't have to try to figure out if the
+      // player can afford the reds tax when increasing the oxygen level.
       return true;
     }
-    if (PartyHooks.shouldApplyPolicy(player, PartyName.REDS)) {
-      return player.canAfford(REDS_RULING_POLICY_COST);
-    }
-    return true;
+    return player.canAfford(0, {
+      tr: {oxygen: 1},
+      reserveUnits: Units.of({plants: player.plantsNeededForGreenery}),
+    });
   }
 
   public action(player: Player) {

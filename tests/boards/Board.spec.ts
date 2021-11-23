@@ -10,7 +10,7 @@ import {Color} from '../../src/Color';
 import {SerializedBoard} from '../../src/boards/SerializedBoard';
 import {MoonSpaces} from '../../src/moon/MoonSpaces';
 import {Random} from '../../src/Random';
-import {DEFAULT_GAME_OPTIONS} from '../../src/Game';
+import {DEFAULT_GAME_OPTIONS, GameOptions} from '../../src/Game';
 
 describe('Board', function() {
   let board : OriginalBoard; let player : Player; let player2 : Player;
@@ -19,6 +19,11 @@ describe('Board', function() {
     board = OriginalBoard.newInstance(DEFAULT_GAME_OPTIONS, new Random(0));
     player = TestPlayers.BLUE.newPlayer();
     player2 = TestPlayers.RED.newPlayer();
+
+    // Rather than create a whole game around this test, I'm mocking data to make the tests pass.
+    const gameOptions: Partial<GameOptions> = {pathfindersExpansion: false};
+    (player as any)._game = {gameOptions};
+    (player2 as any)._game = {gameOptions};
   });
 
   it('getSpace', () => {

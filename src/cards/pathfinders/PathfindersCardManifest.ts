@@ -10,6 +10,7 @@ import {AsteroidResources} from './AsteroidResources';
 import {BreedingFarms} from './BreedingFarms';
 import {CassiniStation} from './CassiniStation';
 import {CeresSpaceport} from './CeresSpaceport';
+import {Chimera} from './Chimera';
 import {CO2Reducers} from './CO2Reducers';
 // import {CommunicationCenter} from './CommunicationCenter';
 import {ControlledBloom} from './ControlledBloom';
@@ -58,6 +59,7 @@ import {PrefabricationofHumanHabitats} from './PrefabricationofHumanHabitats';
 import {PrivateSecurity} from './PrivateSecurity';
 import {PublicSponsoredGrant} from './PublicSponsoredGrant';
 import {RareEarthElements} from './RareEarthElements';
+import {RedCity} from './RedCity';
 import {Ringcom} from './Ringcom';
 import {ResearchGrant} from './ResearchGrant';
 import {ReturntoAbandonedTechnology} from './ReturntoAbandonedTechnology';
@@ -145,7 +147,7 @@ export const PATHFINDERS_CARD_MANIFEST = new CardManifest({
     {cardName: CardName.MICROBIOLOGY_PATENTS, Factory: MicrobiologyPatents},
     // // {cardName: CardName.COORDINATED_RAID, Factory: CoordinatedRaid, compatibility: GameModule.Colonies},       // TRICKY WORK
     {cardName: CardName.LOBBY_HALLS, Factory: LobbyHalls, compatibility: GameModule.Turmoil},
-    // // {cardName: CardName.RED_CITY, Factory: RedCity, compatibility: GameModule.Turmoil},                        // AVAILABLE GREENERY SPACES
+    {cardName: CardName.RED_CITY, Factory: RedCity, compatibility: GameModule.Turmoil},
     {cardName: CardName.VENERA_BASE, Factory: VeneraBase, compatibility: [GameModule.Turmoil, GameModule.Venus]},
     // // {cardName: CardName.GATEWAY_STATION, Factory: GatewayStation, compatibility: GameModule.Turmoil},
     {cardName: CardName.FLOATER_URBANISM, Factory: FloaterUrbanism, compatibility: GameModule.Venus},
@@ -162,7 +164,7 @@ export const PATHFINDERS_CARD_MANIFEST = new CardManifest({
     // {cardName: CardName.PLANET_PR, Factory: planetpr},
     // {cardName: CardName.AMBIENT, Factory: Ambient},
     {cardName: CardName.RINGCOM, Factory: Ringcom},
-    // {cardName: CardName.CHIIMERA, Factory: Chiimera},
+    {cardName: CardName.CHIMERA, Factory: Chimera},
     // {cardName: CardName.SISTEMAS_SEEBECK, Factory: SistemasSeebeck},
     // {cardName: CardName.SPIRE, Factory: Spire},
     // {cardName: CardName.SOYLENT_SEEDLING_SYSTEMS, Factory: SoylentSeedlingSystems},

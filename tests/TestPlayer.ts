@@ -65,16 +65,10 @@ export class TestPlayer extends Player {
 
   public tagsForTest: Partial<TagsForTest> | undefined = undefined;
 
-  public getTagCountOld(tag: Tags, includeEventsTags:boolean = false, includeWildcardTags:boolean = true): number {
-    if (this.tagsForTest !== undefined) {
-      let count = this.tagsForTest[tag] ?? 0;
-      if (tag !== Tags.WILDCARD && includeWildcardTags === true) {
-        count += this.tagsForTest[Tags.WILDCARD] ?? 0;
-      }
-      return count;
-    } else {
-      return super.getTagCountOld(tag, includeEventsTags, includeWildcardTags);
-    }
+  public getRawTagCount(tag: Tags, includeEventsTags:boolean = false): number {
+    return this.tagsForTest !== undefined ?
+      this.tagsForTest[tag] ?? 0 :
+      super.getRawTagCount(tag, includeEventsTags);
   }
 
   public runInput(input: ReadonlyArray<ReadonlyArray<string>>, pi: PlayerInput): void {

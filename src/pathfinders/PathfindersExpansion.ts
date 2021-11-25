@@ -2,7 +2,7 @@ import {AddResourcesToCard} from '../deferredActions/AddResourcesToCard';
 // import {CardName} from '../CardName';
 // import {CardType} from '../cards/CardType';
 // import {CommunicationCenter} from '../cards/pathfinders/CommunicationCenter';
-import {GameOptions} from '../Game';
+import {Game, GameOptions} from '../Game';
 import {GrantResourceDeferred} from './GrantResourceDeferred';
 import {ICard} from '../cards/ICard';
 import {IPathfindersData} from './IPathfindersData';
@@ -74,13 +74,10 @@ export class PathfindersExpansion {
   ]);
 
   public static raiseTrack(tag: Tags, player: Player, steps: number = 1): void {
-    //   PathfindersExpansion.raiseTrack2(tag, player, player.game, steps);
-    // }
+    PathfindersExpansion.raiseTrack2(tag, player, player.game, steps, true);
+  }
 
-    // public static raiseTrack2(tag: Tags, from: Player | GlobalEventName, game: Game, steps: number = 1): void {
-    const game = player.game;
-    const from: Player | GlobalEventName = player;
-
+  public static raiseTrack2(tag: Tags, from: Player | GlobalEventName, game: Game, steps: number = 1, gainRewards: boolean = true): void {
     const data = game.pathfindersData;
     if (data === undefined) {
       throw new Error('Pathfinders not defined');
@@ -92,6 +89,12 @@ export class PathfindersExpansion {
     }
 
     let space = IPathfindersData.getValue(data, tag);
+
+    // Do not raise tracks unused this game.
+    if (space === -1) {
+      return;
+    }
+
     const lastSpace = Math.min(track.spaces.length - 1, space + steps);
     const distance = lastSpace - space;
     if (distance === 0) return;
@@ -112,26 +115,29 @@ export class PathfindersExpansion {
       IPathfindersData.setValue(data, tag, space);
       const rewards = track.spaces[space];
 
-      if (from instanceof Player) {
-        rewards.risingPlayer.forEach((reward) => {
-          PathfindersExpansion.grant(reward, from, tag);
-        });
-      }
-      rewards.everyone.forEach((reward) => {
-        game.getPlayers().forEach((p) => {
-          PathfindersExpansion.grant(reward, p, tag);
-        });
-      });
-      if (rewards.mostTags.length > 0) {
-        const players = PathfindersExpansion.playersWithMostTags(
-          tag,
-          game.getPlayers(),
-          (from instanceof Player) ? from : undefined);
-        rewards.mostTags.forEach((reward) => {
-          players.forEach((p) => {
+      // Can be false because of the Constant Struggle global event.
+      if (gainRewards) {
+        if (from instanceof Player) {
+          rewards.risingPlayer.forEach((reward) => {
+            PathfindersExpansion.grant(reward, from, tag);
+          });
+        }
+        rewards.everyone.forEach((reward) => {
+          game.getPlayers().forEach((p) => {
             PathfindersExpansion.grant(reward, p, tag);
           });
         });
+        if (rewards.mostTags.length > 0) {
+          const players = PathfindersExpansion.playersWithMostTags(
+            tag,
+            game.getPlayers(),
+            (from instanceof Player) ? from : undefined);
+          rewards.mostTags.forEach((reward) => {
+            players.forEach((p) => {
+              PathfindersExpansion.grant(reward, p, tag);
+            });
+          });
+        }
       }
       // game.indentation--;
     }

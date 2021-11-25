@@ -1121,8 +1121,8 @@ export class Game implements ISerializable<SerializedGame> {
       return undefined;
     }
 
-    // PoliticalAgendas Reds P3 hook
-    if (increments === -1) {
+    // PoliticalAgendas Reds P3 && Magnetic Field Stimulation Delays hook
+    if (increments < 0 ) {
       this.oxygenLevel = Math.max(constants.MIN_OXYGEN_LEVEL, this.oxygenLevel + increments);
       return undefined;
     }

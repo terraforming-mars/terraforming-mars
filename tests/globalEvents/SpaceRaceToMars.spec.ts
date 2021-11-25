@@ -1,5 +1,4 @@
 import {expect} from 'chai';
-import {TestingUtils} from '../TestingUtils';
 import {SpaceRaceToMars} from '../../src/turmoil/globalEvents/SpaceRaceToMars';
 import {Kelvinists} from '../../src/turmoil/parties/Kelvinists';
 import {getTestPlayer, newTestGame} from '../TestGame';

@@ -21,7 +21,7 @@ describe('LobbyHalls', function() {
 
   beforeEach(function() {
     card = new LobbyHalls();
-    game = newTestGame(1, {turmoilExtension: true});
+    game = newTestGame(1, {turmoilExtension: true, pathfindersExpansion: true});
     player = getTestPlayer(game, 0);
     turmoil = game.turmoil!;
   });

@@ -13,7 +13,7 @@ export class DeclareCloneTag implements DeferredAction {
     public player: Player,
     public card: ICard & ICloneTagCard,
     public title: string,
-    public cb: (tag: Tags) => void = () => {}) {}
+    public cb: (tag: Tags) => void) {}
 
   public execute() {
     const tags = [Tags.EARTH, Tags.JOVIAN, Tags.MARS];

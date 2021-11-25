@@ -17,6 +17,7 @@ describe('DeclareCloneTag', function() {
     card = new LobbyHalls();
     player = getTestPlayer(game, 0);
   });
+
   it('sanity', function() {
     const action = new DeclareCloneTag(player, card, '', (t) => tag = t);
 

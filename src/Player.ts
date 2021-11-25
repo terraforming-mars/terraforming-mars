@@ -593,12 +593,11 @@ export class Player implements ISerializable<SerializedPlayer> {
       if (threshold !== undefined && period !== undefined && elapsedTimeInMinutes > threshold) {
         const overTimeInMinutes = Math.max(elapsedTimeInMinutes - threshold - (this.actionsTakenThisGame * (constants.BONUS_SECONDS_PER_ACTION/60)), 0);
         // Don't lose more VP that what is available
-        const victoryPoints = this.getVictoryPoints();
-        victoryPoints.updateTotal();
+        victoryPointsBreakdown.updateTotal();
 
-        const totalBeforeEscapeVelocity = victoryPoints.total;
+        const totalBeforeEscapeVelocity = victoryPointsBreakdown.total;
         const penaltyTotal = Math.min(penaltyPerMin * Math.floor(overTimeInMinutes / period), totalBeforeEscapeVelocity);
-        victoryPoints.setVictoryPoints('escapeVelocity penalty', -penaltyTotal, 'Escape Velocity Penalty');
+        victoryPointsBreakdown.setVictoryPoints('escapeVelocity', -penaltyTotal, 'Escape Velocity Penalty');
       }
     }
 
@@ -2300,7 +2299,7 @@ export class Player implements ISerializable<SerializedPlayer> {
     const player = new Player(d.name, d.color, d.beginner, Number(d.handicap), d.id);
     const cardFinder = new CardFinder();
 
-    player.actionsTakenThisGame = d.actionsTakenThisGame;
+    player.actionsTakenThisGame = d.actionsTakenThisGame ?? 0;
     player.actionsTakenThisRound = d.actionsTakenThisRound;
     player.canUseHeatAsMegaCredits = d.canUseHeatAsMegaCredits;
     player.cardCost = d.cardCost;

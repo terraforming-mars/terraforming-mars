@@ -1,6 +1,6 @@
 import {Tags} from './cards/Tags';
 
-export type VictoryPoints = 'terraformRating' | 'milestones' | 'awards' | 'greenery' | 'city' | 'escapeVelocity penalty' | 'moon colony' | 'moon mine' | 'moon road' | 'planetary tracks' | 'victoryPoints';
+export type VictoryPoints = 'terraformRating' | 'milestones' | 'awards' | 'greenery' | 'city' | 'escapeVelocity' | 'moon colony' | 'moon mine' | 'moon road' | 'planetary tracks' | 'victoryPoints';
 
 export class VictoryPointsBreakdown {
     public terraformRating: number = 0;
@@ -54,7 +54,7 @@ export class VictoryPointsBreakdown {
       case 'city':
         this.city += points;
         break;
-      case 'escapeVelocity penalty':
+      case 'escapeVelocity':
         this.escapeVelocity += points;
         break;
       case 'victoryPoints':

@@ -5,6 +5,7 @@ import {CardName} from '../CardName';
 
 export interface GameOptionsModel {
   aresExtension: boolean,
+  altVenusBoard: boolean,
   boardName: BoardName,
   cardsBlackList: Array<CardName>;
   coloniesExtension: boolean,
@@ -15,6 +16,7 @@ export interface GameOptionsModel {
   includeVenusMA: boolean,
   initialDraftVariant: boolean,
   moonExpansion: boolean,
+  pathfindersExpansion: boolean,
   preludeExtension: boolean,
   promoCardsOption: boolean,
   politicalAgendasExtension: AgendaStyle,
@@ -25,10 +27,9 @@ export interface GameOptionsModel {
   solarPhaseOption: boolean,
   soloTR: boolean,
   randomMA: RandomMAOptionType,
-  turmoilExtension: boolean,
-  venusNextExtension: boolean,
   requiresMoonTrackCompletion: boolean,
   requiresVenusTrackCompletion: boolean,
-  altVenusBoard: boolean,
+  turmoilExtension: boolean,
+  venusNextExtension: boolean,
   undoOption: boolean,
 }

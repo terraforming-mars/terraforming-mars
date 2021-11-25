@@ -487,6 +487,7 @@ export class Server {
       includeVenusMA: options.includeVenusMA,
       initialDraftVariant: options.initialDraftVariant,
       moonExpansion: options.moonExpansion,
+      pathfindersExpansion: options.pathfindersExpansion,
       preludeExtension: options.preludeExtension,
       promoCardsOption: options.promoCardsOption,
       politicalAgendasExtension: options.politicalAgendasExtension,
@@ -497,10 +498,10 @@ export class Server {
       solarPhaseOption: options.solarPhaseOption,
       soloTR: options.soloTR,
       randomMA: options.randomMA,
-      turmoilExtension: options.turmoilExtension,
-      venusNextExtension: options.venusNextExtension,
       requiresMoonTrackCompletion: options.requiresMoonTrackCompletion,
       requiresVenusTrackCompletion: options.requiresVenusTrackCompletion,
+      turmoilExtension: options.turmoilExtension,
+      venusNextExtension: options.venusNextExtension,
       undoOption: options.undoOption,
     };
   }

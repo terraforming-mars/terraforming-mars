@@ -43,9 +43,9 @@ import {LeadershipSummit} from './LeadershipSummit';
 import {BalancedDevelopment} from './BalancedDevelopment';
 import {TiredEarth} from './TiredEarth';
 import {MagneticFieldStimulationDelays} from './MagneticFieldStimulationDelays';
-// import {ConstantStruggle} from './ConstantStruggle';
-// import {SpaceRaceToMars} from './SpaceRaceToMars';
-// import {CommunicationBoom} from './CommunicationBoom';
+import {ConstantStruggle} from './ConstantStruggle';
+import {SpaceRaceToMars} from './SpaceRaceToMars';
+import {CommunicationBoom} from './CommunicationBoom';
 
 const COLONY_ONLY_POSITIVE_GLOBAL_EVENTS = new Map<GlobalEventName, new() => IGlobalEvent>([
   [GlobalEventName.JOVIAN_TAX_RIGHTS, JovianTaxRights],
@@ -110,14 +110,14 @@ const COMMUNITY_GLOBAL_EVENTS = new Map<GlobalEventName, new() => IGlobalEvent>(
 
 const PATHFINDERS_POSITIVE_GLOBAL_EVENTS = new Map<GlobalEventName, new() => IGlobalEvent>([
   [GlobalEventName.BALANCED_DEVELOPMENT, BalancedDevelopment],
-  // [GlobalEventName.SPACE_RACE_TO_MARS, SpaceRaceToMars],
+  [GlobalEventName.SPACE_RACE_TO_MARS, SpaceRaceToMars],
 ]);
 
 const PATHFINDERS_NEGATIVE_GLOBAL_EVENTS = new Map<GlobalEventName, new() => IGlobalEvent>([
-  // [GlobalEventName.CONSTANT_STRUGGLE, ConstantStruggle],
+  [GlobalEventName.CONSTANT_STRUGGLE, ConstantStruggle],
   [GlobalEventName.TIRED_EARTH, TiredEarth],
   [GlobalEventName.MAGNETIC_FIELD_STIMULATION_DELAYS, MagneticFieldStimulationDelays],
-  // [GlobalEventName.COMMUNICATION_BOOM, CommunicationBoom],
+  [GlobalEventName.COMMUNICATION_BOOM, CommunicationBoom],
 ]);
 
 // When renaming, add the rename here and add a TODO (like the example below)

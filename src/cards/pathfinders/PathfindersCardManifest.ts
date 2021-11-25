@@ -27,8 +27,9 @@ import {DustStorm} from './DustStorm';
 import {DysonScreens} from './DysonScreens';
 import {EarlyExpedition} from './EarlyExpedition';
 import {EconomicEspionage} from './EconomicEspionage';
-// import {EconomicHelp} from './EconomicHelp';
+import {EconomicHelp} from './EconomicHelp';
 import {ExpeditionToTheSurfaceVenus} from './ExpeditionToTheSurfaceVenus';
+import {ExperiencedMartians} from './ExperiencedMartians';
 import {FlatMarsTheory} from './FlatMarsTheory';
 import {FloaterUrbanism} from './FloaterUrbanism';
 import {HighTempSuperconductors} from './HighTempSuperconductors';
@@ -73,6 +74,8 @@ import {Solarpedia} from './Solarpedia';
 import {SolarStorm} from './SolarStorm';
 import {SpaceDebrisCleaningOperation} from './SpaceDebrisCleaningOperation';
 import {SpaceRelay} from './SpaceRelay';
+import {StrategicBasePlanning} from './StrategicBasePlanning';
+import {Steelaris} from './Steelaris';
 import {TerraformingControlStation} from './TerraformingControlStation';
 import {TerraformingRobots} from './TerraformingRobots';
 // import {ValuableGases} from './ValuableGases';
@@ -123,7 +126,7 @@ export const PATHFINDERS_CARD_MANIFEST = new CardManifest({
     {cardName: CardName.FLAT_MARS_THEORY, Factory: FlatMarsTheory},
     {cardName: CardName.ASTEROID_RESOURCES, Factory: AsteroidResources},
     {cardName: CardName.KICKSTARTER, Factory: Kickstarter},
-    // {cardName: CardName.ECONOMIC_HELP, Factory: EconomicHelp},
+    {cardName: CardName.ECONOMIC_HELP, Factory: EconomicHelp},
     {cardName: CardName.INTERPLANETARY_TRANSPORT, Factory: InterplanetaryTransport},
     {cardName: CardName.MARTIAN_DUST_PROCESSING_PLANT, Factory: MartianDustProcessingPlant},
     {cardName: CardName.CULTIVATION_OF_VENUS, Factory: CultivationOfVenus, compatibility: GameModule.Venus},
@@ -168,7 +171,7 @@ export const PATHFINDERS_CARD_MANIFEST = new CardManifest({
     // {cardName: CardName.SISTEMAS_SEEBECK, Factory: SistemasSeebeck},
     // {cardName: CardName.SPIRE, Factory: Spire},
     // {cardName: CardName.SOYLENT_SEEDLING_SYSTEMS, Factory: SoylentSeedlingSystems},
-    // {cardName: CardName.STEELARIS, Factory: Steelaris},
+    {cardName: CardName.STEELARIS, Factory: Steelaris},
     // {cardName: CardName.MARS_MATHS, Factory: MarsMaths},
     // {cardName: CardName.MARS_DIRECT, Factory: MarsDirect},
     {cardName: CardName.MARTIAN_INSURANCE_GROUP, Factory: MartianInsuranceGroup},
@@ -196,10 +199,10 @@ export const PATHFINDERS_CARD_MANIFEST = new CardManifest({
     // {cardName: CardName.CONSOLIDATION, Factory: Consolidation},
     {cardName: CardName.PERSONAL_AGENDA, Factory: PersonalAgenda},
     // {cardName: CardName.VITAL_COLONY, Factory: VitalColony, compatibility: GameModule.Colonies},
-    // {cardName: CardName.STRATEGIC_BASE_PLANNING, Factory: StrategicBasePlanning, compatibility: GameModule.Colonies},
+    {cardName: CardName.STRATEGIC_BASE_PLANNING, Factory: StrategicBasePlanning, compatibility: GameModule.Colonies},
     {cardName: CardName.DEEP_SPACE_OPERATIONS, Factory: DeepSpaceOperations},
     {cardName: CardName.ANTI_DESERTIFICATION_TECHNIQUES, Factory: AntidesertificationTechniques},
-    // {cardName: CardName.EXPERIENCED_MARTIANS, Factory: ExperiencedMartians, compatibility: GameModule.Turmoil},
+    {cardName: CardName.EXPERIENCED_MARTIANS, Factory: ExperiencedMartians, compatibility: GameModule.Turmoil},
     // {cardName: CardName.THE_NEW_SPACE_RACE, Factory: TheNewSpaceRace},
   ],
 

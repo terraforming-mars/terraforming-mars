@@ -19,6 +19,6 @@ export interface ICloneTagCard {
   cloneTag: Tags;
 }
 
-export function isICloneTagCard(object: any): object is ICloneTagCard {
-  return 'cloneTag' in object;
+export function isICloneTagCard(obj: object): obj is ICloneTagCard {
+  return 'cloneTag' in obj;
 }

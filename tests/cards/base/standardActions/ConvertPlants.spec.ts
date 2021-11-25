@@ -7,6 +7,7 @@ import {TestPlayers} from '../../../TestPlayers';
 import {Game} from '../../../../src/Game';
 import {PoliticalAgendas} from '../../../../src/turmoil/PoliticalAgendas';
 import {Reds} from '../../../../src/turmoil/parties/Reds';
+import {MAX_OXYGEN_LEVEL} from '../../../../src/constants';
 
 describe('ConvertPlants', function() {
   let card: ConvertPlants; let player: Player;
@@ -30,6 +31,10 @@ describe('ConvertPlants', function() {
     player.game.turmoil!.rulingParty = new Reds();
     PoliticalAgendas.setNextAgenda(player.game.turmoil!, player.game);
     expect(card.canAct(player)).eq(false);
+    player.megaCredits = 2;
+    expect(card.canAct(player)).eq(false);
+    player.megaCredits = 3;
+    expect(card.canAct(player)).eq(true);
   });
 
   it('Should play', function() {
@@ -41,5 +46,12 @@ describe('ConvertPlants', function() {
     action.cb(action.availableSpaces[0]);
 
     expect(player.game.getOxygenLevel()).eq(1);
+  });
+
+  it('Can act when maximized', function() {
+    player.plants = 8;
+    expect(card.canAct(player)).eq(true);
+    (player.game as any).oxygenLevel = MAX_OXYGEN_LEVEL;
+    expect(card.canAct(player)).eq(true);
   });
 });

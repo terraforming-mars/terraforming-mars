@@ -42,6 +42,10 @@ export enum TileType {
     LUNA_MINING_HUB, // 33
     LUNA_TRAIN_STATION, // 34
     LUNAR_MINE_URBANIZATION, // 35
+
+    // Pathfinders
+    WETLANDS, // 36
+    RED_CITY, // 37
 }
 
 const TO_STRING_MAP: Map<TileType, string> = new Map([

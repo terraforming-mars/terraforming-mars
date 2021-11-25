@@ -2,9 +2,6 @@ import {Player} from '../../Player';
 import {CardName} from '../../CardName';
 import {CardRenderer} from '../render/CardRenderer';
 import {StandardProjectCard} from '../StandardProjectCard';
-import {PartyHooks} from '../../turmoil/parties/PartyHooks';
-import {PartyName} from '../../turmoil/parties/PartyName';
-import * as constants from '../../constants';
 import {ColonyName} from '../../colonies/ColonyName';
 import {BuildColony} from '../../deferredActions/BuildColony';
 
@@ -30,7 +27,8 @@ export class BuildColonyStandardProject extends StandardProjectCard {
       colony.isActive);
 
     // TODO: Europa sometimes costs additional 3.
-    if (PartyHooks.shouldApplyPolicy(player, PartyName.REDS) && !player.canAfford(this.cost + constants.REDS_RULING_POLICY_COST)) {
+    const canAffordVenus = player.canAfford(this.cost, {tr: {venus: 1}});
+    if (!canAffordVenus) {
       openColonies = openColonies.filter((colony) => colony.name !== ColonyName.VENUS);
     }
 

@@ -34,8 +34,11 @@ export class AsteroidMiningConsortium extends Card implements IProjectCard {
   }
 
   public play(player: Player) {
-    const decreaseAction = new DecreaseAnyProduction(player, Resources.TITANIUM, 1);
-    decreaseAction.stealing = true;
+    const decreaseAction = new DecreaseAnyProduction(
+      player,
+      Resources.TITANIUM,
+      {count: 1, stealing: true}
+    );
     player.game.defer(decreaseAction);
     player.addProduction(Resources.TITANIUM, 1);
     return undefined;

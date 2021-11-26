@@ -34,9 +34,8 @@ export class PowerSupplyConsortium extends Card implements IProjectCard {
 
   public play(player: Player) {
     player.addProduction(Resources.ENERGY, 1);
-    const decreseAction = new DecreaseAnyProduction(player, Resources.ENERGY, 1)
-    decreseAction.stealing = true;
-    player.game.defer(decreseAction);
+    player.game.defer(
+      new DecreaseAnyProduction(player, Resources.ENERGY, {count:1, stealing:true}));
     return undefined;
   }
 }

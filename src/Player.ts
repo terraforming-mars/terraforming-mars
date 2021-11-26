@@ -341,9 +341,6 @@ export class Player implements ISerializable<SerializedPlayer> {
       message = message + ' by ' + ((from instanceof Player) ? '${4}' : 'Global Event');
     }
 
-    if (from !== undefined) {
-      message = message + ' by ' + ((from instanceof Player) ? '${4}' : 'Global Event');
-    }
     this.game.log(message, (b) => {
       b.player(this)
         .string(resource)

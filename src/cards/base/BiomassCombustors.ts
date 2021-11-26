@@ -44,6 +44,7 @@ export class BiomassCombustors extends Card implements IProjectCard {
 
   public produce(player: Player) {
     player.addProduction(Resources.ENERGY, 2);
-    player.game.defer(new DecreaseAnyProduction(player, Resources.PLANTS, 1));
+    player.game.defer(
+      new DecreaseAnyProduction(player, Resources.PLANTS, {count: 1}));
   }
 }

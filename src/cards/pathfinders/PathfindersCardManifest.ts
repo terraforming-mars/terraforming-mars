@@ -44,7 +44,7 @@ import {MartianCulture} from './MartianCulture';
 import {MartianDustProcessingPlant} from './MartianDustProcessingPlant';
 import {MartianInsuranceGroup} from './MartianInsuranceGroup';
 import {MartianMonuments} from './MartianMonuments';
-// import {MartianNatureWonders} from './MartianNatureWonders';
+import {MartianNatureWonders} from './MartianNatureWonders';
 import {MartianRepository} from './MartianRepository';
 import {MicrobiologyPatents} from './MicrobiologyPatents';
 import {MuseumofEarlyColonisation} from './MuseumofEarlyColonisation';
@@ -75,7 +75,7 @@ import {SpaceDebrisCleaningOperation} from './SpaceDebrisCleaningOperation';
 import {SpaceRelay} from './SpaceRelay';
 import {TerraformingControlStation} from './TerraformingControlStation';
 import {TerraformingRobots} from './TerraformingRobots';
-// import {ValuableGases} from './ValuableGases';
+import {ValuableGases} from './ValuableGases';
 import {VeneraBase} from './VeneraBase';
 import {VenusFirst} from './VenusFirst';
 
@@ -91,7 +91,7 @@ export const PATHFINDERS_CARD_MANIFEST = new CardManifest({
     {cardName: CardName.ORBITAL_LABORATORIES, Factory: OrbitalLaboratories},
     {cardName: CardName.DUST_STORM, Factory: DustStorm},
     {cardName: CardName.MARTIAN_MONUMENTS, Factory: MartianMonuments},
-    // {cardName: CardName.MARTIAN_NATURE_WONDERS, Factory: MartianNatureWonders},
+    {cardName: CardName.MARTIAN_NATURE_WONDERS, Factory: MartianNatureWonders},
     {cardName: CardName.MUSEUM_OF_EARLY_COLONISATION, Factory: MuseumofEarlyColonisation},
     {cardName: CardName.TERRAFORMING_CONTROL_STATION, Factory: TerraformingControlStation, compatibility: GameModule.Venus},
     // // {cardName: CardName.MARTIAN_TRANSHIPMENT_STATION, Factory: MartianTranshipmentStation},  // COMPLICATED EFFECT.
@@ -186,7 +186,7 @@ export const PATHFINDERS_CARD_MANIFEST = new CardManifest({
   ],
   preludeCards: [
     {cardName: CardName.VENUS_FIRST_PATHFINDERS, Factory: VenusFirst, compatibility: GameModule.Venus},
-    // {cardName: CardName.VALUABLE_GASES_PATHFINDERS, Factory: ValuableGases, compatibility: GameModule.Venus},
+    {cardName: CardName.VALUABLE_GASES_PATHFINDERS, Factory: ValuableGases, compatibility: GameModule.Venus},
     {cardName: CardName.CO2_REDUCERS, Factory: CO2Reducers, compatibility: GameModule.Venus},
     {cardName: CardName.HYDROGEN_BOMBARDMENT, Factory: HydrogenBombardment, compatibility: GameModule.Venus},
     {cardName: CardName.RESEARCH_GRANT_PATHFINDERS, Factory: ResearchGrant},

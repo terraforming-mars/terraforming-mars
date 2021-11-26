@@ -1349,10 +1349,7 @@ export class Game implements ISerializable<SerializedGame> {
     // Part 5. Collect the bonuses
     if (this.phase !== Phase.SOLAR) {
       if (!coveringExistingTile) {
-        const bonuses = new Multiset(space.bonus);
-        bonuses.entries().forEach(([bonus, count]) => {
-          this.grantSpaceBonus(player, bonus, count);
-        });
+        this.grantSpaceBonuses(player, space);
       }
 
       this.board.getAdjacentSpaces(space).forEach((adjacentSpace) => {
@@ -1390,6 +1387,13 @@ export class Game implements ISerializable<SerializedGame> {
     space.tile = tile;
     space.player = tile.tileType !== TileType.OCEAN ? player : undefined;
     LogHelper.logTilePlacement(player, space, tile.tileType);
+  }
+
+  public grantSpaceBonuses(player: Player, space: ISpace) {
+    const bonuses = new Multiset(space.bonus);
+    bonuses.entries().forEach(([bonus, count]) => {
+      this.grantSpaceBonus(player, bonus, count);
+    });
   }
 
   public grantSpaceBonus(player: Player, spaceBonus: SpaceBonus, count: number = 1) {

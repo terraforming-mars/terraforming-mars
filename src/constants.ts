@@ -42,6 +42,9 @@ export const MAXIMUM_LOGISTICS_RATE = 8;
 
 // Escape Velocity
 export const BONUS_SECONDS_PER_ACTION = 2;
+export const DEFAULT_ESCAPE_VELOCITY_THRESHOLD = 30;
+export const DEFAULT_ESCAPE_VELOCITY_PERIOD = 2;
+export const DEFAULT_ESCAPE_VELOCITY_PENALTY = 1;
 
 export const LANGUAGES = [
   {'id': 'en', 'title': 'English'},

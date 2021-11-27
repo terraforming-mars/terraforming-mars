@@ -591,9 +591,9 @@ export default Vue.extend({
       moonStandardProjectVariant: false,
       altVenusBoard: false,
       escapeVelocityMode: false,
-      escapeVelocityThreshold: 30,
-      escapeVelocityPeriod: 2,
-      escapeVelocityPenalty: 1,
+      escapeVelocityThreshold: constants.DEFAULT_ESCAPE_VELOCITY_THRESHOLD,
+      escapeVelocityPeriod: constants.DEFAULT_ESCAPE_VELOCITY_PERIOD,
+      escapeVelocityPenalty: constants.DEFAULT_ESCAPE_VELOCITY_PENALTY,
     };
   },
   components: {

@@ -140,10 +140,10 @@ export const DEFAULT_GAME_OPTIONS: GameOptions = {
   customColoniesList: [],
   customCorporationsList: [],
   draftVariant: false,
-  escapeVelocityMode: false,
-  escapeVelocityThreshold: undefined,
-  escapeVelocityPeriod: undefined,
-  escapeVelocityPenalty: undefined,
+  escapeVelocityMode: false, // When true, escape velocity is enabled.
+  escapeVelocityThreshold: constants.DEFAULT_ESCAPE_VELOCITY_THRESHOLD, // Time in minutes a player has to complete a game.
+  escapeVelocityPeriod: constants.DEFAULT_ESCAPE_VELOCITY_PERIOD, // VP a player loses for every `escapeVelocityPenalty` minutes after `escapeVelocityThreshold`.
+  escapeVelocityPenalty: constants.DEFAULT_ESCAPE_VELOCITY_PENALTY,
   fastModeOption: false,
   includeVenusMA: true,
   initialDraftVariant: false,

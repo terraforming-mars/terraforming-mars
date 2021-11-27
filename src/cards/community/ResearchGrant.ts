@@ -10,6 +10,7 @@ export class ResearchGrant extends PreludeCard implements IProjectCard {
     super({
       name: CardName.RESEARCH_GRANT,
       tags: [Tags.SCIENCE, Tags.SCIENCE],
+      startingMegacredits: 8,
 
       metadata: {
         cardNumber: 'Y04',

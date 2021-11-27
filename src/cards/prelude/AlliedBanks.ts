@@ -1,15 +1,18 @@
 import {Tags} from '../Tags';
 import {Player} from '../../Player';
 import {PreludeCard} from './PreludeCard';
-import {Resources} from '../../Resources';
 import {CardName} from '../../CardName';
 import {CardRenderer} from '../render/CardRenderer';
+import {Units} from '../../Units';
 
 export class AlliedBanks extends PreludeCard {
   constructor() {
     super({
       name: CardName.ALLIED_BANKS,
       tags: [Tags.EARTH],
+
+      productionBox: Units.of({megacredits: 4}),
+      startingMegacredits: 3,
 
       metadata: {
         cardNumber: 'P01',
@@ -22,8 +25,8 @@ export class AlliedBanks extends PreludeCard {
     });
   }
   public play(player: Player) {
-    player.addProduction(Resources.MEGACREDITS, 4);
-    player.megaCredits += 3;
+    player.adjustProduction(this.productionBox);
+    player.megaCredits += this.startingMegaCredits;
     return undefined;
   }
 }

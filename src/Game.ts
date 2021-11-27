@@ -121,6 +121,10 @@ export interface GameOptions {
   requiresVenusTrackCompletion: boolean; // Venus must be completed to end the game
   moonStandardProjectVariant: boolean;
   altVenusBoard: boolean;
+  escapeVelocityMode: boolean;
+  escapeVelocityThreshold?: number;
+  escapeVelocityPeriod?: number;
+  escapeVelocityPenalty?: number;
 }
 
 export const DEFAULT_GAME_OPTIONS: GameOptions = {
@@ -136,6 +140,10 @@ export const DEFAULT_GAME_OPTIONS: GameOptions = {
   customColoniesList: [],
   customCorporationsList: [],
   draftVariant: false,
+  escapeVelocityMode: false,
+  escapeVelocityThreshold: undefined,
+  escapeVelocityPeriod: undefined,
+  escapeVelocityPenalty: undefined,
   fastModeOption: false,
   includeVenusMA: true,
   initialDraftVariant: false,

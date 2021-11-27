@@ -226,6 +226,7 @@ describe('Player', function() {
       steelValue: 14,
       canUseHeatAsMegaCredits: false,
       actionsTakenThisRound: 15,
+      actionsTakenThisGame: 30,
       actionsThisGeneration: [CardName.FACTORUM, CardName.GHG_PRODUCING_BACTERIA],
       corporationInitialActionDone: false,
       dealtCorporationCards: [CardName.THARSIS_REPUBLIC],

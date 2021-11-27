@@ -74,6 +74,7 @@ describe('ApiGame', () => {
           'communityCardsOption': false,
           'corporateEra': true,
           'draftVariant': false,
+          'escapeVelocityMode': false,
           'fastModeOption': false,
           'includeVenusMA': true,
           'initialDraftVariant': false,

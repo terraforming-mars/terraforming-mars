@@ -591,7 +591,7 @@ export class Player implements ISerializable<SerializedPlayer> {
       const penaltyPerMin = this.game.gameOptions.escapeVelocityPenalty ?? 1;
       const elapsedTimeInMinutes = this.timer.getElapsedTimeInMinutes();
       if (threshold !== undefined && period !== undefined && elapsedTimeInMinutes > threshold) {
-        const overTimeInMinutes = Math.max(elapsedTimeInMinutes - threshold - (this.actionsTakenThisGame * (constants.BONUS_SECONDS_PER_ACTION/60)), 0);
+        const overTimeInMinutes = Math.max(elapsedTimeInMinutes - threshold - (this.actionsTakenThisGame * (constants.BONUS_SECONDS_PER_ACTION / 60)), 0);
         // Don't lose more VP than what is available
         victoryPointsBreakdown.updateTotal();
 

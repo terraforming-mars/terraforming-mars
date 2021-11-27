@@ -592,7 +592,7 @@ export class Player implements ISerializable<SerializedPlayer> {
       const elapsedTimeInMinutes = this.timer.getElapsedTimeInMinutes();
       if (threshold !== undefined && period !== undefined && elapsedTimeInMinutes > threshold) {
         const overTimeInMinutes = Math.max(elapsedTimeInMinutes - threshold - (this.actionsTakenThisGame * (constants.BONUS_SECONDS_PER_ACTION/60)), 0);
-        // Don't lose more VP that what is available
+        // Don't lose more VP than what is available
         victoryPointsBreakdown.updateTotal();
 
         const totalBeforeEscapeVelocity = victoryPointsBreakdown.total;
@@ -2039,18 +2039,21 @@ export class Player implements ISerializable<SerializedPlayer> {
         this.passOption(),
       );
       this.setWaitingFor(initialActionOrPass, () => {
-        this.actionsTakenThisRound++;
-        this.actionsTakenThisGame++;
+        this.incrementActionsTaken();
         this.takeAction();
       });
       return;
     }
 
     this.setWaitingFor(this.getActions(), () => {
-      this.actionsTakenThisRound++;
-      this.actionsTakenThisGame++;
+      this.incrementActionsTaken();
       this.takeAction();
     });
+  }
+
+  private incrementActionsTaken(): void {
+    this.actionsTakenThisRound++;
+    this.actionsTakenThisGame++;
   }
 
   // Return possible mid-game actions like play a card and fund an award, but no play prelude card.
@@ -2299,6 +2302,7 @@ export class Player implements ISerializable<SerializedPlayer> {
     const player = new Player(d.name, d.color, d.beginner, Number(d.handicap), d.id);
     const cardFinder = new CardFinder();
 
+    // TODO: Remove ?? operator after 01-01-2022
     player.actionsTakenThisGame = d.actionsTakenThisGame ?? 0;
     player.actionsTakenThisRound = d.actionsTakenThisRound;
     player.canUseHeatAsMegaCredits = d.canUseHeatAsMegaCredits;

@@ -55,8 +55,12 @@ export class Timer implements ISerializable<SerializedTimer> {
     this.sumElapsed += Timer.lastStoppedAt - this.startedAt;
   }
 
+  public getElapsed(): number {
+    return this.sumElapsed + (this.running ? Date.now() - this.startedAt : 0);
+  }
+
   public getElapsedTimeInMinutes(): number {
-    const elapsedTimeInMin = (this.sumElapsed + (this.running ? Date.now() - this.startedAt : 0)) / (60 * 1000);
+    const elapsedTimeInMin = this.getElapsed() / (60 * 1000);
     return elapsedTimeInMin;
   }
 
@@ -64,9 +68,9 @@ export class Timer implements ISerializable<SerializedTimer> {
   public static toString(d: SerializedTimer) : string {
     const elapsed = d.sumElapsed + (d.running ? Date.now() - d.startedAt : 0);
     const elapsedDate = new Date(elapsed);
-    const hours = elapsedDate.getUTCHours() + (elapsedDate.getUTCDate()-1)*24;
+    const hours = elapsedDate.getUTCHours() + (elapsedDate.getUTCDate() - 1) * 24;
     if (hours > 0) {
-      return String(hours)+elapsedDate.toISOString().substr(13, 6);
+      return String(hours) + elapsedDate.toISOString().substr(13, 6);
     }
     return elapsedDate.toISOString().substr(14, 5);
   }

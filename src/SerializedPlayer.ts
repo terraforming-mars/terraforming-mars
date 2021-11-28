@@ -5,6 +5,7 @@ import {SerializedCard} from './SerializedCard';
 import {SerializedTimer} from './SerializedTimer';
 
 export interface SerializedPlayer {
+    actionsTakenThisGame: number;
     actionsTakenThisRound: number;
     actionsThisGeneration: Array<CardName>;
     beginner: boolean;

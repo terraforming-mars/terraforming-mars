@@ -59,9 +59,11 @@
                                 <th v-if="game.moon !== undefined"><div class="table-moon-colony-tile"></div></th>
                                 <th v-if="game.moon !== undefined"><div class="table-moon-mine-tile"></div></th>
                                 <th><div class="vp">VP</div></th>
+                                <th v-if="game.gameOptions.escapeVelocityMode" class="clock-icon tooltip tooltip-top" data-tooltip="Escape Velocity penalty">&#x23F3;</th>
                                 <th class="game-end-total"><div class="game-end-total-column">Total</div></th>
                                 <th><div class="mc-icon"></div></th>
                                 <th v-if="game.gameOptions.showTimers" class="clock-icon">&#x1F551;</th>
+                                <th><div class="table-red-arrow tooltip tooltip-top" data-tooltip="Actions taken this game"></div></th>
                             </tr>
                         </thead>
                         <tbody>
@@ -79,6 +81,7 @@
                                 <td v-if="game.moon !== undefined">{{ p.victoryPointsBreakdown.moonColonies }}</td>
                                 <td v-if="game.moon !== undefined">{{ p.victoryPointsBreakdown.moonMines }}</td>
                                 <td>{{ p.victoryPointsBreakdown.victoryPoints }}</td>
+                                <td v-if="game.gameOptions.escapeVelocityMode">{{ p.victoryPointsBreakdown.escapeVelocity }}</td>
                                 <td class="game-end-total">{{ p.victoryPointsBreakdown.total }}</td>
                                 <td class="game-end-mc">
                                   <div>{{ p.megaCredits }}</div>
@@ -86,6 +89,7 @@
                                 <td>
                                   <div v-if="game.gameOptions.showTimers" class="game-end-timer">{{ getTimer(p) }}</div>
                                 </td>
+                                <td><div class="game-end-timer">{{ p.actionsTakenThisGame }}</div></td>
                             </tr>
                         </tbody>
                     </table>

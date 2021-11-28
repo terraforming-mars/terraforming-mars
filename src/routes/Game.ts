@@ -109,6 +109,10 @@ export class GameHandler extends Handler {
           requiresMoonTrackCompletion: gameReq.requiresMoonTrackCompletion,
           moonStandardProjectVariant: gameReq.moonStandardProjectVariant,
           altVenusBoard: gameReq.altVenusBoard,
+          escapeVelocityMode: gameReq.escapeVelocityMode,
+          escapeVelocityThreshold: gameReq.escapeVelocityThreshold,
+          escapeVelocityPeriod: gameReq.escapeVelocityPeriod,
+          escapeVelocityPenalty: gameReq.escapeVelocityPenalty,
         };
 
         if (gameOptions.clonedGamedId !== undefined && !gameOptions.clonedGamedId.startsWith('#')) {

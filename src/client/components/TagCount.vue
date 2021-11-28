@@ -16,7 +16,7 @@ export default Vue.extend({
   name: 'tag-count',
   props: {
     tag: {
-      type: String as () => Tags|SpecialTags,
+      type: String as () => Tags|SpecialTags|'escape',
     },
     count: {
       type: Number,
@@ -38,14 +38,14 @@ export default Vue.extend({
   methods: {
     getClasses(): string {
       const classes = ['tag-display'];
-      if (this.count === 0) {
+      if (this.count === 0 && this.tag !== 'escape') {
         classes.push('tag-no-show');
       }
       return classes.join(' ');
     },
     getCountClasses(): string {
       const classes = ['tag-count-display'];
-      if (this.count === 0) {
+      if (this.count === 0 && this.tag !== 'escape') {
         classes.push('tag-count-no-show');
       }
 

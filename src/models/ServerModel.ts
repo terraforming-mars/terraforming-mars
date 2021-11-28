@@ -372,6 +372,7 @@ export class Server {
     const game = player.game;
     return {
       actionsTakenThisRound: player.actionsTakenThisRound,
+      actionsTakenThisGame: player.actionsTakenThisGame,
       actionsThisGeneration: Array.from(player.getActionsThisGeneration()),
       availableBlueCardActionCount: player.getAvailableBlueActionCount(),
       cardCost: player.cardCost,
@@ -481,6 +482,10 @@ export class Server {
       communityCardsOption: options.communityCardsOption,
       corporateEra: options.corporateEra,
       draftVariant: options.draftVariant,
+      escapeVelocityMode: options.escapeVelocityMode,
+      escapeVelocityThreshold: options.escapeVelocityThreshold,
+      escapeVelocityPeriod: options.escapeVelocityPeriod,
+      escapeVelocityPenalty: options.escapeVelocityPenalty,
       fastModeOption: options.fastModeOption,
       includeVenusMA: options.includeVenusMA,
       initialDraftVariant: options.initialDraftVariant,

@@ -43,6 +43,10 @@
               <div v-if="!gameOptions.initialDraftVariant && !gameOptions.draftVariant" class="game-config generic" v-i18n>Off</div>
             </li>
 
+            <li v-if="gameOptions.escapeVelocityMode">
+              <div class="create-game-expansion-icon expansion-icon-escape-velocity"></div>
+              <span>After {{gameOptions.escapeVelocityThreshold}} min, reduce {{gameOptions.escapeVelocityPenalty}} VP every {{gameOptions.escapeVelocityPeriod}} min.</span>
+            </li>
 
             <li v-if="gameOptions.turmoilExtension && gameOptions.removeNegativeGlobalEvents">
               <div class="setup-item" v-i18n>Turmoil:</div>

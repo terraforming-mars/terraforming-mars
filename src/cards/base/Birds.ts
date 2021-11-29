@@ -47,7 +47,7 @@ export class Birds extends Card implements IActionCard, IProjectCard, IResourceC
     }
     public play(player: Player) {
       player.game.defer(
-        new DecreaseAnyProduction(player, Resources.PLANTS, {count:2}));
+        new DecreaseAnyProduction(player, Resources.PLANTS, {count: 2}));
       return undefined;
     }
     public canAct(): boolean {

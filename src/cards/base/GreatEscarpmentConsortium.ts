@@ -32,7 +32,7 @@ export class GreatEscarpmentConsortium extends Card implements IProjectCard {
 
   public play(player: Player) {
     player.game.defer(
-      new DecreaseAnyProduction(player, Resources.STEEL, {count:1, stealing:true}));
+      new DecreaseAnyProduction(player, Resources.STEEL, {count: 1, stealing: true}));
     player.addProduction(Resources.STEEL, 1);
     return undefined;
   }

@@ -318,9 +318,9 @@ export class Player implements ISerializable<SerializedPlayer> {
   }
 
   private logUnitDelta(
-    resource: Resources, 
-    amount: number, 
-    unitType: 'production' | 'amount', 
+    resource: Resources,
+    amount: number,
+    unitType: 'production' | 'amount',
     from: Player | GlobalEventName | undefined,
     stealing = false
   ) {

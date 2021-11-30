@@ -39,9 +39,13 @@ describe('Cultural Metropolis', function() {
     player.addProduction(Resources.ENERGY, 1);
     turmoil.sendDelegateToParty(player.id, PartyName.UNITY, game, 'lobby');
     turmoil.sendDelegateToParty(player.id, PartyName.UNITY, game, 'reserve');
-    for (let i = 0; i < PLAYER_DELEGATES_COUNT - 3; i++) {
+    for (let i = 0; i < PLAYER_DELEGATES_COUNT - 2; i++) {
       turmoil.sendDelegateToParty(player.id, PartyName.REDS, game, 'reserve');
     }
+    expect(turmoil.getAvailableDelegateCount(player.id, 'reserve')).to.equal(2);
+    expect(player.canPlayIgnoringCost(card)).is.true;
+    
+    turmoil.sendDelegateToParty(player.id, PartyName.REDS, game, 'reserve');
     expect(turmoil.getAvailableDelegateCount(player.id, 'reserve')).to.equal(1);
     expect(player.canPlayIgnoringCost(card)).is.not.true;
   });

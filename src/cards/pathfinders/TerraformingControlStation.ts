@@ -20,7 +20,7 @@ export class TerraformingControlStation extends Card implements IProjectCard {
       metadata: {
         cardNumber: 'Pf12',
         renderData: CardRenderer.builder((b) => {
-          b.effect('When you play a Venus or Mars tag, pay 2MC less.', (eb) => {
+          b.effect('When you play a Venus or Mars tag, pay 2 M€ less.', (eb) => {
             eb.venus(1, {played}).slash().mars(1, {played}).startEffect.megacredits(-2);
           });
           b.br.tr(2);

@@ -16,7 +16,16 @@ describe('StrategicBasePlanning', function() {
   beforeEach(function() {
     card = new StrategicBasePlanning();
     // 2 players to remove an early-game solo action in the deferred actions queue.
-    game = newTestGame(2, {coloniesExtension: true});
+    game = newTestGame(2, {
+      coloniesExtension: true,
+      customColoniesList: [
+        // The important thing is that Europa is absent.
+        ColonyName.GANYMEDE,
+        ColonyName.LUNA,
+        ColonyName.PLUTO,
+        ColonyName.TITAN,
+        ColonyName.TRITON],
+    });
     player = getTestPlayer(game, 0);
   });
 

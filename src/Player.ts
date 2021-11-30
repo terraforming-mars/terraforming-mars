@@ -322,7 +322,7 @@ export class Player implements ISerializable<SerializedPlayer> {
     amount: number,
     unitType: 'production' | 'amount',
     from: Player | GlobalEventName | undefined,
-    stealing = false
+    stealing = false,
   ) {
     if (amount === 0) {
       // Logging zero units doesn't seem to happen
@@ -424,7 +424,7 @@ export class Player implements ISerializable<SerializedPlayer> {
   public addProduction(
     resource: Resources,
     amount : number,
-    options? : { log: boolean, from? : Player | GlobalEventName, stealing?: boolean}
+    options? : { log: boolean, from? : Player | GlobalEventName, stealing?: boolean},
   ) {
     const adj = resource === Resources.MEGACREDITS ? -5 : 0;
     const delta = (amount >= 0) ? amount : Math.max(amount, -(this.getProduction(resource) - adj));

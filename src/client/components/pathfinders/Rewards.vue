@@ -1,7 +1,7 @@
 <template>
   <div class="rewards_cont">
     <span v-if="mostTags">!&nbsp;</span>
-    <Reward v-for="(reward, idx) in myReward" :reward="reward" :key="'r' + idx" :gameOptions="gameOptions"/>
+    <Reward v-for="(reward, idx) in myReward" :reward="reward" :key="idx" :gameOptions="gameOptions"/>
   </div>
 </template>
 

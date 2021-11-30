@@ -2,7 +2,7 @@
     <tr>
       <td>{{icon}}</td>
       <td v-for="idx in range" :key="idx" :class="getClass(idx)">
-        <Rewards :type="type" v-if="idx <= (rewards.spaces.length + 1) && rewards.spaces[idx] !== undefined" :rewards="rewards.spaces[idx]" :gameOptions="gameOptions" />
+        <Rewards :type="type" v-if="idx <= rewards.spaces.length && rewards.spaces[idx] !== undefined" :rewards="rewards.spaces[idx]" :gameOptions="gameOptions" />
       </td>
     </tr>
 </template>

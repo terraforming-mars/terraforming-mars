@@ -23,7 +23,7 @@ export default Vue.extend({
     },
   },
   computed: {
-    getClass(): String {
+    getClass(): string {
       switch (this.reward) {
       case '3mc':
         return 'reward-3mc';
@@ -72,7 +72,7 @@ export default Vue.extend({
         return '';
       }
     },
-    outerClass(): String {
+    outerClass(): string {
       switch (this.reward) {
       case '1vp':
         return 'card-points vp1';

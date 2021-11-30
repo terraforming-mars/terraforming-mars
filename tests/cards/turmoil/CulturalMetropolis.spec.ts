@@ -44,7 +44,6 @@ describe('Cultural Metropolis', function() {
     }
     expect(turmoil.getAvailableDelegateCount(player.id, 'reserve')).to.equal(2);
     expect(player.canPlayIgnoringCost(card)).is.true;
-    
     turmoil.sendDelegateToParty(player.id, PartyName.REDS, game, 'reserve');
     expect(turmoil.getAvailableDelegateCount(player.id, 'reserve')).to.equal(1);
     expect(player.canPlayIgnoringCost(card)).is.not.true;

@@ -20,6 +20,7 @@ export interface ViewModel {
 export interface PublicPlayerModel {
   actionsTakenThisRound: number;
   actionsThisGeneration: Array<string /* CardName */>;
+  actionsTakenThisGame: number;
   availableBlueCardActionCount: number;
   cardCost: number;
   cardDiscount: number;

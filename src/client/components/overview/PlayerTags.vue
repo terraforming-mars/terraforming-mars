@@ -2,6 +2,9 @@
         <div class="player-tags">
             <div class="player-tags-main">
                 <tag-count :tag="'vp'" :count="getVpCount()" :size="'big'" :type="'main'" :hideCount="hideVpCount()" />
+                <div v-if="isEscapeVelocityOn()" class="tag-display tooltip tooltip-top" data-tooltip="Escape Velocity penalty">
+                  <tag-count :tag="'escape'" :count="getEscapeVelocityPenalty()" :size="'big'" :type="'main'"/>
+                </div>
                 <tag-count :tag="'tr'" :count="getTR()" :size="'big'" :type="'main'"/>
                 <div class="tag-and-discount">
                   <PlayerTagDiscount v-if="hasTagDiscount('all')" :amount="getTagDiscountAmount('all')" :color="player.color" />
@@ -249,6 +252,12 @@ export default Vue.extend({
         }
       }
       return multipliers;
+    },
+    isEscapeVelocityOn: function(): boolean {
+      return this.playerView.game.gameOptions.escapeVelocityMode;
+    },
+    getEscapeVelocityPenalty: function(): number {
+      return this.player.victoryPointsBreakdown.escapeVelocity;
     },
   },
 });

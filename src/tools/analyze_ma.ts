@@ -118,6 +118,10 @@ function simpleGameOptions(): GameOptions {
     requiresMoonTrackCompletion: false, // Moon must be completed to end the game
     moonStandardProjectVariant: false,
     altVenusBoard: false,
+    escapeVelocityMode: false,
+    escapeVelocityThreshold: undefined,
+    escapeVelocityPeriod: undefined,
+    escapeVelocityPenalty: undefined,
 
     // The options that can change, should be parameters.
     boardName: BoardName.ORIGINAL,

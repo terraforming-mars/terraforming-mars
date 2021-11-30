@@ -8,16 +8,17 @@ export class PlaceCityTile implements DeferredAction {
   constructor(
         public player: Player,
         public title: string = 'Select space for city tile',
-        public spaces: Array<ISpace> = player.game.board.getAvailableSpacesForCity(player),
+        public spaces: Array<ISpace> | undefined = undefined,
   ) {}
 
   public execute() {
-    if (this.spaces.length === 0) {
+    const spaces = this.spaces !== undefined ? this.spaces : this.player.game.board.getAvailableSpacesForCity(this.player);
+    if (spaces.length === 0) {
       return undefined;
     }
     return new SelectSpace(
       this.title,
-      this.spaces,
+      spaces,
       (space: ISpace) => {
         this.player.game.addCityTile(this.player, space.id);
         return undefined;

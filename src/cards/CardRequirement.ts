@@ -10,6 +10,7 @@ import {MoonExpansion} from '../moon/MoonExpansion';
 import {Turmoil} from '../turmoil/Turmoil';
 import {Options} from './CardRequirements';
 
+const firstLetterUpperCase = (s: string): string => s.charAt(0).toUpperCase() + s.slice(1);
 export class CardRequirement {
   public readonly isMax: boolean = false;
   public readonly isAny: boolean = false;
@@ -205,6 +206,9 @@ export class TagCardRequirement extends CardRequirement {
     super(RequirementType.TAG, amount, options);
   }
 
+  protected parseType(): string {
+    return firstLetterUpperCase(this.tag);
+  }
   public satisfies(player: Player): boolean {
     const mode = this.isMax !== true ? 'default' : 'raw';
     let tagCount = player.getTagCount(this.tag, mode);
@@ -228,7 +232,9 @@ export class ProductionCardRequirement extends CardRequirement {
   constructor(private resource: Resources, amount: number, options?: Options) {
     super(RequirementType.RESOURCE_TYPES, amount, options);
   }
-
+  protected parseType(): string {
+    return `${firstLetterUpperCase(this.resource)} production`;
+  }
   public satisfies(player: Player): boolean {
     return this.satisfiesInequality(player.getProduction(this.resource));
   }

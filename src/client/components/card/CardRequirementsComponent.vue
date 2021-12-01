@@ -1,5 +1,5 @@
 <template>
-  <div v-if="true" class="card-requirements" :class="getClasses()">
+  <div v-if="showIcons()" class="card-requirements" :class="getClasses()">
     <div v-for="(req, idx) in requirements.requirements" :key="idx">
       <card-requirement :requirement="req" />
     </div>
@@ -19,6 +19,7 @@
 import Vue from 'vue';
 import CardRequirementComponent from './CardRequirementComponent.vue';
 import {CardRequirements} from '@/cards/CardRequirements';
+import {PreferencesManager} from '@/client/utils/PreferencesManager';
 
 export default Vue.extend({
   name: 'CardRequirementsComponent',
@@ -37,6 +38,9 @@ export default Vue.extend({
         return 'card-requirements-max';
       }
       return '';
+    },
+    showIcons(): boolean {
+      return PreferencesManager.loadBoolean('experimental_ui');
     },
   },
 });

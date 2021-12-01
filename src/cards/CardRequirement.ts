@@ -244,6 +244,9 @@ export class PartyCardRequirement extends CardRequirement {
   constructor(public readonly party: PartyName) {
     super(RequirementType.PARTY);
   }
+  protected parseType(): string {
+    return this.party.toLowerCase();
+  }
   public satisfies(player: Player): boolean {
     return Turmoil.getTurmoil(player.game).canPlay(player, this.party);
   }

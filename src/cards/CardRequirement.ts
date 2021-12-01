@@ -15,9 +15,11 @@ const firstLetterUpperCase = (s: string): string => s.charAt(0).toUpperCase() + 
 export class CardRequirement {
   public readonly isMax: boolean = false;
   public readonly isAny: boolean = false;
+  public readonly text: string | undefined = undefined;
   constructor(public type: RequirementType, public amount: number = 1, options?: Options) {
     this.isMax = options?.max ?? false;
     this.isAny = options?.all ?? false;
+    this.text = options?.text;
   }
 
   private amountToString(): string {
@@ -62,6 +64,9 @@ export class CardRequirement {
     }
     result += this.parseType();
 
+    if (this.text) {
+      result += this.text;
+    }
     return result;
   }
 

@@ -18,6 +18,7 @@
               <li v-for="(message, index) in messages" :key="index" v-on:click.prevent="messageClicked(message)" v-html="messageToHTML(message)"></li>
             </ul>
           </div>
+          <div class='debugid'>(debugid {{step}})</div>
         </div>
         <div class="card-panel" v-if="cards.length > 0 || globalEventNames.length > 0">
           <Button size="big" type="close" :disableOnServerBusy="false" @click="hideMe" align="right"/>
@@ -76,6 +77,11 @@ export default Vue.extend({
     },
     color: {
       type: String as () => Color,
+    },
+    step: {
+      type: Number,
+      required: false,
+      default: 0,
     },
   },
   data() {
@@ -201,7 +207,7 @@ export default Vue.extend({
         });
         return `BUG: Unparseable message: ${message.message}, (${data.join(', ')})`;
       } catch (err) {
-        return `BUG: Unparseable message: ${message.message} ${err.toString()}`;
+        return `BUG: Unparseable message: ${message.message} ${String(err)}`;
       }
     },
     messageToHTML(message: LogMessage) {

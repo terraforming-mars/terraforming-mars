@@ -39,6 +39,7 @@
                       :oxygen_level="game.oxygenLevel"
                       :temperature="game.temperature"
                       :aresExtension="game.gameOptions.aresExtension"
+                      :pathfindersExpansion="game.gameOptions.pathfindersExpansion"
                       :altVenusBoard="game.gameOptions.altVenusBoard"
                       :aresData="game.aresData"
                       :hideTiles="hideTiles"
@@ -59,7 +60,14 @@
                 <players-overview class="player_home_block player_home_block--players nofloat" :playerView="playerView" v-trim-whitespace id="shortkey-playersoverview"/>
 
                 <div class="player_home_block nofloat">
-                    <log-panel :id="playerView.id" :players="playerView.players" :generation="game.generation" :lastSoloGeneration="game.lastSoloGeneration" :color="thisPlayer.color"></log-panel>
+                    <log-panel
+                      :id="playerView.id"
+                      :players="playerView.players"
+                      :generation="game.generation"
+                      :lastSoloGeneration="game.lastSoloGeneration"
+                      :color="thisPlayer.color"
+                      :step="game.step"></log-panel>
+                    <PlanetaryTracks v-if="game.gameOptions.pathfindersExpansion" :tracks="game.pathfinders" :gameOptions="game.gameOptions"/>
                 </div>
 
                 <div class="player_home_block player_home_block--actions nofloat">
@@ -199,6 +207,7 @@
                           :venusScaleLevel="game.venusScaleLevel"
                           :boardName ="game.gameOptions.boardName"
                           :aresExtension="game.gameOptions.aresExtension"
+                          :pathfindersExpansion="game.gameOptions.pathfindersExpansion"
                           :aresData="game.aresData"
                           :altVenusBoard="game.gameOptions.altVenusBoard">
                         </board>
@@ -243,6 +252,7 @@ import LogPanel from '@/client/components/LogPanel.vue';
 import {PlayerMixin} from '@/client/mixins/PlayerMixin';
 import Turmoil from '@/client/components/Turmoil.vue';
 import {playerColorClass} from '@/utils/utils';
+import PlanetaryTracks from '@/client/components/pathfinders/PlanetaryTracks.vue';
 import DynamicTitle from '@/client/components/common/DynamicTitle.vue';
 import SortableCards from '@/client/components/SortableCards.vue';
 import TopBar from '@/client/components/TopBar.vue';
@@ -319,6 +329,7 @@ export default Vue.extend({
     'sortable-cards': SortableCards,
     'top-bar': TopBar,
     MoonBoard,
+    PlanetaryTracks,
     'stacked-cards': StackedCards,
   },
   mixins: [PlayerMixin],

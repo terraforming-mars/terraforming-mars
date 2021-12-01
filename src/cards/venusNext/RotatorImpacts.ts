@@ -5,10 +5,8 @@ import {Player} from '../../Player';
 import {ResourceType} from '../../ResourceType';
 import {OrOptions} from '../../inputs/OrOptions';
 import {SelectOption} from '../../inputs/SelectOption';
-import {MAX_VENUS_SCALE, REDS_RULING_POLICY_COST} from '../../constants';
+import {MAX_VENUS_SCALE} from '../../constants';
 import {CardName} from '../../CardName';
-import {PartyHooks} from '../../turmoil/parties/PartyHooks';
-import {PartyName} from '../../turmoil/parties/PartyName';
 import {SelectHowToPayDeferred} from '../../deferredActions/SelectHowToPayDeferred';
 import {CardRequirements} from '../CardRequirements';
 import {CardRenderer} from '../render/CardRenderer';
@@ -49,11 +47,7 @@ export class RotatorImpacts extends Card implements IActionCard, IResourceCard {
     const venusMaxed = player.game.getVenusScaleLevel() === MAX_VENUS_SCALE;
     const canSpendResource = this.resourceCount > 0 && !venusMaxed;
 
-    if (PartyHooks.shouldApplyPolicy(player, PartyName.REDS) && !venusMaxed) {
-      return player.canAfford(6, {titanium: true}) || (canSpendResource && player.canAfford(REDS_RULING_POLICY_COST));
-    }
-
-    return player.canAfford(6, {titanium: true}) || canSpendResource;
+    return player.canAfford(6, {titanium: true}) || (canSpendResource && player.canAfford(0, {tr: {venus: 1}}));
   }
 
   public action(player: Player) {

@@ -9,10 +9,8 @@ import {Player} from '../../Player';
 import {SelectCard} from '../../inputs/SelectCard';
 import {SelectOption} from '../../inputs/SelectOption';
 import {OrOptions} from '../../inputs/OrOptions';
-import {MAX_TEMPERATURE, REDS_RULING_POLICY_COST} from '../../constants';
+import {MAX_TEMPERATURE} from '../../constants';
 import {LogHelper} from '../../LogHelper';
-import {PartyHooks} from '../../turmoil/parties/PartyHooks';
-import {PartyName} from '../../turmoil/parties/PartyName';
 import {SelectHowToPayDeferred} from '../../deferredActions/SelectHowToPayDeferred';
 import {CardRenderer} from '../render/CardRenderer';
 
@@ -52,11 +50,7 @@ export class DirectedImpactors extends Card implements IActionCard, IProjectCard
       if (player.game.getTemperature() === MAX_TEMPERATURE && cardHasResources) return true;
       if (canPayForAsteroid) return true;
 
-      if (PartyHooks.shouldApplyPolicy(player, PartyName.REDS)) {
-        return player.canAfford(REDS_RULING_POLICY_COST) && cardHasResources;
-      }
-
-      return cardHasResources;
+      return player.canAfford(0, {tr: {temperature: 1}}) && cardHasResources;
     }
 
     public action(player: Player) {
@@ -65,11 +59,10 @@ export class DirectedImpactors extends Card implements IActionCard, IProjectCard
 
       const addResource = new SelectOption('Pay 6 to add 1 asteroid to a card', 'Pay', () => this.addResource(player, asteroidCards));
       const spendResource = new SelectOption('Remove 1 asteroid to raise temperature 1 step', 'Remove asteroid', () => this.spendResource(player));
-      const redsAreRuling = PartyHooks.shouldApplyPolicy(player, PartyName.REDS);
       const temperatureIsMaxed = player.game.getTemperature() === MAX_TEMPERATURE;
 
       if (this.resourceCount > 0) {
-        if (!redsAreRuling || temperatureIsMaxed || (redsAreRuling && player.canAfford(REDS_RULING_POLICY_COST))) {
+        if (!temperatureIsMaxed && player.canAfford(0, {tr: {temperature: 1}})) {
           opts.push(spendResource);
         }
       } else {

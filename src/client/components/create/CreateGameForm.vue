@@ -144,12 +144,12 @@
                                 </div>
                             </template>
 
-                            <!-- <input type="checkbox" name="pathfinders" id="pathfinders-checkbox" v-model="pathfindersExpansion">
+                            <input type="checkbox" name="pathfinders" id="pathfinders-checkbox" v-model="pathfindersExpansion">
                             <label for="pathfinders-checkbox" class="expansion-button">
                                 <div class="create-game-expansion-icon expansion-icon-pathfinders"></div>
                                 <span v-i18n>Pathfinders</span>&nbsp;<a href="https://github.com/bafolts/terraforming-mars/wiki/Pathfinders" class="tooltip" target="_blank">&#9432;</a>
                             </label>
- -->
+
                             <template v-if="venusNext">
                                 <input type="checkbox" v-model="altVenusBoard" id="altVenusBoard-checkbox">
                                 <label for="altVenusBoard-checkbox">
@@ -200,6 +200,26 @@
                             <input type="checkbox" v-model="showTimers" id="timer-checkbox">
                             <label for="timer-checkbox">
                                 <span v-i18n>Show timers</span>
+                            </label>
+
+                            <input type="checkbox" v-model="escapeVelocityMode" id="escapevelocity-checkbox">
+                            <label for="escapevelocity-checkbox">
+                                <div class="create-game-expansion-icon expansion-icon-escape-velocity"></div>
+                                <span v-i18n>Escape Velocity</span>&nbsp;<a href="https://github.com/terraforming-mars/terraforming-mars/wiki/Escape-Velocity" class="tooltip" target="_blank">&#9432;</a>
+                            </label>
+
+                            <label for="escapeThreshold-checkbox" v-show="escapeVelocityMode">
+                              <span v-i18n>After&nbsp;</span>
+                              <input type="number" class="create-game-corporations-count" value="30" step="5" min="0" :max="180" v-model="escapeVelocityThreshold" id="escapeThreshold-checkbox">
+                              <span v-i18n>&nbsp;min</span>
+                            </label>
+
+                            <label for="escapePeriod-checkbox" v-show="escapeVelocityMode">
+                              <span v-i18n>Reduce&nbsp;</span>
+                              <input type="number" class="create-game-corporations-count" value="1" min="1" :max="10" v-model="escapeVelocityPenalty" id="escapePeriod-checkbox">
+                              <span v-i18n>&nbsp;VP every&nbsp;</span>
+                              <input type="number" class="create-game-corporations-count" value="2" min="1" :max="10" v-model="escapeVelocityPeriod" id="escapePeriod-checkbox">
+                              <span v-i18n>&nbsp;min</span>
                             </label>
 
                             <input type="checkbox" v-model="shuffleMapOption" id="shuffleMap-checkbox">
@@ -472,7 +492,7 @@ export interface CreateGameModel {
     aresExtension: boolean;
     politicalAgendasExtension: AgendaStyle;
     moonExpansion: boolean;
-    // pathfindersExpansion: boolean;
+    pathfindersExpansion: boolean;
     undoOption: boolean;
     showTimers: boolean;
     fastModeOption: boolean;
@@ -487,6 +507,10 @@ export interface CreateGameModel {
     moonStandardProjectVariant: boolean;
     altVenusBoard: boolean;
     seededGame: boolean;
+    escapeVelocityMode: boolean;
+    escapeVelocityThreshold: number;
+    escapeVelocityPeriod: number;
+    escapeVelocityPenalty: number;
 }
 
 export interface NewPlayerModel {
@@ -551,7 +575,7 @@ export default Vue.extend({
       aresExtension: false,
       politicalAgendasExtension: AgendaStyle.STANDARD,
       moonExpansion: false,
-      // pathfindersExpansion: false,
+      pathfindersExpansion: false,
       undoOption: false,
       showTimers: true,
       fastModeOption: false,
@@ -566,6 +590,10 @@ export default Vue.extend({
       requiresMoonTrackCompletion: false,
       moonStandardProjectVariant: false,
       altVenusBoard: false,
+      escapeVelocityMode: false,
+      escapeVelocityThreshold: constants.DEFAULT_ESCAPE_VELOCITY_THRESHOLD,
+      escapeVelocityPeriod: constants.DEFAULT_ESCAPE_VELOCITY_PERIOD,
+      escapeVelocityPenalty: constants.DEFAULT_ESCAPE_VELOCITY_PENALTY,
     };
   },
   components: {
@@ -830,7 +858,7 @@ export default Vue.extend({
       const aresExtension = component.aresExtension;
       const politicalAgendasExtension = this.politicalAgendasExtension;
       const moonExpansion = component.moonExpansion;
-      // const pathfindersExpansion = component.pathfindersExpansion;
+      const pathfindersExpansion = component.pathfindersExpansion;
       const undoOption = component.undoOption;
       const showTimers = component.showTimers;
       const fastModeOption = component.fastModeOption;
@@ -841,6 +869,10 @@ export default Vue.extend({
       const beginnerOption = component.beginnerOption;
       const randomFirstPlayer = component.randomFirstPlayer;
       const requiresVenusTrackCompletion = component.requiresVenusTrackCompletion;
+      const escapeVelocityMode = component.escapeVelocityMode;
+      const escapeVelocityThreshold = component.escapeVelocityMode ? component.escapeVelocityThreshold : undefined;
+      const escapeVelocityPeriod = component.escapeVelocityMode ? component.escapeVelocityPeriod : undefined;
+      const escapeVelocityPenalty = component.escapeVelocityMode ? component.escapeVelocityPenalty : undefined;
       let clonedGamedId: undefined | GameId = undefined;
 
       // Check custom colony count
@@ -901,7 +933,7 @@ export default Vue.extend({
         aresExtension: aresExtension,
         politicalAgendasExtension: politicalAgendasExtension,
         moonExpansion: moonExpansion,
-        // pathfindersExpansion: pathfindersExpansion,
+        pathfindersExpansion: pathfindersExpansion,
         undoOption,
         showTimers,
         fastModeOption,
@@ -919,6 +951,10 @@ export default Vue.extend({
         requiresMoonTrackCompletion: component.requiresMoonTrackCompletion,
         moonStandardProjectVariant: component.moonStandardProjectVariant,
         altVenusBoard: component.altVenusBoard,
+        escapeVelocityMode,
+        escapeVelocityThreshold,
+        escapeVelocityPeriod,
+        escapeVelocityPenalty,
       }, undefined, 4);
       return dataToSend;
     },

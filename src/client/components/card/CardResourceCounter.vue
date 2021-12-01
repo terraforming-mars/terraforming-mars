@@ -48,6 +48,8 @@ export default Vue.extend({
         return 'card-resource-data';
       case ResourceType.SYNDICATE_FLEET:
         return 'card-resource-syndicate-fleet';
+      case ResourceType.VENUSIAN_HABITAT:
+        return 'card-resource-venusian-habitat';
       default:
         return '';
       }

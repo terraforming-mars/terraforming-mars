@@ -7,9 +7,6 @@ import {ResourceType} from '../../ResourceType';
 import {SelectOption} from '../../inputs/SelectOption';
 import {OrOptions} from '../../inputs/OrOptions';
 import {IResourceCard} from '../ICard';
-import {PartyHooks} from '../../turmoil/parties/PartyHooks';
-import {PartyName} from '../../turmoil/parties/PartyName';
-import {REDS_RULING_POLICY_COST} from '../../constants';
 import {CardRenderer} from '../render/CardRenderer';
 import {Card} from '../Card';
 
@@ -41,14 +38,13 @@ export class TitanAirScrapping extends Card implements IProjectCard, IResourceCa
   public resourceCount: number = 0;
 
   public canAct(player: Player): boolean {
-    const hasTitanium = player.titanium > 0;
-    const hasResources = this.resourceCount >= 2;
-
-    if (PartyHooks.shouldApplyPolicy(player, PartyName.REDS)) {
-      return hasTitanium || (player.canAfford(REDS_RULING_POLICY_COST) && hasResources);
+    if (player.titanium > 0) {
+      return true;
     }
-
-    return hasTitanium || hasResources;
+    if (this.resourceCount >= 2) {
+      return player.canAfford(0, {tr: {tr: 1}});
+    }
+    return false;
   }
 
   public action(player: Player) {
@@ -57,16 +53,17 @@ export class TitanAirScrapping extends Card implements IProjectCard, IResourceCa
     const addResource = new SelectOption('Spend 1 titanium to add 2 floaters on this card', 'Spend titanium', () => this.addResource(player));
     const spendResource = new SelectOption('Remove 2 floaters on this card to increase your TR 1 step', 'Remove floaters', () => this.spendResource(player));
 
-    if (this.resourceCount >= 2 && player.titanium > 0) {
-      const redsAreRuling = PartyHooks.shouldApplyPolicy(player, PartyName.REDS);
-      if (!redsAreRuling || (redsAreRuling && player.canAfford(REDS_RULING_POLICY_COST))) {
-        opts.push(spendResource);
-      }
+    if (this.resourceCount >= 2 && player.canAfford(0, {tr: {tr: 1}})) {
+      opts.push(spendResource);
+    }
+
+
+    if (player.titanium > 0) {
       opts.push(addResource);
-    } else if (player.titanium > 0) {
-      return this.addResource(player);
-    } else {
-      return this.spendResource(player);
+    }
+
+    if (opts.length === 1) {
+      return opts[0].cb();
     }
 
     return new OrOptions(...opts);

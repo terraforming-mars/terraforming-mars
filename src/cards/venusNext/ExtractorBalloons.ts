@@ -6,9 +6,7 @@ import {ResourceType} from '../../ResourceType';
 import {OrOptions} from '../../inputs/OrOptions';
 import {SelectOption} from '../../inputs/SelectOption';
 import {CardName} from '../../CardName';
-import {MAX_VENUS_SCALE, REDS_RULING_POLICY_COST} from '../../constants';
-import {PartyHooks} from '../../turmoil/parties/PartyHooks';
-import {PartyName} from '../../turmoil/parties/PartyName';
+import {MAX_VENUS_SCALE} from '../../constants';
 import {LogHelper} from '../../LogHelper';
 import {CardRenderer} from '../render/CardRenderer';
 import {Size} from '../render/Size';
@@ -49,8 +47,8 @@ export class ExtractorBalloons extends Card implements IActionCard, IResourceCar
   }
   public action(player: Player) {
     const venusMaxed = player.game.getVenusScaleLevel() === MAX_VENUS_SCALE;
-    const cannotAffordRed = PartyHooks.shouldApplyPolicy(player, PartyName.REDS) && !player.canAfford(REDS_RULING_POLICY_COST);
-    if (this.resourceCount < 2 || venusMaxed || cannotAffordRed) {
+    const canAffordReds = player.canAfford(0, {tr: {venus: 1}});
+    if (this.resourceCount < 2 || venusMaxed || !canAffordReds) {
       player.addResourceTo(this, {log: true});
       return undefined;
     }

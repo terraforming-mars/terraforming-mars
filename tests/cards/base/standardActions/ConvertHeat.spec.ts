@@ -7,6 +7,7 @@ import {TestPlayers} from '../../../TestPlayers';
 import {Game} from '../../../../src/Game';
 import {PoliticalAgendas} from '../../../../src/turmoil/PoliticalAgendas';
 import {Reds} from '../../../../src/turmoil/parties/Reds';
+import {MAX_TEMPERATURE} from '../../../../src/constants';
 
 describe('ConvertHeat', function() {
   let card: ConvertHeat; let player: Player;
@@ -30,6 +31,10 @@ describe('ConvertHeat', function() {
     player.game.turmoil!.rulingParty = new Reds();
     PoliticalAgendas.setNextAgenda(player.game.turmoil!, player.game);
     expect(card.canAct(player)).eq(false);
+    player.megaCredits = 2;
+    expect(card.canAct(player)).eq(false);
+    player.megaCredits = 3;
+    expect(card.canAct(player)).eq(true);
   });
 
   it('Should play', function() {
@@ -37,5 +42,12 @@ describe('ConvertHeat', function() {
     expect(card.canAct(player)).eq(true);
     expect(card.action(player)).eq(undefined);
     expect(player.game.getTemperature()).eq(-28);
+  });
+
+  it('Can not act when maximized', function() {
+    player.heat = 8;
+    expect(card.canAct(player)).eq(true);
+    (player.game as any).temperature = MAX_TEMPERATURE;
+    expect(card.canAct(player)).eq(false);
   });
 });

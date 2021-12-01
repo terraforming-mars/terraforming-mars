@@ -44,7 +44,7 @@ export class CardRenderDynamicVictoryPoints {
     return new CardRenderDynamicVictoryPoints(new CardRenderItem(itemType), points, target);
   }
   public static tag(type: Tags, points: number, target: number): CardRenderDynamicVictoryPoints {
-    const map: any = new Map([
+    const map = new Map<Tags, CardRenderItemType>([
       [Tags.JOVIAN, CardRenderItemType.JOVIAN],
       [Tags.MOON, CardRenderItemType.MOON],
       [Tags.VENUS, CardRenderItemType.VENUS],

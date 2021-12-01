@@ -27,8 +27,12 @@ export class CardRequirements {
   public hasAny(): boolean {
     return this.requirements.some((req) => req.isAny);
   }
-  public hasParty(): boolean {
-    return this.requirements.some((req) => req instanceof PartyCardRequirement);
+  public hasParty(partyName?: PartyName | undefined): boolean {
+    return this.requirements.some((req) => {
+      if (!(req instanceof PartyCardRequirement)) return false;
+      if (partyName === undefined) return true;
+      return req.party === partyName;
+    });
   }
   public hasPlantsRemoved(): boolean {
     return this.requirements.some((req) => req.type === RequirementType.REMOVED_PLANTS);

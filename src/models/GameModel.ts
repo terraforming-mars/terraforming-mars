@@ -8,6 +8,7 @@ import {Phase} from '../Phase';
 import {SpaceModel} from './SpaceModel';
 import {IAresData} from '../ares/IAresData';
 import {MoonModel} from './MoonModel';
+import {PathfindersModel} from './PathfindersModel';
 
 // Common data about a game not assocaited with a player (eg the temperature.)
 export interface GameModel {
@@ -25,9 +26,11 @@ export interface GameModel {
   oceans: number;
   oxygenLevel: number;
   passedPlayers: Array<Color>;
+  pathfinders: PathfindersModel | undefined;
   phase: Phase;
   spaces: Array<SpaceModel>;
   spectatorId?: string;
+  step: number;
   temperature: number;
   isTerraformed: boolean;
   turmoil: TurmoilModel | undefined;

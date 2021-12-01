@@ -3,7 +3,7 @@ import {Player} from '../../src/Player';
 import {Game} from '../../src/Game';
 import {TestPlayers} from '../TestPlayers';
 import {GrantVenusAltTrackBonusDeferred} from '../../src/venusNext/GrantVenusAltTrackBonusDeferred';
-import {AndOptions} from '@/inputs/AndOptions';
+import {AndOptions} from '../../src/inputs/AndOptions';
 
 describe('GrantVenusAltTrackBonusDeferred', function() {
   let player: Player;
@@ -16,10 +16,10 @@ describe('GrantVenusAltTrackBonusDeferred', function() {
   it('grant single bonus', () => {
     const input = new GrantVenusAltTrackBonusDeferred(player, 1, false).execute() as AndOptions;
     input.options[0].cb(0);
-    input.options[0].cb(0);
-    input.options[0].cb(0);
-    input.options[0].cb(0);
-    input.options[0].cb(0);
+    input.options[1].cb(0);
+    input.options[2].cb(0);
+    input.options[3].cb(0);
+    input.options[4].cb(0);
     input.options[5].cb(1);
     input.cb();
     expect(player.megaCredits).eq(0);

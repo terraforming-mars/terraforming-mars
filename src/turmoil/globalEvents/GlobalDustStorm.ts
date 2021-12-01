@@ -24,7 +24,7 @@ export class GlobalDustStorm implements IGlobalEvent {
         if (player.heat > 0) {
           player.deductResource(Resources.HEAT, player.heat, {log: true, from: this.name});
         }
-        const maxedSteelTags = Math.min(5, player.getTagCount(Tags.BUILDING, false, false));
+        const maxedSteelTags = Math.min(5, player.getTagCount(Tags.BUILDING, 'raw'));
         player.deductResource(Resources.MEGACREDITS, 2 * Math.max(0, maxedSteelTags - turmoil.getPlayerInfluence(player)), {log: true, from: this.name});
       });
     }

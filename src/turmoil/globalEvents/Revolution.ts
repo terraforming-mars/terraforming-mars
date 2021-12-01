@@ -66,7 +66,7 @@ export class Revolution implements IGlobalEvent {
       }
     }
     public getScore(player: Player, turmoil: Turmoil) {
-      return player.getTagCount(Tags.EARTH, false, false) + turmoil.getPlayerInfluence(player);
+      return player.getTagCount(Tags.EARTH, 'raw') + turmoil.getPlayerInfluence(player);
     }
     public renderData = RENDER_DATA;
 }

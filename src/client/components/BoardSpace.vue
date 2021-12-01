@@ -43,6 +43,8 @@ const tileTypeToCssClass = new Map<TileType, string>([
   [TileType.EROSION_SEVERE, 'erosion-severe'],
   [TileType.MINING_STEEL_BONUS, 'mining-steel'],
   [TileType.MINING_TITANIUM_BONUS, 'mining-titanium'],
+  // [TileType.WETLANDS, 'mining-titanium'],
+  [TileType.RED_CITY, 'red-city'],
 ]);
 
 const tileTypeToCssClassAresOverride = new Map<TileType, string>([

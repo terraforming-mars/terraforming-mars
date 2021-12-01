@@ -7,9 +7,6 @@ import {ResourceType} from '../../ResourceType';
 import {SelectOption} from '../../inputs/SelectOption';
 import {OrOptions} from '../../inputs/OrOptions';
 import {IProjectCard} from '../IProjectCard';
-import {PartyHooks} from '../../turmoil/parties/PartyHooks';
-import {PartyName} from '../../turmoil/parties/PartyName';
-import {REDS_RULING_POLICY_COST} from '../../constants';
 import {CardType} from '../CardType';
 import {DeferredAction} from '../../deferredActions/DeferredAction';
 import {CardRenderer} from '../render/CardRenderer';
@@ -79,12 +76,11 @@ export class PharmacyUnion extends Card implements CorporationCard {
       const hasScienceTag = card.tags.includes(Tags.SCIENCE);
       const hasMicrobesTag = card.tags.includes(Tags.MICROBE);
       const isPharmacyUnion = player.isCorporation(CardName.PHARMACY_UNION);
-      const redsAreRuling = PartyHooks.shouldApplyPolicy(player, PartyName.REDS);
 
       // Edge case, let player pick order of resolution (see https://github.com/bafolts/terraforming-mars/issues/1286)
       if (isPharmacyUnion && hasScienceTag && hasMicrobesTag && this.resourceCount === 0) {
         // TODO (Lynesth): Modify this when https://github.com/bafolts/terraforming-mars/issues/1670 is fixed
-        if (!redsAreRuling || redsAreRuling && player.canAfford(REDS_RULING_POLICY_COST * 3) === true) {
+        if (player.canAfford(0, {tr: {tr: 3}})) {
           game.defer(new DeferredAction(
             player,
             () => {
@@ -124,7 +120,7 @@ export class PharmacyUnion extends Card implements CorporationCard {
               if (this.isDisabled) return undefined;
 
               if (this.resourceCount > 0) {
-                if (redsAreRuling && player.canAfford(REDS_RULING_POLICY_COST) === false) {
+                if (player.canAfford(0, {tr: {tr: 1}}) === false) {
                   // TODO (Lynesth): Remove this when #1670 is fixed
                   game.log('${0} cannot remove a disease from ${1} to gain 1 TR because of unaffordable Reds policy cost', (b) => b.player(player).card(this));
                 } else {
@@ -135,7 +131,7 @@ export class PharmacyUnion extends Card implements CorporationCard {
                 return undefined;
               }
 
-              if (redsAreRuling && player.canAfford(REDS_RULING_POLICY_COST * 3) === false) {
+              if (player.canAfford(0, {tr: {tr: 3}}) === false) {
                 // TODO (Lynesth): Remove this when #1670 is fixed
                 game.log('${0} cannot turn ${1} face down to gain 3 TR because of unaffordable Reds policy cost', (b) => b.player(player).card(this));
                 return undefined;

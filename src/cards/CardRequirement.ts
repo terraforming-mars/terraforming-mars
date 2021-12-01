@@ -11,11 +11,57 @@ import {Turmoil} from '../turmoil/Turmoil';
 import {Options} from './CardRequirements';
 
 export class CardRequirement {
-  public readonly isMax: boolean;
-  public readonly isAny: boolean;
+  public readonly isMax: boolean = false;
+  public readonly isAny: boolean = false;
+
   constructor(public readonly type: RequirementType, public amount: number = 1, options?: Options) {
     this.isMax = options?.max ?? false;
     this.isAny = options?.all ?? false;
+  }
+
+  private amountToString(): string {
+    if (this.type === RequirementType.OXYGEN || this.type === RequirementType.VENUS) {
+      return `${this.amount}%`;
+    } else if (this.type === RequirementType.TEMPERATURE) {
+      return `${this.amount}°`;
+    } else {
+      return (this.amount !== 1 || this.isMax) ? this.amount.toString() : '';
+    }
+  }
+
+  protected parseType(): string {
+    const withPlural: Array<string> = [RequirementType.OCEANS, RequirementType.FLOATERS, RequirementType.GREENERIES, RequirementType.CITIES, RequirementType.COLONIES, RequirementType.RESOURCE_TYPES, RequirementType.PARTY_LEADERS];
+
+    if (this.amount > 1 && withPlural.includes(this.type)) {
+      return this.getTypePlural();
+    }
+
+    return this.type;
+  }
+
+  // TODO (chosta): add to a top level class - preferrably translatable
+  public getTypePlural(): string {
+    if (this.type === RequirementType.CITIES) {
+      return 'Cities';
+    } else if (this.type === RequirementType.COLONIES) {
+      return 'Colonies';
+    } else if (this.type === RequirementType.GREENERIES) {
+      return 'Greeneries';
+    } else {
+      return `${this.type}s`;
+    }
+  }
+
+  public getLabel(): string {
+    let result: string = this.isMax ? 'max ' : '';
+    const amount = this.amountToString();
+    if (amount !== '') {
+      result += amount;
+      result += ' ';
+    }
+    result += this.parseType();
+
+    return result;
   }
 
   protected satisfiesInequality(calculated: number) : boolean {
@@ -160,14 +206,14 @@ export class TagCardRequirement extends CardRequirement {
   }
 
   public satisfies(player: Player): boolean {
-    const includeWildTags = this.isMax !== true;
-    let tagCount = player.getTagCount(this.tag, false, includeWildTags);
+    const mode = this.isMax !== true ? 'default' : 'raw';
+    let tagCount = player.getTagCount(this.tag, mode);
 
     if (this.isAny) {
       player.game.getPlayers().forEach((p) => {
         if (p.id !== player.id) {
           // Don't include opponents' wild tags because they are not performing the action.
-          tagCount += p.getTagCount(this.tag, false, false);
+          tagCount += p.getTagCount(this.tag, 'raw');
         }
       });
     }
@@ -189,7 +235,7 @@ export class ProductionCardRequirement extends CardRequirement {
 }
 
 export class PartyCardRequirement extends CardRequirement {
-  constructor(public party: PartyName) {
+  constructor(public readonly party: PartyName) {
     super(RequirementType.PARTY);
   }
   public satisfies(player: Player): boolean {

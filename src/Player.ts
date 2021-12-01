@@ -71,6 +71,7 @@ import {UndoActionOption} from './inputs/UndoActionOption';
 import {LawSuit} from './cards/promo/LawSuit';
 import {CrashSiteCleanup} from './cards/promo/CrashSiteCleanup';
 import {Turmoil} from './turmoil/Turmoil';
+import {PathfindersExpansion} from './pathfinders/PathfindersExpansion';
 import {deserializeProjectCard, serializeProjectCard} from './cards/CardSerialization';
 
 export type PlayerId = string;
@@ -157,6 +158,9 @@ export class Player implements ISerializable<SerializedPlayer> {
   // removedFromPlayCards is a bit of a misname: it's a temporary storage for
   // cards that provide 'next card' discounts. This will clear between turns.
   public removedFromPlayCards: Array<IProjectCard> = [];
+
+  // Stats
+  public actionsTakenThisGame: number = 0;
 
   constructor(
     public name: string,
@@ -578,6 +582,24 @@ export class Player implements ISerializable<SerializedPlayer> {
     }
 
     MoonExpansion.calculateVictoryPoints(this, victoryPointsBreakdown);
+    PathfindersExpansion.calculateVictoryPoints(this, victoryPointsBreakdown);
+
+    // Escape velocity VP penalty
+    if (this.game.gameOptions.escapeVelocityMode) {
+      const threshold = this.game.gameOptions.escapeVelocityThreshold;
+      const period = this.game.gameOptions.escapeVelocityPeriod;
+      const penaltyPerMin = this.game.gameOptions.escapeVelocityPenalty ?? 1;
+      const elapsedTimeInMinutes = this.timer.getElapsedTimeInMinutes();
+      if (threshold !== undefined && period !== undefined && elapsedTimeInMinutes > threshold) {
+        const overTimeInMinutes = Math.max(elapsedTimeInMinutes - threshold - (this.actionsTakenThisGame * (constants.BONUS_SECONDS_PER_ACTION / 60)), 0);
+        // Don't lose more VP than what is available
+        victoryPointsBreakdown.updateTotal();
+
+        const totalBeforeEscapeVelocity = victoryPointsBreakdown.total;
+        const penaltyTotal = Math.min(penaltyPerMin * Math.floor(overTimeInMinutes / period), totalBeforeEscapeVelocity);
+        victoryPointsBreakdown.setVictoryPoints('escapeVelocity', -penaltyTotal, 'Escape Velocity Penalty');
+      }
+    }
 
     victoryPointsBreakdown.updateTotal();
     return victoryPointsBreakdown;
@@ -600,7 +622,7 @@ export class Player implements ISerializable<SerializedPlayer> {
     return this.cardIsInEffect(CardName.LUNAR_SECURITY_STATIONS);
   }
 
-  public megaCreditsAreProtected(): boolean {
+  public productionIsProtected(): boolean {
     return this.cardIsInEffect(CardName.PRIVATE_SECURITY);
   }
 
@@ -767,24 +789,70 @@ export class Player implements ISerializable<SerializedPlayer> {
 
   public getAllTags(): Array<ITagCount> {
     return [
-      {tag: Tags.BUILDING, count: this.getTagCount(Tags.BUILDING, false, false)},
-      {tag: Tags.CITY, count: this.getTagCount(Tags.CITY, false, false)},
-      {tag: Tags.EARTH, count: this.getTagCount(Tags.EARTH, false, false)},
-      {tag: Tags.ENERGY, count: this.getTagCount(Tags.ENERGY, false, false)},
-      {tag: Tags.JOVIAN, count: this.getTagCount(Tags.JOVIAN, false, false)},
-      {tag: Tags.MICROBE, count: this.getTagCount(Tags.MICROBE, false, false)},
-      {tag: Tags.MOON, count: this.getTagCount(Tags.MOON, false, false)},
-      {tag: Tags.PLANT, count: this.getTagCount(Tags.PLANT, false, false)},
-      {tag: Tags.SCIENCE, count: this.getTagCount(Tags.SCIENCE, false, false)},
-      {tag: Tags.SPACE, count: this.getTagCount(Tags.SPACE, false, false)},
-      {tag: Tags.VENUS, count: this.getTagCount(Tags.VENUS, false, false)},
-      {tag: Tags.WILDCARD, count: this.getTagCount(Tags.WILDCARD, false, false)},
-      {tag: Tags.ANIMAL, count: this.getTagCount(Tags.ANIMAL, false, false)},
+      {tag: Tags.BUILDING, count: this.getTagCount(Tags.BUILDING, 'raw')},
+      {tag: Tags.CITY, count: this.getTagCount(Tags.CITY, 'raw')},
+      {tag: Tags.EARTH, count: this.getTagCount(Tags.EARTH, 'raw')},
+      {tag: Tags.ENERGY, count: this.getTagCount(Tags.ENERGY, 'raw')},
+      {tag: Tags.JOVIAN, count: this.getTagCount(Tags.JOVIAN, 'raw')},
+      {tag: Tags.MICROBE, count: this.getTagCount(Tags.MICROBE, 'raw')},
+      {tag: Tags.MOON, count: this.getTagCount(Tags.MOON, 'raw')},
+      {tag: Tags.PLANT, count: this.getTagCount(Tags.PLANT, 'raw')},
+      {tag: Tags.SCIENCE, count: this.getTagCount(Tags.SCIENCE, 'raw')},
+      {tag: Tags.SPACE, count: this.getTagCount(Tags.SPACE, 'raw')},
+      {tag: Tags.VENUS, count: this.getTagCount(Tags.VENUS, 'raw')},
+      {tag: Tags.WILDCARD, count: this.getTagCount(Tags.WILDCARD, 'raw')},
+      {tag: Tags.ANIMAL, count: this.getTagCount(Tags.ANIMAL, 'raw')},
       {tag: Tags.EVENT, count: this.getPlayedEventsCount()},
     ].filter((tag) => tag.count > 0);
   }
 
-  public getTagCount(tag: Tags, includeEventsTags:boolean = false, includeTagSubstitutions:boolean = true): number {
+  /*
+   * Get the number of tags a player has, depending on certain conditions.
+   *
+   * 'raw': count face-up tags literally, including Leavitt Station.
+   * 'default': Same as raw, but include the wild tags.
+   * 'milestone': Same as raw with special conditions for milestones (Chimera)
+   * 'award': Same as raw with special conditions for awards (Chimera)
+   * 'vps': Same as raw, but include event tags.
+   */
+  public getTagCount(tag: Tags, mode: 'default' | 'raw' | 'milestone' | 'award' | 'vps' = 'default') {
+    const includeEvents = mode === 'vps';
+    const includeTagSubstitutions = (mode === 'default' || mode ==='milestone');
+
+    let tagCount = this.getRawTagCount(tag, includeEvents);
+
+    // Leavitt Station hook
+    if (tag === Tags.SCIENCE && this.scienceTagCount > 0) {
+      tagCount += this.scienceTagCount;
+    }
+
+
+    if (includeTagSubstitutions) {
+      // Earth Embassy hook
+      if (tag === Tags.EARTH && this.playedCards.some((c) => c.name === CardName.EARTH_EMBASSY)) {
+        tagCount += this.getRawTagCount(Tags.MOON, includeEvents);
+      }
+      if (tag !== Tags.WILDCARD) {
+        tagCount += this.getRawTagCount(Tags.WILDCARD, includeEvents);
+      }
+    }
+
+    // Chimera hook
+    if (this.corporationCard?.name === CardName.CHIMERA) {
+      // Milestones don't count wild tags, so in this case one will be added.
+      if (mode === 'award') {
+        tagCount++;
+      };
+      // Milestones count wild tags, so in this case one will be deducted.
+      if (mode === 'milestone') {
+        tagCount--;
+      }
+    }
+    return tagCount;
+  }
+
+  // Counts the tags in the player's play area only.
+  public getRawTagCount(tag: Tags, includeEventsTags: boolean) {
     let tagCount = 0;
 
     this.playedCards.forEach((card: IProjectCard) => {
@@ -797,22 +865,6 @@ export class Player implements ISerializable<SerializedPlayer> {
         (cardTag) => cardTag === tag,
       ).length;
     }
-
-    // Leavitt Station hook
-    if (tag === Tags.SCIENCE && this.scienceTagCount > 0) {
-      tagCount += this.scienceTagCount;
-    }
-
-    if (includeTagSubstitutions) {
-      // Earth Embassy hook
-      if (tag === Tags.EARTH && this.playedCards.some((c) => c.name === CardName.EARTH_EMBASSY)) {
-        tagCount += this.getTagCount(Tags.MOON, includeEventsTags, false);
-      }
-      if (tag !== Tags.WILDCARD) {
-        tagCount += this.getTagCount(Tags.WILDCARD, includeEventsTags, false);
-      }
-    } else {
-    }
     return tagCount;
   }
 
@@ -821,9 +873,9 @@ export class Player implements ISerializable<SerializedPlayer> {
   public getMultipleTagCount(tags: Array<Tags>): number {
     let tagCount = 0;
     tags.forEach((tag) => {
-      tagCount += this.getTagCount(tag, false, false);
+      tagCount += this.getRawTagCount(tag, false);
     });
-    return tagCount + this.getTagCount(Tags.WILDCARD);
+    return tagCount + this.getRawTagCount(Tags.WILDCARD, false);
   }
 
   // TODO(kberg): Describe this function.
@@ -866,7 +918,7 @@ export class Player implements ISerializable<SerializedPlayer> {
   public checkMultipleTagPresence(tags: Array<Tags>): boolean {
     let distinctCount = 0;
     tags.forEach((tag) => {
-      if (this.getTagCount(tag, false, false) > 0) {
+      if (this.getTagCount(tag, 'raw') > 0) {
         distinctCount++;
       } else if (tag === Tags.SCIENCE && this.hasTurmoilScienceTagBonus) {
         distinctCount++;
@@ -2000,16 +2052,21 @@ export class Player implements ISerializable<SerializedPlayer> {
         this.passOption(),
       );
       this.setWaitingFor(initialActionOrPass, () => {
-        this.actionsTakenThisRound++;
+        this.incrementActionsTaken();
         this.takeAction();
       });
       return;
     }
 
     this.setWaitingFor(this.getActions(), () => {
-      this.actionsTakenThisRound++;
+      this.incrementActionsTaken();
       this.takeAction();
     });
+  }
+
+  private incrementActionsTaken(): void {
+    this.actionsTakenThisRound++;
+    this.actionsTakenThisGame++;
   }
 
   // Return possible mid-game actions like play a card and fund an award, but no play prelude card.
@@ -2245,6 +2302,8 @@ export class Player implements ISerializable<SerializedPlayer> {
       beginner: this.beginner,
       handicap: this.handicap,
       timer: this.timer.serialize(),
+      // Stats
+      actionsTakenThisGame: this.actionsTakenThisGame,
     };
     if (this.lastCardPlayed !== undefined) {
       result.lastCardPlayed = this.lastCardPlayed;
@@ -2256,6 +2315,8 @@ export class Player implements ISerializable<SerializedPlayer> {
     const player = new Player(d.name, d.color, d.beginner, Number(d.handicap), d.id);
     const cardFinder = new CardFinder();
 
+    // TODO: Remove ?? operator after 01-01-2022
+    player.actionsTakenThisGame = d.actionsTakenThisGame ?? 0;
     player.actionsTakenThisRound = d.actionsTakenThisRound;
     player.canUseHeatAsMegaCredits = d.canUseHeatAsMegaCredits;
     player.cardCost = d.cardCost;

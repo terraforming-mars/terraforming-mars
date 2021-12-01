@@ -34,9 +34,9 @@ class GreensBonus01 implements Bonus {
   description: string = 'Gain 1 M€ for each Plant, Microbe and Animal tag you have';
 
   getScore(player: Player) {
-    return player.getTagCount(Tags.PLANT, false, false) +
-      player.getTagCount(Tags.MICROBE, false, false) +
-      player.getTagCount(Tags.ANIMAL, false, false);
+    return player.getTagCount(Tags.PLANT, 'raw') +
+      player.getTagCount(Tags.MICROBE, 'raw') +
+      player.getTagCount(Tags.ANIMAL, 'raw');
   }
 
   grant(game: Game) {

@@ -9,15 +9,18 @@ const fs = require('fs');
 const dbFolder = path.resolve(process.cwd(), './db');
 const dbPath = path.resolve(dbFolder, 'game.db');
 
-export class SQLite implements IDatabase {
-  private db: sqlite3.Database;
+export const IN_MEMORY_SQLITE_PATH = ':memory:';
 
-  constructor() {
-    // Create the table that will store every saves if not exists
-    if (!fs.existsSync(dbFolder)) {
-      fs.mkdirSync(dbFolder);
+export class SQLite implements IDatabase {
+  protected db: sqlite3.Database;
+
+  constructor(filename: string = dbPath, private throwQuietFailures: boolean = false) {
+    if (filename !== IN_MEMORY_SQLITE_PATH) {
+      if (!fs.existsSync(dbFolder)) {
+        fs.mkdirSync(dbFolder);
+      }
     }
-    this.db = new sqlite3.Database(dbPath);
+    this.db = new sqlite3.Database(filename);
   }
 
   initialize(): Promise<void> {
@@ -32,7 +35,19 @@ export class SQLite implements IDatabase {
             reject(err2);
             return;
           }
-          resolve();
+          this.db.run(`
+          CREATE TABLE IF NOT EXISTS purges(
+            game_id varchar not null,
+            last_save_id number not null,
+            completed_time timestamp not null default (strftime('%s', 'now')),
+            PRIMARY KEY (game_id)
+          )`, (err3) => {
+            if (err3) {
+              reject(err3);
+              return;
+            }
+            resolve();
+          });
         });
       });
     });
@@ -83,7 +98,8 @@ export class SQLite implements IDatabase {
         return cb(err ?? undefined, json);
       } catch (exception) {
         console.error(`unable to load game ${game_id} at save point 0`, exception);
-        cb(exception, undefined);
+        const error = exception instanceof Error ? exception : new Error(String(exception));
+        cb(error, undefined);
         return;
       }
     });
@@ -132,6 +148,8 @@ export class SQLite implements IDatabase {
   }
 
   cleanSaves(game_id: GameId, save_id: number): void {
+    // Purges isn't used yet
+    this.runQuietly('INSERT into purges (game_id, last_save_id) values (?, ?)', [game_id, save_id]);
     // DELETE all saves except initial and last one
     this.db.run('DELETE FROM games WHERE game_id = ? AND save_id < ? AND save_id > 0', [game_id, save_id], function(err: Error | null) {
       if (err) {
@@ -150,11 +168,7 @@ export class SQLite implements IDatabase {
   purgeUnfinishedGames(): void {
     // Purge unfinished games older than MAX_GAME_DAYS days. If this .env variable is not present, unfinished games will not be purged.
     if (process.env.MAX_GAME_DAYS) {
-      this.db.run(`DELETE FROM games WHERE created_time < strftime('%s',date('now', '-' || ? || ' day')) and status = 'running'`, [process.env.MAX_GAME_DAYS], function(err: Error | null) {
-        if (err) {
-          return console.warn(err.message);
-        }
-      });
+      this.runQuietly(`DELETE FROM games WHERE created_time < strftime('%s',date('now', '-' || ? || ' day')) and status = 'running'`, [process.env.MAX_GAME_DAYS]);
     }
   }
 
@@ -170,25 +184,19 @@ export class SQLite implements IDatabase {
         const json = JSON.parse(row.game);
         const game = Game.deserialize(json);
         cb(undefined, game);
-      } catch (err) {
-        cb(err, undefined);
+      } catch (e) {
+        const error = e instanceof Error ? e : new Error(String(e));
+        cb(error, undefined);
       }
     });
   }
 
-  saveGame(game: Game): void {
+  async saveGame(game: Game): Promise<void> {
     const gameJSON = game.toJSON();
     // Insert
-    this.db.run(
+    await this.runQuietly(
       'INSERT INTO games (game_id, save_id, game, players) VALUES (?, ?, ?, ?) ON CONFLICT (game_id, save_id) DO UPDATE SET game = ?',
-      [game.id, game.lastSaveId, gameJSON, game.getPlayers().length, gameJSON],
-      (err: Error | null) => {
-        if (err) {
-          console.error(err.message);
-          return;
-        }
-      },
-    );
+      [game.id, game.lastSaveId, gameJSON, game.getPlayers().length, gameJSON]);
 
     // This must occur after the save.
     game.lastSaveId++;
@@ -196,11 +204,28 @@ export class SQLite implements IDatabase {
 
   deleteGameNbrSaves(game_id: GameId, rollbackCount: number): void {
     if (rollbackCount > 0) {
-      this.db.run('DELETE FROM games WHERE rowid IN (SELECT rowid FROM games WHERE game_id = ? ORDER BY save_id DESC LIMIT ?)', [game_id, rollbackCount], function(err: Error | null) {
-        if (err) {
-          return console.warn(err.message);
-        }
-      });
+      this.runQuietly('DELETE FROM games WHERE rowid IN (SELECT rowid FROM games WHERE game_id = ? ORDER BY save_id DESC LIMIT ?)', [game_id, rollbackCount]);
     }
+  }
+
+  // Run the given SQL but do not return errors.
+  runQuietly(sql: string, params: any): Promise<void> {
+    return new Promise((resolve, reject) => {
+      this.db.run(
+        sql, params,
+        (err: Error | null) => {
+          if (err) {
+            console.error(err);
+            console.error('for sql: ' + sql);
+            if (this.throwQuietFailures) {
+              reject(err);
+              return;
+            }
+          } else {
+            resolve();
+          }
+        },
+      );
+    });
   }
 }

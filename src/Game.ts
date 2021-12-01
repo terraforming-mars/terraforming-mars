@@ -121,6 +121,10 @@ export interface GameOptions {
   requiresVenusTrackCompletion: boolean; // Venus must be completed to end the game
   moonStandardProjectVariant: boolean;
   altVenusBoard: boolean;
+  escapeVelocityMode: boolean;
+  escapeVelocityThreshold?: number;
+  escapeVelocityPeriod?: number;
+  escapeVelocityPenalty?: number;
 }
 
 export const DEFAULT_GAME_OPTIONS: GameOptions = {
@@ -136,6 +140,10 @@ export const DEFAULT_GAME_OPTIONS: GameOptions = {
   customColoniesList: [],
   customCorporationsList: [],
   draftVariant: false,
+  escapeVelocityMode: false, // When true, escape velocity is enabled.
+  escapeVelocityThreshold: constants.DEFAULT_ESCAPE_VELOCITY_THRESHOLD, // Time in minutes a player has to complete a game.
+  escapeVelocityPeriod: constants.DEFAULT_ESCAPE_VELOCITY_PERIOD, // VP a player loses for every `escapeVelocityPenalty` minutes after `escapeVelocityThreshold`.
+  escapeVelocityPenalty: constants.DEFAULT_ESCAPE_VELOCITY_PENALTY,
   fastModeOption: false,
   includeVenusMA: true,
   initialDraftVariant: false,
@@ -414,7 +422,7 @@ export class Game implements ISerializable<SerializedGame> {
   public serialize(): SerializedGame {
     const result: SerializedGame = {
       activePlayer: this.activePlayer,
-      awards: this.awards,
+      awards: this.awards.map((a) => a.name),
       board: this.board.serialize(),
       claimedMilestones: serializeClaimedMilestones(this.claimedMilestones),
       colonies: this.colonies,
@@ -433,7 +441,7 @@ export class Game implements ISerializable<SerializedGame> {
       id: this.id,
       initialDraftIteration: this.initialDraftIteration,
       lastSaveId: this.lastSaveId,
-      milestones: this.milestones,
+      milestones: this.milestones.map((m) => m.name),
       monsInsuranceOwner: this.monsInsuranceOwner,
       moonData: IMoonData.serialize(this.moonData),
       oxygenLevel: this.oxygenLevel,
@@ -1349,10 +1357,7 @@ export class Game implements ISerializable<SerializedGame> {
     // Part 5. Collect the bonuses
     if (this.phase !== Phase.SOLAR) {
       if (!coveringExistingTile) {
-        const bonuses = new Multiset(space.bonus);
-        bonuses.entries().forEach(([bonus, count]) => {
-          this.grantSpaceBonus(player, bonus, count);
-        });
+        this.grantSpaceBonuses(player, space);
       }
 
       this.board.getAdjacentSpaces(space).forEach((adjacentSpace) => {
@@ -1390,6 +1395,13 @@ export class Game implements ISerializable<SerializedGame> {
     space.tile = tile;
     space.player = tile.tileType !== TileType.OCEAN ? player : undefined;
     LogHelper.logTilePlacement(player, space, tile.tileType);
+  }
+
+  public grantSpaceBonuses(player: Player, space: ISpace) {
+    const bonuses = new Multiset(space.bonus);
+    bonuses.entries().forEach(([bonus, count]) => {
+      this.grantSpaceBonus(player, bonus, count);
+    });
   }
 
   public grantSpaceBonus(player: Player, spaceBonus: SpaceBonus, count: number = 1) {
@@ -1579,24 +1591,24 @@ export class Game implements ISerializable<SerializedGame> {
     game.spectatorId = d.spectatorId;
 
     const milestones: Array<IMilestone> = [];
-    d.milestones.forEach((element: IMilestone) => {
-      ALL_MILESTONES.forEach((ms: IMilestone) => {
-        if (ms.name === element.name) {
-          milestones.push(ms);
-        }
-      });
+    d.milestones.forEach((element: IMilestone | string) => {
+      const milestoneName = typeof element === 'string' ? element : element.name;
+      const foundMilestone = ALL_MILESTONES.find((milestone) => milestone.name === milestoneName);
+      if (foundMilestone !== undefined) {
+        milestones.push(foundMilestone);
+      }
     });
 
     game.milestones = milestones;
     game.claimedMilestones = deserializeClaimedMilestones(d.claimedMilestones, players, milestones);
 
     const awards: Array<IAward> = [];
-    d.awards.forEach((element: IAward) => {
-      ALL_AWARDS.forEach((award: IAward) => {
-        if (award.name === element.name) {
-          awards.push(award);
-        }
-      });
+    d.awards.forEach((element: IAward | string) => {
+      const awardName = typeof element === 'string' ? element : element.name;
+      const foundAward = ALL_AWARDS.find((award) => award.name === awardName);
+      if (foundAward !== undefined) {
+        awards.push(foundAward);
+      }
     });
 
     game.awards = awards;

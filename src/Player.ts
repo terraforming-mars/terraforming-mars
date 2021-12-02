@@ -48,7 +48,7 @@ import {SerializedPlayer} from './SerializedPlayer';
 import {SpaceType} from './SpaceType';
 import {StormCraftIncorporated} from './cards/colonies/StormCraftIncorporated';
 import {Tags} from './cards/Tags';
-import {TileType} from './TileType';
+import {CITY_TILES, TileType} from './TileType';
 import {VictoryPointsBreakdown} from './VictoryPointsBreakdown';
 import {SelectProductionToLose} from './inputs/SelectProductionToLose';
 import {IAresGlobalParametersResponse, ShiftAresGlobalParameters} from './inputs/ShiftAresGlobalParameters';
@@ -626,13 +626,9 @@ export class Player implements ISerializable<SerializedPlayer> {
     return this.cardIsInEffect(CardName.PRIVATE_SECURITY);
   }
 
-  // TODO(kberg): counting cities on the board is done in 3 different places, consolidate.
-  // Search for uses of TileType.OCEAN_CITY for reference.
   public getCitiesCount() {
-    const game = this.game;
-    return game.getSpaceCount(TileType.CITY, this) +
-        game.getSpaceCount(TileType.CAPITAL, this) +
-        game.getSpaceCount(TileType.OCEAN_CITY, this);
+    return Array.from(CITY_TILES).map((tileType) => this.game.getSpaceCount(tileType, this))
+      .reduce((previous, current) => previous + current, 0);
   }
 
   // Return the number of cards in the player's hand without tags.
@@ -795,6 +791,7 @@ export class Player implements ISerializable<SerializedPlayer> {
       {tag: Tags.ENERGY, count: this.getTagCount(Tags.ENERGY, 'raw')},
       {tag: Tags.JOVIAN, count: this.getTagCount(Tags.JOVIAN, 'raw')},
       {tag: Tags.MICROBE, count: this.getTagCount(Tags.MICROBE, 'raw')},
+      {tag: Tags.MARS, count: this.getTagCount(Tags.MARS, 'raw')},
       {tag: Tags.MOON, count: this.getTagCount(Tags.MOON, 'raw')},
       {tag: Tags.PLANT, count: this.getTagCount(Tags.PLANT, 'raw')},
       {tag: Tags.SCIENCE, count: this.getTagCount(Tags.SCIENCE, 'raw')},

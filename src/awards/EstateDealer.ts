@@ -1,6 +1,6 @@
 import {IAward} from './IAward';
 import {Player} from '../Player';
-import {isAresTile} from '../TileType';
+import {isHazardTileType} from '../TileType';
 import {Board} from '../boards/Board';
 
 export class EstateDealer implements IAward {
@@ -10,7 +10,7 @@ export class EstateDealer implements IAward {
       return player.game.board.spaces.filter((space) =>
         space.player === player &&
         space.tile !== undefined &&
-        isAresTile(space.tile.tileType) === false &&
+        isHazardTileType(space.tile.tileType) === false &&
         player.game.board.getAdjacentSpaces(space).some((space) => Board.isOceanSpace(space)),
       ).length;
     }

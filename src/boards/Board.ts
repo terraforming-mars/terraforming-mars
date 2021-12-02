@@ -1,7 +1,7 @@
 import {ISpace, SpaceId} from './ISpace';
 import {Player, PlayerId} from '../Player';
 import {SpaceType} from '../SpaceType';
-import {TileType} from '../TileType';
+import {CITY_TILES, OCEAN_TILES, TileType} from '../TileType';
 import {AresHandler} from '../ares/AresHandler';
 import {SerializedBoard, SerializedSpace} from './SerializedBoard';
 
@@ -228,13 +228,11 @@ export abstract class Board {
   }
 
   public static isCitySpace(space: ISpace): boolean {
-    const cityTileTypes = [TileType.CITY, TileType.CAPITAL, TileType.OCEAN_CITY];
-    return space.tile !== undefined && cityTileTypes.includes(space.tile.tileType);
+    return space.tile !== undefined && CITY_TILES.has(space.tile.tileType);
   }
 
   public static isOceanSpace(space: ISpace): boolean {
-    const oceanTileTypes = [TileType.OCEAN, TileType.OCEAN_CITY, TileType.OCEAN_FARM, TileType.OCEAN_SANCTUARY];
-    return space.tile !== undefined && oceanTileTypes.includes(space.tile.tileType);
+    return space.tile !== undefined && OCEAN_TILES.has(space.tile.tileType);
   }
 
   public serialize(): SerializedBoard {

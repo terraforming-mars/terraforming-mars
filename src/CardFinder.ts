@@ -15,6 +15,7 @@ import {ARES_CARD_MANIFEST} from './cards/ares/AresCardManifest';
 import {MOON_CARD_MANIFEST} from './cards/moon/MoonCardManifest';
 import {Deck} from './Deck';
 import {PATHFINDERS_CARD_MANIFEST} from './cards/pathfinders/PathfindersCardManifest';
+import {PreludeCard} from './cards/prelude/PreludeCard';
 
 export class CardFinder {
     private static decks: undefined | Array<CardManifest>;
@@ -63,6 +64,10 @@ export class CardFinder {
     //              another function, perhaps?
     public getProjectCardByName(cardName: CardName): IProjectCard | undefined {
       return this.getCardByName(cardName, (manifest) => [manifest.projectCards, manifest.preludeCards]);
+    }
+
+    public getPreludeByName(cardName: CardName): PreludeCard | undefined {
+      return this.getCardByName(cardName, (manifest) => [manifest.preludeCards]);
     }
 
     public cardsFromJSON(cards: Array<ICard | CardName>): Array<IProjectCard> {

@@ -22,6 +22,8 @@ export class BasicInfrastructure extends PreludeCard {
     });
   };
 
+  public tilesBuilt = [TileType.MOON_ROAD];
+
   public play(player: Player) {
     player.game.defer(new PlaceMoonRoadTile(player));
     player.increaseFleetSize();

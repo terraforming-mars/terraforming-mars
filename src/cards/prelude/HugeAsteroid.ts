@@ -9,6 +9,8 @@ export class HugeAsteroid extends PreludeCard {
     super({
       name: CardName.HUGE_ASTEROID,
 
+      startingMegacredits: -5,
+
       metadata: {
         cardNumber: 'P15',
         renderData: CardRenderer.builder((b) => {

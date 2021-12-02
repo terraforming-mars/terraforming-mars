@@ -12,6 +12,7 @@ interface StaticPreludeProperties {
     metadata: ICardMetadata;
     name: CardName;
     tags?: Array<Tags>;
+    startingMegacredits?: number;
     productionBox?: Units;
 }
 
@@ -23,6 +24,7 @@ export abstract class PreludeCard extends Card implements IProjectCard {
       tags: properties.tags,
       metadata: properties.metadata,
       productionBox: properties.productionBox,
+      startingMegaCredits: properties.startingMegacredits,
     });
   }
   public abstract play(player: Player): PlayerInput | undefined;

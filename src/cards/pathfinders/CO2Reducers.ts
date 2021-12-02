@@ -2,14 +2,15 @@ import {Player} from '../../Player';
 import {PreludeCard} from '../prelude/PreludeCard';
 import {CardName} from '../../CardName';
 import {CardRenderer} from '../render/CardRenderer';
-import {Resources} from '../../Resources';
 import {Tags} from '../Tags';
+import {Units} from '../../Units';
 
 export class CO2Reducers extends PreludeCard {
   constructor() {
     super({
       name: CardName.CO2_REDUCERS,
       tags: [Tags.MICROBE, Tags.VENUS],
+      productionBox: Units.of({megacredits: 3}),
 
       metadata: {
         cardNumber: '',
@@ -22,7 +23,7 @@ export class CO2Reducers extends PreludeCard {
     });
   }
   public play(player: Player) {
-    player.addProduction(Resources.MEGACREDITS, 3);
+    player.adjustProduction(this.productionBox);
     player.drawCard(2, {tag: Tags.MICROBE});
     return undefined;
   }

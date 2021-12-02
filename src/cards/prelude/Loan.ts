@@ -10,6 +10,8 @@ export class Loan extends PreludeCard implements IProjectCard {
     super({
       name: CardName.LOAN,
 
+      startingMegacredits: 30,
+
       metadata: {
         cardNumber: 'P17',
         renderData: CardRenderer.builder((b) => {

@@ -1,15 +1,16 @@
 import {Player} from '../../Player';
 import {PreludeCard} from './PreludeCard';
 import {IProjectCard} from '../IProjectCard';
-import {Resources} from '../../Resources';
 import {CardName} from '../../CardName';
 import {CardRenderer} from '../render/CardRenderer';
+import {Units} from '../../Units';
 
 export class MetalsCompany extends PreludeCard implements IProjectCard {
   constructor() {
     super({
       name: CardName.METALS_COMPANY,
 
+      productionBox: Units.of({megacredits: 1, steel: 1, titanium: 1}),
       metadata: {
         cardNumber: 'P20',
         renderData: CardRenderer.builder((b) => {
@@ -20,9 +21,7 @@ export class MetalsCompany extends PreludeCard implements IProjectCard {
     });
   }
   public play(player: Player) {
-    player.addProduction(Resources.MEGACREDITS, 1);
-    player.addProduction(Resources.TITANIUM, 1);
-    player.addProduction(Resources.STEEL, 1);
+    player.adjustProduction(this.productionBox);
     return undefined;
   }
 }

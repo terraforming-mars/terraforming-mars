@@ -14,6 +14,7 @@ export class ValuableGases extends PreludeCard implements IProjectCard {
     super({
       name: CardName.VALUABLE_GASES,
       tags: [Tags.JOVIAN, Tags.VENUS],
+      startingMegacredits: 6,
 
       metadata: {
         cardNumber: 'Y06',

@@ -61,7 +61,7 @@ describe('CardLoader', function() {
     const turmoilPreludes: Array<CardName> = [];
     COMMUNITY_CARD_MANIFEST.preludeCards.factories.forEach((cf) => turmoilPreludes.push(cf.cardName));
     turmoilPreludes.forEach((preludeName) => {
-      const preludeCard = new CardFinder().getProjectCardByName(preludeName)!;
+      const preludeCard = new CardFinder().getPreludeByName(preludeName)!;
       expect(preludeDeck.includes(preludeCard)).is.not.true;
     });
   });

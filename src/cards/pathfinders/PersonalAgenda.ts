@@ -2,14 +2,15 @@ import {Player} from '../../Player';
 import {PreludeCard} from '../prelude/PreludeCard';
 import {CardName} from '../../CardName';
 import {CardRenderer} from '../render/CardRenderer';
-import {Resources} from '../../Resources';
 import {Tags} from '../Tags';
 import {CardType} from '../CardType';
+import {Units} from '../../Units';
 
 export class PersonalAgenda extends PreludeCard {
   constructor() {
     super({
       name: CardName.PERSONAL_AGENDA,
+      productionBox: Units.of({megacredits: 3}),
 
       metadata: {
         cardNumber: 'P08',
@@ -23,7 +24,7 @@ export class PersonalAgenda extends PreludeCard {
     });
   }
   public play(player: Player) {
-    player.addProduction(Resources.MEGACREDITS, 3);
+    player.adjustProduction(this.productionBox, {log: true});
     player.drawCard(3, {
       include: (card) => {
         return card.cardType === CardType.EVENT &&

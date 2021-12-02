@@ -9,6 +9,8 @@ export class NitrogenDelivery extends PreludeCard implements IProjectCard {
   constructor() {
     super({
       name: CardName.NITROGEN_SHIPMENT,
+      startingMegacredits: 5,
+
 
       metadata: {
         cardNumber: 'P24',

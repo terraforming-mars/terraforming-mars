@@ -13,6 +13,7 @@ export class MartianIndustries extends PreludeCard implements IProjectCard {
       name: CardName.MARTIAN_INDUSTRIES,
       tags: [Tags.BUILDING],
       productionBox: Units.of({energy: 1, steel: 1}),
+      startingMegacredits: 6,
 
       metadata: {
         cardNumber: 'P18',

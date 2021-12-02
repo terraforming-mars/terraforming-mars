@@ -686,6 +686,8 @@ export class Game implements ISerializable<SerializedGame> {
       }
     }
 
+    PathfindersExpansion.onCardPlayed(player, corporationCard);
+
     this.playerIsFinishedWithResearchPhase(player);
   }
 

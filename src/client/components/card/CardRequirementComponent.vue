@@ -13,7 +13,7 @@
 <script lang="ts">
 
 import Vue from 'vue';
-import {CardRequirement, PartyCardRequirement, TagCardRequirement} from '@/cards/CardRequirement';
+import {CardRequirement, PartyCardRequirement, ProductionCardRequirement, TagCardRequirement} from '@/cards/CardRequirement';
 import {RequirementType} from '@/cards/RequirementType';
 import {generateClassString} from '@/utils/utils';
 import CardParty from '@/client/components/card/CardParty.vue';
@@ -85,6 +85,8 @@ export default Vue.extend({
       case RequirementType.TR:
         return ['card-tile', 'card-tr'];
       case RequirementType.RESOURCE_TYPES:
+        const productionRequirement = this.requirement as ProductionCardRequirement;
+        return ['card-resource', 'card-resource-' + productionRequirement.resource];
       case RequirementType.GREENERIES:
         return ['card-tile', 'greenery-tile--M', 'greenery-tile-small'];
       case RequirementType.CITIES:
@@ -102,25 +104,28 @@ export default Vue.extend({
         return ['card-resource-tag', 'card-tag-' + tagRequirement.tag];
       case RequirementType.PRODUCTION:
       case RequirementType.REMOVED_PLANTS:
+        break;
       case RequirementType.COLONY_RATE:
+        return ['card-colony-rate--S'];
       case RequirementType.MINING_RATE:
+        return ['card-mining-rate--S'];
       case RequirementType.LOGISTIC_RATE:
+        return ['card-logistics-rate--S'];
       case RequirementType.COLONY_TILES:
+        return ['card-tile-lunar-colony--S'];
       case RequirementType.MINING_TILES:
+        return ['card-tile-lunar-mine--S'];
       case RequirementType.ROAD_TILES:
+        return ['card-tile-lunar-road--S'];
       }
       return [];
     },
     getText(): string {
       switch (this.requirement.type) {
       case RequirementType.REMOVED_PLANTS:
-      case RequirementType.COLONY_RATE:
-      case RequirementType.MINING_RATE:
-      case RequirementType.LOGISTIC_RATE:
-      case RequirementType.COLONY_TILES:
-      case RequirementType.MINING_TILES:
-      case RequirementType.ROAD_TILES:
         return this.requirement.type;
+      case RequirementType.RESOURCE_TYPES:
+        return 'production';
       }
       return '';
     },

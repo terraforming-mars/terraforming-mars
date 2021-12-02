@@ -229,7 +229,7 @@ export class TagCardRequirement extends CardRequirement {
 }
 
 export class ProductionCardRequirement extends CardRequirement {
-  constructor(private resource: Resources, amount: number, options?: Options) {
+  constructor(public resource: Resources, amount: number, options?: Options) {
     super(RequirementType.RESOURCE_TYPES, amount, options);
   }
   protected parseType(): string {

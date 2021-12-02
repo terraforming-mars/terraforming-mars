@@ -67,7 +67,6 @@
                       :lastSoloGeneration="game.lastSoloGeneration"
                       :color="thisPlayer.color"
                       :step="game.step"></log-panel>
-                    <PlanetaryTracks v-if="game.gameOptions.pathfindersExpansion" :tracks="game.pathfinders" :gameOptions="game.gameOptions"/>
                 </div>
 
                 <div class="player_home_block player_home_block--actions nofloat">
@@ -234,6 +233,7 @@
                     </div>
                 </div>
             </div>
+            <PlanetaryTracks v-if="game.gameOptions.pathfindersExpansion" :tracks="game.pathfinders" :gameOptions="game.gameOptions"/>
         </div>
 </template>
 

@@ -320,7 +320,13 @@ export class Player implements ISerializable<SerializedPlayer> {
     }
   }
 
-  private logUnitDelta(resource: Resources, amount: number, unitType: 'production' | 'amount', from: Player | GlobalEventName | undefined) {
+  private logUnitDelta(
+    resource: Resources,
+    amount: number,
+    unitType: 'production' | 'amount',
+    from: Player | GlobalEventName | undefined,
+    stealing = false,
+  ) {
     if (amount === 0) {
       // Logging zero units doesn't seem to happen
       return;
@@ -332,8 +338,12 @@ export class Player implements ISerializable<SerializedPlayer> {
     let message = '${0}\'s ${1} ' + unitType + ' ${2} by ${3}';
 
     if (from !== undefined) {
+      if (stealing === true) {
+        message = message + ' stolen';
+      }
       message = message + ' by ' + ((from instanceof Player) ? '${4}' : 'Global Event');
     }
+
     this.game.log(message, (b) => {
       b.player(this)
         .string(resource)
@@ -351,6 +361,7 @@ export class Player implements ISerializable<SerializedPlayer> {
     options? : {
       log?: boolean,
       from? : Player | GlobalEventName,
+      stealing?: boolean
     }) {
     this.addResource(resource, -amount, options);
   }
@@ -361,6 +372,7 @@ export class Player implements ISerializable<SerializedPlayer> {
     options? : {
       log?: boolean,
       from? : Player | GlobalEventName,
+      stealing?: boolean
     }) {
     // When amount is negative, sometimes the amount being asked to be removed is more than the player has.
     // delta represents an adjusted amount which basically declares that a player cannot lose more resources
@@ -398,7 +410,7 @@ export class Player implements ISerializable<SerializedPlayer> {
     }
 
     if (options?.log === true) {
-      this.logUnitDelta(resource, delta, 'amount', options.from);
+      this.logUnitDelta(resource, delta, 'amount', options.from, options.stealing);
     }
 
     if (options?.from instanceof Player) {
@@ -412,7 +424,11 @@ export class Player implements ISerializable<SerializedPlayer> {
     }
   }
 
-  public addProduction(resource: Resources, amount : number, options? : { log: boolean, from? : Player | GlobalEventName}) {
+  public addProduction(
+    resource: Resources,
+    amount : number,
+    options? : { log: boolean, from? : Player | GlobalEventName, stealing?: boolean},
+  ) {
     const adj = resource === Resources.MEGACREDITS ? -5 : 0;
     const delta = (amount >= 0) ? amount : Math.max(amount, -(this.getProduction(resource) - adj));
 
@@ -427,7 +443,7 @@ export class Player implements ISerializable<SerializedPlayer> {
     }
 
     if (options?.log === true) {
-      this.logUnitDelta(resource, amount, 'production', options.from);
+      this.logUnitDelta(resource, amount, 'production', options.from, options.stealing);
     }
 
     if (options?.from instanceof Player) {

@@ -1,12 +1,11 @@
 
 <template>
     <div class="turmoil" v-trim-whitespace>
-      <div class="events-board" @click='toggleGlobalEventView'>
-        <global-event v-if="turmoil.distant" :globalEvent="turmoil.distant" type="distant" :showIcons="showIcons"></global-event>
-        <global-event v-if="turmoil.coming" :globalEvent="turmoil.coming" type="coming" :showIcons="showIcons"></global-event>
-        <global-event v-if="turmoil.current" :globalEvent="turmoil.current" type="current" :showIcons="showIcons"></global-event>
+      <div class="events-board">
+        <global-event v-if="turmoil.distant" :globalEvent="turmoil.distant" type="distant"></global-event>
+        <global-event v-if="turmoil.coming" :globalEvent="turmoil.coming" type="coming"></global-event>
+        <global-event v-if="turmoil.current" :globalEvent="turmoil.current" type="current"></global-event>
       </div>
-      <div @click='toggleGlobalEventView'>{{ showIcons ? "T" : "I" }}</div>
 
       <div class="turmoil-board">
         <div class="turmoil-header">
@@ -231,11 +230,6 @@ export default Vue.extend({
       type: Object as () => TurmoilModel,
     },
   },
-  data() {
-    return {
-      showIcons: false,
-    };
-  },
   methods: {
     partyNameToCss(party: PartyName | undefined): string {
       if (party === undefined) {
@@ -313,9 +307,6 @@ export default Vue.extend({
     },
     isVisible() {
       return (this.$root as any).getVisibilityState('turmoil_parties');
-    },
-    toggleGlobalEventView() {
-      this.showIcons = !this.showIcons;
     },
   },
   components: {

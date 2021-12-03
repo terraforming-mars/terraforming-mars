@@ -8,6 +8,8 @@ export class Donation extends PreludeCard {
     super({
       name: CardName.DONATION,
 
+      startingMegacredits: 21,
+
       metadata: {
         cardNumber: 'P08',
         renderData: CardRenderer.builder((b) => {

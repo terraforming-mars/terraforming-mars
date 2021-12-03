@@ -46,7 +46,8 @@ export class SmallAnimals extends Card implements IActionCard, IProjectCard, IRe
       return player.game.someoneHasResourceProduction(Resources.PLANTS, 1);
     }
     public play(player: Player) {
-      player.game.defer(new DecreaseAnyProduction(player, Resources.PLANTS, 1));
+      player.game.defer(
+        new DecreaseAnyProduction(player, Resources.PLANTS, {count: 1}));
       return undefined;
     }
     public canAct(): boolean {

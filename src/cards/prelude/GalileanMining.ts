@@ -12,6 +12,8 @@ export class GalileanMining extends PreludeCard {
       name: CardName.GALILEAN_MINING,
       tags: [Tags.JOVIAN],
 
+      startingMegacredits: -5,
+
       metadata: {
         cardNumber: 'P13',
         renderData: CardRenderer.builder((b) => {

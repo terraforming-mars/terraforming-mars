@@ -27,6 +27,7 @@ import {PlayerViewModel} from '@/models/PlayerModel';
 import SelectCard from '@/client/components/SelectCard.vue';
 import ConfirmDialog from '@/client/components/common/ConfirmDialog.vue';
 import {PreferencesManager} from '@/client/utils/PreferencesManager';
+import {Tags} from '@/cards/Tags';
 
 export default Vue.extend({
   name: 'SelectInitialCards',
@@ -56,7 +57,7 @@ export default Vue.extend({
     return {
       selectedCards: [] as Array<CardName>,
       selectedCorporation: undefined as CorporationCard | undefined,
-      selectedPrelude: [] as Array<CardName>,
+      selectedPreludes: [] as Array<CardName>,
     };
   },
   methods: {
@@ -65,93 +66,80 @@ export default Vue.extend({
     },
     getAfterPreludes() {
       let result = 0;
-      for (const prelude of this.selectedPrelude) {
-        switch (prelude) {
-        case CardName.ALLIED_BANKS:
-          result += 3;
-          break;
-        case CardName.BUSINESS_EMPIRE:
-          result -= 6;
-          break;
-        case CardName.AQUIFER_TURBINES:
-          result -= 3;
-          break;
-        case CardName.DONATION:
-          result += 21;
-          break;
-        case CardName.GALILEAN_MINING:
-        case CardName.HUGE_ASTEROID:
-          result -= 5;
-          break;
-        case CardName.LOAN:
-          result += 30;
-          break;
-        case CardName.MARTIAN_INDUSTRIES:
-        case CardName.VALUABLE_GASES:
-          result += 6;
-          break;
-        case CardName.NITROGEN_SHIPMENT:
-          result += 5;
-          break;
-        case CardName.AEROSPACE_MISSION:
-          result -= 14;
-          break;
-        case CardName.RESEARCH_GRANT:
-          result += 8;
-          break;
-        case CardName.TRADE_ADVANCE:
-          result += 2;
-          break;
+      for (const prelude of this.selectedPreludes) {
+        const card = new CardFinder().getPreludeByName(prelude);
+        if (card === undefined) {
+          throw new Error(`Prelude ${prelude} not found`);
         }
+        result += card?.startingMegaCredits ?? 0;
+
         switch (this.selectedCorporation?.name) {
+        // For each step you increase the production of a resource ... you also gain that resource.
         case CardName.MANUTECH:
-          switch (prelude) {
-          case CardName.ALLIED_BANKS:
-            result += 4;
-            break;
-          case CardName.BUSINESS_EMPIRE:
-            result += 6;
-            break;
-          case CardName.DOME_FARMING:
-          case CardName.SELF_SUFFICIENT_SETTLEMENT:
-            result += 2;
-            break;
-          case CardName.METALS_COMPANY:
-          case CardName.RESEARCH_NETWORK:
-            result += 1;
-            break;
-          }
+          const productionBox = card?.productionBox;
+          result += productionBox.megacredits;
           break;
+
+        // When you place a city tile, gain 3 M€.
         case CardName.THARSIS_REPUBLIC:
           switch (prelude) {
           case CardName.SELF_SUFFICIENT_SETTLEMENT:
           case CardName.EARLY_SETTLEMENT:
+          case CardName.STRATEGIC_BASE_PLANNING:
             result += 3;
             break;
           }
           break;
+
+        // When ANY microbe tag is played ... lose 4 M€ or as much as possible.
         case CardName.PHARMACY_UNION:
-          switch (prelude) {
-          case CardName.BIOFUELS:
-          case CardName.ECOLOGY_EXPERTS:
-            result -= 4;
-            break;
-          }
+          const tags = card.tags.filter((tag) => tag === Tags.MICROBE).length;
+          result -= (4 * tags);
           break;
+
+        // when a microbe tag is played, incl. this, THAT PLAYER gains 2 M€,
         case CardName.SPLICE:
-          switch (prelude) {
-          case CardName.BIOFUELS:
-          case CardName.ECOLOGY_EXPERTS:
-            result += 2;
-            break;
-          }
+          const microbeTags = card.tags.filter((tag) => tag === Tags.MICROBE).length;
+          result += (2 * microbeTags);
           break;
+
+        // Whenever Venus is terraformed 1 step, you gain 2 M€
         case CardName.APHRODITE:
           switch (prelude) {
           case CardName.VENUS_FIRST:
+          case CardName.VENUS_FIRST_PATHFINDERS:
             result += 4;
             break;
+          case CardName.HYDROGEN_BOMBARDMENT:
+            result += 2;
+            break;
           }
+
+        // When any player raises any Moon Rate, gain 1M€ per step.
+        case CardName.LUNA_FIRST_INCORPORATED:
+          switch (prelude) {
+          case CardName.FIRST_LUNAR_SETTLEMENT:
+          case CardName.CORE_MINE:
+          case CardName.BASIC_INFRASTRUCTURE:
+            result += 1;
+            break;
+          case CardName.MINING_COMPLEX:
+            result += 2;
+            break;
+          }
+
+          // // When you place an ocean tile, gain 4MC
+          // case CardName.POLARIS:
+          //   switch (prelude) {
+          //   case CardName.AQUIFER_TURBINES:
+          //   case CardName.POLAR_INDUSTRIES:
+          //     result += 4;
+          //     break;
+          //   case CardName.GREAT_AQUIFER:
+          //     result += 8;
+          //     break;
+          //   }
+          break;
         }
       }
       return result;
@@ -185,7 +173,7 @@ export default Vue.extend({
         result[0].push(this.selectedCorporation.name);
       }
       if (this.hasPrelude()) {
-        result.push(this.selectedPrelude);
+        result.push(this.selectedPreludes);
       }
       result.push(this.selectedCards);
       this.onsave(result);
@@ -200,7 +188,7 @@ export default Vue.extend({
       this.selectedCorporation = new CardFinder().getCorporationCardByName(cards[0]);
     },
     preludesChanged(cards: Array<CardName>) {
-      this.selectedPrelude = cards;
+      this.selectedPreludes = cards;
     },
     confirmSelection() {
       this.saveData();

@@ -19,4 +19,5 @@ export interface CardModel {
     reserveUnits: Readonly<Units>;
     bonusResource?: Array<Resources>;
     cloneTag?: Tags; // Used with Pathfinders
+    startingMegacredits?: number;
 }

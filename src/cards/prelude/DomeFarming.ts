@@ -1,7 +1,6 @@
 import {Tags} from '../Tags';
 import {Player} from '../../Player';
 import {PreludeCard} from './PreludeCard';
-import {Resources} from '../../Resources';
 import {CardName} from '../../CardName';
 import {CardRenderer} from '../render/CardRenderer';
 import {Units} from '../../Units';
@@ -23,8 +22,7 @@ export class DomeFarming extends PreludeCard {
     });
   }
   public play(player: Player) {
-    player.addProduction(Resources.PLANTS, 1);
-    player.addProduction(Resources.MEGACREDITS, 2);
+    player.adjustProduction(this.productionBox);
     return undefined;
   }
 }

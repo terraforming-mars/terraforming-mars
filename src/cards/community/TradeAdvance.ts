@@ -11,6 +11,7 @@ export class TradeAdvance extends PreludeCard implements IProjectCard {
     super({
       name: CardName.TRADE_ADVANCE,
       tags: [Tags.EARTH],
+      startingMegacredits: 2,
 
       metadata: {
         cardNumber: 'Y05',

@@ -61,7 +61,7 @@ export class CardRequirements {
   }
 }
 
-export type Options = {max?: boolean, all?: boolean};
+export type Options = {max?: boolean, all?: boolean, text?: string};
 
 class Builder {
   private reqs: Array<CardRequirement> = [];

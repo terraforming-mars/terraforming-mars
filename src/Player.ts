@@ -1571,6 +1571,8 @@ export class Player implements ISerializable<SerializedPlayer> {
       }
     }
 
+    PathfindersExpansion.onCardPlayed(this, selectedCard);
+
     return undefined;
   }
 

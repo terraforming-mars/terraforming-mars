@@ -7,6 +7,7 @@ import {TestingUtils} from '../TestingUtils';
 import {ResourceType} from '../../src/ResourceType';
 import {Game} from '../../src/Game';
 import {IPathfindersData} from '../../src/pathfinders/IPathfindersData';
+import {CardName} from '../../src/CardName';
 
 describe('PathfindersExpansion', function() {
   let player1: TestPlayer;
@@ -91,5 +92,10 @@ describe('PathfindersExpansion', function() {
     expect(pathfindersData.jovian).eq(14);
   });
 
+  it('played card', () => {
+    expect(pathfindersData.earth).eq(0);
+    player1.playCard(TestingUtils.fakeCard({name: 'A' as CardName, tags: [Tags.EARTH]}));
+    expect(pathfindersData.earth).eq(1);
+  });
   // TODO(kberg): not all rewards are tested.
 });

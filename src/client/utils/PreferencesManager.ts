@@ -17,6 +17,7 @@ export const preferences = [
   'hide_discount_on_cards',
   'learner_mode',
   'hide_animated_sidebar',
+  'experimental_ui',
 ] as const;
 
 export type Key = typeof preferences[number];

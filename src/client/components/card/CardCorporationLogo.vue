@@ -220,7 +220,7 @@ export default Vue.extend({
     },
   },
   computed: {
-    CardName(): any {
+    CardName(): typeof CardName {
       return CardName;
     },
   },

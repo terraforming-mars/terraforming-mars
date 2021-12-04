@@ -48,7 +48,7 @@
                     />
 
                     <turmoil v-if="game.turmoil" :turmoil="game.turmoil"/>
-
+                    <PlanetaryTracks v-if="game.gameOptions.pathfindersExpansion" :tracks="game.pathfinders" :gameOptions="game.gameOptions"/>
                     <MoonBoard v-if="game.gameOptions.moonExpansion" :model="game.moon" :hideTiles="hideTiles"/>
 
                     <div v-if="playerView.players.length > 1" class="player_home_block--milestones-and-awards">
@@ -233,7 +233,6 @@
                     </div>
                 </div>
             </div>
-            <PlanetaryTracks v-if="game.gameOptions.pathfindersExpansion" :tracks="game.pathfinders" :gameOptions="game.gameOptions"/>
         </div>
 </template>
 

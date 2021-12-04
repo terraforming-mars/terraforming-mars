@@ -1,6 +1,5 @@
 <template>
-    <tr>
-      <td>{{icon}}</td>
+    <tr  :class="getRowClass(type)">
       <td v-for="idx in range" :key="idx" :class="getClass(idx)">
         <Rewards :type="type" v-if="idx <= rewards.spaces.length && rewards.spaces[idx] !== undefined" :rewards="rewards.spaces[idx]" :gameOptions="gameOptions" />
       </td>
@@ -13,19 +12,21 @@ import Rewards from '@/client/components/pathfinders/Rewards.vue';
 import {range} from '@/utils/utils';
 import {PlanetaryTrack as Track} from '@/pathfinders/PlanetaryTrack';
 import {GameOptionsModel} from '@/models/GameOptionsModel';
-
 export default Vue.extend({
   name: 'PlanetaryTrack',
   props: {
     val: {
       type: Number,
     },
-    type: String as () => 'risingPlayer' | 'everyone' | 'mostTags',
+    type: String as () => 'risingPlayer' | 'everyone' | 'mostTags' | 'middle',
     rewards: {
       type: Object as () => Track,
     },
     gameOptions: {
       type: Object as () => GameOptionsModel,
+    },
+    trackName: {
+      type: String,
     },
   },
   data() {
@@ -38,7 +39,19 @@ export default Vue.extend({
   },
   methods: {
     getClass(idx: number): String {
-      return (idx === this.val) ? 'highlight' : '';
+      if (this.type==="middle") {
+        if (idx === this.val) {
+          return `step-highlight track-tag-${this.trackName}`
+        }
+        return 'step-empty'
+      }
+      else return "";
+    },
+    getRowClass(type: string): String {
+      if (type==="middle") {
+        return 'middle-row'
+      }
+      else return "";
     },
   },
   computed: {

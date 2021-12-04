@@ -2,18 +2,26 @@
 	margin: 20px;
 	display: inline-block;
 
-	.table {
-		border-collapse: collapse;
-		border-spacing: 0px;
+	.table-track {
+		border-spacing: 0px 0px;
 	}
 
 	.track {
 		display: flex;
-		padding-left: 50px;
+		padding: 5px 15px;
 		width: fit-content;
 		position: relative;
-		background: #ccc;
-		margin-bottom: 10px;
+		background-repeat: no-repeat;
+		background-position-y: -2px !important;
+		border: 1px solid #303030;
+	}
+	.track-line {
+		border-bottom: 2px solid #303030;
+		position: absolute;
+		width: 880px;
+		top: 74px;
+		left: 35px;
+}
 	}
 
 	.track-numbers {
@@ -31,9 +39,10 @@
 		background-size: 70px;
 		border: 2px solid #000;
 		position: absolute;
-		top: -25px;
+		top: 17px;
 		left: -25px;
 		background-position: -2px;
+		display: none;
 	}
 	.track-tag-venus {background-image: url(./assets/tags/venus.png);}
 	.track-tag-earth {background-image: url(./assets/tags/earth.png);}
@@ -42,35 +51,58 @@
 	.track-tag-moon {background-image: url(./assets/tags/moon.png);}
 
 	.track-background-venus {
-		background: linear-gradient(to right, transparent 20%,#303030 40%,#303030), url("assets/buttons-homepage/planet8.png");
+		background-image: url("assets/buttons-homepage/planet8.png");
 	}
 	.track-background-earth {
-		background: linear-gradient(to right, transparent 20%,#303030 40%,#303030), url("assets/buttons-homepage/planet3.png");
+		background-image: url("assets/buttons-homepage/planet3.png");
+		background-position: -20px;
 	}
 	.track-background-mars {
-		background: linear-gradient(to right, transparent 20%,#303030 40%,#303030), url("assets/buttons-homepage/planet4.png");
+		background-image: url("assets/buttons-homepage/planet4.png");
+		background-position: -28px;
 	}
 	.track-background-jovian {
-		background: linear-gradient(to right, transparent 20%,#303030 40%,#303030), url("assets/buttons-homepage/planet5.png");
+		background-image: url("assets/buttons-homepage/planet5.png");
+		background-position: -30px;
 	}
 	.track-background-moon {
-		background: linear-gradient(to right, transparent 20%,#303030 40%,#303030), url("assets/buttons-homepage/planet9.png");
+		background-image: url("assets/buttons-homepage/planet9.png");
+		//todo
 	}
 
-	.highlight {
-    font-weight: bold;
-		background: linear-gradient(transparent,#fff8);
+	.step-highlight {
+		box-shadow: 0 0px 6px black, 0 3px 3px black;
+		background-size: 44px;
+		background-position: -2px;
+		border-radius: 50%;
+		position: relative;
+ 	}
+	.step-empty {
+		background: black;
+		transform: scale(0.3);
+		border-radius: 50%;
+		box-shadow: 0 0 0px 3px #303030;
+ 	}
+	.step-reward {
+		background: black;
+		transform: scale(0.5);
+		border-radius: 50%;
+		box-shadow: 0 0 0px 3px #303030;
+
  	}
 	td {
 		padding: 0;
 		text-align: center;
-		background: linear-gradient(transparent, #0008);
+		width: 40px;
 	}
 	tr {
 		height: 50px;
 		border: none;
 	}
-
+	.middle-row {
+		height: 40px;
+	}
+	/*
 	table td:nth-child(1) { min-width: 20px; }
   table td:nth-child(2) { min-width: 20px; } // 0 space
   table td:nth-child(3) { min-width: 20px; }
@@ -94,11 +126,12 @@
   table td:nth-child(21) { min-width: 80px; }
   table td:nth-child(22) { min-width: 45px; } // 20
   table td:nth-child(23) { min-width: 20px; }
-  table td:nth-child(24) { min-width: 45px; } // 22
+  table td:nth-child(24) { min-width: 45px; } // 22 */
 
 .rewards_cont	{
 		display: flex;
 		justify-content: center;
+		width: 40px;
 	}
 
 	.reward {
@@ -241,6 +274,7 @@
 		width: 30px;
 		background-size: 30px 40px;
 		vertical-align: middle;
+		box-shadow: 0 0px 1px 1px #303030;
 	}
 
 	.card-points {
@@ -253,16 +287,14 @@
 			height: 34px;
 			line-height: 34px;
 			text-align: center;
-			border-radius: 6px;
-			border-top: 2px solid #dddddd;
-			border-left: 2px solid #dddddd;
-			border-bottom: 2px solid #898989;
-			border-right: 2px solid #898989;
+			border-radius: 50%;
 			background-color: #cda282;
 			background: linear-gradient(#cc8b00, #805700, #805700);
 			box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.6), 0 0 0 2px rgba(0, 0, 0, 0.3);
+			color: black;
+			margin-left: -5px;
 	}
-}
+
 
 .vp1 {
 	:after {

@@ -1,4 +1,4 @@
-import {IGlobalEvent} from './IGlobalEvent';
+import {IGlobalEvent, GlobalEvent} from './IGlobalEvent';
 import {GlobalEventName} from './GlobalEventName';
 import {PartyName} from '../parties/PartyName';
 import {Game} from '../../Game';
@@ -12,11 +12,17 @@ const RENDER_DATA = CardRenderer.builder((b) => {
   b.minus().plants(2).slash().earth(1, {played: true, secondaryTag: AltSecondaryTag.INFLUENCE});
 });
 
-export class TiredEarth implements IGlobalEvent {
-  public name = GlobalEventName.TIRED_EARTH;
-  public description = 'Lose 1 plant for each Earth tag you own (max 5) then reduced by influence.';
-  public revealedDelegate = PartyName.KELVINISTS;
-  public currentDelegate = PartyName.GREENS;
+export class TiredEarth extends GlobalEvent implements IGlobalEvent {
+  constructor() {
+    super({
+      name: GlobalEventName.TIRED_EARTH,
+      description: 'Lose 1 plant for each Earth tag you own (max 5) then reduced by influence.',
+      revealedDelegate: PartyName.KELVINISTS,
+      currentDelegate: PartyName.GREENS,
+      renderData: RENDER_DATA,
+    });
+  }
+
   public resolve(game: Game, turmoil: Turmoil) {
     game.getPlayers().forEach((player) => {
       const tags = player.getTagCount(Tags.EARTH, 'raw');
@@ -25,5 +31,4 @@ export class TiredEarth implements IGlobalEvent {
       player.deductResource(Resources.PLANTS, total, {log: true, from: this.name});
     });
   }
-  public renderData = RENDER_DATA;
 }

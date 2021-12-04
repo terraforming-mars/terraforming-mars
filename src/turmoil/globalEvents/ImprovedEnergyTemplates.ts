@@ -1,4 +1,4 @@
-import {IGlobalEvent} from './IGlobalEvent';
+import {IGlobalEvent, GlobalEvent} from './IGlobalEvent';
 import {GlobalEventName} from './GlobalEventName';
 import {PartyName} from '../parties/PartyName';
 import {Game} from '../../Game';
@@ -13,15 +13,19 @@ const RENDER_DATA = CardRenderer.builder((b) => {
   b.production((pb) => pb.energy(1)).slash().energy(2, {played}).influence({size: Size.SMALL});
 });
 
-export class ImprovedEnergyTemplates implements IGlobalEvent {
-    public name = GlobalEventName.IMPROVED_ENERGY_TEMPLATES
-    public description = 'Increase energy production 1 step per 2 power tags (no limit). Influence counts as power tags.';
-    public revealedDelegate = PartyName.SCIENTISTS;
-    public currentDelegate = PartyName.KELVINISTS;
-    public resolve(game: Game, turmoil: Turmoil) {
-      game.getPlayers().forEach((player) => {
-        player.addProduction(Resources.ENERGY, Math.floor((player.getTagCount(Tags.ENERGY, 'raw') + turmoil.getPlayerInfluence(player)) / 2), {log: true, from: this.name});
-      });
-    }
-    public renderData = RENDER_DATA;
+export class ImprovedEnergyTemplates extends GlobalEvent implements IGlobalEvent {
+  constructor() {
+    super({
+      name: GlobalEventName.IMPROVED_ENERGY_TEMPLATES,
+      description: 'Increase energy production 1 step per 2 power tags (no limit). Influence counts as power tags.',
+      revealedDelegate: PartyName.SCIENTISTS,
+      currentDelegate: PartyName.KELVINISTS,
+      renderData: RENDER_DATA,
+    });
+  }
+  public resolve(game: Game, turmoil: Turmoil) {
+    game.getPlayers().forEach((player) => {
+      player.addProduction(Resources.ENERGY, Math.floor((player.getTagCount(Tags.ENERGY, 'raw') + turmoil.getPlayerInfluence(player)) / 2), {log: true, from: this.name});
+    });
+  }
 }

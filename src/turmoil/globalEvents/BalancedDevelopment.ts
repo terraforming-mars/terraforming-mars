@@ -1,4 +1,4 @@
-import {IGlobalEvent} from './IGlobalEvent';
+import {GlobalEvent, IGlobalEvent} from './IGlobalEvent';
 import {GlobalEventName} from './GlobalEventName';
 import {PartyName} from '../parties/PartyName';
 import {Game} from '../../Game';
@@ -12,11 +12,17 @@ const RENDER_DATA = CardRenderer.builder((b) => {
   b.megacredits(2).slash().mars(1, {played: true, secondaryTag: AltSecondaryTag.INFLUENCE});
 });
 
-export class BalancedDevelopment implements IGlobalEvent {
-  public name = GlobalEventName.BALANCED_DEVELOPMENT;
-  public description = 'Gain 2MC for each Mars tag you have (max 5) and influence.';
-  public revealedDelegate = PartyName.UNITY;
-  public currentDelegate = PartyName.MARS;
+export class BalancedDevelopment extends GlobalEvent implements IGlobalEvent {
+  constructor() {
+    super({
+      name: GlobalEventName.BALANCED_DEVELOPMENT,
+      description: 'Gain 2MC for each Mars tag you have (max 5) and influence.',
+      revealedDelegate: PartyName.UNITY,
+      currentDelegate: PartyName.MARS,
+      renderData: RENDER_DATA,
+    });
+  }
+
   public resolve(game: Game, turmoil: Turmoil) {
     game.getPlayers().forEach((player) => {
       const tags = player.getTagCount(Tags.MARS, 'raw');
@@ -24,5 +30,4 @@ export class BalancedDevelopment implements IGlobalEvent {
       player.addResource(Resources.MEGACREDITS, 2 * total, {log: true, from: this.name});
     });
   }
-  public renderData = RENDER_DATA;
 }

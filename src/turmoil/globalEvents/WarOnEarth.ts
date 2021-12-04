@@ -1,4 +1,4 @@
-import {IGlobalEvent} from './IGlobalEvent';
+import {IGlobalEvent, GlobalEvent} from './IGlobalEvent';
 import {GlobalEventName} from './GlobalEventName';
 import {PartyName} from '../parties/PartyName';
 import {Game} from '../../Game';
@@ -10,15 +10,19 @@ const RENDER_DATA = CardRenderer.builder((b) => {
   b.minus().text('4').tr(1).influence({size: Size.SMALL});
 });
 
-export class WarOnEarth implements IGlobalEvent {
-    public name = GlobalEventName.WAR_ON_EARTH;
-    public description = 'Reduce TR 4 steps. Each influence prevents 1 step.';
-    public revealedDelegate = PartyName.MARS;
-    public currentDelegate = PartyName.KELVINISTS;
-    public resolve(game: Game, turmoil: Turmoil) {
-      game.getPlayers().forEach((player) => {
-        player.decreaseTerraformRatingSteps(4 - turmoil.getPlayerInfluence(player));
-      });
-    }
-    public renderData = RENDER_DATA;
+export class WarOnEarth extends GlobalEvent implements IGlobalEvent {
+  constructor() {
+    super({
+      name: GlobalEventName.WAR_ON_EARTH,
+      description: 'Reduce TR 4 steps. Each influence prevents 1 step.',
+      revealedDelegate: PartyName.MARS,
+      currentDelegate: PartyName.KELVINISTS,
+      renderData: RENDER_DATA,
+    });
+  }
+  public resolve(game: Game, turmoil: Turmoil) {
+    game.getPlayers().forEach((player) => {
+      player.decreaseTerraformRatingSteps(4 - turmoil.getPlayerInfluence(player));
+    });
+  }
 }

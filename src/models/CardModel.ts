@@ -16,8 +16,8 @@ export interface CardModel {
     cardType: CardType;
     isDisabled: boolean;
     warning?: string | Message;
-    reserveUnits: Readonly<Units>;
-    bonusResource?: Array<Resources>;
+    reserveUnits: Readonly<Units>; // Written for The Moon, but useful in other contexts.
+    bonusResource?: Array<Resources>; // Used with the Mining cards and Robotic Workforce
     cloneTag?: Tags; // Used with Pathfinders
     startingMegacredits?: number;
 }

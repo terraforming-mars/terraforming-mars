@@ -25,11 +25,11 @@ export class ConstantStruggle implements IGlobalEvent {
       const deducted = Math.max(10 - influence, 0);
       player.deductResource(Resources.MEGACREDITS, deducted, {log: true, from: this.name});
     });
-    PathfindersExpansion.raiseTrack2(Tags.VENUS, this.name, game, 2, false);
-    PathfindersExpansion.raiseTrack2(Tags.EARTH, this.name, game, 2, false);
-    PathfindersExpansion.raiseTrack2(Tags.MARS, this.name, game, 2, false);
-    PathfindersExpansion.raiseTrack2(Tags.JOVIAN, this.name, game, 2, false);
-    PathfindersExpansion.raiseTrack2(Tags.MOON, this.name, game, 2, false);
+    PathfindersExpansion.raiseTrackForGlobalEvent(Tags.VENUS, this.name, game, 2, false);
+    PathfindersExpansion.raiseTrackForGlobalEvent(Tags.EARTH, this.name, game, 2, false);
+    PathfindersExpansion.raiseTrackForGlobalEvent(Tags.MARS, this.name, game, 2, false);
+    PathfindersExpansion.raiseTrackForGlobalEvent(Tags.JOVIAN, this.name, game, 2, false);
+    PathfindersExpansion.raiseTrackForGlobalEvent(Tags.MOON, this.name, game, 2, false);
   }
 
   public renderData = RENDER_DATA;

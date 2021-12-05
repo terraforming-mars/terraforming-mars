@@ -6,6 +6,7 @@ import {Resources} from '../../Resources';
 import {CardName} from '../../CardName';
 import {CardType} from '../CardType';
 import {CardRenderer} from '../render/CardRenderer';
+import {played} from '../Options';
 
 // Issue shown at https://media.discordapp.net/attachments/891004790589517875/905968892940267540/Chimera.PNG
 export class Chimera extends Card implements CorporationCard {
@@ -25,7 +26,7 @@ export class Chimera extends Card implements CorporationCard {
             ce.effect('When you perform an action, these wild tags count as any tags of your choice. ' +
               'For claiming Milestones and Awards, both symbols count as one. ' +
               '(Other wild tags still do not count toward Awards.)',
-            (ce) => ce.nbsp.startEffect.nbsp);
+            (ce) => ce.wild(2, {played}).startEffect.wild(2, {played}).slash().wild(1, {played}).asterix());
           });
         }),
       },

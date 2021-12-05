@@ -11,11 +11,13 @@ const MOON_OPTIONS = TestingUtils.setCustomGameOptions({moonExpansion: true});
 
 describe('IntragenSanctuaryHeadquarters', () => {
   let player: Player;
+  let player2: Player;
   let card: IntragenSanctuaryHeadquarters;
 
   beforeEach(() => {
     player = TestPlayers.BLUE.newPlayer();
-    Game.newInstance('id', [player], player, MOON_OPTIONS);
+    player2 = TestPlayers.RED.newPlayer();
+    Game.newInstance('id', [player, player2], player, MOON_OPTIONS);
     card = new IntragenSanctuaryHeadquarters();
   });
 
@@ -53,6 +55,19 @@ describe('IntragenSanctuaryHeadquarters', () => {
 
     card.resourceCount = 4;
     expect(card.getVictoryPoints()).eq(2);
+  });
+
+
+  it('onCardPlayed by other player', () => {
+    expect(card.resourceCount).eq(0);
+    // This can't reasonably be tested without setting up a research phase.
+    // Game-play tests would help, as would making sure the initial set-up
+    // gave the initial resource.
+    card.onCardPlayed(player2, new MicroMills());
+    expect(card.resourceCount).eq(0);
+
+    card.onCardPlayed(player2, new MartianZoo());
+    expect(card.resourceCount).eq(1);
   });
 });
 

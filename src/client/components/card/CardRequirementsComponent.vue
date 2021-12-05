@@ -11,7 +11,7 @@
       <div class="card-special card-minus"></div>
       <div class="card-resource card-resource-plant red-outline"></div>
   </div>
-  <div v-else :class="getClasses()">{{ requirements.getRequirementsText() }}</div>
+  <div v-else class="card-requirements" :class="getClasses()">{{ requirements.getRequirementsText() }}</div>
 </template>
 
 <script lang="ts">

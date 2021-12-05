@@ -125,7 +125,7 @@
                             <div v-for="v in p.victoryPointsBreakdown.detailsPlanetaryTracks" :key="v.tag">
                               <div class="game-end-column-row">
                                 <div class="game-end-column-vp">{{v.points}}</div>
-                                <div class="game-end-column-text">{{v.tag}}</div>
+                                <div class="game-end-column-text">Most tags on the {{v.tag}} track</div>
                               </div>
                             </div>
                         </div>
@@ -165,6 +165,7 @@ import {GameModel} from '@/models/GameModel';
 import {PlayerViewModel, PublicPlayerModel, ViewModel} from '@/models/PlayerModel';
 import Board from '@/client/components/Board.vue';
 import MoonBoard from '@/client/components/moon/MoonBoard.vue';
+import PlanetaryTracks from '@/client/components/pathfinders/PlanetaryTracks.vue';
 import LogPanel from '@/client/components/LogPanel.vue';
 import Button from '@/client/components/common/Button.vue';
 import {playerColorClass} from '@/utils/utils';
@@ -217,6 +218,7 @@ export default Vue.extend({
     'log-panel': LogPanel,
     Button,
     MoonBoard,
+    PlanetaryTracks,
   },
   methods: {
     getEndGamePlayerRowColorClass(color: string): string {

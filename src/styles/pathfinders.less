@@ -1,5 +1,5 @@
 .pathfinders_cont {
-	margin: 20px;
+	margin: 5px;
 	display: inline-block;
 
 	.table-track {
@@ -8,19 +8,21 @@
 
 	.track {
 		display: flex;
-		padding: 5px 15px;
+		padding: 0px 10px;
 		width: fit-content;
 		position: relative;
 		background-repeat: no-repeat;
 		background-position-y: -2px !important;
 		border: 1px solid #303030;
+		border-radius: 10px;
+		margin: 10px 0;
 	}
 	.track-line {
 		border-bottom: 2px solid #303030;
 		position: absolute;
-		width: 880px;
-		top: 74px;
-		left: 35px;
+		width: 750px;
+		top: 66px;
+		left: 25px;
 }
 	}
 
@@ -55,15 +57,15 @@
 	}
 	.track-background-earth {
 		background-image: url("assets/buttons-homepage/planet3.png");
-		background-position: -20px;
+		background-position: -22px;
 	}
 	.track-background-mars {
 		background-image: url("assets/buttons-homepage/planet4.png");
-		background-position: -28px;
+		background-position: -32px;
 	}
 	.track-background-jovian {
 		background-image: url("assets/buttons-homepage/planet5.png");
-		background-position: -30px;
+		background-position: -35px;
 	}
 	.track-background-moon {
 		background-image: url("assets/buttons-homepage/planet9.png");
@@ -72,7 +74,7 @@
 
 	.step-highlight {
 		box-shadow: 0 0px 6px black, 0 3px 3px black;
-		background-size: 44px;
+		background-size: 38px;
 		background-position: -2px;
 		border-radius: 50%;
 		position: relative;
@@ -93,14 +95,14 @@
 	td {
 		padding: 0;
 		text-align: center;
-		width: 40px;
+		width: 34px;
 	}
 	tr {
 		height: 50px;
 		border: none;
 	}
 	.middle-row {
-		height: 40px;
+		height: 34px;
 	}
 	/*
 	table td:nth-child(1) { min-width: 20px; }
@@ -131,7 +133,8 @@
 .rewards_cont	{
 		display: flex;
 		justify-content: center;
-		width: 40px;
+		width: 34px;
+		transform: scale(0.8);
 	}
 
 	.reward {
@@ -142,17 +145,23 @@
 	// copied from .greenery-tile-oxygen--M {
 	.greenery {
 			background-image: url(./assets/tiles/greenery.png);
-			background-size: 36px;
-			width: 36px;
-			height: 36px;
+			background-size: 50px 48px;
+			width: 50px;
+			height: 48px;
+	}
+	.city {
+			background-image: url(./assets/tiles/city.png);
+			background-size: 42px 48px;
+			width: 42px;
+			height: 48px;
 	}
 
 	// copied from .greenery-tile-oxygen--M {
 		.ocean {
 			background-image: url(./assets/tiles/ocean.png);
-			background-size: 36px;
-			width: 36px;
-			height: 42px;
+			background-size: 42px 48px;
+			width: 42px;
+			height: 48px;
 	}
 
 	// Copied from card-resource-money
@@ -292,7 +301,7 @@
 			background: linear-gradient(#cc8b00, #805700, #805700);
 			box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.6), 0 0 0 2px rgba(0, 0, 0, 0.3);
 			color: black;
-			margin-left: -5px;
+			margin-left: -3px;
 	}
 
 

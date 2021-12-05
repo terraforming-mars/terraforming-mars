@@ -34,7 +34,7 @@ export default Vue.extend({
       case 'card':
         return 'card';
       case 'city':
-        return 'tag-city-count tag-size-big';
+        return 'city';
       case 'delegate':
         return 'delegate';
       case 'energy':

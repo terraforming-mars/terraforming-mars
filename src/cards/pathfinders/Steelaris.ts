@@ -30,7 +30,7 @@ export class Steelaris extends Card implements CorporationCard {
           b.megacredits(42).br;
           b.corpBox('effect', (ce) => {
             ce.effect('When any city or special tile is placed ON MARS, gain 1 steel and 1 plant.', (eb) => {
-              eb.city({size: Size.SMALL, all}).slash().emptyTile('normal', {size: Size.SMALL, all}).text('special').startEffect.steel(1).plants(1);
+              eb.city({size: Size.SMALL, all}).slash().specialTile({size: Size.SMALL, all}).startEffect.steel(1).plants(1);
             });
           });
         }),

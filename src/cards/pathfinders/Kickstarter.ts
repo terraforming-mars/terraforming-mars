@@ -19,7 +19,7 @@ export class Kickstarter extends Card implements IProjectCard, ICloneTagCard {
       metadata: {
         cardNumber: 'PfTBD',
         renderData: CardRenderer.builder((b) => {
-          b.text('NO ICONOGRAPHY YET');
+          b.planetaryTrack().text('3');
         }),
         description: 'Choose a planetary track and raise it 3 steps. This card counts as a card with a tag of the chosen planet.',
       },

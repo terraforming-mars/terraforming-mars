@@ -19,8 +19,7 @@ export class RareEarthElements extends Card implements IProjectCard {
       metadata: {
         cardNumber: 'Pf06',
         renderData: CardRenderer.builder((b) => {
-          // TODO(kberg): add new tile image.
-          b.production(((pb) => pb.megacredits(1))).slash().emptyTile().text('special');
+          b.production(((pb) => pb.megacredits(1))).slash().specialTile();
         }),
         description: 'Increase your M€ production by 1 for every special tile you own on Mars.',
       },

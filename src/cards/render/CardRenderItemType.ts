@@ -43,6 +43,7 @@ export enum CardRenderItemType {
   NBSP = 'nbsp',
   EMPTY_TILE = 'empty_tile',
   EMPTY_TILE_GOLDEN = 'empty_tile_golden',
+  EMPTY_TILE_SPECIAL = 'empty_tile_special',
   SELF_REPLICATING = 'self_replicating',
   MULTIPLIER_WHITE = 'multiplier_white',
   PROJECT_REQUIREMENTS = 'project_requirements',
@@ -64,4 +65,5 @@ export enum CardRenderItemType {
   MARS = 'mars',
   VENUSIAN_HABITAT = 'venusian-habitat',
   SPECIALIZED_ROBOT = 'specialized-robot',
+  PLANETARY_TRACK = 'plantary-track',
 }

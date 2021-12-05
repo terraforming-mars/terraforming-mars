@@ -80,7 +80,8 @@ export class PathfindersExpansion {
   public static raiseTrack2(tag: Tags, from: Player | GlobalEventName, game: Game, steps: number = 1, gainRewards: boolean = true): void {
     const data = game.pathfindersData;
     if (data === undefined) {
-      throw new Error('Pathfinders not defined');
+      return;
+      // throw new Error('Pathfinders not defined');
     }
 
     const track = PathfindersExpansion.trackMap.get(tag);

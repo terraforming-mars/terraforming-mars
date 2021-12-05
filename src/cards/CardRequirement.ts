@@ -11,12 +11,12 @@ import {Turmoil} from '../turmoil/Turmoil';
 import {Options} from './CardRequirements';
 
 const firstLetterUpperCase = (s: string): string => s.charAt(0).toUpperCase() + s.slice(1);
-
 export class CardRequirement {
   public readonly isMax: boolean = false;
   public readonly isAny: boolean = false;
   public readonly text: string | undefined = undefined;
-  constructor(public type: RequirementType, public amount: number = 1, options?: Options) {
+
+  constructor(public readonly type: RequirementType, public amount: number = 1, options?: Options) {
     this.isMax = options?.max ?? false;
     this.isAny = options?.all ?? false;
     this.text = options?.text;
@@ -234,10 +234,9 @@ export class TagCardRequirement extends CardRequirement {
 }
 
 export class ProductionCardRequirement extends CardRequirement {
-  constructor(private resource: Resources, amount: number, options?: Options) {
+  constructor(public resource: Resources, amount: number, options?: Options) {
     super(RequirementType.RESOURCE_TYPES, amount, options);
   }
-
   protected parseType(): string {
     return `${firstLetterUpperCase(this.resource)} production`;
   }

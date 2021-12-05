@@ -1,6 +1,6 @@
 import {IMilestone} from './IMilestone';
 import {Player} from '../Player';
-import {isAresTile} from '../TileType';
+import {isHazardTileType} from '../TileType';
 
 export class PolarExplorer implements IMilestone {
     public name: string = 'Polar Explorer';
@@ -10,7 +10,7 @@ export class PolarExplorer implements IMilestone {
         .filter((space) => space.player !== undefined &&
         space.player === player &&
         space.tile !== undefined &&
-        isAresTile(space.tile.tileType) === false &&
+        isHazardTileType(space.tile.tileType) === false &&
         space.y >= 7 && space.y <= 8).length;
     }
     public canClaim(player: Player): boolean {

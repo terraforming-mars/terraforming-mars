@@ -24,7 +24,7 @@ export enum TileType {
     BIOFERTILIZER_FACILITY, // 17
     METALLIC_ASTEROID, // 18
     SOLAR_FARM, // 19
-    OCEAN_CITY, // 20
+    OCEAN_CITY, // 20, Also used in Pathfinders
     OCEAN_FARM, // 21
     OCEAN_SANCTUARY, // 22
     DUST_STORM_MILD, // 23
@@ -98,7 +98,8 @@ export namespace TileType {
 
 export const HAZARD_TILES = new Set([TileType.DUST_STORM_MILD, TileType.DUST_STORM_SEVERE, TileType.EROSION_MILD, TileType.EROSION_SEVERE]);
 export const OCEAN_UPGRADE_TILES = new Set([TileType.OCEAN_CITY, TileType.OCEAN_FARM, TileType.OCEAN_SANCTUARY]);
-
-export function isAresTile(tile: TileType): boolean {
+export const CITY_TILES = new Set([TileType.CITY, TileType.CAPITAL, TileType.OCEAN_CITY, TileType.RED_CITY]);
+export const OCEAN_TILES = new Set([TileType.OCEAN, TileType.OCEAN_CITY, TileType.OCEAN_FARM, TileType.OCEAN_SANCTUARY]);
+export function isHazardTileType(tile: TileType): boolean {
   return HAZARD_TILES.has(tile);
 }

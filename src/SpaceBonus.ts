@@ -13,7 +13,7 @@ export enum SpaceBonus {
     // Ares-specific
     MEGACREDITS, // 6
     ANIMAL, // 7
-    MICROBE, // 8
+    MICROBE, // 8 (Also used in Arabia Terra)
     POWER, // 9
 
         // Arabia Terra-specific

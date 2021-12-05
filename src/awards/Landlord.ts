@@ -1,6 +1,6 @@
 import {IAward} from './IAward';
 import {Player} from '../Player';
-import {TileType, isAresTile} from '../TileType';
+import {TileType, isHazardTileType} from '../TileType';
 import {MoonExpansion} from '../moon/MoonExpansion';
 
 export class Landlord implements IAward {
@@ -10,7 +10,7 @@ export class Landlord implements IAward {
       const marsSpaces = player.game.board.spaces.filter(
         // Don't simplifiy this to "space.tile?.tileType !== TileType.OCEAN" because that will make
         // Land Claim a valid space for Landlord.
-        (space) => space.tile !== undefined && isAresTile(space.tile.tileType) === false && space.tile.tileType !== TileType.OCEAN && space.player === player).length;
+        (space) => space.tile !== undefined && isHazardTileType(space.tile.tileType) === false && space.tile.tileType !== TileType.OCEAN && space.player === player).length;
 
       const moonSpaces: number = MoonExpansion.ifElseMoon(player.game,
         (moonData) => moonData.moon.spaces.filter(

@@ -3,7 +3,7 @@
       <div class="card-item-container">
         <span v-if="requirement.isMax">MAX&nbsp;</span>
         {{amount()}}{{suffix()}}
-        <div :class="getComponentClasses()" />
+        <div :class="getComponentClasses()"></div>
         {{getText()}}
         <CardParty v-if="isPartyRequirement()" class="" :party="getParty()" />
       </div>

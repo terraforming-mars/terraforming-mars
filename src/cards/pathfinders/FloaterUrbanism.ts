@@ -57,6 +57,7 @@ export class FloaterUrbanism extends Card implements IProjectCard, IActionCard, 
     }
     if (cards.length === 1) {
       input.cb(cards);
+      return undefined;
     }
     return input;
   }

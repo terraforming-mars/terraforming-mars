@@ -806,8 +806,8 @@ export class Player implements ISerializable<SerializedPlayer> {
       {tag: Tags.EARTH, count: this.getTagCount(Tags.EARTH, 'raw')},
       {tag: Tags.ENERGY, count: this.getTagCount(Tags.ENERGY, 'raw')},
       {tag: Tags.JOVIAN, count: this.getTagCount(Tags.JOVIAN, 'raw')},
-      {tag: Tags.MICROBE, count: this.getTagCount(Tags.MICROBE, 'raw')},
       {tag: Tags.MARS, count: this.getTagCount(Tags.MARS, 'raw')},
+      {tag: Tags.MICROBE, count: this.getTagCount(Tags.MICROBE, 'raw')},
       {tag: Tags.MOON, count: this.getTagCount(Tags.MOON, 'raw')},
       {tag: Tags.PLANT, count: this.getTagCount(Tags.PLANT, 'raw')},
       {tag: Tags.SCIENCE, count: this.getTagCount(Tags.SCIENCE, 'raw')},
@@ -1785,7 +1785,7 @@ export class Player implements ISerializable<SerializedPlayer> {
 
   private endTurnOption(): PlayerInput {
     return new SelectOption('End Turn', 'End', () => {
-      this.actionsTakenThisRound = 1;
+      this.actionsTakenThisRound = 1; // Why is this statement necessary?
       this.game.log('${0} ended turn', (b) => b.player(this));
       return undefined;
     });

@@ -37,8 +37,8 @@ export class LunaArchives extends Card implements IResourceCard, IActionCard {
   }
 
   public action(player: Player) {
-    const count = player.getTagCount(Tags.MOON);
-    player.addResourceTo(this, {qty: count, log: true});
+    const qty = player.getTagCount(Tags.MOON);
+    player.addResourceTo(this, {qty, log: true});
     return undefined;
   }
 

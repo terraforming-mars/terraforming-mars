@@ -4,6 +4,7 @@ import {Card} from '../Card';
 import {CardType} from '../CardType';
 import {CardName} from '../../CardName';
 import {CardRenderer} from '../render/CardRenderer';
+import {IActionCard} from '../ICard';
 import {ResourceType} from '../../ResourceType';
 import {SelectCard} from '../../inputs/SelectCard';
 import {Resources} from '../../Resources';
@@ -12,7 +13,7 @@ import {Tags} from '../Tags';
 import {Size} from '../render/Size';
 import {played} from '../Options';
 
-export class PrefabricationofHumanHabitats extends Card implements IProjectCard {
+export class PrefabricationofHumanHabitats extends Card implements IProjectCard, IActionCard {
   constructor() {
     super({
       cardType: CardType.ACTIVE,

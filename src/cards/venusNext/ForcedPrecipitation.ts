@@ -25,7 +25,7 @@ export class ForcedPrecipitation extends Card implements IActionCard, IResourceC
         cardNumber: '226',
         renderData: CardRenderer.builder((b) => {
           b.action('Spend 2 M€ to add 1 Floater to THIS card.', (eb) => {
-            eb.megacredits(2).startAction.floaters(1).asterix;
+            eb.megacredits(2).startAction.floaters(1).asterix();
           }).br;
           b.or().br;
           b.action('Spend 2 Floaters here to increase Venus 1 step.', (eb) => {

@@ -86,6 +86,8 @@ const TO_STRING_MAP: Map<TileType, string> = new Map([
   [TileType.LUNA_MINING_HUB, 'Luna Mining Hub'],
   [TileType.LUNA_TRAIN_STATION, 'Luna Train Station'],
   [TileType.LUNAR_MINE_URBANIZATION, 'Lunar Mine Urbanization'],
+  [TileType.WETLANDS, 'Wetlands'],
+  [TileType.RED_CITY, 'Red City'],
 ]);
 
 export namespace TileType {

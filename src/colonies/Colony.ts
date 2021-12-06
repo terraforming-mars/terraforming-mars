@@ -31,6 +31,7 @@ export abstract class Colony implements SerializedColony {
     public abstract name: ColonyName;
     public abstract description: string;
 
+    // isActive represents when the colony is part of the game, or "back in the box", as it were.
     public isActive: boolean = true;
     public visitor: undefined | PlayerId = undefined;
     public colonies: Array<PlayerId> = [];

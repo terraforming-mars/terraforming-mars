@@ -18,7 +18,7 @@ export class SyndicatePirateRaids extends Card implements IProjectCard {
         description: 'ALL OPPONENTS CANNOT RETRIEVE THEIR TRADE FLEETS THIS GENERATION',
         cardNumber: 'M65',
         renderData: CardRenderer.builder((b) => {
-          b.tradeFleet().asterix;
+          b.tradeFleet().asterix();
         }),
       },
     });

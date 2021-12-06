@@ -21,14 +21,14 @@ export class AdvancedPowerGrid extends Card implements IProjectCard {
         renderData: CardRenderer.builder((b) => {
           b.production((pb) => pb.energy(2).br.megacredits(1).slash().energy(1, {played}));
         }),
-        description: 'Increase your energy production 2 steps. Increase your MC production 1 step per Power tag you have.',
+        description: 'Increase your energy production 2 steps. Increase your MC production 1 step per Power tag you have, including this.',
       },
     });
   }
 
   public produce(player: Player) {
     player.addProduction(Resources.ENERGY, 2, {log: true});
-    const tagCount = player.getTagCount(Tags.ENERGY);
+    const tagCount = player.getTagCount(Tags.ENERGY) + 1; // +1 is including this.
     player.addProduction(Resources.MEGACREDITS, tagCount, {log: true});
   }
 

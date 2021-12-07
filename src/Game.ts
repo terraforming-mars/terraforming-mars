@@ -1458,12 +1458,17 @@ export class Game implements ISerializable<SerializedGame> {
     });
   }
 
+  public canAddOcean(): boolean {
+    if (this.board.getOceansOnBoard() === constants.MAX_OCEAN_TILES) {
+      return false;
+    }
+    return true;
+  }
   public addOceanTile(
     player: Player, spaceId: SpaceId,
     spaceType: SpaceType = SpaceType.OCEAN): void {
-    if (this.board.getOceansOnBoard() === constants.MAX_OCEAN_TILES) {
-      return;
-    }
+    if (this.canAddOcean() === false) return;
+
     this.addTile(player, spaceType, this.board.getSpace(spaceId), {
       tileType: TileType.OCEAN,
     });

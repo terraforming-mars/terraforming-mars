@@ -56,4 +56,27 @@ describe('ArtificialLake', function() {
     const action = card.play(player);
     expect(action).is.undefined;
   });
+
+  it('Cannot place ocean if all land spaces are occupied', function() {
+    // Set temperature level to fit requirements
+    (game as any).temperature = -6;
+
+    // Take all but one space.
+    const spaces = game.board.getAvailableSpacesOnLand(player);
+    spaces.forEach((space, idx) => {
+      if (idx !== 0) game.simpleAddTile(player, space, {tileType: TileType.GREENERY});
+    });
+
+    expect(game.board.getAvailableSpacesOnLand(player)).has.length(1);
+
+    // Card is still playable.
+    expect(player.canPlayIgnoringCost(card)).is.true;
+
+    // No spaces left?
+    game.simpleAddTile(player, spaces[0], {tileType: TileType.GREENERY});
+    expect(game.board.getAvailableSpacesOnLand(player)).has.length(0);
+
+    // Cannot play.
+    expect(player.canPlayIgnoringCost(card)).is.false;
+  });
 });

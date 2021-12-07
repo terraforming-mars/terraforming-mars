@@ -1,4 +1,4 @@
-import {IGlobalEvent} from './IGlobalEvent';
+import {IGlobalEvent, GlobalEvent} from './IGlobalEvent';
 import {GlobalEventName} from './GlobalEventName';
 import {PartyName} from '../parties/PartyName';
 import {Game} from '../../Game';
@@ -14,11 +14,17 @@ const RENDER_DATA = CardRenderer.builder((b) => {
   b.data().slash().influence();
 });
 
-export class CommunicationBoom implements IGlobalEvent {
-  public name = GlobalEventName.COMMUNICATION_BOOM;
-  public description = 'Pay 10MC. Add 2 data to EVERY data card. Add 1 data to any data card for each influence you have.';
-  public revealedDelegate = PartyName.UNITY;
-  public currentDelegate = PartyName.SCIENTISTS;
+export class CommunicationBoom extends GlobalEvent implements IGlobalEvent {
+  constructor() {
+    super({
+      name: GlobalEventName.COMMUNICATION_BOOM,
+      description: 'Pay 10MC. Add 2 data to EVERY data card. Add 1 data to any data card for each influence you have.',
+      revealedDelegate: PartyName.UNITY,
+      currentDelegate: PartyName.SCIENTISTS,
+      renderData: RENDER_DATA,
+    });
+  }
+
   public resolve(game: Game, turmoil: Turmoil) {
     game.getPlayers().forEach((player) => {
       player.deductResource(Resources.MEGACREDITS, 10, {log: true, from: this.name});
@@ -29,5 +35,4 @@ export class CommunicationBoom implements IGlobalEvent {
       game.defer(new AddResourcesToCards(player, ResourceType.DATA, count));
     });
   }
-  public renderData = RENDER_DATA;
 }

@@ -1,4 +1,4 @@
-import {IGlobalEvent} from './IGlobalEvent';
+import {IGlobalEvent, GlobalEvent} from './IGlobalEvent';
 import {GlobalEventName} from './GlobalEventName';
 import {PartyName} from '../parties/PartyName';
 import {Game} from '../../Game';
@@ -14,11 +14,17 @@ const RENDER_DATA = CardRenderer.builder((b) => {
   b.energy(1).slash().influence();
 });
 
-export class SpaceRaceToMars implements IGlobalEvent {
-  public name = GlobalEventName.SPACE_RACE_TO_MARS;
-  public description = 'Increase your MC production 1 step for every special tile you own (max 5.) Gain 1 energy for every influence you have';
-  public revealedDelegate = PartyName.SCIENTISTS;
-  public currentDelegate = PartyName.MARS;
+export class SpaceRaceToMars extends GlobalEvent implements IGlobalEvent {
+  constructor() {
+    super({
+      name: GlobalEventName.SPACE_RACE_TO_MARS,
+      description: 'Increase your MC production 1 step for every special tile you own (max 5.) Gain 1 energy for every influence you have',
+      revealedDelegate: PartyName.SCIENTISTS,
+      currentDelegate: PartyName.MARS,
+      renderData: RENDER_DATA,
+    });
+  }
+
   public resolve(game: Game, turmoil: Turmoil) {
     game.getPlayers().forEach((player) => {
       const specialTileCount = this.specialTileCount(player);
@@ -44,5 +50,4 @@ export class SpaceRaceToMars implements IGlobalEvent {
     () => 0);
     return marsCount + moonCount;
   }
-  public renderData = RENDER_DATA;
 }

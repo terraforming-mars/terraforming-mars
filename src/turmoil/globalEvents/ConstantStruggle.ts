@@ -1,4 +1,4 @@
-import {IGlobalEvent} from './IGlobalEvent';
+import {IGlobalEvent, GlobalEvent} from './IGlobalEvent';
 import {GlobalEventName} from './GlobalEventName';
 import {PartyName} from '../parties/PartyName';
 import {Game} from '../../Game';
@@ -14,11 +14,17 @@ const RENDER_DATA = CardRenderer.builder((b) => {
   b.text('planetary tracks +2');
 });
 
-export class ConstantStruggle implements IGlobalEvent {
-  public name = GlobalEventName.CONSTANT_STRUGGLE;
-  public description = 'Pay 10M€, reduced by 1M€ per influence. Raise every planetary track 2 steps. Nobody gains the "rising player" bonus.';
-  public revealedDelegate = PartyName.KELVINISTS;
-  public currentDelegate = PartyName.REDS;
+export class ConstantStruggle extends GlobalEvent implements IGlobalEvent {
+  constructor() {
+    super({
+      name: GlobalEventName.CONSTANT_STRUGGLE,
+      description: 'Pay 10M€, reduced by 1M€ per influence. Raise every planetary track 2 steps. Nobody gains the "rising player" bonus.',
+      revealedDelegate: PartyName.KELVINISTS,
+      currentDelegate: PartyName.REDS,
+      renderData: RENDER_DATA,
+    });
+  }
+
   public resolve(game: Game, turmoil: Turmoil) {
     game.getPlayers().forEach((player) => {
       const influence = turmoil.getPlayerInfluence(player);
@@ -31,6 +37,4 @@ export class ConstantStruggle implements IGlobalEvent {
     PathfindersExpansion.raiseTrackForGlobalEvent(Tags.JOVIAN, this.name, game, 2, false);
     PathfindersExpansion.raiseTrackForGlobalEvent(Tags.MOON, this.name, game, 2, false);
   }
-
-  public renderData = RENDER_DATA;
 }

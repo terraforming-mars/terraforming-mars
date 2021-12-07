@@ -1,4 +1,4 @@
-import {IGlobalEvent} from './IGlobalEvent';
+import {IGlobalEvent, GlobalEvent} from './IGlobalEvent';
 import {GlobalEventName} from './GlobalEventName';
 import {PartyName} from '../parties/PartyName';
 import {Game} from '../../Game';
@@ -13,15 +13,19 @@ const RENDER_DATA = CardRenderer.builder((b) => {
   b.megacredits(2).slash().space({played}).influence({size: Size.SMALL});
 });
 
-export class InterplanetaryTrade implements IGlobalEvent {
-    public name = GlobalEventName.INTERPLANETARY_TRADE;
-    public description = 'Gain 2 M€ for each space tag (max 5) and influence.';
-    public revealedDelegate = PartyName.UNITY;
-    public currentDelegate = PartyName.UNITY;
-    public resolve(game: Game, turmoil: Turmoil) {
-      game.getPlayers().forEach((player) => {
-        player.addResource(Resources.MEGACREDITS, 2 * (Math.min(5, player.getTagCount(Tags.SPACE, 'raw')) + turmoil.getPlayerInfluence(player)), {log: true, from: this.name});
-      });
-    }
-    public renderData = RENDER_DATA;
+export class InterplanetaryTrade extends GlobalEvent implements IGlobalEvent {
+  constructor() {
+    super({
+      name: GlobalEventName.INTERPLANETARY_TRADE,
+      description: 'Gain 2 M€ for each space tag (max 5) and influence.',
+      revealedDelegate: PartyName.UNITY,
+      currentDelegate: PartyName.UNITY,
+      renderData: RENDER_DATA,
+    });
+  }
+  public resolve(game: Game, turmoil: Turmoil) {
+    game.getPlayers().forEach((player) => {
+      player.addResource(Resources.MEGACREDITS, 2 * (Math.min(5, player.getTagCount(Tags.SPACE, 'raw')) + turmoil.getPlayerInfluence(player)), {log: true, from: this.name});
+    });
+  }
 }

@@ -1,4 +1,4 @@
-import {IGlobalEvent} from './IGlobalEvent';
+import {IGlobalEvent, GlobalEvent} from './IGlobalEvent';
 import {GlobalEventName} from './GlobalEventName';
 import {PartyName} from '../parties/PartyName';
 import {Game} from '../../Game';
@@ -11,19 +11,23 @@ const RENDER_DATA = CardRenderer.builder((b) => {
   b.megacredits(-3).slash().colonies(1).influence({size: Size.SMALL});
 });
 
-export class MicrogravityHealthProblems implements IGlobalEvent {
-    public name = GlobalEventName.MICROGRAVITY_HEALTH_PROBLEMS;
-    public description = 'Lose 3 M€ for each colony (max 5, then reduced by influence).';
-    public revealedDelegate = PartyName.MARS;
-    public currentDelegate = PartyName.SCIENTISTS;
-    public resolve(game: Game, turmoil: Turmoil) {
-      game.getPlayers().forEach((player) => {
-        let coloniesCount: number = 0;
-        game.colonies.forEach((colony) => {
-          coloniesCount += colony.colonies.filter((owner) => owner === player.id).length;
-        });
-        player.deductResource(Resources.MEGACREDITS, 3 * Math.max(0, Math.min(5, coloniesCount) - turmoil.getPlayerInfluence(player)), {log: true, from: this.name});
+export class MicrogravityHealthProblems extends GlobalEvent implements IGlobalEvent {
+  constructor() {
+    super({
+      name: GlobalEventName.MICROGRAVITY_HEALTH_PROBLEMS,
+      description: 'Lose 3 M€ for each colony (max 5, then reduced by influence).',
+      revealedDelegate: PartyName.MARS,
+      currentDelegate: PartyName.SCIENTISTS,
+      renderData: RENDER_DATA,
+    });
+  }
+  public resolve(game: Game, turmoil: Turmoil) {
+    game.getPlayers().forEach((player) => {
+      let coloniesCount: number = 0;
+      game.colonies.forEach((colony) => {
+        coloniesCount += colony.colonies.filter((owner) => owner === player.id).length;
       });
-    }
-    public renderData = RENDER_DATA;
+      player.deductResource(Resources.MEGACREDITS, 3 * Math.max(0, Math.min(5, coloniesCount) - turmoil.getPlayerInfluence(player)), {log: true, from: this.name});
+    });
+  }
 }

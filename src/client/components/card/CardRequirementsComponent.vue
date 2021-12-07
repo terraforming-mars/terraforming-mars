@@ -1,5 +1,5 @@
 <template>
-  <div v-if="showIcons()" class="card-requirements" :class="getClasses()">
+  <div v-if="showIcons()" :class="getClasses()">
     <div v-for="(req, idx) in requirements.requirements" :key="idx">
       <card-requirement :requirement="req" />
     </div>
@@ -11,7 +11,7 @@
       <div class="card-special card-minus"></div>
       <div class="card-resource card-resource-plant red-outline"></div>
   </div>
-  <div v-else class="card-requirements" :class="getClasses()">{{ requirements.getRequirementsText() }}</div>
+  <div v-else :class="getClasses()">{{ requirements.getRequirementsText() }}</div>
 </template>
 
 <script lang="ts">
@@ -35,9 +35,9 @@ export default Vue.extend({
   methods: {
     getClasses(): string {
       if (this.requirements.hasMax()) {
-        return 'card-requirements-max';
+        return 'card-requirements card-requirements-max';
       }
-      return '';
+      return 'card-requirements';
     },
     showIcons(): boolean {
       return PreferencesManager.loadBoolean('experimental_ui');

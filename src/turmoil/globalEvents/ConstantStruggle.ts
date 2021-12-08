@@ -11,7 +11,7 @@ import {AltSecondaryTag} from '../../cards/render/CardRenderItem';
 
 const RENDER_DATA = CardRenderer.builder((b) => {
   b.minus().megacredits(10, {secondaryTag: AltSecondaryTag.INFLUENCE}).br;
-  b.text('planetary tracks +2');
+  b.planetaryTrack().text('2');
 });
 
 export class ConstantStruggle extends GlobalEvent implements IGlobalEvent {

@@ -20,7 +20,7 @@ export class EconomicHelp extends Card implements IProjectCard {
       metadata: {
         cardNumber: 'Pf42',
         renderData: CardRenderer.builder((b) => {
-          b.text('planetary track +3')
+          b.planetaryTrack().text('3').or().text('2')
             .venus(1, {played}).or(Size.SMALL)
             .earth(1, {played}).or(Size.SMALL).br;
           b.mars(1, {played}).or(Size.SMALL)

@@ -21,7 +21,8 @@ const RESOURCE_AND_TAG_TYPES = [
   CardRenderItemType.ANIMALS,
   CardRenderItemType.PLANTS,
   CardRenderItemType.MICROBES,
-  CardRenderItemType.SCIENCE];
+  CardRenderItemType.SCIENCE,
+  CardRenderItemType.CITY];
 
 export default Vue.extend({
   name: 'CardRenderItemComponent',
@@ -156,6 +157,13 @@ export default Vue.extend({
       } else if (type === CardRenderItemType.EMPTY_TILE_GOLDEN) {
         classes.push('card-tile-ares');
         classes.push('board-space-tile--adjacency-tile');
+      } else if (type === CardRenderItemType.EMPTY_TILE_SPECIAL) {
+        classes.push('card-tile');
+        if (this.item.size !== undefined) {
+          classes.push(`special-tile--${this.item.size}`);
+        } else {
+          classes.push('special-tile');
+        }
       } else if (type === CardRenderItemType.COMMUNITY) {
         classes.push('card-resource');
         classes.push('card-resource-community');
@@ -171,6 +179,9 @@ export default Vue.extend({
       } else if (type === CardRenderItemType.VENUSIAN_HABITAT) {
         classes.push('card-resource');
         classes.push('card-resource-venusian-habitat');
+      } else if (type === CardRenderItemType.SPECIALIZED_ROBOT) {
+        classes.push('card-resource');
+        classes.push('card-resource-specialized-robot');
       } else if (this.item.type === CardRenderItemType.MOON_COLONY) {
         if (this.item.secondaryTag === AltSecondaryTag.MOON_COLONY_RATE) {
           classes.push(sized('card-tile-lunar-colony-rate', this.item.size));
@@ -205,6 +216,9 @@ export default Vue.extend({
       }
       if (this.item.type === CardRenderItemType.MOON_LOGISTICS_RATE) {
         classes.push(this.item.size === undefined ? 'card-logistics-rate' : `card-logistics-rate--${this.item.size}`);
+      }
+      if (this.item.type === CardRenderItemType.PLANETARY_TRACK) {
+        classes.push('card-planetary-track');
       }
 
       // round tags

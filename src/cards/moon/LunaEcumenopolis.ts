@@ -77,7 +77,7 @@ export class LunaEcumenopolis extends MoonCard {
     // This function returns true when this space is next to two colonies. Don't try to understand firstSpaceId yet.
     const nextToTwoColonies = function(space: ISpace): boolean {
       const adjacentSpaces = moonData.moon.getAdjacentSpaces(space).filter((adjacentSpace) => {
-        return adjacentSpace.tile?.tileType === TileType.MOON_COLONY || adjacentSpace.id === firstSpaceId;
+        return MoonExpansion.spaceHasType(adjacentSpace, TileType.MOON_COLONY) || adjacentSpace.id === firstSpaceId;
       });
       return adjacentSpaces.length >= 2;
     };
@@ -121,7 +121,7 @@ class CustomPlaceMoonTile extends PlaceMoonColonyTile {
     const spaces = moonData.moon.getAvailableSpacesOnLand(this.player);
     const filtered = spaces.filter((space) => {
       const adjacentSpaces = moonData.moon.getAdjacentSpaces(space).filter((adjacentSpace) => {
-        return adjacentSpace.tile?.tileType === TileType.MOON_COLONY;
+        return MoonExpansion.spaceHasType(adjacentSpace, TileType.MOON_COLONY);
       });
       return adjacentSpaces.length >= 2;
     });

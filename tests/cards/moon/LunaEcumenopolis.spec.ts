@@ -77,6 +77,45 @@ describe('LunaEcumenopolis', () => {
     expect(player.getTerraformRating()).eq(18);
   });
 
+  it('can play next to Lunar Mine Urbanization', () => {
+    player.cardsInHand = [card];
+    player.megaCredits = card.cost;
+
+    const moon = moonData.moon;
+    moon.getSpace('m12').tile = {tileType: TileType.LUNAR_MINE_URBANIZATION};
+    moon.getSpace('m19').tile = {tileType: TileType.MOON_COLONY};
+
+    player.titanium = 2;
+    expect(player.getPlayableCards()).does.include(card);
+
+    player.titanium = 1;
+    expect(player.getPlayableCards()).does.not.include(card);
+  });
+
+  it('Place 2 colony tiles next to Lunar Mine Urbanization', () => {
+    moonData.colonyRate = 2;
+    const moon = moonData.moon;
+    expect(player.getTerraformRating()).eq(14);
+
+    moon.getSpace('m12').tile = {tileType: TileType.LUNAR_MINE_URBANIZATION};
+    moon.getSpace('m19').tile = {tileType: TileType.MOON_COLONY};
+    card.play(player);
+
+    const input1 = game.deferredActions.pop()!.execute() as SelectSpace;
+    expect(input1.availableSpaces.map((space) => space.id)).deep.eq(['m13', 'm18']);
+    input1.cb(moon.getSpace('m18'));
+    expect(moonData.colonyRate).eq(3);
+    expect(player.getTerraformRating()).eq(15);
+
+    const input2 = game.deferredActions.pop()!.execute() as SelectSpace;
+    expect(input2.availableSpaces.map((space) => space.id)).deep.eq(['m13', 'm17']);
+    input1.cb(moon.getSpace('m13'));
+    expect(moonData.colonyRate).eq(4);
+    game.deferredActions.runAll(() => {});
+    expect(player.getTerraformRating()).eq(18);
+  });
+
+
   // it('canPlay when Reds are in power', () => {
   //   const player = TestPlayers.BLUE.newPlayer();
   //   const game = Game.newInstance('foobar', [player], player, MOON_OPTIONS);

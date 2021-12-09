@@ -1235,6 +1235,7 @@
                     background-size: 25px 25px;
                 }
             }
+            // TODO(kberg) This set of tags looks like a duplicate of cards.less.
             .card-tag-wild {
                 background-image: url("../assets/tags/wild.png");
             }
@@ -1933,6 +1934,16 @@ each(@parties, {
     background-size: 41px 30px;
     width: 41px;
     height: 30px;
+  }
+})
+
+@parties: greens, kelvinists, mars-first, reds, scientists, unity;
+each(@parties, {
+  .card-party--@{value}-req {
+    background-image: url("./assets/parties/@{value}.png");
+    background-size: 31px 23px;
+    width: 31px;
+    height: 23px;
   }
 })
 

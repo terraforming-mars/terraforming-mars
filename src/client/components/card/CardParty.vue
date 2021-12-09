@@ -7,7 +7,6 @@
 <script lang="ts">
 
 import Vue from 'vue';
-import {generateClassString} from '@/utils/utils';
 
 export default Vue.extend({
   name: 'CardParty',
@@ -16,11 +15,23 @@ export default Vue.extend({
       required: true,
       type: String,
     },
+    size: {
+      required: false,
+      default: 'card',
+      type: String,
+    },
   },
   methods: {
     getClasses(): string {
-      const classes: string[] = ['card-description', 'card-party--' + this.party.toLowerCase().replace(' ', '-')];
-      return generateClassString(classes);
+      const p = this.party.toLowerCase().replace(' ', '-');
+      switch (this.size) {
+      case 'card':
+        // TODO(kberg): remove card-description if it turns out to not be necessary.
+        return 'card-description card-party--' + p;
+      case 'req':
+        return 'card-party--' + p + '-req';
+      }
+      return '';
     },
   },
 });

@@ -4,8 +4,12 @@
         <span v-if="requirement.isMax">MAX&nbsp;</span>
         {{amount()}}{{suffix()}}
         <div :class="getComponentClasses()"></div>
+        <template v-if="requirement.type === RequirementType.REMOVED_PLANTS">
+          <div class="card-special card-minus"></div>
+          <div class="card-resource card-resource-plant red-outline"></div>
+        </template>
+        <CardParty v-else-if="requirement.type === RequirementType.PARTY" class="" :party="getParty()" />
         {{getText()}}
-        <CardParty v-if="isPartyRequirement()" class="" :party="getParty()" />
       </div>
   </div>
 </template>
@@ -75,13 +79,13 @@ export default Vue.extend({
       // necessary.
       switch (this.requirement.type) {
       case RequirementType.OXYGEN:
-        return ['card-global-requirement', 'card-oxygen-global-requirement', 'card-oxygen--S'];
+        return ['card-global-requirement', 'card-oxygen--req'];
       case RequirementType.TEMPERATURE:
-        return ['card-global-requirement', 'card-temperature-global-requirement', 'card-temperature--S'];
+        return ['card-global-requirement', 'card-temperature--req'];
       case RequirementType.OCEANS:
-        return ['card-global-requirement', 'card-ocean-global-requirement', 'card-ocean--S'];
+        return ['card-global-requirement', 'card-ocean--req'];
       case RequirementType.VENUS:
-        return ['card-global-requirement', 'card-venus-global-requirement', 'card-venus--S'];
+        return ['card-global-requirement', 'card-venus--req'];
       case RequirementType.TR:
         return ['card-tile', 'card-tr'];
       case RequirementType.RESOURCE_TYPES:
@@ -92,16 +96,16 @@ export default Vue.extend({
       case RequirementType.CITIES:
         return ['card-tile', 'city-tile--S'];
       case RequirementType.COLONIES:
-        return ['card-resource-colony', 'card-resource-colony-S'];
+        return ['card-resource-colony', 'card-resource-colony--S'];
       case RequirementType.FLOATERS:
-        return ['card-resource-tag', 'card-tag-science'];
+        return ['card-resource-tag--S', 'card-tag-floater'];
       case RequirementType.CHAIRMAN:
         return ['card-chairman-red'];
       case RequirementType.PARTY_LEADERS:
         break;
       case RequirementType.TAG:
         const tagRequirement = this.requirement as TagCardRequirement;
-        return ['card-resource-tag', 'card-tag-' + tagRequirement.tag];
+        return ['card-resource-tag--S', 'card-tag-' + tagRequirement.tag];
       case RequirementType.PRODUCTION:
       case RequirementType.REMOVED_PLANTS:
         break;
@@ -122,23 +126,23 @@ export default Vue.extend({
     },
     getText(): string {
       switch (this.requirement.type) {
-      case RequirementType.REMOVED_PLANTS:
-        return this.requirement.type;
       case RequirementType.RESOURCE_TYPES:
         return 'production';
       }
       return '';
     },
-    isPartyRequirement(): boolean {
-      return this.requirement.type === RequirementType.PARTY;
-    },
     getParty(): PartyName {
-      if (this.isPartyRequirement()) {
+      if (this.requirement.type === RequirementType.PARTY) {
         return (this.requirement as PartyCardRequirement).party;
       } else {
         // Doesn't matter what this value is, as it is ignored.
         return PartyName.GREENS;
       }
+    },
+  },
+  computed: {
+    RequirementType() {
+      return RequirementType;
     },
   },
 });

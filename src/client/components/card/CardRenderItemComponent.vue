@@ -117,7 +117,7 @@ export default Vue.extend({
         classes.push('card-resource-colony');
         // TODO (chosta): think about an abstraction for item size
         if (this.item.size === Size.SMALL) {
-          classes.push('card-resource-colony-S');
+          classes.push('card-resource-colony--S');
         }
       } else if (type === CardRenderItemType.TRADE_DISCOUNT || type === CardRenderItemType.MULTIPLIER_WHITE) {
         classes.push('card-resource');
@@ -245,7 +245,7 @@ export default Vue.extend({
         } else if (type === CardRenderItemType.CITY) {
           classes.push('card-tag tag-city');
         } else if (this.item.type === CardRenderItemType.MARS) {
-          classes.push('card-tag tag-mars');
+          classes.push('card-tag card-tag-mars');
         }
       }
 

@@ -896,19 +896,44 @@
                 width: 14px;
                 background-size: 14px 46px;
             }
+            .card-temperature--req {
+                background-image: url(./assets/global-parameters/temperature.png);
+                width: 7px;
+                height: 23px;
+                background-size: 7px 23px;
+            }
             .card-ocean-global-requirement {
                 background-image: url(./assets/tiles/ocean.png);
+            }
+            .card-ocean--req {
+                background-image: url(./assets/tiles/ocean.png);
+                width: 21px;
+                height: 23px;
+                background-size: 21px 23px;
             }
             .card-oxygen-global-requirement {
                 background-image: url(./assets/global-parameters/oxygen.png);
                 width: 46px;
                 background-size: 46px;
             }
+            .card-oxygen--req {
+                background-image: url(./assets/global-parameters/oxygen.png);
+                width: 23px;
+                background-size: 23px 23px;
+                height: 23px;
+            }
             .card-venus-global-requirement {
                 background-image: url(./assets/global-parameters/venus.png);
                 width: 60px;
                 height: 40px;
                 background-size: 60px 40px;
+                color: #0000;
+            }
+            .card-venus--req {
+                background-image: url(./assets/global-parameters/venus.png);
+                width: 34px;
+                height: 23px;
+                background-size: 34px 23px;
                 color: #0000;
             }
             /*resources*/
@@ -1165,7 +1190,7 @@
                 width: 46px;
                 background-size: 46px;
             }
-            .card-resource-colony-S {
+            .card-resource-colony--S {
                 height: 30px !important;
                 width: 36px !important;
                 background-size: 36px !important;
@@ -1203,6 +1228,12 @@
                 box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.6), 0 0 0 2px rgba(0, 0, 0, 0.3);
                 vertical-align: middle;
                 filter: brightness(0.9);
+                &--S:extend(.card-container .card-content-wrapper .card-content .card-resource-tag) {
+                    width: 21px;
+                    height: 21px;
+                    line-height: 21px;
+                    background-size: 25px 25px;
+                }
             }
             .card-tag-wild {
                 background-image: url("../assets/tags/wild.png");
@@ -1251,6 +1282,9 @@
             }
             .card-tag-moon {
                 background-image: url("./assets/tags/moon.png")
+            }
+            .card-tag-mars {
+                background-image: url("./assets/tags/mars.png");
             }
             .card-community-services {
                 font-size: 42px;

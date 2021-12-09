@@ -1,17 +1,20 @@
 # <a name="README"> Terraforming Mars Open-source
 
-<div>
-<img src="https://raw.githubusercontent.com/bafolts/terraforming-mars/main/assets/expansion_icons/expansion_icon_corporateEra.png">
-<img src="https://raw.githubusercontent.com/bafolts/terraforming-mars/main/assets/expansion_icons/expansion_icon_venus.png">
-<img src="https://raw.githubusercontent.com/bafolts/terraforming-mars/main/assets/expansion_icons/expansion_icon_colonies.png">
-<img src="https://raw.githubusercontent.com/bafolts/terraforming-mars/main/assets/expansion_icons/expansion_icon_turmoil.png">
-<img src="https://raw.githubusercontent.com/bafolts/terraforming-mars/main/assets/expansion_icons/expansion_icon_prelude.png">
-  &nbsp;&nbsp;&nbsp;
-<img src="https://raw.githubusercontent.com/bafolts/terraforming-mars/main/assets/expansion_icons/expansion_icon_ares.png">
-<img src="https://raw.githubusercontent.com/bafolts/terraforming-mars/main/assets/expansion_icons/expansion_icon_community.png">
-<img src="https://raw.githubusercontent.com/bafolts/terraforming-mars/main/assets/expansion_icons/expansion_icon_promo.png">
-<img src="https://raw.githubusercontent.com/bafolts/terraforming-mars/main/assets/expansion_icons/expansion_icon_agendas.png">
-<img src="https://raw.githubusercontent.com/bafolts/terraforming-mars/main/assets/expansion_icons/expansion_icon_themoon.png">
+<div align="center">
+  <img src="https://raw.githubusercontent.com/bafolts/terraforming-mars/main/assets/expansion_icons/expansion_icon_corporateEra.png">
+  <img src="https://raw.githubusercontent.com/bafolts/terraforming-mars/main/assets/expansion_icons/expansion_icon_venus.png">
+  <img src="https://raw.githubusercontent.com/bafolts/terraforming-mars/main/assets/expansion_icons/expansion_icon_colonies.png">
+  <img src="https://raw.githubusercontent.com/bafolts/terraforming-mars/main/assets/expansion_icons/expansion_icon_turmoil.png">
+  <img src="https://raw.githubusercontent.com/bafolts/terraforming-mars/main/assets/expansion_icons/expansion_icon_prelude.png">
+</div>
+<div align="center">
+  <img src="https://raw.githubusercontent.com/bafolts/terraforming-mars/main/assets/expansion_icons/expansion_icon_ares.png">
+  <img src="https://raw.githubusercontent.com/bafolts/terraforming-mars/main/assets/expansion_icons/expansion_icon_community.png">
+  <img src="https://raw.githubusercontent.com/bafolts/terraforming-mars/main/assets/expansion_icons/expansion_icon_promo.png">
+  <img src="https://raw.githubusercontent.com/bafolts/terraforming-mars/main/assets/expansion_icons/expansion_icon_agendas.png">
+  <img src="https://raw.githubusercontent.com/bafolts/terraforming-mars/main/assets/expansion_icons/expansion_icon_themoon.png">
+  <img src="https://raw.githubusercontent.com/bafolts/terraforming-mars/main/assets/expansion_icons/expansion_icon_pathfinders.png">
+  <img src="https://raw.githubusercontent.com/bafolts/terraforming-mars/main/assets/expansion_icons/expansion_icon_escapeVelocity.png">
 </div>
 
 This is an open-source online implementation of the great board game Terraforming mars. **It is not affiliated

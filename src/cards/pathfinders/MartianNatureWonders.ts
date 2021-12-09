@@ -7,9 +7,9 @@ import {CardRenderer} from '../render/CardRenderer';
 import {Tags} from '../Tags';
 import {SelectSpace} from '../../inputs/SelectSpace';
 import {ISpace} from '../../boards/ISpace';
-import {GameSetup} from '../../GameSetup';
 import {AddResourcesToCard} from '../../deferredActions/AddResourcesToCard';
 import {ResourceType} from '../../ResourceType';
+import {TileType} from '../../TileType';
 
 export class MartianNatureWonders extends Card implements IProjectCard {
   constructor() {
@@ -41,8 +41,7 @@ export class MartianNatureWonders extends Card implements IProjectCard {
     return new SelectSpace('Select a Martian Natural Wonder space',
       player.game.board.getAvailableSpacesOnLand(player),
       (space: ISpace) => {
-        // Actually, is this going to survive deserialization?
-        space.player = GameSetup.neutralPlayerFor(player.game.id);
+        player.game.simpleAddTile(player, space, {tileType: TileType.MARTIAN_NATURE_WONDERS});
         player.game.grantSpaceBonuses(player, space);
         return undefined;
       });

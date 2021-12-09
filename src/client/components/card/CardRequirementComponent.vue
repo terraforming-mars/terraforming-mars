@@ -1,14 +1,14 @@
 <template>
   <div class="card-requirement">
       <div class="card-item-container">
-        <span v-if="requirement.isMax">MAX&nbsp;</span>
+        <template v-if="requirement.isMax">max&nbsp;</template>
         {{amount()}}{{suffix()}}
         <div :class="getComponentClasses()"></div>
         <template v-if="requirement.type === RequirementType.REMOVED_PLANTS">
           <div class="card-special card-minus"></div>
           <div class="card-resource card-resource-plant red-outline"></div>
         </template>
-        <CardParty v-else-if="requirement.type === RequirementType.PARTY" class="" :party="getParty()" />
+        <CardParty v-else-if="requirement.type === RequirementType.PARTY" class="" :party="getParty()" size="req" />
         {{getText()}}
       </div>
   </div>
@@ -17,7 +17,7 @@
 <script lang="ts">
 
 import Vue from 'vue';
-import {CardRequirement, PartyCardRequirement, ProductionCardRequirement, TagCardRequirement} from '@/cards/CardRequirement';
+import {CardRequirement, PartyCardRequirement, /* ProductionCardRequirement,*/ TagCardRequirement} from '@/cards/CardRequirement';
 import {RequirementType} from '@/cards/RequirementType';
 import {generateClassString} from '@/utils/utils';
 import CardParty from '@/client/components/card/CardParty.vue';
@@ -89,8 +89,7 @@ export default Vue.extend({
       case RequirementType.TR:
         return ['card-tile', 'card-tr'];
       case RequirementType.RESOURCE_TYPES:
-        const productionRequirement = this.requirement as ProductionCardRequirement;
-        return ['card-resource', 'card-resource-' + productionRequirement.resource];
+        return ['card-resource', 'card-resource-wild'];
       case RequirementType.GREENERIES:
         return ['card-tile', 'greenery-tile--M', 'greenery-tile-small'];
       case RequirementType.CITIES:

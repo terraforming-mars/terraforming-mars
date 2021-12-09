@@ -4,7 +4,7 @@
     <div class="board-space-text" v-if="text" v-i18n>{{ text }}</div>
     <bonus :bonus="space.bonus" v-if="space.tileType === undefined"></bonus>
     <bonus :bonus="space.bonus" v-if="space.tileType !== undefined && hideTiles"></bonus>
-    <div :class="'board-cube board-cube--'+space.color" v-if="space.color !== undefined && !hideTiles"></div>
+    <div :class="'board-cube board-cube--'+space.color" v-if="space.color !== undefined && space.color !== 'neutral' && !hideTiles"></div>
   </div>
 </template>
 

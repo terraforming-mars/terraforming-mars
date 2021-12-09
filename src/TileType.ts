@@ -46,6 +46,7 @@ export enum TileType {
     // Pathfinders
     WETLANDS, // 36
     RED_CITY, // 37
+    MARTIAN_NATURE_WONDERS, // 38
 }
 
 const TO_STRING_MAP: Map<TileType, string> = new Map([
@@ -88,6 +89,7 @@ const TO_STRING_MAP: Map<TileType, string> = new Map([
   [TileType.LUNAR_MINE_URBANIZATION, 'Lunar Mine Urbanization'],
   [TileType.WETLANDS, 'Wetlands'],
   [TileType.RED_CITY, 'Red City'],
+  [TileType.MARTIAN_NATURE_WONDERS, 'Martian Nature Wonders'],
 ]);
 
 export namespace TileType {

@@ -1917,10 +1917,15 @@ each(@parties, {
         vertical-align: middle;
     }
 
-    @resource_types: microbe, animal, science, floater, fighter, camp, asteroid, disease, preservation, data, syndicate-fleet, cube, venusian-habitat;
+    // This copies stuff above, but scoped inside card-resources-counter. It shouldn't be necessary if
+    // the stuff above wasn't contained inside card-content.
+    @resource_types: microbe, animal, science, floater, fighter, camp, asteroid, disease, preservation, data, syndicate-fleet, cube, venusian-habitat, specialized-robot;
     each(@resource_types, {
       .card-resource-@{value} {
         background-image: url("./assets/resources/@{value}.png");
       }
     })
+    .card-resource-cube {
+      background-image: url("./assets/cube.png");
+    }
 }

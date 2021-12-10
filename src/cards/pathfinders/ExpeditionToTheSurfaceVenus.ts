@@ -23,7 +23,7 @@ export class ExpeditionToTheSurfaceVenus extends Card implements IProjectCard {
           b.cards(2).venus(1).br;
           b.megacredits(1).slash().venus(1, {played});
         }),
-        description: 'Draw 2 cards. Raise Venus 1 step. Gain 1MC for each of your Venus tags, including this.',
+        description: 'Draw 2 cards. Raise Venus 1 step. Gain 1M€ for each of your Venus tags, including this.',
       },
     });
   }

@@ -18,7 +18,7 @@ export class StrategicBasePlanning extends PreludeCard {
         renderData: CardRenderer.builder((b) => {
           b.minus().megacredits(8).city().colonies();
         }),
-        description: 'Pay 8MC. Place a city. Place a colony.',
+        description: 'Pay 8M€. Place a city. Place a colony.',
       },
     });
   }

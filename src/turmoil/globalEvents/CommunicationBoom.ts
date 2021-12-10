@@ -9,8 +9,7 @@ import {AddResourcesToCards} from '../../deferredActions/AddResourcesToCards';
 import {CardRenderer} from '../../cards/render/CardRenderer';
 
 const RENDER_DATA = CardRenderer.builder((b) => {
-  b.minus().megacredits(10).br;
-  b.data().data().asterix().br;
+  b.megacredits(-10).nbsp.data({amount: 2}).asterix().br;
   b.data().slash().influence();
 });
 

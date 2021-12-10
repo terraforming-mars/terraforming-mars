@@ -195,7 +195,8 @@ export default Vue.extend({
       }
 
       if (this.item.type === CardRenderItemType.MOON_COLONY_RATE) {
-        classes.push(this.item.size === undefined ? 'card-colony-rate' : `card-colony-rate--${this.item.size}`);
+        classes.push('card-colony-rate');
+        if (this.item.size !== undefined) classes.push(`card-colony-rate--${this.item.size}`);
       }
       if (this.item.type === CardRenderItemType.MOON_MINE) {
         if (this.item.secondaryTag === AltSecondaryTag.MOON_MINING_RATE) {
@@ -205,7 +206,8 @@ export default Vue.extend({
         }
       }
       if (this.item.type === CardRenderItemType.MOON_MINING_RATE) {
-        classes.push(this.item.size === undefined ? 'card-mining-rate' : `card-mining-rate--${this.item.size}`);
+        classes.push('card-mining-rate');
+        if (this.item.size !== undefined) classes.push(`card-mining-rate--${this.item.size}`);
       }
       if (this.item.type === CardRenderItemType.MOON_ROAD) {
         if (this.item.secondaryTag === AltSecondaryTag.MOON_LOGISTICS_RATE) {
@@ -215,7 +217,8 @@ export default Vue.extend({
         }
       }
       if (this.item.type === CardRenderItemType.MOON_LOGISTICS_RATE) {
-        classes.push(this.item.size === undefined ? 'card-logistics-rate' : `card-logistics-rate--${this.item.size}`);
+        classes.push('card-logistics-rate');
+        if (this.item.size !== undefined) classes.push(`card-logistics-rate--${this.item.size}`);
       }
       if (this.item.type === CardRenderItemType.PLANETARY_TRACK) {
         classes.push('card-planetary-track');

@@ -245,7 +245,7 @@ export default Vue.extend({
         } else if (type === CardRenderItemType.CITY) {
           classes.push('card-tag tag-city');
         } else if (this.item.type === CardRenderItemType.MARS) {
-          classes.push('card-tag card-tag-mars');
+          classes.push('card-tag tag-mars');
         }
       }
 

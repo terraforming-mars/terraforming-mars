@@ -12,6 +12,9 @@ export class BuildColony implements DeferredAction {
     public allowDuplicate: boolean = false,
     public title: string = 'Select where to build a colony',
     public openColonies?: Array<Colony>,
+    private options?: {
+      vitalColonyHook: boolean
+    },
   ) {}
 
   public execute() {
@@ -32,7 +35,7 @@ export class BuildColony implements DeferredAction {
     return new SelectColony(this.title, 'Build', coloniesModel, (colonyName: ColonyName) => {
       openColonies.forEach((colony) => {
         if (colony.name === colonyName) {
-          colony.addColony(this.player);
+          colony.addColony(this.player, this.options);
         }
         return undefined;
       });

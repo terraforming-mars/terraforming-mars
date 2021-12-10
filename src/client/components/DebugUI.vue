@@ -6,10 +6,6 @@
             </div>
             <div class="form-group">
               <input class="form-input form-input-line" placeholder="filter" v-model="filterText">
-              <input type="checkbox" name="filterDescription" id="filterDescription-checkbox" v-model="filterDescription">
-              <label for="filterDescription-checkbox">
-                  <span v-i18n>Filter description</span>
-              </label>
               <input type="checkbox" name="sortById" id="sortById-checkbox" v-model="sortById">
               <label for="sortById-checkbox">
                   <span v-i18n>Sort by ID (work in progress)</span>
@@ -148,7 +144,6 @@ import {
 import {GameModule} from '@/GameModule';
 import {ICard} from '@/cards/ICard';
 import {CardType} from '@/cards/CardType';
-import {ICardRenderDescription, isIDescription} from '@/cards/render/ICardRenderDescription';
 import {CardName} from '@/CardName';
 import {ICardFactory} from '@/cards/ICardFactory';
 import {PreferencesManager} from '@/client/utils/PreferencesManager';
@@ -190,7 +185,6 @@ const ALL_MODULES = `${MODULE_BASE}${MODULE_CORP}${MODULE_PRELUDE}${MODULE_VENUS
 
 export interface DebugUIModel {
   filterText: string,
-  filterDescription: boolean,
   sortById: boolean,
   base: boolean,
   corporateEra: boolean,
@@ -215,7 +209,6 @@ export default Vue.extend({
   data() {
     return {
       filterText: '',
-      filterDescription: false,
       sortById: false,
       base: true,
       corporateEra: true,
@@ -401,18 +394,7 @@ export default Vue.extend({
       const filterText = this.$data.filterText.toUpperCase();
       if (this.$data.filterText.length > 0) {
         if (cardName.toUpperCase().includes(filterText) === false) {
-          if (this.$data.filterDescription) {
-            let desc: string | ICardRenderDescription | undefined = card.card.metadata?.description;
-            if (isIDescription(desc)) {
-              desc = desc.text;
-            }
-            // TODO(kberg): optimize by having all the descriptions in upper case.
-            if (desc === undefined || desc.toUpperCase().includes(filterText) === false) {
-              return false;
-            }
-          } else {
-            return false;
-          }
+          return false;
         }
       }
 

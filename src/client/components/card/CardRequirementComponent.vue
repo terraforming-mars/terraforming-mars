@@ -87,7 +87,7 @@ export default Vue.extend({
       case RequirementType.VENUS:
         return ['card-global-requirement', 'card-venus--req'];
       case RequirementType.TR:
-        return ['card-tile', 'card-tr'];
+        return ['card-tile', 'card-tr', 'card-tr--req'];
       case RequirementType.RESOURCE_TYPES:
         return ['card-resource', 'card-resource-wild'];
       case RequirementType.GREENERIES:
@@ -109,11 +109,11 @@ export default Vue.extend({
       case RequirementType.REMOVED_PLANTS:
         break;
       case RequirementType.COLONY_RATE:
-        return ['card-colony-rate--S'];
+        return ['card-colony-rate', 'card-colony-rate--req'];
       case RequirementType.MINING_RATE:
-        return ['card-mining-rate--S'];
+        return ['card-mining-rate', 'card-mining-rate--req'];
       case RequirementType.LOGISTIC_RATE:
-        return ['card-logistics-rate--S'];
+        return ['card-logistics-rate', 'card-logistics-rate--req'];
       case RequirementType.COLONY_TILES:
         return ['card-tile-lunar-colony--S'];
       case RequirementType.MINING_TILES:

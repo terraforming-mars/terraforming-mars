@@ -6,10 +6,10 @@ import {Turmoil} from '../Turmoil';
 import {Tags} from '../../cards/Tags';
 import {Resources} from '../../Resources';
 import {CardRenderer} from '../../cards/render/CardRenderer';
-import {AltSecondaryTag} from '../../cards/render/CardRenderItem';
+import {Size} from '../../cards/render/Size';
 
 const RENDER_DATA = CardRenderer.builder((b) => {
-  b.megacredits(2).slash().mars(1, {played: true, secondaryTag: AltSecondaryTag.INFLUENCE});
+  b.megacredits(2).slash().mars(1, {played: true}).influence({size: Size.SMALL});
 });
 
 export class BalancedDevelopment extends GlobalEvent implements IGlobalEvent {

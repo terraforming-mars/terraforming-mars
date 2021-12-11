@@ -27,7 +27,7 @@ export class VitalColony extends PreludeCard {
         false,
         undefined,
         undefined,
-        {vitalColonyHook: true}));
+        {giveBonusTwice: true}));
     return undefined;
   }
 }

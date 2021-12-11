@@ -13,7 +13,8 @@ export class BuildColony implements DeferredAction {
     public title: string = 'Select where to build a colony',
     public openColonies?: Array<Colony>,
     private options?: {
-      vitalColonyHook: boolean
+      // Custom for Vital Colony.
+      giveBonusTwice: boolean
     },
   ) {}
 

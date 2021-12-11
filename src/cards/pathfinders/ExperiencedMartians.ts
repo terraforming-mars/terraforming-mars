@@ -16,7 +16,7 @@ export class ExperiencedMartians extends PreludeCard {
         renderData: CardRenderer.builder((b) => {
           b.delegates(1).cards(1, {secondaryTag: Tags.MARS}).cards(1, {secondaryTag: Tags.MARS}).production((pb) => pb.megacredits(2));
         }),
-        description: 'Place 1 delegate in any party. Draw 2 cards with a Mars tag. Increase your MC production 2 steps.',
+        description: 'Place 1 delegate in any party. Draw 2 cards with a Mars tag. Increase your M€ production 2 steps.',
       },
     });
   }

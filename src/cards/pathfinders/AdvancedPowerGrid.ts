@@ -21,7 +21,7 @@ export class AdvancedPowerGrid extends Card implements IProjectCard {
         renderData: CardRenderer.builder((b) => {
           b.production((pb) => pb.energy(2).br.megacredits(1).slash().energy(1, {played}));
         }),
-        description: 'Increase your energy production 2 steps. Increase your MC production 1 step per Power tag you have, including this.',
+        description: 'Increase your energy production 2 steps. Increase your M€ production 1 step per Power tag you have, including this.',
       },
     });
   }

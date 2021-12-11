@@ -29,7 +29,7 @@ export class RedCity extends Card {
           b.production((pb) => pb.minus().energy(1).megacredits(2));
         }),
         description: 'Requires that Reds are ruling or that you have 2 delegates there. ' +
-          '-1 energy prod, +2 MC prod. ' +
+          '-1 energy prod, +2 M€ prod. ' +
           'Place the special tile on Mars ADJACENT TO NO GREENERY. ' +
           'NO GREENERY MAY BE PLACED NEXT TO THIS TILE. 1 VP for every empty space next to this tile (Ares hazards don\'t count.)',
         victoryPoints: CardRenderDynamicVictoryPoints.questionmark(),

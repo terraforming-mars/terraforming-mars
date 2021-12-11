@@ -26,7 +26,7 @@ export class Cryptocurrency extends Card implements IProjectCard, IActionCard {
           b.action('Spend 1 energy to add 1 data to this card.', (eb) => {
             eb.energy(1).startAction.data({amount: 1}).or();
           }).br;
-          b.action('Remove all data from this card to gain 3MC per data removed.', (eb) => {
+          b.action('Remove all data from this card to gain 3M€ per data removed.', (eb) => {
             eb.text('x').data({amount: 1}).startAction.text('x').megacredits(3);
           });
         }),
@@ -51,7 +51,7 @@ export class Cryptocurrency extends Card implements IProjectCard, IActionCard {
       });
 
     const secondOption = new SelectOption(
-      'Remove all data from this card to gain 3MC per data removed.',
+      'Remove all data from this card to gain 3M€ per data removed.',
       'Spend data',
       () => {
         player.addResource(Resources.MEGACREDITS, 3 * this.resourceCount, {log: true});

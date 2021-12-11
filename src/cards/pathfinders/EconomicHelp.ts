@@ -29,7 +29,7 @@ export class EconomicHelp extends Card implements IProjectCard {
           b.production((pb) => pb.megacredits(1));
         }),
         description: 'Raise the lowest planetary influence track by 3. When tied, raise all lowest tracks by 2. ' +
-         'Increase your MC production 1 step',
+         'Increase your M€ production 1 step',
       },
     });
   }

@@ -34,7 +34,7 @@ export class EarlyExpedition extends Card implements IProjectCard {
           b.data().city().asterix();
         }),
         description: 'Temperature must be -18 C or lower. Decrease your energy production 1 step and ' +
-          'Raise your MC production 3 steps. Add 1 data to ANY CARD. Place a city tile on Mars NEXT TO NO OTHER TILE.',
+          'Raise your M€ production 3 steps. Add 1 data to ANY CARD. Place a city tile on Mars NEXT TO NO OTHER TILE.',
       },
     });
   }

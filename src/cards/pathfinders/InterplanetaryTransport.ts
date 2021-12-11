@@ -24,7 +24,7 @@ export class InterplanetaryTransport extends Card implements IProjectCard {
         renderData: CardRenderer.builder((b) => {
           b.production((pb) => pb.megacredits(1)).slash().city({all, secondaryTag: Tags.SPACE}).asterix;
         }),
-        description: 'Increase your MC production 1 step for every offworld city tile.',
+        description: 'Increase your M€ production 1 step for every offworld city tile.',
       },
     });
   }

@@ -32,6 +32,7 @@ import {ExpeditionToTheSurfaceVenus} from './ExpeditionToTheSurfaceVenus';
 import {ExperiencedMartians} from './ExperiencedMartians';
 import {FlatMarsTheory} from './FlatMarsTheory';
 import {FloaterUrbanism} from './FloaterUrbanism';
+import {GeologicalExpedition} from './GeologicalExpedition';
 import {HighTempSuperconductors} from './HighTempSuperconductors';
 import {HydrogenBombardment} from './HydrogenBombardment';
 import {HydrogenProcessingPlant} from './HydrogenProcessingPlant';
@@ -101,7 +102,7 @@ export const PATHFINDERS_CARD_MANIFEST = new CardManifest({
     {cardName: CardName.CERES_SPACEPORT, Factory: CeresSpaceport},
     {cardName: CardName.DYSON_SCREENS, Factory: DysonScreens},
     {cardName: CardName.LUNAR_EMBASSY, Factory: LunarEmbassy},
-    // // {cardName: CardName.GEOLOGICAL_EXPEDITION, Factory: GeologicalExpedition},               // Touches tile placement.
+    {cardName: CardName.GEOLOGICAL_EXPEDITION, Factory: GeologicalExpedition},
     {cardName: CardName.EARLY_EXPEDITION, Factory: EarlyExpedition},
     {cardName: CardName.HYDROGEN_PROCESSING_PLANT, Factory: HydrogenProcessingPlant},
     {cardName: CardName.POWER_PLANT_PATHFINDERS, Factory: PowerPlant},

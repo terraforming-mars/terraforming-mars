@@ -65,6 +65,7 @@ import {Ringcom} from './Ringcom';
 import {ResearchGrant} from './ResearchGrant';
 import {ReturntoAbandonedTechnology} from './ReturntoAbandonedTechnology';
 import {RichDeposits} from './RichDeposits';
+import {RobinHaulings} from './RobinHaulings';
 import {SecretLabs} from './SecretLabs';
 import {SmallOpenPitMine} from './SmallOpenPitMine';
 import {SmallComet} from './SmallComet';
@@ -179,7 +180,7 @@ export const PATHFINDERS_CARD_MANIFEST = new CardManifest({
     // {cardName: CardName.BIO_SOL, Factory: BioSol},
     // {cardName: CardName.AURORAI, Factory: Aurorai},
     // {cardName: CardName.COLLEGIUM_COPERNICUS, Factory: CollegiumCopernicus},
-    // {cardName: CardName.ROBIN_HAULINGS, Factory: RobinHaulings},
+    {cardName: CardName.ROBIN_HAULINGS, Factory: RobinHaulings, compatibility: GameModule.Venus},
     // {cardName: CardName.ODYSSEY_EFFECT, Factory: OdysseyEffect},
     // {cardName: CardName.GAGARIN_MOBILE_BASE, Factory: GagarinMobileBase},
     // {cardName: CardName.MARS_FRONTIER_ALLIANCE, Factory: MarsFrontierAlliance},

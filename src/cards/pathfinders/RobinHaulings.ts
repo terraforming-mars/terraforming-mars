@@ -26,16 +26,13 @@ export class RobinHaulings extends Card implements CorporationCard {
         cardNumber: 'PfC9',
         description: 'You start with 39 M€',
         renderData: CardRenderer.builder((b) => {
-          b.megacredits(39).data({amount: 2}).br;
-          b.corpBox('effect', (ce) => {
-            ce.effect('When ever you play a card with a Venus tag add 1 floater to any card.', (eb) => {
-              eb.venus(1, {played}).startEffect.floaters(1).asterix().br;
-            });
+          b.megacredits(39).br;
+          b.effect('When ever you play a card with a Venus tag add 1 floater to any card.', (eb) => {
+            eb.venus(1, {played}).startEffect.floaters(1).asterix();
           });
-          b.corpBox('action', (ce) => {
-            ce.action('Remove 3 floaters from this card to raise Venus 1 step or raise oxygen 1 step', (ab) => {
-              ab.floaters(3).startAction.venus(1).or().oxygen(1);
-            });
+          b.br;
+          b.action('Remove 3 floaters from this card to raise Venus 1 step or raise oxygen 1 step', (ab) => {
+            ab.floaters(3, {digit: true}).startAction.venus(1).or().oxygen(1);
           });
         }),
       },

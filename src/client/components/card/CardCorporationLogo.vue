@@ -212,6 +212,9 @@
     <template v-else-if="title ===  CardName.MARTIAN_INSURANCE_GROUP">
       <div class="card-martian-insurance-group-logo"></div>
     </template>
+    <template v-else-if="title ===  CardName.ROBIN_HAULINGS">
+      <div class="card-robin-haulings-logo"></div>
+    </template>
     <template v-else-if="title ===  CardName.CURIOSITY_II">
       <div class="card-curiosity-ii-logo">Curiosity II</div>
     </template>

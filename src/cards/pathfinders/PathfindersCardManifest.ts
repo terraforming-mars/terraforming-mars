@@ -54,6 +54,7 @@ import {NobelLabs} from './NobelLabs';
 import {OrbitalLaboratories} from './OrbitalLaboratories';
 import {OzoneGenerators} from './OzoneGenerators';
 import {PersonalAgenda} from './PersonalAgenda';
+import {Polaris} from './Polaris';
 import {Pollinators} from './Pollinators';
 import {PowerPlant} from './PowerPlant';
 import {PrefabricationofHumanHabitats} from './PrefabricationofHumanHabitats';
@@ -163,7 +164,7 @@ export const PATHFINDERS_CARD_MANIFEST = new CardManifest({
     {cardName: CardName.TERRAFORMING_ROBOTS, Factory: TerraformingRobots},
   ],
   corporationCards: [
-    // {cardName: CardName.POLARIS, Factory: Polaris},
+    {cardName: CardName.POLARIS, Factory: Polaris},
     // {cardName: CardName.PLANET_PR, Factory: planetpr},
     // {cardName: CardName.AMBIENT, Factory: Ambient},
     {cardName: CardName.RINGCOM, Factory: Ringcom},

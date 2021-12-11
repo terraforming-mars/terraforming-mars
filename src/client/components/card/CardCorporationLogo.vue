@@ -200,6 +200,9 @@
     <template v-else-if="title === CardName.THE_ARCHAIC_FOUNDATION_INSTITUTE">
       <div class="card-the-archaic-foundation-institute-logo"></div>
     </template>
+    <template v-else-if="title ===  CardName.POLARIS">
+      <div class="card-polaris-logo"></div>
+    </template>
     <template v-else-if="title ===  CardName.RINGCOM">
       <div class="card-ringcom-logo"></div>
     </template>

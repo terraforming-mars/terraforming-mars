@@ -284,6 +284,10 @@ class Builder {
     return this._appendToRow(new CardRenderItem(CardRenderItemType.CHAIRMAN, -1, options));
   }
 
+  public globalEvent() {
+    return this._appendToRow(new CardRenderItem(CardRenderItemType.GLOBAL_EVENT));
+  }
+
   public noTags() {
     return this._appendToRow(new CardRenderItem(CardRenderItemType.NO_TAGS, -1));
   }

@@ -51,7 +51,7 @@ describe('FreyjaBiodomes', function() {
     player.playedCards.push(card2, card3);
 
     const action = card.play(player) as SelectCard<ICard>;
-    expect(action instanceof SelectCard).is.true;
+    expect(action).instanceOf(SelectCard);
 
     action.cb([card2]);
     expect(player.getProduction(Resources.ENERGY)).to.eq(0);

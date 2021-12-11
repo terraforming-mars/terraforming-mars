@@ -34,7 +34,7 @@ describe('Dirigibles', function() {
   it('Should act - multiple targets', function() {
     player.playedCards.push(new FloatingHabs());
     const action = card.action(player);
-    expect(action instanceof SelectCard).is.true;
+    expect(action).instanceOf(SelectCard);
 
     action!.cb([card]);
     expect(card.resourceCount).to.eq(1);

@@ -27,7 +27,7 @@ describe('Astrodrill', function() {
 
   it('Should play - can spend asteroid resource', function() {
     const action = card.action(player) as OrOptions;
-    expect(action instanceof OrOptions).is.true;
+    expect(action).instanceOf(OrOptions);
     expect(action.options).has.lengthOf(3);
 
     // spend asteroid resource
@@ -39,7 +39,7 @@ describe('Astrodrill', function() {
 
   it('Should play - can add asteroid resource to self', function() {
     const action = card.action(player) as OrOptions;
-    expect(action instanceof OrOptions).is.true;
+    expect(action).instanceOf(OrOptions);
     expect(action.options).has.lengthOf(3);
 
     // add asteroid resource and gain standard resource
@@ -54,7 +54,7 @@ describe('Astrodrill', function() {
     player.playedCards.push(cometAiming);
 
     const action = card.action(player) as OrOptions;
-    expect(action instanceof OrOptions).is.true;
+    expect(action).instanceOf(OrOptions);
     const addAsteroidOption = action.options[1] as SelectCard<ICard>;
 
     const result = addAsteroidOption.cb([cometAiming]);
@@ -64,7 +64,7 @@ describe('Astrodrill', function() {
 
   it('Should play - can gain a standard resource', function() {
     const action = card.action(player) as OrOptions;
-    expect(action instanceof OrOptions).is.true;
+    expect(action).instanceOf(OrOptions);
     expect(action.options).has.lengthOf(3);
 
     const resourceChoices = action.options[2].cb() as OrOptions;

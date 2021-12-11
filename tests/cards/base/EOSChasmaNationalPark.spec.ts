@@ -33,7 +33,7 @@ describe('EosChasmaNationalPark', () => {
 
     expect(player.canPlayIgnoringCost(card)).is.true;
     const action = card.play(player);
-    expect(action instanceof SelectCard).is.true;
+    expect(action).instanceOf(SelectCard);
     player.playedCards.push(card);
         action!.cb([birds]);
 

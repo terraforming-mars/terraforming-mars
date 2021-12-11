@@ -24,7 +24,7 @@ describe('InventorsGuild', function() {
   it('Should act', function() {
     player.megaCredits = 3;
     const action = card.action(player);
-    expect(action instanceof SelectCard).is.true;
+    expect(action).instanceOf(SelectCard);
     (action! as SelectCard<IProjectCard>).cb([]);
 
     expect(game.dealer.discarded).has.lengthOf(1);

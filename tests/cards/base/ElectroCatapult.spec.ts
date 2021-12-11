@@ -45,7 +45,7 @@ describe('ElectroCatapult', () => {
     player.steel = 1;
 
     const action = card.action(player);
-    expect(action instanceof OrOptions).is.true;
+    expect(action).instanceOf(OrOptions);
     expect(action!.options).has.lengthOf(2);
 
         action!.options[0].cb();

@@ -33,7 +33,7 @@ describe('MiningAreaAres', function() {
     }
 
     const action = card.play(player);
-    expect(action instanceof SelectSpace).is.true;
+    expect(action).instanceOf(SelectSpace);
 
     const titaniumSpace = action.availableSpaces.find((space) => space.bonus.includes(SpaceBonus.TITANIUM) && space.bonus.includes(SpaceBonus.STEEL) === false);
     expect(titaniumSpace).is.not.undefined;

@@ -28,7 +28,7 @@ describe('AerialMappers', function() {
     const card2 = new Dirigibles();
     player.playedCards.push(card2);
     const action = card.action(player) as SelectCard<ICard>;
-    expect(action instanceof SelectCard).is.true;
+    expect(action).instanceOf(SelectCard);
 
     action.cb([card]);
     expect(card.resourceCount).to.eq(1);

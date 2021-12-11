@@ -34,7 +34,7 @@ describe('Thermophiles', function() {
     player.playedCards.push(card, new VenusianInsects());
 
     const action = card.action(player);
-    expect(action instanceof SelectCard).is.true;
+    expect(action).instanceOf(SelectCard);
         action!.cb([card]);
         expect(card.resourceCount).to.eq(1);
 

@@ -26,7 +26,7 @@ describe('BactoviralResearch', function() {
     player.playedCards.push(card2, card3, card4);
 
     const action = card.play(player) as SelectCard<ICard>;
-    expect(action instanceof SelectCard).is.true;
+    expect(action).instanceOf(SelectCard);
     action.cb([card3]);
     expect(player.getResourcesOnCard(card3)).to.eq(4);
     expect(player.cardsInHand.length).to.eq(1);

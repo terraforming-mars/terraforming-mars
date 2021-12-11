@@ -13,7 +13,7 @@ describe('BusinessContacts', function() {
     const game = Game.newInstance('foobar', [player, redPlayer], player);
     const action = card.play(player)!;
     expect(action).is.not.undefined;
-    expect(action instanceof SelectCard).is.true;
+    expect(action).instanceOf(SelectCard);
     const card1 = action.cards[0];
     const card2 = action.cards[1];
     const card3 = action.cards[2];

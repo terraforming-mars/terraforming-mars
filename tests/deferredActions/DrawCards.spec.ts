@@ -50,7 +50,7 @@ describe('DrawCards', function() {
 
   it('draws 2 from 4', function() {
     const action = DrawCards.keepSome(player, 4, {keepMax: 2}).execute();
-    expect(action instanceof SelectCard).is.true;
+    expect(action).instanceOf(SelectCard);
     expect(action!.minCardsToSelect).to.eq(2);
     expect(action!.maxCardsToSelect).to.eq(2);
     action!.cb([action!.cards[0], action!.cards[2]]);
@@ -61,7 +61,7 @@ describe('DrawCards', function() {
   it('buys 1', function() {
     player.megaCredits = 3;
     const action = DrawCards.keepSome(player, 1, {paying: true}).execute();
-    expect(action instanceof SelectCard).is.true;
+    expect(action).instanceOf(SelectCard);
     expect(action!.minCardsToSelect).to.eq(0);
     expect(action!.maxCardsToSelect).to.eq(1);
     action!.cb([action!.cards[0]]);
@@ -74,7 +74,7 @@ describe('DrawCards', function() {
   it('cannot buy', function() {
     player.megaCredits = 2;
     const action = DrawCards.keepSome(player, 1, {paying: true}).execute();
-    expect(action instanceof SelectCard).is.true;
+    expect(action).instanceOf(SelectCard);
     expect(action!.minCardsToSelect).to.eq(0);
     expect(action!.maxCardsToSelect).to.eq(0);
     action!.cb([]);

@@ -19,7 +19,7 @@ describe('Factorum', function() {
     player.corporationCard = card;
 
     const action = card.action(player);
-    expect(action instanceof OrOptions).is.true;
+    expect(action).instanceOf(OrOptions);
     if ( ! (action instanceof OrOptions)) return;
 
     expect(action.options).has.lengthOf(2);

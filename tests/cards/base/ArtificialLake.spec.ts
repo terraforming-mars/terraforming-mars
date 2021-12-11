@@ -24,7 +24,7 @@ describe('ArtificialLake', function() {
 
   it('Should play', function() {
     const action = card.play(player);
-    expect(action instanceof SelectSpace).is.true;
+    expect(action).instanceOf(SelectSpace);
 
         action!.availableSpaces.forEach((space) => {
           expect(space.spaceType).to.eq(SpaceType.LAND);

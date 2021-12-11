@@ -22,7 +22,7 @@ describe('NaturalPreserveAres', function() {
     expect(card.canPlay(player)).is.true;
     const action = card.play(player);
     expect(action).is.not.undefined;
-    expect(action instanceof SelectSpace).is.true;
+    expect(action).instanceOf(SelectSpace);
 
     const space = action.availableSpaces[0];
     action.cb(space);

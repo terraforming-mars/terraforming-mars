@@ -78,10 +78,13 @@ export abstract class Colony implements SerializedColony {
       return this.colonies.length >= 3;
     }
 
-    public addColony(player: Player): void {
+    public addColony(player: Player, options?: {giveBonusTwice: boolean}): void {
       player.game.log('${0} built a colony on ${1}', (b) => b.player(player).colony(this));
 
       this.giveBonus(player, this.buildType, this.buildQuantity[this.colonies.length], this.buildResource);
+      if (options?.giveBonusTwice === true) { // Vital Colony hook.
+        this.giveBonus(player, this.buildType, this.buildQuantity[this.colonies.length], this.buildResource);
+      }
 
       this.colonies.push(player.id);
       if (this.trackPosition < this.colonies.length) {

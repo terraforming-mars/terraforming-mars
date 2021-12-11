@@ -82,6 +82,7 @@ import {TerraformingRobots} from './TerraformingRobots';
 import {ValuableGases} from './ValuableGases';
 import {VeneraBase} from './VeneraBase';
 import {VenusFirst} from './VenusFirst';
+import {VitalColony} from './VitalColony';
 
 export const PATHFINDERS_CARD_MANIFEST = new CardManifest({
   module: GameModule.Pathfinders,
@@ -199,7 +200,7 @@ export const PATHFINDERS_CARD_MANIFEST = new CardManifest({
     {cardName: CardName.DESIGN_COMPANY, Factory: DesignCompany},
     // {cardName: CardName.CONSOLIDATION, Factory: Consolidation},
     {cardName: CardName.PERSONAL_AGENDA, Factory: PersonalAgenda},
-    // {cardName: CardName.VITAL_COLONY, Factory: VitalColony, compatibility: GameModule.Colonies},
+    {cardName: CardName.VITAL_COLONY, Factory: VitalColony, compatibility: GameModule.Colonies},
     {cardName: CardName.STRATEGIC_BASE_PLANNING, Factory: StrategicBasePlanning, compatibility: GameModule.Colonies},
     {cardName: CardName.DEEP_SPACE_OPERATIONS, Factory: DeepSpaceOperations},
     {cardName: CardName.ANTI_DESERTIFICATION_TECHNIQUES, Factory: AntidesertificationTechniques},

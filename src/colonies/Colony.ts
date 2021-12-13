@@ -31,7 +31,7 @@ type TradeOptions = {
   usesTradeFleet?: boolean;
   decreaseTrackAfterTrade?: boolean;
   giveColonyBonuses?: boolean;
-  selfishTrade?: boolean;
+  // selfishTrade?: boolean; Will be used shortly.
 };
 export abstract class Colony implements SerializedColony {
     public abstract name: ColonyName;
@@ -151,13 +151,13 @@ export abstract class Colony implements SerializedColony {
       }
 
       // !== false because default is true.
-      if (options.usesTradeFleet !== true) {
+      if (options.usesTradeFleet !== false) {
         this.visitor = player.id;
         player.tradesThisGeneration++;
       }
 
       // !== false because default is true.
-      if (options.decreaseTrackAfterTrade !== true) {
+      if (options.decreaseTrackAfterTrade !== false) {
         player.game.defer(new DeferredAction(player, () => {
           this.trackPosition = this.colonies.length;
           return undefined;

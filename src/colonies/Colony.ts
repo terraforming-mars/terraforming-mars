@@ -31,7 +31,7 @@ type TradeOptions = {
   usesTradeFleet?: boolean;
   decreaseTrackAfterTrade?: boolean;
   giveColonyBonuses?: boolean;
-  // selfishTrade?: boolean; Will be used shortly.
+  selfishTrade?: boolean;
 };
 export abstract class Colony implements SerializedColony {
     public abstract name: ColonyName;
@@ -150,7 +150,7 @@ export abstract class Colony implements SerializedColony {
 
       // !== false because default is true.
       if (options.giveColonyBonuses !== false) {
-        player.game.defer(new GiveColonyBonus(player, this));
+        player.game.defer(new GiveColonyBonus(player, this, options.selfishTrade));
       }
 
       // !== false because default is true.

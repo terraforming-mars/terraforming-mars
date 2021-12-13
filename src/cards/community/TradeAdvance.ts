@@ -31,7 +31,7 @@ export class TradeAdvance extends PreludeCard implements IProjectCard {
       () => {
         const openColonies = player.game.colonies.filter((colony) => colony.isActive);
         openColonies.forEach((colony) => {
-          colony.trade(player, 1, false);
+          colony.trade(player, {usesTradeFleet: false}, 1);
         });
         return undefined;
       },

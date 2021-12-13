@@ -4,6 +4,7 @@ import {CardRenderer} from '../render/CardRenderer';
 import {StandardProjectCard} from '../StandardProjectCard';
 import {ColonyName} from '../../colonies/ColonyName';
 import {BuildColony} from '../../deferredActions/BuildColony';
+import {MAX_COLONIES_PER_TILE} from '../../constants';
 
 export class BuildColonyStandardProject extends StandardProjectCard {
   constructor() {
@@ -22,7 +23,8 @@ export class BuildColonyStandardProject extends StandardProjectCard {
   }
 
   private getOpenColonies(player: Player) {
-    let openColonies = player.game.colonies.filter((colony) => colony.colonies.length < 3 &&
+    let openColonies = player.game.colonies.filter((colony) =>
+      colony.colonies.length < MAX_COLONIES_PER_TILE &&
       colony.colonies.includes(player.id) === false &&
       colony.isActive);
 

@@ -25,6 +25,10 @@ export class ResearchColony extends Card implements IProjectCard {
     });
   }
 
+  public canPlay(player: Player) {
+    return player.hasAvailableColonyTileToBuildOn(true);
+  }
+
   public play(player: Player) {
     player.game.defer(new BuildColony(player, true, 'Select colony for Research Colony'));
     player.drawCard(2);

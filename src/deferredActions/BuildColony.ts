@@ -4,6 +4,7 @@ import {Colony} from '../colonies/Colony';
 import {ColonyName} from '../colonies/ColonyName';
 import {ColonyModel} from '../models/ColonyModel';
 import {DeferredAction, Priority} from './DeferredAction';
+import {MAX_COLONIES_PER_TILE} from '../constants';
 
 export class BuildColony implements DeferredAction {
   public priority = Priority.BUILD_COLONY;
@@ -21,7 +22,7 @@ export class BuildColony implements DeferredAction {
   public execute() {
     if (this.openColonies === undefined) {
       this.openColonies = this.player.game.colonies.filter((colony) =>
-        colony.colonies.length < 3 &&
+        colony.colonies.length < MAX_COLONIES_PER_TILE &&
         (colony.colonies.includes(this.player.id) === false || this.allowDuplicate) &&
         colony.isActive);
     }

@@ -4,11 +4,13 @@ import {CardType} from '../CardType';
 import {Player} from '../../Player';
 import {CardName} from '../../CardName';
 import {BuildColony} from '../../deferredActions/BuildColony';
-import {OrOptions} from '../../input/OrOptions';
+import {OrOptions} from '../../inputs/OrOptions';
 import {Card} from '../Card';
 import {CardRenderer} from '../render/CardRenderer';
-import {SelectOption} from '@/inputs/SelectOption';
-import {SelectColony} from '@/inputs/SelectColony';
+import {SelectOption} from '../../inputs/SelectOption';
+import {SelectColony} from '../../inputs/SelectColony';
+import {ColonyName} from '../../colonies/ColonyName';
+import {ColonyModel} from '../../models/ColonyModel';
 
 export class HuygensObservatory extends Card implements IProjectCard {
   constructor() {
@@ -29,33 +31,56 @@ export class HuygensObservatory extends Card implements IProjectCard {
     });
   }
 
+  public trade(player: Player) {
+    const openColonies = player.game.colonies.filter((colony) => colony.isActive && colony.visitor === undefined);
+    const coloniesModel: Array<ColonyModel> = player.game.getColoniesModel(openColonies);
+
+    return new SelectColony('Select colony tile to trade with for free', 'Select', coloniesModel, (colonyName: ColonyName) => {
+      openColonies.find((colony) => colony.name === colonyName)?.trade(player);
+      return undefined;
+    });
+  }
   public canPlay(player: Player): boolean {
-    // Requirements:
-    // 1. There must be a colony available to build on.
-    // 2. Must be able to trade on the tile (eg available trade fleets cannot be on that tile.)
     return player.hasAvailableColonyTileToBuildOn(true);
   }
 
-  public something(player: Player) {
+  public play(player: Player) {
+    player.game.defer(new BuildColony(player, true, 'Select colony for Huygens Observatory'));
+    player.increaseTerraformRating();
+
     const game = player.game;
     if (player.tradesThisGeneration === 0) {
       return undefined;
     }
     const orOptions = new OrOptions();
     const visitedColonies = game.colonies.filter((colony) => colony.visitor === player.id);
-    visitedColonies.forEach(element => {
-      orOptions.options.push(new SelectOption())
-    });
     if (visitedColonies.length > 0) {
-      orOptions.options.push(new SelectColony('Select a colony to recall a trade fleet from', 'OK'))
+      const coloniesModel = player.game.getColoniesModel(visitedColonies);
+      orOptions.options.push(
+        new SelectColony(
+          'Select a colony to recall a trade fleet from',
+          'OK',
+          coloniesModel,
+          (colonyName: ColonyName) => {
+            const colony = game.colonies.find((colony) => colony.name === colonyName);
+            if (colony === undefined) {
+              throw new Error(`Unknown colony name '${colonyName}'`);
+            }
+            colony.visitor = undefined;
+            // TODO(kberg): counting the trades in a generation is not the same as using trade fleets. :D
+            player.tradesThisGeneration--;
+            return this.trade(player);
+          }));
     }
     const hasFreeTradeFleet = visitedColonies.length < player.getFleetSize();
-
-  }
-
-  public play(player: Player) {
-    player.game.defer(new BuildColony(player, true, 'Select colony for Huygens Observatory'));
-    player.increaseTerraformRating();
-    return undefined;
+    if (hasFreeTradeFleet) {
+      orOptions.options.push(new SelectOption('Use an available trade fleet', 'OK', () => {
+        return this.trade(player);
+      }));
+    }
+    if (orOptions.options.length === 0) {
+      return undefined;
+    }
+    return orOptions;
   }
 }

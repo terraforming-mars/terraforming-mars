@@ -29,7 +29,7 @@ describe('TradingColony', function() {
     expect(game.deferredActions).has.length(1);
 
     const selectColony = game.deferredActions.pop()!.execute() as SelectColony;
-    selectColony.cb((<any>ColonyName)[selectColony.coloniesModel[0].name.toUpperCase()]);
+    selectColony.cb((<any>ColonyName)[selectColony.colonies[0].name.toUpperCase()]);
     expect(player.getProduction(Resources.ENERGY)).to.eq(1);
     expect(player.colonyTradeOffset).to.eq(1);
   });

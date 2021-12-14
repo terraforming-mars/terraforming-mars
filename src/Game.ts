@@ -8,7 +8,6 @@ import {CardType} from './cards/CardType';
 import {ClaimedMilestone, serializeClaimedMilestones, deserializeClaimedMilestones} from './milestones/ClaimedMilestone';
 import {Colony} from './colonies/Colony';
 import {ColonyDealer, loadColoniesFromJSON} from './colonies/ColonyDealer';
-import {ColonyModel} from './models/ColonyModel';
 import {ColonyName} from './colonies/ColonyName';
 import {Color} from './Color';
 import {CorporationCard} from './cards/corporation/CorporationCard';
@@ -499,23 +498,6 @@ export class Game implements ISerializable<SerializedGame> {
       action.priority = priority;
     }
     this.deferredActions.push(action);
-  }
-
-  public getColoniesModel(colonies: Array<Colony>) : Array<ColonyModel> {
-    return colonies.map(
-      (colony): ColonyModel => ({
-        colonies: colony.colonies.map(
-          (playerId): Color => this.getPlayerById(playerId).color,
-        ),
-        isActive: colony.isActive,
-        name: colony.name,
-        trackPosition: colony.trackPosition,
-        visitor:
-              colony.visitor === undefined ?
-                undefined :
-                this.getPlayerById(colony.visitor).color,
-      }),
-    );
   }
 
   public milestoneClaimed(milestone: IMilestone): boolean {

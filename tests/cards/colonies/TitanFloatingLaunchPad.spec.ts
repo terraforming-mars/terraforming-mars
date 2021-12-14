@@ -83,7 +83,7 @@ describe('TitanFloatingLaunchPad', function() {
     orOptions.options[0].cb(); // Trade for free
     expect(game.deferredActions).has.lengthOf(1);
     const selectColony = game.deferredActions.peek()!.execute() as SelectColony;
-    selectColony.cb((<any>ColonyName)[selectColony.coloniesModel[0].name.toUpperCase()]);
+    selectColony.cb((<any>ColonyName)[selectColony.colonies[0].name.toUpperCase()]);
     expect(card.resourceCount).to.eq(7);
     expect(player.megaCredits).to.eq(2);
   });

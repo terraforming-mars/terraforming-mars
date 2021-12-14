@@ -6,7 +6,6 @@ import {Board} from './boards/Board';
 import {CardFinder} from './CardFinder';
 import {CardName} from './CardName';
 import {CardType} from './cards/CardType';
-import {ColonyModel} from './models/ColonyModel';
 import {ColonyName} from './colonies/ColonyName';
 import {Color} from './Color';
 import {CorporationCard} from './cards/corporation/CorporationCard';
@@ -1635,13 +1634,12 @@ export class Player implements ISerializable<SerializedPlayer> {
 
   private tradeWithColony(openColonies: Array<Colony>): PlayerInput {
     let payWith: Resources | ResourceType | undefined = undefined;
-    const coloniesModel: Array<ColonyModel> = this.game.getColoniesModel(openColonies);
     const titanFloatingLaunchPad = this.playedCards.find((card) => card.name === CardName.TITAN_FLOATING_LAUNCHPAD);
     const mcTradeAmount: number = this.getMcTradeCost();
     const energyTradeAmount: number = this.getEnergyTradeCost();
     const titaniumTradeAmount: number = this.getTitaniumTradeCost();
 
-    const selectColony = new SelectColony('Select colony tile for trade', 'trade', coloniesModel, (colonyName: ColonyName) => {
+    const selectColony = new SelectColony('Select colony tile for trade', 'trade', openColonies, (colonyName: ColonyName) => {
       openColonies.forEach((colony) => {
         if (colony.name === colonyName) {
           if (payWith === Resources.MEGACREDITS) {

@@ -41,7 +41,7 @@ describe('StrategicBasePlanning', function() {
 
     expect(buildColonyAction).is.instanceOf(SelectColony);
     const selectColony = buildColonyAction as SelectColony;
-    const colonyName = selectColony.coloniesModel[0].name as ColonyName;
+    const colonyName = selectColony.colonies[0].name as ColonyName;
     const colony = game.colonies.find((c) => c.name === colonyName)!;
     expect(colony.colonies).is.empty;
 

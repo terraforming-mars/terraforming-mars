@@ -36,7 +36,7 @@ describe('VitalColony', function() {
     expect(buildColonyAction).is.instanceOf(SelectColony);
 
     const selectColony = buildColonyAction as SelectColony;
-    const colonyName = selectColony.coloniesModel[0].name as ColonyName;
+    const colonyName = selectColony.colonies[0].name as ColonyName;
 
     expect(colonyName).eq(ColonyName.GANYMEDE);
 

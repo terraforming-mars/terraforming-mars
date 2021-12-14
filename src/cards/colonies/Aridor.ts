@@ -9,7 +9,6 @@ import {CardName} from '../../CardName';
 import {Colony} from '../../colonies/Colony';
 import {SelectColony} from '../../inputs/SelectColony';
 import {ColonyName} from '../../colonies/ColonyName';
-import {ColonyModel} from '../../models/ColonyModel';
 import {Card} from '../Card';
 import {CardRenderer} from '../render/CardRenderer';
 
@@ -44,8 +43,7 @@ export class Aridor extends Card implements CorporationCard {
       const availableColonies: Colony[] = game.colonyDealer.discardedColonies;
       if (availableColonies.length === 0) return undefined;
 
-      const coloniesModel: Array<ColonyModel> = game.getColoniesModel(availableColonies);
-      const selectColony = new SelectColony('Aridor first action - Select colony tile to add', 'Add colony tile', coloniesModel, (colonyName: ColonyName) => {
+      const selectColony = new SelectColony('Aridor first action - Select colony tile to add', 'Add colony tile', availableColonies, (colonyName: ColonyName) => {
         if (game.colonyDealer !== undefined) {
           availableColonies.forEach((colony) => {
             if (colony.name === colonyName) {

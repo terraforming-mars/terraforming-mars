@@ -190,17 +190,12 @@ export abstract class Colony implements SerializedColony {
         const openColonies = game.colonies.filter((colony) => colony.isActive);
         action = new DeferredAction(
           player,
-          () => new SelectColony('Select colony to gain trade income from', 'Select', openColonies, (colonyName: ColonyName) => {
-            openColonies.forEach((colony) => {
-              if (colony.name === colonyName) {
-                game.log('${0} gained ${1} trade bonus', (b) => b.player(player).colony(colony));
-                colony.handleTrade(player, {
-                  usesTradeFleet: false,
-                  decreaseTrackAfterTrade: false,
-                  giveColonyBonuses: false,
-                });
-              }
-              return undefined;
+          () => new SelectColony('Select colony to gain trade income from', 'Select', openColonies, (colony: Colony) => {
+            game.log('${0} gained ${1} trade bonus', (b) => b.player(player).colony(colony));
+            colony.handleTrade(player, {
+              usesTradeFleet: false,
+              decreaseTrackAfterTrade: false,
+              giveColonyBonuses: false,
             });
             return undefined;
           }),

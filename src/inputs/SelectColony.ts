@@ -2,7 +2,6 @@
 import {Message} from '../Message';
 import {PlayerInput} from '../PlayerInput';
 import {PlayerInputTypes} from '../PlayerInputTypes';
-import {ColonyName} from '../colonies/ColonyName';
 import {Colony} from '../colonies/Colony';
 
 export class SelectColony implements PlayerInput {
@@ -12,7 +11,7 @@ export class SelectColony implements PlayerInput {
         public title: string | Message,
         public buttonLabel: string = 'Save',
         public colonies: Array<Colony>,
-        public cb: (colony: ColonyName) => undefined,
+        public cb: (colony: Colony) => undefined,
     ) {
       this.buttonLabel = buttonLabel;
     }

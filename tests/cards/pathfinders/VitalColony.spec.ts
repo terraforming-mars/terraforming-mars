@@ -40,7 +40,7 @@ describe('VitalColony', function() {
 
     expect(colonyName).eq(ColonyName.GANYMEDE);
 
-    selectColony.cb(colonyName);
+    selectColony.cb(selectColony.colonies[0]);
 
     expect(player.getProduction(Resources.PLANTS)).eq(2);
   });

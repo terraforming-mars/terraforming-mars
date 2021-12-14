@@ -27,7 +27,7 @@ describe('Vitor', function() {
 
   it('Has initial action', function() {
     const action = card.initialAction(player);
-    expect(action instanceof OrOptions).is.true;
+    expect(action).instanceOf(OrOptions);
     (action as OrOptions).options[0].cb();
     expect(game.hasBeenFunded(game.awards[0])).is.true;
   });

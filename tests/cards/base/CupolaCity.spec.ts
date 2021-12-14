@@ -32,7 +32,7 @@ describe('CupolaCity', function() {
     expect(player.canPlayIgnoringCost(card)).is.true;
 
     const action = card.play(player);
-    expect(action instanceof SelectSpace).is.true;
+    expect(action).instanceOf(SelectSpace);
 
     action.cb(action.availableSpaces[0]);
     expect(player.getProduction(Resources.ENERGY)).to.eq(0);

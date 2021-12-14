@@ -38,7 +38,7 @@ describe('CorroderSuits', function() {
     player.playedCards.push(card2, card3);
 
     const action = card.play(player);
-    expect(action instanceof SelectCard).is.true;
+    expect(action).instanceOf(SelectCard);
 
         action!.cb([card2]);
         expect(player.getResourcesOnCard(card2)).to.eq(1);

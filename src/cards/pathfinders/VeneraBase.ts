@@ -34,7 +34,7 @@ export class VeneraBase extends Card implements IProjectCard, IActionCard {
           b.br;
           b.vpText('1 VP per 2 Venus tags you have.');
         }),
-        description: 'Requires Unity is ruling or that you have 2 delegates there. Raise your MC production 3 steps and place a city tile ON THE RESERVED AREA.',
+        description: 'Requires Unity is ruling or that you have 2 delegates there. Raise your M€ production 3 steps and place a city tile ON THE RESERVED AREA.',
       },
     });
   }

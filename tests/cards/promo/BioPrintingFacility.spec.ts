@@ -40,7 +40,7 @@ describe('BioPrintingFacility', function() {
     player.energy = 2;
 
     const action = card.action(player);
-    expect(action instanceof OrOptions).is.true;
+    expect(action).instanceOf(OrOptions);
     expect(action!.options).has.lengthOf(2);
 
     action!.options[0].cb();
@@ -57,7 +57,7 @@ describe('BioPrintingFacility', function() {
     player.energy = 2;
 
     const action = card.action(player);
-    expect(action instanceof OrOptions).is.true;
+    expect(action).instanceOf(OrOptions);
     expect(action!.options).has.lengthOf(2);
 
     action!.options[0].cb([smallanimals]);

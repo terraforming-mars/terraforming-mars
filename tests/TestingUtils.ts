@@ -144,4 +144,13 @@ export class TestingUtils {
     };
     return Object.assign(template, card);
   }
+
+  // type Class<T> = new (...args: any[]) => T;
+  // export function cast<T>(klass: Class<T>, obj: any): T {
+  public static cast<T>(klass: new (...args: any[]) => T, obj: any): T {
+    if (!(obj instanceof klass)) {
+      throw new Error(`Not an instance of ${klass.name}: ${obj}`);
+    }
+    return obj;
+  }
 }

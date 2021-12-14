@@ -24,7 +24,7 @@ describe('EcologicalZoneAres', function() {
     expect(card.canPlay(player)).is.true;
 
     const action = card.play(player);
-    expect(action instanceof SelectSpace).is.true;
+    expect(action).instanceOf(SelectSpace);
 
     const adjacentSpace = action.availableSpaces[0];
     action.cb(adjacentSpace);

@@ -35,7 +35,7 @@ describe('SelfReplicatingRobots', function() {
     expect(card.canAct(player)).is.true;
 
     const action = card.action(player);
-    expect(action instanceof OrOptions).is.true;
+    expect(action).instanceOf(OrOptions);
     (action as OrOptions).options[0].cb([(action.options[0] as SelectCard<IProjectCard>).cards[0]]);
     expect(card.targetCards[0].resourceCount).to.eq(2);
     expect(player.cardsInHand).has.lengthOf(0);

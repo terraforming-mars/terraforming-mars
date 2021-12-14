@@ -110,7 +110,26 @@ describe('Colony', function() {
     expect(luna.trackPosition).to.eq(2);
   });
 
-  it('Shouldn\'t increase trackPosition above max', function() {
+  it('decreaseTrackAfterTrade', function() {
+    luna.trackPosition = MAX_COLONY_TRACK_POSITION;
+    luna.trade(player);
+    game.deferredActions.runAll(() => {});
+    expect(luna.trackPosition).to.eq(0);
+
+    luna.addColony(player);
+    luna.addColony(player2);
+    luna.trackPosition = MAX_COLONY_TRACK_POSITION;
+
+    luna.trade(player, {decreaseTrackAfterTrade: false});
+    game.deferredActions.runAll(() => {});
+    expect(luna.trackPosition).to.eq(MAX_COLONY_TRACK_POSITION);
+
+    luna.trade(player, {decreaseTrackAfterTrade: true});
+    game.deferredActions.runAll(() => {});
+    expect(luna.trackPosition).to.eq(2);
+  });
+
+  it('Should not increase trackPosition above max', function() {
     luna.increaseTrack(100);
     expect(luna.trackPosition).to.eq(MAX_COLONY_TRACK_POSITION);
   });
@@ -287,5 +306,20 @@ describe('Colony', function() {
     expect(input3).to.be.an.instanceof(SelectCard);
     player3.process([['Dust Seals']]); // Discard a card
     expect(callbackWasCalled).to.be.true;
+  });
+
+  it('usesTradeFleet', () => {
+    expect(player.tradesThisGeneration).eq(0);
+    luna.trade(player);
+    expect(player.tradesThisGeneration).eq(1);
+
+    luna.trade(player, {});
+    expect(player.tradesThisGeneration).eq(2);
+
+    luna.trade(player, {usesTradeFleet: false});
+    expect(player.tradesThisGeneration).eq(2);
+
+    luna.trade(player, {usesTradeFleet: true});
+    expect(player.tradesThisGeneration).eq(3);
   });
 });

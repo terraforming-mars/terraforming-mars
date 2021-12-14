@@ -26,7 +26,7 @@ describe('GreatDamPromo', function() {
     TestingUtils.maxOutOceans(player, 4);
 
     const action = card.play(player);
-    expect(action instanceof SelectSpace).is.true;
+    expect(action).instanceOf(SelectSpace);
     expect(player.getProduction(Resources.ENERGY)).to.eq(2);
     expect(card.getVictoryPoints()).to.eq(1);
   });
@@ -35,7 +35,7 @@ describe('GreatDamPromo', function() {
     TestingUtils.maxOutOceans(player, 4).forEach((space) => space.tile = {tileType: TileType.OCEAN_CITY});
 
     const action = card.play(player);
-    expect(action instanceof SelectSpace).is.true;
+    expect(action).instanceOf(SelectSpace);
     expect(player.getProduction(Resources.ENERGY)).to.eq(2);
     expect(card.getVictoryPoints()).to.eq(1);
   });

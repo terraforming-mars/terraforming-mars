@@ -29,7 +29,7 @@ export class CeresSpaceport extends Card implements IProjectCard {
             .br
             .cards(1).oceans(1).city().asterix().br;
         }),
-        description: 'Increase your MC production 2 steps, and titanium production 1 step for every 2 jovian tags (including these.) ' +
+        description: 'Increase your M€ production 2 steps, and titanium production 1 step for every 2 jovian tags (including these.) ' +
           'Draw a card. Place an ocean tile. Place a city tile ON THE RESERVED AREA.',
       },
     });

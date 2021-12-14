@@ -27,7 +27,7 @@ describe('ImportedHydrogen', function() {
     player.playedCards.push(pets, tardigrades, decomposers);
 
     const action = card.play(player);
-    expect(action instanceof OrOptions).is.true;
+    expect(action).instanceOf(OrOptions);
     expect((action as OrOptions).options).has.lengthOf(3);
 
     (action as OrOptions).options[0].cb();

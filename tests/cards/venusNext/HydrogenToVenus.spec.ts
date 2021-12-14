@@ -26,7 +26,7 @@ describe('HydrogenToVenus', function() {
     player.playedCards.push(card2, card3, card4);
 
     const action = card.play(player) as SelectCard<ICard>;
-    expect(action instanceof SelectCard).is.true;
+    expect(action).instanceOf(SelectCard);
     action.cb([card2]);
     expect(player.getResourcesOnCard(card2)).to.eq(1);
     expect(game.getVenusScaleLevel()).to.eq(2);

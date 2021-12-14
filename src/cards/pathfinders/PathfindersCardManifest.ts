@@ -32,6 +32,7 @@ import {ExpeditionToTheSurfaceVenus} from './ExpeditionToTheSurfaceVenus';
 import {ExperiencedMartians} from './ExperiencedMartians';
 import {FlatMarsTheory} from './FlatMarsTheory';
 import {FloaterUrbanism} from './FloaterUrbanism';
+import {GeologicalExpedition} from './GeologicalExpedition';
 import {HighTempSuperconductors} from './HighTempSuperconductors';
 import {HydrogenBombardment} from './HydrogenBombardment';
 import {HydrogenProcessingPlant} from './HydrogenProcessingPlant';
@@ -41,6 +42,7 @@ import {LastResortIngenuity} from './LastResortIngenuity';
 import {LobbyHalls} from './LobbyHalls';
 import {LunarEmbassy} from './LunarEmbassy';
 import {LuxuryEstate} from './LuxuryEstate';
+import {MarsDirect} from './MarsDirect';
 import {MartianCulture} from './MartianCulture';
 import {MartianDustProcessingPlant} from './MartianDustProcessingPlant';
 import {MartianInsuranceGroup} from './MartianInsuranceGroup';
@@ -54,6 +56,7 @@ import {NobelLabs} from './NobelLabs';
 import {OrbitalLaboratories} from './OrbitalLaboratories';
 import {OzoneGenerators} from './OzoneGenerators';
 import {PersonalAgenda} from './PersonalAgenda';
+import {Polaris} from './Polaris';
 import {Pollinators} from './Pollinators';
 import {PowerPlant} from './PowerPlant';
 import {PrefabricationofHumanHabitats} from './PrefabricationofHumanHabitats';
@@ -82,6 +85,7 @@ import {TerraformingRobots} from './TerraformingRobots';
 import {ValuableGases} from './ValuableGases';
 import {VeneraBase} from './VeneraBase';
 import {VenusFirst} from './VenusFirst';
+import {VitalColony} from './VitalColony';
 
 export const PATHFINDERS_CARD_MANIFEST = new CardManifest({
   module: GameModule.Pathfinders,
@@ -102,7 +106,7 @@ export const PATHFINDERS_CARD_MANIFEST = new CardManifest({
     {cardName: CardName.CERES_SPACEPORT, Factory: CeresSpaceport},
     {cardName: CardName.DYSON_SCREENS, Factory: DysonScreens},
     {cardName: CardName.LUNAR_EMBASSY, Factory: LunarEmbassy},
-    // // {cardName: CardName.GEOLOGICAL_EXPEDITION, Factory: GeologicalExpedition},               // Touches tile placement.
+    {cardName: CardName.GEOLOGICAL_EXPEDITION, Factory: GeologicalExpedition},
     {cardName: CardName.EARLY_EXPEDITION, Factory: EarlyExpedition},
     {cardName: CardName.HYDROGEN_PROCESSING_PLANT, Factory: HydrogenProcessingPlant},
     {cardName: CardName.POWER_PLANT_PATHFINDERS, Factory: PowerPlant},
@@ -164,7 +168,7 @@ export const PATHFINDERS_CARD_MANIFEST = new CardManifest({
     {cardName: CardName.TERRAFORMING_ROBOTS, Factory: TerraformingRobots},
   ],
   corporationCards: [
-    // {cardName: CardName.POLARIS, Factory: Polaris},
+    {cardName: CardName.POLARIS, Factory: Polaris},
     // {cardName: CardName.PLANET_PR, Factory: planetpr},
     // {cardName: CardName.AMBIENT, Factory: Ambient},
     {cardName: CardName.RINGCOM, Factory: Ringcom},
@@ -174,7 +178,7 @@ export const PATHFINDERS_CARD_MANIFEST = new CardManifest({
     // {cardName: CardName.SOYLENT_SEEDLING_SYSTEMS, Factory: SoylentSeedlingSystems},
     {cardName: CardName.STEELARIS, Factory: Steelaris},
     // {cardName: CardName.MARS_MATHS, Factory: MarsMaths},
-    // {cardName: CardName.MARS_DIRECT, Factory: MarsDirect},
+    {cardName: CardName.MARS_DIRECT, Factory: MarsDirect},
     {cardName: CardName.MARTIAN_INSURANCE_GROUP, Factory: MartianInsuranceGroup},
     // {cardName: CardName.SOLBANK, Factory: SolBank},
     // {cardName: CardName.BIO_SOL, Factory: BioSol},
@@ -199,7 +203,7 @@ export const PATHFINDERS_CARD_MANIFEST = new CardManifest({
     {cardName: CardName.DESIGN_COMPANY, Factory: DesignCompany},
     // {cardName: CardName.CONSOLIDATION, Factory: Consolidation},
     {cardName: CardName.PERSONAL_AGENDA, Factory: PersonalAgenda},
-    // {cardName: CardName.VITAL_COLONY, Factory: VitalColony, compatibility: GameModule.Colonies},
+    {cardName: CardName.VITAL_COLONY, Factory: VitalColony, compatibility: GameModule.Colonies},
     {cardName: CardName.STRATEGIC_BASE_PLANNING, Factory: StrategicBasePlanning, compatibility: GameModule.Colonies},
     {cardName: CardName.DEEP_SPACE_OPERATIONS, Factory: DeepSpaceOperations},
     {cardName: CardName.ANTI_DESERTIFICATION_TECHNIQUES, Factory: AntidesertificationTechniques},

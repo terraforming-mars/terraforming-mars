@@ -7,7 +7,6 @@ import {CardRenderer} from '../render/CardRenderer';
 import {CardRequirements} from '../CardRequirements';
 import {SelectColony} from '../../inputs/SelectColony';
 import {ColonyName} from '../../colonies/ColonyName';
-import {Game} from '../../Game';
 
 export class CoordinatedRaid extends Card implements IProjectCard {
   constructor() {
@@ -20,7 +19,10 @@ export class CoordinatedRaid extends Card implements IProjectCard {
       metadata: {
         cardNumber: 'Pf64',
         renderData: CardRenderer.builder((b) => b.colonies(1)),
-        description: 'Requires at least 1 colony in play. Send one of your unused Trade Fleets to ANY colony tile (can be a tile already used this generation.) ' +
+        // TODO(kberg): restoring this behaior will be quite a tricky thing, mostly for visualization etc.
+        // description: 'Requires at least 1 colony in play. Send one of your unused Trade Fleets to ANY colony tile (can be a tile already used this generation.) ' +
+        //   'Collect the trade bonus and colony bonus for every colony on this tile. Other players do not get their colony bonuses from this action.',
+        description: 'Requires at least 1 colony in play. Send one of your unused Trade Fleets to any colony tile. ' +
           'Collect the trade bonus and colony bonus for every colony on this tile. Other players do not get their colony bonuses from this action.',
       },
     });
@@ -30,20 +32,11 @@ export class CoordinatedRaid extends Card implements IProjectCard {
     return player.getFleetSize() > player.tradesThisGeneration;
   }
 
-  private static getColony(game: Game, colonyName: ColonyName) {
-    const colony = game.colonies.find((colony) => colony.name === colonyName);
-    if (colony === undefined) {
-      throw new Error(`Colony ${colonyName} not found`);
-    }
-    return colony;
-  }
-
   public play(player: Player) {
     const colonies = player.game.colonies.filter((colony) => colony.isActive);
     const coloniesModel = player.game.getColoniesModel(colonies);
     return new SelectColony('Select colony tile for trade', 'trade', coloniesModel, (colonyName: ColonyName) => {
-      const colony = CoordinatedRaid.getColony(player.game, colonyName);
-      colony.trade(player, {selfishTrade: true});
+      player.game.colonies.find((colony) => colony.name === colonyName)?.trade(player, {selfishTrade: true});
       return undefined;
     });
   }

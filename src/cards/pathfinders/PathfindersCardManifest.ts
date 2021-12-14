@@ -42,6 +42,7 @@ import {LastResortIngenuity} from './LastResortIngenuity';
 import {LobbyHalls} from './LobbyHalls';
 import {LunarEmbassy} from './LunarEmbassy';
 import {LuxuryEstate} from './LuxuryEstate';
+import {MarsDirect} from './MarsDirect';
 import {MartianCulture} from './MartianCulture';
 import {MartianDustProcessingPlant} from './MartianDustProcessingPlant';
 import {MartianInsuranceGroup} from './MartianInsuranceGroup';
@@ -176,7 +177,7 @@ export const PATHFINDERS_CARD_MANIFEST = new CardManifest({
     // {cardName: CardName.SOYLENT_SEEDLING_SYSTEMS, Factory: SoylentSeedlingSystems},
     {cardName: CardName.STEELARIS, Factory: Steelaris},
     // {cardName: CardName.MARS_MATHS, Factory: MarsMaths},
-    // {cardName: CardName.MARS_DIRECT, Factory: MarsDirect},
+    {cardName: CardName.MARS_DIRECT, Factory: MarsDirect},
     {cardName: CardName.MARTIAN_INSURANCE_GROUP, Factory: MartianInsuranceGroup},
     // {cardName: CardName.SOLBANK, Factory: SolBank},
     // {cardName: CardName.BIO_SOL, Factory: BioSol},

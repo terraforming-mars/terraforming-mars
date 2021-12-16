@@ -1010,7 +1010,7 @@ export class Player implements ISerializable<SerializedPlayer> {
       if (colony === undefined) {
         throw new Error(`Unknown colony '${colonyName}'`);
       }
-      this.runInputCb(pi.cb(colony!));
+      this.runInputCb(pi.cb(colony));
     } else if (pi instanceof OrOptions) {
       // input length is variable, can't test it with checkInputLength
       if (input.length === 0 || input[0].length !== 1) {

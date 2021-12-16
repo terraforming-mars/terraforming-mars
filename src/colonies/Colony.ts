@@ -1,7 +1,6 @@
 import {AddResourcesToCard} from '../deferredActions/AddResourcesToCard';
 import {CardName} from '../CardName';
 import {ColonyBenefit} from './ColonyBenefit';
-import {ColonyModel} from '../models/ColonyModel';
 import {ColonyName} from './ColonyName';
 import {DeferredAction, Priority} from '../deferredActions/DeferredAction';
 import {DiscardCards} from '../deferredActions/DiscardCards';
@@ -189,20 +188,14 @@ export abstract class Colony implements SerializedColony {
 
       case ColonyBenefit.COPY_TRADE:
         const openColonies = game.colonies.filter((colony) => colony.isActive);
-        const coloniesModel: Array<ColonyModel> = game.getColoniesModel(openColonies);
         action = new DeferredAction(
           player,
-          () => new SelectColony('Select colony to gain trade income from', 'Select', coloniesModel, (colonyName: ColonyName) => {
-            openColonies.forEach((colony) => {
-              if (colony.name === colonyName) {
-                game.log('${0} gained ${1} trade bonus', (b) => b.player(player).colony(colony));
-                colony.handleTrade(player, {
-                  usesTradeFleet: false,
-                  decreaseTrackAfterTrade: false,
-                  giveColonyBonuses: false,
-                });
-              }
-              return undefined;
+          () => new SelectColony('Select colony to gain trade income from', 'Select', openColonies, (colony: Colony) => {
+            game.log('${0} gained ${1} trade bonus', (b) => b.player(player).colony(colony));
+            colony.handleTrade(player, {
+              usesTradeFleet: false,
+              decreaseTrackAfterTrade: false,
+              giveColonyBonuses: false,
             });
             return undefined;
           }),

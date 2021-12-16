@@ -6,7 +6,7 @@ import {Card} from '../Card';
 import {CardRenderer} from '../render/CardRenderer';
 import {CardRequirements} from '../CardRequirements';
 import {SelectColony} from '../../inputs/SelectColony';
-import {ColonyName} from '../../colonies/ColonyName';
+import {Colony} from '../../colonies/Colony';
 
 export class CoordinatedRaid extends Card implements IProjectCard {
   constructor() {
@@ -34,9 +34,8 @@ export class CoordinatedRaid extends Card implements IProjectCard {
 
   public play(player: Player) {
     const colonies = player.game.colonies.filter((colony) => colony.isActive);
-    const coloniesModel = player.game.getColoniesModel(colonies);
-    return new SelectColony('Select colony tile for trade', 'trade', coloniesModel, (colonyName: ColonyName) => {
-      player.game.colonies.find((colony) => colony.name === colonyName)?.trade(player, {selfishTrade: true});
+    return new SelectColony('Select colony tile for trade', 'trade', colonies, (colony: Colony) => {
+      colony.trade(player, {selfishTrade: true});
       return undefined;
     });
   }

@@ -284,7 +284,7 @@ export class Server {
       }
       break;
     case PlayerInputTypes.SELECT_COLONY:
-      playerInputModel.coloniesModel = (waitingFor as SelectColony).coloniesModel;
+      playerInputModel.coloniesModel = ColonyModel.getColonyModel(player.game, (waitingFor as SelectColony).colonies);
       break;
     case PlayerInputTypes.SELECT_HOW_TO_PAY:
       playerInputModel.amount = (waitingFor as SelectHowToPay).amount;

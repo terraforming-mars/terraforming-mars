@@ -2,7 +2,6 @@ import {expect} from 'chai';
 import {JupiterFloatingStation} from '../../../src/cards/colonies/JupiterFloatingStation';
 import {TitanFloatingLaunchPad} from '../../../src/cards/colonies/TitanFloatingLaunchPad';
 import {ICard} from '../../../src/cards/ICard';
-import {ColonyName} from '../../../src/colonies/ColonyName';
 import {Luna} from '../../../src/colonies/Luna';
 import {Triton} from '../../../src/colonies/Triton';
 import {Game} from '../../../src/Game';
@@ -83,7 +82,7 @@ describe('TitanFloatingLaunchPad', function() {
     orOptions.options[0].cb(); // Trade for free
     expect(game.deferredActions).has.lengthOf(1);
     const selectColony = game.deferredActions.peek()!.execute() as SelectColony;
-    selectColony.cb((<any>ColonyName)[selectColony.coloniesModel[0].name.toUpperCase()]);
+    selectColony.cb(selectColony.colonies[0]);
     expect(card.resourceCount).to.eq(7);
     expect(player.megaCredits).to.eq(2);
   });

@@ -29,6 +29,8 @@ describe('GeologicalExpedition', function() {
     microbeCard = TestingUtils.fakeCard({resourceType: ResourceType.MICROBE});
     scienceCard = TestingUtils.fakeCard({resourceType: ResourceType.SCIENCE});
     player.playedCards = [card, microbeCard, scienceCard];
+    (player as any).waitingFor = undefined;
+    (player as any).waitingForCb = undefined;
   });
 
   it('no bonuses, gain 1 steel', () => {
@@ -37,6 +39,7 @@ describe('GeologicalExpedition', function() {
     expect(player.getResourcesForTest()).deep.eq(Units.of({steel: 1}));
     expect(microbeCard.resourceCount).eq(0);
     expect(scienceCard.resourceCount).eq(0);
+    expect(player.getWaitingFor()).is.undefined;
   });
 
   it('one resource, gain it', () => {
@@ -46,6 +49,7 @@ describe('GeologicalExpedition', function() {
     expect(player.getResourcesForTest()).deep.eq(Units.of({titanium: 2}));
     expect(microbeCard.resourceCount).eq(0);
     expect(scienceCard.resourceCount).eq(0);
+    expect(player.getWaitingFor()).is.undefined;
   });
 
   it('one resource, one non-resource', () => {
@@ -53,11 +57,11 @@ describe('GeologicalExpedition', function() {
     space.bonus = [SpaceBonus.HEAT, SpaceBonus.DRAW_CARD];
     game.addCityTile(player, space.id);
 
-
     expect(player.cardsInHand).has.length(1);
     expect(player.getResourcesForTest()).deep.eq(Units.of({heat: 2}));
     expect(microbeCard.resourceCount).eq(0);
     expect(scienceCard.resourceCount).eq(0);
+    expect(player.getWaitingFor()).is.undefined;
   });
 
   it('one non-resource, no bonus', () => {
@@ -67,6 +71,7 @@ describe('GeologicalExpedition', function() {
 
     expect(player.cardsInHand).has.length(1);
     expect(player.getResourcesForTest()).deep.eq(Units.EMPTY);
+    expect(player.getWaitingFor()).is.undefined;
   });
 
   it('three identical resources', () => {
@@ -74,6 +79,7 @@ describe('GeologicalExpedition', function() {
     game.addCityTile(player, space.id);
 
     expect(player.getResourcesForTest()).deep.eq(Units.of({heat: 4}));
+    expect(player.getWaitingFor()).is.undefined;
   });
 
   it('card resource', () => {

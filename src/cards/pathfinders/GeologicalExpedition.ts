@@ -79,6 +79,7 @@ export class GeologicalExpedition extends Card implements IProjectCard {
     });
     if (options.options.length === 1) {
       options.options[0].cb();
+      return;
     }
     if (options.options.length === 0) {
       // should not happen.

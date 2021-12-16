@@ -10,10 +10,19 @@
             <board-space :space="getSpaceById('01')" text="Ganymede Colony"></board-space>
             <board-space :space="getSpaceById('02')" text="Phobos Space Haven"></board-space>
             <board-space :space="getSpaceById('69')" text="Stanford Torus"></board-space>
-            <board-space :space="getSpaceById('70')" text="Luna Metropolis" v-if="venusNextExtension"></board-space>
-            <board-space :space="getSpaceById('71')" text="Dawn City" v-if="venusNextExtension"></board-space>
-            <board-space :space="getSpaceById('72')" text="Stratopolis" v-if="venusNextExtension"></board-space>
-            <board-space :space="getSpaceById('73')" text="Maxwell Base" v-if="venusNextExtension"></board-space>
+            <template v-if="venusNextExtension">
+              <board-space :space="getSpaceById('70')" text="Luna Metropolis"></board-space>
+              <board-space :space="getSpaceById('71')" text="Dawn City"></board-space>
+              <board-space :space="getSpaceById('72')" text="Stratopolis"></board-space>
+              <board-space :space="getSpaceById('73')" text="Maxwell Base"></board-space>
+            </template>>
+            <template v-if="pathfindersExpansion">
+              <!-- <board-space :space="getSpaceById('74')" text="Martian Transhipment Station"></board-space> -->
+              <board-space :space="getSpaceById('75')" text="Ceres Spaceport"></board-space>
+              <board-space :space="getSpaceById('76')" text="Dyson Screens"></board-space>
+              <board-space :space="getSpaceById('77')" text="Lunar Embassy"></board-space>
+              <board-space :space="getSpaceById('78')" text="Venera Base"></board-space>
+            </template>>
         </div>
 
         <div class="global-numbers">
@@ -231,6 +240,9 @@ export default Vue.extend({
       type: Number,
     },
     aresExtension: {
+      type: Boolean,
+    },
+    pathfindersExpansion: {
       type: Boolean,
     },
     aresData: {

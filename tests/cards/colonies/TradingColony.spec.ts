@@ -2,7 +2,6 @@ import {expect} from 'chai';
 import {TradingColony} from '../../../src/cards/colonies/TradingColony';
 import {Callisto} from '../../../src/colonies/Callisto';
 import {Ceres} from '../../../src/colonies/Ceres';
-import {ColonyName} from '../../../src/colonies/ColonyName';
 import {Miranda} from '../../../src/colonies/Miranda';
 import {Game} from '../../../src/Game';
 import {SelectColony} from '../../../src/inputs/SelectColony';
@@ -29,7 +28,7 @@ describe('TradingColony', function() {
     expect(game.deferredActions).has.length(1);
 
     const selectColony = game.deferredActions.pop()!.execute() as SelectColony;
-    selectColony.cb((<any>ColonyName)[selectColony.coloniesModel[0].name.toUpperCase()]);
+    selectColony.cb(selectColony.colonies[0]);
     expect(player.getProduction(Resources.ENERGY)).to.eq(1);
     expect(player.colonyTradeOffset).to.eq(1);
   });

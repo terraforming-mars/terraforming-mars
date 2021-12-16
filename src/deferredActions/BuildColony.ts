@@ -1,8 +1,6 @@
 import {Player} from '../Player';
 import {SelectColony} from '../inputs/SelectColony';
 import {Colony} from '../colonies/Colony';
-import {ColonyName} from '../colonies/ColonyName';
-import {ColonyModel} from '../models/ColonyModel';
 import {DeferredAction, Priority} from './DeferredAction';
 
 export class BuildColony implements DeferredAction {
@@ -31,15 +29,9 @@ export class BuildColony implements DeferredAction {
     }
 
     const openColonies = this.openColonies;
-    const coloniesModel: Array<ColonyModel> = this.player.game.getColoniesModel(openColonies);
 
-    return new SelectColony(this.title, 'Build', coloniesModel, (colonyName: ColonyName) => {
-      openColonies.forEach((colony) => {
-        if (colony.name === colonyName) {
-          colony.addColony(this.player, this.options);
-        }
-        return undefined;
-      });
+    return new SelectColony(this.title, 'Build', openColonies, (colony: Colony) => {
+      colony.addColony(this.player, this.options);
       return undefined;
     });
   }

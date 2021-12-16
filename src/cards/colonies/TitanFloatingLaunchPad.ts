@@ -8,10 +8,9 @@ import {SelectOption} from '../../inputs/SelectOption';
 import {OrOptions} from '../../inputs/OrOptions';
 import {IResourceCard} from '../ICard';
 import {AddResourcesToCard} from '../../deferredActions/AddResourcesToCard';
-import {ColonyName} from '../../colonies/ColonyName';
+import {Colony} from '../../colonies/Colony';
 import {DeferredAction} from '../../deferredActions/DeferredAction';
 import {SelectColony} from '../../inputs/SelectColony';
-import {ColonyModel} from '../../models/ColonyModel';
 import {CardRenderer} from '../render/CardRenderer';
 import {Card} from '../Card';
 
@@ -60,22 +59,12 @@ export class TitanFloatingLaunchPad extends Card implements IProjectCard, IResou
 
     return new OrOptions(
       new SelectOption('Remove 1 floater on this card to trade for free', 'Remove floater', () => {
-        const coloniesModel: Array<ColonyModel> = player.game.getColoniesModel(openColonies);
-
         player.game.defer(new DeferredAction(
           player,
-          () => new SelectColony('Select colony tile to trade with for free', 'Select', coloniesModel, (colonyName: ColonyName) => {
-            openColonies.forEach((colony) => {
-              if (colony.name === colonyName) {
-                this.resourceCount--;
-                player.game.log('${0} spent 1 floater to trade with ${1}', (b) => b.player(player).colony(colony));
-                colony.trade(player);
-                return undefined;
-              }
-
-              return undefined;
-            });
-
+          () => new SelectColony('Select colony tile to trade with for free', 'Select', openColonies, (colony: Colony) => {
+            this.resourceCount--;
+            player.game.log('${0} spent 1 floater to trade with ${1}', (b) => b.player(player).colony(colony));
+            colony.trade(player);
             return undefined;
           }),
         ));

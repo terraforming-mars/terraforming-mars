@@ -890,7 +890,7 @@ export class Player implements ISerializable<SerializedPlayer> {
     return tagCount + this.getRawTagCount(Tags.WILDCARD, false);
   }
 
-  // TODO(kberg): Describe this function.
+  // Counts the number of distinct tags
   public getDistinctTagCount(countWild: boolean, extraTag?: Tags): number {
     const allTags: Tags[] = [];
     let wildcardCount: number = 0;
@@ -917,9 +917,14 @@ export class Player implements ISerializable<SerializedPlayer> {
       }
     }
     if (countWild) {
+      // TODO(kberg): it might be more correct to count all the tags
+      // in a game regardless of expansion? But if that happens it needs
+      // to be done once, during set-up so that this operation doesn't
+      // always go through every tag every time.
       let maxTagCount = 10;
       if (this.game.gameOptions.venusNextExtension) maxTagCount++;
       if (this.game.gameOptions.moonExpansion) maxTagCount++;
+      if (this.game.gameOptions.pathfindersExpansion) maxTagCount++;
       return Math.min(uniqueTags.size + wildcardCount, maxTagCount);
     } else {
       return uniqueTags.size;

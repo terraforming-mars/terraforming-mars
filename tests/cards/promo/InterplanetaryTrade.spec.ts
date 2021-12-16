@@ -9,6 +9,7 @@ import {SpaceElevator} from '../../../src/cards/base/SpaceElevator';
 import {ResearchCoordination} from '../../../src/cards/prelude/ResearchCoordination';
 import {InterplanetaryTrade} from '../../../src/cards/promo/InterplanetaryTrade';
 import {MaxwellBase} from '../../../src/cards/venusNext/MaxwellBase';
+import {DeclarationOfIndependence} from '../../../src/cards/pathfinders/DeclarationOfIndependence';
 import {Game} from '../../../src/Game';
 import {Player} from '../../../src/Player';
 import {Resources} from '../../../src/Resources';
@@ -71,6 +72,22 @@ describe('InterplanetaryTrade', function() {
     player.playedCards.push(new MaxwellBase());
     player.playedCards.push(new LunarBeam());
     player.playedCards.push(new ColonizerTrainingCamp());
+    card.play(player);
+    expect(player.getProduction(Resources.MEGACREDITS)).to.eq(12);
+  });
+
+  it('Should only count wildcards up to the max amount of tag types existing (13 with venus, moon, and Mars)', function() {
+    game.gameOptions.venusNextExtension = true;
+    game.gameOptions.moonExpansion = true;
+    player.playedCards.push(new AdvancedAlloys());
+    player.playedCards.push(new SpaceElevator());
+    player.playedCards.push(new MarsUniversity());
+    player.playedCards.push(new ResearchCoordination());
+    player.playedCards.push(new AdvancedEcosystems());
+    player.playedCards.push(new MaxwellBase());
+    player.playedCards.push(new LunarBeam());
+    player.playedCards.push(new ColonizerTrainingCamp());
+    player.playedCards.push(new DeclarationOfIndependence());
     card.play(player);
     expect(player.getProduction(Resources.MEGACREDITS)).to.eq(12);
   });

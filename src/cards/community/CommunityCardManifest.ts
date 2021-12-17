@@ -14,6 +14,7 @@ import {PoliticalUprising} from './PoliticalUprising';
 import {ByElection} from './ByElection';
 import {Midas} from './Midas';
 import {CuriosityII} from './CuriosityII';
+import {ExecutiveOrder} from './ExecutiveOrder';
 
 export const COMMUNITY_CARD_MANIFEST = new CardManifest({
   module: GameModule.Community,
@@ -58,5 +59,6 @@ export const COMMUNITY_CARD_MANIFEST = new CardManifest({
       Factory: ByElection,
       compatibility: GameModule.Turmoil,
     },
+    {cardName: CardName.EXECUTIVE_ORDER, Factory: ExecutiveOrder, compatibility: GameModule.Turmoil},
   ],
 });

@@ -188,6 +188,8 @@ export default Vue.extend({
         } else {
           classes.push(sized('card-tile-lunar-colony', this.item.size));
         }
+      } else if (type === CardRenderItemType.GLOBAL_EVENT) {
+        classes.push('turmoil-global-event');
       }
 
       function sized(clazz: string, size: string | undefined) {

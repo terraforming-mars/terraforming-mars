@@ -46,7 +46,7 @@ export class RobinHaulings extends Card implements CorporationCard {
   }
 
   public onCardPlayed(player: Player, card: IProjectCard) {
-    if (card.tags.includes(Tags.VENUS)) {
+    if (player.isCorporation(CardName.ROBIN_HAULINGS) && card.tags.includes(Tags.VENUS)) {
       player.game.defer(new AddResourcesToCard(player, ResourceType.FLOATER));
     }
   }

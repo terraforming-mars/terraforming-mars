@@ -31,7 +31,7 @@ import {SelectAmount} from './inputs/SelectAmount';
 import {SelectCard} from './inputs/SelectCard';
 import {SellPatentsStandardProject} from './cards/base/standardProjects/SellPatentsStandardProject';
 import {SendDelegateToArea} from './deferredActions/SendDelegateToArea';
-import {DeferredAction} from './deferredActions/DeferredAction';
+import {DeferredAction, Priority} from './deferredActions/DeferredAction';
 import {SelectHowToPayDeferred} from './deferredActions/SelectHowToPayDeferred';
 import {SelectColony} from './inputs/SelectColony';
 import {SelectPartyToSendDelegate} from './inputs/SelectPartyToSendDelegate';
@@ -1569,9 +1569,24 @@ export class Player implements ISerializable<SerializedPlayer> {
       this.playedCards.push(selectedCard);
     }
 
+    if (selectedCard.tags.includes(Tags.CLONE)) {
+      const onCardPlayed = new DeferredAction(this, () => {
+        this.onCardPlayed(selectedCard);
+        return undefined;
+      });
+      onCardPlayed.priority = Priority.ON_CARD_PLAYED;
+      this.game.defer(onCardPlayed);
+    } else {
+      this.onCardPlayed(selectedCard);
+    }
+
+    return undefined;
+  }
+
+  private onCardPlayed(card: IProjectCard) {
     for (const playedCard of this.playedCards) {
       if (playedCard.onCardPlayed !== undefined) {
-        const actionFromPlayedCard: OrOptions | void = playedCard.onCardPlayed(this, selectedCard);
+        const actionFromPlayedCard: OrOptions | void = playedCard.onCardPlayed(this, card);
         if (actionFromPlayedCard !== undefined) {
           this.game.defer(new DeferredAction(
             this,
@@ -1581,11 +1596,11 @@ export class Player implements ISerializable<SerializedPlayer> {
       }
     }
 
-    TurmoilHandler.applyOnCardPlayedEffect(this, selectedCard);
+    TurmoilHandler.applyOnCardPlayedEffect(this, card);
 
     for (const somePlayer of this.game.getPlayers()) {
       if (somePlayer.corporationCard !== undefined && somePlayer.corporationCard.onCardPlayed !== undefined) {
-        const actionFromPlayedCard: OrOptions | void = somePlayer.corporationCard.onCardPlayed(this, selectedCard);
+        const actionFromPlayedCard: OrOptions | void = somePlayer.corporationCard.onCardPlayed(this, card);
         if (actionFromPlayedCard !== undefined) {
           this.game.defer(new DeferredAction(
             this,
@@ -1595,9 +1610,7 @@ export class Player implements ISerializable<SerializedPlayer> {
       }
     }
 
-    PathfindersExpansion.onCardPlayed(this, selectedCard);
-
-    return undefined;
+    PathfindersExpansion.onCardPlayed(this, card);
   }
 
   private playActionCard(): PlayerInput {

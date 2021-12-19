@@ -1569,21 +1569,15 @@ export class Player implements ISerializable<SerializedPlayer> {
       this.playedCards.push(selectedCard);
     }
 
-    if (selectedCard.tags.includes(Tags.CLONE)) {
-      const onCardPlayed = new DeferredAction(this, () => {
-        this.onCardPlayed(selectedCard);
-        return undefined;
-      });
-      onCardPlayed.priority = Priority.ON_CARD_PLAYED;
-      this.game.defer(onCardPlayed);
-    } else {
+    // See DeclareCloneTag for why.
+    if (!selectedCard.tags.includes(Tags.CLONE)) {
       this.onCardPlayed(selectedCard);
     }
 
     return undefined;
   }
 
-  private onCardPlayed(card: IProjectCard) {
+  public onCardPlayed(card: IProjectCard) {
     for (const playedCard of this.playedCards) {
       if (playedCard.onCardPlayed !== undefined) {
         const actionFromPlayedCard: OrOptions | void = playedCard.onCardPlayed(this, card);

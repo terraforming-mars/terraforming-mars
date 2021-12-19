@@ -11,6 +11,7 @@ import {IProjectCard} from '../IProjectCard';
 import {ICard} from '../ICard';
 import {DeferredAction} from '../../deferredActions/DeferredAction';
 import {MAX_TEMPERATURE} from '../../constants';
+import {Size} from '../render/Size';
 
 export class Ambient extends Card implements CorporationCard {
   constructor() {
@@ -26,14 +27,13 @@ export class Ambient extends Card implements CorporationCard {
         cardNumber: 'PfC3',
         description: 'You start with 38 M€. As your first action, raise the Venus scale 2 steps.',
         renderData: CardRenderer.builder((b) => {
-          b.br;
-          b.megacredits(38).venus(2);
+          b.megacredits(38).venus(2, {size: Size.SMALL}).br;
           b.effect('When you play a card with a Venus tag (including this) increase your heat production 1 step.', (eb) => {
             eb.venus(1, {played}).startEffect.production((pb) => pb.heat(1));
-          });
-          b.action('When temperatore is maxxed, spend 8 heat gain 1 TR. ' +
+          }).br;
+          b.action('When temperature is maxed, spend 8 heat gain 1 TR. ' +
             'You may repeat this action like a standard project.', (ab) => {
-            ab.heat(8, {digit}).startAction.tr(1).text('infinity');
+            ab.heat(8, {digit, size: Size.SMALL}).startAction.tr(1, {size: Size.SMALL}).text('∞');
           });
         }),
       },

@@ -15,7 +15,7 @@ describe('Viron', function() {
     expect(action).is.undefined;
     player.corporationCard = card;
     player.playedCards.push(new RestrictedArea());
-    player.setActionsThisGeneration(new RestrictedArea().name);
+    player.addActionThisGeneration(new RestrictedArea().name);
     expect(card.canAct(player)).is.not.true;
     player.megaCredits += 2;
     expect(card.canAct(player)).is.true;

@@ -149,7 +149,7 @@ export class TestingUtils {
   // export function cast<T>(klass: Class<T>, obj: any): T {
   public static cast<T>(klass: new (...args: any[]) => T, obj: any): T {
     if (!(obj instanceof klass)) {
-      throw new Error(`Not an instance of ${klass.name}: ${obj}`);
+      throw new Error(`Not an instance of ${klass.name}: ${obj.constructor.name}`);
     }
     return obj;
   }

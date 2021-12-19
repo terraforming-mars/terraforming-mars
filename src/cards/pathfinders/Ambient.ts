@@ -40,7 +40,8 @@ export class Ambient extends Card implements CorporationCard {
     });
   }
 
-  public play() {
+  public play(player: Player) {
+    this.onCorpCardPlayed(player, this);
     return undefined;
   }
 

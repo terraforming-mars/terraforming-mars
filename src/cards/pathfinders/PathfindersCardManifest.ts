@@ -4,6 +4,7 @@ import {GameModule} from '../../GameModule';
 
 import {AdvancedPowerGrid} from './AdvancedPowerGrid';
 import {AgroDrones} from './AgroDrones';
+import {Ambient} from './Ambient';
 import {Anthozoa} from './Anthozoa';
 import {AntidesertificationTechniques} from './AntidesertificationTechniques';
 import {AsteroidResources} from './AsteroidResources';
@@ -170,7 +171,7 @@ export const PATHFINDERS_CARD_MANIFEST = new CardManifest({
   corporationCards: [
     {cardName: CardName.POLARIS, Factory: Polaris},
     // {cardName: CardName.PLANET_PR, Factory: planetpr},
-    // {cardName: CardName.AMBIENT, Factory: Ambient},
+    {cardName: CardName.AMBIENT, Factory: Ambient, compatibility: GameModule.Venus},
     {cardName: CardName.RINGCOM, Factory: Ringcom},
     {cardName: CardName.CHIMERA, Factory: Chimera},
     // {cardName: CardName.SISTEMAS_SEEBECK, Factory: SistemasSeebeck},

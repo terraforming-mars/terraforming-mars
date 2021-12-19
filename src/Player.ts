@@ -531,7 +531,7 @@ export class Player implements ISerializable<SerializedPlayer> {
     return this.actionsThisGeneration;
   }
 
-  public setActionsThisGeneration(cardName: CardName): void {
+  public addActionThisGeneration(cardName: CardName): void {
     this.actionsThisGeneration.add(cardName);
     return;
   }

@@ -28,7 +28,7 @@ describe('ProjectInspection', function() {
 
   it('Can\'t play if available actions can\'t act', function() {
     player.playedCards.push(restrictedArea);
-    player.setActionsThisGeneration(restrictedArea.name);
+    player.addActionThisGeneration(restrictedArea.name);
     player.megaCredits = 1;
 
     expect(card.canPlay(player)).is.not.true;
@@ -37,7 +37,7 @@ describe('ProjectInspection', function() {
   it('Should play', function() {
     player.playedCards.push(restrictedArea);
     player.addResource(Resources.MEGACREDITS, 2);
-    player.setActionsThisGeneration(restrictedArea.name);
+    player.addActionThisGeneration(restrictedArea.name);
     expect(card.canPlay(player)).is.true;
 
     const play = card.play(player);
@@ -48,7 +48,7 @@ describe('ProjectInspection', function() {
     const playwrights = new Playwrights();
     player.corporationCard = playwrights;
 
-    player.setActionsThisGeneration(playwrights.name);
+    player.addActionThisGeneration(playwrights.name);
     expect(card.canPlay(player)).is.false; // PI -> PW -> ???
   });
 
@@ -57,7 +57,7 @@ describe('ProjectInspection', function() {
     const indenturedWorkers = new IndenturedWorkers();
     player.corporationCard = playwrights;
     player.playedCards.push(indenturedWorkers);
-    player.setActionsThisGeneration(playwrights.name);
+    player.addActionThisGeneration(playwrights.name);
     expect(card.canPlay(player)).is.true; // PI -> PW -> PI -> PW -> IW
 
     player.playCard(card);
@@ -90,8 +90,8 @@ describe('ProjectInspection', function() {
     player.corporationCard = playwrights;
     player.playedCards.push(card);
     player.playedCards.push(restrictedArea);
-    player.setActionsThisGeneration(restrictedArea.name);
-    player.setActionsThisGeneration(playwrights.name);
+    player.addActionThisGeneration(restrictedArea.name);
+    player.addActionThisGeneration(playwrights.name);
     player.addResource(Resources.MEGACREDITS, 2);
     expect(playwrights.canAct(player)).is.true; // PW -> PI -> RA
 
@@ -114,7 +114,7 @@ describe('ProjectInspection', function() {
     player.corporationCard = playwrights;
     player.playedCards.push(card);
     player.playedCards.push(indenturedWorkers);
-    player.setActionsThisGeneration(playwrights.name);
+    player.addActionThisGeneration(playwrights.name);
     player.addResource(Resources.MEGACREDITS, 2);
     expect(playwrights.canAct(player)).is.true; // PW -> PI -> PW -> IW
 

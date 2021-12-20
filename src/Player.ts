@@ -31,7 +31,7 @@ import {SelectAmount} from './inputs/SelectAmount';
 import {SelectCard} from './inputs/SelectCard';
 import {SellPatentsStandardProject} from './cards/base/standardProjects/SellPatentsStandardProject';
 import {SendDelegateToArea} from './deferredActions/SendDelegateToArea';
-import {DeferredAction, Priority} from './deferredActions/DeferredAction';
+import {DeferredAction} from './deferredActions/DeferredAction';
 import {SelectHowToPayDeferred} from './deferredActions/SelectHowToPayDeferred';
 import {SelectColony} from './inputs/SelectColony';
 import {SelectPartyToSendDelegate} from './inputs/SelectPartyToSendDelegate';

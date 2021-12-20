@@ -38,8 +38,8 @@ export class Kickstarter extends Card implements IProjectCard, ICloneTagCard {
       new DeclareCloneTag(
         player,
         this,
-        'Select a planetary track to advance 3 steps (and to clone this tag.)',
-        (tag) => PathfindersExpansion.raiseTrack(tag, player, 3),
+        // +2 instead of +3 because onCardPlayed covers applying one of the 3.
+        (tag) => PathfindersExpansion.raiseTrack(tag, player, 2),
       ));
     return undefined;
   }

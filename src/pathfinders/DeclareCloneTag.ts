@@ -5,8 +5,8 @@ import {OrOptions} from '../inputs/OrOptions';
 import {SelectOption} from '../inputs/SelectOption';
 import {ICloneTagCard} from '../cards/pathfinders/ICloneTagCard';
 import {ICard} from '../cards/ICard';
-import {CardType} from '@/cards/CardType';
-import {IProjectCard} from '@/cards/IProjectCard';
+import {CardType} from '../cards/CardType';
+import {IProjectCard} from '../cards/IProjectCard';
 
 /**
  * Declare what tag a new card has. Must occur before anything else, including
@@ -22,8 +22,12 @@ export class DeclareCloneTag implements DeferredAction {
   public constructor(
     public player: Player,
     public card: ICard & ICloneTagCard,
-    public title: string,
-    public cb: (tag: Tags) => void) {}
+    public cb: (tag: Tags) => void = () => {},
+    public title: string = '') {
+    if (this.title === '') {
+      this.title = `Assign the clone tag for ${card.name}`;
+    }
+  }
 
   public execute() {
     const tags = [Tags.EARTH, Tags.JOVIAN, Tags.MARS];

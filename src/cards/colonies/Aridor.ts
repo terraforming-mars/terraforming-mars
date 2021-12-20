@@ -43,15 +43,16 @@ export class Aridor extends Card implements CorporationCard {
       if (availableColonies.length === 0) return undefined;
 
       const selectColony = new SelectColony('Aridor first action - Select colony tile to add', 'Add colony tile', availableColonies, (colony: Colony) => {
-        if (game.colonyDealer !== undefined) {
+        if (availableColonies.includes(colony)) {
           game.colonies.push(colony);
           game.colonies.sort((a, b) => (a.name > b.name) ? 1 : -1);
           game.log('${0} added a new Colony tile: ${1}', (b) => b.player(player).colony(colony));
           this.checkActivation(colony, game);
-          return undefined;
-        } else return undefined;
-      },
-      );
+        } else {
+          throw new Error(`Colony ${colony.name} is not a discarded colony`);
+        }
+        return undefined;
+      });
       return selectColony;
     }
 

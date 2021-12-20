@@ -72,6 +72,7 @@ import {CrashSiteCleanup} from './cards/promo/CrashSiteCleanup';
 import {Turmoil} from './turmoil/Turmoil';
 import {PathfindersExpansion} from './pathfinders/PathfindersExpansion';
 import {deserializeProjectCard, serializeProjectCard} from './cards/CardSerialization';
+import {ColoniesHandler} from './colonies/ColoniesHandler';
 
 export type PlayerId = string;
 
@@ -1011,10 +1012,7 @@ export class Player implements ISerializable<SerializedPlayer> {
       if (colonyName === undefined) {
         throw new Error('No colony selected');
       }
-      const colony = this.game.colonies.find((c) => c.name === colonyName);
-      if (colony === undefined) {
-        throw new Error(`Unknown colony '${colonyName}'`);
-      }
+      const colony = ColoniesHandler.getColony(this.game, colonyName, true);
       this.runInputCb(pi.cb(colony));
     } else if (pi instanceof OrOptions) {
       // input length is variable, can't test it with checkInputLength

@@ -308,13 +308,13 @@ describe('Game', () => {
     player.takeActionForFinalGreenery();
 
     // Place first greenery to get 2 plants
-    const placeFirstGreenery = player.getWaitingFor() as OrOptions;
+    const placeFirstGreenery = TestingUtils.cast(player.getWaitingFor(), OrOptions);
     const arsiaMons = game.board.getSpace(SpaceName.ARSIA_MONS);
     placeFirstGreenery.options[0].cb(arsiaMons);
     expect(player.plants).to.eq(8);
 
     // Place second greenery
-    const placeSecondGreenery = player.getWaitingFor() as OrOptions;
+    const placeSecondGreenery = TestingUtils.cast(player.getWaitingFor(), OrOptions);
     const otherSpace = game.board.getSpace('30');
     placeSecondGreenery.options[0].cb(otherSpace); ;
 

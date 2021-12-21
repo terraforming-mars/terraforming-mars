@@ -78,8 +78,8 @@ export type PlayerId = string;
 
 export class Player implements ISerializable<SerializedPlayer> {
   public readonly id: PlayerId;
-  private waitingFor?: PlayerInput;
-  private waitingForCb?: () => void;
+  protected waitingFor?: PlayerInput;
+  protected waitingForCb?: () => void;
   private _game: Game | undefined = undefined;
 
   // Corporate identity

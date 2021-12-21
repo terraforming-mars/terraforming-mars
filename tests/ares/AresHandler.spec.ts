@@ -134,7 +134,8 @@ describe('AresHandler', function() {
 
     player.addProduction(Resources.PLANTS, 7);
     game.addTile(player, adjacentSpace.spaceType, adjacentSpace, {tileType: TileType.GREENERY});
-    const input = game.deferredActions.peek()!.execute() as SelectProductionToLose;
+    TestingUtils.runAllActions(game);
+    const input = TestingUtils.cast(player.getWaitingFor(), SelectProductionToLose);
     expect(input.unitsToLose).eq(1);
     input.cb(Units.of({plants: 1}));
     expect(player.getProduction(Resources.PLANTS)).eq(6);
@@ -157,7 +158,8 @@ describe('AresHandler', function() {
     player.addProduction(Resources.PLANTS, 7);
     game.addTile(player, adjacentSpace.spaceType, adjacentSpace, {tileType: TileType.GREENERY});
 
-    const input = game.deferredActions.peek()!.execute() as SelectProductionToLose;
+    TestingUtils.runAllActions(game);
+    const input = TestingUtils.cast(player.getWaitingFor(), SelectProductionToLose);
     expect(input.unitsToLose).eq(2);
     input.cb(Units.of({plants: 2}));
     expect(player.getProduction(Resources.PLANTS)).eq(5);

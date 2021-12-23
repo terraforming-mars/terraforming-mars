@@ -10,6 +10,8 @@ import {SelectCard} from '../../../src/inputs/SelectCard';
 import {SelectColony} from '../../../src/inputs/SelectColony';
 import {Player} from '../../../src/Player';
 import {TestPlayers} from '../../TestPlayers';
+import {AndOptions} from '../../../src/inputs/AndOptions';
+import {TestingUtils} from '../../TestingUtils';
 
 describe('TitanFloatingLaunchPad', function() {
   let card : TitanFloatingLaunchPad; let player : Player; let game : Game;
@@ -85,5 +87,36 @@ describe('TitanFloatingLaunchPad', function() {
     selectColony.cb(selectColony.colonies[0]);
     expect(card.resourceCount).to.eq(7);
     expect(player.megaCredits).to.eq(2);
+  });
+
+
+  it('is available through standard trade action', () => {
+    const luna = new Luna();
+    player.game.colonies = [luna];
+
+    const getTradeAction = () => player.getActions().options.find(
+      (option) => option.title === 'Trade with a colony tile');
+
+    expect(getTradeAction()).is.undefined;
+
+    player.playedCards.push(card);
+
+    expect(getTradeAction()).is.undefined;
+
+    card.resourceCount = 1;
+    const tradeAction = TestingUtils.cast(AndOptions, getTradeAction());
+
+    const payAction = TestingUtils.cast(OrOptions, tradeAction.options[0]);
+    expect(payAction.title).eq('Pay trade fee');
+    expect(payAction.options).has.length(1);
+
+    const floaterOption = payAction.options[0];
+    expect(floaterOption.title).to.match(/Pay 1 Floater/);
+
+    floaterOption.cb();
+    tradeAction.options[1].cb(luna);
+
+    expect(card.resourceCount).eq(0);
+    expect(player.megaCredits).eq(2);
   });
 });

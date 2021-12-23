@@ -19,7 +19,7 @@ import {CardName} from '../../src/CardName';
 const gameOptions = TestingUtils.setCustomGameOptions({coloniesExtension: true});
 
 function isBuildColonyStandardProjectAvailable(player: TestPlayer) {
-  const options = TestingUtils.cast(SelectCard, player.getStandardProjectOption());
+  const options = TestingUtils.cast(player.getStandardProjectOption(), SelectCard);
   const colonyOptionIdx = options.cards.findIndex((card) => card.name === CardName.BUILD_COLONY_STANDARD_PROJECT);
   return options.enabled![colonyOptionIdx];
 }
@@ -27,7 +27,7 @@ function isBuildColonyStandardProjectAvailable(player: TestPlayer) {
 function isTradeWithColonyActionAvailable(player: Player) {
   let tradeWithColonyIsAvailable = false;
   player.takeAction();
-  const actions = TestingUtils.cast(OrOptions, player.getWaitingFor());
+  const actions = TestingUtils.cast(player.getWaitingFor(), OrOptions);
   actions.options.forEach((option) => {
     if (option instanceof AndOptions && option.options.slice(-1)[0] instanceof SelectColony) {
       tradeWithColonyIsAvailable = true;

@@ -10,6 +10,7 @@ export class GiveColonyBonus implements DeferredAction {
     constructor(
         public player: Player,
         public colony: Colony,
+        public selfish: boolean = false, // Used for CoordinatedRaid.
     ) {}
 
     public execute() {
@@ -19,7 +20,13 @@ export class GiveColonyBonus implements DeferredAction {
       }
 
       for (const playerId of this.colony.colonies) {
-        this.waitingFor.add(playerId);
+        if (!this.selfish) {
+          // Normal behavior; colony owners get their bonuses.
+          this.waitingFor.add(playerId);
+        } else {
+          // Selfish behavior, `player` gets all the colony bonuses.
+          this.waitingFor.add(this.player.id);
+        }
       }
 
       for (const entry of this.waitingFor.entries()) {
@@ -32,7 +39,7 @@ export class GiveColonyBonus implements DeferredAction {
     }
 
     private giveColonyBonus(player: Player): void {
-      if (this.waitingFor.get(player.id) !== undefined && this.waitingFor.get(player.id)! > 0) {
+      if (this.waitingFor.get(player.id) ?? 0 > 0) {
         this.waitingFor.subtract(player.id);
         const input = this.colony.giveColonyBonus(player, true);
         if (input !== undefined) {

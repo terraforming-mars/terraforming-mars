@@ -12,7 +12,7 @@ import {CorporationCard} from './cards/corporation/CorporationCard';
 import {Game} from './Game';
 import {HowToPay} from './inputs/HowToPay';
 import {IAward} from './awards/IAward';
-import {ICard, IResourceCard, TRSource} from './cards/ICard';
+import {IActionCard, ICard, IResourceCard, isIActionCard, TRSource} from './cards/ICard';
 import {ISerializable} from './ISerializable';
 import {IMilestone} from './milestones/IMilestone';
 import {IProjectCard} from './cards/IProjectCard';
@@ -1116,20 +1116,15 @@ export class Player implements ISerializable<SerializedPlayer> {
     return this.getPlayableActionCards().length;
   }
 
-  private getPlayableActionCards(): Array<ICard> {
-    const result: Array<ICard> = [];
-    if (
-      this.corporationCard !== undefined &&
+  private getPlayableActionCards(): Array<ICard & IActionCard> {
+    const result: Array<ICard & IActionCard> = [];
+    if (isIActionCard(this.corporationCard) &&
           !this.actionsThisGeneration.has(this.corporationCard.name) &&
-          this.corporationCard.action !== undefined &&
-          this.corporationCard.canAct !== undefined &&
           this.corporationCard.canAct(this)) {
       result.push(this.corporationCard);
     }
     for (const playedCard of this.playedCards) {
-      if (
-        playedCard.action !== undefined &&
-              playedCard.canAct !== undefined &&
+      if (isIActionCard(playedCard) &&
               !this.actionsThisGeneration.has(playedCard.name) &&
               playedCard.canAct(this)) {
         result.push(playedCard);
@@ -1586,14 +1581,14 @@ export class Player implements ISerializable<SerializedPlayer> {
   }
 
   private playActionCard(): PlayerInput {
-    return new SelectCard(
+    return new SelectCard<ICard & IActionCard>(
       'Perform an action from a played card',
       'Take action',
       this.getPlayableActionCards(),
-      (foundCards: Array<ICard>) => {
+      (foundCards) => {
         const foundCard = foundCards[0];
         this.game.log('${0} used ${1} action', (b) => b.player(this).card(foundCard));
-        const action = foundCard.action!(this);
+        const action = foundCard.action(this);
         if (action !== undefined) {
           this.game.defer(new DeferredAction(
             this,

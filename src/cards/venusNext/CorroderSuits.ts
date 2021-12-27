@@ -2,7 +2,6 @@ import {Tags} from '../Tags';
 import {CardType} from '../CardType';
 import {Player} from '../../Player';
 import {Resources} from '../../Resources';
-import {ResourceType} from '../../ResourceType';
 import {SelectCard} from '../../inputs/SelectCard';
 import {ICard} from '../ICard';
 import {CardName} from '../../CardName';
@@ -51,9 +50,6 @@ export class CorroderSuits extends Card {
     );
   }
   public static getVenusResCards(player: Player): ICard[] {
-    let resourceCards = player.getResourceCards(ResourceType.FLOATER);
-    resourceCards = resourceCards.concat(player.getResourceCards(ResourceType.MICROBE));
-    resourceCards = resourceCards.concat(player.getResourceCards(ResourceType.ANIMAL));
-    return resourceCards.filter((card) => card.tags.includes(Tags.VENUS));
+    return player.getResourceCards().filter((card) => card.tags.includes(Tags.VENUS));
   }
 }

@@ -15,14 +15,14 @@
               <board-space :space="getSpaceById('71')" text="Dawn City"></board-space>
               <board-space :space="getSpaceById('72')" text="Stratopolis"></board-space>
               <board-space :space="getSpaceById('73')" text="Maxwell Base"></board-space>
-            </template>>
+            </template>
             <template v-if="pathfindersExpansion">
               <!-- <board-space :space="getSpaceById('74')" text="Martian Transhipment Station"></board-space> -->
               <board-space :space="getSpaceById('75')" text="Ceres Spaceport"></board-space>
               <board-space :space="getSpaceById('76')" text="Dyson Screens"></board-space>
               <board-space :space="getSpaceById('77')" text="Lunar Embassy"></board-space>
               <board-space :space="getSpaceById('78')" text="Venera Base"></board-space>
-            </template>>
+            </template>
         </div>
 
         <div class="global-numbers">

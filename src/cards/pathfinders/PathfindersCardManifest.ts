@@ -15,6 +15,7 @@ import {Chimera} from './Chimera';
 import {CO2Reducers} from './CO2Reducers';
 // import {CommunicationCenter} from './CommunicationCenter';
 import {ControlledBloom} from './ControlledBloom';
+import {CoordinatedRaid} from './CoordinatedRaid';
 import {CrewTraining} from './CrewTraining';
 import {Cryptocurrency} from './Cryptocurrency';
 import {CultivationOfVenus} from './CultivationOfVenus';
@@ -35,6 +36,7 @@ import {FlatMarsTheory} from './FlatMarsTheory';
 import {FloaterUrbanism} from './FloaterUrbanism';
 import {GeologicalExpedition} from './GeologicalExpedition';
 import {HighTempSuperconductors} from './HighTempSuperconductors';
+import {HuygensObservatory} from './HuygensObservatory';
 import {HydrogenBombardment} from './HydrogenBombardment';
 import {HydrogenProcessingPlant} from './HydrogenProcessingPlant';
 import {InterplanetaryTransport} from './InterplanetaryTransport';
@@ -151,14 +153,14 @@ export const PATHFINDERS_CARD_MANIFEST = new CardManifest({
     // // *** {cardName: CardName.CHARITY_DONATION, Factory: CharityDonation},
     // // {cardName: CardName.CURIOSITY_LABS, Factory: CuriosityLabs},                          // TWO RESOURCE TYPES
     {cardName: CardName.NOBEL_LABS, Factory: NobelLabs},
-    // // {cardName: CardName.HUYGENS_OBSERVATORY, Factory: HuygensObservatory, compatibility: GameModule.Colonies}, // TRICKY WORK
+    {cardName: CardName.HUYGENS_OBSERVATORY, Factory: HuygensObservatory, compatibility: GameModule.Colonies},
     {cardName: CardName.CASSINI_STATION, Factory: CassiniStation, compatibility: GameModule.Colonies},
     {cardName: CardName.MICROBIOLOGY_PATENTS, Factory: MicrobiologyPatents},
-    // // {cardName: CardName.COORDINATED_RAID, Factory: CoordinatedRaid, compatibility: GameModule.Colonies},       // TRICKY WORK
+    {cardName: CardName.COORDINATED_RAID, Factory: CoordinatedRaid, compatibility: GameModule.Colonies},
     {cardName: CardName.LOBBY_HALLS, Factory: LobbyHalls, compatibility: GameModule.Turmoil},
     {cardName: CardName.RED_CITY, Factory: RedCity, compatibility: GameModule.Turmoil},
     {cardName: CardName.VENERA_BASE, Factory: VeneraBase, compatibility: [GameModule.Turmoil, GameModule.Venus]},
-    // // {cardName: CardName.GATEWAY_STATION, Factory: GatewayStation, compatibility: GameModule.Turmoil},
+    // // {cardName: CardName.GATEWAY_STATION, Factory: GatewayStation, compatibility: GameModule.Turmoil}, // Place a city tile outside Mars with new adjacency??
     {cardName: CardName.FLOATER_URBANISM, Factory: FloaterUrbanism, compatibility: GameModule.Venus},
     {cardName: CardName.SOIL_DETOXIFICATION, Factory: SoilDetoxification, compatibility: GameModule.Turmoil},
     {cardName: CardName.HIGH_TEMP_SUPERCONDUCTORS, Factory: HighTempSuperconductors, compatibility: GameModule.Turmoil},

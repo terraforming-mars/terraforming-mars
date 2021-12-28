@@ -12,7 +12,8 @@ export class BuildColony implements DeferredAction {
     public openColonies?: Array<Colony>,
     private options?: {
       // Custom for Vital Colony.
-      giveBonusTwice: boolean
+      giveBonusTwice?: boolean,
+      cb?: (colony: Colony) => void,
     },
   ) {}
 
@@ -31,7 +32,8 @@ export class BuildColony implements DeferredAction {
     const openColonies = this.openColonies;
 
     return new SelectColony(this.title, 'Build', openColonies, (colony: Colony) => {
-      colony.addColony(this.player, this.options);
+      colony.addColony(this.player, {giveBonusTwice: this.options?.giveBonusTwice ?? false});
+      if (this.options?.cb) this.options.cb(colony);
       return undefined;
     });
   }

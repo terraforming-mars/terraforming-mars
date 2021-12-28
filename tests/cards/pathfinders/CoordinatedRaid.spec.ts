@@ -51,7 +51,7 @@ describe('CoordinatedRaid', function() {
     colony.addColony(player2);
     colony.addColony(player2);
     const action = card.play(player);
-    const selectColony = TestingUtils.cast(SelectColony, action);
+    const selectColony = TestingUtils.cast(action, SelectColony);
 
     expect(player.getResourcesForTest()).deep.eq(Units.EMPTY);
     expect(player2.getResourcesForTest()).deep.eq(Units.of({titanium: 6}));

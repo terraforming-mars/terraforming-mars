@@ -78,8 +78,8 @@ describe('DeclareCloneTag', function() {
     expect(martianZoo.resourceCount).eq(0);
 
 
-    const action = TestingUtils.cast(DeclareCloneTag, game.deferredActions.pop());
-    const options = TestingUtils.cast(OrOptions, action!.execute());
+    const action = TestingUtils.cast(game.deferredActions.pop(), DeclareCloneTag);
+    const options = TestingUtils.cast(action!.execute(), OrOptions);
 
     expect(options.options[0].title).to.match(/earth/);
 

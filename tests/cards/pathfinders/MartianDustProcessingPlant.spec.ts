@@ -2,7 +2,7 @@ import {expect} from 'chai';
 import {MartianDustProcessingPlant} from '../../../src/cards/pathfinders/MartianDustProcessingPlant';
 import {Game} from '../../../src/Game';
 import {TestPlayer} from '../../TestPlayer';
-import {newTestGame} from '../../TestGame';
+import {getTestPlayer, newTestGame} from '../../TestGame';
 import {Units} from '../../../src/Units';
 
 describe('MartianDustProcessingPlant', function() {
@@ -13,7 +13,7 @@ describe('MartianDustProcessingPlant', function() {
   beforeEach(function() {
     card = new MartianDustProcessingPlant();
     game = newTestGame(1);
-    player = game.getPlayers()[0] as TestPlayer;
+    player = getTestPlayer(game, 0);
   });
 
   it('canPlay', function() {

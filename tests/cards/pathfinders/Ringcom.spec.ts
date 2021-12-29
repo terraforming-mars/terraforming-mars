@@ -2,7 +2,7 @@ import {expect} from 'chai';
 import {Ringcom} from '../../../src/cards/pathfinders/Ringcom';
 import {Game} from '../../../src/Game';
 import {TestPlayer} from '../../TestPlayer';
-import {newTestGame} from '../../TestGame';
+import {getTestPlayer, newTestGame} from '../../TestGame';
 import {CardName} from '../../../src/CardName';
 import {TestingUtils} from '../../TestingUtils';
 import {Tags} from '../../../src/cards/Tags';
@@ -16,8 +16,8 @@ describe('Ringcom', function() {
   beforeEach(function() {
     card = new Ringcom();
     game = newTestGame(2);
-    player = game.getPlayers()[0] as TestPlayer;
-    player2 = game.getPlayers()[1] as TestPlayer;
+    player = getTestPlayer(game, 0);
+    player2 = getTestPlayer(game, 1);
     player.corporationCard = card;
   });
 

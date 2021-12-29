@@ -4,6 +4,7 @@ import {LobbyHalls} from '../../src/cards/pathfinders/LobbyHalls';
 import {Tags} from '../../src/cards/Tags';
 import {deserializeProjectCard, serializeProjectCard} from '../../src/cards/CardSerialization';
 import {CardFinder} from '../../src/CardFinder';
+import {TestingUtils} from '../TestingUtils';
 
 describe('CardSerialization', function() {
   let cardFinder = new CardFinder();
@@ -19,9 +20,9 @@ describe('CardSerialization', function() {
 
     expect(serializedCard.cloneTag).eq(Tags.CLONE);
     const deserialized = deserializeProjectCard(serializedCard, cardFinder);
-    expect(deserialized).is.instanceOf(LobbyHalls);
-    expect((deserialized as LobbyHalls).cloneTag).eq(Tags.CLONE);
-    expect(deserialized.tags).deep.eq([Tags.CLONE, Tags.BUILDING]);
+    const lobbyHalls = TestingUtils.cast(deserialized, LobbyHalls);
+    expect(lobbyHalls.cloneTag).eq(Tags.CLONE);
+    expect(lobbyHalls.tags).deep.eq([Tags.CLONE, Tags.BUILDING]);
   });
 
   it('defined clone tags serialize and deserialize', function() {
@@ -32,8 +33,8 @@ describe('CardSerialization', function() {
     expect(serializedCard.cloneTag).eq(Tags.SCIENCE);
 
     const deserialized = deserializeProjectCard(serializedCard, cardFinder);
-    expect(deserialized).is.instanceOf(LobbyHalls);
-    expect((deserialized as LobbyHalls).cloneTag).eq(Tags.SCIENCE);
-    expect(deserialized.tags).deep.eq([Tags.SCIENCE, Tags.BUILDING]);
+    const lobbyHalls = TestingUtils.cast(deserialized, LobbyHalls);
+    expect(lobbyHalls.cloneTag).eq(Tags.SCIENCE);
+    expect(lobbyHalls.tags).deep.eq([Tags.SCIENCE, Tags.BUILDING]);
   });
 });

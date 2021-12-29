@@ -2,7 +2,7 @@ import {expect} from 'chai';
 import {Ambient} from '../../../src/cards/pathfinders/Ambient';
 import {Game} from '../../../src/Game';
 import {TestPlayer} from '../../TestPlayer';
-import {newTestGame} from '../../TestGame';
+import {getTestPlayer, newTestGame} from '../../TestGame';
 import {TestingUtils} from '../../TestingUtils';
 import {Tags} from '../../../src/cards/Tags';
 import {Resources} from '../../../src/Resources';
@@ -19,8 +19,8 @@ describe('Ambient', function() {
   beforeEach(function() {
     card = new Ambient();
     game = newTestGame(2);
-    player = game.getPlayers()[0] as TestPlayer;
-    player2 = game.getPlayers()[1] as TestPlayer;
+    player = getTestPlayer(game, 0);
+    player2 = getTestPlayer(game, 1);
     player.corporationCard = card;
   });
 
@@ -86,9 +86,9 @@ describe('Ambient', function() {
     (game as any).temperature = MAX_TEMPERATURE;
 
     const getBlueActions = function() {
-      const actions = TestingUtils.cast(OrOptions, player.getActions());
+      const actions = TestingUtils.cast(player.getActions(), OrOptions);
       if (actions.options[0].title === 'Perform an action from a played card') {
-        return TestingUtils.cast(SelectCard, actions.options[0]);
+        return TestingUtils.cast(actions.options[0], SelectCard);
       }
       return undefined;
     };

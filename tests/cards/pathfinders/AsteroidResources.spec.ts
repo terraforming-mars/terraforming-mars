@@ -3,7 +3,7 @@ import {AsteroidResources} from '../../../src/cards/pathfinders/AsteroidResource
 import {Game} from '../../../src/Game';
 import {TestPlayer} from '../../TestPlayer';
 import {SelectSpace} from '../../../src/inputs/SelectSpace';
-import {newTestGame} from '../../TestGame';
+import {getTestPlayer, newTestGame} from '../../TestGame';
 import {OrOptions} from '../../../src/inputs/OrOptions';
 import {Resources} from '../../../src/Resources';
 import {PlaceOceanTile} from '../../../src/deferredActions/PlaceOceanTile';
@@ -18,7 +18,7 @@ describe('AsteroidResources', function() {
   beforeEach(function() {
     card = new AsteroidResources();
     game = newTestGame(1);
-    player = game.getPlayers()[0] as TestPlayer;
+    player = getTestPlayer(game, 0);
   });
 
   it('canPlay', function() {

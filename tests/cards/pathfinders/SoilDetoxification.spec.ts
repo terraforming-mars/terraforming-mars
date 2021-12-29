@@ -3,7 +3,7 @@ import {SoilDetoxification} from '../../../src/cards/pathfinders/SoilDetoxificat
 import {Game} from '../../../src/Game';
 import {Turmoil} from '../../../src/turmoil/Turmoil';
 import {TestPlayer} from '../../TestPlayer';
-import {newTestGame} from '../../TestGame';
+import {getTestPlayer, newTestGame} from '../../TestGame';
 import {EcoLine} from '../../../src/cards/corporation/EcoLine';
 import {ConvertPlants} from '../../../src/cards/base/standardActions/ConvertPlants';
 import {Unity} from '../../../src/turmoil/parties/Unity';
@@ -18,7 +18,7 @@ describe('SoilDetoxification', function() {
   beforeEach(function() {
     card = new SoilDetoxification();
     game = newTestGame(1, {turmoilExtension: true});
-    player = game.getPlayers()[0] as TestPlayer;
+    player = getTestPlayer(game, 0);
   });
 
   it('canPlay', function() {

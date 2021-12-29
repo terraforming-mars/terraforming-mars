@@ -86,7 +86,7 @@ export class TestPlayer extends Player {
     });
   }
 
-  public popWaitingFor() {
+  public popWaitingFor(): PlayerInput | undefined {
     const waitingFor = this.getWaitingFor();
     this.waitingFor = undefined;
     this.waitingForCb = undefined;

@@ -6,7 +6,7 @@ import {TestPlayers} from '../../TestPlayers';
 import {TestingUtils} from '../../TestingUtils';
 import {Turmoil} from '../../../src/turmoil/Turmoil';
 import {PartyName} from '../../../src/turmoil/parties/PartyName';
-import {SendDelegateToArea} from '../../../src/deferredActions/SendDelegateToArea';
+import {SelectPartyToSendDelegate} from '../../../src/inputs/SelectPartyToSendDelegate';
 
 describe('DeclarationOfIndependence', function() {
   let card: DeclarationOfIndependence;
@@ -40,9 +40,9 @@ describe('DeclarationOfIndependence', function() {
     const marsFirst = turmoil.getPartyByName(PartyName.MARS)!;
     expect(marsFirst.getDelegates(player.id)).eq(0);
     card.play(player);
-    const action = player.game.deferredActions.pop() as SendDelegateToArea;
-    const options = action.execute();
-    options!.cb(marsFirst.name);
+    TestingUtils.runAllActions(player.game);
+    const action = TestingUtils.cast(player.getWaitingFor(), SelectPartyToSendDelegate);
+    action.cb(marsFirst.name);
 
     expect(turmoil.getAvailableDelegateCount(player.id, 'reserve')).eq(4);
     expect(marsFirst.getDelegates(player.id)).eq(2);

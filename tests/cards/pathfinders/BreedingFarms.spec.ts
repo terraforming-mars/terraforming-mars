@@ -4,7 +4,7 @@ import {Fish} from '../../../src/cards/base/Fish';
 import {Game} from '../../../src/Game';
 import {TestPlayer} from '../../TestPlayer';
 import {TestPlayers} from '../../TestPlayers';
-import {TestingUtils} from '../../../tests/TestingUtils';
+import {TestingUtils} from '../../TestingUtils';
 
 describe('BreedingFarms', function() {
   let card: BreedingFarms;

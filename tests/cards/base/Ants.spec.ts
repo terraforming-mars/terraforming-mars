@@ -5,20 +5,21 @@ import {NitriteReducingBacteria} from '../../../src/cards/base/NitriteReducingBa
 import {ProtectedHabitats} from '../../../src/cards/base/ProtectedHabitats';
 import {SecurityFleet} from '../../../src/cards/base/SecurityFleet';
 import {Tardigrades} from '../../../src/cards/base/Tardigrades';
-import {ICard} from '../../../src/cards/ICard';
 import {Game} from '../../../src/Game';
 import {SelectCard} from '../../../src/inputs/SelectCard';
-import {Player} from '../../../src/Player';
+import {TestPlayer} from '../../TestPlayer';
 import {TestPlayers} from '../../TestPlayers';
+import {TestingUtils} from '../../TestingUtils';
 
 describe('Ants', function() {
-  let card : Ants; let player : Player; let player2 : Player; let game : Game;
+  let card : Ants; let player : TestPlayer; let player2 : TestPlayer; let game : Game;
 
   beforeEach(function() {
     card = new Ants();
     player = TestPlayers.BLUE.newPlayer();
     player2 = TestPlayers.RED.newPlayer();
     game = Game.newInstance('foobar', [player, player2], player);
+    player.popWaitingFor();
   });
 
   it('Can\'t play without oxygen', function() {
@@ -49,10 +50,11 @@ describe('Ants', function() {
     expect(card.canAct(player)).is.true;
 
     card.action(player);
-    const selectCard = game.deferredActions.pop()!.execute() as SelectCard<ICard>;
+    TestingUtils.runAllActions(game);
+    const selectCard = TestingUtils.cast(player.getWaitingFor(), SelectCard);
     expect(selectCard.cards).has.lengthOf(2);
     selectCard.cb([selectCard.cards[0]]);
-    game.deferredActions.pop()!.execute(); // Add microbe to ants
+    TestingUtils.runAllActions(game);
 
     expect(card.resourceCount).to.eq(1);
     expect(tardigrades.resourceCount).to.eq(0);
@@ -83,11 +85,10 @@ describe('Ants', function() {
     player2.addResourceTo(securityFleet);
 
     card.action(player);
-    const selectCard = game.deferredActions.pop()!.execute() as SelectCard<ICard>;
-    expect(selectCard).is.undefined; // Only one option: Tardigrades
-        game.deferredActions.pop()!.execute(); // Add microbe to ants
+    TestingUtils.runAllActions(game);
+    expect(player.getWaitingFor()).is.undefined;
 
-        expect(card.resourceCount).to.eq(1);
-        expect(tardigrades.resourceCount).to.eq(0);
+    expect(card.resourceCount).to.eq(1);
+    expect(tardigrades.resourceCount).to.eq(0);
   });
 });

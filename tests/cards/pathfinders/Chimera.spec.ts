@@ -6,7 +6,7 @@ import {AdaptationTechnology} from '../../../src/cards/base/AdaptationTechnology
 import {Cartel} from '../../../src/cards/base/Cartel';
 import {Game} from '../../../src/Game';
 import {TestPlayer} from '../../TestPlayer';
-import {newTestGame} from '../../TestGame';
+import {getTestPlayer, newTestGame} from '../../TestGame';
 import {CardName} from '../../../src/CardName';
 import {TestingUtils} from '../../TestingUtils';
 import {CardRequirements} from '../../../src/cards/CardRequirements';
@@ -23,7 +23,7 @@ describe('Chimera', function() {
   beforeEach(function() {
     card = new Chimera();
     game = newTestGame(1);
-    player = game.getPlayers()[0] as TestPlayer;
+    player = getTestPlayer(game, 0);
     player.corporationCard = card;
   });
 

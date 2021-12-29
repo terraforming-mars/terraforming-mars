@@ -97,7 +97,7 @@ describe('Board', function() {
 
   it('Can land-claim, and then place on, a cove space', () => {
     const landClaim = new LandClaim();
-    const selectSpace = landClaim.play(player) as SelectSpace;
+    const selectSpace = TestingUtils.cast(landClaim.play(player), SelectSpace);
     const space = board.getSpaces(SpaceType.COVE)[0];
     expect(selectSpace.availableSpaces.map((space) => space.id)).contains(space.id);
 

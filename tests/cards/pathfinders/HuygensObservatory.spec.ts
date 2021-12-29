@@ -45,7 +45,7 @@ describe('HuygensObservatory', function() {
 
     TestingUtils.runAllActions(game);
 
-    const selectColony = TestingUtils.cast(SelectColony, player.popWaitingFor());
+    const selectColony = TestingUtils.cast(player.popWaitingFor(), SelectColony);
     expect(selectColony.colonies).has.length(5);
     expect(selectColony.title).eq('Select colony for Huygens Observatory');
 
@@ -58,7 +58,7 @@ describe('HuygensObservatory', function() {
 
     TestingUtils.runAllActions(game);
 
-    const tradeDestination = TestingUtils.cast(SelectColony, player.popWaitingFor());
+    const tradeDestination = TestingUtils.cast(player.popWaitingFor(), SelectColony);
 
     expect(tradeDestination.colonies).has.length(5);
 
@@ -79,7 +79,7 @@ describe('HuygensObservatory', function() {
 
     TestingUtils.runAllActions(game);
 
-    const selectColony = TestingUtils.cast(SelectColony, player.popWaitingFor());
+    const selectColony = TestingUtils.cast(player.popWaitingFor(), SelectColony);
     expect(selectColony.colonies).has.length(5);
     expect(selectColony.colonies.map((c) => c.name)).contains(ColonyName.GANYMEDE);
 
@@ -101,7 +101,7 @@ describe('HuygensObservatory', function() {
     TestingUtils.runAllActions(game);
 
     // Go straight to trade
-    const tradeDestination = TestingUtils.cast(SelectColony, player.popWaitingFor());
+    const tradeDestination = TestingUtils.cast(player.popWaitingFor(), SelectColony);
     expect(tradeDestination.title).eq('Select colony tile to trade with for free');
     expect(tradeDestination.colonies).has.length(5);
 
@@ -122,14 +122,14 @@ describe('HuygensObservatory', function() {
     expect(player.getProductionForTest()).deep.eq(Units.EMPTY);
 
     TestingUtils.runAllActions(game);
-    const selectColony = TestingUtils.cast(SelectColony, player.popWaitingFor());
+    const selectColony = TestingUtils.cast(player.popWaitingFor(), SelectColony);
     selectColony.cb(ganymede);
 
     expect(ganymede.visitor).eq(player.id);
 
     TestingUtils.runAllActions(game);
 
-    const recallTradeFleet = TestingUtils.cast(SelectColony, player.popWaitingFor());
+    const recallTradeFleet = TestingUtils.cast(player.popWaitingFor(), SelectColony);
 
     expect(selectColony.colonies).has.length(5);
 
@@ -139,7 +139,7 @@ describe('HuygensObservatory', function() {
 
     TestingUtils.runAllActions(game);
 
-    const tradeDestination = TestingUtils.cast(SelectColony, player.popWaitingFor());
+    const tradeDestination = TestingUtils.cast(player.popWaitingFor(), SelectColony);
 
     expect(tradeDestination.colonies).has.length(4);
     expect(tradeDestination.colonies.map((c) => c.name)).does.not.contain(ColonyName.GANYMEDE);
@@ -157,24 +157,24 @@ describe('HuygensObservatory', function() {
     expect(player.getProductionForTest()).deep.eq(Units.EMPTY);
 
     TestingUtils.runAllActions(game);
-    const selectColony = TestingUtils.cast(SelectColony, player.popWaitingFor());
+    const selectColony = TestingUtils.cast(player.popWaitingFor(), SelectColony);
     selectColony.cb(ganymede);
 
     expect(ganymede.visitor).eq(player.id);
 
     TestingUtils.runAllActions(game);
 
-    const chooseTradeFleet = TestingUtils.cast(OrOptions, player.popWaitingFor());
+    const chooseTradeFleet = TestingUtils.cast(player.popWaitingFor(), OrOptions);
     expect(chooseTradeFleet.options).has.length(2);
 
-    const recallTradeFleet = TestingUtils.cast(SelectColony, chooseTradeFleet.options[0]);
+    const recallTradeFleet = TestingUtils.cast(chooseTradeFleet.options[0], SelectColony);
 
     expect(recallTradeFleet.colonies).has.length(1);
     expect(recallTradeFleet.colonies[0].name).eq(ColonyName.GANYMEDE);
     expect(recallTradeFleet.title).eq('Select a colony tile to recall a trade fleet from');
 
     // Ignored. We know this is the "use an existing unused trade fleet"
-    TestingUtils.cast(SelectOption, chooseTradeFleet.options[1]);
+    TestingUtils.cast(chooseTradeFleet.options[1], SelectOption);
     TestingUtils.runAllActions(game);
   });
 });

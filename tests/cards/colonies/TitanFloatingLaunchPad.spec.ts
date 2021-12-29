@@ -110,9 +110,9 @@ describe('TitanFloatingLaunchPad', function() {
     expect(getTradeAction()).is.undefined;
     player.titanium = 3;
 
-    const tradeAction = TestingUtils.cast(AndOptions, getTradeAction());
+    const tradeAction = TestingUtils.cast(getTradeAction(), AndOptions);
 
-    const payAction = TestingUtils.cast(OrOptions, tradeAction.options[0]);
+    const payAction = TestingUtils.cast(tradeAction.options[0], OrOptions);
     expect(payAction.title).eq('Pay trade fee');
     expect(payAction.options).has.length(2);
 

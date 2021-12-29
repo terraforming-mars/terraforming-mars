@@ -27,6 +27,10 @@ export interface IActionCard {
     canAct: (player: Player) => boolean;
 }
 
+export function isIActionCard(object: any): object is IActionCard {
+  return object !== undefined && 'canAct' in object && 'action' in object;
+}
+
 export interface IResourceCard {
     resourceCount: number;
     resourceType?: ResourceType;

@@ -5,6 +5,7 @@ import {ShiftAresGlobalParameters} from '../../../src/inputs/ShiftAresGlobalPara
 import {getTestPlayer, newTestGame} from '../../TestGame';
 import {TestPlayer} from '../../TestPlayer';
 import {Game} from '../../../src/Game';
+import {TestingUtils} from '../../TestingUtils';
 
 describe('ButterflyEffect', function() {
   let card: ButterflyEffect;
@@ -28,7 +29,8 @@ describe('ButterflyEffect', function() {
     expect(originalHazardData.severeErosionTemperature.threshold).eq(-4);
     expect(originalHazardData.severeDustStormOxygen.threshold).eq(5);
 
-    const input = game.deferredActions.peek()!.execute() as ShiftAresGlobalParameters;
+    TestingUtils.runAllActions(game);
+    const input = TestingUtils.cast(player.getWaitingFor(), ShiftAresGlobalParameters);
     input.cb(
       {
         lowOceanDelta: -1,

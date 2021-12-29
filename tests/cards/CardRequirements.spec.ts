@@ -233,7 +233,8 @@ describe('CardRequirements', function() {
     const smallAsteroid = new SmallAsteroid();
     smallAsteroid.play(player);
     // Choose Remove 1 plant option
-    const orOptions = player.game.deferredActions.peek()!.execute() as OrOptions;
+    TestingUtils.runAllActions(player.game);
+    const orOptions = TestingUtils.cast(player.getWaitingFor(), OrOptions);
     orOptions.options[0].cb([player2]);
 
     expect(requirements.satisfies(player)).eq(true);

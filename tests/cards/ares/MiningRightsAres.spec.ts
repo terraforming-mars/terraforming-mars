@@ -8,6 +8,7 @@ import {Resources} from '../../../src/Resources';
 import {MiningRightsAres} from '../../../src/cards/ares/MiningRightsAres';
 import {ARES_OPTIONS_NO_HAZARDS} from '../../ares/AresTestHelper';
 import {TestPlayers} from '../../TestPlayers';
+import {TestingUtils} from '../../TestingUtils';
 
 describe('MiningRightsAres', function() {
   let card : MiningRightsAres; let player : Player; let game : Game;
@@ -44,12 +45,12 @@ describe('MiningRightsAres', function() {
     const land = game.board.getAvailableSpacesOnLand(player)
       .find((land) => land.bonus.includes(SpaceBonus.STEEL))!;
 
-    let action = card.play(player) as SelectSpace;
+    let action = TestingUtils.cast(card.play(player), SelectSpace);
     const size = action.availableSpaces.length;
     expect(action.availableSpaces).contains(land);
 
     land.tile = {tileType: TileType.MINING_RIGHTS};
-    action = card.play(player) as SelectSpace;
+    action = TestingUtils.cast(card.play(player), SelectSpace);
     expect(action.availableSpaces).has.length(size - 1);
     expect(action.availableSpaces).does.not.contain(land);
   });

@@ -4,6 +4,7 @@ import {Game} from '../../../src/Game';
 import {TestPlayer} from '../../TestPlayer';
 import {TestPlayers} from '../../TestPlayers';
 import {OrOptions} from '../../../src/inputs/OrOptions';
+import {TestingUtils} from '../../TestingUtils';
 
 describe('Cryptocurrency', function() {
   let card: Cryptocurrency;
@@ -50,8 +51,7 @@ describe('Cryptocurrency', function() {
     card.resourceCount = 6;
     const options = card.action(player);
 
-    expect(options).is.instanceOf(OrOptions);
-    const orOptions = options as OrOptions;
+    const orOptions = TestingUtils.cast(options, OrOptions);
 
     orOptions.options[0].cb();
 

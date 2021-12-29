@@ -13,18 +13,21 @@ import {SelectCard} from '../../src/inputs/SelectCard';
 import {IProjectCard} from '../../src/cards/IProjectCard';
 import {MAX_COLONY_TRACK_POSITION} from '../../src/constants';
 import {TestingUtils} from '../TestingUtils';
-import {BuildColonyStandardProject} from '../../src/cards/colonies/BuildColonyStandardProject';
+import {TestPlayer} from '../TestPlayer';
+import {CardName} from '../../src/CardName';
 
 const gameOptions = TestingUtils.setCustomGameOptions({coloniesExtension: true});
 
-function isBuildColonyStandardProjectAvailable(player: Player) {
-  return new BuildColonyStandardProject().canAct(player);
+function isBuildColonyStandardProjectAvailable(player: TestPlayer) {
+  const options = TestingUtils.cast(player.getStandardProjectOption(), SelectCard);
+  const colonyOptionIdx = options.cards.findIndex((card) => card.name === CardName.BUILD_COLONY_STANDARD_PROJECT);
+  return options.enabled![colonyOptionIdx];
 }
 
 function isTradeWithColonyActionAvailable(player: Player) {
   let tradeWithColonyIsAvailable = false;
   player.takeAction();
-  const actions = player.getWaitingFor()! as OrOptions;
+  const actions = TestingUtils.cast(player.getWaitingFor(), OrOptions);
   actions.options.forEach((option) => {
     if (option instanceof AndOptions && option.options.slice(-1)[0] instanceof SelectColony) {
       tradeWithColonyIsAvailable = true;
@@ -35,7 +38,12 @@ function isTradeWithColonyActionAvailable(player: Player) {
 
 
 describe('Colony', function() {
-  let luna: Luna; let player: Player; let player2: Player; let player3: Player; let player4: Player; let game: Game;
+  let luna: Luna;
+  let player: TestPlayer;
+  let player2: TestPlayer;
+  let player3: TestPlayer;
+  let player4: TestPlayer;
+  let game: Game;
 
   beforeEach(function() {
     luna = new Luna();
@@ -247,14 +255,23 @@ describe('Colony', function() {
   it('Should let players trade only if they can afford it', function() {
     expect(isTradeWithColonyActionAvailable(player)).to.be.false;
 
+    player.megaCredits = 8;
+    expect(isTradeWithColonyActionAvailable(player)).to.be.false;
+
     player.megaCredits = 9;
     expect(isTradeWithColonyActionAvailable(player)).to.be.true;
 
     player.megaCredits = 0;
+    player.energy = 2;
+    expect(isTradeWithColonyActionAvailable(player)).to.be.false;
+
     player.energy = 3;
     expect(isTradeWithColonyActionAvailable(player)).to.be.true;
 
     player.energy = 0;
+    player.titanium = 2;
+    expect(isTradeWithColonyActionAvailable(player)).to.be.false;
+
     player.titanium = 3;
     expect(isTradeWithColonyActionAvailable(player)).to.be.true;
   });

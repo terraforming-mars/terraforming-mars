@@ -85,6 +85,13 @@ export class TestPlayer extends Player {
       heat: this.heat,
     });
   }
+
+  public popWaitingFor(): PlayerInput | undefined {
+    const waitingFor = this.getWaitingFor();
+    this.waitingFor = undefined;
+    this.waitingForCb = undefined;
+    return waitingFor;
+  }
 }
 
 export interface TagsForTest {

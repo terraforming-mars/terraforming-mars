@@ -2,7 +2,7 @@ import {expect} from 'chai';
 import {GeologicalExpedition} from '../../../src/cards/pathfinders/GeologicalExpedition';
 import {Game} from '../../../src/Game';
 import {TestPlayer} from '../../TestPlayer';
-import {newTestGame} from '../../TestGame';
+import {getTestPlayer, newTestGame} from '../../TestGame';
 import {EmptyBoard} from '../../ares/EmptyBoard';
 import {ISpace} from '../../../src/boards/ISpace';
 import {SpaceBonus} from '../../../src/SpaceBonus';
@@ -23,7 +23,7 @@ describe('GeologicalExpedition', function() {
   beforeEach(function() {
     card = new GeologicalExpedition();
     game = newTestGame(1);
-    player = game.getPlayers()[0] as TestPlayer;
+    player = getTestPlayer(game, 0);
     game.board = EmptyBoard.newInstance();
     space = game.board.getAvailableSpacesOnLand(player)[0];
     microbeCard = TestingUtils.fakeCard({resourceType: ResourceType.MICROBE});
@@ -99,7 +99,7 @@ describe('GeologicalExpedition', function() {
     expect(player.getResourcesForTest()).deep.eq(Units.of({plants: 1, heat: 1}));
 
     TestingUtils.runAllActions(game);
-    const orOptions = TestingUtils.cast(OrOptions, player.getWaitingFor());
+    const orOptions = TestingUtils.cast(player.getWaitingFor(), OrOptions);
     expect(orOptions.options).has.length(3);
     orOptions.options[0].cb();
     TestingUtils.runAllActions(game);

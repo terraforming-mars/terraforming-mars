@@ -2,7 +2,7 @@ import {expect} from 'chai';
 import {TerraformingRobots} from '../../../src/cards/pathfinders/TerraformingRobots';
 import {Game} from '../../../src/Game';
 import {TestPlayer} from '../../TestPlayer';
-import {newTestGame} from '../../TestGame';
+import {getTestPlayer, newTestGame} from '../../TestGame';
 import {IProjectCard} from '../../../src/cards/IProjectCard';
 import {TitanShuttles} from '../../../src/cards/colonies/TitanShuttles';
 import {FloatingHabs} from '../../../src/cards/venusNext/FloatingHabs';
@@ -22,7 +22,7 @@ describe('TerraformingRobots', function() {
   beforeEach(function() {
     card = new TerraformingRobots();
     game = newTestGame(1);
-    player = game.getPlayers()[0] as TestPlayer;
+    player = getTestPlayer(game, 0);
     floater1 = new TitanShuttles();
     floater2 = new FloatingHabs();
     other = new MartianCulture();

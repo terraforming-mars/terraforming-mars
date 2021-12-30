@@ -4,7 +4,7 @@ import {CardType} from '../CardType';
 import {Player} from '../../Player';
 import {CardName} from '../../CardName';
 import {Playwrights} from '../community/Playwrights';
-import {ICard} from '../ICard';
+import {ICard, isIActionCard} from '../ICard';
 import {SelectCard} from '../../inputs/SelectCard';
 import {CardRenderer} from '../render/CardRenderer';
 import {Size} from '../render/Size';
@@ -29,16 +29,14 @@ export class ProjectInspection extends Card implements IProjectCard {
 
     if (player.corporationCard !== undefined && player.getActionsThisGeneration().has(player.corporationCard.name)) {
       if (player.corporationCard.name !== CardName.PLAYWRIGHTS || (player.corporationCard as Playwrights).getCheckLoops() < 2) {
-        if (player.corporationCard.action !== undefined &&
-              player.corporationCard.canAct !== undefined &&
-              player.corporationCard.canAct(player)) {
+        if (isIActionCard(player.corporationCard) && player.corporationCard.canAct(player)) {
           result.push(player.corporationCard);
         }
       }
     }
 
     for (const playedCard of player.playedCards) {
-      if (playedCard.action !== undefined && playedCard.canAct !== undefined && playedCard.canAct(player) && player.getActionsThisGeneration().has(playedCard.name)) {
+      if (isIActionCard(playedCard) && playedCard.canAct(player) && player.getActionsThisGeneration().has(playedCard.name)) {
         result.push(playedCard);
       }
     }

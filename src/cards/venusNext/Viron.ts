@@ -1,7 +1,7 @@
 import {CorporationCard} from '../corporation/CorporationCard';
 import {Player} from '../../Player';
 import {Tags} from '../Tags';
-import {ICard} from '../ICard';
+import {ICard, isIActionCard} from '../ICard';
 import {SelectCard} from '../../inputs/SelectCard';
 import {Card} from '../Card';
 import {CardName} from '../../CardName';
@@ -35,9 +35,7 @@ export class Viron extends Card implements ICard, CorporationCard {
   private getActionCards(player: Player):Array<ICard> {
     const result: Array<ICard> = [];
     for (const playedCard of player.playedCards) {
-      if (
-        playedCard.action !== undefined &&
-                    playedCard.canAct !== undefined &&
+      if (isIActionCard(playedCard) &&
                     player.getActionsThisGeneration().has(playedCard.name) &&
                     playedCard.canAct(player)) {
         result.push(playedCard);

@@ -28,7 +28,7 @@ export interface IActionCard {
 }
 
 export function isIActionCard(object: any): object is IActionCard {
-  return object !== undefined && 'canAct' in object && 'action' in object;
+  return object !== undefined && object.canAct !== undefined && object.action !== undefined;
 }
 
 export interface IResourceCard {

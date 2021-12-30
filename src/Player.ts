@@ -12,7 +12,7 @@ import {CorporationCard} from './cards/corporation/CorporationCard';
 import {Game} from './Game';
 import {HowToPay} from './inputs/HowToPay';
 import {IAward} from './awards/IAward';
-import {IActionCard, ICard, IResourceCard, isIActionCard, TRSource} from './cards/ICard';
+import {ICard, IResourceCard, isIActionCard, TRSource, IActionCard} from './cards/ICard';
 import {ISerializable} from './ISerializable';
 import {IMilestone} from './milestones/IMilestone';
 import {IProjectCard} from './cards/IProjectCard';
@@ -1120,11 +1120,13 @@ export class Player implements ISerializable<SerializedPlayer> {
     const result: Array<ICard & IActionCard> = [];
     if (isIActionCard(this.corporationCard) &&
           !this.actionsThisGeneration.has(this.corporationCard.name) &&
+          isIActionCard(this.corporationCard) &&
           this.corporationCard.canAct(this)) {
       result.push(this.corporationCard);
     }
     for (const playedCard of this.playedCards) {
-      if (isIActionCard(playedCard) &&
+      if (
+        isIActionCard(playedCard) &&
               !this.actionsThisGeneration.has(playedCard.name) &&
               playedCard.canAct(this)) {
         result.push(playedCard);

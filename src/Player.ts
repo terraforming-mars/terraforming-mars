@@ -830,7 +830,7 @@ export class Player implements ISerializable<SerializedPlayer> {
    */
   public getTagCount(tag: Tags, mode: 'default' | 'raw' | 'milestone' | 'award' | 'vps' = 'default') {
     const includeEvents = mode === 'vps';
-    const includeTagSubstitutions = (mode === 'default' || mode ==='milestone');
+    const includeTagSubstitutions = (mode === 'default' || mode === 'milestone');
 
     let tagCount = this.getRawTagCount(tag, includeEvents);
 
@@ -882,12 +882,18 @@ export class Player implements ISerializable<SerializedPlayer> {
   }
 
   // Return the total number of tags assocaited with these types.
-  // Wild tags are included.
+  // Tag substitutions are included
   public getMultipleTagCount(tags: Array<Tags>): number {
     let tagCount = 0;
     tags.forEach((tag) => {
       tagCount += this.getRawTagCount(tag, false);
     });
+
+    // This is repeated behavior from getTagCount, sigh, OK.
+    if (tags.includes(Tags.EARTH) && !tags.includes(Tags.MOON) && this.playedCards.some((c) => c.name === CardName.EARTH_EMBASSY)) {
+      tagCount += this.getRawTagCount(Tags.MOON, false);
+    }
+
     return tagCount + this.getRawTagCount(Tags.WILDCARD, false);
   }
 

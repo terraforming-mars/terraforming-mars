@@ -9,16 +9,17 @@ import {OrOptions} from '../../../src/inputs/OrOptions';
 import {SelectCard} from '../../../src/inputs/SelectCard';
 import {SelectColony} from '../../../src/inputs/SelectColony';
 import {Player} from '../../../src/Player';
-import {TestPlayers} from '../../TestPlayers';
+import {AndOptions} from '../../../src/inputs/AndOptions';
+import {TestingUtils} from '../../TestingUtils';
+import {newTestGame, getTestPlayer} from '../../TestGame';
 
 describe('TitanFloatingLaunchPad', function() {
   let card : TitanFloatingLaunchPad; let player : Player; let game : Game;
 
   beforeEach(function() {
     card = new TitanFloatingLaunchPad();
-    player = TestPlayers.BLUE.newPlayer();
-    const redPlayer = TestPlayers.RED.newPlayer();
-    game = Game.newInstance('foobar', [player, redPlayer], player);
+    game = newTestGame(2, {coloniesExtension: true});
+    player = getTestPlayer(game, 0);
   });
 
   it('Should act', function() {
@@ -29,6 +30,7 @@ describe('TitanFloatingLaunchPad', function() {
 
   it('Should play with single targets', function() {
     player.playedCards.push(card);
+    game.colonies = []; // A way to fake out that no colonies are available.
 
     // No resource and no other card to add to
     card.action(player);
@@ -60,10 +62,7 @@ describe('TitanFloatingLaunchPad', function() {
   });
 
   it('Should play with multiple targets and colonies', function() {
-    const colony1 = new Luna();
-    const colony2 = new Triton();
-    player.game.colonies.push(colony1);
-    player.game.colonies.push(colony2);
+    game.colonies = [new Luna(), new Triton()];
 
     const card2 = new JupiterFloatingStation();
     player.playedCards.push(card);
@@ -85,5 +84,50 @@ describe('TitanFloatingLaunchPad', function() {
     selectColony.cb(selectColony.colonies[0]);
     expect(card.resourceCount).to.eq(7);
     expect(player.megaCredits).to.eq(2);
+  });
+
+
+  it('is available through standard trade action', () => {
+    const luna = new Luna();
+    player.game.colonies = [luna];
+
+    const getTradeAction = () => player.getActions().options.find(
+      (option) => option.title === 'Trade with a colony tile');
+
+    expect(getTradeAction()).is.undefined;
+
+    player.playedCards.push(card);
+
+    expect(getTradeAction()).is.undefined;
+
+    card.resourceCount = 1;
+
+    // This is too bad, it's because the action doesn't appear unless one of the standard
+    // costs are met. A future change will address that, but for now, let's include this
+    // expectation.
+    // TODO(kberg): remove this comment and the next two lines when fixing how the trade action
+    // works.
+    expect(getTradeAction()).is.undefined;
+    player.titanium = 3;
+
+    const tradeAction = TestingUtils.cast(getTradeAction(), AndOptions);
+
+    const payAction = TestingUtils.cast(tradeAction.options[0], OrOptions);
+    expect(payAction.title).eq('Pay trade fee');
+    expect(payAction.options).has.length(2);
+
+    const floaterOption = payAction.options[0];
+    expect(floaterOption.title).to.match(/Pay 1 Floater/);
+
+    const mcOption = payAction.options[1];
+    expect(mcOption.title).to.match(/Pay 3 Titanium/);
+
+    expect(player.megaCredits).eq(0);
+
+    floaterOption.cb();
+    tradeAction.options[1].cb(luna);
+
+    expect(card.resourceCount).eq(0);
+    expect(player.megaCredits).eq(2);
   });
 });

@@ -9,6 +9,7 @@ import {Player} from '../../Player';
 import {SelectHowToPayDeferred} from '../../deferredActions/SelectHowToPayDeferred';
 import {TurmoilPolicy} from '../TurmoilPolicy';
 import {MAX_TEMPERATURE} from '../../constants';
+import {CardName} from '../../CardName';
 
 export class Kelvinists extends Party implements IParty {
   name = PartyName.KELVINISTS;
@@ -54,8 +55,11 @@ class KelvinistsPolicy01 implements Policy {
   id = TurmoilPolicy.KELVINISTS_DEFAULT_POLICY;
   description: string = 'Pay 10 M€ to increase your Energy and Heat production 1 step (Turmoil Kelvinists)';
 
+  cost(player: Player): number {
+    return player.playedCards.some((card) => card.name === CardName.HIGH_TEMP_SUPERCONDUCTORS) ? 7: 10;
+  }
   canAct(player: Player) {
-    return player.canAfford(10);
+    return player.canAfford(this.cost(player));
   }
 
   action(player: Player) {
@@ -63,7 +67,7 @@ class KelvinistsPolicy01 implements Policy {
     game.log('${0} used Turmoil Kelvinists action', (b) => b.player(player));
     game.defer(new SelectHowToPayDeferred(
       player,
-      10,
+      this.cost(player),
       {
         title: 'Select how to pay for Turmoil Kelvinists action',
         afterPay: () => {

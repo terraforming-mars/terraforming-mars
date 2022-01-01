@@ -5,12 +5,13 @@ import {Game} from '../../../src/Game';
 import {TestPlayer} from '../../TestPlayer';
 import {getTestPlayer, newTestGame} from '../../TestGame';
 import {Reds} from '../../../src/turmoil/parties/Reds';
-import {Kelvinists} from '../../../src/turmoil/parties/Kelvinists';
+import {Kelvinists, KELVINISTS_POLICY_1} from '../../../src/turmoil/parties/Kelvinists';
 import {Turmoil} from '../../../src/turmoil/Turmoil';
 import {TestingUtils} from '../../TestingUtils';
 import {Units} from '../../../src/Units';
 import {Tags} from '../../../src/cards/Tags';
 import {PowerPlantStandardProject} from '../../../src/cards/base/standardProjects/PowerPlantStandardProject';
+import {TurmoilPolicy} from '../../../src/turmoil/TurmoilPolicy';
 
 describe('HighTempSuperconductors', function() {
   let card: HighTempSuperconductors;
@@ -77,16 +78,19 @@ describe('HighTempSuperconductors', function() {
     expect(powerPlant.canAct(player)).is.true;
   });
 
-  it('discount kelvinists card', function() {
-    player.playedCards.push(card);
-    // If the card has a Kevlinist's requirement, then canPlay won't pass unless Kevlinists
-    // are in power.
-    turmoil.rulingParty = new Kelvinists();
+  it('discount Kelvinists ruling bonus', function() {
+    TestingUtils.setRulingPartyAndRulingPolicy(game, turmoil, new Kelvinists(), TurmoilPolicy.KELVINISTS_DEFAULT_POLICY);
 
-    // Itself is a kelvinst's card
-    player.megaCredits = card.cost - 4;
-    expect(player.canPlay(card)).is.false;
-    player.megaCredits++;
-    expect(player.canPlay(card)).is.true;
+    player.megaCredits = 9;
+    expect(KELVINISTS_POLICY_1.canAct(player)).is.false;
+    player.megaCredits = 10;
+    expect(KELVINISTS_POLICY_1.canAct(player)).is.true;
+
+    player.playedCards.push(card);
+
+    player.megaCredits = 6;
+    expect(KELVINISTS_POLICY_1.canAct(player)).is.false;
+    player.megaCredits = 7;
+    expect(KELVINISTS_POLICY_1.canAct(player)).is.true;
   });
 });

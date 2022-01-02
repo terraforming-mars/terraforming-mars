@@ -28,8 +28,7 @@ describe('CrewTraining', function() {
     expect(player.getTerraformRating()).eq(16);
 
     expect(game.deferredActions.length).eq(1);
-    const action = game.deferredActions.pop();
-    expect(action).instanceOf(DeclareCloneTag);
+    const action = TestingUtils.cast(game.deferredActions.pop(), DeclareCloneTag);
     const options = TestingUtils.cast(action!.execute(), OrOptions);
 
     expect(options.options[0].title).to.match(/earth/);

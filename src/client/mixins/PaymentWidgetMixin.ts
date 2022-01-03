@@ -40,7 +40,10 @@ export interface PaymentWidgetModel extends SelectHowToPayModel {
   playerinput: PlayerInputModel;
 }
 
-type ResourcesWithRates = 'titanium' | 'steel' | 'microbes' |'floaters';
+// https://steveholgado.com/typescript-types-from-arrays/
+const unit = ['megaCredits', 'titanium', 'steel', 'heat', 'microbes', 'floaters', 'science'] as const;
+export type Unit = typeof unit[number];
+
 export const PaymentWidgetMixin = {
   'name': 'PaymentWidgetMixin',
   'methods': {
@@ -55,62 +58,43 @@ export const PaymentWidgetMixin = {
       const model = this.asModel();
       return Math.min(model.playerView.thisPlayer.megaCredits, model.$data.cost);
     },
-    getResourceRate(resourceName: ResourcesWithRates): number {
-      let rate = 1; // one resource == one money
-      if (resourceName === 'titanium') {
-        rate = this.asModel().playerView.thisPlayer.titaniumValue;
-      } else if (resourceName === 'steel') {
-        rate = this.asModel().playerView.thisPlayer.steelValue;
-      } else if (resourceName === 'microbes') {
-        rate = 2;
-      } else if (resourceName === 'floaters') {
-        rate = 3;
+    getResourceRate(resourceName: Unit): number {
+      switch (resourceName) {
+      case 'titanium':
+        return this.asModel().playerView.thisPlayer.titaniumValue;
+      case 'steel':
+        return this.asModel().playerView.thisPlayer.steelValue;
+      case 'microbes':
+        return 2;
+      case 'floaters':
+        return 3;
+      default:
+        return 1;
       }
-      return rate;
     },
-    reduceValue(target: ResourcesWithRates | 'heat' | 'megaCredits' | 'science', to: number): void {
+    reduceValue(target: Unit, delta: number): void {
       const currentValue: number | undefined = this.asModel()[target];
-
       if (currentValue === undefined) {
         throw new Error(`can not reduceValue for ${target} on this`);
       }
 
-      if (currentValue === 0) return;
 
-      const realTo = Math.min(to, currentValue);
-      this.asModel()[target] -= realTo;
-
-      if (target === 'megaCredits' || realTo === 0) return;
-
-      this.setRemainingMCValue();
+      const adjustedDelta = Math.min(delta, currentValue);
+      if (adjustedDelta === 0) return;
+      this.asModel()[target] -= adjustedDelta;
+      if (target !== 'megaCredits') this.setRemainingMCValue();
     },
-    addValue(target: ResourcesWithRates | 'heat' | 'megaCredits' | 'science', to: number, max?: number): void {
+    // max is the largest value this item can be. It's not the largest delta.
+    addValue(target: Unit, delta: number, max?: number): void {
       const currentValue: number | undefined = this.asModel()[target];
-
       if (currentValue === undefined) {
         throw new Error(`can not addValue for ${target} on this`);
       }
 
-      let maxValue: number | undefined = max;
-
-      if (maxValue === undefined && target !== 'microbes' && target !== 'floaters' && target !== 'science') {
-        maxValue = this.asModel().playerView.thisPlayer[target];
-      }
-
-      switch (target) {
-      case 'megaCredits':
+      let maxValue: number | undefined = max !== undefined ? max : this.getAmount(target);
+      // TODO(kberg): Remove this special code for MC?
+      if (target === 'megaCredits') {
         maxValue = this.getMegaCreditsMax();
-        break;
-      case 'microbes':
-        maxValue = this.asModel().playerinput.microbes;
-        break;
-      case 'floaters':
-        maxValue = this.asModel().playerinput.floaters;
-        if (maxValue !== undefined && this.isStratosphericBirdsEdgeCase()) maxValue--;
-        break;
-      case 'science':
-        maxValue = this.asModel().playerinput.science;
-        break;
       }
 
       if (currentValue === maxValue) return;
@@ -119,62 +103,74 @@ export const PaymentWidgetMixin = {
         throw new Error(`unable to determine maxValue for ${target}`);
       }
 
-      const realTo = (currentValue + to <= maxValue) ? to : maxValue - currentValue;
-      this.asModel()[target] += realTo;
-
-      if (target === 'megaCredits' || realTo === 0) return;
-
-      this.setRemainingMCValue();
+      // const adjustedDelta = (currentValue + delta <= maxValue) ? delta : maxValue - currentValue;
+      const adjustedDelta = Math.min(delta, maxValue - currentValue);
+      if (adjustedDelta === 0) return;
+      this.asModel()[target] += adjustedDelta;
+      if (target !== 'megaCredits') this.setRemainingMCValue();
     },
     setRemainingMCValue(): void {
       const ta = this.asModel();
-      const heatMc = ta['heat'] ?? 0;
-      const titaniumMc = (ta['titanium'] ?? 0) * this.getResourceRate('titanium');
-      const steelMc = (ta['steel'] ?? 0) * this.getResourceRate('steel');
-      const microbesMc = (ta['microbes'] ?? 0) * this.getResourceRate('microbes');
-      const floatersMc = (ta['floaters'] ?? 0) * this.getResourceRate('floaters');
-      const scienceMc = ta['science'] ?? 0;
 
-      const remainingMC: number =
-          ta.$data.cost - heatMc - titaniumMc - steelMc - microbesMc - floatersMc - scienceMc;
+      let remainingMC = ta.$data.cost;
+
+      for (const resource of unit) {
+        if (resource === 'megaCredits') continue;
+
+        const value = (ta[resource] ?? 0) * this.getResourceRate(resource);
+        remainingMC -= value;
+      }
 
       ta['megaCredits'] = Math.max(0, Math.min(this.getMegaCreditsMax(), remainingMC));
     },
-    setMaxValue(target: ResourcesWithRates | 'science' | 'heat', max?: number): void {
+    setMaxValue(target: Unit, max?: number): void {
       let currentValue: number | undefined = this.asModel()[target];
       if (currentValue === undefined) {
         throw new Error(`can not setMaxValue for ${target} on this`);
       }
-      const cardCost: number = this.asModel().$data.cost;
-      let amountHave: number | undefined = max;
-      if (max === undefined && target !== 'microbes' && target !== 'floaters' && target !== 'science') {
-        amountHave = this.asModel().playerView.thisPlayer[target];
-      }
-
-      let amountNeed = cardCost;
+      const cost: number = this.asModel().$data.cost;
+      let amountNeed = cost;
       if (target !== 'science' && target !== 'heat') {
-        amountNeed = Math.floor(cardCost / this.getResourceRate(target));
+        amountNeed = Math.floor(cost / this.getResourceRate(target));
       }
 
-      if (target === 'microbes') amountHave = this.asModel().playerinput.microbes;
-      if (target === 'floaters') {
-        amountHave = this.asModel().playerinput.floaters;
-        if (amountHave !== undefined && this.isStratosphericBirdsEdgeCase()) amountHave--;
-      }
-      if (target === 'science') amountHave = this.asModel().playerinput.science;
-
-      if (amountHave === undefined) {
-        throw new Error(`unable to find amountHave for setMaxValue for ${target}`);
-      }
+      const amountHave: number = this.getAmount(target);
 
       while (currentValue < amountHave && currentValue < amountNeed) {
         this.addValue(target, 1, max);
         currentValue++;
       }
     },
+    getAmount(target: Unit) {
+      let amount: number | undefined = undefined;
+      const model = this.asModel();
+      switch (target) {
+      case 'heat':
+      case 'steel':
+      case 'titanium':
+      case 'megaCredits':
+        amount = model.playerView.thisPlayer[target];
+        break;
+
+      case 'floaters':
+      case 'microbes':
+      case 'science':
+        amount = model.playerinput[target];
+        break;
+      };
+
+      if (amount === undefined) {
+        throw new Error(`unable to find amountHave for ${target}`);
+      }
+
+      if (target === 'floaters' && this.isStratosphericBirdsEdgeCase()) {
+        amount--;
+      }
+      return amount;
+    },
     isStratosphericBirdsEdgeCase(): boolean {
       if (this.asModel().$data.card?.name === CardName.STRATOSPHERIC_BIRDS) {
-        const playedCards = this.asModel().playerView.thisPlayer.playedCards as Array<CardModel>;
+        const playedCards: Array<CardModel> = this.asModel().playerView.thisPlayer.playedCards;
         const cardsWithFloaters = playedCards.filter((card) => card.resourceType === ResourceType.FLOATER && card.resources);
         return cardsWithFloaters.length === 1;
       }

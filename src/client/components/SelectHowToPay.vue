@@ -1,11 +1,14 @@
 <script lang="ts">
 import Vue from 'vue';
 import {HowToPay} from '@/inputs/HowToPay';
-import {PaymentWidgetMixin, SelectHowToPayModel} from '@/client/mixins/PaymentWidgetMixin';
+import {PaymentWidgetMixin, SelectHowToPayModel, Unit} from '@/client/mixins/PaymentWidgetMixin';
 import {PlayerInputModel} from '@/models/PlayerInputModel';
 import {PlayerViewModel, PublicPlayerModel} from '@/models/PlayerModel';
 import {PreferencesManager} from '@/client/utils/PreferencesManager';
 import Button from '@/client/components/common/Button.vue';
+
+// TODO(kberg): delete by 2022-03-01
+const useNewVersion = true;
 
 export default Vue.extend({
   name: 'SelectHowToPay',
@@ -51,9 +54,13 @@ export default Vue.extend({
       this.setInitialCost();
       this.$data.megaCredits = (this as any).getMegaCreditsMax();
 
-      this.setDefaultSteelValue();
-      this.setDefaultTitaniumValue();
-      this.setDefaultHeatValue();
+      if (useNewVersion) {
+        this.setDefaultValues();
+      } else {
+        this.setDefaultSteelValue();
+        this.setDefaultTitaniumValue();
+        this.setDefaultHeatValue();
+      }
     });
   },
   methods: {
@@ -63,6 +70,51 @@ export default Vue.extend({
     },
     setInitialCost() {
       this.$data.cost = this.playerinput.amount;
+    },
+    canUse(target: Unit) {
+      switch (target) {
+      case 'steel': return this.canUseSteel();
+      case 'titanium': return this.canUseTitanium();
+      case 'heat': return this.canUseHeat();
+      }
+      return false;
+    },
+    setDefaultValue(
+      amountCovered: number, // MC values of prior-computed resources.
+      target: Unit): number {
+      if (!this.canUse(target)) return 0;
+      const amount = this.getAmount(target);
+      if (amount === 0) return 0;
+
+      const cost = this.$data.cost;
+      const resourceRate = this.getResourceRate(target);
+
+      let qty = Math.ceil(Math.max(cost - this.getAmount('megaCredits') - amountCovered, 0) / resourceRate);
+      qty = Math.min(qty, amount);
+      let contributingValue = qty * resourceRate;
+
+      // When greedy, use as much as possible without overspending. When selfish, use as little as possible
+      const greedy = target !== 'heat';
+      if (greedy === true) {
+        while (qty < amount && contributingValue <= cost - resourceRate) {
+          qty++;
+          contributingValue += resourceRate;
+        }
+      }
+
+      this.$data[target] = qty;
+      return contributingValue;
+    },
+    setDefaultValues() {
+      const cost = this.$data.cost;
+
+      const targets: Array<Unit> = ['steel', 'titanium', 'heat'];
+      const megaCredits = this.getAmount('megaCredits');
+      let amountCovered = 0;
+      for (const target of targets) {
+        amountCovered += this.setDefaultValue(amountCovered, target);
+      }
+      this.$data.megaCredits = Math.min(megaCredits, Math.max(cost - amountCovered, 0));
     },
     setDefaultSteelValue() {
       // automatically use available steel to pay if not enough MC

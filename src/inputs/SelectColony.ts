@@ -11,7 +11,7 @@ export class SelectColony implements PlayerInput {
         public title: string | Message,
         public buttonLabel: string = 'Save',
         public colonies: Array<Colony>,
-        public cb: (colony: Colony) => undefined,
+        public cb: (colony: Colony) => PlayerInput | undefined,
     ) {
       this.buttonLabel = buttonLabel;
     }

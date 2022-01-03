@@ -6,6 +6,7 @@ import {Tags} from '../../../src/cards/Tags';
 import {TestPlayer} from '../../TestPlayer';
 import {DeclareCloneTag} from '../../../src/pathfinders/DeclareCloneTag';
 import {OrOptions} from '../../../src/inputs/OrOptions';
+import {TestingUtils} from '../../TestingUtils';
 
 describe('CrewTraining', function() {
   let card: CrewTraining;
@@ -27,9 +28,8 @@ describe('CrewTraining', function() {
     expect(player.getTerraformRating()).eq(16);
 
     expect(game.deferredActions.length).eq(1);
-    const action = game.deferredActions.pop();
-    expect(action).instanceOf(DeclareCloneTag);
-    const options = action!.execute() as OrOptions;
+    const action = TestingUtils.cast(game.deferredActions.pop(), DeclareCloneTag);
+    const options = TestingUtils.cast(action!.execute(), OrOptions);
 
     expect(options.options[0].title).to.match(/earth/);
     expect(game.pathfindersData).deep.eq({

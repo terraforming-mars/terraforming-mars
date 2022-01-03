@@ -9,9 +9,8 @@ import {OrOptions} from '../../../src/inputs/OrOptions';
 import {SelectCard} from '../../../src/inputs/SelectCard';
 import {SelectColony} from '../../../src/inputs/SelectColony';
 import {TestPlayer} from '../../TestPlayer';
-import {getTestPlayer, newTestGame} from '../../TestGame';
-import {TestingUtils} from '../../TestingUtils';
 import {AndOptions} from '../../../src/inputs/AndOptions';
+import {newTestGame, getTestPlayer} from '../../TestGame';
 
 describe('TitanFloatingLaunchPad', function() {
   let card : TitanFloatingLaunchPad; let player : TestPlayer; let game : Game;
@@ -32,6 +31,7 @@ describe('TitanFloatingLaunchPad', function() {
   it('Should play with single targets', function() {
     player.game.colonies = []; // A way to simulate that no colonies are available.
     player.playedCards.push(card);
+    game.colonies = []; // A way to fake out that no colonies are available.
 
     // No resource and no other card to add to
     card.action(player);
@@ -65,7 +65,7 @@ describe('TitanFloatingLaunchPad', function() {
   });
 
   it('Should play with multiple targets and colonies', function() {
-    player.game.colonies = [new Luna(), new Triton()];
+    game.colonies = [new Luna(), new Triton()];
 
     const card2 = new JupiterFloatingStation();
     player.playedCards.push(card);
@@ -103,17 +103,19 @@ describe('TitanFloatingLaunchPad', function() {
     expect(getTradeAction()).is.undefined;
 
     card.resourceCount = 1;
-    const tradeAction = TestingUtils.cast(AndOptions, getTradeAction());
+    const tradeAction = getTradeAction();
+    expect(tradeAction).instanceOf(AndOptions);
 
-    const payAction = TestingUtils.cast(OrOptions, tradeAction.options[0]);
+    const payAction = (tradeAction as AndOptions).options[0];
+    expect(payAction).instanceOf(OrOptions);
     expect(payAction.title).eq('Pay trade fee');
     expect(payAction.options).has.length(1);
 
-    const floaterOption = payAction.options[0];
+    const floaterOption = (payAction as OrOptions).options[0];
     expect(floaterOption.title).to.match(/Pay 1 Floater/);
 
     floaterOption.cb();
-    tradeAction.options[1].cb(luna);
+    (tradeAction as AndOptions).options[1].cb(luna);
 
     expect(card.resourceCount).eq(0);
     expect(player.megaCredits).eq(2);

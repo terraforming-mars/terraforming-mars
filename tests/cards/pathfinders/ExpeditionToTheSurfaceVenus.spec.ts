@@ -2,7 +2,7 @@ import {expect} from 'chai';
 import {ExpeditionToTheSurfaceVenus} from '../../../src/cards/pathfinders/ExpeditionToTheSurfaceVenus';
 import {Game} from '../../../src/Game';
 import {TestPlayer} from '../../TestPlayer';
-import {newTestGame} from '../../TestGame';
+import {getTestPlayer, newTestGame} from '../../TestGame';
 
 describe('ExpeditiontotheSurfaceVenus', function() {
   let card: ExpeditionToTheSurfaceVenus;
@@ -12,7 +12,7 @@ describe('ExpeditiontotheSurfaceVenus', function() {
   beforeEach(function() {
     card = new ExpeditionToTheSurfaceVenus();
     game = newTestGame(1);
-    player = game.getPlayers()[0] as TestPlayer;
+    player = getTestPlayer(game, 0);
   });
 
   it('play', function() {

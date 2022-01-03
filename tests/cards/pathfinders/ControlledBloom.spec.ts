@@ -3,7 +3,7 @@ import {ControlledBloom} from '../../../src/cards/pathfinders/ControlledBloom';
 import {Game} from '../../../src/Game';
 import {ICard} from '../../../src/cards/ICard';
 import {TestPlayer} from '../../TestPlayer';
-import {newTestGame} from '../../TestGame';
+import {getTestPlayer, newTestGame} from '../../TestGame';
 import {CardName} from '../../../src/CardName';
 import {TestingUtils} from '../../TestingUtils';
 import {SelectCard} from '../../../src/inputs/SelectCard';
@@ -17,7 +17,7 @@ describe('ControlledBloom', function() {
   beforeEach(function() {
     card = new ControlledBloom();
     game = newTestGame(1);
-    player = game.getPlayers()[0] as TestPlayer;
+    player = getTestPlayer(game, 0);
   });
 
   it('canPlay', function() {

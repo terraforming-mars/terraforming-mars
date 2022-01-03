@@ -19,3 +19,5 @@ assets/locales
 
 # Local Packages
 node_modules/
+
+.idea

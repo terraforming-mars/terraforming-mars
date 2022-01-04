@@ -19,6 +19,7 @@
     "html-escaper": "^3.0.3",
     "less": "^3.10.3",
     "mnemonist": "^0.38.1",
+    "nanoid": "^3.1.30",
     "pg": "^8.2.1",
     "spectre.css": "^0.5.8",
     "sqlite3": "^4.2.0",

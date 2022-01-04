@@ -24,10 +24,11 @@
               </span>
             </div>
             <div>
-              <label class="form-switch form-inline">
-                <input type="checkbox" v-model="newPlayer.beginner">
-                <i class="form-icon"></i> <span v-i18n>Beginner?</span>
-              </label>
+              <CreateGameToggle v-model="newPlayer.beginner" title="Beginner?" class="form-switch form-inline">
+                <template #prepend>
+                  <i class="form-icon" />
+                </template>
+              </CreateGameToggle>
             </div>
           </div>
         </div>
@@ -47,114 +48,149 @@
           <div class="create-game-page-column">
             <h4 v-i18n>Expansions</h4>
 
-            <input type="checkbox" name="allOfficialExpansions" id="allOfficialExpansions-checkbox" v-model="allOfficialExpansions" v-on:change="selectAll()">
-            <label for="allOfficialExpansions-checkbox">
-              <span v-i18n>All</span>
-            </label>
+            <CreateGameToggle v-model="allOfficialExpansions" title="All" />
 
-            <input type="checkbox" name="corporateEra" id="corporateEra-checkbox" v-model="corporateEra">
-            <label for="corporateEra-checkbox" class="expansion-button">
-              <div class="create-game-expansion-icon expansion-icon-CE"></div>
-              <span v-i18n>Corporate Era</span>
-            </label>
+            <CreateGameToggle v-model="corporateEra" title="Corporate Era" class="expansion-button">
+              <template #prepend>
+                <i class="create-game-expansion-icon expansion-icon-CE" />
+              </template>
+            </CreateGameToggle>
 
-            <input type="checkbox" name="prelude" id="prelude-checkbox" v-model="prelude">
-            <label for="prelude-checkbox" class="expansion-button">
-              <div class="create-game-expansion-icon expansion-icon-prelude"></div>
-              <span v-i18n>Prelude</span>
-            </label>
+            <CreateGameToggle v-model="prelude" title="Prelude" class="expansion-button">
+              <template #prepend>
+                <i class="create-game-expansion-icon expansion-icon-prelude" />
+              </template>
+            </CreateGameToggle>
 
-            <input type="checkbox" name="venusNext" id="venusNext-checkbox" v-model="venusNext" v-on:change="toggleVenusNext()">
-            <label for="venusNext-checkbox" class="expansion-button">
-              <div class="create-game-expansion-icon expansion-icon-venus"></div>
-              <span v-i18n>Venus Next</span>
-            </label>
+            <CreateGameToggle v-model="venusNext" title="Venus Next" class="expansion-button">
+              <template #prepend>
+                <i class="create-game-expansion-icon expansion-icon-venus" />
+              </template>
+            </CreateGameToggle>
 
-            <input type="checkbox" name="colonies" id="colonies-checkbox" v-model="colonies">
-            <label for="colonies-checkbox" class="expansion-button">
-              <div class="create-game-expansion-icon expansion-icon-colony"></div>
-              <span v-i18n>Colonies</span>
-            </label>
+            <CreateGameToggle v-model="colonies" title="Colonies" class="expansion-button">
+              <template #prepend>
+                <i class="create-game-expansion-icon expansion-icon-colony" />
+              </template>
+            </CreateGameToggle>
 
-            <input type="checkbox" name="turmoil" id="turmoil-checkbox" v-model="turmoil" v-on:change="deselectPoliticalAgendasWhenDeselectingTurmoil()">
-            <label for="turmoil-checkbox" class="expansion-button">
-              <div class="create-game-expansion-icon expansion-icon-turmoil"></div>
-              <span v-i18n>Turmoil</span>
-            </label>
+            <CreateGameToggle v-model="turmoil" title="Turmoil" class="expansion-button">
+              <template #prepend>
+                <i class="create-game-expansion-icon expansion-icon-turmoil" />
+              </template>
+            </CreateGameToggle>
 
-            <input type="checkbox" name="promo" id="promo-checkbox" v-model="promoCardsOption">
-            <label for="promo-checkbox" class="expansion-button">
-              <div class="create-game-expansion-icon expansion-icon-promo"></div>
-              <span v-i18n>Promos</span>&nbsp;<a href="https://github.com/bafolts/terraforming-mars/wiki/Variants#promo-cards" class="tooltip" target="_blank">&#9432;</a>
-            </label>
+            <CreateGameToggle v-model="promoCardsOption" title="Promos" class="expansion-button">
+              <template #prepend>
+                <i class="create-game-expansion-icon expansion-icon-promo" />
+              </template>
+              <template #append>
+                <Tooltip link="https://github.com/bafolts/terraforming-mars/wiki/Variants#promo-cards" />
+              </template>
+            </CreateGameToggle>
 
             <div class="create-game-subsection-label" v-i18n>Fan-made</div>
 
-            <input type="checkbox" name="ares" id="ares-checkbox" v-model="aresExtension">
-            <label for="ares-checkbox" class="expansion-button">
-              <div class="create-game-expansion-icon expansion-icon-ares"></div>
-              <span v-i18n>Ares</span>&nbsp;<a href="https://github.com/bafolts/terraforming-mars/wiki/Ares" class="tooltip" target="_blank">&#9432;</a>
-            </label>
+            <CreateGameToggle v-model="aresExtension" title="Ares" class="expansion-button">
+              <template #prepend>
+                <i class="create-game-expansion-icon expansion-icon-ares" />
+              </template>
+              <template #append>
+                <Tooltip link="https://github.com/bafolts/terraforming-mars/wiki/Ares" />
+              </template>
+            </CreateGameToggle>
 
-            <input type="checkbox" name="community" id="communityCards-checkbox" v-model="communityCardsOption">
-            <label for="communityCards-checkbox" class="expansion-button">
-              <div class="create-game-expansion-icon expansion-icon-community"></div>
-              <span v-i18n>Community</span>&nbsp;<a href="https://github.com/bafolts/terraforming-mars/wiki/Variants#community" class="tooltip" target="_blank">&#9432;</a>
-            </label>
+            <CreateGameToggle v-model="promoCardsOption" title="Promos" class="expansion-button">
+              <template #prepend>
+                <i class="create-game-expansion-icon expansion-icon-promo" />
+              </template>
+              <template #append>
+                <Tooltip link="https://github.com/bafolts/terraforming-mars/wiki/Variants#promo-cards" />
+              </template>
+            </CreateGameToggle>
 
-            <input type="checkbox" name="themoon" id="themoon-checkbox" v-model="moonExpansion">
-            <label for="themoon-checkbox" class="expansion-button">
-              <div class="create-game-expansion-icon expansion-icon-themoon"></div>
-              <span v-i18n>The Moon</span>&nbsp;<a href="https://github.com/bafolts/terraforming-mars/wiki/The-Moon" class="tooltip" target="_blank">&#9432;</a>
-            </label>
+            <CreateGameToggle v-model="communityCardsOption" title="Community" class="expansion-button">
+              <template #prepend>
+                <i class="create-game-expansion-icon expansion-icon-community" />
+              </template>
+              <template #append>
+                <Tooltip link="https://github.com/bafolts/terraforming-mars/wiki/Variants#community" />
+              </template>
+            </CreateGameToggle>
+
+            <CreateGameToggle v-model="moonExpansion" title="The Moon" >
+              <template #prepend>
+                <i class="create-game-expansion-icon expansion-icon-themoon" />
+              </template>
+              <template #append>
+                <Tooltip link="https://github.com/bafolts/terraforming-mars/wiki/The-Moon" />
+              </template>
+            </CreateGameToggle>
 
             <template v-if="moonExpansion">
-              <input type="checkbox" v-model="requiresMoonTrackCompletion" id="requiresMoonTrackCompletion-checkbox">
-              <label for="requiresMoonTrackCompletion-checkbox">
-                <span v-i18n>Mandatory Moon Terraforming</span>
-              </label>
+              <CreateGameToggle v-model="requiresMoonTrackCompletion" title="Mandatory Moon Terraforming" />
 
-              <input type="checkbox" v-model="moonStandardProjectVariant" id="moonStandardProjectVariant-checkbox">
-              <label for="moonStandardProjectVariant-checkbox">
-                <span v-i18n>Standard Project Variant</span>&nbsp;<a href="https://github.com/bafolts/terraforming-mars/wiki/Variants#moon-standard-project-variant" class="tooltip" target="_blank">&#9432;</a>
-              </label>
+              <CreateGameToggle v-model="moonStandardProjectVariant" title="Standard Project Variant" >
+                <template #append>
+                  <Tooltip link="https://github.com/bafolts/terraforming-mars/wiki/Variants#moon-standard-project-variant" />
+                </template>
+              </CreateGameToggle>
             </template>
 
             <template v-if="turmoil">
-              <input type="checkbox" name="politicalAgendas" id="politicalAgendas-checkbox" v-on:change="politicalAgendasExtensionToggle()">
-              <label for="politicalAgendas-checkbox" class="expansion-button">
-                <div class="create-game-expansion-icon expansion-icon-agendas"></div>
-                <span v-i18n>Agendas</span>&nbsp;<a href="https://www.notion.so/Political-Agendas-8c6b0b018a884692be29b3ef44b340a9" class="tooltip" target="_blank">&#9432;</a>
-              </label>
+              <CreateGameToggle v-model="isPoliticalAgendasExtensionEnabled" title="Agendas" class="expansion-button">
+                <template #prepend>
+                  <i class="create-game-expansion-icon expansion-icon-agendas"/>
+                </template>
+                <template #append>
+                  <Tooltip link="https://www.notion.so/Political-Agendas-8c6b0b018a884692be29b3ef44b340a9" />
+                </template>
+              </CreateGameToggle>
 
-              <div class="create-game-page-column-row" v-if="isPoliticalAgendasExtensionEnabled()">
+
+              <CreateGameToggle v-model="moonStandardProjectVariant" title="Standard Project Variant">
+                <template #append>
+                  <Tooltip link="https://github.com/bafolts/terraforming-mars/wiki/Variants#moon-standard-project-variant" />
+                </template>
+              </CreateGameToggle>
+
+
+              <div class="create-game-page-column-row" v-if="isPoliticalAgendasExtensionEnabled">
                 <div>
-                  <input type="radio" name="agendaStyle" v-model="politicalAgendasExtension" :value="getPoliticalAgendasExtensionAgendaStyle('random')" id="randomAgendaStyle-radio">
+                  <input type="radio" name="agendaStyle" v-model="politicalAgendasExtension" :value="maps.AgendaStyle.RANDOM" id="randomAgendaStyle-radio">
                   <label class="label-agendaStyle agendaStyle-random" for="randomAgendaStyle-radio">
-                    <span class="agendas-text" v-i18n>{{ getPoliticalAgendasExtensionAgendaStyle('random') }}</span>
+                    <span class="agendas-text" v-i18n>{{ maps.AgendaStyle.RANDOM }}</span>
                   </label>
                 </div>
 
                 <div>
-                  <input type="radio" name="agendaStyle" v-model="politicalAgendasExtension" :value="getPoliticalAgendasExtensionAgendaStyle('chairman')" id="chairmanAgendaStyle-radio">
+                  <input type="radio" name="agendaStyle" v-model="politicalAgendasExtension" :value="maps.AgendaStyle.CHAIRMAN" id="chairmanAgendaStyle-radio">
                   <label class="label-agendaStyle agendaStyle-chairman" for="chairmanAgendaStyle-radio">
-                    <span class="agendas-text" v-i18n>{{ getPoliticalAgendasExtensionAgendaStyle('chairman') }}</span>
+                    <span class="agendas-text" v-i18n>{{ maps.AgendaStyle.CHAIRMAN }}</span>
                   </label>
                 </div>
               </div>
             </template>
 
-            <input type="checkbox" name="pathfinders" id="pathfinders-checkbox" v-model="pathfindersExpansion">
-            <label for="pathfinders-checkbox" class="expansion-button">
-              <div class="create-game-expansion-icon expansion-icon-pathfinders"></div>
-              <span v-i18n>Pathfinders</span>&nbsp;<a href="https://github.com/bafolts/terraforming-mars/wiki/Pathfinders" class="tooltip" target="_blank">&#9432;</a>
-            </label>
+            <CreateGameToggle
+              v-model="pathfindersExpansion"
+              title="Pathfinders"
+              class="expansion-button"
+            >
+              <template #prepend>
+                <i class="create-game-expansion-icon expansion-icon-pathfinders" />
+              </template>
+              <template #append>
+                <Tooltip link="https://github.com/bafolts/terraforming-mars/wiki/Pathfinders"/>
+              </template>
+            </CreateGameToggle>
 
             <template v-if="venusNext">
-              <input type="checkbox" v-model="altVenusBoard" id="altVenusBoard-checkbox">
-              <label for="altVenusBoard-checkbox">
-                <span v-i18n>Alternate Venus Board</span> &nbsp;<a href="https://github.com/bafolts/terraforming-mars/wiki/Variants#alt-venus" class="tooltip" target="_blank">&#9432;</a>
-              </label>
+              <CreateGameToggle v-model="altVenusBoard" title="Alternate Venus Board">
+                <template #append>
+                  <Tooltip link="https://github.com/bafolts/terraforming-mars/wiki/Variants#alt-venus" />
+                </template>
+              </CreateGameToggle>
             </template>
           </div>
 
@@ -180,33 +216,40 @@
               <span v-i18n>Starting Corporations</span>
             </label>
 
-            <input type="checkbox" v-model="solarPhaseOption" id="WGT-checkbox">
-            <label for="WGT-checkbox">
-              <span v-i18n>World Government Terraforming</span>&nbsp;<a href="https://github.com/bafolts/terraforming-mars/wiki/Variants#solar-phase" class="tooltip" target="_blank">&#9432;</a>
-            </label>
+            <CreateGameToggle v-model="solarPhaseOption" title="World Government Terraforming">
+              <template #append>
+                <Tooltip link="https://github.com/bafolts/terraforming-mars/wiki/Variants#solar-phase" />
+              </template>
+            </CreateGameToggle>
 
             <template v-if="playersCount === 1">
-              <input type="checkbox" v-model="soloTR" id="soloTR-checkbox">
-              <label for="soloTR-checkbox">
-                <span v-i18n>63 TR solo mode</span>&nbsp;<a href="https://github.com/bafolts/terraforming-mars/wiki/Variants#tr-solo-mode" class="tooltip" target="_blank">&#9432;</a>
-              </label>
+              <CreateGameToggle v-model="soloTR" title="63 TR solo mode">
+                <template #append>
+                  <Tooltip link="https://github.com/bafolts/terraforming-mars/wiki/Variants#tr-solo-mode" />
+                </template>
+              </CreateGameToggle>
             </template>
 
-            <input type="checkbox" v-model="undoOption" id="undo-checkbox">
-            <label for="undo-checkbox">
-              <span v-i18n>Allow undo</span>&nbsp;<a href="https://github.com/bafolts/terraforming-mars/wiki/Variants#allow-undo" class="tooltip" target="_blank">&#9432;</a>
-            </label>
+            <CreateGameToggle v-model="undoOption" title="Allow undo">
+              <template #append>
+                <Tooltip link="https://github.com/bafolts/terraforming-mars/wiki/Variants#allow-undo" />
+              </template>
+            </CreateGameToggle>
 
-            <input type="checkbox" v-model="showTimers" id="timer-checkbox">
-            <label for="timer-checkbox">
-              <span v-i18n>Show timers</span>
-            </label>
+            <CreateGameToggle v-model="showTimers" title="Show timers" />
 
-            <input type="checkbox" v-model="escapeVelocityMode" id="escapevelocity-checkbox">
-            <label for="escapevelocity-checkbox">
-              <div class="create-game-expansion-icon expansion-icon-escape-velocity"></div>
-              <span v-i18n>Escape Velocity</span>&nbsp;<a href="https://github.com/terraforming-mars/terraforming-mars/wiki/Escape-Velocity" class="tooltip" target="_blank">&#9432;</a>
-            </label>
+            <CreateGameToggle
+              v-model="escapeVelocityMode"
+              title="Escape Velocity"
+            >
+              <template #prepend>
+                <i class="create-game-expansion-icon expansion-icon-escape-velocity" />
+              </template>
+              <template #append>
+                <Tooltip link="https://github.com/terraforming-mars/terraforming-mars/wiki/Escape-Velocity"/>
+              </template>
+            </CreateGameToggle>
+
 
             <label for="escapeThreshold-checkbox" v-show="escapeVelocityMode">
               <span v-i18n>After&nbsp;</span>
@@ -214,23 +257,31 @@
               <span v-i18n>&nbsp;min</span>
             </label>
 
-            <label for="escapePeriod-checkbox" v-show="escapeVelocityMode">
+            <label for="escapePeriod-checkbox-penalty" v-show="escapeVelocityMode">
               <span v-i18n>Reduce&nbsp;</span>
-              <input type="number" class="create-game-corporations-count" value="1" min="1" :max="10" v-model="escapeVelocityPenalty" id="escapePeriod-checkbox">
+              <input type="number" class="create-game-corporations-count" value="1" min="1" :max="10" v-model="escapeVelocityPenalty" id="escapePeriod-checkbox-penalty">
               <span v-i18n>&nbsp;VP every&nbsp;</span>
-              <input type="number" class="create-game-corporations-count" value="2" min="1" :max="10" v-model="escapeVelocityPeriod" id="escapePeriod-checkbox">
+              <input type="number" class="create-game-corporations-count" value="2" min="1" :max="10" v-model="escapeVelocityPeriod" id="escapePeriod-checkbox-period">
               <span v-i18n>&nbsp;min</span>
             </label>
 
-            <input type="checkbox" v-model="shuffleMapOption" id="shuffleMap-checkbox">
-            <label for="shuffleMap-checkbox">
-              <span v-i18n>Randomize board tiles</span>&nbsp;<a href="https://github.com/bafolts/terraforming-mars/wiki/Variants#randomize-board-tiles" class="tooltip" target="_blank">&#9432;</a>
-            </label>
+            <CreateGameToggle
+              v-model="shuffleMapOption"
+              title="Randomize board tiles"
+            >
+              <template #append>
+                <Tooltip link="https://github.com/bafolts/terraforming-mars/wiki/Variants#randomize-board-tiles"/>
+              </template>
+            </CreateGameToggle>
 
-            <input type="checkbox" v-model="seededGame" id="seeded-checkbox">
-            <label for="seeded-checkbox">
-              <span v-i18n>Set Predefined Game</span>&nbsp;<a href="https://github.com/bafolts/terraforming-mars/wiki/Variants#set-predefined-game" class="tooltip" target="_blank">&#9432;</a>
-            </label>
+            <CreateGameToggle
+              v-model="seededGame"
+              title="Set Predefined Game"
+            >
+              <template #append>
+                <Tooltip link="https://github.com/bafolts/terraforming-mars/wiki/Variants#set-predefined-game"/>
+              </template>
+            </CreateGameToggle>
 
             <div v-if="seededGame">
               <select name="clonedGamedId" v-model="clonedGameData">
@@ -243,28 +294,26 @@
 
             <div class="create-game-subsection-label" v-i18n>Filter</div>
 
-            <input type="checkbox" v-model="showCorporationList" id="customCorps-checkbox">
-            <label for="customCorps-checkbox">
-              <span v-i18n>Custom Corporation list</span>
-            </label>
+            <CreateGameToggle v-model="showCorporationList" title="Custom Corporation list" />
 
-            <input type="checkbox" v-model="showCardsBlackList" id="blackList-checkbox">
-            <label for="blackList-checkbox">
-              <span v-i18n>Exclude some cards</span>
-            </label>
+            <CreateGameToggle v-model="showCardsBlackList" title="Exclude some cards" />
 
             <template v-if="colonies">
-              <input type="checkbox" v-model="showColoniesList" id="customColonies-checkbox">
-              <label for="customColonies-checkbox">
-                <span v-i18n>Custom Colonies list</span>
-              </label>
+              <CreateGameToggle
+                v-model="showColoniesList"
+                title="Custom Colonies list"
+              />
             </template>
 
             <template v-if="turmoil">
-              <input type="checkbox" v-model="removeNegativeGlobalEventsOption" id="removeNegativeEvent-checkbox">
-              <label for="removeNegativeEvent-checkbox">
-                <span v-i18n>Remove negative Global Events</span>&nbsp;<a href="https://github.com/bafolts/terraforming-mars/wiki/Variants#remove-negative-global-events" class="tooltip" target="_blank">&#9432;</a>
-              </label>
+              <CreateGameToggle
+                v-model="removeNegativeGlobalEventsOption"
+                title="Remove negative Global Events"
+              >
+                <template #append>
+                  <Tooltip link="https://github.com/bafolts/terraforming-mars/wiki/Variants#remove-negative-global-events"/>
+                </template>
+              </CreateGameToggle>
             </template>
 
           </div>
@@ -274,72 +323,71 @@
             <h4 v-i18n>Multiplayer Options</h4>
 
             <div class="create-game-page-column-row">
-              <div>
-                <input type="checkbox" name="draftVariant" v-model="draftVariant" id="draft-checkbox">
-                <label for="draft-checkbox">
-                  <span v-i18n>Draft variant</span>
-                </label>
-              </div>
+              <CreateGameToggle title="Draft variant" v-model="draftVariant" />
 
-              <div>
-                <input type="checkbox" name="initialDraft" v-model="initialDraft" id="initialDraft-checkbox">
-                <label for="initialDraft-checkbox">
-                  <span v-i18n>Initial Draft variant</span>&nbsp;<a href="https://github.com/bafolts/terraforming-mars/wiki/Variants#initial-draft" class="tooltip" target="_blank">&#9432;</a>
-                </label>
-              </div>
+              <CreateGameToggle title="Draft variant" v-model="draftVariant" >
+                <template #append>
+                  <Tooltip link="https://github.com/bafolts/terraforming-mars/wiki/Variants#initial-draft" />
+                </template>
+              </CreateGameToggle>
             </div>
 
-            <input type="checkbox" v-model="randomFirstPlayer" id="randomFirstPlayer-checkbox">
-            <label for="randomFirstPlayer-checkbox">
-              <span v-i18n>Random first player</span>
-            </label>
 
-            <input type="checkbox" name="randomMAToggle" id="randomMA-checkbox" v-on:change="randomMAToggle()">
-            <label for="randomMA-checkbox">
-              <span v-i18n>Random Milestones/Awards</span>&nbsp;<a href="https://github.com/bafolts/terraforming-mars/wiki/Variants#random-milestones-and-awards" class="tooltip" target="_blank">&#9432;</a>
-            </label>
+            <CreateGameToggle title="Random first player" v-model="randomFirstPlayer" />
 
-            <div class="create-game-page-column-row" v-if="isRandomMAEnabled()">
+            <CreateGameToggle title="Random Milestones/Awards" v-model="isRandomMAEnabled">
+              <template #append>
+                <Tooltip link="https://github.com/bafolts/terraforming-mars/wiki/Variants#random-milestones-and-awards" />
+              </template>
+            </CreateGameToggle>
+
+
+            <CreateGameToggle v-model="requiresVenusTrackCompletion" title="Mandatory Venus Terraforming">
+              <template #append>
+                <Tooltip link="https://github.com/bafolts/terraforming-mars/wiki/Variants#venus-terraforming" />
+              </template>
+            </CreateGameToggle>
+
+            <div class="create-game-page-column-row" v-if="isRandomMAEnabled">
               <div>
-                <input type="radio" name="randomMAOption" v-model="randomMA" :value="getRandomMaOptionType('limited')" id="limitedRandomMA-radio">
+                <input type="radio" name="randomMAOption" v-model="randomMA" :value="maps.RandomMAOptionType.LIMITED" id="limitedRandomMA-radio">
                 <label class="label-randomMAOption" for="limitedRandomMA-radio">
-                  <span v-i18n>{{ getRandomMaOptionType('limited') }}</span>
+                  <span v-i18n>{{ maps.RandomMAOptionType.LIMITED }}</span>
                 </label>
               </div>
 
               <div>
-                <input type="radio" name="randomMAOption" v-model="randomMA" :value="getRandomMaOptionType('full')" id="unlimitedRandomMA-radio">
+                <input type="radio" name="randomMAOption" v-model="randomMA" :value="maps.RandomMAOptionType.UNLIMITED" id="unlimitedRandomMA-radio">
                 <label class="label-randomMAOption" for="unlimitedRandomMA-radio">
-                  <span v-i18n>{{ getRandomMaOptionType('full') }}</span>
+                  <span v-i18n>{{ maps.RandomMAOptionType.UNLIMITED }}</span>
                 </label>
               </div>
             </div>
 
             <template v-if="venusNext">
-              <input type="checkbox" v-model="includeVenusMA" id="venusMA-checkbox">
-              <label for="venusMA-checkbox">
-                <span v-i18n>Venus Milestone/Award</span>
-              </label>
-              <input type="checkbox" v-model="requiresVenusTrackCompletion" id="requiresVenusTrackCompletion-checkbox">
-              <label for="requiresVenusTrackCompletion-checkbox">
-                <span v-i18n>Mandatory Venus Terraforming</span> &nbsp;<a href="https://github.com/bafolts/terraforming-mars/wiki/Variants#venus-terraforming" class="tooltip" target="_blank">&#9432;</a>
-              </label>
+              <CreateGameToggle v-model="includeVenusMA" title="venusMA-checkbox" />
+
+              <CreateGameToggle v-model="requiresVenusTrackCompletion" title="Mandatory Venus Terraforming">
+                <template #append>
+                  <Tooltip link="https://github.com/bafolts/terraforming-mars/wiki/Variants#venus-terraforming" />
+                </template>
+              </CreateGameToggle>
+
             </template>
 
-            <input type="checkbox" name="showOtherPlayersVP" v-model="showOtherPlayersVP" id="realTimeVP-checkbox">
-            <label for="realTimeVP-checkbox">
-              <span v-i18n>Show real-time VP</span>&nbsp;<a href="https://github.com/bafolts/terraforming-mars/wiki/Variants#show-real-time-vp" class="tooltip" target="_blank">&#9432;</a>
-            </label>
+            <CreateGameToggle v-model="showOtherPlayersVP" title="Show real-time VP">
+              <template #append>
+                <Tooltip link="https://github.com/bafolts/terraforming-mars/wiki/Variants#show-real-time-vp" />
+              </template>
+            </CreateGameToggle>
 
-            <input type="checkbox" v-model="fastModeOption" id="fastMode-checkbox">
-            <label for="fastMode-checkbox">
-              <span v-i18n>Fast mode</span>&nbsp;<a href="https://github.com/bafolts/terraforming-mars/wiki/Variants#fast-mode" class="tooltip" target="_blank">&#9432;</a>
-            </label>
+            <CreateGameToggle v-model="fastModeOption" title="Fast Mode">
+              <template #append>
+                <Tooltip link="https://github.com/bafolts/terraforming-mars/wiki/Variants#fast-mode" />
+              </template>
+            </CreateGameToggle>
 
-            <input type="checkbox" v-model="beginnerOption" id="beginnerOption-checkbox">
-            <label for="beginnerOption-checkbox">
-              <span v-i18n>Beginner Options</span>
-            </label>
+            <CreateGameToggle v-model="beginnerOption" title="Beginner Options" />
           </div>
 
           <div class="create-game-players-cont" v-if="playersCount > 1">
@@ -363,10 +411,14 @@
                       </div>
                       <div>
                         <template v-if="beginnerOption">
-                          <label v-if="isBeginnerToggleEnabled()" class="form-switch form-inline create-game-beginner-option-label">
-                            <input type="checkbox" v-model="newPlayer.beginner">
-                            <i class="form-icon"></i> <span v-i18n>Beginner?</span>&nbsp;<a href="https://github.com/bafolts/terraforming-mars/wiki/Variants#beginner-corporation" class="tooltip" target="_blank">&#9432;</a>
-                          </label>
+                          <CreateGameToggle v-if="isBeginnerToggleEnabled()" v-model="newPlayer.beginner" title="Beginner?">
+                            <template #prepend>
+                              <i class="form-icon" />
+                            </template>
+                            <template #append>
+                              <Tooltip link="https://github.com/bafolts/terraforming-mars/wiki/Variants#beginner-corporation" />
+                            </template>
+                          </CreateGameToggle>
 
                           <label class="form-label">
                             <input type="number" class="form-input form-inline player-handicap" value="0" min="0" :max="10" v-model.number="newPlayer.handicap" />
@@ -453,6 +505,8 @@ import {playerColorClass} from '@/utils/utils';
 import {RandomMAOptionType} from '@/RandomMAOptionType';
 import {GameId} from '@/Game';
 import {AgendaStyle} from '@/turmoil/PoliticalAgendas';
+import CreateGameToggle from '@/client/components/create/CreateGameToggle.vue';
+import Tooltip from '@/client/components/common/Tooltip.vue';
 
 import * as constants from '@/constants';
 
@@ -543,7 +597,7 @@ export default Vue.extend({
       prelude: false,
       draftVariant: true,
       initialDraft: false,
-      randomMA: RandomMAOptionType.NONE,
+      randomMA: RandomMAOptionType.NONE as RandomMAOptionType,
       randomFirstPlayer: true,
       showOtherPlayersVP: false,
       beginnerOption: false,
@@ -601,21 +655,68 @@ export default Vue.extend({
     CardsFilter,
     ColoniesFilter,
     CorporationsFilter,
+    CreateGameToggle,
+    Tooltip,
   },
   mounted() {
     if (window.location.pathname === '/solo') {
       this.isSoloModePage = true;
     }
 
-    const onSucces = (response: any) => {
-      this.$data.cloneGameData = response;
+    const onSuccess = (response: any) => {
+      this.cloneGameData = response;
     };
 
     fetch('/api/clonablegames')
       .then((response) => response.json())
-      .then(onSucces)
+      .then(onSuccess)
       .catch((_) => alert('Unexpected server response'));
   },
+
+  computed: {
+    isRandomMAEnabled: {
+      get: function(): boolean {
+        return this.randomMA !== RandomMAOptionType.NONE;
+      },
+      set: function() {
+        if (this.randomMA !== RandomMAOptionType.NONE) {
+          this.randomMA = RandomMAOptionType.NONE;
+        } else {
+          this.randomMA = RandomMAOptionType.LIMITED;
+        }
+      },
+    },
+    isPoliticalAgendasExtensionEnabled: {
+      get: function(): boolean {
+        return this.politicalAgendasExtension !== AgendaStyle.STANDARD;
+      },
+      set: function() {
+        if (this.politicalAgendasExtension === AgendaStyle.STANDARD) {
+          this.politicalAgendasExtension = AgendaStyle.RANDOM;
+        } else {
+          this.politicalAgendasExtension = AgendaStyle.STANDARD;
+        }
+      },
+    },
+    maps() {
+      return {
+        AgendaStyle,
+        RandomMAOptionType,
+      };
+    },
+  },
+
+  watch: {
+    venusNext(value) {
+      this.solarPhaseOption = value;
+    },
+    turmoil(value) {
+      if (!value) {
+        this.politicalAgendasExtension = AgendaStyle.STANDARD;
+      }
+    },
+  },
+
   methods: {
     downloadCurrentSettings() {
       const serializedData = this.serializeSettings();
@@ -700,48 +801,6 @@ export default Vue.extend({
       const component = (this as any) as CreateGameModel;
       return component.players.slice(0, component.playersCount);
     },
-    isRandomMAEnabled(): Boolean {
-      return this.randomMA !== RandomMAOptionType.NONE;
-    },
-    randomMAToggle() {
-      const component = (this as any) as CreateGameModel;
-      if (component.randomMA === RandomMAOptionType.NONE) {
-        component.randomMA = RandomMAOptionType.LIMITED;
-        this.randomMA = RandomMAOptionType.LIMITED;
-      } else {
-        component.randomMA = RandomMAOptionType.NONE;
-        this.randomMA = RandomMAOptionType.NONE;
-      }
-    },
-    getRandomMaOptionType(type: 'limited' | 'full'): RandomMAOptionType {
-      if (type === 'limited') {
-        return RandomMAOptionType.LIMITED;
-      } else if (type === 'full') {
-        return RandomMAOptionType.UNLIMITED;
-      } else {
-        return RandomMAOptionType.NONE;
-      }
-    },
-    isPoliticalAgendasExtensionEnabled(): Boolean {
-      return this.politicalAgendasExtension !== AgendaStyle.STANDARD;
-    },
-    politicalAgendasExtensionToggle() {
-      if (this.politicalAgendasExtension === AgendaStyle.STANDARD) {
-        this.politicalAgendasExtension = AgendaStyle.RANDOM;
-      } else {
-        this.politicalAgendasExtension = AgendaStyle.STANDARD;
-      }
-    },
-    getPoliticalAgendasExtensionAgendaStyle(type: 'random' | 'chairman'): AgendaStyle {
-      if (type === 'random') {
-        return AgendaStyle.RANDOM;
-      } else if (type === 'chairman') {
-        return AgendaStyle.CHAIRMAN;
-      } else {
-        console.warn('AgendaStyle not found');
-        return AgendaStyle.STANDARD;
-      }
-    },
     isBeginnerToggleEnabled(): Boolean {
       return !(this.initialDraft || this.prelude || this.venusNext || this.colonies || this.turmoil);
     },
@@ -753,25 +812,6 @@ export default Vue.extend({
       this.turmoil = this.$data.allOfficialExpansions;
       this.promoCardsOption = this.$data.allOfficialExpansions;
       this.solarPhaseOption = this.$data.allOfficialExpansions;
-    },
-    toggleVenusNext() {
-      this.solarPhaseOption = this.$data.venusNext;
-    },
-    deselectPoliticalAgendasWhenDeselectingTurmoil() {
-      if (this.$data.turmoil === false) {
-        this.politicalAgendasExtension = AgendaStyle.STANDARD;
-      }
-    },
-    deselectVenusCompletion() {
-      if (this.$data.venusNext === false) {
-        this.requiresVenusTrackCompletion = false;
-      }
-    },
-    deselectMoonCompletion() {
-      if (this.$data.moonExpansion === false) {
-        this.requiresMoonTrackCompletion = false;
-        this.moonStandardProjectVariant = false;
-      }
     },
     getBoardColorClass(boardName: string): string {
       if (boardName === BoardName.ORIGINAL) {
@@ -981,3 +1021,9 @@ export default Vue.extend({
   },
 });
 </script>
+<style scoped>
+.create-game-expansion-icon {
+  /* no need margin anymore on create game page, but class still used on other pages*/
+  margin: 0;
+}
+</style>

@@ -32,6 +32,7 @@ describe('TitanFloatingLaunchPad', function() {
   it('Should play with single targets', function() {
     player.game.colonies = []; // A way to simulate that no colonies are available.
     player.playedCards.push(card);
+    game.colonies = []; // A way to fake out that no colonies are available.
 
     // No resource and no other card to add to
     card.action(player);
@@ -65,7 +66,7 @@ describe('TitanFloatingLaunchPad', function() {
   });
 
   it('Should play with multiple targets and colonies', function() {
-    player.game.colonies = [new Luna(), new Triton()];
+    game.colonies = [new Luna(), new Triton()];
 
     const card2 = new JupiterFloatingStation();
     player.playedCards.push(card);

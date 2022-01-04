@@ -5,15 +5,29 @@ import {OrOptions} from '../inputs/OrOptions';
 import {SelectOption} from '../inputs/SelectOption';
 import {ICloneTagCard} from '../cards/pathfinders/ICloneTagCard';
 import {ICard} from '../cards/ICard';
+import {CardType} from '../cards/CardType';
+import {IProjectCard} from '../cards/IProjectCard';
 
+/**
+ * Declare what tag a new card has. Must occur before anything else, including
+ * the standard behavior that comes from onCardPlayed.
+ *
+ * To handle the onCardPlayed nature, `Player` doesn't call onCardPlayed
+ * when the card has a clone tag, and instead defers that call.
+ * That's why it calls onCardPlayed here.
+ */
 export class DeclareCloneTag implements DeferredAction {
-  public priority = Priority.DEFAULT;
+  public priority = Priority.DECLARE_CLONE_TAG;
 
   public constructor(
     public player: Player,
     public card: ICard & ICloneTagCard,
-    public title: string,
-    public cb: (tag: Tags) => void) {}
+    public cb: (tag: Tags) => void = () => {},
+    public title: string = '') {
+    if (this.title === '') {
+      this.title = `Assign the clone tag for ${card.name}`;
+    }
+  }
 
   public execute() {
     const tags = [Tags.EARTH, Tags.JOVIAN, Tags.MARS];
@@ -29,6 +43,9 @@ export class DeclareCloneTag implements DeferredAction {
         this.card.cloneTag = tag;
         this.player.game.log('${0} turned the clone tag on ${1} into a ${2} tag',
           (b) => b.player(this.player).card(this.card).string(tag));
+        if ([CardType.AUTOMATED, CardType.ACTIVE, CardType.EVENT, CardType.PRELUDE].includes(this.card.cardType)) {
+          this.player.onCardPlayed(this.card as unknown as IProjectCard);
+        }
         this.cb(tag);
         return undefined;
       });

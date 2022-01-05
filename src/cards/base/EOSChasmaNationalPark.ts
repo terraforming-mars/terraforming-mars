@@ -19,7 +19,7 @@ export class EosChasmaNationalPark extends Card implements IProjectCard {
       name: CardName.EOS_CHASMA_NATIONAL_PARK,
       tags: [Tags.PLANT, Tags.BUILDING],
       cost: 16,
-      productionBox: Units.of({energy: 2}),
+      productionBox: Units.of({megacredits: 2}),
       victoryPoints: 1,
 
       requirements: CardRequirements.builder((b) => b.temperature(-12)),

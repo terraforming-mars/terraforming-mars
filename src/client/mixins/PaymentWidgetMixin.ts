@@ -41,7 +41,7 @@ export interface PaymentWidgetModel extends SelectHowToPayModel {
 }
 
 // https://steveholgado.com/typescript-types-from-arrays/
-const unit = ['megaCredits', 'titanium', 'steel', 'heat', 'microbes', 'floaters', 'science'] as const;
+export const unit = ['megaCredits', 'titanium', 'steel', 'heat', 'microbes', 'floaters', 'science'] as const;
 export type Unit = typeof unit[number];
 
 export const PaymentWidgetMixin = {

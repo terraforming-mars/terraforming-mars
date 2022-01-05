@@ -1,10 +1,7 @@
 import Vue from 'vue';
 import {Wrapper} from '@vue/test-utils';
 import {expect} from 'chai';
-import {SelectHowToPayModel} from '@/client/mixins/PaymentWidgetMixin';
-
-export type Unit = 'heat' | 'steel' | 'titanium' | 'floaters' | 'microbes' | 'megaCredits' | 'science';
-
+import {SelectHowToPayModel, Unit} from '@/client/mixins/PaymentWidgetMixin';
 
 export class PaymentTester {
   private model: SelectHowToPayModel;
@@ -35,6 +32,11 @@ export class PaymentTester {
     await this.nextTick();
   };
 
+  public getValue(type: Unit) {
+    const textBox = this.wrapper.find(PaymentTester.selector(type) + ' ~ input').element as HTMLInputElement;
+    return textBox.value;
+  }
+
   // This that the given unit has the given value. It does this two ways:
   // It verifies that the model has this value, and also that the text box
   // has the same value.
@@ -63,8 +65,7 @@ export class PaymentTester {
       vmVal = this.model.science;
       break;
     }
-    const textBox = this.wrapper.find(PaymentTester.selector(type) + ' ~ input').element as HTMLInputElement;
-    expect(textBox.value, 'text box value for ' + type).eq(String(amount));
+    expect(this.getValue(type), 'text box value for ' + type).eq(String(amount));
     expect(vmVal, 'VM box value for ' + type).eq(amount);
   };
 

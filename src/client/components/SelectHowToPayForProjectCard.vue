@@ -7,7 +7,7 @@ import Card from '@/client/components/card/Card.vue';
 import {CardFinder} from '@/CardFinder';
 import {CardModel} from '@/models/CardModel';
 import {CardOrderStorage} from '@/client/utils/CardOrderStorage';
-import {PaymentWidgetMixin, SelectHowToPayForProjectCardModel} from '@/client/mixins/PaymentWidgetMixin';
+import {PaymentWidgetMixin, SelectHowToPayForProjectCardModel, unit} from '@/client/mixins/PaymentWidgetMixin';
 import {PlayerInputModel} from '@/models/PlayerInputModel';
 import {PlayerViewModel, PublicPlayerModel} from '@/models/PlayerModel';
 import {PreferencesManager} from '@/client/utils/PreferencesManager';
@@ -268,85 +268,34 @@ export default Vue.extend({
         floaters: this.floaters,
         science: this.science,
       };
-      if (htp.megaCredits > this.thisPlayer.megaCredits) {
-        this.warning = 'You don\'t have that many M€';
-        return;
-      }
-      if (this.playerinput.microbes !== undefined && htp.microbes > this.playerinput.microbes) {
-        this.warning = 'You don\'t have enough microbes';
-        return;
-      }
-      if (this.playerinput.floaters !== undefined && htp.floaters > this.playerinput.floaters) {
-        this.warning = 'You don\'t have enough floaters';
-        return;
-      }
-      if (this.playerinput.science !== undefined && htp.science > this.playerinput.science) {
-        this.warning = 'You don\'t have enough science resources';
-        return;
-      }
-      if (htp.heat > this.thisPlayer.heat) {
-        this.warning = 'You don\'t have enough heat';
-        return;
-      }
-      if (htp.titanium > this.thisPlayer.titanium) {
-        this.warning = 'You don\'t have enough titanium';
-        return;
-      }
-      if (htp.steel > this.thisPlayer.steel) {
-        this.warning = 'You don\'t have enough steel';
-        return;
+      let totalSpent = 0;
+      for (const target of unit) {
+        if (htp[target] > this.getAmount(target)) {
+          this.$data.warning = `You do not have enough ${target}`;
+          return;
+        }
+        totalSpent += htp[target] * this.getResourceRate(target);
       }
 
-      const totalSpentAmt =
-        (3 * htp.floaters) +
-        (2 * htp.microbes) +
-        htp.science +
-        htp.heat +
-        htp.megaCredits +
-        (htp.steel * this.thisPlayer.steelValue) +
-        (htp.titanium * this.thisPlayer.titaniumValue);
-
-      if (totalSpentAmt < this.cost) {
+      if (totalSpent < this.cost) {
         this.warning = 'Haven\'t spent enough';
         return;
       }
 
-      if (totalSpentAmt > this.cost) {
-        const diff = totalSpentAmt - this.cost;
-        if (htp.titanium && diff >= this.thisPlayer.titaniumValue) {
-          this.warning = 'You cannot overspend titanium';
-          return;
-        }
-        if (htp.steel && diff >= this.thisPlayer.steelValue) {
-          this.warning = 'You cannot overspend steel';
-          return;
-        }
-        if (htp.floaters && diff >= 3) {
-          this.warning = 'You cannot overspend floaters';
-          return;
-        }
-        if (htp.microbes && diff >= 2) {
-          this.warning = 'You cannot overspend microbes';
-          return;
-        }
-        if (htp.science && diff >= 1) {
-          this.warning = 'You cannot overspend science resources';
-          return;
-        }
-        if (htp.heat && diff >= 1) {
-          this.warning = 'You cannot overspend heat';
-          return;
-        }
-        if (htp.megaCredits && diff >= 1) {
-          this.warning = 'You cannot overspend megaCredits';
-          return;
+      if (totalSpent > this.cost) {
+        const diff = totalSpent - this.cost;
+        for (const target of unit) {
+          if (htp[target] && diff >= this.getResourceRate(target)) {
+            this.$data.warning = `You cannot overspend ${target}`;
+            return;
+          }
         }
       }
 
       const showAlert = PreferencesManager.load('show_alerts') === '1';
 
-      if (totalSpentAmt > this.cost && showAlert) {
-        const diff = totalSpentAmt - this.cost;
+      if (totalSpent > this.cost && showAlert) {
+        const diff = totalSpent - this.cost;
 
         if (confirm('Warning: You are overpaying by ' + diff + ' M€')) {
           this.onsave([[

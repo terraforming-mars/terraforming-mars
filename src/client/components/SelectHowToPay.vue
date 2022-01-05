@@ -1,11 +1,14 @@
 <script lang="ts">
 import Vue from 'vue';
 import {HowToPay} from '@/inputs/HowToPay';
-import {PaymentWidgetMixin, SelectHowToPayModel} from '@/client/mixins/PaymentWidgetMixin';
+import {PaymentWidgetMixin, SelectHowToPayModel, Unit} from '@/client/mixins/PaymentWidgetMixin';
 import {PlayerInputModel} from '@/models/PlayerInputModel';
 import {PlayerViewModel, PublicPlayerModel} from '@/models/PlayerModel';
 import {PreferencesManager} from '@/client/utils/PreferencesManager';
 import Button from '@/client/components/common/Button.vue';
+
+// TODO(kberg): delete by 2022-03-01
+const useNewVersion = true;
 
 export default Vue.extend({
   name: 'SelectHowToPay',
@@ -51,9 +54,13 @@ export default Vue.extend({
       this.setInitialCost();
       this.$data.megaCredits = (this as any).getMegaCreditsMax();
 
-      this.setDefaultSteelValue();
-      this.setDefaultTitaniumValue();
-      this.setDefaultHeatValue();
+      if (useNewVersion) {
+        this.setDefaultValues();
+      } else {
+        this.setDefaultSteelValue();
+        this.setDefaultTitaniumValue();
+        this.setDefaultHeatValue();
+      }
     });
   },
   methods: {
@@ -63,6 +70,51 @@ export default Vue.extend({
     },
     setInitialCost() {
       this.$data.cost = this.playerinput.amount;
+    },
+    canUse(target: Unit) {
+      switch (target) {
+      case 'steel': return this.canUseSteel();
+      case 'titanium': return this.canUseTitanium();
+      case 'heat': return this.canUseHeat();
+      }
+      return false;
+    },
+    setDefaultValue(
+      amountCovered: number, // MC values of prior-computed resources.
+      target: Unit): number {
+      if (!this.canUse(target)) return 0;
+      const amount = this.getAmount(target);
+      if (amount === 0) return 0;
+
+      const cost = this.$data.cost;
+      const resourceRate = this.getResourceRate(target);
+
+      let qty = Math.ceil(Math.max(cost - this.getAmount('megaCredits') - amountCovered, 0) / resourceRate);
+      qty = Math.min(qty, amount);
+      let contributingValue = qty * resourceRate;
+
+      // When greedy, use as much as possible without overspending. When selfish, use as little as possible
+      const greedy = target !== 'heat';
+      if (greedy === true) {
+        while (qty < amount && contributingValue <= cost - resourceRate) {
+          qty++;
+          contributingValue += resourceRate;
+        }
+      }
+
+      this.$data[target] = qty;
+      return contributingValue;
+    },
+    setDefaultValues() {
+      const cost = this.$data.cost;
+
+      const targets: Array<Unit> = ['steel', 'titanium', 'heat'];
+      const megaCredits = this.getAmount('megaCredits');
+      let amountCovered = 0;
+      for (const target of targets) {
+        amountCovered += this.setDefaultValue(amountCovered, target);
+      }
+      this.$data.megaCredits = Math.min(megaCredits, Math.max(cost - amountCovered, 0));
     },
     setDefaultSteelValue() {
       // automatically use available steel to pay if not enough MC
@@ -135,6 +187,7 @@ export default Vue.extend({
       return this.playerinput.canUseTitanium && this.thisPlayer.titanium > 0;
     },
     saveData() {
+      const targets: Array<Unit> = ['steel', 'titanium', 'heat', 'megaCredits'];
       const htp: HowToPay = {
         heat: this.$data.heat,
         megaCredits: this.$data.megaCredits,
@@ -145,27 +198,18 @@ export default Vue.extend({
         science: 0,
       };
 
-      if (htp.megaCredits > this.thisPlayer.megaCredits) {
-        this.$data.warning = 'You don\'t have that many M€';
-        return;
-      }
-      if (htp.heat > this.thisPlayer.heat) {
-        this.$data.warning = 'You don\'t have enough heat';
-        return;
-      }
-      if (htp.titanium > this.thisPlayer.titanium) {
-        this.$data.warning = 'You don\'t have enough titanium';
-        return;
-      }
-      if (htp.steel > this.thisPlayer.steel) {
-        this.$data.warning = 'You don\'t have enough steel';
-        return;
+      let totalSpent = 0;
+      for (const target of targets) {
+        if (htp[target] > this.getAmount(target)) {
+          this.$data.warning = `You do not have enough ${target}`;
+          return;
+        }
+        totalSpent += htp[target] * this.getResourceRate(target);
       }
 
       const requiredAmt = this.playerinput.amount || 0;
-      const totalSpentAmt = htp.heat + htp.megaCredits + (htp.steel * this.thisPlayer.steelValue) + (htp.titanium * this.thisPlayer.titaniumValue);
 
-      if (requiredAmt > 0 && totalSpentAmt < requiredAmt) {
+      if (requiredAmt > 0 && totalSpent < requiredAmt) {
         this.$data.warning = 'Haven\'t spent enough';
         return;
       }
@@ -175,30 +219,19 @@ export default Vue.extend({
         htp.megaCredits = 0;
       }
 
-      if (requiredAmt > 0 && totalSpentAmt > requiredAmt) {
-        const diff = totalSpentAmt - requiredAmt;
-        if (htp.titanium && diff >= this.thisPlayer.titaniumValue) {
-          this.$data.warning = 'You cannot overspend titanium';
-          return;
-        }
-        if (htp.steel && diff >= this.thisPlayer.steelValue) {
-          this.$data.warning = 'You cannot overspend steel';
-          return;
-        }
-        if (htp.heat && diff >= 1) {
-          this.$data.warning = 'You cannot overspend heat';
-          return;
-        }
-        if (htp.megaCredits && diff >= 1) {
-          this.$data.warning = 'You cannot overspend megaCredits';
-          return;
+      if (requiredAmt > 0 && totalSpent > requiredAmt) {
+        const diff = totalSpent - requiredAmt;
+        for (const target of targets) {
+          if (htp[target] && diff >= this.getResourceRate(target)) {
+            this.$data.warning = `You cannot overspend ${target}`;
+            return;
+          }
         }
       }
-
       const showAlert = PreferencesManager.load('show_alerts') === '1';
 
-      if (requiredAmt > 0 && totalSpentAmt > requiredAmt && showAlert) {
-        const diff = totalSpentAmt - requiredAmt;
+      if (requiredAmt > 0 && totalSpent > requiredAmt && showAlert) {
+        const diff = totalSpent - requiredAmt;
 
         if (confirm('Warning: You are overpaying by ' + diff + ' M€')) {
           this.onsave([[JSON.stringify(htp)]]);

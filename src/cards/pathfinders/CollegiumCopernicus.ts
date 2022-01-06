@@ -103,8 +103,7 @@ export class TradeWithCollegiumCopernicus implements IColonyTrader {
   }
 
   public trade(colony: Colony) {
-    // TODO(kberg): find a way to remove ! or just suck it up and use an if(!undefined)
-    this.collegiumCopernicus!.resourceCount -= tradeCost(this.player);
+    if (this.collegiumCopernicus !== undefined) this.collegiumCopernicus.resourceCount -= tradeCost(this.player);
     this.player.addActionThisGeneration(CardName.COLLEGIUM_COPERNICUS);
     this.player.game.log('${0} spent ${1} data to trade with ${2}', (b) => b.player(this.player).number(tradeCost(this.player)).colony(colony));
     colony.trade(this.player);

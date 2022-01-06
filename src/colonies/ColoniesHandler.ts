@@ -12,6 +12,7 @@ import {SelectOption} from '../inputs/SelectOption';
 import {SelectColony} from '../inputs/SelectColony';
 import {AndOptions} from '../inputs/AndOptions';
 import {IColonyTrader} from './IColonyTrader';
+import {TradeWithCollegiumCopernicus} from '../cards/pathfinders/CollegiumCopernicus';
 
 export class ColoniesHandler {
   public static getColony(game: Game, colonyName: ColonyName, includeDiscardedColonies: boolean = false): Colony {
@@ -22,6 +23,14 @@ export class ColoniesHandler {
       if (colony !== undefined) return colony;
     }
     throw new Error(`Unknown colony '${colonyName}'`);
+  }
+
+  public static tradeableColonies(game: Game) {
+    return game.colonies.filter((colony) => colony.isActive && colony.visitor === undefined);
+  }
+  public static canTrade(player: Player) {
+    return ColoniesHandler.tradeableColonies(player.game).length > 0 &&
+      player.getFleetSize() > player.tradesThisGeneration;
   }
 
   public static coloniesTradeAction(player: Player) {
@@ -37,10 +46,11 @@ export class ColoniesHandler {
 
   private static tradeWithColony(player: Player, openColonies: Array<Colony>): PlayerInput | undefined {
     const handlers = [
+      new TradeWithTitanFloatingLaunchPad(player),
+      new TradeWithCollegiumCopernicus(player),
       new TradeWithEnergy(player),
       new TradeWithTitanium(player),
       new TradeWithMegacredits(player),
-      new TradeWithTitanFloatingLaunchPad(player),
     ];
 
     let selected: IColonyTrader | undefined = undefined;

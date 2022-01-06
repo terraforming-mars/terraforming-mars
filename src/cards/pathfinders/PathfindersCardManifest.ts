@@ -13,6 +13,7 @@ import {CassiniStation} from './CassiniStation';
 import {CeresSpaceport} from './CeresSpaceport';
 import {Chimera} from './Chimera';
 import {CO2Reducers} from './CO2Reducers';
+import {CollegiumCopernicus} from './CollegiumCopernicus';
 // import {CommunicationCenter} from './CommunicationCenter';
 import {ControlledBloom} from './ControlledBloom';
 import {CoordinatedRaid} from './CoordinatedRaid';
@@ -186,7 +187,7 @@ export const PATHFINDERS_CARD_MANIFEST = new CardManifest({
     // {cardName: CardName.SOLBANK, Factory: SolBank},
     // {cardName: CardName.BIO_SOL, Factory: BioSol},
     // {cardName: CardName.AURORAI, Factory: Aurorai},
-    // {cardName: CardName.COLLEGIUM_COPERNICUS, Factory: CollegiumCopernicus},
+    {cardName: CardName.COLLEGIUM_COPERNICUS, Factory: CollegiumCopernicus},
     {cardName: CardName.ROBIN_HAULINGS, Factory: RobinHaulings, compatibility: GameModule.Venus},
     // {cardName: CardName.ODYSSEY_EFFECT, Factory: OdysseyEffect},
     // {cardName: CardName.GAGARIN_MOBILE_BASE, Factory: GagarinMobileBase},

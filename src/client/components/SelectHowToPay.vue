@@ -284,7 +284,7 @@ export default Vue.extend({
       <Button type="max" @click="setMaxValue('heat')" title="MAX" />
     </div>
 
-    <div class="payments_type input-group">
+    <div class="payments_type input-group"  v-if="playerinput.canUseSeeds">
       <i class="resource_icon resource_icon--seeds payments_type_icon" :title="$t('Pay by Seeds')"></i>
       <Button type="minus" @click="reduceValue('seeds', 1)" />
       <input class="form-input form-inline payments_input" v-model.number="seeds" />

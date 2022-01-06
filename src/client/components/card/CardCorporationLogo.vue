@@ -218,6 +218,9 @@
     <template v-else-if="title ===  CardName.ROBIN_HAULINGS">
       <div class="card-robin-haulings-logo"></div>
     </template>
+    <template v-else-if="title ===  CardName.COLLEGIUM_COPERNICUS">
+      <div class="card-collegium-copernicus-logo"></div>
+    </template>
     <template v-else-if="title ===  CardName.MARS_DIRECT">
       <div class="card-mars-direct-logo"></div>
     </template>

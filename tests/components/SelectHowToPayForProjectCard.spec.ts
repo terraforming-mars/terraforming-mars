@@ -73,6 +73,7 @@ describe('SelectHowToPayForProjectCard', () => {
     const tester = new PaymentTester(wrapper);
     await tester.nextTick();
 
+    tester.expectIsAvailable('heat', true);
     tester.expectValue('heat', 3);
   });
 
@@ -293,6 +294,7 @@ describe('SelectHowToPayForProjectCard', () => {
     tester.expectIsAvailable('steel', false);
   });
 
+  // TODO(kberg): Be greedy with science units.
   it('select how to pay uses science', async () => {
     // ARISTARCHUS_ROAD_NETWORK costs 15. Player has 7M€ and will use 8 science units.
     const wrapper = setupCardForPurchase(
@@ -308,6 +310,25 @@ describe('SelectHowToPayForProjectCard', () => {
 
     tester.expectIsAvailable('science', true);
     tester.expectValue('science', 8);
+    tester.expectValue('megaCredits', 7);
+  });
+
+  // TODO(kberg): be greedy with seeds.
+  it('select how to pay uses seeds', async () => {
+    // ARCTIC_ALGAE costs 12. Player has 7M€ and will use 2 seeds.
+    const wrapper = setupCardForPurchase(
+      CardName.ARCTIC_ALGAE, 12,
+      {
+        megaCredits: 7,
+      },
+      {seeds: 3});
+
+    const tester = new PaymentTester(wrapper);
+    await tester.nextTick();
+
+    tester.expectIsAvailable('seeds', true);
+    tester.expectValue('seeds', 1);
+    tester.expectValue('megaCredits', 7);
   });
 
   it('select how to pay allows with Last Restort Ingenuity', async () => {

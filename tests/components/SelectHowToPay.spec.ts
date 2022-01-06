@@ -79,6 +79,32 @@ describe('SelectHowToPay', () => {
     tester.expectValue('megaCredits', 0);
   });
 
+  it('Uses seeds', async () => {
+    const wrapper = setupBill(
+      14,
+      {megaCredits: 6},
+      {canUseSeeds: true, seeds: 4});
+
+    const tester = new PaymentTester(wrapper);
+    await tester.nextTick();
+
+    tester.expectValue('seeds', 2);
+    tester.expectValue('megaCredits', 4);
+  });
+
+  it('Default seed value uses more than minimum when there are not enough MC', async () => {
+    const wrapper = setupBill(
+      14,
+      {megaCredits: 2},
+      {canUseSeeds: true, seeds: 4});
+
+    const tester = new PaymentTester(wrapper);
+    await tester.nextTick();
+
+    tester.expectValue('seeds', 3);
+    tester.expectValue('megaCredits', 0);
+  });
+
   it('initial values, multiple values', async () => {
     const wrapper = setupBill(
       10,

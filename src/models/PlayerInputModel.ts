@@ -15,6 +15,7 @@ export interface PlayerInputModel {
     canUseHeat: boolean | undefined;
     canUseSteel: boolean | undefined;
     canUseTitanium: boolean | undefined;
+    canUseSeeds: boolean | undefined;
     cards: Array<CardModel> | undefined;
     inputType: PlayerInputTypes;
     options: Array<PlayerInputModel> | undefined;
@@ -25,6 +26,7 @@ export interface PlayerInputModel {
     microbes: number | undefined;
     floaters: number | undefined;
     science: number | undefined;
+    seeds: number | undefined;
     minCardsToSelect: number | undefined;
     players: Array<ColorWithNeutral> | undefined;
     title: string | Message;

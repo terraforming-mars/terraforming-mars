@@ -38,7 +38,7 @@ export default Vue.extend({
     Button,
   },
   data() {
-    return {
+    const model: SelectHowToPayModel = {
       cost: 0,
       heat: 0,
       megaCredits: 0,
@@ -46,8 +46,10 @@ export default Vue.extend({
       titanium: 0,
       microbes: 0,
       floaters: 0,
+      seeds: 0,
       warning: undefined,
-    } as SelectHowToPayModel;
+    };
+    return model;
   },
   mounted() {
     Vue.nextTick(() => {
@@ -76,6 +78,7 @@ export default Vue.extend({
       case 'steel': return this.canUseSteel();
       case 'titanium': return this.canUseTitanium();
       case 'heat': return this.canUseHeat();
+      case 'seeds': return this.canUseSeeds();
       }
       return false;
     },
@@ -108,7 +111,7 @@ export default Vue.extend({
     setDefaultValues() {
       const cost = this.$data.cost;
 
-      const targets: Array<Unit> = ['steel', 'titanium', 'heat'];
+      const targets: Array<Unit> = ['seeds', 'steel', 'titanium', 'heat'];
       const megaCredits = this.getAmount('megaCredits');
       let amountCovered = 0;
       for (const target of targets) {
@@ -186,13 +189,19 @@ export default Vue.extend({
     canUseTitanium() {
       return this.playerinput.canUseTitanium && this.thisPlayer.titanium > 0;
     },
+    canUseSeeds() {
+      return this.playerinput.canUseSeeds && (this.playerinput.seeds ?? 0 > 0);
+    },
+
     saveData() {
-      const targets: Array<Unit> = ['steel', 'titanium', 'heat', 'megaCredits'];
+      const targets: Array<Unit> = ['seeds', 'steel', 'titanium', 'heat', 'megaCredits'];
+
       const htp: HowToPay = {
         heat: this.$data.heat,
         megaCredits: this.$data.megaCredits,
         steel: this.$data.steel,
         titanium: this.$data.titanium,
+        seeds: this.$data.seeds,
         microbes: 0,
         floaters: 0,
         science: 0,
@@ -273,6 +282,14 @@ export default Vue.extend({
       <input class="form-input form-inline payments_input" v-model.number="heat" />
       <Button type="plus" @click="addValue('heat', 1)" />
       <Button type="max" @click="setMaxValue('heat')" title="MAX" />
+    </div>
+
+    <div class="payments_type input-group">
+      <i class="resource_icon resource_icon--seeds payments_type_icon" :title="$t('Pay by Seeds')"></i>
+      <Button type="minus" @click="reduceValue('seeds', 1)" />
+      <input class="form-input form-inline payments_input" v-model.number="seeds" />
+      <Button type="plus" @click="addValue('seeds', 1)" />
+      <Button type="max" @click="setMaxValue('seeds')" title="MAX" />
     </div>
 
     <div class="payments_type input-group">

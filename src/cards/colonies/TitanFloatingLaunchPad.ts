@@ -103,8 +103,8 @@ export class TradeWithTitanFloatingLaunchPad implements IColonyTrader {
   }
 
   public trade(colony: Colony) {
-    // TODO(kberg): find a way to remove ! or just suck it up and use an if(!undefined)
-    this.titanFloatingLaunchPad!.resourceCount--;
+    // grr I wish there was a simpler syntax.
+    if (this.titanFloatingLaunchPad !== undefined) this.titanFloatingLaunchPad.resourceCount--;
     this.player.addActionThisGeneration(CardName.TITAN_FLOATING_LAUNCHPAD);
     this.player.game.log('${0} spent 1 floater to trade with ${1}', (b) => b.player(this.player).colony(colony));
     colony.trade(this.player);

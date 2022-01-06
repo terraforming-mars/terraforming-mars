@@ -79,6 +79,32 @@ describe('SelectHowToPay', () => {
     tester.expectValue('megaCredits', 0);
   });
 
+  it('Uses seeds', async () => {
+    const wrapper = setupBill(
+      14,
+      {megaCredits: 6},
+      {canUseSeeds: true, seeds: 4});
+
+    const tester = new PaymentTester(wrapper);
+    await tester.nextTick();
+
+    tester.expectValue('seeds', 2);
+    tester.expectValue('megaCredits', 4);
+  });
+
+  it('Default seed value uses more than minimum when there are not enough MC', async () => {
+    const wrapper = setupBill(
+      14,
+      {megaCredits: 2},
+      {canUseSeeds: true, seeds: 4});
+
+    const tester = new PaymentTester(wrapper);
+    await tester.nextTick();
+
+    tester.expectValue('seeds', 3);
+    tester.expectValue('megaCredits', 0);
+  });
+
   it('initial values, multiple values', async () => {
     const wrapper = setupBill(
       10,
@@ -87,6 +113,14 @@ describe('SelectHowToPay', () => {
 
     const tester = new PaymentTester(wrapper);
     await tester.nextTick();
+
+    // Using this as a chance to test that other components aren't visible.
+    tester.expectIsAvailable('steel', false);
+    tester.expectIsAvailable('titanium', true);
+    tester.expectIsAvailable('heat', true);
+    tester.expectIsAvailable('megaCredits', true);
+    tester.expectIsAvailable('science', false);
+    tester.expectIsAvailable('seeds', false);
 
     tester.expectValue('titanium', 2);
     tester.expectValue('heat', 0);
@@ -102,6 +136,7 @@ describe('SelectHowToPay', () => {
     const tester = new PaymentTester(wrapper);
     await tester.nextTick();
 
+    tester.expectIsAvailable('seeds', false);
     tester.expectValue('titanium', 0);
     tester.expectValue('steel', 0);
     tester.expectValue('heat', 0);

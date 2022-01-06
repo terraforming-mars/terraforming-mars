@@ -18,6 +18,7 @@ export interface SelectHowToPayModel {
     floaters: number; // Floaters are not actually used in this component. It's just to satisfy the mixin.
     warning: string | undefined;
     science?: number; // Science isn't used in this component, but it simplifies testing.
+    seeds?: number;
 }
 
 export interface SelectHowToPayForProjectCardModel extends SelectHowToPayModel {
@@ -26,6 +27,7 @@ export interface SelectHowToPayForProjectCardModel extends SelectHowToPayModel {
   cards: Array<CardModel>;
   tags: Array<Tags>
   science: number;
+  seeds: number;
   available: Units;
 }
 
@@ -41,7 +43,7 @@ export interface PaymentWidgetModel extends SelectHowToPayModel {
 }
 
 // https://steveholgado.com/typescript-types-from-arrays/
-export const unit = ['megaCredits', 'titanium', 'steel', 'heat', 'microbes', 'floaters', 'science'] as const;
+export const unit = ['megaCredits', 'titanium', 'steel', 'heat', 'microbes', 'floaters', 'science', 'seeds'] as const;
 export type Unit = typeof unit[number];
 
 export const PaymentWidgetMixin = {
@@ -68,6 +70,8 @@ export const PaymentWidgetMixin = {
         return 2;
       case 'floaters':
         return 3;
+      case 'seeds':
+        return 5;
       default:
         return 1;
       }
@@ -155,6 +159,7 @@ export const PaymentWidgetMixin = {
       case 'floaters':
       case 'microbes':
       case 'science':
+      case 'seeds':
         amount = model.playerinput[target];
         break;
       };

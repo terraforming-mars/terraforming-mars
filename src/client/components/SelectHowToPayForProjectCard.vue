@@ -66,6 +66,7 @@ export default Vue.extend({
       titanium: 0,
       microbes: 0,
       science: 0,
+      seeds: 0,
       floaters: 0,
       warning: undefined,
       available: Units.of({}),
@@ -105,6 +106,7 @@ export default Vue.extend({
       this.microbes = 0;
       this.floaters = 0;
       this.science = 0;
+      this.seeds = 0;
       this.steel = 0;
       this.titanium = 0;
       this.heat = 0;
@@ -148,6 +150,10 @@ export default Vue.extend({
         return toSaveUnits;
       };
 
+      if (megacreditBalance > 0 && this.canUseSeeds()) {
+        this.seeds = deductUnits(this.playerinput.seeds, 5);
+      }
+
       if (megacreditBalance > 0 && this.canUseMicrobes()) {
         this.microbes = deductUnits(this.playerinput.microbes, 2);
       }
@@ -185,6 +191,7 @@ export default Vue.extend({
         this.floaters -= saveOverSpendingUnits(this.floaters, 3);
         this.microbes -= saveOverSpendingUnits(this.microbes, 2);
         this.science -= saveOverSpendingUnits(this.science, 1);
+        this.seeds -= saveOverSpendingUnits(this.seeds, 5);
         this.megaCredits -= saveOverSpendingUnits(this.megaCredits, 1);
       }
     },
@@ -234,6 +241,19 @@ export default Vue.extend({
       }
       return false;
     },
+    canUseSeeds() {
+      // FYI Seed Resources are limited to the Soylent Seedling Systems corp card, which allows spending its
+      // resources for plant cards and the standard greenery project.
+      if (this.card !== undefined && (this.playerinput.seeds ?? 0) > 0) {
+        if (this.tags.includes(Tags.PLANT)) {
+          return true;
+        }
+        if (this.card.name === CardName.GREENERY_STANDARD_PROJECT) {
+          return true;
+        }
+      }
+      return false;
+    },
     cardChanged() {
       this.card = this.getCard();
       this.cost = this.card.calculatedCost || 0;
@@ -267,6 +287,7 @@ export default Vue.extend({
         microbes: this.microbes,
         floaters: this.floaters,
         science: this.science,
+        seeds: this.seeds,
       };
       let totalSpent = 0;
       for (const target of unit) {
@@ -386,6 +407,14 @@ export default Vue.extend({
       <input class="form-input form-inline payments_input" v-model.number="science" />
       <Button type="plus" @click="addValue('science', 1)" />
       <Button type="max" @click="setMaxValue('science')" title="MAX" />
+    </div>
+
+    <div class="payments_type input-group" v-if="canUseSeeds()">
+      <i class="resource_icon resource_icon--seeds payments_type_icon" :title="$t('Pay by Seeds')"></i>
+      <Button type="minus" @click="reduceValue('seeds', 1)" />
+      <input class="form-input form-inline payments_input" v-model.number="seeds" />
+      <Button type="plus" @click="addValue('seeds', 1)" />
+      <Button type="max" @click="setMaxValue('seeds')" title="MAX" />
     </div>
 
     <div class="payments_type input-group">

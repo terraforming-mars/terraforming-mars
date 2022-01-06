@@ -7,5 +7,6 @@ export interface HowToPay {
     microbes: number;
     floaters: number;
     science: number;
+    seeds: number;
 }
 

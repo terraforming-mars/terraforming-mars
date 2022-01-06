@@ -1385,6 +1385,10 @@ export class Player implements ISerializable<SerializedPlayer> {
     return card.tags.includes(Tags.MOON);
   }
 
+  private canUseSeeds(card: ICard): boolean {
+    return card.tags.includes(Tags.PLANT) || card.name === CardName.GREENERY_STANDARD_PROJECT;
+  }
+
   private getMcTradeCost(): number {
     return MC_TRADE_COST - this.colonyTradeDiscount;
   }
@@ -1451,6 +1455,10 @@ export class Player implements ISerializable<SerializedPlayer> {
       totalToPay += howToPay.science;
     }
 
+    if (howToPay.seeds ?? 0 > 0) {
+      totalToPay += howToPay.seeds * 5;
+    }
+
     if (howToPay.megaCredits > this.megaCredits) {
       throw new Error('Do not have enough M€');
     }
@@ -1496,6 +1504,13 @@ export class Player implements ISerializable<SerializedPlayer> {
       0;
   }
 
+  public getSpendableSeedResources(): number {
+    if (this.isCorporation(CardName.SOYLENT_SEEDLING_SYSTEMS)) {
+      return this.corporationCard?.resourceCount ?? 0;
+    }
+    return 0;
+  }
+
   public playCard(selectedCard: IProjectCard, howToPay?: HowToPay, addToPlayedCards: boolean = true): undefined {
     // Pay for card
     if (howToPay !== undefined) {
@@ -1515,6 +1530,10 @@ export class Player implements ISerializable<SerializedPlayer> {
 
         if (playedCard.name === CardName.LUNA_ARCHIVES) {
           this.removeResourceFrom(playedCard, howToPay.science);
+        }
+
+        if (this.corporationCard?.name === CardName.SOYLENT_SEEDLING_SYSTEMS) {
+          this.removeResourceFrom(this.corporationCard, howToPay.seeds);
         }
       }
     }
@@ -1895,6 +1914,7 @@ export class Player implements ISerializable<SerializedPlayer> {
         floaters: this.canUseFloaters(card),
         microbes: this.canUseMicrobes(card),
         science: this.canUseScience(card),
+        seeds: this.canUseSeeds(card),
         reserveUnits: MoonExpansion.adjustedReserveCosts(this, card),
         tr: card.tr,
       });
@@ -1923,6 +1943,7 @@ export class Player implements ISerializable<SerializedPlayer> {
     floaters?: boolean,
     microbes?: boolean,
     science?: boolean,
+    seeds?: boolean,
     reserveUnits?: Units,
     tr?: TRSource,
   }) {
@@ -1936,6 +1957,7 @@ export class Player implements ISerializable<SerializedPlayer> {
     const canUseFloaters: boolean = options?.floaters ?? false;
     const canUseMicrobes: boolean = options?.microbes ?? false;
     const canUseScience: boolean = options?.science ?? false;
+    const canUseSeeds: boolean = options?.seeds ?? false;
 
     const redsCost = TurmoilHandler.computeTerraformRatingBump(this, options?.tr) * REDS_RULING_POLICY_COST;
 
@@ -1955,7 +1977,8 @@ export class Player implements ISerializable<SerializedPlayer> {
       (canUseTitanium ? (this.titanium - reserveUnits.titanium) * this.getTitaniumValue() : 0) +
       (canUseFloaters ? this.getFloatersCanSpend() * 3 : 0) +
       (canUseMicrobes ? this.getMicrobesCanSpend() * 2 : 0) +
-      (canUseScience ? this.getSpendableScienceResources() : 0);
+      (canUseScience ? this.getSpendableScienceResources() : 0) +
+      (canUseSeeds ? this.getSpendableSeedResources() * 5 : 0);
   }
 
   private getStandardProjects(): Array<StandardProjectCard> {

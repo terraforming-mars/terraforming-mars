@@ -74,7 +74,7 @@ export class ColoniesHandler {
 
     const selectColony = new SelectColony('Select colony tile for trade', 'trade', openColonies, (colony: Colony) => {
       if (selected === undefined) {
-        throw new Error('???');
+        throw new Error(`Unexpected condition: no trade funding source selected when trading with ${colony.name}.`);
       }
       selected.trade(colony);
       return undefined;

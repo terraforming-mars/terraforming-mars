@@ -9,9 +9,8 @@ import {OrOptions} from '../../../src/inputs/OrOptions';
 import {SelectCard} from '../../../src/inputs/SelectCard';
 import {SelectColony} from '../../../src/inputs/SelectColony';
 import {TestPlayer} from '../../TestPlayer';
-import {getTestPlayer, newTestGame} from '../../TestGame';
-import {TestingUtils} from '../../TestingUtils';
 import {AndOptions} from '../../../src/inputs/AndOptions';
+import {newTestGame, getTestPlayer} from '../../TestGame';
 
 describe('TitanFloatingLaunchPad', function() {
   let card : TitanFloatingLaunchPad; let player : TestPlayer; let game : Game;
@@ -104,17 +103,19 @@ describe('TitanFloatingLaunchPad', function() {
     expect(getTradeAction()).is.undefined;
 
     card.resourceCount = 1;
-    const tradeAction = TestingUtils.cast(getTradeAction(), AndOptions);
+    const tradeAction = getTradeAction();
+    expect(tradeAction).instanceOf(AndOptions);
 
-    const payAction = TestingUtils.cast(tradeAction.options[0], OrOptions);
+    const payAction = (tradeAction as AndOptions).options[0];
+    expect(payAction).instanceOf(OrOptions);
     expect(payAction.title).eq('Pay trade fee');
     expect(payAction.options).has.length(1);
 
-    const floaterOption = payAction.options[0];
+    const floaterOption = (payAction as OrOptions).options[0];
     expect(floaterOption.title).to.match(/Pay 1 Floater/);
 
     floaterOption.cb();
-    tradeAction.options[1].cb(luna);
+    (tradeAction as AndOptions).options[1].cb(luna);
 
     expect(card.resourceCount).eq(0);
     expect(player.megaCredits).eq(2);

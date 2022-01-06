@@ -100,15 +100,6 @@
               </template>
             </CreateGameToggle>
 
-            <CreateGameToggle v-model="promoCardsOption" title="Promos" class="expansion-button">
-              <template #prepend>
-                <i class="create-game-expansion-icon expansion-icon-promo" />
-              </template>
-              <template #append>
-                <Tooltip link="https://github.com/bafolts/terraforming-mars/wiki/Variants#promo-cards" />
-              </template>
-            </CreateGameToggle>
-
             <CreateGameToggle v-model="communityCardsOption" title="Community" class="expansion-button">
               <template #prepend>
                 <i class="create-game-expansion-icon expansion-icon-community" />
@@ -118,7 +109,7 @@
               </template>
             </CreateGameToggle>
 
-            <CreateGameToggle v-model="moonExpansion" title="The Moon" >
+            <CreateGameToggle v-model="moonExpansion" title="The Moon" class="expansion-button">
               <template #prepend>
                 <i class="create-game-expansion-icon expansion-icon-themoon" />
               </template>
@@ -146,14 +137,6 @@
                   <Tooltip link="https://www.notion.so/Political-Agendas-8c6b0b018a884692be29b3ef44b340a9" />
                 </template>
               </CreateGameToggle>
-
-
-              <CreateGameToggle v-model="moonStandardProjectVariant" title="Standard Project Variant">
-                <template #append>
-                  <Tooltip link="https://github.com/bafolts/terraforming-mars/wiki/Variants#moon-standard-project-variant" />
-                </template>
-              </CreateGameToggle>
-
 
               <div class="create-game-page-column-row" v-if="isPoliticalAgendasExtensionEnabled">
                 <div>
@@ -198,10 +181,10 @@
             <h4 v-i18n>Board</h4>
 
             <template v-for="boardName in boards">
-              <div v-bind:key="boardName">
-                <div v-if="boardName==='arabia terra'" class="create-game-subsection-label" v-i18n>Fan-made</div>
-                <input type="radio" :value="boardName" name="board" v-model="board" :id="boardName+'-checkbox'">
-                <label :for="boardName+'-checkbox'" class="expansion-button">
+              <div v-bind:key="boardName" class="expansion-button">
+                <div v-if="boardName === 'arabia terra'" class="create-game-subsection-label" v-i18n>Fan-made</div>
+                <input type="radio" :value="boardName" name="board" v-model="board" :id="boardName + '-checkbox'">
+                <label :for="boardName + '-checkbox'" class="expansion-button">
                   <span :class="getBoardColorClass(boardName)">&#x2B22;</span><span class="capitalized" v-i18n>{{ boardName }}</span>
                 </label>
               </div>

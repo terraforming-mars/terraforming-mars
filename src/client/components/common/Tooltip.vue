@@ -11,3 +11,13 @@ export default Vue.extend({
   },
 });
 </script>
+
+
+<style lang="less">
+.tooltip {
+  color: black;
+  &:hover {
+    text-decoration: none;
+  }
+}
+</style>

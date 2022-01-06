@@ -16,8 +16,7 @@ pid
 .eslintcache
 tsconfig.tsbuildinfo
 assets/locales
+.idea
 
 # Local Packages
 node_modules/
-
-.idea

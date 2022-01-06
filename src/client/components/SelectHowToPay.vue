@@ -292,7 +292,7 @@ export default Vue.extend({
       <Button type="max" @click="setMaxValue('seeds')" title="MAX" />
     </div>
 
-    <div class="payments_type input-group">
+    <div class="payments_type input-group" v-if="playerinput.canUseSeeds">
       <i class="resource_icon resource_icon--megacredits payments_type_icon" :title="$t('Pay by Megacredits')"></i>
       <Button type="minus" @click="reduceValue('megaCredits', 1)" />
       <input class="form-input form-inline payments_input" v-model.number="megaCredits" />

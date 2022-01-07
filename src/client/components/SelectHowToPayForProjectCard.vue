@@ -429,7 +429,7 @@ export default Vue.extend({
     </div>
 
     <div v-if="showsave === true" class="payments_save">
-      <Button size="big" @click="saveData" :title="playerinput.buttonLabel" />
+      <Button size="big" @click="saveData" :title="playerinput.buttonLabel" data-test="save"/>
     </div>
   </section>
 </div>

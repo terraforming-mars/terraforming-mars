@@ -140,8 +140,61 @@ describe('SelectHowToPayForProjectCard', () => {
     expect(saveResponse).deep.eq(howToPay({floaters: 2, megaCredits: 4}));
   });
 
+  it('Paying for Stratospheric Birds without floaters', async () => {
+    const wrapper = setupCardForPurchase(
+      CardName.STRATOSPHERIC_BIRDS, 12, {
+        megaCredits: 12,
+      },
+      {});
+
+    const tester = new PaymentTester(wrapper);
+    await tester.nextTick();
+
+
+    tester.clickSave();
+    expect(saveResponse).deep.eq(howToPay({megaCredits: 12}));
+  });
+
+  it('Paying for Stratospheric Birds with Dirigibles', async () => {
+    const wrapper = setupCardForPurchase(
+      CardName.STRATOSPHERIC_BIRDS, 12, {
+        megaCredits: 9,
+      },
+      {floaters: 3});
+
+    const tester = new PaymentTester(wrapper);
+    await tester.nextTick();
+
+    tester.clickSave();
+    expect(saveResponse).deep.eq(howToPay({floaters: 1, megaCredits: 9}));
+
+    tester.clickMax('floaters');
+
+    tester.clickSave();
+    expect(saveResponse).deep.eq(howToPay({floaters: 2, megaCredits: 6}));
+  });
+
+  it('Paying for other card with Dirigibles uses all floaters', async () => {
+    const wrapper = setupCardForPurchase(
+      CardName.FORCED_PRECIPITATION, 12, {
+        megaCredits: 9,
+      },
+      {floaters: 3});
+
+    const tester = new PaymentTester(wrapper);
+    await tester.nextTick();
+
+    tester.clickSave();
+    expect(saveResponse).deep.eq(howToPay({floaters: 1, megaCredits: 9}));
+
+    tester.clickMax('floaters');
+
+    tester.clickSave();
+    expect(saveResponse).deep.eq(howToPay({floaters: 3, megaCredits: 3}));
+  });
+
   it('using steel', async () => {
-    // Regoplastic will cost 10. Player has 7M€ and 4 steels.
+    // Rego Plastics will cost 10. Player has 7M€ and 4 steels.
     // They should spend at least enough to pay for the card, that is 6 M€ and 2 steel.
     const wrapper = setupCardForPurchase(
       CardName.REGO_PLASTICS, 10,
@@ -418,6 +471,8 @@ describe('SelectHowToPayForProjectCard', () => {
       cards: [{name: cardName, calculatedCost: cardCost}],
       steel: 0,
       titanium: 0,
+      steelValue: 2,
+      titaniumValue: 3,
     }, playerFields);
 
     const playerView: Partial<PlayerViewModel>= {

@@ -52,6 +52,8 @@ export default Vue.extend({
         return 'card-resource-venusian-habitat';
       case ResourceType.SPECIALIZED_ROBOT:
         return 'card-resource-specialized-robot';
+      case ResourceType.SEED:
+        return 'card-resource-seed';
       default:
         return '';
       }

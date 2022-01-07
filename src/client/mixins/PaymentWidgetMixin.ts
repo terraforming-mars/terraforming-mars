@@ -145,7 +145,7 @@ export const PaymentWidgetMixin = {
         currentValue++;
       }
     },
-    getAmount(target: Unit) {
+    getAmount(target: Unit): number {
       let amount: number | undefined = undefined;
       const model = this.asModel();
       switch (target) {
@@ -165,7 +165,7 @@ export const PaymentWidgetMixin = {
       };
 
       if (amount === undefined) {
-        throw new Error(`unable to find amountHave for ${target}`);
+        return 0;
       }
 
       if (target === 'floaters' && this.isStratosphericBirdsEdgeCase()) {

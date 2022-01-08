@@ -1383,6 +1383,10 @@ export class Player implements ISerializable<SerializedPlayer> {
     return card.tags.includes(Tags.MOON);
   }
 
+  private canUseSeeds(card: ICard): boolean {
+    return card.tags.includes(Tags.PLANT) || card.name === CardName.GREENERY_STANDARD_PROJECT;
+  }
+
   private playPreludeCard(): PlayerInput {
     return new SelectCard(
       'Select prelude card to play',

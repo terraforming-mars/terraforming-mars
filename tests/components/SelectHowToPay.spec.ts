@@ -114,6 +114,14 @@ describe('SelectHowToPay', () => {
     const tester = new PaymentTester(wrapper);
     await tester.nextTick();
 
+    // Using this as a chance to test that other components aren't visible.
+    tester.expectIsAvailable('steel', false);
+    tester.expectIsAvailable('titanium', true);
+    tester.expectIsAvailable('heat', true);
+    tester.expectIsAvailable('megaCredits', true);
+    tester.expectIsAvailable('science', false);
+    tester.expectIsAvailable('seeds', false);
+
     tester.expectValue('titanium', 2);
     tester.expectValue('heat', 0);
     tester.expectValue('megaCredits', 2);
@@ -128,6 +136,7 @@ describe('SelectHowToPay', () => {
     const tester = new PaymentTester(wrapper);
     await tester.nextTick();
 
+    tester.expectIsAvailable('seeds', false);
     tester.expectValue('titanium', 0);
     tester.expectValue('steel', 0);
     tester.expectValue('heat', 0);

@@ -1,5 +1,5 @@
 <template>
-    <tr  :class="getRowClass(type)">
+    <tr :class="getRowClass(type)">
       <td v-for="idx in range" :key="idx" :class="getClass(idx)">
         <Rewards :type="type" v-if="idx <= rewards.spaces.length && rewards.spaces[idx] !== undefined" :rewards="rewards.spaces[idx]" :gameOptions="gameOptions" />
       </td>
@@ -39,33 +39,23 @@ export default Vue.extend({
   },
   methods: {
     getClass(idx: number): String {
-      if (this.type==="middle") {
+      if (this.type === 'middle') {
         if (idx === this.val) {
           return `step-highlight track-tag-${this.trackName}`;
-        }
-        else {
-          if (this.hasReward(this.trackName,idx)) return 'step-reward';
+        } else {
+          if (this.hasReward(idx)) return 'step-reward';
           else return 'step-empty';
         }
-      }
-      else return "";
+      } else return '';
     },
     getRowClass(type: string): String {
-      if (type==="middle") {
-        return 'middle-row'
-      }
-      else return "";
+      if (type==='middle') {
+        return 'middle-row';
+      } else return '';
     },
-      hasReward(trackName: String, idx: number): Boolean {
-        const venus = [3,5,8,11,14,17];
-        const earth = [3,6,9,12,16,19,22];
-        const mars = [2,5,8,11,14,17];
-        const jovian = [2,5,8,11,14];
-        if (trackName === "venus" && venus.includes(idx)) return true;
-        if (trackName === "earth" && earth.includes(idx)) return true;
-        if (trackName === "mars" && mars.includes(idx)) return true;
-        if (trackName === "jovian" && jovian.includes(idx)) return true;
-        return false;
+    hasReward(idx: number): Boolean {
+      const space = this.rewards.spaces[idx];
+      return space !== undefined && space.everyone.length + space.risingPlayer.length + space.mostTags.length > 0;
     },
   },
   computed: {

@@ -235,7 +235,7 @@ export class TagCardRequirement extends CardRequirement {
 
 export class ProductionCardRequirement extends CardRequirement {
   constructor(public resource: Resources, amount: number, options?: Options) {
-    super(RequirementType.RESOURCE_TYPES, amount, options);
+    super(RequirementType.PRODUCTION, amount, options);
   }
   protected parseType(): string {
     return `${firstLetterUpperCase(this.resource)} production`;

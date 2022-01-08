@@ -224,6 +224,9 @@
     <template v-else-if="title ===  CardName.MARS_DIRECT">
       <div class="card-mars-direct-logo"></div>
     </template>
+    <template v-else-if="title ===  CardName.AMBIENT">
+      <div class="card-ambient-logo"></div>
+    </template>
     <template v-else-if="title ===  CardName.SOYLENT_SEEDLING_SYSTEMS">
       <div class="card-soylent-logo"></div>
     </template>

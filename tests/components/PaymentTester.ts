@@ -32,6 +32,12 @@ export class PaymentTester {
     await this.nextTick();
   };
 
+  public async clickSave() {
+    const button = this.wrapper.find('[data-test=save]');
+    await button.trigger('click');
+    await this.nextTick();
+  };
+
   public getValue(type: Unit) {
     const textBox = this.wrapper.find(PaymentTester.selector(type) + ' ~ input').element as HTMLInputElement;
     return textBox.value;

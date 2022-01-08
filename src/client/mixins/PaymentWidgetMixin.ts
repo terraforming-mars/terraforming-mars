@@ -3,7 +3,6 @@ import {CardName} from '@/CardName';
 import {CardModel} from '@/models/CardModel';
 import {PlayerInputModel} from '@/models/PlayerInputModel';
 import {PlayerViewModel} from '@/models/PlayerModel';
-import {ResourceType} from '@/ResourceType';
 import {Tags} from '@/cards/Tags';
 import {Units} from '@/Units';
 
@@ -145,7 +144,7 @@ export const PaymentWidgetMixin = {
         currentValue++;
       }
     },
-    getAmount(target: Unit) {
+    getAmount(target: Unit): number {
       let amount: number | undefined = undefined;
       const model = this.asModel();
       switch (target) {
@@ -165,21 +164,22 @@ export const PaymentWidgetMixin = {
       };
 
       if (amount === undefined) {
-        throw new Error(`unable to find amountHave for ${target}`);
+        return 0;
       }
 
-      if (target === 'floaters' && this.isStratosphericBirdsEdgeCase()) {
-        amount--;
+      // Stratospheric Birds requires discarding one floater from any card.
+      // That the card being paid for by the client shows that there's already a spare floater around, and
+      // that the server has decided there's enough money to play it.
+      //
+      // The only floaters that can be used for payment are those on Dirigibles.
+      // If you don't have Dirigibles but are still paying for S. Birds,
+      // then amount, below would be -1, so the Math.max makes sure it's zero.
+
+      // BTW, this could be managed by some derivative of reserveUnits that took extended resources into account.
+      if (target === 'floaters' && this.asModel().$data.card?.name === CardName.STRATOSPHERIC_BIRDS) {
+        amount = Math.max(amount - 1, 0);
       }
       return amount;
-    },
-    isStratosphericBirdsEdgeCase(): boolean {
-      if (this.asModel().$data.card?.name === CardName.STRATOSPHERIC_BIRDS) {
-        const playedCards: Array<CardModel> = this.asModel().playerView.thisPlayer.playedCards;
-        const cardsWithFloaters = playedCards.filter((card) => card.resourceType === ResourceType.FLOATER && card.resources);
-        return cardsWithFloaters.length === 1;
-      }
-      return false;
     },
   },
 };

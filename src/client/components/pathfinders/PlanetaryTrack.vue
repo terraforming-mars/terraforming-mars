@@ -12,6 +12,15 @@ import Rewards from '@/client/components/pathfinders/Rewards.vue';
 import {range} from '@/utils/utils';
 import {PlanetaryTrack as Track} from '@/pathfinders/PlanetaryTrack';
 import {GameOptionsModel} from '@/models/GameOptionsModel';
+
+const transitions = new Map([
+  ['venus', 15],
+  ['earth', 17],
+  ['mars', 18],
+  ['jovian', 18],
+  ['moon', 10],
+]);
+
 export default Vue.extend({
   name: 'PlanetaryTrack',
   props: {
@@ -40,11 +49,13 @@ export default Vue.extend({
   methods: {
     getClass(idx: number): String {
       if (this.type === 'middle') {
+        const colorClass = (transitions.get(this.trackName) ?? 30) > idx ? 'shadow-step' : 'light-step';
+        console.log(this.trackName, transitions.get(this.trackName), idx, colorClass);
         if (idx === this.val) {
           return `step-highlight track-tag-${this.trackName}`;
         } else {
-          if (this.hasReward(idx)) return 'step-reward';
-          else return 'step-empty';
+          const stepClass = this.hasReward(idx) ? 'step-reward' : 'step-empty';
+          return `${stepClass} ${colorClass}`;
         }
       } else return '';
     },

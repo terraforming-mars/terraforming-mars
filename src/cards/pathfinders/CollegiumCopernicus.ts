@@ -76,7 +76,7 @@ export class CollegiumCopernicus extends Card implements CorporationCard, IActio
       player,
       () => new SelectColony('Select colony tile to trade with for free', 'Select', ColoniesHandler.tradeableColonies(game), (colony) => {
         this.resourceCount -= tradeCost(player);
-        game.log('${0} spent ${1} to trade with ${2}', (b) => b.player(player).number(tradeCost(player)).colony(colony));
+        game.log('${0} spent ${1} data to trade with ${2}', (b) => b.player(player).number(tradeCost(player)).colony(colony));
         colony.trade(player);
         return undefined;
       }),

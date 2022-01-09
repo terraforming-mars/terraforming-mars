@@ -32,10 +32,9 @@ export class CardRequirement {
     }
   }
 
+  private static withPlural: Array<string> = [RequirementType.OCEANS, RequirementType.FLOATERS, RequirementType.GREENERIES, RequirementType.CITIES, RequirementType.COLONIES, RequirementType.RESOURCE_TYPES, RequirementType.PARTY_LEADERS];
   protected parseType(): string {
-    const withPlural: Array<string> = [RequirementType.OCEANS, RequirementType.FLOATERS, RequirementType.GREENERIES, RequirementType.CITIES, RequirementType.COLONIES, RequirementType.RESOURCE_TYPES, RequirementType.PARTY_LEADERS];
-
-    if (this.amount > 1 && withPlural.includes(this.type)) {
+    if (this.amount > 1 && CardRequirement.withPlural.includes(this.type)) {
       return this.getTypePlural();
     }
 
@@ -235,7 +234,7 @@ export class TagCardRequirement extends CardRequirement {
 
 export class ProductionCardRequirement extends CardRequirement {
   constructor(public resource: Resources, amount: number, options?: Options) {
-    super(RequirementType.RESOURCE_TYPES, amount, options);
+    super(RequirementType.PRODUCTION, amount, options);
   }
   protected parseType(): string {
     return `${firstLetterUpperCase(this.resource)} production`;

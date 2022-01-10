@@ -35,7 +35,7 @@ export class ColoniesHandler {
 
   public static coloniesTradeAction(player: Player) {
     if (player.game.gameOptions.coloniesExtension) {
-      const openColonies = player.game.colonies.filter((colony) => colony.isActive && colony.visitor === undefined);
+      const openColonies = this.tradeableColonies(player.game);
       if (openColonies.length > 0 &&
         player.getFleetSize() > player.tradesThisGeneration) {
         return ColoniesHandler.tradeWithColony(player, openColonies);

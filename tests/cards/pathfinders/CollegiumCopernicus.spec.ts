@@ -9,6 +9,10 @@ import {Player} from '../../../src/Player';
 import {AndOptions} from '../../../src/inputs/AndOptions';
 import {TestingUtils} from '../../TestingUtils';
 import {newTestGame, getTestPlayer} from '../../TestGame';
+import {Enceladus} from '../../../src/colonies/Enceladus';
+import {Europa} from '../../../src/colonies/Europa';
+import {Io} from '../../../src/colonies/Io';
+import {Pluto} from '../../../src/colonies/Pluto';
 
 describe('CollegiumCopernicus', function() {
   let card: CollegiumCopernicus;
@@ -19,12 +23,21 @@ describe('CollegiumCopernicus', function() {
     card = new CollegiumCopernicus();
     game = newTestGame(2, {coloniesExtension: true, pathfindersExpansion: true});
     player = getTestPlayer(game, 0);
+    // Looks as though when Enceladus is first, the test fails. So removing flakiness by defining colonies.
+    game.colonies = [
+      new Europa(),
+      new Enceladus(),
+      new Io(),
+      new Luna(),
+      new Pluto(),
+    ];
   });
 
   it('canAct', () => {
     card.resourceCount = 2;
     game.colonies.forEach((colony) => colony.visitor = player.id);
     expect(card.canAct(player)).is.false;
+    // xcolonies (5) ['Callisto', 'Enceladus', 'Europa', 'Io', 'Titan']
 
     card.resourceCount = 2;
     game.colonies[0].visitor = undefined;
@@ -36,6 +49,7 @@ describe('CollegiumCopernicus', function() {
 
     card.resourceCount = 3;
     game.colonies[0].visitor = undefined;
+    console.log('xcolonies', game.colonies.map((c) => c.name));
     expect(card.canAct(player)).is.true;
   });
 

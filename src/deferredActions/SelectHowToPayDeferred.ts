@@ -12,10 +12,24 @@ export class SelectHowToPayDeferred implements DeferredAction {
         public options: SelectHowToPayDeferred.Options = {},
   ) {}
 
+  private mustPayWithMegacredits() {
+    if (this.player.canUseHeatAsMegaCredits && this.player.heat > 0) {
+      return false;
+    }
+    if (this.options.canUseSteel && this.player.steel > 0) {
+      return false;
+    }
+    if (this.options.canUseTitanium && this.player.titanium > 0) {
+      return false;
+    }
+    if (this.options.canUseSeeds && (this.player.corporationCard?.resourceCount ?? 0 > 0)) {
+      return false;
+    }
+    return true;
+  }
+
   public execute() {
-    if ((!this.player.canUseHeatAsMegaCredits || this.player.heat === 0) &&
-            (!this.options.canUseSteel || this.player.steel === 0) &&
-            (!this.options.canUseTitanium || this.player.titanium === 0)) {
+    if (this.mustPayWithMegacredits()) {
       this.player.deductResource(Resources.MEGACREDITS, this.amount);
       if (this.options.afterPay !== undefined) {
         this.options.afterPay();
@@ -28,12 +42,16 @@ export class SelectHowToPayDeferred implements DeferredAction {
       this.options.canUseSteel || false,
       this.options.canUseTitanium || false,
       this.player.canUseHeatAsMegaCredits,
+      this.options.canUseSeeds || false,
       this.amount,
       (howToPay: HowToPay) => {
         this.player.deductResource(Resources.STEEL, howToPay.steel);
         this.player.deductResource(Resources.TITANIUM, howToPay.titanium);
         this.player.deductResource(Resources.MEGACREDITS, howToPay.megaCredits);
         this.player.deductResource(Resources.HEAT, howToPay.heat);
+        if (howToPay.seeds > 0 && this.player.corporationCard !== undefined) {
+          this.player.removeResourceFrom(this.player.corporationCard, howToPay.seeds);
+        }
         if (this.options.afterPay !== undefined) {
           this.options.afterPay();
         }
@@ -47,6 +65,7 @@ export namespace SelectHowToPayDeferred {
   export interface Options {
     canUseSteel?: boolean;
     canUseTitanium?: boolean;
+    canUseSeeds?: boolean,
     title?: string;
     afterPay?: () => void;
   };

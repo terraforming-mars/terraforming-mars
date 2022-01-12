@@ -2,7 +2,7 @@
   <div class="card-requirement">
       <div class="card-item-container">
         <template v-if="requirement.isMax">max&nbsp;</template>
-        {{amount()}}{{suffix()}}
+        <span v-if="!isRepeated">{{amount()}}</span>{{suffix()}}
         <template v-if="requirement.type === RequirementType.REMOVED_PLANTS">
           <div class="card-special card-minus"></div>
           <div class="card-resource card-resource-plant red-outline"></div>
@@ -20,7 +20,9 @@
         </template>
         <CardParty v-else-if="requirement.type === RequirementType.PARTY" class="" :party="getParty()" size="req" />
         <template v-else>
-          <div :class="getComponentClasses()"></div>
+          <template v-for="num in repeats">
+            <div :class="getComponentClasses()" :key="num"></div>
+          </template>
         </template>
       </div>
   </div>
@@ -31,7 +33,7 @@
 import Vue from 'vue';
 import {CardRequirement, PartyCardRequirement, ProductionCardRequirement, /* ProductionCardRequirement,*/ TagCardRequirement} from '@/cards/CardRequirement';
 import {RequirementType} from '@/cards/RequirementType';
-import {generateClassString} from '@/utils/utils';
+import {generateClassString, range} from '@/utils/utils';
 import CardParty from '@/client/components/card/CardParty.vue';
 import {PartyName} from '@/turmoil/parties/PartyName';
 
@@ -156,6 +158,24 @@ export default Vue.extend({
   computed: {
     RequirementType() {
       return RequirementType;
+    },
+    isRepeated(): boolean {
+      switch (this.requirement.type) {
+      case RequirementType.OXYGEN:
+      case RequirementType.TEMPERATURE:
+      case RequirementType.VENUS:
+      case RequirementType.CHAIRMAN:
+      case RequirementType.PARTY:
+      case RequirementType.REMOVED_PLANTS:
+        return false;
+      }
+      return this.requirement.amount < 4;
+    },
+    repeats(): Array<number> {
+      if (!this.isRepeated || this.requirement.amount === undefined) {
+        return [1];
+      }
+      return range(this.requirement.amount);
     },
   },
 });

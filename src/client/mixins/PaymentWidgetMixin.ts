@@ -5,6 +5,7 @@ import {PlayerInputModel} from '@/models/PlayerInputModel';
 import {PlayerViewModel} from '@/models/PlayerModel';
 import {Tags} from '@/cards/Tags';
 import {Units} from '@/Units';
+import {SEED_VALUE} from '@/constants';
 
 export interface SelectHowToPayModel {
     card?: CardModel;
@@ -70,7 +71,7 @@ export const PaymentWidgetMixin = {
       case 'floaters':
         return 3;
       case 'seeds':
-        return 5;
+        return SEED_VALUE;
       default:
         return 1;
       }

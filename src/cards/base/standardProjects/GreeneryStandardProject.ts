@@ -21,7 +21,7 @@ export class GreeneryStandardProject extends StandardProjectCard {
     });
   }
 
-  public canPayWith(player: Player) {
+  public override canPayWith(player: Player) {
     if (player.isCorporation(CardName.SOYLENT_SEEDLING_SYSTEMS)) {
       return {seeds: true};
     } else {

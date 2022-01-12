@@ -227,6 +227,9 @@
     <template v-else-if="title ===  CardName.AMBIENT">
       <div class="card-ambient-logo"></div>
     </template>
+    <template v-else-if="title ===  CardName.SOYLENT_SEEDLING_SYSTEMS">
+      <div class="card-soylent-logo"></div>
+    </template>
     <template v-else-if="title ===  CardName.CURIOSITY_II">
       <div class="card-curiosity-ii-logo">Curiosity II</div>
     </template>

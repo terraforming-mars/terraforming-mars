@@ -65,7 +65,7 @@ export abstract class StandardProjectCard extends Card implements IActionCard, I
       });
   }
 
-  public canPayWith(_player: Player): {steel?: boolean, titanium?: boolean, tr?: TRSource} {
+  public canPayWith(_player: Player): {steel?: boolean, titanium?: boolean, seeds?: boolean, tr?: TRSource} {
     return {};
   }
 
@@ -86,6 +86,7 @@ export abstract class StandardProjectCard extends Card implements IActionCard, I
       {
         canUseSteel: canPayWith.steel,
         canUseTitanium: canPayWith.titanium,
+        canUseSeeds: canPayWith.seeds,
         title: `Select how to pay for ${this.suffixFreeCardName(this.name)} standard project`,
         afterPay: () => {
           this.projectPlayed(player);

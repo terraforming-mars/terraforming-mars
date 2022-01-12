@@ -1442,7 +1442,7 @@ export class Player implements ISerializable<SerializedPlayer> {
     }
 
     if (howToPay.seeds ?? 0 > 0) {
-      totalToPay += howToPay.seeds * 5;
+      totalToPay += howToPay.seeds * constants.SEED_VALUE;
     }
 
     if (howToPay.megaCredits > this.megaCredits) {
@@ -1882,7 +1882,7 @@ export class Player implements ISerializable<SerializedPlayer> {
       (canUseFloaters ? this.getFloatersCanSpend() * 3 : 0) +
       (canUseMicrobes ? this.getMicrobesCanSpend() * 2 : 0) +
       (canUseScience ? this.getSpendableScienceResources() : 0) +
-      (canUseSeeds ? this.getSpendableSeedResources() * 5 : 0);
+      (canUseSeeds ? this.getSpendableSeedResources() * constants.SEED_VALUE : 0);
   }
 
   private getStandardProjects(): Array<StandardProjectCard> {

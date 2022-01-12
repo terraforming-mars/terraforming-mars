@@ -407,6 +407,11 @@ class Builder {
     return this;
   }
 
+  public seed(): Builder {
+    this._appendToRow(new CardRenderItem(CardRenderItemType.SEED, 1));
+    return this;
+  }
+
   public specialTile(options?: ItemOptions) {
     this._appendToRow(new CardRenderItem(CardRenderItemType.EMPTY_TILE_SPECIAL, 1, options));
     return this;

@@ -41,6 +41,9 @@ export const MAXIMUM_COLONY_RATE = 8;
 export const MAXIMUM_MINING_RATE = 8;
 export const MAXIMUM_LOGISTICS_RATE = 8;
 
+// Pathfinders
+export const SEED_VALUE = 5;
+
 // Escape Velocity
 export const BONUS_SECONDS_PER_ACTION = 2;
 export const DEFAULT_ESCAPE_VELOCITY_THRESHOLD = 30;

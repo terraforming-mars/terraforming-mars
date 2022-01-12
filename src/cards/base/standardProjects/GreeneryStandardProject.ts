@@ -21,6 +21,14 @@ export class GreeneryStandardProject extends StandardProjectCard {
     });
   }
 
+  public override canPayWith(player: Player) {
+    if (player.isCorporation(CardName.SOYLENT_SEEDLING_SYSTEMS)) {
+      return {seeds: true};
+    } else {
+      return {};
+    }
+  }
+
   public canAct(player: Player): boolean {
     if (player.game.board.getAvailableSpacesForGreenery(player).length === 0) return false;
     return super.canAct(player);

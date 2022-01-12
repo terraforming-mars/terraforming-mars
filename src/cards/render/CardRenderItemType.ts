@@ -66,5 +66,6 @@ export enum CardRenderItemType {
   VENUSIAN_HABITAT = 'venusian-habitat',
   SPECIALIZED_ROBOT = 'specialized-robot',
   PLANETARY_TRACK = 'plantary-track',
+  SEED = 'seed',
   GLOBAL_EVENT = 'global-event',
 }

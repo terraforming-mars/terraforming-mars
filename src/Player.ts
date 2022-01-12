@@ -237,8 +237,8 @@ export class Player implements ISerializable<SerializedPlayer> {
     return this.terraformRating;
   }
 
-  public decreaseTerraformRating() {
-    this.terraformRating--;
+  public decreaseTerraformRating(opts: {log?: boolean} = {}) {
+    this.decreaseTerraformRatingSteps(1, opts);
   }
 
   public increaseTerraformRating(opts: {log?: boolean} = {}) {
@@ -275,8 +275,11 @@ export class Player implements ISerializable<SerializedPlayer> {
     }
   }
 
-  public decreaseTerraformRatingSteps(value: number) {
-    this.terraformRating -= value;
+  public decreaseTerraformRatingSteps(steps: number, opts: {log?: boolean} = {}) {
+    this.terraformRating -= steps;
+    if (opts.log === true) {
+      this.game.log('${0} lost ${1} TR', (b) => b.player(this).number(steps));
+    }
   }
 
   public setTerraformRating(value: number) {

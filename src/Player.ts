@@ -147,7 +147,7 @@ export class Player implements ISerializable<SerializedPlayer> {
   // Custom cards
   // Leavitt Station.
   public scienceTagCount: number = 0;
-  // PoliticalAgendas Scientists P4
+  // PoliticalAgendas Scientists P41
   public hasTurmoilScienceTagBonus: boolean = false;
   // Ecoline
   public plantsNeededForGreenery: number = 8;
@@ -2259,8 +2259,7 @@ export class Player implements ISerializable<SerializedPlayer> {
     const player = new Player(d.name, d.color, d.beginner, Number(d.handicap), d.id);
     const cardFinder = new CardFinder();
 
-    // TODO: Remove ?? operator after 01-01-2022
-    player.actionsTakenThisGame = d.actionsTakenThisGame ?? 0;
+    player.actionsTakenThisGame = d.actionsTakenThisGame;
     player.actionsTakenThisRound = d.actionsTakenThisRound;
     player.canUseHeatAsMegaCredits = d.canUseHeatAsMegaCredits;
     player.cardCost = d.cardCost;
@@ -2273,6 +2272,7 @@ export class Player implements ISerializable<SerializedPlayer> {
     player.energyProduction = d.energyProduction;
     player.fleetSize = d.fleetSize;
     player.hasIncreasedTerraformRatingThisGeneration = d.hasIncreasedTerraformRatingThisGeneration;
+    player.hasTurmoilScienceTagBonus = d.hasTurmoilScienceTagBonus;
     player.heat = d.heat;
     player.heatProduction = d.heatProduction;
     player.megaCreditProduction = d.megaCreditProduction;
@@ -2329,25 +2329,12 @@ export class Player implements ISerializable<SerializedPlayer> {
       player.corporationCard = undefined;
     }
 
-    // Rebuild dealt corporation array
     player.dealtCorporationCards = cardFinder.corporationCardsFromJSON(d.dealtCorporationCards);
-
-    // Rebuild dealt prelude array
     player.dealtPreludeCards = cardFinder.cardsFromJSON(d.dealtPreludeCards);
-
-    // Rebuild dealt cards array
     player.dealtProjectCards = cardFinder.cardsFromJSON(d.dealtProjectCards);
-
-    // Rebuild each cards in hand
     player.cardsInHand = cardFinder.cardsFromJSON(d.cardsInHand);
-
-    // Rebuild each prelude in hand
     player.preludeCardsInHand = cardFinder.cardsFromJSON(d.preludeCardsInHand);
-
-    // Rebuild each played card
     player.playedCards = d.playedCards.map((element: SerializedCard) => deserializeProjectCard(element, cardFinder));
-
-    // Rebuild each drafted cards
     player.draftedCards = cardFinder.cardsFromJSON(d.draftedCards);
 
     player.timer = Timer.deserialize(d.timer);

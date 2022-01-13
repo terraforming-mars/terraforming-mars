@@ -58,7 +58,7 @@ describe('LunaEcumenopolis', () => {
     player.titanium = 2;
     expect(player.getPlayableCards()).does.include(card);
   });
-  
+
   it('Cannot play: not enough adjacent colony tiles', () => {
     player.titanium = 2;
     moonData.moon.getSpace('m09').tile = {tileType: TileType.MOON_COLONY};

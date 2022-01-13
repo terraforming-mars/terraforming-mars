@@ -2,14 +2,28 @@
   <div class="card-requirement">
       <div class="card-item-container">
         <template v-if="requirement.isMax">max&nbsp;</template>
-        {{amount()}}{{suffix()}}
-        <div :class="getComponentClasses()"></div>
+        <span v-if="!isRepeated">{{amount()}}</span>{{suffix()}}
         <template v-if="requirement.type === RequirementType.REMOVED_PLANTS">
           <div class="card-special card-minus"></div>
           <div class="card-resource card-resource-plant red-outline"></div>
         </template>
+        <template v-if="requirement.type === RequirementType.PRODUCTION">
+          <div class="card-production-box card-production-box--req">
+            <div class="card-production-box-row">
+              <div class="card-production-box-row-item">
+                <div class="card-item-container">
+                  <div :class="getProductionClass()"></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </template>
         <CardParty v-else-if="requirement.type === RequirementType.PARTY" class="" :party="getParty()" size="req" />
-        {{getText()}}
+        <template v-else>
+          <template v-for="num in repeats">
+            <div :class="getComponentClasses()" :key="num"></div>
+          </template>
+        </template>
       </div>
   </div>
 </template>
@@ -17,9 +31,9 @@
 <script lang="ts">
 
 import Vue from 'vue';
-import {CardRequirement, PartyCardRequirement, /* ProductionCardRequirement,*/ TagCardRequirement} from '@/cards/CardRequirement';
+import {CardRequirement, PartyCardRequirement, ProductionCardRequirement, /* ProductionCardRequirement,*/ TagCardRequirement} from '@/cards/CardRequirement';
 import {RequirementType} from '@/cards/RequirementType';
-import {generateClassString} from '@/utils/utils';
+import {generateClassString, range} from '@/utils/utils';
 import CardParty from '@/client/components/card/CardParty.vue';
 import {PartyName} from '@/turmoil/parties/PartyName';
 
@@ -91,23 +105,20 @@ export default Vue.extend({
       case RequirementType.RESOURCE_TYPES:
         return ['card-resource', 'card-resource-wild'];
       case RequirementType.GREENERIES:
-        return ['card-tile', 'greenery-tile--M', 'greenery-tile-small'];
+        return ['card-tile', 'greenery-tile--M', 'tile--req'];
       case RequirementType.CITIES:
-        return ['card-tile', 'city-tile--S'];
+        return ['card-tile', 'city-tile--M', 'tile--req'];
       case RequirementType.COLONIES:
-        return ['card-resource-colony', 'card-resource-colony--S'];
+        return ['card-resource-colony', 'card-resource-colony--req'];
       case RequirementType.FLOATERS:
         return ['card-resource-tag--S', 'card-tag-floater'];
       case RequirementType.CHAIRMAN:
-        return ['card-chairman-red'];
+        return ['card-chairman--req'];
       case RequirementType.PARTY_LEADERS:
-        break;
+        return ['card-party-leader--req'];
       case RequirementType.TAG:
         const tagRequirement = this.requirement as TagCardRequirement;
         return ['card-resource-tag--S', 'card-tag-' + tagRequirement.tag];
-      case RequirementType.PRODUCTION:
-      case RequirementType.REMOVED_PLANTS:
-        break;
       case RequirementType.COLONY_RATE:
         return ['card-colony-rate', 'card-colony-rate--req'];
       case RequirementType.MINING_RATE:
@@ -115,20 +126,16 @@ export default Vue.extend({
       case RequirementType.LOGISTIC_RATE:
         return ['card-logistics-rate', 'card-logistics-rate--req'];
       case RequirementType.COLONY_TILES:
-        return ['card-tile-lunar-colony--S'];
+        return ['card-tile-lunar-colony--S', 'tile--req'];
       case RequirementType.MINING_TILES:
-        return ['card-tile-lunar-mine--S'];
+        return ['card-tile-lunar-mine--S', 'tile--req'];
       case RequirementType.ROAD_TILES:
-        return ['card-tile-lunar-road--S'];
+        return ['card-tile-lunar-road--S', 'tile--req'];
+      case RequirementType.PRODUCTION:
+      case RequirementType.REMOVED_PLANTS:
+        break;
       }
       return [];
-    },
-    getText(): string {
-      switch (this.requirement.type) {
-      case RequirementType.RESOURCE_TYPES:
-        return 'production';
-      }
-      return '';
     },
     getParty(): PartyName {
       if (this.requirement.type === RequirementType.PARTY) {
@@ -138,10 +145,37 @@ export default Vue.extend({
         return PartyName.GREENS;
       }
     },
+    getProductionClass(): string {
+      if (this.requirement.type === RequirementType.PRODUCTION) {
+        const resource = (this.requirement as ProductionCardRequirement).resource;
+        return `card-resource card-resource-${resource}`;
+      } else {
+        // Doesn't matter what this value is, as it is ignored.
+        return '';
+      }
+    },
   },
   computed: {
     RequirementType() {
       return RequirementType;
+    },
+    isRepeated(): boolean {
+      switch (this.requirement.type) {
+      case RequirementType.OXYGEN:
+      case RequirementType.TEMPERATURE:
+      case RequirementType.VENUS:
+      case RequirementType.CHAIRMAN:
+      case RequirementType.PARTY:
+      case RequirementType.REMOVED_PLANTS:
+        return false;
+      }
+      return this.requirement.amount < 4;
+    },
+    repeats(): Array<number> {
+      if (!this.isRepeated || this.requirement.amount === undefined) {
+        return [1];
+      }
+      return range(this.requirement.amount);
     },
   },
 });

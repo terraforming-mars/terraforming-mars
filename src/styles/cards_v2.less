@@ -1242,6 +1242,13 @@
                 width: 36px !important;
                 background-size: 36px !important;
             }
+            .card-resource-colony--req {
+                height: 23px;
+                width: 26px;
+                background-size: 26px 23px;
+                margin-left: 3px;
+                margin-right: 3px;
+            }
             /*turmoil special*/
             .card-influence {
                 display: inline-block;
@@ -1479,6 +1486,10 @@
                     }
                 }
             }
+            .card-production-box--req {
+                transform: scale(0.8);
+                padding: 0px;
+            }
             .card-rows {
                 display: flex;
                 flex-flow: column;
@@ -1710,15 +1721,22 @@
             .city-tile--S {
                 background-image: url(./assets/tiles/city.png);
                 filter: brightness(0.8) drop-shadow(0px 1px 1px rgba(0, 0, 0, 0.5));
-                width: 30px;
-                height: 32px;
-                background-size: 30px 32px;
+                width: 21px;
+                height: 23px;
+                background-size: 21px 23px;
             }
             .greenery-tile--M {
                 background-image: url(./assets/tiles/greenery_no_O2.png);
                 background-size: 40px;
                 width: 40px;
                 height: 47px;
+            }
+            .tile--req {
+                width: 21px;
+                height: 23px;
+                background-size: 21px 23px;
+                margin-left: 4px;
+                margin-right: 4px;
             }
             .greenery-tile-oxygen--M {
                 background-image: url(./assets/tiles/greenery.png);
@@ -1800,6 +1818,22 @@
                 background-position: 3px;
                 border-radius: 15px 15px 2px 2px;
             }
+            .card-party-leader--req {
+                display: inline-block;
+                background-image: url(./assets/misc/delegate.png);
+                width: 18px;
+                height: 22px;
+                background-size: 18px 22px;
+                vertical-align: middle;
+                filter: drop-shadow(0px 0px 1px black);
+                background-color: #222;
+                padding: 1px;
+                background-repeat: no-repeat;
+                background-position: 1px;
+                border-radius: 11px 11px 0px 0px;
+                margin-left: 2px;
+                margin-right: 2px;
+            }
             .card-chairman {
                 display: inline-block;
                 background-image: url(./assets/misc/chairman.png);
@@ -1813,6 +1847,22 @@
                 background-repeat: no-repeat;
                 background-position: 3px;
                 border-radius: 15px 15px 2px 2px;
+            }
+            .card-chairman--req {
+                display: inline-block;
+                background-image: url(./assets/misc/chairman.png);
+                width: 18px;
+                height: 22px;
+                background-size: 18px 22px;
+                vertical-align: middle;
+                filter: drop-shadow(0px 0px 1px black);
+                background-color: #222;
+                padding: 1px;
+                background-repeat: no-repeat;
+                background-position: 1px;
+                border-radius: 11px 11px 0px 0px;
+                margin-left: 2px;
+                margin-right: 2px;
             }
             .card-chairman-red {
                 filter: drop-shadow(1px 0px 1px #c33) drop-shadow(-1px 0px 1px #c33) drop-shadow(0px 1px 1px #c33) drop-shadow(0px -1px 1px #c33) !important;

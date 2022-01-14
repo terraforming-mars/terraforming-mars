@@ -7,7 +7,7 @@ import {Phase} from '../src/Phase';
 import {IParty} from '../src/turmoil/parties/IParty';
 import {Turmoil} from '../src/turmoil/Turmoil';
 import {TurmoilPolicy} from '../src/turmoil/TurmoilPolicy';
-import {LogMessage} from '../src/LogMessage';
+import {LogMessage} from '../src/common/logs/LogMessage';
 import {Log} from '../src/Log';
 import {PlayerInput} from '../src/PlayerInput';
 import {DeferredAction} from '../src/deferredActions/DeferredAction';

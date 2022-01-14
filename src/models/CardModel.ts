@@ -1,4 +1,4 @@
-import {Message} from '../Message';
+import {Message} from '../common/logs/Message';
 import {CardType} from '../cards/CardType';
 import {ResourceType} from '../ResourceType';
 import {Units} from '../Units';

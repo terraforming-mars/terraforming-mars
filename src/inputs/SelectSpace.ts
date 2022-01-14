@@ -1,5 +1,5 @@
 
-import {Message} from '../Message';
+import {Message} from '../common/logs/Message';
 import {OrOptions} from './OrOptions';
 import {PlayerInput} from '../PlayerInput';
 import {ISpace} from '../boards/ISpace';

@@ -39,7 +39,7 @@ export class RobinHaulings extends Card implements CorporationCard {
     });
   }
 
-  public resourceCount = 0;
+  public override resourceCount = 0;
 
   public play() {
     return undefined;

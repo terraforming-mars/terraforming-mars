@@ -44,7 +44,7 @@ export class RedCity extends Card {
       return !board.getAdjacentSpaces(space).some((neighbor) => neighbor.tile?.tileType === TileType.GREENERY);
     });
   }
-  public canPlay(player: Player) {
+  public override canPlay(player: Player) {
     return player.canAdjustProduction(this.productionBox) && this.availableRedCitySpaces(player).length > 0;
   }
 
@@ -56,7 +56,7 @@ export class RedCity extends Card {
     });
   }
 
-  public getVictoryPoints(player: Player): number {
+  public override getVictoryPoints(player: Player): number {
     const space = player.game.board.getSpaceByTileCard(this.name);
     if (space === undefined) {
       return 0;

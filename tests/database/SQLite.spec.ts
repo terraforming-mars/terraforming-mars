@@ -1,5 +1,6 @@
 import {expect} from 'chai';
-import {Game, GameId} from '../../src/Game';
+import {Game} from '../../src/Game';
+import {GameId} from '../../src/common/Types';
 import {TestPlayers} from '../TestPlayers';
 import {IN_MEMORY_SQLITE_PATH, SQLite} from '../../src/database/SQLite';
 import {Database} from '../../src/database/Database';

@@ -1,6 +1,6 @@
 import {Database} from './Database';
-import {Game, GameId, SpectatorId} from '../Game';
-import {PlayerId} from '../Player';
+import {Game} from '../Game';
+import {PlayerId, GameId, SpectatorId} from '../common/Types';
 import {IGameLoader} from './IGameLoader';
 import {GameIds} from './GameIds';
 import {MultiMap} from 'mnemonist';

@@ -1,8 +1,8 @@
 import * as http from 'http';
 import {Handler} from './Handler';
 import {IContext} from './IHandler';
-import {GameId, SpectatorId} from '../Game';
-import {PlayerId} from '../Player';
+import {GameId, SpectatorId} from '../common/Types';
+import {PlayerId} from '../common/Types';
 
 
 export class ApiGames extends Handler {

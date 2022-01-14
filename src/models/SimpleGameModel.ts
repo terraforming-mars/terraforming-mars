@@ -1,8 +1,7 @@
 
 import {Color} from '../Color';
-import {GameId, SpectatorId} from '../Game';
+import {PlayerId, GameId, SpectatorId} from '../common/Types';
 import {Phase} from '../Phase';
-import {PlayerId} from '../Player';
 import {GameOptionsModel} from './GameOptionsModel';
 
 export interface SimpleGameModel {

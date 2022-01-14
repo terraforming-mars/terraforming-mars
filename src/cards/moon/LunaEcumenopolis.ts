@@ -89,9 +89,10 @@ export class LunaEcumenopolis extends MoonCard {
       if (nextToTwoColonies(first) === true) {
         // Remember it.
         firstSpaceId = first.id;
-        // Now go through all the land spaces again (actually as an optimization, just continue with the space after.)
-        for (let y = x + 1; y < len; y++) {
+        // Now go through all the land spaces again
+        for (let y = 0; y < len; y++) {
           const second = spaces[y];
+          if (second.id === firstSpaceId) continue;
           // Now if it's next to two colonies, it includes the first colony you placed. That's what firstSpaceId is for.
           if (nextToTwoColonies(second) === true) {
             return true;

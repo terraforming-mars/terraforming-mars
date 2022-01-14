@@ -37,7 +37,7 @@ import {ALL_CARD_MANIFESTS} from '@/cards/AllCards';
 import {GameModule} from '@/GameModule';
 import {CardRequirements} from '@/cards/CardRequirements';
 import {PreferencesManager} from '@/client/utils/PreferencesManager';
-import {ResourceType} from '@/ResourceType';
+import {ResourceType} from '@/common/ResourceType';
 
 export default Vue.extend({
   name: 'Card',

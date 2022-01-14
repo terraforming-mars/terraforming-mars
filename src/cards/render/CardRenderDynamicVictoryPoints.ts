@@ -1,7 +1,7 @@
 import {CardRenderItemType} from './CardRenderItemType';
 import {CardRenderItem} from './CardRenderItem';
 import {Size} from './Size';
-import {ResourceType} from '../../ResourceType';
+import {ResourceType} from '../../common/ResourceType';
 import {Tags} from '../../cards/Tags';
 
 const RESOURCE_TO_ITEM_TYPE = new Map([

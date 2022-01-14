@@ -8,7 +8,7 @@ import {IActionCard, VictoryPoints} from '../ICard';
 import {Resources} from '../../Resources';
 import {Tags} from '../Tags';
 import {CardRequirements} from '../CardRequirements';
-import {ResourceType} from '../../ResourceType';
+import {ResourceType} from '../../common/ResourceType';
 
 export class Anthozoa extends Card implements IProjectCard, IActionCard {
   constructor() {

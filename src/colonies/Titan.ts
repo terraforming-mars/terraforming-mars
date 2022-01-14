@@ -1,7 +1,7 @@
 import {Colony} from './Colony';
 import {ColonyName} from './ColonyName';
 import {ColonyBenefit} from './ColonyBenefit';
-import {ResourceType} from '../ResourceType';
+import {ResourceType} from '../common/ResourceType';
 
 export class Titan extends Colony {
     public name = ColonyName.TITAN;

@@ -6,7 +6,7 @@ import {CardName} from '../../CardName';
 import {CardRenderer} from '../render/CardRenderer';
 import {Tags} from '../Tags';
 import {Resources} from '../../Resources';
-import {ResourceType} from '../../ResourceType';
+import {ResourceType} from '../../common/ResourceType';
 import {all} from '../Options';
 import {ICard} from '../ICard';
 import {SelectCard} from '../../inputs/SelectCard';

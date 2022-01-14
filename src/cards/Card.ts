@@ -2,7 +2,7 @@ import {ICardMetadata} from './ICardMetadata';
 import {CardName} from '../CardName';
 import {CardType} from './CardType';
 import {IAdjacencyBonus} from '../ares/IAdjacencyBonus';
-import {ResourceType} from '../ResourceType';
+import {ResourceType} from '../common/ResourceType';
 import {Tags} from './Tags';
 import {Player} from '../Player';
 import {Units} from '../Units';

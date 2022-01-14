@@ -4,7 +4,7 @@ import {getTestPlayer, newTestGame} from '../TestGame';
 import {PathfindersExpansion} from '../../src/pathfinders/PathfindersExpansion';
 import {Tags} from '../../src/cards/Tags';
 import {TestingUtils} from '../TestingUtils';
-import {ResourceType} from '../../src/ResourceType';
+import {ResourceType} from '../../src/common/ResourceType';
 import {Game} from '../../src/Game';
 import {IPathfindersData} from '../../src/pathfinders/IPathfindersData';
 import {CardName} from '../../src/CardName';

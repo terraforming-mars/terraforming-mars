@@ -5,7 +5,7 @@ import {SelectCard} from '../inputs/SelectCard';
 import {ISpace} from '../boards/ISpace';
 import {Player} from '../Player';
 import {Resources} from '../Resources';
-import {ResourceType} from '../ResourceType';
+import {ResourceType} from '../common/ResourceType';
 import {SpaceBonus} from '../SpaceBonus';
 import {OCEAN_UPGRADE_TILES, TileType} from '../TileType';
 import {ITile} from '../ITile';

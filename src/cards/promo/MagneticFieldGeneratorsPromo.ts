@@ -6,7 +6,7 @@ import {CardType} from '../CardType';
 import {Resources} from '../../Resources';
 import {CardName} from '../../CardName';
 import {SelectSpace} from '../../inputs/SelectSpace';
-import {TileType} from '../../TileType';
+import {TileType} from '../../common/TileType';
 import {ISpace} from '../../boards/ISpace';
 import {CardRenderer} from '../render/CardRenderer';
 import {Units} from '../../Units';

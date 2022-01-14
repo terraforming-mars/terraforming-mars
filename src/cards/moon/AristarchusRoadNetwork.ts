@@ -4,7 +4,7 @@ import {CardType} from '../CardType';
 import {PlaceMoonRoadTile} from '../../moon/PlaceMoonRoadTile';
 import {Tags} from '../Tags';
 import {CardRenderer} from '../render/CardRenderer';
-import {TileType} from '../../TileType';
+import {TileType} from '../../common/TileType';
 import {Units} from '../../Units';
 import {MoonCard} from './MoonCard';
 import {AltSecondaryTag} from '../render/CardRenderItem';

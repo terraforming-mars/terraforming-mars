@@ -7,7 +7,7 @@ import {CardRenderer} from '../render/CardRenderer';
 import {MoonExpansion} from '../../moon/MoonExpansion';
 import {MoonSpaces} from '../../moon/MoonSpaces';
 import {Units} from '../../Units';
-import {TileType} from '../../TileType';
+import {TileType} from '../../common/TileType';
 import {IMoonCard} from './IMoonCard';
 import {MoonCard} from './MoonCard';
 import {AltSecondaryTag} from '../render/CardRenderItem';

@@ -3,7 +3,7 @@ import {Player} from '../../Player';
 import {CardType} from '../CardType';
 import {Tags} from '../Tags';
 import {MoonExpansion} from '../../moon/MoonExpansion';
-import {TileType} from '../../TileType';
+import {TileType} from '../../common/TileType';
 import {CardRenderDynamicVictoryPoints} from '../render/CardRenderDynamicVictoryPoints';
 import {CardRenderer} from '../render/CardRenderer';
 import {Units} from '../../Units';

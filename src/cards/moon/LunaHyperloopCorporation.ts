@@ -2,7 +2,7 @@ import {CardName} from '../../CardName';
 import {MoonExpansion} from '../../moon/MoonExpansion';
 import {Player} from '../../Player';
 import {Resources} from '../../Resources';
-import {TileType} from '../../TileType';
+import {TileType} from '../../common/TileType';
 import {Card} from '../Card';
 import {CardType} from '../CardType';
 import {CorporationCard} from '../corporation/CorporationCard';

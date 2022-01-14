@@ -5,7 +5,7 @@ import {Gyropolis} from '../../../src/cards/venusNext/Gyropolis';
 import {Game} from '../../../src/Game';
 import {SelectSpace} from '../../../src/inputs/SelectSpace';
 import {Resources} from '../../../src/Resources';
-import {TileType} from '../../../src/TileType';
+import {TileType} from '../../../src/common/TileType';
 import {TestPlayers} from '../../TestPlayers';
 import {TestPlayer} from '../../TestPlayer';
 import {EarthEmbassy} from '../../../src/cards/moon/EarthEmbassy';

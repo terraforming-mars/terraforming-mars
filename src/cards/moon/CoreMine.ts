@@ -7,7 +7,7 @@ import {PlaceMoonMineTile} from '../../moon/PlaceMoonMineTile';
 import {IProjectCard} from '../IProjectCard';
 import {AltSecondaryTag} from '../render/CardRenderItem';
 import {Units} from '../../Units';
-import {TileType} from '../../TileType';
+import {TileType} from '../../common/TileType';
 
 export class CoreMine extends PreludeCard implements IProjectCard {
   constructor() {

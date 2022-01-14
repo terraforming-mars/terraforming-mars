@@ -1,7 +1,7 @@
 import {CardName} from '../../CardName';
 import {SpaceBonus} from '../../SpaceBonus';
 import {LavaFlows} from '../base/LavaFlows';
-import {TileType} from '../../TileType';
+import {TileType} from '../../common/TileType';
 import {CardRenderer} from '../render/CardRenderer';
 
 export class LavaFlowsAres extends LavaFlows {

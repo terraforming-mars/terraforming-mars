@@ -8,7 +8,7 @@ import {MoonExpansion} from '../../moon/MoonExpansion';
 import {PlaceMoonRoadTile} from '../../moon/PlaceMoonRoadTile';
 import {Units} from '../../Units';
 import {SpaceType} from '../../SpaceType';
-import {TileType} from '../../TileType';
+import {TileType} from '../../common/TileType';
 import {MoonCard} from './MoonCard';
 import {AltSecondaryTag} from '../render/CardRenderItem';
 

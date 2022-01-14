@@ -7,7 +7,7 @@ import {Resources} from '../../Resources';
 import {ResourceType} from '../../ResourceType';
 import {SpaceBonus} from '../../SpaceBonus';
 import {SpaceType} from '../../SpaceType';
-import {TileType} from '../../TileType';
+import {TileType} from '../../common/TileType';
 import {CardType} from '../CardType';
 import {IProjectCard} from '../IProjectCard';
 import {Tags} from '../Tags';

@@ -7,7 +7,7 @@ import {LunarSecurityStations} from '../../../src/cards/moon/LunarSecurityStatio
 import {expect} from 'chai';
 import {OrOptions} from '../../../src/inputs/OrOptions';
 import {HiredRaiders} from '../../../src/cards/base/HiredRaiders';
-import {TileType} from '../../../src/TileType';
+import {TileType} from '../../../src/common/TileType';
 import {TestPlayers} from '../../TestPlayers';
 
 const MOON_OPTIONS = TestingUtils.setCustomGameOptions({moonExpansion: true});

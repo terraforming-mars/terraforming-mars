@@ -6,7 +6,7 @@ import {CardRenderer} from '../render/CardRenderer';
 import {Units} from '../../Units';
 import {AltSecondaryTag} from '../render/CardRenderItem';
 import {MoonCard} from './MoonCard';
-import {TileType} from '../../TileType';
+import {TileType} from '../../common/TileType';
 import {MoonExpansion} from '../../moon/MoonExpansion';
 import {PlaceMoonColonyTile} from '../../moon/PlaceMoonColonyTile';
 import {DeferredAction} from '../../deferredActions/DeferredAction';

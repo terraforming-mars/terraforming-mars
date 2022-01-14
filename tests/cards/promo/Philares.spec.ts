@@ -3,7 +3,7 @@ import {Game} from '../../../src/Game';
 import {TestPlayers} from '../../TestPlayers';
 import {SpaceType} from '../../../src/SpaceType';
 import {EmptyBoard} from '../../ares/EmptyBoard';
-import {TileType} from '../../../src/TileType';
+import {TileType} from '../../../src/common/TileType';
 import {ISpace} from '../../../src/boards/ISpace';
 import {expect} from 'chai';
 import {Phase} from '../../../src/Phase';

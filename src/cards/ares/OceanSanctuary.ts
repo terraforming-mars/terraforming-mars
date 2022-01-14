@@ -6,7 +6,7 @@ import {ISpace} from '../../boards/ISpace';
 import {Player} from '../../Player';
 import {ResourceType} from '../../ResourceType';
 import {SpaceBonus} from '../../SpaceBonus';
-import {TileType} from '../../TileType';
+import {TileType} from '../../common/TileType';
 import {CardType} from '../CardType';
 import {IResourceCard} from '../ICard';
 import {Tags} from '../Tags';

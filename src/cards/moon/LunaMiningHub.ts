@@ -4,7 +4,7 @@ import {CardType} from '../CardType';
 import {Tags} from '../Tags';
 import {CardRequirements} from '../CardRequirements';
 import {CardRenderer} from '../render/CardRenderer';
-import {TileType} from '../../TileType';
+import {TileType} from '../../common/TileType';
 import {CardRenderDynamicVictoryPoints} from '../render/CardRenderDynamicVictoryPoints';
 import {MoonExpansion} from '../../moon/MoonExpansion';
 import {Units} from '../../Units';

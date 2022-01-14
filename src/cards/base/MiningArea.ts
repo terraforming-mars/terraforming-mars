@@ -1,5 +1,5 @@
 import {Player} from '../../Player';
-import {TileType} from '../../TileType';
+import {TileType} from '../../common/TileType';
 import {CardName} from '../../CardName';
 import {MiningCard} from './MiningCard';
 import {CardRenderer} from '../render/CardRenderer';

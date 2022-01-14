@@ -4,7 +4,7 @@ import {PartyName} from '../turmoil/parties/PartyName';
 import {Resources} from '../Resources';
 import {Player} from '../Player';
 import {ResourceType} from '../ResourceType';
-import {TileType} from '../TileType';
+import {TileType} from '../common/TileType';
 import {GlobalParameter} from '../GlobalParameter';
 import {MoonExpansion} from '../moon/MoonExpansion';
 import {Turmoil} from '../turmoil/Turmoil';

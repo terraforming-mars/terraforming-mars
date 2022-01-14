@@ -8,7 +8,7 @@ import {CardType} from '../CardType';
 import {CardRenderer} from '../render/CardRenderer';
 import {all} from '../Options';
 import {ISpace} from '../../boards/ISpace';
-import {TileType} from '../../TileType';
+import {TileType} from '../../common/TileType';
 import {GainResources} from '../../deferredActions/GainResources';
 import {Priority} from '../../deferredActions/DeferredAction';
 import {Size} from '../render/Size';

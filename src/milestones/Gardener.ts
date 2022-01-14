@@ -1,6 +1,6 @@
 import {IMilestone} from './IMilestone';
 import {Player} from '../Player';
-import {TileType} from '../TileType';
+import {TileType} from '../common/TileType';
 
 export class Gardener implements IMilestone {
     public name: string = 'Gardener';

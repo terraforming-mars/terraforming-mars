@@ -6,7 +6,7 @@ import {MoonExpansion} from '../../moon/MoonExpansion';
 import {PlaceMoonRoadTile} from '../../moon/PlaceMoonRoadTile';
 import {Units} from '../../Units';
 import {IMoonCard} from './IMoonCard';
-import {TileType} from '../../TileType';
+import {TileType} from '../../common/TileType';
 import {AltSecondaryTag} from '../render/CardRenderItem';
 
 export class MoonRoadStandardProject extends StandardProjectCard implements IMoonCard {

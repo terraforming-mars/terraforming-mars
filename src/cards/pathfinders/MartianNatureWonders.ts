@@ -9,7 +9,7 @@ import {SelectSpace} from '../../inputs/SelectSpace';
 import {ISpace} from '../../boards/ISpace';
 import {AddResourcesToCard} from '../../deferredActions/AddResourcesToCard';
 import {ResourceType} from '../../ResourceType';
-import {TileType} from '../../TileType';
+import {TileType} from '../../common/TileType';
 
 export class MartianNatureWonders extends Card implements IProjectCard {
   constructor() {

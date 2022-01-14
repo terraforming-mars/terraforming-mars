@@ -2,7 +2,7 @@ import {expect} from 'chai';
 import {DEFAULT_GAME_OPTIONS, Game} from '../../src/Game';
 import {ArabiaTerraBoard} from '../../src/boards/ArabiaTerraBoard';
 import {Player} from '../../src/Player';
-import {TileType} from '../../src/TileType';
+import {TileType} from '../../src/common/TileType';
 import {SpaceType} from '../../src/SpaceType';
 import {TestPlayers} from '../TestPlayers';
 import {Random} from '../../src/Random';

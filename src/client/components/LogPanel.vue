@@ -45,7 +45,7 @@ import Card from '@/client/components/card/Card.vue';
 import {CardFinder} from '@/CardFinder';
 import {ICard} from '@/cards/ICard';
 import {CardName} from '@/CardName';
-import {TileType} from '@/TileType';
+import {TileType} from '@/common/TileType';
 import {playerColorClass} from '@/utils/utils';
 import {Color} from '@/Color';
 import {SoundManager} from '@/client/utils/SoundManager';

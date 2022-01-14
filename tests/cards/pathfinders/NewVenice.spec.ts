@@ -2,7 +2,7 @@ import {Game} from '../../../src/Game';
 import {NewVenice} from '../../../src/cards/pathfinders/NewVenice';
 import {expect} from 'chai';
 import {Resources} from '../../../src/Resources';
-import {TileType} from '../../../src/TileType';
+import {TileType} from '../../../src/common/TileType';
 import {SpaceType} from '../../../src/SpaceType';
 import {TestPlayers} from '../../TestPlayers';
 import {Capital} from '../../../src/cards/base/Capital';

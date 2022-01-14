@@ -47,7 +47,7 @@ describe('LunaEcumenopolis', () => {
     expect(player.getPlayableCards()).does.not.include(card);
   });
 
-  it('can play when 1st placement enables 2nd placcement', () => {
+  it('can play when 1st placement enables 2nd placement', () => {
     player.cardsInHand = [card];
     player.megaCredits = card.cost;
 
@@ -55,6 +55,8 @@ describe('LunaEcumenopolis', () => {
     moon.getSpace('m18').tile = {tileType: TileType.MOON_COLONY};
     moon.getSpace('m19').tile = {tileType: TileType.MOON_COLONY};
 
+    // This test works because space 13 is the only available colony space, but after
+    // playing it, space 12 can take a colony.
     player.titanium = 2;
     expect(player.getPlayableCards()).does.include(card);
   });

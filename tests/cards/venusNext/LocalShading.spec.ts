@@ -2,7 +2,7 @@ import {expect} from 'chai';
 import {LocalShading} from '../../../src/cards/venusNext/LocalShading';
 import {OrOptions} from '../../../src/inputs/OrOptions';
 import {Player} from '../../../src/Player';
-import {Resources} from '../../../src/Resources';
+import {Resources} from '../../../src/common/Resources';
 import {TestPlayers} from '../../TestPlayers';
 
 describe('LocalShading', function() {

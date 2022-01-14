@@ -4,7 +4,7 @@ import {Player} from '../../Player';
 import {ISpace} from '../../boards/ISpace';
 import {SpaceBonus} from '../../SpaceBonus';
 import {TileType} from '../../TileType';
-import {Resources} from '../../Resources';
+import {Resources} from '../../common/Resources';
 import {ResourceType} from '../../ResourceType';
 import {AddResourcesToCard} from '../../deferredActions/AddResourcesToCard';
 import {GainResources} from '../../deferredActions/GainResources';

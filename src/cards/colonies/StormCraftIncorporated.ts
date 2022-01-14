@@ -12,7 +12,7 @@ import {Card} from '../Card';
 import {CardRenderer} from '../render/CardRenderer';
 import {Size} from '../render/Size';
 import {PlayerInput} from '../../PlayerInput';
-import {Resources} from '../../Resources';
+import {Resources} from '../../common/Resources';
 
 export class StormCraftIncorporated extends Card implements IActionCard, CorporationCard, IResourceCard {
   constructor() {

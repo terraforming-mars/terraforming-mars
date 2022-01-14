@@ -2,7 +2,7 @@ import {expect} from 'chai';
 import {ColonizerTrainingCamp} from '../../src/cards/base/ColonizerTrainingCamp';
 import {InventorsGuild} from '../../src/cards/base/InventorsGuild';
 import {Game} from '../../src/Game';
-import {Resources} from '../../src/Resources';
+import {Resources} from '../../src/common/Resources';
 import {SolarnetShutdown} from '../../src/turmoil/globalEvents/SolarnetShutdown';
 import {Kelvinists} from '../../src/turmoil/parties/Kelvinists';
 import {Turmoil} from '../../src/turmoil/Turmoil';

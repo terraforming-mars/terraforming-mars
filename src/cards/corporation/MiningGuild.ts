@@ -5,7 +5,7 @@ import {CorporationCard} from './CorporationCard';
 import {Phase} from '../../Phase';
 import {ISpace} from '../../boards/ISpace';
 import {SpaceBonus} from '../../SpaceBonus';
-import {Resources} from '../../Resources';
+import {Resources} from '../../common/Resources';
 import {CardName} from '../../CardName';
 import {CardType} from '../CardType';
 import {GainProduction} from '../../deferredActions/GainProduction';

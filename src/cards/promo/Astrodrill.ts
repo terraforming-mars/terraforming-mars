@@ -9,7 +9,7 @@ import {SelectOption} from '../../inputs/SelectOption';
 import {SelectCard} from '../../inputs/SelectCard';
 import {OrOptions} from '../../inputs/OrOptions';
 import {LogHelper} from '../../LogHelper';
-import {Resources} from '../../Resources';
+import {Resources} from '../../common/Resources';
 import {CardType} from '../CardType';
 import {CardRenderer} from '../render/CardRenderer';
 import {Size} from '../render/Size';

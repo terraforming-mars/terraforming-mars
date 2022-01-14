@@ -1,6 +1,6 @@
 import {expect} from 'chai';
 import {TerraformingContract} from '../../../src/cards/venusNext/TerraformingContract';
-import {Resources} from '../../../src/Resources';
+import {Resources} from '../../../src/common/Resources';
 import {TestPlayers} from '../../TestPlayers';
 
 describe('TerraformingContract', function() {

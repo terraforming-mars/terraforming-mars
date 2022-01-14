@@ -7,7 +7,7 @@ import {CardRenderer} from '../render/CardRenderer';
 import {Card} from '../Card';
 import {all} from '../Options';
 import {Board} from '../../boards/Board';
-import {Resources} from '../../Resources';
+import {Resources} from '../../common/Resources';
 
 export class OutdoorSports extends Card implements IProjectCard {
   constructor() {

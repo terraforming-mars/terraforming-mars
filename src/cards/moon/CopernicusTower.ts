@@ -4,7 +4,7 @@ import {CardType} from '../CardType';
 import {IProjectCard} from '../IProjectCard';
 import {Tags} from '../Tags';
 import {ResourceType} from '../../ResourceType';
-import {Resources} from '../../Resources';
+import {Resources} from '../../common/Resources';
 import {CardRenderer} from '../render/CardRenderer';
 import {CardRequirements} from '../CardRequirements';
 import {IActionCard} from '../ICard';

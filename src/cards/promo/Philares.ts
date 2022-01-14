@@ -12,7 +12,7 @@ import {DeferredAction, Priority} from '../../deferredActions/DeferredAction';
 import {CardRenderer} from '../render/CardRenderer';
 import {Size} from '../render/Size';
 import {BoardType} from '../../boards/BoardType';
-import {Resources} from '../../Resources';
+import {Resources} from '../../common/Resources';
 import {all} from '../Options';
 
 export class Philares extends Card implements CorporationCard {

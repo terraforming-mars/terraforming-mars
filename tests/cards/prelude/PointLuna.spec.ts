@@ -4,7 +4,7 @@ import {EarthCatapult} from '../../../src/cards/base/EarthCatapult';
 import {PointLuna} from '../../../src/cards/prelude/PointLuna';
 import {Game} from '../../../src/Game';
 import {Player} from '../../../src/Player';
-import {Resources} from '../../../src/Resources';
+import {Resources} from '../../../src/common/Resources';
 import {TestPlayers} from '../../TestPlayers';
 
 describe('PointLuna', function() {

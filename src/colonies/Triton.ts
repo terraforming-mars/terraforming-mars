@@ -1,7 +1,7 @@
 import {Colony} from './Colony';
 import {ColonyName} from './ColonyName';
 import {ColonyBenefit} from './ColonyBenefit';
-import {Resources} from '../Resources';
+import {Resources} from '../common/Resources';
 
 export class Triton extends Colony {
     public name = ColonyName.TRITON;

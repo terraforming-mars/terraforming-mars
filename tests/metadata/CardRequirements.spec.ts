@@ -1,6 +1,6 @@
 import {CardRequirements} from '../../src/cards/CardRequirements';
 import {Tags} from '../../src/cards/Tags';
-import {Resources} from '../../src/Resources';
+import {Resources} from '../../src/common/Resources';
 import {PartyName} from '../../src/turmoil/parties/PartyName';
 import {expect} from 'chai';
 

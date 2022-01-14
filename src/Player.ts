@@ -25,7 +25,7 @@ import {PharmacyUnion} from './cards/promo/PharmacyUnion';
 import {Phase} from './Phase';
 import {PlayerInput} from './PlayerInput';
 import {ResourceType} from './ResourceType';
-import {Resources} from './Resources';
+import {Resources} from './common/Resources';
 import {SelectAmount} from './inputs/SelectAmount';
 import {SelectCard} from './inputs/SelectCard';
 import {SellPatentsStandardProject} from './cards/base/standardProjects/SellPatentsStandardProject';

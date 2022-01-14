@@ -6,7 +6,7 @@ import {CardName} from '../../CardName';
 import {CardType} from '../CardType';
 import {IProjectCard} from '../IProjectCard';
 import {SelectCard} from '../../inputs/SelectCard';
-import {Resources} from '../../Resources';
+import {Resources} from '../../common/Resources';
 import {SelectHowToPayDeferred} from '../../deferredActions/SelectHowToPayDeferred';
 import {DeferredAction} from '../../deferredActions/DeferredAction';
 import {CardRenderer} from '../render/CardRenderer';

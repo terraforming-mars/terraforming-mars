@@ -5,7 +5,7 @@ import {IProjectCard} from '../IProjectCard';
 import {Tags} from '../Tags';
 import {MoonExpansion} from '../../moon/MoonExpansion';
 import {TileType} from '../../TileType';
-import {Resources} from '../../Resources';
+import {Resources} from '../../common/Resources';
 import {CardRenderer} from '../render/CardRenderer';
 import {CardRequirements} from '../CardRequirements';
 import {Card} from '../Card';

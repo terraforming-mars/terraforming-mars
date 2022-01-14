@@ -1,6 +1,6 @@
 import {expect} from 'chai';
 import {DomeFarming} from '../../../src/cards/prelude/DomeFarming';
-import {Resources} from '../../../src/Resources';
+import {Resources} from '../../../src/common/Resources';
 import {TestPlayers} from '../../TestPlayers';
 
 describe('DomeFarming', function() {

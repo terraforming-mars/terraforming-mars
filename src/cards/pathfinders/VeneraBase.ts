@@ -10,7 +10,7 @@ import {ResourceType} from '../../ResourceType';
 import {Tags} from '../Tags';
 import {CardRequirements} from '../CardRequirements';
 import {PartyName} from '../../turmoil/parties/PartyName';
-import {Resources} from '../../Resources';
+import {Resources} from '../../common/Resources';
 import {SpaceName} from '../../SpaceName';
 import {SpaceType} from '../../SpaceType';
 

@@ -2,7 +2,7 @@ import {IProjectCard} from '../IProjectCard';
 import {CardType} from '../CardType';
 import {Player} from '../../Player';
 import {CardName} from '../../CardName';
-import {Resources} from '../../Resources';
+import {Resources} from '../../common/Resources';
 import {ResourceType} from '../../ResourceType';
 import {AddResourcesToCard} from '../../deferredActions/AddResourcesToCard';
 import {CardRequirements} from '../CardRequirements';

@@ -5,7 +5,7 @@ import {CardType} from '../CardType';
 import {Player} from '../../Player';
 import {CardName} from '../../CardName';
 import {CardRenderer} from '../render/CardRenderer';
-import {Resources} from '../../Resources';
+import {Resources} from '../../common/Resources';
 import {CardRequirements} from '../CardRequirements';
 
 export class Harvest extends Card implements IProjectCard {

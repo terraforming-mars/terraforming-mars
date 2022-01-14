@@ -8,7 +8,7 @@ import {SelectOption} from '../../inputs/SelectOption';
 import {SelectSpace} from '../../inputs/SelectSpace';
 import {ISpace} from '../../boards/ISpace';
 import {CardName} from '../../CardName';
-import {Resources} from '../../Resources';
+import {Resources} from '../../common/Resources';
 import {MAX_OCEAN_TILES} from '../../constants';
 import {PlaceOceanTile} from '../../deferredActions/PlaceOceanTile';
 import {CardRenderer} from '../render/CardRenderer';

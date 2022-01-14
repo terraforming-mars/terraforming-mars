@@ -14,7 +14,7 @@ import {PlaceOceanTile} from '../deferredActions/PlaceOceanTile';
 import {PlanetaryTrack} from './PlanetaryTrack';
 import {PlanetaryTracks} from './PlanetaryTracks';
 import {Player} from '../Player';
-import {Resources} from '../Resources';
+import {Resources} from '../common/Resources';
 import {ResourceType} from '../ResourceType';
 import {Reward} from './Reward';
 import {SelectResourcesDeferred} from '../deferredActions/SelectResourcesDeferred';

@@ -2,7 +2,7 @@ import {expect} from 'chai';
 import {Luna} from '../../src/colonies/Luna';
 import {Triton} from '../../src/colonies/Triton';
 import {Game} from '../../src/Game';
-import {Resources} from '../../src/Resources';
+import {Resources} from '../../src/common/Resources';
 import {JovianTaxRights} from '../../src/turmoil/globalEvents/JovianTaxRights';
 import {Kelvinists} from '../../src/turmoil/parties/Kelvinists';
 import {Turmoil} from '../../src/turmoil/Turmoil';

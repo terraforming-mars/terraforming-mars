@@ -12,7 +12,7 @@ import {BoardName} from '../../src/boards/BoardName';
 import {ProcessorFactory} from '../../src/cards/moon/ProcessorFactory';
 import {SearchForLife} from '../../src/cards/base/SearchForLife';
 import {Decomposers} from '../../src/cards/base/Decomposers';
-import {Resources} from '../../src/Resources';
+import {Resources} from '../../src/common/Resources';
 import {LandClaim} from '../../src/cards/base/LandClaim';
 import {SelectSpace} from '../../src/inputs/SelectSpace';
 

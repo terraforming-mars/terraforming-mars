@@ -7,7 +7,7 @@ import {Game} from '../../../src/Game';
 import {TestPlayer} from '../../TestPlayer';
 import {Colony} from '../../../src/colonies/Colony';
 import {ColonyBenefit} from '../../../src/colonies/ColonyBenefit';
-import {Resources} from '../../../src/Resources';
+import {Resources} from '../../../src/common/Resources';
 import {TestingUtils} from '../../TestingUtils';
 import {Units} from '../../../src/Units';
 

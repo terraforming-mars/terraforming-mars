@@ -7,7 +7,7 @@ import {ResourceType} from '../../ResourceType';
 import {OrOptions} from '../../inputs/OrOptions';
 import {SelectOption} from '../../inputs/SelectOption';
 import {IResourceCard} from '../ICard';
-import {Resources} from '../../Resources';
+import {Resources} from '../../common/Resources';
 import {AddResourcesToCard} from '../../deferredActions/AddResourcesToCard';
 import {CardRequirements} from '../CardRequirements';
 import {Card} from '../Card';

@@ -4,7 +4,7 @@ import {CardType} from '../CardType';
 import {Tags} from '../Tags';
 import {ResourceType} from '../../ResourceType';
 import {StealResources} from '../../deferredActions/StealResources';
-import {Resources} from '../../Resources';
+import {Resources} from '../../common/Resources';
 import {CardRenderer} from '../render/CardRenderer';
 import {Units} from '../../Units';
 import {MoonCard} from './MoonCard';

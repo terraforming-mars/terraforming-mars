@@ -2,7 +2,7 @@ import {CardName} from '../../CardName';
 import {Player} from '../../Player';
 import {CardType} from '../CardType';
 import {Tags} from '../Tags';
-import {Resources} from '../../Resources';
+import {Resources} from '../../common/Resources';
 import {CardRenderer} from '../render/CardRenderer';
 import {Card} from '../Card';
 

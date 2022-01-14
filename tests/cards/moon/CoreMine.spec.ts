@@ -6,7 +6,7 @@ import {TestingUtils} from '../../TestingUtils';
 import {TestPlayers} from '../../TestPlayers';
 import {CoreMine} from '../../../src/cards/moon/CoreMine';
 import {expect} from 'chai';
-import {Resources} from '../../../src/Resources';
+import {Resources} from '../../../src/common/Resources';
 import {PlaceMoonMineTile} from '../../../src/moon/PlaceMoonMineTile';
 
 const MOON_OPTIONS = TestingUtils.setCustomGameOptions({moonExpansion: true});

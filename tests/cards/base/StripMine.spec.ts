@@ -3,7 +3,7 @@ import {StripMine} from '../../../src/cards/base/StripMine';
 import {Game} from '../../../src/Game';
 import {Phase} from '../../../src/Phase';
 import {Player} from '../../../src/Player';
-import {Resources} from '../../../src/Resources';
+import {Resources} from '../../../src/common/Resources';
 import {Reds} from '../../../src/turmoil/parties/Reds';
 import {PoliticalAgendas} from '../../../src/turmoil/PoliticalAgendas';
 import {Turmoil} from '../../../src/turmoil/Turmoil';

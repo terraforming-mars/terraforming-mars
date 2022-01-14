@@ -3,7 +3,7 @@ import {CardType} from '../cards/CardType';
 import {ResourceType} from '../ResourceType';
 import {Units} from '../Units';
 import {CardName} from '../CardName';
-import {Resources} from '../Resources';
+import {Resources} from '../common/Resources';
 import {CardDiscount} from '../cards/ICard';
 import {Tags} from '../cards/Tags';
 

@@ -3,7 +3,7 @@ import {SpaceRaceToMars} from '../../src/turmoil/globalEvents/SpaceRaceToMars';
 import {Kelvinists} from '../../src/turmoil/parties/Kelvinists';
 import {getTestPlayer, newTestGame} from '../TestGame';
 import {TileType} from '../../src/TileType';
-import {Resources} from '../../src/Resources';
+import {Resources} from '../../src/common/Resources';
 import {Game} from '../../src/Game';
 import {TestPlayer} from '../TestPlayer';
 import {Turmoil} from '../../src/turmoil/Turmoil';

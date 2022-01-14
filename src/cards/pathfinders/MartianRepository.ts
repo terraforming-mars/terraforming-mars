@@ -7,7 +7,7 @@ import {CardName} from '../../CardName';
 import {CardRenderer} from '../render/CardRenderer';
 import {Tags} from '../Tags';
 import {ResourceType} from '../../ResourceType';
-import {Resources} from '../../Resources';
+import {Resources} from '../../common/Resources';
 import {Units} from '../../Units';
 import {ICard} from '../ICard';
 import {played} from '../Options';

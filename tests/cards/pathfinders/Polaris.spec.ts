@@ -1,7 +1,7 @@
 import {expect} from 'chai';
 import {Polaris} from '../../../src/cards/pathfinders/Polaris';
 import {Game} from '../../../src/Game';
-import {Resources} from '../../../src/Resources';
+import {Resources} from '../../../src/common/Resources';
 import {TestingUtils} from '../../TestingUtils';
 import {TestPlayer} from '../../TestPlayer';
 import {newTestGame, getTestPlayer} from '../../TestGame';

@@ -3,7 +3,7 @@ import {Europa} from '../../src/colonies/Europa';
 import {PlaceOceanTile} from '../../src/deferredActions/PlaceOceanTile';
 import {Game} from '../../src/Game';
 import {Player} from '../../src/Player';
-import {Resources} from '../../src/Resources';
+import {Resources} from '../../src/common/Resources';
 import {TestPlayers} from '../TestPlayers';
 
 describe('Europa', function() {

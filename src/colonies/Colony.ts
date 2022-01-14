@@ -13,7 +13,7 @@ import {PlaceOceanTile} from '../deferredActions/PlaceOceanTile';
 import {Player, PlayerId} from '../Player';
 import {PlayerInput} from '../PlayerInput';
 import {ResourceType} from '../ResourceType';
-import {Resources} from '../Resources';
+import {Resources} from '../common/Resources';
 import {ScienceTagCard} from '../cards/community/ScienceTagCard';
 import {SelectColony} from '../inputs/SelectColony';
 import {SelectPlayer} from '../inputs/SelectPlayer';

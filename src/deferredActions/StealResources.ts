@@ -1,5 +1,5 @@
 import {Player} from '../Player';
-import {Resources} from '../Resources';
+import {Resources} from '../common/Resources';
 import {OrOptions} from '../inputs/OrOptions';
 import {SelectOption} from '../inputs/SelectOption';
 import {DeferredAction, Priority} from './DeferredAction';

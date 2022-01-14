@@ -1,6 +1,6 @@
 import {expect} from 'chai';
 import {PowerGrid} from '../../../src/cards/base/PowerGrid';
-import {Resources} from '../../../src/Resources';
+import {Resources} from '../../../src/common/Resources';
 import {TestPlayers} from '../../TestPlayers';
 import {Game} from '../../../src/Game';
 

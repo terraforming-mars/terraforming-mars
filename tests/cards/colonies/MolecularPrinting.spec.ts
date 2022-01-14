@@ -3,7 +3,7 @@ import {MolecularPrinting} from '../../../src/cards/colonies/MolecularPrinting';
 import {Luna} from '../../../src/colonies/Luna';
 import {Triton} from '../../../src/colonies/Triton';
 import {Game} from '../../../src/Game';
-import {Resources} from '../../../src/Resources';
+import {Resources} from '../../../src/common/Resources';
 import {TestPlayers} from '../../TestPlayers';
 
 describe('MolecularPrinting', function() {

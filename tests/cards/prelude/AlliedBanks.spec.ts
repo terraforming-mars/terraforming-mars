@@ -1,6 +1,6 @@
 import {expect} from 'chai';
 import {AlliedBanks} from '../../../src/cards/prelude/AlliedBanks';
-import {Resources} from '../../../src/Resources';
+import {Resources} from '../../../src/common/Resources';
 import {TestPlayers} from '../../TestPlayers';
 
 describe('AlliedBanks', function() {

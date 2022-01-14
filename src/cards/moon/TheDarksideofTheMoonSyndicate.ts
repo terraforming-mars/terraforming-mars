@@ -8,7 +8,7 @@ import {Player} from '../../Player';
 import {ISpace} from '../../boards/ISpace';
 import {MoonExpansion} from '../../moon/MoonExpansion';
 import {Multiset} from '../../utils/Multiset';
-import {Resources} from '../../Resources';
+import {Resources} from '../../common/Resources';
 import {OrOptions} from '../../inputs/OrOptions';
 import {SelectOption} from '../../inputs/SelectOption';
 import {StealResources} from '../../deferredActions/StealResources';

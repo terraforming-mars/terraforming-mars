@@ -2,7 +2,7 @@ import {expect} from 'chai';
 import {BiomassCombustors} from '../../../src/cards/base/BiomassCombustors';
 import {Game} from '../../../src/Game';
 import {TestPlayer} from '../../TestPlayer';
-import {Resources} from '../../../src/Resources';
+import {Resources} from '../../../src/common/Resources';
 import {TestPlayers} from '../../TestPlayers';
 
 describe('BiomassCombustors', function() {

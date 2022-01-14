@@ -33,7 +33,7 @@ import {Phase} from './Phase';
 import {Player, PlayerId} from './Player';
 import {PlayerInput} from './PlayerInput';
 import {ResourceType} from './ResourceType';
-import {Resources} from './Resources';
+import {Resources} from './common/Resources';
 import {DeferredAction, Priority} from './deferredActions/DeferredAction';
 import {DeferredActionsQueue} from './deferredActions/DeferredActionsQueue';
 import {SelectHowToPayDeferred} from './deferredActions/SelectHowToPayDeferred';

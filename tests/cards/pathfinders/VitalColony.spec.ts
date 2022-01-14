@@ -5,7 +5,7 @@ import {Player} from '../../../src/Player';
 import {SelectColony} from '../../../src/inputs/SelectColony';
 import {ColonyName} from '../../../src/colonies/ColonyName';
 import {Game} from '../../../src/Game';
-import {Resources} from '../../../src/Resources';
+import {Resources} from '../../../src/common/Resources';
 
 describe('VitalColony', function() {
   let card: VitalColony;

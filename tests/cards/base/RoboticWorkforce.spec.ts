@@ -13,7 +13,7 @@ import {UtopiaInvest} from '../../../src/cards/turmoil/UtopiaInvest';
 import {Tags} from '../../../src/cards/Tags';
 import {Game} from '../../../src/Game';
 import {SelectSpace} from '../../../src/inputs/SelectSpace';
-import {Resources} from '../../../src/Resources';
+import {Resources} from '../../../src/common/Resources';
 import {SpaceBonus} from '../../../src/SpaceBonus';
 import {ARES_OPTIONS_NO_HAZARDS} from '../../ares/AresTestHelper';
 import {TestingUtils} from '../../TestingUtils';

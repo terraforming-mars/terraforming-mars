@@ -8,7 +8,7 @@ import {SelectCard} from '../../inputs/SelectCard';
 import {ResourceType} from '../../ResourceType';
 import {ICard} from '../ICard';
 import {CardName} from '../../CardName';
-import {Resources} from '../../Resources';
+import {Resources} from '../../common/Resources';
 import {CardRenderer} from '../render/CardRenderer';
 import {Units} from '../../Units';
 import {digit} from '../Options';

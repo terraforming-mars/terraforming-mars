@@ -11,7 +11,7 @@ import {Phase} from '../src/Phase';
 import {TestingUtils} from './TestingUtils';
 import {TestPlayers} from './TestPlayers';
 import {SaturnSystems} from '../src/cards/corporation/SaturnSystems';
-import {Resources} from '../src/Resources';
+import {Resources} from '../src/common/Resources';
 import {ISpace, SpaceId} from '../src/boards/ISpace';
 import {ResearchNetwork} from '../src/cards/prelude/ResearchNetwork';
 import {ArcticAlgae} from '../src/cards/base/ArcticAlgae';

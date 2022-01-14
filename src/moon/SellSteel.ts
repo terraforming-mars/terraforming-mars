@@ -1,7 +1,7 @@
 import {DeferredAction, Priority} from '../deferredActions/DeferredAction';
 import {SelectAmount} from '../inputs/SelectAmount';
 import {Player} from '../Player';
-import {Resources} from '../Resources';
+import {Resources} from '../common/Resources';
 
 export class SellSteel implements DeferredAction {
   public priority = Priority.DEFAULT;

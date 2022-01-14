@@ -8,7 +8,7 @@ import {CardRenderer} from '../render/CardRenderer';
 import {ResourceType} from '../../ResourceType';
 import {Tags} from '../Tags';
 import {CardRequirements} from '../CardRequirements';
-import {Resources} from '../../Resources';
+import {Resources} from '../../common/Resources';
 
 export class Pollinators extends Card implements IProjectCard, IResourceCard, IActionCard {
   constructor() {

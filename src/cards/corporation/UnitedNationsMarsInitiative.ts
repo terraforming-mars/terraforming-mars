@@ -6,7 +6,7 @@ import {CorporationCard} from './CorporationCard';
 import {CardName} from '../../CardName';
 import {CardType} from '../CardType';
 import {CardRenderer} from '../render/CardRenderer';
-import {Resources} from '../../Resources';
+import {Resources} from '../../common/Resources';
 
 export const ACTION_COST = 3;
 export class UnitedNationsMarsInitiative extends Card implements IActionCard, CorporationCard {

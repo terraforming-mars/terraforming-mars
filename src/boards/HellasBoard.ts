@@ -56,19 +56,19 @@ export class HellasBoard extends Board {
     return player.canAfford(HELLAS_BONUS_OCEAN_COST) ? spaces : spaces.filter((space) => space.id !== SpaceName.HELLAS_OCEAN_TILE);
   }
 
-  public getSpaces(spaceType: SpaceType, player: Player): Array<ISpace> {
+  public override getSpaces(spaceType: SpaceType, player: Player): Array<ISpace> {
     return this.filterHellas(player, super.getSpaces(spaceType, player));
   }
 
-  public getAvailableSpacesForCity(player: Player): Array<ISpace> {
+  public override getAvailableSpacesForCity(player: Player): Array<ISpace> {
     return this.filterHellas(player, super.getAvailableSpacesForCity(player));
   }
 
-  public getAvailableSpacesOnLand(player: Player): Array<ISpace> {
+  public override getAvailableSpacesOnLand(player: Player): Array<ISpace> {
     return this.filterHellas(player, super.getAvailableSpacesOnLand(player));
   }
 
-  public getAvailableSpacesForGreenery(player: Player): Array<ISpace> {
+  public override getAvailableSpacesForGreenery(player: Player): Array<ISpace> {
     return this.filterHellas(player, super.getAvailableSpacesForGreenery(player));
   }
 

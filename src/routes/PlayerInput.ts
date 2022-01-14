@@ -13,7 +13,7 @@ export class PlayerInput extends Handler {
     super();
   }
 
-  public post(req: http.IncomingMessage, res: http.ServerResponse, ctx: IContext): void {
+  public override post(req: http.IncomingMessage, res: http.ServerResponse, ctx: IContext): void {
     const playerId = ctx.url.searchParams.get('id');
 
     if (playerId === null) {

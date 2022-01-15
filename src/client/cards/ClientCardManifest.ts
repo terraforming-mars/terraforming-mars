@@ -23,7 +23,6 @@ ALL_CARD_MANIFESTS.forEach((manifest) => {
     });
   });
 });
-console.log(cardArray.map((cam) => cam.card.name));
 
 export function getCard(cardName: CardName): CardAndModule | undefined {
   return cards.get(cardName);
@@ -33,6 +32,12 @@ export function getCards(filter: (card: CardAndModule) => boolean): Array<CardAn
   return cardArray.filter(filter);
 }
 
-export function getCardsByType(cardType: CardType): Array<CardAndModule> {
-  return getCards((cam) => cam.card.cardType === cardType);
+export function byType(cardType: CardType): (cam: CardAndModule) => boolean {
+  return (cam) => cam.card.cardType === cardType;
 }
+
+export function byModule(module: GameModule): (cam: CardAndModule) => boolean {
+  return (cam) => cam.module === module;
+}
+
+export const toName = (cam: CardAndModule) => cam.card.name;

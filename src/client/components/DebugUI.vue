@@ -143,7 +143,7 @@ import {GlobalEventModel} from '@/models/TurmoilModel';
 import {PartyName} from '@/turmoil/parties/PartyName';
 import {ALL_EVENTS, getGlobalEventByName} from '@/turmoil/globalEvents/GlobalEventDealer';
 import GlobalEvent from '@/client/components/GlobalEvent.vue';
-import {getCard, getCardsByType} from '../cards/ClientCardManifest';
+import {byType, getCard, getCards, toName} from '../cards/ClientCardManifest';
 
 const MODULE_BASE = 'b';
 const MODULE_CORP = 'c';
@@ -328,22 +328,22 @@ export default Vue.extend({
       }
     },
     getAllStandardProjectCards() {
-      const names = getCardsByType(CardType.STANDARD_PROJECT).map((cam) => cam.card.name);
+      const names = getCards(byType(CardType.STANDARD_PROJECT)).map(toName);
       return this.sort(names);
     },
     getAllProjectCards() {
       const names: Array<CardName> = [];
-      names.push(...getCardsByType(CardType.AUTOMATED).map((cam) => cam.card.name));
-      names.push(...getCardsByType(CardType.ACTIVE).map((cam) => cam.card.name));
-      names.push(...getCardsByType(CardType.EVENT).map((cam) => cam.card.name));
+      names.push(...getCards(byType(CardType.AUTOMATED)).map(toName));
+      names.push(...getCards(byType(CardType.ACTIVE)).map(toName));
+      names.push(...getCards(byType(CardType.EVENT)).map(toName));
       return this.sort(names);
     },
     getAllCorporationCards() {
-      const names = getCardsByType(CardType.CORPORATION).map((cam) => cam.card.name);
+      const names = getCards(byType(CardType.CORPORATION)).map(toName);
       return this.sort(names);
     },
     getAllPreludeCards() {
-      const names = getCardsByType(CardType.PRELUDE).map((cam) => cam.card.name);
+      const names = getCards(byType(CardType.PRELUDE)).map(toName);
       return this.sort(names);
     },
     getAllGlobalEvents() {

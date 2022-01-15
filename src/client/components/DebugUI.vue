@@ -349,7 +349,7 @@ export default Vue.extend({
           return an.localeCompare(bn);
         });
       } else {
-        return copy.sort();
+        return copy.sort((a, b) => a.localeCompare(b));
       }
     },
     getAllStandardProjectCards() {

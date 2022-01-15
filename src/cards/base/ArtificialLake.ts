@@ -30,6 +30,7 @@ export class ArtificialLake extends Card implements IProjectCard {
   }
 
   public canPlay(player: Player) {
+    if (!player.game.canAddOcean()) return true;
     return player.game.board.getAvailableSpacesOnLand(player).length > 0;
   }
 

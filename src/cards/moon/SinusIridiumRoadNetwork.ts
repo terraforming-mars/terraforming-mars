@@ -38,7 +38,7 @@ export class SinusIridiumRoadNetwork extends MoonCard {
     });
   }
 
-  public play(player: Player) {
+  public override play(player: Player) {
     super.play(player);
     player.game.defer(new PlaceMoonRoadTile(player));
     return undefined;

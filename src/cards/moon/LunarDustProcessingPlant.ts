@@ -32,8 +32,7 @@ export class LunarDustProcessingPlant extends MoonCard implements IProjectCard {
     });
   };
 
-
-  public play(player: Player) {
+  public override play(player: Player) {
     super.play(player);
     MoonExpansion.raiseLogisticRate(player);
     return undefined;

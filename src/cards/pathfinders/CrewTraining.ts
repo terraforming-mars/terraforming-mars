@@ -33,7 +33,7 @@ export class CrewTraining extends PreludeCard implements ICloneTagCard {
 
   public cloneTag: Tags = Tags.CLONE;
 
-  public get tags(): Array<Tags> {
+  public override get tags(): Array<Tags> {
     return [this.cloneTag, this.cloneTag];
   }
 

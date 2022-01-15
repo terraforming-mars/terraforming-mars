@@ -26,7 +26,7 @@ export class MoonColonyStandardProjectVariant2 extends MoonColonyStandardProject
     });
   }
 
-  public canAct(player: Player) {
+  public override canAct(player: Player) {
     return player.game.gameOptions.moonStandardProjectVariant && super.canAct(player);
   }
 }
@@ -50,7 +50,7 @@ export class MoonMineStandardProjectVariant2 extends MoonMineStandardProject {
     });
   }
 
-  public canAct(player: Player) {
+  public override canAct(player: Player) {
     return player.game.gameOptions.moonStandardProjectVariant && super.canAct(player);
   }
 }
@@ -74,7 +74,7 @@ export class MoonRoadStandardProjectVariant2 extends MoonRoadStandardProject {
     });
   }
 
-  public canAct(player: Player) {
+  public override canAct(player: Player) {
     return player.game.gameOptions.moonStandardProjectVariant && super.canAct(player);
   }
 }

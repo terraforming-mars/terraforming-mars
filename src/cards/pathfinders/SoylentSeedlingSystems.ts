@@ -36,7 +36,7 @@ export class SoylentSeedlingSystems extends Card implements CorporationCard {
     });
   }
 
-  public resourceCount = 0;
+  public override resourceCount = 0;
 
   public play() {
     this.resourceCount += 2;

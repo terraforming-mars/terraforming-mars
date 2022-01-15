@@ -103,7 +103,7 @@ export class LunaEcumenopolis extends MoonCard {
     return false;
   }
 
-  public play(player: Player) {
+  public override play(player: Player) {
     // These all have the same priority: Default.
     player.game.defer(new CustomPlaceMoonTile(player));
     player.game.defer(new CustomPlaceMoonTile(player));
@@ -117,7 +117,7 @@ export class LunaEcumenopolis extends MoonCard {
 }
 
 class CustomPlaceMoonTile extends PlaceMoonColonyTile {
-  protected getSpaces() {
+  protected override getSpaces() {
     const moonData = MoonExpansion.moonData(this.player.game);
     const spaces = moonData.moon.getAvailableSpacesOnLand(this.player);
     const filtered = spaces.filter((space) => {

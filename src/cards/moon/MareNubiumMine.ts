@@ -34,8 +34,7 @@ export class MareNubiumMine extends MoonCard {
     });
   }
 
-
-  public play(player: Player) {
+  public override play(player: Player) {
     super.play(player);
     MoonExpansion.addMineTile(player, MoonSpaces.MARE_NUBIUM, this.name);
     MoonExpansion.raiseMiningRate(player);

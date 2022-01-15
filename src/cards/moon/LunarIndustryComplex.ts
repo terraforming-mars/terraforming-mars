@@ -35,7 +35,7 @@ export class LunarIndustryComplex extends MoonCard implements IProjectCard {
     });
   };
 
-  public play(player: Player) {
+  public override play(player: Player) {
     player.deductUnits(this.reserveUnits);
     player.game.defer(new PlaceMoonMineTile(player));
     player.addProduction(Resources.STEEL, 1);

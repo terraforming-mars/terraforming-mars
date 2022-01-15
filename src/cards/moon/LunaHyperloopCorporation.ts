@@ -53,7 +53,7 @@ export class LunaHyperloopCorporation extends Card implements IActionCard, Corpo
     return undefined;
   }
 
-  public getVictoryPoints(player: Player) {
+  public override getVictoryPoints(player: Player) {
     return MoonExpansion.tiles(player.game, TileType.MOON_ROAD, {surfaceOnly: true}).length;
   }
 }

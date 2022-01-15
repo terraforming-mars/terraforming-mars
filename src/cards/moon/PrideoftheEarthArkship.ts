@@ -36,9 +36,9 @@ export class PrideoftheEarthArkship extends MoonCard implements IActionCard {
       },
     });
   };
-  public resourceCount = 0;
+  public override resourceCount = 0;
 
-  public play(player: Player) {
+  public override play(player: Player) {
     super.play(player);
     return undefined;
   }

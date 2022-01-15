@@ -67,7 +67,7 @@ export class TheGrandLunaCapitalGroup extends Card implements CorporationCard {
     cardOwner.addResource(Resources.MEGACREDITS, filtered.length * 2, {log: true});
   }
 
-  public getVictoryPoints(player: Player) {
+  public override getVictoryPoints(player: Player) {
     const moon = MoonExpansion.moonData(player.game).moon;
     const neighboringColonyTiles: Set<SpaceId> = new Set();
     const colonyTiles = MoonExpansion.tiles(player.game, TileType.MOON_COLONY, {ownedBy: player});

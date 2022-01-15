@@ -37,7 +37,7 @@ export class MareImbriumMine extends MoonCard implements IProjectCard, IMoonCard
     });
   }
 
-  public play(player: Player) {
+  public override play(player: Player) {
     super.play(player);
     MoonExpansion.addMineTile(player, MoonSpaces.MARE_IMBRIUM, this.name);
     MoonExpansion.raiseMiningRate(player);

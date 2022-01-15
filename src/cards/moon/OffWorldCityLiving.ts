@@ -41,7 +41,7 @@ export class OffWorldCityLiving extends Card implements IProjectCard {
     return undefined;
   }
 
-  public getVictoryPoints(player: Player) {
+  public override getVictoryPoints(player: Player) {
     const amount = player.game.getCitiesInPlay();
     return Math.floor(amount / 3);
   }

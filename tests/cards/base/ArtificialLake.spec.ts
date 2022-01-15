@@ -7,7 +7,7 @@ import {TestPlayer} from '../../TestPlayer';
 import {SpaceType} from '../../../src/SpaceType';
 import {TileType} from '../../../src/TileType';
 import {TestPlayers} from '../../TestPlayers';
-import {TestingUtils} from 'tests/TestingUtils';
+import {TestingUtils} from '../../TestingUtils';
 
 describe('ArtificialLake', function() {
   let card : ArtificialLake; let player : TestPlayer; let game : Game;

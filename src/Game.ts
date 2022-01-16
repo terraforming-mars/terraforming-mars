@@ -1552,11 +1552,6 @@ export class Game implements ISerializable<SerializedGame> {
 
   public static deserialize(d: SerializedGame): Game {
     const gameOptions = d.gameOptions;
-    // TODO(kberg): Remove by 2021-10-15
-    if (d.gameOptions.altVenusBoard === undefined) {
-      d.gameOptions.altVenusBoard = false;
-    }
-
     const players = d.players.map((element: SerializedPlayer) => Player.deserialize(element));
     const first = players.find((player) => player.id === d.first);
     if (first === undefined) {

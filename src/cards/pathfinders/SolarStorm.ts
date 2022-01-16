@@ -39,7 +39,6 @@ export class SolarStorm extends Card implements IProjectCard {
       }
     });
     player.game.defer(new RemoveResourcesFromCard(player, ResourceType.DATA, 3));
-    // TODO(kberg): Handle Turmoil.
     player.game.increaseTemperature(player, 1);
     return undefined;
   }

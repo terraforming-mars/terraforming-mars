@@ -37,7 +37,7 @@ export class GeodesicTents extends MoonCard {
     });
   }
 
-  public play(player: Player) {
+  public override play(player: Player) {
     super.play(player);
     player.game.defer(new PlaceMoonColonyTile(player));
     return undefined;

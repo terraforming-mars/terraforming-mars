@@ -28,7 +28,7 @@ export class HeliostatMirrorArray extends MoonCard {
     });
   };
 
-  public play(player: Player) {
+  public override play(player: Player) {
     super.play(player);
     player.heat++;
     return undefined;

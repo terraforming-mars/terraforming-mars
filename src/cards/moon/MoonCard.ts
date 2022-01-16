@@ -18,11 +18,11 @@ export abstract class MoonCard extends ProjectCard implements IMoonCard {
     return this.moonCardProperties.tilesBuilt || [];
   }
 
-  public canPlay(player: Player) {
+  public override canPlay(player: Player) {
     return player.canAdjustProduction(this.productionBox);
   }
 
-  public play(player: Player) {
+  public override play(player: Player) {
     super.play(player);
     player.adjustProduction(this.productionBox, {log: true});
     return undefined;

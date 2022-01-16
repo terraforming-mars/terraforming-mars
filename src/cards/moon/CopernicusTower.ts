@@ -39,7 +39,7 @@ export class CopernicusTower extends Card implements IActionCard, IProjectCard {
       },
     });
   };
-  public resourceCount = 0;
+  public override resourceCount = 0;
 
   public play() {
     return undefined;

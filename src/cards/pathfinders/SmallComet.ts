@@ -37,7 +37,6 @@ export class SmallComet extends Card implements IProjectCard {
   }
 
   public play(player: Player) {
-    // TODO(kberg): Handle Turmoil.
     player.game.getPlayers().forEach((p) => {
       if (!p.plantsAreProtected()) {
         p.deductResource(Resources.PLANTS, 2, {log: true, from: player});

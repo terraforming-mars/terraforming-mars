@@ -38,7 +38,6 @@ export class MuseumofEarlyColonisation extends Card implements IProjectCard {
   }
   public play(player: Player) {
     player.adjustProduction(this.productionBox);
-    // TODO(kberg): Handle Turmoil efect.
     player.increaseTerraformRating();
     return undefined;
   }

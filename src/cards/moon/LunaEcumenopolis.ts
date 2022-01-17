@@ -59,7 +59,7 @@ export class LunaEcumenopolis extends MoonCard {
     return player.canAfford(0, {tr: {moonColony: 2, tr: expectedTRBump}});
   }
 
-  public canPlay(player: Player) {
+  public override canPlay(player: Player) {
     if (!super.canPlay(player)) {
       return false;
     }

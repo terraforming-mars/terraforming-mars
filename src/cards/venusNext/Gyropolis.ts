@@ -30,7 +30,7 @@ export class Gyropolis extends Card {
       },
     });
   };
-  public canPlay(player: Player): boolean {
+  public override canPlay(player: Player): boolean {
     if (player.game.board.getAvailableSpacesForCity(player).length === 0) return false;
     return player.getProduction(Resources.ENERGY) >= 2;
   }

@@ -34,7 +34,7 @@ export class ColonistShuttles extends MoonCard {
     });
   };
 
-  public play(player: Player) {
+  public override play(player: Player) {
     super.play(player);
     MoonExpansion.raiseColonyRate(player);
     const surfaceColonies = MoonExpansion.tiles(player.game, TileType.MOON_COLONY, {surfaceOnly: true}).length;

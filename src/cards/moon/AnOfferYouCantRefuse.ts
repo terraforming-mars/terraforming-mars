@@ -33,7 +33,7 @@ export class AnOfferYouCantRefuse extends ProjectCard {
   }
 
   // You can play this if you have an available delegate, and if there are non-neutral non-leader delegates available to swap with.
-  public canPlay(player: Player) {
+  public override canPlay(player: Player) {
     const turmoil = Turmoil.getTurmoil(player.game);
     const hasDelegate = turmoil.hasDelegatesInReserve(player.id) || turmoil.lobby.has(player.id);
     if (!hasDelegate) return false;
@@ -63,7 +63,7 @@ export class AnOfferYouCantRefuse extends ProjectCard {
     return orOptions;
   }
 
-  public play(player: Player) {
+  public override play(player: Player) {
     const game = player.game;
     const turmoil = Turmoil.getTurmoil(game);
     const orOptions = new OrOptions();

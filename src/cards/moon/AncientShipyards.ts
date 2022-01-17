@@ -35,9 +35,9 @@ export class AncientShipyards extends MoonCard {
       },
     });
   };
-  public resourceCount: number = 0;
+  public override resourceCount: number = 0;
 
-  public play(player: Player) {
+  public override play(player: Player) {
     super.play(player);
     return undefined;
   }

@@ -3,6 +3,8 @@ import {PermafrostExtraction} from '../../../src/cards/base/PermafrostExtraction
 import {Game} from '../../../src/Game';
 import {Player} from '../../../src/Player';
 import {TestPlayers} from '../../TestPlayers';
+import {SelectSpace} from '../../../src/inputs/SelectSpace';
+import {TestingUtils} from '../../TestingUtils';
 
 describe('PermafrostExtraction', function() {
   let card : PermafrostExtraction; let player : Player; let game : Game;
@@ -14,7 +16,7 @@ describe('PermafrostExtraction', function() {
     game = Game.newInstance('foobar', [player, redPlayer], player);
   });
 
-  it('Can\'t play', function() {
+  it('Cannot play', function() {
     expect(player.canPlayIgnoringCost(card)).is.not.true;
   });
 
@@ -23,7 +25,10 @@ describe('PermafrostExtraction', function() {
     expect(player.canPlayIgnoringCost(card)).is.true;
 
     const action = card.play(player);
-        action!.cb(action!.availableSpaces[0]);
-        expect(game.board.getOceansOnBoard()).to.eq(1);
+    expect(action).is.undefined;
+    TestingUtils.runAllActions(game);
+    const selectSpace = TestingUtils.cast(player.getWaitingFor(), SelectSpace);
+    selectSpace.cb(selectSpace.availableSpaces[0]);
+    expect(game.board.getOceansOnBoard()).to.eq(1);
   });
 });

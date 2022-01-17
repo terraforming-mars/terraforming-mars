@@ -415,6 +415,7 @@
                   v-bind:promoCardsOption="promoCardsOption"
                   v-bind:communityCardsOption="communityCardsOption"
                   v-bind:moonExpansion="moonExpansion"
+                  v-bind:pathfindersExpansion="pathfindersExpansion"
               ></CorporationsFilter>
             </div>
 

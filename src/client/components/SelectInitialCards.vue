@@ -18,7 +18,7 @@
 import Vue from 'vue';
 
 import Button from '@/client/components/common/Button.vue';
-import {CardFinder} from '@/CardFinder';
+import {getCard} from '@/client/cards/ClientCardManifest';
 import {CardName} from '@/CardName';
 import * as constants from '@/constants';
 import {CorporationCard} from '@/cards/corporation/CorporationCard';
@@ -28,6 +28,7 @@ import SelectCard from '@/client/components/SelectCard.vue';
 import ConfirmDialog from '@/client/components/common/ConfirmDialog.vue';
 import {PreferencesManager} from '@/client/utils/PreferencesManager';
 import {Tags} from '@/cards/Tags';
+import {PreludeCard} from '@/cards/prelude/PreludeCard';
 
 export default Vue.extend({
   name: 'SelectInitialCards',
@@ -67,11 +68,12 @@ export default Vue.extend({
     getAfterPreludes() {
       let result = 0;
       for (const prelude of this.selectedPreludes) {
-        const card = new CardFinder().getPreludeByName(prelude);
-        if (card === undefined) {
+        const cam = getCard(prelude);
+        if (cam === undefined) {
           throw new Error(`Prelude ${prelude} not found`);
         }
-        result += card?.startingMegaCredits ?? 0;
+        const card = cam.card as PreludeCard;
+        result += card.startingMegaCredits ?? 0;
 
         switch (this.selectedCorporation?.name) {
         // For each step you increase the production of a resource ... you also gain that resource.
@@ -185,7 +187,7 @@ export default Vue.extend({
       this.selectedCards = cards;
     },
     corporationChanged(cards: Array<CardName>) {
-      this.selectedCorporation = new CardFinder().getCorporationCardByName(cards[0]);
+      this.selectedCorporation = getCard(cards[0])?.card as CorporationCard;
     },
     preludesChanged(cards: Array<CardName>) {
       this.selectedPreludes = cards;

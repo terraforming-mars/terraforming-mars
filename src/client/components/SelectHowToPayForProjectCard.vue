@@ -4,7 +4,7 @@ import Button from '@/client/components/common/Button.vue';
 
 import {HowToPay} from '@/inputs/HowToPay';
 import Card from '@/client/components/card/Card.vue';
-import {CardFinder} from '@/CardFinder';
+import {getCard} from '@/client/cards/ClientCardManifest';
 import {CardModel} from '@/models/CardModel';
 import {CardOrderStorage} from '@/client/utils/CardOrderStorage';
 import {PaymentWidgetMixin, SelectHowToPayForProjectCardModel, unit} from '@/client/mixins/PaymentWidgetMixin';
@@ -96,11 +96,11 @@ export default Vue.extend({
       return card;
     },
     getCardTags() {
-      const card = new CardFinder().getProjectCardByName(this.cardName);
-      if (card === undefined) {
+      const cam = getCard(this.cardName);
+      if (cam === undefined) {
         throw new Error(`card not found ${this.cardName}`);
       }
-      return card.tags;
+      return cam.card.tags;
     },
     setDefaultValues() {
       this.microbes = 0;

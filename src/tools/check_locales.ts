@@ -20,23 +20,25 @@ if (args[0] === '--locales') {
       process.exit(1);
     }
   });
+} else if (args[0] !== undefined) {
+  console.error(`invalid arg ${args[0]}`);
+  process.exit(1);
 }
 
 let sourceString: keyof typeof raw_translations;
-let warnings: Array<string>;
+let missingLocales: Array<string>;
 
 for (sourceString in raw_translations) {
   if ( ! raw_translations.hasOwnProperty(sourceString)) continue;
   const translations = raw_translations[sourceString];
-  warnings = [];
+  missingLocales = [];
   for (const localeName of localesToWarn) {
     const trans: string = (translations as any)[localeName];
     if ( ! trans) {
-      warnings.push('\tmissing ' + localeName);
+      missingLocales.push(localeName);
     }
   }
-  if (warnings.length > 0) {
-    console.log(sourceString);
-    console.warn(warnings.join('\n'));
+  if (missingLocales.length > 0) {
+    console.log(sourceString, ':', missingLocales);
   }
 }

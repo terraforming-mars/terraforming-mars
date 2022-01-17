@@ -34,7 +34,7 @@ export class NuclearZone extends Card implements IProjectCard {
       tr: {temperature: 2},
     });
   }
-  public canPlay(player: Player): boolean {
+  public override canPlay(player: Player): boolean {
     return player.game.board.getAvailableSpacesOnLand(player).length > 0;
   }
 

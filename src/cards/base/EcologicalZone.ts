@@ -50,7 +50,7 @@ export class EcologicalZone extends Card implements IProjectCard, IResourceCard 
     });
   }
 
-  public resourceCount: number = 0;
+  public override resourceCount: number = 0;
 
   private getAvailableSpaces(player: Player): Array<ISpace> {
     return player.game.board.getAvailableSpacesOnLand(player)
@@ -61,7 +61,7 @@ export class EcologicalZone extends Card implements IProjectCard, IResourceCard 
         ).length > 0,
       );
   }
-  public canPlay(player: Player): boolean {
+  public override canPlay(player: Player): boolean {
     return this.getAvailableSpaces(player).length > 0;
   }
   public onCardPlayed(player: Player, card: IProjectCard): void {

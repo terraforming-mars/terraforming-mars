@@ -25,7 +25,7 @@ export class CardRenderProductionBox extends CardRenderer {
     super(rows);
   }
 
-  public static builder(f: (builder: ProductionBoxBuilder) => void): CardRenderProductionBox {
+  public static override builder(f: (builder: ProductionBoxBuilder) => void): CardRenderProductionBox {
     const builder = new ProductionBoxBuilder();
     f(builder);
     return builder.build();
@@ -41,7 +41,7 @@ export class CardRenderEffect extends CardRenderer {
     super(rows);
   }
 
-  public static builder(f: (builder: EffectBuilder) => void): CardRenderEffect {
+  public static override builder(f: (builder: EffectBuilder) => void): CardRenderEffect {
     const builder = new EffectBuilder();
     f(builder);
     return builder.build();
@@ -95,7 +95,7 @@ export class CardRenderCorpBoxEffect extends CardRenderer {
     super(rows);
   }
 
-  public static builder(f: (builder: CorpEffectBuilderEffect) => void): CardRenderCorpBoxEffect {
+  public static override builder(f: (builder: CorpEffectBuilderEffect) => void): CardRenderCorpBoxEffect {
     const builder = new CorpEffectBuilderEffect();
     f(builder);
     return builder.build();
@@ -107,7 +107,7 @@ export class CardRenderCorpBoxAction extends CardRenderer {
     super(rows);
   }
 
-  public static builder(f: (builder: CorpEffectBuilderAction) => void): CardRenderCorpBoxAction {
+  public static override builder(f: (builder: CorpEffectBuilderAction) => void): CardRenderCorpBoxAction {
     const builder = new CorpEffectBuilderAction();
     f(builder);
     return builder.build();
@@ -575,33 +575,33 @@ class Builder {
 }
 
 class ProductionBoxBuilder extends Builder {
-  protected _data: Array<Array<CardRenderItem | CardRenderSymbol>> = [[]];
+  protected override _data: Array<Array<CardRenderItem | CardRenderSymbol>> = [[]];
 
-  public build(): CardRenderProductionBox {
+  public override build(): CardRenderProductionBox {
     return new CardRenderProductionBox(this._data);
   }
 }
 
 class EffectBuilder extends Builder {
-  protected _data: Array<Array<CardRenderItem | CardRenderSymbol | CardRenderProductionBox>> = [[]];
+  protected override _data: Array<Array<CardRenderItem | CardRenderSymbol | CardRenderProductionBox>> = [[]];
 
-  public build(): CardRenderEffect {
+  public override build(): CardRenderEffect {
     return new CardRenderEffect(this._data);
   }
 }
 
 class CorpEffectBuilderEffect extends Builder {
-  protected _data: Array<Array<CardRenderEffect | CardRenderItem>> = [[]];
+  protected override _data: Array<Array<CardRenderEffect | CardRenderItem>> = [[]];
 
-  public build(): CardRenderCorpBoxAction {
+  public override build(): CardRenderCorpBoxAction {
     return new CardRenderCorpBoxEffect(this._data);
   }
 }
 
 class CorpEffectBuilderAction extends Builder {
-  protected _data: Array<Array<CardRenderEffect | CardRenderItem>> = [[]];
+  protected override _data: Array<Array<CardRenderEffect | CardRenderItem>> = [[]];
 
-  public build(): CardRenderCorpBoxEffect {
+  public override build(): CardRenderCorpBoxEffect {
     return new CardRenderCorpBoxAction(this._data);
   }
 }

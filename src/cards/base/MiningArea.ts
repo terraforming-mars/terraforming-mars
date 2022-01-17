@@ -23,7 +23,7 @@ export class MiningArea extends MiningCard {
       metadata,
     );
   }
-  protected getAvailableSpaces(player: Player) {
+  protected override getAvailableSpaces(player: Player) {
     return super.getAvailableSpaces(player)
       .filter((space) => player.game.board.getAdjacentSpaces(space).some((adjacentSpace) => adjacentSpace.tile !== undefined && adjacentSpace.tile.tileType !== TileType.OCEAN && adjacentSpace.player === player));
   }

@@ -46,9 +46,9 @@ export class Herbivores extends Card implements IProjectCard, IResourceCard {
       },
     });
   }
-    public resourceCount: number = 0;
+    public override resourceCount: number = 0;
 
-    public canPlay(player: Player): boolean {
+    public override canPlay(player: Player): boolean {
       return player.game.someoneHasResourceProduction(Resources.PLANTS, 1);
     }
 

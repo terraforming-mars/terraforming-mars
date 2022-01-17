@@ -20,11 +20,6 @@ export class BufferGasStandardProject extends StandardProjectCard {
     });
   }
 
-  // This feels kind of over-superfluous, but...
-  public canAct(player: Player): boolean {
-    return super.canAct(player);
-  }
-
   actionEssence(player: Player): void {
     player.increaseTerraformRating();
   }

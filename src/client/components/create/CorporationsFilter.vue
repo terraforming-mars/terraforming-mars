@@ -45,10 +45,6 @@ function corpCardNames(module: GameModule): Array<CardName> {
     .filter((name) => name !== CardName.BEGINNER_CORPORATION);
 }
 
-function iterator(mm: MultiMap<GameModule, CardName>) {
-  return Array.from(mm.associations());
-}
-
 export default Vue.extend({
   name: 'CorporationsFilter',
   props: {
@@ -87,7 +83,6 @@ export default Vue.extend({
         cardsByModule.set(cam.module, cam.card.name);
       }
     });
-    console.log(iterator(cardsByModule));
 
     return {
       cardsByModule: cardsByModule,
@@ -116,7 +111,7 @@ export default Vue.extend({
       return [];
     },
     getItemsByGroup(group: string): Array<CardName> {
-      if (group === 'All') return Array.from(this.cardsByModule.values()).slice();
+      if (group === 'All') return Array.from(this.cardsByModule.values());
 
       const corps = this.cardsByModule.get(group as GameModule);
       if (corps === undefined) {

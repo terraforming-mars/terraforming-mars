@@ -7,7 +7,7 @@ import {Turmoil} from '../../../src/turmoil/Turmoil';
 import {PartyName} from '../../../src/turmoil/parties/PartyName';
 import {Phase} from '../../../src/Phase';
 import {SpaceType} from '../../../src/SpaceType';
-import {TileType} from '../../../src/TileType';
+import {TileType} from '../../../src/common/TileType';
 import {Board} from '../../../src/boards/Board';
 import {Units} from '../../../src/Units';
 

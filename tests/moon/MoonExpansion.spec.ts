@@ -11,7 +11,7 @@ import {MoonExpansion} from '../../src/moon/MoonExpansion';
 import {MoonSpaces} from '../../src/moon/MoonSpaces';
 import {Resources} from '../../src/Resources';
 import {SpaceName} from '../../src/SpaceName';
-import {TileType} from '../../src/TileType';
+import {TileType} from '../../src/common/TileType';
 import {TestingUtils} from '../TestingUtils';
 import {TestPlayer} from '../TestPlayer';
 import {TestPlayers} from '../TestPlayers';

@@ -10,7 +10,7 @@ import {Resources} from '../../Resources';
 import {SelectSpace} from '../../inputs/SelectSpace';
 import {SpaceBonus} from '../../SpaceBonus';
 import {Tags} from '../../cards/Tags';
-import {TileType} from '../../TileType';
+import {TileType} from '../../common/TileType';
 import {DeferredAction} from '../../deferredActions/DeferredAction';
 import {SelectOption} from '../../inputs/SelectOption';
 import {OrOptions} from '../../inputs/OrOptions';

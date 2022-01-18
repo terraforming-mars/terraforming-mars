@@ -14,7 +14,7 @@ import Vue from 'vue';
 import Bonus from '@/client/components/Bonus.vue';
 import {SpaceModel} from '@/models/SpaceModel';
 import {SpaceType} from '@/SpaceType';
-import {TileType} from '@/TileType';
+import {TileType} from '@/common/TileType';
 
 const tileTypeToCssClass = new Map<TileType, string>([
   [TileType.COMMERCIAL_DISTRICT, 'commercial_district'],

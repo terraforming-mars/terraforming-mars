@@ -21,7 +21,7 @@ import {SelectHowToPayForProjectCard} from '../inputs/SelectHowToPayForProjectCa
 import {SelectPlayer} from '../inputs/SelectPlayer';
 import {SelectSpace} from '../inputs/SelectSpace';
 import {SpaceHighlight, SpaceModel} from './SpaceModel';
-import {TileType} from '../TileType';
+import {TileType} from '../common/TileType';
 import {Phase} from '../Phase';
 import {Resources} from '../Resources';
 import {CardType} from '../cards/CardType';

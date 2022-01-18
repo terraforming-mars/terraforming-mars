@@ -5,7 +5,7 @@ import {Game} from '../../src/Game';
 import {MoonExpansion} from '../../src/moon/MoonExpansion';
 import {TestPlayer} from '../TestPlayer';
 import {TestingUtils} from '../TestingUtils';
-import {TileType} from '../../src/TileType';
+import {TileType} from '../../src/common/TileType';
 
 const MOON_OPTIONS = TestingUtils.setCustomGameOptions({moonExpansion: true});
 

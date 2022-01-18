@@ -8,7 +8,7 @@ import {MoonExpansion} from '../../../src/moon/MoonExpansion';
 import {IMoonData} from '../../../src/moon/IMoonData';
 import {OrOptions} from '../../../src/inputs/OrOptions';
 import {StealResources} from '../../../src/deferredActions/StealResources';
-import {TileType} from '../../../src/TileType';
+import {TileType} from '../../../src/common/TileType';
 import {Phase} from '../../../src/Phase';
 
 const MOON_OPTIONS = TestingUtils.setCustomGameOptions({moonExpansion: true});

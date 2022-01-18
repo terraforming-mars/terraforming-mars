@@ -47,7 +47,7 @@ import {SpaceBonus} from './SpaceBonus';
 import {SpaceName} from './SpaceName';
 import {SpaceType} from './SpaceType';
 import {Tags} from './cards/Tags';
-import {TileType} from './TileType';
+import {TileType} from './common/TileType';
 import {Turmoil} from './turmoil/Turmoil';
 import {RandomMAOptionType} from './RandomMAOptionType';
 import {AresHandler} from './ares/AresHandler';

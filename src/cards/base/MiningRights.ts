@@ -1,7 +1,7 @@
 
 import {CardName} from '../../CardName';
 import {MiningCard} from './MiningCard';
-import {TileType} from '../../TileType';
+import {TileType} from '../../common/TileType';
 import {CardRenderer} from '../render/CardRenderer';
 
 export class MiningRights extends MiningCard {

@@ -25,7 +25,7 @@ import {Player} from '../src/Player';
 import {Color} from '../src/Color';
 import {RandomMAOptionType} from '../src/RandomMAOptionType';
 import {SpaceBonus} from '../src/SpaceBonus';
-import {TileType} from '../src/TileType';
+import {TileType} from '../src/common/TileType';
 import {ALL_AWARDS} from '../src/awards/Awards';
 import {ALL_MILESTONES} from '../src/milestones/Milestones';
 

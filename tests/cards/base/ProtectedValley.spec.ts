@@ -2,7 +2,7 @@ import {expect} from 'chai';
 import {ProtectedValley} from '../../../src/cards/base/ProtectedValley';
 import {Game} from '../../../src/Game';
 import {Resources} from '../../../src/Resources';
-import {TileType} from '../../../src/TileType';
+import {TileType} from '../../../src/common/TileType';
 import {TestPlayers} from '../../TestPlayers';
 
 describe('ProtectedValley', function() {

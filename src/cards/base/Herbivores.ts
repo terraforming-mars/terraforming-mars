@@ -6,7 +6,7 @@ import {CardType} from '../CardType';
 import {Player} from '../../Player';
 import {ISpace} from '../../boards/ISpace';
 import {ResourceType} from '../../ResourceType';
-import {TileType} from '../../TileType';
+import {TileType} from '../../common/TileType';
 import {Resources} from '../../Resources';
 import {CardName} from '../../CardName';
 import {IResourceCard} from '../ICard';

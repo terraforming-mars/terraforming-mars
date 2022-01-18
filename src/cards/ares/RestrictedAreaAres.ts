@@ -1,7 +1,7 @@
 import {CardName} from '../../CardName';
 import {SpaceBonus} from '../../SpaceBonus';
 import {RestrictedArea} from '../base/RestrictedArea';
-import {TileType} from '../../TileType';
+import {TileType} from '../../common/TileType';
 import {CardRenderer} from '../render/CardRenderer';
 
 export class RestrictedAreaAres extends RestrictedArea {

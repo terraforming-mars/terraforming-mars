@@ -4,7 +4,7 @@ import {SelectSpace} from '../../inputs/SelectSpace';
 import {ISpace} from '../../boards/ISpace';
 import {Player} from '../../Player';
 import {Resources} from '../../Resources';
-import {TileType} from '../../TileType';
+import {TileType} from '../../common/TileType';
 import {CardType} from './../CardType';
 import {IProjectCard} from './../IProjectCard';
 import {Tags} from './../Tags';

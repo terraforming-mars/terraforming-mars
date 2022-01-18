@@ -4,7 +4,7 @@ import {Player} from '../../Player';
 import {Tags} from '../Tags';
 import {CorporationCard} from '../corporation/CorporationCard';
 import {CardRenderer} from '../render/CardRenderer';
-import {TileType} from '../../TileType';
+import {TileType} from '../../common/TileType';
 import {PlaceMoonColonyTile} from '../../moon/PlaceMoonColonyTile';
 import {MoonExpansion} from '../../moon/MoonExpansion';
 import {ISpace, SpaceId} from '../../boards/ISpace';

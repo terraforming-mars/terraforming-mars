@@ -1,7 +1,7 @@
 import {CardName} from '../../CardName';
 import {SpaceBonus} from '../../SpaceBonus';
 import {MoholeArea} from '../base/MoholeArea';
-import {TileType} from '../../TileType';
+import {TileType} from '../../common/TileType';
 import {CardRenderer} from '../render/CardRenderer';
 import {digit} from '../Options';
 

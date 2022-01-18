@@ -2,7 +2,7 @@ import {Game} from '../Game';
 import {ITile} from '../ITile';
 import {MoonBoard} from './MoonBoard';
 import {Player} from '../Player';
-import {TileType} from '../TileType';
+import {TileType} from '../common/TileType';
 import {SpaceType} from '../SpaceType';
 import {IMoonData} from './IMoonData';
 import {CardName} from '../CardName';

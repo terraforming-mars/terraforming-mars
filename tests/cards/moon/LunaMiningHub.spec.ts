@@ -7,7 +7,7 @@ import {TestPlayers} from '../../TestPlayers';
 import {LunaMiningHub} from '../../../src/cards/moon/LunaMiningHub';
 import {expect} from 'chai';
 import {Resources} from '../../../src/Resources';
-import {TileType} from '../../../src/TileType';
+import {TileType} from '../../../src/common/TileType';
 import {PlaceSpecialMoonTile} from '../../../src/moon/PlaceSpecialMoonTile';
 
 const MOON_OPTIONS = TestingUtils.setCustomGameOptions({moonExpansion: true});

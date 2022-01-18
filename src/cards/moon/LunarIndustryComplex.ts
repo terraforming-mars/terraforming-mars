@@ -8,7 +8,7 @@ import {CardRenderer} from '../render/CardRenderer';
 import {PlaceMoonMineTile} from '../../moon/PlaceMoonMineTile';
 import {Units} from '../../Units';
 import {MoonCard} from './MoonCard';
-import {TileType} from '../../TileType';
+import {TileType} from '../../common/TileType';
 
 export class LunarIndustryComplex extends MoonCard implements IProjectCard {
   constructor() {

@@ -2,7 +2,7 @@ import {AltSecondaryTag, CardRenderItem, ItemOptions} from './CardRenderItem';
 import {CardRenderSymbol} from './CardRenderSymbol';
 import {Size} from './Size';
 import {CardRenderItemType} from './CardRenderItemType';
-import {TileType} from '../../TileType';
+import {TileType} from '../../common/TileType';
 
 export type ItemType = CardRenderItem | CardRenderProductionBox | CardRenderSymbol | CardRenderEffect | CardRenderTile | string | undefined;
 

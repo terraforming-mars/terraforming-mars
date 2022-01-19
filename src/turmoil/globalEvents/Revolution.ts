@@ -28,8 +28,7 @@ export class Revolution extends GlobalEvent implements IGlobalEvent {
   public resolve(game: Game, turmoil: Turmoil) {
     if (game.isSoloMode()) {
       if (this.getScore(game.getPlayers()[0], turmoil) >= 4 ) {
-        game.getPlayers()[0].decreaseTerraformRating();
-        game.getPlayers()[0].decreaseTerraformRating();
+        game.getPlayers()[0].decreaseTerraformRatingSteps(2, {log: true});
       }
     } else {
       const players = [...game.getPlayers()].sort(
@@ -38,21 +37,21 @@ export class Revolution extends GlobalEvent implements IGlobalEvent {
 
       // We have one rank 1 player
       if (this.getScore(players[0], turmoil) > this.getScore(players[1], turmoil)) {
-        players[0].decreaseTerraformRatingSteps(2);
+        players[0].decreaseTerraformRatingSteps(2, {log: true});
         players.shift();
 
         if (players.length === 1 && this.getScore(players[0], turmoil) > 0) {
-          players[0].decreaseTerraformRating();
+          players[0].decreaseTerraformRating({log: true});
         } else if (players.length > 1) {
           // We have one rank 2 player
           if (this.getScore(players[0], turmoil) > this.getScore(players[1], turmoil)) {
-            players[0].decreaseTerraformRating();
+            players[0].decreaseTerraformRating({log: true});
             // We have at least two rank 2 players
           } else {
             const score = this.getScore(players[0], turmoil);
             while (players.length > 0 && this.getScore(players[0], turmoil) === score) {
               if (this.getScore(players[0], turmoil) > 0) {
-                players[0].decreaseTerraformRating();
+                players[0].decreaseTerraformRating({log: true});
               }
               players.shift();
             }
@@ -63,7 +62,7 @@ export class Revolution extends GlobalEvent implements IGlobalEvent {
         const score = this.getScore(players[0], turmoil);
         while (players.length > 0 && this.getScore(players[0], turmoil) === score) {
           if (this.getScore(players[0], turmoil) > 0) {
-            players[0].decreaseTerraformRatingSteps(2);
+            players[0].decreaseTerraformRatingSteps(2, {log: true});
           }
           players.shift();
         }

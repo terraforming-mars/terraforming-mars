@@ -42,10 +42,8 @@ import {LogMessageData} from '@/LogMessageData';
 import {LogMessageDataType} from '@/LogMessageDataType';
 import {PublicPlayerModel} from '@/models/PlayerModel';
 import Card from '@/client/components/card/Card.vue';
-import {CardFinder} from '@/CardFinder';
-import {ICard} from '@/cards/ICard';
 import {CardName} from '@/CardName';
-import {TileType} from '@/TileType';
+import {TileType} from '@/common/TileType';
 import {playerColorClass} from '@/utils/utils';
 import {Color} from '@/Color';
 import {SoundManager} from '@/client/utils/SoundManager';
@@ -57,6 +55,7 @@ import {GlobalEventModel} from '@/models/TurmoilModel';
 import {PartyName} from '@/turmoil/parties/PartyName';
 import Button from '@/client/components/common/Button.vue';
 import {Log} from '@/Log';
+import {getCard} from '@/client/cards/ClientCardManifest';
 
 let logRequest: XMLHttpRequest | undefined;
 
@@ -165,14 +164,9 @@ export default Vue.extend({
             }
           }
         }
-        const card = new CardFinder().getCardByName<ICard>(cardName, (manifest) => [
-          manifest.projectCards,
-          manifest.preludeCards,
-          manifest.standardProjects,
-          manifest.standardActions,
-        ]);
-        if (card && card.cardType) {
-          return this.cardToHtml(card.cardType, data.value);
+        const card = getCard(cardName);
+        if (card && card.card.cardType) {
+          return this.cardToHtml(card.card.cardType, data.value);
         }
         break;
 

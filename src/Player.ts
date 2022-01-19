@@ -47,13 +47,12 @@ import {SerializedPlayer} from './SerializedPlayer';
 import {SpaceType} from './SpaceType';
 import {StormCraftIncorporated} from './cards/colonies/StormCraftIncorporated';
 import {Tags} from './cards/Tags';
-import {CITY_TILES, TileType} from './TileType';
+import {CITY_TILES, TileType} from './common/TileType';
 import {VictoryPointsBreakdown} from './VictoryPointsBreakdown';
 import {SelectProductionToLose} from './inputs/SelectProductionToLose';
 import {IAresGlobalParametersResponse, ShiftAresGlobalParameters} from './inputs/ShiftAresGlobalParameters';
 import {Timer} from './Timer';
 import {TurmoilHandler} from './turmoil/TurmoilHandler';
-import {TurmoilPolicy} from './turmoil/TurmoilPolicy';
 import {CardLoader} from './CardLoader';
 import {DrawCards} from './deferredActions/DrawCards';
 import {Units} from './Units';
@@ -218,7 +217,7 @@ export class Player implements ISerializable<SerializedPlayer> {
   }
 
   public getSteelValue(): number {
-    if (PartyHooks.shouldApplyPolicy(this, PartyName.MARS, TurmoilPolicy.MARS_FIRST_POLICY_3)) return this.steelValue + 1;
+    if (PartyHooks.shouldApplyPolicy(this, PartyName.MARS, 'mfp03')) return this.steelValue + 1;
     return this.steelValue;
   }
 
@@ -236,8 +235,8 @@ export class Player implements ISerializable<SerializedPlayer> {
     return this.terraformRating;
   }
 
-  public decreaseTerraformRating() {
-    this.terraformRating--;
+  public decreaseTerraformRating(opts: {log?: boolean} = {}) {
+    this.decreaseTerraformRatingSteps(1, opts);
   }
 
   public increaseTerraformRating(opts: {log?: boolean} = {}) {
@@ -274,8 +273,11 @@ export class Player implements ISerializable<SerializedPlayer> {
     }
   }
 
-  public decreaseTerraformRatingSteps(value: number) {
-    this.terraformRating -= value;
+  public decreaseTerraformRatingSteps(steps: number, opts: {log?: boolean} = {}) {
+    this.terraformRating -= steps;
+    if (opts.log === true) {
+      this.game.log('${0} lost ${1} TR', (b) => b.player(this).number(steps));
+    }
   }
 
   public setTerraformRating(value: number) {
@@ -704,7 +706,7 @@ export class Player implements ISerializable<SerializedPlayer> {
     }
 
     // PoliticalAgendas Scientists P2 hook
-    if (PartyHooks.shouldApplyPolicy(this, PartyName.SCIENTISTS, TurmoilPolicy.SCIENTISTS_POLICY_2)) {
+    if (PartyHooks.shouldApplyPolicy(this, PartyName.SCIENTISTS, 'sp02')) {
       requirementsBonus += 2;
     }
 
@@ -1355,7 +1357,7 @@ export class Player implements ISerializable<SerializedPlayer> {
     });
 
     // PoliticalAgendas Unity P4 hook
-    if (card.tags.includes(Tags.SPACE) && PartyHooks.shouldApplyPolicy(this, PartyName.UNITY, TurmoilPolicy.UNITY_POLICY_4)) {
+    if (card.tags.includes(Tags.SPACE) && PartyHooks.shouldApplyPolicy(this, PartyName.UNITY, 'up04')) {
       cost -= 2;
     }
 

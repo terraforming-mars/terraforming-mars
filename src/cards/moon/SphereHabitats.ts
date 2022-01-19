@@ -6,7 +6,7 @@ import {PlaceMoonColonyTile} from '../../moon/PlaceMoonColonyTile';
 import {CardRenderer} from '../render/CardRenderer';
 import {Units} from '../../Units';
 import {MoonCard} from './MoonCard';
-import {TileType} from '../../TileType';
+import {TileType} from '../../common/TileType';
 import {AltSecondaryTag} from '../render/CardRenderItem';
 
 export class SphereHabitats extends MoonCard {
@@ -32,7 +32,7 @@ export class SphereHabitats extends MoonCard {
     });
   };
 
-  public play(player: Player) {
+  public override play(player: Player) {
     super.play(player);
     player.game.defer(new PlaceMoonColonyTile(player));
     return undefined;

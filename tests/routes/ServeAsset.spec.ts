@@ -15,15 +15,15 @@ class FileApiMock extends FileAPI {
   public constructor() {
     super();
   }
-  public readFileSync(path: string): Buffer {
+  public override readFileSync(path: string): Buffer {
     this.counts.readFileSync++;
     return Buffer.from('data: ' + path);
   }
-  public readFile(path: string, cb: (err: NodeJS.ErrnoException | null, data: Buffer) => void): void {
+  public override readFile(path: string, cb: (err: NodeJS.ErrnoException | null, data: Buffer) => void): void {
     this.counts.readFile++;
     cb(null, Buffer.from('data: ' + path));
   }
-  public existsSync(_path: string): boolean {
+  public override existsSync(_path: string): boolean {
     this.counts.existsSync++;
     return true;
   }

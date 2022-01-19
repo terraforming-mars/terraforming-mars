@@ -6,7 +6,7 @@ import {Tags} from '../Tags';
 import {CardRenderer} from '../render/CardRenderer';
 import {PartyName} from '../../turmoil/parties/PartyName';
 import {MoonExpansion} from '../../moon/MoonExpansion';
-import {TileType} from '../../TileType';
+import {TileType} from '../../common/TileType';
 import {CardRequirements} from '../CardRequirements';
 import {Card} from '../Card';
 import {Size} from '../render/Size';

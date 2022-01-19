@@ -8,7 +8,7 @@ import {MareNectarisMine} from '../../../src/cards/moon/MareNectarisMine';
 import {expect} from 'chai';
 import {Resources} from '../../../src/Resources';
 import {MoonSpaces} from '../../../src/moon/MoonSpaces';
-import {TileType} from '../../../src/TileType';
+import {TileType} from '../../../src/common/TileType';
 
 const MOON_OPTIONS = TestingUtils.setCustomGameOptions({moonExpansion: true});
 

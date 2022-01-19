@@ -4,7 +4,7 @@ import {PartyName} from '../turmoil/parties/PartyName';
 import {Resources} from '../Resources';
 import {Player} from '../Player';
 import {ResourceType} from '../ResourceType';
-import {TileType} from '../TileType';
+import {TileType} from '../common/TileType';
 import {GlobalParameter} from '../GlobalParameter';
 import {MoonExpansion} from '../moon/MoonExpansion';
 import {Turmoil} from '../turmoil/Turmoil';
@@ -210,10 +210,10 @@ export class TagCardRequirement extends CardRequirement {
     super(RequirementType.TAG, amount, options);
   }
 
-  protected parseType(): string {
+  protected override parseType(): string {
     return firstLetterUpperCase(this.tag);
   }
-  public satisfies(player: Player): boolean {
+  public override satisfies(player: Player): boolean {
     const mode = this.isMax !== true ? 'default' : 'raw';
     let tagCount = player.getTagCount(this.tag, mode);
 
@@ -236,10 +236,10 @@ export class ProductionCardRequirement extends CardRequirement {
   constructor(public resource: Resources, amount: number, options?: Options) {
     super(RequirementType.PRODUCTION, amount, options);
   }
-  protected parseType(): string {
+  protected override parseType(): string {
     return `${firstLetterUpperCase(this.resource)} production`;
   }
-  public satisfies(player: Player): boolean {
+  public override satisfies(player: Player): boolean {
     return this.satisfiesInequality(player.getProduction(this.resource));
   }
 }
@@ -248,10 +248,10 @@ export class PartyCardRequirement extends CardRequirement {
   constructor(public readonly party: PartyName) {
     super(RequirementType.PARTY);
   }
-  protected parseType(): string {
+  protected override parseType(): string {
     return this.party.toLowerCase();
   }
-  public satisfies(player: Player): boolean {
+  public override satisfies(player: Player): boolean {
     return Turmoil.getTurmoil(player.game).canPlay(player, this.party);
   }
 }

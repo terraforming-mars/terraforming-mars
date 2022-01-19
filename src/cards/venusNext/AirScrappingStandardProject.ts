@@ -21,7 +21,7 @@ export class AirScrappingStandardProject extends StandardProjectCard {
     super(properties);
   }
 
-  public canAct(player: Player): boolean {
+  public override canAct(player: Player): boolean {
     if (player.game.getVenusScaleLevel() >= constants.MAX_VENUS_SCALE) return false;
     return super.canAct(player);
   }

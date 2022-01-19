@@ -7,7 +7,7 @@ import {PlaceMoonColonyTile} from '../../moon/PlaceMoonColonyTile';
 import {Units} from '../../Units';
 import {Resources} from '../../Resources';
 import {IMoonCard} from './IMoonCard';
-import {TileType} from '../../TileType';
+import {TileType} from '../../common/TileType';
 import {AltSecondaryTag} from '../render/CardRenderItem';
 
 
@@ -32,14 +32,14 @@ export class MoonColonyStandardProject extends StandardProjectCard implements IM
 
   public tilesBuilt = [TileType.MOON_COLONY];
 
-  protected discount(player: Player): number {
+  protected override discount(player: Player): number {
     if (player.playedCards.find((card) => card.name === CardName.MOONCRATE_BLOCK_FACTORY)) {
       return 4;
     }
     return super.discount(player);
   }
 
-  public canAct(player: Player): boolean {
+  public override canAct(player: Player): boolean {
     const moonData = MoonExpansion.moonData(player.game);
     const spaces = moonData.moon.getAvailableSpacesOnLand(player);
 

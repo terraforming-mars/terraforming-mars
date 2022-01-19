@@ -2,7 +2,7 @@ import {SpaceBonus} from '../../SpaceBonus';
 import {CardName} from '../../CardName';
 import {CommercialDistrict} from '../base/CommercialDistrict';
 import {CardRenderer} from '../render/CardRenderer';
-import {TileType} from '../../TileType';
+import {TileType} from '../../common/TileType';
 import {CardRenderDynamicVictoryPoints} from '../render/CardRenderDynamicVictoryPoints';
 
 

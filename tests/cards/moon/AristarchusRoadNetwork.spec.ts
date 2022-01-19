@@ -7,7 +7,7 @@ import {TestPlayers} from '../../TestPlayers';
 import {AristarchusRoadNetwork} from '../../../src/cards/moon/AristarchusRoadNetwork';
 import {expect} from 'chai';
 import {Resources} from '../../../src/Resources';
-import {TileType} from '../../../src/TileType';
+import {TileType} from '../../../src/common/TileType';
 import {PlaceMoonRoadTile} from '../../../src/moon/PlaceMoonRoadTile';
 
 const MOON_OPTIONS = TestingUtils.setCustomGameOptions({moonExpansion: true});

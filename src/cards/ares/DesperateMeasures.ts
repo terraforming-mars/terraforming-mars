@@ -6,7 +6,7 @@ import {CardType} from '../CardType';
 import {IProjectCard} from '../IProjectCard';
 import {SelectSpace} from '../../inputs/SelectSpace';
 import {ISpace} from '../../boards/ISpace';
-import {TileType} from '../../TileType';
+import {TileType} from '../../common/TileType';
 import {AresHandler} from '../../ares/AresHandler';
 import {CardRenderer} from '../render/CardRenderer';
 
@@ -33,7 +33,7 @@ export class DesperateMeasures extends Card implements IProjectCard {
     return game.board.spaces.filter((space) => AresHandler.hasHazardTile(space));
   }
 
-  public canPlay(player: Player): boolean {
+  public override canPlay(player: Player): boolean {
     // You can't play desperate measures if there isn't a hazard marker in play.
     return this.getHazardTiles(player.game).length > 0;
   }

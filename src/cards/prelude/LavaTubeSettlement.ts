@@ -43,7 +43,7 @@ export class LavaTubeSettlement extends Card implements IProjectCard {
     return LavaFlows.getVolcanicSpaces(player);
   }
 
-  public canPlay(player: Player): boolean {
+  public override canPlay(player: Player): boolean {
     return this.getSpacesForCity(player).length > 0 && player.getProduction(Resources.ENERGY) >= 1;
   }
 

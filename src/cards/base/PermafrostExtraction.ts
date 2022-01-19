@@ -1,13 +1,11 @@
 import {CardType} from '../CardType';
 import {IProjectCard} from '../IProjectCard';
 import {Player} from '../../Player';
-import {SelectSpace} from '../../inputs/SelectSpace';
-import {ISpace} from '../../boards/ISpace';
-import {MAX_OCEAN_TILES} from '../../constants';
 import {Card} from '../Card';
 import {CardName} from '../../CardName';
 import {CardRequirements} from '../CardRequirements';
 import {CardRenderer} from '../render/CardRenderer';
+import {PlaceOceanTile} from '../../deferredActions/PlaceOceanTile';
 
 export class PermafrostExtraction extends Card implements IProjectCard {
   constructor() {
@@ -29,14 +27,7 @@ export class PermafrostExtraction extends Card implements IProjectCard {
   }
 
   public play(player: Player) {
-    // TODO(kberg): Replace with PlaceOceanTile
-    if (player.game.board.getOceansOnBoard() === MAX_OCEAN_TILES) {
-      return undefined;
-    }
-
-    return new SelectSpace('Select space for ocean tile', player.game.board.getAvailableSpacesForOcean(player), (space: ISpace) => {
-      player.game.addOceanTile(player, space.id);
-      return undefined;
-    });
+    player.game.defer(new PlaceOceanTile(player));
+    return undefined;
   }
 }

@@ -9,7 +9,7 @@ import {Reds} from '../../../../src/turmoil/parties/Reds';
 import {Phase} from '../../../../src/Phase';
 import {SelectSpace} from '../../../../src/inputs/SelectSpace';
 import {SpaceType} from '../../../../src/SpaceType';
-import {TileType} from '../../../../src/TileType';
+import {TileType} from '../../../../src/common/TileType';
 
 describe('AquiferStandardProject', function() {
   let card: AquiferStandardProject;

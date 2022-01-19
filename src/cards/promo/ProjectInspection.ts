@@ -43,7 +43,7 @@ export class ProjectInspection extends Card implements IProjectCard {
     return result;
   }
 
-  public canPlay(player: Player): boolean {
+  public override canPlay(player: Player): boolean {
     return this.getActionCards(player).length > 0;
   }
 

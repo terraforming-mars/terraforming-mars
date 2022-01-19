@@ -21,7 +21,7 @@ export class AquiferStandardProject extends StandardProjectCard {
     });
   }
 
-  public canAct(player: Player): boolean {
+  public override canAct(player: Player): boolean {
     if (player.game.board.getOceansOnBoard() === MAX_OCEAN_TILES) return false;
     return super.canAct(player);
   }

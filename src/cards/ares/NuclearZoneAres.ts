@@ -1,4 +1,4 @@
-import {TileType} from '../../TileType';
+import {TileType} from '../../common/TileType';
 import {CardName} from '../../CardName';
 import {NuclearZone} from '../base/NuclearZone';
 import {CardRenderer} from '../render/CardRenderer';

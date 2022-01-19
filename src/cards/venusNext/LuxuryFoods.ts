@@ -22,7 +22,7 @@ export class LuxuryFoods extends Card {
     });
   };
 
-  public canPlay(player: Player): boolean {
+  public override canPlay(player: Player): boolean {
     return player.checkMultipleTagPresence([Tags.VENUS, Tags.EARTH, Tags.JOVIAN]);
   }
 

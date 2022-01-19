@@ -34,7 +34,7 @@ export class TitaniumExtractionCenter extends MoonCard {
     player.addProduction(Resources.TITANIUM, productionIncrease, {log: true});
   }
 
-  public play(player: Player) {
+  public override play(player: Player) {
     super.play(player);
     this.produce(player);
     return undefined;

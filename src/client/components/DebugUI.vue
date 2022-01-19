@@ -134,41 +134,16 @@
 
 import Vue from 'vue';
 import Card from '@/client/components/card/Card.vue';
-import {
-  ALL_CARD_MANIFESTS,
-  ALL_CORPORATION_CARD_NAMES,
-  ALL_PRELUDE_CARD_NAMES,
-  ALL_PROJECT_CARD_NAMES,
-  ALL_STANDARD_PROJECT_CARD_NAMES,
-} from '@/cards/AllCards';
 import {GameModule} from '@/GameModule';
-import {ICard} from '@/cards/ICard';
 import {CardType} from '@/cards/CardType';
 import {CardName} from '@/CardName';
-import {ICardFactory} from '@/cards/ICardFactory';
 import {PreferencesManager} from '@/client/utils/PreferencesManager';
 import {GlobalEventName} from '@/turmoil/globalEvents/GlobalEventName';
 import {GlobalEventModel} from '@/models/TurmoilModel';
 import {PartyName} from '@/turmoil/parties/PartyName';
 import {ALL_EVENTS, getGlobalEventByName} from '@/turmoil/globalEvents/GlobalEventDealer';
 import GlobalEvent from '@/client/components/GlobalEvent.vue';
-
-const cards: Map<CardName, {card: ICard, module: GameModule, cardNumber: string}> = new Map();
-
-ALL_CARD_MANIFESTS.forEach((manifest) => {
-  const module = manifest.module;
-  [
-    manifest.projectCards,
-    manifest.corporationCards,
-    manifest.preludeCards,
-    manifest.standardProjects].forEach((deck) => {
-    deck.factories.forEach((cf: ICardFactory<ICard>) => {
-      const card: ICard = new cf.Factory();
-      const cardNumber = card.metadata.cardNumber;
-      cards.set(card.name, {card, module, cardNumber});
-    });
-  });
-});
+import {byType, getCard, getCards, toName} from '../cards/ClientCardManifest';
 
 const MODULE_BASE = 'b';
 const MODULE_CORP = 'c';
@@ -344,25 +319,32 @@ export default Vue.extend({
       const copy = [...names];
       if (this.$data.sortById) {
         return copy.sort((a: CardName, b: CardName) => {
-          const an = cards.get(a)?.cardNumber || '';
-          const bn = cards.get(b)?.cardNumber || '';
+          const an = getCard(a)?.card.metadata.cardNumber || '';
+          const bn = getCard(b)?.card.metadata.cardNumber || '';
           return an.localeCompare(bn);
         });
       } else {
-        return copy.sort();
+        return copy.sort((a, b) => a.localeCompare(b));
       }
     },
     getAllStandardProjectCards() {
-      return this.sort(ALL_STANDARD_PROJECT_CARD_NAMES);
+      const names = getCards(byType(CardType.STANDARD_PROJECT)).map(toName);
+      return this.sort(names);
     },
     getAllProjectCards() {
-      return this.sort(ALL_PROJECT_CARD_NAMES);
+      const names: Array<CardName> = [];
+      names.push(...getCards(byType(CardType.AUTOMATED)).map(toName));
+      names.push(...getCards(byType(CardType.ACTIVE)).map(toName));
+      names.push(...getCards(byType(CardType.EVENT)).map(toName));
+      return this.sort(names);
     },
     getAllCorporationCards() {
-      return this.sort(ALL_CORPORATION_CARD_NAMES);
+      const names = getCards(byType(CardType.CORPORATION)).map(toName);
+      return this.sort(names);
     },
     getAllPreludeCards() {
-      return this.sort(ALL_PRELUDE_CARD_NAMES);
+      const names = getCards(byType(CardType.PRELUDE)).map(toName);
+      return this.sort(names);
     },
     getAllGlobalEvents() {
       return ALL_EVENTS.keys();
@@ -386,7 +368,7 @@ export default Vue.extend({
       };
     },
     filtered(cardName: CardName): boolean {
-      const card = cards.get(cardName);
+      const card = getCard(cardName);
       if (card === undefined) {
         return false;
       }

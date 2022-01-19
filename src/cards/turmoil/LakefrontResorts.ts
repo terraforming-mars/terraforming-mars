@@ -2,7 +2,7 @@ import {CorporationCard} from '../corporation/CorporationCard';
 import {Tags} from '../Tags';
 import {Player} from '../../Player';
 import {ISpace} from '../../boards/ISpace';
-import {TileType} from '../../TileType';
+import {TileType} from '../../common/TileType';
 import {Resources} from '../../Resources';
 import {Card} from '../Card';
 import {CardName} from '../../CardName';

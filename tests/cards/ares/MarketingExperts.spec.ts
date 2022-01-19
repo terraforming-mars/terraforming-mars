@@ -4,7 +4,7 @@ import {Player} from '../../../src/Player';
 import {Resources} from '../../../src/Resources';
 import {expect} from 'chai';
 import {SpaceType} from '../../../src/SpaceType';
-import {TileType} from '../../../src/TileType';
+import {TileType} from '../../../src/common/TileType';
 import {ARES_OPTIONS_NO_HAZARDS} from '../../ares/AresTestHelper';
 import {SpaceBonus} from '../../../src/SpaceBonus';
 import {EmptyBoard} from '../../ares/EmptyBoard';

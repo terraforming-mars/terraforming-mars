@@ -1,6 +1,6 @@
 
 import {Color} from '../Color';
-import {TileType} from '../TileType';
+import {TileType} from '../common/TileType';
 import {SpaceBonus} from '../SpaceBonus';
 import {SpaceType} from '../SpaceType';
 import {SpaceId} from '../boards/ISpace';

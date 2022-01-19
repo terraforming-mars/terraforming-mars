@@ -33,7 +33,7 @@ export class PhysicsComplex extends Card implements IActionCard, IProjectCard, I
     });
   }
 
-    public resourceCount: number = 0;
+    public override resourceCount: number = 0;
 
     public play() {
       return undefined;

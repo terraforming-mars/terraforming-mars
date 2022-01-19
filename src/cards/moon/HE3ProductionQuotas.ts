@@ -7,7 +7,7 @@ import {CardRenderer} from '../render/CardRenderer';
 import {CardRequirements} from '../CardRequirements';
 import {PartyName} from '../../turmoil/parties/PartyName';
 import {MoonExpansion} from '../../moon/MoonExpansion';
-import {TileType} from '../../TileType';
+import {TileType} from '../../common/TileType';
 import {Card} from '../Card';
 import {Size} from '../render/Size';
 import {all} from '../Options';
@@ -35,7 +35,7 @@ export class HE3ProductionQuotas extends Card implements IProjectCard {
     });
   };
 
-  public canPlay(player: Player): boolean {
+  public override canPlay(player: Player): boolean {
     const moonTiles = MoonExpansion.tiles(player.game, TileType.MOON_MINE, {surfaceOnly: true});
     if (player.steel < moonTiles.length) {
       return false;

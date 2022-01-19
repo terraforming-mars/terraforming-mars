@@ -3,7 +3,7 @@ import {SpaceBonus} from '../../src/SpaceBonus';
 import {Player} from '../../src/Player';
 import {Resources} from '../../src/Resources';
 import {SpaceType} from '../../src/SpaceType';
-import {TileType} from '../../src/TileType';
+import {TileType} from '../../src/common/TileType';
 import {ISpace} from '../../src/boards/ISpace';
 import {TestingUtils} from '../TestingUtils';
 import {AresHandler} from '../../src/ares/AresHandler';

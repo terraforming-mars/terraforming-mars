@@ -38,7 +38,6 @@ export class TerraformingControlStation extends Card implements IProjectCard {
   }
 
   public play(player: Player) {
-    // TODO(kberg): Handle Turmoil efect.
     player.increaseTerraformRatingSteps(2);
     return undefined;
   }

@@ -4,7 +4,7 @@ import {Player} from '../../src/Player';
 import {DEFAULT_GAME_OPTIONS, Game} from '../../src/Game';
 import {ARES_OPTIONS_NO_HAZARDS, AresTestHelper, ARES_OPTIONS_WITH_HAZARDS} from './AresTestHelper';
 import {EmptyBoard} from './EmptyBoard';
-import {TileType} from '../../src/TileType';
+import {TileType} from '../../src/common/TileType';
 import {ITile} from '../../src/ITile';
 import {SpaceType} from '../../src/SpaceType';
 import {Resources} from '../../src/Resources';

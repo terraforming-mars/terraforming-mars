@@ -1,5 +1,5 @@
 import {SpaceBonus} from '../../SpaceBonus';
-import {TileType} from '../../TileType';
+import {TileType} from '../../common/TileType';
 import {CardName} from '../../CardName';
 import {NaturalPreserve} from '../base/NaturalPreserve';
 import {CardRenderer} from '../render/CardRenderer';

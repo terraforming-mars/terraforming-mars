@@ -1,5 +1,5 @@
 import {Player} from '../../Player';
-import {TileType} from '../../TileType';
+import {TileType} from '../../common/TileType';
 import {CardName} from '../../CardName';
 import {MiningCard} from './MiningCard';
 import {CardRenderer} from '../render/CardRenderer';
@@ -23,7 +23,7 @@ export class MiningArea extends MiningCard {
       metadata,
     );
   }
-  protected getAvailableSpaces(player: Player) {
+  protected override getAvailableSpaces(player: Player) {
     return super.getAvailableSpaces(player)
       .filter((space) => player.game.board.getAdjacentSpaces(space).some((adjacentSpace) => adjacentSpace.tile !== undefined && adjacentSpace.tile.tileType !== TileType.OCEAN && adjacentSpace.player === player));
   }

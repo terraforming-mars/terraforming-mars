@@ -1,6 +1,6 @@
 import {IAward} from './IAward';
 import {Player} from '../Player';
-import {isHazardTileType} from '../TileType';
+import {isHazardTileType} from '../common/TileType';
 
 export class DesertSettler implements IAward {
     public name: string = 'Desert Settler';

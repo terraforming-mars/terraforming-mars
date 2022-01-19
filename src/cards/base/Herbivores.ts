@@ -6,7 +6,7 @@ import {CardType} from '../CardType';
 import {Player} from '../../Player';
 import {ISpace} from '../../boards/ISpace';
 import {ResourceType} from '../../ResourceType';
-import {TileType} from '../../TileType';
+import {TileType} from '../../common/TileType';
 import {Resources} from '../../Resources';
 import {CardName} from '../../CardName';
 import {IResourceCard} from '../ICard';
@@ -46,9 +46,9 @@ export class Herbivores extends Card implements IProjectCard, IResourceCard {
       },
     });
   }
-    public resourceCount: number = 0;
+    public override resourceCount: number = 0;
 
-    public canPlay(player: Player): boolean {
+    public override canPlay(player: Player): boolean {
       return player.game.someoneHasResourceProduction(Resources.PLANTS, 1);
     }
 

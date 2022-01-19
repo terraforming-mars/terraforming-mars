@@ -6,7 +6,7 @@ import {CardRenderer} from '../render/CardRenderer';
 import {Units} from '../../Units';
 import {AltSecondaryTag} from '../render/CardRenderItem';
 import {MoonCard} from './MoonCard';
-import {TileType} from '../../TileType';
+import {TileType} from '../../common/TileType';
 import {MoonExpansion} from '../../moon/MoonExpansion';
 import {PlaceMoonColonyTile} from '../../moon/PlaceMoonColonyTile';
 import {DeferredAction} from '../../deferredActions/DeferredAction';
@@ -59,7 +59,7 @@ export class LunaEcumenopolis extends MoonCard {
     return player.canAfford(0, {tr: {moonColony: 2, tr: expectedTRBump}});
   }
 
-  public canPlay(player: Player) {
+  public override canPlay(player: Player) {
     if (!super.canPlay(player)) {
       return false;
     }

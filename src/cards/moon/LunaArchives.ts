@@ -30,7 +30,7 @@ export class LunaArchives extends Card implements IResourceCard, IActionCard {
     });
   };
 
-  public resourceCount = 0;
+  public override resourceCount = 0;
 
   public canAct() {
     return true;

@@ -1,6 +1,6 @@
 import {IMilestone} from './IMilestone';
 import {Player} from '../Player';
-import {isHazardTileType} from '../TileType';
+import {isHazardTileType} from '../common/TileType';
 
 export class PolarExplorer implements IMilestone {
     public name: string = 'Polar Explorer';

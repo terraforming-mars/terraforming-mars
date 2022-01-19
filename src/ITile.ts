@@ -1,5 +1,5 @@
 
-import {TileType} from './TileType';
+import {TileType} from './common/TileType';
 
 export interface ITile {
   card?: string;

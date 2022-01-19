@@ -34,7 +34,7 @@ export class SelectResources extends AndOptions {
   constructor(
     public player: Player,
     public count: number,
-    public title: string,
+    public override title: string,
     private units = Units.of({})) {
     super(
       () => {

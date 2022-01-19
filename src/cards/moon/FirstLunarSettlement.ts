@@ -4,7 +4,7 @@ import {Tags} from '../Tags';
 import {PreludeCard} from '../prelude/PreludeCard';
 import {PlaceMoonColonyTile} from '../../moon/PlaceMoonColonyTile';
 import {CardRenderer} from '../render/CardRenderer';
-import {TileType} from '../../TileType';
+import {TileType} from '../../common/TileType';
 import {IProjectCard} from '../IProjectCard';
 import {AltSecondaryTag} from '../render/CardRenderItem';
 import {Units} from '../../Units';

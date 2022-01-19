@@ -4,7 +4,7 @@ import {Card} from '../Card';
 import {VictoryPoints} from '../ICard';
 import {CardType} from '../CardType';
 import {Player} from '../../Player';
-import {TileType} from '../../TileType';
+import {TileType} from '../../common/TileType';
 import {ResourceType} from '../../ResourceType';
 import {SelectSpace} from '../../inputs/SelectSpace';
 import {ISpace} from '../../boards/ISpace';
@@ -50,7 +50,7 @@ export class EcologicalZone extends Card implements IProjectCard, IResourceCard 
     });
   }
 
-  public resourceCount: number = 0;
+  public override resourceCount: number = 0;
 
   private getAvailableSpaces(player: Player): Array<ISpace> {
     return player.game.board.getAvailableSpacesOnLand(player)
@@ -61,7 +61,7 @@ export class EcologicalZone extends Card implements IProjectCard, IResourceCard 
         ).length > 0,
       );
   }
-  public canPlay(player: Player): boolean {
+  public override canPlay(player: Player): boolean {
     return this.getAvailableSpaces(player).length > 0;
   }
   public onCardPlayed(player: Player, card: IProjectCard): void {

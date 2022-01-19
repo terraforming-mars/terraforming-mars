@@ -41,7 +41,7 @@ export class Pets extends Card implements IProjectCard, IResourceCard {
     });
   }
 
-  public resourceCount: number = 0;
+  public override resourceCount: number = 0;
 
   public onTilePlaced(cardOwner: Player, activePlayer: Player, space: ISpace) {
     if (Board.isCitySpace(space)) {

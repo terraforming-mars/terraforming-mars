@@ -41,7 +41,8 @@ export class RobinHaulings extends Card implements CorporationCard {
 
   public override resourceCount = 0;
 
-  public play() {
+  public play(player: Player) {
+    player.addResourceTo(this, 1);
     return undefined;
   }
 

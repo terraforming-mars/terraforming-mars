@@ -2,7 +2,7 @@ import {ISpace} from '../boards/ISpace';
 import {Color} from '../Color';
 import {Game} from '../Game';
 import {MoonExpansion} from '../moon/MoonExpansion';
-import {TileType} from '../TileType';
+import {TileType} from '../common/TileType';
 import {SpaceModel} from './SpaceModel';
 
 export interface MoonModel {

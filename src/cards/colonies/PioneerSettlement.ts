@@ -34,7 +34,7 @@ export class PioneerSettlement extends Card implements IProjectCard {
 
   public warning?: string;
 
-  public canPlay(player: Player): boolean {
+  public override canPlay(player: Player): boolean {
     if (player.hasAvailableColonyTileToBuildOn() === false) {
       return false;
     }

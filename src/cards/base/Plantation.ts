@@ -29,7 +29,7 @@ export class Plantation extends Card implements IProjectCard {
     });
   }
 
-  public canPlay(player: Player): boolean {
+  public override canPlay(player: Player): boolean {
     if (player.game.board.getAvailableSpacesOnLand(player).length === 0) {
       return false;
     }

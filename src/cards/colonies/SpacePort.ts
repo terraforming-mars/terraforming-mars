@@ -35,7 +35,7 @@ export class SpacePort extends Card implements IProjectCard {
     });
   }
 
-  public canPlay(player: Player): boolean {
+  public override canPlay(player: Player): boolean {
     if (player.game.board.getAvailableSpacesForCity(player).length === 0) return false;
     let coloniesCount: number = 0;
     player.game.colonies.forEach((colony) => {

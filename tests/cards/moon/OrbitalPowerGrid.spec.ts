@@ -4,7 +4,7 @@ import {TestingUtils} from '../../TestingUtils';
 import {TestPlayers} from '../../TestPlayers';
 import {OrbitalPowerGrid} from '../../../src/cards/moon/OrbitalPowerGrid';
 import {expect} from 'chai';
-import {TileType} from '../../../src/TileType';
+import {TileType} from '../../../src/common/TileType';
 import {Resources} from '../../../src/Resources';
 import {SpaceType} from '../../../src/SpaceType';
 

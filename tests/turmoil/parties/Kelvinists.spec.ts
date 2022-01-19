@@ -6,7 +6,7 @@ import {ISpace} from '../../../src/boards/ISpace';
 import {TestingUtils} from '../../TestingUtils';
 import {TestPlayers} from '../../TestPlayers';
 import {Kelvinists, KELVINISTS_BONUS_1, KELVINISTS_BONUS_2, KELVINISTS_POLICY_1, KELVINISTS_POLICY_2, KELVINISTS_POLICY_3, KELVINISTS_POLICY_4} from '../../../src/turmoil/parties/Kelvinists';
-import {TileType} from '../../../src/TileType';
+import {TileType} from '../../../src/common/TileType';
 import {Resources} from '../../../src/Resources';
 import {StormCraftIncorporated} from '../../../src/cards/colonies/StormCraftIncorporated';
 import {AndOptions} from '../../../src/inputs/AndOptions';

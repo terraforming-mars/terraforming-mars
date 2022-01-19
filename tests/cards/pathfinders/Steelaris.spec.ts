@@ -3,7 +3,7 @@ import {Steelaris} from '../../../src/cards/pathfinders/Steelaris';
 import {Game} from '../../../src/Game';
 import {TestPlayer} from '../../TestPlayer';
 import {getTestPlayer, newTestGame} from '../../TestGame';
-import {TileType} from '../../../src//TileType';
+import {TileType} from '../../../src/common/TileType';
 import {TestingUtils} from '../../TestingUtils';
 import {EmptyBoard} from '../../ares/EmptyBoard';
 

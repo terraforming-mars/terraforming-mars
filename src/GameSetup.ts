@@ -8,7 +8,7 @@ import {Player} from './Player';
 import {Resources} from './Resources';
 import {ColonyName} from './colonies/ColonyName';
 import {Color} from './Color';
-import {TileType} from './TileType';
+import {TileType} from './common/TileType';
 import {Random} from './Random';
 import {ArabiaTerraBoard} from './boards/ArabiaTerraBoard';
 

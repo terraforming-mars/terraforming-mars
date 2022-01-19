@@ -35,7 +35,7 @@ export class BuildColonyStandardProject extends StandardProjectCard {
     return openColonies;
   }
 
-  public canAct(player: Player): boolean {
+  public override canAct(player: Player): boolean {
     return super.canAct(player) && this.getOpenColonies(player).length > 0;
   }
 

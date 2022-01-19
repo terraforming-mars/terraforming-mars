@@ -7,7 +7,7 @@ import {TestPlayers} from '../../TestPlayers';
 import {TychoRoadNetwork} from '../../../src/cards/moon/TychoRoadNetwork';
 import {expect} from 'chai';
 import {Resources} from '../../../src/Resources';
-import {TileType} from '../../../src/TileType';
+import {TileType} from '../../../src/common/TileType';
 import {PlaceMoonRoadTile} from '../../../src/moon/PlaceMoonRoadTile';
 import {SelectSpace} from '../../../src/inputs/SelectSpace';
 

@@ -10,7 +10,7 @@ import {IProjectCard} from '../../../src/cards/IProjectCard';
 import {JovianLanterns} from '../../../src/cards/colonies/JovianLanterns';
 import {GHGProducingBacteria} from '../../../src/cards/base/GHGProducingBacteria';
 import {SelectSpace} from '../../../src/inputs/SelectSpace';
-import {TileType} from '../../../src/TileType';
+import {TileType} from '../../../src/common/TileType';
 
 describe('SecretLabs', function() {
   let card: SecretLabs;

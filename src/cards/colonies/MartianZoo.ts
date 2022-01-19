@@ -40,7 +40,7 @@ export class MartianZoo extends Card implements IProjectCard, IResourceCard {
     });
   }
 
-  public resourceCount: number = 0;
+  public override resourceCount: number = 0;
 
   public onCardPlayed(player: Player, card: IProjectCard) {
     if (card.tags.includes(Tags.EARTH)) {

@@ -3,7 +3,7 @@ import {Player} from '../../../src/Player';
 import {OceanFarm} from '../../../src/cards/ares/OceanFarm';
 import {ARES_OPTIONS_NO_HAZARDS} from '../../ares/AresTestHelper';
 import {expect} from 'chai';
-import {TileType} from '../../../src/TileType';
+import {TileType} from '../../../src/common/TileType';
 import {SpaceBonus} from '../../../src/SpaceBonus';
 import {Resources} from '../../../src/Resources';
 import {SpaceType} from '../../../src/SpaceType';

@@ -3,7 +3,7 @@ import {Game} from './Game';
 import {Player} from './Player';
 import {ICard} from './cards/ICard';
 import {ISpace} from './boards/ISpace';
-import {TileType} from './TileType';
+import {TileType} from './common/TileType';
 import {Colony} from './colonies/Colony';
 
 export class LogHelper {

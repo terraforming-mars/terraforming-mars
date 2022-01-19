@@ -6,7 +6,7 @@ import {HeavyDutyRovers} from '../../../src/cards/moon/HeavyDutyRovers';
 import {expect} from 'chai';
 import {IMoonData} from '../../../src/moon/IMoonData';
 import {MoonExpansion} from '../../../src/moon/MoonExpansion';
-import {TileType} from '../../../src/TileType';
+import {TileType} from '../../../src/common/TileType';
 
 const MOON_OPTIONS = TestingUtils.setCustomGameOptions({moonExpansion: true});
 

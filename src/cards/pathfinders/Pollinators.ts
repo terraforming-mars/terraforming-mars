@@ -33,7 +33,7 @@ export class Pollinators extends Card implements IProjectCard, IResourceCard, IA
     });
   }
 
-  public resourceCount = 0;
+  public override resourceCount = 0;
 
   public canAct() {
     return true;

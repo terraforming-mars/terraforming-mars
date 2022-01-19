@@ -29,7 +29,7 @@ export class NitrophilicMoss extends Card implements IProjectCard {
     });
   }
 
-  public canPlay(player: Player): boolean {
+  public override canPlay(player: Player): boolean {
     const hasViralEnhancers = player.playedCards.find((card) => card.name === CardName.VIRAL_ENHANCERS);
     const hasEnoughPlants = player.plants >= 2 || player.isCorporation(CardName.MANUTECH) || player.plants >= 1 && hasViralEnhancers !== undefined;
 

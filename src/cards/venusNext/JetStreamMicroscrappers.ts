@@ -34,7 +34,7 @@ export class JetStreamMicroscrappers extends Card implements IActionCard, IResou
       },
     });
   };
-  public resourceCount: number = 0;
+  public override resourceCount: number = 0;
 
   public play() {
     return undefined;

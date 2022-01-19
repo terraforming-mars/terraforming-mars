@@ -9,7 +9,7 @@ import {IMilestone} from './milestones/IMilestone';
 import {Colony} from './colonies/Colony';
 import {IParty} from './turmoil/parties/IParty';
 import {LogMessage} from './LogMessage';
-import {TileType} from './TileType';
+import {TileType} from './common/TileType';
 import {SpaceBonus} from './SpaceBonus';
 import {IGlobalEvent} from './turmoil/globalEvents/IGlobalEvent';
 import {GlobalEventName} from './turmoil/globalEvents/GlobalEventName';

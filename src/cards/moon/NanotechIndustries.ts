@@ -38,7 +38,7 @@ export class NanotechIndustries extends Card implements IActionCard, Corporation
     });
   }
 
-  public resourceCount = 0;
+  public override resourceCount = 0;
 
   public play() {
     return undefined;

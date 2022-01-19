@@ -8,7 +8,6 @@ import {Bonus} from '../Bonus';
 import {SelectHowToPayDeferred} from '../../deferredActions/SelectHowToPayDeferred';
 import {Player} from '../../Player';
 import {Policy} from '../Policy';
-import {TurmoilPolicy} from '../TurmoilPolicy';
 
 export class Scientists extends Party implements IParty {
   name = PartyName.SCIENTISTS;
@@ -18,7 +17,7 @@ export class Scientists extends Party implements IParty {
 }
 
 class ScientistsBonus01 implements Bonus {
-  id = 'sb01';
+  id = 'sb01' as const;
   isDefault = true;
   description: string = 'Gain 1 M€ for each Science tag you have';
 
@@ -34,7 +33,7 @@ class ScientistsBonus01 implements Bonus {
 }
 
 class ScientistsBonus02 implements Bonus {
-  id = 'sb02';
+  id = 'sb02' as const;
   description: string = 'Gain 1 M€ for every 3 cards in hand';
   isDefault = false;
 
@@ -51,7 +50,7 @@ class ScientistsBonus02 implements Bonus {
 
 class ScientistsPolicy01 implements Policy {
   isDefault = true;
-  id = TurmoilPolicy.SCIENTISTS_DEFAULT_POLICY;
+  id = 'sp01' as const;
   description: string = 'Pay 10 M€ to draw 3 cards (Turmoil Scientists)';
 
   canAct(player: Player) {
@@ -78,19 +77,19 @@ class ScientistsPolicy01 implements Policy {
 }
 
 class ScientistsPolicy02 implements Policy {
-  id = TurmoilPolicy.SCIENTISTS_POLICY_2;
+  id = 'sp02' as const;
   description: string = 'Your global requirements are +/- 2 steps';
   isDefault = false;
 }
 
 class ScientistsPolicy03 implements Policy {
-  id = TurmoilPolicy.SCIENTISTS_POLICY_3;
+  id = 'sp03' as const;
   description: string = 'When you raise a global parameter, draw a card per step raised';
   isDefault = false;
 }
 
 class ScientistsPolicy04 implements Policy {
-  id = TurmoilPolicy.SCIENTISTS_POLICY_4;
+  id = 'sp04' as const;
   description: string = 'Cards with Science tag requirements may be played with 1 less Science tag';
   isDefault = false;
 

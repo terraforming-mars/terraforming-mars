@@ -42,7 +42,7 @@ export class SecretLabs extends Card implements IProjectCard {
     return player.canAfford(megacrdits, {steel: true, titanium: true, tr});
   };
 
-  public canPlay(player: Player) {
+  public override canPlay(player: Player) {
     return this.canAfford(player, {oceans: 1}) || this.canAfford(player, {temperature: 1}) || this.canAfford(player, {oxygen: 1});
   }
 

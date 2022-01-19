@@ -46,7 +46,7 @@ export class TheDarksideofTheMoonSyndicate extends Card implements CorporationCa
     });
   }
 
-  public resourceCount = 0;
+  public override resourceCount = 0;
 
   public play(player: Player) {
     player.addResourceTo(this, 2);

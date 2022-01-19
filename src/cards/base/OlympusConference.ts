@@ -34,7 +34,7 @@ export class OlympusConference extends Card implements IProjectCard, IResourceCa
     });
   }
 
-    public resourceCount: number = 0;
+    public override resourceCount: number = 0;
 
     public onCardPlayed(player: Player, card: IProjectCard) {
       const scienceTags = card.tags.filter((tag) => tag === Tags.SCIENCE).length;

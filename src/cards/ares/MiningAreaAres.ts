@@ -1,6 +1,6 @@
 import {CardName} from '../../CardName';
 import {MiningArea} from '../base/MiningArea';
-import {TileType} from '../../TileType';
+import {TileType} from '../../common/TileType';
 import {CardRenderer} from '../render/CardRenderer';
 
 export class MiningAreaAres extends MiningArea {

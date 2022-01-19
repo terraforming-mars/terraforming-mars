@@ -43,7 +43,7 @@ export class StormCraftIncorporated extends Card implements IActionCard, Corpora
     });
   }
 
-  public resourceCount = 0;
+  public override resourceCount = 0;
 
   public play() {
     return undefined;

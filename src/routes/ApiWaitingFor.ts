@@ -34,7 +34,7 @@ export class ApiWaitingFor extends Handler {
     return {result: 'WAIT'};
   }
 
-  public get(req: http.IncomingMessage, res: http.ServerResponse, ctx: IContext): void {
+  public override get(req: http.IncomingMessage, res: http.ServerResponse, ctx: IContext): void {
     const id = String(ctx.url.searchParams.get('id'));
     const gameAge = Number(ctx.url.searchParams.get('gameAge'));
     const undoCount = Number(ctx.url.searchParams.get('undoCount'));

@@ -29,7 +29,7 @@ export class ImprovedMoonConcrete extends MoonCard implements IProjectCard {
     });
   }
 
-  public play(player: Player) {
+  public override play(player: Player) {
     super.play(player);
     MoonExpansion.raiseMiningRate(player);
     return undefined;

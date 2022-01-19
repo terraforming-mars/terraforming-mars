@@ -38,7 +38,7 @@ export class IntragenSanctuaryHeadquarters extends Card implements CorporationCa
     });
   }
 
-  public resourceCount = 0;
+  public override resourceCount = 0;
 
   public initialAction(player: Player) {
     player.game.defer(new PlaceMoonColonyTile(player));

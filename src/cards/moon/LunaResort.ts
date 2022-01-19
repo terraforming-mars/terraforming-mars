@@ -35,7 +35,7 @@ export class LunaResort extends MoonCard {
     });
   };
 
-  public play(player: Player) {
+  public override play(player: Player) {
     super.play(player);
     MoonExpansion.raiseColonyRate(player);
     return undefined;

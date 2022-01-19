@@ -37,7 +37,7 @@ export class ImmigrantCity extends Card implements IProjectCard {
     });
   }
 
-  public canPlay(player: Player): boolean {
+  public override canPlay(player: Player): boolean {
     const hasEnergyProduction = player.getProduction(Resources.ENERGY) >= 1;
     const canPlaceCityOnMars = player.game.board.getAvailableSpacesForCity(player).length > 0;
     const canDecreaseMcProduction = player.getProduction(Resources.MEGACREDITS) >= -4 || player.isCorporation(CardName.THARSIS_REPUBLIC);

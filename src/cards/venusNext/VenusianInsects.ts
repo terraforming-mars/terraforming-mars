@@ -32,7 +32,7 @@ export class VenusianInsects extends Card implements IActionCard, IResourceCard 
       },
     });
   };
-  public resourceCount: number = 0;
+  public override resourceCount: number = 0;
 
   public play() {
     return undefined;

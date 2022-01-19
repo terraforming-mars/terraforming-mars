@@ -44,7 +44,7 @@ export class EarlyExpedition extends Card implements IProjectCard {
       .filter(nextToNoOtherTileFn(player.game.board));
   }
 
-  public canPlay(player: Player) {
+  public override canPlay(player: Player) {
     return player.canAdjustProduction(this.productionBox) && this.getAvailableSpaces(player).length > 0;
   }
 

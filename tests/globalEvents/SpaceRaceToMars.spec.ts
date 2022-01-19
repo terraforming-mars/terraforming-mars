@@ -2,7 +2,7 @@ import {expect} from 'chai';
 import {SpaceRaceToMars} from '../../src/turmoil/globalEvents/SpaceRaceToMars';
 import {Kelvinists} from '../../src/turmoil/parties/Kelvinists';
 import {getTestPlayer, newTestGame} from '../TestGame';
-import {TileType} from '../../src/TileType';
+import {TileType} from '../../src/common/TileType';
 import {Resources} from '../../src/Resources';
 import {Game} from '../../src/Game';
 import {TestPlayer} from '../TestPlayer';

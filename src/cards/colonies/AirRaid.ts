@@ -29,7 +29,7 @@ export class AirRaid extends Card implements IProjectCard {
     });
   }
 
-  public canPlay(player: Player): boolean {
+  public override canPlay(player: Player): boolean {
     return player.getResourceCount(ResourceType.FLOATER) > 0;
   }
 

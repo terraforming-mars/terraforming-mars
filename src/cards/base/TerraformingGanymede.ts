@@ -25,7 +25,7 @@ export class TerraformingGanymede extends Card implements IProjectCard {
       },
     });
   }
-  public canPlay(player: Player): boolean {
+  public override canPlay(player: Player): boolean {
     const steps = 1 + player.getTagCount(Tags.JOVIAN);
     return player.canAfford(player.getCardCost(this), {titanium: true, tr: {tr: steps}});
   }

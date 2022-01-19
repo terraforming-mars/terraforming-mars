@@ -13,7 +13,6 @@ import {PartyName} from './parties/PartyName';
 import {REDS_POLICY_2, REDS_POLICY_3} from './parties/Reds';
 import {SCIENTISTS_POLICY_1} from './parties/Scientists';
 import {UNITY_POLICY_2, UNITY_POLICY_3} from './parties/Unity';
-import {TurmoilPolicy} from './TurmoilPolicy';
 import * as constants from '../constants';
 import {TRSource} from '../cards/ICard';
 import {MoonExpansion} from '../moon/MoonExpansion';
@@ -68,7 +67,7 @@ export class TurmoilHandler {
     }
 
     // Turmoil Greens action
-    if (PartyHooks.shouldApplyPolicy(player, PartyName.GREENS, TurmoilPolicy.GREENS_POLICY_4)) {
+    if (PartyHooks.shouldApplyPolicy(player, PartyName.GREENS, 'gp04')) {
       const greensPolicy = GREENS_POLICY_4;
 
       if (greensPolicy.canAct(player)) {
@@ -83,7 +82,7 @@ export class TurmoilHandler {
     }
 
     // Turmoil Mars First action
-    if (PartyHooks.shouldApplyPolicy(player, PartyName.MARS, TurmoilPolicy.MARS_FIRST_POLICY_4)) {
+    if (PartyHooks.shouldApplyPolicy(player, PartyName.MARS, 'mfp04')) {
       const marsFirstPolicy = MARS_FIRST_POLICY_4;
 
       if (marsFirstPolicy.canAct(player)) {
@@ -98,7 +97,7 @@ export class TurmoilHandler {
     }
 
     // Turmoil Unity action
-    if (PartyHooks.shouldApplyPolicy(player, PartyName.UNITY, TurmoilPolicy.UNITY_POLICY_2)) {
+    if (PartyHooks.shouldApplyPolicy(player, PartyName.UNITY, 'up02')) {
       const unityPolicy = UNITY_POLICY_2;
 
       if (unityPolicy.canAct(player)) {
@@ -113,7 +112,7 @@ export class TurmoilHandler {
     }
 
     // Turmoil Unity action
-    if (PartyHooks.shouldApplyPolicy(player, PartyName.UNITY, TurmoilPolicy.UNITY_POLICY_3)) {
+    if (PartyHooks.shouldApplyPolicy(player, PartyName.UNITY, 'up03')) {
       const unityPolicy = UNITY_POLICY_3;
 
       if (unityPolicy.canAct(player)) {
@@ -128,7 +127,7 @@ export class TurmoilHandler {
     }
 
     // Turmoil Reds action
-    if (PartyHooks.shouldApplyPolicy(player, PartyName.REDS, TurmoilPolicy.REDS_POLICY_3)) {
+    if (PartyHooks.shouldApplyPolicy(player, PartyName.REDS, 'rp03')) {
       const redsPolicy = REDS_POLICY_3;
 
       if (redsPolicy.canAct(player)) {
@@ -145,13 +144,13 @@ export class TurmoilHandler {
 
   public static applyOnCardPlayedEffect(player: Player, selectedCard: IProjectCard): void {
     // PoliticalAgendas Greens P3 hook
-    if (PartyHooks.shouldApplyPolicy(player, PartyName.GREENS, TurmoilPolicy.GREENS_POLICY_3)) {
+    if (PartyHooks.shouldApplyPolicy(player, PartyName.GREENS, 'gp03')) {
       const policy = GREENS_POLICY_3;
       policy.onCardPlayed(player, selectedCard);
     }
 
     // PoliticalAgendas MarsFirst P2 hook
-    if (PartyHooks.shouldApplyPolicy(player, PartyName.MARS, TurmoilPolicy.MARS_FIRST_POLICY_2)) {
+    if (PartyHooks.shouldApplyPolicy(player, PartyName.MARS, 'mfp02')) {
       const policy = MARS_FIRST_POLICY_2;
       policy.onCardPlayed(player, selectedCard);
     }
@@ -159,7 +158,7 @@ export class TurmoilHandler {
 
   public static resolveTilePlacementCosts(player: Player): void {
     // PoliticalAgendas Reds P2 hook
-    if (PartyHooks.shouldApplyPolicy(player, PartyName.REDS, TurmoilPolicy.REDS_POLICY_2)) {
+    if (PartyHooks.shouldApplyPolicy(player, PartyName.REDS, 'rp02')) {
       const redsPolicy = REDS_POLICY_2;
       redsPolicy.onTilePlaced(player);
     }
@@ -169,13 +168,13 @@ export class TurmoilHandler {
     PartyHooks.applyMarsFirstRulingPolicy(player, spaceType);
 
     // PoliticalAgendas Greens P2 hook
-    if (PartyHooks.shouldApplyPolicy(player, PartyName.GREENS, TurmoilPolicy.GREENS_POLICY_2)) {
+    if (PartyHooks.shouldApplyPolicy(player, PartyName.GREENS, 'gp02')) {
       const greensPolicy = GREENS_POLICY_2;
       greensPolicy.onTilePlaced(player);
     }
 
     // PoliticalAgendas Kelvinists P4 hook
-    if (PartyHooks.shouldApplyPolicy(player, PartyName.KELVINISTS, TurmoilPolicy.KELVINISTS_POLICY_4)) {
+    if (PartyHooks.shouldApplyPolicy(player, PartyName.KELVINISTS, 'kp04')) {
       const kelvinistsPolicy = KELVINISTS_POLICY_4;
       kelvinistsPolicy.onTilePlaced(player);
     }
@@ -184,18 +183,18 @@ export class TurmoilHandler {
   public static onGlobalParameterIncrease(player: Player, parameter: GlobalParameter, steps: number = 1): void {
     if (parameter === GlobalParameter.TEMPERATURE) {
       // PoliticalAgendas Kelvinists P2 hook
-      if (PartyHooks.shouldApplyPolicy(player, PartyName.KELVINISTS, TurmoilPolicy.KELVINISTS_POLICY_2)) {
+      if (PartyHooks.shouldApplyPolicy(player, PartyName.KELVINISTS, 'kp02')) {
         player.addResource(Resources.MEGACREDITS, steps * 3);
       }
     }
 
     // PoliticalAgendas Reds P4 hook
-    if (PartyHooks.shouldApplyPolicy(player, PartyName.REDS, TurmoilPolicy.REDS_POLICY_4)) {
+    if (PartyHooks.shouldApplyPolicy(player, PartyName.REDS, 'rp04')) {
       player.addProduction(Resources.MEGACREDITS, -1 * steps, {log: true});
     }
 
     // PoliticalAgendas Scientists P3 hook
-    if (PartyHooks.shouldApplyPolicy(player, PartyName.SCIENTISTS, TurmoilPolicy.SCIENTISTS_POLICY_3)) {
+    if (PartyHooks.shouldApplyPolicy(player, PartyName.SCIENTISTS, 'sp03')) {
       player.drawCard(steps);
     }
   }

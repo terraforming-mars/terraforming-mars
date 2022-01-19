@@ -5,7 +5,7 @@ import {IProjectCard} from '../IProjectCard';
 import {Tags} from '../Tags';
 import {CardRenderer} from '../render/CardRenderer';
 import {MoonExpansion} from '../../moon/MoonExpansion';
-import {TileType} from '../../TileType';
+import {TileType} from '../../common/TileType';
 import {Resources} from '../../Resources';
 import {SelectSpace} from '../../inputs/SelectSpace';
 import {Card} from '../Card';

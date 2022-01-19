@@ -38,7 +38,7 @@ export class Ants extends Card implements IActionCard, IProjectCard, IResourceCa
     });
   }
 
-  public resourceCount = 0;
+  public override resourceCount = 0;
 
   public play() {
     return undefined;

@@ -1,5 +1,5 @@
 import {expect} from 'chai';
-import {ALL_PROJECT_DECKS} from '../../../src/cards/AllCards';
+import {ALL_CARD_MANIFESTS} from '../../../src/cards/AllCards';
 import {Celestic} from '../../../src/cards/venusNext/Celestic';
 import {Game} from '../../../src/Game';
 import {TestPlayers} from '../../TestPlayers';
@@ -27,8 +27,8 @@ describe('Celestic', function() {
 
   it('Ensure static list contains all cards that mention floaters', function() {
     const found: Array<CardName> = [];
-    ALL_PROJECT_DECKS.forEach((deck) => {
-      deck.factories.forEach((factory) => {
+    ALL_CARD_MANIFESTS.forEach((manifest) => {
+      manifest.projectCards.factories.forEach((factory) => {
         const card = new factory.Factory();
 
         // Only looking for cards that mention floaters in the metadata

@@ -4,7 +4,7 @@ import {CardType} from '../CardType';
 import {PlaceMoonRoadTile} from '../../moon/PlaceMoonRoadTile';
 import {Tags} from '../Tags';
 import {CardRenderer} from '../render/CardRenderer';
-import {TileType} from '../../TileType';
+import {TileType} from '../../common/TileType';
 import {Units} from '../../Units';
 import {MoonCard} from './MoonCard';
 import {AltSecondaryTag} from '../render/CardRenderItem';
@@ -34,7 +34,7 @@ export class AristarchusRoadNetwork extends MoonCard {
     });
   };
 
-  public play(player: Player) {
+  public override play(player: Player) {
     super.play(player);
     player.game.defer(new PlaceMoonRoadTile(player));
     return undefined;

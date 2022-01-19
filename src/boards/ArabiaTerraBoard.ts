@@ -61,7 +61,7 @@ export class ArabiaTerraBoard extends Board {
     ];
   }
 
-  public getSpaces(spaceType: SpaceType): Array<ISpace> {
+  public override getSpaces(spaceType: SpaceType): Array<ISpace> {
     switch (spaceType) {
     case SpaceType.LAND:
     case SpaceType.OCEAN:

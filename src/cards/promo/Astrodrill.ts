@@ -44,7 +44,7 @@ export class Astrodrill extends Card implements IActionCard, CorporationCard {
       },
     });
   }
-    public resourceCount = 0;
+    public override resourceCount = 0;
 
     public canAct(): boolean {
       return true;

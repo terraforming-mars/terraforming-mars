@@ -44,10 +44,10 @@ export class PharmacyUnion extends Card implements CorporationCard {
     });
   }
 
-    public resourceCount = 0;
+    public override resourceCount = 0;
     public isDisabled = false;
 
-    public get tags() {
+    public override get tags() {
       if (this.isDisabled) {
         return [];
       }

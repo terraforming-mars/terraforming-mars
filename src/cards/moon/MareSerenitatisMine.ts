@@ -8,7 +8,7 @@ import {MoonExpansion} from '../../moon/MoonExpansion';
 import {PlaceMoonRoadTile} from '../../moon/PlaceMoonRoadTile';
 import {Units} from '../../Units';
 import {SpaceType} from '../../SpaceType';
-import {TileType} from '../../TileType';
+import {TileType} from '../../common/TileType';
 import {MoonCard} from './MoonCard';
 import {AltSecondaryTag} from '../render/CardRenderItem';
 
@@ -38,7 +38,7 @@ export class MareSerenitatisMine extends MoonCard {
     });
   }
 
-  public play(player: Player) {
+  public override play(player: Player) {
     super.play(player);
     MoonExpansion.addMineTile(player, MoonSpaces.MARE_SERENITATIS, this.name);
     MoonExpansion.raiseMiningRate(player);

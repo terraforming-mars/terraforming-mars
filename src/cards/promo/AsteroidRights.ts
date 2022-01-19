@@ -41,7 +41,7 @@ export class AsteroidRights extends Card implements IActionCard, IProjectCard, I
       },
     });
   }
-  public resourceCount = 0;
+  public override resourceCount = 0;
 
   public play() {
     this.resourceCount = 2;

@@ -33,7 +33,7 @@ export class BiomassCombustors extends Card implements IProjectCard {
     });
   }
 
-  public canPlay(player: Player): boolean {
+  public override canPlay(player: Player): boolean {
     return player.game.someoneHasResourceProduction(Resources.PLANTS, 1);
   }
 

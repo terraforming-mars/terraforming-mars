@@ -3,7 +3,7 @@ import {Player} from '../../Player';
 import {CardType} from '../CardType';
 import {Tags} from '../Tags';
 import {MoonExpansion} from '../../moon/MoonExpansion';
-import {TileType} from '../../TileType';
+import {TileType} from '../../common/TileType';
 import {CardRenderDynamicVictoryPoints} from '../render/CardRenderDynamicVictoryPoints';
 import {CardRenderer} from '../render/CardRenderer';
 import {Units} from '../../Units';
@@ -40,7 +40,7 @@ export class LunaTrainStation extends MoonCard {
     });
   }
 
-  public play(player: Player) {
+  public override play(player: Player) {
     super.play(player);
     player.game.defer(new PlaceSpecialMoonTile(player, {
       tileType: TileType.LUNA_TRAIN_STATION,
@@ -51,7 +51,7 @@ export class LunaTrainStation extends MoonCard {
     return undefined;
   }
 
-  public getVictoryPoints(player: Player) {
+  public override getVictoryPoints(player: Player) {
     const moonData = MoonExpansion.moonData(player.game);
     const usedSpace = moonData.moon.getSpaceByTileCard(this.name);
     if (usedSpace !== undefined) {

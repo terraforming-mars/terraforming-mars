@@ -9,7 +9,7 @@
             </div>
         </div>
         <br/>
-          <div class="corporations-filter-group" v-for="entry in corpsByModule" v-bind:key="entry[0]">
+          <div class="corporations-filter-group" v-for="entry in cardsByModule.associations()" v-bind:key="entry[0]">
             <div v-if="entry[1].length > 0">
               <div class="corporations-filter-toolbox-cont">
                   <div class="corporations-filter-toolbox">
@@ -33,31 +33,17 @@
 import Vue from 'vue';
 
 import {CardName} from '@/CardName';
-import {ALL_CARD_MANIFESTS, MANIFEST_BY_MODULE} from '@/cards/AllCards';
 import {GameModule} from '@/GameModule';
+import {byModule, byType, getCards, toName} from '@/client/cards/ClientCardManifest';
+import {CardType} from '@/cards/CardType';
+import {MultiMap} from 'mnemonist';
 
 function corpCardNames(module: GameModule): Array<CardName> {
-  const manifest = MANIFEST_BY_MODULE.get(module);
-  if (manifest === undefined) {
-    console.log('manifest %s not found', manifest);
-    return [];
-  } else {
-    const cards: Array<CardName> = [];
-    manifest.corporationCards.factories.forEach((cf) => {
-      if (cf.cardName !== CardName.BEGINNER_CORPORATION) {
-        cards.push(cf.cardName);
-      }
-    });
-    return cards;
-  }
+  return getCards(byModule(module))
+    .filter(byType(CardType.CORPORATION))
+    .map(toName)
+    .filter((name) => name !== CardName.BEGINNER_CORPORATION);
 }
-
-const allItems: Array<CardName> = [];
-ALL_CARD_MANIFESTS.forEach((manifest) => {
-  manifest.corporationCards.factories.forEach((cf) => {
-    allItems.push(cf.cardName);
-  });
-});
 
 export default Vue.extend({
   name: 'CorporationsFilter',
@@ -86,25 +72,34 @@ export default Vue.extend({
     moonExpansion: {
       type: Boolean,
     },
+    pathfindersExpansion: {
+      type: Boolean,
+    },
   },
   data() {
-    const cardsByModuleMap: Map<GameModule, Array<CardName>> =
-            new Map(ALL_CARD_MANIFESTS.map((m) => [m.module, corpCardNames(m.module)]));
+    const cardsByModule: MultiMap<GameModule, CardName> = new MultiMap();
+    getCards(byType(CardType.CORPORATION)).forEach((cam) => {
+      if (cam.card.name !== CardName.BEGINNER_CORPORATION) {
+        cardsByModule.set(cam.module, cam.card.name);
+      }
+    });
+
     return {
-      cardsByModuleMap: cardsByModuleMap,
+      cardsByModule: cardsByModule,
       customCorporationsList: false,
       selectedCorporations: [
-        ...cardsByModuleMap.get(GameModule.Base)!,
-        ...this.corporateEra ? cardsByModuleMap.get(GameModule.CorpEra)! : [],
-        ...this.prelude ? cardsByModuleMap.get(GameModule.Prelude)! : [],
-        ...this.venusNext ? cardsByModuleMap.get(GameModule.Venus)! : [],
-        ...this.colonies ? cardsByModuleMap.get(GameModule.Colonies)! : [],
-        ...this.turmoil ? cardsByModuleMap.get(GameModule.Turmoil)! : [],
-        ...this.promoCardsOption ? cardsByModuleMap.get(GameModule.Promo)! : [],
-        ...this.communityCardsOption ? cardsByModuleMap.get(GameModule.Community)! : [],
-        ...this.moonExpansion ? cardsByModuleMap.get(GameModule.Moon)! : [],
-      ] as Array<CardName> | boolean /* v-model thinks this can be boolean */,
-      corpsByModule: Array.from(cardsByModuleMap),
+        // A bit sloppy since map is just above, but it will do.
+        ...corpCardNames(GameModule.Base)!,
+        ...this.corporateEra ? corpCardNames(GameModule.CorpEra) : [],
+        ...this.prelude ? corpCardNames(GameModule.Prelude) : [],
+        ...this.venusNext ? corpCardNames(GameModule.Venus) : [],
+        ...this.colonies ? corpCardNames(GameModule.Colonies) : [],
+        ...this.turmoil ? corpCardNames(GameModule.Turmoil) : [],
+        ...this.promoCardsOption ? corpCardNames(GameModule.Promo) : [],
+        ...this.communityCardsOption ? corpCardNames(GameModule.Community) : [],
+        ...this.moonExpansion ? corpCardNames(GameModule.Moon) : [],
+        ...this.pathfindersExpansion ? corpCardNames(GameModule.Pathfinders) : [],
+      ],
     };
   },
   methods: {
@@ -116,9 +111,9 @@ export default Vue.extend({
       return [];
     },
     getItemsByGroup(group: string): Array<CardName> {
-      if (group === 'All') return allItems.slice();
+      if (group === 'All') return Array.from(this.cardsByModule.values());
 
-      const corps = this.cardsByModuleMap.get(group as GameModule);
+      const corps = this.cardsByModule.get(group as GameModule);
       if (corps === undefined) {
         console.log('module %s not found', group);
         return [];

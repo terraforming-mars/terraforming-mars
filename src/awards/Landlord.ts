@@ -1,6 +1,6 @@
 import {IAward} from './IAward';
 import {Player} from '../Player';
-import {TileType, isHazardTileType} from '../TileType';
+import {TileType, isHazardTileType} from '../common/TileType';
 import {MoonExpansion} from '../moon/MoonExpansion';
 
 export class Landlord implements IAward {

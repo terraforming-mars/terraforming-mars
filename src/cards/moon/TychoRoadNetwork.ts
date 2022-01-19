@@ -5,7 +5,7 @@ import {PlaceMoonRoadTile} from '../../moon/PlaceMoonRoadTile';
 import {Tags} from '../Tags';
 import {CardRenderer} from '../render/CardRenderer';
 import {Units} from '../../Units';
-import {TileType} from '../../TileType';
+import {TileType} from '../../common/TileType';
 import {MoonCard} from './MoonCard';
 import {AltSecondaryTag} from '../render/CardRenderItem';
 
@@ -35,7 +35,7 @@ export class TychoRoadNetwork extends MoonCard {
     });
   }
 
-  public play(player: Player) {
+  public override play(player: Player) {
     super.play(player);
     player.game.defer(new PlaceMoonRoadTile(player));
     return undefined;

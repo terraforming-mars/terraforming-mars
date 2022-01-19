@@ -3,7 +3,7 @@ import {Player} from '../../../src/Player';
 import {Game} from '../../../src/Game';
 import {SelectSpace} from '../../../src/inputs/SelectSpace';
 import {SpaceBonus} from '../../../src/SpaceBonus';
-import {TileType} from '../../../src/TileType';
+import {TileType} from '../../../src/common/TileType';
 import {Resources} from '../../../src/Resources';
 import {MiningRightsAres} from '../../../src/cards/ares/MiningRightsAres';
 import {ARES_OPTIONS_NO_HAZARDS} from '../../ares/AresTestHelper';

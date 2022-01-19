@@ -2,7 +2,7 @@ import {expect} from 'chai';
 import {RestrictedArea} from '../../../src/cards/base/RestrictedArea';
 import {Game} from '../../../src/Game';
 import {Player} from '../../../src/Player';
-import {TileType} from '../../../src/TileType';
+import {TileType} from '../../../src/common/TileType';
 import {TestPlayers} from '../../TestPlayers';
 
 describe('RestrictedArea', function() {

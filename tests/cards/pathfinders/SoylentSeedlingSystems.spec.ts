@@ -7,9 +7,9 @@ import {CardName} from '../../../src/CardName';
 import {TestingUtils} from '../../TestingUtils';
 import {Tags} from '../../../src/cards/Tags';
 import {Celestic} from '../../../src/cards/venusNext/Celestic';
-import {ALL_PROJECT_CARD_NAMES} from '../../../src/cards/AllCards';
 import {fail} from 'assert';
 import {GreeneryStandardProject} from '../../../src/cards/base/standardProjects/GreeneryStandardProject';
+import {PATHFINDERS_CARD_MANIFEST} from '../../../src/cards/pathfinders/PathfindersCardManifest';
 
 describe('SoylentSeedlingSystems', function() {
   let card: SoylentSeedlingSystems;
@@ -83,7 +83,7 @@ describe('SoylentSeedlingSystems', function() {
 
   // This test will fail if/when Wetlands gets introduced
   it('on wetlands placed', () => {
-    if (ALL_PROJECT_CARD_NAMES.includes(CardName.WETLANDS)) {
+    if (PATHFINDERS_CARD_MANIFEST.projectCards.findByCardName(CardName.WETLANDS) !== undefined) {
       fail('Make sure Wetlands works with this, too.');
     }
   });

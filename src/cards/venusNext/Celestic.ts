@@ -38,7 +38,7 @@ export class Celestic extends Card implements IActionCard, CorporationCard, IRes
     });
   }
 
-    public resourceCount = 0;
+    public override resourceCount = 0;
 
     // Public for testing
     public static readonly floaterCards: Set<CardName> = new Set([

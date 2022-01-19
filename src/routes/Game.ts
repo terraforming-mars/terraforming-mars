@@ -33,14 +33,14 @@ export class GameHandler extends Handler {
     return [board];
   }
 
-  public get(req: http.IncomingMessage, res: http.ServerResponse, ctx: IContext): void {
+  public override get(req: http.IncomingMessage, res: http.ServerResponse, ctx: IContext): void {
     req.url = '/assets/index.html';
     ServeAsset.INSTANCE.get(req, res, ctx);
   }
 
   // TODO(kberg): much of this code can be moved outside of handler, and that
   // would be better.
-  public put(req: http.IncomingMessage, res: http.ServerResponse, ctx: IContext): void {
+  public override put(req: http.IncomingMessage, res: http.ServerResponse, ctx: IContext): void {
     let body = '';
     req.on('data', function(data) {
       body += data.toString();

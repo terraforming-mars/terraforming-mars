@@ -31,7 +31,7 @@ export class DeepLunarMining extends MoonCard {
     });
   };
 
-  public play(player: Player) {
+  public override play(player: Player) {
     super.play(player);
     MoonExpansion.raiseMiningRate(player);
     return undefined;

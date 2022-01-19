@@ -33,7 +33,7 @@ export class Penguins extends Card implements IActionCard, IProjectCard, IResour
       },
     });
   }
-    public resourceCount = 0;
+    public override resourceCount = 0;
 
     public play() {
       return undefined;

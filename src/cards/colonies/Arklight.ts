@@ -38,7 +38,7 @@ export class Arklight extends Card implements CorporationCard, IResourceCard {
     });
   }
 
-    public resourceCount = 0;
+    public override resourceCount = 0;
 
     public play(player: Player) {
       player.addProduction(Resources.MEGACREDITS, 2);

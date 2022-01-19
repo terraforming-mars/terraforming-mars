@@ -7,6 +7,6 @@ export class Iapetus extends Colony {
     public description = 'TR';
     public buildType = ColonyBenefit.GAIN_TR;
     public tradeType = ColonyBenefit.GAIN_TR;
-    public tradeQuantity = [0, 0, 0, 1, 1, 1, 2];
+    public override tradeQuantity = [0, 0, 0, 1, 1, 1, 2];
     public colonyBonusType = ColonyBenefit.GAIN_CARD_DISCOUNT;
 }

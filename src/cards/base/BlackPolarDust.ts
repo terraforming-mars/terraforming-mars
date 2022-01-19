@@ -27,7 +27,7 @@ export class BlackPolarDust extends Card implements IProjectCard {
       },
     });
   }
-  public canPlay(player: Player): boolean {
+  public override canPlay(player: Player): boolean {
     return player.getProduction(Resources.MEGACREDITS) >= -3;
   }
   public play(player: Player) {

@@ -16,7 +16,7 @@ class TestSQLite extends SQLite {
     return this.db;
   }
 
-  public saveGame(game: Game): Promise<void> {
+  public override saveGame(game: Game): Promise<void> {
     this.saveGamePromise = super.saveGame(game);
     return this.saveGamePromise;
   };

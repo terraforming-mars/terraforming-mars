@@ -12,7 +12,7 @@ export class LoadGame extends Handler {
     super();
   }
 
-  public put(req: http.IncomingMessage, res: http.ServerResponse, ctx: IContext): void {
+  public override put(req: http.IncomingMessage, res: http.ServerResponse, ctx: IContext): void {
     let body = '';
     req.on('data', function(data) {
       body += data.toString();

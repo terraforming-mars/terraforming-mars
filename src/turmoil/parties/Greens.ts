@@ -5,7 +5,7 @@ import {Game} from '../../Game';
 import {Tags} from '../../cards/Tags';
 import {Resources} from '../../Resources';
 import {Bonus} from '../Bonus';
-import {TileType} from '../../TileType';
+import {TileType} from '../../common/TileType';
 import {Policy} from '../Policy';
 import {ISpace} from '../../boards/ISpace';
 import {Player} from '../../Player';
@@ -19,7 +19,6 @@ import {Phase} from '../../Phase';
 import {SelectHowToPayDeferred} from '../../deferredActions/SelectHowToPayDeferred';
 import {DeferredAction} from '../../deferredActions/DeferredAction';
 import {POLITICAL_AGENDAS_MAX_ACTION_USES} from '../../constants';
-import {TurmoilPolicy} from '../TurmoilPolicy';
 
 export class Greens extends Party implements IParty {
   name = PartyName.GREENS;
@@ -30,7 +29,7 @@ export class Greens extends Party implements IParty {
 
 class GreensBonus01 implements Bonus {
   isDefault = true;
-  id = 'gb01';
+  id = 'gb01' as const;
   description: string = 'Gain 1 M€ for each Plant, Microbe and Animal tag you have';
 
   getScore(player: Player) {
@@ -47,7 +46,7 @@ class GreensBonus01 implements Bonus {
 }
 
 class GreensBonus02 implements Bonus {
-  id = 'gb02';
+  id = 'gb02' as const;
   description: string = 'Gain 2 M€ for each greenery tile you have';
   isDefault = false;
 
@@ -66,7 +65,7 @@ class GreensBonus02 implements Bonus {
 
 class GreensPolicy01 implements Policy {
   isDefault = true;
-  id = TurmoilPolicy.GREENS_DEFAULT_POLICY;
+  id = 'gp01' as const;
   description: string = 'When you place a greenery tile, gain 4 M€';
 
   onTilePlaced(player: Player, space: ISpace) {
@@ -77,7 +76,7 @@ class GreensPolicy01 implements Policy {
 }
 
 class GreensPolicy02 implements Policy {
-  id = TurmoilPolicy.GREENS_POLICY_2;
+  id = 'gp02' as const;
   description: string = 'When you place a tile, gain 1 plant';
   isDefault = false;
 
@@ -87,7 +86,7 @@ class GreensPolicy02 implements Policy {
 }
 
 class GreensPolicy03 implements Policy {
-  id = TurmoilPolicy.GREENS_POLICY_3;
+  id = 'gp03' as const;
   description: string = 'When you play an animal, plant or microbe tag, gain 2 M€';
   isDefault = false;
 
@@ -100,7 +99,7 @@ class GreensPolicy03 implements Policy {
 }
 
 class GreensPolicy04 implements Policy {
-  id = TurmoilPolicy.GREENS_POLICY_4;
+  id = 'gp04' as const;
   description: string = 'Spend 5 M€ to gain 3 plants or add 2 microbes to any card (Turmoil Greens)';
   isDefault = false;
 

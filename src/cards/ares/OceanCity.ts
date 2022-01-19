@@ -4,7 +4,7 @@ import {SelectSpace} from '../../inputs/SelectSpace';
 import {ISpace} from '../../boards/ISpace';
 import {Player} from '../../Player';
 import {Resources} from '../../Resources';
-import {TileType} from '../../TileType';
+import {TileType} from '../../common/TileType';
 import {CardType} from './../CardType';
 import {IProjectCard} from './../IProjectCard';
 import {Tags} from './../Tags';
@@ -35,7 +35,7 @@ export class OceanCity extends Card implements IProjectCard {
     });
   }
 
-  public canPlay(player: Player): boolean {
+  public override canPlay(player: Player): boolean {
     return player.getProduction(Resources.ENERGY) > 0;
   }
 

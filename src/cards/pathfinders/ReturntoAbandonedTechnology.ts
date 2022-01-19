@@ -25,7 +25,7 @@ export class ReturntoAbandonedTechnology extends Card implements IProjectCard {
     });
   }
 
-  public canPlay(player: Player) {
+  public override canPlay(player: Player) {
     return player.game.dealer.discarded.length > 0;
   }
 

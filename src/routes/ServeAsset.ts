@@ -44,7 +44,7 @@ export class ServeAsset extends Handler {
     this.cache.set('build/styles.css.br', brotli);
   }
 
-  public get(req: http.IncomingMessage, res: http.ServerResponse, ctx: IContext): void {
+  public override get(req: http.IncomingMessage, res: http.ServerResponse, ctx: IContext): void {
     if (req.url === undefined) {
       ctx.route.internalServerError(req, res, new Error('no url on request'));
       return;

@@ -4,7 +4,7 @@ import {Game} from '../../../src/Game';
 import {TestPlayer} from '../../TestPlayer';
 import {TestPlayers} from '../../TestPlayers';
 import {TestingUtils} from '../../TestingUtils';
-import {TileType} from '../../../src/TileType';
+import {TileType} from '../../../src/common/TileType';
 import {Units} from '../../../src/Units';
 
 describe('MuseumofEarlyColonisation', function() {

@@ -33,7 +33,7 @@ export class TheArchaicFoundationInstitute extends Card implements CorporationCa
     });
   }
 
-  public resourceCount = 0;
+  public override resourceCount = 0;
 
   public play() {
     this.resourceCount += 2;

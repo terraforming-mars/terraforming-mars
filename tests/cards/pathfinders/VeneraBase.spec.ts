@@ -2,7 +2,7 @@ import {expect} from 'chai';
 import {VeneraBase} from '../../../src/cards/pathfinders/VeneraBase';
 import {Game} from '../../../src/Game';
 import {TestPlayer} from '../../TestPlayer';
-import {TileType} from '../../../src/TileType';
+import {TileType} from '../../../src/common/TileType';
 import {getTestPlayer, newTestGame} from '../../TestGame';
 import {Turmoil} from '../../../src/turmoil/Turmoil';
 import {Greens} from '../../../src/turmoil/parties/Greens';

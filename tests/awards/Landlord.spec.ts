@@ -9,7 +9,7 @@ import {Player} from '../../src/Player';
 import {ARES_OPTIONS_NO_HAZARDS} from '../ares/AresTestHelper';
 import {EmptyBoard} from '../ares/EmptyBoard';
 import {_AresHazardPlacement} from '../../src/ares/AresHazards';
-import {TileType} from '../../src/TileType';
+import {TileType} from '../../src/common/TileType';
 import {LandClaim} from '../../src/cards/base/LandClaim';
 import {TestingUtils} from '../TestingUtils';
 

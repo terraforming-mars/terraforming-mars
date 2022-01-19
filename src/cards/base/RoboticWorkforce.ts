@@ -29,7 +29,7 @@ export class RoboticWorkforce extends Card implements IProjectCard {
       },
     });
   }
-  public canPlay(player: Player): boolean {
+  public override canPlay(player: Player): boolean {
     return this.getAvailableCards(player).length > 0;
   }
 

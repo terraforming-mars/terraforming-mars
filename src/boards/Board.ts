@@ -2,7 +2,7 @@ import {ISpace, SpaceId} from './ISpace';
 import {Player} from '../Player';
 import {PlayerId} from '../common/Types';
 import {SpaceType} from '../SpaceType';
-import {CITY_TILES, OCEAN_TILES, TileType} from '../TileType';
+import {CITY_TILES, OCEAN_TILES, TileType} from '../common/TileType';
 import {AresHandler} from '../ares/AresHandler';
 import {SerializedBoard, SerializedSpace} from './SerializedBoard';
 

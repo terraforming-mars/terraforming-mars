@@ -9,7 +9,7 @@ import {played} from '../Options';
 import {CorporationCard} from '../corporation/CorporationCard';
 import {ResourceType} from '../../ResourceType';
 import {ISpace} from '../../boards/ISpace';
-import {TileType} from '../../TileType';
+import {TileType} from '../../common/TileType';
 
 export class SoylentSeedlingSystems extends Card implements CorporationCard {
   constructor() {
@@ -36,7 +36,7 @@ export class SoylentSeedlingSystems extends Card implements CorporationCard {
     });
   }
 
-  public resourceCount = 0;
+  public override resourceCount = 0;
 
   public play() {
     this.resourceCount += 2;

@@ -22,7 +22,7 @@ export class SellPatentsStandardProject extends StandardProjectCard {
     });
   }
 
-  public canAct(player: Player): boolean {
+  public override canAct(player: Player): boolean {
     return player.cardsInHand.length > 0;
   }
 
@@ -30,7 +30,7 @@ export class SellPatentsStandardProject extends StandardProjectCard {
     // no-op
   }
 
-  public action(player: Player): SelectCard<IProjectCard> {
+  public override action(player: Player): SelectCard<IProjectCard> {
     return new SelectCard(
       'Sell patents',
       'Sell',

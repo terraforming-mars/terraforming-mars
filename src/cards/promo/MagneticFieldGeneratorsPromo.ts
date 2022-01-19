@@ -6,7 +6,7 @@ import {CardType} from '../CardType';
 import {Resources} from '../../Resources';
 import {CardName} from '../../CardName';
 import {SelectSpace} from '../../inputs/SelectSpace';
-import {TileType} from '../../TileType';
+import {TileType} from '../../common/TileType';
 import {ISpace} from '../../boards/ISpace';
 import {CardRenderer} from '../render/CardRenderer';
 import {Units} from '../../Units';
@@ -35,7 +35,7 @@ export class MagneticFieldGeneratorsPromo extends Card implements IProjectCard {
       },
     });
   }
-  public canPlay(player: Player): boolean {
+  public override canPlay(player: Player): boolean {
     const meetsEnergyRequirements = player.getProduction(Resources.ENERGY) >= 4;
     const canPlaceTile = player.game.board.getAvailableSpacesOnLand(player).length > 0;
 

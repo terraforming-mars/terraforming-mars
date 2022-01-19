@@ -11,7 +11,7 @@ export class ApiGames extends Handler {
     super({validateServerId: true});
   }
 
-  public get(req: http.IncomingMessage, res: http.ServerResponse, ctx: IContext): void {
+  public override get(req: http.IncomingMessage, res: http.ServerResponse, ctx: IContext): void {
     ctx.gameLoader.getLoadedGameIds((list: Array<{id: GameId, participants: Array<SpectatorId | PlayerId>}> | undefined) => {
       if (list === undefined) {
         ctx.route.notFound(req, res, 'could not load game list');

@@ -4,7 +4,7 @@ import {Card} from '../Card';
 import {CardType} from '../CardType';
 import {Player} from '../../Player';
 import {ISpace} from '../../boards/ISpace';
-import {TileType} from '../../TileType';
+import {TileType} from '../../common/TileType';
 import {CardName} from '../../CardName';
 import {Resources} from '../../Resources';
 import {Priority} from '../../deferredActions/DeferredAction';

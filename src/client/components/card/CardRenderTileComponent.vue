@@ -7,7 +7,7 @@
 import Vue from 'vue';
 import {CardRenderTile} from '@/cards/render/CardRenderer';
 import {generateClassString} from '@/utils/utils';
-import {TileType} from '@/TileType';
+import {TileType} from '@/common/TileType';
 
 interface Classes {
   // The tile div is used to display a full tile. If distinct version

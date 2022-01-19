@@ -9,7 +9,7 @@ export class Load extends Handler {
     super();
   }
 
-  public get(req: http.IncomingMessage, res: http.ServerResponse, ctx: IContext): void {
+  public override get(req: http.IncomingMessage, res: http.ServerResponse, ctx: IContext): void {
     req.url = '/assets/index.html';
     ServeApp.INSTANCE.get(req, res, ctx);
   }

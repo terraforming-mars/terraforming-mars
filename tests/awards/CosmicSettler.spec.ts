@@ -5,7 +5,7 @@ import {SpaceType} from '../../src/SpaceType';
 import {TestPlayers} from '../TestPlayers';
 import {TestPlayer} from '../TestPlayer';
 import {Board} from '../../src/boards/Board';
-import {TileType} from '../../src/TileType';
+import {TileType} from '../../src/common/TileType';
 
 describe('CosmicSettler', function() {
   let award : CosmicSettler;

@@ -4,7 +4,7 @@ import {Tags} from '../Tags';
 import {Card} from '../Card';
 import {CardType} from '../CardType';
 import {Player} from '../../Player';
-import {TileType} from '../../TileType';
+import {TileType} from '../../common/TileType';
 import {SelectSpace} from '../../inputs/SelectSpace';
 import {ISpace} from '../../boards/ISpace';
 import {CardName} from '../../CardName';
@@ -36,7 +36,7 @@ export class RestrictedArea extends Card implements IActionCard, IProjectCard {
       metadata,
     });
   }
-  public canPlay(player: Player): boolean {
+  public override canPlay(player: Player): boolean {
     return player.game.board.getAvailableSpacesOnLand(player).length > 0;
   }
   public play(player: Player) {

@@ -1,6 +1,6 @@
 import {SpaceBonus} from '../../SpaceBonus';
 import {CardName} from '../../CardName';
-import {TileType} from '../../TileType';
+import {TileType} from '../../common/TileType';
 import {Capital} from '../base/Capital';
 import {CardRenderer} from '../render/CardRenderer';
 import {CardRenderDynamicVictoryPoints} from '../render/CardRenderDynamicVictoryPoints';

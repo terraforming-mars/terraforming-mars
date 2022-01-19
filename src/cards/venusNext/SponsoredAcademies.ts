@@ -29,7 +29,7 @@ export class SponsoredAcademies extends Card {
       },
     });
   };
-  public canPlay(player: Player): boolean {
+  public override canPlay(player: Player): boolean {
     return player.cardsInHand.length > 1; // this card and at least another
   }
 

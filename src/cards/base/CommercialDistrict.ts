@@ -3,7 +3,7 @@ import {Tags} from '../Tags';
 import {Card} from '../Card';
 import {CardType} from '../CardType';
 import {Player} from '../../Player';
-import {TileType} from '../../TileType';
+import {TileType} from '../../common/TileType';
 import {SelectSpace} from '../../inputs/SelectSpace';
 import {ISpace} from '../../boards/ISpace';
 import {Resources} from '../../Resources';
@@ -42,13 +42,12 @@ export class CommercialDistrict extends Card implements IProjectCard {
       metadata,
     });
   }
-  // public adjacencyBonus?: IAdjacencyBonus = undefined;
 
-  public canPlay(player: Player): boolean {
+  public override canPlay(player: Player): boolean {
     return player.getProduction(Resources.ENERGY) >= 1 &&
       player.game.board.getAvailableSpacesOnLand(player).length > 0;
   }
-  public getVictoryPoints(player: Player) {
+  public override getVictoryPoints(player: Player) {
     const usedSpace = player.game.board.getSpaceByTileCard(this.name);
     if (usedSpace !== undefined) {
       return player.game.board.getAdjacentSpaces(usedSpace).filter(

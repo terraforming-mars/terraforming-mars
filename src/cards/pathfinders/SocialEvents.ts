@@ -28,7 +28,7 @@ export class SocialEvents extends Card implements IProjectCard {
   private getExpectedTr(player: Player) {
     return Math.floor((player.getTagCount(Tags.MARS) + 1) / 2); // +1 is the "including this"
   }
-  public canPlay(player: Player): boolean {
+  public override canPlay(player: Player): boolean {
     return player.canAfford(player.getCardCost(this), {tr: {tr: this.getExpectedTr(player)}});
   }
 

@@ -28,7 +28,7 @@ export class DeclarationOfIndependence extends Card implements IProjectCard {
     });
   }
 
-  public canPlay(player: Player) {
+  public override canPlay(player: Player) {
     return Turmoil.getTurmoil(player.game).getAvailableDelegateCount(player.id, 'reserve') >= 2;
   }
   public play(player: Player) {

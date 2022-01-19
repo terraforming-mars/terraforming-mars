@@ -7,7 +7,7 @@ import {Player} from '../Player';
 import {Resources} from '../Resources';
 import {ResourceType} from '../ResourceType';
 import {SpaceBonus} from '../SpaceBonus';
-import {OCEAN_UPGRADE_TILES, TileType} from '../TileType';
+import {OCEAN_UPGRADE_TILES, TileType} from '../common/TileType';
 import {ITile} from '../ITile';
 import {IAresData, IMilestoneCount} from './IAresData';
 import {IAdjacencyCost} from './IAdjacencyCost';

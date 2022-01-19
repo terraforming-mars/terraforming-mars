@@ -9,7 +9,7 @@ import {PlaceMoonRoadTile} from '../../moon/PlaceMoonRoadTile';
 import {SpaceType} from '../../SpaceType';
 import {Resources} from '../../Resources';
 import {AltSecondaryTag} from '../render/CardRenderItem';
-import {TileType} from '../../TileType';
+import {TileType} from '../../common/TileType';
 
 export class MiningComplex extends PreludeCard {
   constructor() {

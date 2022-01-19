@@ -29,7 +29,7 @@ export class GreeneryStandardProject extends StandardProjectCard {
     }
   }
 
-  public canAct(player: Player): boolean {
+  public override canAct(player: Player): boolean {
     if (player.game.board.getAvailableSpacesForGreenery(player).length === 0) return false;
     return super.canAct(player);
   }

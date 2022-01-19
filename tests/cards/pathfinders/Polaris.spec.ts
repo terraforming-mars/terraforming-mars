@@ -6,7 +6,7 @@ import {TestingUtils} from '../../TestingUtils';
 import {TestPlayer} from '../../TestPlayer';
 import {newTestGame, getTestPlayer} from '../../TestGame';
 import {SelectSpace} from '../../../src/inputs/SelectSpace';
-import {TileType} from '../../../src/TileType';
+import {TileType} from '../../../src/common/TileType';
 
 describe('Polaris', function() {
   let card: Polaris;

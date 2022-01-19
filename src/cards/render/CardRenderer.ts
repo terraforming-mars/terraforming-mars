@@ -7,11 +7,7 @@ import {TileType} from '../../common/TileType';
 export type ItemType = CardRenderItem | CardRenderProductionBox | CardRenderSymbol | CardRenderEffect | CardRenderTile | string | undefined;
 
 export class CardRenderer {
-  constructor(protected _rows: Array<Array<ItemType>> = [[]]) {}
-
-  public get rows() {
-    return this._rows;
-  }
+  constructor(public rows: Array<Array<ItemType>> = [[]]) {}
 
   public static builder(f: (builder: Builder) => void): CardRenderer {
     const builder = new Builder();
@@ -21,7 +17,7 @@ export class CardRenderer {
 }
 
 export class CardRenderProductionBox extends CardRenderer {
-  constructor(rows: Array<Array<CardRenderItem | CardRenderSymbol>>) {
+  constructor(rows: Array<Array<ItemType>>) {
     super(rows);
   }
 
@@ -37,7 +33,7 @@ export class CardRenderTile {
 }
 
 export class CardRenderEffect extends CardRenderer {
-  constructor(rows: Array<Array<CardRenderItem | CardRenderSymbol | CardRenderProductionBox | CardRenderTile | string>>) {
+  constructor(rows: Array<Array<ItemType>>) {
     super(rows);
   }
 
@@ -91,7 +87,7 @@ export class CardRenderEffect extends CardRenderer {
 }
 
 export class CardRenderCorpBoxEffect extends CardRenderer {
-  constructor(rows: Array<Array<CardRenderEffect | CardRenderItem | string>>) {
+  constructor(rows: Array<Array<ItemType>>) {
     super(rows);
   }
 
@@ -103,7 +99,7 @@ export class CardRenderCorpBoxEffect extends CardRenderer {
 }
 
 export class CardRenderCorpBoxAction extends CardRenderer {
-  constructor(rows: Array<Array<CardRenderEffect | CardRenderItem | string>>) {
+  constructor(rows: Array<Array<ItemType>>) {
     super(rows);
   }
 
@@ -575,32 +571,24 @@ class Builder {
 }
 
 class ProductionBoxBuilder extends Builder {
-  protected _data: Array<Array<CardRenderItem | CardRenderSymbol>> = [[]];
-
   public build(): CardRenderProductionBox {
     return new CardRenderProductionBox(this._data);
   }
 }
 
 class EffectBuilder extends Builder {
-  protected _data: Array<Array<CardRenderItem | CardRenderSymbol | CardRenderProductionBox>> = [[]];
-
   public build(): CardRenderEffect {
     return new CardRenderEffect(this._data);
   }
 }
 
 class CorpEffectBuilderEffect extends Builder {
-  protected _data: Array<Array<CardRenderEffect | CardRenderItem>> = [[]];
-
   public build(): CardRenderCorpBoxAction {
     return new CardRenderCorpBoxEffect(this._data);
   }
 }
 
 class CorpEffectBuilderAction extends Builder {
-  protected _data: Array<Array<CardRenderEffect | CardRenderItem>> = [[]];
-
   public build(): CardRenderCorpBoxEffect {
     return new CardRenderCorpBoxAction(this._data);
   }

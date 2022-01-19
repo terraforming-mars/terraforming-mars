@@ -36,7 +36,7 @@ export class RestrictedArea extends Card implements IActionCard, IProjectCard {
       metadata,
     });
   }
-  public canPlay(player: Player): boolean {
+  public override canPlay(player: Player): boolean {
     return player.game.board.getAvailableSpacesOnLand(player).length > 0;
   }
   public play(player: Player) {

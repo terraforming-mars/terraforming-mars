@@ -34,7 +34,7 @@ export class GreatDamPromo extends Card implements IProjectCard {
     });
   }
 
-  public canPlay(player: Player): boolean {
+  public override canPlay(player: Player): boolean {
     return this.getAvailableSpaces(player).length > 0;
   }
 

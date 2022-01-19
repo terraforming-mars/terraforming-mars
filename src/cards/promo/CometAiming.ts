@@ -37,7 +37,7 @@ export class CometAiming extends Card implements IActionCard, IProjectCard, IRes
       },
     });
   }
-    public resourceCount = 0;
+    public override resourceCount = 0;
 
     public play() {
       return undefined;

@@ -29,7 +29,7 @@ export abstract class MiningCard extends Card implements IProjectCard {
     });
   }
     public bonusResource?: Array<Resources>;
-    public canPlay(player: Player): boolean {
+    public override canPlay(player: Player): boolean {
       return this.getAvailableSpaces(player).length > 0;
     }
     private isAres(): boolean {

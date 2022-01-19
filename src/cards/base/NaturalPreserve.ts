@@ -42,7 +42,7 @@ export class NaturalPreserve extends Card implements IProjectCard {
     return player.game.board.getAvailableSpacesOnLand(player)
       .filter(nextToNoOtherTileFn(player.game.board));
   }
-  public canPlay(player: Player): boolean {
+  public override canPlay(player: Player): boolean {
     return this.getAvailableSpaces(player).length > 0;
   }
   public play(player: Player) {

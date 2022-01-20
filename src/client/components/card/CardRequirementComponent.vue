@@ -18,7 +18,7 @@
             </div>
           </div>
         </template>
-        <CardParty v-else-if="requirement.type === RequirementType.PARTY" class="" :party="getParty()" size="req" />
+        <CardParty v-else-if="requirement.type === RequirementType.PARTY" :party="getParty()" size="req" />
         <template v-else>
           <template v-for="num in repeats">
             <div :class="getComponentClasses()" :key="num"></div>

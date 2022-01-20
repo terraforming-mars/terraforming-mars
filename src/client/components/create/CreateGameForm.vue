@@ -452,7 +452,7 @@ import CardsFilter from '@/client/components/create/CardsFilter.vue';
 import Button from '@/client/components/common/Button.vue';
 import {playerColorClass} from '@/utils/utils';
 import {RandomMAOptionType} from '@/RandomMAOptionType';
-import {GameId} from '@/Game';
+import {GameId} from '@/common/Types';
 import {AgendaStyle} from '@/turmoil/PoliticalAgendas';
 
 import * as constants from '@/constants';

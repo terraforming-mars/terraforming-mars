@@ -1,5 +1,6 @@
 
-import {Player, PlayerId} from '../Player';
+import {Player} from '../Player';
+import {PlayerId} from '../common/Types';
 import {IMilestone} from './IMilestone';
 
 export interface ClaimedMilestone {

@@ -6,7 +6,7 @@ import {expect} from 'chai';
 import {TestPlayer} from '../../TestPlayer';
 import {NeutralPlayer, Turmoil} from '../../../src/turmoil/Turmoil';
 import {PartyName} from '../../../src/turmoil/parties/PartyName';
-import {PlayerId} from '../../../src/Player';
+import {PlayerId} from '../../../src/common/Types';
 import {IParty} from '../../../src/turmoil/parties/IParty';
 import {OrOptions} from '../../../src/inputs/OrOptions';
 

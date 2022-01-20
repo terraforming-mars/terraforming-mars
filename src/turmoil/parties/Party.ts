@@ -1,4 +1,5 @@
-import {Player, PlayerId} from '../../Player';
+import {Player} from '../../Player';
+import {PlayerId} from '../../common/Types';
 import {Game} from '../../Game';
 import {NeutralPlayer} from '../Turmoil';
 

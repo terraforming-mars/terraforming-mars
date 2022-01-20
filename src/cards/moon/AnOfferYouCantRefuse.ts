@@ -1,5 +1,6 @@
 import {CardName} from '../../CardName';
-import {Player, PlayerId} from '../../Player';
+import {Player} from '../../Player';
+import {PlayerId} from '../../common/Types';
 import {CardType} from '../CardType';
 import {CardRenderer} from '../render/CardRenderer';
 import {ProjectCard} from '../ProjectCard';

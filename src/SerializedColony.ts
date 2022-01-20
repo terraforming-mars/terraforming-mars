@@ -1,6 +1,6 @@
 
 import {ColonyName} from './colonies/ColonyName';
-import {PlayerId} from './Player';
+import {PlayerId} from './common/Types';
 import {ResourceType} from './common/ResourceType';
 
 export interface SerializedColony {

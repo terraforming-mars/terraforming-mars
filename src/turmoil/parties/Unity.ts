@@ -14,7 +14,7 @@ import {DeferredAction} from '../../deferredActions/DeferredAction';
 import {OrOptions} from '../../inputs/OrOptions';
 import {SelectCard} from '../../inputs/SelectCard';
 import {SelectOption} from '../../inputs/SelectOption';
-import {ResourceType} from '../../ResourceType';
+import {ResourceType} from '../../common/ResourceType';
 
 export class Unity extends Party implements IParty {
   name = PartyName.UNITY;

@@ -2,7 +2,7 @@ import {IActionCard, IResourceCard} from '../ICard';
 import {Tags} from '../Tags';
 import {CardType} from '../CardType';
 import {Player} from '../../Player';
-import {ResourceType} from '../../ResourceType';
+import {ResourceType} from '../../common/ResourceType';
 import {CardName} from '../../CardName';
 import {CardRequirements} from '../CardRequirements';
 import {CardRenderer} from '../render/CardRenderer';

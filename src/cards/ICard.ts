@@ -13,7 +13,7 @@ import {SelectPlayer} from '../inputs/SelectPlayer';
 import {SelectSpace} from '../inputs/SelectSpace';
 import {OrOptions} from '../inputs/OrOptions';
 import {SelectOption} from '../inputs/SelectOption';
-import {ResourceType} from '../ResourceType';
+import {ResourceType} from '../common/ResourceType';
 import {CardName} from '../CardName';
 import {ICardMetadata} from './ICardMetadata';
 import {StandardProjectCard} from './StandardProjectCard';

@@ -5,7 +5,7 @@ import {CardType} from '../CardType';
 import {CardName} from '../../CardName';
 import {CardRenderer} from '../render/CardRenderer';
 import {Tags} from '../Tags';
-import {ResourceType} from '../../ResourceType';
+import {ResourceType} from '../../common/ResourceType';
 import {AddResourcesToCards} from '../../deferredActions/AddResourcesToCards';
 
 export class Cyanobacteria extends Card implements IProjectCard {

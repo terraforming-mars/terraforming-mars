@@ -2,7 +2,7 @@ import {CardName} from '../../CardName';
 import {Player} from '../../Player';
 import {CardType} from '../CardType';
 import {Tags} from '../Tags';
-import {ResourceType} from '../../ResourceType';
+import {ResourceType} from '../../common/ResourceType';
 import {AddResourcesToCard} from '../../deferredActions/AddResourcesToCard';
 import {IActionCard} from '../ICard';
 import {CardRenderer} from '../render/CardRenderer';

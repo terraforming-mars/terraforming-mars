@@ -8,7 +8,7 @@
 <script lang="ts">
 
 import Vue from 'vue';
-import {ResourceType} from '@/ResourceType';
+import {ResourceType} from '@/common/ResourceType';
 export default Vue.extend({
   name: 'CardResourceCounter',
   props: {

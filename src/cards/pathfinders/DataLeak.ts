@@ -5,7 +5,7 @@ import {CardType} from '../CardType';
 import {CardName} from '../../CardName';
 import {CardRenderer} from '../render/CardRenderer';
 import {AddResourcesToCard} from '../../deferredActions/AddResourcesToCard';
-import {ResourceType} from '../../ResourceType';
+import {ResourceType} from '../../common/ResourceType';
 
 export class DataLeak extends Card implements IProjectCard {
   constructor() {

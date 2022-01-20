@@ -7,7 +7,7 @@ import {Tags} from '../Tags';
 import {Size} from '../render/Size';
 import {played} from '../Options';
 import {CorporationCard} from '../corporation/CorporationCard';
-import {ResourceType} from '../../ResourceType';
+import {ResourceType} from '../../common/ResourceType';
 import {ISpace} from '../../boards/ISpace';
 import {TileType} from '../../common/TileType';
 

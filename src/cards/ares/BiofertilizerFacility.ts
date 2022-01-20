@@ -4,7 +4,7 @@ import {SelectSpace} from '../../inputs/SelectSpace';
 import {ISpace} from '../../boards/ISpace';
 import {Player} from '../../Player';
 import {Resources} from '../../Resources';
-import {ResourceType} from '../../ResourceType';
+import {ResourceType} from '../../common/ResourceType';
 import {SpaceBonus} from '../../SpaceBonus';
 import {SpaceType} from '../../SpaceType';
 import {TileType} from '../../common/TileType';

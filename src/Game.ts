@@ -33,7 +33,7 @@ import {Phase} from './Phase';
 import {Player} from './Player';
 import {PlayerId, GameId, SpectatorId} from './common/Types';
 import {PlayerInput} from './PlayerInput';
-import {ResourceType} from './ResourceType';
+import {ResourceType} from './common/ResourceType';
 import {Resources} from './Resources';
 import {DeferredAction, Priority} from './deferredActions/DeferredAction';
 import {DeferredActionsQueue} from './deferredActions/DeferredActionsQueue';

@@ -4,7 +4,7 @@ import {CardType} from '../CardType';
 import {Tags} from '../Tags';
 import {CardRenderer} from '../render/CardRenderer';
 import {Card} from '../Card';
-import {ResourceType} from '../../ResourceType';
+import {ResourceType} from '../../common/ResourceType';
 import {IActionCard, IResourceCard} from '../ICard';
 import {played} from '../Options';
 

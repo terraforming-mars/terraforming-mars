@@ -4,7 +4,7 @@ import {Celestic} from '../../../src/cards/venusNext/Celestic';
 import {Game} from '../../../src/Game';
 import {TestPlayers} from '../../TestPlayers';
 import {CardName} from '../../../src/CardName';
-import {ResourceType} from '../../../src/ResourceType';
+import {ResourceType} from '../../../src/common/ResourceType';
 import {RequirementType} from '../../../src/cards/RequirementType';
 
 describe('Celestic', function() {

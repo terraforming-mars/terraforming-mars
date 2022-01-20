@@ -4,7 +4,7 @@ import {Card} from '../Card';
 import {CorporationCard} from '../corporation/CorporationCard';
 import {IActionCard, ICard} from '../ICard';
 import {CardName} from '../../CardName';
-import {ResourceType} from '../../ResourceType';
+import {ResourceType} from '../../common/ResourceType';
 import {SelectOption} from '../../inputs/SelectOption';
 import {SelectCard} from '../../inputs/SelectCard';
 import {OrOptions} from '../../inputs/OrOptions';

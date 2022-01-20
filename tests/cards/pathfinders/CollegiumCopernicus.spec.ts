@@ -13,6 +13,9 @@ import {Enceladus} from '../../../src/colonies/Enceladus';
 import {Europa} from '../../../src/colonies/Europa';
 import {Io} from '../../../src/colonies/Io';
 import {Pluto} from '../../../src/colonies/Pluto';
+import {LunarObservationPost} from '../../../src/cards/moon/LunarObservationPost';
+import {Tags} from '../../../src/cards/Tags';
+import {SelectCard} from '../../../src/inputs/SelectCard';
 
 describe('CollegiumCopernicus', function() {
   let card: CollegiumCopernicus;
@@ -23,6 +26,7 @@ describe('CollegiumCopernicus', function() {
     card = new CollegiumCopernicus();
     game = newTestGame(2, {coloniesExtension: true, pathfindersExpansion: true});
     player = getTestPlayer(game, 0);
+    player.corporationCard = card;
     // Looks as though when Enceladus is first, the test fails. So removing flakiness by defining colonies.
     game.colonies = [
       new Europa(),
@@ -49,7 +53,6 @@ describe('CollegiumCopernicus', function() {
 
     card.resourceCount = 3;
     game.colonies[0].visitor = undefined;
-    console.log('xcolonies', game.colonies.map((c) => c.name));
     expect(card.canAct(player)).is.true;
   });
 
@@ -97,5 +100,30 @@ describe('CollegiumCopernicus', function() {
 
     expect(card.resourceCount).eq(0);
     expect(player.megaCredits).eq(2);
+  });
+
+  it('play', function() {
+    expect(card.resourceCount).eq(0);
+    card.play(player);
+    TestingUtils.runAllActions(game);
+    expect(card.resourceCount).eq(1);
+  });
+
+  it('onCardPlayed', () => {
+    const lunarObservationPost = new LunarObservationPost();
+    player.playedCards = [lunarObservationPost];
+
+    card.onCardPlayed(player, TestingUtils.fakeCard({tags: [Tags.SCIENCE]}));
+    TestingUtils.runAllActions(game);
+    const selectCard = TestingUtils.cast(player.getWaitingFor(), SelectCard);
+
+    expect(selectCard.cards).has.members([card, lunarObservationPost]);
+    expect(lunarObservationPost.resourceCount).eq(0);
+    expect(card.resourceCount).eq(0);
+
+    selectCard.cb([lunarObservationPost]);
+
+    expect(lunarObservationPost.resourceCount).eq(1);
+    expect(card.resourceCount).eq(0);
   });
 });

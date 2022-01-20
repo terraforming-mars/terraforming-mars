@@ -15,7 +15,7 @@ import {PlanetaryTrack} from './PlanetaryTrack';
 import {PlanetaryTracks} from './PlanetaryTracks';
 import {Player} from '../Player';
 import {Resources} from '../Resources';
-import {ResourceType} from '../ResourceType';
+import {ResourceType} from '../common/ResourceType';
 import {Reward} from './Reward';
 import {SelectResourcesDeferred} from '../deferredActions/SelectResourcesDeferred';
 import {SendDelegateToArea} from '../deferredActions/SendDelegateToArea';

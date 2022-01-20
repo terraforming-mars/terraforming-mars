@@ -5,7 +5,7 @@ import {Player} from '../../Player';
 import {CardName} from '../../CardName';
 import {CardType} from '../CardType';
 import {CardRenderer} from '../render/CardRenderer';
-import {ResourceType} from '../../ResourceType';
+import {ResourceType} from '../../common/ResourceType';
 import {AddResourcesToCard} from '../../deferredActions/AddResourcesToCard';
 import {played} from '../Options';
 import {IProjectCard} from '../IProjectCard';

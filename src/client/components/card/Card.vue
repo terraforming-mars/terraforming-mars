@@ -35,7 +35,7 @@ import {ICardMetadata} from '@/cards/ICardMetadata';
 import {Tags} from '@/cards/Tags';
 import {CardRequirements} from '@/cards/CardRequirements';
 import {PreferencesManager} from '@/client/utils/PreferencesManager';
-import {ResourceType} from '@/ResourceType';
+import {ResourceType} from '@/common/ResourceType';
 import {getCard} from '@/client/cards/ClientCardManifest';
 
 export default Vue.extend({

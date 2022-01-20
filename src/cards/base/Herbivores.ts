@@ -5,7 +5,7 @@ import {VictoryPoints} from '../ICard';
 import {CardType} from '../CardType';
 import {Player} from '../../Player';
 import {ISpace} from '../../boards/ISpace';
-import {ResourceType} from '../../ResourceType';
+import {ResourceType} from '../../common/ResourceType';
 import {TileType} from '../../common/TileType';
 import {Resources} from '../../Resources';
 import {CardName} from '../../CardName';

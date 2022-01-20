@@ -8,7 +8,7 @@ import {ISpace} from '../../../src/boards/ISpace';
 import {SpaceBonus} from '../../../src/SpaceBonus';
 import {IProjectCard} from '../../../src/cards/IProjectCard';
 import {TestingUtils} from '../../TestingUtils';
-import {ResourceType} from '../../../src/ResourceType';
+import {ResourceType} from '../../../src/common/ResourceType';
 import {Units} from '../../../src/Units';
 import {OrOptions} from '../../../src/inputs/OrOptions';
 

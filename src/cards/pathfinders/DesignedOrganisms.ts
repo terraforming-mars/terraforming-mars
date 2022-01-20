@@ -8,7 +8,7 @@ import {Resources} from '../../Resources';
 import {Tags} from '../Tags';
 import {CardRequirements} from '../CardRequirements';
 import {AddResourcesToCard} from '../../deferredActions/AddResourcesToCard';
-import {ResourceType} from '../../ResourceType';
+import {ResourceType} from '../../common/ResourceType';
 import {Units} from '../../Units';
 
 export class DesignedOrganisms extends Card implements IProjectCard {

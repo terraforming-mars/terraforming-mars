@@ -8,7 +8,7 @@ import {OrOptions} from '../../inputs/OrOptions';
 import {SelectOption} from '../../inputs/SelectOption';
 import {SelectCard} from '../../inputs/SelectCard';
 import {PlayerInput} from '../../PlayerInput';
-import {ResourceType} from '../../ResourceType';
+import {ResourceType} from '../../common/ResourceType';
 import {CardName} from '../../CardName';
 import {Resources} from '../../Resources';
 import {PlaceOceanTile} from '../../deferredActions/PlaceOceanTile';

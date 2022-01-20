@@ -3,7 +3,7 @@ import {Player} from '../../Player';
 import {PreludeCard} from './../prelude/PreludeCard';
 import {IProjectCard} from '../IProjectCard';
 import {CardName} from '../../CardName';
-import {ResourceType} from '../../ResourceType';
+import {ResourceType} from '../../common/ResourceType';
 import {SelectHowToPayForProjectCard} from '../../inputs/SelectHowToPayForProjectCard';
 import {CardRenderer} from '../render/CardRenderer';
 import {Size} from '../render/Size';

@@ -6,7 +6,7 @@ import {Kelvinists} from '../../src/turmoil/parties/Kelvinists';
 import {Turmoil} from '../../src/turmoil/Turmoil';
 import {TestPlayers} from '../TestPlayers';
 import {CardName} from '../../src/CardName';
-import {ResourceType} from '../../src/ResourceType';
+import {ResourceType} from '../../src/common/ResourceType';
 import {AndOptions} from '../../src/inputs/AndOptions';
 
 describe('CommunicationBoom', function() {

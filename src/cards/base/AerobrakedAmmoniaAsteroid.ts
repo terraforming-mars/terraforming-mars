@@ -6,7 +6,7 @@ import {CardType} from '../CardType';
 import {Player} from '../../Player';
 import {SelectCard} from '../../inputs/SelectCard';
 import {Resources} from '../../Resources';
-import {ResourceType} from '../../ResourceType';
+import {ResourceType} from '../../common/ResourceType';
 import {CardName} from '../../CardName';
 import {CardRenderer} from '../render/CardRenderer';
 

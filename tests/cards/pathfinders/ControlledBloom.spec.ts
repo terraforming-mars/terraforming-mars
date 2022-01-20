@@ -7,7 +7,7 @@ import {getTestPlayer, newTestGame} from '../../TestGame';
 import {CardName} from '../../../src/CardName';
 import {TestingUtils} from '../../TestingUtils';
 import {SelectCard} from '../../../src/inputs/SelectCard';
-import {ResourceType} from '../../../src/ResourceType';
+import {ResourceType} from '../../../src/common/ResourceType';
 
 describe('ControlledBloom', function() {
   let card: ControlledBloom;

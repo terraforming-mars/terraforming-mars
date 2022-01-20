@@ -8,7 +8,7 @@ import {Tags} from '../Tags';
 import {CardRequirements} from '../CardRequirements';
 import {Units} from '../../Units';
 import {AddResourcesToCard} from '../../deferredActions/AddResourcesToCard';
-import {ResourceType} from '../../ResourceType';
+import {ResourceType} from '../../common/ResourceType';
 import {nextToNoOtherTileFn} from '../../boards/Board';
 import {ISpace} from '../../boards/ISpace';
 import {SelectSpace} from '../../inputs/SelectSpace';

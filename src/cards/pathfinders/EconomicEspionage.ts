@@ -4,7 +4,7 @@ import {CardType} from '../CardType';
 import {CardName} from '../../CardName';
 import {CardRenderer} from '../render/CardRenderer';
 import {Tags} from '../Tags';
-import {ResourceType} from '../../ResourceType';
+import {ResourceType} from '../../common/ResourceType';
 import {Player} from '../../Player';
 import {IActionCard, VictoryPoints} from '../ICard';
 import {AddResourcesToCard} from '../../deferredActions/AddResourcesToCard';

@@ -24,7 +24,7 @@ import {PartyName} from './turmoil/parties/PartyName';
 import {PharmacyUnion} from './cards/promo/PharmacyUnion';
 import {Phase} from './Phase';
 import {PlayerInput} from './PlayerInput';
-import {ResourceType} from './ResourceType';
+import {ResourceType} from './common/ResourceType';
 import {Resources} from './Resources';
 import {SelectAmount} from './inputs/SelectAmount';
 import {SelectCard} from './inputs/SelectCard';

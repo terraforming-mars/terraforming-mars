@@ -8,7 +8,7 @@ import {CardRenderer} from '../render/CardRenderer';
 import {played} from '../Options';
 import {IProjectCard} from '../IProjectCard';
 import {IActionCard, ICard} from '../ICard';
-import {ResourceType} from '../../ResourceType';
+import {ResourceType} from '../../common/ResourceType';
 import {ColoniesHandler} from '../../colonies/ColoniesHandler';
 import {DeferredAction} from '../../deferredActions/DeferredAction';
 import {SelectColony} from '../../inputs/SelectColony';

@@ -5,7 +5,7 @@ import {ISpace} from '../../boards/ISpace';
 import {SpaceBonus} from '../../SpaceBonus';
 import {TileType} from '../../common/TileType';
 import {Resources} from '../../Resources';
-import {ResourceType} from '../../ResourceType';
+import {ResourceType} from '../../common/ResourceType';
 import {AddResourcesToCard} from '../../deferredActions/AddResourcesToCard';
 import {GainResources} from '../../deferredActions/GainResources';
 import {Phase} from '../../Phase';

@@ -13,7 +13,7 @@ import {TestPlayers} from '../../TestPlayers';
 import {CardName} from '../../../src/CardName';
 import {Tags} from '../../../src/cards/Tags';
 import {CardType} from '../../../src/cards/CardType';
-import {ResourceType} from '../../../src/ResourceType';
+import {ResourceType} from '../../../src/common/ResourceType';
 import {IProjectCard} from '../../../src/cards/IProjectCard';
 
 describe('MaxwellBase', function() {

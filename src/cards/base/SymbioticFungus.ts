@@ -1,4 +1,4 @@
-import {Tags} from '../Tags';
+import {Tags} from '../../common/cards/Tags';
 import {IActionCard, ICard} from '../ICard';
 import {IProjectCard} from '../IProjectCard';
 import {Player} from '../../Player';

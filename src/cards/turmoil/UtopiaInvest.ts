@@ -1,5 +1,5 @@
 import {IActionCard} from '../ICard';
-import {Tags} from '../Tags';
+import {Tags} from '../../common/cards/Tags';
 import {Player} from '../../Player';
 import {CorporationCard} from './../corporation/CorporationCard';
 import {OrOptions} from '../../inputs/OrOptions';

@@ -22,7 +22,7 @@ export class PowerPlantStandardProject extends StandardProjectCard {
     });
   }
 
-  protected discount(player: Player): number {
+  protected override discount(player: Player): number {
     let discount = 0;
     if (player.isCorporation(CardName.THORGATE)) {
       discount += 3;

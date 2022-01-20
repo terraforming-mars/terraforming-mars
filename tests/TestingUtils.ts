@@ -6,7 +6,7 @@ import {ISpace} from '../src/boards/ISpace';
 import {Phase} from '../src/Phase';
 import {IParty} from '../src/turmoil/parties/IParty';
 import {Turmoil} from '../src/turmoil/Turmoil';
-import {TurmoilPolicy} from '../src/turmoil/TurmoilPolicy';
+import {PolicyId} from '../src/turmoil/Policy';
 import {LogMessage} from '../src/LogMessage';
 import {Log} from '../src/Log';
 import {PlayerInput} from '../src/PlayerInput';
@@ -70,7 +70,7 @@ export class TestingUtils {
     return Object.assign(defaultOptions, options);
   };
 
-  public static setRulingPartyAndRulingPolicy(game: Game, turmoil: Turmoil, party: IParty, policyId: TurmoilPolicy) {
+  public static setRulingPartyAndRulingPolicy(game: Game, turmoil: Turmoil, party: IParty, policyId: PolicyId) {
     turmoil.rulingParty = party;
     turmoil.politicalAgendasData.agendas.set(party.name, {bonusId: party.bonuses[0].id, policyId: policyId});
     game.phase = Phase.ACTION;

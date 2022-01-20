@@ -1,7 +1,7 @@
 import {CorporationCard} from '../corporation/CorporationCard';
 import {Player} from '../../Player';
 import {Tags} from '../Tags';
-import {ResourceType} from '../../ResourceType';
+import {ResourceType} from '../../common/ResourceType';
 import {IProjectCard} from '../IProjectCard';
 import {Resources} from '../../common/Resources';
 import {CardType} from '../CardType';
@@ -38,7 +38,7 @@ export class Arklight extends Card implements CorporationCard, IResourceCard {
     });
   }
 
-    public resourceCount = 0;
+    public override resourceCount = 0;
 
     public play(player: Player) {
       player.addProduction(Resources.MEGACREDITS, 2);

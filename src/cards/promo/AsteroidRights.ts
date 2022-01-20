@@ -3,7 +3,7 @@ import {IActionCard, ICard, IResourceCard} from '../ICard';
 import {Card} from '../Card';
 import {CardName} from '../../CardName';
 import {CardType} from '../CardType';
-import {ResourceType} from '../../ResourceType';
+import {ResourceType} from '../../common/ResourceType';
 import {Tags} from '../Tags';
 import {Player} from '../../Player';
 import {Resources} from '../../common/Resources';
@@ -41,7 +41,7 @@ export class AsteroidRights extends Card implements IActionCard, IProjectCard, I
       },
     });
   }
-  public resourceCount = 0;
+  public override resourceCount = 0;
 
   public play() {
     this.resourceCount = 2;

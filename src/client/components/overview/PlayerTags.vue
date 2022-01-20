@@ -48,7 +48,6 @@ import {SpecialTags} from '@/cards/SpecialTags';
 import PlayerTagDiscount from '@/client/components/overview/PlayerTagDiscount.vue';
 import JovianMultiplier from '@/client/components/overview/JovianMultiplier.vue';
 import {PartyName} from '@/turmoil/parties/PartyName';
-import {TurmoilPolicy} from '@/turmoil/TurmoilPolicy';
 import {CardModel} from '@/models/CardModel';
 import {Shared} from '@/client/components/overview/Shared';
 
@@ -191,7 +190,7 @@ export default Vue.extend({
       const turmoil = this.playerView.game.turmoil;
       if (tag === Tags.SPACE &&
         turmoil && turmoil.ruling === PartyName.UNITY &&
-        turmoil.politicalAgendas?.unity.policyId === TurmoilPolicy.UNITY_POLICY_4) {
+        turmoil.politicalAgendas?.unity.policyId === 'up04') {
         return true;
       }
 
@@ -210,7 +209,7 @@ export default Vue.extend({
       }
 
       if (tag === Tags.SPACE && this.playerView.game.turmoil?.ruling === PartyName.UNITY) {
-        if (this.playerView.game.turmoil.politicalAgendas?.unity.policyId === TurmoilPolicy.UNITY_POLICY_4) discount += 2;
+        if (this.playerView.game.turmoil.politicalAgendas?.unity.policyId === 'up04') discount += 2;
       }
 
       if (tag === 'all') {

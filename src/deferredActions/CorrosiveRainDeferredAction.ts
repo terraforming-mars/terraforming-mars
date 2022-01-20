@@ -3,7 +3,7 @@ import {SelectCard} from '../inputs/SelectCard';
 import {ICard} from '../cards/ICard';
 import {OrOptions} from '../inputs/OrOptions';
 import {Resources} from '../common/Resources';
-import {ResourceType} from '../ResourceType';
+import {ResourceType} from '../common/ResourceType';
 import {SelectOption} from '../inputs/SelectOption';
 import {DeferredAction, Priority} from './DeferredAction';
 import {GlobalEventName} from '../turmoil/globalEvents/GlobalEventName';

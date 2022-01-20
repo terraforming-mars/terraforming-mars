@@ -4,7 +4,7 @@ import {CardType} from '../CardType';
 import {Tags} from '../Tags';
 import {CardRequirements} from '../CardRequirements';
 import {CardRenderer} from '../render/CardRenderer';
-import {TileType} from '../../TileType';
+import {TileType} from '../../common/TileType';
 import {CardRenderDynamicVictoryPoints} from '../render/CardRenderDynamicVictoryPoints';
 import {MoonExpansion} from '../../moon/MoonExpansion';
 import {Units} from '../../Units';
@@ -44,7 +44,7 @@ export class LunaMiningHub extends MoonCard {
     });
   };
 
-  public play(player: Player) {
+  public override play(player: Player) {
     super.play(player);
     player.game.defer(new PlaceSpecialMoonTile(
       player, {
@@ -56,7 +56,7 @@ export class LunaMiningHub extends MoonCard {
     return undefined;
   }
 
-  public getVictoryPoints(player: Player) {
+  public override getVictoryPoints(player: Player) {
     const moonData = MoonExpansion.moonData(player.game);
     const usedSpace = moonData.moon.getSpaceByTileCard(this.name);
     if (usedSpace !== undefined) {

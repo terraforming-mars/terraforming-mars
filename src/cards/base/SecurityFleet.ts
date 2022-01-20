@@ -5,7 +5,7 @@ import {Card} from '../Card';
 import {VictoryPoints} from '../ICard';
 import {CardType} from '../CardType';
 import {Player} from '../../Player';
-import {ResourceType} from '../../ResourceType';
+import {ResourceType} from '../../common/ResourceType';
 import {CardName} from '../../CardName';
 import {CardRenderer} from '../render/CardRenderer';
 
@@ -31,7 +31,7 @@ export class SecurityFleet extends Card implements IActionCard, IProjectCard, IR
       },
     });
   }
-    public resourceCount = 0;
+    public override resourceCount = 0;
 
     public play() {
       return undefined;

@@ -2,7 +2,7 @@ import {CardName} from '../../CardName';
 import {Player} from '../../Player';
 import {CardType} from '../CardType';
 import {Tags} from '../Tags';
-import {ResourceType} from '../../ResourceType';
+import {ResourceType} from '../../common/ResourceType';
 import {StealResources} from '../../deferredActions/StealResources';
 import {Resources} from '../../common/Resources';
 import {CardRenderer} from '../render/CardRenderer';
@@ -35,9 +35,9 @@ export class AncientShipyards extends MoonCard {
       },
     });
   };
-  public resourceCount: number = 0;
+  public override resourceCount: number = 0;
 
-  public play(player: Player) {
+  public override play(player: Player) {
     super.play(player);
     return undefined;
   }

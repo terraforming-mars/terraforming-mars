@@ -2,7 +2,7 @@ import {IActionCard, IResourceCard} from '../ICard';
 import {Tags} from '../Tags';
 import {CardType} from '../CardType';
 import {Player} from '../../Player';
-import {ResourceType} from '../../ResourceType';
+import {ResourceType} from '../../common/ResourceType';
 import {CardName} from '../../CardName';
 import {RemoveResourcesFromCard} from '../../deferredActions/RemoveResourcesFromCard';
 import {CardRequirements} from '../CardRequirements';
@@ -37,8 +37,8 @@ export class StratosphericBirds extends Card implements IActionCard, IResourceCa
       },
     });
   };
-  public resourceCount: number = 0;
-  public canPlay(player: Player): boolean {
+  public override resourceCount: number = 0;
+  public override canPlay(player: Player): boolean {
     const cardsWithFloater = player.getCardsWithResources().filter((card) => card.resourceType === ResourceType.FLOATER);
     if (cardsWithFloater.length === 0) return false;
 

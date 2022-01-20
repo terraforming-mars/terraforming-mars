@@ -1,4 +1,4 @@
-import {TileType} from '../../TileType';
+import {TileType} from '../../common/TileType';
 import {Card} from '../Card';
 import {CardType} from '../CardType';
 import {IProjectCard} from '../IProjectCard';

@@ -2,7 +2,7 @@ import {ICard, IActionCard, IResourceCard} from '../ICard';
 import {Tags} from '../Tags';
 import {CardType} from '../CardType';
 import {Player} from '../../Player';
-import {ResourceType} from '../../ResourceType';
+import {ResourceType} from '../../common/ResourceType';
 import {SelectCard} from '../../inputs/SelectCard';
 import {CardName} from '../../CardName';
 import {SelectHowToPayDeferred} from '../../deferredActions/SelectHowToPayDeferred';
@@ -35,7 +35,7 @@ export class FloatingHabs extends Card implements IActionCard, IResourceCard {
       },
     });
   };
-  public resourceCount: number = 0;
+  public override resourceCount: number = 0;
 
   public play() {
     return undefined;

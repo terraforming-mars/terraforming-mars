@@ -4,7 +4,7 @@ import {TestingUtils} from '../TestingUtils';
 import {TestPlayers} from '../TestPlayers';
 import {Game} from '../../src/Game';
 import {AdaptationTechnology} from '../../src/cards/base/AdaptationTechnology';
-import {TileType} from '../../src/TileType';
+import {TileType} from '../../src/common/TileType';
 import {Ants} from '../../src/cards/base/Ants';
 import {Ceres} from '../../src/colonies/Ceres';
 import {Celestic} from '../../src/cards/venusNext/Celestic';

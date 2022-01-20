@@ -36,7 +36,7 @@ export class AsteroidResources extends Card implements IProjectCard {
     });
   }
 
-  public canPlay(player: Player) {
+  public override canPlay(player: Player) {
     return player.hasUnits(this.reserveUnits);
   }
   public play(player: Player) {

@@ -4,7 +4,7 @@ import {Card} from '../Card';
 import {VictoryPoints} from '../ICard';
 import {CardType} from '../CardType';
 import {Player} from '../../Player';
-import {ResourceType} from '../../ResourceType';
+import {ResourceType} from '../../common/ResourceType';
 import {CardName} from '../../CardName';
 import {IResourceCard} from '../ICard';
 import {CardRequirements} from '../CardRequirements';
@@ -39,7 +39,7 @@ export class Decomposers extends Card implements IProjectCard, IResourceCard {
       },
     });
   }
-    public resourceCount: number = 0;
+    public override resourceCount: number = 0;
     public onCardPlayed(player: Player, card: IProjectCard): void {
       player.addResourceTo(this, card.tags.filter((tag) => tag === Tags.ANIMAL || tag === Tags.PLANT || tag === Tags.MICROBE).length);
     }

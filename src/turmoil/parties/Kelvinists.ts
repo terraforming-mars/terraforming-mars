@@ -7,7 +7,6 @@ import {Bonus} from '../Bonus';
 import {Policy} from '../Policy';
 import {Player} from '../../Player';
 import {SelectHowToPayDeferred} from '../../deferredActions/SelectHowToPayDeferred';
-import {TurmoilPolicy} from '../TurmoilPolicy';
 import {MAX_TEMPERATURE} from '../../constants';
 import {CardName} from '../../CardName';
 
@@ -19,7 +18,7 @@ export class Kelvinists extends Party implements IParty {
 }
 
 class KelvinistsBonus01 implements Bonus {
-  id = 'kb01';
+  id = 'kb01' as const;
   isDefault = true;
   description = 'Gain 1 M€ for each Heat production you have';
 
@@ -35,7 +34,7 @@ class KelvinistsBonus01 implements Bonus {
 }
 
 class KelvinistsBonus02 implements Bonus {
-  id = 'kb02';
+  id = 'kb02' as const;
   description = 'Gain 1 heat for each Heat production you have';
   isDefault = false;
 
@@ -52,7 +51,7 @@ class KelvinistsBonus02 implements Bonus {
 
 class KelvinistsPolicy01 implements Policy {
   isDefault = true;
-  id = TurmoilPolicy.KELVINISTS_DEFAULT_POLICY;
+  id = 'kp01' as const;
   description: string = 'Pay 10 M€ to increase your Energy and Heat production 1 step (Turmoil Kelvinists)';
 
   cost(player: Player): number {
@@ -83,13 +82,13 @@ class KelvinistsPolicy01 implements Policy {
 }
 
 class KelvinistsPolicy02 implements Policy {
-  id = TurmoilPolicy.KELVINISTS_POLICY_2;
+  id = 'kp02' as const;
   description: string = 'When you raise temperature, gain 3 M€ per step raised';
   isDefault = false;
 }
 
 class KelvinistsPolicy03 implements Policy {
-  id = TurmoilPolicy.KELVINISTS_POLICY_3;
+  id = 'kp03' as const;
   description: string = 'Convert 6 heat into temperature (Turmoil Kelvinists)';
   isDefault = false;
 
@@ -110,7 +109,7 @@ class KelvinistsPolicy03 implements Policy {
 }
 
 class KelvinistsPolicy04 implements Policy {
-  id = TurmoilPolicy.KELVINISTS_POLICY_4;
+  id = 'kp04' as const;
   description: string = 'When you place a tile, gain 2 heat';
   isDefault = false;
 

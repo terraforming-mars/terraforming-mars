@@ -36,7 +36,7 @@ import {WaterTreatmentComplex} from '../../src/cards/moon/WaterTreatmentComplex'
 import {DarksideMeteorBombardment} from '../../src/cards/moon/DarksideMeteorBombardment';
 import {LunaStagingStation} from '../../src/cards/moon/LunaStagingStation';
 import {MoonExpansion} from '../../src/moon/MoonExpansion';
-import {TileType} from '../../src/TileType';
+import {TileType} from '../../src/common/TileType';
 
 describe('Turmoil', function() {
   let player : TestPlayer; let player2 : Player; let game : Game; let turmoil: Turmoil;

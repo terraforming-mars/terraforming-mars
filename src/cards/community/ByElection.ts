@@ -27,7 +27,7 @@ export class ByElection extends PreludeCard implements IProjectCard {
       },
     });
   }
-  public canPlay() {
+  public override canPlay() {
     return true;
   }
 

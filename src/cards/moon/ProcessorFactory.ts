@@ -3,7 +3,7 @@ import {Player} from '../../Player';
 import {CardType} from '../CardType';
 import {IProjectCard} from '../IProjectCard';
 import {Tags} from '../Tags';
-import {ResourceType} from '../../ResourceType';
+import {ResourceType} from '../../common/ResourceType';
 import {AddResourcesToCard} from '../../deferredActions/AddResourcesToCard';
 import {CardRenderer} from '../render/CardRenderer';
 import {Card} from '../Card';
@@ -30,7 +30,7 @@ export class ProcessorFactory extends Card implements IProjectCard {
       },
     });
   };
-  public resourceCount = 0;
+  public override resourceCount = 0;
 
   public play() {
     return undefined;

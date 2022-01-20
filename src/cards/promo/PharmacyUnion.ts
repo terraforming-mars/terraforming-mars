@@ -3,7 +3,7 @@ import {Player} from '../../Player';
 import {CorporationCard} from '../corporation/CorporationCard';
 import {Card} from '../Card';
 import {CardName} from '../../CardName';
-import {ResourceType} from '../../ResourceType';
+import {ResourceType} from '../../common/ResourceType';
 import {SelectOption} from '../../inputs/SelectOption';
 import {OrOptions} from '../../inputs/OrOptions';
 import {IProjectCard} from '../IProjectCard';
@@ -44,10 +44,10 @@ export class PharmacyUnion extends Card implements CorporationCard {
     });
   }
 
-    public resourceCount = 0;
+    public override resourceCount = 0;
     public isDisabled = false;
 
-    public get tags() {
+    public override get tags() {
       if (this.isDisabled) {
         return [];
       }

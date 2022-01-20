@@ -5,8 +5,8 @@ import {Card} from '../Card';
 import {VictoryPoints} from '../ICard';
 import {CardType} from '../CardType';
 import {Player} from '../../Player';
-import {ResourceType} from '../../ResourceType';
 import {Resources} from '../../common/Resources';
+import {ResourceType} from '../../common/ResourceType';
 import {CardName} from '../../CardName';
 import {CardRequirements} from '../CardRequirements';
 import {CardRenderer} from '../render/CardRenderer';
@@ -42,8 +42,8 @@ export class Livestock extends Card implements IActionCard, IProjectCard, IResou
     });
   }
 
-    public resourceCount = 0;
-    public canPlay(player: Player): boolean {
+    public override resourceCount = 0;
+    public override canPlay(player: Player): boolean {
       return player.getProduction(Resources.PLANTS) >= 1;
     }
     public play(player: Player) {

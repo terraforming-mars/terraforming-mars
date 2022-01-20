@@ -5,7 +5,7 @@ import {VictoryPoints} from '../ICard';
 import {CardType} from '../CardType';
 import {Player} from '../../Player';
 import {ISpace} from '../../boards/ISpace';
-import {ResourceType} from '../../ResourceType';
+import {ResourceType} from '../../common/ResourceType';
 import {CardName} from '../../CardName';
 import {Priority} from '../../deferredActions/DeferredAction';
 import {AddResourcesToCard} from '../../deferredActions/AddResourcesToCard';
@@ -41,7 +41,7 @@ export class Pets extends Card implements IProjectCard, IResourceCard {
     });
   }
 
-  public resourceCount: number = 0;
+  public override resourceCount: number = 0;
 
   public onTilePlaced(cardOwner: Player, activePlayer: Player, space: ISpace) {
     if (Board.isCitySpace(space)) {

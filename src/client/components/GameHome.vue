@@ -34,8 +34,7 @@ import {SimpleGameModel} from '@/models/SimpleGameModel';
 import Button from '@/client/components/common/Button.vue';
 import {playerColorClass} from '@/utils/utils';
 import GameSetupDetail from '@/client/components/GameSetupDetail.vue';
-import {SpectatorId} from '@/Game';
-import {PlayerId} from '@/Player';
+import {SpectatorId, PlayerId} from '@/common/Types';
 
 // taken from https://stackoverflow.com/a/46215202/83336
 // The solution to copying to the clipboard in this case is

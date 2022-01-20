@@ -1,6 +1,6 @@
 import {IAdjacencyBonus} from '../ares/IAdjacencyBonus';
 import {ITile} from '../ITile';
-import {PlayerId} from '../Player';
+import {PlayerId} from '../common/Types';
 import {SpaceBonus} from '../SpaceBonus';
 import {SpaceType} from '../SpaceType';
 import {SpaceId} from './ISpace';

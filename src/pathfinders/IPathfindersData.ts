@@ -1,5 +1,5 @@
 import {Tags} from '../cards/Tags';
-import {PlayerId} from '../Player';
+import {PlayerId} from '../common/Types';
 import {SerializedPathfindersData} from './SerializedPathfindersData';
 
 export interface IPathfindersData {

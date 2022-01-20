@@ -32,7 +32,7 @@ export class NoctisCity extends Card implements IProjectCard {
     });
   }
 
-  public canPlay(player: Player): boolean {
+  public override canPlay(player: Player): boolean {
     if (player.getProduction(Resources.ENERGY) < 1) {
       return false;
     }

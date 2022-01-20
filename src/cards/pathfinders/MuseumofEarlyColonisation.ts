@@ -33,12 +33,11 @@ export class MuseumofEarlyColonisation extends Card implements IProjectCard {
     });
   }
 
-  public canPlay(player: Player) {
+  public override canPlay(player: Player) {
     return super.canPlay(player) && player.canAdjustProduction(this.productionBox);
   }
   public play(player: Player) {
     player.adjustProduction(this.productionBox);
-    // TODO(kberg): Handle Turmoil efect.
     player.increaseTerraformRating();
     return undefined;
   }

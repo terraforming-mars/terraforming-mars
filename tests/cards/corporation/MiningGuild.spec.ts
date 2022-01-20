@@ -9,7 +9,7 @@ import {Phase} from '../../../src/Phase';
 import {TestingUtils} from '../../TestingUtils';
 import {TestPlayers} from '../../TestPlayers';
 import {BoardType} from '../../../src/boards/BoardType';
-import {TileType} from '../../../src/TileType';
+import {TileType} from '../../../src/common/TileType';
 import {OceanCity} from '../../../src/cards/ares/OceanCity';
 
 describe('MiningGuild', () => {

@@ -7,7 +7,7 @@ import {CardRenderer} from '../render/CardRenderer';
 import {IActionCard} from '../ICard';
 import {Resources} from '../../common/Resources';
 import {Tags} from '../Tags';
-import {ResourceType} from '../../ResourceType';
+import {ResourceType} from '../../common/ResourceType';
 import {SelectOption} from '../../inputs/SelectOption';
 import {OrOptions} from '../../inputs/OrOptions';
 
@@ -34,7 +34,7 @@ export class Cryptocurrency extends Card implements IProjectCard, IActionCard {
     });
   }
 
-  public resourceCount = 0;
+  public override resourceCount = 0;
 
   public canAct(player: Player) {
     return player.energy > 0 || this.resourceCount > 0;

@@ -27,8 +27,7 @@ export class MarketManipulation extends Card implements IProjectCard {
     });
   }
 
-
-  public canPlay(player: Player): boolean {
+  public override canPlay(player: Player): boolean {
     const increasableColonies = this.getIncreasableColonies(player.game);
     const decreasableColonies = this.getDecreasableColonies(player.game);
 

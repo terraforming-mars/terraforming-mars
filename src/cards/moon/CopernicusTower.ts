@@ -3,8 +3,8 @@ import {Player} from '../../Player';
 import {CardType} from '../CardType';
 import {IProjectCard} from '../IProjectCard';
 import {Tags} from '../Tags';
-import {ResourceType} from '../../ResourceType';
 import {Resources} from '../../common/Resources';
+import {ResourceType} from '../../common/ResourceType';
 import {CardRenderer} from '../render/CardRenderer';
 import {CardRequirements} from '../CardRequirements';
 import {IActionCard} from '../ICard';
@@ -39,7 +39,7 @@ export class CopernicusTower extends Card implements IActionCard, IProjectCard {
       },
     });
   };
-  public resourceCount = 0;
+  public override resourceCount = 0;
 
   public play() {
     return undefined;

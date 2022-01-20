@@ -6,7 +6,7 @@ import {CosmicRadiation} from '../../../src/cards/moon/CosmicRadiation';
 import {expect} from 'chai';
 import {MoonExpansion} from '../../../src/moon/MoonExpansion';
 import {IMoonData} from '../../../src/moon/IMoonData';
-import {TileType} from '../../../src/TileType';
+import {TileType} from '../../../src/common/TileType';
 
 const MOON_OPTIONS = TestingUtils.setCustomGameOptions({moonExpansion: true});
 

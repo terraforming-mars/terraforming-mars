@@ -28,7 +28,7 @@ export class Kickstarter extends Card implements IProjectCard, ICloneTagCard {
 
   public cloneTag: Tags = Tags.CLONE;
 
-  public get tags(): Array<Tags> {
+  public override get tags(): Array<Tags> {
     return [this.cloneTag];
   }
 

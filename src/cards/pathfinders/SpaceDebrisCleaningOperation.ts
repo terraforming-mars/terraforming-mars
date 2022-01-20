@@ -8,7 +8,7 @@ import {Resources} from '../../common/Resources';
 import {Tags} from '../Tags';
 import {CardRequirements} from '../CardRequirements';
 import {AddResourcesToCard} from '../../deferredActions/AddResourcesToCard';
-import {ResourceType} from '../../ResourceType';
+import {ResourceType} from '../../common/ResourceType';
 import {ICard} from '../ICard';
 
 export class SpaceDebrisCleaningOperation extends Card implements IProjectCard {

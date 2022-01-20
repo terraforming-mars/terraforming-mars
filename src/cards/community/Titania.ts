@@ -7,11 +7,11 @@ export class Titania extends Colony {
     public name = ColonyName.TITANIA;
     public description = 'VP';
     public buildType = ColonyBenefit.GAIN_VP;
-    public buildQuantity = [5, 3, 2];
+    public override buildQuantity = [5, 3, 2];
     public tradeType = ColonyBenefit.GAIN_VP;
-    public tradeQuantity = [2, 2, 2, 1, 1, 0, 0];
+    public override tradeQuantity = [2, 2, 2, 1, 1, 0, 0];
     public colonyBonusType = ColonyBenefit.LOSE_RESOURCES;
-    public colonyBonusQuantity = 3;
-    public colonyBonusResource = Resources.MEGACREDITS;
-    public shouldIncreaseTrack = ShouldIncreaseTrack.NO;
+    public override colonyBonusQuantity = 3;
+    public override colonyBonusResource = Resources.MEGACREDITS;
+    public override shouldIncreaseTrack = ShouldIncreaseTrack.NO;
 }

@@ -25,7 +25,7 @@ import {Player} from '../src/Player';
 import {Color} from '../src/Color';
 import {RandomMAOptionType} from '../src/RandomMAOptionType';
 import {SpaceBonus} from '../src/SpaceBonus';
-import {TileType} from '../src/TileType';
+import {TileType} from '../src/common/TileType';
 import {ALL_AWARDS} from '../src/awards/Awards';
 import {ALL_MILESTONES} from '../src/milestones/Milestones';
 
@@ -647,15 +647,6 @@ describe('Game', () => {
     delete serialized['moonData'];
     const deserialized = Game.deserialize(serialized);
     expect(deserialized.moonData).is.undefined;
-  });
-
-  it('deserializing a game without altVenusBoard has a default value', () => {
-    const player = TestPlayers.BLUE.newPlayer();
-    const game = Game.newInstance('foobar', [player], player, TestingUtils.setCustomGameOptions({altVenusBoard: true}));
-    const serialized = game.serialize();
-    (serialized.gameOptions as any).altVenusBoard = undefined;
-    const deserialized = Game.deserialize(serialized);
-    expect(deserialized.gameOptions.altVenusBoard).is.false;
   });
 
   it('deserializing a game without pathfinders still loads', () => {

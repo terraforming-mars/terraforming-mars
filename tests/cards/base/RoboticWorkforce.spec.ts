@@ -18,7 +18,7 @@ import {SpaceBonus} from '../../../src/SpaceBonus';
 import {ARES_OPTIONS_NO_HAZARDS} from '../../ares/AresTestHelper';
 import {TestingUtils} from '../../TestingUtils';
 import {TestPlayers} from '../../TestPlayers';
-import {TileType} from '../../../src/TileType';
+import {TileType} from '../../../src/common/TileType';
 import {ICard} from '../../../src/cards/ICard';
 import {TestPlayer} from '../../TestPlayer';
 import {Units} from '../../../src/Units';

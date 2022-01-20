@@ -5,7 +5,7 @@ import {CardType} from '../CardType';
 import {CardName} from '../../CardName';
 import {CardRenderer} from '../render/CardRenderer';
 import {IActionCard} from '../ICard';
-import {ResourceType} from '../../ResourceType';
+import {ResourceType} from '../../common/ResourceType';
 import {SelectCard} from '../../inputs/SelectCard';
 import {Resources} from '../../common/Resources';
 import {CardRequirements} from '../CardRequirements';

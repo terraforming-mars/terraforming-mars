@@ -4,7 +4,7 @@ import {Card} from '../Card';
 import {CorporationCard} from '../corporation/CorporationCard';
 import {IActionCard, ICard} from '../ICard';
 import {CardName} from '../../CardName';
-import {ResourceType} from '../../ResourceType';
+import {ResourceType} from '../../common/ResourceType';
 import {SelectOption} from '../../inputs/SelectOption';
 import {SelectCard} from '../../inputs/SelectCard';
 import {OrOptions} from '../../inputs/OrOptions';
@@ -44,7 +44,7 @@ export class Astrodrill extends Card implements IActionCard, CorporationCard {
       },
     });
   }
-    public resourceCount = 0;
+    public override resourceCount = 0;
 
     public canAct(): boolean {
       return true;

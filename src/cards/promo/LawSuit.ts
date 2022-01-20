@@ -35,7 +35,7 @@ export class LawSuit extends Card implements IProjectCard {
     return player.game.getPlayersById(player.removingPlayers);
   }
 
-  public canPlay(player: Player) {
+  public override canPlay(player: Player) {
     return this.targets(player).length > 0;
   }
 
@@ -48,7 +48,7 @@ export class LawSuit extends Card implements IProjectCard {
       return undefined;
     });
   }
-  public getVictoryPoints() {
+  public override getVictoryPoints() {
     return -1;
   }
 

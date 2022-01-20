@@ -5,7 +5,7 @@ import {Game} from '../../../src/Game';
 import {Units} from '../../../src/Units';
 import {TestPlayer} from '../../TestPlayer';
 import {TestPlayers} from '../../TestPlayers';
-import {ResourceType} from '../../../src/ResourceType';
+import {ResourceType} from '../../../src/common/ResourceType';
 
 describe('SolarStorm', function() {
   let card: SolarStorm;

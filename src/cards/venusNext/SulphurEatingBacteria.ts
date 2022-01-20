@@ -2,7 +2,7 @@ import {IActionCard, IResourceCard} from '../ICard';
 import {Tags} from '../Tags';
 import {CardType} from '../CardType';
 import {Player} from '../../Player';
-import {ResourceType} from '../../ResourceType';
+import {ResourceType} from '../../common/ResourceType';
 import {OrOptions} from '../../inputs/OrOptions';
 import {SelectOption} from '../../inputs/SelectOption';
 import {SelectAmount} from '../../inputs/SelectAmount';
@@ -38,7 +38,7 @@ export class SulphurEatingBacteria extends Card implements IActionCard, IResourc
       },
     });
   };
-  public resourceCount: number = 0;
+  public override resourceCount: number = 0;
 
   public play() {
     return undefined;

@@ -34,7 +34,7 @@ export class IronExtractionCenter extends MoonCard {
     player.addProduction(Resources.STEEL, productionIncrease, {log: true});
   }
 
-  public play(player: Player) {
+  public override play(player: Player) {
     super.play(player);
     this.produce(player);
     return undefined;

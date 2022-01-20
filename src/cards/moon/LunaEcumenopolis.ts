@@ -6,7 +6,7 @@ import {CardRenderer} from '../render/CardRenderer';
 import {Units} from '../../Units';
 import {AltSecondaryTag} from '../render/CardRenderItem';
 import {MoonCard} from './MoonCard';
-import {TileType} from '../../TileType';
+import {TileType} from '../../common/TileType';
 import {MoonExpansion} from '../../moon/MoonExpansion';
 import {PlaceMoonColonyTile} from '../../moon/PlaceMoonColonyTile';
 import {DeferredAction} from '../../deferredActions/DeferredAction';
@@ -59,7 +59,7 @@ export class LunaEcumenopolis extends MoonCard {
     return player.canAfford(0, {tr: {moonColony: 2, tr: expectedTRBump}});
   }
 
-  public canPlay(player: Player) {
+  public override canPlay(player: Player) {
     if (!super.canPlay(player)) {
       return false;
     }
@@ -89,9 +89,10 @@ export class LunaEcumenopolis extends MoonCard {
       if (nextToTwoColonies(first) === true) {
         // Remember it.
         firstSpaceId = first.id;
-        // Now go through all the land spaces again (actually as an optimization, just continue with the space after.)
-        for (let y = x + 1; y < len; y++) {
+        // Now go through all the land spaces again
+        for (let y = 0; y < len; y++) {
           const second = spaces[y];
+          if (second.id === firstSpaceId) continue;
           // Now if it's next to two colonies, it includes the first colony you placed. That's what firstSpaceId is for.
           if (nextToTwoColonies(second) === true) {
             return true;
@@ -102,7 +103,7 @@ export class LunaEcumenopolis extends MoonCard {
     return false;
   }
 
-  public play(player: Player) {
+  public override play(player: Player) {
     // These all have the same priority: Default.
     player.game.defer(new CustomPlaceMoonTile(player));
     player.game.defer(new CustomPlaceMoonTile(player));
@@ -116,7 +117,7 @@ export class LunaEcumenopolis extends MoonCard {
 }
 
 class CustomPlaceMoonTile extends PlaceMoonColonyTile {
-  protected getSpaces() {
+  protected override getSpaces() {
     const moonData = MoonExpansion.moonData(this.player.game);
     const spaces = moonData.moon.getAvailableSpacesOnLand(this.player);
     const filtered = spaces.filter((space) => {

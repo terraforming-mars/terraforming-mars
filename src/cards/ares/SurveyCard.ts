@@ -3,9 +3,9 @@ import {CardName} from '../../CardName';
 import {Player} from '../../Player';
 import {ISpace} from '../../boards/ISpace';
 import {SpaceBonus} from '../../SpaceBonus';
-import {TileType} from '../../TileType';
 import {Resources} from '../../common/Resources';
-import {ResourceType} from '../../ResourceType';
+import {TileType} from '../../common/TileType';
+import {ResourceType} from '../../common/ResourceType';
 import {AddResourcesToCard} from '../../deferredActions/AddResourcesToCard';
 import {GainResources} from '../../deferredActions/GainResources';
 import {Phase} from '../../Phase';
@@ -14,7 +14,6 @@ import {BoardType} from '../../boards/BoardType';
 import {SpaceType} from '../../SpaceType';
 import {PartyHooks} from '../../turmoil/parties/PartyHooks';
 import {PartyName} from '../../turmoil/parties/PartyName';
-import {TurmoilPolicy} from '../../turmoil/TurmoilPolicy';
 
 export abstract class SurveyCard extends Card implements IProjectCard {
   constructor(properties: StaticCardProperties) {
@@ -49,7 +48,7 @@ export abstract class SurveyCard extends Card implements IProjectCard {
       switch (resource) {
       case Resources.STEEL:
         grant = space.spaceType !== SpaceType.COLONY &&
-            PartyHooks.shouldApplyPolicy(cardOwner, PartyName.MARS, TurmoilPolicy.MARS_FIRST_DEFAULT_POLICY);
+            PartyHooks.shouldApplyPolicy(cardOwner, PartyName.MARS, 'mfp01');
         break;
       case Resources.PLANTS:
         grant = space.tile?.tileType === TileType.OCEAN &&

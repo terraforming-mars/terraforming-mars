@@ -1,4 +1,4 @@
-import {PlayerId} from './Player';
+import {PlayerId} from './common/Types';
 import {CardName} from './CardName';
 import {Color} from './Color';
 import {SerializedCard} from './SerializedCard';

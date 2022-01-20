@@ -26,7 +26,7 @@ export class GalileanMining extends PreludeCard {
       },
     });
   }
-  public canPlay(player: Player) {
+  public override canPlay(player: Player) {
     return player.canAfford(5);
   }
   public play(player: Player) {

@@ -32,7 +32,7 @@ export class DawnCity extends Card {
       },
     });
   };
-  public canPlay(player: Player): boolean {
+  public override canPlay(player: Player): boolean {
     return player.getProduction(Resources.ENERGY) >= 1;
   }
   public play(player: Player) {

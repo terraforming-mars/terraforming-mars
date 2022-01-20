@@ -93,7 +93,7 @@ export class HuygensObservatory extends Card implements IProjectCard {
       game.defer(new DeferredAction(player, () => orOptions));
     }
   }
-  public canPlay(player: Player): boolean {
+  public override canPlay(player: Player): boolean {
     return player.hasAvailableColonyTileToBuildOn(true) || this.tradeableColonies(player).length > 0;
   }
 

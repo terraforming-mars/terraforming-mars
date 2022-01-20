@@ -6,8 +6,8 @@ import {CardType} from '../CardType';
 import {CardName} from '../../CardName';
 import {CardRenderer} from '../render/CardRenderer';
 import {Tags} from '../Tags';
-import {ResourceType} from '../../ResourceType';
 import {Resources} from '../../common/Resources';
+import {ResourceType} from '../../common/ResourceType';
 import {Units} from '../../Units';
 import {ICard} from '../ICard';
 import {played} from '../Options';
@@ -36,14 +36,14 @@ export class MartianRepository extends Card implements IProjectCard {
     });
   }
 
-  public resourceCount = 0;
+  public override resourceCount = 0;
 
   public onCardPlayed(player: Player, card: ICard) {
     const qty = card.tags.filter((tag) => tag === Tags.SCIENCE || tag === Tags.MARS).length;
     if (qty > 0) player.addResourceTo(this, {qty, log: true});
   }
 
-  public canPlay(player: Player) {
+  public override canPlay(player: Player) {
     return player.getProduction(Resources.ENERGY) > 0;
   }
 

@@ -1,7 +1,7 @@
 import {CorporationCard} from '../corporation/CorporationCard';
 import {Player} from '../../Player';
 import {Tags} from '../Tags';
-import {ResourceType} from '../../ResourceType';
+import {ResourceType} from '../../common/ResourceType';
 import {IActionCard, ICard, IResourceCard} from '../ICard';
 import {SelectCard} from '../../inputs/SelectCard';
 import {Card} from '../Card';
@@ -38,7 +38,7 @@ export class Celestic extends Card implements IActionCard, CorporationCard, IRes
     });
   }
 
-    public resourceCount = 0;
+    public override resourceCount = 0;
 
     // Public for testing
     public static readonly floaterCards: Set<CardName> = new Set([

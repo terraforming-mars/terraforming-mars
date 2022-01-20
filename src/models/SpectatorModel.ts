@@ -1,4 +1,4 @@
-import {SpectatorId} from '../Game';
+import {SpectatorId} from '../common/Types';
 import {Color} from '../Color';
 import {ViewModel} from './PlayerModel';
 

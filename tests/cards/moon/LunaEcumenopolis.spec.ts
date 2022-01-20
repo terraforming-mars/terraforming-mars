@@ -6,7 +6,7 @@ import {TestingUtils} from '../../TestingUtils';
 import {TestPlayers} from '../../TestPlayers';
 import {LunaEcumenopolis} from '../../../src/cards/moon/LunaEcumenopolis';
 import {expect} from 'chai';
-import {TileType} from '../../../src/TileType';
+import {TileType} from '../../../src/common/TileType';
 import {SelectSpace} from '../../../src/inputs/SelectSpace';
 // import {Phase} from '../../../src/Phase';
 
@@ -45,6 +45,20 @@ describe('LunaEcumenopolis', () => {
 
     player.titanium = 1;
     expect(player.getPlayableCards()).does.not.include(card);
+  });
+
+  it('can play when 1st placement enables 2nd placement', () => {
+    player.cardsInHand = [card];
+    player.megaCredits = card.cost;
+
+    const moon = moonData.moon;
+    moon.getSpace('m18').tile = {tileType: TileType.MOON_COLONY};
+    moon.getSpace('m19').tile = {tileType: TileType.MOON_COLONY};
+
+    // This test works because space 13 is the only available colony space, but after
+    // playing it, space 12 can take a colony.
+    player.titanium = 2;
+    expect(player.getPlayableCards()).does.include(card);
   });
 
   it('Cannot play: not enough adjacent colony tiles', () => {

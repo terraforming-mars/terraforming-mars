@@ -13,7 +13,6 @@ import {Phase} from '../../Phase';
 import {SelectHowToPayDeferred} from '../../deferredActions/SelectHowToPayDeferred';
 import {IProjectCard} from '../../cards/IProjectCard';
 import {POLITICAL_AGENDAS_MAX_ACTION_USES} from '../../constants';
-import {TurmoilPolicy} from '../TurmoilPolicy';
 
 export class MarsFirst extends Party implements IParty {
   name = PartyName.MARS;
@@ -24,7 +23,7 @@ export class MarsFirst extends Party implements IParty {
 
 // TODO(nwai90): Mars First bonus IDs start with 'm' and policies start with 'mp'.
 class MarsFirstBonus01 implements Bonus {
-  id = 'mb01';
+  id = 'mb01' as const;
   description = 'Gain 1 M€ for each Building tag you have';
   isDefault = true;
 
@@ -40,7 +39,7 @@ class MarsFirstBonus01 implements Bonus {
 }
 
 class MarsFirstBonus02 implements Bonus {
-  id = 'mb02';
+  id = 'mb02' as const;
   description = 'Gain 1 M€ for each tile you have ON MARS';
   isDefault = false;
 
@@ -58,7 +57,7 @@ class MarsFirstBonus02 implements Bonus {
 
 class MarsFirstPolicy01 implements Policy {
   isDefault = true;
-  id = TurmoilPolicy.MARS_FIRST_DEFAULT_POLICY;
+  id = 'mfp01' as const;
   description: string = 'When you place a tile ON MARS, gain 1 steel';
 
   onTilePlaced(player: Player, space: ISpace) {
@@ -69,7 +68,7 @@ class MarsFirstPolicy01 implements Policy {
 }
 
 class MarsFirstPolicy02 implements Policy {
-  id = TurmoilPolicy.MARS_FIRST_POLICY_2;
+  id = 'mfp02' as const;
   description: string = 'When you play a Building tag, gain 2 M€';
   isDefault = false;
 
@@ -79,13 +78,13 @@ class MarsFirstPolicy02 implements Policy {
 }
 
 class MarsFirstPolicy03 implements Policy {
-  id = TurmoilPolicy.MARS_FIRST_POLICY_3;
+  id = 'mfp03' as const;
   description: string = 'Your steel resources are worth 1 M€ extra';
   isDefault = false;
 }
 
 class MarsFirstPolicy04 implements Policy {
-  id = TurmoilPolicy.MARS_FIRST_POLICY_4;
+  id = 'mfp04' as const;
   description: string = 'Spend 4 M€ to draw a Building card (Turmoil Mars First)';
   isDefault = false;
 

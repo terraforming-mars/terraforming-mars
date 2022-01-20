@@ -30,10 +30,11 @@ import {ALL_AWARDS} from './awards/Awards';
 import {OriginalBoard} from './boards/OriginalBoard';
 import {PartyHooks} from './turmoil/parties/PartyHooks';
 import {Phase} from './Phase';
-import {Player, PlayerId} from './Player';
+import {Player} from './Player';
+import {PlayerId, GameId, SpectatorId} from './common/Types';
 import {PlayerInput} from './PlayerInput';
-import {ResourceType} from './ResourceType';
 import {Resources} from './common/Resources';
+import {ResourceType} from './common/ResourceType';
 import {DeferredAction, Priority} from './deferredActions/DeferredAction';
 import {DeferredActionsQueue} from './deferredActions/DeferredActionsQueue';
 import {SelectHowToPayDeferred} from './deferredActions/SelectHowToPayDeferred';
@@ -47,7 +48,7 @@ import {SpaceBonus} from './SpaceBonus';
 import {SpaceName} from './SpaceName';
 import {SpaceType} from './SpaceType';
 import {Tags} from './cards/Tags';
-import {TileType} from './TileType';
+import {TileType} from './common/TileType';
 import {Turmoil} from './turmoil/Turmoil';
 import {RandomMAOptionType} from './RandomMAOptionType';
 import {AresHandler} from './ares/AresHandler';
@@ -70,9 +71,6 @@ import {IPathfindersData} from './pathfinders/IPathfindersData';
 import {ArabiaTerraBoard} from './boards/ArabiaTerraBoard';
 import {AddResourcesToCard} from './deferredActions/AddResourcesToCard';
 import {isProduction} from './utils/server';
-
-export type GameId = string;
-export type SpectatorId = string;
 
 export interface Score {
   corporation: String;
@@ -1552,11 +1550,6 @@ export class Game implements ISerializable<SerializedGame> {
 
   public static deserialize(d: SerializedGame): Game {
     const gameOptions = d.gameOptions;
-    // TODO(kberg): Remove by 2021-10-15
-    if (d.gameOptions.altVenusBoard === undefined) {
-      d.gameOptions.altVenusBoard = false;
-    }
-
     const players = d.players.map((element: SerializedPlayer) => Player.deserialize(element));
     const first = players.find((player) => player.id === d.first);
     if (first === undefined) {

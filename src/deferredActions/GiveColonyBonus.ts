@@ -1,4 +1,5 @@
-import {Player, PlayerId} from '../Player';
+import {Player} from '../Player';
+import {PlayerId} from '../common/Types';
 import {Colony} from '../colonies/Colony';
 import {DeferredAction, Priority} from './DeferredAction';
 import {Multiset} from '../utils/Multiset';

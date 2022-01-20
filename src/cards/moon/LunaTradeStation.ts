@@ -4,7 +4,7 @@ import {CardType} from '../CardType';
 import {Tags} from '../Tags';
 import {MoonExpansion} from '../../moon/MoonExpansion';
 import {MoonSpaces} from '../../moon/MoonSpaces';
-import {TileType} from '../../TileType';
+import {TileType} from '../../common/TileType';
 import {CardRenderer} from '../render/CardRenderer';
 import {IActionCard} from '../ICard';
 import {Units} from '../../Units';
@@ -34,7 +34,7 @@ export class LunaTradeStation extends MoonCard implements IActionCard {
     });
   };
 
-  public play(player: Player) {
+  public override play(player: Player) {
     super.play(player);
     MoonExpansion.addTile(
       player,

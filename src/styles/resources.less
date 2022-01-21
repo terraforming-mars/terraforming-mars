@@ -98,40 +98,17 @@
     text-align: center;
 }
 
-.resource_icon--microbe {
-    background-image: url(assets/resources/microbe.png);
-}
-
-.resource_icon--floater {
-    background-image: url(assets/resources/floater.png);
-}
-
-.resource_icon--titanium {
-    background-image: url(assets/resources/titanium.png);
-}
-
-.resource_icon--steel {
-    background-image: url(assets/resources/steel.png);
-}
-
+@resource_types: microbe, floater, titanium, steel, heat, data, science, seed;
+each(@resource_types, {
+  .resource_icon--@{value} {
+    background-image: url("assets/resources/@{value}.png");
+  }
+})
 .resource_icon--plants {
     background-image: url(assets/resources/plant.png);
 }
-
 .resource_icon--energy {
     background-image: url(assets/resources/power.png);
-}
-
-.resource_icon--heat {
-    background-image: url(assets/resources/heat.png);
-}
-
-.resource_icon--data {
-    background-image: url(assets/resources/data.png);
-}
-
-.resource_icon--science {
-    background-image: url(assets/resources/science.png);
 }
 
 .shield_icon {

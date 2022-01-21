@@ -91,6 +91,7 @@ import {ValuableGases} from './ValuableGases';
 import {VeneraBase} from './VeneraBase';
 import {VenusFirst} from './VenusFirst';
 import {VitalColony} from './VitalColony';
+// import {Wetlands} from './Wetlands';
 
 export const PATHFINDERS_CARD_MANIFEST = new CardManifest({
   module: GameModule.Pathfinders,
@@ -99,7 +100,7 @@ export const PATHFINDERS_CARD_MANIFEST = new CardManifest({
     {cardName: CardName.PREFABRICATION_OF_HUMAN_HABITATS, Factory: PrefabricationofHumanHabitats},
     {cardName: CardName.NEW_VENICE, Factory: NewVenice},
     {cardName: CardName.AGRO_DRONES, Factory: AgroDrones},
-    // // {cardName: CardName.WETLANDS, Factory: Wetlands},                                    // NEW TILE
+    // {cardName: CardName.WETLANDS, Factory: Wetlands},
     {cardName: CardName.RARE_EARTH_ELEMENTS, Factory: RareEarthElements},
     {cardName: CardName.ORBITAL_LABORATORIES, Factory: OrbitalLaboratories},
     {cardName: CardName.DUST_STORM, Factory: DustStorm},

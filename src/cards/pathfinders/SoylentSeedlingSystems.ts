@@ -47,7 +47,7 @@ export class SoylentSeedlingSystems extends Card implements CorporationCard {
     if (cardOwner.id !== activePlayer.id) {
       return;
     }
-    if (space.tile?.tileType === TileType.GREENERY) {
+    if (space.tile?.tileType === TileType.GREENERY || space.tile?.tileType === TileType.WETLANDS) {
       cardOwner.addResourceTo(this, {log: true});
     }
   }

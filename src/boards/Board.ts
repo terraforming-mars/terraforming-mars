@@ -2,7 +2,7 @@ import {ISpace, SpaceId} from './ISpace';
 import {Player} from '../Player';
 import {PlayerId} from '../common/Types';
 import {SpaceType} from '../SpaceType';
-import {CITY_TILES, OCEAN_TILES, OCEAN_UPGRADE_TILES, TileType} from '../common/TileType';
+import {CITY_TILES, GREENERY_TILES, OCEAN_TILES, OCEAN_UPGRADE_TILES, TileType} from '../common/TileType';
 import {AresHandler} from '../ares/AresHandler';
 import {SerializedBoard, SerializedSpace} from './SerializedBoard';
 
@@ -107,14 +107,36 @@ export abstract class Board {
     );
   }
 
-  public getOceansOnBoard(countUpgradedOceans: boolean = true): number {
-    return this.getOceansTiles(countUpgradedOceans).length;
+  /*
+   * Returns the number of oceans on the board.
+   *
+   * The default condition is to return those oceans used to count toward the global parameter, so
+   * upgraded oceans are included, but Wetlands is not. That's why the boolean values have different defaults.
+   */
+  public getOceansOnBoard(include?: {upgradedOceans?: boolean, wetlands?: boolean}): number {
+    // return this.getOceansTiles({
+    //   countUpgradedOceans: options?.countUpgradedOceans ?? true,
+    //   countWetlands: options?.countWetlands ?? false,
+    // }).length;
+    return this.getOceansTiles({
+      upgradedOceans: include?.upgradedOceans ?? true,
+      wetlands: include?.wetlands ?? false,
+    }).length;
   }
 
-  public getOceansTiles(countUpgradedOceans: boolean): Array<ISpace> {
+  /*
+   * Returns the ocean tiles on the board.
+   *
+   * The default condition is to return those oceans used to count toward the global parameter, so
+   * upgraded oceans are included, but Wetlands is not. That's why the boolean values have different defaults.
+   */
+  public getOceansTiles(include?: {upgradedOceans?: boolean, wetlands?: boolean}): Array<ISpace> {
     let spaces = this.spaces.filter((space) => Board.isOceanSpace(space));
-    if (!countUpgradedOceans) {
+    if (!include?.upgradedOceans ?? true) {
       spaces = spaces.filter((space) => space.tile && !OCEAN_UPGRADE_TILES.has(space.tile?.tileType));
+    }
+    if (!include?.wetlands ?? false) {
+      spaces = spaces.filter((space) => space.tile?.tileType !== TileType.WETLANDS);
     }
     return spaces;
   }
@@ -232,6 +254,10 @@ export abstract class Board {
 
   public static isOceanSpace(space: ISpace): boolean {
     return space.tile !== undefined && OCEAN_TILES.has(space.tile.tileType);
+  }
+
+  public static isGreenerySpace(space: ISpace): boolean {
+    return space.tile !== undefined && GREENERY_TILES.has(space.tile.tileType);
   }
 
   public serialize(): SerializedBoard {

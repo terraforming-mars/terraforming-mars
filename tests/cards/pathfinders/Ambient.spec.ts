@@ -5,7 +5,7 @@ import {TestPlayer} from '../../TestPlayer';
 import {getTestPlayer, newTestGame} from '../../TestGame';
 import {TestingUtils} from '../../TestingUtils';
 import {Tags} from '../../../src/cards/Tags';
-import {Resources} from '../../../src/Resources';
+import {Resources} from '../../../src/common/Resources';
 import {MAX_TEMPERATURE} from '../../../src/constants';
 import {OrOptions} from '../../../src/inputs/OrOptions';
 import {SelectCard} from '../../../src/inputs/SelectCard';

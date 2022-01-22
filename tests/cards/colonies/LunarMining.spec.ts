@@ -3,7 +3,7 @@ import {LunaGovernor} from '../../../src/cards/colonies/LunaGovernor';
 import {LunarMining} from '../../../src/cards/colonies/LunarMining';
 import {SpaceHotels} from '../../../src/cards/prelude/SpaceHotels';
 import {Game} from '../../../src/Game';
-import {Resources} from '../../../src/Resources';
+import {Resources} from '../../../src/common/Resources';
 import {TestPlayers} from '../../TestPlayers';
 
 describe('LunarMining', function() {

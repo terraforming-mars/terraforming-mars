@@ -1,6 +1,6 @@
 
 import {ICard} from '../cards/ICard';
-import {Message} from '../Message';
+import {Message} from '../common/logs/Message';
 import {PlayerInput} from '../PlayerInput';
 import {PlayerInputTypes} from '../PlayerInputTypes';
 

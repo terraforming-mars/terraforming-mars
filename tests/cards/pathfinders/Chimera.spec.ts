@@ -11,7 +11,7 @@ import {CardName} from '../../../src/CardName';
 import {TestingUtils} from '../../TestingUtils';
 import {CardRequirements} from '../../../src/cards/CardRequirements';
 import {Tags} from '../../../src/cards/Tags';
-import {Resources} from '../../../src/Resources';
+import {Resources} from '../../../src/common/Resources';
 import {Businessperson} from '../../../src/milestones/Businessperson';
 import {Scientist} from '../../../src/awards/Scientist';
 

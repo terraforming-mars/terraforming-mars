@@ -3,7 +3,7 @@ import {CardType} from '../CardType';
 import {Player} from '../../Player';
 import {ISpace} from '../../boards/ISpace';
 import {SpaceBonus} from '../../SpaceBonus';
-import {Resources} from '../../Resources';
+import {Resources} from '../../common/Resources';
 import {Tags} from '../Tags';
 import {CardRequirements} from '../CardRequirements';
 import {CardRenderer} from '../render/CardRenderer';

@@ -18,15 +18,15 @@ import {ISerializable} from './ISerializable';
 import {IMilestone} from './milestones/IMilestone';
 import {IProjectCard} from './cards/IProjectCard';
 import {ITagCount} from './ITagCount';
-import {LogMessageDataType} from './LogMessageDataType';
+import {LogMessageDataType} from './common/logs/LogMessageDataType';
 import {OrOptions} from './inputs/OrOptions';
 import {PartyHooks} from './turmoil/parties/PartyHooks';
 import {PartyName} from './turmoil/parties/PartyName';
 import {PharmacyUnion} from './cards/promo/PharmacyUnion';
 import {Phase} from './Phase';
 import {PlayerInput} from './PlayerInput';
+import {Resources} from './common/Resources';
 import {ResourceType} from './common/ResourceType';
-import {Resources} from './Resources';
 import {SelectAmount} from './inputs/SelectAmount';
 import {SelectCard} from './inputs/SelectCard';
 import {SellPatentsStandardProject} from './cards/base/standardProjects/SellPatentsStandardProject';
@@ -1198,7 +1198,7 @@ export class Player implements ISerializable<SerializedPlayer> {
         }),
       );
     }
-    if (game.board.getOceansOnBoard() < constants.MAX_OCEAN_TILES) {
+    if (game.canAddOcean()) {
       action.options.push(
         new SelectSpace(
           'Add an ocean',

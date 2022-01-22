@@ -2,7 +2,7 @@ import {expect} from 'chai';
 import {GreatDam} from '../../../src/cards/base/GreatDam';
 import {Game} from '../../../src/Game';
 import {TestPlayer} from '../../TestPlayer';
-import {Resources} from '../../../src/Resources';
+import {Resources} from '../../../src/common/Resources';
 import {TestingUtils} from '../../TestingUtils';
 import {TestPlayers} from '../../TestPlayers';
 

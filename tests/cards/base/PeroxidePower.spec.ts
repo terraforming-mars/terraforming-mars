@@ -1,6 +1,6 @@
 import {expect} from 'chai';
 import {PeroxidePower} from '../../../src/cards/base/PeroxidePower';
-import {Resources} from '../../../src/Resources';
+import {Resources} from '../../../src/common/Resources';
 import {TestPlayers} from '../../TestPlayers';
 
 describe('PeroxidePower', function() {

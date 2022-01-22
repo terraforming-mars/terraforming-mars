@@ -18,7 +18,7 @@ import {JovianEmbassy} from '../../src/cards/promo/JovianEmbassy';
 import {IceAsteroid} from '../../src/cards/base/IceAsteroid';
 import {ProtectedValley} from '../../src/cards/base/ProtectedValley';
 import {MagneticFieldGeneratorsPromo} from '../../src/cards/promo/MagneticFieldGeneratorsPromo';
-import {Resources} from '../../src/Resources';
+import {Resources} from '../../src/common/Resources';
 import {NitrogenFromTitan} from '../../src/cards/colonies/NitrogenFromTitan';
 import {SpaceStation} from '../../src/cards/base/SpaceStation';
 import {EarthCatapult} from '../../src/cards/base/EarthCatapult';

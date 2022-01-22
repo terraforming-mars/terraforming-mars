@@ -8,7 +8,7 @@ import {TileType} from '../../common/TileType';
 import {PlaceMoonColonyTile} from '../../moon/PlaceMoonColonyTile';
 import {MoonExpansion} from '../../moon/MoonExpansion';
 import {ISpace, SpaceId} from '../../boards/ISpace';
-import {Resources} from '../../Resources';
+import {Resources} from '../../common/Resources';
 import {CardRenderDynamicVictoryPoints} from '../render/CardRenderDynamicVictoryPoints';
 import {Size} from '../render/Size';
 import {AltSecondaryTag} from '../render/CardRenderItem';

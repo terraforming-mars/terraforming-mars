@@ -4,7 +4,7 @@ import {PLAYER_DELEGATES_COUNT} from '../../../src/constants';
 import {SendDelegateToArea} from '../../../src/deferredActions/SendDelegateToArea';
 import {Game} from '../../../src/Game';
 import {Player} from '../../../src/Player';
-import {Resources} from '../../../src/Resources';
+import {Resources} from '../../../src/common/Resources';
 import {PartyName} from '../../../src/turmoil/parties/PartyName';
 import {Turmoil} from '../../../src/turmoil/Turmoil';
 import {TestingUtils} from '../../TestingUtils';

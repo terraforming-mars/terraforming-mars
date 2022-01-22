@@ -10,7 +10,7 @@ import {IActionCard} from '../ICard';
 import {Units} from '../../Units';
 import {MoonCard} from './MoonCard';
 import {Game} from '../../Game';
-import {Resources} from '../../Resources';
+import {Resources} from '../../common/Resources';
 import {all} from '../Options';
 
 export class LunaTradeStation extends MoonCard implements IActionCard {

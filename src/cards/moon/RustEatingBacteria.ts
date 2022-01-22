@@ -8,7 +8,7 @@ import {ResourceType} from '../../common/ResourceType';
 import {CardRenderer} from '../render/CardRenderer';
 import {Card} from '../Card';
 import {VictoryPoints} from '../ICard';
-import {Resources} from '../../Resources';
+import {Resources} from '../../common/Resources';
 
 export class RustEatingBacteria extends Card implements IActionCard, IProjectCard {
   constructor() {

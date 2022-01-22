@@ -4,7 +4,7 @@ import {CardName} from '../../CardName';
 import {CardType} from '../CardType';
 import {Tags} from '../Tags';
 import {Player} from '../../Player';
-import {Resources} from '../../Resources';
+import {Resources} from '../../common/Resources';
 import {CardRenderer} from '../../cards/render/CardRenderer';
 
 export class InterplanetaryTrade extends Card implements IProjectCard {

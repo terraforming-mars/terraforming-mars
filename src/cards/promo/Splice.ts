@@ -10,7 +10,7 @@ import {CardName} from '../../CardName';
 import {CardType} from '../CardType';
 import {CardRenderer} from '../render/CardRenderer';
 import {Size} from '../render/Size';
-import {Resources} from '../../Resources';
+import {Resources} from '../../common/Resources';
 import {all, played} from '../Options';
 
 export class Splice extends Card implements CorporationCard {

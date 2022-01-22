@@ -2,7 +2,7 @@
 import {expect} from 'chai';
 import {Soletta} from '../../../src/cards/base/Soletta';
 import {Game} from '../../../src/Game';
-import {Resources} from '../../../src/Resources';
+import {Resources} from '../../../src/common/Resources';
 import {TestPlayers} from '../../TestPlayers';
 
 describe('Soletta', function() {

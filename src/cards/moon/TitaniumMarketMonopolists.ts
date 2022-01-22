@@ -2,7 +2,7 @@ import {CardName} from '../../CardName';
 import {CardType} from '../CardType';
 import {CardRequirements} from '../CardRequirements';
 import {CardRenderer} from '../render/CardRenderer';
-import {Resources} from '../../Resources';
+import {Resources} from '../../common/Resources';
 import {MarketCard} from './MarketCard';
 import {multiplier} from '../Options';
 

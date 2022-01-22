@@ -12,7 +12,7 @@ import {IMoonCard} from '../cards/moon/IMoonCard';
 import {Tags} from '../cards/Tags';
 import {ISpace} from '../boards/ISpace';
 import {MAXIMUM_COLONY_RATE, MAXIMUM_LOGISTICS_RATE, MAXIMUM_MINING_RATE} from '../constants';
-import {Resources} from '../Resources';
+import {Resources} from '../common/Resources';
 import {Phase} from '../Phase';
 import {BoardType} from '../boards/BoardType';
 import {VictoryPointsBreakdown} from '../VictoryPointsBreakdown';

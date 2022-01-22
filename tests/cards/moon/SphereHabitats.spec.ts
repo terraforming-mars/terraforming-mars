@@ -4,7 +4,7 @@ import {TestingUtils} from '../../TestingUtils';
 import {TestPlayers} from '../../TestPlayers';
 import {SphereHabitats} from '../../../src/cards/moon/SphereHabitats';
 import {expect} from 'chai';
-import {Resources} from '../../../src/Resources';
+import {Resources} from '../../../src/common/Resources';
 import {PlaceMoonColonyTile} from '../../../src/moon/PlaceMoonColonyTile';
 
 const MOON_OPTIONS = TestingUtils.setCustomGameOptions({moonExpansion: true});

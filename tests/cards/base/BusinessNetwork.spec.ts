@@ -3,7 +3,7 @@ import {BusinessNetwork} from '../../../src/cards/base/BusinessNetwork';
 import {Player} from '../../../src/Player';
 import {Game} from '../../../src/Game';
 import {SelectCard} from '../../../src/inputs/SelectCard';
-import {Resources} from '../../../src/Resources';
+import {Resources} from '../../../src/common/Resources';
 import {IProjectCard} from '../../../src/cards/IProjectCard';
 import {TestPlayers} from '../../TestPlayers';
 

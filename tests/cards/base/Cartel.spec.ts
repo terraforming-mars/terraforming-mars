@@ -5,7 +5,7 @@ import {InterstellarColonyShip} from '../../../src/cards/base/InterstellarColony
 import {LunarBeam} from '../../../src/cards/base/LunarBeam';
 import {Game} from '../../../src/Game';
 import {Player} from '../../../src/Player';
-import {Resources} from '../../../src/Resources';
+import {Resources} from '../../../src/common/Resources';
 import {TestPlayers} from '../../TestPlayers';
 
 describe('Cartel', function() {

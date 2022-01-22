@@ -2,7 +2,7 @@ import {expect} from 'chai';
 import {getTestPlayer, newTestGame} from '../../TestGame';
 import {OutdoorSports} from '../../../src/cards/promo/OutdoorSports';
 import {Player} from '../../../src/Player';
-import {Resources} from '../../../src/Resources';
+import {Resources} from '../../../src/common/Resources';
 import {ISpace} from '../../../src/boards/ISpace';
 
 describe('OutdoorSports', function() {

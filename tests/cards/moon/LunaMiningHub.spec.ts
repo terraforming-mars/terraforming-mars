@@ -6,7 +6,7 @@ import {TestingUtils} from '../../TestingUtils';
 import {TestPlayers} from '../../TestPlayers';
 import {LunaMiningHub} from '../../../src/cards/moon/LunaMiningHub';
 import {expect} from 'chai';
-import {Resources} from '../../../src/Resources';
+import {Resources} from '../../../src/common/Resources';
 import {TileType} from '../../../src/common/TileType';
 import {PlaceSpecialMoonTile} from '../../../src/moon/PlaceSpecialMoonTile';
 

@@ -1,7 +1,7 @@
 import {expect} from 'chai';
 import {DawnCity} from '../../../src/cards/venusNext/DawnCity';
 import {Game} from '../../../src/Game';
-import {Resources} from '../../../src/Resources';
+import {Resources} from '../../../src/common/Resources';
 import {TestingUtils} from '../../TestingUtils';
 import {TestPlayers} from '../../TestPlayers';
 

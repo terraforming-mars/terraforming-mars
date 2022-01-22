@@ -5,7 +5,7 @@ import {StandardProjectCard} from '../StandardProjectCard';
 import {MoonExpansion} from '../../moon/MoonExpansion';
 import {PlaceMoonColonyTile} from '../../moon/PlaceMoonColonyTile';
 import {Units} from '../../Units';
-import {Resources} from '../../Resources';
+import {Resources} from '../../common/Resources';
 import {IMoonCard} from './IMoonCard';
 import {TileType} from '../../common/TileType';
 import {AltSecondaryTag} from '../render/CardRenderItem';

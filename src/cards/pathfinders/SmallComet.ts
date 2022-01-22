@@ -4,9 +4,8 @@ import {Card} from '../Card';
 import {CardType} from '../CardType';
 import {CardName} from '../../CardName';
 import {CardRenderer} from '../render/CardRenderer';
-import {Resources} from '../../Resources';
+import {Resources} from '../../common/Resources';
 import {Tags} from '../Tags';
-import {MAX_OCEAN_TILES} from '../../constants';
 import {SelectSpace} from '../../inputs/SelectSpace';
 import {SpaceType} from '../../SpaceType';
 import {ISpace} from '../../boards/ISpace';
@@ -45,7 +44,7 @@ export class SmallComet extends Card implements IProjectCard {
     player.game.increaseTemperature(player, 1);
     player.game.increaseOxygenLevel(player, 1);
     player.addResource(Resources.TITANIUM, 1);
-    if (player.game.board.getOceansOnBoard() < MAX_OCEAN_TILES) {
+    if (player.game.canAddOcean()) {
       return new SelectSpace('Select a land space to place an ocean', player.game.board.getAvailableSpacesOnLand(player), (space: ISpace) => {
         player.game.addOceanTile(player, space.id, SpaceType.LAND);
         return undefined;

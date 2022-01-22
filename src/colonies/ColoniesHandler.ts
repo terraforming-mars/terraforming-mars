@@ -4,7 +4,7 @@ import {Player} from '../Player';
 import {Colony} from './Colony';
 import {ColonyName} from './ColonyName';
 import {SelectHowToPayDeferred} from '../deferredActions/SelectHowToPayDeferred';
-import {Resources} from '../Resources';
+import {Resources} from '../common/Resources';
 import {TradeWithTitanFloatingLaunchPad} from '../cards/colonies/TitanFloatingLaunchPad';
 import {PlayerInput} from '../PlayerInput';
 import {OrOptions} from '../inputs/OrOptions';

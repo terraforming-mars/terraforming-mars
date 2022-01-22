@@ -23,7 +23,6 @@ export class Cyanobacteria extends Card implements IProjectCard {
           b.oxygen(1).br;
           b.microbes(1).asterix().slash().oceans(1).br;
         }),
-        // TODO(kberg): include Wetlands
         description: 'Raise the oxygen level 1%. For every ocean tile, place a microbe on any card.',
       },
     });
@@ -31,7 +30,7 @@ export class Cyanobacteria extends Card implements IProjectCard {
 
   public play(player: Player) {
     player.game.increaseOxygenLevel(player, 1);
-    const microbes = player.game.board.getOceansOnBoard();
+    const microbes = player.game.board.getOceansTiles(true).length;
     player.game.defer(new AddResourcesToCards(player, ResourceType.MICROBE, microbes));
     return undefined;
   }

@@ -4,7 +4,7 @@ import {Ants} from '../../../src/cards/base/Ants';
 import {BiofertilizerFacility} from '../../../src/cards/ares/BiofertilizerFacility';
 import {IProjectCard} from '../../../src/cards/IProjectCard';
 import {Game} from '../../../src/Game';
-import {Resources} from '../../../src/Resources';
+import {Resources} from '../../../src/common/Resources';
 import {SpaceBonus} from '../../../src/SpaceBonus';
 import {TileType} from '../../../src/common/TileType';
 import {TestPlayer} from '../../TestPlayer';

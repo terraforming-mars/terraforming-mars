@@ -3,7 +3,7 @@ import {DeepWellHeating} from '../../../src/cards/base/DeepWellHeating';
 import {MartianRails} from '../../../src/cards/base/MartianRails';
 import {ParliamentHall} from '../../../src/cards/turmoil/ParliamentHall';
 import {Game} from '../../../src/Game';
-import {Resources} from '../../../src/Resources';
+import {Resources} from '../../../src/common/Resources';
 import {PartyName} from '../../../src/turmoil/parties/PartyName';
 import {TestingUtils} from '../../TestingUtils';
 import {TestPlayers} from '../../TestPlayers';

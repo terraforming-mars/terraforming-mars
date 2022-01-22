@@ -2,7 +2,7 @@ import {Player} from '../Player';
 import {SelectHowToPay} from '../inputs/SelectHowToPay';
 import {HowToPay} from '../inputs/HowToPay';
 import {DeferredAction, Priority} from './DeferredAction';
-import {Resources} from '../Resources';
+import {Resources} from '../common/Resources';
 
 export class SelectHowToPayDeferred implements DeferredAction {
   public priority = Priority.DEFAULT;

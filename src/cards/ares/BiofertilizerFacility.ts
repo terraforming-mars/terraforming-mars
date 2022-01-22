@@ -3,7 +3,7 @@ import {CardName} from '../../CardName';
 import {SelectSpace} from '../../inputs/SelectSpace';
 import {ISpace} from '../../boards/ISpace';
 import {Player} from '../../Player';
-import {Resources} from '../../Resources';
+import {Resources} from '../../common/Resources';
 import {ResourceType} from '../../common/ResourceType';
 import {SpaceBonus} from '../../SpaceBonus';
 import {SpaceType} from '../../SpaceType';

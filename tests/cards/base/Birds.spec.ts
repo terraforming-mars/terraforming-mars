@@ -2,7 +2,7 @@ import {expect} from 'chai';
 import {Birds} from '../../../src/cards/base/Birds';
 import {Player} from '../../../src/Player';
 import {Game} from '../../../src/Game';
-import {Resources} from '../../../src/Resources';
+import {Resources} from '../../../src/common/Resources';
 import {SelectPlayer} from '../../../src/inputs/SelectPlayer';
 import {TestPlayers} from '../../TestPlayers';
 

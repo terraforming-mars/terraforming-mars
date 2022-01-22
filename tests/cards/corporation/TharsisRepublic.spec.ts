@@ -2,7 +2,7 @@ import {expect} from 'chai';
 import {TharsisRepublic} from '../../../src/cards/corporation/TharsisRepublic';
 import {Game} from '../../../src/Game';
 import {Player} from '../../../src/Player';
-import {Resources} from '../../../src/Resources';
+import {Resources} from '../../../src/common/Resources';
 import {SpaceType} from '../../../src/SpaceType';
 import {TileType} from '../../../src/common/TileType';
 import {TestingUtils} from '../../TestingUtils';

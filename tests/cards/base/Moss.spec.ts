@@ -3,7 +3,7 @@ import {Moss} from '../../../src/cards/base/Moss';
 import {ViralEnhancers} from '../../../src/cards/base/ViralEnhancers';
 import {Game} from '../../../src/Game';
 import {Player} from '../../../src/Player';
-import {Resources} from '../../../src/Resources';
+import {Resources} from '../../../src/common/Resources';
 import {TestingUtils} from '../../TestingUtils';
 import {TestPlayers} from '../../TestPlayers';
 

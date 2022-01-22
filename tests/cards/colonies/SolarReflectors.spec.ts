@@ -1,6 +1,6 @@
 import {expect} from 'chai';
 import {SolarReflectors} from '../../../src/cards/colonies/SolarReflectors';
-import {Resources} from '../../../src/Resources';
+import {Resources} from '../../../src/common/Resources';
 import {TestPlayers} from '../../TestPlayers';
 
 describe('SolarReflectors', function() {

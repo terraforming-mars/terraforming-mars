@@ -8,7 +8,7 @@ import {SpaceBonus} from '../../SpaceBonus';
 import {Player} from '../../Player';
 import {BoardType} from '../../boards/BoardType';
 import {ISpace} from '../../boards/ISpace';
-import {Resources} from '../../Resources';
+import {Resources} from '../../common/Resources';
 import {OrOptions} from '../../inputs/OrOptions';
 import {SelectOption} from '../../inputs/SelectOption';
 import {DeferredAction, Priority} from '../../deferredActions/DeferredAction';

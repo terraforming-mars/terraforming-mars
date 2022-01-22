@@ -3,7 +3,7 @@ import {UrbanizedArea} from '../../../src/cards/base/UrbanizedArea';
 import {Game} from '../../../src/Game';
 import {ISpace} from '../../../src/boards/ISpace';
 import {Player} from '../../../src/Player';
-import {Resources} from '../../../src/Resources';
+import {Resources} from '../../../src/common/Resources';
 import {SpaceName} from '../../../src/SpaceName';
 import {SpaceType} from '../../../src/SpaceType';
 import {TestPlayers} from '../../TestPlayers';

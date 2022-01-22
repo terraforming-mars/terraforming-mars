@@ -6,7 +6,7 @@ import {CardName} from '../../CardName';
 import {CardRenderer} from '../render/CardRenderer';
 import {Tags} from '../Tags';
 import {CardRequirements} from '../CardRequirements';
-import {Resources} from '../../Resources';
+import {Resources} from '../../common/Resources';
 import {PartyName} from '../../turmoil/parties/PartyName';
 import {played} from '../Options';
 

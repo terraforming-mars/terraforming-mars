@@ -6,7 +6,7 @@ import {IAdjacencyBonus} from '../../ares/IAdjacencyBonus';
 import {IProjectCard} from '../../cards/IProjectCard';
 import {ISpace} from '../../boards/ISpace';
 import {Player} from '../../Player';
-import {Resources} from '../../Resources';
+import {Resources} from '../../common/Resources';
 import {SelectSpace} from '../../inputs/SelectSpace';
 import {SpaceBonus} from '../../SpaceBonus';
 import {Tags} from '../../cards/Tags';

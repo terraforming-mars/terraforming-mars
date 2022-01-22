@@ -11,7 +11,7 @@ import {Celestic} from '../../src/cards/venusNext/Celestic';
 import {PartyName} from '../../src/turmoil/parties/PartyName';
 import {Tags} from '../../src/cards/Tags';
 import {ResearchCoordination} from '../../src/cards/prelude/ResearchCoordination';
-import {Resources} from '../../src/Resources';
+import {Resources} from '../../src/common/Resources';
 import {SmallAsteroid} from '../../src/cards/promo/SmallAsteroid';
 import {OrOptions} from '../../src/inputs/OrOptions';
 import {TestPlayer} from '../TestPlayer';

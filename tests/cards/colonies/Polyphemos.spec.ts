@@ -6,7 +6,7 @@ import {IProjectCard} from '../../../src/cards/IProjectCard';
 import {Game} from '../../../src/Game';
 import {AndOptions} from '../../../src/inputs/AndOptions';
 import {SelectCard} from '../../../src/inputs/SelectCard';
-import {Resources} from '../../../src/Resources';
+import {Resources} from '../../../src/common/Resources';
 import {TestPlayers} from '../../TestPlayers';
 
 describe('Polyphemos', function() {

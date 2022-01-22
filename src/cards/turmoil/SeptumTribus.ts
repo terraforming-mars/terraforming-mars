@@ -6,7 +6,7 @@ import {Card} from '../Card';
 import {CardName} from '../../CardName';
 import {CardType} from '../CardType';
 import {CardRenderer} from '../render/CardRenderer';
-import {Resources} from '../../Resources';
+import {Resources} from '../../common/Resources';
 import {Turmoil} from '../../turmoil/Turmoil';
 
 export class SeptumTribus extends Card implements IActionCard, CorporationCard {

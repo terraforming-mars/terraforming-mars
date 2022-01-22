@@ -8,7 +8,7 @@ import {IResourceCard} from '../ICard';
 import {CardRequirements} from '../CardRequirements';
 import {Card} from '../Card';
 import {CardRenderer} from '../render/CardRenderer';
-import {Resources} from '../../Resources';
+import {Resources} from '../../common/Resources';
 import {all, played} from '../Options';
 
 export class MartianZoo extends Card implements IProjectCard, IResourceCard {

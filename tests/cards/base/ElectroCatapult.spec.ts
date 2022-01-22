@@ -2,7 +2,7 @@ import {expect} from 'chai';
 import {ElectroCatapult} from '../../../src/cards/base/ElectroCatapult';
 import {Game} from '../../../src/Game';
 import {OrOptions} from '../../../src/inputs/OrOptions';
-import {Resources} from '../../../src/Resources';
+import {Resources} from '../../../src/common/Resources';
 import {TestPlayer} from '../../TestPlayer';
 import {TestPlayers} from '../../TestPlayers';
 

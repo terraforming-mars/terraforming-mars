@@ -10,7 +10,7 @@ import {TileType} from '../../common/TileType';
 import {CardRequirements} from '../CardRequirements';
 import {Card} from '../Card';
 import {Size} from '../render/Size';
-import {Resources} from '../../Resources';
+import {Resources} from '../../common/Resources';
 import {all} from '../Options';
 
 export class LunaConference extends Card implements IProjectCard {

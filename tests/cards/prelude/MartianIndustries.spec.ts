@@ -1,6 +1,6 @@
 import {expect} from 'chai';
 import {MartianIndustries} from '../../../src/cards/prelude/MartianIndustries';
-import {Resources} from '../../../src/Resources';
+import {Resources} from '../../../src/common/Resources';
 import {TestPlayers} from '../../TestPlayers';
 
 describe('MartianIndustries', function() {

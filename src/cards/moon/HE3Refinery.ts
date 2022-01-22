@@ -6,7 +6,7 @@ import {Tags} from '../Tags';
 import {MoonExpansion} from '../../moon/MoonExpansion';
 import {CardRenderer} from '../render/CardRenderer';
 import {Card} from '../Card';
-import {Resources} from '../../Resources';
+import {Resources} from '../../common/Resources';
 
 export class HE3Refinery extends Card implements IProjectCard {
   constructor() {

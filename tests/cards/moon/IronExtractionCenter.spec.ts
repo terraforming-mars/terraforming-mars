@@ -6,7 +6,7 @@ import {TestingUtils} from '../../TestingUtils';
 import {TestPlayers} from '../../TestPlayers';
 import {IronExtractionCenter} from '../../../src/cards/moon/IronExtractionCenter';
 import {expect} from 'chai';
-import {Resources} from '../../../src/Resources';
+import {Resources} from '../../../src/common/Resources';
 
 const MOON_OPTIONS = TestingUtils.setCustomGameOptions({moonExpansion: true});
 

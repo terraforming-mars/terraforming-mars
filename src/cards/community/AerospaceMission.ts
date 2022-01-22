@@ -4,7 +4,7 @@ import {PreludeCard} from '../prelude/PreludeCard';
 import {CardName} from '../../CardName';
 import {BuildColony} from '../../deferredActions/BuildColony';
 import {CardRenderer} from '../render/CardRenderer';
-import {Resources} from '../../Resources';
+import {Resources} from '../../common/Resources';
 
 export class AerospaceMission extends PreludeCard {
   constructor() {

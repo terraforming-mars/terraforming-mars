@@ -10,8 +10,8 @@ import {OrOptions} from '../../inputs/OrOptions';
 import {SelectOption} from '../../inputs/SelectOption';
 import {PlaceOceanTile} from '../../deferredActions/PlaceOceanTile';
 import {AddResourcesToCard} from '../../deferredActions/AddResourcesToCard';
+import {Resources} from '../../common/Resources';
 import {ResourceType} from '../../common/ResourceType';
-import {Resources} from '../../Resources';
 import {TRSource} from '../ICard';
 
 export class SecretLabs extends Card implements IProjectCard {

@@ -4,7 +4,7 @@ import {Player} from '../../Player';
 import {CorporationCard} from './../corporation/CorporationCard';
 import {OrOptions} from '../../inputs/OrOptions';
 import {SelectOption} from '../../inputs/SelectOption';
-import {Resources} from '../../Resources';
+import {Resources} from '../../common/Resources';
 import {Card} from '../Card';
 import {CardName} from '../../CardName';
 import {CardType} from '../CardType';

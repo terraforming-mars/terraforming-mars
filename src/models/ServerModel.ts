@@ -23,7 +23,7 @@ import {SelectSpace} from '../inputs/SelectSpace';
 import {SpaceHighlight, SpaceModel} from './SpaceModel';
 import {TileType} from '../common/TileType';
 import {Phase} from '../Phase';
-import {Resources} from '../Resources';
+import {Resources} from '../common/Resources';
 import {CardType} from '../cards/CardType';
 import {
   ClaimedMilestoneModel,

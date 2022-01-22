@@ -3,7 +3,7 @@ import {OrOptions} from '../../inputs/OrOptions';
 import {SelectAmount} from '../../inputs/SelectAmount';
 import {SelectOption} from '../../inputs/SelectOption';
 import {Player} from '../../Player';
-import {Resources} from '../../Resources';
+import {Resources} from '../../common/Resources';
 import {Card, StaticCardProperties} from '../Card';
 import {IActionCard} from '../ICard';
 

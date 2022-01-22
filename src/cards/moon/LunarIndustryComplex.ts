@@ -3,7 +3,7 @@ import {Player} from '../../Player';
 import {CardType} from '../CardType';
 import {IProjectCard} from '../IProjectCard';
 import {Tags} from '../Tags';
-import {Resources} from '../../Resources';
+import {Resources} from '../../common/Resources';
 import {CardRenderer} from '../render/CardRenderer';
 import {PlaceMoonMineTile} from '../../moon/PlaceMoonMineTile';
 import {Units} from '../../Units';

@@ -3,7 +3,7 @@ import {IProjectCard} from '../IProjectCard';
 import {Tags} from '../Tags';
 import {Card} from '../Card';
 import {CardType} from '../CardType';
-import {Resources} from '../../Resources';
+import {Resources} from '../../common/Resources';
 import {CardName} from '../../CardName';
 import {SelectSpace} from '../../inputs/SelectSpace';
 import {TileType} from '../../common/TileType';

@@ -2,7 +2,7 @@ import {expect} from 'chai';
 import {SnowAlgae} from '../../../src/cards/promo/SnowAlgae';
 import {Game} from '../../../src/Game';
 import {Player} from '../../../src/Player';
-import {Resources} from '../../../src/Resources';
+import {Resources} from '../../../src/common/Resources';
 import {TestingUtils} from '../../TestingUtils';
 import {TestPlayers} from '../../TestPlayers';
 

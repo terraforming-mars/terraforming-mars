@@ -4,7 +4,7 @@ import {TestPlayer} from '../../TestPlayer';
 import {Game} from '../../../src/Game';
 import {SpaceType} from '../../../src/SpaceType';
 import {SelectSpace} from '../../../src/inputs/SelectSpace';
-import {Resources} from '../../../src/Resources';
+import {Resources} from '../../../src/common/Resources';
 import {TileType} from '../../../src/common/TileType';
 import {SpaceBonus} from '../../../src/SpaceBonus';
 import {ARES_OPTIONS_NO_HAZARDS} from '../../ares/AresTestHelper';

@@ -7,7 +7,7 @@ import {SpaceName} from '../../SpaceName';
 import {SpaceType} from '../../SpaceType';
 import {CardName} from '../../CardName';
 import {CardRenderer} from '../render/CardRenderer';
-import {Resources} from '../../Resources';
+import {Resources} from '../../common/Resources';
 import {played} from '../Options';
 
 export class LunarEmbassy extends Card implements IProjectCard {

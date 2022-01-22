@@ -5,7 +5,7 @@ import {CardType} from '../CardType';
 import {CardName} from '../../CardName';
 import {CardRenderer} from '../render/CardRenderer';
 import {Tags} from '../Tags';
-import {Resources} from '../../Resources';
+import {Resources} from '../../common/Resources';
 import {VictoryPoints} from '../ICard';
 
 export class CultivationOfVenus extends Card implements IProjectCard {

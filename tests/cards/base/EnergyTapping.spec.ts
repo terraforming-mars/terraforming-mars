@@ -3,7 +3,7 @@ import {EnergyTapping} from '../../../src/cards/base/EnergyTapping';
 import {Game} from '../../../src/Game';
 import {SelectPlayer} from '../../../src/inputs/SelectPlayer';
 import {TestPlayer} from '../../TestPlayer';
-import {Resources} from '../../../src/Resources';
+import {Resources} from '../../../src/common/Resources';
 import {TestPlayers} from '../../TestPlayers';
 
 describe('EnergyTapping', function() {

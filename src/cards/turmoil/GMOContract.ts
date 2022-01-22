@@ -5,7 +5,7 @@ import {CardName} from '../../CardName';
 import {CardType} from '../CardType';
 import {Player} from '../../Player';
 import {PartyName} from '../../turmoil/parties/PartyName';
-import {Resources} from '../../Resources';
+import {Resources} from '../../common/Resources';
 import {DeferredAction} from '../../deferredActions/DeferredAction';
 import {CardRenderer} from '../render/CardRenderer';
 import {CardRequirements} from '../CardRequirements';

@@ -3,7 +3,7 @@ import {OrbitalLaboratories} from '../../../src/cards/pathfinders/OrbitalLaborat
 import {Game} from '../../../src/Game';
 import {TestPlayer} from '../../TestPlayer';
 import {TestPlayers} from '../../TestPlayers';
-import {Resources} from '../../../src/Resources';
+import {Resources} from '../../../src/common/Resources';
 
 describe('OrbitalLaboratories', function() {
   let card: OrbitalLaboratories;

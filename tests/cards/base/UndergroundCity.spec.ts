@@ -2,7 +2,7 @@ import {expect} from 'chai';
 import {UndergroundCity} from '../../../src/cards/base/UndergroundCity';
 import {Game} from '../../../src/Game';
 import {Player} from '../../../src/Player';
-import {Resources} from '../../../src/Resources';
+import {Resources} from '../../../src/common/Resources';
 import {TestPlayers} from '../../TestPlayers';
 
 describe('UndergroundCity', function() {

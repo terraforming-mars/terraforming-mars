@@ -4,7 +4,7 @@ import {Pets} from '../../../src/cards/base/Pets';
 import {PowerPlantStandardProject} from '../../../src/cards/base/standardProjects/PowerPlantStandardProject';
 import {Thorgate} from '../../../src/cards/corporation/Thorgate';
 import {Game} from '../../../src/Game';
-import {Resources} from '../../../src/Resources';
+import {Resources} from '../../../src/common/Resources';
 import {TestPlayers} from '../../TestPlayers';
 
 describe('Thorgate', function() {

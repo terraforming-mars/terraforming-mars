@@ -2,7 +2,7 @@ import {expect} from 'chai';
 import {SpaceRelay} from '../../../src/cards/pathfinders/SpaceRelay';
 import {IProjectCard} from '../../../src/cards/IProjectCard';
 import {Tags} from '../../../src/cards/Tags';
-import {Resources} from '../../../src/Resources';
+import {Resources} from '../../../src/common/Resources';
 import {Game} from '../../../src/Game';
 import {TestPlayer} from '../../TestPlayer';
 import {TestPlayers} from '../../TestPlayers';

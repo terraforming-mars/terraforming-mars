@@ -5,7 +5,7 @@ import {expect} from 'chai';
 import {MoonExpansion} from '../../../src/moon/MoonExpansion';
 import {TestPlayer} from '../../TestPlayer';
 import {TestPlayers} from '../../TestPlayers';
-import {Resources} from '../../../src/Resources';
+import {Resources} from '../../../src/common/Resources';
 
 const MOON_OPTIONS = TestingUtils.setCustomGameOptions({moonExpansion: true});
 

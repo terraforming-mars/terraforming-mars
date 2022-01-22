@@ -5,7 +5,7 @@ import {IProjectCard} from '../IProjectCard';
 import {Tags} from '../Tags';
 import {CardRenderer} from '../render/CardRenderer';
 import {MoonExpansion} from '../../moon/MoonExpansion';
-import {Resources} from '../../Resources';
+import {Resources} from '../../common/Resources';
 import {Card} from '../Card';
 
 export class DarksideMiningSyndicate extends Card implements IProjectCard {

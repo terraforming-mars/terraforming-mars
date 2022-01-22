@@ -9,7 +9,7 @@ import {Game} from '../../src/Game';
 import {IMoonData} from '../../src/moon/IMoonData';
 import {MoonExpansion} from '../../src/moon/MoonExpansion';
 import {MoonSpaces} from '../../src/moon/MoonSpaces';
-import {Resources} from '../../src/Resources';
+import {Resources} from '../../src/common/Resources';
 import {SpaceName} from '../../src/SpaceName';
 import {TileType} from '../../src/common/TileType';
 import {TestingUtils} from '../TestingUtils';

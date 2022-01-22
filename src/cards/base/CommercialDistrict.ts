@@ -6,7 +6,7 @@ import {Player} from '../../Player';
 import {TileType} from '../../common/TileType';
 import {SelectSpace} from '../../inputs/SelectSpace';
 import {ISpace} from '../../boards/ISpace';
-import {Resources} from '../../Resources';
+import {Resources} from '../../common/Resources';
 import {CardName} from '../../CardName';
 import {Board} from '../../boards/Board';
 import {IAdjacencyBonus} from '../../ares/IAdjacencyBonus';

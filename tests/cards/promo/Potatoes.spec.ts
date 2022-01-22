@@ -2,7 +2,7 @@ import {expect} from 'chai';
 import {ViralEnhancers} from '../../../src/cards/base/ViralEnhancers';
 import {Potatoes} from '../../../src/cards/promo/Potatoes';
 import {Player} from '../../../src/Player';
-import {Resources} from '../../../src/Resources';
+import {Resources} from '../../../src/common/Resources';
 import {TestPlayers} from '../../TestPlayers';
 
 describe('Potatoes', function() {

@@ -6,7 +6,7 @@ import {Miranda} from '../../../src/colonies/Miranda';
 import {Game} from '../../../src/Game';
 import {SelectColony} from '../../../src/inputs/SelectColony';
 import {Player} from '../../../src/Player';
-import {Resources} from '../../../src/Resources';
+import {Resources} from '../../../src/common/Resources';
 import {TestingUtils} from '../../TestingUtils';
 import {TestPlayers} from '../../TestPlayers';
 

@@ -2,7 +2,7 @@ import {Player} from '../../../Player';
 import {CardName} from '../../../CardName';
 import {CardRenderer} from '../../render/CardRenderer';
 import {StandardProjectCard} from '../../StandardProjectCard';
-import {Resources} from '../../../Resources';
+import {Resources} from '../../../common/Resources';
 
 export class PowerPlantStandardProject extends StandardProjectCard {
   constructor() {

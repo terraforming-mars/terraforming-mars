@@ -3,7 +3,7 @@ import {AdvancedEcosystems} from '../../src/cards/base/AdvancedEcosystems';
 import {SolarWindPower} from '../../src/cards/base/SolarWindPower';
 import {EarlySettlement} from '../../src/cards/prelude/EarlySettlement';
 import {Game} from '../../src/Game';
-import {Resources} from '../../src/Resources';
+import {Resources} from '../../src/common/Resources';
 import {Diversity} from '../../src/turmoil/globalEvents/Diversity';
 import {Kelvinists} from '../../src/turmoil/parties/Kelvinists';
 import {Turmoil} from '../../src/turmoil/Turmoil';

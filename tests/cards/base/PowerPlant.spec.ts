@@ -1,6 +1,6 @@
 import {expect} from 'chai';
 import {PowerPlant} from '../../../src/cards/base/PowerPlant';
-import {Resources} from '../../../src/Resources';
+import {Resources} from '../../../src/common/Resources';
 import {TestPlayers} from '../../TestPlayers';
 
 describe('PowerPlant', function() {

@@ -1,5 +1,5 @@
 import {Player} from '../Player';
-import {Resources} from '../Resources';
+import {Resources} from '../common/Resources';
 import {DeferredAction, Priority} from './DeferredAction';
 
 export namespace GainResources {

@@ -4,7 +4,7 @@ import {TestPlayers} from '../../TestPlayers';
 import {TestPlayer} from '../../TestPlayer';
 import {LunaSenate} from '../../../src/cards/moon/LunaSenate';
 import {expect} from 'chai';
-import {Resources} from '../../../src/Resources';
+import {Resources} from '../../../src/common/Resources';
 
 const MOON_OPTIONS = TestingUtils.setCustomGameOptions({moonExpansion: true});
 

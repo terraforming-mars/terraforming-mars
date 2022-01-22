@@ -4,7 +4,7 @@ import {Shuttles} from '../../../src/cards/base/Shuttles';
 import {TollStation} from '../../../src/cards/base/TollStation';
 import {Game} from '../../../src/Game';
 import {TestPlayer} from '../../TestPlayer';
-import {Resources} from '../../../src/Resources';
+import {Resources} from '../../../src/common/Resources';
 import {TestPlayers} from '../../TestPlayers';
 
 describe('Shuttles', function() {

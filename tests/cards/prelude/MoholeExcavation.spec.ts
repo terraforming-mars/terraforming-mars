@@ -1,6 +1,6 @@
 import {expect} from 'chai';
 import {MoholeExcavation} from '../../../src/cards/prelude/MoholeExcavation';
-import {Resources} from '../../../src/Resources';
+import {Resources} from '../../../src/common/Resources';
 import {TestPlayers} from '../../TestPlayers';
 
 describe('MoholeExcavation', function() {

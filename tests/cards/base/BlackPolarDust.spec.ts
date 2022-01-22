@@ -4,7 +4,7 @@ import {Player} from '../../../src/Player';
 import {Game} from '../../../src/Game';
 import {TestingUtils} from '../../TestingUtils';
 import {TestPlayers} from '../../TestPlayers';
-import {Resources} from '../../../src/Resources';
+import {Resources} from '../../../src/common/Resources';
 import {SelectSpace} from '../../../src/inputs/SelectSpace';
 
 describe('BlackPolarDust', function() {

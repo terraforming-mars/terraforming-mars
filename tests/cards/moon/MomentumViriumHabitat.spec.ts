@@ -6,7 +6,7 @@ import {TestingUtils} from '../../TestingUtils';
 import {TestPlayers} from '../../TestPlayers';
 import {MomentumViriumHabitat} from '../../../src/cards/moon/MomentumViriumHabitat';
 import {expect} from 'chai';
-import {Resources} from '../../../src/Resources';
+import {Resources} from '../../../src/common/Resources';
 import {MoonSpaces} from '../../../src/moon/MoonSpaces';
 import {TileType} from '../../../src/common/TileType';
 

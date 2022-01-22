@@ -107,11 +107,11 @@ export abstract class Board {
     );
   }
 
-  public getOceansOnBoard(countUpgradedOceans: boolean = true): number {
-    return this.getOceansTiles(countUpgradedOceans).length;
+  public getOceanCount(countUpgradedOceans: boolean = true): number {
+    return this.getOceanSpaces(countUpgradedOceans).length;
   }
 
-  public getOceansTiles(countUpgradedOceans: boolean): Array<ISpace> {
+  public getOceanSpaces(countUpgradedOceans: boolean): Array<ISpace> {
     let spaces = this.spaces.filter((space) => Board.isOceanSpace(space));
     if (!countUpgradedOceans) {
       spaces = spaces.filter((space) => space.tile && !OCEAN_UPGRADE_TILES.has(space.tile?.tileType));
@@ -232,6 +232,10 @@ export abstract class Board {
 
   public static isOceanSpace(space: ISpace): boolean {
     return space.tile !== undefined && OCEAN_TILES.has(space.tile.tileType);
+  }
+
+  public static ownedBy(player: Player): (space: ISpace) => boolean {
+    return (space: ISpace) => space.player?.id === player.id;
   }
 
   public serialize(): SerializedBoard {

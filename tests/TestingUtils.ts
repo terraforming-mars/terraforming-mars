@@ -26,7 +26,7 @@ export class TestingUtils {
       toValue = constants.MAX_OCEAN_TILES;
     }
 
-    while (player.game.board.getOceansOnBoard() < toValue) {
+    while (player.game.board.getOceanCount() < toValue) {
       oceans.push(TestingUtils.addOcean(player));
     }
     return oceans;

@@ -47,7 +47,7 @@ export class LunaTradeStation extends MoonCard implements IActionCard {
   }
 
   private surfaceColonyCount(game: Game): number {
-    return MoonExpansion.tiles(game, TileType.MOON_COLONY, {surfaceOnly: true}).length;
+    return MoonExpansion.spaces(game, TileType.MOON_COLONY, {surfaceOnly: true}).length;
   }
 
   public canAct(player: Player): boolean {

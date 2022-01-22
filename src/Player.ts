@@ -47,7 +47,7 @@ import {SerializedPlayer} from './SerializedPlayer';
 import {SpaceType} from './SpaceType';
 import {StormCraftIncorporated} from './cards/colonies/StormCraftIncorporated';
 import {Tags} from './cards/Tags';
-import {CITY_TILES, TileType} from './common/TileType';
+import {TileType} from './common/TileType';
 import {VictoryPointsBreakdown} from './VictoryPointsBreakdown';
 import {SelectProductionToLose} from './inputs/SelectProductionToLose';
 import {IAresGlobalParametersResponse, ShiftAresGlobalParameters} from './inputs/ShiftAresGlobalParameters';
@@ -640,11 +640,6 @@ export class Player implements ISerializable<SerializedPlayer> {
 
   public productionIsProtected(): boolean {
     return this.cardIsInEffect(CardName.PRIVATE_SECURITY);
-  }
-
-  public getCitiesCount() {
-    return Array.from(CITY_TILES).map((tileType) => this.game.getSpaceCount(tileType, this))
-      .reduce((previous, current) => previous + current, 0);
   }
 
   // Return the number of cards in the player's hand without tags.

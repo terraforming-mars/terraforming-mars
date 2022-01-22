@@ -108,7 +108,7 @@ class RedsPolicy03 implements Policy {
     if (game.marsIsTerraformed()) return false;
 
     const temperature = game.getTemperature();
-    const oceansPlaced = game.board.getOceansOnBoard();
+    const oceansPlaced = game.board.getOceanCount();
     const oxygenLevel = game.getOxygenLevel();
     const venusScaleLevel = game.getVenusScaleLevel();
 

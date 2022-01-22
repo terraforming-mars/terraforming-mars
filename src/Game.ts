@@ -33,8 +33,8 @@ import {Phase} from './Phase';
 import {Player} from './Player';
 import {PlayerId, GameId, SpectatorId} from './common/Types';
 import {PlayerInput} from './PlayerInput';
-import {Resources} from './common/Resources';
 import {ResourceType} from './common/ResourceType';
+import {Resources} from './common/Resources';
 import {DeferredAction, Priority} from './deferredActions/DeferredAction';
 import {DeferredActionsQueue} from './deferredActions/DeferredActionsQueue';
 import {SelectHowToPayDeferred} from './deferredActions/SelectHowToPayDeferred';
@@ -1252,17 +1252,20 @@ export class Game implements ISerializable<SerializedGame> {
     return player;
   }
 
-  public getCitiesInPlayOnMars(): number {
+  public getCitiesOnMarsCount(): number {
     return this.board.spaces.filter(
       (space) => Board.isCitySpace(space) && space.spaceType !== SpaceType.COLONY).length;
   }
-  public getCitiesInPlay(): number {
-    return this.board.spaces.filter((space) => Board.isCitySpace(space)).length;
+
+  public getCitiesCount(player?: Player): number {
+    let cities = this.board.spaces.filter((space) => Board.isCitySpace(space));
+    if (player !== undefined) cities = cities.filter(Board.ownedBy(player));
+    return cities.length;
   }
+
   public getSpaceCount(tileType: TileType, player: Player): number {
     return this.board.spaces.filter(
-      (space) => space.tile !== undefined &&
-                  space.tile.tileType === tileType &&
+      (space) => space.tile?.tileType === tileType &&
                   space.player !== undefined &&
                   space.player === player,
     ).length;
@@ -1438,11 +1441,11 @@ export class Game implements ISerializable<SerializedGame> {
   }
 
   public canAddOcean(): boolean {
-    return this.board.getOceansOnBoard() < constants.MAX_OCEAN_TILES;
+    return this.board.getOceanCount() < constants.MAX_OCEAN_TILES;
   }
 
   public canRemoveOcean(): boolean {
-    const count = this.board.getOceansOnBoard();
+    const count = this.board.getOceanCount();
     return count > 0 && count < constants.MAX_OCEAN_TILES;
   }
 

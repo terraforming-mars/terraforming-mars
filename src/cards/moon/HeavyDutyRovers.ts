@@ -33,7 +33,7 @@ export class HeavyDutyRovers extends Card implements IProjectCard {
 
   public play(player: Player) {
     MoonExpansion.ifMoon(player.game, (moonData) => {
-      const mines = MoonExpansion.tiles(player.game, TileType.MOON_MINE);
+      const mines = MoonExpansion.spaces(player.game, TileType.MOON_MINE);
       const minesNextToRoads = mines.filter((mine) => {
         const spacesNextToMine = moonData.moon.getAdjacentSpaces(mine);
         const firstRoad = spacesNextToMine.find((s) => MoonExpansion.spaceHasType(s, TileType.MOON_ROAD));

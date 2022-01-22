@@ -19,7 +19,7 @@ describe('IndustrialCenterAres', function() {
 
   it('Should play', function() {
     game.addCityTile(player, game.board.getAvailableSpacesOnLand(player)[0].id);
-    expect(game.getCitiesInPlayOnMars()).to.eq(1);
+    expect(game.getCitiesOnMarsCount()).to.eq(1);
 
     const action = card.play(player);
     const space = action!.availableSpaces[0];

@@ -62,7 +62,7 @@ export class _AresHazardPlacement {
 
     this.testConstraint(
       aresData.hazardData.erosionOceanCount,
-      player.game.board.getOceansOnBoard(),
+      player.game.board.getOceanCount(),
       () => {
         let type = TileType.EROSION_MILD;
         if (aresData.hazardData.severeErosionTemperature.available !== true) {
@@ -81,7 +81,7 @@ export class _AresHazardPlacement {
   private static testToRemoveDustStorms(aresData: IAresData, player: Player) {
     this.testConstraint(
       aresData.hazardData.removeDustStormsOceanCount,
-      player.game.board.getOceansOnBoard(),
+      player.game.board.getOceanCount(),
       () => {
         player.game.board.spaces.forEach((space) => {
           if (space.tile?.tileType === TileType.DUST_STORM_MILD || space.tile?.tileType === TileType.DUST_STORM_SEVERE) {

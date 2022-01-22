@@ -34,11 +34,7 @@ export class CardRequirement {
       return Turmoil.getTurmoil(player.game).chairman === player.id;
 
     case RequirementType.CITIES:
-      if (this.isAny) {
-        return this.satisfiesInequality(player.game.getCitiesInPlay());
-      } else {
-        return this.satisfiesInequality(player.getCitiesCount());
-      }
+      return this.satisfiesInequality(player.game.getCitiesCount(this.isAny ? undefined : player));
 
     case RequirementType.COLONIES:
       const coloniesCount = player.game.colonies.map((colony) => colony.colonies.filter((owner) => owner === player.id).length)
@@ -96,15 +92,15 @@ export class CardRequirement {
 
     case RequirementType.COLONY_TILES:
       return this.satisfiesInequality(
-        MoonExpansion.tiles(player.game, TileType.MOON_COLONY, {surfaceOnly: true, ownedBy: this.isAny ? undefined : player}).length);
+        MoonExpansion.spaces(player.game, TileType.MOON_COLONY, {surfaceOnly: true, ownedBy: this.isAny ? undefined : player}).length);
 
     case RequirementType.MINING_TILES:
       return this.satisfiesInequality(
-        MoonExpansion.tiles(player.game, TileType.MOON_MINE, {surfaceOnly: true, ownedBy: this.isAny ? undefined : player}).length);
+        MoonExpansion.spaces(player.game, TileType.MOON_MINE, {surfaceOnly: true, ownedBy: this.isAny ? undefined : player}).length);
 
     case RequirementType.ROAD_TILES:
       return this.satisfiesInequality(
-        MoonExpansion.tiles(player.game, TileType.MOON_ROAD, {surfaceOnly: true, ownedBy: this.isAny ? undefined : player}).length);
+        MoonExpansion.spaces(player.game, TileType.MOON_ROAD, {surfaceOnly: true, ownedBy: this.isAny ? undefined : player}).length);
 
     case RequirementType.TAG:
     case RequirementType.PARTY:
@@ -119,7 +115,7 @@ export class CardRequirement {
 
     switch (parameter) {
     case GlobalParameter.OCEANS:
-      currentLevel = player.game.board.getOceansOnBoard();
+      currentLevel = player.game.board.getOceanCount();
       break;
     case GlobalParameter.OXYGEN:
       currentLevel = player.game.getOxygenLevel();

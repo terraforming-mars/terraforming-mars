@@ -45,7 +45,7 @@ export class NewVenice extends Card implements IProjectCard {
 
     return new SelectSpace(
       'Select space for New Venice',
-      player.game.board.getOceansTiles(false),
+      player.game.board.getOceanSpaces(false),
       (space: ISpace) => {
         const tile = {
           tileType: TileType.OCEAN_CITY,

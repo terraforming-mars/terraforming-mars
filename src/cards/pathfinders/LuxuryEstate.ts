@@ -29,7 +29,7 @@ export class LuxuryEstate extends Card implements IProjectCard {
   }
 
   public play(player: Player) {
-    const count = player.getCitiesCount() + player.game.getSpaceCount(TileType.GREENERY, player);
+    const count = player.game.getCitiesCount(player) + player.game.getSpaceCount(TileType.GREENERY, player);
     player.addResource(Resources.TITANIUM, count, {log: true});
     return undefined;
   }

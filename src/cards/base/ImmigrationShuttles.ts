@@ -29,7 +29,7 @@ export class ImmigrationShuttles extends Card implements IProjectCard {
     });
   }
   public override getVictoryPoints(player: Player) {
-    return Math.floor(player.game.getCitiesInPlay() / 3);
+    return Math.floor(player.game.getCitiesCount(player) / 3);
   }
   public play(player: Player) {
     player.addProduction(Resources.MEGACREDITS, 5);

@@ -1,7 +1,7 @@
 import {LogMessageType} from './LogMessageType';
 import {LogMessageData} from './LogMessageData';
 import {Message} from './Message';
-import {PlayerId} from './common/Types';
+import {PlayerId} from '../Types';
 
 export class LogMessage implements Message {
   public timestamp = Date.now();

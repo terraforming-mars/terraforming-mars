@@ -1,4 +1,4 @@
-FROM node:lts-alpine
+FROM node:14-alpine3.11
 
 EXPOSE 8080
 

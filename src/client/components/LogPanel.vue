@@ -36,10 +36,10 @@
 
 import Vue from 'vue';
 import {CardType} from '@/cards/CardType';
-import {LogMessage} from '@/LogMessage';
-import {LogMessageType} from '@/LogMessageType';
-import {LogMessageData} from '@/LogMessageData';
-import {LogMessageDataType} from '@/LogMessageDataType';
+import {LogMessage} from '@/common/logs/LogMessage';
+import {LogMessageType} from '@/common/logs/LogMessageType';
+import {LogMessageData} from '@/common/logs/LogMessageData';
+import {LogMessageDataType} from '@/common/logs/LogMessageDataType';
 import {PublicPlayerModel} from '@/models/PlayerModel';
 import Card from '@/client/components/card/Card.vue';
 import {CardName} from '@/CardName';

@@ -7,7 +7,6 @@ import {Player} from '../../Player';
 import {ISpace} from '../../boards/ISpace';
 import {Resources} from '../../common/Resources';
 import {ResourceType} from '../../common/ResourceType';
-import {TileType} from '../../common/TileType';
 import {CardName} from '../../CardName';
 import {IResourceCard} from '../ICard';
 import {AddResourcesToCard} from '../../deferredActions/AddResourcesToCard';
@@ -16,6 +15,7 @@ import {CardRenderer} from '../render/CardRenderer';
 import {CardRequirements} from '../CardRequirements';
 import {Size} from '../render/Size';
 import {all} from '../Options';
+import {Board} from '../../boards/Board';
 
 export class Herbivores extends Card implements IProjectCard, IResourceCard {
   constructor() {
@@ -53,7 +53,7 @@ export class Herbivores extends Card implements IProjectCard, IResourceCard {
     }
 
     public onTilePlaced(cardOwner: Player, activePlayer: Player, space: ISpace) {
-      if (cardOwner.id === activePlayer.id && space.tile?.tileType === TileType.GREENERY) {
+      if (cardOwner.id === activePlayer.id && Board.isGreenerySpace(space)) {
         cardOwner.game.defer(new AddResourcesToCard(cardOwner, ResourceType.ANIMAL, {filter: (c) => c.name === this.name}));
       }
     }

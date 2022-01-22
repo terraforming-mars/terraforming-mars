@@ -2,7 +2,7 @@ import {ISpace, SpaceId} from './ISpace';
 import {Player} from '../Player';
 import {PlayerId} from '../common/Types';
 import {SpaceType} from '../SpaceType';
-import {CITY_TILES, OCEAN_TILES, OCEAN_UPGRADE_TILES, TileType} from '../common/TileType';
+import {CITY_TILES, GREENERY_TILES, OCEAN_TILES, OCEAN_UPGRADE_TILES, TileType} from '../common/TileType';
 import {AresHandler} from '../ares/AresHandler';
 import {SerializedBoard, SerializedSpace} from './SerializedBoard';
 
@@ -232,6 +232,10 @@ export abstract class Board {
 
   public static isOceanSpace(space: ISpace): boolean {
     return space.tile !== undefined && OCEAN_TILES.has(space.tile.tileType);
+  }
+
+  public static isGreenerySpace(space: ISpace): boolean {
+    return space.tile !== undefined && GREENERY_TILES.has(space.tile.tileType);
   }
 
   public static ownedBy(player: Player): (space: ISpace) => boolean {

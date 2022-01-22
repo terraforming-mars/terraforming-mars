@@ -16,6 +16,7 @@ import {CardRequirements} from '../CardRequirements';
 import {CardRenderer} from '../render/CardRenderer';
 import {Phase} from '../../Phase';
 import {played} from '../Options';
+import {Board} from '../../boards/Board';
 
 export class EcologicalZone extends Card implements IProjectCard, IResourceCard {
   constructor(
@@ -54,12 +55,7 @@ export class EcologicalZone extends Card implements IProjectCard, IResourceCard 
 
   private getAvailableSpaces(player: Player): Array<ISpace> {
     return player.game.board.getAvailableSpacesOnLand(player)
-      .filter(
-        (space) => player.game.board.getAdjacentSpaces(space).filter(
-          (adjacentSpace) => adjacentSpace.tile !== undefined &&
-              adjacentSpace.tile.tileType === TileType.GREENERY,
-        ).length > 0,
-      );
+      .filter((space) => player.game.board.getAdjacentSpaces(space).filter(Board.isGreenerySpace).length > 0);
   }
   public override canPlay(player: Player): boolean {
     return this.getAvailableSpaces(player).length > 0;

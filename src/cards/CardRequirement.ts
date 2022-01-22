@@ -45,12 +45,7 @@ export class CardRequirement {
       return this.satisfiesInequality(player.getResourceCount(ResourceType.FLOATER));
 
     case RequirementType.GREENERIES:
-      const greeneries = player.game.board.spaces.filter(
-        (space) => space.tile !== undefined &&
-            space.tile.tileType === TileType.GREENERY &&
-            (space.player === player || this.isAny),
-      ).length;
-      return this.satisfiesInequality(greeneries);
+      return this.satisfiesInequality(player.game.getGreeneriesCount(this.isAny ? undefined : player));
 
     case RequirementType.PARTY_LEADERS:
       const turmoil = Turmoil.getTurmoil(player.game);

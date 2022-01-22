@@ -10,7 +10,7 @@ import {ICard} from '../cards/ICard';
 import {IProjectCard} from '../cards/IProjectCard';
 import {SelectDelegate} from './SelectDelegate';
 import {SelectColony} from './SelectColony';
-import {Message} from '../Message';
+import {Message} from '../common/logs/Message';
 
 export class OrOptions implements PlayerInput {
   public cb(): PlayerInput | undefined {

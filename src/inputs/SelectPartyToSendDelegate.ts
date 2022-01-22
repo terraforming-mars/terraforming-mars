@@ -1,4 +1,4 @@
-import {Message} from '../Message';
+import {Message} from '../common/logs/Message';
 import {PlayerInput} from '../PlayerInput';
 import {PlayerInputTypes} from '../PlayerInputTypes';
 import {PartyName} from '../turmoil/parties/PartyName';

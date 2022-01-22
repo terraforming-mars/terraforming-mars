@@ -40,7 +40,7 @@ export class OceanSanctuary extends Card implements IResourceCard {
     player.addResourceTo(this, 1);
     return new SelectSpace(
       'Select space for Ocean Sanctuary',
-      player.game.board.getOceanSpaces(false),
+      player.game.board.getOceanSpaces({upgradedOceans: false}),
       (space: ISpace) => {
         const tile = {
           tileType: TileType.OCEAN_SANCTUARY,

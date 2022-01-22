@@ -42,7 +42,7 @@ export class OceanFarm extends Card implements IProjectCard {
 
     return new SelectSpace(
       'Select space for Ocean Farm',
-      player.game.board.getOceanSpaces(false),
+      player.game.board.getOceanSpaces({upgradedOceans: false}),
       (space: ISpace) => {
         const tile = {
           tileType: TileType.OCEAN_FARM,

@@ -107,15 +107,35 @@ export abstract class Board {
     );
   }
 
-  public getOceanCount(countUpgradedOceans: boolean = true): number {
-    return this.getOceanSpaces(countUpgradedOceans).length;
+  /*
+   * Returns the number of oceans on the board.
+   *
+   * The default condition is to return those oceans used to count toward the global parameter, so
+   * upgraded oceans are included, but Wetlands is not. That's why the boolean values have different defaults.
+   */
+  public getOceanCount(include?: {upgradedOceans?: boolean, wetlands?: boolean}): number {
+    return this.getOceanSpaces(include).length;
   }
 
-  public getOceanSpaces(countUpgradedOceans: boolean): Array<ISpace> {
-    let spaces = this.spaces.filter((space) => Board.isOceanSpace(space));
-    if (!countUpgradedOceans) {
-      spaces = spaces.filter((space) => space.tile && !OCEAN_UPGRADE_TILES.has(space.tile?.tileType));
-    }
+  /*
+   * Returns spaces on the board with ocean tiless.
+   *
+   * The default condition is to return those oceans used to count toward the global parameter, so
+   * upgraded oceans are included, but Wetlands is not. That's why the boolean values have different defaults.
+   */
+  public getOceanSpaces(include?: {upgradedOceans?: boolean, wetlands?: boolean}): Array<ISpace> {
+    const spaces = this.spaces.filter((space) => {
+      if (!Board.isOceanSpace(space)) return false;
+      if (space.tile?.tileType === undefined) return false;
+      const tileType = space.tile.tileType;
+      if (OCEAN_UPGRADE_TILES.has(tileType)) {
+        return include?.upgradedOceans ?? true;
+      }
+      if (tileType === TileType.WETLANDS) {
+        return include?.wetlands ?? false;
+      }
+      return true;
+    });
     return spaces;
   }
 

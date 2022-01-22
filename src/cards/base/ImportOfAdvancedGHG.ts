@@ -3,7 +3,7 @@ import {CardType} from '../CardType';
 import {Player} from '../../Player';
 import {IProjectCard} from '../IProjectCard';
 import {Tags} from '../Tags';
-import {Resources} from '../../Resources';
+import {Resources} from '../../common/Resources';
 import {CardName} from '../../CardName';
 import {CardRenderer} from '../render/CardRenderer';
 

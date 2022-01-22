@@ -1,7 +1,7 @@
 import {expect} from 'chai';
 import {ProtectedValley} from '../../../src/cards/base/ProtectedValley';
 import {Game} from '../../../src/Game';
-import {Resources} from '../../../src/Resources';
+import {Resources} from '../../../src/common/Resources';
 import {TileType} from '../../../src/common/TileType';
 import {TestPlayers} from '../../TestPlayers';
 

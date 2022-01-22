@@ -3,7 +3,7 @@ import {EarthOffice} from '../../../src/cards/base/EarthOffice';
 import {Sponsors} from '../../../src/cards/base/Sponsors';
 import {SaturnSurfing} from '../../../src/cards/promo/SaturnSurfing';
 import {Player} from '../../../src/Player';
-import {Resources} from '../../../src/Resources';
+import {Resources} from '../../../src/common/Resources';
 import {TestPlayers} from '../../TestPlayers';
 
 describe('SaturnSurfing', function() {

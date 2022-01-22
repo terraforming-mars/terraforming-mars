@@ -1,7 +1,7 @@
 import {expect} from 'chai';
 import {IshtarMining} from '../../../src/cards/venusNext/IshtarMining';
 import {Game} from '../../../src/Game';
-import {Resources} from '../../../src/Resources';
+import {Resources} from '../../../src/common/Resources';
 import {TestPlayers} from '../../TestPlayers';
 
 describe('IshtarMining', function() {

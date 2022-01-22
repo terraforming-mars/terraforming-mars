@@ -5,7 +5,7 @@ import {TestPlayer} from '../../TestPlayer';
 import {SelectSpace} from '../../../src/inputs/SelectSpace';
 import {getTestPlayer, newTestGame} from '../../TestGame';
 import {OrOptions} from '../../../src/inputs/OrOptions';
-import {Resources} from '../../../src/Resources';
+import {Resources} from '../../../src/common/Resources';
 import {PlaceOceanTile} from '../../../src/deferredActions/PlaceOceanTile';
 import {SpaceType} from '../../../src/SpaceType';
 import {TileType} from '../../../src/common/TileType';

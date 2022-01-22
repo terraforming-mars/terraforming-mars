@@ -3,7 +3,7 @@ import {CardName} from '../../../CardName';
 import {CardRenderer} from '../../render/CardRenderer';
 import {StandardProjectCard} from '../../StandardProjectCard';
 import {PlaceCityTile} from '../../../deferredActions/PlaceCityTile';
-import {Resources} from '../../../Resources';
+import {Resources} from '../../../common/Resources';
 
 export class CityStandardProject extends StandardProjectCard {
   constructor() {

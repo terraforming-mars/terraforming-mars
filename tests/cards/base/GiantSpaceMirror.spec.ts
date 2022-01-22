@@ -1,6 +1,6 @@
 import {expect} from 'chai';
 import {GiantSpaceMirror} from '../../../src/cards/base/GiantSpaceMirror';
-import {Resources} from '../../../src/Resources';
+import {Resources} from '../../../src/common/Resources';
 import {TestPlayers} from '../../TestPlayers';
 
 describe('GiantSpaceMirror', function() {

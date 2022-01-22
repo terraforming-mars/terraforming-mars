@@ -7,7 +7,7 @@ import {TileType} from '../../common/TileType';
 import {CardRenderer} from '../render/CardRenderer';
 import {Size} from '../render/Size';
 import {Card} from '../Card';
-import {Resources} from '../../Resources';
+import {Resources} from '../../common/Resources';
 import {all} from '../Options';
 
 export class HeavyDutyRovers extends Card implements IProjectCard {

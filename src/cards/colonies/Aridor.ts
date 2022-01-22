@@ -3,7 +3,7 @@ import {Player} from '../../Player';
 import {Tags} from '../Tags';
 import {Game} from '../../Game';
 import {IProjectCard} from '../IProjectCard';
-import {Resources} from '../../Resources';
+import {Resources} from '../../common/Resources';
 import {CardType} from '../CardType';
 import {CardName} from '../../CardName';
 import {Colony} from '../../colonies/Colony';

@@ -4,7 +4,7 @@ import {IProjectCard} from '../IProjectCard';
 import {CardName} from '../../CardName';
 import {SendDelegateToArea} from '../../deferredActions/SendDelegateToArea';
 import {CardRenderer} from '../render/CardRenderer';
-import {Resources} from '../../Resources';
+import {Resources} from '../../common/Resources';
 import {Turmoil} from '../../turmoil/Turmoil';
 import {DeferredAction} from '../../deferredActions/DeferredAction';
 import {OrOptions} from '../../inputs/OrOptions';

@@ -7,7 +7,7 @@ import {Player} from '../../Player';
 import {MoonExpansion} from '../../moon/MoonExpansion';
 import {PlaceMoonRoadTile} from '../../moon/PlaceMoonRoadTile';
 import {SpaceType} from '../../SpaceType';
-import {Resources} from '../../Resources';
+import {Resources} from '../../common/Resources';
 import {AltSecondaryTag} from '../render/CardRenderItem';
 import {TileType} from '../../common/TileType';
 

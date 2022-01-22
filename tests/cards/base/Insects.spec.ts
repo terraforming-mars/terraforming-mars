@@ -3,7 +3,7 @@ import {Insects} from '../../../src/cards/base/Insects';
 import {Trees} from '../../../src/cards/base/Trees';
 import {Game} from '../../../src/Game';
 import {Player} from '../../../src/Player';
-import {Resources} from '../../../src/Resources';
+import {Resources} from '../../../src/common/Resources';
 import {TestPlayers} from '../../TestPlayers';
 
 describe('Insects', function() {

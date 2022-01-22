@@ -5,7 +5,7 @@ import {Predators} from '../../../src/cards/base/Predators';
 import {ResearchOutpost} from '../../../src/cards/base/ResearchOutpost';
 import {Aridor} from '../../../src/cards/colonies/Aridor';
 import {Game} from '../../../src/Game';
-import {Resources} from '../../../src/Resources';
+import {Resources} from '../../../src/common/Resources';
 
 let card: Aridor;
 let game: Game;

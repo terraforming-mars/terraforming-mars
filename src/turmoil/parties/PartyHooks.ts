@@ -3,7 +3,7 @@ import {PartyName} from './PartyName';
 import {SpaceType} from '../../SpaceType';
 import {Phase} from '../../Phase';
 import {PolicyId} from '../Policy';
-import {Resources} from '../../Resources';
+import {Resources} from '../../common/Resources';
 import {ISpace} from '../../boards/ISpace';
 import {GREENS_POLICY_1} from './Greens';
 import {PoliticalAgendas} from '../PoliticalAgendas';

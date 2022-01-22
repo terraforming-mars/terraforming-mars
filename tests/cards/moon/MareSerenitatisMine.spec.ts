@@ -6,7 +6,7 @@ import {TestingUtils} from '../../TestingUtils';
 import {TestPlayers} from '../../TestPlayers';
 import {MareSerenitatisMine} from '../../../src/cards/moon/MareSerenitatisMine';
 import {expect} from 'chai';
-import {Resources} from '../../../src/Resources';
+import {Resources} from '../../../src/common/Resources';
 import {PlaceMoonRoadTile} from '../../../src/moon/PlaceMoonRoadTile';
 import {MoonSpaces} from '../../../src/moon/MoonSpaces';
 import {TileType} from '../../../src/common/TileType';

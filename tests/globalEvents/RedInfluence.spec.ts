@@ -1,6 +1,6 @@
 import {expect} from 'chai';
 import {Game} from '../../src/Game';
-import {Resources} from '../../src/Resources';
+import {Resources} from '../../src/common/Resources';
 import {RedInfluence} from '../../src/turmoil/globalEvents/RedInfluence';
 import {Kelvinists} from '../../src/turmoil/parties/Kelvinists';
 import {Turmoil} from '../../src/turmoil/Turmoil';

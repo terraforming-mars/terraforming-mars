@@ -1,6 +1,6 @@
 import {expect} from 'chai';
 import {Game} from '../../src/Game';
-import {Resources} from '../../src/Resources';
+import {Resources} from '../../src/common/Resources';
 import {Riots} from '../../src/turmoil/globalEvents/Riots';
 import {Turmoil} from '../../src/turmoil/Turmoil';
 import {TestPlayers} from '../TestPlayers';

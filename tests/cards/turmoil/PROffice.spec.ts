@@ -3,7 +3,7 @@ import {AcquiredCompany} from '../../../src/cards/base/AcquiredCompany';
 import {Sponsors} from '../../../src/cards/base/Sponsors';
 import {PROffice} from '../../../src/cards/turmoil/PROffice';
 import {Game} from '../../../src/Game';
-import {Resources} from '../../../src/Resources';
+import {Resources} from '../../../src/common/Resources';
 import {PartyName} from '../../../src/turmoil/parties/PartyName';
 import {TestingUtils} from '../../TestingUtils';
 import {TestPlayers} from '../../TestPlayers';

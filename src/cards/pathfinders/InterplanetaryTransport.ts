@@ -6,8 +6,8 @@ import {CardName} from '../../CardName';
 import {CardRenderer} from '../render/CardRenderer';
 import {Tags} from '../Tags';
 import {SpaceType} from '../../SpaceType';
+import {Resources} from '../../common/Resources';
 import {TileType} from '../../common/TileType';
-import {Resources} from '../../Resources';
 import {all} from '../Options';
 
 export class InterplanetaryTransport extends Card implements IProjectCard {

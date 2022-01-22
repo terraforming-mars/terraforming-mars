@@ -4,7 +4,7 @@ import {CardName} from '../../CardName';
 import {CardRenderer} from '../render/CardRenderer';
 import {SendDelegateToArea} from '../../deferredActions/SendDelegateToArea';
 import {Tags} from '../Tags';
-import {Resources} from '../../Resources';
+import {Resources} from '../../common/Resources';
 
 export class ExperiencedMartians extends PreludeCard {
   constructor() {

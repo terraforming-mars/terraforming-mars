@@ -6,7 +6,7 @@ import {Tags} from '../Tags';
 import {CardRenderer} from '../render/CardRenderer';
 import {MoonExpansion} from '../../moon/MoonExpansion';
 import {SpaceType} from '../../SpaceType';
-import {Resources} from '../../Resources';
+import {Resources} from '../../common/Resources';
 import {Units} from '../../Units';
 import {Size} from '../render/Size';
 import {Card} from '../Card';

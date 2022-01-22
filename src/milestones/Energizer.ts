@@ -1,6 +1,6 @@
 import {IMilestone} from './IMilestone';
 import {Player} from '../Player';
-import {Resources} from '../Resources';
+import {Resources} from '../common/Resources';
 
 export class Energizer implements IMilestone {
     public name: string = 'Energizer';

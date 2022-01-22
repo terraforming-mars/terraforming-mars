@@ -1,6 +1,6 @@
 import {expect} from 'chai';
 import {SocietySupport} from '../../../src/cards/prelude/SocietySupport';
-import {Resources} from '../../../src/Resources';
+import {Resources} from '../../../src/common/Resources';
 import {TestPlayers} from '../../TestPlayers';
 
 describe('SocietySupport', function() {

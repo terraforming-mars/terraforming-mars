@@ -11,7 +11,7 @@ import {CardType} from '../CardType';
 import {DeferredAction} from '../../deferredActions/DeferredAction';
 import {CardRenderer} from '../render/CardRenderer';
 import {Size} from '../render/Size';
-import {Resources} from '../../Resources';
+import {Resources} from '../../common/Resources';
 import {all, digit, played} from '../Options';
 
 export class PharmacyUnion extends Card implements CorporationCard {

@@ -2,7 +2,7 @@ import {expect} from 'chai';
 import {EarthCatapult} from '../../../src/cards/base/EarthCatapult';
 import {Advertising} from '../../../src/cards/promo/Advertising';
 import {Game} from '../../../src/Game';
-import {Resources} from '../../../src/Resources';
+import {Resources} from '../../../src/common/Resources';
 import {TestPlayers} from '../../TestPlayers';
 
 describe('Advertising', function() {

@@ -5,7 +5,7 @@ import {TestPlayer} from '../../TestPlayer';
 import {TestPlayers} from '../../TestPlayers';
 import {Fish} from '../../../src/cards/base/Fish';
 import {SelectPlayer} from '../../../src/inputs/SelectPlayer';
-import {Resources} from '../../../src/Resources';
+import {Resources} from '../../../src/common/Resources';
 
 describe('PrivateSecurity', function() {
   let card: PrivateSecurity;

@@ -3,7 +3,7 @@ import {Party} from './Party';
 import {PartyName} from './PartyName';
 import {Game} from '../../Game';
 import {Tags} from '../../cards/Tags';
-import {Resources} from '../../Resources';
+import {Resources} from '../../common/Resources';
 import {Bonus} from '../Bonus';
 import {SelectHowToPayDeferred} from '../../deferredActions/SelectHowToPayDeferred';
 import {Player} from '../../Player';

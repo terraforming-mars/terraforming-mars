@@ -16,7 +16,7 @@
 
 import Vue from 'vue';
 import {DEFAULT_STEEL_VALUE, DEFAULT_TITANIUM_VALUE} from '@/constants';
-import {Resources} from '@/Resources';
+import {Resources} from '@/common/Resources';
 import {PreferencesManager} from '@/client/utils/PreferencesManager';
 
 export default Vue.extend({

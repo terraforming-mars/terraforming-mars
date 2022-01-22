@@ -20,6 +20,7 @@ export class MarsDirect extends Card implements CorporationCard {
       startingMegaCredits: 64,
       // For every new Mars card added reduce by 2, then 1 (aka reduce by 1.5)
       // 62, 61, 59, 58, 56, 55, 53, 52
+      // Also change the value in description and renderData.
 
       metadata: {
         description: 'You start with 64 M€. (This is a temporary buff from 52M€ as many Mars tag cards are unimplemented)',

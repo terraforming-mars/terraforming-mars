@@ -6,6 +6,8 @@ import {TestPlayers} from '../../TestPlayers';
 import {PowerPlant} from '../../../src/cards/pathfinders/PowerPlant';
 import {ControlledBloom} from '../../../src/cards/pathfinders/ControlledBloom';
 import {TestingUtils} from '../../TestingUtils';
+import {PATHFINDERS_CARD_MANIFEST} from '../../../src/cards/pathfinders/PathfindersCardManifest';
+import {Tags} from '../../../src/cards/Tags';
 
 describe('MarsDirect', () => {
   let player: TestPlayer;
@@ -52,6 +54,17 @@ describe('MarsDirect', () => {
     player.tagsForTest = {mars: 2};
     player.megaCredits = 11;
     expect(player.getPlayableCards()).has.members([powerPlant]);
+  });
+
+  it('verify buff is lined up with game state', () => {
+    let count = 0;
+    PATHFINDERS_CARD_MANIFEST.projectCards.factories.forEach((factory) => {
+      if (new factory.Factory().tags.includes(Tags.MARS)) {
+        count++;
+      }
+    });
+    // When this fails, reduce starting MC by 1.5MC per fail.
+    expect(count).eq(26);
   });
 });
 

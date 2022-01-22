@@ -5,7 +5,7 @@ import {TestPlayer} from '../../TestPlayer';
 import {getTestPlayer, newTestGame} from '../../TestGame';
 import {EmptyBoard} from '../../ares/EmptyBoard';
 import {ISpace} from '../../../src/boards/ISpace';
-import {SpaceBonus} from '../../../src/SpaceBonus';
+import {SpaceBonus} from '../../../src/common/boards/SpaceBonus';
 import {IProjectCard} from '../../../src/cards/IProjectCard';
 import {TestingUtils} from '../../TestingUtils';
 import {ResourceType} from '../../../src/common/ResourceType';

@@ -60,7 +60,6 @@ describe('MarsDirect', () => {
     let count = 0;
     PATHFINDERS_CARD_MANIFEST.projectCards.factories.forEach((factory) => {
       if (new factory.Factory().tags.includes(Tags.MARS)) {
-        console.log(factory.cardName);
         count++;
       }
     });

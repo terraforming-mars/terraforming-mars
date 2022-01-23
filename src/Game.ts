@@ -1004,7 +1004,6 @@ export class Game implements ISerializable<SerializedGame> {
 
 
   public playerIsFinishedTakingActions(): void {
-    // Deferred actions hook
     if (this.deferredActions.length > 0) {
       this.deferredActions.runAll(() => this.playerIsFinishedTakingActions());
       return;

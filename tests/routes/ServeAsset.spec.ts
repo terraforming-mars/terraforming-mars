@@ -116,8 +116,4 @@ describe('ServeAsset', () => {
       existsSync: 0,
     });
   });
-
-
-  // Cached CSS
-  // Uncached CSS
 });

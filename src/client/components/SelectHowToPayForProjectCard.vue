@@ -410,7 +410,7 @@ export default Vue.extend({
     </div>
 
     <div class="payments_type input-group" v-if="canUseSeeds()">
-      <i class="resource_icon resource_icon--seeds payments_type_icon" :title="$t('Pay by Seeds')"></i>
+      <i class="resource_icon resource_icon--seed payments_type_icon" :title="$t('Pay by Seeds')"></i>
       <Button type="minus" @click="reduceValue('seeds', 1)" />
       <input class="form-input form-inline payments_input" v-model.number="seeds" />
       <Button type="plus" @click="addValue('seeds', 1)" />

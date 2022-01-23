@@ -32,7 +32,7 @@ describe('AquiferStandardProject', function() {
   it('action', function() {
     player.megaCredits = card.cost;
     player.setTerraformRating(20);
-    expect(game.board.getOceansOnBoard()).eq(0);
+    expect(game.board.getOceanCount()).eq(0);
 
     card.action(player);
     TestingUtils.runAllActions(game);
@@ -46,7 +46,7 @@ describe('AquiferStandardProject', function() {
 
     expect(availableSpace.tile!.tileType).eq(TileType.OCEAN);
     expect(player.getTerraformRating()).eq(21);
-    expect(game.board.getOceansOnBoard()).eq(1);
+    expect(game.board.getOceanCount()).eq(1);
   });
 
   it('cannnot act when maximized', () => {

@@ -70,7 +70,7 @@ export class TheGrandLunaCapitalGroup extends Card implements CorporationCard {
   public override getVictoryPoints(player: Player) {
     const moon = MoonExpansion.moonData(player.game).moon;
     const neighboringColonyTiles: Set<SpaceId> = new Set();
-    const colonyTiles = MoonExpansion.tiles(player.game, TileType.MOON_COLONY, {ownedBy: player});
+    const colonyTiles = MoonExpansion.spaces(player.game, TileType.MOON_COLONY, {ownedBy: player});
     colonyTiles.forEach((tile) =>
       moon.getAdjacentSpaces(tile).forEach((neighbor) => {
         if (MoonExpansion.spaceHasType(neighbor, TileType.MOON_COLONY)) {

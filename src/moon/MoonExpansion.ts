@@ -258,7 +258,7 @@ export class MoonExpansion {
    *
    * Special tiles such as Lunar Mine Urbanization, are especially included.
    */
-  public static tiles(
+  public static spaces(
     game: Game,
     tileType?: TileType,
     options?: {

@@ -27,7 +27,7 @@ export class Greenhouses extends Card implements IProjectCard {
     });
   }
   public play(player: Player) {
-    player.addResource(Resources.PLANTS, player.game.getCitiesInPlay(), {log: true});
+    player.addResource(Resources.PLANTS, player.game.getCitiesCount(player), {log: true});
     return undefined;
   }
 }

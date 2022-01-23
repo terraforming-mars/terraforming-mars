@@ -50,13 +50,13 @@ describe('NewVenice', function() {
     expect(player.plants).eq(0);
     expect(player.getProduction(Resources.MEGACREDITS)).eq(2);
     expect(player.getProduction(Resources.ENERGY)).eq(1);
-    expect(game.getCitiesInPlayOnMars()).eq(0);
-    expect(player.getCitiesCount()).eq(0);
+    expect(game.getCitiesOnMarsCount()).eq(0);
+    expect(player.game.getCitiesCount(player)).eq(0);
 
     action.cb(oceanSpace);
 
-    expect(game.getCitiesInPlayOnMars()).eq(1);
-    expect(player.getCitiesCount()).eq(1);
+    expect(game.getCitiesOnMarsCount()).eq(1);
+    expect(player.game.getCitiesCount(player)).eq(1);
 
     expect(oceanSpace.player).to.eq(player);
     expect(oceanSpace.tile!.tileType).to.eq(TileType.OCEAN_CITY);

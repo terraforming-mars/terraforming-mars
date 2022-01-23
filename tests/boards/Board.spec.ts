@@ -225,21 +225,21 @@ describe('Board', function() {
   });
 
   it('getOceansOnBoard', function() {
-    expect(board.getOceansOnBoard()).eq(0);
+    expect(board.getOceanCount()).eq(0);
 
     const space1 = board.spaces[1];
     space1.spaceType = SpaceType.OCEAN;
     space1.tile = {tileType: TileType.OCEAN};
 
-    expect(board.getOceansOnBoard(true)).eq(1);
-    expect(board.getOceansOnBoard(false)).eq(1);
+    expect(board.getOceanCount(true)).eq(1);
+    expect(board.getOceanCount(false)).eq(1);
 
     const space2 = board.spaces[2];
     space2.spaceType = SpaceType.OCEAN;
     space2.tile = {tileType: TileType.OCEAN_SANCTUARY};
 
-    expect(board.getOceansOnBoard(true)).eq(2);
-    expect(board.getOceansOnBoard(false)).eq(1);
+    expect(board.getOceanCount(true)).eq(2);
+    expect(board.getOceanCount(false)).eq(1);
   });
 
   class TestBoard extends Board {

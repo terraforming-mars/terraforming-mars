@@ -45,7 +45,7 @@ describe('ArtificialLake', function() {
 
     // Set oceans count to the max value
     for (const space of game.board.getSpaces(SpaceType.OCEAN, player)) {
-      if (game.board.getOceansOnBoard() < constants.MAX_OCEAN_TILES) {
+      if (game.board.getOceanCount() < constants.MAX_OCEAN_TILES) {
         game.addOceanTile(player, space.id);
       }
     }

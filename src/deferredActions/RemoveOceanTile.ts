@@ -12,13 +12,13 @@ export class RemoveOceanTile implements DeferredAction {
   ) {}
 
   public execute() {
-    if (this.player.game.board.getOceansOnBoard() === 0) {
+    if (this.player.game.board.getOceanCount() === 0) {
       return undefined;
     }
     return new SelectSpace(
       this.title,
       // false: don't include upgraded oceans.
-      this.player.game.board.getOceansTiles(false),
+      this.player.game.board.getOceanSpaces(false),
       (space: ISpace) => {
         this.player.game.removeTile(space.id);
         LogHelper.logBoardTileAction(this.player, space, 'ocean tile', 'removed');

@@ -49,15 +49,15 @@ describe('LunarMineUrbanization', () => {
 
     const action = card.play(player);
 
-    expect(MoonExpansion.tiles(player.game, TileType.MOON_MINE)).eql([space]);
-    expect(MoonExpansion.tiles(player.game, TileType.MOON_COLONY)).eql([]);
+    expect(MoonExpansion.spaces(player.game, TileType.MOON_MINE)).eql([space]);
+    expect(MoonExpansion.spaces(player.game, TileType.MOON_COLONY)).eql([]);
     expect(player.getProduction(Resources.MEGACREDITS)).eq(1);
 
     action.cb(space);
 
     expect(space.tile!.tileType).eq(TileType.LUNAR_MINE_URBANIZATION);
-    expect(MoonExpansion.tiles(player.game, TileType.MOON_MINE)).eql([space]);
-    expect(MoonExpansion.tiles(player.game, TileType.MOON_COLONY)).eql([space]);
+    expect(MoonExpansion.spaces(player.game, TileType.MOON_MINE)).eql([space]);
+    expect(MoonExpansion.spaces(player.game, TileType.MOON_COLONY)).eql([space]);
     expect(moonData.colonyRate).eq(1);
     expect(player.getTerraformRating()).eq(15);
   });

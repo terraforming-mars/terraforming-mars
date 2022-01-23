@@ -26,7 +26,7 @@ describe('TharsisRepublic', function() {
     action.cb(action.availableSpaces[0]);
     TestingUtils.runAllActions(game);
 
-    expect(game.getCitiesInPlayOnMars()).to.eq(1);
+    expect(game.getCitiesOnMarsCount()).to.eq(1);
     expect(player.getProduction(Resources.MEGACREDITS)).to.eq(1);
     expect(player.megaCredits).to.eq(3);
   });

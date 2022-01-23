@@ -30,7 +30,7 @@ export class AerosportTournament extends Card {
   };
 
   public play(player: Player) {
-    player.addResource(Resources.MEGACREDITS, player.game.getCitiesInPlay(), {log: true});
+    player.addResource(Resources.MEGACREDITS, player.game.getCitiesCount(), {log: true});
     return undefined;
   }
 }

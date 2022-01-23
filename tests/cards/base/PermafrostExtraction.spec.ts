@@ -29,6 +29,6 @@ describe('PermafrostExtraction', function() {
     TestingUtils.runAllActions(game);
     const selectSpace = TestingUtils.cast(player.getWaitingFor(), SelectSpace);
     selectSpace.cb(selectSpace.availableSpaces[0]);
-    expect(game.board.getOceansOnBoard()).to.eq(1);
+    expect(game.board.getOceanCount()).to.eq(1);
   });
 });

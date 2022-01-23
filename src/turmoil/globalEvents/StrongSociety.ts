@@ -23,7 +23,7 @@ export class StrongSociety extends GlobalEvent implements IGlobalEvent {
   }
   public resolve(game: Game, turmoil: Turmoil) {
     game.getPlayers().forEach((player) => {
-      const amount = Math.min(5, player.getCitiesCount()) + turmoil.getPlayerInfluence(player);
+      const amount = Math.min(5, player.game.getCitiesCount(player)) + turmoil.getPlayerInfluence(player);
       if (amount > 0) {
         player.addResource(Resources.MEGACREDITS, amount * 2, {log: true, from: this.name});
       }

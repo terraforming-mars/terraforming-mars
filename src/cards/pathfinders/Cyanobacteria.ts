@@ -30,7 +30,7 @@ export class Cyanobacteria extends Card implements IProjectCard {
 
   public play(player: Player) {
     player.game.increaseOxygenLevel(player, 1);
-    const microbes = player.game.board.getOceansTiles(true).length;
+    const microbes = player.game.board.getOceanSpaces(true).length;
     player.game.defer(new AddResourcesToCards(player, ResourceType.MICROBE, microbes));
     return undefined;
   }

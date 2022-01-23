@@ -1469,6 +1469,7 @@ export class Game implements ISerializable<SerializedGame> {
     space.player = undefined;
   }
 
+  // Players returned in play order starting with first player this generation.
   public getPlayers(): Array<Player> {
     // We always return them in turn order
     const ret: Array<Player> = [];

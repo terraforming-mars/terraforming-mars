@@ -5,7 +5,6 @@ import {Game} from '../../Game';
 import {Tags} from '../../cards/Tags';
 import {Resources} from '../../common/Resources';
 import {Bonus} from '../Bonus';
-import {TileType} from '../../common/TileType';
 import {Policy} from '../Policy';
 import {ISpace} from '../../boards/ISpace';
 import {Player} from '../../Player';
@@ -19,6 +18,7 @@ import {Phase} from '../../Phase';
 import {SelectHowToPayDeferred} from '../../deferredActions/SelectHowToPayDeferred';
 import {DeferredAction} from '../../deferredActions/DeferredAction';
 import {POLITICAL_AGENDAS_MAX_ACTION_USES} from '../../constants';
+import {Board} from '../../boards/Board';
 
 export class Greens extends Party implements IParty {
   name = PartyName.GREENS;
@@ -52,7 +52,7 @@ class GreensBonus02 implements Bonus {
 
   getScore(player: Player) {
     const boardSpaces = player.game.board.spaces;
-    const count = boardSpaces.filter((space) => space.tile && space.tile.tileType === TileType.GREENERY && space.player !== undefined && space.player.id === player.id).length;
+    const count = boardSpaces.filter((space) => Board.isGreenerySpace(space) && space.player !== undefined && space.player.id === player.id).length;
     return count * 2;
   }
 
@@ -69,7 +69,7 @@ class GreensPolicy01 implements Policy {
   description: string = 'When you place a greenery tile, gain 4 M€';
 
   onTilePlaced(player: Player, space: ISpace) {
-    if (space.tile?.tileType === TileType.GREENERY && player.game.phase === Phase.ACTION) {
+    if (Board.isGreenerySpace(space) && player.game.phase === Phase.ACTION) {
       player.addResource(Resources.MEGACREDITS, 4);
     }
   }

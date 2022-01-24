@@ -1263,6 +1263,12 @@ export class Game implements ISerializable<SerializedGame> {
     return cities.length;
   }
 
+  public getGreeneriesCount(player?: Player): number {
+    let greeneries = this.board.spaces.filter((space) => Board.isGreenerySpace(space));
+    if (player !== undefined) greeneries = greeneries.filter(Board.ownedBy(player));
+    return greeneries.length;
+  }
+
   public getSpaceCount(tileType: TileType, player: Player): number {
     return this.board.spaces.filter(
       (space) => space.tile?.tileType === tileType &&

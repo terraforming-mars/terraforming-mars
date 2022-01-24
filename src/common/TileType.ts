@@ -104,6 +104,7 @@ export const HAZARD_TILES = new Set([TileType.DUST_STORM_MILD, TileType.DUST_STO
 export const OCEAN_UPGRADE_TILES = new Set([TileType.OCEAN_CITY, TileType.OCEAN_FARM, TileType.OCEAN_SANCTUARY]);
 export const CITY_TILES = new Set([TileType.CITY, TileType.CAPITAL, TileType.OCEAN_CITY, TileType.RED_CITY]);
 export const OCEAN_TILES = new Set([TileType.OCEAN, TileType.OCEAN_CITY, TileType.OCEAN_FARM, TileType.OCEAN_SANCTUARY]);
+export const GREENERY_TILES = new Set([TileType.GREENERY, TileType.WETLANDS]);
 export function isHazardTileType(tile: TileType): boolean {
   return HAZARD_TILES.has(tile);
 }

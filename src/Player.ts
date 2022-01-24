@@ -47,7 +47,6 @@ import {SerializedPlayer} from './SerializedPlayer';
 import {SpaceType} from './SpaceType';
 import {StormCraftIncorporated} from './cards/colonies/StormCraftIncorporated';
 import {Tags} from './cards/Tags';
-import {TileType} from './common/TileType';
 import {VictoryPointsBreakdown} from './VictoryPointsBreakdown';
 import {SelectProductionToLose} from './inputs/SelectProductionToLose';
 import {IAresGlobalParametersResponse, ShiftAresGlobalParameters} from './inputs/ShiftAresGlobalParameters';
@@ -568,7 +567,7 @@ export class Player implements ISerializable<SerializedPlayer> {
     // Victory points from board
     this.game.board.spaces.forEach((space) => {
       // Victory points for greenery tiles
-      if (space.tile && space.tile.tileType === TileType.GREENERY && space.player !== undefined && space.player.id === this.id) {
+      if (Board.isGreenerySpace(space) && space.player !== undefined && space.player.id === this.id) {
         victoryPointsBreakdown.setVictoryPoints('greenery', 1);
       }
 
@@ -576,7 +575,7 @@ export class Player implements ISerializable<SerializedPlayer> {
       if (Board.isCitySpace(space) && space.player !== undefined && space.player.id === this.id) {
         const adjacent = this.game.board.getAdjacentSpaces(space);
         for (const adj of adjacent) {
-          if (adj.tile && adj.tile.tileType === TileType.GREENERY) {
+          if (Board.isGreenerySpace(adj)) {
             victoryPointsBreakdown.setVictoryPoints('city', 1);
           }
         }

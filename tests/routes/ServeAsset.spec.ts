@@ -147,4 +147,16 @@ describe('ServeAsset', () => {
       existsSync: 0,
     });
   });
+
+  it('sw.js', () => {
+    instance = new ServeAsset(undefined, false, fileApi);
+    setRequest('/sw.js', [['accept-encoding', '']]);
+    instance.get(req, res.hide(), ctx);
+    expect(res.content).eq('data: build/src/client/sw.js');
+    expect(fileApi.counts).deep.eq({
+      ...primedCache,
+      readFile: 1,
+      existsSync: 0,
+    });
+  });
 });

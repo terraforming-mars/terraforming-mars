@@ -103,6 +103,32 @@ export class ServeAsset extends Handler {
     });
   }
 
+  private toMainFile(urlPath: string, encodings: Set<Encoding>): { file?: string, encoding?: Encoding } {
+    let file = `build/${urlPath}`;
+    let encoding: Encoding | undefined;
+    if (encodings.has('br')) {
+      encoding = 'br';
+      file += '.br';
+    } else if (encodings.has('gzip')) {
+      encoding = 'gzip';
+      file += '.gz';
+    }
+
+    // Return not-compressed .js files for development mode
+    if (!isProduction() && !this.fileApi.existsSync(file)) {
+      encoding = undefined;
+      file = `build/${urlPath}`;
+    }
+
+    return {file, encoding};
+  }
+
+  private toServiceWorkerFile(urlPath: string): { file?: string, encoding?: Encoding } {
+    const file = `build/src/client/${urlPath}`;
+
+    return {file};
+  }
+
   private toFile(urlPath: string, encodings: Set<Encoding>): { file?: string, encoding?: Encoding } {
     switch (urlPath) {
     case 'assets/index.html':
@@ -121,23 +147,10 @@ export class ServeAsset extends Handler {
 
     case 'main.js':
     case 'main.js.map':
-      let file = `build/${urlPath}`;
-      let encoding: Encoding | undefined = undefined;
-      if (encodings.has('br')) {
-        encoding = 'br';
-        file += '.br';
-      } else if (encodings.has('gzip')) {
-        encoding = 'gzip';
-        file += '.gz';
-      }
+      return this.toMainFile(urlPath, encodings);
 
-      // Return not-compressed .js files for development mode
-      if (!isProduction() && !this.fileApi.existsSync(file)) {
-        encoding = undefined;
-        file = `build/${urlPath}`;
-      }
-
-      return {file, encoding};
+    case 'sw.js':
+      return this.toServiceWorkerFile(urlPath);
 
     case 'favicon.ico':
       return {file: 'assets/favicon.ico'};

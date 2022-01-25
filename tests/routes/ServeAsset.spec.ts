@@ -35,6 +35,8 @@ describe('ServeAsset', () => {
   let res: MockResponse;
   let ctx: IContext;
   let fileApi: FileApiMock;
+  // The expected state of call counts in most simple cases in this test. This is a template
+  // used and overridden below. That makes how individual condition changes these calls.
   const primedCache = {
     readFile: 0,
     readFileSync: 3,

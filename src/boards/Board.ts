@@ -242,6 +242,10 @@ export abstract class Board {
     return (space: ISpace) => space.player?.id === player.id;
   }
 
+  public static spaceOwnedBy(space: ISpace, player: Player): boolean {
+    return Board.ownedBy(player)(space);
+  }
+
   public serialize(): SerializedBoard {
     return {
       spaces: this.spaces.map((space) => {

@@ -9,7 +9,7 @@ import {SpaceType} from '../../SpaceType';
 import {TileType} from '../../common/TileType';
 import {CardType} from '../CardType';
 import {IProjectCard} from '../IProjectCard';
-import {Tags} from '../Tags';
+import {Tags} from '../../common/cards/Tags';
 import {CardRenderer} from '../render/CardRenderer';
 
 export class SolarFarm extends Card implements IProjectCard {

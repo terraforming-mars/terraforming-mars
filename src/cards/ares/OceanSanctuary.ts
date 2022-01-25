@@ -9,7 +9,7 @@ import {SpaceBonus} from '../../SpaceBonus';
 import {TileType} from '../../common/TileType';
 import {CardType} from '../CardType';
 import {IResourceCard} from '../ICard';
-import {Tags} from '../Tags';
+import {Tags} from '../../common/cards/Tags';
 import {CardRequirements} from '../CardRequirements';
 import {CardRenderer} from '../render/CardRenderer';
 

@@ -9,7 +9,7 @@ import {Player} from '../../Player';
 import {Resources} from '../../common/Resources';
 import {SelectSpace} from '../../inputs/SelectSpace';
 import {SpaceBonus} from '../../SpaceBonus';
-import {Tags} from '../../cards/Tags';
+import {Tags} from '../../common/cards/Tags';
 import {TileType} from '../../common/TileType';
 import {DeferredAction} from '../../deferredActions/DeferredAction';
 import {SelectOption} from '../../inputs/SelectOption';

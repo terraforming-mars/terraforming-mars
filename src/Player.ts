@@ -46,7 +46,7 @@ import {SerializedCard} from './SerializedCard';
 import {SerializedPlayer} from './SerializedPlayer';
 import {SpaceType} from './SpaceType';
 import {StormCraftIncorporated} from './cards/colonies/StormCraftIncorporated';
-import {Tags} from './cards/Tags';
+import {Tags} from './common/cards/Tags';
 import {VictoryPointsBreakdown} from './VictoryPointsBreakdown';
 import {SelectProductionToLose} from './inputs/SelectProductionToLose';
 import {IAresGlobalParametersResponse, ShiftAresGlobalParameters} from './inputs/ShiftAresGlobalParameters';

@@ -47,7 +47,7 @@ import {SerializedPlayer} from './SerializedPlayer';
 import {SpaceBonus} from './SpaceBonus';
 import {SpaceName} from './SpaceName';
 import {SpaceType} from './SpaceType';
-import {Tags} from './cards/Tags';
+import {Tags} from './common/cards/Tags';
 import {TileType} from './common/TileType';
 import {Turmoil} from './turmoil/Turmoil';
 import {RandomMAOptionType} from './RandomMAOptionType';

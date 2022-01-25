@@ -1,6 +1,6 @@
 import {CardName} from './CardName';
 import {Resources} from './common/Resources';
-import {Tags} from './cards/Tags';
+import {Tags} from './common/cards/Tags';
 
 export interface SerializedCard {
   allTags?: Array<Tags>; // For Aridor

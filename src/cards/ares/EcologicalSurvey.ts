@@ -5,7 +5,7 @@ import {ISpace} from '../../boards/ISpace';
 import {SpaceBonus} from '../../SpaceBonus';
 import {Resources} from '../../common/Resources';
 import {ResourceType} from '../../common/ResourceType';
-import {Tags} from '../Tags';
+import {Tags} from '../../common/cards/Tags';
 import {CardRequirements} from '../CardRequirements';
 import {CardRenderer} from '../render/CardRenderer';
 import {SurveyCard} from './SurveyCard';

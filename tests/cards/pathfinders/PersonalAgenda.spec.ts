@@ -3,7 +3,7 @@ import {getTestPlayer, newTestGame} from '../../TestGame';
 import {PersonalAgenda} from '../../../src/cards/pathfinders/PersonalAgenda';
 import {Game} from '../../../src/Game';
 import {Units} from '../../../src/Units';
-import {Tags} from '../../../src/cards/Tags';
+import {Tags} from '../../../src/common/cards/Tags';
 import {TestPlayer} from '../../TestPlayer';
 import {CardType} from '../../../src/cards/CardType';
 

@@ -1,4 +1,4 @@
-import {Tags} from '../cards/Tags';
+import {Tags} from '../common/cards/Tags';
 import {PlayerId} from '../common/Types';
 import {SerializedPathfindersData} from './SerializedPathfindersData';
 

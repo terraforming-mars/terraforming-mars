@@ -1,6 +1,6 @@
 import {Player} from '../Player';
 import {DeferredAction, Priority} from '../deferredActions/DeferredAction';
-import {Tags} from '../cards/Tags';
+import {Tags} from '../common/cards/Tags';
 import {OrOptions} from '../inputs/OrOptions';
 import {SelectOption} from '../inputs/SelectOption';
 import {ICloneTagCard} from '../cards/pathfinders/ICloneTagCard';

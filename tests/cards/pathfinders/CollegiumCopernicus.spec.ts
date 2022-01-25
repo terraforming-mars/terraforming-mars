@@ -14,7 +14,7 @@ import {Europa} from '../../../src/colonies/Europa';
 import {Io} from '../../../src/colonies/Io';
 import {Pluto} from '../../../src/colonies/Pluto';
 import {LunarObservationPost} from '../../../src/cards/moon/LunarObservationPost';
-import {Tags} from '../../../src/cards/Tags';
+import {Tags} from '../../../src/common/cards/Tags';
 import {SelectCard} from '../../../src/inputs/SelectCard';
 
 describe('CollegiumCopernicus', function() {

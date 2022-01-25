@@ -11,7 +11,7 @@ import {PaymentWidgetMixin, SelectHowToPayForProjectCardModel, unit} from '@/cli
 import {PlayerInputModel} from '@/models/PlayerInputModel';
 import {PlayerViewModel, PublicPlayerModel} from '@/models/PlayerModel';
 import {PreferencesManager} from '@/client/utils/PreferencesManager';
-import {Tags} from '@/cards/Tags';
+import {Tags} from '@/common/cards/Tags';
 import {Units} from '@/Units';
 import {CardName} from '@/CardName';
 

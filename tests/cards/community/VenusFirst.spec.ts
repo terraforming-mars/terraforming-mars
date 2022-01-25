@@ -1,6 +1,6 @@
 import {expect} from 'chai';
 import {VenusFirst} from '../../../src/cards/community/VenusFirst';
-import {Tags} from '../../../src/cards/Tags';
+import {Tags} from '../../../src/common/cards/Tags';
 import {Game} from '../../../src/Game';
 import {Player} from '../../../src/Player';
 import {TestingUtils} from '../../TestingUtils';

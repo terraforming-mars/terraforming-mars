@@ -2,7 +2,7 @@ import {Player} from '../src/Player';
 import {PlayerInput} from '../src/PlayerInput';
 import {Color} from '../src/Color';
 import {Units} from '../src/Units';
-import {Tags} from '../src/cards/Tags';
+import {Tags} from '../src/common/cards/Tags';
 import {VictoryPointsBreakdown} from '../src/VictoryPointsBreakdown';
 
 export class TestPlayer extends Player {

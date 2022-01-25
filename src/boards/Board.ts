@@ -2,7 +2,7 @@ import {ISpace, SpaceId} from './ISpace';
 import {Player} from '../Player';
 import {PlayerId} from '../common/Types';
 import {SpaceType} from '../SpaceType';
-import {CITY_TILES, GREENERY_TILES, OCEAN_TILES, OCEAN_UPGRADE_TILES, TileType} from '../common/TileType';
+import {BASE_OCEAN_TILES as UNCOVERED_OCEAN_TILES, CITY_TILES, GREENERY_TILES, OCEAN_TILES, OCEAN_UPGRADE_TILES, TileType} from '../common/TileType';
 import {AresHandler} from '../ares/AresHandler';
 import {SerializedBoard, SerializedSpace} from './SerializedBoard';
 
@@ -250,8 +250,15 @@ export abstract class Board {
     return space.tile !== undefined && CITY_TILES.has(space.tile.tileType);
   }
 
+  // Returns true when the space has an ocean tile or any derivative tiles (ocean city, wetlands)
   public static isOceanSpace(space: ISpace): boolean {
     return space.tile !== undefined && OCEAN_TILES.has(space.tile.tileType);
+  }
+
+  // Returns true when the space is an ocean tile that is not used to cover another ocean.
+  // Used for benefits associated with "when a player places an ocean tile"
+  public static isUncoveredOceanSpace(space: ISpace): boolean {
+    return space.tile !== undefined && UNCOVERED_OCEAN_TILES.has(space.tile.tileType);
   }
 
   public static isGreenerySpace(space: ISpace): boolean {

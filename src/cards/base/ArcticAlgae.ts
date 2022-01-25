@@ -4,7 +4,6 @@ import {Card} from '../Card';
 import {CardType} from '../CardType';
 import {Player} from '../../Player';
 import {ISpace} from '../../boards/ISpace';
-import {TileType} from '../../common/TileType';
 import {CardName} from '../../CardName';
 import {Resources} from '../../common/Resources';
 import {Priority} from '../../deferredActions/DeferredAction';
@@ -12,6 +11,7 @@ import {GainResources} from '../../deferredActions/GainResources';
 import {CardRequirements} from '../CardRequirements';
 import {CardRenderer} from '../render/CardRenderer';
 import {all, max} from '../Options';
+import {Board} from '../../boards/Board';
 
 export class ArcticAlgae extends Card implements IProjectCard {
   constructor() {
@@ -34,7 +34,7 @@ export class ArcticAlgae extends Card implements IProjectCard {
   }
 
   public onTilePlaced(cardOwner: Player, activePlayer: Player, space: ISpace) {
-    if (space.tile?.tileType === TileType.OCEAN) {
+    if (Board.isUncoveredOceanSpace(space)) {
       cardOwner.game.defer(
         new GainResources(cardOwner, Resources.PLANTS, {
           count: 2,

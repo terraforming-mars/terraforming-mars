@@ -4,7 +4,7 @@ import {Player} from '../../Player';
 import {PlayerInput} from '../../PlayerInput';
 import {ICardMetadata} from '../ICardMetadata';
 import {CardName} from '../../CardName';
-import {Tags} from '../Tags';
+import {Tags} from '../../common/cards/Tags';
 import {IProjectCard} from '../IProjectCard';
 import {Units} from '../../Units';
 

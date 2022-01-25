@@ -5,7 +5,7 @@ import {DrawCards} from '../../deferredActions/DrawCards';
 import {CardType} from '../CardType';
 import {CardName} from '../../CardName';
 import {CardRenderer} from '../render/CardRenderer';
-import {Tags} from '../Tags';
+import {Tags} from '../../common/cards/Tags';
 import {Size} from '../render/Size';
 
 export class ReturntoAbandonedTechnology extends Card implements IProjectCard {

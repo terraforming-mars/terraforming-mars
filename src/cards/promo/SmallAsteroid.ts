@@ -2,7 +2,7 @@ import {IProjectCard} from '../IProjectCard';
 import {Card} from '../Card';
 import {CardName} from '../../CardName';
 import {CardType} from '../CardType';
-import {Tags} from '../Tags';
+import {Tags} from '../../common/cards/Tags';
 import {Player} from '../../Player';
 import {RemoveAnyPlants} from '../../deferredActions/RemoveAnyPlants';
 import {CardRenderer} from '../render/CardRenderer';

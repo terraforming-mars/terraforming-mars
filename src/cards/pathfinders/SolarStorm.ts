@@ -5,7 +5,7 @@ import {CardType} from '../CardType';
 import {CardName} from '../../CardName';
 import {CardRenderer} from '../render/CardRenderer';
 import {Resources} from '../../common/Resources';
-import {Tags} from '../Tags';
+import {Tags} from '../../common/cards/Tags';
 import {RemoveResourcesFromCard} from '../../deferredActions/RemoveResourcesFromCard';
 import {ResourceType} from '../../common/ResourceType';
 import {all, digit} from '../Options';

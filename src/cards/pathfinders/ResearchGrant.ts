@@ -3,7 +3,7 @@ import {PreludeCard} from '../prelude/PreludeCard';
 import {CardName} from '../../CardName';
 import {CardRenderer} from '../render/CardRenderer';
 import {Resources} from '../../common/Resources';
-import {Tags} from '../Tags';
+import {Tags} from '../../common/cards/Tags';
 import {Units} from '../../Units';
 
 export class ResearchGrant extends PreludeCard {

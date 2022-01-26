@@ -1,6 +1,6 @@
 import {CardName} from '../../CardName';
 import {CardType} from '../CardType';
-import {Tags} from '../Tags';
+import {Tags} from '../../common/cards/Tags';
 import {CardRenderer} from '../render/CardRenderer';
 import {Card} from '../Card';
 import {CardRequirements} from '../CardRequirements';

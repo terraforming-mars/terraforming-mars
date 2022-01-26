@@ -1,5 +1,5 @@
 import {CardName} from '../../CardName';
-import {Tags} from '../Tags';
+import {Tags} from '../../common/cards/Tags';
 import {PreludeCard} from '../prelude/PreludeCard';
 import {CardRenderer} from '../render/CardRenderer';
 import {PlaceMoonMineTile} from '../../moon/PlaceMoonMineTile';

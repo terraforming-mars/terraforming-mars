@@ -2,7 +2,7 @@ import {expect} from 'chai';
 import {MetallicAsteroid} from '../../../src/cards/ares/MetallicAsteroid';
 import {Game} from '../../../src/Game';
 import {Player} from '../../../src/Player';
-import {SpaceBonus} from '../../../src/SpaceBonus';
+import {SpaceBonus} from '../../../src/common/boards/SpaceBonus';
 import {TileType} from '../../../src/common/TileType';
 import {ARES_OPTIONS_NO_HAZARDS} from '../../ares/AresTestHelper';
 import {TestPlayers} from '../../TestPlayers';

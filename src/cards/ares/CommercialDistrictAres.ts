@@ -1,4 +1,4 @@
-import {SpaceBonus} from '../../SpaceBonus';
+import {SpaceBonus} from '../../common/boards/SpaceBonus';
 import {CardName} from '../../CardName';
 import {CommercialDistrict} from '../base/CommercialDistrict';
 import {CardRenderer} from '../render/CardRenderer';

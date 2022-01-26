@@ -4,7 +4,7 @@ import {CardType} from '../CardType';
 import {CardName} from '../../CardName';
 import {CardRenderer} from '../render/CardRenderer';
 import {Tags} from '../Tags';
-import {SpaceBonus} from '../../SpaceBonus';
+import {SpaceBonus} from '../../common/boards/SpaceBonus';
 import {Player} from '../../Player';
 import {BoardType} from '../../boards/BoardType';
 import {ISpace} from '../../boards/ISpace';

@@ -10,7 +10,7 @@ import {Colony} from './colonies/Colony';
 import {IParty} from './turmoil/parties/IParty';
 import {LogMessage} from './common/logs/LogMessage';
 import {TileType} from './common/TileType';
-import {SpaceBonus} from './SpaceBonus';
+import {SpaceBonus} from './common/boards/SpaceBonus';
 import {IGlobalEvent} from './turmoil/globalEvents/IGlobalEvent';
 import {GlobalEventName} from './turmoil/globalEvents/GlobalEventName';
 import {PartyName} from './turmoil/parties/PartyName';

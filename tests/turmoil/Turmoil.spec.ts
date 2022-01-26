@@ -6,7 +6,7 @@ import {MarsFirst} from '../../src/turmoil/parties/MarsFirst';
 import {Phase} from '../../src/Phase';
 import {OrOptions} from '../../src/inputs/OrOptions';
 import {SelectSpace} from '../../src/inputs/SelectSpace';
-import {SpaceBonus} from '../../src/SpaceBonus';
+import {SpaceBonus} from '../../src/common/boards/SpaceBonus';
 import {Turmoil} from '../../src/turmoil/Turmoil';
 import {TestingUtils} from '../TestingUtils';
 import {TestPlayers} from '../TestPlayers';

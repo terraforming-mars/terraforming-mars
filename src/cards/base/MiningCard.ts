@@ -8,7 +8,7 @@ import {ISpace} from '../../boards/ISpace';
 import {Player} from '../../Player';
 import {Resources} from '../../common/Resources';
 import {SelectSpace} from '../../inputs/SelectSpace';
-import {SpaceBonus} from '../../SpaceBonus';
+import {SpaceBonus} from '../../common/boards/SpaceBonus';
 import {Tags} from '../../cards/Tags';
 import {TileType} from '../../common/TileType';
 import {DeferredAction} from '../../deferredActions/DeferredAction';

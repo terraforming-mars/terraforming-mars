@@ -2,7 +2,7 @@ import {Card, StaticCardProperties} from '../Card';
 import {CardName} from '../../CardName';
 import {Player} from '../../Player';
 import {ISpace} from '../../boards/ISpace';
-import {SpaceBonus} from '../../SpaceBonus';
+import {SpaceBonus} from '../../common/boards/SpaceBonus';
 import {Resources} from '../../common/Resources';
 import {TileType} from '../../common/TileType';
 import {ResourceType} from '../../common/ResourceType';

@@ -1,5 +1,5 @@
 import {CardName} from '../../CardName';
-import {SpaceBonus} from '../../SpaceBonus';
+import {SpaceBonus} from '../../common/boards/SpaceBonus';
 import {LavaFlows} from '../base/LavaFlows';
 import {TileType} from '../../common/TileType';
 import {CardRenderer} from '../render/CardRenderer';

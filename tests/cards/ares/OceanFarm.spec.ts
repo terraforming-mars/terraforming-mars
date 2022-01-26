@@ -4,7 +4,7 @@ import {OceanFarm} from '../../../src/cards/ares/OceanFarm';
 import {ARES_OPTIONS_NO_HAZARDS} from '../../ares/AresTestHelper';
 import {expect} from 'chai';
 import {TileType} from '../../../src/common/TileType';
-import {SpaceBonus} from '../../../src/SpaceBonus';
+import {SpaceBonus} from '../../../src/common/boards/SpaceBonus';
 import {Resources} from '../../../src/common/Resources';
 import {SpaceType} from '../../../src/SpaceType';
 import {TestPlayers} from '../../TestPlayers';

@@ -10,6 +10,7 @@ import {AntidesertificationTechniques} from './AntidesertificationTechniques';
 import {AsteroidResources} from './AsteroidResources';
 import {BotanicalExperience} from './BotanicalExperience';
 import {BreedingFarms} from './BreedingFarms';
+import {BioSol} from './BioSol';
 import {CassiniStation} from './CassiniStation';
 import {CeresSpaceport} from './CeresSpaceport';
 import {Chimera} from './Chimera';
@@ -187,7 +188,7 @@ export const PATHFINDERS_CARD_MANIFEST = new CardManifest({
     {cardName: CardName.MARS_DIRECT, Factory: MarsDirect},
     {cardName: CardName.MARTIAN_INSURANCE_GROUP, Factory: MartianInsuranceGroup},
     // {cardName: CardName.SOLBANK, Factory: SolBank},
-    // {cardName: CardName.BIO_SOL, Factory: BioSol},
+    {cardName: CardName.BIO_SOL, Factory: BioSol},
     // {cardName: CardName.AURORAI, Factory: Aurorai},
     {cardName: CardName.COLLEGIUM_COPERNICUS, Factory: CollegiumCopernicus},
     {cardName: CardName.ROBIN_HAULINGS, Factory: RobinHaulings, compatibility: GameModule.Venus},

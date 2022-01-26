@@ -736,6 +736,10 @@ export class Player implements ISerializable<SerializedPlayer> {
       card.resourceCount += count;
     }
 
+    if (typeof(options) !== 'number' && options.log === true) {
+      LogHelper.logAddResource(this, card, count);
+    }
+
     // Topsoil contract hook
     if (card.resourceType === ResourceType.MICROBE && this.playedCards.map((card) => card.name).includes(CardName.TOPSOIL_CONTRACT)) {
       this.megaCredits += count;
@@ -746,8 +750,9 @@ export class Player implements ISerializable<SerializedPlayer> {
       this.megaCredits += count * 2;
     }
 
-    if (typeof(options) !== 'number' && options.log === true) {
-      LogHelper.logAddResource(this, card, count);
+    // Communication Center Hook
+    if (card.name === CardName.COMMUNICATION_CENTER) {
+      PathfindersExpansion.communicationCenterHook(card, this.game);
     }
   }
 

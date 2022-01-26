@@ -15,7 +15,7 @@ import {CeresSpaceport} from './CeresSpaceport';
 import {Chimera} from './Chimera';
 import {CO2Reducers} from './CO2Reducers';
 import {CollegiumCopernicus} from './CollegiumCopernicus';
-// import {CommunicationCenter} from './CommunicationCenter';
+import {CommunicationCenter} from './CommunicationCenter';
 import {ControlledBloom} from './ControlledBloom';
 import {CoordinatedRaid} from './CoordinatedRaid';
 import {CrewTraining} from './CrewTraining';
@@ -123,7 +123,7 @@ export const PATHFINDERS_CARD_MANIFEST = new CardManifest({
     {cardName: CardName.PRIVATE_SECURITY, Factory: PrivateSecurity},
     {cardName: CardName.SECRET_LABS, Factory: SecretLabs},
     {cardName: CardName.CYANOBACTERIA, Factory: Cyanobacteria},
-    // {cardName: CardName.COMMUNICATION_CENTER, Factory: CommunicationCenter},
+    {cardName: CardName.COMMUNICATION_CENTER, Factory: CommunicationCenter},
     {cardName: CardName.MARTIAN_REPOSITORY, Factory: MartianRepository},
     {cardName: CardName.DATA_LEAK, Factory: DataLeak},
     {cardName: CardName.SMALL_OPEN_PIT_MINE, Factory: SmallOpenPitMine},

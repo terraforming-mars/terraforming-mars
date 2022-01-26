@@ -3,7 +3,7 @@ import {Player} from '../../../src/Player';
 import {Game} from '../../../src/Game';
 import {TileType} from '../../../src/common/TileType';
 import {IndustrialCenterAres} from '../../../src/cards/ares/IndustrialCenterAres';
-import {SpaceBonus} from '../../../src/SpaceBonus';
+import {SpaceBonus} from '../../../src/common/boards/SpaceBonus';
 import {ARES_OPTIONS_NO_HAZARDS} from '../../ares/AresTestHelper';
 import {TestPlayers} from '../../TestPlayers';
 

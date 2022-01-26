@@ -3,7 +3,7 @@ import {Game} from '../../../src/Game';
 import {SelectSpace} from '../../../src/inputs/SelectSpace';
 import {TileType} from '../../../src/common/TileType';
 import {MoholeAreaAres} from '../../../src/cards/ares/MoholeAreaAres';
-import {SpaceBonus} from '../../../src/SpaceBonus';
+import {SpaceBonus} from '../../../src/common/boards/SpaceBonus';
 import {ARES_OPTIONS_NO_HAZARDS} from '../../ares/AresTestHelper';
 import {TestPlayers} from '../../TestPlayers';
 

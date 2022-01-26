@@ -1,4 +1,4 @@
-import {SpaceBonus} from '../../SpaceBonus';
+import {SpaceBonus} from '../../common/boards/SpaceBonus';
 import {TileType} from '../../common/TileType';
 import {CardName} from '../../CardName';
 import {NaturalPreserve} from '../base/NaturalPreserve';

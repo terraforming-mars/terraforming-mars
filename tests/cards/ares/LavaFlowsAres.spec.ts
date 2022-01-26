@@ -5,7 +5,7 @@ import {TileType} from '../../../src/common/TileType';
 import {TestingUtils} from '../../TestingUtils';
 import {TestPlayers} from '../../TestPlayers';
 import {LavaFlowsAres} from '../../../src/cards/ares/LavaFlowsAres';
-import {SpaceBonus} from '../../../src/SpaceBonus';
+import {SpaceBonus} from '../../../src/common/boards/SpaceBonus';
 import {ARES_OPTIONS_NO_HAZARDS} from '../../ares/AresTestHelper';
 
 describe('LavaFlowsAres', function() {

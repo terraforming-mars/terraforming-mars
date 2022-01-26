@@ -44,7 +44,7 @@ import {RemoveColonyFromGame} from './deferredActions/RemoveColonyFromGame';
 import {GainResources} from './deferredActions/GainResources';
 import {SerializedGame} from './SerializedGame';
 import {SerializedPlayer} from './SerializedPlayer';
-import {SpaceBonus} from './SpaceBonus';
+import {SpaceBonus} from './common/boards/SpaceBonus';
 import {SpaceName} from './SpaceName';
 import {SpaceType} from './SpaceType';
 import {Tags} from './common/cards/Tags';

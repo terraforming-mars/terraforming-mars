@@ -3,7 +3,7 @@ import {MiningGuild} from '../../../src/cards/corporation/MiningGuild';
 import {Game} from '../../../src/Game';
 import {Player} from '../../../src/Player';
 import {Resources} from '../../../src/common/Resources';
-import {SpaceBonus} from '../../../src/SpaceBonus';
+import {SpaceBonus} from '../../../src/common/boards/SpaceBonus';
 import {SpaceType} from '../../../src/SpaceType';
 import {Phase} from '../../../src/Phase';
 import {TestingUtils} from '../../TestingUtils';

@@ -6,7 +6,7 @@ import {TestPlayers} from '../TestPlayers';
 import {Player} from '../../src/Player';
 import {SpaceId} from '../../src/boards/ISpace';
 import {IAdjacencyBonus} from '../../src/ares/IAdjacencyBonus';
-import {SpaceBonus} from '../../src/SpaceBonus';
+import {SpaceBonus} from '../../src/common/boards/SpaceBonus';
 
 function addAdjacencyBonus(player: Player, spaceId: SpaceId, adjacency: IAdjacencyBonus = {bonus: [SpaceBonus.HEAT]}): void {
   const space = player.game.board.getSpace(spaceId);

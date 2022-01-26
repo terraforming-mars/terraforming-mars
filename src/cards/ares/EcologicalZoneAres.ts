@@ -1,6 +1,6 @@
 import {CardName} from '../../CardName';
 import {EcologicalZone} from '../base/EcologicalZone';
-import {SpaceBonus} from '../../SpaceBonus';
+import {SpaceBonus} from '../../common/boards/SpaceBonus';
 import {TileType} from '../../common/TileType';
 import {CardRenderer} from '../render/CardRenderer';
 import {played} from '../Options';

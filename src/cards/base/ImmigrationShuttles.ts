@@ -1,5 +1,5 @@
 import {IProjectCard} from '../IProjectCard';
-import {Tags} from '../Tags';
+import {Tags} from '../../common/cards/Tags';
 import {Card} from '../Card';
 import {CardType} from '../CardType';
 import {Player} from '../../Player';
@@ -29,7 +29,7 @@ export class ImmigrationShuttles extends Card implements IProjectCard {
     });
   }
   public override getVictoryPoints(player: Player) {
-    return Math.floor(player.game.getCitiesCount(player) / 3);
+    return Math.floor(player.game.getCitiesCount() / 3);
   }
   public play(player: Player) {
     player.addProduction(Resources.MEGACREDITS, 5);

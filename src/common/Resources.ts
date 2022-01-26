@@ -1,4 +1,3 @@
-
 export enum Resources {
     MEGACREDITS = 'megacredits',
     STEEL = 'steel',

@@ -10,6 +10,7 @@ import {Resources} from '../../common/Resources';
 import {Units} from '../../Units';
 import {all, played} from '../Options';
 import {DeferredAction} from '../../deferredActions/DeferredAction';
+import {Size} from '../render/Size';
 
 export class CommunicationCenter extends Card implements IProjectCard {
   constructor() {
@@ -24,12 +25,9 @@ export class CommunicationCenter extends Card implements IProjectCard {
       metadata: {
         cardNumber: 'Pf28',
         renderData: CardRenderer.builder((b) => {
-          b.effect('Whenever ANY PLAYER plays an event, add 1 data to this card.', (eb) => {
-            eb.event({all, played}).startEffect.data({amount: 1});
-          }).br;
-          b.effect('Remove 3 data to draw a card automatically.', (eb) => {
-            eb.data({amount: 3}).startEffect.cards(1);
-          }).br;
+          b.event({all, played}).colon().data({amount: 1}).nbsp.data({amount: 3, digit: true}).colon().cards(1).br;
+          b.text('(Effect: Whenever ANY PLAYER plays an event, add 1 data to this card.)', Size.TINY, false, false).br;
+          b.text('(Effect: Remove 3 data to draw a card automatically.)', Size.TINY, false, false).br;
           b.minus().production((pb) => pb.energy(1)).data({amount: 2});
         }),
         description: 'Decrease your energy production 1 step. Place 2 data on this card.',

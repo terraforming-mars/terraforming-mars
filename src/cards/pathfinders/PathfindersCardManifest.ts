@@ -8,6 +8,7 @@ import {Ambient} from './Ambient';
 import {Anthozoa} from './Anthozoa';
 import {AntidesertificationTechniques} from './AntidesertificationTechniques';
 import {AsteroidResources} from './AsteroidResources';
+import {BotanicalExperience} from './BotanicalExperience';
 import {BreedingFarms} from './BreedingFarms';
 import {BioSol} from './BioSol';
 import {CassiniStation} from './CassiniStation';
@@ -146,7 +147,7 @@ export const PATHFINDERS_CARD_MANIFEST = new CardManifest({
     {cardName: CardName.LAST_RESORT_INGENUITY, Factory: LastResortIngenuity},
     // // {cardName: CardName.CRASHLANDING, Factory: Crashlanding},                             // COMPLICATED ADJACENCY BONUS RULES
     // // {cardName: CardName.THINK_TANK, Factory: ThinkTank},                                  // COMPLICATED REQUIREMENT RULES
-    // // {cardName: CardName.BOTANICAL_EXPERIENCE, Factory: BotanicalExperience},              // AUTOMATIC INCREASE, TARGETING RULES.
+    {cardName: CardName.BOTANICAL_EXPERIENCE, Factory: BotanicalExperience},
     {cardName: CardName.CRYPTOCURRENCY, Factory: Cryptocurrency},
     {cardName: CardName.RICH_DEPOSITS, Factory: RichDeposits},
     // // *** {cardName: CardName.OUMUAMUA_TYPE_OBJECT_SURVEY, Factory: OumuamuaTypeObjectSurvey},

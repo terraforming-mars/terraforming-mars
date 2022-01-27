@@ -30,9 +30,9 @@ export class BotanicalExperience extends Card implements IProjectCard, IResource
           b.nbsp;
           b.data({amount: 3, digit: true}).asterix().colon().production((pb) => pb.plants(1));
           b.br;
-          b.text('(Effect: Whenever a greenery tile is placed, add 1 data on this card.) ' +
-            '(Effect: Whenever this card has at least 3 data, automatically remove 3 daya to raise your plant production 1 step.) ' +
-            '(Effect: Players may remove your plants, but you only lose half, rounded up.)', Size.SMALL, false, false);
+          b.text('(EFFECT: Whenever a greenery tile is placed, add 1 data on this card.) ' +
+            '(EFFECT: Whenever this card has at least 3 data, automatically remove 3 daya to raise your plant production 1 step.) ' +
+            '(EFFECT: Players may remove your plants, but you only lose half, rounded up.)', Size.SMALL, false, false);
         }),
         description: 'Requires one greenery tile on Mars.',
       },

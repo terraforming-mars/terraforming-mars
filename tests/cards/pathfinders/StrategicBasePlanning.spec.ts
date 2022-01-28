@@ -3,7 +3,7 @@ import {getTestPlayer, newTestGame} from '../../TestGame';
 import {StrategicBasePlanning} from '../../../src/cards/pathfinders/StrategicBasePlanning';
 import {Player} from '../../../src/Player';
 import {SelectSpace} from '../../../src/inputs/SelectSpace';
-import {TileType} from '../../../src/TileType';
+import {TileType} from '../../../src/common/TileType';
 import {SelectColony} from '../../../src/inputs/SelectColony';
 import {ColonyName} from '../../../src/colonies/ColonyName';
 import {Game} from '../../../src/Game';
@@ -41,11 +41,10 @@ describe('StrategicBasePlanning', function() {
 
     expect(buildColonyAction).is.instanceOf(SelectColony);
     const selectColony = buildColonyAction as SelectColony;
-    const colonyName = selectColony.coloniesModel[0].name as ColonyName;
-    const colony = game.colonies.find((c) => c.name === colonyName)!;
+    const colony = selectColony.colonies[0];
     expect(colony.colonies).is.empty;
 
-    selectColony.cb(colonyName);
+    selectColony.cb(colony);
 
     expect(colony.colonies).deep.eq([player.id]);
 

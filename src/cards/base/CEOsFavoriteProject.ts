@@ -23,7 +23,7 @@ export class CEOsFavoriteProject extends Card implements IProjectCard {
       },
     });
   }
-  public canPlay(player: Player): boolean {
+  public override canPlay(player: Player): boolean {
     return player.getCardsWithResources().length > 0 ||
            player.getSelfReplicatingRobotsTargetCards().length > 0;
   }

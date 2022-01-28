@@ -215,6 +215,24 @@
     <template v-else-if="title ===  CardName.MARTIAN_INSURANCE_GROUP">
       <div class="card-martian-insurance-group-logo"></div>
     </template>
+    <template v-else-if="title ===  CardName.ROBIN_HAULINGS">
+      <div class="card-robin-haulings-logo"></div>
+    </template>
+    <template v-else-if="title ===  CardName.COLLEGIUM_COPERNICUS">
+      <div class="card-collegium-copernicus-logo"></div>
+    </template>
+    <template v-else-if="title ===  CardName.MARS_DIRECT">
+      <div class="card-mars-direct-logo"></div>
+    </template>
+    <template v-else-if="title ===  CardName.AMBIENT">
+      <div class="card-ambient-logo"></div>
+    </template>
+    <template v-else-if="title ===  CardName.SOYLENT_SEEDLING_SYSTEMS">
+      <div class="card-soylent-logo"></div>
+    </template>
+    <template v-else-if="title ===  CardName.BIO_SOL">
+      <div class="card-bio-sol-logo"></div>
+    </template>
     <template v-else-if="title ===  CardName.CURIOSITY_II">
       <div class="card-curiosity-ii-logo">Curiosity II</div>
     </template>

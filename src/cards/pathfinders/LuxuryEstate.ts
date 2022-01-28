@@ -4,10 +4,9 @@ import {Card} from '../Card';
 import {CardType} from '../CardType';
 import {CardName} from '../../CardName';
 import {CardRenderer} from '../render/CardRenderer';
-import {Resources} from '../../Resources';
+import {Resources} from '../../common/Resources';
 import {Tags} from '../Tags';
 import {CardRequirements} from '../CardRequirements';
-import {TileType} from '../../TileType';
 
 export class LuxuryEstate extends Card implements IProjectCard {
   constructor() {
@@ -29,7 +28,7 @@ export class LuxuryEstate extends Card implements IProjectCard {
   }
 
   public play(player: Player) {
-    const count = player.getCitiesCount() + player.game.getSpaceCount(TileType.GREENERY, player);
+    const count = player.game.getCitiesCount(player) + player.game.getGreeneriesCount(player);
     player.addResource(Resources.TITANIUM, count, {log: true});
     return undefined;
   }

@@ -3,7 +3,7 @@ import {DesertSettler} from '../../src/awards/DesertSettler';
 import {Game} from '../../src/Game';
 import {Player} from '../../src/Player';
 import {SpaceType} from '../../src/SpaceType';
-import {TileType} from '../../src/TileType';
+import {TileType} from '../../src/common/TileType';
 import {TestPlayers} from '../TestPlayers';
 import {ARES_OPTIONS_NO_HAZARDS} from './AresTestHelper';
 import {TestingUtils} from '../TestingUtils';

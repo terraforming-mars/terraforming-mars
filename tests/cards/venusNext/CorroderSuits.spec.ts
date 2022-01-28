@@ -2,10 +2,11 @@ import {expect} from 'chai';
 import {AerialMappers} from '../../../src/cards/venusNext/AerialMappers';
 import {CorroderSuits} from '../../../src/cards/venusNext/CorroderSuits';
 import {Dirigibles} from '../../../src/cards/venusNext/Dirigibles';
+import {FloaterUrbanism} from '../../../src/cards/pathfinders/FloaterUrbanism';
 import {Game} from '../../../src/Game';
 import {SelectCard} from '../../../src/inputs/SelectCard';
 import {Player} from '../../../src/Player';
-import {Resources} from '../../../src/Resources';
+import {Resources} from '../../../src/common/Resources';
 import {TestPlayers} from '../../TestPlayers';
 
 describe('CorroderSuits', function() {
@@ -43,5 +44,14 @@ describe('CorroderSuits', function() {
         action!.cb([card2]);
         expect(player.getResourcesOnCard(card2)).to.eq(1);
         expect(player.getProduction(Resources.MEGACREDITS)).to.eq(2);
+  });
+
+  it('Should play - specialized resource type', function() {
+    const card2 = new FloaterUrbanism();
+    player.playedCards.push(card2);
+
+    card.play(player);
+    expect(player.getResourcesOnCard(card2)).to.eq(1);
+    expect(player.getProduction(Resources.MEGACREDITS)).to.eq(2);
   });
 });

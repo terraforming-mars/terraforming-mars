@@ -21,9 +21,9 @@ import {SelectHowToPayForProjectCard} from '../inputs/SelectHowToPayForProjectCa
 import {SelectPlayer} from '../inputs/SelectPlayer';
 import {SelectSpace} from '../inputs/SelectSpace';
 import {SpaceHighlight, SpaceModel} from './SpaceModel';
-import {TileType} from '../TileType';
+import {TileType} from '../common/TileType';
 import {Phase} from '../Phase';
-import {Resources} from '../Resources';
+import {Resources} from '../common/Resources';
 import {CardType} from '../cards/CardType';
 import {
   ClaimedMilestoneModel,
@@ -77,7 +77,7 @@ export class Server {
       lastSoloGeneration: game.lastSoloGeneration(),
       milestones: this.getMilestones(game),
       moon: MoonModel.serialize(game),
-      oceans: game.board.getOceansOnBoard(),
+      oceans: game.board.getOceanCount(),
       oxygenLevel: game.getOxygenLevel(),
       passedPlayers: game.getPassedPlayers(),
       pathfinders: PathfindersModel.serialize(game),
@@ -229,6 +229,7 @@ export class Server {
       canUseSteel: undefined,
       canUseTitanium: undefined,
       canUseHeat: undefined,
+      canUseSeeds: undefined,
       players: undefined,
       availableSpaces: undefined,
       min: undefined,
@@ -237,6 +238,7 @@ export class Server {
       microbes: undefined,
       floaters: undefined,
       science: undefined,
+      seeds: undefined,
       coloniesModel: undefined,
       payProduction: undefined,
       aresData: undefined,
@@ -267,6 +269,7 @@ export class Server {
       playerInputModel.floaters = shtpfpc.floaters;
       playerInputModel.canUseHeat = shtpfpc.canUseHeat;
       playerInputModel.science = shtpfpc.scienceResources;
+      playerInputModel.seeds = shtpfpc.seedResources;
       break;
     case PlayerInputTypes.SELECT_CARD:
       const selectCard = waitingFor as SelectCard<ICard>;
@@ -284,13 +287,15 @@ export class Server {
       }
       break;
     case PlayerInputTypes.SELECT_COLONY:
-      playerInputModel.coloniesModel = (waitingFor as SelectColony).coloniesModel;
+      playerInputModel.coloniesModel = ColonyModel.getColonyModel(player.game, (waitingFor as SelectColony).colonies);
       break;
     case PlayerInputTypes.SELECT_HOW_TO_PAY:
       playerInputModel.amount = (waitingFor as SelectHowToPay).amount;
       playerInputModel.canUseSteel = (waitingFor as SelectHowToPay).canUseSteel;
       playerInputModel.canUseTitanium = (waitingFor as SelectHowToPay).canUseTitanium;
       playerInputModel.canUseHeat = (waitingFor as SelectHowToPay).canUseHeat;
+      playerInputModel.canUseSeeds = (waitingFor as SelectHowToPay).canUseSeeds;
+      playerInputModel.seeds = player.getSpendableSeedResources();
       break;
     case PlayerInputTypes.SELECT_PLAYER:
       playerInputModel.players = (waitingFor as SelectPlayer).players.map(
@@ -380,7 +385,7 @@ export class Server {
       cardCost: player.cardCost,
       cardDiscount: player.cardDiscount,
       cardsInHandNbr: player.cardsInHand.length,
-      citiesCount: player.getCitiesCount(),
+      citiesCount: player.game.getCitiesCount(player),
       coloniesCount: player.getColoniesCount(),
       color: player.color,
       corporationCard: Server.getCorporationCard(player),

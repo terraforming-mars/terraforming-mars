@@ -113,10 +113,17 @@ export default Vue.extend({
               if (Notification.permission !== 'granted') {
                 Notification.requestPermission();
               } else if (Notification.permission === 'granted') {
-                new Notification(constants.APP_NAME, {
-                  icon: '/favicon.ico',
-                  body: 'It\'s your turn!',
-                });
+                try {
+                  // this needs to be updated to use a serviceWorker
+                  // on browsers where this constructor isn't supported
+                  // the error will be ignored instead of going uncaught
+                  new Notification(constants.APP_NAME, {
+                    icon: '/favicon.ico',
+                    body: 'It\'s your turn!',
+                  });
+                } catch (e) {
+                  console.warn('unable to create notification', e);
+                }
               }
 
               const soundsEnabled = PreferencesManager.load('enable_sounds') === '1';

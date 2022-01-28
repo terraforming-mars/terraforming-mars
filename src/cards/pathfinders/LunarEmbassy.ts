@@ -7,7 +7,7 @@ import {SpaceName} from '../../SpaceName';
 import {SpaceType} from '../../SpaceType';
 import {CardName} from '../../CardName';
 import {CardRenderer} from '../render/CardRenderer';
-import {Resources} from '../../Resources';
+import {Resources} from '../../common/Resources';
 import {played} from '../Options';
 
 export class LunarEmbassy extends Card implements IProjectCard {
@@ -27,7 +27,7 @@ export class LunarEmbassy extends Card implements IProjectCard {
             .br
             .cards(1).city().asterix().br;
         }),
-        description: 'Increase your M€ production 2 steps, and plant production 1 step for every 2 earth tags (including this.) ' +
+        description: 'Increase your M€ production 3 steps, and plant production 1 step for every 2 earth tags (including this.) ' +
           'Draw a card. Place a city tile ON THE RESERVED AREA.',
       },
     });

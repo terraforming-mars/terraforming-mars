@@ -1,6 +1,6 @@
 import {expect} from 'chai';
 import {LunaGovernor} from '../../../src/cards/colonies/LunaGovernor';
-import {Resources} from '../../../src/Resources';
+import {Resources} from '../../../src/common/Resources';
 import {TestPlayers} from '../../TestPlayers';
 
 describe('LunaGovernor', function() {

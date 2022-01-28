@@ -1,9 +1,9 @@
-import {Tags} from '../Tags';
+import {Tags} from '../../common/cards/Tags';
 import {CardType} from '../CardType';
 import {Player} from '../../Player';
 import {SpaceName} from '../../SpaceName';
 import {SpaceType} from '../../SpaceType';
-import {Resources} from '../../Resources';
+import {Resources} from '../../common/Resources';
 import {IActionCard, ICard} from '../ICard';
 import {SelectCard} from '../../inputs/SelectCard';
 import {CardName} from '../../CardName';
@@ -37,7 +37,7 @@ export class MaxwellBase extends Card implements IActionCard {
       },
     });
   };
-  public canPlay(player: Player): boolean {
+  public override canPlay(player: Player): boolean {
     return player.getProduction(Resources.ENERGY) >= 1;
   }
   public play(player: Player) {

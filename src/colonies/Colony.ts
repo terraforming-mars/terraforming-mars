@@ -1,7 +1,6 @@
 import {AddResourcesToCard} from '../deferredActions/AddResourcesToCard';
 import {CardName} from '../CardName';
 import {ColonyBenefit} from './ColonyBenefit';
-import {ColonyModel} from '../models/ColonyModel';
 import {ColonyName} from './ColonyName';
 import {DeferredAction, Priority} from '../deferredActions/DeferredAction';
 import {DiscardCards} from '../deferredActions/DiscardCards';
@@ -11,10 +10,11 @@ import {IncreaseColonyTrack} from '../deferredActions/IncreaseColonyTrack';
 import {LogHelper} from '../LogHelper';
 import {MAX_COLONY_TRACK_POSITION, PLAYER_DELEGATES_COUNT} from '../constants';
 import {PlaceOceanTile} from '../deferredActions/PlaceOceanTile';
-import {Player, PlayerId} from '../Player';
+import {Player} from '../Player';
+import {PlayerId} from '../common/Types';
 import {PlayerInput} from '../PlayerInput';
-import {ResourceType} from '../ResourceType';
-import {Resources} from '../Resources';
+import {Resources} from '../common/Resources';
+import {ResourceType} from '../common/ResourceType';
 import {ScienceTagCard} from '../cards/community/ScienceTagCard';
 import {SelectColony} from '../inputs/SelectColony';
 import {SelectPlayer} from '../inputs/SelectPlayer';
@@ -31,7 +31,7 @@ type TradeOptions = {
   usesTradeFleet?: boolean;
   decreaseTrackAfterTrade?: boolean;
   giveColonyBonuses?: boolean;
-  // selfishTrade?: boolean; Will be used shortly.
+  selfishTrade?: boolean;
 };
 export abstract class Colony implements SerializedColony {
     public abstract name: ColonyName;
@@ -150,7 +150,7 @@ export abstract class Colony implements SerializedColony {
 
       // !== false because default is true.
       if (options.giveColonyBonuses !== false) {
-        player.game.defer(new GiveColonyBonus(player, this));
+        player.game.defer(new GiveColonyBonus(player, this, options.selfishTrade));
       }
 
       // !== false because default is true.
@@ -189,20 +189,14 @@ export abstract class Colony implements SerializedColony {
 
       case ColonyBenefit.COPY_TRADE:
         const openColonies = game.colonies.filter((colony) => colony.isActive);
-        const coloniesModel: Array<ColonyModel> = game.getColoniesModel(openColonies);
         action = new DeferredAction(
           player,
-          () => new SelectColony('Select colony to gain trade income from', 'Select', coloniesModel, (colonyName: ColonyName) => {
-            openColonies.forEach((colony) => {
-              if (colony.name === colonyName) {
-                game.log('${0} gained ${1} trade bonus', (b) => b.player(player).colony(colony));
-                colony.handleTrade(player, {
-                  usesTradeFleet: false,
-                  decreaseTrackAfterTrade: false,
-                  giveColonyBonuses: false,
-                });
-              }
-              return undefined;
+          () => new SelectColony('Select colony to gain trade income from', 'Select', openColonies, (colony: Colony) => {
+            game.log('${0} gained ${1} trade bonus', (b) => b.player(player).colony(colony));
+            colony.handleTrade(player, {
+              usesTradeFleet: false,
+              decreaseTrackAfterTrade: false,
+              giveColonyBonuses: false,
             });
             return undefined;
           }),

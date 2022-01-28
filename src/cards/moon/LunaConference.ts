@@ -2,15 +2,15 @@ import {CardName} from '../../CardName';
 import {Player} from '../../Player';
 import {CardType} from '../CardType';
 import {IProjectCard} from '../IProjectCard';
-import {Tags} from '../Tags';
+import {Tags} from '../../common/cards/Tags';
 import {CardRenderer} from '../render/CardRenderer';
 import {PartyName} from '../../turmoil/parties/PartyName';
 import {MoonExpansion} from '../../moon/MoonExpansion';
-import {TileType} from '../../TileType';
+import {TileType} from '../../common/TileType';
 import {CardRequirements} from '../CardRequirements';
 import {Card} from '../Card';
 import {Size} from '../render/Size';
-import {Resources} from '../../Resources';
+import {Resources} from '../../common/Resources';
 import {all} from '../Options';
 
 export class LunaConference extends Card implements IProjectCard {
@@ -35,8 +35,8 @@ export class LunaConference extends Card implements IProjectCard {
   };
 
   public play(player: Player) {
-    const moonRoadCount = MoonExpansion.tiles(player.game, TileType.MOON_ROAD, {surfaceOnly: true}).length;
-    const moonColonyCount = MoonExpansion.tiles(player.game, TileType.MOON_COLONY, {surfaceOnly: true}).length;
+    const moonRoadCount = MoonExpansion.spaces(player.game, TileType.MOON_ROAD, {surfaceOnly: true}).length;
+    const moonColonyCount = MoonExpansion.spaces(player.game, TileType.MOON_COLONY, {surfaceOnly: true}).length;
     player.addResource(Resources.MEGACREDITS, (moonRoadCount + moonColonyCount) * 2, {log: true});
 
     return undefined;

@@ -3,7 +3,7 @@ import {Tags} from '../Tags';
 import {CardType} from '../CardType';
 import {Player} from '../../Player';
 import {CardName} from '../../CardName';
-import {ResourceType} from '../../ResourceType';
+import {ResourceType} from '../../common/ResourceType';
 import {SelectOption} from '../../inputs/SelectOption';
 import {OrOptions} from '../../inputs/OrOptions';
 import {IResourceCard} from '../ICard';
@@ -35,7 +35,7 @@ export class TitanAirScrapping extends Card implements IProjectCard, IResourceCa
     });
   }
 
-  public resourceCount: number = 0;
+  public override resourceCount: number = 0;
 
   public canAct(player: Player): boolean {
     if (player.titanium > 0) {

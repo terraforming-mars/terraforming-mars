@@ -6,7 +6,7 @@ import {AddResourcesToCards} from '../../src/deferredActions/AddResourcesToCards
 import {Game} from '../../src/Game';
 import {TestPlayers} from '../TestPlayers';
 import {TestPlayer} from '../TestPlayer';
-import {ResourceType} from '../../src/ResourceType';
+import {ResourceType} from '../../src/common/ResourceType';
 import {AndOptions} from '../../src/inputs/AndOptions';
 
 describe('AddResourcesToCards', function() {

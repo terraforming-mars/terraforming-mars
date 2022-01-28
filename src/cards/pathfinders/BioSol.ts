@@ -1,0 +1,55 @@
+import {Card} from '../Card';
+import {CorporationCard} from '../corporation/CorporationCard';
+import {Tags} from '../Tags';
+import {Player} from '../../Player';
+import {CardName} from '../../CardName';
+import {CardType} from '../CardType';
+import {CardRenderer} from '../render/CardRenderer';
+import {played} from '../Options';
+import {IActionCard, VictoryPoints} from '../ICard';
+import {ResourceType} from '../../common/ResourceType';
+import {AddResourcesToCard} from '../../deferredActions/AddResourcesToCard';
+
+export class BioSol extends Card implements CorporationCard, IActionCard {
+  constructor() {
+    super({
+      cardType: CardType.CORPORATION,
+      name: CardName.BIO_SOL,
+      tags: [Tags.MICROBE],
+      startingMegaCredits: 42,
+      resourceType: ResourceType.MICROBE,
+      victoryPoints: VictoryPoints.resource(1, 3),
+
+      initialActionText: 'Draw 2 cards with a microbe tag',
+
+      metadata: {
+        cardNumber: 'PfC14',
+        description: 'You start with 42 M€. As your first action, draw 2 cards with a microbe tag.',
+        renderData: CardRenderer.builder((b) => {
+          b.megacredits(42).cards(2, {secondaryTag: Tags.MICROBE}).br;
+          b.corpBox('action', (corpbox) => corpbox.action(
+            'Add 1 microbe to ANY card',
+            (ab) => ab.empty().startAction.microbes(1, {played}).asterix()));
+        }),
+      },
+    });
+  }
+
+  public play() {
+    return undefined;
+  }
+
+  public initialAction(player: Player) {
+    player.drawCard(2, {tag: Tags.MICROBE});
+    return undefined;
+  }
+
+  public canAct() {
+    return true;
+  }
+
+  public action(player: Player) {
+    player.game.defer(new AddResourcesToCard(player, ResourceType.MICROBE));
+    return undefined;
+  }
+}

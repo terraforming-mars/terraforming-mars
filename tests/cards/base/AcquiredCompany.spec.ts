@@ -1,7 +1,7 @@
 
 import {expect} from 'chai';
 import {AcquiredCompany} from '../../../src/cards/base/AcquiredCompany';
-import {Resources} from '../../../src/Resources';
+import {Resources} from '../../../src/common/Resources';
 import {TestPlayers} from '../../TestPlayers';
 
 describe('AcquiredCompany', function() {

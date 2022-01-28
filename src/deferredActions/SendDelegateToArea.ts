@@ -1,4 +1,5 @@
-import {Player, PlayerId} from '../Player';
+import {Player} from '../Player';
+import {PlayerId} from '../common/Types';
 import {SelectPartyToSendDelegate} from '../inputs/SelectPartyToSendDelegate';
 import {DeferredAction, Priority} from './DeferredAction';
 import {SelectHowToPayDeferred} from './SelectHowToPayDeferred';

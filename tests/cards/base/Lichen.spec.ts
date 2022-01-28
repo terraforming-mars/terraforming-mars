@@ -2,7 +2,7 @@ import {expect} from 'chai';
 import {Lichen} from '../../../src/cards/base/Lichen';
 import {Game} from '../../../src/Game';
 import {Player} from '../../../src/Player';
-import {Resources} from '../../../src/Resources';
+import {Resources} from '../../../src/common/Resources';
 import {TestPlayers} from '../../TestPlayers';
 
 describe('Lichen', function() {

@@ -2,10 +2,10 @@ import {IProjectCard} from '../IProjectCard';
 import {Tags} from '../Tags';
 import {Player} from '../../Player';
 import {CardType} from '../CardType';
-import {Resources} from '../../Resources';
+import {Resources} from '../../common/Resources';
 import {CardName} from '../../CardName';
 import {SelectSpace} from '../../inputs/SelectSpace';
-import {TileType} from '../../TileType';
+import {TileType} from '../../common/TileType';
 import {ISpace} from '../../boards/ISpace';
 import {Board} from '../../boards/Board';
 import {CardRequirements} from '../CardRequirements';
@@ -34,7 +34,7 @@ export class GreatDamPromo extends Card implements IProjectCard {
     });
   }
 
-  public canPlay(player: Player): boolean {
+  public override canPlay(player: Player): boolean {
     return this.getAvailableSpaces(player).length > 0;
   }
 

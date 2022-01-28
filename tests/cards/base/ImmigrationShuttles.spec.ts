@@ -1,7 +1,7 @@
 import {expect} from 'chai';
 import {ImmigrationShuttles} from '../../../src/cards/base/ImmigrationShuttles';
 import {Game} from '../../../src/Game';
-import {Resources} from '../../../src/Resources';
+import {Resources} from '../../../src/common/Resources';
 import {TestPlayers} from '../../TestPlayers';
 
 describe('ImmigrationShuttles', function() {
@@ -16,7 +16,10 @@ describe('ImmigrationShuttles', function() {
     for (let i = 0; i < 5; i++) {
       game.addCityTile(player, game.board.getAvailableSpacesOnLand(player)[0].id);
     }
-    expect(game.getCitiesInPlay()).to.eq(5);
+    expect(game.getCitiesCount()).to.eq(5);
     expect(card.getVictoryPoints(player)).to.eq(1);
+    game.addCityTile(redPlayer, game.board.getAvailableSpacesOnLand(player)[0].id);
+    expect(game.getCitiesCount()).to.eq(6);
+    expect(card.getVictoryPoints(player)).to.eq(2);
   });
 });

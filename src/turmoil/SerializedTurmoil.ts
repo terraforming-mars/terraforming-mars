@@ -3,7 +3,7 @@ import {PartyName} from './parties/PartyName';
 import {SerializedGlobalEventDealer} from './globalEvents/SerializedGlobalEventDealer';
 import {SerializedPoliticalAgendasData} from './PoliticalAgendas';
 import {NeutralPlayer} from './Turmoil';
-import {PlayerId} from '../Player';
+import {PlayerId} from '../common/Types';
 
 export interface SerializedParty {
     name: PartyName;

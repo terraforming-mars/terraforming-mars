@@ -1,7 +1,7 @@
 import {CardType} from '../CardType';
 import {Player} from '../../Player';
 import {CardName} from '../../CardName';
-import {Resources} from '../../Resources';
+import {Resources} from '../../common/Resources';
 import {CardRequirements} from '../CardRequirements';
 import {CardRenderer} from '../render/CardRenderer';
 import {Size} from '../render/Size';
@@ -30,7 +30,7 @@ export class AerosportTournament extends Card {
   };
 
   public play(player: Player) {
-    player.addResource(Resources.MEGACREDITS, player.game.getCitiesInPlay(), {log: true});
+    player.addResource(Resources.MEGACREDITS, player.game.getCitiesCount(), {log: true});
     return undefined;
   }
 }

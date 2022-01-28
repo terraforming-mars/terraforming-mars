@@ -6,8 +6,8 @@ import {TestPlayers} from '../../TestPlayers';
 import {TestPlayer} from '../../TestPlayer';
 import {LunaResort} from '../../../src/cards/moon/LunaResort';
 import {expect} from 'chai';
-import {Resources} from '../../../src/Resources';
-import {TileType} from '../../../src/TileType';
+import {Resources} from '../../../src/common/Resources';
+import {TileType} from '../../../src/common/TileType';
 
 const MOON_OPTIONS = TestingUtils.setCustomGameOptions({moonExpansion: true});
 

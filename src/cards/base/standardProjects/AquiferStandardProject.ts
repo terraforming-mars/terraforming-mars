@@ -1,7 +1,6 @@
 import {Player} from '../../../Player';
 import {CardName} from '../../../CardName';
 import {CardRenderer} from '../../render/CardRenderer';
-import {MAX_OCEAN_TILES} from '../../../constants';
 import {PlaceOceanTile} from '../../../deferredActions/PlaceOceanTile';
 import {StandardProjectCard} from '../../StandardProjectCard';
 
@@ -21,8 +20,8 @@ export class AquiferStandardProject extends StandardProjectCard {
     });
   }
 
-  public canAct(player: Player): boolean {
-    if (player.game.board.getOceansOnBoard() === MAX_OCEAN_TILES) return false;
+  public override canAct(player: Player): boolean {
+    if (!player.game.canAddOcean()) return false;
     return super.canAct(player);
   }
 

@@ -1,8 +1,8 @@
 import {CardName} from '../../CardName';
 import {Player} from '../../Player';
-import {Tags} from '../Tags';
+import {Tags} from '../../common/cards/Tags';
 import {PreludeCard} from '../prelude/PreludeCard';
-import {TileType} from '../../TileType';
+import {TileType} from '../../common/TileType';
 import {CardRenderer} from '../render/CardRenderer';
 import {PlaceMoonRoadTile} from '../../moon/PlaceMoonRoadTile';
 

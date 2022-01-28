@@ -3,7 +3,7 @@ import {CorporationCard} from '../corporation/CorporationCard';
 import {Tags} from '../Tags';
 import {Player} from '../../Player';
 import {ISpace} from '../../boards/ISpace';
-import {Resources} from '../../Resources';
+import {Resources} from '../../common/Resources';
 import {CardName} from '../../CardName';
 import {CardType} from '../CardType';
 import {CardRenderer} from '../render/CardRenderer';
@@ -14,7 +14,7 @@ import {SelectOption} from '../../inputs/SelectOption';
 import {SelectHowToPayDeferred} from '../../deferredActions/SelectHowToPayDeferred';
 import {DrawCards} from '../../deferredActions/DrawCards';
 import {SpaceType} from '../../SpaceType';
-import {SpaceBonus} from '../../SpaceBonus';
+import {SpaceBonus} from '../../common/boards/SpaceBonus';
 import {Phase} from '../../Phase';
 import {Units} from '../../Units';
 

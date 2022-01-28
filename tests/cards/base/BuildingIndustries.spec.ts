@@ -1,7 +1,7 @@
 import {expect} from 'chai';
 import {BuildingIndustries} from '../../../src/cards/base/BuildingIndustries';
 import {Player} from '../../../src/Player';
-import {Resources} from '../../../src/Resources';
+import {Resources} from '../../../src/common/Resources';
 import {TestPlayers} from '../../TestPlayers';
 
 describe('BuildingIndustries', function() {

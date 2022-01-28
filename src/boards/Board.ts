@@ -1,7 +1,8 @@
 import {ISpace, SpaceId} from './ISpace';
-import {Player, PlayerId} from '../Player';
+import {Player} from '../Player';
+import {PlayerId} from '../common/Types';
 import {SpaceType} from '../SpaceType';
-import {CITY_TILES, OCEAN_TILES, TileType} from '../TileType';
+import {BASE_OCEAN_TILES as UNCOVERED_OCEAN_TILES, CITY_TILES, GREENERY_TILES, OCEAN_TILES, OCEAN_UPGRADE_TILES, TileType} from '../common/TileType';
 import {AresHandler} from '../ares/AresHandler';
 import {SerializedBoard, SerializedSpace} from './SerializedBoard';
 
@@ -106,18 +107,36 @@ export abstract class Board {
     );
   }
 
-  public getOceansOnBoard(countUpgradedOceans: boolean = true): number {
-    return this.getOceansTiles(countUpgradedOceans).length;
+  /*
+   * Returns the number of oceans on the board.
+   *
+   * The default condition is to return those oceans used to count toward the global parameter, so
+   * upgraded oceans are included, but Wetlands is not. That's why the boolean values have different defaults.
+   */
+  public getOceanCount(include?: {upgradedOceans?: boolean, wetlands?: boolean}): number {
+    return this.getOceanSpaces(include).length;
   }
 
-  public getOceansTiles(countUpgradedOceans: boolean): Array<ISpace> {
-    if (!countUpgradedOceans) {
-      return this.spaces.filter((space) => space.tile !== undefined &&
-                      space.tile.tileType === TileType.OCEAN,
-      );
-    } else {
-      return this.spaces.filter((space) => Board.isOceanSpace(space));
-    }
+  /*
+   * Returns spaces on the board with ocean tiless.
+   *
+   * The default condition is to return those oceans used to count toward the global parameter, so
+   * upgraded oceans are included, but Wetlands is not. That's why the boolean values have different defaults.
+   */
+  public getOceanSpaces(include?: {upgradedOceans?: boolean, wetlands?: boolean}): Array<ISpace> {
+    const spaces = this.spaces.filter((space) => {
+      if (!Board.isOceanSpace(space)) return false;
+      if (space.tile?.tileType === undefined) return false;
+      const tileType = space.tile.tileType;
+      if (OCEAN_UPGRADE_TILES.has(tileType)) {
+        return include?.upgradedOceans ?? true;
+      }
+      if (tileType === TileType.WETLANDS) {
+        return include?.wetlands ?? false;
+      }
+      return true;
+    });
+    return spaces;
   }
 
   public getSpaces(spaceType: SpaceType, _player : Player): Array<ISpace> {
@@ -231,8 +250,23 @@ export abstract class Board {
     return space.tile !== undefined && CITY_TILES.has(space.tile.tileType);
   }
 
+  // Returns true when the space has an ocean tile or any derivative tiles (ocean city, wetlands)
   public static isOceanSpace(space: ISpace): boolean {
     return space.tile !== undefined && OCEAN_TILES.has(space.tile.tileType);
+  }
+
+  // Returns true when the space is an ocean tile that is not used to cover another ocean.
+  // Used for benefits associated with "when a player places an ocean tile"
+  public static isUncoveredOceanSpace(space: ISpace): boolean {
+    return space.tile !== undefined && UNCOVERED_OCEAN_TILES.has(space.tile.tileType);
+  }
+
+  public static isGreenerySpace(space: ISpace): boolean {
+    return space.tile !== undefined && GREENERY_TILES.has(space.tile.tileType);
+  }
+
+  public static ownedBy(player: Player): (space: ISpace) => boolean {
+    return (space: ISpace) => space.player?.id === player.id;
   }
 
   public serialize(): SerializedBoard {

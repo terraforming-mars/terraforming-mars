@@ -7,13 +7,13 @@ import {StratosphericBirds} from '../../../src/cards/venusNext/StratosphericBird
 import {Game} from '../../../src/Game';
 import {SelectCard} from '../../../src/inputs/SelectCard';
 import {Player} from '../../../src/Player';
-import {Resources} from '../../../src/Resources';
+import {Resources} from '../../../src/common/Resources';
 import {TestingUtils} from '../../TestingUtils';
 import {TestPlayers} from '../../TestPlayers';
 import {CardName} from '../../../src/CardName';
 import {Tags} from '../../../src/cards/Tags';
 import {CardType} from '../../../src/cards/CardType';
-import {ResourceType} from '../../../src/ResourceType';
+import {ResourceType} from '../../../src/common/ResourceType';
 import {IProjectCard} from '../../../src/cards/IProjectCard';
 
 describe('MaxwellBase', function() {

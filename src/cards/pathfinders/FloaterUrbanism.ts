@@ -6,7 +6,7 @@ import {Card} from '../Card';
 import {CardType} from '../CardType';
 import {CardName} from '../../CardName';
 import {CardRenderer} from '../render/CardRenderer';
-import {ResourceType} from '../../ResourceType';
+import {ResourceType} from '../../common/ResourceType';
 import {Tags} from '../Tags';
 import {CardRequirements} from '../CardRequirements';
 import {SelectCard} from '../../inputs/SelectCard';
@@ -35,7 +35,7 @@ export class FloaterUrbanism extends Card implements IProjectCard, IActionCard, 
     });
   }
 
-  public resourceCount = 0;
+  public override resourceCount = 0;
 
   public canAct(player: Player) {
     return player.getResourceCount(ResourceType.FLOATER) > 0;

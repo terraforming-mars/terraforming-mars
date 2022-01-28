@@ -5,7 +5,7 @@ import {Player} from '../../../src/Player';
 import {SelectColony} from '../../../src/inputs/SelectColony';
 import {ColonyName} from '../../../src/colonies/ColonyName';
 import {Game} from '../../../src/Game';
-import {Resources} from '../../../src/Resources';
+import {Resources} from '../../../src/common/Resources';
 
 describe('VitalColony', function() {
   let card: VitalColony;
@@ -36,11 +36,11 @@ describe('VitalColony', function() {
     expect(buildColonyAction).is.instanceOf(SelectColony);
 
     const selectColony = buildColonyAction as SelectColony;
-    const colonyName = selectColony.coloniesModel[0].name as ColonyName;
+    const colonyName = selectColony.colonies[0].name as ColonyName;
 
     expect(colonyName).eq(ColonyName.GANYMEDE);
 
-    selectColony.cb(colonyName);
+    selectColony.cb(selectColony.colonies[0]);
 
     expect(player.getProduction(Resources.PLANTS)).eq(2);
   });

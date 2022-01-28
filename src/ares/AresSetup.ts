@@ -1,7 +1,7 @@
 import {Player} from '../Player';
 import {IAresData} from './IAresData';
 import {Game} from '../Game';
-import {TileType} from '../TileType';
+import {TileType} from '../common/TileType';
 import {_AresHazardPlacement} from './AresHazards';
 
 export class AresSetup {

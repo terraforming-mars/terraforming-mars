@@ -4,11 +4,11 @@ import {CardType} from '../CardType';
 import {CardName} from '../../CardName';
 import {CardRenderer} from '../render/CardRenderer';
 import {Tags} from '../Tags';
-import {SpaceBonus} from '../../SpaceBonus';
+import {SpaceBonus} from '../../common/boards/SpaceBonus';
 import {Player} from '../../Player';
 import {BoardType} from '../../boards/BoardType';
 import {ISpace} from '../../boards/ISpace';
-import {Resources} from '../../Resources';
+import {Resources} from '../../common/Resources';
 import {OrOptions} from '../../inputs/OrOptions';
 import {SelectOption} from '../../inputs/SelectOption';
 import {DeferredAction, Priority} from '../../deferredActions/DeferredAction';
@@ -79,6 +79,7 @@ export class GeologicalExpedition extends Card implements IProjectCard {
     });
     if (options.options.length === 1) {
       options.options[0].cb();
+      return;
     }
     if (options.options.length === 0) {
       // should not happen.

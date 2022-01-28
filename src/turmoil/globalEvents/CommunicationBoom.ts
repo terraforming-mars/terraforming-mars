@@ -3,8 +3,8 @@ import {GlobalEventName} from './GlobalEventName';
 import {PartyName} from '../parties/PartyName';
 import {Game} from '../../Game';
 import {Turmoil} from '../Turmoil';
-import {Resources} from '../../Resources';
-import {ResourceType} from '../../ResourceType';
+import {Resources} from '../../common/Resources';
+import {ResourceType} from '../../common/ResourceType';
 import {AddResourcesToCards} from '../../deferredActions/AddResourcesToCards';
 import {CardRenderer} from '../../cards/render/CardRenderer';
 

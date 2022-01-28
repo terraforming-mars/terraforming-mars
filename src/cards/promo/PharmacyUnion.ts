@@ -3,7 +3,7 @@ import {Player} from '../../Player';
 import {CorporationCard} from '../corporation/CorporationCard';
 import {Card} from '../Card';
 import {CardName} from '../../CardName';
-import {ResourceType} from '../../ResourceType';
+import {ResourceType} from '../../common/ResourceType';
 import {SelectOption} from '../../inputs/SelectOption';
 import {OrOptions} from '../../inputs/OrOptions';
 import {IProjectCard} from '../IProjectCard';
@@ -11,7 +11,7 @@ import {CardType} from '../CardType';
 import {DeferredAction} from '../../deferredActions/DeferredAction';
 import {CardRenderer} from '../render/CardRenderer';
 import {Size} from '../render/Size';
-import {Resources} from '../../Resources';
+import {Resources} from '../../common/Resources';
 import {all, digit, played} from '../Options';
 
 export class PharmacyUnion extends Card implements CorporationCard {
@@ -44,10 +44,10 @@ export class PharmacyUnion extends Card implements CorporationCard {
     });
   }
 
-    public resourceCount = 0;
+    public override resourceCount = 0;
     public isDisabled = false;
 
-    public get tags() {
+    public override get tags() {
       if (this.isDisabled) {
         return [];
       }

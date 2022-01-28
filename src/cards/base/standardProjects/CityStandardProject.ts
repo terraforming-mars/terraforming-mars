@@ -3,7 +3,7 @@ import {CardName} from '../../../CardName';
 import {CardRenderer} from '../../render/CardRenderer';
 import {StandardProjectCard} from '../../StandardProjectCard';
 import {PlaceCityTile} from '../../../deferredActions/PlaceCityTile';
-import {Resources} from '../../../Resources';
+import {Resources} from '../../../common/Resources';
 
 export class CityStandardProject extends StandardProjectCard {
   constructor() {
@@ -23,14 +23,14 @@ export class CityStandardProject extends StandardProjectCard {
     });
   }
 
-  protected discount(player: Player): number {
+  protected override discount(player: Player): number {
     if (player.playedCards.find((card) => card.name === CardName.PREFABRICATION_OF_HUMAN_HABITATS)) {
       return 2 + super.discount(player);
     }
     return super.discount(player);
   }
 
-  public canPayWith(player: Player) {
+  public override canPayWith(player: Player) {
     if (player.playedCards.find((card) => card.name === CardName.PREFABRICATION_OF_HUMAN_HABITATS)) {
       return {steel: true};
     } else {
@@ -38,7 +38,7 @@ export class CityStandardProject extends StandardProjectCard {
     }
   }
 
-  public canAct(player: Player): boolean {
+  public override canAct(player: Player): boolean {
     return super.canAct(player) && player.game.board.getAvailableSpacesForCity(player).length > 0;
   }
 

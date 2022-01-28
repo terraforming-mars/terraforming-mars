@@ -26,10 +26,17 @@
 <script lang="ts">
 import Vue from 'vue';
 import {CardName} from '@/CardName';
-import {ALL_PRELUDE_CARD_NAMES, ALL_PROJECT_CARD_NAMES} from '@/cards/AllCards';
 import Button from '@/client/components/common/Button.vue';
+import {byType, getCard, getCards, toName} from '@/client/cards/ClientCardManifest';
+import {CardType} from '@/cards/CardType';
 
-const allItems: Array<CardName> = ALL_PROJECT_CARD_NAMES.concat(ALL_PRELUDE_CARD_NAMES).sort();
+const allItems: Array<CardName> = [
+  ...getCards(byType(CardType.AUTOMATED)),
+  ...getCards(byType(CardType.ACTIVE)),
+  ...getCards(byType(CardType.EVENT)),
+  ...getCards(byType(CardType.PRELUDE)),
+].map(toName)
+  .sort((a, b) => a.localeCompare(b));
 
 interface CardsFilterModel {
     selectedCardNames: Array<CardName>;
@@ -50,7 +57,7 @@ export default Vue.extend({
   components: {Button},
   methods: {
     isPrelude(cardName: CardName) {
-      return ALL_PRELUDE_CARD_NAMES.includes(cardName);
+      return getCard(cardName)?.card.cardType === CardType.PRELUDE;
     },
     removeCard(cardNameToRemove: CardName) {
       this.selectedCardNames = this.selectedCardNames.filter((curCardName) => curCardName !== cardNameToRemove).sort();

@@ -3,9 +3,9 @@ import {Capital} from '../../../src/cards/base/Capital';
 import {TestPlayer} from '../../TestPlayer';
 import {Game} from '../../../src/Game';
 import {SpaceType} from '../../../src/SpaceType';
-import {TileType} from '../../../src/TileType';
+import {TileType} from '../../../src/common/TileType';
 import {SelectSpace} from '../../../src/inputs/SelectSpace';
-import {Resources} from '../../../src/Resources';
+import {Resources} from '../../../src/common/Resources';
 import {TestingUtils} from '../../TestingUtils';
 import {TestPlayers} from '../../TestPlayers';
 import {Board} from '../../../src/boards/Board';
@@ -72,8 +72,8 @@ describe('Capital', () => {
 
     // cover main functions
     expect(Board.isCitySpace(space)).is.true;
-    expect(game.getCitiesInPlayOnMars()).to.eq(1);
-    expect(game.getCitiesInPlay()).to.eq(1);
+    expect(game.getCitiesOnMarsCount()).to.eq(1);
+    expect(game.getCitiesCount()).to.eq(1);
 
     // check VP
     const greenerySpace = game.board.getAdjacentSpaces(space).find((space) => space.spaceType === SpaceType.LAND);

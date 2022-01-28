@@ -485,6 +485,7 @@ export enum CardName {
     TRADE_ADVANCE = 'Trade Advance',
     POLITICAL_UPRISING = 'Political Uprising',
     BY_ELECTION = 'By-Election',
+    EXECUTIVE_ORDER = 'Executive Order',
 
     // Community colonies
     SCIENCE_TAG_BLANK_CARD = '',

@@ -2,7 +2,7 @@ import {expect} from 'chai';
 import {Mangrove} from '../../../src/cards/base/Mangrove';
 import {Game} from '../../../src/Game';
 import {TestPlayer} from '../../TestPlayer';
-import {TileType} from '../../../src/TileType';
+import {TileType} from '../../../src/common/TileType';
 import {TestPlayers} from '../../TestPlayers';
 
 describe('Mangrove', function() {

@@ -1,6 +1,6 @@
 import {ICard} from './ICard';
 import {Player} from '../Player';
-import {Resources} from '../Resources';
+import {Resources} from '../common/Resources';
 import {Units} from '../Units';
 
 export interface IProjectCard extends ICard {

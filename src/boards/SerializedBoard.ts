@@ -1,7 +1,7 @@
 import {IAdjacencyBonus} from '../ares/IAdjacencyBonus';
 import {ITile} from '../ITile';
-import {PlayerId} from '../Player';
-import {SpaceBonus} from '../SpaceBonus';
+import {PlayerId} from '../common/Types';
+import {SpaceBonus} from '../common/boards/SpaceBonus';
 import {SpaceType} from '../SpaceType';
 import {SpaceId} from './ISpace';
 

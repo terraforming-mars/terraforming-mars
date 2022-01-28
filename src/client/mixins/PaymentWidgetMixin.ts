@@ -3,9 +3,9 @@ import {CardName} from '@/CardName';
 import {CardModel} from '@/models/CardModel';
 import {PlayerInputModel} from '@/models/PlayerInputModel';
 import {PlayerViewModel} from '@/models/PlayerModel';
-import {ResourceType} from '@/ResourceType';
 import {Tags} from '@/cards/Tags';
 import {Units} from '@/Units';
+import {SEED_VALUE} from '@/constants';
 
 export interface SelectHowToPayModel {
     card?: CardModel;
@@ -18,6 +18,7 @@ export interface SelectHowToPayModel {
     floaters: number; // Floaters are not actually used in this component. It's just to satisfy the mixin.
     warning: string | undefined;
     science?: number; // Science isn't used in this component, but it simplifies testing.
+    seeds?: number;
 }
 
 export interface SelectHowToPayForProjectCardModel extends SelectHowToPayModel {
@@ -26,6 +27,7 @@ export interface SelectHowToPayForProjectCardModel extends SelectHowToPayModel {
   cards: Array<CardModel>;
   tags: Array<Tags>
   science: number;
+  seeds: number;
   available: Units;
 }
 
@@ -40,7 +42,10 @@ export interface PaymentWidgetModel extends SelectHowToPayModel {
   playerinput: PlayerInputModel;
 }
 
-type ResourcesWithRates = 'titanium' | 'steel' | 'microbes' |'floaters';
+// https://steveholgado.com/typescript-types-from-arrays/
+export const unit = ['megaCredits', 'titanium', 'steel', 'heat', 'microbes', 'floaters', 'science', 'seeds'] as const;
+export type Unit = typeof unit[number];
+
 export const PaymentWidgetMixin = {
   'name': 'PaymentWidgetMixin',
   'methods': {
@@ -55,62 +60,45 @@ export const PaymentWidgetMixin = {
       const model = this.asModel();
       return Math.min(model.playerView.thisPlayer.megaCredits, model.$data.cost);
     },
-    getResourceRate(resourceName: ResourcesWithRates): number {
-      let rate = 1; // one resource == one money
-      if (resourceName === 'titanium') {
-        rate = this.asModel().playerView.thisPlayer.titaniumValue;
-      } else if (resourceName === 'steel') {
-        rate = this.asModel().playerView.thisPlayer.steelValue;
-      } else if (resourceName === 'microbes') {
-        rate = 2;
-      } else if (resourceName === 'floaters') {
-        rate = 3;
+    getResourceRate(resourceName: Unit): number {
+      switch (resourceName) {
+      case 'titanium':
+        return this.asModel().playerView.thisPlayer.titaniumValue;
+      case 'steel':
+        return this.asModel().playerView.thisPlayer.steelValue;
+      case 'microbes':
+        return 2;
+      case 'floaters':
+        return 3;
+      case 'seeds':
+        return SEED_VALUE;
+      default:
+        return 1;
       }
-      return rate;
     },
-    reduceValue(target: ResourcesWithRates | 'heat' | 'megaCredits' | 'science', to: number): void {
+    reduceValue(target: Unit, delta: number): void {
       const currentValue: number | undefined = this.asModel()[target];
-
       if (currentValue === undefined) {
         throw new Error(`can not reduceValue for ${target} on this`);
       }
 
-      if (currentValue === 0) return;
 
-      const realTo = Math.min(to, currentValue);
-      this.asModel()[target] -= realTo;
-
-      if (target === 'megaCredits' || realTo === 0) return;
-
-      this.setRemainingMCValue();
+      const adjustedDelta = Math.min(delta, currentValue);
+      if (adjustedDelta === 0) return;
+      this.asModel()[target] -= adjustedDelta;
+      if (target !== 'megaCredits') this.setRemainingMCValue();
     },
-    addValue(target: ResourcesWithRates | 'heat' | 'megaCredits' | 'science', to: number, max?: number): void {
+    // max is the largest value this item can be. It's not the largest delta.
+    addValue(target: Unit, delta: number, max?: number): void {
       const currentValue: number | undefined = this.asModel()[target];
-
       if (currentValue === undefined) {
         throw new Error(`can not addValue for ${target} on this`);
       }
 
-      let maxValue: number | undefined = max;
-
-      if (maxValue === undefined && target !== 'microbes' && target !== 'floaters' && target !== 'science') {
-        maxValue = this.asModel().playerView.thisPlayer[target];
-      }
-
-      switch (target) {
-      case 'megaCredits':
+      let maxValue: number | undefined = max !== undefined ? max : this.getAmount(target);
+      // TODO(kberg): Remove this special code for MC?
+      if (target === 'megaCredits') {
         maxValue = this.getMegaCreditsMax();
-        break;
-      case 'microbes':
-        maxValue = this.asModel().playerinput.microbes;
-        break;
-      case 'floaters':
-        maxValue = this.asModel().playerinput.floaters;
-        if (maxValue !== undefined && this.isStratosphericBirdsEdgeCase()) maxValue--;
-        break;
-      case 'science':
-        maxValue = this.asModel().playerinput.science;
-        break;
       }
 
       if (currentValue === maxValue) return;
@@ -119,66 +107,80 @@ export const PaymentWidgetMixin = {
         throw new Error(`unable to determine maxValue for ${target}`);
       }
 
-      const realTo = (currentValue + to <= maxValue) ? to : maxValue - currentValue;
-      this.asModel()[target] += realTo;
-
-      if (target === 'megaCredits' || realTo === 0) return;
-
-      this.setRemainingMCValue();
+      // const adjustedDelta = (currentValue + delta <= maxValue) ? delta : maxValue - currentValue;
+      const adjustedDelta = Math.min(delta, maxValue - currentValue);
+      if (adjustedDelta === 0) return;
+      this.asModel()[target] += adjustedDelta;
+      if (target !== 'megaCredits') this.setRemainingMCValue();
     },
     setRemainingMCValue(): void {
       const ta = this.asModel();
-      const heatMc = ta['heat'] ?? 0;
-      const titaniumMc = (ta['titanium'] ?? 0) * this.getResourceRate('titanium');
-      const steelMc = (ta['steel'] ?? 0) * this.getResourceRate('steel');
-      const microbesMc = (ta['microbes'] ?? 0) * this.getResourceRate('microbes');
-      const floatersMc = (ta['floaters'] ?? 0) * this.getResourceRate('floaters');
-      const scienceMc = ta['science'] ?? 0;
 
-      const remainingMC: number =
-          ta.$data.cost - heatMc - titaniumMc - steelMc - microbesMc - floatersMc - scienceMc;
+      let remainingMC = ta.$data.cost;
+
+      for (const resource of unit) {
+        if (resource === 'megaCredits') continue;
+
+        const value = (ta[resource] ?? 0) * this.getResourceRate(resource);
+        remainingMC -= value;
+      }
 
       ta['megaCredits'] = Math.max(0, Math.min(this.getMegaCreditsMax(), remainingMC));
     },
-    setMaxValue(target: ResourcesWithRates | 'science' | 'heat', max?: number): void {
+    setMaxValue(target: Unit, max?: number): void {
       let currentValue: number | undefined = this.asModel()[target];
       if (currentValue === undefined) {
         throw new Error(`can not setMaxValue for ${target} on this`);
       }
-      const cardCost: number = this.asModel().$data.cost;
-      let amountHave: number | undefined = max;
-      if (max === undefined && target !== 'microbes' && target !== 'floaters' && target !== 'science') {
-        amountHave = this.asModel().playerView.thisPlayer[target];
-      }
-
-      let amountNeed = cardCost;
+      const cost: number = this.asModel().$data.cost;
+      let amountNeed = cost;
       if (target !== 'science' && target !== 'heat') {
-        amountNeed = Math.floor(cardCost / this.getResourceRate(target));
+        amountNeed = Math.floor(cost / this.getResourceRate(target));
       }
 
-      if (target === 'microbes') amountHave = this.asModel().playerinput.microbes;
-      if (target === 'floaters') {
-        amountHave = this.asModel().playerinput.floaters;
-        if (amountHave !== undefined && this.isStratosphericBirdsEdgeCase()) amountHave--;
-      }
-      if (target === 'science') amountHave = this.asModel().playerinput.science;
-
-      if (amountHave === undefined) {
-        throw new Error(`unable to find amountHave for setMaxValue for ${target}`);
-      }
+      const amountHave: number = this.getAmount(target);
 
       while (currentValue < amountHave && currentValue < amountNeed) {
         this.addValue(target, 1, max);
         currentValue++;
       }
     },
-    isStratosphericBirdsEdgeCase(): boolean {
-      if (this.asModel().$data.card?.name === CardName.STRATOSPHERIC_BIRDS) {
-        const playedCards = this.asModel().playerView.thisPlayer.playedCards as Array<CardModel>;
-        const cardsWithFloaters = playedCards.filter((card) => card.resourceType === ResourceType.FLOATER && card.resources);
-        return cardsWithFloaters.length === 1;
+    getAmount(target: Unit): number {
+      let amount: number | undefined = undefined;
+      const model = this.asModel();
+      switch (target) {
+      case 'heat':
+      case 'steel':
+      case 'titanium':
+      case 'megaCredits':
+        amount = model.playerView.thisPlayer[target];
+        break;
+
+      case 'floaters':
+      case 'microbes':
+      case 'science':
+      case 'seeds':
+        amount = model.playerinput[target];
+        break;
+      };
+
+      if (amount === undefined) {
+        return 0;
       }
-      return false;
+
+      // Stratospheric Birds requires discarding one floater from any card.
+      // That the card being paid for by the client shows that there's already a spare floater around, and
+      // that the server has decided there's enough money to play it.
+      //
+      // The only floaters that can be used for payment are those on Dirigibles.
+      // If you don't have Dirigibles but are still paying for S. Birds,
+      // then amount, below would be -1, so the Math.max makes sure it's zero.
+
+      // BTW, this could be managed by some derivative of reserveUnits that took extended resources into account.
+      if (target === 'floaters' && this.asModel().$data.card?.name === CardName.STRATOSPHERIC_BIRDS) {
+        amount = Math.max(amount - 1, 0);
+      }
+      return amount;
     },
   },
 };

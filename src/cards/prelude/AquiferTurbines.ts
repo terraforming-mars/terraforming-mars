@@ -1,4 +1,4 @@
-import {Tags} from '../Tags';
+import {Tags} from '../../common/cards/Tags';
 import {Player} from '../../Player';
 import {PreludeCard} from './PreludeCard';
 import {CardName} from '../../CardName';
@@ -26,7 +26,7 @@ export class AquiferTurbines extends PreludeCard {
       },
     });
   }
-  public canPlay(player: Player) {
+  public override canPlay(player: Player) {
     return player.canAfford(3);
   }
   public play(player: Player) {

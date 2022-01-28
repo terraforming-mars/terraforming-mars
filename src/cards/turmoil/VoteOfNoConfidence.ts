@@ -16,6 +16,8 @@ export class VoteOfNoConfidence extends Card implements IProjectCard {
       cost: 5,
       tr: {tr: 1},
 
+      // TODO(kberg): this renders a delegate with a tie and a black background. On the physical card, there is
+      // no black background.
       requirements: CardRequirements.builder((b) => b.partyLeaders()),
       metadata: {
         cardNumber: 'T16',
@@ -30,7 +32,7 @@ export class VoteOfNoConfidence extends Card implements IProjectCard {
     });
   }
 
-  public canPlay(player: Player): boolean {
+  public override canPlay(player: Player): boolean {
     const turmoil = Turmoil.getTurmoil(player.game);
     if (!turmoil.hasDelegatesInReserve(player.id)) return false;
 

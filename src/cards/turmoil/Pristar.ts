@@ -1,6 +1,6 @@
 import {CorporationCard} from '../corporation/CorporationCard';
 import {Player} from '../../Player';
-import {ResourceType} from '../../ResourceType';
+import {ResourceType} from '../../common/ResourceType';
 import {CardName} from '../../CardName';
 import {IResourceCard} from '../ICard';
 import {Card} from '../Card';
@@ -36,7 +36,7 @@ export class Pristar extends Card implements CorporationCard, IResourceCard {
     });
   }
 
-    public resourceCount = 0;
+    public override resourceCount = 0;
 
     public play(player: Player) {
       player.decreaseTerraformRatingSteps(2);

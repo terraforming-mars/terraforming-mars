@@ -1,8 +1,8 @@
 import {CorporationCard} from '../corporation/CorporationCard';
 import {Player} from '../../Player';
 import {Tags} from '../Tags';
-import {ResourceType} from '../../ResourceType';
-import {Resources} from '../../Resources';
+import {Resources} from '../../common/Resources';
+import {ResourceType} from '../../common/ResourceType';
 import {IProjectCard} from '../IProjectCard';
 import {SelectOption} from '../../inputs/SelectOption';
 import {OrOptions} from '../../inputs/OrOptions';
@@ -40,7 +40,7 @@ export class Recyclon extends Card implements CorporationCard, IResourceCard {
       },
     });
   }
-    public resourceCount = 0;
+    public override resourceCount = 0;
 
     public play(player: Player) {
       player.addProduction(Resources.STEEL, 1);

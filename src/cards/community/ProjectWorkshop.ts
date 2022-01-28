@@ -12,7 +12,7 @@ import {Card} from '../Card';
 import {CardRenderer} from '../render/CardRenderer';
 import {Size} from '../render/Size';
 import {AltSecondaryTag} from '../render/CardRenderItem';
-import {Resources} from '../../Resources';
+import {Resources} from '../../common/Resources';
 import {digit} from '../Options';
 
 export class ProjectWorkshop extends Card implements CorporationCard {

@@ -4,14 +4,16 @@ import {Game} from '../../../src/Game';
 import {Player} from '../../../src/Player';
 import {SpaceName} from '../../../src/SpaceName';
 import {SpaceType} from '../../../src/SpaceType';
-import {TileType} from '../../../src/TileType';
+import {TileType} from '../../../src/common/TileType';
 import {TestingUtils} from '../../TestingUtils';
 import {TestPlayers} from '../../TestPlayers';
 import {newTestGame} from '../../TestGame';
 import {BoardName} from '../../../src/boards/BoardName';
 
 describe('LavaFlows', function() {
-  let card : LavaFlows; let player : Player; let game : Game;
+  let card: LavaFlows;
+  let player: Player;
+  let game: Game;
 
   beforeEach(function() {
     card = new LavaFlows();
@@ -40,6 +42,19 @@ describe('LavaFlows', function() {
 
     const action = card.play(player);
     expect(action.availableSpaces).deep.eq(game.board.getAvailableSpacesOnLand(player));
+  });
+
+  it('Ares hazards do not disrupt Lava Flow space selection', function() {
+    expect(card.play(player).availableSpaces).has.length(4);
+    expect(card.play(player).availableSpaces.map((space) => space.id))
+      .has.members([SpaceName.ARSIA_MONS, SpaceName.PAVONIS_MONS, SpaceName.ASCRAEUS_MONS, SpaceName.THARSIS_THOLUS]);
+
+    game.board.getSpace(SpaceName.THARSIS_THOLUS).tile = {tileType: TileType.EROSION_MILD, protectedHazard: false};
+    expect(card.play(player).availableSpaces).has.length(4);
+    game.board.getSpace(SpaceName.THARSIS_THOLUS).tile = {tileType: TileType.CITY};
+    expect(card.play(player).availableSpaces).has.length(3);
+    expect(card.play(player).availableSpaces.map((space) => space.id))
+      .has.members([SpaceName.ARSIA_MONS, SpaceName.PAVONIS_MONS, SpaceName.ASCRAEUS_MONS]);
   });
 
   it('Should play', function() {

@@ -27,7 +27,7 @@
 import Vue from 'vue';
 import Button from '@/client/components/common/Button.vue';
 import {Color} from '@/Color';
-import {Message} from '@/Message';
+import {Message} from '@/common/logs/Message';
 import {CardOrderStorage} from '@/client/utils/CardOrderStorage';
 import {PlayerViewModel} from '@/models/PlayerModel';
 import {VueModelCheckbox, VueModelRadio} from '@/client/types';

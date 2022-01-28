@@ -1,11 +1,11 @@
 import {CardName} from '../../CardName';
 import {Player} from '../../Player';
 import {CardType} from '../CardType';
-import {Tags} from '../Tags';
+import {Tags} from '../../common/cards/Tags';
 import {PlaceMoonColonyTile} from '../../moon/PlaceMoonColonyTile';
 import {CardRenderer} from '../render/CardRenderer';
 import {Units} from '../../Units';
-import {TileType} from '../../TileType';
+import {TileType} from '../../common/TileType';
 import {MoonCard} from './MoonCard';
 
 
@@ -36,7 +36,7 @@ export class Habitat14 extends MoonCard {
     });
   }
 
-  public play(player: Player) {
+  public override play(player: Player) {
     super.play(player);
     player.game.defer(new PlaceMoonColonyTile(player));
     return undefined;

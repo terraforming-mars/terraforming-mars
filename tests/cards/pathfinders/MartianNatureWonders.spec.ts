@@ -3,10 +3,10 @@ import {MartianNatureWonders} from '../../../src/cards/pathfinders/MartianNature
 import {Game} from '../../../src/Game';
 import {TestPlayer} from '../../TestPlayer';
 import {TestPlayers} from '../../TestPlayers';
-import {SpaceBonus} from '../../../src/SpaceBonus';
+import {SpaceBonus} from '../../../src/common/boards/SpaceBonus';
 import {LunarObservationPost} from '../../../src/cards/moon/LunarObservationPost';
 import {TestingUtils} from '../../TestingUtils';
-import {TileType} from '../../../src/TileType';
+import {TileType} from '../../../src/common/TileType';
 
 describe('MartianNatureWonders', function() {
   let card: MartianNatureWonders;

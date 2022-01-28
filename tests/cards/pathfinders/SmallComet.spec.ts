@@ -4,7 +4,7 @@ import {Game} from '../../../src/Game';
 import {TestPlayer} from '../../TestPlayer';
 import {TestPlayers} from '../../TestPlayers';
 import {SpaceType} from '../../../src/SpaceType';
-import {TileType} from '../../../src//TileType';
+import {TileType} from '../../../src/common/TileType';
 
 describe('SmallComet', function() {
   let card: SmallComet;

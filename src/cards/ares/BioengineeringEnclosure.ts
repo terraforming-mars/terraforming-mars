@@ -1,6 +1,6 @@
 import {Card} from '../Card';
 import {CardName} from '../../CardName';
-import {ResourceType} from '../../ResourceType';
+import {ResourceType} from '../../common/ResourceType';
 import {CardType} from '../CardType';
 import {IActionCard, IResourceCard} from '../ICard';
 import {IProjectCard} from '../IProjectCard';
@@ -34,7 +34,7 @@ export class BioengineeringEnclosure extends Card implements IProjectCard, IActi
       },
     });
   }
-  public resourceCount = 0;
+  public override resourceCount = 0;
 
   public play(player: Player) {
     player.addResourceTo(this, 2);

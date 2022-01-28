@@ -33,13 +33,12 @@ export class LobbyHalls extends Card implements IProjectCard, ICloneTagCard {
 
   public cloneTag: Tags = Tags.CLONE;
 
-  public get tags(): Array<Tags> {
+  public override get tags(): Array<Tags> {
     return [this.cloneTag, Tags.BUILDING];
   }
 
   public play(player: Player) {
-    player.game.defer(new DeclareCloneTag(player, this, 'Select the clone tag\'s new tag',
-      (tag) => PathfindersExpansion.raiseTrack(tag, player, 1)));
+    player.game.defer(new DeclareCloneTag(player, this, (tag) => PathfindersExpansion.raiseTrack(tag, player, 1)));
     player.adjustProduction(this.productionBox);
     const turmoil = Turmoil.getTurmoil(player.game);
     if (turmoil.getAvailableDelegateCount(player.id, 'reserve') > 0) {

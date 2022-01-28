@@ -7,7 +7,7 @@ import {CardRenderer} from '../render/CardRenderer';
 import {Card} from '../Card';
 import {all} from '../Options';
 import {Board} from '../../boards/Board';
-import {Resources} from '../../Resources';
+import {Resources} from '../../common/Resources';
 
 export class OutdoorSports extends Card implements IProjectCard {
   constructor() {
@@ -30,9 +30,9 @@ export class OutdoorSports extends Card implements IProjectCard {
     });
   }
 
-  public canPlay(player: Player) {
+  public override canPlay(player: Player) {
     const board = player.game.board;
-    const oceans = board.getOceansTiles(true);
+    const oceans = board.getOceanSpaces( );
     return oceans.some((ocean) => board.getAdjacentSpaces(ocean).some((space) => Board.isCitySpace(space)));
   }
 

@@ -6,8 +6,8 @@ import {MicrosingularityPlant} from '../../../src/cards/moon/MicrosingularityPla
 import {expect} from 'chai';
 import {MoonExpansion} from '../../../src/moon/MoonExpansion';
 import {IMoonData} from '../../../src/moon/IMoonData';
-import {TileType} from '../../../src/TileType';
-import {Resources} from '../../../src/Resources';
+import {Resources} from '../../../src/common/Resources';
+import {TileType} from '../../../src/common/TileType';
 
 const MOON_OPTIONS = TestingUtils.setCustomGameOptions({moonExpansion: true});
 

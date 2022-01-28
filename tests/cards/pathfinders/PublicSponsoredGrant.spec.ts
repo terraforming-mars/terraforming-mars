@@ -3,7 +3,7 @@ import {PublicSponsoredGrant} from '../../../src/cards/pathfinders/PublicSponsor
 import {Game} from '../../../src/Game';
 import {Turmoil} from '../../../src/turmoil/Turmoil';
 import {TestPlayer} from '../../TestPlayer';
-import {newTestGame} from '../../TestGame';
+import {getTestPlayer, newTestGame} from '../../TestGame';
 import {BiomassCombustors} from '../../../src/cards/base/BiomassCombustors';
 import {SearchForLife} from '../../../src/cards/base/SearchForLife';
 import {ColonizerTrainingCamp} from '../../../src/cards/base/ColonizerTrainingCamp';
@@ -22,9 +22,9 @@ describe('PublicSponsoredGrant', function() {
   beforeEach(function() {
     card = new PublicSponsoredGrant();
     game = newTestGame(3, {turmoilExtension: true});
-    player = game.getPlayers()[0] as TestPlayer;
-    player2 = game.getPlayers()[1] as TestPlayer;
-    player3 = game.getPlayers()[2] as TestPlayer;
+    player = getTestPlayer(game, 0);
+    player2 = getTestPlayer(game, 1);
+    player3 = getTestPlayer(game, 2);
   });
 
   it('canPlay', function() {

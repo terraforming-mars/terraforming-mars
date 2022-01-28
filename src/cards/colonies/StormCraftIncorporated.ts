@@ -1,7 +1,7 @@
 import {CorporationCard} from '../corporation/CorporationCard';
 import {Player} from '../../Player';
 import {Tags} from '../Tags';
-import {ResourceType} from '../../ResourceType';
+import {ResourceType} from '../../common/ResourceType';
 import {ICard, IActionCard, IResourceCard} from '../ICard';
 import {AndOptions} from '../../inputs/AndOptions';
 import {SelectAmount} from '../../inputs/SelectAmount';
@@ -12,7 +12,7 @@ import {Card} from '../Card';
 import {CardRenderer} from '../render/CardRenderer';
 import {Size} from '../render/Size';
 import {PlayerInput} from '../../PlayerInput';
-import {Resources} from '../../Resources';
+import {Resources} from '../../common/Resources';
 
 export class StormCraftIncorporated extends Card implements IActionCard, CorporationCard, IResourceCard {
   constructor() {
@@ -43,7 +43,7 @@ export class StormCraftIncorporated extends Card implements IActionCard, Corpora
     });
   }
 
-  public resourceCount = 0;
+  public override resourceCount = 0;
 
   public play() {
     return undefined;

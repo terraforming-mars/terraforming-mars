@@ -5,7 +5,6 @@ import {CardRenderer} from '../render/CardRenderer';
 import {Tags} from '../Tags';
 import {ICloneTagCard} from './ICloneTagCard';
 import {DeclareCloneTag} from '../../pathfinders/DeclareCloneTag';
-import {PathfindersExpansion} from '../../pathfinders/PathfindersExpansion';
 import {Size} from '../render/Size';
 import {played} from '../Options';
 
@@ -34,19 +33,14 @@ export class CrewTraining extends PreludeCard implements ICloneTagCard {
 
   public cloneTag: Tags = Tags.CLONE;
 
-  public get tags(): Array<Tags> {
+  public override get tags(): Array<Tags> {
     return [this.cloneTag, this.cloneTag];
   }
 
   public play(player: Player) {
     player.increaseTerraformRatingSteps(2);
 
-    player.game.defer(
-      new DeclareCloneTag(
-        player,
-        this,
-        'Select a planetary track to advance 2 steps (and to clone this tag.)',
-        (tag) => PathfindersExpansion.raiseTrack(tag, player, 2)));
+    player.game.defer(new DeclareCloneTag(player, this));
     return undefined;
   }
 }

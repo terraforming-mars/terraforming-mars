@@ -4,9 +4,9 @@ import {SolarFarm} from '../../../src/cards/ares/SolarFarm';
 import {Game} from '../../../src/Game';
 import {SelectSpace} from '../../../src/inputs/SelectSpace';
 import {Player} from '../../../src/Player';
-import {Resources} from '../../../src/Resources';
-import {SpaceBonus} from '../../../src/SpaceBonus';
-import {TileType} from '../../../src/TileType';
+import {Resources} from '../../../src/common/Resources';
+import {SpaceBonus} from '../../../src/common/boards/SpaceBonus';
+import {TileType} from '../../../src/common/TileType';
 import {ARES_OPTIONS_WITH_HAZARDS} from '../../ares/AresTestHelper';
 import {TestPlayers} from '../../TestPlayers';
 

@@ -20,7 +20,7 @@ describe('ResearchOutpost', function() {
     expect(action).is.not.undefined;
 
     action.cb(action.availableSpaces[0]);
-    expect(game.getCitiesInPlay()).to.eq(1);
+    expect(game.getCitiesCount()).to.eq(1);
     expect(card.getCardDiscount()).to.eq(1);
   });
 

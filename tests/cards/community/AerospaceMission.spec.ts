@@ -8,7 +8,7 @@ import {Luna} from '../../../src/colonies/Luna';
 import {Game} from '../../../src/Game';
 import {SelectColony} from '../../../src/inputs/SelectColony';
 import {Player} from '../../../src/Player';
-import {Resources} from '../../../src/Resources';
+import {Resources} from '../../../src/common/Resources';
 import {TestingUtils} from '../../TestingUtils';
 import {TestPlayers} from '../../TestPlayers';
 
@@ -37,13 +37,13 @@ describe('AerospaceMission', function() {
     // Build the first free on Callisto
     const selectColony = game.deferredActions.peek()!.execute() as SelectColony;
     game.deferredActions.pop();
-    selectColony.cb((<any>ColonyName)[selectColony.coloniesModel[0].name.toUpperCase()]);
+    selectColony.cb(selectColony.colonies[0]);
     expect(player.getProduction(Resources.ENERGY)).to.eq(1);
 
     // Build the second free on Ceres
     const selectColony2 = game.deferredActions.peek()!.execute() as SelectColony;
     game.deferredActions.pop();
-    selectColony2.cb((<any>ColonyName)[selectColony2.coloniesModel[0].name.toUpperCase()]);
+    selectColony2.cb(selectColony2.colonies[0]);
     expect(player.getProduction(Resources.STEEL)).to.eq(1);
 
     // Check that we built two colonies

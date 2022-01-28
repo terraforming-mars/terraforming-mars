@@ -6,7 +6,7 @@ import {LunaConference} from '../../../src/cards/moon/LunaConference';
 import {expect} from 'chai';
 import {MoonExpansion} from '../../../src/moon/MoonExpansion';
 import {IMoonData} from '../../../src/moon/IMoonData';
-import {TileType} from '../../../src/TileType';
+import {TileType} from '../../../src/common/TileType';
 import {Scientists} from '../../../src/turmoil/parties/Scientists';
 import {Greens} from '../../../src/turmoil/parties/Greens';
 

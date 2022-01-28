@@ -1,8 +1,6 @@
 import {Player} from '../Player';
 import {SelectColony} from '../inputs/SelectColony';
 import {Colony} from '../colonies/Colony';
-import {ColonyName} from '../colonies/ColonyName';
-import {ColonyModel} from '../models/ColonyModel';
 import {DeferredAction, Priority} from './DeferredAction';
 import {MAX_COLONIES_PER_TILE} from '../constants';
 
@@ -15,7 +13,8 @@ export class BuildColony implements DeferredAction {
     public openColonies?: Array<Colony>,
     private options?: {
       // Custom for Vital Colony.
-      giveBonusTwice: boolean
+      giveBonusTwice?: boolean,
+      cb?: (colony: Colony) => void,
     },
   ) {}
 
@@ -32,15 +31,10 @@ export class BuildColony implements DeferredAction {
     }
 
     const openColonies = this.openColonies;
-    const coloniesModel: Array<ColonyModel> = this.player.game.getColoniesModel(openColonies);
 
-    return new SelectColony(this.title, 'Build', coloniesModel, (colonyName: ColonyName) => {
-      openColonies.forEach((colony) => {
-        if (colony.name === colonyName) {
-          colony.addColony(this.player, this.options);
-        }
-        return undefined;
-      });
+    return new SelectColony(this.title, 'Build', openColonies, (colony: Colony) => {
+      colony.addColony(this.player, {giveBonusTwice: this.options?.giveBonusTwice ?? false});
+      if (this.options?.cb) this.options.cb(colony);
       return undefined;
     });
   }

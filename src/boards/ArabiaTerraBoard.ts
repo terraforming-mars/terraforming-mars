@@ -1,7 +1,7 @@
 import {GameOptions} from '../Game';
 import {Player} from '../Player';
 import {Random} from '../Random';
-import {SpaceBonus} from '../SpaceBonus';
+import {SpaceBonus} from '../common/boards/SpaceBonus';
 import {SpaceName} from '../SpaceName';
 import {SpaceType} from '../SpaceType';
 import {Board} from './Board';
@@ -61,7 +61,7 @@ export class ArabiaTerraBoard extends Board {
     ];
   }
 
-  public getSpaces(spaceType: SpaceType): Array<ISpace> {
+  public override getSpaces(spaceType: SpaceType): Array<ISpace> {
     switch (spaceType) {
     case SpaceType.LAND:
     case SpaceType.OCEAN:

@@ -1,13 +1,13 @@
 import {ICard} from '../ICard';
 import {IProjectCard} from '../IProjectCard';
-import {Tags} from '../Tags';
+import {Tags} from '../../common/cards/Tags';
 import {Card} from '../Card';
 import {CardType} from '../CardType';
 import {Player} from '../../Player';
 import {SelectCard} from '../../inputs/SelectCard';
-import {Resources} from '../../Resources';
+import {Resources} from '../../common/Resources';
 import {CardName} from '../../CardName';
-import {ResourceType} from '../../ResourceType';
+import {ResourceType} from '../../common/ResourceType';
 import {CardRequirements} from '../CardRequirements';
 import {CardRenderer} from '../render/CardRenderer';
 import {Units} from '../../Units';
@@ -19,7 +19,7 @@ export class EosChasmaNationalPark extends Card implements IProjectCard {
       name: CardName.EOS_CHASMA_NATIONAL_PARK,
       tags: [Tags.PLANT, Tags.BUILDING],
       cost: 16,
-      productionBox: Units.of({energy: 2}),
+      productionBox: Units.of({megacredits: 2}),
       victoryPoints: 1,
 
       requirements: CardRequirements.builder((b) => b.temperature(-12)),

@@ -2,7 +2,7 @@ import {expect} from 'chai';
 import {Zeppelins} from '../../../src/cards/base/Zeppelins';
 import {Game} from '../../../src/Game';
 import {TestPlayer} from '../../TestPlayer';
-import {Resources} from '../../../src/Resources';
+import {Resources} from '../../../src/common/Resources';
 import {TestPlayers} from '../../TestPlayers';
 
 describe('Zeppelins', function() {

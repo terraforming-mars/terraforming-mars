@@ -1,11 +1,11 @@
 import {IProjectCard} from '../IProjectCard';
-import {Tags} from '../Tags';
+import {Tags} from '../../common/cards/Tags';
 import {Card} from '../Card';
 import {VictoryPoints} from '../ICard';
 import {CardType} from '../CardType';
 import {Player} from '../../Player';
-import {TileType} from '../../TileType';
-import {ResourceType} from '../../ResourceType';
+import {ResourceType} from '../../common/ResourceType';
+import {TileType} from '../../common/TileType';
 import {SelectSpace} from '../../inputs/SelectSpace';
 import {ISpace} from '../../boards/ISpace';
 import {CardName} from '../../CardName';
@@ -16,6 +16,7 @@ import {CardRequirements} from '../CardRequirements';
 import {CardRenderer} from '../render/CardRenderer';
 import {Phase} from '../../Phase';
 import {played} from '../Options';
+import {Board} from '../../boards/Board';
 
 export class EcologicalZone extends Card implements IProjectCard, IResourceCard {
   constructor(
@@ -50,18 +51,13 @@ export class EcologicalZone extends Card implements IProjectCard, IResourceCard 
     });
   }
 
-  public resourceCount: number = 0;
+  public override resourceCount: number = 0;
 
   private getAvailableSpaces(player: Player): Array<ISpace> {
     return player.game.board.getAvailableSpacesOnLand(player)
-      .filter(
-        (space) => player.game.board.getAdjacentSpaces(space).filter(
-          (adjacentSpace) => adjacentSpace.tile !== undefined &&
-              adjacentSpace.tile.tileType === TileType.GREENERY,
-        ).length > 0,
-      );
+      .filter((space) => player.game.board.getAdjacentSpaces(space).filter(Board.isGreenerySpace).length > 0);
   }
-  public canPlay(player: Player): boolean {
+  public override canPlay(player: Player): boolean {
     return this.getAvailableSpaces(player).length > 0;
   }
   public onCardPlayed(player: Player, card: IProjectCard): void {

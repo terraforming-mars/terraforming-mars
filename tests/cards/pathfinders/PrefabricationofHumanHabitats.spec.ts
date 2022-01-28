@@ -27,16 +27,6 @@ describe('PrefabricationofHumanHabitats', function() {
     expect(player.canPlayIgnoringCost(card)).is.true;
   });
 
-  it('play', function() {
-    expect(player.getTerraformRating()).eq(14);
-    expect(player.game.getTemperature()).eq(-30);
-
-    card.play(player);
-
-    expect(player.getTerraformRating()).eq(15);
-    expect(player.game.getTemperature()).eq(-28);
-  });
-
   it('City tag discount ', function() {
     const immigrantCity = new ImmigrantCity();
     expect(card.getCardDiscount(player, immigrantCity)).eq(2);

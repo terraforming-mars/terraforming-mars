@@ -3,12 +3,12 @@ import {Tags} from '../Tags';
 import {CardType} from '../CardType';
 import {Player} from '../../Player';
 import {CardName} from '../../CardName';
-import {ResourceType} from '../../ResourceType';
+import {ResourceType} from '../../common/ResourceType';
 import {IResourceCard} from '../ICard';
 import {CardRequirements} from '../CardRequirements';
 import {Card} from '../Card';
 import {CardRenderer} from '../render/CardRenderer';
-import {Resources} from '../../Resources';
+import {Resources} from '../../common/Resources';
 import {all, played} from '../Options';
 
 export class MartianZoo extends Card implements IProjectCard, IResourceCard {
@@ -40,7 +40,7 @@ export class MartianZoo extends Card implements IProjectCard, IResourceCard {
     });
   }
 
-  public resourceCount: number = 0;
+  public override resourceCount: number = 0;
 
   public onCardPlayed(player: Player, card: IProjectCard) {
     if (card.tags.includes(Tags.EARTH)) {

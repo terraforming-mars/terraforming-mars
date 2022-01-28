@@ -1,5 +1,5 @@
 import {ICard} from './cards/ICard';
-import {Message} from './Message';
+import {Message} from './common/logs/Message';
 import {PlayerInputTypes} from './PlayerInputTypes';
 
 export interface PlayerInput {

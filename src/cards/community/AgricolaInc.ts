@@ -1,7 +1,7 @@
 import {CorporationCard} from '../corporation/CorporationCard';
 import {Player} from '../../Player';
 import {Tags} from '../Tags';
-import {Resources} from '../../Resources';
+import {Resources} from '../../common/Resources';
 import {Card} from '../Card';
 import {CardName} from '../../CardName';
 import {ITagCount} from '../../ITagCount';
@@ -42,7 +42,7 @@ export class AgricolaInc extends Card implements CorporationCard {
     return undefined;
   }
 
-  public getVictoryPoints(player: Player): number {
+  public override getVictoryPoints(player: Player): number {
     const scorableTags : Array<Tags> = [Tags.CITY, Tags.EARTH, Tags.ENERGY, Tags.JOVIAN, Tags.MICROBE, Tags.PLANT, Tags.SCIENCE, Tags.SPACE, Tags.BUILDING, Tags.ANIMAL];
     if (player.game.gameOptions.venusNextExtension) scorableTags.push(Tags.VENUS);
 

@@ -3,8 +3,8 @@ import {NaturalPreserve} from '../../../src/cards/base/NaturalPreserve';
 import {Game} from '../../../src/Game';
 import {SelectSpace} from '../../../src/inputs/SelectSpace';
 import {TestPlayer} from '../../TestPlayer';
-import {Resources} from '../../../src/Resources';
-import {TileType} from '../../../src/TileType';
+import {Resources} from '../../../src/common/Resources';
+import {TileType} from '../../../src/common/TileType';
 import {TestPlayers} from '../../TestPlayers';
 
 describe('NaturalPreserve', () => {

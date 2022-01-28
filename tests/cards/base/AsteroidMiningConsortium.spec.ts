@@ -3,8 +3,9 @@ import {AsteroidMiningConsortium} from '../../../src/cards/base/AsteroidMiningCo
 import {Game} from '../../../src/Game';
 import {SelectPlayer} from '../../../src/inputs/SelectPlayer';
 import {TestPlayer} from '../../TestPlayer';
-import {Resources} from '../../../src/Resources';
+import {Resources} from '../../../src/common/Resources';
 import {TestPlayers} from '../../TestPlayers';
+import {TestingUtils} from '../../TestingUtils';
 
 describe('AsteroidMiningConsortium', function() {
   let card : AsteroidMiningConsortium; let player : TestPlayer; let player2 : TestPlayer; let game : Game;
@@ -39,8 +40,8 @@ describe('AsteroidMiningConsortium', function() {
     card.play(player);
     expect(player.getProduction(Resources.TITANIUM)).to.eq(2);
 
-    expect(game.deferredActions).has.lengthOf(1);
-    const selectPlayer = game.deferredActions.peek()!.execute() as SelectPlayer;
+    TestingUtils.runAllActions(game);
+    const selectPlayer = TestingUtils.cast(player.getWaitingFor(), SelectPlayer);
     selectPlayer.cb(player2);
     expect(player2.getProduction(Resources.TITANIUM)).to.eq(0);
   });

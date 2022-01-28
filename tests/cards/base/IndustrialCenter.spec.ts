@@ -2,8 +2,8 @@ import {expect} from 'chai';
 import {IndustrialCenter} from '../../../src/cards/base/IndustrialCenter';
 import {Game} from '../../../src/Game';
 import {Player} from '../../../src/Player';
-import {Resources} from '../../../src/Resources';
-import {TileType} from '../../../src/TileType';
+import {Resources} from '../../../src/common/Resources';
+import {TileType} from '../../../src/common/TileType';
 import {TestPlayers} from '../../TestPlayers';
 
 describe('IndustrialCenter', function() {
@@ -31,7 +31,7 @@ describe('IndustrialCenter', function() {
 
   it('Should play', function() {
     game.addCityTile(player, game.board.getAvailableSpacesOnLand(player)[0].id);
-    expect(game.getCitiesInPlayOnMars()).to.eq(1);
+    expect(game.getCitiesOnMarsCount()).to.eq(1);
 
     const action = card.play(player);
     const space = action!.availableSpaces[0];

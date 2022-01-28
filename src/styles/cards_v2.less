@@ -47,15 +47,6 @@
             justify-content: center;
             flex-flow: row;
             align-items: center;
-            .party {
-                background: #ddd;
-                padding: 0px 10px 0px 10px;
-                border: 1px solid #666;
-                border-radius: 20px;
-                text-transform: uppercase;
-                height: 18px;
-                line-height: 18px;
-            }
         }
         .card-requirements-max {
             background-image: url(./assets/requisites/max_big.png);
@@ -799,6 +790,49 @@
                 background-size: 170px 45px;
                 margin-top: 10px;
             }
+            .card-robin-haulings-logo {
+                background-image: url(./assets/pathfinders/corp-logo-robin-haulings.png);
+                height: 41px;
+                width: 140px;
+                background-size: 140px 41px;
+                margin-top: 10px;
+            }
+            .card-mars-direct-logo {
+                background-image: url(./assets/pathfinders/corp-logo-mars-direct.png);
+                height: 45px;
+                width: 144px;
+                background-size: 144px 45px;
+                margin-top: 10px;
+            }
+            .card-ambient-logo {
+                background-image: url(./assets/pathfinders/corp-logo-ambient.png);
+                height: 45px;
+                width: 173px;
+                background-size: 173px 45px;
+                margin-top: 10px;
+                margin-left: 16px;
+            }
+            .card-collegium-copernicus-logo {
+                background-image: url(./assets/pathfinders/corp-logo-colleguim-copernicus.png);
+                height: 45px;
+                width: 144px;
+                background-size: 144px 45px;
+                margin-top: 10px;
+            }
+            .card-soylent-logo {
+                background-image: url(./assets/pathfinders/corp-logo-soylent.png);
+                height: 45px;
+                width: 144px;
+                background-size: 144px 45px;
+                margin-top: 10px;
+            }
+            .card-bio-sol-logo {
+                background-image: url(./assets/pathfinders/corp-logo-bio-sol.png);
+                height: 45px;
+                width: 184px;
+                background-size: 184px 45px;
+                margin-top: 10px;
+            }
         }
         .card-content-corporation {
             top: -30px;
@@ -1042,6 +1076,10 @@
                 color: #0000 !important;
                 background-image: url(./assets/resources/specialized-robot.png);
             }
+            .card-resource-seed {
+                color: #0000 !important;
+                background-image: url(./assets/resources/seed.png);
+            }
             .card-resource-cube {
                 color: #0000 !important;
                 background-image: url(./assets/cube.png);
@@ -1202,6 +1240,13 @@
                 width: 36px !important;
                 background-size: 36px !important;
             }
+            .card-resource-colony--req {
+                height: 23px;
+                width: 26px;
+                background-size: 26px 23px;
+                margin-left: 3px;
+                margin-right: 3px;
+            }
             /*turmoil special*/
             .card-influence {
                 display: inline-block;
@@ -1218,6 +1263,15 @@
                 position: relative;
                 top: -10px;
                 left: -7px;
+            }
+            .turmoil-global-event {
+                display: inline-block;
+                background-image: url(./assets/parties/globalEvent.png);
+                width: 40px;
+                height: 56px;
+                background-size: 40px 56px;
+                background-repeat: no-repeat;
+                margin-right: 10px;
             }
             /*tags*/
             .card-resource-tag {
@@ -1429,6 +1483,10 @@
                         }
                     }
                 }
+            }
+            .card-production-box--req {
+                transform: scale(0.8);
+                padding: 0px;
             }
             .card-rows {
                 display: flex;
@@ -1661,9 +1719,9 @@
             .city-tile--S {
                 background-image: url(./assets/tiles/city.png);
                 filter: brightness(0.8) drop-shadow(0px 1px 1px rgba(0, 0, 0, 0.5));
-                width: 30px;
-                height: 32px;
-                background-size: 30px 32px;
+                width: 21px;
+                height: 23px;
+                background-size: 21px 23px;
             }
             .greenery-tile--M {
                 background-image: url(./assets/tiles/greenery_no_O2.png);
@@ -1671,11 +1729,24 @@
                 width: 40px;
                 height: 47px;
             }
+            .greenery-tile--S {
+                background-image: url(./assets/tiles/greenery_no_O2.png);
+                background-size: 30px 32px;
+                width: 30px;
+                height: 32px;
+            }
             .greenery-tile-oxygen--M {
                 background-image: url(./assets/tiles/greenery.png);
                 background-size: 47px;
                 width: 47px;
                 height: 46px;
+            }
+            .tile--req {
+                width: 21px;
+                height: 23px;
+                background-size: 21px 23px;
+                margin-left: 4px;
+                margin-right: 4px;
             }
             .card-ocean--S {
                 width: 30px !important;
@@ -1751,6 +1822,22 @@
                 background-position: 3px;
                 border-radius: 15px 15px 2px 2px;
             }
+            .card-party-leader--req {
+                display: inline-block;
+                background-image: url(./assets/misc/delegate.png);
+                width: 18px;
+                height: 22px;
+                background-size: 18px 22px;
+                vertical-align: middle;
+                filter: drop-shadow(0px 0px 1px black);
+                background-color: #222;
+                padding: 1px;
+                background-repeat: no-repeat;
+                background-position: 1px;
+                border-radius: 11px 11px 0px 0px;
+                margin-left: 2px;
+                margin-right: 2px;
+            }
             .card-chairman {
                 display: inline-block;
                 background-image: url(./assets/misc/chairman.png);
@@ -1764,6 +1851,22 @@
                 background-repeat: no-repeat;
                 background-position: 3px;
                 border-radius: 15px 15px 2px 2px;
+            }
+            .card-chairman--req {
+                display: inline-block;
+                background-image: url(./assets/misc/chairman.png);
+                width: 18px;
+                height: 22px;
+                background-size: 18px 22px;
+                vertical-align: middle;
+                filter: drop-shadow(0px 0px 1px black);
+                background-color: #222;
+                padding: 1px;
+                background-repeat: no-repeat;
+                background-position: 1px;
+                border-radius: 11px 11px 0px 0px;
+                margin-left: 2px;
+                margin-right: 2px;
             }
             .card-chairman-red {
                 filter: drop-shadow(1px 0px 1px #c33) drop-shadow(-1px 0px 1px #c33) drop-shadow(0px 1px 1px #c33) drop-shadow(0px -1px 1px #c33) !important;
@@ -1979,7 +2082,7 @@ each(@parties, {
 
     // This copies stuff above, but scoped inside card-resources-counter. It shouldn't be necessary if
     // the stuff above wasn't contained inside card-content.
-    @resource_types: microbe, animal, science, floater, fighter, camp, asteroid, disease, preservation, data, syndicate-fleet, cube, venusian-habitat, specialized-robot;
+    @resource_types: microbe, animal, science, floater, fighter, camp, asteroid, disease, preservation, data, syndicate-fleet, cube, venusian-habitat, specialized-robot, seed;
     each(@resource_types, {
       .card-resource-@{value} {
         background-image: url("./assets/resources/@{value}.png");

@@ -1,14 +1,14 @@
 import {CardName} from '../../CardName';
 import {CardType} from '../CardType';
-import {Tags} from '../Tags';
+import {Tags} from '../../common/cards/Tags';
 import {CorporationCard} from '../corporation/CorporationCard';
 import {CardRenderer} from '../render/CardRenderer';
-import {ResourceType} from '../../ResourceType';
+import {ResourceType} from '../../common/ResourceType';
 import {Player} from '../../Player';
 import {ISpace} from '../../boards/ISpace';
 import {MoonExpansion} from '../../moon/MoonExpansion';
 import {Multiset} from '../../utils/Multiset';
-import {Resources} from '../../Resources';
+import {Resources} from '../../common/Resources';
 import {OrOptions} from '../../inputs/OrOptions';
 import {SelectOption} from '../../inputs/SelectOption';
 import {StealResources} from '../../deferredActions/StealResources';
@@ -46,7 +46,7 @@ export class TheDarksideofTheMoonSyndicate extends Card implements CorporationCa
     });
   }
 
-  public resourceCount = 0;
+  public override resourceCount = 0;
 
   public play(player: Player) {
     player.addResourceTo(this, 2);

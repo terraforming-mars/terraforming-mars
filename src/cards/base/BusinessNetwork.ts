@@ -1,10 +1,10 @@
-import {Tags} from '../Tags';
+import {Tags} from '../../common/cards/Tags';
 import {Card} from '../Card';
 import {CardType} from '../CardType';
 import {Player} from '../../Player';
 import {IActionCard} from '../ICard';
 import {IProjectCard} from '../IProjectCard';
-import {Resources} from '../../Resources';
+import {Resources} from '../../common/Resources';
 import {CardName} from '../../CardName';
 import {CardRenderer} from '../render/CardRenderer';
 import {Size} from '../render/Size';
@@ -28,7 +28,7 @@ export class BusinessNetwork extends Card implements IActionCard, IProjectCard {
     });
   }
 
-  public canPlay(player: Player): boolean {
+  public override canPlay(player: Player): boolean {
     return player.getProduction(Resources.MEGACREDITS) >= -4;
   }
   public play(player: Player) {

@@ -4,8 +4,8 @@ import {TestingUtils} from '../../TestingUtils';
 import {TestPlayers} from '../../TestPlayers';
 import {OrbitalPowerGrid} from '../../../src/cards/moon/OrbitalPowerGrid';
 import {expect} from 'chai';
-import {TileType} from '../../../src/TileType';
-import {Resources} from '../../../src/Resources';
+import {Resources} from '../../../src/common/Resources';
+import {TileType} from '../../../src/common/TileType';
 import {SpaceType} from '../../../src/SpaceType';
 
 const MOON_OPTIONS = TestingUtils.setCustomGameOptions({moonExpansion: true});

@@ -3,10 +3,10 @@ import {TestingUtils} from '../../TestingUtils';
 import {TestPlayers} from '../../TestPlayers';
 import {HypersensitiveSiliconChipFactory} from '../../../src/cards/moon/HypersensitiveSiliconChipFactory';
 import {expect} from 'chai';
-import {Resources} from '../../../src/Resources';
+import {Resources} from '../../../src/common/Resources';
 import {IMoonData} from '../../../src/moon/IMoonData';
 import {MoonExpansion} from '../../../src/moon/MoonExpansion';
-import {TileType} from '../../../src/TileType';
+import {TileType} from '../../../src/common/TileType';
 import {TestPlayer} from '../../TestPlayer';
 
 const MOON_OPTIONS = TestingUtils.setCustomGameOptions({moonExpansion: true});

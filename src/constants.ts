@@ -22,6 +22,7 @@ export const MAX_VENUS_SCALE = 30;
 
 // Colonies
 export const MAX_COLONY_TRACK_POSITION = 6;
+export const MAX_COLONIES_PER_TILE = 3;
 export const MAX_FLEET_SIZE = 4;
 export const MAX_COLONIES_PER_TILE = 3;
 export const MC_TRADE_COST = 9;
@@ -40,6 +41,9 @@ export const HELLAS_BONUS_OCEAN_COST = 6;
 export const MAXIMUM_COLONY_RATE = 8;
 export const MAXIMUM_MINING_RATE = 8;
 export const MAXIMUM_LOGISTICS_RATE = 8;
+
+// Pathfinders
+export const SEED_VALUE = 5;
 
 // Escape Velocity
 export const BONUS_SECONDS_PER_ACTION = 2;

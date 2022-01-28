@@ -9,9 +9,11 @@ import {PlayerViewModel, PublicPlayerModel} from '@/models/PlayerModel';
 import {Units} from '@/Units';
 import {FakeLocalStorage} from './FakeLocalStorage';
 import {PaymentTester} from './PaymentTester';
+import {HowToPay} from '@/inputs/HowToPay';
 
 describe('SelectHowToPayForProjectCard', () => {
   let localStorage: FakeLocalStorage;
+  let saveResponse: HowToPay;
 
   beforeEach(() => {
     localStorage = new FakeLocalStorage();
@@ -21,7 +23,7 @@ describe('SelectHowToPayForProjectCard', () => {
     FakeLocalStorage.deregister(localStorage);
   });
 
-  it('uses sort order for cards', async () => {
+  it('using sort order for cards', async () => {
     localStorage.setItem('cardOrderfoo', JSON.stringify({
       [CardName.ANTS]: 2,
       [CardName.BIRDS]: 1,
@@ -63,7 +65,7 @@ describe('SelectHowToPayForProjectCard', () => {
     expect(cards.at(1).props().card.name).to.eq(CardName.ANTS);
   });
 
-  it('select how to pay uses heat', async () => {
+  it('using heat', async () => {
     // Birds will cost 10. Player has 7M€ and will use 3 of the 4 available heat units.
     const wrapper = setupCardForPurchase(
       CardName.BIRDS, 10,
@@ -73,10 +75,14 @@ describe('SelectHowToPayForProjectCard', () => {
     const tester = new PaymentTester(wrapper);
     await tester.nextTick();
 
+    tester.expectIsAvailable('heat', true);
     tester.expectValue('heat', 3);
+
+    tester.clickSave();
+    expect(saveResponse).deep.eq(howToPay({heat: 3, megaCredits: 7}));
   });
 
-  it('select how to pay uses heat with reserve', async () => {
+  it('using max button with heat', async () => {
     // Birds will cost 10. Player has 10 MC and 4 heat. It will select 10MC
     //
     // Then when clicking the 'max' button for heat, the algorithm will switch to 8 M€ and 2 heat.
@@ -97,9 +103,12 @@ describe('SelectHowToPayForProjectCard', () => {
 
     tester.expectValue('megaCredits', 8);
     tester.expectValue('heat', 2);
+
+    tester.clickSave();
+    expect(saveResponse).deep.eq(howToPay({heat: 2, megaCredits: 8}));
   });
 
-  it('select how to pay uses microbes', async () => {
+  it('using microbes', async () => {
     // Moss will cost 10. Player has 7M€ and will 2 of the 4 available microbes units.
     const wrapper = setupCardForPurchase(
       CardName.MOSS, 10,
@@ -110,9 +119,12 @@ describe('SelectHowToPayForProjectCard', () => {
     await tester.nextTick();
 
     tester.expectValue('microbes', 2);
+
+    tester.clickSave();
+    expect(saveResponse).deep.eq(howToPay({microbes: 2, megaCredits: 6}));
   });
 
-  it('select how to pay uses floaters', async () => {
+  it('using floaters', async () => {
     // Forced Precipitation will cost 10. Player has 7M€ and will 2 of the 4 available floaters.
     const wrapper = setupCardForPurchase(
       CardName.FORCED_PRECIPITATION, 10,
@@ -123,10 +135,66 @@ describe('SelectHowToPayForProjectCard', () => {
     await tester.nextTick();
 
     tester.expectValue('floaters', 2);
+
+    tester.clickSave();
+    expect(saveResponse).deep.eq(howToPay({floaters: 2, megaCredits: 4}));
   });
 
-  it('select how to pay uses steel', async () => {
-    // Regoplastic will cost 10. Player has 7M€ and 4 steels.
+  it('Paying for Stratospheric Birds without floaters', async () => {
+    const wrapper = setupCardForPurchase(
+      CardName.STRATOSPHERIC_BIRDS, 12, {
+        megaCredits: 12,
+      },
+      {});
+
+    const tester = new PaymentTester(wrapper);
+    await tester.nextTick();
+
+
+    tester.clickSave();
+    expect(saveResponse).deep.eq(howToPay({megaCredits: 12}));
+  });
+
+  it('Paying for Stratospheric Birds with Dirigibles', async () => {
+    const wrapper = setupCardForPurchase(
+      CardName.STRATOSPHERIC_BIRDS, 12, {
+        megaCredits: 9,
+      },
+      {floaters: 3});
+
+    const tester = new PaymentTester(wrapper);
+    await tester.nextTick();
+
+    tester.clickSave();
+    expect(saveResponse).deep.eq(howToPay({floaters: 1, megaCredits: 9}));
+
+    tester.clickMax('floaters');
+
+    tester.clickSave();
+    expect(saveResponse).deep.eq(howToPay({floaters: 2, megaCredits: 6}));
+  });
+
+  it('Paying for other card with Dirigibles uses all floaters', async () => {
+    const wrapper = setupCardForPurchase(
+      CardName.FORCED_PRECIPITATION, 12, {
+        megaCredits: 9,
+      },
+      {floaters: 3});
+
+    const tester = new PaymentTester(wrapper);
+    await tester.nextTick();
+
+    tester.clickSave();
+    expect(saveResponse).deep.eq(howToPay({floaters: 1, megaCredits: 9}));
+
+    tester.clickMax('floaters');
+
+    tester.clickSave();
+    expect(saveResponse).deep.eq(howToPay({floaters: 3, megaCredits: 3}));
+  });
+
+  it('using steel', async () => {
+    // Rego Plastics will cost 10. Player has 7M€ and 4 steels.
     // They should spend at least enough to pay for the card, that is 6 M€ and 2 steel.
     const wrapper = setupCardForPurchase(
       CardName.REGO_PLASTICS, 10,
@@ -137,9 +205,13 @@ describe('SelectHowToPayForProjectCard', () => {
     await tester.nextTick();
 
     tester.expectValue('steel', 2);
+
+
+    tester.clickSave();
+    expect(saveResponse).deep.eq(howToPay({steel: 2, megaCredits: 6}));
   });
 
-  it('select how to pay uses titanium metal bonus', async () => {
+  it('using titanium metal bonus', async () => {
     // Solar Wind Power will cost 11. Player has 2M€ and 4 Ti. The titanium is
     // artificially inflated to be worth 7M€ each.
     // The algorithm will try to spend 2 mc. Then spend as much Ti as possible.
@@ -157,9 +229,13 @@ describe('SelectHowToPayForProjectCard', () => {
 
     tester.expectValue('megaCredits', 0);
     tester.expectValue('titanium', 2);
+
+
+    tester.clickSave();
+    expect(saveResponse).deep.eq(howToPay({titanium: 2, megaCredits: 0}));
   });
 
-  it('select how to pay uses steel and titanium with metal bonus', async () => {
+  it('using steel and titanium with metal bonus', async () => {
     // Space Elevator will cost 27. Player has 1MC, 4 steels (at value 3), and 6 Ti. The titanium is
     // artificially inflated to be worth 6M€ each.
     // The algorithm will try to spend 1 mc. Then spend as much steel as possible. Then spend as much Ti as possible.
@@ -178,9 +254,12 @@ describe('SelectHowToPayForProjectCard', () => {
     tester.expectValue('megaCredits', 0);
     tester.expectValue('steel', 3);
     tester.expectValue('titanium', 3);
+
+    tester.clickSave();
+    expect(saveResponse).deep.eq(howToPay({steel: 3, titanium: 3, megaCredits: 0}));
   });
 
-  it('select how to pay uses steel and microbes', async () => {
+  it('using steel and microbes', async () => {
     // Protected Valley will cost 23. Player has no mc, 5 microbes, and 10 steels The steel is
     // artificially inflated to be worth 4M€ each.
     // The algorithm will try to spend no mc. Then spend as much microbes as possible. Then spend as much steel as possible.
@@ -199,9 +278,12 @@ describe('SelectHowToPayForProjectCard', () => {
     tester.expectValue('megaCredits', 0);
     tester.expectValue('steel', 4);
     tester.expectValue('microbes', 4);
+
+    tester.clickSave();
+    expect(saveResponse).deep.eq(howToPay({microbes: 4, steel: 4, megaCredits: 0}));
   });
 
-  it('select how to pay uses floater and microbes', async () => {
+  it('using floater and microbes', async () => {
     // Freyja Biodomes will cost 14. Player has 1 mc, 6 microbes, and 4 floater.
     // The algorithm will try to spend 1 mc. Then spend as much microbes as possible. Then spend as much floater as possible.
     // This will come down to 1 MC, 6 microbes (at value 2), and 1 floater (at value 3). So we are effectively spending 16.
@@ -219,9 +301,12 @@ describe('SelectHowToPayForProjectCard', () => {
     tester.expectValue('megaCredits', 1);
     tester.expectValue('microbes', 5);
     tester.expectValue('floaters', 1);
+
+    tester.clickSave();
+    expect(saveResponse).deep.eq(howToPay({floaters: 1, microbes: 5, megaCredits: 1}));
   });
 
-  it('select how to pay uses floater and titanium', async () => {
+  it('using floater and titanium', async () => {
     // Giant Solar Shade will cost 27. Player has 1 mc, 8 floaters, and 6 ti.
     // The algorithm will try to spend 1 mc. Then spend as much floaters as possible. Then spend as much ti as possible.
     // This will come down to 1 MC, 8 floaters (at value 3), and 1 ti (at value 7). So we are effectively spending 32.
@@ -239,9 +324,12 @@ describe('SelectHowToPayForProjectCard', () => {
     tester.expectValue('megaCredits', 0);
     tester.expectValue('floaters', 7);
     tester.expectValue('titanium', 1);
+
+    tester.clickSave();
+    expect(saveResponse).deep.eq(howToPay({titanium: 1, floaters: 7, megaCredits: 0}));
   });
 
-  it('select Luna Train Station limits how much steel you can use', async () => {
+  it('Luna Train Station limits how much steel you can use', async () => {
     // Luna Train Station costs 20, and will need 2 steel. Player has 20 M€ and 4 steel.
     //
     // The algorithm will select 20 MC,
@@ -267,9 +355,12 @@ describe('SelectHowToPayForProjectCard', () => {
 
     tester.expectValue('megaCredits', 16);
     tester.expectValue('steel', 2);
+
+    tester.clickSave();
+    expect(saveResponse).deep.eq(howToPay({steel: 2, megaCredits: 16}));
   });
 
-  it('select how to pay uses titanium metal bonus without using steel', async () => {
+  it('using titanium metal bonus without using steel', async () => {
     // Io Mining Industries cost 41 mc. Player has 10 MC, 2 Steel and 13 Ti.
     // The steel is artificially inflated to be worth 4 M€ each.
     // The titanium is artificially inflated to be worth 5 M€ each.
@@ -291,9 +382,13 @@ describe('SelectHowToPayForProjectCard', () => {
     tester.expectValue('titanium', 7);
     expect((wrapper.vm as any).steel).eq(0);
     tester.expectIsAvailable('steel', false);
+
+    tester.clickSave();
+    expect(saveResponse).deep.eq(howToPay({titanium: 7, megaCredits: 6}));
   });
 
-  it('select how to pay uses science', async () => {
+  // TODO(kberg): Be greedy with science units.
+  it('using science', async () => {
     // ARISTARCHUS_ROAD_NETWORK costs 15. Player has 7M€ and will use 8 science units.
     const wrapper = setupCardForPurchase(
       CardName.ARISTARCHUS_ROAD_NETWORK, 15,
@@ -308,9 +403,34 @@ describe('SelectHowToPayForProjectCard', () => {
 
     tester.expectIsAvailable('science', true);
     tester.expectValue('science', 8);
+    tester.expectValue('megaCredits', 7);
+
+    tester.clickSave();
+    expect(saveResponse).deep.eq(howToPay({science: 8, megaCredits: 7}));
   });
 
-  it('select how to pay allows with Last Restort Ingenuity', async () => {
+  // TODO(kberg): be greedy with seeds.
+  it('using seeds', async () => {
+    // ARCTIC_ALGAE costs 12. Player has 7M€ and will use 2 seeds.
+    const wrapper = setupCardForPurchase(
+      CardName.ARCTIC_ALGAE, 12,
+      {
+        megaCredits: 7,
+      },
+      {seeds: 3});
+
+    const tester = new PaymentTester(wrapper);
+    await tester.nextTick();
+
+    tester.expectIsAvailable('seeds', true);
+    tester.expectValue('seeds', 1);
+    tester.expectValue('megaCredits', 7);
+
+    tester.clickSave();
+    expect(saveResponse).deep.eq(howToPay({seeds: 1, megaCredits: 7}));
+  });
+
+  it('initial setup allows for steel and titanium when using Last Restort Ingenuity', async () => {
     // Earth Office costs 1, but has no building tag or space tag.
     const wrapper = setupCardForPurchase(
       CardName.EARTH_OFFICE, 0, {
@@ -328,6 +448,19 @@ describe('SelectHowToPayForProjectCard', () => {
     tester.expectIsAvailable('titanium', true);
   });
 
+  const howToPay = function(htp: Partial<HowToPay>) : HowToPay {
+    return {
+      floaters: htp.floaters ?? 0,
+      heat: htp.heat ?? 0,
+      megaCredits: htp.megaCredits ?? 0,
+      microbes: htp.microbes ?? 0,
+      science: htp.science ?? 0,
+      seeds: htp.seeds ?? 0,
+      steel: htp.steel ?? 0,
+      titanium: htp.titanium ?? 0,
+    };
+  };
+
   const setupCardForPurchase = function(
     cardName: CardName,
     cardCost: number,
@@ -338,6 +471,8 @@ describe('SelectHowToPayForProjectCard', () => {
       cards: [{name: cardName, calculatedCost: cardCost}],
       steel: 0,
       titanium: 0,
+      steelValue: 2,
+      titaniumValue: 3,
     }, playerFields);
 
     const playerView: Partial<PlayerViewModel>= {
@@ -363,7 +498,9 @@ describe('SelectHowToPayForProjectCard', () => {
       propsData: {
         playerView: playerView,
         playerinput: playerInput,
-        onsave: () => {},
+        onsave: (response: Array<[CardName, string]>) => {
+          saveResponse = JSON.parse(response[0][1]);
+        },
         showsave: true,
         showtitle: true,
       },

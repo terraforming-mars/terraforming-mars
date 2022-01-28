@@ -1,9 +1,9 @@
 import {CardName} from '../../CardName';
 import {Player} from '../../Player';
 import {CardType} from '../CardType';
-import {Tags} from '../Tags';
+import {Tags} from '../../common/cards/Tags';
 import {MoonExpansion} from '../../moon/MoonExpansion';
-import {Resources} from '../../Resources';
+import {Resources} from '../../common/Resources';
 import {CardRenderer} from '../render/CardRenderer';
 import {Units} from '../../Units';
 import {MoonCard} from './MoonCard';
@@ -34,7 +34,7 @@ export class TitaniumExtractionCenter extends MoonCard {
     player.addProduction(Resources.TITANIUM, productionIncrease, {log: true});
   }
 
-  public play(player: Player) {
+  public override play(player: Player) {
     super.play(player);
     this.produce(player);
     return undefined;

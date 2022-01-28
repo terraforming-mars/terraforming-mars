@@ -5,7 +5,7 @@ import {EccentricSponsor} from '../../../src/cards/prelude/EccentricSponsor';
 import {ResearchCoordination} from '../../../src/cards/prelude/ResearchCoordination';
 import {SeptumTribus} from '../../../src/cards/turmoil/SeptumTribus';
 import {Game} from '../../../src/Game';
-import {Resources} from '../../../src/Resources';
+import {Resources} from '../../../src/common/Resources';
 import {TestPlayers} from '../../TestPlayers';
 
 describe('CommunityServices', function() {

@@ -5,10 +5,10 @@ import {Card} from '../Card';
 import {CardType} from '../CardType';
 import {CardName} from '../../CardName';
 import {CardRenderer} from '../render/CardRenderer';
-import {ResourceType} from '../../ResourceType';
+import {ResourceType} from '../../common/ResourceType';
 import {Tags} from '../Tags';
 import {CardRequirements} from '../CardRequirements';
-import {Resources} from '../../Resources';
+import {Resources} from '../../common/Resources';
 import {AddResourcesToCard} from '../../deferredActions/AddResourcesToCard';
 
 export class ControlledBloom extends Card implements IProjectCard {

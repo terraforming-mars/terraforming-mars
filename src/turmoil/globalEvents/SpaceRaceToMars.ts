@@ -3,7 +3,7 @@ import {GlobalEventName} from './GlobalEventName';
 import {PartyName} from '../parties/PartyName';
 import {Game} from '../../Game';
 import {Turmoil} from '../Turmoil';
-import {Resources} from '../../Resources';
+import {Resources} from '../../common/Resources';
 import {Player} from '../../Player';
 import {isSpecialTile, playerTileFn} from '../../boards/Board';
 import {MoonExpansion} from '../../moon/MoonExpansion';

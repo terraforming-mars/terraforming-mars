@@ -1,5 +1,5 @@
 import {CardName} from '../../CardName';
-import {Tags} from '../Tags';
+import {Tags} from '../../common/cards/Tags';
 import {PreludeCard} from '../prelude/PreludeCard';
 import {CardRenderer} from '../render/CardRenderer';
 import {PlaceMoonMineTile} from '../../moon/PlaceMoonMineTile';
@@ -7,9 +7,9 @@ import {Player} from '../../Player';
 import {MoonExpansion} from '../../moon/MoonExpansion';
 import {PlaceMoonRoadTile} from '../../moon/PlaceMoonRoadTile';
 import {SpaceType} from '../../SpaceType';
-import {Resources} from '../../Resources';
+import {Resources} from '../../common/Resources';
 import {AltSecondaryTag} from '../render/CardRenderItem';
-import {TileType} from '../../TileType';
+import {TileType} from '../../common/TileType';
 
 export class MiningComplex extends PreludeCard {
   constructor() {

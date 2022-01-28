@@ -2,7 +2,7 @@ import {PartyName} from './PartyName';
 import {Game} from '../../Game';
 import {Bonus} from '../Bonus';
 import {Policy} from '../Policy';
-import {PlayerId} from '../../Player';
+import {PlayerId} from '../../common/Types';
 import {NeutralPlayer} from '../Turmoil';
 
 export interface IParty {

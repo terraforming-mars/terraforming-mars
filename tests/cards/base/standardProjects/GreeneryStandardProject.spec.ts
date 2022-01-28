@@ -10,7 +10,7 @@ import {Phase} from '../../../../src/Phase';
 import {MAX_OXYGEN_LEVEL} from '../../../../src/constants';
 import {SelectSpace} from '../../../../src/inputs/SelectSpace';
 import {SpaceType} from '../../../../src/SpaceType';
-import {TileType} from '../../../../src/TileType';
+import {TileType} from '../../../../src/common/TileType';
 
 describe('GreeneryStandardProject', function() {
   let card: GreeneryStandardProject;

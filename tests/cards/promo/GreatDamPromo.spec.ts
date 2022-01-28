@@ -3,8 +3,8 @@ import {GreatDamPromo} from '../../../src/cards/promo/GreatDamPromo';
 import {Game} from '../../../src/Game';
 import {SelectSpace} from '../../../src/inputs/SelectSpace';
 import {Player} from '../../../src/Player';
-import {Resources} from '../../../src/Resources';
-import {TileType} from '../../../src/TileType';
+import {Resources} from '../../../src/common/Resources';
+import {TileType} from '../../../src/common/TileType';
 import {TestingUtils} from '../../TestingUtils';
 import {TestPlayers} from '../../TestPlayers';
 

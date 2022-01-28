@@ -4,7 +4,7 @@ import {PreludeCard} from '../prelude/PreludeCard';
 import {CardName} from '../../CardName';
 import {BuildColony} from '../../deferredActions/BuildColony';
 import {CardRenderer} from '../render/CardRenderer';
-import {Resources} from '../../Resources';
+import {Resources} from '../../common/Resources';
 
 export class AerospaceMission extends PreludeCard {
   constructor() {
@@ -24,7 +24,7 @@ export class AerospaceMission extends PreludeCard {
     });
   }
 
-  public canPlay(player: Player) {
+  public override canPlay(player: Player) {
     return player.canAfford(14);
   }
 

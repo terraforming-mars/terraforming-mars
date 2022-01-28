@@ -3,13 +3,12 @@ import {IActionCard, IResourceCard, ICard} from '../ICard';
 import {Card} from '../Card';
 import {CardName} from '../../CardName';
 import {CardType} from '../CardType';
-import {ResourceType} from '../../ResourceType';
+import {ResourceType} from '../../common/ResourceType';
 import {Tags} from '../Tags';
 import {Player} from '../../Player';
 import {SelectCard} from '../../inputs/SelectCard';
 import {SelectOption} from '../../inputs/SelectOption';
 import {OrOptions} from '../../inputs/OrOptions';
-import {MAX_OCEAN_TILES} from '../../constants';
 import {LogHelper} from '../../LogHelper';
 import {PlaceOceanTile} from '../../deferredActions/PlaceOceanTile';
 import {CardRenderer} from '../render/CardRenderer';
@@ -37,15 +36,14 @@ export class CometAiming extends Card implements IActionCard, IProjectCard, IRes
       },
     });
   }
-    public resourceCount = 0;
+    public override resourceCount = 0;
 
     public play() {
       return undefined;
     }
 
     private canPlaceOcean(player: Player) {
-      return player.game.board.getOceansOnBoard() < MAX_OCEAN_TILES &&
-        player.canAfford(0, {tr: {oceans: 1}});
+      return player.game.canAddOcean() && player.canAfford(0, {tr: {oceans: 1}});
     }
 
     public canAct(player: Player): boolean {

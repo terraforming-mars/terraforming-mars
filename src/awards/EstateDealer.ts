@@ -1,6 +1,6 @@
 import {IAward} from './IAward';
 import {Player} from '../Player';
-import {isHazardTileType} from '../TileType';
+import {isHazardTileType} from '../common/TileType';
 import {Board} from '../boards/Board';
 
 export class EstateDealer implements IAward {

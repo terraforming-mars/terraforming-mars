@@ -27,7 +27,7 @@ describe('MoholeLake', function() {
     selectSpace.cb(selectSpace.availableSpaces[0]);
 
     expect(player.game.getTemperature()).to.eq(-28);
-    expect(player.game.board.getOceansOnBoard()).to.eq(1);
+    expect(player.game.board.getOceanCount()).to.eq(1);
     expect(player.getTerraformRating()).to.eq(22);
     expect(player.plants).to.eq(3);
   });

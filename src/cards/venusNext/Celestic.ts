@@ -1,7 +1,7 @@
 import {CorporationCard} from '../corporation/CorporationCard';
 import {Player} from '../../Player';
-import {Tags} from '../Tags';
-import {ResourceType} from '../../ResourceType';
+import {Tags} from '../../common/cards/Tags';
+import {ResourceType} from '../../common/ResourceType';
 import {IActionCard, ICard, IResourceCard} from '../ICard';
 import {SelectCard} from '../../inputs/SelectCard';
 import {Card} from '../Card';
@@ -38,20 +38,31 @@ export class Celestic extends Card implements IActionCard, CorporationCard, IRes
     });
   }
 
-    public resourceCount = 0;
+    public override resourceCount = 0;
 
-    private static readonly floaterCards: Set<CardName> = new Set([
+    // Public for testing
+    public static readonly floaterCards: Set<CardName> = new Set([
+      // Venus
       CardName.AEROSPORT_TOURNAMENT,
       CardName.AIR_SCRAPPING_EXPEDITION,
-      CardName.AIR_RAID,
-      CardName.AIRLINERS,
       CardName.ATMOSCOOP,
+      CardName.HYDROGEN_TO_VENUS,
+      CardName.STRATOSPHERIC_BIRDS,
+
+      // Colonies
+      CardName.AIRLINERS,
+      CardName.AIR_RAID,
       CardName.FLOATER_LEASING,
       CardName.FLOATER_PROTOTYPES,
       CardName.FLOATER_TECHNOLOGY,
-      CardName.HYDROGEN_TO_VENUS,
       CardName.NITROGEN_FROM_TITAN,
-      CardName.STRATOSPHERIC_BIRDS,
+
+      // // Pathfinders
+      CardName.CASSINI_STATION,
+      CardName.FLOATER_URBANISM,
+      CardName.NOBEL_LABS,
+      CardName.SECRET_LABS,
+      CardName.VENERA_BASE,
     ]);
 
     public initialAction(player: Player) {

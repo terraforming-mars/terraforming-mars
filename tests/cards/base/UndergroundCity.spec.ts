@@ -2,7 +2,7 @@ import {expect} from 'chai';
 import {UndergroundCity} from '../../../src/cards/base/UndergroundCity';
 import {Game} from '../../../src/Game';
 import {Player} from '../../../src/Player';
-import {Resources} from '../../../src/Resources';
+import {Resources} from '../../../src/common/Resources';
 import {TestPlayers} from '../../TestPlayers';
 
 describe('UndergroundCity', function() {
@@ -27,7 +27,7 @@ describe('UndergroundCity', function() {
     expect(action).is.not.undefined;
 
     action.cb(action.availableSpaces[0]);
-    expect(game.getCitiesInPlay()).to.eq(1);
+    expect(game.getCitiesCount()).to.eq(1);
     expect(player.getProduction(Resources.ENERGY)).to.eq(0);
     expect(player.getProduction(Resources.STEEL)).to.eq(2);
   });

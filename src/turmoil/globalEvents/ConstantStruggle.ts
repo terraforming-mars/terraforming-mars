@@ -3,7 +3,7 @@ import {GlobalEventName} from './GlobalEventName';
 import {PartyName} from '../parties/PartyName';
 import {Game} from '../../Game';
 import {Turmoil} from '../Turmoil';
-import {Resources} from '../../Resources';
+import {Resources} from '../../common/Resources';
 import {PathfindersExpansion} from '../../pathfinders/PathfindersExpansion';
 import {Tags} from '../../cards/Tags';
 import {CardRenderer} from '../../cards/render/CardRenderer';

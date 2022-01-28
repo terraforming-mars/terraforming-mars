@@ -3,7 +3,7 @@ import {Party} from './Party';
 import {PartyName} from './PartyName';
 import {Game} from '../../Game';
 import {Tags} from '../../cards/Tags';
-import {Resources} from '../../Resources';
+import {Resources} from '../../common/Resources';
 import {Bonus} from '../Bonus';
 import {Policy} from '../Policy';
 import {SelectHowToPayDeferred} from '../../deferredActions/SelectHowToPayDeferred';
@@ -14,8 +14,7 @@ import {DeferredAction} from '../../deferredActions/DeferredAction';
 import {OrOptions} from '../../inputs/OrOptions';
 import {SelectCard} from '../../inputs/SelectCard';
 import {SelectOption} from '../../inputs/SelectOption';
-import {ResourceType} from '../../ResourceType';
-import {TurmoilPolicy} from '../TurmoilPolicy';
+import {ResourceType} from '../../common/ResourceType';
 
 export class Unity extends Party implements IParty {
   name = PartyName.UNITY;
@@ -25,7 +24,7 @@ export class Unity extends Party implements IParty {
 }
 
 class UnityBonus01 implements Bonus {
-  id = 'ub01';
+  id = 'ub01' as const;
   description = 'Gain 1 M€ for each Venus, Earth and Jovian tag you have';
   isDefault = true;
 
@@ -42,7 +41,7 @@ class UnityBonus01 implements Bonus {
 }
 
 class UnityBonus02 implements Bonus {
-  id = 'ub02';
+  id = 'ub02' as const;
   description = 'Gain 1 M€ for each Space tag you have';
   isDefault = false;
 
@@ -59,12 +58,12 @@ class UnityBonus02 implements Bonus {
 
 class UnityPolicy01 implements Policy {
   isDefault = true;
-  id = TurmoilPolicy.UNITY_DEFAULT_POLICY;
+  id = 'up01' as const;
   description: string = 'Your titanium resources are worth 1 M€ extra';
 }
 
 class UnityPolicy02 implements Policy {
-  id = TurmoilPolicy.UNITY_POLICY_2;
+  id = 'up02' as const;
   description: string = 'Spend 4 M€ to gain 2 titanium or add 2 floaters to any card (Turmoil Unity)';
   isDefault = false;
 
@@ -124,7 +123,7 @@ class UnityPolicy02 implements Policy {
 }
 
 class UnityPolicy03 implements Policy {
-  id = TurmoilPolicy.UNITY_POLICY_3;
+  id = 'up03' as const;
   description: string = 'Spend 4 M€ to draw a Space card (Turmoil Unity)';
   isDefault = false;
 
@@ -153,7 +152,7 @@ class UnityPolicy03 implements Policy {
 }
 
 class UnityPolicy04 implements Policy {
-  id = TurmoilPolicy.UNITY_POLICY_4;
+  id = 'up04' as const;
   description: string = 'Cards with Space tags cost 2 M€ less to play';
   isDefault = false;
 }

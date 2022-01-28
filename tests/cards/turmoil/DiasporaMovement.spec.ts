@@ -4,7 +4,7 @@ import {MethaneFromTitan} from '../../../src/cards/base/MethaneFromTitan';
 import {DiasporaMovement} from '../../../src/cards/turmoil/DiasporaMovement';
 import {Game} from '../../../src/Game';
 import {Player} from '../../../src/Player';
-import {Resources} from '../../../src/Resources';
+import {Resources} from '../../../src/common/Resources';
 import {IParty} from '../../../src/turmoil/parties/IParty';
 import {PartyName} from '../../../src/turmoil/parties/PartyName';
 import {Turmoil} from '../../../src/turmoil/Turmoil';

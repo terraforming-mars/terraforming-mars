@@ -2,10 +2,10 @@ import {expect} from 'chai';
 import {InterplanetaryTransport} from '../../../src/cards/pathfinders/InterplanetaryTransport';
 import {Game} from '../../../src/Game';
 import {TestPlayer} from '../../TestPlayer';
-import {newTestGame} from '../../TestGame';
-import {TileType} from '../../../src/TileType';
+import {getTestPlayer, newTestGame} from '../../TestGame';
+import {TileType} from '../../../src/common/TileType';
 import {SpaceName} from '../../../src/SpaceName';
-import {Resources} from '../../../src/Resources';
+import {Resources} from '../../../src/common/Resources';
 
 describe('InterplanetaryTransport', function() {
   let card: InterplanetaryTransport;
@@ -15,7 +15,7 @@ describe('InterplanetaryTransport', function() {
   beforeEach(function() {
     card = new InterplanetaryTransport();
     game = newTestGame(1);
-    player = game.getPlayers()[0] as TestPlayer;
+    player = getTestPlayer(game, 0);
   });
 
   it('play - cities on land yield nothing', function() {

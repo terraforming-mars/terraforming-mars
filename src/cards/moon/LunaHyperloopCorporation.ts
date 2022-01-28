@@ -1,8 +1,8 @@
 import {CardName} from '../../CardName';
 import {MoonExpansion} from '../../moon/MoonExpansion';
 import {Player} from '../../Player';
-import {Resources} from '../../Resources';
-import {TileType} from '../../TileType';
+import {Resources} from '../../common/Resources';
+import {TileType} from '../../common/TileType';
 import {Card} from '../Card';
 import {CardType} from '../CardType';
 import {CorporationCard} from '../corporation/CorporationCard';
@@ -10,7 +10,7 @@ import {IActionCard} from '../ICard';
 import {all} from '../Options';
 import {CardRenderDynamicVictoryPoints} from '../render/CardRenderDynamicVictoryPoints';
 import {CardRenderer} from '../render/CardRenderer';
-import {Tags} from '../Tags';
+import {Tags} from '../../common/cards/Tags';
 
 export class LunaHyperloopCorporation extends Card implements IActionCard, CorporationCard {
   constructor() {
@@ -47,13 +47,13 @@ export class LunaHyperloopCorporation extends Card implements IActionCard, Corpo
   }
 
   public action(player: Player) {
-    const roadTileCount = MoonExpansion.tiles(player.game, TileType.MOON_ROAD, {surfaceOnly: true}).length;
+    const roadTileCount = MoonExpansion.spaces(player.game, TileType.MOON_ROAD, {surfaceOnly: true}).length;
     player.addResource(Resources.MEGACREDITS, roadTileCount, {log: true});
 
     return undefined;
   }
 
-  public getVictoryPoints(player: Player) {
-    return MoonExpansion.tiles(player.game, TileType.MOON_ROAD, {surfaceOnly: true}).length;
+  public override getVictoryPoints(player: Player) {
+    return MoonExpansion.spaces(player.game, TileType.MOON_ROAD, {surfaceOnly: true}).length;
   }
 }

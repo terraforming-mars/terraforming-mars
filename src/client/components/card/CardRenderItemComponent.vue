@@ -182,12 +182,17 @@ export default Vue.extend({
       } else if (type === CardRenderItemType.SPECIALIZED_ROBOT) {
         classes.push('card-resource');
         classes.push('card-resource-specialized-robot');
+      } else if (type === CardRenderItemType.SEED) {
+        classes.push('card-resource');
+        classes.push('card-resource-seed');
       } else if (this.item.type === CardRenderItemType.MOON_COLONY) {
         if (this.item.secondaryTag === AltSecondaryTag.MOON_COLONY_RATE) {
           classes.push(sized('card-tile-lunar-colony-rate', this.item.size));
         } else {
           classes.push(sized('card-tile-lunar-colony', this.item.size));
         }
+      } else if (type === CardRenderItemType.GLOBAL_EVENT) {
+        classes.push('turmoil-global-event');
       }
 
       function sized(clazz: string, size: string | undefined) {

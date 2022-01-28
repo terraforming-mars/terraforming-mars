@@ -1,7 +1,7 @@
 import {expect} from 'chai';
 import {RefugeeCamps} from '../../../src/cards/colonies/RefugeeCamps';
 import {Player} from '../../../src/Player';
-import {Resources} from '../../../src/Resources';
+import {Resources} from '../../../src/common/Resources';
 import {TestPlayers} from '../../TestPlayers';
 
 describe('RefugeeCamps', function() {

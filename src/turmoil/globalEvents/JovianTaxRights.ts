@@ -7,8 +7,7 @@ import {Turmoil} from '../Turmoil';
 import {CardRenderer} from '../../cards/render/CardRenderer';
 
 const RENDER_DATA = CardRenderer.builder((b) => {
-  b.production((pb) => pb.megacredits(1)).slash().colonies(1).br;
-  b.titanium(1).slash().influence();
+  b.production((pb) => pb.megacredits(1)).slash().colonies(1).nbsp.titanium(1).slash().influence();
 });
 
 export class JovianTaxRights extends GlobalEvent implements IGlobalEvent {

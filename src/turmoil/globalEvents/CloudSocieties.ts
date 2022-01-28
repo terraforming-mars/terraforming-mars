@@ -9,7 +9,8 @@ import {CardRenderer} from '../../cards/render/CardRenderer';
 import {AltSecondaryTag} from '../../cards/render/CardRenderItem';
 
 const RENDER_DATA = CardRenderer.builder((b) => {
-  b.cards(1, {secondaryTag: AltSecondaryTag.FLOATER}).colon().floaters(1).br.floaters(1).slash().influence();
+  b.br.cards(1, {secondaryTag: AltSecondaryTag.FLOATER}).colon().floaters(1).nbsp;
+  b.floaters(1).slash().influence();
 });
 
 export class CloudSocieties extends GlobalEvent implements IGlobalEvent {

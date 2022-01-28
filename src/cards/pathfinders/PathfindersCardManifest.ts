@@ -8,10 +8,12 @@ import {Ambient} from './Ambient';
 import {Anthozoa} from './Anthozoa';
 import {AntidesertificationTechniques} from './AntidesertificationTechniques';
 import {AsteroidResources} from './AsteroidResources';
+import {BotanicalExperience} from './BotanicalExperience';
 import {BreedingFarms} from './BreedingFarms';
 import {BioSol} from './BioSol';
 import {CassiniStation} from './CassiniStation';
 import {CeresSpaceport} from './CeresSpaceport';
+import {CharityDonation} from './CharityDonation';
 import {Chimera} from './Chimera';
 import {CO2Reducers} from './CO2Reducers';
 import {CollegiumCopernicus} from './CollegiumCopernicus';
@@ -145,7 +147,7 @@ export const PATHFINDERS_CARD_MANIFEST = new CardManifest({
     {cardName: CardName.LAST_RESORT_INGENUITY, Factory: LastResortIngenuity},
     // // {cardName: CardName.CRASHLANDING, Factory: Crashlanding},                             // COMPLICATED ADJACENCY BONUS RULES
     // // {cardName: CardName.THINK_TANK, Factory: ThinkTank},                                  // COMPLICATED REQUIREMENT RULES
-    // // {cardName: CardName.BOTANICAL_EXPERIENCE, Factory: BotanicalExperience},              // AUTOMATIC INCREASE, TARGETING RULES.
+    {cardName: CardName.BOTANICAL_EXPERIENCE, Factory: BotanicalExperience},
     {cardName: CardName.CRYPTOCURRENCY, Factory: Cryptocurrency},
     {cardName: CardName.RICH_DEPOSITS, Factory: RichDeposits},
     // // *** {cardName: CardName.OUMUAMUA_TYPE_OBJECT_SURVEY, Factory: OumuamuaTypeObjectSurvey},
@@ -153,7 +155,7 @@ export const PATHFINDERS_CARD_MANIFEST = new CardManifest({
     {cardName: CardName.ANTHOZOA, Factory: Anthozoa},
     {cardName: CardName.ADVANCED_POWER_GRID, Factory: AdvancedPowerGrid},
     // // {cardName: CardName.SPECIALIZED_SETTLEMENT, Factory: SpecializedSettlement},          // ROBOTIC WORKFORCE COMPLICATION
-    // // *** {cardName: CardName.CHARITY_DONATION, Factory: CharityDonation},
+    {cardName: CardName.CHARITY_DONATION, Factory: CharityDonation},
     // // {cardName: CardName.CURIOSITY_LABS, Factory: CuriosityLabs},                          // TWO RESOURCE TYPES
     {cardName: CardName.NOBEL_LABS, Factory: NobelLabs},
     {cardName: CardName.HUYGENS_OBSERVATORY, Factory: HuygensObservatory, compatibility: GameModule.Colonies},

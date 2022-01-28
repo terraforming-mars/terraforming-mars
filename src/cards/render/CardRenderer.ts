@@ -226,8 +226,8 @@ class Builder {
     return this._appendToRow(new CardRenderItem(CardRenderItemType.SCIENCE, amount, options));
   }
 
-  public trade(): Builder {
-    return this._appendToRow(new CardRenderItem(CardRenderItemType.TRADE));
+  public trade(options?: ItemOptions): Builder {
+    return this._appendToRow(new CardRenderItem(CardRenderItemType.TRADE, 1, options));
   }
   public tradeFleet(): Builder {
     return this._appendToRow(new CardRenderItem(CardRenderItemType.TRADE_FLEET));

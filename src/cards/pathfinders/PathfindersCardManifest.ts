@@ -2,6 +2,7 @@ import {CardManifest} from '../CardManifest';
 import {CardName} from '../../CardName';
 import {GameModule} from '../../GameModule';
 
+import {AdhaiHighOrbitConstruction} from './AdhaiHighOrbitConstruction';
 import {AdvancedPowerGrid} from './AdvancedPowerGrid';
 import {AgroDrones} from './AgroDrones';
 import {Ambient} from './Ambient';
@@ -199,7 +200,7 @@ export const PATHFINDERS_CARD_MANIFEST = new CardManifest({
     // {cardName: CardName.MARS_FRONTIER_ALLIANCE, Factory: MarsFrontierAlliance},
     // {cardName: CardName.MIND_SET_MARS, Factory: MindSetMars},
     // {cardName: CardName.HABITAT_MARTAE, Factory: HabitatMartae},
-    // {cardName: CardName.ADHAI_HIGH_ORBIT_CONSTRUCTION, Factory: AdhaiHighOrbitConstruction},
+    {cardName: CardName.ADHAI_HIGH_ORBIT_CONSTRUCTION, Factory: AdhaiHighOrbitConstruction},
   ],
   preludeCards: [
     {cardName: CardName.VENUS_FIRST_PATHFINDERS, Factory: VenusFirst, compatibility: GameModule.Venus},

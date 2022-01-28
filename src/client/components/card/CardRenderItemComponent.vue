@@ -113,6 +113,9 @@ export default Vue.extend({
         classes.push('card-resource-science');
       } else if (type === CardRenderItemType.TRADE) {
         classes.push('card-resource-trade');
+        if (this.item.size === Size.SMALL) {
+          classes.push('card-resource-colony--S');
+        }
       } else if (type === CardRenderItemType.COLONIES) {
         classes.push('card-resource-colony');
         // TODO (chosta): think about an abstraction for item size

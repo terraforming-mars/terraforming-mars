@@ -24,7 +24,7 @@ import {Turmoil} from '../turmoil/Turmoil';
 import {VictoryPointsBreakdown} from '../VictoryPointsBreakdown';
 import {GlobalEventName} from '../turmoil/globalEvents/GlobalEventName';
 
-const VALID_TAGS = [Tags.VENUS, Tags.EARTH, Tags.MARS, Tags.JOVIAN, Tags.MOON];
+export const PLANETARY_TAGS = [Tags.VENUS, Tags.EARTH, Tags.MARS, Tags.JOVIAN, Tags.MOON];
 const TRACKS = PlanetaryTracks.initialize();
 
 export class PathfindersExpansion {
@@ -48,7 +48,7 @@ export class PathfindersExpansion {
     }
     const tags = card.tags;
     tags.forEach((tag) => {
-      if (VALID_TAGS.includes(tag)) {
+      if (PLANETARY_TAGS.includes(tag)) {
         PathfindersExpansion.raiseTrack(tag, player);
       }
     });

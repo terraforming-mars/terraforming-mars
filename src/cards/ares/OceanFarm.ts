@@ -4,7 +4,7 @@ import {SelectSpace} from '../../inputs/SelectSpace';
 import {ISpace} from '../../boards/ISpace';
 import {Player} from '../../Player';
 import {Resources} from '../../common/Resources';
-import {SpaceBonus} from '../../SpaceBonus';
+import {SpaceBonus} from '../../common/boards/SpaceBonus';
 import {TileType} from '../../common/TileType';
 import {CardType} from './../CardType';
 import {IProjectCard} from './../IProjectCard';
@@ -42,7 +42,7 @@ export class OceanFarm extends Card implements IProjectCard {
 
     return new SelectSpace(
       'Select space for Ocean Farm',
-      player.game.board.getOceanSpaces(false),
+      player.game.board.getOceanSpaces({upgradedOceans: false}),
       (space: ISpace) => {
         const tile = {
           tileType: TileType.OCEAN_FARM,

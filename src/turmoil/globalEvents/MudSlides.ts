@@ -4,7 +4,6 @@ import {PartyName} from '../parties/PartyName';
 import {Game} from '../../Game';
 import {Resources} from '../../common/Resources';
 import {Turmoil} from '../Turmoil';
-import {TileType} from '../../common/TileType';
 import {CardRenderer} from '../../cards/render/CardRenderer';
 import {Size} from '../../cards/render/Size';
 import {Board} from '../../boards/Board';
@@ -28,7 +27,7 @@ export class MudSlides extends GlobalEvent implements IGlobalEvent {
       const tiles = game.board.spaces.filter(Board.ownedBy(player))
         .filter((space) => space.tile !== undefined &&
           game.board.getAdjacentSpaces(space)
-            .filter((space) => (space.tile !== undefined && space.tile.tileType === TileType.OCEAN)).length > 0,
+            .filter((space) => Board.isOceanSpace(space)).length > 0,
         ).length;
       const amount = Math.min(5, tiles) - turmoil.getPlayerInfluence(player);
       if (amount > 0) {

@@ -110,7 +110,7 @@ export class CardRequirement {
 
     switch (parameter) {
     case GlobalParameter.OCEANS:
-      currentLevel = player.game.board.getOceanCount();
+      currentLevel = player.game.board.getOceanCount({upgradedOceans: true, wetlands: true});
       break;
     case GlobalParameter.OXYGEN:
       currentLevel = player.game.getOxygenLevel();

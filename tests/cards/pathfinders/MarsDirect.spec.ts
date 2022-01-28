@@ -64,7 +64,7 @@ describe('MarsDirect', () => {
       }
     });
     // When this fails, reduce starting MC by 1.5MC per fail.
-    expect(count).eq(28);
+    expect(count).eq(29);
   });
 });
 

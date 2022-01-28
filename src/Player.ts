@@ -46,7 +46,7 @@ import {SerializedCard} from './SerializedCard';
 import {SerializedPlayer} from './SerializedPlayer';
 import {SpaceType} from './SpaceType';
 import {StormCraftIncorporated} from './cards/colonies/StormCraftIncorporated';
-import {Tags} from './cards/Tags';
+import {Tags} from './common/cards/Tags';
 import {VictoryPointsBreakdown} from './VictoryPointsBreakdown';
 import {SelectProductionToLose} from './inputs/SelectProductionToLose';
 import {IAresGlobalParametersResponse, ShiftAresGlobalParameters} from './inputs/ShiftAresGlobalParameters';
@@ -748,6 +748,17 @@ export class Player implements ISerializable<SerializedPlayer> {
 
     if (typeof(options) !== 'number' && options.log === true) {
       LogHelper.logAddResource(this, card, count);
+    }
+
+    // Botanical Experience Hook
+    if (card.name === CardName.BOTANICAL_EXPERIENCE && card.resourceCount >= 3) {
+      const delta = Math.floor(card.resourceCount / 3);
+      const deducted = delta * 3;
+      card.resourceCount -= deducted;
+      // This assumes this player is the card owner. Bad?
+      this.addProduction(Resources.PLANTS, delta, {log: false});
+      this.game.log('${0} removed ${1} data from ${2} to increase plant production {3} steps.',
+        (b) => b.player(this).number(deducted).cardName(CardName.BOTANICAL_EXPERIENCE).number(delta));
     }
   }
 

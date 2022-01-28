@@ -1,4 +1,4 @@
-import {SpaceBonus} from '../SpaceBonus';
+import {SpaceBonus} from '../common/boards/SpaceBonus';
 import {SpaceType} from '../SpaceType';
 import {ITile} from '../ITile';
 import {Player} from '../Player';

@@ -35,7 +35,13 @@ describe('ServeAsset', () => {
   let res: MockResponse;
   let ctx: IContext;
   let fileApi: FileApiMock;
-
+  // The expected state of call counts in most simple cases in this test. This is a template
+  // used and overridden below. That makes how individual condition changes these calls.
+  const primedCache = {
+    readFile: 0,
+    readFileSync: 3,
+    existsSync: 0,
+  };
   // Strictly speaking |parameters| can also accept a fragment.
   const setRequest = function(parameters: string, headers: Array<Array<string>> = []) {
     req.url = parameters;
@@ -44,7 +50,7 @@ describe('ServeAsset', () => {
       req.headers[entry[0]] = entry[1];
     });
   };
-
+  const storedNodeEnv = process.env.NODE_ENV;
   beforeEach(() => {
     instance = new ServeAsset(undefined, false);
     req = {headers: {}} as http.IncomingMessage;
@@ -57,7 +63,9 @@ describe('ServeAsset', () => {
       gameLoader: new FakeGameLoader(),
     };
   });
-
+  afterEach(() => {
+    process.env.NODE_ENV = storedNodeEnv;
+  });
   it('bad filename', () => {
     setRequest('goo.goo.gaa.gaa', [['accept-encoding', '']]);
     instance.get(req, res.hide(), ctx);
@@ -88,36 +96,55 @@ describe('ServeAsset', () => {
   it('styles.css: uncached', () => {
     instance = new ServeAsset(undefined, false, fileApi);
     // Primes the cache.
-    expect(fileApi.counts).deep.eq({readFile: 0, readFileSync: 3, existsSync: 0});
+    expect(fileApi.counts).deep.eq(primedCache);
 
     setRequest('/styles.css', [['accept-encoding', '']]);
     instance.get(req, res.hide(), ctx);
 
     expect(res.content).eq('data: build/styles.css');
     expect(fileApi.counts).deep.eq({
+      ...primedCache,
       readFile: 1, // Still read.
-      readFileSync: 3,
-      existsSync: 0,
     });
   });
 
   it('styles.css.gz: cached', () => {
     instance = new ServeAsset(undefined, true, fileApi);
     // Primes the cache.
-    expect(fileApi.counts).deep.eq({readFile: 0, readFileSync: 3, existsSync: 0});
+    expect(fileApi.counts).deep.eq(primedCache);
 
     setRequest('/styles.css', [['accept-encoding', 'gzip']]);
     instance.get(req, res.hide(), ctx);
 
     expect(res.content).eq('data: build/styles.css.gz');
     expect(fileApi.counts).deep.eq({
+      ...primedCache,
       readFile: 0, // Does not change
-      readFileSync: 3,
-      existsSync: 0,
     });
   });
 
+  it('development main.js', () => {
+    instance = new ServeAsset(undefined, false, fileApi);
+    setRequest('/main.js', [['accept-encoding', '']]);
+    instance.get(req, res.hide(), ctx);
+    expect(res.content).eq('data: build/main.js');
+    expect(fileApi.counts).deep.eq({
+      ...primedCache,
+      readFile: 1,
+      existsSync: 1,
+    });
+  });
 
-  // Cached CSS
-  // Uncached CSS
+  it('production main.js', () => {
+    process.env.NODE_ENV = 'production';
+    instance = new ServeAsset(undefined, false, fileApi);
+    setRequest('/main.js', [['accept-encoding', '']]);
+    instance.get(req, res.hide(), ctx);
+    expect(res.content).eq('data: build/main.js');
+    expect(fileApi.counts).deep.eq({
+      ...primedCache,
+      readFile: 1,
+      existsSync: 0,
+    });
+  });
 });

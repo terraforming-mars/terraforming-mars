@@ -6,7 +6,7 @@ import {CardType} from '../CardType';
 import {CorporationCard} from '../corporation/CorporationCard';
 import {IProjectCard} from '../IProjectCard';
 import {CardRenderer} from '../render/CardRenderer';
-import {Tags} from '../Tags';
+import {Tags} from '../../common/cards/Tags';
 
 export class CrescentResearchAssociation extends Card implements CorporationCard {
   constructor() {

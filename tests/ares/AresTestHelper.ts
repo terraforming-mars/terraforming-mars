@@ -1,5 +1,5 @@
 import {expect} from 'chai';
-import {SpaceBonus} from '../../src/SpaceBonus';
+import {SpaceBonus} from '../../src/common/boards/SpaceBonus';
 import {Player} from '../../src/Player';
 import {Resources} from '../../src/common/Resources';
 import {SpaceType} from '../../src/SpaceType';

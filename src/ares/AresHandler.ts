@@ -6,7 +6,7 @@ import {ISpace} from '../boards/ISpace';
 import {Player} from '../Player';
 import {Resources} from '../common/Resources';
 import {ResourceType} from '../common/ResourceType';
-import {SpaceBonus} from '../SpaceBonus';
+import {SpaceBonus} from '../common/boards/SpaceBonus';
 import {OCEAN_UPGRADE_TILES, TileType} from '../common/TileType';
 import {ITile} from '../ITile';
 import {IAresData, IMilestoneCount} from './IAresData';

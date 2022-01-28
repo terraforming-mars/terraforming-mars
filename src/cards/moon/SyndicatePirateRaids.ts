@@ -4,7 +4,7 @@ import {IProjectCard} from '../IProjectCard';
 import {CardRenderer} from '../render/CardRenderer';
 import {Player} from '../../Player';
 import {Card} from '../Card';
-import {Tags} from '../Tags';
+import {Tags} from '../../common/cards/Tags';
 
 export class SyndicatePirateRaids extends Card implements IProjectCard {
   constructor() {

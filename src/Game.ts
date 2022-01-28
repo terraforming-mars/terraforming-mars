@@ -1269,11 +1269,9 @@ export class Game implements ISerializable<SerializedGame> {
   }
 
   public getSpaceCount(tileType: TileType, player: Player): number {
-    return this.board.spaces.filter(
-      (space) => space.tile?.tileType === tileType &&
-                  space.player !== undefined &&
-                  space.player === player,
-    ).length;
+    return this.board.spaces.filter(Board.ownedBy(player))
+      .filter((space) => space.tile?.tileType === tileType)
+      .length;
   }
 
   // addTile applies to the Mars board, but not the Moon board, see MoonExpansion.addTile for placing

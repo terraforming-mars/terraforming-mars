@@ -4,7 +4,7 @@ import {IContext} from './IHandler';
 import {Phase} from '../Phase';
 import {Player} from '../Player';
 import {WaitingForModel} from '../models/WaitingForModel';
-import {Game} from '@/Game';
+import {Game} from '../Game';
 import {isPlayerId, isSpectatorId} from '../utils/utils';
 
 export class ApiWaitingFor extends Handler {

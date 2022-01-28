@@ -10,7 +10,7 @@ import {SpaceType} from '../../SpaceType';
 import {TileType} from '../../common/TileType';
 import {CardType} from '../CardType';
 import {IProjectCard} from '../IProjectCard';
-import {Tags} from '../Tags';
+import {Tags} from '../../common/cards/Tags';
 import {AddResourcesToCard} from '../../deferredActions/AddResourcesToCard';
 import {CardRequirements} from '../CardRequirements';
 import {CardRenderer} from '../render/CardRenderer';

@@ -2,7 +2,7 @@ import {Resources} from '../common/Resources';
 import {PartyName} from '../turmoil/parties/PartyName';
 import {CardRequirement, PartyCardRequirement, ProductionCardRequirement, TagCardRequirement} from './CardRequirement';
 import {RequirementType} from './RequirementType';
-import {Tags} from './Tags';
+import {Tags} from '../common/cards/Tags';
 import {Player} from '../Player';
 import {
   MAX_OCEAN_TILES,

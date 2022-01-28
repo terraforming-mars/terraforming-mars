@@ -5,7 +5,7 @@ import {ISpace} from '../boards/ISpace';
 import {Message} from '../common/logs/Message';
 import {PlayerInput} from '../PlayerInput';
 import {Player} from '../Player';
-import {Tags} from './Tags';
+import {Tags} from '../common/cards/Tags';
 import {SelectAmount} from '../inputs/SelectAmount';
 import {SelectCard} from '../inputs/SelectCard';
 import {SelectHowToPay} from '../inputs/SelectHowToPay';

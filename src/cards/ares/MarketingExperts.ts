@@ -4,7 +4,7 @@ import {Player} from '../../Player';
 import {Resources} from '../../common/Resources';
 import {CardType} from '../CardType';
 import {IProjectCard} from '../IProjectCard';
-import {Tags} from '../Tags';
+import {Tags} from '../../common/cards/Tags';
 import {CardRenderer} from '../render/CardRenderer';
 
 export class MarketingExperts extends Card implements IProjectCard {

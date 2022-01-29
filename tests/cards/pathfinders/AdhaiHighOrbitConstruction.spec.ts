@@ -1,6 +1,6 @@
 import {expect} from 'chai';
 import {getTestPlayer, newTestGame} from '../../TestGame';
-import {AdhaiHighOrbitConstruction} from '../../../src/cards/pathfinders/AdhaiHighOrbitConstruction';
+import {AdhaiHighOrbitConstructions} from '../../../src/cards/pathfinders/AdhaiHighOrbitConstructions';
 import {Game} from '../../../src/Game';
 import {TestPlayer} from '../../TestPlayer';
 import {SearchForLife} from '../../../src/cards/base/SearchForLife';
@@ -13,13 +13,13 @@ import {ColoniesHandler} from '../../../src/colonies/ColoniesHandler';
 import {TestingUtils} from '../../TestingUtils';
 import {OrOptions} from '../../../src/inputs/OrOptions';
 
-describe('AdhaiHighOrbitConstruction', function() {
+describe('AdhaiHighOrbitConstructions', function() {
   let game: Game;
   let player: TestPlayer;
-  let card: AdhaiHighOrbitConstruction;
+  let card: AdhaiHighOrbitConstructions;
 
   beforeEach(function() {
-    card = new AdhaiHighOrbitConstruction();
+    card = new AdhaiHighOrbitConstructions();
     game = newTestGame(1, {coloniesExtension: true});
     player = getTestPlayer(game, 0);
     player.corporationCard = card;

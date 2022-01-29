@@ -12,11 +12,11 @@ import {played} from '../Options';
 import {Size} from '../render/Size';
 import {AltSecondaryTag} from '../render/CardRenderItem';
 
-export class AdhaiHighOrbitConstruction extends Card implements CorporationCard {
+export class AdhaiHighOrbitConstructions extends Card implements CorporationCard {
   constructor() {
     super({
       cardType: CardType.CORPORATION,
-      name: CardName.ADHAI_HIGH_ORBIT_CONSTRUCTION,
+      name: CardName.ADHAI_HIGH_ORBIT_CONSTRUCTIONS,
       tags: [Tags.SPACE],
       startingMegaCredits: 43,
       resourceType: ResourceType.SPECIALIZED_ROBOT,
@@ -55,13 +55,13 @@ export class AdhaiHighOrbitConstruction extends Card implements CorporationCard 
   }
 
   public onCardPlayed(player: Player, card: IProjectCard) {
-    if (player.isCorporation(CardName.ADHAI_HIGH_ORBIT_CONSTRUCTION) && this.matchingTags(card.tags)) {
+    if (player.isCorporation(CardName.ADHAI_HIGH_ORBIT_CONSTRUCTIONS) && this.matchingTags(card.tags)) {
       player.addResourceTo(this, 1);
     }
   }
 
   public getCardDiscount(player: Player, card: IProjectCard) {
-    if (player.isCorporation(CardName.ADHAI_HIGH_ORBIT_CONSTRUCTION) && this.matchingTags(card.tags)) {
+    if (player.isCorporation(CardName.ADHAI_HIGH_ORBIT_CONSTRUCTIONS) && this.matchingTags(card.tags)) {
       return Math.floor(this.resourceCount / 2);
     } else {
       return 0;

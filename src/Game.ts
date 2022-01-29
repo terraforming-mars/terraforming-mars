@@ -1039,7 +1039,7 @@ export class Game implements ISerializable<SerializedGame> {
       this.log('This game id was ' + this.id);
     }
 
-    Database.getInstance().cleanSaves(this.id, this.lastSaveId);
+    Database.getInstance().cleanSaves(this.id);
     const scores: Array<Score> = [];
     this.players.forEach((player) => {
       let corponame: string = '';

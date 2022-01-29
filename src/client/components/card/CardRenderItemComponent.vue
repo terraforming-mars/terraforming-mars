@@ -232,6 +232,9 @@ export default Vue.extend({
         classes.push('card-planetary-track');
       }
 
+      if (this.item.secondaryTag === AltSecondaryTag.NO_PLANETARY_TAG) {
+        classes.push('tag-clone');
+      }
       // round tags
       if (this.item.isPlayed) {
         // override resource behavior

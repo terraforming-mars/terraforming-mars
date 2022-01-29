@@ -1374,6 +1374,23 @@
                 height: 16px;
                 border-radius: 50%;
             }
+            .card-tag-no_planetary_tag {
+                .tag-clone();
+            }
+            .card-tag-no_planetary_tag:after {
+                content: '';
+                height:20px;
+                border-left: 2px solid #f00;
+                position: absolute;
+                transform: rotate(45deg);
+            }
+            .card-tag-no_planetary_tag:before {
+                content: '';
+                height: 20px;
+                border-left: 2px solid #f00;
+                position: absolute;
+                transform: rotate(-45deg);
+            }
             .card-tag-turmoil:after {
                 position: absolute;
                 color: #222;

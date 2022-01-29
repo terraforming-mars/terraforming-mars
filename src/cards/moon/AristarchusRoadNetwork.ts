@@ -2,7 +2,7 @@ import {CardName} from '../../CardName';
 import {Player} from '../../Player';
 import {CardType} from '../CardType';
 import {PlaceMoonRoadTile} from '../../moon/PlaceMoonRoadTile';
-import {Tags} from '../Tags';
+import {Tags} from '../../common/cards/Tags';
 import {CardRenderer} from '../render/CardRenderer';
 import {TileType} from '../../common/TileType';
 import {Units} from '../../Units';

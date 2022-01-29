@@ -91,12 +91,12 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/bafolts/terraforming-mars.git"
+    "url": "git+https://github.com/terraforming-mars/terraforming-mars.git"
   },
   "author": "",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/bafolts/terraforming-mars/issues"
+    "url": "https://github.com/terraforming-mars/terraforming-mars/issues"
   },
-  "homepage": "https://github.com/bafolts/terraforming-mars#readme"
+  "homepage": "https://github.com/terraforming-mars/terraforming-mars#readme"
 }

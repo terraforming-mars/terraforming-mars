@@ -1,1 +1,18 @@
-../../cards/Tags.ts
+export enum Tags {
+    BUILDING = 'building',
+    SPACE = 'space',
+    SCIENCE = 'science',
+    ENERGY = 'power',
+    EARTH = 'earth',
+    JOVIAN = 'jovian',
+    VENUS = 'venus',
+    PLANT = 'plant',
+    MICROBE = 'microbe',
+    ANIMAL = 'animal',
+    CITY = 'city',
+    MOON = 'moon',
+    MARS = 'mars',
+    WILDCARD = 'wild',
+    EVENT = 'event',
+    CLONE = 'clone',
+}

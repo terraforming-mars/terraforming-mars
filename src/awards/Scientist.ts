@@ -1,6 +1,6 @@
 import {IAward} from './IAward';
 import {Player} from '../Player';
-import {Tags} from '../cards/Tags';
+import {Tags} from '../common/cards/Tags';
 
 export class Scientist implements IAward {
     public name: string = 'Scientist';

@@ -4,7 +4,7 @@ import {Card} from '../Card';
 import {CardType} from '../CardType';
 import {CardName} from '../../CardName';
 import {CardRenderer} from '../render/CardRenderer';
-import {Tags} from '../Tags';
+import {Tags} from '../../common/cards/Tags';
 import {SelectSpace} from '../../inputs/SelectSpace';
 import {ISpace} from '../../boards/ISpace';
 import {AddResourcesToCard} from '../../deferredActions/AddResourcesToCard';

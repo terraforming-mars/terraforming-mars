@@ -38,7 +38,7 @@
                               <div v-bind:key="pCount">
                                 <input type="radio" :value="pCount" name="playersCount" v-model="playersCount" :id="pCount+'-radio'">
                                 <label :for="pCount+'-radio'">
-                                    <span v-html="pCount === 1 ? 'Solo' : pCount"></span>
+                                    {{pCount === 1 ? 'Solo' : pCount}}
                                 </label>
                               </div>
                             </template>

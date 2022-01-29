@@ -5,9 +5,9 @@ import {ISpace} from '../../boards/ISpace';
 import {Player} from '../../Player';
 import {Resources} from '../../common/Resources';
 import {TileType} from '../../common/TileType';
-import {CardType} from './../CardType';
-import {IProjectCard} from './../IProjectCard';
-import {Tags} from './../Tags';
+import {CardType} from '../CardType';
+import {IProjectCard} from '../IProjectCard';
+import {Tags} from '../../common/cards/Tags';
 import {CardRequirements} from '../CardRequirements';
 import {CardRenderer} from '../render/CardRenderer';
 import {Units} from '../../Units';
@@ -45,7 +45,7 @@ export class OceanCity extends Card implements IProjectCard {
 
     return new SelectSpace(
       'Select space for Ocean City',
-      player.game.board.getOceanSpaces(false),
+      player.game.board.getOceanSpaces({upgradedOceans: false}),
       (space: ISpace) => {
         const tile = {
           tileType: TileType.OCEAN_CITY,

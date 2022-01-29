@@ -38,7 +38,7 @@ export class ReturntoAbandonedTechnology extends Card implements IProjectCard {
     }
 
     const cardsToKeep = Math.min(2, cards.length);
-    return DrawCards.choose(player, cards, {keepMax: cardsToKeep, logDrawnCard: true});
+    return DrawCards.choose(player, cards, {keepMax: cardsToKeep});
   }
 }
 

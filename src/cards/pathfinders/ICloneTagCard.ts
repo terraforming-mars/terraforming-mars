@@ -1,4 +1,4 @@
-import {Tags} from '../Tags';
+import {Tags} from '../../common/cards/Tags';
 
 /*
  * Implementing clone tags is a little tricky and falls outside of fairly standard behavior.

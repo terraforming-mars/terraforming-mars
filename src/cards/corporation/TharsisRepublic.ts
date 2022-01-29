@@ -1,6 +1,6 @@
 import {Card} from '../Card';
 import {CorporationCard} from './CorporationCard';
-import {Tags} from '../Tags';
+import {Tags} from '../../common/cards/Tags';
 import {Player} from '../../Player';
 import {SelectSpace} from '../../inputs/SelectSpace';
 import {SpaceType} from '../../SpaceType';

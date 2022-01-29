@@ -6,7 +6,7 @@ import {CardType} from '../CardType';
 import {CorporationCard} from '../corporation/CorporationCard';
 import {CardRenderer} from '../render/CardRenderer';
 import {Size} from '../render/Size';
-import {Tags} from '../Tags';
+import {Tags} from '../../common/cards/Tags';
 import {Turmoil} from '../../turmoil/Turmoil';
 
 export class TempestConsultancy extends Card implements CorporationCard {

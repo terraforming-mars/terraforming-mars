@@ -3,7 +3,6 @@ import {Tags} from '../../common/cards/Tags';
 import {Player} from '../../Player';
 import {ISpace} from '../../boards/ISpace';
 import {Resources} from '../../common/Resources';
-import {TileType} from '../../common/TileType';
 import {Card} from '../Card';
 import {CardName} from '../../CardName';
 import {Priority} from '../../deferredActions/DeferredAction';
@@ -12,6 +11,7 @@ import {CardType} from '../CardType';
 import {CardRenderer} from '../render/CardRenderer';
 import {Size} from '../render/Size';
 import {all} from '../Options';
+import {Board} from '../../boards/Board';
 
 export class LakefrontResorts extends Card implements CorporationCard {
   constructor() {
@@ -46,7 +46,7 @@ export class LakefrontResorts extends Card implements CorporationCard {
   }
 
   public onTilePlaced(cardOwner: Player, activePlayer: Player, space: ISpace) {
-    if (space.tile?.tileType === TileType.OCEAN) {
+    if (Board.isUncoveredOceanSpace(space)) {
       cardOwner.game.defer(
         new GainProduction(cardOwner, Resources.MEGACREDITS),
         cardOwner.id !== activePlayer.id ? Priority.OPPONENT_TRIGGER : undefined,

@@ -24,7 +24,7 @@ import {CardName} from '../src/CardName';
 import {Player} from '../src/Player';
 import {Color} from '../src/Color';
 import {RandomMAOptionType} from '../src/RandomMAOptionType';
-import {SpaceBonus} from '../src/SpaceBonus';
+import {SpaceBonus} from '../src/common/boards/SpaceBonus';
 import {TileType} from '../src/common/TileType';
 import {ALL_AWARDS} from '../src/awards/Awards';
 import {ALL_MILESTONES} from '../src/milestones/Milestones';

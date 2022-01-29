@@ -52,7 +52,7 @@ class GreensBonus02 implements Bonus {
 
   getScore(player: Player) {
     const boardSpaces = player.game.board.spaces;
-    const count = boardSpaces.filter((space) => Board.isGreenerySpace(space) && space.player !== undefined && space.player.id === player.id).length;
+    const count = boardSpaces.filter((space) => Board.isGreenerySpace(space) && Board.spaceOwnedBy(space, player)).length;
     return count * 2;
   }
 

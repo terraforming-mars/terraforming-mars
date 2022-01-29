@@ -1,6 +1,6 @@
 import {Card} from '../Card';
 import {CorporationCard} from '../corporation/CorporationCard';
-import {Tags} from '../Tags';
+import {Tags} from '../../common/cards/Tags';
 import {Player} from '../../Player';
 import {Resources} from '../../common/Resources';
 import {CardName} from '../../CardName';

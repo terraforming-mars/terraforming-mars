@@ -2,7 +2,7 @@ import {Player} from '../../Player';
 import {PreludeCard} from '../prelude/PreludeCard';
 import {CardName} from '../../CardName';
 import {CardRenderer} from '../render/CardRenderer';
-import {Tags} from '../Tags';
+import {Tags} from '../../common/cards/Tags';
 import {CardType} from '../CardType';
 import {Units} from '../../Units';
 

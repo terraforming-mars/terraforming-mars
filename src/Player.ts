@@ -757,7 +757,7 @@ export class Player implements ISerializable<SerializedPlayer> {
       card.resourceCount -= deducted;
       // This assumes this player is the card owner. Bad?
       this.addProduction(Resources.PLANTS, delta, {log: false});
-      this.game.log('${0} removed ${1} data from ${2} to increase plant production {3} steps.',
+      this.game.log('${0} removed ${1} data from ${2} to increase plant production ${3} steps.',
         (b) => b.player(this).number(deducted).cardName(CardName.BOTANICAL_EXPERIENCE).number(delta));
     }
   }

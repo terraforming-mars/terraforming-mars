@@ -8,7 +8,7 @@
 
 import Vue from 'vue';
 import CardTag from '@/client/components/card/CardTag.vue';
-import {Tags} from '@/cards/Tags';
+import {Tags} from '@/common/cards/Tags';
 
 export default Vue.extend({
   name: 'CardTags',

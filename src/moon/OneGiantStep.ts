@@ -1,4 +1,4 @@
-import {Tags} from '../cards/Tags';
+import {Tags} from '../common/cards/Tags';
 import {IMilestone} from '../milestones/IMilestone';
 import {Player} from '../Player';
 

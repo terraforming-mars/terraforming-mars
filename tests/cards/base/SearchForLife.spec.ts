@@ -1,6 +1,6 @@
 import {expect} from 'chai';
 import {SearchForLife} from '../../../src/cards/base/SearchForLife';
-import {Tags} from '../../../src/cards/Tags';
+import {Tags} from '../../../src/common/cards/Tags';
 import {Game} from '../../../src/Game';
 import {Player} from '../../../src/Player';
 import {TestPlayers} from '../../TestPlayers';

@@ -8,7 +8,7 @@ import {TitanShuttles} from '../../../src/cards/colonies/TitanShuttles';
 import {FloatingHabs} from '../../../src/cards/venusNext/FloatingHabs';
 import {MartianCulture} from '../../../src/cards/pathfinders/MartianCulture';
 import {TestingUtils} from '../../TestingUtils';
-import {Tags} from '../../../src/cards/Tags';
+import {Tags} from '../../../src/common/cards/Tags';
 
 describe('TerraformingRobots', function() {
   let card: TerraformingRobots;

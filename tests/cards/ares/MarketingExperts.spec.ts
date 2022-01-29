@@ -6,7 +6,7 @@ import {expect} from 'chai';
 import {SpaceType} from '../../../src/SpaceType';
 import {TileType} from '../../../src/common/TileType';
 import {ARES_OPTIONS_NO_HAZARDS} from '../../ares/AresTestHelper';
-import {SpaceBonus} from '../../../src/SpaceBonus';
+import {SpaceBonus} from '../../../src/common/boards/SpaceBonus';
 import {EmptyBoard} from '../../ares/EmptyBoard';
 import {TestPlayers} from '../../TestPlayers';
 

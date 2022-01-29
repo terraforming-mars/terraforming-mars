@@ -1,6 +1,6 @@
 import {CardName} from '../../CardName';
 import {Player} from '../../Player';
-import {Tags} from '../Tags';
+import {Tags} from '../../common/cards/Tags';
 import {PreludeCard} from '../prelude/PreludeCard';
 import {PlaceMoonColonyTile} from '../../moon/PlaceMoonColonyTile';
 import {CardRenderer} from '../render/CardRenderer';

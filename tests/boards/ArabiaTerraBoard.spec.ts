@@ -6,7 +6,7 @@ import {TileType} from '../../src/common/TileType';
 import {SpaceType} from '../../src/SpaceType';
 import {TestPlayers} from '../TestPlayers';
 import {Random} from '../../src/Random';
-import {SpaceBonus} from '../../src/SpaceBonus';
+import {SpaceBonus} from '../../src/common/boards/SpaceBonus';
 import {TestingUtils} from '../TestingUtils';
 import {BoardName} from '../../src/boards/BoardName';
 import {ProcessorFactory} from '../../src/cards/moon/ProcessorFactory';

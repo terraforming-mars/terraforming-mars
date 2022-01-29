@@ -7,7 +7,7 @@
 <script lang="ts">
 
 import Vue from 'vue';
-import {SpaceBonus} from '@/SpaceBonus';
+import {SpaceBonus} from '@/common/boards/SpaceBonus';
 
 export default Vue.extend({
   name: 'bonus',

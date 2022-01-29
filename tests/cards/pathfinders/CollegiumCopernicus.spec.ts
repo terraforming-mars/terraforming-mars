@@ -126,4 +126,11 @@ describe('CollegiumCopernicus', function() {
     expect(lunarObservationPost.resourceCount).eq(1);
     expect(card.resourceCount).eq(0);
   });
+
+  it('initialAction', function() {
+    expect(player.cardsInHand).is.empty;
+    card.initialAction(player);
+    expect(player.cardsInHand).has.length(2);
+    expect(player.cardsInHand.filter((card) => card.tags.includes(Tags.SCIENCE))).has.length(2);
+  });
 });

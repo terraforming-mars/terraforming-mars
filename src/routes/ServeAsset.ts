@@ -132,7 +132,7 @@ export class ServeAsset extends Handler {
       }
 
       // Return not-compressed .js files for development mode
-      if (!this.fileApi.existsSync(file)) {
+      if (!isProduction() && !this.fileApi.existsSync(file)) {
         encoding = undefined;
         file = `build/${urlPath}`;
       }

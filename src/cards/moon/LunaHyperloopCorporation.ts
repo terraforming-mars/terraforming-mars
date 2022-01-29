@@ -10,7 +10,7 @@ import {IActionCard} from '../ICard';
 import {all} from '../Options';
 import {CardRenderDynamicVictoryPoints} from '../render/CardRenderDynamicVictoryPoints';
 import {CardRenderer} from '../render/CardRenderer';
-import {Tags} from '../Tags';
+import {Tags} from '../../common/cards/Tags';
 
 export class LunaHyperloopCorporation extends Card implements IActionCard, CorporationCard {
   constructor() {

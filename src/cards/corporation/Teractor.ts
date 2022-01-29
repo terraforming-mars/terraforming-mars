@@ -1,5 +1,5 @@
 import {Card} from '../Card';
-import {Tags} from '../Tags';
+import {Tags} from '../../common/cards/Tags';
 import {CorporationCard} from './CorporationCard';
 import {Player} from '../../Player';
 import {IProjectCard} from '../IProjectCard';

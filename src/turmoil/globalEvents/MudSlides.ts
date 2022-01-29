@@ -4,9 +4,9 @@ import {PartyName} from '../parties/PartyName';
 import {Game} from '../../Game';
 import {Resources} from '../../common/Resources';
 import {Turmoil} from '../Turmoil';
-import {TileType} from '../../common/TileType';
 import {CardRenderer} from '../../cards/render/CardRenderer';
 import {Size} from '../../cards/render/Size';
+import {Board} from '../../boards/Board';
 
 const RENDER_DATA = CardRenderer.builder((b) => {
   b.minus().megacredits(4).slash().oceans(1).emptyTile().influence({size: Size.SMALL});
@@ -24,11 +24,11 @@ export class MudSlides extends GlobalEvent implements IGlobalEvent {
   }
   public resolve(game: Game, turmoil: Turmoil) {
     game.getPlayers().forEach((player) => {
-      const tiles = game.board.spaces.filter((space) => (space.player !== undefined && space.player === player && space.tile !== undefined) &&
-                               game.board.getAdjacentSpaces(space)
-                                 .filter((space) => (space.tile !== undefined &&
-                                           space.tile.tileType === TileType.OCEAN)).length > 0,
-      ).length;
+      const tiles = game.board.spaces.filter(Board.ownedBy(player))
+        .filter((space) => space.tile !== undefined &&
+          game.board.getAdjacentSpaces(space)
+            .filter((space) => Board.isOceanSpace(space)).length > 0,
+        ).length;
       const amount = Math.min(5, tiles) - turmoil.getPlayerInfluence(player);
       if (amount > 0) {
         player.deductResource(Resources.MEGACREDITS, 4 * amount, {log: true, from: this.name});

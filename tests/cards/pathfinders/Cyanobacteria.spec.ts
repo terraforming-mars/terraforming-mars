@@ -8,6 +8,7 @@ import {AndOptions} from '../../../src/inputs/AndOptions';
 import {GHGProducingBacteria} from '../../../src/cards/base/GHGProducingBacteria';
 import {Tardigrades} from '../../../src/cards/base/Tardigrades';
 import {Ants} from '../../../src/cards/base/Ants';
+import {TileType} from '../../../src/common/TileType';
 
 describe('Cyanobacteria', function() {
   let card: Cyanobacteria;
@@ -42,6 +43,20 @@ describe('Cyanobacteria', function() {
     // 9 oceans, so, maxed out.
     TestingUtils.runAllActions(player.game);
     expect(ghgProducingBacteria.resourceCount).eq(9);
+  });
+
+  it('play, one microbe card, include Wetlands', function() {
+    player.playedCards = [ghgProducingBacteria];
+    player.game.simpleAddTile(
+      player,
+      player.game.board.getAvailableSpacesOnLand(player)[0],
+      {tileType: TileType.WETLANDS});
+
+    const options = card.play(player);
+    expect(options).is.undefined;
+    TestingUtils.runAllActions(player.game);
+    // 9 oceans plus wetlands, so 10.
+    expect(ghgProducingBacteria.resourceCount).eq(10);
   });
 
   it('play, many microbe cards', function() {

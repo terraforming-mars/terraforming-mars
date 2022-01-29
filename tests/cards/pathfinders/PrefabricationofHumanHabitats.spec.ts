@@ -4,7 +4,7 @@ import {Game} from '../../../src/Game';
 import {TestPlayer} from '../../TestPlayer';
 import {TestPlayers} from '../../TestPlayers';
 import {ImmigrantCity} from '../../../src/cards/base/ImmigrantCity';
-import {CityStandardProject} from '../../../src//cards/base/standardProjects/CityStandardProject';
+import {CityStandardProject} from '../../../src/cards/base/standardProjects/CityStandardProject';
 
 describe('PrefabricationofHumanHabitats', function() {
   let card: PrefabricationofHumanHabitats;

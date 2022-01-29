@@ -4,7 +4,7 @@ import {Card} from '../Card';
 import {CardType} from '../CardType';
 import {CardName} from '../../CardName';
 import {CardRenderer} from '../render/CardRenderer';
-import {Tags} from '../Tags';
+import {Tags} from '../../common/cards/Tags';
 import {CardRequirements} from '../CardRequirements';
 import {Resources} from '../../common/Resources';
 
@@ -31,8 +31,7 @@ export class HydrogenProcessingPlant extends Card implements IProjectCard {
   }
 
   public produce(player: Player) {
-    // Take Wetlands into account.
-    player.addProduction(Resources.ENERGY, Math.floor(player.game.board.getOceanCount() / 2), {log: true});
+    player.addProduction(Resources.ENERGY, Math.floor(player.game.board.getOceanCount({wetlands: true}) / 2), {log: true});
   }
 
   public play(player: Player) {

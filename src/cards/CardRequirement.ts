@@ -1,5 +1,5 @@
 import {RequirementType} from './RequirementType';
-import {Tags} from './Tags';
+import {Tags} from '../common/cards/Tags';
 import {PartyName} from '../turmoil/parties/PartyName';
 import {Resources} from '../common/Resources';
 import {Player} from '../Player';
@@ -110,7 +110,7 @@ export class CardRequirement {
 
     switch (parameter) {
     case GlobalParameter.OCEANS:
-      currentLevel = player.game.board.getOceanCount();
+      currentLevel = player.game.board.getOceanCount({upgradedOceans: true, wetlands: true});
       break;
     case GlobalParameter.OXYGEN:
       currentLevel = player.game.getOxygenLevel();

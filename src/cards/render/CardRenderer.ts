@@ -227,7 +227,7 @@ class Builder {
   }
 
   public trade(options?: ItemOptions): Builder {
-    return this._appendToRow(new CardRenderItem(CardRenderItemType.TRADE, 1, options));
+    return this._appendToRow(new CardRenderItem(CardRenderItemType.TRADE, -1, options));
   }
   public tradeFleet(): Builder {
     return this._appendToRow(new CardRenderItem(CardRenderItemType.TRADE_FLEET));

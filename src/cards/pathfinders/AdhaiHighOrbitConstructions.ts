@@ -19,19 +19,19 @@ export class AdhaiHighOrbitConstructions extends Card implements CorporationCard
       name: CardName.ADHAI_HIGH_ORBIT_CONSTRUCTIONS,
       tags: [Tags.SPACE],
       startingMegaCredits: 43,
-      resourceType: ResourceType.SPECIALIZED_ROBOT,
+      resourceType: ResourceType.ORBITAL,
 
       metadata: {
         cardNumber: 'PfC23',
         description: 'You start with 43 M€',
         renderData: CardRenderer.builder((b) => {
-          b.megacredits(43).nbsp.nbsp.space({played, secondaryTag: AltSecondaryTag.NO_PLANETARY_TAG}).colon().specializedRobot(1).br;
+          b.megacredits(43).nbsp.nbsp.space({played, secondaryTag: AltSecondaryTag.NO_PLANETARY_TAG}).colon().orbital().br;
           b.text('(Effect: When ever you play a card with a space tag BUT NO PLANETARY TAG (including this) add 1 orbital on this card.)', Size.SMALL, false, false);
           b.br;
           b.effect('For every 2 orbitals on this card, cards with a space tag but with no planetary tag or the standard colony project or trade action costs 1M€ less.', (eb) => {
             eb.space({played, secondaryTag: AltSecondaryTag.NO_PLANETARY_TAG}).slash(Size.SMALL).colonies(1, {size: Size.SMALL}).slash(Size.SMALL).trade({size: Size.SMALL})
               .startEffect
-              .minus().megacredits(1).text('/2').specializedRobot(1);
+              .minus().megacredits(1).text('/2').orbital();
           });
         }),
       },

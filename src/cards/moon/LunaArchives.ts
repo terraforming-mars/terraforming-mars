@@ -1,10 +1,10 @@
 import {CardName} from '../../CardName';
 import {Player} from '../../Player';
 import {CardType} from '../CardType';
-import {Tags} from '../Tags';
+import {Tags} from '../../common/cards/Tags';
 import {CardRenderer} from '../render/CardRenderer';
 import {Card} from '../Card';
-import {ResourceType} from '../../ResourceType';
+import {ResourceType} from '../../common/ResourceType';
 import {IActionCard, IResourceCard} from '../ICard';
 import {played} from '../Options';
 
@@ -30,15 +30,15 @@ export class LunaArchives extends Card implements IResourceCard, IActionCard {
     });
   };
 
-  public resourceCount = 0;
+  public override resourceCount = 0;
 
   public canAct() {
     return true;
   }
 
   public action(player: Player) {
-    const count = player.getTagCount(Tags.MOON);
-    player.addResourceTo(this, {qty: count, log: true});
+    const qty = player.getTagCount(Tags.MOON);
+    player.addResourceTo(this, {qty, log: true});
     return undefined;
   }
 

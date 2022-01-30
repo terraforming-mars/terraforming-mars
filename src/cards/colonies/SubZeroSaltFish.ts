@@ -1,10 +1,10 @@
 import {IProjectCard} from '../IProjectCard';
-import {Tags} from '../Tags';
+import {Tags} from '../../common/cards/Tags';
 import {CardType} from '../CardType';
 import {Player} from '../../Player';
 import {CardName} from '../../CardName';
-import {ResourceType} from '../../ResourceType';
-import {Resources} from '../../Resources';
+import {Resources} from '../../common/Resources';
+import {ResourceType} from '../../common/ResourceType';
 import {IResourceCard} from '../ICard';
 import {DecreaseAnyProduction} from '../../deferredActions/DecreaseAnyProduction';
 import {CardRenderer} from '../render/CardRenderer';
@@ -42,13 +42,13 @@ export class SubZeroSaltFish extends Card implements IProjectCard, IResourceCard
     });
   }
 
-  public resourceCount: number = 0;
+  public override resourceCount: number = 0;
 
   public canAct(): boolean {
     return true;
   }
 
-  public canPlay(player: Player): boolean {
+  public override canPlay(player: Player): boolean {
     return player.game.someoneHasResourceProduction(Resources.PLANTS, 1);
   }
 
@@ -58,7 +58,8 @@ export class SubZeroSaltFish extends Card implements IProjectCard, IResourceCard
   }
 
   public play(player: Player) {
-    player.game.defer(new DecreaseAnyProduction(player, Resources.PLANTS, 1));
+    player.game.defer(
+      new DecreaseAnyProduction(player, Resources.PLANTS, {count: 1}));
     return undefined;
   }
 }

@@ -1,6 +1,6 @@
 import {expect} from 'chai';
 import {FueledGenerators} from '../../../src/cards/base/FueledGenerators';
-import {Resources} from '../../../src/Resources';
+import {Resources} from '../../../src/common/Resources';
 import {TestPlayers} from '../../TestPlayers';
 
 describe('FueledGenerators', function() {

@@ -6,11 +6,11 @@ import {CardType} from '../CardType';
 import {CardName} from '../../CardName';
 import {CardRenderer} from '../render/CardRenderer';
 import {AddResourcesToCard} from '../../deferredActions/AddResourcesToCard';
-import {ResourceType} from '../../ResourceType';
-import {Tags} from '../Tags';
+import {ResourceType} from '../../common/ResourceType';
+import {Tags} from '../../common/cards/Tags';
 import {CardRequirements} from '../CardRequirements';
 import {PartyName} from '../../turmoil/parties/PartyName';
-import {Resources} from '../../Resources';
+import {Resources} from '../../common/Resources';
 import {SpaceName} from '../../SpaceName';
 import {SpaceType} from '../../SpaceType';
 
@@ -34,7 +34,7 @@ export class VeneraBase extends Card implements IProjectCard, IActionCard {
           b.br;
           b.vpText('1 VP per 2 Venus tags you have.');
         }),
-        description: 'Requires Unity is ruling or that you have 2 delegates there. Raise your MC production 3 steps and place a city tile ON THE RESERVED AREA.',
+        description: 'Requires Unity is ruling or that you have 2 delegates there. Raise your M€ production 3 steps and place a city tile ON THE RESERVED AREA.',
       },
     });
   }

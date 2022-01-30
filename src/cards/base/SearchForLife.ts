@@ -1,10 +1,10 @@
 import {IActionCard, IResourceCard} from '../ICard';
 import {IProjectCard} from '../IProjectCard';
-import {Tags} from '../Tags';
+import {Tags} from '../../common/cards/Tags';
 import {Card} from '../Card';
 import {CardType} from '../CardType';
 import {Player} from '../../Player';
-import {ResourceType} from '../../ResourceType';
+import {ResourceType} from '../../common/ResourceType';
 import {CardName} from '../../CardName';
 import {SelectHowToPayDeferred} from '../../deferredActions/SelectHowToPayDeferred';
 import {CardRequirements} from '../CardRequirements';
@@ -37,9 +37,9 @@ export class SearchForLife extends Card implements IActionCard, IProjectCard, IR
       },
     });
   }
-    public resourceCount = 0;
+    public override resourceCount = 0;
 
-    public getVictoryPoints() {
+    public override getVictoryPoints() {
       if (this.resourceCount > 0) {
         return 3;
       }

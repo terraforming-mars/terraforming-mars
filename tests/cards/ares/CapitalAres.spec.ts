@@ -4,9 +4,9 @@ import {TestPlayer} from '../../TestPlayer';
 import {Game} from '../../../src/Game';
 import {SpaceType} from '../../../src/SpaceType';
 import {SelectSpace} from '../../../src/inputs/SelectSpace';
-import {Resources} from '../../../src/Resources';
-import {TileType} from '../../../src/TileType';
-import {SpaceBonus} from '../../../src/SpaceBonus';
+import {Resources} from '../../../src/common/Resources';
+import {TileType} from '../../../src/common/TileType';
+import {SpaceBonus} from '../../../src/common/boards/SpaceBonus';
 import {ARES_OPTIONS_NO_HAZARDS} from '../../ares/AresTestHelper';
 import {TestPlayers} from '../../TestPlayers';
 
@@ -29,7 +29,7 @@ describe('CapitalAres', function() {
     expect(card.canPlay(player)).is.true;
 
     const action = card.play(player);
-    expect(action instanceof SelectSpace).is.true;
+    expect(action).instanceOf(SelectSpace);
     expect(player.getProduction(Resources.ENERGY)).to.eq(0);
     expect(player.getProduction(Resources.MEGACREDITS)).to.eq(5);
 

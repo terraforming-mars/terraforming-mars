@@ -3,7 +3,7 @@ import {MagneticFieldGeneratorsPromo} from '../../../src/cards/promo/MagneticFie
 import {Game} from '../../../src/Game';
 import {SelectSpace} from '../../../src/inputs/SelectSpace';
 import {Player} from '../../../src/Player';
-import {Resources} from '../../../src/Resources';
+import {Resources} from '../../../src/common/Resources';
 import {TestPlayers} from '../../TestPlayers';
 
 describe('MagneticFieldGeneratorsPromo', function() {
@@ -26,7 +26,7 @@ describe('MagneticFieldGeneratorsPromo', function() {
     expect(card.canPlay(player)).is.true;
 
     const action = card.play(player);
-    expect(action instanceof SelectSpace).is.true;
+    expect(action).instanceOf(SelectSpace);
     expect(player.getProduction(Resources.ENERGY)).to.eq(0);
     expect(player.getProduction(Resources.PLANTS)).to.eq(2);
     expect(player.getTerraformRating()).to.eq(23);

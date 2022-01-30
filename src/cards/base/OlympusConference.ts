@@ -1,11 +1,11 @@
 import {IProjectCard} from '../IProjectCard';
-import {Tags} from '../Tags';
+import {Tags} from '../../common/cards/Tags';
 import {Card} from '../Card';
 import {CardType} from '../CardType';
 import {Player} from '../../Player';
 import {OrOptions} from '../../inputs/OrOptions';
 import {SelectOption} from '../../inputs/SelectOption';
-import {ResourceType} from '../../ResourceType';
+import {ResourceType} from '../../common/ResourceType';
 import {CardName} from '../../CardName';
 import {IResourceCard} from '../ICard';
 import {DeferredAction} from '../../deferredActions/DeferredAction';
@@ -34,7 +34,7 @@ export class OlympusConference extends Card implements IProjectCard, IResourceCa
     });
   }
 
-    public resourceCount: number = 0;
+    public override resourceCount: number = 0;
 
     public onCardPlayed(player: Player, card: IProjectCard) {
       const scienceTags = card.tags.filter((tag) => tag === Tags.SCIENCE).length;

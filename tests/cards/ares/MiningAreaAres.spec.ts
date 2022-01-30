@@ -2,9 +2,9 @@ import {expect} from 'chai';
 import {Player} from '../../../src/Player';
 import {Game} from '../../../src/Game';
 import {SelectSpace} from '../../../src/inputs/SelectSpace';
-import {SpaceBonus} from '../../../src/SpaceBonus';
-import {TileType} from '../../../src/TileType';
-import {Resources} from '../../../src/Resources';
+import {SpaceBonus} from '../../../src/common/boards/SpaceBonus';
+import {Resources} from '../../../src/common/Resources';
+import {TileType} from '../../../src/common/TileType';
 import {MiningAreaAres} from '../../../src/cards/ares/MiningAreaAres';
 import {ARES_OPTIONS_NO_HAZARDS} from '../../ares/AresTestHelper';
 import {TestPlayers} from '../../TestPlayers';
@@ -33,7 +33,7 @@ describe('MiningAreaAres', function() {
     }
 
     const action = card.play(player);
-    expect(action instanceof SelectSpace).is.true;
+    expect(action).instanceOf(SelectSpace);
 
     const titaniumSpace = action.availableSpaces.find((space) => space.bonus.includes(SpaceBonus.TITANIUM) && space.bonus.includes(SpaceBonus.STEEL) === false);
     expect(titaniumSpace).is.not.undefined;

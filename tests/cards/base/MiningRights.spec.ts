@@ -4,9 +4,9 @@ import {Game} from '../../../src/Game';
 import {OrOptions} from '../../../src/inputs/OrOptions';
 import {SelectSpace} from '../../../src/inputs/SelectSpace';
 import {Player} from '../../../src/Player';
-import {Resources} from '../../../src/Resources';
-import {SpaceBonus} from '../../../src/SpaceBonus';
-import {TileType} from '../../../src/TileType';
+import {Resources} from '../../../src/common/Resources';
+import {SpaceBonus} from '../../../src/common/boards/SpaceBonus';
+import {TileType} from '../../../src/common/TileType';
 import {TestPlayers} from '../../TestPlayers';
 import {ISpace} from '../../../src/boards/ISpace';
 
@@ -31,7 +31,7 @@ describe('MiningRights', () => {
 
   it('Should play', () => {
     const action = card.play(player);
-    expect(action instanceof SelectSpace).is.true;
+    expect(action).instanceOf(SelectSpace);
 
     const titaniumSpace = action.availableSpaces.find((space) => space.bonus.includes(SpaceBonus.TITANIUM) && space.bonus.includes(SpaceBonus.STEEL) === false);
     expect(titaniumSpace).is.not.undefined;
@@ -56,7 +56,7 @@ describe('MiningRights', () => {
 
   it('Should play when space bonus is both steel and titanium', () => {
     const action = card.play(player);
-    expect(action instanceof SelectSpace).is.true;
+    expect(action).instanceOf(SelectSpace);
     const space = action.availableSpaces.find((space) => space.tile === undefined && space.bonus.includes(SpaceBonus.TITANIUM) && space.bonus.includes(SpaceBonus.STEEL) === false) as ISpace;
     space.bonus = [SpaceBonus.STEEL, SpaceBonus.TITANIUM];
 

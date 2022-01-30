@@ -5,9 +5,8 @@ import {ITagCount} from '../ITagCount';
 import {PlayerInputModel} from './PlayerInputModel';
 import {TimerModel} from './TimerModel';
 import {GameModel} from './GameModel';
-import {PlayerId} from '../Player';
-import {SpectatorId} from '../Game';
-import {CardName} from '@/CardName';
+import {PlayerId, SpectatorId} from '../common/Types';
+import {CardName} from '../CardName';
 
 export interface ViewModel {
   game: GameModel;
@@ -20,6 +19,7 @@ export interface ViewModel {
 export interface PublicPlayerModel {
   actionsTakenThisRound: number;
   actionsThisGeneration: Array<string /* CardName */>;
+  actionsTakenThisGame: number;
   availableBlueCardActionCount: number;
   cardCost: number;
   cardDiscount: number;

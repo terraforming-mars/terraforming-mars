@@ -1,7 +1,7 @@
-import {Tags} from '../Tags';
+import {Tags} from '../../common/cards/Tags';
 import {Player} from '../../Player';
 import {PreludeCard} from './PreludeCard';
-import {Resources} from '../../Resources';
+import {Resources} from '../../common/Resources';
 import {CardName} from '../../CardName';
 import {SelectHowToPayDeferred} from '../../deferredActions/SelectHowToPayDeferred';
 import {CardRenderer} from '../../cards/render/CardRenderer';
@@ -11,6 +11,8 @@ export class GalileanMining extends PreludeCard {
     super({
       name: CardName.GALILEAN_MINING,
       tags: [Tags.JOVIAN],
+
+      startingMegacredits: -5,
 
       metadata: {
         cardNumber: 'P13',
@@ -24,7 +26,7 @@ export class GalileanMining extends PreludeCard {
       },
     });
   }
-  public canPlay(player: Player) {
+  public override canPlay(player: Player) {
     return player.canAfford(5);
   }
   public play(player: Player) {

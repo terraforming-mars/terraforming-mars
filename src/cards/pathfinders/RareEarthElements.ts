@@ -4,8 +4,8 @@ import {Card} from '../Card';
 import {CardType} from '../CardType';
 import {CardName} from '../../CardName';
 import {CardRenderer} from '../render/CardRenderer';
-import {Resources} from '../../Resources';
-import {Tags} from '../Tags';
+import {Resources} from '../../common/Resources';
+import {Tags} from '../../common/cards/Tags';
 import {isSpecialTile, playerTileFn} from '../../boards/Board';
 
 export class RareEarthElements extends Card implements IProjectCard {
@@ -19,8 +19,7 @@ export class RareEarthElements extends Card implements IProjectCard {
       metadata: {
         cardNumber: 'Pf06',
         renderData: CardRenderer.builder((b) => {
-          // TODO(kberg): add new tile image.
-          b.production(((pb) => pb.megacredits(1))).slash().emptyTile().text('special');
+          b.production(((pb) => pb.megacredits(1))).slash().specialTile();
         }),
         description: 'Increase your M€ production by 1 for every special tile you own on Mars.',
       },

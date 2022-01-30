@@ -4,10 +4,10 @@ import {Card} from '../Card';
 import {CardType} from '../CardType';
 import {CardName} from '../../CardName';
 import {CardRenderer} from '../render/CardRenderer';
-import {Tags} from '../Tags';
+import {Tags} from '../../common/cards/Tags';
 import {CardRequirements} from '../CardRequirements';
 import {PartyName} from '../../turmoil/parties/PartyName';
-import {Resources} from '../../Resources';
+import {Resources} from '../../common/Resources';
 
 export class SoilDetoxification extends Card implements IProjectCard {
   constructor() {

@@ -5,9 +5,9 @@ import {CardType} from '../CardType';
 import {CardName} from '../../CardName';
 import {CardRenderer} from '../render/CardRenderer';
 import {IActionCard} from '../ICard';
-import {Resources} from '../../Resources';
-import {Tags} from '../Tags';
-import {ResourceType} from '../../ResourceType';
+import {Resources} from '../../common/Resources';
+import {Tags} from '../../common/cards/Tags';
+import {ResourceType} from '../../common/ResourceType';
 import {SelectOption} from '../../inputs/SelectOption';
 import {OrOptions} from '../../inputs/OrOptions';
 
@@ -26,7 +26,7 @@ export class Cryptocurrency extends Card implements IProjectCard, IActionCard {
           b.action('Spend 1 energy to add 1 data to this card.', (eb) => {
             eb.energy(1).startAction.data({amount: 1}).or();
           }).br;
-          b.action('Remove all data from this card to gain 3MC per data removed.', (eb) => {
+          b.action('Remove all data from this card to gain 3M€ per data removed.', (eb) => {
             eb.text('x').data({amount: 1}).startAction.text('x').megacredits(3);
           });
         }),
@@ -34,7 +34,7 @@ export class Cryptocurrency extends Card implements IProjectCard, IActionCard {
     });
   }
 
-  public resourceCount = 0;
+  public override resourceCount = 0;
 
   public canAct(player: Player) {
     return player.energy > 0 || this.resourceCount > 0;
@@ -51,7 +51,7 @@ export class Cryptocurrency extends Card implements IProjectCard, IActionCard {
       });
 
     const secondOption = new SelectOption(
-      'Remove all data from this card to gain 3MC per data removed.',
+      'Remove all data from this card to gain 3M€ per data removed.',
       'Spend data',
       () => {
         player.addResource(Resources.MEGACREDITS, 3 * this.resourceCount, {log: true});

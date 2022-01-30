@@ -8,7 +8,6 @@ import {CardType} from './cards/CardType';
 import {ClaimedMilestone, serializeClaimedMilestones, deserializeClaimedMilestones} from './milestones/ClaimedMilestone';
 import {Colony} from './colonies/Colony';
 import {ColonyDealer, loadColoniesFromJSON} from './colonies/ColonyDealer';
-import {ColonyModel} from './models/ColonyModel';
 import {ColonyName} from './colonies/ColonyName';
 import {Color} from './Color';
 import {CorporationCard} from './cards/corporation/CorporationCard';
@@ -25,16 +24,17 @@ import {ISpace, SpaceId} from './boards/ISpace';
 import {ITile} from './ITile';
 import {LogBuilder} from './LogBuilder';
 import {LogHelper} from './LogHelper';
-import {LogMessage} from './LogMessage';
+import {LogMessage} from './common/logs/LogMessage';
 import {ALL_MILESTONES} from './milestones/Milestones';
 import {ALL_AWARDS} from './awards/Awards';
 import {OriginalBoard} from './boards/OriginalBoard';
 import {PartyHooks} from './turmoil/parties/PartyHooks';
 import {Phase} from './Phase';
-import {Player, PlayerId} from './Player';
+import {Player} from './Player';
+import {PlayerId, GameId, SpectatorId} from './common/Types';
 import {PlayerInput} from './PlayerInput';
-import {ResourceType} from './ResourceType';
-import {Resources} from './Resources';
+import {ResourceType} from './common/ResourceType';
+import {Resources} from './common/Resources';
 import {DeferredAction, Priority} from './deferredActions/DeferredAction';
 import {DeferredActionsQueue} from './deferredActions/DeferredActionsQueue';
 import {SelectHowToPayDeferred} from './deferredActions/SelectHowToPayDeferred';
@@ -44,11 +44,11 @@ import {RemoveColonyFromGame} from './deferredActions/RemoveColonyFromGame';
 import {GainResources} from './deferredActions/GainResources';
 import {SerializedGame} from './SerializedGame';
 import {SerializedPlayer} from './SerializedPlayer';
-import {SpaceBonus} from './SpaceBonus';
+import {SpaceBonus} from './common/boards/SpaceBonus';
 import {SpaceName} from './SpaceName';
 import {SpaceType} from './SpaceType';
-import {Tags} from './cards/Tags';
-import {TileType} from './TileType';
+import {Tags} from './common/cards/Tags';
+import {TileType} from './common/TileType';
 import {Turmoil} from './turmoil/Turmoil';
 import {RandomMAOptionType} from './RandomMAOptionType';
 import {AresHandler} from './ares/AresHandler';
@@ -71,9 +71,6 @@ import {IPathfindersData} from './pathfinders/IPathfindersData';
 import {ArabiaTerraBoard} from './boards/ArabiaTerraBoard';
 import {AddResourcesToCard} from './deferredActions/AddResourcesToCard';
 import {isProduction} from './utils/server';
-
-export type GameId = string;
-export type SpectatorId = string;
 
 export interface Score {
   corporation: String;
@@ -121,6 +118,10 @@ export interface GameOptions {
   requiresVenusTrackCompletion: boolean; // Venus must be completed to end the game
   moonStandardProjectVariant: boolean;
   altVenusBoard: boolean;
+  escapeVelocityMode: boolean;
+  escapeVelocityThreshold?: number;
+  escapeVelocityPeriod?: number;
+  escapeVelocityPenalty?: number;
 }
 
 export const DEFAULT_GAME_OPTIONS: GameOptions = {
@@ -136,6 +137,10 @@ export const DEFAULT_GAME_OPTIONS: GameOptions = {
   customColoniesList: [],
   customCorporationsList: [],
   draftVariant: false,
+  escapeVelocityMode: false, // When true, escape velocity is enabled.
+  escapeVelocityThreshold: constants.DEFAULT_ESCAPE_VELOCITY_THRESHOLD, // Time in minutes a player has to complete a game.
+  escapeVelocityPeriod: constants.DEFAULT_ESCAPE_VELOCITY_PERIOD, // VP a player loses for every `escapeVelocityPenalty` minutes after `escapeVelocityThreshold`.
+  escapeVelocityPenalty: constants.DEFAULT_ESCAPE_VELOCITY_PENALTY,
   fastModeOption: false,
   includeVenusMA: true,
   initialDraftVariant: false,
@@ -433,7 +438,7 @@ export class Game implements ISerializable<SerializedGame> {
       id: this.id,
       initialDraftIteration: this.initialDraftIteration,
       lastSaveId: this.lastSaveId,
-      milestones: this.milestones,
+      milestones: this.milestones.map((m) => m.name),
       monsInsuranceOwner: this.monsInsuranceOwner,
       moonData: IMoonData.serialize(this.moonData),
       oxygenLevel: this.oxygenLevel,
@@ -493,37 +498,16 @@ export class Game implements ISerializable<SerializedGame> {
     this.deferredActions.push(action);
   }
 
-  public getColoniesModel(colonies: Array<Colony>) : Array<ColonyModel> {
-    return colonies.map(
-      (colony): ColonyModel => ({
-        colonies: colony.colonies.map(
-          (playerId): Color => this.getPlayerById(playerId).color,
-        ),
-        isActive: colony.isActive,
-        name: colony.name,
-        trackPosition: colony.trackPosition,
-        visitor:
-              colony.visitor === undefined ?
-                undefined :
-                this.getPlayerById(colony.visitor).color,
-      }),
-    );
-  }
-
   public milestoneClaimed(milestone: IMilestone): boolean {
     return this.claimedMilestones.some(
       (claimedMilestone) => claimedMilestone.milestone.name === milestone.name,
     );
   }
 
-  public noOceansAvailable(): boolean {
-    return this.board.getOceansOnBoard() >= constants.MAX_OCEAN_TILES;
-  }
-
   public marsIsTerraformed(): boolean {
     const oxygenMaxed = this.oxygenLevel >= constants.MAX_OXYGEN_LEVEL;
     const temperatureMaxed = this.temperature >= constants.MAX_TEMPERATURE;
-    const oceansMaxed = this.board.getOceansOnBoard() === constants.MAX_OCEAN_TILES;
+    const oceansMaxed = !this.canAddOcean();
     let globalParametersMaxed = oxygenMaxed && temperatureMaxed && oceansMaxed;
     const venusMaxed = this.getVenusScaleLevel() === constants.MAX_VENUS_SCALE;
 
@@ -677,6 +661,8 @@ export class Game implements ISerializable<SerializedGame> {
         if (venusColony) venusColony.isActive = true;
       }
     }
+
+    PathfindersExpansion.onCardPlayed(player, corporationCard);
 
     this.playerIsFinishedWithResearchPhase(player);
   }
@@ -1018,7 +1004,6 @@ export class Game implements ISerializable<SerializedGame> {
 
 
   public playerIsFinishedTakingActions(): void {
-    // Deferred actions hook
     if (this.deferredActions.length > 0) {
       this.deferredActions.runAll(() => this.playerIsFinishedTakingActions());
       return;
@@ -1116,13 +1101,13 @@ export class Game implements ISerializable<SerializedGame> {
     player.takeAction();
   }
 
-  public increaseOxygenLevel(player: Player, increments: -1 | 1 | 2): undefined {
+  public increaseOxygenLevel(player: Player, increments: -2 | -1 | 1 | 2): undefined {
     if (this.oxygenLevel >= constants.MAX_OXYGEN_LEVEL) {
       return undefined;
     }
 
-    // PoliticalAgendas Reds P3 hook
-    if (increments === -1) {
+    // PoliticalAgendas Reds P3 && Magnetic Field Stimulation Delays hook
+    if (increments < 0 ) {
       this.oxygenLevel = Math.max(constants.MIN_OXYGEN_LEVEL, this.oxygenLevel + increments);
       return undefined;
     }
@@ -1266,20 +1251,27 @@ export class Game implements ISerializable<SerializedGame> {
     return player;
   }
 
-  public getCitiesInPlayOnMars(): number {
+  public getCitiesOnMarsCount(): number {
     return this.board.spaces.filter(
       (space) => Board.isCitySpace(space) && space.spaceType !== SpaceType.COLONY).length;
   }
-  public getCitiesInPlay(): number {
-    return this.board.spaces.filter((space) => Board.isCitySpace(space)).length;
+
+  public getCitiesCount(player?: Player): number {
+    let cities = this.board.spaces.filter((space) => Board.isCitySpace(space));
+    if (player !== undefined) cities = cities.filter(Board.ownedBy(player));
+    return cities.length;
   }
+
+  public getGreeneriesCount(player?: Player): number {
+    let greeneries = this.board.spaces.filter((space) => Board.isGreenerySpace(space));
+    if (player !== undefined) greeneries = greeneries.filter(Board.ownedBy(player));
+    return greeneries.length;
+  }
+
   public getSpaceCount(tileType: TileType, player: Player): number {
-    return this.board.spaces.filter(
-      (space) => space.tile !== undefined &&
-                  space.tile.tileType === tileType &&
-                  space.player !== undefined &&
-                  space.player === player,
-    ).length;
+    return this.board.spaces.filter(Board.ownedBy(player))
+      .filter((space) => space.tile?.tileType === tileType)
+      .length;
   }
 
   // addTile applies to the Mars board, but not the Moon board, see MoonExpansion.addTile for placing
@@ -1307,11 +1299,9 @@ export class Game implements ISerializable<SerializedGame> {
       throw new Error(`Select a valid location: ${space.spaceType} is not ${spaceType}`);
     }
 
-    AresHandler.ifAres(this, () => {
-      if (!AresHandler.canCover(space, tile)) {
-        throw new Error('Selected space is occupied: ' + space.id);
-      }
-    });
+    if (!AresHandler.canCover(space, tile)) {
+      throw new Error('Selected space is occupied: ' + space.id);
+    }
 
     // Oceans are not subject to Ares adjacency production penalties.
     const subjectToHazardAdjacency = tile.tileType !== TileType.OCEAN;
@@ -1328,7 +1318,7 @@ export class Game implements ISerializable<SerializedGame> {
 
     // Hellas special requirements ocean tile
     if (space.id === SpaceName.HELLAS_OCEAN_TILE &&
-        this.board.getOceansOnBoard() < constants.MAX_OCEAN_TILES &&
+        this.canAddOcean() &&
         this.gameOptions.boardName === BoardName.HELLAS) {
       if (player.color !== Color.NEUTRAL) {
         this.defer(new PlaceOceanTile(player, 'Select space for ocean from placement bonus'));
@@ -1349,10 +1339,7 @@ export class Game implements ISerializable<SerializedGame> {
     // Part 5. Collect the bonuses
     if (this.phase !== Phase.SOLAR) {
       if (!coveringExistingTile) {
-        const bonuses = new Multiset(space.bonus);
-        bonuses.entries().forEach(([bonus, count]) => {
-          this.grantSpaceBonus(player, bonus, count);
-        });
+        this.grantSpaceBonuses(player, space);
       }
 
       this.board.getAdjacentSpaces(space).forEach((adjacentSpace) => {
@@ -1388,8 +1375,18 @@ export class Game implements ISerializable<SerializedGame> {
 
   public simpleAddTile(player: Player, space: ISpace, tile: ITile) {
     space.tile = tile;
-    space.player = tile.tileType !== TileType.OCEAN ? player : undefined;
+    space.player = player;
+    if (tile.tileType === TileType.OCEAN || tile.tileType === TileType.MARTIAN_NATURE_WONDERS) {
+      space.player = undefined;
+    }
     LogHelper.logTilePlacement(player, space, tile.tileType);
+  }
+
+  public grantSpaceBonuses(player: Player, space: ISpace) {
+    const bonuses = new Multiset(space.bonus);
+    bonuses.entries().forEach(([bonus, count]) => {
+      this.grantSpaceBonus(player, bonus, count);
+    });
   }
 
   public grantSpaceBonus(player: Player, spaceBonus: SpaceBonus, count: number = 1) {
@@ -1446,12 +1443,20 @@ export class Game implements ISerializable<SerializedGame> {
     });
   }
 
+  public canAddOcean(): boolean {
+    return this.board.getOceanCount() < constants.MAX_OCEAN_TILES;
+  }
+
+  public canRemoveOcean(): boolean {
+    const count = this.board.getOceanCount();
+    return count > 0 && count < constants.MAX_OCEAN_TILES;
+  }
+
   public addOceanTile(
     player: Player, spaceId: SpaceId,
     spaceType: SpaceType = SpaceType.OCEAN): void {
-    if (this.board.getOceansOnBoard() === constants.MAX_OCEAN_TILES) {
-      return;
-    }
+    if (this.canAddOcean() === false) return;
+
     this.addTile(player, spaceType, this.board.getSpace(spaceId), {
       tileType: TileType.OCEAN,
     });
@@ -1470,6 +1475,7 @@ export class Game implements ISerializable<SerializedGame> {
     space.player = undefined;
   }
 
+  // Players returned in play order starting with first player this generation.
   public getPlayers(): Array<Player> {
     // We always return them in turn order
     const ret: Array<Player> = [];
@@ -1550,11 +1556,6 @@ export class Game implements ISerializable<SerializedGame> {
 
   public static deserialize(d: SerializedGame): Game {
     const gameOptions = d.gameOptions;
-    // TODO(kberg): Remove by 2021-10-15
-    if (d.gameOptions.altVenusBoard === undefined) {
-      d.gameOptions.altVenusBoard = false;
-    }
-
     const players = d.players.map((element: SerializedPlayer) => Player.deserialize(element));
     const first = players.find((player) => player.id === d.first);
     if (first === undefined) {
@@ -1579,12 +1580,12 @@ export class Game implements ISerializable<SerializedGame> {
     game.spectatorId = d.spectatorId;
 
     const milestones: Array<IMilestone> = [];
-    d.milestones.forEach((element: IMilestone) => {
-      ALL_MILESTONES.forEach((ms: IMilestone) => {
-        if (ms.name === element.name) {
-          milestones.push(ms);
-        }
-      });
+    d.milestones.forEach((element: IMilestone | string) => {
+      const milestoneName = typeof element === 'string' ? element : element.name;
+      const foundMilestone = ALL_MILESTONES.find((milestone) => milestone.name === milestoneName);
+      if (foundMilestone !== undefined) {
+        milestones.push(foundMilestone);
+      }
     });
 
     game.milestones = milestones;

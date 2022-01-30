@@ -1,10 +1,10 @@
 import {expect} from 'chai';
 import {Player} from '../../../src/Player';
 import {Game} from '../../../src/Game';
-import {TileType} from '../../../src/TileType';
+import {TileType} from '../../../src/common/TileType';
 import {SelectSpace} from '../../../src/inputs/SelectSpace';
 import {NaturalPreserveAres} from '../../../src/cards/ares/NaturalPreserveAres';
-import {SpaceBonus} from '../../../src/SpaceBonus';
+import {SpaceBonus} from '../../../src/common/boards/SpaceBonus';
 import {ARES_OPTIONS_NO_HAZARDS} from '../../ares/AresTestHelper';
 import {TestPlayers} from '../../TestPlayers';
 
@@ -22,7 +22,7 @@ describe('NaturalPreserveAres', function() {
     expect(card.canPlay(player)).is.true;
     const action = card.play(player);
     expect(action).is.not.undefined;
-    expect(action instanceof SelectSpace).is.true;
+    expect(action).instanceOf(SelectSpace);
 
     const space = action.availableSpaces[0];
     action.cb(space);

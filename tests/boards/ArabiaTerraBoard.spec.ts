@@ -2,17 +2,17 @@ import {expect} from 'chai';
 import {DEFAULT_GAME_OPTIONS, Game} from '../../src/Game';
 import {ArabiaTerraBoard} from '../../src/boards/ArabiaTerraBoard';
 import {Player} from '../../src/Player';
-import {TileType} from '../../src/TileType';
+import {TileType} from '../../src/common/TileType';
 import {SpaceType} from '../../src/SpaceType';
 import {TestPlayers} from '../TestPlayers';
 import {Random} from '../../src/Random';
-import {SpaceBonus} from '../../src/SpaceBonus';
+import {SpaceBonus} from '../../src/common/boards/SpaceBonus';
 import {TestingUtils} from '../TestingUtils';
 import {BoardName} from '../../src/boards/BoardName';
 import {ProcessorFactory} from '../../src/cards/moon/ProcessorFactory';
 import {SearchForLife} from '../../src/cards/base/SearchForLife';
 import {Decomposers} from '../../src/cards/base/Decomposers';
-import {Resources} from '../../src/Resources';
+import {Resources} from '../../src/common/Resources';
 import {LandClaim} from '../../src/cards/base/LandClaim';
 import {SelectSpace} from '../../src/inputs/SelectSpace';
 
@@ -97,7 +97,7 @@ describe('Board', function() {
 
   it('Can land-claim, and then place on, a cove space', () => {
     const landClaim = new LandClaim();
-    const selectSpace = landClaim.play(player) as SelectSpace;
+    const selectSpace = TestingUtils.cast(landClaim.play(player), SelectSpace);
     const space = board.getSpaces(SpaceType.COVE)[0];
     expect(selectSpace.availableSpaces.map((space) => space.id)).contains(space.id);
 

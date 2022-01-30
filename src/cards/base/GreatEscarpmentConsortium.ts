@@ -2,7 +2,7 @@ import {IProjectCard} from '../IProjectCard';
 import {Card} from '../Card';
 import {CardType} from '../CardType';
 import {Player} from '../../Player';
-import {Resources} from '../../Resources';
+import {Resources} from '../../common/Resources';
 import {CardName} from '../../CardName';
 import {DecreaseAnyProduction} from '../../deferredActions/DecreaseAnyProduction';
 import {CardRequirements} from '../CardRequirements';
@@ -31,7 +31,8 @@ export class GreatEscarpmentConsortium extends Card implements IProjectCard {
   }
 
   public play(player: Player) {
-    player.game.defer(new DecreaseAnyProduction(player, Resources.STEEL, 1));
+    player.game.defer(
+      new DecreaseAnyProduction(player, Resources.STEEL, {count: 1, stealing: true}));
     player.addProduction(Resources.STEEL, 1);
     return undefined;
   }

@@ -59,9 +59,11 @@
                                 <th v-if="game.moon !== undefined"><div class="table-moon-colony-tile"></div></th>
                                 <th v-if="game.moon !== undefined"><div class="table-moon-mine-tile"></div></th>
                                 <th><div class="vp">VP</div></th>
+                                <th v-if="game.gameOptions.escapeVelocityMode" class="clock-icon tooltip tooltip-top" data-tooltip="Escape Velocity penalty">&#x23F3;</th>
                                 <th class="game-end-total"><div class="game-end-total-column">Total</div></th>
                                 <th><div class="mc-icon"></div></th>
                                 <th v-if="game.gameOptions.showTimers" class="clock-icon">&#x1F551;</th>
+                                <th><div class="table-red-arrow tooltip tooltip-top" data-tooltip="Actions taken this game"></div></th>
                             </tr>
                         </thead>
                         <tbody>
@@ -79,6 +81,7 @@
                                 <td v-if="game.moon !== undefined">{{ p.victoryPointsBreakdown.moonColonies }}</td>
                                 <td v-if="game.moon !== undefined">{{ p.victoryPointsBreakdown.moonMines }}</td>
                                 <td>{{ p.victoryPointsBreakdown.victoryPoints }}</td>
+                                <td v-if="game.gameOptions.escapeVelocityMode">{{ p.victoryPointsBreakdown.escapeVelocity }}</td>
                                 <td class="game-end-total">{{ p.victoryPointsBreakdown.total }}</td>
                                 <td class="game-end-mc">
                                   <div>{{ p.megaCredits }}</div>
@@ -86,6 +89,7 @@
                                 <td>
                                   <div v-if="game.gameOptions.showTimers" class="game-end-timer">{{ getTimer(p) }}</div>
                                 </td>
+                                <td><div class="game-end-timer">{{ p.actionsTakenThisGame }}</div></td>
                             </tr>
                         </tbody>
                     </table>
@@ -118,6 +122,12 @@
                                 <div class="game-end-column-text">{{v.split(':', 2)[0]}}</div>
                               </div>
                             </div>
+                            <div v-for="v in p.victoryPointsBreakdown.detailsPlanetaryTracks" :key="v.tag">
+                              <div class="game-end-column-row">
+                                <div class="game-end-column-vp">{{v.points}}</div>
+                                <div class="game-end-column-text">Most tags on the {{v.tag}} track</div>
+                              </div>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -129,12 +139,16 @@
                         :venusNextExtension="game.gameOptions.venusNextExtension"
                         :venusScaleLevel="game.venusScaleLevel"
                         :aresExtension="game.gameOptions.aresExtension"
+                        :pathfindersExpansion="game.gameOptions.pathfindersExpansion"
                         :altVenusBoard="game.gameOptions.altVenusBoard"
                         :boardName ="game.gameOptions.boardName"
                         :oceans_count="game.oceans"
                         :oxygen_level="game.oxygenLevel"
                         :temperature="game.temperature"></board>
                   <MoonBoard v-if="game.gameOptions.moonExpansion" :model="game.moon"></MoonBoard>
+                  <div v-if="game.gameOptions.pathfindersExpansion">
+                    <PlanetaryTracks :tracks="game.pathfinders" :gameOptions="game.gameOptions"/>
+                  </div>
                 </div>
                 <div class="game_end_block--log game-end-column">
                   <log-panel :color="color" :generation="game.generation" :id="viewModel.id" :lastSoloGeneration="game.lastSoloGeneration" :players="players"></log-panel>
@@ -151,6 +165,7 @@ import {GameModel} from '@/models/GameModel';
 import {PlayerViewModel, PublicPlayerModel, ViewModel} from '@/models/PlayerModel';
 import Board from '@/client/components/Board.vue';
 import MoonBoard from '@/client/components/moon/MoonBoard.vue';
+import PlanetaryTracks from '@/client/components/pathfinders/PlanetaryTracks.vue';
 import LogPanel from '@/client/components/LogPanel.vue';
 import Button from '@/client/components/common/Button.vue';
 import {playerColorClass} from '@/utils/utils';
@@ -203,6 +218,7 @@ export default Vue.extend({
     'log-panel': LogPanel,
     Button,
     MoonBoard,
+    PlanetaryTracks,
   },
   methods: {
     getEndGamePlayerRowColorClass(color: string): string {

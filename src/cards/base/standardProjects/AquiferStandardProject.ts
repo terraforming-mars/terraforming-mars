@@ -1,17 +1,15 @@
 import {Player} from '../../../Player';
 import {CardName} from '../../../CardName';
 import {CardRenderer} from '../../render/CardRenderer';
-import {MAX_OCEAN_TILES, REDS_RULING_POLICY_COST} from '../../../constants';
 import {PlaceOceanTile} from '../../../deferredActions/PlaceOceanTile';
 import {StandardProjectCard} from '../../StandardProjectCard';
-import {PartyHooks} from '../../../turmoil/parties/PartyHooks';
-import {PartyName} from '../../../turmoil/parties/PartyName';
 
 export class AquiferStandardProject extends StandardProjectCard {
   constructor() {
     super({
       name: CardName.AQUIFER_STANDARD_PROJECT,
       cost: 18,
+      tr: {oceans: 1},
       metadata: {
         cardNumber: 'SP2',
         renderData: CardRenderer.builder((b) =>
@@ -22,17 +20,9 @@ export class AquiferStandardProject extends StandardProjectCard {
     });
   }
 
-  public canAct(player: Player): boolean {
-    if (player.game.board.getOceansOnBoard() === MAX_OCEAN_TILES) {
-      return false;
-    }
-
-    let additionalCost = 0;
-    if (PartyHooks.shouldApplyPolicy(player, PartyName.REDS)) {
-      additionalCost += REDS_RULING_POLICY_COST;
-    }
-
-    return player.canAfford(this.cost + additionalCost);
+  public override canAct(player: Player): boolean {
+    if (!player.game.canAddOcean()) return false;
+    return super.canAct(player);
   }
 
   actionEssence(player: Player): void {

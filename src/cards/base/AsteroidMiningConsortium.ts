@@ -1,9 +1,9 @@
 import {IProjectCard} from '../IProjectCard';
-import {Tags} from '../Tags';
+import {Tags} from '../../common/cards/Tags';
 import {Card} from '../Card';
 import {CardType} from '../CardType';
 import {Player} from '../../Player';
-import {Resources} from '../../Resources';
+import {Resources} from '../../common/Resources';
 import {CardName} from '../../CardName';
 import {DecreaseAnyProduction} from '../../deferredActions/DecreaseAnyProduction';
 import {CardRequirements} from '../CardRequirements';
@@ -34,7 +34,12 @@ export class AsteroidMiningConsortium extends Card implements IProjectCard {
   }
 
   public play(player: Player) {
-    player.game.defer(new DecreaseAnyProduction(player, Resources.TITANIUM, 1));
+    const decreaseAction = new DecreaseAnyProduction(
+      player,
+      Resources.TITANIUM,
+      {count: 1, stealing: true},
+    );
+    player.game.defer(decreaseAction);
     player.addProduction(Resources.TITANIUM, 1);
     return undefined;
   }

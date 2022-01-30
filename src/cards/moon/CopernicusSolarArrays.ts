@@ -1,8 +1,8 @@
 import {CardName} from '../../CardName';
 import {Player} from '../../Player';
 import {CardType} from '../CardType';
-import {Tags} from '../Tags';
-import {Resources} from '../../Resources';
+import {Tags} from '../../common/cards/Tags';
+import {Resources} from '../../common/Resources';
 import {CardRenderer} from '../render/CardRenderer';
 import {Units} from '../../Units';
 import {MoonCard} from './MoonCard';
@@ -30,7 +30,7 @@ export class CopernicusSolarArrays extends MoonCard {
     });
   };
 
-  public play(player: Player) {
+  public override play(player: Player) {
     super.play(player);
     player.heat += 2;
     player.addProduction(Resources.ENERGY, 1, {log: true});

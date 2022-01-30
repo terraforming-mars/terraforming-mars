@@ -1,7 +1,7 @@
 import {Player} from '../../Player';
 import {PreludeCard} from './PreludeCard';
 import {IProjectCard} from '../IProjectCard';
-import {Resources} from '../../Resources';
+import {Resources} from '../../common/Resources';
 import {CardName} from '../../CardName';
 import {CardRenderer} from '../render/CardRenderer';
 
@@ -9,6 +9,8 @@ export class NitrogenDelivery extends PreludeCard implements IProjectCard {
   constructor() {
     super({
       name: CardName.NITROGEN_SHIPMENT,
+      startingMegacredits: 5,
+
 
       metadata: {
         cardNumber: 'P24',

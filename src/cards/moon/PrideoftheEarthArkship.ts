@@ -1,9 +1,9 @@
 import {CardName} from '../../CardName';
 import {Player} from '../../Player';
 import {CardType} from '../CardType';
-import {Tags} from '../Tags';
+import {Tags} from '../../common/cards/Tags';
 import {IActionCard} from '../ICard';
-import {ResourceType} from '../../ResourceType';
+import {ResourceType} from '../../common/ResourceType';
 import {CardRenderer} from '../render/CardRenderer';
 import {Units} from '../../Units';
 import {MoonCard} from './MoonCard';
@@ -36,9 +36,9 @@ export class PrideoftheEarthArkship extends MoonCard implements IActionCard {
       },
     });
   };
-  public resourceCount = 0;
+  public override resourceCount = 0;
 
-  public play(player: Player) {
+  public override play(player: Player) {
     super.play(player);
     return undefined;
   }

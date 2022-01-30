@@ -2,12 +2,13 @@ import {expect} from 'chai';
 import {Player} from '../../../src/Player';
 import {Game} from '../../../src/Game';
 import {SelectSpace} from '../../../src/inputs/SelectSpace';
-import {SpaceBonus} from '../../../src/SpaceBonus';
-import {TileType} from '../../../src/TileType';
-import {Resources} from '../../../src/Resources';
+import {SpaceBonus} from '../../../src/common/boards/SpaceBonus';
+import {Resources} from '../../../src/common/Resources';
+import {TileType} from '../../../src/common/TileType';
 import {MiningRightsAres} from '../../../src/cards/ares/MiningRightsAres';
 import {ARES_OPTIONS_NO_HAZARDS} from '../../ares/AresTestHelper';
 import {TestPlayers} from '../../TestPlayers';
+import {TestingUtils} from '../../TestingUtils';
 
 describe('MiningRightsAres', function() {
   let card : MiningRightsAres; let player : Player; let game : Game;
@@ -21,7 +22,7 @@ describe('MiningRightsAres', function() {
 
   it('Should play', function() {
     const action = card.play(player);
-    expect(action instanceof SelectSpace).is.true;
+    expect(action).instanceOf(SelectSpace);
 
     const titaniumSpace = action.availableSpaces.find((space) => space.bonus.includes(SpaceBonus.TITANIUM) && space.bonus.includes(SpaceBonus.STEEL) === false);
     expect(titaniumSpace).is.not.undefined;
@@ -44,12 +45,12 @@ describe('MiningRightsAres', function() {
     const land = game.board.getAvailableSpacesOnLand(player)
       .find((land) => land.bonus.includes(SpaceBonus.STEEL))!;
 
-    let action = card.play(player) as SelectSpace;
+    let action = TestingUtils.cast(card.play(player), SelectSpace);
     const size = action.availableSpaces.length;
     expect(action.availableSpaces).contains(land);
 
     land.tile = {tileType: TileType.MINING_RIGHTS};
-    action = card.play(player) as SelectSpace;
+    action = TestingUtils.cast(card.play(player), SelectSpace);
     expect(action.availableSpaces).has.length(size - 1);
     expect(action.availableSpaces).does.not.contain(land);
   });

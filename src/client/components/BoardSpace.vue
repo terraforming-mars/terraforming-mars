@@ -2,8 +2,8 @@
   <div :class="getMainClass()" :data_space_id="space.id">
     <div :class="getTileClass()" :title="getVerboseTitle(space.tileType)" data-test="tile"/>
     <div class="board-space-text" v-if="text" v-i18n>{{ text }}</div>
-    <bonus :bonus="space.bonus" v-if="space.tileType === undefined"></bonus>
-    <bonus :bonus="space.bonus" v-if="space.tileType !== undefined && hideTiles"></bonus>
+    <bonus :bonus="space.bonus" v-if="showBonus"></bonus>
+    <bonus :bonus="space.bonus" v-if="showBonus"></bonus>
     <div :class="'board-cube board-cube--'+space.color" v-if="space.color !== undefined && !hideTiles"></div>
   </div>
 </template>
@@ -14,7 +14,7 @@ import Vue from 'vue';
 import Bonus from '@/client/components/Bonus.vue';
 import {SpaceModel} from '@/models/SpaceModel';
 import {SpaceType} from '@/SpaceType';
-import {TileType} from '@/TileType';
+import {TileType} from '@/common/TileType';
 
 const tileTypeToCssClass = new Map<TileType, string>([
   [TileType.COMMERCIAL_DISTRICT, 'commercial_district'],
@@ -43,6 +43,9 @@ const tileTypeToCssClass = new Map<TileType, string>([
   [TileType.EROSION_SEVERE, 'erosion-severe'],
   [TileType.MINING_STEEL_BONUS, 'mining-steel'],
   [TileType.MINING_TITANIUM_BONUS, 'mining-titanium'],
+  [TileType.WETLANDS, 'wetlands'],
+  [TileType.RED_CITY, 'red-city'],
+  [TileType.MARTIAN_NATURE_WONDERS, 'martian-nature-wonders'],
 ]);
 
 const tileTypeToCssClassAresOverride = new Map<TileType, string>([
@@ -190,6 +193,11 @@ export default Vue.extend({
         css += ' board-hidden-tile';
       }
       return css;
+    },
+  },
+  computed: {
+    showBonus() {
+      return this.space.tileType === undefined || this.hideTiles;
     },
   },
 });

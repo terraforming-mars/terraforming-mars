@@ -21,9 +21,9 @@ import {SelectHowToPayForProjectCard} from '../inputs/SelectHowToPayForProjectCa
 import {SelectPlayer} from '../inputs/SelectPlayer';
 import {SelectSpace} from '../inputs/SelectSpace';
 import {SpaceHighlight, SpaceModel} from './SpaceModel';
-import {TileType} from '../TileType';
+import {TileType} from '../common/TileType';
 import {Phase} from '../Phase';
-import {Resources} from '../Resources';
+import {Resources} from '../common/Resources';
 import {CardType} from '../cards/CardType';
 import {
   ClaimedMilestoneModel,
@@ -43,6 +43,7 @@ import {Units} from '../Units';
 import {SelectPartyToSendDelegate} from '../inputs/SelectPartyToSendDelegate';
 import {GameModel} from './GameModel';
 import {Turmoil} from '../turmoil/Turmoil';
+import {PathfindersModel} from './PathfindersModel';
 
 export class Server {
   public static getSimpleGameModel(game: Game): SimpleGameModel {
@@ -76,9 +77,10 @@ export class Server {
       lastSoloGeneration: game.lastSoloGeneration(),
       milestones: this.getMilestones(game),
       moon: MoonModel.serialize(game),
-      oceans: game.board.getOceansOnBoard(),
+      oceans: game.board.getOceanCount(),
       oxygenLevel: game.getOxygenLevel(),
       passedPlayers: game.getPassedPlayers(),
+      pathfinders: PathfindersModel.serialize(game),
       phase: game.phase,
       spaces: this.getSpaces(game.board),
       spectatorId: game.spectatorId,
@@ -227,6 +229,7 @@ export class Server {
       canUseSteel: undefined,
       canUseTitanium: undefined,
       canUseHeat: undefined,
+      canUseSeeds: undefined,
       players: undefined,
       availableSpaces: undefined,
       min: undefined,
@@ -235,6 +238,7 @@ export class Server {
       microbes: undefined,
       floaters: undefined,
       science: undefined,
+      seeds: undefined,
       coloniesModel: undefined,
       payProduction: undefined,
       aresData: undefined,
@@ -265,6 +269,7 @@ export class Server {
       playerInputModel.floaters = shtpfpc.floaters;
       playerInputModel.canUseHeat = shtpfpc.canUseHeat;
       playerInputModel.science = shtpfpc.scienceResources;
+      playerInputModel.seeds = shtpfpc.seedResources;
       break;
     case PlayerInputTypes.SELECT_CARD:
       const selectCard = waitingFor as SelectCard<ICard>;
@@ -282,13 +287,15 @@ export class Server {
       }
       break;
     case PlayerInputTypes.SELECT_COLONY:
-      playerInputModel.coloniesModel = (waitingFor as SelectColony).coloniesModel;
+      playerInputModel.coloniesModel = ColonyModel.getColonyModel(player.game, (waitingFor as SelectColony).colonies);
       break;
     case PlayerInputTypes.SELECT_HOW_TO_PAY:
       playerInputModel.amount = (waitingFor as SelectHowToPay).amount;
       playerInputModel.canUseSteel = (waitingFor as SelectHowToPay).canUseSteel;
       playerInputModel.canUseTitanium = (waitingFor as SelectHowToPay).canUseTitanium;
       playerInputModel.canUseHeat = (waitingFor as SelectHowToPay).canUseHeat;
+      playerInputModel.canUseSeeds = (waitingFor as SelectHowToPay).canUseSeeds;
+      playerInputModel.seeds = player.getSpendableSeedResources();
       break;
     case PlayerInputTypes.SELECT_PLAYER:
       playerInputModel.players = (waitingFor as SelectPlayer).players.map(
@@ -372,12 +379,13 @@ export class Server {
     const game = player.game;
     return {
       actionsTakenThisRound: player.actionsTakenThisRound,
+      actionsTakenThisGame: player.actionsTakenThisGame,
       actionsThisGeneration: Array.from(player.getActionsThisGeneration()),
       availableBlueCardActionCount: player.getAvailableBlueActionCount(),
       cardCost: player.cardCost,
       cardDiscount: player.cardDiscount,
       cardsInHandNbr: player.cardsInHand.length,
-      citiesCount: player.getCitiesCount(),
+      citiesCount: player.game.getCitiesCount(player),
       coloniesCount: player.getColoniesCount(),
       color: player.color,
       corporationCard: Server.getCorporationCard(player),
@@ -481,10 +489,15 @@ export class Server {
       communityCardsOption: options.communityCardsOption,
       corporateEra: options.corporateEra,
       draftVariant: options.draftVariant,
+      escapeVelocityMode: options.escapeVelocityMode,
+      escapeVelocityThreshold: options.escapeVelocityThreshold,
+      escapeVelocityPeriod: options.escapeVelocityPeriod,
+      escapeVelocityPenalty: options.escapeVelocityPenalty,
       fastModeOption: options.fastModeOption,
       includeVenusMA: options.includeVenusMA,
       initialDraftVariant: options.initialDraftVariant,
       moonExpansion: options.moonExpansion,
+      pathfindersExpansion: options.pathfindersExpansion,
       preludeExtension: options.preludeExtension,
       promoCardsOption: options.promoCardsOption,
       politicalAgendasExtension: options.politicalAgendasExtension,
@@ -495,10 +508,10 @@ export class Server {
       solarPhaseOption: options.solarPhaseOption,
       soloTR: options.soloTR,
       randomMA: options.randomMA,
-      turmoilExtension: options.turmoilExtension,
-      venusNextExtension: options.venusNextExtension,
       requiresMoonTrackCompletion: options.requiresMoonTrackCompletion,
       requiresVenusTrackCompletion: options.requiresVenusTrackCompletion,
+      turmoilExtension: options.turmoilExtension,
+      venusNextExtension: options.venusNextExtension,
       undoOption: options.undoOption,
     };
   }

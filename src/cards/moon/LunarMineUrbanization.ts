@@ -2,11 +2,11 @@ import {CardName} from '../../CardName';
 import {Player} from '../../Player';
 import {CardType} from '../CardType';
 import {IProjectCard} from '../IProjectCard';
-import {Tags} from '../Tags';
+import {Tags} from '../../common/cards/Tags';
 import {CardRenderer} from '../render/CardRenderer';
 import {MoonExpansion} from '../../moon/MoonExpansion';
-import {TileType} from '../../TileType';
-import {Resources} from '../../Resources';
+import {Resources} from '../../common/Resources';
+import {TileType} from '../../common/TileType';
 import {SelectSpace} from '../../inputs/SelectSpace';
 import {Card} from '../Card';
 import {CardRequirements} from '../CardRequirements';
@@ -40,7 +40,7 @@ export class LunarMineUrbanization extends Card implements IProjectCard {
 
   public play(player: Player) {
     player.addProduction(Resources.MEGACREDITS, 1);
-    const tiles = MoonExpansion.tiles(player.game, TileType.MOON_MINE, {ownedBy: player});
+    const tiles = MoonExpansion.spaces(player.game, TileType.MOON_MINE, {ownedBy: player});
     return new SelectSpace('Select one of your mines to upgrade', tiles, (space) => {
       if (space.tile === undefined) {
         throw new Error(`Space ${space.id} should have a tile, how doesn't it?`);

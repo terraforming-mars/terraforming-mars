@@ -4,8 +4,8 @@ import {Card} from '../Card';
 import {CardType} from '../CardType';
 import {CardName} from '../../CardName';
 import {CardRenderer} from '../render/CardRenderer';
-import {Tags} from '../Tags';
-import {ResourceType} from '../../ResourceType';
+import {Tags} from '../../common/cards/Tags';
+import {ResourceType} from '../../common/ResourceType';
 import {AddResourcesToCards} from '../../deferredActions/AddResourcesToCards';
 
 export class Cyanobacteria extends Card implements IProjectCard {
@@ -23,7 +23,6 @@ export class Cyanobacteria extends Card implements IProjectCard {
           b.oxygen(1).br;
           b.microbes(1).asterix().slash().oceans(1).br;
         }),
-        // TODO(kberg): include Wetlands
         description: 'Raise the oxygen level 1%. For every ocean tile, place a microbe on any card.',
       },
     });
@@ -31,7 +30,7 @@ export class Cyanobacteria extends Card implements IProjectCard {
 
   public play(player: Player) {
     player.game.increaseOxygenLevel(player, 1);
-    const microbes = player.game.board.getOceansOnBoard();
+    const microbes = player.game.board.getOceanSpaces({upgradedOceans: true, wetlands: true}).length;
     player.game.defer(new AddResourcesToCards(player, ResourceType.MICROBE, microbes));
     return undefined;
   }

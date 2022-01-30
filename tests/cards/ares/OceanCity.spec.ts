@@ -3,12 +3,12 @@ import {Player} from '../../../src/Player';
 import {OceanCity} from '../../../src/cards/ares/OceanCity';
 import {ARES_OPTIONS_NO_HAZARDS} from '../../ares/AresTestHelper';
 import {expect} from 'chai';
-import {Resources} from '../../../src/Resources';
-import {TileType} from '../../../src/TileType';
+import {Resources} from '../../../src/common/Resources';
+import {TileType} from '../../../src/common/TileType';
 import {SpaceType} from '../../../src/SpaceType';
 import {TestPlayers} from '../../TestPlayers';
 import {Capital} from '../../../src/cards/base/Capital';
-import {SpaceBonus} from '../../../src/SpaceBonus';
+import {SpaceBonus} from '../../../src/common/boards/SpaceBonus';
 import {TestingUtils} from '../../TestingUtils';
 
 describe('OceanCity', function() {
@@ -52,13 +52,13 @@ describe('OceanCity', function() {
 
     expect(player.getProduction(Resources.ENERGY)).eq(0);
     expect(player.getProduction(Resources.MEGACREDITS)).eq(3);
-    expect(game.getCitiesInPlayOnMars()).eq(0);
-    expect(player.getCitiesCount()).eq(0);
+    expect(game.getCitiesOnMarsCount()).eq(0);
+    expect(player.game.getCitiesCount(player)).eq(0);
 
     action.cb(oceanSpace);
 
-    expect(game.getCitiesInPlayOnMars()).eq(1);
-    expect(player.getCitiesCount()).eq(1);
+    expect(game.getCitiesOnMarsCount()).eq(1);
+    expect(player.game.getCitiesCount(player)).eq(1);
 
     expect(oceanSpace.player).to.eq(player);
     expect(oceanSpace.tile!.tileType).to.eq(TileType.OCEAN_CITY);

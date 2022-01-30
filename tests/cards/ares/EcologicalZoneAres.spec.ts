@@ -2,8 +2,8 @@ import {expect} from 'chai';
 import {Player} from '../../../src/Player';
 import {Game} from '../../../src/Game';
 import {SelectSpace} from '../../../src/inputs/SelectSpace';
-import {TileType} from '../../../src/TileType';
-import {SpaceBonus} from '../../../src/SpaceBonus';
+import {TileType} from '../../../src/common/TileType';
+import {SpaceBonus} from '../../../src/common/boards/SpaceBonus';
 import {EcologicalZoneAres} from '../../../src/cards/ares/EcologicalZoneAres';
 import {ARES_OPTIONS_NO_HAZARDS} from '../../ares/AresTestHelper';
 import {TestPlayers} from '../../TestPlayers';
@@ -24,7 +24,7 @@ describe('EcologicalZoneAres', function() {
     expect(card.canPlay(player)).is.true;
 
     const action = card.play(player);
-    expect(action instanceof SelectSpace).is.true;
+    expect(action).instanceOf(SelectSpace);
 
     const adjacentSpace = action.availableSpaces[0];
     action.cb(adjacentSpace);

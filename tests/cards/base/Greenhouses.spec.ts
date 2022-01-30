@@ -10,10 +10,16 @@ describe('Greenhouses', function() {
     const redPlayer = TestPlayers.RED.newPlayer();
     const game = Game.newInstance('foobar', [player, redPlayer], player);
     const action = card.play(player);
+
     expect(action).is.undefined;
     expect(player.plants).to.eq(0);
+
     game.addCityTile(player, game.board.getAvailableSpacesOnLand(player)[0].id);
+    game.addCityTile(player, game.board.getAvailableSpacesOnLand(player)[0].id);
+    game.addCityTile(redPlayer, game.board.getAvailableSpacesOnLand(redPlayer)[0].id);
     card.play(player);
-    expect(player.plants).to.eq(1);
+
+    expect(player.plants).to.eq(3);
+    expect(redPlayer.plants).to.eq(0);
   });
 });

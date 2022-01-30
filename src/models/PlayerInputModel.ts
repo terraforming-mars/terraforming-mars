@@ -5,7 +5,7 @@ import {ColonyModel} from './ColonyModel';
 import {ColorWithNeutral} from '../Color';
 import {IPayProductionModel} from './IPayProductionUnitsModel';
 import {IAresData} from '../ares/IAresData';
-import {Message} from '../Message';
+import {Message} from '../common/logs/Message';
 import {PartyName} from '../turmoil/parties/PartyName';
 import {TurmoilModel} from './TurmoilModel';
 
@@ -15,6 +15,7 @@ export interface PlayerInputModel {
     canUseHeat: boolean | undefined;
     canUseSteel: boolean | undefined;
     canUseTitanium: boolean | undefined;
+    canUseSeeds: boolean | undefined;
     cards: Array<CardModel> | undefined;
     inputType: PlayerInputTypes;
     options: Array<PlayerInputModel> | undefined;
@@ -25,6 +26,7 @@ export interface PlayerInputModel {
     microbes: number | undefined;
     floaters: number | undefined;
     science: number | undefined;
+    seeds: number | undefined;
     minCardsToSelect: number | undefined;
     players: Array<ColorWithNeutral> | undefined;
     title: string | Message;

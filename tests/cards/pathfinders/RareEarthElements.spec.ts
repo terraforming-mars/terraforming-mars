@@ -3,8 +3,8 @@ import {RareEarthElements} from '../../../src/cards/pathfinders/RareEarthElement
 import {Game} from '../../../src/Game';
 import {TestPlayer} from '../../TestPlayer';
 import {TestPlayers} from '../../TestPlayers';
-import {TileType} from '../../../src/TileType';
-import {Resources} from '../../../src/Resources';
+import {Resources} from '../../../src/common/Resources';
+import {TileType} from '../../../src/common/TileType';
 
 describe('RareEarthElements', function() {
   let card: RareEarthElements;

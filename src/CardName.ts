@@ -467,6 +467,7 @@ export enum CardName {
     BIO_PRINTING_FACILITY = 'Bio Printing Facility',
     BACTOVIRAL_RESEARCH = 'Bactoviral Research',
     HARVEST = 'Harvest',
+    OUTDOOR_SPORTS = 'Outdoor Sports',
 
     // Community corps
     AGRICOLA_INC = 'Agricola Inc',
@@ -484,6 +485,7 @@ export enum CardName {
     TRADE_ADVANCE = 'Trade Advance',
     POLITICAL_UPRISING = 'Political Uprising',
     BY_ELECTION = 'By-Election',
+    EXECUTIVE_ORDER = 'Executive Order',
 
     // Community colonies
     SCIENCE_TAG_BLANK_CARD = '',
@@ -725,7 +727,7 @@ export enum CardName {
     PLANET_PR = 'planet pr',
     AMBIENT = 'Ambient',
     RINGCOM = 'Ringcom',
-    CHIIMERA = 'Chiimera',
+    CHIMERA = 'Chimera',
     SISTEMAS_SEEBECK = 'Sistemas Seebeck',
     SPIRE = 'Spire',
     SOYLENT_SEEDLING_SYSTEMS = 'Soylent Seedling Systems',

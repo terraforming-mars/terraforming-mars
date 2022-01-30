@@ -1,8 +1,8 @@
 import {Player} from '../Player';
 import {SelectCard} from '../inputs/SelectCard';
-import {ResourceType} from '../ResourceType';
+import {ResourceType} from '../common/ResourceType';
 import {ICard} from '../cards/ICard';
-import {Tags} from '../cards/Tags';
+import {Tags} from '../common/cards/Tags';
 import {DeferredAction, Priority} from './DeferredAction';
 import {LogBuilder} from '../LogBuilder';
 
@@ -26,8 +26,8 @@ export class AddResourcesToCard implements DeferredAction {
   ) {}
 
   public execute() {
-    const count = this.options.count || 1;
-    const title = this.options.title ||
+    const count = this.options.count ?? 1;
+    const title = this.options.title ??
       'Select card to add ' + count + ' ' + (this.resourceType || 'resources') + '(s)';
     let cards = this.player.getResourceCards(this.resourceType);
 

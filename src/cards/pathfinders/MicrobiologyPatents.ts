@@ -4,8 +4,8 @@ import {Card} from '../Card';
 import {CardType} from '../CardType';
 import {CardName} from '../../CardName';
 import {CardRenderer} from '../render/CardRenderer';
-import {Tags} from '../Tags';
-import {Resources} from '../../Resources';
+import {Tags} from '../../common/cards/Tags';
+import {Resources} from '../../common/Resources';
 import {played} from '../Options';
 
 export class MicrobiologyPatents extends Card implements IProjectCard {

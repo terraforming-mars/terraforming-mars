@@ -4,14 +4,14 @@ import Button from '@/client/components/common/Button.vue';
 
 import {HowToPay} from '@/inputs/HowToPay';
 import Card from '@/client/components/card/Card.vue';
-import {CardFinder} from '@/CardFinder';
+import {getCard} from '@/client/cards/ClientCardManifest';
 import {CardModel} from '@/models/CardModel';
 import {CardOrderStorage} from '@/client/utils/CardOrderStorage';
-import {PaymentWidgetMixin, SelectHowToPayForProjectCardModel} from '@/client/mixins/PaymentWidgetMixin';
+import {PaymentWidgetMixin, SelectHowToPayForProjectCardModel, unit} from '@/client/mixins/PaymentWidgetMixin';
 import {PlayerInputModel} from '@/models/PlayerInputModel';
 import {PlayerViewModel, PublicPlayerModel} from '@/models/PlayerModel';
 import {PreferencesManager} from '@/client/utils/PreferencesManager';
-import {Tags} from '@/cards/Tags';
+import {Tags} from '@/common/cards/Tags';
 import {Units} from '@/Units';
 import {CardName} from '@/CardName';
 
@@ -66,6 +66,7 @@ export default Vue.extend({
       titanium: 0,
       microbes: 0,
       science: 0,
+      seeds: 0,
       floaters: 0,
       warning: undefined,
       available: Units.of({}),
@@ -95,16 +96,17 @@ export default Vue.extend({
       return card;
     },
     getCardTags() {
-      const card = new CardFinder().getProjectCardByName(this.cardName);
-      if (card === undefined) {
+      const cam = getCard(this.cardName);
+      if (cam === undefined) {
         throw new Error(`card not found ${this.cardName}`);
       }
-      return card.tags;
+      return cam.card.tags;
     },
     setDefaultValues() {
       this.microbes = 0;
       this.floaters = 0;
       this.science = 0;
+      this.seeds = 0;
       this.steel = 0;
       this.titanium = 0;
       this.heat = 0;
@@ -148,6 +150,10 @@ export default Vue.extend({
         return toSaveUnits;
       };
 
+      if (megacreditBalance > 0 && this.canUseSeeds()) {
+        this.seeds = deductUnits(this.playerinput.seeds, 5);
+      }
+
       if (megacreditBalance > 0 && this.canUseMicrobes()) {
         this.microbes = deductUnits(this.playerinput.microbes, 2);
       }
@@ -185,6 +191,7 @@ export default Vue.extend({
         this.floaters -= saveOverSpendingUnits(this.floaters, 3);
         this.microbes -= saveOverSpendingUnits(this.microbes, 2);
         this.science -= saveOverSpendingUnits(this.science, 1);
+        this.seeds -= saveOverSpendingUnits(this.seeds, 5);
         this.megaCredits -= saveOverSpendingUnits(this.megaCredits, 1);
       }
     },
@@ -234,6 +241,19 @@ export default Vue.extend({
       }
       return false;
     },
+    canUseSeeds() {
+      // FYI Seed Resources are limited to the Soylent Seedling Systems corp card, which allows spending its
+      // resources for plant cards and the standard greenery project.
+      if (this.card !== undefined && (this.playerinput.seeds ?? 0) > 0) {
+        if (this.tags.includes(Tags.PLANT)) {
+          return true;
+        }
+        if (this.card.name === CardName.GREENERY_STANDARD_PROJECT) {
+          return true;
+        }
+      }
+      return false;
+    },
     cardChanged() {
       this.card = this.getCard();
       this.cost = this.card.calculatedCost || 0;
@@ -267,86 +287,36 @@ export default Vue.extend({
         microbes: this.microbes,
         floaters: this.floaters,
         science: this.science,
+        seeds: this.seeds,
       };
-      if (htp.megaCredits > this.thisPlayer.megaCredits) {
-        this.warning = 'You don\'t have that many M€';
-        return;
-      }
-      if (this.playerinput.microbes !== undefined && htp.microbes > this.playerinput.microbes) {
-        this.warning = 'You don\'t have enough microbes';
-        return;
-      }
-      if (this.playerinput.floaters !== undefined && htp.floaters > this.playerinput.floaters) {
-        this.warning = 'You don\'t have enough floaters';
-        return;
-      }
-      if (this.playerinput.science !== undefined && htp.science > this.playerinput.science) {
-        this.warning = 'You don\'t have enough science resources';
-        return;
-      }
-      if (htp.heat > this.thisPlayer.heat) {
-        this.warning = 'You don\'t have enough heat';
-        return;
-      }
-      if (htp.titanium > this.thisPlayer.titanium) {
-        this.warning = 'You don\'t have enough titanium';
-        return;
-      }
-      if (htp.steel > this.thisPlayer.steel) {
-        this.warning = 'You don\'t have enough steel';
-        return;
+      let totalSpent = 0;
+      for (const target of unit) {
+        if (htp[target] > this.getAmount(target)) {
+          this.$data.warning = `You do not have enough ${target}`;
+          return;
+        }
+        totalSpent += htp[target] * this.getResourceRate(target);
       }
 
-      const totalSpentAmt =
-        (3 * htp.floaters) +
-        (2 * htp.microbes) +
-        htp.science +
-        htp.heat +
-        htp.megaCredits +
-        (htp.steel * this.thisPlayer.steelValue) +
-        (htp.titanium * this.thisPlayer.titaniumValue);
-
-      if (totalSpentAmt < this.cost) {
+      if (totalSpent < this.cost) {
         this.warning = 'Haven\'t spent enough';
         return;
       }
 
-      if (totalSpentAmt > this.cost) {
-        const diff = totalSpentAmt - this.cost;
-        if (htp.titanium && diff >= this.thisPlayer.titaniumValue) {
-          this.warning = 'You cannot overspend titanium';
-          return;
-        }
-        if (htp.steel && diff >= this.thisPlayer.steelValue) {
-          this.warning = 'You cannot overspend steel';
-          return;
-        }
-        if (htp.floaters && diff >= 3) {
-          this.warning = 'You cannot overspend floaters';
-          return;
-        }
-        if (htp.microbes && diff >= 2) {
-          this.warning = 'You cannot overspend microbes';
-          return;
-        }
-        if (htp.science && diff >= 1) {
-          this.warning = 'You cannot overspend science resources';
-          return;
-        }
-        if (htp.heat && diff >= 1) {
-          this.warning = 'You cannot overspend heat';
-          return;
-        }
-        if (htp.megaCredits && diff >= 1) {
-          this.warning = 'You cannot overspend megaCredits';
-          return;
+      if (totalSpent > this.cost) {
+        const diff = totalSpent - this.cost;
+        for (const target of unit) {
+          if (htp[target] && diff >= this.getResourceRate(target)) {
+            this.$data.warning = `You cannot overspend ${target}`;
+            return;
+          }
         }
       }
 
       const showAlert = PreferencesManager.load('show_alerts') === '1';
 
-      if (totalSpentAmt > this.cost && showAlert) {
-        const diff = totalSpentAmt - this.cost;
+      if (totalSpent > this.cost && showAlert) {
+        const diff = totalSpent - this.cost;
 
         if (confirm('Warning: You are overpaying by ' + diff + ' M€')) {
           this.onsave([[
@@ -439,6 +409,14 @@ export default Vue.extend({
       <Button type="max" @click="setMaxValue('science')" title="MAX" />
     </div>
 
+    <div class="payments_type input-group" v-if="canUseSeeds()">
+      <i class="resource_icon resource_icon--seed payments_type_icon" :title="$t('Pay by Seeds')"></i>
+      <Button type="minus" @click="reduceValue('seeds', 1)" />
+      <input class="form-input form-inline payments_input" v-model.number="seeds" />
+      <Button type="plus" @click="addValue('seeds', 1)" />
+      <Button type="max" @click="setMaxValue('seeds')" title="MAX" />
+    </div>
+
     <div class="payments_type input-group">
       <i class="resource_icon resource_icon--megacredits payments_type_icon" :title="$t('Pay by Megacredits')"></i>
       <Button type="minus" @click="reduceValue('megaCredits', 1)" />
@@ -451,7 +429,7 @@ export default Vue.extend({
     </div>
 
     <div v-if="showsave === true" class="payments_save">
-      <Button size="big" @click="saveData" :title="playerinput.buttonLabel" />
+      <Button size="big" @click="saveData" :title="playerinput.buttonLabel" data-test="save"/>
     </div>
   </section>
 </div>

@@ -1,10 +1,10 @@
 import {Card} from '../Card';
 import {CardName} from '../../CardName';
-import {ResourceType} from '../../ResourceType';
+import {ResourceType} from '../../common/ResourceType';
 import {CardType} from '../CardType';
 import {IActionCard, IResourceCard} from '../ICard';
 import {IProjectCard} from '../IProjectCard';
-import {Tags} from '../Tags';
+import {Tags} from '../../common/cards/Tags';
 import {ICard} from '../../cards/ICard';
 import {SelectCard} from '../../inputs/SelectCard';
 import {DeferredAction} from '../../deferredActions/DeferredAction';
@@ -34,7 +34,7 @@ export class BioengineeringEnclosure extends Card implements IProjectCard, IActi
       },
     });
   }
-  public resourceCount = 0;
+  public override resourceCount = 0;
 
   public play(player: Player) {
     player.addResourceTo(this, 2);

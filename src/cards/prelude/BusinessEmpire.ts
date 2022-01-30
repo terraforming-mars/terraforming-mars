@@ -1,16 +1,19 @@
-import {Tags} from '../Tags';
+import {Tags} from '../../common/cards/Tags';
 import {Player} from '../../Player';
 import {PreludeCard} from './PreludeCard';
-import {Resources} from '../../Resources';
 import {CardName} from '../../CardName';
 import {SelectHowToPayDeferred} from '../../deferredActions/SelectHowToPayDeferred';
 import {CardRenderer} from '../render/CardRenderer';
+import {Units} from '../../Units';
 
 export class BusinessEmpire extends PreludeCard {
   constructor() {
     super({
       name: CardName.BUSINESS_EMPIRE,
       tags: [Tags.EARTH],
+
+      productionBox: Units.of({megacredits: 6}),
+      startingMegacredits: -6,
 
       metadata: {
         cardNumber: 'P06',
@@ -22,12 +25,12 @@ export class BusinessEmpire extends PreludeCard {
       },
     });
   }
-  public canPlay(player: Player) {
+  public override canPlay(player: Player) {
     if (player.isCorporation(CardName.MANUTECH)) return true;
     return player.canAfford(6);
   }
   public play(player: Player) {
-    player.addProduction(Resources.MEGACREDITS, 6);
+    player.adjustProduction(this.productionBox);
     player.game.defer(new SelectHowToPayDeferred(player, 6));
     return undefined;
   }

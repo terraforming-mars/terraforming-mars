@@ -6,7 +6,7 @@ import {IProjectCard} from '../../../src/cards/IProjectCard';
 import {Game} from '../../../src/Game';
 import {AndOptions} from '../../../src/inputs/AndOptions';
 import {SelectCard} from '../../../src/inputs/SelectCard';
-import {Resources} from '../../../src/Resources';
+import {Resources} from '../../../src/common/Resources';
 import {TestPlayers} from '../../TestPlayers';
 
 describe('Polyphemos', function() {
@@ -28,7 +28,7 @@ describe('Polyphemos', function() {
     player.playedCards.push(card3);
     const action = card3.action(player);
     expect(action).is.not.undefined;
-    expect(action instanceof SelectCard).is.true;
+    expect(action).instanceOf(SelectCard);
     (action as SelectCard<IProjectCard>).cb([(action as SelectCard<IProjectCard>).cards[0]]);
     player.game.deferredActions.runNext();
     expect(player.megaCredits).to.eq(35);

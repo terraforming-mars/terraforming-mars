@@ -1,7 +1,7 @@
 import {Player} from '../../Player';
 import {CardName} from '../../CardName';
 import {CardRenderer} from '../render/CardRenderer';
-import {Tags} from '../Tags';
+import {Tags} from '../../common/cards/Tags';
 import {AirScrappingStandardProject} from './AirScrappingStandardProject';
 import {Size} from '../render/Size';
 import {played} from '../Options';
@@ -11,6 +11,7 @@ export class AirScrappingStandardProjectVariant extends AirScrappingStandardProj
     super({
       name: CardName.AIR_SCRAPPING_STANDARD_PROJECT_VARIANT,
       cost: 15,
+      tr: {venus: 1},
       metadata: {
         cardNumber: 'SP1a',
         renderData: CardRenderer.builder((b) => {
@@ -23,7 +24,7 @@ export class AirScrappingStandardProjectVariant extends AirScrappingStandardProj
     });
   }
 
-  protected discount(player: Player): number {
+  protected override discount(player: Player): number {
     const tagCount = player.getTagCount(Tags.VENUS);
     const discount = Math.min(tagCount, 5);
     return discount + super.discount(player);

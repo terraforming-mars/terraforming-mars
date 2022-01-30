@@ -1,9 +1,10 @@
 
-import {Message} from '../Message';
+import {ICard} from '../cards/ICard';
+import {Message} from '../common/logs/Message';
 import {PlayerInput} from '../PlayerInput';
 import {PlayerInputTypes} from '../PlayerInputTypes';
 
-export class SelectCard<T> implements PlayerInput {
+export class SelectCard<T extends ICard> implements PlayerInput {
     public inputType: PlayerInputTypes = PlayerInputTypes.SELECT_CARD;
 
     constructor(

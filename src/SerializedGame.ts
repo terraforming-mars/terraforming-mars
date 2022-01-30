@@ -10,10 +10,10 @@ import {SerializedColony} from './SerializedColony';
 import {SerializedPlayer} from './SerializedPlayer';
 import {SerializedDealer} from './SerializedDealer';
 import {SerializedTurmoil} from './turmoil/SerializedTurmoil';
-import {PlayerId} from './Player';
-import {GameId, GameOptions, SpectatorId} from './Game';
+import {PlayerId, GameId, SpectatorId} from './common/Types';
+import {GameOptions} from './Game';
 import {IAresData} from './ares/IAresData';
-import {LogMessage} from './LogMessage';
+import {LogMessage} from './common/logs/LogMessage';
 import {SerializedBoard} from './boards/SerializedBoard';
 import {SerializedMoonData} from './moon/SerializedMoonData';
 import {SerializedPathfindersData} from './pathfinders/SerializedPathfindersData';
@@ -41,7 +41,7 @@ export interface SerializedGame {
     id: GameId;
     initialDraftIteration: number;
     lastSaveId: number;
-    milestones: Array<IMilestone>;
+    milestones: Array<IMilestone> | Array<string>; // TODO(bafolts): remove Array<IMilestone> by 2021-12-01
     monsInsuranceOwner: PlayerId | undefined;
     moonData: SerializedMoonData | undefined;
     pathfindersData: SerializedPathfindersData | undefined;

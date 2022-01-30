@@ -4,10 +4,10 @@ import {Card} from '../Card';
 import {CardType} from '../CardType';
 import {CardName} from '../../CardName';
 import {CardRenderer} from '../render/CardRenderer';
-import {Resources} from '../../Resources';
-import {Tags} from '../Tags';
+import {Resources} from '../../common/Resources';
+import {Tags} from '../../common/cards/Tags';
 import {RemoveResourcesFromCard} from '../../deferredActions/RemoveResourcesFromCard';
-import {ResourceType} from '../../ResourceType';
+import {ResourceType} from '../../common/ResourceType';
 import {all, digit} from '../Options';
 
 export class SolarStorm extends Card implements IProjectCard {
@@ -39,7 +39,6 @@ export class SolarStorm extends Card implements IProjectCard {
       }
     });
     player.game.defer(new RemoveResourcesFromCard(player, ResourceType.DATA, 3));
-    // TODO(kberg): Handle Turmoil.
     player.game.increaseTemperature(player, 1);
     return undefined;
   }

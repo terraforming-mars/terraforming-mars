@@ -4,8 +4,8 @@ import {Card} from '../Card';
 import {CardType} from '../CardType';
 import {CardName} from '../../CardName';
 import {CardRenderer} from '../render/CardRenderer';
-import {Resources} from '../../Resources';
-import {Tags} from '../Tags';
+import {Resources} from '../../common/Resources';
+import {Tags} from '../../common/cards/Tags';
 import {played} from '../Options';
 
 export class ExpeditionToTheSurfaceVenus extends Card implements IProjectCard {
@@ -23,7 +23,7 @@ export class ExpeditionToTheSurfaceVenus extends Card implements IProjectCard {
           b.cards(2).venus(1).br;
           b.megacredits(1).slash().venus(1, {played});
         }),
-        description: 'Draw 2 cards. Raise Venus 1 step. Gain 1MC for each of your Venus tags, including this.',
+        description: 'Draw 2 cards. Raise Venus 1 step. Gain 1M€ for each of your Venus tags, including this.',
       },
     });
   }

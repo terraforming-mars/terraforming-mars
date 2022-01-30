@@ -1,5 +1,5 @@
-import {Tags} from '../cards/Tags';
-import {PlayerId} from '../Player';
+import {Tags} from '../common/cards/Tags';
+import {PlayerId} from '../common/Types';
 
 export interface SerializedPathfindersData {
   venus: number;

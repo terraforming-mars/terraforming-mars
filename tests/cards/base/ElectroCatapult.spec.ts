@@ -2,7 +2,7 @@ import {expect} from 'chai';
 import {ElectroCatapult} from '../../../src/cards/base/ElectroCatapult';
 import {Game} from '../../../src/Game';
 import {OrOptions} from '../../../src/inputs/OrOptions';
-import {Resources} from '../../../src/Resources';
+import {Resources} from '../../../src/common/Resources';
 import {TestPlayer} from '../../TestPlayer';
 import {TestPlayers} from '../../TestPlayers';
 
@@ -45,7 +45,7 @@ describe('ElectroCatapult', () => {
     player.steel = 1;
 
     const action = card.action(player);
-    expect(action instanceof OrOptions).is.true;
+    expect(action).instanceOf(OrOptions);
     expect(action!.options).has.lengthOf(2);
 
         action!.options[0].cb();

@@ -6,8 +6,8 @@ import {CardName} from '../../CardName';
 import {CardRenderer} from '../render/CardRenderer';
 import {IActionCard} from '../ICard';
 import {CardRequirements} from '../CardRequirements';
-import {Tags} from '../Tags';
-import {Resources} from '../../Resources';
+import {Tags} from '../../common/cards/Tags';
+import {Resources} from '../../common/Resources';
 
 export class OzoneGenerators extends Card implements IProjectCard, IActionCard {
   constructor() {

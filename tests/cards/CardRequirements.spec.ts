@@ -4,14 +4,14 @@ import {TestingUtils} from '../TestingUtils';
 import {TestPlayers} from '../TestPlayers';
 import {Game} from '../../src/Game';
 import {AdaptationTechnology} from '../../src/cards/base/AdaptationTechnology';
-import {TileType} from '../../src/TileType';
+import {TileType} from '../../src/common/TileType';
 import {Ants} from '../../src/cards/base/Ants';
 import {Ceres} from '../../src/colonies/Ceres';
 import {Celestic} from '../../src/cards/venusNext/Celestic';
 import {PartyName} from '../../src/turmoil/parties/PartyName';
-import {Tags} from '../../src/cards/Tags';
+import {Tags} from '../../src/common/cards/Tags';
 import {ResearchCoordination} from '../../src/cards/prelude/ResearchCoordination';
-import {Resources} from '../../src/Resources';
+import {Resources} from '../../src/common/Resources';
 import {SmallAsteroid} from '../../src/cards/promo/SmallAsteroid';
 import {OrOptions} from '../../src/inputs/OrOptions';
 import {TestPlayer} from '../TestPlayer';
@@ -233,7 +233,8 @@ describe('CardRequirements', function() {
     const smallAsteroid = new SmallAsteroid();
     smallAsteroid.play(player);
     // Choose Remove 1 plant option
-    const orOptions = player.game.deferredActions.peek()!.execute() as OrOptions;
+    TestingUtils.runAllActions(player.game);
+    const orOptions = TestingUtils.cast(player.getWaitingFor(), OrOptions);
     orOptions.options[0].cb([player2]);
 
     expect(requirements.satisfies(player)).eq(true);

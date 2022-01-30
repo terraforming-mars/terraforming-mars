@@ -2,9 +2,9 @@ import {expect} from 'chai';
 import {TharsisRepublic} from '../../../src/cards/corporation/TharsisRepublic';
 import {Game} from '../../../src/Game';
 import {Player} from '../../../src/Player';
-import {Resources} from '../../../src/Resources';
+import {Resources} from '../../../src/common/Resources';
 import {SpaceType} from '../../../src/SpaceType';
-import {TileType} from '../../../src/TileType';
+import {TileType} from '../../../src/common/TileType';
 import {TestingUtils} from '../../TestingUtils';
 import {TestPlayers} from '../../TestPlayers';
 
@@ -26,7 +26,7 @@ describe('TharsisRepublic', function() {
     action.cb(action.availableSpaces[0]);
     TestingUtils.runAllActions(game);
 
-    expect(game.getCitiesInPlayOnMars()).to.eq(1);
+    expect(game.getCitiesOnMarsCount()).to.eq(1);
     expect(player.getProduction(Resources.MEGACREDITS)).to.eq(1);
     expect(player.megaCredits).to.eq(3);
   });

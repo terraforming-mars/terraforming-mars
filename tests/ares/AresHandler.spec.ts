@@ -1,13 +1,13 @@
 import {expect} from 'chai';
-import {SpaceBonus} from '../../src/SpaceBonus';
+import {SpaceBonus} from '../../src/common/boards/SpaceBonus';
 import {Player} from '../../src/Player';
 import {DEFAULT_GAME_OPTIONS, Game} from '../../src/Game';
 import {ARES_OPTIONS_NO_HAZARDS, AresTestHelper, ARES_OPTIONS_WITH_HAZARDS} from './AresTestHelper';
 import {EmptyBoard} from './EmptyBoard';
-import {TileType} from '../../src/TileType';
+import {TileType} from '../../src/common/TileType';
 import {ITile} from '../../src/ITile';
 import {SpaceType} from '../../src/SpaceType';
-import {Resources} from '../../src/Resources';
+import {Resources} from '../../src/common/Resources';
 import {SelectProductionToLose} from '../../src/inputs/SelectProductionToLose';
 import {OriginalBoard} from '../../src/boards/OriginalBoard';
 import {DesperateMeasures} from '../../src/cards/ares/DesperateMeasures';
@@ -134,7 +134,8 @@ describe('AresHandler', function() {
 
     player.addProduction(Resources.PLANTS, 7);
     game.addTile(player, adjacentSpace.spaceType, adjacentSpace, {tileType: TileType.GREENERY});
-    const input = game.deferredActions.peek()!.execute() as SelectProductionToLose;
+    TestingUtils.runAllActions(game);
+    const input = TestingUtils.cast(player.getWaitingFor(), SelectProductionToLose);
     expect(input.unitsToLose).eq(1);
     input.cb(Units.of({plants: 1}));
     expect(player.getProduction(Resources.PLANTS)).eq(6);
@@ -157,7 +158,8 @@ describe('AresHandler', function() {
     player.addProduction(Resources.PLANTS, 7);
     game.addTile(player, adjacentSpace.spaceType, adjacentSpace, {tileType: TileType.GREENERY});
 
-    const input = game.deferredActions.peek()!.execute() as SelectProductionToLose;
+    TestingUtils.runAllActions(game);
+    const input = TestingUtils.cast(player.getWaitingFor(), SelectProductionToLose);
     expect(input.unitsToLose).eq(2);
     input.cb(Units.of({plants: 2}));
     expect(player.getProduction(Resources.PLANTS)).eq(5);

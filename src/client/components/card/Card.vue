@@ -10,7 +10,7 @@
                 <CardNumber v-if="getCardMetadata() !== undefined" :number="getCardNumber()"/>
             </div>
             <CardExpansion :expansion="getCardExpansion()" :isCorporation="isCorporationCard()"/>
-            <CardResourceCounter v-if="card.resourceType !== undefined" :amount="getResourceAmount(card)" :type="resourceType" />
+            <CardResourceCounter v-if="hasResourceType" :amount="getResourceAmount(card)" :type="resourceType" />
             <CardExtraContent :card="card" />
             <slot/>
         </div>
@@ -32,12 +32,11 @@ import CardTags from './CardTags.vue';
 import {CardType} from '@/cards/CardType';
 import CardContent from './CardContent.vue';
 import {ICardMetadata} from '@/cards/ICardMetadata';
-import {Tags} from '@/cards/Tags';
-import {ALL_CARD_MANIFESTS} from '@/cards/AllCards';
-import {GameModule} from '@/GameModule';
+import {Tags} from '@/common/cards/Tags';
 import {CardRequirements} from '@/cards/CardRequirements';
 import {PreferencesManager} from '@/client/utils/PreferencesManager';
-import {ResourceType} from '@/ResourceType';
+import {ResourceType} from '@/common/ResourceType';
+import {getCard} from '@/client/cards/ClientCardManifest';
 
 export default Vue.extend({
   name: 'Card',
@@ -63,37 +62,15 @@ export default Vue.extend({
     },
   },
   data() {
-    let cardInstance: ICard | undefined;
     const cardName = this.card.name;
-    let expansion: GameModule | undefined;
-    for (const manifest of ALL_CARD_MANIFESTS) {
-      const decks = [
-        manifest.corporationCards,
-        manifest.projectCards,
-        manifest.preludeCards,
-        manifest.standardProjects,
-        manifest.standardActions,
-      ];
-      for (const deck of decks) {
-        const factory = deck.findByCardName(cardName);
-        if (factory !== undefined) {
-          cardInstance = new factory.Factory();
-          expansion = manifest.module;
-          break;
-        }
-      }
-      if (expansion !== undefined) {
-        break;
-      }
-    }
-
-    if (cardInstance === undefined || expansion === undefined) {
+    const cam = getCard(cardName);
+    if (cam === undefined) {
       throw new Error(`Can't find card ${cardName}`);
     }
 
     return {
-      cardInstance,
-      expansion,
+      cardInstance: cam.card,
+      expansion: cam.module,
     };
   },
   methods: {
@@ -167,6 +144,9 @@ export default Vue.extend({
     },
   },
   computed: {
+    hasResourceType(): boolean {
+      return this.card.resourceType !== undefined || this.cardInstance.resourceType !== undefined;
+    },
     resourceType(): ResourceType {
       if (this.card.resourceType !== undefined) return this.card.resourceType;
       if (this.cardInstance.resourceType !== undefined) return this.cardInstance.resourceType;

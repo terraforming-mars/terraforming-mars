@@ -1,14 +1,15 @@
 import {Board} from './boards/Board';
 import {BoardName} from './boards/BoardName';
 import {ElysiumBoard} from './boards/ElysiumBoard';
-import {Game, GameId, GameOptions} from './Game';
+import {Game, GameOptions} from './Game';
+import {GameId} from './common/Types';
 import {HellasBoard} from './boards/HellasBoard';
 import {OriginalBoard} from './boards/OriginalBoard';
 import {Player} from './Player';
-import {Resources} from './Resources';
+import {Resources} from './common/Resources';
 import {ColonyName} from './colonies/ColonyName';
 import {Color} from './Color';
-import {TileType} from './TileType';
+import {TileType} from './common/TileType';
 import {Random} from './Random';
 import {ArabiaTerraBoard} from './boards/ArabiaTerraBoard';
 

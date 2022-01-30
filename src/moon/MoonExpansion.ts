@@ -2,17 +2,17 @@ import {Game} from '../Game';
 import {ITile} from '../ITile';
 import {MoonBoard} from './MoonBoard';
 import {Player} from '../Player';
-import {TileType} from '../TileType';
+import {TileType} from '../common/TileType';
 import {SpaceType} from '../SpaceType';
 import {IMoonData} from './IMoonData';
 import {CardName} from '../CardName';
 import {IProjectCard} from '../cards/IProjectCard';
 import {Units} from '../Units';
 import {IMoonCard} from '../cards/moon/IMoonCard';
-import {Tags} from '../cards/Tags';
+import {Tags} from '../common/cards/Tags';
 import {ISpace} from '../boards/ISpace';
 import {MAXIMUM_COLONY_RATE, MAXIMUM_LOGISTICS_RATE, MAXIMUM_MINING_RATE} from '../constants';
-import {Resources} from '../Resources';
+import {Resources} from '../common/Resources';
 import {Phase} from '../Phase';
 import {BoardType} from '../boards/BoardType';
 import {VictoryPointsBreakdown} from '../VictoryPointsBreakdown';
@@ -258,7 +258,7 @@ export class MoonExpansion {
    *
    * Special tiles such as Lunar Mine Urbanization, are especially included.
    */
-  public static tiles(
+  public static spaces(
     game: Game,
     tileType?: TileType,
     options?: {

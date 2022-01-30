@@ -5,7 +5,7 @@ import {CardType} from '../CardType';
 import {CardName} from '../../CardName';
 import {CardRenderer} from '../render/CardRenderer';
 import {ICard} from '../ICard';
-import {Tags} from '../Tags';
+import {Tags} from '../../common/cards/Tags';
 import {played} from '../Options';
 
 export class TerraformingControlStation extends Card implements IProjectCard {
@@ -20,7 +20,7 @@ export class TerraformingControlStation extends Card implements IProjectCard {
       metadata: {
         cardNumber: 'Pf12',
         renderData: CardRenderer.builder((b) => {
-          b.effect('When you play a Venus or Mars tag, pay 2MC less.', (eb) => {
+          b.effect('When you play a Venus or Mars tag, pay 2 M€ less.', (eb) => {
             eb.venus(1, {played}).slash().mars(1, {played}).startEffect.megacredits(-2);
           });
           b.br.tr(2);
@@ -38,7 +38,6 @@ export class TerraformingControlStation extends Card implements IProjectCard {
   }
 
   public play(player: Player) {
-    // TODO(kberg): Handle Turmoil efect.
     player.increaseTerraformRatingSteps(2);
     return undefined;
   }

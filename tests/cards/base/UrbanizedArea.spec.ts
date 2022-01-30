@@ -3,7 +3,7 @@ import {UrbanizedArea} from '../../../src/cards/base/UrbanizedArea';
 import {Game} from '../../../src/Game';
 import {ISpace} from '../../../src/boards/ISpace';
 import {Player} from '../../../src/Player';
-import {Resources} from '../../../src/Resources';
+import {Resources} from '../../../src/common/Resources';
 import {SpaceName} from '../../../src/SpaceName';
 import {SpaceType} from '../../../src/SpaceType';
 import {TestPlayers} from '../../TestPlayers';
@@ -43,7 +43,7 @@ describe('UrbanizedArea', function() {
     expect(action.availableSpaces).has.lengthOf(1);
 
     action.cb(action.availableSpaces[0]);
-    expect(game.getCitiesInPlay()).to.eq(3);
+    expect(game.getCitiesCount()).to.eq(3);
     expect(player.getProduction(Resources.ENERGY)).to.eq(0);
     expect(player.getProduction(Resources.MEGACREDITS)).to.eq(2);
   });

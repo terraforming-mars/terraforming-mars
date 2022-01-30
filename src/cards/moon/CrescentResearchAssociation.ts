@@ -6,7 +6,7 @@ import {CardType} from '../CardType';
 import {CorporationCard} from '../corporation/CorporationCard';
 import {IProjectCard} from '../IProjectCard';
 import {CardRenderer} from '../render/CardRenderer';
-import {Tags} from '../Tags';
+import {Tags} from '../../common/cards/Tags';
 
 export class CrescentResearchAssociation extends Card implements CorporationCard {
   constructor() {
@@ -39,6 +39,6 @@ export class CrescentResearchAssociation extends Card implements CorporationCard
     if (card.tags.indexOf(Tags.MOON) === -1) {
       return 0;
     }
-    return player.getTagCount(Tags.MOON, false, true);
+    return player.getTagCount(Tags.MOON);
   }
 }

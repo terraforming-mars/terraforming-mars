@@ -1,10 +1,10 @@
 import {IProjectCard} from '../IProjectCard';
-import {Tags} from '../Tags';
+import {Tags} from '../../common/cards/Tags';
 import {Card} from '../Card';
 import {CardName} from '../../CardName';
 import {CardType} from '../CardType';
 import {Player} from '../../Player';
-import {Resources} from '../../Resources';
+import {Resources} from '../../common/Resources';
 import {PartyName} from '../../turmoil/parties/PartyName';
 import {PlaceCityTile} from '../../deferredActions/PlaceCityTile';
 import {SendDelegateToArea} from '../../deferredActions/SendDelegateToArea';
@@ -36,14 +36,14 @@ export class CulturalMetropolis extends Card implements IProjectCard {
     });
   }
 
-  public canPlay(player: Player): boolean {
+  public override canPlay(player: Player): boolean {
     if (player.getProduction(Resources.ENERGY) < 1) {
       return false;
     }
 
     // This card requires player has 2 delegates available
     const turmoil = Turmoil.getTurmoil(player.game);
-    const hasEnoughDelegates = turmoil.getAvailableDelegateCount(player.id, 'both') > 2;
+    const hasEnoughDelegates = turmoil.getAvailableDelegateCount(player.id, 'both') >= 2;
     return hasEnoughDelegates;
   }
 

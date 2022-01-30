@@ -22,6 +22,7 @@ export default Vue.extend({
       'hide_discount_on_cards': false,
       'learner_mode': true,
       'hide_animated_sidebar': false,
+      'experimental_ui': false,
     };
   },
   methods: {
@@ -59,7 +60,7 @@ export default Vue.extend({
       }
       return PreferencesManager.preferencesValues;
     },
-    updatePreferences(_evt: any): void {
+    updatePreferences(): void {
       let strVal: string = '';
       for (const k of preferences) {
         const val = PreferencesManager.preferencesValues.get(k);
@@ -165,6 +166,14 @@ export default Vue.extend({
           <i class="form-icon"></i>
           <span v-i18n>Learner Mode (req. refresh)</span>
           <span class="tooltip tooltip-left" data-tooltip="Show information that can be helpful\n to players who are still learning the games">&#9432;</span>
+        </label>
+      </div>
+      <div class="preferences_panel_item">
+        <label class="form-switch">
+          <input type="checkbox" v-on:change="updatePreferences" v-model="experimental_ui">
+          <i class="form-icon"></i>
+          <span v-i18n>Experimental UI</span>
+          <span class="tooltip tooltip-left" data-tooltip="Test out any possible new experimental UI features for feedback.">&#9432;</span>
         </label>
       </div>
       <div class="preferences_panel_item form-group">

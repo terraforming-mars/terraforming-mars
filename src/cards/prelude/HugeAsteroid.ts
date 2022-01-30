@@ -9,6 +9,8 @@ export class HugeAsteroid extends PreludeCard {
     super({
       name: CardName.HUGE_ASTEROID,
 
+      startingMegacredits: -5,
+
       metadata: {
         cardNumber: 'P15',
         renderData: CardRenderer.builder((b) => {
@@ -19,7 +21,7 @@ export class HugeAsteroid extends PreludeCard {
       },
     });
   }
-  public canPlay(player: Player) {
+  public override canPlay(player: Player) {
     return player.canAfford(5);
   }
   public play(player: Player) {

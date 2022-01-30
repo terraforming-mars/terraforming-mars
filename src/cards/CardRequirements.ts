@@ -1,8 +1,8 @@
-import {Resources} from '../Resources';
+import {Resources} from '../common/Resources';
 import {PartyName} from '../turmoil/parties/PartyName';
 import {CardRequirement, PartyCardRequirement, ProductionCardRequirement, TagCardRequirement} from './CardRequirement';
 import {RequirementType} from './RequirementType';
-import {Tags} from './Tags';
+import {Tags} from '../common/cards/Tags';
 import {Player} from '../Player';
 import {
   MAX_OCEAN_TILES,
@@ -14,35 +14,15 @@ import {
 } from '../constants';
 
 export class CardRequirements {
-  constructor(private requirements: Array<CardRequirement>) {}
+  constructor(public requirements: Array<CardRequirement>) {}
 
   public static builder(f: (builder: Builder) => void): CardRequirements {
     const builder = new Builder();
     f(builder);
     return builder.build();
   }
-  public getRequirementsText(): string {
-    const reqTexts: Array<string> = this.requirements.map((req) => req.getLabel());
-    if (this.hasAny()) {
-      reqTexts.unshift('Any');
-    }
-    return reqTexts.join(' ');
-  }
   public hasMax(): boolean {
     return this.requirements.some((req) => req.isMax);
-  }
-  public hasAny(): boolean {
-    return this.requirements.some((req) => req.isAny);
-  }
-  public hasParty(partyName?: PartyName | undefined): boolean {
-    return this.requirements.some((req) => {
-      if (!(req instanceof PartyCardRequirement)) return false;
-      if (partyName === undefined) return true;
-      return req.party === partyName;
-    });
-  }
-  public hasPlantsRemoved(): boolean {
-    return this.requirements.some((req) => req.type === RequirementType.REMOVED_PLANTS);
   }
   public satisfies(player: Player): boolean {
     // Process tags separately, though max & any tag criteria will be processed later.
@@ -61,7 +41,7 @@ export class CardRequirements {
   }
 }
 
-export type Options = {max?: boolean, all?: boolean};
+export type Options = {max?: boolean, all?: boolean, text?: string};
 
 class Builder {
   private reqs: Array<CardRequirement> = [];

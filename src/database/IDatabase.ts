@@ -1,4 +1,5 @@
-import {Game, GameId, GameOptions, Score} from '../Game';
+import {Game, GameOptions, Score} from '../Game';
+import {GameId} from '../common/Types';
 import {SerializedGame} from '../SerializedGame';
 
 export interface IGameData {

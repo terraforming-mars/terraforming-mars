@@ -4,7 +4,7 @@ import {PLAYER_DELEGATES_COUNT} from '../../../src/constants';
 import {SendDelegateToArea} from '../../../src/deferredActions/SendDelegateToArea';
 import {Game} from '../../../src/Game';
 import {Player} from '../../../src/Player';
-import {Resources} from '../../../src/Resources';
+import {Resources} from '../../../src/common/Resources';
 import {PartyName} from '../../../src/turmoil/parties/PartyName';
 import {Turmoil} from '../../../src/turmoil/Turmoil';
 import {TestingUtils} from '../../TestingUtils';
@@ -39,10 +39,12 @@ describe('Cultural Metropolis', function() {
     player.addProduction(Resources.ENERGY, 1);
     turmoil.sendDelegateToParty(player.id, PartyName.UNITY, game, 'lobby');
     turmoil.sendDelegateToParty(player.id, PartyName.UNITY, game, 'reserve');
-    for (let i = 0; i < PLAYER_DELEGATES_COUNT - 3; i++) {
+    for (let i = 0; i < PLAYER_DELEGATES_COUNT - 4; i++) {
       turmoil.sendDelegateToParty(player.id, PartyName.REDS, game, 'reserve');
     }
-    expect(turmoil.getAvailableDelegateCount(player.id, 'reserve')).to.equal(1);
+    expect(turmoil.getAvailableDelegateCount(player.id, 'reserve')).to.equal(2);
+    expect(player.canPlayIgnoringCost(card)).is.true;
+    turmoil.sendDelegateToParty(player.id, PartyName.REDS, game, 'reserve');
     expect(player.canPlayIgnoringCost(card)).is.not.true;
   });
 

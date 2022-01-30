@@ -1,4 +1,4 @@
-import {SpaceBonus} from '../SpaceBonus';
+import {SpaceBonus} from '../common/boards/SpaceBonus';
 import {SpaceName} from '../SpaceName';
 import {Board} from './Board';
 import {Player} from '../Player';
@@ -49,15 +49,15 @@ export class OriginalBoard extends Board {
     return new OriginalBoard(Board.deserializeSpaces(board.spaces, players));
   }
 
-  public getNonReservedLandSpaces(): Array<ISpace> {
+  public override getNonReservedLandSpaces(): Array<ISpace> {
     return super.getNonReservedLandSpaces().filter((space) => space.id !== SpaceName.NOCTIS_CITY);
   }
 
-  public getAvailableSpacesOnLand(player: Player): Array<ISpace> {
+  public override getAvailableSpacesOnLand(player: Player): Array<ISpace> {
     return super.getAvailableSpacesOnLand(player).filter((space) => space.id !== SpaceName.NOCTIS_CITY);
   }
 
-  public canPlaceTile(space: ISpace): boolean {
+  public override canPlaceTile(space: ISpace): boolean {
     return super.canPlaceTile(space) && space.id !== SpaceName.NOCTIS_CITY;
   }
 

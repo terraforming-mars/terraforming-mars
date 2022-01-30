@@ -1,4 +1,4 @@
-import {Tags} from '../Tags';
+import {Tags} from '../../common/cards/Tags';
 import {Player} from '../../Player';
 import {PreludeCard} from '../prelude/PreludeCard';
 import {IProjectCard} from '../IProjectCard';
@@ -27,7 +27,7 @@ export class ByElection extends PreludeCard implements IProjectCard {
       },
     });
   }
-  public canPlay() {
+  public override canPlay() {
     return true;
   }
 

@@ -20,7 +20,7 @@ describe('FullMoon', () => {
     expect(award.getScore(player)).eq(2);
   });
 
-  it('Wildcard counts', () => {
+  it('Wildcard does not count', () => {
     const award = new FullMoon();
     const player = TestPlayers.BLUE.newPlayer();
     player.playedCards = [
@@ -32,6 +32,6 @@ describe('FullMoon', () => {
     ];
     expect(award.getScore(player)).eq(5);
     player.playedCards.push(new ResearchNetwork());
-    expect(award.getScore(player)).eq(6);
+    expect(award.getScore(player)).eq(5);
   });
 });

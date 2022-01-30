@@ -1,7 +1,7 @@
 
 import {expect} from 'chai';
 import {Sponsors} from '../../../src/cards/base/Sponsors';
-import {Resources} from '../../../src/Resources';
+import {Resources} from '../../../src/common/Resources';
 import {TestPlayers} from '../../TestPlayers';
 
 describe('Sponsors', function() {

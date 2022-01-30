@@ -4,7 +4,7 @@ import {Card} from '../Card';
 import {CardType} from '../CardType';
 import {CardName} from '../../CardName';
 import {CardRenderer} from '../render/CardRenderer';
-import {Tags} from '../Tags';
+import {Tags} from '../../common/cards/Tags';
 import {CardRequirements} from '../CardRequirements';
 import {Units} from '../../Units';
 import {all} from '../Options';
@@ -33,12 +33,11 @@ export class MuseumofEarlyColonisation extends Card implements IProjectCard {
     });
   }
 
-  public canPlay(player: Player) {
+  public override canPlay(player: Player) {
     return super.canPlay(player) && player.canAdjustProduction(this.productionBox);
   }
   public play(player: Player) {
     player.adjustProduction(this.productionBox);
-    // TODO(kberg): Handle Turmoil efect.
     player.increaseTerraformRating();
     return undefined;
   }

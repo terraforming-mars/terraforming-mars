@@ -4,7 +4,7 @@ import {Game} from '../../../src/Game';
 import {TestPlayer} from '../../TestPlayer';
 import {TestPlayers} from '../../TestPlayers';
 import {ImmigrantCity} from '../../../src/cards/base/ImmigrantCity';
-import {CityStandardProject} from '../../../src//cards/base/standardProjects/CityStandardProject';
+import {CityStandardProject} from '../../../src/cards/base/standardProjects/CityStandardProject';
 
 describe('PrefabricationofHumanHabitats', function() {
   let card: PrefabricationofHumanHabitats;
@@ -25,16 +25,6 @@ describe('PrefabricationofHumanHabitats', function() {
 
     player.setProductionForTest({steel: 1});
     expect(player.canPlayIgnoringCost(card)).is.true;
-  });
-
-  it('play', function() {
-    expect(player.getTerraformRating()).eq(14);
-    expect(player.game.getTemperature()).eq(-30);
-
-    card.play(player);
-
-    expect(player.getTerraformRating()).eq(15);
-    expect(player.game.getTemperature()).eq(-28);
   });
 
   it('City tag discount ', function() {

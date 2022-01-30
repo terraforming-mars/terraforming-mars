@@ -1,12 +1,12 @@
 import {CardName} from '../../CardName';
 import {Player} from '../../Player';
 import {CardType} from '../CardType';
-import {Tags} from '../Tags';
+import {Tags} from '../../common/cards/Tags';
 import {CorporationCard} from '../corporation/CorporationCard';
 import {CardRenderer} from '../render/CardRenderer';
 import {IProjectCard} from '../IProjectCard';
 import {ICard} from '../ICard';
-import {ResourceType} from '../../ResourceType';
+import {ResourceType} from '../../common/ResourceType';
 import {PlaceMoonColonyTile} from '../../moon/PlaceMoonColonyTile';
 import {Card} from '../Card';
 import {VictoryPoints} from '../ICard';
@@ -38,7 +38,7 @@ export class IntragenSanctuaryHeadquarters extends Card implements CorporationCa
     });
   }
 
-  public resourceCount = 0;
+  public override resourceCount = 0;
 
   public initialAction(player: Player) {
     player.game.defer(new PlaceMoonColonyTile(player));

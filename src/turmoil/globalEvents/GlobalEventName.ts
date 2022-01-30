@@ -38,4 +38,12 @@ export enum GlobalEventName {
 
     // Community
     LEADERSHIP_SUMMIT = 'Leadership Summit',
+
+    // Pathfinders
+    BALANCED_DEVELOPMENT = 'Balanced Development',
+    CONSTANT_STRUGGLE = 'Constant Struggle',
+    TIRED_EARTH = 'Tired Earth',
+    MAGNETIC_FIELD_STIMULATION_DELAYS ='Magnetic Field Stimulation Delays',
+    COMMUNICATION_BOOM = 'Communication Boom',
+    SPACE_RACE_TO_MARS = 'Space Race to Mars',
 }

@@ -5,7 +5,7 @@ import {Stratopolis} from '../../../src/cards/venusNext/Stratopolis';
 import {Game} from '../../../src/Game';
 import {SelectCard} from '../../../src/inputs/SelectCard';
 import {Player} from '../../../src/Player';
-import {Resources} from '../../../src/Resources';
+import {Resources} from '../../../src/common/Resources';
 import {TestingUtils} from '../../TestingUtils';
 import {TestPlayers} from '../../TestPlayers';
 
@@ -43,7 +43,7 @@ describe('Stratopolis', function() {
     player.playedCards.push(card, card2);
 
     const action = card.action(player);
-    expect(action instanceof SelectCard).is.true;
+    expect(action).instanceOf(SelectCard);
         action!.cb([card2]);
         expect(player.getResourcesOnCard(card2)).to.eq(2);
   });

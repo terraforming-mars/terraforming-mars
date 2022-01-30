@@ -1,11 +1,11 @@
 import {IActionCard, IResourceCard} from '../ICard';
 import {IProjectCard} from '../IProjectCard';
-import {Tags} from '../Tags';
+import {Tags} from '../../common/cards/Tags';
 import {Card} from '../Card';
 import {CardType} from '../CardType';
 import {Player} from '../../Player';
 import {OrOptions} from '../../inputs/OrOptions';
-import {ResourceType} from '../../ResourceType';
+import {ResourceType} from '../../common/ResourceType';
 import {SelectOption} from '../../inputs/SelectOption';
 import {CardName} from '../../CardName';
 import {LogHelper} from '../../LogHelper';
@@ -35,7 +35,7 @@ export class RegolithEaters extends Card implements IActionCard, IProjectCard, I
     });
   }
 
-    public resourceCount = 0;
+    public override resourceCount = 0;
 
     public play(_player: Player) {
       return undefined;

@@ -5,7 +5,7 @@ import {Fish} from '../../../src/cards/base/Fish';
 import {Game} from '../../../src/Game';
 import {SelectCard} from '../../../src/inputs/SelectCard';
 import {TestPlayer} from '../../TestPlayer';
-import {Resources} from '../../../src/Resources';
+import {Resources} from '../../../src/common/Resources';
 import {TestPlayers} from '../../TestPlayers';
 
 describe('EosChasmaNationalPark', () => {
@@ -33,7 +33,7 @@ describe('EosChasmaNationalPark', () => {
 
     expect(player.canPlayIgnoringCost(card)).is.true;
     const action = card.play(player);
-    expect(action instanceof SelectCard).is.true;
+    expect(action).instanceOf(SelectCard);
     player.playedCards.push(card);
         action!.cb([birds]);
 

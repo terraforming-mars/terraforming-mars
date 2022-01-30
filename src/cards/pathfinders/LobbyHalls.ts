@@ -4,12 +4,13 @@ import {Card} from '../Card';
 import {CardType} from '../CardType';
 import {CardName} from '../../CardName';
 import {CardRenderer} from '../render/CardRenderer';
-import {Tags} from '../Tags';
+import {Tags} from '../../common/cards/Tags';
 import {Units} from '../../Units';
 import {SendDelegateToArea} from '../../deferredActions/SendDelegateToArea';
 import {DeclareCloneTag} from '../../pathfinders/DeclareCloneTag';
 import {ICloneTagCard} from './ICloneTagCard';
 import {Turmoil} from '../../turmoil/Turmoil';
+import {PathfindersExpansion} from '../../pathfinders/PathfindersExpansion';
 
 export class LobbyHalls extends Card implements IProjectCard, ICloneTagCard {
   constructor() {
@@ -32,12 +33,12 @@ export class LobbyHalls extends Card implements IProjectCard, ICloneTagCard {
 
   public cloneTag: Tags = Tags.CLONE;
 
-  public get tags(): Array<Tags> {
+  public override get tags(): Array<Tags> {
     return [this.cloneTag, Tags.BUILDING];
   }
 
   public play(player: Player) {
-    player.game.defer(new DeclareCloneTag(player, this, 'Select the clone tag\'s new tag'));
+    player.game.defer(new DeclareCloneTag(player, this, (tag) => PathfindersExpansion.raiseTrack(tag, player, 1)));
     player.adjustProduction(this.productionBox);
     const turmoil = Turmoil.getTurmoil(player.game);
     if (turmoil.getAvailableDelegateCount(player.id, 'reserve') > 0) {

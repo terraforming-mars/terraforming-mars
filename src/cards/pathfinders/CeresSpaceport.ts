@@ -1,5 +1,5 @@
 import {IProjectCard} from '../IProjectCard';
-import {Tags} from '../Tags';
+import {Tags} from '../../common/cards/Tags';
 import {Card} from '../Card';
 import {CardType} from '../CardType';
 import {Player} from '../../Player';
@@ -7,7 +7,7 @@ import {SpaceName} from '../../SpaceName';
 import {SpaceType} from '../../SpaceType';
 import {CardName} from '../../CardName';
 import {CardRenderer} from '../render/CardRenderer';
-import {Resources} from '../../Resources';
+import {Resources} from '../../common/Resources';
 import {PlaceOceanTile} from '../../deferredActions/PlaceOceanTile';
 import {played} from '../Options';
 
@@ -29,7 +29,7 @@ export class CeresSpaceport extends Card implements IProjectCard {
             .br
             .cards(1).oceans(1).city().asterix().br;
         }),
-        description: 'Increase your MC production 2 steps, and titanium production 1 step for every 2 jovian tags (including these.) ' +
+        description: 'Increase your M€ production 2 steps, and titanium production 1 step for every 2 jovian tags (including these.) ' +
           'Draw a card. Place an ocean tile. Place a city tile ON THE RESERVED AREA.',
       },
     });

@@ -4,6 +4,7 @@ import {GameLoader} from '../database/GameLoader';
 import {Server} from '../models/ServerModel';
 import {Handler} from './Handler';
 import {IContext} from './IHandler';
+import {LoadGameFormModel} from '../models/LoadGameFormModel';
 
 export class LoadGame extends Handler {
   public static readonly INSTANCE = new LoadGame();
@@ -11,14 +12,14 @@ export class LoadGame extends Handler {
     super();
   }
 
-  public put(req: http.IncomingMessage, res: http.ServerResponse, ctx: IContext): void {
+  public override put(req: http.IncomingMessage, res: http.ServerResponse, ctx: IContext): void {
     let body = '';
     req.on('data', function(data) {
       body += data.toString();
     });
     req.once('end', () => {
       try {
-        const gameReq = JSON.parse(body);
+        const gameReq: LoadGameFormModel = JSON.parse(body);
 
         const game_id = gameReq.game_id;
         // This should probably be behind some kind of verification that prevents just

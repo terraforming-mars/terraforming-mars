@@ -12,6 +12,7 @@ export class LandSpecialist implements IMilestone {
         .filter(isSpecialTile);
 
       const marsCount = spaces.length;
+      // Repeated in SpaceRaceToMars
       const moonCount = MoonExpansion.ifElseMoon(player.game, (moonData) => {
         return moonData.moon.spaces
           .filter(playerTileFn(player))

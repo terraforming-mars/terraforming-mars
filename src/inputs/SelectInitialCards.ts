@@ -8,7 +8,7 @@ import {PlayerInputTypes} from '../PlayerInputTypes';
 import {SelectCard} from './SelectCard';
 
 export class SelectInitialCards extends AndOptions implements PlayerInput {
-    public inputType = PlayerInputTypes.SELECT_INITIAL_CARDS;
+    public override inputType = PlayerInputTypes.SELECT_INITIAL_CARDS;
     constructor(player: Player, cb: (corporation: CorporationCard) => undefined) {
       super(() => {
         cb(corporation);

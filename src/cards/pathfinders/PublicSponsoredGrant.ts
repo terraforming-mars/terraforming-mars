@@ -4,8 +4,8 @@ import {Card} from '../Card';
 import {CardType} from '../CardType';
 import {CardName} from '../../CardName';
 import {CardRenderer} from '../render/CardRenderer';
-import {Resources} from '../../Resources';
-import {Tags} from '../Tags';
+import {Resources} from '../../common/Resources';
+import {Tags} from '../../common/cards/Tags';
 import {CardRequirements} from '../CardRequirements';
 import {PartyName} from '../../turmoil/parties/PartyName';
 import {OrOptions} from '../../inputs/OrOptions';
@@ -26,7 +26,7 @@ export class PublicSponsoredGrant extends Card implements IProjectCard {
           b.minus().megacredits(2, {all}).br;
           b.cards(1, {secondaryTag: Tags.WILDCARD}).cards(1, {secondaryTag: Tags.WILDCARD}).asterix();
         }),
-        description: 'Requires Scientists are ruling or that you have 2 delegates there. All players lose 2MC. Choose a tag (NOT CITY, ? OR PLANETARY TRACK) and draw 2 cards with that tag.',
+        description: 'Requires Scientists are ruling or that you have 2 delegates there. All players lose 2M€. Choose a tag (NOT CITY, ? OR PLANETARY TRACK) and draw 2 cards with that tag.',
       },
     });
   }

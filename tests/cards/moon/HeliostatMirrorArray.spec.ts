@@ -3,7 +3,7 @@ import {TestingUtils} from '../../TestingUtils';
 import {TestPlayers} from '../../TestPlayers';
 import {HeliostatMirrorArray} from '../../../src/cards/moon/HeliostatMirrorArray';
 import {expect} from 'chai';
-import {Resources} from '../../../src/Resources';
+import {Resources} from '../../../src/common/Resources';
 import {TestPlayer} from '../../TestPlayer';
 
 const MOON_OPTIONS = TestingUtils.setCustomGameOptions({moonExpansion: true});

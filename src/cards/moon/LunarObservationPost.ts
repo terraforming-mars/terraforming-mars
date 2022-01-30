@@ -1,8 +1,8 @@
 import {CardName} from '../../CardName';
 import {Player} from '../../Player';
 import {CardType} from '../CardType';
-import {Tags} from '../Tags';
-import {ResourceType} from '../../ResourceType';
+import {Tags} from '../../common/cards/Tags';
+import {ResourceType} from '../../common/ResourceType';
 import {AddResourcesToCard} from '../../deferredActions/AddResourcesToCard';
 import {IActionCard} from '../ICard';
 import {CardRenderer} from '../render/CardRenderer';
@@ -36,9 +36,9 @@ export class LunarObservationPost extends MoonCard implements IActionCard {
     });
   }
 
-  public resourceCount: number = 0;
+  public override resourceCount: number = 0;
 
-  public play(player: Player) {
+  public override play(player: Player) {
     super.play(player);
     return undefined;
   }

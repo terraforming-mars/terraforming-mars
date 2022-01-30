@@ -1,15 +1,13 @@
 import {CorporationCard} from '../corporation/CorporationCard';
 import {Player} from '../../Player';
-import {Tags} from '../Tags';
+import {Tags} from '../../common/cards/Tags';
 import {Game} from '../../Game';
 import {IProjectCard} from '../IProjectCard';
-import {Resources} from '../../Resources';
+import {Resources} from '../../common/Resources';
 import {CardType} from '../CardType';
 import {CardName} from '../../CardName';
 import {Colony} from '../../colonies/Colony';
 import {SelectColony} from '../../inputs/SelectColony';
-import {ColonyName} from '../../colonies/ColonyName';
-import {ColonyModel} from '../../models/ColonyModel';
 import {Card} from '../Card';
 import {CardRenderer} from '../render/CardRenderer';
 
@@ -44,23 +42,17 @@ export class Aridor extends Card implements CorporationCard {
       const availableColonies: Colony[] = game.colonyDealer.discardedColonies;
       if (availableColonies.length === 0) return undefined;
 
-      const coloniesModel: Array<ColonyModel> = game.getColoniesModel(availableColonies);
-      const selectColony = new SelectColony('Aridor first action - Select colony tile to add', 'Add colony tile', coloniesModel, (colonyName: ColonyName) => {
-        if (game.colonyDealer !== undefined) {
-          availableColonies.forEach((colony) => {
-            if (colony.name === colonyName) {
-              game.colonies.push(colony);
-              game.colonies.sort((a, b) => (a.name > b.name) ? 1 : -1);
-              game.log('${0} added a new Colony tile: ${1}', (b) => b.player(player).colony(colony));
-              this.checkActivation(colony, game);
-              return undefined;
-            }
-            return undefined;
-          });
-          return undefined;
-        } else return undefined;
-      },
-      );
+      const selectColony = new SelectColony('Aridor first action - Select colony tile to add', 'Add colony tile', availableColonies, (colony: Colony) => {
+        if (availableColonies.includes(colony)) {
+          game.colonies.push(colony);
+          game.colonies.sort((a, b) => (a.name > b.name) ? 1 : -1);
+          game.log('${0} added a new Colony tile: ${1}', (b) => b.player(player).colony(colony));
+          this.checkActivation(colony, game);
+        } else {
+          throw new Error(`Colony ${colony.name} is not a discarded colony`);
+        }
+        return undefined;
+      });
       return selectColony;
     }
 

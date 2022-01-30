@@ -1,8 +1,8 @@
 import * as http from 'http';
 
 import {IContext} from './IHandler';
-import {LogMessage} from '../LogMessage';
-import {LogMessageType} from '../LogMessageType';
+import {LogMessage} from '../common/logs/LogMessage';
+import {LogMessageType} from '../common/logs/LogMessageType';
 
 export class GameLogs {
   private getLogsForGeneration(messages: Array<LogMessage>, generation: number): Array<LogMessage> {

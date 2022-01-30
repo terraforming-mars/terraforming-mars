@@ -5,8 +5,8 @@ import {CardType} from '../CardType';
 import {CardName} from '../../CardName';
 import {CardRenderer} from '../render/CardRenderer';
 import {ICard} from '../ICard';
-import {Resources} from '../../Resources';
-import {Tags} from '../Tags';
+import {Resources} from '../../common/Resources';
+import {Tags} from '../../common/cards/Tags';
 import {played} from '../Options';
 
 export class SpaceRelay extends Card implements IProjectCard {
@@ -25,7 +25,7 @@ export class SpaceRelay extends Card implements IProjectCard {
           }).br;
           b.production((pb) => pb.megacredits(1));
         }),
-        description: 'Increase your MC production 1 step.',
+        description: 'Increase your M€ production 1 step.',
       },
     });
   }

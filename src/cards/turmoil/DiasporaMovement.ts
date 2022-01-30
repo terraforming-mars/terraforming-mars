@@ -1,10 +1,10 @@
 import {IProjectCard} from '../IProjectCard';
-import {Tags} from '../Tags';
+import {Tags} from '../../common/cards/Tags';
 import {Card} from '../Card';
 import {CardName} from '../../CardName';
 import {CardType} from '../CardType';
 import {Player} from '../../Player';
-import {Resources} from '../../Resources';
+import {Resources} from '../../common/Resources';
 import {PartyName} from '../../turmoil/parties/PartyName';
 import {CardRequirements} from '../CardRequirements';
 import {CardRenderer} from '../render/CardRenderer';
@@ -32,7 +32,7 @@ export class DiasporaMovement extends Card implements IProjectCard {
 
   public play(player: Player) {
     const amount = player.game.getPlayers()
-      .map((p) => p.getTagCount(Tags.JOVIAN, false, p.id === player.id ? true : false))
+      .map((p) => p.getTagCount(Tags.JOVIAN, p.id === player.id ? 'default' : 'raw'))
       .reduce((a, c) => a + c);
     player.addResource(Resources.MEGACREDITS, amount + 1, {log: true});
     return undefined;

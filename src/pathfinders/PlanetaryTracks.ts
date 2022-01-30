@@ -45,7 +45,7 @@ export class PlanetaryTracks {
     const moon = new TrackBuilder(20)
       .at(2).risingPlayer('steel').everyone('steel')
       .at(5).risingPlayer('resource').everyone('steel')
-      .at(8).risingPlayer('steel').everyone('steel')
+      .at(8).risingPlayer('steel_production').everyone('steel')
       .at(11).risingPlayer('any_resource').everyone('any_resource')
       .at(14).risingPlayer('delegate', '3mc').everyone('card')
       .at(17).risingPlayer('moon_road').everyone('card')

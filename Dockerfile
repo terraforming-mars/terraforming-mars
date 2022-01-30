@@ -1,4 +1,4 @@
-FROM node:lts-alpine
+FROM node:16-alpine3.15
 
 EXPOSE 8080
 
@@ -6,22 +6,22 @@ LABEL maintainer="bafolts" \
       name="terraforming-mars" \
       Version="1.0"
 
-RUN mkdir -p /usr/src/app/db \
-   && addgroup -S tfm \
-   && adduser -S -D -h /usr/src/app tfm tfm \
-   && apk add --no-cache --virtual .gyp git python make g++
-
 WORKDIR /usr/src/app
+COPY . .
 
-COPY package*.json ./
-
-RUN npm install
-
-COPY --chown=tfm:tfm . .
-
-RUN npm run build  \
-   && rm -rf .git \
-   && apk del git .gyp
+RUN mkdir -p /usr/src/app/db \
+  && apk add --no-cache --virtual .gyp git python3 make g++ \
+  && ln -sf python3 /usr/bin/python \
+  && npm install \
+  && npm run build \
+  && apk del --no-cache .gyp \
+  && rm /usr/bin/python \
+  && rm -rf .git \
+  && rm -rf /tmp/* \
+  && rm -rf /root/.cache \
+  && rm -rf /root/.npm \
+  && adduser -S -D -h /usr/src/app tfm \
+  && chown -R tfm:nogroup .
 
 USER tfm
 

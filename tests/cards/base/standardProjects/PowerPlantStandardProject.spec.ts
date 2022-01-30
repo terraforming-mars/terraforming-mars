@@ -5,7 +5,7 @@ import {TestingUtils} from '../../../TestingUtils';
 import {TestPlayers} from '../../../TestPlayers';
 import {Game} from '../../../../src/Game';
 import {StandardTechnology} from '../../../../src/cards/base/StandardTechnology';
-import {Resources} from '../../../../src/Resources';
+import {Resources} from '../../../../src/common/Resources';
 
 describe('PowerPlantStandardProjects', function() {
   let card: PowerPlantStandardProject; let player: Player;

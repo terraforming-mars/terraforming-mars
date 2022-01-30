@@ -11,7 +11,7 @@ import {Phase} from '../src/Phase';
 import {TestingUtils} from './TestingUtils';
 import {TestPlayers} from './TestPlayers';
 import {SaturnSystems} from '../src/cards/corporation/SaturnSystems';
-import {Resources} from '../src/Resources';
+import {Resources} from '../src/common/Resources';
 import {ISpace, SpaceId} from '../src/boards/ISpace';
 import {ResearchNetwork} from '../src/cards/prelude/ResearchNetwork';
 import {ArcticAlgae} from '../src/cards/base/ArcticAlgae';
@@ -24,9 +24,10 @@ import {CardName} from '../src/CardName';
 import {Player} from '../src/Player';
 import {Color} from '../src/Color';
 import {RandomMAOptionType} from '../src/RandomMAOptionType';
-import {SpaceBonus} from '../src/SpaceBonus';
-import {TileType} from '../src/TileType';
+import {SpaceBonus} from '../src/common/boards/SpaceBonus';
+import {TileType} from '../src/common/TileType';
 import {ALL_AWARDS} from '../src/awards/Awards';
+import {ALL_MILESTONES} from '../src/milestones/Milestones';
 
 describe('Game', () => {
   it('should initialize with right defaults', () => {
@@ -307,13 +308,13 @@ describe('Game', () => {
     player.takeActionForFinalGreenery();
 
     // Place first greenery to get 2 plants
-    const placeFirstGreenery = player.getWaitingFor() as OrOptions;
+    const placeFirstGreenery = TestingUtils.cast(player.getWaitingFor(), OrOptions);
     const arsiaMons = game.board.getSpace(SpaceName.ARSIA_MONS);
     placeFirstGreenery.options[0].cb(arsiaMons);
     expect(player.plants).to.eq(8);
 
     // Place second greenery
-    const placeSecondGreenery = player.getWaitingFor() as OrOptions;
+    const placeSecondGreenery = TestingUtils.cast(player.getWaitingFor(), OrOptions);
     const otherSpace = game.board.getSpace('30');
     placeSecondGreenery.options[0].cb(otherSpace); ;
 
@@ -648,15 +649,6 @@ describe('Game', () => {
     expect(deserialized.moonData).is.undefined;
   });
 
-  it('deserializing a game without altVenusBoard has a default value', () => {
-    const player = TestPlayers.BLUE.newPlayer();
-    const game = Game.newInstance('foobar', [player], player, TestingUtils.setCustomGameOptions({altVenusBoard: true}));
-    const serialized = game.serialize();
-    (serialized.gameOptions as any).altVenusBoard = undefined;
-    const deserialized = Game.deserialize(serialized);
-    expect(deserialized.gameOptions.altVenusBoard).is.false;
-  });
-
   it('deserializing a game without pathfinders still loads', () => {
     const player = TestPlayers.BLUE.newPlayer();
     const game = Game.newInstance('foobar', [player], player, TestingUtils.setCustomGameOptions({pathfindersExpansion: false}));
@@ -673,5 +665,14 @@ describe('Game', () => {
     serialized.awards = serialized.awards.map((a) => ALL_AWARDS.find((b) => b.name === a)!);
     const deserialized = Game.deserialize(serialized);
     expect(deserialized.awards).deep.eq(game.awards);
+  });
+
+  it('deserializing a game with milestone as an object', () => {
+    const player = TestPlayers.BLUE.newPlayer();
+    const game = Game.newInstance('foobar', [player], player, TestingUtils.setCustomGameOptions({pathfindersExpansion: false}));
+    const serialized = game.serialize();
+    serialized.milestones = serialized.milestones.map((a) => ALL_MILESTONES.find((b) => b.name === a)!);
+    const deserialized = Game.deserialize(serialized);
+    expect(deserialized.milestones).deep.eq(game.milestones);
   });
 });

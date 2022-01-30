@@ -2,10 +2,10 @@ import {CardName} from '../../CardName';
 import {Player} from '../../Player';
 import {CardType} from '../CardType';
 import {IProjectCard} from '../IProjectCard';
-import {Tags} from '../Tags';
+import {Tags} from '../../common/cards/Tags';
 import {MoonExpansion} from '../../moon/MoonExpansion';
 import {CardRenderer} from '../render/CardRenderer';
-import {TileType} from '../../TileType';
+import {TileType} from '../../common/TileType';
 import {Units} from '../../Units';
 import {MoonCard} from './MoonCard';
 
@@ -32,8 +32,7 @@ export class LunarDustProcessingPlant extends MoonCard implements IProjectCard {
     });
   };
 
-
-  public play(player: Player) {
+  public override play(player: Player) {
     super.play(player);
     MoonExpansion.raiseLogisticRate(player);
     return undefined;

@@ -47,15 +47,6 @@
             justify-content: center;
             flex-flow: row;
             align-items: center;
-            .party {
-                background: #ddd;
-                padding: 0px 10px 0px 10px;
-                border: 1px solid #666;
-                border-radius: 20px;
-                text-transform: uppercase;
-                height: 18px;
-                line-height: 18px;
-            }
         }
         .card-requirements-max {
             background-image: url(./assets/requisites/max_big.png);
@@ -763,6 +754,85 @@
                 background-size: 180px 50px;
                 margin-top: 10px;
             }
+            .card-polaris-logo {
+                background-image: url(./assets/pathfinders/corp-logo-polaris.png);
+                height: 54px;
+                width: 180px;
+                background-size: 180px 54px;
+                margin-top: 10px;
+            }
+            .card-ringcom-logo {
+                background-image: url(./assets/pathfinders/corp-logo-ringcom.png);
+                height: 35px;
+                width: 180px;
+                background-size: 180px 35px;
+                margin-top: 10px;
+            }
+            .card-chimera-logo {
+                background-image: url(./assets/pathfinders/corp-logo-chimera.png);
+                height: 39px;
+                width: 66px;
+                background-size: 66px 39px;
+                margin-top: 10px;
+                margin-left: 79px;
+            }
+            .card-steelaris-logo {
+                background-image: url(./assets/pathfinders/corp-logo-steelaris.png);
+                height: 35px;
+                width: 180px;
+                background-size: 180px 35px;
+                margin-top: 10px;
+            }
+            .card-martian-insurance-group-logo {
+                background-image: url(./assets/pathfinders/corp-logo-martian-insurance-group.png);
+                height: 45px;
+                width: 170px;
+                background-size: 170px 45px;
+                margin-top: 10px;
+            }
+            .card-robin-haulings-logo {
+                background-image: url(./assets/pathfinders/corp-logo-robin-haulings.png);
+                height: 41px;
+                width: 140px;
+                background-size: 140px 41px;
+                margin-top: 10px;
+            }
+            .card-mars-direct-logo {
+                background-image: url(./assets/pathfinders/corp-logo-mars-direct.png);
+                height: 45px;
+                width: 144px;
+                background-size: 144px 45px;
+                margin-top: 10px;
+            }
+            .card-ambient-logo {
+                background-image: url(./assets/pathfinders/corp-logo-ambient.png);
+                height: 45px;
+                width: 173px;
+                background-size: 173px 45px;
+                margin-top: 10px;
+                margin-left: 16px;
+            }
+            .card-collegium-copernicus-logo {
+                background-image: url(./assets/pathfinders/corp-logo-colleguim-copernicus.png);
+                height: 45px;
+                width: 144px;
+                background-size: 144px 45px;
+                margin-top: 10px;
+            }
+            .card-soylent-logo {
+                background-image: url(./assets/pathfinders/corp-logo-soylent.png);
+                height: 45px;
+                width: 144px;
+                background-size: 144px 45px;
+                margin-top: 10px;
+            }
+            .card-bio-sol-logo {
+                background-image: url(./assets/pathfinders/corp-logo-bio-sol.png);
+                height: 45px;
+                width: 184px;
+                background-size: 184px 45px;
+                margin-top: 10px;
+            }
         }
         .card-content-corporation {
             top: -30px;
@@ -867,19 +937,44 @@
                 width: 14px;
                 background-size: 14px 46px;
             }
+            .card-temperature--req {
+                background-image: url(./assets/global-parameters/temperature.png);
+                width: 7px;
+                height: 23px;
+                background-size: 7px 23px;
+            }
             .card-ocean-global-requirement {
                 background-image: url(./assets/tiles/ocean.png);
+            }
+            .card-ocean--req {
+                background-image: url(./assets/tiles/ocean.png);
+                width: 21px;
+                height: 23px;
+                background-size: 21px 23px;
             }
             .card-oxygen-global-requirement {
                 background-image: url(./assets/global-parameters/oxygen.png);
                 width: 46px;
                 background-size: 46px;
             }
+            .card-oxygen--req {
+                background-image: url(./assets/global-parameters/oxygen.png);
+                width: 23px;
+                background-size: 23px 23px;
+                height: 23px;
+            }
             .card-venus-global-requirement {
                 background-image: url(./assets/global-parameters/venus.png);
                 width: 60px;
                 height: 40px;
                 background-size: 60px 40px;
+                color: #0000;
+            }
+            .card-venus--req {
+                background-image: url(./assets/global-parameters/venus.png);
+                width: 34px;
+                height: 23px;
+                background-size: 34px 23px;
                 color: #0000;
             }
             /*resources*/
@@ -972,6 +1067,18 @@
             .card-resource-syndicate-fleet {
                 color: #0000 !important;
                 background-image: url(./assets/resources/syndicate-fleet.png);
+            }
+            .card-resource-venusian-habitat {
+                color: #0000 !important;
+                background-image: url(./assets/resources/venusian-habitat.png);
+            }
+            .card-resource-specialized-robot {
+                color: #0000 !important;
+                background-image: url(./assets/resources/specialized-robot.png);
+            }
+            .card-resource-seed {
+                color: #0000 !important;
+                background-image: url(./assets/resources/seed.png);
             }
             .card-resource-cube {
                 color: #0000 !important;
@@ -1128,10 +1235,17 @@
                 width: 46px;
                 background-size: 46px;
             }
-            .card-resource-colony-S {
+            .card-resource-colony--S {
                 height: 30px !important;
                 width: 36px !important;
                 background-size: 36px !important;
+            }
+            .card-resource-colony--req {
+                height: 23px;
+                width: 26px;
+                background-size: 26px 23px;
+                margin-left: 3px;
+                margin-right: 3px;
             }
             /*turmoil special*/
             .card-influence {
@@ -1150,6 +1264,15 @@
                 top: -10px;
                 left: -7px;
             }
+            .turmoil-global-event {
+                display: inline-block;
+                background-image: url(./assets/parties/globalEvent.png);
+                width: 40px;
+                height: 56px;
+                background-size: 40px 56px;
+                background-repeat: no-repeat;
+                margin-right: 10px;
+            }
             /*tags*/
             .card-resource-tag {
                 position: relative;
@@ -1166,7 +1289,14 @@
                 box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.6), 0 0 0 2px rgba(0, 0, 0, 0.3);
                 vertical-align: middle;
                 filter: brightness(0.9);
+                &--S:extend(.card-container .card-content-wrapper .card-content .card-resource-tag) {
+                    width: 21px;
+                    height: 21px;
+                    line-height: 21px;
+                    background-size: 25px 25px;
+                }
             }
+            // TODO(kberg) This set of tags looks like a duplicate of cards.less.
             .card-tag-wild {
                 background-image: url("../assets/tags/wild.png");
             }
@@ -1214,6 +1344,9 @@
             }
             .card-tag-moon {
                 background-image: url("./assets/tags/moon.png")
+            }
+            .card-tag-mars {
+                background-image: url("./assets/tags/mars.png");
             }
             .card-community-services {
                 font-size: 42px;
@@ -1350,6 +1483,10 @@
                         }
                     }
                 }
+            }
+            .card-production-box--req {
+                transform: scale(0.8);
+                padding: 0px;
             }
             .card-rows {
                 display: flex;
@@ -1582,9 +1719,9 @@
             .city-tile--S {
                 background-image: url(./assets/tiles/city.png);
                 filter: brightness(0.8) drop-shadow(0px 1px 1px rgba(0, 0, 0, 0.5));
-                width: 30px;
-                height: 32px;
-                background-size: 30px 32px;
+                width: 21px;
+                height: 23px;
+                background-size: 21px 23px;
             }
             .greenery-tile--M {
                 background-image: url(./assets/tiles/greenery_no_O2.png);
@@ -1592,16 +1729,37 @@
                 width: 40px;
                 height: 47px;
             }
+            .greenery-tile--S {
+                background-image: url(./assets/tiles/greenery_no_O2.png);
+                background-size: 30px 32px;
+                width: 30px;
+                height: 32px;
+            }
             .greenery-tile-oxygen--M {
                 background-image: url(./assets/tiles/greenery.png);
                 background-size: 47px;
                 width: 47px;
                 height: 46px;
             }
+            .tile--req {
+                width: 21px;
+                height: 23px;
+                background-size: 21px 23px;
+                margin-left: 4px;
+                margin-right: 4px;
+            }
             .card-ocean--S {
                 width: 30px !important;
                 height: 32px !important;
                 background-size: 30px 32px !important;
+                vertical-align: middle !important;
+                box-shadow: none !important;
+                background-repeat: no-repeat;
+            }
+            .card-venus--S {
+                width: 48px !important;
+                height: 32px !important;
+                background-size: 48px 32px !important;
                 vertical-align: middle !important;
                 box-shadow: none !important;
                 background-repeat: no-repeat;
@@ -1627,6 +1785,14 @@
                     left: 5px;
                     top: 2px;
                 }
+            }
+            .card-tr--req {
+                width: 30px !important;
+                height: 23px !important;
+                background-size: 30px 23px !important;
+                vertical-align: middle !important;
+                box-shadow: none !important;
+                background-repeat: no-repeat;
             }
             .card-delegate {
                 display: inline-block;
@@ -1656,6 +1822,22 @@
                 background-position: 3px;
                 border-radius: 15px 15px 2px 2px;
             }
+            .card-party-leader--req {
+                display: inline-block;
+                background-image: url(./assets/misc/delegate.png);
+                width: 18px;
+                height: 22px;
+                background-size: 18px 22px;
+                vertical-align: middle;
+                filter: drop-shadow(0px 0px 1px black);
+                background-color: #222;
+                padding: 1px;
+                background-repeat: no-repeat;
+                background-position: 1px;
+                border-radius: 11px 11px 0px 0px;
+                margin-left: 2px;
+                margin-right: 2px;
+            }
             .card-chairman {
                 display: inline-block;
                 background-image: url(./assets/misc/chairman.png);
@@ -1669,6 +1851,22 @@
                 background-repeat: no-repeat;
                 background-position: 3px;
                 border-radius: 15px 15px 2px 2px;
+            }
+            .card-chairman--req {
+                display: inline-block;
+                background-image: url(./assets/misc/chairman.png);
+                width: 18px;
+                height: 22px;
+                background-size: 18px 22px;
+                vertical-align: middle;
+                filter: drop-shadow(0px 0px 1px black);
+                background-color: #222;
+                padding: 1px;
+                background-repeat: no-repeat;
+                background-position: 1px;
+                border-radius: 11px 11px 0px 0px;
+                margin-left: 2px;
+                margin-right: 2px;
             }
             .card-chairman-red {
                 filter: drop-shadow(1px 0px 1px #c33) drop-shadow(-1px 0px 1px #c33) drop-shadow(0px 1px 1px #c33) drop-shadow(0px -1px 1px #c33) !important;
@@ -1837,12 +2035,14 @@
   display: inherit;
   position: absolute;
   margin: -7px 0 0 -285px;
+  transform: scale(1.4);
 }
 
 .card-party--current {
   display: inherit;
   position: absolute;
   margin: 129px 0 0 280px;
+  transform: scale(1.4);
 }
 
 @parties: greens, kelvinists, mars-first, reds, scientists, unity;
@@ -1852,6 +2052,16 @@ each(@parties, {
     background-size: 41px 30px;
     width: 41px;
     height: 30px;
+  }
+})
+
+@parties: greens, kelvinists, mars-first, reds, scientists, unity;
+each(@parties, {
+  .card-party--@{value}-req {
+    background-image: url("./assets/parties/@{value}.png");
+    background-size: 31px 23px;
+    width: 31px;
+    height: 23px;
   }
 })
 
@@ -1870,10 +2080,15 @@ each(@parties, {
         vertical-align: middle;
     }
 
-    @resource_types: microbe, animal, science, floater, fighter, camp, asteroid, disease, preservation, data, syndicate-fleet, cube;
+    // This copies stuff above, but scoped inside card-resources-counter. It shouldn't be necessary if
+    // the stuff above wasn't contained inside card-content.
+    @resource_types: microbe, animal, science, floater, fighter, camp, asteroid, disease, preservation, data, syndicate-fleet, cube, venusian-habitat, specialized-robot, seed;
     each(@resource_types, {
       .card-resource-@{value} {
         background-image: url("./assets/resources/@{value}.png");
       }
     })
+    .card-resource-cube {
+      background-image: url("./assets/cube.png");
+    }
 }

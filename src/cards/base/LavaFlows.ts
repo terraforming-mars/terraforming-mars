@@ -3,7 +3,7 @@ import {Card} from '../Card';
 import {CardType} from '../CardType';
 import {SpaceType} from '../../SpaceType';
 import {Player} from '../../Player';
-import {TileType} from '../../TileType';
+import {TileType} from '../../common/TileType';
 import {ISpace} from '../../boards/ISpace';
 import {SelectSpace} from '../../inputs/SelectSpace';
 import {CardName} from '../../CardName';
@@ -36,13 +36,14 @@ export class LavaFlows extends Card implements IProjectCard {
     const board = player.game.board;
     const volcanicSpaceIds = board.getVolcanicSpaceIds();
 
-    const spaces: Array<ISpace> = (volcanicSpaceIds.length > 0) ?
-      volcanicSpaceIds.map((id) => board.getSpace(id)) :
-      board.getSpaces(SpaceType.LAND, player);
-    return spaces.filter((space) => space.tile === undefined && (space.player === undefined || space.player === player));
+    const spaces = board.getAvailableSpacesOnLand(player);
+    if (volcanicSpaceIds.length > 0) {
+      return spaces.filter((space) => volcanicSpaceIds.includes(space.id));
+    }
+    return spaces;
   }
 
-  public canPlay(player: Player): boolean {
+  public override canPlay(player: Player): boolean {
     return LavaFlows.getVolcanicSpaces(player).length > 0;
   }
   public play(player: Player) {

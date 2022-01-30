@@ -1,4 +1,5 @@
-import {Player, PlayerId} from '../Player';
+import {Player} from '../Player';
+import {PlayerId} from '../common/Types';
 import {SelectPartyToSendDelegate} from '../inputs/SelectPartyToSendDelegate';
 import {DeferredAction, Priority} from './DeferredAction';
 import {SelectHowToPayDeferred} from './SelectHowToPayDeferred';
@@ -43,7 +44,7 @@ export class SendDelegateToArea implements DeferredAction {
       return undefined;
     }
     // How many delegate to send
-    const numDelegateToSend = this.options.count || 1;
+    const numDelegateToSend = this.options.count ?? 1;
 
     const sendDelegate = new SelectPartyToSendDelegate(this.title, 'Send delegate', availableParties, (partyName: PartyName) => {
       if (this.options.cost) {

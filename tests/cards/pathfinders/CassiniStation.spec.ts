@@ -2,10 +2,9 @@ import {expect} from 'chai';
 import {CassiniStation} from '../../../src/cards/pathfinders/CassiniStation';
 import {Game} from '../../../src/Game';
 import {TestPlayer} from '../../TestPlayer';
-import {newTestGame} from '../../TestGame';
+import {getTestPlayer, newTestGame} from '../../TestGame';
 import {Leavitt} from '../../../src/cards/community/Leavitt';
 import {Mercury} from '../../../src/cards/community/Mercury';
-import {Callisto} from '../../../src/colonies/Callisto';
 import {Units} from '../../../src/Units';
 import {IProjectCard} from '../../../src/cards/IProjectCard';
 import {TitanShuttles} from '../../../src/cards/colonies/TitanShuttles';
@@ -27,8 +26,8 @@ describe('CassiniStation', function() {
 
   beforeEach(function() {
     card = new CassiniStation();
-    game = newTestGame(1);
-    player = game.getPlayers()[0] as TestPlayer;
+    game = newTestGame(2);
+    player = getTestPlayer(game, 0);
     floater1 = new TitanShuttles();
     floater2 = new FloatingHabs();
     data1 = new MartianCulture();
@@ -37,10 +36,26 @@ describe('CassiniStation', function() {
   });
 
   it('play', function() {
-    game.colonies = [new Leavitt(), new Mercury(), new Callisto()];
+    const colonyTile1 = new Leavitt();
+    const colonyTile2 = new Mercury();
+    game.colonies = [colonyTile1, colonyTile2];
     const options = card.play(player);
-    expect(player.getProductionForTest()).deep.eq(Units.of({energy: 3}));
+    expect(player.getProductionForTest()).deep.eq(Units.of({energy: 0}));
     expect(options).is.undefined;
+
+    colonyTile1.colonies.push(player.id);
+
+    card.play(player);
+
+    expect(player.getProductionForTest()).deep.eq(Units.of({energy: 1}));
+
+    player.setProductionForTest(Units.EMPTY);
+    colonyTile2.colonies.push(player.id);
+    colonyTile2.colonies.push(getTestPlayer(game, 1).id);
+
+    card.play(player);
+
+    expect(player.getProductionForTest()).deep.eq(Units.of({energy: 3}));
   });
 
   it('play - one floater card', function() {

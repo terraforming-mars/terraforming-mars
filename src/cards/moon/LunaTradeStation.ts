@@ -1,16 +1,16 @@
 import {CardName} from '../../CardName';
 import {Player} from '../../Player';
 import {CardType} from '../CardType';
-import {Tags} from '../Tags';
+import {Tags} from '../../common/cards/Tags';
 import {MoonExpansion} from '../../moon/MoonExpansion';
 import {MoonSpaces} from '../../moon/MoonSpaces';
-import {TileType} from '../../TileType';
+import {TileType} from '../../common/TileType';
 import {CardRenderer} from '../render/CardRenderer';
 import {IActionCard} from '../ICard';
 import {Units} from '../../Units';
 import {MoonCard} from './MoonCard';
 import {Game} from '../../Game';
-import {Resources} from '../../Resources';
+import {Resources} from '../../common/Resources';
 import {all} from '../Options';
 
 export class LunaTradeStation extends MoonCard implements IActionCard {
@@ -34,7 +34,7 @@ export class LunaTradeStation extends MoonCard implements IActionCard {
     });
   };
 
-  public play(player: Player) {
+  public override play(player: Player) {
     super.play(player);
     MoonExpansion.addTile(
       player,
@@ -47,7 +47,7 @@ export class LunaTradeStation extends MoonCard implements IActionCard {
   }
 
   private surfaceColonyCount(game: Game): number {
-    return MoonExpansion.tiles(game, TileType.MOON_COLONY, {surfaceOnly: true}).length;
+    return MoonExpansion.spaces(game, TileType.MOON_COLONY, {surfaceOnly: true}).length;
   }
 
   public canAct(player: Player): boolean {

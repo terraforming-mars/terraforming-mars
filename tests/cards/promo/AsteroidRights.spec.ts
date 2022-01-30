@@ -7,7 +7,7 @@ import {OrOptions} from '../../../src/inputs/OrOptions';
 import {SelectCard} from '../../../src/inputs/SelectCard';
 import {SelectOption} from '../../../src/inputs/SelectOption';
 import {Player} from '../../../src/Player';
-import {Resources} from '../../../src/Resources';
+import {Resources} from '../../../src/common/Resources';
 import {TestPlayers} from '../../TestPlayers';
 
 describe('AsteroidRights', function() {
@@ -73,7 +73,7 @@ describe('AsteroidRights', function() {
     player.playedCards.push(cometAiming);
 
     const action = card.action(player) as OrOptions;
-    expect(action instanceof OrOptions).is.true;
+    expect(action).instanceOf(OrOptions);
     expect(action.options[0] instanceof SelectOption).is.true;
     expect(action.options[1] instanceof SelectOption).is.true;
     expect(action.options[2] instanceof SelectCard).is.true;

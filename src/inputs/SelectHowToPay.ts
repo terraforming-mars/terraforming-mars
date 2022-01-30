@@ -1,5 +1,5 @@
 
-import {Message} from '../Message';
+import {Message} from '../common/logs/Message';
 import {PlayerInput} from '../PlayerInput';
 import {PlayerInputTypes} from '../PlayerInputTypes';
 import {HowToPay} from './HowToPay';
@@ -15,10 +15,9 @@ export class SelectHowToPay implements PlayerInput {
         public canUseSteel: boolean,
         public canUseTitanium: boolean,
         public canUseHeat: boolean,
+        public canUseSeeds: boolean,
         public amount: number,
         public cb: (howToPay: HowToPay) => SelectSpace | SelectOption| OrOptions | undefined,
     ) {
-
     }
 }
-

@@ -6,7 +6,7 @@ import {MarsFirst} from '../../src/turmoil/parties/MarsFirst';
 import {Phase} from '../../src/Phase';
 import {OrOptions} from '../../src/inputs/OrOptions';
 import {SelectSpace} from '../../src/inputs/SelectSpace';
-import {SpaceBonus} from '../../src/SpaceBonus';
+import {SpaceBonus} from '../../src/common/boards/SpaceBonus';
 import {Turmoil} from '../../src/turmoil/Turmoil';
 import {TestingUtils} from '../TestingUtils';
 import {TestPlayers} from '../TestPlayers';
@@ -18,7 +18,7 @@ import {JovianEmbassy} from '../../src/cards/promo/JovianEmbassy';
 import {IceAsteroid} from '../../src/cards/base/IceAsteroid';
 import {ProtectedValley} from '../../src/cards/base/ProtectedValley';
 import {MagneticFieldGeneratorsPromo} from '../../src/cards/promo/MagneticFieldGeneratorsPromo';
-import {Resources} from '../../src/Resources';
+import {Resources} from '../../src/common/Resources';
 import {NitrogenFromTitan} from '../../src/cards/colonies/NitrogenFromTitan';
 import {SpaceStation} from '../../src/cards/base/SpaceStation';
 import {EarthCatapult} from '../../src/cards/base/EarthCatapult';
@@ -36,7 +36,7 @@ import {WaterTreatmentComplex} from '../../src/cards/moon/WaterTreatmentComplex'
 import {DarksideMeteorBombardment} from '../../src/cards/moon/DarksideMeteorBombardment';
 import {LunaStagingStation} from '../../src/cards/moon/LunaStagingStation';
 import {MoonExpansion} from '../../src/moon/MoonExpansion';
-import {TileType} from '../../src/TileType';
+import {TileType} from '../../src/common/TileType';
 
 describe('Turmoil', function() {
   let player : TestPlayer; let player2 : Player; let game : Game; let turmoil: Turmoil;

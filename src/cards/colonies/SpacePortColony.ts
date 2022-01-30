@@ -1,5 +1,5 @@
 import {IProjectCard} from '../IProjectCard';
-import {Tags} from '../Tags';
+import {Tags} from '../../common/cards/Tags';
 import {CardType} from '../CardType';
 import {Player} from '../../Player';
 import {CardName} from '../../CardName';
@@ -38,7 +38,7 @@ export class SpacePortColony extends Card implements IProjectCard {
     return undefined;
   }
 
-  public getVictoryPoints(player: Player) {
+  public override getVictoryPoints(player: Player) {
     let coloniesCount: number = 0;
     player.game.colonies.forEach((colony) => {
       coloniesCount += colony.colonies.length;

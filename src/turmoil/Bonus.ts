@@ -1,7 +1,9 @@
 import {Game} from '../Game';
 import {Player} from '../Player';
 
-export type BonusId = string;
+export type Party = 'm' | 's' | 'u' | 'k' | 'r' | 'g';
+export type Suffix = 'b01' | 'b02';
+export type BonusId = `${Party}${Suffix}` | 'hello';
 
 export interface Bonus {
   id: BonusId;

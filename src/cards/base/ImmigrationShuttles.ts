@@ -1,9 +1,9 @@
 import {IProjectCard} from '../IProjectCard';
-import {Tags} from '../Tags';
+import {Tags} from '../../common/cards/Tags';
 import {Card} from '../Card';
 import {CardType} from '../CardType';
 import {Player} from '../../Player';
-import {Resources} from '../../Resources';
+import {Resources} from '../../common/Resources';
 import {CardName} from '../../CardName';
 import {CardRenderer} from '../render/CardRenderer';
 import {CardRenderDynamicVictoryPoints} from '../render/CardRenderDynamicVictoryPoints';
@@ -28,8 +28,8 @@ export class ImmigrationShuttles extends Card implements IProjectCard {
       },
     });
   }
-  public getVictoryPoints(player: Player) {
-    return Math.floor(player.game.getCitiesInPlay() / 3);
+  public override getVictoryPoints(player: Player) {
+    return Math.floor(player.game.getCitiesCount() / 3);
   }
   public play(player: Player) {
     player.addProduction(Resources.MEGACREDITS, 5);

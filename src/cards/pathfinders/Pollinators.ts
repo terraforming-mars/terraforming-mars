@@ -5,10 +5,10 @@ import {Card} from '../Card';
 import {CardType} from '../CardType';
 import {CardName} from '../../CardName';
 import {CardRenderer} from '../render/CardRenderer';
-import {ResourceType} from '../../ResourceType';
-import {Tags} from '../Tags';
+import {ResourceType} from '../../common/ResourceType';
+import {Tags} from '../../common/cards/Tags';
 import {CardRequirements} from '../CardRequirements';
-import {Resources} from '../../Resources';
+import {Resources} from '../../common/Resources';
 
 export class Pollinators extends Card implements IProjectCard, IResourceCard, IActionCard {
   constructor() {
@@ -28,12 +28,12 @@ export class Pollinators extends Card implements IProjectCard, IResourceCard, IA
           b.production((pb) => pb.plants(1).megacredits(2));
           b.vpText('1 VP per animal on this card.');
         }),
-        description: 'Requires 3 plant tags. Raise your plant production 1 step and your MC production 2 steps.',
+        description: 'Requires 3 plant tags. Raise your plant production 1 step and your M€ production 2 steps.',
       },
     });
   }
 
-  public resourceCount = 0;
+  public override resourceCount = 0;
 
   public canAct() {
     return true;

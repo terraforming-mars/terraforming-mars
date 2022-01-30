@@ -1,7 +1,6 @@
 import {IGameLoader} from '../../src/database/IGameLoader';
-import {Game, GameId, SpectatorId} from '../../src/Game';
-import {PlayerId} from '../../src/Player';
-
+import {Game} from '../../src/Game';
+import {PlayerId, GameId, SpectatorId} from '../../src/common/Types';
 
 export class FakeGameLoader implements IGameLoader {
   private games: Map<string, Game> = new Map();

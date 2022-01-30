@@ -4,7 +4,7 @@ import {Card} from '../Card';
 import {CardType} from '../CardType';
 import {CardName} from '../../CardName';
 import {CardRenderer} from '../render/CardRenderer';
-import {Tags} from '../Tags';
+import {Tags} from '../../common/cards/Tags';
 import {DeclareCloneTag} from '../../pathfinders/DeclareCloneTag';
 import {ICloneTagCard} from './ICloneTagCard';
 import {PathfindersExpansion} from '../../pathfinders/PathfindersExpansion';
@@ -19,7 +19,7 @@ export class Kickstarter extends Card implements IProjectCard, ICloneTagCard {
       metadata: {
         cardNumber: 'PfTBD',
         renderData: CardRenderer.builder((b) => {
-          b.text('NO ICONOGRAPHY YET');
+          b.planetaryTrack().text('3');
         }),
         description: 'Choose a planetary track and raise it 3 steps. This card counts as a card with a tag of the chosen planet.',
       },
@@ -28,7 +28,7 @@ export class Kickstarter extends Card implements IProjectCard, ICloneTagCard {
 
   public cloneTag: Tags = Tags.CLONE;
 
-  public get tags(): Array<Tags> {
+  public override get tags(): Array<Tags> {
     return [this.cloneTag];
   }
 
@@ -38,8 +38,8 @@ export class Kickstarter extends Card implements IProjectCard, ICloneTagCard {
       new DeclareCloneTag(
         player,
         this,
-        'Select a planetary track to advance 3 steps (and to clone this tag.)',
-        (tag) => PathfindersExpansion.raiseTrack(tag, player, 3),
+        // +2 instead of +3 because onCardPlayed covers applying one of the 3.
+        (tag) => PathfindersExpansion.raiseTrack(tag, player, 2),
       ));
     return undefined;
   }

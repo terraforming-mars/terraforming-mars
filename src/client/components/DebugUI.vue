@@ -6,10 +6,6 @@
             </div>
             <div class="form-group">
               <input class="form-input form-input-line" placeholder="filter" v-model="filterText">
-              <input type="checkbox" name="filterDescription" id="filterDescription-checkbox" v-model="filterDescription">
-              <label for="filterDescription-checkbox">
-                  <span v-i18n>Filter description</span>
-              </label>
               <input type="checkbox" name="sortById" id="sortById-checkbox" v-model="sortById">
               <label for="sortById-checkbox">
                   <span v-i18n>Sort by ID (work in progress)</span>
@@ -138,42 +134,16 @@
 
 import Vue from 'vue';
 import Card from '@/client/components/card/Card.vue';
-import {
-  ALL_CARD_MANIFESTS,
-  ALL_CORPORATION_CARD_NAMES,
-  ALL_PRELUDE_CARD_NAMES,
-  ALL_PROJECT_CARD_NAMES,
-  ALL_STANDARD_PROJECT_CARD_NAMES,
-} from '@/cards/AllCards';
 import {GameModule} from '@/GameModule';
-import {ICard} from '@/cards/ICard';
 import {CardType} from '@/cards/CardType';
-import {ICardRenderDescription, isIDescription} from '@/cards/render/ICardRenderDescription';
 import {CardName} from '@/CardName';
-import {ICardFactory} from '@/cards/ICardFactory';
 import {PreferencesManager} from '@/client/utils/PreferencesManager';
 import {GlobalEventName} from '@/turmoil/globalEvents/GlobalEventName';
 import {GlobalEventModel} from '@/models/TurmoilModel';
 import {PartyName} from '@/turmoil/parties/PartyName';
 import {ALL_EVENTS, getGlobalEventByName} from '@/turmoil/globalEvents/GlobalEventDealer';
 import GlobalEvent from '@/client/components/GlobalEvent.vue';
-
-const cards: Map<CardName, {card: ICard, module: GameModule, cardNumber: string}> = new Map();
-
-ALL_CARD_MANIFESTS.forEach((manifest) => {
-  const module = manifest.module;
-  [
-    manifest.projectCards,
-    manifest.corporationCards,
-    manifest.preludeCards,
-    manifest.standardProjects].forEach((deck) => {
-    deck.factories.forEach((cf: ICardFactory<ICard>) => {
-      const card: ICard = new cf.Factory();
-      const cardNumber = card.metadata.cardNumber;
-      cards.set(card.name, {card, module, cardNumber});
-    });
-  });
-});
+import {byType, getCard, getCards, toName} from '../cards/ClientCardManifest';
 
 const MODULE_BASE = 'b';
 const MODULE_CORP = 'c';
@@ -190,7 +160,6 @@ const ALL_MODULES = `${MODULE_BASE}${MODULE_CORP}${MODULE_PRELUDE}${MODULE_VENUS
 
 export interface DebugUIModel {
   filterText: string,
-  filterDescription: boolean,
   sortById: boolean,
   base: boolean,
   corporateEra: boolean,
@@ -215,7 +184,6 @@ export default Vue.extend({
   data() {
     return {
       filterText: '',
-      filterDescription: false,
       sortById: false,
       base: true,
       corporateEra: true,
@@ -351,25 +319,32 @@ export default Vue.extend({
       const copy = [...names];
       if (this.$data.sortById) {
         return copy.sort((a: CardName, b: CardName) => {
-          const an = cards.get(a)?.cardNumber || '';
-          const bn = cards.get(b)?.cardNumber || '';
+          const an = getCard(a)?.card.metadata.cardNumber || '';
+          const bn = getCard(b)?.card.metadata.cardNumber || '';
           return an.localeCompare(bn);
         });
       } else {
-        return copy.sort();
+        return copy.sort((a, b) => a.localeCompare(b));
       }
     },
     getAllStandardProjectCards() {
-      return this.sort(ALL_STANDARD_PROJECT_CARD_NAMES);
+      const names = getCards(byType(CardType.STANDARD_PROJECT)).map(toName);
+      return this.sort(names);
     },
     getAllProjectCards() {
-      return this.sort(ALL_PROJECT_CARD_NAMES);
+      const names: Array<CardName> = [];
+      names.push(...getCards(byType(CardType.AUTOMATED)).map(toName));
+      names.push(...getCards(byType(CardType.ACTIVE)).map(toName));
+      names.push(...getCards(byType(CardType.EVENT)).map(toName));
+      return this.sort(names);
     },
     getAllCorporationCards() {
-      return this.sort(ALL_CORPORATION_CARD_NAMES);
+      const names = getCards(byType(CardType.CORPORATION)).map(toName);
+      return this.sort(names);
     },
     getAllPreludeCards() {
-      return this.sort(ALL_PRELUDE_CARD_NAMES);
+      const names = getCards(byType(CardType.PRELUDE)).map(toName);
+      return this.sort(names);
     },
     getAllGlobalEvents() {
       return ALL_EVENTS.keys();
@@ -393,7 +368,7 @@ export default Vue.extend({
       };
     },
     filtered(cardName: CardName): boolean {
-      const card = cards.get(cardName);
+      const card = getCard(cardName);
       if (card === undefined) {
         return false;
       }
@@ -401,18 +376,7 @@ export default Vue.extend({
       const filterText = this.$data.filterText.toUpperCase();
       if (this.$data.filterText.length > 0) {
         if (cardName.toUpperCase().includes(filterText) === false) {
-          if (this.$data.filterDescription) {
-            let desc: string | ICardRenderDescription | undefined = card.card.metadata?.description;
-            if (isIDescription(desc)) {
-              desc = desc.text;
-            }
-            // TODO(kberg): optimize by having all the descriptions in upper case.
-            if (desc === undefined || desc.toUpperCase().includes(filterText) === false) {
-              return false;
-            }
-          } else {
-            return false;
-          }
+          return false;
         }
       }
 

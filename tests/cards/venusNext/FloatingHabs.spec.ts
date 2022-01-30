@@ -43,7 +43,7 @@ describe('FloatingHabs', function() {
     player.playedCards.push(card, new Dirigibles());
     player.megaCredits = 10;
     const action = card.action(player);
-    expect(action instanceof SelectCard).is.true;
+    expect(action).instanceOf(SelectCard);
 
     (action as SelectCard<ICard>).cb([card]);
     game.deferredActions.runNext();

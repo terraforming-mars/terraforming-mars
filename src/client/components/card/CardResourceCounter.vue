@@ -8,7 +8,7 @@
 <script lang="ts">
 
 import Vue from 'vue';
-import {ResourceType} from '@/ResourceType';
+import {ResourceType} from '@/common/ResourceType';
 export default Vue.extend({
   name: 'CardResourceCounter',
   props: {
@@ -43,11 +43,17 @@ export default Vue.extend({
       case ResourceType.DISEASE:
         return 'card-resource-disease';
       case ResourceType.RESOURCE_CUBE:
-        return 'card-resource-resource-cube';
+        return 'card-resource-cube';
       case ResourceType.DATA:
         return 'card-resource-data';
       case ResourceType.SYNDICATE_FLEET:
         return 'card-resource-syndicate-fleet';
+      case ResourceType.VENUSIAN_HABITAT:
+        return 'card-resource-venusian-habitat';
+      case ResourceType.SPECIALIZED_ROBOT:
+        return 'card-resource-specialized-robot';
+      case ResourceType.SEED:
+        return 'card-resource-seed';
       default:
         return '';
       }

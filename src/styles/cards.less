@@ -407,6 +407,24 @@ input[type="radio"]:checked + .filterDiv::after {
   content: "M";
 }
 
+
+.pathfinders-icon:after {
+    position: absolute;
+    color:#DDD;
+    border: 1px solid #222;
+    background: #b84;
+    font-family: Prototype;
+    font-weight: bold;
+    font-size: 14px;
+    line-height: 17px;
+    width: 16px;
+    height:16px;
+    text-align: center;
+    border-radius: 50%;
+    box-shadow: 0 0 0 1px rgba(0,0,0,0.4);
+    content: "🪐";
+}
+
 .button-icon:after {
     margin-top: -9px;
     margin-left: -9px;
@@ -580,6 +598,9 @@ input[type="radio"]:checked + .filterDiv::after {
 }
 .tag-moon {
     background-image: url("./assets/tags/moon.png")
+}
+.tag-mars {
+    background-image: url("./assets/tags/mars.png");
 }
 .tag-clone {
     background-image: url("./assets/tags/clone.png");
@@ -871,10 +892,16 @@ input[type="radio"]:checked + .filterDiv::after {
 
 .special-tile {
     background-image: url(./assets/tiles/special.png);
-    color: rgb(73, 54, 40);
-    font-size: 30px;
-    font-weight: bold;
-    line-height: 44px;
+    width: 47px;
+    height: 51px;
+    background-size: 47px 51px;
+}
+
+.special-tile--S {
+    background-image: url(./assets/tiles/special.png);
+    width: 30px;
+    height: 32px;
+    background-size: 30px 32px;
 }
 
 .oxygen-tile {
@@ -2579,6 +2606,10 @@ input[type="radio"]:checked + .filterDiv::after {
     background-image: url(./assets/expansion_icons/expansion_icon_community.png);
 }
 
+.expansion-icon-escape-velocity {
+    background-image: url(./assets/expansion_icons/expansion_icon_escapeVelocity.png);
+}
+
 .expansion-icon-ares {
     background-image: url(./assets/expansion_icons/expansion_icon_ares.png);
 }
@@ -2588,6 +2619,10 @@ input[type="radio"]:checked + .filterDiv::after {
 }
 .expansion-icon-themoon {
     background-image: url(./assets/expansion_icons/expansion_icon_themoon.png);
+}
+
+.expansion-icon-pathfinders {
+    background-image: url(./assets/expansion_icons/expansion_icon_pathfinders.png);
 }
 
 /* refactored */

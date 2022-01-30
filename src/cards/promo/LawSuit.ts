@@ -2,9 +2,9 @@ import {Player} from '../../Player';
 import {IProjectCard} from '../IProjectCard';
 import {Card} from '../Card';
 import {CardType} from '../CardType';
-import {Tags} from '../Tags';
+import {Tags} from '../../common/cards/Tags';
 import {SelectPlayer} from '../../inputs/SelectPlayer';
-import {Resources} from '../../Resources';
+import {Resources} from '../../common/Resources';
 import {CardName} from '../../CardName';
 import {CardRenderer} from '../render/CardRenderer';
 import {Size} from '../render/Size';
@@ -35,7 +35,7 @@ export class LawSuit extends Card implements IProjectCard {
     return player.game.getPlayersById(player.removingPlayers);
   }
 
-  public canPlay(player: Player) {
+  public override canPlay(player: Player) {
     return this.targets(player).length > 0;
   }
 
@@ -43,12 +43,12 @@ export class LawSuit extends Card implements IProjectCard {
     return new SelectPlayer(this.targets(player), 'Select player to sue (steal 3 M€ from)', 'Steal M€', (suedPlayer: Player) => {
       const amount = Math.min(3, suedPlayer.megaCredits);
       player.addResource(Resources.MEGACREDITS, amount);
-      suedPlayer.deductResource(Resources.MEGACREDITS, amount, {log: true, from: player});
+      suedPlayer.deductResource(Resources.MEGACREDITS, amount, {log: true, from: player, stealing: true});
       suedPlayer.playedCards.push(this);
       return undefined;
     });
   }
-  public getVictoryPoints() {
+  public override getVictoryPoints() {
     return -1;
   }
 

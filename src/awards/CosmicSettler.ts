@@ -1,7 +1,7 @@
 import {IAward} from './IAward';
 import {Player} from '../Player';
 import {playerTileFn} from '../boards/Board';
-import {TileType} from '../TileType';
+import {TileType} from '../common/TileType';
 import {SpaceType} from '../SpaceType';
 
 export class CosmicSettler implements IAward {

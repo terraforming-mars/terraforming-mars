@@ -2,14 +2,14 @@ import {expect} from 'chai';
 import {MiningGuild} from '../../../src/cards/corporation/MiningGuild';
 import {Game} from '../../../src/Game';
 import {Player} from '../../../src/Player';
-import {Resources} from '../../../src/Resources';
-import {SpaceBonus} from '../../../src/SpaceBonus';
+import {Resources} from '../../../src/common/Resources';
+import {SpaceBonus} from '../../../src/common/boards/SpaceBonus';
 import {SpaceType} from '../../../src/SpaceType';
 import {Phase} from '../../../src/Phase';
 import {TestingUtils} from '../../TestingUtils';
 import {TestPlayers} from '../../TestPlayers';
 import {BoardType} from '../../../src/boards/BoardType';
-import {TileType} from '../../../src/TileType';
+import {TileType} from '../../../src/common/TileType';
 import {OceanCity} from '../../../src/cards/ares/OceanCity';
 
 describe('MiningGuild', () => {

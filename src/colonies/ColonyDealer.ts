@@ -20,6 +20,10 @@ import {Leavitt} from '../cards/community/Leavitt';
 import {Pallas} from '../cards/community/Pallas';
 import {SerializedColony} from '../SerializedColony';
 
+// TODO(kberg): Add ability to hard-code chosen colonies, separate from customColoniesList, so as to not be
+// forced to rely on randomness.
+// TODO(kberg): Add ability to disable initial action that removes a colony in the solo game. (Or come up with
+// a simple line of code to deal with solo games.)
 export interface IColonyFactory<T> {
     colonyName: ColonyName;
     Factory: new () => T

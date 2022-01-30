@@ -7,12 +7,11 @@ import {Policy} from '../Policy';
 import {SelectHowToPayDeferred} from '../../deferredActions/SelectHowToPayDeferred';
 import {Player} from '../../Player';
 import {CardName} from '../../CardName';
-import {MAX_OCEAN_TILES, MAX_OXYGEN_LEVEL, MAX_TEMPERATURE, MAX_VENUS_SCALE, MIN_OXYGEN_LEVEL, MIN_TEMPERATURE, MIN_VENUS_SCALE, POLITICAL_AGENDAS_MAX_ACTION_USES} from '../../constants';
+import {MAX_OXYGEN_LEVEL, MAX_TEMPERATURE, MAX_VENUS_SCALE, MIN_OXYGEN_LEVEL, MIN_TEMPERATURE, MIN_VENUS_SCALE, POLITICAL_AGENDAS_MAX_ACTION_USES} from '../../constants';
 import {DeferredAction} from '../../deferredActions/DeferredAction';
 import {RemoveOceanTile} from '../../deferredActions/RemoveOceanTile';
 import {OrOptions} from '../../inputs/OrOptions';
 import {SelectOption} from '../../inputs/SelectOption';
-import {TurmoilPolicy} from '../TurmoilPolicy';
 
 export class Reds extends Party implements IParty {
   name = PartyName.REDS;
@@ -22,7 +21,7 @@ export class Reds extends Party implements IParty {
 }
 
 class RedsBonus01 implements Bonus {
-  id = 'rb01';
+  id = 'rb01' as const;
   description = 'The player(s) with the lowest TR gains 1 TR';
   isDefault = true;
 
@@ -50,7 +49,7 @@ class RedsBonus01 implements Bonus {
 }
 
 class RedsBonus02 implements Bonus {
-  id = 'rb02';
+  id = 'rb02' as const;
   description = 'The player(s) with the highest TR loses 1 TR';
   isDefault = false;
 
@@ -78,13 +77,13 @@ class RedsBonus02 implements Bonus {
 }
 
 class RedsPolicy01 implements Policy {
-  id = TurmoilPolicy.REDS_DEFAULT_POLICY;
+  id = 'rp01' as const;
   isDefault = true;
   description: string = 'When you take an action that raises TR, you MUST pay 3 M€ per step raised';
 }
 
 class RedsPolicy02 implements Policy {
-  id = TurmoilPolicy.REDS_POLICY_2;
+  id = 'rp02' as const;
   description: string = 'When you place a tile, pay 3 M€ or as much as possible';
   isDefault = false;
 
@@ -100,7 +99,7 @@ class RedsPolicy02 implements Policy {
 }
 
 class RedsPolicy03 implements Policy {
-  id = TurmoilPolicy.REDS_POLICY_3;
+  id = 'rp03' as const;
   description: string = 'Pay 4 M€ to reduce a non-maxed global parameter 1 step (do not gain any track bonuses)';
   isDefault = false;
 
@@ -109,7 +108,7 @@ class RedsPolicy03 implements Policy {
     if (game.marsIsTerraformed()) return false;
 
     const temperature = game.getTemperature();
-    const oceansPlaced = game.board.getOceansOnBoard();
+    const oceansPlaced = game.board.getOceanCount();
     const oxygenLevel = game.getOxygenLevel();
     const venusScaleLevel = game.getVenusScaleLevel();
 
@@ -146,10 +145,7 @@ class RedsPolicy03 implements Policy {
           }
 
           // Remove ocean option
-          const oceansPlaced = game.board.getOceansOnBoard();
-          const canRemoveOcean = oceansPlaced > 0 && oceansPlaced !== MAX_OCEAN_TILES;
-
-          if (canRemoveOcean) {
+          if (game.canRemoveOcean()) {
             orOptions.options.push(new SelectOption('Remove an ocean tile', 'Confirm', () => {
               game.defer(new RemoveOceanTile(player, 'Turmoil Reds action - Remove an Ocean tile from the board'));
               return undefined;
@@ -193,7 +189,7 @@ class RedsPolicy03 implements Policy {
 }
 
 class RedsPolicy04 implements Policy {
-  id = TurmoilPolicy.REDS_POLICY_4;
+  id = 'rp04' as const;
   description: string = 'When you raise a global parameter, decrease your M€ production 1 step per step raised if possible';
   isDefault = false;
 }

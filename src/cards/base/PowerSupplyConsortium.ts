@@ -1,9 +1,9 @@
 import {IProjectCard} from '../IProjectCard';
-import {Tags} from '../Tags';
+import {Tags} from '../../common/cards/Tags';
 import {Card} from '../Card';
 import {CardType} from '../CardType';
 import {Player} from '../../Player';
-import {Resources} from '../../Resources';
+import {Resources} from '../../common/Resources';
 import {CardName} from '../../CardName';
 import {DecreaseAnyProduction} from '../../deferredActions/DecreaseAnyProduction';
 import {CardRequirements} from '../CardRequirements';
@@ -34,7 +34,8 @@ export class PowerSupplyConsortium extends Card implements IProjectCard {
 
   public play(player: Player) {
     player.addProduction(Resources.ENERGY, 1);
-    player.game.defer(new DecreaseAnyProduction(player, Resources.ENERGY, 1));
+    player.game.defer(
+      new DecreaseAnyProduction(player, Resources.ENERGY, {count: 1, stealing: true}));
     return undefined;
   }
 }

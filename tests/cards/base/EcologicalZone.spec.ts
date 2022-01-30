@@ -5,7 +5,7 @@ import {Game} from '../../../src/Game';
 import {SelectSpace} from '../../../src/inputs/SelectSpace';
 import {Phase} from '../../../src/Phase';
 import {Player} from '../../../src/Player';
-import {TileType} from '../../../src/TileType';
+import {TileType} from '../../../src/common/TileType';
 import {TestPlayers} from '../../TestPlayers';
 
 describe('EcologicalZone', function() {
@@ -28,7 +28,7 @@ describe('EcologicalZone', function() {
     expect(card.canPlay(player)).is.true;
 
     const action = card.play(player);
-    expect(action instanceof SelectSpace).is.true;
+    expect(action).instanceOf(SelectSpace);
 
     const adjacentSpace = action.availableSpaces[0];
     action.cb(adjacentSpace);

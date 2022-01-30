@@ -2,14 +2,17 @@ import {Player} from '../../Player';
 import {PreludeCard} from '../prelude/PreludeCard';
 import {CardName} from '../../CardName';
 import {CardRenderer} from '../render/CardRenderer';
-import {Resources} from '../../Resources';
-import {Tags} from '../Tags';
+import {Resources} from '../../common/Resources';
+import {Tags} from '../../common/cards/Tags';
+import {Units} from '../../Units';
 
 export class ResearchGrant extends PreludeCard {
   constructor() {
     super({
       name: CardName.RESEARCH_GRANT_PATHFINDERS,
       tags: [Tags.SCIENCE, Tags.SCIENCE],
+      productionBox: Units.of({energy: 1}),
+      startingMegacredits: 14,
 
       metadata: {
         cardNumber: 'P08',
@@ -22,7 +25,7 @@ export class ResearchGrant extends PreludeCard {
     });
   }
   public play(player: Player) {
-    player.addProduction(Resources.ENERGY, 1);
+    player.adjustProduction(this.productionBox, {log: true});
     player.addResource(Resources.MEGACREDITS, 14);
     return undefined;
   }

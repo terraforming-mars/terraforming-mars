@@ -17,7 +17,7 @@ describe('RoverConstruction', function() {
     player.playedCards.push(card);
     game.addCityTile(player, game.board.getAvailableSpacesOnLand(player)[0].id);
     TestingUtils.runAllActions(game);
-    expect(game.getCitiesInPlay()).to.eq(1);
+    expect(game.getCitiesCount()).to.eq(1);
     expect(player.megaCredits).to.eq(2);
   });
 });

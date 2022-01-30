@@ -6,8 +6,8 @@ import {CardName} from '../../CardName';
 import {CardRenderer} from '../render/CardRenderer';
 import {IActionCard, VictoryPoints} from '../ICard';
 import {CardRequirements} from '../CardRequirements';
-import {Tags} from '../Tags';
-import {ResourceType} from '../../ResourceType';
+import {Tags} from '../../common/cards/Tags';
+import {ResourceType} from '../../common/ResourceType';
 import {AddResourcesToCard} from '../../deferredActions/AddResourcesToCard';
 import {all} from '../Options';
 
@@ -32,7 +32,7 @@ export class MartianCulture extends Card implements IProjectCard, IActionCard {
     });
   }
 
-  public resourceCount = 0;
+  public override resourceCount = 0;
 
   public canAct() {
     return true;

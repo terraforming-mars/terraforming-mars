@@ -4,7 +4,7 @@ import {Player} from '../../Player';
 import {PlayerInput} from '../../PlayerInput';
 import {ICardMetadata} from '../ICardMetadata';
 import {CardName} from '../../CardName';
-import {Tags} from '../Tags';
+import {Tags} from '../../common/cards/Tags';
 import {IProjectCard} from '../IProjectCard';
 import {Units} from '../../Units';
 
@@ -12,6 +12,7 @@ interface StaticPreludeProperties {
     metadata: ICardMetadata;
     name: CardName;
     tags?: Array<Tags>;
+    startingMegacredits?: number;
     productionBox?: Units;
 }
 
@@ -23,10 +24,11 @@ export abstract class PreludeCard extends Card implements IProjectCard {
       tags: properties.tags,
       metadata: properties.metadata,
       productionBox: properties.productionBox,
+      startingMegaCredits: properties.startingMegacredits,
     });
   }
   public abstract play(player: Player): PlayerInput | undefined;
-  public canPlay(_player: Player): boolean {
+  public override canPlay(_player: Player): boolean {
     return true;
   }
 }

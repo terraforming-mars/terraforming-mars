@@ -2,7 +2,7 @@ import {expect} from 'chai';
 import {Ants} from '../../src/cards/base/Ants';
 import {SecurityFleet} from '../../src/cards/base/SecurityFleet';
 import {Game} from '../../src/Game';
-import {Resources} from '../../src/Resources';
+import {Resources} from '../../src/common/Resources';
 import {ScientificCommunity} from '../../src/turmoil/globalEvents/ScientificCommunity';
 import {Kelvinists} from '../../src/turmoil/parties/Kelvinists';
 import {Turmoil} from '../../src/turmoil/Turmoil';

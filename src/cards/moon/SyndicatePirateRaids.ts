@@ -4,7 +4,7 @@ import {IProjectCard} from '../IProjectCard';
 import {CardRenderer} from '../render/CardRenderer';
 import {Player} from '../../Player';
 import {Card} from '../Card';
-import {Tags} from '../Tags';
+import {Tags} from '../../common/cards/Tags';
 
 export class SyndicatePirateRaids extends Card implements IProjectCard {
   constructor() {
@@ -18,7 +18,7 @@ export class SyndicatePirateRaids extends Card implements IProjectCard {
         description: 'ALL OPPONENTS CANNOT RETRIEVE THEIR TRADE FLEETS THIS GENERATION',
         cardNumber: 'M65',
         renderData: CardRenderer.builder((b) => {
-          b.tradeFleet().asterix;
+          b.tradeFleet().asterix();
         }),
       },
     });

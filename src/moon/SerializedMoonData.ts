@@ -1,5 +1,5 @@
 import {SerializedBoard} from '../boards/SerializedBoard';
-import {PlayerId} from '../Player';
+import {PlayerId} from '../common/Types';
 
 export interface SerializedMoonData {
   moon: SerializedBoard;

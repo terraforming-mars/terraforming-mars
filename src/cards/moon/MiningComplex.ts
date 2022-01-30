@@ -1,5 +1,5 @@
 import {CardName} from '../../CardName';
-import {Tags} from '../Tags';
+import {Tags} from '../../common/cards/Tags';
 import {PreludeCard} from '../prelude/PreludeCard';
 import {CardRenderer} from '../render/CardRenderer';
 import {PlaceMoonMineTile} from '../../moon/PlaceMoonMineTile';
@@ -7,14 +7,16 @@ import {Player} from '../../Player';
 import {MoonExpansion} from '../../moon/MoonExpansion';
 import {PlaceMoonRoadTile} from '../../moon/PlaceMoonRoadTile';
 import {SpaceType} from '../../SpaceType';
-import {Resources} from '../../Resources';
+import {Resources} from '../../common/Resources';
 import {AltSecondaryTag} from '../render/CardRenderItem';
+import {TileType} from '../../common/TileType';
 
 export class MiningComplex extends PreludeCard {
   constructor() {
     super({
       name: CardName.MINING_COMPLEX,
       tags: [Tags.MOON],
+      startingMegacredits: -7,
 
       metadata: {
         description: 'Place a mine tile on the Moon and raise the Mining Rate 1 step. ' +
@@ -27,6 +29,8 @@ export class MiningComplex extends PreludeCard {
       },
     });
   };
+
+  public tilesBuilt = [TileType.MOON_MINE, TileType.MOON_ROAD];
 
   public play(player: Player) {
     player.game.defer(new PlaceMoonMineTile(player)

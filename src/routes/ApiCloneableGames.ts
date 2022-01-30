@@ -9,7 +9,7 @@ export class ApiCloneableGames extends Handler {
     super();
   }
 
-  public get(req: http.IncomingMessage, res: http.ServerResponse, ctx: IContext): void {
+  public override get(req: http.IncomingMessage, res: http.ServerResponse, ctx: IContext): void {
     Database.getInstance().getClonableGames(function(err, allGames) {
       if (err) {
         console.warn('Could not load cloneable games: ', err);

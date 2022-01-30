@@ -4,11 +4,11 @@ import {Card} from '../Card';
 import {CardType} from '../CardType';
 import {CardName} from '../../CardName';
 import {CardRenderer} from '../render/CardRenderer';
-import {Tags} from '../Tags';
+import {Tags} from '../../common/cards/Tags';
 import {CardRequirements} from '../CardRequirements';
 import {Units} from '../../Units';
 import {AddResourcesToCard} from '../../deferredActions/AddResourcesToCard';
-import {ResourceType} from '../../ResourceType';
+import {ResourceType} from '../../common/ResourceType';
 import {nextToNoOtherTileFn} from '../../boards/Board';
 import {ISpace} from '../../boards/ISpace';
 import {SelectSpace} from '../../inputs/SelectSpace';
@@ -34,7 +34,7 @@ export class EarlyExpedition extends Card implements IProjectCard {
           b.data().city().asterix();
         }),
         description: 'Temperature must be -18 C or lower. Decrease your energy production 1 step and ' +
-          'Raise your MC production 3 steps. Add 1 data to ANY CARD. Place a city tile on Mars NEXT TO NO OTHER TILE.',
+          'Raise your M€ production 3 steps. Add 1 data to ANY CARD. Place a city tile on Mars NEXT TO NO OTHER TILE.',
       },
     });
   }
@@ -44,7 +44,7 @@ export class EarlyExpedition extends Card implements IProjectCard {
       .filter(nextToNoOtherTileFn(player.game.board));
   }
 
-  public canPlay(player: Player) {
+  public override canPlay(player: Player) {
     return player.canAdjustProduction(this.productionBox) && this.getAvailableSpaces(player).length > 0;
   }
 

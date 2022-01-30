@@ -163,6 +163,7 @@ export class SQLite implements IDatabase {
         console.warn('SQLite: cleansaves0:', err.message);
         return;
       }
+      if (save_id === undefined) throw new Error('saveId is undefined for ' + game_id);
       // Purges isn't used yet
       this.runQuietly('INSERT into purges (game_id, last_save_id) values (?, ?)', [game_id, save_id]);
       // DELETE all saves except initial and last one

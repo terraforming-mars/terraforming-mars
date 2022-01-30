@@ -162,11 +162,11 @@ export class PostgreSQL implements IDatabase {
   }
 
   getMaxSaveId(game_id: GameId, cb: DbLoadCallback<number>): void {
-    this.client.query('SELECT MAX(save_id) FROM games WHERE game_id = $1', [game_id], (err: Error | null, res: QueryResult<any>) => {
+    this.client.query('SELECT MAX(save_id) as save_id FROM games WHERE game_id = $1', [game_id], (err: Error | null, res: QueryResult<any>) => {
       if (err) {
         return cb(err ?? undefined, undefined);
       }
-      cb(undefined, res.rows[0]);
+      cb(undefined, res.rows[0].save_id);
     });
   }
 
@@ -180,6 +180,7 @@ export class PostgreSQL implements IDatabase {
   cleanSaves(game_id: GameId): void {
     this.getMaxSaveId(game_id, ((err, save_id) => {
       this.throwIf(err, 'cleanSaves0');
+      if (save_id === undefined) throw new Error('saveId is undefined for ' + game_id);
       // DELETE all saves except initial and last one
       this.client.query('DELETE FROM games WHERE game_id = $1 AND save_id < $2 AND save_id > 0', [game_id, save_id], (err) => {
         this.throwIf(err, 'cleanSaves1');

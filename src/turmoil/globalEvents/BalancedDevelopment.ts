@@ -16,7 +16,7 @@ export class BalancedDevelopment extends GlobalEvent implements IGlobalEvent {
   constructor() {
     super({
       name: GlobalEventName.BALANCED_DEVELOPMENT,
-      description: 'Gain 2MC for each Mars tag you have (max 5) and influence.',
+      description: 'Gain 2M€ for each Mars tag you have (max 5) and influence.',
       revealedDelegate: PartyName.UNITY,
       currentDelegate: PartyName.MARS,
       renderData: RENDER_DATA,

@@ -74,13 +74,6 @@ describe('CardRenderer', function() {
       expect(item.type).to.equal(CardRenderItemType.TITANIUM);
       expect(item.amount).to.equal(3);
     });
-    it('shows digit for amount > 5', () => {
-      const renderer = CardRenderer.builder((b) => b.titanium(6, {digit: 'large'}));
-      const item = renderer.rows[0][0] as CardRenderItem;
-      expect(item.type).to.equal(CardRenderItemType.TITANIUM);
-      expect(item.showDigit).to.be.true;
-      expect(item.amount).to.equal(6);
-    });
   });
   it('steel: success', () => {
     const renderer = CardRenderer.builder((b) => b.steel(2));

@@ -8,7 +8,7 @@ import {CardRenderer} from '../../cards/render/CardRenderer';
 import {Size} from '../../cards/render/Size';
 
 const RENDER_DATA = CardRenderer.builder((b) => {
-  b.text('9').diverseTag(1).influence({size: Size.SMALL}).colon().megacredits(10);
+  b.vSpace(Size.MEDIUM).br.text('9').diverseTag(1).influence({size: Size.SMALL}).colon().megacredits(10);
 });
 
 export class Diversity extends GlobalEvent implements IGlobalEvent {

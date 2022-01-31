@@ -27,7 +27,7 @@ export interface ItemOptions {
   size?: Size;
   amount?: number;
   all?: boolean;
-  digit?: true | false | 'large';
+  digit?: boolean;
   played?: boolean;
   secondaryTag?: Tags | AltSecondaryTag;
   multiplier?: boolean; /** Mark any amount to be a multiplier 'X' */
@@ -62,7 +62,6 @@ export class CardRenderItem {
       break;
     case false:
       break; // it's undefined
-    case 'large':
     default:
       this.showDigit = Math.abs(this.amount) > 5 ? true : undefined;
     }

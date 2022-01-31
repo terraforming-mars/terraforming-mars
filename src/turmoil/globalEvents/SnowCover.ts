@@ -6,7 +6,7 @@ import {Turmoil} from '../Turmoil';
 import {CardRenderer} from '../../cards/render/CardRenderer';
 
 const RENDER_DATA = CardRenderer.builder((b) => {
-  b.minus().temperature(2).br.cards(1).slash().influence();
+  b.minus().temperature(2).nbsp.cards(1).slash().influence();
 });
 
 export class SnowCover extends GlobalEvent implements IGlobalEvent {

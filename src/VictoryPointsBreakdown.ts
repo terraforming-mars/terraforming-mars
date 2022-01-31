@@ -1,4 +1,4 @@
-import {Tags} from './cards/Tags';
+import {Tags} from './common/cards/Tags';
 
 export type VictoryPoints = 'terraformRating' | 'milestones' | 'awards' | 'greenery' | 'city' | 'escapeVelocity' | 'moon colony' | 'moon mine' | 'moon road' | 'planetary tracks' | 'victoryPoints';
 

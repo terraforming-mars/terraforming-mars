@@ -6,7 +6,7 @@ import {CorporationCard} from '../corporation/CorporationCard';
 import {IProjectCard} from '../IProjectCard';
 import {played} from '../Options';
 import {CardRenderer} from '../render/CardRenderer';
-import {Tags} from '../Tags';
+import {Tags} from '../../common/cards/Tags';
 
 // TODO(kberg): This card is actually different: it uses resources to track on this card, which
 // means this result can be changed by cards like CEO's Favorite Project.

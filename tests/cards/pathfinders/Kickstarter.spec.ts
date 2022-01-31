@@ -5,7 +5,7 @@ import {getTestPlayer, newTestGame} from '../../TestGame';
 import {Game} from '../../../src/Game';
 import {DeclareCloneTag} from '../../../src/pathfinders/DeclareCloneTag';
 import {OrOptions} from '../../../src/inputs/OrOptions';
-import {Tags} from '../../../src/cards/Tags';
+import {Tags} from '../../../src/common/cards/Tags';
 
 describe('Kickstarter', function() {
   let card: Kickstarter;

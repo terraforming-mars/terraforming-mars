@@ -32,7 +32,7 @@ import CardTags from './CardTags.vue';
 import {CardType} from '@/cards/CardType';
 import CardContent from './CardContent.vue';
 import {ICardMetadata} from '@/cards/ICardMetadata';
-import {Tags} from '@/cards/Tags';
+import {Tags} from '@/common/cards/Tags';
 import {CardRequirements} from '@/cards/CardRequirements';
 import {PreferencesManager} from '@/client/utils/PreferencesManager';
 import {ResourceType} from '@/common/ResourceType';

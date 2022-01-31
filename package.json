@@ -45,8 +45,8 @@
     "jsdom": "^16.6.0",
     "jsdom-global": "^3.0.2",
     "less-loader": "^10.0.0",
-    "mocha": "^8.4.0",
-    "mochapack": "^2.1.2",
+    "mocha": "^9.2.0",
+    "mochapack": "^2.1.4",
     "mutation-observer": "^1.0.3",
     "nyc": "^14.1.1",
     "rimraf": "^3.0.2",
@@ -91,12 +91,12 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/bafolts/terraforming-mars.git"
+    "url": "git+https://github.com/terraforming-mars/terraforming-mars.git"
   },
   "author": "",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/bafolts/terraforming-mars/issues"
+    "url": "https://github.com/terraforming-mars/terraforming-mars/issues"
   },
-  "homepage": "https://github.com/bafolts/terraforming-mars#readme"
+  "homepage": "https://github.com/terraforming-mars/terraforming-mars#readme"
 }

@@ -1,6 +1,6 @@
 import {IMilestone} from './IMilestone';
 import {Player} from '../Player';
-import {Tags} from '../cards/Tags';
+import {Tags} from '../common/cards/Tags';
 
 export class Businessperson implements IMilestone {
   public name: string = 'Businessperson';

@@ -9,7 +9,7 @@ import {SisterPlanetSupport} from '../../../src/cards/venusNext/SisterPlanetSupp
 import {VestaShipyard} from '../../../src/cards/base/VestaShipyard';
 import {LocalShading} from '../../../src/cards/venusNext/LocalShading';
 import {OrOptions} from '../../../src/inputs/OrOptions';
-import {Tags} from '../../../src/cards/Tags';
+import {Tags} from '../../../src/common/cards/Tags';
 
 describe('Unity', function() {
   let player : Player; let game : Game; let turmoil: Turmoil; let unity: Unity;

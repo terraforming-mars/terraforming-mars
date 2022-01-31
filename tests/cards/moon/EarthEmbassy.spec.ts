@@ -4,7 +4,7 @@ import {TestPlayers} from '../../TestPlayers';
 import {TestPlayer} from '../../TestPlayer';
 import {EarthEmbassy} from '../../../src/cards/moon/EarthEmbassy';
 import {expect} from 'chai';
-import {Tags} from '../../../src/cards/Tags';
+import {Tags} from '../../../src/common/cards/Tags';
 import {CardType} from '../../../src/cards/CardType';
 import {CardName} from '../../../src/CardName';
 import {IProjectCard} from '../../../src/cards/IProjectCard';

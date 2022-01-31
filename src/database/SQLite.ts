@@ -148,22 +148,34 @@ export class SQLite implements IDatabase {
     });
   }
 
-  cleanSaves(game_id: GameId, save_id: number): void {
-    // Purges isn't used yet
-    this.runQuietly('INSERT into purges (game_id, last_save_id) values (?, ?)', [game_id, save_id]);
-    // DELETE all saves except initial and last one
-    this.db.run('DELETE FROM games WHERE game_id = ? AND save_id < ? AND save_id > 0', [game_id, save_id], function(err: Error | null) {
+  getMaxSaveId(game_id: GameId, cb: DbLoadCallback<number>): void {
+    this.db.get('SELECT MAX(save_id) AS save_id FROM games WHERE game_id = ?', [game_id], (err: Error | null, row: { save_id: number; }) => {
       if (err) {
-        return console.warn(err.message);
+        return cb(err ?? undefined, undefined);
       }
+      cb(undefined, row.save_id);
     });
-    // Flag game as finished
-    this.db.run('UPDATE games SET status = \'finished\' WHERE game_id = ?', [game_id], function(err: Error | null) {
+  }
+
+  cleanSaves(game_id: GameId): void {
+    this.getMaxSaveId(game_id, ((err, save_id) => {
       if (err) {
-        return console.warn(err.message);
+        console.warn('SQLite: cleansaves0:', err.message);
+        return;
       }
-    });
-    this.purgeUnfinishedGames();
+      if (save_id === undefined) throw new Error('saveId is undefined for ' + game_id);
+      // Purges isn't used yet
+      this.runQuietly('INSERT into purges (game_id, last_save_id) values (?, ?)', [game_id, save_id]);
+      // DELETE all saves except initial and last one
+      this.db.run('DELETE FROM games WHERE game_id = ? AND save_id < ? AND save_id > 0', [game_id, save_id], (err) => {
+        if (err) console.warn('SQLite: cleansaves1: ', err.message);
+        // Flag game as finished
+        this.db.run('UPDATE games SET status = \'finished\' WHERE game_id = ?', [game_id], (err) => {
+          if (err) console.warn('SQLite: cleansaves2: ', err.message);
+          this.purgeUnfinishedGames();
+        });
+      });
+    }));
   }
 
   purgeUnfinishedGames(): void {

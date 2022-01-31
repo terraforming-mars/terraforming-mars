@@ -9,7 +9,7 @@ import {ResourceType} from '../../common/ResourceType';
 import {SelectCard} from '../../inputs/SelectCard';
 import {Resources} from '../../common/Resources';
 import {CardRequirements} from '../CardRequirements';
-import {Tags} from '../Tags';
+import {Tags} from '../../common/cards/Tags';
 
 export class BreedingFarms extends Card implements IProjectCard, IActionCard {
   constructor() {

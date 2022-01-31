@@ -5,7 +5,7 @@ import {VictoryPoints} from '../ICard';
 import {CardType} from '../CardType';
 import {CardName} from '../../CardName';
 import {CardRenderer} from '../render/CardRenderer';
-import {Tags} from '../Tags';
+import {Tags} from '../../common/cards/Tags';
 import {Resources} from '../../common/Resources';
 import {ResourceType} from '../../common/ResourceType';
 import {Units} from '../../Units';

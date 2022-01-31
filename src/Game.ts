@@ -47,7 +47,7 @@ import {SerializedPlayer} from './SerializedPlayer';
 import {SpaceBonus} from './common/boards/SpaceBonus';
 import {SpaceName} from './SpaceName';
 import {SpaceType} from './SpaceType';
-import {Tags} from './cards/Tags';
+import {Tags} from './common/cards/Tags';
 import {TileType} from './common/TileType';
 import {Turmoil} from './turmoil/Turmoil';
 import {RandomMAOptionType} from './RandomMAOptionType';
@@ -1039,7 +1039,7 @@ export class Game implements ISerializable<SerializedGame> {
       this.log('This game id was ' + this.id);
     }
 
-    Database.getInstance().cleanSaves(this.id, this.lastSaveId);
+    Database.getInstance().cleanSaves(this.id);
     const scores: Array<Score> = [];
     this.players.forEach((player) => {
       let corponame: string = '';
@@ -1269,11 +1269,9 @@ export class Game implements ISerializable<SerializedGame> {
   }
 
   public getSpaceCount(tileType: TileType, player: Player): number {
-    return this.board.spaces.filter(
-      (space) => space.tile?.tileType === tileType &&
-                  space.player !== undefined &&
-                  space.player === player,
-    ).length;
+    return this.board.spaces.filter(Board.ownedBy(player))
+      .filter((space) => space.tile?.tileType === tileType)
+      .length;
   }
 
   // addTile applies to the Mars board, but not the Moon board, see MoonExpansion.addTile for placing

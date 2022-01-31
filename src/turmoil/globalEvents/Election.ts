@@ -2,7 +2,7 @@ import {IGlobalEvent, GlobalEvent} from './IGlobalEvent';
 import {GlobalEventName} from './GlobalEventName';
 import {PartyName} from '../parties/PartyName';
 import {Game} from '../../Game';
-import {Tags} from '../../cards/Tags';
+import {Tags} from '../../common/cards/Tags';
 import {Turmoil} from '../Turmoil';
 import {Player} from '../../Player';
 import {Board} from '../../boards/Board';
@@ -11,8 +11,8 @@ import {played} from '../../cards/Options';
 import {Size} from '../../cards/render/Size';
 
 const RENDER_DATA = CardRenderer.builder((b) => {
-  b.influence().plus().building(1, {played}).plus().city().colon().br;
-  b.text('1st: ').tr(2, {size: Size.SMALL}).nbsp.text('2nd: ').tr(1, {size: Size.SMALL});
+  b.influence({size: Size.SMALL}).plus().building(1, {played, size: Size.SMALL}).plus().city({size: Size.SMALL}).colon();
+  b.text('1st:', Size.SMALL).tr(2, {size: Size.TINY, digit: true}).text('2nd:', Size.SMALL).tr(1, {size: Size.TINY});
 });
 
 export class Election extends GlobalEvent implements IGlobalEvent {

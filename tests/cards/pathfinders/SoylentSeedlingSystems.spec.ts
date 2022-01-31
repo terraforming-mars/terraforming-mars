@@ -5,11 +5,11 @@ import {TestPlayer} from '../../TestPlayer';
 import {getTestPlayer, newTestGame} from '../../TestGame';
 import {CardName} from '../../../src/CardName';
 import {TestingUtils} from '../../TestingUtils';
-import {Tags} from '../../../src/cards/Tags';
+import {Tags} from '../../../src/common/cards/Tags';
 import {Celestic} from '../../../src/cards/venusNext/Celestic';
-import {fail} from 'assert';
 import {GreeneryStandardProject} from '../../../src/cards/base/standardProjects/GreeneryStandardProject';
-import {PATHFINDERS_CARD_MANIFEST} from '../../../src/cards/pathfinders/PathfindersCardManifest';
+import {TileType} from '../../../src/common/TileType';
+import {SpaceType} from '../../../src/SpaceType';
 
 describe('SoylentSeedlingSystems', function() {
   let card: SoylentSeedlingSystems;
@@ -81,10 +81,15 @@ describe('SoylentSeedlingSystems', function() {
     expect(player.canPlay(plantCard)).is.true;
   });
 
-  // This test will fail if/when Wetlands gets introduced
   it('on wetlands placed', () => {
-    if (PATHFINDERS_CARD_MANIFEST.projectCards.findByCardName(CardName.WETLANDS) !== undefined) {
-      fail('Make sure Wetlands works with this, too.');
-    }
+    expect(player.corporationCard!.resourceCount).eq(0);
+    expect(player2.corporationCard!.resourceCount).eq(0);
+    player.game.addTile(
+      player,
+      SpaceType.LAND,
+      player.game.board.getAvailableSpacesOnLand(player)[0],
+      {tileType: TileType.WETLANDS});
+    expect(player.corporationCard!.resourceCount).eq(1);
+    expect(player2.corporationCard!.resourceCount).eq(0);
   });
 });

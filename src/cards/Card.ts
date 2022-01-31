@@ -3,7 +3,7 @@ import {CardName} from '../CardName';
 import {CardType} from './CardType';
 import {IAdjacencyBonus} from '../ares/IAdjacencyBonus';
 import {ResourceType} from '../common/ResourceType';
-import {Tags} from './Tags';
+import {Tags} from '../common/cards/Tags';
 import {Player} from '../Player';
 import {Units} from '../Units';
 import {CardRequirements} from './CardRequirements';

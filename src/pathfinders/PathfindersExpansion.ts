@@ -18,7 +18,7 @@ import {ResourceType} from '../common/ResourceType';
 import {Reward} from './Reward';
 import {SelectResourcesDeferred} from '../deferredActions/SelectResourcesDeferred';
 import {SendDelegateToArea} from '../deferredActions/SendDelegateToArea';
-import {Tags} from '../cards/Tags';
+import {Tags} from '../common/cards/Tags';
 import {Turmoil} from '../turmoil/Turmoil';
 import {VictoryPointsBreakdown} from '../VictoryPointsBreakdown';
 import {GlobalEventName} from '../turmoil/globalEvents/GlobalEventName';

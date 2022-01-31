@@ -3,7 +3,7 @@ import {CardType} from '../CardType';
 import {CardName} from '../../CardName';
 import {CardRenderer} from '../render/CardRenderer';
 import {Card} from '../Card';
-import {Tags} from '../Tags';
+import {Tags} from '../../common/cards/Tags';
 import {Size} from '../render/Size';
 import {played} from '../Options';
 import {CorporationCard} from '../corporation/CorporationCard';

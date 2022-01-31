@@ -29,7 +29,7 @@ export class EnergySaving extends Card implements IProjectCard {
   }
 
   public play(player: Player) {
-    player.addProduction(Resources.ENERGY, player.game.getCitiesCount(player), {log: true});
+    player.addProduction(Resources.ENERGY, player.game.getCitiesCount(), {log: true});
     return undefined;
   }
 }

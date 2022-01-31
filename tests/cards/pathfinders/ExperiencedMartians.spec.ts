@@ -5,7 +5,7 @@ import {getTestPlayer, newTestGame} from '../../TestGame';
 import {Units} from '../../../src/Units';
 import {Turmoil} from '../../../src/turmoil/Turmoil';
 import {Game} from '../../../src/Game';
-import {Tags} from '../../../src/cards/Tags';
+import {Tags} from '../../../src/common/cards/Tags';
 import {PartyName} from '../../../src/turmoil/parties/PartyName';
 import {SendDelegateToArea} from '../../../src/deferredActions/SendDelegateToArea';
 import {SelectPartyToSendDelegate} from '../../../src/inputs/SelectPartyToSendDelegate';

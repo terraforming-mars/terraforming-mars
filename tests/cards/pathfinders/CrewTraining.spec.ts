@@ -2,7 +2,7 @@ import {expect} from 'chai';
 import {getTestPlayer, newTestGame} from '../../TestGame';
 import {CrewTraining} from '../../../src/cards/pathfinders/CrewTraining';
 import {Game} from '../../../src/Game';
-import {Tags} from '../../../src/cards/Tags';
+import {Tags} from '../../../src/common/cards/Tags';
 import {TestPlayer} from '../../TestPlayer';
 import {DeclareCloneTag} from '../../../src/pathfinders/DeclareCloneTag';
 import {OrOptions} from '../../../src/inputs/OrOptions';

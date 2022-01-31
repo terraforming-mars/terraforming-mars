@@ -3,7 +3,7 @@ import {CardName} from '@/CardName';
 import {CardModel} from '@/models/CardModel';
 import {PlayerInputModel} from '@/models/PlayerInputModel';
 import {PlayerViewModel} from '@/models/PlayerModel';
-import {Tags} from '@/cards/Tags';
+import {Tags} from '@/common/cards/Tags';
 import {Units} from '@/Units';
 import {SEED_VALUE} from '@/constants';
 

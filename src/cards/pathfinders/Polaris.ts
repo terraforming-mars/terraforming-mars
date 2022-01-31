@@ -1,6 +1,6 @@
 import {Card} from '../Card';
 import {CorporationCard} from '../corporation/CorporationCard';
-import {Tags} from '../Tags';
+import {Tags} from '../../common/cards/Tags';
 import {Player} from '../../Player';
 import {Resources} from '../../common/Resources';
 import {CardName} from '../../CardName';
@@ -9,10 +9,10 @@ import {CardRenderer} from '../render/CardRenderer';
 import {all, digit} from '../Options';
 import {PlaceOceanTile} from '../../deferredActions/PlaceOceanTile';
 import {ISpace} from '../../boards/ISpace';
-import {TileType} from '../../common/TileType';
 import {GainResources} from '../../deferredActions/GainResources';
 import {Priority} from '../../deferredActions/DeferredAction';
 import {Size} from '../render/Size';
+import {Board} from '../../boards/Board';
 
 export class Polaris extends Card implements CorporationCard {
   constructor() {
@@ -52,7 +52,7 @@ export class Polaris extends Card implements CorporationCard {
   }
 
   public onTilePlaced(cardOwner: Player, activePlayer: Player, space: ISpace) {
-    if (space.tile?.tileType === TileType.OCEAN) {
+    if (Board.isUncoveredOceanSpace(space)) {
       // TODO(kberg): Find a way to add Card to addProduction log options.
       cardOwner.addProduction(Resources.MEGACREDITS, 1);
       activePlayer.game.log(

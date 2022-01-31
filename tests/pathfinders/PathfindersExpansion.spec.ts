@@ -2,7 +2,7 @@ import {expect} from 'chai';
 import {TestPlayer} from '../TestPlayer';
 import {getTestPlayer, newTestGame} from '../TestGame';
 import {PathfindersExpansion} from '../../src/pathfinders/PathfindersExpansion';
-import {Tags} from '../../src/cards/Tags';
+import {Tags} from '../../src/common/cards/Tags';
 import {TestingUtils} from '../TestingUtils';
 import {ResourceType} from '../../src/common/ResourceType';
 import {Game} from '../../src/Game';

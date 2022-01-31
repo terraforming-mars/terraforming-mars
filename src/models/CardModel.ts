@@ -5,7 +5,7 @@ import {Units} from '../Units';
 import {CardName} from '../CardName';
 import {Resources} from '../common/Resources';
 import {CardDiscount} from '../cards/ICard';
-import {Tags} from '../cards/Tags';
+import {Tags} from '../common/cards/Tags';
 
 export interface CardModel {
     name: CardName;

@@ -1,5 +1,5 @@
 import {Player} from '../Player';
-import {Tags} from '../cards/Tags';
+import {Tags} from '../common/cards/Tags';
 import {IProjectCard} from '../cards/IProjectCard';
 import {DeferredAction, Priority} from './DeferredAction';
 import {SelectCard} from '../inputs/SelectCard';

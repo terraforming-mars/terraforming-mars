@@ -128,7 +128,7 @@ export class TestingUtils {
     expect(cb(), 'Reds in power, enough money').is.true;
   }
 
-  public static fakeCard(card: Partial<IProjectCard>) {
+  public static fakeCard(card: Partial<IProjectCard>): IProjectCard {
     const template: IProjectCard = {
       name: 'HELLO' as CardName,
       cost: 0,

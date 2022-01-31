@@ -4,7 +4,7 @@ import {Game} from '../../../src/Game';
 import {TestPlayer} from '../../TestPlayer';
 import {getTestPlayer, newTestGame} from '../../TestGame';
 import {TestingUtils} from '../../TestingUtils';
-import {Tags} from '../../../src/cards/Tags';
+import {Tags} from '../../../src/common/cards/Tags';
 import {OrOptions} from '../../../src/inputs/OrOptions';
 
 describe('RobinHaulings', function() {

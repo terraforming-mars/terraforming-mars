@@ -9,7 +9,7 @@ import {CardName} from '../CardName';
 import {IProjectCard} from '../cards/IProjectCard';
 import {Units} from '../Units';
 import {IMoonCard} from '../cards/moon/IMoonCard';
-import {Tags} from '../cards/Tags';
+import {Tags} from '../common/cards/Tags';
 import {ISpace} from '../boards/ISpace';
 import {MAXIMUM_COLONY_RATE, MAXIMUM_LOGISTICS_RATE, MAXIMUM_MINING_RATE} from '../constants';
 import {Resources} from '../common/Resources';

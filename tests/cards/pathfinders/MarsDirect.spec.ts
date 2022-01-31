@@ -7,7 +7,7 @@ import {PowerPlant} from '../../../src/cards/pathfinders/PowerPlant';
 import {ControlledBloom} from '../../../src/cards/pathfinders/ControlledBloom';
 import {TestingUtils} from '../../TestingUtils';
 import {PATHFINDERS_CARD_MANIFEST} from '../../../src/cards/pathfinders/PathfindersCardManifest';
-import {Tags} from '../../../src/cards/Tags';
+import {Tags} from '../../../src/common/cards/Tags';
 
 describe('MarsDirect', () => {
   let player: TestPlayer;
@@ -64,7 +64,7 @@ describe('MarsDirect', () => {
       }
     });
     // When this fails, reduce starting MC by 1.5MC per fail.
-    expect(count).eq(26);
+    expect(count).eq(29);
   });
 });
 

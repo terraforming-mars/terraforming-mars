@@ -1,5 +1,5 @@
-import {CardFinder} from '@/CardFinder';
-import {SerializedCard} from '@/SerializedCard';
+import {CardFinder} from '../CardFinder';
+import {SerializedCard} from '../SerializedCard';
 import {MiningCard} from './base/MiningCard';
 import {IProjectCard} from './IProjectCard';
 import {ICloneTagCard, isICloneTagCard} from './pathfinders/ICloneTagCard';

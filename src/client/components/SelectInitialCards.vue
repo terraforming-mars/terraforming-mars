@@ -27,7 +27,7 @@ import {PlayerViewModel} from '@/models/PlayerModel';
 import SelectCard from '@/client/components/SelectCard.vue';
 import ConfirmDialog from '@/client/components/common/ConfirmDialog.vue';
 import {PreferencesManager} from '@/client/utils/PreferencesManager';
-import {Tags} from '@/cards/Tags';
+import {Tags} from '@/common/cards/Tags';
 import {PreludeCard} from '@/cards/prelude/PreludeCard';
 
 export default Vue.extend({

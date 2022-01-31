@@ -42,7 +42,7 @@ import TagCount from '@/client/components/TagCount.vue';
 import {ITagCount} from '@/ITagCount';
 import {ViewModel, PublicPlayerModel} from '@/models/PlayerModel';
 import {GameModel} from '@/models/GameModel';
-import {Tags} from '@/cards/Tags';
+import {Tags} from '@/common/cards/Tags';
 import {CardName} from '@/CardName';
 import {SpecialTags} from '@/cards/SpecialTags';
 import PlayerTagDiscount from '@/client/components/overview/PlayerTagDiscount.vue';

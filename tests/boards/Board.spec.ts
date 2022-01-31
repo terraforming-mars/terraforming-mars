@@ -224,22 +224,34 @@ describe('Board', function() {
     expect(board.getNthAvailableLandSpace(50, -1).id).eq('60');
   });
 
-  it('getOceansOnBoard', function() {
+  it('getOceanCount', function() {
     expect(board.getOceanCount()).eq(0);
 
     const space1 = board.spaces[1];
     space1.spaceType = SpaceType.OCEAN;
     space1.tile = {tileType: TileType.OCEAN};
 
-    expect(board.getOceanCount(true)).eq(1);
-    expect(board.getOceanCount(false)).eq(1);
+    expect(board.getOceanCount()).eq(1);
+    expect(board.getOceanCount({upgradedOceans: false})).eq(1);
+    expect(board.getOceanCount({upgradedOceans: true})).eq(1);
 
     const space2 = board.spaces[2];
     space2.spaceType = SpaceType.OCEAN;
     space2.tile = {tileType: TileType.OCEAN_SANCTUARY};
 
-    expect(board.getOceanCount(true)).eq(2);
-    expect(board.getOceanCount(false)).eq(1);
+    expect(board.getOceanCount()).eq(2);
+    expect(board.getOceanCount({upgradedOceans: false})).eq(1);
+    expect(board.getOceanCount({upgradedOceans: true})).eq(2);
+
+    const space3 = board.spaces[3];
+    space3.spaceType = SpaceType.OCEAN;
+    space3.tile = {tileType: TileType.WETLANDS};
+
+    expect(board.getOceanCount()).eq(2);
+    expect(board.getOceanCount({upgradedOceans: false})).eq(1);
+    expect(board.getOceanCount({upgradedOceans: true})).eq(2);
+    expect(board.getOceanCount({wetlands: true})).eq(3);
+    expect(board.getOceanCount({wetlands: false})).eq(2);
   });
 
   class TestBoard extends Board {

@@ -97,7 +97,7 @@ describe('SQLite', () => {
     // TODO(kberg): make cleanSaves a promise, too. Beacuse right now
     // this timeout doesn't participate in automated testing. But for now I can
     // verify this in the debugger. Next step.
-    db.cleanSaves(game.id, 3);
+    db.cleanSaves(game.id);
     setTimeout(async () => {
       const saveIds = await db.getSaveIds(game.id);
       expect(saveIds).has.members([0, 3]);

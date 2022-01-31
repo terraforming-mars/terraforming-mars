@@ -3,7 +3,7 @@ import {Card} from '../Card';
 import {CardType} from '../CardType';
 import {CardName} from '../../CardName';
 import {CardRenderer} from '../render/CardRenderer';
-import {Tags} from '../Tags';
+import {Tags} from '../../common/cards/Tags';
 import {SpaceBonus} from '../../common/boards/SpaceBonus';
 import {Player} from '../../Player';
 import {BoardType} from '../../boards/BoardType';

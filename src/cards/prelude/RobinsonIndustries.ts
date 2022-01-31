@@ -1,6 +1,6 @@
 import {IActionCard} from '../ICard';
 import {Player} from '../../Player';
-import {CorporationCard} from './../corporation/CorporationCard';
+import {CorporationCard} from '../corporation/CorporationCard';
 import {OrOptions} from '../../inputs/OrOptions';
 import {SelectOption} from '../../inputs/SelectOption';
 import {Resources} from '../../common/Resources';

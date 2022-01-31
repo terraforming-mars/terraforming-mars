@@ -10,7 +10,7 @@ import {NoctisFarming} from '../../../src/cards/base/NoctisFarming';
 import {RoboticWorkforce} from '../../../src/cards/base/RoboticWorkforce';
 import {ResearchCoordination} from '../../../src/cards/prelude/ResearchCoordination';
 import {UtopiaInvest} from '../../../src/cards/turmoil/UtopiaInvest';
-import {Tags} from '../../../src/cards/Tags';
+import {Tags} from '../../../src/common/cards/Tags';
 import {Game} from '../../../src/Game';
 import {SelectSpace} from '../../../src/inputs/SelectSpace';
 import {Resources} from '../../../src/common/Resources';

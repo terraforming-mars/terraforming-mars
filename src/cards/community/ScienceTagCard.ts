@@ -1,5 +1,5 @@
 import {IProjectCard} from '../IProjectCard';
-import {Tags} from '../Tags';
+import {Tags} from '../../common/cards/Tags';
 import {CardType} from '../CardType';
 import {CardName} from '../../CardName';
 import {ICardMetadata} from '../ICardMetadata';

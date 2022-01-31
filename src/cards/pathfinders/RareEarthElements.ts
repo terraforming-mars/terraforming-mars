@@ -5,7 +5,7 @@ import {CardType} from '../CardType';
 import {CardName} from '../../CardName';
 import {CardRenderer} from '../render/CardRenderer';
 import {Resources} from '../../common/Resources';
-import {Tags} from '../Tags';
+import {Tags} from '../../common/cards/Tags';
 import {isSpecialTile, playerTileFn} from '../../boards/Board';
 
 export class RareEarthElements extends Card implements IProjectCard {

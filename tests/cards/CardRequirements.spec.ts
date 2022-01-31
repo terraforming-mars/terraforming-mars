@@ -9,7 +9,7 @@ import {Ants} from '../../src/cards/base/Ants';
 import {Ceres} from '../../src/colonies/Ceres';
 import {Celestic} from '../../src/cards/venusNext/Celestic';
 import {PartyName} from '../../src/turmoil/parties/PartyName';
-import {Tags} from '../../src/cards/Tags';
+import {Tags} from '../../src/common/cards/Tags';
 import {ResearchCoordination} from '../../src/cards/prelude/ResearchCoordination';
 import {Resources} from '../../src/common/Resources';
 import {SmallAsteroid} from '../../src/cards/promo/SmallAsteroid';

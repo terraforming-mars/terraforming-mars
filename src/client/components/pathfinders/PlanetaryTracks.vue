@@ -56,7 +56,7 @@
 import Vue from 'vue';
 import {GameOptionsModel} from '@/models/GameOptionsModel';
 import {PathfindersModel} from '@/models/PathfindersModel';
-import {Tags} from '@/cards/Tags';
+import {Tags} from '@/common/cards/Tags';
 import {range} from '@/utils/utils';
 import PlanetaryTrack from '@/client/components/pathfinders/PlanetaryTrack.vue';
 import {PlanetaryTracks as Tracks} from '@/pathfinders/PlanetaryTracks';

@@ -4,7 +4,7 @@ import {Card} from '../Card';
 import {CardType} from '../CardType';
 import {CardName} from '../../CardName';
 import {CardRenderer} from '../render/CardRenderer';
-import {Tags} from '../Tags';
+import {Tags} from '../../common/cards/Tags';
 import {Units} from '../../Units';
 
 export class PowerPlant extends Card implements IProjectCard {

@@ -2,7 +2,7 @@ import {IParty} from './IParty';
 import {Party} from './Party';
 import {PartyName} from './PartyName';
 import {Game} from '../../Game';
-import {Tags} from '../../cards/Tags';
+import {Tags} from '../../common/cards/Tags';
 import {Resources} from '../../common/Resources';
 import {Bonus} from '../Bonus';
 import {Policy} from '../Policy';

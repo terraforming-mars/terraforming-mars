@@ -1,5 +1,5 @@
 import {IAward} from '../awards/IAward';
-import {Tags} from '../cards/Tags';
+import {Tags} from '../common/cards/Tags';
 import {Player} from '../Player';
 
 export class FullMoon implements IAward {

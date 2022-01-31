@@ -2,7 +2,7 @@ import {IGlobalEvent, GlobalEvent} from './IGlobalEvent';
 import {GlobalEventName} from './GlobalEventName';
 import {PartyName} from '../parties/PartyName';
 import {Game} from '../../Game';
-import {Tags} from '../../cards/Tags';
+import {Tags} from '../../common/cards/Tags';
 import {Turmoil} from '../Turmoil';
 import {Player} from '../../Player';
 import {Board} from '../../boards/Board';

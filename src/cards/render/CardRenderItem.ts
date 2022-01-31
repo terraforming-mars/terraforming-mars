@@ -4,7 +4,7 @@
  */
 import {CardRenderItemType} from './CardRenderItemType';
 import {Size} from './Size';
-import {Tags} from '../Tags';
+import {Tags} from '../../common/cards/Tags';
 
 // Tags that belong in `CardRenderItem.secondaryTag` that aren't part of `Tags`.
 export enum AltSecondaryTag {

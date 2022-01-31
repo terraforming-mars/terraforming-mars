@@ -8,7 +8,7 @@ import {SpaceType} from '../../SpaceType';
 import {TileType} from '../../common/TileType';
 import {CardType} from '../CardType';
 import {IProjectCard} from '../IProjectCard';
-import {Tags} from '../Tags';
+import {Tags} from '../../common/cards/Tags';
 import {RemoveAnyPlants} from '../../deferredActions/RemoveAnyPlants';
 import {CardRenderer} from '../render/CardRenderer';
 import {all, digit} from '../Options';

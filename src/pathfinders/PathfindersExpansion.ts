@@ -54,13 +54,17 @@ export class PathfindersExpansion {
 
     // Communication Center hook
     if (card.cardType === CardType.EVENT) {
-      player.game.getPlayers().forEach((p) => {
-        p.playedCards.forEach((c) => {
+      let done = false;
+      for (const p of player.game.getPlayers()) {
+        for (const c of p.playedCards) {
           if (c.name === CardName.COMMUNICATION_CENTER) {
             player.addResourceTo(c, {qty: 1, log: true});
+            done = true;
+            break;
           }
-        });
-      });
+        }
+        if (done) break;
+      }
     }
   }
 

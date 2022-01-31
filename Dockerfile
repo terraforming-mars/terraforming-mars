@@ -1,5 +1,5 @@
-# Intermediate image to build solution
-FROM node:16.13.2-alpine3.15 AS builder
+# Intermediate image - base for building and installing dependencies
+FROM node:16.13.2-alpine3.15 AS install
 
 # Install required tools
 RUN apk add --no-cache --virtual .gyp git python3 make g++ \
@@ -10,20 +10,36 @@ WORKDIR /usr/src/app
 # Install dependencies first, to cache the image.
 COPY ["package.json", "package-lock.json", "./"]
 
-# Set node environment to 'production'. Go with 'development' for local deployments.
-# todo - not working yet # ENV NODE_ENV=production
-
+# Install dependencies
 RUN npm ci
 
-# Building the app.
+
+# Create image for application building
+FROM install AS builder
+
+# Copy sources
 COPY . .
 
+# Run building
 RUN npm run build 
+
+
+# Create image to prepare prod dependencies to be copied from
+FROM install AS installProd
+
+RUN npm ci --production --prefer-offline
+
 
 # Target image
 FROM node:16.13.2-alpine3.15
 
 WORKDIR /usr/src/app
+
+# Add user tfm
+RUN adduser -S -D -h /usr/src/app tfm \
+  && chown -R tfm:nogroup .
+
+USER tfm
 
 # Copy required files.
 
@@ -31,15 +47,11 @@ COPY ["package.json", "package-lock.json", "./"]
 
 COPY assets ./assets
 
-COPY --from=builder /usr/src/app/node_modules ./node_modules
+# Copy dependencies from intermediate image
+COPY --from=installProd /usr/src/app/node_modules ./node_modules
 
+# Copy built app from intermediate image
 COPY --from=builder /usr/src/app/build ./build
-
-# Add user tfm
-RUN adduser -S -D -h /usr/src/app tfm \
-  && chown -R tfm:nogroup .
-
-USER tfm
 
 # Run command.
 

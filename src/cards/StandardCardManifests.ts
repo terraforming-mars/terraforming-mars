@@ -1,5 +1,5 @@
 import {CardName} from '../CardName';
-import {GameModule} from '../GameModule';
+import {GameModule} from '../common/cards/GameModule';
 import {AcquiredCompany} from './base/AcquiredCompany';
 import {AdaptationTechnology} from './base/AdaptationTechnology';
 import {AdaptedLichen} from './base/AdaptedLichen';

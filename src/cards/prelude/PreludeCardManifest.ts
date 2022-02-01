@@ -1,5 +1,5 @@
 import {CardName} from '../../CardName';
-import {GameModule} from '../../GameModule';
+import {GameModule} from '../../common/cards/GameModule';
 import {CardManifest} from '../CardManifest';
 import {AcquiredSpaceAgency} from './AcquiredSpaceAgency';
 import {AlliedBanks} from './AlliedBanks';

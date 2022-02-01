@@ -1,6 +1,6 @@
 import {CardManifest} from '../CardManifest';
 import {CardName} from '../../CardName';
-import {GameModule} from '../../GameModule';
+import {GameModule} from '../../common/cards/GameModule';
 
 import {AdvancedPowerGrid} from './AdvancedPowerGrid';
 import {AgroDrones} from './AgroDrones';

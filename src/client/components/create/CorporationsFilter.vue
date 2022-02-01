@@ -33,7 +33,7 @@
 import Vue from 'vue';
 
 import {CardName} from '@/CardName';
-import {GameModule} from '@/GameModule';
+import {GameModule} from '@/common/cards/GameModule';
 import {byModule, byType, getCards, toName} from '@/client/cards/ClientCardManifest';
 import {CardType} from '@/cards/CardType';
 import {MultiMap} from 'mnemonist';

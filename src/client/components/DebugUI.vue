@@ -134,7 +134,7 @@
 
 import Vue from 'vue';
 import Card from '@/client/components/card/Card.vue';
-import {GameModule} from '@/GameModule';
+import {GameModule} from '@/common/cards/GameModule';
 import {CardType} from '@/cards/CardType';
 import {CardName} from '@/CardName';
 import {PreferencesManager} from '@/client/utils/PreferencesManager';

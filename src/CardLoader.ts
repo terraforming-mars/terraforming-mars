@@ -13,7 +13,7 @@ import {CardName} from './CardName';
 import {ICard} from './cards/ICard';
 import {ICardFactory} from './cards/ICardFactory';
 import {Deck} from './Deck';
-import {GameModule} from './GameModule';
+import {GameModule} from './common/cards/GameModule';
 import {GameOptions} from './Game';
 
 export class CardLoader {

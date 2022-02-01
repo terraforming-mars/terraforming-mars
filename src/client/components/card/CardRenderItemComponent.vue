@@ -186,11 +186,9 @@ export default Vue.extend({
         classes.push('card-resource');
         classes.push('card-resource-specialized-robot');
       } else if (type === CardRenderItemType.SEED) {
-        console.log('is seed', type);
         classes.push('card-resource');
         classes.push('card-resource-seed');
       } else if (type === CardRenderItemType.ORBITAL) {
-        console.log('is orbital', type);
         classes.push('card-resource');
         classes.push('card-resource-orbital');
       } else if (this.item.type === CardRenderItemType.MOON_COLONY) {

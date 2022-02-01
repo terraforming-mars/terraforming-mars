@@ -30,7 +30,7 @@ export class RemoveAnyPlants implements DeferredAction {
       let qtyToRemove = Math.min(candidate.plants, this.count);
 
       // Botanical Experience hook.
-      if (candidate.playedCards.some((card) => card.name === CardName.BOTANICAL_EXPERIENCE)) {
+      if (candidate.cardIsInEffect(CardName.BOTANICAL_EXPERIENCE)) {
         qtyToRemove = Math.ceil(qtyToRemove / 2);
       }
 

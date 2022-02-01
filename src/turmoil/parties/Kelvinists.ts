@@ -55,7 +55,7 @@ class KelvinistsPolicy01 implements Policy {
   description: string = 'Pay 10 M€ to increase your Energy and Heat production 1 step (Turmoil Kelvinists)';
 
   cost(player: Player): number {
-    return player.playedCards.some((card) => card.name === CardName.HIGH_TEMP_SUPERCONDUCTORS) ? 7: 10;
+    return player.cardIsInEffect(CardName.HIGH_TEMP_SUPERCONDUCTORS) ? 7: 10;
   }
   canAct(player: Player) {
     return player.canAfford(this.cost(player));

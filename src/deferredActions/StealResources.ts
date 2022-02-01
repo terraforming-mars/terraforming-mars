@@ -40,7 +40,7 @@ export class StealResources implements DeferredAction {
       let qtyToSteal = Math.min(candidate.getResource(this.resource), this.count);
 
       // Botanical Experience hook.
-      if (candidate.playedCards.some((card) => card.name === CardName.BOTANICAL_EXPERIENCE)) {
+      if (candidate.cardIsInEffect(CardName.BOTANICAL_EXPERIENCE)) {
         qtyToSteal = Math.ceil(qtyToSteal / 2);
       }
 

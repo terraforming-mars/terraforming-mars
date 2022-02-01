@@ -3,7 +3,7 @@ import {BioSol} from '../../../src/cards/pathfinders/BioSol';
 import {Game} from '../../../src/Game';
 import {Player} from '../../../src/Player';
 import {newTestGame, getTestPlayer} from '../../TestGame';
-import {Tags} from '../../../src/cards/Tags';
+import {Tags} from '../../../src/common/cards/Tags';
 import {TestingUtils} from '../../TestingUtils';
 
 describe('BioSol', function() {

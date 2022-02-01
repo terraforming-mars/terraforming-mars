@@ -8,7 +8,7 @@ import {CardRenderer} from '../../cards/render/CardRenderer';
 import {digit} from '../../cards/Options';
 
 const RENDER_DATA = CardRenderer.builder((b) => {
-  b.br.br.br.megacredits(-3).slash().tr(5, {digit, over: 10}).nbsp.production((pb) => pb.megacredits(1)).slash().influence();
+  b.br.br.megacredits(-3).slash().tr(5, {digit, over: 10}).nbsp.production((pb) => pb.megacredits(1)).slash().influence();
 });
 
 

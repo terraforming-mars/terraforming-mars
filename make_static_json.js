@@ -45,8 +45,8 @@ function generateAppVersion() {
   try {
     return child_process.execSync(`git log -1 --pretty=format:"%h %cD"`).toString();
   } catch (error) {
-    console.warn('unable to generate app version', error);
-    return 'unknown version';
+    console.error('unable to generate app version', error);
+    throw error;
   }
 }
 

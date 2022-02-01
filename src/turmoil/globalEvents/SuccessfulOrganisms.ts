@@ -8,7 +8,7 @@ import {CardRenderer} from '../../cards/render/CardRenderer';
 import {Size} from '../../cards/render/Size';
 
 const RENDER_DATA = CardRenderer.builder((b) => {
-  b.plants(1).slash().production((pb) => pb.plants(1)).nbsp.influence({size: Size.SMALL});
+  b.vSpace().br.plants(1).slash().production((pb) => pb.plants(1)).nbsp.influence({size: Size.SMALL});
 });
 
 

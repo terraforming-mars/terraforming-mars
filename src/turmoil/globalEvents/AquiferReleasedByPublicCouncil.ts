@@ -8,7 +8,7 @@ import {PlaceOceanTile} from '../../deferredActions/PlaceOceanTile';
 import {CardRenderer} from '../../cards/render/CardRenderer';
 
 const RENDER_DATA = CardRenderer.builder((b) => {
-  b.oceans(1).br.plants(1).steel(1).slash().influence();
+  b.oceans(1).nbsp.plants(1).steel(1).slash().influence();
 });
 
 export class AquiferReleasedByPublicCouncil extends GlobalEvent implements IGlobalEvent {

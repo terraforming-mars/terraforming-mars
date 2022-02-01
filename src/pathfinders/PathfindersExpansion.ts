@@ -1,7 +1,6 @@
 import {AddResourcesToCard} from '../deferredActions/AddResourcesToCard';
-// import {CardName} from '../CardName';
-// import {CardType} from '../cards/CardType';
-// import {CommunicationCenter} from '../cards/pathfinders/CommunicationCenter';
+import {CardName} from '../CardName';
+import {CardType} from '../cards/CardType';
 import {Game, GameOptions} from '../Game';
 import {GrantResourceDeferred} from './GrantResourceDeferred';
 import {ICard} from '../cards/ICard';
@@ -53,16 +52,20 @@ export class PathfindersExpansion {
       }
     });
 
-    // // Communication Center hook
-    // if (card.cardType === CardType.EVENT) {
-    //   player.game.getPlayers().forEach((p) => {
-    //     p.playedCards.forEach((c) => {
-    //       if (c.name === CardName.COMMUNICATION_CENTER) {
-    //         (c as CommunicationCenter).bonus(p);
-    //       }
-    //     });
-    //   });
-    // }
+    // Communication Center hook
+    if (card.cardType === CardType.EVENT) {
+      let done = false;
+      for (const p of player.game.getPlayers()) {
+        for (const c of p.playedCards) {
+          if (c.name === CardName.COMMUNICATION_CENTER) {
+            player.addResourceTo(c, {qty: 1, log: true});
+            done = true;
+            break;
+          }
+        }
+        if (done) break;
+      }
+    }
   }
 
   private static readonly trackMap: Map<Tags, PlanetaryTrack | undefined> = new Map([
@@ -268,5 +271,16 @@ export class PathfindersExpansion {
     data.vps
       .filter((vp) => vp.id === player.id)
       .forEach((vp) => victoryPointsBreakdown.setVictoryPoints('planetary tracks', vp.points, vp.tag));
+  }
+
+  public static communicationCenterHook(card: ICard, game: Game) {
+    const owner = game.getCardPlayer(card.name);
+    while (card.resourceCount >= 3) {
+      card.resourceCount -= 3;
+      owner.drawCard(1);
+      owner.game.log('${0} automatically removed 3 data from ${1} to draw a card.', (b) => {
+        b.player(owner).card(card);
+      });
+    }
   }
 }

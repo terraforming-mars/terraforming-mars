@@ -6,7 +6,8 @@ import {Turmoil} from '../Turmoil';
 import {CardRenderer} from '../../cards/render/CardRenderer';
 
 const RENDER_DATA = CardRenderer.builder((b) => {
-  b.cards(1).text('w/rsrs').colon().wild(1).br.cards(1).slash().influence();
+  b.br.cards(1).text('w/rsrs').colon().wild(1).nbsp;
+  b.cards(1).slash().influence();
 });
 
 export class SponsoredProjects extends GlobalEvent implements IGlobalEvent {

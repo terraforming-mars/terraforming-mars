@@ -2,7 +2,7 @@ import {Game} from '../../../src/Game';
 import {Wetlands} from '../../../src/cards/pathfinders/Wetlands';
 import {expect} from 'chai';
 import {TileType} from '../../../src/common/TileType';
-import {SpaceType} from '../../../src/SpaceType';
+import {SpaceType} from '../../../src/common/boards/SpaceType';
 import {TestPlayers} from '../../TestPlayers';
 import {TestingUtils} from '../../TestingUtils';
 import {TestPlayer} from '../../TestPlayer';

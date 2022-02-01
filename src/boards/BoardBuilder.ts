@@ -1,7 +1,7 @@
 import {ISpace, SpaceId} from './ISpace';
 import {SpaceBonus} from '../common/boards/SpaceBonus';
 import {SpaceName} from '../SpaceName';
-import {SpaceType} from '../SpaceType';
+import {SpaceType} from '../common/boards/SpaceType';
 import {Random} from '../Random';
 
 export class BoardBuilder {

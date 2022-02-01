@@ -3,7 +3,7 @@ import {OriginalBoard} from '../../src/boards/OriginalBoard';
 import {Player} from '../../src/Player';
 import {TileType} from '../../src/common/TileType';
 import {ISpace} from '../../src/boards/ISpace';
-import {SpaceType} from '../../src/SpaceType';
+import {SpaceType} from '../../src/common/boards/SpaceType';
 import {TestPlayers} from '../TestPlayers';
 import {Board} from '../../src/boards/Board';
 import {Color} from '../../src/Color';

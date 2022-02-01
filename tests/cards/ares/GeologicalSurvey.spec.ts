@@ -6,7 +6,7 @@ import {Game} from '../../../src/Game';
 import {Phase} from '../../../src/Phase';
 import {Player} from '../../../src/Player';
 import {SpaceBonus} from '../../../src/common/boards/SpaceBonus';
-import {SpaceType} from '../../../src/SpaceType';
+import {SpaceType} from '../../../src/common/boards/SpaceType';
 import {TileType} from '../../../src/common/TileType';
 import {ARES_OPTIONS_NO_HAZARDS} from '../../ares/AresTestHelper';
 import {EmptyBoard} from '../../ares/EmptyBoard';

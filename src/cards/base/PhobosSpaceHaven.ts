@@ -4,7 +4,7 @@ import {Card} from '../Card';
 import {CardType} from '../CardType';
 import {Player} from '../../Player';
 import {SpaceName} from '../../SpaceName';
-import {SpaceType} from '../../SpaceType';
+import {SpaceType} from '../../common/boards/SpaceType';
 import {Resources} from '../../common/Resources';
 import {CardName} from '../../CardName';
 import {CardRenderer} from '../render/CardRenderer';

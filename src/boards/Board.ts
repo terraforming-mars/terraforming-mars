@@ -1,7 +1,7 @@
 import {ISpace, SpaceId} from './ISpace';
 import {Player} from '../Player';
 import {PlayerId} from '../common/Types';
-import {SpaceType} from '../SpaceType';
+import {SpaceType} from '../common/boards/SpaceType';
 import {BASE_OCEAN_TILES as UNCOVERED_OCEAN_TILES, CITY_TILES, GREENERY_TILES, OCEAN_TILES, OCEAN_UPGRADE_TILES, TileType} from '../common/TileType';
 import {AresHandler} from '../ares/AresHandler';
 import {SerializedBoard, SerializedSpace} from './SerializedBoard';

@@ -2,7 +2,7 @@ import {TileType} from '../../common/TileType';
 import {Card} from '../Card';
 import {CardType} from '../CardType';
 import {IProjectCard} from '../IProjectCard';
-import {SpaceType} from '../../SpaceType';
+import {SpaceType} from '../../common/boards/SpaceType';
 import {Player} from '../../Player';
 import {Tags} from '../../common/cards/Tags';
 import {SelectSpace} from '../../inputs/SelectSpace';

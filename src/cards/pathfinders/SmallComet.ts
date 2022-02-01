@@ -7,7 +7,7 @@ import {CardRenderer} from '../render/CardRenderer';
 import {Resources} from '../../common/Resources';
 import {Tags} from '../../common/cards/Tags';
 import {SelectSpace} from '../../inputs/SelectSpace';
-import {SpaceType} from '../../SpaceType';
+import {SpaceType} from '../../common/boards/SpaceType';
 import {ISpace} from '../../boards/ISpace';
 import {all} from '../Options';
 

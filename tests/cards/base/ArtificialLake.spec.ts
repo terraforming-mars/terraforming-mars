@@ -4,7 +4,7 @@ import * as constants from '../../../src/constants';
 import {Game} from '../../../src/Game';
 import {SelectSpace} from '../../../src/inputs/SelectSpace';
 import {TestPlayer} from '../../TestPlayer';
-import {SpaceType} from '../../../src/SpaceType';
+import {SpaceType} from '../../../src/common/boards/SpaceType';
 import {TileType} from '../../../src/common/TileType';
 import {TestPlayers} from '../../TestPlayers';
 import {TestingUtils} from '../../TestingUtils';

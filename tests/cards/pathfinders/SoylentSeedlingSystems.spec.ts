@@ -9,7 +9,7 @@ import {Tags} from '../../../src/common/cards/Tags';
 import {Celestic} from '../../../src/cards/venusNext/Celestic';
 import {GreeneryStandardProject} from '../../../src/cards/base/standardProjects/GreeneryStandardProject';
 import {TileType} from '../../../src/common/TileType';
-import {SpaceType} from '../../../src/SpaceType';
+import {SpaceType} from '../../../src/common/boards/SpaceType';
 
 describe('SoylentSeedlingSystems', function() {
   let card: SoylentSeedlingSystems;

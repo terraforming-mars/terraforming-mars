@@ -4,7 +4,7 @@ import {Game} from '../../../src/Game';
 import {Player} from '../../../src/Player';
 import {Resources} from '../../../src/common/Resources';
 import {SpaceBonus} from '../../../src/common/boards/SpaceBonus';
-import {SpaceType} from '../../../src/SpaceType';
+import {SpaceType} from '../../../src/common/boards/SpaceType';
 import {Phase} from '../../../src/Phase';
 import {TestingUtils} from '../../TestingUtils';
 import {TestPlayers} from '../../TestPlayers';

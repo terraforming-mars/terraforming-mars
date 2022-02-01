@@ -12,7 +12,7 @@ import {CardRequirements} from '../CardRequirements';
 import {PartyName} from '../../turmoil/parties/PartyName';
 import {Resources} from '../../common/Resources';
 import {SpaceName} from '../../SpaceName';
-import {SpaceType} from '../../SpaceType';
+import {SpaceType} from '../../common/boards/SpaceType';
 
 export class VeneraBase extends Card implements IProjectCard, IActionCard {
   constructor() {

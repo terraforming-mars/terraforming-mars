@@ -2,7 +2,7 @@ import {expect} from 'chai';
 import {SpaceBonus} from '../../src/common/boards/SpaceBonus';
 import {Player} from '../../src/Player';
 import {Resources} from '../../src/common/Resources';
-import {SpaceType} from '../../src/SpaceType';
+import {SpaceType} from '../../src/common/boards/SpaceType';
 import {TileType} from '../../src/common/TileType';
 import {ISpace} from '../../src/boards/ISpace';
 import {TestingUtils} from '../TestingUtils';

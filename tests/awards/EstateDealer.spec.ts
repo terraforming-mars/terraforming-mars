@@ -1,7 +1,7 @@
 import {expect} from 'chai';
 import {Game} from '../../src/Game';
 import {EstateDealer} from '../../src/awards/EstateDealer';
-import {SpaceType} from '../../src/SpaceType';
+import {SpaceType} from '../../src/common/boards/SpaceType';
 import {TileType} from '../../src/common/TileType';
 import {TestPlayers} from '../TestPlayers';
 

@@ -13,7 +13,7 @@ import {OrOptions} from '../../inputs/OrOptions';
 import {SelectOption} from '../../inputs/SelectOption';
 import {SelectHowToPayDeferred} from '../../deferredActions/SelectHowToPayDeferred';
 import {DrawCards} from '../../deferredActions/DrawCards';
-import {SpaceType} from '../../SpaceType';
+import {SpaceType} from '../../common/boards/SpaceType';
 import {SpaceBonus} from '../../common/boards/SpaceBonus';
 import {Phase} from '../../Phase';
 import {Units} from '../../Units';

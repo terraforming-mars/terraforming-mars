@@ -44,7 +44,7 @@ import {SelectSpace} from './inputs/SelectSpace';
 import {RobotCard, SelfReplicatingRobots} from './cards/promo/SelfReplicatingRobots';
 import {SerializedCard} from './SerializedCard';
 import {SerializedPlayer} from './SerializedPlayer';
-import {SpaceType} from './SpaceType';
+import {SpaceType} from './common/boards/SpaceType';
 import {StormCraftIncorporated} from './cards/colonies/StormCraftIncorporated';
 import {Tags} from './common/cards/Tags';
 import {VictoryPointsBreakdown} from './VictoryPointsBreakdown';

@@ -5,7 +5,7 @@ import {CardType} from '../CardType';
 import {CardName} from '../../CardName';
 import {CardRenderer} from '../render/CardRenderer';
 import {Tags} from '../../common/cards/Tags';
-import {SpaceType} from '../../SpaceType';
+import {SpaceType} from '../../common/boards/SpaceType';
 import {Resources} from '../../common/Resources';
 import {TileType} from '../../common/TileType';
 import {all} from '../Options';

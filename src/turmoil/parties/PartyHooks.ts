@@ -1,6 +1,6 @@
 import {Player} from '../../Player';
 import {PartyName} from './PartyName';
-import {SpaceType} from '../../SpaceType';
+import {SpaceType} from '../../common/boards/SpaceType';
 import {Phase} from '../../Phase';
 import {PolicyId} from '../Policy';
 import {Resources} from '../../common/Resources';

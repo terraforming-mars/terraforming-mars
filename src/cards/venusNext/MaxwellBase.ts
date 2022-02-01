@@ -2,7 +2,7 @@ import {Tags} from '../../common/cards/Tags';
 import {CardType} from '../CardType';
 import {Player} from '../../Player';
 import {SpaceName} from '../../SpaceName';
-import {SpaceType} from '../../SpaceType';
+import {SpaceType} from '../../common/boards/SpaceType';
 import {Resources} from '../../common/Resources';
 import {IActionCard, ICard} from '../ICard';
 import {SelectCard} from '../../inputs/SelectCard';

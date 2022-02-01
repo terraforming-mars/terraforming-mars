@@ -18,7 +18,7 @@ import {ArcticAlgae} from '../src/cards/base/ArcticAlgae';
 import {Ecologist} from '../src/milestones/Ecologist';
 import {OrOptions} from '../src/inputs/OrOptions';
 import {BoardName} from '../src/boards/BoardName';
-import {SpaceType} from '../src/SpaceType';
+import {SpaceType} from '../src/common/boards/SpaceType';
 import {Helion} from '../src/cards/corporation/Helion';
 import {CardName} from '../src/CardName';
 import {Player} from '../src/Player';

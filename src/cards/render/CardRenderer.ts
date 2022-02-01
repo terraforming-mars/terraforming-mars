@@ -226,8 +226,8 @@ class Builder {
     return this._appendToRow(new CardRenderItem(CardRenderItemType.SCIENCE, amount, options));
   }
 
-  public trade(): Builder {
-    return this._appendToRow(new CardRenderItem(CardRenderItemType.TRADE));
+  public trade(options?: ItemOptions): Builder {
+    return this._appendToRow(new CardRenderItem(CardRenderItemType.TRADE, -1, options));
   }
   public tradeFleet(): Builder {
     return this._appendToRow(new CardRenderItem(CardRenderItemType.TRADE_FLEET));
@@ -405,6 +405,11 @@ class Builder {
 
   public seed(): Builder {
     this._appendToRow(new CardRenderItem(CardRenderItemType.SEED, 1));
+    return this;
+  }
+
+  public orbital(): Builder {
+    this._appendToRow(new CardRenderItem(CardRenderItemType.ORBITAL, 1));
     return this;
   }
 

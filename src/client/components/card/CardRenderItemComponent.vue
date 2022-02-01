@@ -113,6 +113,9 @@ export default Vue.extend({
         classes.push('card-resource-science');
       } else if (type === CardRenderItemType.TRADE) {
         classes.push('card-resource-trade');
+        if (this.item.size === Size.SMALL) {
+          classes.push('card-resource-colony--S');
+        }
       } else if (type === CardRenderItemType.COLONIES) {
         classes.push('card-resource-colony');
         // TODO (chosta): think about an abstraction for item size
@@ -185,6 +188,9 @@ export default Vue.extend({
       } else if (type === CardRenderItemType.SEED) {
         classes.push('card-resource');
         classes.push('card-resource-seed');
+      } else if (type === CardRenderItemType.ORBITAL) {
+        classes.push('card-resource');
+        classes.push('card-resource-orbital');
       } else if (this.item.type === CardRenderItemType.MOON_COLONY) {
         if (this.item.secondaryTag === AltSecondaryTag.MOON_COLONY_RATE) {
           classes.push(sized('card-tile-lunar-colony-rate', this.item.size));
@@ -229,6 +235,9 @@ export default Vue.extend({
         classes.push('card-planetary-track');
       }
 
+      if (this.item.secondaryTag === AltSecondaryTag.NO_PLANETARY_TAG) {
+        classes.push('tag-clone');
+      }
       // round tags
       if (this.item.isPlayed) {
         // override resource behavior

@@ -54,6 +54,8 @@ export default Vue.extend({
         return 'card-resource-specialized-robot';
       case ResourceType.SEED:
         return 'card-resource-seed';
+      case ResourceType.ORBITAL:
+        return 'card-resource-orbital';
       default:
         return '';
       }

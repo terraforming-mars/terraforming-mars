@@ -829,6 +829,13 @@
             .card-bio-sol-logo {
                 background-image: url(./assets/pathfinders/corp-logo-bio-sol.png);
                 height: 45px;
+                width: 175px;
+                background-size: 175px 45px;
+                margin-top: 10px;
+            }
+            .card-adhai-high-orbit-constructions-logo {
+                background-image: url(./assets/pathfinders/corp-logo-adhai-high-orbit-constructions.png);
+                height: 45px;
                 width: 184px;
                 background-size: 184px 45px;
                 margin-top: 10px;
@@ -1080,6 +1087,10 @@
                 color: #0000 !important;
                 background-image: url(./assets/resources/seed.png);
             }
+            .card-resource-orbital {
+                color: #0000 !important;
+                background-image: url(./assets/resources/orbital.png);
+            }
             .card-resource-cube {
                 color: #0000 !important;
                 background-image: url(./assets/cube.png);
@@ -1228,6 +1239,11 @@
                 width: 48px;
                 background-size: 48px;
             }
+            .card-resource-trade--S {
+                height: 30px !important;
+                width: 36px !important;
+                background-size: 36px !important;
+            }
             .card-resource-trade-fleet {
                 background-image: url(./assets/tiles/trade.png);
                 height: 40px;
@@ -1374,6 +1390,25 @@
                 top: -7px;
                 height: 16px;
                 border-radius: 50%;
+            }
+            .card-tag-no_planetary_tag {
+                .tag-clone();
+            }
+            .card-tag-no_planetary_tag:after {
+                content: '';
+                height: 20px;
+                border-left: 2px dashed #f00;
+                position: absolute;
+                transform: rotate(45deg);
+                margin-left: -1px;
+            }
+            .card-tag-no_planetary_tag:before {
+                content: '';
+                height: 20px;
+                border-left: 2px dashed #f00;
+                position: absolute;
+                transform: rotate(-45deg);
+                margin-left: -1px;
             }
             .card-tag-turmoil:after {
                 position: absolute;
@@ -2091,7 +2126,7 @@ each(@parties, {
 
     // This copies stuff above, but scoped inside card-resources-counter. It shouldn't be necessary if
     // the stuff above wasn't contained inside card-content.
-    @resource_types: microbe, animal, science, floater, fighter, camp, asteroid, disease, preservation, data, syndicate-fleet, cube, venusian-habitat, specialized-robot, seed;
+    @resource_types: microbe, animal, science, floater, fighter, camp, asteroid, disease, preservation, data, syndicate-fleet, cube, venusian-habitat, specialized-robot, seed, orbital;
     each(@resource_types, {
       .card-resource-@{value} {
         background-image: url("./assets/resources/@{value}.png");

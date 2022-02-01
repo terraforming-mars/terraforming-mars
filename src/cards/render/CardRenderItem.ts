@@ -21,6 +21,8 @@ export enum AltSecondaryTag {
   MOON_MINING_RATE = 'moon-mine',
   MOON_COLONY_RATE = 'moon-colony',
   MOON_LOGISTICS_RATE = 'moon-road',
+
+  NO_PLANETARY_TAG = 'no_planetary_tag',
 }
 
 export interface ItemOptions {

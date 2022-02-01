@@ -60,6 +60,7 @@ const handlers: Map<string, IHandler> = new Map(
     ['/solo', ServeApp.INSTANCE],
     ['/spectator', ServeApp.INSTANCE],
     ['/styles.css', ServeAsset.INSTANCE],
+    ['/sw.js', ServeAsset.INSTANCE],
     ['/the-end', ServeApp.INSTANCE],
   ],
 );

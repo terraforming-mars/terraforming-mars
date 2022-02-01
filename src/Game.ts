@@ -1526,9 +1526,15 @@ export class Game implements ISerializable<SerializedGame> {
     this.gameAge++;
   }
 
-  public someoneHasResourceProduction(resource: Resources, minQuantity: number = 1): boolean {
+  public someoneCanHaveProductionReduced(resource: Resources, minQuantity: number = 1): boolean {
     // in soloMode you don't have to decrease resources
-    return this.getPlayers().some((p) => p.getProduction(resource) >= minQuantity) || this.isSoloMode();
+    if (this.isSoloMode()) return true;
+    return this.getPlayers().some((p) => {
+      if (p.getProduction(resource) < minQuantity) return false;
+      // The pathfindersExpansion test is just an optimization for non-Pathfinders games.
+      if (this.gameOptions.pathfindersExpansion && p.cardIsInEffect(CardName.PRIVATE_SECURITY)) return false;
+      return true;
+    });
   }
 
   public discardForCost(toPlace: TileType) {

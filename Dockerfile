@@ -1,28 +1,60 @@
-FROM node:16-alpine3.15
+# Intermediate image - base for building and installing dependencies
+FROM node:16.13.2-alpine3.15 AS install
 
-EXPOSE 8080
-
-LABEL maintainer="bafolts" \
-      name="terraforming-mars" \
-      Version="1.0"
+# Install required tools
+RUN apk add --no-cache --virtual .gyp git python3 make g++ \
+  && ln -sf python3 /usr/bin/python
 
 WORKDIR /usr/src/app
+
+# Install dependencies first, to cache the image.
+COPY ["package.json", "package-lock.json", "./"]
+
+# Install dependencies
+RUN npm ci
+
+
+# Create image for application building
+FROM install AS builder
+
+# Copy sources
 COPY . .
 
-RUN mkdir -p /usr/src/app/db \
-  && apk add --no-cache --virtual .gyp git python3 make g++ \
-  && ln -sf python3 /usr/bin/python \
-  && npm install \
-  && npm run build \
-  && apk del --no-cache .gyp \
-  && rm /usr/bin/python \
-  && rm -rf .git \
-  && rm -rf /tmp/* \
-  && rm -rf /root/.cache \
-  && rm -rf /root/.npm \
-  && adduser -S -D -h /usr/src/app tfm \
+# Run building
+RUN npm run build 
+
+
+# Create image to prepare prod dependencies to be copied from
+FROM install AS installProd
+
+RUN npm ci --production --prefer-offline
+
+
+# Target image
+FROM node:16.13.2-alpine3.15
+
+WORKDIR /usr/src/app
+
+# Add user tfm
+RUN adduser -S -D -h /usr/src/app tfm \
   && chown -R tfm:nogroup .
 
 USER tfm
 
-CMD [ "npm", "run", "start" ]
+# Copy required files.
+
+COPY ["package.json", "package-lock.json", "./"]
+
+COPY assets ./assets
+
+# Copy dependencies from intermediate image
+COPY --from=installProd /usr/src/app/node_modules ./node_modules
+
+# Copy built app from intermediate image
+COPY --from=builder /usr/src/app/build ./build
+
+# Run command.
+
+EXPOSE 8080
+
+CMD npm run start

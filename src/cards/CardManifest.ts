@@ -1,6 +1,6 @@
 import {CardName} from '../CardName';
 import {Deck} from '../Deck';
-import {GameModule} from '../GameModule';
+import {GameModule} from '../common/cards/GameModule';
 import {CorporationCard} from './corporation/CorporationCard';
 import {ICardFactory} from './ICardFactory';
 import {IProjectCard} from './IProjectCard';

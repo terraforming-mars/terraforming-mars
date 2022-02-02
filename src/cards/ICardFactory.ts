@@ -1,5 +1,5 @@
 import {CardName} from '../CardName';
-import {GameModule} from '../GameModule';
+import {GameModule} from '../common/cards/GameModule';
 
 export interface ICardFactory<T> {
     cardName: CardName;

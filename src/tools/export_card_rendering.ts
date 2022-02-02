@@ -5,7 +5,7 @@ import {ALL_CARD_MANIFESTS} from '../cards/AllCards';
 import {CardManifest} from '../cards/CardManifest';
 import {ICard} from '../cards/ICard';
 import {Deck} from '../Deck';
-import {GameModule} from '../GameModule';
+import {GameModule} from '../common/cards/GameModule';
 
 const json: Array<any> = [];
 

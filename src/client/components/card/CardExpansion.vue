@@ -5,7 +5,7 @@
 <script lang="ts">
 
 import Vue from 'vue';
-import {GameModule} from '@/GameModule';
+import {GameModule} from '@/common/cards/GameModule';
 
 const MODULE_TO_CSS: Map<GameModule, string> = new Map([
   [GameModule.CorpEra, 'corporate-icon'],

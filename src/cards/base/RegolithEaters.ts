@@ -35,36 +35,36 @@ export class RegolithEaters extends Card implements IActionCard, IProjectCard, I
     });
   }
 
-    public override resourceCount = 0;
+  public override resourceCount = 0;
 
-    public play(_player: Player) {
+  public play(_player: Player) {
+    return undefined;
+  }
+  public canAct(): boolean {
+    return true;
+  }
+  public action(player: Player) {
+    if (this.resourceCount < 2) {
+      player.addResourceTo(this, {log: true});
       return undefined;
     }
-    public canAct(): boolean {
-      return true;
-    }
-    public action(player: Player) {
-      if (this.resourceCount < 2) {
-        player.addResourceTo(this, {log: true});
-        return undefined;
-      }
 
-      const orOptions = new OrOptions();
+    const orOptions = new OrOptions();
 
-      if (player.canAfford(0, {tr: {oxygen: 1}})) {
-        orOptions.options.push(new SelectOption('Remove 2 microbes to raise oxygen level 1 step', 'Remove microbes', () => {
-          player.removeResourceFrom(this, 2);
-          LogHelper.logRemoveResource(player, this, 2, 'raise oxygen 1 step');
-          return player.game.increaseOxygenLevel(player, 1);
-        }));
-      }
-
-      orOptions.options.push(new SelectOption('Add 1 microbe to this card', 'Add microbe', () => {
-        player.addResourceTo(this, {log: true});
-        return undefined;
+    if (player.canAfford(0, {tr: {oxygen: 1}})) {
+      orOptions.options.push(new SelectOption('Remove 2 microbes to raise oxygen level 1 step', 'Remove microbes', () => {
+        player.removeResourceFrom(this, 2);
+        LogHelper.logRemoveResource(player, this, 2, 'raise oxygen 1 step');
+        return player.game.increaseOxygenLevel(player, 1);
       }));
-
-      if (orOptions.options.length === 1) return orOptions.options[0].cb();
-      return orOptions;
     }
+
+    orOptions.options.push(new SelectOption('Add 1 microbe to this card', 'Add microbe', () => {
+      player.addResourceTo(this, {log: true});
+      return undefined;
+    }));
+
+    if (orOptions.options.length === 1) return orOptions.options[0].cb();
+    return orOptions;
+  }
 }

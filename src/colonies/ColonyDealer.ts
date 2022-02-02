@@ -83,50 +83,50 @@ export function loadColoniesFromJSON(colonies: Array<SerializedColony>): Array<C
 }
 
 export class ColonyDealer {
-    public coloniesDeck: Array<Colony> = [];
-    public discardedColonies: Array<Colony> = [];
+  public coloniesDeck: Array<Colony> = [];
+  public discardedColonies: Array<Colony> = [];
 
-    public shuffle(cards: Array<Colony>): Array<Colony> {
-      const deck: Array<Colony> = [];
-      const copy = cards.slice();
-      while (copy.length) {
-        deck.push(copy.splice(Math.floor(Math.random() * copy.length), 1)[0]);
-      }
-      return deck;
+  public shuffle(cards: Array<Colony>): Array<Colony> {
+    const deck: Array<Colony> = [];
+    const copy = cards.slice();
+    while (copy.length) {
+      deck.push(copy.splice(Math.floor(Math.random() * copy.length), 1)[0]);
     }
-    public discard(card: Colony): void {
-      this.discardedColonies.push(card);
+    return deck;
+  }
+  public discard(card: Colony): void {
+    this.discardedColonies.push(card);
+  }
+  public drawColonies(players: number, allowList: Array<ColonyName> = [], venusNextExtension: boolean, turmoilExtension: boolean, addCommunityColonies: boolean = false): Array<Colony> {
+    let count: number = players + 2;
+    let colonyTiles = ALL_COLONIES_TILES;
+    if (addCommunityColonies) colonyTiles = colonyTiles.concat(COMMUNITY_COLONIES_TILES);
+    if (!venusNextExtension) colonyTiles = colonyTiles.filter((c) => c.colonyName !== ColonyName.VENUS);
+    if (!turmoilExtension) colonyTiles = colonyTiles.filter((c) => c.colonyName !== ColonyName.PALLAS);
+
+    if (allowList.length === 0) {
+      colonyTiles.forEach((e) => allowList.push(e.colonyName));
     }
-    public drawColonies(players: number, allowList: Array<ColonyName> = [], venusNextExtension: boolean, turmoilExtension: boolean, addCommunityColonies: boolean = false): Array<Colony> {
-      let count: number = players + 2;
-      let colonyTiles = ALL_COLONIES_TILES;
-      if (addCommunityColonies) colonyTiles = colonyTiles.concat(COMMUNITY_COLONIES_TILES);
-      if (!venusNextExtension) colonyTiles = colonyTiles.filter((c) => c.colonyName !== ColonyName.VENUS);
-      if (!turmoilExtension) colonyTiles = colonyTiles.filter((c) => c.colonyName !== ColonyName.PALLAS);
-
-      if (allowList.length === 0) {
-        colonyTiles.forEach((e) => allowList.push(e.colonyName));
-      }
-      if (players === 1) {
-        count = 4;
-      } else if (players === 2) {
-        count = 5;
-      }
-
-      const tempDeck = this.shuffle(
-        colonyTiles.filter(
-          (el) => allowList.includes(el.colonyName),
-        ).map(
-          (cf) => new cf.Factory(),
-        ),
-      );
-      for (let i = 0; i < count; i++) {
-        this.coloniesDeck.push(tempDeck.pop()!);
-      }
-      this.discardedColonies.push(...tempDeck);
-      this.discardedColonies.sort((a, b) => (a.name > b.name) ? 1 : -1);
-      this.coloniesDeck.sort((a, b) => (a.name > b.name) ? 1 : -1);
-
-      return this.coloniesDeck;
+    if (players === 1) {
+      count = 4;
+    } else if (players === 2) {
+      count = 5;
     }
+
+    const tempDeck = this.shuffle(
+      colonyTiles.filter(
+        (el) => allowList.includes(el.colonyName),
+      ).map(
+        (cf) => new cf.Factory(),
+      ),
+    );
+    for (let i = 0; i < count; i++) {
+      this.coloniesDeck.push(tempDeck.pop()!);
+    }
+    this.discardedColonies.push(...tempDeck);
+    this.discardedColonies.sort((a, b) => (a.name > b.name) ? 1 : -1);
+    this.coloniesDeck.sort((a, b) => (a.name > b.name) ? 1 : -1);
+
+    return this.coloniesDeck;
+  }
 }

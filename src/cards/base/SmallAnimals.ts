@@ -41,20 +41,20 @@ export class SmallAnimals extends Card implements IActionCard, IProjectCard, IRe
       },
     });
   }
-    public override resourceCount = 0;
-    public override canPlay(player: Player): boolean {
-      return player.game.someoneHasResourceProduction(Resources.PLANTS, 1);
-    }
-    public play(player: Player) {
-      player.game.defer(
-        new DecreaseAnyProduction(player, Resources.PLANTS, {count: 1}));
-      return undefined;
-    }
-    public canAct(): boolean {
-      return true;
-    }
-    public action(player: Player) {
-      player.addResourceTo(this);
-      return undefined;
-    }
+  public override resourceCount = 0;
+  public override canPlay(player: Player): boolean {
+    return player.game.someoneHasResourceProduction(Resources.PLANTS, 1);
+  }
+  public play(player: Player) {
+    player.game.defer(
+      new DecreaseAnyProduction(player, Resources.PLANTS, {count: 1}));
+    return undefined;
+  }
+  public canAct(): boolean {
+    return true;
+  }
+  public action(player: Player) {
+    player.addResourceTo(this);
+    return undefined;
+  }
 }

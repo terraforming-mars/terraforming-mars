@@ -42,21 +42,21 @@ export class Livestock extends Card implements IActionCard, IProjectCard, IResou
     });
   }
 
-    public override resourceCount = 0;
-    public override canPlay(player: Player): boolean {
-      return player.getProduction(Resources.PLANTS) >= 1;
-    }
-    public play(player: Player) {
-      player.addProduction(Resources.PLANTS, -1);
-      player.addProduction(Resources.MEGACREDITS, 2);
-      return undefined;
-    }
-    public canAct(): boolean {
-      return true;
-    }
-    public action(player: Player) {
-      player.addResourceTo(this);
-      return undefined;
-    }
+  public override resourceCount = 0;
+  public override canPlay(player: Player): boolean {
+    return player.getProduction(Resources.PLANTS) >= 1;
+  }
+  public play(player: Player) {
+    player.addProduction(Resources.PLANTS, -1);
+    player.addProduction(Resources.MEGACREDITS, 2);
+    return undefined;
+  }
+  public canAct(): boolean {
+    return true;
+  }
+  public action(player: Player) {
+    player.addResourceTo(this);
+    return undefined;
+  }
 }
 

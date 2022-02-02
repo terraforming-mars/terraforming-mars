@@ -34,36 +34,36 @@ export class OlympusConference extends Card implements IProjectCard, IResourceCa
     });
   }
 
-    public override resourceCount: number = 0;
+  public override resourceCount: number = 0;
 
-    public onCardPlayed(player: Player, card: IProjectCard) {
-      const scienceTags = card.tags.filter((tag) => tag === Tags.SCIENCE).length;
-      for (let i = 0; i < scienceTags; i++) {
-        player.game.defer(new DeferredAction(
-          player,
-          () => {
-            // Can't remove a resource
-            if (this.resourceCount === 0) {
+  public onCardPlayed(player: Player, card: IProjectCard) {
+    const scienceTags = card.tags.filter((tag) => tag === Tags.SCIENCE).length;
+    for (let i = 0; i < scienceTags; i++) {
+      player.game.defer(new DeferredAction(
+        player,
+        () => {
+          // Can't remove a resource
+          if (this.resourceCount === 0) {
+            player.addResourceTo(this, 1);
+            return undefined;
+          }
+          return new OrOptions(
+            new SelectOption('Remove a science resource from this card to draw a card', 'Remove resource', () => {
+              player.removeResourceFrom(this);
+              player.drawCard();
+              return undefined;
+            }),
+            new SelectOption('Add a science resource to this card', 'Add resource', () => {
               player.addResourceTo(this, 1);
               return undefined;
-            }
-            return new OrOptions(
-              new SelectOption('Remove a science resource from this card to draw a card', 'Remove resource', () => {
-                player.removeResourceFrom(this);
-                player.drawCard();
-                return undefined;
-              }),
-              new SelectOption('Add a science resource to this card', 'Add resource', () => {
-                player.addResourceTo(this, 1);
-                return undefined;
-              }),
-            );
-          },
-        ), -1); // Unshift that deferred action
-      }
-      return undefined;
+            }),
+          );
+        },
+      ), -1); // Unshift that deferred action
     }
-    public play() {
-      return undefined;
-    }
+    return undefined;
+  }
+  public play() {
+    return undefined;
+  }
 }

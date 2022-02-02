@@ -25,6 +25,9 @@ module.exports = {
     'no-var': 'error',
     'prefer-const': 'error',
     'indent': ['error', 2],
-    'require-jsdoc': 'off'
+    'require-jsdoc': 'off',
+    // Should turn this back on, but for now, turn it off.
+    // https://eslint.vuejs.org/rules/multi-word-component-names.html
+    'vue/multi-word-component-names': 'warn',
   },
 };

@@ -40,21 +40,21 @@ export class Birds extends Card implements IActionCard, IProjectCard, IResourceC
     });
   }
 
-    public override resourceCount = 0;
+  public override resourceCount = 0;
 
-    public override canPlay(player: Player): boolean {
-      return player.game.someoneHasResourceProduction(Resources.PLANTS, 2);
-    }
-    public play(player: Player) {
-      player.game.defer(
-        new DecreaseAnyProduction(player, Resources.PLANTS, {count: 2}));
-      return undefined;
-    }
-    public canAct(): boolean {
-      return true;
-    }
-    public action(player: Player) {
-      player.addResourceTo(this);
-      return undefined;
-    }
+  public override canPlay(player: Player): boolean {
+    return player.game.someoneHasResourceProduction(Resources.PLANTS, 2);
+  }
+  public play(player: Player) {
+    player.game.defer(
+      new DecreaseAnyProduction(player, Resources.PLANTS, {count: 2}));
+    return undefined;
+  }
+  public canAct(): boolean {
+    return true;
+  }
+  public action(player: Player) {
+    player.addResourceTo(this);
+    return undefined;
+  }
 }

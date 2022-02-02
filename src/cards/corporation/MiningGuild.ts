@@ -2,7 +2,7 @@ import {Card} from '../Card';
 import {Tags} from '../../common/cards/Tags';
 import {Player} from '../../Player';
 import {CorporationCard} from './CorporationCard';
-import {Phase} from '../../Phase';
+import {Phase} from '../../common/Phase';
 import {ISpace} from '../../boards/ISpace';
 import {SpaceBonus} from '../../common/boards/SpaceBonus';
 import {Resources} from '../../common/Resources';

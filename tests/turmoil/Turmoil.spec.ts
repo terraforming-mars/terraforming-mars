@@ -3,7 +3,7 @@ import {Player} from '../../src/Player';
 import {PartyName} from '../../src/turmoil/parties/PartyName';
 import {Game} from '../../src/Game';
 import {MarsFirst} from '../../src/turmoil/parties/MarsFirst';
-import {Phase} from '../../src/Phase';
+import {Phase} from '../../src/common/Phase';
 import {OrOptions} from '../../src/inputs/OrOptions';
 import {SelectSpace} from '../../src/inputs/SelectSpace';
 import {SpaceBonus} from '../../src/common/boards/SpaceBonus';

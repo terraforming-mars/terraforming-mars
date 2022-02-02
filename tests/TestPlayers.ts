@@ -1,4 +1,4 @@
-import {Color} from '../src/Color';
+import {Color} from '../src/common/Color';
 import {TestPlayer} from './TestPlayer';
 
 class TestPlayerFactory {

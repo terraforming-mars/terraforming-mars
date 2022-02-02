@@ -13,7 +13,7 @@ import {OrOptions} from '../../inputs/OrOptions';
 import {SelectOption} from '../../inputs/SelectOption';
 import {StealResources} from '../../deferredActions/StealResources';
 import {Size} from '../render/Size';
-import {Phase} from '../../Phase';
+import {Phase} from '../../common/Phase';
 import {Card} from '../Card';
 import {all} from '../Options';
 

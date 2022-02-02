@@ -5,7 +5,7 @@ import {Card} from '../Card';
 import {CardName} from '../../CardName';
 import {CardType} from '../CardType';
 import {CardRenderer} from '../render/CardRenderer';
-import {GlobalParameter} from '../../GlobalParameter';
+import {GlobalParameter} from '../../common/GlobalParameter';
 
 export class MorningStarInc extends Card implements CorporationCard {
   constructor() {

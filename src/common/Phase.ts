@@ -1,4 +1,3 @@
-
 export enum Phase {
     ACTION = 'action',
     END = 'end', // specifically, *game* end.

@@ -45,7 +45,7 @@ import Card from '@/client/components/card/Card.vue';
 import {CardName} from '@/CardName';
 import {TileType} from '@/common/TileType';
 import {playerColorClass} from '@/utils/utils';
-import {Color} from '@/Color';
+import {Color} from '@/common/Color';
 import {SoundManager} from '@/client/utils/SoundManager';
 import {PreferencesManager} from '@/client/utils/PreferencesManager';
 import {GlobalEventName} from '@/turmoil/globalEvents/GlobalEventName';

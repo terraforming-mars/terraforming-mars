@@ -174,7 +174,7 @@ import {Timer} from '@/Timer';
 
 import * as constants from '@/constants';
 import {SpectatorModel} from '@/models/SpectatorModel';
-import {Color} from '@/Color';
+import {Color} from '@/common/Color';
 
 function getViewModel(playerView: ViewModel | undefined, spectator: ViewModel | undefined): ViewModel {
   if (playerView !== undefined) return playerView;

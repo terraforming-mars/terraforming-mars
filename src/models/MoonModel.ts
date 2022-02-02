@@ -1,5 +1,5 @@
 import {ISpace} from '../boards/ISpace';
-import {Color} from '../Color';
+import {Color} from '../common/Color';
 import {Game} from '../Game';
 import {MoonExpansion} from '../moon/MoonExpansion';
 import {TileType} from '../common/TileType';

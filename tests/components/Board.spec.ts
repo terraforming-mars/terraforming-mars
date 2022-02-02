@@ -4,7 +4,7 @@ import {expect} from 'chai';
 import Board from '@/client/components/Board.vue';
 import BoardSpace from '@/client/components/BoardSpace.vue';
 import {SpaceModel} from '@/models/SpaceModel';
-import {SpaceType} from '@/SpaceType';
+import {SpaceType} from '@/common/boards/SpaceType';
 
 const spaces: SpaceModel[] = [
   {

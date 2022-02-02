@@ -8,7 +8,7 @@ import {PoliticalAgendas} from '../../../../src/turmoil/PoliticalAgendas';
 import {Reds} from '../../../../src/turmoil/parties/Reds';
 import {Phase} from '../../../../src/Phase';
 import {SelectSpace} from '../../../../src/inputs/SelectSpace';
-import {SpaceType} from '../../../../src/SpaceType';
+import {SpaceType} from '../../../../src/common/boards/SpaceType';
 import {TileType} from '../../../../src/common/TileType';
 
 describe('AquiferStandardProject', function() {

@@ -5,7 +5,7 @@ import {ISpace} from '../../../src/boards/ISpace';
 import {Player} from '../../../src/Player';
 import {Resources} from '../../../src/common/Resources';
 import {SpaceName} from '../../../src/SpaceName';
-import {SpaceType} from '../../../src/SpaceType';
+import {SpaceType} from '../../../src/common/boards/SpaceType';
 import {TestPlayers} from '../../TestPlayers';
 
 describe('UrbanizedArea', function() {

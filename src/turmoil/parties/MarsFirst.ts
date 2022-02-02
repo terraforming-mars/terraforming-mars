@@ -5,7 +5,7 @@ import {Game} from '../../Game';
 import {Tags} from '../../common/cards/Tags';
 import {Resources} from '../../common/Resources';
 import {Bonus} from '../Bonus';
-import {SpaceType} from '../../SpaceType';
+import {SpaceType} from '../../common/boards/SpaceType';
 import {ISpace} from '../../boards/ISpace';
 import {Player} from '../../Player';
 import {Policy} from '../Policy';

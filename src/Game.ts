@@ -46,7 +46,7 @@ import {SerializedGame} from './SerializedGame';
 import {SerializedPlayer} from './SerializedPlayer';
 import {SpaceBonus} from './common/boards/SpaceBonus';
 import {SpaceName} from './SpaceName';
-import {SpaceType} from './SpaceType';
+import {SpaceType} from './common/boards/SpaceType';
 import {Tags} from './common/cards/Tags';
 import {TileType} from './common/TileType';
 import {Turmoil} from './turmoil/Turmoil';

@@ -204,7 +204,7 @@ import * as constants from '@/constants';
 import BoardSpace from '@/client/components/BoardSpace.vue';
 import {IAresData} from '@/ares/IAresData';
 import {SpaceModel} from '@/models/SpaceModel';
-import {SpaceType} from '@/SpaceType';
+import {SpaceType} from '@/common/boards/SpaceType';
 import {SpaceId} from '@/boards/ISpace';
 
 class GlobalParamLevel {

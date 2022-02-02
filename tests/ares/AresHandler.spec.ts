@@ -6,7 +6,7 @@ import {ARES_OPTIONS_NO_HAZARDS, AresTestHelper, ARES_OPTIONS_WITH_HAZARDS} from
 import {EmptyBoard} from './EmptyBoard';
 import {TileType} from '../../src/common/TileType';
 import {ITile} from '../../src/ITile';
-import {SpaceType} from '../../src/SpaceType';
+import {SpaceType} from '../../src/common/boards/SpaceType';
 import {Resources} from '../../src/common/Resources';
 import {SelectProductionToLose} from '../../src/inputs/SelectProductionToLose';
 import {OriginalBoard} from '../../src/boards/OriginalBoard';

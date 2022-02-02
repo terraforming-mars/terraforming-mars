@@ -2,7 +2,7 @@ import {expect} from 'chai';
 import {DesertSettler} from '../../src/awards/DesertSettler';
 import {Game} from '../../src/Game';
 import {Player} from '../../src/Player';
-import {SpaceType} from '../../src/SpaceType';
+import {SpaceType} from '../../src/common/boards/SpaceType';
 import {TileType} from '../../src/common/TileType';
 import {TestPlayers} from '../TestPlayers';
 import {ARES_OPTIONS_NO_HAZARDS} from './AresTestHelper';

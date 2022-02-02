@@ -4,7 +4,7 @@ import {Card} from '../Card';
 import {CardType} from '../CardType';
 import {Player} from '../../Player';
 import {SelectSpace} from '../../inputs/SelectSpace';
-import {SpaceType} from '../../SpaceType';
+import {SpaceType} from '../../common/boards/SpaceType';
 import {ISpace} from '../../boards/ISpace';
 import {CardName} from '../../CardName';
 import {CardRequirements} from '../CardRequirements';

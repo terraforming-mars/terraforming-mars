@@ -2,7 +2,7 @@ import {IAward} from './IAward';
 import {Player} from '../Player';
 import {playerTileFn} from '../boards/Board';
 import {TileType} from '../common/TileType';
-import {SpaceType} from '../SpaceType';
+import {SpaceType} from '../common/boards/SpaceType';
 
 export class CosmicSettler implements IAward {
     public name: string = 'Cosmic Settler';

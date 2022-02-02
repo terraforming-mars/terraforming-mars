@@ -7,7 +7,7 @@ import {expect} from 'chai';
 import {MoonExpansion} from '../../../src/moon/MoonExpansion';
 import {IMoonData} from '../../../src/moon/IMoonData';
 import {TileType} from '../../../src/common/TileType';
-import {SpaceType} from '../../../src/SpaceType';
+import {SpaceType} from '../../../src/common/boards/SpaceType';
 import {Resources} from '../../../src/common/Resources';
 
 const MOON_OPTIONS = TestingUtils.setCustomGameOptions({moonExpansion: true});

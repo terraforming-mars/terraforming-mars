@@ -9,7 +9,7 @@ import {Pets} from '../../../src/cards/base/Pets';
 import {EmptyBoard} from '../../ares/EmptyBoard';
 import {SpaceBonus} from '../../../src/common/boards/SpaceBonus';
 import {ArcticAlgae} from '../../../src/cards/base/ArcticAlgae';
-import {SpaceType} from '../../../src/SpaceType';
+import {SpaceType} from '../../../src/common/boards/SpaceType';
 import {Phase} from '../../../src/Phase';
 import {TestingUtils} from '../../TestingUtils';
 import {TestPlayers} from '../../TestPlayers';

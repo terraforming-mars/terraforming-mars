@@ -3,7 +3,7 @@ import {LavaFlows} from '../../../src/cards/base/LavaFlows';
 import {Game} from '../../../src/Game';
 import {Player} from '../../../src/Player';
 import {SpaceName} from '../../../src/SpaceName';
-import {SpaceType} from '../../../src/SpaceType';
+import {SpaceType} from '../../../src/common/boards/SpaceType';
 import {TileType} from '../../../src/common/TileType';
 import {TestingUtils} from '../../TestingUtils';
 import {TestPlayers} from '../../TestPlayers';

@@ -13,7 +13,7 @@ import {GainResources} from '../../deferredActions/GainResources';
 import {Priority} from '../../deferredActions/DeferredAction';
 import {Size} from '../render/Size';
 import {BoardType} from '../../boards/BoardType';
-import {SpaceType} from '../../SpaceType';
+import {SpaceType} from '../../common/boards/SpaceType';
 
 export class Steelaris extends Card implements CorporationCard {
   constructor() {

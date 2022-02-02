@@ -4,7 +4,7 @@ import {SelectOption} from '../inputs/SelectOption';
 import {Player} from '../Player';
 import {PlayerInput} from '../PlayerInput';
 import {Resources} from '../common/Resources';
-import {SpaceType} from '../SpaceType';
+import {SpaceType} from '../common/boards/SpaceType';
 import {GREENS_POLICY_2, GREENS_POLICY_3, GREENS_POLICY_4} from './parties/Greens';
 import {KELVINISTS_POLICY_1, KELVINISTS_POLICY_3, KELVINISTS_POLICY_4} from './parties/Kelvinists';
 import {MARS_FIRST_POLICY_2, MARS_FIRST_POLICY_4} from './parties/MarsFirst';

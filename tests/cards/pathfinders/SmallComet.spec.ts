@@ -3,7 +3,7 @@ import {SmallComet} from '../../../src/cards/pathfinders/SmallComet';
 import {Game} from '../../../src/Game';
 import {TestPlayer} from '../../TestPlayer';
 import {TestPlayers} from '../../TestPlayers';
-import {SpaceType} from '../../../src/SpaceType';
+import {SpaceType} from '../../../src/common/boards/SpaceType';
 import {TileType} from '../../../src/common/TileType';
 
 describe('SmallComet', function() {

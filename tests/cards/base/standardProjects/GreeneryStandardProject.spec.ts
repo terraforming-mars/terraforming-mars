@@ -9,7 +9,7 @@ import {Reds} from '../../../../src/turmoil/parties/Reds';
 import {Phase} from '../../../../src/Phase';
 import {MAX_OXYGEN_LEVEL} from '../../../../src/constants';
 import {SelectSpace} from '../../../../src/inputs/SelectSpace';
-import {SpaceType} from '../../../../src/SpaceType';
+import {SpaceType} from '../../../../src/common/boards/SpaceType';
 import {TileType} from '../../../../src/common/TileType';
 
 describe('GreeneryStandardProject', function() {

@@ -7,7 +7,7 @@ import {getTestPlayer, newTestGame} from '../../TestGame';
 import {OrOptions} from '../../../src/inputs/OrOptions';
 import {Resources} from '../../../src/common/Resources';
 import {PlaceOceanTile} from '../../../src/deferredActions/PlaceOceanTile';
-import {SpaceType} from '../../../src/SpaceType';
+import {SpaceType} from '../../../src/common/boards/SpaceType';
 import {TileType} from '../../../src/common/TileType';
 
 describe('AsteroidResources', function() {

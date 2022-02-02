@@ -3,7 +3,7 @@ import {ITile} from '../ITile';
 import {MoonBoard} from './MoonBoard';
 import {Player} from '../Player';
 import {TileType} from '../common/TileType';
-import {SpaceType} from '../SpaceType';
+import {SpaceType} from '../common/boards/SpaceType';
 import {IMoonData} from './IMoonData';
 import {CardName} from '../CardName';
 import {IProjectCard} from '../cards/IProjectCard';

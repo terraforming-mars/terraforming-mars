@@ -10,7 +10,7 @@ import {GainResources} from '../../deferredActions/GainResources';
 import {Phase} from '../../Phase';
 import {IProjectCard} from '../IProjectCard';
 import {BoardType} from '../../boards/BoardType';
-import {SpaceType} from '../../SpaceType';
+import {SpaceType} from '../../common/boards/SpaceType';
 import {PartyHooks} from '../../turmoil/parties/PartyHooks';
 import {PartyName} from '../../turmoil/parties/PartyName';
 import {Board} from '../../boards/Board';

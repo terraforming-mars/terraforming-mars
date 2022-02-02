@@ -4,7 +4,7 @@ import {Board} from './Board';
 import {Player} from '../Player';
 import {ISpace} from './ISpace';
 import {HELLAS_BONUS_OCEAN_COST} from '../constants';
-import {SpaceType} from '../SpaceType';
+import {SpaceType} from '../common/boards/SpaceType';
 import {BoardBuilder} from './BoardBuilder';
 import {SerializedBoard} from './SerializedBoard';
 import {Random} from '../Random';

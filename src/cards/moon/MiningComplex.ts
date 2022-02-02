@@ -6,7 +6,7 @@ import {PlaceMoonMineTile} from '../../moon/PlaceMoonMineTile';
 import {Player} from '../../Player';
 import {MoonExpansion} from '../../moon/MoonExpansion';
 import {PlaceMoonRoadTile} from '../../moon/PlaceMoonRoadTile';
-import {SpaceType} from '../../SpaceType';
+import {SpaceType} from '../../common/boards/SpaceType';
 import {Resources} from '../../common/Resources';
 import {AltSecondaryTag} from '../render/CardRenderItem';
 import {TileType} from '../../common/TileType';

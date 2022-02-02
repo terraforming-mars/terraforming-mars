@@ -1,7 +1,7 @@
 import {Player} from '../Player';
 import {SelectSpace} from '../inputs/SelectSpace';
 import {ISpace} from '../boards/ISpace';
-import {SpaceType} from '../SpaceType';
+import {SpaceType} from '../common/boards/SpaceType';
 import {DeferredAction, Priority} from './DeferredAction';
 
 export class PlaceOceanTile implements DeferredAction {

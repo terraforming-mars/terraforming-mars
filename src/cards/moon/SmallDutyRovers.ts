@@ -5,7 +5,7 @@ import {IProjectCard} from '../IProjectCard';
 import {Tags} from '../../common/cards/Tags';
 import {CardRenderer} from '../render/CardRenderer';
 import {MoonExpansion} from '../../moon/MoonExpansion';
-import {SpaceType} from '../../SpaceType';
+import {SpaceType} from '../../common/boards/SpaceType';
 import {Resources} from '../../common/Resources';
 import {Units} from '../../Units';
 import {Size} from '../render/Size';

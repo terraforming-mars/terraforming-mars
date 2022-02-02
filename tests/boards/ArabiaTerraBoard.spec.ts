@@ -3,7 +3,7 @@ import {DEFAULT_GAME_OPTIONS, Game} from '../../src/Game';
 import {ArabiaTerraBoard} from '../../src/boards/ArabiaTerraBoard';
 import {Player} from '../../src/Player';
 import {TileType} from '../../src/common/TileType';
-import {SpaceType} from '../../src/SpaceType';
+import {SpaceType} from '../../src/common/boards/SpaceType';
 import {TestPlayers} from '../TestPlayers';
 import {Random} from '../../src/Random';
 import {SpaceBonus} from '../../src/common/boards/SpaceBonus';

@@ -2,7 +2,7 @@ import {CardName} from '../../CardName';
 import {CardType} from '../CardType';
 import {IProjectCard} from '../IProjectCard';
 import {CardRenderer} from '../render/CardRenderer';
-import {Units} from '../../Units';
+import {Units} from '../../common/Units';
 import {MoonExpansion} from '../../moon/MoonExpansion';
 import {Player} from '../../Player';
 import {MoonCard} from './MoonCard';

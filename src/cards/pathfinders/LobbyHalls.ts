@@ -5,7 +5,7 @@ import {CardType} from '../CardType';
 import {CardName} from '../../CardName';
 import {CardRenderer} from '../render/CardRenderer';
 import {Tags} from '../../common/cards/Tags';
-import {Units} from '../../Units';
+import {Units} from '../../common/Units';
 import {SendDelegateToArea} from '../../deferredActions/SendDelegateToArea';
 import {DeclareCloneTag} from '../../pathfinders/DeclareCloneTag';
 import {ICloneTagCard} from './ICloneTagCard';

@@ -15,7 +15,7 @@ import {CardName} from '../CardName';
 import {SelectHowToPayDeferred} from '../deferredActions/SelectHowToPayDeferred';
 import {Card} from './Card';
 import {MoonExpansion} from '../moon/MoonExpansion';
-import {Units} from '../Units';
+import {Units} from '../common/Units';
 
 interface StaticStandardProjectCardProperties {
   name: CardName,

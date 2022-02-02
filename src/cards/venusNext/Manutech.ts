@@ -6,7 +6,7 @@ import {Card} from '../Card';
 import {CardName} from '../../CardName';
 import {CardType} from '../CardType';
 import {CardRenderer} from '../render/CardRenderer';
-import {Units} from '../../Units';
+import {Units} from '../../common/Units';
 
 export class Manutech extends Card implements CorporationCard {
   constructor() {

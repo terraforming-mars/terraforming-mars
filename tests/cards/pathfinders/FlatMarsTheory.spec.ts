@@ -3,7 +3,7 @@ import {FlatMarsTheory} from '../../../src/cards/pathfinders/FlatMarsTheory';
 import {Game} from '../../../src/Game';
 import {TestPlayer} from '../../TestPlayer';
 import {TestPlayers} from '../../TestPlayers';
-import {Units} from '../../../src/Units';
+import {Units} from '../../../src/common/Units';
 
 describe('FlatMarsTheory', function() {
   let card: FlatMarsTheory;

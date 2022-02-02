@@ -9,7 +9,7 @@ import {Phase} from '../../../src/Phase';
 import {SpaceType} from '../../../src/common/boards/SpaceType';
 import {TileType} from '../../../src/common/TileType';
 import {Board} from '../../../src/boards/Board';
-import {Units} from '../../../src/Units';
+import {Units} from '../../../src/common/Units';
 
 describe('RedCity', function() {
   let card: RedCity;

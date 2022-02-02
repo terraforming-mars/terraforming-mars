@@ -4,7 +4,7 @@ import {CardName} from '../../CardName';
 import {CardRenderer} from '../render/CardRenderer';
 import {Resources} from '../../common/Resources';
 import {Tags} from '../../common/cards/Tags';
-import {Units} from '../../Units';
+import {Units} from '../../common/Units';
 
 export class ResearchGrant extends PreludeCard {
   constructor() {

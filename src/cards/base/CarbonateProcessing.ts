@@ -7,7 +7,7 @@ import {Player} from '../../Player';
 import {Resources} from '../../common/Resources';
 import {CardName} from '../../CardName';
 import {CardRenderer} from '../render/CardRenderer';
-import {Units} from '../../Units';
+import {Units} from '../../common/Units';
 
 export class CarbonateProcessing extends Card implements IProjectCard {
   constructor() {

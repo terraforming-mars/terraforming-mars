@@ -4,7 +4,7 @@ import {CardType} from '../CardType';
 import {Tags} from '../../common/cards/Tags';
 import {MoonExpansion} from '../../moon/MoonExpansion';
 import {CardRenderer} from '../render/CardRenderer';
-import {Units} from '../../Units';
+import {Units} from '../../common/Units';
 import {MoonCard} from './MoonCard';
 
 // TODO(kberg): Add a test for how this card operates with Reds. It will be a good verification.

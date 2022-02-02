@@ -3,7 +3,7 @@ import {PreludeCard} from '../prelude/PreludeCard';
 import {CardName} from '../../CardName';
 import {CardRenderer} from '../render/CardRenderer';
 import {Tags} from '../../common/cards/Tags';
-import {Units} from '../../Units';
+import {Units} from '../../common/Units';
 
 export class CO2Reducers extends PreludeCard {
   constructor() {

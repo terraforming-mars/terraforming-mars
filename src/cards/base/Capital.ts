@@ -15,7 +15,7 @@ import {ICardMetadata} from '../ICardMetadata';
 import {CardRequirements} from '../CardRequirements';
 import {CardRenderer} from '../render/CardRenderer';
 import {CardRenderDynamicVictoryPoints} from '../render/CardRenderDynamicVictoryPoints';
-import {Units} from '../../Units';
+import {Units} from '../../common/Units';
 
 export class Capital extends Card implements IProjectCard {
   constructor(

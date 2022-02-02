@@ -10,7 +10,7 @@ import {Player} from '../../Player';
 import {Resources} from '../../common/Resources';
 import {CardRenderer} from '../render/CardRenderer';
 import {Size} from '../render/Size';
-import {Units} from '../../Units';
+import {Units} from '../../common/Units';
 import {played} from '../Options';
 
 export class AsteroidDeflectionSystem extends Card implements IActionCard, IProjectCard, IResourceCard {

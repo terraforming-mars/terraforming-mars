@@ -10,7 +10,7 @@ import {CardName} from '../../CardName';
 import {ResourceType} from '../../common/ResourceType';
 import {CardRequirements} from '../CardRequirements';
 import {CardRenderer} from '../render/CardRenderer';
-import {Units} from '../../Units';
+import {Units} from '../../common/Units';
 
 export class EosChasmaNationalPark extends Card implements IProjectCard {
   constructor() {

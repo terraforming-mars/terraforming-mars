@@ -9,7 +9,7 @@ import {Colony} from '../../../src/colonies/Colony';
 import {ColonyBenefit} from '../../../src/colonies/ColonyBenefit';
 import {Resources} from '../../../src/common/Resources';
 import {TestingUtils} from '../../TestingUtils';
-import {Units} from '../../../src/Units';
+import {Units} from '../../../src/common/Units';
 
 export class TestColony extends Colony {
   public name = 'TestColony' as ColonyName;

@@ -2,7 +2,7 @@ import {RemoveResourcesFromCard} from '../../../src/deferredActions/RemoveResour
 import {expect} from 'chai';
 import {SolarStorm} from '../../../src/cards/pathfinders/SolarStorm';
 import {Game} from '../../../src/Game';
-import {Units} from '../../../src/Units';
+import {Units} from '../../../src/common/Units';
 import {TestPlayer} from '../../TestPlayer';
 import {TestPlayers} from '../../TestPlayers';
 import {ResourceType} from '../../../src/common/ResourceType';

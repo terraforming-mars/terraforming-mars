@@ -10,7 +10,7 @@ import {PlaceCityTile} from '../../deferredActions/PlaceCityTile';
 import {SendDelegateToArea} from '../../deferredActions/SendDelegateToArea';
 import {CardRequirements} from '../CardRequirements';
 import {CardRenderer} from '../render/CardRenderer';
-import {Units} from '../../Units';
+import {Units} from '../../common/Units';
 import {Turmoil} from '../../turmoil/Turmoil';
 
 export class CulturalMetropolis extends Card implements IProjectCard {

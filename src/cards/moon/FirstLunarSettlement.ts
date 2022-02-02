@@ -7,7 +7,7 @@ import {CardRenderer} from '../render/CardRenderer';
 import {TileType} from '../../common/TileType';
 import {IProjectCard} from '../IProjectCard';
 import {AltSecondaryTag} from '../render/CardRenderItem';
-import {Units} from '../../Units';
+import {Units} from '../../common/Units';
 
 export class FirstLunarSettlement extends PreludeCard implements IProjectCard {
   constructor() {

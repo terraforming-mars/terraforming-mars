@@ -8,7 +8,7 @@ import {CardRenderer} from '../render/CardRenderer';
 import {Tags} from '../../common/cards/Tags';
 import {Resources} from '../../common/Resources';
 import {ResourceType} from '../../common/ResourceType';
-import {Units} from '../../Units';
+import {Units} from '../../common/Units';
 import {ICard} from '../ICard';
 import {played} from '../Options';
 

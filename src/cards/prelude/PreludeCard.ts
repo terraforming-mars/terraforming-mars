@@ -6,7 +6,7 @@ import {ICardMetadata} from '../ICardMetadata';
 import {CardName} from '../../CardName';
 import {Tags} from '../../common/cards/Tags';
 import {IProjectCard} from '../IProjectCard';
-import {Units} from '../../Units';
+import {Units} from '../../common/Units';
 
 interface StaticPreludeProperties {
     metadata: ICardMetadata;

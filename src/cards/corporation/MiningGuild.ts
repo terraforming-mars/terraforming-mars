@@ -10,7 +10,7 @@ import {CardName} from '../../CardName';
 import {CardType} from '../CardType';
 import {GainProduction} from '../../deferredActions/GainProduction';
 import {CardRenderer} from '../render/CardRenderer';
-import {Units} from '../../Units';
+import {Units} from '../../common/Units';
 import {BoardType} from '../../boards/BoardType';
 import {digit} from '../Options';
 

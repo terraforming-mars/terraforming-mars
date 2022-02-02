@@ -7,7 +7,7 @@ import {SpaceType} from '../common/boards/SpaceType';
 import {IMoonData} from './IMoonData';
 import {CardName} from '../CardName';
 import {IProjectCard} from '../cards/IProjectCard';
-import {Units} from '../Units';
+import {Units} from '../common/Units';
 import {IMoonCard} from '../cards/moon/IMoonCard';
 import {Tags} from '../common/cards/Tags';
 import {ISpace} from '../boards/ISpace';

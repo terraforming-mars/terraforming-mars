@@ -3,7 +3,7 @@ import {getTestPlayer, newTestGame} from '../../TestGame';
 import {EconomicHelp} from '../../../src/cards/pathfinders/EconomicHelp';
 import {Game} from '../../../src/Game';
 import {TestPlayer} from '../../TestPlayer';
-import {Units} from '../../../src/Units';
+import {Units} from '../../../src/common/Units';
 
 describe('EconomicHelp', function() {
   let card: EconomicHelp;

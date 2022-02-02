@@ -7,7 +7,7 @@ import {CardRenderer} from '../render/CardRenderer';
 import {Tags} from '../../common/cards/Tags';
 import {ResourceType} from '../../common/ResourceType';
 import {Resources} from '../../common/Resources';
-import {Units} from '../../Units';
+import {Units} from '../../common/Units';
 import {all, played} from '../Options';
 import {DeferredAction} from '../../deferredActions/DeferredAction';
 import {Size} from '../render/Size';

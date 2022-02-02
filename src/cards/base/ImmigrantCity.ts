@@ -12,7 +12,7 @@ import {GainProduction} from '../../deferredActions/GainProduction';
 import {LoseProduction} from '../../deferredActions/LoseProduction';
 import {Board} from '../../boards/Board';
 import {CardRenderer} from '../render/CardRenderer';
-import {Units} from '../../Units';
+import {Units} from '../../common/Units';
 import {all} from '../Options';
 
 export class ImmigrantCity extends Card implements IProjectCard {

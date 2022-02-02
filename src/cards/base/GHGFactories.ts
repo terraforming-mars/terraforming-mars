@@ -6,7 +6,7 @@ import {CardType} from '../CardType';
 import {Resources} from '../../common/Resources';
 import {CardName} from '../../CardName';
 import {CardRenderer} from '../render/CardRenderer';
-import {Units} from '../../Units';
+import {Units} from '../../common/Units';
 import {digit} from '../Options';
 
 export class GHGFactories extends Card implements IProjectCard {

@@ -3,7 +3,7 @@ import {PreludeCard} from '../prelude/PreludeCard';
 import {CardName} from '../../CardName';
 import {CardRenderer} from '../render/CardRenderer';
 import {Resources} from '../../common/Resources';
-import {Units} from '../../Units';
+import {Units} from '../../common/Units';
 
 export class HydrogenBombardment extends PreludeCard {
   constructor() {

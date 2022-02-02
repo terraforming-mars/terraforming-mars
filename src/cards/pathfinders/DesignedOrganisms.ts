@@ -9,7 +9,7 @@ import {Tags} from '../../common/cards/Tags';
 import {CardRequirements} from '../CardRequirements';
 import {AddResourcesToCard} from '../../deferredActions/AddResourcesToCard';
 import {ResourceType} from '../../common/ResourceType';
-import {Units} from '../../Units';
+import {Units} from '../../common/Units';
 
 export class DesignedOrganisms extends Card implements IProjectCard {
   constructor() {

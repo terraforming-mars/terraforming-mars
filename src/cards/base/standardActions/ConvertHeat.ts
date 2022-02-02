@@ -3,7 +3,7 @@ import {CardName} from '../../../CardName';
 import {CardRenderer} from '../../render/CardRenderer';
 import {Player} from '../../../Player';
 import {HEAT_FOR_TEMPERATURE, MAX_TEMPERATURE} from '../../../constants';
-import {Units} from '../../../Units';
+import {Units} from '../../../common/Units';
 
 
 export class ConvertHeat extends StandardActionCard {

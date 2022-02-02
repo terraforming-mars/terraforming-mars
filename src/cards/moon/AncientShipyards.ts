@@ -6,7 +6,7 @@ import {ResourceType} from '../../common/ResourceType';
 import {StealResources} from '../../deferredActions/StealResources';
 import {Resources} from '../../common/Resources';
 import {CardRenderer} from '../render/CardRenderer';
-import {Units} from '../../Units';
+import {Units} from '../../common/Units';
 import {MoonCard} from './MoonCard';
 import {all} from '../Options';
 import {VictoryPoints} from '../ICard';

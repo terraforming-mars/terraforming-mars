@@ -17,7 +17,7 @@ import {ICard, IResourceCard, isIActionCard, TRSource, IActionCard} from './card
 import {ISerializable} from './ISerializable';
 import {IMilestone} from './milestones/IMilestone';
 import {IProjectCard} from './cards/IProjectCard';
-import {ITagCount} from './ITagCount';
+import {ITagCount} from './common/cards/ITagCount';
 import {LogMessageDataType} from './common/logs/LogMessageDataType';
 import {OrOptions} from './inputs/OrOptions';
 import {PartyHooks} from './turmoil/parties/PartyHooks';

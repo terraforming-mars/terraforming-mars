@@ -39,7 +39,7 @@
 
 import Vue from 'vue';
 import TagCount from '@/client/components/TagCount.vue';
-import {ITagCount} from '@/ITagCount';
+import {ITagCount} from '@/common/cards/ITagCount';
 import {ViewModel, PublicPlayerModel} from '@/models/PlayerModel';
 import {GameModel} from '@/models/GameModel';
 import {Tags} from '@/common/cards/Tags';

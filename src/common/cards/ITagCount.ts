@@ -1,4 +1,4 @@
-import {Tags} from './common/cards/Tags';
+import {Tags} from './Tags';
 
 export interface ITagCount {
   tag: Tags;

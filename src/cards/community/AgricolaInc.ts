@@ -4,7 +4,7 @@ import {Tags} from '../../common/cards/Tags';
 import {Resources} from '../../common/Resources';
 import {Card} from '../Card';
 import {CardName} from '../../CardName';
-import {ITagCount} from '../../ITagCount';
+import {ITagCount} from '../../common/cards/ITagCount';
 import {CardType} from '../CardType';
 import {CardRenderer} from '../render/CardRenderer';
 import {Size} from '../render/Size';

@@ -27,7 +27,7 @@ export class PowerPlantStandardProject extends StandardProjectCard {
     if (player.isCorporation(CardName.THORGATE)) {
       discount += 3;
     }
-    if (player.playedCards.some((card) => card.name === CardName.HIGH_TEMP_SUPERCONDUCTORS)) {
+    if (player.cardIsInEffect(CardName.HIGH_TEMP_SUPERCONDUCTORS)) {
       discount += 3;
     }
     return discount;

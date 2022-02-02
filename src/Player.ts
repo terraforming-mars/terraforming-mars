@@ -852,7 +852,7 @@ export class Player implements ISerializable<SerializedPlayer> {
 
     if (includeTagSubstitutions) {
       // Earth Embassy hook
-      if (tag === Tags.EARTH && this.playedCards.some((c) => c.name === CardName.EARTH_EMBASSY)) {
+      if (tag === Tags.EARTH && this.cardIsInEffect(CardName.EARTH_EMBASSY)) {
         tagCount += this.getRawTagCount(Tags.MOON, includeEvents);
       }
       if (tag !== Tags.WILDCARD) {
@@ -900,7 +900,7 @@ export class Player implements ISerializable<SerializedPlayer> {
     });
 
     // This is repeated behavior from getTagCount, sigh, OK.
-    if (tags.includes(Tags.EARTH) && !tags.includes(Tags.MOON) && this.playedCards.some((c) => c.name === CardName.EARTH_EMBASSY)) {
+    if (tags.includes(Tags.EARTH) && !tags.includes(Tags.MOON) && this.cardIsInEffect(CardName.EARTH_EMBASSY)) {
       tagCount += this.getRawTagCount(Tags.MOON, false);
     }
 

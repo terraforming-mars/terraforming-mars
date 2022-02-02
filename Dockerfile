@@ -45,13 +45,13 @@ USER tfm
 
 COPY ["package.json", "package-lock.json", "./"]
 
-COPY assets ./assets
-
 # Copy dependencies from intermediate image
 COPY --from=installProd /usr/src/app/node_modules ./node_modules
 
 # Copy built app from intermediate image
 COPY --from=builder /usr/src/app/build ./build
+
+COPY --from=builder /usr/src/app/assets ./assets
 
 # Run command.
 

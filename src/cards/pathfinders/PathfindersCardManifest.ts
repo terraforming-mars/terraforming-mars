@@ -61,6 +61,7 @@ import {MuseumofEarlyColonisation} from './MuseumofEarlyColonisation';
 import {NewVenice} from './NewVenice';
 import {NobelLabs} from './NobelLabs';
 import {OrbitalLaboratories} from './OrbitalLaboratories';
+import {OumuamuaTypeObjectSurvey} from './OumuamuaTypeObjectSurvey';
 import {OzoneGenerators} from './OzoneGenerators';
 import {PersonalAgenda} from './PersonalAgenda';
 import {Polaris} from './Polaris';
@@ -151,7 +152,7 @@ export const PATHFINDERS_CARD_MANIFEST = new CardManifest({
     {cardName: CardName.BOTANICAL_EXPERIENCE, Factory: BotanicalExperience},
     {cardName: CardName.CRYPTOCURRENCY, Factory: Cryptocurrency},
     {cardName: CardName.RICH_DEPOSITS, Factory: RichDeposits},
-    // // *** {cardName: CardName.OUMUAMUA_TYPE_OBJECT_SURVEY, Factory: OumuamuaTypeObjectSurvey},
+    {cardName: CardName.OUMUAMUA_TYPE_OBJECT_SURVEY, Factory: OumuamuaTypeObjectSurvey},
     {cardName: CardName.SOLARPEDIA, Factory: Solarpedia, compatibility: GameModule.Venus},
     {cardName: CardName.ANTHOZOA, Factory: Anthozoa},
     {cardName: CardName.ADVANCED_POWER_GRID, Factory: AdvancedPowerGrid},

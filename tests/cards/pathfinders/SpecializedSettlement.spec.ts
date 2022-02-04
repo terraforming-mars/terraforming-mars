@@ -10,6 +10,8 @@ import {SelectSpace} from '../../../src/inputs/SelectSpace';
 import {SpaceBonus} from '../../../src/common/boards/SpaceBonus';
 import {TileType} from '../../../src/common/TileType';
 import {OrOptions} from '../../../src/inputs/OrOptions';
+import {RoboticWorkforce} from '../../../src/cards/base/RoboticWorkforce';
+import {SelectCard} from '../../../src/inputs/SelectCard';
 
 describe('SpecializedSettlement', function() {
   let card: SpecializedSettlement;
@@ -110,6 +112,28 @@ describe('SpecializedSettlement', function() {
     orOptions.options[0].cb();
     expect(player.getProductionForTest()).deep.eq(Units.of({megacredits: 3, heat: 1}));
     expect(player.popWaitingFor()).is.undefined;
+  });
+
+
+  it('play - 3 different, then play Robotic Workforce', function() {
+    singleResourceTest(
+      [SpaceBonus.HEAT, SpaceBonus.STEEL, SpaceBonus.TITANIUM],
+      {heat: 1, steel: 1, titanium: 1},
+      {energy: 0, megacredits: 3});
+    const orOptions = TestingUtils.cast(player.popWaitingFor(), OrOptions);
+    orOptions.options[0].cb();
+    expect(player.getProductionForTest()).deep.eq(Units.of({megacredits: 3, heat: 1}));
+    expect(player.popWaitingFor()).is.undefined;
+
+    player.playedCards = [card];
+
+    const roboticWorkforce = new RoboticWorkforce();
+    expect(roboticWorkforce.play(player)).is.undefined;
+    player.setProductionForTest(Units.of({energy: 1}));
+    const selectCard = TestingUtils.cast(roboticWorkforce.play(player), SelectCard);
+    expect(selectCard.cards).deep.eq([card]);
+    selectCard.cb([selectCard.cards[0]]);
+    expect(player.getProductionForTest()).deep.eq(Units.of({megacredits: 3, heat: 1}));
   });
 
   function singleResourceTest(spaceBonus: SpaceBonus | Array<SpaceBonus>, resources: Partial<Units>, production: Partial<Units>) {

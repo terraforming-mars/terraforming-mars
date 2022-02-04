@@ -203,7 +203,7 @@ import Vue from 'vue';
 import * as constants from '@/constants';
 import BoardSpace from '@/client/components/BoardSpace.vue';
 import {IAresData} from '@/ares/IAresData';
-import {SpaceModel} from '@/models/SpaceModel';
+import {SpaceModel} from '@/common/models/SpaceModel';
 import {SpaceType} from '@/common/boards/SpaceType';
 import {SpaceId} from '@/common/Types';
 

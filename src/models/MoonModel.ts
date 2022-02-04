@@ -3,7 +3,7 @@ import {Color} from '../common/Color';
 import {Game} from '../Game';
 import {MoonExpansion} from '../moon/MoonExpansion';
 import {TileType} from '../common/TileType';
-import {SpaceModel} from './SpaceModel';
+import {SpaceModel} from '../common/models/SpaceModel';
 
 export interface MoonModel {
   spaces: Array<SpaceModel>;

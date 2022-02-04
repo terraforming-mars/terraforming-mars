@@ -5,7 +5,7 @@ import {TurmoilModel} from './TurmoilModel';
 import {ClaimedMilestoneModel} from './ClaimedMilestoneModel';
 import {FundedAwardModel} from './FundedAwardModel';
 import {Phase} from '../common/Phase';
-import {SpaceModel} from './SpaceModel';
+import {SpaceModel} from '../common/models/SpaceModel';
 import {IAresData} from '../ares/IAresData';
 import {MoonModel} from './MoonModel';
 import {PathfindersModel} from './PathfindersModel';

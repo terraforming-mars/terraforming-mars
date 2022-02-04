@@ -20,7 +20,7 @@ import {SelectHowToPay} from '../inputs/SelectHowToPay';
 import {SelectHowToPayForProjectCard} from '../inputs/SelectHowToPayForProjectCard';
 import {SelectPlayer} from '../inputs/SelectPlayer';
 import {SelectSpace} from '../inputs/SelectSpace';
-import {SpaceHighlight, SpaceModel} from './SpaceModel';
+import {SpaceHighlight, SpaceModel} from '../common/models/SpaceModel';
 import {TileType} from '../common/TileType';
 import {Phase} from '../common/Phase';
 import {Resources} from '../common/Resources';

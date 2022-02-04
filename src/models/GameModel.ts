@@ -7,7 +7,7 @@ import {FundedAwardModel} from './FundedAwardModel';
 import {Phase} from '../common/Phase';
 import {SpaceModel} from '../common/models/SpaceModel';
 import {IAresData} from '../ares/IAresData';
-import {MoonModel} from './MoonModel';
+import {MoonModel} from '../common/models/MoonModel';
 import {PathfindersModel} from './PathfindersModel';
 
 // Common data about a game not assocaited with a player (eg the temperature.)

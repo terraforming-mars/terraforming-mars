@@ -75,7 +75,7 @@
 <script lang="ts">
 
 import Vue from 'vue';
-import {MoonModel} from '@/models/MoonModel';
+import {MoonModel} from '@/common/models/MoonModel';
 import {SpaceModel} from '@/common/models/SpaceModel';
 import {SpaceType} from '@/common/boards/SpaceType';
 import MoonSpace from '@/client/components/moon/MoonSpace.vue';

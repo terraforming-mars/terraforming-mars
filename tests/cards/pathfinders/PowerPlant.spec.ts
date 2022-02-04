@@ -3,7 +3,7 @@ import {PowerPlant} from '../../../src/cards/pathfinders/PowerPlant';
 import {Game} from '../../../src/Game';
 import {TestPlayer} from '../../TestPlayer';
 import {TestPlayers} from '../../TestPlayers';
-import {Units} from '../../../src/Units';
+import {Units} from '../../../src/common/Units';
 
 describe('PowerPlant', function() {
   let card: PowerPlant;

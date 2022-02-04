@@ -1,6 +1,6 @@
 import {CardName} from '../../CardName';
 import {Player} from '../../Player';
-import {Units} from '../../Units';
+import {Units} from '../../common/Units';
 import {CardRenderer} from '../render/CardRenderer';
 import {AltSecondaryTag} from '../render/CardRenderItem';
 import {MoonColonyStandardProject} from './MoonColonyStandardProject';

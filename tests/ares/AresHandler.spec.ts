@@ -18,7 +18,7 @@ import {TestPlayers} from '../TestPlayers';
 import {_AresHazardPlacement} from '../../src/ares/AresHazards';
 import {AresSetup} from '../../src/ares/AresSetup';
 import {Random} from '../../src/Random';
-import {Units} from '../../src/Units';
+import {Units} from '../../src/common/Units';
 import {TestingUtils} from '../TestingUtils';
 
 // oddly, this no longer tests AresHandler calls. So that's interesting.

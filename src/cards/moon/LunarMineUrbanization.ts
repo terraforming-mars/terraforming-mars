@@ -10,7 +10,7 @@ import {TileType} from '../../common/TileType';
 import {SelectSpace} from '../../inputs/SelectSpace';
 import {Card} from '../Card';
 import {CardRequirements} from '../CardRequirements';
-import {Units} from '../../Units';
+import {Units} from '../../common/Units';
 
 export class LunarMineUrbanization extends Card implements IProjectCard {
   constructor() {

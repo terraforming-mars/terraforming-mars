@@ -4,7 +4,7 @@ import {CardName} from '../../CardName';
 import {CardRenderer} from '../render/CardRenderer';
 import {Tags} from '../../common/cards/Tags';
 import {CardType} from '../CardType';
-import {Units} from '../../Units';
+import {Units} from '../../common/Units';
 
 export class PersonalAgenda extends PreludeCard {
   constructor() {

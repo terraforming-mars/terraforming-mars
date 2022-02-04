@@ -16,7 +16,7 @@ import {VictoryPointsBreakdown} from '../src/VictoryPointsBreakdown';
 import {CardName} from '../src/CardName';
 import {GlobalParameter} from '../src/common/GlobalParameter';
 import {TestingUtils} from './TestingUtils';
-import {Units} from '../src/Units';
+import {Units} from '../src/common/Units';
 import {SelfReplicatingRobots} from '../src/cards/promo/SelfReplicatingRobots';
 import {Pets} from '../src/cards/base/Pets';
 import {GlobalEventName} from '../src/turmoil/globalEvents/GlobalEventName';

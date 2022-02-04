@@ -10,7 +10,7 @@ import {Resources} from '../../common/Resources';
 import {CardName} from '../../CardName';
 import {CardRequirements} from '../CardRequirements';
 import {CardRenderer} from '../render/CardRenderer';
-import {Units} from '../../Units';
+import {Units} from '../../common/Units';
 import {digit, max} from '../Options';
 
 export class DomedCrater extends Card implements IProjectCard {

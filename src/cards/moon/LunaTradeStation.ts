@@ -7,7 +7,7 @@ import {MoonSpaces} from '../../moon/MoonSpaces';
 import {TileType} from '../../common/TileType';
 import {CardRenderer} from '../render/CardRenderer';
 import {IActionCard} from '../ICard';
-import {Units} from '../../Units';
+import {Units} from '../../common/Units';
 import {MoonCard} from './MoonCard';
 import {Game} from '../../Game';
 import {Resources} from '../../common/Resources';

@@ -11,7 +11,7 @@ import {CardName} from '../../CardName';
 import {IResourceCard} from '../ICard';
 import {CardType} from '../CardType';
 import {CardRenderer} from '../render/CardRenderer';
-import {Units} from '../../Units';
+import {Units} from '../../common/Units';
 import {digit, played} from '../Options';
 
 export class Recyclon extends Card implements CorporationCard, IResourceCard {

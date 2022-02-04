@@ -8,7 +8,7 @@ import {EcoLine} from '../../../src/cards/corporation/EcoLine';
 import {ConvertPlants} from '../../../src/cards/base/standardActions/ConvertPlants';
 import {Unity} from '../../../src/turmoil/parties/Unity';
 import {Greens} from '../../../src/turmoil/parties/Greens';
-import {Units} from '../../../src/Units';
+import {Units} from '../../../src/common/Units';
 
 describe('SoilDetoxification', function() {
   let card: SoilDetoxification;

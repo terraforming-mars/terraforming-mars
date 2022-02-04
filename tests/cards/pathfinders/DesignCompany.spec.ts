@@ -2,7 +2,7 @@ import {expect} from 'chai';
 import {getTestPlayer, newTestGame} from '../../TestGame';
 import {DesignCompany} from '../../../src/cards/pathfinders/DesignCompany';
 import {Game} from '../../../src/Game';
-import {Units} from '../../../src/Units';
+import {Units} from '../../../src/common/Units';
 import {Tags} from '../../../src/common/cards/Tags';
 import {TestPlayer} from '../../TestPlayer';
 

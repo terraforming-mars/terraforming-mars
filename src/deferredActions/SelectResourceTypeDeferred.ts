@@ -15,6 +15,7 @@ export class SelectResourceTypeDeferred implements DeferredAction {
 
   public execute() {
     const orOptions = new OrOptions();
+    orOptions.title = this.title;
     orOptions.options = this.resources.map((resource) => {
       return new SelectOption(resource, 'OK', () => {
         this.cb(resource);

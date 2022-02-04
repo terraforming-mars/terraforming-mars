@@ -31,16 +31,16 @@ export class Tardigrades extends Card implements IProjectCard, IResourceCard {
       },
     });
   }
-    public override resourceCount = 0;
+  public override resourceCount = 0;
 
-    public play() {
-      return undefined;
-    }
-    public action(player: Player) {
-      player.addResourceTo(this);
-      return undefined;
-    }
-    public canAct(): boolean {
-      return true;
-    }
+  public play() {
+    return undefined;
+  }
+  public action(player: Player) {
+    player.addResourceTo(this);
+    return undefined;
+  }
+  public canAct(): boolean {
+    return true;
+  }
 }

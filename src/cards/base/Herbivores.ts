@@ -46,22 +46,22 @@ export class Herbivores extends Card implements IProjectCard, IResourceCard {
       },
     });
   }
-    public override resourceCount: number = 0;
+  public override resourceCount: number = 0;
 
-    public override canPlay(player: Player): boolean {
-      return player.game.someoneCanHaveProductionReduced(Resources.PLANTS, 1);
-    }
+  public override canPlay(player: Player): boolean {
+    return player.game.someoneCanHaveProductionReduced(Resources.PLANTS, 1);
+  }
 
-    public onTilePlaced(cardOwner: Player, activePlayer: Player, space: ISpace) {
-      if (cardOwner.id === activePlayer.id && Board.isGreenerySpace(space)) {
-        cardOwner.game.defer(new AddResourcesToCard(cardOwner, ResourceType.ANIMAL, {filter: (c) => c.name === this.name}));
-      }
+  public onTilePlaced(cardOwner: Player, activePlayer: Player, space: ISpace) {
+    if (cardOwner.id === activePlayer.id && Board.isGreenerySpace(space)) {
+      cardOwner.game.defer(new AddResourcesToCard(cardOwner, ResourceType.ANIMAL, {filter: (c) => c.name === this.name}));
     }
+  }
 
-    public play(player: Player) {
-      player.addResourceTo(this);
-      player.game.defer(
-        new DecreaseAnyProduction(player, Resources.PLANTS, {count: 1}));
-      return undefined;
-    }
+  public play(player: Player) {
+    player.addResourceTo(this);
+    player.game.defer(
+      new DecreaseAnyProduction(player, Resources.PLANTS, {count: 1}));
+    return undefined;
+  }
 }

@@ -3,7 +3,7 @@ import {CardType} from '../CardType';
 import {CardRenderer} from '../render/CardRenderer';
 import {Card} from '../Card';
 import {CardRequirements} from '../CardRequirements';
-import {PartyName} from '../../turmoil/parties/PartyName';
+import {PartyName} from '../../common/turmoil/PartyName';
 import {MoonExpansion} from '../../moon/MoonExpansion';
 import {Player} from '../../Player';
 import {SellSteel} from '../../moon/SellSteel';

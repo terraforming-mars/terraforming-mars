@@ -1,5 +1,5 @@
 import {Color} from '../common/Color';
-import {PartyName} from '../turmoil/parties/PartyName';
+import {PartyName} from '../common/turmoil/PartyName';
 import {GlobalEventName} from '../turmoil/globalEvents/GlobalEventName';
 import {Game} from '../Game';
 import {Agenda, PoliticalAgendas} from '../turmoil/PoliticalAgendas';

@@ -5,7 +5,7 @@ import {AnOfferYouCantRefuse} from '../../../src/cards/moon/AnOfferYouCantRefuse
 import {expect} from 'chai';
 import {TestPlayer} from '../../TestPlayer';
 import {NeutralPlayer, Turmoil} from '../../../src/turmoil/Turmoil';
-import {PartyName} from '../../../src/turmoil/parties/PartyName';
+import {PartyName} from '../../../src/common/turmoil/PartyName';
 import {PlayerId} from '../../../src/common/Types';
 import {IParty} from '../../../src/turmoil/parties/IParty';
 import {OrOptions} from '../../../src/inputs/OrOptions';

@@ -52,7 +52,7 @@ import {GlobalEventName} from '@/turmoil/globalEvents/GlobalEventName';
 import GlobalEvent from '@/client/components/GlobalEvent.vue';
 import {getGlobalEventByName} from '@/turmoil/globalEvents/GlobalEventDealer';
 import {GlobalEventModel} from '@/models/TurmoilModel';
-import {PartyName} from '@/turmoil/parties/PartyName';
+import {PartyName} from '@/common/turmoil/PartyName';
 import Button from '@/client/components/common/Button.vue';
 import {Log} from '@/Log';
 import {getCard} from '@/client/cards/ClientCardManifest';

@@ -1,4 +1,4 @@
-import {PartyName} from './parties/PartyName';
+import {PartyName} from '../common/turmoil/PartyName';
 import {IParty} from './parties/IParty';
 import {MarsFirst} from './parties/MarsFirst';
 import {Scientists} from './parties/Scientists';

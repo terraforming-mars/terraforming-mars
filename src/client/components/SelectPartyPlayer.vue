@@ -14,7 +14,7 @@
 <script lang="ts">
 import Vue from 'vue';
 import Button from '@/client/components/common/Button.vue';
-import {ColorWithNeutral} from '@/Color';
+import {ColorWithNeutral} from '@/common/Color';
 import {PlayerInputModel} from '@/models/PlayerInputModel';
 import {PublicPlayerModel} from '@/models/PlayerModel';
 import SelectPlayerRow from '@/client/components/SelectPlayerRow.vue';

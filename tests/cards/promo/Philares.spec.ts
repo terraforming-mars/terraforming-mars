@@ -6,7 +6,7 @@ import {EmptyBoard} from '../../ares/EmptyBoard';
 import {TileType} from '../../../src/common/TileType';
 import {ISpace} from '../../../src/boards/ISpace';
 import {expect} from 'chai';
-import {Phase} from '../../../src/Phase';
+import {Phase} from '../../../src/common/Phase';
 import {AndOptions} from '../../../src/inputs/AndOptions';
 import {TestPlayer} from '../../TestPlayer';
 import {Units} from '../../../src/common/Units';

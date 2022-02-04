@@ -3,7 +3,7 @@ import {EcologicalZone} from '../../../src/cards/base/EcologicalZone';
 import {EcologyExperts} from '../../../src/cards/prelude/EcologyExperts';
 import {Game} from '../../../src/Game';
 import {SelectSpace} from '../../../src/inputs/SelectSpace';
-import {Phase} from '../../../src/Phase';
+import {Phase} from '../../../src/common/Phase';
 import {Player} from '../../../src/Player';
 import {TileType} from '../../../src/common/TileType';
 import {TestPlayers} from '../../TestPlayers';

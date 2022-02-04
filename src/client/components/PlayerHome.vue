@@ -262,7 +262,7 @@ import TopBar from '@/client/components/TopBar.vue';
 import {PreferencesManager} from '@/client/utils/PreferencesManager';
 import {KeyboardNavigation} from '@/client/components/KeyboardNavigation';
 import MoonBoard from '@/client/components/moon/MoonBoard.vue';
-import {Phase} from '@/Phase';
+import {Phase} from '@/common/Phase';
 import StackedCards from '@/client/components/StackedCards.vue';
 import {GameModel} from '@/models/GameModel';
 import {PlayerViewModel, PublicPlayerModel} from '@/models/PlayerModel';

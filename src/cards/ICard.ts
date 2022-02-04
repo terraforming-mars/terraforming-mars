@@ -18,7 +18,7 @@ import {CardName} from '../CardName';
 import {ICardMetadata} from './ICardMetadata';
 import {StandardProjectCard} from './StandardProjectCard';
 import {CardRequirements} from './CardRequirements';
-import {GlobalParameter} from '../GlobalParameter';
+import {GlobalParameter} from '../common/GlobalParameter';
 import {BoardType} from '../boards/BoardType';
 import {Units} from '../common/Units';
 

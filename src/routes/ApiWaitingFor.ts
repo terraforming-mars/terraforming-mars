@@ -1,7 +1,7 @@
 import * as http from 'http';
 import {Handler} from './Handler';
 import {IContext} from './IHandler';
-import {Phase} from '../Phase';
+import {Phase} from '../common/Phase';
 import {Player} from '../Player';
 import {WaitingForModel} from '../models/WaitingForModel';
 import {Game} from '../Game';

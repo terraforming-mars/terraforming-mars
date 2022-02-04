@@ -1,6 +1,6 @@
 
 import {IAward} from '../awards/IAward';
-import {Color} from '../Color';
+import {Color} from '../common/Color';
 
 export interface IAwardScore {
     playerColor: Color;

@@ -1,11 +1,10 @@
 import {expect} from 'chai';
 import {PrivateSecurity} from '../../../src/cards/pathfinders/PrivateSecurity';
-import {Game} from '../../../src/Game';
 import {TestPlayer} from '../../TestPlayer';
-import {TestPlayers} from '../../TestPlayers';
 import {Fish} from '../../../src/cards/base/Fish';
 import {SelectPlayer} from '../../../src/inputs/SelectPlayer';
 import {Resources} from '../../../src/common/Resources';
+import {getTestPlayer, newTestGame} from '../../TestGame';
 
 describe('PrivateSecurity', function() {
   let card: PrivateSecurity;
@@ -15,10 +14,10 @@ describe('PrivateSecurity', function() {
 
   beforeEach(function() {
     card = new PrivateSecurity();
-    player = TestPlayers.BLUE.newPlayer();
-    opponent1 = TestPlayers.RED.newPlayer();
-    opponent2 = TestPlayers.GREEN.newPlayer();
-    Game.newInstance('id', [player, opponent1, opponent2], player);
+    const game = newTestGame(3, {pathfindersExpansion: true});
+    player = getTestPlayer(game, 0);
+    opponent1 = getTestPlayer(game, 1);
+    opponent2 = getTestPlayer(game, 2);
   });
 
   it('protects against Fish', function() {
@@ -41,5 +40,17 @@ describe('PrivateSecurity', function() {
     expect(action).is.undefined;
     // And it's the one without Private Security.
     expect(opponent1.getProduction(Resources.PLANTS)).to.eq(1);
+  });
+
+  it('Card cannot be played if the only opponent with production has Private Security', () => {
+    opponent1.setProductionForTest({plants: 1});
+    opponent2.setProductionForTest({plants: 0});
+
+    const fish = new Fish();
+
+    opponent2.playedCards = [];
+    expect(fish.canPlay(player)).is.true;
+    opponent1.playedCards = [card];
+    expect(fish.canPlay(player)).is.false;
   });
 });

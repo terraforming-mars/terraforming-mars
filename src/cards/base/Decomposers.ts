@@ -9,7 +9,7 @@ import {CardName} from '../../CardName';
 import {IResourceCard} from '../ICard';
 import {CardRequirements} from '../CardRequirements';
 import {CardRenderer} from '../render/CardRenderer';
-import {Phase} from '../../Phase';
+import {Phase} from '../../common/Phase';
 import {played} from '../Options';
 
 export class Decomposers extends Card implements IProjectCard, IResourceCard {

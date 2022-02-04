@@ -1,5 +1,5 @@
 
-import {Color} from '../Color';
+import {Color} from '../common/Color';
 import {Game} from '../Game';
 import {Colony} from '../colonies/Colony';
 

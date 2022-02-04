@@ -13,7 +13,7 @@ import {Tags} from '../common/cards/Tags';
 import {ISpace} from '../boards/ISpace';
 import {MAXIMUM_COLONY_RATE, MAXIMUM_LOGISTICS_RATE, MAXIMUM_MINING_RATE} from '../constants';
 import {Resources} from '../common/Resources';
-import {Phase} from '../Phase';
+import {Phase} from '../common/Phase';
 import {BoardType} from '../boards/BoardType';
 import {VictoryPointsBreakdown} from '../VictoryPointsBreakdown';
 

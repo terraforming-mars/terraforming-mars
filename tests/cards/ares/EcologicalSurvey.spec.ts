@@ -10,7 +10,7 @@ import {EmptyBoard} from '../../ares/EmptyBoard';
 import {SpaceBonus} from '../../../src/common/boards/SpaceBonus';
 import {ArcticAlgae} from '../../../src/cards/base/ArcticAlgae';
 import {SpaceType} from '../../../src/common/boards/SpaceType';
-import {Phase} from '../../../src/Phase';
+import {Phase} from '../../../src/common/Phase';
 import {TestingUtils} from '../../TestingUtils';
 import {TestPlayers} from '../../TestPlayers';
 import {OceanCity} from '../../../src/cards/ares/OceanCity';

@@ -1,5 +1,5 @@
 import {CardModel} from './CardModel';
-import {Color} from '../Color';
+import {Color} from '../common/Color';
 import {VictoryPointsBreakdown} from '../VictoryPointsBreakdown';
 import {ITagCount} from '@/common/cards/ITagCount';
 import {PlayerInputModel} from './PlayerInputModel';

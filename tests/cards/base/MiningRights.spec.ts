@@ -9,6 +9,7 @@ import {SpaceBonus} from '../../../src/common/boards/SpaceBonus';
 import {TileType} from '../../../src/common/TileType';
 import {TestPlayers} from '../../TestPlayers';
 import {ISpace} from '../../../src/boards/ISpace';
+import {TestingUtils} from '../../TestingUtils';
 
 describe('MiningRights', () => {
   let card : MiningRights; let player : Player; let game : Game;
@@ -38,6 +39,8 @@ describe('MiningRights', () => {
     expect(titaniumSpace!.bonus).contains(SpaceBonus.TITANIUM);
 
     action.cb(titaniumSpace!);
+    TestingUtils.runAllActions(game);
+
     expect(titaniumSpace!.player).to.eq(player);
     expect(titaniumSpace!.tile && titaniumSpace!.tile!.tileType).to.eq(TileType.MINING_RIGHTS);
     expect(player.getProduction(Resources.TITANIUM)).to.eq(1);
@@ -48,6 +51,8 @@ describe('MiningRights', () => {
     expect(steelSpace!.bonus).contains(SpaceBonus.STEEL);
 
     action.cb(steelSpace!);
+    TestingUtils.runAllActions(game);
+
     expect(steelSpace!.player).to.eq(player);
     expect(steelSpace!.tile && steelSpace!.tile!.tileType).to.eq(TileType.MINING_RIGHTS);
     expect(player.getProduction(Resources.TITANIUM)).to.eq(1);

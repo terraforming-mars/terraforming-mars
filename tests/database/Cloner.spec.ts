@@ -3,7 +3,7 @@ import {Cloner} from '../../src/database/Cloner';
 import {Game} from '../../src/Game';
 import {Player} from '../../src/Player';
 import {TestingUtils} from '../TestingUtils';
-import {Color} from '../../src/Color';
+import {Color} from '../../src/common/Color';
 
 describe('Cloner', function() {
   it('solo game preserved', () => {

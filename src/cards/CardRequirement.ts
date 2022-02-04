@@ -5,7 +5,7 @@ import {Resources} from '../common/Resources';
 import {Player} from '../Player';
 import {ResourceType} from '../common/ResourceType';
 import {TileType} from '../common/TileType';
-import {GlobalParameter} from '../GlobalParameter';
+import {GlobalParameter} from '../common/GlobalParameter';
 import {MoonExpansion} from '../moon/MoonExpansion';
 import {Turmoil} from '../turmoil/Turmoil';
 import {Options} from './CardRequirements';

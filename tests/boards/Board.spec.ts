@@ -6,7 +6,7 @@ import {ISpace} from '../../src/boards/ISpace';
 import {SpaceType} from '../../src/common/boards/SpaceType';
 import {TestPlayers} from '../TestPlayers';
 import {Board} from '../../src/boards/Board';
-import {Color} from '../../src/Color';
+import {Color} from '../../src/common/Color';
 import {SerializedBoard} from '../../src/boards/SerializedBoard';
 import {MoonSpaces} from '../../src/moon/MoonSpaces';
 import {Random} from '../../src/Random';

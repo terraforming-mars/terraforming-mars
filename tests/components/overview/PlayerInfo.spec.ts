@@ -2,7 +2,7 @@ import {mount} from '@vue/test-utils';
 import {getLocalVue} from '../getLocalVue';
 import {expect} from 'chai';
 import {CardName} from '@/CardName';
-import {Color} from '@/Color';
+import {Color} from '@/common/Color';
 import PlayerInfo from '@/client/components/overview/PlayerInfo.vue';
 import {PlayerViewModel, PublicPlayerModel} from '@/models/PlayerModel';
 import {RecursivePartial} from '@/utils/utils';

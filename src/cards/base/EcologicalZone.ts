@@ -14,7 +14,7 @@ import {IAdjacencyBonus} from '../../ares/IAdjacencyBonus';
 import {ICardMetadata} from '../ICardMetadata';
 import {CardRequirements} from '../CardRequirements';
 import {CardRenderer} from '../render/CardRenderer';
-import {Phase} from '../../Phase';
+import {Phase} from '../../common/Phase';
 import {played} from '../Options';
 import {Board} from '../../boards/Board';
 

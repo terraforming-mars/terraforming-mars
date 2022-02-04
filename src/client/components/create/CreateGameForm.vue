@@ -440,7 +440,7 @@
 
 <script lang="ts">
 import Vue from 'vue';
-import {Color} from '@/Color';
+import {Color} from '@/common/Color';
 import {BoardName, RandomBoardOption} from '@/boards/BoardName';
 import {CardName} from '@/CardName';
 import CorporationsFilter from '@/client/components/create/CorporationsFilter.vue';

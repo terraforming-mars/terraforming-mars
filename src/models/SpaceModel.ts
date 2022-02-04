@@ -1,5 +1,5 @@
 
-import {Color} from '../Color';
+import {Color} from '../common/Color';
 import {TileType} from '../common/TileType';
 import {SpaceBonus} from '../common/boards/SpaceBonus';
 import {SpaceType} from '../common/boards/SpaceType';

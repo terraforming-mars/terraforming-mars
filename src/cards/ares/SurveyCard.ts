@@ -7,7 +7,7 @@ import {Resources} from '../../common/Resources';
 import {ResourceType} from '../../common/ResourceType';
 import {AddResourcesToCard} from '../../deferredActions/AddResourcesToCard';
 import {GainResources} from '../../deferredActions/GainResources';
-import {Phase} from '../../Phase';
+import {Phase} from '../../common/Phase';
 import {IProjectCard} from '../IProjectCard';
 import {BoardType} from '../../boards/BoardType';
 import {SpaceType} from '../../common/boards/SpaceType';

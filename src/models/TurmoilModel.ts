@@ -1,4 +1,4 @@
-import {Color} from '../Color';
+import {Color} from '../common/Color';
 import {PartyName} from '../turmoil/parties/PartyName';
 import {GlobalEventName} from '../turmoil/globalEvents/GlobalEventName';
 import {Game} from '../Game';

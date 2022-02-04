@@ -3,7 +3,7 @@ import {getLocalVue} from './getLocalVue';
 import {expect} from 'chai';
 import Award from '@/client/components/Award.vue';
 import {FundedAwardModel} from '@/models/FundedAwardModel';
-import {Color} from '@/Color';
+import {Color} from '@/common/Color';
 
 function createAward(
   {funded, scores = []}:

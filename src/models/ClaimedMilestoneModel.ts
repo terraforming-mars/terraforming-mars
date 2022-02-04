@@ -1,5 +1,5 @@
 import {IMilestone} from '../milestones/IMilestone';
-import {Color} from '../Color';
+import {Color} from '../common/Color';
 
 export interface IMilestoneScore {
     playerColor: Color;

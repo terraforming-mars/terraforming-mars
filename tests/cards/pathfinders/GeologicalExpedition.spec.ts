@@ -9,7 +9,7 @@ import {SpaceBonus} from '../../../src/common/boards/SpaceBonus';
 import {IProjectCard} from '../../../src/cards/IProjectCard';
 import {TestingUtils} from '../../TestingUtils';
 import {ResourceType} from '../../../src/common/ResourceType';
-import {Units} from '../../../src/Units';
+import {Units} from '../../../src/common/Units';
 import {OrOptions} from '../../../src/inputs/OrOptions';
 
 describe('GeologicalExpedition', function() {

@@ -8,9 +8,9 @@ import {OrOptions} from './OrOptions';
 import {SelectOption} from './SelectOption';
 
 export class SelectHowToPay implements PlayerInput {
-    public inputType: PlayerInputTypes = PlayerInputTypes.SELECT_HOW_TO_PAY;
-    public buttonLabel: string = 'Pay'; // no input button
-    constructor(
+  public inputType: PlayerInputTypes = PlayerInputTypes.SELECT_HOW_TO_PAY;
+  public buttonLabel: string = 'Pay'; // no input button
+  constructor(
         public title: string | Message,
         public canUseSteel: boolean,
         public canUseTitanium: boolean,
@@ -18,6 +18,6 @@ export class SelectHowToPay implements PlayerInput {
         public canUseSeeds: boolean,
         public amount: number,
         public cb: (howToPay: HowToPay) => SelectSpace | SelectOption| OrOptions | undefined,
-    ) {
-    }
+  ) {
+  }
 }

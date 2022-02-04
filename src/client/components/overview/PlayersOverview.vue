@@ -5,8 +5,8 @@ import OverviewSettings from '@/client/components/overview/OverviewSettings.vue'
 import OtherPlayer from '@/client/components/OtherPlayer.vue';
 import {ViewModel, PublicPlayerModel} from '@/models/PlayerModel';
 import {ActionLabel} from '@/client/components/overview/ActionLabel';
-import {Phase} from '@/Phase';
-import {Color} from '@/Color';
+import {Phase} from '@/common/Phase';
+import {Color} from '@/common/Color';
 
 const SHOW_NEXT_LABEL_MIN = 2;
 

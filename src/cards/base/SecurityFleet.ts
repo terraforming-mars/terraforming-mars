@@ -31,17 +31,17 @@ export class SecurityFleet extends Card implements IActionCard, IProjectCard, IR
       },
     });
   }
-    public override resourceCount = 0;
+  public override resourceCount = 0;
 
-    public play() {
-      return undefined;
-    }
-    public canAct(player: Player): boolean {
-      return player.titanium > 0;
-    }
-    public action(player: Player) {
-      player.titanium--;
-      player.addResourceTo(this, 1);
-      return undefined;
-    }
+  public play() {
+    return undefined;
+  }
+  public canAct(player: Player): boolean {
+    return player.titanium > 0;
+  }
+  public action(player: Player) {
+    player.titanium--;
+    player.addResourceTo(this, 1);
+    return undefined;
+  }
 }

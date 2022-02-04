@@ -10,7 +10,7 @@ import {Resources} from '../../../src/common/Resources';
 import {SelectHowToPayDeferred} from '../../../src/deferredActions/SelectHowToPayDeferred';
 import {PlaceMoonMineTile} from '../../../src/moon/PlaceMoonMineTile';
 import {MooncrateBlockFactory} from '../../../src/cards/moon/MooncrateBlockFactory';
-import {Phase} from '../../../src/Phase';
+import {Phase} from '../../../src/common/Phase';
 
 const MOON_OPTIONS = TestingUtils.setCustomGameOptions({moonExpansion: true});
 

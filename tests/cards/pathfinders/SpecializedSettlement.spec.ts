@@ -5,7 +5,7 @@ import {TestPlayer} from '../../TestPlayer';
 import {TestPlayers} from '../../TestPlayers';
 import {TestingUtils} from '../../TestingUtils';
 import {EmptyBoard} from '../../ares/EmptyBoard';
-import {Units} from '../../../src/Units';
+import {Units} from '../../../src/common/Units';
 import {SelectSpace} from '../../../src/inputs/SelectSpace';
 import {SpaceBonus} from '../../../src/common/boards/SpaceBonus';
 import {TileType} from '../../../src/common/TileType';

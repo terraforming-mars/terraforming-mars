@@ -1,4 +1,4 @@
-import {Phase} from './Phase';
+import {Phase} from './common/Phase';
 import {CardName} from './CardName';
 import {SerializedClaimedMilestone} from './milestones/ClaimedMilestone';
 import {SerializedFundedAward} from './awards/FundedAward';

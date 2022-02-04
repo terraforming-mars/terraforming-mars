@@ -21,7 +21,7 @@ import {TestPlayers} from '../../TestPlayers';
 import {TileType} from '../../../src/common/TileType';
 import {ICard} from '../../../src/cards/ICard';
 import {TestPlayer} from '../../TestPlayer';
-import {Units} from '../../../src/Units';
+import {Units} from '../../../src/common/Units';
 import {fail} from 'assert';
 import {SolarWindPower} from '../../../src/cards/base/SolarWindPower';
 import {MarsUniversity} from '../../../src/cards/base/MarsUniversity';

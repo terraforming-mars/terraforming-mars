@@ -6,7 +6,7 @@ import {Game} from '../../../src/Game';
 import {TestPlayers} from '../../TestPlayers';
 import {PoliticalAgendas} from '../../../src/turmoil/PoliticalAgendas';
 import {Reds} from '../../../src/turmoil/parties/Reds';
-import {Phase} from '../../../src/Phase';
+import {Phase} from '../../../src/common/Phase';
 
 describe('BufferGasStandardProject', function() {
   let card: BufferGasStandardProject;

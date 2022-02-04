@@ -41,21 +41,21 @@ export class Fish extends Card implements IActionCard, IProjectCard, IResourceCa
       },
     });
   }
-    public override resourceCount: number = 0;
+  public override resourceCount: number = 0;
 
-    public override canPlay(player: Player): boolean {
-      return player.game.someoneCanHaveProductionReduced(Resources.PLANTS, 1);
-    }
-    public play(player: Player) {
-      player.game.defer(
-        new DecreaseAnyProduction(player, Resources.PLANTS, {count: 1}));
-      return undefined;
-    }
-    public canAct(): boolean {
-      return true;
-    }
-    public action(player: Player) {
-      player.addResourceTo(this);
-      return undefined;
-    }
+  public override canPlay(player: Player): boolean {
+    return player.game.someoneCanHaveProductionReduced(Resources.PLANTS, 1);
+  }
+  public play(player: Player) {
+    player.game.defer(
+      new DecreaseAnyProduction(player, Resources.PLANTS, {count: 1}));
+    return undefined;
+  }
+  public canAct(): boolean {
+    return true;
+  }
+  public action(player: Player) {
+    player.addResourceTo(this);
+    return undefined;
+  }
 }

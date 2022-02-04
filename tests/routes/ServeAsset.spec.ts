@@ -11,7 +11,7 @@ class FileApiMock extends FileAPI {
     readFile: 0,
     readFileSync: 0,
     existsSync: 0,
-  }
+  };
   public constructor() {
     super();
   }

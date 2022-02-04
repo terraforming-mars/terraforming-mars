@@ -5,7 +5,7 @@ import {Tags} from '../../common/cards/Tags';
 import {MoonExpansion} from '../../moon/MoonExpansion';
 import {MoonSpaces} from '../../moon/MoonSpaces';
 import {CardRenderer} from '../render/CardRenderer';
-import {Units} from '../../Units';
+import {Units} from '../../common/Units';
 import {TileType} from '../../common/TileType';
 import {MoonCard} from './MoonCard';
 import {AltSecondaryTag} from '../render/CardRenderItem';

@@ -9,7 +9,7 @@ import {CardName} from '../../CardName';
 import {BoardName} from '../../boards/BoardName';
 import {PlaceCityTile} from '../../deferredActions/PlaceCityTile';
 import {CardRenderer} from '../render/CardRenderer';
-import {Units} from '../../Units';
+import {Units} from '../../common/Units';
 
 export class LavaTubeSettlement extends Card implements IProjectCard {
   constructor() {

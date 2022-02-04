@@ -1,5 +1,5 @@
 import {expect} from 'chai';
-import {Units} from '../src/Units';
+import {Units} from '../../src/common/Units';
 
 describe('Units', () => {
   it('of', () => {

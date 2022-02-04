@@ -8,7 +8,7 @@ import {PartyName} from '../../turmoil/parties/PartyName';
 import {CardRequirements} from '../CardRequirements';
 import {CardRenderer} from '../render/CardRenderer';
 import {Card} from '../Card';
-import {Units} from '../../Units';
+import {Units} from '../../common/Units';
 
 export class SponsoredMohole extends Card implements IProjectCard {
   constructor() {

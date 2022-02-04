@@ -18,9 +18,9 @@ import {CardName} from '../CardName';
 import {ICardMetadata} from './ICardMetadata';
 import {StandardProjectCard} from './StandardProjectCard';
 import {CardRequirements} from './CardRequirements';
-import {GlobalParameter} from '../GlobalParameter';
+import {GlobalParameter} from '../common/GlobalParameter';
 import {BoardType} from '../boards/BoardType';
-import {Units} from '../Units';
+import {Units} from '../common/Units';
 
 export interface IActionCard {
     action: (player: Player) => OrOptions | SelectOption | AndOptions | SelectAmount | SelectCard<ICard> | SelectCard<IProjectCard> | SelectHowToPay | SelectPlayer | SelectSpace | undefined;

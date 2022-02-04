@@ -20,9 +20,7 @@
 <script lang="ts">
 
 import Vue from 'vue';
-
-import {Phase} from '@/Phase';
-
+import {Phase} from '@/common/Phase';
 import * as constants from '@/constants';
 
 export default Vue.extend({

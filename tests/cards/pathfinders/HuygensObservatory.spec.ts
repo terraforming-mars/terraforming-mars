@@ -8,7 +8,7 @@ import {ColonyName} from '../../../src/colonies/ColonyName';
 import {Game} from '../../../src/Game';
 import {TestPlayer} from '../../TestPlayer';
 import {TestingUtils} from '../../TestingUtils';
-import {Units} from '../../../src/Units';
+import {Units} from '../../../src/common/Units';
 import {Colony} from '../../../src/colonies/Colony';
 
 describe('HuygensObservatory', function() {

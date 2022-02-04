@@ -5,7 +5,7 @@ import {Resources} from '../../common/Resources';
 import {Card} from '../Card';
 import {CardName} from '../../CardName';
 import {CardRenderer} from '../render/CardRenderer';
-import {Units} from '../../Units';
+import {Units} from '../../common/Units';
 
 export class HousePrinting extends Card {
   constructor() {

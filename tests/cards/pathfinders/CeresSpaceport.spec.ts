@@ -5,7 +5,7 @@ import {TestPlayer} from '../../TestPlayer';
 import {TestPlayers} from '../../TestPlayers';
 import {PlaceOceanTile} from '../../../src/deferredActions/PlaceOceanTile';
 import {SpaceName} from '../../../src/SpaceName';
-import {Units} from '../../../src/Units';
+import {Units} from '../../../src/common/Units';
 import {TestingUtils} from '../../TestingUtils';
 
 describe('CeresSpaceport', function() {

@@ -4,7 +4,7 @@ import {CardType} from '../CardType';
 import {Tags} from '../../common/cards/Tags';
 import {Resources} from '../../common/Resources';
 import {CardRenderer} from '../render/CardRenderer';
-import {Units} from '../../Units';
+import {Units} from '../../common/Units';
 import {MoonCard} from './MoonCard';
 
 export class CopernicusSolarArrays extends MoonCard {

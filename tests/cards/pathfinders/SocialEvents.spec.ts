@@ -1,7 +1,7 @@
 import {expect} from 'chai';
 import {SocialEvents} from '../../../src/cards/pathfinders/SocialEvents';
 import {Game} from '../../../src/Game';
-import {Phase} from '../../../src/Phase';
+import {Phase} from '../../../src/common/Phase';
 import {TestPlayer} from '../../TestPlayer';
 import {getTestPlayer, newTestGame} from '../../TestGame';
 import {Reds} from '../../../src/turmoil/parties/Reds';

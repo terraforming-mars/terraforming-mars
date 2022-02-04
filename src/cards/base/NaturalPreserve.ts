@@ -11,7 +11,7 @@ import {CardName} from '../../CardName';
 import {IAdjacencyBonus} from '../../ares/IAdjacencyBonus';
 import {CardRequirements} from '../CardRequirements';
 import {CardRenderer} from '../render/CardRenderer';
-import {Units} from '../../Units';
+import {Units} from '../../common/Units';
 import {nextToNoOtherTileFn} from '../../boards/Board';
 import {max} from '../Options';
 

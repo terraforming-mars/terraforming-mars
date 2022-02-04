@@ -15,7 +15,7 @@ import {TileType} from '../../src/common/TileType';
 import {TestingUtils} from '../TestingUtils';
 import {TestPlayer} from '../TestPlayer';
 import {TestPlayers} from '../TestPlayers';
-import {Phase} from '../../src/Phase';
+import {Phase} from '../../src/common/Phase';
 
 const MOON_OPTIONS = TestingUtils.setCustomGameOptions({moonExpansion: true});
 

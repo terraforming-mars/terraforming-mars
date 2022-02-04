@@ -1,7 +1,7 @@
 import {ICard} from './ICard';
 import {Player} from '../Player';
 import {Resources} from '../common/Resources';
-import {Units} from '../Units';
+import {Units} from '../common/Units';
 
 export interface IProjectCard extends ICard {
     canPlay: (player: Player) => boolean;

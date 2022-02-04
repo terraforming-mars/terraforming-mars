@@ -14,7 +14,7 @@ import {Tags} from '../../common/cards/Tags';
 import {AddResourcesToCard} from '../../deferredActions/AddResourcesToCard';
 import {CardRequirements} from '../CardRequirements';
 import {CardRenderer} from '../render/CardRenderer';
-import {Units} from '../../Units';
+import {Units} from '../../common/Units';
 
 export class BiofertilizerFacility extends Card implements IProjectCard {
   constructor() {

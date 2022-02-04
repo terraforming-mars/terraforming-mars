@@ -36,18 +36,18 @@ export class Pristar extends Card implements CorporationCard, IResourceCard {
     });
   }
 
-    public override resourceCount = 0;
+  public override resourceCount = 0;
 
-    public play(player: Player) {
-      player.decreaseTerraformRatingSteps(2);
-      return undefined;
-    }
+  public play(player: Player) {
+    player.decreaseTerraformRatingSteps(2);
+    return undefined;
+  }
 
-    public onProductionPhase(player: Player) {
-      if (!(player.hasIncreasedTerraformRatingThisGeneration)) {
-        player.megaCredits += 6;
-        player.addResourceTo(this, 1);
-      }
-      return undefined;
+  public onProductionPhase(player: Player) {
+    if (!(player.hasIncreasedTerraformRatingThisGeneration)) {
+      player.megaCredits += 6;
+      player.addResourceTo(this, 1);
     }
+    return undefined;
+  }
 }

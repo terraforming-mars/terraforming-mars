@@ -10,7 +10,7 @@ import {ICard} from '../ICard';
 import {CardName} from '../../CardName';
 import {Resources} from '../../common/Resources';
 import {CardRenderer} from '../render/CardRenderer';
-import {Units} from '../../Units';
+import {Units} from '../../common/Units';
 import {digit} from '../Options';
 
 export class LocalHeatTrapping extends Card implements IProjectCard {

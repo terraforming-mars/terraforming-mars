@@ -2,7 +2,7 @@ import {PlayerInput} from '../PlayerInput';
 import {PlayerInputTypes} from '../PlayerInputTypes';
 import {HowToPay} from './HowToPay';
 import {IProjectCard} from '../cards/IProjectCard';
-import {Units} from '../Units';
+import {Units} from '../common/Units';
 import {MoonExpansion} from '../moon/MoonExpansion';
 import {Player} from '../Player';
 

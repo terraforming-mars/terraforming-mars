@@ -8,7 +8,7 @@ import {Resources} from '../../common/Resources';
 import {CardName} from '../../CardName';
 import {CardRequirements} from '../CardRequirements';
 import {CardRenderer} from '../render/CardRenderer';
-import {Units} from '../../Units';
+import {Units} from '../../common/Units';
 
 export class AICentral extends Card implements IActionCard, IProjectCard {
   constructor() {

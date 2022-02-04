@@ -34,18 +34,18 @@ export class Psychrophiles extends Card implements IActionCard, IProjectCard, IR
       },
     });
   }
-    public override resourceCount = 0;
+  public override resourceCount = 0;
 
-    public play() {
-      return undefined;
-    }
+  public play() {
+    return undefined;
+  }
 
-    public canAct(): boolean {
-      return true;
-    }
+  public canAct(): boolean {
+    return true;
+  }
 
-    public action(player: Player) {
-      player.addResourceTo(this);
-      return undefined;
-    }
+  public action(player: Player) {
+    player.addResourceTo(this);
+    return undefined;
+  }
 }

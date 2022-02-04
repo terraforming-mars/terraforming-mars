@@ -42,87 +42,87 @@ export class Playwrights extends Card implements CorporationCard {
     });
   }
 
-    private checkLoops: number = 0;
+  private checkLoops: number = 0;
 
-    public play(player: Player) {
-      player.addProduction(Resources.ENERGY, 1);
-      return undefined;
-    }
+  public play(player: Player) {
+    player.addProduction(Resources.ENERGY, 1);
+    return undefined;
+  }
 
-    public canAct(player: Player): boolean {
-      const replayableEvents = this.getReplayableEvents(player);
-      return replayableEvents.length > 0;
-    }
+  public canAct(player: Player): boolean {
+    const replayableEvents = this.getReplayableEvents(player);
+    return replayableEvents.length > 0;
+  }
 
-    public action(player: Player): SelectCard<IProjectCard> | undefined {
-      const players = player.game.getPlayers();
-      const replayableEvents = this.getReplayableEvents(player);
+  public action(player: Player): SelectCard<IProjectCard> | undefined {
+    const players = player.game.getPlayers();
+    const replayableEvents = this.getReplayableEvents(player);
 
-      return new SelectCard<IProjectCard>(
-        'Select event card to replay at cost in M€ and remove from play', 'Select', replayableEvents,
-        (foundCards: Array<IProjectCard>) => {
-          const selectedCard: IProjectCard = foundCards[0];
+    return new SelectCard<IProjectCard>(
+      'Select event card to replay at cost in M€ and remove from play', 'Select', replayableEvents,
+      (foundCards: Array<IProjectCard>) => {
+        const selectedCard: IProjectCard = foundCards[0];
 
-          players.forEach((p) => {
-            const cardIndex = p.playedCards.findIndex((c) => c.name === selectedCard.name);
-            if (cardIndex !== -1) {
-              p.playedCards.splice(cardIndex, 1);
-            }
-          });
+        players.forEach((p) => {
+          const cardIndex = p.playedCards.findIndex((c) => c.name === selectedCard.name);
+          if (cardIndex !== -1) {
+            p.playedCards.splice(cardIndex, 1);
+          }
+        });
 
-          const cost = player.getCardCost(selectedCard);
-          player.game.defer(new SelectHowToPayDeferred(
-            player,
-            cost,
-            {
-              title: 'Select how to pay to replay the event',
-              afterPay: () => {
-                player.playCard(selectedCard, undefined, false); // Play the card but don't add it to played cards
-                player.removedFromPlayCards.push(selectedCard); // Remove card from the game
-                if (selectedCard.name === CardName.LAW_SUIT) {
-                  /*
+        const cost = player.getCardCost(selectedCard);
+        player.game.defer(new SelectHowToPayDeferred(
+          player,
+          cost,
+          {
+            title: 'Select how to pay to replay the event',
+            afterPay: () => {
+              player.playCard(selectedCard, undefined, false); // Play the card but don't add it to played cards
+              player.removedFromPlayCards.push(selectedCard); // Remove card from the game
+              if (selectedCard.name === CardName.LAW_SUIT) {
+                /*
                    * If the card played is Law Suit we need to remove it from the newly sued player's played cards.
                    * Needs to be deferred to happen after Law Suit's `play()` method.
                    */
-                  player.game.defer(new DeferredAction(player, () => {
-                    player.game.getPlayers().some((p) => {
-                      const card = p.playedCards[p.playedCards.length - 1];
-                      if (card?.name === selectedCard.name) {
-                        p.playedCards.pop();
-                        return true;
-                      }
-                      return false;
-                    });
-                    return undefined;
-                  }));
-                }
-              },
+                player.game.defer(new DeferredAction(player, () => {
+                  player.game.getPlayers().some((p) => {
+                    const card = p.playedCards[p.playedCards.length - 1];
+                    if (card?.name === selectedCard.name) {
+                      p.playedCards.pop();
+                      return true;
+                    }
+                    return false;
+                  });
+                  return undefined;
+                }));
+              }
             },
-          ));
-          return undefined;
-        },
-      );
-    }
+          },
+        ));
+        return undefined;
+      },
+    );
+  }
 
-    public getCheckLoops(): number {
-      return this.checkLoops;
-    }
+  public getCheckLoops(): number {
+    return this.checkLoops;
+  }
 
-    private getReplayableEvents(player: Player): Array<IProjectCard> {
-      const playedEvents : IProjectCard[] = [];
+  private getReplayableEvents(player: Player): Array<IProjectCard> {
+    const playedEvents : IProjectCard[] = [];
 
-      this.checkLoops++;
-      player.game.getPlayers().forEach((p) => {
-        playedEvents.push(...p.playedCards.filter((card) => {
-          return card.cardType === CardType.EVENT &&
+    this.checkLoops++;
+    player.game.getPlayers().forEach((p) => {
+      playedEvents.push(...p.playedCards.filter((card) => {
+        return card.cardType === CardType.EVENT &&
             // Can player.canPlay(card) replace this?
             player.canAfford(player.getCardCost(card), {
               reserveUnits: MoonExpansion.adjustedReserveCosts(player, card),
             }) && player.canPlayIgnoringCost(card);
-        }));
-      });
-      this.checkLoops--;
+      }));
+    });
+    this.checkLoops--;
 
-      return playedEvents;
-    }
+    return playedEvents;
+  }
 }

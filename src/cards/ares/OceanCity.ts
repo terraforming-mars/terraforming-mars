@@ -10,7 +10,7 @@ import {IProjectCard} from '../IProjectCard';
 import {Tags} from '../../common/cards/Tags';
 import {CardRequirements} from '../CardRequirements';
 import {CardRenderer} from '../render/CardRenderer';
-import {Units} from '../../Units';
+import {Units} from '../../common/Units';
 
 export class OceanCity extends Card implements IProjectCard {
   constructor() {

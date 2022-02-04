@@ -12,7 +12,7 @@ import {PlayerInputModel} from '@/models/PlayerInputModel';
 import {PlayerViewModel, PublicPlayerModel} from '@/models/PlayerModel';
 import {PreferencesManager} from '@/client/utils/PreferencesManager';
 import {Tags} from '@/common/cards/Tags';
-import {Units} from '@/Units';
+import {Units} from '@/common/Units';
 import {CardName} from '@/CardName';
 
 export default Vue.extend({

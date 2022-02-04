@@ -3,7 +3,7 @@ import {Player} from '../src/Player';
 import {DEFAULT_GAME_OPTIONS, Game, GameOptions} from '../src/Game';
 import * as constants from '../src/constants';
 import {ISpace} from '../src/boards/ISpace';
-import {Phase} from '../src/Phase';
+import {Phase} from '../src/common/Phase';
 import {IParty} from '../src/turmoil/parties/IParty';
 import {Turmoil} from '../src/turmoil/Turmoil';
 import {LogMessage} from '../src/common/logs/LogMessage';

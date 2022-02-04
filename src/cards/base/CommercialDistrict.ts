@@ -12,7 +12,7 @@ import {Board} from '../../boards/Board';
 import {IAdjacencyBonus} from '../../ares/IAdjacencyBonus';
 import {CardRenderer} from '../render/CardRenderer';
 import {CardRenderDynamicVictoryPoints} from '../render/CardRenderDynamicVictoryPoints';
-import {Units} from '../../Units';
+import {Units} from '../../common/Units';
 
 export class CommercialDistrict extends Card implements IProjectCard {
   constructor(

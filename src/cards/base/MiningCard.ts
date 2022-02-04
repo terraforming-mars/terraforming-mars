@@ -64,40 +64,33 @@ export abstract class MiningCard extends Card implements IProjectCard {
     return TileType.MINING_AREA;
   }
 
-  private _produce(player: Player, cb: (resource: Resources) => void = () => {}): void {
-    if (this.bonusResource === undefined) {
-      return;
-    }
-
-    player.game.defer(new SelectResourceTypeDeferred(
-      player, this.bonusResource,
-      'Select a resource to gain 1 unit of production',
-      (resource) => {
-        player.addProduction(resource, 1, {log: true});
-        cb(resource);
-      },
-    ));
-  }
-
   public produce(player: Player) {
-    this._produce(player);
+    if (this.bonusResource && this.bonusResource.length === 1) {
+      player.addProduction(this.bonusResource[0], 1, {log: true});
+    }
   }
 
   public play(player: Player): SelectSpace {
     return new SelectSpace(this.getSelectTitle(), this.getAvailableSpaces(player), (space: ISpace) => {
-      this.bonusResource = [];
+      const bonusResources = [];
       if (space.bonus.includes(SpaceBonus.STEEL)) {
-        this.bonusResource.push(Resources.STEEL);
+        bonusResources.push(Resources.STEEL);
       }
       if (space.bonus.includes(SpaceBonus.TITANIUM)) {
-        this.bonusResource.push(Resources.TITANIUM);
+        bonusResources.push(Resources.TITANIUM);
       }
 
-      this._produce(player, (resource) => {
-        const spaceBonus = resource === Resources.TITANIUM ? SpaceBonus.TITANIUM : SpaceBonus.STEEL;
-        player.game.addTile(player, space.spaceType, space, {tileType: this.getTileType(spaceBonus)});
-        space.adjacency = this.getAdjacencyBonus(spaceBonus);
-      });
+      player.game.defer(new SelectResourceTypeDeferred(
+        player, bonusResources,
+        'Select a resource to gain 1 unit of production',
+        (resource) => {
+          player.addProduction(resource, 1, {log: true});
+          this.bonusResource = [resource];
+          const spaceBonus = resource === Resources.TITANIUM ? SpaceBonus.TITANIUM : SpaceBonus.STEEL;
+          player.game.addTile(player, space.spaceType, space, {tileType: this.getTileType(spaceBonus)});
+          space.adjacency = this.getAdjacencyBonus(spaceBonus);
+        },
+      ));
       return undefined;
     });
   }

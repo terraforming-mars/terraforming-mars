@@ -2,7 +2,7 @@ import {expect} from 'chai';
 import {MiningArea} from '../../../src/cards/base/MiningArea';
 import {Game} from '../../../src/Game';
 import {SelectSpace} from '../../../src/inputs/SelectSpace';
-import {Player} from '../../../src/Player';
+import {TestPlayer} from '../../TestPlayer';
 import {Resources} from '../../../src/common/Resources';
 import {SpaceBonus} from '../../../src/common/boards/SpaceBonus';
 import {TileType} from '../../../src/common/TileType';
@@ -10,7 +10,7 @@ import {TestPlayers} from '../../TestPlayers';
 import {TestingUtils} from '../../TestingUtils';
 
 describe('MiningArea', function() {
-  let card : MiningArea; let player : Player; let game : Game;
+  let card : MiningArea; let player : TestPlayer; let game : Game;
 
   beforeEach(function() {
     card = new MiningArea();
@@ -19,7 +19,7 @@ describe('MiningArea', function() {
     game = Game.newInstance('foobar', [player, redPlayer], player);
   });
 
-  it('Can\'t play', function() {
+  it('Cannot play', function() {
     expect(card.canPlay(player)).is.not.true;
   });
 

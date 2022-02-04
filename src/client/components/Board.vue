@@ -205,7 +205,7 @@ import BoardSpace from '@/client/components/BoardSpace.vue';
 import {IAresData} from '@/ares/IAresData';
 import {SpaceModel} from '@/models/SpaceModel';
 import {SpaceType} from '@/common/boards/SpaceType';
-import {SpaceId} from '@/boards/ISpace';
+import {SpaceId} from '@/common/Types';
 
 class GlobalParamLevel {
   constructor(public value: number, public isActive: boolean, public strValue: string) {

@@ -15,8 +15,8 @@ import {SelectHowToPayDeferred} from '../../deferredActions/SelectHowToPayDeferr
 import {DrawCards} from '../../deferredActions/DrawCards';
 import {SpaceType} from '../../common/boards/SpaceType';
 import {SpaceBonus} from '../../common/boards/SpaceBonus';
-import {Phase} from '../../Phase';
-import {Units} from '../../Units';
+import {Phase} from '../../common/Phase';
+import {Units} from '../../common/Units';
 
 export class CuriosityII extends Card implements CorporationCard {
   constructor() {

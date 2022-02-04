@@ -3,7 +3,7 @@ import {Ants} from '../../../src/cards/base/Ants';
 import {GeologicalSurvey} from '../../../src/cards/ares/GeologicalSurvey';
 import {Pets} from '../../../src/cards/base/Pets';
 import {Game} from '../../../src/Game';
-import {Phase} from '../../../src/Phase';
+import {Phase} from '../../../src/common/Phase';
 import {Player} from '../../../src/Player';
 import {SpaceBonus} from '../../../src/common/boards/SpaceBonus';
 import {SpaceType} from '../../../src/common/boards/SpaceType';

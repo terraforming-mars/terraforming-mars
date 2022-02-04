@@ -2,7 +2,7 @@ import {expect} from 'chai';
 import {ExperiencedMartians} from '../../../src/cards/pathfinders/ExperiencedMartians';
 import {TestPlayer} from '../../TestPlayer';
 import {getTestPlayer, newTestGame} from '../../TestGame';
-import {Units} from '../../../src/Units';
+import {Units} from '../../../src/common/Units';
 import {Turmoil} from '../../../src/turmoil/Turmoil';
 import {Game} from '../../../src/Game';
 import {Tags} from '../../../src/common/cards/Tags';

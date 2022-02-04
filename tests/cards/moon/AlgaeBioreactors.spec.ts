@@ -7,7 +7,7 @@ import {expect} from 'chai';
 import {Resources} from '../../../src/common/Resources';
 import {IMoonData} from '../../../src/moon/IMoonData';
 import {MoonExpansion} from '../../../src/moon/MoonExpansion';
-import {Phase} from '../../../src/Phase';
+import {Phase} from '../../../src/common/Phase';
 import {MAX_OXYGEN_LEVEL} from '../../../src/constants';
 
 const MOON_OPTIONS = TestingUtils.setCustomGameOptions({moonExpansion: true});

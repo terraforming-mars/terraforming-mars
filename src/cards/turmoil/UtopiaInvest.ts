@@ -9,7 +9,7 @@ import {Card} from '../Card';
 import {CardName} from '../../CardName';
 import {CardType} from '../CardType';
 import {CardRenderer} from '../render/CardRenderer';
-import {Units} from '../../Units';
+import {Units} from '../../common/Units';
 import {digit} from '../Options';
 
 export class UtopiaInvest extends Card implements IActionCard, CorporationCard {

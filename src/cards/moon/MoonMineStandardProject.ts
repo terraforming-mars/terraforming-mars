@@ -4,7 +4,7 @@ import {CardRenderer} from '../render/CardRenderer';
 import {StandardProjectCard} from '../StandardProjectCard';
 import {MoonExpansion} from '../../moon/MoonExpansion';
 import {PlaceMoonMineTile} from '../../moon/PlaceMoonMineTile';
-import {Units} from '../../Units';
+import {Units} from '../../common/Units';
 import {Resources} from '../../common/Resources';
 import {IMoonCard} from './IMoonCard';
 import {TileType} from '../../common/TileType';

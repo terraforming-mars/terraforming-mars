@@ -4,7 +4,7 @@ import {Game} from '../../../src/Game';
 import {TestPlayer} from '../../TestPlayer';
 import {TestPlayers} from '../../TestPlayers';
 import {TestingUtils} from '../../TestingUtils';
-import {Units} from '../../../src/Units';
+import {Units} from '../../../src/common/Units';
 
 describe('HydrogenProcessingPlant', function() {
   let card: HydrogenProcessingPlant;

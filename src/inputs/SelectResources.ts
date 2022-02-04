@@ -1,7 +1,7 @@
 import {Player} from '../Player';
 import {AndOptions} from './AndOptions';
 import {SelectAmount} from './SelectAmount';
-import {Units} from '../Units';
+import {Units} from '../common/Units';
 
 export class SelectResources extends AndOptions {
   private static makeOptions(count: number, units: Units) {

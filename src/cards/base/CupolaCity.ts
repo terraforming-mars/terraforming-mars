@@ -10,7 +10,7 @@ import {Resources} from '../../common/Resources';
 import {CardName} from '../../CardName';
 import {CardRequirements} from '../CardRequirements';
 import {CardRenderer} from '../render/CardRenderer';
-import {Units} from '../../Units';
+import {Units} from '../../common/Units';
 import {max} from '../Options';
 
 export class CupolaCity extends Card implements IProjectCard {

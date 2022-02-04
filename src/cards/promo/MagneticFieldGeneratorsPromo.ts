@@ -9,7 +9,7 @@ import {SelectSpace} from '../../inputs/SelectSpace';
 import {TileType} from '../../common/TileType';
 import {ISpace} from '../../boards/ISpace';
 import {CardRenderer} from '../render/CardRenderer';
-import {Units} from '../../Units';
+import {Units} from '../../common/Units';
 import {digit} from '../Options';
 
 export class MagneticFieldGeneratorsPromo extends Card implements IProjectCard {

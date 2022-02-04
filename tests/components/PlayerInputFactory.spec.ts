@@ -6,7 +6,7 @@ import PlayerInputFactory from '@/client/components/PlayerInputFactory.vue';
 import {PlayerInputTypes} from '@/PlayerInputTypes';
 import {CardModel} from '@/models/CardModel';
 import {PlayerInputModel} from '@/models/PlayerInputModel';
-import {Units} from '@/Units';
+import {Units} from '@/common/Units';
 import {CardName} from '@/CardName';
 
 const baseInput = {

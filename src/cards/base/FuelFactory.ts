@@ -6,7 +6,7 @@ import {Tags} from '../../common/cards/Tags';
 import {Resources} from '../../common/Resources';
 import {CardName} from '../../CardName';
 import {CardRenderer} from '../render/CardRenderer';
-import {Units} from '../../Units';
+import {Units} from '../../common/Units';
 
 export class FuelFactory extends Card implements IProjectCard {
   constructor() {

@@ -1,7 +1,7 @@
 import {ISpace} from '../boards/ISpace';
 import {Game} from '../Game';
 import {LogHelper} from '../LogHelper';
-import {Phase} from '../Phase';
+import {Phase} from '../common/Phase';
 import {Player} from '../Player';
 import {TileType} from '../common/TileType';
 import {IAresData, IHazardConstraint} from './IAresData';

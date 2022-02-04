@@ -3,7 +3,7 @@ import {Player} from '../../Player';
 import {CardType} from '../CardType';
 import {Tags} from '../../common/cards/Tags';
 import {CardRenderer} from '../render/CardRenderer';
-import {Units} from '../../Units';
+import {Units} from '../../common/Units';
 import {MoonCard} from './MoonCard';
 
 export class HeliostatMirrorArray extends MoonCard {

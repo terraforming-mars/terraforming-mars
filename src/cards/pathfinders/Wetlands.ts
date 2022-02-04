@@ -9,7 +9,7 @@ import {IProjectCard} from '../IProjectCard';
 import {Tags} from '../../common/cards/Tags';
 import {CardRequirements} from '../CardRequirements';
 import {CardRenderer} from '../render/CardRenderer';
-import {Units} from '../../Units';
+import {Units} from '../../common/Units';
 import {Board} from '../../boards/Board';
 import {Size} from '../render/Size';
 

@@ -1,6 +1,6 @@
 import {expect} from 'chai';
 import {ConvertHeat} from '../../../../src/cards/base/standardActions/ConvertHeat';
-import {Phase} from '../../../../src/Phase';
+import {Phase} from '../../../../src/common/Phase';
 import {Player} from '../../../../src/Player';
 import {TestingUtils} from '../../../TestingUtils';
 import {TestPlayers} from '../../../TestPlayers';

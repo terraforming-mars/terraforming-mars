@@ -6,7 +6,7 @@ import {CardRenderer} from '../render/CardRenderer';
 import {MoonSpaces} from '../../moon/MoonSpaces';
 import {MoonExpansion} from '../../moon/MoonExpansion';
 import {PlaceMoonRoadTile} from '../../moon/PlaceMoonRoadTile';
-import {Units} from '../../Units';
+import {Units} from '../../common/Units';
 import {SpaceType} from '../../common/boards/SpaceType';
 import {TileType} from '../../common/TileType';
 import {MoonCard} from './MoonCard';

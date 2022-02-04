@@ -10,7 +10,7 @@ import {CardName} from '../../CardName';
 import {CardType} from '../CardType';
 import {CardRenderer} from '../render/CardRenderer';
 import {Size} from '../render/Size';
-import {Units} from '../../Units';
+import {Units} from '../../common/Units';
 
 export class Factorum extends Card implements IActionCard, CorporationCard {
   constructor() {

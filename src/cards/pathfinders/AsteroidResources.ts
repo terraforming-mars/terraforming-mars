@@ -6,7 +6,7 @@ import {CardName} from '../../CardName';
 import {CardRenderer} from '../render/CardRenderer';
 import {Tags} from '../../common/cards/Tags';
 import {Resources} from '../../common/Resources';
-import {Units} from '../../Units';
+import {Units} from '../../common/Units';
 import {OrOptions} from '../../inputs/OrOptions';
 import {SelectOption} from '../../inputs/SelectOption';
 import {PlaceOceanTile} from '../../deferredActions/PlaceOceanTile';

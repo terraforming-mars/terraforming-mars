@@ -1,7 +1,7 @@
 import {Player} from '../src/Player';
 import {PlayerInput} from '../src/PlayerInput';
-import {Color} from '../src/Color';
-import {Units} from '../src/Units';
+import {Color} from '../src/common/Color';
+import {Units} from '../src/common/Units';
 import {Tags} from '../src/common/cards/Tags';
 import {VictoryPointsBreakdown} from '../src/VictoryPointsBreakdown';
 

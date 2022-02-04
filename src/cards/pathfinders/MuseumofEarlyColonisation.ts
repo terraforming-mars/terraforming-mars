@@ -6,7 +6,7 @@ import {CardName} from '../../CardName';
 import {CardRenderer} from '../render/CardRenderer';
 import {Tags} from '../../common/cards/Tags';
 import {CardRequirements} from '../CardRequirements';
-import {Units} from '../../Units';
+import {Units} from '../../common/Units';
 import {all} from '../Options';
 
 export class MuseumofEarlyColonisation extends Card implements IProjectCard {

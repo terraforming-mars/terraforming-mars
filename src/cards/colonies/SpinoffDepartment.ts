@@ -6,7 +6,7 @@ import {CardName} from '../../CardName';
 import {Resources} from '../../common/Resources';
 import {CardRenderer} from '../render/CardRenderer';
 import {Card} from '../Card';
-import {Units} from '../../Units';
+import {Units} from '../../common/Units';
 
 export class SpinoffDepartment extends Card implements IProjectCard {
   constructor() {

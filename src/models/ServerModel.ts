@@ -1,6 +1,6 @@
 import {CardModel} from './CardModel';
 import {ColonyModel} from './ColonyModel';
-import {Color} from '../Color';
+import {Color} from '../common/Color';
 import {Game, GameOptions} from '../Game';
 import {SimpleGameModel} from './SimpleGameModel';
 import {GameOptionsModel} from './GameOptionsModel';
@@ -22,7 +22,7 @@ import {SelectPlayer} from '../inputs/SelectPlayer';
 import {SelectSpace} from '../inputs/SelectSpace';
 import {SpaceHighlight, SpaceModel} from './SpaceModel';
 import {TileType} from '../common/TileType';
-import {Phase} from '../Phase';
+import {Phase} from '../common/Phase';
 import {Resources} from '../common/Resources';
 import {CardType} from '../cards/CardType';
 import {
@@ -39,7 +39,7 @@ import {SelectProductionToLose} from '../inputs/SelectProductionToLose';
 import {ShiftAresGlobalParameters} from '../inputs/ShiftAresGlobalParameters';
 import {SpectatorModel} from './SpectatorModel';
 import {MoonModel} from './MoonModel';
-import {Units} from '../Units';
+import {Units} from '../common/Units';
 import {SelectPartyToSendDelegate} from '../inputs/SelectPartyToSendDelegate';
 import {GameModel} from './GameModel';
 import {Turmoil} from '../turmoil/Turmoil';

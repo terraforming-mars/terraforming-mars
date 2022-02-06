@@ -9,7 +9,7 @@ import {AddResourcesToCard} from '../../deferredActions/AddResourcesToCard';
 import {ResourceType} from '../../common/ResourceType';
 import {Tags} from '../../common/cards/Tags';
 import {CardRequirements} from '../CardRequirements';
-import {PartyName} from '../../turmoil/parties/PartyName';
+import {PartyName} from '../../common/turmoil/PartyName';
 import {Resources} from '../../common/Resources';
 import {SpaceName} from '../../SpaceName';
 import {SpaceType} from '../../common/boards/SpaceType';

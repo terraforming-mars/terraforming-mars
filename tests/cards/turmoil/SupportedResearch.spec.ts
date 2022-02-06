@@ -1,7 +1,7 @@
 import {expect} from 'chai';
 import {SupportedResearch} from '../../../src/cards/turmoil/SupportedResearch';
 import {Game} from '../../../src/Game';
-import {PartyName} from '../../../src/turmoil/parties/PartyName';
+import {PartyName} from '../../../src/common/turmoil/PartyName';
 import {TestingUtils} from '../../TestingUtils';
 import {TestPlayers} from '../../TestPlayers';
 

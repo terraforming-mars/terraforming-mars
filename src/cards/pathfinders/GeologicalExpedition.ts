@@ -12,6 +12,7 @@ import {Resources} from '../../common/Resources';
 import {OrOptions} from '../../inputs/OrOptions';
 import {SelectOption} from '../../inputs/SelectOption';
 import {DeferredAction, Priority} from '../../deferredActions/DeferredAction';
+import {SpaceType} from '../../common/boards/SpaceType';
 
 const VALID_BONUSES: Array<SpaceBonus> = [
   SpaceBonus.TITANIUM,
@@ -38,7 +39,7 @@ export class GeologicalExpedition extends Card implements IProjectCard {
       metadata: {
         cardNumber: 'Pf17',
         renderData: CardRenderer.builder((b) => {
-          b.effect('When you place a tile on Mars gain 1 additional resource on the space. If the space has no bonus, gain 1 steel', (eb) => {
+          b.effect('When you place a tile ON MARS gain 1 additional resource on the space. If the space has no bonus, gain 1 steel', (eb) => {
             eb.emptyTile().startEffect.plus().wild(1).or().steel(1).asterix();
           }).br;
         }),
@@ -47,16 +48,10 @@ export class GeologicalExpedition extends Card implements IProjectCard {
   }
 
   public onTilePlaced(cardOwner: Player, activePlayer: Player, space: ISpace, boardType: BoardType) {
-    if (boardType !== BoardType.MARS) {
-      return;
-    }
-    if (cardOwner !== activePlayer) {
-      return;
-    }
+    if (boardType !== BoardType.MARS || space.spaceType === SpaceType.COLONY) return;
+    if (cardOwner !== activePlayer) return;
     // Don't grant bonuses when overplacing.
-    if (space.tile?.covers !== undefined) {
-      return;
-    }
+    if (space.tile?.covers !== undefined) return;
 
     const bonuses = space.bonus;
     if (bonuses.length === 0) {

@@ -20,7 +20,7 @@ import {SelectHowToPay} from '../inputs/SelectHowToPay';
 import {SelectHowToPayForProjectCard} from '../inputs/SelectHowToPayForProjectCard';
 import {SelectPlayer} from '../inputs/SelectPlayer';
 import {SelectSpace} from '../inputs/SelectSpace';
-import {SpaceHighlight, SpaceModel} from './SpaceModel';
+import {SpaceHighlight, SpaceModel} from '../common/models/SpaceModel';
 import {TileType} from '../common/TileType';
 import {Phase} from '../common/Phase';
 import {Resources} from '../common/Resources';
@@ -28,8 +28,8 @@ import {CardType} from '../common/cards/CardType';
 import {
   ClaimedMilestoneModel,
   IMilestoneScore,
-} from './ClaimedMilestoneModel';
-import {FundedAwardModel, IAwardScore} from './FundedAwardModel';
+} from '../common/models/ClaimedMilestoneModel';
+import {FundedAwardModel, IAwardScore} from '../common/models/FundedAwardModel';
 import {
   getTurmoilModel,
 } from './TurmoilModel';
@@ -38,12 +38,13 @@ import {SelectColony} from '../inputs/SelectColony';
 import {SelectProductionToLose} from '../inputs/SelectProductionToLose';
 import {ShiftAresGlobalParameters} from '../inputs/ShiftAresGlobalParameters';
 import {SpectatorModel} from './SpectatorModel';
-import {MoonModel} from './MoonModel';
 import {Units} from '../common/Units';
 import {SelectPartyToSendDelegate} from '../inputs/SelectPartyToSendDelegate';
 import {GameModel} from './GameModel';
 import {Turmoil} from '../turmoil/Turmoil';
 import {PathfindersModel} from './PathfindersModel';
+import {MoonExpansion} from '../moon/MoonExpansion';
+import {MoonModel} from '../common/models/MoonModel';
 
 export class Server {
   public static getSimpleGameModel(game: Game): SimpleGameModel {
@@ -76,7 +77,7 @@ export class Server {
       isSoloModeWin: game.isSoloModeWin(),
       lastSoloGeneration: game.lastSoloGeneration(),
       milestones: this.getMilestones(game),
-      moon: MoonModel.serialize(game),
+      moon: this.getMoonModel(game),
       oceans: game.board.getOceanCount(),
       oxygenLevel: game.getOxygenLevel(),
       passedPlayers: game.getPassedPlayers(),
@@ -160,7 +161,8 @@ export class Server {
       milestoneModels.push({
         player_name: claimed === undefined ? '' : claimed.player.name,
         player_color: claimed === undefined ? '' : claimed.player.color,
-        milestone,
+        name: milestone.name,
+        description: milestone.description,
         scores,
       });
     }
@@ -190,7 +192,8 @@ export class Server {
       awardModels.push({
         player_name: funded === undefined ? '' : funded.player.name,
         player_color: funded === undefined ? '' : funded.player.color,
-        award,
+        name: award.name,
+        description: award.description,
         scores: scores,
       });
     }
@@ -442,7 +445,7 @@ export class Server {
 
   // Oceans can't be owned so they shouldn't have a color associated with them
   // Land claim can have a color on a space without a tile
-  public static getColor(space: ISpace): Color | undefined {
+  private static getColor(space: ISpace): Color | undefined {
     if (
       (space.tile === undefined || space.tile.tileType !== TileType.OCEAN) &&
     space.player !== undefined
@@ -455,7 +458,7 @@ export class Server {
     return undefined;
   }
 
-  public static getSpaces(board: Board): Array<SpaceModel> {
+  private static getSpaces(board: Board): Array<SpaceModel> {
     const volcanicSpaceIds = board.getVolcanicSpaceIds();
     const noctisCitySpaceIds = board.getNoctisCitySpaceIds();
 
@@ -514,5 +517,16 @@ export class Server {
       venusNextExtension: options.venusNextExtension,
       undoOption: options.undoOption,
     };
+  }
+
+  private static getMoonModel(game: Game): MoonModel | undefined {
+    return MoonExpansion.ifElseMoon(game, (moonData) => {
+      return {
+        logisticsRate: moonData.logisticRate,
+        miningRate: moonData.miningRate,
+        colonyRate: moonData.colonyRate,
+        spaces: this.getSpaces(moonData.moon),
+      };
+    }, () => undefined);
   }
 }

@@ -1,5 +1,5 @@
 import {Player} from '../../Player';
-import {PartyName} from './PartyName';
+import {PartyName} from '../../common/turmoil/PartyName';
 import {SpaceType} from '../../common/boards/SpaceType';
 import {Phase} from '../../common/Phase';
 import {PolicyId} from '../Policy';

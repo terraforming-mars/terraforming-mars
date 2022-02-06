@@ -8,7 +8,7 @@ import {Game} from '../../../src/Game';
 import {DeclareCloneTag} from '../../../src/pathfinders/DeclareCloneTag';
 import {OrOptions} from '../../../src/inputs/OrOptions';
 import {Tags} from '../../../src/common/cards/Tags';
-import {PartyName} from '../../../src/turmoil/parties/PartyName';
+import {PartyName} from '../../../src/common/turmoil/PartyName';
 import {DeferredAction} from '../../../src//deferredActions/DeferredAction';
 import {SendDelegateToArea} from '../../../src//deferredActions/SendDelegateToArea';
 import {SelectPartyToSendDelegate} from '../../../src//inputs/SelectPartyToSendDelegate';

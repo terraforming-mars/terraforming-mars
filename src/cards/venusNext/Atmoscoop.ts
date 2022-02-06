@@ -11,7 +11,7 @@ import {ICard} from '../ICard';
 import {CardName} from '../../CardName';
 import * as constants from '../../constants';
 import {PartyHooks} from '../../turmoil/parties/PartyHooks';
-import {PartyName} from '../../turmoil/parties/PartyName';
+import {PartyName} from '../../common/turmoil/PartyName';
 import {CardRequirements} from '../CardRequirements';
 import {CardRenderer} from '../render/CardRenderer';
 import {Size} from '../render/Size';

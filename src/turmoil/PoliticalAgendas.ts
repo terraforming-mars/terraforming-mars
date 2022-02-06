@@ -2,7 +2,7 @@ import {ChoosePoliticalAgenda} from '../deferredActions/ChoosePoliticalAgenda';
 import {Game} from '../Game';
 import {Bonus, BonusId} from './Bonus';
 import {IParty} from './parties/IParty';
-import {PartyName} from './parties/PartyName';
+import {PartyName} from '../common/turmoil/PartyName';
 import {Policy, PolicyId} from './Policy';
 import {Turmoil} from './Turmoil';
 

@@ -4,7 +4,7 @@ import {Card} from '../Card';
 import {CardName} from '../../CardName';
 import {CardType} from '../../common/cards/CardType';
 import {Player} from '../../Player';
-import {PartyName} from '../../turmoil/parties/PartyName';
+import {PartyName} from '../../common/turmoil/PartyName';
 import {Resources} from '../../common/Resources';
 import {SelectHowToPayDeferred} from '../../deferredActions/SelectHowToPayDeferred';
 import {SendDelegateToArea} from '../../deferredActions/SendDelegateToArea';

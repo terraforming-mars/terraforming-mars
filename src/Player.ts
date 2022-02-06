@@ -21,7 +21,7 @@ import {ITagCount} from './common/cards/ITagCount';
 import {LogMessageDataType} from './common/logs/LogMessageDataType';
 import {OrOptions} from './inputs/OrOptions';
 import {PartyHooks} from './turmoil/parties/PartyHooks';
-import {PartyName} from './turmoil/parties/PartyName';
+import {PartyName} from './common/turmoil/PartyName';
 import {PharmacyUnion} from './cards/promo/PharmacyUnion';
 import {Phase} from './common/Phase';
 import {PlayerInput} from './PlayerInput';

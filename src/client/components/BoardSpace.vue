@@ -12,7 +12,7 @@
 
 import Vue from 'vue';
 import Bonus from '@/client/components/Bonus.vue';
-import {SpaceModel} from '@/models/SpaceModel';
+import {SpaceModel} from '@/common/models/SpaceModel';
 import {SpaceType} from '@/common/boards/SpaceType';
 import {TileType} from '@/common/TileType';
 

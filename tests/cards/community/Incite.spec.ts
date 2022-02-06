@@ -4,7 +4,7 @@ import {EventAnalysts} from '../../../src/cards/turmoil/EventAnalysts';
 import {Game} from '../../../src/Game';
 import {SelectPartyToSendDelegate} from '../../../src/inputs/SelectPartyToSendDelegate';
 import {Player} from '../../../src/Player';
-import {PartyName} from '../../../src/turmoil/parties/PartyName';
+import {PartyName} from '../../../src/common/turmoil/PartyName';
 import {TestingUtils} from '../../TestingUtils';
 import {TestPlayers} from '../../TestPlayers';
 

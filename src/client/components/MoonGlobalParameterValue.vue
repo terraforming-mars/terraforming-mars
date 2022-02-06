@@ -23,7 +23,7 @@
 <script lang="ts">
 import Vue from 'vue';
 import {MAXIMUM_COLONY_RATE, MAXIMUM_LOGISTICS_RATE, MAXIMUM_MINING_RATE} from '@/constants';
-import {MoonModel} from '@/models/MoonModel';
+import {MoonModel} from '@/common/models/MoonModel';
 
 export default Vue.extend({
   name: 'MoonGlobalParameterValue',

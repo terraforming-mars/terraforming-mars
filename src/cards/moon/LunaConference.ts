@@ -4,7 +4,7 @@ import {CardType} from '../../common/cards/CardType';
 import {IProjectCard} from '../IProjectCard';
 import {Tags} from '../../common/cards/Tags';
 import {CardRenderer} from '../render/CardRenderer';
-import {PartyName} from '../../turmoil/parties/PartyName';
+import {PartyName} from '../../common/turmoil/PartyName';
 import {MoonExpansion} from '../../moon/MoonExpansion';
 import {TileType} from '../../common/TileType';
 import {CardRequirements} from '../CardRequirements';

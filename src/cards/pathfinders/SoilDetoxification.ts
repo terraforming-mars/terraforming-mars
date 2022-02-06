@@ -6,7 +6,7 @@ import {CardName} from '../../CardName';
 import {CardRenderer} from '../render/CardRenderer';
 import {Tags} from '../../common/cards/Tags';
 import {CardRequirements} from '../CardRequirements';
-import {PartyName} from '../../turmoil/parties/PartyName';
+import {PartyName} from '../../common/turmoil/PartyName';
 import {Resources} from '../../common/Resources';
 
 export class SoilDetoxification extends Card implements IProjectCard {

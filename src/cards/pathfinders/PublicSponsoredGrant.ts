@@ -7,7 +7,7 @@ import {CardRenderer} from '../render/CardRenderer';
 import {Resources} from '../../common/Resources';
 import {Tags} from '../../common/cards/Tags';
 import {CardRequirements} from '../CardRequirements';
-import {PartyName} from '../../turmoil/parties/PartyName';
+import {PartyName} from '../../common/turmoil/PartyName';
 import {OrOptions} from '../../inputs/OrOptions';
 import {SelectOption} from '../../inputs/SelectOption';
 import {all} from '../Options';

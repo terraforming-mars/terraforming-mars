@@ -11,6 +11,9 @@ import {TestingUtils} from '../../TestingUtils';
 import {ResourceType} from '../../../src/common/ResourceType';
 import {Units} from '../../../src/common/Units';
 import {OrOptions} from '../../../src/inputs/OrOptions';
+import {SpaceName} from '../../../src/SpaceName';
+import {TileType} from '../../../src/common/TileType';
+import {SpaceType} from '../../../src/common/boards/SpaceType';
 
 describe('GeologicalExpedition', function() {
   let card: GeologicalExpedition;
@@ -37,6 +40,17 @@ describe('GeologicalExpedition', function() {
     game.addCityTile(player, space.id);
 
     expect(player.getResourcesForTest()).deep.eq(Units.of({steel: 1}));
+    expect(microbeCard.resourceCount).eq(0);
+    expect(scienceCard.resourceCount).eq(0);
+    expect(player.getWaitingFor()).is.undefined;
+  });
+
+  it('City tile on a space colony, no bonus', () => {
+    game.addCityTile(player, SpaceName.GANYMEDE_COLONY, SpaceType.COLONY);
+
+    expect(game.board.getSpace(SpaceName.GANYMEDE_COLONY).tile?.tileType).eq(TileType.CITY);
+
+    expect(player.getResourcesForTest()).deep.eq(Units.EMPTY);
     expect(microbeCard.resourceCount).eq(0);
     expect(scienceCard.resourceCount).eq(0);
     expect(player.getWaitingFor()).is.undefined;

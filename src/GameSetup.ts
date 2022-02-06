@@ -1,5 +1,5 @@
 import {Board} from './boards/Board';
-import {BoardName} from './boards/BoardName';
+import {BoardName} from './common/boards/BoardName';
 import {ElysiumBoard} from './boards/ElysiumBoard';
 import {Game, GameOptions} from './Game';
 import {GameId} from './common/Types';

@@ -7,7 +7,7 @@ import {SpaceName} from '../../../src/SpaceName';
 import {TileType} from '../../../src/common/TileType';
 import {TestPlayers} from '../../TestPlayers';
 import {newTestGame} from '../../TestGame';
-import {BoardName} from '../../../src/boards/BoardName';
+import {BoardName} from '../../../src/common/boards/BoardName';
 
 describe('NoctisCity', function() {
   let card : NoctisCity; let player : Player; let game : Game;

@@ -7,7 +7,7 @@ import {CardRenderer} from '../render/CardRenderer';
 import {Tags} from '../../common/cards/Tags';
 import {CardRequirements} from '../CardRequirements';
 import {Resources} from '../../common/Resources';
-import {PartyName} from '../../turmoil/parties/PartyName';
+import {PartyName} from '../../common/turmoil/PartyName';
 import {played} from '../Options';
 
 export class HighTempSuperconductors extends Card implements IProjectCard {

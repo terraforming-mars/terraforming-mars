@@ -1,6 +1,6 @@
 import {IGlobalEvent, GlobalEvent} from './IGlobalEvent';
 import {GlobalEventName} from './GlobalEventName';
-import {PartyName} from '../parties/PartyName';
+import {PartyName} from '../../common/turmoil/PartyName';
 import {Game} from '../../Game';
 import {Tags} from '../../common/cards/Tags';
 import {Turmoil} from '../Turmoil';

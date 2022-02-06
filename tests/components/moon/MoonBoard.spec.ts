@@ -3,7 +3,7 @@ import {getLocalVue} from '../getLocalVue';
 import {expect} from 'chai';
 import MoonBoard from '@/client/components/moon/MoonBoard.vue';
 import MoonSpace from '@/client/components/moon/MoonSpace.vue';
-import {MoonModel} from '@/models/MoonModel';
+import {MoonModel} from '@/common/models/MoonModel';
 import {SpaceType} from '@/common/boards/SpaceType';
 
 const model: MoonModel = {

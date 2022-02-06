@@ -4,9 +4,9 @@ import {CardModel} from './CardModel';
 import {ColonyModel} from './ColonyModel';
 import {ColorWithNeutral} from '../common/Color';
 import {IPayProductionModel} from './IPayProductionUnitsModel';
-import {IAresData} from '../ares/IAresData';
+import {IAresData} from '../common/ares/IAresData';
 import {Message} from '../common/logs/Message';
-import {PartyName} from '../turmoil/parties/PartyName';
+import {PartyName} from '../common/turmoil/PartyName';
 import {TurmoilModel} from './TurmoilModel';
 
 export interface PlayerInputModel {

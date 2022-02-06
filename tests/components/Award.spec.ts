@@ -2,7 +2,7 @@ import {mount} from '@vue/test-utils';
 import {getLocalVue} from './getLocalVue';
 import {expect} from 'chai';
 import Award from '@/client/components/Award.vue';
-import {FundedAwardModel} from '@/models/FundedAwardModel';
+import {FundedAwardModel} from '@/common/models/FundedAwardModel';
 import {Color} from '@/common/Color';
 
 function createAward(
@@ -10,11 +10,8 @@ function createAward(
   {funded: boolean, scores?: FundedAwardModel['scores']},
 ): FundedAwardModel {
   return {
-    award: {
-      name: `Award name`,
-      description: `Award description`,
-      getScore: () => 0,
-    },
+    name: `Award name`,
+    description: `Award description`,
     player_name: funded ? 'Foo' : '',
     player_color: funded ? 'red': '',
     scores,
@@ -29,7 +26,7 @@ describe('Award', () => {
       propsData: {award},
     });
 
-    expect(wrapper.text()).to.includes(award.award.name);
+    expect(wrapper.text()).to.include(award.name);
   });
 
   it(`doesn't show award's description`, () => {
@@ -39,7 +36,7 @@ describe('Award', () => {
       propsData: {award},
     });
 
-    expect(wrapper.text()).to.not.includes(award.award.description);
+    expect(wrapper.text()).to.not.include(award.description);
   });
 
   it(`shows award's description on click`, async () => {
@@ -51,7 +48,7 @@ describe('Award', () => {
 
     await wrapper.trigger('click');
 
-    expect(wrapper.text()).to.include(award.award.description);
+    expect(wrapper.text()).to.include(award.description);
   });
 
   it(`doesn't show scores`, () => {

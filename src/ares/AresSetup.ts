@@ -1,5 +1,5 @@
 import {Player} from '../Player';
-import {IAresData} from './IAresData';
+import {IAresData} from '../common/ares/IAresData';
 import {Game} from '../Game';
 import {TileType} from '../common/TileType';
 import {_AresHazardPlacement} from './AresHazards';

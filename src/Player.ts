@@ -6,7 +6,7 @@ import {Aridor} from './cards/colonies/Aridor';
 import {Board} from './boards/Board';
 import {CardFinder} from './CardFinder';
 import {CardName} from './CardName';
-import {CardType} from './cards/CardType';
+import {CardType} from './common/cards/CardType';
 import {ColonyName} from './colonies/ColonyName';
 import {Color} from './common/Color';
 import {CorporationCard} from './cards/corporation/CorporationCard';

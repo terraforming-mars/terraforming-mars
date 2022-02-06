@@ -24,7 +24,7 @@ import {SpaceHighlight, SpaceModel} from './SpaceModel';
 import {TileType} from '../common/TileType';
 import {Phase} from '../common/Phase';
 import {Resources} from '../common/Resources';
-import {CardType} from '../cards/CardType';
+import {CardType} from '../common/cards/CardType';
 import {
   ClaimedMilestoneModel,
   IMilestoneScore,

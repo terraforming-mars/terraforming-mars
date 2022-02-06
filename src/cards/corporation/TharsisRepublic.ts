@@ -11,7 +11,7 @@ import {Priority} from '../../deferredActions/DeferredAction';
 import {GainResources} from '../../deferredActions/GainResources';
 import {GainProduction} from '../../deferredActions/GainProduction';
 import {Board} from '../../boards/Board';
-import {CardType} from '../CardType';
+import {CardType} from '../../common/cards/CardType';
 import {CardRenderer} from '../render/CardRenderer';
 import {Size} from '../render/Size';
 import {all} from '../Options';

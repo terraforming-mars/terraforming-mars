@@ -1,4 +1,4 @@
-import {CardType} from './CardType';
+import {CardType} from '../common/cards/CardType';
 import {AndOptions} from '../inputs/AndOptions';
 import {IProjectCard} from './IProjectCard';
 import {ISpace} from '../boards/ISpace';

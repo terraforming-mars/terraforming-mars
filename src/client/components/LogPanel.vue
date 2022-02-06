@@ -35,7 +35,7 @@
 <script lang="ts">
 
 import Vue from 'vue';
-import {CardType} from '@/cards/CardType';
+import {CardType} from '@/common/cards/CardType';
 import {LogMessage} from '@/common/logs/LogMessage';
 import {LogMessageType} from '@/common/logs/LogMessageType';
 import {LogMessageData} from '@/common/logs/LogMessageData';

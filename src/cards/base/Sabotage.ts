@@ -1,6 +1,6 @@
 import {IProjectCard} from '../IProjectCard';
 import {Card} from '../Card';
-import {CardType} from '../CardType';
+import {CardType} from '../../common/cards/CardType';
 import {Player} from '../../Player';
 import {OrOptions} from '../../inputs/OrOptions';
 import {Resources} from '../../common/Resources';

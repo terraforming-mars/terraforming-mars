@@ -5,7 +5,7 @@ import {ICard, isIActionCard} from '../ICard';
 import {SelectCard} from '../../inputs/SelectCard';
 import {Card} from '../Card';
 import {CardName} from '../../CardName';
-import {CardType} from '../CardType';
+import {CardType} from '../../common/cards/CardType';
 import {CardRenderer} from '../render/CardRenderer';
 
 export class Viron extends Card implements ICard, CorporationCard {

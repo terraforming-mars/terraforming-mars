@@ -2,7 +2,7 @@ import {Player} from '../../Player';
 import {IProjectCard} from '../IProjectCard';
 import {Tags} from '../../common/cards/Tags';
 import {Card} from '../Card';
-import {CardType} from '../CardType';
+import {CardType} from '../../common/cards/CardType';
 import {Resources} from '../../common/Resources';
 import {CardName} from '../../CardName';
 import {SelectSpace} from '../../inputs/SelectSpace';

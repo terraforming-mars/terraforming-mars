@@ -6,7 +6,7 @@ import {Player} from '../../Player';
 import {SpaceBonus} from '../../common/boards/SpaceBonus';
 import {SpaceType} from '../../common/boards/SpaceType';
 import {TileType} from '../../common/TileType';
-import {CardType} from '../CardType';
+import {CardType} from '../../common/cards/CardType';
 import {IProjectCard} from '../IProjectCard';
 import {Tags} from '../../common/cards/Tags';
 import {RemoveAnyPlants} from '../../deferredActions/RemoveAnyPlants';

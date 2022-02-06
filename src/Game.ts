@@ -4,7 +4,7 @@ import {Board} from './boards/Board';
 import {BoardName} from './boards/BoardName';
 import {CardFinder} from './CardFinder';
 import {CardName} from './CardName';
-import {CardType} from './cards/CardType';
+import {CardType} from './common/cards/CardType';
 import {ClaimedMilestone, serializeClaimedMilestones, deserializeClaimedMilestones} from './milestones/ClaimedMilestone';
 import {Colony} from './colonies/Colony';
 import {ColonyDealer, loadColoniesFromJSON} from './colonies/ColonyDealer';

@@ -2,7 +2,7 @@ import {CorporationCard} from './CorporationCard';
 import {Player} from '../../Player';
 import {Card} from '../Card';
 import {CardName} from '../../CardName';
-import {CardType} from '../CardType';
+import {CardType} from '../../common/cards/CardType';
 import {CardRenderer} from '../render/CardRenderer';
 import {digit} from '../Options';
 

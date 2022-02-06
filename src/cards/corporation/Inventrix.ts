@@ -3,7 +3,7 @@ import {CorporationCard} from './CorporationCard';
 import {Tags} from '../../common/cards/Tags';
 import {Player} from '../../Player';
 import {CardName} from '../../CardName';
-import {CardType} from '../CardType';
+import {CardType} from '../../common/cards/CardType';
 import {CardRenderer} from '../render/CardRenderer';
 
 export class Inventrix extends Card implements CorporationCard {

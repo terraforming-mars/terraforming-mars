@@ -3,7 +3,7 @@ import {IActionCard, ICard} from '../ICard';
 import {IProjectCard} from '../IProjectCard';
 import {Player} from '../../Player';
 import {Card} from '../Card';
-import {CardType} from '../CardType';
+import {CardType} from '../../common/cards/CardType';
 import {SelectCard} from '../../inputs/SelectCard';
 import {ResourceType} from '../../common/ResourceType';
 import {CardName} from '../../CardName';

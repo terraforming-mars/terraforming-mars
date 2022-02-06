@@ -3,7 +3,7 @@ import {IResourceCard, VictoryPoints} from '../ICard';
 import {IActionCard} from '../ICard';
 import {Player} from '../../Player';
 import {Card} from '../Card';
-import {CardType} from '../CardType';
+import {CardType} from '../../common/cards/CardType';
 import {CardName} from '../../CardName';
 import {CardRenderer} from '../render/CardRenderer';
 import {ResourceType} from '../../common/ResourceType';

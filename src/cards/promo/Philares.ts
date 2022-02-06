@@ -7,7 +7,7 @@ import {SelectAmount} from '../../inputs/SelectAmount';
 import {AndOptions} from '../../inputs/AndOptions';
 import {Card} from '../Card';
 import {CardName} from '../../CardName';
-import {CardType} from '../CardType';
+import {CardType} from '../../common/cards/CardType';
 import {DeferredAction, Priority} from '../../deferredActions/DeferredAction';
 import {CardRenderer} from '../render/CardRenderer';
 import {Size} from '../render/Size';

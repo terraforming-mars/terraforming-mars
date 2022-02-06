@@ -1,5 +1,5 @@
 import {Tags} from '../../common/cards/Tags';
-import {CardType} from '../CardType';
+import {CardType} from '../../common/cards/CardType';
 import {Player} from '../../Player';
 import {SpaceName} from '../../SpaceName';
 import {SpaceType} from '../../common/boards/SpaceType';

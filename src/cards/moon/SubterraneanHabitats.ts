@@ -1,5 +1,5 @@
 import {CardName} from '../../CardName';
-import {CardType} from '../CardType';
+import {CardType} from '../../common/cards/CardType';
 import {IProjectCard} from '../IProjectCard';
 import {CardRenderer} from '../render/CardRenderer';
 import {Units} from '../../common/Units';

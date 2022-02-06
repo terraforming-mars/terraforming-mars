@@ -1,6 +1,6 @@
 import {CardName} from '../../CardName';
 import {Player} from '../../Player';
-import {CardType} from '../CardType';
+import {CardType} from '../../common/cards/CardType';
 import {Tags} from '../../common/cards/Tags';
 import {Resources} from '../../common/Resources';
 import {MoonExpansion} from '../../moon/MoonExpansion';

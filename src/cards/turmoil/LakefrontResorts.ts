@@ -7,7 +7,7 @@ import {Card} from '../Card';
 import {CardName} from '../../CardName';
 import {Priority} from '../../deferredActions/DeferredAction';
 import {GainProduction} from '../../deferredActions/GainProduction';
-import {CardType} from '../CardType';
+import {CardType} from '../../common/cards/CardType';
 import {CardRenderer} from '../render/CardRenderer';
 import {Size} from '../render/Size';
 import {all} from '../Options';

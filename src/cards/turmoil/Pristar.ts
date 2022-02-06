@@ -5,7 +5,7 @@ import {CardName} from '../../CardName';
 import {IResourceCard} from '../ICard';
 import {Card} from '../Card';
 import {VictoryPoints} from '../ICard';
-import {CardType} from '../CardType';
+import {CardType} from '../../common/cards/CardType';
 import {CardRenderer} from '../render/CardRenderer';
 import {Size} from '../render/Size';
 

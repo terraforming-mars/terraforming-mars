@@ -27,7 +27,7 @@ import {SolarWindPower} from '../../../src/cards/base/SolarWindPower';
 import {MarsUniversity} from '../../../src/cards/base/MarsUniversity';
 import {Gyropolis} from '../../../src/cards/venusNext/Gyropolis';
 import {VenusGovernor} from '../../../src/cards/venusNext/VenusGovernor';
-import {CardType} from '../../../src/cards/CardType';
+import {CardType} from '../../../src/common/cards/CardType';
 import {CorporationCard} from '../../../src/cards/corporation/CorporationCard';
 import {IProjectCard} from '../../../src/cards/IProjectCard';
 

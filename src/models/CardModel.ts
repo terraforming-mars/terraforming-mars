@@ -1,5 +1,5 @@
 import {Message} from '../common/logs/Message';
-import {CardType} from '../cards/CardType';
+import {CardType} from '../common/cards/CardType';
 import {ResourceType} from '../common/ResourceType';
 import {Units} from '../common/Units';
 import {CardName} from '../CardName';

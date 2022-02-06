@@ -4,7 +4,7 @@ import {Player} from '../../Player';
 import {Resources} from '../../common/Resources';
 import {TileType} from '../../common/TileType';
 import {Card} from '../Card';
-import {CardType} from '../CardType';
+import {CardType} from '../../common/cards/CardType';
 import {CorporationCard} from '../corporation/CorporationCard';
 import {IActionCard} from '../ICard';
 import {all} from '../Options';

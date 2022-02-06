@@ -35,7 +35,7 @@ import Vue from 'vue';
 import {CardName} from '@/CardName';
 import {GameModule} from '@/common/cards/GameModule';
 import {byModule, byType, getCards, toName} from '@/client/cards/ClientCardManifest';
-import {CardType} from '@/cards/CardType';
+import {CardType} from '@/common/cards/CardType';
 import {MultiMap} from 'mnemonist';
 
 function corpCardNames(module: GameModule): Array<CardName> {

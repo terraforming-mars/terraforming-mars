@@ -1,6 +1,6 @@
 import {IProjectCard} from '../IProjectCard';
 import {Card} from '../Card';
-import {CardType} from '../CardType';
+import {CardType} from '../../common/cards/CardType';
 import {Tags} from '../../common/cards/Tags';
 import {Player} from '../../Player';
 import {SelectSpace} from '../../inputs/SelectSpace';

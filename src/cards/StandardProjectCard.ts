@@ -1,4 +1,4 @@
-import {CardType} from './CardType';
+import {CardType} from '../common/cards/CardType';
 import {Player} from '../Player';
 import {IActionCard, ICard, TRSource} from './ICard';
 import {OrOptions} from '../inputs/OrOptions';

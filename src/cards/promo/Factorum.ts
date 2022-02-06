@@ -7,7 +7,7 @@ import {Resources} from '../../common/Resources';
 import {SelectOption} from '../../inputs/SelectOption';
 import {OrOptions} from '../../inputs/OrOptions';
 import {CardName} from '../../CardName';
-import {CardType} from '../CardType';
+import {CardType} from '../../common/cards/CardType';
 import {CardRenderer} from '../render/CardRenderer';
 import {Size} from '../render/Size';
 import {Units} from '../../common/Units';

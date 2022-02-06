@@ -4,7 +4,7 @@ import {Tags} from '../../common/cards/Tags';
 import {Game} from '../../Game';
 import {IProjectCard} from '../IProjectCard';
 import {Resources} from '../../common/Resources';
-import {CardType} from '../CardType';
+import {CardType} from '../../common/cards/CardType';
 import {CardName} from '../../CardName';
 import {Colony} from '../../colonies/Colony';
 import {SelectColony} from '../../inputs/SelectColony';

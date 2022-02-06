@@ -3,7 +3,7 @@ import {Player} from '../../Player';
 import {Tags} from '../../common/cards/Tags';
 import {Card} from '../Card';
 import {CardName} from '../../CardName';
-import {CardType} from '../CardType';
+import {CardType} from '../../common/cards/CardType';
 import {CardRenderer} from '../render/CardRenderer';
 
 export class TerralabsResearch extends Card implements CorporationCard {

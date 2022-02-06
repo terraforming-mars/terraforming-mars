@@ -1,6 +1,6 @@
 import {AddResourcesToCard} from '../deferredActions/AddResourcesToCard';
 import {CardName} from '../CardName';
-import {CardType} from '../cards/CardType';
+import {CardType} from '../common/cards/CardType';
 import {Game, GameOptions} from '../Game';
 import {GrantResourceDeferred} from './GrantResourceDeferred';
 import {ICard} from '../cards/ICard';

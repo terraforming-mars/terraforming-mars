@@ -28,8 +28,8 @@ import {CardType} from '../cards/CardType';
 import {
   ClaimedMilestoneModel,
   IMilestoneScore,
-} from './ClaimedMilestoneModel';
-import {FundedAwardModel, IAwardScore} from './FundedAwardModel';
+} from '../common/models/ClaimedMilestoneModel';
+import {FundedAwardModel, IAwardScore} from '../common/models/FundedAwardModel';
 import {
   getTurmoilModel,
 } from './TurmoilModel';
@@ -160,7 +160,8 @@ export class Server {
       milestoneModels.push({
         player_name: claimed === undefined ? '' : claimed.player.name,
         player_color: claimed === undefined ? '' : claimed.player.color,
-        milestone,
+        name: milestone.name,
+        description: milestone.description,
         scores,
       });
     }
@@ -190,7 +191,8 @@ export class Server {
       awardModels.push({
         player_name: funded === undefined ? '' : funded.player.name,
         player_color: funded === undefined ? '' : funded.player.color,
-        award,
+        name: award.name,
+        description: award.description,
         scores: scores,
       });
     }

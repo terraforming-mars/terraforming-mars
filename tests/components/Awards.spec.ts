@@ -4,16 +4,13 @@ import {getLocalVue} from './getLocalVue';
 import {expect} from 'chai';
 import Awards from '@/client/components/Awards.vue';
 import Award from '@/client/components/Award.vue';
-import {FundedAwardModel} from '@/models/FundedAwardModel';
+import {FundedAwardModel} from '@/common/models/FundedAwardModel';
 import {AWARD_COSTS} from '@/constants';
 
 function createAward({id = 1, funded = false}): FundedAwardModel {
   return {
-    award: {
-      name: `Award ${id} name`,
-      description: `Award ${id} description`,
-      getScore: () => 0,
-    },
+    name: `Award ${id} name`,
+    description: `Award ${id} description`,
     player_name: funded ? 'Foo' : '',
     player_color: funded ? 'red': '',
     scores: [],
@@ -71,8 +68,8 @@ describe('Awards', () => {
     });
 
     const fundedAwards = wrapper.find('[data-test=funded-awards]');
-    expect(fundedAwards.text()).to.include(fundedAward.award.name);
-    expect(fundedAwards.text()).to.not.include(notFundedAward.award.name);
+    expect(fundedAwards.text()).to.include(fundedAward.name);
+    expect(fundedAwards.text()).to.not.include(notFundedAward.name);
 
     const playerCube = fundedAwards.find(`[data-test-player-cube=${fundedAward.player_color}]`);
     expect(playerCube.exists()).to.be.true;

@@ -13,7 +13,7 @@ import {TileType} from './common/TileType';
 import {SpaceBonus} from './common/boards/SpaceBonus';
 import {IGlobalEvent} from './turmoil/globalEvents/IGlobalEvent';
 import {GlobalEventName} from './turmoil/globalEvents/GlobalEventName';
-import {PartyName} from './turmoil/parties/PartyName';
+import {PartyName} from './common/turmoil/PartyName';
 
 export class LogBuilder {
   private message: string;

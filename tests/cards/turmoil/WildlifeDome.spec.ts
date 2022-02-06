@@ -3,7 +3,7 @@ import {WildlifeDome} from '../../../src/cards/turmoil/WildlifeDome';
 import {Game} from '../../../src/Game';
 import {Phase} from '../../../src/common/Phase';
 import {Player} from '../../../src/Player';
-import {PartyName} from '../../../src/turmoil/parties/PartyName';
+import {PartyName} from '../../../src/common/turmoil/PartyName';
 import {PoliticalAgendas} from '../../../src/turmoil/PoliticalAgendas';
 import {TestingUtils} from '../../TestingUtils';
 import {TestPlayers} from '../../TestPlayers';

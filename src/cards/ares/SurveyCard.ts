@@ -12,7 +12,7 @@ import {IProjectCard} from '../IProjectCard';
 import {BoardType} from '../../boards/BoardType';
 import {SpaceType} from '../../common/boards/SpaceType';
 import {PartyHooks} from '../../turmoil/parties/PartyHooks';
-import {PartyName} from '../../turmoil/parties/PartyName';
+import {PartyName} from '../../common/turmoil/PartyName';
 import {Board} from '../../boards/Board';
 
 export abstract class SurveyCard extends Card implements IProjectCard {

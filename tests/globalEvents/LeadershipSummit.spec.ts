@@ -2,7 +2,7 @@ import {expect} from 'chai';
 import {LeadershipSummit} from '../../src/turmoil/globalEvents/LeadershipSummit';
 import {Game} from '../../src/Game';
 import {Turmoil} from '../../src/turmoil/Turmoil';
-import {PartyName} from '../../src/turmoil/parties/PartyName';
+import {PartyName} from '../../src/common/turmoil/PartyName';
 import {TestPlayers} from '../TestPlayers';
 
 describe('LeadershipSummit', function() {

@@ -4,7 +4,7 @@ import {SelectPartyToSendDelegate} from '../inputs/SelectPartyToSendDelegate';
 import {DeferredAction, Priority} from './DeferredAction';
 import {SelectHowToPayDeferred} from './SelectHowToPayDeferred';
 import {NeutralPlayer, Turmoil} from '../turmoil/Turmoil';
-import {PartyName} from '../turmoil/parties/PartyName';
+import {PartyName} from '../common/turmoil/PartyName';
 
 export class SendDelegateToArea implements DeferredAction {
   public priority = Priority.DEFAULT;

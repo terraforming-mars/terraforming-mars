@@ -5,7 +5,7 @@ import {TestPlayer} from '../../TestPlayer';
 import {getTestPlayer, newTestGame} from '../../TestGame';
 import {CardName} from '../../../src/CardName';
 import {TestingUtils} from '../../TestingUtils';
-import {CardType} from '../../../src/cards/CardType';
+import {CardType} from '../../../src/common/cards/CardType';
 import {Resources} from '../../../src/common/Resources';
 
 describe('MartianInsuranceGroup', function() {

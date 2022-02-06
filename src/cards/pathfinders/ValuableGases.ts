@@ -9,7 +9,7 @@ import {Size} from '../render/Size';
 import {AltSecondaryTag} from '../render/CardRenderItem';
 import {Resources} from '../../common/Resources';
 import {digit} from '../Options';
-import {CardType} from '../CardType';
+import {CardType} from '../../common/cards/CardType';
 import {DeferredAction} from '../../deferredActions/DeferredAction';
 import {SelectHowToPayForProjectCard} from '../../inputs/SelectHowToPayForProjectCard';
 

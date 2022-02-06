@@ -1,6 +1,6 @@
 import {IProjectCard} from '../IProjectCard';
 import {Card} from '../Card';
-import {CardType} from '../CardType';
+import {CardType} from '../../common/cards/CardType';
 import {CardName} from '../../CardName';
 import {CardRenderer} from '../render/CardRenderer';
 import {Size} from '../render/Size';

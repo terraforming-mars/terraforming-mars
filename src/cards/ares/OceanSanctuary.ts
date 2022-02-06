@@ -7,7 +7,7 @@ import {Player} from '../../Player';
 import {ResourceType} from '../../common/ResourceType';
 import {SpaceBonus} from '../../common/boards/SpaceBonus';
 import {TileType} from '../../common/TileType';
-import {CardType} from '../CardType';
+import {CardType} from '../../common/cards/CardType';
 import {IResourceCard} from '../ICard';
 import {Tags} from '../../common/cards/Tags';
 import {CardRequirements} from '../CardRequirements';

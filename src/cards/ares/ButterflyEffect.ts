@@ -2,7 +2,7 @@ import {Card} from '../Card';
 import {CardName} from '../../CardName';
 import {ShiftAresGlobalParametersDeferred} from '../../deferredActions/ShiftAresGlobalParametersDeferred';
 import {Player} from '../../Player';
-import {CardType} from '../CardType';
+import {CardType} from '../../common/cards/CardType';
 import {IProjectCard} from '../IProjectCard';
 import {CardRenderer} from '../render/CardRenderer';
 import {Size} from '../render/Size';

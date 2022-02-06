@@ -4,7 +4,7 @@ import {PartyName} from '../../common/turmoil/PartyName';
 import {Game} from '../../Game';
 import {Resources} from '../../common/Resources';
 import {Turmoil} from '../Turmoil';
-import {CardType} from '../../cards/CardType';
+import {CardType} from '../../common/cards/CardType';
 import {CardRenderer} from '../../cards/render/CardRenderer';
 import {Size} from '../../cards/render/Size';
 

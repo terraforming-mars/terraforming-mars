@@ -3,7 +3,7 @@ import {Player} from '../../Player';
 import {Tags} from '../../common/cards/Tags';
 import {Card} from '../Card';
 import {CardName} from '../../CardName';
-import {CardType} from '../CardType';
+import {CardType} from '../../common/cards/CardType';
 import {SendDelegateToArea} from '../../deferredActions/SendDelegateToArea';
 import {CardRenderer} from '../render/CardRenderer';
 import {Size} from '../render/Size';

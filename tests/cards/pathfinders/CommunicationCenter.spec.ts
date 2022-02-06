@@ -5,7 +5,7 @@ import {TestPlayer} from '../../TestPlayer';
 import {TestingUtils} from '../../TestingUtils';
 import {getTestPlayer, newTestGame} from '../../TestGame';
 import {Resources} from '../../../src/common/Resources';
-import {CardType} from '../../../src/cards/CardType';
+import {CardType} from '../../../src/common/cards/CardType';
 
 describe('CommunicationCenter', function() {
   let card: CommunicationCenter;

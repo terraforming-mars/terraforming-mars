@@ -9,7 +9,7 @@ import {OrOptions} from '../../inputs/OrOptions';
 import {Card} from '../Card';
 import {CardName} from '../../CardName';
 import {IResourceCard} from '../ICard';
-import {CardType} from '../CardType';
+import {CardType} from '../../common/cards/CardType';
 import {CardRenderer} from '../render/CardRenderer';
 import {Units} from '../../common/Units';
 import {digit, played} from '../Options';

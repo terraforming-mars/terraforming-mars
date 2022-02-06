@@ -10,7 +10,7 @@ import {SelectCard} from '../../inputs/SelectCard';
 import {OrOptions} from '../../inputs/OrOptions';
 import {LogHelper} from '../../LogHelper';
 import {Resources} from '../../common/Resources';
-import {CardType} from '../CardType';
+import {CardType} from '../../common/cards/CardType';
 import {CardRenderer} from '../render/CardRenderer';
 import {Size} from '../render/Size';
 import {digit} from '../Options';

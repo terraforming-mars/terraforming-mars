@@ -12,7 +12,7 @@ import {TestingUtils} from '../../TestingUtils';
 import {TestPlayers} from '../../TestPlayers';
 import {CardName} from '../../../src/CardName';
 import {Tags} from '../../../src/common/cards/Tags';
-import {CardType} from '../../../src/cards/CardType';
+import {CardType} from '../../../src/common/cards/CardType';
 import {ResourceType} from '../../../src/common/ResourceType';
 import {IProjectCard} from '../../../src/cards/IProjectCard';
 

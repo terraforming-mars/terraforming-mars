@@ -5,7 +5,7 @@ import {OrOptions} from '../inputs/OrOptions';
 import {SelectOption} from '../inputs/SelectOption';
 import {ICloneTagCard} from '../cards/pathfinders/ICloneTagCard';
 import {ICard} from '../cards/ICard';
-import {CardType} from '../cards/CardType';
+import {CardType} from '../common/cards/CardType';
 import {IProjectCard} from '../cards/IProjectCard';
 
 /**

@@ -7,7 +7,7 @@ import {ISpace} from '../../boards/ISpace';
 import {SpaceBonus} from '../../common/boards/SpaceBonus';
 import {Resources} from '../../common/Resources';
 import {CardName} from '../../CardName';
-import {CardType} from '../CardType';
+import {CardType} from '../../common/cards/CardType';
 import {GainProduction} from '../../deferredActions/GainProduction';
 import {CardRenderer} from '../render/CardRenderer';
 import {Units} from '../../common/Units';

@@ -2,7 +2,7 @@ import {IProjectCard} from '../IProjectCard';
 import {Tags} from '../../common/cards/Tags';
 import {Card} from '../Card';
 import {CardName} from '../../CardName';
-import {CardType} from '../CardType';
+import {CardType} from '../../common/cards/CardType';
 import {Player} from '../../Player';
 import {PartyName} from '../../common/turmoil/PartyName';
 import {CardRenderer} from '../render/CardRenderer';

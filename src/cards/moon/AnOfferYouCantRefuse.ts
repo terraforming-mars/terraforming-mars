@@ -1,7 +1,7 @@
 import {CardName} from '../../CardName';
 import {Player} from '../../Player';
 import {PlayerId} from '../../common/Types';
-import {CardType} from '../CardType';
+import {CardType} from '../../common/cards/CardType';
 import {CardRenderer} from '../render/CardRenderer';
 import {ProjectCard} from '../ProjectCard';
 import {NeutralPlayer, Turmoil} from '../../turmoil/Turmoil';

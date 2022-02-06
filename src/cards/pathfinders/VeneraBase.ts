@@ -2,7 +2,7 @@ import {IProjectCard} from '../IProjectCard';
 import {IActionCard, VictoryPoints} from '../ICard';
 import {Player} from '../../Player';
 import {Card} from '../Card';
-import {CardType} from '../CardType';
+import {CardType} from '../../common/cards/CardType';
 import {CardName} from '../../CardName';
 import {CardRenderer} from '../render/CardRenderer';
 import {AddResourcesToCard} from '../../deferredActions/AddResourcesToCard';

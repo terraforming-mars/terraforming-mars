@@ -1,6 +1,6 @@
 import {ICardMetadata} from './ICardMetadata';
 import {CardName} from '../CardName';
-import {CardType} from './CardType';
+import {CardType} from '../common/cards/CardType';
 import {IAdjacencyBonus} from '../ares/IAdjacencyBonus';
 import {ResourceType} from '../common/ResourceType';
 import {Tags} from '../common/cards/Tags';

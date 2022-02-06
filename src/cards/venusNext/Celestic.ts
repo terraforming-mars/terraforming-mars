@@ -7,7 +7,7 @@ import {SelectCard} from '../../inputs/SelectCard';
 import {Card} from '../Card';
 import {VictoryPoints} from '../ICard';
 import {CardName} from '../../CardName';
-import {CardType} from '../CardType';
+import {CardType} from '../../common/cards/CardType';
 import {CardRenderer} from '../render/CardRenderer';
 import {AltSecondaryTag} from '../render/CardRenderItem';
 

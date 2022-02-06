@@ -3,7 +3,7 @@
 {
     // Compiler options are mostly for the sub-configurations
     "compilerOptions": {
-        "lib": ["dom"],
+        "lib": ["dom", "es2021"],
         "incremental": true,
         "module": "commonjs",
         "strict": true,

@@ -7,7 +7,7 @@ import {OrOptions} from '../../inputs/OrOptions';
 import {SelectOption} from '../../inputs/SelectOption';
 import {MAX_VENUS_SCALE} from '../../constants';
 import {SelectCard} from '../../inputs/SelectCard';
-import {CardName} from '../../CardName';
+import {CardName} from '../../common/cards/CardName';
 import {CardRequirements} from '../CardRequirements';
 import {CardRenderer} from '../render/CardRenderer';
 import {Card} from '../Card';

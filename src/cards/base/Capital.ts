@@ -8,7 +8,7 @@ import {SelectSpace} from '../../inputs/SelectSpace';
 import {SpaceType} from '../../common/boards/SpaceType';
 import {ISpace} from '../../boards/ISpace';
 import {Resources} from '../../common/Resources';
-import {CardName} from '../../CardName';
+import {CardName} from '../../common/cards/CardName';
 import {IAdjacencyBonus} from '../../ares/IAdjacencyBonus';
 import {Board} from '../../boards/Board';
 import {ICardMetadata} from '../ICardMetadata';

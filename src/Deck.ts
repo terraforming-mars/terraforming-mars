@@ -1,4 +1,4 @@
-import {CardName} from './CardName';
+import {CardName} from './common/cards/CardName';
 import {ICard} from './cards/ICard';
 import {ICardFactory} from './cards/ICardFactory';
 

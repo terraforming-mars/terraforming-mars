@@ -1,4 +1,4 @@
-import {CardName} from '../../CardName';
+import {CardName} from '../../common/cards/CardName';
 import {EcologicalZone} from '../base/EcologicalZone';
 import {SpaceBonus} from '../../common/boards/SpaceBonus';
 import {TileType} from '../../common/TileType';

@@ -1,5 +1,5 @@
 import {expect} from 'chai';
-import {CardName} from '../../../src/CardName';
+import {CardName} from '../../../src/common/cards/CardName';
 import {AirScrappingStandardProjectVariant} from '../../../src/cards/venusNext/AirScrappingStandardProjectVariant';
 import {TestingUtils} from '../../TestingUtils';
 import {TestPlayer} from '../../TestPlayer';

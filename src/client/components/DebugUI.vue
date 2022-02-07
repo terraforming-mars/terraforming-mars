@@ -136,7 +136,7 @@ import Vue from 'vue';
 import Card from '@/client/components/card/Card.vue';
 import {GameModule} from '@/common/cards/GameModule';
 import {CardType} from '@/common/cards/CardType';
-import {CardName} from '@/CardName';
+import {CardName} from '@/common/cards/CardName';
 import {PreferencesManager} from '@/client/utils/PreferencesManager';
 import {GlobalEventName} from '@/turmoil/globalEvents/GlobalEventName';
 import {GlobalEventModel} from '@/models/TurmoilModel';

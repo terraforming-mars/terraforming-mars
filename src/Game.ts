@@ -3,7 +3,7 @@ import {BeginnerCorporation} from './cards/corporation/BeginnerCorporation';
 import {Board} from './boards/Board';
 import {BoardName} from './common/boards/BoardName';
 import {CardFinder} from './CardFinder';
-import {CardName} from './CardName';
+import {CardName} from './common/cards/CardName';
 import {CardType} from './common/cards/CardType';
 import {ClaimedMilestone, serializeClaimedMilestones, deserializeClaimedMilestones} from './milestones/ClaimedMilestone';
 import {Colony} from './colonies/Colony';

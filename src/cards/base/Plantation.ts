@@ -5,7 +5,7 @@ import {Tags} from '../../common/cards/Tags';
 import {Player} from '../../Player';
 import {SelectSpace} from '../../inputs/SelectSpace';
 import {ISpace} from '../../boards/ISpace';
-import {CardName} from '../../CardName';
+import {CardName} from '../../common/cards/CardName';
 import {CardRequirements} from '../CardRequirements';
 import {CardRenderer} from '../render/CardRenderer';
 

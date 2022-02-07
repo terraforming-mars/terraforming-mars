@@ -1,4 +1,4 @@
-import {CardName} from '../../CardName';
+import {CardName} from '../../common/cards/CardName';
 import {MoonExpansion} from '../../moon/MoonExpansion';
 import {Player} from '../../Player';
 import {Resources} from '../../common/Resources';

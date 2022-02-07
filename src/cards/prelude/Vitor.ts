@@ -6,7 +6,7 @@ import {IProjectCard} from '../IProjectCard';
 import {OrOptions} from '../../inputs/OrOptions';
 import {SelectOption} from '../../inputs/SelectOption';
 import {IAward} from '../../awards/IAward';
-import {CardName} from '../../CardName';
+import {CardName} from '../../common/cards/CardName';
 import {CardType} from '../../common/cards/CardType';
 import {CardRenderer} from '../render/CardRenderer';
 

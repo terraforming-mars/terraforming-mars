@@ -6,7 +6,7 @@ import {VictoryPoints} from '../ICard';
 import {CardType} from '../../common/cards/CardType';
 import {Player} from '../../Player';
 import {ResourceType} from '../../common/ResourceType';
-import {CardName} from '../../CardName';
+import {CardName} from '../../common/cards/CardName';
 import {AddResourcesToCard} from '../../deferredActions/AddResourcesToCard';
 import {RemoveResourcesFromCard} from '../../deferredActions/RemoveResourcesFromCard';
 import {CardRequirements} from '../CardRequirements';

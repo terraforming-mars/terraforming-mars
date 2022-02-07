@@ -4,7 +4,7 @@ import {Tags} from '../../common/cards/Tags';
 import {Player} from '../../Player';
 import {ISpace} from '../../boards/ISpace';
 import {Resources} from '../../common/Resources';
-import {CardName} from '../../CardName';
+import {CardName} from '../../common/cards/CardName';
 import {CardType} from '../../common/cards/CardType';
 import {CardRenderer} from '../render/CardRenderer';
 import {Size} from '../render/Size';

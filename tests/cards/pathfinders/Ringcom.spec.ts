@@ -3,7 +3,7 @@ import {Ringcom} from '../../../src/cards/pathfinders/Ringcom';
 import {Game} from '../../../src/Game';
 import {TestPlayer} from '../../TestPlayer';
 import {getTestPlayer, newTestGame} from '../../TestGame';
-import {CardName} from '../../../src/CardName';
+import {CardName} from '../../../src/common/cards/CardName';
 import {TestingUtils} from '../../TestingUtils';
 import {Tags} from '../../../src/common/cards/Tags';
 

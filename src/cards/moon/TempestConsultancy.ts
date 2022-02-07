@@ -1,4 +1,4 @@
-import {CardName} from '../../CardName';
+import {CardName} from '../../common/cards/CardName';
 import {SendDelegateToArea} from '../../deferredActions/SendDelegateToArea';
 import {Player} from '../../Player';
 import {Card} from '../Card';

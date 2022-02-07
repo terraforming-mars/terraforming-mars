@@ -15,7 +15,7 @@ import {ISerializable} from '../ISerializable';
 import {SerializedTurmoil} from './SerializedTurmoil';
 import {PLAYER_DELEGATES_COUNT} from '../constants';
 import {AgendaStyle, PoliticalAgendasData, PoliticalAgendas} from './PoliticalAgendas';
-import {CardName} from '../CardName';
+import {CardName} from '../common/cards/CardName';
 import {DeferredAction} from '../deferredActions/DeferredAction';
 
 export type NeutralPlayer = 'NEUTRAL';

@@ -4,7 +4,7 @@ import {CorporationCard} from '../corporation/CorporationCard';
 import {SelectSpace} from '../../inputs/SelectSpace';
 import {ISpace} from '../../boards/ISpace';
 import {IActionCard} from '../ICard';
-import {CardName} from '../../CardName';
+import {CardName} from '../../common/cards/CardName';
 import {CardType} from '../../common/cards/CardType';
 import {CardRenderer} from '../render/CardRenderer';
 import {Size} from '../render/Size';

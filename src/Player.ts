@@ -5,7 +5,7 @@ import {AndOptions} from './inputs/AndOptions';
 import {Aridor} from './cards/colonies/Aridor';
 import {Board} from './boards/Board';
 import {CardFinder} from './CardFinder';
-import {CardName} from './CardName';
+import {CardName} from './common/cards/CardName';
 import {CardType} from './common/cards/CardType';
 import {ColonyName} from './colonies/ColonyName';
 import {Color} from './common/Color';

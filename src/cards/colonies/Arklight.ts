@@ -5,7 +5,7 @@ import {ResourceType} from '../../common/ResourceType';
 import {IProjectCard} from '../IProjectCard';
 import {Resources} from '../../common/Resources';
 import {CardType} from '../../common/cards/CardType';
-import {CardName} from '../../CardName';
+import {CardName} from '../../common/cards/CardName';
 import {IResourceCard} from '../ICard';
 import {Card} from '../Card';
 import {VictoryPoints} from '../ICard';

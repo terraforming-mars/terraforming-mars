@@ -1,5 +1,5 @@
 import {expect} from 'chai';
-import {CardName} from '../../../src/CardName';
+import {CardName} from '../../../src/common/cards/CardName';
 import {ALL_CARD_MANIFESTS} from '../../../src/cards/AllCards';
 import {CapitalAres} from '../../../src/cards/ares/CapitalAres';
 import {SolarFarm} from '../../../src/cards/ares/SolarFarm';

@@ -7,7 +7,7 @@ import {Player} from '../../Player';
 import {OrOptions} from '../../inputs/OrOptions';
 import {ResourceType} from '../../common/ResourceType';
 import {SelectOption} from '../../inputs/SelectOption';
-import {CardName} from '../../CardName';
+import {CardName} from '../../common/cards/CardName';
 import {LogHelper} from '../../LogHelper';
 import {CardRenderer} from '../render/CardRenderer';
 

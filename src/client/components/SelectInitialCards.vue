@@ -19,7 +19,7 @@ import Vue from 'vue';
 
 import Button from '@/client/components/common/Button.vue';
 import {getCard} from '@/client/cards/ClientCardManifest';
-import {CardName} from '@/CardName';
+import {CardName} from '@/common/cards/CardName';
 import * as constants from '@/constants';
 import {CorporationCard} from '@/cards/corporation/CorporationCard';
 import {PlayerInputModel} from '@/models/PlayerInputModel';

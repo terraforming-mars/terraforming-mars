@@ -3,7 +3,7 @@ import {ResourceType} from '../common/ResourceType';
 import {OrOptions} from '../inputs/OrOptions';
 import {SelectCard} from '../inputs/SelectCard';
 import {SelectOption} from '../inputs/SelectOption';
-import {CardName} from '../CardName';
+import {CardName} from '../common/cards/CardName';
 import {ICard} from '../cards/ICard';
 import {DeferredAction, Priority} from './DeferredAction';
 

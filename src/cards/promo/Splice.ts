@@ -6,7 +6,7 @@ import {CorporationCard} from '../corporation/CorporationCard';
 import {SelectOption} from '../../inputs/SelectOption';
 import {OrOptions} from '../../inputs/OrOptions';
 import {ResourceType} from '../../common/ResourceType';
-import {CardName} from '../../CardName';
+import {CardName} from '../../common/cards/CardName';
 import {CardType} from '../../common/cards/CardType';
 import {CardRenderer} from '../render/CardRenderer';
 import {Size} from '../render/Size';

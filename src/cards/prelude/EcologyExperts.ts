@@ -1,5 +1,5 @@
 import {Tags} from '../../common/cards/Tags';
-import {CardName} from '../../CardName';
+import {CardName} from '../../common/cards/CardName';
 import {Player} from '../../Player';
 import {PreludeCard} from './PreludeCard';
 import {Resources} from '../../common/Resources';

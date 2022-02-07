@@ -9,7 +9,7 @@ import {SelectCard} from '../../inputs/SelectCard';
 import {SelectOption} from '../../inputs/SelectOption';
 import {PlayerInput} from '../../PlayerInput';
 import {ResourceType} from '../../common/ResourceType';
-import {CardName} from '../../CardName';
+import {CardName} from '../../common/cards/CardName';
 import {Resources} from '../../common/Resources';
 import {PlaceOceanTile} from '../../deferredActions/PlaceOceanTile';
 import {CardRenderer} from '../render/CardRenderer';

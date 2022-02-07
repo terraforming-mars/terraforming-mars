@@ -5,7 +5,7 @@ import {CardType} from '../../common/cards/CardType';
 import {Player} from '../../Player';
 import {LavaFlows} from '../base/LavaFlows';
 import {Resources} from '../../common/Resources';
-import {CardName} from '../../CardName';
+import {CardName} from '../../common/cards/CardName';
 import {BoardName} from '../../common/boards/BoardName';
 import {PlaceCityTile} from '../../deferredActions/PlaceCityTile';
 import {CardRenderer} from '../render/CardRenderer';

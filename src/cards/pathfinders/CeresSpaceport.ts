@@ -5,7 +5,7 @@ import {CardType} from '../../common/cards/CardType';
 import {Player} from '../../Player';
 import {SpaceName} from '../../SpaceName';
 import {SpaceType} from '../../common/boards/SpaceType';
-import {CardName} from '../../CardName';
+import {CardName} from '../../common/cards/CardName';
 import {CardRenderer} from '../render/CardRenderer';
 import {Resources} from '../../common/Resources';
 import {PlaceOceanTile} from '../../deferredActions/PlaceOceanTile';

@@ -5,7 +5,7 @@ import {Card} from '../Card';
 import {VictoryPoints} from '../ICard';
 import {CardType} from '../../common/cards/CardType';
 import {Player} from '../../Player';
-import {CardName} from '../../CardName';
+import {CardName} from '../../common/cards/CardName';
 import {PlaceOceanTile} from '../../deferredActions/PlaceOceanTile';
 import {SelectHowToPayDeferred} from '../../deferredActions/SelectHowToPayDeferred';
 import {CardRenderer} from '../render/CardRenderer';

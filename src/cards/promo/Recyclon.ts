@@ -7,7 +7,7 @@ import {IProjectCard} from '../IProjectCard';
 import {SelectOption} from '../../inputs/SelectOption';
 import {OrOptions} from '../../inputs/OrOptions';
 import {Card} from '../Card';
-import {CardName} from '../../CardName';
+import {CardName} from '../../common/cards/CardName';
 import {IResourceCard} from '../ICard';
 import {CardType} from '../../common/cards/CardType';
 import {CardRenderer} from '../render/CardRenderer';

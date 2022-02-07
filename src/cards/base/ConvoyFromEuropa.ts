@@ -3,7 +3,7 @@ import {Tags} from '../../common/cards/Tags';
 import {Card} from '../Card';
 import {CardType} from '../../common/cards/CardType';
 import {Player} from '../../Player';
-import {CardName} from '../../CardName';
+import {CardName} from '../../common/cards/CardName';
 import {PlaceOceanTile} from '../../deferredActions/PlaceOceanTile';
 import {CardRenderer} from '../render/CardRenderer';
 

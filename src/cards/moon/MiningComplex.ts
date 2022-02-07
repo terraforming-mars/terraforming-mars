@@ -1,4 +1,4 @@
-import {CardName} from '../../CardName';
+import {CardName} from '../../common/cards/CardName';
 import {Tags} from '../../common/cards/Tags';
 import {PreludeCard} from '../prelude/PreludeCard';
 import {CardRenderer} from '../render/CardRenderer';

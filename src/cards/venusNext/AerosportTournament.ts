@@ -1,6 +1,6 @@
 import {CardType} from '../../common/cards/CardType';
 import {Player} from '../../Player';
-import {CardName} from '../../CardName';
+import {CardName} from '../../common/cards/CardName';
 import {Resources} from '../../common/Resources';
 import {CardRequirements} from '../CardRequirements';
 import {CardRenderer} from '../render/CardRenderer';

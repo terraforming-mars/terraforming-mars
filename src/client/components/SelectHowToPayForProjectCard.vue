@@ -13,7 +13,7 @@ import {PlayerViewModel, PublicPlayerModel} from '@/models/PlayerModel';
 import {PreferencesManager} from '@/client/utils/PreferencesManager';
 import {Tags} from '@/common/cards/Tags';
 import {Units} from '@/common/Units';
-import {CardName} from '@/CardName';
+import {CardName} from '@/common/cards/CardName';
 
 export default Vue.extend({
   name: 'SelectHowToPayForProjectCard',

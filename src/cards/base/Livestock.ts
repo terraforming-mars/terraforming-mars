@@ -7,7 +7,7 @@ import {CardType} from '../../common/cards/CardType';
 import {Player} from '../../Player';
 import {Resources} from '../../common/Resources';
 import {ResourceType} from '../../common/ResourceType';
-import {CardName} from '../../CardName';
+import {CardName} from '../../common/cards/CardName';
 import {CardRequirements} from '../CardRequirements';
 import {CardRenderer} from '../render/CardRenderer';
 

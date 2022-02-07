@@ -5,7 +5,7 @@ import {Player} from '../Player';
 import {TileType} from '../common/TileType';
 import {SpaceType} from '../common/boards/SpaceType';
 import {IMoonData} from './IMoonData';
-import {CardName} from '../CardName';
+import {CardName} from '../common/cards/CardName';
 import {IProjectCard} from '../cards/IProjectCard';
 import {Units} from '../common/Units';
 import {IMoonCard} from '../cards/moon/IMoonCard';

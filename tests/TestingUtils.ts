@@ -15,7 +15,7 @@ import {Greens} from '../src/turmoil/parties/Greens';
 import {PoliticalAgendas} from '../src/turmoil/PoliticalAgendas';
 import {Reds} from '../src/turmoil/parties/Reds';
 import {IProjectCard} from '../src/cards/IProjectCard';
-import {CardName} from '../src/CardName';
+import {CardName} from '../src/common/cards/CardName';
 import {CardType} from '../src/common/cards/CardType';
 
 export class TestingUtils {

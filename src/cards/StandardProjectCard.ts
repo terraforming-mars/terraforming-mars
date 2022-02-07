@@ -11,7 +11,7 @@ import {AndOptions} from '../inputs/AndOptions';
 import {SelectCard} from '../inputs/SelectCard';
 import {SelectSpace} from '../inputs/SelectSpace';
 import {ICardMetadata} from './ICardMetadata';
-import {CardName} from '../CardName';
+import {CardName} from '../common/cards/CardName';
 import {SelectHowToPayDeferred} from '../deferredActions/SelectHowToPayDeferred';
 import {Card} from './Card';
 import {MoonExpansion} from '../moon/MoonExpansion';

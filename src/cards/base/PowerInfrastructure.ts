@@ -5,7 +5,7 @@ import {IProjectCard} from '../IProjectCard';
 import {Tags} from '../../common/cards/Tags';
 import {Player} from '../../Player';
 import {SelectAmount} from '../../inputs/SelectAmount';
-import {CardName} from '../../CardName';
+import {CardName} from '../../common/cards/CardName';
 import {Resources} from '../../common/Resources';
 import {CardRenderer} from '../render/CardRenderer';
 import {multiplier} from '../Options';

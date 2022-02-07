@@ -4,7 +4,7 @@ import {CardType} from '../../common/cards/CardType';
 import {Player} from '../../Player';
 import {OrOptions} from '../../inputs/OrOptions';
 import {Resources} from '../../common/Resources';
-import {CardName} from '../../CardName';
+import {CardName} from '../../common/cards/CardName';
 import {SelectOption} from '../../inputs/SelectOption';
 import {CardRenderer} from '../render/CardRenderer';
 import {Size} from '../render/Size';

@@ -1,6 +1,6 @@
 import {Player} from '../../Player';
 import {PreludeCard} from '../prelude/PreludeCard';
-import {CardName} from '../../CardName';
+import {CardName} from '../../common/cards/CardName';
 import {CardRenderer} from '../render/CardRenderer';
 import {Resources} from '../../common/Resources';
 import {Tags} from '../../common/cards/Tags';

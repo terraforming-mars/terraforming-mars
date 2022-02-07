@@ -6,7 +6,7 @@ import {ICard, IActionCard, IResourceCard} from '../ICard';
 import {AndOptions} from '../../inputs/AndOptions';
 import {SelectAmount} from '../../inputs/SelectAmount';
 import {SelectCard} from '../../inputs/SelectCard';
-import {CardName} from '../../CardName';
+import {CardName} from '../../common/cards/CardName';
 import {CardType} from '../../common/cards/CardType';
 import {Card} from '../Card';
 import {CardRenderer} from '../render/CardRenderer';

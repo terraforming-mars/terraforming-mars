@@ -6,7 +6,7 @@ import {EarthEmbassy} from '../../../src/cards/moon/EarthEmbassy';
 import {expect} from 'chai';
 import {Tags} from '../../../src/common/cards/Tags';
 import {CardType} from '../../../src/common/cards/CardType';
-import {CardName} from '../../../src/CardName';
+import {CardName} from '../../../src/common/cards/CardName';
 import {IProjectCard} from '../../../src/cards/IProjectCard';
 import {ICardMetadata} from '../../../src/cards/ICardMetadata';
 

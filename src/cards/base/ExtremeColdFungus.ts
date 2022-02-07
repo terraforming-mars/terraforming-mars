@@ -8,7 +8,7 @@ import {SelectOption} from '../../inputs/SelectOption';
 import {SelectCard} from '../../inputs/SelectCard';
 import {IProjectCard} from '../IProjectCard';
 import {ResourceType} from '../../common/ResourceType';
-import {CardName} from '../../CardName';
+import {CardName} from '../../common/cards/CardName';
 import {Resources} from '../../common/Resources';
 import {CardRequirements} from '../CardRequirements';
 import {CardRenderer} from '../render/CardRenderer';

@@ -25,7 +25,7 @@
 
 <script lang="ts">
 import Vue from 'vue';
-import {CardName} from '@/CardName';
+import {CardName} from '@/common/cards/CardName';
 import Button from '@/client/components/common/Button.vue';
 import {byType, getCard, getCards, toName} from '@/client/cards/ClientCardManifest';
 import {CardType} from '@/common/cards/CardType';

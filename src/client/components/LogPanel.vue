@@ -42,7 +42,7 @@ import {LogMessageData} from '@/common/logs/LogMessageData';
 import {LogMessageDataType} from '@/common/logs/LogMessageDataType';
 import {PublicPlayerModel} from '@/models/PlayerModel';
 import Card from '@/client/components/card/Card.vue';
-import {CardName} from '@/CardName';
+import {CardName} from '@/common/cards/CardName';
 import {TileType} from '@/common/TileType';
 import {playerColorClass} from '@/utils/utils';
 import {Color} from '@/common/Color';

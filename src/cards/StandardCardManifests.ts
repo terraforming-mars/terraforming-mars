@@ -1,4 +1,4 @@
-import {CardName} from '../CardName';
+import {CardName} from '../common/cards/CardName';
 import {GameModule} from '../common/cards/GameModule';
 import {AcquiredCompany} from './base/AcquiredCompany';
 import {AdaptationTechnology} from './base/AdaptationTechnology';

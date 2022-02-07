@@ -4,7 +4,7 @@ import {Game} from '../../../src/Game';
 import {ICard} from '../../../src/cards/ICard';
 import {TestPlayer} from '../../TestPlayer';
 import {getTestPlayer, newTestGame} from '../../TestGame';
-import {CardName} from '../../../src/CardName';
+import {CardName} from '../../../src/common/cards/CardName';
 import {TestingUtils} from '../../TestingUtils';
 import {SelectCard} from '../../../src/inputs/SelectCard';
 import {ResourceType} from '../../../src/common/ResourceType';

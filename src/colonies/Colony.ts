@@ -1,5 +1,5 @@
 import {AddResourcesToCard} from '../deferredActions/AddResourcesToCard';
-import {CardName} from '../CardName';
+import {CardName} from '../common/cards/CardName';
 import {ColonyBenefit} from './ColonyBenefit';
 import {ColonyName} from './ColonyName';
 import {DeferredAction, Priority} from '../deferredActions/DeferredAction';

@@ -1,5 +1,5 @@
 import {CardManifest} from '../CardManifest';
-import {CardName} from '../../CardName';
+import {CardName} from '../../common/cards/CardName';
 import {GameModule} from '../../common/cards/GameModule';
 
 import {AdhaiHighOrbitConstructions} from './AdhaiHighOrbitConstructions';

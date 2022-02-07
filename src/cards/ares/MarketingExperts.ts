@@ -1,5 +1,5 @@
 import {Card} from '../Card';
-import {CardName} from '../../CardName';
+import {CardName} from '../../common/cards/CardName';
 import {Player} from '../../Player';
 import {Resources} from '../../common/Resources';
 import {CardType} from '../../common/cards/CardType';

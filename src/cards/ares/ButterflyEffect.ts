@@ -1,5 +1,5 @@
 import {Card} from '../Card';
-import {CardName} from '../../CardName';
+import {CardName} from '../../common/cards/CardName';
 import {ShiftAresGlobalParametersDeferred} from '../../deferredActions/ShiftAresGlobalParametersDeferred';
 import {Player} from '../../Player';
 import {CardType} from '../../common/cards/CardType';

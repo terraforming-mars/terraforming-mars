@@ -7,7 +7,7 @@ import {Cartel} from '../../../src/cards/base/Cartel';
 import {Game} from '../../../src/Game';
 import {TestPlayer} from '../../TestPlayer';
 import {getTestPlayer, newTestGame} from '../../TestGame';
-import {CardName} from '../../../src/CardName';
+import {CardName} from '../../../src/common/cards/CardName';
 import {TestingUtils} from '../../TestingUtils';
 import {CardRequirements} from '../../../src/cards/CardRequirements';
 import {Tags} from '../../../src/common/cards/Tags';

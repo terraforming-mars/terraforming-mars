@@ -13,7 +13,7 @@ import {SerializedTimer} from '../src/SerializedTimer';
 import {Player} from '../src/Player';
 import {Color} from '../src/common/Color';
 import {VictoryPointsBreakdown} from '../src/VictoryPointsBreakdown';
-import {CardName} from '../src/CardName';
+import {CardName} from '../src/common/cards/CardName';
 import {GlobalParameter} from '../src/common/GlobalParameter';
 import {TestingUtils} from './TestingUtils';
 import {Units} from '../src/common/Units';

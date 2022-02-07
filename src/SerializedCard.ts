@@ -1,4 +1,4 @@
-import {CardName} from './CardName';
+import {CardName} from './common/cards/CardName';
 import {Resources} from './common/Resources';
 import {Tags} from './common/cards/Tags';
 

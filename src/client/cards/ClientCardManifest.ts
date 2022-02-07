@@ -1,4 +1,4 @@
-import {CardName} from '@/CardName';
+import {CardName} from '@/common/cards/CardName';
 import {ALL_CARD_MANIFESTS} from '@/cards/AllCards';
 import {CardType} from '@/common/cards/CardType';
 import {ICard} from '@/cards/ICard';

@@ -1,5 +1,5 @@
 import {Card} from '../Card';
-import {CardName} from '../../CardName';
+import {CardName} from '../../common/cards/CardName';
 import {ResourceType} from '../../common/ResourceType';
 import {CardType} from '../../common/cards/CardType';
 import {IActionCard, IResourceCard} from '../ICard';

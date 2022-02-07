@@ -4,7 +4,7 @@ import {MoonExpansion} from '../../../src/moon/MoonExpansion';
 import {TestingUtils} from '../../TestingUtils';
 import {SubterraneanHabitats} from '../../../src/cards/moon/SubterraneanHabitats';
 import {expect} from 'chai';
-import {CardName} from '../../../src/CardName';
+import {CardName} from '../../../src/common/cards/CardName';
 import {TheWomb} from '../../../src/cards/moon/TheWomb';
 import {TestPlayer} from '../../TestPlayer';
 import {TestPlayers} from '../../TestPlayers';

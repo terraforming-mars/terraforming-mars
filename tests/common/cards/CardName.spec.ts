@@ -1,6 +1,6 @@
-import {Multiset} from '../src/utils/Multiset';
+import {Multiset} from '../../../src/utils/Multiset';
 import {fail} from 'assert';
-import {CardName} from '../src/CardName';
+import {CardName} from '../../../src/common/cards/CardName';
 
 describe('CardName', () => {
   it('No duplicate card names', () => {

@@ -1,4 +1,4 @@
-import {CardName} from '../../CardName';
+import {CardName} from '../../common/cards/CardName';
 import {MiningArea} from '../base/MiningArea';
 import {TileType} from '../../common/TileType';
 import {CardRenderer} from '../render/CardRenderer';

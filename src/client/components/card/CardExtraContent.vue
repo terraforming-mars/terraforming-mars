@@ -10,7 +10,7 @@
 
 import Vue from 'vue';
 import {CardModel} from '@/models/CardModel';
-import {CardName} from '@/CardName';
+import {CardName} from '@/common/cards/CardName';
 import {Resources} from '@/common/Resources';
 
 export default Vue.extend({

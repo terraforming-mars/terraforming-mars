@@ -12,7 +12,7 @@ import {SelectColony} from '../inputs/SelectColony';
 import {AndOptions} from '../inputs/AndOptions';
 import {IColonyTrader} from './IColonyTrader';
 import {TradeWithCollegiumCopernicus} from '../cards/pathfinders/CollegiumCopernicus';
-import {CardName} from '../CardName';
+import {CardName} from '../common/cards/CardName';
 
 export class ColoniesHandler {
   public static getColony(game: Game, colonyName: ColonyName, includeDiscardedColonies: boolean = false): Colony {

@@ -4,7 +4,7 @@ import {ISerializable} from './ISerializable';
 import {SerializedDealer} from './SerializedDealer';
 import {CardFinder} from './CardFinder';
 import {CardLoader} from './CardLoader';
-import {CardName} from './CardName';
+import {CardName} from './common/cards/CardName';
 import {LogHelper} from './LogHelper';
 import {Game} from './Game';
 

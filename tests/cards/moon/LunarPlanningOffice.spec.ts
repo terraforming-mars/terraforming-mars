@@ -8,7 +8,7 @@ import {MareNectarisMine} from '../../../src/cards/moon/MareNectarisMine';
 import {MareImbriumMine} from '../../../src/cards/moon/MareImbriumMine';
 import {MicroMills} from '../../../src/cards/base/MicroMills';
 import {RoboticWorkforce} from '../../../src/cards/base/RoboticWorkforce';
-import {CardName} from '../../../src/CardName';
+import {CardName} from '../../../src/common/cards/CardName';
 
 const MOON_OPTIONS = TestingUtils.setCustomGameOptions({moonExpansion: true});
 

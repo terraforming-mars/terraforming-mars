@@ -4,7 +4,7 @@ import {Player} from '../../Player';
 import {IProjectCard} from '../IProjectCard';
 import {Tags} from '../../common/cards/Tags';
 import {Resources} from '../../common/Resources';
-import {CardName} from '../../CardName';
+import {CardName} from '../../common/cards/CardName';
 import {CardRenderer} from '../render/CardRenderer';
 
 export class ImportOfAdvancedGHG extends Card implements IProjectCard {

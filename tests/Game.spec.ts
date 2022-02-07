@@ -21,7 +21,7 @@ import {OrOptions} from '../src/inputs/OrOptions';
 import {BoardName} from '../src/common/boards/BoardName';
 import {SpaceType} from '../src/common/boards/SpaceType';
 import {Helion} from '../src/cards/corporation/Helion';
-import {CardName} from '../src/CardName';
+import {CardName} from '../src/common/cards/CardName';
 import {Player} from '../src/Player';
 import {Color} from '../src/common/Color';
 import {RandomMAOptionType} from '../src/RandomMAOptionType';

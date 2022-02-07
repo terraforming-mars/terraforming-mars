@@ -1,6 +1,6 @@
 import {expect} from 'chai';
 
-import {CardName} from '../../src/CardName';
+import {CardName} from '../../src/common/cards/CardName';
 import {CardType} from '../../src/common/cards/CardType';
 import {Helion} from '../../src/cards/corporation/Helion';
 import {Inventrix} from '../../src/cards/corporation/Inventrix';

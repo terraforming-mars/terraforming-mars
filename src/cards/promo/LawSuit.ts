@@ -5,7 +5,7 @@ import {CardType} from '../../common/cards/CardType';
 import {Tags} from '../../common/cards/Tags';
 import {SelectPlayer} from '../../inputs/SelectPlayer';
 import {Resources} from '../../common/Resources';
-import {CardName} from '../../CardName';
+import {CardName} from '../../common/cards/CardName';
 import {CardRenderer} from '../render/CardRenderer';
 import {Size} from '../render/Size';
 import {CardRenderDynamicVictoryPoints} from '../render/CardRenderDynamicVictoryPoints';

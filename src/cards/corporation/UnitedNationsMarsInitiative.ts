@@ -3,7 +3,7 @@ import {IActionCard} from '../ICard';
 import {Tags} from '../../common/cards/Tags';
 import {Player} from '../../Player';
 import {CorporationCard} from './CorporationCard';
-import {CardName} from '../../CardName';
+import {CardName} from '../../common/cards/CardName';
 import {CardType} from '../../common/cards/CardType';
 import {CardRenderer} from '../render/CardRenderer';
 import {Resources} from '../../common/Resources';

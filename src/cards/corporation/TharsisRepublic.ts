@@ -6,7 +6,7 @@ import {SelectSpace} from '../../inputs/SelectSpace';
 import {SpaceType} from '../../common/boards/SpaceType';
 import {ISpace} from '../../boards/ISpace';
 import {Resources} from '../../common/Resources';
-import {CardName} from '../../CardName';
+import {CardName} from '../../common/cards/CardName';
 import {Priority} from '../../deferredActions/DeferredAction';
 import {GainResources} from '../../deferredActions/GainResources';
 import {GainProduction} from '../../deferredActions/GainProduction';

@@ -1,7 +1,7 @@
 import * as constants from './constants';
 import {BeginnerCorporation} from './cards/corporation/BeginnerCorporation';
 import {Board} from './boards/Board';
-import {BoardName} from './boards/BoardName';
+import {BoardName} from './common/boards/BoardName';
 import {CardFinder} from './CardFinder';
 import {CardName} from './CardName';
 import {CardType} from './common/cards/CardType';

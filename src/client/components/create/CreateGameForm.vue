@@ -441,7 +441,8 @@
 <script lang="ts">
 import Vue from 'vue';
 import {Color} from '@/common/Color';
-import {BoardName, RandomBoardOption} from '@/boards/BoardName';
+import {BoardName} from '@/common/boards/BoardName';
+import {RandomBoardOption} from '@/common/boards/RandomBoardOption';
 import {CardName} from '@/CardName';
 import CorporationsFilter from '@/client/components/create/CorporationsFilter.vue';
 import {translateTextWithParams} from '@/client/directives/i18n';

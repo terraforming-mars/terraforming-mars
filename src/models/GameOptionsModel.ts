@@ -1,4 +1,4 @@
-import {BoardName} from '../boards/BoardName';
+import {BoardName} from '../common/boards/BoardName';
 import {RandomMAOptionType} from '../RandomMAOptionType';
 import {AgendaStyle} from '../turmoil/PoliticalAgendas';
 import {CardName} from '../CardName';

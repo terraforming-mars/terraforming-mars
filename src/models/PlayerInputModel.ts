@@ -3,7 +3,7 @@ import {PlayerInputTypes} from '../common/input/PlayerInputTypes';
 import {CardModel} from './CardModel';
 import {ColonyModel} from './ColonyModel';
 import {ColorWithNeutral} from '../common/Color';
-import {IPayProductionModel} from './IPayProductionUnitsModel';
+import {IPayProductionModel} from '../common/models/IPayProductionUnitsModel';
 import {IAresData} from '../common/ares/IAresData';
 import {Message} from '../common/logs/Message';
 import {PartyName} from '../common/turmoil/PartyName';

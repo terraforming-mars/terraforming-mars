@@ -11,7 +11,7 @@
 <script lang="ts">
 
 import Vue from 'vue';
-import {PlayerInputTypes} from '@/PlayerInputTypes';
+import {PlayerInputTypes} from '@/common/input/PlayerInputTypes';
 import {PlayerViewModel, PublicPlayerModel} from '@/models/PlayerModel';
 import {PlayerInputModel} from '@/models/PlayerInputModel';
 import AndOptions from '@/client/components/AndOptions.vue';

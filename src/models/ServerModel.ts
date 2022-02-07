@@ -12,7 +12,7 @@ import {ISpace} from '../boards/ISpace';
 import {Player} from '../Player';
 import {PlayerInput} from '../PlayerInput';
 import {PlayerInputModel} from './PlayerInputModel';
-import {PlayerInputTypes} from '../PlayerInputTypes';
+import {PlayerInputTypes} from '../common/input/PlayerInputTypes';
 import {PlayerViewModel, PublicPlayerModel} from './PlayerModel';
 import {SelectAmount} from '../inputs/SelectAmount';
 import {SelectCard} from '../inputs/SelectCard';

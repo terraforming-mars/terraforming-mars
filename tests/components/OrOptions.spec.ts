@@ -3,7 +3,7 @@ import {mount} from '@vue/test-utils';
 import {getLocalVue} from './getLocalVue';
 import {expect} from 'chai';
 import OrOptions from '@/client/components/OrOptions.vue';
-import {PlayerInputTypes} from '@/PlayerInputTypes';
+import {PlayerInputTypes} from '@/common/input/PlayerInputTypes';
 
 describe('OrOptions', function() {
   it('saves the options ignoring hidden', async function() {

@@ -1,5 +1,5 @@
 import {PlayerInput} from '../PlayerInput';
-import {PlayerInputTypes} from '../PlayerInputTypes';
+import {PlayerInputTypes} from '../common/input/PlayerInputTypes';
 import {SelectSpace} from './SelectSpace';
 import {SelectHowToPay} from './SelectHowToPay';
 import {SelectCard} from './SelectCard';

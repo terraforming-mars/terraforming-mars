@@ -3,7 +3,7 @@ import {Message} from '../common/logs/Message';
 import {OrOptions} from './OrOptions';
 import {PlayerInput} from '../PlayerInput';
 import {ISpace} from '../boards/ISpace';
-import {PlayerInputTypes} from '../PlayerInputTypes';
+import {PlayerInputTypes} from '../common/input/PlayerInputTypes';
 
 export class SelectSpace implements PlayerInput {
   public inputType: PlayerInputTypes = PlayerInputTypes.SELECT_SPACE;

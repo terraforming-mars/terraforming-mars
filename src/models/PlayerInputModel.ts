@@ -1,5 +1,5 @@
 
-import {PlayerInputTypes} from '../PlayerInputTypes';
+import {PlayerInputTypes} from '../common/input/PlayerInputTypes';
 import {CardModel} from './CardModel';
 import {ColonyModel} from './ColonyModel';
 import {ColorWithNeutral} from '../common/Color';

@@ -1,6 +1,6 @@
 
 import {PlayerInput} from '../PlayerInput';
-import {PlayerInputTypes} from '../PlayerInputTypes';
+import {PlayerInputTypes} from '../common/input/PlayerInputTypes';
 import {SelectAmount} from './SelectAmount';
 import {SelectCard} from './SelectCard';
 import {SelectPlayer} from './SelectPlayer';

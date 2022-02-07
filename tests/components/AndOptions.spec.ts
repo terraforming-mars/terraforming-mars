@@ -4,7 +4,7 @@ import {getLocalVue} from './getLocalVue';
 
 import {expect} from 'chai';
 import AndOptions from '@/client/components/AndOptions.vue';
-import {PlayerInputTypes} from '@/PlayerInputTypes';
+import {PlayerInputTypes} from '@/common/input/PlayerInputTypes';
 
 describe('AndOptions', function() {
   it('saves the options', async function() {

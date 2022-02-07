@@ -4,7 +4,7 @@ import {CorporationCard} from '../cards/corporation/CorporationCard';
 import {IProjectCard} from '../cards/IProjectCard';
 import {Player} from '../Player';
 import {PlayerInput} from '../PlayerInput';
-import {PlayerInputTypes} from '../PlayerInputTypes';
+import {PlayerInputTypes} from '../common/input/PlayerInputTypes';
 import {SelectCard} from './SelectCard';
 
 export class SelectInitialCards extends AndOptions implements PlayerInput {

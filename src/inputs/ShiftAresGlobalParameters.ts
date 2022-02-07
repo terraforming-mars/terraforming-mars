@@ -1,5 +1,5 @@
 import {PlayerInput} from '../PlayerInput';
-import {PlayerInputTypes} from '../PlayerInputTypes';
+import {PlayerInputTypes} from '../common/input/PlayerInputTypes';
 import {Player} from '../Player';
 import {IAresData} from '../common/ares/IAresData';
 

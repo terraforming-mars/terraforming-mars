@@ -6,7 +6,7 @@ import {TestPlayers} from '../../TestPlayers';
 import {LunarObservationPost} from '../../../src/cards/moon/LunarObservationPost';
 import {TestingUtils} from '../../TestingUtils';
 import {IProjectCard} from '../../../src/cards/IProjectCard';
-import {CardName} from '../../../src/CardName';
+import {CardName} from '../../../src/common/cards/CardName';
 import {Tags} from '../../../src/common/cards/Tags';
 import {CardRequirements} from '../../../src/cards/CardRequirements';
 import {Dealer} from '../../../src/Dealer';

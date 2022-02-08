@@ -1,5 +1,5 @@
 
-import {ColonyName} from './colonies/ColonyName';
+import {ColonyName} from './common/colonies/ColonyName';
 import {PlayerId} from './common/Types';
 import {ResourceType} from './common/ResourceType';
 

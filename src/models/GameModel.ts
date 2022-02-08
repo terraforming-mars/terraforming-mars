@@ -1,5 +1,5 @@
 import {GameOptionsModel} from './GameOptionsModel';
-import {ColonyModel} from './ColonyModel';
+import {ColonyModel} from '../common/models/ColonyModel';
 import {Color} from '../common/Color';
 import {TurmoilModel} from './TurmoilModel';
 import {ClaimedMilestoneModel} from '../common/models/ClaimedMilestoneModel';

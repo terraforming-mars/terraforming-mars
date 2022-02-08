@@ -7,7 +7,7 @@ import {Board} from './boards/Board';
 import {CardFinder} from './CardFinder';
 import {CardName} from './common/cards/CardName';
 import {CardType} from './common/cards/CardType';
-import {ColonyName} from './colonies/ColonyName';
+import {ColonyName} from './common/colonies/ColonyName';
 import {Color} from './common/Color';
 import {CorporationCard} from './cards/corporation/CorporationCard';
 import {Game} from './Game';

@@ -1,6 +1,6 @@
 import {Colony, ShouldIncreaseTrack} from '../../colonies/Colony';
 import {Resources} from '../../common/Resources';
-import {ColonyName} from '../../colonies/ColonyName';
+import {ColonyName} from '../../common/colonies/ColonyName';
 import {ColonyBenefit} from '../../colonies/ColonyBenefit';
 
 export class Titania extends Colony {

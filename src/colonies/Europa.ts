@@ -1,6 +1,6 @@
 import {Colony, ShouldIncreaseTrack} from './Colony';
 import {Resources} from '../common/Resources';
-import {ColonyName} from './ColonyName';
+import {ColonyName} from '../common/colonies/ColonyName';
 import {ColonyBenefit} from './ColonyBenefit';
 
 export class Europa extends Colony {

@@ -1,5 +1,5 @@
 import {Colony, ShouldIncreaseTrack} from '../../colonies/Colony';
-import {ColonyName} from '../../colonies/ColonyName';
+import {ColonyName} from '../../common/colonies/ColonyName';
 import {ColonyBenefit} from '../../colonies/ColonyBenefit';
 import {Resources} from '../../common/Resources';
 

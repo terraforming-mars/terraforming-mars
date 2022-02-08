@@ -8,7 +8,7 @@ import {AddResourcesToCard} from '../../deferredActions/AddResourcesToCard';
 import {ResourceType} from '../../common/ResourceType';
 import {CardRequirements} from '../CardRequirements';
 import {Tags} from '../../common/cards/Tags';
-import {all, digit, played} from '../Options';
+import {digit, played} from '../Options';
 import {Resources} from '../../common/Resources';
 import {Size} from '../render/Size';
 
@@ -23,7 +23,7 @@ export class OumuamuaTypeObjectSurvey extends Card implements IProjectCard {
       metadata: {
         cardNumber: 'Pf53',
         renderData: CardRenderer.builder((b) => {
-          b.data({amount: 2, all}).cards(2, {size: Size.SMALL}).asterix().br;
+          b.data({amount: 2}).asterix().cards(2, {size: Size.SMALL}).asterix().br;
           b.science(1, {played}).microbes(1, {played}).colon().text('play ', Size.SMALL, false, true);
           b.space({played}).colon().production((pb) => pb.energy(3, {digit})).br;
           b.text(
@@ -31,7 +31,7 @@ export class OumuamuaTypeObjectSurvey extends Card implements IProjectCard {
             'If not, and it has a space tag, gain 3 energy prod. If it has none of those, apply the check to the second card.',
             Size.SMALL, false, false);
         }),
-        description: 'Requires 1 space tag and 1 science tag. Add 2 data to any card. ',
+        description: 'Requires 1 space tag and 1 science tag. Add 2 data to ANY card. ',
       },
     });
   }

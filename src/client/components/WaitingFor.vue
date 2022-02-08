@@ -130,7 +130,7 @@ export default Vue.extend({
                     registration.showNotification(notificationTitle, notificationOptions);
                   }).catch((err) => {
                     // avoid promise going uncaught
-                    console.warn('Failed to display notification', err);
+                    console.warn('Failed to display notification with serviceWorker', err);
                   });
                 }
               }

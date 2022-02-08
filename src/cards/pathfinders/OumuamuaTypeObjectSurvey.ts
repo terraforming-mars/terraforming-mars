@@ -18,6 +18,7 @@ export class OumuamuaTypeObjectSurvey extends Card implements IProjectCard {
       cardType: CardType.AUTOMATED,
       name: CardName.OUMUAMUA_TYPE_OBJECT_SURVEY,
       cost: 20,
+      tags: [Tags.SPACE, Tags.SCIENCE],
       requirements: CardRequirements.builder((b) => b.tag(Tags.SPACE, 1).tag(Tags.SCIENCE, 1)),
 
       metadata: {

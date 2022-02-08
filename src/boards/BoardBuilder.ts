@@ -113,7 +113,7 @@ export class BoardBuilder {
         const land_id = Number(land) - 3;
         while (this.spaceTypes[land_id] === SpaceType.OCEAN) {
           satisfy = false;
-          const idx = rng.nextInt(this.spaceTypes.length + 1);
+          const idx = rng.nextInt(this.spaceTypes.length);
           [this.spaceTypes[land_id], this.spaceTypes[idx]] = [this.spaceTypes[idx], this.spaceTypes[land_id]];
         }
       }

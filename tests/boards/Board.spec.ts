@@ -11,6 +11,7 @@ import {SerializedBoard} from '../../src/boards/SerializedBoard';
 import {MoonSpaces} from '../../src/moon/MoonSpaces';
 import {Random} from '../../src/Random';
 import {DEFAULT_GAME_OPTIONS, GameOptions} from '../../src/Game';
+import {MultiSet} from 'mnemonist';
 
 describe('Board', function() {
   let board : OriginalBoard; let player : Player; let player2 : Player;
@@ -341,5 +342,24 @@ describe('Board', function() {
 
     const board = new TestBoard(Board.deserializeSpaces((boardJson as SerializedBoard).spaces, [player1, player2]));
     expect(board.getSpaceById('31')!.spaceType).eq(SpaceType.LAND);
+  });
+
+  it('Randomized maps have space types on all spaces, #4056', () => {
+    const spaces = new MultiSet<string>();
+    for (let idx = 0; idx < 50_000; idx++) {
+      const seed = Math.random();
+      board = OriginalBoard.newInstance({
+        ...DEFAULT_GAME_OPTIONS,
+        shuffleMapOption: true,
+      },
+      new Random(seed));
+      for (const space of board.spaces) {
+        if (space.spaceType === undefined) {
+          console.log(`Bad seed ${seed}`);
+          spaces.add(space.id);
+        }
+      }
+    }
+    expect(spaces.size, spaces.toJSON()).eq(0);
   });
 });

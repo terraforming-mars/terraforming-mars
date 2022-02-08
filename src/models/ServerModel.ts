@@ -1,5 +1,5 @@
 import {CardModel} from './CardModel';
-import {ColonyModel} from './ColonyModel';
+import {ColonyModel} from '../common/models/ColonyModel';
 import {Color} from '../common/Color';
 import {Game, GameOptions} from '../Game';
 import {SimpleGameModel} from './SimpleGameModel';
@@ -45,6 +45,7 @@ import {Turmoil} from '../turmoil/Turmoil';
 import {PathfindersModel} from './PathfindersModel';
 import {MoonExpansion} from '../moon/MoonExpansion';
 import {MoonModel} from '../common/models/MoonModel';
+import {Colony} from '../colonies/Colony';
 
 export class Server {
   public static getSimpleGameModel(game: Game): SimpleGameModel {
@@ -290,7 +291,7 @@ export class Server {
       }
       break;
     case PlayerInputTypes.SELECT_COLONY:
-      playerInputModel.coloniesModel = ColonyModel.getColonyModel(player.game, (waitingFor as SelectColony).colonies);
+      playerInputModel.coloniesModel = this.getColonyModel(player.game, (waitingFor as SelectColony).colonies);
       break;
     case PlayerInputTypes.SELECT_HOW_TO_PAY:
       playerInputModel.amount = (waitingFor as SelectHowToPay).amount;
@@ -519,6 +520,22 @@ export class Server {
     };
   }
 
+  private static getColonyModel(game: Game, colonies: Array<Colony>) : Array<ColonyModel> {
+    return colonies.map(
+      (colony): ColonyModel => ({
+        colonies: colony.colonies.map(
+          (playerId): Color => game.getPlayerById(playerId).color,
+        ),
+        isActive: colony.isActive,
+        name: colony.name,
+        trackPosition: colony.trackPosition,
+        visitor:
+                colony.visitor === undefined ?
+                  undefined :
+                  game.getPlayerById(colony.visitor).color,
+      }),
+    );
+  }
   private static getMoonModel(game: Game): MoonModel | undefined {
     return MoonExpansion.ifElseMoon(game, (moonData) => {
       return {

@@ -448,7 +448,7 @@ import CorporationsFilter from '@/client/components/create/CorporationsFilter.vu
 import {translateTextWithParams} from '@/client/directives/i18n';
 import {IGameData} from '@/database/IDatabase';
 import ColoniesFilter from '@/client/components/create/ColoniesFilter.vue';
-import {ColonyName} from '@/colonies/ColonyName';
+import {ColonyName} from '@/common/colonies/ColonyName';
 import CardsFilter from '@/client/components/create/CardsFilter.vue';
 import Button from '@/client/components/common/Button.vue';
 import {playerColorClass} from '@/utils/utils';

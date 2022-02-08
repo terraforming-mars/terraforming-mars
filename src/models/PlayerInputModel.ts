@@ -1,7 +1,7 @@
 
 import {PlayerInputTypes} from '../common/input/PlayerInputTypes';
 import {CardModel} from './CardModel';
-import {ColonyModel} from './ColonyModel';
+import {ColonyModel} from '../common/models/ColonyModel';
 import {ColorWithNeutral} from '../common/Color';
 import {IPayProductionModel} from '../common/models/IPayProductionUnitsModel';
 import {IAresData} from '../common/ares/IAresData';

@@ -894,13 +894,14 @@ export default Vue.extend({
       }
 
       // Check custom corp count
-      if (customCorporationsList.length > 0) {
+      if (component.showCorporationList && customCorporationsList.length > 0) {
         const neededCorpsCount = players.length * startingCorporations;
-
         if (customCorporationsList.length < neededCorpsCount) {
           window.alert(translateTextWithParams('Must select at least ${0} corporations', [neededCorpsCount.toString()]));
           return;
         }
+      } else {
+        customCorporationsList.length = 0;
       }
 
       // Clone game checks

@@ -24,8 +24,7 @@ import {Tags} from '../common/cards/Tags';
 import {SendDelegateToArea} from '../deferredActions/SendDelegateToArea';
 import {Game} from '../Game';
 import {Turmoil} from '../turmoil/Turmoil';
-
-export enum ShouldIncreaseTrack { YES, NO, ASK }
+import {ShouldIncreaseTrack} from '../common/colonies/ShouldIncreaseTrack';
 
 type TradeOptions = {
   usesTradeFleet?: boolean;

@@ -1,5 +1,5 @@
 import {Card, StaticCardProperties} from '../Card';
-import {CardName} from '../../CardName';
+import {CardName} from '../../common/cards/CardName';
 import {Player} from '../../Player';
 import {ISpace} from '../../boards/ISpace';
 import {SpaceBonus} from '../../common/boards/SpaceBonus';
@@ -12,7 +12,7 @@ import {IProjectCard} from '../IProjectCard';
 import {BoardType} from '../../boards/BoardType';
 import {SpaceType} from '../../common/boards/SpaceType';
 import {PartyHooks} from '../../turmoil/parties/PartyHooks';
-import {PartyName} from '../../turmoil/parties/PartyName';
+import {PartyName} from '../../common/turmoil/PartyName';
 import {Board} from '../../boards/Board';
 
 export abstract class SurveyCard extends Card implements IProjectCard {

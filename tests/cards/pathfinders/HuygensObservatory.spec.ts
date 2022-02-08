@@ -4,7 +4,7 @@ import {HuygensObservatory} from '../../../src/cards/pathfinders/HuygensObservat
 import {SelectColony} from '../../../src/inputs/SelectColony';
 import {SelectOption} from '../../../src/inputs/SelectOption';
 import {OrOptions} from '../../../src/inputs/OrOptions';
-import {ColonyName} from '../../../src/colonies/ColonyName';
+import {ColonyName} from '../../../src/common/colonies/ColonyName';
 import {Game} from '../../../src/Game';
 import {TestPlayer} from '../../TestPlayer';
 import {TestingUtils} from '../../TestingUtils';

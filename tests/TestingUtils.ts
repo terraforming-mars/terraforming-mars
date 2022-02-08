@@ -15,8 +15,8 @@ import {Greens} from '../src/turmoil/parties/Greens';
 import {PoliticalAgendas} from '../src/turmoil/PoliticalAgendas';
 import {Reds} from '../src/turmoil/parties/Reds';
 import {IProjectCard} from '../src/cards/IProjectCard';
-import {CardName} from '../src/CardName';
-import {CardType} from '../src/cards/CardType';
+import {CardName} from '../src/common/cards/CardName';
+import {CardType} from '../src/common/cards/CardType';
 
 export class TestingUtils {
   // Returns the oceans created during this operation which may not reflect all oceans.

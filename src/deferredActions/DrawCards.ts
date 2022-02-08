@@ -4,7 +4,7 @@ import {IProjectCard} from '../cards/IProjectCard';
 import {DeferredAction, Priority} from './DeferredAction';
 import {SelectCard} from '../inputs/SelectCard';
 import {ResourceType} from '../common/ResourceType';
-import {CardType} from '../cards/CardType';
+import {CardType} from '../common/cards/CardType';
 import {SelectHowToPayDeferred} from './SelectHowToPayDeferred';
 import {LogHelper} from '../LogHelper';
 

@@ -29,7 +29,7 @@ import CardCost from './CardCost.vue';
 import CardExtraContent from './CardExtraContent.vue';
 import CardExpansion from './CardExpansion.vue';
 import CardTags from './CardTags.vue';
-import {CardType} from '@/cards/CardType';
+import {CardType} from '@/common/cards/CardType';
 import CardContent from './CardContent.vue';
 import {ICardMetadata} from '@/cards/ICardMetadata';
 import {Tags} from '@/common/cards/Tags';

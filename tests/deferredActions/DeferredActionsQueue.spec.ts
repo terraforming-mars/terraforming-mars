@@ -1,7 +1,7 @@
 import {expect} from 'chai';
 import {DeferredAction} from '../../src/deferredActions/DeferredAction';
 import {DeferredActionsQueue} from '../../src/deferredActions/DeferredActionsQueue';
-import {PlayerInputTypes} from '../../src/PlayerInputTypes';
+import {PlayerInputTypes} from '../../src/common/input/PlayerInputTypes';
 import {TestPlayers} from '../TestPlayers';
 import {SelectOption} from '../../src/inputs/SelectOption';
 

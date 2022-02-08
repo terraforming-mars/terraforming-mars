@@ -1,6 +1,6 @@
 import {IParty} from './IParty';
 import {Party} from './Party';
-import {PartyName} from './PartyName';
+import {PartyName} from '../../common/turmoil/PartyName';
 import {Game} from '../../Game';
 import {Resources} from '../../common/Resources';
 import {Bonus} from '../Bonus';
@@ -8,7 +8,7 @@ import {Policy} from '../Policy';
 import {Player} from '../../Player';
 import {SelectHowToPayDeferred} from '../../deferredActions/SelectHowToPayDeferred';
 import {MAX_TEMPERATURE} from '../../constants';
-import {CardName} from '../../CardName';
+import {CardName} from '../../common/cards/CardName';
 
 export class Kelvinists extends Party implements IParty {
   name = PartyName.KELVINISTS;

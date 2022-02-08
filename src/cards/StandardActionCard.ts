@@ -1,7 +1,7 @@
-import {CardType} from './CardType';
+import {CardType} from '../common/cards/CardType';
 import {Player} from '../Player';
 import {ICardMetadata} from './ICardMetadata';
-import {CardName} from '../CardName';
+import {CardName} from '../common/cards/CardName';
 import {Card} from './Card';
 import {IActionCard, ICard} from './ICard';
 import {PlayerInput} from '../PlayerInput';

@@ -1,6 +1,6 @@
 import {IAward} from './IAward';
 import {Player} from '../Player';
-import {CardType} from '../cards/CardType';
+import {CardType} from '../common/cards/CardType';
 
 export class Manufacturer implements IAward {
   public name: string = 'Manufacturer';

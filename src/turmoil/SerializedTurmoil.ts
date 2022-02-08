@@ -1,5 +1,5 @@
 import {GlobalEventName} from './globalEvents/GlobalEventName';
-import {PartyName} from './parties/PartyName';
+import {PartyName} from '../common/turmoil/PartyName';
 import {SerializedGlobalEventDealer} from './globalEvents/SerializedGlobalEventDealer';
 import {SerializedPoliticalAgendasData} from './PoliticalAgendas';
 import {NeutralPlayer} from './Turmoil';

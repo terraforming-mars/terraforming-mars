@@ -1,4 +1,4 @@
-import {CardName} from '../CardName';
+import {CardName} from '../common/cards/CardName';
 import {Deck} from '../Deck';
 import {GameModule} from '../common/cards/GameModule';
 import {CorporationCard} from './corporation/CorporationCard';

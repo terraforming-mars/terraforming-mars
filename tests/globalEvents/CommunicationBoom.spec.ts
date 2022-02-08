@@ -5,7 +5,7 @@ import {CommunicationBoom} from '../../src/turmoil/globalEvents/CommunicationBoo
 import {Kelvinists} from '../../src/turmoil/parties/Kelvinists';
 import {Turmoil} from '../../src/turmoil/Turmoil';
 import {TestPlayers} from '../TestPlayers';
-import {CardName} from '../../src/CardName';
+import {CardName} from '../../src/common/cards/CardName';
 import {ResourceType} from '../../src/common/ResourceType';
 import {AndOptions} from '../../src/inputs/AndOptions';
 

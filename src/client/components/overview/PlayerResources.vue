@@ -11,7 +11,7 @@
 
 <script lang="ts">
 import Vue from 'vue';
-import {CardName} from '@/CardName';
+import {CardName} from '@/common/cards/CardName';
 import {PublicPlayerModel} from '@/models/PlayerModel';
 import PlayerResource from '@/client/components/overview/PlayerResource.vue';
 import {Resources} from '@/common/Resources';

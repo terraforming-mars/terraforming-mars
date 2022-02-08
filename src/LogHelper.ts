@@ -1,4 +1,4 @@
-import {CardName} from './CardName';
+import {CardName} from './common/cards/CardName';
 import {Game} from './Game';
 import {Player} from './Player';
 import {ICard} from './cards/ICard';

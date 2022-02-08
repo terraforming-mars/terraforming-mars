@@ -1,4 +1,4 @@
-import {CardName} from '@/CardName';
+import {CardName} from '@/common/cards/CardName';
 import {CardModel} from '@/models/CardModel';
 
 export function sortActiveCards(inCards: Array<CardModel>): Array<CardModel> {

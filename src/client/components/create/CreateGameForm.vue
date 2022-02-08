@@ -441,13 +441,14 @@
 <script lang="ts">
 import Vue from 'vue';
 import {Color} from '@/common/Color';
-import {BoardName, RandomBoardOption} from '@/boards/BoardName';
-import {CardName} from '@/CardName';
+import {BoardName} from '@/common/boards/BoardName';
+import {RandomBoardOption} from '@/common/boards/RandomBoardOption';
+import {CardName} from '@/common/cards/CardName';
 import CorporationsFilter from '@/client/components/create/CorporationsFilter.vue';
 import {translateTextWithParams} from '@/client/directives/i18n';
 import {IGameData} from '@/database/IDatabase';
 import ColoniesFilter from '@/client/components/create/ColoniesFilter.vue';
-import {ColonyName} from '@/colonies/ColonyName';
+import {ColonyName} from '@/common/colonies/ColonyName';
 import CardsFilter from '@/client/components/create/CardsFilter.vue';
 import Button from '@/client/components/common/Button.vue';
 import {playerColorClass} from '@/utils/utils';

@@ -135,12 +135,12 @@
 import Vue from 'vue';
 import Card from '@/client/components/card/Card.vue';
 import {GameModule} from '@/common/cards/GameModule';
-import {CardType} from '@/cards/CardType';
-import {CardName} from '@/CardName';
+import {CardType} from '@/common/cards/CardType';
+import {CardName} from '@/common/cards/CardName';
 import {PreferencesManager} from '@/client/utils/PreferencesManager';
 import {GlobalEventName} from '@/turmoil/globalEvents/GlobalEventName';
 import {GlobalEventModel} from '@/models/TurmoilModel';
-import {PartyName} from '@/turmoil/parties/PartyName';
+import {PartyName} from '@/common/turmoil/PartyName';
 import {ALL_EVENTS, getGlobalEventByName} from '@/turmoil/globalEvents/GlobalEventDealer';
 import GlobalEvent from '@/client/components/GlobalEvent.vue';
 import {byType, getCard, getCards, toName} from '../cards/ClientCardManifest';

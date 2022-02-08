@@ -1,11 +1,11 @@
 
 import {Card} from '../Card';
-import {CardType} from '../CardType';
+import {CardType} from '../../common/cards/CardType';
 import {Tags} from '../../common/cards/Tags';
 import {IProjectCard} from '../IProjectCard';
 import {Player} from '../../Player';
 import {Resources} from '../../common/Resources';
-import {CardName} from '../../CardName';
+import {CardName} from '../../common/cards/CardName';
 import {Size} from '../render/Size';
 import {CardRenderer} from '../render/CardRenderer';
 import {all} from '../Options';

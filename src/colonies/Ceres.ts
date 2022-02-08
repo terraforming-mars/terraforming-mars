@@ -1,5 +1,5 @@
 import {Colony} from './Colony';
-import {ColonyName} from './ColonyName';
+import {ColonyName} from '../common/colonies/ColonyName';
 import {ColonyBenefit} from './ColonyBenefit';
 import {Resources} from '../common/Resources';
 

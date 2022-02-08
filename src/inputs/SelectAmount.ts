@@ -1,7 +1,7 @@
 
 import {Message} from '../common/logs/Message';
 import {PlayerInput} from '../PlayerInput';
-import {PlayerInputTypes} from '../PlayerInputTypes';
+import {PlayerInputTypes} from '../common/input/PlayerInputTypes';
 
 export class SelectAmount implements PlayerInput {
   public inputType: PlayerInputTypes = PlayerInputTypes.SELECT_AMOUNT;

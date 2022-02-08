@@ -2,7 +2,7 @@ import {Tags} from '../../common/cards/Tags';
 import {Player} from '../../Player';
 import {PreludeCard} from './PreludeCard';
 import {Resources} from '../../common/Resources';
-import {CardName} from '../../CardName';
+import {CardName} from '../../common/cards/CardName';
 import {PlaceCityTile} from '../../deferredActions/PlaceCityTile';
 import {CardRenderer} from '../render/CardRenderer';
 import {Units} from '../../common/Units';

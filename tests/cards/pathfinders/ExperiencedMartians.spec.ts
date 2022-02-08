@@ -6,11 +6,11 @@ import {Units} from '../../../src/common/Units';
 import {Turmoil} from '../../../src/turmoil/Turmoil';
 import {Game} from '../../../src/Game';
 import {Tags} from '../../../src/common/cards/Tags';
-import {PartyName} from '../../../src/turmoil/parties/PartyName';
+import {PartyName} from '../../../src/common/turmoil/PartyName';
 import {SendDelegateToArea} from '../../../src/deferredActions/SendDelegateToArea';
 import {SelectPartyToSendDelegate} from '../../../src/inputs/SelectPartyToSendDelegate';
 import {TestingUtils} from '../../TestingUtils';
-import {CardName} from '../../../src/CardName';
+import {CardName} from '../../../src/common/cards/CardName';
 
 describe('ExperiencedMartians', function() {
   let card: ExperiencedMartians;

@@ -8,7 +8,7 @@ import {TileType} from '../../../src/common/TileType';
 import {TestingUtils} from '../../TestingUtils';
 import {TestPlayers} from '../../TestPlayers';
 import {newTestGame} from '../../TestGame';
-import {BoardName} from '../../../src/boards/BoardName';
+import {BoardName} from '../../../src/common/boards/BoardName';
 
 describe('LavaFlows', function() {
   let card: LavaFlows;

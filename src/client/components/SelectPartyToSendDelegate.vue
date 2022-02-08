@@ -17,7 +17,7 @@ import Vue from 'vue';
 import Button from '@/client/components/common/Button.vue';
 import {PlayerInputModel} from '@/models/PlayerInputModel';
 import Party from '@/client/components/Party.vue';
-import {PartyName} from '@/turmoil/parties/PartyName';
+import {PartyName} from '@/common/turmoil/PartyName';
 
 export default Vue.extend({
   name: 'SelectPartyToSendDelegate',

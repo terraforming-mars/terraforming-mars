@@ -1,11 +1,11 @@
 import {IActionCard, IResourceCard} from '../ICard';
 import {Tags} from '../../common/cards/Tags';
-import {CardType} from '../CardType';
+import {CardType} from '../../common/cards/CardType';
 import {Player} from '../../Player';
 import {ResourceType} from '../../common/ResourceType';
 import {OrOptions} from '../../inputs/OrOptions';
 import {SelectOption} from '../../inputs/SelectOption';
-import {CardName} from '../../CardName';
+import {CardName} from '../../common/cards/CardName';
 import {MAX_VENUS_SCALE} from '../../constants';
 import {LogHelper} from '../../LogHelper';
 import {CardRenderer} from '../render/CardRenderer';

@@ -75,13 +75,13 @@ import {Color} from '@/common/Color';
 import {PreferencesManager} from '@/client/utils/PreferencesManager';
 import {LANGUAGES} from '@/constants';
 import {TurmoilModel} from '@/models/TurmoilModel';
-import {PartyName} from '@/turmoil/parties/PartyName';
+import {PartyName} from '@/common/turmoil/PartyName';
 import GameSetupDetail from '@/client/components/GameSetupDetail.vue';
 import {GameOptionsModel} from '@/models/GameOptionsModel';
 import GlobalParameterValue from '@/client/components/GlobalParameterValue.vue';
 import MoonGlobalParameterValue from '@/client/components/MoonGlobalParameterValue.vue';
 import {GlobalParameter} from '@/common/GlobalParameter';
-import {MoonModel} from '@/models/MoonModel';
+import {MoonModel} from '@/common/models/MoonModel';
 import PreferencesDialog from '@/client/components/PreferencesDialog.vue';
 
 export default Vue.extend({

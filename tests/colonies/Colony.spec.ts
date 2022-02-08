@@ -14,7 +14,7 @@ import {IProjectCard} from '../../src/cards/IProjectCard';
 import {MAX_COLONY_TRACK_POSITION} from '../../src/constants';
 import {TestingUtils} from '../TestingUtils';
 import {TestPlayer} from '../TestPlayer';
-import {CardName} from '../../src/CardName';
+import {CardName} from '../../src/common/cards/CardName';
 
 const gameOptions = TestingUtils.setCustomGameOptions({coloniesExtension: true});
 

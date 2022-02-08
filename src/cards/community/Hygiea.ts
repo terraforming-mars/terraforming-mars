@@ -1,7 +1,8 @@
-import {Colony, ShouldIncreaseTrack} from '../../colonies/Colony';
-import {ColonyName} from '../../colonies/ColonyName';
+import {Colony} from '../../colonies/Colony';
+import {ColonyName} from '../../common/colonies/ColonyName';
 import {ColonyBenefit} from '../../colonies/ColonyBenefit';
 import {Resources} from '../../common/Resources';
+import {ShouldIncreaseTrack} from '../../common/colonies/ShouldIncreaseTrack';
 
 export class Hygiea extends Colony {
   public name = ColonyName.HYGIEA;

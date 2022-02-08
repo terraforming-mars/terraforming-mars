@@ -7,7 +7,7 @@ import {TestPlayers} from '../../TestPlayers';
 import {ImprovedMoonConcrete} from '../../../src/cards/moon/ImprovedMoonConcrete';
 import {expect} from 'chai';
 import {MareSerenitatisMine} from '../../../src/cards/moon/MareSerenitatisMine';
-import {CardName} from '../../../src/CardName';
+import {CardName} from '../../../src/common/cards/CardName';
 import {MoonMineStandardProject} from '../../../src/cards/moon/MoonMineStandardProject';
 
 const MOON_OPTIONS = TestingUtils.setCustomGameOptions({moonExpansion: true});

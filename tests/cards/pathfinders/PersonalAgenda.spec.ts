@@ -5,7 +5,7 @@ import {Game} from '../../../src/Game';
 import {Units} from '../../../src/common/Units';
 import {Tags} from '../../../src/common/cards/Tags';
 import {TestPlayer} from '../../TestPlayer';
-import {CardType} from '../../../src/cards/CardType';
+import {CardType} from '../../../src/common/cards/CardType';
 
 describe('PersonalAgenda', function() {
   let card: PersonalAgenda;

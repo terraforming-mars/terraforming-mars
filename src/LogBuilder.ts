@@ -2,7 +2,7 @@ import {LogMessageData} from './common/logs/LogMessageData';
 import {LogMessageDataType} from './common/logs/LogMessageDataType';
 import {LogMessageType} from './common/logs/LogMessageType';
 import {Player} from './Player';
-import {CardName} from './CardName';
+import {CardName} from './common/cards/CardName';
 import {ICard} from './cards/ICard';
 import {IAward} from './awards/IAward';
 import {IMilestone} from './milestones/IMilestone';
@@ -13,7 +13,7 @@ import {TileType} from './common/TileType';
 import {SpaceBonus} from './common/boards/SpaceBonus';
 import {IGlobalEvent} from './turmoil/globalEvents/IGlobalEvent';
 import {GlobalEventName} from './turmoil/globalEvents/GlobalEventName';
-import {PartyName} from './turmoil/parties/PartyName';
+import {PartyName} from './common/turmoil/PartyName';
 
 export class LogBuilder {
   private message: string;

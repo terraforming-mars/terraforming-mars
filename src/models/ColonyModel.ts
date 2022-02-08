@@ -2,15 +2,9 @@
 import {Color} from '../common/Color';
 import {Game} from '../Game';
 import {Colony} from '../colonies/Colony';
+import {ColonyModel} from '../common/models/ColonyModel';
 
-export interface ColonyModel {
-    colonies: Array<Color>;
-    isActive: boolean;
-    name: string;
-    trackPosition: number;
-    visitor: Color | undefined;
-}
-export namespace ColonyModel {
+export namespace X {
   export function getColonyModel(game: Game, colonies: Array<Colony>) : Array<ColonyModel> {
     return colonies.map(
       (colony): ColonyModel => ({

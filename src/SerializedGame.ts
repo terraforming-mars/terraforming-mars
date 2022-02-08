@@ -1,5 +1,5 @@
 import {Phase} from './common/Phase';
-import {CardName} from './CardName';
+import {CardName} from './common/cards/CardName';
 import {SerializedClaimedMilestone} from './milestones/ClaimedMilestone';
 import {SerializedFundedAward} from './awards/FundedAward';
 import {IMilestone} from './milestones/IMilestone';
@@ -12,7 +12,7 @@ import {SerializedDealer} from './SerializedDealer';
 import {SerializedTurmoil} from './turmoil/SerializedTurmoil';
 import {PlayerId, GameId, SpectatorId} from './common/Types';
 import {GameOptions} from './Game';
-import {IAresData} from './ares/IAresData';
+import {IAresData} from './common/ares/IAresData';
 import {LogMessage} from './common/logs/LogMessage';
 import {SerializedBoard} from './boards/SerializedBoard';
 import {SerializedMoonData} from './moon/SerializedMoonData';

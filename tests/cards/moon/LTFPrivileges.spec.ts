@@ -4,7 +4,7 @@ import {TestingUtils} from '../../TestingUtils';
 import {TestPlayers} from '../../TestPlayers';
 import {LTFPrivileges} from '../../../src/cards/moon/LTFPrivileges';
 import {expect} from 'chai';
-import {CardName} from '../../../src/CardName';
+import {CardName} from '../../../src/common/cards/CardName';
 import {AristarchusRoadNetwork} from '../../../src/cards/moon/AristarchusRoadNetwork';
 
 const MOON_OPTIONS = TestingUtils.setCustomGameOptions({moonExpansion: true});

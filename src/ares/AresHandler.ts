@@ -1,4 +1,4 @@
-import {CardName} from '../CardName';
+import {CardName} from '../common/cards/CardName';
 import {ICard} from '../cards/ICard';
 import {Game} from '../Game';
 import {SelectCard} from '../inputs/SelectCard';
@@ -9,7 +9,7 @@ import {ResourceType} from '../common/ResourceType';
 import {SpaceBonus} from '../common/boards/SpaceBonus';
 import {OCEAN_UPGRADE_TILES, TileType} from '../common/TileType';
 import {ITile} from '../ITile';
-import {IAresData, IMilestoneCount} from './IAresData';
+import {IAresData, IMilestoneCount} from '../common/ares/IAresData';
 import {IAdjacencyCost} from './IAdjacencyCost';
 import {Multiset} from '../utils/Multiset';
 import {Phase} from '../common/Phase';

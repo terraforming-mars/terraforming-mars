@@ -4,7 +4,7 @@ import * as http from 'http';
 import * as fs from 'fs';
 import {MilestoneAwardSelector} from '../MilestoneAwardSelector';
 import {GameOptions} from '../Game';
-import {BoardName} from '../boards/BoardName';
+import {BoardName} from '../common/boards/BoardName';
 import {AgendaStyle} from '../turmoil/PoliticalAgendas';
 import {RandomMAOptionType} from '../RandomMAOptionType';
 import {Multiset} from '../utils/Multiset';

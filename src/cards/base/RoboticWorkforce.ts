@@ -39,12 +39,12 @@ export class RoboticWorkforce extends Card implements IProjectCard {
     }
     if (card.name === CardName.BIOMASS_COMBUSTORS) {
       return player.game.someoneCanHaveProductionReduced(Resources.PLANTS, 1);
-    }
-    if (card.name === CardName.HEAT_TRAPPERS) {
+    } else if (card.name === CardName.HEAT_TRAPPERS) {
       return player.game.someoneCanHaveProductionReduced(Resources.HEAT, 2);
-    }
-    if (card.name === CardName.GYROPOLIS) {
+    } else if (card.name === CardName.GYROPOLIS) {
       return player.getProduction(Resources.ENERGY) >= 2;
+    } else if (card.name === CardName.SPECIALIZED_SETTLEMENT) {
+      return player.getProduction(Resources.ENERGY) >= 1;
     }
 
     if (card.produce !== undefined) return true;

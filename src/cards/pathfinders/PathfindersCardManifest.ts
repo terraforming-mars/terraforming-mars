@@ -88,6 +88,7 @@ import {SolarStorm} from './SolarStorm';
 import {SoylentSeedlingSystems} from './SoylentSeedlingSystems';
 import {SpaceDebrisCleaningOperation} from './SpaceDebrisCleaningOperation';
 import {SpaceRelay} from './SpaceRelay';
+import {SpecializedSettlement} from './SpecializedSettlement';
 import {StrategicBasePlanning} from './StrategicBasePlanning';
 import {Steelaris} from './Steelaris';
 import {TerraformingControlStation} from './TerraformingControlStation';
@@ -157,7 +158,7 @@ export const PATHFINDERS_CARD_MANIFEST = new CardManifest({
     {cardName: CardName.SOLARPEDIA, Factory: Solarpedia, compatibility: GameModule.Venus},
     {cardName: CardName.ANTHOZOA, Factory: Anthozoa},
     {cardName: CardName.ADVANCED_POWER_GRID, Factory: AdvancedPowerGrid},
-    // // {cardName: CardName.SPECIALIZED_SETTLEMENT, Factory: SpecializedSettlement},          // ROBOTIC WORKFORCE COMPLICATION
+    {cardName: CardName.SPECIALIZED_SETTLEMENT, Factory: SpecializedSettlement},
     {cardName: CardName.CHARITY_DONATION, Factory: CharityDonation},
     // // {cardName: CardName.CURIOSITY_LABS, Factory: CuriosityLabs},                          // TWO RESOURCE TYPES
     {cardName: CardName.NOBEL_LABS, Factory: NobelLabs},

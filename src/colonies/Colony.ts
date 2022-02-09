@@ -33,26 +33,26 @@ type TradeOptions = {
   selfishTrade?: boolean;
 };
 export abstract class Colony {
-    public abstract name: ColonyName;
-    public abstract description: string;
+    public abstract readonly name: ColonyName;
+    public abstract readonly description: string;
 
     // isActive represents when the colony is part of the game, or "back in the box", as it were.
     public isActive: boolean = true;
     public visitor: undefined | PlayerId = undefined;
     public colonies: Array<PlayerId> = [];
     public trackPosition: number = 1;
-    public resourceType?: ResourceType;
+    public readonly resourceType?: ResourceType;
 
-    public abstract buildType: ColonyBenefit;
-    public buildQuantity: Array<number> = [1, 1, 1];
-    public buildResource?: Resources;
-    public abstract tradeType: ColonyBenefit;
-    public tradeQuantity: Array<number> = [1, 1, 1, 1, 1, 1, 1];
-    public tradeResource?: Resources | Array<Resources>;
-    public abstract colonyBonusType: ColonyBenefit;
-    public colonyBonusQuantity: number = 1;
-    public colonyBonusResource?: Resources;
-    public shouldIncreaseTrack: ShouldIncreaseTrack = ShouldIncreaseTrack.YES;
+    public abstract readonly buildType: ColonyBenefit;
+    public readonly buildQuantity: Array<number> = [1, 1, 1];
+    public readonly buildResource?: Resources;
+    public abstract readonly tradeType: ColonyBenefit;
+    public readonly tradeQuantity: Array<number> = [1, 1, 1, 1, 1, 1, 1];
+    public readonly tradeResource?: Resources | Array<Resources>;
+    public abstract readonly colonyBonusType: ColonyBenefit;
+    public readonly colonyBonusQuantity: number = 1;
+    public readonly colonyBonusResource?: Resources;
+    public readonly shouldIncreaseTrack: ShouldIncreaseTrack = ShouldIncreaseTrack.YES;
 
 
     public endGeneration(game: Game): void {

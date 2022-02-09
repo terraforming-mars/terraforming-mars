@@ -71,7 +71,6 @@ export function loadColoniesFromJSON(colonies: Array<SerializedColony>): Array<C
     if (colony !== undefined) {
       colony.colonies = serialized.colonies;
       colony.isActive = serialized.isActive;
-      colony.resourceType = serialized.resourceType;
       colony.trackPosition = serialized.trackPosition;
       colony.visitor = serialized.visitor;
       result.push(colony);

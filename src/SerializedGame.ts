@@ -2,8 +2,6 @@ import {Phase} from './common/Phase';
 import {CardName} from './common/cards/CardName';
 import {SerializedClaimedMilestone} from './milestones/ClaimedMilestone';
 import {SerializedFundedAward} from './awards/FundedAward';
-import {IMilestone} from './milestones/IMilestone';
-import {IAward} from './awards/IAward';
 import {ColonyDealer} from './colonies/ColonyDealer';
 import {DeferredAction} from './deferredActions/DeferredAction';
 import {SerializedColony} from './SerializedColony';
@@ -21,7 +19,7 @@ import {SerializedPathfindersData} from './pathfinders/SerializedPathfindersData
 export interface SerializedGame {
     activePlayer: PlayerId;
     aresData?: IAresData;
-    awards: Array<IAward> | Array<string>; // TODO(bafolts): remove Array<IAward> by 2021-12-01
+    awards: Array<string>;
     board: SerializedBoard;
     claimedMilestones: Array<SerializedClaimedMilestone>;
     clonedGamedId?: string;
@@ -41,7 +39,7 @@ export interface SerializedGame {
     id: GameId;
     initialDraftIteration: number;
     lastSaveId: number;
-    milestones: Array<IMilestone> | Array<string>; // TODO(bafolts): remove Array<IMilestone> by 2021-12-01
+    milestones: Array<string>;
     monsInsuranceOwner: PlayerId | undefined;
     moonData: SerializedMoonData | undefined;
     pathfindersData: SerializedPathfindersData | undefined;

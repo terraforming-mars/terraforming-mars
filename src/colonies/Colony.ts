@@ -18,7 +18,6 @@ import {ResourceType} from '../common/ResourceType';
 import {ScienceTagCard} from '../cards/community/ScienceTagCard';
 import {SelectColony} from '../inputs/SelectColony';
 import {SelectPlayer} from '../inputs/SelectPlayer';
-import {SerializedColony} from '../SerializedColony';
 import {StealResources} from '../deferredActions/StealResources';
 import {Tags} from '../common/cards/Tags';
 import {SendDelegateToArea} from '../deferredActions/SendDelegateToArea';
@@ -32,7 +31,7 @@ type TradeOptions = {
   giveColonyBonuses?: boolean;
   selfishTrade?: boolean;
 };
-export abstract class Colony implements SerializedColony {
+export abstract class Colony {
     public abstract name: ColonyName;
     public abstract description: string;
 

@@ -43,6 +43,14 @@ export namespace Units {
     },
   };
 
+  export const keys = Object.keys(EMPTY) as (keyof Units)[];
+
+  export function isUnits(arg: any): arg is Units {
+    if (typeof arg !== 'object') return false;
+    return keys.every(key =>
+      typeof arg[key] === 'number' && !isNaN(arg[key]));
+  }
+
   // Converts partial units to a full Units, allowing code to use a Units stricture,
   // reducing the need to check for undefined everywhere.
   export function of(partialUnits: Partial<Units>): Units {

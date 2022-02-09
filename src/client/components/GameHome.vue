@@ -10,7 +10,7 @@
             <Button title="copy" size="tiny" @click="copyUrl(player.id)"/>
             <span v-if="isPlayerUrlCopied(player.id)" class="copied-notice">Playable link for {{player.name}} copied to clipboard <span class="dismissed" @click="setCopiedIdToDefault" >dismiss</span></span>
           </li>
-          <li v-if="game.spectatorId">
+          <li v-if="game !== undefined && game.spectatorId">
             <p/>
             <span class="turn-order"></span>
             <span class="color-square"></span>

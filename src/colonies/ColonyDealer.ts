@@ -69,11 +69,11 @@ export function loadColoniesFromJSON(colonies: Array<SerializedColony>): Array<C
   for (const serialized of colonies) {
     const colony = getColonyByName(serialized.name);
     if (colony !== undefined) {
-      colony.isActive = serialized.isActive;
-      colony.visitor = serialized.visitor;
-      colony.trackPosition = serialized.trackPosition;
       colony.colonies = serialized.colonies;
+      colony.isActive = serialized.isActive;
       colony.resourceType = serialized.resourceType;
+      colony.trackPosition = serialized.trackPosition;
+      colony.visitor = serialized.visitor;
       result.push(colony);
     } else {
       console.warn(`colony ${serialized.name} not found`);

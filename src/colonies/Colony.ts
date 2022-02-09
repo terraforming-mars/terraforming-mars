@@ -24,6 +24,7 @@ import {SendDelegateToArea} from '../deferredActions/SendDelegateToArea';
 import {Game} from '../Game';
 import {Turmoil} from '../turmoil/Turmoil';
 import {ShouldIncreaseTrack} from '../common/colonies/ShouldIncreaseTrack';
+import {SerializedColony} from '@/SerializedColony';
 
 type TradeOptions = {
   usesTradeFleet?: boolean;
@@ -342,4 +343,17 @@ export abstract class Colony {
         return undefined;
       }
     }
+}
+
+export function serializeColonies(colonies: Array<Colony>): Array<SerializedColony> {
+  return colonies.map((colony) => {
+    return {
+      colonies: colony.colonies,
+      name: colony.name,
+      isActive: colony.isActive,
+      resourceType: colony.resourceType,
+      trackPosition: colony.trackPosition,
+      visitor: colony.visitor,
+    };
+  });
 }

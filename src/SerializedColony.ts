@@ -4,9 +4,8 @@ import {PlayerId} from './common/Types';
 import {ResourceType} from './common/ResourceType';
 
 export interface SerializedColony {
-    colonies: Array<PlayerId>;
-    description: string;
     name: ColonyName;
+    colonies: Array<PlayerId>;
     isActive: boolean;
     resourceType?: ResourceType;
     trackPosition: number;

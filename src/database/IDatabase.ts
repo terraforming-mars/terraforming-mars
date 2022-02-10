@@ -93,6 +93,8 @@ export interface IDatabase {
      */
     getClonableGames(cb:(err: Error | undefined, allGames:Array<IGameData>)=> void) : void;
 
+    getClonableGameByGameId(game_id: GameId, cb: (err: Error | undefined, gameData: IGameData | undefined) => void): void;
+
     /**
      * Saves the current state of the game. at a supplied save point. Used for
      * interim game updates.

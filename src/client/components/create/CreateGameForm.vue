@@ -233,13 +233,8 @@
                             </label>
 
                             <div v-if="seededGame">
-                                <select name="clonedGamedId" v-model="clonedGameData">
-                                    <option v-for="game in cloneGameData" :value="game" :key="game.gameId">
-                                        {{ game.gameId }} - {{ game.playerCount }} player(s)
-                                    </option>
-                                </select>
+                                <input type="text" name="clonedGamedId" v-model="clonedGameId" />
                             </div>
-
 
                             <div class="create-game-subsection-label" v-i18n>Filter</div>
 
@@ -446,7 +441,6 @@ import {RandomBoardOption} from '@/common/boards/RandomBoardOption';
 import {CardName} from '@/common/cards/CardName';
 import CorporationsFilter from '@/client/components/create/CorporationsFilter.vue';
 import {translateTextWithParams} from '@/client/directives/i18n';
-import {IGameData} from '@/database/IDatabase';
 import ColoniesFilter from '@/client/components/create/ColoniesFilter.vue';
 import {ColonyName} from '@/common/colonies/ColonyName';
 import CardsFilter from '@/client/components/create/CardsFilter.vue';
@@ -502,8 +496,7 @@ export interface CreateGameModel {
     includeVenusMA: boolean;
     startingCorporations: number;
     soloTR: boolean;
-    clonedGameData: IGameData | undefined;
-    cloneGameData: Array<IGameData>;
+    clonedGameId: string | undefined;
     requiresVenusTrackCompletion: boolean;
     requiresMoonTrackCompletion: boolean;
     moonStandardProjectVariant: boolean;
@@ -585,8 +578,7 @@ export default Vue.extend({
       includeVenusMA: true,
       startingCorporations: 2,
       soloTR: false,
-      clonedGameData: undefined,
-      cloneGameData: [],
+      clonedGameId: undefined,
       allOfficialExpansions: false,
       requiresVenusTrackCompletion: false,
       requiresMoonTrackCompletion: false,
@@ -608,19 +600,10 @@ export default Vue.extend({
     if (window.location.pathname === '/solo') {
       this.isSoloModePage = true;
     }
-
-    const onSucces = (response: any) => {
-      this.$data.cloneGameData = response;
-    };
-
-    fetch('/api/clonablegames')
-      .then((response) => response.json())
-      .then(onSucces)
-      .catch((_) => alert('Unexpected server response'));
   },
   methods: {
-    downloadCurrentSettings() {
-      const serializedData = this.serializeSettings();
+    async downloadCurrentSettings() {
+      const serializedData = await this.serializeSettings();
 
       if (serializedData) {
         const a = document.createElement('a');
@@ -794,7 +777,7 @@ export default Vue.extend({
     getPlayerContainerColorClass(color: string): string {
       return playerColorClass(color.toLowerCase(), 'bg_transparent');
     },
-    serializeSettings() {
+    async serializeSettings() {
       const component = (this as any) as CreateGameModel;
 
       let players = component.players.slice(0, component.playersCount);
@@ -905,11 +888,29 @@ export default Vue.extend({
       }
 
       // Clone game checks
-      if (component.clonedGameData !== undefined && component.seededGame) {
-        clonedGamedId = component.clonedGameData.gameId;
-        if (component.clonedGameData.playerCount !== players.length) {
-          window.alert(this.$t('Player count mismatch'));
-          this.$data.playersCount = component.clonedGameData.playerCount;
+      if (component.clonedGameId !== undefined && component.seededGame) {
+        const gameData = await fetch('/api/cloneablegames?id=' + component.clonedGameId)
+          .then((response) => {
+            if (response.ok) {
+              return response.json();
+            }
+            if (response.status === 404) {
+              return;
+            }
+            return response.text().then((res) => new Error(res));
+          });
+        if (gameData === undefined) {
+          alert(this.$t('Game id ' + component.clonedGameId + ' not found'));
+          return;
+        }
+        if (gameData instanceof Error) {
+          alert(this.$t('Error looking for predefined game ' + gameData.message));
+          return;
+        }
+        clonedGamedId = component.clonedGameId;
+        if (gameData.playerCount !== players.length) {
+          alert(this.$t('Player count mismatch'));
+          this.$data.playersCount = gameData.playerCount;
           return;
         }
       } else if (!component.seededGame) {
@@ -961,8 +962,8 @@ export default Vue.extend({
       }, undefined, 4);
       return dataToSend;
     },
-    createGame() {
-      const dataToSend = this.serializeSettings();
+    async createGame() {
+      const dataToSend = await this.serializeSettings();
 
       if (dataToSend === undefined) return;
       const onSucces = (response: any) => {

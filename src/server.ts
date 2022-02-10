@@ -37,7 +37,6 @@ const route = new Route();
 const handlers: Map<string, IHandler> = new Map(
   [
     ['/', ServeApp.INSTANCE],
-    ['/api/clonablegames', ApiCloneableGames.INSTANCE],
     ['/api/cloneablegames', ApiCloneableGames.INSTANCE],
     ['/api/game', ApiGame.INSTANCE],
     ['/api/game/logs', ApiGameLogs.INSTANCE],

@@ -70,6 +70,26 @@ export class PostgreSQL implements IDatabase {
     });
   }
 
+  getClonableGameByGameId(game_id: GameId, cb: (err: Error | undefined, gameData: IGameData | undefined) => void) {
+    const sql = 'SELECT players FROM games WHERE save_id = 0 AND game_id = $1 LIMIT 1';
+
+    this.client.query(sql, [game_id], (err, res) => {
+      if (err) {
+        console.error('PostgreSQL:getClonableGameByGameId', err);
+        cb(err, undefined);
+        return;
+      }
+      if (res.rows.length === 0) {
+        cb(undefined, undefined);
+        return;
+      }
+      cb(undefined, {
+        gameId: res.rows[0].game_id,
+        playerCount: res.rows[0].players,
+      });
+    });
+  }
+
   getGames(cb: (err: Error | undefined, allGames: Array<GameId>) => void) {
     const allGames: Array<GameId> = [];
     const sql: string = 'SELECT games.game_id FROM games, (SELECT max(save_id) save_id, game_id FROM games WHERE status=\'running\' GROUP BY game_id) a WHERE games.game_id = a.game_id AND games.save_id = a.save_id ORDER BY created_time DESC';

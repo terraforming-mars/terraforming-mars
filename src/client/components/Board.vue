@@ -279,7 +279,7 @@ export default Vue.extend({
           return space;
         }
       }
-      throw 'Board space not found by id \'' + spaceId + '\'';
+      throw new Error('Board space not found by id \'' + spaceId + '\'');
     },
     getValuesForParameter(targetParameter: string): Array<GlobalParamLevel> {
       const values: Array<GlobalParamLevel> = [];
@@ -309,7 +309,7 @@ export default Vue.extend({
         curValue = this.venusScaleLevel;
         break;
       default:
-        throw 'Wrong parameter to get values from';
+        throw new Error('Wrong parameter to get values from: ' + targetParameter);
       }
 
       for (let value: number = endValue; value >= startValue; value -= step) {

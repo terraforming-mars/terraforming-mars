@@ -41,16 +41,13 @@ export class CardFinder {
     return this.getCardByName(cardName, (manifest) => [manifest.preludeCards]);
   }
 
-  public cardsFromJSON(cards: Array<ICard | CardName>): Array<IProjectCard> {
+  public cardsFromJSON(cards: Array<CardName>): Array<IProjectCard> {
     if (cards === undefined) {
       console.warn('missing cards calling cardsFromJSON');
       return [];
     }
     const result: Array<IProjectCard> = [];
-    cards.forEach((element: ICard | CardName) => {
-      if (typeof element !== 'string') {
-        element = element.name;
-      }
+    cards.forEach((element: CardName) => {
       const card = this.getProjectCardByName(element);
       if (card !== undefined) {
         result.push(card);
@@ -61,16 +58,13 @@ export class CardFinder {
     return result;
   }
 
-  public corporationCardsFromJSON(cards: Array<ICard | CardName>): Array<CorporationCard> {
+  public corporationCardsFromJSON(cards: Array<CardName>): Array<CorporationCard> {
     if (cards === undefined) {
       console.warn('missing cards calling corporationCardsFromJSON');
       return [];
     }
     const result: Array<CorporationCard> = [];
-    cards.forEach((element: ICard | CardName) => {
-      if (typeof element !== 'string') {
-        element = element.name;
-      }
+    cards.forEach((element: CardName) => {
       const card = this.getCorporationCardByName(element);
       if (card !== undefined) {
         result.push(card);

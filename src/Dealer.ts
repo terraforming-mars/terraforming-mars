@@ -45,7 +45,7 @@ export class Dealer implements ISerializable<SerializedDealer> {
     }
 
     if (result === undefined) {
-      throw 'Unexpected empty deck';
+      throw new Error('Unexpected empty deck');
     }
 
     if (this.deck.length === 0) {
@@ -85,7 +85,7 @@ export class Dealer implements ISerializable<SerializedDealer> {
   public dealPreludeCard(): IProjectCard {
     const result: IProjectCard | undefined = this.preludeDeck.pop();
     if (result === undefined) {
-      throw 'Unexpected empty prelude deck';
+      throw new Error('Unexpected empty prelude deck');
     }
     // All Prelude cards are expected to subclass IProjectCard
     return result;

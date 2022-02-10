@@ -142,7 +142,7 @@ describe('Colony', function() {
     expect(luna.trackPosition).to.eq(MAX_COLONY_TRACK_POSITION);
   });
 
-  it('Shouldn\'t decrease trackPosition below 0', function() {
+  it('Should not decrease trackPosition below 0', function() {
     luna.decreaseTrack(100);
     expect(luna.trackPosition).to.eq(0);
   });
@@ -225,7 +225,7 @@ describe('Colony', function() {
     expect(isBuildColonyStandardProjectAvailable(player)).to.be.true;
   });
 
-  it('Shouldn\'t let players build a colony if they already have one', function() {
+  it('Should not let players build a colony if they already have one', function() {
     player.megaCredits = 17;
 
     luna.addColony(player2);
@@ -235,7 +235,7 @@ describe('Colony', function() {
     expect(isBuildColonyStandardProjectAvailable(player)).to.be.false;
   });
 
-  it('Shouldn\'t let players build a colony if colony tile is full', function() {
+  it('Should not let players build a colony if colony tile is full', function() {
     player.megaCredits = 17;
     expect(luna.isColonyFull()).to.be.false;
 
@@ -276,14 +276,25 @@ describe('Colony', function() {
     expect(isTradeWithColonyActionAvailable(player)).to.be.true;
   });
 
-  it('Shouldn\'t let players trade if they have no fleet', function() {
+  it('Player with Helion can trade', function() {
+    expect(isTradeWithColonyActionAvailable(player)).to.be.false;
+
+    player.megaCredits = 7;
+    player.heat = 2;
+    expect(isTradeWithColonyActionAvailable(player)).to.be.false;
+
+    player.canUseHeatAsMegaCredits = true;
+    expect(isTradeWithColonyActionAvailable(player)).to.be.true;
+  });
+
+  it('Should not let players trade if they have no fleet', function() {
     player.titanium = 3;
 
     luna.trade(player);
     expect(isTradeWithColonyActionAvailable(player)).to.be.false;
   });
 
-  it('Shouldn\'t let players trade with colonies that have already been traded with', function() {
+  it('Should not let players trade with colonies that have already been traded with', function() {
     player.titanium = 3;
     player2.titanium = 3;
 

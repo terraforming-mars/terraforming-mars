@@ -1,8 +1,8 @@
 import {Player} from '../../Player';
-import {CardName} from '../../CardName';
+import {CardName} from '../../common/cards/CardName';
 import {CardRenderer} from '../render/CardRenderer';
 import {StandardProjectCard} from '../StandardProjectCard';
-import {ColonyName} from '../../colonies/ColonyName';
+import {ColonyName} from '../../common/colonies/ColonyName';
 import {BuildColony} from '../../deferredActions/BuildColony';
 
 export class BuildColonyStandardProject extends StandardProjectCard {

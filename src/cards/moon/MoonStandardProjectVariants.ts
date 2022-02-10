@@ -1,4 +1,4 @@
-import {CardName} from '../../CardName';
+import {CardName} from '../../common/cards/CardName';
 import {Player} from '../../Player';
 import {Units} from '../../common/Units';
 import {CardRenderer} from '../render/CardRenderer';

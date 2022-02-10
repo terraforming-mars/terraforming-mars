@@ -14,7 +14,7 @@ export enum SpaceBonus {
     MEGACREDITS, // 6
     ANIMAL, // 7
     MICROBE, // 8 (Also used in Arabia Terra)
-    POWER, // 9
+    POWER, // 9 // TODO(kberg): Rename to ENERGY
 
         // Arabia Terra-specific
     DATA, // 10

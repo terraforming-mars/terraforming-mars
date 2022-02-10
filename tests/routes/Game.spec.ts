@@ -1,6 +1,7 @@
 import {expect} from 'chai';
 import {GameHandler} from '../../src/routes/Game';
-import {BoardName, RandomBoardOption} from '../../src/boards/BoardName';
+import {BoardName} from '../../src/common/boards/BoardName';
+import {RandomBoardOption} from '../../src/common/boards/RandomBoardOption';
 
 describe('GameHandler', () => {
   it('Official random boards do not include arabia terra', () => {

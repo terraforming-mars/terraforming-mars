@@ -1,6 +1,6 @@
 import {Player} from '../../Player';
 import {PreludeCard} from './PreludeCard';
-import {CardName} from '../../CardName';
+import {CardName} from '../../common/cards/CardName';
 import {PlaceOceanTile} from '../../deferredActions/PlaceOceanTile';
 import {CardRenderer} from '../render/CardRenderer';
 

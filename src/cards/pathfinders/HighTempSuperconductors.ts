@@ -1,13 +1,13 @@
 import {IProjectCard} from '../IProjectCard';
 import {Player} from '../../Player';
 import {Card} from '../Card';
-import {CardType} from '../CardType';
-import {CardName} from '../../CardName';
+import {CardType} from '../../common/cards/CardType';
+import {CardName} from '../../common/cards/CardName';
 import {CardRenderer} from '../render/CardRenderer';
 import {Tags} from '../../common/cards/Tags';
 import {CardRequirements} from '../CardRequirements';
 import {Resources} from '../../common/Resources';
-import {PartyName} from '../../turmoil/parties/PartyName';
+import {PartyName} from '../../common/turmoil/PartyName';
 import {played} from '../Options';
 
 export class HighTempSuperconductors extends Card implements IProjectCard {

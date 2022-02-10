@@ -1,12 +1,12 @@
 import {IParty} from './IParty';
 import {Party} from './Party';
-import {PartyName} from './PartyName';
+import {PartyName} from '../../common/turmoil/PartyName';
 import {Game} from '../../Game';
 import {Bonus} from '../Bonus';
 import {Policy} from '../Policy';
 import {SelectHowToPayDeferred} from '../../deferredActions/SelectHowToPayDeferred';
 import {Player} from '../../Player';
-import {CardName} from '../../CardName';
+import {CardName} from '../../common/cards/CardName';
 import {MAX_OXYGEN_LEVEL, MAX_TEMPERATURE, MAX_VENUS_SCALE, MIN_OXYGEN_LEVEL, MIN_TEMPERATURE, MIN_VENUS_SCALE, POLITICAL_AGENDAS_MAX_ACTION_USES} from '../../constants';
 import {DeferredAction} from '../../deferredActions/DeferredAction';
 import {RemoveOceanTile} from '../../deferredActions/RemoveOceanTile';

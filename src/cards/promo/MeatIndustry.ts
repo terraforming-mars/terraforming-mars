@@ -1,8 +1,8 @@
 import {IProjectCard} from '../IProjectCard';
 import {Tags} from '../../common/cards/Tags';
 import {Card} from '../Card';
-import {CardName} from '../../CardName';
-import {CardType} from '../CardType';
+import {CardName} from '../../common/cards/CardName';
+import {CardType} from '../../common/cards/CardType';
 import {CardRenderer} from '../render/CardRenderer';
 
 export class MeatIndustry extends Card implements IProjectCard {

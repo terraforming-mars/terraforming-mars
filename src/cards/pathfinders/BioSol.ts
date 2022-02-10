@@ -2,10 +2,9 @@ import {Card} from '../Card';
 import {CorporationCard} from '../corporation/CorporationCard';
 import {Tags} from '../../common/cards/Tags';
 import {Player} from '../../Player';
-import {CardName} from '../../CardName';
-import {CardType} from '../CardType';
+import {CardName} from '../../common/cards/CardName';
+import {CardType} from '../../common/cards/CardType';
 import {CardRenderer} from '../render/CardRenderer';
-import {played} from '../Options';
 import {IActionCard, VictoryPoints} from '../ICard';
 import {ResourceType} from '../../common/ResourceType';
 import {AddResourcesToCard} from '../../deferredActions/AddResourcesToCard';
@@ -29,7 +28,7 @@ export class BioSol extends Card implements CorporationCard, IActionCard {
           b.megacredits(42).cards(2, {secondaryTag: Tags.MICROBE}).br;
           b.corpBox('action', (corpbox) => corpbox.action(
             'Add 1 microbe to ANY card',
-            (ab) => ab.empty().startAction.microbes(1, {played}).asterix()));
+            (ab) => ab.empty().startAction.microbes(1).asterix()));
         }),
       },
     });

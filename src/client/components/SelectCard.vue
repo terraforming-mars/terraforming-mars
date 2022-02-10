@@ -33,7 +33,7 @@ import {PlayerViewModel} from '@/models/PlayerModel';
 import {VueModelCheckbox, VueModelRadio} from '@/client/types';
 import Card from '@/client/components/card/Card.vue';
 import {CardModel} from '@/models/CardModel';
-import {CardName} from '@/CardName';
+import {CardName} from '@/common/cards/CardName';
 import {PlayerInputModel} from '@/models/PlayerInputModel';
 import {sortActiveCards} from '@/client/utils/ActiveCardsSortingOrder';
 
@@ -145,7 +145,7 @@ export default Vue.extend({
     },
     findOwner(card: CardModel): Owner | undefined {
       for (const player of this.playerView.players) {
-        if (player.playedCards.find((c) => c.name === card.name)) {
+        if (player.playedCards.find((c) => c.name === card.name) || player.corporationCard?.name === card.name) {
           return {name: player.name, color: player.color};
         }
       }

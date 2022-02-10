@@ -1,10 +1,10 @@
 import {ICard, IActionCard, IResourceCard} from '../ICard';
 import {Tags} from '../../common/cards/Tags';
-import {CardType} from '../CardType';
+import {CardType} from '../../common/cards/CardType';
 import {Player} from '../../Player';
 import {ResourceType} from '../../common/ResourceType';
 import {SelectCard} from '../../inputs/SelectCard';
-import {CardName} from '../../CardName';
+import {CardName} from '../../common/cards/CardName';
 import {SelectHowToPayDeferred} from '../../deferredActions/SelectHowToPayDeferred';
 import {CardRequirements} from '../CardRequirements';
 import {CardRenderer} from '../render/CardRenderer';

@@ -1,5 +1,5 @@
 import {StandardActionCard} from '../../StandardActionCard';
-import {CardName} from '../../../CardName';
+import {CardName} from '../../../common/cards/CardName';
 import {CardRenderer} from '../../render/CardRenderer';
 import {Player} from '../../../Player';
 import {MAX_OXYGEN_LEVEL} from '../../../constants';

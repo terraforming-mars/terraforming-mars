@@ -1,4 +1,4 @@
-import {CardName} from '../CardName';
+import {CardName} from '../common/cards/CardName';
 
 export class MoonCards {
   public static scienceCardsWithLessThan2VP: Set<CardName> = new Set([

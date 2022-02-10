@@ -8,7 +8,7 @@ import {TestPlayers} from '../TestPlayers';
 import {Random} from '../../src/Random';
 import {SpaceBonus} from '../../src/common/boards/SpaceBonus';
 import {TestingUtils} from '../TestingUtils';
-import {BoardName} from '../../src/boards/BoardName';
+import {BoardName} from '../../src/common/boards/BoardName';
 import {ProcessorFactory} from '../../src/cards/moon/ProcessorFactory';
 import {SearchForLife} from '../../src/cards/base/SearchForLife';
 import {Decomposers} from '../../src/cards/base/Decomposers';

@@ -4,8 +4,8 @@ import {Player} from '../../Player';
 import {CorporationCard} from './CorporationCard';
 import {IProjectCard} from '../IProjectCard';
 import {Resources} from '../../common/Resources';
-import {CardName} from '../../CardName';
-import {CardType} from '../CardType';
+import {CardName} from '../../common/cards/CardName';
+import {CardType} from '../../common/cards/CardType';
 import {CardRenderer} from '../render/CardRenderer';
 import {all, played} from '../Options';
 

@@ -1,4 +1,4 @@
-import {PartyName} from './parties/PartyName';
+import {PartyName} from '../common/turmoil/PartyName';
 import {IParty} from './parties/IParty';
 import {MarsFirst} from './parties/MarsFirst';
 import {Scientists} from './parties/Scientists';
@@ -15,7 +15,7 @@ import {ISerializable} from '../ISerializable';
 import {SerializedTurmoil} from './SerializedTurmoil';
 import {PLAYER_DELEGATES_COUNT} from '../constants';
 import {AgendaStyle, PoliticalAgendasData, PoliticalAgendas} from './PoliticalAgendas';
-import {CardName} from '../CardName';
+import {CardName} from '../common/cards/CardName';
 import {DeferredAction} from '../deferredActions/DeferredAction';
 
 export type NeutralPlayer = 'NEUTRAL';

@@ -22,7 +22,7 @@
 
 import Vue from 'vue';
 import Card from '@/client/components/card/Card.vue';
-import {CardName} from '@/CardName';
+import {CardName} from '@/common/cards/CardName';
 
 export default Vue.extend({
   name: 'HelpStandardProjects',

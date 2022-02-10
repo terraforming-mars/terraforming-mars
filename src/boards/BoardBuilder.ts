@@ -88,8 +88,8 @@ export class BoardBuilder {
 
   public shuffleArray(rng: Random, array: Array<Object>): void {
     this.unshufflableSpaces.sort((a, b) => a < b ? a : b);
-    // Reverseing the indexes so the elements are pulled from the right.
-    // Revering the result so elements are listed left to right.
+    // Reversing the indexes so the elements are pulled from the right.
+    // Reversing the result so elements are listed left to right.
     const spliced = this.unshufflableSpaces.reverse().map((idx) => array.splice(idx, 1)[0]).reverse();
     for (let i = array.length - 1; i > 0; i--) {
       const j = rng.nextInt(i + 1);
@@ -113,7 +113,7 @@ export class BoardBuilder {
         const land_id = Number(land) - 3;
         while (this.spaceTypes[land_id] === SpaceType.OCEAN) {
           satisfy = false;
-          const idx = rng.nextInt(this.spaceTypes.length + 1);
+          const idx = rng.nextInt(this.spaceTypes.length);
           [this.spaceTypes[land_id], this.spaceTypes[idx]] = [this.spaceTypes[idx], this.spaceTypes[land_id]];
         }
       }

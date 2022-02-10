@@ -18,17 +18,15 @@ import {ResearchNetwork} from '../src/cards/prelude/ResearchNetwork';
 import {ArcticAlgae} from '../src/cards/base/ArcticAlgae';
 import {Ecologist} from '../src/milestones/Ecologist';
 import {OrOptions} from '../src/inputs/OrOptions';
-import {BoardName} from '../src/boards/BoardName';
+import {BoardName} from '../src/common/boards/BoardName';
 import {SpaceType} from '../src/common/boards/SpaceType';
 import {Helion} from '../src/cards/corporation/Helion';
-import {CardName} from '../src/CardName';
+import {CardName} from '../src/common/cards/CardName';
 import {Player} from '../src/Player';
 import {Color} from '../src/common/Color';
 import {RandomMAOptionType} from '../src/RandomMAOptionType';
 import {SpaceBonus} from '../src/common/boards/SpaceBonus';
 import {TileType} from '../src/common/TileType';
-import {ALL_AWARDS} from '../src/awards/Awards';
-import {ALL_MILESTONES} from '../src/milestones/Milestones';
 
 describe('Game', () => {
   it('should initialize with right defaults', () => {
@@ -659,20 +657,18 @@ describe('Game', () => {
     expect(deserialized.pathfindersData).is.undefined;
   });
 
-  it('deserializing a game with award as an object', () => {
+  it('deserializing a game with awards', () => {
     const player = TestPlayers.BLUE.newPlayer();
     const game = Game.newInstance('foobar', [player], player, TestingUtils.setCustomGameOptions({pathfindersExpansion: false}));
     const serialized = game.serialize();
-    serialized.awards = serialized.awards.map((a) => ALL_AWARDS.find((b) => b.name === a)!);
     const deserialized = Game.deserialize(serialized);
     expect(deserialized.awards).deep.eq(game.awards);
   });
 
-  it('deserializing a game with milestone as an object', () => {
+  it('deserializing a game with milestones', () => {
     const player = TestPlayers.BLUE.newPlayer();
     const game = Game.newInstance('foobar', [player], player, TestingUtils.setCustomGameOptions({pathfindersExpansion: false}));
     const serialized = game.serialize();
-    serialized.milestones = serialized.milestones.map((a) => ALL_MILESTONES.find((b) => b.name === a)!);
     const deserialized = Game.deserialize(serialized);
     expect(deserialized.milestones).deep.eq(game.milestones);
   });

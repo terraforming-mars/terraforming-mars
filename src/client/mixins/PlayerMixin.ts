@@ -1,5 +1,5 @@
 import {CardModel} from '@/models/CardModel';
-import {CardType} from '@/cards/CardType';
+import {CardType} from '@/common/cards/CardType';
 import {PublicPlayerModel} from '@/models/PlayerModel';
 import {sortActiveCards} from '@/client/utils/ActiveCardsSortingOrder';
 

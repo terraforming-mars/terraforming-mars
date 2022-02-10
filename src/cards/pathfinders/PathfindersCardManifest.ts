@@ -1,5 +1,5 @@
 import {CardManifest} from '../CardManifest';
-import {CardName} from '../../CardName';
+import {CardName} from '../../common/cards/CardName';
 import {GameModule} from '../../common/cards/GameModule';
 
 import {AdhaiHighOrbitConstructions} from './AdhaiHighOrbitConstructions';
@@ -62,6 +62,7 @@ import {MuseumofEarlyColonisation} from './MuseumofEarlyColonisation';
 import {NewVenice} from './NewVenice';
 import {NobelLabs} from './NobelLabs';
 import {OrbitalLaboratories} from './OrbitalLaboratories';
+import {OumuamuaTypeObjectSurvey} from './OumuamuaTypeObjectSurvey';
 import {OzoneGenerators} from './OzoneGenerators';
 import {PersonalAgenda} from './PersonalAgenda';
 import {Polaris} from './Polaris';
@@ -87,6 +88,7 @@ import {SolarStorm} from './SolarStorm';
 import {SoylentSeedlingSystems} from './SoylentSeedlingSystems';
 import {SpaceDebrisCleaningOperation} from './SpaceDebrisCleaningOperation';
 import {SpaceRelay} from './SpaceRelay';
+import {SpecializedSettlement} from './SpecializedSettlement';
 import {StrategicBasePlanning} from './StrategicBasePlanning';
 import {Steelaris} from './Steelaris';
 import {TerraformingControlStation} from './TerraformingControlStation';
@@ -152,11 +154,11 @@ export const PATHFINDERS_CARD_MANIFEST = new CardManifest({
     {cardName: CardName.BOTANICAL_EXPERIENCE, Factory: BotanicalExperience},
     {cardName: CardName.CRYPTOCURRENCY, Factory: Cryptocurrency},
     {cardName: CardName.RICH_DEPOSITS, Factory: RichDeposits},
-    // // *** {cardName: CardName.OUMUAMUA_TYPE_OBJECT_SURVEY, Factory: OumuamuaTypeObjectSurvey},
+    {cardName: CardName.OUMUAMUA_TYPE_OBJECT_SURVEY, Factory: OumuamuaTypeObjectSurvey},
     {cardName: CardName.SOLARPEDIA, Factory: Solarpedia, compatibility: GameModule.Venus},
     {cardName: CardName.ANTHOZOA, Factory: Anthozoa},
     {cardName: CardName.ADVANCED_POWER_GRID, Factory: AdvancedPowerGrid},
-    // // {cardName: CardName.SPECIALIZED_SETTLEMENT, Factory: SpecializedSettlement},          // ROBOTIC WORKFORCE COMPLICATION
+    {cardName: CardName.SPECIALIZED_SETTLEMENT, Factory: SpecializedSettlement},
     {cardName: CardName.CHARITY_DONATION, Factory: CharityDonation},
     // // {cardName: CardName.CURIOSITY_LABS, Factory: CuriosityLabs},                          // TWO RESOURCE TYPES
     {cardName: CardName.NOBEL_LABS, Factory: NobelLabs},

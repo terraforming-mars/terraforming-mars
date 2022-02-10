@@ -499,8 +499,8 @@
 
 import Vue from 'vue';
 
-import {ColonyModel} from '@/models/ColonyModel';
-import {ColonyName} from '@/colonies/ColonyName';
+import {ColonyModel} from '@/common/models/ColonyModel';
+import {ColonyName} from '@/common/colonies/ColonyName';
 
 export default Vue.extend({
   name: 'colony',

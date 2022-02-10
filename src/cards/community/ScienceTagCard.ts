@@ -1,7 +1,7 @@
 import {IProjectCard} from '../IProjectCard';
 import {Tags} from '../../common/cards/Tags';
-import {CardType} from '../CardType';
-import {CardName} from '../../CardName';
+import {CardType} from '../../common/cards/CardType';
+import {CardName} from '../../common/cards/CardName';
 import {ICardMetadata} from '../ICardMetadata';
 
 export class ScienceTagCard implements IProjectCard {

@@ -1,12 +1,12 @@
 import {IProjectCard} from '../IProjectCard';
 import {Tags} from '../../common/cards/Tags';
 import {Card} from '../Card';
-import {CardType} from '../CardType';
+import {CardType} from '../../common/cards/CardType';
 import {Player} from '../../Player';
 import {SpaceName} from '../../SpaceName';
 import {SpaceType} from '../../common/boards/SpaceType';
 import {Resources} from '../../common/Resources';
-import {CardName} from '../../CardName';
+import {CardName} from '../../common/cards/CardName';
 import {CardRenderer} from '../render/CardRenderer';
 
 export class PhobosSpaceHaven extends Card implements IProjectCard {

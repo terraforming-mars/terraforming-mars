@@ -2,7 +2,7 @@
 import {Message} from '../common/logs/Message';
 import {PlayerInput} from '../PlayerInput';
 import {Player} from '../Player';
-import {PlayerInputTypes} from '../PlayerInputTypes';
+import {PlayerInputTypes} from '../common/input/PlayerInputTypes';
 import {NeutralPlayer} from '../turmoil/Turmoil';
 
 export class SelectDelegate implements PlayerInput {

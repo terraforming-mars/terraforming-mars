@@ -17,7 +17,7 @@ import {Scientist} from './awards/Scientist';
 import {SpaceBaron} from './awards/SpaceBaron';
 import {Thermalist} from './awards/Thermalist';
 import {Venuphile} from './awards/Venuphile';
-import {BoardName} from './boards/BoardName';
+import {BoardName} from './common/boards/BoardName';
 import {GameOptions} from './Game';
 import {IDrawnMilestonesAndAwards} from './IDrawnMilestonesAndAwards';
 import {Builder} from './milestones/Builder';

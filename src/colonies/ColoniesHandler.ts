@@ -2,7 +2,7 @@ import {ENERGY_TRADE_COST, MC_TRADE_COST, TITANIUM_TRADE_COST} from '../constant
 import {Game} from '../Game';
 import {Player} from '../Player';
 import {Colony} from './Colony';
-import {ColonyName} from './ColonyName';
+import {ColonyName} from '../common/colonies/ColonyName';
 import {SelectHowToPayDeferred} from '../deferredActions/SelectHowToPayDeferred';
 import {Resources} from '../common/Resources';
 import {TradeWithTitanFloatingLaunchPad} from '../cards/colonies/TitanFloatingLaunchPad';
@@ -12,7 +12,7 @@ import {SelectColony} from '../inputs/SelectColony';
 import {AndOptions} from '../inputs/AndOptions';
 import {IColonyTrader} from './IColonyTrader';
 import {TradeWithCollegiumCopernicus} from '../cards/pathfinders/CollegiumCopernicus';
-import {CardName} from '../CardName';
+import {CardName} from '../common/cards/CardName';
 
 export class ColoniesHandler {
   public static getColony(game: Game, colonyName: ColonyName, includeDiscardedColonies: boolean = false): Colony {

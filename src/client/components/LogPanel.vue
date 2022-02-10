@@ -35,14 +35,14 @@
 <script lang="ts">
 
 import Vue from 'vue';
-import {CardType} from '@/cards/CardType';
+import {CardType} from '@/common/cards/CardType';
 import {LogMessage} from '@/common/logs/LogMessage';
 import {LogMessageType} from '@/common/logs/LogMessageType';
 import {LogMessageData} from '@/common/logs/LogMessageData';
 import {LogMessageDataType} from '@/common/logs/LogMessageDataType';
 import {PublicPlayerModel} from '@/models/PlayerModel';
 import Card from '@/client/components/card/Card.vue';
-import {CardName} from '@/CardName';
+import {CardName} from '@/common/cards/CardName';
 import {TileType} from '@/common/TileType';
 import {playerColorClass} from '@/utils/utils';
 import {Color} from '@/common/Color';
@@ -52,7 +52,7 @@ import {GlobalEventName} from '@/turmoil/globalEvents/GlobalEventName';
 import GlobalEvent from '@/client/components/GlobalEvent.vue';
 import {getGlobalEventByName} from '@/turmoil/globalEvents/GlobalEventDealer';
 import {GlobalEventModel} from '@/models/TurmoilModel';
-import {PartyName} from '@/turmoil/parties/PartyName';
+import {PartyName} from '@/common/turmoil/PartyName';
 import Button from '@/client/components/common/Button.vue';
 import {Log} from '@/Log';
 import {getCard} from '@/client/cards/ClientCardManifest';

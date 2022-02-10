@@ -46,7 +46,7 @@ import {Tags} from '@/common/cards/Tags';
 import {SpecialTags} from '@/cards/SpecialTags';
 import PlayerTagDiscount from '@/client/components/overview/PlayerTagDiscount.vue';
 import PointsPerTag from '@/client/components/overview/PointsPerTag.vue';
-import {PartyName} from '@/turmoil/parties/PartyName';
+import {PartyName} from '@/common/turmoil/PartyName';
 import {Shared} from '@/client/components/overview/Shared';
 import {getCard} from '@/client/cards/ClientCardManifest';
 

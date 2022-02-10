@@ -3,11 +3,11 @@ import {mount} from '@vue/test-utils';
 import {getLocalVue} from './getLocalVue';
 import {expect} from 'chai';
 import PlayerInputFactory from '@/client/components/PlayerInputFactory.vue';
-import {PlayerInputTypes} from '@/PlayerInputTypes';
+import {PlayerInputTypes} from '@/common/input/PlayerInputTypes';
 import {CardModel} from '@/models/CardModel';
 import {PlayerInputModel} from '@/models/PlayerInputModel';
 import {Units} from '@/common/Units';
-import {CardName} from '@/CardName';
+import {CardName} from '@/common/cards/CardName';
 
 const baseInput = {
   amount: undefined,

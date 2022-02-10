@@ -1,6 +1,6 @@
 import {Message} from '../common/logs/Message';
 import {PlayerInput} from '../PlayerInput';
-import {PlayerInputTypes} from '../PlayerInputTypes';
+import {PlayerInputTypes} from '../common/input/PlayerInputTypes';
 import {Player} from '../Player';
 import {Units} from '../common/Units';
 

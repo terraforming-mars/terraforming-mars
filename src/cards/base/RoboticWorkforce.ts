@@ -1,10 +1,10 @@
 import {IProjectCard} from '../IProjectCard';
 import {Tags} from '../../common/cards/Tags';
 import {Card} from '../Card';
-import {CardType} from '../CardType';
+import {CardType} from '../../common/cards/CardType';
 import {Player} from '../../Player';
 import {SelectCard} from '../../inputs/SelectCard';
-import {CardName} from '../../CardName';
+import {CardName} from '../../common/cards/CardName';
 import {Resources} from '../../common/Resources';
 import {ICard} from '../ICard';
 import {CardRenderer} from '../render/CardRenderer';
@@ -39,12 +39,12 @@ export class RoboticWorkforce extends Card implements IProjectCard {
     }
     if (card.name === CardName.BIOMASS_COMBUSTORS) {
       return player.game.someoneCanHaveProductionReduced(Resources.PLANTS, 1);
-    }
-    if (card.name === CardName.HEAT_TRAPPERS) {
+    } else if (card.name === CardName.HEAT_TRAPPERS) {
       return player.game.someoneCanHaveProductionReduced(Resources.HEAT, 2);
-    }
-    if (card.name === CardName.GYROPOLIS) {
+    } else if (card.name === CardName.GYROPOLIS) {
       return player.getProduction(Resources.ENERGY) >= 2;
+    } else if (card.name === CardName.SPECIALIZED_SETTLEMENT) {
+      return player.getProduction(Resources.ENERGY) >= 1;
     }
 
     if (card.produce !== undefined) return true;

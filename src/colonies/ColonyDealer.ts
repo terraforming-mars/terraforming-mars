@@ -12,7 +12,7 @@ import {Pluto} from './Pluto';
 import {Enceladus} from './Enceladus';
 import {Iapetus} from '../cards/community/Iapetus';
 import {Mercury} from '../cards/community/Mercury';
-import {ColonyName} from './ColonyName';
+import {ColonyName} from '../common/colonies/ColonyName';
 import {Hygiea} from '../cards/community/Hygiea';
 import {Titania} from '../cards/community/Titania';
 import {Venus} from '../cards/community/Venus';

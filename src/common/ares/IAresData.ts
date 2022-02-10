@@ -1,4 +1,4 @@
-import {PlayerId} from '../common/Types';
+import {PlayerId} from '../Types';
 
 export interface IAresData {
     active: boolean;

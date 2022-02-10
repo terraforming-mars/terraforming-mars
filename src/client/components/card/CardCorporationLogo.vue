@@ -248,7 +248,7 @@
 <script lang="ts">
 
 import Vue from 'vue';
-import {CardName} from '@/CardName';
+import {CardName} from '@/common/cards/CardName';
 
 export default Vue.extend({
   name: 'CardCorporationLogo',

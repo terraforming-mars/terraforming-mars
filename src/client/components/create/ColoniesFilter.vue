@@ -34,7 +34,7 @@ import {Pluto} from '@/colonies/Pluto';
 import {Titan} from '@/colonies/Titan';
 import {Triton} from '@/colonies/Triton';
 import {Enceladus} from '@/colonies/Enceladus';
-import {ColonyName} from '@/colonies/ColonyName';
+import {ColonyName} from '@/common/colonies/ColonyName';
 import {Iapetus} from '@/cards/community/Iapetus';
 import {Mercury} from '@/cards/community/Mercury';
 import {Hygiea} from '@/cards/community/Hygiea';

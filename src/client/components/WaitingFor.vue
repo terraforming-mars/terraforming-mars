@@ -113,16 +113,25 @@ export default Vue.extend({
               if (Notification.permission !== 'granted') {
                 Notification.requestPermission();
               } else if (Notification.permission === 'granted') {
+                const notificationOptions = {
+                  icon: '/favicon.ico',
+                  body: 'It\'s your turn!',
+                };
+                const notificationTitle = constants.APP_NAME;
                 try {
-                  // this needs to be updated to use a serviceWorker
-                  // on browsers where this constructor isn't supported
-                  // the error will be ignored instead of going uncaught
-                  new Notification(constants.APP_NAME, {
-                    icon: '/favicon.ico',
-                    body: 'It\'s your turn!',
-                  });
+                  new Notification(notificationTitle, notificationOptions);
                 } catch (e) {
-                  console.warn('unable to create notification', e);
+                  // ok so the native Notification doesn't work which will happen
+                  // try to use the service worker if we can
+                  if (!window.isSecureContext || !navigator.serviceWorker) {
+                    return;
+                  }
+                  navigator.serviceWorker.ready.then((registration) => {
+                    registration.showNotification(notificationTitle, notificationOptions);
+                  }).catch((err) => {
+                    // avoid promise going uncaught
+                    console.warn('Failed to display notification with serviceWorker', err);
+                  });
                 }
               }
 

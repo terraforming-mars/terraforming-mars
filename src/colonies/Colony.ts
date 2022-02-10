@@ -1,7 +1,7 @@
 import {AddResourcesToCard} from '../deferredActions/AddResourcesToCard';
-import {CardName} from '../CardName';
+import {CardName} from '../common/cards/CardName';
 import {ColonyBenefit} from './ColonyBenefit';
-import {ColonyName} from './ColonyName';
+import {ColonyName} from '../common/colonies/ColonyName';
 import {DeferredAction, Priority} from '../deferredActions/DeferredAction';
 import {DiscardCards} from '../deferredActions/DiscardCards';
 import {DrawCards} from '../deferredActions/DrawCards';
@@ -24,8 +24,7 @@ import {Tags} from '../common/cards/Tags';
 import {SendDelegateToArea} from '../deferredActions/SendDelegateToArea';
 import {Game} from '../Game';
 import {Turmoil} from '../turmoil/Turmoil';
-
-export enum ShouldIncreaseTrack { YES, NO, ASK }
+import {ShouldIncreaseTrack} from '../common/colonies/ShouldIncreaseTrack';
 
 type TradeOptions = {
   usesTradeFleet?: boolean;

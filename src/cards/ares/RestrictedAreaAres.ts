@@ -1,4 +1,4 @@
-import {CardName} from '../../CardName';
+import {CardName} from '../../common/cards/CardName';
 import {SpaceBonus} from '../../common/boards/SpaceBonus';
 import {RestrictedArea} from '../base/RestrictedArea';
 import {TileType} from '../../common/TileType';

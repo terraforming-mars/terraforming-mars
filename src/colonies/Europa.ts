@@ -1,7 +1,8 @@
-import {Colony, ShouldIncreaseTrack} from './Colony';
+import {Colony} from './Colony';
 import {Resources} from '../common/Resources';
-import {ColonyName} from './ColonyName';
+import {ColonyName} from '../common/colonies/ColonyName';
 import {ColonyBenefit} from './ColonyBenefit';
+import {ShouldIncreaseTrack} from '../common/colonies/ShouldIncreaseTrack';
 
 export class Europa extends Colony {
   public name = ColonyName.EUROPA;

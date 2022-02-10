@@ -2,14 +2,15 @@ import {expect} from 'chai';
 import {MiningArea} from '../../../src/cards/base/MiningArea';
 import {Game} from '../../../src/Game';
 import {SelectSpace} from '../../../src/inputs/SelectSpace';
-import {Player} from '../../../src/Player';
+import {TestPlayer} from '../../TestPlayer';
 import {Resources} from '../../../src/common/Resources';
 import {SpaceBonus} from '../../../src/common/boards/SpaceBonus';
 import {TileType} from '../../../src/common/TileType';
 import {TestPlayers} from '../../TestPlayers';
+import {TestingUtils} from '../../TestingUtils';
 
 describe('MiningArea', function() {
-  let card : MiningArea; let player : Player; let game : Game;
+  let card : MiningArea; let player : TestPlayer; let game : Game;
 
   beforeEach(function() {
     card = new MiningArea();
@@ -18,7 +19,7 @@ describe('MiningArea', function() {
     game = Game.newInstance('foobar', [player, redPlayer], player);
   });
 
-  it('Can\'t play', function() {
+  it('Cannot play', function() {
     expect(card.canPlay(player)).is.not.true;
   });
 
@@ -41,8 +42,11 @@ describe('MiningArea', function() {
     const titaniumSpace = action.availableSpaces.find((space) => space.bonus.includes(SpaceBonus.TITANIUM) && space.bonus.includes(SpaceBonus.STEEL) === false);
     expect(titaniumSpace).is.not.undefined;
     expect(titaniumSpace!.bonus).contains(SpaceBonus.TITANIUM);
+    expect(titaniumSpace!.bonus).does.not.contain(SpaceBonus.STEEL);
 
     action.cb(titaniumSpace!);
+    TestingUtils.runAllActions(game);
+
     expect(titaniumSpace!.player).to.eq(player);
     expect(titaniumSpace!.tile && titaniumSpace!.tile!.tileType).to.eq(TileType.MINING_AREA);
     expect(player.getProduction(Resources.TITANIUM)).to.eq(1);
@@ -51,7 +55,10 @@ describe('MiningArea', function() {
     const steelSpace = action.availableSpaces.find((space) => space.bonus.includes(SpaceBonus.TITANIUM) === false && space.bonus.includes(SpaceBonus.STEEL));
     expect(steelSpace).is.not.undefined;
     expect(steelSpace!.bonus).contains(SpaceBonus.STEEL);
+
     action.cb(steelSpace!);
+    TestingUtils.runAllActions(game);
+
     expect(steelSpace!.player).to.eq(player);
     expect(steelSpace!.tile && steelSpace!.tile!.tileType).to.eq(TileType.MINING_AREA);
     expect(player.getProduction(Resources.TITANIUM)).to.eq(1);

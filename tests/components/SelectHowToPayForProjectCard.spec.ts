@@ -1,8 +1,8 @@
 import {mount} from '@vue/test-utils';
 import {getLocalVue} from './getLocalVue';
 import {expect} from 'chai';
-import {CardName} from '@/CardName';
-import {CardType} from '@/cards/CardType';
+import {CardName} from '@/common/cards/CardName';
+import {CardType} from '@/common/cards/CardType';
 import SelectHowToPayForProjectCard from '@/client/components/SelectHowToPayForProjectCard.vue';
 import {PlayerInputModel} from '@/models/PlayerInputModel';
 import {PlayerViewModel, PublicPlayerModel} from '@/models/PlayerModel';

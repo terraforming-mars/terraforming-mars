@@ -9,9 +9,9 @@
 
 import Vue from 'vue';
 import {GameOptionsModel} from '@/models/GameOptionsModel';
-import {PlanetaryTrackSpace} from '@/pathfinders/PlanetaryTrack';
+import {PlanetaryTrackSpace} from '@/common/pathfinders/PlanetaryTrack';
 import Reward from './Reward.vue';
-import {Reward as R} from '@/pathfinders/Reward'; // UGH.
+import {Reward as R} from '@/common/pathfinders/Reward'; // UGH.
 
 export default Vue.extend({
   name: 'Rewards',

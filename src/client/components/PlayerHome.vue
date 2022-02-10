@@ -254,7 +254,7 @@ import Colony from '@/client/components/Colony.vue';
 import LogPanel from '@/client/components/LogPanel.vue';
 import {PlayerMixin} from '@/client/mixins/PlayerMixin';
 import Turmoil from '@/client/components/Turmoil.vue';
-import {playerColorClass} from '@/utils/utils';
+import {playerColorClass} from '@/common/utils/utils';
 import PlanetaryTracks from '@/client/components/pathfinders/PlanetaryTracks.vue';
 import DynamicTitle from '@/client/components/common/DynamicTitle.vue';
 import SortableCards from '@/client/components/SortableCards.vue';

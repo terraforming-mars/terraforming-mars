@@ -92,7 +92,7 @@ import Sidebar from '@/client/components/Sidebar.vue';
 import Turmoil from '@/client/components/Turmoil.vue';
 import WaitingFor from '@/client/components/WaitingFor.vue';
 import PlayersOverview from '@/client/components/overview/PlayersOverview.vue';
-import {range} from '@/utils/utils';
+import {range} from '@/common/utils/utils';
 
 export interface SpectatorHomeModel {
   hideTiles: boolean;

@@ -44,7 +44,7 @@ import {ViewModel, PublicPlayerModel} from '@/models/PlayerModel';
 import {GameModel} from '@/models/GameModel';
 import {Tags} from '@/common/cards/Tags';
 import {CardName} from '@/common/cards/CardName';
-import {SpecialTags} from '@/cards/SpecialTags';
+import {SpecialTags} from '@/client/cards/SpecialTags';
 import PlayerTagDiscount from '@/client/components/overview/PlayerTagDiscount.vue';
 import JovianMultiplier from '@/client/components/overview/JovianMultiplier.vue';
 import {PartyName} from '@/common/turmoil/PartyName';

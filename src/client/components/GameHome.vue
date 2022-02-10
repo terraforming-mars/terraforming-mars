@@ -32,7 +32,7 @@
 import Vue from 'vue';
 import {SimpleGameModel} from '@/models/SimpleGameModel';
 import Button from '@/client/components/common/Button.vue';
-import {playerColorClass} from '@/utils/utils';
+import {playerColorClass} from '@/common/utils/utils';
 import GameSetupDetail from '@/client/components/GameSetupDetail.vue';
 import {SpectatorId, PlayerId} from '@/common/Types';
 

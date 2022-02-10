@@ -10,7 +10,7 @@
 import Vue from 'vue';
 import Tag from '@/client/components/Tag.vue';
 import {Tags} from '@/common/cards/Tags';
-import {SpecialTags} from '@/cards/SpecialTags';
+import {SpecialTags} from '@/client/cards/SpecialTags';
 
 export default Vue.extend({
   name: 'tag-count',

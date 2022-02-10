@@ -6,7 +6,6 @@ module.exports = {
   'extends': [
     'google',
     'plugin:vue/essential',
-    'eslint:recommended',
   ],
   'parserOptions': {
     'ecmaVersion': 2018,

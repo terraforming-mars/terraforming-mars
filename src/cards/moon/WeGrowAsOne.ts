@@ -29,7 +29,7 @@ export class WeGrowAsOne extends Card implements IProjectCard {
         }),
       },
     });
-  };
+  }
 
   public play(player: Player) {
     player.game.colonies.forEach((colony) => {

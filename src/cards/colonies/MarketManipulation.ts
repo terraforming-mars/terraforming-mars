@@ -71,7 +71,7 @@ export class MarketManipulation extends Card implements IProjectCard {
           );
 
           selectColonies.options.push(colonySelect);
-        };
+        }
       });
     });
 

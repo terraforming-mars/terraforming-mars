@@ -30,7 +30,7 @@ export class LunarDustProcessingPlant extends MoonCard implements IProjectCard {
         }),
       },
     });
-  };
+  }
 
   public override play(player: Player) {
     super.play(player);

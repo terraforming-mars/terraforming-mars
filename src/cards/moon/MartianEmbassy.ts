@@ -24,7 +24,7 @@ export class MartianEmbassy extends Card implements IProjectCard {
         }),
       },
     });
-  };
+  }
 
   public play(player: Player) {
     // The +1 is "including this".

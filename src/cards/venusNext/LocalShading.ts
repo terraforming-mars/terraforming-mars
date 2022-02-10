@@ -32,7 +32,7 @@ export class LocalShading extends Card implements IActionCard, IResourceCard {
         }),
       },
     });
-  };
+  }
   public override resourceCount: number = 0;
 
   public play() {

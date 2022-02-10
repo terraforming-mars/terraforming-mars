@@ -29,7 +29,7 @@ export class ProcessorFactory extends Card implements IProjectCard {
         }),
       },
     });
-  };
+  }
   public override resourceCount = 0;
 
   public play() {

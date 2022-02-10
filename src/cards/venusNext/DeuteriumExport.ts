@@ -33,7 +33,7 @@ export class DeuteriumExport extends Card implements IActionCard, IResourceCard 
         }),
       },
     });
-  };
+  }
 
   public override resourceCount: number = 0;
 

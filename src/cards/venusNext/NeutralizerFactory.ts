@@ -24,7 +24,7 @@ export class NeutralizerFactory extends Card {
         description: 'Requires Venus 10%. Increase the Venus track 1 step.',
       },
     });
-  };
+  }
 
   public play(player: Player) {
     player.game.increaseVenusScaleLevel(player, 1);

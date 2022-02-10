@@ -27,7 +27,7 @@ export class ArchimedesHydroponicsStation extends MoonCard {
     }, {
       // No moon card properties.
     });
-  };
+  }
 
   public override play(player: Player) {
     player.adjustProduction(this.productionBox, {log: true});

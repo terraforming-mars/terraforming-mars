@@ -60,5 +60,5 @@ export class TempestConsultancy extends Card implements CorporationCard {
         {count: count, source: 'reserve'}));
     }
     return undefined;
-  };
+  }
 }

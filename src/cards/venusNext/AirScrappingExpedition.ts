@@ -25,7 +25,7 @@ export class AirScrappingExpedition extends Card {
         }),
       },
     });
-  };
+  }
 
   public play(player: Player) {
     player.game.increaseVenusScaleLevel(player, 1);

@@ -22,7 +22,7 @@ export class SyndicatePirateRaids extends Card implements IProjectCard {
         }),
       },
     });
-  };
+  }
 
   public play(player: Player) {
     const game = player.game;

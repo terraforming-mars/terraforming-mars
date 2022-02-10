@@ -25,7 +25,7 @@ export const range = (n: number): Array<number> => Array.from(Array(n).keys());
  */
 export function intersection<T>(a: Array<T>, b: Array<T>) {
   return a.filter((e) => b.includes(e));
-};
+}
 
 export const generateClassString = (classes: Array<string>): string => classes.join(' ').trimStart();
 

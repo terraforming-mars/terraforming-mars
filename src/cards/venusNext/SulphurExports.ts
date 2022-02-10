@@ -25,7 +25,7 @@ export class SulphurExports extends Card {
         description: 'Increase Venus 1 step. Increase your M€ production 1 step for each Venus tag you have, including this.',
       },
     });
-  };
+  }
 
   public play(player: Player) {
     player.addProduction(Resources.MEGACREDITS, player.getTagCount(Tags.VENUS) + 1, {log: true});

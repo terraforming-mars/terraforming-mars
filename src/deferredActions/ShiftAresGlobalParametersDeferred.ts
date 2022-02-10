@@ -48,5 +48,5 @@ export class ShiftAresGlobalParametersDeferred implements DeferredAction {
       throw new Error('Should not reach.');
     }
     return pi;
-  };
+  }
 }

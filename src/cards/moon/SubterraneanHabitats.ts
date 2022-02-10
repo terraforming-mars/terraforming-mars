@@ -28,7 +28,7 @@ export class SubterraneanHabitats extends MoonCard implements IProjectCard {
         }),
       },
     });
-  };
+  }
 
   public override play(player: Player) {
     super.play(player);

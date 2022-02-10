@@ -350,7 +350,7 @@ export class Server {
     case PlayerInputTypes.SHIFT_ARES_GLOBAL_PARAMETERS:
       playerInputModel.aresData = (waitingFor as ShiftAresGlobalParameters).aresData;
       break;
-    };
+    }
     return playerInputModel;
   }
 

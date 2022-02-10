@@ -34,7 +34,7 @@ export class SmallDutyRovers extends Card implements IProjectCard {
         }),
       },
     });
-  };
+  }
 
   public play(player: Player) {
     player.deductUnits(this.reserveUnits);

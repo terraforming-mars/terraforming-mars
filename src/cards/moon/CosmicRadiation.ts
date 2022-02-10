@@ -28,7 +28,7 @@ export class CosmicRadiation extends Card implements IProjectCard {
         }),
       },
     });
-  };
+  }
 
   public play(player: Player) {
     const mines = MoonExpansion.spaces(player.game, TileType.MOON_MINE);

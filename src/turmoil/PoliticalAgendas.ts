@@ -66,7 +66,7 @@ export class PoliticalAgendas {
       throw new Error('Invalid party: ' + partyName);
     }
     return agenda;
-  };
+  }
 
   // The ruling party is already in power, and now it is time for the party to select an agenda.
   // Do not expect the method to return an activated agenda if the current agenda style is chairman

@@ -26,7 +26,7 @@ export class MiningQuota extends Card {
         description: 'Requires Venus, Earth and Jovian tags. Increase your steel production 2 steps.',
       },
     });
-  };
+  }
 
   public play(player: Player) {
     player.addProduction(Resources.STEEL, 2);

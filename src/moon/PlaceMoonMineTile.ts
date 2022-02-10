@@ -10,7 +10,7 @@ export class PlaceMoonMineTile implements DeferredAction {
   public andThen(cb: (space: ISpace) => void) {
     this.cb = cb;
     return this;
-  };
+  }
 
   private cb: (space: ISpace) => void = () => {};
 

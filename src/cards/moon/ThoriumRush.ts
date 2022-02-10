@@ -31,7 +31,7 @@ export class ThoriumRush extends Card implements IProjectCard {
         }),
       },
     });
-  };
+  }
 
   public play(player: Player) {
     player.game.defer(new PlaceMoonColonyTile(player));

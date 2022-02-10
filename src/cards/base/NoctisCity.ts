@@ -39,7 +39,7 @@ export class NoctisCity extends Card implements IProjectCard {
     if (player.game.board.getNoctisCitySpaceIds().length > 0) {
       return true;
     } else {
-      return player.game.board.getAvailableSpacesForCity(player).length > 0; ;
+      return player.game.board.getAvailableSpacesForCity(player).length > 0;
     }
   }
   public play(player: Player) {

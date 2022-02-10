@@ -25,7 +25,7 @@ export class WaterTreatmentComplex extends MoonCard {
         renderData: CardRenderer.builder((b) => b.minus().titanium(1).br.moonColonyRate({amount: 2})),
       },
     });
-  };
+  }
 
   public override play(player: Player) {
     super.play(player);

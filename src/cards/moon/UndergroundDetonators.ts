@@ -23,7 +23,7 @@ export class UndergroundDetonators extends Card {
         }),
       },
     });
-  };
+  }
 
   public play(player: Player) {
     player.steel += 1;

@@ -32,7 +32,7 @@ export class OffWorldCityLiving extends Card implements IProjectCard {
         victoryPoints: CardRenderDynamicVictoryPoints.cities(1, 3, true),
       },
     });
-  };
+  }
 
   public play(player: Player) {
     const amount = player.game.getCitiesCount() - player.game.getCitiesOnMarsCount();

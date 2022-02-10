@@ -12,31 +12,31 @@ export class PaymentTester {
   private static selector(type: Unit) {
     const re = type === 'megaCredits' ? 'Megacredits' : (type.charAt(0).toUpperCase() + type.slice(1)); // (eg steel -> Steel)
     return '[title~=' + re + ']';
-  };
+  }
 
   public async clickMax(type: Unit) {
     const button = this.wrapper.find(PaymentTester.selector(type) + ' ~ .btn-max');
     await button.trigger('click');
     await this.nextTick();
-  };
+  }
 
   public async clickMinus(type: Unit) {
     const button = this.wrapper.find(PaymentTester.selector(type) + ' ~ .btn-minus');
     await button.trigger('click');
     await this.nextTick();
-  };
+  }
 
   public async clickPlus(type: Unit) {
     const button = this.wrapper.find(PaymentTester.selector(type) + ' ~ .btn-plus');
     await button.trigger('click');
     await this.nextTick();
-  };
+  }
 
   public async clickSave() {
     const button = this.wrapper.find('[data-test=save]');
     await button.trigger('click');
     await this.nextTick();
-  };
+  }
 
   public getValue(type: Unit) {
     const textBox = this.wrapper.find(PaymentTester.selector(type) + ' ~ input').element as HTMLInputElement;
@@ -50,7 +50,7 @@ export class PaymentTester {
     const vmVal = this.model[type];
     expect(this.getValue(type), 'text box value for ' + type).eq(String(amount));
     expect(vmVal, 'VM box value for ' + type).eq(amount);
-  };
+  }
 
   // When `expected` is true, this passes when the unit type is available and visible to the user,
   // and vice-versa.
@@ -61,7 +61,7 @@ export class PaymentTester {
     } else {
       expect(w.element, `Expect input for ${type} to be invisible`).is.undefined;
     }
-  };
+  }
 
   public async nextTick() {
     await this.wrapper.vm.$nextTick();

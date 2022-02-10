@@ -25,7 +25,7 @@ export class OrbitalPowerGrid extends Card implements IProjectCard {
         }),
       },
     });
-  };
+  }
 
   public play(player: Player) {
     const amount = player.game.getCitiesCount() - player.game.getCitiesOnMarsCount();

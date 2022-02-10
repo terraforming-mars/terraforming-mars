@@ -5,7 +5,7 @@ module.exports = {
   },
   'extends': [
     'google',
-    'plugin:vue/essential'
+    'plugin:vue/essential',
   ],
   'parserOptions': {
     'ecmaVersion': 2018,
@@ -26,6 +26,8 @@ module.exports = {
     'prefer-const': 'error',
     'indent': ['error', 2],
     'require-jsdoc': 'off',
+    'no-throw-literal': 'error',
+    'no-extra-semi': 'error',
     // Should turn this back on, but for now, turn it off.
     // https://eslint.vuejs.org/rules/multi-word-component-names.html
     'vue/multi-word-component-names': 'warn',

@@ -26,7 +26,7 @@ export class VenusWaystation extends Card {
         }),
       },
     });
-  };
+  }
 
   public play() {
     return undefined;

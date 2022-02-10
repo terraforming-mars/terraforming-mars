@@ -28,7 +28,7 @@ export class LunarSecurityStations extends Card implements IProjectCard {
         }),
       },
     });
-  };
+  }
 
   public play(player: Player) {
     MoonExpansion.raiseLogisticRate(player);

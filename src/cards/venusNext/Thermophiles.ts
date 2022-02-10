@@ -36,7 +36,7 @@ export class Thermophiles extends Card implements IActionCard, IResourceCard {
         description: 'Requires Venus 6%',
       },
     });
-  };
+  }
   public override resourceCount: number = 0;
 
   public play() {

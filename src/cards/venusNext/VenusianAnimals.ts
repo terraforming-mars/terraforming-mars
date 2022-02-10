@@ -33,7 +33,7 @@ export class VenusianAnimals extends Card implements IResourceCard {
         description: 'Requires Venus 18%',
       },
     });
-  };
+  }
   public override resourceCount: number = 0;
   public play() {
     return undefined;

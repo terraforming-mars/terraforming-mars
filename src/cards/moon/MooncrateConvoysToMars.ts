@@ -28,7 +28,7 @@ export class MooncrateConvoysToMars extends Card {
         }),
       },
     });
-  };
+  }
 
   public play(player: Player) {
     MoonExpansion.raiseLogisticRate(player, 1);

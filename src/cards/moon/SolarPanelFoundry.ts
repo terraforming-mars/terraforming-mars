@@ -24,7 +24,7 @@ export class SolarPanelFoundry extends Card implements IActionCard, IProjectCard
         }),
       },
     });
-  };
+  }
 
   public play() {
     return undefined;

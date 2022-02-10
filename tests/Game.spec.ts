@@ -315,7 +315,7 @@ describe('Game', () => {
     // Place second greenery
     const placeSecondGreenery = TestingUtils.cast(player.getWaitingFor(), OrOptions);
     const otherSpace = game.board.getSpace('30');
-    placeSecondGreenery.options[0].cb(otherSpace); ;
+    placeSecondGreenery.options[0].cb(otherSpace);
 
     // End the game
     game.playerHasPassed(player);

@@ -31,7 +31,7 @@ export class VenusianInsects extends Card implements IActionCard, IResourceCard 
         description: 'Requires Venus 12%.',
       },
     });
-  };
+  }
   public override resourceCount: number = 0;
 
   public play() {

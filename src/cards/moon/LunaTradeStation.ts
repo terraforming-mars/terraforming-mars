@@ -32,7 +32,7 @@ export class LunaTradeStation extends MoonCard implements IActionCard {
         }),
       },
     });
-  };
+  }
 
   public override play(player: Player) {
     super.play(player);

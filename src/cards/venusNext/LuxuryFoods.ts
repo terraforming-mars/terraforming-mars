@@ -20,7 +20,7 @@ export class LuxuryFoods extends Card {
         cardNumber: 'T10',
       },
     });
-  };
+  }
 
   public override canPlay(player: Player): boolean {
     return player.checkMultipleTagPresence([Tags.VENUS, Tags.EARTH, Tags.JOVIAN]);

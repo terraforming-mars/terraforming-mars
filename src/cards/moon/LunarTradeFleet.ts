@@ -29,7 +29,7 @@ export class LunarTradeFleet extends Card {
         }),
       },
     });
-  };
+  }
 
   public play(player: Player) {
     player.addProduction(Resources.MEGACREDITS, 1, {log: true});

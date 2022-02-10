@@ -30,7 +30,7 @@ export class PreliminaryDarkside extends Card implements IProjectCard {
         }),
       },
     });
-  };
+  }
 
   public play(player: Player) {
     MoonExpansion.raiseMiningRate(player);

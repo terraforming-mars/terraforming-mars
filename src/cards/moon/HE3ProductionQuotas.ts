@@ -33,7 +33,7 @@ export class HE3ProductionQuotas extends Card implements IProjectCard {
         }),
       },
     });
-  };
+  }
 
   public override canPlay(player: Player): boolean {
     const moonTiles = MoonExpansion.spaces(player.game, TileType.MOON_MINE, {surfaceOnly: true});

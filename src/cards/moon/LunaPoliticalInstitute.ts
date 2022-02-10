@@ -29,7 +29,7 @@ export class LunaPoliticalInstitute extends Card implements IActionCard, IProjec
         }),
       },
     });
-  };
+  }
 
   public play() {
     return undefined;

@@ -30,7 +30,7 @@ export class Dirigibles extends Card implements IActionCard, IResourceCard {
         }),
       },
     });
-  };
+  }
 
   public override resourceCount: number = 0;
 

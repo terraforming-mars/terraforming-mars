@@ -30,7 +30,7 @@ export class TestingUtils {
       oceans.push(TestingUtils.addOcean(player));
     }
     return oceans;
-  };
+  }
 
   public static addGreenery(player: Player): ISpace {
     const space = player.game.board.getAvailableSpacesForGreenery(player)[0];
@@ -55,7 +55,7 @@ export class TestingUtils {
       space.player = undefined;
       space.tile = undefined;
     });
-  };
+  }
 
   public static setCustomGameOptions(options: Partial<GameOptions> = {}): GameOptions {
     const defaultOptions = {
@@ -68,13 +68,13 @@ export class TestingUtils {
     };
 
     return Object.assign(defaultOptions, options);
-  };
+  }
 
   public static setRulingPartyAndRulingPolicy(game: Game, turmoil: Turmoil, party: IParty, policyId: PolicyId) {
     turmoil.rulingParty = party;
     turmoil.politicalAgendasData.agendas.set(party.name, {bonusId: party.bonuses[0].id, policyId: policyId});
     game.phase = Phase.ACTION;
-  };
+  }
 
   // Just shortcuts to some often called methods
   // related to the deferred actions queue
@@ -104,7 +104,7 @@ export class TestingUtils {
   }
 
   public static forceGenerationEnd(game: Game) {
-    while (game.deferredActions.pop() !== undefined) {};
+    while (game.deferredActions.pop() !== undefined) {}
     game.getPlayers().forEach((player) => player.pass());
     game.playerIsFinishedTakingActions();
   }

@@ -34,7 +34,7 @@ export class TheWomb extends MoonCard {
     }, {
       tilesBuilt: [TileType.MOON_COLONY],
     });
-  };
+  }
 
   public override play(player: Player) {
     super.play(player);

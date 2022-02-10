@@ -76,7 +76,7 @@ export abstract class StandardProjectCard extends Card implements IActionCard, I
 
   private suffixFreeCardName(cardName: CardName): string {
     return cardName.split(':')[0];
-  };
+  }
 
   public action(player: Player): OrOptions | SelectOption | AndOptions | SelectAmount | SelectCard<ICard> | SelectCard<IProjectCard> | SelectHowToPay | SelectPlayer | SelectSpace | undefined {
     const canPayWith = this.canPayWith(player);

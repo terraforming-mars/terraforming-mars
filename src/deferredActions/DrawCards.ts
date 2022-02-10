@@ -42,7 +42,7 @@ export class DrawCards<T extends undefined | SelectCard<IProjectCard>> implement
     });
 
     return this.cb(cards);
-  };
+  }
 
   public static keepAll(player: Player, count: number = 1, options?: DrawCards.DrawOptions): DrawCards<undefined> {
     return new DrawCards(player, count, options, (cards) =>

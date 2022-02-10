@@ -34,7 +34,7 @@ export class AncientShipyards extends MoonCard {
         }),
       },
     });
-  };
+  }
   public override resourceCount: number = 0;
 
   public override play(player: Player) {

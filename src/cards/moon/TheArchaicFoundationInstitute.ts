@@ -54,7 +54,7 @@ export class TheArchaicFoundationInstitute extends Card implements CorporationCa
         player.removeResourceFrom(this, 3, player.game, player, true);
         player.increaseTerraformRating();
       }
-    };
+    }
     return undefined;
   }
 }

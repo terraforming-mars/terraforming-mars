@@ -42,7 +42,7 @@ export class LunaMiningHub extends MoonCard {
         victoryPoints: CardRenderDynamicVictoryPoints.moonMiningTile(2, true),
       },
     });
-  };
+  }
 
   public override play(player: Player) {
     super.play(player);

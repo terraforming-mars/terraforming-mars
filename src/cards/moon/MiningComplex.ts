@@ -28,7 +28,7 @@ export class MiningComplex extends PreludeCard {
         ),
       },
     });
-  };
+  }
 
   public tilesBuilt = [TileType.MOON_MINE, TileType.MOON_ROAD];
 

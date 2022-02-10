@@ -35,7 +35,7 @@ export class LunaEcumenopolis extends MoonCard {
     }, {
       tilesBuilt: [TileType.MOON_COLONY],
     });
-  };
+  }
 
   private canAffordTRBump(player: Player) {
     // Note for someone paying close attention:

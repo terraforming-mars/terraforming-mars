@@ -24,7 +24,7 @@ export class MooncrateBlockFactory extends Card {
         }),
       },
     });
-  };
+  }
 
   public play() {
     // Behavior is in MoonColonyStandardProject, MoonMineStandardProject and MoonRoadStandardProject.

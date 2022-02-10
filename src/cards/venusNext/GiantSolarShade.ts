@@ -20,7 +20,7 @@ export class GiantSolarShade extends Card {
         description: 'Raise Venus 3 steps.',
       },
     });
-  };
+  }
 
   public play(player: Player) {
     player.game.increaseVenusScaleLevel(player, 3);

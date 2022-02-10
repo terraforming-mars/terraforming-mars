@@ -9,7 +9,7 @@
 <script lang="ts">
 
 import Vue from 'vue';
-import {generateClassString} from '@/utils/utils';
+import {generateClassString} from '@/common/utils/utils';
 import {AltSecondaryTag, CardRenderItem} from '@/cards/render/CardRenderItem';
 import {CardRenderItemType} from '@/cards/render/CardRenderItemType';
 import {CardRenderSymbol} from '@/cards/render/CardRenderSymbol';

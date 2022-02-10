@@ -17,7 +17,7 @@ import {$t} from '@/client/directives/i18n';
 import * as constants from '@/constants';
 import * as raw_settings from '@/genfiles/settings.json';
 import {SpectatorModel} from '@/models/SpectatorModel';
-import {isPlayerId, isSpectatorId} from '@/utils/utils';
+import {isPlayerId, isSpectatorId} from '@/common/utils/utils';
 import {hasShowModal, showModal, windowHasHTMLDialogElement} from './HTMLDialogElementCompatibility';
 
 const dialogPolyfill = require('dialog-polyfill');

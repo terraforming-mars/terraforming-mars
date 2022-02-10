@@ -10,8 +10,8 @@
 <script lang="ts">
 import Vue from 'vue';
 import Rewards from '@/client/components/pathfinders/Rewards.vue';
-import {range} from '@/utils/utils';
-import {PlanetaryTrack as Track} from '@/pathfinders/PlanetaryTrack';
+import {range} from '@/common/utils/utils';
+import {PlanetaryTrack as Track} from '@/common/pathfinders/PlanetaryTrack';
 import {GameOptionsModel} from '@/models/GameOptionsModel';
 
 export default Vue.extend({

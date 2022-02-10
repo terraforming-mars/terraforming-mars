@@ -4,7 +4,7 @@
 
 <script lang="ts">
 import Vue from 'vue';
-import {playerColorClass} from '@/utils/utils';
+import {playerColorClass} from '@/common/utils/utils';
 
 export default Vue.extend({
   name: 'DynamicTitle',

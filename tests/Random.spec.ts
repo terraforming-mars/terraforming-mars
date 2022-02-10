@@ -1,6 +1,6 @@
 import {expect} from 'chai';
 import {Random} from '../src/Random';
-import {range} from '../src/utils/utils';
+import {range} from '../src/common/utils/utils';
 
 describe('Random', function() {
   it('Seed is deterministic', function() {

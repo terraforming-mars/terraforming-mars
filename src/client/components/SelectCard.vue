@@ -145,7 +145,7 @@ export default Vue.extend({
     },
     findOwner(card: CardModel): Owner | undefined {
       for (const player of this.playerView.players) {
-        if (player.playedCards.find((c) => c.name === card.name)) {
+        if (player.playedCards.find((c) => c.name === card.name) || player.corporationCard?.name === card.name) {
           return {name: player.name, color: player.color};
         }
       }

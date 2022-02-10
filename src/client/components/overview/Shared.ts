@@ -5,4 +5,4 @@ export class Shared {
   public static isTagsViewConcise(root: any): boolean {
     return root.getVisibilityState('tags_concise');
   }
-};
+}

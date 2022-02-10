@@ -23,7 +23,7 @@ export class AtalantaPlanitiaLab extends Card {
         renderData: CardRenderer.builder((b) => b.cards(2)),
       },
     });
-  };
+  }
 
   public play(player: Player) {
     player.drawCard(2);

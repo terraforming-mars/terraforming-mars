@@ -54,7 +54,7 @@ export class Wetlands extends Card implements IProjectCard {
   public override canPlay(player: Player) {
     if (!player.hasUnits(this.reserveUnits)) {
       return false;
-    };
+    }
     return this.availableSpaces(player).length > 0;
   }
 

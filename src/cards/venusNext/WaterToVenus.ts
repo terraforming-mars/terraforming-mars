@@ -20,7 +20,7 @@ export class WaterToVenus extends Card {
         description: 'Raise Venus 1 step.',
       },
     });
-  };
+  }
 
   public play(player: Player) {
     player.game.increaseVenusScaleLevel(player, 1);

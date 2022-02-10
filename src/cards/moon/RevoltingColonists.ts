@@ -28,7 +28,7 @@ export class RevoltingColonists extends Card implements IProjectCard {
         }),
       },
     });
-  };
+  }
 
   public play(player: Player) {
     const colonies = MoonExpansion.spaces(player.game, TileType.MOON_COLONY);

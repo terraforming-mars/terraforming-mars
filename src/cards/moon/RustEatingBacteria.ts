@@ -31,7 +31,7 @@ export class RustEatingBacteria extends Card implements IActionCard, IProjectCar
         }),
       },
     });
-  };
+  }
 
   public override resourceCount = 0;
 

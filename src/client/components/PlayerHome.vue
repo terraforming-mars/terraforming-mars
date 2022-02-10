@@ -448,7 +448,7 @@ export default Vue.extend({
       alert('Mars is Terraformed!');
       // Avoids repeated calls.
       TerraformedAlertDialog.shouldAlert = false;
-    };
+    }
   },
 });
 

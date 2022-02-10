@@ -28,7 +28,7 @@ export class LunaStagingStation extends MoonCard {
         }),
       },
     });
-  };
+  }
 
   public override play(player: Player) {
     super.play(player);

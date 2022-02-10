@@ -34,7 +34,7 @@ export class FloatingHabs extends Card implements IActionCard, IResourceCard {
         description: 'Requires 2 Science tags.',
       },
     });
-  };
+  }
   public override resourceCount: number = 0;
 
   public play() {

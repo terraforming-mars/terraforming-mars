@@ -27,7 +27,7 @@ export class VenusMagnetizer extends Card implements IActionCard {
         description: 'Requires Venus 10%.',
       },
     });
-  };
+  }
 
   public play() {
     return undefined;

@@ -28,7 +28,7 @@ export class CopernicusSolarArrays extends MoonCard {
         }),
       },
     });
-  };
+  }
 
   public override play(player: Player) {
     super.play(player);

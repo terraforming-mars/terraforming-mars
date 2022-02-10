@@ -22,7 +22,7 @@ export class HE3Lobbyists extends Card {
         }),
       },
     });
-  };
+  }
 
   public play(player: Player) {
     // + 1 because the tag above isn't yet included in the played cards pile.

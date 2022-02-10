@@ -27,5 +27,5 @@ export class HypersensitiveSiliconChipFactory extends MoonCard {
         }),
       },
     });
-  };
+  }
 }

@@ -33,7 +33,7 @@ export class LunarIndustryComplex extends MoonCard implements IProjectCard {
     }, {
       tilesBuilt: [TileType.MOON_MINE],
     });
-  };
+  }
 
   public override play(player: Player) {
     player.deductUnits(this.reserveUnits);

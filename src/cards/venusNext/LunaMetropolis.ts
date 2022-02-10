@@ -28,7 +28,7 @@ export class LunaMetropolis extends Card {
         description: 'Increase your M€ production 1 step for each Earth tag you have, including this. Place a City tile on the RESERVED AREA',
       },
     });
-  };
+  }
   public play(player: Player) {
     player.addProduction(Resources.MEGACREDITS, player.getTagCount(Tags.EARTH) + 1, {log: true});
     player.game.addCityTile(player, SpaceName.LUNA_METROPOLIS, SpaceType.COLONY);

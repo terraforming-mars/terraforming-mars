@@ -27,7 +27,7 @@ export class HydrogenToVenus extends Card {
         description: 'Raise Venus 1 step. Add 1 Floater to A Venus CARD for each Jovian tag you have.',
       },
     });
-  };
+  }
 
   public play(player: Player) {
     const jovianTags: number = player.getTagCount(Tags.JOVIAN);

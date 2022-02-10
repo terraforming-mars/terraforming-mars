@@ -30,7 +30,7 @@ export class LunaSenate extends Card implements IProjectCard {
         }),
       },
     });
-  };
+  }
 
   public play(player: Player) {
     let count = player.game.getPlayers().map((p) => p.getTagCount(Tags.MOON, 'raw')).reduce((p, v) => p + v, 0);

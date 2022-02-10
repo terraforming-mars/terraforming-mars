@@ -32,7 +32,7 @@ export class AristarchusRoadNetwork extends MoonCard {
     }, {
       tilesBuilt: [TileType.MOON_ROAD],
     });
-  };
+  }
 
   public override play(player: Player) {
     super.play(player);

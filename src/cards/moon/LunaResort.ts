@@ -33,7 +33,7 @@ export class LunaResort extends MoonCard {
         }),
       },
     });
-  };
+  }
 
   public override play(player: Player) {
     super.play(player);

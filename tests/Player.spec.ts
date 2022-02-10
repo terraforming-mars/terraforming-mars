@@ -339,7 +339,7 @@ describe('Player', function() {
         energy: player.energy,
         heat: player.heat,
       };
-    };
+    }
 
     const player = TestPlayers.BLUE.newPlayer();
 
@@ -430,7 +430,7 @@ describe('Player', function() {
         energy: player.energy,
         heat: player.heat,
       };
-    };
+    }
 
     const player = TestPlayers.BLUE.newPlayer();
 
@@ -521,7 +521,7 @@ describe('Player', function() {
         energy: player.getProduction(Resources.ENERGY),
         heat: player.getProduction(Resources.HEAT),
       };
-    };
+    }
 
     const player = TestPlayers.BLUE.newPlayer();
 
@@ -645,7 +645,7 @@ describe('Player', function() {
     player2.megaCredits = 3;
     game.monsInsuranceOwner = player2.id;
     player1.addResource(Resources.MEGACREDITS, -3, {from: player2, log: false});
-    expect(player2.megaCredits).eq(3); ;
+    expect(player2.megaCredits).eq(3);
     player1.addProduction(Resources.MEGACREDITS, -3, {from: player2, log: false});
     expect(player2.megaCredits).eq(3);
   });

@@ -37,7 +37,7 @@ export class SulphurEatingBacteria extends Card implements IActionCard, IResourc
         description: 'Requires Venus 6%',
       },
     });
-  };
+  }
   public override resourceCount: number = 0;
 
   public play() {

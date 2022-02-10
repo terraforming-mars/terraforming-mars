@@ -24,7 +24,7 @@ export class Solarnet extends Card {
         description: 'Requires Venus, Earth and Jovian tags. Draw 2 cards.',
       },
     });
-  };
+  }
 
   public play(player: Player) {
     player.drawCard(2);

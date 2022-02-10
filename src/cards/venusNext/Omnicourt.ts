@@ -24,7 +24,7 @@ export class Omnicourt extends Card {
         description: 'Requires Venus, Earth and Jovian tags. Increase your TR 2 steps.',
       },
     });
-  };
+  }
 
   public play(player: Player) {
     player.increaseTerraformRatingSteps(2);

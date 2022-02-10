@@ -104,7 +104,7 @@ describe('MoonExpansion', () => {
         mines: vps.moonMines,
         roads: vps.moonRoads,
       };
-    };
+    }
 
     expect(computeVps()).eql({colonies: 0, mines: 0, roads: 0});
     MoonExpansion.addTile(player, 'm02', {tileType: TileType.MOON_ROAD});

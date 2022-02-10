@@ -26,7 +26,7 @@ export class IoSulphurResearch extends Card {
         description: 'Draw 1 card, or draw 3 if you have at least 3 Venus tags.',
       },
     });
-  };
+  }
 
   public play(player: Player) {
     player.drawCard(player.getTagCount(Tags.VENUS) >= 3 ? 3 : 1);

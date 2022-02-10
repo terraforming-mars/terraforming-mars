@@ -3,7 +3,7 @@ import {Color} from '../common/Color';
 import {VictoryPointsBreakdown} from '../VictoryPointsBreakdown';
 import {ITagCount} from '@/common/cards/ITagCount';
 import {PlayerInputModel} from './PlayerInputModel';
-import {TimerModel} from './TimerModel';
+import {TimerModel} from '../common/models/TimerModel';
 import {GameModel} from './GameModel';
 import {PlayerId, SpectatorId} from '../common/Types';
 import {CardName} from '../common/cards/CardName';

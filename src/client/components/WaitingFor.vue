@@ -23,7 +23,7 @@ import {WaitingForModel} from '@/models/WaitingForModel';
 
 import * as constants from '@/constants';
 import * as raw_settings from '@/genfiles/settings.json';
-import {isPlayerId} from '@/utils/utils';
+import {isPlayerId} from '@/common/utils/utils';
 
 let ui_update_timeout_id: number | undefined;
 let documentTitleTimer: number | undefined;

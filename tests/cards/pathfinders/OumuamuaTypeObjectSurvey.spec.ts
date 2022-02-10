@@ -175,6 +175,8 @@ describe('OumuamuaTypeObjectSurvey', function() {
   it('The part where a card gets 2 data', function() {
     const lunarObservationPost = new LunarObservationPost();
     player.playedCards = [lunarObservationPost];
+    // Put two cards on the front of the deck so they don't have data
+    dealer.deck.push(slug, noTags);
 
     card.play(player);
     TestingUtils.runAllActions(game);

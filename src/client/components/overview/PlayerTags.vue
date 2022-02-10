@@ -132,7 +132,7 @@ export default Vue.extend({
 
     if (this.playerView.game.turmoil?.ruling === PartyName.UNITY &&
       this.playerView.game.turmoil.politicalAgendas?.unity.policyId === 'up04') {
-      // space: discount += 2;
+      modifiers[Tags.SPACE].discount += 2;
     }
     return {
       modifiers,

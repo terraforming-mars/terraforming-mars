@@ -49,7 +49,7 @@ export class IntragenSanctuaryHeadquarters extends Card implements CorporationCa
     // Gains the initial resource from its own tag.
     this.resourceCount = 1;
     return undefined;
-  };
+  }
 
   public onCorpCardPlayed(player: Player, card: CorporationCard) {
     return this.onCardPlayed(player, card as ICard as IProjectCard);

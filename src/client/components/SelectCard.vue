@@ -105,7 +105,7 @@ export default Vue.extend({
             this.playerinput.cards,
           );
         }
-      };
+      }
 
       if (this.playerinput.showOwner) {
         // Optimization so getOwners isn't repeatedly called.

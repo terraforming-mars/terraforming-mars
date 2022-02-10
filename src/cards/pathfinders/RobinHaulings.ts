@@ -77,7 +77,7 @@ export class RobinHaulings extends Card implements CorporationCard {
             this.resourceCount -= 3;
             return undefined;
           }));
-    };
+    }
     if (this.canRaiseOxygen(player)) {
       options.options.push(
         new SelectOption(
@@ -88,7 +88,7 @@ export class RobinHaulings extends Card implements CorporationCard {
             this.resourceCount -= 3;
             return undefined;
           }));
-    };
+    }
 
     if (options.options.length === 0) {
       return undefined;

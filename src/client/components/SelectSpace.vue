@@ -140,7 +140,7 @@ export default Vue.extend({
       const spaceId = tile.getAttribute('data_space_id');
       if (spaceId === null || this.availableSpaces.has(spaceId) === false) {
         continue;
-      };
+      }
 
       tile.onclick = () => this.onTileSelected(tile);
     }

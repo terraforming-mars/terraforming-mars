@@ -29,7 +29,7 @@ export class CardRenderProductionBox extends CardRenderer {
 }
 
 export class CardRenderTile {
-  constructor(public tile: TileType, public hasSymbol: boolean, public isAres: boolean) { };
+  constructor(public tile: TileType, public hasSymbol: boolean, public isAres: boolean) { }
 }
 
 export class CardRenderEffect extends CardRenderer {

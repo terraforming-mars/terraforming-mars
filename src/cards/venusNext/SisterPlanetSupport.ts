@@ -24,7 +24,7 @@ export class SisterPlanetSupport extends Card {
         description: 'Requires Venus and Earth tags. Increase your M€ production 3 steps.',
       },
     });
-  };
+  }
 
   public play(player: Player) {
     player.addProduction(Resources.MEGACREDITS, 3);

@@ -31,7 +31,7 @@ export class DarksideObservatory extends Card implements IProjectCard, IActionCa
         }),
       },
     });
-  };
+  }
 
   private include(card: ICard) {
     return card.resourceType === ResourceType.DATA || MoonCards.scienceCardsWithLessThan2VP.has(card.name);

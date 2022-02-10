@@ -458,7 +458,7 @@ export class Player implements ISerializable<SerializedPlayer> {
     if (this.isCorporation(CardName.MANUTECH)) {
       Manutech.onProductionGain(this, resource, amount);
     }
-  };
+  }
 
   // Returns true when the player has the supplied units in its inventory.
   public hasUnits(units: Units): boolean {
@@ -865,7 +865,7 @@ export class Player implements ISerializable<SerializedPlayer> {
       // Milestones don't count wild tags, so in this case one will be added.
       if (mode === 'award') {
         tagCount++;
-      };
+      }
       // Milestones count wild tags, so in this case one will be deducted.
       if (mode === 'milestone') {
         tagCount--;
@@ -1913,7 +1913,7 @@ export class Player implements ISerializable<SerializedPlayer> {
           return this.game.gameOptions.altVenusBoard === true;
         default:
           return true;
-        };
+        }
       })
       .sort((a, b) => a.cost - b.cost);
   }

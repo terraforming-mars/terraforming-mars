@@ -32,7 +32,7 @@ export class Solarpedia extends Card implements IProjectCard, IActionCard {
         description: 'Requires 1 Venus, Earth, Mars, and Jovian Tag. Add 2 data to any card. 1 VP for every 6 data resources here.',
       },
     });
-  };
+  }
 
   public override resourceCount = 0;
 

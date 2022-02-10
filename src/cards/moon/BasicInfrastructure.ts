@@ -20,7 +20,7 @@ export class BasicInfrastructure extends PreludeCard {
         }),
       },
     });
-  };
+  }
 
   public tilesBuilt = [TileType.MOON_ROAD];
 

@@ -258,7 +258,7 @@ describe('Board', function() {
   class TestBoard extends Board {
     public constructor(spaces: Array<ISpace>) {
       super(spaces);
-    };
+    }
 
     public getSpaceById(id: string): ISpace | undefined {
       return this.spaces.find((space) => space.id === id);
@@ -271,7 +271,7 @@ describe('Board', function() {
     public getNoctisCitySpaceIds(): Array<string> {
       return [];
     }
-  };
+  }
 
   it('deserialize', () => {
     const boardJson = {

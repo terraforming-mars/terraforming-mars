@@ -27,7 +27,7 @@ export class AnOfferYouCantRefuse extends ProjectCard {
         }),
       },
     });
-  };
+  }
 
   private isReplaceableDelegate(delegate: PlayerId | NeutralPlayer, player: Player, party: IParty) {
     return delegate !== player.id && delegate !== 'NEUTRAL' && delegate !== party.partyLeader;

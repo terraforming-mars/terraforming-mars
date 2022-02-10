@@ -275,7 +275,7 @@ export abstract class Colony implements SerializedColony {
       case ColonyBenefit.GAIN_TR:
         if (quantity > 0) {
           player.increaseTerraformRatingSteps(quantity, {log: true});
-        };
+        }
         break;
 
       case ColonyBenefit.GAIN_VP:

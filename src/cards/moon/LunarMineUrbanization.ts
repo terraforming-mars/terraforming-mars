@@ -36,7 +36,7 @@ export class LunarMineUrbanization extends Card implements IProjectCard {
         }),
       },
     });
-  };
+  }
 
   public play(player: Player) {
     player.addProduction(Resources.MEGACREDITS, 1);

@@ -25,7 +25,7 @@ export class GHGImportFromVenus extends Card {
         }),
       },
     });
-  };
+  }
 
   public play(player: Player) {
     player.addProduction(Resources.HEAT, 3);

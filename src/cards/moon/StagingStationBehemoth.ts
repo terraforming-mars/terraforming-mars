@@ -24,7 +24,7 @@ export class StagingStationBehemoth extends Card implements IProjectCard {
         }),
       },
     });
-  };
+  }
 
   public play(player: Player) {
     player.increaseFleetSize();

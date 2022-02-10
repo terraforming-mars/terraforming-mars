@@ -27,7 +27,7 @@ export class VenusSoils extends Card {
         description: 'Raise Venus 1 step. Increase your Plant production 1 step. Add 2 Microbes to ANOTHER card',
       },
     });
-  };
+  }
 
   public play(player: Player) {
     player.addProduction(Resources.PLANTS, 1);

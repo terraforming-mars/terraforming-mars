@@ -36,7 +36,7 @@ export class RotatorImpacts extends Card implements IActionCard, IResourceCard {
         description: 'Venus must be 14% or lower',
       },
     });
-  };
+  }
   public override resourceCount: number = 0;
 
   public play() {

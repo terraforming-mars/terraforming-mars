@@ -68,5 +68,5 @@ export namespace SelectHowToPayDeferred {
     canUseSeeds?: boolean,
     title?: string;
     afterPay?: () => void;
-  };
+  }
 }

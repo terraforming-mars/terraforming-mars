@@ -23,7 +23,7 @@ export class EarthEmbassy extends Card implements IProjectCard {
         }),
       },
     });
-  };
+  }
 
   // Behavior is baked into `Player.getTagCount`
   public play() {

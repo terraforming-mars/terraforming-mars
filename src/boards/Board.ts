@@ -25,7 +25,7 @@ export abstract class Board {
     spaces.forEach((space) => {
       this.adjacentSpaces.set(space.id, this.computeAdjacentSpaces(space));
     });
-  };
+  }
 
   public abstract getVolcanicSpaceIds(): Array<string>;
 
@@ -332,7 +332,7 @@ export abstract class Board {
 
 export function nextToNoOtherTileFn(board: Board): (space: ISpace) => boolean {
   return (space: ISpace) => board.getAdjacentSpaces(space).every((space) => space.tile === undefined);
-};
+}
 
 export function playerTileFn(player: Player) {
   return (space: ISpace) => space.player?.id === player.id;
@@ -351,4 +351,4 @@ export function isSpecialTile(space: ISpace): boolean {
   default:
     return true;
   }
-};
+}

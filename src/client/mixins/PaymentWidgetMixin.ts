@@ -162,7 +162,7 @@ export const PaymentWidgetMixin = {
       case 'seeds':
         amount = model.playerinput[target];
         break;
-      };
+      }
 
       if (amount === undefined) {
         return 0;

@@ -26,7 +26,7 @@ export class OrbitalReflectors extends Card {
         description: 'Raise Venus 2 steps. Increase your heat production 2 steps.',
       },
     });
-  };
+  }
 
   public play(player: Player) {
     player.game.increaseVenusScaleLevel(player, 2);

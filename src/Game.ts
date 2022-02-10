@@ -1085,7 +1085,7 @@ export class Game implements ISerializable<SerializedGame> {
       } else {
         this.donePlayers.add(player.id);
       }
-    };
+    }
     this.gotoEndGame();
   }
 

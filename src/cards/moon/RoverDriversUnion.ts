@@ -28,7 +28,7 @@ export class RoverDriversUnion extends Card implements IProjectCard {
         }),
       },
     });
-  };
+  }
 
   public play(player: Player) {
     MoonExpansion.ifMoon(player.game, (moonData) => {

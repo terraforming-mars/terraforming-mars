@@ -20,7 +20,7 @@ class TestSQLite extends SQLite {
   public override saveGame(game: Game): Promise<void> {
     this.saveGamePromise = super.saveGame(game);
     return this.saveGamePromise;
-  };
+  }
 
   public getSaveIds(gameId: GameId): Promise<Array<number>> {
     return new Promise((resolve, reject) => {

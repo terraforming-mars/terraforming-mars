@@ -28,7 +28,7 @@ export class LunaArchives extends Card implements IResourceCard, IActionCard {
         }),
       },
     });
-  };
+  }
 
   public override resourceCount = 0;
 

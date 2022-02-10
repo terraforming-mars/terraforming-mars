@@ -41,7 +41,7 @@ export class TerraformingRobots extends Card implements IProjectCard, IResourceC
     if (qty !== 0) {
       player.addResourceTo(this, {log: true, qty: qty});
     }
-  };
+  }
 
   public play() {
     return undefined;

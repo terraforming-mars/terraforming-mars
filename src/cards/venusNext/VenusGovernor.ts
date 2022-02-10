@@ -24,7 +24,7 @@ export class VenusGovernor extends Card {
         description: 'Requires 2 Venus tags. Increase your M€ production 2 steps.',
       },
     });
-  };
+  }
   public play(player: Player) {
     player.addProduction(Resources.MEGACREDITS, 2);
     return undefined;

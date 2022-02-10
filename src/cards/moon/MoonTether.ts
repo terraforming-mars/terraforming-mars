@@ -27,7 +27,7 @@ export class MoonTether extends Card implements IProjectCard {
         description: 'Requires 6 Space tags.',
       },
     });
-  };
+  }
 
   public play() {
     return undefined;

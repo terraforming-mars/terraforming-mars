@@ -23,6 +23,6 @@ export class AcquiredSpaceAgency extends PreludeCard {
     player.titanium += 6;
     player.drawCard(2, {tag: Tags.SPACE});
     return undefined;
-  };
+  }
 }
 

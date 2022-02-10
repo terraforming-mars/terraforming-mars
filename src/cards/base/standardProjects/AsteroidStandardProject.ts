@@ -23,7 +23,7 @@ export class AsteroidStandardProject extends StandardProjectCard {
   public override canAct(player: Player): boolean {
     if (player.game.getTemperature() === constants.MAX_TEMPERATURE) {
       return false;
-    };
+    }
     return player.canAfford(this.cost, {
       tr: {temperature: 1},
     });

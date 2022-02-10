@@ -34,7 +34,7 @@ export class ForcedPrecipitation extends Card implements IActionCard, IResourceC
         }),
       },
     });
-  };
+  }
   public override resourceCount: number = 0;
 
   public play() {
@@ -57,7 +57,7 @@ export class ForcedPrecipitation extends Card implements IActionCard, IResourceC
       opts.push(spendResource);
     } else {
       return this.addResource(player);
-    };
+    }
 
     if (player.canAfford(2)) {
       opts.push(addResource);

@@ -24,7 +24,7 @@ export namespace IMoonData {
       lunaFirstPlayerId: moonData.lunaFirstPlayer ? moonData.lunaFirstPlayer.id : undefined,
       lunaProjectOfficeLastGeneration: moonData.lunaProjectOfficeLastGeneration,
     };
-  };
+  }
 
   export function deserialize(moonData: SerializedMoonData, players: Array<Player>): IMoonData {
     const lunaFirstPlayer = players.find((p) => p.id === moonData.lunaFirstPlayerId);

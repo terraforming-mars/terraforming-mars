@@ -23,7 +23,7 @@ export class NewColonyPlanningInitiaitives extends Card {
         }),
       },
     });
-  };
+  }
 
   public play(player: Player) {
     MoonExpansion.raiseColonyRate(player);

@@ -24,7 +24,7 @@ export class LTFHeadquarters extends Card {
         }),
       },
     });
-  };
+  }
 
   public play(player: Player) {
     MoonExpansion.raiseColonyRate(player);

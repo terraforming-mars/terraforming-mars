@@ -26,7 +26,7 @@ export class CorroderSuits extends Card {
         }),
       },
     });
-  };
+  }
 
   public play(player: Player) {
     player.addProduction(Resources.MEGACREDITS, 2);

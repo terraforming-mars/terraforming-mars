@@ -17,7 +17,7 @@ export interface IHazardData {
     removeDustStormsOceanCount: IHazardConstraint,
     severeErosionTemperature: IHazardConstraint,
     severeDustStormOxygen: IHazardConstraint
-};
+}
 
 export interface IMilestoneCount {
     id: PlayerId;

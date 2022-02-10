@@ -32,7 +32,7 @@ export class LunaConference extends Card implements IProjectCard {
         }),
       },
     });
-  };
+  }
 
   public play(player: Player) {
     const moonRoadCount = MoonExpansion.spaces(player.game, TileType.MOON_ROAD, {surfaceOnly: true}).length;

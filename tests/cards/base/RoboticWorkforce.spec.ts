@@ -267,7 +267,7 @@ describe('RoboticWorkforce', () => {
           if (card.productionBox === undefined || isEmpty(card.productionBox)) {
             fail(card.name + ' should be registered for Robotic Workforce');
           }
-        };
+        }
       }
     };
   });

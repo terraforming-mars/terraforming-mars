@@ -100,7 +100,7 @@ export class CardRequirement {
     case RequirementType.TAG:
     case RequirementType.PARTY:
     case RequirementType.PRODUCTION:
-      throw `Use subclass satisfies() for requirement type ${this.type}`;
+      throw new Error(`Use subclass satisfies() for requirement type ${this.type}`);
     }
   }
 

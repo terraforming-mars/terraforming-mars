@@ -76,7 +76,7 @@ describe('GameLoader', function() {
   it('gets no game when fails to deserialize from database', function(done) {
     const originalDeserialize = Game.deserialize;
     Game.deserialize = function() {
-      throw 'could not parse this';
+      throw new Error('could not parse this');
     };
     GameLoader.getInstance().getByGameId('foobar', false, (game1) => {
       try {

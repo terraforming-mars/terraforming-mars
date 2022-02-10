@@ -117,7 +117,7 @@ export default Vue.extend({
           return space;
         }
       }
-      throw 'Board space not found by id \'' + spaceId + '\'';
+      throw new Error('Board space not found by id \'' + spaceId + '\'');
     },
     getValuesForParameter(targetParameter: string): Array<MoonParamLevel> {
       let curValue: number;
@@ -133,7 +133,7 @@ export default Vue.extend({
         curValue = this.model.colonyRate;
         break;
       default:
-        throw 'Wrong parameter to get values from';
+        throw new Error('Wrong parameter to get values from: ' + targetParameter);
       }
 
       const values: Array<MoonParamLevel> = [];

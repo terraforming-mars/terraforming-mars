@@ -109,7 +109,7 @@ export default Vue.component('player-input-factory', {
       case PlayerInputTypes.SHIFT_ARES_GLOBAL_PARAMETERS:
         return 'shift-ares-global-parameters';
       default:
-        throw 'Unsupported input type: ' + inputType;
+        throw new Error('Unsupported input type: ' + inputType);
       }
     },
   },

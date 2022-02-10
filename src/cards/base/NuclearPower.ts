@@ -34,9 +34,6 @@ export class NuclearPower extends Card implements IProjectCard {
     return player.getProduction(Resources.MEGACREDITS) >= -3;
   }
   public play(player: Player) {
-    if (player.getProduction(Resources.MEGACREDITS) < -3) {
-      throw 'Not enough M€ production';
-    }
     player.addProduction(Resources.MEGACREDITS, -2);
     player.addProduction(Resources.ENERGY, 3);
     return undefined;

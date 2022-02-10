@@ -26,9 +26,6 @@ export class GeneRepair extends Card implements IProjectCard {
     });
   }
   public play(player: Player) {
-    if (player.getTagCount(Tags.SCIENCE) < 3) {
-      throw 'Requires 3 science tags.';
-    }
     player.addProduction(Resources.MEGACREDITS, 2);
     return undefined;
   }

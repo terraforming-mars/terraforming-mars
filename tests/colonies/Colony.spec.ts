@@ -15,6 +15,13 @@ import {MAX_COLONY_TRACK_POSITION} from '../../src/constants';
 import {TestingUtils} from '../TestingUtils';
 import {TestPlayer} from '../TestPlayer';
 import {CardName} from '../../src/common/cards/CardName';
+import {Pallas} from '../../src/cards/community/Pallas';
+import {Io} from '../../src/colonies/Io';
+import {Europa} from '../../src/colonies/Europa';
+// TODO(kberg): bring serialization and deserialization into one place.
+import {serializeColonies} from '../../src/colonies/Colony';
+import {loadColoniesFromJSON} from '../../src/colonies/ColonyDealer';
+import {ColonyName} from '../../src/common/colonies/ColonyName';
 
 const gameOptions = TestingUtils.setCustomGameOptions({coloniesExtension: true});
 
@@ -338,5 +345,40 @@ describe('Colony', function() {
 
     luna.trade(player, {usesTradeFleet: true});
     expect(player.tradesThisGeneration).eq(3);
+  });
+
+  it('serializing and deserializing', () => {
+    const io = new Io();
+    io.isActive = true;
+    io.colonies = ['p1', 'p2', 'p3'];
+    io.trackPosition = 3;
+    io.visitor = 'p4';
+
+    const pallas = new Pallas();
+    pallas.isActive = true;
+
+    const europa = new Europa();
+    europa.isActive = false;
+
+    const json = serializeColonies([io, pallas, europa]);
+    const colonies = loadColoniesFromJSON(json);
+
+    expect(colonies[0].name).eq(ColonyName.IO);
+    expect(colonies[0].isActive).is.true;
+    expect(colonies[0].colonies).deep.eq(['p1', 'p2', 'p3']);
+    expect(colonies[0].trackPosition).eq(3);
+    expect(colonies[0].visitor).eq('p4');
+
+    expect(colonies[1].name).eq(ColonyName.PALLAS);
+    expect(colonies[1].isActive).is.true;
+    expect(colonies[1].colonies).is.empty;
+    expect(colonies[1].trackPosition).eq(1);
+    expect(colonies[1].visitor).is.undefined;
+
+    expect(colonies[2].name).eq(ColonyName.EUROPA);
+    expect(colonies[2].isActive).is.false;
+    expect(colonies[2].colonies).is.empty;
+    expect(colonies[2].trackPosition).eq(1);
+    expect(colonies[2].visitor).is.undefined;
   });
 });

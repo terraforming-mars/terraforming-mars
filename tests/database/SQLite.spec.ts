@@ -115,4 +115,16 @@ describe('SQLite', () => {
       expect(gameData?.playerCount).to.eq(1);
     });
   });
+
+  it('does not find cloneable game by id', async () => {
+    const player = TestPlayers.BLACK.newPlayer();
+    const game = Game.newInstance('game-id-1212', [player], player);
+    await db.saveGamePromise;
+    expect(game.lastSaveId).eq(1);
+
+    db.getClonableGameByGameId('notfound', (err, gameData) => {
+      expect(err).to.be.undefined;
+      expect(gameData).to.be.undefined;
+    });
+  });
 });

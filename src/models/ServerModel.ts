@@ -206,7 +206,7 @@ export class Server {
     if (player.corporationCard === undefined) return undefined;
     return {
       name: player.corporationCard.name,
-      resources: player.getResourcesOnCard(player.corporationCard),
+      resources: player.corporationCard.resourceCount,
       cardType: CardType.CORPORATION,
       isDisabled: player.corporationCard.isDisabled,
       warning: player.corporationCard.warning,
@@ -365,7 +365,7 @@ export class Server {
   } = {},
   ): Array<CardModel> {
     return cards.map((card, index) => ({
-      resources: options.showResources ? player.getResourcesOnCard(card) : undefined,
+      resources: options.showResources ? card.resourceCount : undefined,
       resourceType: card.resourceType,
       name: card.name,
       calculatedCost: options.showNewCost ? (card.cost === undefined ? undefined : player.getCardCost(card as IProjectCard)) : card.cost,

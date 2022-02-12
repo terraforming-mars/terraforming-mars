@@ -29,7 +29,7 @@ describe('Virus', function() {
     expect(orOptions instanceof OrOptions).is.true;
 
     orOptions.options[0].cb([player.playedCards[0]]);
-    expect(player.getResourcesOnCard(birds)).to.eq(0);
+    expect(birds.resourceCount).to.eq(0);
 
     orOptions.options[1].cb();
     expect(player.plants).to.eq(0);

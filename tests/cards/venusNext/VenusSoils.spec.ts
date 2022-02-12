@@ -23,7 +23,7 @@ describe('VenusSoils', function() {
     player.playedCards.push(card2);
     card.play(player);
 
-    expect(player.getResourcesOnCard(card2)).to.eq(2);
+    expect(card2.resourceCount).to.eq(2);
     expect(player.getProduction(Resources.PLANTS)).to.eq(1);
     expect(game.getVenusScaleLevel()).to.eq(2);
   });
@@ -37,7 +37,7 @@ describe('VenusSoils', function() {
     expect(action).instanceOf(SelectCard);
 
         action!.cb([card2]);
-        expect(player.getResourcesOnCard(card2)).to.eq(2);
+        expect(card2.resourceCount).to.eq(2);
         expect(player.getProduction(Resources.PLANTS)).to.eq(1);
         expect(game.getVenusScaleLevel()).to.eq(2);
   });

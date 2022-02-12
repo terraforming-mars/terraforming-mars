@@ -37,7 +37,7 @@ describe('ImportedNitrogen', function() {
 
     const addAnimals = game.deferredActions.pop()!.execute() as SelectCard<ICard>;
     addAnimals.cb([pets]);
-    expect(player.getResourcesOnCard(pets)).to.eq(2);
+    expect(pets.resourceCount).to.eq(2);
 
     expect(player.getTerraformRating()).to.eq(21);
     expect(player.plants).to.eq(4);
@@ -51,7 +51,7 @@ describe('ImportedNitrogen', function() {
 
     const addMicrobes = game.deferredActions.pop()!.execute() as SelectCard<ICard>;
     addMicrobes.cb([tardigrades]);
-    expect(player.getResourcesOnCard(tardigrades)).to.eq(3);
+    expect(tardigrades.resourceCount).to.eq(3);
 
     const addAnimals = game.deferredActions.pop()!.execute() as SelectCard<ICard>;
     expect(addAnimals).is.undefined;
@@ -70,11 +70,11 @@ describe('ImportedNitrogen', function() {
 
     const addMicrobes = game.deferredActions.pop()!.execute() as SelectCard<ICard>;
     addMicrobes.cb([tardigrades]);
-    expect(player.getResourcesOnCard(tardigrades)).to.eq(3);
+    expect(tardigrades.resourceCount).to.eq(3);
 
     const addAnimals = game.deferredActions.pop()!.execute() as SelectCard<ICard>;
     addAnimals.cb([pets]);
-    expect(player.getResourcesOnCard(pets)).to.eq(2);
+    expect(pets.resourceCount).to.eq(2);
 
     expect(player.getTerraformRating()).to.eq(21);
     expect(player.plants).to.eq(4);

@@ -25,7 +25,7 @@ export class ConstantStruggle extends GlobalEvent implements IGlobalEvent {
   }
 
   public resolve(game: Game, turmoil: Turmoil) {
-    game.getPlayers().forEach((player) => {
+    game.getPlayersInGenerationOrder().forEach((player) => {
       const influence = turmoil.getPlayerInfluence(player);
       const deducted = Math.max(10 - influence, 0);
       player.deductResource(Resources.MEGACREDITS, deducted, {log: true, from: this.name});

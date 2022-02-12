@@ -350,7 +350,7 @@ export class Game implements ISerializable<SerializedGame> {
     // Initialize each player:
     // Give them their corporation cards, other cards, starting production,
     // handicaps.
-    for (const player of game.getPlayers()) {
+    for (const player of game.getPlayersInGenerationOrder()) {
       player.setTerraformRating(player.getTerraformRating() + player.handicap);
       if (!gameOptions.corporateEra) {
         GameSetup.setStartingProductions(player);
@@ -610,7 +610,7 @@ export class Game implements ISerializable<SerializedGame> {
     player.pickedCorporationCard = corporationCard;
     // if all players picked corporationCard
     if (this.players.every((p) => p.pickedCorporationCard !== undefined)) {
-      for (const somePlayer of this.getPlayers()) {
+      for (const somePlayer of this.getPlayersInGenerationOrder()) {
         this.playCorporationCard(somePlayer, somePlayer.pickedCorporationCard!);
       }
     }
@@ -633,7 +633,7 @@ export class Game implements ISerializable<SerializedGame> {
     this.log('${0} played ${1}', (b) => b.player(player).card(corporationCard));
 
     // trigger other corp's effect, e.g. SaturnSystems,PharmacyUnion,Splice
-    for (const somePlayer of this.getPlayers()) {
+    for (const somePlayer of this.getPlayersInGenerationOrder()) {
       if (somePlayer !== player && somePlayer.corporationCard !== undefined && somePlayer.corporationCard.onCorpCardPlayed !== undefined) {
         this.defer(new DeferredAction(
           player,
@@ -1073,7 +1073,7 @@ export class Game implements ISerializable<SerializedGame> {
 
   public /* for testing */ gotoFinalGreeneryPlacement(): void {
     // this.getPlayers returns in turn order -- a necessary rule for final greenery placement.
-    for (const player of this.getPlayers()) {
+    for (const player of this.getPlayersInGenerationOrder()) {
       if (this.donePlayers.has(player.id)) {
         continue;
       }
@@ -1476,7 +1476,7 @@ export class Game implements ISerializable<SerializedGame> {
   }
 
   // Players returned in play order starting with first player this generation.
-  public getPlayers(): Array<Player> {
+  public getPlayersInGenerationOrder(): Array<Player> {
     // We always return them in turn order
     const ret: Array<Player> = [];
     let insertIdx: number = 0;
@@ -1529,7 +1529,7 @@ export class Game implements ISerializable<SerializedGame> {
   public someoneCanHaveProductionReduced(resource: Resources, minQuantity: number = 1): boolean {
     // in soloMode you don't have to decrease resources
     if (this.isSoloMode()) return true;
-    return this.getPlayers().some((p) => {
+    return this.getPlayersInGenerationOrder().some((p) => {
       if (p.getProduction(resource) < minQuantity) return false;
       // The pathfindersExpansion test is just an optimization for non-Pathfinders games.
       if (this.gameOptions.pathfindersExpansion && p.cardIsInEffect(CardName.PRIVATE_SECURITY)) return false;

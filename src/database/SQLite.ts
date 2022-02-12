@@ -209,7 +209,7 @@ export class SQLite implements IDatabase {
     // Insert
     await this.runQuietly(
       'INSERT INTO games (game_id, save_id, game, players) VALUES (?, ?, ?, ?) ON CONFLICT (game_id, save_id) DO UPDATE SET game = ?',
-      [game.id, game.lastSaveId, gameJSON, game.getPlayers().length, gameJSON]);
+      [game.id, game.lastSaveId, gameJSON, game.getPlayersInGenerationOrder().length, gameJSON]);
 
     // This must occur after the save.
     game.lastSaveId++;

@@ -104,7 +104,7 @@ export function getTurmoilModel(game: Game): TurmoilModel | undefined {
     };
 
     const policyActionUsers = Array.from(
-      game.getPlayers(),
+      game.getPlayersInGenerationOrder(),
       (player) => {
         return {
           color: player.color,

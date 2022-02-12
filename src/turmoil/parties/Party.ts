@@ -32,22 +32,22 @@ export abstract class Party {
         if (this.getDelegates(this.partyLeader) !== max) {
           let currentIndex = 0;
           if (this.partyLeader === 'NEUTRAL') {
-            currentIndex = game.getPlayers().indexOf(game.getPlayerById(game.activePlayer));
+            currentIndex = game.getPlayersInGenerationOrder().indexOf(game.getPlayerById(game.activePlayer));
           } else {
-            currentIndex = game.getPlayers().indexOf(game.getPlayerById(this.partyLeader));
+            currentIndex = game.getPlayersInGenerationOrder().indexOf(game.getPlayerById(this.partyLeader));
           }
 
           let playersToCheck: Array<Player | NeutralPlayer> = [];
 
           // Manage if it's the first player or the last
-          if (game.getPlayers().length === 1 || currentIndex === 0) {
-            playersToCheck = game.getPlayers();
-          } else if (currentIndex === game.getPlayers().length - 1) {
-            playersToCheck = game.getPlayers().slice(0, currentIndex);
-            playersToCheck.unshift(game.getPlayers()[currentIndex]);
+          if (game.getPlayersInGenerationOrder().length === 1 || currentIndex === 0) {
+            playersToCheck = game.getPlayersInGenerationOrder();
+          } else if (currentIndex === game.getPlayersInGenerationOrder().length - 1) {
+            playersToCheck = game.getPlayersInGenerationOrder().slice(0, currentIndex);
+            playersToCheck.unshift(game.getPlayersInGenerationOrder()[currentIndex]);
           } else {
-            const left = game.getPlayers().slice(0, currentIndex);
-            const right = game.getPlayers().slice(currentIndex);
+            const left = game.getPlayersInGenerationOrder().slice(0, currentIndex);
+            const right = game.getPlayersInGenerationOrder().slice(currentIndex);
             playersToCheck = right.concat(left);
           }
 

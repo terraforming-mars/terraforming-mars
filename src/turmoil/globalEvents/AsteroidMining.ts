@@ -25,7 +25,7 @@ export class AsteroidMining extends GlobalEvent implements IGlobalEvent {
     });
   }
   public resolve(game: Game, turmoil: Turmoil) {
-    game.getPlayers().forEach((player) => {
+    game.getPlayersInGenerationOrder().forEach((player) => {
       player.addResource(Resources.TITANIUM, Math.min(5, player.getTagCount(Tags.JOVIAN, 'raw')) + turmoil.getPlayerInfluence(player), {log: true, from: this.name});
     });
   }

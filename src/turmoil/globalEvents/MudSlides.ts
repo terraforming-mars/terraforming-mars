@@ -23,7 +23,7 @@ export class MudSlides extends GlobalEvent implements IGlobalEvent {
     });
   }
   public resolve(game: Game, turmoil: Turmoil) {
-    game.getPlayers().forEach((player) => {
+    game.getPlayersInGenerationOrder().forEach((player) => {
       const tiles = game.board.spaces.filter(Board.ownedBy(player))
         .filter((space) => space.tile !== undefined &&
           game.board.getAdjacentSpaces(space)

@@ -58,7 +58,7 @@ export class Aridor extends Card implements CorporationCard {
 
   private checkActivation(colony: Colony, game: Game): void {
     if (colony.resourceType === undefined) return;
-    game.getPlayers().forEach((player) => {
+    game.getPlayersInGenerationOrder().forEach((player) => {
       if (player.corporationCard !== undefined && player.corporationCard.resourceType === colony.resourceType) {
         colony.isActive = true;
         return;

@@ -118,7 +118,7 @@ describe('GameLoader', function() {
       }, asyncTestDelay);
     };
     (GameLoader.getInstance() as GameLoader).reset();
-    GameLoader.getInstance().getByPlayerId(game.getPlayers()[0].id, (game1) => {
+    GameLoader.getInstance().getByPlayerId(game.getPlayersInGenerationOrder()[0].id, (game1) => {
       try {
         expect(game1).is.not.undefined;
         done();
@@ -156,7 +156,7 @@ describe('GameLoader', function() {
   });
 
   it('gets player when it exists in database', function(done) {
-    const players = game.getPlayers();
+    const players = game.getPlayersInGenerationOrder();
     GameLoader.getInstance().getByPlayerId(players[Math.floor(Math.random() * players.length)].id, (game1) => {
       try {
         expect(game1!.id).to.eq(game.id);
@@ -183,7 +183,7 @@ describe('GameLoader', function() {
   });
 
   it('gets player when added and not in database', function(done) {
-    const players = game.getPlayers();
+    const players = game.getPlayersInGenerationOrder();
     GameLoader.getInstance().add(game);
     GameLoader.getInstance().getByPlayerId(players[Math.floor(Math.random() * players.length)]!.id, (game1) => {
       try {
@@ -272,7 +272,7 @@ describe('GameLoader', function() {
       try {
         expect(game1).is.not.undefined;
         expect(game1!.id).to.eq('foobar');
-        GameLoader.getInstance().getByPlayerId(game.getPlayers()[0].id, (game1) => {
+        GameLoader.getInstance().getByPlayerId(game.getPlayersInGenerationOrder()[0].id, (game1) => {
           try {
             expect(game1!.id).to.eq('foobar');
             done();

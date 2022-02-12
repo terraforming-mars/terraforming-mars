@@ -18,7 +18,7 @@ export class FakeGameLoader implements IGameLoader {
   }
   getByPlayerId(playerId: string, cb: (game: Game | undefined) => void): void {
     for (const game of Array.from(this.games.values())) {
-      for (const player of game.getPlayers()) {
+      for (const player of game.getPlayersInGenerationOrder()) {
         if (player.id === playerId) {
           cb(game);
           return;

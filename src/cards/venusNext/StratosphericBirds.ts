@@ -48,7 +48,7 @@ export class StratosphericBirds extends Card implements IActionCard, IResourceCa
       const floaterCard = cardsWithFloater[0];
       if (floaterCard.name !== CardName.DIRIGIBLES) return true;
 
-      const canPayForFloater = ((floaterCard.resourceCount! - 1) * 3 + player.megaCredits) >= player.getCardCost(this);
+      const canPayForFloater = ((floaterCard.resourceCount - 1) * 3 + player.megaCredits) >= player.getCardCost(this);
       return canPayForFloater;
     }
   }

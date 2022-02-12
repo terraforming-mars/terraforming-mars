@@ -42,6 +42,7 @@ describe('CommunicationCenter', function() {
   });
 
   it('onCardPlayed', () => {
+    player.playedCards = [card];
     expect(card.resourceCount).eq(0);
 
     player.onCardPlayed(TestingUtils.fakeCard({cardType: CardType.ACTIVE}));
@@ -70,6 +71,7 @@ describe('CommunicationCenter', function() {
   });
 
   it('card.addResourceTo', () => {
+    player.playedCards = [card];
     card.resourceCount = 2;
     expect(player.cardsInHand).is.length(0);
     player.addResourceTo(card, 8);

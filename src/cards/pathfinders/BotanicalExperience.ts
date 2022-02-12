@@ -11,7 +11,8 @@ import {Size} from '../render/Size';
 import {ISpace} from '../../boards/ISpace';
 import {Board} from '../../boards/Board';
 import {ResourceType} from '../../common/ResourceType';
-import {IResourceCard} from '../ICard';
+import {ICard, IResourceCard} from '../ICard';
+import {Resources} from '../../common/Resources';
 
 export class BotanicalExperience extends Card implements IProjectCard, IResourceCard {
   constructor() {
@@ -49,5 +50,17 @@ export class BotanicalExperience extends Card implements IProjectCard, IResource
 
   public play() {
     return undefined;
+  }
+
+  public onResourceAdded(player: Player, playedCard: ICard) {
+    if (playedCard.name !== this.name) return;
+    if (this.resourceCount >= 3) {
+      const delta = Math.floor(this.resourceCount / 3);
+      const deducted = delta * 3;
+      this.resourceCount -= deducted;
+      player.addProduction(Resources.PLANTS, delta, {log: false});
+      player.game.log('${0} removed ${1} data from ${2} to increase plant production ${3} steps.',
+        (b) => b.player(player).number(deducted).card(this).number(delta));
+    }
   }
 }

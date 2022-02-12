@@ -158,7 +158,7 @@ export class TagCardRequirement extends CardRequirement {
     let tagCount = player.getTagCount(this.tag, mode);
 
     if (this.isAny) {
-      player.game.getPlayers().forEach((p) => {
+      player.game.getPlayersInGenerationOrder().forEach((p) => {
         if (p.id !== player.id) {
           // Don't include opponents' wild tags because they are not performing the action.
           tagCount += p.getTagCount(this.tag, 'raw');

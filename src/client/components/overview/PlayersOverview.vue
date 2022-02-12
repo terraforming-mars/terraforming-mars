@@ -123,9 +123,9 @@ export default Vue.extend({
 <template>
         <div class="players-overview" v-if="hasPlayers()">
             <overview-settings />
-            <div class="other_player" v-if="players.length > 1">
+            <div class="other_player" v-if="thisPlayer === undefined || players.length > 1">
                 <div v-for="(otherPlayer, index) in getPlayersInOrder()" :key="otherPlayer.id">
-                    <other-player v-if="thisPlayer !== undefined && otherPlayer.id !== thisPlayer.id" :player="otherPlayer" :playerIndex="index"/>
+                    <other-player v-if="thisPlayer === undefined || otherPlayer.id !== thisPlayer.id" :player="otherPlayer" :playerIndex="index"/>
                 </div>
             </div>
             <player-info v-for="(p, index) in getPlayersInOrder()"

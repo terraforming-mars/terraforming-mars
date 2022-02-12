@@ -27,7 +27,7 @@ class KelvinistsBonus01 implements Bonus {
   }
 
   grant(game: Game) {
-    game.getPlayers().forEach((player) => {
+    game.getPlayersInGenerationOrder().forEach((player) => {
       player.addResource(Resources.MEGACREDITS, this.getScore(player));
     });
   }
@@ -43,7 +43,7 @@ class KelvinistsBonus02 implements Bonus {
   }
 
   grant(game: Game) {
-    game.getPlayers().forEach((player) => {
+    game.getPlayersInGenerationOrder().forEach((player) => {
       player.addResource(Resources.HEAT, this.getScore(player));
     });
   }

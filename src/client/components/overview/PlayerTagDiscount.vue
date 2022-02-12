@@ -1,7 +1,7 @@
 <template>
   <div class="player-tag-discount">
     <div class="megacredits-container">
-      <div class="megacredits">{{ getAmount() }}</div>
+      <div class="megacredits">-{{ amount }}</div>
     </div>
   </div>
 </template>
@@ -14,11 +14,6 @@ export default Vue.extend({
   props: {
     amount: {
       type: Number,
-    },
-  },
-  methods: {
-    getAmount(): number {
-      return this.amount * -1;
     },
   },
 });

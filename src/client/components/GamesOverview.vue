@@ -8,8 +8,9 @@
                     with {{game.players.length}} player(s) :
                     <span class="player_home_block nofloat" >
                         <span v-for="player in game.players" class="player_name" :class="'player_bg_color_'+ player.color" :key="player.color">
-                            <a :href="'/player?id=' + player.id">{{player.name}}</a>
+                            <a target="blank" :href="'/player?id=' + player.id">{{player.name}}</a>
                         </span>
+                        <a target="blank" :href="'/spectator?id=' + game.spectatorId">Spectator</a>
                         <span v-if="isGameRunning(game.phase)">is running</span><span v-else>has ended</span>
                     </span>
                 </li>

@@ -34,7 +34,7 @@ class UnityBonus01 implements Bonus {
   }
 
   grant(game: Game) {
-    game.getPlayers().forEach((player) => {
+    game.getPlayersInGenerationOrder().forEach((player) => {
       player.addResource(Resources.MEGACREDITS, this.getScore(player));
     });
   }
@@ -50,7 +50,7 @@ class UnityBonus02 implements Bonus {
   }
 
   grant(game: Game) {
-    game.getPlayers().forEach((player) => {
+    game.getPlayersInGenerationOrder().forEach((player) => {
       player.addResource(Resources.MEGACREDITS, this.getScore(player));
     });
   }

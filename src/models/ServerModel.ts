@@ -53,7 +53,7 @@ export class Server {
       activePlayer: game.getPlayerById(game.activePlayer).color,
       id: game.id,
       phase: game.phase,
-      players: game.getPlayers().map((player) => ({
+      players: game.getPlayersInGenerationOrder().map((player) => ({
         color: player.color,
         id: player.id,
         name: player.name,
@@ -98,7 +98,7 @@ export class Server {
   public static getPlayerModel(player: Player): PlayerViewModel {
     const game = player.game;
 
-    const players: Array<PublicPlayerModel> = game.getPlayers().map(this.getPlayer);
+    const players: Array<PublicPlayerModel> = game.getPlayersInGenerationOrder().map(this.getPlayer);
     const thisPlayerIndex: number = players.findIndex((p) => p.color === player.color);
     const thisPlayer: PublicPlayerModel = players[thisPlayerIndex];
 
@@ -123,7 +123,7 @@ export class Server {
       color: Color.NEUTRAL,
       id: game.spectatorId ?? '',
       game: this.getGameModel(game),
-      players: game.getPlayers().map(this.getPlayer),
+      players: game.getPlayersInGenerationOrder().map(this.getPlayer),
       thisPlayer: undefined,
     };
   }
@@ -151,7 +151,7 @@ export class Server {
       );
       const scores: Array<IMilestoneScore> = [];
       if (claimed === undefined && claimedMilestones.length < 3) {
-        game.getPlayers().forEach((player) => {
+        game.getPlayersInGenerationOrder().forEach((player) => {
           scores.push({
             playerColor: player.color,
             playerScore: milestone.getScore(player),
@@ -182,7 +182,7 @@ export class Server {
       );
       const scores: Array<IAwardScore> = [];
       if (fundedAwards.length < 3 || funded !== undefined) {
-        game.getPlayers().forEach((player) => {
+        game.getPlayersInGenerationOrder().forEach((player) => {
           scores.push({
             playerColor: player.color,
             playerScore: award.getScore(player),

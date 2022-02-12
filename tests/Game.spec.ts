@@ -335,7 +335,7 @@ describe('Game', () => {
     const player4 = new Player('p4', Color.RED, false, 0, 'p4-id');
     const game = Game.newInstance('gto', [player1, player2, player3, player4], player3);
 
-    game.getPlayers().forEach((p) => {
+    game.getPlayersInGenerationOrder().forEach((p) => {
       (p as any).waitingFor = undefined;
       p.plants = 8;
     });
@@ -388,7 +388,7 @@ describe('Game', () => {
     const game = Game.newInstance('gto', [player1, player2, player3, player4], player2);
     (game as any).incrementFirstPlayer();
 
-    game.getPlayers().forEach((p) => {
+    game.getPlayersInGenerationOrder().forEach((p) => {
       (p as any).waitingFor = undefined;
     });
 
@@ -428,7 +428,7 @@ describe('Game', () => {
     const player4 = new Player('p4', Color.RED, false, 0, 'p4-id');
     const game = Game.newInstance('gto', [player1, player2, player3, player4], player3);
 
-    let players = game.getPlayers();
+    let players = game.getPlayersInGenerationOrder();
     expect(players[0].name).to.eq('p3');
     expect(players[1].name).to.eq('p4');
     expect(players[2].name).to.eq('p1');
@@ -436,14 +436,14 @@ describe('Game', () => {
 
 
     (game as any).incrementFirstPlayer();
-    players = game.getPlayers();
+    players = game.getPlayersInGenerationOrder();
     expect(players[0].name).to.eq('p4');
     expect(players[1].name).to.eq('p1');
     expect(players[2].name).to.eq('p2');
     expect(players[3].name).to.eq('p3');
 
     (game as any).incrementFirstPlayer();
-    players = game.getPlayers();
+    players = game.getPlayersInGenerationOrder();
     expect(players[0].name).to.eq('p1');
     expect(players[1].name).to.eq('p2');
     expect(players[2].name).to.eq('p3');

@@ -77,7 +77,7 @@ export class RemoveResourcesFromCard implements DeferredAction {
       }
     } else {
       resourceCards = [];
-      player.game.getPlayers().forEach((p) => {
+      player.game.getPlayersInGenerationOrder().forEach((p) => {
         switch (resourceType) {
         case ResourceType.ANIMAL:
           if (p.hasProtectedHabitats() && player.id !== p.id) return;

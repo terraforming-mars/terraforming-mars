@@ -76,7 +76,7 @@ export class Turmoil implements ISerializable<SerializedTurmoil> {
     // Init parties
     turmoil.parties = ALL_PARTIES.map((cf) => new cf.Factory());
 
-    game.getPlayers().forEach((player) => {
+    game.getPlayersInGenerationOrder().forEach((player) => {
       // Begin with one delegate in the lobby
       turmoil.lobby.add(player.id);
       // Begin with six delegates in the delegate reserve
@@ -242,7 +242,7 @@ export class Turmoil implements ISerializable<SerializedTurmoil> {
   // Launch the turmoil phase
   public endGeneration(game: Game): void {
     // 1 - All player lose 1 TR
-    game.getPlayers().forEach((player) => {
+    game.getPlayersInGenerationOrder().forEach((player) => {
       player.decreaseTerraformRating();
     });
 
@@ -270,7 +270,7 @@ export class Turmoil implements ISerializable<SerializedTurmoil> {
     });
     this.lobby = new Set<string>();
 
-    game.getPlayers().forEach((player) => {
+    game.getPlayersInGenerationOrder().forEach((player) => {
       if (this.hasDelegatesInReserve(player.id)) {
         const index = this.delegateReserve.indexOf(player.id);
         if (index > -1) {
@@ -303,7 +303,7 @@ export class Turmoil implements ISerializable<SerializedTurmoil> {
   public setRulingParty(game: Game): void {
     if (this.rulingParty !== undefined) {
       // Cleanup previous party effects
-      game.getPlayers().forEach((player) => player.hasTurmoilScienceTagBonus = false);
+      game.getPlayersInGenerationOrder().forEach((player) => player.hasTurmoilScienceTagBonus = false);
 
       // Change the chairman
       if (this.chairman) {

@@ -23,7 +23,7 @@ export class SolarnetShutdown extends GlobalEvent implements IGlobalEvent {
     });
   }
   public resolve(game: Game, turmoil: Turmoil) {
-    game.getPlayers().forEach((player) => {
+    game.getPlayersInGenerationOrder().forEach((player) => {
       const amount = Math.min(5, player.playedCards.filter((card) => card.cardType === CardType.ACTIVE).length) - turmoil.getPlayerInfluence(player);
       if (amount > 0) {
         player.addResource(Resources.MEGACREDITS, amount * -3, {log: true, from: this.name});

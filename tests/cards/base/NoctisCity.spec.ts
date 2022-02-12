@@ -26,7 +26,7 @@ describe('NoctisCity', function() {
   it('All land spaces are available on Hellas', function() {
     // With two players, there's no solo setup, so all spaces will be available.
     const game = newTestGame(2, {boardName: BoardName.HELLAS});
-    const player = game.getPlayers()[0];
+    const player = game.getPlayersInGenerationOrder()[0];
 
     const action = card.play(player);
     expect(action!.availableSpaces).deep.eq(game.board.getAvailableSpacesForCity(player));

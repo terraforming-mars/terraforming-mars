@@ -28,7 +28,7 @@ export class GalileanWaystation extends Card implements IProjectCard {
   }
 
   public play(player: Player) {
-    const amount = player.game.getPlayers()
+    const amount = player.game.getPlayersInGenerationOrder()
       .map((aplayer) => aplayer.getTagCount(Tags.JOVIAN, player.id === aplayer.id ? 'default' : 'raw'))
       .reduce((a, c) => a + c, 0);
     player.addProduction(Resources.MEGACREDITS, amount, {log: true});

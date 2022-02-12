@@ -27,7 +27,7 @@ class RedsBonus01 implements Bonus {
 
   getScore(player: Player) {
     const game = player.game;
-    const players = game.getPlayers();
+    const players = game.getPlayersInGenerationOrder();
 
     if (game.isSoloMode() && players[0].getTerraformRating() <= 20) return 1;
 
@@ -39,7 +39,7 @@ class RedsBonus01 implements Bonus {
   }
 
   grant(game: Game) {
-    const players = game.getPlayers();
+    const players = game.getPlayersInGenerationOrder();
     const scores = players.map((player) => this.getScore(player));
 
     players.forEach((player, idx) => {
@@ -55,7 +55,7 @@ class RedsBonus02 implements Bonus {
 
   getScore(player: Player) {
     const game = player.game;
-    const players = game.getPlayers();
+    const players = game.getPlayersInGenerationOrder();
 
     if (game.isSoloMode() && players[0].getTerraformRating() > 20) return -1;
 
@@ -67,7 +67,7 @@ class RedsBonus02 implements Bonus {
   }
 
   grant(game: Game) {
-    const players = game.getPlayers();
+    const players = game.getPlayersInGenerationOrder();
     const scores = players.map((player) => this.getScore(player));
 
     players.forEach((player, idx) => {

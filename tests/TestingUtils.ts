@@ -105,7 +105,7 @@ export class TestingUtils {
 
   public static forceGenerationEnd(game: Game) {
     while (game.deferredActions.pop() !== undefined) {}
-    game.getPlayers().forEach((player) => player.pass());
+    game.getPlayersInGenerationOrder().forEach((player) => player.pass());
     game.playerIsFinishedTakingActions();
   }
 

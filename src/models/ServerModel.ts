@@ -204,13 +204,14 @@ export class Server {
 
   public static getCorporationCard(player: Player): CardModel | undefined {
     if (player.corporationCard === undefined) return undefined;
+    const card = player.corporationCard;
     return {
-      name: player.corporationCard.name,
-      resources: player.getResourcesOnCard(player.corporationCard),
+      name: card.name,
+      resources: player.getResourcesOnCard(card),
       cardType: CardType.CORPORATION,
-      isDisabled: player.corporationCard.isDisabled,
-      warning: player.corporationCard.warning,
-      discount: player.corporationCard.cardDiscount,
+      isDisabled: card.isDisabled,
+      warning: card.warning,
+      discount: card.cardDiscount === undefined ? undefined : (Array.isArray(card.cardDiscount) ? card.cardDiscount : [card.cardDiscount]),
     } as CardModel;
   }
 
@@ -374,7 +375,7 @@ export class Server {
       warning: card.warning,
       reserveUnits: options.reserveUnits ? options.reserveUnits[index] : Units.EMPTY,
       bonusResource: (card as IProjectCard).bonusResource,
-      discount: card.cardDiscount,
+      discount: card.cardDiscount === undefined ? undefined : (Array.isArray(card.cardDiscount) ? card.cardDiscount : [card.cardDiscount]),
       cloneTag: isICloneTagCard(card) ? card.cloneTag : undefined,
     }));
   }

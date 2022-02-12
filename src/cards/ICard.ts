@@ -73,7 +73,7 @@ export interface ICard extends Partial<IActionCard>, IResourceCard {
     tags: Array<Tags>;
     play: (player: Player) => PlayerInput | undefined;
     getCardDiscount?: (player: Player, card: IProjectCard) => number;
-    cardDiscount?: CardDiscount;
+    cardDiscount?: CardDiscount | Array<CardDiscount>;
     // parameter is a Morningstar Inc. special case.
     getRequirementBonus?: (player: Player, parameter: GlobalParameter) => number;
     victoryPoints?: number | 'special' | VictoryPoints,

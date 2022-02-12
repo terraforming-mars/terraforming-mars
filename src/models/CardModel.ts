@@ -12,7 +12,7 @@ export interface CardModel {
     resources: number | undefined;
     resourceType: ResourceType | undefined;
     calculatedCost?: number;
-    discount?: CardDiscount,
+    discount?: Array<CardDiscount>,
     cardType: CardType;
     isDisabled: boolean;
     warning?: string | Message;

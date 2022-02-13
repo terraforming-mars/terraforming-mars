@@ -12,7 +12,7 @@ import {LogMessage} from './common/logs/LogMessage';
 import {TileType} from './common/TileType';
 import {SpaceBonus} from './common/boards/SpaceBonus';
 import {IGlobalEvent} from './turmoil/globalEvents/IGlobalEvent';
-import {GlobalEventName} from './turmoil/globalEvents/GlobalEventName';
+import {GlobalEventName} from './common/turmoil/globalEvents/GlobalEventName';
 import {PartyName} from './common/turmoil/PartyName';
 
 export class LogBuilder {

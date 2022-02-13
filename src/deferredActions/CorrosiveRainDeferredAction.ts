@@ -6,7 +6,7 @@ import {Resources} from '../common/Resources';
 import {ResourceType} from '../common/ResourceType';
 import {SelectOption} from '../inputs/SelectOption';
 import {DeferredAction, Priority} from './DeferredAction';
-import {GlobalEventName} from '../turmoil/globalEvents/GlobalEventName';
+import {GlobalEventName} from '../common/turmoil/globalEvents/GlobalEventName';
 
 export class CorrosiveRainDeferredAction implements DeferredAction {
   public priority = Priority.DEFAULT;

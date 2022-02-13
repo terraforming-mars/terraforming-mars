@@ -1,18 +1,18 @@
-import {Message} from '../common/logs/Message';
-import {CardType} from '../common/cards/CardType';
-import {ResourceType} from '../common/ResourceType';
-import {Units} from '../common/Units';
-import {CardName} from '../common/cards/CardName';
-import {Resources} from '../common/Resources';
-import {CardDiscount} from '../cards/ICard';
-import {Tags} from '../common/cards/Tags';
+import {Message} from '../logs/Message';
+import {CardType} from '../cards/CardType';
+import {ResourceType} from '../ResourceType';
+import {Units} from '../Units';
+import {CardName} from '../cards/CardName';
+import {Resources} from '../Resources';
+import {ICardDiscount} from '../cards/Types';
+import {Tags} from '../cards/Tags';
 
 export interface CardModel {
     name: CardName;
     resources: number | undefined;
     resourceType: ResourceType | undefined;
     calculatedCost?: number;
-    discount?: CardDiscount,
+    discount?: ICardDiscount,
     cardType: CardType;
     isDisabled: boolean;
     warning?: string | Message;

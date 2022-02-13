@@ -1,6 +1,6 @@
 
 import {IGlobalEvent, GlobalEvent} from './IGlobalEvent';
-import {GlobalEventName} from './GlobalEventName';
+import {GlobalEventName} from '../../common/turmoil/globalEvents/GlobalEventName';
 import {PartyName} from '../../common/turmoil/PartyName';
 import {Game} from '../../Game';
 import {Resources} from '../../common/Resources';

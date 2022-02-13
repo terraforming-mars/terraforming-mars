@@ -62,7 +62,7 @@ import {ConvertHeat} from './cards/base/standardActions/ConvertHeat';
 import {Manutech} from './cards/venusNext/Manutech';
 import {LunaProjectOffice} from './cards/moon/LunaProjectOffice';
 import {GlobalParameter} from './common/GlobalParameter';
-import {GlobalEventName} from './turmoil/globalEvents/GlobalEventName';
+import {GlobalEventName} from './common/turmoil/globalEvents/GlobalEventName';
 import {LogHelper} from './LogHelper';
 import {UndoActionOption} from './inputs/UndoActionOption';
 import {LawSuit} from './cards/promo/LawSuit';

@@ -1,4 +1,4 @@
-import {GlobalEventName} from './GlobalEventName';
+import {GlobalEventName} from '../../common/turmoil/globalEvents/GlobalEventName';
 import {IGlobalEvent} from './IGlobalEvent';
 import {GlobalDustStorm} from './GlobalDustStorm';
 import {SponsoredProjects} from './SponsoredProjects';

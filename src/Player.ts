@@ -674,10 +674,6 @@ export class Player implements ISerializable<SerializedPlayer> {
     return count;
   }
 
-  public getResourcesOnCard(card: ICard): number | undefined {
-    return card.resourceCount;
-  }
-
   public getResourcesOnCorporation():number {
     if (this.corporationCard !== undefined &&
       this.corporationCard.resourceCount !== undefined) {
@@ -800,7 +796,7 @@ export class Player implements ISerializable<SerializedPlayer> {
   public getResourceCount(resource: ResourceType): number {
     let count: number = 0;
     this.getCardsWithResources(resource).forEach((card) => {
-      count += (this.getResourcesOnCard(card) ?? 0);
+      count += card.resourceCount;
     });
     return count;
   }
@@ -1482,23 +1478,17 @@ export class Player implements ISerializable<SerializedPlayer> {
 
   public getMicrobesCanSpend(): number {
     const psychrophiles = this.playedCards.find((card) => card.name === CardName.PSYCHROPHILES);
-    return psychrophiles !== undefined ?
-      this.getResourcesOnCard(psychrophiles) ?? 0 :
-      0;
+    return psychrophiles?.resourceCount ?? 0;
   }
 
   public getFloatersCanSpend(): number {
     const dirigibles = this.playedCards.find((card) => card.name === CardName.DIRIGIBLES);
-    return dirigibles !== undefined ?
-      this.getResourcesOnCard(dirigibles) ?? 0 :
-      0;
+    return dirigibles?.resourceCount ?? 0;
   }
 
   public getSpendableScienceResources(): number {
     const lunaArchives = this.playedCards.find((card) => card.name === CardName.LUNA_ARCHIVES);
-    return lunaArchives !== undefined ?
-      this.getResourcesOnCard(lunaArchives) ?? 0 :
-      0;
+    return lunaArchives?.resourceCount ?? 0;
   }
 
   public getSpendableSeedResources(): number {

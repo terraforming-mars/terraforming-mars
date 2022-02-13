@@ -58,7 +58,7 @@ describe('MaxwellBase', function() {
     player.playedCards.push(card3);
     expect(card.canAct(player)).is.true;
     card.action(player);
-    expect(player.getResourcesOnCard(card3)).to.eq(1);
+    expect(card3.resourceCount).to.eq(1);
   });
 
   it('Should act - multiple targets', function() {
@@ -70,7 +70,7 @@ describe('MaxwellBase', function() {
     const action = card.action(player);
     expect(action).instanceOf(SelectCard);
     (action as SelectCard<ICard>).cb([card2]);
-    expect(player.getResourcesOnCard(card2)).to.eq(1);
+    expect(card2.resourceCount).to.eq(1);
   });
 
   // This may seem like a weird test, but it's just verifying that a change

@@ -36,7 +36,7 @@ describe('AerobrakedAmmoniaAsteroid', function() {
     card.play(player);
     expect(player.getProduction(Resources.HEAT)).to.eq(3);
     expect(player.getProduction(Resources.PLANTS)).to.eq(1);
-    expect(player.getResourcesOnCard(selectedCard)).to.eq(2);
+    expect(selectedCard.resourceCount).to.eq(2);
   });
 
   it('Adds microbes to another card', function() {
@@ -54,6 +54,6 @@ describe('AerobrakedAmmoniaAsteroid', function() {
     expect(action).is.not.undefined;
         action!.cb([selectedCard]);
 
-        expect(player.getResourcesOnCard(selectedCard)).to.eq(2);
+        expect(selectedCard.resourceCount).to.eq(2);
   });
 });

@@ -216,7 +216,7 @@ export default Vue.extend({
     },
     canUseMicrobes() {
       // FYI Microbes are limited to the Psychrophiles card, which allows spending microbes for Plant cards.
-      if (this.card !== undefined && this.playerinput.microbes !== undefined && this.playerinput.microbes > 0) {
+      if (this.card !== undefined && (this.playerinput.microbes ?? 0) > 0) {
         if (this.tags.includes(Tags.PLANT)) {
           return true;
         }
@@ -225,7 +225,7 @@ export default Vue.extend({
     },
     canUseFloaters() {
       // FYI Floaters are limited to the DIRIGIBLES card.
-      if (this.card !== undefined && this.playerinput.floaters !== undefined && this.playerinput.floaters > 0) {
+      if (this.card !== undefined && (this.playerinput.floaters ?? 0) > 0) {
         if (this.tags.includes(Tags.VENUS)) {
           return true;
         }

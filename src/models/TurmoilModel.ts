@@ -2,10 +2,10 @@ import {Color} from '../common/Color';
 import {PartyName} from '../common/turmoil/PartyName';
 import {GlobalEventName} from '../turmoil/globalEvents/GlobalEventName';
 import {Game} from '../Game';
-import {Agenda, PoliticalAgendas} from '../turmoil/PoliticalAgendas';
+import {PoliticalAgendas} from '../turmoil/PoliticalAgendas';
 import {IGlobalEvent} from '../turmoil/globalEvents/IGlobalEvent';
 import {Turmoil} from '../turmoil/Turmoil';
-
+import {Agenda} from '../common/turmoil/Types';
 export interface TurmoilModel {
   dominant: PartyName | undefined;
   ruling: PartyName | undefined;

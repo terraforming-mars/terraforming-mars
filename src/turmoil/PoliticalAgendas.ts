@@ -5,12 +5,7 @@ import {IParty} from './parties/IParty';
 import {PartyName} from '../common/turmoil/PartyName';
 import {Policy, PolicyId} from './Policy';
 import {Turmoil} from './Turmoil';
-
-export enum AgendaStyle {
-  STANDARD = 'Standard',
-  RANDOM = 'Random',
-  CHAIRMAN = 'Chairman',
-}
+import {AgendaStyle} from '../common/turmoil/Types';
 
 export interface Agenda {
   bonusId: BonusId;

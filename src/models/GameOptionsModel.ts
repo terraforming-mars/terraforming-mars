@@ -1,6 +1,6 @@
 import {BoardName} from '../common/boards/BoardName';
-import {RandomMAOptionType} from '../RandomMAOptionType';
-import {AgendaStyle} from '../turmoil/PoliticalAgendas';
+import {RandomMAOptionType} from '../common/ma/RandomMAOptionType';
+import {AgendaStyle} from '../common/turmoil/Types';
 import {CardName} from '../common/cards/CardName';
 
 export interface GameOptionsModel {

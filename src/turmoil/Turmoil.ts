@@ -14,7 +14,8 @@ import {IGlobalEvent} from './globalEvents/IGlobalEvent';
 import {ISerializable} from '../ISerializable';
 import {SerializedTurmoil} from './SerializedTurmoil';
 import {PLAYER_DELEGATES_COUNT} from '../constants';
-import {AgendaStyle, PoliticalAgendasData, PoliticalAgendas} from './PoliticalAgendas';
+import {PoliticalAgendasData, PoliticalAgendas} from './PoliticalAgendas';
+import {AgendaStyle} from '../common/turmoil/Types';
 import {CardName} from '../common/cards/CardName';
 import {DeferredAction} from '../deferredActions/DeferredAction';
 

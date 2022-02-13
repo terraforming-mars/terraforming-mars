@@ -452,9 +452,9 @@ import {ColonyName} from '@/common/colonies/ColonyName';
 import CardsFilter from '@/client/components/create/CardsFilter.vue';
 import Button from '@/client/components/common/Button.vue';
 import {playerColorClass} from '@/common/utils/utils';
-import {RandomMAOptionType} from '@/RandomMAOptionType';
+import {RandomMAOptionType} from '@/common/ma/RandomMAOptionType';
 import {GameId} from '@/common/Types';
-import {AgendaStyle} from '@/turmoil/PoliticalAgendas';
+import {AgendaStyle} from '@/common/turmoil/Types';
 
 import * as constants from '@/constants';
 

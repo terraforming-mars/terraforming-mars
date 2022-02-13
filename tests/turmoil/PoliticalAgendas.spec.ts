@@ -4,7 +4,8 @@ import {PartyName} from '../../src/common/turmoil/PartyName';
 import {Game} from '../../src/Game';
 import {TestingUtils} from '../TestingUtils';
 import {TestPlayers} from '../TestPlayers';
-import {AgendaStyle, PoliticalAgendas} from '../../src/turmoil/PoliticalAgendas';
+import {PoliticalAgendas} from '../../src/turmoil/PoliticalAgendas';
+import {AgendaStyle} from '../../src/common/turmoil/Types';
 import {OrOptions} from '../../src/inputs/OrOptions';
 
 describe('PoliticalAgendas', function() {

@@ -24,7 +24,7 @@ import {Helion} from '../src/cards/corporation/Helion';
 import {CardName} from '../src/common/cards/CardName';
 import {Player} from '../src/Player';
 import {Color} from '../src/common/Color';
-import {RandomMAOptionType} from '../src/RandomMAOptionType';
+import {RandomMAOptionType} from '../src/common/ma/RandomMAOptionType';
 import {SpaceBonus} from '../src/common/boards/SpaceBonus';
 import {TileType} from '../src/common/TileType';
 

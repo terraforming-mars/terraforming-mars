@@ -19,7 +19,7 @@ import {PlayerInputModel} from '@/models/PlayerInputModel';
 import {ViewModel, PublicPlayerModel} from '@/models/PlayerModel';
 import {PreferencesManager} from '@/client/utils/PreferencesManager';
 import {SoundManager} from '@/client/utils/SoundManager';
-import {WaitingForModel} from '@/models/WaitingForModel';
+import {WaitingForModel} from '@/common/models/WaitingForModel';
 
 import * as constants from '@/constants';
 import * as raw_settings from '@/genfiles/settings.json';

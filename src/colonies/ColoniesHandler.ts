@@ -150,7 +150,7 @@ export class TradeWithMegacredits implements IColonyTrader {
   }
 
   public canUse() {
-    return this.player.megaCredits >= this.tradeCost;
+    return this.player.canAfford(this.tradeCost);
   }
   public optionText() {
     return 'Pay ' + this.tradeCost +' M€';

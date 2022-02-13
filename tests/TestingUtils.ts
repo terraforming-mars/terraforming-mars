@@ -7,7 +7,7 @@ import {Phase} from '../src/common/Phase';
 import {IParty} from '../src/turmoil/parties/IParty';
 import {Turmoil} from '../src/turmoil/Turmoil';
 import {LogMessage} from '../src/common/logs/LogMessage';
-import {PolicyId} from '../src/turmoil/Policy';
+import {PolicyId} from '../src/common/turmoil/Types';
 import {Log} from '../src/Log';
 import {PlayerInput} from '../src/PlayerInput';
 import {DeferredAction} from '../src/deferredActions/DeferredAction';
@@ -105,7 +105,7 @@ export class TestingUtils {
 
   public static forceGenerationEnd(game: Game) {
     while (game.deferredActions.pop() !== undefined) {}
-    game.getPlayers().forEach((player) => player.pass());
+    game.getPlayersInGenerationOrder().forEach((player) => player.pass());
     game.playerIsFinishedTakingActions();
   }
 

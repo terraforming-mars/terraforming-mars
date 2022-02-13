@@ -55,7 +55,7 @@ export class Playwrights extends Card implements CorporationCard {
   }
 
   public action(player: Player): SelectCard<IProjectCard> | undefined {
-    const players = player.game.getPlayers();
+    const players = player.game.getPlayersInGenerationOrder();
     const replayableEvents = this.getReplayableEvents(player);
 
     return new SelectCard<IProjectCard>(
@@ -85,7 +85,7 @@ export class Playwrights extends Card implements CorporationCard {
                    * Needs to be deferred to happen after Law Suit's `play()` method.
                    */
                 player.game.defer(new DeferredAction(player, () => {
-                  player.game.getPlayers().some((p) => {
+                  player.game.getPlayersInGenerationOrder().some((p) => {
                     const card = p.playedCards[p.playedCards.length - 1];
                     if (card?.name === selectedCard.name) {
                       p.playedCards.pop();
@@ -112,7 +112,7 @@ export class Playwrights extends Card implements CorporationCard {
     const playedEvents : IProjectCard[] = [];
 
     this.checkLoops++;
-    player.game.getPlayers().forEach((p) => {
+    player.game.getPlayersInGenerationOrder().forEach((p) => {
       playedEvents.push(...p.playedCards.filter((card) => {
         return card.cardType === CardType.EVENT &&
             // Can player.canPlay(card) replace this?

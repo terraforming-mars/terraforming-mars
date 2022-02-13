@@ -67,7 +67,7 @@ export class TharsisRepublic extends Card implements CorporationCard {
   }
 
   public play(player: Player) {
-    if (player.game.getPlayers().length === 1) {
+    if (player.game.getPlayersInGenerationOrder().length === 1) {
       // Get bonus for 2 neutral cities
       player.addProduction(Resources.MEGACREDITS, 2);
     }

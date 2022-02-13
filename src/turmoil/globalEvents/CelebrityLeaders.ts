@@ -25,7 +25,7 @@ export class CelebrityLeaders extends GlobalEvent implements IGlobalEvent {
   }
 
   public resolve(game: Game, turmoil: Turmoil) {
-    game.getPlayers().forEach((player) => {
+    game.getPlayersInGenerationOrder().forEach((player) => {
       const eventsCards = player.playedCards.filter((card) => card.cardType === CardType.EVENT).length;
       player.addResource(Resources.MEGACREDITS, 2 * (Math.min(5, eventsCards) + turmoil.getPlayerInfluence(player)), {log: true, from: this.name});
     });

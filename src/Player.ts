@@ -674,10 +674,6 @@ export class Player implements ISerializable<SerializedPlayer> {
     return count;
   }
 
-  public getResourcesOnCard(card: ICard): number | undefined {
-    return card.resourceCount;
-  }
-
   public getResourcesOnCorporation():number {
     if (this.corporationCard !== undefined &&
       this.corporationCard.resourceCount !== undefined) {
@@ -800,7 +796,7 @@ export class Player implements ISerializable<SerializedPlayer> {
   public getResourceCount(resource: ResourceType): number {
     let count: number = 0;
     this.getCardsWithResources(resource).forEach((card) => {
-      count += (this.getResourcesOnCard(card) ?? 0);
+      count += card.resourceCount;
     });
     return count;
   }
@@ -1482,23 +1478,17 @@ export class Player implements ISerializable<SerializedPlayer> {
 
   public getMicrobesCanSpend(): number {
     const psychrophiles = this.playedCards.find((card) => card.name === CardName.PSYCHROPHILES);
-    return psychrophiles !== undefined ?
-      this.getResourcesOnCard(psychrophiles) ?? 0 :
-      0;
+    return psychrophiles?.resourceCount ?? 0;
   }
 
   public getFloatersCanSpend(): number {
     const dirigibles = this.playedCards.find((card) => card.name === CardName.DIRIGIBLES);
-    return dirigibles !== undefined ?
-      this.getResourcesOnCard(dirigibles) ?? 0 :
-      0;
+    return dirigibles?.resourceCount ?? 0;
   }
 
   public getSpendableScienceResources(): number {
     const lunaArchives = this.playedCards.find((card) => card.name === CardName.LUNA_ARCHIVES);
-    return lunaArchives !== undefined ?
-      this.getResourcesOnCard(lunaArchives) ?? 0 :
-      0;
+    return lunaArchives?.resourceCount ?? 0;
   }
 
   public getSpendableSeedResources(): number {
@@ -1611,7 +1601,7 @@ export class Player implements ISerializable<SerializedPlayer> {
 
     TurmoilHandler.applyOnCardPlayedEffect(this, card);
 
-    for (const somePlayer of this.game.getPlayers()) {
+    for (const somePlayer of this.game.getPlayersInGenerationOrder()) {
       if (somePlayer.corporationCard !== undefined && somePlayer.corporationCard.onCardPlayed !== undefined) {
         const actionFromPlayedCard: OrOptions | void = somePlayer.corporationCard.onCardPlayed(this, card);
         if (actionFromPlayedCard !== undefined) {
@@ -1692,7 +1682,7 @@ export class Player implements ISerializable<SerializedPlayer> {
       // Awards are disabled for 1 player games
       if (this.game.isSoloMode()) return;
 
-      const players: Array<Player> = this.game.getPlayers().slice();
+      const players: Array<Player> = this.game.getPlayersInGenerationOrder().slice();
       players.sort(
         (p1, p2) => fundedAward.award.getScore(p2) - fundedAward.award.getScore(p1),
       );
@@ -2105,7 +2095,7 @@ export class Player implements ISerializable<SerializedPlayer> {
       }
     });
 
-    if (this.game.getPlayers().length > 1 &&
+    if (this.game.getPlayersInGenerationOrder().length > 1 &&
       this.actionsTakenThisRound > 0 &&
       !this.game.gameOptions.fastModeOption &&
       this.allOtherPlayersHavePassed() === false) {
@@ -2152,7 +2142,7 @@ export class Player implements ISerializable<SerializedPlayer> {
   private allOtherPlayersHavePassed(): boolean {
     const game = this.game;
     if (game.isSoloMode()) return true;
-    const players = game.getPlayers();
+    const players = game.getPlayersInGenerationOrder();
     const passedPlayers = game.getPassedPlayers();
     return passedPlayers.length === players.length - 1 && passedPlayers.includes(this.color) === false;
   }

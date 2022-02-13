@@ -38,7 +38,7 @@ describe('LargeConvoy', function() {
 
     expect(player.victoryPointsBreakdown.victoryPoints).to.eq(4);
     expect(player.cardsInHand).has.lengthOf(2);
-    expect(player.getResourcesOnCard(pets)).to.eq(4);
+    expect(pets.resourceCount).to.eq(4);
     expect(player.plants).to.eq(0);
   });
 
@@ -56,7 +56,7 @@ describe('LargeConvoy', function() {
     expect(player.plants).to.eq(0);
 
     (action as OrOptions).options[1].cb([pets]);
-    expect(player.getResourcesOnCard(pets)).to.eq(4);
+    expect(pets.resourceCount).to.eq(4);
   });
 
   it('Should play without oceans', function() {

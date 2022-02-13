@@ -25,7 +25,7 @@ describe('ImportedNutrients', function() {
 
     card.play(player);
     expect(player.plants).to.eq(4);
-    expect(player.getResourcesOnCard(ants)).to.eq(4);
+    expect(ants.resourceCount).to.eq(4);
   });
 
   it('Can select target if have multiple cards collecting microbes', function() {
@@ -38,6 +38,6 @@ describe('ImportedNutrients', function() {
 
     expect(action).is.not.undefined;
         action!.cb([decomposers]);
-        expect(player.getResourcesOnCard(decomposers)).to.eq(4);
+        expect(decomposers.resourceCount).to.eq(4);
   });
 });

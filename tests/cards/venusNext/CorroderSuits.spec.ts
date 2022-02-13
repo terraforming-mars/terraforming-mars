@@ -29,7 +29,7 @@ describe('CorroderSuits', function() {
     player.playedCards.push(card2);
 
     card.play(player);
-    expect(player.getResourcesOnCard(card2)).to.eq(1);
+    expect(card2.resourceCount).to.eq(1);
     expect(player.getProduction(Resources.MEGACREDITS)).to.eq(2);
   });
 
@@ -42,7 +42,7 @@ describe('CorroderSuits', function() {
     expect(action).instanceOf(SelectCard);
 
         action!.cb([card2]);
-        expect(player.getResourcesOnCard(card2)).to.eq(1);
+        expect(card2.resourceCount).to.eq(1);
         expect(player.getProduction(Resources.MEGACREDITS)).to.eq(2);
   });
 
@@ -51,7 +51,7 @@ describe('CorroderSuits', function() {
     player.playedCards.push(card2);
 
     card.play(player);
-    expect(player.getResourcesOnCard(card2)).to.eq(1);
+    expect(card2.resourceCount).to.eq(1);
     expect(player.getProduction(Resources.MEGACREDITS)).to.eq(2);
   });
 });

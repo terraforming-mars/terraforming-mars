@@ -18,13 +18,13 @@ import {ResourceType} from '../common/ResourceType';
 import {ScienceTagCard} from '../cards/community/ScienceTagCard';
 import {SelectColony} from '../inputs/SelectColony';
 import {SelectPlayer} from '../inputs/SelectPlayer';
-import {SerializedColony} from '../SerializedColony';
 import {StealResources} from '../deferredActions/StealResources';
 import {Tags} from '../common/cards/Tags';
 import {SendDelegateToArea} from '../deferredActions/SendDelegateToArea';
 import {Game} from '../Game';
 import {Turmoil} from '../turmoil/Turmoil';
 import {ShouldIncreaseTrack} from '../common/colonies/ShouldIncreaseTrack';
+import {SerializedColony} from '@/SerializedColony';
 
 type TradeOptions = {
   usesTradeFleet?: boolean;
@@ -32,27 +32,27 @@ type TradeOptions = {
   giveColonyBonuses?: boolean;
   selfishTrade?: boolean;
 };
-export abstract class Colony implements SerializedColony {
-    public abstract name: ColonyName;
-    public abstract description: string;
+export abstract class Colony {
+    public abstract readonly name: ColonyName;
+    public abstract readonly description: string;
 
     // isActive represents when the colony is part of the game, or "back in the box", as it were.
     public isActive: boolean = true;
     public visitor: undefined | PlayerId = undefined;
     public colonies: Array<PlayerId> = [];
     public trackPosition: number = 1;
-    public resourceType?: ResourceType;
+    public readonly resourceType?: ResourceType;
 
-    public abstract buildType: ColonyBenefit;
-    public buildQuantity: Array<number> = [1, 1, 1];
-    public buildResource?: Resources;
-    public abstract tradeType: ColonyBenefit;
-    public tradeQuantity: Array<number> = [1, 1, 1, 1, 1, 1, 1];
-    public tradeResource?: Resources | Array<Resources>;
-    public abstract colonyBonusType: ColonyBenefit;
-    public colonyBonusQuantity: number = 1;
-    public colonyBonusResource?: Resources;
-    public shouldIncreaseTrack: ShouldIncreaseTrack = ShouldIncreaseTrack.YES;
+    public abstract readonly buildType: ColonyBenefit;
+    public readonly buildQuantity: Array<number> = [1, 1, 1];
+    public readonly buildResource?: Resources;
+    public abstract readonly tradeType: ColonyBenefit;
+    public readonly tradeQuantity: Array<number> = [1, 1, 1, 1, 1, 1, 1];
+    public readonly tradeResource?: Resources | Array<Resources>;
+    public abstract readonly colonyBonusType: ColonyBenefit;
+    public readonly colonyBonusQuantity: number = 1;
+    public readonly colonyBonusResource?: Resources;
+    public readonly shouldIncreaseTrack: ShouldIncreaseTrack = ShouldIncreaseTrack.YES;
 
 
     public endGeneration(game: Game): void {
@@ -97,7 +97,7 @@ export abstract class Colony implements SerializedColony {
       }
 
       // Poseidon hook
-      const poseidon = player.game.getPlayers().find((player) => player.isCorporation(CardName.POSEIDON));
+      const poseidon = player.game.getPlayersInGenerationOrder().find((player) => player.isCorporation(CardName.POSEIDON));
       if (poseidon !== undefined) {
         poseidon.addProduction(Resources.MEGACREDITS, 1);
       }
@@ -300,7 +300,7 @@ export abstract class Colony implements SerializedColony {
         action = new DeferredAction(
           player,
           () => {
-            const playersWithCards = game.getPlayers().filter((p) => p.cardsInHand.length > 0);
+            const playersWithCards = game.getPlayersInGenerationOrder().filter((p) => p.cardsInHand.length > 0);
             if (playersWithCards.length === 0) return undefined;
             return new SelectPlayer(
               playersWithCards,
@@ -343,4 +343,17 @@ export abstract class Colony implements SerializedColony {
         return undefined;
       }
     }
+}
+
+export function serializeColonies(colonies: Array<Colony>): Array<SerializedColony> {
+  return colonies.map((colony) => {
+    return {
+      colonies: colony.colonies,
+      name: colony.name,
+      isActive: colony.isActive,
+      resourceType: colony.resourceType,
+      trackPosition: colony.trackPosition,
+      visitor: colony.visitor,
+    };
+  });
 }

@@ -40,7 +40,7 @@ describe('Extremophiles', function() {
     expect(action).instanceOf(SelectCard);
 
         action!.cb([card]);
-        expect(player.getResourcesOnCard(card)).to.eq(1);
+        expect(card.resourceCount).to.eq(1);
   });
 
   it('Gives victory points', function() {

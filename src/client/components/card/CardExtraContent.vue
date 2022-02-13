@@ -9,7 +9,7 @@
 <script lang="ts">
 
 import Vue from 'vue';
-import {CardModel} from '@/models/CardModel';
+import {CardModel} from '@/common/models/CardModel';
 import {CardName} from '@/common/cards/CardName';
 import {Resources} from '@/common/Resources';
 

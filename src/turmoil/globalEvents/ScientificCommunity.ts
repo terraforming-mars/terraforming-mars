@@ -22,7 +22,7 @@ export class ScientificCommunity extends GlobalEvent implements IGlobalEvent {
     });
   }
   public resolve(game: Game, turmoil: Turmoil) {
-    game.getPlayers().forEach((player) => {
+    game.getPlayersInGenerationOrder().forEach((player) => {
       const amount = player.cardsInHand.length + turmoil.getPlayerInfluence(player);
       player.addResource(Resources.MEGACREDITS, amount, {log: true, from: this.name});
     });

@@ -21,6 +21,7 @@ import {CardRequirements} from './CardRequirements';
 import {GlobalParameter} from '../common/GlobalParameter';
 import {BoardType} from '../boards/BoardType';
 import {Units} from '../common/Units';
+import {ICardDiscount} from '../common/cards/Types';
 
 export interface IActionCard {
     action: (player: Player) => OrOptions | SelectOption | AndOptions | SelectAmount | SelectCard<ICard> | SelectCard<IProjectCard> | SelectHowToPay | SelectPlayer | SelectSpace | undefined;
@@ -36,10 +37,6 @@ export interface IResourceCard {
     resourceType?: ResourceType;
 }
 
-export interface CardDiscount {
-  tag?: Tags, // When absent, discount applies to all cards.
-  amount: number
- }
 export interface VictoryPoints {
     type: 'resource' | Tags,
     points: number,
@@ -73,7 +70,7 @@ export interface ICard extends Partial<IActionCard>, IResourceCard {
     tags: Array<Tags>;
     play: (player: Player) => PlayerInput | undefined;
     getCardDiscount?: (player: Player, card: IProjectCard) => number;
-    cardDiscount?: CardDiscount;
+    cardDiscount?: ICardDiscount;
     // parameter is a Morningstar Inc. special case.
     getRequirementBonus?: (player: Player, parameter: GlobalParameter) => number;
     victoryPoints?: number | 'special' | VictoryPoints,

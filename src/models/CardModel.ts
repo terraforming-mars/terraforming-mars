@@ -4,7 +4,7 @@ import {ResourceType} from '../common/ResourceType';
 import {Units} from '../common/Units';
 import {CardName} from '../common/cards/CardName';
 import {Resources} from '../common/Resources';
-import {CardDiscount} from '../cards/ICard';
+import {ICardDiscount} from '../common/cards/Types';
 import {Tags} from '../common/cards/Tags';
 
 export interface CardModel {
@@ -12,7 +12,7 @@ export interface CardModel {
     resources: number | undefined;
     resourceType: ResourceType | undefined;
     calculatedCost?: number;
-    discount?: CardDiscount,
+    discount?: ICardDiscount,
     cardType: CardType;
     isDisabled: boolean;
     warning?: string | Message;

@@ -1,13 +1,14 @@
 import {ICardMetadata} from './ICardMetadata';
 import {CardName} from '../common/cards/CardName';
 import {CardType} from '../common/cards/CardType';
+import {ICardDiscount} from '../common/cards/Types';
 import {IAdjacencyBonus} from '../ares/IAdjacencyBonus';
 import {ResourceType} from '../common/ResourceType';
 import {Tags} from '../common/cards/Tags';
 import {Player} from '../Player';
 import {Units} from '../common/Units';
 import {CardRequirements} from './CardRequirements';
-import {CardDiscount, TRSource, VictoryPoints} from './ICard';
+import {TRSource, VictoryPoints} from './ICard';
 import {CardRenderDynamicVictoryPoints} from './render/CardRenderDynamicVictoryPoints';
 import {CardRenderItemType} from './render/CardRenderItemType';
 
@@ -24,7 +25,7 @@ export interface StaticCardProperties {
   startingMegaCredits?: number;
   tags?: Array<Tags>;
   productionBox?: Units;
-  cardDiscount?: CardDiscount;
+  cardDiscount?: ICardDiscount;
   reserveUnits?: Units,
   tr?: TRSource,
   victoryPoints?: number | 'special' | VictoryPoints,

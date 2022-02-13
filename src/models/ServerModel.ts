@@ -1,4 +1,4 @@
-import {CardModel} from './CardModel';
+import {CardModel} from '../common/models/CardModel';
 import {ColonyModel} from '../common/models/ColonyModel';
 import {Color} from '../common/Color';
 import {Game, GameOptions} from '../Game';

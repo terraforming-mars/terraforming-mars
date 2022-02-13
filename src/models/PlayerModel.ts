@@ -1,4 +1,4 @@
-import {CardModel} from './CardModel';
+import {CardModel} from '../common/models/CardModel';
 import {Color} from '../common/Color';
 import {VictoryPointsBreakdown} from '../VictoryPointsBreakdown';
 import {ITagCount} from '@/common/cards/ITagCount';

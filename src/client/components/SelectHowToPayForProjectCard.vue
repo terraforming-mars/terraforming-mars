@@ -5,7 +5,7 @@ import Button from '@/client/components/common/Button.vue';
 import {HowToPay} from '@/inputs/HowToPay';
 import Card from '@/client/components/card/Card.vue';
 import {getCard} from '@/client/cards/ClientCardManifest';
-import {CardModel} from '@/models/CardModel';
+import {CardModel} from '@/common/models/CardModel';
 import {CardOrderStorage} from '@/client/utils/CardOrderStorage';
 import {PaymentWidgetMixin, SelectHowToPayForProjectCardModel, unit} from '@/client/mixins/PaymentWidgetMixin';
 import {PlayerInputModel} from '@/models/PlayerInputModel';

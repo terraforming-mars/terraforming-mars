@@ -1,6 +1,6 @@
 
 import {PlayerInputTypes} from '../common/input/PlayerInputTypes';
-import {CardModel} from './CardModel';
+import {CardModel} from '../common/models/CardModel';
 import {ColonyModel} from '../common/models/ColonyModel';
 import {ColorWithNeutral} from '../common/Color';
 import {IPayProductionModel} from '../common/models/IPayProductionUnitsModel';

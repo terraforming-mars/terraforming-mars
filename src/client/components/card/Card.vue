@@ -21,7 +21,7 @@
 import Vue from 'vue';
 
 import {ICard} from '@/cards/ICard';
-import {CardModel} from '@/models/CardModel';
+import {CardModel} from '@/common/models/CardModel';
 import CardTitle from './CardTitle.vue';
 import CardNumber from './CardNumber.vue';
 import CardResourceCounter from './CardResourceCounter.vue';

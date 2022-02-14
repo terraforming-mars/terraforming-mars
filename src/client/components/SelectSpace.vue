@@ -15,7 +15,7 @@
 <script lang="ts">
 import Vue from 'vue';
 import ConfirmDialog from '@/client/components/common/ConfirmDialog.vue';
-import {PlayerInputModel} from '@/models/PlayerInputModel';
+import {PlayerInputModel} from '@/common/models/PlayerInputModel';
 import {PreferencesManager} from '@/client/utils/PreferencesManager';
 
 export default Vue.extend({

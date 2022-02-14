@@ -2,7 +2,7 @@
 import Vue from 'vue';
 import Button from '@/client/components/common/Button.vue';
 import {LoadGameFormModel} from '@/common/models/LoadGameFormModel';
-import {SimpleGameModel} from '@/models/SimpleGameModel';
+import {SimpleGameModel} from '@/common/models/SimpleGameModel';
 import {mainAppSettings} from '@/client/components/App';
 
 import * as constants from '@/constants';

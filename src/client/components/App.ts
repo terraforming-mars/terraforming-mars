@@ -9,7 +9,7 @@ import {ViewModel, PlayerViewModel} from '@/models/PlayerModel';
 import StartScreen from '@/client/components/StartScreen.vue';
 import LoadGameForm from '@/client/components/LoadGameForm.vue';
 import DebugUI from '@/client/components/DebugUI.vue';
-import {SimpleGameModel} from '@/models/SimpleGameModel';
+import {SimpleGameModel} from '@/common/models/SimpleGameModel';
 import Help from '@/client/components/help/Help.vue';
 
 import {$t} from '@/client/directives/i18n';

@@ -2,7 +2,7 @@ import {CardModel} from '../common/models/CardModel';
 import {ColonyModel} from '../common/models/ColonyModel';
 import {Color} from '../common/Color';
 import {Game, GameOptions} from '../Game';
-import {SimpleGameModel} from './SimpleGameModel';
+import {SimpleGameModel} from '../common/models/SimpleGameModel';
 import {GameOptionsModel} from '../common/models/GameOptionsModel';
 import {ICard} from '../cards/ICard';
 import {IProjectCard} from '../cards/IProjectCard';

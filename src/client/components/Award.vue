@@ -1,5 +1,5 @@
 <template>
-  <div @click="toggleDescription" class="ma-block" title="press to show or hide the description">
+  <div class="ma-block">
     <div class="ma-player" v-if="award.player_name">
       <i :title="award.player_name" class="board-cube" :class="`board-cube--${award.player_color}`" />
     </div>
@@ -39,16 +39,13 @@ export default Vue.extend({
       type: Boolean,
       default: false,
     },
+    showDescription: {
+      type: Boolean,
+    },
   },
   data() {
     return {
-      showDescription: false,
     };
-  },
-  methods: {
-    toggleDescription() {
-      this.showDescription = !this.showDescription;
-    },
   },
   computed: {
     maAwardClass(): string {

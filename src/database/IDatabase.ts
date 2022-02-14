@@ -1,11 +1,7 @@
 import {Game, GameOptions, Score} from '../Game';
 import {GameId} from '../common/Types';
 import {SerializedGame} from '../SerializedGame';
-
-export interface IGameData {
-    gameId: GameId;
-    playerCount: number;
-}
+import {IGameData} from '../common/game/IGameData';
 
 /**
  * A game store. Load, save, you know the drill.

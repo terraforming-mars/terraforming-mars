@@ -21,7 +21,7 @@ import {SendDelegateToArea} from '../deferredActions/SendDelegateToArea';
 import {Tags} from '../common/cards/Tags';
 import {Turmoil} from '../turmoil/Turmoil';
 import {VictoryPointsBreakdown} from '../VictoryPointsBreakdown';
-import {GlobalEventName} from '../turmoil/globalEvents/GlobalEventName';
+import {GlobalEventName} from '../common/turmoil/globalEvents/GlobalEventName';
 
 export const PLANETARY_TAGS = [Tags.VENUS, Tags.EARTH, Tags.MARS, Tags.JOVIAN, Tags.MOON];
 const TRACKS = PlanetaryTracks.initialize();

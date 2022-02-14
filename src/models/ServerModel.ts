@@ -42,7 +42,7 @@ import {Units} from '../common/Units';
 import {SelectPartyToSendDelegate} from '../inputs/SelectPartyToSendDelegate';
 import {GameModel} from './GameModel';
 import {Turmoil} from '../turmoil/Turmoil';
-import {PathfindersModel} from './PathfindersModel';
+import createPathfindersModel from './PathfindersModel';
 import {MoonExpansion} from '../moon/MoonExpansion';
 import {MoonModel} from '../common/models/MoonModel';
 import {Colony} from '../colonies/Colony';
@@ -82,7 +82,7 @@ export class Server {
       oceans: game.board.getOceanCount(),
       oxygenLevel: game.getOxygenLevel(),
       passedPlayers: game.getPassedPlayers(),
-      pathfinders: PathfindersModel.serialize(game),
+      pathfinders: createPathfindersModel(game),
       phase: game.phase,
       spaces: this.getSpaces(game.board),
       spectatorId: game.spectatorId,

@@ -107,7 +107,7 @@ export default Vue.extend({
 
     const x = PLAYER_INTERFACE_TAGS_ORDER.map((key) => [key, {discount: 0, points: 0}]);
     const modifiers: TagModifiers = Object.fromEntries(x);
-    modifiers['all'] = {discount: this.playerView.thisPlayer?.cardDiscount ?? 0, points: 0};
+    modifiers['all'] = {discount: this.player?.cardDiscount ?? 0, points: 0};
 
     const cards = this.player.corporationCard !== undefined ?
       [...this.player.playedCards, this.player.corporationCard] :

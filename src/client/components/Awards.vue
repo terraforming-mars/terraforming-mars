@@ -40,12 +40,13 @@
         </span>
       </div>
 
-      <div v-show="showAwards">
+      <div v-show="showAwards" @click="toggleDescription" title="press to show or hide the description">
         <Award
           v-for="award in awards"
           :key="award.name"
           :award="award"
           :showScores="showScores"
+          :showDescription="showDescription"
         />
       </div>
     </div>
@@ -75,6 +76,7 @@ export default Vue.extend({
   data() {
     return {
       showAwards: true,
+      showDescription: false,
       PreferencesManager,
     };
   },
@@ -82,6 +84,10 @@ export default Vue.extend({
     toggleList() {
       this.showAwards = !this.showAwards;
     },
+    toggleDescription() {
+      this.showDescription = !this.showDescription;
+    },
+
   },
   computed: {
     fundedAwards(): FundedAwardModel[] {

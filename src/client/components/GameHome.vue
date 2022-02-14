@@ -30,7 +30,7 @@
 <script lang="ts">
 
 import Vue from 'vue';
-import {SimpleGameModel} from '@/models/SimpleGameModel';
+import {SimpleGameModel} from '@/common/models/SimpleGameModel';
 import Button from '@/client/components/common/Button.vue';
 import {playerColorClass} from '@/common/utils/utils';
 import GameSetupDetail from '@/client/components/GameSetupDetail.vue';

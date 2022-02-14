@@ -54,7 +54,7 @@
 <script lang="ts">
 
 import Vue from 'vue';
-import {GameOptionsModel} from '@/models/GameOptionsModel';
+import {GameOptionsModel} from '@/common/models/GameOptionsModel';
 import {PathfindersModel} from '@/models/PathfindersModel';
 import {Tags} from '@/common/cards/Tags';
 import {range} from '@/common/utils/utils';

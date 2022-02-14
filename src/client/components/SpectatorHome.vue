@@ -75,7 +75,7 @@
 <script lang="ts">
 import Vue from 'vue';
 
-import {GameModel} from '@/models/GameModel';
+import {GameModel} from '@/common/models/GameModel';
 import {mainAppSettings} from './App';
 
 import * as raw_settings from '@/genfiles/settings.json';

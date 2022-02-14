@@ -40,7 +40,7 @@ import {ShiftAresGlobalParameters} from '../inputs/ShiftAresGlobalParameters';
 import {SpectatorModel} from './SpectatorModel';
 import {Units} from '../common/Units';
 import {SelectPartyToSendDelegate} from '../inputs/SelectPartyToSendDelegate';
-import {GameModel} from './GameModel';
+import {GameModel} from '../common/models/GameModel';
 import {Turmoil} from '../turmoil/Turmoil';
 import createPathfindersModel from './PathfindersModel';
 import {MoonExpansion} from '../moon/MoonExpansion';

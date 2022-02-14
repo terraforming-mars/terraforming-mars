@@ -446,7 +446,7 @@ import {RandomBoardOption} from '@/common/boards/RandomBoardOption';
 import {CardName} from '@/common/cards/CardName';
 import CorporationsFilter from '@/client/components/create/CorporationsFilter.vue';
 import {translateTextWithParams} from '@/client/directives/i18n';
-import {IGameData} from '@/database/IDatabase';
+import {IGameData} from '@/common/game/IGameData';
 import ColoniesFilter from '@/client/components/create/ColoniesFilter.vue';
 import {ColonyName} from '@/common/colonies/ColonyName';
 import CardsFilter from '@/client/components/create/CardsFilter.vue';

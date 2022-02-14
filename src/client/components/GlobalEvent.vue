@@ -23,7 +23,7 @@
 <script lang="ts">
 
 import Vue from 'vue';
-import {GlobalEventModel} from '@/models/TurmoilModel';
+import {GlobalEventModel} from '@/common/models/TurmoilModel';
 import CardRenderData from '@/client/components/card/CardRenderData.vue';
 import CardParty from '@/client/components/card/CardParty.vue';
 import {IGlobalEvent} from '@/turmoil/globalEvents/IGlobalEvent';

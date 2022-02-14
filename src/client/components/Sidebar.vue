@@ -74,7 +74,7 @@ import Vue from 'vue';
 import {Color} from '@/common/Color';
 import {PreferencesManager} from '@/client/utils/PreferencesManager';
 import {LANGUAGES} from '@/constants';
-import {TurmoilModel} from '@/models/TurmoilModel';
+import {TurmoilModel} from '@/common/models/TurmoilModel';
 import {PartyName} from '@/common/turmoil/PartyName';
 import GameSetupDetail from '@/client/components/GameSetupDetail.vue';
 import {GameOptionsModel} from '@/models/GameOptionsModel';

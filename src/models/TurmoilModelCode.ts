@@ -4,7 +4,7 @@ import {Game} from '../Game';
 import {PoliticalAgendas} from '../turmoil/PoliticalAgendas';
 import {IGlobalEvent} from '../turmoil/globalEvents/IGlobalEvent';
 import {Turmoil} from '../turmoil/Turmoil';
-import {DelegatesModel, GlobalEventModel, PartyModel, PolicyUser, PoliticalAgendasModel, TurmoilModel} from './TurmoilModel';
+import {DelegatesModel, GlobalEventModel, PartyModel, PolicyUser, PoliticalAgendasModel, TurmoilModel} from '../common/models/TurmoilModel';
 
 export function getTurmoilModel(game: Game): TurmoilModel | undefined {
   return Turmoil.ifTurmoilElse(game, (turmoil) => {

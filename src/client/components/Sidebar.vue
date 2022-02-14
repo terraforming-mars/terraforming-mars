@@ -77,7 +77,7 @@ import {LANGUAGES} from '@/constants';
 import {TurmoilModel} from '@/common/models/TurmoilModel';
 import {PartyName} from '@/common/turmoil/PartyName';
 import GameSetupDetail from '@/client/components/GameSetupDetail.vue';
-import {GameOptionsModel} from '@/models/GameOptionsModel';
+import {GameOptionsModel} from '@/common/models/GameOptionsModel';
 import GlobalParameterValue from '@/client/components/GlobalParameterValue.vue';
 import MoonGlobalParameterValue from '@/client/components/MoonGlobalParameterValue.vue';
 import {GlobalParameter} from '@/common/GlobalParameter';

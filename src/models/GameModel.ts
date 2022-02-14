@@ -1,4 +1,4 @@
-import {GameOptionsModel} from './GameOptionsModel';
+import {GameOptionsModel} from '../common/models/GameOptionsModel';
 import {ColonyModel} from '../common/models/ColonyModel';
 import {Color} from '../common/Color';
 import {TurmoilModel} from '../common/models/TurmoilModel';

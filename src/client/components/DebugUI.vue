@@ -139,7 +139,7 @@ import {CardType} from '@/common/cards/CardType';
 import {CardName} from '@/common/cards/CardName';
 import {PreferencesManager} from '@/client/utils/PreferencesManager';
 import {GlobalEventName} from '@/common/turmoil/globalEvents/GlobalEventName';
-import {GlobalEventModel} from '@/models/TurmoilModel';
+import {GlobalEventModel} from '@/common/models/TurmoilModel';
 import {PartyName} from '@/common/turmoil/PartyName';
 import {ALL_EVENTS, getGlobalEventByName} from '@/turmoil/globalEvents/GlobalEventDealer';
 import GlobalEvent from '@/client/components/GlobalEvent.vue';

@@ -7,7 +7,7 @@ import {IPayProductionModel} from '../common/models/IPayProductionUnitsModel';
 import {IAresData} from '../common/ares/IAresData';
 import {Message} from '../common/logs/Message';
 import {PartyName} from '../common/turmoil/PartyName';
-import {TurmoilModel} from './TurmoilModel';
+import {TurmoilModel} from '../common/models/TurmoilModel';
 
 export interface PlayerInputModel {
     amount: number | undefined;

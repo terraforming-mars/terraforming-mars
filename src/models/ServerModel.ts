@@ -32,7 +32,7 @@ import {
 import {FundedAwardModel, IAwardScore} from '../common/models/FundedAwardModel';
 import {
   getTurmoilModel,
-} from './TurmoilModel';
+} from '../models/TurmoilModelCode';
 import {SelectDelegate} from '../inputs/SelectDelegate';
 import {SelectColony} from '../inputs/SelectColony';
 import {SelectProductionToLose} from '../inputs/SelectProductionToLose';

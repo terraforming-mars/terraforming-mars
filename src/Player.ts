@@ -124,7 +124,6 @@ export class Player implements ISerializable<SerializedPlayer> {
   public draftedCards: Array<IProjectCard> = [];
   public cardCost: number = constants.CARD_COST;
   public needsToDraft: boolean | undefined = undefined;
-  public cardDiscount: number = 0;
 
   public timer: Timer = Timer.newInstance();
 
@@ -134,6 +133,7 @@ export class Player implements ISerializable<SerializedPlayer> {
   public colonyTradeOffset: number = 0;
   public colonyTradeDiscount: number = 0;
   public colonyVictoryPoints: number = 0;
+  public cardDiscount: number = 0; // Iapetus Colony
 
   // Turmoil
   public turmoilPolicyActionUsed: boolean = false;

@@ -1,6 +1,6 @@
 import {CardModel} from '../common/models/CardModel';
 import {Color} from '../common/Color';
-import {IVictoryPointsBreakdown} from '../VictoryPointsBreakdown';
+import {IVictoryPointsBreakdown} from '../common/game/IVictoryPointsBreakdown';
 import {ITagCount} from '../common/cards/ITagCount';
 import {PlayerInputModel} from '../common/models/PlayerInputModel';
 import {TimerModel} from '../common/models/TimerModel';

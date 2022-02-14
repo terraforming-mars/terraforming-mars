@@ -8,7 +8,7 @@ import {Phase} from '../common/Phase';
 import {IAresData} from '../common/ares/IAresData';
 import {SpaceModel} from '../common/models/SpaceModel';
 import {MoonModel} from '../common/models/MoonModel';
-import {PathfindersModel} from './PathfindersModel';
+import {PathfindersModel} from '../common/models/PathfindersModel';
 
 // Common data about a game not assocaited with a player (eg the temperature.)
 export interface GameModel {

@@ -11,7 +11,6 @@ describe('SkyDocks', function() {
     expect(action).is.undefined;
     expect(player.getFleetSize()).to.eq(2);
     expect(card.getCardDiscount()).to.eq(1);
-    player.victoryPointsBreakdown.setVictoryPoints('victoryPoints', card.getVictoryPoints());
-    expect(player.victoryPointsBreakdown.victoryPoints).to.eq(2);
+    expect(card.getVictoryPoints()).to.eq(2);
   });
 });

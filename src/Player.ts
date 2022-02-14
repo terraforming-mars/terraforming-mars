@@ -47,7 +47,7 @@ import {SerializedPlayer} from './SerializedPlayer';
 import {SpaceType} from './common/boards/SpaceType';
 import {StormCraftIncorporated} from './cards/colonies/StormCraftIncorporated';
 import {Tags} from './common/cards/Tags';
-import {VictoryPointsBreakdown} from './VictoryPointsBreakdown';
+import {IVictoryPointsBreakdown, VictoryPointsBreakdown} from './VictoryPointsBreakdown';
 import {SelectProductionToLose} from './inputs/SelectProductionToLose';
 import {IAresGlobalParametersResponse, ShiftAresGlobalParameters} from './inputs/ShiftAresGlobalParameters';
 import {Timer} from './Timer';
@@ -536,7 +536,7 @@ export class Player implements ISerializable<SerializedPlayer> {
     return;
   }
 
-  public getVictoryPoints(): VictoryPointsBreakdown {
+  public getVictoryPoints(): IVictoryPointsBreakdown {
     const victoryPointsBreakdown = new VictoryPointsBreakdown();
 
     // Victory points from corporations
@@ -610,14 +610,14 @@ export class Player implements ISerializable<SerializedPlayer> {
         // Don't lose more VP than what is available
         victoryPointsBreakdown.updateTotal();
 
-        const totalBeforeEscapeVelocity = victoryPointsBreakdown.total;
+        const totalBeforeEscapeVelocity = victoryPointsBreakdown.points.total;
         const penaltyTotal = Math.min(penaltyPerMin * Math.floor(overTimeInMinutes / period), totalBeforeEscapeVelocity);
         victoryPointsBreakdown.setVictoryPoints('escapeVelocity', -penaltyTotal, 'Escape Velocity Penalty');
       }
     }
 
     victoryPointsBreakdown.updateTotal();
-    return victoryPointsBreakdown;
+    return victoryPointsBreakdown.points;
   }
 
   public cardIsInEffect(cardName: CardName): boolean {

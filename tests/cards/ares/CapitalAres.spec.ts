@@ -40,7 +40,6 @@ describe('CapitalAres', function() {
     expect(citySpace.tile).is.not.undefined;
     expect(citySpace.player).to.eq(player);
     expect(citySpace.tile && citySpace.tile.tileType).to.eq(TileType.CAPITAL);
-    expect(player.victoryPointsBreakdown.victoryPoints).to.eq(0);
     expect(card.getVictoryPoints(player)).to.eq(1);
     expect(citySpace.adjacency).to.deep.eq({bonus: [SpaceBonus.MEGACREDITS, SpaceBonus.MEGACREDITS]});
   });

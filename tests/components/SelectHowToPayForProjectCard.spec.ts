@@ -11,7 +11,7 @@ import {FakeLocalStorage} from './FakeLocalStorage';
 import {PaymentTester} from './PaymentTester';
 import {HowToPay} from '@/inputs/HowToPay';
 import {ResourceType} from '@/common/ResourceType';
-import {CardModel} from '@/models/CardModel';
+import {CardModel} from '@/common/models/CardModel';
 
 describe('SelectHowToPayForProjectCard', () => {
   let localStorage: FakeLocalStorage;

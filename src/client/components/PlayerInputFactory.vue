@@ -13,7 +13,7 @@
 import Vue from 'vue';
 import {PlayerInputTypes} from '@/common/input/PlayerInputTypes';
 import {PlayerViewModel, PublicPlayerModel} from '@/models/PlayerModel';
-import {PlayerInputModel} from '@/models/PlayerInputModel';
+import {PlayerInputModel} from '@/common/models/PlayerInputModel';
 import AndOptions from '@/client/components/AndOptions.vue';
 import OrOptions from '@/client/components/OrOptions.vue';
 import SelectAmount from '@/client/components/SelectAmount.vue';

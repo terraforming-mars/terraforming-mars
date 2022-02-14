@@ -2,7 +2,7 @@ import {mount} from '@vue/test-utils';
 import {getLocalVue} from './getLocalVue';
 import {expect} from 'chai';
 import ShiftAresGlobalParameters from '@/client/components/ShiftAresGlobalParameters.vue';
-import {PlayerInputModel} from '@/models/PlayerInputModel';
+import {PlayerInputModel} from '@/common/models/PlayerInputModel';
 import {PlayerInputTypes} from '@/common/input/PlayerInputTypes';
 import {PartyName} from '@/common/turmoil/PartyName';
 

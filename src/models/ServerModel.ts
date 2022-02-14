@@ -11,7 +11,7 @@ import {Board} from '../boards/Board';
 import {ISpace} from '../boards/ISpace';
 import {Player} from '../Player';
 import {PlayerInput} from '../PlayerInput';
-import {PlayerInputModel} from './PlayerInputModel';
+import {PlayerInputModel} from '../common/models/PlayerInputModel';
 import {PlayerInputTypes} from '../common/input/PlayerInputTypes';
 import {PlayerViewModel, PublicPlayerModel} from './PlayerModel';
 import {SelectAmount} from '../inputs/SelectAmount';

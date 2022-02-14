@@ -15,7 +15,7 @@
 import Vue from 'vue';
 
 import {mainAppSettings} from '@/client/components/App';
-import {PlayerInputModel} from '@/models/PlayerInputModel';
+import {PlayerInputModel} from '@/common/models/PlayerInputModel';
 import {ViewModel, PublicPlayerModel} from '@/models/PlayerModel';
 import {PreferencesManager} from '@/client/utils/PreferencesManager';
 import {SoundManager} from '@/client/utils/SoundManager';

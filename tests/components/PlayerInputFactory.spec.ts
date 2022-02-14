@@ -5,7 +5,7 @@ import {expect} from 'chai';
 import PlayerInputFactory from '@/client/components/PlayerInputFactory.vue';
 import {PlayerInputTypes} from '@/common/input/PlayerInputTypes';
 import {CardModel} from '@/common/models/CardModel';
-import {PlayerInputModel} from '@/models/PlayerInputModel';
+import {PlayerInputModel} from '@/common/models/PlayerInputModel';
 import {Units} from '@/common/Units';
 import {CardName} from '@/common/cards/CardName';
 

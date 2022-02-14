@@ -4,7 +4,7 @@ import {VictoryPointsBreakdown} from '../VictoryPointsBreakdown';
 import {ITagCount} from '../common/cards/ITagCount';
 import {PlayerInputModel} from '../common/models/PlayerInputModel';
 import {TimerModel} from '../common/models/TimerModel';
-import {GameModel} from './GameModel';
+import {GameModel} from '../common/models/GameModel';
 import {PlayerId, SpectatorId} from '../common/Types';
 import {CardName} from '../common/cards/CardName';
 

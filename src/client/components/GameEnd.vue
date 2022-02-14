@@ -161,7 +161,7 @@
 <script lang="ts">
 
 import Vue from 'vue';
-import {GameModel} from '@/models/GameModel';
+import {GameModel} from '@/common/models/GameModel';
 import {PlayerViewModel, PublicPlayerModel, ViewModel} from '@/models/PlayerModel';
 import Board from '@/client/components/Board.vue';
 import MoonBoard from '@/client/components/moon/MoonBoard.vue';

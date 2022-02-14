@@ -15,7 +15,7 @@
 import Vue from 'vue';
 import Button from '@/client/components/common/Button.vue';
 import {ColorWithNeutral} from '@/common/Color';
-import {PlayerInputModel} from '@/models/PlayerInputModel';
+import {PlayerInputModel} from '@/common/models/PlayerInputModel';
 import {PublicPlayerModel} from '@/models/PlayerModel';
 import SelectPlayerRow from '@/client/components/SelectPlayerRow.vue';
 

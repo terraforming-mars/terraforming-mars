@@ -173,7 +173,7 @@ import {Timer} from '@/Timer';
 
 
 import * as constants from '@/constants';
-import {SpectatorModel} from '@/models/SpectatorModel';
+import {SpectatorModel} from '@/common/models/SpectatorModel';
 import {Color} from '@/common/Color';
 
 function getViewModel(playerView: ViewModel | undefined, spectator: ViewModel | undefined): ViewModel {

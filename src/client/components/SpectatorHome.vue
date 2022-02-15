@@ -79,7 +79,7 @@ import {GameModel} from '@/common/models/GameModel';
 import {mainAppSettings} from './App';
 
 import * as raw_settings from '@/genfiles/settings.json';
-import {SpectatorModel} from '@/models/SpectatorModel';
+import {SpectatorModel} from '@/common/models/SpectatorModel';
 import Awards from '@/client/components/Awards.vue';
 import Board from '@/client/components/Board.vue';
 import Colony from '@/client/components/Colony.vue';

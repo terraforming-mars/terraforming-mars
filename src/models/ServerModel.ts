@@ -42,7 +42,7 @@ import {Units} from '../common/Units';
 import {SelectPartyToSendDelegate} from '../inputs/SelectPartyToSendDelegate';
 import {GameModel} from '../common/models/GameModel';
 import {Turmoil} from '../turmoil/Turmoil';
-import createPathfindersModel from './PathfindersModel';
+import {createPathfindersModel} from './PathfindersModel';
 import {MoonExpansion} from '../moon/MoonExpansion';
 import {MoonModel} from '../common/models/MoonModel';
 import {Colony} from '../colonies/Colony';

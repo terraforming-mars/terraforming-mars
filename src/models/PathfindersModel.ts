@@ -1,7 +1,7 @@
 import {PathfindersModel} from '../common/models/PathfindersModel';
 import {Game} from '../Game';
 
-export default function createPathfindersModel(game: Game): PathfindersModel | undefined {
+export function createPathfindersModel(game: Game): PathfindersModel | undefined {
   if (game.pathfindersData === undefined) return undefined;
   const pathfindersData = game.pathfindersData;
   return {

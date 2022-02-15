@@ -30,19 +30,17 @@ import {
   IMilestoneScore,
 } from '../common/models/ClaimedMilestoneModel';
 import {FundedAwardModel, IAwardScore} from '../common/models/FundedAwardModel';
-import {
-  getTurmoilModel,
-} from '../models/TurmoilModelCode';
+import {getTurmoilModel} from '../models/TurmoilModel';
 import {SelectDelegate} from '../inputs/SelectDelegate';
 import {SelectColony} from '../inputs/SelectColony';
 import {SelectProductionToLose} from '../inputs/SelectProductionToLose';
 import {ShiftAresGlobalParameters} from '../inputs/ShiftAresGlobalParameters';
-import {SpectatorModel} from './SpectatorModel';
+import {SpectatorModel} from '../common/models/SpectatorModel';
 import {Units} from '../common/Units';
 import {SelectPartyToSendDelegate} from '../inputs/SelectPartyToSendDelegate';
 import {GameModel} from '../common/models/GameModel';
 import {Turmoil} from '../turmoil/Turmoil';
-import createPathfindersModel from './PathfindersModel';
+import {createPathfindersModel} from './PathfindersModel';
 import {MoonExpansion} from '../moon/MoonExpansion';
 import {MoonModel} from '../common/models/MoonModel';
 import {Colony} from '../colonies/Colony';

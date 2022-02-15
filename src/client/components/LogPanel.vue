@@ -54,7 +54,7 @@ import {getGlobalEventByName} from '@/turmoil/globalEvents/GlobalEventDealer';
 import {GlobalEventModel} from '@/common/models/TurmoilModel';
 import {PartyName} from '@/common/turmoil/PartyName';
 import Button from '@/client/components/common/Button.vue';
-import {Log} from '@/Log';
+import {Log} from '@/common/logs/Log';
 import {getCard} from '@/client/cards/ClientCardManifest';
 
 let logRequest: XMLHttpRequest | undefined;

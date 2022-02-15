@@ -3,7 +3,7 @@ import Vue from 'vue';
 import {HowToPay} from '@/inputs/HowToPay';
 import {PaymentWidgetMixin, SelectHowToPayModel, Unit} from '@/client/mixins/PaymentWidgetMixin';
 import {PlayerInputModel} from '@/common/models/PlayerInputModel';
-import {PlayerViewModel, PublicPlayerModel} from '@/models/PlayerModel';
+import {PlayerViewModel, PublicPlayerModel} from '@/common/models/PlayerModel';
 import {PreferencesManager} from '@/client/utils/PreferencesManager';
 import Button from '@/client/components/common/Button.vue';
 

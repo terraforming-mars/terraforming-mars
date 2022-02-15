@@ -29,7 +29,7 @@ import Button from '@/client/components/common/Button.vue';
 import {Color} from '@/common/Color';
 import {Message} from '@/common/logs/Message';
 import {CardOrderStorage} from '@/client/utils/CardOrderStorage';
-import {PlayerViewModel} from '@/models/PlayerModel';
+import {PlayerViewModel} from '@/common/models/PlayerModel';
 import {VueModelCheckbox, VueModelRadio} from '@/client/types';
 import Card from '@/client/components/card/Card.vue';
 import {CardModel} from '@/common/models/CardModel';

@@ -13,7 +13,7 @@ import {Player} from '../Player';
 import {PlayerInput} from '../PlayerInput';
 import {PlayerInputModel} from '../common/models/PlayerInputModel';
 import {PlayerInputTypes} from '../common/input/PlayerInputTypes';
-import {PlayerViewModel, PublicPlayerModel} from './PlayerModel';
+import {PlayerViewModel, PublicPlayerModel} from '../common/models/PlayerModel';
 import {SelectAmount} from '../inputs/SelectAmount';
 import {SelectCard} from '../inputs/SelectCard';
 import {SelectHowToPay} from '../inputs/SelectHowToPay';

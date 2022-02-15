@@ -265,7 +265,7 @@ import MoonBoard from '@/client/components/moon/MoonBoard.vue';
 import {Phase} from '@/common/Phase';
 import StackedCards from '@/client/components/StackedCards.vue';
 import {GameModel} from '@/common/models/GameModel';
-import {PlayerViewModel, PublicPlayerModel} from '@/models/PlayerModel';
+import {PlayerViewModel, PublicPlayerModel} from '@/common/models/PlayerModel';
 
 import * as raw_settings from '@/genfiles/settings.json';
 

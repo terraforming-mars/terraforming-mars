@@ -6,7 +6,6 @@ import {ShouldIncreaseTrack} from '../../common/colonies/ShouldIncreaseTrack';
 
 export class Mercury extends Colony {
   public name = ColonyName.MERCURY;
-  public description = 'Production';
   public buildType = ColonyBenefit.COPY_TRADE;
   public tradeType = ColonyBenefit.GAIN_PRODUCTION;
   public override tradeResource = [

@@ -4,7 +4,7 @@ import Vue from 'vue';
 
 import StackedCards from '@/client/components/StackedCards.vue';
 import {PlayerMixin} from '@/client/mixins/PlayerMixin';
-import {PublicPlayerModel} from '@/models/PlayerModel';
+import {PublicPlayerModel} from '@/common/models/PlayerModel';
 import {mainAppSettings} from '@/client/components/App';
 import Card from '@/client/components/card/Card.vue';
 import Button from '@/client/components/common/Button.vue';

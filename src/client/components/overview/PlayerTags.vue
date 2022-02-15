@@ -40,7 +40,7 @@
 import Vue from 'vue';
 import TagCount from '@/client/components/TagCount.vue';
 import {ITagCount} from '@/common/cards/ITagCount';
-import {ViewModel, PublicPlayerModel} from '@/models/PlayerModel';
+import {ViewModel, PublicPlayerModel} from '@/common/models/PlayerModel';
 import {GameModel} from '@/common/models/GameModel';
 import {Tags} from '@/common/cards/Tags';
 import {SpecialTags} from '@/client/cards/SpecialTags';

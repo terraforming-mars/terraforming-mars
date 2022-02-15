@@ -162,7 +162,7 @@
 
 import Vue from 'vue';
 import {GameModel} from '@/common/models/GameModel';
-import {PlayerViewModel, PublicPlayerModel, ViewModel} from '@/models/PlayerModel';
+import {PlayerViewModel, PublicPlayerModel, ViewModel} from '@/common/models/PlayerModel';
 import Board from '@/client/components/Board.vue';
 import MoonBoard from '@/client/components/moon/MoonBoard.vue';
 import PlanetaryTracks from '@/client/components/pathfinders/PlanetaryTracks.vue';

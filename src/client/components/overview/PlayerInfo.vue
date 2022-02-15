@@ -1,6 +1,6 @@
 <script lang="ts">
 import Vue from 'vue';
-import {ViewModel, PublicPlayerModel} from '@/models/PlayerModel';
+import {ViewModel, PublicPlayerModel} from '@/common/models/PlayerModel';
 import PlayerResources from '@/client/components/overview/PlayerResources.vue';
 import PlayerTags from '@/client/components/overview/PlayerTags.vue';
 import PlayerStatus from '@/client/components/overview/PlayerStatus.vue';

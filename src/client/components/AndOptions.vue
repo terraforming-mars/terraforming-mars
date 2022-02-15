@@ -18,7 +18,7 @@
 <script lang="ts">
 
 import Vue from 'vue';
-import {PlayerViewModel, PublicPlayerModel} from '@/models/PlayerModel';
+import {PlayerViewModel, PublicPlayerModel} from '@/common/models/PlayerModel';
 import {PlayerInputModel} from '@/common/models/PlayerInputModel';
 import Button from '@/client/components/common/Button.vue';
 

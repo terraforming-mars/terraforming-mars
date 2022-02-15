@@ -8,7 +8,7 @@ import {IParty} from '../src/turmoil/parties/IParty';
 import {Turmoil} from '../src/turmoil/Turmoil';
 import {LogMessage} from '../src/common/logs/LogMessage';
 import {PolicyId} from '../src/common/turmoil/Types';
-import {Log} from '../src/common/Log';
+import {Log} from '../src/common/logs/Log';
 import {PlayerInput} from '../src/PlayerInput';
 import {DeferredAction} from '../src/deferredActions/DeferredAction';
 import {Greens} from '../src/turmoil/parties/Greens';

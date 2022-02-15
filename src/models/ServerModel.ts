@@ -30,9 +30,7 @@ import {
   IMilestoneScore,
 } from '../common/models/ClaimedMilestoneModel';
 import {FundedAwardModel, IAwardScore} from '../common/models/FundedAwardModel';
-import {
-  getTurmoilModel,
-} from '../models/TurmoilModelCode';
+import {getTurmoilModel} from '../models/TurmoilModel';
 import {SelectDelegate} from '../inputs/SelectDelegate';
 import {SelectColony} from '../inputs/SelectColony';
 import {SelectProductionToLose} from '../inputs/SelectProductionToLose';

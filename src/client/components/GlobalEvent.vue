@@ -30,7 +30,7 @@ import {IGlobalEvent} from '@/turmoil/globalEvents/IGlobalEvent';
 import {CardRenderer} from '@/cards/render/CardRenderer';
 import {getGlobalEventByName} from '@/turmoil/globalEvents/GlobalEventDealer';
 import CardDescription from '@/client/components/card/CardDescription.vue';
-import {PreferencesManager} from '../utils/PreferencesManager';
+import {PreferencesManager} from '@/client/utils/PreferencesManager';
 
 export default Vue.extend({
   name: 'global-event',

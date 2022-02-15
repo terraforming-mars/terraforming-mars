@@ -47,7 +47,6 @@ describe('AsteroidMiningConsortium', function() {
   });
 
   it('Gives victory points', function() {
-    player.victoryPointsBreakdown.setVictoryPoints('victoryPoints', card.getVictoryPoints());
-    expect(player.victoryPointsBreakdown.victoryPoints).to.eq(1);
+    expect(card.getVictoryPoints()).to.eq(1);
   });
 });

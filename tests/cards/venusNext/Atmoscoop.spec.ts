@@ -5,7 +5,7 @@ import {ICard} from '../../../src/cards/ICard';
 import {Atmoscoop} from '../../../src/cards/venusNext/Atmoscoop';
 import {Dirigibles} from '../../../src/cards/venusNext/Dirigibles';
 import {FloatingHabs} from '../../../src/cards/venusNext/FloatingHabs';
-import * as constants from '../../../src/constants';
+import * as constants from '../../../src/common/constants';
 import {Game} from '../../../src/Game';
 import {OrOptions} from '../../../src/inputs/OrOptions';
 import {SelectCard} from '../../../src/inputs/SelectCard';

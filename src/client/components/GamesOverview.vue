@@ -22,7 +22,7 @@
 
 import Vue from 'vue';
 import {Phase} from '@/common/Phase';
-import * as constants from '@/constants';
+import * as constants from '@/common/constants';
 
 export default Vue.extend({
   name: 'games-overview',

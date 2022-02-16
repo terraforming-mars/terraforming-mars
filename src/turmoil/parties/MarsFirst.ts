@@ -12,7 +12,7 @@ import {Policy} from '../Policy';
 import {Phase} from '../../common/Phase';
 import {SelectHowToPayDeferred} from '../../deferredActions/SelectHowToPayDeferred';
 import {IProjectCard} from '../../cards/IProjectCard';
-import {POLITICAL_AGENDAS_MAX_ACTION_USES} from '../../constants';
+import {POLITICAL_AGENDAS_MAX_ACTION_USES} from '../../common/constants';
 
 export class MarsFirst extends Party implements IParty {
   name = PartyName.MARS;

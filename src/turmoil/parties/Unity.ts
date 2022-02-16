@@ -8,7 +8,7 @@ import {Bonus} from '../Bonus';
 import {Policy} from '../Policy';
 import {SelectHowToPayDeferred} from '../../deferredActions/SelectHowToPayDeferred';
 import {Player} from '../../Player';
-import {POLITICAL_AGENDAS_MAX_ACTION_USES} from '../../constants';
+import {POLITICAL_AGENDAS_MAX_ACTION_USES} from '../../common/constants';
 import {ICard} from '../../cards/ICard';
 import {DeferredAction} from '../../deferredActions/DeferredAction';
 import {OrOptions} from '../../inputs/OrOptions';

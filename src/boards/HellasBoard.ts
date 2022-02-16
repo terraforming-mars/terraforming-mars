@@ -3,7 +3,7 @@ import {SpaceName} from '../SpaceName';
 import {Board} from './Board';
 import {Player} from '../Player';
 import {ISpace} from './ISpace';
-import {HELLAS_BONUS_OCEAN_COST} from '../constants';
+import {HELLAS_BONUS_OCEAN_COST} from '../common/constants';
 import {SpaceType} from '../common/boards/SpaceType';
 import {BoardBuilder} from './BoardBuilder';
 import {SerializedBoard} from './SerializedBoard';

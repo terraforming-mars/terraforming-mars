@@ -456,7 +456,7 @@ import {RandomMAOptionType} from '@/common/ma/RandomMAOptionType';
 import {GameId} from '@/common/Types';
 import {AgendaStyle} from '@/common/turmoil/Types';
 
-import * as constants from '@/constants';
+import * as constants from '@/common/constants';
 
 type BoardNameType = BoardName | RandomBoardOption;
 

@@ -200,7 +200,7 @@
 
 <script lang="ts">
 import Vue from 'vue';
-import * as constants from '@/constants';
+import * as constants from '@/common/constants';
 import BoardSpace from '@/client/components/BoardSpace.vue';
 import {IAresData} from '@/common/ares/IAresData';
 import {SpaceModel} from '@/common/models/SpaceModel';

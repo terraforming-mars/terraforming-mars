@@ -4,7 +4,7 @@ import {SpaceName} from '../src/SpaceName';
 import {Mayor} from '../src/milestones/Mayor';
 import {Banker} from '../src/awards/Banker';
 import {Thermalist} from '../src/awards/Thermalist';
-import * as constants from '../src/constants';
+import * as constants from '../src/common/constants';
 import {Birds} from '../src/cards/base/Birds';
 import {WaterImportFromEuropa} from '../src/cards/base/WaterImportFromEuropa';
 import {Phase} from '../src/common/Phase';

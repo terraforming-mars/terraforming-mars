@@ -7,7 +7,7 @@ import {TestPlayers} from '../../../TestPlayers';
 import {Game} from '../../../../src/Game';
 import {PoliticalAgendas} from '../../../../src/turmoil/PoliticalAgendas';
 import {Reds} from '../../../../src/turmoil/parties/Reds';
-import {MAX_TEMPERATURE} from '../../../../src/constants';
+import {MAX_TEMPERATURE} from '../../../../src/common/constants';
 
 describe('ConvertHeat', function() {
   let card: ConvertHeat; let player: Player;

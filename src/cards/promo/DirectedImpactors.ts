@@ -9,7 +9,7 @@ import {Player} from '../../Player';
 import {SelectCard} from '../../inputs/SelectCard';
 import {SelectOption} from '../../inputs/SelectOption';
 import {OrOptions} from '../../inputs/OrOptions';
-import {MAX_TEMPERATURE} from '../../constants';
+import {MAX_TEMPERATURE} from '../../common/constants';
 import {LogHelper} from '../../LogHelper';
 import {SelectHowToPayDeferred} from '../../deferredActions/SelectHowToPayDeferred';
 import {CardRenderer} from '../render/CardRenderer';

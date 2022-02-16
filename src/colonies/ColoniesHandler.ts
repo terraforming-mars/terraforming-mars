@@ -1,4 +1,4 @@
-import {ENERGY_TRADE_COST, MC_TRADE_COST, TITANIUM_TRADE_COST} from '../constants';
+import {ENERGY_TRADE_COST, MC_TRADE_COST, TITANIUM_TRADE_COST} from '../common/constants';
 import {Game} from '../Game';
 import {Player} from '../Player';
 import {Colony} from './Colony';

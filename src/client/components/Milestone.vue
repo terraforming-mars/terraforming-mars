@@ -34,7 +34,7 @@
 <script lang="ts">
 
 import Vue from 'vue';
-import {MILESTONE_COST, MAX_MILESTONES} from '@/constants';
+import {MILESTONE_COST, MAX_MILESTONES} from '@/common/constants';
 import {ClaimedMilestoneModel} from '@/common/models/ClaimedMilestoneModel';
 import {PreferencesManager} from '@/client/utils/PreferencesManager';
 

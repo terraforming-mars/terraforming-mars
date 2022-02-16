@@ -7,7 +7,7 @@ import {Bonus} from '../Bonus';
 import {Policy} from '../Policy';
 import {Player} from '../../Player';
 import {SelectHowToPayDeferred} from '../../deferredActions/SelectHowToPayDeferred';
-import {MAX_TEMPERATURE} from '../../constants';
+import {MAX_TEMPERATURE} from '../../common/constants';
 import {CardName} from '../../common/cards/CardName';
 
 export class Kelvinists extends Party implements IParty {

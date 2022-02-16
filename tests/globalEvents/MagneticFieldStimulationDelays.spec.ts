@@ -1,5 +1,5 @@
 import {expect} from 'chai';
-import {MAX_OXYGEN_LEVEL, MAX_TEMPERATURE} from '../../src/constants';
+import {MAX_OXYGEN_LEVEL, MAX_TEMPERATURE} from '../../src/common/constants';
 import {Game} from '../../src/Game';
 import {Player} from '../../src/Player';
 import {MagneticFieldStimulationDelays} from '../../src/turmoil/globalEvents/MagneticFieldStimulationDelays';

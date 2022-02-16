@@ -5,7 +5,7 @@ import {expect} from 'chai';
 import Awards from '@/client/components/Awards.vue';
 import Award from '@/client/components/Award.vue';
 import {FundedAwardModel} from '@/common/models/FundedAwardModel';
-import {AWARD_COSTS} from '@/constants';
+import {AWARD_COSTS} from '@/common/constants';
 
 function createAward({id = 1, funded = false}): FundedAwardModel {
   return {

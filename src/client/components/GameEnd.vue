@@ -172,7 +172,7 @@ import {playerColorClass} from '@/common/utils/utils';
 import {Timer} from '@/Timer';
 
 
-import * as constants from '@/constants';
+import * as constants from '@/common/constants';
 import {SpectatorModel} from '@/common/models/SpectatorModel';
 import {Color} from '@/common/Color';
 

@@ -14,7 +14,7 @@ import Help from '@/client/components/help/Help.vue';
 
 import {$t} from '@/client/directives/i18n';
 
-import * as constants from '@/constants';
+import * as constants from '@/common/constants';
 import * as raw_settings from '@/genfiles/settings.json';
 import {SpectatorModel} from '@/common/models/SpectatorModel';
 import {isPlayerId, isSpectatorId} from '@/common/utils/utils';

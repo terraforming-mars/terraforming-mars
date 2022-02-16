@@ -13,7 +13,7 @@ import {GlobalEventDealer, getGlobalEventByName} from './globalEvents/GlobalEven
 import {IGlobalEvent} from './globalEvents/IGlobalEvent';
 import {ISerializable} from '../ISerializable';
 import {SerializedTurmoil} from './SerializedTurmoil';
-import {PLAYER_DELEGATES_COUNT} from '../constants';
+import {PLAYER_DELEGATES_COUNT} from '../common/constants';
 import {PoliticalAgendasData, PoliticalAgendas} from './PoliticalAgendas';
 import {AgendaStyle} from '../common/turmoil/Types';
 import {CardName} from '../common/cards/CardName';

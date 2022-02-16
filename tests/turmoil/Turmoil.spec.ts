@@ -23,7 +23,7 @@ import {NitrogenFromTitan} from '../../src/cards/colonies/NitrogenFromTitan';
 import {SpaceStation} from '../../src/cards/base/SpaceStation';
 import {EarthCatapult} from '../../src/cards/base/EarthCatapult';
 import {QuantumExtractor} from '../../src/cards/base/QuantumExtractor';
-import * as constants from '../../src/constants';
+import * as constants from '../../src/common/constants';
 import {SerializedTurmoil} from '../../src/turmoil/SerializedTurmoil';
 import {PoliticalAgendas} from '../../src/turmoil/PoliticalAgendas';
 import {IParty} from '../../src/turmoil/parties/IParty';

@@ -58,7 +58,7 @@
 <script lang="ts">
 import Vue from 'vue';
 import Award from '@/client/components/Award.vue';
-import {AWARD_COSTS} from '@/constants';
+import {AWARD_COSTS} from '@/common/constants';
 import {FundedAwardModel} from '@/common/models/FundedAwardModel';
 import {PreferencesManager} from '@/client/utils/PreferencesManager';
 

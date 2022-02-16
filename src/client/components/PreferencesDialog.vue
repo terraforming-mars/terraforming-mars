@@ -1,7 +1,7 @@
 <script lang="ts">
 import Vue from 'vue';
 import {preferences, PreferencesManager} from '@/client/utils/PreferencesManager';
-import {LANGUAGES} from '@/constants';
+import {LANGUAGES} from '@/common/constants';
 
 export default Vue.extend({
   name: 'PreferencesDialog',

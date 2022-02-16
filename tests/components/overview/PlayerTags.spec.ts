@@ -4,7 +4,7 @@ import {expect} from 'chai';
 import {CardName} from '@/common/cards/CardName';
 import {Color} from '@/common/Color';
 import PlayerTags from '@/client/components/overview/PlayerTags.vue';
-import {PlayerViewModel, PublicPlayerModel} from '@/models/PlayerModel';
+import {PlayerViewModel, PublicPlayerModel} from '@/common/models/PlayerModel';
 import {RecursivePartial} from '@/common/utils/utils';
 import {Tags} from '@/common/cards/Tags';
 import {Wrapper} from '@vue/test-utils';

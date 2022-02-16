@@ -187,7 +187,7 @@ export default Vue.extend({
       let vulgarFraction = '';
       if (fraction === 0.5) {
         vulgarFraction = '½';
-      } else if (Math.abs(fraction - (1/3)) < 0.001) {
+      } else if (Math.abs(fraction - (1/3)) < Number.EPSILON) {
         vulgarFraction = '⅓';
       }
       return `${integer || ''}${vulgarFraction}`;

@@ -6,7 +6,6 @@ import {ShouldIncreaseTrack} from '../../common/colonies/ShouldIncreaseTrack';
 
 export class Titania extends Colony {
   public name = ColonyName.TITANIA;
-  public description = 'VP';
   public buildType = ColonyBenefit.GAIN_VP;
   public override buildQuantity = [5, 3, 2];
   public tradeType = ColonyBenefit.GAIN_VP;

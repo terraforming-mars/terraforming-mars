@@ -34,7 +34,6 @@ type TradeOptions = {
 };
 export abstract class Colony {
     public abstract readonly name: ColonyName;
-    public abstract readonly description: string;
 
     // isActive represents when the colony is part of the game, or "back in the box", as it were.
     public isActive: boolean = true;

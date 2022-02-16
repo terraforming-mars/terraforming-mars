@@ -5,7 +5,6 @@ import {Resources} from '../common/Resources';
 
 export class Luna extends Colony {
   public name = ColonyName.LUNA;
-  public description = 'MegaCredits';
   public buildType = ColonyBenefit.GAIN_PRODUCTION;
   public override buildQuantity = [2, 2, 2];
   public override buildResource = Resources.MEGACREDITS;

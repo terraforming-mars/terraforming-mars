@@ -6,7 +6,6 @@ import {ShouldIncreaseTrack} from '../../common/colonies/ShouldIncreaseTrack';
 
 export class Hygiea extends Colony {
   public name = ColonyName.HYGIEA;
-  public description = 'Attack';
   public buildType = ColonyBenefit.OPPONENT_DISCARD;
   public tradeType = ColonyBenefit.STEAL_RESOURCES;
   public override tradeQuantity = [3, 3, 3, 3, 3, 3, 3];

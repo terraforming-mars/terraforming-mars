@@ -10,8 +10,7 @@ describe('BribedCommittee', function() {
     const redPlayer = TestPlayers.RED.newPlayer();
     Game.newInstance('foobar', [player, redPlayer], player);
     card.play(player);
-    player.victoryPointsBreakdown.setVictoryPoints('victoryPoints', card.getVictoryPoints());
-    expect(player.victoryPointsBreakdown.victoryPoints).to.eq(-2);
+    expect(card.getVictoryPoints()).to.eq(-2);
     expect(player.getTerraformRating()).to.eq(22);
   });
 });

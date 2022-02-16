@@ -7,7 +7,7 @@ import {TestPlayers} from '../TestPlayers';
 import {MockResponse} from './HttpMocks';
 import {IContext} from '../../src/routes/IHandler';
 import {FakeGameLoader} from './FakeGameLoader';
-import {PlayerViewModel} from '../../src/models/PlayerModel';
+import {PlayerViewModel} from '../../src/common/models/PlayerModel';
 
 describe('ApiPlayer', function() {
   let req: http.IncomingMessage;

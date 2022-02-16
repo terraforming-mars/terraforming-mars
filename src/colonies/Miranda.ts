@@ -5,7 +5,6 @@ import {ResourceType} from '../common/ResourceType';
 
 export class Miranda extends Colony {
   public name = ColonyName.MIRANDA;
-  public description = 'Animals';
   public override isActive = false;
   public override resourceType = ResourceType.ANIMAL;
   public buildType = ColonyBenefit.ADD_RESOURCES_TO_CARD;

@@ -5,7 +5,6 @@ import {ResourceType} from '../common/ResourceType';
 
 export class Enceladus extends Colony {
   public name = ColonyName.ENCELADUS;
-  public description = 'Microbes';
   public override isActive = false;
   public override resourceType = ResourceType.MICROBE;
   public buildType = ColonyBenefit.ADD_RESOURCES_TO_CARD;

@@ -97,20 +97,20 @@ describe('Game', () => {
     game.playerIsDoneWithGame(player2);
     game.playerIsDoneWithGame(player);
 
-    player.getVictoryPoints();
-    player2.getVictoryPoints();
-    player3.getVictoryPoints();
+    const player1VPs = player.getVictoryPoints();
+    const player2VPs = player2.getVictoryPoints();
+    const player3VPs = player3.getVictoryPoints();
 
-    expect(player.victoryPointsBreakdown.terraformRating).to.eq(21);
-    expect(player.victoryPointsBreakdown.milestones).to.eq(5);
-    expect(player.victoryPointsBreakdown.awards).to.eq(2); // one 2nd place
-    expect(player.victoryPointsBreakdown.greenery).to.eq(1);
-    expect(player.victoryPointsBreakdown.city).to.eq(1); // greenery adjacent to city
-    expect(player.victoryPointsBreakdown.victoryPoints).to.eq(6);
-    expect(player.victoryPointsBreakdown.total).to.eq(36);
+    expect(player1VPs.terraformRating).to.eq(21);
+    expect(player1VPs.milestones).to.eq(5);
+    expect(player1VPs.awards).to.eq(2); // one 2nd place
+    expect(player1VPs.greenery).to.eq(1);
+    expect(player1VPs.city).to.eq(1); // greenery adjacent to city
+    expect(player1VPs.victoryPoints).to.eq(6);
+    expect(player1VPs.total).to.eq(36);
 
-    expect(player2.victoryPointsBreakdown.awards).to.eq(10); // 1st place + one shared 1st place
-    expect(player3.victoryPointsBreakdown.awards).to.eq(5); // one shared 1st place
+    expect(player2VPs.awards).to.eq(10); // 1st place + one shared 1st place
+    expect(player3VPs.awards).to.eq(5); // one shared 1st place
   });
 
   it('Disallows to set temperature more than allowed maximum', () => {

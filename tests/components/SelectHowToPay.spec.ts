@@ -1,8 +1,8 @@
 import {mount} from '@vue/test-utils';
 import {getLocalVue} from './getLocalVue';
 import SelectHowToPay from '@/client/components/SelectHowToPay.vue';
-import {PlayerInputModel} from '@/models/PlayerInputModel';
-import {PlayerViewModel, PublicPlayerModel} from '@/models/PlayerModel';
+import {PlayerInputModel} from '@/common/models/PlayerInputModel';
+import {PlayerViewModel, PublicPlayerModel} from '@/common/models/PlayerModel';
 import {PaymentTester} from './PaymentTester';
 
 describe('SelectHowToPay', () => {

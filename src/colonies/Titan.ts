@@ -5,7 +5,6 @@ import {ResourceType} from '../common/ResourceType';
 
 export class Titan extends Colony {
   public name = ColonyName.TITAN;
-  public description = 'Floaters';
   public override isActive = false;
   public override resourceType = ResourceType.FLOATER;
   public buildType = ColonyBenefit.ADD_RESOURCES_TO_CARD;

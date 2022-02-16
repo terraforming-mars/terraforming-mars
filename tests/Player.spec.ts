@@ -19,7 +19,7 @@ import {TestingUtils} from './TestingUtils';
 import {Units} from '../src/common/Units';
 import {SelfReplicatingRobots} from '../src/cards/promo/SelfReplicatingRobots';
 import {Pets} from '../src/cards/base/Pets';
-import {GlobalEventName} from '../src/turmoil/globalEvents/GlobalEventName';
+import {GlobalEventName} from '../src/common/turmoil/globalEvents/GlobalEventName';
 
 describe('Player', function() {
   it('should initialize with right defaults', function() {

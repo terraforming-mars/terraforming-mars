@@ -1,5 +1,5 @@
-import {LogMessageData} from './common/logs/LogMessageData';
-import {Message} from './common/logs/Message';
+import {LogMessageData} from './LogMessageData';
+import {Message} from './Message';
 
 export class Log {
   public static applyData(message: Message, cb: (datum: LogMessageData, idx: number) => string): string {

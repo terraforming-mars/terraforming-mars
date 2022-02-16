@@ -1,5 +1,5 @@
 
-import {shallowMount} from '@vue/test-utils';
+import {shallowMount, mount} from '@vue/test-utils';
 import {getLocalVue} from './getLocalVue';
 import {expect} from 'chai';
 import Awards from '@/client/components/Awards.vue';
@@ -202,5 +202,29 @@ describe('Awards', () => {
     wrapper.findAllComponents(Award).wrappers.forEach((awardWrapper) => {
       expect(awardWrapper.props('showScores')).to.be.true;
     });
+  });
+
+  it(`shows award descriptions on click`, async () => {
+    const awards = [
+      createAward({id: 1, funded: true}),
+      createAward({id: 2, funded: false}),
+    ];
+    const wrapper = mount(Awards, {
+      localVue: getLocalVue(),
+      propsData: {awards, showScores: true},
+    });
+
+    expect(wrapper.text()).to.not.include(awards[0].description);
+    expect(wrapper.text()).to.not.include(awards[1].description);
+
+    await wrapper.find('[data-test=toggle-description]').trigger('click');
+
+    expect(wrapper.text()).to.include(awards[0].description);
+    expect(wrapper.text()).to.include(awards[1].description);
+
+    await wrapper.find('[data-test=toggle-description]').trigger('click');
+
+    expect(wrapper.text()).to.not.include(awards[0].description);
+    expect(wrapper.text()).to.not.include(awards[1].description);
   });
 });

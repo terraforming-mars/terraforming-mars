@@ -13,6 +13,7 @@ import {AddResourcesToCard} from '../../deferredActions/AddResourcesToCard';
 import {Resources} from '../../common/Resources';
 import {ResourceType} from '../../common/ResourceType';
 import {TRSource} from '../ICard';
+import {digit} from '../Options';
 
 export class SecretLabs extends Card implements IProjectCard {
   constructor() {
@@ -28,7 +29,7 @@ export class SecretLabs extends Card implements IProjectCard {
         cardNumber: 'Pf26',
         renderData: CardRenderer.builder((b) => {
           b.oceans(1).microbes(2).or().temperature(1).br;
-          b.plants(2).or().oxygen(1).floaters(2).br;
+          b.plants(3, {digit}).or().oxygen(1).floaters(2).br;
         }),
         description: 'Requires 1 Science tag and 1 Jovian tag. ' +
           'Place an ocean tile. Add 2 microbes on any card. ' +

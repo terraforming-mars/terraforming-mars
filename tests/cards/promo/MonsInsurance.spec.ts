@@ -6,7 +6,7 @@ import {MonsInsurance} from '../../../src/cards/promo/MonsInsurance';
 import {Game} from '../../../src/Game';
 import {OrOptions} from '../../../src/inputs/OrOptions';
 import {Resources} from '../../../src/common/Resources';
-import {GlobalEventName} from '../../../src/turmoil/globalEvents/GlobalEventName';
+import {GlobalEventName} from '../../../src/common/turmoil/globalEvents/GlobalEventName';
 import {TestPlayer} from '../../TestPlayer';
 import {TestPlayers} from '../../TestPlayers';
 

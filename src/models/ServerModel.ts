@@ -2,8 +2,8 @@ import {CardModel} from '../common/models/CardModel';
 import {ColonyModel} from '../common/models/ColonyModel';
 import {Color} from '../common/Color';
 import {Game, GameOptions} from '../Game';
-import {SimpleGameModel} from './SimpleGameModel';
-import {GameOptionsModel} from './GameOptionsModel';
+import {SimpleGameModel} from '../common/models/SimpleGameModel';
+import {GameOptionsModel} from '../common/models/GameOptionsModel';
 import {ICard} from '../cards/ICard';
 import {IProjectCard} from '../cards/IProjectCard';
 import {isICloneTagCard} from '../cards/pathfinders/ICloneTagCard';
@@ -11,9 +11,9 @@ import {Board} from '../boards/Board';
 import {ISpace} from '../boards/ISpace';
 import {Player} from '../Player';
 import {PlayerInput} from '../PlayerInput';
-import {PlayerInputModel} from './PlayerInputModel';
+import {PlayerInputModel} from '../common/models/PlayerInputModel';
 import {PlayerInputTypes} from '../common/input/PlayerInputTypes';
-import {PlayerViewModel, PublicPlayerModel} from './PlayerModel';
+import {PlayerViewModel, PublicPlayerModel} from '../common/models/PlayerModel';
 import {SelectAmount} from '../inputs/SelectAmount';
 import {SelectCard} from '../inputs/SelectCard';
 import {SelectHowToPay} from '../inputs/SelectHowToPay';
@@ -30,19 +30,17 @@ import {
   IMilestoneScore,
 } from '../common/models/ClaimedMilestoneModel';
 import {FundedAwardModel, IAwardScore} from '../common/models/FundedAwardModel';
-import {
-  getTurmoilModel,
-} from './TurmoilModel';
+import {getTurmoilModel} from '../models/TurmoilModel';
 import {SelectDelegate} from '../inputs/SelectDelegate';
 import {SelectColony} from '../inputs/SelectColony';
 import {SelectProductionToLose} from '../inputs/SelectProductionToLose';
 import {ShiftAresGlobalParameters} from '../inputs/ShiftAresGlobalParameters';
-import {SpectatorModel} from './SpectatorModel';
+import {SpectatorModel} from '../common/models/SpectatorModel';
 import {Units} from '../common/Units';
 import {SelectPartyToSendDelegate} from '../inputs/SelectPartyToSendDelegate';
-import {GameModel} from './GameModel';
+import {GameModel} from '../common/models/GameModel';
 import {Turmoil} from '../turmoil/Turmoil';
-import {PathfindersModel} from './PathfindersModel';
+import {createPathfindersModel} from './PathfindersModel';
 import {MoonExpansion} from '../moon/MoonExpansion';
 import {MoonModel} from '../common/models/MoonModel';
 import {Colony} from '../colonies/Colony';
@@ -82,7 +80,7 @@ export class Server {
       oceans: game.board.getOceanCount(),
       oxygenLevel: game.getOxygenLevel(),
       passedPlayers: game.getPassedPlayers(),
-      pathfinders: PathfindersModel.serialize(game),
+      pathfinders: createPathfindersModel(game),
       phase: game.phase,
       spaces: this.getSpaces(game.board),
       spectatorId: game.spectatorId,

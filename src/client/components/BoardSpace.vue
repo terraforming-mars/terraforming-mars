@@ -117,7 +117,11 @@ export default Vue.extend({
       } else if (tileType === TileType.DEIMOS_DOWN) {
         ret = 'Deimos Down';
       } else if (tileType === TileType.CITY) {
-        ret = 'City: 1 VP per adjacent greenery';
+        if (this.space.spaceType === SpaceType.COLONY) {
+          ret = 'City in space. No VP.';
+        } else {
+          ret = 'City: 1 VP per adjacent greenery';
+        }
       } else if (tileType === TileType.GREENERY) {
         ret = 'Greenery: 1 VP';
       } else if (tileType === TileType.BIOFERTILIZER_FACILITY) {

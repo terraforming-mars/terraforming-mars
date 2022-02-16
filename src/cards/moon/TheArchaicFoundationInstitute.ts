@@ -51,7 +51,7 @@ export class TheArchaicFoundationInstitute extends Card implements CorporationCa
       // TODO(kberg): If for some reason you gain MC but do not play another card, this becomes almost
       // like lost TR.
       if (this.resourceCount >= 3 && player.canAfford(0, {tr: {tr: 1}})) {
-        player.removeResourceFrom(this, 3, player.game, player, true);
+        player.removeResourceFrom(this, 3);
         player.increaseTerraformRating();
       }
     }

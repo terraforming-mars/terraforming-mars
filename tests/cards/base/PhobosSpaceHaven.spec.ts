@@ -13,8 +13,7 @@ describe('PhobosSpaceHaven', function() {
     const action = card.play(player);
     expect(action).is.undefined;
     expect(player.getProduction(Resources.TITANIUM)).to.eq(1);
-    player.victoryPointsBreakdown.setVictoryPoints('victoryPoints', card.getVictoryPoints());
-    expect(player.victoryPointsBreakdown.victoryPoints).to.eq(3);
+    expect(card.getVictoryPoints()).to.eq(3);
     expect(game.getCitiesCount()).to.eq(1);
   });
 });

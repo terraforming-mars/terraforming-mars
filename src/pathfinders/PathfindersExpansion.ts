@@ -21,7 +21,7 @@ import {SendDelegateToArea} from '../deferredActions/SendDelegateToArea';
 import {Tags} from '../common/cards/Tags';
 import {Turmoil} from '../turmoil/Turmoil';
 import {VictoryPointsBreakdown} from '../VictoryPointsBreakdown';
-import {GlobalEventName} from '../turmoil/globalEvents/GlobalEventName';
+import {GlobalEventName} from '../common/turmoil/globalEvents/GlobalEventName';
 
 export const PLANETARY_TAGS = [Tags.VENUS, Tags.EARTH, Tags.MARS, Tags.JOVIAN, Tags.MOON];
 const TRACKS = PlanetaryTracks.initialize();
@@ -54,7 +54,7 @@ export class PathfindersExpansion {
 
     // Communication Center hook
     if (card.cardType === CardType.EVENT) {
-      for (const p of player.game.getPlayers()) {
+      for (const p of player.game.getPlayersInGenerationOrder()) {
         for (const c of p.playedCards) {
           if (c.name === CardName.COMMUNICATION_CENTER) {
             p.addResourceTo(c, {qty: 1, log: true});
@@ -128,14 +128,14 @@ export class PathfindersExpansion {
           });
         }
         rewards.everyone.forEach((reward) => {
-          game.getPlayers().forEach((p) => {
+          game.getPlayersInGenerationOrder().forEach((p) => {
             PathfindersExpansion.grant(reward, p, tag);
           });
         });
         if (rewards.mostTags.length > 0) {
           const players = PathfindersExpansion.playersWithMostTags(
             tag,
-            game.getPlayers(),
+            game.getPlayersInGenerationOrder(),
             (from instanceof Player) ? from : undefined);
           rewards.mostTags.forEach((reward) => {
             players.forEach((p) => {

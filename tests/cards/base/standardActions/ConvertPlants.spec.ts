@@ -7,7 +7,7 @@ import {TestPlayers} from '../../../TestPlayers';
 import {Game} from '../../../../src/Game';
 import {PoliticalAgendas} from '../../../../src/turmoil/PoliticalAgendas';
 import {Reds} from '../../../../src/turmoil/parties/Reds';
-import {MAX_OXYGEN_LEVEL} from '../../../../src/constants';
+import {MAX_OXYGEN_LEVEL} from '../../../../src/common/constants';
 
 describe('ConvertPlants', function() {
   let card: ConvertPlants; let player: Player;

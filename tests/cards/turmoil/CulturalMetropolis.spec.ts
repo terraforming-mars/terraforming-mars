@@ -1,6 +1,6 @@
 import {expect} from 'chai';
 import {CulturalMetropolis} from '../../../src/cards/turmoil/CulturalMetropolis';
-import {PLAYER_DELEGATES_COUNT} from '../../../src/constants';
+import {PLAYER_DELEGATES_COUNT} from '../../../src/common/constants';
 import {SendDelegateToArea} from '../../../src/deferredActions/SendDelegateToArea';
 import {Game} from '../../../src/Game';
 import {Player} from '../../../src/Player';

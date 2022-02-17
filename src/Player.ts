@@ -1,6 +1,6 @@
-import * as constants from './constants';
+import * as constants from './common/constants';
 import {PlayerId} from './common/Types';
-import {DEFAULT_FLOATERS_VALUE, DEFAULT_MICROBES_VALUE, MAX_FLEET_SIZE, MILESTONE_COST, REDS_RULING_POLICY_COST} from './constants';
+import {DEFAULT_FLOATERS_VALUE, DEFAULT_MICROBES_VALUE, MAX_FLEET_SIZE, MILESTONE_COST, REDS_RULING_POLICY_COST} from './common/constants';
 import {AndOptions} from './inputs/AndOptions';
 import {Aridor} from './cards/colonies/Aridor';
 import {Board} from './boards/Board';
@@ -48,6 +48,7 @@ import {SpaceType} from './common/boards/SpaceType';
 import {StormCraftIncorporated} from './cards/colonies/StormCraftIncorporated';
 import {Tags} from './common/cards/Tags';
 import {VictoryPointsBreakdown} from './VictoryPointsBreakdown';
+import {IVictoryPointsBreakdown} from './common/game/IVictoryPointsBreakdown';
 import {SelectProductionToLose} from './inputs/SelectProductionToLose';
 import {IAresGlobalParametersResponse, ShiftAresGlobalParameters} from './inputs/ShiftAresGlobalParameters';
 import {Timer} from './Timer';
@@ -62,7 +63,7 @@ import {ConvertHeat} from './cards/base/standardActions/ConvertHeat';
 import {Manutech} from './cards/venusNext/Manutech';
 import {LunaProjectOffice} from './cards/moon/LunaProjectOffice';
 import {GlobalParameter} from './common/GlobalParameter';
-import {GlobalEventName} from './turmoil/globalEvents/GlobalEventName';
+import {GlobalEventName} from './common/turmoil/globalEvents/GlobalEventName';
 import {LogHelper} from './LogHelper';
 import {UndoActionOption} from './inputs/UndoActionOption';
 import {LawSuit} from './cards/promo/LawSuit';
@@ -124,7 +125,6 @@ export class Player implements ISerializable<SerializedPlayer> {
   public draftedCards: Array<IProjectCard> = [];
   public cardCost: number = constants.CARD_COST;
   public needsToDraft: boolean | undefined = undefined;
-  public cardDiscount: number = 0;
 
   public timer: Timer = Timer.newInstance();
 
@@ -134,6 +134,7 @@ export class Player implements ISerializable<SerializedPlayer> {
   public colonyTradeOffset: number = 0;
   public colonyTradeDiscount: number = 0;
   public colonyVictoryPoints: number = 0;
+  public cardDiscount: number = 0; // Iapetus Colony
 
   // Turmoil
   public turmoilPolicyActionUsed: boolean = false;
@@ -536,7 +537,7 @@ export class Player implements ISerializable<SerializedPlayer> {
     return;
   }
 
-  public getVictoryPoints(): VictoryPointsBreakdown {
+  public getVictoryPoints(): IVictoryPointsBreakdown {
     const victoryPointsBreakdown = new VictoryPointsBreakdown();
 
     // Victory points from corporations
@@ -610,14 +611,14 @@ export class Player implements ISerializable<SerializedPlayer> {
         // Don't lose more VP than what is available
         victoryPointsBreakdown.updateTotal();
 
-        const totalBeforeEscapeVelocity = victoryPointsBreakdown.total;
+        const totalBeforeEscapeVelocity = victoryPointsBreakdown.points.total;
         const penaltyTotal = Math.min(penaltyPerMin * Math.floor(overTimeInMinutes / period), totalBeforeEscapeVelocity);
         victoryPointsBreakdown.setVictoryPoints('escapeVelocity', -penaltyTotal, 'Escape Velocity Penalty');
       }
     }
 
     victoryPointsBreakdown.updateTotal();
-    return victoryPointsBreakdown;
+    return victoryPointsBreakdown.points;
   }
 
   public cardIsInEffect(cardName: CardName): boolean {
@@ -672,10 +673,6 @@ export class Player implements ISerializable<SerializedPlayer> {
     if (this.isCorporation(CardName.PHARMACY_UNION) && this.corporationCard?.isDisabled) count++;
 
     return count;
-  }
-
-  public getResourcesOnCard(card: ICard): number | undefined {
-    return card.resourceCount;
   }
 
   public getResourcesOnCorporation():number {
@@ -779,7 +776,7 @@ export class Player implements ISerializable<SerializedPlayer> {
   public getResourceCount(resource: ResourceType): number {
     let count: number = 0;
     this.getCardsWithResources(resource).forEach((card) => {
-      count += (this.getResourcesOnCard(card) ?? 0);
+      count += card.resourceCount;
     });
     return count;
   }
@@ -1461,23 +1458,17 @@ export class Player implements ISerializable<SerializedPlayer> {
 
   public getMicrobesCanSpend(): number {
     const psychrophiles = this.playedCards.find((card) => card.name === CardName.PSYCHROPHILES);
-    return psychrophiles !== undefined ?
-      this.getResourcesOnCard(psychrophiles) ?? 0 :
-      0;
+    return psychrophiles?.resourceCount ?? 0;
   }
 
   public getFloatersCanSpend(): number {
     const dirigibles = this.playedCards.find((card) => card.name === CardName.DIRIGIBLES);
-    return dirigibles !== undefined ?
-      this.getResourcesOnCard(dirigibles) ?? 0 :
-      0;
+    return dirigibles?.resourceCount ?? 0;
   }
 
   public getSpendableScienceResources(): number {
     const lunaArchives = this.playedCards.find((card) => card.name === CardName.LUNA_ARCHIVES);
-    return lunaArchives !== undefined ?
-      this.getResourcesOnCard(lunaArchives) ?? 0 :
-      0;
+    return lunaArchives?.resourceCount ?? 0;
   }
 
   public getSpendableSeedResources(): number {
@@ -1590,7 +1581,7 @@ export class Player implements ISerializable<SerializedPlayer> {
 
     TurmoilHandler.applyOnCardPlayedEffect(this, card);
 
-    for (const somePlayer of this.game.getPlayers()) {
+    for (const somePlayer of this.game.getPlayersInGenerationOrder()) {
       if (somePlayer.corporationCard !== undefined && somePlayer.corporationCard.onCardPlayed !== undefined) {
         const actionFromPlayedCard: OrOptions | void = somePlayer.corporationCard.onCardPlayed(this, card);
         if (actionFromPlayedCard !== undefined) {
@@ -1671,7 +1662,7 @@ export class Player implements ISerializable<SerializedPlayer> {
       // Awards are disabled for 1 player games
       if (this.game.isSoloMode()) return;
 
-      const players: Array<Player> = this.game.getPlayers().slice();
+      const players: Array<Player> = this.game.getPlayersInGenerationOrder().slice();
       players.sort(
         (p1, p2) => fundedAward.award.getScore(p2) - fundedAward.award.getScore(p1),
       );
@@ -2084,7 +2075,7 @@ export class Player implements ISerializable<SerializedPlayer> {
       }
     });
 
-    if (this.game.getPlayers().length > 1 &&
+    if (this.game.getPlayersInGenerationOrder().length > 1 &&
       this.actionsTakenThisRound > 0 &&
       !this.game.gameOptions.fastModeOption &&
       this.allOtherPlayersHavePassed() === false) {
@@ -2131,7 +2122,7 @@ export class Player implements ISerializable<SerializedPlayer> {
   private allOtherPlayersHavePassed(): boolean {
     const game = this.game;
     if (game.isSoloMode()) return true;
-    const players = game.getPlayers();
+    const players = game.getPlayersInGenerationOrder();
     const passedPlayers = game.getPassedPlayers();
     return passedPlayers.length === players.length - 1 && passedPlayers.includes(this.color) === false;
   }

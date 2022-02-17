@@ -13,8 +13,7 @@ describe('SpaceStation', function() {
     Game.newInstance('foobar', [player, redPlayer], player);
     const action = card.play();
     expect(action).is.undefined;
-    player.victoryPointsBreakdown.setVictoryPoints('victoryPoints', card.getVictoryPoints());
-    expect(player.victoryPointsBreakdown.victoryPoints).to.eq(1);
+    expect(card.getVictoryPoints()).to.eq(1);
     expect(card.getCardDiscount(player, card)).to.eq(2);
     expect(card.getCardDiscount(player, new Bushes())).to.eq(0);
   });

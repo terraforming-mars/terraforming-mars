@@ -30,7 +30,6 @@ describe('KelpFarming', function() {
     expect(player.getProduction(Resources.PLANTS)).to.eq(3);
     expect(player.plants).to.eq(plantsCount + 2);
 
-    player.victoryPointsBreakdown.setVictoryPoints('victoryPoints', card.getVictoryPoints());
-    expect(player.victoryPointsBreakdown.victoryPoints).to.eq(1);
+    expect(card.getVictoryPoints()).to.eq(1);
   });
 });

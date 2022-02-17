@@ -1,21 +1,11 @@
 import {ChoosePoliticalAgenda} from '../deferredActions/ChoosePoliticalAgenda';
 import {Game} from '../Game';
-import {Bonus, BonusId} from './Bonus';
+import {Bonus} from './Bonus';
 import {IParty} from './parties/IParty';
 import {PartyName} from '../common/turmoil/PartyName';
-import {Policy, PolicyId} from './Policy';
+import {Policy} from './Policy';
 import {Turmoil} from './Turmoil';
-
-export enum AgendaStyle {
-  STANDARD = 'Standard',
-  RANDOM = 'Random',
-  CHAIRMAN = 'Chairman',
-}
-
-export interface Agenda {
-  bonusId: BonusId;
-  policyId: PolicyId;
-}
+import {Agenda, AgendaStyle} from '../common/turmoil/Types';
 
 export interface PoliticalAgendasData {
   agendas: Map<PartyName, Agenda>;

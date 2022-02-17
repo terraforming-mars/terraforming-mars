@@ -40,9 +40,9 @@ describe('ImportedHydrogen', function() {
     expect(selectMicrobe.cards[0]).to.eq(tardigrades);
     selectMicrobe.cb([tardigrades]);
 
-    expect(player.getResourcesOnCard(tardigrades)).to.eq(3);
+    expect(tardigrades.resourceCount).to.eq(3);
     selectAnimal.cb();
-    expect(player.getResourcesOnCard(pets)).to.eq(2);
+    expect(pets.resourceCount).to.eq(2);
   });
 
   it('Should add plants directly if no microbe or animal cards available', function() {

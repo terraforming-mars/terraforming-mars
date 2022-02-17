@@ -44,7 +44,7 @@ describe('BioPrintingFacility', function() {
     expect(action!.options).has.lengthOf(2);
 
     action!.options[0].cb();
-    expect(player.getResourcesOnCard(smallanimals)).to.eq(1);
+    expect(smallanimals.resourceCount).to.eq(1);
 
     action!.options[1].cb();
     expect(player.plants).to.eq(2);
@@ -61,9 +61,9 @@ describe('BioPrintingFacility', function() {
     expect(action!.options).has.lengthOf(2);
 
     action!.options[0].cb([smallanimals]);
-    expect(player.getResourcesOnCard(smallanimals)).to.eq(1);
+    expect(smallanimals.resourceCount).to.eq(1);
 
     action!.options[0].cb([fish]);
-    expect(player.getResourcesOnCard(fish)).to.eq(1);
+    expect(fish.resourceCount).to.eq(1);
   });
 });

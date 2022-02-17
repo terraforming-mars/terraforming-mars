@@ -1,7 +1,7 @@
 import {DbLoadCallback, IDatabase} from './IDatabase';
 import {Game, GameOptions, Score} from '../Game';
 import {GameId} from '../common/Types';
-import {IGameData} from './IDatabase';
+import {IGameData} from '../common/game/IGameData';
 import {SerializedGame} from '../SerializedGame';
 import {Dirent} from 'fs';
 

@@ -4,12 +4,14 @@ import {expect} from 'chai';
 import {CardName} from '@/common/cards/CardName';
 import {CardType} from '@/common/cards/CardType';
 import SelectHowToPayForProjectCard from '@/client/components/SelectHowToPayForProjectCard.vue';
-import {PlayerInputModel} from '@/models/PlayerInputModel';
-import {PlayerViewModel, PublicPlayerModel} from '@/models/PlayerModel';
+import {PlayerInputModel} from '@/common/models/PlayerInputModel';
+import {PlayerViewModel, PublicPlayerModel} from '@/common/models/PlayerModel';
 import {Units} from '@/common/Units';
 import {FakeLocalStorage} from './FakeLocalStorage';
 import {PaymentTester} from './PaymentTester';
 import {HowToPay} from '@/inputs/HowToPay';
+import {ResourceType} from '@/common/ResourceType';
+import {CardModel} from '@/common/models/CardModel';
 
 describe('SelectHowToPayForProjectCard', () => {
   let localStorage: FakeLocalStorage;
@@ -172,6 +174,30 @@ describe('SelectHowToPayForProjectCard', () => {
 
     tester.clickSave();
     expect(saveResponse).deep.eq(howToPay({floaters: 2, megaCredits: 6}));
+  });
+
+  it('Paying for Stratospheric Birds with Dirigibles while another card has floaters (#4052)', async () => {
+    const playedCards: Array<Partial<CardModel>> = [
+      {name: CardName.DIRIGIBLES, resourceType: ResourceType.FLOATER, resources: 3},
+      {name: CardName.AERIAL_MAPPERS, resourceType: ResourceType.FLOATER, resources: 1},
+    ];
+    const wrapper = setupCardForPurchase(
+      CardName.STRATOSPHERIC_BIRDS, 12, {
+        megaCredits: 9,
+        playedCards: playedCards as Array<CardModel>,
+      },
+      {floaters: 3});
+
+    const tester = new PaymentTester(wrapper);
+    await tester.nextTick();
+
+    tester.clickSave();
+    expect(saveResponse).deep.eq(howToPay({floaters: 1, megaCredits: 9}));
+
+    tester.clickMax('floaters');
+
+    tester.clickSave();
+    expect(saveResponse).deep.eq(howToPay({floaters: 3, megaCredits: 3}));
   });
 
   it('Paying for other card with Dirigibles uses all floaters', async () => {
@@ -473,6 +499,7 @@ describe('SelectHowToPayForProjectCard', () => {
       titanium: 0,
       steelValue: 2,
       titaniumValue: 3,
+      playedCards: [],
     }, playerFields);
 
     const playerView: Partial<PlayerViewModel>= {

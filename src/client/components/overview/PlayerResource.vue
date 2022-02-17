@@ -15,7 +15,7 @@
 <script lang="ts">
 
 import Vue from 'vue';
-import {DEFAULT_STEEL_VALUE, DEFAULT_TITANIUM_VALUE} from '@/constants';
+import {DEFAULT_STEEL_VALUE, DEFAULT_TITANIUM_VALUE} from '@/common/constants';
 import {Resources} from '@/common/Resources';
 import {PreferencesManager} from '@/client/utils/PreferencesManager';
 

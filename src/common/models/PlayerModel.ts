@@ -1,12 +1,12 @@
 import {CardModel} from './CardModel';
-import {Color} from '../common/Color';
-import {VictoryPointsBreakdown} from '../VictoryPointsBreakdown';
-import {ITagCount} from '@/common/cards/ITagCount';
+import {Color} from '../Color';
+import {IVictoryPointsBreakdown} from '../game/IVictoryPointsBreakdown';
+import {ITagCount} from '../cards/ITagCount';
 import {PlayerInputModel} from './PlayerInputModel';
-import {TimerModel} from '../common/models/TimerModel';
+import {TimerModel} from './TimerModel';
 import {GameModel} from './GameModel';
-import {PlayerId, SpectatorId} from '../common/Types';
-import {CardName} from '../common/cards/CardName';
+import {PlayerId, SpectatorId} from '../Types';
+import {CardName} from '../cards/CardName';
 
 export interface ViewModel {
   game: GameModel;
@@ -59,7 +59,7 @@ export interface PublicPlayerModel {
   titaniumProduction: number;
   titaniumValue: number;
   tradesThisGeneration: number;
-  victoryPointsBreakdown: VictoryPointsBreakdown;
+  victoryPointsBreakdown: IVictoryPointsBreakdown;
 }
 
 /** A player's view of the game, including their secret information. */

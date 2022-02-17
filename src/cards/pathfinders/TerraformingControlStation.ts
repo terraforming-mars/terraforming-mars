@@ -17,6 +17,7 @@ export class TerraformingControlStation extends Card implements IProjectCard {
       tags: [Tags.VENUS, Tags.MARS, Tags.SPACE],
       tr: {tr: 2},
 
+      cardDiscount: [{tag: Tags.VENUS, amount: 2}, {tag: Tags.MARS, amount: 2}],
       metadata: {
         cardNumber: 'Pf12',
         renderData: CardRenderer.builder((b) => {

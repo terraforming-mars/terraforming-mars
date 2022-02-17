@@ -446,17 +446,17 @@ import {RandomBoardOption} from '@/common/boards/RandomBoardOption';
 import {CardName} from '@/common/cards/CardName';
 import CorporationsFilter from '@/client/components/create/CorporationsFilter.vue';
 import {translateTextWithParams} from '@/client/directives/i18n';
-import {IGameData} from '@/database/IDatabase';
+import {IGameData} from '@/common/game/IGameData';
 import ColoniesFilter from '@/client/components/create/ColoniesFilter.vue';
 import {ColonyName} from '@/common/colonies/ColonyName';
 import CardsFilter from '@/client/components/create/CardsFilter.vue';
 import Button from '@/client/components/common/Button.vue';
 import {playerColorClass} from '@/common/utils/utils';
-import {RandomMAOptionType} from '@/RandomMAOptionType';
+import {RandomMAOptionType} from '@/common/ma/RandomMAOptionType';
 import {GameId} from '@/common/Types';
-import {AgendaStyle} from '@/turmoil/PoliticalAgendas';
+import {AgendaStyle} from '@/common/turmoil/Types';
 
-import * as constants from '@/constants';
+import * as constants from '@/common/constants';
 
 type BoardNameType = BoardName | RandomBoardOption;
 

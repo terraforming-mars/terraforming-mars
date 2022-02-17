@@ -34,7 +34,7 @@ describe('VenusianPlants', function() {
     expect(action).instanceOf(SelectCard);
 
         action!.cb([card2]);
-        expect(player.getResourcesOnCard(card2)).to.eq(1);
+        expect(card2.resourceCount).to.eq(1);
         expect(game.getVenusScaleLevel()).to.eq(18);
   });
 
@@ -44,7 +44,7 @@ describe('VenusianPlants', function() {
     (game as any).venusScaleLevel = 16;
 
     card.play(player);
-    expect(player.getResourcesOnCard(card2)).to.eq(1);
+    expect(card2.resourceCount).to.eq(1);
     expect(game.getVenusScaleLevel()).to.eq(18);
   });
 });

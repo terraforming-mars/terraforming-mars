@@ -1,7 +1,7 @@
 <script lang="ts">
 import Vue from 'vue';
 import Button from '@/client/components/common/Button.vue';
-import {PlayerInputModel} from '@/models/PlayerInputModel';
+import {PlayerInputModel} from '@/common/models/PlayerInputModel';
 
 export default Vue.extend({
   name: 'SelectAmount',

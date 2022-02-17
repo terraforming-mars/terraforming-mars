@@ -42,7 +42,7 @@ import {FullMoon} from './moon/FullMoon';
 import {Lunarchitect} from './moon/Lunarchitect';
 import {LunarMagnate} from './moon/LunarMagnate';
 import {OneGiantStep} from './moon/OneGiantStep';
-import {RandomMAOptionType} from './RandomMAOptionType';
+import {RandomMAOptionType} from './common/ma/RandomMAOptionType';
 
 export namespace MilestoneAwardSelector {
   // This map uses keys of the format "X|Y" where X and Y are MA names. Entries are stored as "X|Y"

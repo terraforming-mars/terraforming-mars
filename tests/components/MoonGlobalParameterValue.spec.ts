@@ -3,7 +3,7 @@ import {getLocalVue} from './getLocalVue';
 import {expect} from 'chai';
 import MoonGlobalParameterValue from '@/client/components/MoonGlobalParameterValue.vue';
 import {MoonModel} from '@/common/models/MoonModel';
-import {MAXIMUM_COLONY_RATE, MAXIMUM_LOGISTICS_RATE, MAXIMUM_MINING_RATE} from '@/constants';
+import {MAXIMUM_COLONY_RATE, MAXIMUM_LOGISTICS_RATE, MAXIMUM_MINING_RATE} from '@/common/constants';
 
 const moonData: MoonModel = {
   colonyRate: 1,

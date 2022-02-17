@@ -13,7 +13,6 @@ describe('TropicalResort', function() {
     expect(action).is.undefined;
     expect(player.getProduction(Resources.HEAT)).to.eq(0);
     expect(player.getProduction(Resources.MEGACREDITS)).to.eq(3);
-    player.victoryPointsBreakdown.setVictoryPoints('victoryPoints', card.getVictoryPoints());
-    expect(player.victoryPointsBreakdown.victoryPoints).to.eq(2);
+    expect(card.getVictoryPoints()).to.eq(2);
   });
 });

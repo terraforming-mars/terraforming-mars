@@ -13,7 +13,7 @@ import {PartyName} from '../common/turmoil/PartyName';
 import {REDS_POLICY_2, REDS_POLICY_3} from './parties/Reds';
 import {SCIENTISTS_POLICY_1} from './parties/Scientists';
 import {UNITY_POLICY_2, UNITY_POLICY_3} from './parties/Unity';
-import * as constants from '../constants';
+import * as constants from '../common/constants';
 import {TRSource} from '../cards/ICard';
 import {MoonExpansion} from '../moon/MoonExpansion';
 

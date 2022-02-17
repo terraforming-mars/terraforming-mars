@@ -8,7 +8,7 @@ import {DrawCards} from '../deferredActions/DrawCards';
 import {GiveColonyBonus} from '../deferredActions/GiveColonyBonus';
 import {IncreaseColonyTrack} from '../deferredActions/IncreaseColonyTrack';
 import {LogHelper} from '../LogHelper';
-import {MAX_COLONY_TRACK_POSITION, PLAYER_DELEGATES_COUNT} from '../constants';
+import {MAX_COLONY_TRACK_POSITION, PLAYER_DELEGATES_COUNT} from '../common/constants';
 import {PlaceOceanTile} from '../deferredActions/PlaceOceanTile';
 import {Player} from '../Player';
 import {PlayerId} from '../common/Types';
@@ -34,7 +34,6 @@ type TradeOptions = {
 };
 export abstract class Colony {
     public abstract readonly name: ColonyName;
-    public abstract readonly description: string;
 
     // isActive represents when the colony is part of the game, or "back in the box", as it were.
     public isActive: boolean = true;
@@ -97,7 +96,7 @@ export abstract class Colony {
       }
 
       // Poseidon hook
-      const poseidon = player.game.getPlayers().find((player) => player.isCorporation(CardName.POSEIDON));
+      const poseidon = player.game.getPlayersInGenerationOrder().find((player) => player.isCorporation(CardName.POSEIDON));
       if (poseidon !== undefined) {
         poseidon.addProduction(Resources.MEGACREDITS, 1);
       }
@@ -300,7 +299,7 @@ export abstract class Colony {
         action = new DeferredAction(
           player,
           () => {
-            const playersWithCards = game.getPlayers().filter((p) => p.cardsInHand.length > 0);
+            const playersWithCards = game.getPlayersInGenerationOrder().filter((p) => p.cardsInHand.length > 0);
             if (playersWithCards.length === 0) return undefined;
             return new SelectPlayer(
               playersWithCards,

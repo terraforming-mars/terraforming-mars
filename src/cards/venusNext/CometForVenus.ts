@@ -30,7 +30,7 @@ export class CometForVenus extends Card {
   }
 
   public play(player: Player) {
-    const venusTagPlayers = player.game.getPlayers().filter((otherPlayer) => otherPlayer.id !== player.id && otherPlayer.getTagCount(Tags.VENUS, 'raw') > 0);
+    const venusTagPlayers = player.game.getPlayersInGenerationOrder().filter((otherPlayer) => otherPlayer.id !== player.id && otherPlayer.getTagCount(Tags.VENUS, 'raw') > 0);
 
     if (player.game.isSoloMode()|| venusTagPlayers.length === 0) {
       player.game.increaseVenusScaleLevel(player, 1);

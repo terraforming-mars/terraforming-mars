@@ -49,7 +49,7 @@ describe('Predators', function() {
         game.deferredActions.pop()!.execute(); // Add animal to predators
 
         expect(card.resourceCount).to.eq(1);
-        expect(player.getResourcesOnCard(fish)).to.eq(0);
+        expect(fish.resourceCount).to.eq(0);
   });
 
   it('Respects pets', function() {
@@ -69,8 +69,8 @@ describe('Predators', function() {
         game.deferredActions.pop()!.execute(); // Add animal to predators
 
         expect(card.resourceCount).to.eq(1);
-        expect(player2.getResourcesOnCard(fish)).to.eq(0);
-        expect(player2.getResourcesOnCard(pets)).to.eq(1);
+        expect(fish.resourceCount).to.eq(0);
+        expect(pets.resourceCount).to.eq(1);
   });
 
   it('Respects Bioengineering Enclosure', function() {
@@ -90,8 +90,8 @@ describe('Predators', function() {
         game.deferredActions.pop()!.execute(); // Add animal to predators
 
         expect(card.resourceCount).to.eq(1);
-        expect(player2.getResourcesOnCard(fish)).to.eq(0);
-        expect(player2.getResourcesOnCard(bioengineeringEnclosure)).to.eq(1);
+        expect(fish.resourceCount).to.eq(0);
+        expect(bioengineeringEnclosure.resourceCount).to.eq(1);
   });
 
   it('Respects protected habitats', function() {

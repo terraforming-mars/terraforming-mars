@@ -4,7 +4,7 @@ import {expect} from 'chai';
 import {CardName} from '@/common/cards/CardName';
 import {Color} from '@/common/Color';
 import PlayerInfo from '@/client/components/overview/PlayerInfo.vue';
-import {PlayerViewModel, PublicPlayerModel} from '@/models/PlayerModel';
+import {PlayerViewModel, PublicPlayerModel} from '@/common/models/PlayerModel';
 import {RecursivePartial} from '@/common/utils/utils';
 
 describe('PlayerInfo', function() {

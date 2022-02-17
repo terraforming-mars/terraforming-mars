@@ -1,5 +1,5 @@
 import {IGlobalEvent, GlobalEvent} from './IGlobalEvent';
-import {GlobalEventName} from './GlobalEventName';
+import {GlobalEventName} from '../../common/turmoil/globalEvents/GlobalEventName';
 import {PartyName} from '../../common/turmoil/PartyName';
 import {Game} from '../../Game';
 import {Resources} from '../../common/Resources';
@@ -23,7 +23,7 @@ export class GenerousFunding extends GlobalEvent implements IGlobalEvent {
   }
 
   public resolve(game: Game, turmoil: Turmoil) {
-    game.getPlayers().forEach((player) => {
+    game.getPlayersInGenerationOrder().forEach((player) => {
       const trSets = Math.max(0, Math.floor((player.getTerraformRating() - 15) / 5));
       const maxTRSets = 5;
       const totalSets = Math.min(maxTRSets, trSets) + turmoil.getPlayerInfluence(player);

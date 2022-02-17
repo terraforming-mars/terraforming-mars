@@ -1,7 +1,7 @@
 import {DbLoadCallback, IDatabase} from './IDatabase';
 import {Game, GameOptions, Score} from '../Game';
 import {GameId} from '../common/Types';
-import {IGameData} from './IDatabase';
+import {IGameData} from '../common/game/IGameData';
 import {SerializedGame} from '../SerializedGame';
 
 import {Pool, ClientConfig, QueryResult} from 'pg';
@@ -237,7 +237,7 @@ export class PostgreSQL implements IDatabase {
     const gameJSON = game.toJSON();
     this.client.query(
       'INSERT INTO games (game_id, save_id, game, players) VALUES ($1, $2, $3, $4) ON CONFLICT (game_id, save_id) DO UPDATE SET game = $3',
-      [game.id, game.lastSaveId, gameJSON, game.getPlayers().length], (err) => {
+      [game.id, game.lastSaveId, gameJSON, game.getPlayersInGenerationOrder().length], (err) => {
         if (err) {
           console.error('PostgreSQL:saveGame', err);
           return;

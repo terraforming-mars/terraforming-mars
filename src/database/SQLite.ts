@@ -1,7 +1,7 @@
 import {DbLoadCallback, IDatabase} from './IDatabase';
 import {Game, GameOptions, Score} from '../Game';
 import {GameId} from '../common/Types';
-import {IGameData} from './IDatabase';
+import {IGameData} from '../common/game/IGameData';
 import {SerializedGame} from '../SerializedGame';
 
 import sqlite3 = require('sqlite3');
@@ -209,7 +209,7 @@ export class SQLite implements IDatabase {
     // Insert
     await this.runQuietly(
       'INSERT INTO games (game_id, save_id, game, players) VALUES (?, ?, ?, ?) ON CONFLICT (game_id, save_id) DO UPDATE SET game = ?',
-      [game.id, game.lastSaveId, gameJSON, game.getPlayers().length, gameJSON]);
+      [game.id, game.lastSaveId, gameJSON, game.getPlayersInGenerationOrder().length, gameJSON]);
 
     // This must occur after the save.
     game.lastSaveId++;

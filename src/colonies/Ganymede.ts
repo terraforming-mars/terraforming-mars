@@ -5,7 +5,6 @@ import {ColonyBenefit} from './ColonyBenefit';
 
 export class Ganymede extends Colony {
   public name = ColonyName.GANYMEDE;
-  public description = 'Plants';
   public buildType = ColonyBenefit.GAIN_PRODUCTION;
   public override buildResource = Resources.PLANTS;
   public tradeType = ColonyBenefit.GAIN_RESOURCES;

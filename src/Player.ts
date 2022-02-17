@@ -737,31 +737,10 @@ export class Player implements ISerializable<SerializedPlayer> {
       LogHelper.logAddResource(this, card, count);
     }
 
-    // Topsoil contract hook
-    if (card.resourceType === ResourceType.MICROBE && this.playedCards.map((card) => card.name).includes(CardName.TOPSOIL_CONTRACT)) {
-      this.megaCredits += count;
+    for (const playedCard of this.playedCards) {
+      playedCard.onResourceAdded?.(this, card, count);
     }
-
-    // Meat industry hook
-    if (card.resourceType === ResourceType.ANIMAL && this.playedCards.map((card) => card.name).includes(CardName.MEAT_INDUSTRY)) {
-      this.megaCredits += count * 2;
-    }
-
-    // Communication Center Hook
-    if (card.name === CardName.COMMUNICATION_CENTER) {
-      PathfindersExpansion.communicationCenterHook(card, this.game);
-    }
-
-    // Botanical Experience Hook
-    if (card.name === CardName.BOTANICAL_EXPERIENCE && card.resourceCount >= 3) {
-      const delta = Math.floor(card.resourceCount / 3);
-      const deducted = delta * 3;
-      card.resourceCount -= deducted;
-      // This assumes this player is the card owner. Bad?
-      this.addProduction(Resources.PLANTS, delta, {log: false});
-      this.game.log('${0} removed ${1} data from ${2} to increase plant production ${3} steps.',
-        (b) => b.player(this).number(deducted).cardName(CardName.BOTANICAL_EXPERIENCE).number(delta));
-    }
+    this.corporationCard?.onResourceAdded?.(this, card, count);
   }
 
   public getCardsWithResources(resource?: ResourceType): Array<ICard & IResourceCard> {

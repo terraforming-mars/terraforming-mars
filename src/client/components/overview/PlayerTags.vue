@@ -7,7 +7,7 @@
                 </div>
                 <tag-count :tag="'tr'" :count="player.terraformRating" :size="'big'" :type="'main'"/>
                 <div class="tag-and-discount">
-                  <PlayerTagDiscount v-if="getTagDiscountAmount('all') > 0" :amount="getTagDiscountAmount('all')" :color="player.color" />
+                  <PlayerTagDiscount v-if="getTagDiscountAmount('all') > 0" :amount="getTagDiscountAmount('all')" :color="player.color"  :data-test="'discount-all'"/>
                   <tag-count :tag="'cards'" :count="cardsInHandCount" :size="'big'" :type="'main'"/>
                 </div>
             </div>
@@ -16,7 +16,7 @@
                   <div class="tag-count-container" v-for="tag in player.tags" :key="tag.tag">
                     <div class="tag-and-discount">
                       <PlayerTagDiscount v-if="getTagDiscountAmount(tag.tag) > 0" :amount="getTagDiscountAmount(tag.tag)" :color="player.color" />
-                      <PointsPerTag v-if="getVPs(tag.tag) !== '0'" :amount="getVPs(tag.tag)" />
+                      <PointsPerTag v-if="getVPs(tag.tag) !== ''" :amount="getVPs(tag.tag)" />
                       <tag-count :tag="tag.tag" :count="tag.count" :size="'big'" :type="'secondary'"/>
                     </div>
                   </div>
@@ -24,8 +24,8 @@
                 <template v-else>
                     <div class="tag-count-container" v-for="tagName in tagsPlaceholders" :key="tagName">
                       <div class="tag-and-discount" v-if="tagName !== 'separator'">
-                        <PlayerTagDiscount v-if="getTagDiscountAmount(tagName) > 0" :color="player.color" :amount="getTagDiscountAmount(tagName)"/>
-                        <PointsPerTag v-if="getVPs(tagName) !== '0'" :amount="getVPs(tagName)" />
+                        <PlayerTagDiscount v-if="getTagDiscountAmount(tagName) > 0" :color="player.color" :amount="getTagDiscountAmount(tagName)" :data-test="'discount-' + tagName"/>
+                        <PointsPerTag v-if="getVPs(tagName) !== ''" :amount="getVPs(tagName)" :data-test="'vps-' + tagName" />
                         <tag-count :tag="tagName" :count="getTagCount(tagName)" :size="'big'" :type="'secondary'"/>
                       </div>
                       <div v-else class="tag-separator"></div>
@@ -101,7 +101,6 @@ export default Vue.extend({
     type TagModifier = {
       discount: number;
       points: number;
-      fraction?: string; // Limited to the Mono Corp Crescent Research Association
     };
     type TagModifiers = Record<InterfaceTagsType, TagModifier>;
 
@@ -114,19 +113,15 @@ export default Vue.extend({
       this.player.playedCards;
 
     for (const card of cards) {
-      if (card.discount !== undefined) {
-        if (card.discount.tag === undefined) {
-          modifiers['all'].discount += card.discount.amount;
-        } else {
-          modifiers[card.discount.tag].discount += card.discount.amount;
-        }
+      for (const discount of card.discount ?? []) {
+        const tag = discount.tag ?? 'all';
+        modifiers[tag].discount += discount.amount;
       }
 
       const instance = getCard(card.name);
       const vps = instance?.card.victoryPoints;
       if (vps !== undefined && typeof(vps) !== 'number' && vps !== 'special' && vps.type !== 'resource') {
-        modifiers[vps.type].points += vps.points;
-        if (vps.per === 3) modifiers[vps.type].fraction = '⅓';
+        modifiers[vps.type].points += (vps.points / vps.per);
       }
     }
 
@@ -187,7 +182,15 @@ export default Vue.extend({
     },
     getVPs(tag: InterfaceTagsType) {
       const modifier = this.modifiers[tag];
-      return `${modifier.points}${modifier.fraction ?? ''}`;
+      const integer = Math.floor(modifier.points);
+      const fraction = modifier.points - integer;
+      let vulgarFraction = '';
+      if (fraction === 0.5) {
+        vulgarFraction = '½';
+      } else if (Math.abs(fraction - (1/3)) < Number.EPSILON) {
+        vulgarFraction = '⅓';
+      }
+      return `${integer || ''}${vulgarFraction}`;
     },
     getTagCount(tagName: InterfaceTagsType): number {
       if (tagName === SpecialTags.COLONY_COUNT && this.showColonyCount) {

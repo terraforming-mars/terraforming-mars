@@ -21,7 +21,7 @@ import {PreferencesManager} from '@/client/utils/PreferencesManager';
 import {SoundManager} from '@/client/utils/SoundManager';
 import {WaitingForModel} from '@/common/models/WaitingForModel';
 
-import * as constants from '@/constants';
+import * as constants from '@/common/constants';
 import * as raw_settings from '@/genfiles/settings.json';
 import {isPlayerId} from '@/common/utils/utils';
 

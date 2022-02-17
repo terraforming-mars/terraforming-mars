@@ -9,7 +9,7 @@ import {ResourceType} from '../../common/ResourceType';
 import {SelectCard} from '../../inputs/SelectCard';
 import {ICard} from '../ICard';
 import {CardName} from '../../common/cards/CardName';
-import * as constants from '../../constants';
+import * as constants from '../../common/constants';
 import {PartyHooks} from '../../turmoil/parties/PartyHooks';
 import {PartyName} from '../../common/turmoil/PartyName';
 import {CardRequirements} from '../CardRequirements';

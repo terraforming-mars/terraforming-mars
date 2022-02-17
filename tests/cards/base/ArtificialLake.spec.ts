@@ -1,6 +1,6 @@
 import {expect} from 'chai';
 import {ArtificialLake} from '../../../src/cards/base/ArtificialLake';
-import * as constants from '../../../src/constants';
+import * as constants from '../../../src/common/constants';
 import {Game} from '../../../src/Game';
 import {SelectSpace} from '../../../src/inputs/SelectSpace';
 import {TestPlayer} from '../../TestPlayer';

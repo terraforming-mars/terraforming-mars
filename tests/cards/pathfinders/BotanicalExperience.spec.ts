@@ -24,6 +24,7 @@ describe('BotanicalExperience', function() {
     player = getTestPlayer(game, 0);
     otherPlayer = getTestPlayer(game, 1);
     space = game.board.getAvailableSpacesForGreenery(otherPlayer)[0];
+    player.playedCards.push(card);
   });
 
   it('canPlay', () => {

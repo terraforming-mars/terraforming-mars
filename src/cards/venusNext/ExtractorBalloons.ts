@@ -6,7 +6,7 @@ import {ResourceType} from '../../common/ResourceType';
 import {OrOptions} from '../../inputs/OrOptions';
 import {SelectOption} from '../../inputs/SelectOption';
 import {CardName} from '../../common/cards/CardName';
-import {MAX_VENUS_SCALE} from '../../constants';
+import {MAX_VENUS_SCALE} from '../../common/constants';
 import {LogHelper} from '../../LogHelper';
 import {CardRenderer} from '../render/CardRenderer';
 import {Size} from '../render/Size';

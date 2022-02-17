@@ -11,7 +11,7 @@ import {AndOptions} from '../../src/inputs/AndOptions';
 import {SelectColony} from '../../src/inputs/SelectColony';
 import {SelectCard} from '../../src/inputs/SelectCard';
 import {IProjectCard} from '../../src/cards/IProjectCard';
-import {MAX_COLONY_TRACK_POSITION} from '../../src/constants';
+import {MAX_COLONY_TRACK_POSITION} from '../../src/common/constants';
 import {TestingUtils} from '../TestingUtils';
 import {TestPlayer} from '../TestPlayer';
 import {CardName} from '../../src/common/cards/CardName';

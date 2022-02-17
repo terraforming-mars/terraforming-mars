@@ -1,5 +1,5 @@
 import {expect} from 'chai';
-import {MAX_TEMPERATURE} from '../../src/constants';
+import {MAX_TEMPERATURE} from '../../src/common/constants';
 import {Game} from '../../src/Game';
 import {Player} from '../../src/Player';
 import {SnowCover} from '../../src/turmoil/globalEvents/SnowCover';

@@ -10,7 +10,7 @@ import {Phase} from '../../../src/common/Phase';
 import {AndOptions} from '../../../src/inputs/AndOptions';
 import {TestPlayer} from '../../TestPlayer';
 import {Units} from '../../../src/common/Units';
-import {MAX_OXYGEN_LEVEL, MAX_TEMPERATURE} from '../../../src/constants';
+import {MAX_OXYGEN_LEVEL, MAX_TEMPERATURE} from '../../../src/common/constants';
 import {OrOptions} from '../../../src/inputs/OrOptions';
 
 describe('Philares', () => {

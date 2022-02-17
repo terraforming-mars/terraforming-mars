@@ -128,7 +128,7 @@ export class Philares extends Card implements CorporationCard {
     if (eligibleTiles.length > 0) {
       cardOwner.game.defer(
         new DeferredAction(cardOwner, () => {
-          cardOwner.game.log('${0} must select ${1} bonus resource(s) from Philares\' ability', (b) => b.player(cardOwner).number(eligibleTiles.length));
+          cardOwner.game.log('${0} must select ${1} bonus resource(s) from ${2}\' ability', (b) => b.player(cardOwner).number(eligibleTiles.length).card(this));
           return this.selectResources(cardOwner, eligibleTiles.length);
         }),
         cardOwner.id !== activePlayer.id ? Priority.OPPONENT_TRIGGER : Priority.GAIN_RESOURCE_OR_PRODUCTION,

@@ -5,8 +5,8 @@ import * as fs from 'fs';
 import {MilestoneAwardSelector} from '../MilestoneAwardSelector';
 import {GameOptions} from '../Game';
 import {BoardName} from '../common/boards/BoardName';
-import {AgendaStyle} from '../turmoil/PoliticalAgendas';
-import {RandomMAOptionType} from '../RandomMAOptionType';
+import {AgendaStyle} from '../common/turmoil/Types';
+import {RandomMAOptionType} from '../common/ma/RandomMAOptionType';
 import {Multiset} from '../utils/Multiset';
 
 function processRequest(req: http.IncomingMessage, res: http.ServerResponse): void {

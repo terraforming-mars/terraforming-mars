@@ -1,5 +1,5 @@
 import {IGlobalEvent, GlobalEvent} from './IGlobalEvent';
-import {GlobalEventName} from './GlobalEventName';
+import {GlobalEventName} from '../../common/turmoil/globalEvents/GlobalEventName';
 import {PartyName} from '../../common/turmoil/PartyName';
 import {Game} from '../../Game';
 import {Turmoil} from '../Turmoil';
@@ -21,7 +21,7 @@ export class WarOnEarth extends GlobalEvent implements IGlobalEvent {
     });
   }
   public resolve(game: Game, turmoil: Turmoil) {
-    game.getPlayers().forEach((player) => {
+    game.getPlayersInGenerationOrder().forEach((player) => {
       player.decreaseTerraformRatingSteps(4 - turmoil.getPlayerInfluence(player), {log: true});
     });
   }

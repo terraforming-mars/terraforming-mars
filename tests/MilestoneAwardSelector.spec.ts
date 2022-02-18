@@ -4,7 +4,7 @@ import {IAward} from '../src/awards/IAward';
 import {MilestoneAwardSelector} from '../src/MilestoneAwardSelector';
 import {IMilestone} from '../src/milestones/IMilestone';
 import {ARABIA_TERRA_MILESTONES, ARES_MILESTONES, ELYSIUM_MILESTONES, HELLAS_MILESTONES, MOON_MILESTONES, ORIGINAL_MILESTONES, VENUS_MILESTONES} from '../src/milestones/Milestones';
-import {RandomMAOptionType} from '../src/RandomMAOptionType';
+import {RandomMAOptionType} from '../src/common/ma/RandomMAOptionType';
 import {TestingUtils} from './TestingUtils';
 import {intersection} from '../src/common/utils/utils';
 

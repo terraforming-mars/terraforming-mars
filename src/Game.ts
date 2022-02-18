@@ -1,4 +1,4 @@
-import * as constants from './constants';
+import * as constants from './common/constants';
 import {BeginnerCorporation} from './cards/corporation/BeginnerCorporation';
 import {Board} from './boards/Board';
 import {BoardName} from './common/boards/BoardName';
@@ -6,7 +6,7 @@ import {CardFinder} from './CardFinder';
 import {CardName} from './common/cards/CardName';
 import {CardType} from './common/cards/CardType';
 import {ClaimedMilestone, serializeClaimedMilestones, deserializeClaimedMilestones} from './milestones/ClaimedMilestone';
-import {Colony} from './colonies/Colony';
+import {Colony, serializeColonies} from './colonies/Colony';
 import {ColonyDealer, loadColoniesFromJSON} from './colonies/ColonyDealer';
 import {ColonyName} from './common/colonies/ColonyName';
 import {Color} from './common/Color';
@@ -50,10 +50,10 @@ import {SpaceType} from './common/boards/SpaceType';
 import {Tags} from './common/cards/Tags';
 import {TileType} from './common/TileType';
 import {Turmoil} from './turmoil/Turmoil';
-import {RandomMAOptionType} from './RandomMAOptionType';
+import {RandomMAOptionType} from './common/ma/RandomMAOptionType';
 import {AresHandler} from './ares/AresHandler';
 import {IAresData} from './common/ares/IAresData';
-import {AgendaStyle} from './turmoil/PoliticalAgendas';
+import {AgendaStyle} from './common/turmoil/Types';
 import {GameSetup} from './GameSetup';
 import {CardLoader} from './CardLoader';
 import {GlobalParameter} from './common/GlobalParameter';
@@ -350,7 +350,7 @@ export class Game implements ISerializable<SerializedGame> {
     // Initialize each player:
     // Give them their corporation cards, other cards, starting production,
     // handicaps.
-    for (const player of game.getPlayers()) {
+    for (const player of game.getPlayersInGenerationOrder()) {
       player.setTerraformRating(player.getTerraformRating() + player.handicap);
       if (!gameOptions.corporateEra) {
         GameSetup.setStartingProductions(player);
@@ -422,7 +422,7 @@ export class Game implements ISerializable<SerializedGame> {
       awards: this.awards.map((a) => a.name),
       board: this.board.serialize(),
       claimedMilestones: serializeClaimedMilestones(this.claimedMilestones),
-      colonies: this.colonies,
+      colonies: serializeColonies(this.colonies),
       colonyDealer: this.colonyDealer,
       dealer: this.dealer.serialize(),
       deferredActions: [],
@@ -610,7 +610,7 @@ export class Game implements ISerializable<SerializedGame> {
     player.pickedCorporationCard = corporationCard;
     // if all players picked corporationCard
     if (this.players.every((p) => p.pickedCorporationCard !== undefined)) {
-      for (const somePlayer of this.getPlayers()) {
+      for (const somePlayer of this.getPlayersInGenerationOrder()) {
         this.playCorporationCard(somePlayer, somePlayer.pickedCorporationCard!);
       }
     }
@@ -633,7 +633,7 @@ export class Game implements ISerializable<SerializedGame> {
     this.log('${0} played ${1}', (b) => b.player(player).card(corporationCard));
 
     // trigger other corp's effect, e.g. SaturnSystems,PharmacyUnion,Splice
-    for (const somePlayer of this.getPlayers()) {
+    for (const somePlayer of this.getPlayersInGenerationOrder()) {
       if (somePlayer !== player && somePlayer.corporationCard !== undefined && somePlayer.corporationCard.onCorpCardPlayed !== undefined) {
         this.defer(new DeferredAction(
           player,
@@ -1073,7 +1073,7 @@ export class Game implements ISerializable<SerializedGame> {
 
   public /* for testing */ gotoFinalGreeneryPlacement(): void {
     // this.getPlayers returns in turn order -- a necessary rule for final greenery placement.
-    for (const player of this.getPlayers()) {
+    for (const player of this.getPlayersInGenerationOrder()) {
       if (this.donePlayers.has(player.id)) {
         continue;
       }
@@ -1476,7 +1476,7 @@ export class Game implements ISerializable<SerializedGame> {
   }
 
   // Players returned in play order starting with first player this generation.
-  public getPlayers(): Array<Player> {
+  public getPlayersInGenerationOrder(): Array<Player> {
     // We always return them in turn order
     const ret: Array<Player> = [];
     let insertIdx: number = 0;
@@ -1529,7 +1529,7 @@ export class Game implements ISerializable<SerializedGame> {
   public someoneCanHaveProductionReduced(resource: Resources, minQuantity: number = 1): boolean {
     // in soloMode you don't have to decrease resources
     if (this.isSoloMode()) return true;
-    return this.getPlayers().some((p) => {
+    return this.getPlayersInGenerationOrder().some((p) => {
       if (p.getProduction(resource) < minQuantity) return false;
       // The pathfindersExpansion test is just an optimization for non-Pathfinders games.
       if (this.gameOptions.pathfindersExpansion && p.cardIsInEffect(CardName.PRIVATE_SECURITY)) return false;

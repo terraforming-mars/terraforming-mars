@@ -1,9 +1,9 @@
-import {CardModel} from './CardModel';
+import {CardModel} from '../common/models/CardModel';
 import {ColonyModel} from '../common/models/ColonyModel';
 import {Color} from '../common/Color';
 import {Game, GameOptions} from '../Game';
-import {SimpleGameModel} from './SimpleGameModel';
-import {GameOptionsModel} from './GameOptionsModel';
+import {SimpleGameModel} from '../common/models/SimpleGameModel';
+import {GameOptionsModel} from '../common/models/GameOptionsModel';
 import {ICard} from '../cards/ICard';
 import {IProjectCard} from '../cards/IProjectCard';
 import {isICloneTagCard} from '../cards/pathfinders/ICloneTagCard';
@@ -11,9 +11,9 @@ import {Board} from '../boards/Board';
 import {ISpace} from '../boards/ISpace';
 import {Player} from '../Player';
 import {PlayerInput} from '../PlayerInput';
-import {PlayerInputModel} from './PlayerInputModel';
+import {PlayerInputModel} from '../common/models/PlayerInputModel';
 import {PlayerInputTypes} from '../common/input/PlayerInputTypes';
-import {PlayerViewModel, PublicPlayerModel} from './PlayerModel';
+import {PlayerViewModel, PublicPlayerModel} from '../common/models/PlayerModel';
 import {SelectAmount} from '../inputs/SelectAmount';
 import {SelectCard} from '../inputs/SelectCard';
 import {SelectHowToPay} from '../inputs/SelectHowToPay';
@@ -30,19 +30,17 @@ import {
   IMilestoneScore,
 } from '../common/models/ClaimedMilestoneModel';
 import {FundedAwardModel, IAwardScore} from '../common/models/FundedAwardModel';
-import {
-  getTurmoilModel,
-} from './TurmoilModel';
+import {getTurmoilModel} from '../models/TurmoilModel';
 import {SelectDelegate} from '../inputs/SelectDelegate';
 import {SelectColony} from '../inputs/SelectColony';
 import {SelectProductionToLose} from '../inputs/SelectProductionToLose';
 import {ShiftAresGlobalParameters} from '../inputs/ShiftAresGlobalParameters';
-import {SpectatorModel} from './SpectatorModel';
+import {SpectatorModel} from '../common/models/SpectatorModel';
 import {Units} from '../common/Units';
 import {SelectPartyToSendDelegate} from '../inputs/SelectPartyToSendDelegate';
-import {GameModel} from './GameModel';
+import {GameModel} from '../common/models/GameModel';
 import {Turmoil} from '../turmoil/Turmoil';
-import {PathfindersModel} from './PathfindersModel';
+import {createPathfindersModel} from './PathfindersModel';
 import {MoonExpansion} from '../moon/MoonExpansion';
 import {MoonModel} from '../common/models/MoonModel';
 import {Colony} from '../colonies/Colony';
@@ -53,7 +51,7 @@ export class Server {
       activePlayer: game.getPlayerById(game.activePlayer).color,
       id: game.id,
       phase: game.phase,
-      players: game.getPlayers().map((player) => ({
+      players: game.getPlayersInGenerationOrder().map((player) => ({
         color: player.color,
         id: player.id,
         name: player.name,
@@ -82,7 +80,7 @@ export class Server {
       oceans: game.board.getOceanCount(),
       oxygenLevel: game.getOxygenLevel(),
       passedPlayers: game.getPassedPlayers(),
-      pathfinders: PathfindersModel.serialize(game),
+      pathfinders: createPathfindersModel(game),
       phase: game.phase,
       spaces: this.getSpaces(game.board),
       spectatorId: game.spectatorId,
@@ -98,7 +96,7 @@ export class Server {
   public static getPlayerModel(player: Player): PlayerViewModel {
     const game = player.game;
 
-    const players: Array<PublicPlayerModel> = game.getPlayers().map(this.getPlayer);
+    const players: Array<PublicPlayerModel> = game.getPlayersInGenerationOrder().map(this.getPlayer);
     const thisPlayerIndex: number = players.findIndex((p) => p.color === player.color);
     const thisPlayer: PublicPlayerModel = players[thisPlayerIndex];
 
@@ -123,7 +121,7 @@ export class Server {
       color: Color.NEUTRAL,
       id: game.spectatorId ?? '',
       game: this.getGameModel(game),
-      players: game.getPlayers().map(this.getPlayer),
+      players: game.getPlayersInGenerationOrder().map(this.getPlayer),
       thisPlayer: undefined,
     };
   }
@@ -151,7 +149,7 @@ export class Server {
       );
       const scores: Array<IMilestoneScore> = [];
       if (claimed === undefined && claimedMilestones.length < 3) {
-        game.getPlayers().forEach((player) => {
+        game.getPlayersInGenerationOrder().forEach((player) => {
           scores.push({
             playerColor: player.color,
             playerScore: milestone.getScore(player),
@@ -182,7 +180,7 @@ export class Server {
       );
       const scores: Array<IAwardScore> = [];
       if (fundedAwards.length < 3 || funded !== undefined) {
-        game.getPlayers().forEach((player) => {
+        game.getPlayersInGenerationOrder().forEach((player) => {
           scores.push({
             playerColor: player.color,
             playerScore: award.getScore(player),
@@ -204,13 +202,14 @@ export class Server {
 
   public static getCorporationCard(player: Player): CardModel | undefined {
     if (player.corporationCard === undefined) return undefined;
+    const card = player.corporationCard;
     return {
-      name: player.corporationCard.name,
-      resources: player.getResourcesOnCard(player.corporationCard),
+      name: card.name,
+      resources: card.resourceCount,
       cardType: CardType.CORPORATION,
-      isDisabled: player.corporationCard.isDisabled,
-      warning: player.corporationCard.warning,
-      discount: player.corporationCard.cardDiscount,
+      isDisabled: card.isDisabled,
+      warning: card.warning,
+      discount: card.cardDiscount === undefined ? undefined : (Array.isArray(card.cardDiscount) ? card.cardDiscount : [card.cardDiscount]),
     } as CardModel;
   }
 
@@ -365,7 +364,7 @@ export class Server {
   } = {},
   ): Array<CardModel> {
     return cards.map((card, index) => ({
-      resources: options.showResources ? player.getResourcesOnCard(card) : undefined,
+      resources: options.showResources ? card.resourceCount : undefined,
       resourceType: card.resourceType,
       name: card.name,
       calculatedCost: options.showNewCost ? (card.cost === undefined ? undefined : player.getCardCost(card as IProjectCard)) : card.cost,
@@ -374,7 +373,7 @@ export class Server {
       warning: card.warning,
       reserveUnits: options.reserveUnits ? options.reserveUnits[index] : Units.EMPTY,
       bonusResource: (card as IProjectCard).bonusResource,
-      discount: card.cardDiscount,
+      discount: card.cardDiscount === undefined ? undefined : (Array.isArray(card.cardDiscount) ? card.cardDiscount : [card.cardDiscount]),
       cloneTag: isICloneTagCard(card) ? card.cloneTag : undefined,
     }));
   }

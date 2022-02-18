@@ -7,7 +7,7 @@ import {TestPlayers} from '../../TestPlayers';
 import {PoliticalAgendas} from '../../../src/turmoil/PoliticalAgendas';
 import {Reds} from '../../../src/turmoil/parties/Reds';
 import {Phase} from '../../../src/common/Phase';
-import {MAX_VENUS_SCALE} from '../../../src/constants';
+import {MAX_VENUS_SCALE} from '../../../src/common/constants';
 
 describe('AirScrappingStandardProject', function() {
   let card: AirScrappingStandardProject;

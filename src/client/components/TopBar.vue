@@ -10,7 +10,7 @@
 <script lang="ts">
 
 import Vue from 'vue';
-import {PlayerViewModel} from '@/models/PlayerModel';
+import {PlayerViewModel} from '@/common/models/PlayerModel';
 import PlayerInfo from '@/client/components/overview/PlayerInfo.vue';
 import {PreferencesManager} from '@/client/utils/PreferencesManager';
 

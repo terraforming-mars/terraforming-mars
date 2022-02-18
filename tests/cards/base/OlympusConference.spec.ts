@@ -24,8 +24,7 @@ describe('OlympusConference', function() {
     player.playedCards.push(card);
     card.play();
 
-    player.victoryPointsBreakdown.setVictoryPoints('victoryPoints', card.getVictoryPoints());
-    expect(player.victoryPointsBreakdown.victoryPoints).to.eq(1);
+    expect(card.getVictoryPoints()).to.eq(1);
 
     card.onCardPlayed(player, new Bushes());
     expect(game.deferredActions).has.lengthOf(0);

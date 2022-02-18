@@ -46,7 +46,7 @@ describe('AirRaid', function() {
     expect(player.megaCredits).to.eq(4);
 
     option2.cb([corpo]);
-    expect(player.getResourcesOnCard(corpo)).to.eq(0);
+    expect(corpo.resourceCount).to.eq(0);
   });
 
   it('Should play - single target for floater removal and MC removal', function() {
@@ -61,7 +61,7 @@ describe('AirRaid', function() {
     option.options[0].cb();
     player.game.deferredActions.pop()!.execute(); // Remove floater
 
-    expect(player.getResourcesOnCard(corpo)).to.eq(0);
+    expect(corpo.resourceCount).to.eq(0);
     expect(player2.megaCredits).to.eq(0);
     expect(player.megaCredits).to.eq(4);
   });

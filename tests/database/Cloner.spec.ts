@@ -25,7 +25,7 @@ describe('Cloner', function() {
     expect(() => newGame!.getPlayerById('old-player1-id')).to.throw();
     expect(newGame!.getPlayerById('new-player1-id')).is.not.undefined;
 
-    const newPlayerZero = newGame!.getPlayers()[0];
+    const newPlayerZero = newGame!.getPlayersInGenerationOrder()[0];
     expect(newPlayerZero.color).eq(Color.RED);
     expect(newPlayerZero.beginner).is.true;
 

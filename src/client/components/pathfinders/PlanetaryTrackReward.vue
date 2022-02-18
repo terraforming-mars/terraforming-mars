@@ -9,11 +9,11 @@
 <script lang="ts">
 
 import Vue from 'vue';
-import {GameOptionsModel} from '@/models/GameOptionsModel';
+import {GameOptionsModel} from '@/common/models/GameOptionsModel';
 import {Reward} from '@/common/pathfinders/Reward';
 
 export default Vue.extend({
-  name: 'Reward',
+  name: 'PlanetaryTrackReward',
   props: {
     reward: {
       type: String as () => Reward,

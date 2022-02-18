@@ -31,7 +31,7 @@ describe('TitanAirScrapping', function() {
         orOptions!.options[0].cb();
 
         expect(player.getTerraformRating()).to.eq(21);
-        expect(player.getResourcesOnCard(card)).to.eq(5);
+        expect(card.resourceCount).to.eq(5);
         expect(card.getVictoryPoints()).to.eq(2);
   });
 
@@ -42,6 +42,6 @@ describe('TitanAirScrapping', function() {
 
     card.action(player);
     expect(player.getTerraformRating()).to.eq(21);
-    expect(player.getResourcesOnCard(card)).to.eq(0);
+    expect(card.resourceCount).to.eq(0);
   });
 });

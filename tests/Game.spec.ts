@@ -4,7 +4,7 @@ import {SpaceName} from '../src/SpaceName';
 import {Mayor} from '../src/milestones/Mayor';
 import {Banker} from '../src/awards/Banker';
 import {Thermalist} from '../src/awards/Thermalist';
-import * as constants from '../src/constants';
+import * as constants from '../src/common/constants';
 import {Birds} from '../src/cards/base/Birds';
 import {WaterImportFromEuropa} from '../src/cards/base/WaterImportFromEuropa';
 import {Phase} from '../src/common/Phase';
@@ -24,7 +24,7 @@ import {Helion} from '../src/cards/corporation/Helion';
 import {CardName} from '../src/common/cards/CardName';
 import {Player} from '../src/Player';
 import {Color} from '../src/common/Color';
-import {RandomMAOptionType} from '../src/RandomMAOptionType';
+import {RandomMAOptionType} from '../src/common/ma/RandomMAOptionType';
 import {SpaceBonus} from '../src/common/boards/SpaceBonus';
 import {TileType} from '../src/common/TileType';
 
@@ -97,20 +97,20 @@ describe('Game', () => {
     game.playerIsDoneWithGame(player2);
     game.playerIsDoneWithGame(player);
 
-    player.getVictoryPoints();
-    player2.getVictoryPoints();
-    player3.getVictoryPoints();
+    const player1VPs = player.getVictoryPoints();
+    const player2VPs = player2.getVictoryPoints();
+    const player3VPs = player3.getVictoryPoints();
 
-    expect(player.victoryPointsBreakdown.terraformRating).to.eq(21);
-    expect(player.victoryPointsBreakdown.milestones).to.eq(5);
-    expect(player.victoryPointsBreakdown.awards).to.eq(2); // one 2nd place
-    expect(player.victoryPointsBreakdown.greenery).to.eq(1);
-    expect(player.victoryPointsBreakdown.city).to.eq(1); // greenery adjacent to city
-    expect(player.victoryPointsBreakdown.victoryPoints).to.eq(6);
-    expect(player.victoryPointsBreakdown.total).to.eq(36);
+    expect(player1VPs.terraformRating).to.eq(21);
+    expect(player1VPs.milestones).to.eq(5);
+    expect(player1VPs.awards).to.eq(2); // one 2nd place
+    expect(player1VPs.greenery).to.eq(1);
+    expect(player1VPs.city).to.eq(1); // greenery adjacent to city
+    expect(player1VPs.victoryPoints).to.eq(6);
+    expect(player1VPs.total).to.eq(36);
 
-    expect(player2.victoryPointsBreakdown.awards).to.eq(10); // 1st place + one shared 1st place
-    expect(player3.victoryPointsBreakdown.awards).to.eq(5); // one shared 1st place
+    expect(player2VPs.awards).to.eq(10); // 1st place + one shared 1st place
+    expect(player3VPs.awards).to.eq(5); // one shared 1st place
   });
 
   it('Disallows to set temperature more than allowed maximum', () => {
@@ -335,7 +335,7 @@ describe('Game', () => {
     const player4 = new Player('p4', Color.RED, false, 0, 'p4-id');
     const game = Game.newInstance('gto', [player1, player2, player3, player4], player3);
 
-    game.getPlayers().forEach((p) => {
+    game.getPlayersInGenerationOrder().forEach((p) => {
       (p as any).waitingFor = undefined;
       p.plants = 8;
     });
@@ -388,7 +388,7 @@ describe('Game', () => {
     const game = Game.newInstance('gto', [player1, player2, player3, player4], player2);
     (game as any).incrementFirstPlayer();
 
-    game.getPlayers().forEach((p) => {
+    game.getPlayersInGenerationOrder().forEach((p) => {
       (p as any).waitingFor = undefined;
     });
 
@@ -428,7 +428,7 @@ describe('Game', () => {
     const player4 = new Player('p4', Color.RED, false, 0, 'p4-id');
     const game = Game.newInstance('gto', [player1, player2, player3, player4], player3);
 
-    let players = game.getPlayers();
+    let players = game.getPlayersInGenerationOrder();
     expect(players[0].name).to.eq('p3');
     expect(players[1].name).to.eq('p4');
     expect(players[2].name).to.eq('p1');
@@ -436,14 +436,14 @@ describe('Game', () => {
 
 
     (game as any).incrementFirstPlayer();
-    players = game.getPlayers();
+    players = game.getPlayersInGenerationOrder();
     expect(players[0].name).to.eq('p4');
     expect(players[1].name).to.eq('p1');
     expect(players[2].name).to.eq('p2');
     expect(players[3].name).to.eq('p3');
 
     (game as any).incrementFirstPlayer();
-    players = game.getPlayers();
+    players = game.getPlayersInGenerationOrder();
     expect(players[0].name).to.eq('p1');
     expect(players[1].name).to.eq('p2');
     expect(players[2].name).to.eq('p3');

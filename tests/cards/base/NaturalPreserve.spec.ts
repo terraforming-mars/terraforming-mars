@@ -48,7 +48,6 @@ describe('NaturalPreserve', () => {
     expect(space.tile && space.tile.tileType).to.eq(TileType.NATURAL_PRESERVE);
     expect(space.adjacency?.bonus).eq(undefined);
 
-    player.victoryPointsBreakdown.setVictoryPoints('victoryPoints', card.getVictoryPoints());
-    expect(player.victoryPointsBreakdown.victoryPoints).to.eq(1);
+    expect(card.getVictoryPoints()).to.eq(1);
   });
 });

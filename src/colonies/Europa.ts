@@ -6,7 +6,6 @@ import {ShouldIncreaseTrack} from '../common/colonies/ShouldIncreaseTrack';
 
 export class Europa extends Colony {
   public name = ColonyName.EUROPA;
-  public description = 'Production';
   public buildType = ColonyBenefit.PLACE_OCEAN_TILE;
   public tradeType = ColonyBenefit.GAIN_PRODUCTION;
   public override tradeResource = [

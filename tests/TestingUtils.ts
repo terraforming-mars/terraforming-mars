@@ -1,14 +1,14 @@
 import {expect} from 'chai';
 import {Player} from '../src/Player';
 import {DEFAULT_GAME_OPTIONS, Game, GameOptions} from '../src/Game';
-import * as constants from '../src/constants';
+import * as constants from '../src/common/constants';
 import {ISpace} from '../src/boards/ISpace';
 import {Phase} from '../src/common/Phase';
 import {IParty} from '../src/turmoil/parties/IParty';
 import {Turmoil} from '../src/turmoil/Turmoil';
 import {LogMessage} from '../src/common/logs/LogMessage';
-import {PolicyId} from '../src/turmoil/Policy';
-import {Log} from '../src/Log';
+import {PolicyId} from '../src/common/turmoil/Types';
+import {Log} from '../src/common/logs/Log';
 import {PlayerInput} from '../src/PlayerInput';
 import {DeferredAction} from '../src/deferredActions/DeferredAction';
 import {Greens} from '../src/turmoil/parties/Greens';
@@ -105,7 +105,7 @@ export class TestingUtils {
 
   public static forceGenerationEnd(game: Game) {
     while (game.deferredActions.pop() !== undefined) {}
-    game.getPlayers().forEach((player) => player.pass());
+    game.getPlayersInGenerationOrder().forEach((player) => player.pass());
     game.playerIsFinishedTakingActions();
   }
 

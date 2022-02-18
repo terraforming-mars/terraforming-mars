@@ -1,13 +1,13 @@
 import {GameOptionsModel} from './GameOptionsModel';
-import {ColonyModel} from '../common/models/ColonyModel';
-import {Color} from '../common/Color';
+import {ColonyModel} from './ColonyModel';
+import {Color} from '../Color';
 import {TurmoilModel} from './TurmoilModel';
-import {ClaimedMilestoneModel} from '../common/models/ClaimedMilestoneModel';
-import {FundedAwardModel} from '../common/models/FundedAwardModel';
-import {Phase} from '../common/Phase';
-import {IAresData} from '../common/ares/IAresData';
-import {SpaceModel} from '../common/models/SpaceModel';
-import {MoonModel} from '../common/models/MoonModel';
+import {ClaimedMilestoneModel} from './ClaimedMilestoneModel';
+import {FundedAwardModel} from './FundedAwardModel';
+import {Phase} from '../Phase';
+import {IAresData} from '../ares/IAresData';
+import {SpaceModel} from './SpaceModel';
+import {MoonModel} from './MoonModel';
 import {PathfindersModel} from './PathfindersModel';
 
 // Common data about a game not assocaited with a player (eg the temperature.)

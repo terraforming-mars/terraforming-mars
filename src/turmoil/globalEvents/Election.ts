@@ -1,5 +1,5 @@
 import {IGlobalEvent, GlobalEvent} from './IGlobalEvent';
-import {GlobalEventName} from './GlobalEventName';
+import {GlobalEventName} from '../../common/turmoil/globalEvents/GlobalEventName';
 import {PartyName} from '../../common/turmoil/PartyName';
 import {Game} from '../../Game';
 import {Tags} from '../../common/cards/Tags';
@@ -29,13 +29,13 @@ export class Election extends GlobalEvent implements IGlobalEvent {
   public resolve(game: Game, turmoil: Turmoil) {
     // Solo
     if (game.isSoloMode()) {
-      if (this.getScore(game.getPlayers()[0], turmoil, game) >= 10) {
-        game.getPlayers()[0].increaseTerraformRatingSteps(2, {log: true});
-      } else if (this.getScore(game.getPlayers()[0], turmoil, game) >= 1) {
-        game.getPlayers()[0].increaseTerraformRatingSteps(1, {log: true});
+      if (this.getScore(game.getPlayersInGenerationOrder()[0], turmoil, game) >= 10) {
+        game.getPlayersInGenerationOrder()[0].increaseTerraformRatingSteps(2, {log: true});
+      } else if (this.getScore(game.getPlayersInGenerationOrder()[0], turmoil, game) >= 1) {
+        game.getPlayersInGenerationOrder()[0].increaseTerraformRatingSteps(1, {log: true});
       }
     } else {
-      const players = [...game.getPlayers()].sort(
+      const players = [...game.getPlayersInGenerationOrder()].sort(
         (p1, p2) => this.getScore(p2, turmoil, game) - this.getScore(p1, turmoil, game),
       );
 

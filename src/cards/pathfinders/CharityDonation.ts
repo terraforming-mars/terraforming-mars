@@ -30,7 +30,7 @@ export class CharityDonation extends Card implements IProjectCard {
 
   public play(player: Player) {
     const game = player.game;
-    const players = game.getPlayers();
+    const players = game.getPlayersInGenerationOrder();
     const thisIdx = players.findIndex((p) => p === player);
     const cards = game.dealer.drawProjectCardsByCondition(game, players.length + 1, () => true);
     // TODO(kberg): log the drawn cards after raising the planetary track.

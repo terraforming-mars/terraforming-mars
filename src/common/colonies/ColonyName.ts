@@ -12,7 +12,7 @@ export enum ColonyName {
     TRITON = 'Triton',
 
     // Community
-    // If you add a community colony, also update GameSetup.includesCommunityColonies
+    // If you add a community colony, update GameSetup.includesCommunityColonies and ColonyDescription
     IAPETUS = 'Iapetus',
     MERCURY = 'Mercury',
     HYGIEA = 'Hygiea',

@@ -1,12 +1,12 @@
 
-import {PlayerInputTypes} from '../common/input/PlayerInputTypes';
+import {PlayerInputTypes} from '../input/PlayerInputTypes';
 import {CardModel} from './CardModel';
-import {ColonyModel} from '../common/models/ColonyModel';
-import {ColorWithNeutral} from '../common/Color';
-import {IPayProductionModel} from '../common/models/IPayProductionUnitsModel';
-import {IAresData} from '../common/ares/IAresData';
-import {Message} from '../common/logs/Message';
-import {PartyName} from '../common/turmoil/PartyName';
+import {ColonyModel} from './ColonyModel';
+import {ColorWithNeutral} from '../Color';
+import {IPayProductionModel} from './IPayProductionUnitsModel';
+import {IAresData} from '../ares/IAresData';
+import {Message} from '../logs/Message';
+import {PartyName} from '../turmoil/PartyName';
 import {TurmoilModel} from './TurmoilModel';
 
 export interface PlayerInputModel {

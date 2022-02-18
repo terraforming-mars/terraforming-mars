@@ -19,7 +19,7 @@ import {TestingUtils} from './TestingUtils';
 import {Units} from '../src/common/Units';
 import {SelfReplicatingRobots} from '../src/cards/promo/SelfReplicatingRobots';
 import {Pets} from '../src/cards/base/Pets';
-import {GlobalEventName} from '../src/turmoil/globalEvents/GlobalEventName';
+import {GlobalEventName} from '../src/common/turmoil/globalEvents/GlobalEventName';
 
 describe('Player', function() {
   it('should initialize with right defaults', function() {
@@ -648,6 +648,44 @@ describe('Player', function() {
     expect(player2.megaCredits).eq(3);
     player1.addProduction(Resources.MEGACREDITS, -3, {from: player2, log: false});
     expect(player2.megaCredits).eq(3);
+  });
+
+  it('removeResourcesFrom', () => {
+    const player = TestPlayers.BLUE.newPlayer();
+    const game = Game.newInstance('foobar', [player], player);
+
+    const log = game.gameLog;
+    log.length = 0; // Empty it out.
+
+    const card = new Pets();
+    expect(card.resourceCount).eq(0);
+    expect(log.length).eq(0);
+
+    log.length = 0;
+    card.resourceCount = 6;
+    player.removeResourceFrom(card);
+    expect(card.resourceCount).eq(5);
+    expect(log.length).eq(1);
+    expect(log[0].data[1].value).eq('1');
+    expect(log[0].data[3].value).eq('Pets');
+
+    log.length = 0;
+    player.removeResourceFrom(card, 1);
+    expect(card.resourceCount).eq(4);
+    expect(log.length).eq(1);
+    expect(log[0].data[1].value).eq('1');
+
+    log.length = 0;
+    player.removeResourceFrom(card, 3);
+    expect(log.length).eq(1);
+    expect(log[0].data[1].value).eq('3');
+
+    log.length = 0;
+    card.resourceCount = 4;
+    player.removeResourceFrom(card, 5);
+    expect(card.resourceCount).eq(0);
+    expect(log.length).eq(1);
+    expect(log[0].data[1].value).eq('4');
   });
 
   it('adds resources', () => {

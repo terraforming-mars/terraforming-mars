@@ -4,7 +4,7 @@ import {GameLoader} from '../database/GameLoader';
 import {Server} from '../models/ServerModel';
 import {Handler} from './Handler';
 import {IContext} from './IHandler';
-import {LoadGameFormModel} from '../models/LoadGameFormModel';
+import {LoadGameFormModel} from '../common/models/LoadGameFormModel';
 
 export class LoadGame extends Handler {
   public static readonly INSTANCE = new LoadGame();

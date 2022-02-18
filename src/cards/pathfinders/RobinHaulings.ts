@@ -9,7 +9,7 @@ import {ResourceType} from '../../common/ResourceType';
 import {AddResourcesToCard} from '../../deferredActions/AddResourcesToCard';
 import {played} from '../Options';
 import {IProjectCard} from '../IProjectCard';
-import {MAX_OXYGEN_LEVEL, MAX_VENUS_SCALE} from '../../constants';
+import {MAX_OXYGEN_LEVEL, MAX_VENUS_SCALE} from '../../common/constants';
 import {OrOptions} from '../../inputs/OrOptions';
 import {SelectOption} from '../../inputs/SelectOption';
 

@@ -39,18 +39,6 @@ describe('Award', () => {
     expect(wrapper.text()).to.not.include(award.description);
   });
 
-  it(`shows award's description on click`, async () => {
-    const award = createAward({funded: false});
-    const wrapper = mount(Award, {
-      localVue: getLocalVue(),
-      propsData: {award},
-    });
-
-    await wrapper.trigger('click');
-
-    expect(wrapper.text()).to.include(award.description);
-  });
-
   it(`doesn't show scores`, () => {
     const award = createAward({
       funded: true,

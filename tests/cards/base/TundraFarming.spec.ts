@@ -28,7 +28,6 @@ describe('TundraFarming', function() {
     expect(player.getProduction(Resources.MEGACREDITS)).to.eq(2);
     expect(player.plants).to.eq(1);
 
-    player.victoryPointsBreakdown.setVictoryPoints('victoryPoints', card.getVictoryPoints());
-    expect(player.victoryPointsBreakdown.victoryPoints).to.eq(2);
+    expect(card.getVictoryPoints()).to.eq(2);
   });
 });

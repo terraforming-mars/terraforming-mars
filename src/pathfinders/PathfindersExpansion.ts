@@ -21,7 +21,7 @@ import {SendDelegateToArea} from '../deferredActions/SendDelegateToArea';
 import {Tags} from '../common/cards/Tags';
 import {Turmoil} from '../turmoil/Turmoil';
 import {VictoryPointsBreakdown} from '../VictoryPointsBreakdown';
-import {GlobalEventName} from '../turmoil/globalEvents/GlobalEventName';
+import {GlobalEventName} from '../common/turmoil/globalEvents/GlobalEventName';
 
 export const PLANETARY_TAGS = [Tags.VENUS, Tags.EARTH, Tags.MARS, Tags.JOVIAN, Tags.MOON];
 const TRACKS = PlanetaryTracks.initialize();
@@ -54,16 +54,13 @@ export class PathfindersExpansion {
 
     // Communication Center hook
     if (card.cardType === CardType.EVENT) {
-      let done = false;
-      for (const p of player.game.getPlayers()) {
+      for (const p of player.game.getPlayersInGenerationOrder()) {
         for (const c of p.playedCards) {
           if (c.name === CardName.COMMUNICATION_CENTER) {
-            player.addResourceTo(c, {qty: 1, log: true});
-            done = true;
-            break;
+            p.addResourceTo(c, {qty: 1, log: true});
+            return;
           }
         }
-        if (done) break;
       }
     }
   }
@@ -131,14 +128,14 @@ export class PathfindersExpansion {
           });
         }
         rewards.everyone.forEach((reward) => {
-          game.getPlayers().forEach((p) => {
+          game.getPlayersInGenerationOrder().forEach((p) => {
             PathfindersExpansion.grant(reward, p, tag);
           });
         });
         if (rewards.mostTags.length > 0) {
           const players = PathfindersExpansion.playersWithMostTags(
             tag,
-            game.getPlayers(),
+            game.getPlayersInGenerationOrder(),
             (from instanceof Player) ? from : undefined);
           rewards.mostTags.forEach((reward) => {
             players.forEach((p) => {
@@ -271,16 +268,5 @@ export class PathfindersExpansion {
     data.vps
       .filter((vp) => vp.id === player.id)
       .forEach((vp) => victoryPointsBreakdown.setVictoryPoints('planetary tracks', vp.points, vp.tag));
-  }
-
-  public static communicationCenterHook(card: ICard, game: Game) {
-    const owner = game.getCardPlayer(card.name);
-    while (card.resourceCount >= 3) {
-      card.resourceCount -= 3;
-      owner.drawCard(1);
-      owner.game.log('${0} automatically removed 3 data from ${1} to draw a card.', (b) => {
-        b.player(owner).card(card);
-      });
-    }
   }
 }

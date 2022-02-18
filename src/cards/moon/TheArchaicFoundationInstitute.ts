@@ -7,6 +7,7 @@ import {IProjectCard} from '../IProjectCard';
 import {ResourceType} from '../../common/ResourceType';
 import {CardRenderer} from '../render/CardRenderer';
 import {Card} from '../Card';
+import {ICard} from '../ICard';
 
 export class TheArchaicFoundationInstitute extends Card implements CorporationCard {
   constructor() {
@@ -48,13 +49,17 @@ export class TheArchaicFoundationInstitute extends Card implements CorporationCa
     const count = moonTags.length;
     if (count > 0) {
       player.addResourceTo(this, count);
-      // TODO(kberg): If for some reason you gain MC but do not play another card, this becomes almost
-      // like lost TR.
-      if (this.resourceCount >= 3 && player.canAfford(0, {tr: {tr: 1}})) {
-        player.removeResourceFrom(this, 3, player.game, player, true);
-        player.increaseTerraformRating();
-      }
     }
     return undefined;
+  }
+
+  public onResourceAdded(player: Player, playedCard: ICard): void {
+    if (playedCard.name !== this.name) return;
+    // TODO(kberg): If for some reason you gain MC but do not play another card, this becomes almost
+    // like lost TR.
+    if (this.resourceCount >= 3 && player.canAfford(0, {tr: {tr: 1}})) {
+      player.removeResourceFrom(this, 3);
+      player.increaseTerraformRating();
+    }
   }
 }

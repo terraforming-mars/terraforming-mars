@@ -138,12 +138,12 @@ import {GameModule} from '@/common/cards/GameModule';
 import {CardType} from '@/common/cards/CardType';
 import {CardName} from '@/common/cards/CardName';
 import {PreferencesManager} from '@/client/utils/PreferencesManager';
-import {GlobalEventName} from '@/turmoil/globalEvents/GlobalEventName';
-import {GlobalEventModel} from '@/models/TurmoilModel';
+import {GlobalEventName} from '@/common/turmoil/globalEvents/GlobalEventName';
+import {GlobalEventModel} from '@/common/models/TurmoilModel';
 import {PartyName} from '@/common/turmoil/PartyName';
 import {ALL_EVENTS, getGlobalEventByName} from '@/turmoil/globalEvents/GlobalEventDealer';
 import GlobalEvent from '@/client/components/GlobalEvent.vue';
-import {byType, getCard, getCards, toName} from '../cards/ClientCardManifest';
+import {byType, getCard, getCards, toName} from '@/client/cards/ClientCardManifest';
 
 const MODULE_BASE = 'b';
 const MODULE_CORP = 'c';

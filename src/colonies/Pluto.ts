@@ -4,7 +4,6 @@ import {ColonyBenefit} from './ColonyBenefit';
 
 export class Pluto extends Colony {
   public name = ColonyName.PLUTO;
-  public description = 'Cards';
   public buildType = ColonyBenefit.DRAW_CARDS;
   public override buildQuantity = [2, 2, 2];
   public tradeType = ColonyBenefit.DRAW_CARDS;

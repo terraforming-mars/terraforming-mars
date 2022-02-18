@@ -1,5 +1,5 @@
 import {IGlobalEvent, GlobalEvent} from './IGlobalEvent';
-import {GlobalEventName} from './GlobalEventName';
+import {GlobalEventName} from '../../common/turmoil/globalEvents/GlobalEventName';
 import {PartyName} from '../../common/turmoil/PartyName';
 import {Game} from '../../Game';
 import {Turmoil} from '../Turmoil';
@@ -24,7 +24,7 @@ export class TiredEarth extends GlobalEvent implements IGlobalEvent {
   }
 
   public resolve(game: Game, turmoil: Turmoil) {
-    game.getPlayers().forEach((player) => {
+    game.getPlayersInGenerationOrder().forEach((player) => {
       const tags = player.getTagCount(Tags.EARTH, 'raw');
       const rawTotal = Math.min(tags, 5) - turmoil.getPlayerInfluence(player);
       const total = Math.max(rawTotal, 0);

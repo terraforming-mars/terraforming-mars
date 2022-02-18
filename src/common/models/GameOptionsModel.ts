@@ -1,7 +1,7 @@
-import {BoardName} from '../common/boards/BoardName';
-import {RandomMAOptionType} from '../RandomMAOptionType';
-import {AgendaStyle} from '../turmoil/PoliticalAgendas';
-import {CardName} from '../common/cards/CardName';
+import {BoardName} from '../boards/BoardName';
+import {RandomMAOptionType} from '../ma/RandomMAOptionType';
+import {AgendaStyle} from '../turmoil/Types';
+import {CardName} from '../cards/CardName';
 
 export interface GameOptionsModel {
   aresExtension: boolean,

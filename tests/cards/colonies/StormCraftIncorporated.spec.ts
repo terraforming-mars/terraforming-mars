@@ -1,6 +1,6 @@
 import {expect} from 'chai';
 import {StormCraftIncorporated} from '../../../src/cards/colonies/StormCraftIncorporated';
-import * as constants from '../../../src/constants';
+import * as constants from '../../../src/common/constants';
 import {Game} from '../../../src/Game';
 import {SelectAmount} from '../../../src/inputs/SelectAmount';
 import {Player} from '../../../src/Player';

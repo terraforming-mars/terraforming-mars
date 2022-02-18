@@ -35,7 +35,7 @@ describe('Splice', function() {
     const orOptions = action.options[0] as OrOptions;
 
     orOptions.cb();
-    expect(player2.getResourcesOnCard(card2)).to.eq(1);
+    expect(card2.resourceCount).to.eq(1);
     expect(player.megaCredits).to.eq(2);
   });
 

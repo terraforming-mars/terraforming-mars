@@ -17,7 +17,7 @@ import {ResourceType} from '../../common/ResourceType';
 import {Phase} from '../../common/Phase';
 import {SelectHowToPayDeferred} from '../../deferredActions/SelectHowToPayDeferred';
 import {DeferredAction} from '../../deferredActions/DeferredAction';
-import {POLITICAL_AGENDAS_MAX_ACTION_USES} from '../../constants';
+import {POLITICAL_AGENDAS_MAX_ACTION_USES} from '../../common/constants';
 import {Board} from '../../boards/Board';
 
 export class Greens extends Party implements IParty {
@@ -39,7 +39,7 @@ class GreensBonus01 implements Bonus {
   }
 
   grant(game: Game) {
-    game.getPlayers().forEach((player) => {
+    game.getPlayersInGenerationOrder().forEach((player) => {
       player.addResource(Resources.MEGACREDITS, this.getScore(player));
     });
   }
@@ -57,7 +57,7 @@ class GreensBonus02 implements Bonus {
   }
 
   grant(game: Game) {
-    game.getPlayers().forEach((player) => {
+    game.getPlayersInGenerationOrder().forEach((player) => {
       player.addResource(Resources.MEGACREDITS, this.getScore(player));
     });
   }

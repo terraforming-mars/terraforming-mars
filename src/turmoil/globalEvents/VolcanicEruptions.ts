@@ -1,5 +1,5 @@
 import {IGlobalEvent, GlobalEvent} from './IGlobalEvent';
-import {GlobalEventName} from './GlobalEventName';
+import {GlobalEventName} from '../../common/turmoil/globalEvents/GlobalEventName';
 import {PartyName} from '../../common/turmoil/PartyName';
 import {Game} from '../../Game';
 import {Resources} from '../../common/Resources';
@@ -21,8 +21,8 @@ export class VolcanicEruptions extends GlobalEvent implements IGlobalEvent {
     });
   }
   public resolve(game: Game, turmoil: Turmoil) {
-    game.increaseTemperature(game.getPlayers()[0], 2);
-    game.getPlayers().forEach((player) => {
+    game.increaseTemperature(game.getPlayersInGenerationOrder()[0], 2);
+    game.getPlayersInGenerationOrder().forEach((player) => {
       const amount = turmoil.getPlayerInfluence(player);
       if (amount > 0) {
         player.addProduction(Resources.HEAT, amount, {log: true, from: this.name});

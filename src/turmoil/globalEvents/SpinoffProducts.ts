@@ -1,6 +1,6 @@
 
 import {IGlobalEvent, GlobalEvent} from './IGlobalEvent';
-import {GlobalEventName} from './GlobalEventName';
+import {GlobalEventName} from '../../common/turmoil/globalEvents/GlobalEventName';
 import {PartyName} from '../../common/turmoil/PartyName';
 import {Game} from '../../Game';
 import {Resources} from '../../common/Resources';
@@ -25,7 +25,7 @@ export class SpinoffProducts extends GlobalEvent implements IGlobalEvent {
     });
   }
   public resolve(game: Game, turmoil: Turmoil) {
-    game.getPlayers().forEach((player) => {
+    game.getPlayersInGenerationOrder().forEach((player) => {
       player.addResource(Resources.MEGACREDITS, 2 * (Math.min(5, player.getTagCount(Tags.SCIENCE, 'raw')) + turmoil.getPlayerInfluence(player)), {log: true, from: this.name});
     });
   }

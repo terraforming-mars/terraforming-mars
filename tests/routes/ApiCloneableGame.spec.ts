@@ -1,13 +1,13 @@
 import * as http from 'http';
 import {expect} from 'chai';
-import {ApiCloneableGames} from '../../src/routes/ApiCloneableGames';
+import {ApiCloneableGame} from '../../src/routes/ApiCloneableGame';
 import {Route} from '../../src/routes/Route';
 import {FakeGameLoader} from './FakeGameLoader';
 import {MockResponse} from './HttpMocks';
 import {IContext} from '../../src/routes/IHandler';
 import {Database} from '../../src/database/Database';
 
-describe('ApiCloneableGames', () => {
+describe('ApiCloneableGame', () => {
   let req: http.IncomingMessage;
   let res: MockResponse;
   let ctx: IContext;
@@ -36,7 +36,7 @@ describe('ApiCloneableGames', () => {
 
   it('no parameter', () => {
     setRequest('/api/cloneablegames');
-    ApiCloneableGames.INSTANCE.get(req, res.hide(), ctx);
+    ApiCloneableGame.INSTANCE.get(req, res.hide(), ctx);
     expect(res.statusCode).eq(400);
     expect(res.content).eq('Bad request: id parameter missing');
   });
@@ -47,7 +47,7 @@ describe('ApiCloneableGames', () => {
       cb(new Error('Segmentation fault'), undefined);
     };
     setRequest('/api/cloneablegames?id=invalidId');
-    ApiCloneableGames.INSTANCE.get(req, res.hide(), ctx);
+    ApiCloneableGame.INSTANCE.get(req, res.hide(), ctx);
     expect(res.statusCode).eq(500);
     expect(res.content).eq('Internal server error: Segmentation fault');
   });
@@ -58,7 +58,7 @@ describe('ApiCloneableGames', () => {
       cb(undefined, undefined);
     };
     setRequest('/api/cloneablegames?id=notfound');
-    ApiCloneableGames.INSTANCE.get(req, res.hide(), ctx);
+    ApiCloneableGame.INSTANCE.get(req, res.hide(), ctx);
     expect(res.statusCode).eq(404);
     expect(res.content).eq('Not found');
   });
@@ -73,7 +73,7 @@ describe('ApiCloneableGames', () => {
       cb(undefined, expected);
     };
     setRequest('/api/cloneablegames?id=' + expected.gameId);
-    ApiCloneableGames.INSTANCE.get(req, res.hide(), ctx);
+    ApiCloneableGame.INSTANCE.get(req, res.hide(), ctx);
     expect(res.statusCode).eq(200);
     expect(res.content).eq(JSON.stringify(expected));
   });

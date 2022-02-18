@@ -889,7 +889,7 @@ export default Vue.extend({
 
       // Clone game checks
       if (component.clonedGameId !== undefined && component.seededGame) {
-        const gameData = await fetch('/api/cloneablegames?id=' + component.clonedGameId)
+        const gameData = await fetch('/api/cloneablegame?id=' + component.clonedGameId)
           .then((response) => {
             if (response.ok) {
               return response.json();

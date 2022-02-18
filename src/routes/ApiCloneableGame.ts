@@ -3,8 +3,8 @@ import {Handler} from './Handler';
 import {IContext} from './IHandler';
 import {Database} from '../database/Database';
 
-export class ApiCloneableGames extends Handler {
-  public static readonly INSTANCE = new ApiCloneableGames();
+export class ApiCloneableGame extends Handler {
+  public static readonly INSTANCE = new ApiCloneableGame();
   private constructor() {
     super();
   }

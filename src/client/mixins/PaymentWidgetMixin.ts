@@ -5,7 +5,7 @@ import {PlayerInputModel} from '@/common/models/PlayerInputModel';
 import {PlayerViewModel} from '@/common/models/PlayerModel';
 import {Tags} from '@/common/cards/Tags';
 import {Units} from '@/common/Units';
-import {SEED_VALUE} from '@/constants';
+import {SEED_VALUE} from '@/common/constants';
 import {ResourceType} from '@/common/ResourceType';
 
 export interface SelectHowToPayModel {

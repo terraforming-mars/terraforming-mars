@@ -11,6 +11,7 @@ import {Units} from '../../common/Units';
 import {all, played} from '../Options';
 import {DeferredAction} from '../../deferredActions/DeferredAction';
 import {Size} from '../render/Size';
+import {ICard} from '../ICard';
 
 export class CommunicationCenter extends Card implements IProjectCard {
   constructor() {
@@ -52,6 +53,17 @@ export class CommunicationCenter extends Card implements IProjectCard {
       return undefined;
     }));
     return undefined;
+  }
+
+  public onResourceAdded(player: Player, playedCard: ICard) {
+    if (playedCard.name !== this.name) return;
+    while (this.resourceCount >= 3) {
+      this.resourceCount -= 3;
+      player.drawCard(1);
+      player.game.log('${0} automatically removed 3 data from ${1} to draw a card.', (b) => {
+        b.player(player).card(this);
+      });
+    }
   }
 }
 

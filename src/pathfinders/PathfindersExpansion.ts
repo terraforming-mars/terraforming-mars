@@ -54,16 +54,13 @@ export class PathfindersExpansion {
 
     // Communication Center hook
     if (card.cardType === CardType.EVENT) {
-      let done = false;
       for (const p of player.game.getPlayersInGenerationOrder()) {
         for (const c of p.playedCards) {
           if (c.name === CardName.COMMUNICATION_CENTER) {
-            player.addResourceTo(c, {qty: 1, log: true});
-            done = true;
-            break;
+            p.addResourceTo(c, {qty: 1, log: true});
+            return;
           }
         }
-        if (done) break;
       }
     }
   }
@@ -271,16 +268,5 @@ export class PathfindersExpansion {
     data.vps
       .filter((vp) => vp.id === player.id)
       .forEach((vp) => victoryPointsBreakdown.setVictoryPoints('planetary tracks', vp.points, vp.tag));
-  }
-
-  public static communicationCenterHook(card: ICard, game: Game) {
-    const owner = game.getCardPlayer(card.name);
-    while (card.resourceCount >= 3) {
-      card.resourceCount -= 3;
-      owner.drawCard(1);
-      owner.game.log('${0} automatically removed 3 data from ${1} to draw a card.', (b) => {
-        b.player(owner).card(card);
-      });
-    }
   }
 }

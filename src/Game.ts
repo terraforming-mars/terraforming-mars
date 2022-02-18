@@ -1,4 +1,4 @@
-import * as constants from './constants';
+import * as constants from './common/constants';
 import {BeginnerCorporation} from './cards/corporation/BeginnerCorporation';
 import {Board} from './boards/Board';
 import {BoardName} from './common/boards/BoardName';

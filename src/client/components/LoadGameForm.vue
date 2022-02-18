@@ -5,7 +5,7 @@ import {LoadGameFormModel} from '@/common/models/LoadGameFormModel';
 import {SimpleGameModel} from '@/common/models/SimpleGameModel';
 import {mainAppSettings} from '@/client/components/App';
 
-import * as constants from '@/constants';
+import * as constants from '@/common/constants';
 
 export default Vue.extend({
   name: 'LoadGameForm',

@@ -1,5 +1,5 @@
 import {shallowMount} from '@vue/test-utils';
-import {LANGUAGES} from '@/constants';
+import {LANGUAGES} from '@/common/constants';
 import {expect} from 'chai';
 import * as sinon from 'sinon';
 import LanguageSwitcher from '@/client/components/LanguageSwitcher.vue';

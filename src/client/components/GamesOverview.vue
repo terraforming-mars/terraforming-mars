@@ -13,7 +13,7 @@
 <script lang="ts">
 
 import Vue from 'vue';
-import * as constants from '@/constants';
+import * as constants from '@/common/constants';
 import GameOverview from '@/client/components/admin/GameOverview.vue';
 import {SimpleGameModel} from '@/common/models/SimpleGameModel';
 import {GameId, PlayerId, SpectatorId} from '@/common/Types';

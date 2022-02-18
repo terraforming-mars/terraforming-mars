@@ -129,10 +129,11 @@ Database.getInstance().initialize()
   .then(() => {
     Database.getInstance().purgeUnfinishedGames();
 
-    console.log('Starting server on port ' + (process.env.PORT || 8080));
+    const port = process.env.port || 8080;
+    console.log('Starting server on port ' + port);
     console.log('version 0.X');
 
-    server.listen(process.env.PORT || 8080);
+    server.listen(port);
 
     console.log();
     console.log(

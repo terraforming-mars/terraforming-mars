@@ -704,21 +704,19 @@ export class Player implements ISerializable<SerializedPlayer> {
     return requirementsBonus;
   }
 
-  public removeResourceFrom(card: ICard, count: number = 1, game? : Game, removingPlayer? : Player, shouldLogAction: boolean = true): void {
+  public removeResourceFrom(card: ICard, count: number = 1, removingPlayer? : Player): void {
     if (card.resourceCount) {
-      card.resourceCount = Math.max(card.resourceCount - count, 0);
-      // Mons Insurance hook
-      if (game !== undefined && removingPlayer !== undefined) {
-        if (removingPlayer !== this) this.resolveMonsInsurance();
+      const amountRemoved = Math.min(card.resourceCount, count);
+      card.resourceCount -= amountRemoved;
 
-        if (shouldLogAction) {
-          game.log('${0} removed ${1} resource(s) from ${2}\'s ${3}', (b) =>
-            b.player(removingPlayer)
-              .number(count)
-              .player(this)
-              .card(card));
-        }
-      }
+      if (removingPlayer !== undefined && removingPlayer !== this) this.resolveMonsInsurance();
+
+      this.game.log('${0} removed ${1} resource(s) from ${2}\'s ${3}', (b) =>
+        b.player(removingPlayer ?? this)
+          .number(amountRemoved)
+          .player(this)
+          .card(card));
+
       // Lawsuit hook
       if (removingPlayer !== undefined && removingPlayer !== this && this.removingPlayers.includes(removingPlayer.id) === false) {
         this.removingPlayers.push(removingPlayer.id);

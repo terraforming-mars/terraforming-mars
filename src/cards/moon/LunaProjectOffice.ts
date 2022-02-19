@@ -7,7 +7,7 @@ import {CardRenderer} from '../render/CardRenderer';
 import {MoonExpansion} from '../../moon/MoonExpansion';
 import {Card} from '../Card';
 import {CardRequirements} from '../CardRequirements';
-import {Size} from '../render/Size';
+import {Size} from '../../common/cards/render/Size';
 
 export class LunaProjectOffice extends Card implements IProjectCard {
   constructor() {

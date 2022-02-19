@@ -6,7 +6,7 @@ import {IProjectCard} from '../IProjectCard';
 import {Player} from '../../Player';
 import {Resources} from '../../common/Resources';
 import {CardName} from '../../common/cards/CardName';
-import {Size} from '../render/Size';
+import {Size} from '../../common/cards/render/Size';
 import {CardRenderer} from '../render/CardRenderer';
 import {all} from '../Options';
 

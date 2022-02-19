@@ -9,7 +9,7 @@ import {IResourceCard} from '../ICard';
 import {Resources} from '../../common/Resources';
 import {AddResourcesToCard} from '../../deferredActions/AddResourcesToCard';
 import {Card} from '../Card';
-import {Size} from '../render/Size';
+import {Size} from '../../common/cards/render/Size';
 import {CardRenderer} from '../render/CardRenderer';
 import {digit} from '../Options';
 

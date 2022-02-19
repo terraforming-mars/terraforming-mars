@@ -1,6 +1,6 @@
-import {CardRenderItemType} from './CardRenderItemType';
+import {CardRenderItemType} from '../../common/cards/render/CardRenderItemType';
 import {CardRenderItem} from './CardRenderItem';
-import {Size} from './Size';
+import {Size} from '../../common/cards/render/Size';
 import {ResourceType} from '../../common/ResourceType';
 import {Tags} from '../../common/cards/Tags';
 

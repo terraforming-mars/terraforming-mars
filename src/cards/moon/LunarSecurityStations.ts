@@ -4,7 +4,7 @@ import {CardType} from '../../common/cards/CardType';
 import {CardRenderer} from '../render/CardRenderer';
 import {Card} from '../Card';
 import {MoonExpansion} from '../../moon/MoonExpansion';
-import {Size} from '../render/Size';
+import {Size} from '../../common/cards/render/Size';
 import {IProjectCard} from '../IProjectCard';
 import {CardRequirements} from '../CardRequirements';
 import {all} from '../Options';

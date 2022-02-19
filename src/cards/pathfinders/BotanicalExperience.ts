@@ -7,7 +7,7 @@ import {CardRenderer} from '../render/CardRenderer';
 import {CardRequirements} from '../CardRequirements';
 import {all} from '../Options';
 import {Tags} from '../../common/cards/Tags';
-import {Size} from '../render/Size';
+import {Size} from '../../common/cards/render/Size';
 import {ISpace} from '../../boards/ISpace';
 import {Board} from '../../boards/Board';
 import {ResourceType} from '../../common/ResourceType';

@@ -7,7 +7,7 @@ import {SelectCard} from '../../inputs/SelectCard';
 import {CardName} from '../../common/cards/CardName';
 import {LogHelper} from '../../LogHelper';
 import {CardRenderer} from '../render/CardRenderer';
-import {Size} from '../render/Size';
+import {Size} from '../../common/cards/render/Size';
 import {RobotCard} from '../promo/SelfReplicatingRobots';
 
 export class CEOsFavoriteProject extends Card implements IProjectCard {

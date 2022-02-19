@@ -40,7 +40,7 @@ import {ExperiencedMartians} from './ExperiencedMartians';
 import {FlatMarsTheory} from './FlatMarsTheory';
 import {FloaterUrbanism} from './FloaterUrbanism';
 import {GeologicalExpedition} from './GeologicalExpedition';
-// import {HabitatMarte} from './HabitatMarte';
+import {HabitatMarte} from './HabitatMarte';
 import {HighTempSuperconductors} from './HighTempSuperconductors';
 import {HuygensObservatory} from './HuygensObservatory';
 import {HydrogenBombardment} from './HydrogenBombardment';
@@ -204,7 +204,7 @@ export const PATHFINDERS_CARD_MANIFEST = new CardManifest({
     // {cardName: CardName.GAGARIN_MOBILE_BASE, Factory: GagarinMobileBase},
     // {cardName: CardName.MARS_FRONTIER_ALLIANCE, Factory: MarsFrontierAlliance},
     // {cardName: CardName.MIND_SET_MARS, Factory: MindSetMars, compatibility: GameModule.Turmoil},
-    // {cardName: CardName.HABITAT_MARTE, Factory: HabitatMarte},
+    {cardName: CardName.HABITAT_MARTE, Factory: HabitatMarte},
     {cardName: CardName.ADHAI_HIGH_ORBIT_CONSTRUCTIONS, Factory: AdhaiHighOrbitConstructions},
   ],
   preludeCards: [

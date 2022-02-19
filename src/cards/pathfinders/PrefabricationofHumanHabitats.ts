@@ -7,7 +7,7 @@ import {CardRenderer} from '../render/CardRenderer';
 import {Resources} from '../../common/Resources';
 import {CardRequirements} from '../CardRequirements';
 import {Tags} from '../../common/cards/Tags';
-import {Size} from '../render/Size';
+import {Size} from '../../common/cards/render/Size';
 import {played} from '../Options';
 
 export class PrefabricationofHumanHabitats extends Card implements IProjectCard {

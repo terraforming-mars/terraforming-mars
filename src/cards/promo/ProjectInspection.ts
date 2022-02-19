@@ -7,7 +7,7 @@ import {Playwrights} from '../community/Playwrights';
 import {ICard, isIActionCard} from '../ICard';
 import {SelectCard} from '../../inputs/SelectCard';
 import {CardRenderer} from '../render/CardRenderer';
-import {Size} from '../render/Size';
+import {Size} from '../../common/cards/render/Size';
 
 export class ProjectInspection extends Card implements IProjectCard {
   constructor() {

@@ -7,7 +7,7 @@
 import Vue from 'vue';
 import {CardRenderSymbolType} from '@/cards/render/CardRenderSymbolType';
 import {CardRenderSymbol} from '@/cards/render/CardRenderSymbol';
-import {Size} from '@/cards/render/Size';
+import {Size} from '@/common/cards/render/Size';
 
 export default Vue.extend({
   name: 'CardRenderSymbolComponent',

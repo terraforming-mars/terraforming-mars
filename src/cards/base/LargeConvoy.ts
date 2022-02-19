@@ -13,7 +13,7 @@ import {CardName} from '../../common/cards/CardName';
 import {Resources} from '../../common/Resources';
 import {PlaceOceanTile} from '../../deferredActions/PlaceOceanTile';
 import {CardRenderer} from '../render/CardRenderer';
-import {Size} from '../render/Size';
+import {Size} from '../../common/cards/render/Size';
 import {digit} from '../Options';
 
 export class LargeConvoy extends Card implements IProjectCard {

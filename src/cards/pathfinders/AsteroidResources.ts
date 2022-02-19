@@ -10,7 +10,7 @@ import {Units} from '../../common/Units';
 import {OrOptions} from '../../inputs/OrOptions';
 import {SelectOption} from '../../inputs/SelectOption';
 import {PlaceOceanTile} from '../../deferredActions/PlaceOceanTile';
-import {Size} from '../render/Size';
+import {Size} from '../../common/cards/render/Size';
 import {digit} from '../Options';
 
 export class AsteroidResources extends Card implements IProjectCard {

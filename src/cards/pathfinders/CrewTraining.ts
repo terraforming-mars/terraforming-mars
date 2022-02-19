@@ -5,7 +5,7 @@ import {CardRenderer} from '../render/CardRenderer';
 import {Tags} from '../../common/cards/Tags';
 import {ICloneTagCard} from './ICloneTagCard';
 import {DeclareCloneTag} from '../../pathfinders/DeclareCloneTag';
-import {Size} from '../render/Size';
+import {Size} from '../../common/cards/render/Size';
 import {played} from '../Options';
 
 export class CrewTraining extends PreludeCard implements ICloneTagCard {

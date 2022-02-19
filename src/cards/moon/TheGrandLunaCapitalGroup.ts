@@ -11,7 +11,7 @@ import {ISpace} from '../../boards/ISpace';
 import {SpaceId} from '../../common/Types';
 import {Resources} from '../../common/Resources';
 import {CardRenderDynamicVictoryPoints} from '../render/CardRenderDynamicVictoryPoints';
-import {Size} from '../render/Size';
+import {Size} from '../../common/cards/render/Size';
 import {AltSecondaryTag} from '../render/CardRenderItem';
 import {Card} from '../Card';
 import {all} from '../Options';

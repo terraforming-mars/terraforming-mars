@@ -4,7 +4,7 @@ import {PartyName} from '../../common/turmoil/PartyName';
 import {Game} from '../../Game';
 import {Turmoil} from '../Turmoil';
 import {CardRenderer} from '../../cards/render/CardRenderer';
-import {Size} from '../../cards/render/Size';
+import {Size} from '../../common/cards/render/Size';
 
 const RENDER_DATA = CardRenderer.builder((b) => {
   b.minus().text('4').tr(1).influence({size: Size.SMALL});

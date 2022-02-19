@@ -1,5 +1,5 @@
 import {CardRenderSymbol} from '../../src/cards/render/CardRenderSymbol';
-import {Size} from '../../src/cards/render/Size';
+import {Size} from '../../src/common/cards/render/Size';
 import {CardRenderSymbolType} from '../../src/cards/render/CardRenderSymbolType';
 import {expect} from 'chai';
 

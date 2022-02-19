@@ -12,7 +12,7 @@ import {LogHelper} from '../../LogHelper';
 import {Resources} from '../../common/Resources';
 import {CardType} from '../../common/cards/CardType';
 import {CardRenderer} from '../render/CardRenderer';
-import {Size} from '../render/Size';
+import {Size} from '../../common/cards/render/Size';
 import {digit} from '../Options';
 
 export class Astrodrill extends Card implements IActionCard, CorporationCard {

@@ -6,7 +6,7 @@ import {Turmoil} from '../Turmoil';
 import {Tags} from '../../common/cards/Tags';
 import {Resources} from '../../common/Resources';
 import {CardRenderer} from '../../cards/render/CardRenderer';
-import {Size} from '../../cards/render/Size';
+import {Size} from '../../common/cards/render/Size';
 
 const RENDER_DATA = CardRenderer.builder((b) => {
   b.megacredits(2).slash().mars(1, {played: true}).influence({size: Size.SMALL});

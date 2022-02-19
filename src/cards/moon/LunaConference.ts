@@ -9,7 +9,7 @@ import {MoonExpansion} from '../../moon/MoonExpansion';
 import {TileType} from '../../common/TileType';
 import {CardRequirements} from '../CardRequirements';
 import {Card} from '../Card';
-import {Size} from '../render/Size';
+import {Size} from '../../common/cards/render/Size';
 import {Resources} from '../../common/Resources';
 import {all} from '../Options';
 

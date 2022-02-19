@@ -44,7 +44,7 @@ export class OumuamuaTypeObjectSurvey extends Card implements IProjectCard {
 
   private processCard(player: Player, card: IProjectCard): boolean {
     const tags = card.tags;
-    if (tags.includes(Tags.SCIENCE) || tags.includes(Tags.MICROBE)) {
+    if (player.cardHasTag(card, Tags.SCIENCE) || player.cardHasTag(card, Tags.MICROBE)) {
       player.playCard(card, undefined);
       return true;
     } else if (tags.includes(Tags.SPACE)) {

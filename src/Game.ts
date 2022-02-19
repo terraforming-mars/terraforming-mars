@@ -1491,7 +1491,7 @@ export class Game implements ISerializable<SerializedGame> {
     return ret;
   }
 
-  public getCardPlayer(name: string): Player {
+  public getCardPlayer(name: string): Player | undefined {
     for (const player of this.players) {
       // Check cards player has played
       for (const card of player.playedCards) {
@@ -1504,7 +1504,7 @@ export class Game implements ISerializable<SerializedGame> {
         return player;
       }
     }
-    throw new Error('No player has played requested card');
+    return undefined;
   }
 
   public getCardsInHandByResource(player: Player, resourceType: ResourceType) {

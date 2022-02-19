@@ -744,6 +744,6 @@ export enum CardName {
     GAGARIN_MOBILE_BASE = 'Gagarin Mobile Base',
     MARS_FRONTIER_ALLIANCE = 'Mars Frontier Alliance',
     MIND_SET_MARS = 'Mind Set Mars',
-    HABITAT_MARTAE = 'Habitat Martae',
+    HABITAT_MARTE = 'Habitat Marte',
     ADHAI_HIGH_ORBIT_CONSTRUCTIONS = 'Adhai High Orbit Constructions',
 }

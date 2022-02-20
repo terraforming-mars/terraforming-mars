@@ -1,4 +1,4 @@
-import {RequirementType} from './RequirementType';
+import {RequirementType} from '../common/cards/RequirementType';
 import {Tags} from '../common/cards/Tags';
 import {PartyName} from '../common/turmoil/PartyName';
 import {Resources} from '../common/Resources';

@@ -1,7 +1,7 @@
 import {Resources} from '../common/Resources';
 import {PartyName} from '../common/turmoil/PartyName';
 import {CardRequirement, PartyCardRequirement, ProductionCardRequirement, TagCardRequirement} from './CardRequirement';
-import {RequirementType} from './RequirementType';
+import {RequirementType} from '../common/cards/RequirementType';
 import {Tags} from '../common/cards/Tags';
 import {Player} from '../Player';
 import {

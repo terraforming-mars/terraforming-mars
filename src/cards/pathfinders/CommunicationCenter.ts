@@ -10,7 +10,7 @@ import {Resources} from '../../common/Resources';
 import {Units} from '../../common/Units';
 import {all, played} from '../Options';
 import {DeferredAction} from '../../deferredActions/DeferredAction';
-import {Size} from '../render/Size';
+import {Size} from '../../common/cards/render/Size';
 import {ICard} from '../ICard';
 
 export class CommunicationCenter extends Card implements IProjectCard {

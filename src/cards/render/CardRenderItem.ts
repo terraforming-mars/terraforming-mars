@@ -2,8 +2,8 @@
   Used to describe any distinct item on a card and prepare it for rendering in Vue
   e.g. Any tag, tile, production cube, ocean, temperature, etc.
  */
-import {CardRenderItemType} from './CardRenderItemType';
-import {Size} from './Size';
+import {CardRenderItemType} from '../../common/cards/render/CardRenderItemType';
+import {Size} from '../../common/cards/render/Size';
 import {Tags} from '../../common/cards/Tags';
 
 // Tags that belong in `CardRenderItem.secondaryTag` that aren't part of `Tags`.

@@ -8,7 +8,7 @@ import {CardName} from '../../common/cards/CardName';
 import {Resources} from '../../common/Resources';
 import {ICard} from '../ICard';
 import {CardRenderer} from '../render/CardRenderer';
-import {Size} from '../render/Size';
+import {Size} from '../../common/cards/render/Size';
 import {Units} from '../../common/Units';
 import {played} from '../Options';
 

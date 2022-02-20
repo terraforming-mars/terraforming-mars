@@ -13,7 +13,7 @@
 
 import Vue from 'vue';
 import {CardRenderItem} from '@/cards/render/CardRenderItem';
-import {isIDescription} from '@/cards/render/ICardRenderDescription';
+import {isIDescription} from '@/common/cards/render/ICardRenderDescription';
 import {CardRenderSymbol} from '@/cards/render/CardRenderSymbol';
 import {CardRenderProductionBox, ItemType} from '@/cards/render/CardRenderer';
 import {CardRenderTile} from '@/cards/render/CardRenderer';

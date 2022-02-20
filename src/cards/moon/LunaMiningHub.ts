@@ -10,7 +10,7 @@ import {MoonExpansion} from '../../moon/MoonExpansion';
 import {Units} from '../../common/Units';
 import {MoonCard} from './MoonCard';
 import {PlaceSpecialMoonTile} from '../../moon/PlaceSpecialMoonTile';
-import {Size} from '../render/Size';
+import {Size} from '../../common/cards/render/Size';
 
 export class LunaMiningHub extends MoonCard {
   constructor() {

@@ -12,7 +12,7 @@ import {AddResourcesToCard} from '../../deferredActions/AddResourcesToCard';
 import {IResourceCard} from '../ICard';
 import {Board} from '../../boards/Board';
 import {CardRenderer} from '../render/CardRenderer';
-import {Size} from '../render/Size';
+import {Size} from '../../common/cards/render/Size';
 import {all} from '../Options';
 
 export class Pets extends Card implements IProjectCard, IResourceCard {

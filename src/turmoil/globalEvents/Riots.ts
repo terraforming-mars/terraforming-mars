@@ -6,7 +6,7 @@ import {Resources} from '../../common/Resources';
 import {Turmoil} from '../Turmoil';
 import {Board} from '../../boards/Board';
 import {CardRenderer} from '../../cards/render/CardRenderer';
-import {Size} from '../../cards/render/Size';
+import {Size} from '../../common/cards/render/Size';
 
 const RENDER_DATA = CardRenderer.builder((b) => {
   b.minus().megacredits(4).slash().city().influence({size: Size.SMALL});

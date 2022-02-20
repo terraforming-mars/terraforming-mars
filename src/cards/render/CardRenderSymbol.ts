@@ -2,8 +2,8 @@
   Used to describe any distinct symbol on a card and prepare it for rendering in Vue
   e.g. plus and minus sign, asterix, arrow, dash, slash, etc.
  */
-import {CardRenderSymbolType} from './CardRenderSymbolType';
-import {Size} from './Size';
+import {CardRenderSymbolType} from '../../common/cards/render/CardRenderSymbolType';
+import {Size} from '../../common/cards/render/Size';
 
 export class CardRenderSymbol {
   private constructor(public type: CardRenderSymbolType, public size: Size, public isIcon: boolean = false) {}

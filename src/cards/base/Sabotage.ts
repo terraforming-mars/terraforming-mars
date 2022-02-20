@@ -7,7 +7,7 @@ import {Resources} from '../../common/Resources';
 import {CardName} from '../../common/cards/CardName';
 import {SelectOption} from '../../inputs/SelectOption';
 import {CardRenderer} from '../render/CardRenderer';
-import {Size} from '../render/Size';
+import {Size} from '../../common/cards/render/Size';
 import {all, digit} from '../Options';
 
 export class Sabotage extends Card implements IProjectCard {

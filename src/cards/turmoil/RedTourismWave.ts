@@ -7,7 +7,7 @@ import {PartyName} from '../../common/turmoil/PartyName';
 import {Resources} from '../../common/Resources';
 import {CardRequirements} from '../CardRequirements';
 import {CardRenderer} from '../render/CardRenderer';
-import {Size} from '../render/Size';
+import {Size} from '../../common/cards/render/Size';
 import {Card} from '../Card';
 
 export class RedTourismWave extends Card implements IProjectCard {

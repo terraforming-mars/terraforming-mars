@@ -1,6 +1,6 @@
 import {expect} from 'chai';
 import {CardRenderItem} from '../../src/cards/render/CardRenderItem';
-import {CardRenderItemType} from '../../src/cards/render/CardRenderItemType';
+import {CardRenderItemType} from '../../src/common/cards/render/CardRenderItemType';
 import {CardRenderDynamicVictoryPoints} from '../../src/cards/render/CardRenderDynamicVictoryPoints';
 import {ResourceType} from '../../src/common/ResourceType';
 

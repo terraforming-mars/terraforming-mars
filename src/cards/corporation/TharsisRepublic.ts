@@ -13,7 +13,7 @@ import {GainProduction} from '../../deferredActions/GainProduction';
 import {Board} from '../../boards/Board';
 import {CardType} from '../../common/cards/CardType';
 import {CardRenderer} from '../render/CardRenderer';
-import {Size} from '../render/Size';
+import {Size} from '../../common/cards/render/Size';
 import {all} from '../Options';
 
 export class TharsisRepublic extends Card implements CorporationCard {

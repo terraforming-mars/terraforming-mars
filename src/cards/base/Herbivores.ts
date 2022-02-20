@@ -13,7 +13,7 @@ import {AddResourcesToCard} from '../../deferredActions/AddResourcesToCard';
 import {DecreaseAnyProduction} from '../../deferredActions/DecreaseAnyProduction';
 import {CardRenderer} from '../render/CardRenderer';
 import {CardRequirements} from '../CardRequirements';
-import {Size} from '../render/Size';
+import {Size} from '../../common/cards/render/Size';
 import {all} from '../Options';
 import {Board} from '../../boards/Board';
 

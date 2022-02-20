@@ -5,7 +5,7 @@ import {Game} from '../../Game';
 import {Resources} from '../../common/Resources';
 import {Turmoil} from '../Turmoil';
 import {CardRenderer} from '../../cards/render/CardRenderer';
-import {Size} from '../../cards/render/Size';
+import {Size} from '../../common/cards/render/Size';
 
 const RENDER_DATA = CardRenderer.builder((b) => {
   b.production((pb) => pb.minus().energy(1).steel(1)).br;

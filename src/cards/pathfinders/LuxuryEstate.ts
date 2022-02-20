@@ -7,7 +7,7 @@ import {CardRenderer} from '../render/CardRenderer';
 import {Resources} from '../../common/Resources';
 import {Tags} from '../../common/cards/Tags';
 import {CardRequirements} from '../CardRequirements';
-import {Size} from '../render/Size';
+import {Size} from '../../common/cards/render/Size';
 
 export class LuxuryEstate extends Card implements IProjectCard {
   constructor() {

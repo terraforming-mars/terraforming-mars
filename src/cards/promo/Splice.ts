@@ -9,7 +9,7 @@ import {ResourceType} from '../../common/ResourceType';
 import {CardName} from '../../common/cards/CardName';
 import {CardType} from '../../common/cards/CardType';
 import {CardRenderer} from '../render/CardRenderer';
-import {Size} from '../render/Size';
+import {Size} from '../../common/cards/render/Size';
 import {Resources} from '../../common/Resources';
 import {all, played} from '../Options';
 

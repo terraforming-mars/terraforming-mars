@@ -4,7 +4,7 @@ import {CardName} from '../../common/cards/CardName';
 import {CardRenderer} from '../render/CardRenderer';
 import {Card} from '../Card';
 import {Tags} from '../../common/cards/Tags';
-import {Size} from '../render/Size';
+import {Size} from '../../common/cards/render/Size';
 import {played} from '../Options';
 import {CorporationCard} from '../corporation/CorporationCard';
 import {ResourceType} from '../../common/ResourceType';

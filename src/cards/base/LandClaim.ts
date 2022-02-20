@@ -7,7 +7,7 @@ import {ISpace} from '../../boards/ISpace';
 import {CardName} from '../../common/cards/CardName';
 import {LogHelper} from '../../LogHelper';
 import {CardRenderer} from '../render/CardRenderer';
-import {Size} from '../render/Size';
+import {Size} from '../../common/cards/render/Size';
 
 export class LandClaim extends Card implements IProjectCard {
   constructor() {

@@ -5,7 +5,7 @@ import {Tags} from '../../common/cards/Tags';
 import {CorporationCard} from '../corporation/CorporationCard';
 import {CardRenderer} from '../render/CardRenderer';
 import {MoonExpansion} from '../../moon/MoonExpansion';
-import {Size} from '../render/Size';
+import {Size} from '../../common/cards/render/Size';
 import {Card} from '../Card';
 import {all} from '../Options';
 

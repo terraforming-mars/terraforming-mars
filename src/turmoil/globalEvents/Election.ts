@@ -8,7 +8,7 @@ import {Player} from '../../Player';
 import {Board} from '../../boards/Board';
 import {CardRenderer} from '../../cards/render/CardRenderer';
 import {played} from '../../cards/Options';
-import {Size} from '../../cards/render/Size';
+import {Size} from '../../common/cards/render/Size';
 
 const RENDER_DATA = CardRenderer.builder((b) => {
   b.influence({size: Size.SMALL}).plus().building(1, {played, size: Size.SMALL}).plus().city({size: Size.SMALL}).colon();

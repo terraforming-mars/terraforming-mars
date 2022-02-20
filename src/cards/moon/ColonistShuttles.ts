@@ -7,7 +7,7 @@ import {TileType} from '../../common/TileType';
 import {CardRenderer} from '../render/CardRenderer';
 import {Units} from '../../common/Units';
 import {MoonCard} from './MoonCard';
-import {Size} from '../render/Size';
+import {Size} from '../../common/cards/render/Size';
 import {Resources} from '../../common/Resources';
 import {all} from '../Options';
 

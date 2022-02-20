@@ -6,7 +6,7 @@ import {Tags} from '../../common/cards/Tags';
 import {Player} from '../../Player';
 import {CardRequirements} from '../CardRequirements';
 import {CardRenderer} from '../render/CardRenderer';
-import {Size} from '../render/Size';
+import {Size} from '../../common/cards/render/Size';
 
 export class MercurianAlloys extends Card implements IProjectCard {
   constructor() {

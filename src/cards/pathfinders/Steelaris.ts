@@ -11,7 +11,7 @@ import {ISpace} from '../../boards/ISpace';
 import {TileType} from '../../common/TileType';
 import {GainResources} from '../../deferredActions/GainResources';
 import {Priority} from '../../deferredActions/DeferredAction';
-import {Size} from '../render/Size';
+import {Size} from '../../common/cards/render/Size';
 import {BoardType} from '../../boards/BoardType';
 import {SpaceType} from '../../common/boards/SpaceType';
 

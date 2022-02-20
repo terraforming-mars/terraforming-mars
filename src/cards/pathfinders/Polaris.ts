@@ -11,7 +11,7 @@ import {PlaceOceanTile} from '../../deferredActions/PlaceOceanTile';
 import {ISpace} from '../../boards/ISpace';
 import {GainResources} from '../../deferredActions/GainResources';
 import {Priority} from '../../deferredActions/DeferredAction';
-import {Size} from '../render/Size';
+import {Size} from '../../common/cards/render/Size';
 import {Board} from '../../boards/Board';
 
 export class Polaris extends Card implements CorporationCard {

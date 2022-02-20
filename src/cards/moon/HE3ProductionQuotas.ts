@@ -9,7 +9,7 @@ import {PartyName} from '../../common/turmoil/PartyName';
 import {MoonExpansion} from '../../moon/MoonExpansion';
 import {TileType} from '../../common/TileType';
 import {Card} from '../Card';
-import {Size} from '../render/Size';
+import {Size} from '../../common/cards/render/Size';
 import {all} from '../Options';
 
 export class HE3ProductionQuotas extends Card implements IProjectCard {

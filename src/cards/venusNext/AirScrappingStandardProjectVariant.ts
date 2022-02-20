@@ -3,7 +3,7 @@ import {CardName} from '../../common/cards/CardName';
 import {CardRenderer} from '../render/CardRenderer';
 import {Tags} from '../../common/cards/Tags';
 import {AirScrappingStandardProject} from './AirScrappingStandardProject';
-import {Size} from '../render/Size';
+import {Size} from '../../common/cards/render/Size';
 import {played} from '../Options';
 
 export class AirScrappingStandardProjectVariant extends AirScrappingStandardProject {

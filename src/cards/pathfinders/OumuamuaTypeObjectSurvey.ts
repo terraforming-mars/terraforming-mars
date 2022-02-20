@@ -10,7 +10,7 @@ import {CardRequirements} from '../CardRequirements';
 import {Tags} from '../../common/cards/Tags';
 import {digit, played} from '../Options';
 import {Resources} from '../../common/Resources';
-import {Size} from '../render/Size';
+import {Size} from '../../common/cards/render/Size';
 
 export class OumuamuaTypeObjectSurvey extends Card implements IProjectCard {
   constructor() {

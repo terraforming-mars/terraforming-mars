@@ -5,7 +5,7 @@ import {Game} from '../../Game';
 import {Resources} from '../../common/Resources';
 import {Turmoil} from '../Turmoil';
 import {CardRenderer} from '../../cards/render/CardRenderer';
-import {Size} from '../../cards/render/Size';
+import {Size} from '../../common/cards/render/Size';
 
 const RENDER_DATA = CardRenderer.builder((b) => {
   b.vSpace().br.plants(1).slash().production((pb) => pb.plants(1)).nbsp.influence({size: Size.SMALL});

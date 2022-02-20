@@ -5,7 +5,7 @@ import {Card} from '../Card';
 import {CardType} from '../../common/cards/CardType';
 import {CorporationCard} from '../corporation/CorporationCard';
 import {CardRenderer} from '../render/CardRenderer';
-import {Size} from '../render/Size';
+import {Size} from '../../common/cards/render/Size';
 import {Tags} from '../../common/cards/Tags';
 import {Turmoil} from '../../turmoil/Turmoil';
 

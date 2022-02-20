@@ -9,7 +9,7 @@ import {Priority} from '../../deferredActions/DeferredAction';
 import {GainProduction} from '../../deferredActions/GainProduction';
 import {CardType} from '../../common/cards/CardType';
 import {CardRenderer} from '../render/CardRenderer';
-import {Size} from '../render/Size';
+import {Size} from '../../common/cards/render/Size';
 import {all} from '../Options';
 import {Board} from '../../boards/Board';
 

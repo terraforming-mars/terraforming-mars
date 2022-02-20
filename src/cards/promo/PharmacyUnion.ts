@@ -10,7 +10,7 @@ import {IProjectCard} from '../IProjectCard';
 import {CardType} from '../../common/cards/CardType';
 import {DeferredAction} from '../../deferredActions/DeferredAction';
 import {CardRenderer} from '../render/CardRenderer';
-import {Size} from '../render/Size';
+import {Size} from '../../common/cards/render/Size';
 import {Resources} from '../../common/Resources';
 import {all, digit, played} from '../Options';
 

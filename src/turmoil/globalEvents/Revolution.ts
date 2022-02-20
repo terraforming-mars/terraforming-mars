@@ -7,7 +7,7 @@ import {Tags} from '../../common/cards/Tags';
 import {Player} from '../../Player';
 import {CardRenderer} from '../../cards/render/CardRenderer';
 import {played} from '../../cards/Options';
-import {Size} from '../../cards/render/Size';
+import {Size} from '../../common/cards/render/Size';
 
 const RENDER_DATA = CardRenderer.builder((b) => {
   b.br.br;

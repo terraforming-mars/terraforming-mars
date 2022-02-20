@@ -7,7 +7,7 @@ import {Resources} from '../../common/Resources';
 import {CardRenderer} from '../render/CardRenderer';
 import {CardRequirements} from '../CardRequirements';
 import {Card} from '../Card';
-import {Size} from '../render/Size';
+import {Size} from '../../common/cards/render/Size';
 import {all} from '../Options';
 
 export class QuantumCommunications extends Card implements IProjectCard {

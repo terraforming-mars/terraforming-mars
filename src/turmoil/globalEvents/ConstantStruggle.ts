@@ -7,7 +7,7 @@ import {Resources} from '../../common/Resources';
 import {PathfindersExpansion} from '../../pathfinders/PathfindersExpansion';
 import {Tags} from '../../common/cards/Tags';
 import {CardRenderer} from '../../cards/render/CardRenderer';
-import {Size} from '../../cards/render/Size';
+import {Size} from '../../common/cards/render/Size';
 
 const RENDER_DATA = CardRenderer.builder((b) => {
   b.minus().megacredits(10).influence({size: Size.SMALL}).planetaryTrack().text('2');

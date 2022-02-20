@@ -48,7 +48,7 @@ export class FloaterUrbanism extends Card implements IProjectCard, IActionCard, 
       'Choose',
       cards,
       (selected) => {
-        player.removeResourceFrom(selected[0], 1, player.game, undefined, true);
+        player.removeResourceFrom(selected[0], 1);
         player.addResourceTo(this, {log: true});
         return undefined;
       });

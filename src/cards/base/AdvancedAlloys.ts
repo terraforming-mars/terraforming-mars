@@ -5,7 +5,7 @@ import {CardType} from '../../common/cards/CardType';
 import {Player} from '../../Player';
 import {CardName} from '../../common/cards/CardName';
 import {CardRenderer} from '../render/CardRenderer';
-import {Size} from '../render/Size';
+import {Size} from '../../common/cards/render/Size';
 
 export class AdvancedAlloys extends Card implements IProjectCard {
   constructor() {

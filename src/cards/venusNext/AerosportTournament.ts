@@ -4,7 +4,7 @@ import {CardName} from '../../common/cards/CardName';
 import {Resources} from '../../common/Resources';
 import {CardRequirements} from '../CardRequirements';
 import {CardRenderer} from '../render/CardRenderer';
-import {Size} from '../render/Size';
+import {Size} from '../../common/cards/render/Size';
 import {Card} from '../Card';
 import {all} from '../Options';
 

@@ -9,7 +9,7 @@ import {SelectCard} from '../../inputs/SelectCard';
 import {CardName} from '../../common/cards/CardName';
 import {LogHelper} from '../../LogHelper';
 import {CardRenderer} from '../render/CardRenderer';
-import {Size} from '../render/Size';
+import {Size} from '../../common/cards/render/Size';
 import {Card} from '../Card';
 
 export class AerialMappers extends Card implements IActionCard, IResourceCard {

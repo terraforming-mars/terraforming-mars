@@ -10,7 +10,7 @@ import {CardName} from '../../common/cards/CardName';
 import {CardType} from '../../common/cards/CardType';
 import {Card} from '../Card';
 import {CardRenderer} from '../render/CardRenderer';
-import {Size} from '../render/Size';
+import {Size} from '../../common/cards/render/Size';
 import {PlayerInput} from '../../PlayerInput';
 import {Resources} from '../../common/Resources';
 

@@ -7,7 +7,7 @@ import {CardName} from '../../common/cards/CardName';
 import {ITagCount} from '../../common/cards/ITagCount';
 import {CardType} from '../../common/cards/CardType';
 import {CardRenderer} from '../render/CardRenderer';
-import {Size} from '../render/Size';
+import {Size} from '../../common/cards/render/Size';
 import {CardRenderDynamicVictoryPoints} from '../render/CardRenderDynamicVictoryPoints';
 
 export class AgricolaInc extends Card implements CorporationCard {

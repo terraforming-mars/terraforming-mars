@@ -11,9 +11,9 @@
 import Vue from 'vue';
 import {generateClassString} from '@/common/utils/utils';
 import {AltSecondaryTag, CardRenderItem} from '@/cards/render/CardRenderItem';
-import {CardRenderItemType} from '@/cards/render/CardRenderItemType';
+import {CardRenderItemType} from '@/common/cards/render/CardRenderItemType';
 import {CardRenderSymbol} from '@/cards/render/CardRenderSymbol';
-import {Size} from '@/cards/render/Size';
+import {Size} from '@/common/cards/render/Size';
 import {Tags} from '@/common/cards/Tags';
 
 // microbe, animal and plant tag could be used both as a resource and played tag

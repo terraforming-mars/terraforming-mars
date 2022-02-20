@@ -8,7 +8,7 @@ import {SelectOption} from '../../inputs/SelectOption';
 import {OrOptions} from '../../inputs/OrOptions';
 import {DeferredAction} from '../../deferredActions/DeferredAction';
 import {CardRenderer} from '../render/CardRenderer';
-import {Size} from '../render/Size';
+import {Size} from '../../common/cards/render/Size';
 import {PoliticalAgendas} from '../../turmoil/PoliticalAgendas';
 
 export class ByElection extends PreludeCard implements IProjectCard {

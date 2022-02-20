@@ -12,7 +12,7 @@ import {OrOptions} from '../../inputs/OrOptions';
 import {SelectOption} from '../../inputs/SelectOption';
 import {Card} from '../Card';
 import {VictoryPoints} from '../ICard';
-import {Size} from '../render/Size';
+import {Size} from '../../common/cards/render/Size';
 
 export class CopernicusTower extends Card implements IActionCard, IProjectCard {
   constructor() {

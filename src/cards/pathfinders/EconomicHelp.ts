@@ -7,7 +7,7 @@ import {CardRenderer} from '../render/CardRenderer';
 import {Resources} from '../../common/Resources';
 import {PathfindersExpansion} from '../../pathfinders/PathfindersExpansion';
 import {Tags} from '../../common/cards/Tags';
-import {Size} from '../render/Size';
+import {Size} from '../../common/cards/render/Size';
 import {played} from '../Options';
 
 export class EconomicHelp extends Card implements IProjectCard {

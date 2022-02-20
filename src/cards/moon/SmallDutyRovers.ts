@@ -8,7 +8,7 @@ import {MoonExpansion} from '../../moon/MoonExpansion';
 import {SpaceType} from '../../common/boards/SpaceType';
 import {Resources} from '../../common/Resources';
 import {Units} from '../../common/Units';
-import {Size} from '../render/Size';
+import {Size} from '../../common/cards/render/Size';
 import {Card} from '../Card';
 import {all} from '../Options';
 

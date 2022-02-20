@@ -13,7 +13,7 @@ import {SelectOption} from '../../inputs/SelectOption';
 import {SendDelegateToArea} from '../../deferredActions/SendDelegateToArea';
 import {Turmoil} from '../../turmoil/Turmoil';
 import {PlaceCityTile} from '../../deferredActions/PlaceCityTile';
-import {Size} from '../render/Size';
+import {Size} from '../../common/cards/render/Size';
 
 export class MindSetMars extends Card implements CorporationCard {
   constructor() {

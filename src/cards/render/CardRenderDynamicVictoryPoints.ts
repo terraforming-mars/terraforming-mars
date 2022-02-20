@@ -25,12 +25,6 @@ export class CardRenderDynamicVictoryPoints implements ICardRenderDynamicVictory
   public anyPlayer: boolean = false; // Law Suit
   constructor(public item: CardRenderItem | undefined, public points: number, public target: number) {}
 
-  public static asteroids(points: number, target: number): CardRenderDynamicVictoryPoints {
-    return new CardRenderDynamicVictoryPoints(new CardRenderItem(CardRenderItemType.ASTEROIDS), points, target);
-  }
-
-  // Remove all of the builder methods; they're no longer necessary. Keep some
-  // version of the tests, though.
   public static resource(type: ResourceType, points: number, target: number): CardRenderDynamicVictoryPoints {
     const itemType = RESOURCE_TO_ITEM_TYPE.get(type);
     if (itemType === undefined) {

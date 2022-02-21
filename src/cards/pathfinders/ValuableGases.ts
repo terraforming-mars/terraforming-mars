@@ -6,7 +6,7 @@ import {CardName} from '../../common/cards/CardName';
 import {ResourceType} from '../../common/ResourceType';
 import {CardRenderer} from '../render/CardRenderer';
 import {Size} from '../../common/cards/render/Size';
-import {AltSecondaryTag} from '../render/CardRenderItem';
+import {AltSecondaryTag} from '../../common/cards/render/AltSecondaryTag';
 import {Resources} from '../../common/Resources';
 import {digit} from '../Options';
 import {CardType} from '../../common/cards/CardType';

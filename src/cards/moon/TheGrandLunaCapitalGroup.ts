@@ -12,7 +12,7 @@ import {SpaceId} from '../../common/Types';
 import {Resources} from '../../common/Resources';
 import {CardRenderDynamicVictoryPoints} from '../render/CardRenderDynamicVictoryPoints';
 import {Size} from '../../common/cards/render/Size';
-import {AltSecondaryTag} from '../render/CardRenderItem';
+import {AltSecondaryTag} from '../../common/cards/render/AltSecondaryTag';
 import {Card} from '../Card';
 import {all} from '../Options';
 

@@ -30,9 +30,10 @@ export class Election extends GlobalEvent implements IGlobalEvent {
     // Solo
     if (game.isSoloMode()) {
       const player = game.getPlayers()[0];
-      if (this.getScore(player, turmoil, game) >= 10) {
+      const score = this.getScore(player, turmoil, game);
+      if (score >= 10) {
         player.increaseTerraformRatingSteps(2, {log: true});
-      } else if (this.getScore(player, turmoil, game) >= 1) {
+      } else if (score >= 1) {
         player.increaseTerraformRatingSteps(1, {log: true});
       }
     } else {

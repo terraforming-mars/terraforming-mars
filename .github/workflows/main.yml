@@ -18,23 +18,24 @@ jobs:
     - run: npm test
   build-windows:
 
-    runs-on: windows-latest
+    # TODO(kberg): Move to windows-latest.
+    runs-on: windows-2019
 
     steps:
     - uses: actions/checkout@v1
     - uses: actions/setup-node@v1
       with:
-        node-version: '14.x'
+        node-version: '16.x'
     - run: npm ci
     - run: npm run lint
     - run: npm run build
     - run: npm test
-    
+
   build-docker:
     runs-on: ubuntu-latest
-    
+
     steps:
     - uses: actions/checkout@v1
     - run: docker build .
-        
+
 

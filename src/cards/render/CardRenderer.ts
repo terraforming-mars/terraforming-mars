@@ -1,6 +1,7 @@
-import {AltSecondaryTag, CardRenderItem, ItemOptions} from './CardRenderItem';
+import {CardRenderItem, ItemOptions} from './CardRenderItem';
 import {CardRenderSymbol} from './CardRenderSymbol';
 import {Size} from '../../common/cards/render/Size';
+import {AltSecondaryTag} from '../../common/cards/render/AltSecondaryTag';
 import {CardRenderItemType} from '../../common/cards/render/CardRenderItemType';
 import {TileType} from '../../common/TileType';
 

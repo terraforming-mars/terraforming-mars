@@ -7,7 +7,7 @@ import {CardRenderer} from '../render/CardRenderer';
 import {Units} from '../../common/Units';
 import {TileType} from '../../common/TileType';
 import {MoonCard} from './MoonCard';
-import {AltSecondaryTag} from '../render/CardRenderItem';
+import {AltSecondaryTag} from '../../common/cards/render/AltSecondaryTag';
 
 export class TychoRoadNetwork extends MoonCard {
   constructor() {

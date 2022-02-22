@@ -1,11 +1,6 @@
 <template>
   <div :class="getClass()">
-    <div v-if="showIcons() === false">
-      <div class="event-party event-party--revealed" :class="partyNameClass(globalEvent.revealed)" v-i18n>{{ globalEvent.revealed }}</div>
-      <div class="event-party event-party--current" :class="partyNameClass(globalEvent.current)" v-i18n>{{ globalEvent.current }}</div>
-      <div class="event-content"><div class="event-text" v-i18n>{{ globalEvent.description }}</div></div>
-    </div>
-    <div v-else class="card-container">
+    <div class="card-container">
       <div class="card-content-wrapper" v-i18n>
         <div class="card-content global-event-card-content">
           <div class="card-title"><span :class="eventNameStyle">{{globalEvent.name}}</span></div>
@@ -30,7 +25,6 @@ import {IGlobalEvent} from '@/turmoil/globalEvents/IGlobalEvent';
 import {CardRenderer} from '@/cards/render/CardRenderer';
 import {getGlobalEventByName} from '@/turmoil/globalEvents/GlobalEventDealer';
 import CardDescription from '@/client/components/card/CardDescription.vue';
-import {PreferencesManager} from '@/client/utils/PreferencesManager';
 
 export default Vue.extend({
   name: 'global-event',
@@ -77,9 +71,6 @@ export default Vue.extend({
       default:
         return common;
       }
-    },
-    showIcons(): boolean {
-      return PreferencesManager.loadBoolean('experimental_ui');
     },
   },
   computed: {

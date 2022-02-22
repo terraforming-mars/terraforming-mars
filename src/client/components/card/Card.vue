@@ -121,7 +121,7 @@ export default Vue.extend({
       if (this.isStandardProject()) {
         classes.push('card-standard-project');
       }
-      const learnerModeOff = PreferencesManager.load('learner_mode') === '0';
+      const learnerModeOff = !PreferencesManager.INSTANCE.values().learner_mode;
       if (learnerModeOff && this.isStandardProject() && card.isDisabled) {
         classes.push('card-hide');
       }

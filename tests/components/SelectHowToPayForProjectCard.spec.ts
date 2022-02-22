@@ -12,6 +12,7 @@ import {PaymentTester} from './PaymentTester';
 import {HowToPay} from '@/inputs/HowToPay';
 import {ResourceType} from '@/common/ResourceType';
 import {CardModel} from '@/common/models/CardModel';
+import {PreferencesManager} from '@/client/utils/PreferencesManager';
 
 describe('SelectHowToPayForProjectCard', () => {
   let localStorage: FakeLocalStorage;
@@ -20,6 +21,7 @@ describe('SelectHowToPayForProjectCard', () => {
   beforeEach(() => {
     localStorage = new FakeLocalStorage();
     FakeLocalStorage.register(localStorage);
+    PreferencesManager.INSTANCE.set('show_alerts', false);
   });
   afterEach(() => {
     FakeLocalStorage.deregister(localStorage);

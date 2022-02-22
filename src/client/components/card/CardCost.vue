@@ -32,7 +32,7 @@ export default Vue.extend({
       return classes.join(' ');
     },
     displayTwoCosts(): boolean {
-      const hideDiscount = PreferencesManager.loadBoolean('hide_discount_on_cards');
+      const hideDiscount = PreferencesManager.INSTANCE.values().hide_discount_on_cards;
       return this.newCost !== undefined && this.newCost !== this.amount && !hideDiscount;
     },
   },

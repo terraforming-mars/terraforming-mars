@@ -34,11 +34,11 @@ export default Vue.extend({
       this.componentKey += 1;
     },
     toggleBar() {
-      PreferencesManager.save('hide_top_bar', this.isExpanded(), true);
+      PreferencesManager.INSTANCE.set('hide_top_bar', this.isExpanded());
       this.forceRerender();
     },
     isExpanded(): boolean {
-      return !PreferencesManager.loadBoolean('hide_top_bar');
+      return !PreferencesManager.INSTANCE.values().hide_top_bar;
     },
     formatCssClass(): string {
       const cssClasses = ['top-bar'];

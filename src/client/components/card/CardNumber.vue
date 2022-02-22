@@ -1,5 +1,5 @@
 <template>
-  <div class="card-nr-outer"><span class="card-nr-inner" v-if="showCardNumber()">{{ number }}</span></div>
+  <div class="card-nr-outer"><span class="card-nr-inner" v-if="showCardNumber">{{ number }}</span></div>
 </template>
 
 <script lang="ts">
@@ -15,9 +15,9 @@ export default Vue.extend({
       required: true,
     },
   },
-  methods: {
+  computed: {
     showCardNumber(): boolean {
-      return PreferencesManager.load('show_card_number') === '1';
+      return PreferencesManager.INSTANCE.values().show_card_number;
     },
   },
 });

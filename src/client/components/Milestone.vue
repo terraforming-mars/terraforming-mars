@@ -75,7 +75,7 @@ export default Vue.extend({
       return Array(MAX_MILESTONES - count).fill(MILESTONE_COST);
     },
     isLearnerModeOn(): boolean {
-      return PreferencesManager.load('learner_mode') === '1';
+      return PreferencesManager.INSTANCE.values().learner_mode;
     },
   },
 });

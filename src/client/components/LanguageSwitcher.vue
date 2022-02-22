@@ -25,7 +25,7 @@ export default Vue.extend({
   },
   methods: {
     switchLanguageTo(langId: string) {
-      this.PreferencesManager.save('lang', langId);
+      this.PreferencesManager.INSTANCE.set('lang', langId);
       window.location.reload();
     },
   },

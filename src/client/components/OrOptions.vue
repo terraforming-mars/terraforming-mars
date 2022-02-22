@@ -64,7 +64,7 @@ export default Vue.extend({
     if (this.playerinput.options === undefined) {
       throw new Error('no options provided for OrOptions');
     }
-    const displayedOptions = this.playerinput.options.filter((o) => Boolean(o.showOnlyInLearnerMode) === false || PreferencesManager.loadBoolean('learner_mode'));
+    const displayedOptions = this.playerinput.options.filter((o) => Boolean(o.showOnlyInLearnerMode) === false || PreferencesManager.INSTANCE.values().learner_mode);
     return {
       displayedOptions,
       radioElementName: 'selectOption' + unique++,

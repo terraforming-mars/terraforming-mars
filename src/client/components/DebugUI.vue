@@ -410,7 +410,7 @@ export default Vue.extend({
       }
     },
     getLanguageCssClass() {
-      const language = PreferencesManager.load('lang') || 'en';
+      const language = PreferencesManager.INSTANCE.values().lang;
       return 'language-' + language;
     },
   },

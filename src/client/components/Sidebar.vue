@@ -63,7 +63,7 @@
 
   <div class="sidebar_item sidebar_item--settings">
     <i class="sidebar_icon sidebar_icon--settings" :class="{'sidebar_item--is-active': ui.preferences_panel_open}" v-on:click="ui.preferences_panel_open = !ui.preferences_panel_open"></i>
-    <preferences-dialog v-show="ui.preferences_panel_open" @okButtonClicked="ui.preferences_panel_open = false"/>
+    <preferences-dialog v-show="ui.preferences_panel_open" @okButtonClicked="ui.preferences_panel_open = false" :preferencesManager="preferencesManager"/>
   </div>
 </div>
 </template>
@@ -159,10 +159,10 @@ export default Vue.extend({
   },
   methods: {
     getPlayerColorCubeClass(): string {
-      return this.acting_player && (PreferencesManager.loadBoolean('hide_animated_sidebar') === false) ? 'preferences_player_inner active' : 'preferences_player_inner';
+      return this.acting_player && (PreferencesManager.INSTANCE.values().hide_animated_sidebar === false) ? 'preferences_player_inner active' : 'preferences_player_inner';
     },
     getSideBarClass(): string {
-      return this.acting_player && (PreferencesManager.loadBoolean('hide_animated_sidebar') === false) ? 'preferences_acting_player' : 'preferences_nonacting_player';
+      return this.acting_player && (PreferencesManager.INSTANCE.values().hide_animated_sidebar === false) ? 'preferences_acting_player' : 'preferences_nonacting_player';
     },
     getGenMarker(): string {
       return `${this.generation}`;
@@ -185,6 +185,11 @@ export default Vue.extend({
       } else {
         return rulingPartyName as string;
       }
+    },
+  },
+  computed: {
+    preferencesManager(): PreferencesManager {
+      return PreferencesManager.INSTANCE;
     },
   },
 });

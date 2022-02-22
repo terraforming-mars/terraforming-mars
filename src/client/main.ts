@@ -12,7 +12,7 @@ declare global {
 }
 
 async function bootstrap() {
-  const lang = PreferencesManager.load('lang') || 'en';
+  const lang = PreferencesManager.INSTANCE.values().lang;
 
   if (lang !== 'en') {
     try {

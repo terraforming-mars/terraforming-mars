@@ -135,7 +135,7 @@ export default Vue.extend({
                 }
               }
 
-              const soundsEnabled = PreferencesManager.load('enable_sounds') === '1';
+              const soundsEnabled = PreferencesManager.INSTANCE.values().enable_sounds;
               if (soundsEnabled) SoundManager.playActivePlayerSound();
 
               // We don't need to wait anymore - it's our turn

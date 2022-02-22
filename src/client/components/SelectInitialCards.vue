@@ -162,7 +162,7 @@ export default Vue.extend({
       return starting;
     },
     saveIfConfirmed() {
-      if (PreferencesManager.load('show_alerts') === '1' && this.selectedCards.length === 0) {
+      if (PreferencesManager.INSTANCE.values().show_alerts && this.selectedCards.length === 0) {
         (this.$refs['confirmation'] as any).show();
       } else {
         this.saveData();

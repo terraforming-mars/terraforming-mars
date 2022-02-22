@@ -237,7 +237,7 @@ export default Vue.extend({
           }
         }
       }
-      const showAlert = PreferencesManager.load('show_alerts') === '1';
+      const showAlert = PreferencesManager.INSTANCE.values().show_alerts;
 
       if (requiredAmt > 0 && totalSpent > requiredAmt && showAlert) {
         const diff = totalSpent - requiredAmt;

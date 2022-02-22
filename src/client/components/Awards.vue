@@ -79,7 +79,6 @@ export default Vue.extend({
     return {
       showAwards: true,
       showDescription: false,
-      PreferencesManager,
     };
   },
   methods: {
@@ -100,7 +99,7 @@ export default Vue.extend({
       return AWARD_COSTS.slice(this.fundedAwards.length);
     },
     isLearnerModeOn(): boolean {
-      return this.PreferencesManager.loadBoolean('learner_mode');
+      return PreferencesManager.INSTANCE.values().learner_mode;
     },
   },
 });

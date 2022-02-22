@@ -1,29 +1,17 @@
 <script lang="ts">
 import Vue from 'vue';
-import {preferences, PreferencesManager} from '@/client/utils/PreferencesManager';
+import {PreferencesManager, Preference} from '@/client/utils/PreferencesManager';
 import {LANGUAGES} from '@/common/constants';
 
 export default Vue.extend({
   name: 'PreferencesDialog',
+  props: {
+    preferencesManager: {
+      type: Object as () => PreferencesManager,
+    },
+  },
   data() {
-    return {
-      'hide_hand': false,
-      'hide_awards_and_milestones': false,
-      'hide_top_bar': false,
-      'small_cards': false,
-      'remove_background': false,
-      'magnify_cards': true,
-      'show_alerts': true,
-      'lang': 'en',
-      'langs': LANGUAGES,
-      'enable_sounds': false,
-      'hide_tile_confirmation': false,
-      'show_card_number': false,
-      'hide_discount_on_cards': false,
-      'learner_mode': true,
-      'hide_animated_sidebar': false,
-      'experimental_ui': false,
-    };
+    return this.preferencesManager.values();
   },
   methods: {
     setPreferencesCSS(
@@ -42,43 +30,14 @@ export default Vue.extend({
         target.classList.add('language-' + this.lang);
       }
     },
-    updatePreferencesFromStorage(): Map<
-            string,
-            boolean | string
-            > {
-      for (const k of preferences) {
-        const val = PreferencesManager.load(k);
-        if (k === 'lang') {
-          PreferencesManager.preferencesValues.set(k, this.$data[k]);
-          this[k] = val || 'en';
-          PreferencesManager.preferencesValues.set(k, val || 'en');
-        } else {
-          const boolVal = val !== '' ? val === '1' : this.$data[k];
-          PreferencesManager.preferencesValues.set(k, val === '1');
-          this.$data[k] = boolVal;
-        }
-      }
-      return PreferencesManager.preferencesValues;
-    },
-    updatePreferences(): void {
-      let strVal: string = '';
-      for (const k of preferences) {
-        const val = PreferencesManager.preferencesValues.get(k);
-        if (val !== this.$data[k]) {
-          if (k === 'lang') {
-            strVal = this.$data[k];
-          } else {
-            strVal = this.$data[k] ? '1' : '0';
-          }
-          PreferencesManager.save(k, strVal);
-          PreferencesManager.preferencesValues.set(k, this.$data[k]);
-          this.setPreferencesCSS(this.$data[k], k);
-        }
+    updatePreferences() {
+      for (const k of Object.keys(this.preferencesManager.values) as Array<Preference>) {
+        const val = this[k];
+        this.preferencesManager.set(k, val);
       }
     },
     syncPreferences(): void {
-      for (const k of preferences) {
-        this.$data[k] = PreferencesManager.preferencesValues.get(k);
+      for (const k of Object.keys(this.$data)) {
         this.setPreferencesCSS(this.$data[k], k);
       }
     },
@@ -86,8 +45,10 @@ export default Vue.extend({
       this.$emit('okButtonClicked');
     },
   },
-  mounted() {
-    this.updatePreferencesFromStorage();
+  computed: {
+    LANGUAGES(): typeof LANGUAGES {
+      return LANGUAGES;
+    },
   },
 });
 </script>
@@ -179,7 +140,7 @@ export default Vue.extend({
       <div class="preferences_panel_item form-group">
         <label class="form-label"><span v-i18n>Language</span> (<a href="javascript:document.location.reload(true);" v-i18n>refresh page</a> <span v-i18n>to see changes</span>)</label>
         <div class="preferences_panel_langs">
-          <label class="form-radio" v-for="language in langs" :key="language.id">
+          <label class="form-radio" v-for="language in LANGUAGES" :key="language.id">
             <input name="lang" type="radio" v-on:change="updatePreferences" v-model="lang" :value="language.id">
             <i class="form-icon"></i> {{ language.title }}
           </label>

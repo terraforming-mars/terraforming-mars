@@ -15,7 +15,7 @@ export function translateMessage(message: Message): string {
 }
 
 export function translateText(englishText: string): string {
-  const lang = PreferencesManager.load('lang') || 'en';
+  const lang = PreferencesManager.INSTANCE.values().lang;
   const translations: {[key: string]: string} | undefined = (window as any)._translations;
   if (lang === 'en' || translations === undefined) {
     return englishText;

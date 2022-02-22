@@ -67,7 +67,7 @@ export default Vue.extend({
       return this.type === Resources.PLANTS && this.plantsAreProtected;
     },
     showResourceValue(): boolean {
-      const learnerModeOn = PreferencesManager.load('learner_mode') === '1';
+      const learnerModeOn = PreferencesManager.INSTANCE.values().learner_mode;
       switch (this.type) {
       case Resources.STEEL:
         return learnerModeOn || this.steelValue > DEFAULT_STEEL_VALUE;

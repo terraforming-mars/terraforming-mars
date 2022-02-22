@@ -6,7 +6,7 @@ import {Turmoil} from '../Turmoil';
 import {ResourceType} from '../../common/ResourceType';
 import {AddResourcesToCard} from '../../deferredActions/AddResourcesToCard';
 import {CardRenderer} from '../../cards/render/CardRenderer';
-import {AltSecondaryTag} from '../../cards/render/CardRenderItem';
+import {AltSecondaryTag} from '../../common/cards/render/AltSecondaryTag';
 
 const RENDER_DATA = CardRenderer.builder((b) => {
   b.br.cards(1, {secondaryTag: AltSecondaryTag.FLOATER}).colon().floaters(1).nbsp;

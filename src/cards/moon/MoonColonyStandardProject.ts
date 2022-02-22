@@ -8,7 +8,7 @@ import {Units} from '../../common/Units';
 import {Resources} from '../../common/Resources';
 import {IMoonCard} from './IMoonCard';
 import {TileType} from '../../common/TileType';
-import {AltSecondaryTag} from '../render/CardRenderItem';
+import {AltSecondaryTag} from '../../common/cards/render/AltSecondaryTag';
 
 
 export class MoonColonyStandardProject extends StandardProjectCard implements IMoonCard {

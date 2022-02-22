@@ -8,7 +8,7 @@ import {PlaceMoonColonyTile} from '../../moon/PlaceMoonColonyTile';
 import {PlaceMoonRoadTile} from '../../moon/PlaceMoonRoadTile';
 import {PlaceMoonMineTile} from '../../moon/PlaceMoonMineTile';
 import {Card} from '../Card';
-import {AltSecondaryTag} from '../render/CardRenderItem';
+import {AltSecondaryTag} from '../../common/cards/render/AltSecondaryTag';
 
 // TODO(kberg): Add a test for how this card operates with Reds. It will be a good verification.
 export class ThoriumRush extends Card implements IProjectCard {

@@ -10,8 +10,9 @@
 
 import Vue from 'vue';
 import {generateClassString} from '@/common/utils/utils';
-import {AltSecondaryTag, CardRenderItem} from '@/cards/render/CardRenderItem';
+import {CardRenderItem} from '@/cards/render/CardRenderItem';
 import {CardRenderItemType} from '@/common/cards/render/CardRenderItemType';
+import {AltSecondaryTag} from '@/common/cards/render/AltSecondaryTag';
 import {Size} from '@/common/cards/render/Size';
 import {Tags} from '@/common/cards/Tags';
 

@@ -9,7 +9,7 @@ import {VictoryPoints} from '../ICard';
 import {CardName} from '../../common/cards/CardName';
 import {CardType} from '../../common/cards/CardType';
 import {CardRenderer} from '../render/CardRenderer';
-import {AltSecondaryTag} from '../render/CardRenderItem';
+import {AltSecondaryTag} from '../../common/cards/render/AltSecondaryTag';
 
 export class Celestic extends Card implements IActionCard, CorporationCard, IResourceCard {
   constructor() {

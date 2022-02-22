@@ -349,6 +349,11 @@ class Builder {
     return this;
   }
 
+  public mindSetAgenda(options?: ItemOptions | undefined): Builder {
+    this._appendToRow(new CardRenderItem(CardRenderItemType.MIND_SET_AGENDA, 1, options));
+    return this;
+  }
+
   public multiplierWhite() {
     return this._appendToRow(new CardRenderItem(CardRenderItemType.MULTIPLIER_WHITE));
   }

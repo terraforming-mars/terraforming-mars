@@ -58,6 +58,7 @@ import {MartianMonuments} from './MartianMonuments';
 import {MartianNatureWonders} from './MartianNatureWonders';
 import {MartianRepository} from './MartianRepository';
 import {MicrobiologyPatents} from './MicrobiologyPatents';
+import {MindSetMars} from './MindSetMars';
 import {MuseumofEarlyColonisation} from './MuseumofEarlyColonisation';
 import {NewVenice} from './NewVenice';
 import {NobelLabs} from './NobelLabs';
@@ -200,7 +201,7 @@ export const PATHFINDERS_CARD_MANIFEST = new CardManifest({
     // {cardName: CardName.ODYSSEY_EFFECT, Factory: OdysseyEffect},
     // {cardName: CardName.GAGARIN_MOBILE_BASE, Factory: GagarinMobileBase},
     // {cardName: CardName.MARS_FRONTIER_ALLIANCE, Factory: MarsFrontierAlliance},
-    // {cardName: CardName.MIND_SET_MARS, Factory: MindSetMars},
+    {cardName: CardName.MIND_SET_MARS, Factory: MindSetMars, compatibility: GameModule.Turmoil},
     // {cardName: CardName.HABITAT_MARTAE, Factory: HabitatMartae},
     {cardName: CardName.ADHAI_HIGH_ORBIT_CONSTRUCTIONS, Factory: AdhaiHighOrbitConstructions},
   ],

@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <link
+            href="https://fonts.googleapis.com/css?family=Ubuntu&display=swap"
+            rel="stylesheet"
+        />
+        <link rel="stylesheet" type="text/css" media="all" href="/styles.css" />
+        <meta name="description" content="Terraforming Mars Open Source Web Application" />
+        <script type="text/javascript">
+            var serverId = '';
+            function execute() {
+                const queryString = window.location.search;
+                const urlParams = new URLSearchParams(queryString);
+                serverId = urlParams.get('serverId');
+                const noServerIdElement = document.getElementById('no-server-id');
+                const hasServerIdElement = document.getElementById('has-server-id');
+                if (serverId === null || serverId.length === 0) {
+                    noServerIdElement.style.display = "block";
+                    hasServerIdElement.style.display = "none";
+                } else {
+                    noServerIdElement.style.display = "none";
+                    hasServerIdElement.style.display = "block";
+                }
+            }
+
+            function goto(segment) {
+                window.location = segment + "?serverId=" + serverId;
+            }
+        </script>
+    </head>
+    <body onload="execute()">
+        <h1>Terraforming Mars Admin Page</h1>
+        <div id="no-server-id">Add a server id to the URL parameter</div>
+        <div id="has-server-id">
+            <ul>
+                <li><a href="" onclick="goto('/games-overview')">Games overview</a>
+            </ul>
+        </div>
+    </body>
+</html>

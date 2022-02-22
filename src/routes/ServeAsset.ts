@@ -132,6 +132,7 @@ export class ServeAsset extends Handler {
   private toFile(urlPath: string, encodings: Set<Encoding>): { file?: string, encoding?: Encoding } {
     switch (urlPath) {
     case 'assets/index.html':
+    case 'assets/admin.html':
     case 'assets/Prototype.ttf':
     case 'assets/futureforces.ttf':
       return {file: urlPath};

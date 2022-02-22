@@ -8,6 +8,7 @@ import * as https from 'https';
 import * as http from 'http';
 import * as fs from 'fs';
 
+import {AdminApp} from './routes/AdminApp';
 import {ApiCloneableGame} from './routes/ApiCloneableGame';
 import {ApiGameLogs} from './routes/ApiGameLogs';
 import {ApiGames} from './routes/ApiGames';
@@ -37,6 +38,7 @@ const route = new Route();
 const handlers: Map<string, IHandler> = new Map(
   [
     ['/', ServeApp.INSTANCE],
+    ['/admin', AdminApp.INSTANCE],
     ['/api/cloneablegame', ApiCloneableGame.INSTANCE],
     ['/api/game', ApiGame.INSTANCE],
     ['/api/game/logs', ApiGameLogs.INSTANCE],

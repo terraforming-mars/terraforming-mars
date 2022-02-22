@@ -7,7 +7,7 @@ import {CardRenderer} from '../render/CardRenderer';
 import {Units} from '../../common/Units';
 import {MoonCard} from './MoonCard';
 import {TileType} from '../../common/TileType';
-import {AltSecondaryTag} from '../render/CardRenderItem';
+import {AltSecondaryTag} from '../../common/cards/render/AltSecondaryTag';
 
 export class TheWomb extends MoonCard {
   constructor() {

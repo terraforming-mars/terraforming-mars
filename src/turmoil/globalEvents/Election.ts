@@ -31,7 +31,7 @@ export class Election extends GlobalEvent implements IGlobalEvent {
     if (game.isSoloMode()) {
       if (this.getScore(game.getPlayersInGenerationOrder()[0], turmoil, game) >= 10) {
         game.getPlayersInGenerationOrder()[0].increaseTerraformRatingSteps(2, {log: true});
-      } else if (this.getScore(game.getPlayersInGenerationOrder()[0], turmoil, game) >= 1) {
+      } else if (this.getScore(game.getPlayersInGenerationOrder()[0], turmoil, game) >= 5) {
         game.getPlayersInGenerationOrder()[0].increaseTerraformRatingSteps(1, {log: true});
       }
     } else {

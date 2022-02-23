@@ -96,7 +96,7 @@ export abstract class Colony {
       }
 
       // Poseidon hook
-      const poseidon = player.game.getPlayersInGenerationOrder().find((player) => player.isCorporation(CardName.POSEIDON));
+      const poseidon = player.game.getPlayers().find((player) => player.isCorporation(CardName.POSEIDON));
       if (poseidon !== undefined) {
         poseidon.addProduction(Resources.MEGACREDITS, 1);
       }
@@ -299,7 +299,7 @@ export abstract class Colony {
         action = new DeferredAction(
           player,
           () => {
-            const playersWithCards = game.getPlayersInGenerationOrder().filter((p) => p.cardsInHand.length > 0);
+            const playersWithCards = game.getPlayers().filter((p) => p.cardsInHand.length > 0);
             if (playersWithCards.length === 0) return undefined;
             return new SelectPlayer(
               playersWithCards,

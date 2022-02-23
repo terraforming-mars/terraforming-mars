@@ -147,14 +147,12 @@ export class Server {
       const claimed = claimedMilestones.find(
         (m) => m.milestone.name === milestone.name,
       );
-      const scores: Array<IMilestoneScore> = [];
+      let scores: Array<IMilestoneScore> = [];
       if (claimed === undefined && claimedMilestones.length < 3) {
-        game.getPlayersInGenerationOrder().forEach((player) => {
-          scores.push({
-            playerColor: player.color,
-            playerScore: milestone.getScore(player),
-          });
-        });
+        scores = game.getPlayers().map((player) => ({
+          playerColor: player.color,
+          playerScore: milestone.getScore(player),
+        }));
       }
 
       milestoneModels.push({
@@ -178,14 +176,12 @@ export class Server {
       const funded = fundedAwards.find(
         (a) => a.award.name === award.name,
       );
-      const scores: Array<IAwardScore> = [];
+      let scores: Array<IAwardScore> = [];
       if (fundedAwards.length < 3 || funded !== undefined) {
-        game.getPlayersInGenerationOrder().forEach((player) => {
-          scores.push({
-            playerColor: player.color,
-            playerScore: award.getScore(player),
-          });
-        });
+        scores = game.getPlayers().map((player) => ({
+          playerColor: player.color,
+          playerScore: award.getScore(player),
+        }));
       }
 
       awardModels.push({

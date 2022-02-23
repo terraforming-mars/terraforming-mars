@@ -1475,6 +1475,10 @@ export class Game implements ISerializable<SerializedGame> {
     space.player = undefined;
   }
 
+  public getPlayers(): ReadonlyArray<Player> {
+    return this.players;
+  }
+
   // Players returned in play order starting with first player this generation.
   public getPlayersInGenerationOrder(): Array<Player> {
     // We always return them in turn order
@@ -1529,7 +1533,7 @@ export class Game implements ISerializable<SerializedGame> {
   public someoneCanHaveProductionReduced(resource: Resources, minQuantity: number = 1): boolean {
     // in soloMode you don't have to decrease resources
     if (this.isSoloMode()) return true;
-    return this.getPlayersInGenerationOrder().some((p) => {
+    return this.getPlayers().some((p) => {
       if (p.getProduction(resource) < minQuantity) return false;
       // The pathfindersExpansion test is just an optimization for non-Pathfinders games.
       if (this.gameOptions.pathfindersExpansion && p.cardIsInEffect(CardName.PRIVATE_SECURITY)) return false;

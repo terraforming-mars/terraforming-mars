@@ -13,7 +13,6 @@ import {generateClassString} from '@/common/utils/utils';
 import {CardRenderItem} from '@/cards/render/CardRenderItem';
 import {CardRenderItemType} from '@/common/cards/render/CardRenderItemType';
 import {AltSecondaryTag} from '@/common/cards/render/AltSecondaryTag';
-import {CardRenderSymbol} from '@/cards/render/CardRenderSymbol';
 import {Size} from '@/common/cards/render/Size';
 import {Tags} from '@/common/cards/Tags';
 
@@ -304,9 +303,6 @@ export default Vue.extend({
     getAmountAbs(): number {
       if (this.item.amountInside) return 1;
       return Math.abs(this.item.amount);
-    },
-    getMinus(): CardRenderSymbol {
-      return CardRenderSymbol.minus();
     },
     itemsToShow(): number {
       if (this.item.showDigit) return 1;

@@ -30,7 +30,7 @@ export class DustStorm extends Card implements IProjectCard {
   }
 
   public play(player: Player) {
-    player.game.getPlayersInGenerationOrder().forEach((p) => p.addResource(Resources.ENERGY, -p.energy, {log: true}));
+    player.game.getPlayers().forEach((p) => p.addResource(Resources.ENERGY, -p.energy, {log: true}));
     player.game.increaseTemperature(player, 2);
     return undefined;
   }

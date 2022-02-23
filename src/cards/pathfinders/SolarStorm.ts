@@ -33,7 +33,7 @@ export class SolarStorm extends Card implements IProjectCard {
 
   public play(player: Player) {
     player.addProduction(Resources.HEAT, 1);
-    player.game.getPlayersInGenerationOrder().forEach((p) => {
+    player.game.getPlayers().forEach((p) => {
       if (!p.plantsAreProtected()) {
         p.deductResource(Resources.PLANTS, 2, {log: true, from: player});
       }

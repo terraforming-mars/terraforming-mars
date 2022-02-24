@@ -33,7 +33,7 @@ export class Election extends GlobalEvent implements IGlobalEvent {
       const score = this.getScore(player, turmoil, game);
       if (score >= 10) {
         player.increaseTerraformRatingSteps(2, {log: true});
-      } else if (score >= 1) {
+      } else if (score >= 5) {
         player.increaseTerraformRatingSteps(1, {log: true});
       }
     } else {

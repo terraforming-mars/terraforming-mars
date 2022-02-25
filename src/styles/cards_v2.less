@@ -840,6 +840,13 @@
                 background-size: 184px 45px;
                 margin-top: 10px;
             }
+            .card-mind-set-mars-logo {
+                background-image: url(./assets/pathfinders/corp-logo-mind-set-mars.png);
+                height: 45px;
+                width: 125px;
+                background-size: 125px 45px;
+                margin-top: 10px;
+            }
         }
         .card-content-corporation {
             top: -30px;
@@ -1086,6 +1093,10 @@
             .card-resource-seed {
                 color: #0000 !important;
                 background-image: url(./assets/resources/seed.png);
+            }
+            .card-resource-agenda {
+                color: #0000 !important;
+                background-image: url(./assets/resources/agenda.png);
             }
             .card-resource-orbital {
                 color: #0000 !important;
@@ -2123,7 +2134,9 @@ each(@parties, {
 
     // This copies stuff above, but scoped inside card-resources-counter. It shouldn't be necessary if
     // the stuff above wasn't contained inside card-content.
-    @resource_types: microbe, animal, science, floater, fighter, camp, asteroid, disease, preservation, data, syndicate-fleet, cube, venusian-habitat, specialized-robot, seed, orbital;
+    @resource_types: microbe, animal, science, floater, fighter, camp,
+      asteroid, disease, preservation, data, syndicate-fleet, cube,
+      venusian-habitat, specialized-robot, seed, orbital, agenda;
     each(@resource_types, {
       .card-resource-@{value} {
         background-image: url("./assets/resources/@{value}.png");

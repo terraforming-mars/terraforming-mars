@@ -8,7 +8,7 @@ import * as https from 'https';
 import * as http from 'http';
 import * as fs from 'fs';
 
-import {ApiCloneableGames} from './routes/ApiCloneableGames';
+import {ApiCloneableGame} from './routes/ApiCloneableGame';
 import {ApiGameLogs} from './routes/ApiGameLogs';
 import {ApiGames} from './routes/ApiGames';
 import {ApiGame} from './routes/ApiGame';
@@ -37,8 +37,7 @@ const route = new Route();
 const handlers: Map<string, IHandler> = new Map(
   [
     ['/', ServeApp.INSTANCE],
-    ['/api/clonablegames', ApiCloneableGames.INSTANCE],
-    ['/api/cloneablegames', ApiCloneableGames.INSTANCE],
+    ['/api/cloneablegame', ApiCloneableGame.INSTANCE],
     ['/api/game', ApiGame.INSTANCE],
     ['/api/game/logs', ApiGameLogs.INSTANCE],
     ['/api/games', ApiGames.INSTANCE],
@@ -129,7 +128,7 @@ Database.getInstance().initialize()
   .then(() => {
     Database.getInstance().purgeUnfinishedGames();
 
-    const port = process.env.port || 8080;
+    const port = process.env.PORT || 8080;
     console.log('Starting server on port ' + port);
     console.log('version 0.X');
 

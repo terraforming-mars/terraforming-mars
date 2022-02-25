@@ -1,6 +1,6 @@
 <template>
 <div>
-  <div :class="getIconClass()"></div>
+  <div :class="getIconClass()" :title="$t(getTitle())"></div>
   <div class="global_params_value">
     <div v-if="isMax()">
       <img src="/assets/misc/checkmark.png" class="checkmark" :alt="$t('Completed!')">
@@ -41,6 +41,20 @@ export default Vue.extend({
         return this.value === MAX_VENUS_SCALE;
       default:
         return false;
+      }
+    },
+    getTitle(): string {
+      switch (this.param as GlobalParameter) {
+      case GlobalParameter.TEMPERATURE:
+        return 'Temperature';
+      case GlobalParameter.OXYGEN:
+        return 'Oxygen Level';
+      case GlobalParameter.OCEANS:
+        return 'Oceans';
+      case GlobalParameter.VENUS:
+        return 'Venus scale';
+      default:
+        return '';
       }
     },
     getIconClass(): string {

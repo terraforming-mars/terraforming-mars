@@ -74,6 +74,23 @@ export class SQLite implements IDatabase {
     });
   }
 
+  getClonableGameByGameId(gameId: GameId, cb: (err: Error | undefined, gameData: IGameData | undefined) => void) {
+    const sql = 'SELECT players FROM games WHERE save_id = 0 AND game_id = ? LIMIT 1';
+
+    this.db.get(sql, [gameId], (err, row) => {
+      if (err) {
+        cb(err, undefined);
+      } else if (row) {
+        cb(undefined, {
+          gameId,
+          playerCount: row.players,
+        });
+      } else {
+        cb(undefined, undefined);
+      }
+    });
+  }
+
   getGames(cb: (err: Error | undefined, allGames: Array<GameId>) => void) {
     const allGames: Array<GameId> = [];
     const sql: string = 'SELECT distinct game_id game_id FROM games WHERE status = \'running\'';
@@ -209,7 +226,7 @@ export class SQLite implements IDatabase {
     // Insert
     await this.runQuietly(
       'INSERT INTO games (game_id, save_id, game, players) VALUES (?, ?, ?, ?) ON CONFLICT (game_id, save_id) DO UPDATE SET game = ?',
-      [game.id, game.lastSaveId, gameJSON, game.getPlayersInGenerationOrder().length, gameJSON]);
+      [game.id, game.lastSaveId, gameJSON, game.getPlayers().length, gameJSON]);
 
     // This must occur after the save.
     game.lastSaveId++;

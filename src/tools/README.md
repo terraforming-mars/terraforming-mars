@@ -39,16 +39,19 @@ as result you will see the warnings for Chinese and Russian languages only.
 
 ### Usage
 
-`node build/src/tools/export_game.js <game id | player id>`
+```
+heroku pg:credentials:url --app <your-app-name>
+POSTGRES_HOST=<postges:...> node build/src/tools/export_game.js <game id | player id>
+```
 
 ### Description
 This tool extracts the entire history of a game from a database and stores it in the local filesystem database.
 
-If you plan to extract from the local SQLite database, have no environemnt variables. If you're extracting
+If you plan to extract from the local SQLite database, have no environment variables. If you're extracting
 from PostgreSQL, use the `POSTGRES_HOST` environment variable. You cannot export from a local filesystem database.
 You might as well then just run `cp -R`
 
-(Read https://github.com/bafolts/terraforming-mars/wiki/Databases#maintenance
+(Read https://github.com/terraforming-mars/terraforming-mars/wiki/Databases#maintenance
 to get advice on setting up your `POSTGRES_HOST` environment variable.)
 
 ## Analyze MA

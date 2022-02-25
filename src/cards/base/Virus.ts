@@ -32,7 +32,7 @@ export class Virus extends Card implements IProjectCard {
     });
   }
   public play(player: Player): PlayerInput | undefined {
-    if (player.game.getPlayersInGenerationOrder().length === 1) {
+    if (player.game.isSoloMode()) {
       player.game.someoneHasRemovedOtherPlayersPlants = true;
       return undefined;
     }

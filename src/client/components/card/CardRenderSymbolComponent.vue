@@ -6,14 +6,14 @@
 
 import Vue from 'vue';
 import {CardRenderSymbolType} from '@/common/cards/render/CardRenderSymbolType';
-import {CardRenderSymbol} from '@/cards/render/CardRenderSymbol';
+import {ICardRenderSymbol} from '@/common/cards/render/Types';
 import {Size} from '@/common/cards/render/Size';
 
 export default Vue.extend({
   name: 'CardRenderSymbolComponent',
   props: {
     item: {
-      type: Object as () => CardRenderSymbol,
+      type: Object as () => ICardRenderSymbol,
       required: true,
     },
   },

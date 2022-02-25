@@ -31,7 +31,7 @@ import CardExpansion from './CardExpansion.vue';
 import CardTags from './CardTags.vue';
 import {CardType} from '@/common/cards/CardType';
 import CardContent from './CardContent.vue';
-import {ICardMetadata} from '@/cards/ICardMetadata';
+import {ICardMetadata} from '@/common/cards/ICardMetadata';
 import {Tags} from '@/common/cards/Tags';
 import {CardRequirements} from '@/cards/CardRequirements';
 import {PreferencesManager} from '@/client/utils/PreferencesManager';

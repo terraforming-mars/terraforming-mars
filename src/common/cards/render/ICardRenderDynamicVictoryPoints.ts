@@ -1,7 +1,7 @@
-import {CardRenderItem} from './CardRenderItem';
+import {ICardRenderItem} from './Types';
 
 export interface ICardRenderDynamicVictoryPoints {
-  item: CardRenderItem | undefined;
+  item: ICardRenderItem | undefined;
   points: number;
   target: number;
   targetOneOrMore: boolean;

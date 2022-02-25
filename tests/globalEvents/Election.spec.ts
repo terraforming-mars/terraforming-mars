@@ -1,19 +1,22 @@
 import {expect} from 'chai';
 import {StripMine} from '../../src/cards/base/StripMine';
-import {Game} from '../../src/Game';
 import {Election} from '../../src/turmoil/globalEvents/Election';
 import {Kelvinists} from '../../src/turmoil/parties/Kelvinists';
-import {Turmoil} from '../../src/turmoil/Turmoil';
-import {TestPlayers} from '../TestPlayers';
+import {getTestPlayer, newTestGame} from '../TestGame';
+import {TestingUtils} from '../TestingUtils';
+import {Tags} from '../../src/common/cards/Tags';
 
 describe('Election', function() {
+  let card: Election;
+  beforeEach(() => {
+    card = new Election();
+  });
   it('resolve play', function() {
-    const card = new Election();
-    const player = TestPlayers.BLUE.newPlayer();
-    const player2 = TestPlayers.RED.newPlayer();
-    const player3 = TestPlayers.GREEN.newPlayer();
-    const game = Game.newInstance('foobar', [player, player2, player3], player);
-    const turmoil = Turmoil.newInstance(game);
+    const game = newTestGame(3, {turmoilExtension: true});
+    const player = getTestPlayer(game, 0);
+    const player2 = getTestPlayer(game, 1);
+    const player3 = getTestPlayer(game, 2);
+    const turmoil = game.turmoil!;
     turmoil.initGlobalEvent(game);
     player.playedCards.push(new StripMine());
     player2.playedCards.push(new StripMine());
@@ -23,9 +26,53 @@ describe('Election', function() {
     turmoil.dominantParty = new Kelvinists();
     turmoil.dominantParty.partyLeader = player2.id;
     turmoil.dominantParty.delegates.push(player2.id);
+
+    expect(card.getScore(player, turmoil, game)).eq(1);
+    expect(card.getScore(player2, turmoil, game)).eq(4);
+    expect(card.getScore(player3, turmoil, game)).eq(1);
+
     card.resolve(game, turmoil);
+
     expect(player.getTerraformRating()).to.eq(21);
     expect(player2.getTerraformRating()).to.eq(22);
     expect(player3.getTerraformRating()).to.eq(21);
+  });
+
+
+  it('solo play', function() {
+    const game = newTestGame(1, {turmoilExtension: true});
+    const player = getTestPlayer(game, 0);
+    const turmoil = game.turmoil!;
+    turmoil.initGlobalEvent(game);
+    const fakeCard = TestingUtils.fakeCard({tags: [Tags.BUILDING, Tags.BUILDING, Tags.BUILDING, Tags.BUILDING]});
+    player.playedCards.push(fakeCard);
+
+    expect(player.getTerraformRating()).to.eq(14);
+    expect(card.getScore(player, turmoil, game)).eq(4);
+
+    card.resolve(game, turmoil);
+
+    expect(player.getTerraformRating()).to.eq(14);
+
+    fakeCard.tags.push(Tags.BUILDING);
+    expect(card.getScore(player, turmoil, game)).eq(5);
+
+    card.resolve(game, turmoil);
+
+    expect(player.getTerraformRating()).to.eq(15);
+
+    fakeCard.tags.push(Tags.BUILDING, Tags.BUILDING, Tags.BUILDING, Tags.BUILDING);
+    expect(card.getScore(player, turmoil, game)).eq(9);
+
+    card.resolve(game, turmoil);
+
+    expect(player.getTerraformRating()).to.eq(16);
+
+    fakeCard.tags.push(Tags.BUILDING);
+    expect(card.getScore(player, turmoil, game)).eq(10);
+
+    card.resolve(game, turmoil);
+
+    expect(player.getTerraformRating()).to.eq(18);
   });
 });

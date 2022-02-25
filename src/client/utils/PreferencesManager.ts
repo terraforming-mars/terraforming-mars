@@ -52,14 +52,13 @@ export class PreferencesManager {
   }
 
   public static resetForTest() {
-    localStorage.clear();
     this.INSTANCE = new PreferencesManager();
   }
 
   private constructor() {
     this._values = {...defaults};
     for (const key of Object.keys(defaults) as Array<Preference>) {
-      const value = this.localStorageSupported() ? localStorage[key] : undefined;
+      const value = this.localStorageSupported() ? localStorage.getItem(key) : undefined;
       if (value) this._set(key, value);
     }
   }
@@ -72,7 +71,8 @@ export class PreferencesManager {
     }
   }
 
-  // Making this Readonly means that it's impossible to set preferences through the fields themselves.
+  // Making this Readonly means that it's Typescript-impossible to
+  // set preferences through the fields themselves.
   values(): Readonly<IPreferences> {
     return this._values;
   }

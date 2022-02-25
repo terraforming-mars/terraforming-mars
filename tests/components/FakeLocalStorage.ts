@@ -41,4 +41,8 @@ export class FakeLocalStorage implements Storage {
   public removeItem(key: string): void {
     delete this.data[key];
   }
+
+  public hasItem(key: string): boolean {
+    return typeof this.data[key] !== 'undefined';
+  }
 }

@@ -6,7 +6,7 @@
 
 import Vue from 'vue';
 import {CardRenderSymbolType} from '@/common/cards/render/CardRenderSymbolType';
-import {ICardRenderSymbol} from '@/cards/render/Types';
+import {ICardRenderSymbol} from '@/common/cards/render/Types';
 import {Size} from '@/common/cards/render/Size';
 
 export default Vue.extend({

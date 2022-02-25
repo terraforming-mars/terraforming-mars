@@ -2,7 +2,7 @@ import {expect} from 'chai';
 import {shallowMount, Wrapper} from '@vue/test-utils';
 import {getLocalVue} from '../getLocalVue';
 import CardVictoryPoints from '@/client/components/card/CardVictoryPoints.vue';
-import {ICardRenderDynamicVictoryPoints} from '@/cards/render/ICardRenderDynamicVictoryPoints';
+import {ICardRenderDynamicVictoryPoints} from '@/common/cards/render/ICardRenderDynamicVictoryPoints';
 import {CardRenderItemType} from '@/common/cards/render/CardRenderItemType';
 import {RecursivePartial} from '@/common/utils/utils';
 

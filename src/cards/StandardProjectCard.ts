@@ -10,7 +10,7 @@ import {SelectPlayer} from '../inputs/SelectPlayer';
 import {AndOptions} from '../inputs/AndOptions';
 import {SelectCard} from '../inputs/SelectCard';
 import {SelectSpace} from '../inputs/SelectSpace';
-import {ICardMetadata} from './ICardMetadata';
+import {ICardMetadata} from '../common/cards/ICardMetadata';
 import {CardName} from '../common/cards/CardName';
 import {SelectHowToPayDeferred} from '../deferredActions/SelectHowToPayDeferred';
 import {Card} from './Card';

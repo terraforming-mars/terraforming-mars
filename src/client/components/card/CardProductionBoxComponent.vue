@@ -15,13 +15,13 @@
 import Vue from 'vue';
 import CardRenderItemComponent from '@/client/components/card/CardRenderItemComponent.vue';
 import CardRenderSymbolComponent from '@/client/components/card/CardRenderSymbolComponent.vue';
-import {CardRenderItem} from '@/cards/render/CardRenderItem';
+import {ICardRenderItem} from '@/common/cards/render/Types';
 
 export default Vue.extend({
   name: 'CardProductionBoxComponent',
   props: {
     rows: {
-      type: Array as () => Array<Array<CardRenderItem>>,
+      type: Array as () => Array<Array<ICardRenderItem>>,
       required: true,
     },
   },

@@ -3,7 +3,7 @@
   e.g. plus and minus sign, asterix, arrow, dash, slash, etc.
  */
 import {CardRenderSymbolType} from '../../common/cards/render/CardRenderSymbolType';
-import {ICardRenderSymbol} from './Types';
+import {ICardRenderSymbol} from '../../common/cards/render/Types';
 import {Size} from '../../common/cards/render/Size';
 
 export class CardRenderSymbol implements ICardRenderSymbol {

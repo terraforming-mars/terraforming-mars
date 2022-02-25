@@ -5,7 +5,7 @@
 import {CardRenderItemType} from '../../common/cards/render/CardRenderItemType';
 import {Size} from '../../common/cards/render/Size';
 import {Tags} from '../../common/cards/Tags';
-import {ICardRenderItem} from './Types';
+import {ICardRenderItem} from '../../common/cards/render/Types';
 import {AltSecondaryTag} from '../../common/cards/render/AltSecondaryTag';
 
 export interface ItemOptions {

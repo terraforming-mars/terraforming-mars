@@ -1,5 +1,5 @@
 import {CardRenderItemType} from '../../common/cards/render/CardRenderItemType';
-import {ICardRenderDynamicVictoryPoints} from '../../cards/render/ICardRenderDynamicVictoryPoints';
+import {ICardRenderDynamicVictoryPoints} from '../../common/cards/render/ICardRenderDynamicVictoryPoints';
 import {CardRenderItem} from './CardRenderItem';
 import {Size} from '../../common/cards/render/Size';
 import {ResourceType} from '../../common/ResourceType';

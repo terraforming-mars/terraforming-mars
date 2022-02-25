@@ -3,11 +3,10 @@ import {CardRenderSymbol} from './CardRenderSymbol';
 import {Size} from '../../common/cards/render/Size';
 import {CardRenderItemType} from '../../common/cards/render/CardRenderItemType';
 import {TileType} from '../../common/TileType';
-import {CardComponent, ComponentType} from './CardComponent';
-import {ICardRenderCorpBoxAction, ICardRenderCorpBoxEffect, ICardRenderEffect, ICardRenderProductionBox, ICardRenderTile} from './Types';
+import {CardComponent, ComponentType} from '../../common/cards/render/CardComponent';
+import {ICardRenderCorpBoxAction, ICardRenderCorpBoxEffect, ICardRenderEffect, ICardRenderProductionBox, ICardRenderTile, ItemType} from '../../common/cards/render/Types';
 import {AltSecondaryTag} from '../../common/cards/render/AltSecondaryTag';
 
-export type ItemType = CardComponent | string | undefined;
 export class CardRenderer {
   public static builder(f: (builder: Builder) => void): CardRendererImpl {
     const builder = new Builder();

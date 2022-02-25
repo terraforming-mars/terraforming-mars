@@ -1,11 +1,10 @@
-import {AltSecondaryTag} from '../../common/cards/render/AltSecondaryTag';
-import {Tags} from '../../common/cards/Tags';
-import {TileType} from '../../common/TileType';
+import {AltSecondaryTag} from './AltSecondaryTag';
+import {Tags} from '../Tags';
+import {TileType} from '../../TileType';
 import {CardComponent} from './CardComponent';
-import {ItemType} from './CardRenderer';
-import {CardRenderItemType} from '../../common/cards/render/CardRenderItemType';
-import {CardRenderSymbolType} from '../../common/cards/render/CardRenderSymbolType';
-import {Size} from '../../common/cards/render/Size';
+import {CardRenderItemType} from './CardRenderItemType';
+import {CardRenderSymbolType} from './CardRenderSymbolType';
+import {Size} from './Size';
 
 export interface ICardRenderSymbol extends CardComponent {
   type: CardRenderSymbolType;
@@ -102,3 +101,5 @@ export interface ICardRenderItem extends CardComponent {
 export function isICardRenderItem(item: ItemType): item is ICardRenderItem {
   return item !== undefined && typeof(item) !== 'string' && item.is === 'item';
 }
+
+export type ItemType = CardComponent | string | undefined;

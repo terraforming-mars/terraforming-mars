@@ -5,7 +5,7 @@
 <script lang="ts">
 
 import Vue from 'vue';
-import {ICardRenderTile} from '@/cards/render/Types';
+import {ICardRenderTile} from '@/common/cards/render/Types';
 import {generateClassString} from '@/common/utils/utils';
 import {TileType} from '@/common/TileType';
 

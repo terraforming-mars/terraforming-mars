@@ -17,7 +17,7 @@
 <script lang="ts">
 
 import Vue from 'vue';
-import {ICardRenderDynamicVictoryPoints} from '@/cards/render/ICardRenderDynamicVictoryPoints';
+import {ICardRenderDynamicVictoryPoints} from '@/common/cards/render/ICardRenderDynamicVictoryPoints';
 import CardRenderItemComponent from '@/client/components/card/CardRenderItemComponent.vue';
 
 export default Vue.extend({

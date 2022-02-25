@@ -14,7 +14,7 @@ import {CardRenderItemType} from '@/common/cards/render/CardRenderItemType';
 import {AltSecondaryTag} from '@/common/cards/render/AltSecondaryTag';
 import {Size} from '@/common/cards/render/Size';
 import {Tags} from '@/common/cards/Tags';
-import {ICardRenderItem, isICardRenderItem} from '@/cards/render/Types';
+import {ICardRenderItem, isICardRenderItem} from '@/common/cards/render/Types';
 
 // microbe, animal and plant tag could be used both as a resource and played tag
 const RESOURCE_AND_TAG_TYPES = [

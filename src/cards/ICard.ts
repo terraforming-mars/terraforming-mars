@@ -15,7 +15,7 @@ import {OrOptions} from '../inputs/OrOptions';
 import {SelectOption} from '../inputs/SelectOption';
 import {ResourceType} from '../common/ResourceType';
 import {CardName} from '../common/cards/CardName';
-import {ICardMetadata} from './ICardMetadata';
+import {ICardMetadata} from '../common/cards/ICardMetadata';
 import {StandardProjectCard} from './StandardProjectCard';
 import {CardRequirements} from './CardRequirements';
 import {GlobalParameter} from '../common/GlobalParameter';

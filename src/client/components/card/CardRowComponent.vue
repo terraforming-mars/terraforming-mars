@@ -23,8 +23,8 @@ import {
   isICardRenderProductionBox,
   isICardRenderSymbol,
   isICardRenderTile,
-} from '@/cards/render/Types';
-import {ItemType} from '@/cards/render/CardRenderer';
+  ItemType,
+} from '@/common/cards/render/Types';
 import CardRenderItemComponent from '@/client/components/card/CardRenderItemComponent.vue';
 import CardProductionBoxComponent from '@/client/components/card/CardProductionBoxComponent.vue';
 import CardRenderEffectBoxComponent from '@/client/components/card/CardRenderEffectBoxComponent.vue';

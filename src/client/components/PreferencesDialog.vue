@@ -12,35 +12,39 @@ export default Vue.extend({
   },
   data() {
     return {
-      prefs: this.preferencesManager.values(),
+      prefs: {...this.preferencesManager.values()},
     };
   },
   methods: {
-    setPreferencesCSS(
-      val: boolean | undefined,
-      cssClassSuffix: string,
+    setBoolPreferencesCSS(
+      target: HTMLElement,
+      val: boolean,
+      name: Preference,
     ): void {
-      const target = document.getElementById('ts-preferences-target');
-      if (!target) return;
+      const cssClassSuffix = name;
       if (val) {
         target.classList.add('preferences_' + cssClassSuffix);
       } else {
         target.classList.remove('preferences_' + cssClassSuffix);
       }
-
-      if (!target.classList.contains('language-' + this.prefs.lang)) {
-        target.classList.add('language-' + this.prefs.lang);
-      }
     },
-    updatePreferences() {
+    updatePreferences(): void {
       for (const k of Object.keys(this.preferencesManager.values) as Array<Preference>) {
         const val = this.$data[k];
-        this.preferencesManager.set(k, val);
+        this.preferencesManager.set(k, val, /* setOnChange */ true);
       }
     },
     syncPreferences(): void {
-      for (const k of Object.keys(this.$data)) {
-        this.setPreferencesCSS(this.$data[k], k);
+      const target = document.getElementById('ts-preferences-target');
+      if (!target) return;
+
+      for (const k of Object.keys(this.prefs) as Array<Preference>) {
+        if (k === 'lang') continue;
+        this.setBoolPreferencesCSS(target, this.prefs[k], k);
+      }
+
+      if (!target.classList.contains('language-' + this.prefs.lang)) {
+        target.classList.add('language-' + this.prefs.lang);
       }
     },
     okClicked(): void {

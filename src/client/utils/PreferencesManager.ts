@@ -77,7 +77,9 @@ export class PreferencesManager {
     return this._values;
   }
 
-  set(name: Preference, val: string | boolean): void {
+  set(name: Preference, val: string | boolean, setOnChange = false): void {
+    // Don't set values if nothing has changed.
+    if (setOnChange && this._values[name] === val) return;
     this._set(name, val);
     if (this.localStorageSupported()) {
       if (name === 'lang') {

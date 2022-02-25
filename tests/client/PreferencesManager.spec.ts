@@ -42,6 +42,18 @@ describe('PreferencesManager', () => {
     expect(values.hide_active_cards).eq(false);
   });
 
+  it('setter does not update when setOnChange is true', () => {
+    const values = instance.values();
+
+    expect(values.hide_active_cards).eq(false);
+    expect(localStorage.hasItem('hide_active_cards')).is.false;
+    expect(localStorage.getItem('hide_active_cards')).is.null;
+
+    instance.set('hide_active_cards', false, /* setOnChange */ true);
+
+    expect(localStorage.hasItem('hide_active_cards')).is.false;
+    expect(values.hide_active_cards).eq(false);
+  });
 
   it('initially stored values override defaults', () => {
     localStorage.setItem('lang', 'fr');

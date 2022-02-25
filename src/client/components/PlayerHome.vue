@@ -283,10 +283,11 @@ class TerraformedAlertDialog {
 export default Vue.extend({
   name: 'player-home',
   data(): PlayerHomeModel {
+    const preferences = getPreferences();
     return {
-      showActiveCards: !PreferencesManager.INSTANCE.values().hide_active_cards,
-      showAutomatedCards: !PreferencesManager.INSTANCE.values().hide_automated_cards,
-      showEventCards: !PreferencesManager.INSTANCE.values().hide_event_cards,
+      showActiveCards: !preferences.hide_active_cards,
+      showAutomatedCards: !preferences.hide_automated_cards,
+      showEventCards: !preferences.hide_event_cards,
       hideTiles: false,
     };
   },
@@ -444,7 +445,7 @@ export default Vue.extend({
   },
   mounted() {
     window.addEventListener('keydown', this.navigatePage);
-    if (this.game.isTerraformed && TerraformedAlertDialog.shouldAlert && PreferencesManager.INSTANCE.values().show_alerts) {
+    if (this.game.isTerraformed && TerraformedAlertDialog.shouldAlert && getPreferences().show_alerts) {
       alert('Mars is Terraformed!');
       // Avoids repeated calls.
       TerraformedAlertDialog.shouldAlert = false;

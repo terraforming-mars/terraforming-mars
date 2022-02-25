@@ -88,3 +88,7 @@ export class PreferencesManager {
     }
   }
 }
+
+export function getPreferences(): Readonly<IPreferences> {
+  return getPreferences();
+}

@@ -137,7 +137,7 @@ import Card from '@/client/components/card/Card.vue';
 import {GameModule} from '@/common/cards/GameModule';
 import {CardType} from '@/common/cards/CardType';
 import {CardName} from '@/common/cards/CardName';
-import {PreferencesManager} from '@/client/utils/PreferencesManager';
+import {getPreferences} from '@/client/utils/PreferencesManager';
 import {GlobalEventName} from '@/common/turmoil/globalEvents/GlobalEventName';
 import {GlobalEventModel} from '@/common/models/TurmoilModel';
 import {PartyName} from '@/common/turmoil/PartyName';
@@ -410,7 +410,7 @@ export default Vue.extend({
       }
     },
     getLanguageCssClass() {
-      const language = PreferencesManager.INSTANCE.values().lang;
+      const language = getPreferences().lang;
       return 'language-' + language;
     },
   },

@@ -34,7 +34,7 @@ import CardContent from './CardContent.vue';
 import {ICardMetadata} from '@/cards/ICardMetadata';
 import {Tags} from '@/common/cards/Tags';
 import {CardRequirements} from '@/cards/CardRequirements';
-import {PreferencesManager} from '@/client/utils/PreferencesManager';
+import {getPreferences} from '@/client/utils/PreferencesManager';
 import {ResourceType} from '@/common/ResourceType';
 import {getCard} from '@/client/cards/ClientCardManifest';
 
@@ -121,7 +121,7 @@ export default Vue.extend({
       if (this.isStandardProject()) {
         classes.push('card-standard-project');
       }
-      const learnerModeOff = !PreferencesManager.INSTANCE.values().learner_mode;
+      const learnerModeOff = !getPreferences().learner_mode;
       if (learnerModeOff && this.isStandardProject() && card.isDisabled) {
         classes.push('card-hide');
       }

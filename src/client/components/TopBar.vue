@@ -12,7 +12,7 @@
 import Vue from 'vue';
 import {PlayerViewModel} from '@/common/models/PlayerModel';
 import PlayerInfo from '@/client/components/overview/PlayerInfo.vue';
-import {PreferencesManager} from '@/client/utils/PreferencesManager';
+import {getPreferences, PreferencesManager} from '@/client/utils/PreferencesManager';
 
 export default Vue.extend({
   name: 'top-bar',
@@ -38,7 +38,7 @@ export default Vue.extend({
       this.forceRerender();
     },
     isExpanded(): boolean {
-      return !PreferencesManager.INSTANCE.values().hide_top_bar;
+      return !getPreferences().hide_top_bar;
     },
     formatCssClass(): string {
       const cssClasses = ['top-bar'];

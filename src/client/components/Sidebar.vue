@@ -72,7 +72,7 @@
 
 import Vue from 'vue';
 import {Color} from '@/common/Color';
-import {PreferencesManager} from '@/client/utils/PreferencesManager';
+import {getPreferences, PreferencesManager} from '@/client/utils/PreferencesManager';
 import {LANGUAGES} from '@/common/constants';
 import {TurmoilModel} from '@/common/models/TurmoilModel';
 import {PartyName} from '@/common/turmoil/PartyName';
@@ -159,10 +159,10 @@ export default Vue.extend({
   },
   methods: {
     getPlayerColorCubeClass(): string {
-      return this.acting_player && (PreferencesManager.INSTANCE.values().hide_animated_sidebar === false) ? 'preferences_player_inner active' : 'preferences_player_inner';
+      return this.acting_player && (getPreferences().hide_animated_sidebar === false) ? 'preferences_player_inner active' : 'preferences_player_inner';
     },
     getSideBarClass(): string {
-      return this.acting_player && (PreferencesManager.INSTANCE.values().hide_animated_sidebar === false) ? 'preferences_acting_player' : 'preferences_nonacting_player';
+      return this.acting_player && (getPreferences().hide_animated_sidebar === false) ? 'preferences_acting_player' : 'preferences_nonacting_player';
     },
     getGenMarker(): string {
       return `${this.generation}`;

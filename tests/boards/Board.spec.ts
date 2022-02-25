@@ -346,7 +346,7 @@ describe('Board', function() {
 
   it('Randomized maps have space types on all spaces, #4056', () => {
     const spaces = new MultiSet<string>();
-    for (let idx = 0; idx < 5_000; idx++) {
+    for (let idx = 0; idx < 4_000; idx++) {
       const seed = Math.random();
       board = OriginalBoard.newInstance({
         ...DEFAULT_GAME_OPTIONS,

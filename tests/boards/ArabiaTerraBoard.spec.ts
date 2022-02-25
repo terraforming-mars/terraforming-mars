@@ -16,7 +16,7 @@ import {Resources} from '../../src/common/Resources';
 import {LandClaim} from '../../src/cards/base/LandClaim';
 import {SelectSpace} from '../../src/inputs/SelectSpace';
 
-describe('Board', function() {
+describe('ArabiaTerraBoard', function() {
   let board : ArabiaTerraBoard;
   let game: Game;
   let player : Player;

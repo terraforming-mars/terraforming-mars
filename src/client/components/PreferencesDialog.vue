@@ -32,7 +32,7 @@ export default Vue.extend({
     },
     updatePreferences() {
       for (const k of Object.keys(this.preferencesManager.values) as Array<Preference>) {
-        const val = this[k];
+        const val = this.preferencesManager.values[k];
         this.preferencesManager.set(k, val);
       }
     },

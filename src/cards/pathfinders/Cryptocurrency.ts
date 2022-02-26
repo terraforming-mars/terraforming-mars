@@ -45,7 +45,7 @@ export class Cryptocurrency extends Card implements IProjectCard, IActionCard {
       'Spend 1 energy to add 1 data to this card.',
       'Spend energy',
       () => {
-        player.addResource(Resources.ENERGY, -1);
+        player.deductResource(Resources.ENERGY, 1);
         player.addResourceTo(this, {qty: 1, log: true});
         return undefined;
       });

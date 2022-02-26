@@ -1,4 +1,4 @@
-import {ICardMetadata} from './ICardMetadata';
+import {ICardMetadata} from '../common/cards/ICardMetadata';
 import {CardName} from '../common/cards/CardName';
 import {CardType} from '../common/cards/CardType';
 import {ICardDiscount} from '../common/cards/Types';
@@ -131,10 +131,7 @@ export abstract class Card {
       return 0;
     }
 
-    // This will go away.
-    if (!(vps instanceof CardRenderDynamicVictoryPoints)) {
-      return vps;
-    }
+    if (typeof(vps) === 'number') return vps;
 
     if (vps.targetOneOrMore === true || vps.anyPlayer === true) {
       throw new Error('Not yet handled');

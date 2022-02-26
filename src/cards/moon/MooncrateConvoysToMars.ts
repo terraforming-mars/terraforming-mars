@@ -33,7 +33,7 @@ export class MooncrateConvoysToMars extends Card {
   public play(player: Player) {
     MoonExpansion.raiseLogisticRate(player, 1);
     const game = player.game;
-    game.getPlayersInGenerationOrder().forEach((player) => {
+    game.getPlayers().forEach((player) => {
       game.defer(new SellSteel(player));
     });
     return undefined;

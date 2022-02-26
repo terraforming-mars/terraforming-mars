@@ -1,53 +1,52 @@
 import {CardRenderItem, ItemOptions} from './CardRenderItem';
 import {CardRenderSymbol} from './CardRenderSymbol';
 import {Size} from '../../common/cards/render/Size';
-import {AltSecondaryTag} from '../../common/cards/render/AltSecondaryTag';
 import {CardRenderItemType} from '../../common/cards/render/CardRenderItemType';
 import {TileType} from '../../common/TileType';
-
-export type ItemType = CardRenderItem | CardRenderProductionBox | CardRenderSymbol | CardRenderEffect | CardRenderTile | string | undefined;
+import {CardComponent, ComponentType} from '../../common/cards/render/CardComponent';
+import {ICardRenderCorpBoxAction, ICardRenderCorpBoxEffect, ICardRenderEffect, ICardRenderProductionBox, ICardRenderTile, ItemType} from '../../common/cards/render/Types';
+import {AltSecondaryTag} from '../../common/cards/render/AltSecondaryTag';
 
 export class CardRenderer {
-  constructor(public rows: Array<Array<ItemType>> = [[]]) {}
-
-  public static builder(f: (builder: Builder) => void): CardRenderer {
+  public static builder(f: (builder: Builder) => void): CardRendererImpl {
     const builder = new Builder();
     f(builder);
     return builder.build();
   }
 }
 
-export class CardRenderProductionBox extends CardRenderer {
-  constructor(rows: Array<Array<ItemType>>) {
-    super(rows);
-  }
+export class CardRendererImpl implements CardComponent {
+  public readonly is: ComponentType = 'root';
+  constructor(public rows: Array<Array<ItemType>> = [[]]) {}
+}
 
-  public static override builder(f: (builder: ProductionBoxBuilder) => void): CardRenderProductionBox {
+class CardRenderProductionBox implements ICardRenderProductionBox {
+  public readonly is = 'production-box';
+  constructor(public rows: Array<Array<ItemType>>) {}
+
+  public static builder(f: (builder: ProductionBoxBuilder) => void): CardRenderProductionBox {
     const builder = new ProductionBoxBuilder();
     f(builder);
     return builder.build();
   }
 }
 
-export class CardRenderTile {
+class CardRenderTile implements ICardRenderTile {
+  public readonly is = 'tile';
   constructor(public tile: TileType, public hasSymbol: boolean, public isAres: boolean) { }
 }
 
-export class CardRenderEffect extends CardRenderer {
-  constructor(rows: Array<Array<ItemType>>) {
-    super(rows);
-  }
+class CardRenderEffect implements ICardRenderEffect {
+  public readonly is = 'effect';
+  constructor(public rows: Array<Array<ItemType>>) {}
 
-  public static override builder(f: (builder: EffectBuilder) => void): CardRenderEffect {
+  public static builder(f: (builder: EffectBuilder) => void): CardRenderEffect {
     const builder = new EffectBuilder();
     f(builder);
-    return builder.build();
+    return builder.build().validate();
   }
 
-  /**
-   * Check if the card effect structure is valid
-   */
-  protected _validate(): void {
+  private validate() {
     if (this.rows.length !== 3) {
       throw new Error('Card effect must have 3 arrays representing cause, delimiter and effect. If there is no cause, start with `empty`.');
     }
@@ -57,29 +56,7 @@ export class CardRenderEffect extends CardRenderer {
     if (!(this.rows[1][0] instanceof CardRenderSymbol)) {
       throw new Error('Effect delimiter must be a symbol');
     }
-  }
-
-  public get cause(): Array<ItemType> | undefined {
-    this._validate();
-    return this.rows[0];
-  }
-
-  public get delimiter(): ItemType {
-    this._validate();
-    if (this.cause?.length === 0) {
-      return undefined;
-    }
-    return this.rows[1][0];
-  }
-
-  public get effect(): Array<ItemType> {
-    this._validate();
-    return this.rows[2];
-  }
-
-  public get description(): ItemType {
-    this._validate();
-    return this.rows[2].slice(-1)[0];
+    return this;
   }
 
   public set description(content: ItemType) {
@@ -87,24 +64,22 @@ export class CardRenderEffect extends CardRenderer {
   }
 }
 
-export class CardRenderCorpBoxEffect extends CardRenderer {
-  constructor(rows: Array<Array<ItemType>>) {
-    super(rows);
-  }
+class CardRenderCorpBoxEffect implements ICardRenderCorpBoxEffect {
+  public readonly is = 'corp-box-effect';
+  constructor(public rows: Array<Array<ItemType>>) { }
 
-  public static override builder(f: (builder: CorpEffectBuilderEffect) => void): CardRenderCorpBoxEffect {
+  public static builder(f: (builder: CorpEffectBuilderEffect) => void): CardRenderCorpBoxEffect {
     const builder = new CorpEffectBuilderEffect();
     f(builder);
     return builder.build();
   }
 }
 
-export class CardRenderCorpBoxAction extends CardRenderer {
-  constructor(rows: Array<Array<ItemType>>) {
-    super(rows);
-  }
+class CardRenderCorpBoxAction implements ICardRenderCorpBoxAction {
+  public readonly is = 'corp-box-action';
+  constructor(public rows: Array<Array<ItemType>>) { }
 
-  public static override builder(f: (builder: CorpEffectBuilderAction) => void): CardRenderCorpBoxAction {
+  public static builder(f: (builder: CorpEffectBuilderAction) => void): CardRenderCorpBoxAction {
     const builder = new CorpEffectBuilderAction();
     f(builder);
     return builder.build();
@@ -114,8 +89,8 @@ export class CardRenderCorpBoxAction extends CardRenderer {
 class Builder {
   protected _data: Array<Array<ItemType>> = [[]];
 
-  public build(): CardRenderer {
-    return new CardRenderer(this._data);
+  public build(): CardRendererImpl {
+    return new CardRendererImpl(this._data);
   }
 
   protected _currentRow(): Array<ItemType> {
@@ -125,7 +100,7 @@ class Builder {
     return this._data[this._data.length - 1];
   }
 
-  protected _appendToRow(thing: ItemType | CardRenderSymbol | CardRenderTile) {
+  protected _appendToRow(thing: ItemType) {
     this._currentRow().push(thing);
     return this;
   }
@@ -594,13 +569,13 @@ class EffectBuilder extends Builder {
 }
 
 class CorpEffectBuilderEffect extends Builder {
-  public override build(): CardRenderCorpBoxAction {
+  public override build(): CardRenderCorpBoxEffect {
     return new CardRenderCorpBoxEffect(this._data);
   }
 }
 
 class CorpEffectBuilderAction extends Builder {
-  public override build(): CardRenderCorpBoxEffect {
+  public override build(): CardRenderCorpBoxAction {
     return new CardRenderCorpBoxAction(this._data);
   }
 }

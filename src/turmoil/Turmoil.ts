@@ -243,7 +243,7 @@ export class Turmoil implements ISerializable<SerializedTurmoil> {
   // Launch the turmoil phase
   public endGeneration(game: Game): void {
     // 1 - All player lose 1 TR
-    game.getPlayersInGenerationOrder().forEach((player) => {
+    game.getPlayers().forEach((player) => {
       player.decreaseTerraformRating();
     });
 
@@ -304,7 +304,7 @@ export class Turmoil implements ISerializable<SerializedTurmoil> {
   public setRulingParty(game: Game): void {
     if (this.rulingParty !== undefined) {
       // Cleanup previous party effects
-      game.getPlayersInGenerationOrder().forEach((player) => player.hasTurmoilScienceTagBonus = false);
+      game.getPlayers().forEach((player) => player.hasTurmoilScienceTagBonus = false);
 
       // Change the chairman
       if (this.chairman) {

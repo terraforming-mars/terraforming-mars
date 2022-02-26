@@ -10,12 +10,11 @@
 
 import Vue from 'vue';
 import {generateClassString} from '@/common/utils/utils';
-import {CardRenderItem} from '@/cards/render/CardRenderItem';
 import {CardRenderItemType} from '@/common/cards/render/CardRenderItemType';
 import {AltSecondaryTag} from '@/common/cards/render/AltSecondaryTag';
-import {CardRenderSymbol} from '@/cards/render/CardRenderSymbol';
 import {Size} from '@/common/cards/render/Size';
 import {Tags} from '@/common/cards/Tags';
+import {ICardRenderItem, isICardRenderItem} from '@/common/cards/render/Types';
 
 // microbe, animal and plant tag could be used both as a resource and played tag
 const RESOURCE_AND_TAG_TYPES = [
@@ -29,7 +28,7 @@ export default Vue.extend({
   name: 'CardRenderItemComponent',
   props: {
     item: {
-      type: Object as () => CardRenderItem,
+      type: Object as () => ICardRenderItem,
     },
   },
   methods: {
@@ -303,19 +302,17 @@ export default Vue.extend({
     },
     getAmountAbs(): number {
       if (this.item.amountInside) return 1;
-      return Math.abs(this.item.amount);
-    },
-    getMinus(): CardRenderSymbol {
-      return CardRenderSymbol.minus();
+      return Math.abs(this.item.amount || 1);
     },
     itemsToShow(): number {
       if (this.item.showDigit) return 1;
       return this.getAmountAbs();
     },
+    // Oooh this is begging to be a template or something.
     itemHtmlContent(): string {
       let result: string = '';
       // in case of symbols inside
-      if (this.item instanceof CardRenderItem && this.item.amountInside) {
+      if (isICardRenderItem(this.item) && this.item.amountInside) {
         if (this.item.amount !== 0) {
           result += this.item.amount.toString();
         }

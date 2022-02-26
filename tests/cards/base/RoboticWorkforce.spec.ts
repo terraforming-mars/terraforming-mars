@@ -28,7 +28,7 @@ import {MarsUniversity} from '../../../src/cards/base/MarsUniversity';
 import {Gyropolis} from '../../../src/cards/venusNext/Gyropolis';
 import {VenusGovernor} from '../../../src/cards/venusNext/VenusGovernor';
 import {CardType} from '../../../src/common/cards/CardType';
-import {CorporationCard} from '../../../src/cards/corporation/CorporationCard';
+import {CorporationCard} from '../../../src/cards/corporation/ICorporationCard';
 import {IProjectCard} from '../../../src/cards/IProjectCard';
 
 describe('RoboticWorkforce', () => {

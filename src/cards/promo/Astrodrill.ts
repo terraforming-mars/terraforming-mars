@@ -1,7 +1,7 @@
 import {Tags} from '../../common/cards/Tags';
 import {Player} from '../../Player';
 import {Card} from '../Card';
-import {CorporationCard} from '../corporation/CorporationCard';
+import {CorporationCard} from '../corporation/ICorporationCard';
 import {IActionCard, ICard} from '../ICard';
 import {CardName} from '../../common/cards/CardName';
 import {ResourceType} from '../../common/ResourceType';

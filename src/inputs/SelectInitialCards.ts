@@ -1,6 +1,6 @@
 
 import {AndOptions} from './AndOptions';
-import {CorporationCard} from '../cards/corporation/CorporationCard';
+import {CorporationCard} from '../cards/corporation/ICorporationCard';
 import {IProjectCard} from '../cards/IProjectCard';
 import {Player} from '../Player';
 import {PlayerInput} from '../PlayerInput';

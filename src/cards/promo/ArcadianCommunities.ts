@@ -1,6 +1,6 @@
 import {Player} from '../../Player';
 import {Card} from '../Card';
-import {CorporationCard} from '../corporation/CorporationCard';
+import {CorporationCard} from '../corporation/ICorporationCard';
 import {SelectSpace} from '../../inputs/SelectSpace';
 import {ISpace} from '../../boards/ISpace';
 import {IActionCard} from '../ICard';

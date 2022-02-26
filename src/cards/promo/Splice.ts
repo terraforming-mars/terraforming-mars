@@ -2,7 +2,7 @@ import {Tags} from '../../common/cards/Tags';
 import {Player} from '../../Player';
 import {IProjectCard} from '../IProjectCard';
 import {Card} from '../Card';
-import {CorporationCard} from '../corporation/CorporationCard';
+import {CorporationCard} from '../corporation/ICorporationCard';
 import {SelectOption} from '../../inputs/SelectOption';
 import {OrOptions} from '../../inputs/OrOptions';
 import {ResourceType} from '../../common/ResourceType';

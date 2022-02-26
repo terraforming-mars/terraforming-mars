@@ -9,7 +9,7 @@ import {CardName} from './common/cards/CardName';
 import {CardType} from './common/cards/CardType';
 import {ColonyName} from './common/colonies/ColonyName';
 import {Color} from './common/Color';
-import {CorporationCard} from './cards/corporation/CorporationCard';
+import {CorporationCard} from './cards/corporation/ICorporationCard';
 import {Game} from './Game';
 import {HowToPay} from './inputs/HowToPay';
 import {IAward} from './awards/IAward';

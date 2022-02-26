@@ -1,4 +1,4 @@
-import {CorporationCard} from './cards/corporation/CorporationCard';
+import {CorporationCard} from './cards/corporation/ICorporationCard';
 import {IProjectCard} from './cards/IProjectCard';
 import {ISerializable} from './ISerializable';
 import {SerializedDealer} from './SerializedDealer';

@@ -3,7 +3,7 @@ import {ICardFactory} from './cards/ICardFactory';
 import {IProjectCard} from './cards/IProjectCard';
 import {CardManifest} from './cards/CardManifest';
 import {CardName} from './common/cards/CardName';
-import {CorporationCard} from './cards/corporation/CorporationCard';
+import {CorporationCard} from './cards/corporation/ICorporationCard';
 import {Deck} from './Deck';
 import {PreludeCard} from './cards/prelude/PreludeCard';
 import {ALL_CARD_MANIFESTS} from './cards/AllCards';

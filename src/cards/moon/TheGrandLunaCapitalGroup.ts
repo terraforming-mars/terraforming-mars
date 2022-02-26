@@ -2,7 +2,7 @@ import {CardName} from '../../common/cards/CardName';
 import {CardType} from '../../common/cards/CardType';
 import {Player} from '../../Player';
 import {Tags} from '../../common/cards/Tags';
-import {CorporationCard} from '../corporation/CorporationCard';
+import {CorporationCard} from '../corporation/ICorporationCard';
 import {CardRenderer} from '../render/CardRenderer';
 import {TileType} from '../../common/TileType';
 import {PlaceMoonColonyTile} from '../../moon/PlaceMoonColonyTile';

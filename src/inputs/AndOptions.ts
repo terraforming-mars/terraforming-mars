@@ -3,7 +3,7 @@ import {PlayerInputTypes} from '../common/input/PlayerInputTypes';
 import {SelectSpace} from './SelectSpace';
 import {SelectHowToPay} from './SelectHowToPay';
 import {SelectCard} from './SelectCard';
-import {CorporationCard} from '../cards/corporation/CorporationCard';
+import {CorporationCard} from '../cards/corporation/ICorporationCard';
 import {SelectPlayer} from './SelectPlayer';
 import {OrOptions} from './OrOptions';
 import {SelectAmount} from './SelectAmount';

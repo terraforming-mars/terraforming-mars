@@ -2,7 +2,7 @@ import {CardName} from '../../common/cards/CardName';
 import {Player} from '../../Player';
 import {Card} from '../Card';
 import {CardType} from '../../common/cards/CardType';
-import {CorporationCard} from '../corporation/CorporationCard';
+import {CorporationCard} from '../corporation/ICorporationCard';
 import {IProjectCard} from '../IProjectCard';
 import {played} from '../Options';
 import {CardRenderer} from '../render/CardRenderer';

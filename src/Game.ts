@@ -10,7 +10,7 @@ import {Colony, serializeColonies} from './colonies/Colony';
 import {ColonyDealer, loadColoniesFromJSON} from './colonies/ColonyDealer';
 import {ColonyName} from './common/colonies/ColonyName';
 import {Color} from './common/Color';
-import {CorporationCard} from './cards/corporation/CorporationCard';
+import {CorporationCard} from './cards/corporation/ICorporationCard';
 import {Database} from './database/Database';
 import {Dealer} from './Dealer';
 import {ElysiumBoard} from './boards/ElysiumBoard';

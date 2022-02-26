@@ -21,7 +21,7 @@ import Button from '@/client/components/common/Button.vue';
 import {getCard} from '@/client/cards/ClientCardManifest';
 import {CardName} from '@/common/cards/CardName';
 import * as constants from '@/common/constants';
-import {CorporationCard} from '@/cards/corporation/CorporationCard';
+import {CorporationCard} from '@/cards/corporation/ICorporationCard';
 import {PlayerInputModel} from '@/common/models/PlayerInputModel';
 import {PlayerViewModel} from '@/common/models/PlayerModel';
 import SelectCard from '@/client/components/SelectCard.vue';

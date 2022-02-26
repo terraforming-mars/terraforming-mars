@@ -6,6 +6,10 @@ import {CardRenderItemType} from './CardRenderItemType';
 import {CardRenderSymbolType} from './CardRenderSymbolType';
 import {Size} from './Size';
 
+export interface ICardRenderRoot extends CardComponent {
+  readonly is: 'root';
+  rows: Array<Array<ItemType>>,
+}
 export interface ICardRenderSymbol extends CardComponent {
   type: CardRenderSymbolType;
   size: Size;

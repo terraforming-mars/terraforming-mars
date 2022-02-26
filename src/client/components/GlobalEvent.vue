@@ -22,7 +22,7 @@ import {GlobalEventModel} from '@/common/models/TurmoilModel';
 import CardRenderData from '@/client/components/card/CardRenderData.vue';
 import CardParty from '@/client/components/card/CardParty.vue';
 import {IGlobalEvent} from '@/turmoil/globalEvents/IGlobalEvent';
-import {CardRenderer} from '@/cards/render/CardRenderer';
+import {CardComponent} from '@/common/cards/render/CardComponent';
 import {getGlobalEventByName} from '@/turmoil/globalEvents/GlobalEventDealer';
 import CardDescription from '@/client/components/card/CardDescription.vue';
 
@@ -52,7 +52,7 @@ export default Vue.extend({
     };
   },
   methods: {
-    getCardRenderer(): CardRenderer | undefined {
+    getCardRenderer(): CardComponent | undefined {
       return this.renderData;
     },
     partyNameClass(partyName: string): string {

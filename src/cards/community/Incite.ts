@@ -1,4 +1,4 @@
-import {CorporationCard} from '../corporation/CorporationCard';
+import {ICorporationCard} from '../corporation/ICorporationCard';
 import {Player} from '../../Player';
 import {Tags} from '../../common/cards/Tags';
 import {Card} from '../Card';
@@ -9,7 +9,7 @@ import {CardRenderer} from '../render/CardRenderer';
 import {Size} from '../../common/cards/render/Size';
 import {Turmoil} from '../../turmoil/Turmoil';
 
-export class Incite extends Card implements CorporationCard {
+export class Incite extends Card implements ICorporationCard {
   constructor() {
     super({
       name: CardName.INCITE,

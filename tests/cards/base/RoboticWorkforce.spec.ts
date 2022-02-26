@@ -28,7 +28,7 @@ import {MarsUniversity} from '../../../src/cards/base/MarsUniversity';
 import {Gyropolis} from '../../../src/cards/venusNext/Gyropolis';
 import {VenusGovernor} from '../../../src/cards/venusNext/VenusGovernor';
 import {CardType} from '../../../src/common/cards/CardType';
-import {CorporationCard} from '../../../src/cards/corporation/CorporationCard';
+import {ICorporationCard} from '../../../src/cards/corporation/ICorporationCard';
 import {IProjectCard} from '../../../src/cards/IProjectCard';
 
 describe('RoboticWorkforce', () => {
@@ -237,7 +237,7 @@ describe('RoboticWorkforce', () => {
         }
 
         if (card.cardType === CardType.CORPORATION) {
-          (game as any).playCorporationCard(player, card as CorporationCard);
+          (game as any).playCorporationCard(player, card as ICorporationCard);
         } else {
           player.playCard(card as IProjectCard);
         }

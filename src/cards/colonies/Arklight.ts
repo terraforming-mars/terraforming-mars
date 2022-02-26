@@ -1,4 +1,4 @@
-import {CorporationCard} from '../corporation/CorporationCard';
+import {ICorporationCard} from '../corporation/ICorporationCard';
 import {Player} from '../../Player';
 import {Tags} from '../../common/cards/Tags';
 import {ResourceType} from '../../common/ResourceType';
@@ -12,7 +12,7 @@ import {VictoryPoints} from '../ICard';
 import {CardRenderer} from '../render/CardRenderer';
 import {played} from '../Options';
 
-export class Arklight extends Card implements CorporationCard, IResourceCard {
+export class Arklight extends Card implements ICorporationCard, IResourceCard {
   constructor() {
     super({
       name: CardName.ARKLIGHT,

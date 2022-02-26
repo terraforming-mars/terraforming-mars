@@ -2,14 +2,14 @@ import {CardName} from '../../common/cards/CardName';
 import {Player} from '../../Player';
 import {CardType} from '../../common/cards/CardType';
 import {Tags} from '../../common/cards/Tags';
-import {CorporationCard} from '../corporation/CorporationCard';
+import {ICorporationCard} from '../corporation/ICorporationCard';
 import {IProjectCard} from '../IProjectCard';
 import {ResourceType} from '../../common/ResourceType';
 import {CardRenderer} from '../render/CardRenderer';
 import {Card} from '../Card';
 import {ICard} from '../ICard';
 
-export class TheArchaicFoundationInstitute extends Card implements CorporationCard {
+export class TheArchaicFoundationInstitute extends Card implements ICorporationCard {
   constructor() {
     super({
       cardType: CardType.CORPORATION,

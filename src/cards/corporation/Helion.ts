@@ -1,5 +1,5 @@
 import {Card} from '../Card';
-import {CorporationCard} from './CorporationCard';
+import {ICorporationCard} from './ICorporationCard';
 import {Tags} from '../../common/cards/Tags';
 import {Player} from '../../Player';
 import {Resources} from '../../common/Resources';
@@ -8,7 +8,7 @@ import {CardType} from '../../common/cards/CardType';
 import {CardRenderer} from '../render/CardRenderer';
 import {multiplier} from '../Options';
 
-export class Helion extends Card implements CorporationCard {
+export class Helion extends Card implements ICorporationCard {
   constructor() {
     super({
       cardType: CardType.CORPORATION,

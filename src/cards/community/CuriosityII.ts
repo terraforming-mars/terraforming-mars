@@ -1,5 +1,5 @@
 import {Card} from '../Card';
-import {CorporationCard} from '../corporation/CorporationCard';
+import {ICorporationCard} from '../corporation/ICorporationCard';
 import {Tags} from '../../common/cards/Tags';
 import {Player} from '../../Player';
 import {ISpace} from '../../boards/ISpace';
@@ -18,7 +18,7 @@ import {SpaceBonus} from '../../common/boards/SpaceBonus';
 import {Phase} from '../../common/Phase';
 import {Units} from '../../common/Units';
 
-export class CuriosityII extends Card implements CorporationCard {
+export class CuriosityII extends Card implements ICorporationCard {
   constructor() {
     super({
       cardType: CardType.CORPORATION,

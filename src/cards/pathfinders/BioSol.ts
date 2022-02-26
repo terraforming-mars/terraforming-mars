@@ -1,5 +1,5 @@
 import {Card} from '../Card';
-import {CorporationCard} from '../corporation/CorporationCard';
+import {ICorporationCard} from '../corporation/ICorporationCard';
 import {Tags} from '../../common/cards/Tags';
 import {Player} from '../../Player';
 import {CardName} from '../../common/cards/CardName';
@@ -9,7 +9,7 @@ import {IActionCard, VictoryPoints} from '../ICard';
 import {ResourceType} from '../../common/ResourceType';
 import {AddResourcesToCard} from '../../deferredActions/AddResourcesToCard';
 
-export class BioSol extends Card implements CorporationCard, IActionCard {
+export class BioSol extends Card implements ICorporationCard, IActionCard {
   constructor() {
     super({
       cardType: CardType.CORPORATION,

@@ -1,4 +1,4 @@
-import {CorporationCard} from '../corporation/CorporationCard';
+import {ICorporationCard} from '../corporation/ICorporationCard';
 import {Player} from '../../Player';
 import {Tags} from '../../common/cards/Tags';
 import {ResourceType} from '../../common/ResourceType';
@@ -14,7 +14,7 @@ import {Size} from '../../common/cards/render/Size';
 import {PlayerInput} from '../../PlayerInput';
 import {Resources} from '../../common/Resources';
 
-export class StormCraftIncorporated extends Card implements IActionCard, CorporationCard, IResourceCard {
+export class StormCraftIncorporated extends Card implements IActionCard, ICorporationCard, IResourceCard {
   constructor() {
     super({
       name: CardName.STORMCRAFT_INCORPORATED,

@@ -2,7 +2,7 @@ import {CardName} from '../../common/cards/CardName';
 import {Player} from '../../Player';
 import {Card} from '../Card';
 import {CardType} from '../../common/cards/CardType';
-import {CorporationCard} from '../corporation/CorporationCard';
+import {ICorporationCard} from '../corporation/ICorporationCard';
 import {IProjectCard} from '../IProjectCard';
 import {played} from '../Options';
 import {CardRenderer} from '../render/CardRenderer';
@@ -11,7 +11,7 @@ import {Tags} from '../../common/cards/Tags';
 // TODO(kberg): This card is actually different: it uses resources to track on this card, which
 // means this result can be changed by cards like CEO's Favorite Project.
 // It also means cards with a wild tag may impact this.
-export class MarsDirect extends Card implements CorporationCard {
+export class MarsDirect extends Card implements ICorporationCard {
   constructor() {
     super({
       cardType: CardType.CORPORATION,

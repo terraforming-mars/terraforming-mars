@@ -1,5 +1,5 @@
 import {Card} from '../Card';
-import {CorporationCard} from '../corporation/CorporationCard';
+import {ICorporationCard} from '../corporation/ICorporationCard';
 import {Tags} from '../../common/cards/Tags';
 import {Player} from '../../Player';
 import {Resources} from '../../common/Resources';
@@ -9,7 +9,7 @@ import {CardRenderer} from '../render/CardRenderer';
 import {IProjectCard} from '../IProjectCard';
 import {played} from '../Options';
 
-export class MartianInsuranceGroup extends Card implements CorporationCard {
+export class MartianInsuranceGroup extends Card implements ICorporationCard {
   constructor() {
     super({
       cardType: CardType.CORPORATION,

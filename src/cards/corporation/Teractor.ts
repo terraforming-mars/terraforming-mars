@@ -1,6 +1,6 @@
 import {Card} from '../Card';
 import {Tags} from '../../common/cards/Tags';
-import {CorporationCard} from './CorporationCard';
+import {ICorporationCard} from './ICorporationCard';
 import {Player} from '../../Player';
 import {IProjectCard} from '../IProjectCard';
 import {CardName} from '../../common/cards/CardName';
@@ -8,7 +8,7 @@ import {CardType} from '../../common/cards/CardType';
 import {CardRenderer} from '../render/CardRenderer';
 import {played} from '../Options';
 
-export class Teractor extends Card implements CorporationCard {
+export class Teractor extends Card implements ICorporationCard {
   constructor() {
     super({
       cardType: CardType.CORPORATION,

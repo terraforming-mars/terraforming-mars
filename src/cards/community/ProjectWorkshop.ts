@@ -1,4 +1,4 @@
-import {CorporationCard} from '../corporation/CorporationCard';
+import {ICorporationCard} from '../corporation/ICorporationCard';
 import {Player} from '../../Player';
 import {Tags} from '../../common/cards/Tags';
 import {CardName} from '../../common/cards/CardName';
@@ -15,7 +15,7 @@ import {AltSecondaryTag} from '../../common/cards/render/AltSecondaryTag';
 import {Resources} from '../../common/Resources';
 import {digit} from '../Options';
 
-export class ProjectWorkshop extends Card implements CorporationCard {
+export class ProjectWorkshop extends Card implements ICorporationCard {
   constructor() {
     super({
       name: CardName.PROJECT_WORKSHOP,

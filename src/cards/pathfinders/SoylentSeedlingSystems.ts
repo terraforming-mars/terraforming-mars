@@ -6,12 +6,12 @@ import {Card} from '../Card';
 import {Tags} from '../../common/cards/Tags';
 import {Size} from '../../common/cards/render/Size';
 import {played} from '../Options';
-import {CorporationCard} from '../corporation/CorporationCard';
+import {ICorporationCard} from '../corporation/ICorporationCard';
 import {ResourceType} from '../../common/ResourceType';
 import {ISpace} from '../../boards/ISpace';
 import {Board} from '../../boards/Board';
 
-export class SoylentSeedlingSystems extends Card implements CorporationCard {
+export class SoylentSeedlingSystems extends Card implements ICorporationCard {
   constructor() {
     super({
       cardType: CardType.CORPORATION,

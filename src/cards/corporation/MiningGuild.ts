@@ -1,7 +1,7 @@
 import {Card} from '../Card';
 import {Tags} from '../../common/cards/Tags';
 import {Player} from '../../Player';
-import {CorporationCard} from './CorporationCard';
+import {ICorporationCard} from './ICorporationCard';
 import {Phase} from '../../common/Phase';
 import {ISpace} from '../../boards/ISpace';
 import {SpaceBonus} from '../../common/boards/SpaceBonus';
@@ -14,7 +14,7 @@ import {Units} from '../../common/Units';
 import {BoardType} from '../../boards/BoardType';
 import {digit} from '../Options';
 
-export class MiningGuild extends Card implements CorporationCard {
+export class MiningGuild extends Card implements ICorporationCard {
   constructor() {
     super({
       cardType: CardType.CORPORATION,

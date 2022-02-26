@@ -1,5 +1,5 @@
 import {expect} from 'chai';
-import {FakeLocalStorage} from '../components/FakeLocalStorage';
+import {FakeLocalStorage} from './components/FakeLocalStorage';
 import {PreferencesManager} from '../../src/client/utils/PreferencesManager';
 
 describe('PreferencesManager', () => {

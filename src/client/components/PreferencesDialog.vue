@@ -29,8 +29,8 @@ export default Vue.extend({
       }
     },
     updatePreferences(): void {
-      for (const k of Object.keys(this.preferencesManager.values) as Array<Preference>) {
-        const val = this.$data[k];
+      for (const k of Object.keys(this.preferencesManager.values()) as Array<Preference>) {
+        const val = this.prefs[k];
         this.preferencesManager.set(k, val, /* setOnChange */ true);
       }
     },
@@ -63,73 +63,73 @@ export default Vue.extend({
     <div class="preferences_panel" :data="syncPreferences()">
       <div class="preferences_panel_item">
         <label class="form-switch">
-          <input type="checkbox" v-on:change="updatePreferences" v-model="prefs.hide_hand">
+          <input type="checkbox" v-on:change="updatePreferences" v-model="prefs.hide_hand" data-test="hide_hand">
           <i class="form-icon"></i> <span v-i18n>Hide cards in hand</span>
         </label>
       </div>
       <div class="preferences_panel_item">
         <label class="form-switch">
-          <input type="checkbox" v-on:change="updatePreferences" v-model="prefs.hide_awards_and_milestones">
+          <input type="checkbox" v-on:change="updatePreferences" v-model="prefs.hide_awards_and_milestones" data-test="hide_awards_and_milestones">
           <i class="form-icon"></i> <span v-i18n>Hide awards and milestones</span>
         </label>
       </div>
       <div class="preferences_panel_item">
         <label class="form-switch">
-          <input type="checkbox" v-on:change="updatePreferences" v-model="prefs.small_cards">
+          <input type="checkbox" v-on:change="updatePreferences" v-model="prefs.small_cards" data-test="small_cards">
           <i class="form-icon"></i> <span v-i18n>Smaller cards</span>
         </label>
       </div>
       <div class="preferences_panel_item">
         <label class="form-switch">
-          <input type="checkbox" v-on:change="updatePreferences" v-model="prefs.magnify_cards">
+          <input type="checkbox" v-on:change="updatePreferences" v-model="prefs.magnify_cards" data-test="magnify_cards">
           <i class="form-icon"></i> <span v-i18n>Magnify cards on hover</span>
         </label>
       </div>
       <div class="preferences_panel_item">
         <label class="form-switch">
-          <input type="checkbox" v-on:change="updatePreferences" v-model="prefs.hide_discount_on_cards">
+          <input type="checkbox" v-on:change="updatePreferences" v-model="prefs.hide_discount_on_cards" data-test="hide_discount_on_cards">
           <i class="form-icon"></i> <span v-i18n>Hide discount on cards</span>
         </label>
       </div>
       <div class="preferences_panel_item">
         <label class="form-switch">
-          <input type="checkbox" v-on:change="updatePreferences" v-model="prefs.show_card_number">
+          <input type="checkbox" v-on:change="updatePreferences" v-model="prefs.show_card_number" data-test="show_card_number">
           <i class="form-icon"></i> <span v-i18n>Show card numbers (req. refresh)</span>
         </label>
       </div>
       <div class="preferences_panel_item">
         <label class="form-switch">
-          <input type="checkbox" v-on:change="updatePreferences" v-model="prefs.remove_background">
+          <input type="checkbox" v-on:change="updatePreferences" v-model="prefs.remove_background" data-test="remove_background">
           <i class="form-icon"></i> <span v-i18n>Remove background image</span>
         </label>
       </div>
       <div class="preferences_panel_item">
         <label class="form-switch">
-          <input type="checkbox" v-on:change="updatePreferences" v-model="prefs.show_alerts">
+          <input type="checkbox" v-on:change="updatePreferences" v-model="prefs.show_alerts" data-test="show_alerts">
           <i class="form-icon"></i> <span v-i18n>Show in-game alerts</span>
         </label>
       </div>
       <div class="preferences_panel_item">
         <label class="form-switch">
-          <input type="checkbox" v-on:change="updatePreferences" v-model="prefs.enable_sounds">
+          <input type="checkbox" v-on:change="updatePreferences" v-model="prefs.enable_sounds" data-test="enable_sounds">
           <i class="form-icon"></i> <span v-i18n>Enable sounds</span>
         </label>
       </div>
       <div class="preferences_panel_item">
         <label class="form-switch">
-          <input type="checkbox" v-on:change="updatePreferences" v-model="prefs.hide_animated_sidebar">
+          <input type="checkbox" v-on:change="updatePreferences" v-model="prefs.hide_animated_sidebar" data-test="hide_animated_sidebar">
           <i class="form-icon"></i> <span v-i18n>Hide sidebar notification</span>
         </label>
       </div>
       <div class="preferences_panel_item">
         <label class="form-switch">
-          <input type="checkbox" v-on:change="updatePreferences" v-model="prefs.hide_tile_confirmation">
+          <input type="checkbox" v-on:change="updatePreferences" v-model="prefs.hide_tile_confirmation" data-test="hide_tile_confirmation">
           <i class="form-icon"></i> <span v-i18n>Hide tile confirmation</span>
         </label>
       </div>
       <div class="preferences_panel_item">
         <label class="form-switch">
-          <input type="checkbox" v-on:change="updatePreferences" v-model="prefs.learner_mode">
+          <input type="checkbox" v-on:change="updatePreferences" v-model="prefs.learner_mode" data-test="learner_mode">
           <i class="form-icon"></i>
           <span v-i18n>Learner Mode (req. refresh)</span>
           <span class="tooltip tooltip-left" data-tooltip="Show information that can be helpful\n to players who are still learning the games">&#9432;</span>
@@ -137,7 +137,7 @@ export default Vue.extend({
       </div>
       <div class="preferences_panel_item">
         <label class="form-switch">
-          <input type="checkbox" v-on:change="updatePreferences" v-model="prefs.experimental_ui">
+          <input type="checkbox" v-on:change="updatePreferences" v-model="prefs.experimental_ui" data-test="experimental_ui">
           <i class="form-icon"></i>
           <span v-i18n>Experimental UI</span>
           <span class="tooltip tooltip-left" data-tooltip="Test out any possible new experimental UI features for feedback.">&#9432;</span>

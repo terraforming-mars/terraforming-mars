@@ -28,14 +28,13 @@ describe('PreferencesDialog', () => {
     expect(preferencesManager.values().learner_mode).is.true;
   });
 
-
   it('toggling sets the underlying preferences', async () => {
     const wrapper = mount(PreferencesDialog, {
       localVue: getLocalVue(),
       propsData: {preferencesManager},
     });
 
-    expect(PreferencesManager.INSTANCE.values().hide_awards_and_milestones).is.false;
+    expect(preferencesManager.values().hide_awards_and_milestones).is.false;
 
     const cbWrapper = getDataTest(wrapper, 'hide_awards_and_milestones');
     const cb = getCheckbox(wrapper, 'hide_awards_and_milestones');
@@ -43,6 +42,6 @@ describe('PreferencesDialog', () => {
     cbWrapper.trigger('change');
     await wrapper.vm.$nextTick();
 
-    expect(PreferencesManager.INSTANCE.values().hide_awards_and_milestones).is.true;
+    expect(preferencesManager.values().hide_awards_and_milestones).is.true;
   });
 });

@@ -1,4 +1,4 @@
-import {CorporationCard} from '../corporation/CorporationCard';
+import {ICorporationCard} from '../corporation/ICorporationCard';
 import {Player} from '../../Player';
 import {Tags} from '../../common/cards/Tags';
 import {Resources} from '../../common/Resources';
@@ -8,7 +8,7 @@ import {CardType} from '../../common/cards/CardType';
 import {CardRenderer} from '../render/CardRenderer';
 import {Units} from '../../common/Units';
 
-export class Manutech extends Card implements CorporationCard {
+export class Manutech extends Card implements ICorporationCard {
   constructor() {
     super({
       name: CardName.MANUTECH,

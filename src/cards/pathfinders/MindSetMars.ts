@@ -1,5 +1,5 @@
 import {Card} from '../Card';
-import {CorporationCard} from '../corporation/CorporationCard';
+import {ICorporationCard} from '../corporation/ICorporationCard';
 import {CardName} from '../../common/cards/CardName';
 import {CardType} from '../../common/cards/CardType';
 import {CardRenderer} from '../render/CardRenderer';
@@ -15,7 +15,7 @@ import {Turmoil} from '../../turmoil/Turmoil';
 import {PlaceCityTile} from '../../deferredActions/PlaceCityTile';
 import {Size} from '../../common/cards/render/Size';
 
-export class MindSetMars extends Card implements CorporationCard {
+export class MindSetMars extends Card implements ICorporationCard {
   constructor() {
     super({
       cardType: CardType.CORPORATION,

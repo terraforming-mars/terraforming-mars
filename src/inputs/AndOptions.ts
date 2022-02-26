@@ -3,7 +3,7 @@ import {PlayerInputTypes} from '../common/input/PlayerInputTypes';
 import {SelectSpace} from './SelectSpace';
 import {SelectHowToPay} from './SelectHowToPay';
 import {SelectCard} from './SelectCard';
-import {CorporationCard} from '../cards/corporation/CorporationCard';
+import {ICorporationCard} from '../cards/corporation/ICorporationCard';
 import {SelectPlayer} from './SelectPlayer';
 import {OrOptions} from './OrOptions';
 import {SelectAmount} from './SelectAmount';
@@ -16,7 +16,7 @@ export class AndOptions implements PlayerInput {
   public title = '';
   public buttonLabel: string = 'Save';
   public options: Array<PlayerInput>;
-  constructor(public cb: () => PlayerInput | undefined, ...options: Array<OrOptions | SelectAmount | SelectPlayer | SelectHowToPay | SelectSpace | SelectColony | SelectCard<CorporationCard> | SelectCard<ICard> | SelectCard<IProjectCard>>) {
+  constructor(public cb: () => PlayerInput | undefined, ...options: Array<OrOptions | SelectAmount | SelectPlayer | SelectHowToPay | SelectSpace | SelectColony | SelectCard<ICorporationCard> | SelectCard<ICard> | SelectCard<IProjectCard>>) {
     this.options = options;
   }
 }

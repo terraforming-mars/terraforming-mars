@@ -1,6 +1,6 @@
 
 import {AndOptions} from './AndOptions';
-import {CorporationCard} from '../cards/corporation/CorporationCard';
+import {ICorporationCard} from '../cards/corporation/ICorporationCard';
 import {IProjectCard} from '../cards/IProjectCard';
 import {Player} from '../Player';
 import {PlayerInput} from '../PlayerInput';
@@ -9,19 +9,19 @@ import {SelectCard} from './SelectCard';
 
 export class SelectInitialCards extends AndOptions implements PlayerInput {
   public override inputType = PlayerInputTypes.SELECT_INITIAL_CARDS;
-  constructor(player: Player, cb: (corporation: CorporationCard) => undefined) {
+  constructor(player: Player, cb: (corporation: ICorporationCard) => undefined) {
     super(() => {
       cb(corporation);
       return undefined;
     });
-    let corporation: CorporationCard;
+    let corporation: ICorporationCard;
     this.title = ' ';
     this.buttonLabel = 'Start';
 
     this.options.push(
-      new SelectCard<CorporationCard>(
+      new SelectCard<ICorporationCard>(
         'Select corporation', undefined, player.dealtCorporationCards,
-        (foundCards: Array<CorporationCard>) => {
+        (foundCards: Array<ICorporationCard>) => {
           corporation = foundCards[0];
           return undefined;
         },

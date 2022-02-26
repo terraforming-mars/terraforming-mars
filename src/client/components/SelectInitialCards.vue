@@ -21,7 +21,7 @@ import Button from '@/client/components/common/Button.vue';
 import {getCard} from '@/client/cards/ClientCardManifest';
 import {CardName} from '@/common/cards/CardName';
 import * as constants from '@/common/constants';
-import {CorporationCard} from '@/cards/corporation/CorporationCard';
+import {ICorporationCard} from '@/cards/corporation/ICorporationCard';
 import {PlayerInputModel} from '@/common/models/PlayerInputModel';
 import {PlayerViewModel} from '@/common/models/PlayerModel';
 import SelectCard from '@/client/components/SelectCard.vue';
@@ -57,7 +57,7 @@ export default Vue.extend({
   data() {
     return {
       selectedCards: [] as Array<CardName>,
-      selectedCorporation: undefined as CorporationCard | undefined,
+      selectedCorporation: undefined as ICorporationCard | undefined,
       selectedPreludes: [] as Array<CardName>,
     };
   },
@@ -187,7 +187,7 @@ export default Vue.extend({
       this.selectedCards = cards;
     },
     corporationChanged(cards: Array<CardName>) {
-      this.selectedCorporation = getCard(cards[0])?.card as CorporationCard;
+      this.selectedCorporation = getCard(cards[0])?.card as ICorporationCard;
     },
     preludesChanged(cards: Array<CardName>) {
       this.selectedPreludes = cards;

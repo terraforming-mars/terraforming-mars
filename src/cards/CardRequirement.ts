@@ -1,5 +1,6 @@
 import {RequirementType} from '../common/cards/RequirementType';
 import {Tags} from '../common/cards/Tags';
+import {ICardRequirement, IPartyCardRequirement, IProductionCardRequirement, ITagCardRequirement} from '../common/cards/ICardRequirement';
 import {PartyName} from '../common/turmoil/PartyName';
 import {Resources} from '../common/Resources';
 import {Player} from '../Player';
@@ -10,7 +11,7 @@ import {MoonExpansion} from '../moon/MoonExpansion';
 import {Turmoil} from '../turmoil/Turmoil';
 import {Options} from './CardRequirements';
 
-export class CardRequirement {
+export class CardRequirement implements ICardRequirement {
   public readonly isMax: boolean = false;
   public readonly isAny: boolean = false;
   public readonly text: string | undefined = undefined;
@@ -148,7 +149,7 @@ export class CardRequirement {
   }
 }
 
-export class TagCardRequirement extends CardRequirement {
+export class TagCardRequirement extends CardRequirement implements ITagCardRequirement {
   constructor(public tag: Tags, amount: number, options?: Options) {
     super(RequirementType.TAG, amount, options);
   }
@@ -172,7 +173,7 @@ export class TagCardRequirement extends CardRequirement {
   }
 }
 
-export class ProductionCardRequirement extends CardRequirement {
+export class ProductionCardRequirement extends CardRequirement implements IProductionCardRequirement {
   constructor(public resource: Resources, amount: number, options?: Options) {
     super(RequirementType.PRODUCTION, amount, options);
   }
@@ -181,7 +182,7 @@ export class ProductionCardRequirement extends CardRequirement {
   }
 }
 
-export class PartyCardRequirement extends CardRequirement {
+export class PartyCardRequirement extends CardRequirement implements IPartyCardRequirement {
   constructor(public readonly party: PartyName) {
     super(RequirementType.PARTY);
   }

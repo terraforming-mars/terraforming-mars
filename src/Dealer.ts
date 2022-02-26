@@ -1,4 +1,4 @@
-import {CorporationCard} from './cards/corporation/CorporationCard';
+import {ICorporationCard} from './cards/corporation/ICorporationCard';
 import {IProjectCard} from './cards/IProjectCard';
 import {ISerializable} from './ISerializable';
 import {SerializedDealer} from './SerializedDealer';
@@ -12,7 +12,7 @@ export class Dealer implements ISerializable<SerializedDealer> {
   public deck: Array<IProjectCard> = [];
   public preludeDeck: Array<IProjectCard> = [];
   public discarded: Array<IProjectCard> = [];
-  public corporationCards: Array<CorporationCard> = [];
+  public corporationCards: Array<ICorporationCard> = [];
 
   private constructor() { }
 

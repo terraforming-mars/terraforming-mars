@@ -1,19 +1,19 @@
 <template>
-        <div :class="getCardClasses(card)">
-            <div class="card-content-wrapper" v-i18n>
-                <div v-if="!isStandardProject()" class="card-cost-and-tags">
-                    <CardCost :amount="getCost()" :newCost="getReducedCost()" />
-                    <CardTags :tags="getTags()" />
-                </div>
-                <CardTitle :title="card.name" :type="getCardType()"/>
-                <CardContent v-if="getCardMetadata() !== undefined" :metadata="getCardMetadata()" :requirements="getCardRequirements()" :isCorporation="isCorporationCard()"/>
-                <CardNumber v-if="getCardMetadata() !== undefined" :number="getCardNumber()"/>
-            </div>
-            <CardExpansion :expansion="getCardExpansion()" :isCorporation="isCorporationCard()"/>
-            <CardResourceCounter v-if="hasResourceType" :amount="getResourceAmount(card)" :type="resourceType" />
-            <CardExtraContent :card="card" />
-            <slot/>
-        </div>
+  <div :class="getCardClasses(card)">
+      <div class="card-content-wrapper" v-i18n>
+          <div v-if="!isStandardProject()" class="card-cost-and-tags">
+              <CardCost :amount="getCost()" :newCost="getReducedCost()" />
+              <CardTags :tags="getTags()" />
+          </div>
+          <CardTitle :title="card.name" :type="getCardType()"/>
+          <CardContent v-if="getCardMetadata() !== undefined" :metadata="getCardMetadata()" :requirements="getCardRequirements()" :isCorporation="isCorporationCard()"/>
+          <CardNumber v-if="getCardMetadata() !== undefined" :number="getCardNumber()"/>
+      </div>
+      <CardExpansion :expansion="getCardExpansion()" :isCorporation="isCorporationCard()"/>
+      <CardResourceCounter v-if="hasResourceType" :amount="getResourceAmount(card)" :type="resourceType" />
+      <CardExtraContent :card="card" />
+      <slot/>
+  </div>
 </template>
 
 <script lang="ts">
@@ -32,8 +32,8 @@ import CardTags from './CardTags.vue';
 import {CardType} from '@/common/cards/CardType';
 import CardContent from './CardContent.vue';
 import {ICardMetadata} from '@/common/cards/ICardMetadata';
+import {ICardRequirements} from '@/common/cards/ICardRequirements';
 import {Tags} from '@/common/cards/Tags';
-import {CardRequirements} from '@/cards/CardRequirements';
 import {getPreferences} from '@/client/utils/PreferencesManager';
 import {ResourceType} from '@/common/ResourceType';
 import {getCard} from '@/client/cards/ClientCardManifest';
@@ -130,7 +130,7 @@ export default Vue.extend({
     getCardMetadata(): ICardMetadata | undefined {
       return this.getCard()?.metadata;
     },
-    getCardRequirements(): CardRequirements | undefined {
+    getCardRequirements(): ICardRequirements | undefined {
       return this.getCard()?.requirements;
     },
     getResourceAmount(card: CardModel): number {

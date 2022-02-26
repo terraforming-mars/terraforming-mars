@@ -1,4 +1,4 @@
-import {CorporationCard} from '../corporation/CorporationCard';
+import {ICorporationCard} from '../corporation/ICorporationCard';
 import {Player} from '../../Player';
 import {Tags} from '../../common/cards/Tags';
 import {ResourceType} from '../../common/ResourceType';
@@ -11,7 +11,7 @@ import {CardType} from '../../common/cards/CardType';
 import {CardRenderer} from '../render/CardRenderer';
 import {AltSecondaryTag} from '../../common/cards/render/AltSecondaryTag';
 
-export class Celestic extends Card implements IActionCard, CorporationCard, IResourceCard {
+export class Celestic extends Card implements IActionCard, ICorporationCard, IResourceCard {
   constructor() {
     super({
       name: CardName.CELESTIC,

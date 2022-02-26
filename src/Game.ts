@@ -10,7 +10,7 @@ import {Colony, serializeColonies} from './colonies/Colony';
 import {ColonyDealer, loadColoniesFromJSON} from './colonies/ColonyDealer';
 import {ColonyName} from './common/colonies/ColonyName';
 import {Color} from './common/Color';
-import {CorporationCard} from './cards/corporation/CorporationCard';
+import {ICorporationCard} from './cards/corporation/ICorporationCard';
 import {Database} from './database/Database';
 import {Dealer} from './Dealer';
 import {ElysiumBoard} from './boards/ElysiumBoard';
@@ -332,7 +332,7 @@ export class Game implements ISerializable<SerializedGame> {
 
     const minCorpsRequired = players.length * gameOptions.startingCorporations;
     if (gameOptions.customCorporationsList && gameOptions.customCorporationsList.length >= minCorpsRequired) {
-      const customCorporationCards: CorporationCard[] = [];
+      const customCorporationCards: ICorporationCard[] = [];
       for (const corp of gameOptions.customCorporationsList) {
         const customCorp = cardFinder.getCorporationCardByName(corp);
         if (customCorp) customCorporationCards.push(customCorp);
@@ -606,7 +606,7 @@ export class Game implements ISerializable<SerializedGame> {
     return this.claimedMilestones.length >= constants.MAX_MILESTONES;
   }
 
-  private playerHasPickedCorporationCard(player: Player, corporationCard: CorporationCard) {
+  private playerHasPickedCorporationCard(player: Player, corporationCard: ICorporationCard) {
     player.pickedCorporationCard = corporationCard;
     // if all players picked corporationCard
     if (this.players.every((p) => p.pickedCorporationCard !== undefined)) {
@@ -617,7 +617,7 @@ export class Game implements ISerializable<SerializedGame> {
   }
 
   private playCorporationCard(
-    player: Player, corporationCard: CorporationCard,
+    player: Player, corporationCard: ICorporationCard,
   ): void {
     player.corporationCard = corporationCard;
     player.megaCredits = corporationCard.startingMegaCredits;
@@ -668,7 +668,7 @@ export class Game implements ISerializable<SerializedGame> {
   }
 
   private pickCorporationCard(player: Player): PlayerInput {
-    return new SelectInitialCards(player, (corporation: CorporationCard) => {
+    return new SelectInitialCards(player, (corporation: ICorporationCard) => {
       // Check for negative M€
       const cardCost = corporation.cardCost !== undefined ? corporation.cardCost : player.cardCost;
       if (corporation.name !== CardName.BEGINNER_CORPORATION && player.cardsInHand.length * cardCost > corporation.startingMegaCredits) {

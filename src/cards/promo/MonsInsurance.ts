@@ -1,4 +1,4 @@
-import {CorporationCard} from '../corporation/ICorporationCard';
+import {ICorporationCard} from '../corporation/ICorporationCard';
 import {Player} from '../../Player';
 import {Resources} from '../../common/Resources';
 import {Card} from '../Card';
@@ -8,7 +8,7 @@ import {CardRenderer} from '../render/CardRenderer';
 import {Size} from '../../common/cards/render/Size';
 import {all} from '../Options';
 
-export class MonsInsurance extends Card implements CorporationCard {
+export class MonsInsurance extends Card implements ICorporationCard {
   constructor() {
     super({
       cardType: CardType.CORPORATION,

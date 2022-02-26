@@ -1,6 +1,6 @@
 import {Tags} from '../../common/cards/Tags';
 import {Player} from '../../Player';
-import {CorporationCard} from '../corporation/ICorporationCard';
+import {ICorporationCard} from '../corporation/ICorporationCard';
 import {Card} from '../Card';
 import {CardName} from '../../common/cards/CardName';
 import {ResourceType} from '../../common/ResourceType';
@@ -14,7 +14,7 @@ import {Size} from '../../common/cards/render/Size';
 import {Resources} from '../../common/Resources';
 import {all, digit, played} from '../Options';
 
-export class PharmacyUnion extends Card implements CorporationCard {
+export class PharmacyUnion extends Card implements ICorporationCard {
   constructor() {
     super({
       cardType: CardType.CORPORATION,
@@ -64,11 +64,11 @@ export class PharmacyUnion extends Card implements CorporationCard {
     this._onCardPlayed(player, card);
   }
 
-  public onCorpCardPlayed(player: Player, card: CorporationCard) {
+  public onCorpCardPlayed(player: Player, card: ICorporationCard) {
     return this._onCardPlayed(player, card);
   }
 
-  private _onCardPlayed(player: Player, card: IProjectCard | CorporationCard): void {
+  private _onCardPlayed(player: Player, card: IProjectCard | ICorporationCard): void {
     if (this.isDisabled) return undefined;
 
     const game = player.game;

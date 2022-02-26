@@ -9,7 +9,7 @@ import {CardName} from './common/cards/CardName';
 import {CardType} from './common/cards/CardType';
 import {ColonyName} from './common/colonies/ColonyName';
 import {Color} from './common/Color';
-import {CorporationCard} from './cards/corporation/ICorporationCard';
+import {ICorporationCard} from './cards/corporation/ICorporationCard';
 import {Game} from './Game';
 import {HowToPay} from './inputs/HowToPay';
 import {IAward} from './awards/IAward';
@@ -80,9 +80,9 @@ export class Player implements ISerializable<SerializedPlayer> {
   private _game: Game | undefined = undefined;
 
   // Corporate identity
-  public corporationCard: CorporationCard | undefined = undefined;
+  public corporationCard: ICorporationCard | undefined = undefined;
   // Used only during set-up
-  public pickedCorporationCard: CorporationCard | undefined = undefined;
+  public pickedCorporationCard: ICorporationCard | undefined = undefined;
 
   // Terraforming Rating
   private terraformRating: number = 20;
@@ -116,7 +116,7 @@ export class Player implements ISerializable<SerializedPlayer> {
   private corporationInitialActionDone: boolean = false;
 
   // Cards
-  public dealtCorporationCards: Array<CorporationCard> = [];
+  public dealtCorporationCards: Array<ICorporationCard> = [];
   public dealtProjectCards: Array<IProjectCard> = [];
   public dealtPreludeCards: Array<IProjectCard> = [];
   public cardsInHand: Array<IProjectCard> = [];

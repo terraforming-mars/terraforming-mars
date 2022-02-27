@@ -201,6 +201,7 @@ export interface DebugUIModel {
   pathfinders: boolean,
   promo: boolean,
   types: Record<CardType, boolean>,
+  colonyCount: number,
 }
 
 export default Vue.extend({
@@ -233,6 +234,7 @@ export default Vue.extend({
         corporation: true,
         standard_project: true,
       },
+      colonyCount: 0,
     } as DebugUIModel;
   },
   mounted() {
@@ -290,6 +292,14 @@ export default Vue.extend({
     },
     types() {
       this.updateUrl();
+    },
+    colonyCount: {
+      immediate: true,
+      handler() {
+        setTimeout(() => {
+          this.colonyCount = (this.colonyCount + 1) % 4;
+        }, 1000);
+      },
     },
   },
   computed: {
@@ -450,7 +460,7 @@ export default Vue.extend({
     },
     colonyModel(colonyName: ColonyName): ColonyModel {
       return {
-        colonies: [],
+        colonies: Array(this.colonyCount).fill('blue'),
         isActive: true,
         name: colonyName,
         trackPosition: 5,

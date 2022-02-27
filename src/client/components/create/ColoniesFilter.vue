@@ -40,7 +40,6 @@ const OFFICIAL_COLONY_NAMES = [
 ];
 
 const COMMUNITY_COLONY_NAMES = [
-  ColonyName.CALLISTO,
   ColonyName.IAPETUS,
   ColonyName.MERCURY,
   ColonyName.HYGIEA,
@@ -87,11 +86,8 @@ export default Vue.extend({
     },
   },
   watch: {
-    selectedColonies(value) {
-      const colonyNames: Array<ColonyName> = [];
-      value.forEach(function(el: any) {
-        colonyNames.push(el.name);
-      } );
+    selectedColonies(value: Array<ColonyName>) {
+      const colonyNames: Array<ColonyName> = [...value];
       this.$emit('colonies-list-changed', colonyNames);
     },
     communityCardsOption(enabled) {

@@ -707,6 +707,7 @@ export class Player implements ISerializable<SerializedPlayer> {
   public removeResourceFrom(card: ICard, count: number = 1, removingPlayer? : Player): void {
     if (card.resourceCount) {
       const amountRemoved = Math.min(card.resourceCount, count);
+      if (amountRemoved === 0) return;
       card.resourceCount -= amountRemoved;
 
       if (removingPlayer !== undefined && removingPlayer !== this) this.resolveMonsInsurance();

@@ -123,8 +123,20 @@
             <section class="debug-ui-cards-list">
               <h2>Global Events</h2>
               <div class="cardbox" v-for="globalEventName in getAllGlobalEvents()" :key="globalEventName">
-                <!-- <global-event :globalEvent="getGlobalEvent(globalEventName)" type="prior" :showIcons="false"></global-event> -->
-                <global-event :globalEvent="getGlobalEvent(globalEventName)" type="prior" :showIcons="true"></global-event>
+                <global-event :globalEvent="getGlobalEvent(globalEventName)" type="prior"></global-event>
+              </div>
+            </section>
+
+          <!-- <div class="player_home_colony_cont">
+              <div class="player_home_colony" v-for="colony in game.colonies" :key="colony.name">
+                  <colony :colony="colony"></colony>
+              </div>
+          </div> -->
+
+            <section>
+              <h2>Colonies</h2>
+              <div class="player_home_colony" v-for="colonyName in getAllColonyNames()" :key="colonyName">
+                <colony :colony="colonyModel(colonyName)"></colony>
               </div>
             </section>
         </div>
@@ -144,6 +156,10 @@ import {PartyName} from '@/common/turmoil/PartyName';
 import {ALL_EVENTS, getGlobalEventByName} from '@/turmoil/globalEvents/GlobalEventDealer';
 import GlobalEvent from '@/client/components/GlobalEvent.vue';
 import {byType, getCard, getCards, toName} from '@/client/cards/ClientCardManifest';
+import Colony from '@/client/components/Colony.vue';
+import {COMMUNITY_COLONY_NAMES, OFFICIAL_COLONY_NAMES} from '@/common/colonies/AllColonies';
+import {ColonyModel} from '@/common/models/ColonyModel';
+import {ColonyName} from '@/common/colonies/ColonyName';
 
 const MODULE_BASE = 'b';
 const MODULE_CORP = 'c';
@@ -155,8 +171,20 @@ const MODULE_COMMUNITY = '*';
 const MODULE_PROMO = 'r';
 const MODULE_ARES = 'a';
 const MODULE_MOON = 'm';
+const MODULE_PATHFINDERS = 'P';
 
-const ALL_MODULES = `${MODULE_BASE}${MODULE_CORP}${MODULE_PRELUDE}${MODULE_VENUS}${MODULE_COLONIES}${MODULE_TURMOIL}${MODULE_COMMUNITY}${MODULE_PROMO}${MODULE_ARES}${MODULE_MOON}`;
+const ALL_MODULES =
+  MODULE_BASE +
+  MODULE_CORP +
+  MODULE_PRELUDE +
+  MODULE_VENUS +
+  MODULE_COLONIES +
+  MODULE_TURMOIL +
+  MODULE_COMMUNITY +
+  MODULE_PROMO +
+  MODULE_ARES +
+  MODULE_MOON +
+  MODULE_PATHFINDERS;
 
 export interface DebugUIModel {
   filterText: string,
@@ -180,6 +208,7 @@ export default Vue.extend({
   components: {
     Card,
     GlobalEvent,
+    Colony,
   },
   data() {
     return {
@@ -223,6 +252,7 @@ export default Vue.extend({
     this.promo = modules.includes(MODULE_PROMO);
     this.ares = modules.includes(MODULE_ARES);
     this.moon = modules.includes(MODULE_MOON);
+    this.pathfinders = modules.includes(MODULE_PATHFINDERS);
   },
   watch: {
     filterText(newSearchString: string) {
@@ -293,6 +323,7 @@ export default Vue.extend({
         if (this.promo) m += MODULE_PROMO;
         if (this.ares) m += MODULE_ARES;
         if (this.moon) m += MODULE_MOON;
+        if (this.pathfinders) m += MODULE_PATHFINDERS;
         if (m === '') m = '-'; // - means no modules.
 
         if (m !== ALL_MODULES) {
@@ -349,6 +380,10 @@ export default Vue.extend({
     getAllGlobalEvents() {
       return ALL_EVENTS.keys();
     },
+    getAllColonyNames() {
+      return OFFICIAL_COLONY_NAMES.concat(COMMUNITY_COLONY_NAMES);
+    },
+
     // Copied from LogPanel.vue
     getGlobalEvent(globalEventName: GlobalEventName): GlobalEventModel {
       const globalEvent = getGlobalEventByName(globalEventName);
@@ -412,6 +447,15 @@ export default Vue.extend({
     getLanguageCssClass() {
       const language = PreferencesManager.load('lang') || 'en';
       return 'language-' + language;
+    },
+    colonyModel(colonyName: ColonyName): ColonyModel {
+      return {
+        colonies: [],
+        isActive: true,
+        name: colonyName,
+        trackPosition: 5,
+        visitor: undefined,
+      };
     },
   },
 });

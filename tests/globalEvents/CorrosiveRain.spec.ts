@@ -4,6 +4,7 @@ import {CorrosiveRain} from '../../src/turmoil/globalEvents/CorrosiveRain';
 import {Kelvinists} from '../../src/turmoil/parties/Kelvinists';
 import {Turmoil} from '../../src/turmoil/Turmoil';
 import {TestPlayers} from '../TestPlayers';
+import {TestingUtils} from '../TestingUtils';
 
 describe('CorrosiveRain', function() {
   it('resolve play', function() {
@@ -24,7 +25,7 @@ describe('CorrosiveRain', function() {
 
     card.resolve(game, turmoil);
     expect(game.deferredActions).has.lengthOf(2);
-    game.deferredActions.runAll(() => {});
+    TestingUtils.runAllActions(game);
     expect(game.deferredActions).has.lengthOf(0);
     expect(player2.cardsInHand).has.lengthOf(3);
     expect(player.cardsInHand).has.lengthOf(0);

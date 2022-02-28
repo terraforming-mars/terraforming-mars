@@ -18,10 +18,8 @@ import {CardName} from '../../src/common/cards/CardName';
 import {Pallas} from '../../src/cards/community/Pallas';
 import {Io} from '../../src/colonies/Io';
 import {Europa} from '../../src/colonies/Europa';
-// TODO(kberg): bring serialization and deserialization into one place.
-import {serializeColonies} from '../../src/colonies/Colony';
-import {loadColoniesFromJSON} from '../../src/colonies/ColonyDealer';
 import {ColonyName} from '../../src/common/colonies/ColonyName';
+import {Colony} from '../../src/colonies/Colony';
 
 const gameOptions = TestingUtils.setCustomGameOptions({coloniesExtension: true});
 
@@ -371,8 +369,8 @@ describe('Colony', function() {
     const europa = new Europa();
     europa.isActive = false;
 
-    const json = serializeColonies([io, pallas, europa]);
-    const colonies = loadColoniesFromJSON(json);
+    const json = [io, pallas, europa].map((c) => c.serialize());
+    const colonies = Colony.deserializeColonies(json);
 
     expect(colonies[0].name).eq(ColonyName.IO);
     expect(colonies[0].isActive).is.true;

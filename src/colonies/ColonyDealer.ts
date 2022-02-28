@@ -18,7 +18,7 @@ import {Titania} from '../cards/community/Titania';
 import {Venus} from '../cards/community/Venus';
 import {Leavitt} from '../cards/community/Leavitt';
 import {Pallas} from '../cards/community/Pallas';
-import {SerializedColony} from '../SerializedColony';
+import {SerializedColonyDealer} from './SerializedColonyDealer';
 
 // TODO(kberg): Add ability to hard-code chosen colonies, separate from customColoniesList, so as to not be
 // forced to rely on randomness.
@@ -29,7 +29,7 @@ export interface IColonyFactory<T> {
     Factory: new () => T
 }
 
-// ALL COLONIES TILES is now a const not and attribute of Colony Dealer
+// Rename to BASE_COLONIES_TILES or something.
 export const ALL_COLONIES_TILES: Array<IColonyFactory<Colony>> = [
   {colonyName: ColonyName.CERES, Factory: Ceres},
   {colonyName: ColonyName.ENCELADUS, Factory: Enceladus},
@@ -54,47 +54,18 @@ export const COMMUNITY_COLONIES_TILES: Array<IColonyFactory<Colony>> = [
   {colonyName: ColonyName.PALLAS, Factory: Pallas},
 ];
 
-// Function to return a card object by its name
-export function getColonyByName(colonyName: string): Colony | undefined {
-  const colonyTiles = ALL_COLONIES_TILES.concat(COMMUNITY_COLONIES_TILES);
-  const colonyFactory = colonyTiles.find((colonyFactory) => colonyFactory.colonyName === colonyName);
-  if (colonyFactory !== undefined) {
-    return new colonyFactory.Factory();
-  }
-  return undefined;
-}
-
-export function loadColoniesFromJSON(colonies: Array<SerializedColony>): Array<Colony> {
-  const result: Array<Colony> = [];
-  for (const serialized of colonies) {
-    const colony = getColonyByName(serialized.name);
-    if (colony !== undefined) {
-      colony.colonies = serialized.colonies;
-      colony.isActive = serialized.isActive;
-      colony.trackPosition = serialized.trackPosition;
-      colony.visitor = serialized.visitor;
-      result.push(colony);
-    } else {
-      console.warn(`colony ${serialized.name} not found`);
-    }
-  }
-  return result;
-}
+export const ALL_ALL_COLONIES_TILES = [...ALL_COLONIES_TILES, ...COMMUNITY_COLONIES_TILES];
 
 export class ColonyDealer {
-  public coloniesDeck: Array<Colony> = [];
   public discardedColonies: Array<Colony> = [];
 
-  public shuffle(cards: Array<Colony>): Array<Colony> {
+  private shuffle(cards: Array<Colony>): Array<Colony> {
     const deck: Array<Colony> = [];
     const copy = cards.slice();
     while (copy.length) {
       deck.push(copy.splice(Math.floor(Math.random() * copy.length), 1)[0]);
     }
     return deck;
-  }
-  public discard(card: Colony): void {
-    this.discardedColonies.push(card);
   }
   public drawColonies(players: number, allowList: Array<ColonyName> = [], venusNextExtension: boolean, turmoilExtension: boolean, addCommunityColonies: boolean = false): Array<Colony> {
     let count: number = players + 2;
@@ -119,13 +90,29 @@ export class ColonyDealer {
         (cf) => new cf.Factory(),
       ),
     );
+    const coloniesDeck: Array<Colony> = [];
+
     for (let i = 0; i < count; i++) {
-      this.coloniesDeck.push(tempDeck.pop()!);
+      coloniesDeck.push(tempDeck.pop()!);
     }
     this.discardedColonies.push(...tempDeck);
     this.discardedColonies.sort((a, b) => (a.name > b.name) ? 1 : -1);
-    this.coloniesDeck.sort((a, b) => (a.name > b.name) ? 1 : -1);
+    coloniesDeck.sort((a, b) => (a.name > b.name) ? 1 : -1);
 
-    return this.coloniesDeck;
+    return coloniesDeck;
+  }
+
+  public serialize(): SerializedColonyDealer {
+    return {
+      discardedColonies: this.discardedColonies.map((c) => c.name),
+    };
+  }
+
+  public static deserialize(d: SerializedColonyDealer | undefined): ColonyDealer {
+    const colonyDealer = new ColonyDealer();
+    if (d !== undefined) {
+      colonyDealer.discardedColonies = Colony.deserializeColonies(d.discardedColonies);
+    }
+    return colonyDealer;
   }
 }

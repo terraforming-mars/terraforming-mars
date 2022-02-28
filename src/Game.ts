@@ -6,8 +6,8 @@ import {CardFinder} from './CardFinder';
 import {CardName} from './common/cards/CardName';
 import {CardType} from './common/cards/CardType';
 import {ClaimedMilestone, serializeClaimedMilestones, deserializeClaimedMilestones} from './milestones/ClaimedMilestone';
-import {Colony, serializeColonies} from './colonies/Colony';
-import {ColonyDealer, loadColoniesFromJSON} from './colonies/ColonyDealer';
+import {Colony} from './colonies/Colony';
+import {ColonyDealer} from './colonies/ColonyDealer';
 import {ColonyName} from './common/colonies/ColonyName';
 import {Color} from './common/Color';
 import {ICorporationCard} from './cards/corporation/ICorporationCard';
@@ -422,8 +422,8 @@ export class Game implements ISerializable<SerializedGame> {
       awards: this.awards.map((a) => a.name),
       board: this.board.serialize(),
       claimedMilestones: serializeClaimedMilestones(this.claimedMilestones),
-      colonies: serializeColonies(this.colonies),
-      colonyDealer: this.colonyDealer,
+      colonies: this.colonies.map((colony) => colony.serialize()),
+      colonyDealer: this.colonyDealer?.serialize(),
       dealer: this.dealer.serialize(),
       deferredActions: [],
       donePlayers: Array.from(this.donePlayers),
@@ -1618,13 +1618,8 @@ export class Game implements ISerializable<SerializedGame> {
     }
     // Reload colonies elements if needed
     if (gameOptions.coloniesExtension) {
-      game.colonyDealer = new ColonyDealer();
-
-      if (d.colonyDealer !== undefined) {
-        game.colonyDealer.discardedColonies = loadColoniesFromJSON(d.colonyDealer.discardedColonies);
-      }
-
-      game.colonies = loadColoniesFromJSON(d.colonies);
+      game.colonyDealer = ColonyDealer.deserialize(d.colonyDealer);
+      game.colonies = Colony.deserializeColonies(d.colonies);
     }
 
     // Reload turmoil elements if needed

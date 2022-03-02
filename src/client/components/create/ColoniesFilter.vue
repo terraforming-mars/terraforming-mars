@@ -24,30 +24,7 @@
 import Vue from 'vue';
 import {ColonyName} from '@/common/colonies/ColonyName';
 import {COLONY_DESCRIPTIONS} from '@/common/colonies/ColonyDescription';
-
-const OFFICIAL_COLONY_NAMES = [
-  ColonyName.CALLISTO,
-  ColonyName.CERES,
-  ColonyName.ENCELADUS,
-  ColonyName.EUROPA,
-  ColonyName.GANYMEDE,
-  ColonyName.IO,
-  ColonyName.LUNA,
-  ColonyName.MIRANDA,
-  ColonyName.PLUTO,
-  ColonyName.TITAN,
-  ColonyName.TRITON,
-];
-
-const COMMUNITY_COLONY_NAMES = [
-  ColonyName.IAPETUS,
-  ColonyName.MERCURY,
-  ColonyName.HYGIEA,
-  ColonyName.TITANIA,
-  ColonyName.LEAVITT,
-  ColonyName.VENUS,
-  ColonyName.PALLAS,
-];
+import {OFFICIAL_COLONY_NAMES, COMMUNITY_COLONY_NAMES} from '@/common/colonies/AllColonies';
 
 type Data = {
   allColonies: Array<ColonyName>,

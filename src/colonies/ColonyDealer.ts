@@ -29,7 +29,6 @@ export interface IColonyFactory<T> {
     Factory: new () => T
 }
 
-// ALL COLONIES TILES is now a const not and attribute of Colony Dealer
 export const ALL_COLONIES_TILES: Array<IColonyFactory<Colony>> = [
   {colonyName: ColonyName.CERES, Factory: Ceres},
   {colonyName: ColonyName.ENCELADUS, Factory: Enceladus},

@@ -87,7 +87,7 @@ describe('LunaEcumenopolis', () => {
     expect(input2.availableSpaces.map((space) => space.id)).deep.eq(['m13', 'm17']);
     input1.cb(moon.getSpace('m13'));
     expect(moonData.colonyRate).eq(4);
-    game.deferredActions.runAll(() => {});
+    TestingUtils.runAllActions(game);
     expect(player.getTerraformRating()).eq(18);
   });
 
@@ -125,7 +125,7 @@ describe('LunaEcumenopolis', () => {
     expect(input2.availableSpaces.map((space) => space.id)).deep.eq(['m13', 'm17']);
     input1.cb(moon.getSpace('m13'));
     expect(moonData.colonyRate).eq(4);
-    game.deferredActions.runAll(() => {});
+    TestingUtils.runAllActions(game);
     expect(player.getTerraformRating()).eq(18);
   });
 

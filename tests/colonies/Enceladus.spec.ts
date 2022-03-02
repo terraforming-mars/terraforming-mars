@@ -6,6 +6,7 @@ import {AddResourcesToCard} from '../../src/deferredActions/AddResourcesToCard';
 import {Game} from '../../src/Game';
 import {Player} from '../../src/Player';
 import {TestPlayers} from '../TestPlayers';
+import {TestingUtils} from '../TestingUtils';
 
 describe('Enceladus', function() {
   let enceladus: Enceladus; let tardigrades: Tardigrades; let player: Player; let player2: Player; let game: Game;
@@ -66,7 +67,7 @@ describe('Enceladus', function() {
     game.deferredActions.pop()!.execute(); // Gain placement microbes
 
     enceladus.trade(player2);
-    game.deferredActions.runAll(() => {}); // Gain Trade & Bonus
+    TestingUtils.runAllActions(game); // Gain Trade & Bonus
 
     expect(tardigrades.resourceCount).to.eq(4);
     expect(regolithEaters.resourceCount).to.eq(1);

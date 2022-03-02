@@ -23,7 +23,7 @@ describe('TradeAdvance', function() {
   it('Should play', function() {
     card.play(player);
 
-    player.game.deferredActions.runAll(() => {});
+    TestingUtils.runAllActions(player.game);
 
     expect(player.megaCredits).to.eq(6); // 2 from card + 4 from Luna
     expect(player.energy).to.eq(3);

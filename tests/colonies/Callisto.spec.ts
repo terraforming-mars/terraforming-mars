@@ -4,7 +4,7 @@ import {Game} from '../../src/Game';
 import {Player} from '../../src/Player';
 import {Resources} from '../../src/common/Resources';
 import {TestPlayers} from '../TestPlayers';
-
+import {TestingUtils} from '../TestingUtils';
 
 describe('Callisto', function() {
   let callisto: Callisto; let player: Player; let player2: Player; let game: Game;
@@ -34,7 +34,7 @@ describe('Callisto', function() {
     callisto.addColony(player);
 
     callisto.trade(player2);
-    game.deferredActions.runAll(() => {});
+    TestingUtils.runAllActions(game);
 
     expect(player.getProduction(Resources.ENERGY)).to.eq(1);
     expect(player2.getProduction(Resources.ENERGY)).to.eq(0);

@@ -5,6 +5,7 @@ import {Game} from '../../src/Game';
 import {Player} from '../../src/Player';
 import {Resources} from '../../src/common/Resources';
 import {TestPlayers} from '../TestPlayers';
+import {TestingUtils} from '../TestingUtils';
 
 describe('Europa', function() {
   let europa: Europa; let player: Player; let player2: Player; let game: Game;
@@ -37,7 +38,7 @@ describe('Europa', function() {
     game.deferredActions.pop();
 
     europa.trade(player2);
-    game.deferredActions.runAll(() => {});
+    TestingUtils.runAllActions(game);
 
     expect(player.getProduction(Resources.MEGACREDITS)).to.eq(0);
     expect(player2.getProduction(Resources.MEGACREDITS)).to.eq(1);

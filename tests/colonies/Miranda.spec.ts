@@ -6,6 +6,7 @@ import {AddResourcesToCard} from '../../src/deferredActions/AddResourcesToCard';
 import {Game} from '../../src/Game';
 import {Player} from '../../src/Player';
 import {TestPlayers} from '../TestPlayers';
+import {TestingUtils} from '../TestingUtils';
 
 describe('Miranda', function() {
   let miranda: Miranda; let pets: Pets; let player: Player; let player2: Player; let game: Game;
@@ -66,7 +67,7 @@ describe('Miranda', function() {
     game.deferredActions.pop()!.execute(); // Gain placement animals
 
     miranda.trade(player2);
-    game.deferredActions.runAll(() => {}); // Gain Trade & Bonus
+    TestingUtils.runAllActions(game); // Gain Trade & Bonus
 
     expect(pets.resourceCount).to.eq(2);
     expect(predators.resourceCount).to.eq(1);

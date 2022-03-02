@@ -35,6 +35,7 @@ export const POLITICAL_AGENDAS_MAX_ACTION_USES = 3;
 
 // Map specific
 export const HELLAS_BONUS_OCEAN_COST = 6;
+export const VASTITAS_BOREALIS_BONUS_TEMPERATURE_COST = 3;
 
 // Moon
 export const MAXIMUM_COLONY_RATE = 8;

@@ -23,6 +23,11 @@ import {Pioneer} from './Pioneer';
 import {LandSpecialist} from './LandSpecialist';
 import {Martian} from './Martian';
 import {Businessperson} from './Businessperson';
+import {Capitalist} from './Capitalist';
+import {Electrician} from './Electrician';
+import {Irrigator} from './Irrigator';
+import {Smith} from './Smith';
+import {Tradesman} from './Tradesman';
 
 export const ORIGINAL_MILESTONES: Array<IMilestone> = [
   new Terraformer(),
@@ -69,6 +74,14 @@ export const ARABIA_TERRA_MILESTONES = [
   new Businessperson(),
 ];
 
+export const VASTITAS_BOREALIS_MILESTONES: Array<IMilestone> = [
+  new Electrician(),
+  new Smith(),
+  new Tradesman(),
+  new Irrigator(),
+  new Capitalist(),
+];
+
 export const ALL_MILESTONES: Array<IMilestone> = [
   ...ORIGINAL_MILESTONES,
   ...ELYSIUM_MILESTONES,
@@ -76,7 +89,9 @@ export const ALL_MILESTONES: Array<IMilestone> = [
   ...VENUS_MILESTONES,
   ...ARES_MILESTONES,
   ...MOON_MILESTONES,
-  ...ARABIA_TERRA_MILESTONES];
+  ...ARABIA_TERRA_MILESTONES,
+  ...VASTITAS_BOREALIS_MILESTONES,
+];
 
 export namespace Milestones {
   export const ALL = ALL_MILESTONES;

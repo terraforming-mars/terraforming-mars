@@ -10,10 +10,10 @@ import {GameOptions} from '../Game';
 import {DeferredAction} from '../deferredActions/DeferredAction';
 import {SelectHowToPayDeferred} from '../deferredActions/SelectHowToPayDeferred';
 import {Game} from '../Game';
-import {SpaceType} from '@/common/boards/SpaceType';
-import {Color} from '@/common/Color';
-import {MAX_TEMPERATURE, VASTITAS_BOREALIS_BONUS_TEMPERATURE_COST} from '@/common/constants';
-import {BoardName} from '@/common/boards/BoardName';
+import {SpaceType} from '../common/boards/SpaceType';
+import {Color} from '../common/Color';
+import {MAX_TEMPERATURE, VASTITAS_BOREALIS_BONUS_TEMPERATURE_COST} from '../common/constants';
+import {BoardName} from '../common/boards/BoardName';
 
 export class VastitasBorealisBoard extends Board {
   public static newInstance(gameOptions: GameOptions, rng: Random): VastitasBorealisBoard {
@@ -44,7 +44,7 @@ export class VastitasBorealisBoard extends Board {
     builder.ocean(PLANT).land().land(DRAW_CARD).land(STEEL).land().land(PLANT, PLANT);
     // y=8
     builder.ocean(PLANT, PLANT).land().land(PLANT).land(PLANT, PLANT).land(STEEL, PLANT);
-    
+
     if (gameOptions.shuffleMapOption) {
       builder.shuffle(rng);
     }
@@ -52,7 +52,7 @@ export class VastitasBorealisBoard extends Board {
     const spaces = builder.build();
     return new VastitasBorealisBoard(spaces);
   }
-        
+
   public static deserialize(board: SerializedBoard, players: Array<Player>): VastitasBorealisBoard {
     return new VastitasBorealisBoard(Board.deserializeSpaces(board.spaces, players));
   }

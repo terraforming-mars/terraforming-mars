@@ -1,7 +1,7 @@
-import {Capitalist} from "@/milestones/Capitalist";
-import {Player} from "@/Player";
-import {expect} from "chai";
-import {TestPlayers} from "tests/TestPlayers";
+import {Capitalist} from '../../src/milestones/Capitalist';
+import {Player} from '../../src/Player';
+import {expect} from 'chai';
+import {TestPlayers} from '../TestPlayers';
 
 describe('Capitalist', () => {
   let milestone : Capitalist; let player : Player;

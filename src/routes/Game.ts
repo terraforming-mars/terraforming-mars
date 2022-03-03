@@ -30,9 +30,11 @@ export class GameHandler extends Handler {
     const allBoards = Object.values(BoardName);
 
     if (board === RandomBoardOption.ALL) return allBoards;
-    if (board === RandomBoardOption.OFFICIAL) return allBoards.filter((name) => {
-      return name !== BoardName.ARABIA_TERRA && name !== BoardName.VASTITAS_BOREALIS;
-    });
+    if (board === RandomBoardOption.OFFICIAL) {
+      return allBoards.filter((name) => {
+        return name !== BoardName.ARABIA_TERRA && name !== BoardName.VASTITAS_BOREALIS;
+      });
+    }
     return [board];
   }
 

@@ -1,10 +1,10 @@
-import {Birds} from "@/cards/base/Birds";
-import {CometAiming} from "@/cards/promo/CometAiming";
-import {Dirigibles} from "@/cards/venusNext/Dirigibles";
-import {Tradesman} from "@/milestones/Tradesman";
-import {Player} from "@/Player";
-import {expect} from "chai";
-import {TestPlayers} from "tests/TestPlayers";
+import {expect} from 'chai';
+import {Birds} from '../../src/cards/base/Birds';
+import {CometAiming} from '../../src/cards/promo/CometAiming';
+import {Dirigibles} from '../../src/cards/venusNext/Dirigibles';
+import {Tradesman} from '../../src/milestones/Tradesman';
+import {Player} from '../../src/Player';
+import {TestPlayers} from '../TestPlayers';
 
 describe('Tradesman', () => {
   let milestone : Tradesman; let player : Player;
@@ -19,7 +19,7 @@ describe('Tradesman', () => {
     const birds = new Birds();
     const dirigibles = new Dirigibles();
     player.playedCards.push(cometAiming, birds, dirigibles);
-    
+
     player.addResourceTo(cometAiming);
     player.addResourceTo(birds);
     expect(milestone.canClaim(player)).is.false;

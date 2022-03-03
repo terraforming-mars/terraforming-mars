@@ -1,13 +1,13 @@
-import {PowerPlant} from "@/cards/base/PowerPlant";
-import {SolarPower} from "@/cards/base/SolarPower";
-import {SpaceMirrors} from "@/cards/base/SpaceMirrors";
-import {ResearchCoordination} from "@/cards/prelude/ResearchCoordination";
-import {FieldCappedCity} from "@/cards/promo/FieldCappedCity";
-import {Game} from "@/Game";
-import {Electrician} from "@/milestones/Electrician";
-import {Player} from "@/Player";
-import {expect} from "chai";
-import {TestPlayers} from "tests/TestPlayers";
+import {expect} from 'chai';
+import {PowerPlant} from '../../src/cards/base/PowerPlant';
+import {SolarPower} from '../../src/cards/base/SolarPower';
+import {SpaceMirrors} from '../../src/cards/base/SpaceMirrors';
+import {ResearchCoordination} from '../../src/cards/prelude/ResearchCoordination';
+import {FieldCappedCity} from '../../src/cards/promo/FieldCappedCity';
+import {Game} from '../../src/Game';
+import {Electrician} from '../../src/milestones/Electrician';
+import {Player} from '../../src/Player';
+import {TestPlayers} from '../TestPlayers';
 
 describe('Electrician', () => {
   let milestone : Electrician; let player : Player;

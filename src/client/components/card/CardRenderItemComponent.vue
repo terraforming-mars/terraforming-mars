@@ -191,7 +191,7 @@ export default Vue.extend({
       } else if (type === CardRenderItemType.ORBITAL) {
         classes.push('card-resource');
         classes.push('card-resource-orbital');
-      } else if (type === CardRenderItemType.MIND_SET_AGENDA) {
+      } else if (type === CardRenderItemType.AGENDA) {
         classes.push('card-resource');
         classes.push('card-resource-agenda');
       } else if (this.item.type === CardRenderItemType.MOON_COLONY) {

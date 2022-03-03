@@ -118,7 +118,7 @@ export default Vue.extend({
         return 'Deimos Down';
       case TileType.CITY:
         if (this.space.spaceType === SpaceType.COLONY) {
-          return 'City in space. No VP.';
+          return 'City in space.';
         } else {
           return 'City: 1 VP per adjacent greenery';
         }

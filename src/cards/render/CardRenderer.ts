@@ -322,8 +322,8 @@ abstract class Builder<T> {
     return this;
   }
 
-  public mindSetAgenda(options?: ItemOptions | undefined): Builder<T> {
-    this._appendToRow(new CardRenderItem(CardRenderItemType.MIND_SET_AGENDA, 1, options));
+  public agenda(options?: ItemOptions | undefined): Builder<T> {
+    this._appendToRow(new CardRenderItem(CardRenderItemType.AGENDA, 1, options));
     return this;
   }
 

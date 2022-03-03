@@ -1,10 +1,10 @@
 {
-  "Pharmacy Union": "Pharmacy Union",
-  "You start with 54 M€ . Draw a Science card.": "",
-  "Effect: When ANY microbe tag is played, add a disease here and lose 4 M€ or as much as possible. When you play a science tag, remove a disease here and gain 1 TR OR if there are no diseases here, you MAY put this card face down in your EVENTS PILE to gain 3 TR.": "",
+  "Pharmacy Union": "Sindicato Farmacéutico",
+  "You start with 54 M€ . Draw a Science card.": "Comienza con 54 M€. Roba una carta de Ciencia.",
+  "Effect: When ANY microbe tag is played, add a disease here and lose 4 M€ or as much as possible. When you play a science tag, remove a disease here and gain 1 TR OR if there are no diseases here, you MAY put this card face down in your EVENTS PILE to gain 3 TR.": "Efecto: Cuando se juega CUALQUIER carta tipo microbio, añade una enfermedad aquí y pierde 4 M€ o tanto como sea posible. Cuando juegas una carta tipo ciencia, elimina una enfermedad aquí y gana 1 nivel de VT O, si no hay enfermedades aquí, PUEDES poner esta carta boca abajo en tu PILA DE EVENTOS para ganar 3 niveles de VT.",
 
   "Comet Aiming":"Apuntado de Cometas",
-  "Action: Spend 1 titanium to add 1 asteroid resource to ANY CARD.":"Acción: asta 1 titanio para añadir un recurso de asteroide a CUALQUIER CARTA.",
+  "Action: Spend 1 titanium to add 1 asteroid resource to ANY CARD.":"Acción: gasta 1 titanio para añadir un recurso de asteroide a CUALQUIER CARTA.",
   "Action: Remove 1 asteroid here to place an ocean.":"Acción: elimina un recurso de asteroide de esta carta para colocar una loseta de océano.",
 
   "Cutting Edge Technology":"Tecnología Punta",
@@ -117,23 +117,23 @@
   "Action: Spend 1 asteroid here to increase M€ production 1 step OR gain 2 titanium.": "Acción: elimina un asteroide sobre esta carta para aumentar 1 nivele tu producción de M€ U obtener 2 de titanio.",
   "Add 2 asteroids to this card.": "Añade 2 asteroides a esta carta.",
 
-  "Stanford Torus":"Stanford Torus",
+  "Stanford Torus":"Toro de Stanford",
   "Place a city tile IN SPACE, outside and separate from the planet.":"Coloca una loseta de la ciudad EN EL ESPACIO, fuera y separada del planeta.",
 
-  "You start with 48 M€. Increase your M€ production 4 steps. ALL OPPONENTS DECREASE THEIR M€ production 2 STEPS. THIS DOES NOT TRIGGER THE EFFECT BELOW.": "",
-  "Effect: When a player causes another player to decrease production or lose resources, pay 3M€ to the victim, or as much as possible.": "",
+  "You start with 48 M€. Increase your M€ production 4 steps. ALL OPPONENTS DECREASE THEIR M€ production 2 STEPS. THIS DOES NOT TRIGGER THE EFFECT BELOW.": "Comienza con 48 M€. Incrementa tu producción de M€ en 4 niveles. TODOS LOS ADVERSARIOS DISMINUYEN SU PRODUCCIÓN DE M€ EN 2 NIVELES. ESTO NO ACTIVA EL SIGUIENTE EFECTO.",
+  "Effect: When a player causes another player to decrease production or lose resources, pay 3M€ to the victim, or as much as possible.": "Efecto: Cuando un jugador provoca que otro jugador disminuya la producción o pierda recursos, paga 3M€ a la víctima, o lo máximo posible.",
 
-  "You start with 47 M€. As your first action, place a greenery tile and raise the oxygen 1 step.": "",
-  "Effect: Each new adjacency between your tile and an opponent's tile gives you a standard resource of your choice [regardless of who just placed a tile].": "",
+  "You start with 47 M€. As your first action, place a greenery tile and raise the oxygen 1 step.": "Comienza con 47 M€. Como primera acción, coloca una loseta de vegetación y sube 1 nivel el oxígeno.",
+  "Effect: Each new adjacency between your tile and an opponent's tile gives you a standard resource of your choice [regardless of who just placed a tile].": "Efecto: cada nueva adyacencia entre tu loseta y la loseta de un oponente te otorga un recurso estándar a tu elección [independientemente de quién haya colocado una loseta].",
 
-  "Arcadian": "",
-  "Communities": "",
-  "You start with 40 M€ and 10 steel. AS YOUR FIRST ACTION, PLACE A COMMUNITY [PLAYER MARKER] ON A NON-RESERVED AREA.": "",
-  "ACTION: PLACE A COMMUNITY (PLAYER MARKER) ON A NON-RESERVED AREA ADJACENT TO ONE OF YOUR TILES OR MARKED AREAS": "",
-  "EFFECT: MARKED AREAS ARE RESERVED FOR YOU. WHEN YOU PLACE A TILE THERE, GAIN 3 M€": "",
+  "Arcadian": "Arcadia",
+  "Communities": "Comunidades",
+  "You start with 40 M€ and 10 steel. AS YOUR FIRST ACTION, PLACE A COMMUNITY [PLAYER MARKER] ON A NON-RESERVED AREA.": "Comienza con 40 M€ y 10 de acero. COMO PRIMERA ACCIÓN, COLOCA UNA COMUNIDAD [MARCADOR DE JUGADOR] EN UN ÁREA NO RESERVADA.",
+  "ACTION: PLACE A COMMUNITY (PLAYER MARKER) ON A NON-RESERVED AREA ADJACENT TO ONE OF YOUR TILES OR MARKED AREAS": "ACCIÓN: COLOCA UNA COMUNIDAD (MARCADOR DE JUGADOR) EN UN ÁREA NO RESERVADA ADYACENTE A UNA DE TUS LOSETAS O ÁREAS MARCADAS",
+  "EFFECT: MARKED AREAS ARE RESERVED FOR YOU. WHEN YOU PLACE A TILE THERE, GAIN 3 M€": "EFECTO: LAS ÁREAS MARCADAS ESTÁN RESERVADAS PARA TI. CUANDO COLOQUES UNA LOSETA EN ELLAS, GANA 3 M€",
 
-  "You start with 44 M€. As your first action, reveal cards until you have revealed a microbe tag. Take it and discard the rest.": "",
-  "Effect: when a microbe tag is played, incl. this, THAT PLAYER gains 2 M€, or adds a microbe to THAT card, and you gain 2 M€.": "",
+  "You start with 44 M€. As your first action, reveal cards until you have revealed a microbe tag. Take it and discard the rest.": "Comienza con 44 M€. Como primera acción, revela cartas hasta que hayas revelado una carta de tipo microbio. Róbala y descarta el resto.",
+  "Effect: when a microbe tag is played, incl. this, THAT PLAYER gains 2 M€, or adds a microbe to THAT card, and you gain 2 M€.": "Efecto: cuando se juega una carta de tipo microbio, incluida esta, ESE JUGADOR gana 2 M€, o le añade un microbio a ESA carta, y tú ganas 2 M€.",
 
   "Raise temperature 3 steps and gain 4 steel. Place this tile ADJACENT TO no other city tile. Remove up to 6 Plants from any player.":"Aumenta la temperatura 3 niveles y obtén 4 de acero. Coloca esta loseta NO ADYACENTE a una ciudad. Elimina hasta 6 plantas de un jugador. ",
 
@@ -143,15 +143,15 @@
 
   "Requires 4 ocean tiles. Increase your Energy production 2 steps. Place this tile ADJACENT TO an ocean tile.":"Requiere 4 losetas de océano. Aumenta tu producción de energía 2 niveles. Coloca esta loseta ADYACENTE a una loseta de oceáno.",
 
-  "Decrease your Energy production 4 steps and increase your Plant production 2 steps. Raise your TR 3 steps.": "",
+  "Decrease your Energy production 4 steps and increase your Plant production 2 steps. Raise your TR 3 steps.": "Reduce tu producción de Energía en 4 niveles e incrementa tu producción de plantas en 2 niveles. Incrementa tu VT en 3 niveles.",
 
-  "You start with 37 M€. Increase your steel production 1 step.": "",
-  "Action: Increase your energy production 1 step IF YOU HAVE NO ENERGY RESOURCES, or spend 3M€ to draw a building card.": "",
+  "You start with 37 M€. Increase your steel production 1 step.": "Comienza con 37 M€. Incrementa tu producción de acero en 1 nivel.",
+  "Action: Increase your energy production 1 step IF YOU HAVE NO ENERGY RESOURCES, or spend 3M€ to draw a building card.": "Acción: Aumenta tu producción de energía en 1 nivel SI NO TIENES RECURSOS ENERGÉTICOS, o gasta 3M€ para robar una carta de edificio.",
 
-  "You start with 38 M€ and 1 steel production.": "",
-  "Effect: When you play a building tag, including this, gain 1 microbe to this card, or remove 2 microbes here and raise your plant production 1 step.": "",
+  "You start with 38 M€ and 1 steel production.": "Comienza con 38 M€ y 1 nivel de producción de acero.",
+  "Effect: When you play a building tag, including this, gain 1 microbe to this card, or remove 2 microbes here and raise your plant production 1 step.": "Efecto: cuando juegues una carta de tipo edificio, incluida esta, obtienes 1 microbio para esta carta, o eliminas 2 microbios aquí y aumentas tu producción de plantas en 1 nivel.",
 
   "Requires 8 oceans. 1 VP for each animal on this card.":"Requiere 8 océanos. 1 PV por cada animal en esta carta.",
   "Requires 2 Science tags.":"Requiere 2 símbolos de ciencia",
-  "Action: Spend 2X M€ to gain X energy, or decrease energy production 1 step to gain 8 M€.":""
+  "Action: Spend 2X M€ to gain X energy, or decrease energy production 1 step to gain 8 M€.":"Acción: Gasta 2X M€ para ganar X energía, o reduce la producción de energía en 1 nivel para ganar 8 M€."
 }

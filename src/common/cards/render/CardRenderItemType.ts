@@ -65,7 +65,7 @@ export enum CardRenderItemType {
   MARS = 'mars',
   VENUSIAN_HABITAT = 'venusian-habitat',
   SPECIALIZED_ROBOT = 'specialized-robot',
-  MIND_SET_AGENDA = 'mind-set-agenda',
+  AGENDA = 'mind-set-agenda',
   PLANETARY_TRACK = 'plantary-track',
   SEED = 'seed',
   ORBITAL = 'orbital',

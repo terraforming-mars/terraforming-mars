@@ -47,7 +47,7 @@ import {TileType} from '@/common/TileType';
 import {playerColorClass} from '@/common/utils/utils';
 import {Color} from '@/common/Color';
 import {SoundManager} from '@/client/utils/SoundManager';
-import {PreferencesManager} from '@/client/utils/PreferencesManager';
+import {getPreferences} from '@/client/utils/PreferencesManager';
 import {GlobalEventName} from '@/common/turmoil/globalEvents/GlobalEventName';
 import GlobalEvent from '@/client/components/GlobalEvent.vue';
 import {getGlobalEventByName} from '@/turmoil/globalEvents/GlobalEventDealer';
@@ -281,7 +281,7 @@ export default Vue.extend({
         if (xhr.status === 200) {
           messages.splice(0, messages.length);
           messages.push(...xhr.response);
-          if (PreferencesManager.loadBoolean('enable_sounds') && window.location.search.includes('experimental=1') ) {
+          if (getPreferences().enable_sounds && window.location.search.includes('experimental=1') ) {
             SoundManager.newLog();
           }
           if (generation === this.generation) {

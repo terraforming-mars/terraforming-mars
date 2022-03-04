@@ -4,7 +4,7 @@ import {HowToPay} from '@/inputs/HowToPay';
 import {PaymentWidgetMixin, SelectHowToPayModel, Unit} from '@/client/mixins/PaymentWidgetMixin';
 import {PlayerInputModel} from '@/common/models/PlayerInputModel';
 import {PlayerViewModel, PublicPlayerModel} from '@/common/models/PlayerModel';
-import {PreferencesManager} from '@/client/utils/PreferencesManager';
+import {getPreferences} from '@/client/utils/PreferencesManager';
 import Button from '@/client/components/common/Button.vue';
 
 export default Vue.extend({
@@ -169,7 +169,7 @@ export default Vue.extend({
           }
         }
       }
-      const showAlert = PreferencesManager.load('show_alerts') === '1';
+      const showAlert = getPreferences().show_alerts;
 
       if (requiredAmt > 0 && totalSpent > requiredAmt && showAlert) {
         const diff = totalSpent - requiredAmt;

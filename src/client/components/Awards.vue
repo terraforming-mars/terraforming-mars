@@ -60,7 +60,7 @@ import Vue from 'vue';
 import Award from '@/client/components/Award.vue';
 import {AWARD_COSTS} from '@/common/constants';
 import {FundedAwardModel} from '@/common/models/FundedAwardModel';
-import {PreferencesManager} from '@/client/utils/PreferencesManager';
+import {getPreferences} from '@/client/utils/PreferencesManager';
 
 export default Vue.extend({
   name: 'Awards',
@@ -79,7 +79,6 @@ export default Vue.extend({
     return {
       showAwards: true,
       showDescription: false,
-      PreferencesManager,
     };
   },
   methods: {
@@ -100,7 +99,7 @@ export default Vue.extend({
       return AWARD_COSTS.slice(this.fundedAwards.length);
     },
     isLearnerModeOn(): boolean {
-      return this.PreferencesManager.loadBoolean('learner_mode');
+      return getPreferences().learner_mode;
     },
   },
 });

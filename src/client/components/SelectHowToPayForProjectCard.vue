@@ -10,7 +10,7 @@ import {CardOrderStorage} from '@/client/utils/CardOrderStorage';
 import {PaymentWidgetMixin, SelectHowToPayForProjectCardModel, unit} from '@/client/mixins/PaymentWidgetMixin';
 import {PlayerInputModel} from '@/common/models/PlayerInputModel';
 import {PlayerViewModel, PublicPlayerModel} from '@/common/models/PlayerModel';
-import {PreferencesManager} from '@/client/utils/PreferencesManager';
+import {getPreferences} from '@/client/utils/PreferencesManager';
 import {Tags} from '@/common/cards/Tags';
 import {Units} from '@/common/Units';
 import {CardName} from '@/common/cards/CardName';
@@ -313,7 +313,7 @@ export default Vue.extend({
         }
       }
 
-      const showAlert = PreferencesManager.load('show_alerts') === '1';
+      const showAlert = getPreferences().show_alerts;
 
       if (totalSpent > this.cost && showAlert) {
         const diff = totalSpent - this.cost;

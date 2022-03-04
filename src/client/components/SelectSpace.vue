@@ -16,7 +16,7 @@
 import Vue from 'vue';
 import ConfirmDialog from '@/client/components/common/ConfirmDialog.vue';
 import {PlayerInputModel} from '@/common/models/PlayerInputModel';
-import {PreferencesManager} from '@/client/utils/PreferencesManager';
+import {getPreferences, PreferencesManager} from '@/client/utils/PreferencesManager';
 
 export default Vue.extend({
   name: 'SelectSpace',
@@ -109,14 +109,14 @@ export default Vue.extend({
       return spaces;
     },
     hideDialog(hide: boolean) {
-      PreferencesManager.save('hide_tile_confirmation', hide);
+      PreferencesManager.INSTANCE.set('hide_tile_confirmation', hide);
     },
     onTileSelected(tile: HTMLElement) {
       this.selectedTile = tile;
       this.disableAvailableSpaceAnimation();
       this.animateSpace(tile, true);
       tile.classList.remove('board-space--available');
-      const hideTileConfirmation = PreferencesManager.loadBoolean('hide_tile_confirmation');
+      const hideTileConfirmation = getPreferences().hide_tile_confirmation;
       if (hideTileConfirmation) {
         this.confirmPlacement();
       } else {

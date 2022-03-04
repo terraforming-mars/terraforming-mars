@@ -21,6 +21,8 @@ describe('Irrigator', () => {
     game.addCityTile(player, '09');
     game.addGreenery(player, '20');
     game.addCityTile(player, '11');
+    expect(milestone.canClaim(player)).is.false;
+
     game.addGreenery(player, '24');
     expect(milestone.canClaim(player)).is.true;
   });

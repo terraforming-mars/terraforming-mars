@@ -21,6 +21,10 @@ describe('Electrician', () => {
   });
 
   it('Can claim with 4 Power tags', () => {
+    // Only 3 power tags
+    expect(milestone.canClaim(player)).is.false;
+
+    // The fourth power tag
     player.playedCards.push(new FieldCappedCity());
     expect(milestone.canClaim(player)).is.true;
   });

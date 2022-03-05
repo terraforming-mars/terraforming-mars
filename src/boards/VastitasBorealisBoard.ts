@@ -7,13 +7,8 @@ import {BoardBuilder} from './BoardBuilder';
 import {SerializedBoard} from './SerializedBoard';
 import {Random} from '../Random';
 import {GameOptions} from '../Game';
-import {DeferredAction} from '../deferredActions/DeferredAction';
-import {SelectHowToPayDeferred} from '../deferredActions/SelectHowToPayDeferred';
-import {Game} from '../Game';
 import {SpaceType} from '../common/boards/SpaceType';
-import {Color} from '../common/Color';
-import {MAX_TEMPERATURE, VASTITAS_BOREALIS_BONUS_TEMPERATURE_COST} from '../common/constants';
-import {BoardName} from '../common/boards/BoardName';
+import {VASTITAS_BOREALIS_BONUS_TEMPERATURE_COST} from '../common/constants';
 
 export class VastitasBorealisBoard extends Board {
   public static newInstance(gameOptions: GameOptions, rng: Random): VastitasBorealisBoard {
@@ -58,7 +53,7 @@ export class VastitasBorealisBoard extends Board {
   }
 
   private filterVastitasBorealis(player: Player, spaces: Array<ISpace>) {
-    return player.canAfford(VASTITAS_BOREALIS_BONUS_TEMPERATURE_COST) ? spaces : spaces.filter((space) => space.id !== SpaceName.VASTITAS_BOREALIS_NORTH_POLE);
+    return player.canAfford(VASTITAS_BOREALIS_BONUS_TEMPERATURE_COST, {tr: {temperature: 1}}) ? spaces : spaces.filter((space) => space.id !== SpaceName.VASTITAS_BOREALIS_NORTH_POLE);
   }
 
   public override getSpaces(spaceType: SpaceType, player: Player): Array<ISpace> {
@@ -88,14 +83,5 @@ export class VastitasBorealisBoard extends Board {
 
   public getNoctisCitySpaceIds(): Array<string> {
     return [];
-  }
-
-  public static handleBonusTemperatureFromTilePlacement(game: Game, player: Player, space: ISpace) {
-    if (space.id === SpaceName.VASTITAS_BOREALIS_NORTH_POLE && game.getTemperature() < MAX_TEMPERATURE && game.gameOptions.boardName === BoardName.VASTITAS_BOREALIS) {
-      if (player.color !== Color.NEUTRAL) {
-        game.defer(new DeferredAction(player, () => game.increaseTemperature(player, 1)));
-        game.defer(new SelectHowToPayDeferred(player, VASTITAS_BOREALIS_BONUS_TEMPERATURE_COST, {title: 'Select how to pay for placement bonus temperature'}));
-      }
-    }
   }
 }

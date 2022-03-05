@@ -23,6 +23,11 @@ import {Botanist} from './Botanist';
 import {Coordinator} from './Coordinator';
 import {Zoologist} from './Zoologist';
 import {Manufacturer} from './Manufacturer';
+import {Adapter} from './Adapter';
+import {Edgedancer} from './Edgedancer';
+import {Hoarder} from './Hoarder';
+import {Naturalist} from './Naturalist';
+import {Voyager} from './Voyager';
 
 export const ORIGINAL_AWARDS: Array<IAward> = [
   new Landlord(),
@@ -69,6 +74,14 @@ export const ARABIA_TERRA_AWARDS = [
   new Manufacturer(),
 ];
 
+export const VASTITAS_BOREALIS_AWARDS: Array<IAward> = [
+  new Adapter(),
+  new Edgedancer(),
+  new Hoarder(),
+  new Naturalist(),
+  new Voyager(),
+];
+
 export const ALL_AWARDS: Array<IAward> = [
   ...ORIGINAL_AWARDS,
   ...ELYSIUM_AWARDS,
@@ -76,7 +89,9 @@ export const ALL_AWARDS: Array<IAward> = [
   ...VENUS_AWARDS,
   ...ARES_AWARDS,
   ...MOON_AWARDS,
-  ...ARABIA_TERRA_AWARDS];
+  ...ARABIA_TERRA_AWARDS,
+  ...VASTITAS_BOREALIS_AWARDS,
+];
 
 export namespace Awards {
   export const ALL = ALL_AWARDS;

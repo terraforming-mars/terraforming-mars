@@ -24,7 +24,7 @@ import {SendDelegateToArea} from '../deferredActions/SendDelegateToArea';
 import {Game} from '../Game';
 import {Turmoil} from '../turmoil/Turmoil';
 import {ShouldIncreaseTrack} from '../common/colonies/ShouldIncreaseTrack';
-import {SerializedColony} from '@/SerializedColony';
+import {SerializedColony} from '../SerializedColony';
 
 type TradeOptions = {
   usesTradeFleet?: boolean;

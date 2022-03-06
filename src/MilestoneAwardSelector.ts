@@ -1,4 +1,4 @@
-import {ARABIA_TERRA_AWARDS, ARES_AWARDS, Awards, ELYSIUM_AWARDS, HELLAS_AWARDS, MOON_AWARDS, ORIGINAL_AWARDS, VENUS_AWARDS} from './awards/Awards';
+import {ARABIA_TERRA_AWARDS, ARES_AWARDS, Awards, ELYSIUM_AWARDS, HELLAS_AWARDS, MOON_AWARDS, ORIGINAL_AWARDS, VASTITAS_BOREALIS_AWARDS, VENUS_AWARDS} from './awards/Awards';
 import {Banker} from './awards/Banker';
 import {Benefactor} from './awards/Benefactor';
 import {Celebrity} from './awards/Celebrity';
@@ -29,7 +29,7 @@ import {Generalist} from './milestones/Generalist';
 import {Hoverlord} from './milestones/Hoverlord';
 import {IMilestone} from './milestones/IMilestone';
 import {Mayor} from './milestones/Mayor';
-import {ARABIA_TERRA_MILESTONES, ARES_MILESTONES, ELYSIUM_MILESTONES, HELLAS_MILESTONES, Milestones, MOON_MILESTONES, ORIGINAL_MILESTONES, VENUS_MILESTONES} from './milestones/Milestones';
+import {ARABIA_TERRA_MILESTONES, ARES_MILESTONES, ELYSIUM_MILESTONES, HELLAS_MILESTONES, Milestones, MOON_MILESTONES, ORIGINAL_MILESTONES, VASTITAS_BOREALIS_MILESTONES, VENUS_MILESTONES} from './milestones/Milestones';
 import {Networker} from './milestones/Networker';
 import {Planner} from './milestones/Planner';
 import {PolarExplorer} from './milestones/PolarExplorer';
@@ -43,6 +43,13 @@ import {Lunarchitect} from './moon/Lunarchitect';
 import {LunarMagnate} from './moon/LunarMagnate';
 import {OneGiantStep} from './moon/OneGiantStep';
 import {RandomMAOptionType} from './common/ma/RandomMAOptionType';
+import {Adapter} from './awards/Adapter';
+import {Edgedancer} from './awards/Edgedancer';
+import {Naturalist} from './awards/Naturalist';
+import {Irrigator} from './milestones/Irrigator';
+import {Smith} from './milestones/Smith';
+import {Tradesman} from './milestones/Tradesman';
+import {Voyager} from './awards/Voyager';
 
 export namespace MilestoneAwardSelector {
   // This map uses keys of the format "X|Y" where X and Y are MA names. Entries are stored as "X|Y"
@@ -176,6 +183,54 @@ export namespace MilestoneAwardSelector {
       bind(Terraformer, DesertSettler, 1);
       bind(Terraformer, EstateDealer, 1);
       bind(Gardener, Ecologist, 1);
+
+      // Vastitas Borealis
+      bind(Smith, Generalist, 2);
+      bind(Smith, Specialist, 5);
+      bind(Smith, RimSettler, 3);
+      bind(Smith, Miner, 8);
+      bind(Smith, Industrialist, 5);
+
+      bind(Tradesman, Ecologist, 6);
+      bind(Tradesman, Diversifier, 3);
+      bind(Tradesman, Hoverlord, 6);
+      bind(Tradesman, Excentric, 8);
+      bind(Tradesman, Venuphile, 4);
+
+      bind(Irrigator, Mayor, 3);
+      bind(Irrigator, Gardener, 3);
+      bind(Irrigator, PolarExplorer, 3);
+      bind(Irrigator, Landlord, 4);
+      bind(Irrigator, DesertSettler, 5);
+      bind(Irrigator, EstateDealer, 9);
+      bind(Irrigator, Cultivator, 4);
+
+      bind(Adapter, Ecologist, 2);
+      bind(Adapter, Tactician, 3);
+      bind(Adapter, Scientist, 5);
+
+      bind(Edgedancer, Mayor, 2);
+      bind(Edgedancer, Gardener, 4);
+      bind(Edgedancer, PolarExplorer, 5);
+      bind(Edgedancer, DesertSettler, 5);
+      bind(Edgedancer, EstateDealer, 1);
+      bind(Edgedancer, Cultivator, 4);
+      bind(Edgedancer, Irrigator, 1);
+
+      bind(Naturalist, Terraformer, 3);
+      bind(Naturalist, Gardener, 2);
+      bind(Naturalist, Generalist, 2);
+      bind(Naturalist, Specialist, 1);
+      bind(Naturalist, Landlord, 4);
+      bind(Naturalist, Thermalist, 6);
+      bind(Naturalist, DesertSettler, 1);
+      bind(Naturalist, EstateDealer, 1);
+      bind(Naturalist, Benefactor, 5);
+      bind(Naturalist, Cultivator, 3);
+      bind(Naturalist, Edgedancer, 1);
+
+      bind(Voyager, RimSettler, 9);
+
       return synergies;
     }
   }
@@ -256,6 +311,10 @@ export namespace MilestoneAwardSelector {
         drawnMilestonesAndAwards.milestones.push(...ARABIA_TERRA_MILESTONES);
         drawnMilestonesAndAwards.awards.push(...ARABIA_TERRA_AWARDS);
         break;
+      case BoardName.VASTITAS_BOREALIS:
+        drawnMilestonesAndAwards.milestones.push(...VASTITAS_BOREALIS_MILESTONES);
+        drawnMilestonesAndAwards.awards.push(...VASTITAS_BOREALIS_AWARDS);
+        break;
       }
       if (includeVenus) {
         drawnMilestonesAndAwards.milestones.push(...VENUS_MILESTONES);
@@ -321,6 +380,16 @@ export namespace MilestoneAwardSelector {
     if (gameOptions.moonExpansion) {
       candidateMilestones.push(...MOON_MILESTONES.map(toName));
       candidateAwards.push(...MOON_AWARDS.map(toName));
+    }
+
+    if (gameOptions.boardName === BoardName.ARABIA_TERRA) {
+      candidateMilestones.push(...ARABIA_TERRA_MILESTONES.map(toName));
+      candidateAwards.push(...ARABIA_TERRA_AWARDS.map(toName));
+    }
+
+    if (gameOptions.boardName === BoardName.VASTITAS_BOREALIS) {
+      candidateMilestones.push(...VASTITAS_BOREALIS_MILESTONES.map(toName));
+      candidateAwards.push(...VASTITAS_BOREALIS_AWARDS.map(toName));
     }
 
     // TODO(kberg): Find a way to add the Arabia Terra milestones and awards in.

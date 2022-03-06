@@ -6,6 +6,7 @@ import {AddResourcesToCard} from '../../src/deferredActions/AddResourcesToCard';
 import {Game} from '../../src/Game';
 import {Player} from '../../src/Player';
 import {TestPlayers} from '../TestPlayers';
+import {TestingUtils} from '../TestingUtils';
 
 describe('Titan', function() {
   let titan: Titan; let aerialMappers: AerialMappers; let player: Player; let player2: Player; let game: Game;
@@ -66,7 +67,7 @@ describe('Titan', function() {
     game.deferredActions.pop()!.execute(); // Gain placement floaters
 
     titan.trade(player2);
-    game.deferredActions.runAll(() => {}); // Gain Trade & Bonus
+    TestingUtils.runAllActions(game); // Gain Trade & Bonus
 
     expect(aerialMappers.resourceCount).to.eq(4);
     expect(dirigibles.resourceCount).to.eq(1);

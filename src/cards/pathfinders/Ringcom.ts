@@ -1,5 +1,5 @@
 import {Card} from '../Card';
-import {CorporationCard} from '../corporation/CorporationCard';
+import {ICorporationCard} from '../corporation/ICorporationCard';
 import {Tags} from '../../common/cards/Tags';
 import {Player} from '../../Player';
 import {Resources} from '../../common/Resources';
@@ -10,7 +10,7 @@ import {all, played} from '../Options';
 import {IProjectCard} from '../IProjectCard';
 import {ICard} from '../ICard';
 
-export class Ringcom extends Card implements CorporationCard {
+export class Ringcom extends Card implements ICorporationCard {
   constructor() {
     super({
       cardType: CardType.CORPORATION,
@@ -48,13 +48,13 @@ export class Ringcom extends Card implements CorporationCard {
     return undefined;
   }
 
-  public onCorpCardPlayed(player: Player, card: CorporationCard) {
+  public onCorpCardPlayed(player: Player, card: ICorporationCard) {
     return this.onCardPlayed(player, card as ICard as IProjectCard);
   }
 
   public onCardPlayed(player: Player, card: IProjectCard): void {
     if (card.tags.includes(Tags.JOVIAN)) {
-      player.game.getPlayersInGenerationOrder().forEach((p) => {
+      player.game.getPlayers().forEach((p) => {
         if (p.corporationCard?.name === this.name) {
           p.addResource(Resources.TITANIUM, 1, {log: true});
         }

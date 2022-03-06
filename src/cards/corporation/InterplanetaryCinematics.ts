@@ -1,5 +1,5 @@
 import {Card} from '../Card';
-import {CorporationCard} from './CorporationCard';
+import {ICorporationCard} from './ICorporationCard';
 import {Tags} from '../../common/cards/Tags';
 import {IProjectCard} from '../IProjectCard';
 import {Player} from '../../Player';
@@ -8,7 +8,7 @@ import {CardName} from '../../common/cards/CardName';
 import {CardRenderer} from '../render/CardRenderer';
 import {digit, played} from '../Options';
 
-export class InterplanetaryCinematics extends Card implements CorporationCard {
+export class InterplanetaryCinematics extends Card implements ICorporationCard {
   constructor() {
     super({
       cardType: CardType.CORPORATION,

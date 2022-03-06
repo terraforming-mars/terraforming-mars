@@ -18,7 +18,7 @@ export class LunaArchives extends Card implements IResourceCard, IActionCard {
       resourceType: ResourceType.SCIENCE,
 
       metadata: {
-        cardNumber: 'M70',
+        cardNumber: 'M69',
         renderData: CardRenderer.builder((b) => {
           b.action('Add 1 science resource here for each Moon tag you have.',
             (ab) => ab.empty().startAction.science().slash().moon());

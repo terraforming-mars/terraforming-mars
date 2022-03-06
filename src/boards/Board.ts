@@ -6,6 +6,7 @@ import {BASE_OCEAN_TILES as UNCOVERED_OCEAN_TILES, CITY_TILES, GREENERY_TILES, O
 import {AresHandler} from '../ares/AresHandler';
 import {SerializedBoard, SerializedSpace} from './SerializedBoard';
 import {SpaceName} from '../SpaceName';
+import {CardName} from '../common/cards/CardName';
 
 /**
  * A representation of any hex board. This is normally Mars (Tharsis, Hellas, Elysium) but can also be The Moon.
@@ -102,7 +103,7 @@ export abstract class Board {
     return [...spaces];
   }
 
-  public getSpaceByTileCard(cardName: string): ISpace | undefined {
+  public getSpaceByTileCard(cardName: CardName): ISpace | undefined {
     return this.spaces.find(
       (space) => space.tile !== undefined && space.tile.card === cardName,
     );

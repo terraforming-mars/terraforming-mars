@@ -10,12 +10,12 @@
 <script lang="ts">
 
 import Vue from 'vue';
-import {ICardMetadata} from '@/cards/ICardMetadata';
+import {ICardMetadata} from '@/common/cards/ICardMetadata';
+import {ICardRequirements} from '@/common/cards/ICardRequirements';
 import CardRequirementsComponent from './CardRequirementsComponent.vue';
 import CardVictoryPoints from './CardVictoryPoints.vue';
 import CardDescription from './CardDescription.vue';
 import CardRenderData from './CardRenderData.vue';
-import {CardRequirements} from '@/cards/CardRequirements';
 
 export default Vue.extend({
   name: 'CardContent',
@@ -25,7 +25,7 @@ export default Vue.extend({
       required: true,
     },
     requirements: {
-      type: Object as () => CardRequirements,
+      type: Object as () => ICardRequirements,
     },
     isCorporation: {
       type: Boolean,

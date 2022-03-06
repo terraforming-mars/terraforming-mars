@@ -58,8 +58,6 @@
     "${0}'s ${1} production ${2} by ${3}": "${0}的${1}产量${2}${3}",
     "${0}'s ${1} amount ${2} by ${3} by ${4}": "${0}的${1}数量被${4}${2}${3}",
     "${0}'s ${1} production ${2} by ${3} by ${4}": "${0}的${1}产量被${4}${2}${3}",
-    "${0}'s ${1} amount ${2} by ${3} by Global Event": "${0}的${1}数量被全球事件${2}${3}",
-    "${0}'s ${1} production ${2} by ${3} by Global Event": "${0}的${1}产量被全球事件${2}${3}",
     "${0} spent 1 ${1} to gain 7 M€":"${0} 花费 1 ${1} 以获得7 M€",
 
     "${0} removed ${1} resource(s) from ${2}'s ${3}": "${0} 从 ${2}的 ${3} 移除了 ${1} 资源",
@@ -73,7 +71,7 @@
 
     "gain 1 TR":"获得1改造度",
     "draw a card" :"抽一张牌",
-    
+
     "A neutral delegate is the new chairman." :"中立的代表是新任主席。",
     "Greens are in power in the first generation.":"绿党在第一代掌权。",
     "The ruling bonus is: ${0}":"统治者设定奖励为 ${0}",

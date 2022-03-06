@@ -745,7 +745,7 @@ describe('Player', function() {
 
     const log = game.gameLog;
     const logEntry = log[log.length - 1];
-    expect(TestingUtils.formatLogMessage(logEntry)).eq('blue\'s megacredits amount increased by 12 by Global Event');
+    expect(TestingUtils.formatLogMessage(logEntry)).eq('blue\'s megacredits amount increased by 12 by Asteroid Mining');
   });
 
   it('addResource logs error when deducting too much', () => {

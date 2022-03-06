@@ -1,4 +1,4 @@
-import {CorporationCard} from '../corporation/CorporationCard';
+import {ICorporationCard} from '../corporation/ICorporationCard';
 import {Player} from '../../Player';
 import {Tags} from '../../common/cards/Tags';
 import {Game} from '../../Game';
@@ -11,7 +11,7 @@ import {SelectColony} from '../../inputs/SelectColony';
 import {Card} from '../Card';
 import {CardRenderer} from '../render/CardRenderer';
 
-export class Aridor extends Card implements CorporationCard {
+export class Aridor extends Card implements ICorporationCard {
   constructor() {
     super({
       name: CardName.ARIDOR,
@@ -58,13 +58,13 @@ export class Aridor extends Card implements CorporationCard {
 
   private checkActivation(colony: Colony, game: Game): void {
     if (colony.resourceType === undefined) return;
-    game.getPlayersInGenerationOrder().forEach((player) => {
+    game.getPlayers().forEach((player) => {
       if (player.corporationCard !== undefined && player.corporationCard.resourceType === colony.resourceType) {
         colony.isActive = true;
         return;
       }
-      const resourceCard = player.playedCards.find((card) => card.resourceType === colony.resourceType);
-      if (resourceCard !== undefined) {
+      const resourceCard = player.playedCards.some((card) => card.resourceType === colony.resourceType);
+      if (resourceCard) {
         colony.isActive = true;
         return;
       }

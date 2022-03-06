@@ -1,4 +1,4 @@
-import {CorporationCard} from '../corporation/CorporationCard';
+import {ICorporationCard} from '../corporation/ICorporationCard';
 import {Player} from '../../Player';
 import {Resources} from '../../common/Resources';
 import {Card} from '../Card';
@@ -8,7 +8,7 @@ import {CardRenderer} from '../render/CardRenderer';
 import {Size} from '../../common/cards/render/Size';
 import {all} from '../Options';
 
-export class MonsInsurance extends Card implements CorporationCard {
+export class MonsInsurance extends Card implements ICorporationCard {
   constructor() {
     super({
       cardType: CardType.CORPORATION,
@@ -36,7 +36,7 @@ export class MonsInsurance extends Card implements CorporationCard {
 
   public play(player: Player) {
     player.addProduction(Resources.MEGACREDITS, 6);
-    for (const p of player.game.getPlayersInGenerationOrder()) {
+    for (const p of player.game.getPlayers()) {
       p.addProduction(Resources.MEGACREDITS, -2, {log: true});
     }
     player.game.monsInsuranceOwner = player.id;

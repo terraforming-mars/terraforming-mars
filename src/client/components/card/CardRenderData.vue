@@ -7,14 +7,14 @@
 <script lang="ts">
 
 import Vue from 'vue';
-import {CardRenderer} from '@/cards/render/CardRenderer';
+import {ICardRenderRoot} from '@/common/cards/render/Types';
 import CardRowData from '@/client/components/card/CardRowData.vue';
 
 export default Vue.extend({
   name: 'CardRenderData',
   props: {
     renderData: {
-      type: Object as () => CardRenderer,
+      type: Object as () => ICardRenderRoot,
       required: true,
     },
   },

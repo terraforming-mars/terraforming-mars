@@ -559,6 +559,7 @@ export default Vue.extend({
         BoardName.ELYSIUM,
         RandomBoardOption.OFFICIAL,
         BoardName.ARABIA_TERRA,
+        BoardName.VASTITAS_BOREALIS,
         RandomBoardOption.ALL,
       ],
       seed: Math.random(),
@@ -767,6 +768,8 @@ export default Vue.extend({
         return 'create-game-board-hexagon create-game-elysium';
       } else if (boardName === BoardName.ARABIA_TERRA) {
         return 'create-game-board-hexagon create-game-arabia-terra';
+      } else if (boardName === BoardName.VASTITAS_BOREALIS) {
+        return 'create-game-board-hexagon create-game-vastitas-borealis';
       } else {
         return 'create-game-board-hexagon create-game-random';
       }

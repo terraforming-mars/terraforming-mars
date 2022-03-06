@@ -1,7 +1,7 @@
 import {Tags} from '../../common/cards/Tags';
 import {Player} from '../../Player';
 import {Card} from '../Card';
-import {CorporationCard} from '../corporation/CorporationCard';
+import {ICorporationCard} from '../corporation/ICorporationCard';
 import {IActionCard, ICard} from '../ICard';
 import {CardName} from '../../common/cards/CardName';
 import {ResourceType} from '../../common/ResourceType';
@@ -15,7 +15,7 @@ import {CardRenderer} from '../render/CardRenderer';
 import {Size} from '../../common/cards/render/Size';
 import {digit} from '../Options';
 
-export class Astrodrill extends Card implements IActionCard, CorporationCard {
+export class Astrodrill extends Card implements IActionCard, ICorporationCard {
   constructor() {
     super({
       cardType: CardType.CORPORATION,

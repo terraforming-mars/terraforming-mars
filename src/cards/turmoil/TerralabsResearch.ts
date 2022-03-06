@@ -1,4 +1,4 @@
-import {CorporationCard} from '../corporation/CorporationCard';
+import {ICorporationCard} from '../corporation/ICorporationCard';
 import {Player} from '../../Player';
 import {Tags} from '../../common/cards/Tags';
 import {Card} from '../Card';
@@ -6,7 +6,7 @@ import {CardName} from '../../common/cards/CardName';
 import {CardType} from '../../common/cards/CardType';
 import {CardRenderer} from '../render/CardRenderer';
 
-export class TerralabsResearch extends Card implements CorporationCard {
+export class TerralabsResearch extends Card implements ICorporationCard {
   constructor() {
     super({
       name: CardName.TERRALABS_RESEARCH,

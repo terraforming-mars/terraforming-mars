@@ -54,7 +54,7 @@ export class PathfindersExpansion {
 
     // Communication Center hook
     if (card.cardType === CardType.EVENT) {
-      for (const p of player.game.getPlayersInGenerationOrder()) {
+      for (const p of player.game.getPlayers()) {
         for (const c of p.playedCards) {
           if (c.name === CardName.COMMUNICATION_CENTER) {
             p.addResourceTo(c, {qty: 1, log: true});
@@ -128,14 +128,14 @@ export class PathfindersExpansion {
           });
         }
         rewards.everyone.forEach((reward) => {
-          game.getPlayersInGenerationOrder().forEach((p) => {
+          game.getPlayers().forEach((p) => {
             PathfindersExpansion.grant(reward, p, tag);
           });
         });
         if (rewards.mostTags.length > 0) {
           const players = PathfindersExpansion.playersWithMostTags(
             tag,
-            game.getPlayersInGenerationOrder(),
+            game.getPlayers().slice(),
             (from instanceof Player) ? from : undefined);
           rewards.mostTags.forEach((reward) => {
             players.forEach((p) => {

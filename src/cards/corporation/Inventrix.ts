@@ -1,12 +1,12 @@
 import {Card} from '../Card';
-import {CorporationCard} from './CorporationCard';
+import {ICorporationCard} from './ICorporationCard';
 import {Tags} from '../../common/cards/Tags';
 import {Player} from '../../Player';
 import {CardName} from '../../common/cards/CardName';
 import {CardType} from '../../common/cards/CardType';
 import {CardRenderer} from '../render/CardRenderer';
 
-export class Inventrix extends Card implements CorporationCard {
+export class Inventrix extends Card implements ICorporationCard {
   constructor() {
     super({
       cardType: CardType.CORPORATION,

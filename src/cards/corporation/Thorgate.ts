@@ -2,14 +2,14 @@ import {Card} from '../Card';
 import {Tags} from '../../common/cards/Tags';
 import {Player} from '../../Player';
 import {IProjectCard} from '../IProjectCard';
-import {CorporationCard} from './CorporationCard';
+import {ICorporationCard} from './ICorporationCard';
 import {Resources} from '../../common/Resources';
 import {CardName} from '../../common/cards/CardName';
 import {CardType} from '../../common/cards/CardType';
 import {CardRenderer} from '../render/CardRenderer';
 import {played} from '../Options';
 
-export class Thorgate extends Card implements CorporationCard {
+export class Thorgate extends Card implements ICorporationCard {
   constructor() {
     super({
       cardType: CardType.CORPORATION,

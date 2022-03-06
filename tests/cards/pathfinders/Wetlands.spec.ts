@@ -11,6 +11,7 @@ import {SelectSpace} from '../../../src/inputs/SelectSpace';
 import {ISpace} from '../../../src/boards/ISpace';
 import {MAX_OXYGEN_LEVEL, MAX_TEMPERATURE} from '../../../src/common/constants';
 import {CardRequirements} from '../../../src/cards/CardRequirements';
+import {CardName} from '../../../src/common/cards/CardName';
 
 const toSpaceId = (space: ISpace): string => space.id;
 
@@ -50,6 +51,24 @@ describe('Wetlands', function() {
     player.plants = 3;
     expect(card.canPlay(player)).is.false;
   });
+
+  // Same test as above, with Red City in the way
+  it('Cannot play next to Red City', function() {
+    player.megaCredits = card.cost;
+
+    player.plants = 4;
+    game.addOceanTile(player, '15');
+    expect(player.canPlay(card)).is.false;
+
+    game.addOceanTile(player, '16');
+    expect(player.canPlay(card)).is.true;
+    expect(card.availableSpaces(player).map(toSpaceId)).deep.eq(['09', '23']);
+
+    game.simpleAddTile(player, game.board.getSpace('10'), {tileType: TileType.RED_CITY, card: CardName.RED_CITY});
+    expect(player.canPlay(card)).is.true;
+    expect(card.availableSpaces(player).map(toSpaceId)).deep.eq(['23']);
+  });
+
 
   // If only available spaces are reserved, cannot play.
   it('Can play if spots are reserved', function() {

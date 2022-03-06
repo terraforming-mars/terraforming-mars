@@ -1,5 +1,5 @@
 import {Card} from '../Card';
-import {CorporationCard} from './CorporationCard';
+import {ICorporationCard} from './ICorporationCard';
 import {Tags} from '../../common/cards/Tags';
 import {Player} from '../../Player';
 import {SelectSpace} from '../../inputs/SelectSpace';
@@ -16,7 +16,7 @@ import {CardRenderer} from '../render/CardRenderer';
 import {Size} from '../../common/cards/render/Size';
 import {all} from '../Options';
 
-export class TharsisRepublic extends Card implements CorporationCard {
+export class TharsisRepublic extends Card implements ICorporationCard {
   constructor() {
     super({
       cardType: CardType.CORPORATION,
@@ -67,7 +67,7 @@ export class TharsisRepublic extends Card implements CorporationCard {
   }
 
   public play(player: Player) {
-    if (player.game.getPlayersInGenerationOrder().length === 1) {
+    if (player.game.isSoloMode()) {
       // Get bonus for 2 neutral cities
       player.addProduction(Resources.MEGACREDITS, 2);
     }

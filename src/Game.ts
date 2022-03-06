@@ -10,7 +10,7 @@ import {Colony, serializeColonies} from './colonies/Colony';
 import {ColonyDealer, loadColoniesFromJSON} from './colonies/ColonyDealer';
 import {ColonyName} from './common/colonies/ColonyName';
 import {Color} from './common/Color';
-import {CorporationCard} from './cards/corporation/CorporationCard';
+import {ICorporationCard} from './cards/corporation/ICorporationCard';
 import {Database} from './database/Database';
 import {Dealer} from './Dealer';
 import {ElysiumBoard} from './boards/ElysiumBoard';
@@ -71,6 +71,7 @@ import {IPathfindersData} from './pathfinders/IPathfindersData';
 import {ArabiaTerraBoard} from './boards/ArabiaTerraBoard';
 import {AddResourcesToCard} from './deferredActions/AddResourcesToCard';
 import {isProduction} from './utils/server';
+import {VastitasBorealisBoard} from './boards/VastitasBorealisBoard';
 
 export interface Score {
   corporation: String;
@@ -332,7 +333,7 @@ export class Game implements ISerializable<SerializedGame> {
 
     const minCorpsRequired = players.length * gameOptions.startingCorporations;
     if (gameOptions.customCorporationsList && gameOptions.customCorporationsList.length >= minCorpsRequired) {
-      const customCorporationCards: CorporationCard[] = [];
+      const customCorporationCards: ICorporationCard[] = [];
       for (const corp of gameOptions.customCorporationsList) {
         const customCorp = cardFinder.getCorporationCardByName(corp);
         if (customCorp) customCorporationCards.push(customCorp);
@@ -606,7 +607,7 @@ export class Game implements ISerializable<SerializedGame> {
     return this.claimedMilestones.length >= constants.MAX_MILESTONES;
   }
 
-  private playerHasPickedCorporationCard(player: Player, corporationCard: CorporationCard) {
+  private playerHasPickedCorporationCard(player: Player, corporationCard: ICorporationCard) {
     player.pickedCorporationCard = corporationCard;
     // if all players picked corporationCard
     if (this.players.every((p) => p.pickedCorporationCard !== undefined)) {
@@ -617,7 +618,7 @@ export class Game implements ISerializable<SerializedGame> {
   }
 
   private playCorporationCard(
-    player: Player, corporationCard: CorporationCard,
+    player: Player, corporationCard: ICorporationCard,
   ): void {
     player.corporationCard = corporationCard;
     player.megaCredits = corporationCard.startingMegaCredits;
@@ -668,7 +669,7 @@ export class Game implements ISerializable<SerializedGame> {
   }
 
   private pickCorporationCard(player: Player): PlayerInput {
-    return new SelectInitialCards(player, (corporation: CorporationCard) => {
+    return new SelectInitialCards(player, (corporation: ICorporationCard) => {
       // Check for negative M€
       const cardCost = corporation.cardCost !== undefined ? corporation.cardCost : player.cardCost;
       if (corporation.name !== CardName.BEGINNER_CORPORATION && player.cardsInHand.length * cardCost > corporation.startingMegaCredits) {
@@ -1322,7 +1323,7 @@ export class Game implements ISerializable<SerializedGame> {
         this.gameOptions.boardName === BoardName.HELLAS) {
       if (player.color !== Color.NEUTRAL) {
         this.defer(new PlaceOceanTile(player, 'Select space for ocean from placement bonus'));
-        this.defer(new SelectHowToPayDeferred(player, 6, {title: 'Select how to pay for placement bonus ocean'}));
+        this.defer(new SelectHowToPayDeferred(player, constants.HELLAS_BONUS_OCEAN_COST, {title: 'Select how to pay for placement bonus ocean'}));
       }
     }
 
@@ -1390,27 +1391,47 @@ export class Game implements ISerializable<SerializedGame> {
   }
 
   public grantSpaceBonus(player: Player, spaceBonus: SpaceBonus, count: number = 1) {
-    if (spaceBonus === SpaceBonus.DRAW_CARD) {
+    switch (spaceBonus) {
+    case SpaceBonus.DRAW_CARD:
       player.drawCard(count);
-    } else if (spaceBonus === SpaceBonus.PLANT) {
+      break;
+    case SpaceBonus.PLANT:
       player.addResource(Resources.PLANTS, count, {log: true});
-    } else if (spaceBonus === SpaceBonus.STEEL) {
+      break;
+    case SpaceBonus.STEEL:
       player.addResource(Resources.STEEL, count, {log: true});
-    } else if (spaceBonus === SpaceBonus.TITANIUM) {
+      break;
+    case SpaceBonus.TITANIUM:
       player.addResource(Resources.TITANIUM, count, {log: true});
-    } else if (spaceBonus === SpaceBonus.HEAT) {
+      break;
+    case SpaceBonus.HEAT:
       player.addResource(Resources.HEAT, count, {log: true});
-    } else if (spaceBonus === SpaceBonus.OCEAN) {
+      break;
+    case SpaceBonus.OCEAN:
       // ignore
-    } else if (spaceBonus === SpaceBonus.MICROBE) {
+      break;
+    case SpaceBonus.MICROBE:
       this.defer(new AddResourcesToCard(player, ResourceType.MICROBE, {count: count}));
-    } else if (spaceBonus === SpaceBonus.DATA) {
+      break;
+    case SpaceBonus.DATA:
       this.defer(new AddResourcesToCard(player, ResourceType.DATA, {count: count}));
-    } else if (spaceBonus === SpaceBonus.ENERGY_PRODUCTION) {
+      break;
+    case SpaceBonus.ENERGY_PRODUCTION:
       player.addProduction(Resources.ENERGY, count);
-    } else if (spaceBonus === SpaceBonus.SCIENCE) {
+      break;
+    case SpaceBonus.SCIENCE:
       this.defer(new AddResourcesToCard(player, ResourceType.SCIENCE, {count: count}));
-    } else {
+      break;
+    case SpaceBonus.TEMPERATURE:
+      if (this.getTemperature() < constants.MAX_TEMPERATURE) {
+        this.defer(new DeferredAction(player, () => this.increaseTemperature(player, 1)));
+        this.defer(new SelectHowToPayDeferred(
+          player,
+          constants.VASTITAS_BOREALIS_BONUS_TEMPERATURE_COST,
+          {title: 'Select how to pay for placement bonus temperature'}));
+      }
+      break;
+    default:
       // TODO(kberg): Remove the isProduction condition after 2022-01-01.
       // I tried this once and broke the server, so I'm wrapping it in isProduction for now.
       if (!isProduction()) {
@@ -1475,6 +1496,10 @@ export class Game implements ISerializable<SerializedGame> {
     space.player = undefined;
   }
 
+  public getPlayers(): ReadonlyArray<Player> {
+    return this.players;
+  }
+
   // Players returned in play order starting with first player this generation.
   public getPlayersInGenerationOrder(): Array<Player> {
     // We always return them in turn order
@@ -1529,7 +1554,7 @@ export class Game implements ISerializable<SerializedGame> {
   public someoneCanHaveProductionReduced(resource: Resources, minQuantity: number = 1): boolean {
     // in soloMode you don't have to decrease resources
     if (this.isSoloMode()) return true;
-    return this.getPlayersInGenerationOrder().some((p) => {
+    return this.getPlayers().some((p) => {
       if (p.getProduction(resource) < minQuantity) return false;
       // The pathfindersExpansion test is just an optimization for non-Pathfinders games.
       if (this.gameOptions.pathfindersExpansion && p.cardIsInEffect(CardName.PRIVATE_SECURITY)) return false;
@@ -1576,6 +1601,8 @@ export class Game implements ISerializable<SerializedGame> {
       board = HellasBoard.deserialize(d.board, playersForBoard);
     } else if (gameOptions.boardName === BoardName.ARABIA_TERRA) {
       board = ArabiaTerraBoard.deserialize(d.board, playersForBoard);
+    } else if (gameOptions.boardName === BoardName.VASTITAS_BOREALIS) {
+      board = VastitasBorealisBoard.deserialize(d.board, playersForBoard);
     } else {
       board = OriginalBoard.deserialize(d.board, playersForBoard);
     }

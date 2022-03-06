@@ -9,7 +9,7 @@ import {CardName} from './common/cards/CardName';
 import {CardType} from './common/cards/CardType';
 import {ColonyName} from './common/colonies/ColonyName';
 import {Color} from './common/Color';
-import {CorporationCard} from './cards/corporation/CorporationCard';
+import {ICorporationCard} from './cards/corporation/ICorporationCard';
 import {Game} from './Game';
 import {HowToPay} from './inputs/HowToPay';
 import {IAward} from './awards/IAward';
@@ -80,9 +80,9 @@ export class Player implements ISerializable<SerializedPlayer> {
   private _game: Game | undefined = undefined;
 
   // Corporate identity
-  public corporationCard: CorporationCard | undefined = undefined;
+  public corporationCard: ICorporationCard | undefined = undefined;
   // Used only during set-up
-  public pickedCorporationCard: CorporationCard | undefined = undefined;
+  public pickedCorporationCard: ICorporationCard | undefined = undefined;
 
   // Terraforming Rating
   private terraformRating: number = 20;
@@ -116,7 +116,7 @@ export class Player implements ISerializable<SerializedPlayer> {
   private corporationInitialActionDone: boolean = false;
 
   // Cards
-  public dealtCorporationCards: Array<CorporationCard> = [];
+  public dealtCorporationCards: Array<ICorporationCard> = [];
   public dealtProjectCards: Array<IProjectCard> = [];
   public dealtPreludeCards: Array<IProjectCard> = [];
   public cardsInHand: Array<IProjectCard> = [];
@@ -341,7 +341,7 @@ export class Player implements ISerializable<SerializedPlayer> {
       if (stealing === true) {
         message = message + ' stolen';
       }
-      message = message + ' by ' + ((from instanceof Player) ? '${4}' : 'Global Event');
+      message = message + ' by ${4}';
     }
 
     this.game.log(message, (b) => {
@@ -351,6 +351,8 @@ export class Player implements ISerializable<SerializedPlayer> {
         .number(absAmount);
       if (from instanceof Player) {
         b.player(from);
+      } else if (from !== undefined) {
+        b.globalEventName(from);
       }
     });
   }
@@ -707,6 +709,7 @@ export class Player implements ISerializable<SerializedPlayer> {
   public removeResourceFrom(card: ICard, count: number = 1, removingPlayer? : Player): void {
     if (card.resourceCount) {
       const amountRemoved = Math.min(card.resourceCount, count);
+      if (amountRemoved === 0) return;
       card.resourceCount -= amountRemoved;
 
       if (removingPlayer !== undefined && removingPlayer !== this) this.resolveMonsInsurance();
@@ -1691,7 +1694,7 @@ export class Player implements ISerializable<SerializedPlayer> {
       // Awards are disabled for 1 player games
       if (this.game.isSoloMode()) return;
 
-      const players: Array<Player> = this.game.getPlayersInGenerationOrder().slice();
+      const players: Array<Player> = this.game.getPlayers().slice();
       players.sort(
         (p1, p2) => fundedAward.award.getScore(p2) - fundedAward.award.getScore(p1),
       );
@@ -2104,7 +2107,7 @@ export class Player implements ISerializable<SerializedPlayer> {
       }
     });
 
-    if (this.game.getPlayersInGenerationOrder().length > 1 &&
+    if (this.game.getPlayers().length > 1 &&
       this.actionsTakenThisRound > 0 &&
       !this.game.gameOptions.fastModeOption &&
       this.allOtherPlayersHavePassed() === false) {
@@ -2151,7 +2154,7 @@ export class Player implements ISerializable<SerializedPlayer> {
   private allOtherPlayersHavePassed(): boolean {
     const game = this.game;
     if (game.isSoloMode()) return true;
-    const players = game.getPlayersInGenerationOrder();
+    const players = game.getPlayers();
     const passedPlayers = game.getPassedPlayers();
     return passedPlayers.length === players.length - 1 && passedPlayers.includes(this.color) === false;
   }

@@ -17,7 +17,7 @@ import Vue from 'vue';
 import {mainAppSettings} from '@/client/components/App';
 import {PlayerInputModel} from '@/common/models/PlayerInputModel';
 import {ViewModel, PublicPlayerModel} from '@/common/models/PlayerModel';
-import {PreferencesManager} from '@/client/utils/PreferencesManager';
+import {getPreferences} from '@/client/utils/PreferencesManager';
 import {SoundManager} from '@/client/utils/SoundManager';
 import {WaitingForModel} from '@/common/models/WaitingForModel';
 
@@ -135,7 +135,7 @@ export default Vue.extend({
                 }
               }
 
-              const soundsEnabled = PreferencesManager.load('enable_sounds') === '1';
+              const soundsEnabled = getPreferences().enable_sounds;
               if (soundsEnabled) SoundManager.playActivePlayerSound();
 
               // We don't need to wait anymore - it's our turn

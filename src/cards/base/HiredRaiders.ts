@@ -43,7 +43,7 @@ export class HiredRaiders extends Card implements IProjectCard {
       );
     }
 
-    const availablePlayerTargets = player.game.getPlayersInGenerationOrder().filter((p) => p.id !== player.id);
+    const availablePlayerTargets = player.game.getPlayers().filter((p) => p.id !== player.id);
     const availableActions = new OrOptions();
 
     availablePlayerTargets.forEach((target) => {

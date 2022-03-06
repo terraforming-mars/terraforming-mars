@@ -1,4 +1,4 @@
-import {CorporationCard} from '../corporation/CorporationCard';
+import {ICorporationCard} from '../corporation/ICorporationCard';
 import {Player} from '../../Player';
 import {ResourceType} from '../../common/ResourceType';
 import {CardName} from '../../common/cards/CardName';
@@ -9,7 +9,7 @@ import {CardType} from '../../common/cards/CardType';
 import {CardRenderer} from '../render/CardRenderer';
 import {Size} from '../../common/cards/render/Size';
 
-export class Pristar extends Card implements CorporationCard, IResourceCard {
+export class Pristar extends Card implements ICorporationCard, IResourceCard {
   constructor() {
     super({
       name: CardName.PRISTAR,

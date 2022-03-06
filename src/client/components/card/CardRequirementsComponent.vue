@@ -10,13 +10,13 @@
 
 import Vue from 'vue';
 import CardRequirementComponent from './CardRequirementComponent.vue';
-import {CardRequirements} from '@/cards/CardRequirements';
+import {ICardRequirements} from '@/common/cards/ICardRequirements';
 
 export default Vue.extend({
   name: 'CardRequirementsComponent',
   props: {
     requirements: {
-      type: Object as () => CardRequirements,
+      type: Object as () => ICardRequirements,
       required: true,
     },
   },
@@ -25,10 +25,8 @@ export default Vue.extend({
   },
   methods: {
     getClasses(): string {
-      if (this.requirements.hasMax()) {
-        return 'card-requirements card-requirements-max';
-      }
-      return 'card-requirements';
+      const hasMax = this.requirements.requirements.some((req) => req.isMax);
+      return hasMax ? 'card-requirements card-requirements-max' : 'card-requirements';
     },
   },
 });

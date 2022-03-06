@@ -1,5 +1,5 @@
 import {Card} from '../Card';
-import {CorporationCard} from '../corporation/CorporationCard';
+import {ICorporationCard} from '../corporation/ICorporationCard';
 import {Tags} from '../../common/cards/Tags';
 import {Player} from '../../Player';
 import {Resources} from '../../common/Resources';
@@ -9,7 +9,7 @@ import {CardRenderer} from '../render/CardRenderer';
 import {played} from '../Options';
 
 // Issue shown at https://media.discordapp.net/attachments/891004790589517875/905968892940267540/Chimera.PNG
-export class Chimera extends Card implements CorporationCard {
+export class Chimera extends Card implements ICorporationCard {
   constructor() {
     super({
       cardType: CardType.CORPORATION,

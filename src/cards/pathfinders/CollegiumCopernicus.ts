@@ -1,5 +1,5 @@
 import {Card} from '../Card';
-import {CorporationCard} from '../corporation/CorporationCard';
+import {ICorporationCard} from '../corporation/ICorporationCard';
 import {Tags} from '../../common/cards/Tags';
 import {Player} from '../../Player';
 import {CardName} from '../../common/cards/CardName';
@@ -19,7 +19,7 @@ import {AddResourcesToCard} from '../../deferredActions/AddResourcesToCard';
 function tradeCost(player: Player) {
   return Math.max(0, 3 - player.colonyTradeDiscount);
 }
-export class CollegiumCopernicus extends Card implements CorporationCard, IActionCard {
+export class CollegiumCopernicus extends Card implements ICorporationCard, IActionCard {
   constructor() {
     super({
       cardType: CardType.CORPORATION,
@@ -57,7 +57,7 @@ export class CollegiumCopernicus extends Card implements CorporationCard, IActio
     return undefined;
   }
 
-  public onCorpCardPlayed(player: Player, card: CorporationCard) {
+  public onCorpCardPlayed(player: Player, card: ICorporationCard) {
     return this.onCardPlayed(player, card as ICard as IProjectCard);
   }
 
@@ -88,14 +88,14 @@ export class CollegiumCopernicus extends Card implements CorporationCard, IActio
   }
 }
 
-export function tradeWithColony(card: CorporationCard, player: Player, colony: Colony) {
+export function tradeWithColony(card: ICorporationCard, player: Player, colony: Colony) {
   const cost = tradeCost(player);
   card.resourceCount -= cost;
   player.game.log('${0} spent ${1} data from ${2} to trade with ${3}', (b) => b.player(player).number(cost).card(card).colony(colony));
   colony.trade(player);
 }
 export class TradeWithCollegiumCopernicus implements IColonyTrader {
-  private collegiumCopernicus: CorporationCard | undefined;
+  private collegiumCopernicus: ICorporationCard | undefined;
 
   constructor(private player: Player) {
     this.collegiumCopernicus = player.isCorporation(CardName.COLLEGIUM_COPERNICUS) ?

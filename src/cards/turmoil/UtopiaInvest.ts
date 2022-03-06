@@ -1,7 +1,7 @@
 import {IActionCard} from '../ICard';
 import {Tags} from '../../common/cards/Tags';
 import {Player} from '../../Player';
-import {CorporationCard} from '../corporation/CorporationCard';
+import {ICorporationCard} from '../corporation/ICorporationCard';
 import {OrOptions} from '../../inputs/OrOptions';
 import {SelectOption} from '../../inputs/SelectOption';
 import {Resources} from '../../common/Resources';
@@ -12,7 +12,7 @@ import {CardRenderer} from '../render/CardRenderer';
 import {Units} from '../../common/Units';
 import {digit} from '../Options';
 
-export class UtopiaInvest extends Card implements IActionCard, CorporationCard {
+export class UtopiaInvest extends Card implements IActionCard, ICorporationCard {
   constructor() {
     super({
       name: CardName.UTOPIA_INVEST,

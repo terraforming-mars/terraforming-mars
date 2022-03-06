@@ -1,12 +1,12 @@
 import {Card} from '../Card';
-import {CorporationCard} from '../corporation/CorporationCard';
+import {ICorporationCard} from '../corporation/ICorporationCard';
 import {Tags} from '../../common/cards/Tags';
 import {CardName} from '../../common/cards/CardName';
 import {CardType} from '../../common/cards/CardType';
 import {CardRenderer} from '../render/CardRenderer';
 import {played} from '../Options';
 
-export class HabitatMarte extends Card implements CorporationCard {
+export class HabitatMarte extends Card implements ICorporationCard {
   constructor() {
     super({
       cardType: CardType.CORPORATION,

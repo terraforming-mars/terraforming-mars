@@ -1,9 +1,10 @@
+import {expect} from 'chai';
 import {Game} from '../../../src/Game';
 import {TestingUtils} from '../../TestingUtils';
 import {TestPlayer} from '../../TestPlayer';
 import {TestPlayers} from '../../TestPlayers';
 import {MoonTether} from '../../../src/cards/moon/MoonTether';
-import {expect} from 'chai';
+import {Tags} from '../../../src/common/cards/Tags';
 
 const MOON_OPTIONS = TestingUtils.setCustomGameOptions({moonExpansion: true});
 
@@ -18,7 +19,17 @@ describe('MoonTether', () => {
   });
 
   it('can play', () => {
-    // TODO(kberg): Add a test when m70 is merged.
+    player.cardsInHand = [card];
+    player.megaCredits = card.cost;
+
+    expect(player.getPlayableCards()).does.not.include(card);
+
+    player.playedCards.push(TestingUtils.fakeCard({tags: [Tags.SPACE, Tags.SPACE, Tags.SPACE, Tags.SPACE, Tags.SPACE]}));
+    expect(player.getPlayableCards()).does.not.include(card);
+
+    // Pushing a sixth tag will do it.
+    player.playedCards.push(TestingUtils.fakeCard({tags: [Tags.SPACE]}));
+    expect(player.getPlayableCards()).includes(card);
   });
 
   it('play', () => {

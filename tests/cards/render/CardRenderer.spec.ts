@@ -1,9 +1,9 @@
-import {CardRenderer} from '../../src/cards/render/CardRenderer';
-import {CardRenderItem} from '../../src/cards/render/CardRenderItem';
-import {CardRenderItemType} from '../../src/common/cards/render/CardRenderItemType';
-import {AltSecondaryTag} from '../../src/common/cards/render/AltSecondaryTag';
-import {Size} from '../../src/common/cards/render/Size';
 import {expect} from 'chai';
+import {CardRenderer} from '../../../src/cards/render/CardRenderer';
+import {CardRenderItem} from '../../../src/cards/render/CardRenderItem';
+import {CardRenderItemType} from '../../../src/common/cards/render/CardRenderItemType';
+import {Size} from '../../../src/common/cards/render/Size';
+import {AltSecondaryTag} from '../../../src/common/cards/render/AltSecondaryTag';
 
 describe('CardRenderer', function() {
   describe('temperature', () => {

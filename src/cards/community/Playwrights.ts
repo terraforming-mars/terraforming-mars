@@ -1,4 +1,4 @@
-import {CorporationCard} from '../corporation/CorporationCard';
+import {ICorporationCard} from '../corporation/ICorporationCard';
 import {Player} from '../../Player';
 import {Tags} from '../../common/cards/Tags';
 import {Card} from '../Card';
@@ -14,7 +14,7 @@ import {Size} from '../../common/cards/render/Size';
 import {MoonExpansion} from '../../moon/MoonExpansion';
 import {all} from '../Options';
 
-export class Playwrights extends Card implements CorporationCard {
+export class Playwrights extends Card implements ICorporationCard {
   constructor() {
     super({
       name: CardName.PLAYWRIGHTS,
@@ -55,7 +55,7 @@ export class Playwrights extends Card implements CorporationCard {
   }
 
   public action(player: Player): SelectCard<IProjectCard> | undefined {
-    const players = player.game.getPlayersInGenerationOrder();
+    const players = player.game.getPlayers();
     const replayableEvents = this.getReplayableEvents(player);
 
     return new SelectCard<IProjectCard>(
@@ -85,7 +85,7 @@ export class Playwrights extends Card implements CorporationCard {
                    * Needs to be deferred to happen after Law Suit's `play()` method.
                    */
                 player.game.defer(new DeferredAction(player, () => {
-                  player.game.getPlayersInGenerationOrder().some((p) => {
+                  player.game.getPlayers().some((p) => {
                     const card = p.playedCards[p.playedCards.length - 1];
                     if (card?.name === selectedCard.name) {
                       p.playedCards.pop();
@@ -112,7 +112,7 @@ export class Playwrights extends Card implements CorporationCard {
     const playedEvents : IProjectCard[] = [];
 
     this.checkLoops++;
-    player.game.getPlayersInGenerationOrder().forEach((p) => {
+    player.game.getPlayers().forEach((p) => {
       playedEvents.push(...p.playedCards.filter((card) => {
         return card.cardType === CardType.EVENT &&
             // Can player.canPlay(card) replace this?

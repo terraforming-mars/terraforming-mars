@@ -14,6 +14,6 @@ export enum ResourceType {
     VENUSIAN_HABITAT = 'Venusian Habitat',
     SPECIALIZED_ROBOT = 'Specialized Robot',
     SEED = 'Seed',
-    MIND_SET_AGENDA = 'Mind Set Agenda',
+    AGENDA = 'Agenda',
     ORBITAL = 'Orbital',
 }

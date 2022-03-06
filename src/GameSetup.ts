@@ -12,6 +12,7 @@ import {Color} from './common/Color';
 import {TileType} from './common/TileType';
 import {Random} from './Random';
 import {ArabiaTerraBoard} from './boards/ArabiaTerraBoard';
+import {VastitasBorealisBoard} from './boards/VastitasBorealisBoard';
 
 export class GameSetup {
   // Function to construct the board and milestones/awards list
@@ -23,6 +24,8 @@ export class GameSetup {
       return HellasBoard.newInstance(gameOptions, rng);
     case BoardName.ARABIA_TERRA:
       return ArabiaTerraBoard.newInstance(gameOptions, rng);
+    case BoardName.VASTITAS_BOREALIS:
+      return VastitasBorealisBoard.newInstance(gameOptions, rng);
     default:
       return OriginalBoard.newInstance(gameOptions, rng);
     }

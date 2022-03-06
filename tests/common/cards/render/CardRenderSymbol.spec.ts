@@ -1,6 +1,6 @@
-import {CardRenderSymbol} from '../../src/cards/render/CardRenderSymbol';
-import {Size} from '../../src/common/cards/render/Size';
-import {CardRenderSymbolType} from '../../src/common/cards/render/CardRenderSymbolType';
+import {CardRenderSymbol} from '../../../../src/cards/render/CardRenderSymbol';
+import {Size} from '../../../../src/common/cards/render/Size';
+import {CardRenderSymbolType} from '../../../../src/common/cards/render/CardRenderSymbolType';
 import {expect} from 'chai';
 
 const sizeM = Size.MEDIUM;

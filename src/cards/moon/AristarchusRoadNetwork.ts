@@ -7,7 +7,7 @@ import {CardRenderer} from '../render/CardRenderer';
 import {TileType} from '../../common/TileType';
 import {Units} from '../../common/Units';
 import {MoonCard} from './MoonCard';
-import {AltSecondaryTag} from '../render/CardRenderItem';
+import {AltSecondaryTag} from '../../common/cards/render/AltSecondaryTag';
 
 export class AristarchusRoadNetwork extends MoonCard {
   constructor() {

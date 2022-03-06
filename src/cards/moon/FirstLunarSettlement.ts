@@ -6,7 +6,7 @@ import {PlaceMoonColonyTile} from '../../moon/PlaceMoonColonyTile';
 import {CardRenderer} from '../render/CardRenderer';
 import {TileType} from '../../common/TileType';
 import {IProjectCard} from '../IProjectCard';
-import {AltSecondaryTag} from '../render/CardRenderItem';
+import {AltSecondaryTag} from '../../common/cards/render/AltSecondaryTag';
 import {Units} from '../../common/Units';
 
 export class FirstLunarSettlement extends PreludeCard implements IProjectCard {

@@ -233,6 +233,9 @@
     <template v-else-if="title ===  CardName.BIO_SOL">
       <div class="card-bio-sol-logo"></div>
     </template>
+    <template v-else-if="title ===  CardName.MIND_SET_MARS">
+      <div class="card-mind-set-mars-logo"></div>
+    </template>
     <template v-else-if="title ===  CardName.ADHAI_HIGH_ORBIT_CONSTRUCTIONS">
       <div class="card-adhai-high-orbit-constructions-logo"></div>
     </template>

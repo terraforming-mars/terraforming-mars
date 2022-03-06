@@ -8,7 +8,7 @@ import {MoonExpansion} from '../../moon/MoonExpansion';
 import {PlaceMoonRoadTile} from '../../moon/PlaceMoonRoadTile';
 import {SpaceType} from '../../common/boards/SpaceType';
 import {Resources} from '../../common/Resources';
-import {AltSecondaryTag} from '../render/CardRenderItem';
+import {AltSecondaryTag} from '../../common/cards/render/AltSecondaryTag';
 import {TileType} from '../../common/TileType';
 
 export class MiningComplex extends PreludeCard {

@@ -10,8 +10,9 @@
 
 import Vue from 'vue';
 import {generateClassString} from '@/common/utils/utils';
-import {AltSecondaryTag, CardRenderItem} from '@/cards/render/CardRenderItem';
+import {CardRenderItem} from '@/cards/render/CardRenderItem';
 import {CardRenderItemType} from '@/common/cards/render/CardRenderItemType';
+import {AltSecondaryTag} from '@/common/cards/render/AltSecondaryTag';
 import {CardRenderSymbol} from '@/cards/render/CardRenderSymbol';
 import {Size} from '@/common/cards/render/Size';
 import {Tags} from '@/common/cards/Tags';
@@ -191,6 +192,9 @@ export default Vue.extend({
       } else if (type === CardRenderItemType.ORBITAL) {
         classes.push('card-resource');
         classes.push('card-resource-orbital');
+      } else if (type === CardRenderItemType.MIND_SET_AGENDA) {
+        classes.push('card-resource');
+        classes.push('card-resource-agenda');
       } else if (this.item.type === CardRenderItemType.MOON_COLONY) {
         if (this.item.secondaryTag === AltSecondaryTag.MOON_COLONY_RATE) {
           classes.push(sized('card-tile-lunar-colony-rate', this.item.size));

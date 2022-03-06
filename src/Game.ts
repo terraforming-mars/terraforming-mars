@@ -297,7 +297,7 @@ export class Game implements ISerializable<SerializedGame> {
 
     // Add colonies stuff
     if (gameOptions.coloniesExtension) {
-      game.colonyDealer = new ColonyDealer();
+      game.colonyDealer = new ColonyDealer(rng);
       const communityColoniesSelected = GameSetup.includesCommunityColonies(gameOptions);
       const allowCommunityColonies = gameOptions.communityCardsOption || communityColoniesSelected;
 
@@ -448,7 +448,7 @@ export class Game implements ISerializable<SerializedGame> {
       phase: this.phase,
       players: this.players.map((p) => p.serialize()),
       researchedPlayers: Array.from(this.researchedPlayers),
-      seed: this.seed,
+      seed: this.seed, // TODO(kberg): serialize the RNG too.
       someoneHasRemovedOtherPlayersPlants: this.someoneHasRemovedOtherPlayersPlants,
       spectatorId: this.spectatorId,
       syndicatePirateRaider: this.syndicatePirateRaider,
@@ -1641,7 +1641,9 @@ export class Game implements ISerializable<SerializedGame> {
     }
     // Reload colonies elements if needed
     if (gameOptions.coloniesExtension) {
-      game.colonyDealer = new ColonyDealer();
+      // TODO(kberg): this is harmless, but it honestly would be better if rng were serialized too
+      // since the seed shifts.
+      game.colonyDealer = new ColonyDealer(new Random(game.seed));
 
       if (d.colonyDealer !== undefined) {
         game.colonyDealer.discardedColonies = loadColoniesFromJSON(d.colonyDealer.discardedColonies);

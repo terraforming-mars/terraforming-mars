@@ -100,8 +100,8 @@ export class ColonyDealer {
     if (allowList.length === 0) {
       colonyTiles.forEach((e) => allowList.push(e.colonyName));
     }
-    // Two-player games and solo games get one more colony.
 
+    // Two-player games and solo games get one more colony.
     const count: number = (players + 2) + (players <= 2 ? 1 : 0);
 
     const tempDeck = this.shuffle(

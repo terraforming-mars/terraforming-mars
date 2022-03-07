@@ -624,19 +624,12 @@ describe('Game', () => {
     const game = Game.newInstance('foobar', [player], player);
     const serialized = game.serialize();
     const serializedKeys = Object.keys(serialized);
+    expect(serializedKeys).not.include('rng');
     const gameKeys = Object.keys(game);
     expect(gameKeys).not.include('moonData');
     expect(gameKeys).not.include('pathfindersData');
-    expect(serializedKeys).to.have.members(gameKeys.concat('moonData', 'pathfindersData'));
-  });
-
-  it('serializes every property', () => {
-    const player = TestPlayers.BLUE.newPlayer();
-    const game = Game.newInstance('foobar', [player], player, TestingUtils.setCustomGameOptions({moonExpansion: true, pathfindersExpansion: true}));
-    const serialized = game.serialize();
-    const serializedKeys = Object.keys(serialized);
-    const gameKeys = Object.keys(game);
-    expect(serializedKeys).to.have.members(gameKeys);
+    expect(serializedKeys.concat('rng').sort())
+      .deep.eq(gameKeys.concat('moonData', 'pathfindersData', 'seed', 'currentSeed').sort());
   });
 
   it('deserializing a game without moon data still loads', () => {

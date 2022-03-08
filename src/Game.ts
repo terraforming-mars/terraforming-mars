@@ -170,7 +170,7 @@ export class Game implements ISerializable<SerializedGame> {
   // Game-level data
   public lastSaveId: number = 0;
   private clonedGamedId: string | undefined;
-  public seed: number;
+  public rng: Random;
   public spectatorId: SpectatorId | undefined;
   public deferredActions: DeferredActionsQueue = new DeferredActionsQueue();
   public gameAge: number = 0; // Each log event increases it
@@ -228,7 +228,7 @@ export class Game implements ISerializable<SerializedGame> {
     private first: Player,
     activePlayer: PlayerId,
     public gameOptions: GameOptions,
-    seed: number,
+    rng: Random,
     board: Board,
     dealer: Dealer) {
     const playerIds = players.map((p) => p.id);
@@ -247,7 +247,7 @@ export class Game implements ISerializable<SerializedGame> {
     }
 
     this.activePlayer = activePlayer;
-    this.seed = seed;
+    this.rng = rng;
     this.dealer = dealer;
     this.board = board;
 
@@ -284,7 +284,7 @@ export class Game implements ISerializable<SerializedGame> {
       players[0].terraformRatingAtGenerationStart = 14;
     }
 
-    const game = new Game(id, players, firstPlayer, activePlayer, gameOptions, seed, board, dealer);
+    const game = new Game(id, players, firstPlayer, activePlayer, gameOptions, rng, board, dealer);
     game.spectatorId = spectatorId;
     // Initialize Ares data
     if (gameOptions.aresExtension) {
@@ -425,6 +425,7 @@ export class Game implements ISerializable<SerializedGame> {
       claimedMilestones: serializeClaimedMilestones(this.claimedMilestones),
       colonies: this.colonies.map((colony) => colony.serialize()),
       colonyDealer: this.colonyDealer?.serialize(),
+      currentSeed: this.rng.current,
       dealer: this.dealer.serialize(),
       deferredActions: [],
       donePlayers: Array.from(this.donePlayers),
@@ -448,7 +449,7 @@ export class Game implements ISerializable<SerializedGame> {
       phase: this.phase,
       players: this.players.map((p) => p.serialize()),
       researchedPlayers: Array.from(this.researchedPlayers),
-      seed: this.seed,
+      seed: this.rng.seed,
       someoneHasRemovedOtherPlayersPlants: this.someoneHasRemovedOtherPlayersPlants,
       spectatorId: this.spectatorId,
       syndicatePirateRaider: this.syndicatePirateRaider,
@@ -1609,7 +1610,8 @@ export class Game implements ISerializable<SerializedGame> {
 
     // Rebuild dealer object to be sure that we will have cards in the same order
     const dealer = Dealer.deserialize(d.dealer);
-    const game = new Game(d.id, players, first, d.activePlayer, gameOptions, d.seed, board, dealer);
+    const rng = new Random(d.seed, d.currentSeed);
+    const game = new Game(d.id, players, first, d.activePlayer, gameOptions, rng, board, dealer);
     game.spectatorId = d.spectatorId;
 
     const milestones: Array<IMilestone> = [];

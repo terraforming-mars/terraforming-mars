@@ -43,13 +43,11 @@ describe('CardVictoryPoints', () => {
   });
   it('renders points with item - points = targed 5/10', async () => {
     await wrapper.setProps(prop({item: {type: CardRenderItemType.ASTEROIDS}, points: 5, target: 10}));
-    console.log(wrapper.html());
     expect(wrapper.text()).to.equal('5/10');
     expect(wrapper.find('[data-test=item]').props().item.type).eq('asteroids');
   });
   it('search for life', async () => {
     await wrapper.setProps(prop({item: {type: CardRenderItemType.SCIENCE}, targetOneOrMore: true}));
-    console.log(wrapper.html());
     expect(wrapper.text()).to.equal('*:3');
     expect(wrapper.find('[data-test=item]').props().item.type).eq('science');
   });

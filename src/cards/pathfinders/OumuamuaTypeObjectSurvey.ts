@@ -37,9 +37,9 @@ export class OumuamuaTypeObjectSurvey extends Card implements IProjectCard {
     });
   }
 
-  private discard(player: Player, card: IProjectCard) {
-    player.game.dealer.discard(card);
-    player.game.log('${0} discarded ${1}', (b) => b.player(player).card(card));
+  private keep(player: Player, card: IProjectCard) {
+    player.cardsInHand.push(card);
+    player.game.log('${0} kept ${1}', (b) => b.player(player).card(card));
   }
 
   private processCard(player: Player, card: IProjectCard): boolean {
@@ -49,10 +49,10 @@ export class OumuamuaTypeObjectSurvey extends Card implements IProjectCard {
       return true;
     } else if (tags.includes(Tags.SPACE)) {
       player.addProduction(Resources.ENERGY, 3, {log: true});
-      this.discard(player, card);
+      this.keep(player, card);
       return true;
     } else {
-      this.discard(player, card);
+      this.keep(player, card);
       return false;
     }
   }
@@ -64,7 +64,7 @@ export class OumuamuaTypeObjectSurvey extends Card implements IProjectCard {
 
     player.game.log('${0} revealed ${1} and ${2}', (b) => b.player(player).card(cards[0]).card(cards[1]));
     if (this.processCard(player, cards[0])) {
-      this.discard(player, cards[1]);
+      this.keep(player, cards[1]);
     } else {
       this.processCard(player, cards[1]);
     }

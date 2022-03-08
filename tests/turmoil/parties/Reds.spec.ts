@@ -71,7 +71,7 @@ describe('Reds', function() {
 
     player.megaCredits = 3;
     game.addGreenery(player, '10');
-    game.deferredActions.runAll(() => {});
+    TestingUtils.runAllActions(game);
     expect(player.megaCredits).to.eq(0);
   });
 

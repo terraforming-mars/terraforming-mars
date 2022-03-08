@@ -341,7 +341,7 @@ export class Player implements ISerializable<SerializedPlayer> {
       if (stealing === true) {
         message = message + ' stolen';
       }
-      message = message + ' by ' + ((from instanceof Player) ? '${4}' : 'Global Event');
+      message = message + ' by ${4}';
     }
 
     this.game.log(message, (b) => {
@@ -351,6 +351,8 @@ export class Player implements ISerializable<SerializedPlayer> {
         .number(absAmount);
       if (from instanceof Player) {
         b.player(from);
+      } else if (from !== undefined) {
+        b.globalEventName(from);
       }
     });
   }
@@ -707,6 +709,7 @@ export class Player implements ISerializable<SerializedPlayer> {
   public removeResourceFrom(card: ICard, count: number = 1, removingPlayer? : Player): void {
     if (card.resourceCount) {
       const amountRemoved = Math.min(card.resourceCount, count);
+      if (amountRemoved === 0) return;
       card.resourceCount -= amountRemoved;
 
       if (removingPlayer !== undefined && removingPlayer !== this) this.resolveMonsInsurance();

@@ -26,7 +26,7 @@ import {PlayerInputModel} from '@/common/models/PlayerInputModel';
 import {PlayerViewModel} from '@/common/models/PlayerModel';
 import SelectCard from '@/client/components/SelectCard.vue';
 import ConfirmDialog from '@/client/components/common/ConfirmDialog.vue';
-import {PreferencesManager} from '@/client/utils/PreferencesManager';
+import {getPreferences} from '@/client/utils/PreferencesManager';
 import {Tags} from '@/common/cards/Tags';
 import {PreludeCard} from '@/cards/prelude/PreludeCard';
 
@@ -162,7 +162,7 @@ export default Vue.extend({
       return starting;
     },
     saveIfConfirmed() {
-      if (PreferencesManager.load('show_alerts') === '1' && this.selectedCards.length === 0) {
+      if (getPreferences().show_alerts && this.selectedCards.length === 0) {
         (this.$refs['confirmation'] as any).show();
       } else {
         this.saveData();

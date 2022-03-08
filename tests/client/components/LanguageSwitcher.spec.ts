@@ -16,7 +16,7 @@ describe('LanguageSwitcher', () => {
   });
 
   it('saves language preference', async () => {
-    const preferenceSaveSpy = sinon.spy(PreferencesManager, 'save');
+    const preferenceSaveSpy = sinon.spy(PreferencesManager.INSTANCE, 'set');
     const wrapper = shallowMount(LanguageSwitcher, {
       data() {
         return {PreferencesManager};

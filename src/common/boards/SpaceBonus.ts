@@ -16,10 +16,13 @@ export enum SpaceBonus {
     MICROBE, // 8 (Also used in Arabia Terra)
     POWER, // 9 // TODO(kberg): Rename to ENERGY
 
-        // Arabia Terra-specific
+    // Arabia Terra-specific
     DATA, // 10
     SCIENCE, // 11
     ENERGY_PRODUCTION, // 12
+
+    // Vastitas Borealis-specific
+    TEMPERATURE, // 13
 }
 
 const TO_STRING_MAP: Map<SpaceBonus, string> = new Map([
@@ -36,6 +39,7 @@ const TO_STRING_MAP: Map<SpaceBonus, string> = new Map([
   [SpaceBonus.DATA, 'Data'],
   [SpaceBonus.SCIENCE, 'Science'],
   [SpaceBonus.ENERGY_PRODUCTION, 'Energy Production'],
+  [SpaceBonus.TEMPERATURE, 'Temperature'],
 ]);
 
 export namespace SpaceBonus {

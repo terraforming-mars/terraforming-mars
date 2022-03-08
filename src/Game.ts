@@ -71,6 +71,7 @@ import {IPathfindersData} from './pathfinders/IPathfindersData';
 import {ArabiaTerraBoard} from './boards/ArabiaTerraBoard';
 import {AddResourcesToCard} from './deferredActions/AddResourcesToCard';
 import {isProduction} from './utils/server';
+import {VastitasBorealisBoard} from './boards/VastitasBorealisBoard';
 
 export interface Score {
   corporation: String;
@@ -1322,7 +1323,7 @@ export class Game implements ISerializable<SerializedGame> {
         this.gameOptions.boardName === BoardName.HELLAS) {
       if (player.color !== Color.NEUTRAL) {
         this.defer(new PlaceOceanTile(player, 'Select space for ocean from placement bonus'));
-        this.defer(new SelectHowToPayDeferred(player, 6, {title: 'Select how to pay for placement bonus ocean'}));
+        this.defer(new SelectHowToPayDeferred(player, constants.HELLAS_BONUS_OCEAN_COST, {title: 'Select how to pay for placement bonus ocean'}));
       }
     }
 
@@ -1390,27 +1391,47 @@ export class Game implements ISerializable<SerializedGame> {
   }
 
   public grantSpaceBonus(player: Player, spaceBonus: SpaceBonus, count: number = 1) {
-    if (spaceBonus === SpaceBonus.DRAW_CARD) {
+    switch (spaceBonus) {
+    case SpaceBonus.DRAW_CARD:
       player.drawCard(count);
-    } else if (spaceBonus === SpaceBonus.PLANT) {
+      break;
+    case SpaceBonus.PLANT:
       player.addResource(Resources.PLANTS, count, {log: true});
-    } else if (spaceBonus === SpaceBonus.STEEL) {
+      break;
+    case SpaceBonus.STEEL:
       player.addResource(Resources.STEEL, count, {log: true});
-    } else if (spaceBonus === SpaceBonus.TITANIUM) {
+      break;
+    case SpaceBonus.TITANIUM:
       player.addResource(Resources.TITANIUM, count, {log: true});
-    } else if (spaceBonus === SpaceBonus.HEAT) {
+      break;
+    case SpaceBonus.HEAT:
       player.addResource(Resources.HEAT, count, {log: true});
-    } else if (spaceBonus === SpaceBonus.OCEAN) {
+      break;
+    case SpaceBonus.OCEAN:
       // ignore
-    } else if (spaceBonus === SpaceBonus.MICROBE) {
+      break;
+    case SpaceBonus.MICROBE:
       this.defer(new AddResourcesToCard(player, ResourceType.MICROBE, {count: count}));
-    } else if (spaceBonus === SpaceBonus.DATA) {
+      break;
+    case SpaceBonus.DATA:
       this.defer(new AddResourcesToCard(player, ResourceType.DATA, {count: count}));
-    } else if (spaceBonus === SpaceBonus.ENERGY_PRODUCTION) {
+      break;
+    case SpaceBonus.ENERGY_PRODUCTION:
       player.addProduction(Resources.ENERGY, count);
-    } else if (spaceBonus === SpaceBonus.SCIENCE) {
+      break;
+    case SpaceBonus.SCIENCE:
       this.defer(new AddResourcesToCard(player, ResourceType.SCIENCE, {count: count}));
-    } else {
+      break;
+    case SpaceBonus.TEMPERATURE:
+      if (this.getTemperature() < constants.MAX_TEMPERATURE) {
+        this.defer(new DeferredAction(player, () => this.increaseTemperature(player, 1)));
+        this.defer(new SelectHowToPayDeferred(
+          player,
+          constants.VASTITAS_BOREALIS_BONUS_TEMPERATURE_COST,
+          {title: 'Select how to pay for placement bonus temperature'}));
+      }
+      break;
+    default:
       // TODO(kberg): Remove the isProduction condition after 2022-01-01.
       // I tried this once and broke the server, so I'm wrapping it in isProduction for now.
       if (!isProduction()) {
@@ -1580,6 +1601,8 @@ export class Game implements ISerializable<SerializedGame> {
       board = HellasBoard.deserialize(d.board, playersForBoard);
     } else if (gameOptions.boardName === BoardName.ARABIA_TERRA) {
       board = ArabiaTerraBoard.deserialize(d.board, playersForBoard);
+    } else if (gameOptions.boardName === BoardName.VASTITAS_BOREALIS) {
+      board = VastitasBorealisBoard.deserialize(d.board, playersForBoard);
     } else {
       board = OriginalBoard.deserialize(d.board, playersForBoard);
     }

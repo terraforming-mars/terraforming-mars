@@ -9,6 +9,7 @@ import {Tags} from '../../../src/common/cards/Tags';
 import {Turmoil} from '../../../src/turmoil/Turmoil';
 import {SelectOption} from '../../../src/inputs/SelectOption';
 import {assertPlaceCityTile, assertSendDelegateToArea} from './assertions';
+import {OrOptions} from '../../../src/inputs/OrOptions';
 
 describe('MindSetMars', function() {
   let card: MindSetMars;
@@ -72,11 +73,37 @@ describe('MindSetMars', function() {
     card.resourceCount = 7;
 
     turmoil.delegateReserve = [];
-    card.action(player);
-    // expect(game.deferredActions.length).eq(0);
-
-    // turmoil.delegateReserve = [player.id, player.id, player.id];
     TestingUtils.cast(card.action(player), SelectOption).cb();
+    expect(game.deferredActions.length).eq(1);
+    assertPlaceCityTile(player, game.deferredActions.pop()!);
+    expect(card.resourceCount).eq(2);
+  });
+
+  it('both are available, place delegates', () => {
+    card.resourceCount = 7;
+
+    turmoil.delegateReserve = [player.id, player.id, player.id];
+    const options = TestingUtils.cast(card.action(player), OrOptions);
+    expect(options.options).has.length(2);
+
+    // First option places delegates
+    options.options[0].cb();
+
+    expect(game.deferredActions.length).eq(1);
+    assertSendDelegateToArea(player, game.deferredActions.pop()!);
+    expect(card.resourceCount).eq(5);
+  });
+
+  it('both are available, place a city', () => {
+    card.resourceCount = 7;
+
+    turmoil.delegateReserve = [player.id, player.id, player.id];
+    const options = TestingUtils.cast(card.action(player), OrOptions);
+    expect(options.options).has.length(2);
+
+    // Second option places a city
+    options.options[1].cb();
+
     expect(game.deferredActions.length).eq(1);
     assertPlaceCityTile(player, game.deferredActions.pop()!);
     expect(card.resourceCount).eq(2);

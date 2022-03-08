@@ -112,21 +112,21 @@ describe('Colony', function() {
   it('Should decrease trackPosition after trade', function() {
     luna.trackPosition = MAX_COLONY_TRACK_POSITION;
     luna.trade(player);
-    game.deferredActions.runAll(() => {});
+    TestingUtils.runAllActions(game);
     expect(luna.trackPosition).to.eq(0);
 
     luna.addColony(player);
     luna.addColony(player2);
     luna.trackPosition = MAX_COLONY_TRACK_POSITION;
     luna.trade(player);
-    game.deferredActions.runAll(() => {});
+    TestingUtils.runAllActions(game);
     expect(luna.trackPosition).to.eq(2);
   });
 
   it('decreaseTrackAfterTrade', function() {
     luna.trackPosition = MAX_COLONY_TRACK_POSITION;
     luna.trade(player);
-    game.deferredActions.runAll(() => {});
+    TestingUtils.runAllActions(game);
     expect(luna.trackPosition).to.eq(0);
 
     luna.addColony(player);
@@ -134,11 +134,11 @@ describe('Colony', function() {
     luna.trackPosition = MAX_COLONY_TRACK_POSITION;
 
     luna.trade(player, {decreaseTrackAfterTrade: false});
-    game.deferredActions.runAll(() => {});
+    TestingUtils.runAllActions(game);
     expect(luna.trackPosition).to.eq(MAX_COLONY_TRACK_POSITION);
 
     luna.trade(player, {decreaseTrackAfterTrade: true});
-    game.deferredActions.runAll(() => {});
+    TestingUtils.runAllActions(game);
     expect(luna.trackPosition).to.eq(2);
   });
 
@@ -159,7 +159,7 @@ describe('Colony', function() {
       player.megaCredits = 0;
       luna.trackPosition = i;
       luna.trade(player);
-      game.deferredActions.runAll(() => {});
+      TestingUtils.runAllActions(game);
       expect(player.megaCredits).to.eq(income[i]);
     }
   });
@@ -168,7 +168,7 @@ describe('Colony', function() {
     // No colonies
     luna.trackPosition = 3; // 7 MC
     luna.trade(player);
-    game.deferredActions.runAll(() => {});
+    TestingUtils.runAllActions(game);
     expect(player.megaCredits).to.eq(7);
     expect(player2.megaCredits).to.eq(0);
     expect(player3.megaCredits).to.eq(0);
@@ -179,7 +179,7 @@ describe('Colony', function() {
     luna.trackPosition = 3; // 7 MC
     luna.addColony(player);
     luna.trade(player);
-    game.deferredActions.runAll(() => {});
+    TestingUtils.runAllActions(game);
     expect(player.megaCredits).to.eq(9);
     expect(player2.megaCredits).to.eq(0);
     expect(player3.megaCredits).to.eq(0);
@@ -190,7 +190,7 @@ describe('Colony', function() {
     luna.trackPosition = 3; // 7 MC
     luna.addColony(player2);
     luna.trade(player2);
-    game.deferredActions.runAll(() => {});
+    TestingUtils.runAllActions(game);
     expect(player.megaCredits).to.eq(2);
     expect(player2.megaCredits).to.eq(9);
     expect(player3.megaCredits).to.eq(0);
@@ -202,7 +202,7 @@ describe('Colony', function() {
     luna.trackPosition = 3; // 7 MC
     luna.addColony(player3);
     luna.trade(player4);
-    game.deferredActions.runAll(() => {});
+    TestingUtils.runAllActions(game);
     expect(player.megaCredits).to.eq(2);
     expect(player2.megaCredits).to.eq(2);
     expect(player3.megaCredits).to.eq(2);
@@ -216,7 +216,7 @@ describe('Colony', function() {
     luna.addColony(player);
 
     luna.trade(player2);
-    game.deferredActions.runAll(() => {});
+    TestingUtils.runAllActions(game);
     expect(player.megaCredits).to.eq(6);
     expect(player2.megaCredits).to.eq(7);
     expect(player3.megaCredits).to.eq(0);

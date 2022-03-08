@@ -63,7 +63,7 @@
 
   <div class="sidebar_item sidebar_item--settings" :title="$t('Player Settings')">
     <i class="sidebar_icon sidebar_icon--settings" :class="{'sidebar_item--is-active': ui.preferences_panel_open}" v-on:click="ui.preferences_panel_open = !ui.preferences_panel_open"></i>
-    <preferences-dialog v-show="ui.preferences_panel_open" @okButtonClicked="ui.preferences_panel_open = false"/>
+    <preferences-dialog v-show="ui.preferences_panel_open" @okButtonClicked="ui.preferences_panel_open = false" :preferencesManager="preferencesManager"/>
   </div>
 </div>
 </template>
@@ -72,8 +72,7 @@
 
 import Vue from 'vue';
 import {Color} from '@/common/Color';
-import {PreferencesManager} from '@/client/utils/PreferencesManager';
-import {LANGUAGES} from '@/common/constants';
+import {getPreferences, PreferencesManager} from '@/client/utils/PreferencesManager';
 import {TurmoilModel} from '@/common/models/TurmoilModel';
 import {PartyName} from '@/common/turmoil/PartyName';
 import GameSetupDetail from '@/client/components/GameSetupDetail.vue';
@@ -139,30 +138,15 @@ export default Vue.extend({
         'preferences_panel_open': false,
         'gamesetup_detail_open': false,
       },
-      'hide_hand': false,
-      'hide_awards_and_milestones': false,
-      'hide_top_bar': false,
-      'small_cards': false,
-      'remove_background': false,
-      'magnify_cards': true,
-      'show_alerts': true,
-      'lang': 'en',
-      'langs': LANGUAGES,
-      'enable_sounds': false,
-      'hide_tile_confirmation': false,
-      'show_card_number': false,
-      'hide_discount_on_cards': false,
-      'learner_mode': true,
-      'hide_animated_sidebar': false,
       'globalParameter': GlobalParameter,
     };
   },
   methods: {
     getPlayerColorCubeClass(): string {
-      return this.acting_player && (PreferencesManager.loadBoolean('hide_animated_sidebar') === false) ? 'preferences_player_inner active' : 'preferences_player_inner';
+      return this.acting_player && (getPreferences().hide_animated_sidebar === false) ? 'preferences_player_inner active' : 'preferences_player_inner';
     },
     getSideBarClass(): string {
-      return this.acting_player && (PreferencesManager.loadBoolean('hide_animated_sidebar') === false) ? 'preferences_acting_player' : 'preferences_nonacting_player';
+      return this.acting_player && (getPreferences().hide_animated_sidebar === false) ? 'preferences_acting_player' : 'preferences_nonacting_player';
     },
     getGenMarker(): string {
       return `${this.generation}`;
@@ -185,6 +169,11 @@ export default Vue.extend({
       } else {
         return rulingPartyName as string;
       }
+    },
+  },
+  computed: {
+    preferencesManager(): PreferencesManager {
+      return PreferencesManager.INSTANCE;
     },
   },
 });

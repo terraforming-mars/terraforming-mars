@@ -13,6 +13,7 @@ import {SelectPlayer} from '../../../src/inputs/SelectPlayer';
 import {Player} from '../../../src/Player';
 import {Resources} from '../../../src/common/Resources';
 import {TestPlayers} from '../../TestPlayers';
+import {TestingUtils} from '../../TestingUtils';
 
 describe('Playwrights', () => {
   let card : Playwrights; let player : Player; let player2: Player; let game : Game;
@@ -48,7 +49,7 @@ describe('Playwrights', () => {
     selectCard.cb([event]);
 
     game.deferredActions.pop()!.execute(); // SelectHowToPay
-    game.deferredActions.runAll(() => {});
+    TestingUtils.runAllActions(game);
 
     expect(player.getTerraformRating()).to.eq(tr + 4);
     expect(player.megaCredits).eq(0);
@@ -68,7 +69,7 @@ describe('Playwrights', () => {
     selectCard.cb([event]);
 
     game.deferredActions.pop()!.execute(); // SelectHowToPay
-    game.deferredActions.runAll(() => {});
+    TestingUtils.runAllActions(game);
 
     expect(player.getTerraformRating()).to.eq(tr + 2);
     expect(player.megaCredits).eq(0);
@@ -116,7 +117,7 @@ describe('Playwrights', () => {
     const selectPlayer = game.deferredActions.pop()!.execute() as SelectPlayer;
     selectPlayer.cb(player2);
 
-    player.game.deferredActions.runAll(() => {});
+    TestingUtils.runAllActions(player.game);
 
     expect(player.playedCards).has.lengthOf(0);
     expect(player2.playedCards).has.lengthOf(0); // Card is removed from play for sued player

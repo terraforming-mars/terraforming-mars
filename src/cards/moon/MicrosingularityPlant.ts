@@ -20,7 +20,6 @@ export class MicrosingularityPlant extends Card {
       metadata: {
         description: 'Requires 2 colonies on the Moon. Increase your energy production 2 steps.',
         cardNumber: 'M40',
-        // TODO(kberg): requirements: CardRequirements.text('2 colonies @moon'),
         renderData: CardRenderer.builder((b) => {
           b.production((pb) => pb.energy(2));
         }),

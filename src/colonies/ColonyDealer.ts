@@ -68,7 +68,6 @@ export class ColonyDealer {
     return deck;
   }
   public drawColonies(players: number, allowList: Array<ColonyName> = [], venusNextExtension: boolean, turmoilExtension: boolean, addCommunityColonies: boolean = false): Array<Colony> {
-    let count: number = players + 2;
     let colonyTiles = ALL_COLONIES_TILES;
     if (addCommunityColonies) colonyTiles = colonyTiles.concat(COMMUNITY_COLONIES_TILES);
     if (!venusNextExtension) colonyTiles = colonyTiles.filter((c) => c.colonyName !== ColonyName.VENUS);
@@ -77,11 +76,9 @@ export class ColonyDealer {
     if (allowList.length === 0) {
       colonyTiles.forEach((e) => allowList.push(e.colonyName));
     }
-    if (players === 1) {
-      count = 4;
-    } else if (players === 2) {
-      count = 5;
-    }
+
+    // Two-player games and solo games get one more colony.
+    const count: number = (players + 2) + (players <= 2 ? 1 : 0);
 
     const tempDeck = this.shuffle(
       colonyTiles.filter(
@@ -90,16 +87,15 @@ export class ColonyDealer {
         (cf) => new cf.Factory(),
       ),
     );
-    const coloniesDeck: Array<Colony> = [];
-
+    const deck: Array<Colony> = [];
     for (let i = 0; i < count; i++) {
-      coloniesDeck.push(tempDeck.pop()!);
+      deck.push(tempDeck.pop()!);
     }
+
     this.discardedColonies.push(...tempDeck);
     this.discardedColonies.sort((a, b) => (a.name > b.name) ? 1 : -1);
-    coloniesDeck.sort((a, b) => (a.name > b.name) ? 1 : -1);
-
-    return coloniesDeck;
+    deck.sort((a, b) => (a.name > b.name) ? 1 : -1);
+    return deck;
   }
 
   public serialize(): SerializedColonyDealer {

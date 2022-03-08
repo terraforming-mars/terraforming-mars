@@ -1,6 +1,6 @@
 import {LogMessageDataType} from '@/common/logs/LogMessageDataType';
 import {Message} from '@/common/logs/Message';
-import {PreferencesManager} from '@/client/utils/PreferencesManager';
+import {getPreferences} from '@/client/utils/PreferencesManager';
 import {LogMessageData} from '@/common/logs/LogMessageData';
 import {Log} from '@/common/logs/Log';
 
@@ -15,7 +15,7 @@ export function translateMessage(message: Message): string {
 }
 
 export function translateText(englishText: string): string {
-  const lang = PreferencesManager.load('lang') || 'en';
+  const lang = getPreferences().lang;
   const translations: {[key: string]: string} | undefined = (window as any)._translations;
   if (lang === 'en' || translations === undefined) {
     return englishText;

@@ -1,41 +1,13 @@
-import {TestPlayers} from '../TestPlayers';
 import {expect} from 'chai';
+import {TestPlayers} from '../TestPlayers';
 import {Luna} from '../../src/colonies/Luna';
-import {Player} from '../../src/Player';
 import {Game} from '../../src/Game';
-import {OrOptions} from '../../src/inputs/OrOptions';
-import {AndOptions} from '../../src/inputs/AndOptions';
-import {SelectColony} from '../../src/inputs/SelectColony';
-import {SelectCard} from '../../src/inputs/SelectCard';
 import {TestingUtils} from '../TestingUtils';
 import {TestPlayer} from '../TestPlayer';
-import {CardName} from '../../src/common/cards/CardName';
-import {Pallas} from '../../src/cards/community/Pallas';
-import {Io} from '../../src/colonies/Io';
-import {Europa} from '../../src/colonies/Europa';
-import {ColonyName} from '../../src/common/colonies/ColonyName';
-import {Colony} from '../../src/colonies/Colony';
-import {ColonyDealer} from '@/colonies/ColonyDealer';
+import {ColonyDealer} from '../../src/colonies/ColonyDealer';
+import {Random} from '../../src/Random';
 
 const gameOptions = TestingUtils.setCustomGameOptions({coloniesExtension: true});
-
-function isBuildColonyStandardProjectAvailable(player: TestPlayer) {
-  const options = TestingUtils.cast(player.getStandardProjectOption(), SelectCard);
-  const colonyOptionIdx = options.cards.findIndex((card) => card.name === CardName.BUILD_COLONY_STANDARD_PROJECT);
-  return options.enabled![colonyOptionIdx];
-}
-
-function isTradeWithColonyActionAvailable(player: Player) {
-  let tradeWithColonyIsAvailable = false;
-  player.takeAction();
-  const actions = TestingUtils.cast(player.getWaitingFor(), OrOptions);
-  actions.options.forEach((option) => {
-    if (option instanceof AndOptions && option.options.slice(-1)[0] instanceof SelectColony) {
-      tradeWithColonyIsAvailable = true;
-    }
-  });
-  return tradeWithColonyIsAvailable;
-}
 
 describe('ColonyDealer', function() {
   let luna: Luna;
@@ -126,38 +98,12 @@ describe('ColonyDealer', function() {
     expect(isTradeWithColonyActionAvailable(player2)).to.be.false;
   });
 
-  it('serializing and deserializing', () => {
-    const io = new Io();
-    io.isActive = true;
-    io.colonies = ['p1', 'p2', 'p3'];
-    io.trackPosition = 3;
-    io.visitor = 'p4';
-
-    const pallas = new Pallas();
-    pallas.isActive = true;
-
-    const europa = new Europa();
-    europa.isActive = false;
-
-    const json = [io, pallas, europa].map((c) => c.serialize());
-    const colonies = Colony.deserializeColonies(json);
-
-    expect(colonies[0].name).eq(ColonyName.IO);
-    expect(colonies[0].isActive).is.true;
-    expect(colonies[0].colonies).deep.eq(['p1', 'p2', 'p3']);
-    expect(colonies[0].trackPosition).eq(3);
-    expect(colonies[0].visitor).eq('p4');
-
-    expect(colonies[1].name).eq(ColonyName.PALLAS);
-    expect(colonies[1].isActive).is.true;
-    expect(colonies[1].colonies).is.empty;
-    expect(colonies[1].trackPosition).eq(1);
-    expect(colonies[1].visitor).is.undefined;
-
-    expect(colonies[2].name).eq(ColonyName.EUROPA);
-    expect(colonies[2].isActive).is.false;
-    expect(colonies[2].colonies).is.empty;
-    expect(colonies[2].trackPosition).eq(1);
-    expect(colonies[2].visitor).is.undefined;
+  it('colonies dealt by player count', () => {
+    const rng = new Random(1);
+    expect(new ColonyDealer(rng).drawColonies(1, undefined, false, false, false)).has.length(4);
+    expect(new ColonyDealer(rng).drawColonies(2, undefined, false, false, false)).has.length(5);
+    expect(new ColonyDealer(rng).drawColonies(3, undefined, false, false, false)).has.length(5);
+    expect(new ColonyDealer(rng).drawColonies(4, undefined, false, false, false)).has.length(6);
+    expect(new ColonyDealer(rng).drawColonies(5, undefined, false, false, false)).has.length(7);
   });
 });

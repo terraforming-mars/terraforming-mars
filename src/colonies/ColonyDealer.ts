@@ -19,6 +19,7 @@ import {Venus} from '../cards/community/Venus';
 import {Leavitt} from '../cards/community/Leavitt';
 import {Pallas} from '../cards/community/Pallas';
 import {SerializedColonyDealer} from './SerializedColonyDealer';
+import {Random} from '../Random';
 
 // TODO(kberg): Add ability to hard-code chosen colonies, separate from customColoniesList, so as to not be
 // forced to rely on randomness.
@@ -59,11 +60,13 @@ export const ALL_ALL_COLONIES_TILES = [...ALL_COLONIES_TILES, ...COMMUNITY_COLON
 export class ColonyDealer {
   public discardedColonies: Array<Colony> = [];
 
+  constructor(private rng: Random) {}
+
   private shuffle(cards: Array<Colony>): Array<Colony> {
     const deck: Array<Colony> = [];
     const copy = cards.slice();
     while (copy.length) {
-      deck.push(copy.splice(Math.floor(Math.random() * copy.length), 1)[0]);
+      deck.push(copy.splice(Math.floor(this.rng.nextInt(copy.length)), 1)[0]);
     }
     return deck;
   }
@@ -104,8 +107,8 @@ export class ColonyDealer {
     };
   }
 
-  public static deserialize(d: SerializedColonyDealer | undefined): ColonyDealer {
-    const colonyDealer = new ColonyDealer();
+  public static deserialize(d: SerializedColonyDealer | undefined, rng: Random): ColonyDealer {
+    const colonyDealer = new ColonyDealer(rng);
     if (d !== undefined) {
       colonyDealer.discardedColonies = Colony.deserializeColonies(d.discardedColonies);
     }

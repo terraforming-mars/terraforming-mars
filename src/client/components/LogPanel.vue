@@ -337,6 +337,7 @@ export default Vue.extend({
       for (const player of this.players) {
         const foundCard = player.playedCards.find((card) => card.name === cardName);
         if (foundCard !== undefined) return foundCard.resources;
+        if (cardName === player.corporationCard?.name) return player.corporationCard.resources;
       }
 
       return undefined;

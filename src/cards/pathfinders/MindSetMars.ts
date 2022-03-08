@@ -28,7 +28,7 @@ export class MindSetMars extends Card implements ICorporationCard {
         description: 'You start with 44 M€ and 1 agenda resource to this card.',
         renderData: CardRenderer.builder((b) => {
           b.br;
-          b.megacredits(44).agenda().nbsp.building(1, {played}).arrow(Size.SMALL).agenda().br;
+          b.megacredits(44).agenda().nbsp.building(1, {played}).colon(Size.SMALL).agenda().br;
           b.text('(Action: When you play a card with a building tag, add 1 agenda on this card.)', Size.SMALL, false, false).br;
           b.agenda({amount: 2, digit: true}).arrow(Size.SMALL).delegates(1).nbsp;
           b.agenda({amount: 5, digit: true}).arrow(Size.SMALL).city().br;

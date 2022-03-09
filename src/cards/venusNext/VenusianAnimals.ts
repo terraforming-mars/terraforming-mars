@@ -39,6 +39,6 @@ export class VenusianAnimals extends Card implements IResourceCard {
     return undefined;
   }
   public onCardPlayed(player: Player, card: IProjectCard): void {
-    player.addResourceTo(this, card.tags.filter((tag) => tag === Tags.SCIENCE).length);
+    player.addResourceTo(this, player.cardTagCount(card, Tags.SCIENCE));
   }
 }

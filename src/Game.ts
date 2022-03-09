@@ -72,6 +72,7 @@ import {ArabiaTerraBoard} from './boards/ArabiaTerraBoard';
 import {AddResourcesToCard} from './deferredActions/AddResourcesToCard';
 import {isProduction} from './utils/server';
 import {VastitasBorealisBoard} from './boards/VastitasBorealisBoard';
+import {ColonyDeserializer} from './colonies/ColonyDeserializer';
 
 export interface Score {
   corporation: String;
@@ -1644,7 +1645,7 @@ export class Game implements ISerializable<SerializedGame> {
     // Reload colonies elements if needed
     if (gameOptions.coloniesExtension) {
       game.colonyDealer = ColonyDealer.deserialize(d.colonyDealer, game.rng);
-      game.colonies = Colony.deserializeColonies(d.colonies);
+      game.colonies = ColonyDeserializer.deserializeAndFilter(d.colonies);
     }
 
     // Reload turmoil elements if needed

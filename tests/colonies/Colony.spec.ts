@@ -19,7 +19,8 @@ import {Pallas} from '../../src/cards/community/Pallas';
 import {Io} from '../../src/colonies/Io';
 import {Europa} from '../../src/colonies/Europa';
 import {ColonyName} from '../../src/common/colonies/ColonyName';
-import {Colony} from '../../src/colonies/Colony';
+// import {Colony} from '../../src/colonies/Colony';
+import {ColonyDeserializer} from '../../src/colonies/ColonyDeserializer';
 
 const gameOptions = TestingUtils.setCustomGameOptions({coloniesExtension: true});
 
@@ -370,7 +371,7 @@ describe('Colony', function() {
     europa.isActive = false;
 
     const json = [io, pallas, europa].map((c) => c.serialize());
-    const colonies = Colony.deserializeColonies(json);
+    const colonies = ColonyDeserializer.deserializeAndFilter(json);
 
     expect(colonies[0].name).eq(ColonyName.IO);
     expect(colonies[0].isActive).is.true;

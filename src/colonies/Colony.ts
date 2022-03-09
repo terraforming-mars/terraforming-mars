@@ -25,7 +25,6 @@ import {Game} from '../Game';
 import {Turmoil} from '../turmoil/Turmoil';
 import {ShouldIncreaseTrack} from '../common/colonies/ShouldIncreaseTrack';
 import {SerializedColony} from '../SerializedColony';
-import {ALL_ALL_COLONIES_TILES} from './ColonyDealer';
 
 type TradeOptions = {
   usesTradeFleet?: boolean;
@@ -352,29 +351,5 @@ export abstract class Colony {
         trackPosition: this.trackPosition,
         visitor: this.visitor,
       };
-    }
-
-    public static deserialize(serialized: SerializedColony | ColonyName): Colony | undefined {
-      const name = typeof(serialized) === 'string' ? serialized : serialized.name;
-      const factory = ALL_ALL_COLONIES_TILES.find((cf) => cf.colonyName === name);
-      if (factory === undefined) {
-        console.warn(`colony ${name} not found`);
-        return undefined;
-      }
-
-      const colony = new factory.Factory();
-      if (typeof(serialized) !== 'string') {
-        colony.colonies = serialized.colonies;
-        colony.isActive = serialized.isActive;
-        colony.trackPosition = serialized.trackPosition;
-        colony.visitor = serialized.visitor;
-      }
-      return colony;
-    }
-
-    public static deserializeColonies(serialized: Array<SerializedColony | ColonyName>): Array<Colony> {
-      const colonies: Array<Colony | undefined> = serialized.map((c) => Colony.deserialize(c)).filter((c) => c !== undefined);
-      // as Array<Colony> is safe because filter removes the undefined colonies
-      return colonies as Array<Colony>;
     }
 }

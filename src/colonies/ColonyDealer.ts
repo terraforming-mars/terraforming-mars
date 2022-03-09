@@ -1,61 +1,14 @@
 import {Colony} from './Colony';
-import {Europa} from './Europa';
-import {Ganymede} from './Ganymede';
-import {Titan} from './Titan';
-import {Callisto} from './Callisto';
-import {Triton} from './Triton';
-import {Ceres} from './Ceres';
-import {Luna} from './Luna';
-import {Io} from './Io';
-import {Miranda} from './Miranda';
-import {Pluto} from './Pluto';
-import {Enceladus} from './Enceladus';
-import {Iapetus} from '../cards/community/Iapetus';
-import {Mercury} from '../cards/community/Mercury';
 import {ColonyName} from '../common/colonies/ColonyName';
-import {Hygiea} from '../cards/community/Hygiea';
-import {Titania} from '../cards/community/Titania';
-import {Venus} from '../cards/community/Venus';
-import {Leavitt} from '../cards/community/Leavitt';
-import {Pallas} from '../cards/community/Pallas';
 import {SerializedColonyDealer} from './SerializedColonyDealer';
 import {Random} from '../Random';
+import {ALL_COLONIES_TILES, COMMUNITY_COLONIES_TILES} from './ColonyManifest';
+import {ColonyDeserializer} from './ColonyDeserializer';
 
 // TODO(kberg): Add ability to hard-code chosen colonies, separate from customColoniesList, so as to not be
 // forced to rely on randomness.
 // TODO(kberg): Add ability to disable initial action that removes a colony in the solo game. (Or come up with
 // a simple line of code to deal with solo games.)
-export interface IColonyFactory<T> {
-    colonyName: ColonyName;
-    Factory: new () => T
-}
-
-// Rename to BASE_COLONIES_TILES or something.
-export const ALL_COLONIES_TILES: Array<IColonyFactory<Colony>> = [
-  {colonyName: ColonyName.CERES, Factory: Ceres},
-  {colonyName: ColonyName.ENCELADUS, Factory: Enceladus},
-  {colonyName: ColonyName.EUROPA, Factory: Europa},
-  {colonyName: ColonyName.GANYMEDE, Factory: Ganymede},
-  {colonyName: ColonyName.IO, Factory: Io},
-  {colonyName: ColonyName.LUNA, Factory: Luna},
-  {colonyName: ColonyName.MIRANDA, Factory: Miranda},
-  {colonyName: ColonyName.TITAN, Factory: Titan},
-  {colonyName: ColonyName.CALLISTO, Factory: Callisto},
-  {colonyName: ColonyName.PLUTO, Factory: Pluto},
-  {colonyName: ColonyName.TRITON, Factory: Triton},
-];
-
-export const COMMUNITY_COLONIES_TILES: Array<IColonyFactory<Colony>> = [
-  {colonyName: ColonyName.IAPETUS, Factory: Iapetus},
-  {colonyName: ColonyName.MERCURY, Factory: Mercury},
-  {colonyName: ColonyName.HYGIEA, Factory: Hygiea},
-  {colonyName: ColonyName.TITANIA, Factory: Titania},
-  {colonyName: ColonyName.VENUS, Factory: Venus},
-  {colonyName: ColonyName.LEAVITT, Factory: Leavitt},
-  {colonyName: ColonyName.PALLAS, Factory: Pallas},
-];
-
-export const ALL_ALL_COLONIES_TILES = [...ALL_COLONIES_TILES, ...COMMUNITY_COLONIES_TILES];
 
 export class ColonyDealer {
   public discardedColonies: Array<Colony> = [];
@@ -110,7 +63,7 @@ export class ColonyDealer {
   public static deserialize(d: SerializedColonyDealer | undefined, rng: Random): ColonyDealer {
     const colonyDealer = new ColonyDealer(rng);
     if (d !== undefined) {
-      colonyDealer.discardedColonies = Colony.deserializeColonies(d.discardedColonies);
+      colonyDealer.discardedColonies = ColonyDeserializer.deserializeAndFilter(d.discardedColonies);
     }
     return colonyDealer;
   }

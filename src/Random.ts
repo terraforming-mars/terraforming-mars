@@ -2,7 +2,7 @@ export class Random {
   private currentSeed: number;
 
   constructor(public readonly seed = 0, currentSeed?: number) {
-    this.currentSeed = currentSeed ? currentSeed : Math.floor(seed * 4294967296);
+    this.currentSeed = currentSeed ?? Math.floor(seed * 4294967296);
   }
 
   public get current(): number {

@@ -298,7 +298,7 @@ export class Game implements ISerializable<SerializedGame> {
 
     // Add colonies stuff
     if (gameOptions.coloniesExtension) {
-      game.colonyDealer = new ColonyDealer();
+      game.colonyDealer = new ColonyDealer(rng);
       const communityColoniesSelected = GameSetup.includesCommunityColonies(gameOptions);
       const allowCommunityColonies = gameOptions.communityCardsOption || communityColoniesSelected;
 
@@ -1518,7 +1518,7 @@ export class Game implements ISerializable<SerializedGame> {
     return ret;
   }
 
-  public getCardPlayer(name: string): Player {
+  public getCardPlayer(name: CardName): Player {
     for (const player of this.players) {
       // Check cards player has played
       for (const card of player.playedCards) {
@@ -1531,7 +1531,7 @@ export class Game implements ISerializable<SerializedGame> {
         return player;
       }
     }
-    throw new Error('No player has played requested card');
+    throw new Error(`No player has played ${name}`);
   }
 
   public getCardsInHandByResource(player: Player, resourceType: ResourceType) {
@@ -1644,7 +1644,7 @@ export class Game implements ISerializable<SerializedGame> {
     }
     // Reload colonies elements if needed
     if (gameOptions.coloniesExtension) {
-      game.colonyDealer = new ColonyDealer();
+      game.colonyDealer = new ColonyDealer(game.rng);
 
       if (d.colonyDealer !== undefined) {
         game.colonyDealer.discardedColonies = loadColoniesFromJSON(d.colonyDealer.discardedColonies);

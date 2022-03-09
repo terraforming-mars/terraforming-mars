@@ -832,8 +832,16 @@ export class Player implements ISerializable<SerializedPlayer> {
       if (tag === Tags.EARTH && this.cardIsInEffect(CardName.EARTH_EMBASSY)) {
         tagCount += this.getRawTagCount(Tags.MOON, includeEvents);
       }
+
       if (tag !== Tags.WILDCARD) {
         tagCount += this.getRawTagCount(Tags.WILDCARD, includeEvents);
+      }
+    }
+
+    // Habitat Marte hook
+    if (mode !== 'raw') {
+      if (tag === Tags.SCIENCE && this.corporationCard?.name === CardName.HABITAT_MARTE) {
+        tagCount += this.getRawTagCount(Tags.MARS, includeEvents);
       }
     }
 
@@ -849,6 +857,29 @@ export class Player implements ISerializable<SerializedPlayer> {
       }
     }
     return tagCount;
+  }
+
+  public cardHasTag(card: ICard, target: Tags): boolean {
+    for (const tag of card.tags) {
+      if (tag === target) return true;
+      if (tag === Tags.MARS &&
+        target === Tags.SCIENCE &&
+        this.corporationCard?.name === CardName.HABITAT_MARTE) {
+        return true;
+      }
+    }
+    return false;
+  }
+  public cardTagCount(card: ICard, target: Tags): number {
+    let count = 0;
+    for (const tag of card.tags) {
+      if (tag === target) count++;
+      if (tag === Tags.MARS && target === Tags.SCIENCE &&
+        this.corporationCard?.name === CardName.HABITAT_MARTE) {
+        count++;
+      }
+    }
+    return count;
   }
 
   // Counts the tags in the player's play area only.

@@ -73,7 +73,7 @@ export class PharmacyUnion extends Card implements ICorporationCard {
 
     const game = player.game;
 
-    const hasScienceTag = card.tags.includes(Tags.SCIENCE);
+    const hasScienceTag = player.cardHasTag(card, Tags.SCIENCE);
     const hasMicrobesTag = card.tags.includes(Tags.MICROBE);
     const isPharmacyUnion = player.isCorporation(CardName.PHARMACY_UNION);
 
@@ -112,7 +112,7 @@ export class PharmacyUnion extends Card implements ICorporationCard {
 
 
     if (isPharmacyUnion && hasScienceTag) {
-      const scienceTags = card.tags.filter((tag) => tag === Tags.SCIENCE).length;
+      const scienceTags = player.cardTagCount(card, Tags.SCIENCE);
       for (let i = 0; i < scienceTags; i++) {
         game.defer(new DeferredAction(
           player,

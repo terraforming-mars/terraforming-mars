@@ -1,6 +1,6 @@
 <template>
-<div>
-  <div :class="getIconClass()" :title="$t(getTitle())"></div>
+<div :title="$t(getTitle())">
+  <div :class="getIconClass()"></div>
   <div class="global_params_value">
     <div v-if="isMax()">
       <img src="/assets/misc/checkmark.png" class="checkmark" :alt="$t('Completed!')">

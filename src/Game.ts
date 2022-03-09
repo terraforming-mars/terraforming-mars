@@ -297,7 +297,7 @@ export class Game implements ISerializable<SerializedGame> {
 
     // Add colonies stuff
     if (gameOptions.coloniesExtension) {
-      game.colonyDealer = new ColonyDealer();
+      game.colonyDealer = new ColonyDealer(rng);
       const communityColoniesSelected = GameSetup.includesCommunityColonies(gameOptions);
       const allowCommunityColonies = gameOptions.communityCardsOption || communityColoniesSelected;
 
@@ -1643,7 +1643,7 @@ export class Game implements ISerializable<SerializedGame> {
     }
     // Reload colonies elements if needed
     if (gameOptions.coloniesExtension) {
-      game.colonyDealer = new ColonyDealer();
+      game.colonyDealer = new ColonyDealer(game.rng);
 
       if (d.colonyDealer !== undefined) {
         game.colonyDealer.discardedColonies = loadColoniesFromJSON(d.colonyDealer.discardedColonies);

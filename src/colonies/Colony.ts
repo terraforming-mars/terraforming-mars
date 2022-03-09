@@ -25,14 +25,9 @@ import {Game} from '../Game';
 import {Turmoil} from '../turmoil/Turmoil';
 import {ShouldIncreaseTrack} from '../common/colonies/ShouldIncreaseTrack';
 import {SerializedColony} from '../SerializedColony';
+import {IColony, TradeOptions} from './IColony';
 
-type TradeOptions = {
-  usesTradeFleet?: boolean;
-  decreaseTrackAfterTrade?: boolean;
-  giveColonyBonuses?: boolean;
-  selfishTrade?: boolean;
-};
-export abstract class Colony {
+export abstract class Colony implements IColony {
     public abstract readonly name: ColonyName;
 
     // isActive represents when the colony is part of the game, or "back in the box", as it were.
@@ -189,9 +184,9 @@ export abstract class Colony {
         const openColonies = game.colonies.filter((colony) => colony.isActive);
         action = new DeferredAction(
           player,
-          () => new SelectColony('Select colony to gain trade income from', 'Select', openColonies, (colony: Colony) => {
+          () => new SelectColony('Select colony to gain trade income from', 'Select', openColonies, (colony: IColony) => {
             game.log('${0} gained ${1} trade bonus', (b) => b.player(player).colony(colony));
-            colony.handleTrade(player, {
+            (colony as Colony).handleTrade(player, {
               usesTradeFleet: false,
               decreaseTrackAfterTrade: false,
               giveColonyBonuses: false,
@@ -344,7 +339,7 @@ export abstract class Colony {
     }
 }
 
-export function serializeColonies(colonies: Array<Colony>): Array<SerializedColony> {
+export function serializeColonies(colonies: Array<IColony>): Array<SerializedColony> {
   return colonies.map((colony) => {
     return {
       colonies: colony.colonies,

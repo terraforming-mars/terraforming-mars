@@ -13,7 +13,7 @@ import {ColoniesHandler} from '../../colonies/ColoniesHandler';
 import {DeferredAction} from '../../deferredActions/DeferredAction';
 import {SelectColony} from '../../inputs/SelectColony';
 import {IColonyTrader} from '../../colonies/IColonyTrader';
-import {Colony} from '../../colonies/Colony';
+import {IColony} from '../../colonies/IColony';
 import {AddResourcesToCard} from '../../deferredActions/AddResourcesToCard';
 
 function tradeCost(player: Player) {
@@ -88,7 +88,7 @@ export class CollegiumCopernicus extends Card implements ICorporationCard, IActi
   }
 }
 
-export function tradeWithColony(card: ICorporationCard, player: Player, colony: Colony) {
+export function tradeWithColony(card: ICorporationCard, player: Player, colony: IColony) {
   const cost = tradeCost(player);
   card.resourceCount -= cost;
   player.game.log('${0} spent ${1} data from ${2} to trade with ${3}', (b) => b.player(player).number(cost).card(card).colony(colony));
@@ -111,7 +111,7 @@ export class TradeWithCollegiumCopernicus implements IColonyTrader {
     return 'Pay 3 Data (use Collegium Copernicus action)';
   }
 
-  public trade(colony: Colony) {
+  public trade(colony: IColony) {
     this.player.addActionThisGeneration(CardName.COLLEGIUM_COPERNICUS);
     if (this.collegiumCopernicus !== undefined) {
       tradeWithColony(this.collegiumCopernicus, this.player, colony);

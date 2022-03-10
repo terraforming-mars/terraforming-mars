@@ -14,7 +14,6 @@ import {Game} from './Game';
 import {HowToPay} from './common/inputs/HowToPay';
 import {IAward} from './awards/IAward';
 import {ICard, IResourceCard, isIActionCard, TRSource, IActionCard} from './cards/ICard';
-import {ISerializable} from './ISerializable';
 import {IMilestone} from './milestones/IMilestone';
 import {IProjectCard} from './cards/IProjectCard';
 import {ITagCount} from './common/cards/ITagCount';
@@ -74,7 +73,7 @@ import {PathfindersExpansion} from './pathfinders/PathfindersExpansion';
 import {deserializeProjectCard, serializeProjectCard} from './cards/CardSerialization';
 import {ColoniesHandler} from './colonies/ColoniesHandler';
 
-export class Player implements ISerializable<SerializedPlayer> {
+export class Player {
   public readonly id: PlayerId;
   protected waitingFor?: PlayerInput;
   protected waitingForCb?: () => void;

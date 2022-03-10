@@ -1,8 +1,8 @@
-import {Colony} from './Colony';
+import {IColony} from './IColony';
 
 // Something that can pay for trading with colonies.
 export interface IColonyTrader {
   canUse(): boolean;
   optionText(): string;
-  trade(colony: Colony): void;
+  trade(colony: IColony): void;
 }

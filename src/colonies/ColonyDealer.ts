@@ -1,4 +1,4 @@
-import {Colony} from './Colony';
+import {IColony} from './IColony';
 import {Europa} from './Europa';
 import {Ganymede} from './Ganymede';
 import {Titan} from './Titan';
@@ -30,7 +30,7 @@ export interface IColonyFactory<T> {
     Factory: new () => T
 }
 
-export const ALL_COLONIES_TILES: Array<IColonyFactory<Colony>> = [
+export const ALL_COLONIES_TILES: Array<IColonyFactory<IColony>> = [
   {colonyName: ColonyName.CERES, Factory: Ceres},
   {colonyName: ColonyName.ENCELADUS, Factory: Enceladus},
   {colonyName: ColonyName.EUROPA, Factory: Europa},
@@ -44,7 +44,7 @@ export const ALL_COLONIES_TILES: Array<IColonyFactory<Colony>> = [
   {colonyName: ColonyName.TRITON, Factory: Triton},
 ];
 
-export const COMMUNITY_COLONIES_TILES: Array<IColonyFactory<Colony>> = [
+export const COMMUNITY_COLONIES_TILES: Array<IColonyFactory<IColony>> = [
   {colonyName: ColonyName.IAPETUS, Factory: Iapetus},
   {colonyName: ColonyName.MERCURY, Factory: Mercury},
   {colonyName: ColonyName.HYGIEA, Factory: Hygiea},
@@ -55,7 +55,7 @@ export const COMMUNITY_COLONIES_TILES: Array<IColonyFactory<Colony>> = [
 ];
 
 // Function to return a card object by its name
-export function getColonyByName(colonyName: string): Colony | undefined {
+export function getColonyByName(colonyName: string): IColony | undefined {
   const colonyTiles = ALL_COLONIES_TILES.concat(COMMUNITY_COLONIES_TILES);
   const colonyFactory = colonyTiles.find((colonyFactory) => colonyFactory.colonyName === colonyName);
   if (colonyFactory !== undefined) {
@@ -64,8 +64,8 @@ export function getColonyByName(colonyName: string): Colony | undefined {
   return undefined;
 }
 
-export function loadColoniesFromJSON(colonies: Array<SerializedColony>): Array<Colony> {
-  const result: Array<Colony> = [];
+export function loadColoniesFromJSON(colonies: Array<SerializedColony>): Array<IColony> {
+  const result: Array<IColony> = [];
   for (const serialized of colonies) {
     const colony = getColonyByName(serialized.name);
     if (colony !== undefined) {
@@ -82,19 +82,19 @@ export function loadColoniesFromJSON(colonies: Array<SerializedColony>): Array<C
 }
 
 export class ColonyDealer {
-  public discardedColonies: Array<Colony> = [];
+  public discardedColonies: Array<IColony> = [];
 
   constructor(private rng: Random) {}
 
-  private shuffle(cards: Array<Colony>): Array<Colony> {
-    const deck: Array<Colony> = [];
+  private shuffle(cards: Array<IColony>): Array<IColony> {
+    const deck: Array<IColony> = [];
     const copy = cards.slice();
     while (copy.length) {
       deck.push(copy.splice(Math.floor(this.rng.nextInt(copy.length)), 1)[0]);
     }
     return deck;
   }
-  public drawColonies(players: number, allowList: Array<ColonyName> = [], venusNextExtension: boolean, turmoilExtension: boolean, addCommunityColonies: boolean = false): Array<Colony> {
+  public drawColonies(players: number, allowList: Array<ColonyName> = [], venusNextExtension: boolean, turmoilExtension: boolean, addCommunityColonies: boolean = false): Array<IColony> {
     let colonyTiles = ALL_COLONIES_TILES;
     if (addCommunityColonies) colonyTiles = colonyTiles.concat(COMMUNITY_COLONIES_TILES);
     if (!venusNextExtension) colonyTiles = colonyTiles.filter((c) => c.colonyName !== ColonyName.VENUS);

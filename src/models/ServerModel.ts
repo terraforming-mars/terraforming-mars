@@ -43,7 +43,7 @@ import {Turmoil} from '../turmoil/Turmoil';
 import {createPathfindersModel} from './PathfindersModel';
 import {MoonExpansion} from '../moon/MoonExpansion';
 import {MoonModel} from '../common/models/MoonModel';
-import {Colony} from '../colonies/Colony';
+import {IColony} from '../colonies/IColony';
 
 export class Server {
   public static getSimpleGameModel(game: Game): SimpleGameModel {
@@ -515,7 +515,7 @@ export class Server {
     };
   }
 
-  private static getColonyModel(game: Game, colonies: Array<Colony>) : Array<ColonyModel> {
+  private static getColonyModel(game: Game, colonies: Array<IColony>) : Array<ColonyModel> {
     return colonies.map(
       (colony): ColonyModel => ({
         colonies: colony.colonies.map(

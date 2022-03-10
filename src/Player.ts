@@ -11,7 +11,7 @@ import {ColonyName} from './common/colonies/ColonyName';
 import {Color} from './common/Color';
 import {ICorporationCard} from './cards/corporation/ICorporationCard';
 import {Game} from './Game';
-import {HowToPay} from './inputs/HowToPay';
+import {HowToPay} from './common/inputs/HowToPay';
 import {IAward} from './awards/IAward';
 import {ICard, IResourceCard, isIActionCard, TRSource, IActionCard} from './cards/ICard';
 import {ISerializable} from './ISerializable';

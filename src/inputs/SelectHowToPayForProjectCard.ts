@@ -1,6 +1,6 @@
 import {PlayerInput} from '../PlayerInput';
 import {PlayerInputTypes} from '../common/input/PlayerInputTypes';
-import {HowToPay} from './HowToPay';
+import {HowToPay} from '../common/inputs/HowToPay';
 import {IProjectCard} from '../cards/IProjectCard';
 import {Units} from '../common/Units';
 import {MoonExpansion} from '../moon/MoonExpansion';

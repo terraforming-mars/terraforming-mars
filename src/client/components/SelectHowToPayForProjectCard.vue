@@ -2,7 +2,7 @@
 import Vue from 'vue';
 import Button from '@/client/components/common/Button.vue';
 
-import {HowToPay} from '@/inputs/HowToPay';
+import {HowToPay} from '@/common/inputs/HowToPay';
 import Card from '@/client/components/card/Card.vue';
 import {getCard} from '@/client/cards/ClientCardManifest';
 import {CardModel} from '@/common/models/CardModel';

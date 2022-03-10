@@ -11,7 +11,6 @@ import {PlayerId} from '../common/Types';
 import {Game} from '../Game';
 import {GlobalEventDealer, getGlobalEventByName} from './globalEvents/GlobalEventDealer';
 import {IGlobalEvent} from './globalEvents/IGlobalEvent';
-import {ISerializable} from '../ISerializable';
 import {SerializedTurmoil} from './SerializedTurmoil';
 import {PLAYER_DELEGATES_COUNT} from '../common/constants';
 import {PoliticalAgendasData, PoliticalAgendas} from './PoliticalAgendas';
@@ -40,7 +39,7 @@ const UNINITIALIZED_POLITICAL_AGENDAS_DATA: PoliticalAgendasData = {
   agendaStyle: AgendaStyle.CHAIRMAN,
 };
 
-export class Turmoil implements ISerializable<SerializedTurmoil> {
+export class Turmoil {
   public chairman: undefined | PlayerId | NeutralPlayer = undefined;
   public rulingParty: IParty;
   public dominantParty: IParty;

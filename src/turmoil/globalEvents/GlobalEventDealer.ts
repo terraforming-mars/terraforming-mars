@@ -38,7 +38,6 @@ import {VenusInfrastructure} from './VenusInfrastructure';
 import {CloudSocieties} from './CloudSocieties';
 import {MicrogravityHealthProblems} from './MicrogravityHealthProblems';
 import {SerializedGlobalEventDealer} from './SerializedGlobalEventDealer';
-import {ISerializable} from '../../ISerializable';
 import {LeadershipSummit} from './LeadershipSummit';
 import {BalancedDevelopment} from './BalancedDevelopment';
 import {TiredEarth} from './TiredEarth';
@@ -148,7 +147,7 @@ export function getGlobalEventByName(globalEventName: GlobalEventName): IGlobalE
   return undefined;
 }
 
-export class GlobalEventDealer implements ISerializable<SerializedGlobalEventDealer> {
+export class GlobalEventDealer {
   constructor(
     public readonly globalEventsDeck: Array<IGlobalEvent>,
     public readonly discardedGlobalEvents: Array<IGlobalEvent>) {}

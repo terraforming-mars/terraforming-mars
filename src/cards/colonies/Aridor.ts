@@ -6,7 +6,7 @@ import {IProjectCard} from '../IProjectCard';
 import {Resources} from '../../common/Resources';
 import {CardType} from '../../common/cards/CardType';
 import {CardName} from '../../common/cards/CardName';
-import {Colony} from '../../colonies/Colony';
+import {IColony} from '../../colonies/IColony';
 import {SelectColony} from '../../inputs/SelectColony';
 import {Card} from '../Card';
 import {CardRenderer} from '../render/CardRenderer';
@@ -39,10 +39,10 @@ export class Aridor extends Card implements ICorporationCard {
     const game = player.game;
     if (game.colonyDealer === undefined || !game.gameOptions.coloniesExtension) return undefined;
 
-    const availableColonies: Colony[] = game.colonyDealer.discardedColonies;
+    const availableColonies: IColony[] = game.colonyDealer.discardedColonies;
     if (availableColonies.length === 0) return undefined;
 
-    const selectColony = new SelectColony('Aridor first action - Select colony tile to add', 'Add colony tile', availableColonies, (colony: Colony) => {
+    const selectColony = new SelectColony('Aridor first action - Select colony tile to add', 'Add colony tile', availableColonies, (colony: IColony) => {
       if (availableColonies.includes(colony)) {
         game.colonies.push(colony);
         game.colonies.sort((a, b) => (a.name > b.name) ? 1 : -1);
@@ -56,7 +56,7 @@ export class Aridor extends Card implements ICorporationCard {
     return selectColony;
   }
 
-  private checkActivation(colony: Colony, game: Game): void {
+  private checkActivation(colony: IColony, game: Game): void {
     if (colony.resourceType === undefined) return;
     game.getPlayers().forEach((player) => {
       if (player.corporationCard !== undefined && player.corporationCard.resourceType === colony.resourceType) {

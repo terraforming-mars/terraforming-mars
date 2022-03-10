@@ -2,7 +2,7 @@
 import {Message} from '../common/logs/Message';
 import {PlayerInput} from '../PlayerInput';
 import {PlayerInputTypes} from '../common/input/PlayerInputTypes';
-import {Colony} from '../colonies/Colony';
+import {IColony} from '../colonies/IColony';
 
 export class SelectColony implements PlayerInput {
   public inputType: PlayerInputTypes = PlayerInputTypes.SELECT_COLONY;
@@ -10,8 +10,8 @@ export class SelectColony implements PlayerInput {
   constructor(
         public title: string | Message,
         public buttonLabel: string = 'Save',
-        public colonies: Array<Colony>,
-        public cb: (colony: Colony) => PlayerInput | undefined,
+        public colonies: Array<IColony>,
+        public cb: (colony: IColony) => PlayerInput | undefined,
   ) {
     this.buttonLabel = buttonLabel;
   }

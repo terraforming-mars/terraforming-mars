@@ -9,7 +9,7 @@ import {Card} from '../Card';
 import {CardRenderer} from '../render/CardRenderer';
 import {SelectOption} from '../../inputs/SelectOption';
 import {SelectColony} from '../../inputs/SelectColony';
-import {Colony} from '../../colonies/Colony';
+import {IColony} from '../../colonies/IColony';
 import {DeferredAction} from '../../deferredActions/DeferredAction';
 
 export class HuygensObservatory extends Card implements IProjectCard {
@@ -32,8 +32,8 @@ export class HuygensObservatory extends Card implements IProjectCard {
     });
   }
 
-  private trade(player: Player, colonies: Array<Colony>) {
-    return new SelectColony('Select colony tile to trade with for free', 'Select', colonies, (colony: Colony) => {
+  private trade(player: Player, colonies: Array<IColony>) {
+    return new SelectColony('Select colony tile to trade with for free', 'Select', colonies, (colony: IColony) => {
       colony.trade(player);
       return undefined;
     });
@@ -65,7 +65,7 @@ export class HuygensObservatory extends Card implements IProjectCard {
           'Select a colony tile to recall a trade fleet from',
           'OK',
           visitedColonies,
-          (colony: Colony) => {
+          (colony: IColony) => {
             game.log(
               '${0} is reusing a trade fleet from ${1}',
               (b) => b.player(player).colony(colony));

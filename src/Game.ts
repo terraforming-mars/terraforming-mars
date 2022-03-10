@@ -6,7 +6,8 @@ import {CardFinder} from './CardFinder';
 import {CardName} from './common/cards/CardName';
 import {CardType} from './common/cards/CardType';
 import {ClaimedMilestone, serializeClaimedMilestones, deserializeClaimedMilestones} from './milestones/ClaimedMilestone';
-import {Colony, serializeColonies} from './colonies/Colony';
+import {IColony} from './colonies/IColony';
+import {serializeColonies} from './colonies/Colony';
 import {ColonyDealer, loadColoniesFromJSON} from './colonies/ColonyDealer';
 import {ColonyName} from './common/colonies/ColonyName';
 import {Color} from './common/Color';
@@ -207,7 +208,7 @@ export class Game implements ISerializable<SerializedGame> {
   public awards: Array<IAward> = [];
 
   // Expansion-specific data
-  public colonies: Array<Colony> = [];
+  public colonies: Array<IColony> = [];
   public colonyDealer: ColonyDealer | undefined = undefined;
   public turmoil: Turmoil | undefined;
   public aresData: IAresData | undefined;

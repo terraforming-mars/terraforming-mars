@@ -1,26 +1,24 @@
-import {Colony} from './Colony';
+import {IColony} from './IColony';
 import {ColonyName} from '../common/colonies/ColonyName';
 import {SerializedColony} from '../SerializedColony';
 import {Random} from '../Random';
-import {ALL_COLONIES_TILES, COMMUNITY_COLONIES_TILES} from './ColonyManifest';
+import {ALL_COLONIES_TILES, BASE_COLONIES_TILES, COMMUNITY_COLONIES_TILES} from './ColonyManifest';
 
 // TODO(kberg): Add ability to hard-code chosen colonies, separate from customColoniesList, so as to not be
 // forced to rely on randomness.
 // TODO(kberg): Add ability to disable initial action that removes a colony in the solo game. (Or come up with
 // a simple line of code to deal with solo games.)
-
 // Function to return a card object by its name
-export function getColonyByName(colonyName: string): Colony | undefined {
-  const colonyTiles = ALL_COLONIES_TILES.concat(COMMUNITY_COLONIES_TILES);
-  const colonyFactory = colonyTiles.find((colonyFactory) => colonyFactory.colonyName === colonyName);
+export function getColonyByName(colonyName: string): IColony | undefined {
+  const colonyFactory = ALL_COLONIES_TILES.find((colonyFactory) => colonyFactory.colonyName === colonyName);
   if (colonyFactory !== undefined) {
     return new colonyFactory.Factory();
   }
   return undefined;
 }
 
-export function loadColoniesFromJSON(colonies: Array<SerializedColony>): Array<Colony> {
-  const result: Array<Colony> = [];
+export function loadColoniesFromJSON(colonies: Array<SerializedColony>): Array<IColony> {
+  const result: Array<IColony> = [];
   for (const serialized of colonies) {
     const colony = getColonyByName(serialized.name);
     if (colony !== undefined) {
@@ -37,20 +35,20 @@ export function loadColoniesFromJSON(colonies: Array<SerializedColony>): Array<C
 }
 
 export class ColonyDealer {
-  public discardedColonies: Array<Colony> = [];
+  public discardedColonies: Array<IColony> = [];
 
   constructor(private rng: Random) {}
 
-  private shuffle(cards: Array<Colony>): Array<Colony> {
-    const deck: Array<Colony> = [];
+  private shuffle(cards: Array<IColony>): Array<IColony> {
+    const deck: Array<IColony> = [];
     const copy = cards.slice();
     while (copy.length) {
       deck.push(copy.splice(Math.floor(this.rng.nextInt(copy.length)), 1)[0]);
     }
     return deck;
   }
-  public drawColonies(players: number, allowList: Array<ColonyName> = [], venusNextExtension: boolean, turmoilExtension: boolean, addCommunityColonies: boolean = false): Array<Colony> {
-    let colonyTiles = ALL_COLONIES_TILES;
+  public drawColonies(players: number, allowList: Array<ColonyName> = [], venusNextExtension: boolean, turmoilExtension: boolean, addCommunityColonies: boolean = false): Array<IColony> {
+    let colonyTiles = BASE_COLONIES_TILES;
     if (addCommunityColonies) colonyTiles = colonyTiles.concat(COMMUNITY_COLONIES_TILES);
     if (!venusNextExtension) colonyTiles = colonyTiles.filter((c) => c.colonyName !== ColonyName.VENUS);
     if (!turmoilExtension) colonyTiles = colonyTiles.filter((c) => c.colonyName !== ColonyName.PALLAS);

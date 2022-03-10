@@ -9,13 +9,13 @@ import {Game} from '../../../src/Game';
 import {TestPlayer} from '../../TestPlayer';
 import {TestingUtils} from '../../TestingUtils';
 import {Units} from '../../../src/common/Units';
-import {Colony} from '../../../src/colonies/Colony';
+import {IColony} from '../../../src/colonies/IColony';
 
 describe('HuygensObservatory', function() {
   let card: HuygensObservatory;
   let player: TestPlayer;
   let game: Game;
-  let ganymede: Colony;
+  let ganymede: IColony;
 
   beforeEach(function() {
     card = new HuygensObservatory();

@@ -1,5 +1,6 @@
-import {Player} from '@/Player';
-import {PlayerInput} from '@/PlayerInput';
+import {ISerializable} from '../ISerializable';
+import {Player} from '../Player';
+import {PlayerInput} from '../PlayerInput';
 import {ColonyName} from '../common/colonies/ColonyName';
 import {ShouldIncreaseTrack} from '../common/colonies/ShouldIncreaseTrack';
 import {Resources} from '../common/Resources';
@@ -7,6 +8,7 @@ import {ResourceType} from '../common/ResourceType';
 import {PlayerId} from '../common/Types';
 import {Game} from '../Game';
 import {ColonyBenefit} from './ColonyBenefit';
+import {SerializedColony} from '../SerializedColony';
 
 export type TradeOptions = {
   usesTradeFleet?: boolean;
@@ -15,7 +17,7 @@ export type TradeOptions = {
   selfishTrade?: boolean;
 };
 
-export interface IColony {
+export interface IColony extends ISerializable<SerializedColony> {
   name: ColonyName;
   isActive: boolean;
   colonies: Array<PlayerId>;

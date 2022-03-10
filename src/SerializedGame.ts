@@ -2,7 +2,6 @@ import {Phase} from './common/Phase';
 import {CardName} from './common/cards/CardName';
 import {SerializedClaimedMilestone} from './milestones/ClaimedMilestone';
 import {SerializedFundedAward} from './awards/FundedAward';
-import {ColonyDealer} from './colonies/ColonyDealer';
 import {DeferredAction} from './deferredActions/DeferredAction';
 import {SerializedColony} from './SerializedColony';
 import {SerializedPlayer} from './SerializedPlayer';
@@ -27,7 +26,6 @@ export interface SerializedGame {
     claimedMilestones: Array<SerializedClaimedMilestone>;
     clonedGamedId?: string;
     colonies: Array<SerializedColony>;
-    colonyDealer: ColonyDealer | undefined;
     dealer: SerializedDealer;
     deferredActions: Array<DeferredAction>;
     donePlayers: Array<PlayerId>;

@@ -337,17 +337,14 @@ export abstract class Colony implements IColony {
         return undefined;
       }
     }
-}
 
-export function serializeColonies(colonies: Array<IColony>): Array<SerializedColony> {
-  return colonies.map((colony) => {
-    return {
-      colonies: colony.colonies,
-      name: colony.name,
-      isActive: colony.isActive,
-      resourceType: colony.resourceType,
-      trackPosition: colony.trackPosition,
-      visitor: colony.visitor,
-    };
-  });
+    public serialize(): SerializedColony {
+      return {
+        colonies: this.colonies,
+        name: this.name,
+        isActive: this.isActive,
+        trackPosition: this.trackPosition,
+        visitor: this.visitor,
+      };
+    }
 }

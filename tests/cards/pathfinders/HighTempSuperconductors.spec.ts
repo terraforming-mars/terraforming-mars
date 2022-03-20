@@ -84,8 +84,10 @@ describe('HighTempSuperconductors', function() {
     expect(KELVINISTS_POLICY_1.canAct(player)).is.false;
     player.megaCredits = 10;
     expect(KELVINISTS_POLICY_1.canAct(player)).is.true;
+    expect(KELVINISTS_POLICY_1.description(player)).matches(/10 M/);
 
     player.playedCards.push(card);
+    expect(KELVINISTS_POLICY_1.description(player)).matches(/7 M/);
 
     player.megaCredits = 6;
     expect(KELVINISTS_POLICY_1.canAct(player)).is.false;

@@ -45,6 +45,8 @@ function corpCardNames(module: GameModule): Array<CardName> {
     .filter((name) => name !== CardName.BEGINNER_CORPORATION);
 }
 
+type Group = GameModule | 'All';
+
 export default Vue.extend({
   name: 'CorporationsFilter',
   props: {
@@ -103,17 +105,10 @@ export default Vue.extend({
     };
   },
   methods: {
-    getSelected(): Array<CardName> {
-      if (Array.isArray(this.selectedCorporations)) {
-        return this.selectedCorporations;
-      }
-      console.warn('unexpectedly got boolean for selectedCorporations');
-      return [];
-    },
-    getItemsByGroup(group: string): Array<CardName> {
+    getItemsByGroup(group: Group): Array<CardName> {
       if (group === 'All') return Array.from(this.cardsByModule.values());
 
-      const corps = this.cardsByModule.get(group as GameModule);
+      const corps = this.cardsByModule.get(group);
       if (corps === undefined) {
         console.log('module %s not found', group);
         return [];
@@ -121,34 +116,34 @@ export default Vue.extend({
         return corps.slice();
       }
     },
-    selectAll(group: string) {
+    selectAll(group: Group) {
       const items = this.getItemsByGroup(group);
       for (const item of items) {
-        if (this.getSelected().includes(item) === false) {
-          this.getSelected().push(item);
+        if (this.selectedCorporations.includes(item) === false) {
+          this.selectedCorporations.push(item);
         }
       }
     },
     removeFromSelection(cardName: CardName) {
-      const itemIdx = this.getSelected().indexOf(cardName);
+      const itemIdx = this.selectedCorporations.indexOf(cardName);
       if (itemIdx !== -1) {
-        this.getSelected().splice(itemIdx, 1);
+        this.selectedCorporations.splice(itemIdx, 1);
       }
     },
-    selectNone(group: string) {
+    selectNone(group: Group) {
       const items = this.getItemsByGroup(group);
       for (const item of items) {
         this.removeFromSelection(item);
       }
     },
-    invertSelection(group: string) {
+    invertSelection(group: Group) {
       const items = this.getItemsByGroup(group);
 
       for (const idx in items) {
-        if (this.getSelected().includes(items[idx])) {
+        if (this.selectedCorporations.includes(items[idx])) {
           this.removeFromSelection(items[idx]);
         } else {
-          this.getSelected().push(items[idx]);
+          this.selectedCorporations.push(items[idx]);
         }
       }
     },

@@ -1,5 +1,4 @@
 import {IProjectCard} from '../IProjectCard';
-import {Player} from '../../Player';
 import {Card} from '../Card';
 import {CardType} from '../../common/cards/CardType';
 import {CardName} from '../../common/cards/CardName';
@@ -19,6 +18,8 @@ export class PrefabricationofHumanHabitats extends Card implements IProjectCard 
       tags: [Tags.BUILDING, Tags.CITY],
 
       requirements: CardRequirements.builder((b) => b.production(Resources.STEEL)),
+      cardDiscount: {tag: Tags.CITY, amount: 2},
+
       metadata: {
         cardNumber: 'Pf02',
         renderData: CardRenderer.builder((b) => {
@@ -33,10 +34,6 @@ export class PrefabricationofHumanHabitats extends Card implements IProjectCard 
         description: 'Requires that you have steel production.',
       },
     });
-  }
-
-  public getCardDiscount(_player: Player, card: IProjectCard) {
-    return card.tags.includes(Tags.CITY) ? 2 : 0;
   }
 
   public play() {

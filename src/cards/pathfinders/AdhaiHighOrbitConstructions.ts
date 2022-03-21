@@ -60,7 +60,8 @@ export class AdhaiHighOrbitConstructions extends Card implements ICorporationCar
     }
   }
 
-  public getCardDiscount(player: Player, card: IProjectCard) {
+  // TODO(kberg): it's not possible to make this a cardDiscount type, which just means rendering is tricky.
+  public override getCardDiscount(player: Player, card: IProjectCard) {
     if (player.isCorporation(CardName.ADHAI_HIGH_ORBIT_CONSTRUCTIONS) && this.matchingTags(card.tags)) {
       return Math.floor(this.resourceCount / 2);
     } else {

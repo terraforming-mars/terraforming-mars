@@ -65,6 +65,15 @@ export default Vue.extend({
     return data;
   },
   methods: {
+    // Do not delete this method. It's used by CreateGameForm.
+    updateColoniesByNames(colonyNames: Array<ColonyName>) {
+      this.selectedColonies = [];
+      for (const colony of this.allColonies) {
+        if (colonyNames.includes(colony)) {
+          this.selectedColonies.push(colony);
+        }
+      }
+    },
     description(colonyName: ColonyName): string {
       return COLONY_DESCRIPTIONS.get(colonyName) ?? 'unknown';
     },

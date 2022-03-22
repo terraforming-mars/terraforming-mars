@@ -435,6 +435,7 @@
 
 <script lang="ts">
 import Vue from 'vue';
+import {WithRefs} from 'vue-typed-refs';
 import {Color} from '@/common/Color';
 import {BoardName} from '@/common/boards/BoardName';
 import {RandomBoardOption} from '@/common/boards/RandomBoardOption';
@@ -517,7 +518,14 @@ export interface NewPlayerModel {
     first: boolean;
 }
 
-export default Vue.extend({
+type Refs = {
+  coloniesFilter: InstanceType<typeof ColoniesFilter>,
+  corporationsFilter: InstanceType<typeof CorporationsFilter>,
+  cardsFilter: InstanceType<typeof CardsFilter>,
+  file: HTMLInputElement,
+}
+
+export default (Vue as WithRefs<Refs>).extend({
   name: 'CreateGameForm',
   data(): CreateGameModel {
     return {
@@ -616,7 +624,7 @@ export default Vue.extend({
     },
     handleSettingsUpload() {
       const refs = this.$refs;
-      const file = (refs.file as any).files[0];
+      const file = refs.file.files !== null ? refs.file.files[0] : undefined;
       const reader = new FileReader();
       const component = this.$data;
 
@@ -641,15 +649,15 @@ export default Vue.extend({
 
           Vue.nextTick(() => {
             if (component.showColoniesList) {
-              (refs.coloniesFilter as any).updateColoniesByNames(results['customColoniesList']);
+              refs.coloniesFilter.updateColoniesByNames(results['customColoniesList']);
             }
 
             if (component.showCorporationList) {
-              (refs.corporationsFilter as any).selectedCorporations = results['customCorporationsList'];
+              refs.corporationsFilter.selectedCorporations = results['customCorporationsList'];
             }
 
             if (component.showCardsBlackList) {
-              (refs.cardsFilter as any).selectedCardNames = results['cardsBlackList'];
+              refs.cardsFilter.selectedCardNames = results['cardsBlackList'];
             }
 
             if ( ! component.seededGame) {

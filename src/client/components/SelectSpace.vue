@@ -14,11 +14,16 @@
 
 <script lang="ts">
 import Vue from 'vue';
+import {WithRefs} from 'vue-typed-refs';
 import ConfirmDialog from '@/client/components/common/ConfirmDialog.vue';
 import {PlayerInputModel} from '@/common/models/PlayerInputModel';
 import {getPreferences, PreferencesManager} from '@/client/utils/PreferencesManager';
 
-export default Vue.extend({
+type Refs = {
+  confirmation: InstanceType<typeof ConfirmDialog>,
+}
+
+export default (Vue as WithRefs<Refs>).extend({
   name: 'SelectSpace',
   props: {
     playerinput: {
@@ -120,7 +125,7 @@ export default Vue.extend({
       if (hideTileConfirmation) {
         this.confirmPlacement();
       } else {
-        (this.$refs['confirmation'] as any).show();
+        this.$refs.confirmation.show();
       }
     },
     saveData() {

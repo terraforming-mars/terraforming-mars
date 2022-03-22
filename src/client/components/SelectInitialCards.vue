@@ -16,6 +16,7 @@
 <script lang="ts">
 
 import Vue from 'vue';
+import {WithRefs} from 'vue-typed-refs';
 
 import Button from '@/client/components/common/Button.vue';
 import {getCard} from '@/client/cards/ClientCardManifest';
@@ -30,7 +31,11 @@ import {getPreferences} from '@/client/utils/PreferencesManager';
 import {Tags} from '@/common/cards/Tags';
 import {PreludeCard} from '@/cards/prelude/PreludeCard';
 
-export default Vue.extend({
+type Refs = {
+  confirmation: InstanceType<typeof ConfirmDialog>,
+}
+
+export default (Vue as WithRefs<Refs>).extend({
   name: 'SelectInitialCards',
   props: {
     playerView: {
@@ -163,7 +168,7 @@ export default Vue.extend({
     },
     saveIfConfirmed() {
       if (getPreferences().show_alerts && this.selectedCards.length === 0) {
-        (this.$refs['confirmation'] as any).show();
+        this.$refs.confirmation.show();
       } else {
         this.saveData();
       }

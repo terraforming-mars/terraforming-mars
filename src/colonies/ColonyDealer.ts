@@ -57,8 +57,8 @@ export class ColonyDealer {
       colonyTiles.forEach((e) => allowList.push(e.colonyName));
     }
 
-    // Two-player games and solo games get one more colony.
-    const count: number = (players + 2) + (players <= 2 ? 1 : 0);
+    const count: number = (players + 2) +
+      (players <= 2 ? 1 : 0); // Two-player games and solo games get one more colony.
 
     const tempDeck = this.shuffle(
       colonyTiles.filter(
@@ -67,9 +67,18 @@ export class ColonyDealer {
         (cf) => new cf.Factory(),
       ),
     );
-    const deck = [];
+
+    if (tempDeck.length < count) {
+      throw new Error(`Not enough valid colonies to choose from (want ${count}, has ${tempDeck.length}.) Remember that colonies like Venus and Pallas are invalid without Venus or Turmoil.`);
+    }
+
+    const deck: Array<IColony> = [];
     for (let i = 0; i < count; i++) {
-      deck.push(tempDeck.pop()!);
+      const colony = tempDeck.pop();
+      if (colony === undefined) {
+        throw new Error('Not enough colonies');
+      }
+      deck.push(colony);
     }
     this.discardedColonies.push(...tempDeck);
     this.discardedColonies.sort((a, b) => (a.name > b.name) ? 1 : -1);

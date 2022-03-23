@@ -1,4 +1,3 @@
-import {ISerializable} from '../ISerializable';
 import {Player} from '../Player';
 import {PlayerInput} from '../PlayerInput';
 import {ColonyName} from '../common/colonies/ColonyName';
@@ -17,7 +16,7 @@ export type TradeOptions = {
   selfishTrade?: boolean;
 };
 
-export interface IColony extends ISerializable<SerializedColony> {
+export interface IColony {
   name: ColonyName;
   isActive: boolean;
   colonies: Array<PlayerId>;
@@ -43,4 +42,5 @@ export interface IColony extends ISerializable<SerializedColony> {
   addColony(player: Player, options?: {giveBonusTwice: boolean}): void;
   trade(player: Player, tradeOptions?: TradeOptions, bonusTradeOffset?: number): void;
   giveColonyBonus(player: Player, isGiveColonyBonus?: boolean): undefined | PlayerInput;
+  serialize(): SerializedColony;
 }

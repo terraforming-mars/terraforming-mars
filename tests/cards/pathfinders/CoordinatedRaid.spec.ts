@@ -38,6 +38,9 @@ describe('CoordinatedRaid', function() {
       customColoniesList: [
         ColonyName.PLUTO,
         ColonyName.TRITON,
+        ColonyName.CALLISTO,
+        ColonyName.ENCELADUS,
+        ColonyName.LUNA,
       ],
     });
     player = getTestPlayer(game, 0);

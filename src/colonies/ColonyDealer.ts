@@ -20,7 +20,7 @@ export class ColonyDealer {
     if (ColonyDealer.includesCommunityColonies(this.gameOptions)) colonyTiles = colonyTiles.concat(COMMUNITY_COLONIES_TILES);
     if (!this.gameOptions.venusNextExtension) colonyTiles = colonyTiles.filter((c) => c.colonyName !== ColonyName.VENUS);
     if (!this.gameOptions.turmoilExtension) colonyTiles = colonyTiles.filter((c) => c.colonyName !== ColonyName.PALLAS);
-    this.gameColonies = [...colonyTiles.map((cf) => new cf.Factory())];
+    this.gameColonies = colonyTiles.map((cf) => new cf.Factory());
   }
 
   private static includesCommunityColonies(gameOptions: GameOptions) : boolean {
@@ -42,12 +42,20 @@ export class ColonyDealer {
     const customColonies = this.gameOptions.customColoniesList;
     const colonies = customColonies.length === 0 ? this.gameColonies : this.gameColonies.filter((c) => customColonies.includes(c.name));
 
-    // Two-player games and solo games get one more colony.
-    const count: number = (players + 2) + (players <= 2 ? 1 : 0);
+    const count: number = (players + 2) +
+      (players <= 2 ? 1 : 0); // Two-player games and solo games get one more colony.
+
+    if (colonies.length < count) {
+      throw new Error(`Not enough valid colonies to choose from (want ${count}, has ${colonies.length}.) Remember that colonies like Venus and Pallas are invalid without Venus or Turmoil.`);
+    }
 
     const tempDeck = this.shuffle(colonies);
     for (let i = 0; i < count; i++) {
-      this.colonies.push(tempDeck.pop()!);
+      const colony = tempDeck.pop();
+      if (colony === undefined) {
+        throw new Error('Not enough colonies');
+      }
+      this.colonies.push(colony);
     }
 
     this.discardedColonies.push(...tempDeck);

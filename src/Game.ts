@@ -17,7 +17,6 @@ import {ElysiumBoard} from './boards/ElysiumBoard';
 import {FundedAward, serializeFundedAwards, deserializeFundedAwards} from './awards/FundedAward';
 import {HellasBoard} from './boards/HellasBoard';
 import {IAward} from './awards/IAward';
-import {ISerializable} from './ISerializable';
 import {IMilestone} from './milestones/IMilestone';
 import {IProjectCard} from './cards/IProjectCard';
 import {ISpace} from './boards/ISpace';
@@ -167,7 +166,7 @@ export const DEFAULT_GAME_OPTIONS: GameOptions = {
   venusNextExtension: false,
 };
 
-export class Game implements ISerializable<SerializedGame> {
+export class Game {
   // Game-level data
   public lastSaveId: number = 0;
   private clonedGamedId: string | undefined;

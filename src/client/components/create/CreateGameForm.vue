@@ -969,21 +969,30 @@ export default Vue.extend({
       const dataToSend = await this.serializeSettings();
 
       if (dataToSend === undefined) return;
-      const onSucces = (response: any) => {
-        if (response.players.length === 1) {
-          window.location.href = '/player?id=' + response.players[0].id;
+      const onSuccess = (json: any) => {
+        if (json.players.length === 1) {
+          window.location.href = '/player?id=' + json.players[0].id;
           return;
         } else {
-          window.history.replaceState(response, `${constants.APP_NAME} - Game`, '/game?id=' + response.id);
-          (this as any).$root.$data.game = response;
+          window.history.replaceState(json, `${constants.APP_NAME} - Game`, '/game?id=' + json.id);
+          (this as any).$root.$data.game = json;
           (this as any).$root.$data.screen = 'game-home';
         }
       };
 
       fetch('/game', {'method': 'PUT', 'body': dataToSend, 'headers': {'Content-Type': 'application/json'}})
-        .then((response) => response.json())
-        .then(onSucces)
-        .catch((_) => alert('Unexpected server response'));
+        .then((response) => response.text())
+        .then((text) => {
+          try {
+            const json = JSON.parse(text);
+            onSuccess(json);
+          } catch (err) {
+            throw new Error(text);
+          }
+        })
+        .catch((error: Error) => {
+          alert(error.message);
+        });
     },
   },
 });

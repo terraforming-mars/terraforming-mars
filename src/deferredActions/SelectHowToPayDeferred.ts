@@ -1,6 +1,6 @@
 import {Player} from '../Player';
 import {SelectHowToPay} from '../inputs/SelectHowToPay';
-import {HowToPay} from '../inputs/HowToPay';
+import {HowToPay} from '../common/inputs/HowToPay';
 import {DeferredAction, Priority} from './DeferredAction';
 import {Resources} from '../common/Resources';
 

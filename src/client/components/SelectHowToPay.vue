@@ -1,6 +1,6 @@
 <script lang="ts">
 import Vue from 'vue';
-import {HowToPay} from '@/inputs/HowToPay';
+import {HowToPay} from '@/common/inputs/HowToPay';
 import {PaymentWidgetMixin, SelectHowToPayModel, Unit} from '@/client/mixins/PaymentWidgetMixin';
 import {PlayerInputModel} from '@/common/models/PlayerInputModel';
 import {PlayerViewModel, PublicPlayerModel} from '@/common/models/PlayerModel';

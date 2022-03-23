@@ -113,7 +113,9 @@ export abstract class Colony implements IColony {
       const maxTrackPosition = Math.min(this.trackPosition + tradeOffset, MAX_COLONY_TRACK_POSITION);
       const steps = maxTrackPosition - this.trackPosition;
 
-      if (steps === 0 || this.shouldIncreaseTrack === ShouldIncreaseTrack.NO) {
+      if (steps === 0 ||
+        this.shouldIncreaseTrack === ShouldIncreaseTrack.NO ||
+        tradeOptions.selfishTrade === true) {
         // Don't increase
         this.handleTrade(player, tradeOptions);
         return;

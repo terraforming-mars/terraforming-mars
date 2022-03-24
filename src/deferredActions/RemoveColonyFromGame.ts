@@ -13,7 +13,7 @@ export class RemoveColonyFromGame implements DeferredAction {
     const game = this.player.game;
     const removeColony = new SelectColony('Select colony tile to remove', 'Remove colony', game.colonies, (colony: IColony) => {
       game.colonies.splice(game.colonies.indexOf(colony), 1);
-      game.colonyDealer?.discardedColonies.push(colony);
+      game.discardedColonies.push(colony);
       return undefined;
     });
 

@@ -1037,6 +1037,8 @@ export class Player {
       if (colonyName === undefined) {
         throw new Error('No colony selected');
       }
+      // TODO(kberg): this passes true because SelectColony sometimes loads discarded colonies
+      // but that can be a parameter, and that would be useful.
       const colony = ColoniesHandler.getColony(this.game, colonyName, true);
       this.runInputCb(pi.cb(colony));
     } else if (pi instanceof OrOptions) {

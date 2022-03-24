@@ -18,8 +18,8 @@ export class ColoniesHandler {
   public static getColony(game: Game, colonyName: ColonyName, includeDiscardedColonies: boolean = false): IColony {
     let colony: IColony | undefined = game.colonies.find((c) => c.name === colonyName);
     if (colony !== undefined) return colony;
-    if (includeDiscardedColonies === true && game.colonyDealer !== undefined) {
-      colony = game.colonyDealer.discardedColonies.find((c) => c.name === colonyName);
+    if (includeDiscardedColonies === true) {
+      colony = game.discardedColonies.find((c) => c.name === colonyName);
       if (colony !== undefined) return colony;
     }
     throw new Error(`Unknown colony '${colonyName}'`);

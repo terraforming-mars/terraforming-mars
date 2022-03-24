@@ -5,7 +5,7 @@ import {BASE_COLONIES_TILES, COMMUNITY_COLONIES_TILES} from './ColonyManifest';
 import {GameOptions} from '../Game';
 
 // TODO(kberg): Add ability to hard-code chosen colonies, separate from customColoniesList, so as to not be
-// forced to rely on randomness.
+// forced to rely on the RNG.
 // TODO(kberg): Add ability to disable initial action that removes a colony in the solo game. (Or come up with
 // a simple line of code to deal with solo games.)
 

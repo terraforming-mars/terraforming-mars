@@ -3,7 +3,7 @@ import {COMMUNITY_CARD_MANIFEST} from '../src/cards/community/CommunityCardManif
 import {CardFinder} from '../src/CardFinder';
 import {TestingUtils} from './TestingUtils';
 import {CardLoader} from '../src/CardLoader';
-import {CardName} from '../src/CardName';
+import {CardName} from '../src/common/cards/CardName';
 
 describe('CardLoader', function() {
   it('correctly removes projectCardsToRemove', function() {

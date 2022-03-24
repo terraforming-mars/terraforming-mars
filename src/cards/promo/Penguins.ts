@@ -2,10 +2,10 @@ import {IProjectCard} from '../IProjectCard';
 import {IActionCard, IResourceCard} from '../ICard';
 import {Card} from '../Card';
 import {VictoryPoints} from '../ICard';
-import {CardName} from '../../CardName';
-import {CardType} from '../CardType';
+import {CardName} from '../../common/cards/CardName';
+import {CardType} from '../../common/cards/CardType';
 import {ResourceType} from '../../common/ResourceType';
-import {Tags} from '../Tags';
+import {Tags} from '../../common/cards/Tags';
 import {Player} from '../../Player';
 import {CardRequirements} from '../CardRequirements';
 import {CardRenderer} from '../render/CardRenderer';
@@ -33,18 +33,18 @@ export class Penguins extends Card implements IActionCard, IProjectCard, IResour
       },
     });
   }
-    public override resourceCount = 0;
+  public override resourceCount = 0;
 
-    public play() {
-      return undefined;
-    }
+  public play() {
+    return undefined;
+  }
 
-    public canAct(): boolean {
-      return true;
-    }
+  public canAct(): boolean {
+    return true;
+  }
 
-    public action(player: Player) {
-      player.addResourceTo(this);
-      return undefined;
-    }
+  public action(player: Player) {
+    player.addResourceTo(this);
+    return undefined;
+  }
 }

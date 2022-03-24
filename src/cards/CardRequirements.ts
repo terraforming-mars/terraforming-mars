@@ -1,8 +1,9 @@
 import {Resources} from '../common/Resources';
-import {PartyName} from '../turmoil/parties/PartyName';
+import {PartyName} from '../common/turmoil/PartyName';
 import {CardRequirement, PartyCardRequirement, ProductionCardRequirement, TagCardRequirement} from './CardRequirement';
-import {RequirementType} from './RequirementType';
-import {Tags} from './Tags';
+import {RequirementType} from '../common/cards/RequirementType';
+import {ICardRequirements} from '../common/cards/ICardRequirements';
+import {Tags} from '../common/cards/Tags';
 import {Player} from '../Player';
 import {
   MAX_OCEAN_TILES,
@@ -11,18 +12,15 @@ import {
   MIN_OXYGEN_LEVEL,
   MIN_TEMPERATURE,
   MIN_VENUS_SCALE,
-} from '../constants';
+} from '../common/constants';
 
-export class CardRequirements {
+export class CardRequirements implements ICardRequirements {
   constructor(public requirements: Array<CardRequirement>) {}
 
   public static builder(f: (builder: Builder) => void): CardRequirements {
     const builder = new Builder();
     f(builder);
     return builder.build();
-  }
-  public hasMax(): boolean {
-    return this.requirements.some((req) => req.isMax);
   }
   public satisfies(player: Player): boolean {
     // Process tags separately, though max & any tag criteria will be processed later.

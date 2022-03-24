@@ -1,18 +1,18 @@
-import {CorporationCard} from '../corporation/CorporationCard';
+import {ICorporationCard} from '../corporation/ICorporationCard';
 import {Player} from '../../Player';
-import {Tags} from '../Tags';
+import {Tags} from '../../common/cards/Tags';
 import {ResourceType} from '../../common/ResourceType';
 import {IProjectCard} from '../IProjectCard';
 import {Resources} from '../../common/Resources';
-import {CardType} from '../CardType';
-import {CardName} from '../../CardName';
+import {CardType} from '../../common/cards/CardType';
+import {CardName} from '../../common/cards/CardName';
 import {IResourceCard} from '../ICard';
 import {Card} from '../Card';
 import {VictoryPoints} from '../ICard';
 import {CardRenderer} from '../render/CardRenderer';
 import {played} from '../Options';
 
-export class Arklight extends Card implements CorporationCard, IResourceCard {
+export class Arklight extends Card implements ICorporationCard, IResourceCard {
   constructor() {
     super({
       name: CardName.ARKLIGHT,
@@ -38,17 +38,17 @@ export class Arklight extends Card implements CorporationCard, IResourceCard {
     });
   }
 
-    public override resourceCount = 0;
+  public override resourceCount = 0;
 
-    public play(player: Player) {
-      player.addProduction(Resources.MEGACREDITS, 2);
-      player.addResourceTo(this);
-      return undefined;
-    }
+  public play(player: Player) {
+    player.addProduction(Resources.MEGACREDITS, 2);
+    player.addResourceTo(this, {log: true});
+    return undefined;
+  }
 
-    public onCardPlayed(player: Player, card: IProjectCard): void {
-      if (player.isCorporation(CardName.ARKLIGHT)) {
-        player.addResourceTo(this, card.tags.filter((cardTag) => cardTag === Tags.ANIMAL || cardTag === Tags.PLANT).length);
-      }
+  public onCardPlayed(player: Player, card: IProjectCard): void {
+    if (player.isCorporation(CardName.ARKLIGHT)) {
+      player.addResourceTo(this, {qty: card.tags.filter((cardTag) => cardTag === Tags.ANIMAL || cardTag === Tags.PLANT).length, log: true});
     }
+  }
 }

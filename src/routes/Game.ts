@@ -2,7 +2,8 @@ import * as http from 'http';
 import {Handler} from './Handler';
 import {IContext} from './IHandler';
 import {Database} from '../database/Database';
-import {BoardName, RandomBoardOption} from '../boards/BoardName';
+import {BoardName} from '../common/boards/BoardName';
+import {RandomBoardOption} from '../common/boards/RandomBoardOption';
 import {Cloner} from '../database/Cloner';
 import {GameLoader} from '../database/GameLoader';
 import {Game, GameOptions} from '../Game';
@@ -29,7 +30,11 @@ export class GameHandler extends Handler {
     const allBoards = Object.values(BoardName);
 
     if (board === RandomBoardOption.ALL) return allBoards;
-    if (board === RandomBoardOption.OFFICIAL) return allBoards.filter((name) => name !== BoardName.ARABIA_TERRA);
+    if (board === RandomBoardOption.OFFICIAL) {
+      return allBoards.filter((name) => {
+        return name !== BoardName.ARABIA_TERRA && name !== BoardName.VASTITAS_BOREALIS;
+      });
+    }
     return [board];
   }
 

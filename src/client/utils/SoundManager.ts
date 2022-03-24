@@ -18,7 +18,7 @@ export namespace SoundManager {
     A5 = 880.00,
     B5 = 987.77,
     C6 = 1046.50,
-  };
+  }
 
   function setupGainNode(audioCtx: AudioContext, time: number, value: number) {
     time += audioCtx.currentTime;

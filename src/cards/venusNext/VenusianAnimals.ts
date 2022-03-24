@@ -1,9 +1,9 @@
 import {IProjectCard} from '../IProjectCard';
 import {Tags} from '../../common/cards/Tags';
-import {CardType} from '../CardType';
+import {CardType} from '../../common/cards/CardType';
 import {Player} from '../../Player';
 import {ResourceType} from '../../common/ResourceType';
-import {CardName} from '../../CardName';
+import {CardName} from '../../common/cards/CardName';
 import {IResourceCard} from '../ICard';
 import {CardRequirements} from '../CardRequirements';
 import {CardRenderer} from '../render/CardRenderer';
@@ -33,12 +33,12 @@ export class VenusianAnimals extends Card implements IResourceCard {
         description: 'Requires Venus 18%',
       },
     });
-  };
+  }
   public override resourceCount: number = 0;
   public play() {
     return undefined;
   }
   public onCardPlayed(player: Player, card: IProjectCard): void {
-    player.addResourceTo(this, card.tags.filter((tag) => tag === Tags.SCIENCE).length);
+    player.addResourceTo(this, player.cardTagCount(card, Tags.SCIENCE));
   }
 }

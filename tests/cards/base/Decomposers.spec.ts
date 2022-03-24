@@ -4,7 +4,7 @@ import {Birds} from '../../../src/cards/base/Birds';
 import {Decomposers} from '../../../src/cards/base/Decomposers';
 import {EcologyExperts} from '../../../src/cards/prelude/EcologyExperts';
 import {Game} from '../../../src/Game';
-import {Phase} from '../../../src/Phase';
+import {Phase} from '../../../src/common/Phase';
 import {Player} from '../../../src/Player';
 import {TestPlayers} from '../../TestPlayers';
 

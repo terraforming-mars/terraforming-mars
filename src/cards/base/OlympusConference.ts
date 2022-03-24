@@ -1,12 +1,12 @@
 import {IProjectCard} from '../IProjectCard';
 import {Tags} from '../../common/cards/Tags';
 import {Card} from '../Card';
-import {CardType} from '../CardType';
+import {CardType} from '../../common/cards/CardType';
 import {Player} from '../../Player';
 import {OrOptions} from '../../inputs/OrOptions';
 import {SelectOption} from '../../inputs/SelectOption';
 import {ResourceType} from '../../common/ResourceType';
-import {CardName} from '../../CardName';
+import {CardName} from '../../common/cards/CardName';
 import {IResourceCard} from '../ICard';
 import {DeferredAction} from '../../deferredActions/DeferredAction';
 import {CardRenderer} from '../render/CardRenderer';
@@ -34,36 +34,38 @@ export class OlympusConference extends Card implements IProjectCard, IResourceCa
     });
   }
 
-    public override resourceCount: number = 0;
+  public override resourceCount: number = 0;
 
-    public onCardPlayed(player: Player, card: IProjectCard) {
-      const scienceTags = card.tags.filter((tag) => tag === Tags.SCIENCE).length;
-      for (let i = 0; i < scienceTags; i++) {
-        player.game.defer(new DeferredAction(
-          player,
-          () => {
-            // Can't remove a resource
-            if (this.resourceCount === 0) {
+  public onCardPlayed(player: Player, card: IProjectCard) {
+    const scienceTags = player.cardTagCount(card, Tags.SCIENCE);
+    for (let i = 0; i < scienceTags; i++) {
+      player.game.defer(new DeferredAction(
+        player,
+        () => {
+          // Can't remove a resource
+          if (this.resourceCount === 0) {
+            player.addResourceTo(this, 1);
+            return undefined;
+          }
+          const options = new OrOptions(
+            new SelectOption('Remove a science resource from this card to draw a card', 'Remove resource', () => {
+              player.removeResourceFrom(this);
+              player.drawCard();
+              return undefined;
+            }),
+            new SelectOption('Add a science resource to this card', 'Add resource', () => {
               player.addResourceTo(this, 1);
               return undefined;
-            }
-            return new OrOptions(
-              new SelectOption('Remove a science resource from this card to draw a card', 'Remove resource', () => {
-                player.removeResourceFrom(this);
-                player.drawCard();
-                return undefined;
-              }),
-              new SelectOption('Add a science resource to this card', 'Add resource', () => {
-                player.addResourceTo(this, 1);
-                return undefined;
-              }),
-            );
-          },
-        ), -1); // Unshift that deferred action
-      }
-      return undefined;
+            }),
+          );
+          options.title = 'Select an option for Olympus Conference';
+          return options;
+        },
+      ), -1); // Unshift that deferred action
     }
-    public play() {
-      return undefined;
-    }
+    return undefined;
+  }
+  public play() {
+    return undefined;
+  }
 }

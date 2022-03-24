@@ -1,14 +1,14 @@
 import {IActionCard, IResourceCard} from '../ICard';
 import {Tags} from '../../common/cards/Tags';
-import {CardType} from '../CardType';
+import {CardType} from '../../common/cards/CardType';
 import {Player} from '../../Player';
 import {ResourceType} from '../../common/ResourceType';
 import {OrOptions} from '../../inputs/OrOptions';
 import {SelectOption} from '../../inputs/SelectOption';
 import {Resources} from '../../common/Resources';
-import {CardName} from '../../CardName';
+import {CardName} from '../../common/cards/CardName';
 import {CardRenderer} from '../render/CardRenderer';
-import {Size} from '../render/Size';
+import {Size} from '../../common/cards/render/Size';
 import {Card} from '../Card';
 
 export class DeuteriumExport extends Card implements IActionCard, IResourceCard {
@@ -33,7 +33,7 @@ export class DeuteriumExport extends Card implements IActionCard, IResourceCard 
         }),
       },
     });
-  };
+  }
 
   public override resourceCount: number = 0;
 

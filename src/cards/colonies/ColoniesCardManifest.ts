@@ -1,5 +1,5 @@
-import {CardName} from '../../CardName';
-import {GameModule} from '../../GameModule';
+import {CardName} from '../../common/cards/CardName';
+import {GameModule} from '../../common/cards/GameModule';
 import {CardManifest} from '../CardManifest';
 import {Airliners} from './Airliners';
 import {AirRaid} from './AirRaid';

@@ -1,12 +1,12 @@
 import {IProjectCard} from '../IProjectCard';
 import {Player} from '../../Player';
 import {Card} from '../Card';
-import {CardType} from '../CardType';
-import {CardName} from '../../CardName';
+import {CardType} from '../../common/cards/CardType';
+import {CardName} from '../../common/cards/CardName';
 import {CardRenderer} from '../render/CardRenderer';
 import {Resources} from '../../common/Resources';
 import {CardRequirements} from '../CardRequirements';
-import {Tags} from '../Tags';
+import {Tags} from '../../common/cards/Tags';
 
 export class RichDeposits extends Card implements IProjectCard {
   constructor() {

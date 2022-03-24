@@ -1,7 +1,6 @@
 import {AddResourcesToCard} from '../deferredActions/AddResourcesToCard';
-// import {CardName} from '../CardName';
-// import {CardType} from '../cards/CardType';
-// import {CommunicationCenter} from '../cards/pathfinders/CommunicationCenter';
+import {CardName} from '../common/cards/CardName';
+import {CardType} from '../common/cards/CardType';
 import {Game, GameOptions} from '../Game';
 import {GrantResourceDeferred} from './GrantResourceDeferred';
 import {ICard} from '../cards/ICard';
@@ -11,20 +10,20 @@ import {PlaceGreeneryTile} from '../deferredActions/PlaceGreeneryTile';
 import {PlaceMoonMineTile} from '../moon/PlaceMoonMineTile';
 import {PlaceMoonRoadTile} from '../moon/PlaceMoonRoadTile';
 import {PlaceOceanTile} from '../deferredActions/PlaceOceanTile';
-import {PlanetaryTrack} from './PlanetaryTrack';
-import {PlanetaryTracks} from './PlanetaryTracks';
+import {PlanetaryTrack} from '../common/pathfinders/PlanetaryTrack';
+import {PlanetaryTracks} from '../common/pathfinders/PlanetaryTracks';
 import {Player} from '../Player';
 import {Resources} from '../common/Resources';
 import {ResourceType} from '../common/ResourceType';
-import {Reward} from './Reward';
+import {Reward} from '../common/pathfinders/Reward';
 import {SelectResourcesDeferred} from '../deferredActions/SelectResourcesDeferred';
 import {SendDelegateToArea} from '../deferredActions/SendDelegateToArea';
-import {Tags} from '../cards/Tags';
+import {Tags} from '../common/cards/Tags';
 import {Turmoil} from '../turmoil/Turmoil';
 import {VictoryPointsBreakdown} from '../VictoryPointsBreakdown';
-import {GlobalEventName} from '../turmoil/globalEvents/GlobalEventName';
+import {GlobalEventName} from '../common/turmoil/globalEvents/GlobalEventName';
 
-const VALID_TAGS = [Tags.VENUS, Tags.EARTH, Tags.MARS, Tags.JOVIAN, Tags.MOON];
+export const PLANETARY_TAGS = [Tags.VENUS, Tags.EARTH, Tags.MARS, Tags.JOVIAN, Tags.MOON];
 const TRACKS = PlanetaryTracks.initialize();
 
 export class PathfindersExpansion {
@@ -48,21 +47,22 @@ export class PathfindersExpansion {
     }
     const tags = card.tags;
     tags.forEach((tag) => {
-      if (VALID_TAGS.includes(tag)) {
+      if (PLANETARY_TAGS.includes(tag)) {
         PathfindersExpansion.raiseTrack(tag, player);
       }
     });
 
-    // // Communication Center hook
-    // if (card.cardType === CardType.EVENT) {
-    //   player.game.getPlayers().forEach((p) => {
-    //     p.playedCards.forEach((c) => {
-    //       if (c.name === CardName.COMMUNICATION_CENTER) {
-    //         (c as CommunicationCenter).bonus(p);
-    //       }
-    //     });
-    //   });
-    // }
+    // Communication Center hook
+    if (card.cardType === CardType.EVENT) {
+      for (const p of player.game.getPlayers()) {
+        for (const c of p.playedCards) {
+          if (c.name === CardName.COMMUNICATION_CENTER) {
+            p.addResourceTo(c, {qty: 1, log: true});
+            return;
+          }
+        }
+      }
+    }
   }
 
   private static readonly trackMap: Map<Tags, PlanetaryTrack | undefined> = new Map([
@@ -135,7 +135,7 @@ export class PathfindersExpansion {
         if (rewards.mostTags.length > 0) {
           const players = PathfindersExpansion.playersWithMostTags(
             tag,
-            game.getPlayers(),
+            game.getPlayers().slice(),
             (from instanceof Player) ? from : undefined);
           rewards.mostTags.forEach((reward) => {
             players.forEach((p) => {

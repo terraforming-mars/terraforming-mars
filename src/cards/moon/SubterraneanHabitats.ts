@@ -1,8 +1,8 @@
-import {CardName} from '../../CardName';
-import {CardType} from '../CardType';
+import {CardName} from '../../common/cards/CardName';
+import {CardType} from '../../common/cards/CardType';
 import {IProjectCard} from '../IProjectCard';
 import {CardRenderer} from '../render/CardRenderer';
-import {Units} from '../../Units';
+import {Units} from '../../common/Units';
 import {MoonExpansion} from '../../moon/MoonExpansion';
 import {Player} from '../../Player';
 import {MoonCard} from './MoonCard';
@@ -28,7 +28,7 @@ export class SubterraneanHabitats extends MoonCard implements IProjectCard {
         }),
       },
     });
-  };
+  }
 
   public override play(player: Player) {
     super.play(player);

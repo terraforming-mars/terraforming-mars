@@ -8,7 +8,7 @@ import {Research} from '../../../src/cards/base/Research';
 import {SearchForLife} from '../../../src/cards/base/SearchForLife';
 import {ViralEnhancers} from '../../../src/cards/base/ViralEnhancers';
 import {PharmacyUnion} from '../../../src/cards/promo/PharmacyUnion';
-import {Tags} from '../../../src/cards/Tags';
+import {Tags} from '../../../src/common/cards/Tags';
 import {Game} from '../../../src/Game';
 import {AndOptions} from '../../../src/inputs/AndOptions';
 import {OrOptions} from '../../../src/inputs/OrOptions';

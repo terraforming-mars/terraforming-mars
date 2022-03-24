@@ -3,7 +3,7 @@ import {AdvancedPowerGrid} from '../../../src/cards/pathfinders/AdvancedPowerGri
 import {Game} from '../../../src/Game';
 import {TestPlayer} from '../../TestPlayer';
 import {TestPlayers} from '../../TestPlayers';
-import {Units} from '../../../src/Units';
+import {Units} from '../../../src/common/Units';
 
 describe('AdvancedPowerGrid', function() {
   let card: AdvancedPowerGrid;

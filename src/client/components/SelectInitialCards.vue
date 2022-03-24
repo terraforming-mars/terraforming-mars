@@ -19,15 +19,15 @@ import Vue from 'vue';
 
 import Button from '@/client/components/common/Button.vue';
 import {getCard} from '@/client/cards/ClientCardManifest';
-import {CardName} from '@/CardName';
-import * as constants from '@/constants';
-import {CorporationCard} from '@/cards/corporation/CorporationCard';
-import {PlayerInputModel} from '@/models/PlayerInputModel';
-import {PlayerViewModel} from '@/models/PlayerModel';
+import {CardName} from '@/common/cards/CardName';
+import * as constants from '@/common/constants';
+import {ICorporationCard} from '@/cards/corporation/ICorporationCard';
+import {PlayerInputModel} from '@/common/models/PlayerInputModel';
+import {PlayerViewModel} from '@/common/models/PlayerModel';
 import SelectCard from '@/client/components/SelectCard.vue';
 import ConfirmDialog from '@/client/components/common/ConfirmDialog.vue';
-import {PreferencesManager} from '@/client/utils/PreferencesManager';
-import {Tags} from '@/cards/Tags';
+import {getPreferences} from '@/client/utils/PreferencesManager';
+import {Tags} from '@/common/cards/Tags';
 import {PreludeCard} from '@/cards/prelude/PreludeCard';
 
 export default Vue.extend({
@@ -57,7 +57,7 @@ export default Vue.extend({
   data() {
     return {
       selectedCards: [] as Array<CardName>,
-      selectedCorporation: undefined as CorporationCard | undefined,
+      selectedCorporation: undefined as ICorporationCard | undefined,
       selectedPreludes: [] as Array<CardName>,
     };
   },
@@ -162,7 +162,7 @@ export default Vue.extend({
       return starting;
     },
     saveIfConfirmed() {
-      if (PreferencesManager.load('show_alerts') === '1' && this.selectedCards.length === 0) {
+      if (getPreferences().show_alerts && this.selectedCards.length === 0) {
         (this.$refs['confirmation'] as any).show();
       } else {
         this.saveData();
@@ -187,7 +187,7 @@ export default Vue.extend({
       this.selectedCards = cards;
     },
     corporationChanged(cards: Array<CardName>) {
-      this.selectedCorporation = getCard(cards[0])?.card as CorporationCard;
+      this.selectedCorporation = getCard(cards[0])?.card as ICorporationCard;
     },
     preludesChanged(cards: Array<CardName>) {
       this.selectedPreludes = cards;

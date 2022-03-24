@@ -3,7 +3,7 @@ import {DesignedOrganisms} from '../../../src/cards/pathfinders/DesignedOrganism
 import {Game} from '../../../src/Game';
 import {TestPlayer} from '../../TestPlayer';
 import {TestPlayers} from '../../TestPlayers';
-import {Units} from '../../../src/Units';
+import {Units} from '../../../src/common/Units';
 import {Penguins} from '../../../src/cards/promo/Penguins';
 import {Tardigrades} from '../../../src/cards/base/Tardigrades';
 import {TestingUtils} from '../../TestingUtils';

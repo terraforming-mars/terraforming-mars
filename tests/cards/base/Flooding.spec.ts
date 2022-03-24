@@ -6,7 +6,7 @@ import {OrOptions} from '../../../src/inputs/OrOptions';
 import {SelectPlayer} from '../../../src/inputs/SelectPlayer';
 import {SelectSpace} from '../../../src/inputs/SelectSpace';
 import {TestPlayer} from '../../TestPlayer';
-import {SpaceType} from '../../../src/SpaceType';
+import {SpaceType} from '../../../src/common/boards/SpaceType';
 import {TestingUtils} from '../../TestingUtils';
 import {TestPlayers} from '../../TestPlayers';
 
@@ -47,8 +47,7 @@ describe('Flooding', function() {
     subActionSelectPlayer.cb(player2);
     expect(player2.megaCredits).to.eq(0);
 
-    player.victoryPointsBreakdown.setVictoryPoints('victoryPoints', card.getVictoryPoints());
-    expect(player.victoryPointsBreakdown.victoryPoints).to.eq(-1);
+    expect(card.getVictoryPoints()).to.eq(-1);
   });
 
   it('Does not suggest to remove money from yourself', function() {

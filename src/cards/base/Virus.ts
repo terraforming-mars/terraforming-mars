@@ -1,11 +1,11 @@
 import {IProjectCard} from '../IProjectCard';
 import {Tags} from '../../common/cards/Tags';
 import {Card} from '../Card';
-import {CardType} from '../CardType';
+import {CardType} from '../../common/cards/CardType';
 import {Player} from '../../Player';
 import {OrOptions} from '../../inputs/OrOptions';
 import {PlayerInput} from '../../PlayerInput';
-import {CardName} from '../../CardName';
+import {CardName} from '../../common/cards/CardName';
 import {SelectOption} from '../../inputs/SelectOption';
 import {ResourceType} from '../../common/ResourceType';
 import {RemoveAnyPlants} from '../../deferredActions/RemoveAnyPlants';
@@ -32,7 +32,7 @@ export class Virus extends Card implements IProjectCard {
     });
   }
   public play(player: Player): PlayerInput | undefined {
-    if (player.game.getPlayers().length === 1) {
+    if (player.game.isSoloMode()) {
       player.game.someoneHasRemovedOtherPlayersPlants = true;
       return undefined;
     }

@@ -1,7 +1,7 @@
 // Exports a game locally for debugging.
 // See README.md for instructions.
 
-import {isPlayerId} from '../utils/utils';
+import {isPlayerId} from '../common/utils/utils';
 import {Database} from '../database/Database';
 import {Localfilesystem} from '../database/LocalFilesystem';
 import {SerializedGame} from '../SerializedGame';

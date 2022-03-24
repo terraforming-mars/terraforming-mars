@@ -1,12 +1,12 @@
 import {Tags} from '../../common/cards/Tags';
 import {Card} from '../Card';
-import {CardType} from '../CardType';
+import {CardType} from '../../common/cards/CardType';
 import {Player} from '../../Player';
 import {IProjectCard} from '../IProjectCard';
 import {IActionCard} from '../ICard';
-import {CardName} from '../../CardName';
+import {CardName} from '../../common/cards/CardName';
 import {CardRenderer} from '../render/CardRenderer';
-import {Size} from '../render/Size';
+import {Size} from '../../common/cards/render/Size';
 
 export class InventorsGuild extends Card implements IActionCard, IProjectCard {
   constructor() {

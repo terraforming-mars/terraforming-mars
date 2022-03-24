@@ -3,7 +3,7 @@ import {Cloner} from '../../src/database/Cloner';
 import {Game} from '../../src/Game';
 import {Player} from '../../src/Player';
 import {TestingUtils} from '../TestingUtils';
-import {Color} from '../../src/Color';
+import {Color} from '../../src/common/Color';
 
 describe('Cloner', function() {
   it('solo game preserved', () => {
@@ -25,7 +25,7 @@ describe('Cloner', function() {
     expect(() => newGame!.getPlayerById('old-player1-id')).to.throw();
     expect(newGame!.getPlayerById('new-player1-id')).is.not.undefined;
 
-    const newPlayerZero = newGame!.getPlayers()[0];
+    const newPlayerZero = newGame!.getPlayersInGenerationOrder()[0];
     expect(newPlayerZero.color).eq(Color.RED);
     expect(newPlayerZero.beginner).is.true;
 
@@ -45,7 +45,7 @@ describe('Cloner', function() {
     expect(player.playedCards, 'playedCards').deep.eq(newPlayerZero.playedCards);
     expect(player.draftedCards, 'draftedCards').deep.eq(newPlayerZero.draftedCards);
 
-    expect(game.seed).eq(newGame!.seed);
+    expect(game.rng.seed).eq(newGame!.rng.seed);
     expect(game.gameAge).eq(newGame!.gameAge);
     expect(game.undoCount).eq(newGame!.undoCount);
     expect(game.dealer, 'dealer').to.deep.eq(newGame!.dealer);

@@ -1,6 +1,6 @@
-import {CardName} from '../../CardName';
+import {CardName} from '../../common/cards/CardName';
 import {Player} from '../../Player';
-import {CardType} from '../CardType';
+import {CardType} from '../../common/cards/CardType';
 import {Tags} from '../../common/cards/Tags';
 import {Resources} from '../../common/Resources';
 import {CardRenderer} from '../render/CardRenderer';
@@ -22,7 +22,7 @@ export class HE3Lobbyists extends Card {
         }),
       },
     });
-  };
+  }
 
   public play(player: Player) {
     // + 1 because the tag above isn't yet included in the played cards pile.

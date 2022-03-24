@@ -1,6 +1,6 @@
 import {expect} from 'chai';
 import {Random} from '../src/Random';
-import {range} from '../src/utils/utils';
+import {range} from '../src/common/utils/utils';
 
 describe('Random', function() {
   it('Seed is deterministic', function() {
@@ -28,5 +28,19 @@ describe('Random', function() {
       expect(val).is.lte(1000);
       expect(val).eq(Math.floor(val));
     });
+  });
+
+  it('can be serialized', () => {
+    // Well, it's not actually serialized, but yeah.
+
+    const first = new Random(0.4);
+    const v1 = range(10).map(() => first.next());
+    let second = new Random(0.4);
+    const v2: typeof v1 = [];
+    range(10).forEach(() => {
+      v2.push(second.next());
+      second = new Random(second.seed, second.current);
+    });
+    expect(v1).to.deep.eq(v2);
   });
 });

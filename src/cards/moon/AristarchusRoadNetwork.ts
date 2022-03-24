@@ -1,13 +1,13 @@
-import {CardName} from '../../CardName';
+import {CardName} from '../../common/cards/CardName';
 import {Player} from '../../Player';
-import {CardType} from '../CardType';
+import {CardType} from '../../common/cards/CardType';
 import {PlaceMoonRoadTile} from '../../moon/PlaceMoonRoadTile';
 import {Tags} from '../../common/cards/Tags';
 import {CardRenderer} from '../render/CardRenderer';
 import {TileType} from '../../common/TileType';
-import {Units} from '../../Units';
+import {Units} from '../../common/Units';
 import {MoonCard} from './MoonCard';
-import {AltSecondaryTag} from '../render/CardRenderItem';
+import {AltSecondaryTag} from '../../common/cards/render/AltSecondaryTag';
 
 export class AristarchusRoadNetwork extends MoonCard {
   constructor() {
@@ -32,7 +32,7 @@ export class AristarchusRoadNetwork extends MoonCard {
     }, {
       tilesBuilt: [TileType.MOON_ROAD],
     });
-  };
+  }
 
   public override play(player: Player) {
     super.play(player);

@@ -1,12 +1,12 @@
 import {IProjectCard} from '../IProjectCard';
 import {Tags} from '../../common/cards/Tags';
 import {Card} from '../Card';
-import {CardType} from '../CardType';
+import {CardType} from '../../common/cards/CardType';
 import {Player} from '../../Player';
 import {OrOptions} from '../../inputs/OrOptions';
 import {SelectCard} from '../../inputs/SelectCard';
 import {SelectOption} from '../../inputs/SelectOption';
-import {CardName} from '../../CardName';
+import {CardName} from '../../common/cards/CardName';
 import {DeferredAction} from '../../deferredActions/DeferredAction';
 import {CardRenderer} from '../render/CardRenderer';
 import {played} from '../Options';
@@ -32,7 +32,7 @@ export class MarsUniversity extends Card implements IProjectCard {
   }
 
   public onCardPlayed(player: Player, card: IProjectCard) {
-    const scienceTags = card.tags.filter((tag) => tag === Tags.SCIENCE).length;
+    const scienceTags = player.cardTagCount(card, Tags.SCIENCE);
     for (let i = 0; i < scienceTags; i++) {
       player.game.defer(new DeferredAction(
         player,

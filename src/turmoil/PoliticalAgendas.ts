@@ -1,21 +1,11 @@
 import {ChoosePoliticalAgenda} from '../deferredActions/ChoosePoliticalAgenda';
 import {Game} from '../Game';
-import {Bonus, BonusId} from './Bonus';
+import {Bonus} from './Bonus';
 import {IParty} from './parties/IParty';
-import {PartyName} from './parties/PartyName';
-import {Policy, PolicyId} from './Policy';
+import {PartyName} from '../common/turmoil/PartyName';
+import {Policy} from './Policy';
 import {Turmoil} from './Turmoil';
-
-export enum AgendaStyle {
-  STANDARD = 'Standard',
-  RANDOM = 'Random',
-  CHAIRMAN = 'Chairman',
-}
-
-export interface Agenda {
-  bonusId: BonusId;
-  policyId: PolicyId;
-}
+import {Agenda, AgendaStyle} from '../common/turmoil/Types';
 
 export interface PoliticalAgendasData {
   agendas: Map<PartyName, Agenda>;
@@ -66,7 +56,7 @@ export class PoliticalAgendas {
       throw new Error('Invalid party: ' + partyName);
     }
     return agenda;
-  };
+  }
 
   // The ruling party is already in power, and now it is time for the party to select an agenda.
   // Do not expect the method to return an activated agenda if the current agenda style is chairman

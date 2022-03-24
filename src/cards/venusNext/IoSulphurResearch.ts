@@ -1,7 +1,7 @@
 import {Tags} from '../../common/cards/Tags';
-import {CardType} from '../CardType';
+import {CardType} from '../../common/cards/CardType';
 import {Player} from '../../Player';
-import {CardName} from '../../CardName';
+import {CardName} from '../../common/cards/CardName';
 import {CardRenderer} from '../render/CardRenderer';
 import {Card} from '../Card';
 import {digit, played} from '../Options';
@@ -26,7 +26,7 @@ export class IoSulphurResearch extends Card {
         description: 'Draw 1 card, or draw 3 if you have at least 3 Venus tags.',
       },
     });
-  };
+  }
 
   public play(player: Player) {
     player.drawCard(player.getTagCount(Tags.VENUS) >= 3 ? 3 : 1);

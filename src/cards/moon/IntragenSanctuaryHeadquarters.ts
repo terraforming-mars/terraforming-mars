@@ -1,8 +1,8 @@
-import {CardName} from '../../CardName';
+import {CardName} from '../../common/cards/CardName';
 import {Player} from '../../Player';
-import {CardType} from '../CardType';
+import {CardType} from '../../common/cards/CardType';
 import {Tags} from '../../common/cards/Tags';
-import {CorporationCard} from '../corporation/CorporationCard';
+import {ICorporationCard} from '../corporation/ICorporationCard';
 import {CardRenderer} from '../render/CardRenderer';
 import {IProjectCard} from '../IProjectCard';
 import {ICard} from '../ICard';
@@ -12,7 +12,7 @@ import {Card} from '../Card';
 import {VictoryPoints} from '../ICard';
 import {played} from '../Options';
 
-export class IntragenSanctuaryHeadquarters extends Card implements CorporationCard {
+export class IntragenSanctuaryHeadquarters extends Card implements ICorporationCard {
   constructor() {
     super({
       cardType: CardType.CORPORATION,
@@ -49,9 +49,9 @@ export class IntragenSanctuaryHeadquarters extends Card implements CorporationCa
     // Gains the initial resource from its own tag.
     this.resourceCount = 1;
     return undefined;
-  };
+  }
 
-  public onCorpCardPlayed(player: Player, card: CorporationCard) {
+  public onCorpCardPlayed(player: Player, card: ICorporationCard) {
     return this.onCardPlayed(player, card as ICard as IProjectCard);
   }
 

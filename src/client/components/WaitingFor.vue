@@ -15,15 +15,15 @@
 import Vue from 'vue';
 
 import {mainAppSettings} from '@/client/components/App';
-import {PlayerInputModel} from '@/models/PlayerInputModel';
-import {ViewModel, PublicPlayerModel} from '@/models/PlayerModel';
-import {PreferencesManager} from '@/client/utils/PreferencesManager';
+import {PlayerInputModel} from '@/common/models/PlayerInputModel';
+import {ViewModel, PublicPlayerModel} from '@/common/models/PlayerModel';
+import {getPreferences} from '@/client/utils/PreferencesManager';
 import {SoundManager} from '@/client/utils/SoundManager';
-import {WaitingForModel} from '@/models/WaitingForModel';
+import {WaitingForModel} from '@/common/models/WaitingForModel';
 
-import * as constants from '@/constants';
+import * as constants from '@/common/constants';
 import * as raw_settings from '@/genfiles/settings.json';
-import {isPlayerId} from '@/utils/utils';
+import {isPlayerId} from '@/common/utils/utils';
 
 let ui_update_timeout_id: number | undefined;
 let documentTitleTimer: number | undefined;
@@ -113,20 +113,29 @@ export default Vue.extend({
               if (Notification.permission !== 'granted') {
                 Notification.requestPermission();
               } else if (Notification.permission === 'granted') {
+                const notificationOptions = {
+                  icon: '/favicon.ico',
+                  body: 'It\'s your turn!',
+                };
+                const notificationTitle = constants.APP_NAME;
                 try {
-                  // this needs to be updated to use a serviceWorker
-                  // on browsers where this constructor isn't supported
-                  // the error will be ignored instead of going uncaught
-                  new Notification(constants.APP_NAME, {
-                    icon: '/favicon.ico',
-                    body: 'It\'s your turn!',
-                  });
+                  new Notification(notificationTitle, notificationOptions);
                 } catch (e) {
-                  console.warn('unable to create notification', e);
+                  // ok so the native Notification doesn't work which will happen
+                  // try to use the service worker if we can
+                  if (!window.isSecureContext || !navigator.serviceWorker) {
+                    return;
+                  }
+                  navigator.serviceWorker.ready.then((registration) => {
+                    registration.showNotification(notificationTitle, notificationOptions);
+                  }).catch((err) => {
+                    // avoid promise going uncaught
+                    console.warn('Failed to display notification with serviceWorker', err);
+                  });
                 }
               }
 
-              const soundsEnabled = PreferencesManager.load('enable_sounds') === '1';
+              const soundsEnabled = getPreferences().enable_sounds;
               if (soundsEnabled) SoundManager.playActivePlayerSound();
 
               // We don't need to wait anymore - it's our turn

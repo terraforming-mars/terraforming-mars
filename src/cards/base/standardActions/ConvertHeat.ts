@@ -1,9 +1,9 @@
 import {StandardActionCard} from '../../StandardActionCard';
-import {CardName} from '../../../CardName';
+import {CardName} from '../../../common/cards/CardName';
 import {CardRenderer} from '../../render/CardRenderer';
 import {Player} from '../../../Player';
-import {HEAT_FOR_TEMPERATURE, MAX_TEMPERATURE} from '../../../constants';
-import {Units} from '../../../Units';
+import {HEAT_FOR_TEMPERATURE, MAX_TEMPERATURE} from '../../../common/constants';
+import {Units} from '../../../common/Units';
 
 
 export class ConvertHeat extends StandardActionCard {

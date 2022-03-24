@@ -1,6 +1,6 @@
-import {CardName} from '../../CardName';
+import {CardName} from '../../common/cards/CardName';
 import {Player} from '../../Player';
-import {CardType} from '../CardType';
+import {CardType} from '../../common/cards/CardType';
 import {IProjectCard} from '../IProjectCard';
 import {Tags} from '../../common/cards/Tags';
 import {Resources} from '../../common/Resources';
@@ -32,7 +32,7 @@ export class OffWorldCityLiving extends Card implements IProjectCard {
         victoryPoints: CardRenderDynamicVictoryPoints.cities(1, 3, true),
       },
     });
-  };
+  }
 
   public play(player: Player) {
     const amount = player.game.getCitiesCount() - player.game.getCitiesOnMarsCount();

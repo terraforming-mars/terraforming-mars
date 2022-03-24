@@ -1,6 +1,6 @@
-import {CardName} from '../../CardName';
+import {CardName} from '../../common/cards/CardName';
 import {Player} from '../../Player';
-import {CardType} from '../CardType';
+import {CardType} from '../../common/cards/CardType';
 import {IProjectCard} from '../IProjectCard';
 import {Tags} from '../../common/cards/Tags';
 import {CardRenderer} from '../render/CardRenderer';
@@ -31,7 +31,7 @@ export class DarksideObservatory extends Card implements IProjectCard, IActionCa
         }),
       },
     });
-  };
+  }
 
   private include(card: ICard) {
     return card.resourceType === ResourceType.DATA || MoonCards.scienceCardsWithLessThan2VP.has(card.name);

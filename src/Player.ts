@@ -1,29 +1,28 @@
-import * as constants from './constants';
+import * as constants from './common/constants';
 import {PlayerId} from './common/Types';
-import {DEFAULT_FLOATERS_VALUE, DEFAULT_MICROBES_VALUE, MAX_FLEET_SIZE, MILESTONE_COST, REDS_RULING_POLICY_COST} from './constants';
+import {DEFAULT_FLOATERS_VALUE, DEFAULT_MICROBES_VALUE, MAX_FLEET_SIZE, MILESTONE_COST, REDS_RULING_POLICY_COST} from './common/constants';
 import {AndOptions} from './inputs/AndOptions';
 import {Aridor} from './cards/colonies/Aridor';
 import {Board} from './boards/Board';
 import {CardFinder} from './CardFinder';
-import {CardName} from './CardName';
-import {CardType} from './cards/CardType';
-import {ColonyName} from './colonies/ColonyName';
-import {Color} from './Color';
-import {CorporationCard} from './cards/corporation/CorporationCard';
+import {CardName} from './common/cards/CardName';
+import {CardType} from './common/cards/CardType';
+import {ColonyName} from './common/colonies/ColonyName';
+import {Color} from './common/Color';
+import {ICorporationCard} from './cards/corporation/ICorporationCard';
 import {Game} from './Game';
-import {HowToPay} from './inputs/HowToPay';
+import {HowToPay} from './common/inputs/HowToPay';
 import {IAward} from './awards/IAward';
 import {ICard, IResourceCard, isIActionCard, TRSource, IActionCard} from './cards/ICard';
-import {ISerializable} from './ISerializable';
 import {IMilestone} from './milestones/IMilestone';
 import {IProjectCard} from './cards/IProjectCard';
-import {ITagCount} from './ITagCount';
+import {ITagCount} from './common/cards/ITagCount';
 import {LogMessageDataType} from './common/logs/LogMessageDataType';
 import {OrOptions} from './inputs/OrOptions';
 import {PartyHooks} from './turmoil/parties/PartyHooks';
-import {PartyName} from './turmoil/parties/PartyName';
+import {PartyName} from './common/turmoil/PartyName';
 import {PharmacyUnion} from './cards/promo/PharmacyUnion';
-import {Phase} from './Phase';
+import {Phase} from './common/Phase';
 import {PlayerInput} from './PlayerInput';
 import {Resources} from './common/Resources';
 import {ResourceType} from './common/ResourceType';
@@ -44,25 +43,27 @@ import {SelectSpace} from './inputs/SelectSpace';
 import {RobotCard, SelfReplicatingRobots} from './cards/promo/SelfReplicatingRobots';
 import {SerializedCard} from './SerializedCard';
 import {SerializedPlayer} from './SerializedPlayer';
-import {SpaceType} from './SpaceType';
+import {SpaceType} from './common/boards/SpaceType';
 import {StormCraftIncorporated} from './cards/colonies/StormCraftIncorporated';
-import {Tags} from './cards/Tags';
+import {Tags} from './common/cards/Tags';
 import {VictoryPointsBreakdown} from './VictoryPointsBreakdown';
+import {IVictoryPointsBreakdown} from './common/game/IVictoryPointsBreakdown';
 import {SelectProductionToLose} from './inputs/SelectProductionToLose';
-import {IAresGlobalParametersResponse, ShiftAresGlobalParameters} from './inputs/ShiftAresGlobalParameters';
+import {ShiftAresGlobalParameters} from './inputs/ShiftAresGlobalParameters';
+import {IAresGlobalParametersResponse} from './common/inputs/IAresGlobalParametersResponse';
 import {Timer} from './Timer';
 import {TurmoilHandler} from './turmoil/TurmoilHandler';
 import {CardLoader} from './CardLoader';
 import {DrawCards} from './deferredActions/DrawCards';
-import {Units} from './Units';
+import {Units} from './common/Units';
 import {MoonExpansion} from './moon/MoonExpansion';
 import {StandardProjectCard} from './cards/StandardProjectCard';
 import {ConvertPlants} from './cards/base/standardActions/ConvertPlants';
 import {ConvertHeat} from './cards/base/standardActions/ConvertHeat';
 import {Manutech} from './cards/venusNext/Manutech';
 import {LunaProjectOffice} from './cards/moon/LunaProjectOffice';
-import {GlobalParameter} from './GlobalParameter';
-import {GlobalEventName} from './turmoil/globalEvents/GlobalEventName';
+import {GlobalParameter} from './common/GlobalParameter';
+import {GlobalEventName} from './common/turmoil/globalEvents/GlobalEventName';
 import {LogHelper} from './LogHelper';
 import {UndoActionOption} from './inputs/UndoActionOption';
 import {LawSuit} from './cards/promo/LawSuit';
@@ -72,16 +73,16 @@ import {PathfindersExpansion} from './pathfinders/PathfindersExpansion';
 import {deserializeProjectCard, serializeProjectCard} from './cards/CardSerialization';
 import {ColoniesHandler} from './colonies/ColoniesHandler';
 
-export class Player implements ISerializable<SerializedPlayer> {
+export class Player {
   public readonly id: PlayerId;
   protected waitingFor?: PlayerInput;
   protected waitingForCb?: () => void;
   private _game: Game | undefined = undefined;
 
   // Corporate identity
-  public corporationCard: CorporationCard | undefined = undefined;
+  public corporationCard: ICorporationCard | undefined = undefined;
   // Used only during set-up
-  public pickedCorporationCard: CorporationCard | undefined = undefined;
+  public pickedCorporationCard: ICorporationCard | undefined = undefined;
 
   // Terraforming Rating
   private terraformRating: number = 20;
@@ -115,7 +116,7 @@ export class Player implements ISerializable<SerializedPlayer> {
   private corporationInitialActionDone: boolean = false;
 
   // Cards
-  public dealtCorporationCards: Array<CorporationCard> = [];
+  public dealtCorporationCards: Array<ICorporationCard> = [];
   public dealtProjectCards: Array<IProjectCard> = [];
   public dealtPreludeCards: Array<IProjectCard> = [];
   public cardsInHand: Array<IProjectCard> = [];
@@ -124,7 +125,6 @@ export class Player implements ISerializable<SerializedPlayer> {
   public draftedCards: Array<IProjectCard> = [];
   public cardCost: number = constants.CARD_COST;
   public needsToDraft: boolean | undefined = undefined;
-  public cardDiscount: number = 0;
 
   public timer: Timer = Timer.newInstance();
 
@@ -134,6 +134,7 @@ export class Player implements ISerializable<SerializedPlayer> {
   public colonyTradeOffset: number = 0;
   public colonyTradeDiscount: number = 0;
   public colonyVictoryPoints: number = 0;
+  public cardDiscount: number = 0; // Iapetus Colony
 
   // Turmoil
   public turmoilPolicyActionUsed: boolean = false;
@@ -340,7 +341,7 @@ export class Player implements ISerializable<SerializedPlayer> {
       if (stealing === true) {
         message = message + ' stolen';
       }
-      message = message + ' by ' + ((from instanceof Player) ? '${4}' : 'Global Event');
+      message = message + ' by ${4}';
     }
 
     this.game.log(message, (b) => {
@@ -350,6 +351,8 @@ export class Player implements ISerializable<SerializedPlayer> {
         .number(absAmount);
       if (from instanceof Player) {
         b.player(from);
+      } else if (from !== undefined) {
+        b.globalEventName(from);
       }
     });
   }
@@ -458,7 +461,7 @@ export class Player implements ISerializable<SerializedPlayer> {
     if (this.isCorporation(CardName.MANUTECH)) {
       Manutech.onProductionGain(this, resource, amount);
     }
-  };
+  }
 
   // Returns true when the player has the supplied units in its inventory.
   public hasUnits(units: Units): boolean {
@@ -536,7 +539,7 @@ export class Player implements ISerializable<SerializedPlayer> {
     return;
   }
 
-  public getVictoryPoints(): VictoryPointsBreakdown {
+  public getVictoryPoints(): IVictoryPointsBreakdown {
     const victoryPointsBreakdown = new VictoryPointsBreakdown();
 
     // Victory points from corporations
@@ -567,12 +570,12 @@ export class Player implements ISerializable<SerializedPlayer> {
     // Victory points from board
     this.game.board.spaces.forEach((space) => {
       // Victory points for greenery tiles
-      if (Board.isGreenerySpace(space) && space.player !== undefined && space.player.id === this.id) {
+      if (Board.isGreenerySpace(space) && Board.spaceOwnedBy(space, this)) {
         victoryPointsBreakdown.setVictoryPoints('greenery', 1);
       }
 
       // Victory points for greenery tiles adjacent to cities
-      if (Board.isCitySpace(space) && space.player !== undefined && space.player.id === this.id) {
+      if (Board.isCitySpace(space) && Board.spaceOwnedBy(space, this)) {
         const adjacent = this.game.board.getAdjacentSpaces(space);
         for (const adj of adjacent) {
           if (Board.isGreenerySpace(adj)) {
@@ -610,14 +613,14 @@ export class Player implements ISerializable<SerializedPlayer> {
         // Don't lose more VP than what is available
         victoryPointsBreakdown.updateTotal();
 
-        const totalBeforeEscapeVelocity = victoryPointsBreakdown.total;
+        const totalBeforeEscapeVelocity = victoryPointsBreakdown.points.total;
         const penaltyTotal = Math.min(penaltyPerMin * Math.floor(overTimeInMinutes / period), totalBeforeEscapeVelocity);
         victoryPointsBreakdown.setVictoryPoints('escapeVelocity', -penaltyTotal, 'Escape Velocity Penalty');
       }
     }
 
     victoryPointsBreakdown.updateTotal();
-    return victoryPointsBreakdown;
+    return victoryPointsBreakdown.points;
   }
 
   public cardIsInEffect(cardName: CardName): boolean {
@@ -674,10 +677,6 @@ export class Player implements ISerializable<SerializedPlayer> {
     return count;
   }
 
-  public getResourcesOnCard(card: ICard): number | undefined {
-    return card.resourceCount;
-  }
-
   public getResourcesOnCorporation():number {
     if (this.corporationCard !== undefined &&
       this.corporationCard.resourceCount !== undefined) {
@@ -707,21 +706,20 @@ export class Player implements ISerializable<SerializedPlayer> {
     return requirementsBonus;
   }
 
-  public removeResourceFrom(card: ICard, count: number = 1, game? : Game, removingPlayer? : Player, shouldLogAction: boolean = true): void {
+  public removeResourceFrom(card: ICard, count: number = 1, removingPlayer? : Player): void {
     if (card.resourceCount) {
-      card.resourceCount = Math.max(card.resourceCount - count, 0);
-      // Mons Insurance hook
-      if (game !== undefined && removingPlayer !== undefined) {
-        if (removingPlayer !== this) this.resolveMonsInsurance();
+      const amountRemoved = Math.min(card.resourceCount, count);
+      if (amountRemoved === 0) return;
+      card.resourceCount -= amountRemoved;
 
-        if (shouldLogAction) {
-          game.log('${0} removed ${1} resource(s) from ${2}\'s ${3}', (b) =>
-            b.player(removingPlayer)
-              .number(count)
-              .player(this)
-              .card(card));
-        }
-      }
+      if (removingPlayer !== undefined && removingPlayer !== this) this.resolveMonsInsurance();
+
+      this.game.log('${0} removed ${1} resource(s) from ${2}\'s ${3}', (b) =>
+        b.player(removingPlayer ?? this)
+          .number(amountRemoved)
+          .player(this)
+          .card(card));
+
       // Lawsuit hook
       if (removingPlayer !== undefined && removingPlayer !== this && this.removingPlayers.includes(removingPlayer.id) === false) {
         this.removingPlayers.push(removingPlayer.id);
@@ -736,30 +734,14 @@ export class Player implements ISerializable<SerializedPlayer> {
       card.resourceCount += count;
     }
 
-    // Topsoil contract hook
-    if (card.resourceType === ResourceType.MICROBE && this.playedCards.map((card) => card.name).includes(CardName.TOPSOIL_CONTRACT)) {
-      this.megaCredits += count;
-    }
-
-    // Meat industry hook
-    if (card.resourceType === ResourceType.ANIMAL && this.playedCards.map((card) => card.name).includes(CardName.MEAT_INDUSTRY)) {
-      this.megaCredits += count * 2;
-    }
-
     if (typeof(options) !== 'number' && options.log === true) {
       LogHelper.logAddResource(this, card, count);
     }
 
-    // Botanical Experience Hook
-    if (card.name === CardName.BOTANICAL_EXPERIENCE && card.resourceCount >= 3) {
-      const delta = Math.floor(card.resourceCount / 3);
-      const deducted = delta * 3;
-      card.resourceCount -= deducted;
-      // This assumes this player is the card owner. Bad?
-      this.addProduction(Resources.PLANTS, delta, {log: false});
-      this.game.log('${0} removed ${1} data from ${2} to increase plant production {3} steps.',
-        (b) => b.player(this).number(deducted).cardName(CardName.BOTANICAL_EXPERIENCE).number(delta));
+    for (const playedCard of this.playedCards) {
+      playedCard.onResourceAdded?.(this, card, count);
     }
+    this.corporationCard?.onResourceAdded?.(this, card, count);
   }
 
   public getCardsWithResources(resource?: ResourceType): Array<ICard & IResourceCard> {
@@ -795,7 +777,7 @@ export class Player implements ISerializable<SerializedPlayer> {
   public getResourceCount(resource: ResourceType): number {
     let count: number = 0;
     this.getCardsWithResources(resource).forEach((card) => {
-      count += (this.getResourcesOnCard(card) ?? 0);
+      count += card.resourceCount;
     });
     return count;
   }
@@ -847,11 +829,19 @@ export class Player implements ISerializable<SerializedPlayer> {
 
     if (includeTagSubstitutions) {
       // Earth Embassy hook
-      if (tag === Tags.EARTH && this.playedCards.some((c) => c.name === CardName.EARTH_EMBASSY)) {
+      if (tag === Tags.EARTH && this.cardIsInEffect(CardName.EARTH_EMBASSY)) {
         tagCount += this.getRawTagCount(Tags.MOON, includeEvents);
       }
+
       if (tag !== Tags.WILDCARD) {
         tagCount += this.getRawTagCount(Tags.WILDCARD, includeEvents);
+      }
+    }
+
+    // Habitat Marte hook
+    if (mode !== 'raw') {
+      if (tag === Tags.SCIENCE && this.corporationCard?.name === CardName.HABITAT_MARTE) {
+        tagCount += this.getRawTagCount(Tags.MARS, includeEvents);
       }
     }
 
@@ -860,13 +850,36 @@ export class Player implements ISerializable<SerializedPlayer> {
       // Milestones don't count wild tags, so in this case one will be added.
       if (mode === 'award') {
         tagCount++;
-      };
+      }
       // Milestones count wild tags, so in this case one will be deducted.
       if (mode === 'milestone') {
         tagCount--;
       }
     }
     return tagCount;
+  }
+
+  public cardHasTag(card: ICard, target: Tags): boolean {
+    for (const tag of card.tags) {
+      if (tag === target) return true;
+      if (tag === Tags.MARS &&
+        target === Tags.SCIENCE &&
+        this.corporationCard?.name === CardName.HABITAT_MARTE) {
+        return true;
+      }
+    }
+    return false;
+  }
+  public cardTagCount(card: ICard, target: Tags): number {
+    let count = 0;
+    for (const tag of card.tags) {
+      if (tag === target) count++;
+      if (tag === Tags.MARS && target === Tags.SCIENCE &&
+        this.corporationCard?.name === CardName.HABITAT_MARTE) {
+        count++;
+      }
+    }
+    return count;
   }
 
   // Counts the tags in the player's play area only.
@@ -895,7 +908,7 @@ export class Player implements ISerializable<SerializedPlayer> {
     });
 
     // This is repeated behavior from getTagCount, sigh, OK.
-    if (tags.includes(Tags.EARTH) && !tags.includes(Tags.MOON) && this.playedCards.some((c) => c.name === CardName.EARTH_EMBASSY)) {
+    if (tags.includes(Tags.EARTH) && !tags.includes(Tags.MOON) && this.cardIsInEffect(CardName.EARTH_EMBASSY)) {
       tagCount += this.getRawTagCount(Tags.MOON, false);
     }
 
@@ -1024,6 +1037,8 @@ export class Player implements ISerializable<SerializedPlayer> {
       if (colonyName === undefined) {
         throw new Error('No colony selected');
       }
+      // TODO(kberg): this passes true because SelectColony sometimes loads discarded colonies
+      // but that can be a parameter, and that would be useful.
       const colony = ColoniesHandler.getColony(this.game, colonyName, true);
       this.runInputCb(pi.cb(colony));
     } else if (pi instanceof OrOptions) {
@@ -1477,23 +1492,17 @@ export class Player implements ISerializable<SerializedPlayer> {
 
   public getMicrobesCanSpend(): number {
     const psychrophiles = this.playedCards.find((card) => card.name === CardName.PSYCHROPHILES);
-    return psychrophiles !== undefined ?
-      this.getResourcesOnCard(psychrophiles) ?? 0 :
-      0;
+    return psychrophiles?.resourceCount ?? 0;
   }
 
   public getFloatersCanSpend(): number {
     const dirigibles = this.playedCards.find((card) => card.name === CardName.DIRIGIBLES);
-    return dirigibles !== undefined ?
-      this.getResourcesOnCard(dirigibles) ?? 0 :
-      0;
+    return dirigibles?.resourceCount ?? 0;
   }
 
   public getSpendableScienceResources(): number {
     const lunaArchives = this.playedCards.find((card) => card.name === CardName.LUNA_ARCHIVES);
-    return lunaArchives !== undefined ?
-      this.getResourcesOnCard(lunaArchives) ?? 0 :
-      0;
+    return lunaArchives?.resourceCount ?? 0;
   }
 
   public getSpendableSeedResources(): number {
@@ -1606,7 +1615,7 @@ export class Player implements ISerializable<SerializedPlayer> {
 
     TurmoilHandler.applyOnCardPlayedEffect(this, card);
 
-    for (const somePlayer of this.game.getPlayers()) {
+    for (const somePlayer of this.game.getPlayersInGenerationOrder()) {
       if (somePlayer.corporationCard !== undefined && somePlayer.corporationCard.onCardPlayed !== undefined) {
         const actionFromPlayedCard: OrOptions | void = somePlayer.corporationCard.onCardPlayed(this, card);
         if (actionFromPlayedCard !== undefined) {
@@ -1908,7 +1917,7 @@ export class Player implements ISerializable<SerializedPlayer> {
           return this.game.gameOptions.altVenusBoard === true;
         default:
           return true;
-        };
+        }
       })
       .sort((a, b) => a.cost - b.cost);
   }

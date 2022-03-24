@@ -38,7 +38,7 @@
                               <div v-bind:key="pCount">
                                 <input type="radio" :value="pCount" name="playersCount" v-model="playersCount" :id="pCount+'-radio'">
                                 <label :for="pCount+'-radio'">
-                                    <span v-html="pCount === 1 ? 'Solo' : pCount"></span>
+                                    {{pCount === 1 ? 'Solo' : pCount}}
                                 </label>
                               </div>
                             </template>
@@ -233,13 +233,8 @@
                             </label>
 
                             <div v-if="seededGame">
-                                <select name="clonedGamedId" v-model="clonedGameData">
-                                    <option v-for="game in cloneGameData" :value="game" :key="game.gameId">
-                                        {{ game.gameId }} - {{ game.playerCount }} player(s)
-                                    </option>
-                                </select>
+                                <input type="text" name="clonedGamedId" v-model="clonedGameId" />
                             </div>
-
 
                             <div class="create-game-subsection-label" v-i18n>Filter</div>
 
@@ -440,22 +435,22 @@
 
 <script lang="ts">
 import Vue from 'vue';
-import {Color} from '@/Color';
-import {BoardName, RandomBoardOption} from '@/boards/BoardName';
-import {CardName} from '@/CardName';
+import {Color} from '@/common/Color';
+import {BoardName} from '@/common/boards/BoardName';
+import {RandomBoardOption} from '@/common/boards/RandomBoardOption';
+import {CardName} from '@/common/cards/CardName';
 import CorporationsFilter from '@/client/components/create/CorporationsFilter.vue';
 import {translateTextWithParams} from '@/client/directives/i18n';
-import {IGameData} from '@/database/IDatabase';
 import ColoniesFilter from '@/client/components/create/ColoniesFilter.vue';
-import {ColonyName} from '@/colonies/ColonyName';
+import {ColonyName} from '@/common/colonies/ColonyName';
 import CardsFilter from '@/client/components/create/CardsFilter.vue';
 import Button from '@/client/components/common/Button.vue';
-import {playerColorClass} from '@/utils/utils';
-import {RandomMAOptionType} from '@/RandomMAOptionType';
+import {playerColorClass} from '@/common/utils/utils';
+import {RandomMAOptionType} from '@/common/ma/RandomMAOptionType';
 import {GameId} from '@/common/Types';
-import {AgendaStyle} from '@/turmoil/PoliticalAgendas';
+import {AgendaStyle} from '@/common/turmoil/Types';
 
-import * as constants from '@/constants';
+import * as constants from '@/common/constants';
 
 type BoardNameType = BoardName | RandomBoardOption;
 
@@ -501,8 +496,7 @@ export interface CreateGameModel {
     includeVenusMA: boolean;
     startingCorporations: number;
     soloTR: boolean;
-    clonedGameData: IGameData | undefined;
-    cloneGameData: Array<IGameData>;
+    clonedGameId: string | undefined;
     requiresVenusTrackCompletion: boolean;
     requiresMoonTrackCompletion: boolean;
     moonStandardProjectVariant: boolean;
@@ -565,6 +559,7 @@ export default Vue.extend({
         BoardName.ELYSIUM,
         RandomBoardOption.OFFICIAL,
         BoardName.ARABIA_TERRA,
+        BoardName.VASTITAS_BOREALIS,
         RandomBoardOption.ALL,
       ],
       seed: Math.random(),
@@ -584,8 +579,7 @@ export default Vue.extend({
       includeVenusMA: true,
       startingCorporations: 2,
       soloTR: false,
-      clonedGameData: undefined,
-      cloneGameData: [],
+      clonedGameId: undefined,
       allOfficialExpansions: false,
       requiresVenusTrackCompletion: false,
       requiresMoonTrackCompletion: false,
@@ -607,19 +601,10 @@ export default Vue.extend({
     if (window.location.pathname === '/solo') {
       this.isSoloModePage = true;
     }
-
-    const onSucces = (response: any) => {
-      this.$data.cloneGameData = response;
-    };
-
-    fetch('/api/clonablegames')
-      .then((response) => response.json())
-      .then(onSucces)
-      .catch((_) => alert('Unexpected server response'));
   },
   methods: {
-    downloadCurrentSettings() {
-      const serializedData = this.serializeSettings();
+    async downloadCurrentSettings() {
+      const serializedData = await this.serializeSettings();
 
       if (serializedData) {
         const a = document.createElement('a');
@@ -783,6 +768,8 @@ export default Vue.extend({
         return 'create-game-board-hexagon create-game-elysium';
       } else if (boardName === BoardName.ARABIA_TERRA) {
         return 'create-game-board-hexagon create-game-arabia-terra';
+      } else if (boardName === BoardName.VASTITAS_BOREALIS) {
+        return 'create-game-board-hexagon create-game-vastitas-borealis';
       } else {
         return 'create-game-board-hexagon create-game-random';
       }
@@ -793,7 +780,7 @@ export default Vue.extend({
     getPlayerContainerColorClass(color: string): string {
       return playerColorClass(color.toLowerCase(), 'bg_transparent');
     },
-    serializeSettings() {
+    async serializeSettings() {
       const component = (this as any) as CreateGameModel;
 
       let players = component.players.slice(0, component.playersCount);
@@ -893,21 +880,40 @@ export default Vue.extend({
       }
 
       // Check custom corp count
-      if (customCorporationsList.length > 0) {
+      if (component.showCorporationList && customCorporationsList.length > 0) {
         const neededCorpsCount = players.length * startingCorporations;
-
         if (customCorporationsList.length < neededCorpsCount) {
           window.alert(translateTextWithParams('Must select at least ${0} corporations', [neededCorpsCount.toString()]));
           return;
         }
+      } else {
+        customCorporationsList.length = 0;
       }
 
       // Clone game checks
-      if (component.clonedGameData !== undefined && component.seededGame) {
-        clonedGamedId = component.clonedGameData.gameId;
-        if (component.clonedGameData.playerCount !== players.length) {
-          window.alert(this.$t('Player count mismatch'));
-          this.$data.playersCount = component.clonedGameData.playerCount;
+      if (component.clonedGameId !== undefined && component.seededGame) {
+        const gameData = await fetch('/api/cloneablegame?id=' + component.clonedGameId)
+          .then((response) => {
+            if (response.ok) {
+              return response.json();
+            }
+            if (response.status === 404) {
+              return;
+            }
+            return response.text().then((res) => new Error(res));
+          });
+        if (gameData === undefined) {
+          alert(this.$t('Game id ' + component.clonedGameId + ' not found'));
+          return;
+        }
+        if (gameData instanceof Error) {
+          alert(this.$t('Error looking for predefined game ' + gameData.message));
+          return;
+        }
+        clonedGamedId = component.clonedGameId;
+        if (gameData.playerCount !== players.length) {
+          alert(this.$t('Player count mismatch'));
+          this.$data.playersCount = gameData.playerCount;
           return;
         }
       } else if (!component.seededGame) {
@@ -959,25 +965,34 @@ export default Vue.extend({
       }, undefined, 4);
       return dataToSend;
     },
-    createGame() {
-      const dataToSend = this.serializeSettings();
+    async createGame() {
+      const dataToSend = await this.serializeSettings();
 
       if (dataToSend === undefined) return;
-      const onSucces = (response: any) => {
-        if (response.players.length === 1) {
-          window.location.href = '/player?id=' + response.players[0].id;
+      const onSuccess = (json: any) => {
+        if (json.players.length === 1) {
+          window.location.href = '/player?id=' + json.players[0].id;
           return;
         } else {
-          window.history.replaceState(response, `${constants.APP_NAME} - Game`, '/game?id=' + response.id);
-          (this as any).$root.$data.game = response;
+          window.history.replaceState(json, `${constants.APP_NAME} - Game`, '/game?id=' + json.id);
+          (this as any).$root.$data.game = json;
           (this as any).$root.$data.screen = 'game-home';
         }
       };
 
       fetch('/game', {'method': 'PUT', 'body': dataToSend, 'headers': {'Content-Type': 'application/json'}})
-        .then((response) => response.json())
-        .then(onSucces)
-        .catch((_) => alert('Unexpected server response'));
+        .then((response) => response.text())
+        .then((text) => {
+          try {
+            const json = JSON.parse(text);
+            onSuccess(json);
+          } catch (err) {
+            throw new Error(text);
+          }
+        })
+        .catch((error: Error) => {
+          alert(error.message);
+        });
     },
   },
 });

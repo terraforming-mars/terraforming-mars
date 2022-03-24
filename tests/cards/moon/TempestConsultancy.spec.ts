@@ -1,7 +1,7 @@
 import {Game} from '../../../src/Game';
 import {TempestConsultancy} from '../../../src/cards/moon/TempestConsultancy';
 import {expect} from 'chai';
-import {PartyName} from '../../../src/turmoil/parties/PartyName';
+import {PartyName} from '../../../src/common/turmoil/PartyName';
 import {Turmoil} from '../../../src/turmoil/Turmoil';
 import {TestPlayer} from '../../TestPlayer';
 import {TestPlayers} from '../../TestPlayers';
@@ -95,7 +95,7 @@ describe('TempestConsultancy', () => {
     expect(player.getTerraformRating()).eq(20);
 
     turmoil.setRulingParty(game);
-    game.deferredActions.runAll(() => {});
+    TestingUtils.runAllActions(game);
 
     expect(turmoil.chairman).eq(player.id);
     expect(player.getTerraformRating()).eq(22);

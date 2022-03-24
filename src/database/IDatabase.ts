@@ -1,11 +1,7 @@
 import {Game, GameOptions, Score} from '../Game';
 import {GameId} from '../common/Types';
 import {SerializedGame} from '../SerializedGame';
-
-export interface IGameData {
-    gameId: GameId;
-    playerCount: number;
-}
+import {IGameData} from '../common/game/IGameData';
 
 /**
  * A game store. Load, save, you know the drill.
@@ -94,6 +90,20 @@ export interface IDatabase {
     getClonableGames(cb:(err: Error | undefined, allGames:Array<IGameData>)=> void) : void;
 
     /**
+     * Load reference to game that can be cloned. Every game is cloneable,
+     * this just returns the original save of the game. However, if a game's
+     * original save is pruned, say, due to {@link deleteGameNbrSaves}, it won't
+     * exist.
+     *
+     * Cloneable games are those with a save_id 0.
+     *
+     * @param game_id the game id to search for
+     * @param cb a callback either returning either an error or a reference to a cloneable game.
+     * if the game is not found then undefined.
+     */
+    getClonableGameByGameId(game_id: GameId, cb: (err: Error | undefined, gameData: IGameData | undefined) => void): void;
+
+    /**
      * Saves the current state of the game. at a supplied save point. Used for
      * interim game updates.
      */
@@ -135,7 +145,7 @@ export interface IDatabase {
      * A maintenance task on a single game to close it out upon its completion.
      * It will:
      *
-     * * Purge all saves between `(0, save_id]`.
+     * * Purge all saves between `(0, last save]`.
      * * Mark the game as finished.
      * * It also participates in purging abandoned solo games older
      *   than a given date range, regardless of the supplied `game_id`.
@@ -144,7 +154,7 @@ export interface IDatabase {
     // TODO(kberg): rename to represent that it's closing out
     // this game. Also consider not needing the save_id, and
     // also to make the maintenance behavior a first-class method.
-    cleanSaves(game_id: GameId, save_id: number): void;
+    cleanSaves(game_id: GameId): void;
 
     /**
      * A maintenance task that purges abandoned solo games older

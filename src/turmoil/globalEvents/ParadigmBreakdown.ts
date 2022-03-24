@@ -1,6 +1,6 @@
 import {IGlobalEvent, GlobalEvent} from './IGlobalEvent';
-import {GlobalEventName} from './GlobalEventName';
-import {PartyName} from '../parties/PartyName';
+import {GlobalEventName} from '../../common/turmoil/globalEvents/GlobalEventName';
+import {PartyName} from '../../common/turmoil/PartyName';
 import {Game} from '../../Game';
 import {Resources} from '../../common/Resources';
 import {Turmoil} from '../Turmoil';
@@ -8,7 +8,7 @@ import {DiscardCards} from '../../deferredActions/DiscardCards';
 import {CardRenderer} from '../../cards/render/CardRenderer';
 
 const RENDER_DATA = CardRenderer.builder((b) => {
-  b.minus().cards(2).br.megacredits(2).influence();
+  b.br.minus().cards(2).nbsp.megacredits(2).influence();
 });
 
 export class ParadigmBreakdown extends GlobalEvent implements IGlobalEvent {
@@ -22,7 +22,7 @@ export class ParadigmBreakdown extends GlobalEvent implements IGlobalEvent {
     });
   }
   public resolve(game: Game, turmoil: Turmoil) {
-    game.getPlayers().forEach((player) => {
+    game.getPlayersInGenerationOrder().forEach((player) => {
       if (player.cardsInHand.length >= 2) {
         game.defer(new DiscardCards(player, 2, 'Global Event - Select 2 cards to discard'));
       } else if (player.cardsInHand.length === 1) {

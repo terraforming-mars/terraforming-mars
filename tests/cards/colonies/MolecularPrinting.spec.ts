@@ -25,7 +25,6 @@ describe('MolecularPrinting', function() {
     const action = card.play(player);
     expect(action).is.undefined;
     expect(player.getResource(Resources.MEGACREDITS)).to.eq(3);
-    player.victoryPointsBreakdown.setVictoryPoints('victoryPoints', card.getVictoryPoints());
-    expect(player.victoryPointsBreakdown.victoryPoints).to.eq(1);
+    expect(card.getVictoryPoints()).to.eq(1);
   });
 });

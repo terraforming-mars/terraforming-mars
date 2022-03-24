@@ -1,14 +1,14 @@
 import {IProjectCard} from '../IProjectCard';
-import {Tags} from '../Tags';
-import {CardType} from '../CardType';
+import {Tags} from '../../common/cards/Tags';
+import {CardType} from '../../common/cards/CardType';
 import {Player} from '../../Player';
-import {CardName} from '../../CardName';
+import {CardName} from '../../common/cards/CardName';
 import {Resources} from '../../common/Resources';
 import {OrOptions} from '../../inputs/OrOptions';
 import {SelectOption} from '../../inputs/SelectOption';
 import {Card} from '../Card';
 import {CardRenderer} from '../render/CardRenderer';
-import {Size} from '../render/Size';
+import {Size} from '../../common/cards/render/Size';
 
 export class LunarExports extends Card implements IProjectCard {
   constructor() {

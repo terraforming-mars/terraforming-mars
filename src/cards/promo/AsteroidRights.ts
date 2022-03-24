@@ -1,10 +1,10 @@
 import {IProjectCard} from '../IProjectCard';
 import {IActionCard, ICard, IResourceCard} from '../ICard';
 import {Card} from '../Card';
-import {CardName} from '../../CardName';
-import {CardType} from '../CardType';
+import {CardName} from '../../common/cards/CardName';
+import {CardType} from '../../common/cards/CardType';
 import {ResourceType} from '../../common/ResourceType';
-import {Tags} from '../Tags';
+import {Tags} from '../../common/cards/Tags';
 import {Player} from '../../Player';
 import {Resources} from '../../common/Resources';
 import {LogHelper} from '../../LogHelper';

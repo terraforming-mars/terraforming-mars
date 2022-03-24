@@ -1,10 +1,10 @@
 import {expect} from 'chai';
 
-import {CardName} from '../../src/CardName';
-import {CardType} from '../../src/cards/CardType';
+import {CardName} from '../../src/common/cards/CardName';
+import {CardType} from '../../src/common/cards/CardType';
 import {Helion} from '../../src/cards/corporation/Helion';
 import {Inventrix} from '../../src/cards/corporation/Inventrix';
-import {Tags} from '../../src/cards/Tags';
+import {Tags} from '../../src/common/cards/Tags';
 
 describe('Card', function() {
   it('pulls values for typical corporation', function() {

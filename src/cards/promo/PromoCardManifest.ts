@@ -1,5 +1,5 @@
-import {CardName} from '../../CardName';
-import {GameModule} from '../../GameModule';
+import {CardName} from '../../common/cards/CardName';
+import {GameModule} from '../../common/cards/GameModule';
 import {CardManifest} from '../CardManifest';
 import {Advertising} from './Advertising';
 import {ArcadianCommunities} from './ArcadianCommunities';
@@ -33,6 +33,7 @@ import {Meltworks} from './Meltworks';
 import {MercurianAlloys} from './MercurianAlloys';
 import {MoholeLake} from './MoholeLake';
 import {MonsInsurance} from './MonsInsurance';
+import {NewPartner} from './NewPartner';
 import {OrbitalCleanup} from './OrbitalCleanup';
 import {OutdoorSports} from './OutdoorSports';
 import {Penguins} from './Penguins';
@@ -95,6 +96,9 @@ export const PROMO_CARD_MANIFEST = new CardManifest({
     {cardName: CardName.BACTOVIRAL_RESEARCH, Factory: BactoviralResearch},
     {cardName: CardName.HARVEST, Factory: Harvest},
     {cardName: CardName.OUTDOOR_SPORTS, Factory: OutdoorSports},
+  ],
+  preludeCards: [
+    {cardName: CardName.NEW_PARTNER, Factory: NewPartner},
   ],
 
   cardsToRemove: [

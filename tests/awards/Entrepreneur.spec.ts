@@ -4,7 +4,7 @@ import {Entrepreneur} from '../../src/awards/Entrepreneur';
 import {TileType} from '../../src/common/TileType';
 import {TestPlayers} from '../TestPlayers';
 import {Player} from '../../src/Player';
-import {SpaceId} from '../../src/boards/ISpace';
+import {SpaceId} from '../../src/common/Types';
 import {IAdjacencyBonus} from '../../src/ares/IAdjacencyBonus';
 import {SpaceBonus} from '../../src/common/boards/SpaceBonus';
 

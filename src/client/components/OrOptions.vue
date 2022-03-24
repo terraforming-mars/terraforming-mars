@@ -29,9 +29,9 @@
 
 import Vue from 'vue';
 import Button from '@/client/components/common/Button.vue';
-import {PlayerViewModel, PublicPlayerModel} from '@/models/PlayerModel';
-import {PlayerInputModel} from '@/models/PlayerInputModel';
-import {PreferencesManager} from '@/client/utils/PreferencesManager';
+import {PlayerViewModel, PublicPlayerModel} from '@/common/models/PlayerModel';
+import {PlayerInputModel} from '@/common/models/PlayerInputModel';
+import {getPreferences} from '@/client/utils/PreferencesManager';
 
 let unique = 0;
 
@@ -64,7 +64,7 @@ export default Vue.extend({
     if (this.playerinput.options === undefined) {
       throw new Error('no options provided for OrOptions');
     }
-    const displayedOptions = this.playerinput.options.filter((o) => Boolean(o.showOnlyInLearnerMode) === false || PreferencesManager.loadBoolean('learner_mode'));
+    const displayedOptions = this.playerinput.options.filter((o) => Boolean(o.showOnlyInLearnerMode) === false || getPreferences().learner_mode);
     return {
       displayedOptions,
       radioElementName: 'selectOption' + unique++,

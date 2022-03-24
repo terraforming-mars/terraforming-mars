@@ -1,13 +1,13 @@
 import {IParty} from './IParty';
 import {Party} from './Party';
-import {PartyName} from './PartyName';
+import {PartyName} from '../../common/turmoil/PartyName';
 import {Game} from '../../Game';
 import {Bonus} from '../Bonus';
 import {Policy} from '../Policy';
 import {SelectHowToPayDeferred} from '../../deferredActions/SelectHowToPayDeferred';
 import {Player} from '../../Player';
-import {CardName} from '../../CardName';
-import {MAX_OXYGEN_LEVEL, MAX_TEMPERATURE, MAX_VENUS_SCALE, MIN_OXYGEN_LEVEL, MIN_TEMPERATURE, MIN_VENUS_SCALE, POLITICAL_AGENDAS_MAX_ACTION_USES} from '../../constants';
+import {CardName} from '../../common/cards/CardName';
+import {MAX_OXYGEN_LEVEL, MAX_TEMPERATURE, MAX_VENUS_SCALE, MIN_OXYGEN_LEVEL, MIN_TEMPERATURE, MIN_VENUS_SCALE, POLITICAL_AGENDAS_MAX_ACTION_USES} from '../../common/constants';
 import {DeferredAction} from '../../deferredActions/DeferredAction';
 import {RemoveOceanTile} from '../../deferredActions/RemoveOceanTile';
 import {OrOptions} from '../../inputs/OrOptions';
@@ -27,7 +27,7 @@ class RedsBonus01 implements Bonus {
 
   getScore(player: Player) {
     const game = player.game;
-    const players = game.getPlayers();
+    const players = game.getPlayersInGenerationOrder();
 
     if (game.isSoloMode() && players[0].getTerraformRating() <= 20) return 1;
 
@@ -39,7 +39,7 @@ class RedsBonus01 implements Bonus {
   }
 
   grant(game: Game) {
-    const players = game.getPlayers();
+    const players = game.getPlayersInGenerationOrder();
     const scores = players.map((player) => this.getScore(player));
 
     players.forEach((player, idx) => {
@@ -55,7 +55,7 @@ class RedsBonus02 implements Bonus {
 
   getScore(player: Player) {
     const game = player.game;
-    const players = game.getPlayers();
+    const players = game.getPlayersInGenerationOrder();
 
     if (game.isSoloMode() && players[0].getTerraformRating() > 20) return -1;
 
@@ -67,7 +67,7 @@ class RedsBonus02 implements Bonus {
   }
 
   grant(game: Game) {
-    const players = game.getPlayers();
+    const players = game.getPlayersInGenerationOrder();
     const scores = players.map((player) => this.getScore(player));
 
     players.forEach((player, idx) => {

@@ -1,9 +1,9 @@
 import {expect} from 'chai';
 import {Player} from '../../src/Player';
-import {PartyName} from '../../src/turmoil/parties/PartyName';
+import {PartyName} from '../../src/common/turmoil/PartyName';
 import {Game} from '../../src/Game';
 import {MarsFirst} from '../../src/turmoil/parties/MarsFirst';
-import {Phase} from '../../src/Phase';
+import {Phase} from '../../src/common/Phase';
 import {OrOptions} from '../../src/inputs/OrOptions';
 import {SelectSpace} from '../../src/inputs/SelectSpace';
 import {SpaceBonus} from '../../src/common/boards/SpaceBonus';
@@ -23,7 +23,7 @@ import {NitrogenFromTitan} from '../../src/cards/colonies/NitrogenFromTitan';
 import {SpaceStation} from '../../src/cards/base/SpaceStation';
 import {EarthCatapult} from '../../src/cards/base/EarthCatapult';
 import {QuantumExtractor} from '../../src/cards/base/QuantumExtractor';
-import * as constants from '../../src/constants';
+import * as constants from '../../src/common/constants';
 import {SerializedTurmoil} from '../../src/turmoil/SerializedTurmoil';
 import {PoliticalAgendas} from '../../src/turmoil/PoliticalAgendas';
 import {IParty} from '../../src/turmoil/parties/IParty';
@@ -161,7 +161,7 @@ describe('Turmoil', function() {
 
     game.phase = Phase.SOLAR;
     turmoil.endGeneration(game);
-    game.deferredActions.runAll(() => {});
+    TestingUtils.runAllActions(game);
 
     expect(game.getPlayerById(turmoil.chairman!)).to.eq(player);
     // both players lose 1 TR; player gains 1 TR from Reds ruling bonus, 1 TR from chairman

@@ -1,8 +1,8 @@
 import {Player} from '../../Player';
-import {CardName} from '../../CardName';
+import {CardName} from '../../common/cards/CardName';
 import {CardRenderer} from '../render/CardRenderer';
 import {StandardProjectCard} from '../StandardProjectCard';
-import {ColonyName} from '../../colonies/ColonyName';
+import {ColonyName} from '../../common/colonies/ColonyName';
 import {BuildColony} from '../../deferredActions/BuildColony';
 import {MAX_COLONIES_PER_TILE} from '../../constants';
 
@@ -20,6 +20,14 @@ export class BuildColonyStandardProject extends StandardProjectCard {
         ),
       },
     });
+  }
+
+  protected override discount(player: Player): number {
+    if (player.isCorporation(CardName.ADHAI_HIGH_ORBIT_CONSTRUCTIONS)) {
+      const adhaiDiscount = Math.floor((player.corporationCard?.resourceCount ?? 0) / 2);
+      return adhaiDiscount + super.discount(player);
+    }
+    return super.discount(player);
   }
 
   private getOpenColonies(player: Player) {

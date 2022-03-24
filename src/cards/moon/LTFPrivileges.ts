@@ -1,5 +1,5 @@
-import {CardName} from '../../CardName';
-import {CardType} from '../CardType';
+import {CardName} from '../../common/cards/CardName';
+import {CardType} from '../../common/cards/CardType';
 import {IProjectCard} from '../IProjectCard';
 import {Tags} from '../../common/cards/Tags';
 import {CardRenderer} from '../render/CardRenderer';
@@ -23,7 +23,7 @@ export class LTFPrivileges extends Card implements IProjectCard {
         }),
       },
     });
-  };
+  }
 
   public play() {
     return undefined;

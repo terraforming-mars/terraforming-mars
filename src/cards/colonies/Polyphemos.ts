@@ -1,13 +1,13 @@
-import {CorporationCard} from '../corporation/CorporationCard';
+import {ICorporationCard} from '../corporation/ICorporationCard';
 import {Player} from '../../Player';
 import {Resources} from '../../common/Resources';
 import {Card} from '../Card';
-import {CardName} from '../../CardName';
-import {CardType} from '../CardType';
+import {CardName} from '../../common/cards/CardName';
+import {CardType} from '../../common/cards/CardType';
 import {CardRenderer} from '../render/CardRenderer';
 import {digit} from '../Options';
 
-export class Polyphemos extends Card implements CorporationCard {
+export class Polyphemos extends Card implements ICorporationCard {
   constructor() {
     super({
       name: CardName.POLYPHEMOS,

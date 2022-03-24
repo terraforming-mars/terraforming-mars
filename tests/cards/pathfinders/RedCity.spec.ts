@@ -4,12 +4,12 @@ import {Game} from '../../../src/Game';
 import {TestPlayer} from '../../TestPlayer';
 import {getTestPlayer, newTestGame} from '../../TestGame';
 import {Turmoil} from '../../../src/turmoil/Turmoil';
-import {PartyName} from '../../../src/turmoil/parties/PartyName';
-import {Phase} from '../../../src/Phase';
-import {SpaceType} from '../../../src/SpaceType';
+import {PartyName} from '../../../src/common/turmoil/PartyName';
+import {Phase} from '../../../src/common/Phase';
+import {SpaceType} from '../../../src/common/boards/SpaceType';
 import {TileType} from '../../../src/common/TileType';
 import {Board} from '../../../src/boards/Board';
-import {Units} from '../../../src/Units';
+import {Units} from '../../../src/common/Units';
 
 describe('RedCity', function() {
   let card: RedCity;

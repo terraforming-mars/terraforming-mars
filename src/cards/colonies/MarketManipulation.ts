@@ -1,14 +1,15 @@
 import {IProjectCard} from '../IProjectCard';
-import {Tags} from '../Tags';
-import {CardType} from '../CardType';
+import {Tags} from '../../common/cards/Tags';
+import {CardType} from '../../common/cards/CardType';
 import {Player} from '../../Player';
-import {CardName} from '../../CardName';
+import {CardName} from '../../common/cards/CardName';
 import {Game} from '../../Game';
 import {OrOptions} from '../../inputs/OrOptions';
 import {SelectOption} from '../../inputs/SelectOption';
 import {Card} from '../Card';
-import {Size} from '../render/Size';
+import {Size} from '../../common/cards/render/Size';
 import {CardRenderer} from '../render/CardRenderer';
+import {COLONY_DESCRIPTIONS} from '../../common/colonies/ColonyDescription';
 
 export class MarketManipulation extends Card implements IProjectCard {
   constructor() {
@@ -58,7 +59,9 @@ export class MarketManipulation extends Card implements IProjectCard {
     increasableColonies.forEach(function(c1) {
       decreasableColonies.forEach(function(c2) {
         if (c1.name !== c2.name) {
-          const description = 'Increase ' + c1.name + ' (' + c1.description + ') and decrease ' + c2.name + ' (' + c2.description + ')';
+          const c1Description = COLONY_DESCRIPTIONS.get(c1.name) ?? 'unknown';
+          const c2Description = COLONY_DESCRIPTIONS.get(c2.name) ?? 'unknown';
+          const description = 'Increase ' + c1.name + ' (' + c1Description + ') and decrease ' + c2.name + ' (' + c2Description + ')';
           const colonySelect = new SelectOption(
             description,
             'Select',
@@ -71,7 +74,7 @@ export class MarketManipulation extends Card implements IProjectCard {
           );
 
           selectColonies.options.push(colonySelect);
-        };
+        }
       });
     });
 

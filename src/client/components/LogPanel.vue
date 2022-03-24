@@ -35,26 +35,26 @@
 <script lang="ts">
 
 import Vue from 'vue';
-import {CardType} from '@/cards/CardType';
+import {CardType} from '@/common/cards/CardType';
 import {LogMessage} from '@/common/logs/LogMessage';
 import {LogMessageType} from '@/common/logs/LogMessageType';
 import {LogMessageData} from '@/common/logs/LogMessageData';
 import {LogMessageDataType} from '@/common/logs/LogMessageDataType';
-import {PublicPlayerModel} from '@/models/PlayerModel';
+import {PublicPlayerModel} from '@/common/models/PlayerModel';
 import Card from '@/client/components/card/Card.vue';
-import {CardName} from '@/CardName';
+import {CardName} from '@/common/cards/CardName';
 import {TileType} from '@/common/TileType';
-import {playerColorClass} from '@/utils/utils';
-import {Color} from '@/Color';
+import {playerColorClass} from '@/common/utils/utils';
+import {Color} from '@/common/Color';
 import {SoundManager} from '@/client/utils/SoundManager';
-import {PreferencesManager} from '@/client/utils/PreferencesManager';
-import {GlobalEventName} from '@/turmoil/globalEvents/GlobalEventName';
+import {getPreferences} from '@/client/utils/PreferencesManager';
+import {GlobalEventName} from '@/common/turmoil/globalEvents/GlobalEventName';
 import GlobalEvent from '@/client/components/GlobalEvent.vue';
 import {getGlobalEventByName} from '@/turmoil/globalEvents/GlobalEventDealer';
-import {GlobalEventModel} from '@/models/TurmoilModel';
-import {PartyName} from '@/turmoil/parties/PartyName';
+import {GlobalEventModel} from '@/common/models/TurmoilModel';
+import {PartyName} from '@/common/turmoil/PartyName';
 import Button from '@/client/components/common/Button.vue';
-import {Log} from '@/Log';
+import {Log} from '@/common/logs/Log';
 import {getCard} from '@/client/cards/ClientCardManifest';
 
 let logRequest: XMLHttpRequest | undefined;
@@ -281,7 +281,7 @@ export default Vue.extend({
         if (xhr.status === 200) {
           messages.splice(0, messages.length);
           messages.push(...xhr.response);
-          if (PreferencesManager.loadBoolean('enable_sounds') && window.location.search.includes('experimental=1') ) {
+          if (getPreferences().enable_sounds && window.location.search.includes('experimental=1') ) {
             SoundManager.newLog();
           }
           if (generation === this.generation) {
@@ -337,6 +337,7 @@ export default Vue.extend({
       for (const player of this.players) {
         const foundCard = player.playedCards.find((card) => card.name === cardName);
         if (foundCard !== undefined) return foundCard.resources;
+        if (cardName === player.corporationCard?.name) return player.corporationCard.resources;
       }
 
       return undefined;

@@ -6,19 +6,19 @@ import {ARES_OPTIONS_NO_HAZARDS, AresTestHelper, ARES_OPTIONS_WITH_HAZARDS} from
 import {EmptyBoard} from './EmptyBoard';
 import {TileType} from '../../src/common/TileType';
 import {ITile} from '../../src/ITile';
-import {SpaceType} from '../../src/SpaceType';
+import {SpaceType} from '../../src/common/boards/SpaceType';
 import {Resources} from '../../src/common/Resources';
 import {SelectProductionToLose} from '../../src/inputs/SelectProductionToLose';
 import {OriginalBoard} from '../../src/boards/OriginalBoard';
 import {DesperateMeasures} from '../../src/cards/ares/DesperateMeasures';
 import {Decomposers} from '../../src/cards/base/Decomposers';
 import {EnergyTapping} from '../../src/cards/base/EnergyTapping';
-import {Phase} from '../../src/Phase';
+import {Phase} from '../../src/common/Phase';
 import {TestPlayers} from '../TestPlayers';
 import {_AresHazardPlacement} from '../../src/ares/AresHazards';
 import {AresSetup} from '../../src/ares/AresSetup';
 import {Random} from '../../src/Random';
-import {Units} from '../../src/Units';
+import {Units} from '../../src/common/Units';
 import {TestingUtils} from '../TestingUtils';
 
 // oddly, this no longer tests AresHandler calls. So that's interesting.

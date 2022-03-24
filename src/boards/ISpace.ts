@@ -1,10 +1,9 @@
 import {SpaceBonus} from '../common/boards/SpaceBonus';
-import {SpaceType} from '../SpaceType';
+import {SpaceType} from '../common/boards/SpaceType';
 import {ITile} from '../ITile';
 import {Player} from '../Player';
 import {IAdjacencyBonus} from '../ares/IAdjacencyBonus';
-
-export type SpaceId = string;
+import {SpaceId} from '../common/Types';
 
 export interface ISpace {
     id: SpaceId;

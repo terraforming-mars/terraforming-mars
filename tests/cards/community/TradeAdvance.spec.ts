@@ -1,6 +1,6 @@
 import {expect} from 'chai';
 import {TradeAdvance} from '../../../src/cards/community/TradeAdvance';
-import {ColonyName} from '../../../src/colonies/ColonyName';
+import {ColonyName} from '../../../src/common/colonies/ColonyName';
 import {Game} from '../../../src/Game';
 import {Player} from '../../../src/Player';
 import {TestingUtils} from '../../TestingUtils';
@@ -23,7 +23,7 @@ describe('TradeAdvance', function() {
   it('Should play', function() {
     card.play(player);
 
-    player.game.deferredActions.runAll(() => {});
+    TestingUtils.runAllActions(player.game);
 
     expect(player.megaCredits).to.eq(6); // 2 from card + 4 from Luna
     expect(player.energy).to.eq(3);

@@ -11,7 +11,7 @@ class FileApiMock extends FileAPI {
     readFile: 0,
     readFileSync: 0,
     existsSync: 0,
-  }
+  };
   public constructor() {
     super();
   }
@@ -141,6 +141,18 @@ describe('ServeAsset', () => {
     setRequest('/main.js', [['accept-encoding', '']]);
     instance.get(req, res.hide(), ctx);
     expect(res.content).eq('data: build/main.js');
+    expect(fileApi.counts).deep.eq({
+      ...primedCache,
+      readFile: 1,
+      existsSync: 0,
+    });
+  });
+
+  it('sw.js', () => {
+    instance = new ServeAsset(undefined, false, fileApi);
+    setRequest('/sw.js', [['accept-encoding', '']]);
+    instance.get(req, res.hide(), ctx);
+    expect(res.content).eq('data: build/src/client/sw.js');
     expect(fileApi.counts).deep.eq({
       ...primedCache,
       readFile: 1,

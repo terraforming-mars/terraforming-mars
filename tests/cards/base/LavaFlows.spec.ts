@@ -3,12 +3,12 @@ import {LavaFlows} from '../../../src/cards/base/LavaFlows';
 import {Game} from '../../../src/Game';
 import {Player} from '../../../src/Player';
 import {SpaceName} from '../../../src/SpaceName';
-import {SpaceType} from '../../../src/SpaceType';
+import {SpaceType} from '../../../src/common/boards/SpaceType';
 import {TileType} from '../../../src/common/TileType';
 import {TestingUtils} from '../../TestingUtils';
 import {TestPlayers} from '../../TestPlayers';
 import {newTestGame} from '../../TestGame';
-import {BoardName} from '../../../src/boards/BoardName';
+import {BoardName} from '../../../src/common/boards/BoardName';
 
 describe('LavaFlows', function() {
   let card: LavaFlows;
@@ -38,7 +38,7 @@ describe('LavaFlows', function() {
   it('All land spaces are available on Hellas', function() {
     // With two players, there's no solo setup, so all spaces will be available.
     const game = newTestGame(2, {boardName: BoardName.HELLAS});
-    const player = game.getPlayers()[0];
+    const player = game.getPlayersInGenerationOrder()[0];
 
     const action = card.play(player);
     expect(action.availableSpaces).deep.eq(game.board.getAvailableSpacesOnLand(player));

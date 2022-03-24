@@ -1,9 +1,9 @@
-import {CardName} from '../../CardName';
+import {CardName} from '../../common/cards/CardName';
 import {Player} from '../../Player';
-import {CardType} from '../CardType';
+import {CardType} from '../../common/cards/CardType';
 import {MoonExpansion} from '../../moon/MoonExpansion';
 import {CardRenderer} from '../render/CardRenderer';
-import {Units} from '../../Units';
+import {Units} from '../../common/Units';
 import {MoonCard} from './MoonCard';
 import {CardRequirements} from '../CardRequirements';
 import {all} from '../Options';
@@ -21,11 +21,10 @@ export class WaterTreatmentComplex extends MoonCard {
       metadata: {
         description: 'Requires 1 colony tile on the Moon. Spend 1 titanium. Raise the Colony Rate 2 steps.',
         cardNumber: 'M46',
-        // requirements: CardRequirements.builder((b) => b.text('1 colony on Moon')),// TODO(kberg):
         renderData: CardRenderer.builder((b) => b.minus().titanium(1).br.moonColonyRate({amount: 2})),
       },
     });
-  };
+  }
 
   public override play(player: Player) {
     super.play(player);

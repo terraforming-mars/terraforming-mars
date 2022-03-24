@@ -1,5 +1,5 @@
 import {expect} from 'chai';
-import {CardName} from '../../../src/CardName';
+import {CardName} from '../../../src/common/cards/CardName';
 import {ALL_CARD_MANIFESTS} from '../../../src/cards/AllCards';
 import {CapitalAres} from '../../../src/cards/ares/CapitalAres';
 import {SolarFarm} from '../../../src/cards/ares/SolarFarm';
@@ -10,7 +10,7 @@ import {NoctisFarming} from '../../../src/cards/base/NoctisFarming';
 import {RoboticWorkforce} from '../../../src/cards/base/RoboticWorkforce';
 import {ResearchCoordination} from '../../../src/cards/prelude/ResearchCoordination';
 import {UtopiaInvest} from '../../../src/cards/turmoil/UtopiaInvest';
-import {Tags} from '../../../src/cards/Tags';
+import {Tags} from '../../../src/common/cards/Tags';
 import {Game} from '../../../src/Game';
 import {SelectSpace} from '../../../src/inputs/SelectSpace';
 import {Resources} from '../../../src/common/Resources';
@@ -21,14 +21,14 @@ import {TestPlayers} from '../../TestPlayers';
 import {TileType} from '../../../src/common/TileType';
 import {ICard} from '../../../src/cards/ICard';
 import {TestPlayer} from '../../TestPlayer';
-import {Units} from '../../../src/Units';
+import {Units} from '../../../src/common/Units';
 import {fail} from 'assert';
 import {SolarWindPower} from '../../../src/cards/base/SolarWindPower';
 import {MarsUniversity} from '../../../src/cards/base/MarsUniversity';
 import {Gyropolis} from '../../../src/cards/venusNext/Gyropolis';
 import {VenusGovernor} from '../../../src/cards/venusNext/VenusGovernor';
-import {CardType} from '../../../src/cards/CardType';
-import {CorporationCard} from '../../../src/cards/corporation/CorporationCard';
+import {CardType} from '../../../src/common/cards/CardType';
+import {ICorporationCard} from '../../../src/cards/corporation/ICorporationCard';
 import {IProjectCard} from '../../../src/cards/IProjectCard';
 
 describe('RoboticWorkforce', () => {
@@ -237,7 +237,7 @@ describe('RoboticWorkforce', () => {
         }
 
         if (card.cardType === CardType.CORPORATION) {
-          (game as any).playCorporationCard(player, card as CorporationCard);
+          (game as any).playCorporationCard(player, card as ICorporationCard);
         } else {
           player.playCard(card as IProjectCard);
         }
@@ -267,7 +267,7 @@ describe('RoboticWorkforce', () => {
           if (card.productionBox === undefined || isEmpty(card.productionBox)) {
             fail(card.name + ' should be registered for Robotic Workforce');
           }
-        };
+        }
       }
     };
   });

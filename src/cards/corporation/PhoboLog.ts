@@ -1,14 +1,14 @@
 import {Card} from '../Card';
-import {Tags} from '../Tags';
+import {Tags} from '../../common/cards/Tags';
 import {Player} from '../../Player';
-import {CorporationCard} from './CorporationCard';
-import {CardName} from '../../CardName';
-import {CardType} from '../CardType';
+import {ICorporationCard} from './ICorporationCard';
+import {CardName} from '../../common/cards/CardName';
+import {CardType} from '../../common/cards/CardType';
 import {CardRenderer} from '../render/CardRenderer';
-import {Size} from '../render/Size';
+import {Size} from '../../common/cards/render/Size';
 import {digit} from '../Options';
 
-export class PhoboLog extends Card implements CorporationCard {
+export class PhoboLog extends Card implements ICorporationCard {
   constructor() {
     super({
       cardType: CardType.CORPORATION,

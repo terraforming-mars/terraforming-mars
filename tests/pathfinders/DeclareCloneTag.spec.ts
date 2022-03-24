@@ -1,9 +1,9 @@
 import {LobbyHalls} from '../../src/cards/pathfinders/LobbyHalls';
 import {expect} from 'chai';
 import {DeclareCloneTag} from '../../src/pathfinders/DeclareCloneTag';
-import {Tags} from '../../src//cards/Tags';
-import {OrOptions} from '../../src//inputs/OrOptions';
-import {SelectOption} from '../../src//inputs/SelectOption';
+import {Tags} from '../../src/common/cards/Tags';
+import {OrOptions} from '../../src/inputs/OrOptions';
+import {SelectOption} from '../../src/inputs/SelectOption';
 import {TestPlayer} from '../../tests/TestPlayer';
 import {getTestPlayer, newTestGame} from '../../tests/TestGame';
 import {TestingUtils} from '../TestingUtils';

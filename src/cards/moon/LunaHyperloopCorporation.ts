@@ -1,18 +1,18 @@
-import {CardName} from '../../CardName';
+import {CardName} from '../../common/cards/CardName';
 import {MoonExpansion} from '../../moon/MoonExpansion';
 import {Player} from '../../Player';
 import {Resources} from '../../common/Resources';
 import {TileType} from '../../common/TileType';
 import {Card} from '../Card';
-import {CardType} from '../CardType';
-import {CorporationCard} from '../corporation/CorporationCard';
+import {CardType} from '../../common/cards/CardType';
+import {ICorporationCard} from '../corporation/ICorporationCard';
 import {IActionCard} from '../ICard';
 import {all} from '../Options';
 import {CardRenderDynamicVictoryPoints} from '../render/CardRenderDynamicVictoryPoints';
 import {CardRenderer} from '../render/CardRenderer';
 import {Tags} from '../../common/cards/Tags';
 
-export class LunaHyperloopCorporation extends Card implements IActionCard, CorporationCard {
+export class LunaHyperloopCorporation extends Card implements IActionCard, ICorporationCard {
   constructor() {
     super({
       cardType: CardType.CORPORATION,

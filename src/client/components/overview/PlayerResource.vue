@@ -15,9 +15,9 @@
 <script lang="ts">
 
 import Vue from 'vue';
-import {DEFAULT_STEEL_VALUE, DEFAULT_TITANIUM_VALUE} from '@/constants';
+import {DEFAULT_STEEL_VALUE, DEFAULT_TITANIUM_VALUE} from '@/common/constants';
 import {Resources} from '@/common/Resources';
-import {PreferencesManager} from '@/client/utils/PreferencesManager';
+import {getPreferences} from '@/client/utils/PreferencesManager';
 
 export default Vue.extend({
   name: 'PlayerResource',
@@ -67,7 +67,7 @@ export default Vue.extend({
       return this.type === Resources.PLANTS && this.plantsAreProtected;
     },
     showResourceValue(): boolean {
-      const learnerModeOn = PreferencesManager.load('learner_mode') === '1';
+      const learnerModeOn = getPreferences().learner_mode;
       switch (this.type) {
       case Resources.STEEL:
         return learnerModeOn || this.steelValue > DEFAULT_STEEL_VALUE;

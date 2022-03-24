@@ -5,8 +5,8 @@
 <script lang="ts">
 
 import Vue from 'vue';
-import {isIDescription} from '@/cards/render/ICardRenderDescription';
-import {generateClassString} from '@/utils/utils';
+import {isIDescription} from '@/common/cards/render/ICardRenderDescription';
+import {generateClassString} from '@/common/utils/utils';
 
 export default Vue.extend({
   name: 'CardDescription',

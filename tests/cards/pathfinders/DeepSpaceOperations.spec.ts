@@ -2,8 +2,8 @@ import {expect} from 'chai';
 import {getTestPlayer, newTestGame} from '../../TestGame';
 import {DeepSpaceOperations} from '../../../src/cards/pathfinders/DeepSpaceOperations';
 import {Game} from '../../../src/Game';
-import {Units} from '../../../src/Units';
-import {Tags} from '../../../src/cards/Tags';
+import {Units} from '../../../src/common/Units';
+import {Tags} from '../../../src/common/cards/Tags';
 import {TestPlayer} from '../../TestPlayer';
 
 describe('DeepSpaceOperations', function() {

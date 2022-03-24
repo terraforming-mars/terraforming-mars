@@ -2,10 +2,10 @@ import {IActionCard, IResourceCard} from '../ICard';
 import {IProjectCard} from '../IProjectCard';
 import {Tags} from '../../common/cards/Tags';
 import {Card} from '../Card';
-import {CardType} from '../CardType';
+import {CardType} from '../../common/cards/CardType';
 import {Player} from '../../Player';
 import {ResourceType} from '../../common/ResourceType';
-import {CardName} from '../../CardName';
+import {CardName} from '../../common/cards/CardName';
 import {CardRequirements} from '../CardRequirements';
 import {CardRenderer} from '../render/CardRenderer';
 import {max, played} from '../Options';
@@ -34,18 +34,18 @@ export class Psychrophiles extends Card implements IActionCard, IProjectCard, IR
       },
     });
   }
-    public override resourceCount = 0;
+  public override resourceCount = 0;
 
-    public play() {
-      return undefined;
-    }
+  public play() {
+    return undefined;
+  }
 
-    public canAct(): boolean {
-      return true;
-    }
+  public canAct(): boolean {
+    return true;
+  }
 
-    public action(player: Player) {
-      player.addResourceTo(this);
-      return undefined;
-    }
+  public action(player: Player) {
+    player.addResourceTo(this);
+    return undefined;
+  }
 }

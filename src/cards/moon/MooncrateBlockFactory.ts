@@ -1,5 +1,5 @@
-import {CardName} from '../../CardName';
-import {CardType} from '../CardType';
+import {CardName} from '../../common/cards/CardName';
+import {CardType} from '../../common/cards/CardType';
 import {Tags} from '../../common/cards/Tags';
 import {CardRenderer} from '../render/CardRenderer';
 import {Card} from '../Card';
@@ -24,7 +24,7 @@ export class MooncrateBlockFactory extends Card {
         }),
       },
     });
-  };
+  }
 
   public play() {
     // Behavior is in MoonColonyStandardProject, MoonMineStandardProject and MoonRoadStandardProject.

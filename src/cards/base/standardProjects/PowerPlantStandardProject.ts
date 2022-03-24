@@ -1,5 +1,5 @@
 import {Player} from '../../../Player';
-import {CardName} from '../../../CardName';
+import {CardName} from '../../../common/cards/CardName';
 import {CardRenderer} from '../../render/CardRenderer';
 import {StandardProjectCard} from '../../StandardProjectCard';
 import {Resources} from '../../../common/Resources';
@@ -27,7 +27,7 @@ export class PowerPlantStandardProject extends StandardProjectCard {
     if (player.isCorporation(CardName.THORGATE)) {
       discount += 3;
     }
-    if (player.playedCards.some((card) => card.name === CardName.HIGH_TEMP_SUPERCONDUCTORS)) {
+    if (player.cardIsInEffect(CardName.HIGH_TEMP_SUPERCONDUCTORS)) {
       discount += 3;
     }
     return discount;

@@ -1,7 +1,7 @@
 import {Tags} from '../../common/cards/Tags';
-import {CardType} from '../CardType';
+import {CardType} from '../../common/cards/CardType';
 import {Player} from '../../Player';
-import {CardName} from '../../CardName';
+import {CardName} from '../../common/cards/CardName';
 import {CardRequirements} from '../CardRequirements';
 import {CardRenderer} from '../render/CardRenderer';
 import {Card} from '../Card';
@@ -23,7 +23,7 @@ export class AtalantaPlanitiaLab extends Card {
         renderData: CardRenderer.builder((b) => b.cards(2)),
       },
     });
-  };
+  }
 
   public play(player: Player) {
     player.drawCard(2);

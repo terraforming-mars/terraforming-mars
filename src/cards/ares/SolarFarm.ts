@@ -1,15 +1,15 @@
 import {Card} from '../Card';
-import {CardName} from '../../CardName';
+import {CardName} from '../../common/cards/CardName';
 import {SelectSpace} from '../../inputs/SelectSpace';
 import {ISpace} from '../../boards/ISpace';
 import {Player} from '../../Player';
 import {Resources} from '../../common/Resources';
 import {SpaceBonus} from '../../common/boards/SpaceBonus';
-import {SpaceType} from '../../SpaceType';
+import {SpaceType} from '../../common/boards/SpaceType';
 import {TileType} from '../../common/TileType';
-import {CardType} from '../CardType';
+import {CardType} from '../../common/cards/CardType';
 import {IProjectCard} from '../IProjectCard';
-import {Tags} from '../Tags';
+import {Tags} from '../../common/cards/Tags';
 import {CardRenderer} from '../render/CardRenderer';
 
 export class SolarFarm extends Card implements IProjectCard {
@@ -39,7 +39,7 @@ export class SolarFarm extends Card implements IProjectCard {
   public produce(player: Player) {
     const space = player.game.board.getSpaceByTileCard(this.name);
     if (space === undefined) {
-      throw new Error('solar Farm space not found');
+      throw new Error('Solar Farm space not found');
     }
     const plantsOnSpace = space.bonus.filter((b) => b === SpaceBonus.PLANT).length;
     player.addProduction(Resources.ENERGY, plantsOnSpace, {log: true});

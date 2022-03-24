@@ -2,7 +2,7 @@ import {expect} from 'chai';
 import {TerraformingGanymede} from '../../../src/cards/base/TerraformingGanymede';
 import {Game} from '../../../src/Game';
 import {TestPlayers} from '../../TestPlayers';
-import {Phase} from '../../../src/Phase';
+import {Phase} from '../../../src/common/Phase';
 import {PoliticalAgendas} from '../../../src/turmoil/PoliticalAgendas';
 import {TestPlayer} from 'tests/TestPlayer';
 import {Reds} from '../../../src/turmoil/parties/Reds';
@@ -24,8 +24,7 @@ describe('TerraformingGanymede', function() {
   it('Should play', function() {
     const action = card.play(player);
     expect(action).is.undefined;
-    player.victoryPointsBreakdown.setVictoryPoints('victoryPoints', card.getVictoryPoints());
-    expect(player.victoryPointsBreakdown.victoryPoints).to.eq(2);
+    expect(card.getVictoryPoints()).to.eq(2);
     player.playedCards.push(card);
     expect(player.getTerraformRating()).to.eq(21);
   });

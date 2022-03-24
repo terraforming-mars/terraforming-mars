@@ -5,6 +5,7 @@ const FAKE_DATABASE: IDatabase = {
   cleanSaves: () => {},
   deleteGameNbrSaves: () => {},
   getClonableGames: () => {},
+  getClonableGameByGameId: () => {},
   getGame: () => {},
   getGameId: () => {},
   getGameVersion: () => {},

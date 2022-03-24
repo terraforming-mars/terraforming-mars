@@ -10,9 +10,9 @@
 <script lang="ts">
 
 import Vue from 'vue';
-import {PlayerViewModel} from '@/models/PlayerModel';
+import {PlayerViewModel} from '@/common/models/PlayerModel';
 import PlayerInfo from '@/client/components/overview/PlayerInfo.vue';
-import {PreferencesManager} from '@/client/utils/PreferencesManager';
+import {getPreferences, PreferencesManager} from '@/client/utils/PreferencesManager';
 
 export default Vue.extend({
   name: 'top-bar',
@@ -34,11 +34,11 @@ export default Vue.extend({
       this.componentKey += 1;
     },
     toggleBar() {
-      PreferencesManager.save('hide_top_bar', this.isExpanded(), true);
+      PreferencesManager.INSTANCE.set('hide_top_bar', this.isExpanded());
       this.forceRerender();
     },
     isExpanded(): boolean {
-      return !PreferencesManager.loadBoolean('hide_top_bar');
+      return !getPreferences().hide_top_bar;
     },
     formatCssClass(): string {
       const cssClasses = ['top-bar'];

@@ -12,7 +12,7 @@
 
 <script lang="ts">
 import Vue from 'vue';
-import {LANGUAGES} from '@/constants';
+import {LANGUAGES} from '@/common/constants';
 import {PreferencesManager} from '@/client/utils/PreferencesManager';
 
 export default Vue.extend({
@@ -25,7 +25,7 @@ export default Vue.extend({
   },
   methods: {
     switchLanguageTo(langId: string) {
-      this.PreferencesManager.save('lang', langId);
+      this.PreferencesManager.INSTANCE.set('lang', langId);
       window.location.reload();
     },
   },

@@ -2,14 +2,14 @@ import {IProjectCard} from '../IProjectCard';
 import {Tags} from '../../common/cards/Tags';
 import {Card} from '../Card';
 import {VictoryPoints} from '../ICard';
-import {CardType} from '../CardType';
+import {CardType} from '../../common/cards/CardType';
 import {Player} from '../../Player';
 import {ResourceType} from '../../common/ResourceType';
-import {CardName} from '../../CardName';
+import {CardName} from '../../common/cards/CardName';
 import {IResourceCard} from '../ICard';
 import {CardRequirements} from '../CardRequirements';
 import {CardRenderer} from '../render/CardRenderer';
-import {Phase} from '../../Phase';
+import {Phase} from '../../common/Phase';
 import {played} from '../Options';
 
 export class Decomposers extends Card implements IProjectCard, IResourceCard {
@@ -39,16 +39,16 @@ export class Decomposers extends Card implements IProjectCard, IResourceCard {
       },
     });
   }
-    public override resourceCount: number = 0;
-    public onCardPlayed(player: Player, card: IProjectCard): void {
-      player.addResourceTo(this, card.tags.filter((tag) => tag === Tags.ANIMAL || tag === Tags.PLANT || tag === Tags.MICROBE).length);
+  public override resourceCount: number = 0;
+  public onCardPlayed(player: Player, card: IProjectCard): void {
+    player.addResourceTo(this, card.tags.filter((tag) => tag === Tags.ANIMAL || tag === Tags.PLANT || tag === Tags.MICROBE).length);
+  }
+  public play(player: Player) {
+    // Get two extra microbes from EcoExperts if played during prelude while having just played EcoExperts
+    if (player.game.phase === Phase.PRELUDES && player.playedCards.length > 0 && player.playedCards[player.playedCards.length-1].name === CardName.ECOLOGY_EXPERTS) {
+      player.addResourceTo(this, 2);
     }
-    public play(player: Player) {
-      // Get two extra microbes from EcoExperts if played during prelude while having just played EcoExperts
-      if (player.game.phase === Phase.PRELUDES && player.playedCards.length > 0 && player.playedCards[player.playedCards.length-1].name === CardName.ECOLOGY_EXPERTS) {
-        player.addResourceTo(this, 2);
-      }
-      return undefined;
-    }
+    return undefined;
+  }
 }
 

@@ -1,19 +1,19 @@
 import {IProjectCard} from '../cards/IProjectCard';
-import {GlobalParameter} from '../GlobalParameter';
+import {GlobalParameter} from '../common/GlobalParameter';
 import {SelectOption} from '../inputs/SelectOption';
 import {Player} from '../Player';
 import {PlayerInput} from '../PlayerInput';
 import {Resources} from '../common/Resources';
-import {SpaceType} from '../SpaceType';
+import {SpaceType} from '../common/boards/SpaceType';
 import {GREENS_POLICY_2, GREENS_POLICY_3, GREENS_POLICY_4} from './parties/Greens';
 import {KELVINISTS_POLICY_1, KELVINISTS_POLICY_3, KELVINISTS_POLICY_4} from './parties/Kelvinists';
 import {MARS_FIRST_POLICY_2, MARS_FIRST_POLICY_4} from './parties/MarsFirst';
 import {PartyHooks} from './parties/PartyHooks';
-import {PartyName} from './parties/PartyName';
+import {PartyName} from '../common/turmoil/PartyName';
 import {REDS_POLICY_2, REDS_POLICY_3} from './parties/Reds';
 import {SCIENTISTS_POLICY_1} from './parties/Scientists';
 import {UNITY_POLICY_2, UNITY_POLICY_3} from './parties/Unity';
-import * as constants from '../constants';
+import * as constants from '../common/constants';
 import {TRSource} from '../cards/ICard';
 import {MoonExpansion} from '../moon/MoonExpansion';
 

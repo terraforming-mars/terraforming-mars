@@ -1,8 +1,8 @@
-import {CardName} from '../../CardName';
-import {CardType} from '../CardType';
+import {CardName} from '../../common/cards/CardName';
+import {CardType} from '../../common/cards/CardType';
 import {Tags} from '../../common/cards/Tags';
 import {CardRenderer} from '../render/CardRenderer';
-import {Units} from '../../Units';
+import {Units} from '../../common/Units';
 import {MoonCard} from './MoonCard';
 import {CardRequirements} from '../CardRequirements';
 import {all} from '../Options';
@@ -27,5 +27,5 @@ export class HypersensitiveSiliconChipFactory extends MoonCard {
         }),
       },
     });
-  };
+  }
 }

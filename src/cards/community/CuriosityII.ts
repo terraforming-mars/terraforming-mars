@@ -1,24 +1,24 @@
 import {Card} from '../Card';
-import {CorporationCard} from '../corporation/CorporationCard';
-import {Tags} from '../Tags';
+import {ICorporationCard} from '../corporation/ICorporationCard';
+import {Tags} from '../../common/cards/Tags';
 import {Player} from '../../Player';
 import {ISpace} from '../../boards/ISpace';
 import {Resources} from '../../common/Resources';
-import {CardName} from '../../CardName';
-import {CardType} from '../CardType';
+import {CardName} from '../../common/cards/CardName';
+import {CardType} from '../../common/cards/CardType';
 import {CardRenderer} from '../render/CardRenderer';
-import {Size} from '../render/Size';
+import {Size} from '../../common/cards/render/Size';
 import {DeferredAction} from '../../deferredActions/DeferredAction';
 import {OrOptions} from '../../inputs/OrOptions';
 import {SelectOption} from '../../inputs/SelectOption';
 import {SelectHowToPayDeferred} from '../../deferredActions/SelectHowToPayDeferred';
 import {DrawCards} from '../../deferredActions/DrawCards';
-import {SpaceType} from '../../SpaceType';
+import {SpaceType} from '../../common/boards/SpaceType';
 import {SpaceBonus} from '../../common/boards/SpaceBonus';
-import {Phase} from '../../Phase';
-import {Units} from '../../Units';
+import {Phase} from '../../common/Phase';
+import {Units} from '../../common/Units';
 
-export class CuriosityII extends Card implements CorporationCard {
+export class CuriosityII extends Card implements ICorporationCard {
   constructor() {
     super({
       cardType: CardType.CORPORATION,

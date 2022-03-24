@@ -5,7 +5,7 @@ import {Player} from '../../../src/Player';
 import {SelectSpace} from '../../../src/inputs/SelectSpace';
 import {TileType} from '../../../src/common/TileType';
 import {SelectColony} from '../../../src/inputs/SelectColony';
-import {ColonyName} from '../../../src/colonies/ColonyName';
+import {ColonyName} from '../../../src/common/colonies/ColonyName';
 import {Game} from '../../../src/Game';
 
 describe('StrategicBasePlanning', function() {

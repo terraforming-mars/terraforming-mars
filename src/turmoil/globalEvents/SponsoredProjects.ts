@@ -1,12 +1,13 @@
 import {IGlobalEvent, GlobalEvent} from './IGlobalEvent';
-import {GlobalEventName} from './GlobalEventName';
-import {PartyName} from '../parties/PartyName';
+import {GlobalEventName} from '../../common/turmoil/globalEvents/GlobalEventName';
+import {PartyName} from '../../common/turmoil/PartyName';
 import {Game} from '../../Game';
 import {Turmoil} from '../Turmoil';
 import {CardRenderer} from '../../cards/render/CardRenderer';
 
 const RENDER_DATA = CardRenderer.builder((b) => {
-  b.cards(1).text('w/rsrs').colon().wild(1).br.cards(1).slash().influence();
+  b.br.cards(1).text('w/rsrs').colon().wild(1).nbsp;
+  b.cards(1).slash().influence();
 });
 
 export class SponsoredProjects extends GlobalEvent implements IGlobalEvent {
@@ -20,7 +21,7 @@ export class SponsoredProjects extends GlobalEvent implements IGlobalEvent {
     });
   }
   public resolve(game: Game, turmoil: Turmoil) {
-    game.getPlayers().forEach((player) => {
+    game.getPlayersInGenerationOrder().forEach((player) => {
       player.getCardsWithResources().forEach((card) => card.resourceCount && player.addResourceTo(card));
       player.drawCard(turmoil.getPlayerInfluence(player));
     });

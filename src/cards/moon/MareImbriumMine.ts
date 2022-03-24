@@ -1,16 +1,16 @@
-import {CardName} from '../../CardName';
+import {CardName} from '../../common/cards/CardName';
 import {Player} from '../../Player';
-import {CardType} from '../CardType';
+import {CardType} from '../../common/cards/CardType';
 import {IProjectCard} from '../IProjectCard';
 import {Tags} from '../../common/cards/Tags';
 import {CardRenderer} from '../render/CardRenderer';
 import {MoonSpaces} from '../../moon/MoonSpaces';
 import {MoonExpansion} from '../../moon/MoonExpansion';
-import {Units} from '../../Units';
+import {Units} from '../../common/Units';
 import {TileType} from '../../common/TileType';
 import {IMoonCard} from './IMoonCard';
 import {MoonCard} from './MoonCard';
-import {AltSecondaryTag} from '../render/CardRenderItem';
+import {AltSecondaryTag} from '../../common/cards/render/AltSecondaryTag';
 
 export class MareImbriumMine extends MoonCard implements IProjectCard, IMoonCard {
   constructor() {

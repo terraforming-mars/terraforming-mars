@@ -10,7 +10,7 @@
 
 import Vue from 'vue';
 import Card from '@/client/components/card/Card.vue';
-import {CardModel} from '@/models/CardModel';
+import {CardModel} from '@/common/models/CardModel';
 
 export default Vue.extend({
   name: 'stacked-cards',

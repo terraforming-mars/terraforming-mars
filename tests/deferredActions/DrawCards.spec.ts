@@ -6,8 +6,8 @@ import {Player} from '../../src/Player';
 import {AICentral} from '../../src/cards/base/AICentral';
 import {Asteroid} from '../../src/cards/base/Asteroid';
 import {CapitalAres} from '../../src/cards/ares/CapitalAres';
-import {CardType} from '../../src/cards/CardType';
-import {Tags} from '../../src/cards/Tags';
+import {CardType} from '../../src/common/cards/CardType';
+import {Tags} from '../../src/common/cards/Tags';
 import {SelectCard} from '../../src/inputs/SelectCard';
 import {Dealer} from '../../src/Dealer';
 

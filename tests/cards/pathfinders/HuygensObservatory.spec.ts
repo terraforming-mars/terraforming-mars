@@ -4,18 +4,18 @@ import {HuygensObservatory} from '../../../src/cards/pathfinders/HuygensObservat
 import {SelectColony} from '../../../src/inputs/SelectColony';
 import {SelectOption} from '../../../src/inputs/SelectOption';
 import {OrOptions} from '../../../src/inputs/OrOptions';
-import {ColonyName} from '../../../src/colonies/ColonyName';
+import {ColonyName} from '../../../src/common/colonies/ColonyName';
 import {Game} from '../../../src/Game';
 import {TestPlayer} from '../../TestPlayer';
 import {TestingUtils} from '../../TestingUtils';
-import {Units} from '../../../src/Units';
-import {Colony} from '../../../src/colonies/Colony';
+import {Units} from '../../../src/common/Units';
+import {IColony} from '../../../src/colonies/IColony';
 
 describe('HuygensObservatory', function() {
   let card: HuygensObservatory;
   let player: TestPlayer;
   let game: Game;
-  let ganymede: Colony;
+  let ganymede: IColony;
 
   beforeEach(function() {
     card = new HuygensObservatory();

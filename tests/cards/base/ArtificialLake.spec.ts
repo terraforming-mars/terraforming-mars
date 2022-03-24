@@ -1,10 +1,10 @@
 import {expect} from 'chai';
 import {ArtificialLake} from '../../../src/cards/base/ArtificialLake';
-import * as constants from '../../../src/constants';
+import * as constants from '../../../src/common/constants';
 import {Game} from '../../../src/Game';
 import {SelectSpace} from '../../../src/inputs/SelectSpace';
 import {TestPlayer} from '../../TestPlayer';
-import {SpaceType} from '../../../src/SpaceType';
+import {SpaceType} from '../../../src/common/boards/SpaceType';
 import {TileType} from '../../../src/common/TileType';
 import {TestPlayers} from '../../TestPlayers';
 import {TestingUtils} from '../../TestingUtils';
@@ -35,8 +35,7 @@ describe('ArtificialLake', function() {
         const placedTile = action!.availableSpaces[0].tile;
         expect(placedTile!.tileType).to.eq(TileType.OCEAN);
 
-        player.victoryPointsBreakdown.setVictoryPoints('victoryPoints', card.getVictoryPoints());
-        expect(player.victoryPointsBreakdown.victoryPoints).to.eq(1);
+        expect(card.getVictoryPoints()).to.eq(1);
   });
 
   it('Cannot place ocean if all oceans are already placed', function() {

@@ -3,11 +3,11 @@ import {IProjectCard} from '../IProjectCard';
 import {Tags} from '../../common/cards/Tags';
 import {Card} from '../Card';
 import {VictoryPoints} from '../ICard';
-import {CardType} from '../CardType';
+import {CardType} from '../../common/cards/CardType';
 import {ResourceType} from '../../common/ResourceType';
 import {Player} from '../../Player';
 import {Resources} from '../../common/Resources';
-import {CardName} from '../../CardName';
+import {CardName} from '../../common/cards/CardName';
 import {DecreaseAnyProduction} from '../../deferredActions/DecreaseAnyProduction';
 import {CardRequirements} from '../CardRequirements';
 import {CardRenderer} from '../render/CardRenderer';
@@ -41,21 +41,21 @@ export class Fish extends Card implements IActionCard, IProjectCard, IResourceCa
       },
     });
   }
-    public override resourceCount: number = 0;
+  public override resourceCount: number = 0;
 
-    public override canPlay(player: Player): boolean {
-      return player.game.someoneHasResourceProduction(Resources.PLANTS, 1);
-    }
-    public play(player: Player) {
-      player.game.defer(
-        new DecreaseAnyProduction(player, Resources.PLANTS, {count: 1}));
-      return undefined;
-    }
-    public canAct(): boolean {
-      return true;
-    }
-    public action(player: Player) {
-      player.addResourceTo(this);
-      return undefined;
-    }
+  public override canPlay(player: Player): boolean {
+    return player.game.someoneCanHaveProductionReduced(Resources.PLANTS, 1);
+  }
+  public play(player: Player) {
+    player.game.defer(
+      new DecreaseAnyProduction(player, Resources.PLANTS, {count: 1}));
+    return undefined;
+  }
+  public canAct(): boolean {
+    return true;
+  }
+  public action(player: Player) {
+    player.addResourceTo(this);
+    return undefined;
+  }
 }

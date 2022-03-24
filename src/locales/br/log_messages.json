@@ -24,7 +24,6 @@
     "increased": "aumentou",
     "decreased": "diminuiu",
     "${0}'s ${1} production ${2} by ${3} by ${4}": "${4} ${2} em ${3} a produção de ${1} de ${0}",
-    "${0}'s ${1} production ${2} by ${3} by Global Event": "Evento Global ${2} em ${3} a produção de ${1} de ${0}",
     "${0} removed ${1} resource(s) from ${2}'s ${3}": "${0} removeu ${1} recurso(s) de ${3} de ${2}",
     "Card not found" : "Carta não encontrada",
     "Incorrect options provided" : "Opções incorretas inseridas",
@@ -156,7 +155,6 @@
 
     "The id of this game is ${0}": "O id desta partida é ${0}",
     "Dealt and discarded ${0} (cost ${1}) to place a ${2}": "Comprou e descartou ${0} (custo ${1}) para colocar um ${2}",
-    "${0}'s ${1} amount ${2} by ${3} by Global Event": "A quantidade ${1} de ${0} foi ${2} em ${3} pelo Evento Global",
     "${0} placed ${1} tile on row ${2} position ${3}": "${0} colocou um tile ${1} na linha ${2} posição ${3}",
     "${0} spent 1 ${1} to gain 7 M€": "${0} gastou 1 ${1} para ganhar 7 M€",
     "${0} removed an animal from ${1}": "${0} removeu um animal de ${1}",

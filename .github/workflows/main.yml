@@ -18,7 +18,8 @@ jobs:
     - run: npm test
   build-windows:
 
-    runs-on: windows-latest
+    # TODO(kberg): Move to windows-latest.
+    runs-on: windows-2019
 
     steps:
     - uses: actions/checkout@v1
@@ -29,4 +30,12 @@ jobs:
     - run: npm run lint
     - run: npm run build
     - run: npm test
+
+  build-docker:
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v1
+    - run: docker build .
+
 

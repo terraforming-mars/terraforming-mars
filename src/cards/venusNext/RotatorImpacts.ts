@@ -1,12 +1,12 @@
 import {IActionCard, IResourceCard} from '../ICard';
 import {Tags} from '../../common/cards/Tags';
-import {CardType} from '../CardType';
+import {CardType} from '../../common/cards/CardType';
 import {Player} from '../../Player';
 import {ResourceType} from '../../common/ResourceType';
 import {OrOptions} from '../../inputs/OrOptions';
 import {SelectOption} from '../../inputs/SelectOption';
-import {MAX_VENUS_SCALE} from '../../constants';
-import {CardName} from '../../CardName';
+import {MAX_VENUS_SCALE} from '../../common/constants';
+import {CardName} from '../../common/cards/CardName';
 import {SelectHowToPayDeferred} from '../../deferredActions/SelectHowToPayDeferred';
 import {CardRequirements} from '../CardRequirements';
 import {CardRenderer} from '../render/CardRenderer';
@@ -36,7 +36,7 @@ export class RotatorImpacts extends Card implements IActionCard, IResourceCard {
         description: 'Venus must be 14% or lower',
       },
     });
-  };
+  }
   public override resourceCount: number = 0;
 
   public play() {

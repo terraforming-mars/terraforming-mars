@@ -2,19 +2,20 @@
     <div class="colonies-filter">
         <div>
             <h2 v-i18n>Colonies</h2>
+            <div class="corporations-filter-toolbox corporations-filter-toolbox--topmost">
+                <a href="#" v-i18n v-on:click.prevent="selectAll('All')">All*</a> |
+                <a href="#" v-i18n v-on:click.prevent="selectNone('All')">None*</a> |
+                <a href="#" v-i18n v-on:click.prevent="invertSelection('All')">Invert*</a>
+            </div>
         </div>
-        <div class="colonies-filter-list">
-            <h2 v-i18n>Official</h2>
-            <label class="form-checkbox" v-for="colony in officialColonies" v-bind:key="colony.name">
+        <div class="colonies-filter-list" v-for="module in modules" v-bind:key="module">
+            <h2 v-i18n>{{title(module)}}</h2>
+              <a href="#" v-i18n v-on:click.prevent="selectAll(module)">All</a> |
+              <a href="#" v-i18n v-on:click.prevent="selectNone(module)">None</a> |
+              <a href="#" v-i18n v-on:click.prevent="invertSelection(module)">Invert</a>
+            <label class="form-checkbox" v-for="colony in getColonies(module)" v-bind:key="colony">
                 <input type="checkbox" v-model="selectedColonies" :value="colony">
-                <i class="form-icon"></i><span v-i18n>{{ colony.name }} - ({{ colony.description }})</span>
-            </label>
-        </div>
-        <div class="colonies-filter-list">
-            <h2 v-i18n>Community</h2>
-            <label class="form-checkbox" v-for="colony in communityColonies" v-bind:key="colony.name">
-                <input type="checkbox" v-model="selectedColonies" :value="colony">
-                <i class="form-icon"></i><span v-i18n>{{ colony.name }} - ({{ colony.description }})</span>
+                <i class="form-icon"></i><span v-i18n>{{ colony }} - ({{ description(colony) }})</span>
             </label>
         </div>
     </div>
@@ -22,50 +23,20 @@
 
 <script lang="ts">
 import Vue from 'vue';
-import {Callisto} from '@/colonies/Callisto';
-import {Ceres} from '@/colonies/Ceres';
-import {Colony} from '@/colonies/Colony';
-import {Europa} from '@/colonies/Europa';
-import {Ganymede} from '@/colonies/Ganymede';
-import {Io} from '@/colonies/Io';
-import {Luna} from '@/colonies/Luna';
-import {Miranda} from '@/colonies/Miranda';
-import {Pluto} from '@/colonies/Pluto';
-import {Titan} from '@/colonies/Titan';
-import {Triton} from '@/colonies/Triton';
-import {Enceladus} from '@/colonies/Enceladus';
-import {ColonyName} from '@/colonies/ColonyName';
-import {Iapetus} from '@/cards/community/Iapetus';
-import {Mercury} from '@/cards/community/Mercury';
-import {Hygiea} from '@/cards/community/Hygiea';
-import {Titania} from '@/cards/community/Titania';
-import {Venus} from '@/cards/community/Venus';
-import {Leavitt} from '@/cards/community/Leavitt';
-import {Pallas} from '@/cards/community/Pallas';
+import {ColonyName} from '@/common/colonies/ColonyName';
+import {COLONY_DESCRIPTIONS} from '@/common/colonies/ColonyDescription';
+import {OFFICIAL_COLONY_NAMES, COMMUNITY_COLONY_NAMES} from '@/common/colonies/AllColonies';
+import {GameModule} from '@/common/cards/GameModule';
 
-const OFFICIAL_COLONIES: Array<Colony> = [
-  new Callisto(),
-  new Ceres(),
-  new Enceladus(),
-  new Europa(),
-  new Ganymede(),
-  new Io(),
-  new Luna(),
-  new Miranda(),
-  new Pluto(),
-  new Titan(),
-  new Triton(),
-];
-
-const COMMUNITY_COLONIES: Array<Colony> = [
-  new Iapetus(),
-  new Mercury(),
-  new Hygiea(),
-  new Titania(),
-  new Leavitt(),
-  new Venus(),
-  new Pallas(),
-];
+type Data = {
+  allColonies: Array<ColonyName>,
+  officialColonies: Array<ColonyName>,
+  communityColonies: Array<ColonyName>,
+  selectedColonies: Array<ColonyName>,
+  modules: Array<ColonyModule>,
+}
+type ColonyModule = GameModule.Colonies | GameModule.Community;
+type Group = ColonyModule | 'All';
 
 export default Vue.extend({
   name: 'ColoniesFilter',
@@ -81,58 +52,110 @@ export default Vue.extend({
     },
   },
   data() {
-    return {
-      allColonies: OFFICIAL_COLONIES.concat(COMMUNITY_COLONIES),
-      officialColonies: OFFICIAL_COLONIES,
-      communityColonies: COMMUNITY_COLONIES,
+    const data: Data = {
+      allColonies: OFFICIAL_COLONY_NAMES.concat(COMMUNITY_COLONY_NAMES),
+      officialColonies: OFFICIAL_COLONY_NAMES,
+      communityColonies: COMMUNITY_COLONY_NAMES,
       selectedColonies: [
-        ...OFFICIAL_COLONIES,
-        ...this.communityCardsOption ? COMMUNITY_COLONIES: [],
+        ...OFFICIAL_COLONY_NAMES,
+        ...this.communityCardsOption ? COMMUNITY_COLONY_NAMES: [],
       ],
+      modules: [GameModule.Colonies, GameModule.Community],
     };
+    return data;
   },
   methods: {
+    // Do not delete this method. It's used by CreateGameForm.
     updateColoniesByNames(colonyNames: Array<ColonyName>) {
       this.selectedColonies = [];
       for (const colony of this.allColonies) {
-        if (colonyNames.includes(colony.name)) {
+        if (colonyNames.includes(colony)) {
           this.selectedColonies.push(colony);
         }
       }
     },
+    description(colonyName: ColonyName): string {
+      return COLONY_DESCRIPTIONS.get(colonyName) ?? 'unknown';
+    },
+    getItemsByGroup(group: Group): Array<ColonyName> {
+      switch (group) {
+      case 'All': return this.allColonies;
+      case GameModule.Colonies: return this.officialColonies;
+      case GameModule.Community: return this.communityColonies;
+      default: return [];
+      }
+    },
+    selectAll(group: Group) {
+      const items = this.getItemsByGroup(group);
+      for (const item of items) {
+        if (this.selectedColonies.includes(item) === false) {
+          this.selectedColonies.push(item);
+        }
+      }
+    },
+    removeFromSelection(colonyName: ColonyName) {
+      const itemIdx = this.selectedColonies.indexOf(colonyName);
+      if (itemIdx !== -1) {
+        this.selectedColonies.splice(itemIdx, 1);
+      }
+    },
+    selectNone(group: Group) {
+      const items = this.getItemsByGroup(group);
+      for (const item of items) {
+        this.removeFromSelection(item);
+      }
+    },
+    invertSelection(group: Group) {
+      const items = this.getItemsByGroup(group);
+
+      for (const idx in items) {
+        if (this.selectedColonies.includes(items[idx])) {
+          this.removeFromSelection(items[idx]);
+        } else {
+          this.selectedColonies.push(items[idx]);
+        }
+      }
+    },
+    title(module: ColonyModule) {
+      if (module === GameModule.Colonies) return 'Official';
+      if (module === GameModule.Community) return 'Community';
+      return module;
+    },
+    getColonies(module: ColonyModule) {
+      if (module === GameModule.Colonies) return this.officialColonies;
+      if (module === GameModule.Community) return this.communityColonies;
+      return [];
+    },
   },
   watch: {
-    selectedColonies(value) {
-      const colonyNames: Array<ColonyName> = [];
-      value.forEach(function(el: any) {
-        colonyNames.push(el.name);
-      } );
+    selectedColonies(value: Array<ColonyName>) {
+      const colonyNames: Array<ColonyName> = [...value];
       this.$emit('colonies-list-changed', colonyNames);
     },
     communityCardsOption(enabled) {
       if (enabled) {
-        this.selectedColonies = OFFICIAL_COLONIES.concat(COMMUNITY_COLONIES).slice();
-        if (this.venusNext === false) this.selectedColonies = this.selectedColonies.filter((c) => c.name !== ColonyName.VENUS);
-        if (this.turmoil === false) this.selectedColonies = this.selectedColonies.filter((c) => c.name !== ColonyName.PALLAS);
+        this.selectedColonies = OFFICIAL_COLONY_NAMES.concat(COMMUNITY_COLONY_NAMES).slice();
+        if (this.venusNext === false) this.selectedColonies = this.selectedColonies.filter((c) => c !== ColonyName.VENUS);
+        if (this.turmoil === false) this.selectedColonies = this.selectedColonies.filter((c) => c !== ColonyName.PALLAS);
       } else {
-        this.selectedColonies = OFFICIAL_COLONIES.slice();
+        this.selectedColonies = OFFICIAL_COLONY_NAMES.slice();
       }
     },
     venusNext(enabled) {
       if (this.communityCardsOption && Array.isArray(this.selectedColonies)) {
         if (enabled === false) {
-          this.selectedColonies = this.selectedColonies.filter((c) => c.name !== ColonyName.VENUS);
-        } else if (this.selectedColonies.find((c) => c.name === ColonyName.VENUS) === undefined) {
-          this.selectedColonies.push(new Venus());
+          this.selectedColonies = this.selectedColonies.filter((c) => c !== ColonyName.VENUS);
+        } else if (this.selectedColonies.find((c) => c === ColonyName.VENUS) === undefined) {
+          this.selectedColonies.push(ColonyName.VENUS);
         }
       }
     },
     turmoil(enabled) {
       if (this.communityCardsOption && Array.isArray(this.selectedColonies)) {
         if (enabled === false) {
-          this.selectedColonies = this.selectedColonies.filter((c) => c.name !== ColonyName.PALLAS);
-        } else if (this.selectedColonies.find((c) => c.name === ColonyName.PALLAS) === undefined) {
-          this.selectedColonies.push(new Pallas());
+          this.selectedColonies = this.selectedColonies.filter((c) => c !== ColonyName.PALLAS);
+        } else if (this.selectedColonies.find((c) => c === ColonyName.PALLAS) === undefined) {
+          this.selectedColonies.push(ColonyName.PALLAS);
         }
       }
     },

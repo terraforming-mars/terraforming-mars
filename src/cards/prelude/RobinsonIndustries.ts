@@ -1,15 +1,15 @@
 import {IActionCard} from '../ICard';
 import {Player} from '../../Player';
-import {CorporationCard} from './../corporation/CorporationCard';
+import {ICorporationCard} from '../corporation/ICorporationCard';
 import {OrOptions} from '../../inputs/OrOptions';
 import {SelectOption} from '../../inputs/SelectOption';
 import {Resources} from '../../common/Resources';
 import {Card} from '../Card';
-import {CardName} from '../../CardName';
-import {CardType} from '../CardType';
+import {CardName} from '../../common/cards/CardName';
+import {CardType} from '../../common/cards/CardType';
 import {CardRenderer} from '../render/CardRenderer';
 
-export class RobinsonIndustries extends Card implements IActionCard, CorporationCard {
+export class RobinsonIndustries extends Card implements IActionCard, ICorporationCard {
   constructor() {
     super({
       cardType: CardType.CORPORATION,

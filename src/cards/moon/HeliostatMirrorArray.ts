@@ -1,9 +1,9 @@
-import {CardName} from '../../CardName';
+import {CardName} from '../../common/cards/CardName';
 import {Player} from '../../Player';
-import {CardType} from '../CardType';
+import {CardType} from '../../common/cards/CardType';
 import {Tags} from '../../common/cards/Tags';
 import {CardRenderer} from '../render/CardRenderer';
-import {Units} from '../../Units';
+import {Units} from '../../common/Units';
 import {MoonCard} from './MoonCard';
 
 export class HeliostatMirrorArray extends MoonCard {
@@ -26,7 +26,7 @@ export class HeliostatMirrorArray extends MoonCard {
         }),
       },
     });
-  };
+  }
 
   public override play(player: Player) {
     super.play(player);

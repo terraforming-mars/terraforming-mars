@@ -1,13 +1,13 @@
-import {CorporationCard} from '../corporation/CorporationCard';
+import {ICorporationCard} from '../corporation/ICorporationCard';
 import {Player} from '../../Player';
 import {Tags} from '../../common/cards/Tags';
 import {Card} from '../Card';
-import {CardName} from '../../CardName';
-import {CardType} from '../CardType';
+import {CardName} from '../../common/cards/CardName';
+import {CardType} from '../../common/cards/CardType';
 import {CardRenderer} from '../render/CardRenderer';
-import {GlobalParameter} from '../../GlobalParameter';
+import {GlobalParameter} from '../../common/GlobalParameter';
 
-export class MorningStarInc extends Card implements CorporationCard {
+export class MorningStarInc extends Card implements ICorporationCard {
   constructor() {
     super({
       name: CardName.MORNING_STAR_INC,

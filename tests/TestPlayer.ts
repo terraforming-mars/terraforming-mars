@@ -1,12 +1,10 @@
 import {Player} from '../src/Player';
 import {PlayerInput} from '../src/PlayerInput';
-import {Color} from '../src/Color';
-import {Units} from '../src/Units';
-import {Tags} from '../src/cards/Tags';
-import {VictoryPointsBreakdown} from '../src/VictoryPointsBreakdown';
+import {Color} from '../src/common/Color';
+import {Units} from '../src/common/Units';
+import {Tags} from '../src/common/cards/Tags';
 
 export class TestPlayer extends Player {
-  public victoryPointsBreakdown = new VictoryPointsBreakdown();
   constructor(color: Color) {
     super('player-' + color, color, false, 0, 'p-' + color + '-id');
   }
@@ -52,11 +50,6 @@ export class TestPlayer extends Player {
       energy: this.energy,
       heat: this.heat,
     };
-  }
-
-  public override getVictoryPoints(): VictoryPointsBreakdown {
-    this.victoryPointsBreakdown = super.getVictoryPoints();
-    return this.victoryPointsBreakdown;
   }
 
   public override getStandardProjectOption() {

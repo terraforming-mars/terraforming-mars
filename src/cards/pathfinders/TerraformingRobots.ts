@@ -2,11 +2,11 @@ import {IProjectCard} from '../IProjectCard';
 import {IResourceCard, VictoryPoints} from '../ICard';
 import {Player} from '../../Player';
 import {Card} from '../Card';
-import {CardType} from '../CardType';
-import {CardName} from '../../CardName';
+import {CardType} from '../../common/cards/CardType';
+import {CardName} from '../../common/cards/CardName';
 import {CardRenderer} from '../render/CardRenderer';
 import {ResourceType} from '../../common/ResourceType';
-import {Tags} from '../Tags';
+import {Tags} from '../../common/cards/Tags';
 import {CardRequirements} from '../CardRequirements';
 import {played} from '../Options';
 
@@ -41,7 +41,7 @@ export class TerraformingRobots extends Card implements IProjectCard, IResourceC
     if (qty !== 0) {
       player.addResourceTo(this, {log: true, qty: qty});
     }
-  };
+  }
 
   public play() {
     return undefined;

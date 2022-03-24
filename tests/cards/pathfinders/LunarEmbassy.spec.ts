@@ -3,7 +3,7 @@ import {LunarEmbassy} from '../../../src/cards/pathfinders/LunarEmbassy';
 import {Game} from '../../../src/Game';
 import {TestPlayer} from '../../TestPlayer';
 import {TestPlayers} from '../../TestPlayers';
-import {Units} from '../../../src/Units';
+import {Units} from '../../../src/common/Units';
 import {SpaceName} from '../../../src/SpaceName';
 import {TestingUtils} from '../../TestingUtils';
 

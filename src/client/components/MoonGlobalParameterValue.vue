@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div title="Moon colony, logistics, and mining rates">
     <div class="moon-tile"/>
     <div>
       <div v-if="isMax" class="global_params_value">
@@ -22,8 +22,8 @@
 
 <script lang="ts">
 import Vue from 'vue';
-import {MAXIMUM_COLONY_RATE, MAXIMUM_LOGISTICS_RATE, MAXIMUM_MINING_RATE} from '@/constants';
-import {MoonModel} from '@/models/MoonModel';
+import {MAXIMUM_COLONY_RATE, MAXIMUM_LOGISTICS_RATE, MAXIMUM_MINING_RATE} from '@/common/constants';
+import {MoonModel} from '@/common/models/MoonModel';
 
 export default Vue.extend({
   name: 'MoonGlobalParameterValue',

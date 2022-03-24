@@ -1,7 +1,8 @@
 import {CardManifest} from '../CardManifest';
-import {CardName} from '../../CardName';
-import {GameModule} from '../../GameModule';
+import {CardName} from '../../common/cards/CardName';
+import {GameModule} from '../../common/cards/GameModule';
 
+import {AdhaiHighOrbitConstructions} from './AdhaiHighOrbitConstructions';
 import {AdvancedPowerGrid} from './AdvancedPowerGrid';
 import {AgroDrones} from './AgroDrones';
 import {Ambient} from './Ambient';
@@ -17,7 +18,7 @@ import {CharityDonation} from './CharityDonation';
 import {Chimera} from './Chimera';
 import {CO2Reducers} from './CO2Reducers';
 import {CollegiumCopernicus} from './CollegiumCopernicus';
-// import {CommunicationCenter} from './CommunicationCenter';
+import {CommunicationCenter} from './CommunicationCenter';
 import {ControlledBloom} from './ControlledBloom';
 import {CoordinatedRaid} from './CoordinatedRaid';
 import {CrewTraining} from './CrewTraining';
@@ -39,6 +40,7 @@ import {ExperiencedMartians} from './ExperiencedMartians';
 import {FlatMarsTheory} from './FlatMarsTheory';
 import {FloaterUrbanism} from './FloaterUrbanism';
 import {GeologicalExpedition} from './GeologicalExpedition';
+import {HabitatMarte} from './HabitatMarte';
 import {HighTempSuperconductors} from './HighTempSuperconductors';
 import {HuygensObservatory} from './HuygensObservatory';
 import {HydrogenBombardment} from './HydrogenBombardment';
@@ -57,10 +59,12 @@ import {MartianMonuments} from './MartianMonuments';
 import {MartianNatureWonders} from './MartianNatureWonders';
 import {MartianRepository} from './MartianRepository';
 import {MicrobiologyPatents} from './MicrobiologyPatents';
+import {MindSetMars} from './MindSetMars';
 import {MuseumofEarlyColonisation} from './MuseumofEarlyColonisation';
 import {NewVenice} from './NewVenice';
 import {NobelLabs} from './NobelLabs';
 import {OrbitalLaboratories} from './OrbitalLaboratories';
+import {OumuamuaTypeObjectSurvey} from './OumuamuaTypeObjectSurvey';
 import {OzoneGenerators} from './OzoneGenerators';
 import {PersonalAgenda} from './PersonalAgenda';
 import {Polaris} from './Polaris';
@@ -86,6 +90,7 @@ import {SolarStorm} from './SolarStorm';
 import {SoylentSeedlingSystems} from './SoylentSeedlingSystems';
 import {SpaceDebrisCleaningOperation} from './SpaceDebrisCleaningOperation';
 import {SpaceRelay} from './SpaceRelay';
+import {SpecializedSettlement} from './SpecializedSettlement';
 import {StrategicBasePlanning} from './StrategicBasePlanning';
 import {Steelaris} from './Steelaris';
 import {TerraformingControlStation} from './TerraformingControlStation';
@@ -95,6 +100,7 @@ import {VeneraBase} from './VeneraBase';
 import {VenusFirst} from './VenusFirst';
 import {VitalColony} from './VitalColony';
 import {Wetlands} from './Wetlands';
+// import {VitalColony} from './VitalColony';
 
 export const PATHFINDERS_CARD_MANIFEST = new CardManifest({
   module: GameModule.Pathfinders,
@@ -126,7 +132,7 @@ export const PATHFINDERS_CARD_MANIFEST = new CardManifest({
     {cardName: CardName.PRIVATE_SECURITY, Factory: PrivateSecurity},
     {cardName: CardName.SECRET_LABS, Factory: SecretLabs},
     {cardName: CardName.CYANOBACTERIA, Factory: Cyanobacteria},
-    // {cardName: CardName.COMMUNICATION_CENTER, Factory: CommunicationCenter},
+    {cardName: CardName.COMMUNICATION_CENTER, Factory: CommunicationCenter},
     {cardName: CardName.MARTIAN_REPOSITORY, Factory: MartianRepository},
     {cardName: CardName.DATA_LEAK, Factory: DataLeak},
     {cardName: CardName.SMALL_OPEN_PIT_MINE, Factory: SmallOpenPitMine},
@@ -151,11 +157,11 @@ export const PATHFINDERS_CARD_MANIFEST = new CardManifest({
     {cardName: CardName.BOTANICAL_EXPERIENCE, Factory: BotanicalExperience},
     {cardName: CardName.CRYPTOCURRENCY, Factory: Cryptocurrency},
     {cardName: CardName.RICH_DEPOSITS, Factory: RichDeposits},
-    // // *** {cardName: CardName.OUMUAMUA_TYPE_OBJECT_SURVEY, Factory: OumuamuaTypeObjectSurvey},
+    {cardName: CardName.OUMUAMUA_TYPE_OBJECT_SURVEY, Factory: OumuamuaTypeObjectSurvey},
     {cardName: CardName.SOLARPEDIA, Factory: Solarpedia, compatibility: GameModule.Venus},
     {cardName: CardName.ANTHOZOA, Factory: Anthozoa},
     {cardName: CardName.ADVANCED_POWER_GRID, Factory: AdvancedPowerGrid},
-    // // {cardName: CardName.SPECIALIZED_SETTLEMENT, Factory: SpecializedSettlement},          // ROBOTIC WORKFORCE COMPLICATION
+    {cardName: CardName.SPECIALIZED_SETTLEMENT, Factory: SpecializedSettlement},
     {cardName: CardName.CHARITY_DONATION, Factory: CharityDonation},
     // // {cardName: CardName.CURIOSITY_LABS, Factory: CuriosityLabs},                          // TWO RESOURCE TYPES
     {cardName: CardName.NOBEL_LABS, Factory: NobelLabs},
@@ -197,9 +203,9 @@ export const PATHFINDERS_CARD_MANIFEST = new CardManifest({
     // {cardName: CardName.ODYSSEY_EFFECT, Factory: OdysseyEffect},
     // {cardName: CardName.GAGARIN_MOBILE_BASE, Factory: GagarinMobileBase},
     // {cardName: CardName.MARS_FRONTIER_ALLIANCE, Factory: MarsFrontierAlliance},
-    // {cardName: CardName.MIND_SET_MARS, Factory: MindSetMars},
-    // {cardName: CardName.HABITAT_MARTAE, Factory: HabitatMartae},
-    // {cardName: CardName.ADHAI_HIGH_ORBIT_CONSTRUCTION, Factory: AdhaiHighOrbitConstruction},
+    {cardName: CardName.MIND_SET_MARS, Factory: MindSetMars, compatibility: GameModule.Turmoil},
+    {cardName: CardName.HABITAT_MARTE, Factory: HabitatMarte},
+    {cardName: CardName.ADHAI_HIGH_ORBIT_CONSTRUCTIONS, Factory: AdhaiHighOrbitConstructions},
   ],
   preludeCards: [
     {cardName: CardName.VENUS_FIRST_PATHFINDERS, Factory: VenusFirst, compatibility: GameModule.Venus},

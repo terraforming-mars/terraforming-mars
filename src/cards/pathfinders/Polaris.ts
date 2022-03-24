@@ -1,20 +1,20 @@
 import {Card} from '../Card';
-import {CorporationCard} from '../corporation/CorporationCard';
-import {Tags} from '../Tags';
+import {ICorporationCard} from '../corporation/ICorporationCard';
+import {Tags} from '../../common/cards/Tags';
 import {Player} from '../../Player';
 import {Resources} from '../../common/Resources';
-import {CardName} from '../../CardName';
-import {CardType} from '../CardType';
+import {CardName} from '../../common/cards/CardName';
+import {CardType} from '../../common/cards/CardType';
 import {CardRenderer} from '../render/CardRenderer';
 import {all, digit} from '../Options';
 import {PlaceOceanTile} from '../../deferredActions/PlaceOceanTile';
 import {ISpace} from '../../boards/ISpace';
 import {GainResources} from '../../deferredActions/GainResources';
 import {Priority} from '../../deferredActions/DeferredAction';
-import {Size} from '../render/Size';
+import {Size} from '../../common/cards/render/Size';
 import {Board} from '../../boards/Board';
 
-export class Polaris extends Card implements CorporationCard {
+export class Polaris extends Card implements ICorporationCard {
   constructor() {
     super({
       cardType: CardType.CORPORATION,

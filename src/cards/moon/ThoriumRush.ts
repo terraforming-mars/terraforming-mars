@@ -1,6 +1,6 @@
-import {CardName} from '../../CardName';
+import {CardName} from '../../common/cards/CardName';
 import {Player} from '../../Player';
-import {CardType} from '../CardType';
+import {CardType} from '../../common/cards/CardType';
 import {IProjectCard} from '../IProjectCard';
 import {Tags} from '../../common/cards/Tags';
 import {CardRenderer} from '../render/CardRenderer';
@@ -8,7 +8,7 @@ import {PlaceMoonColonyTile} from '../../moon/PlaceMoonColonyTile';
 import {PlaceMoonRoadTile} from '../../moon/PlaceMoonRoadTile';
 import {PlaceMoonMineTile} from '../../moon/PlaceMoonMineTile';
 import {Card} from '../Card';
-import {AltSecondaryTag} from '../render/CardRenderItem';
+import {AltSecondaryTag} from '../../common/cards/render/AltSecondaryTag';
 
 // TODO(kberg): Add a test for how this card operates with Reds. It will be a good verification.
 export class ThoriumRush extends Card implements IProjectCard {
@@ -31,7 +31,7 @@ export class ThoriumRush extends Card implements IProjectCard {
         }),
       },
     });
-  };
+  }
 
   public play(player: Player) {
     player.game.defer(new PlaceMoonColonyTile(player));

@@ -11,9 +11,9 @@
 <script lang="ts">
 
 import Vue from 'vue';
-import {PlayerInputTypes} from '@/PlayerInputTypes';
-import {PlayerViewModel, PublicPlayerModel} from '@/models/PlayerModel';
-import {PlayerInputModel} from '@/models/PlayerInputModel';
+import {PlayerInputTypes} from '@/common/input/PlayerInputTypes';
+import {PlayerViewModel, PublicPlayerModel} from '@/common/models/PlayerModel';
+import {PlayerInputModel} from '@/common/models/PlayerInputModel';
 import AndOptions from '@/client/components/AndOptions.vue';
 import OrOptions from '@/client/components/OrOptions.vue';
 import SelectAmount from '@/client/components/SelectAmount.vue';
@@ -109,7 +109,7 @@ export default Vue.component('player-input-factory', {
       case PlayerInputTypes.SHIFT_ARES_GLOBAL_PARAMETERS:
         return 'shift-ares-global-parameters';
       default:
-        throw 'Unsupported input type: ' + inputType;
+        throw new Error('Unsupported input type: ' + inputType);
       }
     },
   },

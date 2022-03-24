@@ -3,10 +3,10 @@ import {IProjectCard} from '../IProjectCard';
 import {Tags} from '../../common/cards/Tags';
 import {Card} from '../Card';
 import {VictoryPoints} from '../ICard';
-import {CardType} from '../CardType';
+import {CardType} from '../../common/cards/CardType';
 import {Player} from '../../Player';
 import {ResourceType} from '../../common/ResourceType';
-import {CardName} from '../../CardName';
+import {CardName} from '../../common/cards/CardName';
 import {AddResourcesToCard} from '../../deferredActions/AddResourcesToCard';
 import {RemoveResourcesFromCard} from '../../deferredActions/RemoveResourcesFromCard';
 import {CardRequirements} from '../CardRequirements';
@@ -38,20 +38,20 @@ export class Predators extends Card implements IProjectCard, IActionCard, IResou
     });
   }
 
-    public override resourceCount: number = 0;
+  public override resourceCount: number = 0;
 
-    public play() {
-      return undefined;
-    }
+  public play() {
+    return undefined;
+  }
 
-    public canAct(player: Player): boolean {
-      if (player.game.isSoloMode()) return true;
-      return RemoveResourcesFromCard.getAvailableTargetCards(player, ResourceType.ANIMAL).length > 0;
-    }
+  public canAct(player: Player): boolean {
+    if (player.game.isSoloMode()) return true;
+    return RemoveResourcesFromCard.getAvailableTargetCards(player, ResourceType.ANIMAL).length > 0;
+  }
 
-    public action(player: Player) {
-      player.game.defer(new RemoveResourcesFromCard(player, ResourceType.ANIMAL));
-      player.game.defer(new AddResourcesToCard(player, ResourceType.ANIMAL, {filter: (c) => c.name === this.name}));
-      return undefined;
-    }
+  public action(player: Player) {
+    player.game.defer(new RemoveResourcesFromCard(player, ResourceType.ANIMAL));
+    player.game.defer(new AddResourcesToCard(player, ResourceType.ANIMAL, {filter: (c) => c.name === this.name}));
+    return undefined;
+  }
 }

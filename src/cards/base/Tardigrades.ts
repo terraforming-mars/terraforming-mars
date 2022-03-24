@@ -2,9 +2,9 @@ import {IProjectCard} from '../IProjectCard';
 import {Tags} from '../../common/cards/Tags';
 import {Card} from '../Card';
 import {VictoryPoints} from '../ICard';
-import {CardType} from '../CardType';
+import {CardType} from '../../common/cards/CardType';
 import {ResourceType} from '../../common/ResourceType';
-import {CardName} from '../../CardName';
+import {CardName} from '../../common/cards/CardName';
 import {IResourceCard} from '../ICard';
 import {Player} from '../../Player';
 import {CardRenderer} from '../render/CardRenderer';
@@ -31,16 +31,16 @@ export class Tardigrades extends Card implements IProjectCard, IResourceCard {
       },
     });
   }
-    public override resourceCount = 0;
+  public override resourceCount = 0;
 
-    public play() {
-      return undefined;
-    }
-    public action(player: Player) {
-      player.addResourceTo(this);
-      return undefined;
-    }
-    public canAct(): boolean {
-      return true;
-    }
+  public play() {
+    return undefined;
+  }
+  public action(player: Player) {
+    player.addResourceTo(this);
+    return undefined;
+  }
+  public canAct(): boolean {
+    return true;
+  }
 }

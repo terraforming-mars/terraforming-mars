@@ -1,10 +1,10 @@
 import {IProjectCard} from '../IProjectCard';
 import {Player} from '../../Player';
 import {Card} from '../Card';
-import {CardType} from '../CardType';
-import {CardName} from '../../CardName';
+import {CardType} from '../../common/cards/CardType';
+import {CardName} from '../../common/cards/CardName';
 import {CardRenderer} from '../render/CardRenderer';
-import {Tags} from '../Tags';
+import {Tags} from '../../common/cards/Tags';
 import {LogHelper} from '../../LogHelper';
 import {SelectCard} from '../../inputs/SelectCard';
 import {DeferredAction, Priority} from '../..//deferredActions/DeferredAction';
@@ -30,7 +30,7 @@ export class CharityDonation extends Card implements IProjectCard {
 
   public play(player: Player) {
     const game = player.game;
-    const players = game.getPlayers();
+    const players = game.getPlayersInGenerationOrder();
     const thisIdx = players.findIndex((p) => p === player);
     const cards = game.dealer.drawProjectCardsByCondition(game, players.length + 1, () => true);
     // TODO(kberg): log the drawn cards after raising the planetary track.
@@ -41,7 +41,7 @@ export class CharityDonation extends Card implements IProjectCard {
 }
 
 export class SelectCharityDonationCard implements DeferredAction {
-  public priority = Priority.DRAW_CARDS
+  public priority = Priority.DRAW_CARDS;
   public player: Player;
   constructor(private players: Array<Player>, private playerIdx: number, private boundaryIndex: number, private cards: Array<IProjectCard>) {
     this.player = this.players[playerIdx];

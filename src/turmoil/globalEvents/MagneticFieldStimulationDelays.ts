@@ -1,6 +1,6 @@
 import {IGlobalEvent, GlobalEvent} from './IGlobalEvent';
-import {GlobalEventName} from './GlobalEventName';
-import {PartyName} from '../parties/PartyName';
+import {GlobalEventName} from '../../common/turmoil/globalEvents/GlobalEventName';
+import {PartyName} from '../../common/turmoil/PartyName';
 import {Game} from '../../Game';
 import {CardRenderer} from '../../cards/render/CardRenderer';
 
@@ -20,7 +20,7 @@ export class MagneticFieldStimulationDelays extends GlobalEvent implements IGlob
   }
 
   public resolve(game: Game) {
-    game.increaseOxygenLevel(game.getPlayers()[0], -2);
-    game.increaseTemperature(game.getPlayers()[0], -2);
+    game.increaseOxygenLevel(game.getPlayersInGenerationOrder()[0], -2);
+    game.increaseTemperature(game.getPlayersInGenerationOrder()[0], -2);
   }
 }

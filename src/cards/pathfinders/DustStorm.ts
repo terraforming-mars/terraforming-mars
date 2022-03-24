@@ -1,11 +1,11 @@
 import {IProjectCard} from '../IProjectCard';
 import {Player} from '../../Player';
 import {Card} from '../Card';
-import {CardType} from '../CardType';
-import {CardName} from '../../CardName';
+import {CardType} from '../../common/cards/CardType';
+import {CardName} from '../../common/cards/CardName';
 import {CardRenderer} from '../render/CardRenderer';
 import {Resources} from '../../common/Resources';
-import {Tags} from '../Tags';
+import {Tags} from '../../common/cards/Tags';
 import {all} from '../Options';
 
 export class DustStorm extends Card implements IProjectCard {
@@ -30,7 +30,7 @@ export class DustStorm extends Card implements IProjectCard {
   }
 
   public play(player: Player) {
-    player.game.getPlayers().forEach((p) => p.addResource(Resources.ENERGY, -p.energy, {log: true}));
+    player.game.getPlayers().forEach((p) => p.deductResource(Resources.ENERGY, p.energy, {log: true}));
     player.game.increaseTemperature(player, 2);
     return undefined;
   }

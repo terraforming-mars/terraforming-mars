@@ -3,11 +3,11 @@ import {IResourceCard, VictoryPoints} from '../ICard';
 import {IActionCard} from '../ICard';
 import {Player} from '../../Player';
 import {Card} from '../Card';
-import {CardType} from '../CardType';
-import {CardName} from '../../CardName';
+import {CardType} from '../../common/cards/CardType';
+import {CardName} from '../../common/cards/CardName';
 import {CardRenderer} from '../render/CardRenderer';
 import {ResourceType} from '../../common/ResourceType';
-import {Tags} from '../Tags';
+import {Tags} from '../../common/cards/Tags';
 import {CardRequirements} from '../CardRequirements';
 import {SelectCard} from '../../inputs/SelectCard';
 
@@ -48,7 +48,7 @@ export class FloaterUrbanism extends Card implements IProjectCard, IActionCard, 
       'Choose',
       cards,
       (selected) => {
-        player.removeResourceFrom(selected[0], 1, player.game, undefined, true);
+        player.removeResourceFrom(selected[0], 1);
         player.addResourceTo(this, {log: true});
         return undefined;
       });

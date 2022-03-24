@@ -1,14 +1,11 @@
 <script lang="ts">
 import Vue from 'vue';
-import {HowToPay} from '@/inputs/HowToPay';
+import {HowToPay} from '@/common/inputs/HowToPay';
 import {PaymentWidgetMixin, SelectHowToPayModel, Unit} from '@/client/mixins/PaymentWidgetMixin';
-import {PlayerInputModel} from '@/models/PlayerInputModel';
-import {PlayerViewModel, PublicPlayerModel} from '@/models/PlayerModel';
-import {PreferencesManager} from '@/client/utils/PreferencesManager';
+import {PlayerInputModel} from '@/common/models/PlayerInputModel';
+import {PlayerViewModel, PublicPlayerModel} from '@/common/models/PlayerModel';
+import {getPreferences} from '@/client/utils/PreferencesManager';
 import Button from '@/client/components/common/Button.vue';
-
-// TODO(kberg): delete by 2022-03-01
-const useNewVersion = true;
 
 export default Vue.extend({
   name: 'SelectHowToPay',
@@ -55,14 +52,7 @@ export default Vue.extend({
     Vue.nextTick(() => {
       this.setInitialCost();
       this.$data.megaCredits = (this as any).getMegaCreditsMax();
-
-      if (useNewVersion) {
-        this.setDefaultValues();
-      } else {
-        this.setDefaultSteelValue();
-        this.setDefaultTitaniumValue();
-        this.setDefaultHeatValue();
-      }
+      this.setDefaultValues();
     });
   },
   methods: {
@@ -118,64 +108,6 @@ export default Vue.extend({
         amountCovered += this.setDefaultValue(amountCovered, target);
       }
       this.$data.megaCredits = Math.min(megaCredits, Math.max(cost - amountCovered, 0));
-    },
-    setDefaultSteelValue() {
-      // automatically use available steel to pay if not enough MC
-      if (!this.canAffordWithMcOnly() && this.canUseSteel()) {
-        let requiredSteelQty = Math.ceil(Math.max(this.$data.cost - this.thisPlayer.megaCredits, 0) / this.thisPlayer.steelValue);
-
-        if (requiredSteelQty > this.thisPlayer.steel) {
-          this.$data.steel = this.thisPlayer.steel;
-        } else {
-          // use as much steel as possible without overpaying by default
-          let currentSteelValue = requiredSteelQty * this.thisPlayer.steelValue;
-          while (currentSteelValue <= this.$data.cost - this.thisPlayer.steelValue && requiredSteelQty < this.thisPlayer.steel) {
-            requiredSteelQty++;
-            currentSteelValue = requiredSteelQty * this.thisPlayer.steelValue;
-          }
-
-          this.$data.steel = requiredSteelQty;
-        }
-
-        const discountedCost = this.$data.cost - (this.$data.steel * this.thisPlayer.steelValue);
-        this.$data.megaCredits = Math.max(discountedCost, 0);
-      } else {
-        this.$data.steel = 0;
-      }
-    },
-    setDefaultTitaniumValue() {
-      // automatically use available titanium to pay if not enough MC
-      if (!this.canAffordWithMcOnly() && this.canUseTitanium()) {
-        let requiredTitaniumQty = Math.ceil(Math.max(this.$data.cost - this.thisPlayer.megaCredits - (this.$data.steel * this.thisPlayer.steelValue), 0) / this.thisPlayer.titaniumValue);
-
-        if (requiredTitaniumQty > this.thisPlayer.titanium) {
-          this.$data.titanium = this.thisPlayer.titanium;
-        } else {
-          // use as much titanium as possible without overpaying by default
-          let currentTitaniumValue = requiredTitaniumQty * this.thisPlayer.titaniumValue;
-          while (currentTitaniumValue <= this.$data.cost - this.thisPlayer.titaniumValue && requiredTitaniumQty < this.thisPlayer.titanium) {
-            requiredTitaniumQty++;
-            currentTitaniumValue = requiredTitaniumQty * this.thisPlayer.titaniumValue;
-          }
-
-          this.$data.titanium = requiredTitaniumQty;
-        }
-
-        const discountedCost = this.$data.cost - (this.$data.steel * this.thisPlayer.steelValue) - (this.$data.titanium * this.thisPlayer.titaniumValue);
-        this.$data.megaCredits = Math.max(discountedCost, 0);
-      } else {
-        this.$data.titanium = 0;
-      }
-    },
-    setDefaultHeatValue() {
-      // automatically use available heat for Helion if not enough MC
-      if (!this.canAffordWithMcOnly() && this.canUseHeat()) {
-        this.$data.heat = Math.max(this.$data.cost - this.thisPlayer.megaCredits - (this.$data.steel * this.thisPlayer.steelValue) - (this.$data.titanium * this.thisPlayer.titaniumValue), 0);
-      } else {
-        this.$data.heat = 0;
-      }
-      const discountedCost = this.$data.cost - (this.$data.steel * this.thisPlayer.steelValue) - (this.$data.titanium * this.thisPlayer.titaniumValue) - this.$data.heat;
-      this.$data.megaCredits = Math.max(discountedCost, 0);
     },
     canAffordWithMcOnly() {
       return this.thisPlayer.megaCredits >= this.$data.cost;
@@ -237,7 +169,7 @@ export default Vue.extend({
           }
         }
       }
-      const showAlert = PreferencesManager.load('show_alerts') === '1';
+      const showAlert = getPreferences().show_alerts;
 
       if (requiredAmt > 0 && totalSpent > requiredAmt && showAlert) {
         const diff = totalSpent - requiredAmt;
@@ -285,7 +217,7 @@ export default Vue.extend({
     </div>
 
     <div class="payments_type input-group"  v-if="playerinput.canUseSeeds">
-      <i class="resource_icon resource_icon--seeds payments_type_icon" :title="$t('Pay by Seeds')"></i>
+      <i class="resource_icon resource_icon--seed payments_type_icon" :title="$t('Pay by Seeds')"></i>
       <Button type="minus" @click="reduceValue('seeds', 1)" />
       <input class="form-input form-inline payments_input" v-model.number="seeds" />
       <Button type="plus" @click="addValue('seeds', 1)" />

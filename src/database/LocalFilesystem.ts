@@ -1,7 +1,7 @@
 import {DbLoadCallback, IDatabase} from './IDatabase';
 import {Game, GameOptions, Score} from '../Game';
 import {GameId} from '../common/Types';
-import {IGameData} from './IDatabase';
+import {IGameData} from '../common/game/IGameData';
 import {SerializedGame} from '../SerializedGame';
 import {Dirent} from 'fs';
 
@@ -79,6 +79,19 @@ export class Localfilesystem implements IDatabase {
     });
   }
 
+  getClonableGameByGameId(gameId: GameId, cb: (err: Error | undefined, gameData: IGameData | undefined) => void) {
+    this.getGames((err, gameIds) => {
+      const found = gameIds.find((gId) => gId === gameId && fs.existsSync(this._historyFilename(gameId, 0)));
+      if (found === undefined) {
+        cb(err, undefined);
+        return;
+      }
+      const text = fs.readFileSync(this._historyFilename(gameId, 0));
+      const serializedGame = JSON.parse(text) as SerializedGame;
+      cb(err, {gameId: gameId, playerCount: serializedGame.players.length});
+    });
+  }
+
   loadCloneableGame(game_id: GameId, cb: DbLoadCallback<SerializedGame>) {
     try {
       console.log(`Loading ${game_id} at save point 0`);
@@ -117,7 +130,7 @@ export class Localfilesystem implements IDatabase {
     // Not implemented
   }
 
-  cleanSaves(_gameId: GameId, _save_id: number): void {
+  cleanSaves(_gameId: GameId): void {
     // Not implemented here.
   }
 

@@ -1,17 +1,17 @@
 import {Card} from '../Card';
-import {CardName} from '../../CardName';
+import {CardName} from '../../common/cards/CardName';
 import {SelectSpace} from '../../inputs/SelectSpace';
 import {ISpace} from '../../boards/ISpace';
 import {Player} from '../../Player';
 import {Resources} from '../../common/Resources';
 import {SpaceBonus} from '../../common/boards/SpaceBonus';
 import {TileType} from '../../common/TileType';
-import {CardType} from './../CardType';
-import {IProjectCard} from './../IProjectCard';
-import {Tags} from './../Tags';
+import {CardType} from '../../common/cards/CardType';
+import {IProjectCard} from '../IProjectCard';
+import {Tags} from '../../common/cards/Tags';
 import {CardRequirements} from '../CardRequirements';
 import {CardRenderer} from '../render/CardRenderer';
-import {Units} from '../../Units';
+import {Units} from '../../common/Units';
 
 export class OceanFarm extends Card implements IProjectCard {
   constructor() {

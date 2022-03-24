@@ -1,6 +1,6 @@
-import {CardName} from '../../CardName';
+import {CardName} from '../../common/cards/CardName';
 import {Player} from '../../Player';
-import {CardType} from '../CardType';
+import {CardType} from '../../common/cards/CardType';
 import {IProjectCard} from '../IProjectCard';
 import {Tags} from '../../common/cards/Tags';
 import {Resources} from '../../common/Resources';
@@ -12,7 +12,7 @@ import {OrOptions} from '../../inputs/OrOptions';
 import {SelectOption} from '../../inputs/SelectOption';
 import {Card} from '../Card';
 import {VictoryPoints} from '../ICard';
-import {Size} from '../render/Size';
+import {Size} from '../../common/cards/render/Size';
 
 export class CopernicusTower extends Card implements IActionCard, IProjectCard {
   constructor() {
@@ -38,7 +38,7 @@ export class CopernicusTower extends Card implements IActionCard, IProjectCard {
         }),
       },
     });
-  };
+  }
   public override resourceCount = 0;
 
   public play() {

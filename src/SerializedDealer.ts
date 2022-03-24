@@ -1,10 +1,8 @@
-import {CardName} from './CardName';
-import {CorporationCard} from './cards/corporation/CorporationCard';
-import {IProjectCard} from './cards/IProjectCard';
+import {CardName} from './common/cards/CardName';
 
 export interface SerializedDealer {
-    corporationCards: Array<CorporationCard | CardName>;
-    deck: Array<IProjectCard | CardName>;
-    discarded: Array<IProjectCard | CardName>;
-    preludeDeck: Array<IProjectCard | CardName>;
+    corporationCards: Array<CardName>;
+    deck: Array<CardName>;
+    discarded: Array<CardName>;
+    preludeDeck: Array<CardName>;
 }

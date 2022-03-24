@@ -1,20 +1,20 @@
 import {Card} from '../Card';
-import {Tags} from '../Tags';
+import {Tags} from '../../common/cards/Tags';
 import {Player} from '../../Player';
-import {CorporationCard} from './CorporationCard';
-import {Phase} from '../../Phase';
+import {ICorporationCard} from './ICorporationCard';
+import {Phase} from '../../common/Phase';
 import {ISpace} from '../../boards/ISpace';
 import {SpaceBonus} from '../../common/boards/SpaceBonus';
 import {Resources} from '../../common/Resources';
-import {CardName} from '../../CardName';
-import {CardType} from '../CardType';
+import {CardName} from '../../common/cards/CardName';
+import {CardType} from '../../common/cards/CardType';
 import {GainProduction} from '../../deferredActions/GainProduction';
 import {CardRenderer} from '../render/CardRenderer';
-import {Units} from '../../Units';
+import {Units} from '../../common/Units';
 import {BoardType} from '../../boards/BoardType';
 import {digit} from '../Options';
 
-export class MiningGuild extends Card implements CorporationCard {
+export class MiningGuild extends Card implements ICorporationCard {
   constructor() {
     super({
       cardType: CardType.CORPORATION,

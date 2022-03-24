@@ -1,6 +1,6 @@
 
 import {PlayerInput} from '../PlayerInput';
-import {PlayerInputTypes} from '../PlayerInputTypes';
+import {PlayerInputTypes} from '../common/input/PlayerInputTypes';
 import {SelectAmount} from './SelectAmount';
 import {SelectCard} from './SelectCard';
 import {SelectPlayer} from './SelectPlayer';
@@ -16,13 +16,13 @@ export class OrOptions implements PlayerInput {
   public cb(): PlayerInput | undefined {
     return undefined;
   }
-    public title: string | Message = 'Select one option';
-    public buttonLabel: string = 'Save';
-    public options: Array<PlayerInput>;
-    public inputType: PlayerInputTypes = PlayerInputTypes.OR_OPTIONS;
-    constructor(
-      ...options: Array<SelectAmount | SelectCard<ICard> | SelectCard<IProjectCard>| SelectPlayer | SelectOption | SelectHowToPay | SelectDelegate | SelectColony>
-    ) {
-      this.options = options;
-    }
+  public title: string | Message = 'Select one option';
+  public buttonLabel: string = 'Save';
+  public options: Array<PlayerInput>;
+  public inputType: PlayerInputTypes = PlayerInputTypes.OR_OPTIONS;
+  constructor(
+    ...options: Array<SelectAmount | SelectCard<ICard> | SelectCard<IProjectCard>| SelectPlayer | SelectOption | SelectHowToPay | SelectDelegate | SelectColony>
+  ) {
+    this.options = options;
+  }
 }

@@ -1,14 +1,14 @@
 import {IProjectCard} from '../IProjectCard';
-import {Tags} from '../Tags';
-import {CardType} from '../CardType';
+import {Tags} from '../../common/cards/Tags';
+import {CardType} from '../../common/cards/CardType';
 import {Player} from '../../Player';
-import {CardName} from '../../CardName';
+import {CardName} from '../../common/cards/CardName';
 import {ResourceType} from '../../common/ResourceType';
 import {SelectOption} from '../../inputs/SelectOption';
 import {OrOptions} from '../../inputs/OrOptions';
 import {IResourceCard} from '../ICard';
 import {AddResourcesToCard} from '../../deferredActions/AddResourcesToCard';
-import {Colony} from '../../colonies/Colony';
+import {IColony} from '../../colonies/IColony';
 import {DeferredAction} from '../../deferredActions/DeferredAction';
 import {SelectColony} from '../../inputs/SelectColony';
 import {CardRenderer} from '../render/CardRenderer';
@@ -62,7 +62,7 @@ export class TitanFloatingLaunchPad extends Card implements IProjectCard, IResou
       new SelectOption('Remove 1 floater on this card to trade for free', 'Remove floater', () => {
         player.game.defer(new DeferredAction(
           player,
-          () => new SelectColony('Select colony tile to trade with for free', 'Select', openColonies, (colony: Colony) => {
+          () => new SelectColony('Select colony tile to trade with for free', 'Select', openColonies, (colony: IColony) => {
             this.resourceCount--;
             player.game.log('${0} spent 1 floater to trade with ${1}', (b) => b.player(player).colony(colony));
             colony.trade(player);
@@ -102,7 +102,7 @@ export class TradeWithTitanFloatingLaunchPad implements IColonyTrader {
     return 'Pay 1 Floater (use Titan Floating Launch-pad action)';
   }
 
-  public trade(colony: Colony) {
+  public trade(colony: IColony) {
     // grr I wish there was a simpler syntax.
     if (this.titanFloatingLaunchPad !== undefined) this.titanFloatingLaunchPad.resourceCount--;
     this.player.addActionThisGeneration(CardName.TITAN_FLOATING_LAUNCHPAD);

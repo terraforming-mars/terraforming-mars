@@ -1,10 +1,10 @@
 import {IProjectCard} from '../IProjectCard';
 import {Tags} from '../../common/cards/Tags';
 import {Card} from '../Card';
-import {CardName} from '../../CardName';
-import {CardType} from '../CardType';
+import {CardName} from '../../common/cards/CardName';
+import {CardType} from '../../common/cards/CardType';
 import {Player} from '../../Player';
-import {PartyName} from '../../turmoil/parties/PartyName';
+import {PartyName} from '../../common/turmoil/PartyName';
 import {Resources} from '../../common/Resources';
 import {DeferredAction} from '../../deferredActions/DeferredAction';
 import {CardRenderer} from '../render/CardRenderer';
@@ -38,7 +38,7 @@ export class GMOContract extends Card implements IProjectCard {
     if (amount > 0) {
       player.game.defer(
         new DeferredAction(player, () => {
-          player.addResource(Resources.MEGACREDITS, amount * 2);
+          player.addResource(Resources.MEGACREDITS, amount * 2, {log: true});
           return undefined;
         }),
       );

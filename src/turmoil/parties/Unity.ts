@@ -1,14 +1,14 @@
 import {IParty} from './IParty';
 import {Party} from './Party';
-import {PartyName} from './PartyName';
+import {PartyName} from '../../common/turmoil/PartyName';
 import {Game} from '../../Game';
-import {Tags} from '../../cards/Tags';
+import {Tags} from '../../common/cards/Tags';
 import {Resources} from '../../common/Resources';
 import {Bonus} from '../Bonus';
 import {Policy} from '../Policy';
 import {SelectHowToPayDeferred} from '../../deferredActions/SelectHowToPayDeferred';
 import {Player} from '../../Player';
-import {POLITICAL_AGENDAS_MAX_ACTION_USES} from '../../constants';
+import {POLITICAL_AGENDAS_MAX_ACTION_USES} from '../../common/constants';
 import {ICard} from '../../cards/ICard';
 import {DeferredAction} from '../../deferredActions/DeferredAction';
 import {OrOptions} from '../../inputs/OrOptions';
@@ -34,7 +34,7 @@ class UnityBonus01 implements Bonus {
   }
 
   grant(game: Game) {
-    game.getPlayers().forEach((player) => {
+    game.getPlayersInGenerationOrder().forEach((player) => {
       player.addResource(Resources.MEGACREDITS, this.getScore(player));
     });
   }
@@ -50,7 +50,7 @@ class UnityBonus02 implements Bonus {
   }
 
   grant(game: Game) {
-    game.getPlayers().forEach((player) => {
+    game.getPlayersInGenerationOrder().forEach((player) => {
       player.addResource(Resources.MEGACREDITS, this.getScore(player));
     });
   }

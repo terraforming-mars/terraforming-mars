@@ -5,7 +5,7 @@ import {TestPlayer} from '../../TestPlayer';
 import {getTestPlayer, newTestGame} from '../../TestGame';
 import {Leavitt} from '../../../src/cards/community/Leavitt';
 import {Mercury} from '../../../src/cards/community/Mercury';
-import {Units} from '../../../src/Units';
+import {Units} from '../../../src/common/Units';
 import {IProjectCard} from '../../../src/cards/IProjectCard';
 import {TitanShuttles} from '../../../src/cards/colonies/TitanShuttles';
 import {FloatingHabs} from '../../../src/cards/venusNext/FloatingHabs';

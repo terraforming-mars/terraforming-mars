@@ -1,11 +1,12 @@
 // Common code for SelectHowToPay and SelectHowToPayForProjectCard
-import {CardName} from '@/CardName';
-import {CardModel} from '@/models/CardModel';
-import {PlayerInputModel} from '@/models/PlayerInputModel';
-import {PlayerViewModel} from '@/models/PlayerModel';
-import {Tags} from '@/cards/Tags';
-import {Units} from '@/Units';
-import {SEED_VALUE} from '@/constants';
+import {CardName} from '@/common/cards/CardName';
+import {CardModel} from '@/common/models/CardModel';
+import {PlayerInputModel} from '@/common/models/PlayerInputModel';
+import {PlayerViewModel} from '@/common/models/PlayerModel';
+import {Tags} from '@/common/cards/Tags';
+import {Units} from '@/common/Units';
+import {SEED_VALUE} from '@/common/constants';
+import {ResourceType} from '@/common/ResourceType';
 
 export interface SelectHowToPayModel {
     card?: CardModel;
@@ -148,12 +149,13 @@ export const PaymentWidgetMixin = {
     getAmount(target: Unit): number {
       let amount: number | undefined = undefined;
       const model = this.asModel();
+      const thisPlayer = model.playerView.thisPlayer;
       switch (target) {
       case 'heat':
       case 'steel':
       case 'titanium':
       case 'megaCredits':
-        amount = model.playerView.thisPlayer[target];
+        amount = thisPlayer[target];
         break;
 
       case 'floaters':
@@ -162,7 +164,7 @@ export const PaymentWidgetMixin = {
       case 'seeds':
         amount = model.playerinput[target];
         break;
-      };
+      }
 
       if (amount === undefined) {
         return 0;
@@ -178,7 +180,13 @@ export const PaymentWidgetMixin = {
 
       // BTW, this could be managed by some derivative of reserveUnits that took extended resources into account.
       if (target === 'floaters' && this.asModel().$data.card?.name === CardName.STRATOSPHERIC_BIRDS) {
-        amount = Math.max(amount - 1, 0);
+        // Find a card other than Dirigibles with floaters.
+        // If there is none, then Dirigibles can't use every one.
+        if (!thisPlayer.playedCards.some((card) => {
+          return card.name !== CardName.DIRIGIBLES && card.resourceType === ResourceType.FLOATER && (card.resources ?? 0) > 0;
+        })) {
+          amount = Math.max(amount - 1, 0);
+        }
       }
       return amount;
     },

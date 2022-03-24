@@ -1,20 +1,20 @@
-import {CorporationCard} from '../corporation/CorporationCard';
+import {ICorporationCard} from '../corporation/ICorporationCard';
 import {Player} from '../../Player';
-import {Tags} from '../Tags';
+import {Tags} from '../../common/cards/Tags';
 import {Resources} from '../../common/Resources';
 import {ResourceType} from '../../common/ResourceType';
 import {IProjectCard} from '../IProjectCard';
 import {SelectOption} from '../../inputs/SelectOption';
 import {OrOptions} from '../../inputs/OrOptions';
 import {Card} from '../Card';
-import {CardName} from '../../CardName';
+import {CardName} from '../../common/cards/CardName';
 import {IResourceCard} from '../ICard';
-import {CardType} from '../CardType';
+import {CardType} from '../../common/cards/CardType';
 import {CardRenderer} from '../render/CardRenderer';
-import {Units} from '../../Units';
+import {Units} from '../../common/Units';
 import {digit, played} from '../Options';
 
-export class Recyclon extends Card implements CorporationCard, IResourceCard {
+export class Recyclon extends Card implements ICorporationCard, IResourceCard {
   constructor() {
     super({
       cardType: CardType.CORPORATION,
@@ -40,32 +40,32 @@ export class Recyclon extends Card implements CorporationCard, IResourceCard {
       },
     });
   }
-    public override resourceCount = 0;
+  public override resourceCount = 0;
 
-    public play(player: Player) {
-      player.addProduction(Resources.STEEL, 1);
+  public play(player: Player) {
+    player.addProduction(Resources.STEEL, 1);
+    player.addResourceTo(this);
+    return undefined;
+  }
+  public onCardPlayed(player: Player, card: IProjectCard) {
+    if (card.tags.includes(Tags.BUILDING) === false || !player.isCorporation(this.name)) {
+      return undefined;
+    }
+    if (this.resourceCount < 2) {
       player.addResourceTo(this);
       return undefined;
     }
-    public onCardPlayed(player: Player, card: IProjectCard) {
-      if (card.tags.includes(Tags.BUILDING) === false || !player.isCorporation(this.name)) {
-        return undefined;
-      }
-      if (this.resourceCount < 2) {
-        player.addResourceTo(this);
-        return undefined;
-      }
 
-      const addResource = new SelectOption('Add a microbe resource to this card', 'Add microbe', () => {
-        player.addResourceTo(this);
-        return undefined;
-      });
+    const addResource = new SelectOption('Add a microbe resource to this card', 'Add microbe', () => {
+      player.addResourceTo(this);
+      return undefined;
+    });
 
-      const spendResource = new SelectOption('Remove 2 microbes on this card and increase plant production 1 step', 'Remove microbes', () => {
-        player.removeResourceFrom(this, 2);
-        player.addProduction(Resources.PLANTS, 1);
-        return undefined;
-      });
-      return new OrOptions(spendResource, addResource);
-    }
+    const spendResource = new SelectOption('Remove 2 microbes on this card and increase plant production 1 step', 'Remove microbes', () => {
+      player.removeResourceFrom(this, 2);
+      player.addProduction(Resources.PLANTS, 1);
+      return undefined;
+    });
+    return new OrOptions(spendResource, addResource);
+  }
 }

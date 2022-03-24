@@ -4,7 +4,7 @@ import {EarlyExpedition} from '../../../src/cards/pathfinders/EarlyExpedition';
 import {Game} from '../../../src/Game';
 import {TestPlayer} from '../../TestPlayer';
 import {TestPlayers} from '../../TestPlayers';
-import {Units} from '../../../src/Units';
+import {Units} from '../../../src/common/Units';
 import {TestingUtils} from '../../TestingUtils';
 import {SelectSpace} from '../../../src/inputs/SelectSpace';
 

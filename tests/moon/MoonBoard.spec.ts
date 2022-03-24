@@ -1,5 +1,5 @@
 import {expect} from 'chai';
-import {SpaceType} from '../../src/SpaceType';
+import {SpaceType} from '../../src/common/boards/SpaceType';
 import {MoonBoard} from '../../src/moon/MoonBoard';
 import {MoonSpaces} from '../../src/moon/MoonSpaces';
 

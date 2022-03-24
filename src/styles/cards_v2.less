@@ -29,8 +29,8 @@
         position: relative;
         .card-requirements {
             width: 70%;
-            min-height: 25px;
-            line-height: 25px;
+            height: 24px;
+            line-height: 24px;
             font-weight: normal;
             font-size: 15px;
             box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.6), 0 0 0 2px rgba(0, 0, 0, 0.3);
@@ -829,8 +829,22 @@
             .card-bio-sol-logo {
                 background-image: url(./assets/pathfinders/corp-logo-bio-sol.png);
                 height: 45px;
+                width: 175px;
+                background-size: 175px 45px;
+                margin-top: 10px;
+            }
+            .card-adhai-high-orbit-constructions-logo {
+                background-image: url(./assets/pathfinders/corp-logo-adhai-high-orbit-constructions.png);
+                height: 45px;
                 width: 184px;
                 background-size: 184px 45px;
+                margin-top: 10px;
+            }
+            .card-mind-set-mars-logo {
+                background-image: url(./assets/pathfinders/corp-logo-mind-set-mars.png);
+                height: 45px;
+                width: 125px;
+                background-size: 125px 45px;
                 margin-top: 10px;
             }
         }
@@ -939,18 +953,18 @@
             }
             .card-temperature--req {
                 background-image: url(./assets/global-parameters/temperature.png);
-                width: 7px;
-                height: 23px;
-                background-size: 7px 23px;
+                width: 10px;
+                height: 34px;
+                background-size: 10px 34px;
             }
             .card-ocean-global-requirement {
                 background-image: url(./assets/tiles/ocean.png);
             }
             .card-ocean--req {
                 background-image: url(./assets/tiles/ocean.png);
-                width: 21px;
-                height: 23px;
-                background-size: 21px 23px;
+                width: 30px;
+                height: 34px;
+                background-size: 30px 34px;
             }
             .card-oxygen-global-requirement {
                 background-image: url(./assets/global-parameters/oxygen.png);
@@ -959,9 +973,9 @@
             }
             .card-oxygen--req {
                 background-image: url(./assets/global-parameters/oxygen.png);
-                width: 23px;
-                background-size: 23px 23px;
-                height: 23px;
+                width: 34px;
+                background-size: 34px;
+                height: 34px;
             }
             .card-venus-global-requirement {
                 background-image: url(./assets/global-parameters/venus.png);
@@ -972,9 +986,9 @@
             }
             .card-venus--req {
                 background-image: url(./assets/global-parameters/venus.png);
-                width: 34px;
-                height: 23px;
-                background-size: 34px 23px;
+                width: 50px;
+                height: 34px;
+                background-size: 50px 34px;
                 color: #0000;
             }
             /*resources*/
@@ -1080,6 +1094,14 @@
                 color: #0000 !important;
                 background-image: url(./assets/resources/seed.png);
             }
+            .card-resource-agenda {
+                color: #0000 !important;
+                background-image: url(./assets/resources/agenda.png);
+            }
+            .card-resource-orbital {
+                color: #0000 !important;
+                background-image: url(./assets/resources/orbital.png);
+            }
             .card-resource-cube {
                 color: #0000 !important;
                 background-image: url(./assets/cube.png);
@@ -1108,6 +1130,12 @@
                 margin-right: 2px;
                 position: relative;
                 top: -2px;
+            }
+            .card-minus--S {
+                .card-minus();
+                background-size: 9px;
+                width: 9px;
+                height: 6px;
             }
             .card-plus {
                 background-image: url(/assets/misc/plus.png);
@@ -1222,6 +1250,11 @@
                 width: 48px;
                 background-size: 48px;
             }
+            .card-resource-trade--S {
+                height: 30px !important;
+                width: 36px !important;
+                background-size: 36px !important;
+            }
             .card-resource-trade-fleet {
                 background-image: url(./assets/tiles/trade.png);
                 height: 40px;
@@ -1241,9 +1274,9 @@
                 background-size: 36px !important;
             }
             .card-resource-colony--req {
-                height: 23px;
-                width: 26px;
-                background-size: 26px 23px;
+                height: 34px;
+                width: 40px;
+                background-size: 40px 34px;
                 margin-left: 3px;
                 margin-right: 3px;
             }
@@ -1290,10 +1323,10 @@
                 vertical-align: middle;
                 filter: brightness(0.9);
                 &--S:extend(.card-container .card-content-wrapper .card-content .card-resource-tag) {
-                    width: 21px;
-                    height: 21px;
-                    line-height: 21px;
-                    background-size: 25px 25px;
+                    width: 30px;
+                    height: 30px;
+                    background-size: 34px;
+                    margin-left: 2px;
                 }
             }
             // TODO(kberg) This set of tags looks like a duplicate of cards.less.
@@ -1340,7 +1373,8 @@
                 background-image: url("./assets/tags/tag-none.png");
             }
             .card-tag-floater {
-                background-image: url("./assets/resources/floater.png")
+                background-image: url("./assets/resources/floater.png");
+                border-radius: 0px;
             }
             .card-tag-moon {
                 background-image: url("./assets/tags/moon.png")
@@ -1368,6 +1402,25 @@
                 top: -7px;
                 height: 16px;
                 border-radius: 50%;
+            }
+            .card-tag-no_planetary_tag {
+                .tag-clone();
+            }
+            .card-tag-no_planetary_tag:after {
+                content: '';
+                height: 20px;
+                border-left: 2px dashed #f00;
+                position: absolute;
+                transform: rotate(45deg);
+                margin-left: -1px;
+            }
+            .card-tag-no_planetary_tag:before {
+                content: '';
+                height: 20px;
+                border-left: 2px dashed #f00;
+                position: absolute;
+                transform: rotate(-45deg);
+                margin-left: -1px;
             }
             .card-tag-turmoil:after {
                 position: absolute;
@@ -1742,9 +1795,9 @@
                 height: 46px;
             }
             .tile--req {
-                width: 21px;
-                height: 23px;
-                background-size: 21px 23px;
+                width: 30px;
+                height: 34px;
+                background-size: 30px 34px;
                 margin-left: 4px;
                 margin-right: 4px;
             }
@@ -1786,10 +1839,13 @@
                     top: 2px;
                 }
             }
+            .card-tr--XS {
+                .card-tr--req();
+            }
             .card-tr--req {
-                width: 30px !important;
-                height: 23px !important;
-                background-size: 30px 23px !important;
+                width: 45px !important;
+                height: 34px !important;
+                background-size: 45px 34px !important;
                 vertical-align: middle !important;
                 box-shadow: none !important;
                 background-repeat: no-repeat;
@@ -1825,18 +1881,16 @@
             .card-party-leader--req {
                 display: inline-block;
                 background-image: url(./assets/misc/delegate.png);
-                width: 18px;
-                height: 22px;
-                background-size: 18px 22px;
+                width: 24px;
+                height: 30px;
+                background-size: 24px 30px;
                 vertical-align: middle;
                 filter: drop-shadow(0px 0px 1px black);
                 background-color: #222;
-                padding: 1px;
+                padding: 3px;
                 background-repeat: no-repeat;
-                background-position: 1px;
-                border-radius: 11px 11px 0px 0px;
-                margin-left: 2px;
-                margin-right: 2px;
+                background-position: 3px;
+                border-radius: 15px 15px 2px 2px;
             }
             .card-chairman {
                 display: inline-block;
@@ -1855,18 +1909,16 @@
             .card-chairman--req {
                 display: inline-block;
                 background-image: url(./assets/misc/chairman.png);
-                width: 18px;
-                height: 22px;
-                background-size: 18px 22px;
+                width: 24px;
+                height: 30px;
+                background-size: 24px 30px;
                 vertical-align: middle;
                 filter: drop-shadow(0px 0px 1px black);
                 background-color: #222;
-                padding: 1px;
+                padding: 3px;
                 background-repeat: no-repeat;
-                background-position: 1px;
-                border-radius: 11px 11px 0px 0px;
-                margin-left: 2px;
-                margin-right: 2px;
+                background-position: 3px;
+                border-radius: 15px 15px 2px 2px;
             }
             .card-chairman-red {
                 filter: drop-shadow(1px 0px 1px #c33) drop-shadow(-1px 0px 1px #c33) drop-shadow(0px 1px 1px #c33) drop-shadow(0px -1px 1px #c33) !important;
@@ -2059,9 +2111,9 @@ each(@parties, {
 each(@parties, {
   .card-party--@{value}-req {
     background-image: url("./assets/parties/@{value}.png");
-    background-size: 31px 23px;
-    width: 31px;
-    height: 23px;
+    background-size: 48px 34px;
+    width: 48px;
+    height: 34px;
   }
 })
 
@@ -2082,7 +2134,9 @@ each(@parties, {
 
     // This copies stuff above, but scoped inside card-resources-counter. It shouldn't be necessary if
     // the stuff above wasn't contained inside card-content.
-    @resource_types: microbe, animal, science, floater, fighter, camp, asteroid, disease, preservation, data, syndicate-fleet, cube, venusian-habitat, specialized-robot, seed;
+    @resource_types: microbe, animal, science, floater, fighter, camp,
+      asteroid, disease, preservation, data, syndicate-fleet, cube,
+      venusian-habitat, specialized-robot, seed, orbital, agenda;
     each(@resource_types, {
       .card-resource-@{value} {
         background-image: url("./assets/resources/@{value}.png");

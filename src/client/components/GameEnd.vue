@@ -161,20 +161,20 @@
 <script lang="ts">
 
 import Vue from 'vue';
-import {GameModel} from '@/models/GameModel';
-import {PlayerViewModel, PublicPlayerModel, ViewModel} from '@/models/PlayerModel';
+import {GameModel} from '@/common/models/GameModel';
+import {PlayerViewModel, PublicPlayerModel, ViewModel} from '@/common/models/PlayerModel';
 import Board from '@/client/components/Board.vue';
 import MoonBoard from '@/client/components/moon/MoonBoard.vue';
 import PlanetaryTracks from '@/client/components/pathfinders/PlanetaryTracks.vue';
 import LogPanel from '@/client/components/LogPanel.vue';
 import Button from '@/client/components/common/Button.vue';
-import {playerColorClass} from '@/utils/utils';
+import {playerColorClass} from '@/common/utils/utils';
 import {Timer} from '@/Timer';
 
 
-import * as constants from '@/constants';
-import {SpectatorModel} from '@/models/SpectatorModel';
-import {Color} from '@/Color';
+import * as constants from '@/common/constants';
+import {SpectatorModel} from '@/common/models/SpectatorModel';
+import {Color} from '@/common/Color';
 
 function getViewModel(playerView: ViewModel | undefined, spectator: ViewModel | undefined): ViewModel {
   if (playerView !== undefined) return playerView;

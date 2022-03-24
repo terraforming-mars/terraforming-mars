@@ -1,17 +1,17 @@
 import {Card} from '../Card';
-import {CardName} from '../../CardName';
+import {CardName} from '../../common/cards/CardName';
 import {SelectSpace} from '../../inputs/SelectSpace';
 import {ISpace} from '../../boards/ISpace';
 import {Player} from '../../Player';
 import {TileType} from '../../common/TileType';
-import {CardType} from '../CardType';
+import {CardType} from '../../common/cards/CardType';
 import {IProjectCard} from '../IProjectCard';
-import {Tags} from '../Tags';
+import {Tags} from '../../common/cards/Tags';
 import {CardRequirements} from '../CardRequirements';
 import {CardRenderer} from '../render/CardRenderer';
-import {Units} from '../../Units';
+import {Units} from '../../common/Units';
 import {Board} from '../../boards/Board';
-import {Size} from '../render/Size';
+import {Size} from '../../common/cards/render/Size';
 
 export class Wetlands extends Card implements IProjectCard {
   constructor() {
@@ -47,14 +47,19 @@ export class Wetlands extends Card implements IProjectCard {
       return adjacentSpaces.filter(Board.isOceanSpace).length;
     };
 
-    const spaces = board.getNonReservedLandSpaces();
-    return spaces.filter((space) => adjacentOceans(space) >= 2);
+    const redCity = board.getSpaceByTileCard(CardName.RED_CITY);
+    const spacesNextToRedCity = redCity ?
+      board.getAdjacentSpaces(redCity) :
+      [];
+    return board.getNonReservedLandSpaces()
+      .filter((space) => adjacentOceans(space) >= 2)
+      .filter((space) => !spacesNextToRedCity.includes(space));
   }
 
   public override canPlay(player: Player) {
     if (!player.hasUnits(this.reserveUnits)) {
       return false;
-    };
+    }
     return this.availableSpaces(player).length > 0;
   }
 

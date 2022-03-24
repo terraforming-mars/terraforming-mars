@@ -1,5 +1,5 @@
 import {TileType} from '../../common/TileType';
-import {CardName} from '../../CardName';
+import {CardName} from '../../common/cards/CardName';
 import {NuclearZone} from '../base/NuclearZone';
 import {CardRenderer} from '../render/CardRenderer';
 

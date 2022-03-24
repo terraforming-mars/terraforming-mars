@@ -1,10 +1,10 @@
 import {Tags} from '../../common/cards/Tags';
 import {Player} from '../../Player';
 import {PreludeCard} from './PreludeCard';
-import {CardName} from '../../CardName';
+import {CardName} from '../../common/cards/CardName';
 import {SelectHowToPayDeferred} from '../../deferredActions/SelectHowToPayDeferred';
 import {CardRenderer} from '../render/CardRenderer';
-import {Units} from '../../Units';
+import {Units} from '../../common/Units';
 
 export class BusinessEmpire extends PreludeCard {
   constructor() {

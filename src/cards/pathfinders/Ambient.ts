@@ -1,19 +1,19 @@
 import {Card} from '../Card';
-import {CorporationCard} from '../corporation/CorporationCard';
-import {Tags} from '../Tags';
+import {ICorporationCard} from '../corporation/ICorporationCard';
+import {Tags} from '../../common/cards/Tags';
 import {Player} from '../../Player';
 import {Resources} from '../../common/Resources';
-import {CardName} from '../../CardName';
-import {CardType} from '../CardType';
+import {CardName} from '../../common/cards/CardName';
+import {CardType} from '../../common/cards/CardType';
 import {CardRenderer} from '../render/CardRenderer';
 import {digit, played} from '../Options';
 import {IProjectCard} from '../IProjectCard';
 import {ICard} from '../ICard';
 import {DeferredAction} from '../../deferredActions/DeferredAction';
-import {MAX_TEMPERATURE} from '../../constants';
-import {Size} from '../render/Size';
+import {MAX_TEMPERATURE} from '../../common/constants';
+import {Size} from '../../common/cards/render/Size';
 
-export class Ambient extends Card implements CorporationCard {
+export class Ambient extends Card implements ICorporationCard {
   constructor() {
     super({
       cardType: CardType.CORPORATION,
@@ -50,7 +50,7 @@ export class Ambient extends Card implements CorporationCard {
     return undefined;
   }
 
-  public onCorpCardPlayed(player: Player, card: CorporationCard) {
+  public onCorpCardPlayed(player: Player, card: ICorporationCard) {
     return this.onCardPlayed(player, card as ICard as IProjectCard);
   }
 

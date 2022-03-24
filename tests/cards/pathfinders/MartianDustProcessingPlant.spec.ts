@@ -3,7 +3,7 @@ import {MartianDustProcessingPlant} from '../../../src/cards/pathfinders/Martian
 import {Game} from '../../../src/Game';
 import {TestPlayer} from '../../TestPlayer';
 import {getTestPlayer, newTestGame} from '../../TestGame';
-import {Units} from '../../../src/Units';
+import {Units} from '../../../src/common/Units';
 
 describe('MartianDustProcessingPlant', function() {
   let card: MartianDustProcessingPlant;

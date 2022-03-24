@@ -14,12 +14,12 @@
 
         <span
           v-for="award in fundedAwards"
-          :key="award.award.name"
+          :key="award.name"
           :title="award.player_name"
           class="milestone-award-inline paid"
           data-test="funded-awards"
         >
-          <span v-i18n>{{ award.award.name }}</span>
+          <span v-i18n>{{ award.name }}</span>
           <span class="ma-player-cube">
             <i
               class="board-cube"
@@ -40,14 +40,17 @@
         </span>
       </div>
 
-      <div v-show="showAwards">
-        <Award
-          v-for="award in awards"
-          :key="award.award.name"
-          :award="award"
-          :showScores="showScores"
-        />
-      </div>
+      <span @click="toggleDescription" title="press to show or hide the description" data-test="toggle-description">
+        <div v-show="showAwards">
+          <Award
+            v-for="award in awards"
+            :key="award.name"
+            :award="award"
+            :showScores="showScores"
+            :showDescription="showDescription"
+          />
+        </div>
+      </span>
     </div>
   </div>
 </template>
@@ -55,9 +58,9 @@
 <script lang="ts">
 import Vue from 'vue';
 import Award from '@/client/components/Award.vue';
-import {AWARD_COSTS} from '@/constants';
-import {FundedAwardModel} from '@/models/FundedAwardModel';
-import {PreferencesManager} from '@/client/utils/PreferencesManager';
+import {AWARD_COSTS} from '@/common/constants';
+import {FundedAwardModel} from '@/common/models/FundedAwardModel';
+import {getPreferences} from '@/client/utils/PreferencesManager';
 
 export default Vue.extend({
   name: 'Awards',
@@ -75,13 +78,17 @@ export default Vue.extend({
   data() {
     return {
       showAwards: true,
-      PreferencesManager,
+      showDescription: false,
     };
   },
   methods: {
     toggleList() {
       this.showAwards = !this.showAwards;
     },
+    toggleDescription() {
+      this.showDescription = !this.showDescription;
+    },
+
   },
   computed: {
     fundedAwards(): FundedAwardModel[] {
@@ -92,7 +99,7 @@ export default Vue.extend({
       return AWARD_COSTS.slice(this.fundedAwards.length);
     },
     isLearnerModeOn(): boolean {
-      return this.PreferencesManager.loadBoolean('learner_mode');
+      return getPreferences().learner_mode;
     },
   },
 });

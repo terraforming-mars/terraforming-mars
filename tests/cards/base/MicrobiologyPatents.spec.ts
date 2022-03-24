@@ -3,7 +3,7 @@ import {MicrobiologyPatents} from '../../../src/cards/pathfinders/MicrobiologyPa
 import {Virus} from '../../../src/cards/base/Virus';
 import {MicroMills} from '../../../src/cards/base/MicroMills';
 import {getTestPlayer, newTestGame} from '../../TestGame';
-import {Units} from '../../../src/Units';
+import {Units} from '../../../src/common/Units';
 
 describe('MicrobiologyPatents', function() {
   it('Should play', function() {

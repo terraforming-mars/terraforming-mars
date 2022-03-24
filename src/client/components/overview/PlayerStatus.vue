@@ -14,7 +14,7 @@
 import Vue from 'vue';
 import {ActionLabel} from '@/client/components/overview/ActionLabel';
 import PlayerTimer from '@/client/components/overview/PlayerTimer.vue';
-import {TimerModel} from '@/models/TimerModel';
+import {TimerModel} from '@/common/models/TimerModel';
 
 export default Vue.extend({
   name: 'player-status',

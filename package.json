@@ -15,7 +15,7 @@
     "dialog-polyfill": "^0.5.1",
     "dotenv": "^8.2.0",
     "eslint-config-google": "^0.14.0",
-    "eslint-plugin-vue": "^6.2.2",
+    "eslint-plugin-vue": "^8.4.0",
     "html-escaper": "^3.0.3",
     "less": "^3.10.3",
     "mnemonist": "^0.38.1",
@@ -34,21 +34,21 @@
     "@types/html-escaper": "^3.0.0",
     "@types/mocha": "^5.2.6",
     "@types/sinon": "^10.0.2",
-    "@typescript-eslint/eslint-plugin": "^4.27.0",
-    "@typescript-eslint/parser": "^4.27.0",
+    "@typescript-eslint/eslint-plugin": "^5.10.2",
+    "@typescript-eslint/parser": "^5.10.2",
     "@vue/test-utils": "^1.1.1",
     "chai": "^4.2.0",
     "compression-webpack-plugin": "^8.0.0",
     "css-loader": "^5.2.6",
-    "eslint": "^6.8.0",
+    "eslint": "^8.8.0",
     "fork-ts-checker-webpack-plugin": "^6.2.13",
     "jsdom": "^16.6.0",
     "jsdom-global": "^3.0.2",
     "less-loader": "^10.0.0",
-    "mocha": "^8.4.0",
-    "mochapack": "^2.1.2",
+    "mocha": "^9.2.0",
+    "mochapack": "^2.1.4",
     "mutation-observer": "^1.0.3",
-    "nyc": "^14.1.1",
+    "nyc": "^15.1.0",
     "rimraf": "^3.0.2",
     "sinon": "^11.1.1",
     "ts-loader": "^9.2.2",
@@ -79,11 +79,11 @@
     "make:json": "node make_static_json.js",
     "make:static": "npm run make:css && npm run make:json",
     "test": "npm run test:server && npm run test:client",
-    "test:server": "ts-mocha -p tests/tsconfig.json -r tests/utils/setup.ts \"tests/*.spec.ts\" \"tests/!(components)/**/*.spec.ts\"",
+    "test:server": "ts-mocha -p tests/tsconfig.json -r tests/utils/setup.ts \"tests/*.spec.ts\" \"tests/!(client)/**/*.spec.ts\"",
     "pretest:server": "npx tsc --build tests/tsconfig.json",
-    "test:client": "cross-env NODE_ENV=development mochapack --require tests/components/setup.ts \"tests/components/**/*.spec.ts\"",
-    "test:client:watch": "cross-env NODE_ENV=development mochapack --watch --require tests/components/setup.ts \"tests/components/**/*.spec.ts\"",
-    "cover": "nyc ts-mocha -p tests/tsconfig.json -r tests/utils/setup.ts \"tests/*.spec.ts\" \"tests/!(components)/**/*.spec.ts\"",
+    "test:client": "cross-env NODE_ENV=development mochapack --require tests/client/components/setup.ts \"tests/client/**/*.spec.ts\"",
+    "test:client:watch": "cross-env NODE_ENV=development mochapack --watch --require tests/client/components/setup.ts \"tests/client/**/*.spec.ts\"",
+    "cover": "nyc ts-mocha -p tests/tsconfig.json -r tests/utils/setup.ts \"tests/*.spec.ts\" \"tests/!(client)/**/*.spec.ts\"",
     "//": "When the zipped versions of JS are available dev:client and dev:server do not refresh automatically",
     "dev:prepare": "rm build/main.js.gz build/main.js.br || true",
     "dev:client": "npm run dev:prepare && cross-env NODE_ENV=development webpack --watch",
@@ -91,12 +91,12 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/bafolts/terraforming-mars.git"
+    "url": "git+https://github.com/terraforming-mars/terraforming-mars.git"
   },
   "author": "",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/bafolts/terraforming-mars/issues"
+    "url": "https://github.com/terraforming-mars/terraforming-mars/issues"
   },
-  "homepage": "https://github.com/bafolts/terraforming-mars#readme"
+  "homepage": "https://github.com/terraforming-mars/terraforming-mars#readme"
 }

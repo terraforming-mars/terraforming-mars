@@ -1,6 +1,6 @@
 import {IProjectCard} from '../IProjectCard';
 import {Tags} from '../../common/cards/Tags';
-import {CardType} from '../CardType';
+import {CardType} from '../../common/cards/CardType';
 import {Player} from '../../Player';
 import {Game} from '../../Game';
 import {OrOptions} from '../../inputs/OrOptions';
@@ -8,13 +8,13 @@ import {SelectOption} from '../../inputs/SelectOption';
 import {ResourceType} from '../../common/ResourceType';
 import {SelectCard} from '../../inputs/SelectCard';
 import {ICard} from '../ICard';
-import {CardName} from '../../CardName';
-import * as constants from './../../constants';
+import {CardName} from '../../common/cards/CardName';
+import * as constants from '../../common/constants';
 import {PartyHooks} from '../../turmoil/parties/PartyHooks';
-import {PartyName} from '../../turmoil/parties/PartyName';
+import {PartyName} from '../../common/turmoil/PartyName';
 import {CardRequirements} from '../CardRequirements';
 import {CardRenderer} from '../render/CardRenderer';
-import {Size} from '../render/Size';
+import {Size} from '../../common/cards/render/Size';
 import {Card} from '../Card';
 
 export class Atmoscoop extends Card implements IProjectCard {

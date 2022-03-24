@@ -1,19 +1,19 @@
-import {Tags} from '../Tags';
+import {Tags} from '../../common/cards/Tags';
 import {Player} from '../../Player';
 import {IProjectCard} from '../IProjectCard';
 import {Card} from '../Card';
-import {CorporationCard} from '../corporation/CorporationCard';
+import {ICorporationCard} from '../corporation/ICorporationCard';
 import {SelectOption} from '../../inputs/SelectOption';
 import {OrOptions} from '../../inputs/OrOptions';
 import {ResourceType} from '../../common/ResourceType';
-import {CardName} from '../../CardName';
-import {CardType} from '../CardType';
+import {CardName} from '../../common/cards/CardName';
+import {CardType} from '../../common/cards/CardType';
 import {CardRenderer} from '../render/CardRenderer';
-import {Size} from '../render/Size';
+import {Size} from '../../common/cards/render/Size';
 import {Resources} from '../../common/Resources';
 import {all, played} from '../Options';
 
-export class Splice extends Card implements CorporationCard {
+export class Splice extends Card implements ICorporationCard {
   constructor() {
     super({
       cardType: CardType.CORPORATION,
@@ -53,11 +53,11 @@ export class Splice extends Card implements CorporationCard {
     return this._onCardPlayed(player, card);
   }
 
-  public onCorpCardPlayed(player: Player, card: CorporationCard) {
+  public onCorpCardPlayed(player: Player, card: ICorporationCard) {
     return this._onCardPlayed(player, card);
   }
 
-  private _onCardPlayed(player: Player, card: IProjectCard | CorporationCard): OrOptions | undefined {
+  private _onCardPlayed(player: Player, card: IProjectCard | ICorporationCard): OrOptions | undefined {
     if (card.tags.includes(Tags.MICROBE) === false) {
       return undefined;
     }
@@ -76,7 +76,7 @@ export class Splice extends Card implements CorporationCard {
     });
 
     // Splice owner get 2M€ per microbe tag
-    player.game.getCardPlayer(this.name).addResource(Resources.MEGACREDITS, megacreditsGain, {log: true});
+    player.game.getCardPlayer(this.name)?.addResource(Resources.MEGACREDITS, megacreditsGain, {log: true});
 
     // Card player choose between 2 M€ and a microbe on card, if possible
     if (card.resourceType !== undefined && card.resourceType === ResourceType.MICROBE) {

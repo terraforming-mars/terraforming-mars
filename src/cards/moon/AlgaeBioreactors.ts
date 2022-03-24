@@ -1,13 +1,12 @@
-import {CardName} from '../../CardName';
+import {CardName} from '../../common/cards/CardName';
 import {Player} from '../../Player';
-import {CardType} from '../CardType';
+import {CardType} from '../../common/cards/CardType';
 import {Tags} from '../../common/cards/Tags';
 import {MoonExpansion} from '../../moon/MoonExpansion';
 import {CardRenderer} from '../render/CardRenderer';
-import {Units} from '../../Units';
+import {Units} from '../../common/Units';
 import {MoonCard} from './MoonCard';
 
-// TODO(kberg): Add a test for how this card operates with Reds. It will be a good verification.
 export class AlgaeBioreactors extends MoonCard {
   constructor() {
     super({
@@ -27,7 +26,7 @@ export class AlgaeBioreactors extends MoonCard {
       },
     }, {
     });
-  };
+  }
 
   public override play(player: Player) {
     super.play(player);

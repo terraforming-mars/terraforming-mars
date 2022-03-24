@@ -3,9 +3,9 @@ import {ALL_CARD_MANIFESTS} from '../../../src/cards/AllCards';
 import {Celestic} from '../../../src/cards/venusNext/Celestic';
 import {Game} from '../../../src/Game';
 import {TestPlayers} from '../../TestPlayers';
-import {CardName} from '../../../src/CardName';
+import {CardName} from '../../../src/common/cards/CardName';
 import {ResourceType} from '../../../src/common/ResourceType';
-import {RequirementType} from '../../../src/cards/RequirementType';
+import {RequirementType} from '../../../src/common/cards/RequirementType';
 
 describe('Celestic', function() {
   it('Should play', function() {

@@ -1,51 +1,96 @@
-export const preferences = [
-  'hide_hand',
-  'hide_awards_and_milestones',
-  'hide_top_bar',
-  'small_cards',
-  'remove_background',
-  'magnify_cards',
-  'magnify_card_descriptions',
-  'show_alerts',
-  'hide_active_cards',
-  'hide_automated_cards',
-  'hide_event_cards',
-  'lang',
-  'enable_sounds',
-  'hide_tile_confirmation',
-  'show_card_number',
-  'hide_discount_on_cards',
-  'learner_mode',
-  'hide_animated_sidebar',
-  'experimental_ui',
-] as const;
+export interface IPreferences {
+  learner_mode: boolean,
+  enable_sounds: boolean,
+  magnify_cards: boolean,
+  show_alerts: boolean,
+  hide_hand: boolean,
+  hide_awards_and_milestones: boolean,
+  hide_top_bar: boolean,
+  small_cards: boolean,
+  remove_background: boolean,
+  hide_active_cards: boolean,
+  hide_automated_cards: boolean,
+  hide_event_cards: boolean,
+  hide_tile_confirmation: boolean,
+  show_card_number: boolean,
+  hide_discount_on_cards: boolean,
+  hide_animated_sidebar: boolean,
+  experimental_ui: boolean,
+  lang: string,
+}
 
-export type Key = typeof preferences[number];
+export type Preference = keyof IPreferences;
+
+const defaults: IPreferences = {
+  learner_mode: true,
+  enable_sounds: true,
+  magnify_cards: true,
+  show_alerts: true,
+  lang: 'en',
+
+  hide_hand: false,
+  hide_awards_and_milestones: false,
+  hide_top_bar: false,
+  small_cards: false,
+  remove_background: false,
+  hide_active_cards: false,
+  hide_automated_cards: false,
+  hide_event_cards: false,
+  hide_tile_confirmation: false,
+  show_card_number: false,
+  hide_discount_on_cards: false,
+  hide_animated_sidebar: false,
+  experimental_ui: false,
+};
 
 export class PreferencesManager {
-  static preferencesValues: Map<Key, boolean | string> = new Map<Key, boolean | string>();
-  private static localStorageSupported(): boolean {
+  public static INSTANCE = new PreferencesManager();
+  private readonly _values: IPreferences;
+
+  private localStorageSupported(): boolean {
     return typeof localStorage !== 'undefined';
   }
 
-  static save(name: Key, val: string | boolean, updateMap: boolean = false): void {
-    const stringVal = typeof(val) === 'string' ? val : (val ? '1' : '0');
+  public static resetForTest() {
+    this.INSTANCE = new PreferencesManager();
+  }
+
+  private constructor() {
+    this._values = {...defaults};
+    for (const key of Object.keys(defaults) as Array<Preference>) {
+      const value = this.localStorageSupported() ? localStorage.getItem(key) : undefined;
+      if (value) this._set(key, value);
+    }
+  }
+
+  private _set(key: Preference, val: string | boolean) {
+    if (key === 'lang') {
+      this._values.lang = String(val);
+    } else {
+      this._values[key] = typeof(val) === 'boolean' ? val : (val === '1');
+    }
+  }
+
+  // Making this Readonly means that it's Typescript-impossible to
+  // set preferences through the fields themselves.
+  values(): Readonly<IPreferences> {
+    return this._values;
+  }
+
+  set(name: Preference, val: string | boolean, setOnChange = false): void {
+    // Don't set values if nothing has changed.
+    if (setOnChange && this._values[name] === val) return;
+    this._set(name, val);
     if (this.localStorageSupported()) {
-      localStorage.setItem(name, stringVal);
+      if (name === 'lang') {
+        localStorage?.setItem(name, this._values.lang);
+      } else {
+        localStorage?.setItem(name, val ? '1' : '0');
+      }
     }
-    if (updateMap) {
-      this.preferencesValues.set(name, stringVal);
-    }
   }
+}
 
-  static load(name: Key, defaultValue = ''): string {
-    if (!this.localStorageSupported()) return defaultValue;
-    const value = localStorage.getItem(name);
-    return value ?? defaultValue;
-  }
-
-  static loadBoolean(name: Key, defaultValue = false): boolean {
-    if (!this.localStorageSupported()) return defaultValue;
-    return localStorage.getItem(name) === '1';
-  }
+export function getPreferences(): Readonly<IPreferences> {
+  return PreferencesManager.INSTANCE.values();
 }

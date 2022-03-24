@@ -40,13 +40,13 @@ describe('CEOsFavoriteProject', function() {
     expect(action).instanceOf(SelectCard);
 
     action.cb([searchForLife]);
-    expect(player.getResourcesOnCard(searchForLife)).to.eq(2);
+    expect(searchForLife.resourceCount).to.eq(2);
     action.cb([birds]);
-    expect(player.getResourcesOnCard(birds)).to.eq(2);
+    expect(birds.resourceCount).to.eq(2);
     action.cb([decomposers]);
-    expect(player.getResourcesOnCard(decomposers)).to.eq(2);
+    expect(decomposers.resourceCount).to.eq(2);
     action.cb([securityFleet]);
-    expect(player.getResourcesOnCard(securityFleet)).to.eq(2);
+    expect(securityFleet.resourceCount).to.eq(2);
   });
 
   it('Can play on SelfReplicatingRobots cards', function() {

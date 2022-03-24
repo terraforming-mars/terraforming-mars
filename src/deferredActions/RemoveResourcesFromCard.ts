@@ -3,7 +3,7 @@ import {ResourceType} from '../common/ResourceType';
 import {OrOptions} from '../inputs/OrOptions';
 import {SelectCard} from '../inputs/SelectCard';
 import {SelectOption} from '../inputs/SelectOption';
-import {CardName} from '../CardName';
+import {CardName} from '../common/cards/CardName';
 import {ICard} from '../cards/ICard';
 import {DeferredAction, Priority} from './DeferredAction';
 
@@ -43,7 +43,7 @@ export class RemoveResourcesFromCard implements DeferredAction {
       (foundCards: Array<ICard>) => {
         const card = foundCards[0];
         const owner = this.player.game.getCardPlayer(card.name);
-        owner.removeResourceFrom(card, this.count, this.player.game, this.player);
+        owner?.removeResourceFrom(card, this.count, this.player);
         return undefined;
       },
     );
@@ -53,7 +53,7 @@ export class RemoveResourcesFromCard implements DeferredAction {
       if (resourceCards.length === 1) {
         const card = resourceCards[0];
         const owner = this.player.game.getCardPlayer(card.name);
-        owner.removeResourceFrom(card, this.count, this.player.game, this.player);
+        owner?.removeResourceFrom(card, this.count, this.player);
         return undefined;
       }
       return selectCard;

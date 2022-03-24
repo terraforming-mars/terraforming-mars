@@ -6,7 +6,7 @@ import {TestingUtils} from '../../TestingUtils';
 import {TestPlayers} from '../../TestPlayers';
 import {MarsFirst, MARS_FIRST_BONUS_1, MARS_FIRST_BONUS_2, MARS_FIRST_POLICY_4} from '../../../src/turmoil/parties/MarsFirst';
 import {Mine} from '../../../src/cards/base/Mine';
-import {Tags} from '../../../src/cards/Tags';
+import {Tags} from '../../../src/common/cards/Tags';
 
 describe('MarsFirst', function() {
   let player : Player; let game : Game; let turmoil: Turmoil; let marsFirst: MarsFirst;

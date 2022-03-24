@@ -8,6 +8,7 @@ import {IMoonData} from '../../../src/moon/IMoonData';
 import {TileType} from '../../../src/common/TileType';
 import {TestPlayer} from '../../TestPlayer';
 import {Resources} from '../../../src/common/Resources';
+import {VictoryPointsBreakdown} from '../../../src/VictoryPointsBreakdown';
 
 const MOON_OPTIONS = TestingUtils.setCustomGameOptions({moonExpansion: true});
 
@@ -63,18 +64,18 @@ describe('LunarMineUrbanization', () => {
   });
 
   it('computeVictoryPoints', () => {
-    const vps = player.victoryPointsBreakdown;
+    const vps = new VictoryPointsBreakdown();
     function computeVps() {
-      vps.moonColonies = 0;
-      vps.moonMines = 0;
-      vps.moonRoads = 0;
+      vps.points.moonColonies = 0;
+      vps.points.moonMines = 0;
+      vps.points.moonRoads = 0;
       MoonExpansion.calculateVictoryPoints(player, vps);
       return {
-        colonies: vps.moonColonies,
-        mines: vps.moonMines,
-        roads: vps.moonRoads,
+        colonies: vps.points.moonColonies,
+        mines: vps.points.moonMines,
+        roads: vps.points.moonRoads,
       };
-    };
+    }
 
     expect(computeVps()).eql({colonies: 0, mines: 0, roads: 0});
     MoonExpansion.addTile(player, 'm02', {tileType: TileType.MOON_ROAD});

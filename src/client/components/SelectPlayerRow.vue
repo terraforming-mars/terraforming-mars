@@ -5,7 +5,7 @@
 <script lang="ts">
 
 import Vue from 'vue';
-import {PublicPlayerModel} from '@/models/PlayerModel';
+import {PublicPlayerModel} from '@/common/models/PlayerModel';
 
 export default Vue.extend({
   name: 'SelectPlayerRow',

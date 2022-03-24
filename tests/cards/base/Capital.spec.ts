@@ -2,7 +2,7 @@ import {expect} from 'chai';
 import {Capital} from '../../../src/cards/base/Capital';
 import {TestPlayer} from '../../TestPlayer';
 import {Game} from '../../../src/Game';
-import {SpaceType} from '../../../src/SpaceType';
+import {SpaceType} from '../../../src/common/boards/SpaceType';
 import {TileType} from '../../../src/common/TileType';
 import {SelectSpace} from '../../../src/inputs/SelectSpace';
 import {Resources} from '../../../src/common/Resources';
@@ -58,7 +58,6 @@ describe('Capital', () => {
     expect(citySpace.tile).is.not.undefined;
     expect(citySpace.player).to.eq(player);
     expect(citySpace.tile && citySpace.tile.tileType).to.eq(TileType.CAPITAL);
-    expect(player.victoryPointsBreakdown.victoryPoints).to.eq(0);
     expect(card.getVictoryPoints(player)).to.eq(1);
     expect(citySpace.adjacency?.bonus).eq(undefined);
   });

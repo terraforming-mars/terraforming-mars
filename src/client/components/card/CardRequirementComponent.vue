@@ -31,17 +31,19 @@
 <script lang="ts">
 
 import Vue from 'vue';
-import {CardRequirement, PartyCardRequirement, ProductionCardRequirement, /* ProductionCardRequirement,*/ TagCardRequirement} from '@/cards/CardRequirement';
-import {RequirementType} from '@/cards/RequirementType';
-import {generateClassString, range} from '@/utils/utils';
+import {
+  ICardRequirement, IPartyCardRequirement, IProductionCardRequirement, ITagCardRequirement,
+} from '@/common/cards/ICardRequirement';
+import {RequirementType} from '@/common/cards/RequirementType';
+import {generateClassString, range} from '@/common/utils/utils';
 import CardParty from '@/client/components/card/CardParty.vue';
-import {PartyName} from '@/turmoil/parties/PartyName';
+import {PartyName} from '@/common/turmoil/PartyName';
 
 export default Vue.extend({
   name: 'CardRequirementComponent',
   props: {
     requirement: {
-      type: Object as () => CardRequirement,
+      type: Object as () => ICardRequirement,
       required: true,
     },
   },
@@ -117,7 +119,7 @@ export default Vue.extend({
       case RequirementType.PARTY_LEADERS:
         return ['card-party-leader--req'];
       case RequirementType.TAG:
-        const tagRequirement = this.requirement as TagCardRequirement;
+        const tagRequirement = this.requirement as ITagCardRequirement;
         return ['card-resource-tag--S', 'card-tag-' + tagRequirement.tag];
       case RequirementType.COLONY_RATE:
         return ['card-colony-rate', 'card-colony-rate--req'];
@@ -139,7 +141,7 @@ export default Vue.extend({
     },
     getParty(): PartyName {
       if (this.requirement.type === RequirementType.PARTY) {
-        return (this.requirement as PartyCardRequirement).party;
+        return (this.requirement as IPartyCardRequirement).party;
       } else {
         // Doesn't matter what this value is, as it is ignored.
         return PartyName.GREENS;
@@ -147,7 +149,7 @@ export default Vue.extend({
     },
     getProductionClass(): string {
       if (this.requirement.type === RequirementType.PRODUCTION) {
-        const resource = (this.requirement as ProductionCardRequirement).resource;
+        const resource = (this.requirement as IProductionCardRequirement).resource;
         return `card-resource card-resource-${resource}`;
       } else {
         // Doesn't matter what this value is, as it is ignored.

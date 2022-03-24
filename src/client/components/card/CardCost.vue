@@ -11,7 +11,7 @@
 <script lang="ts">
 
 import Vue from 'vue';
-import {PreferencesManager} from '@/client/utils/PreferencesManager';
+import {getPreferences} from '@/client/utils/PreferencesManager';
 
 export default Vue.extend({
   name: 'CardCost',
@@ -32,7 +32,7 @@ export default Vue.extend({
       return classes.join(' ');
     },
     displayTwoCosts(): boolean {
-      const hideDiscount = PreferencesManager.loadBoolean('hide_discount_on_cards');
+      const hideDiscount = getPreferences().hide_discount_on_cards;
       return this.newCost !== undefined && this.newCost !== this.amount && !hideDiscount;
     },
   },

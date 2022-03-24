@@ -1,6 +1,6 @@
 import {expect} from 'chai';
 import {AsteroidDeflectionSystem} from '../../../src/cards/promo/AsteroidDeflectionSystem';
-import {Tags} from '../../../src/cards/Tags';
+import {Tags} from '../../../src/common/cards/Tags';
 import {Game} from '../../../src/Game';
 import {Player} from '../../../src/Player';
 import {Resources} from '../../../src/common/Resources';

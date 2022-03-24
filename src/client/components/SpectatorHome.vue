@@ -75,11 +75,11 @@
 <script lang="ts">
 import Vue from 'vue';
 
-import {GameModel} from '@/models/GameModel';
+import {GameModel} from '@/common/models/GameModel';
 import {mainAppSettings} from './App';
 
 import * as raw_settings from '@/genfiles/settings.json';
-import {SpectatorModel} from '@/models/SpectatorModel';
+import {SpectatorModel} from '@/common/models/SpectatorModel';
 import Awards from '@/client/components/Awards.vue';
 import Board from '@/client/components/Board.vue';
 import Colony from '@/client/components/Colony.vue';
@@ -92,7 +92,7 @@ import Sidebar from '@/client/components/Sidebar.vue';
 import Turmoil from '@/client/components/Turmoil.vue';
 import WaitingFor from '@/client/components/WaitingFor.vue';
 import PlayersOverview from '@/client/components/overview/PlayersOverview.vue';
-import {range} from '@/utils/utils';
+import {range} from '@/common/utils/utils';
 
 export interface SpectatorHomeModel {
   hideTiles: boolean;

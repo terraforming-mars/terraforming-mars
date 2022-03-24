@@ -3,7 +3,7 @@ import {Resources} from '../common/Resources';
 import {OrOptions} from '../inputs/OrOptions';
 import {SelectOption} from '../inputs/SelectOption';
 import {DeferredAction, Priority} from './DeferredAction';
-import {CardName} from '../CardName';
+import {CardName} from '../common/cards/CardName';
 
 export class RemoveAnyPlants implements DeferredAction {
   public priority = Priority.ATTACK_OPPONENT;
@@ -30,7 +30,7 @@ export class RemoveAnyPlants implements DeferredAction {
       let qtyToRemove = Math.min(candidate.plants, this.count);
 
       // Botanical Experience hook.
-      if (candidate.playedCards.some((card) => card.name === CardName.BOTANICAL_EXPERIENCE)) {
+      if (candidate.cardIsInEffect(CardName.BOTANICAL_EXPERIENCE)) {
         qtyToRemove = Math.ceil(qtyToRemove / 2);
       }
 

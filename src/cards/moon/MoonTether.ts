@@ -1,5 +1,5 @@
-import {CardName} from '../../CardName';
-import {CardType} from '../CardType';
+import {CardName} from '../../common/cards/CardName';
+import {CardType} from '../../common/cards/CardType';
 import {IProjectCard} from '../IProjectCard';
 import {Tags} from '../../common/cards/Tags';
 import {CardRenderer} from '../render/CardRenderer';
@@ -27,7 +27,7 @@ export class MoonTether extends Card implements IProjectCard {
         description: 'Requires 6 Space tags.',
       },
     });
-  };
+  }
 
   public play() {
     return undefined;

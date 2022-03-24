@@ -1,7 +1,7 @@
 import {Tags} from '../../common/cards/Tags';
 import {Player} from '../../Player';
 import {PreludeCard} from './PreludeCard';
-import {CardName} from '../../CardName';
+import {CardName} from '../../common/cards/CardName';
 import {CardRenderer} from '../render/CardRenderer';
 
 export class AcquiredSpaceAgency extends PreludeCard {
@@ -23,6 +23,6 @@ export class AcquiredSpaceAgency extends PreludeCard {
     player.titanium += 6;
     player.drawCard(2, {tag: Tags.SPACE});
     return undefined;
-  };
+  }
 }
 

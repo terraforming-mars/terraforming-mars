@@ -2,7 +2,7 @@ import Vue from 'vue';
 
 import {trimEmptyTextNodes} from '@/client/directives/TrimWhitespace';
 import {mainAppSettings} from '@/client/components/App';
-import {PreferencesManager} from '@/client/utils/PreferencesManager';
+import {getPreferences} from '@/client/utils/PreferencesManager';
 import i18nPlugin from '@/client/plugins/i18n.plugin';
 
 declare global {
@@ -12,7 +12,7 @@ declare global {
 }
 
 async function bootstrap() {
-  const lang = PreferencesManager.load('lang') || 'en';
+  const lang = getPreferences().lang;
 
   if (lang !== 'en') {
     try {
@@ -30,6 +30,13 @@ async function bootstrap() {
     componentUpdated: trimEmptyTextNodes,
   });
 
+  if (window.isSecureContext && 'serviceWorker' in navigator) {
+    window.addEventListener('load', function() {
+      navigator.serviceWorker.register('sw.js').then(function(registration) {
+        console.log('registered the service worker', registration);
+      });
+    });
+  }
 
   new Vue(mainAppSettings);
 }

@@ -3,10 +3,10 @@ import Vue from 'vue';
 import PlayerInfo from '@/client/components/overview/PlayerInfo.vue';
 import OverviewSettings from '@/client/components/overview/OverviewSettings.vue';
 import OtherPlayer from '@/client/components/OtherPlayer.vue';
-import {ViewModel, PublicPlayerModel} from '@/models/PlayerModel';
+import {ViewModel, PublicPlayerModel} from '@/common/models/PlayerModel';
 import {ActionLabel} from '@/client/components/overview/ActionLabel';
-import {Phase} from '@/Phase';
-import {Color} from '@/Color';
+import {Phase} from '@/common/Phase';
+import {Color} from '@/common/Color';
 
 const SHOW_NEXT_LABEL_MIN = 2;
 
@@ -123,9 +123,9 @@ export default Vue.extend({
 <template>
         <div class="players-overview" v-if="hasPlayers()">
             <overview-settings />
-            <div class="other_player" v-if="players.length > 1">
+            <div class="other_player" v-if="thisPlayer === undefined || players.length > 1">
                 <div v-for="(otherPlayer, index) in getPlayersInOrder()" :key="otherPlayer.id">
-                    <other-player v-if="thisPlayer !== undefined && otherPlayer.id !== thisPlayer.id" :player="otherPlayer" :playerIndex="index"/>
+                    <other-player v-if="thisPlayer === undefined || otherPlayer.id !== thisPlayer.id" :player="otherPlayer" :playerIndex="index"/>
                 </div>
             </div>
             <player-info v-for="(p, index) in getPlayersInOrder()"

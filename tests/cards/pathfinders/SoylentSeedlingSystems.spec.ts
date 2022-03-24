@@ -3,13 +3,13 @@ import {SoylentSeedlingSystems} from '../../../src/cards/pathfinders/SoylentSeed
 import {Game} from '../../../src/Game';
 import {TestPlayer} from '../../TestPlayer';
 import {getTestPlayer, newTestGame} from '../../TestGame';
-import {CardName} from '../../../src/CardName';
+import {CardName} from '../../../src/common/cards/CardName';
 import {TestingUtils} from '../../TestingUtils';
-import {Tags} from '../../../src/cards/Tags';
+import {Tags} from '../../../src/common/cards/Tags';
 import {Celestic} from '../../../src/cards/venusNext/Celestic';
 import {GreeneryStandardProject} from '../../../src/cards/base/standardProjects/GreeneryStandardProject';
 import {TileType} from '../../../src/common/TileType';
-import {SpaceType} from '../../../src/SpaceType';
+import {SpaceType} from '../../../src/common/boards/SpaceType';
 
 describe('SoylentSeedlingSystems', function() {
   let card: SoylentSeedlingSystems;

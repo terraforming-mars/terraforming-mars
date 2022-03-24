@@ -8,8 +8,8 @@ import {Reds} from '../../../src/turmoil/parties/Reds';
 import {Kelvinists, KELVINISTS_POLICY_1} from '../../../src/turmoil/parties/Kelvinists';
 import {Turmoil} from '../../../src/turmoil/Turmoil';
 import {TestingUtils} from '../../TestingUtils';
-import {Units} from '../../../src/Units';
-import {Tags} from '../../../src/cards/Tags';
+import {Units} from '../../../src/common/Units';
+import {Tags} from '../../../src/common/cards/Tags';
 import {PowerPlantStandardProject} from '../../../src/cards/base/standardProjects/PowerPlantStandardProject';
 
 describe('HighTempSuperconductors', function() {

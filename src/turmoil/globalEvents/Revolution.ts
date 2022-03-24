@@ -1,18 +1,19 @@
 import {IGlobalEvent, GlobalEvent} from './IGlobalEvent';
-import {GlobalEventName} from './GlobalEventName';
-import {PartyName} from '../parties/PartyName';
+import {GlobalEventName} from '../../common/turmoil/globalEvents/GlobalEventName';
+import {PartyName} from '../../common/turmoil/PartyName';
 import {Game} from '../../Game';
 import {Turmoil} from '../Turmoil';
-import {Tags} from '../../cards/Tags';
+import {Tags} from '../../common/cards/Tags';
 import {Player} from '../../Player';
 import {CardRenderer} from '../../cards/render/CardRenderer';
 import {played} from '../../cards/Options';
-import {Size} from '../../cards/render/Size';
+import {Size} from '../../common/cards/render/Size';
 
 const RENDER_DATA = CardRenderer.builder((b) => {
-  b.earth(1, {played}).plus().influence().colon().br;
-  b.text('1st: ').minus().tr(2, {size: Size.SMALL}).nbsp;
-  b.text('2nd: ').minus().tr(1, {size: Size.SMALL});
+  b.br.br;
+  b.earth(1, {played, size: Size.SMALL}).plus().influence({size: Size.SMALL}).colon();
+  b.text('1st:', Size.SMALL).minus().tr(2, {size: Size.TINY, digit: true});
+  b.text('2nd:', Size.SMALL).minus().tr(1, {size: Size.TINY, digit: true});
 });
 
 export class Revolution extends GlobalEvent implements IGlobalEvent {
@@ -27,11 +28,11 @@ export class Revolution extends GlobalEvent implements IGlobalEvent {
   }
   public resolve(game: Game, turmoil: Turmoil) {
     if (game.isSoloMode()) {
-      if (this.getScore(game.getPlayers()[0], turmoil) >= 4 ) {
-        game.getPlayers()[0].decreaseTerraformRatingSteps(2, {log: true});
+      if (this.getScore(game.getPlayersInGenerationOrder()[0], turmoil) >= 4 ) {
+        game.getPlayersInGenerationOrder()[0].decreaseTerraformRatingSteps(2, {log: true});
       }
     } else {
-      const players = [...game.getPlayers()].sort(
+      const players = [...game.getPlayersInGenerationOrder()].sort(
         (p1, p2) => this.getScore(p2, turmoil) - this.getScore(p1, turmoil),
       );
 

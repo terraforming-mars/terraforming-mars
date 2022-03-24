@@ -1,9 +1,9 @@
 import {IProjectCard} from '../IProjectCard';
 import {Card} from '../Card';
-import {CardType} from '../CardType';
+import {CardType} from '../../common/cards/CardType';
 import {Player} from '../../Player';
 import {Resources} from '../../common/Resources';
-import {CardName} from '../../CardName';
+import {CardName} from '../../common/cards/CardName';
 import {CardRequirements} from '../CardRequirements';
 import {CardRenderer} from '../render/CardRenderer';
 import {all} from '../Options';
@@ -27,9 +27,6 @@ export class RadSuits extends Card implements IProjectCard {
     });
   }
   public play(player: Player) {
-    if (player.game.getCitiesCount() < 2) {
-      throw 'Must have 2 cities in play';
-    }
     player.addProduction(Resources.MEGACREDITS, 1);
     return undefined;
   }

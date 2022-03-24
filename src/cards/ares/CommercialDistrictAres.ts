@@ -1,5 +1,5 @@
 import {SpaceBonus} from '../../common/boards/SpaceBonus';
-import {CardName} from '../../CardName';
+import {CardName} from '../../common/cards/CardName';
 import {CommercialDistrict} from '../base/CommercialDistrict';
 import {CardRenderer} from '../render/CardRenderer';
 import {TileType} from '../../common/TileType';

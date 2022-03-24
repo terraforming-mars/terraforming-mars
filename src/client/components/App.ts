@@ -5,19 +5,19 @@ import GamesOverview from '@/client/components/GamesOverview.vue';
 import PlayerHome from '@/client/components/PlayerHome.vue';
 import PlayerInputFactory from '@/client/components/PlayerInputFactory.vue';
 import SpectatorHome from '@/client/components/SpectatorHome.vue';
-import {ViewModel, PlayerViewModel} from '@/models/PlayerModel';
+import {ViewModel, PlayerViewModel} from '@/common/models/PlayerModel';
 import StartScreen from '@/client/components/StartScreen.vue';
 import LoadGameForm from '@/client/components/LoadGameForm.vue';
 import DebugUI from '@/client/components/DebugUI.vue';
-import {SimpleGameModel} from '@/models/SimpleGameModel';
+import {SimpleGameModel} from '@/common/models/SimpleGameModel';
 import Help from '@/client/components/help/Help.vue';
 
 import {$t} from '@/client/directives/i18n';
 
-import * as constants from '@/constants';
+import * as constants from '@/common/constants';
 import * as raw_settings from '@/genfiles/settings.json';
-import {SpectatorModel} from '@/models/SpectatorModel';
-import {isPlayerId, isSpectatorId} from '@/utils/utils';
+import {SpectatorModel} from '@/common/models/SpectatorModel';
+import {isPlayerId, isSpectatorId} from '@/common/utils/utils';
 import {hasShowModal, showModal, windowHasHTMLDialogElement} from './HTMLDialogElementCompatibility';
 
 const dialogPolyfill = require('dialog-polyfill');

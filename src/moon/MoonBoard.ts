@@ -3,7 +3,7 @@ import {ISpace} from '../boards/ISpace';
 import {SerializedBoard} from '../boards/SerializedBoard';
 import {Player} from '../Player';
 import {SpaceBonus} from '../common/boards/SpaceBonus';
-import {SpaceType} from '../SpaceType';
+import {SpaceType} from '../common/boards/SpaceType';
 import {MoonSpaces} from './MoonSpaces';
 
 class Space implements ISpace {

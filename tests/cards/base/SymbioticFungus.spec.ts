@@ -32,7 +32,7 @@ describe('SymbioticFungus', function() {
   it('Should act - single target', function() {
     player.playedCards.push(new Ants());
     card.action(player);
-    expect(player.getResourcesOnCard(player.playedCards[0])).to.eq(1);
+    expect(player.playedCards[0].resourceCount).to.eq(1);
   });
 
   it('Should act - multiple targets', function() {
@@ -41,6 +41,6 @@ describe('SymbioticFungus', function() {
     expect(action).is.not.undefined;
 
         action!.cb([player.playedCards[0]]);
-        expect(player.getResourcesOnCard(player.playedCards[0])).to.eq(1);
+        expect(player.playedCards[0].resourceCount).to.eq(1);
   });
 });

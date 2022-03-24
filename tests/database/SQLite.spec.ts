@@ -20,7 +20,7 @@ class TestSQLite extends SQLite {
   public override saveGame(game: Game): Promise<void> {
     this.saveGamePromise = super.saveGame(game);
     return this.saveGamePromise;
-  };
+  }
 
   public getSaveIds(gameId: GameId): Promise<Array<number>> {
     return new Promise((resolve, reject) => {
@@ -67,7 +67,6 @@ describe('SQLite', () => {
     });
   });
 
-
   it('saveIds', async () => {
     const player = TestPlayers.BLACK.newPlayer();
     const game = Game.newInstance('game-id-1212', [player], player);
@@ -97,10 +96,35 @@ describe('SQLite', () => {
     // TODO(kberg): make cleanSaves a promise, too. Beacuse right now
     // this timeout doesn't participate in automated testing. But for now I can
     // verify this in the debugger. Next step.
-    db.cleanSaves(game.id, 3);
+    db.cleanSaves(game.id);
     setTimeout(async () => {
       const saveIds = await db.getSaveIds(game.id);
       expect(saveIds).has.members([0, 3]);
     }, 1000);
+  });
+
+  it('gets cloneable game by id', async () => {
+    const player = TestPlayers.BLACK.newPlayer();
+    const game = Game.newInstance('game-id-1212', [player], player);
+    await db.saveGamePromise;
+    expect(game.lastSaveId).eq(1);
+
+    db.getClonableGameByGameId(game.id, (err, gameData) => {
+      expect(err).to.be.undefined;
+      expect(gameData?.gameId).to.eq(game.id);
+      expect(gameData?.playerCount).to.eq(1);
+    });
+  });
+
+  it('does not find cloneable game by id', async () => {
+    const player = TestPlayers.BLACK.newPlayer();
+    const game = Game.newInstance('game-id-1212', [player], player);
+    await db.saveGamePromise;
+    expect(game.lastSaveId).eq(1);
+
+    db.getClonableGameByGameId('notfound', (err, gameData) => {
+      expect(err).to.be.undefined;
+      expect(gameData).to.be.undefined;
+    });
   });
 });

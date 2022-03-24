@@ -254,18 +254,18 @@ import Colony from '@/client/components/Colony.vue';
 import LogPanel from '@/client/components/LogPanel.vue';
 import {PlayerMixin} from '@/client/mixins/PlayerMixin';
 import Turmoil from '@/client/components/Turmoil.vue';
-import {playerColorClass} from '@/utils/utils';
+import {playerColorClass} from '@/common/utils/utils';
 import PlanetaryTracks from '@/client/components/pathfinders/PlanetaryTracks.vue';
 import DynamicTitle from '@/client/components/common/DynamicTitle.vue';
 import SortableCards from '@/client/components/SortableCards.vue';
 import TopBar from '@/client/components/TopBar.vue';
-import {PreferencesManager} from '@/client/utils/PreferencesManager';
-import {KeyboardNavigation} from '@/KeyboardNavigation';
+import {getPreferences, PreferencesManager} from '@/client/utils/PreferencesManager';
+import {KeyboardNavigation} from '@/client/components/KeyboardNavigation';
 import MoonBoard from '@/client/components/moon/MoonBoard.vue';
-import {Phase} from '@/Phase';
+import {Phase} from '@/common/Phase';
 import StackedCards from '@/client/components/StackedCards.vue';
-import {GameModel} from '@/models/GameModel';
-import {PlayerViewModel, PublicPlayerModel} from '@/models/PlayerModel';
+import {GameModel} from '@/common/models/GameModel';
+import {PlayerViewModel, PublicPlayerModel} from '@/common/models/PlayerModel';
 
 import * as raw_settings from '@/genfiles/settings.json';
 
@@ -283,22 +283,23 @@ class TerraformedAlertDialog {
 export default Vue.extend({
   name: 'player-home',
   data(): PlayerHomeModel {
+    const preferences = getPreferences();
     return {
-      showActiveCards: !PreferencesManager.loadBoolean('hide_active_cards'),
-      showAutomatedCards: !PreferencesManager.loadBoolean('hide_automated_cards'),
-      showEventCards: !PreferencesManager.loadBoolean('hide_event_cards'),
+      showActiveCards: !preferences.hide_active_cards,
+      showAutomatedCards: !preferences.hide_automated_cards,
+      showEventCards: !preferences.hide_event_cards,
       hideTiles: false,
     };
   },
   watch: {
     hide_active_cards() {
-      PreferencesManager.save('hide_active_cards', !this.showActiveCards);
+      PreferencesManager.INSTANCE.set('hide_active_cards', !this.showActiveCards);
     },
     hide_automated_cards() {
-      PreferencesManager.save('hide_automated_cards', !this.showAutomatedCards);
+      PreferencesManager.INSTANCE.set('hide_automated_cards', !this.showAutomatedCards);
     },
     hide_event_cards() {
-      PreferencesManager.save('hide_event_cards', !this.showEventCards);
+      PreferencesManager.INSTANCE.set('hide_event_cards', !this.showEventCards);
     },
   },
   props: {
@@ -444,11 +445,11 @@ export default Vue.extend({
   },
   mounted() {
     window.addEventListener('keydown', this.navigatePage);
-    if (this.game.isTerraformed && TerraformedAlertDialog.shouldAlert && PreferencesManager.load('show_alerts') === '1') {
+    if (this.game.isTerraformed && TerraformedAlertDialog.shouldAlert && getPreferences().show_alerts) {
       alert('Mars is Terraformed!');
       // Avoids repeated calls.
       TerraformedAlertDialog.shouldAlert = false;
-    };
+    }
   },
 });
 

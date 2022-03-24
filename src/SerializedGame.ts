@@ -1,10 +1,7 @@
-import {Phase} from './Phase';
-import {CardName} from './CardName';
+import {Phase} from './common/Phase';
+import {CardName} from './common/cards/CardName';
 import {SerializedClaimedMilestone} from './milestones/ClaimedMilestone';
 import {SerializedFundedAward} from './awards/FundedAward';
-import {IMilestone} from './milestones/IMilestone';
-import {IAward} from './awards/IAward';
-import {ColonyDealer} from './colonies/ColonyDealer';
 import {DeferredAction} from './deferredActions/DeferredAction';
 import {SerializedColony} from './SerializedColony';
 import {SerializedPlayer} from './SerializedPlayer';
@@ -12,7 +9,7 @@ import {SerializedDealer} from './SerializedDealer';
 import {SerializedTurmoil} from './turmoil/SerializedTurmoil';
 import {PlayerId, GameId, SpectatorId} from './common/Types';
 import {GameOptions} from './Game';
-import {IAresData} from './ares/IAresData';
+import {IAresData} from './common/ares/IAresData';
 import {LogMessage} from './common/logs/LogMessage';
 import {SerializedBoard} from './boards/SerializedBoard';
 import {SerializedMoonData} from './moon/SerializedMoonData';
@@ -21,12 +18,14 @@ import {SerializedPathfindersData} from './pathfinders/SerializedPathfindersData
 export interface SerializedGame {
     activePlayer: PlayerId;
     aresData?: IAresData;
-    awards: Array<IAward> | Array<string>; // TODO(bafolts): remove Array<IAward> by 2021-12-01
+    awards: Array<string>;
     board: SerializedBoard;
+    // game.rng changes over the course of a game but isn't saved and serialized
+    // for instance, in the face of a redeal.
+    currentSeed: number | undefined; // TODO(kberg): Remove '|undefined' by 2022-06-01
     claimedMilestones: Array<SerializedClaimedMilestone>;
     clonedGamedId?: string;
     colonies: Array<SerializedColony>;
-    colonyDealer: ColonyDealer | undefined;
     dealer: SerializedDealer;
     deferredActions: Array<DeferredAction>;
     donePlayers: Array<PlayerId>;
@@ -41,7 +40,7 @@ export interface SerializedGame {
     id: GameId;
     initialDraftIteration: number;
     lastSaveId: number;
-    milestones: Array<IMilestone> | Array<string>; // TODO(bafolts): remove Array<IMilestone> by 2021-12-01
+    milestones: Array<string>;
     monsInsuranceOwner: PlayerId | undefined;
     moonData: SerializedMoonData | undefined;
     pathfindersData: SerializedPathfindersData | undefined;

@@ -1,5 +1,5 @@
 <template>
-<div>
+<div :title="$t(getTitle())">
   <div :class="getIconClass()"></div>
   <div class="global_params_value">
     <div v-if="isMax()">
@@ -15,8 +15,8 @@
 <script lang="ts">
 
 import Vue from 'vue';
-import {MAX_OCEAN_TILES, MAX_OXYGEN_LEVEL, MAX_TEMPERATURE, MAX_VENUS_SCALE} from '@/constants';
-import {GlobalParameter} from '@/GlobalParameter';
+import {MAX_OCEAN_TILES, MAX_OXYGEN_LEVEL, MAX_TEMPERATURE, MAX_VENUS_SCALE} from '@/common/constants';
+import {GlobalParameter} from '@/common/GlobalParameter';
 
 export default Vue.extend({
   name: 'global-parameter-value',
@@ -41,6 +41,20 @@ export default Vue.extend({
         return this.value === MAX_VENUS_SCALE;
       default:
         return false;
+      }
+    },
+    getTitle(): string {
+      switch (this.param as GlobalParameter) {
+      case GlobalParameter.TEMPERATURE:
+        return 'Temperature';
+      case GlobalParameter.OXYGEN:
+        return 'Oxygen Level';
+      case GlobalParameter.OCEANS:
+        return 'Oceans';
+      case GlobalParameter.VENUS:
+        return 'Venus scale';
+      default:
+        return '';
       }
     },
     getIconClass(): string {

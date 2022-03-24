@@ -4,11 +4,11 @@ import {TestPlayers} from '../../TestPlayers';
 import {TestPlayer} from '../../TestPlayer';
 import {EarthEmbassy} from '../../../src/cards/moon/EarthEmbassy';
 import {expect} from 'chai';
-import {Tags} from '../../../src/cards/Tags';
-import {CardType} from '../../../src/cards/CardType';
-import {CardName} from '../../../src/CardName';
+import {Tags} from '../../../src/common/cards/Tags';
+import {CardType} from '../../../src/common/cards/CardType';
+import {CardName} from '../../../src/common/cards/CardName';
 import {IProjectCard} from '../../../src/cards/IProjectCard';
-import {ICardMetadata} from '../../../src/cards/ICardMetadata';
+import {ICardMetadata} from '../../../src/common/cards/ICardMetadata';
 
 const MOON_OPTIONS = TestingUtils.setCustomGameOptions({moonExpansion: true});
 

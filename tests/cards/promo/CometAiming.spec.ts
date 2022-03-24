@@ -6,7 +6,7 @@ import {OrOptions} from '../../../src/inputs/OrOptions';
 import {SelectSpace} from '../../../src/inputs/SelectSpace';
 import {Player} from '../../../src/Player';
 import {TestPlayers} from '../../TestPlayers';
-import {TestingUtils} from './../../TestingUtils';
+import {TestingUtils} from '../../TestingUtils';
 
 describe('CometAiming', function() {
   let card : CometAiming; let player : Player;

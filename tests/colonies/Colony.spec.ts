@@ -1,6 +1,6 @@
 import {TestPlayers} from '../TestPlayers';
 import {expect} from 'chai';
-import {Luna} from '../../src/colonies/Luna';
+import {IColony} from '../../src/colonies/IColony';
 import {Pluto} from '../../src/colonies/Pluto';
 import {DustSeals} from '../../src/cards/base/DustSeals';
 import {Player} from '../../src/Player';
@@ -11,12 +11,15 @@ import {AndOptions} from '../../src/inputs/AndOptions';
 import {SelectColony} from '../../src/inputs/SelectColony';
 import {SelectCard} from '../../src/inputs/SelectCard';
 import {IProjectCard} from '../../src/cards/IProjectCard';
-import {MAX_COLONY_TRACK_POSITION} from '../../src/constants';
+import {MAX_COLONY_TRACK_POSITION} from '../../src/common/constants';
 import {TestingUtils} from '../TestingUtils';
 import {TestPlayer} from '../TestPlayer';
-import {CardName} from '../../src/CardName';
-
-const gameOptions = TestingUtils.setCustomGameOptions({coloniesExtension: true});
+import {CardName} from '../../src/common/cards/CardName';
+import {Pallas} from '../../src/cards/community/Pallas';
+import {Io} from '../../src/colonies/Io';
+import {Europa} from '../../src/colonies/Europa';
+import {ColonyName} from '../../src/common/colonies/ColonyName';
+import {ColonyDeserializer} from '../../src/colonies/ColonyDeserializer';
 
 function isBuildColonyStandardProjectAvailable(player: TestPlayer) {
   const options = TestingUtils.cast(player.getStandardProjectOption(), SelectCard);
@@ -38,7 +41,7 @@ function isTradeWithColonyActionAvailable(player: Player) {
 
 
 describe('Colony', function() {
-  let luna: Luna;
+  let luna: IColony;
   let player: TestPlayer;
   let player2: TestPlayer;
   let player3: TestPlayer;
@@ -46,13 +49,23 @@ describe('Colony', function() {
   let game: Game;
 
   beforeEach(function() {
-    luna = new Luna();
     player = TestPlayers.BLUE.newPlayer();
     player2 = TestPlayers.RED.newPlayer();
     player3 = TestPlayers.YELLOW.newPlayer();
     player4 = TestPlayers.GREEN.newPlayer();
-    game = Game.newInstance('foobar', [player, player2, player3, player4], player, gameOptions);
-    game.colonies = [luna];
+    const gameOptions = TestingUtils.setCustomGameOptions({
+      coloniesExtension: true,
+      customColoniesList: [
+        ColonyName.LUNA,
+        ColonyName.PLUTO,
+        ColonyName.IAPETUS,
+        ColonyName.IO,
+        ColonyName.EUROPA,
+        ColonyName.CALLISTO,
+      ],
+    });
+    game = Game.newInstance('foobar', [player, player2, player3, player4], player, gameOptions, /* seed */ .1);
+    luna = game.colonies.find((c) => c.name === ColonyName.LUNA)!;
   });
 
   it('Should build and give placement bonus', function() {
@@ -76,14 +89,14 @@ describe('Colony', function() {
   });
 
   it('Should start with a trackPosition at 1', function() {
-    game.colonies = game.colonyDealer!.drawColonies(4, [], true, true);
+    expect(game.colonies).has.length(6);
     game.colonies.forEach((colony) => {
       expect(colony.trackPosition).to.eq(1);
     });
   });
 
   it('Should increase by 1 at the end of a generation', function() {
-    game.colonies = game.colonyDealer!.drawColonies(4, [], true, true);
+    expect(game.colonies).has.length(6);
     game.colonies.forEach((colony) => {
       colony.endGeneration(game);
       if (colony.isActive) {
@@ -107,21 +120,21 @@ describe('Colony', function() {
   it('Should decrease trackPosition after trade', function() {
     luna.trackPosition = MAX_COLONY_TRACK_POSITION;
     luna.trade(player);
-    game.deferredActions.runAll(() => {});
+    TestingUtils.runAllActions(game);
     expect(luna.trackPosition).to.eq(0);
 
     luna.addColony(player);
     luna.addColony(player2);
     luna.trackPosition = MAX_COLONY_TRACK_POSITION;
     luna.trade(player);
-    game.deferredActions.runAll(() => {});
+    TestingUtils.runAllActions(game);
     expect(luna.trackPosition).to.eq(2);
   });
 
   it('decreaseTrackAfterTrade', function() {
     luna.trackPosition = MAX_COLONY_TRACK_POSITION;
     luna.trade(player);
-    game.deferredActions.runAll(() => {});
+    TestingUtils.runAllActions(game);
     expect(luna.trackPosition).to.eq(0);
 
     luna.addColony(player);
@@ -129,11 +142,11 @@ describe('Colony', function() {
     luna.trackPosition = MAX_COLONY_TRACK_POSITION;
 
     luna.trade(player, {decreaseTrackAfterTrade: false});
-    game.deferredActions.runAll(() => {});
+    TestingUtils.runAllActions(game);
     expect(luna.trackPosition).to.eq(MAX_COLONY_TRACK_POSITION);
 
     luna.trade(player, {decreaseTrackAfterTrade: true});
-    game.deferredActions.runAll(() => {});
+    TestingUtils.runAllActions(game);
     expect(luna.trackPosition).to.eq(2);
   });
 
@@ -142,7 +155,7 @@ describe('Colony', function() {
     expect(luna.trackPosition).to.eq(MAX_COLONY_TRACK_POSITION);
   });
 
-  it('Shouldn\'t decrease trackPosition below 0', function() {
+  it('Should not decrease trackPosition below 0', function() {
     luna.decreaseTrack(100);
     expect(luna.trackPosition).to.eq(0);
   });
@@ -154,7 +167,7 @@ describe('Colony', function() {
       player.megaCredits = 0;
       luna.trackPosition = i;
       luna.trade(player);
-      game.deferredActions.runAll(() => {});
+      TestingUtils.runAllActions(game);
       expect(player.megaCredits).to.eq(income[i]);
     }
   });
@@ -163,7 +176,7 @@ describe('Colony', function() {
     // No colonies
     luna.trackPosition = 3; // 7 MC
     luna.trade(player);
-    game.deferredActions.runAll(() => {});
+    TestingUtils.runAllActions(game);
     expect(player.megaCredits).to.eq(7);
     expect(player2.megaCredits).to.eq(0);
     expect(player3.megaCredits).to.eq(0);
@@ -174,7 +187,7 @@ describe('Colony', function() {
     luna.trackPosition = 3; // 7 MC
     luna.addColony(player);
     luna.trade(player);
-    game.deferredActions.runAll(() => {});
+    TestingUtils.runAllActions(game);
     expect(player.megaCredits).to.eq(9);
     expect(player2.megaCredits).to.eq(0);
     expect(player3.megaCredits).to.eq(0);
@@ -185,7 +198,7 @@ describe('Colony', function() {
     luna.trackPosition = 3; // 7 MC
     luna.addColony(player2);
     luna.trade(player2);
-    game.deferredActions.runAll(() => {});
+    TestingUtils.runAllActions(game);
     expect(player.megaCredits).to.eq(2);
     expect(player2.megaCredits).to.eq(9);
     expect(player3.megaCredits).to.eq(0);
@@ -197,7 +210,7 @@ describe('Colony', function() {
     luna.trackPosition = 3; // 7 MC
     luna.addColony(player3);
     luna.trade(player4);
-    game.deferredActions.runAll(() => {});
+    TestingUtils.runAllActions(game);
     expect(player.megaCredits).to.eq(2);
     expect(player2.megaCredits).to.eq(2);
     expect(player3.megaCredits).to.eq(2);
@@ -211,7 +224,7 @@ describe('Colony', function() {
     luna.addColony(player);
 
     luna.trade(player2);
-    game.deferredActions.runAll(() => {});
+    TestingUtils.runAllActions(game);
     expect(player.megaCredits).to.eq(6);
     expect(player2.megaCredits).to.eq(7);
     expect(player3.megaCredits).to.eq(0);
@@ -225,7 +238,8 @@ describe('Colony', function() {
     expect(isBuildColonyStandardProjectAvailable(player)).to.be.true;
   });
 
-  it('Shouldn\'t let players build a colony if they already have one', function() {
+  it('Should not let players build a colony if they already have one', function() {
+    game.colonies = [luna]; // Only a single colony in this test to show that building a second colony on a tile isn't possible.
     player.megaCredits = 17;
 
     luna.addColony(player2);
@@ -235,7 +249,8 @@ describe('Colony', function() {
     expect(isBuildColonyStandardProjectAvailable(player)).to.be.false;
   });
 
-  it('Shouldn\'t let players build a colony if colony tile is full', function() {
+  it('Should not let players build a colony if colony tile is full', function() {
+    game.colonies = [luna]; // Only a single colony in this test to show that building on a full tile isn't possible.
     player.megaCredits = 17;
     expect(luna.isColonyFull()).to.be.false;
 
@@ -276,14 +291,27 @@ describe('Colony', function() {
     expect(isTradeWithColonyActionAvailable(player)).to.be.true;
   });
 
-  it('Shouldn\'t let players trade if they have no fleet', function() {
+  it('Player with Helion can trade', function() {
+    expect(isTradeWithColonyActionAvailable(player)).to.be.false;
+
+    player.megaCredits = 7;
+    player.heat = 2;
+    expect(isTradeWithColonyActionAvailable(player)).to.be.false;
+
+    player.canUseHeatAsMegaCredits = true;
+    expect(isTradeWithColonyActionAvailable(player)).to.be.true;
+  });
+
+  it('Should not let players trade if they have no fleet', function() {
     player.titanium = 3;
 
     luna.trade(player);
     expect(isTradeWithColonyActionAvailable(player)).to.be.false;
   });
 
-  it('Shouldn\'t let players trade with colonies that have already been traded with', function() {
+  it('Should not let players trade with colonies that have already been traded with', function() {
+    game.colonies = [luna]; // Only a single colony in this test to show that retrading on a colony isn't possible.
+
     player.titanium = 3;
     player2.titanium = 3;
 
@@ -338,5 +366,40 @@ describe('Colony', function() {
 
     luna.trade(player, {usesTradeFleet: true});
     expect(player.tradesThisGeneration).eq(3);
+  });
+
+  it('serializing and deserializing', () => {
+    const io = new Io();
+    io.isActive = true;
+    io.colonies = ['p1', 'p2', 'p3'];
+    io.trackPosition = 3;
+    io.visitor = 'p4';
+
+    const pallas = new Pallas();
+    pallas.isActive = true;
+
+    const europa = new Europa();
+    europa.isActive = false;
+
+    const json = [io, pallas, europa].map((c) => c.serialize());
+    const colonies = ColonyDeserializer.deserializeAndFilter(json);
+
+    expect(colonies[0].name).eq(ColonyName.IO);
+    expect(colonies[0].isActive).is.true;
+    expect(colonies[0].colonies).deep.eq(['p1', 'p2', 'p3']);
+    expect(colonies[0].trackPosition).eq(3);
+    expect(colonies[0].visitor).eq('p4');
+
+    expect(colonies[1].name).eq(ColonyName.PALLAS);
+    expect(colonies[1].isActive).is.true;
+    expect(colonies[1].colonies).is.empty;
+    expect(colonies[1].trackPosition).eq(1);
+    expect(colonies[1].visitor).is.undefined;
+
+    expect(colonies[2].name).eq(ColonyName.EUROPA);
+    expect(colonies[2].isActive).is.false;
+    expect(colonies[2].colonies).is.empty;
+    expect(colonies[2].trackPosition).eq(1);
+    expect(colonies[2].visitor).is.undefined;
   });
 });

@@ -1,22 +1,22 @@
 import {expect} from 'chai';
 import {Player} from '../src/Player';
 import {DEFAULT_GAME_OPTIONS, Game, GameOptions} from '../src/Game';
-import * as constants from '../src/constants';
+import * as constants from '../src/common/constants';
 import {ISpace} from '../src/boards/ISpace';
-import {Phase} from '../src/Phase';
+import {Phase} from '../src/common/Phase';
 import {IParty} from '../src/turmoil/parties/IParty';
 import {Turmoil} from '../src/turmoil/Turmoil';
 import {LogMessage} from '../src/common/logs/LogMessage';
-import {PolicyId} from '../src/turmoil/Policy';
-import {Log} from '../src/Log';
+import {PolicyId} from '../src/common/turmoil/Types';
+import {Log} from '../src/common/logs/Log';
 import {PlayerInput} from '../src/PlayerInput';
 import {DeferredAction} from '../src/deferredActions/DeferredAction';
 import {Greens} from '../src/turmoil/parties/Greens';
 import {PoliticalAgendas} from '../src/turmoil/PoliticalAgendas';
 import {Reds} from '../src/turmoil/parties/Reds';
 import {IProjectCard} from '../src/cards/IProjectCard';
-import {CardName} from '../src/CardName';
-import {CardType} from '../src/cards/CardType';
+import {CardName} from '../src/common/cards/CardName';
+import {CardType} from '../src/common/cards/CardType';
 
 export class TestingUtils {
   // Returns the oceans created during this operation which may not reflect all oceans.
@@ -30,7 +30,7 @@ export class TestingUtils {
       oceans.push(TestingUtils.addOcean(player));
     }
     return oceans;
-  };
+  }
 
   public static addGreenery(player: Player): ISpace {
     const space = player.game.board.getAvailableSpacesForGreenery(player)[0];
@@ -55,7 +55,7 @@ export class TestingUtils {
       space.player = undefined;
       space.tile = undefined;
     });
-  };
+  }
 
   public static setCustomGameOptions(options: Partial<GameOptions> = {}): GameOptions {
     const defaultOptions = {
@@ -68,13 +68,13 @@ export class TestingUtils {
     };
 
     return Object.assign(defaultOptions, options);
-  };
+  }
 
   public static setRulingPartyAndRulingPolicy(game: Game, turmoil: Turmoil, party: IParty, policyId: PolicyId) {
     turmoil.rulingParty = party;
     turmoil.politicalAgendasData.agendas.set(party.name, {bonusId: party.bonuses[0].id, policyId: policyId});
     game.phase = Phase.ACTION;
-  };
+  }
 
   // Just shortcuts to some often called methods
   // related to the deferred actions queue
@@ -104,8 +104,8 @@ export class TestingUtils {
   }
 
   public static forceGenerationEnd(game: Game) {
-    while (game.deferredActions.pop() !== undefined) {};
-    game.getPlayers().forEach((player) => player.pass());
+    while (game.deferredActions.pop() !== undefined) {}
+    game.getPlayersInGenerationOrder().forEach((player) => player.pass());
     game.playerIsFinishedTakingActions();
   }
 

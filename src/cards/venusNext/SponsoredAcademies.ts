@@ -1,7 +1,7 @@
 import {Tags} from '../../common/cards/Tags';
-import {CardType} from '../CardType';
+import {CardType} from '../../common/cards/CardType';
 import {Player} from '../../Player';
-import {CardName} from '../../CardName';
+import {CardName} from '../../common/cards/CardName';
 import {Priority} from '../../deferredActions/DeferredAction';
 import {DiscardCards} from '../../deferredActions/DiscardCards';
 import {CardRenderer} from '../render/CardRenderer';
@@ -28,7 +28,7 @@ export class SponsoredAcademies extends Card {
         description: 'Discard 1 card from your hand and THEN draw 3 cards. All OPPONENTS draw 1 card.',
       },
     });
-  };
+  }
   public override canPlay(player: Player): boolean {
     return player.cardsInHand.length > 1; // this card and at least another
   }

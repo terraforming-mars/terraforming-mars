@@ -1,7 +1,7 @@
-import {CardName} from '../../CardName';
-import {CardType} from '../CardType';
+import {CardName} from '../../common/cards/CardName';
+import {CardType} from '../../common/cards/CardType';
 import {Tags} from '../../common/cards/Tags';
-import {CorporationCard} from '../corporation/CorporationCard';
+import {ICorporationCard} from '../corporation/ICorporationCard';
 import {CardRenderer} from '../render/CardRenderer';
 import {IActionCard} from '../ICard';
 import {ResourceType} from '../../common/ResourceType';
@@ -12,7 +12,7 @@ import {PlayerInput} from '../../PlayerInput';
 import {Card} from '../Card';
 import {VictoryPoints} from '../ICard';
 
-export class NanotechIndustries extends Card implements IActionCard, CorporationCard {
+export class NanotechIndustries extends Card implements IActionCard, ICorporationCard {
   constructor() {
     super({
       cardType: CardType.CORPORATION,

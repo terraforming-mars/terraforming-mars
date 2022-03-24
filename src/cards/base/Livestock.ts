@@ -3,11 +3,11 @@ import {IProjectCard} from '../IProjectCard';
 import {Tags} from '../../common/cards/Tags';
 import {Card} from '../Card';
 import {VictoryPoints} from '../ICard';
-import {CardType} from '../CardType';
+import {CardType} from '../../common/cards/CardType';
 import {Player} from '../../Player';
 import {Resources} from '../../common/Resources';
 import {ResourceType} from '../../common/ResourceType';
-import {CardName} from '../../CardName';
+import {CardName} from '../../common/cards/CardName';
 import {CardRequirements} from '../CardRequirements';
 import {CardRenderer} from '../render/CardRenderer';
 
@@ -42,21 +42,21 @@ export class Livestock extends Card implements IActionCard, IProjectCard, IResou
     });
   }
 
-    public override resourceCount = 0;
-    public override canPlay(player: Player): boolean {
-      return player.getProduction(Resources.PLANTS) >= 1;
-    }
-    public play(player: Player) {
-      player.addProduction(Resources.PLANTS, -1);
-      player.addProduction(Resources.MEGACREDITS, 2);
-      return undefined;
-    }
-    public canAct(): boolean {
-      return true;
-    }
-    public action(player: Player) {
-      player.addResourceTo(this);
-      return undefined;
-    }
+  public override resourceCount = 0;
+  public override canPlay(player: Player): boolean {
+    return player.getProduction(Resources.PLANTS) >= 1;
+  }
+  public play(player: Player) {
+    player.addProduction(Resources.PLANTS, -1);
+    player.addProduction(Resources.MEGACREDITS, 2);
+    return undefined;
+  }
+  public canAct(): boolean {
+    return true;
+  }
+  public action(player: Player) {
+    player.addResourceTo(this);
+    return undefined;
+  }
 }
 

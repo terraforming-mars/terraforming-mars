@@ -1,10 +1,10 @@
 import {IProjectCard} from '../IProjectCard';
 import {Tags} from '../../common/cards/Tags';
 import {Card} from '../Card';
-import {CardType} from '../CardType';
+import {CardType} from '../../common/cards/CardType';
 import {Player} from '../../Player';
 import {Resources} from '../../common/Resources';
-import {CardName} from '../../CardName';
+import {CardName} from '../../common/cards/CardName';
 import {DecreaseAnyProduction} from '../../deferredActions/DecreaseAnyProduction';
 import {CardRenderer} from '../render/CardRenderer';
 import {all} from '../Options';
@@ -32,7 +32,7 @@ export class HeatTrappers extends Card implements IProjectCard {
   }
 
   public override canPlay(player: Player): boolean {
-    return player.game.someoneHasResourceProduction(Resources.HEAT, 2);
+    return player.game.someoneCanHaveProductionReduced(Resources.HEAT, 2);
   }
 
   public produce(player: Player) {

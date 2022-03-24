@@ -1,4 +1,4 @@
-import {CardName} from '../src/CardName';
+import {CardName} from '../src/common/cards/CardName';
 import {expect} from 'chai';
 import {CardFinder} from '../src/CardFinder';
 

@@ -21,7 +21,7 @@ describe('AirScrappingExpedition', function() {
     expect(selectCard instanceof SelectCard).is.true;
 
     selectCard.cb([selectCard.cards[0]]);
-    expect(player.getResourcesOnCard(corp)).to.eq(3);
+    expect(corp.resourceCount).to.eq(3);
     expect(game.getVenusScaleLevel()).to.eq(2);
   });
 });

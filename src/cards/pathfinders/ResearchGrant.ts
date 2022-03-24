@@ -1,10 +1,10 @@
 import {Player} from '../../Player';
 import {PreludeCard} from '../prelude/PreludeCard';
-import {CardName} from '../../CardName';
+import {CardName} from '../../common/cards/CardName';
 import {CardRenderer} from '../render/CardRenderer';
 import {Resources} from '../../common/Resources';
-import {Tags} from '../Tags';
-import {Units} from '../../Units';
+import {Tags} from '../../common/cards/Tags';
+import {Units} from '../../common/Units';
 
 export class ResearchGrant extends PreludeCard {
   constructor() {

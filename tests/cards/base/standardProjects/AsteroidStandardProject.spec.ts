@@ -6,8 +6,8 @@ import {Game} from '../../../../src/Game';
 import {TestPlayers} from '../../../TestPlayers';
 import {PoliticalAgendas} from '../../../../src/turmoil/PoliticalAgendas';
 import {Reds} from '../../../../src/turmoil/parties/Reds';
-import {Phase} from '../../../../src/Phase';
-import {MAX_OXYGEN_LEVEL} from '../../../../src/constants';
+import {Phase} from '../../../../src/common/Phase';
+import {MAX_OXYGEN_LEVEL} from '../../../../src/common/constants';
 
 describe('AsteroidStandardProject', function() {
   let card: AsteroidStandardProject;

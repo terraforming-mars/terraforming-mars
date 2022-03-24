@@ -3,7 +3,7 @@ import {MartianRails} from '../../../src/cards/base/MartianRails';
 import {Game} from '../../../src/Game';
 import {Player} from '../../../src/Player';
 import {SpaceName} from '../../../src/SpaceName';
-import {SpaceType} from '../../../src/SpaceType';
+import {SpaceType} from '../../../src/common/boards/SpaceType';
 import {TestPlayers} from '../../TestPlayers';
 
 describe('MartianRails', () => {

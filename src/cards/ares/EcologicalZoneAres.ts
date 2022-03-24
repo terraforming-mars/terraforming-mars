@@ -1,4 +1,4 @@
-import {CardName} from '../../CardName';
+import {CardName} from '../../common/cards/CardName';
 import {EcologicalZone} from '../base/EcologicalZone';
 import {SpaceBonus} from '../../common/boards/SpaceBonus';
 import {TileType} from '../../common/TileType';
@@ -18,7 +18,7 @@ export class EcologicalZoneAres extends EcologicalZone {
         },
         cardNumber: 'A08',
         renderData: CardRenderer.builder((b) => {
-          b.effect('When you play an animal or plant tag /including these/, add an animal to this card.', (eb) => {
+          b.effect('When you play an animal or plant tag INCLUDING THESE, add an animal to this card.', (eb) => {
             eb.animals(1, {played}).slash().plants(1, {played}).startEffect;
             eb.animals(1).tile(TileType.ECOLOGICAL_ZONE, false, true);
           }).br;

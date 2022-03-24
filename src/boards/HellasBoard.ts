@@ -3,8 +3,8 @@ import {SpaceName} from '../SpaceName';
 import {Board} from './Board';
 import {Player} from '../Player';
 import {ISpace} from './ISpace';
-import {HELLAS_BONUS_OCEAN_COST} from '../constants';
-import {SpaceType} from '../SpaceType';
+import {HELLAS_BONUS_OCEAN_COST} from '../common/constants';
+import {SpaceType} from '../common/boards/SpaceType';
 import {BoardBuilder} from './BoardBuilder';
 import {SerializedBoard} from './SerializedBoard';
 import {Random} from '../Random';
@@ -53,7 +53,7 @@ export class HellasBoard extends Board {
   }
 
   private filterHellas(player: Player, spaces: Array<ISpace>) {
-    return player.canAfford(HELLAS_BONUS_OCEAN_COST) ? spaces : spaces.filter((space) => space.id !== SpaceName.HELLAS_OCEAN_TILE);
+    return player.canAfford(HELLAS_BONUS_OCEAN_COST, {tr: {oceans: 1}}) ? spaces : spaces.filter((space) => space.id !== SpaceName.HELLAS_OCEAN_TILE);
   }
 
   public override getSpaces(spaceType: SpaceType, player: Player): Array<ISpace> {

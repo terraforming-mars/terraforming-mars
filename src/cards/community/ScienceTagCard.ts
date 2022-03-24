@@ -1,8 +1,8 @@
 import {IProjectCard} from '../IProjectCard';
-import {Tags} from '../Tags';
-import {CardType} from '../CardType';
-import {CardName} from '../../CardName';
-import {ICardMetadata} from '../ICardMetadata';
+import {Tags} from '../../common/cards/Tags';
+import {CardType} from '../../common/cards/CardType';
+import {CardName} from '../../common/cards/CardName';
+import {ICardMetadata} from '../../common/cards/ICardMetadata';
 
 export class ScienceTagCard implements IProjectCard {
   public get cost() {

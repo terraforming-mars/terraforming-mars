@@ -1,11 +1,11 @@
 <script lang="ts">
 import Vue from 'vue';
 import Button from '@/client/components/common/Button.vue';
-import {LoadGameFormModel} from '@/models/LoadGameFormModel';
-import {SimpleGameModel} from '@/models/SimpleGameModel';
+import {LoadGameFormModel} from '@/common/models/LoadGameFormModel';
+import {SimpleGameModel} from '@/common/models/SimpleGameModel';
 import {mainAppSettings} from '@/client/components/App';
 
-import * as constants from '@/constants';
+import * as constants from '@/common/constants';
 
 export default Vue.extend({
   name: 'LoadGameForm',

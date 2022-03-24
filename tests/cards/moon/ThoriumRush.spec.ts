@@ -6,7 +6,7 @@ import {ThoriumRush} from '../../../src/cards/moon/ThoriumRush';
 import {expect} from 'chai';
 import {MoonExpansion} from '../../../src/moon/MoonExpansion';
 import {IMoonData} from '../../../src/moon/IMoonData';
-import {Phase} from '../../../src/Phase';
+import {Phase} from '../../../src/common/Phase';
 import {Greens} from '../../../src/turmoil/parties/Greens';
 import {PoliticalAgendas} from '../../../src/turmoil/PoliticalAgendas';
 import {Reds} from '../../../src/turmoil/parties/Reds';

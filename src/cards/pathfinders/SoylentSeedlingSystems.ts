@@ -1,17 +1,17 @@
 import {Player} from '../../Player';
-import {CardType} from '../CardType';
-import {CardName} from '../../CardName';
+import {CardType} from '../../common/cards/CardType';
+import {CardName} from '../../common/cards/CardName';
 import {CardRenderer} from '../render/CardRenderer';
 import {Card} from '../Card';
-import {Tags} from '../Tags';
-import {Size} from '../render/Size';
+import {Tags} from '../../common/cards/Tags';
+import {Size} from '../../common/cards/render/Size';
 import {played} from '../Options';
-import {CorporationCard} from '../corporation/CorporationCard';
+import {ICorporationCard} from '../corporation/ICorporationCard';
 import {ResourceType} from '../../common/ResourceType';
 import {ISpace} from '../../boards/ISpace';
 import {Board} from '../../boards/Board';
 
-export class SoylentSeedlingSystems extends Card implements CorporationCard {
+export class SoylentSeedlingSystems extends Card implements ICorporationCard {
   constructor() {
     super({
       cardType: CardType.CORPORATION,

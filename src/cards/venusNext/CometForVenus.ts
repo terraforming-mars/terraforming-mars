@@ -1,9 +1,9 @@
 import {Tags} from '../../common/cards/Tags';
-import {CardType} from '../CardType';
+import {CardType} from '../../common/cards/CardType';
 import {Player} from '../../Player';
 import {SelectPlayer} from '../../inputs/SelectPlayer';
 import {Resources} from '../../common/Resources';
-import {CardName} from '../../CardName';
+import {CardName} from '../../common/cards/CardName';
 import {CardRenderer} from '../render/CardRenderer';
 import {Card} from '../Card';
 import {OrOptions} from '../../inputs/OrOptions';
@@ -27,7 +27,7 @@ export class CometForVenus extends Card {
         }),
       },
     });
-  };
+  }
 
   public play(player: Player) {
     const venusTagPlayers = player.game.getPlayers().filter((otherPlayer) => otherPlayer.id !== player.id && otherPlayer.getTagCount(Tags.VENUS, 'raw') > 0);

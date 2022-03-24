@@ -1,8 +1,8 @@
 import {IProjectCard} from '../IProjectCard';
-import {Tags} from '../Tags';
-import {CardType} from '../CardType';
+import {Tags} from '../../common/cards/Tags';
+import {CardType} from '../../common/cards/CardType';
 import {Player} from '../../Player';
-import {CardName} from '../../CardName';
+import {CardName} from '../../common/cards/CardName';
 import {Resources} from '../../common/Resources';
 import {ResourceType} from '../../common/ResourceType';
 import {IResourceCard} from '../ICard';
@@ -49,7 +49,7 @@ export class SubZeroSaltFish extends Card implements IProjectCard, IResourceCard
   }
 
   public override canPlay(player: Player): boolean {
-    return player.game.someoneHasResourceProduction(Resources.PLANTS, 1);
+    return player.game.someoneCanHaveProductionReduced(Resources.PLANTS, 1);
   }
 
   public action(player: Player) {

@@ -1,4 +1,4 @@
-import {CardName} from '../../CardName';
+import {CardName} from '../../common/cards/CardName';
 import {SpaceBonus} from '../../common/boards/SpaceBonus';
 import {MoholeArea} from '../base/MoholeArea';
 import {TileType} from '../../common/TileType';

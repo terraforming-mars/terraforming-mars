@@ -1,6 +1,6 @@
-import {CardName} from '../../CardName';
+import {CardName} from '../../common/cards/CardName';
 import {Player} from '../../Player';
-import {CardType} from '../CardType';
+import {CardType} from '../../common/cards/CardType';
 import {IProjectCard} from '../IProjectCard';
 import {Tags} from '../../common/cards/Tags';
 import {CardRenderer} from '../render/CardRenderer';
@@ -10,7 +10,7 @@ import {TileType} from '../../common/TileType';
 import {SelectSpace} from '../../inputs/SelectSpace';
 import {Card} from '../Card';
 import {CardRequirements} from '../CardRequirements';
-import {Units} from '../../Units';
+import {Units} from '../../common/Units';
 
 export class LunarMineUrbanization extends Card implements IProjectCard {
   constructor() {
@@ -36,7 +36,7 @@ export class LunarMineUrbanization extends Card implements IProjectCard {
         }),
       },
     });
-  };
+  }
 
   public play(player: Player) {
     player.addProduction(Resources.MEGACREDITS, 1);

@@ -1,4 +1,4 @@
-import {CardType} from './CardType';
+import {CardType} from '../common/cards/CardType';
 import {Player} from '../Player';
 import {IActionCard, ICard, TRSource} from './ICard';
 import {OrOptions} from '../inputs/OrOptions';
@@ -10,12 +10,12 @@ import {SelectPlayer} from '../inputs/SelectPlayer';
 import {AndOptions} from '../inputs/AndOptions';
 import {SelectCard} from '../inputs/SelectCard';
 import {SelectSpace} from '../inputs/SelectSpace';
-import {ICardMetadata} from './ICardMetadata';
-import {CardName} from '../CardName';
+import {ICardMetadata} from '../common/cards/ICardMetadata';
+import {CardName} from '../common/cards/CardName';
 import {SelectHowToPayDeferred} from '../deferredActions/SelectHowToPayDeferred';
 import {Card} from './Card';
 import {MoonExpansion} from '../moon/MoonExpansion';
-import {Units} from '../Units';
+import {Units} from '../common/Units';
 
 interface StaticStandardProjectCardProperties {
   name: CardName,
@@ -76,7 +76,7 @@ export abstract class StandardProjectCard extends Card implements IActionCard, I
 
   private suffixFreeCardName(cardName: CardName): string {
     return cardName.split(':')[0];
-  };
+  }
 
   public action(player: Player): OrOptions | SelectOption | AndOptions | SelectAmount | SelectCard<ICard> | SelectCard<IProjectCard> | SelectHowToPay | SelectPlayer | SelectSpace | undefined {
     const canPayWith = this.canPayWith(player);

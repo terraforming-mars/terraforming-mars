@@ -3,9 +3,9 @@ import {MartianRepository} from '../../../src/cards/pathfinders/MartianRepositor
 import {Game} from '../../../src/Game';
 import {TestPlayer} from '../../TestPlayer';
 import {TestPlayers} from '../../TestPlayers';
-import {Units} from '../../../src/Units';
+import {Units} from '../../../src/common/Units';
 import {IProjectCard} from '../../../src/cards/IProjectCard';
-import {Tags} from '../../../src/cards/Tags';
+import {Tags} from '../../../src/common/cards/Tags';
 
 describe('MartianRepository', function() {
   let card: MartianRepository;

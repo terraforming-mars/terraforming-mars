@@ -49,7 +49,7 @@ describe('LocalHeatTrapping', () => {
     expect(player.heat).to.eq(0);
 
     orOptions.options[1].cb();
-    expect(player.getResourcesOnCard(pets)).to.eq(2);
+    expect(pets.resourceCount).to.eq(2);
   });
 
   it('Should play - multiple animal targets', () => {
@@ -61,7 +61,7 @@ describe('LocalHeatTrapping', () => {
     const orOptions = card.play(player) as OrOptions;
     expect(player.heat).to.eq(0);
     orOptions.options[1].cb([fish]);
-    expect(player.getResourcesOnCard(fish)).to.eq(2);
+    expect(fish.resourceCount).to.eq(2);
   });
 
   it('Cannot play as Helion if not enough heat left after paying for card', () => {

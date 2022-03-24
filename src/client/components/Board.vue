@@ -200,12 +200,12 @@
 
 <script lang="ts">
 import Vue from 'vue';
-import * as constants from '@/constants';
+import * as constants from '@/common/constants';
 import BoardSpace from '@/client/components/BoardSpace.vue';
-import {IAresData} from '@/ares/IAresData';
-import {SpaceModel} from '@/models/SpaceModel';
-import {SpaceType} from '@/SpaceType';
-import {SpaceId} from '@/boards/ISpace';
+import {IAresData} from '@/common/ares/IAresData';
+import {SpaceModel} from '@/common/models/SpaceModel';
+import {SpaceType} from '@/common/boards/SpaceType';
+import {SpaceId} from '@/common/Types';
 
 class GlobalParamLevel {
   constructor(public value: number, public isActive: boolean, public strValue: string) {
@@ -279,7 +279,7 @@ export default Vue.extend({
           return space;
         }
       }
-      throw 'Board space not found by id \'' + spaceId + '\'';
+      throw new Error('Board space not found by id \'' + spaceId + '\'');
     },
     getValuesForParameter(targetParameter: string): Array<GlobalParamLevel> {
       const values: Array<GlobalParamLevel> = [];
@@ -309,7 +309,7 @@ export default Vue.extend({
         curValue = this.venusScaleLevel;
         break;
       default:
-        throw 'Wrong parameter to get values from';
+        throw new Error('Wrong parameter to get values from: ' + targetParameter);
       }
 
       for (let value: number = endValue; value >= startValue; value -= step) {

@@ -1,9 +1,9 @@
 import {IProjectCard} from '../IProjectCard';
-import {Tags} from '../Tags';
+import {Tags} from '../../common/cards/Tags';
 import {Player} from '../../Player';
-import {CardType} from '../CardType';
+import {CardType} from '../../common/cards/CardType';
 import {Resources} from '../../common/Resources';
-import {CardName} from '../../CardName';
+import {CardName} from '../../common/cards/CardName';
 import {SelectSpace} from '../../inputs/SelectSpace';
 import {TileType} from '../../common/TileType';
 import {ISpace} from '../../boards/ISpace';
@@ -11,7 +11,7 @@ import {Board} from '../../boards/Board';
 import {CardRequirements} from '../CardRequirements';
 import {CardRenderer} from '../render/CardRenderer';
 import {Card} from '../Card';
-import {Units} from '../../Units';
+import {Units} from '../../common/Units';
 
 export class GreatDamPromo extends Card implements IProjectCard {
   constructor() {

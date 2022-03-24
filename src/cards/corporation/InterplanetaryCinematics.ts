@@ -1,14 +1,14 @@
 import {Card} from '../Card';
-import {CorporationCard} from './CorporationCard';
-import {Tags} from '../Tags';
+import {ICorporationCard} from './ICorporationCard';
+import {Tags} from '../../common/cards/Tags';
 import {IProjectCard} from '../IProjectCard';
 import {Player} from '../../Player';
-import {CardType} from '../CardType';
-import {CardName} from '../../CardName';
+import {CardType} from '../../common/cards/CardType';
+import {CardName} from '../../common/cards/CardName';
 import {CardRenderer} from '../render/CardRenderer';
 import {digit, played} from '../Options';
 
-export class InterplanetaryCinematics extends Card implements CorporationCard {
+export class InterplanetaryCinematics extends Card implements ICorporationCard {
   constructor() {
     super({
       cardType: CardType.CORPORATION,

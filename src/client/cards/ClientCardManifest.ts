@@ -1,9 +1,9 @@
-import {CardName} from '@/CardName';
+import {CardName} from '@/common/cards/CardName';
 import {ALL_CARD_MANIFESTS} from '@/cards/AllCards';
-import {CardType} from '@/cards/CardType';
+import {CardType} from '@/common/cards/CardType';
 import {ICard} from '@/cards/ICard';
 import {ICardFactory} from '@/cards/ICardFactory';
-import {GameModule} from '@/GameModule';
+import {GameModule} from '@/common/cards/GameModule';
 
 export type CardAndModule = {card: ICard, module: GameModule};
 const cards: Map<CardName, CardAndModule> = new Map();

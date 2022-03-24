@@ -1,8 +1,8 @@
 import {IParty} from './IParty';
 import {Party} from './Party';
-import {PartyName} from './PartyName';
+import {PartyName} from '../../common/turmoil/PartyName';
 import {Game} from '../../Game';
-import {Tags} from '../../cards/Tags';
+import {Tags} from '../../common/cards/Tags';
 import {Resources} from '../../common/Resources';
 import {Bonus} from '../Bonus';
 import {SelectHowToPayDeferred} from '../../deferredActions/SelectHowToPayDeferred';
@@ -26,7 +26,7 @@ class ScientistsBonus01 implements Bonus {
   }
 
   grant(game: Game) {
-    game.getPlayers().forEach((player) => {
+    game.getPlayersInGenerationOrder().forEach((player) => {
       player.addResource(Resources.MEGACREDITS, this.getScore(player));
     });
   }
@@ -42,7 +42,7 @@ class ScientistsBonus02 implements Bonus {
   }
 
   grant(game: Game) {
-    game.getPlayers().forEach((player) => {
+    game.getPlayersInGenerationOrder().forEach((player) => {
       player.addResource(Resources.MEGACREDITS, this.getScore(player));
     });
   }
@@ -94,7 +94,7 @@ class ScientistsPolicy04 implements Policy {
   isDefault = false;
 
   apply(game: Game) {
-    game.getPlayers().forEach((player) => {
+    game.getPlayersInGenerationOrder().forEach((player) => {
       player.hasTurmoilScienceTagBonus = true;
     });
   }

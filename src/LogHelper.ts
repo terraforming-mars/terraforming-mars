@@ -1,10 +1,10 @@
-import {CardName} from './CardName';
+import {CardName} from './common/cards/CardName';
 import {Game} from './Game';
 import {Player} from './Player';
 import {ICard} from './cards/ICard';
 import {ISpace} from './boards/ISpace';
 import {TileType} from './common/TileType';
-import {Colony} from './colonies/Colony';
+import {IColony} from './colonies/IColony';
 
 export class LogHelper {
   static logAddResource(player: Player, card: ICard, qty: number = 1): void {
@@ -47,7 +47,7 @@ export class LogHelper {
       b.player(player).string(action).string(description).number(row).number(position));
   }
 
-  static logColonyTrackIncrease(player: Player, colony: Colony, steps: number = 1) {
+  static logColonyTrackIncrease(player: Player, colony: IColony, steps: number = 1) {
     player.game.log('${0} increased ${1} colony track ${2} step(s)', (b) =>
       b.player(player).colony(colony).number(steps));
   }

@@ -1,7 +1,7 @@
 import {IProjectCard} from '../IProjectCard';
-import {CardType} from '../CardType';
+import {CardType} from '../../common/cards/CardType';
 import {Player} from '../../Player';
-import {CardName} from '../../CardName';
+import {CardName} from '../../common/cards/CardName';
 import {ResourceType} from '../../common/ResourceType';
 import {OrOptions} from '../../inputs/OrOptions';
 import {SelectOption} from '../../inputs/SelectOption';
@@ -9,7 +9,7 @@ import {IResourceCard} from '../ICard';
 import {Resources} from '../../common/Resources';
 import {AddResourcesToCard} from '../../deferredActions/AddResourcesToCard';
 import {Card} from '../Card';
-import {Size} from '../render/Size';
+import {Size} from '../../common/cards/render/Size';
 import {CardRenderer} from '../render/CardRenderer';
 import {digit} from '../Options';
 

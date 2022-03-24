@@ -54,9 +54,9 @@
 <script lang="ts">
 import Vue from 'vue';
 
-import {PlayerInputModel} from '@/models/PlayerInputModel';
-import {IPayProductionModel} from '@/models/IPayProductionUnitsModel';
-import {Units} from '@/Units';
+import {PlayerInputModel} from '@/common/models/PlayerInputModel';
+import {IPayProductionModel} from '@/common/models/IPayProductionUnitsModel';
+import {Units} from '@/common/Units';
 
 interface SelectProductionToLoseModel {
     megacredits: number;

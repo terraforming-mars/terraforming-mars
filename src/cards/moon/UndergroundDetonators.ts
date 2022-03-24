@@ -1,6 +1,6 @@
-import {CardName} from '../../CardName';
+import {CardName} from '../../common/cards/CardName';
 import {Player} from '../../Player';
-import {CardType} from '../CardType';
+import {CardType} from '../../common/cards/CardType';
 import {MoonExpansion} from '../../moon/MoonExpansion';
 import {CardRenderer} from '../render/CardRenderer';
 import {Card} from '../Card';
@@ -23,7 +23,7 @@ export class UndergroundDetonators extends Card {
         }),
       },
     });
-  };
+  }
 
   public play(player: Player) {
     player.steel += 1;

@@ -1,23 +1,30 @@
 <template>
-      <div v-if="isObject(victoryPoints) && !this.victoryPoints.targetOneOrMore" :class="getClasses()">
-        <div>{{ this.victoryPoints.getPointsHtml() }}</div><CardRenderItemComponent v-if="this.victoryPoints.item !== undefined" :item="this.victoryPoints.item" /></div>
-      <div v-else-if="isObject(victoryPoints) && this.victoryPoints.targetOneOrMore" :class="getClasses()">
-        <div class="card-points-item-first"><CardRenderItemComponent v-if="this.victoryPoints.item !== undefined" :item="this.victoryPoints.item" />*:3</div>
+  <div v-if="isObject(victoryPoints)" :class="getClasses()">
+    <template v-if="!victoryPoints.targetOneOrMore">
+      <div>{{ points() }}</div>
+      <CardRenderItemComponent v-if="victoryPoints.item !== undefined" :item="victoryPoints.item" data-test="item"/>
+    </template>
+    <template v-else>
+      <div class="card-points-item-first">
+        <CardRenderItemComponent v-if="victoryPoints.item !== undefined" :item="victoryPoints.item" data-test="item"/>
+        *:3
       </div>
-      <div v-else :class="getClasses()">{{ this.victoryPoints }}</div>
+    </template>
+  </div>
+  <div v-else :class="getClasses()">{{ victoryPoints }}</div>
 </template>
 
 <script lang="ts">
 
 import Vue from 'vue';
-import {CardRenderDynamicVictoryPoints} from '@/cards/render/CardRenderDynamicVictoryPoints';
+import {ICardRenderDynamicVictoryPoints} from '@/common/cards/render/ICardRenderDynamicVictoryPoints';
 import CardRenderItemComponent from '@/client/components/card/CardRenderItemComponent.vue';
 
 export default Vue.extend({
   name: 'CardVictoryPoints',
   props: {
     victoryPoints: {
-      type: [Number, Object as () => CardRenderDynamicVictoryPoints],
+      type: [Number, Object as () => ICardRenderDynamicVictoryPoints],
       required: true,
     },
   },
@@ -40,8 +47,16 @@ export default Vue.extend({
       }
       return classes.join(' ');
     },
-    isObject(item: any): item is CardRenderDynamicVictoryPoints {
-      return item instanceof CardRenderDynamicVictoryPoints;
+    isObject(item: any): item is ICardRenderDynamicVictoryPoints {
+      return item.points !== undefined;
+    },
+    points(): string {
+      if (!this.isObject(this.victoryPoints)) return '';
+      const vps = this.victoryPoints;
+      if (vps.item === undefined && vps.points === 0 && vps.target === 0) return '?';
+      if (vps.item === undefined) return `${vps.points}`;
+      if (vps.target === vps.points || vps.target === 1) return `${vps.points}/`;
+      return `${vps.points}/${vps.target}`;
     },
   },
 });

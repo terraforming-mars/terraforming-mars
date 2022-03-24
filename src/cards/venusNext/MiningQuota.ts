@@ -1,12 +1,12 @@
 import {Tags} from '../../common/cards/Tags';
-import {CardType} from '../CardType';
+import {CardType} from '../../common/cards/CardType';
 import {Player} from '../../Player';
 import {Resources} from '../../common/Resources';
-import {CardName} from '../../CardName';
+import {CardName} from '../../common/cards/CardName';
 import {CardRequirements} from '../CardRequirements';
 import {CardRenderer} from '../render/CardRenderer';
 import {Card} from '../Card';
-import {Units} from '../../Units';
+import {Units} from '../../common/Units';
 
 export class MiningQuota extends Card {
   constructor() {
@@ -26,7 +26,7 @@ export class MiningQuota extends Card {
         description: 'Requires Venus, Earth and Jovian tags. Increase your steel production 2 steps.',
       },
     });
-  };
+  }
 
   public play(player: Player) {
     player.addProduction(Resources.STEEL, 2);

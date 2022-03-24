@@ -1,19 +1,19 @@
 <template>
-        <div :class="getCardClasses(card)">
-            <div class="card-content-wrapper" v-i18n>
-                <div v-if="!isStandardProject()" class="card-cost-and-tags">
-                    <CardCost :amount="getCost()" :newCost="getReducedCost()" />
-                    <CardTags :tags="getTags()" />
-                </div>
-                <CardTitle :title="card.name" :type="getCardType()"/>
-                <CardContent v-if="getCardMetadata() !== undefined" :metadata="getCardMetadata()" :requirements="getCardRequirements()" :isCorporation="isCorporationCard()"/>
-                <CardNumber v-if="getCardMetadata() !== undefined" :number="getCardNumber()"/>
-            </div>
-            <CardExpansion :expansion="getCardExpansion()" :isCorporation="isCorporationCard()"/>
-            <CardResourceCounter v-if="hasResourceType" :amount="getResourceAmount(card)" :type="resourceType" />
-            <CardExtraContent :card="card" />
-            <slot/>
-        </div>
+  <div :class="getCardClasses(card)">
+      <div class="card-content-wrapper" v-i18n>
+          <div v-if="!isStandardProject()" class="card-cost-and-tags">
+              <CardCost :amount="getCost()" :newCost="getReducedCost()" />
+              <CardTags :tags="getTags()" />
+          </div>
+          <CardTitle :title="card.name" :type="getCardType()"/>
+          <CardContent v-if="getCardMetadata() !== undefined" :metadata="getCardMetadata()" :requirements="getCardRequirements()" :isCorporation="isCorporationCard()"/>
+          <CardNumber v-if="getCardMetadata() !== undefined" :number="getCardNumber()"/>
+      </div>
+      <CardExpansion :expansion="getCardExpansion()" :isCorporation="isCorporationCard()"/>
+      <CardResourceCounter v-if="hasResourceType" :amount="getResourceAmount(card)" :type="resourceType" />
+      <CardExtraContent :card="card" />
+      <slot/>
+  </div>
 </template>
 
 <script lang="ts">
@@ -21,7 +21,7 @@
 import Vue from 'vue';
 
 import {ICard} from '@/cards/ICard';
-import {CardModel} from '@/models/CardModel';
+import {CardModel} from '@/common/models/CardModel';
 import CardTitle from './CardTitle.vue';
 import CardNumber from './CardNumber.vue';
 import CardResourceCounter from './CardResourceCounter.vue';
@@ -29,12 +29,12 @@ import CardCost from './CardCost.vue';
 import CardExtraContent from './CardExtraContent.vue';
 import CardExpansion from './CardExpansion.vue';
 import CardTags from './CardTags.vue';
-import {CardType} from '@/cards/CardType';
+import {CardType} from '@/common/cards/CardType';
 import CardContent from './CardContent.vue';
-import {ICardMetadata} from '@/cards/ICardMetadata';
-import {Tags} from '@/cards/Tags';
-import {CardRequirements} from '@/cards/CardRequirements';
-import {PreferencesManager} from '@/client/utils/PreferencesManager';
+import {ICardMetadata} from '@/common/cards/ICardMetadata';
+import {ICardRequirements} from '@/common/cards/ICardRequirements';
+import {Tags} from '@/common/cards/Tags';
+import {getPreferences} from '@/client/utils/PreferencesManager';
 import {ResourceType} from '@/common/ResourceType';
 import {getCard} from '@/client/cards/ClientCardManifest';
 
@@ -121,7 +121,7 @@ export default Vue.extend({
       if (this.isStandardProject()) {
         classes.push('card-standard-project');
       }
-      const learnerModeOff = PreferencesManager.load('learner_mode') === '0';
+      const learnerModeOff = !getPreferences().learner_mode;
       if (learnerModeOff && this.isStandardProject() && card.isDisabled) {
         classes.push('card-hide');
       }
@@ -130,7 +130,7 @@ export default Vue.extend({
     getCardMetadata(): ICardMetadata | undefined {
       return this.getCard()?.metadata;
     },
-    getCardRequirements(): CardRequirements | undefined {
+    getCardRequirements(): ICardRequirements | undefined {
       return this.getCard()?.requirements;
     },
     getResourceAmount(card: CardModel): number {

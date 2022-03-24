@@ -1,6 +1,6 @@
-import {CardModel} from '@/models/CardModel';
-import {CardType} from '@/cards/CardType';
-import {PublicPlayerModel} from '@/models/PlayerModel';
+import {CardModel} from '@/common/models/CardModel';
+import {CardType} from '@/common/cards/CardType';
+import {PublicPlayerModel} from '@/common/models/PlayerModel';
 import {sortActiveCards} from '@/client/utils/ActiveCardsSortingOrder';
 
 // Common code for player layouts

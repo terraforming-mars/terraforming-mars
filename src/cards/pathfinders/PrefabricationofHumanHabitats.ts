@@ -1,13 +1,13 @@
 import {IProjectCard} from '../IProjectCard';
 import {Player} from '../../Player';
 import {Card} from '../Card';
-import {CardType} from '../CardType';
-import {CardName} from '../../CardName';
+import {CardType} from '../../common/cards/CardType';
+import {CardName} from '../../common/cards/CardName';
 import {CardRenderer} from '../render/CardRenderer';
 import {Resources} from '../../common/Resources';
 import {CardRequirements} from '../CardRequirements';
-import {Tags} from '../Tags';
-import {Size} from '../render/Size';
+import {Tags} from '../../common/cards/Tags';
+import {Size} from '../../common/cards/render/Size';
 import {played} from '../Options';
 
 export class PrefabricationofHumanHabitats extends Card implements IProjectCard {

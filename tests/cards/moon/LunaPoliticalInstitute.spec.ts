@@ -5,8 +5,9 @@ import {TestPlayers} from '../../TestPlayers';
 import {LunaPoliticalInstitute} from '../../../src/cards/moon/LunaPoliticalInstitute';
 import {expect} from 'chai';
 import {SelectPartyToSendDelegate} from '../../../src/inputs/SelectPartyToSendDelegate';
-import {PartyName} from '../../../src/turmoil/parties/PartyName';
+import {PartyName} from '../../../src/common/turmoil/PartyName';
 import {Turmoil} from '../../../src/turmoil/Turmoil';
+import {Tags} from '../../../src/common/cards/Tags';
 
 const MOON_OPTIONS = TestingUtils.setCustomGameOptions({moonExpansion: true});
 
@@ -27,8 +28,13 @@ describe('LunaPoliticalInstitute', () => {
     player.cardsInHand = [card];
     player.megaCredits = card.cost;
 
-    // TODO(kberg): Add test when M70 is merged.
     expect(player.getPlayableCards()).does.not.include(card);
+
+    player.playedCards = [TestingUtils.fakeCard({tags: [Tags.MOON]})];
+    expect(player.getPlayableCards()).does.not.include(card);
+
+    player.playedCards = [TestingUtils.fakeCard({tags: [Tags.MOON, Tags.MOON]})];
+    expect(player.getPlayableCards()).includes(card);
   });
 
   it('can act', () => {

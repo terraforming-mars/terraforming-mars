@@ -9,8 +9,8 @@ import {SearchForLife} from '../../../src/cards/base/SearchForLife';
 import {ColonizerTrainingCamp} from '../../../src/cards/base/ColonizerTrainingCamp';
 import {Unity} from '../../../src/turmoil/parties/Unity';
 import {Scientists} from '../../../src/turmoil/parties/Scientists';
-import {Tags} from '../../../src/cards/Tags';
-import {CardName} from '../../../src/CardName';
+import {Tags} from '../../../src/common/cards/Tags';
+import {CardName} from '../../../src/common/cards/CardName';
 
 describe('PublicSponsoredGrant', function() {
   let card: PublicSponsoredGrant;

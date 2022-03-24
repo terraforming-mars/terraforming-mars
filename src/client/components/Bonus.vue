@@ -39,6 +39,8 @@ export default Vue.extend({
         ret += 'energy-production';
       } else if (bonus === SpaceBonus.SCIENCE) {
         ret += 'science';
+      } else if (bonus === SpaceBonus.TEMPERATURE) {
+        ret += 'bonustemperature';
       }
       ret += ' board-space-bonus-pos--' + idx.toString();
       return ret;

@@ -1,14 +1,14 @@
-import {CardName} from '../../CardName';
+import {CardName} from '../../common/cards/CardName';
 import {Player} from '../../Player';
-import {CardType} from '../CardType';
+import {CardType} from '../../common/cards/CardType';
 import {IProjectCard} from '../IProjectCard';
 import {Tags} from '../../common/cards/Tags';
 import {CardRenderer} from '../render/CardRenderer';
 import {MoonExpansion} from '../../moon/MoonExpansion';
-import {SpaceType} from '../../SpaceType';
+import {SpaceType} from '../../common/boards/SpaceType';
 import {Resources} from '../../common/Resources';
-import {Units} from '../../Units';
-import {Size} from '../render/Size';
+import {Units} from '../../common/Units';
+import {Size} from '../../common/cards/render/Size';
 import {Card} from '../Card';
 import {all} from '../Options';
 
@@ -34,7 +34,7 @@ export class SmallDutyRovers extends Card implements IProjectCard {
         }),
       },
     });
-  };
+  }
 
   public play(player: Player) {
     player.deductUnits(this.reserveUnits);

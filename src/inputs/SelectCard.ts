@@ -2,12 +2,12 @@
 import {ICard} from '../cards/ICard';
 import {Message} from '../common/logs/Message';
 import {PlayerInput} from '../PlayerInput';
-import {PlayerInputTypes} from '../PlayerInputTypes';
+import {PlayerInputTypes} from '../common/input/PlayerInputTypes';
 
 export class SelectCard<T extends ICard> implements PlayerInput {
-    public inputType: PlayerInputTypes = PlayerInputTypes.SELECT_CARD;
+  public inputType: PlayerInputTypes = PlayerInputTypes.SELECT_CARD;
 
-    constructor(
+  constructor(
         public title: string | Message,
         public buttonLabel: string = 'Save',
         public cards: Array<T>,
@@ -18,7 +18,7 @@ export class SelectCard<T extends ICard> implements PlayerInput {
         public enabled?: Array<boolean>, // If provided, then the cards with false in `enabled` are not selectable and grayed out
         public played: boolean = true, // If true, then shows resources on those cards. If false than shows discounted price.
         public showOwner?: boolean,
-    ) {
-      this.buttonLabel = buttonLabel;
-    }
+  ) {
+    this.buttonLabel = buttonLabel;
+  }
 }

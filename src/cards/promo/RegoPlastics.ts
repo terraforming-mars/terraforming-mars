@@ -1,11 +1,11 @@
 import {IProjectCard} from '../IProjectCard';
 import {Card} from '../Card';
-import {CardName} from '../../CardName';
-import {CardType} from '../CardType';
-import {Tags} from '../Tags';
+import {CardName} from '../../common/cards/CardName';
+import {CardType} from '../../common/cards/CardType';
+import {Tags} from '../../common/cards/Tags';
 import {Player} from '../../Player';
 import {CardRenderer} from '../render/CardRenderer';
-import {Size} from '../render/Size';
+import {Size} from '../../common/cards/render/Size';
 
 export class RegoPlastics extends Card implements IProjectCard {
   constructor() {

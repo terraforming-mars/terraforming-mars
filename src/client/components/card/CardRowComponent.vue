@@ -1,22 +1,30 @@
 <template>
-        <CardRenderItemComponent v-if="isItem()" :item="componentData"/>
-        <CardRenderSymbolComponent v-else-if="isSymbol()" :item="componentData" />
-        <CardProductionBoxComponent v-else-if="isProduction(componentData)" :rows="componentData.rows" />
-        <CardRenderEffectBoxComponent v-else-if="isEffect()" :effectData="componentData" />
-        <CardRenderTileComponent v-else-if="isTile()" :item="componentData" />
-        <CardDescription v-else-if="isDescription()" :item="componentData" />
-        <CardRenderCorpBoxComponent v-else-if="isCorpBox(componentData)" :rows="componentData.rows" :label="corpBoxLabel()" />
-        <div v-else>n/a</div>
+  <CardRenderItemComponent v-if="isItem(componentData)" :item="componentData"/>
+  <CardRenderSymbolComponent v-else-if="isSymbol(componentData)" :item="componentData" />
+  <CardProductionBoxComponent v-else-if="isProduction(componentData)" :rows="componentData.rows" />
+  <CardRenderEffectBoxComponent v-else-if="isEffect(componentData)" :effectData="componentData" />
+  <CardRenderTileComponent v-else-if="isTile(componentData)" :item="componentData" />
+  <CardDescription v-else-if="isDescription(componentData)" :item="componentData" />
+  <CardRenderCorpBoxComponent v-else-if="isCorpBox(componentData)" :rows="componentData.rows" :label="corpBoxLabel()" />
+  <div v-else>n/a</div>
 </template>
 
 <script lang="ts">
 
 import Vue from 'vue';
-import {CardRenderItem} from '@/cards/render/CardRenderItem';
-import {isIDescription} from '@/cards/render/ICardRenderDescription';
-import {CardRenderSymbol} from '@/cards/render/CardRenderSymbol';
-import {CardRenderProductionBox, ItemType} from '@/cards/render/CardRenderer';
-import {CardRenderTile} from '@/cards/render/CardRenderer';
+import {isIDescription} from '@/common/cards/render/ICardRenderDescription';
+import {
+  ICardRenderCorpBoxAction,
+  ICardRenderCorpBoxEffect,
+  isICardRenderCorpBoxAction,
+  isICardRenderCorpBoxEffect,
+  isICardRenderEffect,
+  isICardRenderItem,
+  isICardRenderProductionBox,
+  isICardRenderSymbol,
+  isICardRenderTile,
+  ItemType,
+} from '@/common/cards/render/Types';
 import CardRenderItemComponent from '@/client/components/card/CardRenderItemComponent.vue';
 import CardProductionBoxComponent from '@/client/components/card/CardProductionBoxComponent.vue';
 import CardRenderEffectBoxComponent from '@/client/components/card/CardRenderEffectBoxComponent.vue';
@@ -24,13 +32,12 @@ import CardRenderCorpBoxComponent from '@/client/components/card/CardRenderCorpB
 import CardRenderTileComponent from '@/client/components/card/CardRenderTileComponent.vue';
 import CardDescription from '@/client/components/card/CardDescription.vue';
 import CardRenderSymbolComponent from '@/client/components/card/CardRenderSymbolComponent.vue';
-import {CardRenderEffect, CardRenderCorpBoxEffect, CardRenderCorpBoxAction} from '@/cards/render/CardRenderer';
 
 export default Vue.extend({
   name: 'CardRowComponent',
   props: {
     componentData: {
-      type: Object as () => CardRenderItem | CardRenderProductionBox | CardRenderSymbol | CardRenderEffect | CardRenderTile | CardRenderCorpBoxEffect | CardRenderCorpBoxAction,
+      type: Object as () => ItemType,
       required: true,
     },
   },
@@ -44,31 +51,23 @@ export default Vue.extend({
     CardDescription,
   },
   methods: {
-    isItem(): boolean {
-      return this.componentData instanceof CardRenderItem;
+    isItem: isICardRenderItem,
+    isSymbol: isICardRenderSymbol,
+    isEffect: isICardRenderEffect,
+    isDescription(componentData: ItemType): boolean {
+      return typeof componentData === 'string' || componentData instanceof String || isIDescription(this.componentData);
     },
-    isSymbol(): boolean {
-      return this.componentData instanceof CardRenderSymbol;
-    },
-    isProduction(item: ItemType): item is CardRenderProductionBox {
-      return item instanceof CardRenderProductionBox;
-    },
-    isEffect(): boolean {
-      return this.componentData instanceof CardRenderEffect;
-    },
-    isDescription(): boolean {
-      return typeof this.componentData === 'string' || this.componentData instanceof String || isIDescription(this.componentData);
-    },
-    isTile(): boolean {
-      return this.componentData instanceof CardRenderTile;
-    },
-    isCorpBox(item: ItemType): item is CardRenderCorpBoxEffect | CardRenderCorpBoxAction {
-      return item instanceof CardRenderCorpBoxEffect || item instanceof CardRenderCorpBoxAction;
+    isTile: isICardRenderTile,
+    isProduction: isICardRenderProductionBox,
+    isCorpBoxEffect: isICardRenderCorpBoxEffect,
+    isCorpBoxAction: isICardRenderCorpBoxAction,
+    isCorpBox(item: ItemType): item is ICardRenderCorpBoxEffect | ICardRenderCorpBoxAction {
+      return this.isCorpBoxEffect(item) || this.isCorpBoxAction(item);
     },
     corpBoxLabel(): string {
-      if (this.componentData instanceof CardRenderCorpBoxEffect) {
+      if (this.isCorpBoxEffect(this.componentData)) {
         return 'effect';
-      } else if (this.componentData instanceof CardRenderCorpBoxAction) {
+      } else if (this.isCorpBoxAction(this.componentData)) {
         return 'action';
       }
       return 'n/a';

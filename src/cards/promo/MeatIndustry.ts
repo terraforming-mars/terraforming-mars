@@ -1,9 +1,12 @@
 import {IProjectCard} from '../IProjectCard';
-import {Tags} from '../Tags';
+import {Tags} from '../../common/cards/Tags';
 import {Card} from '../Card';
-import {CardName} from '../../CardName';
-import {CardType} from '../CardType';
+import {CardName} from '../../common/cards/CardName';
+import {CardType} from '../../common/cards/CardType';
 import {CardRenderer} from '../render/CardRenderer';
+import {Player} from '../../Player';
+import {ICard} from '../ICard';
+import {ResourceType} from '../../common/ResourceType';
 
 export class MeatIndustry extends Card implements IProjectCard {
   constructor() {
@@ -26,5 +29,11 @@ export class MeatIndustry extends Card implements IProjectCard {
 
   public play() {
     return undefined;
+  }
+
+  public onResourceAdded(player: Player, card: ICard, count: number) {
+    if (card.resourceType === ResourceType.ANIMAL) {
+      player.megaCredits += count * 2;
+    }
   }
 }

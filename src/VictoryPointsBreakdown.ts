@@ -1,82 +1,85 @@
-import {Tags} from './cards/Tags';
+import {Tags} from './common/cards/Tags';
+import {IVictoryPointsBreakdown} from './common/game/IVictoryPointsBreakdown';
 
 export type VictoryPoints = 'terraformRating' | 'milestones' | 'awards' | 'greenery' | 'city' | 'escapeVelocity' | 'moon colony' | 'moon mine' | 'moon road' | 'planetary tracks' | 'victoryPoints';
 
 export class VictoryPointsBreakdown {
-    public terraformRating: number = 0;
-    public milestones: number = 0;
-    public awards: number = 0;
-    public greenery: number = 0;
-    public city: number = 0;
-    public escapeVelocity: number = 0;
-    public moonColonies: number = 0;
-    public moonMines: number = 0;
-    public moonRoads: number = 0;
-    public planetaryTracks: number = 0;
-    public victoryPoints = 0;
-    public total = 0;
-    public detailsCards: Array<{cardName: string, victoryPoint: number}> = [];
-    public detailsMilestones: Array<string> = [];
-    public detailsAwards: Array<string> = [];
-    public detailsPlanetaryTracks: Array<{tag: Tags, points: number}> = [];
+  public readonly points: IVictoryPointsBreakdown = {
+    terraformRating: 0,
+    milestones: 0,
+    awards: 0,
+    greenery: 0,
+    city: 0,
+    escapeVelocity: 0,
+    moonColonies: 0,
+    moonMines: 0,
+    moonRoads: 0,
+    planetaryTracks: 0,
+    victoryPoints: 0,
+    total: 0,
+    detailsCards: [],
+    detailsMilestones: [],
+    detailsAwards: [],
+    detailsPlanetaryTracks: [],
+  };
 
-    public updateTotal(): void {
-      this.total = 0;
-      this.total += this.terraformRating;
-      this.total += this.milestones;
-      this.total += this.awards;
-      this.total += this.greenery;
-      this.total += this.city;
-      this.total += this.escapeVelocity;
-      this.total += this.moonColonies;
-      this.total += this.moonMines;
-      this.total += this.moonRoads;
-      this.total += this.planetaryTracks;
-      this.total += this.victoryPoints;
-    }
+  public updateTotal(): void {
+    this.points.total = 0;
+    this.points.total += this.points.terraformRating;
+    this.points.total += this.points.milestones;
+    this.points.total += this.points.awards;
+    this.points.total += this.points.greenery;
+    this.points.total += this.points.city;
+    this.points.total += this.points.escapeVelocity;
+    this.points.total += this.points.moonColonies;
+    this.points.total += this.points.moonMines;
+    this.points.total += this.points.moonRoads;
+    this.points.total += this.points.planetaryTracks;
+    this.points.total += this.points.victoryPoints;
+  }
 
-    public setVictoryPoints(key: VictoryPoints, points: number, message?: string) {
-      switch (key) {
-      case 'terraformRating':
-        this.terraformRating += points;
-        break;
-      case 'milestones':
-        this.milestones += points;
-        if (message !== undefined) this.detailsMilestones.push(message+':'+points);
-        break;
-      case 'awards':
-        this.awards += points;
-        if (message !== undefined) this.detailsAwards.push(message+':'+points);
-        break;
-      case 'greenery':
-        this.greenery += points;
-        break;
-      case 'city':
-        this.city += points;
-        break;
-      case 'escapeVelocity':
-        this.escapeVelocity += points;
-        break;
-      case 'victoryPoints':
-        this.victoryPoints += points;
-        if (message !== undefined) this.detailsCards.push({cardName: message, victoryPoint: points});
-        break;
-      case 'moon colony':
-        this.moonColonies += points;
-        break;
-      case 'moon mine':
-        this.moonMines += points;
-        break;
-      case 'moon road':
-        this.moonRoads += points;
-        break;
-      case 'planetary tracks':
-        this.planetaryTracks += points;
-        if (message !== undefined) this.detailsPlanetaryTracks.push({tag: message as Tags, points});
-        break;
-      default:
-        console.warn('Unknown victory point constraint ' + key);
-        break;
-      }
+  public setVictoryPoints(key: VictoryPoints, points: number, message?: string) {
+    switch (key) {
+    case 'terraformRating':
+      this.points.terraformRating += points;
+      break;
+    case 'milestones':
+      this.points.milestones += points;
+      if (message !== undefined) this.points.detailsMilestones.push(message+':'+points);
+      break;
+    case 'awards':
+      this.points.awards += points;
+      if (message !== undefined) this.points.detailsAwards.push(message+':'+points);
+      break;
+    case 'greenery':
+      this.points.greenery += points;
+      break;
+    case 'city':
+      this.points.city += points;
+      break;
+    case 'escapeVelocity':
+      this.points.escapeVelocity += points;
+      break;
+    case 'victoryPoints':
+      this.points.victoryPoints += points;
+      if (message !== undefined) this.points.detailsCards.push({cardName: message, victoryPoint: points});
+      break;
+    case 'moon colony':
+      this.points.moonColonies += points;
+      break;
+    case 'moon mine':
+      this.points.moonMines += points;
+      break;
+    case 'moon road':
+      this.points.moonRoads += points;
+      break;
+    case 'planetary tracks':
+      this.points.planetaryTracks += points;
+      if (message !== undefined) this.points.detailsPlanetaryTracks.push({tag: message as Tags, points});
+      break;
+    default:
+      console.warn('Unknown victory point constraint ' + key);
+      break;
     }
+  }
 }

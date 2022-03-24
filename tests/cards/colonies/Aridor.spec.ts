@@ -44,7 +44,7 @@ describe('Aridor', function() {
     player.setWaitingFor(playerInput!);
 
     const colonyInPlay = game.colonies[0];
-    const discardedColony = game.colonyDealer!.discardedColonies[0];
+    const discardedColony = game.discardedColonies[0];
 
     expect(game.colonies).does.not.include(discardedColony);
     expect(game.colonies).has.length(5);

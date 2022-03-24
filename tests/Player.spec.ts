@@ -11,15 +11,15 @@ import {TestPlayers} from './TestPlayers';
 import {SerializedPlayer} from '../src/SerializedPlayer';
 import {SerializedTimer} from '../src/SerializedTimer';
 import {Player} from '../src/Player';
-import {Color} from '../src/Color';
+import {Color} from '../src/common/Color';
 import {VictoryPointsBreakdown} from '../src/VictoryPointsBreakdown';
-import {CardName} from '../src/CardName';
-import {GlobalParameter} from '../src/GlobalParameter';
+import {CardName} from '../src/common/cards/CardName';
+import {GlobalParameter} from '../src/common/GlobalParameter';
 import {TestingUtils} from './TestingUtils';
-import {Units} from '../src/Units';
+import {Units} from '../src/common/Units';
 import {SelfReplicatingRobots} from '../src/cards/promo/SelfReplicatingRobots';
 import {Pets} from '../src/cards/base/Pets';
-import {GlobalEventName} from '../src/turmoil/globalEvents/GlobalEventName';
+import {GlobalEventName} from '../src/common/turmoil/globalEvents/GlobalEventName';
 
 describe('Player', function() {
   it('should initialize with right defaults', function() {
@@ -339,7 +339,7 @@ describe('Player', function() {
         energy: player.energy,
         heat: player.heat,
       };
-    };
+    }
 
     const player = TestPlayers.BLUE.newPlayer();
 
@@ -430,7 +430,7 @@ describe('Player', function() {
         energy: player.energy,
         heat: player.heat,
       };
-    };
+    }
 
     const player = TestPlayers.BLUE.newPlayer();
 
@@ -521,7 +521,7 @@ describe('Player', function() {
         energy: player.getProduction(Resources.ENERGY),
         heat: player.getProduction(Resources.HEAT),
       };
-    };
+    }
 
     const player = TestPlayers.BLUE.newPlayer();
 
@@ -645,9 +645,47 @@ describe('Player', function() {
     player2.megaCredits = 3;
     game.monsInsuranceOwner = player2.id;
     player1.addResource(Resources.MEGACREDITS, -3, {from: player2, log: false});
-    expect(player2.megaCredits).eq(3); ;
+    expect(player2.megaCredits).eq(3);
     player1.addProduction(Resources.MEGACREDITS, -3, {from: player2, log: false});
     expect(player2.megaCredits).eq(3);
+  });
+
+  it('removeResourcesFrom', () => {
+    const player = TestPlayers.BLUE.newPlayer();
+    const game = Game.newInstance('foobar', [player], player);
+
+    const log = game.gameLog;
+    log.length = 0; // Empty it out.
+
+    const card = new Pets();
+    expect(card.resourceCount).eq(0);
+    expect(log.length).eq(0);
+
+    log.length = 0;
+    card.resourceCount = 6;
+    player.removeResourceFrom(card);
+    expect(card.resourceCount).eq(5);
+    expect(log.length).eq(1);
+    expect(log[0].data[1].value).eq('1');
+    expect(log[0].data[3].value).eq('Pets');
+
+    log.length = 0;
+    player.removeResourceFrom(card, 1);
+    expect(card.resourceCount).eq(4);
+    expect(log.length).eq(1);
+    expect(log[0].data[1].value).eq('1');
+
+    log.length = 0;
+    player.removeResourceFrom(card, 3);
+    expect(log.length).eq(1);
+    expect(log[0].data[1].value).eq('3');
+
+    log.length = 0;
+    card.resourceCount = 4;
+    player.removeResourceFrom(card, 5);
+    expect(card.resourceCount).eq(0);
+    expect(log.length).eq(1);
+    expect(log[0].data[1].value).eq('4');
   });
 
   it('adds resources', () => {
@@ -707,7 +745,7 @@ describe('Player', function() {
 
     const log = game.gameLog;
     const logEntry = log[log.length - 1];
-    expect(TestingUtils.formatLogMessage(logEntry)).eq('blue\'s megacredits amount increased by 12 by Global Event');
+    expect(TestingUtils.formatLogMessage(logEntry)).eq('blue\'s megacredits amount increased by 12 by Asteroid Mining');
   });
 
   it('addResource logs error when deducting too much', () => {

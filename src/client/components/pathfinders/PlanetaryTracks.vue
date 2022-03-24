@@ -54,12 +54,12 @@
 <script lang="ts">
 
 import Vue from 'vue';
-import {GameOptionsModel} from '@/models/GameOptionsModel';
-import {PathfindersModel} from '@/models/PathfindersModel';
-import {Tags} from '@/cards/Tags';
-import {range} from '@/utils/utils';
+import {GameOptionsModel} from '@/common/models/GameOptionsModel';
+import {PathfindersModel} from '@/common/models/PathfindersModel';
+import {Tags} from '@/common/cards/Tags';
+import {range} from '@/common/utils/utils';
 import PlanetaryTrack from '@/client/components/pathfinders/PlanetaryTrack.vue';
-import {PlanetaryTracks as Tracks} from '@/pathfinders/PlanetaryTracks';
+import {PlanetaryTracks as Tracks} from '@/common/pathfinders/PlanetaryTracks';
 
 export default Vue.extend({
   name: 'PlanetaryTracks',

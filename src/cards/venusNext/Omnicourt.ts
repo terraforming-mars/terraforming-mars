@@ -1,7 +1,7 @@
 import {Tags} from '../../common/cards/Tags';
-import {CardType} from '../CardType';
+import {CardType} from '../../common/cards/CardType';
 import {Player} from '../../Player';
-import {CardName} from '../../CardName';
+import {CardName} from '../../common/cards/CardName';
 import {CardRequirements} from '../CardRequirements';
 import {CardRenderer} from '../render/CardRenderer';
 import {Card} from '../Card';
@@ -24,7 +24,7 @@ export class Omnicourt extends Card {
         description: 'Requires Venus, Earth and Jovian tags. Increase your TR 2 steps.',
       },
     });
-  };
+  }
 
   public play(player: Player) {
     player.increaseTerraformRatingSteps(2);

@@ -1,21 +1,21 @@
 import {IProjectCard} from '../IProjectCard';
 import {Tags} from '../../common/cards/Tags';
 import {Card} from '../Card';
-import {CardType} from '../CardType';
+import {CardType} from '../../common/cards/CardType';
 import {Player} from '../../Player';
 import {TileType} from '../../common/TileType';
 import {SelectSpace} from '../../inputs/SelectSpace';
-import {SpaceType} from '../../SpaceType';
+import {SpaceType} from '../../common/boards/SpaceType';
 import {ISpace} from '../../boards/ISpace';
 import {Resources} from '../../common/Resources';
-import {CardName} from '../../CardName';
+import {CardName} from '../../common/cards/CardName';
 import {IAdjacencyBonus} from '../../ares/IAdjacencyBonus';
 import {Board} from '../../boards/Board';
-import {ICardMetadata} from '../ICardMetadata';
+import {ICardMetadata} from '../../common/cards/ICardMetadata';
 import {CardRequirements} from '../CardRequirements';
 import {CardRenderer} from '../render/CardRenderer';
 import {CardRenderDynamicVictoryPoints} from '../render/CardRenderDynamicVictoryPoints';
-import {Units} from '../../Units';
+import {Units} from '../../common/Units';
 
 export class Capital extends Card implements IProjectCard {
   constructor(

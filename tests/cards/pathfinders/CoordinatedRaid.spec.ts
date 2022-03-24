@@ -2,14 +2,14 @@ import {expect} from 'chai';
 import {getTestPlayer, newTestGame} from '../../TestGame';
 import {CoordinatedRaid} from '../../../src/cards/pathfinders/CoordinatedRaid';
 import {SelectColony} from '../../../src/inputs/SelectColony';
-import {ColonyName} from '../../../src/colonies/ColonyName';
+import {ColonyName} from '../../../src/common/colonies/ColonyName';
 import {Game} from '../../../src/Game';
 import {TestPlayer} from '../../TestPlayer';
 import {Colony} from '../../../src/colonies/Colony';
 import {ColonyBenefit} from '../../../src/colonies/ColonyBenefit';
 import {Resources} from '../../../src/common/Resources';
 import {TestingUtils} from '../../TestingUtils';
-import {Units} from '../../../src/Units';
+import {Units} from '../../../src/common/Units';
 
 export class TestColony extends Colony {
   public name = 'TestColony' as ColonyName;
@@ -38,6 +38,9 @@ describe('CoordinatedRaid', function() {
       customColoniesList: [
         ColonyName.PLUTO,
         ColonyName.TRITON,
+        ColonyName.CALLISTO,
+        ColonyName.ENCELADUS,
+        ColonyName.LUNA,
       ],
     });
     player = getTestPlayer(game, 0);

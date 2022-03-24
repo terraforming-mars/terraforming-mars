@@ -2,17 +2,17 @@
     <tr>
       <td>{{icon}}</td>
       <td v-for="idx in range" :key="idx" :class="getClass(idx)">
-        <Rewards :type="type" v-if="idx <= rewards.spaces.length && rewards.spaces[idx] !== undefined" :rewards="rewards.spaces[idx]" :gameOptions="gameOptions" />
+        <planetary-track-rewards :type="type" v-if="idx <= rewards.spaces.length && rewards.spaces[idx] !== undefined" :rewards="rewards.spaces[idx]" :gameOptions="gameOptions" />
       </td>
     </tr>
 </template>
 
 <script lang="ts">
 import Vue from 'vue';
-import Rewards from '@/client/components/pathfinders/Rewards.vue';
-import {range} from '@/utils/utils';
-import {PlanetaryTrack as Track} from '@/pathfinders/PlanetaryTrack';
-import {GameOptionsModel} from '@/models/GameOptionsModel';
+import {range} from '@/common/utils/utils';
+import {PlanetaryTrack as Track} from '@/common/pathfinders/PlanetaryTrack';
+import {GameOptionsModel} from '@/common/models/GameOptionsModel';
+import PlanetaryTrackRewards from './PlanetaryTrackRewards.vue';
 
 export default Vue.extend({
   name: 'PlanetaryTrack',
@@ -34,7 +34,7 @@ export default Vue.extend({
     };
   },
   components: {
-    Rewards,
+    PlanetaryTrackRewards,
   },
   methods: {
     getClass(idx: number): String {

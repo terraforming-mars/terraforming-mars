@@ -5,15 +5,15 @@
 <script lang="ts">
 
 import Vue from 'vue';
-import {CardRenderSymbolType} from '@/cards/render/CardRenderSymbolType';
-import {CardRenderSymbol} from '@/cards/render/CardRenderSymbol';
-import {Size} from '@/cards/render/Size';
+import {CardRenderSymbolType} from '@/common/cards/render/CardRenderSymbolType';
+import {ICardRenderSymbol} from '@/common/cards/render/Types';
+import {Size} from '@/common/cards/render/Size';
 
 export default Vue.extend({
   name: 'CardRenderSymbolComponent',
   props: {
     item: {
-      type: Object as () => CardRenderSymbol,
+      type: Object as () => ICardRenderSymbol,
       required: true,
     },
   },
@@ -61,6 +61,9 @@ export default Vue.extend({
         }
       } else if (type === CardRenderSymbolType.SLASH) {
         classes.push('card-slash');
+        if (size === Size.SMALL) {
+          classes.push('card-slash--small');
+        }
       } else if (type === CardRenderSymbolType.EQUALS) {
         classes.push('card-equals');
       }

@@ -2,10 +2,10 @@ import {IActionCard, IResourceCard} from '../ICard';
 import {IProjectCard} from '../IProjectCard';
 import {Tags} from '../../common/cards/Tags';
 import {Card} from '../Card';
-import {CardType} from '../CardType';
+import {CardType} from '../../common/cards/CardType';
 import {Player} from '../../Player';
 import {ResourceType} from '../../common/ResourceType';
-import {CardName} from '../../CardName';
+import {CardName} from '../../common/cards/CardName';
 import {SelectHowToPayDeferred} from '../../deferredActions/SelectHowToPayDeferred';
 import {CardRequirements} from '../CardRequirements';
 import {CardRenderer} from '../render/CardRenderer';
@@ -37,32 +37,32 @@ export class SearchForLife extends Card implements IActionCard, IProjectCard, IR
       },
     });
   }
-    public override resourceCount = 0;
+  public override resourceCount = 0;
 
-    public override getVictoryPoints() {
-      if (this.resourceCount > 0) {
-        return 3;
-      }
-      return 0;
+  public override getVictoryPoints() {
+    if (this.resourceCount > 0) {
+      return 3;
     }
-    public play() {
-      return undefined;
-    }
-    public canAct(player: Player): boolean {
-      return player.canAfford(1);
-    }
-    public action(player: Player) {
-      const topCard = player.game.dealer.dealCard(player.game);
+    return 0;
+  }
+  public play() {
+    return undefined;
+  }
+  public canAct(player: Player): boolean {
+    return player.canAfford(1);
+  }
+  public action(player: Player) {
+    const topCard = player.game.dealer.dealCard(player.game);
 
-      player.game.log('${0} revealed and discarded ${1}', (b) => b.player(player).card(topCard));
+    player.game.log('${0} revealed and discarded ${1}', (b) => b.player(player).card(topCard));
 
-      if (topCard.tags.includes(Tags.MICROBE)) {
-        player.addResourceTo(this, 1);
-        player.game.log('${0} found life!', (b) => b.player(player));
-      }
-
-      player.game.dealer.discard(topCard);
-      player.game.defer(new SelectHowToPayDeferred(player, 1, {title: 'Select how to pay for action'}));
-      return undefined;
+    if (topCard.tags.includes(Tags.MICROBE)) {
+      player.addResourceTo(this, 1);
+      player.game.log('${0} found life!', (b) => b.player(player));
     }
+
+    player.game.dealer.discard(topCard);
+    player.game.defer(new SelectHowToPayDeferred(player, 1, {title: 'Select how to pay for action'}));
+    return undefined;
+  }
 }

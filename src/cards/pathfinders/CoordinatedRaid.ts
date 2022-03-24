@@ -1,12 +1,12 @@
 import {IProjectCard} from '../IProjectCard';
-import {CardType} from '../CardType';
+import {CardType} from '../../common/cards/CardType';
 import {Player} from '../../Player';
-import {CardName} from '../../CardName';
+import {CardName} from '../../common/cards/CardName';
 import {Card} from '../Card';
 import {CardRenderer} from '../render/CardRenderer';
 import {CardRequirements} from '../CardRequirements';
 import {SelectColony} from '../../inputs/SelectColony';
-import {Colony} from '../../colonies/Colony';
+import {IColony} from '../../colonies/IColony';
 
 export class CoordinatedRaid extends Card implements IProjectCard {
   constructor() {
@@ -34,7 +34,7 @@ export class CoordinatedRaid extends Card implements IProjectCard {
 
   public play(player: Player) {
     const colonies = player.game.colonies.filter((colony) => colony.isActive);
-    return new SelectColony('Select colony tile for trade', 'trade', colonies, (colony: Colony) => {
+    return new SelectColony('Select colony tile for trade', 'trade', colonies, (colony: IColony) => {
       colony.trade(player, {selfishTrade: true});
       return undefined;
     });

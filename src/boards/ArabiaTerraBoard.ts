@@ -3,7 +3,7 @@ import {Player} from '../Player';
 import {Random} from '../Random';
 import {SpaceBonus} from '../common/boards/SpaceBonus';
 import {SpaceName} from '../SpaceName';
-import {SpaceType} from '../SpaceType';
+import {SpaceType} from '../common/boards/SpaceType';
 import {Board} from './Board';
 import {BoardBuilder} from './BoardBuilder';
 import {ISpace} from './ISpace';

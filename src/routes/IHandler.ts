@@ -11,4 +11,4 @@ export interface IContext {
   route: Route,
   serverId: string,
   gameLoader: IGameLoader,
-};
+}

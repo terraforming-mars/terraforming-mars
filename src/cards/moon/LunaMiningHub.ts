@@ -1,16 +1,16 @@
-import {CardName} from '../../CardName';
+import {CardName} from '../../common/cards/CardName';
 import {Player} from '../../Player';
-import {CardType} from '../CardType';
+import {CardType} from '../../common/cards/CardType';
 import {Tags} from '../../common/cards/Tags';
 import {CardRequirements} from '../CardRequirements';
 import {CardRenderer} from '../render/CardRenderer';
 import {TileType} from '../../common/TileType';
 import {CardRenderDynamicVictoryPoints} from '../render/CardRenderDynamicVictoryPoints';
 import {MoonExpansion} from '../../moon/MoonExpansion';
-import {Units} from '../../Units';
+import {Units} from '../../common/Units';
 import {MoonCard} from './MoonCard';
 import {PlaceSpecialMoonTile} from '../../moon/PlaceSpecialMoonTile';
-import {Size} from '../render/Size';
+import {Size} from '../../common/cards/render/Size';
 
 export class LunaMiningHub extends MoonCard {
   constructor() {
@@ -42,7 +42,7 @@ export class LunaMiningHub extends MoonCard {
         victoryPoints: CardRenderDynamicVictoryPoints.moonMiningTile(2, true),
       },
     });
-  };
+  }
 
   public override play(player: Player) {
     super.play(player);

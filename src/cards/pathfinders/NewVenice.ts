@@ -1,22 +1,22 @@
 import {Card} from '../Card';
-import {CardName} from '../../CardName';
+import {CardName} from '../../common/cards/CardName';
 import {SelectSpace} from '../../inputs/SelectSpace';
 import {ISpace} from '../../boards/ISpace';
 import {Player} from '../../Player';
 import {TileType} from '../../common/TileType';
-import {CardType} from './../CardType';
-import {IProjectCard} from './../IProjectCard';
-import {Tags} from './../Tags';
+import {CardType} from '../../common/cards/CardType';
+import {IProjectCard} from '../IProjectCard';
+import {Tags} from '../../common/cards/Tags';
 import {CardRequirements} from '../CardRequirements';
 import {CardRenderer} from '../render/CardRenderer';
-import {Units} from '../../Units';
+import {Units} from '../../common/Units';
 
 export class NewVenice extends Card implements IProjectCard {
   constructor() {
     super({
       cardType: CardType.AUTOMATED,
       name: CardName.NEW_VENICE,
-      tags: [Tags.MICROBE, Tags.ENERGY, Tags.BUILDING, Tags.CITY],
+      tags: [Tags.MARS, Tags.ENERGY, Tags.BUILDING, Tags.CITY],
       cost: 21,
       productionBox: Units.of({energy: 1, megacredits: 2}),
 

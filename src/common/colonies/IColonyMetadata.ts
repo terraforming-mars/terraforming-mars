@@ -1,0 +1,32 @@
+import {ColonyBenefit} from './ColonyBenefit';
+import {Resources} from '../Resources';
+import {ShouldIncreaseTrack} from './ShouldIncreaseTrack';
+import {ColonyName} from './ColonyName';
+import {ResourceType} from '../ResourceType';
+
+export interface IColonyMetadata {
+  readonly name: ColonyName;
+  readonly buildType: ColonyBenefit;
+  readonly buildQuantity: Array<number>; // Default is [1,1,1]
+  readonly buildResource?: Resources;
+  readonly resourceType?: ResourceType;
+  readonly tradeType: ColonyBenefit;
+  readonly tradeQuantity: Array<number>; // Default is [1,1,1,1,1,1,1]
+  readonly tradeResource?: Resources | Array<Resources>;
+  readonly colonyBonusType: ColonyBenefit;
+  readonly colonyBonusQuantity: number; // Default is 1
+  readonly colonyBonusResource?: Resources;
+  readonly shouldIncreaseTrack: ShouldIncreaseTrack // Default is ShouldIncreaseTrack.YES;
+}
+
+export type IInputColonyMetadata = Omit<IColonyMetadata, 'buildQuantity' |'tradeQuantity' | 'colonyBonusQuantity' | 'shouldIncreaseTrack'> & Partial<IColonyMetadata>;
+
+export function colonyMetadata(partial: IInputColonyMetadata): IColonyMetadata {
+  return {
+    buildQuantity: [1, 1, 1],
+    tradeQuantity: [1, 1, 1, 1, 1, 1, 1],
+    colonyBonusQuantity: 1,
+    shouldIncreaseTrack: ShouldIncreaseTrack.YES,
+    ...partial,
+  };
+}

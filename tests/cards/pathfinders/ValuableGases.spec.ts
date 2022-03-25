@@ -15,31 +15,55 @@ describe('ValuableGases', function() {
   let player: TestPlayer;
   let game: Game;
 
+  let floatingHabs: FloatingHabs;
+  let jovianLanters: JovianLanterns;
+  let localShading: LocalShading;
+  let airRaid: AirRaid;
+
   beforeEach(function() {
     card = new ValuableGases();
     game = newTestGame(1);
     player = getTestPlayer(game, 0);
+
+    // Floating Habs is active, has floaters, and requires 2 science
+    floatingHabs = new FloatingHabs();
+    // Jovian Lanters is active, has floaters, and requires a jovian tag
+    jovianLanters = new JovianLanterns();
+    // Local Shading has floaters and no requirements
+    localShading = new LocalShading();
+    // Air Raid is not a floater card
+    airRaid = new AirRaid();
+    player.cardsInHand = [floatingHabs, jovianLanters, localShading, airRaid];
   });
 
   it('Should play', function() {
-    // Floating Habs is active, has floaters, and requires 2 science
-    const floatingHabs = new FloatingHabs();
-    // Jovian Lanters is active, has floaters, and requires a jovian tag
-    const jovianLanters = new JovianLanterns();
-    // Local Shading has floaters and no requirements
-    const localShading = new LocalShading();
-    // Air Raid is not a floater card
-    const airRaid = new AirRaid();
+    expect(player.getPlayableCards()).is.empty;
 
-    player.cardsInHand = [floatingHabs, jovianLanters, localShading, airRaid];
-    card.play(player);
+    // Using playCard instead because playCard impacts lastCardPlayed.
+    player.playCard(card, undefined, true);
 
     TestingUtils.runAllActions(player.game);
 
-    const input = player.getWaitingFor();
-    expect(input).is.instanceOf(SelectHowToPayForProjectCard);
-    expect((input as SelectHowToPayForProjectCard).cards).has.members(
-      [floatingHabs, jovianLanters, localShading]);
+    const input = player.popWaitingFor();
+
+    const selectHowToPay = TestingUtils.cast(input, SelectHowToPayForProjectCard);
+    expect(selectHowToPay.cards).has.members([localShading]);
     expect(player.megaCredits).eq(10);
+
+    selectHowToPay.cb(localShading, {
+      heat: 0,
+      megaCredits: localShading.cost,
+      steel: 0,
+      titanium: 0,
+      microbes: 0,
+      floaters: 0,
+      science: 0,
+      seeds: 0,
+    });
+
+    expect(localShading.resourceCount).eq(5);
+
+    player.playCard(jovianLanters, undefined, true);
+    expect(airRaid.resourceCount).eq(0);
   });
 });

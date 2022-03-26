@@ -135,17 +135,17 @@ export default (Vue as WithRefs<Refs>).extend({
             break;
           }
 
-          // // When you place an ocean tile, gain 4MC
-          // case CardName.POLARIS:
-          //   switch (prelude) {
-          //   case CardName.AQUIFER_TURBINES:
-          //   case CardName.POLAR_INDUSTRIES:
-          //     result += 4;
-          //     break;
-          //   case CardName.GREAT_AQUIFER:
-          //     result += 8;
-          //     break;
-          //   }
+        // When you place an ocean tile, gain 4MC
+        case CardName.POLARIS:
+          switch (prelude) {
+          case CardName.AQUIFER_TURBINES:
+          case CardName.POLAR_INDUSTRIES:
+            result += 4;
+            break;
+          case CardName.GREAT_AQUIFER:
+            result += 8;
+            break;
+          }
           break;
         }
       }

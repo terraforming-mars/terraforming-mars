@@ -123,7 +123,7 @@
             <section class="debug-ui-cards-list">
               <h2>Global Events</h2>
               <div class="cardbox" v-for="globalEventName in getAllGlobalEvents()" :key="globalEventName">
-                <global-event :globalEvent="getGlobalEvent(globalEventName)" type="prior"></global-event>
+                <global-event :globalEvent="getGlobalEventModel(globalEventName)" type="prior"></global-event>
               </div>
             </section>
 
@@ -152,8 +152,7 @@ import {CardName} from '@/common/cards/CardName';
 import {getPreferences} from '@/client/utils/PreferencesManager';
 import {GlobalEventName} from '@/common/turmoil/globalEvents/GlobalEventName';
 import {GlobalEventModel} from '@/common/models/TurmoilModel';
-import {PartyName} from '@/common/turmoil/PartyName';
-import {ALL_EVENTS, getGlobalEventByName} from '@/turmoil/globalEvents/GlobalEventDealer';
+import {allGlobalEventNames, getGlobalEventModel} from '@/client/turmoil/ClientGlobalEventManifest';
 import GlobalEvent from '@/client/components/GlobalEvent.vue';
 import {byType, getCard, getCards, toName} from '@/client/cards/ClientCardManifest';
 import Colony from '@/client/components/Colony.vue';
@@ -388,29 +387,13 @@ export default Vue.extend({
       return this.sort(names);
     },
     getAllGlobalEvents() {
-      return ALL_EVENTS.keys();
+      return allGlobalEventNames();
     },
     getAllColonyNames() {
       return OFFICIAL_COLONY_NAMES.concat(COMMUNITY_COLONY_NAMES);
     },
-
-    // Copied from LogPanel.vue
-    getGlobalEvent(globalEventName: GlobalEventName): GlobalEventModel {
-      const globalEvent = getGlobalEventByName(globalEventName);
-      if (globalEvent) {
-        return {
-          name: globalEvent.name,
-          description: globalEvent.description,
-          revealed: globalEvent.revealedDelegate,
-          current: globalEvent.currentDelegate,
-        };
-      }
-      return {
-        name: globalEventName,
-        description: 'global event not found',
-        revealed: PartyName.GREENS,
-        current: PartyName.GREENS,
-      };
+    getGlobalEventModel(globalEventName: GlobalEventName): GlobalEventModel {
+      return getGlobalEventModel(globalEventName);
     },
     filtered(cardName: CardName): boolean {
       const card = getCard(cardName);

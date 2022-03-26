@@ -678,32 +678,25 @@ export default (Vue as WithRefs<Refs>).extend({
         [String(player.index)],
       );
     },
-    updateCustomCorporationsList(newCustomCorporationsList: Array<CardName>) {
-      const component = (this as any) as CreateGameModel;
-      component.customCorporationsList = newCustomCorporationsList;
+    updateCustomCorporationsList(customCorporationsList: Array<CardName>) {
+      this.customCorporationsList = customCorporationsList;
     },
-    updateCardsBlackList(newCardsBlackList: Array<CardName>) {
-      const component = (this as any) as CreateGameModel;
-      component.cardsBlackList = newCardsBlackList;
+    updateCardsBlackList(cardsBlackList: Array<CardName>) {
+      this.cardsBlackList = cardsBlackList;
     },
-    updateCustomColoniesList(newCustomColoniesList: Array<ColonyName>) {
-      const component = (this as any) as CreateGameModel;
-      component.customColoniesList = newCustomColoniesList;
+    updateCustomColoniesList(customColoniesList: Array<ColonyName>) {
+      this.customColoniesList = customColoniesList;
     },
     getPlayers(): Array<NewPlayerModel> {
-      const component = (this as any) as CreateGameModel;
-      return component.players.slice(0, component.playersCount);
+      return this.players.slice(0, this.playersCount);
     },
     isRandomMAEnabled(): Boolean {
       return this.randomMA !== RandomMAOptionType.NONE;
     },
     randomMAToggle() {
-      const component = (this as any) as CreateGameModel;
-      if (component.randomMA === RandomMAOptionType.NONE) {
-        component.randomMA = RandomMAOptionType.LIMITED;
+      if (this.randomMA === RandomMAOptionType.NONE) {
         this.randomMA = RandomMAOptionType.LIMITED;
       } else {
-        component.randomMA = RandomMAOptionType.NONE;
         this.randomMA = RandomMAOptionType.NONE;
       }
     },
@@ -789,7 +782,8 @@ export default (Vue as WithRefs<Refs>).extend({
       return playerColorClass(color.toLowerCase(), 'bg_transparent');
     },
     async serializeSettings() {
-      const component = (this as any) as CreateGameModel;
+      // TODO(kberg): remove 'component'
+      const component: CreateGameModel = this;
 
       let players = component.players.slice(0, component.playersCount);
 

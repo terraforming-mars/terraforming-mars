@@ -132,7 +132,7 @@ export default (Vue as WithRefs<Refs>).extend({
             break;
           }
 
-          // When you place an ocean tile, gain 4MC
+        // When you place an ocean tile, gain 4MC
         case CardName.POLARIS:
           switch (prelude) {
           case CardName.AQUIFER_TURBINES:

@@ -20,7 +20,7 @@
 
 import Vue from 'vue';
 
-import {ICard} from '@/cards/ICard';
+import {IClientCard} from '@/common/cards/IClientCard';
 import {CardModel} from '@/common/models/CardModel';
 import CardTitle from './CardTitle.vue';
 import CardNumber from './CardNumber.vue';
@@ -77,7 +77,7 @@ export default Vue.extend({
     getCardExpansion(): string {
       return this.expansion;
     },
-    getCard(): ICard | undefined {
+    getCard(): IClientCard | undefined {
       return this.cardInstance;
     },
     getTags(): Array<string> {

@@ -8,9 +8,10 @@ import {Tags} from '../common/cards/Tags';
 import {Player} from '../Player';
 import {Units} from '../common/Units';
 import {CardRequirements} from './CardRequirements';
-import {TRSource, VictoryPoints} from './ICard';
+import {TRSource} from './ICard';
 import {CardRenderDynamicVictoryPoints} from './render/CardRenderDynamicVictoryPoints';
 import {CardRenderItemType} from '../common/cards/render/CardRenderItemType';
+import {IVictoryPoints} from '../common/cards/IVictoryPoints';
 
 export interface StaticCardProperties {
   adjacencyBonus?: IAdjacencyBonus;
@@ -28,7 +29,7 @@ export interface StaticCardProperties {
   cardDiscount?: ICardDiscount | Array<ICardDiscount>;
   reserveUnits?: Units,
   tr?: TRSource,
-  victoryPoints?: number | 'special' | VictoryPoints,
+  victoryPoints?: number | 'special' | IVictoryPoints,
 }
 
 export const staticCardProperties = new Map<CardName, StaticCardProperties>();
@@ -100,7 +101,7 @@ export abstract class Card {
   public get tr(): TRSource {
     return this.properties.tr || {};
   }
-  public get victoryPoints(): number | 'special' | VictoryPoints | undefined {
+  public get victoryPoints(): number | 'special' | IVictoryPoints | undefined {
     return this.properties.victoryPoints;
   }
   public canPlay(_player: Player) {

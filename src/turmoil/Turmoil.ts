@@ -361,7 +361,8 @@ export class Turmoil {
     if (policy === undefined) {
       throw new Error(`Policy id ${policyId} not found in party ${rulingParty.name}`);
     }
-    game.log('The ruling policy is: ${0}', (b) => b.string(policy.description));
+    const description = typeof(policy.description) === 'string' ? policy.description : policy.description(undefined);
+    game.log('The ruling policy is: ${0}', (b) => b.string(description));
     // Resolve Ruling Policy for Scientists P4
     if (policy.apply !== undefined) {
       policy.apply(game);

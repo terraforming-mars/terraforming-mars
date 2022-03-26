@@ -113,7 +113,9 @@ export abstract class Colony implements IColony {
       const maxTrackPosition = Math.min(this.trackPosition + tradeOffset, MAX_COLONY_TRACK_POSITION);
       const steps = maxTrackPosition - this.trackPosition;
 
-      if (steps === 0 || this.shouldIncreaseTrack === ShouldIncreaseTrack.NO) {
+      if (steps === 0 ||
+        this.shouldIncreaseTrack === ShouldIncreaseTrack.NO ||
+        tradeOptions.selfishTrade === true) {
         // Don't increase
         this.handleTrade(player, tradeOptions);
         return;
@@ -337,17 +339,14 @@ export abstract class Colony implements IColony {
         return undefined;
       }
     }
-}
 
-export function serializeColonies(colonies: Array<IColony>): Array<SerializedColony> {
-  return colonies.map((colony) => {
-    return {
-      colonies: colony.colonies,
-      name: colony.name,
-      isActive: colony.isActive,
-      resourceType: colony.resourceType,
-      trackPosition: colony.trackPosition,
-      visitor: colony.visitor,
-    };
-  });
+    public serialize(): SerializedColony {
+      return {
+        colonies: this.colonies,
+        name: this.name,
+        isActive: this.isActive,
+        trackPosition: this.trackPosition,
+        visitor: this.visitor,
+      };
+    }
 }

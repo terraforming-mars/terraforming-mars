@@ -51,7 +51,7 @@ export default Vue.extend({
   mounted() {
     Vue.nextTick(() => {
       this.setInitialCost();
-      this.$data.megaCredits = (this as any).getMegaCreditsMax();
+      this.$data.megaCredits = this.getMegaCreditsMax();
       this.setDefaultValues();
     });
   },

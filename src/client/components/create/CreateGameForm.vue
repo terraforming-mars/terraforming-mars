@@ -435,6 +435,7 @@
 
 <script lang="ts">
 import Vue from 'vue';
+import {WithRefs} from 'vue-typed-refs';
 import {Color} from '@/common/Color';
 import {BoardName} from '@/common/boards/BoardName';
 import {RandomBoardOption} from '@/common/boards/RandomBoardOption';
@@ -517,7 +518,14 @@ export interface NewPlayerModel {
     first: boolean;
 }
 
-export default Vue.extend({
+type Refs = {
+  coloniesFilter: InstanceType<typeof ColoniesFilter>,
+  corporationsFilter: InstanceType<typeof CorporationsFilter>,
+  cardsFilter: InstanceType<typeof CardsFilter>,
+  file: HTMLInputElement,
+}
+
+export default (Vue as WithRefs<Refs>).extend({
   name: 'CreateGameForm',
   data(): CreateGameModel {
     return {
@@ -616,7 +624,7 @@ export default Vue.extend({
     },
     handleSettingsUpload() {
       const refs = this.$refs;
-      const file = (refs.file as any).files[0];
+      const file = refs.file.files !== null ? refs.file.files[0] : undefined;
       const reader = new FileReader();
       const component = this.$data;
 
@@ -641,15 +649,15 @@ export default Vue.extend({
 
           Vue.nextTick(() => {
             if (component.showColoniesList) {
-              (refs.coloniesFilter as any).updateColoniesByNames(results['customColoniesList']);
+              refs.coloniesFilter.updateColoniesByNames(results['customColoniesList']);
             }
 
             if (component.showCorporationList) {
-              (refs.corporationsFilter as any).selectedCorporations = results['customCorporationsList'];
+              refs.corporationsFilter.selectedCorporations = results['customCorporationsList'];
             }
 
             if (component.showCardsBlackList) {
-              (refs.cardsFilter as any).selectedCardNames = results['cardsBlackList'];
+              refs.cardsFilter.selectedCardNames = results['cardsBlackList'];
             }
 
             if ( ! component.seededGame) {
@@ -670,32 +678,25 @@ export default Vue.extend({
         [String(player.index)],
       );
     },
-    updateCustomCorporationsList(newCustomCorporationsList: Array<CardName>) {
-      const component = (this as any) as CreateGameModel;
-      component.customCorporationsList = newCustomCorporationsList;
+    updateCustomCorporationsList(customCorporationsList: Array<CardName>) {
+      this.customCorporationsList = customCorporationsList;
     },
-    updateCardsBlackList(newCardsBlackList: Array<CardName>) {
-      const component = (this as any) as CreateGameModel;
-      component.cardsBlackList = newCardsBlackList;
+    updateCardsBlackList(cardsBlackList: Array<CardName>) {
+      this.cardsBlackList = cardsBlackList;
     },
-    updateCustomColoniesList(newCustomColoniesList: Array<ColonyName>) {
-      const component = (this as any) as CreateGameModel;
-      component.customColoniesList = newCustomColoniesList;
+    updateCustomColoniesList(customColoniesList: Array<ColonyName>) {
+      this.customColoniesList = customColoniesList;
     },
     getPlayers(): Array<NewPlayerModel> {
-      const component = (this as any) as CreateGameModel;
-      return component.players.slice(0, component.playersCount);
+      return this.players.slice(0, this.playersCount);
     },
     isRandomMAEnabled(): Boolean {
       return this.randomMA !== RandomMAOptionType.NONE;
     },
     randomMAToggle() {
-      const component = (this as any) as CreateGameModel;
-      if (component.randomMA === RandomMAOptionType.NONE) {
-        component.randomMA = RandomMAOptionType.LIMITED;
+      if (this.randomMA === RandomMAOptionType.NONE) {
         this.randomMA = RandomMAOptionType.LIMITED;
       } else {
-        component.randomMA = RandomMAOptionType.NONE;
         this.randomMA = RandomMAOptionType.NONE;
       }
     },
@@ -781,7 +782,8 @@ export default Vue.extend({
       return playerColorClass(color.toLowerCase(), 'bg_transparent');
     },
     async serializeSettings() {
-      const component = (this as any) as CreateGameModel;
+      // TODO(kberg): remove 'component'
+      const component: CreateGameModel = this;
 
       let players = component.players.slice(0, component.playersCount);
 
@@ -969,21 +971,30 @@ export default Vue.extend({
       const dataToSend = await this.serializeSettings();
 
       if (dataToSend === undefined) return;
-      const onSucces = (response: any) => {
-        if (response.players.length === 1) {
-          window.location.href = '/player?id=' + response.players[0].id;
+      const onSuccess = (json: any) => {
+        if (json.players.length === 1) {
+          window.location.href = '/player?id=' + json.players[0].id;
           return;
         } else {
-          window.history.replaceState(response, `${constants.APP_NAME} - Game`, '/game?id=' + response.id);
-          (this as any).$root.$data.game = response;
+          window.history.replaceState(json, `${constants.APP_NAME} - Game`, '/game?id=' + json.id);
+          (this as any).$root.$data.game = json;
           (this as any).$root.$data.screen = 'game-home';
         }
       };
 
       fetch('/game', {'method': 'PUT', 'body': dataToSend, 'headers': {'Content-Type': 'application/json'}})
-        .then((response) => response.json())
-        .then(onSucces)
-        .catch((_) => alert('Unexpected server response'));
+        .then((response) => response.text())
+        .then((text) => {
+          try {
+            const json = JSON.parse(text);
+            onSuccess(json);
+          } catch (err) {
+            throw new Error(text);
+          }
+        })
+        .catch((error: Error) => {
+          alert(error.message);
+        });
     },
   },
 });

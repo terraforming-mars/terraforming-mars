@@ -51,7 +51,7 @@ import {IVictoryPointsBreakdown} from './common/game/IVictoryPointsBreakdown';
 import {SelectProductionToLose} from './inputs/SelectProductionToLose';
 import {ShiftAresGlobalParameters} from './inputs/ShiftAresGlobalParameters';
 import {IAresGlobalParametersResponse} from './common/inputs/IAresGlobalParametersResponse';
-import {Timer} from './Timer';
+import {Timer} from './common/Timer';
 import {TurmoilHandler} from './turmoil/TurmoilHandler';
 import {CardLoader} from './CardLoader';
 import {DrawCards} from './deferredActions/DrawCards';
@@ -1037,6 +1037,8 @@ export class Player {
       if (colonyName === undefined) {
         throw new Error('No colony selected');
       }
+      // TODO(kberg): this passes true because SelectColony sometimes loads discarded colonies
+      // but that can be a parameter, and that would be useful.
       const colony = ColoniesHandler.getColony(this.game, colonyName, true);
       this.runInputCb(pi.cb(colony));
     } else if (pi instanceof OrOptions) {

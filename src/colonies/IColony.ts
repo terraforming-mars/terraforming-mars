@@ -1,5 +1,5 @@
-import {Player} from '@/Player';
-import {PlayerInput} from '@/PlayerInput';
+import {Player} from '../Player';
+import {PlayerInput} from '../PlayerInput';
 import {ColonyName} from '../common/colonies/ColonyName';
 import {ShouldIncreaseTrack} from '../common/colonies/ShouldIncreaseTrack';
 import {Resources} from '../common/Resources';
@@ -7,6 +7,7 @@ import {ResourceType} from '../common/ResourceType';
 import {PlayerId} from '../common/Types';
 import {Game} from '../Game';
 import {ColonyBenefit} from './ColonyBenefit';
+import {SerializedColony} from '../SerializedColony';
 
 export type TradeOptions = {
   usesTradeFleet?: boolean;
@@ -41,4 +42,5 @@ export interface IColony {
   addColony(player: Player, options?: {giveBonusTwice: boolean}): void;
   trade(player: Player, tradeOptions?: TradeOptions, bonusTradeOffset?: number): void;
   giveColonyBonus(player: Player, isGiveColonyBonus?: boolean): undefined | PlayerInput;
+  serialize(): SerializedColony;
 }

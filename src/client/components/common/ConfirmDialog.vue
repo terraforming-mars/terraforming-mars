@@ -1,10 +1,15 @@
 <script lang="ts">
 import Vue from 'vue';
+import {WithRefs} from 'vue-typed-refs';
 import {showModal, windowHasHTMLDialogElement} from '@/client/components/HTMLDialogElementCompatibility';
 
 const dialogPolyfill = require('dialog-polyfill');
 
-export default Vue.extend({
+type Refs = {
+  dialog: HTMLElement,
+}
+
+export default (Vue as WithRefs<Refs>).extend({
   name: 'ConfirmDialog',
   props: {
     message: {
@@ -33,11 +38,11 @@ export default Vue.extend({
       this.$emit('dismiss');
     },
     show() {
-      showModal(this.$refs['dialog'] as HTMLElement);
+      showModal(this.$refs.dialog);
     },
   },
   mounted() {
-    if (!windowHasHTMLDialogElement()) dialogPolyfill.default.registerDialog(this.$refs['dialog']);
+    if (!windowHasHTMLDialogElement()) dialogPolyfill.default.registerDialog(this.$refs.dialog);
   },
 });
 </script>

@@ -210,7 +210,12 @@ export abstract class Card {
       if (discount.tag === undefined) {
         sum += discount.amount;
       } else {
-        sum += discount.amount * (card?.tags.filter((tag) => tag === discount.tag).length ?? 0);
+        const tags = card?.tags.filter((tag) => tag === discount.tag).length ?? 0;
+        if (discount.per !== 'card') {
+          sum += discount.amount * tags;
+        } else if (tags > 0) {
+          sum += discount.amount;
+        }
       }
     }
     return sum;

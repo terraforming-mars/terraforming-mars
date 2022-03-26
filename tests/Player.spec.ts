@@ -9,7 +9,7 @@ import {SelectOption} from '../src/inputs/SelectOption';
 import {Resources} from '../src/common/Resources';
 import {TestPlayers} from './TestPlayers';
 import {SerializedPlayer} from '../src/SerializedPlayer';
-import {SerializedTimer} from '../src/SerializedTimer';
+import {SerializedTimer} from '../src/common/SerializedTimer';
 import {Player} from '../src/Player';
 import {Color} from '../src/common/Color';
 import {VictoryPointsBreakdown} from '../src/VictoryPointsBreakdown';

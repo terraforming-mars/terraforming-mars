@@ -51,7 +51,7 @@ import {IVictoryPointsBreakdown} from './common/game/IVictoryPointsBreakdown';
 import {SelectProductionToLose} from './inputs/SelectProductionToLose';
 import {ShiftAresGlobalParameters} from './inputs/ShiftAresGlobalParameters';
 import {IAresGlobalParametersResponse} from './common/inputs/IAresGlobalParametersResponse';
-import {Timer} from './Timer';
+import {Timer} from './common/Timer';
 import {TurmoilHandler} from './turmoil/TurmoilHandler';
 import {CardLoader} from './CardLoader';
 import {DrawCards} from './deferredActions/DrawCards';

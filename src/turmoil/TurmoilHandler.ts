@@ -43,7 +43,7 @@ export class TurmoilHandler {
       if (kelvinistsPolicy.canAct(player)) {
         options.push(
           new SelectOption(
-            kelvinistsPolicy.description,
+            kelvinistsPolicy.description(player),
             'Pay',
             () => kelvinistsPolicy.action(player),
           ),

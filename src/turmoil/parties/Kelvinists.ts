@@ -52,7 +52,10 @@ class KelvinistsBonus02 implements Bonus {
 class KelvinistsPolicy01 implements Policy {
   isDefault = true;
   id = 'kp01' as const;
-  description: string = 'Pay 10 M€ to increase your Energy and Heat production 1 step (Turmoil Kelvinists)';
+  description(player: Player | undefined): string {
+    const cost = player === undefined ? 10 : this.cost(player);
+    return `Pay ${cost} M€ to increase your Energy and Heat production 1 step (Turmoil Kelvinists)`;
+  }
 
   cost(player: Player): number {
     return player.cardIsInEffect(CardName.HIGH_TEMP_SUPERCONDUCTORS) ? 7: 10;

@@ -1,4 +1,4 @@
-import {Clock} from '../src/Timer';
+import {Clock} from '../../src/common/Timer';
 
 export class FakeClock extends Clock {
   public millis: number = 0;

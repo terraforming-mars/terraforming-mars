@@ -10,7 +10,7 @@ export type PolicyId = `${Party}${Suffix}`
 
 export interface Policy {
   id: PolicyId;
-  description: string;
+  description: string | ((player: Player | undefined) => string);
   isDefault: boolean;
   onTilePlaced?: (player: Player, space: ISpace) => void;
   onCardPlayed?: (player: Player, card: IProjectCard) => void;

@@ -21,7 +21,7 @@
 
     "Martian Rails": "Ferrovie Marziane",
     "Action: Spend 1 Energy to gain 1 M€ for each City tile ON MARS.": "Azione: spendi una risorsa Energia per ottenere 1 M€ per ogni tessera Città SU MARTE.",
-    
+
     "Asteroid": "Asteroide",
     "Raise temperature 1 step and gain 2 titanium. Remove up to 3 Plants from any player.": "Incrementa la Temperatura di 1 livello e ottieni 2 risorse Titanio. Rimuovi fino a 3 Piante da un qualunque giocatore.",
 
@@ -323,7 +323,7 @@
     "Action: Spend 4 energy to gain 1 titanium and increase oxygen 1 step.": "Azione: spendi 4 risorse Energia per ottenere 1 risorsa Titanio e incrementare l'Ossigeno di 1 livello.",
 
     "Earth Office": "Ufficio Terrestre",
-    "(Effect: When you play an Earth card, you pay 3 M€ less for it.)": "(Effetto: quando giochi una carta con un simbolo Terra, la paghi 3 M€ in meno.)",
+    "(Effect: When you play an Earth tag, you pay 3 M€ less for it.)": "(Effetto: quando giochi una carta con un simbolo Terra, la paghi 3 M€ in meno.)",
 
     "Acquired Company": "Compagnia Acquisita",
 
@@ -610,7 +610,7 @@
   "Immigration Shuttles": "Navette per l'Immigrazione",
   "(Increase your M€ production 5 steps.)": "(Incrementa la tua Produzione di M€ di 5 livelli.)",
   "1 VP for every 3rd City in play.": "1 PV per ogni terna di Città in gioco.",
- 
+
   "Place this tile.": "Colloca questa tessera",
 
   "Immigrant City": "Città degli Immigrati",

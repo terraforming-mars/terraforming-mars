@@ -5,8 +5,8 @@
 import {Player} from '../src/Player';
 import {Game} from '../src/Game';
 import {expect} from 'chai';
-import {Timer} from '../src/Timer';
-import {FakeClock} from './FakeClock';
+import {Timer} from '../src/common/Timer';
+import {FakeClock} from './common/FakeClock';
 import {getTestPlayer, newTestGame} from './TestGame';
 
 let game: Game;

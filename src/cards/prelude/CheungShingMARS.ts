@@ -1,7 +1,6 @@
 import {Tags} from '../../common/cards/Tags';
 import {Player} from '../../Player';
 import {ICorporationCard} from '../corporation/ICorporationCard';
-import {IProjectCard} from '../IProjectCard';
 import {Resources} from '../../common/Resources';
 import {Card} from '../Card';
 import {CardName} from '../../common/cards/CardName';
@@ -34,11 +33,6 @@ export class CheungShingMARS extends Card implements ICorporationCard {
         }),
       },
     });
-  }
-
-
-  public getCardDiscount(_player: Player, card: IProjectCard) {
-    return card.tags.filter((tag) => tag === Tags.BUILDING).length * 2;
   }
 
   public play(player: Player) {

@@ -1,7 +1,6 @@
 import {Card} from '../Card';
 import {Tags} from '../../common/cards/Tags';
 import {Player} from '../../Player';
-import {IProjectCard} from '../IProjectCard';
 import {ICorporationCard} from './ICorporationCard';
 import {Resources} from '../../common/Resources';
 import {CardName} from '../../common/cards/CardName';
@@ -35,12 +34,6 @@ export class Thorgate extends Card implements ICorporationCard {
     });
   }
 
-  public getCardDiscount(_player: Player, card: IProjectCard) {
-    if (card.tags.includes(Tags.ENERGY)) {
-      return 3;
-    }
-    return 0;
-  }
   public play(player: Player) {
     player.addProduction(Resources.ENERGY, 1);
     return undefined;

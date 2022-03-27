@@ -35,7 +35,7 @@ export class CrescentResearchAssociation extends Card implements ICorporationCar
     return undefined;
   }
 
-  public getCardDiscount(player: Player, card: IProjectCard) {
+  public override getCardDiscount(player: Player, card: IProjectCard) {
     if (card.tags.indexOf(Tags.MOON) === -1) {
       return 0;
     }

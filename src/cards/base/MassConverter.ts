@@ -18,7 +18,7 @@ export class MassConverter extends Card implements IProjectCard {
       cost: 8,
 
       requirements: CardRequirements.builder((b) => b.tag(Tags.SCIENCE, 5)),
-      cardDiscount: {tag: Tags.SPACE, amount: 2},
+      cardDiscount: {tag: Tags.SPACE, amount: 2, per: 'card'},
       metadata: {
         cardNumber: '094',
         renderData: CardRenderer.builder((b) => {
@@ -33,12 +33,6 @@ export class MassConverter extends Card implements IProjectCard {
   }
 
 
-  public getCardDiscount(_player: Player, card: IProjectCard) {
-    if (card.tags.includes(Tags.SPACE)) {
-      return 2;
-    }
-    return 0;
-  }
   public play(player: Player) {
     player.addProduction(Resources.ENERGY, 6);
     return undefined;

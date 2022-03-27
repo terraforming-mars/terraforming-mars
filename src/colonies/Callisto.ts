@@ -1,16 +1,20 @@
 import {Colony} from './Colony';
 import {Resources} from '../common/Resources';
 import {ColonyName} from '../common/colonies/ColonyName';
-import {ColonyBenefit} from './ColonyBenefit';
+import {ColonyBenefit} from '../common/colonies/ColonyBenefit';
 
 export class Callisto extends Colony {
-  public name = ColonyName.CALLISTO;
-  public buildType = ColonyBenefit.GAIN_PRODUCTION;
-  public override buildResource = Resources.ENERGY;
-  public tradeType = ColonyBenefit.GAIN_RESOURCES;
-  public override tradeQuantity = [0, 2, 3, 5, 7, 10, 13];
-  public override tradeResource = Resources.ENERGY;
-  public colonyBonusType = ColonyBenefit.GAIN_RESOURCES;
-  public override colonyBonusQuantity = 3;
-  public override colonyBonusResource = Resources.ENERGY;
+  constructor() {
+    super({
+      name: ColonyName.CALLISTO,
+      buildType: ColonyBenefit.GAIN_PRODUCTION,
+      buildResource: Resources.ENERGY,
+      tradeType: ColonyBenefit.GAIN_RESOURCES,
+      tradeQuantity: [0, 2, 3, 5, 7, 10, 13],
+      tradeResource: Resources.ENERGY,
+      colonyBonusType: ColonyBenefit.GAIN_RESOURCES,
+      colonyBonusQuantity: 3,
+      colonyBonusResource: Resources.ENERGY,
+    });
+  }
 }

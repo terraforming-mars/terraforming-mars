@@ -1,6 +1,5 @@
 import {IProjectCard} from '../IProjectCard';
 import {Tags} from '../../common/cards/Tags';
-import {Player} from '../../Player';
 import {Card} from '../Card';
 import {CardType} from '../../common/cards/CardType';
 import {CardName} from '../../common/cards/CardName';
@@ -28,12 +27,6 @@ export class SpaceStation extends Card implements IProjectCard {
     });
   }
 
-  public getCardDiscount(_player: Player, card: IProjectCard) {
-    if (card.tags.includes(Tags.SPACE)) {
-      return 2;
-    }
-    return 0;
-  }
   public play() {
     return undefined;
   }

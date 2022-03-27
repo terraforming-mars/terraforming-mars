@@ -1,8 +1,6 @@
 import {Card} from '../Card';
 import {Tags} from '../../common/cards/Tags';
 import {ICorporationCard} from './ICorporationCard';
-import {Player} from '../../Player';
-import {IProjectCard} from '../IProjectCard';
 import {CardName} from '../../common/cards/CardName';
 import {CardType} from '../../common/cards/CardType';
 import {CardRenderer} from '../render/CardRenderer';
@@ -33,9 +31,6 @@ export class Teractor extends Card implements ICorporationCard {
     });
   }
 
-  public getCardDiscount(_player: Player, card: IProjectCard) {
-    return card.tags.filter((tag) => tag === Tags.EARTH).length * 3;
-  }
   public play() {
     return undefined;
   }

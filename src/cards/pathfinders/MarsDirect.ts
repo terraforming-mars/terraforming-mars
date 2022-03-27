@@ -41,7 +41,7 @@ export class MarsDirect extends Card implements ICorporationCard {
     return undefined;
   }
 
-  public getCardDiscount(player: Player, card: IProjectCard) {
+  public override getCardDiscount(player: Player, card: IProjectCard) {
     if (card.tags.indexOf(Tags.MARS) === -1) {
       return 0;
     }

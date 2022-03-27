@@ -21,10 +21,13 @@ export interface IColonyMetadata {
 
 export type IInputColonyMetadata = Omit<IColonyMetadata, 'buildQuantity' |'tradeQuantity' | 'colonyBonusQuantity' | 'shouldIncreaseTrack'> & Partial<IColonyMetadata>;
 
+const DEFAULT_BUILD_QUANTITY = [1, 1, 1];
+const DEFAULT_TRADE_QUANTITY = [1, 1, 1, 1, 1, 1, 1];
+
 export function colonyMetadata(partial: IInputColonyMetadata): IColonyMetadata {
   return {
-    buildQuantity: [1, 1, 1],
-    tradeQuantity: [1, 1, 1, 1, 1, 1, 1],
+    buildQuantity: DEFAULT_BUILD_QUANTITY,
+    tradeQuantity: DEFAULT_TRADE_QUANTITY,
     colonyBonusQuantity: 1,
     shouldIncreaseTrack: ShouldIncreaseTrack.YES,
     ...partial,

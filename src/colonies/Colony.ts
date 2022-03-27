@@ -38,7 +38,7 @@ export abstract class Colony implements IColony {
 
     public metadata: IColonyMetadata;
 
-    public constructor(metadata: IInputColonyMetadata) {
+    protected constructor(metadata: IInputColonyMetadata) {
       this.metadata = colonyMetadata(metadata);
     }
 

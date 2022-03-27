@@ -6,25 +6,28 @@ import {ColonyName} from '../../../src/common/colonies/ColonyName';
 import {Game} from '../../../src/Game';
 import {TestPlayer} from '../../TestPlayer';
 import {Colony} from '../../../src/colonies/Colony';
-import {ColonyBenefit} from '../../../src/colonies/ColonyBenefit';
+import {ColonyBenefit} from '../../../src/common/colonies/ColonyBenefit';
 import {Resources} from '../../../src/common/Resources';
 import {TestingUtils} from '../../TestingUtils';
 import {Units} from '../../../src/common/Units';
 import {ShouldIncreaseTrack} from '../../../src/common/colonies/ShouldIncreaseTrack';
 
 export class TestColony extends Colony {
-  public name = 'TestColony' as ColonyName;
-  public description = 'Test';
-  public buildType = ColonyBenefit.GAIN_RESOURCES;
-  public override buildQuantity = [3, 3, 3];
-  public override buildResource = Resources.TITANIUM;
-  public tradeType = ColonyBenefit.GAIN_RESOURCES;
-  public override tradeQuantity = [4, 5, 6, 7, 8, 9, 10];
-  public override tradeResource = Resources.MEGACREDITS;
-  public colonyBonusType = ColonyBenefit.GAIN_RESOURCES;
-  public override colonyBonusQuantity = 7;
-  public override colonyBonusResource = Resources.STEEL;
-  public override shouldIncreaseTrack = ShouldIncreaseTrack.YES;
+  constructor() {
+    super({
+      name: 'TestColony' as ColonyName,
+      buildType: ColonyBenefit.GAIN_RESOURCES,
+      buildQuantity: [3, 3, 3],
+      buildResource: Resources.TITANIUM,
+      tradeType: ColonyBenefit.GAIN_RESOURCES,
+      tradeQuantity: [4, 5, 6, 7, 8, 9, 10],
+      tradeResource: Resources.MEGACREDITS,
+      colonyBonusType: ColonyBenefit.GAIN_RESOURCES,
+      colonyBonusQuantity: 7,
+      colonyBonusResource: Resources.STEEL,
+      shouldIncreaseTrack: ShouldIncreaseTrack.YES,
+    });
+  }
 }
 
 describe('CoordinatedRaid', function() {

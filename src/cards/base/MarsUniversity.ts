@@ -7,7 +7,7 @@ import {OrOptions} from '../../inputs/OrOptions';
 import {SelectCard} from '../../inputs/SelectCard';
 import {SelectOption} from '../../inputs/SelectOption';
 import {CardName} from '../../common/cards/CardName';
-import {DeferredAction} from '../../deferredActions/DeferredAction';
+import {DeferredAction, Priority} from '../../deferredActions/DeferredAction';
 import {CardRenderer} from '../render/CardRenderer';
 import {played} from '../Options';
 
@@ -55,7 +55,8 @@ export class MarsUniversity extends Card implements IProjectCard {
             }),
           );
         },
-      ));
+      ),
+      Priority.DISCARD_BEFORE_DRAW);
     }
     return undefined;
   }

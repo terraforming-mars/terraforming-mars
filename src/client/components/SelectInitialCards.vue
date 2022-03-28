@@ -22,14 +22,13 @@ import Button from '@/client/components/common/Button.vue';
 import {getCard} from '@/client/cards/ClientCardManifest';
 import {CardName} from '@/common/cards/CardName';
 import * as constants from '@/common/constants';
-import {ICorporationCard} from '@/cards/corporation/ICorporationCard';
+import {IClientCard} from '@/common/cards/IClientCard';
 import {PlayerInputModel} from '@/common/models/PlayerInputModel';
 import {PlayerViewModel} from '@/common/models/PlayerModel';
 import SelectCard from '@/client/components/SelectCard.vue';
 import ConfirmDialog from '@/client/components/common/ConfirmDialog.vue';
 import {getPreferences} from '@/client/utils/PreferencesManager';
 import {Tags} from '@/common/cards/Tags';
-import {PreludeCard} from '@/cards/prelude/PreludeCard';
 
 type Refs = {
   confirmation: InstanceType<typeof ConfirmDialog>,
@@ -62,7 +61,7 @@ export default (Vue as WithRefs<Refs>).extend({
   data() {
     return {
       selectedCards: [] as Array<CardName>,
-      selectedCorporation: undefined as ICorporationCard | undefined,
+      selectedCorporation: undefined as IClientCard | undefined,
       selectedPreludes: [] as Array<CardName>,
     };
   },
@@ -77,14 +76,12 @@ export default (Vue as WithRefs<Refs>).extend({
         if (cam === undefined) {
           throw new Error(`Prelude ${prelude} not found`);
         }
-        const card = cam.card as PreludeCard;
-        result += card.startingMegaCredits ?? 0;
+        result += cam.card.startingMegaCredits ?? 0;
 
         switch (this.selectedCorporation?.name) {
         // For each step you increase the production of a resource ... you also gain that resource.
         case CardName.MANUTECH:
-          const productionBox = card?.productionBox;
-          result += productionBox.megacredits;
+          result += cam.card.productionBox?.megacredits ?? 0;
           break;
 
         // When you place a city tile, gain 3 M€.
@@ -100,13 +97,13 @@ export default (Vue as WithRefs<Refs>).extend({
 
         // When ANY microbe tag is played ... lose 4 M€ or as much as possible.
         case CardName.PHARMACY_UNION:
-          const tags = card.tags.filter((tag) => tag === Tags.MICROBE).length;
+          const tags = cam.card.tags.filter((tag) => tag === Tags.MICROBE).length;
           result -= (4 * tags);
           break;
 
         // when a microbe tag is played, incl. this, THAT PLAYER gains 2 M€,
         case CardName.SPLICE:
-          const microbeTags = card.tags.filter((tag) => tag === Tags.MICROBE).length;
+          const microbeTags = cam.card.tags.filter((tag) => tag === Tags.MICROBE).length;
           result += (2 * microbeTags);
           break;
 
@@ -161,7 +158,8 @@ export default (Vue as WithRefs<Refs>).extend({
       if (this.selectedCorporation === undefined) {
         return NaN;
       }
-      let starting = this.selectedCorporation.startingMegaCredits;
+      // The ?? 0 is only because IClientCard applies to _all_ cards.
+      let starting = this.selectedCorporation.startingMegaCredits ?? 0;
       const cardCost = this.selectedCorporation.cardCost === undefined ? constants.CARD_COST : this.selectedCorporation.cardCost;
       starting -= this.selectedCards.length * cardCost;
       return starting;
@@ -192,7 +190,7 @@ export default (Vue as WithRefs<Refs>).extend({
       this.selectedCards = cards;
     },
     corporationChanged(cards: Array<CardName>) {
-      this.selectedCorporation = getCard(cards[0])?.card as ICorporationCard;
+      this.selectedCorporation = getCard(cards[0])?.card;
     },
     preludesChanged(cards: Array<CardName>) {
       this.selectedPreludes = cards;

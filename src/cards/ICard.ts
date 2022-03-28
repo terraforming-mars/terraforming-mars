@@ -22,6 +22,7 @@ import {GlobalParameter} from '../common/GlobalParameter';
 import {BoardType} from '../boards/BoardType';
 import {Units} from '../common/Units';
 import {ICardDiscount} from '../common/cards/Types';
+import {IVictoryPoints} from '../common/cards/IVictoryPoints';
 
 export interface IActionCard {
     action: (player: Player) => OrOptions | SelectOption | AndOptions | SelectAmount | SelectCard<ICard> | SelectCard<IProjectCard> | SelectHowToPay | SelectPlayer | SelectSpace | undefined;
@@ -37,17 +38,11 @@ export interface IResourceCard {
     resourceType?: ResourceType;
 }
 
-export interface VictoryPoints {
-    type: 'resource' | Tags,
-    points: number,
-    per: number,
-  }
-
 export namespace VictoryPoints {
-  export function resource(points: number, per: number): VictoryPoints {
+  export function resource(points: number, per: number): IVictoryPoints {
     return {type: 'resource', points, per};
   }
-  export function tags(tag: Tags, points: number, per: number): VictoryPoints {
+  export function tags(tag: Tags, points: number, per: number): IVictoryPoints {
     return {type: tag, points, per};
   }
 }
@@ -73,7 +68,7 @@ export interface ICard extends Partial<IActionCard>, IResourceCard {
     cardDiscount?: ICardDiscount | Array<ICardDiscount>;
     // parameter is a Morningstar Inc. special case.
     getRequirementBonus?: (player: Player, parameter: GlobalParameter) => number;
-    victoryPoints?: number | 'special' | VictoryPoints,
+    victoryPoints?: number | 'special' | IVictoryPoints,
     getVictoryPoints: (player: Player) => number;
     onCardPlayed?: (player: Player, card: IProjectCard) => OrOptions | void;
     onStandardProject?: (player: Player, projectType: StandardProjectCard) => void;

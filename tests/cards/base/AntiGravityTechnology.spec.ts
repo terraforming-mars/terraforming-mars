@@ -11,7 +11,7 @@ describe('AntiGravityTechnology', function() {
     player = TestPlayers.BLUE.newPlayer();
   });
 
-  it('Can\'t play', function() {
+  it('Cannot play', function() {
     expect(player.canPlayIgnoringCost(card)).is.not.true;
   });
 

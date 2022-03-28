@@ -44,6 +44,8 @@ import {createPathfindersModel} from './PathfindersModel';
 import {MoonExpansion} from '../moon/MoonExpansion';
 import {MoonModel} from '../common/models/MoonModel';
 import {IColony} from '../colonies/IColony';
+import {CardName} from '../common/cards/CardName';
+import {Tags} from '../common/cards/Tags';
 
 export class Server {
   public static getSimpleGameModel(game: Game): SimpleGameModel {
@@ -198,14 +200,22 @@ export class Server {
 
   public static getCorporationCard(player: Player): CardModel | undefined {
     if (player.corporationCard === undefined) return undefined;
+
     const card = player.corporationCard;
+    let discount = card.cardDiscount === undefined ? undefined : (Array.isArray(card.cardDiscount) ? card.cardDiscount : [card.cardDiscount]);
+
+    // Too bad this is hard-coded
+    if (card.name === CardName.CRESCENT_RESEARCH_ASSOCIATION) {
+      discount = [{tag: Tags.MOON, amount: player.getTagCount(Tags.MOON)}];
+    }
+
     return {
       name: card.name,
       resources: card.resourceCount,
       cardType: CardType.CORPORATION,
       isDisabled: card.isDisabled,
       warning: card.warning,
-      discount: card.cardDiscount === undefined ? undefined : (Array.isArray(card.cardDiscount) ? card.cardDiscount : [card.cardDiscount]),
+      discount: discount,
     } as CardModel;
   }
 

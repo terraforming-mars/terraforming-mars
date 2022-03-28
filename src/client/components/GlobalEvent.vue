@@ -21,9 +21,9 @@ import Vue from 'vue';
 import {GlobalEventModel} from '@/common/models/TurmoilModel';
 import CardRenderData from '@/client/components/card/CardRenderData.vue';
 import CardParty from '@/client/components/card/CardParty.vue';
-import {IGlobalEvent} from '@/turmoil/globalEvents/IGlobalEvent';
+import {IClientGlobalEvent} from '@/common/turmoil/IClientGlobalEvent';
 import {CardComponent} from '@/common/cards/render/CardComponent';
-import {getGlobalEventByName} from '@/turmoil/globalEvents/GlobalEventDealer';
+import {getGlobalEvent} from '@/client/turmoil/ClientGlobalEventManifest';
 import CardDescription from '@/client/components/card/CardDescription.vue';
 
 export default Vue.extend({
@@ -42,7 +42,7 @@ export default Vue.extend({
     },
   },
   data() {
-    const globalEvent: IGlobalEvent | undefined = getGlobalEventByName(this.globalEvent.name);
+    const globalEvent: IClientGlobalEvent | undefined = getGlobalEvent(this.globalEvent.name);
     if (globalEvent === undefined) {
       throw new Error(`Can't find card ${this.globalEvent.name}`);
     }

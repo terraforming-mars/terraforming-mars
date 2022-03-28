@@ -6,9 +6,8 @@ import {CardFinder} from './CardFinder';
 import {CardName} from './common/cards/CardName';
 import {CardType} from './common/cards/CardType';
 import {ClaimedMilestone, serializeClaimedMilestones, deserializeClaimedMilestones} from './milestones/ClaimedMilestone';
+import {ColonyDealer} from './colonies/ColonyDealer';
 import {IColony} from './colonies/IColony';
-import {serializeColonies} from './colonies/Colony';
-import {ColonyDealer, loadColoniesFromJSON} from './colonies/ColonyDealer';
 import {ColonyName} from './common/colonies/ColonyName';
 import {Color} from './common/Color';
 import {ICorporationCard} from './cards/corporation/ICorporationCard';
@@ -72,6 +71,7 @@ import {ArabiaTerraBoard} from './boards/ArabiaTerraBoard';
 import {AddResourcesToCard} from './deferredActions/AddResourcesToCard';
 import {isProduction} from './utils/server';
 import {VastitasBorealisBoard} from './boards/VastitasBorealisBoard';
+import {ColonyDeserializer} from './colonies/ColonyDeserializer';
 
 export interface Score {
   corporation: String;
@@ -208,7 +208,7 @@ export class Game {
 
   // Expansion-specific data
   public colonies: Array<IColony> = [];
-  public colonyDealer: ColonyDealer | undefined = undefined;
+  public discardedColonies: Array<IColony> = []; // Not serialized
   public turmoil: Turmoil | undefined;
   public aresData: IAresData | undefined;
   public moonData: IMoonData | undefined;
@@ -297,11 +297,10 @@ export class Game {
 
     // Add colonies stuff
     if (gameOptions.coloniesExtension) {
-      game.colonyDealer = new ColonyDealer(rng);
-      const communityColoniesSelected = GameSetup.includesCommunityColonies(gameOptions);
-      const allowCommunityColonies = gameOptions.communityCardsOption || communityColoniesSelected;
-
-      game.colonies = game.colonyDealer.drawColonies(players.length, gameOptions.customColoniesList, gameOptions.venusNextExtension, gameOptions.turmoilExtension, allowCommunityColonies);
+      const dealer = new ColonyDealer(rng, gameOptions);
+      dealer.drawColonies(players.length);
+      game.colonies = dealer.colonies;
+      game.discardedColonies = dealer.discardedColonies;
     }
 
     // Add Turmoil stuff
@@ -423,8 +422,7 @@ export class Game {
       awards: this.awards.map((a) => a.name),
       board: this.board.serialize(),
       claimedMilestones: serializeClaimedMilestones(this.claimedMilestones),
-      colonies: serializeColonies(this.colonies),
-      colonyDealer: this.colonyDealer,
+      colonies: this.colonies.map((colony) => colony.serialize()),
       currentSeed: this.rng.current,
       dealer: this.dealer.serialize(),
       deferredActions: [],
@@ -652,7 +650,7 @@ export class Game {
     // Activate some colonies
     if (this.gameOptions.coloniesExtension && corporationCard.resourceType !== undefined) {
       this.colonies.forEach((colony) => {
-        if (colony.resourceType !== undefined && colony.resourceType === corporationCard.resourceType) {
+        if (colony.metadata.resourceType !== undefined && colony.metadata.resourceType === corporationCard.resourceType) {
           colony.isActive = true;
         }
       });
@@ -1643,13 +1641,10 @@ export class Game {
     }
     // Reload colonies elements if needed
     if (gameOptions.coloniesExtension) {
-      game.colonyDealer = new ColonyDealer(game.rng);
-
-      if (d.colonyDealer !== undefined) {
-        game.colonyDealer.discardedColonies = loadColoniesFromJSON(d.colonyDealer.discardedColonies);
-      }
-
-      game.colonies = loadColoniesFromJSON(d.colonies);
+      game.colonies = ColonyDeserializer.deserializeAndFilter(d.colonies);
+      const dealer = new ColonyDealer(rng, gameOptions);
+      dealer.restore(game.colonies);
+      game.discardedColonies = game.discardedColonies;
     }
 
     // Reload turmoil elements if needed

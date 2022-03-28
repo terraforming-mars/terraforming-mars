@@ -4,8 +4,9 @@ import {CardType} from '@/common/cards/CardType';
 import {ICard} from '@/cards/ICard';
 import {ICardFactory} from '@/cards/ICardFactory';
 import {GameModule} from '@/common/cards/GameModule';
+import {IClientCard} from '@/common/cards/IClientCard';
 
-export type CardAndModule = {card: ICard, module: GameModule};
+export type CardAndModule = {card: IClientCard, module: GameModule};
 const cards: Map<CardName, CardAndModule> = new Map();
 const cardArray: Array<CardAndModule> = [];
 ALL_CARD_MANIFESTS.forEach((manifest) => {

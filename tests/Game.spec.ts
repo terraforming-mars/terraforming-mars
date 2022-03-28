@@ -628,7 +628,7 @@ describe('Game', () => {
     const gameKeys = Object.keys(game);
     expect(gameKeys).not.include('moonData');
     expect(gameKeys).not.include('pathfindersData');
-    expect(serializedKeys.concat('rng').sort())
+    expect(serializedKeys.concat('rng', 'discardedColonies').sort())
       .deep.eq(gameKeys.concat('moonData', 'pathfindersData', 'seed', 'currentSeed').sort());
   });
 

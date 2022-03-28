@@ -169,7 +169,7 @@ import PlanetaryTracks from '@/client/components/pathfinders/PlanetaryTracks.vue
 import LogPanel from '@/client/components/LogPanel.vue';
 import Button from '@/client/components/common/Button.vue';
 import {playerColorClass} from '@/common/utils/utils';
-import {Timer} from '@/Timer';
+import {Timer} from '@/common/Timer';
 
 
 import * as constants from '@/common/constants';

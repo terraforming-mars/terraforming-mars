@@ -30,7 +30,7 @@ import {SelectAmount} from './inputs/SelectAmount';
 import {SelectCard} from './inputs/SelectCard';
 import {SellPatentsStandardProject} from './cards/base/standardProjects/SellPatentsStandardProject';
 import {SendDelegateToArea} from './deferredActions/SendDelegateToArea';
-import {DeferredAction} from './deferredActions/DeferredAction';
+import {DeferredAction, Priority} from './deferredActions/DeferredAction';
 import {SelectHowToPayDeferred} from './deferredActions/SelectHowToPayDeferred';
 import {SelectColony} from './inputs/SelectColony';
 import {SelectPartyToSendDelegate} from './inputs/SelectPartyToSendDelegate';
@@ -51,7 +51,7 @@ import {IVictoryPointsBreakdown} from './common/game/IVictoryPointsBreakdown';
 import {SelectProductionToLose} from './inputs/SelectProductionToLose';
 import {ShiftAresGlobalParameters} from './inputs/ShiftAresGlobalParameters';
 import {IAresGlobalParametersResponse} from './common/inputs/IAresGlobalParametersResponse';
-import {Timer} from './Timer';
+import {Timer} from './common/Timer';
 import {TurmoilHandler} from './turmoil/TurmoilHandler';
 import {CardLoader} from './CardLoader';
 import {DrawCards} from './deferredActions/DrawCards';
@@ -974,7 +974,7 @@ export class Player {
 
   private runInputCb(result: PlayerInput | undefined): void {
     if (result !== undefined) {
-      this.game.defer(new DeferredAction(this, () => result));
+      this.defer(result, Priority.DEFAULT);
     }
   }
 
@@ -1037,6 +1037,8 @@ export class Player {
       if (colonyName === undefined) {
         throw new Error('No colony selected');
       }
+      // TODO(kberg): this passes true because SelectColony sometimes loads discarded colonies
+      // but that can be a parameter, and that would be useful.
       const colony = ColoniesHandler.getColony(this.game, colonyName, true);
       this.runInputCb(pi.cb(colony));
     } else if (pi instanceof OrOptions) {
@@ -1540,7 +1542,7 @@ export class Player {
     // Activate some colonies
     if (this.game.gameOptions.coloniesExtension && selectedCard.resourceType !== undefined) {
       this.game.colonies.forEach((colony) => {
-        if (colony.resourceType !== undefined && colony.resourceType === selectedCard.resourceType) {
+        if (colony.metadata.resourceType !== undefined && colony.metadata.resourceType === selectedCard.resourceType) {
           colony.isActive = true;
         }
       });
@@ -1559,12 +1561,7 @@ export class Player {
 
     // Play the card
     const action = selectedCard.play(this);
-    if (action !== undefined) {
-      this.game.defer(new DeferredAction(
-        this,
-        () => action,
-      ));
-    }
+    this.defer(action, Priority.DEFAULT);
 
     // Remove card from hand
     const projectCardIndex = this.cardsInHand.findIndex((card) => card.name === selectedCard.name);
@@ -2382,5 +2379,12 @@ export class Player {
     });
 
     return unavailableColonies < availableColonyTiles.length;
+  }
+
+  /* Shorthand for deferring things */
+  public defer(input: PlayerInput | undefined, priority: Priority): void {
+    if (input === undefined) return;
+    const action = new DeferredAction(this, () => input, priority);
+    this.game.defer(action);
   }
 }

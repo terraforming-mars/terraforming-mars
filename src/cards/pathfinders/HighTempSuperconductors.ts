@@ -19,6 +19,7 @@ export class HighTempSuperconductors extends Card implements IProjectCard {
       tags: [Tags.ENERGY, Tags.SCIENCE],
 
       requirements: CardRequirements.builder((b) => b.party(PartyName.KELVINISTS)),
+      cardDiscount: {tag: Tags.ENERGY, amount: 3},
 
       metadata: {
         cardNumber: 'PfTMP',
@@ -32,13 +33,6 @@ export class HighTempSuperconductors extends Card implements IProjectCard {
         description: 'Requires Kelvinists are ruling or you have 2 delegates there. Increase your energy production 2 steps.',
       },
     });
-  }
-
-  public getCardDiscount(_player: Player, card: IProjectCard) {
-    if (card.tags.includes(Tags.ENERGY)) {
-      return 3;
-    }
-    return 0;
   }
 
   public play(player: Player) {

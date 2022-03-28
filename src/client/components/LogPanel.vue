@@ -26,7 +26,7 @@
             <Card :card="{name: card, resources: getResourcesOnCard(card)}"/>
           </div>
           <div id="log_panel_card" class="cardbox" v-for="globalEventName in globalEventNames" :key="globalEventName">
-            <global-event :globalEvent="getGlobalEvent(globalEventName)" type="prior" :showIcons="false"></global-event>
+            <global-event :globalEvent="getGlobalEventModel(globalEventName)" type="prior" :showIcons="false"></global-event>
           </div>
         </div>
       </div>
@@ -50,9 +50,8 @@ import {SoundManager} from '@/client/utils/SoundManager';
 import {getPreferences} from '@/client/utils/PreferencesManager';
 import {GlobalEventName} from '@/common/turmoil/globalEvents/GlobalEventName';
 import GlobalEvent from '@/client/components/GlobalEvent.vue';
-import {getGlobalEventByName} from '@/turmoil/globalEvents/GlobalEventDealer';
+import {getGlobalEventModel} from '@/client/turmoil/ClientGlobalEventManifest';
 import {GlobalEventModel} from '@/common/models/TurmoilModel';
-import {PartyName} from '@/common/turmoil/PartyName';
 import Button from '@/client/components/common/Button.vue';
 import {Log} from '@/common/logs/Log';
 import {getCard} from '@/client/cards/ClientCardManifest';
@@ -316,22 +315,8 @@ export default Vue.extend({
     lastGenerationClass(): string {
       return this.lastSoloGeneration === this.generation ? 'last-generation blink-animation' : '';
     },
-    getGlobalEvent(globalEventName: GlobalEventName): GlobalEventModel {
-      const globalEvent = getGlobalEventByName(globalEventName);
-      if (globalEvent) {
-        return {
-          name: globalEvent.name,
-          description: globalEvent.description,
-          revealed: globalEvent.revealedDelegate,
-          current: globalEvent.currentDelegate,
-        };
-      }
-      return {
-        name: globalEventName,
-        description: 'global event not found',
-        revealed: PartyName.GREENS,
-        current: PartyName.GREENS,
-      };
+    getGlobalEventModel(globalEventName: GlobalEventName): GlobalEventModel {
+      return getGlobalEventModel(globalEventName);
     },
     getResourcesOnCard(cardName: CardName) {
       for (const player of this.players) {

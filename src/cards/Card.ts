@@ -12,6 +12,7 @@ import {TRSource} from './ICard';
 import {CardRenderDynamicVictoryPoints} from './render/CardRenderDynamicVictoryPoints';
 import {CardRenderItemType} from '../common/cards/render/CardRenderItemType';
 import {IVictoryPoints} from '../common/cards/IVictoryPoints';
+import {IProjectCard} from './IProjectCard';
 
 export interface StaticCardProperties {
   adjacencyBonus?: IAdjacencyBonus;
@@ -198,5 +199,26 @@ export abstract class Card {
     } else {
       properties.metadata.victoryPoints = CardRenderDynamicVictoryPoints.tag(vps.type, vps.points, vps.per);
     }
+  }
+
+  public getCardDiscount(_player?: Player, card?: IProjectCard): number {
+    if (this.cardDiscount === undefined) {
+      return 0;
+    }
+    let sum = 0;
+    const discounts = Array.isArray(this.cardDiscount) ? this.cardDiscount : [this.cardDiscount];
+    for (const discount of discounts) {
+      if (discount.tag === undefined) {
+        sum += discount.amount;
+      } else {
+        const tags = card?.tags.filter((tag) => tag === discount.tag).length ?? 0;
+        if (discount.per !== 'card') {
+          sum += discount.amount * tags;
+        } else if (tags > 0) {
+          sum += discount.amount;
+        }
+      }
+    }
+    return sum;
   }
 }

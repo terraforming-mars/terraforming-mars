@@ -5,6 +5,8 @@ import {Game} from '../../../src/Game';
 import {Player} from '../../../src/Player';
 import {Resources} from '../../../src/common/Resources';
 import {TestPlayers} from '../../TestPlayers';
+import {TestingUtils} from '../../TestingUtils';
+import {Tags} from '../../../src/common/cards/Tags';
 
 describe('MassConverter', function() {
   let card : MassConverter; let player : Player;
@@ -28,5 +30,8 @@ describe('MassConverter', function() {
     expect(player.getProduction(Resources.ENERGY)).to.eq(6);
     expect(card.getCardDiscount(player, card)).to.eq(0);
     expect(card.getCardDiscount(player, new TollStation())).to.eq(2);
+
+    const fakeCard = TestingUtils.fakeCard({tags: [Tags.SPACE, Tags.SPACE, Tags.SPACE, Tags.SPACE, Tags.SPACE]});
+    expect(card.getCardDiscount(player, fakeCard)).eq(2);
   });
 });

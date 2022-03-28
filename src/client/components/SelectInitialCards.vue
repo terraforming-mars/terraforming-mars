@@ -81,7 +81,7 @@ export default (Vue as WithRefs<Refs>).extend({
         switch (this.selectedCorporation?.name) {
         // For each step you increase the production of a resource ... you also gain that resource.
         case CardName.MANUTECH:
-          result += cam.card.productionBox?.megacredits || 0;
+          result += cam.card.productionBox?.megacredits ?? 0;
           break;
 
         // When you place a city tile, gain 3 M€.

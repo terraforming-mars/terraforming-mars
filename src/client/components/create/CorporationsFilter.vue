@@ -147,34 +147,40 @@ export default Vue.extend({
         }
       }
     },
+    watchSelect(module: GameModule, enabled: boolean) {
+      enabled ? this.selectAll(module) : this.selectNone(module);
+    },
   },
   watch: {
     selectedCorporations(value) {
       this.$emit('corporation-list-changed', value);
     },
     corporateEra(enabled) {
-      enabled ? this.selectAll(GameModule.CorpEra) : this.selectNone(GameModule.CorpEra);
+      this.watchSelect(GameModule.CorpEra, enabled);
     },
     prelude(enabled) {
-      enabled ? this.selectAll(GameModule.Prelude) : this.selectNone(GameModule.Prelude);
+      this.watchSelect(GameModule.Prelude, enabled);
     },
     venusNext(enabled) {
-      enabled ? this.selectAll(GameModule.Venus) : this.selectNone(GameModule.Venus);
+      this.watchSelect(GameModule.Venus, enabled);
     },
     colonies(enabled) {
-      enabled ? this.selectAll(GameModule.Colonies) : this.selectNone(GameModule.Colonies);
+      this.watchSelect(GameModule.Colonies, enabled);
     },
     turmoil(enabled) {
-      enabled ? this.selectAll(GameModule.Turmoil) : this.selectNone(GameModule.Turmoil);
+      this.watchSelect(GameModule.Turmoil, enabled);
     },
     promoCardsOption(enabled) {
-      enabled ? this.selectAll(GameModule.Promo) : this.selectNone(GameModule.Promo);
+      this.watchSelect(GameModule.Promo, enabled);
     },
     communityCardsOption(enabled) {
-      enabled ? this.selectAll(GameModule.Community) : this.selectNone(GameModule.Community);
+      this.watchSelect(GameModule.Community, enabled);
     },
     moonExpansion(enabled) {
-      enabled ? this.selectAll(GameModule.Moon) : this.selectNone(GameModule.Moon);
+      this.watchSelect(GameModule.Moon, enabled);
+    },
+    pathfindersExpansion(enabled) {
+      this.watchSelect(GameModule.Pathfinders, enabled);
     },
   },
 });

@@ -478,6 +478,7 @@ describe('SelectHowToPayForProjectCard', () => {
 
   const howToPay = function(htp: Partial<HowToPay>) : HowToPay {
     return {
+      data: htp.data ?? 0,
       floaters: htp.floaters ?? 0,
       heat: htp.heat ?? 0,
       megaCredits: htp.megaCredits ?? 0,

@@ -9,6 +9,7 @@ import {Ambient} from './Ambient';
 import {Anthozoa} from './Anthozoa';
 import {AntidesertificationTechniques} from './AntidesertificationTechniques';
 import {AsteroidResources} from './AsteroidResources';
+import {Aurorai} from './Aurorai';
 import {BotanicalExperience} from './BotanicalExperience';
 import {BreedingFarms} from './BreedingFarms';
 import {BioSol} from './BioSol';
@@ -197,7 +198,7 @@ export const PATHFINDERS_CARD_MANIFEST = new CardManifest({
     {cardName: CardName.MARTIAN_INSURANCE_GROUP, Factory: MartianInsuranceGroup},
     // {cardName: CardName.SOLBANK, Factory: SolBank},
     {cardName: CardName.BIO_SOL, Factory: BioSol},
-    // {cardName: CardName.AURORAI, Factory: Aurorai},
+    {cardName: CardName.AURORAI, Factory: Aurorai},
     {cardName: CardName.COLLEGIUM_COPERNICUS, Factory: CollegiumCopernicus},
     {cardName: CardName.ROBIN_HAULINGS, Factory: RobinHaulings, compatibility: GameModule.Venus},
     // {cardName: CardName.ODYSSEY_EFFECT, Factory: OdysseyEffect},

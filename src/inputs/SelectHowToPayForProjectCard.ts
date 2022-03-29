@@ -6,7 +6,6 @@ import {Units} from '../common/Units';
 import {MoonExpansion} from '../moon/MoonExpansion';
 import {Player} from '../Player';
 
-// TODO(kberg): Rename to SelectProjectCardToPlay
 export class SelectHowToPayForProjectCard implements PlayerInput {
   public inputType: PlayerInputTypes = PlayerInputTypes.SELECT_HOW_TO_PAY_FOR_PROJECT_CARD;
   public title = 'Play project card';
@@ -16,6 +15,7 @@ export class SelectHowToPayForProjectCard implements PlayerInput {
   public canUseHeat: boolean;
   public scienceResources: number;
   public seedResources: number;
+  public dataResources: number;
   public reserveUnits: Array<Units>;
 
   constructor(
@@ -27,6 +27,7 @@ export class SelectHowToPayForProjectCard implements PlayerInput {
     this.canUseHeat = player.canUseHeatAsMegaCredits;
     this.scienceResources = player.getSpendableScienceResources();
     this.seedResources = player.getSpendableSeedResources();
+    this.dataResources = player.getSpendableData();
     this.reserveUnits = this.cards.map((card) => {
       return card.reserveUnits ? MoonExpansion.adjustedReserveCosts(player, card) : Units.EMPTY;
     });

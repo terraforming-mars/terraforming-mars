@@ -3,6 +3,7 @@ import {PlayerId} from './common/Types';
 import {DEFAULT_FLOATERS_VALUE, DEFAULT_MICROBES_VALUE, MAX_FLEET_SIZE, MILESTONE_COST, REDS_RULING_POLICY_COST} from './common/constants';
 import {AndOptions} from './inputs/AndOptions';
 import {Aridor} from './cards/colonies/Aridor';
+import {Aurorai} from './cards/pathfinders/Aurorai';
 import {Board} from './boards/Board';
 import {CardFinder} from './CardFinder';
 import {CardName} from './common/cards/CardName';
@@ -250,6 +251,10 @@ export class Player {
       this.hasIncreasedTerraformRatingThisGeneration = true;
       if (opts.log === true) {
         this.game.log('${0} gained ${1} TR', (b) => b.player(this).number(steps));
+      }
+      // Aurori hook
+      if (this.corporationCard?.name === CardName.AURORAI) {
+        (this.corporationCard as Aurorai).onIncreaseTerraformRating(this, steps);
       }
     };
 
@@ -995,6 +1000,7 @@ export class Player {
       floaters: 0,
       science: 0,
       seeds: 0,
+      data: 0,
     };
     try {
       const howToPay: HowToPay = JSON.parse(json);
@@ -1406,6 +1412,10 @@ export class Player {
     return card.tags.includes(Tags.PLANT) || card.name === CardName.GREENERY_STANDARD_PROJECT;
   }
 
+  private canUseData(card: ICard): boolean {
+    return card.cardType === CardType.STANDARD_PROJECT;
+  }
+
   private playPreludeCard(): PlayerInput {
     return new SelectCard(
       'Select prelude card to play',
@@ -1510,6 +1520,10 @@ export class Player {
     return 0;
   }
 
+  public getSpendableData(): number {
+    return this.corporationCard?.name === CardName.AURORAI ? this.corporationCard.resourceCount : 0;
+  }
+
   public playCard(selectedCard: IProjectCard, howToPay?: HowToPay, addToPlayedCards: boolean = true): undefined {
     // Pay for card
     if (howToPay !== undefined) {
@@ -1533,6 +1547,10 @@ export class Player {
 
         if (this.corporationCard?.name === CardName.SOYLENT_SEEDLING_SYSTEMS) {
           this.removeResourceFrom(this.corporationCard, howToPay.seeds);
+        }
+
+        if (this.corporationCard?.name === CardName.AURORAI) {
+          this.removeResourceFrom(this.corporationCard, howToPay.data);
         }
       }
     }
@@ -1827,6 +1845,7 @@ export class Player {
         microbes: this.canUseMicrobes(card),
         science: this.canUseScience(card),
         seeds: this.canUseSeeds(card),
+        data: this.canUseData(card),
         reserveUnits: MoonExpansion.adjustedReserveCosts(this, card),
         tr: card.tr,
       });
@@ -1856,6 +1875,7 @@ export class Player {
     microbes?: boolean,
     science?: boolean,
     seeds?: boolean,
+    data?: boolean,
     reserveUnits?: Units,
     tr?: TRSource,
   }) {
@@ -1870,6 +1890,7 @@ export class Player {
     const canUseMicrobes: boolean = options?.microbes ?? false;
     const canUseScience: boolean = options?.science ?? false;
     const canUseSeeds: boolean = options?.seeds ?? false;
+    const canUseData: boolean = options?.data ?? false;
 
     const redsCost = TurmoilHandler.computeTerraformRatingBump(this, options?.tr) * REDS_RULING_POLICY_COST;
 
@@ -1890,7 +1911,8 @@ export class Player {
       (canUseFloaters ? this.getFloatersCanSpend() * 3 : 0) +
       (canUseMicrobes ? this.getMicrobesCanSpend() * 2 : 0) +
       (canUseScience ? this.getSpendableScienceResources() : 0) +
-      (canUseSeeds ? this.getSpendableSeedResources() * constants.SEED_VALUE : 0);
+      (canUseSeeds ? this.getSpendableSeedResources() * constants.SEED_VALUE : 0) +
+      (canUseData ? this.getSpendableData() * constants.DATA_VALUE : 0);
   }
 
   private getStandardProjects(): Array<StandardProjectCard> {

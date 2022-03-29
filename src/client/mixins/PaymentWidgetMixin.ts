@@ -5,7 +5,7 @@ import {PlayerInputModel} from '@/common/models/PlayerInputModel';
 import {PlayerViewModel} from '@/common/models/PlayerModel';
 import {Tags} from '@/common/cards/Tags';
 import {Units} from '@/common/Units';
-import {SEED_VALUE} from '@/common/constants';
+import {DATA_VALUE, SEED_VALUE} from '@/common/constants';
 import {ResourceType} from '@/common/ResourceType';
 
 export interface SelectHowToPayModel {
@@ -20,6 +20,7 @@ export interface SelectHowToPayModel {
     warning: string | undefined;
     science?: number; // Science isn't used in this component, but it simplifies testing.
     seeds?: number;
+    data?: number;
 }
 
 export interface SelectHowToPayForProjectCardModel extends SelectHowToPayModel {
@@ -44,7 +45,7 @@ export interface PaymentWidgetModel extends SelectHowToPayModel {
 }
 
 // https://steveholgado.com/typescript-types-from-arrays/
-export const unit = ['megaCredits', 'titanium', 'steel', 'heat', 'microbes', 'floaters', 'science', 'seeds'] as const;
+export const unit = ['megaCredits', 'titanium', 'steel', 'heat', 'microbes', 'floaters', 'science', 'seeds', 'data'] as const;
 export type Unit = typeof unit[number];
 
 export const PaymentWidgetMixin = {
@@ -73,6 +74,8 @@ export const PaymentWidgetMixin = {
         return 3;
       case 'seeds':
         return SEED_VALUE;
+      case 'data':
+        return DATA_VALUE;
       default:
         return 1;
       }
@@ -134,11 +137,7 @@ export const PaymentWidgetMixin = {
         throw new Error(`can not setMaxValue for ${target} on this`);
       }
       const cost: number = this.asModel().$data.cost;
-      let amountNeed = cost;
-      if (target !== 'science' && target !== 'heat') {
-        amountNeed = Math.floor(cost / this.getResourceRate(target));
-      }
-
+      const amountNeed = Math.floor(cost / this.getResourceRate(target));
       const amountHave: number = this.getAmount(target);
 
       while (currentValue < amountHave && currentValue < amountNeed) {
@@ -162,6 +161,7 @@ export const PaymentWidgetMixin = {
       case 'microbes':
       case 'science':
       case 'seeds':
+      case 'data':
         amount = model.playerinput[target];
         break;
       }

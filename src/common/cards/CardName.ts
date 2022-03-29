@@ -741,7 +741,7 @@ export enum CardName {
     AURORAI = 'Aurorai',
     COLLEGIUM_COPERNICUS = 'Collegium Copernicus',
     ROBIN_HAULINGS = 'Robin Haulings',
-    ODYSSEY_EFFECT = 'Odyssey Effect',
+    ODYSSEY = 'Odyssey',
     GAGARIN_MOBILE_BASE = 'Gagarin Mobile Base',
     MARS_FRONTIER_ALLIANCE = 'Mars Frontier Alliance',
     MIND_SET_MARS = 'Mind Set Mars',

@@ -11,6 +11,7 @@ import {PlaceMoonColonyTile} from '../../moon/PlaceMoonColonyTile';
 import {Card} from '../Card';
 import {VictoryPoints} from '../ICard';
 import {played} from '../Options';
+import {AltSecondaryTag} from '../../common/cards/render/AltSecondaryTag';
 
 export class IntragenSanctuaryHeadquarters extends Card implements ICorporationCard {
   constructor() {
@@ -25,14 +26,13 @@ export class IntragenSanctuaryHeadquarters extends Card implements ICorporationC
 
       metadata: {
         description: 'You start with 38 M€. ' +
-        'As your first action, place a colony tile on the Moon and raise the Colony Rate 1 step.',
+        'As your first action, place a colony tile on the Moon and raise the Colony Rate 1 step. 1 VP for every 2 animals on this card.',
         cardNumber: '',
         renderData: CardRenderer.builder((b) => {
-          b.megacredits(38).br;
+          b.megacredits(38).moonColony({secondaryTag: AltSecondaryTag.MOON_COLONY_RATE}).br;
           b.effect('When any player plays an animal tag (including this), add 1 animal on this card.', (eb) => {
             eb.animals(1, {played}).startEffect.animals(1);
-          }).br,
-          b.text('1 VP for every 2 animals on this card.').br;
+          }).br;
         }),
       },
     });

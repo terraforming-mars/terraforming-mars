@@ -71,7 +71,6 @@ export default Vue.extend({
       return this.metadata.buildQuantity[this.idx] > 1 ? String(this.metadata.buildQuantity[this.idx]) : '';
     },
     resource(): string | undefined {
-      console.log(this.metadata.name, this.metadata.buildResource, this.metadata.resourceType);
       return (this.metadata.buildResource ?? this.metadata.resourceType)?.toLowerCase();
     },
   },

@@ -240,36 +240,34 @@ export class Player {
   }
 
   public increaseTerraformRating(opts: {log?: boolean} = {}) {
-    if (!this.game.gameOptions.turmoilExtension) {
-      this.terraformRating++;
-      this.hasIncreasedTerraformRatingThisGeneration = true;
-      return;
-    }
-
-    // Turmoil Reds capacity
-    if (PartyHooks.shouldApplyPolicy(this, PartyName.REDS)) {
-      if (this.canAfford(REDS_RULING_POLICY_COST)) {
-        this.game.defer(new SelectHowToPayDeferred(this, REDS_RULING_POLICY_COST, {title: 'Select how to pay for TR increase'}));
-      } else {
-        // Cannot pay Reds, will not increase TR
-        return;
-      }
-    }
-
-    this.terraformRating++;
-    this.hasIncreasedTerraformRatingThisGeneration = true;
-    if (opts.log === true) {
-      this.game.log('${0} gained 1 TR', (b) => b.player(this));
-    }
+    this.increaseTerraformRatingSteps(1, opts);
   }
 
   public increaseTerraformRatingSteps(steps: number, opts: {log?: boolean} = {}) {
-    for (let i = 0; i < steps; i++) {
-      this.increaseTerraformRating();
-    }
+    const raiseRating = () => {
+      this.terraformRating += steps;
 
-    if (opts.log === true) {
-      this.game.log('${0} gained ${1} TR', (b) => b.player(this).number(steps));
+      this.hasIncreasedTerraformRatingThisGeneration = true;
+      if (opts.log === true) {
+        this.game.log('${0} gained ${1} TR', (b) => b.player(this).number(steps));
+      }
+    };
+
+    if (PartyHooks.shouldApplyPolicy(this, PartyName.REDS)) {
+      if (!this.canAfford(REDS_RULING_POLICY_COST * steps)) {
+        // Cannot pay Reds, will not increase TR
+        return;
+      }
+      const deferred = new SelectHowToPayDeferred(
+        this,
+        REDS_RULING_POLICY_COST * steps,
+        {
+          title: 'Select how to pay for TR increase',
+          afterPay: raiseRating,
+        });
+      this.game.defer(deferred, Priority.COST);
+    } else {
+      raiseRating();
     }
   }
 

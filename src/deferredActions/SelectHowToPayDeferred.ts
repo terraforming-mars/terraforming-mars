@@ -31,9 +31,7 @@ export class SelectHowToPayDeferred implements DeferredAction {
   public execute() {
     if (this.mustPayWithMegacredits()) {
       this.player.deductResource(Resources.MEGACREDITS, this.amount);
-      if (this.options.afterPay !== undefined) {
-        this.options.afterPay();
-      }
+      this.options.afterPay?.();
       return undefined;
     }
 
@@ -52,9 +50,7 @@ export class SelectHowToPayDeferred implements DeferredAction {
         if (howToPay.seeds > 0 && this.player.corporationCard !== undefined) {
           this.player.removeResourceFrom(this.player.corporationCard, howToPay.seeds);
         }
-        if (this.options.afterPay !== undefined) {
-          this.options.afterPay();
-        }
+        this.options.afterPay?.();
         return undefined;
       },
     );

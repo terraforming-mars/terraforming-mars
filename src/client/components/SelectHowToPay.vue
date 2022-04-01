@@ -161,7 +161,11 @@ export default Vue.extend({
         return;
       }
 
-      // What is this about? If someone figures it out, please add a comment.
+      // This following line was introduced in https://github.com/terraforming-mars/terraforming-mars/pull/2353
+      //
+      // According to bafolts@: I think this is an attempt to fix user error. This was added when the UI was
+      // updated to allow paying with heat. Guessing this was trying to avoid taking the heat or megaCredits
+      // from user when nothing is required. Can probably remove this if server only removes what is required.
       if (requiredAmt === 0) {
         htp.heat = 0;
         htp.megaCredits = 0;

@@ -186,7 +186,7 @@ describe('Turmoil', function() {
     expect(player.steel).to.eq(0); // should not give ruling policy bonus
   });
 
-  it('Can\'t raise TR via Standard Projects if Reds are ruling and player cannot pay', function() {
+  it('Cannot raise TR via Standard Projects if Reds are ruling and player cannot pay', function() {
     setRulingParty(turmoil, game, new Reds());
     player.megaCredits = 14;
     const standardProjects = player.getStandardProjectOption();
@@ -205,7 +205,7 @@ describe('Turmoil', function() {
     expect(new GreeneryStandardProject().canAct(player)).equal(true);
   });
 
-  it('Can\'t play cards to raise TR directly if Reds are ruling and player cannot pay', function() {
+  it('Cannot play cards to raise TR directly if Reds are ruling and player cannot pay', function() {
     setRulingParty(turmoil, game, new Reds());
     player.megaCredits = 16;
     const releaseOfInertGases = new ReleaseOfInertGases();
@@ -220,7 +220,7 @@ describe('Turmoil', function() {
     expect(player.canPlay(magneticFieldGeneratorsPromo)).is.not.true; // needs 31 MC
   });
 
-  it('Can\'t play cards to raise TR via global parameters if Reds are ruling and player cannot pay', function() {
+  it('Cannot play cards to raise TR via global parameters if Reds are ruling and player cannot pay', function() {
     setRulingParty(turmoil, game, new Reds());
     // Both of these cards cost 23MC.
     const iceAsteroid = new IceAsteroid();
@@ -252,7 +252,7 @@ describe('Turmoil', function() {
   });
 
 
-  it('canPlay: reds tax applies by default when raising oxygen', function() {
+  it('canPlay: Reds tax applies by default when raising oxygen', function() {
   // Strip Mine raises the oxygen level two steps.
     const card = new StripMine();
     const player = TestPlayers.BLUE.newPlayer();
@@ -589,6 +589,64 @@ describe('Turmoil', function() {
 
     player.megaCredits = card.cost;
     expect(player.canPlay(card)).is.true;
+  });
+
+  it('Reds: Cannot raise TR directly without the money to back it up', function() {
+    const player = TestPlayers.BLUE.newPlayer();
+    const game = Game.newInstance('foobar', [player], player, TestingUtils.setCustomGameOptions({moonExpansion: true}));
+    const turmoil = game.turmoil!;
+    game.phase = Phase.ACTION;
+
+    turmoil.rulingParty = new Reds();
+    PoliticalAgendas.setNextAgenda(turmoil, game);
+
+    expect(player.getTerraformRating()).eq(14);
+
+    player.megaCredits = 2;
+    player.increaseTerraformRating();
+    TestingUtils.runAllActions(game);
+
+    expect(player.megaCredits).eq(2); // No change
+    expect(player.getTerraformRating()).eq(14);
+
+    player.megaCredits = 3;
+    player.increaseTerraformRating();
+    // Possibly remove the requirement to runAllActions if the play is only paying with MC
+    TestingUtils.runAllActions(game);
+
+    expect(player.megaCredits).eq(0);
+    expect(player.getTerraformRating()).eq(15);
+
+    player.megaCredits = 3;
+    player.increaseTerraformRatingSteps(2);
+    TestingUtils.runAllActions(game);
+
+    expect(player.megaCredits).eq(3); // No change
+    expect(player.getTerraformRating()).eq(15);
+
+    player.megaCredits = 5;
+    player.increaseTerraformRatingSteps(2);
+    TestingUtils.runAllActions(game);
+
+    expect(player.megaCredits).eq(5); // No change
+    expect(player.getTerraformRating()).eq(15);
+
+    player.megaCredits = 6;
+    player.increaseTerraformRatingSteps(2);
+    TestingUtils.runAllActions(game);
+
+    expect(player.megaCredits).eq(0);
+    expect(player.getTerraformRating()).eq(17);
+
+    // This doesn't apply outside of the ACTION phase
+    game.phase = Phase.SOLAR;
+
+    player.megaCredits = 6;
+    player.increaseTerraformRatingSteps(2);
+    TestingUtils.runAllActions(game);
+
+    expect(player.megaCredits).eq(6);
+    expect(player.getTerraformRating()).eq(19);
   });
 
   it('serializes and deserializes keeping players', function() {

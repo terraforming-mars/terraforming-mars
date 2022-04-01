@@ -200,7 +200,7 @@ export const PATHFINDERS_CARD_MANIFEST = new CardManifest({
     // {cardName: CardName.AURORAI, Factory: Aurorai},
     {cardName: CardName.COLLEGIUM_COPERNICUS, Factory: CollegiumCopernicus},
     {cardName: CardName.ROBIN_HAULINGS, Factory: RobinHaulings, compatibility: GameModule.Venus},
-    // {cardName: CardName.ODYSSEY_EFFECT, Factory: OdysseyEffect},
+    // {cardName: CardName.ODYSSEY, Factory: Odyssey},
     // {cardName: CardName.GAGARIN_MOBILE_BASE, Factory: GagarinMobileBase},
     // {cardName: CardName.MARS_FRONTIER_ALLIANCE, Factory: MarsFrontierAlliance},
     {cardName: CardName.MIND_SET_MARS, Factory: MindSetMars, compatibility: GameModule.Turmoil},

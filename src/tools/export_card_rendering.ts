@@ -9,6 +9,10 @@ import {GameModule} from '../common/cards/GameModule';
 import {IGlobalEvent} from '../turmoil/globalEvents/IGlobalEvent';
 import {ALL_EVENTS} from '../turmoil/globalEvents/GlobalEventDealer';
 import {IClientGlobalEvent} from '../common/turmoil/IClientGlobalEvent';
+import {IClientCard} from '../common/cards/IClientCard';
+import {CardType} from '../common/cards/CardType';
+import {ICorporationCard} from '../cards/corporation/ICorporationCard';
+import {PreludeCard} from '../cards/prelude/PreludeCard';
 
 class ProjectCardProcessor {
   public static json: Array<any> = [];
@@ -29,20 +33,33 @@ class ProjectCardProcessor {
   }
 
   private static processCard(module: GameModule, card: ICard) {
-    const vizCardData = {
+    let startingMegaCredits = undefined;
+    let cardCost = undefined;
+    if (card.cardType === CardType.PRELUDE) {
+      startingMegaCredits = (card as PreludeCard).startingMegaCredits;
+    }
+    if (card.cardType === CardType.CORPORATION) {
+      startingMegaCredits = (card as ICorporationCard).startingMegaCredits;
+      cardCost = (card as ICorporationCard).cardCost;
+    }
+    const clientCard: IClientCard = {
       module: module,
       name: card.name,
       tags: card.tags,
       cardDiscount: card.cardDiscount,
-      resourceType: card.resourceType,
+      victoryPoints: card.victoryPoints,
       cost: card.cost,
       cardType: card.cardType,
       requirements: card.requirements,
       metadata: card.metadata,
       warning: card.warning,
+      productionBox: card.productionBox,
+      resourceType: card.resourceType,
+      startingMegaCredits: startingMegaCredits,
+      cardCost: cardCost,
     };
 
-    ProjectCardProcessor.json.push(vizCardData);
+    ProjectCardProcessor.json.push(clientCard);
   }
 }
 

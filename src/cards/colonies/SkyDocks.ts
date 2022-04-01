@@ -36,10 +36,6 @@ export class SkyDocks extends Card implements IProjectCard {
     return undefined;
   }
 
-  public getCardDiscount() {
-    return 1;
-  }
-
   public onDiscard(player: Player): void {
     player.decreaseFleetSize();
   }

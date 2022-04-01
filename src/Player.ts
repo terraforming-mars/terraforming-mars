@@ -30,7 +30,7 @@ import {SelectAmount} from './inputs/SelectAmount';
 import {SelectCard} from './inputs/SelectCard';
 import {SellPatentsStandardProject} from './cards/base/standardProjects/SellPatentsStandardProject';
 import {SendDelegateToArea} from './deferredActions/SendDelegateToArea';
-import {DeferredAction} from './deferredActions/DeferredAction';
+import {DeferredAction, Priority} from './deferredActions/DeferredAction';
 import {SelectHowToPayDeferred} from './deferredActions/SelectHowToPayDeferred';
 import {SelectColony} from './inputs/SelectColony';
 import {SelectPartyToSendDelegate} from './inputs/SelectPartyToSendDelegate';
@@ -240,36 +240,34 @@ export class Player {
   }
 
   public increaseTerraformRating(opts: {log?: boolean} = {}) {
-    if (!this.game.gameOptions.turmoilExtension) {
-      this.terraformRating++;
-      this.hasIncreasedTerraformRatingThisGeneration = true;
-      return;
-    }
-
-    // Turmoil Reds capacity
-    if (PartyHooks.shouldApplyPolicy(this, PartyName.REDS)) {
-      if (this.canAfford(REDS_RULING_POLICY_COST)) {
-        this.game.defer(new SelectHowToPayDeferred(this, REDS_RULING_POLICY_COST, {title: 'Select how to pay for TR increase'}));
-      } else {
-        // Cannot pay Reds, will not increase TR
-        return;
-      }
-    }
-
-    this.terraformRating++;
-    this.hasIncreasedTerraformRatingThisGeneration = true;
-    if (opts.log === true) {
-      this.game.log('${0} gained 1 TR', (b) => b.player(this));
-    }
+    this.increaseTerraformRatingSteps(1, opts);
   }
 
   public increaseTerraformRatingSteps(steps: number, opts: {log?: boolean} = {}) {
-    for (let i = 0; i < steps; i++) {
-      this.increaseTerraformRating();
-    }
+    const raiseRating = () => {
+      this.terraformRating += steps;
 
-    if (opts.log === true) {
-      this.game.log('${0} gained ${1} TR', (b) => b.player(this).number(steps));
+      this.hasIncreasedTerraformRatingThisGeneration = true;
+      if (opts.log === true) {
+        this.game.log('${0} gained ${1} TR', (b) => b.player(this).number(steps));
+      }
+    };
+
+    if (PartyHooks.shouldApplyPolicy(this, PartyName.REDS)) {
+      if (!this.canAfford(REDS_RULING_POLICY_COST * steps)) {
+        // Cannot pay Reds, will not increase TR
+        return;
+      }
+      const deferred = new SelectHowToPayDeferred(
+        this,
+        REDS_RULING_POLICY_COST * steps,
+        {
+          title: 'Select how to pay for TR increase',
+          afterPay: raiseRating,
+        });
+      this.game.defer(deferred, Priority.COST);
+    } else {
+      raiseRating();
     }
   }
 
@@ -974,7 +972,7 @@ export class Player {
 
   private runInputCb(result: PlayerInput | undefined): void {
     if (result !== undefined) {
-      this.game.defer(new DeferredAction(this, () => result));
+      this.defer(result, Priority.DEFAULT);
     }
   }
 
@@ -1542,7 +1540,7 @@ export class Player {
     // Activate some colonies
     if (this.game.gameOptions.coloniesExtension && selectedCard.resourceType !== undefined) {
       this.game.colonies.forEach((colony) => {
-        if (colony.resourceType !== undefined && colony.resourceType === selectedCard.resourceType) {
+        if (colony.metadata.resourceType !== undefined && colony.metadata.resourceType === selectedCard.resourceType) {
           colony.isActive = true;
         }
       });
@@ -1561,12 +1559,7 @@ export class Player {
 
     // Play the card
     const action = selectedCard.play(this);
-    if (action !== undefined) {
-      this.game.defer(new DeferredAction(
-        this,
-        () => action,
-      ));
-    }
+    this.defer(action, Priority.DEFAULT);
 
     // Remove card from hand
     const projectCardIndex = this.cardsInHand.findIndex((card) => card.name === selectedCard.name);
@@ -2384,5 +2377,12 @@ export class Player {
     });
 
     return unavailableColonies < availableColonyTiles.length;
+  }
+
+  /* Shorthand for deferring things */
+  public defer(input: PlayerInput | undefined, priority: Priority): void {
+    if (input === undefined) return;
+    const action = new DeferredAction(this, () => input, priority);
+    this.game.defer(action);
   }
 }

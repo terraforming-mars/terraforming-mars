@@ -3,7 +3,7 @@ import {PlayerInput} from '../PlayerInput';
 
 export enum Priority {
   DECLARE_CLONE_TAG, // Used for Pathfinders. First thing a player must do before further effects.
-  COST, // Cost of a blue card action. Must happen before the effects.
+  COST, // Cost of a blue card action, or paying Reds costs. Must happen before the effects.
   OPPONENT_TRIGGER, // Any effect from one of your opponent's card that triggers during your turn.
   DISCARD_BEFORE_DRAW, // When you must discard before you can draw. Mars University, Sponsored Academies.
   DRAW_CARDS,
@@ -21,9 +21,13 @@ export enum Priority {
 
 export class DeferredAction {
   public queueId?: number;
-  public priority: Priority = Priority.DEFAULT;
   constructor(
     public player: Player,
     public execute: () => PlayerInput | undefined,
+    public priority: Priority = Priority.DEFAULT,
   ) {}
+
+  public static create(player: Player, priority: Priority, execute: () => PlayerInput | undefined): DeferredAction {
+    return new DeferredAction(player, execute, priority);
+  }
 }

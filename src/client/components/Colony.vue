@@ -114,388 +114,8 @@
         Trade Income: Draw X cards and keep 1
       </span>
 
-    <div v-if="colony.name === ColonyName.ENCELADUS" class="colony-grid-container">
-      <div>
-        <div class="colony-placement-bonus triple-res resource microbe white-x white-x--3"></div>
-      </div>
-
-      <div>
-        <div class="colony-placement-bonus triple-res resource microbe white-x white-x--3"></div>
-      </div>
-
-      <div>
-        <div class="colony-placement-bonus triple-res resource microbe white-x white-x--3"></div>
-      </div>
-
-      <div></div>
-      <div></div>
-      <div></div>
-      <div></div>
-    </div>
-    <div v-if="colony.name === ColonyName.ENCELADUS" class="colony-grid-container2">
-      <div>0</div>
-      <div>1</div>
-      <div>2</div>
-      <div>3</div>
-      <div>4</div>
-      <div>4</div>
-      <div>5</div>
-    </div>
-
-    <div v-if="colony.name === ColonyName.PLUTO" class="colony-grid-container">
-      <div>
-        <div class="resource card card-with-border" style="margin-top: 0px; margin-left: -5px; transform: scale(0.8);"></div>
-        <div class="resource card card-with-border" style="position absolute; margin: 0 0 0 -30px; transform: scale(0.8);"></div>
-      </div>
-      <div>
-        <div class="resource card card-with-border" style="margin-top: 0px; margin-left: -5px; transform: scale(0.8);"></div>
-        <div class="resource card card-with-border" style="position absolute; margin: 0 0 0 -30px; transform: scale(0.8);"></div>
-      </div>
-      <div>
-        <div class="resource card card-with-border" style="margin-top: 0px; margin-left: -5px; transform: scale(0.8);"></div>
-        <div class="resource card card-with-border" style="position absolute; margin: 0 0 0 -30px; transform: scale(0.8);"></div>
-      </div>
-      <div></div>
-      <div></div>
-      <div></div>
-      <div></div>
-    </div>
-    <div v-if="colony.name === ColonyName.PLUTO" class="colony-grid-container2">
-      <div>0</div>
-      <div>1</div>
-      <div>2</div>
-      <div>2</div>
-      <div>3</div>
-      <div>3</div>
-      <div>4</div>
-    </div>
-
-    <div v-if="colony.name === ColonyName.MIRANDA" class="colony-grid-container">
-      <div><div class="resource animal" style="margin-top:11px;"></div></div>
-      <div><div class="resource animal" style="margin-top:11px;"></div></div>
-      <div><div class="resource animal" style="margin-top:11px;"></div></div>
-      <div></div>
-      <div></div>
-      <div></div>
-      <div></div>
-    </div>
-    <div v-if="colony.name === ColonyName.MIRANDA" class="colony-grid-container2">
-      <div>0</div>
-      <div>1</div>
-      <div>1</div>
-      <div>2</div>
-      <div>2</div>
-      <div>3</div>
-      <div>3</div>
-    </div>
-
-    <div v-if="colony.name === ColonyName.IO" class="colony-grid-container">
-      <div><div class="production-box"><div class="production heat"></div></div></div>
-      <div><div class="production-box"><div class="production heat"></div></div></div>
-      <div><div class="production-box"><div class="production heat"></div></div></div>
-      <div></div>
-      <div></div>
-      <div></div>
-      <div></div>
-    </div>
-    <div v-if="colony.name === ColonyName.IO" class="colony-grid-container2">
-      <div>2</div>
-      <div>3</div>
-      <div>4</div>
-      <div>6</div>
-      <div>8</div>
-      <div>10</div>
-      <div>13</div>
-    </div>
-
-    <div v-if="colony.name === ColonyName.LUNA" class="colony-grid-container">
-      <div><div class="production-box"><div class="production money">2</div></div></div>
-      <div><div class="production-box"><div class="production money">2</div></div></div>
-      <div><div class="production-box"><div class="production money">2</div></div></div>
-      <div></div>
-      <div></div>
-      <div></div>
-      <div></div>
-    </div>
-    <div v-if="colony.name === ColonyName.LUNA" class="colony-grid-container2">
-      <div>1</div>
-      <div>2</div>
-      <div>4</div>
-      <div>7</div>
-      <div>10</div>
-      <div>13</div>
-      <div>17</div>
-    </div>
-
-    <div v-if="colony.name === ColonyName.IAPETUS" class="colony-grid-container">
-      <div><div class="tile rating" style="transform: scale(0.8); margin-left:-1px"></div></div>
-      <div><div class="tile rating" style="transform: scale(0.8); margin-left:-1px"></div></div>
-      <div><div class="tile rating" style="transform: scale(0.8); margin-left:-1px"></div></div>
-      <div></div>
-      <div></div>
-      <div></div>
-      <div></div>
-    </div>
-    <div v-if="colony.name === ColonyName.IAPETUS" class="colony-grid-container2">
-      <div>0</div>
-      <div>0</div>
-      <div>0</div>
-      <div>1</div>
-      <div>1</div>
-      <div>1</div>
-      <div>2</div>
-    </div>
-
-    <div v-if="colony.name === ColonyName.CERES" class="colony-grid-container">
-      <div><div class="production-box"><div class="production steel"></div></div></div>
-      <div><div class="production-box"><div class="production steel"></div></div></div>
-      <div><div class="production-box"><div class="production steel"></div></div></div>
-      <div></div>
-      <div></div>
-      <div></div>
-      <div></div>
-    </div>
-    <div v-if="colony.name === ColonyName.CERES" class="colony-grid-container2">
-      <div>1</div>
-      <div>2</div>
-      <div>3</div>
-      <div>4</div>
-      <div>6</div>
-      <div>8</div>
-      <div>10</div>
-    </div>
-
-    <div v-if="colony.name === ColonyName.TRITON" class="colony-grid-container">
-      <div>
-        <div class="colony-placement-bonus resource triple-res titanium white-x white-x--3"></div>
-      </div>
-
-      <div>
-        <div class="colony-placement-bonus resource triple-res titanium white-x white-x--3"></div>
-      </div>
-
-      <div>
-        <div class="colony-placement-bonus resource triple-res titanium white-x white-x--3"></div>
-      </div>
-      <div></div>
-      <div></div>
-      <div></div>
-      <div></div>
-    </div>
-    <div v-if="colony.name === ColonyName.TRITON" class="colony-grid-container2">
-      <div>0</div>
-      <div>1</div>
-      <div>1</div>
-      <div>2</div>
-      <div>3</div>
-      <div>4</div>
-      <div>5</div>
-    </div>
-
-    <div v-if="colony.name === ColonyName.GANYMEDE" class="colony-grid-container">
-      <div><div class="production-box"><div class="production plant"></div></div></div>
-      <div><div class="production-box"><div class="production plant"></div></div></div>
-      <div><div class="production-box"><div class="production plant"></div></div></div>
-      <div></div>
-      <div></div>
-      <div></div>
-      <div></div>
-    </div>
-    <div v-if="colony.name === ColonyName.GANYMEDE" class="colony-grid-container2">
-      <div>0</div>
-      <div>1</div>
-      <div>2</div>
-      <div>3</div>
-      <div>4</div>
-      <div>5</div>
-      <div>6</div>
-    </div>
-
-    <div v-if="colony.name === ColonyName.CALLISTO" class="colony-grid-container">
-    <div><div class="production-box"><div class="production energy"></div></div></div>
-    <div><div class="production-box"><div class="production energy"></div></div></div>
-    <div><div class="production-box"><div class="production energy"></div></div></div>
-    <div></div>
-    <div></div>
-    <div></div>
-    <div></div>
-  </div>
-  <div v-if="colony.name === ColonyName.CALLISTO" class="colony-grid-container2">
-    <div>0</div>
-    <div>2</div>
-    <div>3</div>
-    <div>5</div>
-    <div>7</div>
-    <div>10</div>
-    <div>13</div>
-  </div>
-
-  <div v-if="colony.name === ColonyName.EUROPA" class="colony-grid-container">
-    <div><div class="tile ocean-tile ocean-tile-colony"></div></div>
-    <div><div class="tile ocean-tile ocean-tile-colony"></div></div>
-    <div><div class="tile ocean-tile ocean-tile-colony"></div></div>
-    <div></div>
-    <div></div>
-    <div></div>
-    <div></div>
-  </div>
-  <div v-if="colony.name === ColonyName.EUROPA" class="colony-grid-container2">
-    <div><div class="production-box"><div class="production money">1</div></div></div>
-    <div><div class="production-box"><div class="production money">1</div></div></div>
-    <div><div class="production-box"><div class="production energy"></div></div></div>
-    <div><div class="production-box"><div class="production energy"></div></div></div>
-    <div><div class="production-box"><div class="production plant"></div></div></div>
-    <div><div class="production-box"><div class="production plant"></div></div></div>
-    <div><div class="production-box"><div class="production plant"></div></div></div>
-  </div>
-
-  <div v-if="colony.name === ColonyName.PALLAS" class="colony-grid-container">
-    <div><div class="influence" style="margin-top:5px"></div></div>
-    <div><div class="influence" style="margin-top:5px"></div></div>
-    <div><div class="influence" style="margin-top:5px"></div></div>
-    <div></div>
-    <div></div>
-    <div></div>
-    <div></div>
-  </div>
-    <div v-if="colony.name === ColonyName.PALLAS" class="colony-grid-container2">
-    <div>1</div>
-    <div>1</div>
-    <div>1</div>
-    <div>2</div>
-    <div>2</div>
-    <div>2</div>
-    <div>3</div>
-  </div>
-
-  <div v-if="colony.name === ColonyName.MERCURY" class="colony-grid-container">
-    <div><div class="copy-trade-box">Copy Trade</div></div>
-    <div><div class="copy-trade-box">Copy Trade</div></div>
-    <div><div class="copy-trade-box">Copy Trade</div></div>
-    <div></div>
-    <div></div>
-    <div></div>
-    <div></div>
-  </div>
-  <div v-if="colony.name === ColonyName.MERCURY" class="colony-grid-container2">
-    <div><div class="production-box mercury-production-box"><div class="production heat"></div></div></div>
-    <div><div class="production-box mercury-production-box"><div class="production heat"></div></div></div>
-    <div><div class="production-box mercury-production-box"><div class="production heat"></div></div></div>
-    <div><div class="production-box mercury-production-box"><div class="production steel"></div></div></div>
-    <div><div class="production-box mercury-production-box"><div class="production steel"></div></div></div>
-    <div><div class="production-box mercury-production-box"><div class="production titanium"></div></div></div>
-    <div><div class="production-box mercury-production-box"><div class="production titanium"></div></div></div>
-  </div>
-
-  <div v-if="colony.name === ColonyName.HYGIEA" class="colony-grid-container">
-    <div>
-      <div class="resource card red-outline" style="margin-left: 5px; margin-top: 2px; transform: scale(0.8);"></div>
-    </div>
-    <div>
-      <div class="resource card red-outline" style="margin-left: 5px; margin-top: 2px; transform: scale(0.8);"></div>
-    </div>
-    <div>
-      <div class="resource card red-outline" style="margin-left: 5px; margin-top: 2px; transform: scale(0.8);"></div>
-    </div>
-    <div></div>
-    <div></div>
-    <div></div>
-    <div></div>
-  </div>
-  <div v-if="colony.name === ColonyName.HYGIEA" class="colony-grid-container2">
-    <div><div class="resource money red-outline"></div></div>
-    <div><div class="resource money red-outline"></div></div>
-    <div><div class="resource heat red-outline"></div></div>
-    <div><div class="resource energy red-outline"></div></div>
-    <div><div class="resource plant red-outline"></div></div>
-    <div><div class="resource steel red-outline"></div></div>
-    <div><div class="resource titanium red-outline"></div></div>
-  </div>
-
-  <div v-if="colony.name === ColonyName.TITANIA" class="colony-grid-container">
-    <div><div class="points points-big" style="transform:scale(0.5); margin-left: -16px; margin-top: -18px; height: 80px; line-height:80px; font-size: 72px">5</div></div>
-    <div><div class="points points-big" style="transform:scale(0.5); margin-left: -16px; margin-top: -18px; height: 80px; line-height:80px; font-size: 72px">3</div></div>
-    <div><div class="points points-big" style="transform:scale(0.5); margin-left: -16px; margin-top: -18px; height: 80px; line-height:80px; font-size: 72px">2</div></div>
-    <div></div>
-    <div></div>
-    <div></div>
-    <div></div>
-  </div>
-  <div v-if="colony.name === ColonyName.TITANIA" class="colony-grid-container2">
-    <div>2</div>
-    <div>2</div>
-    <div>2</div>
-    <div>1</div>
-    <div>1</div>
-    <div>0</div>
-    <div>0</div>
-  </div>
-
-  <div v-if="colony.name === ColonyName.VENUS" class="colony-grid-container" style="margin-top:5px;">
-    <div><div class="tile venus-tile venus-colony-bonus"></div></div>
-    <div><div class="tile venus-tile venus-colony-bonus"></div></div>
-    <div><div class="tile venus-tile venus-colony-bonus"></div></div>
-    <div></div>
-    <div></div>
-    <div></div>
-    <div></div>
-  </div>
-  <div v-if="colony.name === ColonyName.VENUS" class="colony-grid-container2" style="margin-top:55px;">
-    <div>0</div>
-    <div>0</div>
-    <div>0</div>
-    <div>1</div>
-    <div>2</div>
-    <div>3</div>
-    <div>4</div>
-  </div>
-
-  <div v-if="colony.name === ColonyName.LEAVITT" class="colony-grid-container">
-    <div><div class="tag tag-science" style="transform: scale(0.8); margin-top: 2px; margin-left: 4px"></div></div>
-    <div><div class="tag tag-science" style="transform: scale(0.8); margin-top: 2px; margin-left: 4px"></div></div>
-    <div><div class="tag tag-science" style="transform: scale(0.8); margin-top: 2px; margin-left: 4px"></div></div>
-    <div></div>
-    <div></div>
-    <div></div>
-    <div></div>
-  </div>
-  <div v-if="colony.name === ColonyName.LEAVITT" class="colony-grid-container2">
-    <div>1</div>
-    <div>2</div>
-    <div>3</div>
-    <div>4</div>
-    <div>5</div>
-    <div>6</div>
-    <div>7</div>
-  </div>
-
-  <div v-if="colony.name === ColonyName.TITAN" class="colony-grid-container">
-    <div>
-      <div class="colony-placement-bonus triple-res resource floater white-x white-x--3"></div>
-    </div>
-
-    <div>
-      <div class="colony-placement-bonus triple-res resource floater white-x white-x--3"></div>
-    </div>
-
-    <div>
-      <div class="colony-placement-bonus triple-res resource floater white-x white-x--3"></div>
-    </div>
-    <div></div>
-    <div></div>
-    <div></div>
-    <div></div>
-  </div>
-  <div v-if="colony.name === ColonyName.TITAN" class="colony-grid-container2">
-    <div>0</div>
-    <div>1</div>
-    <div>1</div>
-    <div>2</div>
-    <div>3</div>
-    <div>3</div>
-    <div>4</div>
-  </div>
-
+    <colony-row :metadata="metadata"></colony-row>
+    <colony-trade-row :metadata="metadata"></colony-trade-row>
   </div>
 </div>
 
@@ -507,6 +127,10 @@ import Vue from 'vue';
 
 import {ColonyModel} from '@/common/models/ColonyModel';
 import {ColonyName} from '@/common/colonies/ColonyName';
+import {IColonyMetadata} from '@/common/colonies/IColonyMetadata';
+import ColonyRow from '@/client/components/colonies/ColonyRow.vue';
+import ColonyTradeRow from '@/client/components/colonies/ColonyTradeRow.vue';
+import {ALL_COLONIES_TILES} from '@/colonies/ColonyManifest';
 
 export default Vue.extend({
   name: 'colony',
@@ -514,6 +138,10 @@ export default Vue.extend({
     colony: {
       type: Object as () => ColonyModel,
     },
+  },
+  components: {
+    ColonyRow,
+    ColonyTradeRow,
   },
   computed: {
     cubeXPosition(): number {
@@ -551,6 +179,13 @@ export default Vue.extend({
     getColonyContentOffset(): number {
       if (this.colony.name === ColonyName.PLUTO || this.colony.name === ColonyName.MIRANDA) return -12;
       return 0;
+    },
+    metadata(): IColonyMetadata {
+      const cf = ALL_COLONIES_TILES.find((cf) => cf.colonyName === this.colony.name);
+      if (cf === undefined) {
+        throw new Error(`Unknown colony ${this.colony.name}`);
+      }
+      return new cf.Factory().metadata;
     },
     ColonyName(): typeof ColonyName {
       return ColonyName;

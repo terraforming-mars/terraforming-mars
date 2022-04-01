@@ -25,6 +25,9 @@ export class SelectHowToPayDeferred implements DeferredAction {
     if (this.options.canUseSeeds && (this.player.corporationCard?.resourceCount ?? 0 > 0)) {
       return false;
     }
+    if (this.options.canUseData && (this.player.corporationCard?.resourceCount ?? 0 > 0)) {
+      return false;
+    }
     return true;
   }
 
@@ -41,6 +44,7 @@ export class SelectHowToPayDeferred implements DeferredAction {
       this.options.canUseTitanium || false,
       this.player.canUseHeatAsMegaCredits,
       this.options.canUseSeeds || false,
+      this.options.canUseData || false,
       this.amount,
       (howToPay: HowToPay) => {
         this.player.deductResource(Resources.STEEL, howToPay.steel);
@@ -49,6 +53,9 @@ export class SelectHowToPayDeferred implements DeferredAction {
         this.player.deductResource(Resources.HEAT, howToPay.heat);
         if (howToPay.seeds > 0 && this.player.corporationCard !== undefined) {
           this.player.removeResourceFrom(this.player.corporationCard, howToPay.seeds);
+        }
+        if (howToPay.data > 0 && this.player.corporationCard !== undefined) {
+          this.player.removeResourceFrom(this.player.corporationCard, howToPay.data);
         }
         this.options.afterPay?.();
         return undefined;
@@ -62,6 +69,7 @@ export namespace SelectHowToPayDeferred {
     canUseSteel?: boolean;
     canUseTitanium?: boolean;
     canUseSeeds?: boolean,
+    canUseData?: boolean,
     title?: string;
     afterPay?: () => void;
   }

@@ -67,6 +67,7 @@ export default Vue.extend({
       microbes: 0,
       science: 0,
       seeds: 0,
+      data: 0,
       floaters: 0,
       warning: undefined,
       available: Units.of({}),
@@ -288,6 +289,7 @@ export default Vue.extend({
         floaters: this.floaters,
         science: this.science,
         seeds: this.seeds,
+        data: 0,
       };
       let totalSpent = 0;
       for (const target of unit) {

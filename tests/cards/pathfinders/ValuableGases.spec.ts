@@ -59,6 +59,7 @@ describe('ValuableGases', function() {
       floaters: 0,
       science: 0,
       seeds: 0,
+      data: 0,
     });
 
     expect(localShading.resourceCount).eq(5);

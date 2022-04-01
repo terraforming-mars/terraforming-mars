@@ -1653,8 +1653,11 @@ export class Player {
   }
 
   public discardPlayedCard(card: IProjectCard) {
-    // This is copied straight out of Project Workshop.
     const cardIndex = this.playedCards.findIndex((c) => c.name === card.name);
+    if (cardIndex === -1) {
+      console.log(`Error: card ${card.name} not in ${this.id}'s hand`);
+      return;
+    }
     this.playedCards.splice(cardIndex, 1);
     this.game.dealer.discard(card);
     card.onDiscard?.(this);

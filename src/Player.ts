@@ -814,7 +814,7 @@ export class Player {
    * 'vps': Same as raw, but include event tags.
    */
   public getTagCount(tag: Tags, mode: 'default' | 'raw' | 'milestone' | 'award' | 'vps' = 'default') {
-    const includeEvents = mode === 'vps';
+    const includeEvents = mode === 'vps' || this.corporationCard?.name === CardName.ODYSSEY;
     const includeTagSubstitutions = (mode === 'default' || mode === 'milestone');
 
     let tagCount = this.getRawTagCount(tag, includeEvents);
@@ -2380,7 +2380,7 @@ export class Player {
   }
 
   /* Shorthand for deferring things */
-  public defer(input: PlayerInput | undefined, priority: Priority): void {
+  public defer(input: PlayerInput | undefined, priority: Priority = Priority.DEFAULT): void {
     if (input === undefined) return;
     const action = new DeferredAction(this, () => input, priority);
     this.game.defer(action);

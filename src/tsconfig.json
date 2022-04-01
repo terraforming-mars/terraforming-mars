@@ -7,5 +7,4 @@
         "**/*.ts",
         "genfiles/*.json",
     ],
-    "exclude": ["client/**/*.ts"],
 }

@@ -79,7 +79,11 @@
     "make:cards": "node build/src/tools/export_card_rendering.js",
     "make:css": "lessc src/styles/common.less build/styles.css && node src/tools/gzip.js",
     "make:json": "node make_static_json.js",
-    "make:static": "npm run make:css && npm run make:json",
+
+    "// 1": "touch makes creates an empty cards.json which makes it possible to compile the client. It's not ideal",
+    "// 2": "and once we finally separate client and server altogether we can look at better options.",
+    "make:static": "npm run make:css && npm run make:json && touch src/genfiles/cards.json",
+
     "test": "npm run test:server && npm run test:client",
     "test:server": "ts-mocha -p tests/tsconfig.json -r tests/utils/setup.ts \"tests/*.spec.ts\" \"tests/!(client)/**/*.spec.ts\"",
     "pretest:server": "npx tsc --build tests/tsconfig.json",

@@ -5,8 +5,9 @@ import {ICard} from '@/cards/ICard';
 import {ICardFactory} from '@/cards/ICardFactory';
 import {GameModule} from '@/common/cards/GameModule';
 import {IClientCard} from '@/common/cards/IClientCard';
-import * as cardJson from '@/genfiles/cards.json';
 import {PreferencesManager} from '../utils/PreferencesManager';
+// @ts-ignore don't turn this into an import.
+const cardJson = require('@/genfiles/cards.json');
 
 export type CardAndModule = {card: IClientCard, module: GameModule};
 const cards: Map<CardName, CardAndModule> = new Map();

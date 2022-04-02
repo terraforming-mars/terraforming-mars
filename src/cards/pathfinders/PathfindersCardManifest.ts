@@ -95,6 +95,7 @@ import {SpaceRelay} from './SpaceRelay';
 import {SpecializedSettlement} from './SpecializedSettlement';
 import {StrategicBasePlanning} from './StrategicBasePlanning';
 import {Steelaris} from './Steelaris';
+import {SurveyMission} from './SurveyMission';
 import {TerraformingControlStation} from './TerraformingControlStation';
 import {TerraformingRobots} from './TerraformingRobots';
 import {ValuableGases} from './ValuableGases';
@@ -215,7 +216,7 @@ export const PATHFINDERS_CARD_MANIFEST = new CardManifest({
     {cardName: CardName.HYDROGEN_BOMBARDMENT, Factory: HydrogenBombardment, compatibility: GameModule.Venus},
     {cardName: CardName.RESEARCH_GRANT_PATHFINDERS, Factory: ResearchGrant},
     {cardName: CardName.CREW_TRAINING, Factory: CrewTraining},
-    // {cardName: CardName.SURVEY_MISSION, Factory: SurveyMission},
+    {cardName: CardName.SURVEY_MISSION, Factory: SurveyMission},
     {cardName: CardName.DESIGN_COMPANY, Factory: DesignCompany},
     // {cardName: CardName.CONSOLIDATION, Factory: Consolidation},
     {cardName: CardName.PERSONAL_AGENDA, Factory: PersonalAgenda},

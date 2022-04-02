@@ -50,4 +50,7 @@ export class CardRenderSymbol implements ICardRenderSymbol {
   public static equals(size: Size = Size.MEDIUM): CardRenderSymbol {
     return new CardRenderSymbol(CardRenderSymbolType.EQUALS, size);
   }
+  public static surveyMission(): CardRenderSymbol {
+    return new CardRenderSymbol(CardRenderSymbolType.SURVEY_MISSION, Size.MEDIUM, true);
+  }
 }

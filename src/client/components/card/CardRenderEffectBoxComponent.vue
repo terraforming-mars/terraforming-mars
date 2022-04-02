@@ -19,7 +19,7 @@
                 </div>
             </div>
         </div>
-        <CardDescription v-if="description !== undefined" :item="description" />
+        <CardDescription v-if="description" :item="description" />
       </div>
 </template>
 

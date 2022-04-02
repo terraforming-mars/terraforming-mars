@@ -1,9 +1,9 @@
 <template>
   <div :class="getClasses()">
-    <CardRequirementsComponent v-if="requirements !== undefined" :requirements="requirements"/>
-    <CardRenderData v-if="metadata.renderData !== undefined" :renderData="metadata.renderData" />
-    <CardDescription v-if="metadata.description !== undefined" :item="metadata.description" />
-    <CardVictoryPoints v-if="metadata.victoryPoints !== undefined" :victoryPoints="metadata.victoryPoints" />
+    <CardRequirementsComponent v-if="requirements" :requirements="requirements"/>
+    <CardRenderData v-if="metadata.renderData" :renderData="metadata.renderData" />
+    <CardDescription v-if="metadata.description" :item="metadata.description" />
+    <CardVictoryPoints v-if="metadata.victoryPoints" :victoryPoints="metadata.victoryPoints" />
   </div>
 </template>
 

@@ -57,7 +57,6 @@ function newInitialize() {
   });
 }
 
-console.log(PreferencesManager.INSTANCE.values().experimental_ui);
 if (PreferencesManager.INSTANCE.values().experimental_ui) {
   console.log('new initialize');
   newInitialize();

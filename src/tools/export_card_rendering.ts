@@ -15,7 +15,7 @@ import {ICorporationCard} from '../cards/corporation/ICorporationCard';
 import {PreludeCard} from '../cards/prelude/PreludeCard';
 
 class ProjectCardProcessor {
-  public static json: Array<any> = [];
+  public static json: Array<IClientCard> = [];
   public static makeJson() {
     ALL_CARD_MANIFESTS.forEach(this.processManifest);
   }
@@ -64,7 +64,7 @@ class ProjectCardProcessor {
 }
 
 class GlobalEventProcessor {
-  public static json: Array<any> = [];
+  public static json: Array<IClientGlobalEvent> = [];
   public static makeJson() {
     ALL_EVENTS.forEach((Factory) => {
       const globalEvent = new Factory();
@@ -73,7 +73,7 @@ class GlobalEventProcessor {
   }
 
   private static processGlobalEvent(globalEvent: IGlobalEvent) {
-    const vizCardData: IClientGlobalEvent = {
+    const event: IClientGlobalEvent = {
       name: globalEvent.name,
       description: globalEvent.description,
       revealedDelegate: globalEvent.revealedDelegate,
@@ -81,7 +81,7 @@ class GlobalEventProcessor {
       renderData: globalEvent.renderData,
     };
 
-    GlobalEventProcessor.json.push(vizCardData);
+    GlobalEventProcessor.json.push(event);
   }
 }
 

@@ -1,6 +1,13 @@
+const webpack = require('webpack');
+
+// Makes the .vue file format parseable.
 const {VueLoaderPlugin} = require('vue-loader');
+// Compresses resources for smaller download.
 const CompressionPlugin = require('compression-webpack-plugin');
+// Speeds up typescript type checking into a separate process.
 const ForkTsCheckerWebpackPlugin = require('fork-ts-checker-webpack-plugin');
+// Enables the tsconfig-paths behavior in webpack. tsconfig-paths is responsible for the
+// import mapping that often begins with @.
 const TsconfigPathsPlugin = require('tsconfig-paths-webpack-plugin');
 
 const zlib = require('zlib');
@@ -28,6 +35,11 @@ if (process.env.NODE_ENV === 'production') {
     filename: '[path][base].br',
     compressionOptions: {params: {[zlib.constants.BROTLI_PARAM_QUALITY]: zlib.constants.BROTLI_MAX_QUALITY}},
   }));
+}
+
+if (process.env.NODE_ENV === 'development') {
+  // Reports progress on the commandline during compilation.
+  plugins.push(new webpack.ProgressPlugin());
 }
 
 module.exports = {

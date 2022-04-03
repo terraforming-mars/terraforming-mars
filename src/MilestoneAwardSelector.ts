@@ -342,6 +342,8 @@ export namespace MilestoneAwardSelector {
     case RandomMAOptionType.UNLIMITED:
       drawnMilestonesAndAwards = getRandomMilestonesAndAwards(gameOptions, requiredQty, UNLIMITED_SYNERGY);
       break;
+    default:
+      throw new Error('Unknown milestone/award type: ' + gameOptions.randomMA);
     }
 
     return drawnMilestonesAndAwards;

@@ -27,7 +27,7 @@ import {PlayerInputModel} from '@/common/models/PlayerInputModel';
 import {PlayerViewModel} from '@/common/models/PlayerModel';
 import SelectCard from '@/client/components/SelectCard.vue';
 import ConfirmDialog from '@/client/components/common/ConfirmDialog.vue';
-import {getPreferences} from '@/client/utils/PreferencesManager';
+import {IPreferences, PreferencesManager} from '@/client/utils/PreferencesManager';
 import {Tags} from '@/common/cards/Tags';
 import {CardType} from '@/common/cards/CardType';
 
@@ -52,6 +52,10 @@ export default (Vue as WithRefs<Refs>).extend({
     },
     showtitle: {
       type: Boolean,
+    },
+    preferences: {
+      type: Object as () => Readonly<IPreferences>,
+      default: PreferencesManager.INSTANCE.values(),
     },
   },
   components: {
@@ -168,7 +172,7 @@ export default (Vue as WithRefs<Refs>).extend({
     saveIfConfirmed() {
       const projectCards = this.selectedCards.filter((name) => getCard(name)?.card.cardType !== CardType.PRELUDE);
       let showAlert = false;
-      if (getPreferences().show_alerts && projectCards.length === 0) showAlert = true;
+      if (this.preferences.show_alerts && projectCards.length === 0) showAlert = true;
       if (showAlert) {
         this.$refs.confirmation.show();
       } else {

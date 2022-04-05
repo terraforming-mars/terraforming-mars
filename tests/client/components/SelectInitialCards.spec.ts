@@ -4,6 +4,7 @@ import {expect} from 'chai';
 import {CardName} from '@/common/cards/CardName';
 import SelectInitialCards from '@/client/components/SelectInitialCards.vue';
 import ConfirmDialog from '@/client/components/common/ConfirmDialog.vue';
+import {IPreferences} from '@/client/utils/PreferencesManager';
 
 let savedData: Array<Array<string>> | undefined;
 
@@ -116,6 +117,9 @@ function createComponent(corpCards: Array<CardName>, projectCards: Array<CardNam
         savedData = data;
       },
       showsave: true,
+      preferences: {
+        show_alerts: true,
+      } as Readonly<IPreferences>,
     },
   });
 }

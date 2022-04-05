@@ -6,7 +6,7 @@ import {ICardFactory} from '@/cards/ICardFactory';
 import {GameModule} from '@/common/cards/GameModule';
 import {IClientCard} from '@/common/cards/IClientCard';
 import * as cardJson from '@/genfiles/cards.json';
-import {PreferencesManager} from '../utils/PreferencesManager';
+import {getPreferences} from '../utils/PreferencesManager';
 
 export type CardAndModule = {card: IClientCard, module: GameModule};
 const cards: Map<CardName, CardAndModule> = new Map();
@@ -57,7 +57,7 @@ function newInitialize() {
   });
 }
 
-if (PreferencesManager.INSTANCE.values().experimental_ui) {
+if (getPreferences().experimental_ui) {
   console.log('new initialize');
   newInitialize();
 } else {

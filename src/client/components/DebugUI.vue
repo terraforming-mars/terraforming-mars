@@ -139,7 +139,7 @@
                 <colony :colony="colonyModel(colonyName)"></colony>
               </div>
             </section>
-            <div class="free-floating-preferences-icon">>
+            <div class="free-floating-preferences-icon">
               <preferences-icon></preferences-icon>
             </div>
         </div>

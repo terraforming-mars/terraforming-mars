@@ -430,6 +430,7 @@
                   v-on:cards-list-changed="updateCardsBlackList"
               ></CardsFilter>
             </div>
+          <preferences-icon></preferences-icon>
         </div>
 </template>
 
@@ -450,6 +451,7 @@ import {playerColorClass} from '@/common/utils/utils';
 import {RandomMAOptionType} from '@/common/ma/RandomMAOptionType';
 import {GameId} from '@/common/Types';
 import {AgendaStyle} from '@/common/turmoil/Types';
+import PreferencesIcon from '@/client/components/PreferencesIcon.vue';
 
 import * as constants from '@/common/constants';
 
@@ -604,6 +606,7 @@ export default (Vue as WithRefs<Refs>).extend({
     CardsFilter,
     ColoniesFilter,
     CorporationsFilter,
+    PreferencesIcon,
   },
   mounted() {
     if (window.location.pathname === '/solo') {

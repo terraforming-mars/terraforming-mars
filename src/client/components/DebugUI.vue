@@ -139,6 +139,9 @@
                 <colony :colony="colonyModel(colonyName)"></colony>
               </div>
             </section>
+            <div class="free-floating-preferences-icon">
+              <preferences-icon></preferences-icon>
+            </div>
         </div>
 </template>
 
@@ -159,6 +162,7 @@ import Colony from '@/client/components/Colony.vue';
 import {COMMUNITY_COLONY_NAMES, OFFICIAL_COLONY_NAMES} from '@/common/colonies/AllColonies';
 import {ColonyModel} from '@/common/models/ColonyModel';
 import {ColonyName} from '@/common/colonies/ColonyName';
+import PreferencesIcon from '@/client/components/PreferencesIcon.vue';
 
 const MODULE_BASE = 'b';
 const MODULE_CORP = 'c';
@@ -208,6 +212,7 @@ export default Vue.extend({
     Card,
     GlobalEvent,
     Colony,
+    PreferencesIcon,
   },
   data(): DebugUIModel {
     return {

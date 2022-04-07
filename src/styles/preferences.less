@@ -309,9 +309,12 @@
 }
 
 /* Card Magnification */
+.preferences_magnify_cards .filterDiv {
+    transition: transform 0.15s;
+}
 .preferences_magnify_cards .filterDiv:hover {
     transform: scale(1.2);
-    z-index: 2;
+    z-index: 100;
 }
 
 .preferences_magnify_cards .cards-stack:hover,

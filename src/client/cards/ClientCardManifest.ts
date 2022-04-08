@@ -5,9 +5,8 @@ import {ICard} from '@/cards/ICard';
 import {ICardFactory} from '@/cards/ICardFactory';
 import {GameModule} from '@/common/cards/GameModule';
 import {IClientCard} from '@/common/cards/IClientCard';
-// @ts-ignore don't turn this into an import.
-const cardJson = require('@/genfiles/cards.json');
-// import * as cardJson from '@/genfiles/cards.json';
+// @ts-ignore cards.json doesn't exist during npm run build
+import * as cardJson from '@/genfiles/cards.json';
 import {getPreferences} from '../utils/PreferencesManager';
 
 export type CardAndModule = {card: IClientCard, module: GameModule};

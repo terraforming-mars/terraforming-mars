@@ -3,8 +3,8 @@ import {GlobalEventModel} from '@/common/models/TurmoilModel';
 import {GlobalEventName} from '@/common/turmoil/globalEvents/GlobalEventName';
 import {PartyName} from '@/common/turmoil/PartyName';
 import {IClientGlobalEvent} from '@/common/turmoil/IClientGlobalEvent';
-// import * as eventJson from '@/genfiles/events.json';
-const eventJson = require('@/genfiles/events.json');
+// @ts-ignore events.json doesn't exist during npm run build
+import * as eventJson from '@/genfiles/events.json';
 import {getPreferences} from '../utils/PreferencesManager';
 
 const events: Map<GlobalEventName, IClientGlobalEvent> = new Map();

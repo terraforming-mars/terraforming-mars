@@ -168,4 +168,23 @@ describe('EcologicalSurvey', () => {
     TestingUtils.runAllActions(game);
     expect(player.plants).eq(2);
   });
+
+  it('When logging card card resources, log properly', () => {
+    const microbeCard = new Ants();
+    player.playedCards = [card, microbeCard];
+
+    const space = game.board.getAvailableSpacesOnLand(player)[0];
+    space.bonus = [SpaceBonus.MICROBE],
+
+    game.addTile(player, SpaceType.LAND, space, {tileType: TileType.RESTRICTED_AREA});
+    TestingUtils.runAllActions(game);
+
+    const msg = game.gameLog.pop()!;
+    expect(msg.data.length).to.eq(3);
+    expect(msg.data[0].value).to.eq(player.color);
+    expect(msg.data[1].value).to.eq('Microbe');
+    expect(msg.data[2].value).to.eq(card.name);
+    expect(msg.message).to.eq('${0} gained a bonus ${1} because of ${2}');
+    expect(microbeCard.resourceCount).eq(2);
+  });
 });

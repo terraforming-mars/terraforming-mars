@@ -1011,6 +1011,11 @@ input[type="radio"]:checked + .filterDiv::after {
     text-align: center;
 }
 
+// TODO(kberg): move money, above to megacredits since that's how it's listed as a resource.
+.megacredits {
+    &:extend(.money);
+}
+
 .steel {
     background-image: url(./assets/resources/steel.png);
 }
@@ -1022,6 +1027,11 @@ input[type="radio"]:checked + .filterDiv::after {
 .plant {
     background-image: url(./assets/resources/plant.png);
 }
+// TODO(kberg): move plant, above to plants since that's how it's listed as a resource.
+.plants {
+    &:extend(.plant);
+}
+
 .energy {
     background-image: url(./assets/resources/power.png);
 }

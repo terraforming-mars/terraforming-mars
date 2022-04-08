@@ -262,6 +262,7 @@
     background: #000000;
     max-height: calc(85vh);
     overflow-y: auto;
+    white-space: nowrap;
 }
 
 .sidebar_item--is-active::after {
@@ -308,9 +309,12 @@
 }
 
 /* Card Magnification */
+.preferences_magnify_cards .filterDiv {
+    transition: transform 0.15s;
+}
 .preferences_magnify_cards .filterDiv:hover {
     transform: scale(1.2);
-    z-index: 2;
+    z-index: 100;
 }
 
 .preferences_magnify_cards .cards-stack:hover,
@@ -356,4 +360,11 @@
 
 .info_panel_actions {
     text-align: center;
+}
+
+.free-floating-preferences-icon {
+  position: absolute;
+  bottom: 0px;
+  left: 0px;
+  padding: 16px;
 }

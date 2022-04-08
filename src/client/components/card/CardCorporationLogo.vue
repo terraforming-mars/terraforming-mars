@@ -39,9 +39,6 @@
     <template v-else-if="title === CardName.ASTRODRILL">
       <span class="card-astrodril-logo">Astrodrill</span>
     </template>
-    <!-- <template v-else-if="title === CardName.FACTORUM">
-      <span class="card-factorum-logo">FACTORUM</span>
-    </template> -->
     <template v-else-if="title === CardName.MANUTECH">
       <span class="card-manutech-logo"><span style="color:white;background:#e63900;text-shadow:none;padding-left:2px;">MA</span>NUTECH</span>
     </template>
@@ -162,6 +159,8 @@ const imageOnlyLogos: Map<CardName, string> = new Map([
   [CardName.BIO_SOL, 'card-bio-sol-logo'],
   [CardName.MIND_SET_MARS, 'card-mind-set-mars-logo'],
   [CardName.ADHAI_HIGH_ORBIT_CONSTRUCTIONS, 'card-adhai-high-orbit-constructions-logo'],
+  [CardName.HABITAT_MARTE, 'card-habitat-marte-logo'],
+  [CardName.ODYSSEY, 'card-odyssey-logo'],
 ]);
 
 const imageLogosWithNames: Map<CardName, string> = new Map([

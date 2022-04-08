@@ -5,9 +5,10 @@ import {ICard} from '@/cards/ICard';
 import {ICardFactory} from '@/cards/ICardFactory';
 import {GameModule} from '@/common/cards/GameModule';
 import {IClientCard} from '@/common/cards/IClientCard';
-import {PreferencesManager} from '../utils/PreferencesManager';
 // @ts-ignore don't turn this into an import.
 const cardJson = require('@/genfiles/cards.json');
+// import * as cardJson from '@/genfiles/cards.json';
+import {getPreferences} from '../utils/PreferencesManager';
 
 export type CardAndModule = {card: IClientCard, module: GameModule};
 const cards: Map<CardName, CardAndModule> = new Map();
@@ -58,8 +59,8 @@ function newInitialize() {
   });
 }
 
-console.log(PreferencesManager.INSTANCE.values().experimental_ui);
-if (PreferencesManager.INSTANCE.values().experimental_ui) {
+console.log(getPreferences().experimental_ui);
+if (getPreferences().experimental_ui) {
   console.log('new initialize');
   newInitialize();
 } else {

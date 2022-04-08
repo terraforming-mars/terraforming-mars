@@ -19,6 +19,13 @@
       <div><div class="resource titanium red-outline"></div></div>
     </template>
     <template v-else-if="metadata.name === ColonyName.EUROPA">
+      <div><div class="production-box"><div class="production money">1</div></div></div>
+      <div><div class="production-box"><div class="production money">1</div></div></div>
+      <div><div class="production-box"><div class="production energy"></div></div></div>
+      <div><div class="production-box"><div class="production energy"></div></div></div>
+      <div><div class="production-box"><div class="production plant"></div></div></div>
+      <div><div class="production-box"><div class="production plant"></div></div></div>
+      <div><div class="production-box"><div class="production plant"></div></div></div>
     </template>
     <template v-else v-for="idx in range(7)">
       <div :key="idx">{{metadata.tradeQuantity[idx]}}</div>

@@ -139,6 +139,9 @@
                 <colony :colony="colonyModel(colonyName)"></colony>
               </div>
             </section>
+            <div class="free-floating-preferences-icon">
+              <preferences-icon></preferences-icon>
+            </div>
         </div>
 </template>
 
@@ -159,6 +162,7 @@ import Colony from '@/client/components/Colony.vue';
 import {COMMUNITY_COLONY_NAMES, OFFICIAL_COLONY_NAMES} from '@/common/colonies/AllColonies';
 import {ColonyModel} from '@/common/models/ColonyModel';
 import {ColonyName} from '@/common/colonies/ColonyName';
+import PreferencesIcon from '@/client/components/PreferencesIcon.vue';
 
 const MODULE_BASE = 'b';
 const MODULE_CORP = 'c';
@@ -200,7 +204,6 @@ export interface DebugUIModel {
   pathfinders: boolean,
   promo: boolean,
   types: Record<CardType, boolean>,
-  colonyCount: number,
 }
 
 export default Vue.extend({
@@ -209,8 +212,9 @@ export default Vue.extend({
     Card,
     GlobalEvent,
     Colony,
+    PreferencesIcon,
   },
-  data() {
+  data(): DebugUIModel {
     return {
       filterText: '',
       sortById: false,
@@ -232,9 +236,10 @@ export default Vue.extend({
         prelude: true,
         corporation: true,
         standard_project: true,
+        standard_action: false,
+        proxy: false,
       },
-      colonyCount: 0,
-    } as DebugUIModel;
+    };
   },
   mounted() {
     const urlParams = new URLSearchParams(window.location.search);
@@ -291,14 +296,6 @@ export default Vue.extend({
     },
     types() {
       this.updateUrl();
-    },
-    colonyCount: {
-      immediate: true,
-      handler() {
-        setTimeout(() => {
-          this.colonyCount = (this.colonyCount + 1) % 4;
-        }, 1000);
-      },
     },
   },
   computed: {
@@ -443,7 +440,7 @@ export default Vue.extend({
     },
     colonyModel(colonyName: ColonyName): ColonyModel {
       return {
-        colonies: Array(this.colonyCount).fill('blue'),
+        colonies: [],
         isActive: true,
         name: colonyName,
         trackPosition: 5,

@@ -3,16 +3,33 @@ import {GlobalEventModel} from '@/common/models/TurmoilModel';
 import {GlobalEventName} from '@/common/turmoil/globalEvents/GlobalEventName';
 import {PartyName} from '@/common/turmoil/PartyName';
 import {IClientGlobalEvent} from '@/common/turmoil/IClientGlobalEvent';
+// import * as eventJson from '@/genfiles/events.json';
+const eventJson = require('@/genfiles/events.json');
+import {getPreferences} from '../utils/PreferencesManager';
+
+const events: Map<GlobalEventName, IClientGlobalEvent> = new Map();
+if (getPreferences().experimental_ui) {
+  (eventJson as any as Array<IClientGlobalEvent>).forEach((card) => {
+    events.set(card.name, card);
+  });
+}
 
 export function allGlobalEventNames() {
-  return ALL_EVENTS.keys();
+  if (getPreferences().experimental_ui) {
+    return events.keys();
+  } else {
+    return ALL_EVENTS.keys();
+  }
 }
 
 export function getGlobalEvent(globalEventName: GlobalEventName): IClientGlobalEvent | undefined {
-  const Factory = ALL_EVENTS.get(globalEventName);
-
-  if (Factory !== undefined) return new Factory();
-  return undefined;
+  if (getPreferences().experimental_ui) {
+    return events.get(globalEventName);
+  } else {
+    const Factory = ALL_EVENTS.get(globalEventName);
+    if (Factory !== undefined) return new Factory();
+    return undefined;
+  }
 }
 
 export function getGlobalEventModel(globalEventName: GlobalEventName): GlobalEventModel {

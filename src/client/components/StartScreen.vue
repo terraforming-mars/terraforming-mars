@@ -20,6 +20,9 @@
       </div>
     </div>
   </div>
+  <div class="free-floating-preferences-icon">
+    <preferences-icon></preferences-icon>
+  </div>
 </div>
 </template>
 
@@ -27,6 +30,7 @@
 
 import Vue from 'vue';
 import LanguageSwitcher from '@/client/components/LanguageSwitcher.vue';
+import PreferencesIcon from '@/client/components/PreferencesIcon.vue';
 
 import * as raw_settings from '@/genfiles/settings.json';
 
@@ -39,6 +43,7 @@ export default Vue.extend({
   },
   components: {
     LanguageSwitcher,
+    PreferencesIcon,
   },
   methods: {
     getAppVersion(): string {

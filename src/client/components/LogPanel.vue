@@ -49,7 +49,7 @@ import {Color} from '@/common/Color';
 import {SoundManager} from '@/client/utils/SoundManager';
 import {getPreferences} from '@/client/utils/PreferencesManager';
 import {GlobalEventName} from '@/common/turmoil/globalEvents/GlobalEventName';
-import GlobalEvent from '@/client/components/GlobalEvent.vue';
+import GlobalEvent from '@/client/components/turmoil/GlobalEvent.vue';
 import {getGlobalEventModel} from '@/client/turmoil/ClientGlobalEventManifest';
 import {GlobalEventModel} from '@/common/models/TurmoilModel';
 import Button from '@/client/components/common/Button.vue';

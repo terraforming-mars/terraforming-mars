@@ -130,7 +130,7 @@ import {ColonyName} from '@/common/colonies/ColonyName';
 import {IColonyMetadata} from '@/common/colonies/IColonyMetadata';
 import ColonyRow from '@/client/components/colonies/ColonyRow.vue';
 import ColonyTradeRow from '@/client/components/colonies/ColonyTradeRow.vue';
-import {ALL_COLONIES_TILES} from '@/colonies/ColonyManifest';
+import {getColony} from '@/client/colonies/ClientColonyManifest';
 
 export default Vue.extend({
   name: 'colony',
@@ -181,11 +181,7 @@ export default Vue.extend({
       return 0;
     },
     metadata(): IColonyMetadata {
-      const cf = ALL_COLONIES_TILES.find((cf) => cf.colonyName === this.colony.name);
-      if (cf === undefined) {
-        throw new Error(`Unknown colony ${this.colony.name}`);
-      }
-      return new cf.Factory().metadata;
+      return getColony(this.colony.name);
     },
     ColonyName(): typeof ColonyName {
       return ColonyName;

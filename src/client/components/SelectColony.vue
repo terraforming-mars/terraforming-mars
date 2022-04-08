@@ -12,7 +12,7 @@
 </template>
 <script lang="ts">
 import Vue from 'vue';
-import Colony from '@/client/components/Colony.vue';
+import Colony from '@/client/components/colonies/Colony.vue';
 import Button from '@/client/components/common/Button.vue';
 import {PlayerInputModel} from '@/common/models/PlayerInputModel';
 

@@ -1,7 +1,7 @@
 import {mount} from '@vue/test-utils';
 import {getLocalVue} from './getLocalVue';
 import {expect} from 'chai';
-import MoonGlobalParameterValue from '@/client/components/MoonGlobalParameterValue.vue';
+import MoonGlobalParameterValue from '@/client/components/moon/MoonGlobalParameterValue.vue';
 import {MoonModel} from '@/common/models/MoonModel';
 import {MAXIMUM_COLONY_RATE, MAXIMUM_LOGISTICS_RATE, MAXIMUM_MINING_RATE} from '@/common/constants';
 

@@ -95,48 +95,42 @@
             <section class="debug-ui-cards-list">
                 <h2>Project Cards</h2>
                 <div class="cardbox" v-for="card in getAllProjectCards()" :key="card">
-                    <Card v-show="filtered(card)" :card="{'name': card}" />
+                    <Card v-show="showCard(card)" :card="{'name': card}" />
                 </div>
             </section>
             <br>
             <section class="debug-ui-cards-list">
                 <h2>Corporations</h2>
                 <div class="cardbox" v-for="card in getAllCorporationCards()" :key="card">
-                    <Card v-show="filtered(card)" :card="{'name': card}" />
+                    <Card v-show="showCard(card)" :card="{'name': card}" />
                 </div>
             </section>
             <br>
             <section class="debug-ui-cards-list">
                 <h2>Preludes</h2>
                 <div class="cardbox" v-for="card in getAllPreludeCards()" :key="card">
-                    <Card v-show="filtered(card)" :card="{'name': card}" />
+                    <Card v-show="showCard(card)" :card="{'name': card}" />
                 </div>
             </section>
             <br>
             <section class="debug-ui-cards-list">
               <h2>Standard Projects</h2>
               <div class="cardbox" v-for="card in getAllStandardProjectCards()" :key="card">
-                  <Card v-show="filtered(card)" :card="{'name': card}" />
+                  <Card v-show="showCard(card)" :card="{'name': card}" />
               </div>
             </section>
 
             <section class="debug-ui-cards-list">
               <h2>Global Events</h2>
               <div class="cardbox" v-for="globalEventName in getAllGlobalEvents()" :key="globalEventName">
-                <global-event :globalEvent="getGlobalEventModel(globalEventName)" type="prior"></global-event>
+                <global-event v-show="showGlobalEvent(globalEventName)" :globalEvent="getGlobalEventModel(globalEventName)" type="prior"></global-event>
               </div>
             </section>
-
-          <!-- <div class="player_home_colony_cont">
-              <div class="player_home_colony" v-for="colony in game.colonies" :key="colony.name">
-                  <colony :colony="colony"></colony>
-              </div>
-          </div> -->
 
             <section>
               <h2>Colonies</h2>
               <div class="player_home_colony" v-for="colonyName in getAllColonyNames()" :key="colonyName">
-                <colony :colony="colonyModel(colonyName)"></colony>
+                <colony v-show="showColony(colonyName)" :colony="colonyModel(colonyName)"></colony>
               </div>
             </section>
             <div class="free-floating-preferences-icon">
@@ -392,17 +386,21 @@ export default Vue.extend({
     getGlobalEventModel(globalEventName: GlobalEventName): GlobalEventModel {
       return getGlobalEventModel(globalEventName);
     },
-    filtered(cardName: CardName): boolean {
+    filterByName(name: string) {
+      const filterText = this.$data.filterText.toUpperCase();
+      if (this.$data.filterText.length > 0) {
+        if (name.toUpperCase().includes(filterText) === false) {
+          return false;
+        }
+      }
+      return true;
+    },
+    showCard(cardName: CardName): boolean {
+      if (!this.filterByName(cardName)) return false;
+
       const card = getCard(cardName);
       if (card === undefined) {
         return false;
-      }
-
-      const filterText = this.$data.filterText.toUpperCase();
-      if (this.$data.filterText.length > 0) {
-        if (cardName.toUpperCase().includes(filterText) === false) {
-          return false;
-        }
       }
 
       if (!this.types[card.card.cardType]) return false;
@@ -433,6 +431,12 @@ export default Vue.extend({
       default:
         return true;
       }
+    },
+    showGlobalEvent(name: GlobalEventName): boolean {
+      return this.filterByName(name);
+    },
+    showColony(name: ColonyName): boolean {
+      return this.filterByName(name);
     },
     getLanguageCssClass() {
       const language = getPreferences().lang;

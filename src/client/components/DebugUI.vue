@@ -129,8 +129,10 @@
 
             <section>
               <h2>Colonies</h2>
-              <div class="player_home_colony" v-for="colonyName in getAllColonyNames()" :key="colonyName">
-                <colony v-show="showColony(colonyName)" :colony="colonyModel(colonyName)"></colony>
+              <div class="player_home_colony_cont">
+                <div class="player_home_colony" v-for="colonyName in getAllColonyNames()" :key="colonyName">
+                  <colony v-show="showColony(colonyName)" :colony="colonyModel(colonyName)"></colony>
+                </div>
               </div>
             </section>
             <div class="free-floating-preferences-icon">

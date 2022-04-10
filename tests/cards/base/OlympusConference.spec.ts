@@ -3,7 +3,7 @@ import {Bushes} from '../../../src/cards/base/Bushes';
 import {MarsUniversity} from '../../../src/cards/base/MarsUniversity';
 import {OlympusConference} from '../../../src/cards/base/OlympusConference';
 import {Research} from '../../../src/cards/base/Research';
-import {ScienceTagCard} from '../../../src/cards/community/ScienceTagCard';
+import {AdaptationTechnology} from '../../../src//cards/base/AdaptationTechnology';
 import {DeferredActionsQueue} from '../../../src/deferredActions/DeferredActionsQueue';
 import {Game} from '../../../src/Game';
 import {OrOptions} from '../../../src/inputs/OrOptions';
@@ -75,7 +75,7 @@ describe('OlympusConference', function() {
 
   it('Triggers before Mars University', function() {
     const marsUniversity = new MarsUniversity();
-    const scienceTagCard = new ScienceTagCard();
+    const scienceTagCard = new AdaptationTechnology();
 
     // Olypus Conference played before Mars University
     player.playedCards.push(card);

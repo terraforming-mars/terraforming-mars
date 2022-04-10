@@ -159,6 +159,7 @@ export class Player {
 
   // Stats
   public actionsTakenThisGame: number = 0;
+  public victoryPointsByGeneration: Array<number> = [];
 
   constructor(
     public name: string,
@@ -2278,7 +2279,9 @@ export class Player {
       timer: this.timer.serialize(),
       // Stats
       actionsTakenThisGame: this.actionsTakenThisGame,
+      victoryPointsByGeneration: this.victoryPointsByGeneration,
     };
+
     if (this.lastCardPlayed !== undefined) {
       result.lastCardPlayed = this.lastCardPlayed;
     }
@@ -2298,6 +2301,11 @@ export class Player {
     player.colonyTradeOffset = d.colonyTradeOffset;
     player.colonyVictoryPoints = d.colonyVictoryPoints;
     player.corporationInitialActionDone = d.corporationInitialActionDone;
+    player.victoryPointsByGeneration = d.victoryPointsByGeneration;
+    // TODO(kberg): delete this conditional by 2022-06-01
+    if (!player.victoryPointsByGeneration) {
+      player.victoryPointsByGeneration = new Array(player.game.generation).fill(0);
+    }
     player.energy = d.energy;
     player.energyProduction = d.energyProduction;
     player.fleetSize = d.fleetSize;

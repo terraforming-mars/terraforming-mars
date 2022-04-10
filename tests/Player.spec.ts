@@ -275,6 +275,7 @@ describe('Player', function() {
         afterFirstAction: false,
         lastStoppedAt: 0,
       } as SerializedTimer,
+      victoryPointsByGeneration: [],
     };
 
     const newPlayer = Player.deserialize(json as SerializedPlayer);

@@ -73,6 +73,7 @@ import {Turmoil} from './turmoil/Turmoil';
 import {PathfindersExpansion} from './pathfinders/PathfindersExpansion';
 import {deserializeProjectCard, serializeProjectCard} from './cards/CardSerialization';
 import {ColoniesHandler} from './colonies/ColoniesHandler';
+import {SerializedGame} from './SerializedGame';
 
 export class Player {
   public readonly id: PlayerId;
@@ -2288,7 +2289,7 @@ export class Player {
     return result;
   }
 
-  public static deserialize(d: SerializedPlayer): Player {
+  public static deserialize(d: SerializedPlayer, game: SerializedGame): Player {
     const player = new Player(d.name, d.color, d.beginner, Number(d.handicap), d.id);
     const cardFinder = new CardFinder();
 
@@ -2304,7 +2305,7 @@ export class Player {
     player.victoryPointsByGeneration = d.victoryPointsByGeneration;
     // TODO(kberg): delete this conditional by 2022-06-01
     if (!player.victoryPointsByGeneration) {
-      player.victoryPointsByGeneration = new Array(player.game.generation).fill(0);
+      player.victoryPointsByGeneration = new Array(game.generation).fill(0);
     }
     player.energy = d.energy;
     player.energyProduction = d.energyProduction;

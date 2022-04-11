@@ -10,6 +10,7 @@ import {Resources} from '../src/common/Resources';
 import {TestPlayers} from './TestPlayers';
 import {SerializedPlayer} from '../src/SerializedPlayer';
 import {SerializedTimer} from '../src/common/SerializedTimer';
+import {SerializedGame} from '../src/SerializedGame';
 import {Player} from '../src/Player';
 import {Color} from '../src/common/Color';
 import {VictoryPointsBreakdown} from '../src/VictoryPointsBreakdown';
@@ -278,7 +279,7 @@ describe('Player', function() {
       victoryPointsByGeneration: [],
     };
 
-    const newPlayer = Player.deserialize(json as SerializedPlayer);
+    const newPlayer = Player.deserialize(json as SerializedPlayer, {generation: 1} as SerializedGame);
 
     expect(newPlayer.color).eq(Color.PURPLE);
     expect(newPlayer.tradesThisGeneration).eq(100);

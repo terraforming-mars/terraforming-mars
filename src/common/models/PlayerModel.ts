@@ -60,6 +60,7 @@ export interface PublicPlayerModel {
   titaniumValue: number;
   tradesThisGeneration: number;
   victoryPointsBreakdown: IVictoryPointsBreakdown;
+  victoryPointsByGeneration: Array<number>
 }
 
 /** A player's view of the game, including their secret information. */

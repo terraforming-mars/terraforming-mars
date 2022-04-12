@@ -801,21 +801,23 @@ export class Game {
       turmoil.endGeneration(this);
     });
 
-    // Resolve Turmoil deferred actions
+    // turmoil.endGeneration might have added actions.
     if (this.deferredActions.length > 0) {
-      this.resolveTurmoilDeferredActions();
-      return;
+      this.deferredActions.runAll(() => this.goToDraftOrResearch());
+    } else {
+      this.phase = Phase.INTERGENERATION;
+      this.goToDraftOrResearch();
     }
-
-    this.phase = Phase.INTERGENERATION;
-    this.goToDraftOrResearch();
   }
 
-  private resolveTurmoilDeferredActions() {
-    this.deferredActions.runAll(() => this.goToDraftOrResearch());
+  private updateVPbyGeneration(): void {
+    this.getPlayers().forEach((player) => {
+      player.victoryPointsByGeneration.push(player.getVictoryPoints().total);
+    });
   }
 
   private goToDraftOrResearch() {
+    this.updateVPbyGeneration();
     this.generation++;
     this.log('Generation ${0}', (b) => b.forNewGeneration().number(this.generation));
     this.incrementFirstPlayer();
@@ -1086,6 +1088,7 @@ export class Game {
         this.donePlayers.add(player.id);
       }
     }
+    this.updateVPbyGeneration();
     this.gotoEndGame();
   }
 
@@ -1586,7 +1589,7 @@ export class Game {
 
   public static deserialize(d: SerializedGame): Game {
     const gameOptions = d.gameOptions;
-    const players = d.players.map((element: SerializedPlayer) => Player.deserialize(element));
+    const players = d.players.map((element: SerializedPlayer) => Player.deserialize(element, d));
     const first = players.find((player) => player.id === d.first);
     if (first === undefined) {
       throw new Error(`Player ${d.first} not found when rebuilding First Player`);

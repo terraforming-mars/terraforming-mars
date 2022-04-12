@@ -13,6 +13,7 @@ import {PublicPlayerModel} from '@/common/models/PlayerModel';
 
 Chart.register(...registerables);
 Chart.defaults.font.size = 20;
+Chart.defaults.font.family = 'Ubuntu, Sans';
 Chart.defaults.color = 'rgb(240, 240, 240)';
 
 const ColorStringMap = new Map([
@@ -89,8 +90,21 @@ export default Vue.extend({
             scales: {
               y: {
                 title: {text: 'Victory Points', display: true},
-                grid: {color: 'rgb(90, 90, 90'},
+                grid: {
+                  color: (ctx) => {
+                    return ctx.tick.value % 10 === 0 ? 'lightgray' : 'rgb(90, 90, 90)';
+                  },
+                },
                 beginAtZero: true,
+                ticks: {
+                  autoSkip: false,
+                  stepSize: 5,
+                  callback: (value: string | number) => {
+                    // I don't know what to do when it's of string type yet, so this just ensures it's displayed.
+                    if (typeof(value) === 'string') return value;
+                    return value % 10 === 0 ? value : '';
+                  },
+                },
               },
               x: {
                 title: {text: 'Generation', display: true},

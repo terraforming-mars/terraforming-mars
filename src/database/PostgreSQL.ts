@@ -165,7 +165,7 @@ export class PostgreSQL implements IDatabase {
         return cb(err ?? undefined);
       }
       if (res.rowCount === 0) {
-        return cb(new Error(`Game for player id ${playerId} not found`));
+        return cb(new Error(`Game for player id ${id} not found`));
       }
       const gameId = res.rows[0].game_id;
       cb(undefined, gameId);

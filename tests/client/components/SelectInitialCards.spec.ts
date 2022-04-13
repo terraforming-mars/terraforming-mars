@@ -4,10 +4,11 @@ import {getLocalVue} from './getLocalVue';
 import {expect} from 'chai';
 import {CardName} from '@/common/cards/CardName';
 import SelectInitialCards from '@/client/components/SelectInitialCards.vue';
+import {InputResponse} from '@/common/inputs/InputResponse';
 
 describe('SelectInitialCards', function() {
   it('saves data without prelude', async function() {
-    let savedData: Array<Array<string>> | undefined;
+    let savedData: InputResponse | undefined;
     const component = mount(SelectInitialCards, {
       localVue: getLocalVue(),
       propsData: {
@@ -24,7 +25,7 @@ describe('SelectInitialCards', function() {
             cards: [{name: CardName.ANTS}],
           }],
         },
-        onsave: function(data: Array<Array<string>>) {
+        onsave: function(data: InputResponse) {
           savedData = data;
         },
         showsave: true,
@@ -42,7 +43,7 @@ describe('SelectInitialCards', function() {
     expect(savedData).to.deep.eq([[CardName.ECOLINE], [CardName.ANTS]]);
   });
   it('saves data with prelude', async function() {
-    let savedData: Array<Array<string>> | undefined;
+    let savedData: InputResponse | undefined;
     const component = mount(SelectInitialCards, {
       localVue: getLocalVue(),
       propsData: {
@@ -62,7 +63,7 @@ describe('SelectInitialCards', function() {
             cards: [{name: CardName.ANTS}],
           }],
         },
-        onsave: function(data: Array<Array<string>>) {
+        onsave: function(data: InputResponse) {
           savedData = data;
         },
         showsave: true,

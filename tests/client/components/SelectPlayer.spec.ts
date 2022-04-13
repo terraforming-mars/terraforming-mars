@@ -5,10 +5,11 @@ import {Color} from '@/common/Color';
 import SelectPlayer from '@/client/components/SelectPlayer.vue';
 import {PlayerInputModel} from '@/common/models/PlayerInputModel';
 import {PublicPlayerModel} from '@/common/models/PlayerModel';
+import {InputResponse} from '@/common/inputs/InputResponse';
 
 describe('SelectPlayer', () => {
   let wrapper: Wrapper<any>;
-  let response: Array<Array<string>> = [];
+  let response: InputResponse = [];
 
   const players: Array<Partial<PublicPlayerModel>> = [
     {name: 'alpha', color: Color.BLUE},
@@ -31,7 +32,7 @@ describe('SelectPlayer', () => {
       propsData: {
         players: players,
         playerinput: playerInput,
-        onsave: (r: Array<Array<string>>) => {
+        onsave: (r: InputResponse) => {
           response = r;
         },
         showsave: true,

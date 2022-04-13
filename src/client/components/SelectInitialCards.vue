@@ -29,6 +29,7 @@ import SelectCard from '@/client/components/SelectCard.vue';
 import ConfirmDialog from '@/client/components/common/ConfirmDialog.vue';
 import {getPreferences} from '@/client/utils/PreferencesManager';
 import {Tags} from '@/common/cards/Tags';
+import {InputResponse} from '@/common/inputs/InputResponse';
 
 type Refs = {
   confirmation: InstanceType<typeof ConfirmDialog>,
@@ -44,7 +45,7 @@ export default (Vue as WithRefs<Refs>).extend({
       type: Object as () => PlayerInputModel,
     },
     onsave: {
-      type: Function as unknown as () => (out: Array<Array<string>>) => void,
+      type: Function as unknown as () => (out: InputResponse) => void,
     },
     showsave: {
       type: Boolean,
@@ -172,7 +173,7 @@ export default (Vue as WithRefs<Refs>).extend({
       }
     },
     saveData() {
-      const result: Array<Array<string>> = [];
+      const result: InputResponse = [];
       result.push([]);
       if (this.selectedCorporation !== undefined) {
         result[0].push(this.selectedCorporation.name);

@@ -3,6 +3,7 @@ import {PlayerInput} from '../src/PlayerInput';
 import {Color} from '../src/common/Color';
 import {Units} from '../src/common/Units';
 import {Tags} from '../src/common/cards/Tags';
+import {InputResponse} from '../src/common/inputs/InputResponse';
 
 export class TestPlayer extends Player {
   constructor(color: Color) {
@@ -64,7 +65,7 @@ export class TestPlayer extends Player {
       super.getRawTagCount(tag, includeEventsTags);
   }
 
-  public override runInput(input: ReadonlyArray<ReadonlyArray<string>>, pi: PlayerInput): void {
+  public override runInput(input: InputResponse, pi: PlayerInput): void {
     super.runInput(input, pi);
   }
 

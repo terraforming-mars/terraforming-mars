@@ -74,6 +74,7 @@ import {PathfindersExpansion} from './pathfinders/PathfindersExpansion';
 import {deserializeProjectCard, serializeProjectCard} from './cards/CardSerialization';
 import {ColoniesHandler} from './colonies/ColoniesHandler';
 import {SerializedGame} from './SerializedGame';
+import {MonsInsurance} from './cards/promo/MonsInsurance';
 
 export class Player {
   public readonly id: PlayerId;
@@ -311,17 +312,8 @@ export class Player {
 
   private resolveMonsInsurance() {
     if (this.game.monsInsuranceOwner !== undefined && this.game.monsInsuranceOwner !== this.id) {
-      const monsInsuranceOwner: Player = this.game.getPlayerById(this.game.monsInsuranceOwner);
-      const retribution: number = Math.min(monsInsuranceOwner.megaCredits, 3);
-      this.megaCredits += retribution;
-      monsInsuranceOwner.deductResource(Resources.MEGACREDITS, 3);
-      if (retribution > 0) {
-        this.game.log('${0} received ${1} M€ from ${2} owner (${3})', (b) =>
-          b.player(this)
-            .number(retribution)
-            .cardName(CardName.MONS_INSURANCE)
-            .player(monsInsuranceOwner));
-      }
+      const monsInsuranceOwner = this.game.getPlayerById(this.game.monsInsuranceOwner);
+      (monsInsuranceOwner.corporationCard as MonsInsurance).payDebt(monsInsuranceOwner, this);
     }
   }
 

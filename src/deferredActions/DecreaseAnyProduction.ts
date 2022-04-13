@@ -2,6 +2,7 @@ import {Player} from '../Player';
 import {Resources} from '../common/Resources';
 import {SelectPlayer} from '../inputs/SelectPlayer';
 import {DeferredAction, Priority} from './DeferredAction';
+import {MonsInsurance} from '../cards/promo/MonsInsurance';
 
 namespace DecreaseAnyProduction {
   export interface Options {
@@ -22,7 +23,12 @@ export class DecreaseAnyProduction implements DeferredAction {
   ) { }
 
   public execute() {
-    if (this.player.game.isSoloMode()) return undefined;
+    if (this.player.game.isSoloMode()) {
+      if (this.player.game.monsInsuranceOwner === this.player.id) {
+        (this.player.corporationCard as MonsInsurance).payDebt(this.player, undefined);
+      }
+      return undefined;
+    }
 
     let candidates: Array<Player> = this.player.game.getPlayers().filter((p) => !p.productionIsProtected());
 

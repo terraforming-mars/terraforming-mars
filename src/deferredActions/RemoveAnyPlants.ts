@@ -4,6 +4,7 @@ import {OrOptions} from '../inputs/OrOptions';
 import {SelectOption} from '../inputs/SelectOption';
 import {DeferredAction, Priority} from './DeferredAction';
 import {CardName} from '../common/cards/CardName';
+import {MonsInsurance} from '../cards/promo/MonsInsurance';
 
 export class RemoveAnyPlants implements DeferredAction {
   public priority = Priority.ATTACK_OPPONENT;
@@ -17,6 +18,9 @@ export class RemoveAnyPlants implements DeferredAction {
     if (this.player.game.isSoloMode()) {
       // Crash site cleanup hook
       this.player.game.someoneHasRemovedOtherPlayersPlants = true;
+      if (this.player.game.monsInsuranceOwner === this.player.id) {
+        (this.player.corporationCard as MonsInsurance).payDebt(this.player, undefined);
+      }
       return undefined;
     }
 

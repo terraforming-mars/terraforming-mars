@@ -42,4 +42,27 @@ export class MonsInsurance extends Card implements ICorporationCard {
     player.game.monsInsuranceOwner = player.id;
     return undefined;
   }
+
+  // When `insured` is undefined, it's the neutral player.
+  public payDebt(player: Player, insured : Player | undefined) {
+    if (player !== insured) {
+      const retribution = Math.min(player.megaCredits, 3);
+      if (insured) insured.megaCredits += retribution;
+      player.deductResource(Resources.MEGACREDITS, retribution);
+      if (retribution > 0) {
+        if (insured !== undefined) {
+          player.game.log('${0} received ${1} M€ from ${2} owner (${3})', (b) =>
+            b.player(insured)
+              .number(retribution)
+              .cardName(CardName.MONS_INSURANCE)
+              .player(player));
+        } else {
+          player.game.log('Neutral player received ${0} M€ from ${1} owner (${2})', (b) =>
+            b.number(retribution)
+              .cardName(CardName.MONS_INSURANCE)
+              .player(player));
+        }
+      }
+    }
+  }
 }

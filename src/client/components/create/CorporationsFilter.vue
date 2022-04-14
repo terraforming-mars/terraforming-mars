@@ -21,7 +21,7 @@
               <div v-for="corporation in entry[1]" v-bind:key="corporation">
                   <label class="form-checkbox">
                       <input type="checkbox" v-model="selectedCorporations" :value="corporation"/>
-                      <i class="form-icon"></i>{{ corporation }}
+                      <i class="form-icon"></i><span v-i18n>{{ corporation }}</span>
                   </label>
               </div>
           </div>

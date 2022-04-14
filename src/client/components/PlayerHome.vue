@@ -235,7 +235,7 @@
       </div>
       <PlanetaryTracks v-if="game.gameOptions.pathfindersExpansion" :tracks="game.pathfinders" :gameOptions="game.gameOptions"/>
       <div v-if="game.spectatorId">
-        <a :href="'/spectator?id=' +game.spectatorId" target="_blank" rel="noopener noreferrer">Spectator link</a>
+        <a :href="'/spectator?id=' +game.spectatorId" target="_blank" rel="noopener noreferrer" v-i18n>Spectator link</a>
       </div>
   </div>
 </template>

@@ -148,14 +148,14 @@ export default Vue.extend({
         <div class="preferences_panel_langs">
           <label class="form-radio" v-for="language in LANGUAGES" :key="language.id">
             <input name="lang" type="radio" v-on:change="updatePreferences" v-model="prefs.lang" :value="language.id">
-            <i class="form-icon"></i> {{ language.title }}
+            <i class="form-icon"></i> <span v-i18n>{{ language.title }}</span>
           </label>
         </div>
       </div>
 
 
       <div class="preferences_panel_actions">
-        <button class="btn btn-lg btn-primary" v-on:click="okClicked">Ok</button>
+        <button class="btn btn-lg btn-primary" v-on:click="okClicked" v-i18n>Ok</button>
       </div>
     </div>
 </template>

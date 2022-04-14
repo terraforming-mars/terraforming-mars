@@ -73,6 +73,7 @@ import {Turmoil} from './turmoil/Turmoil';
 import {PathfindersExpansion} from './pathfinders/PathfindersExpansion';
 import {deserializeProjectCard, serializeProjectCard} from './cards/CardSerialization';
 import {ColoniesHandler} from './colonies/ColoniesHandler';
+import {SerializedGame} from './SerializedGame';
 
 export class Player {
   public readonly id: PlayerId;
@@ -159,6 +160,7 @@ export class Player {
 
   // Stats
   public actionsTakenThisGame: number = 0;
+  public victoryPointsByGeneration: Array<number> = [];
 
   constructor(
     public name: string,
@@ -730,7 +732,7 @@ export class Player {
     }
   }
 
-  public addResourceTo(card: ICard, options: number | {qty?: number, log?: boolean} = 1): void {
+  public addResourceTo(card: ICard, options: number | {qty?: number, log?: boolean, logZero?: boolean} = 1): void {
     const count = typeof(options) === 'number' ? options : (options.qty ?? 1);
 
     if (card.resourceCount !== undefined) {
@@ -738,7 +740,9 @@ export class Player {
     }
 
     if (typeof(options) !== 'number' && options.log === true) {
-      LogHelper.logAddResource(this, card, count);
+      if (options.logZero === true || count !== 0) {
+        LogHelper.logAddResource(this, card, count);
+      }
     }
 
     for (const playedCard of this.playedCards) {
@@ -2278,14 +2282,16 @@ export class Player {
       timer: this.timer.serialize(),
       // Stats
       actionsTakenThisGame: this.actionsTakenThisGame,
+      victoryPointsByGeneration: this.victoryPointsByGeneration,
     };
+
     if (this.lastCardPlayed !== undefined) {
       result.lastCardPlayed = this.lastCardPlayed;
     }
     return result;
   }
 
-  public static deserialize(d: SerializedPlayer): Player {
+  public static deserialize(d: SerializedPlayer, game: SerializedGame): Player {
     const player = new Player(d.name, d.color, d.beginner, Number(d.handicap), d.id);
     const cardFinder = new CardFinder();
 
@@ -2298,6 +2304,11 @@ export class Player {
     player.colonyTradeOffset = d.colonyTradeOffset;
     player.colonyVictoryPoints = d.colonyVictoryPoints;
     player.corporationInitialActionDone = d.corporationInitialActionDone;
+    player.victoryPointsByGeneration = d.victoryPointsByGeneration;
+    // TODO(kberg): delete this conditional by 2022-06-01
+    if (!player.victoryPointsByGeneration) {
+      player.victoryPointsByGeneration = new Array(game.generation).fill(0);
+    }
     player.energy = d.energy;
     player.energyProduction = d.energyProduction;
     player.fleetSize = d.fleetSize;

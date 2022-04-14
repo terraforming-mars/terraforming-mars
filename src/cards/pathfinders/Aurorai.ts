@@ -7,7 +7,6 @@ import {CardType} from '../../common/cards/CardType';
 import {CardRenderer} from '../render/CardRenderer';
 import {ResourceType} from '../../common/ResourceType';
 import {AddResourcesToCard} from '../../deferredActions/AddResourcesToCard';
-import {VictoryPoints} from '../ICard';
 import {Priority} from '../../deferredActions/DeferredAction';
 
 export class Aurorai extends Card implements ICorporationCard {
@@ -18,7 +17,6 @@ export class Aurorai extends Card implements ICorporationCard {
       tags: [Tags.MARS],
       startingMegaCredits: 33,
       resourceType: ResourceType.DATA,
-      victoryPoints: VictoryPoints.resource(1, 3),
 
       metadata: {
         cardNumber: 'PfC9',

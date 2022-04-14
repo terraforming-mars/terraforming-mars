@@ -32,7 +32,7 @@ export class CardRequirements implements ICardRequirements {
         tags.push((requirement as TagCardRequirement).tag);
       }
     });
-    if (!player.checkMultipleTagPresence(tags)) {
+    if (tags.length > 1 && !player.checkMultipleTagPresence(tags)) {
       return false;
     }
     return this.requirements.every((requirement: CardRequirement) => requirement.satisfies(player));

@@ -11,6 +11,7 @@
     "@types/pg": "^7.14.7",
     "@types/sqlite3": "^3.1.6",
     "console-stamp": "3.0.0-rc4.2",
+    "chart.js": "^3.7.0",
     "cross-env": "^7.0.3",
     "dialog-polyfill": "^0.5.1",
     "dotenv": "^8.2.0",

@@ -22,7 +22,7 @@ export class SoilDetoxification extends Card implements IProjectCard {
       metadata: {
         cardNumber: 'PfTmp',
         renderData: CardRenderer.builder((b) => {
-          b.effect('Using the Greenery standard action costs 1 plant less.', (eb) => eb.greenery(undefined, true).asterix().startEffect.minus().plants(1)).br;
+          b.effect('Using the Greenery standard action costs 1 plant less.', (eb) => eb.greenery().asterix().startEffect.minus().plants(1)).br;
           b.production((pb) => pb.plants(1));
         }),
         description: 'Requires Greens are ruling or you have 2 delegates there. Increase your plant production 1 step',

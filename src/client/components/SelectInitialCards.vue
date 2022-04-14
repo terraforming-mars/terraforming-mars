@@ -1,7 +1,7 @@
 <template>
   <div class="select-initial-cards">
     <confirm-dialog
-      message="Continue without buying initial cards?"
+      message="Continue without buying any project cards?"
       ref="confirmation"
       v-on:accept="confirmSelection" />
     <SelectCard :playerView="playerView" :playerinput="getOption(0)" :showtitle="true" :onsave="noop" v-on:cardschanged="corporationChanged" />
@@ -27,8 +27,9 @@ import {PlayerInputModel} from '@/common/models/PlayerInputModel';
 import {PlayerViewModel} from '@/common/models/PlayerModel';
 import SelectCard from '@/client/components/SelectCard.vue';
 import ConfirmDialog from '@/client/components/common/ConfirmDialog.vue';
-import {getPreferences} from '@/client/utils/PreferencesManager';
+import {IPreferences, PreferencesManager} from '@/client/utils/PreferencesManager';
 import {Tags} from '@/common/cards/Tags';
+import {CardType} from '@/common/cards/CardType';
 
 type Refs = {
   confirmation: InstanceType<typeof ConfirmDialog>,
@@ -51,6 +52,10 @@ export default (Vue as WithRefs<Refs>).extend({
     },
     showtitle: {
       type: Boolean,
+    },
+    preferences: {
+      type: Object as () => Readonly<IPreferences>,
+      default: PreferencesManager.INSTANCE.values(),
     },
   },
   components: {
@@ -165,7 +170,10 @@ export default (Vue as WithRefs<Refs>).extend({
       return starting;
     },
     saveIfConfirmed() {
-      if (getPreferences().show_alerts && this.selectedCards.length === 0) {
+      const projectCards = this.selectedCards.filter((name) => getCard(name)?.card.cardType !== CardType.PRELUDE);
+      let showAlert = false;
+      if (this.preferences.show_alerts && projectCards.length === 0) showAlert = true;
+      if (showAlert) {
         this.$refs.confirmation.show();
       } else {
         this.saveData();

@@ -41,7 +41,7 @@ as result you will see the warnings for Chinese and Russian languages only.
 
 ```
 heroku pg:credentials:url --app <your-app-name>
-POSTGRES_HOST=<postges:...> node build/src/tools/export_game.js <game id | player id>
+POSTGRES_HOST=<postges:...> node build/src/tools/export_game.js <game id | player id | spectator id>
 ```
 
 ### Description

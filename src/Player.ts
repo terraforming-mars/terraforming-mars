@@ -1616,6 +1616,9 @@ export class Player {
   }
 
   public onCardPlayed(card: IProjectCard) {
+    if (card.cardType === CardType.PROXY) {
+      return;
+    }
     for (const playedCard of this.playedCards) {
       if (playedCard.onCardPlayed !== undefined) {
         const actionFromPlayedCard: OrOptions | void = playedCard.onCardPlayed(this, card);

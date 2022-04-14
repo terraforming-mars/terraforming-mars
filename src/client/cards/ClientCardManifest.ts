@@ -58,7 +58,6 @@ function newInitialize() {
   });
 }
 
-console.log(getPreferences().experimental_ui);
 if (getPreferences().experimental_ui) {
   console.log('new initialize');
   newInitialize();

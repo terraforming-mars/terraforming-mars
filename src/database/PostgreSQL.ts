@@ -135,7 +135,7 @@ export class PostgreSQL implements IDatabase {
         console.error('PostgreSQL:getGame', err);
         return cb(err);
       }
-      if (res.rows.length === 0) {
+      if (res.rows.length === 0 || res.rows[0] === undefined) {
         return cb(new Error('Game not found'));
       }
       cb(undefined, JSON.parse(res.rows[0].game));
@@ -165,7 +165,7 @@ export class PostgreSQL implements IDatabase {
         return cb(err ?? undefined);
       }
       if (res.rowCount === 0) {
-        return cb(new Error('Game not found'));
+        return cb(new Error(`Game for player id ${id} not found`));
       }
       const gameId = res.rows[0].game_id;
       cb(undefined, gameId);
@@ -177,6 +177,9 @@ export class PostgreSQL implements IDatabase {
       if (err) {
         console.error('PostgreSQL:getGameVersion', err);
         return cb(err, undefined);
+      }
+      if (res.rowCount === 0) {
+        return cb(new Error(`Game ${game_id} not found at save_id ${save_id}`), undefined);
       }
       cb(undefined, JSON.parse(res.rows[0].game));
     });

@@ -51,7 +51,7 @@ describe('ServeAsset', () => {
   it('bad filename', () => {
     scaffolding.url = 'goo.goo.gaa.gaa';
     scaffolding.req.headers['accept-encoding'] = '';
-    instance.get(scaffolding.req, res.hide(), scaffolding.ctx);
+    scaffolding.get(instance, res);
     expect(res.statusCode).eq(404);
     expect(res.content).eq('Not found');
   });
@@ -59,7 +59,7 @@ describe('ServeAsset', () => {
   it('index.html', () => {
     scaffolding.url = '/assets/index.html';
     scaffolding.req.headers['accept-encoding'] = '';
-    instance.get(scaffolding.req, res.hide(), scaffolding.ctx);
+    scaffolding.get(instance, res);
     expect(res.content.startsWith('<!DOCTYPE html>'));
   });
 
@@ -67,7 +67,7 @@ describe('ServeAsset', () => {
     instance = new ServeAsset(undefined, false, fileApi);
     scaffolding.url = '/styles.css';
     scaffolding.req.headers['accept-encoding'] = '';
-    instance.get(scaffolding.req, res.hide(), scaffolding.ctx);
+    scaffolding.get(instance, res);
     expect(res.content).eq('data: build/styles.css');
   });
 
@@ -75,7 +75,7 @@ describe('ServeAsset', () => {
     instance = new ServeAsset(undefined, false, fileApi);
     scaffolding.url = '/styles.css';
     scaffolding.req.headers['accept-encoding'] = 'gzip';
-    instance.get(scaffolding.req, res.hide(), scaffolding.ctx);
+    scaffolding.get(instance, res);
     expect(res.content).eq('data: build/styles.css.gz');
   });
 
@@ -86,7 +86,7 @@ describe('ServeAsset', () => {
 
     scaffolding.url = '/styles.css';
     scaffolding.req.headers['accept-encoding'] = '';
-    instance.get(scaffolding.req, res.hide(), scaffolding.ctx);
+    scaffolding.get(instance, res);
 
     expect(res.content).eq('data: build/styles.css');
     expect(fileApi.counts).deep.eq({
@@ -102,7 +102,7 @@ describe('ServeAsset', () => {
 
     scaffolding.url = '/styles.css';
     scaffolding.req.headers['accept-encoding'] = 'gzip';
-    instance.get(scaffolding.req, res.hide(), scaffolding.ctx);
+    scaffolding.get(instance, res);
 
     expect(res.content).eq('data: build/styles.css.gz');
     expect(fileApi.counts).deep.eq({
@@ -115,7 +115,7 @@ describe('ServeAsset', () => {
     instance = new ServeAsset(undefined, false, fileApi);
     scaffolding.url = '/main.js';
     scaffolding.req.headers['accept-encoding'] = '';
-    instance.get(scaffolding.req, res.hide(), scaffolding.ctx);
+    scaffolding.get(instance, res);
     expect(res.content).eq('data: build/main.js');
     expect(fileApi.counts).deep.eq({
       ...primedCache,
@@ -129,7 +129,7 @@ describe('ServeAsset', () => {
     instance = new ServeAsset(undefined, false, fileApi);
     scaffolding.url = '/main.js';
     scaffolding.req.headers['accept-encoding'] = '';
-    instance.get(scaffolding.req, res.hide(), scaffolding.ctx);
+    scaffolding.get(instance, res);
     expect(res.content).eq('data: build/main.js');
     expect(fileApi.counts).deep.eq({
       ...primedCache,
@@ -142,7 +142,7 @@ describe('ServeAsset', () => {
     instance = new ServeAsset(undefined, false, fileApi);
     scaffolding.url = '/sw.js';
     scaffolding.req.headers['accept-encoding'] = '';
-    instance.get(scaffolding.req, res.hide(), scaffolding.ctx);
+    scaffolding.get(instance, res);
     expect(res.content).eq('data: build/src/client/sw.js');
     expect(fileApi.counts).deep.eq({
       ...primedCache,

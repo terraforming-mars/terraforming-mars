@@ -20,7 +20,7 @@ describe('ApiCloneableGame', () => {
 
   it('no parameter', () => {
     scaffolding.url = '/api/cloneablegames';
-    ApiCloneableGame.INSTANCE.get(scaffolding.req, res.hide(), scaffolding.ctx);
+    scaffolding.get(ApiCloneableGame.INSTANCE, res);
     expect(res.statusCode).eq(400);
     expect(res.content).eq('Bad request: id parameter missing');
   });
@@ -31,7 +31,7 @@ describe('ApiCloneableGame', () => {
       cb(new Error('Segmentation fault'), undefined);
     };
     scaffolding.url = '/api/cloneablegames?id=invalidId';
-    ApiCloneableGame.INSTANCE.get(scaffolding.req, res.hide(), scaffolding.ctx);
+    scaffolding.get(ApiCloneableGame.INSTANCE, res);
     expect(res.statusCode).eq(500);
     expect(res.content).eq('Internal server error: Segmentation fault');
   });
@@ -42,7 +42,7 @@ describe('ApiCloneableGame', () => {
       cb(undefined, undefined);
     };
     scaffolding.url = '/api/cloneablegames?id=notfound';
-    ApiCloneableGame.INSTANCE.get(scaffolding.req, res.hide(), scaffolding.ctx);
+    scaffolding.get(ApiCloneableGame.INSTANCE, res);
     expect(res.statusCode).eq(404);
     expect(res.content).eq('Not found');
   });
@@ -57,7 +57,7 @@ describe('ApiCloneableGame', () => {
       cb(undefined, expected);
     };
     scaffolding.url = '/api/cloneablegames?id=' + expected.gameId;
-    ApiCloneableGame.INSTANCE.get(scaffolding.req, res.hide(), scaffolding.ctx);
+    scaffolding.get(ApiCloneableGame.INSTANCE, res);
     expect(res.statusCode).eq(200);
     expect(res.content).eq(JSON.stringify(expected));
   });

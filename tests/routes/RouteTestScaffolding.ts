@@ -1,7 +1,9 @@
 import * as http from 'http';
 import {IContext} from '../../src/routes/IHandler';
+import {Handler} from '../../src/routes/Handler';
 import {Route} from '../../src/routes/Route';
 import {FakeGameLoader} from './FakeGameLoader';
+import {MockResponse} from './HttpMocks';
 
 export type Header = 'accept-encoding';
 
@@ -25,5 +27,12 @@ export class RouteTestScaffolding {
   public set url(headlessUri: string) {
     this.req.url = headlessUri;
     this.ctx.url = new URL('http://boo.com' + headlessUri);
+  }
+
+  public get(handler: Handler, res: MockResponse) {
+    handler.get(this.req, res.hide(), this.ctx);
+  }
+  public post(handler: Handler, res: MockResponse) {
+    handler.post(this.req, res.hide(), this.ctx);
   }
 }

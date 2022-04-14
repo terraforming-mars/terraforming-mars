@@ -17,7 +17,7 @@ export class PlayerInput extends Handler {
     const playerId = ctx.url.searchParams.get('id');
 
     if (playerId === null) {
-      ctx.route.badRequest(req, res, 'must provide id');
+      ctx.route.badRequest(req, res, 'must provide player id');
       return;
     }
 

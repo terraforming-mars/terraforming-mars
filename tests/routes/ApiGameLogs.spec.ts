@@ -1,51 +1,38 @@
-import * as http from 'http';
 import {expect} from 'chai';
 import {ApiGameLogs} from '../../src/routes/ApiGameLogs';
-import {Route} from '../../src/routes/Route';
 import {Game} from '../../src/Game';
 import {TestPlayers} from '../TestPlayers';
 import {MockResponse} from './HttpMocks';
-import {IContext} from '../../src/routes/IHandler';
-import {FakeGameLoader} from './FakeGameLoader';
+import {RouteTestScaffolding} from './RouteTestScaffolding';
 
 describe('ApiGameLogs', function() {
-  let req: http.IncomingMessage;
+  let scaffolding: RouteTestScaffolding;
   let res: MockResponse;
-  let ctx: IContext;
 
   beforeEach(() => {
-    req = {} as http.IncomingMessage;
+    scaffolding = new RouteTestScaffolding();
     res = new MockResponse();
-    ctx = {
-      route: new Route(),
-      serverId: '1',
-      url: new URL('http://boo.com'),
-      gameLoader: new FakeGameLoader(),
-    };
   });
 
   it('fails when id not provided', () => {
-    req.url = '/api/game/logs';
-    ctx.url = new URL('http://boo.com' + req.url);
-    ApiGameLogs.INSTANCE.get(req, res.hide(), ctx);
+    scaffolding.url = '/api/game/logs';
+    scaffolding.get(ApiGameLogs.INSTANCE, res);
     expect(res.content).eq('Bad request: must provide player id as the id parameter');
   });
 
   it('fails when game not found', () => {
-    req.url = '/api/game/logs?id=game-id';
-    ctx.url = new URL('http://boo.com' + req.url);
-    ApiGameLogs.INSTANCE.get(req, res.hide(), ctx);
+    scaffolding.url = '/api/game/logs?id=game-id';
+    scaffolding.get(ApiGameLogs.INSTANCE, res);
     expect(res.content).eq('Not found: game not found');
   });
 
   it('pulls logs when no generation provided', () => {
     const player = TestPlayers.BLACK.newPlayer();
-    req.url = '/api/game/logs?id=' + player.id;
-    ctx.url = new URL('http://boo.com' + req.url);
+    scaffolding.url = '/api/game/logs?id=' + player.id;
     const game = Game.newInstance('game-id', [player], player);
-    ctx.gameLoader.add(game);
+    scaffolding.ctx.gameLoader.add(game);
     game.log('Generation ${0}', (b) => b.forNewGeneration().number(50));
-    ApiGameLogs.INSTANCE.get(req, res.hide(), ctx);
+    scaffolding.get(ApiGameLogs.INSTANCE, res);
     const messages = JSON.parse(res.content);
     expect(messages.length).gt(1);
     expect(messages[messages.length - 1].message).eq('Generation ${0}');
@@ -54,12 +41,11 @@ describe('ApiGameLogs', function() {
 
   it('pulls logs for most recent generation', () => {
     const player = TestPlayers.BLACK.newPlayer();
-    req.url = '/api/game/logs?id=' + player.id + '&generation=50';
-    ctx.url = new URL('http://boo.com' + req.url);
+    scaffolding.url = '/api/game/logs?id=' + player.id + '&generation=50';
     const game = Game.newInstance('game-id', [player], player);
-    ctx.gameLoader.add(game);
+    scaffolding.ctx.gameLoader.add(game);
     game.log('Generation ${0}', (b) => b.forNewGeneration().number(50));
-    ApiGameLogs.INSTANCE.get(req, res.hide(), ctx);
+    scaffolding.get(ApiGameLogs.INSTANCE, res);
     const messages = JSON.parse(res.content);
     expect(messages.length).eq(1);
     expect(messages[messages.length - 1].message).eq('Generation ${0}');
@@ -68,11 +54,10 @@ describe('ApiGameLogs', function() {
 
   it('pulls logs for first generation', () => {
     const player = TestPlayers.BLACK.newPlayer();
-    req.url = '/api/game/logs?id=' + player.id;
-    ctx.url = new URL('http://boo.com' + req.url);
+    scaffolding.url = '/api/game/logs?id=' + player.id;
     const game = Game.newInstance('game-id', [player], player);
-    ctx.gameLoader.add(game);
-    ApiGameLogs.INSTANCE.get(req, res.hide(), ctx);
+    scaffolding.ctx.gameLoader.add(game);
+    scaffolding.get(ApiGameLogs.INSTANCE, res);
     const messages = JSON.parse(res.content);
     expect(messages.length).gt(1);
     expect(messages[messages.length - 1].message).eq('Generation ${0}');
@@ -81,11 +66,10 @@ describe('ApiGameLogs', function() {
 
   it('pulls logs for missing generation', () => {
     const player = TestPlayers.BLACK.newPlayer();
-    req.url = '/api/game/logs?id=' + player.id + '&generation=2';
-    ctx.url = new URL('http://boo.com' + req.url);
+    scaffolding.url = '/api/game/logs?id=' + player.id + '&generation=2';
     const game = Game.newInstance('game-id', [player], player);
-    ctx.gameLoader.add(game);
-    ApiGameLogs.INSTANCE.get(req, res.hide(), ctx);
+    scaffolding.ctx.gameLoader.add(game);
+    scaffolding.get(ApiGameLogs.INSTANCE, res);
     const messages = JSON.parse(res.content);
     expect(messages.length).eq(0);
   });
@@ -100,7 +84,7 @@ describe('ApiGameLogs', function() {
       const playerUnderTest = players[entry.idx];
 
       const game = Game.newInstance('game-id', players, yellowPlayer);
-      ctx.gameLoader.add(game);
+      scaffolding.ctx.gameLoader.add(game);
 
       // Remove logs to-date to simplify the test
       game.gameLog.length = 0;
@@ -109,9 +93,8 @@ describe('ApiGameLogs', function() {
       game.log('Orange player sees this.', (_b) => {}, {reservedFor: orangePlayer});
       game.log('Blue player sees this.', (_b) => {}, {reservedFor: bluePlayer});
 
-      req.url = '/api/game/logs?id=' + playerUnderTest.id;
-      ctx.url = new URL('http://boo.com' + req.url);
-      ApiGameLogs.INSTANCE.get(req, res.hide(), ctx);
+      scaffolding.url = '/api/game/logs?id=' + playerUnderTest.id;
+      scaffolding.get(ApiGameLogs.INSTANCE, res);
       const messages = JSON.parse(res.content);
 
       expect(messages.length).eq(2);

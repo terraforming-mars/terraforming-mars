@@ -1,44 +1,32 @@
-import * as http from 'http';
 import {expect} from 'chai';
 import {ApiPlayer} from '../../src/routes/ApiPlayer';
-import {Route} from '../../src/routes/Route';
 import {Game} from '../../src/Game';
 import {TestPlayers} from '../TestPlayers';
 import {MockResponse} from './HttpMocks';
-import {IContext} from '../../src/routes/IHandler';
-import {FakeGameLoader} from './FakeGameLoader';
 import {PlayerViewModel} from '../../src/common/models/PlayerModel';
+import {RouteTestScaffolding} from './RouteTestScaffolding';
 
 describe('ApiPlayer', function() {
-  let req: http.IncomingMessage;
+  let scaffolding: RouteTestScaffolding;
   let res: MockResponse;
-  let ctx: IContext;
 
   beforeEach(() => {
-    req = {} as http.IncomingMessage;
+    scaffolding = new RouteTestScaffolding();
     res = new MockResponse();
-    ctx = {
-      route: new Route(),
-      serverId: '1',
-      url: new URL('http://boo.com'),
-      gameLoader: new FakeGameLoader(),
-    };
   });
 
   it('fails game not found', () => {
-    req.url = '/api/player?id=googoo';
-    ctx.url = new URL('http://boo.com' + req.url);
-    ApiPlayer.INSTANCE.get(req, res.hide(), ctx);
+    scaffolding.url = '/api/player?id=googoo';
+    scaffolding.get(ApiPlayer.INSTANCE, res);
     expect(res.content).eq('Not found');
   });
 
   it('pulls player', () => {
     const player = TestPlayers.BLACK.newPlayer();
-    req.url = '/api/player?id=' + player.id;
-    ctx.url = new URL('http://boo.com' + req.url);
+    scaffolding.url = '/api/player?id=' + player.id;
     const game = Game.newInstance('game-id', [player], player);
-    ctx.gameLoader.add(game);
-    ApiPlayer.INSTANCE.get(req, res.hide(), ctx);
+    scaffolding.ctx.gameLoader.add(game);
+    scaffolding.get(ApiPlayer.INSTANCE, res);
     const response: PlayerViewModel = JSON.parse(res.content);
     expect(response.id).eq(player.id);
   });

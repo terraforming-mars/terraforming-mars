@@ -55,7 +55,7 @@ export default (Vue as WithRefs<Refs>).extend({
     },
     preferences: {
       type: Object as () => Readonly<IPreferences>,
-      default: PreferencesManager.INSTANCE.values(),
+      default: () => PreferencesManager.INSTANCE.values(),
     },
   },
   components: {

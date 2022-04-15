@@ -352,8 +352,8 @@ export default Vue.extend({
       const copy = [...names];
       if (this.$data.sortById) {
         return copy.sort((a: CardName, b: CardName) => {
-          const an = getCard(a)?.card.metadata.cardNumber || '';
-          const bn = getCard(b)?.card.metadata.cardNumber || '';
+          const an = getCard(a)?.metadata.cardNumber || '';
+          const bn = getCard(b)?.metadata.cardNumber || '';
           return an.localeCompare(bn);
         });
       } else {
@@ -405,7 +405,7 @@ export default Vue.extend({
         return false;
       }
 
-      if (!this.types[card.card.cardType]) return false;
+      if (!this.types[card.cardType]) return false;
 
       switch (card.module) {
       case GameModule.Base:

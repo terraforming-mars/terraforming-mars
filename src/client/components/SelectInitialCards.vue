@@ -19,7 +19,7 @@ import Vue from 'vue';
 import {WithRefs} from 'vue-typed-refs';
 
 import Button from '@/client/components/common/Button.vue';
-import {getCard} from '@/client/cards/ClientCardManifest';
+import {getCard, getCardOrThrow} from '@/client/cards/ClientCardManifest';
 import {CardName} from '@/common/cards/CardName';
 import * as constants from '@/common/constants';
 import {IClientCard} from '@/common/cards/IClientCard';
@@ -77,16 +77,13 @@ export default (Vue as WithRefs<Refs>).extend({
     getAfterPreludes() {
       let result = 0;
       for (const prelude of this.selectedPreludes) {
-        const cam = getCard(prelude);
-        if (cam === undefined) {
-          throw new Error(`Prelude ${prelude} not found`);
-        }
-        result += cam.card.startingMegaCredits ?? 0;
+        const card = getCardOrThrow(prelude);
+        result += card.startingMegaCredits ?? 0;
 
         switch (this.selectedCorporation?.name) {
         // For each step you increase the production of a resource ... you also gain that resource.
         case CardName.MANUTECH:
-          result += cam.card.productionBox?.megacredits ?? 0;
+          result += card.productionBox?.megacredits ?? 0;
           break;
 
         // When you place a city tile, gain 3 M€.
@@ -102,13 +99,13 @@ export default (Vue as WithRefs<Refs>).extend({
 
         // When ANY microbe tag is played ... lose 4 M€ or as much as possible.
         case CardName.PHARMACY_UNION:
-          const tags = cam.card.tags.filter((tag) => tag === Tags.MICROBE).length;
+          const tags = card.tags.filter((tag) => tag === Tags.MICROBE).length;
           result -= (4 * tags);
           break;
 
         // when a microbe tag is played, incl. this, THAT PLAYER gains 2 M€,
         case CardName.SPLICE:
-          const microbeTags = cam.card.tags.filter((tag) => tag === Tags.MICROBE).length;
+          const microbeTags = card.tags.filter((tag) => tag === Tags.MICROBE).length;
           result += (2 * microbeTags);
           break;
 
@@ -170,7 +167,7 @@ export default (Vue as WithRefs<Refs>).extend({
       return starting;
     },
     saveIfConfirmed() {
-      const projectCards = this.selectedCards.filter((name) => getCard(name)?.card.cardType !== CardType.PRELUDE);
+      const projectCards = this.selectedCards.filter((name) => getCard(name)?.cardType !== CardType.PRELUDE);
       let showAlert = false;
       if (this.preferences.show_alerts && projectCards.length === 0) showAlert = true;
       if (showAlert) {
@@ -198,7 +195,7 @@ export default (Vue as WithRefs<Refs>).extend({
       this.selectedCards = cards;
     },
     corporationChanged(cards: Array<CardName>) {
-      this.selectedCorporation = getCard(cards[0])?.card;
+      this.selectedCorporation = getCard(cards[0]);
     },
     preludesChanged(cards: Array<CardName>) {
       this.selectedPreludes = cards;

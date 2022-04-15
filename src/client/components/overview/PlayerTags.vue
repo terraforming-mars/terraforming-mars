@@ -118,8 +118,7 @@ export default Vue.extend({
         modifiers[tag].discount += discount.amount;
       }
 
-      const instance = getCard(card.name);
-      const vps = instance?.card.victoryPoints;
+      const vps = getCard(card.name)?.victoryPoints;
       if (vps !== undefined && typeof(vps) !== 'number' && vps !== 'special' && vps.type !== 'resource') {
         modifiers[vps.type].points += (vps.points / vps.per);
       }

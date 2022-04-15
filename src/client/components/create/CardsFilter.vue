@@ -57,7 +57,7 @@ export default Vue.extend({
   components: {Button},
   methods: {
     isPrelude(cardName: CardName) {
-      return getCard(cardName)?.card.cardType === CardType.PRELUDE;
+      return getCard(cardName)?.cardType === CardType.PRELUDE;
     },
     removeCard(cardNameToRemove: CardName) {
       this.selectedCardNames = this.selectedCardNames.filter((curCardName) => curCardName !== cardNameToRemove).sort();

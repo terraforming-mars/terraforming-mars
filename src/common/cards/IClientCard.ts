@@ -11,8 +11,8 @@ import {Tags} from './Tags';
 import {ICardDiscount} from './Types';
 
 export interface IClientCard {
-  module?: GameModule; // ? will be removed after final separation.
   name: CardName;
+  module: GameModule;
   tags: Array<Tags>;
   cardDiscount?: ICardDiscount | Array<ICardDiscount>;
   victoryPoints?: number | 'special' | IVictoryPoints,

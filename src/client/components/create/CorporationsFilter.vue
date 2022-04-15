@@ -80,9 +80,9 @@ export default Vue.extend({
   },
   data() {
     const cardsByModule: MultiMap<GameModule, CardName> = new MultiMap();
-    getCards(byType(CardType.CORPORATION)).forEach((cam) => {
-      if (cam.card.name !== CardName.BEGINNER_CORPORATION) {
-        cardsByModule.set(cam.module, cam.card.name);
+    getCards(byType(CardType.CORPORATION)).forEach((card) => {
+      if (card.name !== CardName.BEGINNER_CORPORATION) {
+        cardsByModule.set(card.module, card.name);
       }
     });
 

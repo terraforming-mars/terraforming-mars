@@ -6,7 +6,7 @@ import {PlayerViewModel} from '@/common/models/PlayerModel';
 import {Tags} from '@/common/cards/Tags';
 import {Units} from '@/common/Units';
 import {DATA_VALUE, SEED_VALUE} from '@/common/constants';
-import {ResourceType} from '@/common/ResourceType';
+import {CardResource} from '@/common/CardResource';
 
 export interface SelectHowToPayModel {
     card?: CardModel;
@@ -183,7 +183,7 @@ export const PaymentWidgetMixin = {
         // Find a card other than Dirigibles with floaters.
         // If there is none, then Dirigibles can't use every one.
         if (!thisPlayer.playedCards.some((card) => {
-          return card.name !== CardName.DIRIGIBLES && card.resourceType === ResourceType.FLOATER && (card.resources ?? 0) > 0;
+          return card.name !== CardName.DIRIGIBLES && card.resourceType === CardResource.FLOATER && (card.resources ?? 0) > 0;
         })) {
           amount = Math.max(amount - 1, 0);
         }

@@ -4,7 +4,7 @@ import {Tags} from '../../common/cards/Tags';
 import {ICorporationCard} from '../corporation/ICorporationCard';
 import {CardRenderer} from '../render/CardRenderer';
 import {IActionCard} from '../ICard';
-import {ResourceType} from '../../common/ResourceType';
+import {CardResource} from '../../common/CardResource';
 import {Player} from '../../Player';
 import {AddResourcesToCard} from '../../deferredActions/AddResourcesToCard';
 import {MoonCards} from '../../moon/MoonCards';
@@ -19,7 +19,7 @@ export class NanotechIndustries extends Card implements IActionCard, ICorporatio
       name: CardName.NANOTECH_INDUSTRIES,
       tags: [Tags.SCIENCE, Tags.MOON],
       startingMegaCredits: 42,
-      resourceType: ResourceType.SCIENCE,
+      resourceType: CardResource.SCIENCE,
       initialActionText: 'Draw 3 cards and keep 2.',
 
       victoryPoints: VictoryPoints.resource(1, 2),
@@ -55,7 +55,7 @@ export class NanotechIndustries extends Card implements IActionCard, ICorporatio
   public action(player: Player) {
     player.game.defer(new AddResourcesToCard(
       player,
-      ResourceType.SCIENCE,
+      CardResource.SCIENCE,
       {filter: (card): boolean => MoonCards.scienceCardsWithLessThan2VP.has(card.name)},
     ));
     return undefined;

@@ -6,7 +6,7 @@ import {CardType} from '../../common/cards/CardType';
 import {Player} from '../../Player';
 import {SelectCard} from '../../inputs/SelectCard';
 import {Resources} from '../../common/Resources';
-import {ResourceType} from '../../common/ResourceType';
+import {CardResource} from '../../common/CardResource';
 import {CardName} from '../../common/cards/CardName';
 import {CardRenderer} from '../render/CardRenderer';
 
@@ -33,7 +33,7 @@ export class AerobrakedAmmoniaAsteroid extends Card implements IProjectCard {
   }
 
   public play(player: Player) {
-    const cardsToPick = player.getResourceCards(ResourceType.MICROBE);
+    const cardsToPick = player.getResourceCards(CardResource.MICROBE);
     player.addProduction(Resources.HEAT, 3);
     player.addProduction(Resources.PLANTS, 1);
 

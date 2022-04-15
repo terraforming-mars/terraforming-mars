@@ -3,7 +3,7 @@ import {CardName} from '../common/cards/CardName';
 import {CardType} from '../common/cards/CardType';
 import {ICardDiscount} from '../common/cards/Types';
 import {IAdjacencyBonus} from '../ares/IAdjacencyBonus';
-import {ResourceType} from '../common/ResourceType';
+import {CardResource} from '../common/CardResource';
 import {Tags} from '../common/cards/Tags';
 import {Player} from '../Player';
 import {Units} from '../common/Units';
@@ -23,7 +23,7 @@ export interface StaticCardProperties {
   metadata: ICardMetadata;
   requirements?: CardRequirements;
   name: CardName;
-  resourceType?: ResourceType;
+  resourceType?: CardResource;
   startingMegaCredits?: number;
   tags?: Array<Tags>;
   productionBox?: Units;

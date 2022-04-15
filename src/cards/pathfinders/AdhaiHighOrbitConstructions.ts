@@ -5,7 +5,7 @@ import {Player} from '../../Player';
 import {CardName} from '../../common/cards/CardName';
 import {CardType} from '../../common/cards/CardType';
 import {CardRenderer} from '../render/CardRenderer';
-import {ResourceType} from '../../common/ResourceType';
+import {CardResource} from '../../common/CardResource';
 import {IProjectCard} from '../IProjectCard';
 import {PLANETARY_TAGS} from '../../pathfinders/PathfindersExpansion';
 import {played} from '../Options';
@@ -19,7 +19,7 @@ export class AdhaiHighOrbitConstructions extends Card implements ICorporationCar
       name: CardName.ADHAI_HIGH_ORBIT_CONSTRUCTIONS,
       tags: [Tags.SPACE],
       startingMegaCredits: 43,
-      resourceType: ResourceType.ORBITAL,
+      resourceType: CardResource.ORBITAL,
 
       metadata: {
         cardNumber: 'PfC23',

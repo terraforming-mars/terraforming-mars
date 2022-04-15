@@ -4,7 +4,7 @@ import {Card} from '../Card';
 import {VictoryPoints} from '../ICard';
 import {CardType} from '../../common/cards/CardType';
 import {Player} from '../../Player';
-import {ResourceType} from '../../common/ResourceType';
+import {CardResource} from '../../common/CardResource';
 import {TileType} from '../../common/TileType';
 import {SelectSpace} from '../../inputs/SelectSpace';
 import {ISpace} from '../../boards/ISpace';
@@ -42,7 +42,7 @@ export class EcologicalZone extends Card implements IProjectCard, IResourceCard 
       name,
       tags: [Tags.ANIMAL, Tags.PLANT],
       cost,
-      resourceType: ResourceType.ANIMAL,
+      resourceType: CardResource.ANIMAL,
       adjacencyBonus,
       victoryPoints: VictoryPoints.resource(1, 2),
 

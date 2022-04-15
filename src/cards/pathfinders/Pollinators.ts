@@ -5,7 +5,7 @@ import {Card} from '../Card';
 import {CardType} from '../../common/cards/CardType';
 import {CardName} from '../../common/cards/CardName';
 import {CardRenderer} from '../render/CardRenderer';
-import {ResourceType} from '../../common/ResourceType';
+import {CardResource} from '../../common/CardResource';
 import {Tags} from '../../common/cards/Tags';
 import {CardRequirements} from '../CardRequirements';
 import {Resources} from '../../common/Resources';
@@ -17,7 +17,7 @@ export class Pollinators extends Card implements IProjectCard, IResourceCard, IA
       name: CardName.POLLINATORS,
       cost: 19,
       tags: [Tags.PLANT, Tags.ANIMAL],
-      resourceType: ResourceType.ANIMAL,
+      resourceType: CardResource.ANIMAL,
       requirements: CardRequirements.builder((b) => b.tag(Tags.PLANT, 3)),
       victoryPoints: VictoryPoints.resource(1, 1),
 

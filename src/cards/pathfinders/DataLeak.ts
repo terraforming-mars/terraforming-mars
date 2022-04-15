@@ -5,7 +5,7 @@ import {CardType} from '../../common/cards/CardType';
 import {CardName} from '../../common/cards/CardName';
 import {CardRenderer} from '../render/CardRenderer';
 import {AddResourcesToCard} from '../../deferredActions/AddResourcesToCard';
-import {ResourceType} from '../../common/ResourceType';
+import {CardResource} from '../../common/CardResource';
 
 export class DataLeak extends Card implements IProjectCard {
   constructor() {
@@ -23,7 +23,7 @@ export class DataLeak extends Card implements IProjectCard {
   }
 
   public play(player: Player) {
-    player.game.defer(new AddResourcesToCard(player, ResourceType.DATA, {count: 5}));
+    player.game.defer(new AddResourcesToCard(player, CardResource.DATA, {count: 5}));
     return undefined;
   }
 }

@@ -4,7 +4,7 @@ import {CardType} from '../../common/cards/CardType';
 import {Tags} from '../../common/cards/Tags';
 import {ICorporationCard} from '../corporation/ICorporationCard';
 import {IProjectCard} from '../IProjectCard';
-import {ResourceType} from '../../common/ResourceType';
+import {CardResource} from '../../common/CardResource';
 import {CardRenderer} from '../render/CardRenderer';
 import {Card} from '../Card';
 import {ICard} from '../ICard';
@@ -16,7 +16,7 @@ export class TheArchaicFoundationInstitute extends Card implements ICorporationC
       name: CardName.THE_ARCHAIC_FOUNDATION_INSTITUTE,
       tags: [Tags.MOON, Tags.MOON],
       startingMegaCredits: 55,
-      resourceType: ResourceType.RESOURCE_CUBE,
+      resourceType: CardResource.RESOURCE_CUBE,
 
       metadata: {
         description: 'You start with 55 M€.',

@@ -7,7 +7,7 @@ import {CardRenderer} from '../render/CardRenderer';
 import {Resources} from '../../common/Resources';
 import {Tags} from '../../common/cards/Tags';
 import {RemoveResourcesFromCard} from '../../deferredActions/RemoveResourcesFromCard';
-import {ResourceType} from '../../common/ResourceType';
+import {CardResource} from '../../common/CardResource';
 import {all, digit} from '../Options';
 
 export class SolarStorm extends Card implements IProjectCard {
@@ -38,7 +38,7 @@ export class SolarStorm extends Card implements IProjectCard {
         p.deductResource(Resources.PLANTS, 2, {log: true, from: player});
       }
     });
-    player.game.defer(new RemoveResourcesFromCard(player, ResourceType.DATA, 3));
+    player.game.defer(new RemoveResourcesFromCard(player, CardResource.DATA, 3));
     player.game.increaseTemperature(player, 1);
     return undefined;
   }

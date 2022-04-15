@@ -1,5 +1,5 @@
 import {Message} from '../logs/Message';
-import {ResourceType} from '../ResourceType';
+import {CardResource} from '../CardResource';
 import {Units} from '../Units';
 import {CardName} from './CardName';
 import {CardType} from './CardType';
@@ -22,7 +22,7 @@ export interface IClientCard {
   metadata: ICardMetadata;
   warning?: string | Message;
   productionBox?: Units;
-  resourceType?: ResourceType;
+  resourceType?: CardResource;
   startingMegaCredits?: number; // Corporation and Prelude
   cardCost?: number; // Corporation
 }

@@ -4,7 +4,7 @@ import {Tags} from '../../common/cards/Tags';
 import {Card} from '../Card';
 import {CardType} from '../../common/cards/CardType';
 import {Player} from '../../Player';
-import {ResourceType} from '../../common/ResourceType';
+import {CardResource} from '../../common/CardResource';
 import {CardName} from '../../common/cards/CardName';
 import {Resources} from '../../common/Resources';
 import {CardRenderer} from '../render/CardRenderer';
@@ -17,7 +17,7 @@ export class SaturnSurfing extends Card implements IActionCard, IProjectCard, IR
       name: CardName.SATURN_SURFING,
       cost: 13,
       tags: [Tags.JOVIAN, Tags.EARTH],
-      resourceType: ResourceType.FLOATER,
+      resourceType: CardResource.FLOATER,
       victoryPoints: 1,
 
       metadata: {

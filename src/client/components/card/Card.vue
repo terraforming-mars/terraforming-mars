@@ -35,7 +35,7 @@ import {ICardMetadata} from '@/common/cards/ICardMetadata';
 import {ICardRequirements} from '@/common/cards/ICardRequirements';
 import {Tags} from '@/common/cards/Tags';
 import {getPreferences} from '@/client/utils/PreferencesManager';
-import {ResourceType} from '@/common/ResourceType';
+import {CardResource} from '@/common/CardResource';
 import {getCard} from '@/client/cards/ClientCardManifest';
 
 export default Vue.extend({
@@ -147,10 +147,10 @@ export default Vue.extend({
     hasResourceType(): boolean {
       return this.card.resourceType !== undefined || this.cardInstance.resourceType !== undefined;
     },
-    resourceType(): ResourceType {
+    resourceType(): CardResource {
       if (this.card.resourceType !== undefined) return this.card.resourceType;
       if (this.cardInstance.resourceType !== undefined) return this.cardInstance.resourceType;
-      return ResourceType.RESOURCE_CUBE;
+      return CardResource.RESOURCE_CUBE;
     },
   },
 });

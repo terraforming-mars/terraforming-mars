@@ -3,7 +3,7 @@ import {Player} from '../../Player';
 import {PreludeCard} from '../prelude/PreludeCard';
 import {IProjectCard} from '../IProjectCard';
 import {CardName} from '../../common/cards/CardName';
-import {ResourceType} from '../../common/ResourceType';
+import {CardResource} from '../../common/CardResource';
 import {SelectHowToPayForProjectCard} from '../../inputs/SelectHowToPayForProjectCard';
 import {CardRenderer} from '../render/CardRenderer';
 import {Size} from '../../common/cards/render/Size';
@@ -39,7 +39,7 @@ export class ValuableGases extends PreludeCard implements IProjectCard {
         playableCards,
         (selectedCard, howToPay) => {
           const result = player.checkHowToPayAndPlayCard(selectedCard, howToPay);
-          if (selectedCard.resourceType === ResourceType.FLOATER) {
+          if (selectedCard.resourceType === CardResource.FLOATER) {
             player.addResourceTo(selectedCard, 4);
           }
           return result;

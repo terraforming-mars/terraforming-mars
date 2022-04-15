@@ -5,7 +5,7 @@ import {Player} from '../../Player';
 import {Game} from '../../Game';
 import {OrOptions} from '../../inputs/OrOptions';
 import {SelectOption} from '../../inputs/SelectOption';
-import {ResourceType} from '../../common/ResourceType';
+import {CardResource} from '../../common/CardResource';
 import {SelectCard} from '../../inputs/SelectCard';
 import {ICard} from '../ICard';
 import {CardName} from '../../common/cards/CardName';
@@ -53,7 +53,7 @@ export class Atmoscoop extends Card implements IProjectCard {
 
   public play(player: Player) {
     const game = player.game;
-    const floaterCards = player.getResourceCards(ResourceType.FLOATER);
+    const floaterCards = player.getResourceCards(CardResource.FLOATER);
 
     if (this.temperatureIsMaxed(game) && this.venusIsMaxed(game) && floaterCards.length === 0) {
       return undefined;

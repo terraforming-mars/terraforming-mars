@@ -5,7 +5,7 @@ import {Card} from '../Card';
 import {ICorporationCard} from '../corporation/ICorporationCard';
 import {SelectOption} from '../../inputs/SelectOption';
 import {OrOptions} from '../../inputs/OrOptions';
-import {ResourceType} from '../../common/ResourceType';
+import {CardResource} from '../../common/CardResource';
 import {CardName} from '../../common/cards/CardName';
 import {CardType} from '../../common/cards/CardType';
 import {CardRenderer} from '../render/CardRenderer';
@@ -79,7 +79,7 @@ export class Splice extends Card implements ICorporationCard {
     player.game.getCardPlayer(this.name)?.addResource(Resources.MEGACREDITS, megacreditsGain, {log: true});
 
     // Card player choose between 2 M€ and a microbe on card, if possible
-    if (card.resourceType !== undefined && card.resourceType === ResourceType.MICROBE) {
+    if (card.resourceType !== undefined && card.resourceType === CardResource.MICROBE) {
       return new OrOptions(addResource, getMegacredits);
     } else {
       player.addResource(Resources.MEGACREDITS, megacreditsGain, {log: true});

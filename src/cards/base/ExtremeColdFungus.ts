@@ -7,7 +7,7 @@ import {OrOptions} from '../../inputs/OrOptions';
 import {SelectOption} from '../../inputs/SelectOption';
 import {SelectCard} from '../../inputs/SelectCard';
 import {IProjectCard} from '../IProjectCard';
-import {ResourceType} from '../../common/ResourceType';
+import {CardResource} from '../../common/CardResource';
 import {CardName} from '../../common/cards/CardName';
 import {Resources} from '../../common/Resources';
 import {CardRequirements} from '../CardRequirements';
@@ -45,7 +45,7 @@ export class ExtremeColdFungus extends Card implements IActionCard, IProjectCard
     return true;
   }
   public action(player: Player) {
-    const otherMicrobeCards = player.getResourceCards(ResourceType.MICROBE);
+    const otherMicrobeCards = player.getResourceCards(CardResource.MICROBE);
 
     if (otherMicrobeCards.length === 0) {
       player.addResource(Resources.PLANTS, 1, {log: true});

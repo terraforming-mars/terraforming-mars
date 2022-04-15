@@ -4,7 +4,7 @@ import {Card} from '../Card';
 import {VictoryPoints} from '../ICard';
 import {CardName} from '../../common/cards/CardName';
 import {CardType} from '../../common/cards/CardType';
-import {ResourceType} from '../../common/ResourceType';
+import {CardResource} from '../../common/CardResource';
 import {Tags} from '../../common/cards/Tags';
 import {Player} from '../../Player';
 import {Resources} from '../../common/Resources';
@@ -17,7 +17,7 @@ export class AsteroidHollowing extends Card implements IActionCard, IProjectCard
       name: CardName.ASTEROID_HOLLOWING,
       tags: [Tags.SPACE],
       cost: 16,
-      resourceType: ResourceType.ASTEROID,
+      resourceType: CardResource.ASTEROID,
 
       victoryPoints: VictoryPoints.resource(1, 2),
 

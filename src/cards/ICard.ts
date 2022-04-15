@@ -13,7 +13,7 @@ import {SelectPlayer} from '../inputs/SelectPlayer';
 import {SelectSpace} from '../inputs/SelectSpace';
 import {OrOptions} from '../inputs/OrOptions';
 import {SelectOption} from '../inputs/SelectOption';
-import {ResourceType} from '../common/ResourceType';
+import {CardResource} from '../common/CardResource';
 import {CardName} from '../common/cards/CardName';
 import {ICardMetadata} from '../common/cards/ICardMetadata';
 import {StandardProjectCard} from './StandardProjectCard';
@@ -35,7 +35,7 @@ export function isIActionCard(object: any): object is IActionCard {
 
 export interface IResourceCard {
     resourceCount: number;
-    resourceType?: ResourceType;
+    resourceType?: CardResource;
 }
 
 export namespace VictoryPoints {

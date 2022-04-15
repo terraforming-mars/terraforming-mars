@@ -6,7 +6,7 @@ import {CardName} from '../../common/cards/CardName';
 import {CardType} from '../../common/cards/CardType';
 import {CardRenderer} from '../render/CardRenderer';
 import {IActionCard, VictoryPoints} from '../ICard';
-import {ResourceType} from '../../common/ResourceType';
+import {CardResource} from '../../common/CardResource';
 import {AddResourcesToCard} from '../../deferredActions/AddResourcesToCard';
 
 export class BioSol extends Card implements ICorporationCard, IActionCard {
@@ -16,7 +16,7 @@ export class BioSol extends Card implements ICorporationCard, IActionCard {
       name: CardName.BIO_SOL,
       tags: [Tags.MICROBE],
       startingMegaCredits: 42,
-      resourceType: ResourceType.MICROBE,
+      resourceType: CardResource.MICROBE,
       victoryPoints: VictoryPoints.resource(1, 3),
 
       initialActionText: 'Draw 2 cards with a microbe tag',
@@ -48,7 +48,7 @@ export class BioSol extends Card implements ICorporationCard, IActionCard {
   }
 
   public action(player: Player) {
-    player.game.defer(new AddResourcesToCard(player, ResourceType.MICROBE));
+    player.game.defer(new AddResourcesToCard(player, CardResource.MICROBE));
     return undefined;
   }
 }

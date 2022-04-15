@@ -2,7 +2,7 @@ import {IActionCard, IResourceCard} from '../ICard';
 import {Tags} from '../../common/cards/Tags';
 import {CardType} from '../../common/cards/CardType';
 import {Player} from '../../Player';
-import {ResourceType} from '../../common/ResourceType';
+import {CardResource} from '../../common/CardResource';
 import {OrOptions} from '../../inputs/OrOptions';
 import {SelectOption} from '../../inputs/SelectOption';
 import {MAX_VENUS_SCALE} from '../../common/constants';
@@ -18,7 +18,7 @@ export class JetStreamMicroscrappers extends Card implements IActionCard, IResou
       cardType: CardType.ACTIVE,
       tags: [Tags.VENUS],
       cost: 12,
-      resourceType: ResourceType.FLOATER,
+      resourceType: CardResource.FLOATER,
 
       metadata: {
         cardNumber: '234',

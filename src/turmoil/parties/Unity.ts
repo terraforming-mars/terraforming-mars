@@ -14,7 +14,7 @@ import {DeferredAction} from '../../deferredActions/DeferredAction';
 import {OrOptions} from '../../inputs/OrOptions';
 import {SelectCard} from '../../inputs/SelectCard';
 import {SelectOption} from '../../inputs/SelectOption';
-import {ResourceType} from '../../common/ResourceType';
+import {CardResource} from '../../common/CardResource';
 
 export class Unity extends Party implements IParty {
   name = PartyName.UNITY;
@@ -82,7 +82,7 @@ class UnityPolicy02 implements Policy {
       {
         title: 'Select how to pay for Turmoil Unity action',
         afterPay: () => {
-          const availableFloaterCards = player.getResourceCards(ResourceType.FLOATER);
+          const availableFloaterCards = player.getResourceCards(CardResource.FLOATER);
           const orOptions = new OrOptions();
 
           if (availableFloaterCards.length === 1) {

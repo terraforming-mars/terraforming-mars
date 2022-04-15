@@ -26,7 +26,7 @@ import {PharmacyUnion} from './cards/promo/PharmacyUnion';
 import {Phase} from './common/Phase';
 import {PlayerInput} from './PlayerInput';
 import {Resources} from './common/Resources';
-import {ResourceType} from './common/ResourceType';
+import {CardResource} from './common/CardResource';
 import {SelectAmount} from './inputs/SelectAmount';
 import {SelectCard} from './inputs/SelectCard';
 import {SellPatentsStandardProject} from './cards/base/standardProjects/SellPatentsStandardProject';
@@ -751,7 +751,7 @@ export class Player {
     this.corporationCard?.onResourceAdded?.(this, card, count);
   }
 
-  public getCardsWithResources(resource?: ResourceType): Array<ICard & IResourceCard> {
+  public getCardsWithResources(resource?: CardResource): Array<ICard & IResourceCard> {
     let result: Array<ICard & IResourceCard> = this.playedCards.filter((card) => card.resourceType !== undefined && card.resourceCount && card.resourceCount > 0);
     if (this.corporationCard !== undefined &&
           this.corporationCard.resourceType !== undefined &&
@@ -767,7 +767,7 @@ export class Player {
     return result;
   }
 
-  public getResourceCards(resource?: ResourceType): Array<ICard> {
+  public getResourceCards(resource?: CardResource): Array<ICard> {
     let result: Array<ICard> = this.playedCards.filter((card) => card.resourceType !== undefined);
 
     if (this.corporationCard !== undefined && this.corporationCard.resourceType !== undefined) {
@@ -781,7 +781,7 @@ export class Player {
     return result;
   }
 
-  public getResourceCount(resource: ResourceType): number {
+  public getResourceCount(resource: CardResource): number {
     let count: number = 0;
     this.getCardsWithResources(resource).forEach((card) => {
       count += card.resourceCount;
@@ -1462,7 +1462,7 @@ export class Player {
 
     if (howToPay.floaters !== undefined && howToPay.floaters > 0) {
       if (selectedCard.name === CardName.STRATOSPHERIC_BIRDS && howToPay.floaters === this.getFloatersCanSpend()) {
-        const cardsWithFloater = this.getCardsWithResources(ResourceType.FLOATER);
+        const cardsWithFloater = this.getCardsWithResources(CardResource.FLOATER);
         if (cardsWithFloater.length === 1) {
           throw new Error('Cannot spend all floaters to play Stratospheric Birds');
         }

@@ -3,7 +3,7 @@ import {Player} from '../../Player';
 import {ICorporationCard} from '../corporation/ICorporationCard';
 import {Card} from '../Card';
 import {CardName} from '../../common/cards/CardName';
-import {ResourceType} from '../../common/ResourceType';
+import {CardResource} from '../../common/CardResource';
 import {SelectOption} from '../../inputs/SelectOption';
 import {OrOptions} from '../../inputs/OrOptions';
 import {IProjectCard} from '../IProjectCard';
@@ -20,7 +20,7 @@ export class PharmacyUnion extends Card implements ICorporationCard {
       cardType: CardType.CORPORATION,
       name: CardName.PHARMACY_UNION,
       startingMegaCredits: 46, // 54 minus 8 for the 2 deseases
-      resourceType: ResourceType.DISEASE,
+      resourceType: CardResource.DISEASE,
 
       metadata: {
         cardNumber: 'R39',

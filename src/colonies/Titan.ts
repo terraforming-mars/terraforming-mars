@@ -1,14 +1,14 @@
 import {Colony} from './Colony';
 import {ColonyName} from '../common/colonies/ColonyName';
 import {ColonyBenefit} from '../common/colonies/ColonyBenefit';
-import {ResourceType} from '../common/ResourceType';
+import {CardResource} from '../common/CardResource';
 
 export class Titan extends Colony {
   public override isActive = false;
   constructor() {
     super({
       name: ColonyName.TITAN,
-      resourceType: ResourceType.FLOATER,
+      resourceType: CardResource.FLOATER,
       buildType: ColonyBenefit.ADD_RESOURCES_TO_CARD,
       buildQuantity: [3, 3, 3],
       tradeType: ColonyBenefit.ADD_RESOURCES_TO_CARD,

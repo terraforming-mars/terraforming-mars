@@ -2,7 +2,7 @@ import {CardName} from '../../common/cards/CardName';
 import {Player} from '../../Player';
 import {CardType} from '../../common/cards/CardType';
 import {Tags} from '../../common/cards/Tags';
-import {ResourceType} from '../../common/ResourceType';
+import {CardResource} from '../../common/CardResource';
 import {StealResources} from '../../deferredActions/StealResources';
 import {Resources} from '../../common/Resources';
 import {CardRenderer} from '../render/CardRenderer';
@@ -19,7 +19,7 @@ export class AncientShipyards extends MoonCard {
       tags: [Tags.MOON, Tags.SPACE],
       cost: 6,
 
-      resourceType: ResourceType.RESOURCE_CUBE,
+      resourceType: CardResource.RESOURCE_CUBE,
       victoryPoints: VictoryPoints.resource(-1, 1),
       reserveUnits: Units.of({titanium: 3}),
 

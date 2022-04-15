@@ -10,7 +10,7 @@ import {Tags} from '../../common/cards/Tags';
 import {Size} from '../../common/cards/render/Size';
 import {ISpace} from '../../boards/ISpace';
 import {Board} from '../../boards/Board';
-import {ResourceType} from '../../common/ResourceType';
+import {CardResource} from '../../common/CardResource';
 import {ICard, IResourceCard} from '../ICard';
 import {Resources} from '../../common/Resources';
 
@@ -22,7 +22,7 @@ export class BotanicalExperience extends Card implements IProjectCard, IResource
       cost: 14,
       tags: [Tags.PLANT, Tags.MARS, Tags.SCIENCE],
       requirements: CardRequirements.builder((b) => b.greeneries(1, {all})),
-      resourceType: ResourceType.DATA,
+      resourceType: CardResource.DATA,
 
       metadata: {
         cardNumber: 'Pf50',

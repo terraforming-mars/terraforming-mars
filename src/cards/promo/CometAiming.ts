@@ -3,7 +3,7 @@ import {IActionCard, IResourceCard, ICard} from '../ICard';
 import {Card} from '../Card';
 import {CardName} from '../../common/cards/CardName';
 import {CardType} from '../../common/cards/CardType';
-import {ResourceType} from '../../common/ResourceType';
+import {CardResource} from '../../common/CardResource';
 import {Tags} from '../../common/cards/Tags';
 import {Player} from '../../Player';
 import {SelectCard} from '../../inputs/SelectCard';
@@ -20,7 +20,7 @@ export class CometAiming extends Card implements IActionCard, IProjectCard, IRes
       name: CardName.COMET_AIMING,
       tags: [Tags.SPACE],
       cost: 17,
-      resourceType: ResourceType.ASTEROID,
+      resourceType: CardResource.ASTEROID,
 
       metadata: {
         cardNumber: 'X16',
@@ -54,7 +54,7 @@ export class CometAiming extends Card implements IActionCard, IProjectCard, IRes
   }
 
   public action(player: Player) {
-    const asteroidCards = player.getResourceCards(ResourceType.ASTEROID);
+    const asteroidCards = player.getResourceCards(CardResource.ASTEROID);
 
     const addAsteroidToSelf = function() {
       player.titanium--;

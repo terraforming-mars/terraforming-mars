@@ -5,7 +5,7 @@ import {Player} from '../../Player';
 import {CardName} from '../../common/cards/CardName';
 import {CardType} from '../../common/cards/CardType';
 import {CardRenderer} from '../render/CardRenderer';
-import {ResourceType} from '../../common/ResourceType';
+import {CardResource} from '../../common/CardResource';
 import {AddResourcesToCard} from '../../deferredActions/AddResourcesToCard';
 import {Priority} from '../../deferredActions/DeferredAction';
 
@@ -16,7 +16,7 @@ export class Aurorai extends Card implements ICorporationCard {
       name: CardName.AURORAI,
       tags: [Tags.MARS],
       startingMegaCredits: 33,
-      resourceType: ResourceType.DATA,
+      resourceType: CardResource.DATA,
 
       metadata: {
         cardNumber: 'PfC9',
@@ -42,6 +42,6 @@ export class Aurorai extends Card implements ICorporationCard {
   }
 
   public onIncreaseTerraformRating(player: Player, steps: number) {
-    player.game.defer(new AddResourcesToCard(player, ResourceType.DATA, {count: steps}), Priority.GAIN_RESOURCE_OR_PRODUCTION);
+    player.game.defer(new AddResourcesToCard(player, CardResource.DATA, {count: steps}), Priority.GAIN_RESOURCE_OR_PRODUCTION);
   }
 }

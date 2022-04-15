@@ -1,6 +1,6 @@
 import {Player} from '../Player';
 import {SelectCard} from '../inputs/SelectCard';
-import {ResourceType} from '../common/ResourceType';
+import {CardResource} from '../common/CardResource';
 import {ICard} from '../cards/ICard';
 import {Tags} from '../common/cards/Tags';
 import {DeferredAction, Priority} from './DeferredAction';
@@ -19,7 +19,7 @@ export class AddResourcesToCard implements DeferredAction {
   public priority = Priority.GAIN_RESOURCE_OR_PRODUCTION;
   constructor(
         public player: Player,
-        public resourceType: ResourceType | undefined,
+        public resourceType: CardResource | undefined,
         public options: AddResourcesToCard.Options = {},
   ) {}
 

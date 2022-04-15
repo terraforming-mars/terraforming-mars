@@ -11,7 +11,7 @@ import {SelectOption} from '../../inputs/SelectOption';
 import {PlaceOceanTile} from '../../deferredActions/PlaceOceanTile';
 import {AddResourcesToCard} from '../../deferredActions/AddResourcesToCard';
 import {Resources} from '../../common/Resources';
-import {ResourceType} from '../../common/ResourceType';
+import {CardResource} from '../../common/CardResource';
 import {TRSource} from '../ICard';
 import {digit} from '../Options';
 
@@ -53,7 +53,7 @@ export class SecretLabs extends Card implements IProjectCard {
     if (this.canAfford(player, {oceans: 1}, 0)) {
       options.options.push(new SelectOption('Place an ocean tile. Add 2 microbes on any card.', 'select', () => {
         player.game.defer(new PlaceOceanTile(player));
-        player.game.defer(new AddResourcesToCard(player, ResourceType.MICROBE, {count: 2}));
+        player.game.defer(new AddResourcesToCard(player, CardResource.MICROBE, {count: 2}));
         return undefined;
       }));
     }
@@ -67,7 +67,7 @@ export class SecretLabs extends Card implements IProjectCard {
     if (this.canAfford(player, {oxygen: 1}, 0)) {
       options.options.push(new SelectOption('Raise oxygen level 1 step. Add 2 floaters on any card.', 'select', () => {
         player.game.increaseOxygenLevel(player, 1);
-        player.game.defer(new AddResourcesToCard(player, ResourceType.FLOATER, {count: 2}));
+        player.game.defer(new AddResourcesToCard(player, CardResource.FLOATER, {count: 2}));
         return undefined;
       }));
     }

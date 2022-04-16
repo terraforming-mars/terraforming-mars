@@ -325,7 +325,7 @@
     "City: 1 VP per adjacent greenery": "Cidade: 1 PV por tile de vegetação adjacente",
     "Greenery: 1 VP": "Vegetação: 1 PV",
     "Commercial District: 1 VP per adjacent city tile": "Distrito comercial: 1 PV por tile de cidade adjacente",
-    "Select space on mars for city tile": "Escolha uma área em Marte para o tile de cidade",
+    "Select space on Mars for city tile": "Escolha uma área em Marte para o tile de cidade",
     "Select space for ocean": "Escolha uma área para o tile de oceano",
 
     "Unable to reach the server. The server may be restarting or down for maintenance.": "Não foi possível acessar o servidor, que pode estar reiniciando ou desligado para manutenção.",
@@ -350,7 +350,7 @@
     "Spend one titanium to add 2 floaters to this card": "Gaste 1 titânio para adicionar 2 flutuadores a esta carta",
 
     "Spend 3 M€ to draw a blue card": "Gastar 3 M€ para comprar uma carta azul",
-    
+
     "Flip and discard a played blue card": "Vire e descarte uma carta azul jogada",
     "Select card to add 1 resource": "Escolha uma carta para adicionar 1 recurso",
     "Add resource": "Adicionar recurso",
@@ -391,9 +391,9 @@
     "Steal M€": "Roubar M€",
 
     "Select where to send a delegate": "Escolha o partido para enviar o delegado.",
-    
+
     "Convert heat": "Conveter calor",
 	"Take action": "Fazer ação",
 	"Self-Replicating Robots cards": "Cartas ligadas ao Robôs Autorreplicadores"
-	
+
 }

@@ -5,35 +5,39 @@ import {IClientCard} from '@/common/cards/IClientCard';
 // @ts-ignore cards.json doesn't exist during npm run build
 import * as cardJson from '@/genfiles/cards.json';
 
-// TODO(kberg): remove CardAndModule once separation is complete; IClientCard can contain the module.
-export type CardAndModule = {card: IClientCard, module: GameModule};
-const cards: Map<CardName, CardAndModule> = new Map();
-const cardArray: Array<CardAndModule> = [];
+const cards: Map<CardName, IClientCard> = new Map();
+const cardArray: Array<IClientCard> = [];
 
-export function getCard(cardName: CardName): CardAndModule | undefined {
+export function getCard(cardName: CardName): IClientCard | undefined {
   return cards.get(cardName);
 }
 
-export function getCards(filter: (card: CardAndModule) => boolean): Array<CardAndModule> {
+export function getCardOrThrow(cardName: CardName): IClientCard {
+  const card = getCard(cardName);
+  if (card === undefined) {
+    throw new Error(`card not found ${cardName}`);
+  }
+  return card;
+}
+
+export function getCards(filter: (card: IClientCard) => boolean): Array<IClientCard> {
   return cardArray.filter(filter);
 }
 
-export function byType(cardType: CardType): (cam: CardAndModule) => boolean {
-  return (cam) => cam.card.cardType === cardType;
+export function byType(cardType: CardType): (card: IClientCard) => boolean {
+  return (card) => card.cardType === cardType;
 }
 
-export function byModule(module: GameModule): (cam: CardAndModule) => boolean {
-  return (cam) => cam.module === module;
+export function byModule(module: GameModule): (card: IClientCard) => boolean {
+  return (card) => card.module === module;
 }
 
-export const toName = (cam: CardAndModule) => cam.card.name;
+export const toName = (card: IClientCard) => card.name;
 
 function initialize() {
   (cardJson as any as Array<IClientCard>).forEach((card) => {
-    const module = card.module ?? GameModule.Base;
-    const cam = {module, card};
-    cards.set(card.name, cam);
-    cardArray.push(cam);
+    cards.set(card.name, card);
+    cardArray.push(card);
   });
 }
 

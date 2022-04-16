@@ -1,6 +1,8 @@
 import {ICard} from './cards/ICard';
 import {Message} from './common/logs/Message';
 import {PlayerInputTypes} from './common/input/PlayerInputTypes';
+import {InputResponse} from './common/inputs/InputResponse';
+import {Player} from './Player';
 
 export interface PlayerInput {
     inputType: PlayerInputTypes;
@@ -9,6 +11,7 @@ export interface PlayerInput {
     title: string | Message;
     cb: (...item: any) => PlayerInput | undefined;
     maxByDefault?: boolean;
+    process?: (response: InputResponse, player: Player) => PlayerInput | undefined;
 }
 
 export namespace PlayerInput {

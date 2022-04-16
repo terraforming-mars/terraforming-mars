@@ -6,6 +6,8 @@ import {HowToPay} from '../common/inputs/HowToPay';
 import {SelectSpace} from './SelectSpace';
 import {OrOptions} from './OrOptions';
 import {SelectOption} from './SelectOption';
+import {InputResponse} from '../common/inputs/InputResponse';
+import {Player} from '../Player';
 
 export class SelectHowToPay implements PlayerInput {
   public inputType: PlayerInputTypes = PlayerInputTypes.SELECT_HOW_TO_PAY;
@@ -20,5 +22,11 @@ export class SelectHowToPay implements PlayerInput {
         public amount: number,
         public cb: (howToPay: HowToPay) => SelectSpace | SelectOption| OrOptions | undefined,
   ) {
+  }
+
+  public process(input: InputResponse, player: Player) {
+    player.checkInputLength(input, 1, 1);
+    const howToPay: HowToPay = player.parseHowToPayJSON(input[0][0]);
+    return this.cb(howToPay);
   }
 }

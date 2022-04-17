@@ -9,7 +9,7 @@ import {OrOptions} from '../../inputs/OrOptions';
 import {IResourceCard} from '../ICard';
 import {AddResourcesToCard} from '../../deferredActions/AddResourcesToCard';
 import {IColony} from '../../colonies/IColony';
-import {DeferredAction} from '../../deferredActions/DeferredAction';
+import {SimpleDeferredAction} from '../../deferredActions/DeferredAction';
 import {SelectColony} from '../../inputs/SelectColony';
 import {CardRenderer} from '../render/CardRenderer';
 import {Card} from '../Card';
@@ -60,7 +60,7 @@ export class TitanFloatingLaunchPad extends Card implements IProjectCard, IResou
 
     return new OrOptions(
       new SelectOption('Remove 1 floater on this card to trade for free', 'Remove floater', () => {
-        player.game.defer(new DeferredAction(
+        player.game.defer(new SimpleDeferredAction(
           player,
           () => new SelectColony('Select colony tile to trade with for free', 'Select', openColonies, (colony: IColony) => {
             this.resourceCount--;

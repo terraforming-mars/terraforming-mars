@@ -8,7 +8,7 @@ import {SelectOption} from '../../inputs/SelectOption';
 import {CardResource} from '../../common/CardResource';
 import {CardName} from '../../common/cards/CardName';
 import {IResourceCard} from '../ICard';
-import {DeferredAction} from '../../deferredActions/DeferredAction';
+import {SimpleDeferredAction} from '../../deferredActions/DeferredAction';
 import {CardRenderer} from '../render/CardRenderer';
 import {played} from '../Options';
 
@@ -39,7 +39,7 @@ export class OlympusConference extends Card implements IProjectCard, IResourceCa
   public onCardPlayed(player: Player, card: IProjectCard) {
     const scienceTags = player.cardTagCount(card, Tags.SCIENCE);
     for (let i = 0; i < scienceTags; i++) {
-      player.game.defer(new DeferredAction(
+      player.game.defer(new SimpleDeferredAction(
         player,
         () => {
           // Can't remove a resource

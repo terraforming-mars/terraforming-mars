@@ -34,7 +34,7 @@ import {PlayerId, GameId, SpectatorId, SpaceId} from './common/Types';
 import {PlayerInput} from './PlayerInput';
 import {CardResource} from './common/CardResource';
 import {Resources} from './common/Resources';
-import {DeferredAction, Priority} from './deferredActions/DeferredAction';
+import {DeferredAction, Priority, SimpleDeferredAction} from './deferredActions/DeferredAction';
 import {DeferredActionsQueue} from './deferredActions/DeferredActionsQueue';
 import {SelectHowToPayDeferred} from './deferredActions/SelectHowToPayDeferred';
 import {SelectInitialCards} from './inputs/SelectInitialCards';
@@ -635,7 +635,7 @@ export class Game {
     // trigger other corp's effect, e.g. SaturnSystems,PharmacyUnion,Splice
     for (const somePlayer of this.getPlayersInGenerationOrder()) {
       if (somePlayer !== player && somePlayer.corporationCard !== undefined && somePlayer.corporationCard.onCorpCardPlayed !== undefined) {
-        this.defer(new DeferredAction(
+        this.defer(new SimpleDeferredAction(
           player,
           () => {
             if (somePlayer.corporationCard !== undefined && somePlayer.corporationCard.onCorpCardPlayed !== undefined) {
@@ -1426,7 +1426,7 @@ export class Game {
       break;
     case SpaceBonus.TEMPERATURE:
       if (this.getTemperature() < constants.MAX_TEMPERATURE) {
-        this.defer(new DeferredAction(player, () => this.increaseTemperature(player, 1)));
+        this.defer(new SimpleDeferredAction(player, () => this.increaseTemperature(player, 1)));
         this.defer(new SelectHowToPayDeferred(
           player,
           constants.VASTITAS_BOREALIS_BONUS_TEMPERATURE_COST,

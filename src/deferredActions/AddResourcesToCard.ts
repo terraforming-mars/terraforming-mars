@@ -15,13 +15,14 @@ export namespace AddResourcesToCard {
   }
 }
 
-export class AddResourcesToCard implements DeferredAction {
-  public priority = Priority.GAIN_RESOURCE_OR_PRODUCTION;
+export class AddResourcesToCard extends DeferredAction {
   constructor(
-        public player: Player,
-        public resourceType: CardResource | undefined,
-        public options: AddResourcesToCard.Options = {},
-  ) {}
+    player: Player,
+    public resourceType: CardResource | undefined,
+    public options: AddResourcesToCard.Options = {},
+  ) {
+    super(player, Priority.GAIN_RESOURCE_OR_PRODUCTION);
+  }
 
   public execute() {
     const count = this.options.count ?? 1;

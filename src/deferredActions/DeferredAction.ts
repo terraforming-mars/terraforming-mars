@@ -19,15 +19,26 @@ export enum Priority {
   DISCARD_CARDS,
 }
 
-export class DeferredAction {
+export abstract class DeferredAction {
   public queueId?: number;
   constructor(
     public player: Player,
-    public execute: () => PlayerInput | undefined,
     public priority: Priority = Priority.DEFAULT,
   ) {}
 
   public static create(player: Player, priority: Priority, execute: () => PlayerInput | undefined): DeferredAction {
-    return new DeferredAction(player, execute, priority);
+    return new SimpleDeferredAction(player, execute, priority);
+  }
+
+  public abstract execute(): PlayerInput | undefined;
+}
+
+export class SimpleDeferredAction extends DeferredAction {
+  constructor(
+    player: Player,
+    public execute: () => PlayerInput | undefined,
+    priority?: Priority,
+  ) {
+    super(player, priority);
   }
 }

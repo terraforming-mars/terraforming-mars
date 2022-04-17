@@ -16,14 +16,13 @@ import {IProjectCard} from '../cards/IProjectCard';
  * when the card has a clone tag, and instead defers that call.
  * That's why it calls onCardPlayed here.
  */
-export class DeclareCloneTag implements DeferredAction {
-  public priority = Priority.DECLARE_CLONE_TAG;
-
+export class DeclareCloneTag extends DeferredAction {
   public constructor(
-    public player: Player,
+    player: Player,
     public card: ICard & ICloneTagCard,
     public cb: (tag: Tags) => void = () => {},
     public title: string = '') {
+    super(player, Priority.DECLARE_CLONE_TAG);
     if (this.title === '') {
       this.title = `Assign the clone tag for ${card.name}`;
     }

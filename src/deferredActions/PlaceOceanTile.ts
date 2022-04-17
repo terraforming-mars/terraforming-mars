@@ -4,12 +4,13 @@ import {ISpace} from '../boards/ISpace';
 import {SpaceType} from '../common/boards/SpaceType';
 import {DeferredAction, Priority} from './DeferredAction';
 
-export class PlaceOceanTile implements DeferredAction {
-  public priority = Priority.PLACE_OCEAN_TILE;
+export class PlaceOceanTile extends DeferredAction {
   constructor(
-        public player: Player,
-        public title: string = 'Select space for ocean tile',
-  ) {}
+    player: Player,
+    public title: string = 'Select space for ocean tile',
+  ) {
+    super(player, Priority.PLACE_OCEAN_TILE);
+  }
 
   public execute() {
     if (!this.player.game.canAddOcean()) {

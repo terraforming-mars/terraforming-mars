@@ -9,7 +9,7 @@ import {CardResource} from '../../common/CardResource';
 import {SelectOption} from '../../inputs/SelectOption';
 import {CardName} from '../../common/cards/CardName';
 import {LogHelper} from '../../LogHelper';
-import {DeferredAction} from '../../deferredActions/DeferredAction';
+import {SimpleDeferredAction} from '../../deferredActions/DeferredAction';
 import {CardRenderer} from '../render/CardRenderer';
 
 export class NitriteReducingBacteria extends Card implements IActionCard, IProjectCard, IResourceCard {
@@ -41,7 +41,7 @@ export class NitriteReducingBacteria extends Card implements IActionCard, IProje
   public override resourceCount: number = 0;
 
   public play(player: Player) {
-    player.game.defer(new DeferredAction(
+    player.game.defer(new SimpleDeferredAction(
       player,
       () => {
         player.addResourceTo(this, 3);

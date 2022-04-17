@@ -2,7 +2,7 @@
 import {AddResourcesToCard} from '../deferredActions/AddResourcesToCard';
 import {CardName} from '../common/cards/CardName';
 import {ColonyBenefit} from '../common/colonies/ColonyBenefit';
-import {DeferredAction, Priority} from '../deferredActions/DeferredAction';
+import {DeferredAction, Priority, SimpleDeferredAction} from '../deferredActions/DeferredAction';
 import {DiscardCards} from '../deferredActions/DiscardCards';
 import {DrawCards} from '../deferredActions/DrawCards';
 import {GiveColonyBonus} from '../deferredActions/GiveColonyBonus';
@@ -153,7 +153,7 @@ export abstract class Colony implements IColony {
 
       // !== false because default is true.
       if (options.decreaseTrackAfterTrade !== false) {
-        player.game.defer(new DeferredAction(player, () => {
+        player.game.defer(new SimpleDeferredAction(player, () => {
           this.trackPosition = this.colonies.length;
           return undefined;
         }), Priority.DECREASE_COLONY_TRACK_AFTER_TRADE);
@@ -181,7 +181,7 @@ export abstract class Colony implements IColony {
 
       case ColonyBenefit.COPY_TRADE:
         const openColonies = game.colonies.filter((colony) => colony.isActive);
-        action = new DeferredAction(
+        action = new SimpleDeferredAction(
           player,
           () => new SelectColony('Select colony to gain trade income from', 'Select', openColonies, (colony: IColony) => {
             game.log('${0} gained ${1} trade bonus', (b) => b.player(player).colony(colony));
@@ -290,7 +290,7 @@ export abstract class Colony implements IColony {
 
       case ColonyBenefit.OPPONENT_DISCARD:
         if (game.isSoloMode()) break;
-        action = new DeferredAction(
+        action = new SimpleDeferredAction(
           player,
           () => {
             const playersWithCards = game.getPlayers().filter((p) => p.cardsInHand.length > 0);

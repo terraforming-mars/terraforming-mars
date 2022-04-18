@@ -5,10 +5,11 @@ import {getLocalVue} from './getLocalVue';
 import {expect} from 'chai';
 import AndOptions from '@/client/components/AndOptions.vue';
 import {PlayerInputTypes} from '@/common/input/PlayerInputTypes';
+import {InputResponse} from '@/common/inputs/InputResponse';
 
 describe('AndOptions', function() {
   it('saves the options', async function() {
-    let savedData: Array<Array<string>> | undefined;
+    let savedData: InputResponse | undefined;
     const component = mount(AndOptions, {
       localVue: getLocalVue(),
       propsData: {
@@ -25,7 +26,7 @@ describe('AndOptions', function() {
             inputType: PlayerInputTypes.SELECT_OPTION,
           }],
         },
-        onsave: function(data: Array<Array<string>>) {
+        onsave: function(data: InputResponse) {
           savedData = data;
         },
         showsave: true,

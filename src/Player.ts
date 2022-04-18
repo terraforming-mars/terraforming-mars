@@ -74,6 +74,7 @@ import {PathfindersExpansion} from './pathfinders/PathfindersExpansion';
 import {deserializeProjectCard, serializeProjectCard} from './cards/CardSerialization';
 import {ColoniesHandler} from './colonies/ColoniesHandler';
 import {SerializedGame} from './SerializedGame';
+import {InputResponse} from './common/inputs/InputResponse';
 
 export class Player {
   public readonly id: PlayerId;
@@ -985,7 +986,7 @@ export class Player {
     }
   }
 
-  private checkInputLength(input: ReadonlyArray<ReadonlyArray<string>>, length: number, firstOptionLength?: number) {
+  private checkInputLength(input: InputResponse, length: number, firstOptionLength?: number) {
     if (input.length !== length) {
       throw new Error('Incorrect options provided');
     }
@@ -1017,7 +1018,7 @@ export class Player {
     }
   }
 
-  protected runInput(input: ReadonlyArray<ReadonlyArray<string>>, pi: PlayerInput): void {
+  protected runInput(input: InputResponse, pi: PlayerInput): void {
     if (pi instanceof AndOptions) {
       this.checkInputLength(input, pi.options.length);
       for (let i = 0; i < input.length; i++) {
@@ -2183,7 +2184,7 @@ export class Player {
     return passedPlayers.length === players.length - 1 && passedPlayers.includes(this.color) === false;
   }
 
-  public process(input: Array<Array<string>>): void {
+  public process(input: InputResponse): void {
     if (this.waitingFor === undefined || this.waitingForCb === undefined) {
       throw new Error('Not waiting for anything');
     }

@@ -29,6 +29,7 @@ import SelectPartyToSendDelegate from '@/client/components/SelectPartyToSendDele
 import SelectColony from '@/client/components/SelectColony.vue';
 import SelectProductionToLose from '@/client/components/SelectProductionToLose.vue';
 import ShiftAresGlobalParameters from '@/client/components/ShiftAresGlobalParameters.vue';
+import {InputResponse} from '@/common/inputs/InputResponse';
 
 export default Vue.component('player-input-factory', {
   props: {
@@ -42,7 +43,7 @@ export default Vue.component('player-input-factory', {
       type: Object as () => PlayerInputModel,
     },
     onsave: {
-      type: Function as unknown as () => (out: Array<Array<string>>) => void,
+      type: Function as unknown as () => (out: InputResponse) => void,
     },
     showsave: {
       type: Boolean,

@@ -2,7 +2,7 @@ import {IProjectCard} from '../IProjectCard';
 import {Tags} from '../../common/cards/Tags';
 import {CardType} from '../../common/cards/CardType';
 import {Player} from '../../Player';
-import {ResourceType} from '../../common/ResourceType';
+import {CardResource} from '../../common/CardResource';
 import {CardName} from '../../common/cards/CardName';
 import {IResourceCard} from '../ICard';
 import {CardRequirements} from '../CardRequirements';
@@ -18,7 +18,7 @@ export class VenusianAnimals extends Card implements IResourceCard {
       cardType: CardType.ACTIVE,
       tags: [Tags.VENUS, Tags.ANIMAL, Tags.SCIENCE],
       cost: 15,
-      resourceType: ResourceType.ANIMAL,
+      resourceType: CardResource.ANIMAL,
       victoryPoints: VictoryPoints.resource(1, 1),
 
       requirements: CardRequirements.builder((b) => b.venus(18)),

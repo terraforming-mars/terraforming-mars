@@ -4,7 +4,7 @@ import {SelectSpace} from '../../inputs/SelectSpace';
 import {ISpace} from '../../boards/ISpace';
 import {Player} from '../../Player';
 import {Resources} from '../../common/Resources';
-import {ResourceType} from '../../common/ResourceType';
+import {CardResource} from '../../common/CardResource';
 import {SpaceBonus} from '../../common/boards/SpaceBonus';
 import {SpaceType} from '../../common/boards/SpaceType';
 import {TileType} from '../../common/TileType';
@@ -43,7 +43,7 @@ export class BiofertilizerFacility extends Card implements IProjectCard {
 
   public play(player: Player) {
     player.addProduction(Resources.PLANTS, 1);
-    player.game.defer(new AddResourcesToCard(player, ResourceType.MICROBE, {count: 2}));
+    player.game.defer(new AddResourcesToCard(player, CardResource.MICROBE, {count: 2}));
 
     return new SelectSpace(
       'Select space for Biofertilizer Facility tile',

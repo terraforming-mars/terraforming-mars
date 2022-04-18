@@ -5,7 +5,7 @@ import {SpaceName} from '../../SpaceName';
 import {SpaceType} from '../../common/boards/SpaceType';
 import {Resources} from '../../common/Resources';
 import {IActionCard, ICard, IResourceCard} from '../ICard';
-import {ResourceType} from '../../common/ResourceType';
+import {CardResource} from '../../common/CardResource';
 import {SelectCard} from '../../inputs/SelectCard';
 import {CardName} from '../../common/cards/CardName';
 import {CardRequirements} from '../CardRequirements';
@@ -21,7 +21,7 @@ export class Stratopolis extends Card implements IActionCard, IResourceCard {
       tags: [Tags.CITY, Tags.VENUS],
       cost: 22,
 
-      resourceType: ResourceType.FLOATER,
+      resourceType: CardResource.FLOATER,
       victoryPoints: VictoryPoints.resource(1, 3),
       requirements: CardRequirements.builder((b) => b.tag(Tags.SCIENCE, 2)),
 
@@ -50,7 +50,7 @@ export class Stratopolis extends Card implements IActionCard, IResourceCard {
   }
 
   public getResCards(player: Player): ICard[] {
-    const resourceCards = player.getResourceCards(ResourceType.FLOATER);
+    const resourceCards = player.getResourceCards(CardResource.FLOATER);
     return resourceCards.filter((card) => card.tags.some((cardTag) => cardTag === Tags.VENUS));
   }
 

@@ -4,7 +4,7 @@ import {ICardRequirement, IPartyCardRequirement, IProductionCardRequirement, ITa
 import {PartyName} from '../common/turmoil/PartyName';
 import {Resources} from '../common/Resources';
 import {Player} from '../Player';
-import {ResourceType} from '../common/ResourceType';
+import {CardResource} from '../common/CardResource';
 import {TileType} from '../common/TileType';
 import {GlobalParameter} from '../common/GlobalParameter';
 import {MoonExpansion} from '../moon/MoonExpansion';
@@ -43,7 +43,7 @@ export class CardRequirement implements ICardRequirement {
       return this.satisfiesInequality(coloniesCount);
 
     case RequirementType.FLOATERS:
-      return this.satisfiesInequality(player.getResourceCount(ResourceType.FLOATER));
+      return this.satisfiesInequality(player.getResourceCount(CardResource.FLOATER));
 
     case RequirementType.GREENERIES:
       return this.satisfiesInequality(player.game.getGreeneriesCount(this.isAny ? undefined : player));

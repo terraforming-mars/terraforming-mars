@@ -12,5 +12,5 @@ export function hasShowModal(dialogElement: HTMLElement) {
 }
 
 export function showModal(dialogElement: HTMLElement) {
-  (dialogElement as any).showModal();
+  (dialogElement as any).showModal?.();
 }

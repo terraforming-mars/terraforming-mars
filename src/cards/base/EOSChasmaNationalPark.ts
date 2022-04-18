@@ -7,7 +7,7 @@ import {Player} from '../../Player';
 import {SelectCard} from '../../inputs/SelectCard';
 import {Resources} from '../../common/Resources';
 import {CardName} from '../../common/cards/CardName';
-import {ResourceType} from '../../common/ResourceType';
+import {CardResource} from '../../common/CardResource';
 import {CardRequirements} from '../CardRequirements';
 import {CardRenderer} from '../render/CardRenderer';
 import {Units} from '../../common/Units';
@@ -35,7 +35,7 @@ export class EosChasmaNationalPark extends Card implements IProjectCard {
   }
 
   public play(player: Player) {
-    const cards = player.getResourceCards(ResourceType.ANIMAL);
+    const cards = player.getResourceCards(CardResource.ANIMAL);
     player.plants += 3;
     player.addProduction(Resources.MEGACREDITS, 2);
 

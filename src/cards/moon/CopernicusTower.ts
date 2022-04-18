@@ -4,7 +4,7 @@ import {CardType} from '../../common/cards/CardType';
 import {IProjectCard} from '../IProjectCard';
 import {Tags} from '../../common/cards/Tags';
 import {Resources} from '../../common/Resources';
-import {ResourceType} from '../../common/ResourceType';
+import {CardResource} from '../../common/CardResource';
 import {CardRenderer} from '../render/CardRenderer';
 import {CardRequirements} from '../CardRequirements';
 import {IActionCard} from '../ICard';
@@ -22,7 +22,7 @@ export class CopernicusTower extends Card implements IActionCard, IProjectCard {
       tags: [Tags.SCIENCE, Tags.MOON],
       cost: 36,
 
-      resourceType: ResourceType.SCIENCE,
+      resourceType: CardResource.SCIENCE,
       requirements: CardRequirements.builder((b) => b.production(Resources.TITANIUM, 2)),
       victoryPoints: VictoryPoints.tags(Tags.MOON, 1, 1),
 

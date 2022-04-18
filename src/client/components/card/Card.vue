@@ -20,7 +20,6 @@
 
 import Vue from 'vue';
 
-import {IClientCard} from '@/common/cards/IClientCard';
 import {CardModel} from '@/common/models/CardModel';
 import CardTitle from './CardTitle.vue';
 import CardNumber from './CardNumber.vue';
@@ -35,8 +34,8 @@ import {ICardMetadata} from '@/common/cards/ICardMetadata';
 import {ICardRequirements} from '@/common/cards/ICardRequirements';
 import {Tags} from '@/common/cards/Tags';
 import {getPreferences} from '@/client/utils/PreferencesManager';
-import {ResourceType} from '@/common/ResourceType';
-import {getCard} from '@/client/cards/ClientCardManifest';
+import {CardResource} from '@/common/CardResource';
+import {getCardOrThrow} from '@/client/cards/ClientCardManifest';
 
 export default Vue.extend({
   name: 'Card',
@@ -63,26 +62,19 @@ export default Vue.extend({
   },
   data() {
     const cardName = this.card.name;
-    const cam = getCard(cardName);
-    if (cam === undefined) {
-      throw new Error(`Can't find card ${cardName}`);
-    }
+    const card = getCardOrThrow(cardName);
 
     return {
-      cardInstance: cam.card,
-      expansion: cam.module,
+      cardInstance: card,
     };
   },
   methods: {
     getCardExpansion(): string {
-      return this.expansion;
-    },
-    getCard(): IClientCard | undefined {
-      return this.cardInstance;
+      return this.cardInstance.module;
     },
     getTags(): Array<string> {
       const type = this.getCardType();
-      const tags = [...this.getCard()?.tags || []];
+      const tags = [...this.cardInstance.tags || []];
       tags.forEach((tag, idx) => {
         // Clone are changed on card implementations but that's not passed down directly through the
         // model, however, it sends down the `cloneTag` field. So this function does the substitution.
@@ -96,7 +88,7 @@ export default Vue.extend({
       return tags;
     },
     getCost(): number | undefined {
-      const cost = this.getCard()?.cost;
+      const cost = this.cardInstance.cost;
       const type = this.getCardType();
       return cost === undefined || type === CardType.PRELUDE || type === CardType.CORPORATION ? undefined : cost;
     },
@@ -105,8 +97,8 @@ export default Vue.extend({
       const type = this.getCardType();
       return cost === undefined || type === CardType.PRELUDE || type === CardType.CORPORATION ? undefined : cost;
     },
-    getCardType(): CardType | undefined {
-      return this.getCard()?.cardType;
+    getCardType(): CardType {
+      return this.cardInstance.cardType;
     },
     getCardNumber(): string {
       return String(this.getCardMetadata()?.cardNumber);
@@ -128,10 +120,11 @@ export default Vue.extend({
       return classes.join(' ');
     },
     getCardMetadata(): ICardMetadata | undefined {
-      return this.getCard()?.metadata;
+      // TODO(kberg): This doesn't return undefined anymore.
+      return this.cardInstance.metadata;
     },
     getCardRequirements(): ICardRequirements | undefined {
-      return this.getCard()?.requirements;
+      return this.cardInstance.requirements;
     },
     getResourceAmount(card: CardModel): number {
       return card.resources !== undefined ? card.resources : 0;
@@ -147,10 +140,10 @@ export default Vue.extend({
     hasResourceType(): boolean {
       return this.card.resourceType !== undefined || this.cardInstance.resourceType !== undefined;
     },
-    resourceType(): ResourceType {
+    resourceType(): CardResource {
       if (this.card.resourceType !== undefined) return this.card.resourceType;
       if (this.cardInstance.resourceType !== undefined) return this.cardInstance.resourceType;
-      return ResourceType.RESOURCE_CUBE;
+      return CardResource.RESOURCE_CUBE;
     },
   },
 });

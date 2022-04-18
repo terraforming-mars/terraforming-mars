@@ -5,7 +5,7 @@ import {VictoryPoints} from '../ICard';
 import {CardType} from '../../common/cards/CardType';
 import {Player} from '../../Player';
 import {ISpace} from '../../boards/ISpace';
-import {ResourceType} from '../../common/ResourceType';
+import {CardResource} from '../../common/CardResource';
 import {CardName} from '../../common/cards/CardName';
 import {Priority} from '../../deferredActions/DeferredAction';
 import {AddResourcesToCard} from '../../deferredActions/AddResourcesToCard';
@@ -22,7 +22,7 @@ export class Pets extends Card implements IProjectCard, IResourceCard {
       name: CardName.PETS,
       tags: [Tags.EARTH, Tags.ANIMAL],
       cost: 10,
-      resourceType: ResourceType.ANIMAL,
+      resourceType: CardResource.ANIMAL,
 
       victoryPoints: VictoryPoints.resource(1, 2),
 
@@ -46,7 +46,7 @@ export class Pets extends Card implements IProjectCard, IResourceCard {
   public onTilePlaced(cardOwner: Player, activePlayer: Player, space: ISpace) {
     if (Board.isCitySpace(space)) {
       cardOwner.game.defer(
-        new AddResourcesToCard(cardOwner, ResourceType.ANIMAL, {filter: (c) => c.name === this.name}),
+        new AddResourcesToCard(cardOwner, CardResource.ANIMAL, {filter: (c) => c.name === this.name}),
         cardOwner.id !== activePlayer.id ? Priority.OPPONENT_TRIGGER : undefined,
       );
     }

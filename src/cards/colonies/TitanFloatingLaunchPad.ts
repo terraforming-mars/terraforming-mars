@@ -3,7 +3,7 @@ import {Tags} from '../../common/cards/Tags';
 import {CardType} from '../../common/cards/CardType';
 import {Player} from '../../Player';
 import {CardName} from '../../common/cards/CardName';
-import {ResourceType} from '../../common/ResourceType';
+import {CardResource} from '../../common/CardResource';
 import {SelectOption} from '../../inputs/SelectOption';
 import {OrOptions} from '../../inputs/OrOptions';
 import {IResourceCard} from '../ICard';
@@ -22,7 +22,7 @@ export class TitanFloatingLaunchPad extends Card implements IProjectCard, IResou
       tags: [Tags.JOVIAN],
       name: CardName.TITAN_FLOATING_LAUNCHPAD,
       cardType: CardType.ACTIVE,
-      resourceType: ResourceType.FLOATER,
+      resourceType: CardResource.FLOATER,
       victoryPoints: 1,
 
       metadata: {
@@ -54,7 +54,7 @@ export class TitanFloatingLaunchPad extends Card implements IProjectCard, IResou
     const openColonies = player.game.colonies.filter((colony) => colony.isActive && colony.visitor === undefined);
 
     if (this.resourceCount === 0 || openColonies.length === 0 || player.getFleetSize() <= player.tradesThisGeneration) {
-      player.game.defer(new AddResourcesToCard(player, ResourceType.FLOATER, {restrictedTag: Tags.JOVIAN, title: 'Add 1 floater to a Jovian card'}));
+      player.game.defer(new AddResourcesToCard(player, CardResource.FLOATER, {restrictedTag: Tags.JOVIAN, title: 'Add 1 floater to a Jovian card'}));
       return undefined;
     }
 
@@ -73,14 +73,14 @@ export class TitanFloatingLaunchPad extends Card implements IProjectCard, IResou
         return undefined;
       }),
       new SelectOption('Add 1 floater to a Jovian card', 'Add floater', () => {
-        player.game.defer(new AddResourcesToCard(player, ResourceType.FLOATER, {restrictedTag: Tags.JOVIAN}));
+        player.game.defer(new AddResourcesToCard(player, CardResource.FLOATER, {restrictedTag: Tags.JOVIAN}));
         return undefined;
       }),
     );
   }
 
   public play(player: Player) {
-    player.game.defer(new AddResourcesToCard(player, ResourceType.FLOATER, {count: 2, restrictedTag: Tags.JOVIAN}));
+    player.game.defer(new AddResourcesToCard(player, CardResource.FLOATER, {count: 2, restrictedTag: Tags.JOVIAN}));
     return undefined;
   }
 }

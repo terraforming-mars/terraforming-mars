@@ -2,7 +2,7 @@ import {IActionCard, IResourceCard} from '../ICard';
 import {Tags} from '../../common/cards/Tags';
 import {CardType} from '../../common/cards/CardType';
 import {Player} from '../../Player';
-import {ResourceType} from '../../common/ResourceType';
+import {CardResource} from '../../common/CardResource';
 import {OrOptions} from '../../inputs/OrOptions';
 import {SelectOption} from '../../inputs/SelectOption';
 import {CardName} from '../../common/cards/CardName';
@@ -19,7 +19,7 @@ export class ExtractorBalloons extends Card implements IActionCard, IResourceCar
       cardType: CardType.ACTIVE,
       tags: [Tags.VENUS],
       cost: 21,
-      resourceType: ResourceType.FLOATER,
+      resourceType: CardResource.FLOATER,
 
       metadata: {
         cardNumber: '223',

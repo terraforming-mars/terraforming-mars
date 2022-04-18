@@ -1,7 +1,7 @@
 import {ICorporationCard} from '../corporation/ICorporationCard';
 import {Player} from '../../Player';
 import {Tags} from '../../common/cards/Tags';
-import {ResourceType} from '../../common/ResourceType';
+import {CardResource} from '../../common/CardResource';
 import {ICard, IActionCard, IResourceCard} from '../ICard';
 import {AndOptions} from '../../inputs/AndOptions';
 import {SelectAmount} from '../../inputs/SelectAmount';
@@ -20,7 +20,7 @@ export class StormCraftIncorporated extends Card implements IActionCard, ICorpor
       name: CardName.STORMCRAFT_INCORPORATED,
       tags: [Tags.JOVIAN],
       startingMegaCredits: 48,
-      resourceType: ResourceType.FLOATER,
+      resourceType: CardResource.FLOATER,
       cardType: CardType.CORPORATION,
       metadata: {
         cardNumber: 'R29',
@@ -54,7 +54,7 @@ export class StormCraftIncorporated extends Card implements IActionCard, ICorpor
   }
 
   public action(player: Player) {
-    const floaterCards = player.getResourceCards(ResourceType.FLOATER);
+    const floaterCards = player.getResourceCards(CardResource.FLOATER);
     if (floaterCards.length === 1) {
       player.addResourceTo(this, {log: true});
       return undefined;

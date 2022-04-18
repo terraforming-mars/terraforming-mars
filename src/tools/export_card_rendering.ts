@@ -13,6 +13,8 @@ import {IClientCard} from '../common/cards/IClientCard';
 import {CardType} from '../common/cards/CardType';
 import {ICorporationCard} from '../cards/corporation/ICorporationCard';
 import {PreludeCard} from '../cards/prelude/PreludeCard';
+import {IColonyMetadata} from '../common/colonies/IColonyMetadata';
+import {ALL_COLONIES_TILES} from '../colonies/ColonyManifest';
 
 class ProjectCardProcessor {
   public static json: Array<IClientCard> = [];
@@ -85,12 +87,46 @@ class GlobalEventProcessor {
   }
 }
 
+class ColoniesProcessor {
+  public static json: Array<IColonyMetadata> = [];
+  public static makeJson() {
+    ALL_COLONIES_TILES.forEach((entry) => {
+      const colony = new entry.Factory();
+      ColoniesProcessor.processColony(colony.metadata);
+    });
+  }
+
+  private static processColony(metadata: IColonyMetadata) {
+    // This seems extraneous but it prevents extra fields from creeping
+    // into the JSON. Could do some other form, but this works and matches
+    // the patterns above.
+    const clientMetadata: IColonyMetadata = {
+      name: metadata.name,
+      buildType: metadata.buildType,
+      buildQuantity: metadata.buildQuantity,
+      buildResource: metadata.buildResource,
+      resourceType: metadata.resourceType,
+      tradeType: metadata.tradeType,
+      tradeQuantity: metadata.tradeQuantity,
+      tradeResource: metadata.tradeResource,
+      colonyBonusType: metadata.colonyBonusType,
+      colonyBonusQuantity: metadata.colonyBonusQuantity,
+      colonyBonusResource: metadata.colonyBonusResource,
+      shouldIncreaseTrack: metadata.shouldIncreaseTrack,
+    };
+
+    ColoniesProcessor.json.push(clientMetadata);
+  }
+}
+
 if (!fs.existsSync('src/genfiles')) {
   fs.mkdirSync('src/genfiles');
 }
 
 ProjectCardProcessor.makeJson();
 GlobalEventProcessor.makeJson();
+ColoniesProcessor.makeJson();
 
 fs.writeFileSync('src/genfiles/cards.json', JSON.stringify(ProjectCardProcessor.json, null, 2));
 fs.writeFileSync('src/genfiles/events.json', JSON.stringify(GlobalEventProcessor.json, null, 2));
+fs.writeFileSync('src/genfiles/colonies.json', JSON.stringify(ColoniesProcessor.json, null, 2));

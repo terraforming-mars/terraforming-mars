@@ -5,7 +5,7 @@ import {CardType} from '../../common/cards/CardType';
 import {Player} from '../../Player';
 import {OrOptions} from '../../inputs/OrOptions';
 import {SelectOption} from '../../inputs/SelectOption';
-import {ResourceType} from '../../common/ResourceType';
+import {CardResource} from '../../common/CardResource';
 import {CardName} from '../../common/cards/CardName';
 import {IResourceCard} from '../ICard';
 import {DeferredAction} from '../../deferredActions/DeferredAction';
@@ -19,7 +19,7 @@ export class OlympusConference extends Card implements IProjectCard, IResourceCa
       name: CardName.OLYMPUS_CONFERENCE,
       tags: [Tags.SCIENCE, Tags.EARTH, Tags.BUILDING],
       cost: 10,
-      resourceType: ResourceType.SCIENCE,
+      resourceType: CardResource.SCIENCE,
       victoryPoints: 1,
 
       metadata: {

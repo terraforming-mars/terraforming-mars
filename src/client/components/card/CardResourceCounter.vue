@@ -8,7 +8,7 @@
 <script lang="ts">
 
 import Vue from 'vue';
-import {ResourceType} from '@/common/ResourceType';
+import {CardResource} from '@/common/CardResource';
 export default Vue.extend({
   name: 'CardResourceCounter',
   props: {
@@ -17,46 +17,46 @@ export default Vue.extend({
       required: true,
     },
     type: {
-      type: String as () => ResourceType,
+      type: String as () => CardResource,
       required: true,
     },
   },
   computed: {
     getClass(): string {
       switch (this.type) {
-      case ResourceType.ANIMAL:
+      case CardResource.ANIMAL:
         return 'card-resource-animal';
-      case ResourceType.MICROBE:
+      case CardResource.MICROBE:
         return 'card-resource-microbe';
-      case ResourceType.FIGHTER:
+      case CardResource.FIGHTER:
         return 'card-resource-fighter';
-      case ResourceType.SCIENCE:
+      case CardResource.SCIENCE:
         return 'card-resource-science';
-      case ResourceType.FLOATER:
+      case CardResource.FLOATER:
         return 'card-resource-floater';
-      case ResourceType.ASTEROID:
+      case CardResource.ASTEROID:
         return 'card-resource-asteroid';
-      case ResourceType.PRESERVATION:
+      case CardResource.PRESERVATION:
         return 'card-resource-preservation';
-      case ResourceType.CAMP:
+      case CardResource.CAMP:
         return 'card-resource-camp';
-      case ResourceType.DISEASE:
+      case CardResource.DISEASE:
         return 'card-resource-disease';
-      case ResourceType.RESOURCE_CUBE:
+      case CardResource.RESOURCE_CUBE:
         return 'card-resource-cube';
-      case ResourceType.DATA:
+      case CardResource.DATA:
         return 'card-resource-data';
-      case ResourceType.SYNDICATE_FLEET:
+      case CardResource.SYNDICATE_FLEET:
         return 'card-resource-syndicate-fleet';
-      case ResourceType.VENUSIAN_HABITAT:
+      case CardResource.VENUSIAN_HABITAT:
         return 'card-resource-venusian-habitat';
-      case ResourceType.SPECIALIZED_ROBOT:
+      case CardResource.SPECIALIZED_ROBOT:
         return 'card-resource-specialized-robot';
-      case ResourceType.SEED:
+      case CardResource.SEED:
         return 'card-resource-seed';
-      case ResourceType.AGENDA:
+      case CardResource.AGENDA:
         return 'card-resource-agenda';
-      case ResourceType.ORBITAL:
+      case CardResource.ORBITAL:
         return 'card-resource-orbital';
       default:
         return '';

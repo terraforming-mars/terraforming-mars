@@ -14,7 +14,7 @@ import {PlanetaryTrack} from '../common/pathfinders/PlanetaryTrack';
 import {PlanetaryTracks} from '../common/pathfinders/PlanetaryTracks';
 import {Player} from '../Player';
 import {Resources} from '../common/Resources';
-import {ResourceType} from '../common/ResourceType';
+import {CardResource} from '../common/CardResource';
 import {Reward} from '../common/pathfinders/Reward';
 import {SelectResourcesDeferred} from '../deferredActions/SelectResourcesDeferred';
 import {SendDelegateToArea} from '../deferredActions/SendDelegateToArea';
@@ -191,7 +191,7 @@ export class PathfindersExpansion {
       player.addProduction(Resources.ENERGY, 1, {log: true});
       break;
     case 'floater':
-      game.defer(new AddResourcesToCard(player, ResourceType.FLOATER));
+      game.defer(new AddResourcesToCard(player, CardResource.FLOATER));
       break;
     case 'greenery':
       game.defer(new PlaceGreeneryTile(player));

@@ -3,7 +3,7 @@ import {Tags} from '../../common/cards/Tags';
 import {CardType} from '../../common/cards/CardType';
 import {Player} from '../../Player';
 import {CardName} from '../../common/cards/CardName';
-import {ResourceType} from '../../common/ResourceType';
+import {CardResource} from '../../common/CardResource';
 import {AddResourcesToCard} from '../../deferredActions/AddResourcesToCard';
 import {Card} from '../Card';
 import {CardRenderer} from '../render/CardRenderer';
@@ -26,7 +26,7 @@ export class FloaterPrototypes extends Card implements IProjectCard {
   }
 
   public play(player: Player) {
-    player.game.defer(new AddResourcesToCard(player, ResourceType.FLOATER, {count: 2}));
+    player.game.defer(new AddResourcesToCard(player, CardResource.FLOATER, {count: 2}));
     return undefined;
   }
 }

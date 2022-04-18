@@ -7,7 +7,7 @@ import {CardName} from '../../common/cards/CardName';
 import {CardRenderer} from '../render/CardRenderer';
 import {Tags} from '../../common/cards/Tags';
 import {Resources} from '../../common/Resources';
-import {ResourceType} from '../../common/ResourceType';
+import {CardResource} from '../../common/CardResource';
 import {Units} from '../../common/Units';
 import {ICard} from '../ICard';
 import {played} from '../Options';
@@ -19,7 +19,7 @@ export class MartianRepository extends Card implements IProjectCard {
       name: CardName.MARTIAN_REPOSITORY,
       cost: 12,
       tags: [Tags.MARS, Tags.MARS, Tags.BUILDING],
-      resourceType: ResourceType.DATA,
+      resourceType: CardResource.DATA,
       productionBox: Units.of({energy: -1}),
       victoryPoints: VictoryPoints.resource(1, 3),
 

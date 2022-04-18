@@ -4,7 +4,7 @@ import {Card} from '../Card';
 import {VictoryPoints} from '../ICard';
 import {CardName} from '../../common/cards/CardName';
 import {CardType} from '../../common/cards/CardType';
-import {ResourceType} from '../../common/ResourceType';
+import {CardResource} from '../../common/CardResource';
 import {Tags} from '../../common/cards/Tags';
 import {Player} from '../../Player';
 import {Resources} from '../../common/Resources';
@@ -21,7 +21,7 @@ export class AsteroidDeflectionSystem extends Card implements IActionCard, IProj
       tags: [Tags.SPACE, Tags.EARTH, Tags.BUILDING],
       cost: 13,
 
-      resourceType: ResourceType.ASTEROID,
+      resourceType: CardResource.ASTEROID,
       victoryPoints: VictoryPoints.resource(1, 1),
       productionBox: Units.of({energy: -1}),
 

@@ -5,7 +5,7 @@ import {Card} from '../Card';
 import {CardType} from '../../common/cards/CardType';
 import {Player} from '../../Player';
 import {OrOptions} from '../../inputs/OrOptions';
-import {ResourceType} from '../../common/ResourceType';
+import {CardResource} from '../../common/CardResource';
 import {SelectOption} from '../../inputs/SelectOption';
 import {CardName} from '../../common/cards/CardName';
 import {LogHelper} from '../../LogHelper';
@@ -18,7 +18,7 @@ export class RegolithEaters extends Card implements IActionCard, IProjectCard, I
       name: CardName.REGOLITH_EATERS,
       tags: [Tags.SCIENCE, Tags.MICROBE],
       cost: 13,
-      resourceType: ResourceType.MICROBE,
+      resourceType: CardResource.MICROBE,
 
       metadata: {
         cardNumber: '033',

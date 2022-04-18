@@ -6,7 +6,7 @@ import {CardType} from '../../common/cards/CardType';
 import {Player} from '../../Player';
 import {ISpace} from '../../boards/ISpace';
 import {Resources} from '../../common/Resources';
-import {ResourceType} from '../../common/ResourceType';
+import {CardResource} from '../../common/CardResource';
 import {CardName} from '../../common/cards/CardName';
 import {IResourceCard} from '../ICard';
 import {AddResourcesToCard} from '../../deferredActions/AddResourcesToCard';
@@ -25,7 +25,7 @@ export class Herbivores extends Card implements IProjectCard, IResourceCard {
       tags: [Tags.ANIMAL],
       cost: 12,
 
-      resourceType: ResourceType.ANIMAL,
+      resourceType: CardResource.ANIMAL,
       victoryPoints: VictoryPoints.resource(1, 2),
       requirements: CardRequirements.builder((b) => b.oxygen(8)),
 
@@ -54,7 +54,7 @@ export class Herbivores extends Card implements IProjectCard, IResourceCard {
 
   public onTilePlaced(cardOwner: Player, activePlayer: Player, space: ISpace) {
     if (cardOwner.id === activePlayer.id && Board.isGreenerySpace(space)) {
-      cardOwner.game.defer(new AddResourcesToCard(cardOwner, ResourceType.ANIMAL, {filter: (c) => c.name === this.name}));
+      cardOwner.game.defer(new AddResourcesToCard(cardOwner, CardResource.ANIMAL, {filter: (c) => c.name === this.name}));
     }
   }
 

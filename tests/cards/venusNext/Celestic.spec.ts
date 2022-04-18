@@ -4,7 +4,7 @@ import {Celestic} from '../../../src/cards/venusNext/Celestic';
 import {Game} from '../../../src/Game';
 import {TestPlayers} from '../../TestPlayers';
 import {CardName} from '../../../src/common/cards/CardName';
-import {ResourceType} from '../../../src/common/ResourceType';
+import {CardResource} from '../../../src/common/CardResource';
 import {RequirementType} from '../../../src/common/cards/RequirementType';
 
 describe('Celestic', function() {
@@ -33,7 +33,7 @@ describe('Celestic', function() {
 
         // Only looking for cards that mention floaters in the metadata
         // or requirements. Cards with floater resources don't need to be hand-verified.
-        if (card.resourceType === ResourceType.FLOATER) return;
+        if (card.resourceType === CardResource.FLOATER) return;
 
         const renderData = card.metadata.renderData;
         if (renderData === undefined) return;

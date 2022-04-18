@@ -4,7 +4,7 @@ import {Tags} from '../../common/cards/Tags';
 import {Card} from '../Card';
 import {CardType} from '../../common/cards/CardType';
 import {Player} from '../../Player';
-import {ResourceType} from '../../common/ResourceType';
+import {CardResource} from '../../common/CardResource';
 import {CardName} from '../../common/cards/CardName';
 import {SelectHowToPayDeferred} from '../../deferredActions/SelectHowToPayDeferred';
 import {CardRequirements} from '../CardRequirements';
@@ -20,7 +20,7 @@ export class SearchForLife extends Card implements IActionCard, IProjectCard, IR
       tags: [Tags.SCIENCE],
       cost: 3,
 
-      resourceType: ResourceType.SCIENCE,
+      resourceType: CardResource.SCIENCE,
       victoryPoints: 'special',
 
       requirements: CardRequirements.builder((b) => b.oxygen(6, {max})),

@@ -3,7 +3,7 @@ import {CardType} from '../../common/cards/CardType';
 import {Player} from '../../Player';
 import {CardName} from '../../common/cards/CardName';
 import {Resources} from '../../common/Resources';
-import {ResourceType} from '../../common/ResourceType';
+import {CardResource} from '../../common/CardResource';
 import {AddResourcesToCard} from '../../deferredActions/AddResourcesToCard';
 import {CardRequirements} from '../CardRequirements';
 import {Card} from '../Card';
@@ -31,7 +31,7 @@ export class Airliners extends Card implements IProjectCard {
 
   public play(player: Player) {
     player.addProduction(Resources.MEGACREDITS, 2);
-    player.game.defer(new AddResourcesToCard(player, ResourceType.FLOATER, {count: 2}));
+    player.game.defer(new AddResourcesToCard(player, CardResource.FLOATER, {count: 2}));
     return undefined;
   }
 }

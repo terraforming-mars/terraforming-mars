@@ -13,7 +13,7 @@ import {TestPlayers} from '../../TestPlayers';
 import {CardName} from '../../../src/common/cards/CardName';
 import {Tags} from '../../../src/common/cards/Tags';
 import {CardType} from '../../../src/common/cards/CardType';
-import {ResourceType} from '../../../src/common/ResourceType';
+import {CardResource} from '../../../src/common/CardResource';
 import {IProjectCard} from '../../../src/cards/IProjectCard';
 
 describe('MaxwellBase', function() {
@@ -91,7 +91,7 @@ describe('MaxwellBase', function() {
       metadata: {
         cardNumber: '1',
       },
-      resourceType: ResourceType.SYNDICATE_FLEET,
+      resourceType: CardResource.SYNDICATE_FLEET,
       resourceCount: 0,
     };
     player.playedCards.push(fakeCard);

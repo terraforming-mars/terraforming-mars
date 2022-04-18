@@ -164,8 +164,8 @@ export default Vue.extend({
           }
         }
         const card = getCard(cardName);
-        if (card && card.card.cardType) {
-          return this.cardToHtml(card.card.cardType, data.value);
+        if (card?.cardType) {
+          return this.cardToHtml(card.cardType, data.value);
         }
         break;
 

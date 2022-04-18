@@ -23,6 +23,7 @@ export default (Vue as WithRefs<Refs>).extend({
   data() {
     return {
       hide: false,
+      shown: false,
     };
   },
   watch: {
@@ -38,6 +39,7 @@ export default (Vue as WithRefs<Refs>).extend({
       this.$emit('dismiss');
     },
     show() {
+      this.shown = true;
       showModal(this.$refs.dialog);
     },
   },

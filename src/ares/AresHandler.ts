@@ -5,7 +5,7 @@ import {SelectCard} from '../inputs/SelectCard';
 import {ISpace} from '../boards/ISpace';
 import {Player} from '../Player';
 import {Resources} from '../common/Resources';
-import {ResourceType} from '../common/ResourceType';
+import {CardResource} from '../common/CardResource';
 import {SpaceBonus} from '../common/boards/SpaceBonus';
 import {OCEAN_UPGRADE_TILES, TileType} from '../common/TileType';
 import {ITile} from '../ITile';
@@ -67,7 +67,7 @@ export class AresHandler {
       throw new Error(`A tile with an adjacency bonus must have an owner (${adjacentSpace.x}, ${adjacentSpace.y}, ${adjacentSpace.adjacency.bonus}`);
     }
 
-    const addResourceToCard = function(player: Player, resourceType: ResourceType, resourceAsText: string) {
+    const addResourceToCard = function(player: Player, resourceType: CardResource, resourceAsText: string) {
       const availableCards = player.getResourceCards(resourceType);
       if (availableCards.length === 0) {
       } else if (availableCards.length === 1) {
@@ -94,7 +94,7 @@ export class AresHandler {
       bonuses.add(bonus);
       switch (bonus) {
       case SpaceBonus.ANIMAL:
-        addResourceToCard(player, ResourceType.ANIMAL, 'animal');
+        addResourceToCard(player, CardResource.ANIMAL, 'animal');
         break;
 
       case SpaceBonus.MEGACREDITS:
@@ -106,7 +106,7 @@ export class AresHandler {
         break;
 
       case SpaceBonus.MICROBE:
-        addResourceToCard(player, ResourceType.MICROBE, 'microbe');
+        addResourceToCard(player, CardResource.MICROBE, 'microbe');
         break;
 
       default:

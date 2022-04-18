@@ -3,7 +3,7 @@ import {SelectCard} from '../inputs/SelectCard';
 import {ICard} from '../cards/ICard';
 import {OrOptions} from '../inputs/OrOptions';
 import {Resources} from '../common/Resources';
-import {ResourceType} from '../common/ResourceType';
+import {CardResource} from '../common/CardResource';
 import {SelectOption} from '../inputs/SelectOption';
 import {DeferredAction, Priority} from './DeferredAction';
 import {GlobalEventName} from '../common/turmoil/globalEvents/GlobalEventName';
@@ -16,7 +16,7 @@ export class CorrosiveRainDeferredAction implements DeferredAction {
   ) {}
 
   public execute() {
-    const floaterCards = this.player.getCardsWithResources(ResourceType.FLOATER).filter((card) => card.resourceCount ?? 0 >= 2);
+    const floaterCards = this.player.getCardsWithResources(CardResource.FLOATER).filter((card) => card.resourceCount ?? 0 >= 2);
 
     if (floaterCards.length === 0) {
       this.player.deductResource(Resources.MEGACREDITS, 10, {log: true, from: GlobalEventName.CORROSIVE_RAIN});

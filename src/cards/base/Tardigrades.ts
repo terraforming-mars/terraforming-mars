@@ -3,7 +3,7 @@ import {Tags} from '../../common/cards/Tags';
 import {Card} from '../Card';
 import {VictoryPoints} from '../ICard';
 import {CardType} from '../../common/cards/CardType';
-import {ResourceType} from '../../common/ResourceType';
+import {CardResource} from '../../common/CardResource';
 import {CardName} from '../../common/cards/CardName';
 import {IResourceCard} from '../ICard';
 import {Player} from '../../Player';
@@ -17,7 +17,7 @@ export class Tardigrades extends Card implements IProjectCard, IResourceCard {
       tags: [Tags.MICROBE],
       cost: 4,
 
-      resourceType: ResourceType.MICROBE,
+      resourceType: CardResource.MICROBE,
       victoryPoints: VictoryPoints.resource(1, 4),
 
       metadata: {

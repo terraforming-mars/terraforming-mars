@@ -8,7 +8,7 @@ import {Resources} from '../../common/Resources';
 import {Tags} from '../../common/cards/Tags';
 import {CardRequirements} from '../CardRequirements';
 import {AddResourcesToCard} from '../../deferredActions/AddResourcesToCard';
-import {ResourceType} from '../../common/ResourceType';
+import {CardResource} from '../../common/CardResource';
 import {ICard} from '../ICard';
 
 export class SpaceDebrisCleaningOperation extends Card implements IProjectCard {
@@ -43,11 +43,11 @@ export class SpaceDebrisCleaningOperation extends Card implements IProjectCard {
         {
           count: 1,
           filter: (card: ICard) => {
-            return card.resourceType !== undefined && card.resourceType !== ResourceType.SCIENCE && !card.tags.includes(Tags.ANIMAL);
+            return card.resourceType !== undefined && card.resourceType !== CardResource.SCIENCE && !card.tags.includes(Tags.ANIMAL);
           },
         },
       ));
-    player.game.defer(new AddResourcesToCard(player, ResourceType.DATA, {count: 1}));
+    player.game.defer(new AddResourcesToCard(player, CardResource.DATA, {count: 1}));
     player.drawCard();
     return undefined;
   }

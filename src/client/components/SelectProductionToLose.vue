@@ -57,6 +57,7 @@ import Vue from 'vue';
 import {PlayerInputModel} from '@/common/models/PlayerInputModel';
 import {IPayProductionModel} from '@/common/models/IPayProductionUnitsModel';
 import {Units} from '@/common/Units';
+import {InputResponse} from '@/common/inputs/InputResponse';
 
 interface SelectProductionToLoseModel {
     megacredits: number;
@@ -75,7 +76,7 @@ export default Vue.extend({
       type: Object as () => Required<Pick<PlayerInputModel, 'title' | 'payProduction' | 'buttonLabel'>>,
     },
     onsave: {
-      type: Function as unknown as () => (out: Array<Array<string>>) => void,
+      type: Function as unknown as () => (out: InputResponse) => void,
     },
     showsave: {
       type: Boolean,

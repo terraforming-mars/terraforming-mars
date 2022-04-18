@@ -6,7 +6,7 @@ import {VictoryPoints} from '../ICard';
 import {CardType} from '../../common/cards/CardType';
 import {Player} from '../../Player';
 import {Resources} from '../../common/Resources';
-import {ResourceType} from '../../common/ResourceType';
+import {CardResource} from '../../common/CardResource';
 import {CardName} from '../../common/cards/CardName';
 import {DecreaseAnyProduction} from '../../deferredActions/DecreaseAnyProduction';
 import {CardRequirements} from '../CardRequirements';
@@ -21,7 +21,7 @@ export class Birds extends Card implements IActionCard, IProjectCard, IResourceC
       tags: [Tags.ANIMAL],
       cost: 10,
 
-      resourceType: ResourceType.ANIMAL,
+      resourceType: CardResource.ANIMAL,
       requirements: CardRequirements.builder((b) => b.oxygen(13)),
       victoryPoints: VictoryPoints.resource(1, 1),
 

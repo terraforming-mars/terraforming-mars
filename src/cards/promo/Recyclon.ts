@@ -2,7 +2,7 @@ import {ICorporationCard} from '../corporation/ICorporationCard';
 import {Player} from '../../Player';
 import {Tags} from '../../common/cards/Tags';
 import {Resources} from '../../common/Resources';
-import {ResourceType} from '../../common/ResourceType';
+import {CardResource} from '../../common/CardResource';
 import {IProjectCard} from '../IProjectCard';
 import {SelectOption} from '../../inputs/SelectOption';
 import {OrOptions} from '../../inputs/OrOptions';
@@ -21,7 +21,7 @@ export class Recyclon extends Card implements ICorporationCard, IResourceCard {
       name: CardName.RECYCLON,
       tags: [Tags.MICROBE, Tags.BUILDING],
       startingMegaCredits: 38,
-      resourceType: ResourceType.MICROBE,
+      resourceType: CardResource.MICROBE,
       productionBox: Units.of({steel: 1}),
 
       metadata: {

@@ -5,7 +5,7 @@ import {Card} from '../Card';
 import {CardType} from '../../common/cards/CardType';
 import {Player} from '../../Player';
 import {OrOptions} from '../../inputs/OrOptions';
-import {ResourceType} from '../../common/ResourceType';
+import {CardResource} from '../../common/CardResource';
 import {SelectOption} from '../../inputs/SelectOption';
 import {CardName} from '../../common/cards/CardName';
 import {LogHelper} from '../../LogHelper';
@@ -19,7 +19,7 @@ export class GHGProducingBacteria extends Card implements IActionCard, IProjectC
       name: CardName.GHG_PRODUCING_BACTERIA,
       tags: [Tags.SCIENCE, Tags.MICROBE],
       cost: 8,
-      resourceType: ResourceType.MICROBE,
+      resourceType: CardResource.MICROBE,
 
       requirements: CardRequirements.builder((b) => b.oxygen(4)),
       metadata: {

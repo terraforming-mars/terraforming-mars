@@ -2,7 +2,7 @@ import {IProjectCard} from '../IProjectCard';
 import {CardType} from '../../common/cards/CardType';
 import {Player} from '../../Player';
 import {CardName} from '../../common/cards/CardName';
-import {ResourceType} from '../../common/ResourceType';
+import {CardResource} from '../../common/CardResource';
 import {OrOptions} from '../../inputs/OrOptions';
 import {SelectOption} from '../../inputs/SelectOption';
 import {IResourceCard} from '../ICard';
@@ -19,7 +19,7 @@ export class AtmoCollectors extends Card implements IProjectCard, IResourceCard 
       cost: 15,
       name: CardName.ATMO_COLLECTORS,
       cardType: CardType.ACTIVE,
-      resourceType: ResourceType.FLOATER,
+      resourceType: CardResource.FLOATER,
 
       metadata: {
         description: 'Add 2 floaters to ANY card.',
@@ -71,7 +71,7 @@ export class AtmoCollectors extends Card implements IProjectCard, IResourceCard 
     );
   }
   public play(player: Player) {
-    player.game.defer(new AddResourcesToCard(player, ResourceType.FLOATER, {count: 2}));
+    player.game.defer(new AddResourcesToCard(player, CardResource.FLOATER, {count: 2}));
     return undefined;
   }
 }

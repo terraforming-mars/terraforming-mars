@@ -5,7 +5,7 @@ import {Game} from '../../../src/Game';
 import {Units} from '../../../src/common/Units';
 import {TestPlayer} from '../../TestPlayer';
 import {TestPlayers} from '../../TestPlayers';
-import {ResourceType} from '../../../src/common/ResourceType';
+import {CardResource} from '../../../src/common/CardResource';
 
 describe('SolarStorm', function() {
   let card: SolarStorm;
@@ -43,7 +43,7 @@ describe('SolarStorm', function() {
     const pi = player.game.deferredActions.peek()!;
     expect(pi).instanceOf(RemoveResourcesFromCard);
     const rr = pi as RemoveResourcesFromCard;
-    expect(rr.resourceType).eq(ResourceType.DATA);
+    expect(rr.resourceType).eq(CardResource.DATA);
     expect(rr.count).eq(3);
   });
 });

@@ -26,7 +26,7 @@ import {PharmacyUnion} from './cards/promo/PharmacyUnion';
 import {Phase} from './common/Phase';
 import {PlayerInput} from './PlayerInput';
 import {Resources} from './common/Resources';
-import {ResourceType} from './common/ResourceType';
+import {CardResource} from './common/CardResource';
 import {SelectAmount} from './inputs/SelectAmount';
 import {SelectCard} from './inputs/SelectCard';
 import {SellPatentsStandardProject} from './cards/base/standardProjects/SellPatentsStandardProject';
@@ -75,6 +75,7 @@ import {deserializeProjectCard, serializeProjectCard} from './cards/CardSerializ
 import {ColoniesHandler} from './colonies/ColoniesHandler';
 import {SerializedGame} from './SerializedGame';
 import {MonsInsurance} from './cards/promo/MonsInsurance';
+import {InputResponse} from './common/inputs/InputResponse';
 
 export class Player {
   public readonly id: PlayerId;
@@ -724,7 +725,7 @@ export class Player {
     }
   }
 
-  public addResourceTo(card: ICard, options: number | {qty?: number, log?: boolean} = 1): void {
+  public addResourceTo(card: ICard, options: number | {qty?: number, log?: boolean, logZero?: boolean} = 1): void {
     const count = typeof(options) === 'number' ? options : (options.qty ?? 1);
 
     if (card.resourceCount !== undefined) {
@@ -732,7 +733,9 @@ export class Player {
     }
 
     if (typeof(options) !== 'number' && options.log === true) {
-      LogHelper.logAddResource(this, card, count);
+      if (options.logZero === true || count !== 0) {
+        LogHelper.logAddResource(this, card, count);
+      }
     }
 
     for (const playedCard of this.playedCards) {
@@ -741,7 +744,7 @@ export class Player {
     this.corporationCard?.onResourceAdded?.(this, card, count);
   }
 
-  public getCardsWithResources(resource?: ResourceType): Array<ICard & IResourceCard> {
+  public getCardsWithResources(resource?: CardResource): Array<ICard & IResourceCard> {
     let result: Array<ICard & IResourceCard> = this.playedCards.filter((card) => card.resourceType !== undefined && card.resourceCount && card.resourceCount > 0);
     if (this.corporationCard !== undefined &&
           this.corporationCard.resourceType !== undefined &&
@@ -757,7 +760,7 @@ export class Player {
     return result;
   }
 
-  public getResourceCards(resource?: ResourceType): Array<ICard> {
+  public getResourceCards(resource?: CardResource): Array<ICard> {
     let result: Array<ICard> = this.playedCards.filter((card) => card.resourceType !== undefined);
 
     if (this.corporationCard !== undefined && this.corporationCard.resourceType !== undefined) {
@@ -771,7 +774,7 @@ export class Player {
     return result;
   }
 
-  public getResourceCount(resource: ResourceType): number {
+  public getResourceCount(resource: CardResource): number {
     let count: number = 0;
     this.getCardsWithResources(resource).forEach((card) => {
       count += card.resourceCount;
@@ -975,7 +978,7 @@ export class Player {
     }
   }
 
-  private checkInputLength(input: ReadonlyArray<ReadonlyArray<string>>, length: number, firstOptionLength?: number) {
+  private checkInputLength(input: InputResponse, length: number, firstOptionLength?: number) {
     if (input.length !== length) {
       throw new Error('Incorrect options provided');
     }
@@ -1007,7 +1010,7 @@ export class Player {
     }
   }
 
-  protected runInput(input: ReadonlyArray<ReadonlyArray<string>>, pi: PlayerInput): void {
+  protected runInput(input: InputResponse, pi: PlayerInput): void {
     if (pi instanceof AndOptions) {
       this.checkInputLength(input, pi.options.length);
       for (let i = 0; i < input.length; i++) {
@@ -1452,7 +1455,7 @@ export class Player {
 
     if (howToPay.floaters !== undefined && howToPay.floaters > 0) {
       if (selectedCard.name === CardName.STRATOSPHERIC_BIRDS && howToPay.floaters === this.getFloatersCanSpend()) {
-        const cardsWithFloater = this.getCardsWithResources(ResourceType.FLOATER);
+        const cardsWithFloater = this.getCardsWithResources(CardResource.FLOATER);
         if (cardsWithFloater.length === 1) {
           throw new Error('Cannot spend all floaters to play Stratospheric Birds');
         }
@@ -1606,6 +1609,9 @@ export class Player {
   }
 
   public onCardPlayed(card: IProjectCard) {
+    if (card.cardType === CardType.PROXY) {
+      return;
+    }
     for (const playedCard of this.playedCards) {
       if (playedCard.onCardPlayed !== undefined) {
         const actionFromPlayedCard: OrOptions | void = playedCard.onCardPlayed(this, card);
@@ -2170,7 +2176,7 @@ export class Player {
     return passedPlayers.length === players.length - 1 && passedPlayers.includes(this.color) === false;
   }
 
-  public process(input: Array<Array<string>>): void {
+  public process(input: InputResponse): void {
     if (this.waitingFor === undefined || this.waitingForCb === undefined) {
       throw new Error('Not waiting for anything');
     }

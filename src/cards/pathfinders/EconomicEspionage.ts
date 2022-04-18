@@ -4,7 +4,7 @@ import {CardType} from '../../common/cards/CardType';
 import {CardName} from '../../common/cards/CardName';
 import {CardRenderer} from '../render/CardRenderer';
 import {Tags} from '../../common/cards/Tags';
-import {ResourceType} from '../../common/ResourceType';
+import {CardResource} from '../../common/CardResource';
 import {Player} from '../../Player';
 import {IActionCard, VictoryPoints} from '../ICard';
 import {AddResourcesToCard} from '../../deferredActions/AddResourcesToCard';
@@ -17,7 +17,7 @@ export class EconomicEspionage extends Card implements IProjectCard, IActionCard
       name: CardName.ECONOMIC_ESPIONAGE,
       cost: 8,
       tags: [Tags.EARTH],
-      resourceType: ResourceType.DATA,
+      resourceType: CardResource.DATA,
       victoryPoints: VictoryPoints.resource(1, 3),
 
       metadata: {
@@ -42,7 +42,7 @@ export class EconomicEspionage extends Card implements IProjectCard, IActionCard
     player.game.defer(new SelectHowToPayDeferred(player, 2, {
       title: 'Select how to pay for action',
       afterPay: () => {
-        player.game.defer(new AddResourcesToCard(player, ResourceType.DATA));
+        player.game.defer(new AddResourcesToCard(player, CardResource.DATA));
       },
     }));
     return undefined;

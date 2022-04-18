@@ -3,12 +3,13 @@ import {Bushes} from '../../../src/cards/base/Bushes';
 import {MarsUniversity} from '../../../src/cards/base/MarsUniversity';
 import {OlympusConference} from '../../../src/cards/base/OlympusConference';
 import {Research} from '../../../src/cards/base/Research';
-import {ScienceTagCard} from '../../../src/cards/community/ScienceTagCard';
+import {AdaptationTechnology} from '../../../src//cards/base/AdaptationTechnology';
 import {DeferredActionsQueue} from '../../../src/deferredActions/DeferredActionsQueue';
 import {Game} from '../../../src/Game';
 import {OrOptions} from '../../../src/inputs/OrOptions';
 import {TestPlayer} from '../../TestPlayer';
 import {TestPlayers} from '../../TestPlayers';
+import {TestingUtils} from '../../TestingUtils';
 
 describe('OlympusConference', function() {
   let card : OlympusConference; let player : TestPlayer; let game : Game;
@@ -52,6 +53,14 @@ describe('OlympusConference', function() {
     expect(game.deferredActions).has.lengthOf(0);
   });
 
+  it('including this', function() {
+    player.cardsInHand = [card];
+    player.playCard(card, undefined);
+    expect(card.resourceCount).to.eq(0);
+    TestingUtils.runAllActions(game);
+    expect(card.resourceCount).to.eq(1);
+  });
+
   it('Plays twice for Research', function() {
     player.playedCards.push(card);
     card.onCardPlayed(player, new Research());
@@ -75,7 +84,7 @@ describe('OlympusConference', function() {
 
   it('Triggers before Mars University', function() {
     const marsUniversity = new MarsUniversity();
-    const scienceTagCard = new ScienceTagCard();
+    const scienceTagCard = new AdaptationTechnology();
 
     // Olypus Conference played before Mars University
     player.playedCards.push(card);

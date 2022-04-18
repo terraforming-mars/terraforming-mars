@@ -107,9 +107,14 @@ describe('Wetlands', function() {
     const selectSpace = TestingUtils.cast(action, SelectSpace);
     expect(selectSpace.availableSpaces.map(toSpaceId)).deep.eq(['09', '23']);
 
+    expect(game.getOxygenLevel()).eq(0);
+
     const space = selectSpace.availableSpaces[0];
     selectSpace.cb(space);
     expect(space.tile?.tileType).eq(TileType.WETLANDS);
+    TestingUtils.runAllActions(game);
+
+    expect(game.getOxygenLevel()).eq(1);
   });
 
   it('Wetlands does not count toward global parameters', () => {

@@ -4,7 +4,7 @@ import {CardType} from '../../common/cards/CardType';
 import {IProjectCard} from '../IProjectCard';
 import {Tags} from '../../common/cards/Tags';
 import {CardRenderer} from '../render/CardRenderer';
-import {ResourceType} from '../../common/ResourceType';
+import {CardResource} from '../../common/CardResource';
 import {IActionCard, VictoryPoints} from '../ICard';
 import {Card} from '../Card';
 import {CardRequirements} from '../CardRequirements';
@@ -18,7 +18,7 @@ export class Solarpedia extends Card implements IProjectCard, IActionCard {
       tags: [Tags.SPACE],
       cost: 12,
       requirements: CardRequirements.builder((b) => b.tag(Tags.VENUS).tag(Tags.EARTH).tag(Tags.MARS).tag(Tags.JOVIAN)),
-      resourceType: ResourceType.DATA,
+      resourceType: CardResource.DATA,
       victoryPoints: VictoryPoints.resource(1, 6),
 
       metadata: {
@@ -41,12 +41,12 @@ export class Solarpedia extends Card implements IProjectCard, IActionCard {
   }
 
   public action(player: Player) {
-    player.game.defer(new AddResourcesToCard(player, ResourceType.DATA, {count: 2}));
+    player.game.defer(new AddResourcesToCard(player, CardResource.DATA, {count: 2}));
     return undefined;
   }
 
   public play(player: Player) {
-    player.game.defer(new AddResourcesToCard(player, ResourceType.DATA, {count: 2}));
+    player.game.defer(new AddResourcesToCard(player, CardResource.DATA, {count: 2}));
     return undefined;
   }
 }

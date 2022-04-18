@@ -6,6 +6,7 @@ import {PlayerInputModel} from '@/common/models/PlayerInputModel';
 import {PlayerViewModel, PublicPlayerModel} from '@/common/models/PlayerModel';
 import {getPreferences} from '@/client/utils/PreferencesManager';
 import Button from '@/client/components/common/Button.vue';
+import {InputResponse} from '@/common/inputs/InputResponse';
 
 export default Vue.extend({
   name: 'SelectHowToPay',
@@ -17,7 +18,7 @@ export default Vue.extend({
       type: Object as () => PlayerInputModel,
     },
     onsave: {
-      type: Function as unknown as () => (out: Array<Array<string>>) => void,
+      type: Function as unknown as () => (out: InputResponse) => void,
     },
     showsave: {
       type: Boolean,

@@ -18,6 +18,7 @@ import {ColorWithNeutral} from '@/common/Color';
 import {PlayerInputModel} from '@/common/models/PlayerInputModel';
 import {PublicPlayerModel} from '@/common/models/PlayerModel';
 import SelectPlayerRow from '@/client/components/SelectPlayerRow.vue';
+import {InputResponse} from '@/common/inputs/InputResponse';
 
 export default Vue.extend({
   name: 'SelectPartyPlayer',
@@ -29,7 +30,7 @@ export default Vue.extend({
       type: Object as () => PlayerInputModel,
     },
     onsave: {
-      type: Function as unknown as () => (out: Array<Array<string>>) => void,
+      type: Function as unknown as () => (out: InputResponse) => void,
     },
     showsave: {
       type: Boolean,

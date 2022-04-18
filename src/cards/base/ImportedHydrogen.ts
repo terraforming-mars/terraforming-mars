@@ -8,7 +8,7 @@ import {OrOptions} from '../../inputs/OrOptions';
 import {SelectOption} from '../../inputs/SelectOption';
 import {SelectCard} from '../../inputs/SelectCard';
 import {PlayerInput} from '../../PlayerInput';
-import {ResourceType} from '../../common/ResourceType';
+import {CardResource} from '../../common/CardResource';
 import {CardName} from '../../common/cards/CardName';
 import {Resources} from '../../common/Resources';
 import {PlaceOceanTile} from '../../deferredActions/PlaceOceanTile';
@@ -39,8 +39,8 @@ export class ImportedHydrogen extends Card implements IProjectCard {
   }
 
   public play(player: Player): undefined | PlayerInput {
-    const availableMicrobeCards = player.getResourceCards(ResourceType.MICROBE);
-    const availableAnimalCards = player.getResourceCards(ResourceType.ANIMAL);
+    const availableMicrobeCards = player.getResourceCards(CardResource.MICROBE);
+    const availableAnimalCards = player.getResourceCards(CardResource.ANIMAL);
 
     const gainPlants = function() {
       player.addResource(Resources.PLANTS, 3, {log: true});

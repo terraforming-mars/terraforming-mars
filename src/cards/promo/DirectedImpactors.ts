@@ -3,7 +3,7 @@ import {IActionCard, IResourceCard, ICard} from '../ICard';
 import {Card} from '../Card';
 import {CardName} from '../../common/cards/CardName';
 import {CardType} from '../../common/cards/CardType';
-import {ResourceType} from '../../common/ResourceType';
+import {CardResource} from '../../common/CardResource';
 import {Tags} from '../../common/cards/Tags';
 import {Player} from '../../Player';
 import {SelectCard} from '../../inputs/SelectCard';
@@ -21,7 +21,7 @@ export class DirectedImpactors extends Card implements IActionCard, IProjectCard
       name: CardName.DIRECTED_IMPACTORS,
       tags: [Tags.SPACE],
       cost: 8,
-      resourceType: ResourceType.ASTEROID,
+      resourceType: CardResource.ASTEROID,
 
       metadata: {
         cardNumber: 'X19',
@@ -54,7 +54,7 @@ export class DirectedImpactors extends Card implements IActionCard, IProjectCard
   }
 
   public action(player: Player) {
-    const asteroidCards = player.getResourceCards(ResourceType.ASTEROID);
+    const asteroidCards = player.getResourceCards(CardResource.ASTEROID);
     const opts: Array<SelectOption> = [];
 
     const addResource = new SelectOption('Pay 6 to add 1 asteroid to a card', 'Pay', () => this.addResource(player, asteroidCards));

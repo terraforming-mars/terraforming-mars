@@ -4,7 +4,7 @@ import {CardType} from '../../common/cards/CardType';
 import {IProjectCard} from '../IProjectCard';
 import {Tags} from '../../common/cards/Tags';
 import {IActionCard} from '../ICard';
-import {ResourceType} from '../../common/ResourceType';
+import {CardResource} from '../../common/CardResource';
 import {CardRenderer} from '../render/CardRenderer';
 import {Card} from '../Card';
 import {VictoryPoints} from '../ICard';
@@ -18,7 +18,7 @@ export class RustEatingBacteria extends Card implements IActionCard, IProjectCar
       tags: [Tags.MICROBE],
       cost: 7,
 
-      resourceType: ResourceType.MICROBE,
+      resourceType: CardResource.MICROBE,
       victoryPoints: VictoryPoints.resource(1, 3),
 
       metadata: {

@@ -3,7 +3,7 @@ import {Tags} from '../../common/cards/Tags';
 import {CardType} from '../../common/cards/CardType';
 import {Player} from '../../Player';
 import {CardName} from '../../common/cards/CardName';
-import {ResourceType} from '../../common/ResourceType';
+import {CardResource} from '../../common/CardResource';
 import {IResourceCard} from '../ICard';
 import {AddResourcesToCard} from '../../deferredActions/AddResourcesToCard';
 import {CardRequirements} from '../CardRequirements';
@@ -19,7 +19,7 @@ export class JovianLanterns extends Card implements IProjectCard, IResourceCard 
       name: CardName.JOVIAN_LANTERNS,
       cardType: CardType.ACTIVE,
 
-      resourceType: ResourceType.FLOATER,
+      resourceType: CardResource.FLOATER,
       victoryPoints: VictoryPoints.resource(1, 2),
       tr: {tr: 1},
       requirements: CardRequirements.builder((b) => b.tag(Tags.JOVIAN)),
@@ -54,7 +54,7 @@ export class JovianLanterns extends Card implements IProjectCard, IResourceCard 
   }
 
   public play(player: Player) {
-    player.game.defer(new AddResourcesToCard(player, ResourceType.FLOATER, {count: 2}));
+    player.game.defer(new AddResourcesToCard(player, CardResource.FLOATER, {count: 2}));
     player.increaseTerraformRating();
     return undefined;
   }

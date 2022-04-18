@@ -76,6 +76,7 @@ export class Wetlands extends Card implements IProjectCard {
           covers: space.tile,
         };
         player.game.addTile(player, space.spaceType, space, tile);
+        player.game.increaseOxygenLevel(player, 1);
         return undefined;
       },
     );

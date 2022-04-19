@@ -11,6 +11,8 @@ import {GeneRepair} from '../../../src/cards/base/GeneRepair';
 import {PrideoftheEarthArkship} from '../../../src/cards/moon/PrideoftheEarthArkship';
 import {SpaceStation} from '../../../src/cards/base/SpaceStation';
 import {Satellites} from '../../../src/cards/base/Satellites';
+import {HabitatMarte} from '../../../src/cards/pathfinders/HabitatMarte';
+import {DesignedOrganisms} from '../../../src/cards/pathfinders/DesignedOrganisms';
 
 describe('Scientists', function() {
   let player : Player; let game : Game; let turmoil: Turmoil; let scientists: Scientists;
@@ -31,6 +33,17 @@ describe('Scientists', function() {
     const bonus = SCIENTISTS_BONUS_1;
     bonus.grant(game);
     expect(player.megaCredits).to.eq(1);
+  });
+
+  it('Ruling bonus 1: Gain 1 M€ for each Science tag you have, with Habitat Marte', function() {
+    player.corporationCard = new HabitatMarte();
+    player.playedCards.push(new SearchForLife(), new DesignedOrganisms());
+
+    const bonus = SCIENTISTS_BONUS_1;
+    bonus.grant(game);
+
+    // This includes Habitat Marte itself, which has a Mars tag.
+    expect(player.megaCredits).to.eq(3);
   });
 
   it('Ruling bonus 2: Gain 1 M€ for every 3 cards in hand', function() {

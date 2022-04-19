@@ -1419,7 +1419,7 @@ export class Game {
       this.defer(new AddResourcesToCard(player, CardResource.DATA, {count: count}));
       break;
     case SpaceBonus.ENERGY_PRODUCTION:
-      player.addProduction(Resources.ENERGY, count);
+      player.addProduction(Resources.ENERGY, count, {log: true});
       break;
     case SpaceBonus.SCIENCE:
       this.defer(new AddResourcesToCard(player, CardResource.SCIENCE, {count: count}));

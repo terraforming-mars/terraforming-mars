@@ -108,9 +108,9 @@ export default Vue.extend({
         <div :class="getPlayerStatusAndResClasses()">
         <div class="player-status">
           <div class="player-info-details">
-            <div class="player-info-name">{{ player.name }}</div>
+            <div class="player-info-name" @click="togglePlayerDetails">{{ player.name }}</div>
             <div class="icon-first-player" v-if="firstForGen && playerView.players.length > 1">1st</div>
-            <div class="player-info-corp" v-if="player.corporationCard !== undefined" :title="player.corporationCard.name">{{ player.corporationCard.name }}</div>
+            <div class="player-info-corp" @click="togglePlayerDetails" v-if="player.corporationCard !== undefined" :title="player.corporationCard.name">{{ player.corporationCard.name }}</div>
           </div>
           <player-status :timer="player.timer" :showTimers="playerView.game.gameOptions.showTimers" :firstForGen="firstForGen" v-trim-whitespace :actionLabel="actionLabel" />
         </div>

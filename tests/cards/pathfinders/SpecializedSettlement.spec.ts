@@ -2,7 +2,6 @@ import {expect} from 'chai';
 import {SpecializedSettlement} from '../../../src/cards/pathfinders/SpecializedSettlement';
 import {Game} from '../../../src/Game';
 import {TestPlayer} from '../../TestPlayer';
-import {TestPlayers} from '../../TestPlayers';
 import {TestingUtils} from '../../TestingUtils';
 import {EmptyBoard} from '../../ares/EmptyBoard';
 import {Units} from '../../../src/common/Units';
@@ -12,6 +11,7 @@ import {TileType} from '../../../src/common/TileType';
 import {OrOptions} from '../../../src/inputs/OrOptions';
 import {RoboticWorkforce} from '../../../src/cards/base/RoboticWorkforce';
 import {SelectCard} from '../../../src/inputs/SelectCard';
+import {getTestPlayer, newTestGame} from '../../TestGame';
 
 describe('SpecializedSettlement', function() {
   let card: SpecializedSettlement;
@@ -20,8 +20,8 @@ describe('SpecializedSettlement', function() {
 
   beforeEach(function() {
     card = new SpecializedSettlement();
-    player = TestPlayers.BLUE.newPlayer();
-    game = Game.newInstance('foobar', [player], player);
+    game = newTestGame(1, {aresExtension: true, pathfindersExpansion: true});
+    player = getTestPlayer(game, 0);
     game.board = EmptyBoard.newInstance();
     player.popWaitingFor(); // Clears out the default waiting for (selecting initial cards)
   });
@@ -134,6 +134,28 @@ describe('SpecializedSettlement', function() {
     expect(selectCard.cards).deep.eq([card]);
     selectCard.cb([selectCard.cards[0]]);
     expect(player.getProductionForTest()).deep.eq(Units.of({megacredits: 3, heat: 1}));
+  });
+
+  it('play on hazard space', function() {
+    player.setProductionForTest({energy: 1});
+    player.megaCredits = 8; // Placing on a hazard space costs 8MC
+
+    const hazardSpace = player.game.board.getAvailableSpacesForCity(player)[0];
+    hazardSpace.bonus = [SpaceBonus.HEAT];
+    hazardSpace.tile = {tileType: TileType.DUST_STORM_MILD, protectedHazard: false};
+
+    const action = card.play(player);
+
+    const selectSpace = TestingUtils.cast(action, SelectSpace);
+    expect(selectSpace.availableSpaces).contains(hazardSpace);
+    selectSpace.cb(hazardSpace);
+
+    expect(hazardSpace.tile?.tileType).eq(TileType.CITY);
+    expect(hazardSpace.player).eq(player);
+
+    TestingUtils.runAllActions(game);
+    expect(player.getResourcesForTest()).deep.eq(Units.of({}));
+    expect(player.getProductionForTest()).deep.eq(Units.of({megacredits: 3}));
   });
 
   function singleResourceTest(spaceBonus: SpaceBonus | Array<SpaceBonus>, resources: Partial<Units>, production: Partial<Units>) {

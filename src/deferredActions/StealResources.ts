@@ -21,9 +21,7 @@ export class StealResources implements DeferredAction {
   public execute() {
     if (this.player.game.isSoloMode()) {
       this.player.addResource(this.resource, this.count);
-      if (this.player.game.monsInsuranceOwner === this.player.id) {
-        (this.player.corporationCard as MonsInsurance).payDebt(this.player, undefined);
-      }
+      MonsInsurance.resolveInsuranceInSoloGame(this.player);
       this.stealComplete();
       return undefined;
     }

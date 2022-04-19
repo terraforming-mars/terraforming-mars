@@ -311,13 +311,6 @@ export class Player {
     throw new Error('Resource ' + resource + ' not found');
   }
 
-  private resolveMonsInsurance() {
-    if (this.game.monsInsuranceOwner !== undefined && this.game.monsInsuranceOwner !== this.id) {
-      const monsInsuranceOwner = this.game.getPlayerById(this.game.monsInsuranceOwner);
-      (monsInsuranceOwner.corporationCard as MonsInsurance).payDebt(monsInsuranceOwner, this);
-    }
-  }
-
   private logUnitDelta(
     resource: Resources,
     amount: number,
@@ -420,7 +413,7 @@ export class Player {
 
     // Mons Insurance hook
     if (options?.from !== undefined && delta < 0 && (options.from instanceof Player && options.from.id !== this.id)) {
-      this.resolveMonsInsurance();
+      MonsInsurance.resolveInsurance(this);
     }
   }
 
@@ -452,7 +445,7 @@ export class Player {
 
     // Mons Insurance hook
     if (options?.from !== undefined && delta < 0 && (options.from instanceof Player && options.from.id !== this.id)) {
-      this.resolveMonsInsurance();
+      MonsInsurance.resolveInsurance(this);
     }
 
     // Manutech hook
@@ -710,7 +703,7 @@ export class Player {
       if (amountRemoved === 0) return;
       card.resourceCount -= amountRemoved;
 
-      if (removingPlayer !== undefined && removingPlayer !== this) this.resolveMonsInsurance();
+      if (removingPlayer !== undefined && removingPlayer !== this) MonsInsurance.resolveInsurance(this);
 
       this.game.log('${0} removed ${1} resource(s) from ${2}\'s ${3}', (b) =>
         b.player(removingPlayer ?? this)

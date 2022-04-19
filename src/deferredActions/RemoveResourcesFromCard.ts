@@ -28,9 +28,7 @@ export class RemoveResourcesFromCard implements DeferredAction {
 
   public execute() {
     if (this.ownCardsOnly === false && this.player.game.isSoloMode()) {
-      if (this.player.game.monsInsuranceOwner === this.player.id) {
-        (this.player.corporationCard as MonsInsurance).payDebt(this.player, undefined);
-      }
+      MonsInsurance.resolveInsuranceInSoloGame(this.player);
       return undefined;
     }
 

@@ -18,9 +18,7 @@ export class RemoveAnyPlants implements DeferredAction {
     if (this.player.game.isSoloMode()) {
       // Crash site cleanup hook
       this.player.game.someoneHasRemovedOtherPlayersPlants = true;
-      if (this.player.game.monsInsuranceOwner === this.player.id) {
-        (this.player.corporationCard as MonsInsurance).payDebt(this.player, undefined);
-      }
+      MonsInsurance.resolveInsuranceInSoloGame(this.player);
       return undefined;
     }
 

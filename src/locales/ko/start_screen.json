@@ -1,6 +1,8 @@
 {
-    "TERRAFORMING": "테　라　포　밍",
-    "MARS": "마 스",
+    "__TERRAFORMING__": "테　라　포　밍",
+    "__MARS__": "마 스",
+    "TERRAFORMING": "TERRAFORMING",
+    "MARS": "MARS",
     "New game": "새 게임",
     "Solo challenge": "1인 도전",
     "Cards list": "카드 목록 보기",

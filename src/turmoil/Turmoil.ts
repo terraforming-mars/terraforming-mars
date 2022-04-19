@@ -129,13 +129,9 @@ export class Turmoil {
   public initGlobalEvent(game: Game) {
     // Draw the first global event to setup the game
     this.comingGlobalEvent = this.globalEventDealer.draw();
-    if (this.comingGlobalEvent !== undefined) {
-      this.sendDelegateToParty('NEUTRAL', this.comingGlobalEvent.revealedDelegate, game);
-    }
+    this.addNeutralDelegate(this.comingGlobalEvent?.revealedDelegate, game);
     this.distantGlobalEvent = this.globalEventDealer.draw();
-    if (this.distantGlobalEvent !== undefined) {
-      this.sendDelegateToParty('NEUTRAL', this.distantGlobalEvent.revealedDelegate, game);
-    }
+    this.addNeutralDelegate(this.distantGlobalEvent?.revealedDelegate, game);
   }
 
   public getPartyByName(name: PartyName): IParty {
@@ -286,17 +282,20 @@ export class Turmoil {
     }
     // 4.a - Coming Event is now Current event. Add neutral delegate.
     this.currentGlobalEvent = this.comingGlobalEvent;
-    if (this.currentGlobalEvent) {
-      this.sendDelegateToParty('NEUTRAL', this.currentGlobalEvent.currentDelegate, game);
-    }
+    this.addNeutralDelegate(this.currentGlobalEvent?.currentDelegate, game);
     // 4.b - Distant Event is now Coming Event
     this.comingGlobalEvent = this.distantGlobalEvent;
     // 4.c - Draw the new distant event and add neutral delegate
     this.distantGlobalEvent = this.globalEventDealer.draw();
-    if (this.distantGlobalEvent) {
-      this.sendDelegateToParty('NEUTRAL', this.distantGlobalEvent.revealedDelegate, game);
-    }
+    this.addNeutralDelegate(this.distantGlobalEvent?.revealedDelegate, game);
     game.log('Turmoil phase has been resolved');
+  }
+
+  private addNeutralDelegate(partyName: PartyName | undefined, game: Game) {
+    if (partyName) {
+      this.sendDelegateToParty('NEUTRAL', partyName, game);
+      game.log('A neutral delegate was added to the ${0} party', (b) => b.partyName(partyName));
+    }
   }
 
   // Ruling Party changes

@@ -5,13 +5,14 @@ import {DeferredAction, Priority} from '../deferredActions/DeferredAction';
 import {Player} from '../Player';
 import {SelectResources} from '../inputs/SelectResources';
 
-export class GrantVenusAltTrackBonusDeferred implements DeferredAction {
-  public priority = Priority.GAIN_RESOURCE_OR_PRODUCTION;
+export class GrantVenusAltTrackBonusDeferred extends DeferredAction {
   constructor(
-    public player: Player,
+    player: Player,
     public standardResourceCount: number,
     public wildResource: boolean,
-  ) { }
+  ) {
+    super(player, Priority.GAIN_RESOURCE_OR_PRODUCTION);
+  }
 
   private newSelectResources(count: number) {
     return new SelectResources(

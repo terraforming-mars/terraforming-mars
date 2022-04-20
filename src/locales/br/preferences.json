@@ -18,7 +18,6 @@
     "Hide sidebar notification": "Esconder notificações da barra lateral",
     "Hide tile confirmation": "Confirmação ao ocultar tile",
     "Hide discount on cards": "Esconder desconto nas cartas",
-    "Show card numbers (req. refresh)": "Mostrar número da carta (requer atualizar)",
     "Learner Mode (req. refresh)": "Modo Aprendizado (requer atualizar)",
     "Language": "Idioma",
     "refresh page": "atualizar página",
@@ -30,5 +29,6 @@
     "Chinese": "Chinês",
     "Spanish": "Espanhol",
     "Polish": "Polonês",
+    "한국어 (Korean)": "한국어 (Coreano)",
     "Ok": "Ok"
 }

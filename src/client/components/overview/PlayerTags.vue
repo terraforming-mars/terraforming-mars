@@ -7,30 +7,19 @@
                 </div>
                 <tag-count :tag="'tr'" :count="player.terraformRating" :size="'big'" :type="'main'"/>
                 <div class="tag-and-discount">
-                  <PlayerTagDiscount v-if="getTagDiscountAmount('all') > 0" :amount="getTagDiscountAmount('all')" :color="player.color"  :data-test="'discount-all'"/>
+                  <PlayerTagDiscount v-if="all.discount" :amount="all.discount" :color="player.color"  :data-test="'discount-all'"/>
                   <tag-count :tag="'cards'" :count="cardsInHandCount" :size="'big'" :type="'main'"/>
                 </div>
             </div>
             <div class="player-tags-secondary">
-                <template v-if="showShortTags">
-                  <div class="tag-count-container" v-for="tag in player.tags" :key="tag.tag">
-                    <div class="tag-and-discount">
-                      <PlayerTagDiscount v-if="getTagDiscountAmount(tag.tag) > 0" :amount="getTagDiscountAmount(tag.tag)" :color="player.color" />
-                      <PointsPerTag v-if="getVPs(tag.tag) !== ''" :amount="getVPs(tag.tag)" />
-                      <tag-count :tag="tag.tag" :count="tag.count" :size="'big'" :type="'secondary'"/>
-                    </div>
-                  </div>
-                </template>
-                <template v-else>
-                    <div class="tag-count-container" v-for="tagName in tagsPlaceholders" :key="tagName">
-                      <div class="tag-and-discount" v-if="tagName !== 'separator'">
-                        <PlayerTagDiscount v-if="getTagDiscountAmount(tagName) > 0" :color="player.color" :amount="getTagDiscountAmount(tagName)" :data-test="'discount-' + tagName"/>
-                        <PointsPerTag v-if="getVPs(tagName) !== ''" :amount="getVPs(tagName)" :data-test="'vps-' + tagName" />
-                        <tag-count :tag="tagName" :count="getTagCount(tagName)" :size="'big'" :type="'secondary'"/>
-                      </div>
-                      <div v-else class="tag-separator"></div>
-                    </div>
-                </template>
+              <div class="tag-count-container" v-for="tagDetail of tags()" :key="tagDetail.name">
+                <div class="tag-and-discount" v-if="tagDetail.name !== 'separator'">
+                  <PlayerTagDiscount v-if="tagDetail.discount > 0" :color="player.color" :amount="tagDetail.discount" :data-test="'discount-' + tagDetail.name"/>
+                  <PointsPerTag v-if="getVPs(tagDetail) !== ''" :amount="getVPs(tagDetail)" :data-test="'vps-' + tagDetail.name" />
+                  <tag-count :tag="tagDetail.name" :count="tagDetail.count" :size="'big'" :type="'secondary'"/>
+                </div>
+                <div v-else-if="tagDetail.name === 'separator'" class="tag-separator"></div>
+              </div>
             </div>
         </div>
 </template>
@@ -51,8 +40,14 @@ import {Shared} from '@/client/components/overview/Shared';
 import {getCard} from '@/client/cards/ClientCardManifest';
 
 type InterfaceTagsType = Tags | SpecialTags | 'all' | 'separator';
+type TagDetail = {
+  name: InterfaceTagsType;
+  discount: number;
+  points: number;
+  count: number;
+};
 
-export const PLAYER_INTERFACE_TAGS_ORDER: Array<InterfaceTagsType> = [
+const ORDER: Array<InterfaceTagsType> = [
   Tags.BUILDING,
   Tags.SPACE,
   Tags.SCIENCE,
@@ -75,13 +70,30 @@ export const PLAYER_INTERFACE_TAGS_ORDER: Array<InterfaceTagsType> = [
   SpecialTags.COLONY_COUNT,
 ];
 
-const isTagInGame = (tag: InterfaceTagsType, game: GameModel) => {
+const isInGame = (tag: InterfaceTagsType, game: GameModel): boolean => {
   if (game.gameOptions.coloniesExtension === false && tag === SpecialTags.COLONY_COUNT) return false;
   if (game.turmoil === undefined && tag === SpecialTags.INFLUENCE) return false;
   if (game.gameOptions.venusNextExtension === false && tag === Tags.VENUS) return false;
   if (game.gameOptions.moonExpansion === false && tag === Tags.MOON) return false;
   if (game.gameOptions.pathfindersExpansion === false && tag === Tags.MARS) return false;
   return true;
+};
+
+const getTagCount = (tagName: InterfaceTagsType, player: PublicPlayerModel): number => {
+  if (tagName === SpecialTags.COLONY_COUNT) {
+    return player.coloniesCount || 0;
+  }
+  if (tagName === SpecialTags.INFLUENCE) {
+    return player.influence || 0;
+  }
+  if (tagName === SpecialTags.CITY_COUNT) {
+    return player.citiesCount || 0;
+  }
+  if (tagName === SpecialTags.NONE) {
+    return player.noTagsCount || 0;
+  }
+
+  return player.tags.find((tag: ITagCount) => tag.tag === tagName)?.count ?? 0;
 };
 
 export default Vue.extend({
@@ -98,38 +110,50 @@ export default Vue.extend({
     },
   },
   data() {
-    type TagModifier = {
-      discount: number;
-      points: number;
-    };
-    type TagModifiers = Record<InterfaceTagsType, TagModifier>;
+    type TagDetails = Record<InterfaceTagsType, TagDetail>;
 
-    const x = PLAYER_INTERFACE_TAGS_ORDER.map((key) => [key, {discount: 0, points: 0}]);
-    const modifiers: TagModifiers = Object.fromEntries(x);
-    modifiers['all'] = {discount: this.player?.cardDiscount ?? 0, points: 0};
+    // Start by giving every entry a default value
+    // Ideally, remove 'x' and inline it into Object.fromEntries, but Typescript doesn't like it.
+    const x = ORDER.map((key) => [key, {name: key, discount: 0, points: 0, count: getTagCount(key, this.player)}]);
+    const details: TagDetails = Object.fromEntries(x);
+
+    // Initialize all's card discount.
+    details['all'] = {name: 'all', discount: this.player?.cardDiscount ?? 0, points: 0, count: 0};
 
     const cards = this.player.corporationCard !== undefined ?
       [...this.player.playedCards, this.player.corporationCard] :
       this.player.playedCards;
 
+    // For each card
     for (const card of cards) {
+      // Calculate discount
       for (const discount of card.discount ?? []) {
         const tag = discount.tag ?? 'all';
-        modifiers[tag].discount += discount.amount;
+        details[tag].discount += discount.amount;
       }
 
       const vps = getCard(card.name)?.victoryPoints;
       if (vps !== undefined && typeof(vps) !== 'number' && vps !== 'special' && vps.type !== 'resource') {
-        modifiers[vps.type].points += (vps.points / vps.per);
+        details[vps.type].points += (vps.points / vps.per);
       }
     }
 
+    // Other modifiers
     if (this.playerView.game.turmoil?.ruling === PartyName.UNITY &&
       this.playerView.game.turmoil.politicalAgendas?.unity.policyId === 'up04') {
-      modifiers[Tags.SPACE].discount += 2;
+      details[Tags.SPACE].discount += 2;
     }
+
+    // Put them in order.
+    const tagsInOrder: Array<TagDetail> = [];
+    for (const tag of ORDER) {
+      const entry = details[tag];
+      tagsInOrder.push(entry);
+    }
+
     return {
-      modifiers,
+      all: details['all'],
+      tagsInOrder,
     };
   },
 
@@ -142,30 +166,11 @@ export default Vue.extend({
     isThisPlayer(): boolean {
       return this.player.color === this.playerView.thisPlayer?.color;
     },
-    showColonyCount(): boolean {
-      return this.playerView.game.gameOptions.coloniesExtension;
-    },
-    showInfluence(): boolean {
-      return this.playerView.game.turmoil !== undefined;
-    },
-    tagsPlaceholders(): Array<InterfaceTagsType> {
-      const tags = PLAYER_INTERFACE_TAGS_ORDER;
-      return tags.filter((tag) => {
-        return isTagInGame(tag, this.playerView.game);
-      });
-    },
     cardsInHandCount(): number {
-      if (this.player.cardsInHandNbr) {
-        return this.player.cardsInHandNbr;
-      }
-      return 0;
+      return this.player.cardsInHandNbr ?? 0;
     },
     hideVpCount(): boolean {
       return !this.playerView.game.gameOptions.showOtherPlayersVP && !this.isThisPlayer;
-    },
-    showShortTags(): boolean {
-      if (this.hideZeroTags === true) return true;
-      return Shared.isTagsViewConcise(this.$root);
     },
     isEscapeVelocityOn: function(): boolean {
       return this.playerView.game.gameOptions.escapeVelocityMode;
@@ -176,13 +181,9 @@ export default Vue.extend({
   },
 
   methods: {
-    getTagDiscountAmount(tag: InterfaceTagsType): number {
-      return this.modifiers[tag].discount;
-    },
-    getVPs(tag: InterfaceTagsType) {
-      const modifier = this.modifiers[tag];
-      const integer = Math.floor(modifier.points);
-      const fraction = modifier.points - integer;
+    getVPs(detail: TagDetail) {
+      const integer = Math.floor(detail.points);
+      const fraction = detail.points - integer;
       let vulgarFraction = '';
       if (fraction === 0.5) {
         vulgarFraction = '½';
@@ -191,28 +192,14 @@ export default Vue.extend({
       }
       return `${integer || ''}${vulgarFraction}`;
     },
-    getTagCount(tagName: InterfaceTagsType): number {
-      if (tagName === SpecialTags.COLONY_COUNT && this.showColonyCount) {
-        return this.player.coloniesCount || 0;
-      }
-      if (tagName === SpecialTags.INFLUENCE && this.showInfluence) {
-        return this.player.influence || 0;
-      }
-      if (tagName === SpecialTags.CITY_COUNT) {
-        return this.player.citiesCount || 0;
-      }
-      if (tagName === SpecialTags.NONE) {
-        return this.player.noTagsCount || 0;
-      }
-      const basicTagFound = this.player.tags.find(
-        (tag: ITagCount) => tag.tag === tagName,
-      );
-
-      if (basicTagFound !== undefined) {
-        return basicTagFound.count;
-      }
-
-      return 0;
+    tags(): Array<TagDetail> {
+      return this.tagsInOrder.filter((entry) => {
+        if (!isInGame(entry.name, this.playerView.game)) return false;
+        if (entry.count === 0) {
+          return this.hideZeroTags || (Shared.isTagsViewConcise(this.$root) ?? true);
+        }
+        return true;
+      });
     },
   },
 });

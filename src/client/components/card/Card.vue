@@ -7,7 +7,6 @@
           </div>
           <CardTitle :title="card.name" :type="getCardType()"/>
           <CardContent v-if="getCardMetadata() !== undefined" :metadata="getCardMetadata()" :requirements="getCardRequirements()" :isCorporation="isCorporationCard()"/>
-          <CardNumber v-if="getCardMetadata() !== undefined" :number="getCardNumber()"/>
       </div>
       <CardExpansion :expansion="getCardExpansion()" :isCorporation="isCorporationCard()"/>
       <CardResourceCounter v-if="hasResourceType" :amount="getResourceAmount(card)" :type="resourceType" />
@@ -22,7 +21,6 @@ import Vue from 'vue';
 
 import {CardModel} from '@/common/models/CardModel';
 import CardTitle from './CardTitle.vue';
-import CardNumber from './CardNumber.vue';
 import CardResourceCounter from './CardResourceCounter.vue';
 import CardCost from './CardCost.vue';
 import CardExtraContent from './CardExtraContent.vue';
@@ -47,7 +45,6 @@ export default Vue.extend({
     CardExpansion,
     CardTags,
     CardContent,
-    CardNumber,
   },
   props: {
     'card': {
@@ -99,9 +96,6 @@ export default Vue.extend({
     },
     getCardType(): CardType {
       return this.cardInstance.cardType;
-    },
-    getCardNumber(): string {
-      return String(this.getCardMetadata()?.cardNumber);
     },
     getCardClasses(card: CardModel): string {
       const classes = ['card-container', 'filterDiv', 'hover-hide-res'];

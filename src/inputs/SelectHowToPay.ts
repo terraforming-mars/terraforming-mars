@@ -27,6 +27,9 @@ export class SelectHowToPay implements PlayerInput {
   public process(input: InputResponse, player: Player) {
     player.checkInputLength(input, 1, 1);
     const howToPay: HowToPay = player.parseHowToPayJSON(input[0][0]);
+    if (!player.canSpend(howToPay)) {
+      throw new Error('You do not have that many resources');
+    }
     return this.cb(howToPay);
   }
 }

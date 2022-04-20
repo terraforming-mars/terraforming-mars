@@ -48,16 +48,10 @@ export class SelectHowToPayDeferred extends DeferredAction {
       this.options.canUseData || false,
       this.amount,
       (howToPay: HowToPay) => {
-        this.player.deductResource(Resources.STEEL, howToPay.steel);
-        this.player.deductResource(Resources.TITANIUM, howToPay.titanium);
-        this.player.deductResource(Resources.MEGACREDITS, howToPay.megaCredits);
-        this.player.deductResource(Resources.HEAT, howToPay.heat);
-        if (howToPay.seeds > 0 && this.player.corporationCard !== undefined) {
-          this.player.removeResourceFrom(this.player.corporationCard, howToPay.seeds);
+        if (!this.player.canSpend(howToPay)) {
+          throw new Error('You do not have that many resources to spend');
         }
-        if (howToPay.data > 0 && this.player.corporationCard !== undefined) {
-          this.player.removeResourceFrom(this.player.corporationCard, howToPay.data);
-        }
+        this.player.pay(howToPay);
         this.options.afterPay?.();
         return undefined;
       },

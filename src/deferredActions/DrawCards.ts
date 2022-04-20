@@ -3,7 +3,7 @@ import {Tags} from '../common/cards/Tags';
 import {IProjectCard} from '../cards/IProjectCard';
 import {DeferredAction, Priority} from './DeferredAction';
 import {SelectCard} from '../inputs/SelectCard';
-import {ResourceType} from '../common/ResourceType';
+import {CardResource} from '../common/CardResource';
 import {CardType} from '../common/cards/CardType';
 import {SelectHowToPayDeferred} from './SelectHowToPayDeferred';
 import {LogHelper} from '../LogHelper';
@@ -14,14 +14,15 @@ enum LogType {
   DREW_VERBOSE='drew_verbose',
 }
 
-export class DrawCards<T extends undefined | SelectCard<IProjectCard>> implements DeferredAction {
-  public priority = Priority.DRAW_CARDS;
+export class DrawCards<T extends undefined | SelectCard<IProjectCard>> extends DeferredAction {
   private constructor(
-    public player: Player,
+    player: Player,
     public count: number = 1,
     public options: DrawCards.AllOptions = {},
     public cb: (cards: Array<IProjectCard>) => T,
-  ) { }
+  ) {
+    super(player, Priority.DRAW_CARDS);
+  }
 
   public execute() : T {
     const game = this.player.game;
@@ -117,7 +118,7 @@ export class DrawCards<T extends undefined | SelectCard<IProjectCard>> implement
 export namespace DrawCards {
   export interface DrawOptions {
     tag?: Tags,
-    resource?: ResourceType,
+    resource?: CardResource,
     cardType?: CardType,
     include?: (card: IProjectCard) => boolean,
   }

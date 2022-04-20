@@ -32,9 +32,9 @@ import {Phase} from './common/Phase';
 import {Player} from './Player';
 import {PlayerId, GameId, SpectatorId, SpaceId} from './common/Types';
 import {PlayerInput} from './PlayerInput';
-import {ResourceType} from './common/ResourceType';
+import {CardResource} from './common/CardResource';
 import {Resources} from './common/Resources';
-import {DeferredAction, Priority} from './deferredActions/DeferredAction';
+import {DeferredAction, Priority, SimpleDeferredAction} from './deferredActions/DeferredAction';
 import {DeferredActionsQueue} from './deferredActions/DeferredActionsQueue';
 import {SelectHowToPayDeferred} from './deferredActions/SelectHowToPayDeferred';
 import {SelectInitialCards} from './inputs/SelectInitialCards';
@@ -635,7 +635,7 @@ export class Game {
     // trigger other corp's effect, e.g. SaturnSystems,PharmacyUnion,Splice
     for (const somePlayer of this.getPlayersInGenerationOrder()) {
       if (somePlayer !== player && somePlayer.corporationCard !== undefined && somePlayer.corporationCard.onCorpCardPlayed !== undefined) {
-        this.defer(new DeferredAction(
+        this.defer(new SimpleDeferredAction(
           player,
           () => {
             if (somePlayer.corporationCard !== undefined && somePlayer.corporationCard.onCorpCardPlayed !== undefined) {
@@ -1413,20 +1413,20 @@ export class Game {
       // ignore
       break;
     case SpaceBonus.MICROBE:
-      this.defer(new AddResourcesToCard(player, ResourceType.MICROBE, {count: count}));
+      this.defer(new AddResourcesToCard(player, CardResource.MICROBE, {count: count}));
       break;
     case SpaceBonus.DATA:
-      this.defer(new AddResourcesToCard(player, ResourceType.DATA, {count: count}));
+      this.defer(new AddResourcesToCard(player, CardResource.DATA, {count: count}));
       break;
     case SpaceBonus.ENERGY_PRODUCTION:
-      player.addProduction(Resources.ENERGY, count);
+      player.addProduction(Resources.ENERGY, count, {log: true});
       break;
     case SpaceBonus.SCIENCE:
-      this.defer(new AddResourcesToCard(player, ResourceType.SCIENCE, {count: count}));
+      this.defer(new AddResourcesToCard(player, CardResource.SCIENCE, {count: count}));
       break;
     case SpaceBonus.TEMPERATURE:
       if (this.getTemperature() < constants.MAX_TEMPERATURE) {
-        this.defer(new DeferredAction(player, () => this.increaseTemperature(player, 1)));
+        this.defer(new SimpleDeferredAction(player, () => this.increaseTemperature(player, 1)));
         this.defer(new SelectHowToPayDeferred(
           player,
           constants.VASTITAS_BOREALIS_BONUS_TEMPERATURE_COST,
@@ -1534,7 +1534,7 @@ export class Game {
     throw new Error(`No player has played ${name}`);
   }
 
-  public getCardsInHandByResource(player: Player, resourceType: ResourceType) {
+  public getCardsInHandByResource(player: Player, resourceType: CardResource) {
     return player.cardsInHand.filter((card) => card.resourceType === resourceType);
   }
 

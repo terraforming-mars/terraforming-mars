@@ -4,7 +4,7 @@ import {Card} from '../Card';
 import {ICorporationCard} from '../corporation/ICorporationCard';
 import {IActionCard, ICard} from '../ICard';
 import {CardName} from '../../common/cards/CardName';
-import {ResourceType} from '../../common/ResourceType';
+import {CardResource} from '../../common/CardResource';
 import {SelectOption} from '../../inputs/SelectOption';
 import {SelectCard} from '../../inputs/SelectCard';
 import {OrOptions} from '../../inputs/OrOptions';
@@ -22,7 +22,7 @@ export class Astrodrill extends Card implements IActionCard, ICorporationCard {
       name: CardName.ASTRODRILL,
       tags: [Tags.SPACE],
       startingMegaCredits: 35,
-      resourceType: ResourceType.ASTEROID,
+      resourceType: CardResource.ASTEROID,
 
       metadata: {
         cardNumber: 'R21',
@@ -51,7 +51,7 @@ export class Astrodrill extends Card implements IActionCard, ICorporationCard {
   }
 
   public action(player: Player) {
-    const asteroidCards = player.getResourceCards(ResourceType.ASTEROID);
+    const asteroidCards = player.getResourceCards(CardResource.ASTEROID);
     const opts: Array<SelectOption | SelectCard<ICard>> = [];
 
     const gainStandardResource = new SelectOption('Gain a standard resource', 'Gain', () => {

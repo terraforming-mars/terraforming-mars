@@ -8,7 +8,7 @@ import {SelectHowToPayDeferred} from '../../deferredActions/SelectHowToPayDeferr
 import {Player} from '../../Player';
 import {CardName} from '../../common/cards/CardName';
 import {MAX_OXYGEN_LEVEL, MAX_TEMPERATURE, MAX_VENUS_SCALE, MIN_OXYGEN_LEVEL, MIN_TEMPERATURE, MIN_VENUS_SCALE, POLITICAL_AGENDAS_MAX_ACTION_USES} from '../../common/constants';
-import {DeferredAction} from '../../deferredActions/DeferredAction';
+import {SimpleDeferredAction} from '../../deferredActions/DeferredAction';
 import {RemoveOceanTile} from '../../deferredActions/RemoveOceanTile';
 import {OrOptions} from '../../inputs/OrOptions';
 import {SelectOption} from '../../inputs/SelectOption';
@@ -178,7 +178,7 @@ class RedsPolicy03 implements Policy {
 
           if (orOptions.options.length === 1) return orOptions.options[0].cb();
 
-          game.defer(new DeferredAction(player, () => orOptions));
+          game.defer(new SimpleDeferredAction(player, () => orOptions));
           return undefined;
         },
       },

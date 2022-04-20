@@ -3,7 +3,7 @@ import {Tags} from '../../common/cards/Tags';
 import {CardType} from '../../common/cards/CardType';
 import {Player} from '../../Player';
 import {CardName} from '../../common/cards/CardName';
-import {ResourceType} from '../../common/ResourceType';
+import {CardResource} from '../../common/CardResource';
 import {SelectOption} from '../../inputs/SelectOption';
 import {OrOptions} from '../../inputs/OrOptions';
 import {SelectAmount} from '../../inputs/SelectAmount';
@@ -19,7 +19,7 @@ export class TitanShuttles extends Card implements IProjectCard, IResourceCard {
       tags: [Tags.JOVIAN, Tags.SPACE],
       name: CardName.TITAN_SHUTTLES,
       cardType: CardType.ACTIVE,
-      resourceType: ResourceType.FLOATER,
+      resourceType: CardResource.FLOATER,
       victoryPoints: 1,
 
       metadata: {
@@ -45,13 +45,13 @@ export class TitanShuttles extends Card implements IProjectCard, IResourceCard {
 
   public action(player: Player) {
     if (this.resourceCount === 0) {
-      player.game.defer(new AddResourcesToCard(player, ResourceType.FLOATER, {count: 2, restrictedTag: Tags.JOVIAN, title: 'Add 2 floaters to a Jovian card'}));
+      player.game.defer(new AddResourcesToCard(player, CardResource.FLOATER, {count: 2, restrictedTag: Tags.JOVIAN, title: 'Add 2 floaters to a Jovian card'}));
       return undefined;
     }
 
     return new OrOptions(
       new SelectOption('Add 2 floaters to a Jovian card', 'Add floaters', () => {
-        player.game.defer(new AddResourcesToCard(player, ResourceType.FLOATER, {count: 2, restrictedTag: Tags.JOVIAN}));
+        player.game.defer(new AddResourcesToCard(player, CardResource.FLOATER, {count: 2, restrictedTag: Tags.JOVIAN}));
         return undefined;
       }),
       new SelectAmount(

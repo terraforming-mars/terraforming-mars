@@ -5,13 +5,14 @@ import {SelectOption} from '../inputs/SelectOption';
 import {DeferredAction, Priority} from './DeferredAction';
 import {CardName} from '../common/cards/CardName';
 
-export class RemoveAnyPlants implements DeferredAction {
-  public priority = Priority.ATTACK_OPPONENT;
+export class RemoveAnyPlants extends DeferredAction {
   constructor(
-        public player: Player,
-        public count: number = 1,
-        public title: string = 'Select player to remove up to ' + count + ' plants',
-  ) {}
+    player: Player,
+    public count: number = 1,
+    public title: string = 'Select player to remove up to ' + count + ' plants',
+  ) {
+    super(player, Priority.ATTACK_OPPONENT);
+  }
 
   public execute() {
     if (this.player.game.isSoloMode()) {

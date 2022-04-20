@@ -8,7 +8,7 @@ import {Resources} from '../../common/Resources';
 import {Tags} from '../../common/cards/Tags';
 import {CardRequirements} from '../CardRequirements';
 import {AddResourcesToCard} from '../../deferredActions/AddResourcesToCard';
-import {ResourceType} from '../../common/ResourceType';
+import {CardResource} from '../../common/CardResource';
 import {Units} from '../../common/Units';
 
 export class DesignedOrganisms extends Card implements IProjectCard {
@@ -36,8 +36,8 @@ export class DesignedOrganisms extends Card implements IProjectCard {
   public play(player: Player) {
     player.addResource(Resources.PLANTS, 3);
     player.addProduction(Resources.PLANTS, 2);
-    player.game.defer(new AddResourcesToCard(player, ResourceType.MICROBE, {count: 3}));
-    player.game.defer(new AddResourcesToCard(player, ResourceType.ANIMAL, {count: 1}));
+    player.game.defer(new AddResourcesToCard(player, CardResource.MICROBE, {count: 3}));
+    player.game.defer(new AddResourcesToCard(player, CardResource.ANIMAL, {count: 1}));
     return undefined;
   }
 }

@@ -6,7 +6,7 @@ import {Kelvinists} from '../../src/turmoil/parties/Kelvinists';
 import {Turmoil} from '../../src/turmoil/Turmoil';
 import {TestPlayers} from '../TestPlayers';
 import {CardName} from '../../src/common/cards/CardName';
-import {ResourceType} from '../../src/common/ResourceType';
+import {CardResource} from '../../src/common/CardResource';
 import {AndOptions} from '../../src/inputs/AndOptions';
 
 describe('CommunicationBoom', function() {
@@ -17,14 +17,14 @@ describe('CommunicationBoom', function() {
     const game = Game.newInstance('foobar', [player, player2], player);
     const turmoil = Turmoil.newInstance(game);
 
-    const a = TestingUtils.fakeCard({name: 'A' as CardName, resourceType: ResourceType.MICROBE});
-    const b = TestingUtils.fakeCard({name: 'B' as CardName, resourceType: ResourceType.DATA});
-    const c = TestingUtils.fakeCard({name: 'C' as CardName, resourceType: ResourceType.MICROBE});
-    const d = TestingUtils.fakeCard({name: 'D' as CardName, resourceType: ResourceType.DATA});
+    const a = TestingUtils.fakeCard({name: 'A' as CardName, resourceType: CardResource.MICROBE});
+    const b = TestingUtils.fakeCard({name: 'B' as CardName, resourceType: CardResource.DATA});
+    const c = TestingUtils.fakeCard({name: 'C' as CardName, resourceType: CardResource.MICROBE});
+    const d = TestingUtils.fakeCard({name: 'D' as CardName, resourceType: CardResource.DATA});
     player.playedCards = [a, b, c, d];
 
-    const e = TestingUtils.fakeCard({name: 'E' as CardName, resourceType: ResourceType.DATA});
-    const f = TestingUtils.fakeCard({name: 'F' as CardName, resourceType: ResourceType.DATA});
+    const e = TestingUtils.fakeCard({name: 'E' as CardName, resourceType: CardResource.DATA});
+    const f = TestingUtils.fakeCard({name: 'F' as CardName, resourceType: CardResource.DATA});
     player2.playedCards = [e, f];
 
     player.megaCredits = 8;

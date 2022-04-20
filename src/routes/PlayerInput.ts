@@ -6,6 +6,7 @@ import {Handler} from './Handler';
 import {IContext} from './IHandler';
 import {OrOptions} from '../inputs/OrOptions';
 import {UndoActionOption} from '../inputs/UndoActionOption';
+import {InputResponse} from '../common/inputs/InputResponse';
 
 export class PlayerInput extends Handler {
   public static readonly INSTANCE = new PlayerInput();
@@ -41,7 +42,7 @@ export class PlayerInput extends Handler {
     });
   }
 
-  private isWaitingForUndo(player: Player, entity: Array<Array<string>>): boolean {
+  private isWaitingForUndo(player: Player, entity: InputResponse): boolean {
     const waitingFor = player.getWaitingFor();
     return entity.length > 0 && entity[0].length > 0 &&
            waitingFor instanceof OrOptions && waitingFor.options[Number(entity[0][0])] instanceof UndoActionOption;

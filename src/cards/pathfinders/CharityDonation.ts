@@ -40,11 +40,9 @@ export class CharityDonation extends Card implements IProjectCard {
   }
 }
 
-export class SelectCharityDonationCard implements DeferredAction {
-  public priority = Priority.DRAW_CARDS;
-  public player: Player;
+export class SelectCharityDonationCard extends DeferredAction {
   constructor(private players: Array<Player>, private playerIdx: number, private boundaryIndex: number, private cards: Array<IProjectCard>) {
-    this.player = this.players[playerIdx];
+    super(players[playerIdx], Priority.DRAW_CARDS);
   }
 
   public execute() {

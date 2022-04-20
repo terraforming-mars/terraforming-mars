@@ -3,10 +3,9 @@ import {SelectColony} from '../inputs/SelectColony';
 import {IColony} from '../colonies/IColony';
 import {DeferredAction, Priority} from './DeferredAction';
 
-export class BuildColony implements DeferredAction {
-  public priority = Priority.BUILD_COLONY;
+export class BuildColony extends DeferredAction {
   constructor(
-    public player: Player,
+    player: Player,
     public allowDuplicate: boolean = false,
     public title: string = 'Select where to build a colony',
     public openColonies?: Array<IColony>,
@@ -15,7 +14,9 @@ export class BuildColony implements DeferredAction {
       giveBonusTwice?: boolean,
       cb?: (colony: IColony) => void,
     },
-  ) {}
+  ) {
+    super(player, Priority.BUILD_COLONY);
+  }
 
   public execute() {
     if (this.openColonies === undefined) {

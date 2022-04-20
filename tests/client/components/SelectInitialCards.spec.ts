@@ -3,10 +3,11 @@ import {getLocalVue} from './getLocalVue';
 import {expect} from 'chai';
 import {CardName} from '@/common/cards/CardName';
 import SelectInitialCards from '@/client/components/SelectInitialCards.vue';
+import {InputResponse} from '@/common/inputs/InputResponse';
 import ConfirmDialog from '@/client/components/common/ConfirmDialog.vue';
 import {IPreferences} from '@/client/utils/PreferencesManager';
 
-let savedData: Array<Array<string>> | undefined;
+let savedData: InputResponse | undefined;
 
 describe('SelectInitialCards', function() {
   beforeEach(() => {

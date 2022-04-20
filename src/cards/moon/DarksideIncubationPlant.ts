@@ -3,7 +3,7 @@ import {Player} from '../../Player';
 import {CardType} from '../../common/cards/CardType';
 import {IProjectCard} from '../IProjectCard';
 import {Tags} from '../../common/cards/Tags';
-import {ResourceType} from '../../common/ResourceType';
+import {CardResource} from '../../common/CardResource';
 import {IActionCard} from '../ICard';
 import {OrOptions} from '../../inputs/OrOptions';
 import {SelectOption} from '../../inputs/SelectOption';
@@ -22,7 +22,7 @@ export class DarksideIncubationPlant extends MoonCard implements IActionCard, IP
       tags: [Tags.MICROBE, Tags.MOON],
       cost: 11,
 
-      resourceType: ResourceType.MICROBE,
+      resourceType: CardResource.MICROBE,
       victoryPoints: VictoryPoints.resource(1, 2),
       reserveUnits: Units.of({titanium: 1}),
 

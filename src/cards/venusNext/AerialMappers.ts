@@ -2,7 +2,7 @@ import {IActionCard, ICard, IResourceCard} from '../ICard';
 import {Tags} from '../../common/cards/Tags';
 import {CardType} from '../../common/cards/CardType';
 import {Player} from '../../Player';
-import {ResourceType} from '../../common/ResourceType';
+import {CardResource} from '../../common/CardResource';
 import {OrOptions} from '../../inputs/OrOptions';
 import {SelectOption} from '../../inputs/SelectOption';
 import {SelectCard} from '../../inputs/SelectCard';
@@ -19,7 +19,7 @@ export class AerialMappers extends Card implements IActionCard, IResourceCard {
       cardType: CardType.ACTIVE,
       tags: [Tags.VENUS],
       cost: 11,
-      resourceType: ResourceType.FLOATER,
+      resourceType: CardResource.FLOATER,
       victoryPoints: 1,
 
       metadata: {
@@ -45,7 +45,7 @@ export class AerialMappers extends Card implements IActionCard, IResourceCard {
     return true;
   }
   public action(player: Player) {
-    const floaterCards = player.getResourceCards(ResourceType.FLOATER);
+    const floaterCards = player.getResourceCards(CardResource.FLOATER);
     const opts: Array<SelectOption | SelectCard<ICard>> = [];
 
     // only one valid target - itself

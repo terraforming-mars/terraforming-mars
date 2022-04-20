@@ -3,12 +3,12 @@ import {Player} from '../../Player';
 import {ICorporationCard} from '../corporation/ICorporationCard';
 import {Card} from '../Card';
 import {CardName} from '../../common/cards/CardName';
-import {ResourceType} from '../../common/ResourceType';
+import {CardResource} from '../../common/CardResource';
 import {SelectOption} from '../../inputs/SelectOption';
 import {OrOptions} from '../../inputs/OrOptions';
 import {IProjectCard} from '../IProjectCard';
 import {CardType} from '../../common/cards/CardType';
-import {DeferredAction} from '../../deferredActions/DeferredAction';
+import {SimpleDeferredAction} from '../../deferredActions/DeferredAction';
 import {CardRenderer} from '../render/CardRenderer';
 import {Size} from '../../common/cards/render/Size';
 import {Resources} from '../../common/Resources';
@@ -20,7 +20,7 @@ export class PharmacyUnion extends Card implements ICorporationCard {
       cardType: CardType.CORPORATION,
       name: CardName.PHARMACY_UNION,
       startingMegaCredits: 46, // 54 minus 8 for the 2 deseases
-      resourceType: ResourceType.DISEASE,
+      resourceType: CardResource.DISEASE,
 
       metadata: {
         cardNumber: 'R39',
@@ -81,7 +81,7 @@ export class PharmacyUnion extends Card implements ICorporationCard {
     if (isPharmacyUnion && hasScienceTag && hasMicrobesTag && this.resourceCount === 0) {
       // TODO (Lynesth): Modify this when https://github.com/bafolts/terraforming-mars/issues/1670 is fixed
       if (player.canAfford(0, {tr: {tr: 3}})) {
-        game.defer(new DeferredAction(
+        game.defer(new SimpleDeferredAction(
           player,
           () => {
             const orOptions = new OrOptions(
@@ -114,7 +114,7 @@ export class PharmacyUnion extends Card implements ICorporationCard {
     if (isPharmacyUnion && hasScienceTag) {
       const scienceTags = player.cardTagCount(card, Tags.SCIENCE);
       for (let i = 0; i < scienceTags; i++) {
-        game.defer(new DeferredAction(
+        game.defer(new SimpleDeferredAction(
           player,
           () => {
             if (this.isDisabled) return undefined;
@@ -155,7 +155,7 @@ export class PharmacyUnion extends Card implements ICorporationCard {
 
 
     if (hasMicrobesTag) {
-      game.defer(new DeferredAction(
+      game.defer(new SimpleDeferredAction(
         player,
         () => {
           const microbeTagCount = card.tags.filter((cardTag) => cardTag === Tags.MICROBE).length;

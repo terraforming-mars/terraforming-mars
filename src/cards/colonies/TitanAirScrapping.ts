@@ -3,7 +3,7 @@ import {Tags} from '../../common/cards/Tags';
 import {CardType} from '../../common/cards/CardType';
 import {Player} from '../../Player';
 import {CardName} from '../../common/cards/CardName';
-import {ResourceType} from '../../common/ResourceType';
+import {CardResource} from '../../common/CardResource';
 import {SelectOption} from '../../inputs/SelectOption';
 import {OrOptions} from '../../inputs/OrOptions';
 import {IResourceCard} from '../ICard';
@@ -17,7 +17,7 @@ export class TitanAirScrapping extends Card implements IProjectCard, IResourceCa
       tags: [Tags.JOVIAN],
       name: CardName.TITAN_AIRSCRAPPING,
       cardType: CardType.ACTIVE,
-      resourceType: ResourceType.FLOATER,
+      resourceType: CardResource.FLOATER,
       victoryPoints: 2,
 
       metadata: {

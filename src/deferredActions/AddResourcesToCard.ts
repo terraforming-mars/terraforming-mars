@@ -1,6 +1,6 @@
 import {Player} from '../Player';
 import {SelectCard} from '../inputs/SelectCard';
-import {ResourceType} from '../common/ResourceType';
+import {CardResource} from '../common/CardResource';
 import {ICard} from '../cards/ICard';
 import {Tags} from '../common/cards/Tags';
 import {DeferredAction, Priority} from './DeferredAction';
@@ -15,13 +15,14 @@ export namespace AddResourcesToCard {
   }
 }
 
-export class AddResourcesToCard implements DeferredAction {
-  public priority = Priority.GAIN_RESOURCE_OR_PRODUCTION;
+export class AddResourcesToCard extends DeferredAction {
   constructor(
-        public player: Player,
-        public resourceType: ResourceType | undefined,
-        public options: AddResourcesToCard.Options = {},
-  ) {}
+    player: Player,
+    public resourceType: CardResource | undefined,
+    public options: AddResourcesToCard.Options = {},
+  ) {
+    super(player, Priority.GAIN_RESOURCE_OR_PRODUCTION);
+  }
 
   public execute() {
     const count = this.options.count ?? 1;

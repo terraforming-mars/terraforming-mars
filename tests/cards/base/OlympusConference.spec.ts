@@ -9,6 +9,7 @@ import {Game} from '../../../src/Game';
 import {OrOptions} from '../../../src/inputs/OrOptions';
 import {TestPlayer} from '../../TestPlayer';
 import {TestPlayers} from '../../TestPlayers';
+import {TestingUtils} from '../../TestingUtils';
 
 describe('OlympusConference', function() {
   let card : OlympusConference; let player : TestPlayer; let game : Game;
@@ -50,6 +51,14 @@ describe('OlympusConference', function() {
     expect(card.resourceCount).to.eq(1);
     expect(player.cardsInHand).has.lengthOf(1);
     expect(game.deferredActions).has.lengthOf(0);
+  });
+
+  it('including this', function() {
+    player.cardsInHand = [card];
+    player.playCard(card, undefined);
+    expect(card.resourceCount).to.eq(0);
+    TestingUtils.runAllActions(game);
+    expect(card.resourceCount).to.eq(1);
   });
 
   it('Plays twice for Research', function() {

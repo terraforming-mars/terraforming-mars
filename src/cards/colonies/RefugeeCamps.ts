@@ -4,7 +4,7 @@ import {CardType} from '../../common/cards/CardType';
 import {Player} from '../../Player';
 import {CardName} from '../../common/cards/CardName';
 import {Resources} from '../../common/Resources';
-import {ResourceType} from '../../common/ResourceType';
+import {CardResource} from '../../common/CardResource';
 import {IResourceCard} from '../ICard';
 import {CardRenderer} from '../render/CardRenderer';
 import {Card} from '../Card';
@@ -17,7 +17,7 @@ export class RefugeeCamps extends Card implements IProjectCard, IResourceCard {
       tags: [Tags.EARTH],
       name: CardName.REFUGEE_CAMP,
       cardType: CardType.ACTIVE,
-      resourceType: ResourceType.CAMP,
+      resourceType: CardResource.CAMP,
       victoryPoints: VictoryPoints.resource(1, 1),
 
       metadata: {

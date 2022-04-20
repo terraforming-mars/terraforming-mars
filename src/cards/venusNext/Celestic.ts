@@ -1,7 +1,7 @@
 import {ICorporationCard} from '../corporation/ICorporationCard';
 import {Player} from '../../Player';
 import {Tags} from '../../common/cards/Tags';
-import {ResourceType} from '../../common/ResourceType';
+import {CardResource} from '../../common/CardResource';
 import {IActionCard, ICard, IResourceCard} from '../ICard';
 import {SelectCard} from '../../inputs/SelectCard';
 import {Card} from '../Card';
@@ -17,7 +17,7 @@ export class Celestic extends Card implements IActionCard, ICorporationCard, IRe
       name: CardName.CELESTIC,
       tags: [Tags.VENUS],
       startingMegaCredits: 42,
-      resourceType: ResourceType.FLOATER,
+      resourceType: CardResource.FLOATER,
       cardType: CardType.CORPORATION,
       initialActionText: 'Draw 2 cards with a floater icon on it',
       victoryPoints: VictoryPoints.resource(1, 3),
@@ -67,7 +67,7 @@ export class Celestic extends Card implements IActionCard, ICorporationCard, IRe
 
   public initialAction(player: Player) {
     player.drawCard(2, {
-      include: (card) => Celestic.floaterCards.has(card.name) || card.resourceType === ResourceType.FLOATER,
+      include: (card) => Celestic.floaterCards.has(card.name) || card.resourceType === CardResource.FLOATER,
     });
     return undefined;
   }
@@ -81,7 +81,7 @@ export class Celestic extends Card implements IActionCard, ICorporationCard, IRe
   }
 
   public action(player: Player) {
-    const floaterCards = player.getResourceCards(ResourceType.FLOATER);
+    const floaterCards = player.getResourceCards(CardResource.FLOATER);
     if (floaterCards.length === 1) {
       player.addResourceTo(this, {qty: 1, log: true});
       return undefined;

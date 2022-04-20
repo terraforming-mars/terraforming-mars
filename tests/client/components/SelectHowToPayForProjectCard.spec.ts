@@ -10,7 +10,7 @@ import {Units} from '@/common/Units';
 import {FakeLocalStorage} from './FakeLocalStorage';
 import {PaymentTester} from './PaymentTester';
 import {HowToPay} from '@/common/inputs/HowToPay';
-import {ResourceType} from '@/common/ResourceType';
+import {CardResource} from '@/common/CardResource';
 import {CardModel} from '@/common/models/CardModel';
 import {PreferencesManager} from '@/client/utils/PreferencesManager';
 
@@ -180,8 +180,8 @@ describe('SelectHowToPayForProjectCard', () => {
 
   it('Paying for Stratospheric Birds with Dirigibles while another card has floaters (#4052)', async () => {
     const playedCards: Array<Partial<CardModel>> = [
-      {name: CardName.DIRIGIBLES, resourceType: ResourceType.FLOATER, resources: 3},
-      {name: CardName.AERIAL_MAPPERS, resourceType: ResourceType.FLOATER, resources: 1},
+      {name: CardName.DIRIGIBLES, resourceType: CardResource.FLOATER, resources: 3},
+      {name: CardName.AERIAL_MAPPERS, resourceType: CardResource.FLOATER, resources: 1},
     ];
     const wrapper = setupCardForPurchase(
       CardName.STRATOSPHERIC_BIRDS, 12, {

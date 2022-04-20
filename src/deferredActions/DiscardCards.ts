@@ -3,13 +3,14 @@ import {SelectCard} from '../inputs/SelectCard';
 import {IProjectCard} from '../cards/IProjectCard';
 import {DeferredAction, Priority} from './DeferredAction';
 
-export class DiscardCards implements DeferredAction {
-  public priority = Priority.DISCARD_CARDS;
+export class DiscardCards extends DeferredAction {
   constructor(
-        public player: Player,
-        public count: number = 1,
-        public title: string = 'Select ' + count + ' card' + (count > 1 ? 's' : '') + ' to discard',
-  ) {}
+    player: Player,
+    public count: number = 1,
+    public title: string = 'Select ' + count + ' card' + (count > 1 ? 's' : '') + ' to discard',
+  ) {
+    super(player, Priority.DISCARD_CARDS);
+  }
 
   public execute() {
     if (this.player.cardsInHand.length <= this.count) {

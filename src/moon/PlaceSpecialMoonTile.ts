@@ -4,13 +4,14 @@ import {ITile} from '../ITile';
 import {Player} from '../Player';
 import {MoonExpansion} from './MoonExpansion';
 
-export class PlaceSpecialMoonTile implements DeferredAction {
+export class PlaceSpecialMoonTile extends DeferredAction {
   constructor(
-    public player: Player,
+    player: Player,
     public tile: ITile,
     public title: string = 'Select a space on the Moon for this tile.',
-    public priority = Priority.DEFAULT,
-  ) {}
+  ) {
+    super(player, Priority.DEFAULT);
+  }
 
   public execute() {
     const moonData = MoonExpansion.moonData(this.player.game);

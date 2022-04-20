@@ -3,13 +3,14 @@ import {Player} from '../Player';
 import {DeferredAction, Priority} from './DeferredAction';
 import {Units} from '../common/Units';
 
-export class SelectProductionToLoseDeferred implements DeferredAction {
-  public priority = Priority.LOSE_RESOURCE_OR_PRODUCTION;
+export class SelectProductionToLoseDeferred extends DeferredAction {
   constructor(
-        public player: Player,
-        private unitsToLose: number,
-        private title: string = `Choose ${unitsToLose} unit(s) of production to lose`,
-  ) {}
+    player: Player,
+    private unitsToLose: number,
+    private title: string = `Choose ${unitsToLose} unit(s) of production to lose`,
+  ) {
+    super(player, Priority.LOSE_RESOURCE_OR_PRODUCTION);
+  }
 
   public execute() {
     return new SelectProductionToLose(

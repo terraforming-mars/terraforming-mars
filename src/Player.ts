@@ -31,7 +31,7 @@ import {SelectAmount} from './inputs/SelectAmount';
 import {SelectCard} from './inputs/SelectCard';
 import {SellPatentsStandardProject} from './cards/base/standardProjects/SellPatentsStandardProject';
 import {SendDelegateToArea} from './deferredActions/SendDelegateToArea';
-import {DeferredAction, Priority} from './deferredActions/DeferredAction';
+import {Priority, SimpleDeferredAction} from './deferredActions/DeferredAction';
 import {SelectHowToPayDeferred} from './deferredActions/SelectHowToPayDeferred';
 import {SelectColony} from './inputs/SelectColony';
 import {SelectPartyToSendDelegate} from './inputs/SelectPartyToSendDelegate';
@@ -1624,7 +1624,7 @@ export class Player {
       if (playedCard.onCardPlayed !== undefined) {
         const actionFromPlayedCard: OrOptions | void = playedCard.onCardPlayed(this, card);
         if (actionFromPlayedCard !== undefined) {
-          this.game.defer(new DeferredAction(
+          this.game.defer(new SimpleDeferredAction(
             this,
             () => actionFromPlayedCard,
           ));
@@ -1638,7 +1638,7 @@ export class Player {
       if (somePlayer.corporationCard !== undefined && somePlayer.corporationCard.onCardPlayed !== undefined) {
         const actionFromPlayedCard: OrOptions | void = somePlayer.corporationCard.onCardPlayed(this, card);
         if (actionFromPlayedCard !== undefined) {
-          this.game.defer(new DeferredAction(
+          this.game.defer(new SimpleDeferredAction(
             this,
             () => actionFromPlayedCard,
           ));
@@ -1659,7 +1659,7 @@ export class Player {
         this.game.log('${0} used ${1} action', (b) => b.player(this).card(foundCard));
         const action = foundCard.action(this);
         if (action !== undefined) {
-          this.game.defer(new DeferredAction(
+          this.game.defer(new SimpleDeferredAction(
             this,
             () => action,
           ));
@@ -2027,7 +2027,7 @@ export class Player {
           }],
         },
         corporationCard.initialActionText, () => {
-          game.defer(new DeferredAction(this, () => {
+          game.defer(new SimpleDeferredAction(this, () => {
             if (corporationCard.initialAction) {
               return corporationCard.initialAction(this);
             } else {
@@ -2419,7 +2419,7 @@ export class Player {
   /* Shorthand for deferring things */
   public defer(input: PlayerInput | undefined, priority: Priority = Priority.DEFAULT): void {
     if (input === undefined) return;
-    const action = new DeferredAction(this, () => input, priority);
+    const action = new SimpleDeferredAction(this, () => input, priority);
     this.game.defer(action);
   }
 }

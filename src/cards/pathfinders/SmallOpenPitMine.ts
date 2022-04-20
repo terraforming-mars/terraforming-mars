@@ -5,7 +5,7 @@ import {CardType} from '../../common/cards/CardType';
 import {CardName} from '../../common/cards/CardName';
 import {CardRenderer} from '../render/CardRenderer';
 import {Tags} from '../../common/cards/Tags';
-import {DeferredAction} from '../../deferredActions/DeferredAction';
+import {SimpleDeferredAction} from '../../deferredActions/DeferredAction';
 import {OrOptions} from '../../inputs/OrOptions';
 import {SelectOption} from '../../inputs/SelectOption';
 import {Resources} from '../../common/Resources';
@@ -29,7 +29,7 @@ export class SmallOpenPitMine extends Card implements IProjectCard {
   }
 
   public produce(player: Player) {
-    player.game.defer(new DeferredAction(player, () => {
+    player.game.defer(new SimpleDeferredAction(player, () => {
       return new OrOptions(
         new SelectOption('Increase your steel production 2 steps', 'Increase', () => {
           player.addProduction(Resources.STEEL, 2, {log: true});

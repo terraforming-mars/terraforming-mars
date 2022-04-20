@@ -16,7 +16,7 @@ import {PLAYER_DELEGATES_COUNT} from '../common/constants';
 import {PoliticalAgendasData, PoliticalAgendas} from './PoliticalAgendas';
 import {AgendaStyle} from '../common/turmoil/Types';
 import {CardName} from '../common/cards/CardName';
-import {DeferredAction} from '../deferredActions/DeferredAction';
+import {SimpleDeferredAction} from '../deferredActions/DeferredAction';
 
 export type NeutralPlayer = 'NEUTRAL';
 
@@ -330,7 +330,7 @@ export class Turmoil {
         const steps = player.corporationCard?.name === CardName.TEMPEST_CONSULTANCY ? 2 :1;
 
         // Raise TR but after resolving the new policy
-        game.defer(new DeferredAction(player, () => {
+        game.defer(new SimpleDeferredAction(player, () => {
           player.increaseTerraformRatingSteps(steps);
           game.log('${0} is the new chairman and gains ${1} TR', (b) => b.player(player).number(steps));
           return undefined;

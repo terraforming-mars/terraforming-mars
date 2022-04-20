@@ -8,7 +8,7 @@ import {OrOptions} from '../../inputs/OrOptions';
 import {SelectOption} from '../../inputs/SelectOption';
 import {CardName} from '../../common/cards/CardName';
 import {CardResource} from '../../common/CardResource';
-import {DeferredAction} from '../../deferredActions/DeferredAction';
+import {SimpleDeferredAction} from '../../deferredActions/DeferredAction';
 import {CardRenderer} from '../render/CardRenderer';
 import {played} from '../Options';
 
@@ -45,7 +45,7 @@ export class ViralEnhancers extends Card implements IProjectCard {
     }
 
     for (let i = 0; i < resourceCount; i++) {
-      player.game.defer(new DeferredAction(
+      player.game.defer(new SimpleDeferredAction(
         player,
         () => new OrOptions(
           new SelectOption('Add resource to card ' + card.name, 'Add resource', () => {

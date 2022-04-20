@@ -13,7 +13,7 @@ import {IAresData, IMilestoneCount} from '../common/ares/IAresData';
 import {IAdjacencyCost} from './IAdjacencyCost';
 import {Multiset} from '../utils/Multiset';
 import {Phase} from '../common/Phase';
-import {DeferredAction} from '../deferredActions/DeferredAction';
+import {SimpleDeferredAction} from '../deferredActions/DeferredAction';
 import {SelectHowToPayDeferred} from '../deferredActions/SelectHowToPayDeferred';
 import {SelectProductionToLoseDeferred} from '../deferredActions/SelectProductionToLoseDeferred';
 import {_AresHazardPlacement} from './AresHazards';
@@ -73,7 +73,7 @@ export class AresHandler {
       } else if (availableCards.length === 1) {
         player.addResourceTo(availableCards[0], {log: true});
       } else if (availableCards.length > 1) {
-        player.game.defer(new DeferredAction(
+        player.game.defer(new SimpleDeferredAction(
           player,
           () => new SelectCard(
             'Select a card to add an ' + resourceAsText,

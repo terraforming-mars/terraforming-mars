@@ -5,14 +5,15 @@ import {SelectOption} from '../inputs/SelectOption';
 import {DeferredAction, Priority} from './DeferredAction';
 import {CardName} from '../common/cards/CardName';
 
-export class StealResources implements DeferredAction {
-  public priority = Priority.ATTACK_OPPONENT;
+export class StealResources extends DeferredAction {
   constructor(
-        public player: Player,
-        public resource: Resources,
-        public count: number = 1,
-        public title: string = 'Select player to steal up to ' + count + ' ' + resource + ' from',
-  ) {}
+    player: Player,
+    public resource: Resources,
+    public count: number = 1,
+    public title: string = 'Select player to steal up to ' + count + ' ' + resource + ' from',
+  ) {
+    super(player, Priority.ATTACK_OPPONENT);
+  }
 
   // Set this when you want to get a callback when the steal is completed.
   public stealComplete: () => void = () => {};

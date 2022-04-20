@@ -4,20 +4,20 @@ import {SelectSpace} from '../inputs/SelectSpace';
 import {Player} from '../Player';
 import {MoonExpansion} from './MoonExpansion';
 
-export class PlaceMoonMineTile implements DeferredAction {
-  public priority = Priority.DEFAULT;
+export class PlaceMoonMineTile extends DeferredAction {
+  private cb: (space: ISpace) => void = () => {};
+
+  constructor(
+    player: Player,
+    public title: string = 'Select a space on the Moon for a mining tile.',
+  ) {
+    super(player, Priority.DEFAULT);
+  }
 
   public andThen(cb: (space: ISpace) => void) {
     this.cb = cb;
     return this;
   }
-
-  private cb: (space: ISpace) => void = () => {};
-
-  constructor(
-    public player: Player,
-    public title: string = 'Select a space on the Moon for a mining tile.',
-  ) {}
 
   public execute() {
     const moonData = MoonExpansion.moonData(this.player.game);

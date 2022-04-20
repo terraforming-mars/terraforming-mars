@@ -10,16 +10,16 @@ import {DeferredAction, Priority} from './DeferredAction';
 // TODO (kberg chosta): Make this a card attribute instead
 const animalsProtectedCards = [CardName.PETS, CardName.BIOENGINEERING_ENCLOSURE];
 
-export class RemoveResourcesFromCard implements DeferredAction {
-  public priority= Priority.ATTACK_OPPONENT;
+export class RemoveResourcesFromCard extends DeferredAction {
   constructor(
-        public player: Player,
-        public resourceType: CardResource,
-        public count: number = 1,
-        public ownCardsOnly: boolean = false,
-        public mandatory: boolean = true, // Resource must be removed (either it's a cost or the icon is not red-bordered)
-        public title: string = 'Select card to remove ' + count + ' ' + resourceType + '(s)',
+    player: Player,
+    public resourceType: CardResource,
+    public count: number = 1,
+    public ownCardsOnly: boolean = false,
+    public mandatory: boolean = true, // Resource must be removed (either it's a cost or the icon is not red-bordered)
+    public title: string = 'Select card to remove ' + count + ' ' + resourceType + '(s)',
   ) {
+    super(player, Priority.ATTACK_OPPONENT);
     if (ownCardsOnly) {
       this.priority = Priority.LOSE_RESOURCE_OR_PRODUCTION;
     }

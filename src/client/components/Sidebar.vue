@@ -1,11 +1,11 @@
 <template>
 <div :class="'sidebar_cont sidebar '+getSideBarClass()">
   <div class="tm" :title="$t('Generation Marker')">
-    <div class="gen-text">GEN</div>
+    <div class="gen-text" v-i18n>GEN</div>
     <div class="gen-marker">{{ getGenMarker() }}</div>
   </div>
   <div v-if="gameOptions.turmoilExtension" :title="$t('Ruling Party')">
-    <div :class="'party-name party-name-indicator party-name--'+rulingPartyToCss()"> {{ getRulingParty() }}</div>
+    <div :class="'party-name party-name-indicator party-name--'+rulingPartyToCss()"> <span v-i18n>{{ getRulingParty() }}</span></div>
   </div>
   <div class="global_params">
     <global-parameter-value :param="this.globalParameter.TEMPERATURE" :value="this.temperature"></global-parameter-value>

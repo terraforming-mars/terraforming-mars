@@ -8,12 +8,13 @@ import {SelectOption} from '../inputs/SelectOption';
 import {DeferredAction, Priority} from './DeferredAction';
 import {GlobalEventName} from '../common/turmoil/globalEvents/GlobalEventName';
 
-export class CorrosiveRainDeferredAction implements DeferredAction {
-  public priority = Priority.DEFAULT;
+export class CorrosiveRainDeferredAction extends DeferredAction {
   constructor(
-        public player: Player,
-        public title: string = 'Remove 2 floaters from a card or lose up to 10 M€',
-  ) {}
+    player: Player,
+    public title: string = 'Remove 2 floaters from a card or lose up to 10 M€',
+  ) {
+    super(player, Priority.DEFAULT);
+  }
 
   public execute() {
     const floaterCards = this.player.getCardsWithResources(CardResource.FLOATER).filter((card) => card.resourceCount ?? 0 >= 2);

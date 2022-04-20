@@ -6,7 +6,7 @@ import {CardName} from '../../common/cards/CardName';
 import {ALL_PARTIES, Turmoil} from '../../turmoil/Turmoil';
 import {SelectOption} from '../../inputs/SelectOption';
 import {OrOptions} from '../../inputs/OrOptions';
-import {DeferredAction} from '../../deferredActions/DeferredAction';
+import {SimpleDeferredAction} from '../../deferredActions/DeferredAction';
 import {CardRenderer} from '../render/CardRenderer';
 import {Size} from '../../common/cards/render/Size';
 import {PoliticalAgendas} from '../../turmoil/PoliticalAgendas';
@@ -47,7 +47,7 @@ export class ByElection extends PreludeCard implements IProjectCard {
       }),
     )];
 
-    player.game.defer(new DeferredAction(
+    player.game.defer(new SimpleDeferredAction(
       player,
       () => setRulingParty,
     ));

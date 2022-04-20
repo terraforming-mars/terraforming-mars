@@ -4,13 +4,14 @@ import {SelectSpace} from '../inputs/SelectSpace';
 import {Player} from '../Player';
 import {MoonExpansion} from './MoonExpansion';
 
-export class PlaceMoonRoadTile implements DeferredAction {
-  public priority = Priority.DEFAULT;
+export class PlaceMoonRoadTile extends DeferredAction {
   constructor(
-    public player: Player,
+    player: Player,
     public title: string = 'Select a space on the Moon for a road tile.',
     public spaces?: Array<ISpace>,
-  ) {}
+  ) {
+    super(player, Priority.DEFAULT);
+  }
 
   public execute() {
     const moonData = MoonExpansion.moonData(this.player.game);

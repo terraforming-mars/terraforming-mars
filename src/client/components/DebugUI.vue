@@ -6,10 +6,6 @@
             </div>
             <div class="form-group">
               <input class="form-input form-input-line" placeholder="filter" v-model="filterText">
-              <input type="checkbox" name="sortById" id="sortById-checkbox" v-model="sortById">
-              <label for="sortById-checkbox">
-                  <span v-i18n>Sort by ID (work in progress)</span>
-              </label>
             </div>
 
             <div class="create-game-page-column" style = "flex-flow: inherit; ">
@@ -187,7 +183,6 @@ const ALL_MODULES =
 
 export interface DebugUIModel {
   filterText: string,
-  sortById: boolean,
   base: boolean,
   corporateEra: boolean,
   prelude: boolean,
@@ -213,7 +208,6 @@ export default Vue.extend({
   data(): DebugUIModel {
     return {
       filterText: '',
-      sortById: false,
       base: true,
       corporateEra: true,
       prelude: true,
@@ -350,15 +344,7 @@ export default Vue.extend({
     },
     sort(names: Array<CardName>): Array<CardName> {
       const copy = [...names];
-      if (this.$data.sortById) {
-        return copy.sort((a: CardName, b: CardName) => {
-          const an = getCard(a)?.metadata.cardNumber || '';
-          const bn = getCard(b)?.metadata.cardNumber || '';
-          return an.localeCompare(bn);
-        });
-      } else {
-        return copy.sort((a, b) => a.localeCompare(b));
-      }
+      return copy.sort((a, b) => a.localeCompare(b));
     },
     getAllStandardProjectCards() {
       const names = getCards(byType(CardType.STANDARD_PROJECT)).map(toName);

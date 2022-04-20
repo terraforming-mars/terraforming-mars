@@ -3,13 +3,13 @@ import {SelectAmount} from '../inputs/SelectAmount';
 import {Player} from '../Player';
 import {Resources} from '../common/Resources';
 
-export class SellSteel implements DeferredAction {
-  public priority = Priority.DEFAULT;
-
+export class SellSteel extends DeferredAction {
   constructor(
-    public player: Player,
+    player: Player,
     public title: string = 'Sell your steel for 3M€ each.',
-  ) {}
+  ) {
+    super(player, Priority.DEFAULT);
+  }
 
   private logSale(unitsSold: number) {
     this.player.game.log('${0} sold ${1} steel', (b) => b.player(this.player).number(unitsSold));

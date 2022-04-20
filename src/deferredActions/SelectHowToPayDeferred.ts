@@ -4,13 +4,14 @@ import {HowToPay} from '../common/inputs/HowToPay';
 import {DeferredAction, Priority} from './DeferredAction';
 import {Resources} from '../common/Resources';
 
-export class SelectHowToPayDeferred implements DeferredAction {
-  public priority = Priority.DEFAULT;
+export class SelectHowToPayDeferred extends DeferredAction {
   constructor(
-        public player: Player,
-        public amount: number,
-        public options: SelectHowToPayDeferred.Options = {},
-  ) {}
+    player: Player,
+    public amount: number,
+    public options: SelectHowToPayDeferred.Options = {},
+  ) {
+    super(player, Priority.DEFAULT);
+  }
 
   private mustPayWithMegacredits() {
     if (this.player.canUseHeatAsMegaCredits && this.player.heat > 0) {

@@ -39,6 +39,6 @@ for (sourceString in raw_translations) {
     }
   }
   if (missingLocales.length > 0) {
-    console.log(sourceString, ':', missingLocales);
+    console.log('"' + sourceString + '": "' + missingLocales + '"');
   }
 }

@@ -1,0 +1,84 @@
+{
+    "Desperate Measures": "",
+    "Place a bronze cube on a dust storm tile and raise oxygen 1 step, or place a bronze cube on an erosion tile and raise the temperature 1 step. The hazard tile with the bronze cube cannot be removed.": "",
+
+    "Mining Area": "",
+    "Place one of these tiles on an area with a steel or titanium placement bonus, ADJACENT TO ANOTHER OF YOUR TILES. This tile provides an ADJACENCY BONUS of the same resource as the area. Increase your production of that resource 1 step.": "",
+
+    "Industrial Center": "",
+    "Action: Spend 7 M€ to increase your steel production 1 step.": "",
+    "Place this tile adjacent to a city tile. This tile grants an ADJACENCY BONUS of 1 steel.": "",
+
+    "Marketing Experts": "",
+    "Effect: When an ADJACENCY BONUS is collected from a tile you own, you gain 1 M€.": "",
+    "Increase your M€ production 1 step.": "",
+
+    "Bioengineering Enclosure": "",
+    "Action: Remove 1 animal from THIS card to add 1 animal to ANOTHER card.": "",
+    "Requires 1 science tag to play. Add 2 animals to this card. OTHERS MAY NOT REMOVE ANIMALS FROM THIS CARD.": "",
+
+    "Butterfly Effect": "",
+    "Gain 1 TR. Move each individual hazard marker up to 1 step up or down.": "",
+    "All hazard markers": "",
+
+    "Geological Survey": "",
+    "Any max 5 Greeneries": "",
+    "Effect: When placing a tile ON MARS grants you any steel, titanium, or heat, you gain one additional of each of those resources that you gain.": "",
+    "Requires 5 or fewer greeneries on Mars.": "",
+
+    "Ecological Survey": "",
+    "Any 3 Greeneries": "",
+    "Effect: When placing a tile grants you any plants, animals or microbes, you gain one additional of each of those resources that you gain.": "",
+    "Requires 3 greeneries on Mars.": "",
+
+    "Mining Rights": "",
+    "Place one of these tiles on an area with a steel or titanium placement bonus. This tile provides an ADJACENCY BONUS of the same resource as the area. Increase your production of that resource 1 step.": "",
+
+    "Natural Preserve": "",
+    "Oxygen must be 4% or less. Place this tile NEXT TO NO OTHER TILE. The tile grants an ADJACENCY BONUS of of 1 M€. Increase your M€ production 1 step.": "",
+
+    "Ocean Sanctuary": "",
+    "1 VP per animal on this card.": "",
+    "Requires 5 ocean tiles. Place this tile on top of an existing ocean tile. The tile grants an ADJACENCY BONUS of 1 animal. Add 1 animal to this card.": "",
+
+    "Nuclear Zone": "",
+    "Raise the temperature two steps. Place this tile. Players must pay an additional 2M€ when they place a tile with their player marker on it ADJACENT to the Nuclear Zone.": "",
+
+    "Restricted Area": "",
+    "Action: Spend 2 M€ to draw a card.": "",
+    "Place this tile which grants an ADJACENCY BONUS of 1 card.": "",
+
+    "Solar Farm": "",
+    "Place this tile which grants an ADJACENCY BONUS of 2 energy. Increase your power production 1 step for each plant resource on the area where you place the tile.": "",
+
+    "Ecological Zone": "",
+    "Effect: When you play an animal or plant tag INCLUDING THESE, add an animal to this card.": "",
+    "the tile grants an adjacency bonus of 1 animal. 1 VP per 2 animals on this card.": "",
+    "Requires that YOU have a greenery tile. Place this tile adjacent to ANY greenery.": "",
+
+    "Bio-Fertilizer Facility": "",
+    "Requires 1 science tag. Increase your plant production 1 step. Add up to 2 microbes to any card. Place this tile which grants an ADJACENCY BONUS of 1 plant and 1 microbe.": "",
+
+    "Metallic Asteroid": "",
+    "Raise temperature 1 step and gain 1 titanium. Remove up to 4 plants from any player. Place this tile which grants an ADJACENCY BONUS of 1 titanium.": "",
+
+    "Ocean Farm": "",
+    "Requires 4 ocean tiles. Increase your heat production 1 step and increase your plant production 1 step. Place this tile on top of an existing ocean tile. The tile grants an ADJACENCY BONUS of 1 plant.": "",
+
+    "Commercial District": "",
+    "1 VP per adjacent city tile.": "",
+    "Place this tile which grants an ADJACENCY BONUS of 2 M€. Decrease your energy production 1 step and increase your M€ production 4 steps.": "",
+
+    "Ocean City": "",
+    "Requires 6 ocean tiles. Decrease your Energy production 1 step and increase your M€ production 3 steps. Place this tile on top of an existing ocean tile, IGNORING NORMAL PLACEMENT RESTRICTIONS FOR CITIES. The tile counts as a city as well as an ocean.": "Na planszy musi znajdować się przynajmniej 6 obszarów oceanów. Obniż swoją produkcję energii o 1 poziom. Podnieś swoją produkcję M€ o 3 poziomy. Umieść ten specjalny obszar miasta na istniejącym obszarze oceanu, ignorując normalne ograniczenia umieszczania miast. Ten obszar liczy się jako obszar miasta i obszar oceanu.",
+
+    "Lava Flows": "",
+    "Raise temperature 2 steps and place this tile ON EITHER THARSIS THOLUS, ASCRAEUS MONS, PAVONIS MONS OR ARSIA MONS. This tile grants an ADJACENCY BONUS of 2 heat.": "",
+
+    "Mohole Area": "",
+    "Increase your heat production 4 steps. Place this tile ON AN AREA RESERVED FOR OCEAN. The tile grants an ADJACENCY BONUS of 2 heat.": "",
+
+    "Capital": "",
+    "1 additional VP for each ocean tile adjacent to this city tile.": "",
+    "Requires 4 ocean tiles. Place tile with ADJACENCY BONUS of 2 M€. Energy prod -2 and M€ prod +5.": ""
+}

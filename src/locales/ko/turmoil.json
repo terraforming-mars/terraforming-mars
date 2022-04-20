@@ -1,0 +1,41 @@
+{
+  "Turmoil": "격동",
+  "Send a delegate in an area (from lobby)": "로비 층에서 의원석으로 의원 1명 보내기 (공짜)",
+  "Send a delegate in an area (5 M€)": "의원 대기실에서 의원석으로 의원 1명 보내기 (5 M€)",
+  "Policies": "정책",
+  "No ruling Policy": "정책 규칙 없음",
+
+  "Mars First": "화성중심당",
+  "Scientists": "과학당",
+  "Unity": "통합당",
+  "Kelvinists": "켈빈당",
+  "Reds": "적색당",
+  "Greens": "녹색당",
+
+  "mars first": "화성중심당",
+  "scientists": "과학당",
+  "unity": "통합당",
+  "kelvinists": "켈빈당",
+  "reds": "적색당",
+  "greens": "녹색당",
+
+  "Chairman": "의장",
+  "Party leader": "당대표",
+  "2 Party leaders": "당대표 2인",
+
+  "Mars First - (All players receive 1 M€ for each Building tag they have.)": "화성중심당 - ()",
+  "Scientists - (All players receive 1 M€ for each Science tag they have.)": "",
+  "Unity - (All players receive 1 M€ for each Venus tag, Earth tag, and Jovian tag they have.)": "",
+  "Kelvinists - (All players receive 1 M€ for each Heat production they have.)": "",
+  "Reds - (The player with the lowest TR gains 1 TR. Ties are friendly.)": "",
+  "Greens - (All players receive 1 M€ for each Plant tag, Microbe tag, and Animal tag they have.)": "",
+
+
+  "Mars First (Focused on Martian development and independence.)": "",
+  "Scientists (Tech is the door to the future, and Scientists will do anything to open it.)": "",
+  "Unity (Wants to see humanity prosper in the whole solar system.)": "",
+  "Greens (Want to see a new Earth as soon as possible.)": "",
+  "Reds (Wishes to preserve the red planet.)": "",
+  "Kelvinists (Pushes for rapid terraforming, usually employing a heat-first strategy.)": ""
+
+}

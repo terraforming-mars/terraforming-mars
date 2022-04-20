@@ -12,7 +12,7 @@ import {MonsInsurance} from '../cards/promo/MonsInsurance';
 const animalsProtectedCards = [CardName.PETS, CardName.BIOENGINEERING_ENCLOSURE];
 
 export class RemoveResourcesFromCard extends DeferredAction {
-  public priority = Priority.ATTACK_OPPONENT;
+  public override priority = Priority.ATTACK_OPPONENT;
   constructor(
     player: Player,
     public resourceType: CardResource,

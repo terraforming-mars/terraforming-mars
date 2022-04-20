@@ -1,14 +1,24 @@
 <script lang="ts">
 import Vue from 'vue';
+import {WithRefs} from 'vue-typed-refs';
+
 import {PreferencesManager, Preference} from '@/client/utils/PreferencesManager';
 import {LANGUAGES} from '@/common/constants';
+import BugReportDialog from '@/client/components/BugReportDialog.vue';
 
-export default Vue.extend({
+type Refs = {
+  bugDialog: InstanceType<typeof BugReportDialog>,
+}
+
+export default (Vue as WithRefs<Refs>).extend({
   name: 'PreferencesDialog',
   props: {
     preferencesManager: {
       type: Object as () => PreferencesManager,
     },
+  },
+  components: {
+    'bug-report-dialog': BugReportDialog,
   },
   data() {
     return {
@@ -156,6 +166,8 @@ export default Vue.extend({
 
       <div class="preferences_panel_actions">
         <button class="btn btn-lg btn-primary" v-on:click="okClicked">Ok</button>
+        <button class="btn btn-lg btn-primary" v-on:click="$refs.bugDialog.show();">Report a bug</button>
       </div>
+      <bug-report-dialog ref="bugDialog" :model="undefined" :source="'spectator'"></bug-report-dialog>
     </div>
 </template>

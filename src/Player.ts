@@ -965,13 +965,11 @@ export class Player {
     return false;
   }
 
-  private runInputCb(result: PlayerInput | undefined): void {
-    if (result !== undefined) {
-      this.defer(result, Priority.DEFAULT);
-    }
+  public deferInputCb(result: PlayerInput | undefined): void {
+    this.defer(result, Priority.DEFAULT);
   }
 
-  private checkInputLength(input: InputResponse, length: number, firstOptionLength?: number) {
+  public checkInputLength(input: InputResponse, length: number, firstOptionLength?: number) {
     if (input.length !== length) {
       throw new Error('Incorrect options provided');
     }
@@ -980,7 +978,7 @@ export class Player {
     }
   }
 
-  private parseHowToPayJSON(json: string): HowToPay {
+  public parseHowToPayJSON(json: string): HowToPay {
     const defaults: HowToPay = {
       steel: 0,
       heat: 0,
@@ -1009,7 +1007,7 @@ export class Player {
       for (let i = 0; i < input.length; i++) {
         this.runInput([input[i]], pi.options[i]);
       }
-      this.runInputCb(pi.cb());
+      this.deferInputCb(pi.cb());
     } else if (pi instanceof SelectAmount) {
       this.checkInputLength(input, 1, 1);
       const amount: number = parseInt(input[0][0]);
@@ -1022,9 +1020,9 @@ export class Player {
       if (amount < pi.min) {
         throw new Error('Amount provided too low (min ' + String(pi.min) + ')');
       }
-      this.runInputCb(pi.cb(amount));
+      this.deferInputCb(pi.cb(amount));
     } else if (pi instanceof SelectOption) {
-      this.runInputCb(pi.cb());
+      this.deferInputCb(pi.cb());
     } else if (pi instanceof SelectColony) {
       this.checkInputLength(input, 1, 1);
       const colonyName: ColonyName = (input[0][0]) as ColonyName;
@@ -1034,7 +1032,7 @@ export class Player {
       // TODO(kberg): this passes true because SelectColony sometimes loads discarded colonies
       // but that can be a parameter, and that would be useful.
       const colony = ColoniesHandler.getColony(this.game, colonyName, true);
-      this.runInputCb(pi.cb(colony));
+      this.deferInputCb(pi.cb(colony));
     } else if (pi instanceof OrOptions) {
       // input length is variable, can't test it with checkInputLength
       if (input.length === 0 || input[0].length !== 1) {
@@ -1043,7 +1041,7 @@ export class Player {
       const optionIndex = parseInt(input[0][0]);
       const selectedOptionInput = input.slice(1);
       this.runInput(selectedOptionInput, pi.options[optionIndex]);
-      this.runInputCb(pi.cb());
+      this.deferInputCb(pi.cb());
     } else if (pi instanceof SelectHowToPayForProjectCard) {
       this.checkInputLength(input, 1, 2);
       const cardName = input[0][0];
@@ -1057,7 +1055,7 @@ export class Player {
       if (reserveUnits.titanium + howToPay.titanium > this.titanium) {
         throw new Error(`${reserveUnits.titanium} units of titanium must be reserved for ${cardName}`);
       }
-      this.runInputCb(pi.cb(foundCard, howToPay));
+      this.deferInputCb(pi.cb(foundCard, howToPay));
     } else if (pi instanceof SelectCard) {
       this.checkInputLength(input, 1);
       if (input[0].length < pi.minCardsToSelect) {
@@ -1074,32 +1072,13 @@ export class Player {
           throw new Error('Selected unavailable card');
         }
       }
-      this.runInputCb(pi.cb(mappedCards));
+      this.deferInputCb(pi.cb(mappedCards));
     } else if (pi instanceof SelectAmount) {
-      this.checkInputLength(input, 1, 1);
-      const amount = parseInt(input[0][0]);
-      if (isNaN(amount)) {
-        throw new Error('Amount is not a number');
-      }
-      this.runInputCb(pi.cb(amount));
+      this.deferInputCb(pi.process(input, this));
     } else if (pi instanceof SelectSpace) {
-      this.checkInputLength(input, 1, 1);
-      const foundSpace = pi.availableSpaces.find(
-        (space) => space.id === input[0][0],
-      );
-      if (foundSpace === undefined) {
-        throw new Error('Space not available');
-      }
-      this.runInputCb(pi.cb(foundSpace));
+      this.deferInputCb(pi.process(input, this));
     } else if (pi instanceof SelectPlayer) {
-      this.checkInputLength(input, 1, 1);
-      const foundPlayer = pi.players.find(
-        (player) => player.color === input[0][0] || player.id === input[0][0],
-      );
-      if (foundPlayer === undefined) {
-        throw new Error('Player not available');
-      }
-      this.runInputCb(pi.cb(foundPlayer));
+      this.deferInputCb(pi.process(input, this));
     } else if (pi instanceof SelectDelegate) {
       this.checkInputLength(input, 1, 1);
       const foundPlayer = pi.players.find((player) =>
@@ -1109,11 +1088,9 @@ export class Player {
       if (foundPlayer === undefined) {
         throw new Error('Player not available');
       }
-      this.runInputCb(pi.cb(foundPlayer));
+      this.deferInputCb(pi.cb(foundPlayer));
     } else if (pi instanceof SelectHowToPay) {
-      this.checkInputLength(input, 1, 1);
-      const howToPay: HowToPay = this.parseHowToPayJSON(input[0][0]);
-      this.runInputCb(pi.cb(howToPay));
+      this.deferInputCb(pi.process(input, this));
     } else if (pi instanceof SelectProductionToLose) {
       // TODO(kberg): I'm sure there's some input validation required.
       const units: Units = JSON.parse(input[0][0]);
@@ -1128,7 +1105,7 @@ export class Player {
       if (party === undefined) {
         throw new Error('No party selected');
       }
-      this.runInputCb(pi.cb(party));
+      this.deferInputCb(pi.cb(party));
     } else {
       throw new Error('Unsupported waitingFor');
     }

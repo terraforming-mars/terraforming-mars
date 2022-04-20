@@ -4,6 +4,7 @@ import {OrOptions} from '../inputs/OrOptions';
 import {SelectOption} from '../inputs/SelectOption';
 import {DeferredAction, Priority} from './DeferredAction';
 import {CardName} from '../common/cards/CardName';
+import {MonsInsurance} from '../cards/promo/MonsInsurance';
 
 export class StealResources extends DeferredAction {
   constructor(
@@ -21,6 +22,7 @@ export class StealResources extends DeferredAction {
   public execute() {
     if (this.player.game.isSoloMode()) {
       this.player.addResource(this.resource, this.count);
+      MonsInsurance.resolveInsuranceInSoloGame(this.player);
       this.stealComplete();
       return undefined;
     }

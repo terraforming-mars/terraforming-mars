@@ -6,11 +6,13 @@ import {SelectOption} from '../inputs/SelectOption';
 import {CardName} from '../common/cards/CardName';
 import {ICard} from '../cards/ICard';
 import {DeferredAction, Priority} from './DeferredAction';
+import {MonsInsurance} from '../cards/promo/MonsInsurance';
 
 // TODO (kberg chosta): Make this a card attribute instead
 const animalsProtectedCards = [CardName.PETS, CardName.BIOENGINEERING_ENCLOSURE];
 
 export class RemoveResourcesFromCard extends DeferredAction {
+  public override priority = Priority.ATTACK_OPPONENT;
   constructor(
     player: Player,
     public resourceType: CardResource,
@@ -27,6 +29,7 @@ export class RemoveResourcesFromCard extends DeferredAction {
 
   public execute() {
     if (this.ownCardsOnly === false && this.player.game.isSoloMode()) {
+      MonsInsurance.resolveInsuranceInSoloGame(this.player);
       return undefined;
     }
 

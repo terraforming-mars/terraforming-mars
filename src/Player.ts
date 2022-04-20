@@ -74,6 +74,7 @@ import {PathfindersExpansion} from './pathfinders/PathfindersExpansion';
 import {deserializeProjectCard, serializeProjectCard} from './cards/CardSerialization';
 import {ColoniesHandler} from './colonies/ColoniesHandler';
 import {SerializedGame} from './SerializedGame';
+import {MonsInsurance} from './cards/promo/MonsInsurance';
 import {InputResponse} from './common/inputs/InputResponse';
 
 export class Player {
@@ -310,22 +311,6 @@ export class Player {
     throw new Error('Resource ' + resource + ' not found');
   }
 
-  private resolveMonsInsurance() {
-    if (this.game.monsInsuranceOwner !== undefined && this.game.monsInsuranceOwner !== this.id) {
-      const monsInsuranceOwner: Player = this.game.getPlayerById(this.game.monsInsuranceOwner);
-      const retribution: number = Math.min(monsInsuranceOwner.megaCredits, 3);
-      this.megaCredits += retribution;
-      monsInsuranceOwner.deductResource(Resources.MEGACREDITS, 3);
-      if (retribution > 0) {
-        this.game.log('${0} received ${1} M€ from ${2} owner (${3})', (b) =>
-          b.player(this)
-            .number(retribution)
-            .cardName(CardName.MONS_INSURANCE)
-            .player(monsInsuranceOwner));
-      }
-    }
-  }
-
   private logUnitDelta(
     resource: Resources,
     amount: number,
@@ -428,7 +413,7 @@ export class Player {
 
     // Mons Insurance hook
     if (options?.from !== undefined && delta < 0 && (options.from instanceof Player && options.from.id !== this.id)) {
-      this.resolveMonsInsurance();
+      MonsInsurance.resolveInsurance(this);
     }
   }
 
@@ -460,7 +445,7 @@ export class Player {
 
     // Mons Insurance hook
     if (options?.from !== undefined && delta < 0 && (options.from instanceof Player && options.from.id !== this.id)) {
-      this.resolveMonsInsurance();
+      MonsInsurance.resolveInsurance(this);
     }
 
     // Manutech hook
@@ -718,7 +703,7 @@ export class Player {
       if (amountRemoved === 0) return;
       card.resourceCount -= amountRemoved;
 
-      if (removingPlayer !== undefined && removingPlayer !== this) this.resolveMonsInsurance();
+      if (removingPlayer !== undefined && removingPlayer !== this) MonsInsurance.resolveInsurance(this);
 
       this.game.log('${0} removed ${1} resource(s) from ${2}\'s ${3}', (b) =>
         b.player(removingPlayer ?? this)

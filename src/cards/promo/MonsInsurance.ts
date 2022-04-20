@@ -42,4 +42,57 @@ export class MonsInsurance extends Card implements ICorporationCard {
     player.game.monsInsuranceOwner = player.id;
     return undefined;
   }
+
+  // When `insured` is undefined, it's the neutral player.
+  public payDebt(player: Player, claimant : Player | undefined) {
+    if (player !== claimant) {
+      const retribution = Math.min(player.megaCredits, 3);
+      if (claimant) claimant.megaCredits += retribution;
+      player.deductResource(Resources.MEGACREDITS, retribution);
+      if (retribution > 0) {
+        if (claimant !== undefined) {
+          player.game.log('${0} received ${1} M€ from ${2} owner (${3})', (b) =>
+            b.player(claimant)
+              .number(retribution)
+              .cardName(CardName.MONS_INSURANCE)
+              .player(player));
+        } else {
+          player.game.log('Neutral player received ${0} M€ from ${1} owner (${2})', (b) =>
+            b.number(retribution)
+              .cardName(CardName.MONS_INSURANCE)
+              .player(player));
+        }
+      }
+    }
+  }
+
+  /**
+   * In the multiplayer game, after an attack, the attacked player makes a claim
+   * for insurance. If Mons Insurance is in the game, the claimant will receive
+   * as much ass possible from the insurer.
+   *
+   * @param {Player} claimant: the attacked player.
+   */
+  public static resolveInsurance(claimant: Player) {
+    const game = claimant.game;
+    if (game.monsInsuranceOwner !== undefined && game.monsInsuranceOwner !== claimant.id) {
+      const monsInsuranceOwner = game.getPlayerById(game.monsInsuranceOwner);
+      (monsInsuranceOwner.corporationCard as MonsInsurance).payDebt(monsInsuranceOwner, claimant);
+    }
+  }
+
+  /**
+   * In the solo game, Mons Insurance is only held by the sole player, who will
+   * have to pay the penalty for hurting the neutral player.
+   *
+   * @param {Player} potentialInsurer: the solo player in the game. It's not
+   * clear yet whether the player has Mons Insurance, but if they do, they will
+   * pay. Unlike `resolveInsurance`, there is no claimant Player so the money
+   * disappears.
+   */
+  public static resolveInsuranceInSoloGame(potentialInsurer: Player) {
+    if (potentialInsurer.game.monsInsuranceOwner === potentialInsurer.id) {
+      (potentialInsurer.corporationCard as MonsInsurance).payDebt(potentialInsurer, undefined);
+    }
+  }
 }

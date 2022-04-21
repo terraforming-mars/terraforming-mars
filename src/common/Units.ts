@@ -47,7 +47,7 @@ export namespace Units {
 
   export function isUnits(arg: any): arg is Units {
     if (typeof arg !== 'object') return false;
-    return keys.every(key =>
+    return keys.every((key) =>
       typeof arg[key] === 'number' && !isNaN(arg[key]));
   }
 

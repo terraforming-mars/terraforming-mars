@@ -1,6 +1,5 @@
 import {CardManifest} from '../CardManifest';
 import {CardName} from '../../common/cards/CardName';
-import {GameModule} from '../../common/cards/GameModule';
 
 import {AdhaiHighOrbitConstructions} from './AdhaiHighOrbitConstructions';
 import {AdvancedPowerGrid} from './AdvancedPowerGrid';
@@ -104,7 +103,7 @@ import {VitalColony} from './VitalColony';
 import {Wetlands} from './Wetlands';
 
 export const PATHFINDERS_CARD_MANIFEST = new CardManifest({
-  module: GameModule.Pathfinders,
+  module: 'pathfinders',
   projectCards: [
     {cardName: CardName.BREEDING_FARMS, Factory: BreedingFarms},
     {cardName: CardName.PREFABRICATION_OF_HUMAN_HABITATS, Factory: PrefabricationofHumanHabitats},
@@ -117,7 +116,7 @@ export const PATHFINDERS_CARD_MANIFEST = new CardManifest({
     {cardName: CardName.MARTIAN_MONUMENTS, Factory: MartianMonuments},
     {cardName: CardName.MARTIAN_NATURE_WONDERS, Factory: MartianNatureWonders},
     {cardName: CardName.MUSEUM_OF_EARLY_COLONISATION, Factory: MuseumofEarlyColonisation},
-    {cardName: CardName.TERRAFORMING_CONTROL_STATION, Factory: TerraformingControlStation, compatibility: GameModule.Venus},
+    {cardName: CardName.TERRAFORMING_CONTROL_STATION, Factory: TerraformingControlStation, compatibility: 'venus'},
     // // {cardName: CardName.MARTIAN_TRANSHIPMENT_STATION, Factory: MartianTranshipmentStation},  // COMPLICATED EFFECT.
     {cardName: CardName.CERES_SPACEPORT, Factory: CeresSpaceport},
     {cardName: CardName.DYSON_SCREENS, Factory: DysonScreens},
@@ -139,7 +138,7 @@ export const PATHFINDERS_CARD_MANIFEST = new CardManifest({
     {cardName: CardName.SMALL_OPEN_PIT_MINE, Factory: SmallOpenPitMine},
     {cardName: CardName.SOLAR_STORM, Factory: SolarStorm},
     {cardName: CardName.SPACE_RELAY, Factory: SpaceRelay},
-    {cardName: CardName.DECLARATION_OF_INDEPENDENCE, Factory: DeclarationOfIndependence, compatibility: GameModule.Turmoil},
+    {cardName: CardName.DECLARATION_OF_INDEPENDENCE, Factory: DeclarationOfIndependence, compatibility: 'turmoil'},
     {cardName: CardName.MARTIAN_CULTURE, Factory: MartianCulture},
     {cardName: CardName.OZONE_GENERATORS, Factory: OzoneGenerators},
     {cardName: CardName.SMALL_COMET, Factory: SmallComet},
@@ -150,8 +149,8 @@ export const PATHFINDERS_CARD_MANIFEST = new CardManifest({
     {cardName: CardName.ECONOMIC_HELP, Factory: EconomicHelp},
     {cardName: CardName.INTERPLANETARY_TRANSPORT, Factory: InterplanetaryTransport},
     {cardName: CardName.MARTIAN_DUST_PROCESSING_PLANT, Factory: MartianDustProcessingPlant},
-    {cardName: CardName.CULTIVATION_OF_VENUS, Factory: CultivationOfVenus, compatibility: GameModule.Venus},
-    {cardName: CardName.EXPEDITION_TO_THE_SURFACE_VENUS, Factory: ExpeditionToTheSurfaceVenus, compatibility: GameModule.Venus},
+    {cardName: CardName.CULTIVATION_OF_VENUS, Factory: CultivationOfVenus, compatibility: 'venus'},
+    {cardName: CardName.EXPEDITION_TO_THE_SURFACE_VENUS, Factory: ExpeditionToTheSurfaceVenus, compatibility: 'venus'},
     {cardName: CardName.LAST_RESORT_INGENUITY, Factory: LastResortIngenuity},
     // // {cardName: CardName.CRASHLANDING, Factory: Crashlanding},                             // COMPLICATED ADJACENCY BONUS RULES
     // // {cardName: CardName.THINK_TANK, Factory: ThinkTank},                                  // COMPLICATED REQUIREMENT RULES
@@ -159,25 +158,25 @@ export const PATHFINDERS_CARD_MANIFEST = new CardManifest({
     {cardName: CardName.CRYPTOCURRENCY, Factory: Cryptocurrency},
     {cardName: CardName.RICH_DEPOSITS, Factory: RichDeposits},
     {cardName: CardName.OUMUAMUA_TYPE_OBJECT_SURVEY, Factory: OumuamuaTypeObjectSurvey},
-    {cardName: CardName.SOLARPEDIA, Factory: Solarpedia, compatibility: GameModule.Venus},
+    {cardName: CardName.SOLARPEDIA, Factory: Solarpedia, compatibility: 'venus'},
     {cardName: CardName.ANTHOZOA, Factory: Anthozoa},
     {cardName: CardName.ADVANCED_POWER_GRID, Factory: AdvancedPowerGrid},
     {cardName: CardName.SPECIALIZED_SETTLEMENT, Factory: SpecializedSettlement},
     {cardName: CardName.CHARITY_DONATION, Factory: CharityDonation},
     // // {cardName: CardName.CURIOSITY_LABS, Factory: CuriosityLabs},                          // TWO RESOURCE TYPES
     {cardName: CardName.NOBEL_LABS, Factory: NobelLabs},
-    {cardName: CardName.HUYGENS_OBSERVATORY, Factory: HuygensObservatory, compatibility: GameModule.Colonies},
-    {cardName: CardName.CASSINI_STATION, Factory: CassiniStation, compatibility: GameModule.Colonies},
+    {cardName: CardName.HUYGENS_OBSERVATORY, Factory: HuygensObservatory, compatibility: 'colonies'},
+    {cardName: CardName.CASSINI_STATION, Factory: CassiniStation, compatibility: 'colonies'},
     {cardName: CardName.MICROBIOLOGY_PATENTS, Factory: MicrobiologyPatents},
-    {cardName: CardName.COORDINATED_RAID, Factory: CoordinatedRaid, compatibility: GameModule.Colonies},
-    {cardName: CardName.LOBBY_HALLS, Factory: LobbyHalls, compatibility: GameModule.Turmoil},
-    {cardName: CardName.RED_CITY, Factory: RedCity, compatibility: GameModule.Turmoil},
-    {cardName: CardName.VENERA_BASE, Factory: VeneraBase, compatibility: [GameModule.Turmoil, GameModule.Venus]},
-    // // {cardName: CardName.GATEWAY_STATION, Factory: GatewayStation, compatibility: GameModule.Turmoil}, // Place a city tile outside Mars with new adjacency??
-    {cardName: CardName.FLOATER_URBANISM, Factory: FloaterUrbanism, compatibility: GameModule.Venus},
-    {cardName: CardName.SOIL_DETOXIFICATION, Factory: SoilDetoxification, compatibility: GameModule.Turmoil},
-    {cardName: CardName.HIGH_TEMP_SUPERCONDUCTORS, Factory: HighTempSuperconductors, compatibility: GameModule.Turmoil},
-    {cardName: CardName.PUBLIC_SPONSORED_GRANT, Factory: PublicSponsoredGrant, compatibility: GameModule.Turmoil},
+    {cardName: CardName.COORDINATED_RAID, Factory: CoordinatedRaid, compatibility: 'colonies'},
+    {cardName: CardName.LOBBY_HALLS, Factory: LobbyHalls, compatibility: 'turmoil'},
+    {cardName: CardName.RED_CITY, Factory: RedCity, compatibility: 'turmoil'},
+    {cardName: CardName.VENERA_BASE, Factory: VeneraBase, compatibility: ['turmoil', 'venus']},
+    // // {cardName: CardName.GATEWAY_STATION, Factory: GatewayStation, compatibility: 'turmoil'}, // Place a city tile outside Mars with new adjacency??
+    {cardName: CardName.FLOATER_URBANISM, Factory: FloaterUrbanism, compatibility: 'venus'},
+    {cardName: CardName.SOIL_DETOXIFICATION, Factory: SoilDetoxification, compatibility: 'turmoil'},
+    {cardName: CardName.HIGH_TEMP_SUPERCONDUCTORS, Factory: HighTempSuperconductors, compatibility: 'turmoil'},
+    {cardName: CardName.PUBLIC_SPONSORED_GRANT, Factory: PublicSponsoredGrant, compatibility: 'turmoil'},
     {cardName: CardName.POLLINATORS, Factory: Pollinators},
     {cardName: CardName.SOCIAL_EVENTS, Factory: SocialEvents},
     {cardName: CardName.CONTROLLED_BLOOM, Factory: ControlledBloom},
@@ -186,7 +185,7 @@ export const PATHFINDERS_CARD_MANIFEST = new CardManifest({
   corporationCards: [
     {cardName: CardName.POLARIS, Factory: Polaris},
     // {cardName: CardName.PLANET_PR, Factory: planetpr},
-    {cardName: CardName.AMBIENT, Factory: Ambient, compatibility: GameModule.Venus},
+    {cardName: CardName.AMBIENT, Factory: Ambient, compatibility: 'venus'},
     {cardName: CardName.RINGCOM, Factory: Ringcom},
     {cardName: CardName.CHIMERA, Factory: Chimera},
     // {cardName: CardName.SISTEMAS_SEEBECK, Factory: SistemasSeebeck},
@@ -200,30 +199,30 @@ export const PATHFINDERS_CARD_MANIFEST = new CardManifest({
     {cardName: CardName.BIO_SOL, Factory: BioSol},
     {cardName: CardName.AURORAI, Factory: Aurorai},
     {cardName: CardName.COLLEGIUM_COPERNICUS, Factory: CollegiumCopernicus},
-    {cardName: CardName.ROBIN_HAULINGS, Factory: RobinHaulings, compatibility: GameModule.Venus},
+    {cardName: CardName.ROBIN_HAULINGS, Factory: RobinHaulings, compatibility: 'venus'},
     // {cardName: CardName.ODYSSEY, Factory: Odyssey},
     // {cardName: CardName.GAGARIN_MOBILE_BASE, Factory: GagarinMobileBase},
     // {cardName: CardName.MARS_FRONTIER_ALLIANCE, Factory: MarsFrontierAlliance},
-    {cardName: CardName.MIND_SET_MARS, Factory: MindSetMars, compatibility: GameModule.Turmoil},
+    {cardName: CardName.MIND_SET_MARS, Factory: MindSetMars, compatibility: 'turmoil'},
     {cardName: CardName.HABITAT_MARTE, Factory: HabitatMarte},
     {cardName: CardName.ADHAI_HIGH_ORBIT_CONSTRUCTIONS, Factory: AdhaiHighOrbitConstructions},
   ],
   preludeCards: [
-    {cardName: CardName.VENUS_FIRST_PATHFINDERS, Factory: VenusFirst, compatibility: GameModule.Venus},
-    {cardName: CardName.VALUABLE_GASES_PATHFINDERS, Factory: ValuableGases, compatibility: GameModule.Venus},
-    {cardName: CardName.CO2_REDUCERS, Factory: CO2Reducers, compatibility: GameModule.Venus},
-    {cardName: CardName.HYDROGEN_BOMBARDMENT, Factory: HydrogenBombardment, compatibility: GameModule.Venus},
+    {cardName: CardName.VENUS_FIRST_PATHFINDERS, Factory: VenusFirst, compatibility: 'venus'},
+    {cardName: CardName.VALUABLE_GASES_PATHFINDERS, Factory: ValuableGases, compatibility: 'venus'},
+    {cardName: CardName.CO2_REDUCERS, Factory: CO2Reducers, compatibility: 'venus'},
+    {cardName: CardName.HYDROGEN_BOMBARDMENT, Factory: HydrogenBombardment, compatibility: 'venus'},
     {cardName: CardName.RESEARCH_GRANT_PATHFINDERS, Factory: ResearchGrant},
     {cardName: CardName.CREW_TRAINING, Factory: CrewTraining},
     // {cardName: CardName.SURVEY_MISSION, Factory: SurveyMission},
     {cardName: CardName.DESIGN_COMPANY, Factory: DesignCompany},
     // {cardName: CardName.CONSOLIDATION, Factory: Consolidation},
     {cardName: CardName.PERSONAL_AGENDA, Factory: PersonalAgenda},
-    {cardName: CardName.VITAL_COLONY, Factory: VitalColony, compatibility: GameModule.Colonies},
-    {cardName: CardName.STRATEGIC_BASE_PLANNING, Factory: StrategicBasePlanning, compatibility: GameModule.Colonies},
+    {cardName: CardName.VITAL_COLONY, Factory: VitalColony, compatibility: 'colonies'},
+    {cardName: CardName.STRATEGIC_BASE_PLANNING, Factory: StrategicBasePlanning, compatibility: 'colonies'},
     {cardName: CardName.DEEP_SPACE_OPERATIONS, Factory: DeepSpaceOperations},
     {cardName: CardName.ANTI_DESERTIFICATION_TECHNIQUES, Factory: AntidesertificationTechniques},
-    {cardName: CardName.EXPERIENCED_MARTIANS, Factory: ExperiencedMartians, compatibility: GameModule.Turmoil},
+    {cardName: CardName.EXPERIENCED_MARTIANS, Factory: ExperiencedMartians, compatibility: 'turmoil'},
     // {cardName: CardName.THE_NEW_SPACE_RACE, Factory: TheNewSpaceRace},
   ],
 

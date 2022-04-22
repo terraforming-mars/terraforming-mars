@@ -26,7 +26,6 @@ import Vue from 'vue';
 import {ColonyName} from '@/common/colonies/ColonyName';
 import {COLONY_DESCRIPTIONS} from '@/common/colonies/ColonyDescription';
 import {OFFICIAL_COLONY_NAMES, COMMUNITY_COLONY_NAMES} from '@/common/colonies/AllColonies';
-import {GameModule} from '@/common/cards/GameModule';
 
 type Data = {
   allColonies: Array<ColonyName>,
@@ -35,7 +34,7 @@ type Data = {
   selectedColonies: Array<ColonyName>,
   modules: Array<ColonyModule>,
 }
-type ColonyModule = GameModule.Colonies | GameModule.Community;
+type ColonyModule = 'colonies' | 'community';
 type Group = ColonyModule | 'All';
 
 export default Vue.extend({
@@ -60,7 +59,7 @@ export default Vue.extend({
         ...OFFICIAL_COLONY_NAMES,
         ...this.communityCardsOption ? COMMUNITY_COLONY_NAMES: [],
       ],
-      modules: [GameModule.Colonies, GameModule.Community],
+      modules: ['colonies', 'community'],
     };
     return data;
   },
@@ -80,8 +79,8 @@ export default Vue.extend({
     getItemsByGroup(group: Group): Array<ColonyName> {
       switch (group) {
       case 'All': return this.allColonies;
-      case GameModule.Colonies: return this.officialColonies;
-      case GameModule.Community: return this.communityColonies;
+      case 'colonies': return this.officialColonies;
+      case 'community': return this.communityColonies;
       default: return [];
       }
     },
@@ -117,13 +116,13 @@ export default Vue.extend({
       }
     },
     title(module: ColonyModule) {
-      if (module === GameModule.Colonies) return 'Official';
-      if (module === GameModule.Community) return 'Community';
+      if (module === 'colonies') return 'Official';
+      if (module === 'community') return 'Community';
       return module;
     },
     getColonies(module: ColonyModule) {
-      if (module === GameModule.Colonies) return this.officialColonies;
-      if (module === GameModule.Community) return this.communityColonies;
+      if (module === 'colonies') return this.officialColonies;
+      if (module === 'community') return this.communityColonies;
       return [];
     },
   },

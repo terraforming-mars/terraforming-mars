@@ -18,6 +18,10 @@ export class SelectProductionToLoseDeferred extends DeferredAction {
       this.unitsToLose,
       this.player,
       (production: Units) => {
+        const total = Units.keys.map((key) => production[key]).reduce((a, c) => a + c, 0);
+        if (total !== this.unitsToLose) {
+          throw new Error(`Expected ${this.unitsToLose} units of production, got ${total}`);
+        }
         this.player.adjustProduction(Units.negative(production), {log: true});
         return undefined;
       },

@@ -1,5 +1,4 @@
 import {CardName} from '../../common/cards/CardName';
-import {GameModule} from '../../common/cards/GameModule';
 import {CardManifest} from '../CardManifest';
 import {Advertising} from './Advertising';
 import {ArcadianCommunities} from './ArcadianCommunities';
@@ -53,7 +52,7 @@ import {SubCrustMeasurements} from './SubCrustMeasurements';
 import {TopsoilContract} from './TopsoilContract';
 
 export const PROMO_CARD_MANIFEST = new CardManifest({
-  module: GameModule.Promo,
+  module: 'promo',
   projectCards: [
     {cardName: CardName.PENGUINS, Factory: Penguins},
     {cardName: CardName.SELF_REPLICATING_ROBOTS, Factory: SelfReplicatingRobots},

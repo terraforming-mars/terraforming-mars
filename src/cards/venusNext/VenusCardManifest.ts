@@ -1,5 +1,4 @@
 import {CardName} from '../../common/cards/CardName';
-import {GameModule} from '../../common/cards/GameModule';
 import {CardManifest} from '../CardManifest';
 import {AerialMappers} from './AerialMappers';
 import {AerosportTournament} from './AerosportTournament';
@@ -59,7 +58,7 @@ import {WaterToVenus} from './WaterToVenus';
 import {AirScrappingStandardProjectVariant} from './AirScrappingStandardProjectVariant';
 
 export const VENUS_CARD_MANIFEST = new CardManifest({
-  module: GameModule.Venus,
+  module: 'venus',
   projectCards: [
     {cardName: CardName.AERIAL_MAPPERS, Factory: AerialMappers},
     {cardName: CardName.AEROSPORT_TOURNAMENT, Factory: AerosportTournament},

@@ -44,11 +44,7 @@ export const PlayerMixin = {
       card: CardModel,
       player: PublicPlayerModel,
     ): boolean {
-      return (
-        (player !== undefined &&
-                player.actionsThisGeneration !== undefined &&
-                player.actionsThisGeneration.includes(card.name)) || card.isDisabled
-      );
+      return player?.actionsThisGeneration?.includes(card.name) || card.isDisabled;
     },
   },
 };

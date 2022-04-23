@@ -10,7 +10,6 @@ import {PlaceGreeneryTile} from '../deferredActions/PlaceGreeneryTile';
 import {PlaceMoonMineTile} from '../moon/PlaceMoonMineTile';
 import {PlaceMoonRoadTile} from '../moon/PlaceMoonRoadTile';
 import {PlaceOceanTile} from '../deferredActions/PlaceOceanTile';
-import {PlanetaryTrack} from '../common/pathfinders/PlanetaryTrack';
 import {PlanetaryTracks} from '../common/pathfinders/PlanetaryTracks';
 import {Player} from '../Player';
 import {Resources} from '../common/Resources';
@@ -23,9 +22,14 @@ import {Turmoil} from '../turmoil/Turmoil';
 import {VictoryPointsBreakdown} from '../VictoryPointsBreakdown';
 import {GlobalEventName} from '../common/turmoil/globalEvents/GlobalEventName';
 
-export const PLANETARY_TAGS = [Tags.VENUS, Tags.EARTH, Tags.MARS, Tags.JOVIAN, Tags.MOON];
-const TRACKS = PlanetaryTracks.initialize();
+export const PLANETARY_TAGS = [Tags.VENUS, Tags.EARTH, Tags.MARS, Tags.JOVIAN, Tags.MOON] as const;
+export type PlanetaryTag = typeof PLANETARY_TAGS[number];
 
+export const TRACKS = PlanetaryTracks.initialize();
+
+export function isPlanetaryTag(tag: Tags): tag is PlanetaryTag {
+  return PLANETARY_TAGS.includes(tag as PlanetaryTag);
+}
 export class PathfindersExpansion {
   private constructor() {
   }
@@ -47,8 +51,8 @@ export class PathfindersExpansion {
     }
     const tags = card.tags;
     tags.forEach((tag) => {
-      if (PLANETARY_TAGS.includes(tag)) {
-        PathfindersExpansion.raiseTrack(tag, player);
+      if (isPlanetaryTag(tag)) {
+        PathfindersExpansion.raiseTrack(tag as PlanetaryTag, player);
       }
     });
 
@@ -65,30 +69,22 @@ export class PathfindersExpansion {
     }
   }
 
-  private static readonly trackMap: Map<Tags, PlanetaryTrack | undefined> = new Map([
-    [Tags.VENUS, TRACKS.venus],
-    [Tags.EARTH, TRACKS.earth],
-    [Tags.MARS, TRACKS.mars],
-    [Tags.JOVIAN, TRACKS.jovian],
-    [Tags.MOON, TRACKS.moon],
-  ]);
-
-  public static raiseTrack(tag: Tags, player: Player, steps: number = 1): void {
+  public static raiseTrack(tag: PlanetaryTag, player: Player, steps: number = 1): void {
     PathfindersExpansion.raiseTrackEssense(tag, player, player.game, steps, true);
   }
 
-  public static raiseTrackForGlobalEvent(tag: Tags, name: GlobalEventName, game: Game, steps: number = 1, gainRewards: boolean = true): void {
+  public static raiseTrackForGlobalEvent(tag: PlanetaryTag, name: GlobalEventName, game: Game, steps: number = 1, gainRewards: boolean = true): void {
     PathfindersExpansion.raiseTrackEssense(tag, name, game, steps, gainRewards);
   }
 
-  private static raiseTrackEssense(tag: Tags, from: Player | GlobalEventName, game: Game, steps: number = 1, gainRewards: boolean = true): void {
+  private static raiseTrackEssense(tag: PlanetaryTag, from: Player | GlobalEventName, game: Game, steps: number = 1, gainRewards: boolean = true): void {
     const data = game.pathfindersData;
     if (data === undefined) {
       return;
       // throw new Error('Pathfinders not defined');
     }
 
-    const track = PathfindersExpansion.trackMap.get(tag);
+    const track = TRACKS[tag];
     if (track === undefined) {
       return;
     }

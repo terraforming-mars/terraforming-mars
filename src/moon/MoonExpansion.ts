@@ -237,6 +237,30 @@ export class MoonExpansion {
     }
   }
 
+  public static lowerMiningRate(player: Player, count: number) {
+    MoonExpansion.ifMoon(player.game, (moonData) => {
+      const increment = Math.min(moonData.miningRate, count);
+      moonData.miningRate -= increment;
+      player.game.log('${0} lowered the mining rate ${1} step(s)', (b) => b.player(player).number(increment));
+    });
+  }
+
+  public static lowerColonyRate(player: Player, count: number) {
+    MoonExpansion.ifMoon(player.game, (moonData) => {
+      const increment = Math.min(moonData.colonyRate, count);
+      moonData.colonyRate -= increment;
+      player.game.log('${0} lowered the colony rate ${1} step(s)', (b) => b.player(player).number(increment));
+    });
+  }
+
+  public static lowerLogisticRate(player: Player, count: number) {
+    MoonExpansion.ifMoon(player.game, (moonData) => {
+      const increment = Math.min(moonData.logisticRate, count);
+      moonData.logisticRate -= increment;
+      player.game.log('${0} lowered the logistic rate ${1} step(s)', (b) => b.player(player).number(increment));
+    });
+  }
+
   // Use this to test whether a space has a given moon tile type rather than
   // testing tiletype directly. It takes into account Lunar Mine Urbanization.
   public static spaceHasType(space: ISpace, type: TileType): boolean {

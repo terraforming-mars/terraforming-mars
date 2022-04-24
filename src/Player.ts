@@ -1889,7 +1889,8 @@ export class Player {
   }
 
   private getStandardProjects(): Array<StandardProjectCard> {
-    return new CardLoader(this.game.gameOptions)
+    const gameOptions = this.game.gameOptions;
+    return new CardLoader(gameOptions)
       .getStandardProjects()
       .filter((card) => {
         switch (card.name) {
@@ -1898,11 +1899,15 @@ export class Player {
           return false;
         // For buffer gas, show ONLY IF in solo AND 63TR mode
         case CardName.BUFFER_GAS_STANDARD_PROJECT:
-          return this.game.isSoloMode() && this.game.gameOptions.soloTR;
+          return this.game.isSoloMode() && gameOptions.soloTR;
         case CardName.AIR_SCRAPPING_STANDARD_PROJECT:
-          return this.game.gameOptions.altVenusBoard === false;
+          return gameOptions.altVenusBoard === false;
         case CardName.AIR_SCRAPPING_STANDARD_PROJECT_VARIANT:
-          return this.game.gameOptions.altVenusBoard === true;
+          return gameOptions.altVenusBoard === true;
+        case CardName.MOON_COLONY_STANDARD_PROJECT_V2:
+        case CardName.MOON_MINE_STANDARD_PROJECT_V2:
+        case CardName.MOON_ROAD_STANDARD_PROJECT_V2:
+          return gameOptions.moonStandardProjectVariant === true;
         default:
           return true;
         }

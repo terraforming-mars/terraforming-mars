@@ -631,6 +631,11 @@ export default (Vue as WithRefs<Refs>).extend({
         this.politicalAgendasExtension = AgendaStyle.STANDARD;
       }
     },
+    playersCount(value: number) {
+      if (value === 1) {
+        this.corporateEra = true;
+      }
+    },
   },
   methods: {
     async downloadCurrentSettings() {

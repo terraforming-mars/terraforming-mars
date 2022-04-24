@@ -9,16 +9,16 @@
             </div>
         </div>
         <br/>
-          <div class="corporations-filter-group" v-for="entry in cardsByModule.associations()" v-bind:key="entry[0]">
-            <div v-if="entry[1].length > 0">
+          <div class="corporations-filter-group" v-for="module in GAME_MODULES" v-bind:key="module">
+            <div v-if="cardsByModule[module].length > 0">
               <div class="corporations-filter-toolbox-cont">
                   <div class="corporations-filter-toolbox">
-                      <a href="#" v-i18n v-on:click.prevent="selectAll(entry[0])">All</a> |
-                      <a href="#" v-i18n v-on:click.prevent="selectNone(entry[0])">None</a> |
-                      <a href="#" v-i18n v-on:click.prevent="invertSelection(entry[0])">Invert</a>
+                      <a href="#" v-i18n v-on:click.prevent="selectAll(module)">All</a> |
+                      <a href="#" v-i18n v-on:click.prevent="selectNone(module)">None</a> |
+                      <a href="#" v-i18n v-on:click.prevent="invertSelection(module)">Invert</a>
                   </div>
               </div>
-              <div v-for="corporation in entry[1]" v-bind:key="corporation">
+              <div v-for="corporation in cardsByModule[module]" v-bind:key="corporation">
                   <label class="form-checkbox">
                       <input type="checkbox" v-model="selectedCorporations" :value="corporation"/>
                       <i class="form-icon"></i><span v-i18n>{{ corporation }}</span>
@@ -33,10 +33,9 @@
 import Vue from 'vue';
 
 import {CardName} from '@/common/cards/CardName';
-import {GameModule} from '@/common/cards/GameModule';
+import {GameModule, GAME_MODULES} from '@/common/cards/GameModule';
 import {byModule, byType, getCards, toName} from '@/client/cards/ClientCardManifest';
 import {CardType} from '@/common/cards/CardType';
-import {MultiMap} from 'mnemonist';
 
 function corpCardNames(module: GameModule): Array<CardName> {
   return getCards(byModule(module))
@@ -79,10 +78,14 @@ export default Vue.extend({
     },
   },
   data() {
-    const cardsByModule: MultiMap<GameModule, CardName> = new MultiMap();
+    // Start by giving every entry a default value
+    // Ideally, remove 'x' and inline it into Object.fromEntries, but Typescript doesn't like it.
+    const x = GAME_MODULES.map((module) => [module, []]);
+    const cardsByModule: Record<GameModule, Array<CardName>> = Object.fromEntries(x);
+
     getCards(byType(CardType.CORPORATION)).forEach((card) => {
       if (card.name !== CardName.BEGINNER_CORPORATION) {
-        cardsByModule.set(card.module, card.name);
+        cardsByModule[card.module].push(card.name);
       }
     });
 
@@ -102,13 +105,13 @@ export default Vue.extend({
         ...this.moonExpansion ? corpCardNames('moon') : [],
         ...this.pathfindersExpansion ? corpCardNames('pathfinders') : [],
       ],
+      GAME_MODULES: GAME_MODULES,
     };
   },
   methods: {
     getItemsByGroup(group: Group): Array<CardName> {
-      if (group === 'All') return Array.from(this.cardsByModule.values());
-
-      const corps = this.cardsByModule.get(group);
+      if (group === 'All') return GAME_MODULES.map((module) => this.cardsByModule[module]).flat();
+      const corps = this.cardsByModule[group];
       if (corps === undefined) {
         console.log('module %s not found', group);
         return [];

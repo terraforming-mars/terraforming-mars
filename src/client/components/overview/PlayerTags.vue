@@ -2,7 +2,7 @@
         <div class="player-tags">
             <div class="player-tags-main">
                 <tag-count :tag="'vp'" :count="player.victoryPointsBreakdown.total" :size="'big'" :type="'main'" :hideCount="hideVpCount" />
-                <div v-if="isEscapeVelocityOn" class="tag-display tooltip tooltip-top" data-tooltip="Escape Velocity penalty">
+                <div v-if="isEscapeVelocityOn" class="tag-display" :class="tooltipCss" data-tooltip="Escape Velocity penalty">
                   <tag-count :tag="'escape'" :count="escapeVelocityPenalty" :size="'big'" :type="'main'"/>
                 </div>
                 <tag-count :tag="'tr'" :count="player.terraformRating" :size="'big'" :type="'main'"/>
@@ -108,6 +108,10 @@ export default Vue.extend({
     hideZeroTags: {
       type: Boolean,
     },
+    isTopBar: {
+      type: Boolean,
+      default: false,
+    },
   },
   data() {
     type TagDetails = Record<InterfaceTagsType, TagDetail>;
@@ -172,11 +176,14 @@ export default Vue.extend({
     hideVpCount(): boolean {
       return !this.playerView.game.gameOptions.showOtherPlayersVP && !this.isThisPlayer;
     },
-    isEscapeVelocityOn: function(): boolean {
+    isEscapeVelocityOn(): boolean {
       return this.playerView.game.gameOptions.escapeVelocityMode;
     },
-    escapeVelocityPenalty: function(): number {
+    escapeVelocityPenalty(): number {
       return this.player.victoryPointsBreakdown.escapeVelocity;
+    },
+    tooltipCss(): string {
+      return 'tooltip tooltip-' + (this.isTopBar ? 'bottom' : 'top');
     },
   },
 

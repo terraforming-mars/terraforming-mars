@@ -158,6 +158,53 @@ describe('SelectHowToPay', () => {
     tester.expectValue('megaCredits', 10);
   });
 
+  it('max megacredits', async () => {
+    const wrapper = setupBill(
+      9,
+      {megaCredits: 16, heat: 3},
+      {canUseHeat: true});
+
+    const tester = new PaymentTester(wrapper);
+    await tester.nextTick();
+
+    tester.expectValue('heat', 0);
+    tester.expectValue('megaCredits', 9);
+
+    await tester.clickMax('heat');
+    await tester.nextTick();
+
+    tester.expectValue('heat', 3);
+    tester.expectValue('megaCredits', 6);
+
+    await tester.clickMax('megaCredits');
+    await tester.nextTick();
+
+    tester.expectValue('heat', 0);
+    tester.expectValue('megaCredits', 9);
+  });
+
+  it('max megacredits, 2', async () => {
+    const wrapper = setupBill(
+      10,
+      {megaCredits: 5, titanium: 4, titaniumValue: 4, heat: 3},
+      {canUseTitanium: true, canUseHeat: true});
+
+    const tester = new PaymentTester(wrapper);
+    await tester.nextTick();
+
+    tester.expectValue('titanium', 2);
+    tester.expectValue('heat', 0);
+    tester.expectValue('megaCredits', 2);
+
+    console.log('click');
+    await tester.clickMax('megaCredits');
+    await tester.nextTick();
+
+    tester.expectValue('titanium', 2);
+    tester.expectValue('heat', 0);
+    tester.expectValue('megaCredits', 5);
+  });
+
   const setupBill = function(
     amount: number,
     playerFields: Partial<PublicPlayerModel>,

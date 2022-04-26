@@ -196,7 +196,8 @@ export default Vue.extend({
       return this.tagsInOrder.filter((entry) => {
         if (!isInGame(entry.name, this.playerView.game)) return false;
         if (entry.count === 0) {
-          return this.hideZeroTags || (Shared.isTagsViewConcise(this.$root) ?? true);
+          if (this.hideZeroTags) return false;
+          if (Shared.isTagsViewConcise(this.$root) ?? true) return false;
         }
         return true;
       });

@@ -72,7 +72,7 @@ export default (Vue as WithRefs<Refs>).extend({
       hide: false,
       message: `URL: ${spectatorUrl(this.model)}
 Player color: ${this.source}
-Version: ${raw_settings.version}
+Version: ${raw_settings.head}, built at ${raw_settings.builtAt}
 Browser: ${browser()}`,
     };
   },

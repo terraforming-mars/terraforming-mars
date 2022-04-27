@@ -163,7 +163,7 @@ export default Vue.extend({
     },
     isCardActivated(card: CardModel): boolean {
       // Copied from PlayerMixin.
-      return this.playerView.thisPlayer.actionsThisGeneration?.includes(card.name);
+      return this.playerView.thisPlayer.actionsThisGeneration.includes(card.name);
     },
   },
 });

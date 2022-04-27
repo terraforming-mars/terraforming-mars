@@ -40,11 +40,8 @@ export const PlayerMixin = {
     getPreludeCardType() {
       return CardType.PRELUDE;
     },
-    isCardActivated(
-      card: CardModel,
-      player: PublicPlayerModel,
-    ): boolean {
-      return player?.actionsThisGeneration?.includes(card.name) || card.isDisabled;
+    isCardActivated(card: CardModel, player: PublicPlayerModel): boolean {
+      return player.actionsThisGeneration.includes(card.name) || card.isDisabled;
     },
   },
 };

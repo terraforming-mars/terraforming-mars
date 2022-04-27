@@ -66,8 +66,11 @@ describe('PlayerTags', function() {
         player: player,
         playerView: playerView,
         hideZeroTags: false,
+        conciseTagsViewDefaultValue: false,
       },
     });
+    // For tests.
+    wrapper.vm.$data.conciseView = false;
   });
 
   it('tag discounts', function() {

@@ -108,6 +108,11 @@ export default Vue.extend({
     hideZeroTags: {
       type: Boolean,
     },
+    conciseTagsViewDefaultValue: {
+      type: Boolean,
+      required: false,
+      default: true,
+    },
   },
   data() {
     type TagDetails = Record<InterfaceTagsType, TagDetail>;
@@ -197,7 +202,7 @@ export default Vue.extend({
         if (!isInGame(entry.name, this.playerView.game)) return false;
         if (entry.count === 0) {
           if (this.hideZeroTags) return false;
-          if (Shared.isTagsViewConcise(this.$root) ?? true) return false;
+          if (Shared.isTagsViewConcise(this.$root) ?? this.conciseTagsViewDefaultValue) return false;
         }
         return true;
       });

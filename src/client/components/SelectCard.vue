@@ -6,7 +6,7 @@
               <input v-if="isSelectOnlyOneCard()" type="radio" v-model="cards" :value="card" />
               <input v-else type="checkbox" v-model="cards" :value="card" :disabled="playerinput.maxCardsToSelect !== undefined && Array.isArray(cards) && cards.length >= playerinput.maxCardsToSelect && cards.includes(card) === false" />
             </template>
-            <Card :card="card">
+            <Card :card="card" :actionUsed="isCardActivated(card)">
               <template v-if="playerinput.showOwner">
                 <div :class="'card-owner-label player_translucent_bg_color_'+ getOwner(card).color">
                   {{getOwner(card).name}}
@@ -160,6 +160,10 @@ export default Vue.extend({
     },
     buttonLabel(): string {
       return this.isSelectOnlyOneCard() ? this.playerinput.buttonLabel : this.playerinput.buttonLabel + ' ' + this.cardsSelected();
+    },
+    isCardActivated(card: CardModel): boolean {
+      // Copied from PlayerMixin.
+      return this.playerView.thisPlayer.actionsThisGeneration.includes(card.name);
     },
   },
 });

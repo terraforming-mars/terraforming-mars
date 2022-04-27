@@ -14,6 +14,9 @@ import {Tags} from '../../../src/common/cards/Tags';
 import {Resources} from '../../../src/common/Resources';
 import {Businessperson} from '../../../src/milestones/Businessperson';
 import {Scientist} from '../../../src/awards/Scientist';
+import {Ecologist} from '../../../src/milestones/Ecologist';
+import {Algae} from '../../../src/cards/base/Algae';
+import {ArcticAlgae} from '../../../src/cards/base/ArcticAlgae';
 
 describe('Chimera', function() {
   let card: Chimera;
@@ -59,5 +62,13 @@ describe('Chimera', function() {
     const milestone = new Businessperson();
     player.playedCards = [new BusinessNetwork(), new EarthCatapult(), new Cartel()];
     expect(milestone.getScore(player)).eq(4);
+  });
+
+  it('as milestone - issue 4369', function() {
+    // Requires 4 plant tags in play
+    const milestone = new Ecologist();
+    player.playedCards = [new Algae(), new ArcticAlgae()];
+    expect(milestone.getScore(player)).eq(3);
+    expect(milestone.canClaim(player)).is.false;
   });
 });

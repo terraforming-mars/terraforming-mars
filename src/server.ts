@@ -26,6 +26,7 @@ import {Route} from './routes/Route';
 import {PlayerInput} from './routes/PlayerInput';
 import {ServeApp} from './routes/ServeApp';
 import {ServeAsset} from './routes/ServeAsset';
+import * as raw_settings from './genfiles/settings.json';
 
 process.on('uncaughtException', (err: any) => {
   console.error('UNCAUGHT EXCEPTION', err);
@@ -129,12 +130,11 @@ Database.getInstance().initialize()
     Database.getInstance().purgeUnfinishedGames();
 
     const port = process.env.PORT || 8080;
-    console.log('Starting server on port ' + port);
-    console.log('version 0.X');
+    console.log(`Starting ${raw_settings.head}, built at ${raw_settings.builtAt}`);
+    console.log(`Starting server on port ${port}`);
 
     server.listen(port);
 
-    console.log();
     console.log(
       'The secret serverId for this server is \x1b[1m' +
       serverId +

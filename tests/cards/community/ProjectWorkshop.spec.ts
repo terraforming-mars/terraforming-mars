@@ -11,6 +11,8 @@ import {SelectCard} from '../../../src/inputs/SelectCard';
 import {SelectOption} from '../../../src/inputs/SelectOption';
 import {Player} from '../../../src/Player';
 import {TestPlayers} from '../../TestPlayers';
+import {AncientShipyards} from '../../../src/cards/moon/AncientShipyards';
+import {TestingUtils} from '../../TestingUtils';
 
 describe('ProjectWorkshop', function() {
   let card : ProjectWorkshop; let player : Player; let game : Game; let advancedAlloys : AdvancedAlloys;
@@ -75,8 +77,7 @@ describe('ProjectWorkshop', function() {
     const originalTR = player.getTerraformRating();
     player.playedCards.push(smallAnimals, extremophiles);
 
-    const selectOption = card.action(player);
-    expect(selectOption instanceof SelectOption).is.true;
+    const selectOption = TestingUtils.cast(card.action(player), SelectOption);
 
     const selectCard = selectOption.cb() as SelectCard<ICard>;
 
@@ -92,7 +93,23 @@ describe('ProjectWorkshop', function() {
   it('Can select option if able to do both actions', function() {
     player.playedCards.push(advancedAlloys);
     player.megaCredits = 3;
-    const result = card.action(player);
-    expect(result instanceof OrOptions).is.true;
+    // That the response is OrOptions is the test.
+    TestingUtils.cast(card.action(player), OrOptions);
+  });
+
+  it('Project Workshop removes TR when flipping Ancient Shipyards', () => {
+    const ancientShipyards = new AncientShipyards();
+    player.addResourceTo(ancientShipyards, 5);
+
+    const originalTR = player.getTerraformRating();
+    player.playedCards.push(ancientShipyards);
+
+    const selectOption = TestingUtils.cast(card.action(player), SelectOption);
+
+    expect(selectOption.cb()).is.undefined;
+    expect(player.playedCards).is.empty;
+
+    expect(player.getTerraformRating()).to.eq(originalTR - 5);
+    expect(player.cardsInHand).has.lengthOf(2);
   });
 });

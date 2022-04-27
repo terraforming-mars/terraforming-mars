@@ -106,8 +106,10 @@ export class ProjectWorkshop extends Card implements ICorporationCard {
   private convertCardPointsToTR(player: Player, card: ICard) {
     const steps = card.getVictoryPoints(player);
     // TODO(kberg): this doesn't reduce VPs below 0. What to do?
-    if (steps !== 0) {
+    if (steps > 0) {
       player.increaseTerraformRatingSteps(steps, {log: true});
+    } else if (steps < 0) {
+      player.decreaseTerraformRatingSteps(-steps, {log: true});
     }
   }
 

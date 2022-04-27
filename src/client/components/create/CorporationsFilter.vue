@@ -91,16 +91,16 @@ export default Vue.extend({
       customCorporationsList: false,
       selectedCorporations: [
         // A bit sloppy since map is just above, but it will do.
-        ...corpCardNames(GameModule.Base)!,
-        ...this.corporateEra ? corpCardNames(GameModule.CorpEra) : [],
-        ...this.prelude ? corpCardNames(GameModule.Prelude) : [],
-        ...this.venusNext ? corpCardNames(GameModule.Venus) : [],
-        ...this.colonies ? corpCardNames(GameModule.Colonies) : [],
-        ...this.turmoil ? corpCardNames(GameModule.Turmoil) : [],
-        ...this.promoCardsOption ? corpCardNames(GameModule.Promo) : [],
-        ...this.communityCardsOption ? corpCardNames(GameModule.Community) : [],
-        ...this.moonExpansion ? corpCardNames(GameModule.Moon) : [],
-        ...this.pathfindersExpansion ? corpCardNames(GameModule.Pathfinders) : [],
+        ...corpCardNames('base')!,
+        ...this.corporateEra ? corpCardNames('corpera') : [],
+        ...this.prelude ? corpCardNames('prelude') : [],
+        ...this.venusNext ? corpCardNames('venus') : [],
+        ...this.colonies ? corpCardNames('colonies') : [],
+        ...this.turmoil ? corpCardNames('turmoil') : [],
+        ...this.promoCardsOption ? corpCardNames('promo') : [],
+        ...this.communityCardsOption ? corpCardNames('community') : [],
+        ...this.moonExpansion ? corpCardNames('moon') : [],
+        ...this.pathfindersExpansion ? corpCardNames('pathfinders') : [],
       ],
     };
   },
@@ -156,31 +156,31 @@ export default Vue.extend({
       this.$emit('corporation-list-changed', value);
     },
     corporateEra(enabled) {
-      this.watchSelect(GameModule.CorpEra, enabled);
+      this.watchSelect('corpera', enabled);
     },
     prelude(enabled) {
-      this.watchSelect(GameModule.Prelude, enabled);
+      this.watchSelect('prelude', enabled);
     },
     venusNext(enabled) {
-      this.watchSelect(GameModule.Venus, enabled);
+      this.watchSelect('venus', enabled);
     },
     colonies(enabled) {
-      this.watchSelect(GameModule.Colonies, enabled);
+      this.watchSelect('colonies', enabled);
     },
     turmoil(enabled) {
-      this.watchSelect(GameModule.Turmoil, enabled);
+      this.watchSelect('turmoil', enabled);
     },
     promoCardsOption(enabled) {
-      this.watchSelect(GameModule.Promo, enabled);
+      this.watchSelect('promo', enabled);
     },
     communityCardsOption(enabled) {
-      this.watchSelect(GameModule.Community, enabled);
+      this.watchSelect('community', enabled);
     },
     moonExpansion(enabled) {
-      this.watchSelect(GameModule.Moon, enabled);
+      this.watchSelect('moon', enabled);
     },
     pathfindersExpansion(enabled) {
-      this.watchSelect(GameModule.Pathfinders, enabled);
+      this.watchSelect('pathfinders', enabled);
     },
   },
 });

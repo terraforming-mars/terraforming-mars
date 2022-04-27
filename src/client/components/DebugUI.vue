@@ -157,7 +157,6 @@
 
 import Vue from 'vue';
 import Card from '@/client/components/card/Card.vue';
-import {GameModule} from '@/common/cards/GameModule';
 import {CardType} from '@/common/cards/CardType';
 import {CardName} from '@/common/cards/CardName';
 import {getPreferences} from '@/client/utils/PreferencesManager';
@@ -412,27 +411,27 @@ export default Vue.extend({
       if (!this.types[card.cardType]) return false;
 
       switch (card.module) {
-      case GameModule.Base:
+      case 'base':
         return this.base === true;
-      case GameModule.CorpEra:
+      case 'corpera':
         return this.corporateEra === true;
-      case GameModule.Promo:
+      case 'promo':
         return this.promo === true;
-      case GameModule.Venus:
+      case 'venus':
         return this.venusNext === true;
-      case GameModule.Colonies:
+      case 'colonies':
         return this.colonies === true;
-      case GameModule.Prelude:
+      case 'prelude':
         return this.prelude === true;
-      case GameModule.Turmoil:
+      case 'turmoil':
         return this.turmoil === true;
-      case GameModule.Community:
+      case 'community':
         return this.community === true;
-      case GameModule.Ares:
+      case 'ares':
         return this.ares === true;
-      case GameModule.Moon:
+      case 'moon':
         return this.moon === true;
-      case GameModule.Pathfinders:
+      case 'pathfinders':
         return this.pathfinders === true;
       default:
         return true;

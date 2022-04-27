@@ -15,8 +15,8 @@
     <div class="start-screen-header start-screen-link--languages">
       <language-switcher />
       <div class="start-screen-version-cont">
-        <div class="nowrap start-screen-date"><span v-i18n>deployed</span>: {{getAppDate()}}</div>
-        <div class="nowrap start-screen-version"><span v-i18n>version</span>: {{getAppVersion()}}</div>
+        <div class="nowrap start-screen-date"><span v-i18n>deployed</span>: {{raw_settings.builtAt}}</div>
+        <div class="nowrap start-screen-version"><span v-i18n>version</span>: {{raw_settings.head}}</div>
       </div>
     </div>
   </div>
@@ -36,26 +36,13 @@ import * as raw_settings from '@/genfiles/settings.json';
 
 export default Vue.extend({
   name: 'start-screen',
-  props: {
-    version: {
-      type: String as () => typeof raw_settings.version,
-    },
-  },
   components: {
     LanguageSwitcher,
     PreferencesIcon,
   },
-  methods: {
-    getAppVersion(): string {
-      const versionParts = this.version.split(' ');
-      return versionParts[0];
-    },
-    getAppDate(): string {
-      const versionParts = this.version.split(' ');
-      if (versionParts.length > 1) {
-        return versionParts.slice(1).join(' ');
-      }
-      return '';
+  computed: {
+    raw_settings(): typeof raw_settings {
+      return raw_settings;
     },
   },
 });

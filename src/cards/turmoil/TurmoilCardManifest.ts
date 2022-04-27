@@ -1,5 +1,4 @@
 import {CardName} from '../../common/cards/CardName';
-import {GameModule} from '../../common/cards/GameModule';
 import {CardManifest} from '../CardManifest';
 import {AerialLenses} from './AerialLenses';
 import {BannedDelegate} from './BannedDelegate';
@@ -25,7 +24,7 @@ import {VoteOfNoConfidence} from './VoteOfNoConfidence';
 import {WildlifeDome} from './WildlifeDome';
 
 export const TURMOIL_CARD_MANIFEST = new CardManifest({
-  module: GameModule.Turmoil,
+  module: 'turmoil',
   projectCards: [
     {cardName: CardName.AERIAL_LENSES, Factory: AerialLenses},
     {cardName: CardName.BANNED_DELEGATE, Factory: BannedDelegate},

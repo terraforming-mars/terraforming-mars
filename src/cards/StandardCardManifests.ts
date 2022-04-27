@@ -1,5 +1,4 @@
 import {CardName} from '../common/cards/CardName';
-import {GameModule} from '../common/cards/GameModule';
 import {AcquiredCompany} from './base/AcquiredCompany';
 import {AdaptationTechnology} from './base/AdaptationTechnology';
 import {AdaptedLichen} from './base/AdaptedLichen';
@@ -233,7 +232,7 @@ import {ConvertHeat} from './base/standardActions/ConvertHeat';
 import {BufferGasStandardProject} from './prelude/BufferGasStandardProject';
 
 export const BASE_CARD_MANIFEST = new CardManifest({
-  module: GameModule.Base,
+  module: 'base',
   projectCards: [
     {cardName: CardName.ADAPTATION_TECHNOLOGY, Factory: AdaptationTechnology},
     {cardName: CardName.ADAPTED_LICHEN, Factory: AdaptedLichen},
@@ -403,7 +402,7 @@ export const BASE_CARD_MANIFEST = new CardManifest({
 
 
 export const CORP_ERA_CARD_MANIFEST = new CardManifest({
-  module: GameModule.CorpEra,
+  module: 'corpera',
   projectCards: [
     {cardName: CardName.ACQUIRED_COMPANY, Factory: AcquiredCompany},
     {cardName: CardName.ADVANCED_ALLOYS, Factory: AdvancedAlloys},

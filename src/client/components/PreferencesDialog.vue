@@ -160,7 +160,7 @@ export default (Vue as WithRefs<Refs>).extend({
 
       <div class="preferences_panel_actions">
         <button class="btn btn-lg btn-primary" v-on:click="okClicked" v-i18n>Ok</button>
-        <button class="btn btn-lg btn-primary" v-on:click="$refs.bugDialog.show();" v-18n>Report a bug</button>
+        <button class="btn btn-lg btn-primary" v-on:click="$refs.bugDialog.show();" v-i18n>Report a bug</button>
       </div>
       <bug-report-dialog ref="bugDialog" :model="undefined" :source="'spectator'"></bug-report-dialog>
     </div>

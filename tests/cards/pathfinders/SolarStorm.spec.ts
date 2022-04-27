@@ -1,24 +1,34 @@
-import {RemoveResourcesFromCard} from '../../../src/deferredActions/RemoveResourcesFromCard';
 import {expect} from 'chai';
+
 import {SolarStorm} from '../../../src/cards/pathfinders/SolarStorm';
-import {Game} from '../../../src/Game';
 import {Units} from '../../../src/common/Units';
 import {TestPlayer} from '../../TestPlayer';
-import {TestPlayers} from '../../TestPlayers';
-import {CardResource} from '../../../src/common/CardResource';
+import {TestingUtils} from '../../TestingUtils';
+import {getTestPlayer, newTestGame} from '../../TestGame';
+import {Cryptocurrency} from '../../../src/cards/pathfinders/Cryptocurrency';
+import {CommunicationCenter} from '../../../src/cards/pathfinders/CommunicationCenter';
+import {OrOptions} from '../../../src/inputs/OrOptions';
+import {SelectCard} from '../../../src/inputs/SelectCard';
 
 describe('SolarStorm', function() {
   let card: SolarStorm;
   let player: TestPlayer;
   let player2: TestPlayer;
   let player3: TestPlayer;
+  let cryptocurrency: Cryptocurrency;
+  let communicationCenter: CommunicationCenter;
 
   beforeEach(function() {
     card = new SolarStorm();
-    player = TestPlayers.BLUE.newPlayer();
-    player2 = TestPlayers.RED.newPlayer();
-    player3 = TestPlayers.GREEN.newPlayer();
-    Game.newInstance('foobar', [player, player2, player3], player);
+    const game = newTestGame(3);
+    player = getTestPlayer(game, 0);
+    player2 = getTestPlayer(game, 1);
+    player3 = getTestPlayer(game, 2);
+    player.popWaitingFor();
+    player2.popWaitingFor();
+    player3.popWaitingFor();
+    cryptocurrency = new Cryptocurrency();
+    communicationCenter = new CommunicationCenter();
   });
 
   it('play', function() {
@@ -37,13 +47,49 @@ describe('SolarStorm', function() {
     expect(player2.plants).eq(13);
     expect(player3.plants).eq(398);
     expect(player.getProductionForTest()).deep.eq(Units.of({heat: 1}));
+  });
 
-    // Instead of testing all the ways RemoveResourcesFromCard can work, just see that
-    // it's using that.
-    const pi = player.game.deferredActions.peek()!;
-    expect(pi).instanceOf(RemoveResourcesFromCard);
-    const rr = pi as RemoveResourcesFromCard;
-    expect(rr.resourceType).eq(CardResource.DATA);
-    expect(rr.count).eq(3);
+  it('remove data, nobody has data', function() {
+    player.playedCards = [cryptocurrency];
+    player2.playedCards = [communicationCenter];
+    card.play(player);
+
+    TestingUtils.runAllActions(player.game);
+    expect(player.getWaitingFor()).is.undefined;
+  });
+
+  it('remove data, only you have data', function() {
+    player.playedCards = [cryptocurrency];
+    player2.playedCards = [communicationCenter];
+
+    cryptocurrency.resourceCount = 2;
+
+    card.play(player);
+
+    TestingUtils.runAllActions(player.game);
+
+    const orOptions = TestingUtils.cast(player.popWaitingFor(), OrOptions);
+    const selectCard = TestingUtils.cast(orOptions.options[0], SelectCard);
+    expect(selectCard.cards).has.members([cryptocurrency]);
+    selectCard.cb([cryptocurrency]);
+    expect(cryptocurrency.resourceCount).eq(0);
+  });
+
+  it('remove data, two players with data', function() {
+    player.playedCards = [cryptocurrency];
+    player2.playedCards = [communicationCenter];
+
+    cryptocurrency.resourceCount = 2;
+    communicationCenter.resourceCount = 6;
+
+    card.play(player);
+
+    TestingUtils.runAllActions(player.game);
+
+    const orOptions = TestingUtils.cast(player.popWaitingFor(), OrOptions);
+    const selectCard = TestingUtils.cast(orOptions.options[0], SelectCard);
+    expect(selectCard.cards).has.members([cryptocurrency, communicationCenter]);
+    selectCard.cb([communicationCenter]);
+    expect(communicationCenter.resourceCount).eq(3);
   });
 });

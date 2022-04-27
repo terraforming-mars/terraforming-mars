@@ -38,7 +38,8 @@ export class SolarStorm extends Card implements IProjectCard {
         p.deductResource(Resources.PLANTS, 2, {log: true, from: player});
       }
     });
-    player.game.defer(new RemoveResourcesFromCard(player, CardResource.DATA, 3));
+    player.game.defer(new RemoveResourcesFromCard(
+      player, CardResource.DATA, 3, /* ownCards */ false, /* mandatory */ false));
     player.game.increaseTemperature(player, 1);
     return undefined;
   }

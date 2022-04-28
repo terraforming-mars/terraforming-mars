@@ -1920,6 +1920,7 @@ export class Player {
       .sort((a, b) => a.cost - b.cost);
   }
 
+  // Subclassed by TestPlayer for testing.
   protected getStandardProjectOption(): SelectCard<StandardProjectCard> {
     const standardProjects: Array<StandardProjectCard> = this.getStandardProjects();
 

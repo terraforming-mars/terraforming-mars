@@ -53,6 +53,7 @@ export class TestPlayer extends Player {
     };
   }
 
+  // Just makes it public, and therefore callable for testing.
   public override getStandardProjectOption() {
     return super.getStandardProjectOption();
   }

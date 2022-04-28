@@ -47,7 +47,7 @@
                         <div class="create-game-page-column">
                             <h4 v-i18n>Expansions</h4>
 
-                            <input type="checkbox" name="allOfficialExpansions" id="allOfficialExpansions-checkbox" v-model="allOfficialExpansions" v-on:change="selectAll()">
+                            <input type="checkbox" name="allOfficialExpansions" id="allOfficialExpansions-checkbox" v-model="allOfficialExpansions">
                             <label for="allOfficialExpansions-checkbox">
                                 <span v-i18n>All</span>
                             </label>
@@ -64,7 +64,7 @@
                                 <span v-i18n>Prelude</span>
                             </label>
 
-                            <input type="checkbox" name="venusNext" id="venusNext-checkbox" v-model="venusNext" v-on:change="toggleVenusNext()">
+                            <input type="checkbox" name="venusNext" id="venusNext-checkbox" v-model="venusNext">
                             <label for="venusNext-checkbox" class="expansion-button">
                             <div class="create-game-expansion-icon expansion-icon-venus"></div>
                                 <span v-i18n>Venus Next</span>
@@ -76,7 +76,7 @@
                                 <span v-i18n>Colonies</span>
                             </label>
 
-                            <input type="checkbox" name="turmoil" id="turmoil-checkbox" v-model="turmoil" v-on:change="deselectPoliticalAgendasWhenDeselectingTurmoil()">
+                            <input type="checkbox" name="turmoil" id="turmoil-checkbox" v-model="turmoil">
                             <label for="turmoil-checkbox" class="expansion-button">
                                 <div class="create-game-expansion-icon expansion-icon-turmoil"></div>
                                 <span v-i18n>Turmoil</span>
@@ -613,6 +613,30 @@ export default (Vue as WithRefs<Refs>).extend({
       this.isSoloModePage = true;
     }
   },
+  watch: {
+    allOfficialExpansions(value: boolean) {
+      this.corporateEra = value;
+      this.prelude = value;
+      this.venusNext = value;
+      this.colonies = value;
+      this.turmoil = value;
+      this.promoCardsOption = value;
+      this.solarPhaseOption = value;
+    },
+    venusNext(value: boolean) {
+      this.solarPhaseOption = value;
+    },
+    turmoil(value: boolean) {
+      if (value === false) {
+        this.politicalAgendasExtension = AgendaStyle.STANDARD;
+      }
+    },
+    playersCount(value: number) {
+      if (value === 1) {
+        this.corporateEra = true;
+      }
+    },
+  },
   methods: {
     async downloadCurrentSettings() {
       const serializedData = await this.serializeSettings();
@@ -734,23 +758,6 @@ export default (Vue as WithRefs<Refs>).extend({
     },
     isBeginnerToggleEnabled(): Boolean {
       return !(this.initialDraft || this.prelude || this.venusNext || this.colonies || this.turmoil);
-    },
-    selectAll() {
-      this.corporateEra = this.$data.allOfficialExpansions;
-      this.prelude = this.$data.allOfficialExpansions;
-      this.venusNext = this.$data.allOfficialExpansions;
-      this.colonies = this.$data.allOfficialExpansions;
-      this.turmoil = this.$data.allOfficialExpansions;
-      this.promoCardsOption = this.$data.allOfficialExpansions;
-      this.solarPhaseOption = this.$data.allOfficialExpansions;
-    },
-    toggleVenusNext() {
-      this.solarPhaseOption = this.$data.venusNext;
-    },
-    deselectPoliticalAgendasWhenDeselectingTurmoil() {
-      if (this.$data.turmoil === false) {
-        this.politicalAgendasExtension = AgendaStyle.STANDARD;
-      }
     },
     deselectVenusCompletion() {
       if (this.$data.venusNext === false) {

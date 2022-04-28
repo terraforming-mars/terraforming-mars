@@ -1862,14 +1862,6 @@ export class Player {
       return false;
     }
 
-    const canUseSteel: boolean = options?.steel ?? false;
-    const canUseTitanium: boolean = options?.titanium ?? false;
-    const canUseFloaters: boolean = options?.floaters ?? false;
-    const canUseMicrobes: boolean = options?.microbes ?? false;
-    const canUseScience: boolean = options?.science ?? false;
-    const canUseSeeds: boolean = options?.seeds ?? false;
-    const canUseData: boolean = options?.data ?? false;
-
     const redsCost = TurmoilHandler.computeTerraformRatingBump(this, options?.tr) * REDS_RULING_POLICY_COST;
 
     let availableMegacredits = this.megaCredits;
@@ -1883,14 +1875,15 @@ export class Player {
     if (availableMegacredits < 0) {
       return false;
     }
-    return cost <= availableMegacredits +
-      (canUseSteel ? (this.steel - reserveUnits.steel) * this.getSteelValue() : 0) +
-      (canUseTitanium ? (this.titanium - reserveUnits.titanium) * this.getTitaniumValue() : 0) +
-      (canUseFloaters ? this.getFloatersCanSpend() * 3 : 0) +
-      (canUseMicrobes ? this.getMicrobesCanSpend() * 2 : 0) +
-      (canUseScience ? this.getSpendableScienceResources() : 0) +
-      (canUseSeeds ? this.getSpendableSeedResources() * constants.SEED_VALUE : 0) +
-      (canUseData ? this.getSpendableData() * constants.DATA_VALUE : 0);
+
+    if (options?.steel) availableMegacredits += (this.steel - reserveUnits.steel) * this.getSteelValue();
+    if (options?.titanium) availableMegacredits += (this.titanium - reserveUnits.titanium) * this.getTitaniumValue();
+    if (options?.floaters) availableMegacredits += this.getFloatersCanSpend() * 3;
+    if (options?.microbes) availableMegacredits += this.getMicrobesCanSpend() * 2;
+    if (options?.science) availableMegacredits += this.getSpendableScienceResources();
+    if (options?.seeds) availableMegacredits += this.getSpendableSeedResources() * constants.SEED_VALUE;
+    if (options?.data) availableMegacredits += this.getSpendableData() * constants.DATA_VALUE;
+    return cost <= availableMegacredits;
   }
 
   private getStandardProjects(): Array<StandardProjectCard> {

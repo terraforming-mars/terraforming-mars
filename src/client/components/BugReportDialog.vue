@@ -4,7 +4,7 @@
         a <a href="https://github.com/terraforming-mars/terraforming-mars/issues/new?template=from-heroku.md" target="_blank">GitHub issue</a>
       or the <a href="https://discord.com/channels/737945098695999559/742721510376210583" target="_blank">#bug-reports Discord channel</a>
     </p>
-    <textarea ref="textarea" readonly rows="5" cols = "40" v-model="message"></textarea>
+    <textarea ref="textarea" readonly rows="6" cols = "50" v-model="message"></textarea>
     <menu class="dialog-menu centered-content">
       <div>
         <button class="btn btn-lg btn-primary" @click="copyTextArea">Copy to Clipboard</button>
@@ -19,9 +19,10 @@
 import Vue from 'vue';
 import {WithRefs} from 'vue-typed-refs';
 import {showModal, windowHasHTMLDialogElement} from '@/client/components/HTMLDialogElementCompatibility';
-import {GameModel} from '@/common/models/GameModel';
-import {Color} from '@/common/Color';
 import * as raw_settings from '@/genfiles/settings.json';
+import {MainAppData} from '@/client/components/App';
+import {PlayerViewModel} from '@/common/models/PlayerModel';
+import {SpectatorId} from '@/common/Types';
 
 const dialogPolyfill = require('dialog-polyfill');
 
@@ -31,10 +32,12 @@ type Refs = {
   copied: HTMLSpanElement,
 }
 
-function spectatorUrl(model: GameModel | undefined) {
+function url(playerView?: PlayerViewModel) {
   const url = new URL(window.location.href);
-  if (url.searchParams.has('id') && model?.spectatorId) {
-    url.searchParams.set('id', model.spectatorId);
+  const spectatorId: SpectatorId | undefined = playerView?.game?.spectatorId;
+  if (spectatorId && url.pathname === '/player' && url.searchParams.has('id')) {
+    url.searchParams.set('id', spectatorId);
+    url.pathname = '/spectator';
   }
   return url;
 }
@@ -59,19 +62,13 @@ function browser(): string {
 
 export default (Vue as WithRefs<Refs>).extend({
   name: 'BugReportDialog',
-  props: {
-    model: {
-      type: Object as () => GameModel,
-      required: false,
-    },
-    source: {
-      type: String as () => Color | 'spectator',
-    },
-  },
   data() {
+    const mainData = this.$root as unknown as MainAppData;
+    const playerView: PlayerViewModel | undefined = mainData.playerView;
     return {
-      message: `URL: ${spectatorUrl(this.model)}
-Player color: ${this.source}
+      message: `URL: ${url(playerView)}
+Player color: ${playerView?.thisPlayer.color}
+Step: ${playerView?.game.step}
 Version: ${raw_settings.head}, built at ${raw_settings.builtAt}
 Browser: ${browser()}`,
       showCopied: false,

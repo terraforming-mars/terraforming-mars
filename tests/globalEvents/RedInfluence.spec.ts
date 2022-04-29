@@ -30,4 +30,17 @@ describe('RedInfluence', function() {
     expect(player.getProduction(Resources.MEGACREDITS)).to.eq(0);
     expect(player2.getProduction(Resources.MEGACREDITS)).to.eq(3);
   });
+
+  it('Max 5', function() {
+    const card = new RedInfluence();
+    const player = TestPlayers.BLACK.newPlayer();
+    const game = Game.newInstance('foobar', [player], player);
+    const turmoil = Turmoil.newInstance(game);
+
+    player.setTerraformRating(59);
+    player.megaCredits = 20;
+
+    card.resolve(game, turmoil);
+    expect(player.getResource(Resources.MEGACREDITS)).to.eq(5);
+  });
 });

@@ -24,8 +24,9 @@ export class RedInfluence extends GlobalEvent implements IGlobalEvent {
   }
   public resolve(game: Game, turmoil: Turmoil) {
     game.getPlayersInGenerationOrder().forEach((player) => {
-      const amount = Math.floor((player.getTerraformRating() - 10)/5);
-      if (amount > 0) {
+      const sets = Math.floor((player.getTerraformRating() - 10)/5);
+      if (sets > 0) {
+        const amount = Math.min(sets, 5);
         player.deductResource(Resources.MEGACREDITS, amount * 3, {log: true, from: this.name});
       }
       player.addProduction(Resources.MEGACREDITS, turmoil.getPlayerInfluence(player), {log: true, from: this.name});

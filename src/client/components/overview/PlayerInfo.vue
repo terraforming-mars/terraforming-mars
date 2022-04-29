@@ -40,6 +40,10 @@ export default Vue.extend({
       type: Boolean,
       default: false,
     },
+    isTopBar: {
+      type: Boolean,
+      default: false,
+    },
   },
   components: {
     Button,
@@ -48,6 +52,11 @@ export default Vue.extend({
     'player-status': PlayerStatus,
   },
   mixins: [PlayerMixin],
+  computed: {
+    tooltipCss(): string {
+      return 'tooltip tooltip-' + (this.isTopBar ? 'bottom' : 'top');
+    },
+  },
   methods: {
     getClasses(): string {
       const classes = ['player-info'];
@@ -130,7 +139,7 @@ export default Vue.extend({
             </div>
             <Button class="played-cards-button" size="tiny" @click="togglePlayerDetails" :title="buttonLabel()" />
           </div>
-          <div class="tag-display player-board-blue-action-counter tooltip tooltip-top" data-tooltip="The number of available actions on active cards">
+          <div class="tag-display player-board-blue-action-counter" :class="tooltipCss" data-tooltip="The number of available actions on active cards">
             <div class="tag-count tag-action-card">
               <div class="blue-stripe"></div>
               <div class="red-arrow"></div>
@@ -138,6 +147,6 @@ export default Vue.extend({
             <span class="tag-count-display">{{ getAvailableBlueActionCount() }}</span>
           </div>
         </div>
-        <PlayerTags :player="player" :playerView="playerView" :hideZeroTags="hideZeroTags" />
+        <PlayerTags :player="player" :playerView="playerView" :hideZeroTags="hideZeroTags" :isTopBar="isTopBar" />
       </div>
 </template>

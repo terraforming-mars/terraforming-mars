@@ -78,6 +78,7 @@ export class SelfReplicatingRobots extends Card implements IProjectCard {
           });
           return undefined;
         },
+        {played: CardName.SELF_REPLICATING_ROBOTS},
       ));
     }
 
@@ -97,6 +98,7 @@ export class SelfReplicatingRobots extends Card implements IProjectCard {
           player.game.log('${0} linked ${1} with ${2}', (b) => b.player(player).card(foundCards[0]).card(this));
           return undefined;
         },
+        {played: CardName.SELF_REPLICATING_ROBOTS},
       ));
     }
 

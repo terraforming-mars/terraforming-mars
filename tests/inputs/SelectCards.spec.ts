@@ -20,8 +20,7 @@ describe('SelectCard', function() {
         cbArray.push(_cards);
         return undefined;
       },
-      1, 1, false,
-      [true, false, true],
+      {enabled: [true, false, true]},
     );
 
     player.runInput([[cards[0].name]], selectCards);

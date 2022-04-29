@@ -51,8 +51,8 @@ describe('DrawCards', function() {
   it('draws 2 from 4', function() {
     const action = DrawCards.keepSome(player, 4, {keepMax: 2}).execute();
     expect(action).instanceOf(SelectCard);
-    expect(action!.minCardsToSelect).to.eq(2);
-    expect(action!.maxCardsToSelect).to.eq(2);
+    expect(action!.config.min).to.eq(2);
+    expect(action!.config.max).to.eq(2);
     action!.cb([action!.cards[0], action!.cards[2]]);
     expect(player.cardsInHand).has.length(2);
     expect(dealer.discarded).has.length(2);
@@ -62,8 +62,8 @@ describe('DrawCards', function() {
     player.megaCredits = 3;
     const action = DrawCards.keepSome(player, 1, {paying: true}).execute();
     expect(action).instanceOf(SelectCard);
-    expect(action!.minCardsToSelect).to.eq(0);
-    expect(action!.maxCardsToSelect).to.eq(1);
+    expect(action!.config.min).to.eq(0);
+    expect(action!.config.max).to.eq(1);
     action!.cb([action!.cards[0]]);
     player.game.deferredActions.runNext();
     expect(player.cardsInHand).has.length(1);
@@ -75,8 +75,8 @@ describe('DrawCards', function() {
     player.megaCredits = 2;
     const action = DrawCards.keepSome(player, 1, {paying: true}).execute();
     expect(action).instanceOf(SelectCard);
-    expect(action!.minCardsToSelect).to.eq(0);
-    expect(action!.maxCardsToSelect).to.eq(0);
+    expect(action!.config.min).to.eq(0);
+    expect(action!.config.max).to.eq(0);
     action!.cb([]);
     expect(player.cardsInHand).has.length(0);
     expect(dealer.discarded).has.length(1);

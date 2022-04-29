@@ -29,8 +29,7 @@ export class DiscardCards extends DeferredAction {
         }
         return undefined;
       },
-      this.count,
-      this.count,
+      {min: this.count, max: this.count},
     );
   }
 }

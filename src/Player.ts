@@ -915,9 +915,9 @@ export class Player {
   }
 
   // Counts the number of distinct tags
-  public getDistinctTagCount(countWild: boolean, extraTag?: Tags): number {
+  public getDistinctTagCount(mode: 'default' | 'milestone' | 'globalEvent', extraTag?: Tags): number {
     const allTags: Tags[] = [];
-    let wildcardCount: number = 0;
+    let wildTagCount: number = 0;
     if (extraTag !== undefined) {
       allTags.push(extraTag);
     }
@@ -935,24 +935,25 @@ export class Player {
     });
     for (const tags of allTags) {
       if (tags === Tags.WILDCARD) {
-        wildcardCount++;
+        wildTagCount++;
       } else {
         uniqueTags.add(tags);
       }
     }
-    if (countWild) {
-      // TODO(kberg): it might be more correct to count all the tags
-      // in a game regardless of expansion? But if that happens it needs
-      // to be done once, during set-up so that this operation doesn't
-      // always go through every tag every time.
-      let maxTagCount = 10;
-      if (this.game.gameOptions.venusNextExtension) maxTagCount++;
-      if (this.game.gameOptions.moonExpansion) maxTagCount++;
-      if (this.game.gameOptions.pathfindersExpansion) maxTagCount++;
-      return Math.min(uniqueTags.size + wildcardCount, maxTagCount);
-    } else {
-      return uniqueTags.size;
-    }
+
+    if (mode === 'globalEvent') return uniqueTags.size;
+
+    if (mode === 'milestone' && this.corporationCard?.name === CardName.CHIMERA) wildTagCount--;
+
+    // TODO(kberg): it might be more correct to count all the tags
+    // in a game regardless of expansion? But if that happens it needs
+    // to be done once, during set-up so that this operation doesn't
+    // always go through every tag every time.
+    let maxTagCount = 10;
+    if (this.game.gameOptions.venusNextExtension) maxTagCount++;
+    if (this.game.gameOptions.moonExpansion) maxTagCount++;
+    if (this.game.gameOptions.pathfindersExpansion) maxTagCount++;
+    return Math.min(uniqueTags.size + wildTagCount, maxTagCount);
   }
 
   // Return true if this player has all the tags in `tags` showing.

@@ -14,34 +14,38 @@ export class GrantVenusAltTrackBonusDeferred extends DeferredAction {
     super(player, Priority.GAIN_RESOURCE_OR_PRODUCTION);
   }
 
-  private newSelectResources(count: number) {
+  private selectStandardResources(count: number) {
     return new SelectResources(
       this.player,
       count,
       `Gain ${count} resources for your Venus track bonus.`,
     );
   }
+
   public execute() {
-    if (this.wildResource === false) {
-      return this.newSelectResources(this.standardResourceCount);
+    const resourceCards = this.player.getResourceCards(undefined);
+
+    if (this.wildResource === false || resourceCards.length === 0) {
+      return this.selectStandardResources(this.standardResourceCount);
     }
 
-    const cards = this.player.getResourceCards(undefined);
-    const card = new SelectCard('Add resource to card', 'Add resource', cards,
+    const selectCard = new SelectCard('Add resource to card', 'Add resource', resourceCards,
       (selected: Array<ICard>) => {
         this.player.addResourceTo(selected[0], {qty: 1, log: true});
         return undefined;
       },
     );
-    const wild = new OrOptions(this.newSelectResources(1), card);
-    wild.title = (this.standardResourceCount === 0) ?
-      'Choose your wild resource bonus.':
-      `Choose your wild resource bonus, after which you will gain ${this.standardResourceCount} more distinct standard resources.`;
-    wild.cb = () => {
-      return this.standardResourceCount > 0 ?
-        this.newSelectResources(this.standardResourceCount) :
-        undefined;
-    };
+    const wild = new OrOptions(selectCard, this.selectStandardResources(1));
+    if (this.standardResourceCount > 0) {
+      wild.cb = () => {
+        return this.standardResourceCount > 0 ?
+          this.selectStandardResources(this.standardResourceCount) :
+          undefined;
+      };
+      wild.title = `Choose your wild resource bonus, after which you will gain ${this.standardResourceCount} more distinct standard resources.`;
+    } else {
+      wild.title = 'Choose your wild resource bonus.';
+    }
     return wild;
   }
 }

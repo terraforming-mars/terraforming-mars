@@ -9,7 +9,7 @@
           <CardContent v-if="getCardMetadata() !== undefined" :metadata="getCardMetadata()" :requirements="getCardRequirements()" :isCorporation="isCorporationCard()"/>
       </div>
       <CardExpansion :expansion="getCardExpansion()" :isCorporation="isCorporationCard()"/>
-      <CardResourceCounter v-if="hasResourceType" :amount="getResourceAmount(card)" :type="resourceType" />
+      <CardResourceCounter v-if="hasResourceType" :amount="getResourceAmount()" :type="resourceType" />
       <CardExtraContent :card="card" />
       <slot/>
   </div>
@@ -47,14 +47,18 @@ export default Vue.extend({
     CardContent,
   },
   props: {
-    'card': {
+    card: {
       type: Object as () => CardModel,
       required: true,
     },
-    'actionUsed': {
+    actionUsed: {
       type: Boolean,
       required: false,
       default: false,
+    },
+    robotCard: {
+      type: Object as () => CardModel | undefined,
+      required: false,
     },
   },
   data() {
@@ -120,8 +124,8 @@ export default Vue.extend({
     getCardRequirements(): ICardRequirements | undefined {
       return this.cardInstance.requirements;
     },
-    getResourceAmount(card: CardModel): number {
-      return card.resources !== undefined ? card.resources : 0;
+    getResourceAmount(): number {
+      return this.card.resources || this.robotCard?.resources || 0;
     },
     isCorporationCard() : boolean {
       return this.getCardType() === CardType.CORPORATION;
@@ -132,9 +136,12 @@ export default Vue.extend({
   },
   computed: {
     hasResourceType(): boolean {
-      return this.card.resourceType !== undefined || this.cardInstance.resourceType !== undefined;
+      return this.card.resourceType !== undefined ||
+        this.cardInstance.resourceType !== undefined ||
+        this.robotCard !== undefined;
     },
     resourceType(): CardResource {
+      if (this.robotCard !== undefined) return CardResource.RESOURCE_CUBE;
       if (this.card.resourceType !== undefined) return this.card.resourceType;
       if (this.cardInstance.resourceType !== undefined) return this.cardInstance.resourceType;
       return CardResource.RESOURCE_CUBE;

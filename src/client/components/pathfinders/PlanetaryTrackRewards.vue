@@ -34,7 +34,7 @@ export default Vue.extend({
     };
   },
   computed: {
-    myReward(): Array<Reward> {
+    myReward(): ReadonlyArray<Reward> {
       switch (this.type) {
       case 'risingPlayer':
         return this.rewards.risingPlayer;

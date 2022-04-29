@@ -7,6 +7,7 @@ import {ICloneTagCard} from '../cards/pathfinders/ICloneTagCard';
 import {ICard} from '../cards/ICard';
 import {CardType} from '../common/cards/CardType';
 import {IProjectCard} from '../cards/IProjectCard';
+import {PlanetaryTag} from './PathfindersExpansion';
 
 /**
  * Declare what tag a new card has. Must occur before anything else, including
@@ -20,7 +21,7 @@ export class DeclareCloneTag extends DeferredAction {
   public constructor(
     player: Player,
     public card: ICard & ICloneTagCard,
-    public cb: (tag: Tags) => void = () => {},
+    public cb: (tag: PlanetaryTag) => void = () => {},
     public title: string = '') {
     super(player, Priority.DECLARE_CLONE_TAG);
     if (this.title === '') {
@@ -29,7 +30,7 @@ export class DeclareCloneTag extends DeferredAction {
   }
 
   public execute() {
-    const tags = [Tags.EARTH, Tags.JOVIAN, Tags.MARS];
+    const tags: Array<PlanetaryTag> = [Tags.EARTH, Tags.JOVIAN, Tags.MARS];
     if (this.player.game.gameOptions.venusNextExtension === true) {
       tags.push(Tags.VENUS);
     }

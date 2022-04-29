@@ -1268,7 +1268,7 @@ export class Game {
   }
 
   public getCitiesCount(player?: Player): number {
-    let cities = this.board.spaces.filter((space) => Board.isCitySpace(space));
+    let cities = this.board.spaces.filter(Board.isCitySpace);
     if (player !== undefined) cities = cities.filter(Board.ownedBy(player));
     return cities.length;
   }

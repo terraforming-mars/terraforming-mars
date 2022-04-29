@@ -9,6 +9,7 @@ export class AsteroidStandardProject extends StandardProjectCard {
     super({
       name: CardName.ASTEROID_STANDARD_PROJECT,
       cost: 14,
+      tr: {temperature: 1},
       metadata: {
         cardNumber: 'SP9',
         renderData: CardRenderer.builder((b) =>
@@ -24,9 +25,7 @@ export class AsteroidStandardProject extends StandardProjectCard {
     if (player.game.getTemperature() === constants.MAX_TEMPERATURE) {
       return false;
     }
-    return player.canAfford(this.cost, {
-      tr: {temperature: 1},
-    });
+    return super.canAct(player);
   }
 
   actionEssence(player: Player): void {

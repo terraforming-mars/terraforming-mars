@@ -895,7 +895,7 @@ export class Player {
 
   // Return the total number of tags assocaited with these types.
   // Tag substitutions are included
-  public getMultipleTagCount(tags: Array<Tags>): number {
+  public getMultipleTagCount(tags: Array<Tags>, mode: 'default' | 'milestones' = 'default'): number {
     let tagCount = 0;
     tags.forEach((tag) => {
       tagCount += this.getRawTagCount(tag, false);
@@ -906,7 +906,12 @@ export class Player {
       tagCount += this.getRawTagCount(Tags.MOON, false);
     }
 
-    return tagCount + this.getRawTagCount(Tags.WILDCARD, false);
+    tagCount += this.getRawTagCount(Tags.WILDCARD, false);
+
+    // Chimera has 2 wild tags but should only count as one for milestones.
+    if (this.corporationCard?.name === CardName.CHIMERA && mode === 'milestones') tagCount--;
+
+    return tagCount;
   }
 
   // Counts the number of distinct tags
@@ -1857,14 +1862,6 @@ export class Player {
       return false;
     }
 
-    const canUseSteel: boolean = options?.steel ?? false;
-    const canUseTitanium: boolean = options?.titanium ?? false;
-    const canUseFloaters: boolean = options?.floaters ?? false;
-    const canUseMicrobes: boolean = options?.microbes ?? false;
-    const canUseScience: boolean = options?.science ?? false;
-    const canUseSeeds: boolean = options?.seeds ?? false;
-    const canUseData: boolean = options?.data ?? false;
-
     const redsCost = TurmoilHandler.computeTerraformRatingBump(this, options?.tr) * REDS_RULING_POLICY_COST;
 
     let availableMegacredits = this.megaCredits;
@@ -1878,18 +1875,20 @@ export class Player {
     if (availableMegacredits < 0) {
       return false;
     }
-    return cost <= availableMegacredits +
-      (canUseSteel ? (this.steel - reserveUnits.steel) * this.getSteelValue() : 0) +
-      (canUseTitanium ? (this.titanium - reserveUnits.titanium) * this.getTitaniumValue() : 0) +
-      (canUseFloaters ? this.getFloatersCanSpend() * 3 : 0) +
-      (canUseMicrobes ? this.getMicrobesCanSpend() * 2 : 0) +
-      (canUseScience ? this.getSpendableScienceResources() : 0) +
-      (canUseSeeds ? this.getSpendableSeedResources() * constants.SEED_VALUE : 0) +
-      (canUseData ? this.getSpendableData() * constants.DATA_VALUE : 0);
+
+    if (options?.steel) availableMegacredits += (this.steel - reserveUnits.steel) * this.getSteelValue();
+    if (options?.titanium) availableMegacredits += (this.titanium - reserveUnits.titanium) * this.getTitaniumValue();
+    if (options?.floaters) availableMegacredits += this.getFloatersCanSpend() * 3;
+    if (options?.microbes) availableMegacredits += this.getMicrobesCanSpend() * 2;
+    if (options?.science) availableMegacredits += this.getSpendableScienceResources();
+    if (options?.seeds) availableMegacredits += this.getSpendableSeedResources() * constants.SEED_VALUE;
+    if (options?.data) availableMegacredits += this.getSpendableData() * constants.DATA_VALUE;
+    return cost <= availableMegacredits;
   }
 
   private getStandardProjects(): Array<StandardProjectCard> {
-    return new CardLoader(this.game.gameOptions)
+    const gameOptions = this.game.gameOptions;
+    return new CardLoader(gameOptions)
       .getStandardProjects()
       .filter((card) => {
         switch (card.name) {
@@ -1898,11 +1897,15 @@ export class Player {
           return false;
         // For buffer gas, show ONLY IF in solo AND 63TR mode
         case CardName.BUFFER_GAS_STANDARD_PROJECT:
-          return this.game.isSoloMode() && this.game.gameOptions.soloTR;
+          return this.game.isSoloMode() && gameOptions.soloTR;
         case CardName.AIR_SCRAPPING_STANDARD_PROJECT:
-          return this.game.gameOptions.altVenusBoard === false;
+          return gameOptions.altVenusBoard === false;
         case CardName.AIR_SCRAPPING_STANDARD_PROJECT_VARIANT:
-          return this.game.gameOptions.altVenusBoard === true;
+          return gameOptions.altVenusBoard === true;
+        case CardName.MOON_COLONY_STANDARD_PROJECT_V2:
+        case CardName.MOON_MINE_STANDARD_PROJECT_V2:
+        case CardName.MOON_ROAD_STANDARD_PROJECT_V2:
+          return gameOptions.moonStandardProjectVariant === true;
         default:
           return true;
         }
@@ -1910,6 +1913,7 @@ export class Player {
       .sort((a, b) => a.cost - b.cost);
   }
 
+  // Subclassed by TestPlayer for testing.
   protected getStandardProjectOption(): SelectCard<StandardProjectCard> {
     const standardProjects: Array<StandardProjectCard> = this.getStandardProjects();
 
@@ -1932,6 +1936,7 @@ export class Player {
    * should only be false in testing and when this method is called during game deserialization. In other
    * words, don't set this value unless you know what you're doing.
    */
+  // @ts-ignore saveBeforeTakingAction is unused at the moment.
   public takeAction(saveBeforeTakingAction: boolean = true): void {
     const game = this.game;
 
@@ -1942,7 +1947,8 @@ export class Player {
 
     const allOtherPlayersHavePassed = this.allOtherPlayersHavePassed();
 
-    if (saveBeforeTakingAction) game.save();
+    if (this.actionsTakenThisRound === 0 || game.gameOptions.undoOption) game.save();
+    // if (saveBeforeTakingAction) game.save();
 
     // Prelude cards have to be played first
     if (this.preludeCardsInHand.length > 0) {

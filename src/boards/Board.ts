@@ -5,7 +5,6 @@ import {SpaceType} from '../common/boards/SpaceType';
 import {BASE_OCEAN_TILES as UNCOVERED_OCEAN_TILES, CITY_TILES, GREENERY_TILES, OCEAN_TILES, OCEAN_UPGRADE_TILES, TileType} from '../common/TileType';
 import {AresHandler} from '../ares/AresHandler';
 import {SerializedBoard, SerializedSpace} from './SerializedBoard';
-import {SpaceName} from '../SpaceName';
 import {CardName} from '../common/cards/CardName';
 
 /**
@@ -302,16 +301,6 @@ export abstract class Board {
       x: serialized.x,
       y: serialized.y,
     };
-
-    // Patch for games with a broken spacetype for noctis city.
-    // TODO(kberg): Remove this patch by 2022-04-01
-    // See https://github.com/terraforming-mars/terraforming-mars/issues/4056
-    if (serialized.spaceType === undefined) {
-      console.log(`Undefined space type for ${space.id}`);
-      if (space.id === SpaceName.NOCTIS_CITY) {
-        space.spaceType = SpaceType.LAND;
-      }
-    }
 
     if (serialized.tile !== undefined) {
       space.tile = serialized.tile;

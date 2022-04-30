@@ -29,7 +29,9 @@ export class SurveyMission extends PreludeCard {
   }
 
   private validTriplets(board: Board): Array<Triplet> {
-    const spaces = board.getNonReservedLandSpaces();
+    const spaces = board.getNonReservedLandSpaces().filter((space) => {
+      return space.player === undefined && (space.tile === undefined || space.tile.protectedHazard === true);
+    });
 
     const result: Array<Triplet> = [];
 
@@ -42,9 +44,6 @@ export class SurveyMission extends PreludeCard {
     }
 
     spaces.forEach((space) => {
-      if (space.id === '03') {
-        console.log('space 3');
-      }
       const adjacentSpaces = board.getAdjacentSpaces(space).filter((adjacent) => validAdjacentSpace(space, adjacent));
       for (let idx1 = 0; idx1 <= adjacentSpaces.length - 2; idx1++) {
         const n1 = adjacentSpaces[idx1];

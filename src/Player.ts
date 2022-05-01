@@ -1116,7 +1116,7 @@ export class Player {
       if (!Units.keys.every((k) => units[k] >= 0)) {
         throw new Error('All units must be positive');
       }
-      if (!this.hasUnits(units)) {
+      if (!this.canAdjustProduction(Units.negative(units))) {
         throw new Error('You do not have those units');
       }
       pi.cb(units);

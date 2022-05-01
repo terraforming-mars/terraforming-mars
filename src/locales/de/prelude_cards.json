@@ -1,0 +1,24 @@
+{
+    "Psychrophiles": "Psychrophilen",
+    "Action: Add 1 microbe to this card.": "AKTION: Füge dieser Karte 1 Mikrobe hinzu.",
+    "Effect: When paying for a plant card, microbes here may be used as 2 M€ each.": "EFFEKT: Wenn du eine Pflanzenkarte bezahlst, darfst Du Mikroben von dieser Karte für je 2 M€ verwenden.",
+    "Temperature must be -20 C or lower.": "Temperatur muss -20 °C oder niedriger sein.",
+
+    "Research Coordination": "Koordinierte Forschung",
+    "After being played, when you perform an action, the wild tag counts as any tag of your choice.": "Wenn du eine Aktion ausführst, zählt das Joker-Symbol als ein Symbol deiner Wahl.",
+
+    "SF Memorial": "Sci-Fi-Gedenkstätte",
+    "Draw 1 card.": "Ziehe 1 Karte.",
+
+    "Martian Survey": "Marsvermessung",
+    "Oxygen must be 4% or lower. Draw two cards.": "Sauerstoffgehalt muss 4% oder niedriger sein. Ziehe zwei Karten.",
+
+    "House Printing": "Häuserdruck",
+    "Increase your steel production 1 step.": "Erhöhe deine Stahlproduktion um 1.",
+
+    "Space Hotels": "Weltraumhotels",
+    "Requires 2 Earth tags. Increase M€ production 4 steps.": "Erfordert 2 Erdsymbole. Erhöhe deine M€-Produktion um 4.",
+
+    "Lava Tube Settlement": "Lavaröhren-Siedlung",
+    "Decrease your Energy production 1 step and increase your M€ production 2 steps. Place a City Tile on a VOLCANIC AREA regardless of adjacent cities.": "Senke deine Energie-Produktion um 1 und erhöhe deine M€-Produktion um 2. Platziere ein Stadtplättchen auf einem VULKAN unabhängig von angrenzenden Stadtplättchen."
+}

@@ -72,16 +72,12 @@ export class VastitasBorealisBoard extends Board {
     return this.filterVastitasBorealis(player, super.getAvailableSpacesForGreenery(player));
   }
 
-  public getVolcanicSpaceIds(): Array<string> {
+  public override getVolcanicSpaceIds(): Array<string> {
     return [
       SpaceName.ELYSIUM_MONS_VASTITAS_BOREALIS,
       SpaceName.ALBA_FOSSAE,
       SpaceName.CERANIUS_FOSSAE,
       SpaceName.ALBA_MONS,
     ];
-  }
-
-  public getNoctisCitySpaceIds(): Array<string> {
-    return [];
   }
 }

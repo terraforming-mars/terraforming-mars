@@ -46,16 +46,12 @@ export class ElysiumBoard extends Board {
     return new ElysiumBoard(Board.deserializeSpaces(board.spaces, players));
   }
 
-  public getVolcanicSpaceIds(): Array<string> {
+  public override getVolcanicSpaceIds(): Array<string> {
     return [
       SpaceName.ARSIA_MONS_ELYSIUM,
       SpaceName.ELYSIUM_MONS,
       SpaceName.HECATES_THOLUS,
       SpaceName.OLYMPUS_MONS,
     ];
-  }
-
-  public getNoctisCitySpaceIds(): Array<string> {
-    return [];
   }
 }

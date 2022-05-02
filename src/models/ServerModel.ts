@@ -471,13 +471,13 @@ export class Server {
 
   private static getSpaces(board: Board): Array<SpaceModel> {
     const volcanicSpaceIds = board.getVolcanicSpaceIds();
-    const noctisCitySpaceIds = board.getNoctisCitySpaceIds();
+    const noctisCitySpaceIds = board.getNoctisCitySpaceId();
 
     return board.spaces.map((space) => {
       let highlight: SpaceHighlight = undefined;
       if (volcanicSpaceIds.includes(space.id)) {
         highlight = 'volcanic';
-      } else if (noctisCitySpaceIds.includes(space.id)) {
+      } else if (noctisCitySpaceIds === space.id) {
         highlight = 'noctis';
       }
       return {

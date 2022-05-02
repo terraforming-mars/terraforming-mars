@@ -22,7 +22,7 @@ const VALID_BONUSES: Array<SpaceBonus> = [
   SpaceBonus.MEGACREDITS,
   SpaceBonus.ANIMAL,
   SpaceBonus.MICROBE,
-  SpaceBonus.POWER,
+  SpaceBonus.ENERGY,
   SpaceBonus.DATA,
   SpaceBonus.SCIENCE,
 ];

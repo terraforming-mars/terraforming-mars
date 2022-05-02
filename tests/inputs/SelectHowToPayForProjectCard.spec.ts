@@ -39,7 +39,18 @@ describe('SelectHowToPayForProjectCard', function() {
 
   it('rejects negative inputs', () => {
     expect(() => cb(CardName.SOLETTA, HowToPay.of({megaCredits: 50, titanium: -5}), cards))
-      .to.throw('Unable to parse HowToPay');
+      .to.throw('You do not have that many');
+  });
+
+  it('rejects overspending', () => {
+    player.megaCredits = 10;
+    expect(() => cb(CardName.SOLETTA, HowToPay.of({megaCredits: 35}), cards))
+      .to.throw('You do not have that many');
+  });
+
+  it('rejects underspending', () => {
+    expect(() => cb(CardName.SOLETTA, HowToPay.of({megaCredits: 20}), cards))
+      .to.throw('Did not spend enough');
   });
 
   function cb(name: string, value: any, cards: IProjectCard[]) {

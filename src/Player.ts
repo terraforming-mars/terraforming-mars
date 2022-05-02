@@ -990,7 +990,7 @@ export class Player {
     if (!u) return false;
     const h = u as {[key in keyof HowToPay]?: any};
     return HowToPay.keys.every((key) =>
-      h.hasOwnProperty(key) && typeof h[key] === 'number' && h[key] >= 0);
+      h.hasOwnProperty(key) && typeof h[key] === 'number' && !isNaN(h[key]));
   }
 
   public parseHowToPayJSON(json: string): HowToPay {
@@ -1855,7 +1855,7 @@ export class Player {
       0 <= howToPay[key] && howToPay[key] <= maxPayable[key]);
   }
 
-  private payingAmount(howToPay: HowToPay, options?: Partial<HowToPay.Options>): number {
+  public payingAmount(howToPay: HowToPay, options?: Partial<HowToPay.Options>): number {
     const mult: {[key in keyof HowToPay]: number} = {
       megaCredits: 1,
       steel: this.getSteelValue(),

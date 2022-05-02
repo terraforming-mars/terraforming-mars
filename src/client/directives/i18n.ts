@@ -14,6 +14,7 @@ export function translateMessage(message: Message): string {
   });
 }
 
+let translated: Set<string> | undefined;
 export function translateText(englishText: string): string {
   const lang = getPreferences().lang;
   const translations: {[key: string]: string} | undefined = (window as any)._translations;
@@ -43,7 +44,20 @@ export function translateText(englishText: string): string {
   }
 
   if (translatedText === undefined) {
-    console.log(`${lang} - please translate: ${englishText}`);
+  // The i18n plugin sends translated strings back here. That means that sometimes this tries to
+  // Since the phrase it sends is not English, it can't be found, and this reports an error to the
+  // browser.
+  //
+  // This Set reduces that by seeing if the string is of the new language, and ignores reporting the error.
+    if (translated === undefined) {
+      translated = new Set();
+      for (const k in translations) {
+        if (translations.hasOwnProperty(k)) translated.add(translations[k]);
+      }
+    }
+    if (!translated.has(englishText)) {
+      console.log(`${lang} - please translate: ${englishText}`);
+    }
   }
 
   return translatedText || englishText;

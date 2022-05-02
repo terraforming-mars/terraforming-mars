@@ -21,7 +21,7 @@ export class CommercialDistrictAres extends CommercialDistrict {
           }).nbsp.nbsp.tile(TileType.COMMERCIAL_DISTRICT, false, true).br;
           b.vpText('1 VP per adjacent city tile.');
         }),
-        victoryPoints: CardRenderDynamicVictoryPoints.cities(1, 1),
+        victoryPoints: CardRenderDynamicVictoryPoints.cities(1, 1, true),
       });
   }
 }

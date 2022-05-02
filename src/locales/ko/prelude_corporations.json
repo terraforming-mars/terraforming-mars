@@ -1,0 +1,33 @@
+{
+    "Cheung Shing": "쳉 싱",
+    "■■MARS■■": "　마스　",
+    "Cheung Sing Mars": "쳉 싱 마스",
+    "Cheung Shing Mars": "쳉 싱 마스",
+    "Cheung Shing MARS": "쳉 싱 마스",
+    "You start with 3 M€ production and 44 M€.": "44 M€과 메가크레딧 생산력 3을 가지고 게임 시작.",
+    "Effect: When you play a building tag, you pay 2 M€ less for it.": "지속 효과: 카드 사용 시, 건물 태그 1개마다 추진 비용 2 M€ 할인.",
+
+    "POINT LUNA": "포인트 루나",
+    "Point Luna": "포인트 루나",
+    "You start with 1 titanium production and 38 M€.": "38 M€과 티타늄 생산력 1을 가지고 게임 시작.",
+    "Effect: When you play an Earth tag, including this, draw a card.": "지속 효과: 이 카드도 포함해서 카드 사용 시 그 카드의 지구 태그 수만큼 카드 획득.",
+
+    "ROBINSON": "로 빈 슨",
+    "INDUSTRIES": "인더스트리",
+    "Robinson Industries": "로빈슨 인더스트리",
+    "You start with 47 M€.": "47 M€을 가지고 게임 시작.",
+    "Action: Spend 4 M€ to increase (one of) your LOWEST production 1 step.": "행동: 4 M€를 소모하여,자신의 최저 생산력 중 하나를 1 증가.",
+
+    "VALLEY": "밸 리",
+    "TRUST": "트러스트",
+    "Valley Trust": "밸리 트러스트",
+    "You start with 37 M€. As your first action, draw 3 Prelude cards, and play one of them. Discard the other two.": "37 M€을 가지고 게임 시작. 게임 첫 행동으로서 서곡 카드를 세 장 뽑아 한 장을 사용하고 나머지 두 장은 버림.",
+    "Effect: When you play a Science tag, you pay 2M€ less for it.": "지속 효과: 과학 카드 사용시, 과학 태그 1개마다 추진비용 2 M€ 할인.",
+
+    "VIT": "비",
+    "O": "토",
+    "R": "르",
+    "Vitor": "비토르",
+    "You start with 45 M€. As your first action, fund an award for free.": "45 M€을 가지고 게임 시작. 게임 첫 행동으로서, 공짜로 기업상 하나 제정.",
+    "Effect: When you play a card with a NON-NEGATIVE VP icon, including this, gain 3 M€.": "지속 효과: 이 카드 포함, 마이너스가 아닌 승점 아이콘 그림이 그려진 카드를 사용할 때마다 3 M€ 획득."
+}

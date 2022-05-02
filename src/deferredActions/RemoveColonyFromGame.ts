@@ -3,11 +3,10 @@ import {IColony} from '../colonies/IColony';
 import {SelectColony} from '../inputs/SelectColony';
 import {DeferredAction, Priority} from './DeferredAction';
 
-export class RemoveColonyFromGame implements DeferredAction {
-  public priority = Priority.DEFAULT;
-  constructor(
-        public player: Player,
-  ) {}
+export class RemoveColonyFromGame extends DeferredAction {
+  constructor(player: Player) {
+    super(player, Priority.DEFAULT);
+  }
 
   public execute() {
     const game = this.player.game;

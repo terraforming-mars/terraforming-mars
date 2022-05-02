@@ -4,15 +4,16 @@ import {IColony} from '../colonies/IColony';
 import {DeferredAction, Priority} from './DeferredAction';
 import {Multiset} from '../utils/Multiset';
 
-export class GiveColonyBonus implements DeferredAction {
-  public priority = Priority.DEFAULT;
+export class GiveColonyBonus extends DeferredAction {
   public cb: () => void = () => {};
   private waitingFor: Multiset<PlayerId> = new Multiset<PlayerId>();
   constructor(
-        public player: Player,
-        public colony: IColony,
-        public selfish: boolean = false, // Used for CoordinatedRaid.
-  ) {}
+    player: Player,
+    public colony: IColony,
+    public selfish: boolean = false, // Used for CoordinatedRaid.
+  ) {
+    super(player, Priority.DEFAULT);
+  }
 
   public execute() {
     if (this.colony.colonies.length === 0) {

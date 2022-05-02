@@ -1,5 +1,4 @@
 import {CardName} from '../../common/cards/CardName';
-import {GameModule} from '../../common/cards/GameModule';
 import {CardManifest} from '../CardManifest';
 import {AIControlledMineNetwork} from './AIControlledMineNetwork';
 import {AlgaeBioreactors} from './AlgaeBioreactors';
@@ -115,7 +114,7 @@ import {WaterTreatmentComplex} from './WaterTreatmentComplex';
 import {WeGrowAsOne} from './WeGrowAsOne';
 
 export const MOON_CARD_MANIFEST = new CardManifest({
-  module: GameModule.Moon,
+  module: 'moon',
   projectCards: [
     {cardName: CardName.MARE_NECTARIS_MINE, Factory: MareNectarisMine},
     {cardName: CardName.MARE_NUBIUM_MINE, Factory: MareNubiumMine},
@@ -174,29 +173,29 @@ export const MOON_CARD_MANIFEST = new CardManifest({
     //   {cardName: CardName.ROAD_PIRACY, Factory: RoadPiracy},
     {cardName: CardName.LUNAR_MINE_URBANIZATION, Factory: LunarMineUrbanization},
     {cardName: CardName.THORIUM_RUSH, Factory: ThoriumRush},
-    {cardName: CardName.HE3_PRODUCTION_QUOTAS, Factory: HE3ProductionQuotas, compatibility: GameModule.Turmoil},
-    {cardName: CardName.LUNA_CONFERENCE, Factory: LunaConference, compatibility: GameModule.Turmoil},
-    {cardName: CardName.WE_GROW_AS_ONE, Factory: WeGrowAsOne, compatibility: [GameModule.Turmoil, GameModule.Colonies]},
-    {cardName: CardName.MOONCRATE_CONVOYS_TO_MARS, Factory: MooncrateConvoysToMars, compatibility: [GameModule.Turmoil]},
+    {cardName: CardName.HE3_PRODUCTION_QUOTAS, Factory: HE3ProductionQuotas, compatibility: 'turmoil'},
+    {cardName: CardName.LUNA_CONFERENCE, Factory: LunaConference, compatibility: 'turmoil'},
+    {cardName: CardName.WE_GROW_AS_ONE, Factory: WeGrowAsOne, compatibility: ['turmoil', 'colonies']},
+    {cardName: CardName.MOONCRATE_CONVOYS_TO_MARS, Factory: MooncrateConvoysToMars, compatibility: ['turmoil']},
     // // {cardName: CardName.LUNAR_INDEPENDENCE_WAR, Factory: LunarIndependenceWar},
-    {cardName: CardName.AN_OFFER_YOU_CANT_REFUSE, Factory: AnOfferYouCantRefuse, compatibility: GameModule.Turmoil},
+    {cardName: CardName.AN_OFFER_YOU_CANT_REFUSE, Factory: AnOfferYouCantRefuse, compatibility: 'turmoil'},
     {cardName: CardName.PRELIMINARY_DARKSIDE, Factory: PreliminaryDarkside},
     //   {cardName: CardName.HOSTILE_TAKEOVER, Factory: HostileTakeover},
-    {cardName: CardName.SYNDICATE_PIRATE_RAIDS, Factory: SyndicatePirateRaids, compatibility: GameModule.Colonies},
+    {cardName: CardName.SYNDICATE_PIRATE_RAIDS, Factory: SyndicatePirateRaids, compatibility: 'colonies'},
     {cardName: CardName.DARKSIDE_MINING_SYNDICATE, Factory: DarksideMiningSyndicate},
-    //   // {cardName: CardName.HE3_PROPULSION, Factory: HE3Propulsion, compatibility: GameModule.Colonies},
-    {cardName: CardName.STAGING_STATION_BEHEMOTH, Factory: StagingStationBehemoth, compatibility: GameModule.Colonies},
+    //   // {cardName: CardName.HE3_PROPULSION, Factory: HE3Propulsion, compatibility: 'colonies'},
+    {cardName: CardName.STAGING_STATION_BEHEMOTH, Factory: StagingStationBehemoth, compatibility: 'colonies'},
     {cardName: CardName.LUNA_ARCHIVES, Factory: LunaArchives},
     {cardName: CardName.LUNA_SENATE, Factory: LunaSenate},
-    {cardName: CardName.LUNA_POLITICAL_INSTITUTE, Factory: LunaPoliticalInstitute, compatibility: GameModule.Turmoil},
+    {cardName: CardName.LUNA_POLITICAL_INSTITUTE, Factory: LunaPoliticalInstitute, compatibility: 'turmoil'},
     {cardName: CardName.COPERNICUS_TOWER, Factory: CopernicusTower},
     {cardName: CardName.SMALL_DUTY_ROVERS, Factory: SmallDutyRovers},
     {cardName: CardName.LUNAR_INDUSTRY_COMPLEX, Factory: LunarIndustryComplex},
     {cardName: CardName.DARKSIDE_OBSERVATORY, Factory: DarksideObservatory},
-    {cardName: CardName.MARTIAN_EMBASSY, Factory: MartianEmbassy, compatibility: GameModule.Pathfinders},
+    {cardName: CardName.MARTIAN_EMBASSY, Factory: MartianEmbassy, compatibility: 'pathfinders'},
     {cardName: CardName.EARTH_EMBASSY, Factory: EarthEmbassy},
     {cardName: CardName.ROVER_DRIVERS_UNION, Factory: RoverDriversUnion},
-    {cardName: CardName.LTF_HEADQUARTERS, Factory: LTFHeadquarters, compatibility: GameModule.Colonies},
+    {cardName: CardName.LTF_HEADQUARTERS, Factory: LTFHeadquarters, compatibility: 'colonies'},
     {cardName: CardName.UNDERMOON_DRUG_LORDS_NETWORK, Factory: UndermoonDrugLordsNetwork},
     {cardName: CardName.LTF_PRIVILEGES, Factory: LTFPrivileges},
     {cardName: CardName.GRAND_LUNA_ACADEMY, Factory: GrandLunaAcademy},
@@ -210,7 +209,7 @@ export const MOON_CARD_MANIFEST = new CardManifest({
   ],
   corporationCards: [
     {cardName: CardName.NANOTECH_INDUSTRIES, Factory: NanotechIndustries},
-    {cardName: CardName.TEMPEST_CONSULTANCY, Factory: TempestConsultancy, compatibility: GameModule.Turmoil},
+    {cardName: CardName.TEMPEST_CONSULTANCY, Factory: TempestConsultancy, compatibility: 'turmoil'},
     {cardName: CardName.THE_DARKSIDE_OF_THE_MOON_SYNDICATE, Factory: TheDarksideofTheMoonSyndicate},
     {cardName: CardName.LUNA_HYPERLOOP_CORPORATION, Factory: LunaHyperloopCorporation},
     {cardName: CardName.CRESCENT_RESEARCH_ASSOCIATION, Factory: CrescentResearchAssociation},
@@ -231,7 +230,7 @@ export const MOON_CARD_MANIFEST = new CardManifest({
   preludeCards: [
     {cardName: CardName.FIRST_LUNAR_SETTLEMENT, Factory: FirstLunarSettlement},
     {cardName: CardName.CORE_MINE, Factory: CoreMine},
-    {cardName: CardName.BASIC_INFRASTRUCTURE, Factory: BasicInfrastructure, compatibility: GameModule.Colonies},
+    {cardName: CardName.BASIC_INFRASTRUCTURE, Factory: BasicInfrastructure, compatibility: 'colonies'},
     {cardName: CardName.LUNAR_PlANNING_OFFICE, Factory: LunarPlanningOffice},
     {cardName: CardName.MINING_COMPLEX, Factory: MiningComplex},
   ],

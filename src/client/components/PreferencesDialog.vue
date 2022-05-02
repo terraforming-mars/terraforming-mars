@@ -1,14 +1,24 @@
 <script lang="ts">
 import Vue from 'vue';
+import {WithRefs} from 'vue-typed-refs';
+
 import {PreferencesManager, Preference} from '@/client/utils/PreferencesManager';
 import {LANGUAGES} from '@/common/constants';
+import BugReportDialog from '@/client/components/BugReportDialog.vue';
 
-export default Vue.extend({
+type Refs = {
+  bugDialog: InstanceType<typeof BugReportDialog>,
+}
+
+export default (Vue as WithRefs<Refs>).extend({
   name: 'PreferencesDialog',
   props: {
     preferencesManager: {
       type: Object as () => PreferencesManager,
     },
+  },
+  components: {
+    'bug-report-dialog': BugReportDialog,
   },
   data() {
     return {
@@ -93,12 +103,6 @@ export default Vue.extend({
       </div>
       <div class="preferences_panel_item">
         <label class="form-switch">
-          <input type="checkbox" v-on:change="updatePreferences" v-model="prefs.show_card_number" data-test="show_card_number">
-          <i class="form-icon"></i> <span v-i18n>Show card numbers (req. refresh)</span>
-        </label>
-      </div>
-      <div class="preferences_panel_item">
-        <label class="form-switch">
           <input type="checkbox" v-on:change="updatePreferences" v-model="prefs.remove_background" data-test="remove_background">
           <i class="form-icon"></i> <span v-i18n>Remove background image</span>
         </label>
@@ -148,14 +152,16 @@ export default Vue.extend({
         <div class="preferences_panel_langs">
           <label class="form-radio" v-for="language in LANGUAGES" :key="language.id">
             <input name="lang" type="radio" v-on:change="updatePreferences" v-model="prefs.lang" :value="language.id">
-            <i class="form-icon"></i> {{ language.title }}
+            <i class="form-icon"></i> <span v-i18n>{{ language.title }}</span>
           </label>
         </div>
       </div>
 
 
       <div class="preferences_panel_actions">
-        <button class="btn btn-lg btn-primary" v-on:click="okClicked">Ok</button>
+        <button class="btn btn-lg btn-primary" v-on:click="okClicked" v-i18n>Ok</button>
+        <button class="btn btn-lg btn-primary" v-on:click="$refs.bugDialog.show();" v-i18n>Report a bug</button>
       </div>
+      <bug-report-dialog ref="bugDialog" :model="undefined" :source="'spectator'"></bug-report-dialog>
     </div>
 </template>

@@ -65,7 +65,7 @@ describe('GeologicalSurvey', () => {
       SpaceBonus.MEGACREDITS,
       SpaceBonus.ANIMAL,
       SpaceBonus.MICROBE,
-      SpaceBonus.POWER,
+      SpaceBonus.ENERGY,
     ],
     };
     game.addTile(player, SpaceType.LAND, firstSpace, {tileType: TileType.RESTRICTED_AREA});

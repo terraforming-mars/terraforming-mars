@@ -5,10 +5,11 @@ import {expect} from 'chai';
 import OrOptions from '@/client/components/OrOptions.vue';
 import {PlayerInputTypes} from '@/common/input/PlayerInputTypes';
 import {PreferencesManager} from '@/client/utils/PreferencesManager';
+import {InputResponse} from '@/common/inputs/InputResponse';
 
 describe('OrOptions', function() {
   it('saves the options ignoring hidden', async function() {
-    let savedData: Array<Array<string>> | undefined;
+    let savedData: InputResponse | undefined;
     PreferencesManager.INSTANCE.set('learner_mode', false);
     const component = mount(OrOptions, {
       localVue: getLocalVue(),
@@ -30,7 +31,7 @@ describe('OrOptions', function() {
             inputType: PlayerInputTypes.SELECT_OPTION,
           }],
         },
-        onsave: function(data: Array<Array<string>>) {
+        onsave: function(data: InputResponse) {
           savedData = data;
         },
         showsave: true,
@@ -44,7 +45,7 @@ describe('OrOptions', function() {
     expect(savedData).to.deep.eq([['1'], ['1']]);
   });
   it('moves and selects 2nd option', async function() {
-    let savedData: Array<Array<string>> | undefined;
+    let savedData: InputResponse | undefined;
     const component = mount(OrOptions, {
       localVue: getLocalVue(),
       propsData: {
@@ -61,7 +62,7 @@ describe('OrOptions', function() {
             inputType: PlayerInputTypes.SELECT_OPTION,
           }],
         },
-        onsave: function(data: Array<Array<string>>) {
+        onsave: function(data: InputResponse) {
           savedData = data;
         },
         showsave: true,

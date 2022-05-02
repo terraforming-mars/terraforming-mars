@@ -1,0 +1,28 @@
+{
+  "LAKEFRONT": "레이크프론트",
+  "RESORTS": "리조트",
+  "Lakefront Resorts": "레이크프론트 리조트",
+  "You start with 54 M€.": "54 M€을 가지고 게임 시작.",
+  "Effect: When any ocean tile is placed, increase your M€ production 1 step. Your bonus for placing adjacent to oceans is 3M€ instead of 2 M€.": "지속 효과: 아무나 해양 타일을 1장 놓을 때마다, 자신의 메가크레딧 생산력 1증가. 해양 타일에 인접한 빈칸에 자신이 타일을 놓을 때마다, 점유 보너스를(2 M€이 아니라) 3 M€ 획득.",
+
+  "TERRALABS": "테라랩스",
+  "RESEARCH": "연구소",
+  "Terralabs Research": "테라랩스",
+  "You start with 14 M€. Lower your TR 1 step.": "14 M€을 가지고 게임 시작. 자신의 테라포밍 등급 1 TR 하락.",
+  "Effect: Buying cards to hand costs 1 M€.": "지속 효과: 카드 구입 비용이 1장당 1 M€. 초기 카드를 구입할 떄도 적용됨.",
+
+  "UTOPIA": "유토피아",
+  "INVEST": "투자회사",
+  "Utopia Invest": "유토피아",
+  "You start with 40 M€. Increase your steel and titanium production 1 step each.": "40 M€, 강철 생산력 1, 티타늄 생산력 1을 가지고 게임 시작.",
+  "Action: Decrease any production to gain 4 resources of that kind.": "행동: 자기 아무 생산력을 1 감소해서 해당 자원 4개 획득.",
+
+  "PRISTAR": "프리스타",
+  "Pristar": "프리스타",
+  "You start with 53 M€. Decrease your TR 2 steps. 1 VP per preservation resource here.": "53 M€을 가지고 게임 시작. 자신의 테라포밍 등급 2 TR 하락. 이 카드에 있는 환경보존 자원 1개당 승점 1점.",
+  "Effect: During production phase, if you did not get TR so far this generation, add one preservation resource here and gain 6 M€.": "지속 효과: 만약 이번 세대 동안(생산 단계가 되기 전까지) 자신의 테라포밍 등급을 상승시키지 않았다면, 생산 단계에서 이 카드에 환경보존 자원 1개 추가 및 6 M€ 획득.",
+
+  "Septem Tribus": "셉템 트리부스",
+  "You start with 36 M€. When you perform an action, the wild tag counts as any tag of your choice.": "36 M€을 가지고 게임 시작. 자신이 행동을 수행할 때마다, 이 카드의 만능 태그를 자신이 원하는 태그로 취급.",
+  "Action: Gain 2 M€ for each party where you have at least 1 delegate.": "행동: 자기 의원이 하나라도 있는 정당마다 2 M€ 획득."
+}

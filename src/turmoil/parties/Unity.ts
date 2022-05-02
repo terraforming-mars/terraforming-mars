@@ -10,11 +10,11 @@ import {SelectHowToPayDeferred} from '../../deferredActions/SelectHowToPayDeferr
 import {Player} from '../../Player';
 import {POLITICAL_AGENDAS_MAX_ACTION_USES} from '../../common/constants';
 import {ICard} from '../../cards/ICard';
-import {DeferredAction} from '../../deferredActions/DeferredAction';
+import {SimpleDeferredAction} from '../../deferredActions/DeferredAction';
 import {OrOptions} from '../../inputs/OrOptions';
 import {SelectCard} from '../../inputs/SelectCard';
 import {SelectOption} from '../../inputs/SelectOption';
-import {ResourceType} from '../../common/ResourceType';
+import {CardResource} from '../../common/CardResource';
 
 export class Unity extends Party implements IParty {
   name = PartyName.UNITY;
@@ -82,7 +82,7 @@ class UnityPolicy02 implements Policy {
       {
         title: 'Select how to pay for Turmoil Unity action',
         afterPay: () => {
-          const availableFloaterCards = player.getResourceCards(ResourceType.FLOATER);
+          const availableFloaterCards = player.getResourceCards(CardResource.FLOATER);
           const orOptions = new OrOptions();
 
           if (availableFloaterCards.length === 1) {
@@ -112,7 +112,7 @@ class UnityPolicy02 implements Policy {
 
           if (orOptions.options.length === 1) return orOptions.options[0].cb();
 
-          game.defer(new DeferredAction(player, () => orOptions));
+          game.defer(new SimpleDeferredAction(player, () => orOptions));
           return undefined;
         },
       },

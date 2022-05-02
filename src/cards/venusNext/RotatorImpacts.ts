@@ -2,7 +2,7 @@ import {IActionCard, IResourceCard} from '../ICard';
 import {Tags} from '../../common/cards/Tags';
 import {CardType} from '../../common/cards/CardType';
 import {Player} from '../../Player';
-import {ResourceType} from '../../common/ResourceType';
+import {CardResource} from '../../common/CardResource';
 import {OrOptions} from '../../inputs/OrOptions';
 import {SelectOption} from '../../inputs/SelectOption';
 import {MAX_VENUS_SCALE} from '../../common/constants';
@@ -20,7 +20,7 @@ export class RotatorImpacts extends Card implements IActionCard, IResourceCard {
       cardType: CardType.ACTIVE,
       tags: [Tags.SPACE],
       cost: 6,
-      resourceType: ResourceType.ASTEROID,
+      resourceType: CardResource.ASTEROID,
 
       requirements: CardRequirements.builder((b) => b.venus(14, {max})),
       metadata: {

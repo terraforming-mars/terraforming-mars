@@ -4,7 +4,7 @@ import {CardName} from '../../common/cards/CardName';
 import {CardType} from '../../common/cards/CardType';
 import {CardRenderer} from '../render/CardRenderer';
 import {played} from '../Options';
-import {ResourceType} from '../../common/ResourceType';
+import {CardResource} from '../../common/CardResource';
 import {Player} from '../../Player';
 import {IProjectCard} from '../IProjectCard';
 import {Tags} from '../../common/cards/Tags';
@@ -21,7 +21,7 @@ export class MindSetMars extends Card implements ICorporationCard {
       cardType: CardType.CORPORATION,
       name: CardName.MIND_SET_MARS,
       startingMegaCredits: 44,
-      resourceType: ResourceType.AGENDA,
+      resourceType: CardResource.AGENDA,
 
       metadata: {
         cardNumber: 'PfC23',

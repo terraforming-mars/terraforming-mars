@@ -87,5 +87,9 @@ export default Vue.extend({
   &--it {
     background-position: 0 42.975207%;
   }
+
+  &--ko {
+    background-position: 0 47.52%;
+  }
 }
 </style>

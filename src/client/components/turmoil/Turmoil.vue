@@ -81,7 +81,7 @@
 import Vue from 'vue';
 import {PartyName} from '@/common/turmoil/PartyName';
 import {TurmoilModel} from '@/common/models/TurmoilModel';
-import GlobalEvent from '@/client/components/GlobalEvent.vue';
+import GlobalEvent from '@/client/components/turmoil/GlobalEvent.vue';
 import Agendas from '@/client/components/turmoil/Agendas.vue';
 
 export default Vue.extend({

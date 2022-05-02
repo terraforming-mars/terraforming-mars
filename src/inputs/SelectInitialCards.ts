@@ -35,7 +35,7 @@ export class SelectInitialCards extends AndOptions implements PlayerInput {
           (preludeCards: Array<IProjectCard>) => {
             player.preludeCardsInHand.push(...preludeCards);
             return undefined;
-          }, 2, 2,
+          }, {min: 2, max: 2},
         ),
       );
     }
@@ -46,7 +46,7 @@ export class SelectInitialCards extends AndOptions implements PlayerInput {
         (foundCards: Array<IProjectCard>) => {
           player.cardsInHand.push(...foundCards);
           return undefined;
-        }, 10, 0,
+        }, {min: 0, max: 10},
       ),
     );
   }

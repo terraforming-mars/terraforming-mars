@@ -11,7 +11,7 @@ import {ISpace} from '../../boards/ISpace';
 import {Resources} from '../../common/Resources';
 import {OrOptions} from '../../inputs/OrOptions';
 import {SelectOption} from '../../inputs/SelectOption';
-import {DeferredAction, Priority} from '../../deferredActions/DeferredAction';
+import {SimpleDeferredAction, Priority} from '../../deferredActions/DeferredAction';
 import {SpaceType} from '../../common/boards/SpaceType';
 
 const VALID_BONUSES: Array<SpaceBonus> = [
@@ -22,7 +22,7 @@ const VALID_BONUSES: Array<SpaceBonus> = [
   SpaceBonus.MEGACREDITS,
   SpaceBonus.ANIMAL,
   SpaceBonus.MICROBE,
-  SpaceBonus.POWER,
+  SpaceBonus.ENERGY,
   SpaceBonus.DATA,
   SpaceBonus.SCIENCE,
 ];
@@ -80,7 +80,7 @@ export class GeologicalExpedition extends Card implements IProjectCard {
       // should not happen.
       return;
     }
-    const action = new DeferredAction(activePlayer, () => options);
+    const action = new SimpleDeferredAction(activePlayer, () => options);
     action.priority = Priority.GAIN_RESOURCE_OR_PRODUCTION;
     activePlayer.game.defer(action);
   }

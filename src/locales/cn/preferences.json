@@ -16,7 +16,6 @@
     "Hide Milestones / Awards scores": "隐藏里程碑 / 奖项分数",
     "Enable sounds": "启用轮次提示音",
     "Hide tile confirmation":"隐藏板块确认信息",
-    "Show card numbers (req. refresh)":"显示卡牌编号（需要刷新页面）",
     "Language": "语言",
     "refresh page": "选择以下语言后<点我>或者刷新页面,",
     "to see changes": "来查看改变",
@@ -25,5 +24,6 @@
     "French": "法语",
     "Russian": "俄语",
     "Chinese": "中文",
+    "한국어 (Korean)": "한국어 (韓國語)",
     "Ok": "好的"
 }

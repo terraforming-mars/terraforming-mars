@@ -21,6 +21,7 @@ import Vue from 'vue';
 import {PlayerViewModel, PublicPlayerModel} from '@/common/models/PlayerModel';
 import {PlayerInputModel} from '@/common/models/PlayerInputModel';
 import Button from '@/client/components/common/Button.vue';
+import {InputResponse} from '@/common/inputs/InputResponse';
 
 export default Vue.extend({
   name: 'and-options',
@@ -35,7 +36,7 @@ export default Vue.extend({
       type: Object as () => PlayerInputModel,
     },
     onsave: {
-      type: Function as unknown as () => (out: Array<Array<string>>) => void,
+      type: Function as unknown as () => (out: InputResponse) => void,
     },
     showsave: {
       type: Boolean,
@@ -57,7 +58,7 @@ export default Vue.extend({
   },
   methods: {
     playerFactorySaved(idx: number) {
-      return (out: Array<Array<string>>) => {
+      return (out: InputResponse) => {
         this.$data.responded[idx] = out[0];
       };
     },

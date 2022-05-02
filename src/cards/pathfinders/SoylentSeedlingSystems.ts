@@ -7,7 +7,7 @@ import {Tags} from '../../common/cards/Tags';
 import {Size} from '../../common/cards/render/Size';
 import {played} from '../Options';
 import {ICorporationCard} from '../corporation/ICorporationCard';
-import {ResourceType} from '../../common/ResourceType';
+import {CardResource} from '../../common/CardResource';
 import {ISpace} from '../../boards/ISpace';
 import {Board} from '../../boards/Board';
 
@@ -18,7 +18,7 @@ export class SoylentSeedlingSystems extends Card implements ICorporationCard {
       name: CardName.SOYLENT_SEEDLING_SYSTEMS,
       tags: [Tags.SCIENCE, Tags.PLANT],
       startingMegaCredits: 38,
-      resourceType: ResourceType.SEED,
+      resourceType: CardResource.SEED,
 
       metadata: {
         cardNumber: 'PfC8',
@@ -28,7 +28,7 @@ export class SoylentSeedlingSystems extends Card implements ICorporationCard {
             eb.greenery().startEffect.seed();
           }).br;
           b.effect('When paying for a plant card, or the STANDARD GREENERY PROJECT, seeds here may be used as 5 M€ each.', (eb) => {
-            eb.plants(1, {played}).slash().greenery(Size.MEDIUM, true).startEffect.seed().equals().megacredits(5);
+            eb.plants(1, {played}).slash().greenery(Size.MEDIUM).startEffect.seed().equals().megacredits(5);
           }).br;
         }),
         description: 'You starrt with 38M€ and 2 seeds on this card.',

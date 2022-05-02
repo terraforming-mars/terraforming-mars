@@ -18,7 +18,7 @@ export interface ICardRenderSymbol extends CardComponent {
 }
 
 export function isICardRenderSymbol(item: ItemType): item is ICardRenderSymbol {
-  return item !== undefined && typeof(item) !== 'string' && item.is === 'symbol';
+  return typeof(item) !== 'string' && item?.is === 'symbol';
 }
 
 export interface ICardRenderTile extends CardComponent {
@@ -29,7 +29,7 @@ export interface ICardRenderTile extends CardComponent {
 }
 
 export function isICardRenderTile(item: ItemType): item is ICardRenderTile {
-  return item !== undefined && typeof(item) !== 'string' && item.is === 'tile';
+  return typeof(item) !== 'string' && item?.is === 'tile';
 }
 
 export interface ICardRenderProductionBox extends CardComponent {
@@ -38,7 +38,7 @@ export interface ICardRenderProductionBox extends CardComponent {
 }
 
 export function isICardRenderProductionBox(item: ItemType): item is ICardRenderProductionBox {
-  return item !== undefined && typeof(item) !== 'string' && item.is === 'production-box';
+  return typeof(item) !== 'string' && item?.is === 'production-box';
 }
 
 export interface ICardRenderEffect extends CardComponent {
@@ -47,7 +47,7 @@ export interface ICardRenderEffect extends CardComponent {
 }
 
 export function isICardRenderEffect(item: ItemType): item is ICardRenderEffect {
-  return item !== undefined && typeof(item) !== 'string' && item.is === 'effect';
+  return typeof(item) !== 'string' && item?.is === 'effect';
 }
 
 export interface ICardRenderCorpBoxEffect extends CardComponent {
@@ -56,7 +56,7 @@ export interface ICardRenderCorpBoxEffect extends CardComponent {
 }
 
 export function isICardRenderCorpBoxEffect(item: ItemType): item is ICardRenderCorpBoxEffect {
-  return item !== undefined && typeof(item) !== 'string' && item.is === 'corp-box-effect';
+  return typeof(item) !== 'string' && item?.is === 'corp-box-effect';
 }
 
 export interface ICardRenderCorpBoxAction extends CardComponent {
@@ -65,7 +65,7 @@ export interface ICardRenderCorpBoxAction extends CardComponent {
 }
 
 export function isICardRenderCorpBoxAction(item: ItemType): item is ICardRenderCorpBoxAction {
-  return item !== undefined && typeof(item) !== 'string' && item.is === 'corp-box-action';
+  return typeof(item) !== 'string' && item?.is === 'corp-box-action';
 }
 
 export interface ICardRenderItem extends CardComponent {
@@ -103,7 +103,7 @@ export interface ICardRenderItem extends CardComponent {
 ;}
 
 export function isICardRenderItem(item: ItemType): item is ICardRenderItem {
-  return item !== undefined && typeof(item) !== 'string' && item.is === 'item';
+  return typeof(item) !== 'string' && item?.is === 'item';
 }
 
 export type ItemType = CardComponent | string | undefined;

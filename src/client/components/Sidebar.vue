@@ -1,11 +1,11 @@
 <template>
 <div :class="'sidebar_cont sidebar '+getSideBarClass()">
   <div class="tm" :title="$t('Generation Marker')">
-    <div class="gen-text">GEN</div>
+    <div class="gen-text" v-i18n>GEN</div>
     <div class="gen-marker">{{ getGenMarker() }}</div>
   </div>
   <div v-if="gameOptions.turmoilExtension" :title="$t('Ruling Party')">
-    <div :class="'party-name party-name-indicator party-name--'+rulingPartyToCss()"> {{ getRulingParty() }}</div>
+    <div :class="'party-name party-name-indicator party-name--'+rulingPartyToCss()"> <span v-i18n>{{ getRulingParty() }}</span></div>
   </div>
   <div class="global_params">
     <global-parameter-value :param="this.globalParameter.TEMPERATURE" :value="this.temperature"></global-parameter-value>
@@ -61,10 +61,7 @@
     </div>
   </a>
 
-  <div class="sidebar_item sidebar_item--settings" :title="$t('Player Settings')">
-    <i class="sidebar_icon sidebar_icon--settings" :class="{'sidebar_item--is-active': ui.preferences_panel_open}" v-on:click="ui.preferences_panel_open = !ui.preferences_panel_open"></i>
-    <preferences-dialog v-show="ui.preferences_panel_open" @okButtonClicked="ui.preferences_panel_open = false" :preferencesManager="preferencesManager"/>
-  </div>
+  <preferences-icon></preferences-icon>
 </div>
 </template>
 
@@ -78,10 +75,10 @@ import {PartyName} from '@/common/turmoil/PartyName';
 import GameSetupDetail from '@/client/components/GameSetupDetail.vue';
 import {GameOptionsModel} from '@/common/models/GameOptionsModel';
 import GlobalParameterValue from '@/client/components/GlobalParameterValue.vue';
-import MoonGlobalParameterValue from '@/client/components/MoonGlobalParameterValue.vue';
+import MoonGlobalParameterValue from '@/client/components/moon/MoonGlobalParameterValue.vue';
 import {GlobalParameter} from '@/common/GlobalParameter';
 import {MoonModel} from '@/common/models/MoonModel';
-import PreferencesDialog from '@/client/components/PreferencesDialog.vue';
+import PreferencesIcon from '@/client/components/PreferencesIcon.vue';
 
 export default Vue.extend({
   name: 'sidebar',
@@ -130,12 +127,11 @@ export default Vue.extend({
     'game-setup-detail': GameSetupDetail,
     'global-parameter-value': GlobalParameterValue,
     MoonGlobalParameterValue,
-    'preferences-dialog': PreferencesDialog,
+    PreferencesIcon,
   },
   data() {
     return {
       'ui': {
-        'preferences_panel_open': false,
         'gamesetup_detail_open': false,
       },
       'globalParameter': GlobalParameter,

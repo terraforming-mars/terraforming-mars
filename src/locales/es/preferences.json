@@ -17,7 +17,6 @@
     "Enable sounds": "Activar sonidos",
     "Hide tile confirmation":"Confirmación al ocultar área",
     "Show discount on cards":"Mostrar descuento en cartas",
-    "Show card numbers (req. refresh)":"Mostrar número de carta (requiere actualizar)",
     "Tutorial Mode (req. refresh)":"Modo Tutorial (requiere actualizar)",
     "Language": "Idioma",
     "refresh page": "actualizar página",
@@ -28,5 +27,6 @@
     "Russian": "Ruso",
     "Chinese": "Chino",
     "Spanish": "Español",
+    "한국어 (Korean)": "한국어 (Coreano)",
     "Ok": "Ok"
 }

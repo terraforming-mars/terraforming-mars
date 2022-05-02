@@ -36,6 +36,9 @@
 
 .card-unavailable {
     filter: brightness(0.55);
+    &:hover {
+        filter: brightness(1.00);
+    }
 }
 
 .card-hide {
@@ -1011,6 +1014,11 @@ input[type="radio"]:checked + .filterDiv::after {
     text-align: center;
 }
 
+// TODO(kberg): move money, above to megacredits since that's how it's listed as a resource.
+.megacredits {
+    &:extend(.money);
+}
+
 .steel {
     background-image: url(./assets/resources/steel.png);
 }
@@ -1022,6 +1030,11 @@ input[type="radio"]:checked + .filterDiv::after {
 .plant {
     background-image: url(./assets/resources/plant.png);
 }
+// TODO(kberg): move plant, above to plants since that's how it's listed as a resource.
+.plants {
+    &:extend(.plant);
+}
+
 .energy {
     background-image: url(./assets/resources/power.png);
 }
@@ -1051,6 +1064,9 @@ input[type="radio"]:checked + .filterDiv::after {
 }
 .camp {
     background-image: url(./assets/resources/camp.png);
+}
+.preservation {
+    background-image: url(./assets/resources/preservation.png);
 }
 .asteroid {
     color: #0000 !important;
@@ -1261,11 +1277,6 @@ input[type="radio"]:checked + .filterDiv::after {
 .asteroid {
     background-color: black;
     color: #bbb;
-}
-
-.disease {
-    background: linear-gradient(darkorange, gold, darkorange);
-    color: black;
 }
 
 .card-corporation {

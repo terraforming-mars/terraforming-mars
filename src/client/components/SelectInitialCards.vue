@@ -1,7 +1,7 @@
 <template>
   <div class="select-initial-cards">
     <confirm-dialog
-      message="Continue without buying initial cards?"
+      message="Continue without buying any project cards?"
       ref="confirmation"
       v-on:accept="confirmSelection" />
     <SelectCard :playerView="playerView" :playerinput="getOption(0)" :showtitle="true" :onsave="noop" v-on:cardschanged="corporationChanged" />
@@ -19,7 +19,7 @@ import Vue from 'vue';
 import {WithRefs} from 'vue-typed-refs';
 
 import Button from '@/client/components/common/Button.vue';
-import {getCard} from '@/client/cards/ClientCardManifest';
+import {getCard, getCardOrThrow} from '@/client/cards/ClientCardManifest';
 import {CardName} from '@/common/cards/CardName';
 import * as constants from '@/common/constants';
 import {IClientCard} from '@/common/cards/IClientCard';
@@ -27,8 +27,10 @@ import {PlayerInputModel} from '@/common/models/PlayerInputModel';
 import {PlayerViewModel} from '@/common/models/PlayerModel';
 import SelectCard from '@/client/components/SelectCard.vue';
 import ConfirmDialog from '@/client/components/common/ConfirmDialog.vue';
-import {getPreferences} from '@/client/utils/PreferencesManager';
+import {IPreferences, PreferencesManager} from '@/client/utils/PreferencesManager';
 import {Tags} from '@/common/cards/Tags';
+import {InputResponse} from '@/common/inputs/InputResponse';
+import {CardType} from '@/common/cards/CardType';
 
 type Refs = {
   confirmation: InstanceType<typeof ConfirmDialog>,
@@ -44,13 +46,17 @@ export default (Vue as WithRefs<Refs>).extend({
       type: Object as () => PlayerInputModel,
     },
     onsave: {
-      type: Function as unknown as () => (out: Array<Array<string>>) => void,
+      type: Function as unknown as () => (out: InputResponse) => void,
     },
     showsave: {
       type: Boolean,
     },
     showtitle: {
       type: Boolean,
+    },
+    preferences: {
+      type: Object as () => Readonly<IPreferences>,
+      default: () => PreferencesManager.INSTANCE.values(),
     },
   },
   components: {
@@ -72,16 +78,13 @@ export default (Vue as WithRefs<Refs>).extend({
     getAfterPreludes() {
       let result = 0;
       for (const prelude of this.selectedPreludes) {
-        const cam = getCard(prelude);
-        if (cam === undefined) {
-          throw new Error(`Prelude ${prelude} not found`);
-        }
-        result += cam.card.startingMegaCredits ?? 0;
+        const card = getCardOrThrow(prelude);
+        result += card.startingMegaCredits ?? 0;
 
         switch (this.selectedCorporation?.name) {
         // For each step you increase the production of a resource ... you also gain that resource.
         case CardName.MANUTECH:
-          result += cam.card.productionBox?.megacredits ?? 0;
+          result += card.productionBox?.megacredits ?? 0;
           break;
 
         // When you place a city tile, gain 3 M€.
@@ -97,13 +100,13 @@ export default (Vue as WithRefs<Refs>).extend({
 
         // When ANY microbe tag is played ... lose 4 M€ or as much as possible.
         case CardName.PHARMACY_UNION:
-          const tags = cam.card.tags.filter((tag) => tag === Tags.MICROBE).length;
+          const tags = card.tags.filter((tag) => tag === Tags.MICROBE).length;
           result -= (4 * tags);
           break;
 
         // when a microbe tag is played, incl. this, THAT PLAYER gains 2 M€,
         case CardName.SPLICE:
-          const microbeTags = cam.card.tags.filter((tag) => tag === Tags.MICROBE).length;
+          const microbeTags = card.tags.filter((tag) => tag === Tags.MICROBE).length;
           result += (2 * microbeTags);
           break;
 
@@ -165,14 +168,17 @@ export default (Vue as WithRefs<Refs>).extend({
       return starting;
     },
     saveIfConfirmed() {
-      if (getPreferences().show_alerts && this.selectedCards.length === 0) {
+      const projectCards = this.selectedCards.filter((name) => getCard(name)?.cardType !== CardType.PRELUDE);
+      let showAlert = false;
+      if (this.preferences.show_alerts && projectCards.length === 0) showAlert = true;
+      if (showAlert) {
         this.$refs.confirmation.show();
       } else {
         this.saveData();
       }
     },
     saveData() {
-      const result: Array<Array<string>> = [];
+      const result: InputResponse = [];
       result.push([]);
       if (this.selectedCorporation !== undefined) {
         result[0].push(this.selectedCorporation.name);
@@ -190,7 +196,7 @@ export default (Vue as WithRefs<Refs>).extend({
       this.selectedCards = cards;
     },
     corporationChanged(cards: Array<CardName>) {
-      this.selectedCorporation = getCard(cards[0])?.card;
+      this.selectedCorporation = getCard(cards[0]);
     },
     preludesChanged(cards: Array<CardName>) {
       this.selectedPreludes = cards;

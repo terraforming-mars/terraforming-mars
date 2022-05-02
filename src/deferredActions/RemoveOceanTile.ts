@@ -4,12 +4,13 @@ import {ISpace} from '../boards/ISpace';
 import {DeferredAction, Priority} from './DeferredAction';
 import {LogHelper} from '../LogHelper';
 
-export class RemoveOceanTile implements DeferredAction {
-  public priority = Priority.DEFAULT;
+export class RemoveOceanTile extends DeferredAction {
   constructor(
-        public player: Player,
-        public title: string = 'Select an Ocean tile to remove from board',
-  ) {}
+    player: Player,
+    public title: string = 'Select an Ocean tile to remove from board',
+  ) {
+    super(player, Priority.DEFAULT);
+  }
 
   public execute() {
     // false: don't include upgraded oceans.

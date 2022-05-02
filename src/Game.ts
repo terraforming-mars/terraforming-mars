@@ -32,9 +32,9 @@ import {Phase} from './common/Phase';
 import {Player} from './Player';
 import {PlayerId, GameId, SpectatorId, SpaceId} from './common/Types';
 import {PlayerInput} from './PlayerInput';
-import {ResourceType} from './common/ResourceType';
+import {CardResource} from './common/CardResource';
 import {Resources} from './common/Resources';
-import {DeferredAction, Priority} from './deferredActions/DeferredAction';
+import {DeferredAction, Priority, SimpleDeferredAction} from './deferredActions/DeferredAction';
 import {DeferredActionsQueue} from './deferredActions/DeferredActionsQueue';
 import {SelectHowToPayDeferred} from './deferredActions/SelectHowToPayDeferred';
 import {SelectInitialCards} from './inputs/SelectInitialCards';
@@ -635,7 +635,7 @@ export class Game {
     // trigger other corp's effect, e.g. SaturnSystems,PharmacyUnion,Splice
     for (const somePlayer of this.getPlayersInGenerationOrder()) {
       if (somePlayer !== player && somePlayer.corporationCard !== undefined && somePlayer.corporationCard.onCorpCardPlayed !== undefined) {
-        this.defer(new DeferredAction(
+        this.defer(new SimpleDeferredAction(
           player,
           () => {
             if (somePlayer.corporationCard !== undefined && somePlayer.corporationCard.onCorpCardPlayed !== undefined) {
@@ -777,6 +777,10 @@ export class Game {
       this.log('Final greenery placement', (b) => b.forNewGeneration());
       this.gotoFinalGreeneryPlacement();
       return;
+    } else {
+      this.players.forEach((player) => {
+        player.returnTradeFleets();
+      });
     }
 
     // solar Phase Option
@@ -788,7 +792,7 @@ export class Game {
     this.gotoEndGeneration();
   }
 
-  private gotoEndGeneration() {
+  private endGenerationForColonies() {
     if (this.gameOptions.coloniesExtension) {
       this.colonies.forEach((colony) => {
         colony.endGeneration(this);
@@ -796,26 +800,32 @@ export class Game {
       // Syndicate Pirate Raids hook. Also see Colony.ts and Player.ts
       this.syndicatePirateRaider = undefined;
     }
+  }
+
+  private gotoEndGeneration() {
+    this.endGenerationForColonies();
 
     Turmoil.ifTurmoil(this, (turmoil) => {
       turmoil.endGeneration(this);
     });
 
-    // Resolve Turmoil deferred actions
+    // turmoil.endGeneration might have added actions.
     if (this.deferredActions.length > 0) {
-      this.resolveTurmoilDeferredActions();
-      return;
+      this.deferredActions.runAll(() => this.goToDraftOrResearch());
+    } else {
+      this.phase = Phase.INTERGENERATION;
+      this.goToDraftOrResearch();
     }
-
-    this.phase = Phase.INTERGENERATION;
-    this.goToDraftOrResearch();
   }
 
-  private resolveTurmoilDeferredActions() {
-    this.deferredActions.runAll(() => this.goToDraftOrResearch());
+  private updateVPbyGeneration(): void {
+    this.getPlayers().forEach((player) => {
+      player.victoryPointsByGeneration.push(player.getVictoryPoints().total);
+    });
   }
 
   private goToDraftOrResearch() {
+    this.updateVPbyGeneration();
     this.generation++;
     this.log('Generation ${0}', (b) => b.forNewGeneration().number(this.generation));
     this.incrementFirstPlayer();
@@ -1086,6 +1096,7 @@ export class Game {
         this.donePlayers.add(player.id);
       }
     }
+    this.updateVPbyGeneration();
     this.gotoEndGame();
   }
 
@@ -1158,14 +1169,13 @@ export class Game {
         player.increaseTerraformRating();
       }
       if (this.gameOptions.altVenusBoard) {
-        // The second half of this equation removes any increases earler than 16-to-18.
-
         const newValue = this.venusScaleLevel + steps * 2;
         const minimalBaseline = Math.max(this.venusScaleLevel, 16);
         const maximumBaseline = Math.min(newValue, 30);
         const standardResourcesGranted = Math.max((maximumBaseline - minimalBaseline) / 2, 0);
 
         const grantWildResource = this.venusScaleLevel + (steps * 2) >= 30;
+        // The second half of this expression removes any increases earler than 16-to-18.
         if (grantWildResource || standardResourcesGranted > 0) {
           this.defer(new GrantVenusAltTrackBonusDeferred(player, standardResourcesGranted, grantWildResource));
         }
@@ -1257,7 +1267,7 @@ export class Game {
   }
 
   public getCitiesCount(player?: Player): number {
-    let cities = this.board.spaces.filter((space) => Board.isCitySpace(space));
+    let cities = this.board.spaces.filter(Board.isCitySpace);
     if (player !== undefined) cities = cities.filter(Board.ownedBy(player));
     return cities.length;
   }
@@ -1410,20 +1420,20 @@ export class Game {
       // ignore
       break;
     case SpaceBonus.MICROBE:
-      this.defer(new AddResourcesToCard(player, ResourceType.MICROBE, {count: count}));
+      this.defer(new AddResourcesToCard(player, CardResource.MICROBE, {count: count}));
       break;
     case SpaceBonus.DATA:
-      this.defer(new AddResourcesToCard(player, ResourceType.DATA, {count: count}));
+      this.defer(new AddResourcesToCard(player, CardResource.DATA, {count: count}));
       break;
     case SpaceBonus.ENERGY_PRODUCTION:
-      player.addProduction(Resources.ENERGY, count);
+      player.addProduction(Resources.ENERGY, count, {log: true});
       break;
     case SpaceBonus.SCIENCE:
-      this.defer(new AddResourcesToCard(player, ResourceType.SCIENCE, {count: count}));
+      this.defer(new AddResourcesToCard(player, CardResource.SCIENCE, {count: count}));
       break;
     case SpaceBonus.TEMPERATURE:
       if (this.getTemperature() < constants.MAX_TEMPERATURE) {
-        this.defer(new DeferredAction(player, () => this.increaseTemperature(player, 1)));
+        this.defer(new SimpleDeferredAction(player, () => this.increaseTemperature(player, 1)));
         this.defer(new SelectHowToPayDeferred(
           player,
           constants.VASTITAS_BOREALIS_BONUS_TEMPERATURE_COST,
@@ -1531,7 +1541,7 @@ export class Game {
     throw new Error(`No player has played ${name}`);
   }
 
-  public getCardsInHandByResource(player: Player, resourceType: ResourceType) {
+  public getCardsInHandByResource(player: Player, resourceType: CardResource) {
     return player.cardsInHand.filter((card) => card.resourceType === resourceType);
   }
 
@@ -1586,7 +1596,7 @@ export class Game {
 
   public static deserialize(d: SerializedGame): Game {
     const gameOptions = d.gameOptions;
-    const players = d.players.map((element: SerializedPlayer) => Player.deserialize(element));
+    const players = d.players.map((element: SerializedPlayer) => Player.deserialize(element, d));
     const first = players.find((player) => player.id === d.first);
     if (first === undefined) {
       throw new Error(`Player ${d.first} not found when rebuilding First Player`);
@@ -1707,7 +1717,7 @@ export class Game {
       game.gotoResearchPhase();
     } else {
       // We should be in ACTION phase, let's prompt the active player for actions
-      game.getPlayerById(game.activePlayer).takeAction();
+      game.getPlayerById(game.activePlayer).takeAction(/* saveBeforeTakingAction */ false);
     }
 
     return game;

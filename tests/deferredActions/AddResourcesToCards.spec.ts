@@ -6,7 +6,7 @@ import {AddResourcesToCards} from '../../src/deferredActions/AddResourcesToCards
 import {Game} from '../../src/Game';
 import {TestPlayers} from '../TestPlayers';
 import {TestPlayer} from '../TestPlayer';
-import {ResourceType} from '../../src/common/ResourceType';
+import {CardResource} from '../../src/common/CardResource';
 import {AndOptions} from '../../src/inputs/AndOptions';
 
 describe('AddResourcesToCards', function() {
@@ -24,19 +24,19 @@ describe('AddResourcesToCards', function() {
   });
 
   it('0 cards in hand no action', function() {
-    const action = new AddResourcesToCards(player, ResourceType.MICROBE, 5);
+    const action = new AddResourcesToCards(player, CardResource.MICROBE, 5);
     expect(action.execute()).is.undefined;
   });
 
   it('0 resources no action', function() {
     player.playedCards = [ghgProducingBacteria];
-    const action = new AddResourcesToCards(player, ResourceType.MICROBE, 0);
+    const action = new AddResourcesToCards(player, CardResource.MICROBE, 0);
     expect(action.execute()).is.undefined;
   });
 
   it('one card autofill', function() {
     player.playedCards = [ghgProducingBacteria];
-    const options = new AddResourcesToCards(player, ResourceType.MICROBE, 5).execute();
+    const options = new AddResourcesToCards(player, CardResource.MICROBE, 5).execute();
     expect(options).is.undefined;
     expect(ghgProducingBacteria.resourceCount).eq(5);
   });
@@ -44,7 +44,7 @@ describe('AddResourcesToCards', function() {
   it('many microbe cards', function() {
     player.playedCards = [ghgProducingBacteria, tardigrades, ants];
 
-    const options = new AddResourcesToCards(player, ResourceType.MICROBE, 9).execute();
+    const options = new AddResourcesToCards(player, CardResource.MICROBE, 9).execute();
     expect(options).instanceOf(AndOptions);
 
     if (options instanceof AndOptions) {
@@ -63,7 +63,7 @@ describe('AddResourcesToCards', function() {
   it('many microbe cards, wrong input', function() {
     player.playedCards = [ghgProducingBacteria, tardigrades, ants];
 
-    const options = new AddResourcesToCards(player, ResourceType.MICROBE, 9).execute();
+    const options = new AddResourcesToCards(player, CardResource.MICROBE, 9).execute();
     expect(options).instanceOf(AndOptions);
 
     if (options instanceof AndOptions) {

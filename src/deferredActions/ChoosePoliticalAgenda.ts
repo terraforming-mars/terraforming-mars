@@ -6,14 +6,15 @@ import {DeferredAction, Priority} from './DeferredAction';
 import {IParty} from '../turmoil/parties/IParty';
 import {BonusId, PolicyId} from '../common/turmoil/Types';
 
-export class ChoosePoliticalAgenda implements DeferredAction {
-  public priority = Priority.DEFAULT;
+export class ChoosePoliticalAgenda extends DeferredAction {
   constructor(
-    public player: Player,
+    player: Player,
     public party: IParty,
     public bonusCb: (bonusId: BonusId) => void,
     public policyCb: (policyId: PolicyId) => void,
-  ) {}
+  ) {
+    super(player, Priority.DEFAULT);
+  }
 
   public execute(): PlayerInput {
     const players = this.player.game.getPlayers();

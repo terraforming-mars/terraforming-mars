@@ -10,6 +10,7 @@ import {SelectCard} from '../../inputs/SelectCard';
 import {Priority} from '../../deferredActions/DeferredAction';
 import {IProjectCard} from '../IProjectCard';
 import {IActionCard} from '../ICard';
+import {Size} from '../../common/cards/render/Size';
 
 export class Odyssey extends Card implements ICorporationCard, IActionCard {
   constructor() {
@@ -22,10 +23,10 @@ export class Odyssey extends Card implements ICorporationCard, IActionCard {
         cardNumber: 'PfC18',
         description: 'You start with 33 M€',
         renderData: CardRenderer.builder((b) => {
-          b.megacredits(33).br.br;
-          b.effect('Your event cards stay face up, and their tags are in use as if the event was an automated card.', (e) => {
-            e.empty().startEffect.cards(1, {secondaryTag: Tags.EVENT}).asterix();
-          }).br;
+          b.br.br.br.br.br.br.megacredits(33).nbsp.nbsp.nbsp;
+          b.colon().cards(1, {secondaryTag: Tags.EVENT}).asterix().br;
+          b.text('(Effect: Your event cards stay face up, and their tags are in use as if the event was an automated card.)',
+            Size.TINY, false, false).br;
           b.action('You may play an event card you have already played that costs 16MC or less, after which, discard that card.', (e) => {
             e.empty().startAction.event({played}).asterix().text('<=16');
           });

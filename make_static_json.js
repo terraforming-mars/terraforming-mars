@@ -37,13 +37,18 @@ function getAllTranslations() {
   return translations;
 }
 
-function generateAppVersion() {
+function getBuildMetadata() /* {head: string, date: string} */ {
   // assumes SOURCE_VERSION is git hash
   if (process.env.SOURCE_VERSION) {
-    return process.env.SOURCE_VERSION.substring(0, 7) + ' ' + new Date().toUTCString().replace(/ \(.+\)/, '');
+    return {
+      head: process.env.SOURCE_VERSION.substring(0, 7),
+      date: new Date().toUTCString().replace(/ \(.+\)/, ''),
+    };
   }
   try {
-    return child_process.execSync(`git log -1 --pretty=format:"%h %cD"`).toString();
+    const output = child_process.execSync(`git log -1 --pretty=format:"%h %cD"`).toString();
+    const [head, ...rest] = output.split(' ');
+    return {head, date: rest.join(' ')};
   } catch (error) {
     console.error('unable to generate app version', error);
     throw error;
@@ -68,8 +73,10 @@ if (!fs.existsSync('src/genfiles')) {
   fs.mkdirSync('src/genfiles');
 }
 
+const buildmetadata = getBuildMetadata();
 fs.writeFileSync('src/genfiles/settings.json', JSON.stringify({
-  version: generateAppVersion(),
+  head: buildmetadata.head,
+  builtAt: buildmetadata.date,
   waitingForTimeout: getWaitingForTimeout(),
   logLength: getLogLength(),
 }));

@@ -8,7 +8,7 @@ import {Tags} from '../../common/cards/Tags';
 import {SelectSpace} from '../../inputs/SelectSpace';
 import {ISpace} from '../../boards/ISpace';
 import {AddResourcesToCard} from '../../deferredActions/AddResourcesToCard';
-import {ResourceType} from '../../common/ResourceType';
+import {CardResource} from '../../common/CardResource';
 import {TileType} from '../../common/TileType';
 
 export class MartianNatureWonders extends Card implements IProjectCard {
@@ -37,7 +37,7 @@ export class MartianNatureWonders extends Card implements IProjectCard {
   }
 
   public play(player: Player) {
-    player.game.defer(new AddResourcesToCard(player, ResourceType.DATA, {count: 2}));
+    player.game.defer(new AddResourcesToCard(player, CardResource.DATA, {count: 2}));
     return new SelectSpace('Select a Martian Natural Wonder space',
       player.game.board.getAvailableSpacesOnLand(player),
       (space: ISpace) => {

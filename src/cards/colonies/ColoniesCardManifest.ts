@@ -1,5 +1,4 @@
 import {CardName} from '../../common/cards/CardName';
-import {GameModule} from '../../common/cards/GameModule';
 import {CardManifest} from '../CardManifest';
 import {Airliners} from './Airliners';
 import {AirRaid} from './AirRaid';
@@ -58,7 +57,7 @@ import {WarpDrive} from './WarpDrive';
 import {BuildColonyStandardProject} from './BuildColonyStandardProject';
 
 export const COLONIES_CARD_MANIFEST = new CardManifest({
-  module: GameModule.Colonies,
+  module: 'colonies',
 
   projectCards: [
     {cardName: CardName.AIRLINERS, Factory: Airliners},

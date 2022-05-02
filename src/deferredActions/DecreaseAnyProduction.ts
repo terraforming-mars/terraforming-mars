@@ -2,6 +2,7 @@ import {Player} from '../Player';
 import {Resources} from '../common/Resources';
 import {SelectPlayer} from '../inputs/SelectPlayer';
 import {DeferredAction, Priority} from './DeferredAction';
+import {MonsInsurance} from '../cards/promo/MonsInsurance';
 
 namespace DecreaseAnyProduction {
   export interface Options {
@@ -9,20 +10,24 @@ namespace DecreaseAnyProduction {
     stealing?: boolean
   }
 }
-export class DecreaseAnyProduction implements DeferredAction {
-  public priority = Priority.ATTACK_OPPONENT;
+export class DecreaseAnyProduction extends DeferredAction {
   constructor(
-    public player: Player,
+    player: Player,
     public resource: Resources,
     public options: DecreaseAnyProduction.Options = {
       count: 1,
       stealing: false,
     },
     public title: string = 'Select player to decrease ' + resource + ' production by ' + options.count + ' step(s)',
-  ) { }
+  ) {
+    super(player, Priority.ATTACK_OPPONENT);
+  }
 
   public execute() {
-    if (this.player.game.isSoloMode()) return undefined;
+    if (this.player.game.isSoloMode()) {
+      MonsInsurance.resolveInsuranceInSoloGame(this.player);
+      return undefined;
+    }
 
     let candidates: Array<Player> = this.player.game.getPlayers().filter((p) => !p.productionIsProtected());
 

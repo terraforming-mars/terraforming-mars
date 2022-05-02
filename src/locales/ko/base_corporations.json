@@ -1,0 +1,73 @@
+{
+    "BEGINNER CORPORATION": "초보자용 기업",
+    "Beginner Corporation": "초보자용 기업",
+    "You start with 42 M€. Instead of choosing from 10 cards during setup, you get 10 cards for free.": "42 M€을 가지고 게임 시작. 게임을 준비할 때 카드를 구입하지 않으며, 그 대신 프로젝트 카드 10장을 공짜로 획득.",
+
+    "CREDICOR": "크레디코르",
+    "Credicor": "크레디코르",
+    "CrediCor": "크레디코르",
+    "You start with 57 M€.": "57 M€을 가지고 게임 시작.",
+    "Effect: After you pay for a card or standard project with a basic cost of 20M€ or more, you gain 4 M€.": "지속 효과: 카드 또는 일반 프로젝트의 추진 비용을 지불할 때마다, 해당 추진 비용의 기본값이 20 M€ 이상일 경우 4 M€ 획득.",
+
+    "ECOLINE": "에코라인",
+    "Ecoline": "에코라인",
+    "EcoLine": "에코라인",
+    "You start with 2 plant production, 3 plants, and 36 M€.": "식물 생산력 2, 식물 자원 3개 및 36 M€을 가지고 게임 시작.",
+    "Effect: You may always pay 7 plants, instead of 8, to place greenery.": "지속 효과: 식물 자원을 8개가 아닌 7개만 소비해도 녹지 타일을 1장 놓을 수 있음.",
+
+    "HELION": "헬리온",
+    "Helion": "헬리온",
+    "You start with 3 heat production and 42 M€.": "열 생산력 3개 및 42 M€을 가지고 시작.",
+    "Effect: You may use heat as M€. You may not use M€ as heat.": "지속 효과: 열 자원을 메가크레딧처럼 사용할 수 있음. 하지만 그 반대는 불가.",
+
+    "INTERPLANETARY": "인터플래너터리",
+    "CINEMATICS": "시네마틱스",
+    "Interplanetary Cinematics": "인터플래너터리 시네마틱스",
+    "You start with 20 steel and 30 M€.": "강철 자원 20개 및 30 M€을 가지고 게임 시작.",
+    "Effect: Each time you play an event, you gain 2 M€.": "지속 효과: 사건형 카드를 사용할 때마다 2 M€ 획득.",
+
+    "INVENTRIX": "인벤트릭스",
+    "Inventrix": "인벤트릭스",
+    "As your first action in the game, draw 3 cards. Start with 45 M€.": "게임 첫 행동으로서 카드 3장 획득. 45 M€을 가지고 게임 시작.",
+    "Effect: Your temperature, oxygen, ocean, and Venus requirements are +2 or -2 steps, your choice in each case.": "지속 효과: 카드 사용 시, 그 카드의 추진 조건 중 행성 지표 및 금성개척률에는 +2단계 또는 -2단계 중 원하는 것을 적용.",
+
+    "PHOBOLOG": "포볼로그",
+    "Phobolog": "포볼로그",
+    "PhoboLog": "포볼로그",
+    "You start with 10 titanium and 23 M€.": "티타늄 자원 10개 및 23 M€을 가지고 게임 시작.",
+    "Effect: Your titanium resources are each worth 1 M€ extra.": "지속 효과: 보유한 각 티타늄 자원의 가치 1 M€ 상승.",
+
+    "THARSIS": "타르시스",
+    "REPUBLIC": "공화국",
+    "Tharsis Republic": "타르시스 공화국",
+    "You start with 40 M€. As your first action in the game, place a city tile.": "40 M€을 가지고 게임 시작. 게임 첫 행동으로서 도시 타일 1장 배치.",
+    "Effect: When any city tile is placed ON MARS, increase your M€ production 1 step. When you place a city tile, gain 3 M€.": "지속 효과: 화성에 아무 도시 타일 1장 놓일 때마다 메가크레딧 생산력 1증가. 자신이 도시 타일을 놓을 때마다 3 M€ 획득.",
+
+    "THORGATE": "토르게이트",
+    "Thorgate": "토르게이트",
+    "You start with 1 energy production and 48 M€.": "에너지 생산력 1 및 48 M€을 가지고 게임 시작.",
+    "Effect: When playing a power card OR THE STANDARD PROJECT POWER PLANT, you pay 3 M€ less for it.": "지속 효과: 일반 프로젝트 발전소 건설의 추진 비용 3 M€ 할인. 에너지 카드 사용 시, 에너지 태그 1개마다 추진 비용 3 M€ 할인.",
+
+    "UNITED NATIONS MARS INITIATIVE": "UNMI",
+    "United Nations Mars Initiative": "UNMI",
+    "UNMI": "UNMI",
+    "You start with 40 M€.": "40 M€을 가지고 게임 시작.",
+    "Action: If your Terraform Rating was raised this generation, you may pay 3 M€ to raise it 1 step more.": "행동: 만약 이번 세대에 자신의 테라포밍 등급이 상승했다면, 3 M€ 소비해서 1 TR 추가 상승.",
+
+    "MINING": "광업",
+    "GUILD": "협동조합",
+    "Mining Guild": "광업협동조합",
+    "You start with 30 M€, 5 steel and 1 steel production.": "30 M€, 강철 자원 4개 및 강철 생산력 1을 가지고 게임 시작.",
+    "Effect: Each time you get any steel or titanium as a placement bonus on the map, increase your steel production 1 step.": "지속 효과: 타일 1장을 놓을 때마다 점유 보너스로서 강철 또는 티타늄 자원을 하나라도 획득했다면 강철 생산력 1 증가.",
+
+    "TERACTOR": "테렉터",
+    "Teractor": "테렉터",
+    "You start with 60 M€.": "60 M€을 가지고 게임 시작.",
+    "Effect: When you play an Earth tag, you pay 3 M€ less for it.": "지속 효과: 지구 카드 사용 시, 지구 태그 1개마다 추진 비용 3 M€ 할인.",
+
+    "SATURN": "새턴",
+    "SYSTEMS": "시스템",
+    "Saturn Systems": "새턴 시스템",
+    "You start with 1 titanium production and 42 M€.": "티타늄 생산력 1 및 42 M€을 가지고 게임 시작.",
+    "Effect: Each time any Jovian tag is put into play, including this, increase your M€ production 1 step.": "지속 효과: 이 카드도 포함해서, 아무 목성 태그가 게임에 등장할 때마다 해당 목성 태그 1개당 자신의 메가크레딧 생산력 1 증가"
+}

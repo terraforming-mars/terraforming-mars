@@ -8,7 +8,7 @@ import {AndOptions} from '../../inputs/AndOptions';
 import {Card} from '../Card';
 import {CardName} from '../../common/cards/CardName';
 import {CardType} from '../../common/cards/CardType';
-import {DeferredAction, Priority} from '../../deferredActions/DeferredAction';
+import {SimpleDeferredAction, Priority} from '../../deferredActions/DeferredAction';
 import {CardRenderer} from '../render/CardRenderer';
 import {Size} from '../../common/cards/render/Size';
 import {BoardType} from '../../boards/BoardType';
@@ -127,7 +127,7 @@ export class Philares extends Card implements ICorporationCard {
 
     if (eligibleTiles.length > 0) {
       cardOwner.game.defer(
-        new DeferredAction(cardOwner, () => {
+        new SimpleDeferredAction(cardOwner, () => {
           cardOwner.game.log('${0} must select ${1} bonus resource(s) from ${2}\' ability', (b) => b.player(cardOwner).number(eligibleTiles.length).card(this));
           return this.selectResources(cardOwner, eligibleTiles.length);
         }),

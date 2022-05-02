@@ -45,7 +45,7 @@ describe('SolarFarm', function() {
     expect(citySpace.player).to.eq(player);
     expect(citySpace.tile!.tileType).to.eq(TileType.SOLAR_FARM);
     expect(citySpace.adjacency).to.deep.eq({
-      bonus: [SpaceBonus.POWER, SpaceBonus.POWER],
+      bonus: [SpaceBonus.ENERGY, SpaceBonus.ENERGY],
     });
     expect(player.getProduction(Resources.ENERGY)).eq(7);
   });

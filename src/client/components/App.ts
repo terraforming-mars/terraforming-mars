@@ -22,7 +22,7 @@ import {hasShowModal, showModal, windowHasHTMLDialogElement} from './HTMLDialogE
 
 const dialogPolyfill = require('dialog-polyfill');
 
-interface MainAppData {
+export interface MainAppData {
     screen: 'create-game-form' |
             'cards' |
             'empty' |

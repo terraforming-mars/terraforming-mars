@@ -235,7 +235,7 @@
       </div>
       <PlanetaryTracks v-if="game.gameOptions.pathfindersExpansion" :tracks="game.pathfinders" :gameOptions="game.gameOptions"/>
       <div v-if="game.spectatorId">
-        <a :href="'/spectator?id=' +game.spectatorId" target="_blank" rel="noopener noreferrer">Spectator link</a>
+        <a :href="'/spectator?id=' +game.spectatorId" target="_blank" rel="noopener noreferrer" v-i18n>Spectator link</a>
       </div>
   </div>
 </template>
@@ -250,10 +250,10 @@ import Awards from '@/client/components/Awards.vue';
 import PlayersOverview from '@/client/components/overview/PlayersOverview.vue';
 import WaitingFor from '@/client/components/WaitingFor.vue';
 import Sidebar from '@/client/components/Sidebar.vue';
-import Colony from '@/client/components/Colony.vue';
+import Colony from '@/client/components/colonies/Colony.vue';
 import LogPanel from '@/client/components/LogPanel.vue';
 import {PlayerMixin} from '@/client/mixins/PlayerMixin';
-import Turmoil from '@/client/components/Turmoil.vue';
+import Turmoil from '@/client/components/turmoil/Turmoil.vue';
 import {playerColorClass} from '@/common/utils/utils';
 import PlanetaryTracks from '@/client/components/pathfinders/PlanetaryTracks.vue';
 import DynamicTitle from '@/client/components/common/DynamicTitle.vue';

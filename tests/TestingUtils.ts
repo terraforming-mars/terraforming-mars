@@ -9,8 +9,6 @@ import {Turmoil} from '../src/turmoil/Turmoil';
 import {LogMessage} from '../src/common/logs/LogMessage';
 import {PolicyId} from '../src/common/turmoil/Types';
 import {Log} from '../src/common/logs/Log';
-import {PlayerInput} from '../src/PlayerInput';
-import {DeferredAction} from '../src/deferredActions/DeferredAction';
 import {Greens} from '../src/turmoil/parties/Greens';
 import {PoliticalAgendas} from '../src/turmoil/PoliticalAgendas';
 import {Reds} from '../src/turmoil/parties/Reds';
@@ -95,12 +93,6 @@ export class TestingUtils {
       throw new Error('No action in queue.');
     }
     return action.execute();
-  }
-
-  public static queueAction(player: Player, action: PlayerInput | undefined) {
-    if (action !== undefined) {
-      player.game.defer(new DeferredAction(player, () => action));
-    }
   }
 
   public static forceGenerationEnd(game: Game) {

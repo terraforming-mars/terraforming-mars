@@ -1,10 +1,9 @@
 import {Player} from '../Player';
 import {SelectCard} from '../inputs/SelectCard';
-import {ResourceType} from '../common/ResourceType';
+import {CardResource} from '../common/CardResource';
 import {ICard} from '../cards/ICard';
 import {Tags} from '../common/cards/Tags';
 import {DeferredAction, Priority} from './DeferredAction';
-import {LogBuilder} from '../LogBuilder';
 
 export namespace AddResourcesToCard {
   export interface Options {
@@ -12,18 +11,18 @@ export namespace AddResourcesToCard {
     restrictedTag?: Tags;
     title?: string;
     filter?: (card: ICard) => boolean;
-    logMessage?: string;
-    logBuilder?: (builder: LogBuilder) => void;
+    log?: () => void;
   }
 }
 
-export class AddResourcesToCard implements DeferredAction {
-  public priority = Priority.GAIN_RESOURCE_OR_PRODUCTION;
+export class AddResourcesToCard extends DeferredAction {
   constructor(
-        public player: Player,
-        public resourceType: ResourceType | undefined,
-        public options: AddResourcesToCard.Options = {},
-  ) {}
+    player: Player,
+    public resourceType: CardResource | undefined,
+    public options: AddResourcesToCard.Options = {},
+  ) {
+    super(player, Priority.GAIN_RESOURCE_OR_PRODUCTION);
+  }
 
   public execute() {
     const count = this.options.count ?? 1;
@@ -43,7 +42,7 @@ export class AddResourcesToCard implements DeferredAction {
     }
 
     if (cards.length === 1) {
-      this.player.addResourceTo(cards[0], {qty: count, log: true});
+      this.addResource(cards[0], count);
       return undefined;
     }
 
@@ -52,9 +51,15 @@ export class AddResourcesToCard implements DeferredAction {
       count === 1 ? 'Add resource' : 'Add resources',
       cards,
       (selected: Array<ICard>) => {
-        this.player.addResourceTo(selected[0], {qty: count, log: true});
+        this.addResource(selected[0], count);
         return undefined;
       },
     );
+  }
+
+  private addResource(card: ICard, qty: number) {
+    const autoLog = this.options.log === undefined;
+    this.player.addResourceTo(card, {qty, log: autoLog});
+    this.options.log?.();
   }
 }

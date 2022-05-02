@@ -26,7 +26,7 @@ export class SpinoffProducts extends GlobalEvent implements IGlobalEvent {
   }
   public resolve(game: Game, turmoil: Turmoil) {
     game.getPlayersInGenerationOrder().forEach((player) => {
-      player.addResource(Resources.MEGACREDITS, 2 * (Math.min(5, player.getTagCount(Tags.SCIENCE, 'raw')) + turmoil.getPlayerInfluence(player)), {log: true, from: this.name});
+      player.addResource(Resources.MEGACREDITS, 2 * (Math.min(5, player.getTagCount(Tags.SCIENCE, 'raw-pf')) + turmoil.getPlayerInfluence(player)), {log: true, from: this.name});
     });
   }
 }

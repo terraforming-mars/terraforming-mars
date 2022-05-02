@@ -8,7 +8,7 @@ import {OrOptions} from '../../inputs/OrOptions';
 import {SelectCard} from '../../inputs/SelectCard';
 import {SelectOption} from '../../inputs/SelectOption';
 import {PlayerInput} from '../../PlayerInput';
-import {ResourceType} from '../../common/ResourceType';
+import {CardResource} from '../../common/CardResource';
 import {CardName} from '../../common/cards/CardName';
 import {Resources} from '../../common/Resources';
 import {PlaceOceanTile} from '../../deferredActions/PlaceOceanTile';
@@ -40,7 +40,7 @@ export class LargeConvoy extends Card implements IProjectCard {
   public play(player: Player): PlayerInput | undefined {
     player.drawCard(2);
 
-    const animalCards = player.getResourceCards(ResourceType.ANIMAL);
+    const animalCards = player.getResourceCards(CardResource.ANIMAL);
 
     const gainPlants = function() {
       player.addResource(Resources.PLANTS, 5, {log: true});

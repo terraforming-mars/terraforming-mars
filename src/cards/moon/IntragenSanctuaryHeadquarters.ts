@@ -6,7 +6,7 @@ import {ICorporationCard} from '../corporation/ICorporationCard';
 import {CardRenderer} from '../render/CardRenderer';
 import {IProjectCard} from '../IProjectCard';
 import {ICard} from '../ICard';
-import {ResourceType} from '../../common/ResourceType';
+import {CardResource} from '../../common/CardResource';
 import {PlaceMoonColonyTile} from '../../moon/PlaceMoonColonyTile';
 import {Card} from '../Card';
 import {VictoryPoints} from '../ICard';
@@ -20,7 +20,7 @@ export class IntragenSanctuaryHeadquarters extends Card implements ICorporationC
       name: CardName.INTRAGEN_SANCTUARY_HEADQUARTERS,
       tags: [Tags.ANIMAL, Tags.MOON],
       startingMegaCredits: 38,
-      resourceType: ResourceType.ANIMAL,
+      resourceType: CardResource.ANIMAL,
       initialActionText: 'Place a colony tile on the Moon.',
       victoryPoints: VictoryPoints.resource(1, 2),
 

@@ -146,9 +146,17 @@ export class SQLite implements IDatabase {
   }
 
   // TODO(kberg): throw an error if two game ids exist.
-  getGameId(playerId: string, cb: (err: Error | undefined, gameId?: GameId) => void): void {
-    const sql = 'SELECT game_id from games, json_each(games.game, \'$.players\') e where json_extract(e.value, \'$.id\') = ?';
-    this.db.get(sql, [playerId], (err: Error | null, row: { gameId: any; }) => {
+  getGameId(id: string, cb: (err:Error | undefined, gameId?: GameId) => void): void {
+    let sql = undefined;
+    if (id.charAt(0) === 'p') {
+      sql = 'SELECT game_id from games, json_each(games.game, \'$.players\') e where json_extract(e.value, \'$.id\') = ?';
+    } else if (id.charAt(0) === 's') {
+      sql = 'SELECT game_id from games where json_extract(games.game, \'$.spectatorId\') = ?';
+    } else {
+      throw new Error(`id ${id} is neither a player id or spectator id`);
+    }
+    console.log(sql);
+    this.db.get(sql, [id], (err: Error | null, row: { gameId: any; }) => {
       if (err) {
         return cb(err ?? undefined);
       }

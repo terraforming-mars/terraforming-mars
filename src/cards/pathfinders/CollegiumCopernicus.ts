@@ -8,9 +8,9 @@ import {CardRenderer} from '../render/CardRenderer';
 import {played} from '../Options';
 import {IProjectCard} from '../IProjectCard';
 import {IActionCard, ICard} from '../ICard';
-import {ResourceType} from '../../common/ResourceType';
+import {CardResource} from '../../common/CardResource';
 import {ColoniesHandler} from '../../colonies/ColoniesHandler';
-import {DeferredAction} from '../../deferredActions/DeferredAction';
+import {SimpleDeferredAction} from '../../deferredActions/DeferredAction';
 import {SelectColony} from '../../inputs/SelectColony';
 import {IColonyTrader} from '../../colonies/IColonyTrader';
 import {IColony} from '../../colonies/IColony';
@@ -26,7 +26,7 @@ export class CollegiumCopernicus extends Card implements ICorporationCard, IActi
       name: CardName.COLLEGIUM_COPERNICUS,
       tags: [Tags.SCIENCE, Tags.EARTH],
       startingMegaCredits: 33,
-      resourceType: ResourceType.DATA,
+      resourceType: CardResource.DATA,
 
       initialActionText: 'Draw 2 cards with a science tag',
 
@@ -68,7 +68,7 @@ export class CollegiumCopernicus extends Card implements ICorporationCard, IActi
   }
 
   private addResource(player: Player) {
-    player.game.defer(new AddResourcesToCard(player, ResourceType.DATA, {count: 1}));
+    player.game.defer(new AddResourcesToCard(player, CardResource.DATA, {count: 1}));
   }
 
   public canAct(player: Player) {
@@ -77,7 +77,7 @@ export class CollegiumCopernicus extends Card implements ICorporationCard, IActi
 
   public action(player: Player) {
     const game = player.game;
-    game.defer(new DeferredAction(
+    game.defer(new SimpleDeferredAction(
       player,
       () => new SelectColony('Select colony tile to trade with', 'Select', ColoniesHandler.tradeableColonies(game), (colony) => {
         tradeWithColony(this, player, colony);

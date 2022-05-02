@@ -1,18 +1,21 @@
-import {ALL_EVENTS} from '@/turmoil/globalEvents/GlobalEventDealer';
 import {GlobalEventModel} from '@/common/models/TurmoilModel';
 import {GlobalEventName} from '@/common/turmoil/globalEvents/GlobalEventName';
 import {PartyName} from '@/common/turmoil/PartyName';
 import {IClientGlobalEvent} from '@/common/turmoil/IClientGlobalEvent';
+// @ts-ignore events.json doesn't exist during npm run build
+import * as eventJson from '@/genfiles/events.json';
+
+const events: Map<GlobalEventName, IClientGlobalEvent> = new Map();
+(eventJson as any as Array<IClientGlobalEvent>).forEach((card) => {
+  events.set(card.name, card);
+});
 
 export function allGlobalEventNames() {
-  return ALL_EVENTS.keys();
+  return events.keys();
 }
 
 export function getGlobalEvent(globalEventName: GlobalEventName): IClientGlobalEvent | undefined {
-  const Factory = ALL_EVENTS.get(globalEventName);
-
-  if (Factory !== undefined) return new Factory();
-  return undefined;
+  return events.get(globalEventName);
 }
 
 export function getGlobalEventModel(globalEventName: GlobalEventName): GlobalEventModel {

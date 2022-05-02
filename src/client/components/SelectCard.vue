@@ -6,7 +6,7 @@
               <input v-if="isSelectOnlyOneCard()" type="radio" v-model="cards" :value="card" />
               <input v-else type="checkbox" v-model="cards" :value="card" :disabled="playerinput.maxCardsToSelect !== undefined && Array.isArray(cards) && cards.length >= playerinput.maxCardsToSelect && cards.includes(card) === false" />
             </template>
-            <Card :card="card">
+            <Card :card="card" :actionUsed="isCardActivated(card)" :robotCard="robotCard(card)">
               <template v-if="playerinput.showOwner">
                 <div :class="'card-owner-label player_translucent_bg_color_'+ getOwner(card).color">
                   {{getOwner(card).name}}
@@ -36,6 +36,7 @@ import {CardModel} from '@/common/models/CardModel';
 import {CardName} from '@/common/cards/CardName';
 import {PlayerInputModel} from '@/common/models/PlayerInputModel';
 import {sortActiveCards} from '@/client/utils/ActiveCardsSortingOrder';
+import {InputResponse} from '@/common/inputs/InputResponse';
 
 interface Owner {
   name: string;
@@ -58,7 +59,7 @@ export default Vue.extend({
       type: Object as () => PlayerInputModel,
     },
     onsave: {
-      type: Function as unknown as () => (out: Array<Array<string>>) => void,
+      type: Function as unknown as () => (out: InputResponse) => void,
     },
     showsave: {
       type: Boolean,
@@ -159,6 +160,13 @@ export default Vue.extend({
     },
     buttonLabel(): string {
       return this.isSelectOnlyOneCard() ? this.playerinput.buttonLabel : this.playerinput.buttonLabel + ' ' + this.cardsSelected();
+    },
+    isCardActivated(card: CardModel): boolean {
+      // Copied from PlayerMixin.
+      return this.playerView.thisPlayer.actionsThisGeneration.includes(card.name);
+    },
+    robotCard(card: CardModel): CardModel | undefined {
+      return this.playerView.thisPlayer.selfReplicatingRobotsCards?.find((r) => r.name === card.name);
     },
   },
 });

@@ -3,7 +3,7 @@ import {Player} from '../../Player';
 import {PreludeCard} from '../prelude/PreludeCard';
 import {IProjectCard} from '../IProjectCard';
 import {CardName} from '../../common/cards/CardName';
-import {DeferredAction} from '../../deferredActions/DeferredAction';
+import {SimpleDeferredAction} from '../../deferredActions/DeferredAction';
 import {CardRenderer} from '../render/CardRenderer';
 
 export class TradeAdvance extends PreludeCard implements IProjectCard {
@@ -26,7 +26,7 @@ export class TradeAdvance extends PreludeCard implements IProjectCard {
   }
 
   public play(player: Player) {
-    player.game.defer(new DeferredAction(
+    player.game.defer(new SimpleDeferredAction(
       player,
       () => {
         const openColonies = player.game.colonies.filter((colony) => colony.isActive);

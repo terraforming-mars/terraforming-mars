@@ -24,6 +24,7 @@ import {WaitingForModel} from '@/common/models/WaitingForModel';
 import * as constants from '@/common/constants';
 import * as raw_settings from '@/genfiles/settings.json';
 import {isPlayerId} from '@/common/utils/utils';
+import {InputResponse} from '@/common/inputs/InputResponse';
 
 let ui_update_timeout_id: number | undefined;
 let documentTitleTimer: number | undefined;
@@ -60,7 +61,7 @@ export default Vue.extend({
       }
       document.title = next + ' ' + this.$t(constants.APP_NAME);
     },
-    onsave(out: Array<Array<string>>) {
+    onsave(out: InputResponse) {
       const xhr = new XMLHttpRequest();
       const root = this.$root as unknown as typeof mainAppSettings.data;
       const showAlert = (this.$root as unknown as typeof mainAppSettings.methods).showAlert;

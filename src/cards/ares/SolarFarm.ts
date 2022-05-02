@@ -55,7 +55,7 @@ export class SolarFarm extends Card implements IProjectCard {
           card: this.name,
         });
         this.produce(player);
-        space.adjacency = {bonus: [SpaceBonus.POWER, SpaceBonus.POWER]};
+        space.adjacency = {bonus: [SpaceBonus.ENERGY, SpaceBonus.ENERGY]};
         return undefined;
       },
     );

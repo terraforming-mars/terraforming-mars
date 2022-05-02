@@ -70,7 +70,7 @@ describe('BreedingFarms', function() {
     fish.resourceCount = 0;
     player.playedCards = [fish];
 
-    TestingUtils.queueAction(player, card.action(player));
+    player.defer(card.action(player));
     TestingUtils.runAllActions(player.game);
     player.getWaitingFor()?.cb([fish]);
 

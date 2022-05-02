@@ -1,5 +1,4 @@
 import {CardName} from '../../common/cards/CardName';
-import {GameModule} from '../../common/cards/GameModule';
 import {CardManifest} from '../CardManifest';
 import {AgricolaInc} from './AgricolaInc';
 import {Incite} from './Incite';
@@ -17,12 +16,12 @@ import {CuriosityII} from './CuriosityII';
 import {ExecutiveOrder} from './ExecutiveOrder';
 
 export const COMMUNITY_CARD_MANIFEST = new CardManifest({
-  module: GameModule.Community,
+  module: 'community',
   projectCards: [],
   corporationCards: [
     {cardName: CardName.AGRICOLA_INC, Factory: AgricolaInc},
     {cardName: CardName.PROJECT_WORKSHOP, Factory: ProjectWorkshop},
-    {cardName: CardName.INCITE, Factory: Incite, compatibility: GameModule.Turmoil},
+    {cardName: CardName.INCITE, Factory: Incite, compatibility: 'turmoil'},
     {cardName: CardName.PLAYWRIGHTS, Factory: Playwrights},
     {cardName: CardName.CURIOSITY_II, Factory: CuriosityII},
     {cardName: CardName.MIDAS, Factory: Midas},
@@ -32,33 +31,33 @@ export const COMMUNITY_CARD_MANIFEST = new CardManifest({
     {
       cardName: CardName.VALUABLE_GASES,
       Factory: ValuableGases,
-      compatibility: GameModule.Venus,
+      compatibility: 'venus',
     },
     {
       cardName: CardName.VENUS_FIRST,
       Factory: VenusFirst,
-      compatibility: GameModule.Venus,
+      compatibility: 'venus',
     },
     {
       cardName: CardName.AEROSPACE_MISSION,
       Factory: AerospaceMission,
-      compatibility: GameModule.Colonies,
+      compatibility: 'colonies',
     },
     {
       cardName: CardName.TRADE_ADVANCE,
       Factory: TradeAdvance,
-      compatibility: GameModule.Colonies,
+      compatibility: 'colonies',
     },
     {
       cardName: CardName.POLITICAL_UPRISING,
       Factory: PoliticalUprising,
-      compatibility: GameModule.Turmoil,
+      compatibility: 'turmoil',
     },
     {
       cardName: CardName.BY_ELECTION,
       Factory: ByElection,
-      compatibility: GameModule.Turmoil,
+      compatibility: 'turmoil',
     },
-    {cardName: CardName.EXECUTIVE_ORDER, Factory: ExecutiveOrder, compatibility: GameModule.Turmoil},
+    {cardName: CardName.EXECUTIVE_ORDER, Factory: ExecutiveOrder, compatibility: 'turmoil'},
   ],
 });

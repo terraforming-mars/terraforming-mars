@@ -1,0 +1,57 @@
+{
+   "Select a Mars First bonus.": "",
+   "Gain 1 M€ for each Building tag you have": "",
+   "Gain 1 M€ for each tile you have ON MARS": "",
+   "Select a Mars First policy.": "",
+   "When you place a tile ON MARS, gain 1 steel": "",
+   "When you play a Building tag, gain 2 M€": "",
+   "Your steel resources are worth 1 M€ extra": "",
+   "Spend 4 M€ to draw a Building card (Turmoil Mars First)": "",
+
+   "Select a Scientists bonus.": "",
+   "Gain 1 M€ for each Science tag you have": "",
+   "Gain 1 M€ for every 3 cards in hand": "",
+   "Select a Scientists policy.": "",
+   "Your global requirements are +/- 2 steps": "",
+   "When you raise a global parameter, draw a card per step raised": "",
+   "Cards with Science tag requirements may be played with 1 less Science tag": "",
+
+   "Select a Unity bonus.": "",
+   "Gain 1 M€ for each Venus, Earth and Jovian tag you have": "",
+   "Gain 1 M€ for each Space tag you have": "",
+   "Select a Unity policy.": "",
+   "Your titanium resources are worth 1 M€ extra": "",
+   "Spend 4 M€ to gain 2 titanium or add 2 floaters to any card (Turmoil Unity)": "",
+   "Spend 4 M€ to draw a Space card (Turmoil Unity)": "",
+   "Cards with Space tags cost 2 M€ less to play": "",
+
+   "Select a Greens bonus.": "",
+   "Gain 1 M€ for each Plant, Microbe and Animal tag you have": "",
+   "Gain 2 M€ for each greenery tile you have": "",
+   "Select a Greens policy.": "",
+   "When you place a greenery tile, gain 4 M€": "",
+   "When you place a tile, gain 1 plant": "",
+   "When you play an animal, plant or microbe tag, gain 2 M€": "",
+   "Spend 5 M€ to gain 3 plants or add 2 microbes to any card (Turmoil Greens)": "",
+
+   "Select a Reds bonus.": "",
+   "The player(s) with the lowest TR gains 1 TR": "",
+   "The player(s) with the highest TR loses 1 TR": "",
+   "Select a Reds policy.": "",
+   "When you take an action that raises TR, you MUST pay 3 M€ per step raised": "",
+   "When you place a tile, pay 3 M€ or as much as possible": "",
+   "Pay 4 M€ to reduce a non-maxed global parameter 1 step (do not gain any track bonuses)": "",
+   "When you raise a global parameter, decrease your M€ production 1 step per step raised if possible": "",
+
+   "Select a Kelvinists bonus.": "",
+   "Gain 1 M€ for each Heat production you have": "",
+   "Gain 1 heat for each Heat production you have": "",
+   "Select a Kelvinists policy.": "",
+   "Pay 10 M€ to increase your Energy and Heat production 1 step (Turmoil Kelvinists)": "",
+   "When you raise temperature, gain 3 M€ per step raised": "",
+   "Convert 6 heat into temperature (Turmoil Kelvinists)": "",
+   "When you place a tile, gain 2 heat": ""
+
+
+
+  }

@@ -68,8 +68,11 @@ export class SpecializedSettlement extends Card implements IProjectCard {
       'Select space for city tile',
       player.game.board.getAvailableSpacesForCity(player),
       (space: ISpace) => {
+        const coveringExistingTile = space.tile !== undefined;
+
         player.game.addCityTile(player, space.id);
 
+        if (coveringExistingTile) return;
         const bonusResources = this.bonusResources(space);
         if (bonusResources.length === 0) return;
 

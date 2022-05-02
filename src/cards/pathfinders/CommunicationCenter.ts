@@ -5,11 +5,11 @@ import {CardType} from '../../common/cards/CardType';
 import {CardName} from '../../common/cards/CardName';
 import {CardRenderer} from '../render/CardRenderer';
 import {Tags} from '../../common/cards/Tags';
-import {ResourceType} from '../../common/ResourceType';
+import {CardResource} from '../../common/CardResource';
 import {Resources} from '../../common/Resources';
 import {Units} from '../../common/Units';
 import {all, played} from '../Options';
-import {DeferredAction} from '../../deferredActions/DeferredAction';
+import {SimpleDeferredAction} from '../../deferredActions/DeferredAction';
 import {Size} from '../../common/cards/render/Size';
 import {ICard} from '../ICard';
 
@@ -20,7 +20,7 @@ export class CommunicationCenter extends Card implements IProjectCard {
       name: CardName.COMMUNICATION_CENTER,
       cost: 13,
       tags: [Tags.SPACE, Tags.MARS, Tags.BUILDING],
-      resourceType: ResourceType.DATA,
+      resourceType: CardResource.DATA,
       productionBox: Units.of({energy: -1}),
 
       metadata: {
@@ -47,7 +47,7 @@ export class CommunicationCenter extends Card implements IProjectCard {
 
   public play(player: Player) {
     player.addProduction(Resources.ENERGY, -1);
-    player.game.defer(new DeferredAction(player, () => {
+    player.game.defer(new SimpleDeferredAction(player, () => {
       // Play this after the card's been put in hand. Otherwise it will generate an error.
       player.addResourceTo(this, 2);
       return undefined;

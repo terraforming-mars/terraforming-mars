@@ -1,5 +1,4 @@
 import {CardName} from '../../common/cards/CardName';
-import {GameModule} from '../../common/cards/GameModule';
 import {CardManifest} from '../CardManifest';
 import {BioengineeringEnclosure} from './BioengineeringEnclosure';
 import {BiofertilizerFacility} from './BiofertilizerFacility';
@@ -26,7 +25,7 @@ import {RestrictedAreaAres} from './RestrictedAreaAres';
 import {SolarFarm} from './SolarFarm';
 
 export const ARES_CARD_MANIFEST = new CardManifest({
-  module: GameModule.Ares,
+  module: 'ares',
   projectCards: [
     {cardName: CardName.BIOENGINEERING_ENCLOSURE, Factory: BioengineeringEnclosure},
     {cardName: CardName.BIOFERTILIZER_FACILITY, Factory: BiofertilizerFacility},

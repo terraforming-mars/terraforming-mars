@@ -1,7 +1,7 @@
 // Exports a game locally for debugging.
 // See README.md for instructions.
 
-import {isPlayerId} from '../common/utils/utils';
+import {isPlayerId, isSpectatorId} from '../common/utils/utils';
 import {Database} from '../database/Database';
 import {Localfilesystem} from '../database/LocalFilesystem';
 import {SerializedGame} from '../SerializedGame';
@@ -18,8 +18,8 @@ if (process.env.LOCAL_FS_DB !== undefined) {
 const db = Database.getInstance();
 const localDb = new Localfilesystem();
 
-if (isPlayerId(id)) {
-  console.log(`Finding game for player ${id}`);
+if (isPlayerId(id) || isSpectatorId(id)) {
+  console.log(`Finding game for player/spectator ${id}`);
   db.getGameId(id, (err, gameId) => {
     if (err) {
       console.log(err);

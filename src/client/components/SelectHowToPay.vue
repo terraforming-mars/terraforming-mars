@@ -6,6 +6,7 @@ import {PlayerInputModel} from '@/common/models/PlayerInputModel';
 import {PlayerViewModel, PublicPlayerModel} from '@/common/models/PlayerModel';
 import {getPreferences} from '@/client/utils/PreferencesManager';
 import Button from '@/client/components/common/Button.vue';
+import {InputResponse} from '@/common/inputs/InputResponse';
 
 export default Vue.extend({
   name: 'SelectHowToPay',
@@ -17,7 +18,7 @@ export default Vue.extend({
       type: Object as () => PlayerInputModel,
     },
     onsave: {
-      type: Function as unknown as () => (out: Array<Array<string>>) => void,
+      type: Function as unknown as () => (out: InputResponse) => void,
     },
     showsave: {
       type: Boolean,
@@ -100,16 +101,23 @@ export default Vue.extend({
       this.$data[target] = qty;
       return contributingValue;
     },
-    setDefaultValues() {
+    setDefaultValues(reserveMegacredits: boolean = false) {
       const cost = this.$data.cost;
 
-      const targets: Array<Unit> = ['seeds', 'data', 'steel', 'titanium', 'heat'];
       const megaCredits = this.getAmount('megaCredits');
-      let amountCovered = 0;
+
+      const targets: Array<Unit> = ['seeds', 'data', 'steel', 'titanium', 'heat'];
+      let amountCovered = reserveMegacredits ? megaCredits : 0;
       for (const target of targets) {
         amountCovered += this.setDefaultValue(amountCovered, target);
       }
-      this.$data.megaCredits = Math.min(megaCredits, Math.max(cost - amountCovered, 0));
+      if (!reserveMegacredits) {
+        this.$data.megaCredits = Math.min(megaCredits, Math.max(cost - amountCovered, 0));
+      }
+    },
+    setMaxMCValue() {
+      this.setMaxValue('megaCredits');
+      this.setDefaultValues(/* reserveMegacredits */ true);
     },
     canAffordWithMcOnly() {
       return this.thisPlayer.megaCredits >= this.$data.cost;
@@ -248,6 +256,7 @@ export default Vue.extend({
       <Button type="minus" @click="reduceValue('megaCredits', 1)" />
       <input class="form-input form-inline payments_input" v-model.number="megaCredits" />
       <Button type="plus" @click="addValue('megaCredits', 1)" />
+      <Button type="max" @click="setMaxMCValue()" title="MAX" />
     </div>
 
     <div v-if="hasWarning()" class="tm-warning">

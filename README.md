@@ -110,6 +110,10 @@ Thanks goes to these wonderful people:
       <td><img src="https://avatars.githubusercontent.com/u/5318258?s=460&v=4" width="50px;" alt=""/><br />
       <td><a href="https://github.com/Lynesth"><b>Lynesth</b></a>: Help with the things</a> </td>
     </tr>
+    <tr>
+      <td><img src="https://avatars.githubusercontent.com/u/15874357?s=460&v=4" width="50px;" alt=""/><br />
+      <td><a href="https://github.com/derornos"><b>푸른이 (derornos)</b></a>: 한국어화 옮긴이 (Korean translator) / 메일(email): <a href="mailto:derornos@gmail.com">derornos@gmail.com</a> / <a href="https://open.kakao.com/me/derornos">카카오톡(Messenger)</a> </td>
+    </tr>
   </tdata>
 </table>
 

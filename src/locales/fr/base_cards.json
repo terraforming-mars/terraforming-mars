@@ -17,14 +17,14 @@
     "Oxygen must be 6% or less.": "Le niveau d'oxygène doit être de 6% ou moins.",
 
     "Inventors' Guild": "Guilde des Inventeurs",
-    "ACTION: LOOK AT THE TOP CARD AND EITHER BUY IT OR DISCARD IT": "ACTION: CONSULTEZ LA PREMIÈRE CARTE DE LA PIOCHE. VOUS POUVEZ SOIT L'ACHETER, SOIT LA DÉFAUSSER.",
+    "Action: Look at the top card and either buy it or discard it": "ACTION: CONSULTEZ LA PREMIÈRE CARTE DE LA PIOCHE. VOUS POUVEZ SOIT L'ACHETER, SOIT LA DÉFAUSSER.",
 
     "Martian Rails": "Réseau Ferré Martien",
     "Action: Spend 1 Energy to gain 1 M€ for each City tile ON MARS.": "Action: Dépensez 1 énergie pour gagnez 1 M€ pour chaque tuile Cité SUR MARS.",
 
     "Capital": "Capitale",
     "Requires 4 ocean tiles. Place this tile. Decrease your Energy production 2 steps and increase your M€ production 5 steps.": "Nécessite 4 tuiles Océan. Placez cette tuile. Diminuez votre production d'néergie de 2 et augmentez votre production de M€ de 5.",
-    "1 ADDITIONAL VP FOR EACH OCEAN TILE ADJACENT TO THIS CITY TILE.": "+1 PV POUR CHAQUE TUILE OCÉAN ADJACENTE À CETTE TUILE CITÉ.",
+    "1 additional VP for each ocean tile adjacent to this city tile.": "+1 PV POUR CHAQUE TUILE OCÉAN ADJACENTE À CETTE TUILE CITÉ.",
 
     "Asteroid": "Astéroïde",
     "Raise temperature 1 step and gain 2 titanium. Remove up to 3 Plants from any player.": "Augmentez la température de 1 et gagnez 2 titanes. Retirez jusqu'à 3 plantes à n'importe quel joueur.",
@@ -213,7 +213,7 @@
     "Decrease your Energy production 1 step and increase your steel production 2 steps.": "Diminuez votre production d'énergie de 1 et augmentez votre production d'acier de 2.",
 
     "Land Claim": "Revendication du terrain",
-    "PLACE YOUR MARKER ON A NON-RESERVED AREA. ONLY YOU MAY PLACE A TILE HERE.": "PLACEZ VOTRE MARQUEUR SUR UNE ZONE NON-RÉSERVÉE. VOUS SEUL POUVEZ PLACER UNE TUILE SUR CETTE ZONE.",
+    "Place your marker on a non-reserved area. Only you may place a tile there.": "PLACEZ VOTRE MARQUEUR SUR UNE ZONE NON-RÉSERVÉE. VOUS SEUL POUVEZ PLACER UNE TUILE SUR CETTE ZONE.",
 
     "Mining Rights": "Droits Miniers",
     "Place this tile on an area with a steel or titanium placement bonus. Increase that production 1 step.": "Placez cette tuile sur une zone offrant un bonus d'acier ou de titane. Augmentez votre production de cette ressource de 1.",
@@ -351,7 +351,7 @@
     "Decrease your M€ production 1 step.": "Diminuez votre production de M€ de 1.",
 
     "Business Contacts": "Contacts Professionels",
-    "Look at the top 4 cards from the deck. Take 2 of them into hand and discard the other 2.": "Consultez premiéres cartes de la pioche. Placez-en 2 dans votre main et défaussez les 2 autres.",
+    "Look at the top 4 cards from the deck. Take 2 of them into hand and discard the other 2.": "Consultez les 4 premières cartes de la pioche. Placez-en 2 dans votre main et défaussez les 2 autres.",
 
     "Bribed Committee": "Comité Corrompu",
     "Raise your TR 2 steps.": "Augmentez votre NT de 2.",
@@ -379,6 +379,8 @@
 
     "Urbanized Area": "Zone Urbanisée",
     "Decrease your Energy production 1 step and increase your M€ production 2 steps. Place a city tile ADJACENT TO AT LEAST 2 OTHER CITY TILES.": "Diminuez votre production d'énergie de 1 et augmentez votre production de M€ de 2. Placez une tuile Cité ADJACENTE À AU MOINS DEUX AUTRES TUILES CITÉ.",
+    "Select space next to at least 2 other city tiles": "Choisissez une zone adjacente à au moins 2 tuiles Cités.",
+
 
     "Sabotage": "Sabotage",
     "Remove up to 3 titanium from any player, or 4 steel, or 7 M€.": "Retirez jusqu'à 3 titanes de n'importe quel joueur, ou 4 aciers, ou 7 M€.",
@@ -474,7 +476,7 @@
     "Requires 6% oxygen. Increase your Plant production 1 step for each plant tag you have.": "Nécessite au moins 6% d'oxygène. Augmentez votre production de plantes de 1 pour chaque badge Plante en votre possession.",
 
     "CEO's Favorite Project": "Projet Favori du PDG",
-    "ADD 1 RESOURCE TO A CARD WITH AT LEAST 1 RESOURCE ON IT": "AJOUTEZ UNE RESSOURCE À UNE CARTE AYANT DÉJÀ SUR ELLE AU MOINS UNE RESSOURCE.",
+    "Add 1 resource to a card with at least 1 resource on it": "AJOUTEZ UNE RESSOURCE À UNE CARTE AYANT DÉJÀ SUR ELLE AU MOINS UNE RESSOURCE.",
 
     "Anti-Gravity Technology": "Technologie Anti-Gravité",
     "Requires 7 science tags.": "Nécessite 7 badges Science.",
@@ -610,7 +612,7 @@
     "Requires -8 C or warmer. Place 1 ocean tile.": "La température doit être de -8°C ou plus. Placez 1 tuile Océan.",
 
     "Invention Contest": "Concours d'Inventions",
-    "LOOK AT THE TOP 3 CARDS FROM THE DECK. TAKE 1 OF THEM INTO HAND AND DISCARD THE OTHER 2": "CONSULTEZ LES 3 PREMIÈRES CARTES DE LA PIOCHE. AJOUTEZ-EN 1 À VOTRE MAIN ET DÉFAUSSEZ LES 2 AUTRES.",
+    "Look at the top 3 cards from the deck. Take 1 of them into hand and discard the other two": "CONSULTEZ LES 3 PREMIÈRES CARTES DE LA PIOCHE. AJOUTEZ-EN 1 À VOTRE MAIN ET DÉFAUSSEZ LES 2 AUTRES.",
 
     "Plantation": "Plantation",
     "Requires 2 Science tags. Place a greenery tile and raise oxygen 1 step.": "Nécessite 2 badges Science. Placez 1 tuile Forêt et augmentez l'oxygène de 1.",

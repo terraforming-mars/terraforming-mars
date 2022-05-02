@@ -5,7 +5,7 @@ import {Player} from '../../Player';
 import {CardName} from '../../common/cards/CardName';
 import {CardType} from '../../common/cards/CardType';
 import {CardRenderer} from '../render/CardRenderer';
-import {ResourceType} from '../../common/ResourceType';
+import {CardResource} from '../../common/CardResource';
 import {AddResourcesToCard} from '../../deferredActions/AddResourcesToCard';
 import {played} from '../Options';
 import {IProjectCard} from '../IProjectCard';
@@ -20,7 +20,7 @@ export class RobinHaulings extends Card implements ICorporationCard {
       name: CardName.ROBIN_HAULINGS,
       tags: [Tags.MARS, Tags.VENUS],
       startingMegaCredits: 39,
-      resourceType: ResourceType.FLOATER,
+      resourceType: CardResource.FLOATER,
 
       metadata: {
         cardNumber: 'PfC9',
@@ -48,7 +48,7 @@ export class RobinHaulings extends Card implements ICorporationCard {
 
   public onCardPlayed(player: Player, card: IProjectCard) {
     if (player.isCorporation(CardName.ROBIN_HAULINGS) && card.tags.includes(Tags.VENUS)) {
-      player.game.defer(new AddResourcesToCard(player, ResourceType.FLOATER));
+      player.game.defer(new AddResourcesToCard(player, CardResource.FLOATER));
     }
   }
 

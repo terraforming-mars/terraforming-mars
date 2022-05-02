@@ -4,7 +4,7 @@ import {Player} from '../../Player';
 import {ISpace} from '../../boards/ISpace';
 import {SpaceBonus} from '../../common/boards/SpaceBonus';
 import {Resources} from '../../common/Resources';
-import {ResourceType} from '../../common/ResourceType';
+import {CardResource} from '../../common/CardResource';
 import {AddResourcesToCard} from '../../deferredActions/AddResourcesToCard';
 import {GainResources} from '../../deferredActions/GainResources';
 import {Phase} from '../../common/Phase';
@@ -42,6 +42,12 @@ export abstract class SurveyCard extends Card implements IProjectCard {
 
   protected abstract checkForBonuses(cardOwner: Player, space: ISpace): void;
 
+  private log(cardOwner: Player, resource: Resources | CardResource): void {
+    cardOwner.game.log(
+      '${0} gained a bonus ${1} because of ${2}',
+      (b) => b.player(cardOwner).string(resource).cardName(this.name));
+  }
+
   protected testForStandardResource(cardOwner: Player, space: ISpace, resource: Resources, bonus: SpaceBonus) {
     let grant = this.grantsBonusNow(space, bonus) || this.anyAdjacentSpaceGivesBonus(cardOwner, space, bonus);
     if (!grant) {
@@ -60,22 +66,19 @@ export abstract class SurveyCard extends Card implements IProjectCard {
         cardOwner,
         resource,
         {
-          cb: () => cardOwner.game.log(
-            '${0} gained a bonus ${1} because of ${2}',
-            (b) => b.player(cardOwner).string(resource).cardName(this.name)),
+          cb: () => this.log(cardOwner, resource),
         }));
     }
   }
 
-  protected testForCardResource(cardOwner: Player, space: ISpace, resource: ResourceType, bonus: SpaceBonus) {
+  protected testForCardResource(cardOwner: Player, space: ISpace, resource: CardResource, bonus: SpaceBonus) {
     if (cardOwner.playedCards.some((card) => card.resourceType === resource) &&
         (this.grantsBonusNow(space, bonus) || this.anyAdjacentSpaceGivesBonus(cardOwner, space, bonus))) {
       cardOwner.game.defer(new AddResourcesToCard(
         cardOwner,
         resource,
         {
-          logMessage: '${0} gained a bonus ${1} because of ${2}',
-          logBuilder: (b) => b.player(cardOwner).string(resource).cardName(this.name),
+          log: () => this.log(cardOwner, resource),
         }));
     }
   }

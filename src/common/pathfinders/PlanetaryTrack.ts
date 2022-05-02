@@ -1,13 +1,13 @@
 import {Reward} from './Reward';
 
 export interface PlanetaryTrack {
-  spaces: Array<PlanetaryTrackSpace>;
+  spaces: ReadonlyArray<PlanetaryTrackSpace>;
 }
 
 export interface PlanetaryTrackSpace {
-  everyone: Array<Reward>;
-  risingPlayer: Array<Reward>;
-  mostTags: Array<Reward>;
+  everyone: ReadonlyArray<Reward>;
+  risingPlayer: ReadonlyArray<Reward>;
+  mostTags: ReadonlyArray<Reward>;
 }
 
 export class TrackBuilder {

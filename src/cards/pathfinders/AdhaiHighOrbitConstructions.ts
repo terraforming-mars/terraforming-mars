@@ -5,9 +5,9 @@ import {Player} from '../../Player';
 import {CardName} from '../../common/cards/CardName';
 import {CardType} from '../../common/cards/CardType';
 import {CardRenderer} from '../render/CardRenderer';
-import {ResourceType} from '../../common/ResourceType';
+import {CardResource} from '../../common/CardResource';
 import {IProjectCard} from '../IProjectCard';
-import {PLANETARY_TAGS} from '../../pathfinders/PathfindersExpansion';
+import {isPlanetaryTag} from '../../pathfinders/PathfindersExpansion';
 import {played} from '../Options';
 import {Size} from '../../common/cards/render/Size';
 import {AltSecondaryTag} from '../../common/cards/render/AltSecondaryTag';
@@ -19,7 +19,7 @@ export class AdhaiHighOrbitConstructions extends Card implements ICorporationCar
       name: CardName.ADHAI_HIGH_ORBIT_CONSTRUCTIONS,
       tags: [Tags.SPACE],
       startingMegaCredits: 43,
-      resourceType: ResourceType.ORBITAL,
+      resourceType: CardResource.ORBITAL,
 
       metadata: {
         cardNumber: 'PfC23',
@@ -44,7 +44,7 @@ export class AdhaiHighOrbitConstructions extends Card implements ICorporationCar
     let spaceTag: boolean = false;
     for (const tag of tags) {
       if (tag === Tags.SPACE) spaceTag = true;
-      if (PLANETARY_TAGS.includes(tag)) return false;
+      if (isPlanetaryTag(tag)) return false;
     }
     return spaceTag;
   }

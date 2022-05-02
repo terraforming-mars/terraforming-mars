@@ -4,7 +4,7 @@ import {CardType} from '../../common/cards/CardType';
 import {Tags} from '../../common/cards/Tags';
 import {CardRenderer} from '../render/CardRenderer';
 import {Card} from '../Card';
-import {ResourceType} from '../../common/ResourceType';
+import {CardResource} from '../../common/CardResource';
 import {IActionCard, IResourceCard} from '../ICard';
 import {played} from '../Options';
 
@@ -15,7 +15,7 @@ export class LunaArchives extends Card implements IResourceCard, IActionCard {
       cardType: CardType.ACTIVE,
       tags: [Tags.SCIENCE, Tags.MOON],
       cost: 13,
-      resourceType: ResourceType.SCIENCE,
+      resourceType: CardResource.SCIENCE,
 
       metadata: {
         cardNumber: 'M69',

@@ -27,7 +27,7 @@ export const ALL_ADJACENCY_BONUSES = [
   SpaceBonus.ANIMAL,
   SpaceBonus.MEGACREDITS,
   SpaceBonus.MICROBE,
-  SpaceBonus.POWER,
+  SpaceBonus.ENERGY,
 ];
 
 export class AresTestHelper {

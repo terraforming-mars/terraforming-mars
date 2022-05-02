@@ -56,7 +56,7 @@ describe('EcologicalSurvey', () => {
       SpaceBonus.MEGACREDITS,
       SpaceBonus.ANIMAL,
       SpaceBonus.MICROBE,
-      SpaceBonus.POWER,
+      SpaceBonus.ENERGY,
     ],
     };
     firstSpace.player = player;

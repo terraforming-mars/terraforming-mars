@@ -25,4 +25,5 @@ export interface IClientCard {
   resourceType?: CardResource;
   startingMegaCredits?: number; // Corporation and Prelude
   cardCost?: number; // Corporation
+  compatibility: Array<GameModule>;
 }

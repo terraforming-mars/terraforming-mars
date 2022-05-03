@@ -17,7 +17,7 @@ export class CorrosiveRainDeferredAction extends DeferredAction {
   }
 
   public execute() {
-    const floaterCards = this.player.getCardsWithResources(CardResource.FLOATER).filter((card) => card.resourceCount ?? 0 >= 2);
+    const floaterCards = this.player.getCardsWithResources(CardResource.FLOATER).filter((card) => (card.resourceCount ?? 0) >= 2);
 
     if (floaterCards.length === 0) {
       this.player.deductResource(Resources.MEGACREDITS, 10, {log: true, from: GlobalEventName.CORROSIVE_RAIN});

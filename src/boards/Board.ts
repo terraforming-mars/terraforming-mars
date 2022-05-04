@@ -15,6 +15,7 @@ import {CardName} from '../common/cards/CardName';
 export abstract class Board {
   private maxX: number = 0;
   private maxY: number = 0;
+  private map: Map<string, ISpace> = new Map();
 
   // stores adjacent spaces in clockwise order starting from the top left
   private readonly adjacentSpaces = new Map<SpaceId, Array<ISpace>>();
@@ -24,6 +25,7 @@ export abstract class Board {
     this.maxY = Math.max(...spaces.map((s) => s.y));
     spaces.forEach((space) => {
       this.adjacentSpaces.set(space.id, this.computeAdjacentSpaces(space));
+      this.map.set(space.id, space);
     });
   }
 
@@ -33,7 +35,7 @@ export abstract class Board {
 
   /* Returns the space given a Space ID. */
   public getSpace(id: string): ISpace {
-    const space = this.spaces.find((space) => space.id === id);
+    const space = this.map.get(id);
     if (space === undefined) {
       throw new Error(`Can't find space with id ${id}`);
     }

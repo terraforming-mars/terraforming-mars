@@ -35,7 +35,7 @@ export class DecreaseAnyProduction extends DeferredAction {
       return undefined;
     }
 
-    if (candidates.length === 1) {
+    if (candidates.length === 1 && candidates[0] !== this.player) {
       candidates[0].addProduction(this.resource, -this.options.count, {log: true, from: this.player, stealing: this.options.stealing});
       return undefined;
     }

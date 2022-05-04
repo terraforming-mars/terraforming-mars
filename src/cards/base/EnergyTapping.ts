@@ -8,6 +8,7 @@ import {CardName} from '../../common/cards/CardName';
 import {DecreaseAnyProduction} from '../../deferredActions/DecreaseAnyProduction';
 import {CardRenderer} from '../render/CardRenderer';
 import {all} from '../Options';
+import {GainProduction} from '../../deferredActions/GainProduction';
 
 export class EnergyTapping extends Card implements IProjectCard {
   constructor() {
@@ -32,9 +33,9 @@ export class EnergyTapping extends Card implements IProjectCard {
   }
 
   public play(player: Player) {
-    player.addProduction(Resources.ENERGY, 1);
     player.game.defer(
       new DecreaseAnyProduction(player, Resources.ENERGY, {count: 1, stealing: true}));
+    player.game.defer(new GainProduction(player, Resources.ENERGY, {count: 1}));
     return undefined;
   }
 }

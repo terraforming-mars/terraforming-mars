@@ -476,6 +476,10 @@ abstract class Builder<T> {
     return this._appendToRow(CardRenderSymbol.equals(size));
   }
 
+  public surveyMission(): Builder<T> {
+    return this._appendToRow(CardRenderSymbol.surveyMission());
+  }
+
   public empty(): Builder<T> {
     return this._appendToRow(CardRenderSymbol.empty());
   }

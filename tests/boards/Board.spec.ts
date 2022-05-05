@@ -259,14 +259,6 @@ describe('Board', function() {
     public constructor(spaces: Array<ISpace>) {
       super(spaces);
     }
-
-    public getVolcanicSpaceIds(): Array<string> {
-      return [];
-    }
-
-    public getNoctisCitySpaceIds(): Array<string> {
-      return [];
-    }
   }
 
   it('deserialize', () => {

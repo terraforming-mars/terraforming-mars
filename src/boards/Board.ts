@@ -29,9 +29,13 @@ export abstract class Board {
     });
   }
 
-  public abstract getVolcanicSpaceIds(): Array<string>;
+  public getVolcanicSpaceIds(): Array<SpaceId> {
+    return [];
+  }
 
-  public abstract getNoctisCitySpaceIds(): Array<string>;
+  public getNoctisCitySpaceId(): SpaceId | undefined {
+    return undefined;
+  }
 
   /* Returns the space given a Space ID. */
   public getSpace(id: string): ISpace {

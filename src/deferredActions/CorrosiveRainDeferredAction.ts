@@ -17,16 +17,11 @@ export class CorrosiveRainDeferredAction extends DeferredAction {
   }
 
   public execute() {
-    const floaterCards = this.player.getCardsWithResources(CardResource.FLOATER).filter((card) => card.resourceCount ?? 0 >= 2);
-
-    if (floaterCards.length === 0) {
-      this.player.deductResource(Resources.MEGACREDITS, 10, {log: true, from: GlobalEventName.CORROSIVE_RAIN});
-      return undefined;
-    }
+    const floaterCards = this.player.getCardsWithResources(CardResource.FLOATER).filter((card) => (card.resourceCount ?? 0) >= 2);
 
     const selectAction = new OrOptions();
     const payMC = new SelectOption('Lose up to 10 M€', 'Lose M€', () => {
-      this.player.deductResource(Resources.MEGACREDITS, 10);
+      this.player.deductResource(Resources.MEGACREDITS, 10, {log: true, from: GlobalEventName.CORROSIVE_RAIN});
       return undefined;
     });
     const removeFloaters = new SelectCard(
@@ -37,6 +32,11 @@ export class CorrosiveRainDeferredAction extends DeferredAction {
       },
     );
     selectAction.options.push(payMC, removeFloaters);
+
+    if (floaterCards.length === 0) {
+      payMC.cb();
+      return undefined;
+    }
 
     return selectAction;
   }

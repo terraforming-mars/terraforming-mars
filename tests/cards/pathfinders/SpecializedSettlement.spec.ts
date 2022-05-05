@@ -76,7 +76,7 @@ describe('SpecializedSettlement', function() {
   it('play - energy', function() {
     expect(() => {
       singleResourceTest(
-        SpaceBonus.POWER,
+        SpaceBonus.ENERGY,
         {energy: 1},
         {energy: 1, megacredits: 3});
     }).to.throw(/Unhandled space bonus/);

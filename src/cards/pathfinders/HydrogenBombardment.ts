@@ -13,7 +13,7 @@ export class HydrogenBombardment extends PreludeCard {
       startingMegacredits: 6,
 
       metadata: {
-        cardNumber: 'P08',
+        cardNumber: 'P04',
         renderData: CardRenderer.builder((b) => {
           b.venus(1).br;
           b.production((pb) => pb.titanium(1)).br;

@@ -101,7 +101,7 @@ export class AresHandler {
         player.megaCredits++;
         break;
 
-      case SpaceBonus.POWER:
+      case SpaceBonus.ENERGY:
         player.energy++;
         break;
 

@@ -126,7 +126,7 @@ describe('Board', function() {
       ['69', []],
     ]);
     board.spaces.forEach((space) => {
-      const expected = expectedAdjacentSpaces.get(space.id)!;
+      const expected = expectedAdjacentSpaces.get(space.id);
       const actual = board.getAdjacentSpaces(space).map((s) => s.id);
       expect(expected).to.eql(actual);
     });
@@ -144,19 +144,19 @@ describe('Board', function() {
     // Filter changes available spaces.
     expect(board.getNthAvailableLandSpace(3, 1, undefined /* player */, (s) => s.id !== '09').id).eq('10');
 
-        // Filter player tokens (I'm looking at you, Land Claim)
-        board.spaces.find((s) => s.id === '05')!.player = player;
-        expect(board.getNthAvailableLandSpace(3, 1, player2).id).eq('10');
-        expect(board.getNthAvailableLandSpace(3, 1, player).id).eq('09');
+    // Filter player tokens (I'm looking at you, Land Claim)
+    board.getSpace('05').player = player;
+    expect(board.getNthAvailableLandSpace(3, 1, player2).id).eq('10');
+    expect(board.getNthAvailableLandSpace(3, 1, player).id).eq('09');
 
-        // bottom ends at 63 and looks like this
-        //
-        //  l l l l l l
-        //   l l l l o
-        expect(board.getNthAvailableLandSpace(0, -1).id).eq('62');
-        expect(board.getNthAvailableLandSpace(1, -1).id).eq('61');
-        expect(board.getNthAvailableLandSpace(2, -1).id).eq('60');
-        expect(board.getNthAvailableLandSpace(3, -1).id).eq('59');
+    // bottom ends at 63 and looks like this
+    //
+    //  l l l l l l
+    //   l l l l o
+    expect(board.getNthAvailableLandSpace(0, -1).id).eq('62');
+    expect(board.getNthAvailableLandSpace(1, -1).id).eq('61');
+    expect(board.getNthAvailableLandSpace(2, -1).id).eq('60');
+    expect(board.getNthAvailableLandSpace(3, -1).id).eq('59');
   });
 
   it('getNthAvailableLandSpace throws if no spaces available', function() {
@@ -259,10 +259,6 @@ describe('Board', function() {
     public constructor(spaces: Array<ISpace>) {
       super(spaces);
     }
-
-    public getSpaceById(id: string): ISpace | undefined {
-      return this.spaces.find((space) => space.id === id);
-    }
   }
 
   it('deserialize', () => {
@@ -297,8 +293,8 @@ describe('Board', function() {
     const player2 = new Player('name-2', Color.YELLOW, false, 0, 'name-2-id');
 
     const board = new TestBoard(Board.deserializeSpaces((boardJson as SerializedBoard).spaces, [player1, player2]));
-    expect(board.getSpaceById('01')!.player).eq(player1);
-    expect(board.getSpaceById('03')!.player).eq(player2);
+    expect(board.getSpace('01').player).eq(player1);
+    expect(board.getSpace('03').player).eq(player2);
   });
 
   it('Randomized maps have space types on all spaces, #4056', () => {

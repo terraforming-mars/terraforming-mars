@@ -1,3 +1,4 @@
+import {MediaGroup} from '../../../src/cards/base/MediaGroup';
 import {expect} from 'chai';
 import {AdvancedEcosystems} from '../../../src/cards/base/AdvancedEcosystems';
 import {Ants} from '../../../src/cards/base/Ants';
@@ -14,6 +15,8 @@ import {AndOptions} from '../../../src/inputs/AndOptions';
 import {OrOptions} from '../../../src/inputs/OrOptions';
 import {Player} from '../../../src/Player';
 import {TestPlayers} from '../../TestPlayers';
+import {Virus} from '../../../src/cards/base/Virus';
+import {TestingUtils} from '../../TestingUtils';
 
 describe('PharmacyUnion', function() {
   let card : PharmacyUnion; let player : Player; let player2 : Player;
@@ -172,5 +175,14 @@ describe('PharmacyUnion', function() {
     expect(card.isDisabled).is.true;
     expect(card.resourceCount).to.eq(0);
     expect(player.megaCredits).to.eq(0);
+  });
+
+  it('Edge case, lose MC before gaining', () => {
+    // See https://github.com/terraforming-mars/terraforming-mars/issues/2191
+    player.megaCredits = 0;
+    player.playedCards = [new MediaGroup()];
+    player.playCard(new Virus());
+    TestingUtils.runAllActions(player.game);
+    expect(player.megaCredits).eq(3);
   });
 });

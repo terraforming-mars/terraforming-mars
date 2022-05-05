@@ -49,7 +49,7 @@ export class SellPatentsStandardProject extends StandardProjectCard {
         this.projectPlayed(player);
         player.game.log('${0} sold ${1} patents', (b) => b.player(player).number(foundCards.length));
         return undefined;
-      }, player.cardsInHand.length,
+      }, {max: player.cardsInHand.length, played: false},
     );
   }
 }

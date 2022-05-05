@@ -12,7 +12,7 @@ export enum Tags {
     CITY = 'city',
     MOON = 'moon',
     MARS = 'mars',
-    WILDCARD = 'wild',
+    WILD = 'wild',
     EVENT = 'event',
     CLONE = 'clone',
 }

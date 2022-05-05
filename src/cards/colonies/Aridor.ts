@@ -72,12 +72,12 @@ export class Aridor extends Card implements ICorporationCard {
   public onCardPlayed(player: Player, card: IProjectCard) {
     if (
       card.cardType === CardType.EVENT ||
-        card.tags.filter((tag) => tag !== Tags.WILDCARD).length === 0 ||
+        card.tags.filter((tag) => tag !== Tags.WILD).length === 0 ||
         !player.isCorporation(this.name)) {
       return undefined;
     }
 
-    for (const tag of card.tags.filter((tag) => tag !== Tags.WILDCARD)) {
+    for (const tag of card.tags.filter((tag) => tag !== Tags.WILD)) {
       const currentSize = this.allTags.size;
       this.allTags.add(tag);
       if (this.allTags.size > currentSize) {

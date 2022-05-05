@@ -30,7 +30,7 @@ describe('AdvancedEcosystems', function() {
     expect(card.getVictoryPoints()).to.eq(3);
   });
 
-  it('Can play with two wildcards', function() {
+  it('Can play with two wild tags', function() {
     player.playedCards.push(new ResearchCoordination());
     expect(player.canPlayIgnoringCost(card)).is.true;
   });

@@ -15,7 +15,7 @@ export class ByElection extends PreludeCard implements IProjectCard {
   constructor() {
     super({
       name: CardName.BY_ELECTION,
-      tags: [Tags.WILDCARD],
+      tags: [Tags.WILD],
 
       metadata: {
         cardNumber: 'Y02',

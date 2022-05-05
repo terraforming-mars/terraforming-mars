@@ -636,15 +636,15 @@ export class Player {
   }
 
   // Return the number of cards in the player's hand without tags.
-  // Wildcard tags are ignored in this computation. (why?)
+  // Wild tags are ignored in this computation. (why?)
   public getNoTagsCount() {
     let noTagsCount: number = 0;
 
-    if (this.corporationCard !== undefined && this.corporationCard.tags.every((tag) => tag === Tags.WILDCARD)) {
+    if (this.corporationCard !== undefined && this.corporationCard.tags.every((tag) => tag === Tags.WILD)) {
       noTagsCount++;
     }
 
-    noTagsCount += this.playedCards.filter((card) => card.cardType !== CardType.EVENT && card.tags.every((tag) => tag === Tags.WILDCARD)).length;
+    noTagsCount += this.playedCards.filter((card) => card.cardType !== CardType.EVENT && card.tags.every((tag) => tag === Tags.WILD)).length;
 
     return noTagsCount;
   }
@@ -793,7 +793,7 @@ export class Player {
       {tag: Tags.SCIENCE, count: this.getTagCount(Tags.SCIENCE, 'raw')},
       {tag: Tags.SPACE, count: this.getTagCount(Tags.SPACE, 'raw')},
       {tag: Tags.VENUS, count: this.getTagCount(Tags.VENUS, 'raw')},
-      {tag: Tags.WILDCARD, count: this.getTagCount(Tags.WILDCARD, 'raw')},
+      {tag: Tags.WILD, count: this.getTagCount(Tags.WILD, 'raw')},
       {tag: Tags.ANIMAL, count: this.getTagCount(Tags.ANIMAL, 'raw')},
       {tag: Tags.EVENT, count: this.getPlayedEventsCount()},
     ].filter((tag) => tag.count > 0);
@@ -827,8 +827,8 @@ export class Player {
         tagCount += this.getRawTagCount(Tags.MOON, includeEvents);
       }
 
-      if (tag !== Tags.WILDCARD) {
-        tagCount += this.getRawTagCount(Tags.WILDCARD, includeEvents);
+      if (tag !== Tags.WILD) {
+        tagCount += this.getRawTagCount(Tags.WILD, includeEvents);
       }
     }
 
@@ -906,7 +906,7 @@ export class Player {
       tagCount += this.getRawTagCount(Tags.MOON, false);
     }
 
-    tagCount += this.getRawTagCount(Tags.WILDCARD, false);
+    tagCount += this.getRawTagCount(Tags.WILD, false);
 
     // Chimera has 2 wild tags but should only count as one for milestones.
     if (this.corporationCard?.name === CardName.CHIMERA && mode === 'milestones') tagCount--;
@@ -934,7 +934,7 @@ export class Player {
       });
     });
     for (const tags of allTags) {
-      if (tags === Tags.WILDCARD) {
+      if (tags === Tags.WILD) {
         wildTagCount++;
       } else {
         uniqueTags.add(tags);
@@ -966,7 +966,7 @@ export class Player {
         distinctCount++;
       }
     });
-    if (distinctCount + this.getTagCount(Tags.WILDCARD) >= tags.length) {
+    if (distinctCount + this.getTagCount(Tags.WILD) >= tags.length) {
       return true;
     }
     return false;

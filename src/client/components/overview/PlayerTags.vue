@@ -64,7 +64,7 @@ const ORDER: Array<InterfaceTagsType> = [
   'separator',
   Tags.EVENT,
   SpecialTags.NONE,
-  Tags.WILDCARD,
+  Tags.WILD,
   SpecialTags.INFLUENCE,
   SpecialTags.CITY_COUNT,
   SpecialTags.COLONY_COUNT,

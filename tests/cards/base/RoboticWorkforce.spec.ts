@@ -196,7 +196,7 @@ describe('RoboticWorkforce', () => {
       const gameOptions = TestingUtils.setCustomGameOptions({aresExtension: true, aresHazards: false, moonExpansion: true});
 
       let include = false;
-      if ((card.tags.includes(Tags.BUILDING) || card.tags.includes(Tags.WILDCARD)) && card.play !== undefined) {
+      if ((card.tags.includes(Tags.BUILDING) || card.tags.includes(Tags.WILD)) && card.play !== undefined) {
         // Solar Farm is a pain to test so let's just say it's fine
         if (card.name === CardName.SOLAR_FARM) {
           return;

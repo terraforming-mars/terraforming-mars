@@ -6,7 +6,7 @@ import {TestPlayers} from '../TestPlayers';
 import {Game} from '../../src/Game';
 
 describe('Diversifier', function() {
-  it('Counts wildcard tags as unique tags', function() {
+  it('Counts wild tags tags as unique tags', function() {
     const milestone = new Diversifier();
     const player = TestPlayers.BLUE.newPlayer();
     Game.newInstance('foo', [player], player);

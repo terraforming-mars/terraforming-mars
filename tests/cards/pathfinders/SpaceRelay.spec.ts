@@ -28,7 +28,7 @@ describe('SpaceRelay', function() {
     expect(player.cardsInHand).has.length(0);
     card.onCardPlayed(player, {tags: [Tags.JOVIAN]} as IProjectCard);
     expect(player.cardsInHand).has.length(1);
-    card.onCardPlayed(player, {tags: [Tags.WILDCARD]} as IProjectCard);
+    card.onCardPlayed(player, {tags: [Tags.WILD]} as IProjectCard);
     expect(player.cardsInHand).has.length(1);
   });
 });

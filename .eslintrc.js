@@ -34,22 +34,22 @@ module.exports = {
     // https://eslint.vuejs.org/rules/multi-word-component-names.html
     'vue/multi-word-component-names': ['error', {
       'ignores': [
-        "Award",
-        "Awards",
-        "agenda",
-        "board",
-        "bonus",
-        "colony",
-        "Milestone",
-        "party",
-        "Party",
-        "sidebar",
-        "Tag",
-        "turmoil",
-        "Card",
-        "Button",
-        "Help"
-      ]
+        'Award',
+        'Awards',
+        'agenda',
+        'board',
+        'bonus',
+        'colony',
+        'Milestone',
+        'party',
+        'Party',
+        'sidebar',
+        'Tag',
+        'turmoil',
+        'Card',
+        'Button',
+        'Help',
+      ],
     }],
   },
 };

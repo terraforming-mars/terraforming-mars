@@ -18,6 +18,7 @@ import {Titania} from '../cards/community/Titania';
 import {Venus} from '../cards/community/Venus';
 import {Leavitt} from '../cards/community/Leavitt';
 import {Pallas} from '../cards/community/Pallas';
+import {GameModule} from '../common/cards/GameModule';
 
 export interface IColonyFactory<T> {
   colonyName: ColonyName;
@@ -49,3 +50,8 @@ export const COMMUNITY_COLONIES_TILES: Array<IColonyFactory<Colony>> = [
 ];
 
 export const ALL_COLONIES_TILES = [...BASE_COLONIES_TILES, ...COMMUNITY_COLONIES_TILES];
+
+export function getColonyModule(name: ColonyName): GameModule {
+  if (COMMUNITY_COLONIES_TILES.some((f) => f.colonyName === name)) return 'community';
+  return 'colonies';
+}

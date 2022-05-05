@@ -45,6 +45,7 @@ import {MagneticFieldStimulationDelays} from './MagneticFieldStimulationDelays';
 import {ConstantStruggle} from './ConstantStruggle';
 import {SpaceRaceToMars} from './SpaceRaceToMars';
 import {CommunicationBoom} from './CommunicationBoom';
+import {GameModule} from '../../common/cards/GameModule';
 
 const COLONY_ONLY_POSITIVE_GLOBAL_EVENTS = new Map<GlobalEventName, new() => IGlobalEvent>([
   [GlobalEventName.JOVIAN_TAX_RIGHTS, JovianTaxRights],
@@ -145,6 +146,13 @@ export function getGlobalEventByName(globalEventName: GlobalEventName): IGlobalE
 
   if (Factory !== undefined) return new Factory();
   return undefined;
+}
+
+export function getGlobalEventModule(name: GlobalEventName): GameModule {
+  if (PATHFINDERS_POSITIVE_GLOBAL_EVENTS.has(name)) return 'pathfinders';
+  if (PATHFINDERS_NEGATIVE_GLOBAL_EVENTS.has(name)) return 'pathfinders';
+  if (COMMUNITY_GLOBAL_EVENTS.has(name)) return 'community';
+  return 'turmoil';
 }
 
 export class GlobalEventDealer {

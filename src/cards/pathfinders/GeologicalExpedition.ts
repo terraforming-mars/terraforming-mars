@@ -39,7 +39,7 @@ export class GeologicalExpedition extends Card implements IProjectCard {
       metadata: {
         cardNumber: 'Pf17',
         renderData: CardRenderer.builder((b) => {
-          b.effect('When you place a tile ON MARS gain 1 additional resource on the space. If the space has no bonus, gain 1 steel', (eb) => {
+          b.effect('When you place a tile ON MARS gain 1 additional resource on the space. If the space has no bonus, gain 1 steel.', (eb) => {
             eb.emptyTile().startEffect.plus().wild(1).or().steel(1).asterix();
           }).br;
         }),

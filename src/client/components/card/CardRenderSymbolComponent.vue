@@ -12,7 +12,7 @@ import {Size} from '@/common/cards/render/Size';
 const configs: Record<CardRenderSymbolType, {class: string, sizes?: Array<Size>}> = {
   [CardRenderSymbolType.ASTERIX]: {class: 'card-asterix'},
   [CardRenderSymbolType.MINUS]: {class: 'card-minus'},
-  [CardRenderSymbolType.PLUS]: {class: 'card-minus', sizes: [Size.SMALL]},
+  [CardRenderSymbolType.PLUS]: {class: 'card-plus', sizes: [Size.SMALL]},
   [CardRenderSymbolType.OR]: {class: 'card-or', sizes: [Size.SMALL, Size.TINY]},
   [CardRenderSymbolType.COLON]: {class: 'card-colon'},
   [CardRenderSymbolType.ARROW]: {class: 'card-arrow', sizes: [Size.SMALL]},

@@ -13,66 +13,66 @@
                 <span v-i18n>Toggle all</span>
             </button>
 
-            <input type="checkbox" name="base" id="base-checkbox" v-model="base">
+            <input type="checkbox" name="base" id="base-checkbox" v-model="expansions.base">
               <label for="base-checkbox" class="expansion-button">
                   <span v-i18n>Base</span>
               </label>
 
-              <input type="checkbox" name="corporateEra" id="corporateEra-checkbox" v-model="corporateEra">
-              <label for="corporateEra-checkbox" class="expansion-button">
+              <input type="checkbox" name="corpera" id="corpera-checkbox" v-model="expansions.corpera">
+              <label for="corpera-checkbox" class="expansion-button">
                   <div class="create-game-expansion-icon expansion-icon-CE"></div>
                   <span v-i18n>Corporate Era</span>
               </label>
 
-              <input type="checkbox" name="prelude" id="prelude-checkbox" v-model="prelude">
+              <input type="checkbox" name="prelude" id="prelude-checkbox" v-model="expansions.prelude">
               <label for="prelude-checkbox" class="expansion-button">
                   <div class="create-game-expansion-icon expansion-icon-prelude"></div>
                   <span v-i18n>Prelude</span>
               </label>
 
-              <input type="checkbox" name="venusNext" id="venusNext-checkbox" v-model="venusNext">
+              <input type="checkbox" name="venusNext" id="venusNext-checkbox" v-model="expansions.venus">
               <label for="venusNext-checkbox" class="expansion-button">
               <div class="create-game-expansion-icon expansion-icon-venus"></div>
                   <span v-i18n>Venus Next</span>
               </label>
 
-              <input type="checkbox" name="colonies" id="colonies-checkbox" v-model="colonies">
+              <input type="checkbox" name="colonies" id="colonies-checkbox" v-model="expansions.colonies">
               <label for="colonies-checkbox" class="expansion-button">
               <div class="create-game-expansion-icon expansion-icon-colony"></div>
                   <span v-i18n>Colonies</span>
               </label>
 
-              <input type="checkbox" name="turmoil" id="turmoil-checkbox" v-model="turmoil">
+              <input type="checkbox" name="turmoil" id="turmoil-checkbox" v-model="expansions.turmoil">
               <label for="turmoil-checkbox" class="expansion-button">
                   <div class="create-game-expansion-icon expansion-icon-turmoil"></div>
                   <span v-i18n>Turmoil</span>
               </label>
 
-              <input type="checkbox" name="promo" id="promo-checkbox" v-model="promo">
+              <input type="checkbox" name="promo" id="promo-checkbox" v-model="expansions.promo">
               <label for="promo-checkbox" class="expansion-button">
                   <div class="create-game-expansion-icon expansion-icon-promo"></div>
                   <span v-i18n>Promos</span>
               </label>
 
-              <input type="checkbox" name="ares" id="ares-checkbox" v-model="ares">
+              <input type="checkbox" name="ares" id="ares-checkbox" v-model="expansions.ares">
               <label for="ares-checkbox" class="expansion-button">
                   <div class="create-game-expansion-icon expansion-icon-ares"></div>
                   <span v-i18n>Ares</span>
               </label>
 
-              <input type="checkbox" name="community" id="community-checkbox" v-model="community">
+              <input type="checkbox" name="community" id="community-checkbox" v-model="expansions.community">
               <label for="community-checkbox" class="expansion-button">
                   <div class="create-game-expansion-icon expansion-icon-community"></div>
                   <span v-i18n>Community</span>
               </label><span/>
 
-              <input type="checkbox" name="moon" id="moon-checkbox" v-model="moon">
+              <input type="checkbox" name="moon" id="moon-checkbox" v-model="expansions.moon">
               <label for="moon-checkbox" class="expansion-button">
                 <div class="create-game-expansion-icon expansion-icon-themoon"></div>
                 <span v-i18n>The Moon</span>
               </label><span/>
 
-              <input type="checkbox" name="pathfinders" id="pathfinders-checkbox" v-model="pathfinders">
+              <input type="checkbox" name="pathfinders" id="pathfinders-checkbox" v-model="expansions.pathfinders">
               <label for="pathfinders-checkbox" class="expansion-button">
                 <div class="create-game-expansion-icon expansion-icon-pathfinders"></div>
                 <span v-i18n>Pathfinders</span>
@@ -99,7 +99,14 @@
                 </label>
               </span>
             </div>
-
+            <div class="create-game-page-column" style = "flex-flow: inherit; ">
+              <span v-for="tag in allTags" :key="tag">
+                <input type="checkbox" :name="`${tag}-cardType`" :id="`${tag}-cardType-checkbox`" v-model="tags[tag]">
+                <label :for="`${tag}-cardType-checkbox`" class="expansion-button">
+                    <span v-i18n>{{tag}}</span>
+                </label>
+              </span>
+            </div>
             <section class="debug-ui-cards-list">
                 <h2>Project Cards</h2>
                 <div class="cardbox" v-for="card in getAllProjectCards()" :key="card">
@@ -170,6 +177,8 @@ import {COMMUNITY_COLONY_NAMES, OFFICIAL_COLONY_NAMES} from '@/common/colonies/A
 import {ColonyModel} from '@/common/models/ColonyModel';
 import {ColonyName} from '@/common/colonies/ColonyName';
 import PreferencesIcon from '@/client/components/PreferencesIcon.vue';
+import {GameModule} from '@/common/cards/GameModule';
+import {Tags} from '@/common/cards/Tags';
 
 const MODULE_BASE = 'b';
 const MODULE_CORP = 'c';
@@ -198,18 +207,9 @@ const ALL_MODULES =
 
 export interface DebugUIModel {
   filterText: string,
-  base: boolean,
-  corporateEra: boolean,
-  prelude: boolean,
-  venusNext: boolean,
-  colonies: boolean,
-  turmoil: boolean,
-  community: boolean,
-  ares: boolean,
-  moon: boolean,
-  pathfinders: boolean,
-  promo: boolean,
+  expansions: Record<GameModule, boolean>,
   types: Record<CardType | 'colonyTiles' | 'globalEvents', boolean>,
+  tags: Record<Tags, boolean>,
 }
 
 export default Vue.extend({
@@ -223,17 +223,19 @@ export default Vue.extend({
   data(): DebugUIModel {
     return {
       filterText: '',
-      base: true,
-      corporateEra: true,
-      prelude: true,
-      venusNext: true,
-      colonies: true,
-      turmoil: true,
-      community: true,
-      ares: true,
-      moon: true,
-      promo: true,
-      pathfinders: true,
+      expansions: {
+        base: true,
+        corpera: true,
+        prelude: true,
+        venus: true,
+        colonies: true,
+        turmoil: true,
+        community: true,
+        ares: true,
+        moon: true,
+        promo: true,
+        pathfinders: true,
+      },
       types: {
         event: true,
         active: true,
@@ -246,6 +248,24 @@ export default Vue.extend({
         globalEvents: true,
         colonyTiles: true,
       },
+      tags: {
+        building: true,
+        space: true,
+        science: true,
+        power: true,
+        earth: true,
+        jovian: true,
+        venus: true,
+        plant: true,
+        microbe: true,
+        animal: true,
+        city: true,
+        moon: true,
+        mars: true,
+        wild: true,
+        event: true,
+        clone: true,
+      },
     };
   },
   mounted() {
@@ -255,17 +275,17 @@ export default Vue.extend({
       this.filterText = searchString;
     }
     const modules = urlParams.get('m') || ALL_MODULES;
-    this.base = modules.includes(MODULE_BASE);
-    this.corporateEra = modules.includes(MODULE_CORP);
-    this.prelude = modules.includes(MODULE_PRELUDE);
-    this.venusNext = modules.includes(MODULE_VENUS);
-    this.colonies = modules.includes(MODULE_COLONIES);
-    this.turmoil = modules.includes(MODULE_TURMOIL);
-    this.community = modules.includes(MODULE_COMMUNITY);
-    this.promo = modules.includes(MODULE_PROMO);
-    this.ares = modules.includes(MODULE_ARES);
-    this.moon = modules.includes(MODULE_MOON);
-    this.pathfinders = modules.includes(MODULE_PATHFINDERS);
+    this.expansions.base = modules.includes(MODULE_BASE);
+    this.expansions.corpera = modules.includes(MODULE_CORP);
+    this.expansions.prelude = modules.includes(MODULE_PRELUDE);
+    this.expansions.venus = modules.includes(MODULE_VENUS);
+    this.expansions.colonies = modules.includes(MODULE_COLONIES);
+    this.expansions.turmoil = modules.includes(MODULE_TURMOIL);
+    this.expansions.community = modules.includes(MODULE_COMMUNITY);
+    this.expansions.promo = modules.includes(MODULE_PROMO);
+    this.expansions.ares = modules.includes(MODULE_ARES);
+    this.expansions.moon = modules.includes(MODULE_MOON);
+    this.expansions.pathfinders = modules.includes(MODULE_PATHFINDERS);
   },
   watch: {
     filterText(newSearchString: string) {
@@ -274,7 +294,7 @@ export default Vue.extend({
     base() {
       this.updateUrl();
     },
-    corporateEra() {
+    corpera() {
       this.updateUrl();
     },
     prelude() {
@@ -316,6 +336,15 @@ export default Vue.extend({
         CardType.STANDARD_PROJECT,
       ];
     },
+    allTags(): Array<Tags> {
+      const results: Array<Tags> = [];
+      for (const tag in Tags) {
+        if (Object.prototype.hasOwnProperty.call(Tags, tag)) {
+          results.push((<any>Tags)[tag]);
+        }
+      }
+      return results;
+    },
   },
   methods: {
     updateUrl(search?: string) {
@@ -326,17 +355,17 @@ export default Vue.extend({
         }
 
         let m = '';
-        if (this.base) m += MODULE_BASE;
-        if (this.corporateEra) m += MODULE_CORP;
-        if (this.prelude) m += MODULE_PRELUDE;
-        if (this.venusNext) m += MODULE_VENUS;
-        if (this.colonies) m += MODULE_COLONIES;
-        if (this.turmoil) m += MODULE_TURMOIL;
-        if (this.community) m += MODULE_COMMUNITY;
-        if (this.promo) m += MODULE_PROMO;
-        if (this.ares) m += MODULE_ARES;
-        if (this.moon) m += MODULE_MOON;
-        if (this.pathfinders) m += MODULE_PATHFINDERS;
+        if (this.expansions.base) m += MODULE_BASE;
+        if (this.expansions.corpera) m += MODULE_CORP;
+        if (this.expansions.prelude) m += MODULE_PRELUDE;
+        if (this.expansions.venus) m += MODULE_VENUS;
+        if (this.expansions.colonies) m += MODULE_COLONIES;
+        if (this.expansions.turmoil) m += MODULE_TURMOIL;
+        if (this.expansions.community) m += MODULE_COMMUNITY;
+        if (this.expansions.promo) m += MODULE_PROMO;
+        if (this.expansions.ares) m += MODULE_ARES;
+        if (this.expansions.moon) m += MODULE_MOON;
+        if (this.expansions.pathfinders) m += MODULE_PATHFINDERS;
         if (m === '') m = '-'; // - means no modules.
 
         if (m !== ALL_MODULES) {
@@ -348,7 +377,7 @@ export default Vue.extend({
     toggleAll() {
       const data = this.$data;
       data.base = !data.base;
-      data.corporateEra = !data.corporateEra;
+      data.corpera = !data.corpera;
       data.prelude = !data.prelude;
       data.venusNext = !data.venusNext;
       data.colonies = !data.colonies;
@@ -409,33 +438,10 @@ export default Vue.extend({
       }
 
       if (!this.types[card.cardType]) return false;
-
-      switch (card.module) {
-      case 'base':
-        return this.base === true;
-      case 'corpera':
-        return this.corporateEra === true;
-      case 'promo':
-        return this.promo === true;
-      case 'venus':
-        return this.venusNext === true;
-      case 'colonies':
-        return this.colonies === true;
-      case 'prelude':
-        return this.prelude === true;
-      case 'turmoil':
-        return this.turmoil === true;
-      case 'community':
-        return this.community === true;
-      case 'ares':
-        return this.ares === true;
-      case 'moon':
-        return this.moon === true;
-      case 'pathfinders':
-        return this.pathfinders === true;
-      default:
-        return true;
+      for (const tag of card.tags) {
+        if (!this.tags[tag]) return false;
       }
+      return this.expansions[card.module] === true;
     },
     showGlobalEvent(name: GlobalEventName): boolean {
       return this.filterByName(name);

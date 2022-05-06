@@ -80,7 +80,14 @@ export class CardLoader {
       .filter((card) => card.name !== CardName.BEGINNER_CORPORATION);
   }
   public getPreludeCards() {
-    return this.getCards((manifest) => manifest.preludeCards);
+    const preludes = this.getCards((manifest) => manifest.preludeCards);
+    // https://github.com/terraforming-mars/terraforming-mars/issues/2833
+    // Make Valley Trust playable even when Preludes is out of the game
+    // by preparing a deck of preludes.
+    if (preludes.length === 0) {
+      this.addDeck(preludes, PRELUDE_CARD_MANIFEST.preludeCards);
+    }
+    return preludes;
   }
 
   private getCards<T extends ICard>(getDeck: (arg0: CardManifest) => Deck<T>) : Array<T> {

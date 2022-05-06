@@ -20,7 +20,7 @@ describe('FullMoon', () => {
     expect(award.getScore(player)).eq(2);
   });
 
-  it('Wildcard does not count', () => {
+  it('Wild tag does not count', () => {
     const award = new FullMoon();
     const player = TestPlayers.BLUE.newPlayer();
     player.playedCards = [

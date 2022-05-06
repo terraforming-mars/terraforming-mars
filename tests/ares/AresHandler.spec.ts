@@ -20,6 +20,8 @@ import {AresSetup} from '../../src/ares/AresSetup';
 import {Random} from '../../src/Random';
 import {Units} from '../../src/common/Units';
 import {TestingUtils} from '../TestingUtils';
+import {Ants} from '../../src/cards/base/Ants';
+import {Birds} from '../../src/cards/base/Birds';
 
 // oddly, this no longer tests AresHandler calls. So that's interesting.
 // TODO(kberg): break up tests, but no rush.
@@ -56,35 +58,66 @@ describe('AresHandler', function() {
     expect(otherPlayer.cardsInHand).is.length(0);
   });
 
-  it('setupHazards', function() {
-    // front-load the deck with cards of predtermined costs.
-    // four player game places two dust storms.
+  describe('setupHazards', function() {
+    interface SpaceToTest {
+      tile: ITile;
+      x: number;
+      y: number;
+    }
 
-    // Even though there's already a game, with a board, that laid out hazards, this is going to use a clean set-up.
+    function spacesWithTiles(game: Game): Array<SpaceToTest> {
+      return game.board.spaces
+        .filter((space) => space.tile !== undefined)
+        .map((space) => {
+          return {tile: space.tile!, x: space.x, y: space.y};
+        });
+    }
 
-    const deck = game.dealer.deck;
-    deck.push(new EnergyTapping());
-    deck.push(new Decomposers());
-    game.board.spaces.forEach((space) => {
-      space.tile = undefined; space.player = undefined;
+    it('4 player game', function() {
+      // front-load the deck with cards of predetermined costs.
+      // four player game places two dust storms.
+
+      const deck = game.dealer.deck;
+      deck.push(new EnergyTapping());
+      deck.push(new Decomposers());
+
+      AresSetup.setupHazards(game, 4);
+
+      expect(spacesWithTiles(game)).to.deep.eq([
+        {tile: {tileType: TileType.DUST_STORM_MILD, protectedHazard: false}, x: 8, y: 0},
+        {tile: {tileType: TileType.DUST_STORM_MILD, protectedHazard: false}, x: 6, y: 8}]);
     });
 
-    AresSetup.setupHazards(game, 4);
+    it('5 player game', function() {
+      // front-load the deck with cards of predetermined costs.
+      // 5 player game places one dust storm but with two cards.
 
-    interface SpaceToTest {
-        tile: ITile;
-        x: number;
-        y: number;
-    }
-    const spacesWithTiles: Array<SpaceToTest> = game.board.spaces
-      .filter((space) => space.tile !== undefined)
-      .map((space) => {
-        const x: SpaceToTest = {tile: space.tile!, x: space.x, y: space.y}; return x;
-      });
+      const deck = game.dealer.deck;
+      deck.push(new EnergyTapping());
+      deck.push(new Decomposers());
 
-    expect(spacesWithTiles).to.deep.eq([
-      {tile: {tileType: TileType.DUST_STORM_MILD, protectedHazard: false}, x: 8, y: 0},
-      {tile: {tileType: TileType.DUST_STORM_MILD, protectedHazard: false}, x: 6, y: 8}]);
+      AresSetup.setupHazards(game, 5);
+
+      expect(spacesWithTiles(game)).to.deep.eq([{tile: {tileType: TileType.DUST_STORM_MILD, protectedHazard: false}, x: 5, y: 1}]);
+    });
+
+    it('3 player game', function() {
+      // front-load the deck with cards of predetermined costs.
+      // 3 player game places 3 dust storms, the first with two cards.
+
+      const deck = game.dealer.deck;
+      deck.push(new EnergyTapping());
+      deck.push(new Decomposers());
+      deck.push(new Ants());
+      deck.push(new Birds());
+
+      AresSetup.setupHazards(game, 3);
+
+      expect(spacesWithTiles(game)).to.deep.eq([
+        {tile: {tileType: TileType.DUST_STORM_MILD, protectedHazard: false}, x: 8, y: 0},
+        {tile: {tileType: TileType.DUST_STORM_MILD, protectedHazard: false}, x: 1, y: 3},
+        {tile: {tileType: TileType.DUST_STORM_MILD, protectedHazard: false}, x: 6, y: 8}]);
+    });
   });
 
   it('Pay Adjacency Costs', function() {
@@ -186,11 +219,11 @@ describe('AresHandler', function() {
     expect(player.getTerraformRating()).eq(20);
 
     game.addTile(player, space.spaceType, space, {tileType: TileType.GREENERY});
-        game.deferredActions.peek()!.execute();
+    game.deferredActions.peek()!.execute();
 
-        expect(space.tile!.tileType).eq(TileType.GREENERY);
-        expect(player.megaCredits).is.eq(0);
-        expect(player.getTerraformRating()).eq(21);
+    expect(space.tile!.tileType).eq(TileType.GREENERY);
+    expect(player.megaCredits).is.eq(0);
+    expect(player.getTerraformRating()).eq(21);
   });
 
   it('cover severe hazard', function() {
@@ -200,11 +233,11 @@ describe('AresHandler', function() {
     expect(player.getTerraformRating()).eq(20);
 
     game.addTile(player, space.spaceType, space, {tileType: TileType.GREENERY});
-        game.deferredActions.peek()!.execute();
+    game.deferredActions.peek()!.execute();
 
-        expect(space.tile!.tileType).eq(TileType.GREENERY);
-        expect(player.megaCredits).is.eq(0);
-        expect(player.getTerraformRating()).eq(22);
+    expect(space.tile!.tileType).eq(TileType.GREENERY);
+    expect(player.megaCredits).is.eq(0);
+    expect(player.getTerraformRating()).eq(22);
   });
 
   it('erosion appears after the third ocean', function() {

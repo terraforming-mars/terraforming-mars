@@ -442,7 +442,7 @@ import {BoardName} from '@/common/boards/BoardName';
 import {RandomBoardOption} from '@/common/boards/RandomBoardOption';
 import {CardName} from '@/common/cards/CardName';
 import CorporationsFilter from '@/client/components/create/CorporationsFilter.vue';
-import {translateTextWithParams} from '@/client/directives/i18n';
+import {translateText, translateTextWithParams} from '@/client/directives/i18n';
 import ColoniesFilter from '@/client/components/create/ColoniesFilter.vue';
 import {ColonyName} from '@/common/colonies/ColonyName';
 import CardsFilter from '@/client/components/create/CardsFilter.vue';
@@ -889,6 +889,12 @@ export default (Vue as WithRefs<Refs>).extend({
           window.alert(translateTextWithParams('Must select at least ${0} colonies', [neededColoniesCount.toString()]));
           return;
         }
+      }
+
+      if (players.length === 1 && corporateEra === false) {
+        const confirm = window.confirm(translateText(
+          'We do not recommend playing a solo game without the Corporate Era. Press OK if you want to play without it.'));
+        if (confirm === false) return;
       }
 
       // Check custom corp count

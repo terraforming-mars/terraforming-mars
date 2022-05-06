@@ -9,7 +9,7 @@ export class ResearchCoordination extends Card implements IProjectCard {
     super({
       cardType: CardType.AUTOMATED,
       name: CardName.RESEARCH_COORDINATION,
-      tags: [Tags.WILDCARD],
+      tags: [Tags.WILD],
       cost: 4,
 
       metadata: {

@@ -28,7 +28,7 @@ describe('OneGiantStep', () => {
     expect(milestone.canClaim(player)).is.true;
   });
 
-  it('Wildcard counts', () => {
+  it('Wild tag counts', () => {
     const milestone = new OneGiantStep();
     const player = TestPlayers.BLUE.newPlayer();
     player.playedCards = [

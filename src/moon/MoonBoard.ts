@@ -26,13 +26,6 @@ class Space implements ISpace {
 }
 
 export class MoonBoard extends Board {
-  public getNoctisCitySpaceIds() {
-    return [];
-  }
-  public getVolcanicSpaceIds() {
-    return [];
-  }
-
   public getAvailableSpacesForMine(player: Player): Array<ISpace> {
     const spaces = this.spaces.filter((space) => {
       const val = space.tile === undefined &&

@@ -49,10 +49,7 @@ export class ArabiaTerraBoard extends Board {
     return new ArabiaTerraBoard(spaces);
   }
 
-  public getNoctisCitySpaceIds() {
-    return [];
-  }
-  public getVolcanicSpaceIds() {
+  public override getVolcanicSpaceIds() {
     return [
       SpaceName.TIKHONAROV,
       SpaceName.LADON,

@@ -13,7 +13,7 @@ export class Chimera extends Card implements ICorporationCard {
     super({
       cardType: CardType.CORPORATION,
       name: CardName.CHIMERA,
-      tags: [Tags.WILDCARD, Tags.WILDCARD],
+      tags: [Tags.WILD, Tags.WILD],
       startingMegaCredits: 36,
 
       metadata: {

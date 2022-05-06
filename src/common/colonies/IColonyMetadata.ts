@@ -3,8 +3,10 @@ import {Resources} from '../Resources';
 import {ShouldIncreaseTrack} from './ShouldIncreaseTrack';
 import {ColonyName} from './ColonyName';
 import {CardResource} from '../CardResource';
+import {GameModule} from '../cards/GameModule';
 
 export interface IColonyMetadata {
+  module?: GameModule; // TODO(kberg): attach gameModule to the server colonies themselves.
   readonly name: ColonyName;
   readonly buildType: ColonyBenefit;
   readonly buildQuantity: Array<number>; // Default is [1,1,1]

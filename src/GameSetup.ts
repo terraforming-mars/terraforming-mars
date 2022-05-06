@@ -56,7 +56,7 @@ export class GameSetup {
       if (adjacentSpaces.length === 0) {
         throw new Error('No space for forest');
       }
-      let idx = game.discardForCost(TileType.GREENERY);
+      let idx = game.discardForCost(1, TileType.GREENERY);
       idx = Math.max(idx-1, 0); // Some cards cost zero.
       const forestSpace = adjacentSpaces[idx%adjacentSpaces.length];
       game.simpleAddTile(neutral, forestSpace, {tileType: TileType.GREENERY});

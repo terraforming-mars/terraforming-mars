@@ -42,24 +42,19 @@ export class ValleyTrust extends Card implements ICorporationCard {
   }
 
   public initialAction(player: Player) {
-    if (player.game.gameOptions.preludeExtension) {
-      const cardsDrawn: Array<IProjectCard> = [
-        player.game.dealer.dealPreludeCard(),
-        player.game.dealer.dealPreludeCard(),
-        player.game.dealer.dealPreludeCard(),
-      ];
+    const cardsDrawn: Array<IProjectCard> = [
+      player.game.dealer.dealPreludeCard(),
+      player.game.dealer.dealPreludeCard(),
+      player.game.dealer.dealPreludeCard(),
+    ];
 
-      return new SelectCard('Choose prelude card to play', 'Play', cardsDrawn, (foundCards: Array<IProjectCard>) => {
-        if (foundCards[0].canPlay === undefined || foundCards[0].canPlay(player)) {
-          return player.playCard(foundCards[0]);
-        } else {
-          throw new Error('You cannot pay for this card');
-        }
-      });
-    } else {
-      console.warn('Prelude extension isn\'t selected.');
-      return undefined;
-    }
+    return new SelectCard('Choose prelude card to play', 'Play', cardsDrawn, (foundCards: Array<IProjectCard>) => {
+      if (foundCards[0].canPlay === undefined || foundCards[0].canPlay(player)) {
+        return player.playCard(foundCards[0]);
+      } else {
+        throw new Error('You cannot pay for this card');
+      }
+    });
   }
 
   public play() {

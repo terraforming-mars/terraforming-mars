@@ -631,6 +631,7 @@ export class Game {
     }
     corporationCard.play(player);
     this.log('${0} played ${1}', (b) => b.player(player).card(corporationCard));
+    player.game.log('${0} kept ${1} project cards', (b) => b.player(player).number(player.cardsInHand.length));
 
     // trigger other corp's effect, e.g. SaturnSystems,PharmacyUnion,Splice
     for (const somePlayer of this.getPlayersInGenerationOrder()) {
@@ -1560,15 +1561,35 @@ export class Game {
     this.gameAge++;
   }
 
-  public discardForCost(toPlace: TileType) {
-    const card = this.dealer.dealCard(this);
-    this.dealer.discard(card);
-    this.log('Drew and discarded ${0} (cost ${1}) to place a ${2}', (b) => b.card(card).number(card.cost).tileType(toPlace));
-    return card.cost;
+  public someoneCanHaveProductionReduced(resource: Resources, minQuantity: number = 1): boolean {
+    // in soloMode you don't have to decrease resources
+    if (this.isSoloMode()) return true;
+    return this.getPlayers().some((p) => {
+      if (p.getProduction(resource) < minQuantity) return false;
+      // The pathfindersExpansion test is just an optimization for non-Pathfinders games.
+      if (this.gameOptions.pathfindersExpansion && p.cardIsInEffect(CardName.PRIVATE_SECURITY)) return false;
+      return true;
+    });
   }
 
-  public getSpaceByOffset(direction: -1 | 1, toPlace: TileType) {
-    const cost = this.discardForCost(toPlace);
+  public discardForCost(cardCount: 1 | 2, toPlace: TileType) {
+    if (cardCount === 1) {
+      const card = this.dealer.dealCard(this);
+      this.dealer.discard(card);
+      this.log('Drew and discarded ${0} (cost ${1}) to place a ${2}', (b) => b.card(card).number(card.cost).tileType(toPlace));
+      return card.cost;
+    } else {
+      const card1 = this.dealer.dealCard(this);
+      this.dealer.discard(card1);
+      const card2 = this.dealer.dealCard(this);
+      this.dealer.discard(card2);
+      this.log('Drew and discarded ${0} (cost ${1}) and ${2} (cost ${3}) to place a ${4}', (b) => b.card(card1).number(card1.cost).card(card2).number(card2.cost).tileType(toPlace));
+      return card1.cost + card2.cost;
+    }
+  }
+
+  public getSpaceByOffset(direction: -1 | 1, toPlace: TileType, cardCount: 1 | 2 = 1) {
+    const cost = this.discardForCost(cardCount, toPlace);
 
     const distance = Math.max(cost-1, 0); // Some cards cost zero.
     const space = this.board.getNthAvailableLandSpace(distance, direction, undefined /* player */,

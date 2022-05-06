@@ -49,7 +49,7 @@ export class SubZeroSaltFish extends Card implements IProjectCard, IResourceCard
   }
 
   public override canPlay(player: Player): boolean {
-    return player.game.someoneCanHaveProductionReduced(Resources.PLANTS, 1);
+    return player.canReduceAnyProduction(Resources.PLANTS, 1);
   }
 
   public action(player: Player) {

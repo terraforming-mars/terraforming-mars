@@ -43,7 +43,7 @@ export class SmallAnimals extends Card implements IActionCard, IProjectCard, IRe
   }
   public override resourceCount = 0;
   public override canPlay(player: Player): boolean {
-    return player.game.someoneCanHaveProductionReduced(Resources.PLANTS, 1);
+    return player.canReduceAnyProduction(Resources.PLANTS, 1);
   }
   public play(player: Player) {
     player.game.defer(

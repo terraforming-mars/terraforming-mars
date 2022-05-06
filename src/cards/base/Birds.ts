@@ -43,7 +43,7 @@ export class Birds extends Card implements IActionCard, IProjectCard, IResourceC
   public override resourceCount = 0;
 
   public override canPlay(player: Player): boolean {
-    return player.game.someoneCanHaveProductionReduced(Resources.PLANTS, 2);
+    return player.canReduceAnyProduction(Resources.PLANTS, 2);
   }
   public play(player: Player) {
     player.game.defer(

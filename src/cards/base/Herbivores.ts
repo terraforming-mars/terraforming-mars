@@ -49,7 +49,7 @@ export class Herbivores extends Card implements IProjectCard, IResourceCard {
   public override resourceCount: number = 0;
 
   public override canPlay(player: Player): boolean {
-    return player.game.someoneCanHaveProductionReduced(Resources.PLANTS, 1);
+    return player.canReduceAnyProduction(Resources.PLANTS, 1);
   }
 
   public onTilePlaced(cardOwner: Player, activePlayer: Player, space: ISpace) {

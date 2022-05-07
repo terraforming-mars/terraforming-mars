@@ -20,7 +20,7 @@ export class Steelaris extends Card implements ICorporationCard {
     super({
       cardType: CardType.CORPORATION,
       name: CardName.STEELARIS,
-      tags: [Tags.SPACE],
+      tags: [Tags.BUILDING, Tags.CITY],
       startingMegaCredits: 42,
 
       metadata: {

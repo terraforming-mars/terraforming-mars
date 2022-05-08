@@ -39,7 +39,7 @@
   "Discard 1 card from your hand and THEN draw 3 cards. All OPPONENTS draw 1 card.": "Wirf eine Karte von deiner Hand ab, DANN ziehe 3 Karten. Alle MITSPIELER ziehen 1 Karte.",
 
   "Sulphur Exports": "Sulfur-Exporte",
-  "Increase Venus 1 step. Increase your M€ production 1 step for each Venus tag you have, including this.": "Erhöhe die Venuswertung um 2%. Erhöhe deine M€-Produktion um 1 für jedes Venussymbol, das du besitzt (inclusive diesem).",
+  "Increase Venus 1 step. Increase your M€ production 1 step for each Venus tag you have, including this.": "Erhöhe die Venuswertung um 2%. Erhöhe deine M€-Produktion um 1 für jedes Venussymbol, das du besitzt (inklusive diesem).",
 
   "Venus Soils": "Venusböden",
   "Raise Venus 1 step. Increase your Plant production 1 step. Add 2 Microbes to ANOTHER card": "Erhöhe die Venuswertung um 2%. Erhöhe deine Pflanzen-Produktion um 1. Füge einer ANDEREN Karte 2 Mikroben hinzu.",
@@ -135,7 +135,7 @@
   "Requires Venus 8%. Increase your titanium production 1 step.": "Erfodert Venuswertung von 8%. Erhöhe deine Titan-Produktion um 1.",
 
   "Luna Metropolis": "Luna Metropolis",
-  "Increase your M€ production 1 step for each Earth tag you have, including this. Place a City tile on the RESERVED AREA": "Erhöhe deine M€-Produktion um 1 für jedes Erdsymbol, das du besitzt (inclusive diesem). Platziere ein Stadtplättchen auf dem RESERVIERTEN FELD.",
+  "Increase your M€ production 1 step for each Earth tag you have, including this. Place a City tile on the RESERVED AREA": "Erhöhe deine M€-Produktion um 1 für jedes Erdsymbol, das du besitzt (inklusive diesem). Platziere ein Stadtplättchen auf dem RESERVIERTEN FELD.",
 
   "Local Shading": "Lokaler Schatten",
   "Action: Spend 1 Floater here to raise your M€ production 1 step.": "AKTION: Entferne 1 Schweber von dieser Karte, um deine M€-Produktion um 1 zu erhöhen.",
@@ -158,7 +158,7 @@
 
   "Venusian Animals": "Venus-Tiere",
   "18% Venus": "18% Venuswertung",
-  "Effect: When you play a Science tag, including this, add 1 Animal to this card.": "EFFEKT: Wenn du ein Wissenschaftssymbol spielst (inclusive diesem), füge dieser Karte 1 Tier hinzu.",
+  "Effect: When you play a Science tag, including this, add 1 Animal to this card.": "EFFEKT: Wenn du ein Wissenschaftssymbol spielst (inklusive diesem), füge dieser Karte 1 Tier hinzu.",
   "Requires Venus 18%": "Erfordert Venuswertung von 18%",
 
   "Venus Magnetizer": "Venus-Magnetisierer",
@@ -176,5 +176,5 @@
 
   "Saturn Surfing": "Saturn-Surfing",
   "Action: Spend 1 floater from here to gain 1 M€ from each floater here, INCLUDING THE PAID FLOATER. Max 5.": "AKTION: Entferne 1 Schweber von dieser Karte, um 1 M€ für jeden Schweber auf dieser Karte zu erhalten (inclusive dem entfernten Schweber, max. 5 M€).",
-  "Add 1 floater here for every Earth tag you have, including this.": "Füge dieser Karte 1 Schweber für jedes Erdsymbol hinzu, das du besitzt (inclusive diesem)."
+  "Add 1 floater here for every Earth tag you have, including this.": "Füge dieser Karte 1 Schweber für jedes Erdsymbol hinzu, das du besitzt (inklusive diesem)."
 }

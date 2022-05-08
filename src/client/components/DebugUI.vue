@@ -11,75 +11,19 @@
         <input class="form-input form-input-line" placeholder="filter" v-model="filterText">
       </div>
 
+      <!-- expansions -->
       <div class="create-game-page-column">
-      <button id="toggle-checkbox" v-on:click="invertExpansions()">
-          <span v-i18n>Invert</span>
-      </button>
+        <button id="toggle-checkbox" v-on:click="invertExpansions()">
+            <span v-i18n>Invert</span>
+        </button>
 
-      <input type="checkbox" name="base" id="base-checkbox" v-model="expansions.base">
-        <label for="base-checkbox" class="expansion-button">
-            <span v-i18n>Base</span>
-        </label>
-
-        <input type="checkbox" name="corpera" id="corpera-checkbox" v-model="expansions.corpera">
-        <label for="corpera-checkbox" class="expansion-button">
-            <div class="create-game-expansion-icon expansion-icon-CE"></div>
-            <span v-i18n>Corporate Era</span>
-        </label>
-
-        <input type="checkbox" name="prelude" id="prelude-checkbox" v-model="expansions.prelude">
-        <label for="prelude-checkbox" class="expansion-button">
-            <div class="create-game-expansion-icon expansion-icon-prelude"></div>
-            <span v-i18n>Prelude</span>
-        </label>
-
-        <input type="checkbox" name="venusNext" id="venusNext-checkbox" v-model="expansions.venus">
-        <label for="venusNext-checkbox" class="expansion-button">
-        <div class="create-game-expansion-icon expansion-icon-venus"></div>
-            <span v-i18n>Venus Next</span>
-        </label>
-
-        <input type="checkbox" name="colonies" id="colonies-checkbox" v-model="expansions.colonies">
-        <label for="colonies-checkbox" class="expansion-button">
-        <div class="create-game-expansion-icon expansion-icon-colony"></div>
-            <span v-i18n>Colonies</span>
-        </label>
-
-        <input type="checkbox" name="turmoil" id="turmoil-checkbox" v-model="expansions.turmoil">
-        <label for="turmoil-checkbox" class="expansion-button">
-            <div class="create-game-expansion-icon expansion-icon-turmoil"></div>
-            <span v-i18n>Turmoil</span>
-        </label>
-
-        <input type="checkbox" name="promo" id="promo-checkbox" v-model="expansions.promo">
-        <label for="promo-checkbox" class="expansion-button">
-            <div class="create-game-expansion-icon expansion-icon-promo"></div>
-            <span v-i18n>Promos</span>
-        </label>
-
-        <input type="checkbox" name="ares" id="ares-checkbox" v-model="expansions.ares">
-        <label for="ares-checkbox" class="expansion-button">
-            <div class="create-game-expansion-icon expansion-icon-ares"></div>
-            <span v-i18n>Ares</span>
-        </label>
-
-        <input type="checkbox" name="community" id="community-checkbox" v-model="expansions.community">
-        <label for="community-checkbox" class="expansion-button">
-            <div class="create-game-expansion-icon expansion-icon-community"></div>
-            <span v-i18n>Community</span>
-        </label><span/>
-
-        <input type="checkbox" name="moon" id="moon-checkbox" v-model="expansions.moon">
-        <label for="moon-checkbox" class="expansion-button">
-          <div class="create-game-expansion-icon expansion-icon-themoon"></div>
-          <span v-i18n>The Moon</span>
-        </label><span/>
-
-        <input type="checkbox" name="pathfinders" id="pathfinders-checkbox" v-model="expansions.pathfinders">
-        <label for="pathfinders-checkbox" class="expansion-button">
-          <div class="create-game-expansion-icon expansion-icon-pathfinders"></div>
-          <span v-i18n>Pathfinders</span>
-        </label><span/>
+        <span v-for="expansion in allModules" :key="expansion">
+          <input type="checkbox" :name="expansion" :id="`${expansion}-checkbox`" v-model="expansions[expansion]">
+          <label :for="`${expansion}-checkbox`" class="expansion-button">
+            <div class='create-game-expansion-icon' :class="expansionIconClass(expansion)"></div>
+            <span v-i18n>{{expansionName(expansion)}}</span>
+          </label>
+        </span>
       </div>
 
       <!-- types -->
@@ -104,10 +48,11 @@
             <span v-i18n>Invert</span>
         </button>
         <span v-for="tag in allTags" :key="tag">
-          <input type="checkbox" :name="`${tag}-cardType`" :id="`${tag}-cardType-checkbox`" v-model="tags[tag]">
-          <label :for="`${tag}-cardType-checkbox`" class="expansion-button">
+          <input v-if="tag === 'event'" type="checkbox" :name="`${tag}-cardType`" :id="`${tag}-tag-checkbox`" v-model="types.event">
+          <input v-else type="checkbox" :name="`${tag}-cardType`" :id="`${tag}-tag-checkbox`" v-model="tags[tag]">
+          <label :for="`${tag}-tag-checkbox`" class="expansion-button">
             <!-- a terrible hack, using create-game-expansion-icon because card-tag isn't enough to show the tag.-->
-            <div :class="'create-game-expansion-icon card-tag tag-' + tag"></div>
+            <div :class="`create-game-expansion-icon card-tag tag-${tag}`"></div>
           </label>
         </span>
       </div>
@@ -188,30 +133,22 @@ import {GameModule, GAME_MODULES} from '@/common/cards/GameModule';
 import {Tags} from '@/common/cards/Tags';
 import {getColony} from '@/client/colonies/ClientColonyManifest';
 
-const MODULE_BASE = 'b';
-const MODULE_CORP = 'c';
-const MODULE_PRELUDE = 'p';
-const MODULE_VENUS = 'v';
-const MODULE_COLONIES = 'o';
-const MODULE_TURMOIL = 't';
-const MODULE_COMMUNITY = '*';
-const MODULE_PROMO = 'r';
-const MODULE_ARES = 'a';
-const MODULE_MOON = 'm';
-const MODULE_PATHFINDERS = 'P';
+const moduleAbbreviations: Record<GameModule, string> = {
+  base: 'b',
+  corpera: 'c',
+  prelude: 'p',
+  venus: 'v',
+  colonies: 'C',
+  turmoil: 't',
+  community: '*',
+  promo: 'r',
+  ares: 'a',
+  moon: 'm',
+  pathfinders: 'P',
+};
 
-const ALL_MODULES =
-  MODULE_BASE +
-  MODULE_CORP +
-  MODULE_PRELUDE +
-  MODULE_VENUS +
-  MODULE_COLONIES +
-  MODULE_TURMOIL +
-  MODULE_COMMUNITY +
-  MODULE_PROMO +
-  MODULE_ARES +
-  MODULE_MOON +
-  MODULE_PATHFINDERS;
+// TODO(kberg): make this  use suffixModules.
+const ALL_MODULES = 'bcpvCt*ramP';
 
 type TypeOptions = CardType | 'colonyTiles' | 'globalEvents';
 type TagOptions = Tags | 'none';
@@ -288,19 +225,15 @@ export default Vue.extend({
       this.filterText = searchString;
     }
     const modules = urlParams.get('m') || ALL_MODULES;
-    this.expansions.base = modules.includes(MODULE_BASE);
-    this.expansions.corpera = modules.includes(MODULE_CORP);
-    this.expansions.prelude = modules.includes(MODULE_PRELUDE);
-    this.expansions.venus = modules.includes(MODULE_VENUS);
-    this.expansions.colonies = modules.includes(MODULE_COLONIES);
-    this.expansions.turmoil = modules.includes(MODULE_TURMOIL);
-    this.expansions.community = modules.includes(MODULE_COMMUNITY);
-    this.expansions.promo = modules.includes(MODULE_PROMO);
-    this.expansions.ares = modules.includes(MODULE_ARES);
-    this.expansions.moon = modules.includes(MODULE_MOON);
-    this.expansions.pathfinders = modules.includes(MODULE_PATHFINDERS);
+    GAME_MODULES.forEach((module) => {
+      return this.expansions[module] =
+        modules.includes(moduleAbbreviations[module]);
+    });
   },
   computed: {
+    allModules(): ReadonlyArray<GameModule> {
+      return GAME_MODULES;
+    },
     allTypes(): Array<TypeOptions> {
       return [
         CardType.EVENT,
@@ -331,18 +264,9 @@ export default Vue.extend({
           url = url + '?search=' + search;
         }
 
-        let m = '';
-        if (this.expansions.base) m += MODULE_BASE;
-        if (this.expansions.corpera) m += MODULE_CORP;
-        if (this.expansions.prelude) m += MODULE_PRELUDE;
-        if (this.expansions.venus) m += MODULE_VENUS;
-        if (this.expansions.colonies) m += MODULE_COLONIES;
-        if (this.expansions.turmoil) m += MODULE_TURMOIL;
-        if (this.expansions.community) m += MODULE_COMMUNITY;
-        if (this.expansions.promo) m += MODULE_PROMO;
-        if (this.expansions.ares) m += MODULE_ARES;
-        if (this.expansions.moon) m += MODULE_MOON;
-        if (this.expansions.pathfinders) m += MODULE_PATHFINDERS;
+        let m = GAME_MODULES.map((module) => {
+          return this.expansions[module] ? moduleAbbreviations[module] : '';
+        }).join('');
         if (m === '') m = '-'; // - means no modules.
 
         if (m !== ALL_MODULES) {
@@ -400,6 +324,30 @@ export default Vue.extend({
         }
       }
       return true;
+    },
+    expansionIconClass(expansion: GameModule): string {
+      if (expansion === 'base') return '';
+      switch (expansion) {
+      case 'corpera': return 'expansion-icon-CE';
+      case 'colonies': return 'expansion-icon-colony';
+      case 'moon': return 'expansion-icon-themoon';
+      default: return `expansion-icon-${expansion}`;
+      }
+    },
+    expansionName(expansion: GameModule): string {
+      switch (expansion) {
+      case 'base': return 'Base';
+      case 'corpera': return 'Corporate Era';
+      case 'prelude': return 'Prelude';
+      case 'venus': return 'Venus Next';
+      case 'colonies': return 'Colonies';
+      case 'turmoil': return 'Turmoil';
+      case 'promo': return 'Promos';
+      case 'ares': return 'Ares';
+      case 'community': return 'Community';
+      case 'moon': return 'The Moon';
+      case 'pathfinders': return 'Pathfinders';
+      }
     },
     showCard(cardName: CardName): boolean {
       if (!this.filterByName(cardName)) return false;

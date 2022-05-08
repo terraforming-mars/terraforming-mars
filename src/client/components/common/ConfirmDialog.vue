@@ -57,10 +57,10 @@ export default (Vue as WithRefs<Refs>).extend({
         <button class="btn btn-lg btn-primary" v-on:click="accept()">Yes</button>
         <button class="btn btn-lg" v-on:click="dismiss()">No</button>
       </menu>
-      <tempalate v-if="enableDontShowAgainCheckbox">
+      <template v-if="enableDontShowAgainCheckbox">
         <input type="checkbox" v-model="hide" id="dialog-confirm-dismiss" />
         <label for="dialog-confirm-dismiss">Don't show this again</label>
-      </tempalate>
+      </template>
     </form>
   </dialog>
 </template>

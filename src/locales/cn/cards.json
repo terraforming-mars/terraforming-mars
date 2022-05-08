@@ -3,7 +3,7 @@
     "Raise your M€ production 1 step. Immediately draw 2 prelude cards. Play 1 of them, and discard the other.": "提升你的M€产量1级,抽2张前序卡,打出其中1张,丢弃其他前序卡",
     
     "Outdoor Sports": "户外运动",
-    "Requires any city adjacent to an ocean. Increase your M€ production 2 steps.": "需要有相邻海洋的尝试,增加你的M€产量2级",
+    "Requires any city adjacent to an ocean. Increase your M€ production 2 steps.": "需要有相邻海洋的城市,增加你的M€产量2级",
     
     "Harvest": "收获",
     "Requires that you have 3 greenery tiles in play. Gain 12 M€.": "你必须拥有3个植物板块,获得12M€",
@@ -401,7 +401,7 @@
     "Remove up to 3 titanium from any player, or 4 steel, or 7 M€.": "移除任一玩家的最多3个钛资源,或4个钢铁资源，或7 M€。",
 
     "Moss": "苔藓",
-    "Requires 3 ocean tiles and that you lose 1 plant. Increase your plant production 1 step.": "需要至少3个还帮板块且你移除1个植物资源。增加你的植物产量1级。",
+    "Requires 3 ocean tiles and that you lose 1 plant. Increase your plant production 1 step.": "需要至少3个海洋板块且你移除1个植物资源。增加你的植物产量1级。",
 
     "Hired Raiders": "雇佣掠夺者",
     "Steal up to 2 steel, or 3 M€ from any player.": "盗取任一玩家最多2个钢铁资源或3 M€。",
@@ -614,7 +614,7 @@
   "Requires 2 Science tags. Place a greenery tile and raise oxygen 1 step.": "（需求：科学标志数≥2）放置一块绿植板块。",
 
   "Power Infrastructure": "电力基础设置",
-  "Action: Spend any amount of Energy and gain that amount of M€.": "花费任意数量电力资源，获得等量的M€。",
+  "Action: Spend any amount of energy and gain that amount of M€.": "花费任意数量电力资源，获得等量的M€。",
 
   "Indentured Workers": "合同工",
   "The next card you play this generation costs 8 M€ less.": "本回合你打出下一张卡牌所需支付的费用减少8。",

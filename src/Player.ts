@@ -1099,22 +1099,7 @@ export class Player {
       }
       this.deferInputCb(pi.cb(foundCard, howToPay));
     } else if (pi instanceof SelectCard) {
-      this.checkInputLength(input, 1);
-      if (input[0].length < pi.config.min) {
-        throw new Error('Not enough cards selected');
-      }
-      if (input[0].length > pi.config.max) {
-        throw new Error('Too many cards selected');
-      }
-      const mappedCards: Array<ICard> = [];
-      for (const cardName of input[0]) {
-        const cardIndex = PlayerInput.getCard(pi.cards, cardName);
-        mappedCards.push(cardIndex.card);
-        if (pi.config.enabled?.[cardIndex.idx] === false) {
-          throw new Error('Selected unavailable card');
-        }
-      }
-      this.deferInputCb(pi.cb(mappedCards));
+      this.deferInputCb(pi.process(input, this));
     } else if (pi instanceof SelectAmount) {
       this.deferInputCb(pi.process(input, this));
     } else if (pi instanceof SelectSpace) {

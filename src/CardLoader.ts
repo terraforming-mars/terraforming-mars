@@ -53,6 +53,8 @@ export class CardLoader {
         return gameOptions.coloniesExtension;
       case 'turmoil':
         return gameOptions.turmoilExtension;
+      case 'moon':
+        return gameOptions.moonExpansion;
       case 'pathfinders':
         return gameOptions.pathfindersExpansion;
       default:

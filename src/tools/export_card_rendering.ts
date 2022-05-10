@@ -30,11 +30,11 @@ class ProjectCardProcessor {
 
   private static processDeck(module: GameModule, deck: Deck<ICard>) {
     deck.factories.forEach((factory) => {
-      ProjectCardProcessor.processCard(module, new factory.Factory());
+      ProjectCardProcessor.processCard(module, new factory.Factory(), factory.compatibility);
     });
   }
 
-  private static processCard(module: GameModule, card: ICard) {
+  private static processCard(module: GameModule, card: ICard, compatibility: undefined | GameModule | Array<GameModule>) {
     let startingMegaCredits = undefined;
     let cardCost = undefined;
     if (card.cardType === CardType.PRELUDE) {
@@ -59,8 +59,14 @@ class ProjectCardProcessor {
       resourceType: card.resourceType,
       startingMegaCredits: startingMegaCredits,
       cardCost: cardCost,
+      compatibility: [],
     };
 
+    if (Array.isArray(compatibility)) {
+      clientCard.compatibility.push(...compatibility);
+    } else if (compatibility !== undefined) {
+      clientCard.compatibility.push(compatibility);
+    }
     ProjectCardProcessor.json.push(clientCard);
   }
 }

@@ -114,9 +114,9 @@ export const COLONIES_CARD_MANIFEST = new CardManifest({
     {cardName: CardName.BUILD_COLONY_STANDARD_PROJECT, Factory: BuildColonyStandardProject},
   ],
   corporationCards: [
-    {cardName: CardName.ARIDOR, Factory: Aridor},
+    {cardName: CardName.ARIDOR, Factory: Aridor, compatibility: 'colonies'},
     {cardName: CardName.ARKLIGHT, Factory: Arklight},
     {cardName: CardName.POLYPHEMOS, Factory: Polyphemos},
-    {cardName: CardName.POSEIDON, Factory: Poseidon},
+    {cardName: CardName.POSEIDON, Factory: Poseidon, compatibility: 'colonies'},
     {cardName: CardName.STORMCRAFT_INCORPORATED, Factory: StormCraftIncorporated},
   ]});

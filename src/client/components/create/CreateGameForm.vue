@@ -452,6 +452,8 @@ import {RandomMAOptionType} from '@/common/ma/RandomMAOptionType';
 import {GameId} from '@/common/Types';
 import {AgendaStyle} from '@/common/turmoil/Types';
 import PreferencesIcon from '@/client/components/PreferencesIcon.vue';
+import {getCard} from '@/client/cards/ClientCardManifest';
+import {GameModule} from '@/common/cards/GameModule';
 
 import * as constants from '@/common/constants';
 
@@ -791,6 +793,21 @@ export default (Vue as WithRefs<Refs>).extend({
     getPlayerContainerColorClass(color: string): string {
       return playerColorClass(color.toLowerCase(), 'bg_transparent');
     },
+    isEnabled(module: GameModule): boolean {
+      switch (module) {
+      case 'corpera': return this.$data.corpera;
+      case 'promo': return this.$data.promoCardsOption;
+      case 'venus': return this.$data.venusNext;
+      case 'colonies': return this.$data.colonies;
+      case 'prelude': return this.$data.prelude;
+      case 'turmoil': return this.$data.turmoil;
+      case 'community': return this.$data.communityCardsOption;
+      case 'ares': return this.$data.aresExtension;
+      case 'moon': return this.$data.moonExpansion;
+      case 'pathfinders': return this.$data.pathfindersExpansion;
+      default: return true;
+      }
+    },
     async serializeSettings() {
       // TODO(kberg): remove 'component'
       const component: CreateGameModel = this;
@@ -903,6 +920,20 @@ export default (Vue as WithRefs<Refs>).extend({
         if (customCorporationsList.length < neededCorpsCount) {
           window.alert(translateTextWithParams('Must select at least ${0} corporations', [neededCorpsCount.toString()]));
           return;
+        }
+        let valid = true;
+        for (const corp of customCorporationsList) {
+          const card = getCard(corp);
+          for (const module of card?.compatibility ?? []) {
+            if (!this.isEnabled(module)) {
+              valid = false;
+            }
+          }
+        }
+        if (valid === false) {
+          const confirm = window.confirm(translateText(
+            'Some of the corps you selected need expansions you have not enabled. Using them might break your game. Press OK to continue or Cancel to change your selections.'));
+          if (confirm === false) return;
         }
       } else {
         customCorporationsList.length = 0;

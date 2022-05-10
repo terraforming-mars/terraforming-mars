@@ -9,8 +9,8 @@
             </div>
         </div>
         <br/>
-          <div class="corporations-filter-group" v-for="module in GAME_MODULES" v-bind:key="module">
-            <div v-if="cardsByModule[module].length > 0">
+          <template v-for="module in GAME_MODULES">
+            <div class="corporations-filter-group" v-if="cardsByModule[module].length > 0" v-bind:key="module">
               <div class="corporations-filter-toolbox-cont">
                   <div>{{moduleName(module)}}&nbsp;<div :class="icon(module)"></div></div><br>
                   <div class="corporations-filter-toolbox">
@@ -26,7 +26,7 @@
                       <div v-for="expansion in expansions(corporation)" :key="expansion" :class="icon(expansion)"></div>
                   </label>
               </div>
-          </div>
+          <template>
         </div>
     </div>
 </template>

@@ -77,8 +77,10 @@
     "Having the most science tags in play": "拥有最多科学标志",
     "Thermalist": "热能魁首",
     "Having the most heat resource cubes": "拥有最多热能资源方块",
+    "Having the most heat resource cubes (after final production round)": "拥有最多热能资源方块(终局生产结算)",
     "Miner": "矿业大亨",
     "Having the most steel and titanium resource cubes": "拥有最多铁和钛资源方块",
+    "Having the most steel and titanium resource cubes (after final production round)": "拥有最多铁和钛资源方块(终局生产结算)",    
     "Cultivator": "森林妙手",
     "Most greenery tiles": "拥有最多森林板块",
     "Magnate": "自动化巨头",
@@ -312,11 +314,14 @@
     "Good luck ${0}!" : "祝你好运${0}！",
     "Not enough cards selected":"未选择足够数量的卡牌。",
     "Select how to pay for action":"选择如何为行动支付",
-    "game setup details":"游戏初设详情",
+    "Game Setup Details":"游戏初设详情",
 
     "Cards List":"卡牌列表",
     "Sort by ID (work in progress)" :"按照ID排序（开发中）",
 
+    "Spectator link": "观战链接",
+    "CONCISE": "简洁模式",
+    "FULL":"显示全部",
     "Select space for ocean from temperature increase":"为升温奖励的海洋选择位置",
     "Must select a space":"必须选择一个位置"
 }

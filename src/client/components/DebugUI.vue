@@ -359,9 +359,11 @@ export default Vue.extend({
 
       if (!this.types[card.cardType]) return false;
       if (card.tags.length === 0 && this.tags['none'] === false) return false;
+      let matchAnyTag = false;
       for (const tag of card.tags) {
-        if (!this.tags[tag]) return false;
+        if (this.tags[tag]) matchAnyTag = true;
       }
+      if (matchAnyTag === false) return false;
       return this.expansions[card.module] === true;
     },
     showGlobalEvent(name: GlobalEventName): boolean {

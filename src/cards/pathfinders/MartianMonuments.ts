@@ -16,7 +16,7 @@ export class MartianMonuments extends Card implements IProjectCard {
     super({
       cardType: CardType.AUTOMATED,
       name: CardName.MARTIAN_MONUMENTS,
-      cost: 5,
+      cost: 10,
       tags: [Tags.MARS, Tags.BUILDING],
       requirements: CardRequirements.builder((b) => b.cities(1, {text: 'ON MARS'})),
 

@@ -8,6 +8,7 @@ import {DecreaseAnyProduction} from '../../deferredActions/DecreaseAnyProduction
 import {CardRequirements} from '../CardRequirements';
 import {CardRenderer} from '../render/CardRenderer';
 import {all} from '../Options';
+import {GainProduction} from '../../deferredActions/GainProduction';
 
 export class GreatEscarpmentConsortium extends Card implements IProjectCard {
   constructor() {
@@ -33,7 +34,7 @@ export class GreatEscarpmentConsortium extends Card implements IProjectCard {
   public play(player: Player) {
     player.game.defer(
       new DecreaseAnyProduction(player, Resources.STEEL, {count: 1, stealing: true}));
-    player.addProduction(Resources.STEEL, 1);
+    player.game.defer(new GainProduction(player, Resources.STEEL, {count: 1}));
     return undefined;
   }
 }

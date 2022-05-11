@@ -4,6 +4,7 @@ import {Game} from '../../../src/Game';
 import {TestPlayer} from '../../TestPlayer';
 import {Resources} from '../../../src/common/Resources';
 import {TestPlayers} from '../../TestPlayers';
+import {TestingUtils} from '../../TestingUtils';
 
 describe('BiomassCombustors', function() {
   let card : BiomassCombustors; let player : TestPlayer; let player2 : TestPlayer; let game : Game;
@@ -13,6 +14,7 @@ describe('BiomassCombustors', function() {
     player = TestPlayers.BLUE.newPlayer();
     player2 = TestPlayers.RED.newPlayer();
     game = Game.newInstance('foobar', [player, player2], player);
+    player.popWaitingFor();
   });
 
   it('Cannot play if oxygen requirement not met', function() {
@@ -37,8 +39,8 @@ describe('BiomassCombustors', function() {
     expect(player.canPlayIgnoringCost(card)).is.true;
 
     card.play(player);
-    const input = game.deferredActions.peek()!.execute();
-    expect(input).is.undefined;
+    TestingUtils.runAllActions(game);
+    expect(player.popWaitingFor()).is.undefined;
     expect(player.getProduction(Resources.ENERGY)).to.eq(2);
     expect(player2.getProduction(Resources.PLANTS)).to.eq(0);
 

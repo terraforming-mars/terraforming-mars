@@ -9,6 +9,7 @@ import {DecreaseAnyProduction} from '../../deferredActions/DecreaseAnyProduction
 import {CardRequirements} from '../CardRequirements';
 import {CardRenderer} from '../render/CardRenderer';
 import {all} from '../Options';
+import {GainProduction} from '../../deferredActions/GainProduction';
 
 export class AsteroidMiningConsortium extends Card implements IProjectCard {
   constructor() {
@@ -34,13 +35,12 @@ export class AsteroidMiningConsortium extends Card implements IProjectCard {
   }
 
   public play(player: Player) {
-    const decreaseAction = new DecreaseAnyProduction(
+    player.game.defer(new DecreaseAnyProduction(
       player,
       Resources.TITANIUM,
       {count: 1, stealing: true},
-    );
-    player.game.defer(decreaseAction);
-    player.addProduction(Resources.TITANIUM, 1);
+    ));
+    player.game.defer(new GainProduction(player, Resources.TITANIUM, {count: 1}));
     return undefined;
   }
 }

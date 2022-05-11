@@ -9,6 +9,7 @@ import {DecreaseAnyProduction} from '../../deferredActions/DecreaseAnyProduction
 import {CardRequirements} from '../CardRequirements';
 import {CardRenderer} from '../render/CardRenderer';
 import {all} from '../Options';
+import {GainProduction} from '../../deferredActions/GainProduction';
 
 export class PowerSupplyConsortium extends Card implements IProjectCard {
   constructor() {
@@ -33,9 +34,9 @@ export class PowerSupplyConsortium extends Card implements IProjectCard {
   }
 
   public play(player: Player) {
-    player.addProduction(Resources.ENERGY, 1);
     player.game.defer(
       new DecreaseAnyProduction(player, Resources.ENERGY, {count: 1, stealing: true}));
+    player.game.defer(new GainProduction(player, Resources.ENERGY, {count: 1}));
     return undefined;
   }
 }

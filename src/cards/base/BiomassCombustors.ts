@@ -9,6 +9,7 @@ import {DecreaseAnyProduction} from '../../deferredActions/DecreaseAnyProduction
 import {CardRenderer} from '../render/CardRenderer';
 import {CardRequirements} from '../CardRequirements';
 import {all} from '../Options';
+import {GainProduction} from '../../deferredActions/GainProduction';
 
 export class BiomassCombustors extends Card implements IProjectCard {
   constructor() {
@@ -43,8 +44,8 @@ export class BiomassCombustors extends Card implements IProjectCard {
   }
 
   public produce(player: Player) {
-    player.addProduction(Resources.ENERGY, 2);
     player.game.defer(
       new DecreaseAnyProduction(player, Resources.PLANTS, {count: 1}));
+    player.game.defer(new GainProduction(player, Resources.ENERGY, {count: 2}));
   }
 }

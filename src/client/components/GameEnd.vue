@@ -104,7 +104,7 @@
                             <div v-for="v in p.victoryPointsBreakdown.detailsCards" :key="v.cardName">
                               <div class="game-end-column-row">
                                 <div class="game-end-column-vp">{{v.victoryPoint}}</div>
-                                <div class="game-end-column-text">{{v.cardName}}</div>
+                                <div class="game-end-column-text" v-i18n>{{v.cardName}}</div>
                               </div>
                             </div>
                             <div class="game-end-column-row">
@@ -114,13 +114,15 @@
                             <div v-for="v in p.victoryPointsBreakdown.detailsMilestones" :key="v">
                               <div class="game-end-column-row">
                                 <div class="game-end-column-vp">{{v.split(':', 2)[1]}}</div>
-                                <div class="game-end-column-text">{{v.split(':', 2)[0]}}</div>
+                                <div class="game-end-column-text" v-i18n>{{v.split(':', 2)[0]}}</div>
                               </div>
                             </div>
                             <div v-for="v in p.victoryPointsBreakdown.detailsAwards" :key="v">
                               <div class="game-end-column-row">
                                 <div class="game-end-column-vp">{{v.split(':', 2)[1]}}</div>
-                                <div class="game-end-column-text">{{v.split(':', 2)[0]}}</div>
+                                <div class="game-end-column-text">
+                                  <span v-i18n>{{v.split('(')[0]}}</span><span>{{v.split('award')[1].split(':')[0]}}</span>
+                                </div>
                               </div>
                             </div>
                             <div v-for="v in p.victoryPointsBreakdown.detailsPlanetaryTracks" :key="v.tag">

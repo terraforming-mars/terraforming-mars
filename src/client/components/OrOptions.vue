@@ -33,6 +33,7 @@ import {PlayerViewModel, PublicPlayerModel} from '@/common/models/PlayerModel';
 import {PlayerInputModel} from '@/common/models/PlayerInputModel';
 import {getPreferences} from '@/client/utils/PreferencesManager';
 import {InputResponse} from '@/common/inputs/InputResponse';
+import {PlayerInputTypes} from '@/common/input/PlayerInputTypes';
 
 let unique = 0;
 
@@ -66,10 +67,17 @@ export default Vue.extend({
       throw new Error('no options provided for OrOptions');
     }
     const displayedOptions = this.playerinput.options.filter((o) => Boolean(o.showOnlyInLearnerMode) === false || getPreferences().learner_mode);
+    // Special case: If the first displayed option is SelectCard, and none of them are enabled, skip it.
+    let selectedOption = displayedOptions[0];
+    if (displayedOptions.length > 1 &&
+      selectedOption.inputType === PlayerInputTypes.SELECT_CARD &&
+      !selectedOption.cards?.some((card) => card.isDisabled === false)) {
+      selectedOption = displayedOptions[1];
+    }
     return {
       displayedOptions,
       radioElementName: 'selectOption' + unique++,
-      selectedOption: displayedOptions[0],
+      selectedOption,
     };
   },
   methods: {

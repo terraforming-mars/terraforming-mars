@@ -119,7 +119,7 @@
                             </div>
                             <div v-for="v in p.victoryPointsBreakdown.detailsAwards" :key="v">
                               <div class="game-end-column-row">
-                                <div class="game-end-column-vp">{{v.split(':', 2)[1]}}</div>                                
+                                <div class="game-end-column-vp">{{v.split(':', 2)[1]}}</div>
                                 <div class="game-end-column-text">
                                   <span v-i18n>{{v.split('(')[0]}}</span><span>{{v.split('award')[1].split(':')[0]}}</span>
                                 </div>

@@ -16,8 +16,8 @@ export class MartianMonuments extends Card implements IProjectCard {
     super({
       cardType: CardType.AUTOMATED,
       name: CardName.MARTIAN_MONUMENTS,
-      cost: 5,
-      tags: [Tags.EARTH, Tags.MARS],
+      cost: 10,
+      tags: [Tags.MARS, Tags.BUILDING],
       requirements: CardRequirements.builder((b) => b.cities(1, {text: 'ON MARS'})),
 
       metadata: {
@@ -36,9 +36,13 @@ export class MartianMonuments extends Card implements IProjectCard {
     });
   }
 
-  public play(player: Player) {
-    const count = player.getTagCount(Tags.MARS) + 1; // +1 is the "including this"
+  public produce(player: Player, increment: number = 0) {
+    const count = player.getTagCount(Tags.MARS) + increment;
     player.addProduction(Resources.MEGACREDITS, count, {log: true});
+  }
+
+  public play(player: Player) {
+    this.produce(player, 1); // The 1 is the "including this"
     return undefined;
   }
 }

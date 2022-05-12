@@ -51,7 +51,6 @@ import {VictoryPointsBreakdown} from './VictoryPointsBreakdown';
 import {IVictoryPointsBreakdown} from './common/game/IVictoryPointsBreakdown';
 import {SelectProductionToLose} from './inputs/SelectProductionToLose';
 import {ShiftAresGlobalParameters} from './inputs/ShiftAresGlobalParameters';
-import {IAresGlobalParametersResponse} from './common/inputs/IAresGlobalParametersResponse';
 import {Timer} from './common/Timer';
 import {TurmoilHandler} from './turmoil/TurmoilHandler';
 import {CardLoader} from './CardLoader';
@@ -1031,18 +1030,6 @@ export class Player {
     }
   }
 
-  private parseUnitsJSON(json: string): Units {
-    try {
-      const units: unknown = JSON.parse(json);
-      if (!Units.isUnits(units)) {
-        throw new Error('not a units object');
-      }
-
-      return units;
-    } catch (err) {
-      throw new Error('Unable to parse Units input ' + err);
-    }
-  }
   protected runInput(input: InputResponse, pi: PlayerInput): void {
     if (pi instanceof AndOptions) {
       this.checkInputLength(input, pi.options.length);
@@ -1066,15 +1053,7 @@ export class Player {
     } else if (pi instanceof SelectOption) {
       this.deferInputCb(pi.cb());
     } else if (pi instanceof SelectColony) {
-      this.checkInputLength(input, 1, 1);
-      const colonyName: ColonyName = (input[0][0]) as ColonyName;
-      if (colonyName === undefined) {
-        throw new Error('No colony selected');
-      }
-      // TODO(kberg): this passes true because SelectColony sometimes loads discarded colonies
-      // but that can be a parameter, and that would be useful.
-      const colony = ColoniesHandler.getColony(this.game, colonyName, true);
-      this.deferInputCb(pi.cb(colony));
+      this.deferInputCb(pi.process(input, this));
     } else if (pi instanceof OrOptions) {
       // input length is variable, can't test it with checkInputLength
       if (input.length === 0 || input[0].length !== 1) {
@@ -1119,19 +1098,9 @@ export class Player {
     } else if (pi instanceof SelectHowToPay) {
       this.deferInputCb(pi.process(input, this));
     } else if (pi instanceof SelectProductionToLose) {
-      this.checkInputLength(input, 1, 1);
-      const units: Units = this.parseUnitsJSON(input[0][0]);
-      if (!Units.keys.every((k) => units[k] >= 0)) {
-        throw new Error('All units must be positive');
-      }
-      if (!this.canAdjustProduction(Units.negative(units))) {
-        throw new Error('You do not have those units');
-      }
-      pi.cb(units);
+      this.deferInputCb(pi.process(input, this));
     } else if (pi instanceof ShiftAresGlobalParameters) {
-      // TODO(kberg): I'm sure there's some input validation required.
-      const response: IAresGlobalParametersResponse = JSON.parse(input[0][0]);
-      pi.cb(response);
+      this.deferInputCb(pi.process(input, this));
     } else if (pi instanceof SelectPartyToSendDelegate) {
       this.checkInputLength(input, 1, 1);
       const party: PartyName = (input[0][0]) as PartyName;

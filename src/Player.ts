@@ -1038,18 +1038,7 @@ export class Player {
       }
       this.deferInputCb(pi.cb());
     } else if (pi instanceof SelectAmount) {
-      this.checkInputLength(input, 1, 1);
-      const amount: number = parseInt(input[0][0]);
-      if (isNaN(amount)) {
-        throw new Error('Number not provided for amount');
-      }
-      if (amount > pi.max) {
-        throw new Error('Amount provided too high (max ' + String(pi.max) + ')');
-      }
-      if (amount < pi.min) {
-        throw new Error('Amount provided too low (min ' + String(pi.min) + ')');
-      }
-      this.deferInputCb(pi.cb(amount));
+      this.deferInputCb(pi.process(input, this));
     } else if (pi instanceof SelectOption) {
       this.deferInputCb(pi.cb());
     } else if (pi instanceof SelectColony) {
@@ -1078,8 +1067,6 @@ export class Player {
       }
       this.deferInputCb(pi.cb(foundCard, howToPay));
     } else if (pi instanceof SelectCard) {
-      this.deferInputCb(pi.process(input, this));
-    } else if (pi instanceof SelectAmount) {
       this.deferInputCb(pi.process(input, this));
     } else if (pi instanceof SelectSpace) {
       this.deferInputCb(pi.process(input, this));

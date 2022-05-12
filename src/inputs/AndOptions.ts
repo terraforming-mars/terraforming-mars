@@ -10,6 +10,8 @@ import {SelectAmount} from './SelectAmount';
 import {ICard} from '../cards/ICard';
 import {IProjectCard} from '../cards/IProjectCard';
 import {SelectColony} from './SelectColony';
+import {InputResponse} from '../common/inputs/InputResponse';
+import {Player} from '../Player';
 
 export class AndOptions implements PlayerInput {
   public inputType: PlayerInputTypes = PlayerInputTypes.AND_OPTIONS;
@@ -18,5 +20,13 @@ export class AndOptions implements PlayerInput {
   public options: Array<PlayerInput>;
   constructor(public cb: () => PlayerInput | undefined, ...options: Array<OrOptions | SelectAmount | SelectPlayer | SelectHowToPay | SelectSpace | SelectColony | SelectCard<ICorporationCard> | SelectCard<ICard> | SelectCard<IProjectCard>>) {
     this.options = options;
+  }
+
+  public process(input: InputResponse, player: Player) {
+    player.checkInputLength(input, this.options.length);
+    for (let i = 0; i < input.length; i++) {
+      player.runInput([input[i]], this.options[i]);
+    }
+    return this.cb();
   }
 }

@@ -1030,13 +1030,9 @@ export class Player {
     }
   }
 
-  protected runInput(input: InputResponse, pi: PlayerInput): void {
+  public runInput(input: InputResponse, pi: PlayerInput): void {
     if (pi instanceof AndOptions) {
-      this.checkInputLength(input, pi.options.length);
-      for (let i = 0; i < input.length; i++) {
-        this.runInput([input[i]], pi.options[i]);
-      }
-      this.deferInputCb(pi.cb());
+      this.deferInputCb(pi.process(input, this));
     } else if (pi instanceof SelectAmount) {
       this.deferInputCb(pi.process(input, this));
     } else if (pi instanceof SelectOption) {
@@ -1044,14 +1040,7 @@ export class Player {
     } else if (pi instanceof SelectColony) {
       this.deferInputCb(pi.process(input, this));
     } else if (pi instanceof OrOptions) {
-      // input length is variable, can't test it with checkInputLength
-      if (input.length === 0 || input[0].length !== 1) {
-        throw new Error('Incorrect options provided');
-      }
-      const optionIndex = parseInt(input[0][0]);
-      const selectedOptionInput = input.slice(1);
-      this.runInput(selectedOptionInput, pi.options[optionIndex]);
-      this.deferInputCb(pi.cb());
+      this.deferInputCb(pi.process(input, this));
     } else if (pi instanceof SelectHowToPayForProjectCard) {
       this.checkInputLength(input, 1, 2);
       const cardName = input[0][0];

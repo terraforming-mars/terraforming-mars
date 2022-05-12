@@ -234,6 +234,26 @@
     "Starting Megacredits:": "起始M€：",
     "After Preludes:": "前序牌打出后M€：",
 
+    "Select a space with a steel or titanium bonus adjacent to one of your tiles": "在你的板块旁选择一个钢铁奖励或者钛奖励的地块",
+    "Increase your energy production 1 step": "提升你的电力产量1级",
+    "Spend 3 M€ to draw a building card": "花费3M€抽1张建筑牌",
+    "Remove 2 microbes to raise temperature 1 step": "移除2个微生物资源并提升火星温度1级",
+    "Add 1 microbe to this card": "在本卡添加1个微生物资源",
+    "Select ocean for Ice Moon Colony": "为冰月殖民地放置海洋板块",
+    "Select colony for Ice Moon Colony": "为冰月殖民地选择殖民地",
+    "Remove 2 microbes on this card and increase plant production 1 step": "移除本卡2个微生物资源,提升植物产量1级",
+    "Add a microbe resource to this card": "在本卡添加1个微生物资源",
+    "Perform again an action from a played card": "选择一张已打出的行动牌再次执行行动",
+    "Select space adjacent to a city tile": "选择一个城市旁边的板块",
+    "Select card to add 2 Floater(s)": "选择卡牌放置2个云资源",
+    "Add resources": "添加资源",
+    "Remove 1 floater to gain 2 titanium": "移除1个云资源获得2个钛资源",
+    "Remove 1 floater to gain 3 energy": "移除1个云资源获得3个电力资源",
+    "Remove 1 floater to gain 4 heat": "移除1个云资源获得4个热能资源",
+    "Remove floater": "移除云资源",
+    "Select colony for Trading Colony": "为交易殖民地选择殖民地",
+    "Select card to add 3 Floater(s)": "选择卡牌放置3个云资源",
+
     "How to pay?":"如何支付？",
     
     "Select a card to keep and pass the rest to ${0}": "选择一张你需要留下的牌然后将其余传递给${0}",
@@ -318,8 +338,20 @@
 
     "Cards List":"卡牌列表",
     "Sort by ID (work in progress)" :"按照ID排序（开发中）",
+    "Invert": "反选",
+    "event": "事件",
+    "Colony Tiles": "殖民地板块",
+    "Global Events": "全球性事件",
+    "active": "行动",
+    "automated": "自动化",    
+    "Corporations": "公司",    
+    "Standard Projects": "标准项目",    
+    "Colonies": "殖民地",
+    "standard_project": "标准项目",
 
-    "Spectator link": "观战链接",    
+    "Spectator link": "观战链接",
+    "Increase production": "提升产量",
+    "Draw card": "抽牌",
     "Select space for ocean from temperature increase":"为升温奖励的海洋选择位置",
     "Must select a space":"必须选择一个位置"
 }

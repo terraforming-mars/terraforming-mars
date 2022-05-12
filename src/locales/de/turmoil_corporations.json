@@ -1,7 +1,7 @@
 {
-  "LAKEFRONT": "SEEUFER",
+  "LAKEFRONT": "MEERESBLICK",
   "RESORTS": "RESORTS",
-  "Lakefront Resorts": "Seeufer Resorts",
+  "Lakefront Resorts": "Meeresblick Resorts",
   "You start with 54 M€.": "Du beginnst mit 54 M€.",
   "Effect: When any ocean tile is placed, increase your M€ production 1 step. Your bonus for placing adjacent to oceans is 3M€ instead of 2 M€.": "EFFEKT: Wenn ein Ozeanplättchen platziert wird, erhöhe deine M€-Produktion um 1. Dein Platzierungsbonus für an Ozeane angrenzende Plättchen beträgt 3 M€ anstatt 2 M€.",
 
@@ -12,8 +12,8 @@
   "Effect: Buying cards to hand costs 1 M€.": "EFFEKT: Karten kosten 1 M€, um sie auf die Hand aufzunehmen.",
 
   "UTOPIA": "UTOPIA",
-  "INVEST": "ANLAGE",
-  "Utopia Invest": "Utopia Anlage",
+  "INVEST": "INVEST",
+  "Utopia Invest": "Utopia Invest",
   "You start with 40 M€. Increase your steel and titanium production 1 step each.": "Du beginnst mit 40 M€. Erhöhe deine Stahl-Produktion sowie deine Titan-Produktion um 1.",
   "Action: Decrease any production to gain 4 resources of that kind.": "AKTION: Senke eine beliebige Produktion, um 4 Ressourcen desselben Typs zu erhalten.",
 

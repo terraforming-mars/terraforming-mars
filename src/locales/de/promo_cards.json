@@ -20,8 +20,8 @@
   "(Increase your M€ production 2 steps, increase your energy production 1 step, gain 3 plants, and place a city tile.)": "(Erhöhe deine M€-Produktion um 2, erhöhe deine Energie-Produktion um 1, erhalte 3 Pflanzen und platziere ein Stadtplättchen.)",
 
   "Magnetic Shield": "Magnetschild",
-  "2 Power": "2 Energie",
-  "(Requires 2 power tags. Raise your TR 4 steps.)": "(Erfordert 2 Energie-Symbole. Erhöhe deine TW um 4.)",
+  "3 Power": "3 Energie",
+  "(Requires 3 power tags. Raise your TR 4 steps.)": "(Benötigt 3 eigene Energiesymbole. Erhöhe deinen TW um 4.)",
 
   "Meltworks": "Schmelzwerk",
   "Action: Spend 5 heat to gain 3 steel.": "AKTION: Bezahle 5 Wärme und erhalte 3 Stahl.",
@@ -66,7 +66,7 @@
   "Decrease your M€ production 2 steps.": "Senke deine M€-Produktion um 2 M€.",
 
   "Law Suit": "Rechtsstreit",
-  "Steal 3 M€ from a player that REMOVED YOUR RESOURCES OR DECREASED YOUR PRODUCTION this generation. Place this card face down in THAT PLAYER'S EVENT PILE.": "Stiehl 3 M€ von einem Spieler, der dir in dieser Generation RESSOURCEN GESTHOLEN ODER PRODUKTION VERRINGERT hat. Platziere diese Karte umgedreht in seinem Ereignis-Stapel.",
+  "Steal 3 M€ from a player that REMOVED YOUR RESOURCES OR DECREASED YOUR PRODUCTION this generation. Place this card face down in THAT PLAYER'S EVENT PILE.": "Klaue 3 M€ von einem Spieler, der dir in dieser Generation RESSOURCEN GESTHOLEN ODER PRODUKTION VERRINGERT hat. Platziere diese Karte umgedreht in seinem Ereignis-Stapel.",
 
   "Small Asteroid": "Kleiner Asteroid",
   "Increase temperature 1 step. Remove up to 2 plants from any player.": "Erhöhe die Temperatur um 2 °C. Entferne bis zu 2 Pflanzen eines beliebigen Spielers.",
@@ -127,5 +127,17 @@
 
   "Requires 8 oceans. 1 VP for each animal on this card.": "Erfordert 8 Ozeane. 1 SP für jedes Tier auf dieser Karte.",
   "Requires 2 Science tags.": "Erfordert 2 Wissenschaftssymbole.",
-  "Action: Spend 2X M€ to gain X energy, or decrease energy production 1 step to gain 8 M€.": "AKTION: Zahle 2X M€, um X Energie zu erhalten oder senke deine Energie-Produktion um 1, um 8 M€ zu erhalten."
+  "Action: Spend 2X M€ to gain X energy, or decrease energy production 1 step to gain 8 M€.": "AKTION: Zahle 2X M€, um X Energie zu erhalten oder senke deine Energie-Produktion um 1, um 8 M€ zu erhalten.",
+
+  "Bactoviral Research": "Baktovirale Forschung",
+  "(Draw 1 card. Choose 1 of your played cards and add 1 microbe to it for each science tag you have, including this.)": "(Ziehe 1 Karte. Wähle 1 deiner ausgespielten Karten und füge für jedes eigene Wissenschaftssymbol, einschließlich diesem, 1 Mikrobe hinzu)",
+
+  "Bio Printing Facility": "Bio-Druckanlage",
+  "(Action: Spend 2 energy to gain 2 plants OR to add 1 animal to ANOTHER card.)": "(AKTION: Entferne 2 Energie, um 2 Pflanzen zu erhalten ODER um 1 Tier zu einer ANDEREN Karte hinzuzufügen.)",
+
+  "Harvest": "Ernte",
+  "(Requires that you have 3 greenery tiles in play. Gain 12 M€.)": "(Benötigt 3 Grünflächenplättchen im Spiel und erhalte 12 M€.)",
+
+  "Outdoor Sports": "Sport im Freien",
+  "Requires any city adjacent to an ocean. Increase your M€ production 2 steps.": "(Benötigt 1 Stadt, die an einen Ozean angrenzt. Erhöhe deine M€-Produktion um 2.)"
 }

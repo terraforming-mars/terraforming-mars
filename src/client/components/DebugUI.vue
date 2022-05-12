@@ -1,6 +1,6 @@
 <template>
   <div class="debug-ui-container" :class="getLanguageCssClass()">
-      <h1>Cards List</h1>
+      <h1 v-i18n>Cards List</h1>
       <div class="legacy-anchor">
         <a href="https://ssimeonoff.github.io/cards-list" target="_blank">legacy card UI</a>
       </div>
@@ -60,35 +60,35 @@
       <!-- start cards -->
 
       <section class="debug-ui-cards-list">
-          <h2>Project Cards</h2>
+          <h2 v-i18n>Project Cards</h2>
           <div class="cardbox" v-for="card in getAllProjectCards()" :key="card">
               <Card v-if="showCard(card)" :card="{'name': card}" />
           </div>
       </section>
       <br>
       <section class="debug-ui-cards-list">
-          <h2>Corporations</h2>
+          <h2 v-i18n>Corporations</h2>
           <div class="cardbox" v-for="card in getAllCorporationCards()" :key="card">
               <Card v-if="showCard(card)" :card="{'name': card}" />
           </div>
       </section>
       <br>
       <section class="debug-ui-cards-list">
-          <h2>Preludes</h2>
+          <h2 v-i18n>Preludes</h2>
           <div class="cardbox" v-for="card in getAllPreludeCards()" :key="card">
               <Card v-if="showCard(card)" :card="{'name': card}" />
           </div>
       </section>
       <br>
       <section class="debug-ui-cards-list">
-        <h2>Standard Projects</h2>
+        <h2 v-i18n>Standard Projects</h2>
         <div class="cardbox" v-for="card in getAllStandardProjectCards()" :key="card">
             <Card v-if="showCard(card)" :card="{'name': card}" />
         </div>
       </section>
 
       <section class="debug-ui-cards-list">
-        <h2>Global Events</h2>
+        <h2 v-i18n>Global Events</h2>
         <template v-if="types.globalEvents">
           <div class="cardbox" v-for="globalEventName in getAllGlobalEvents()" :key="globalEventName">
             <global-event v-if="showGlobalEvent(globalEventName)" :globalEvent="getGlobalEventModel(globalEventName)" type="prior"></global-event>
@@ -97,7 +97,7 @@
       </section>
 
       <section>
-        <h2>Colonies</h2>
+        <h2 v-i18n>Colonies</h2>
         <template v-if="types.colonyTiles">
           <div class="player_home_colony_cont">
             <div class="player_home_colony" v-for="colonyName in getAllColonyNames()" :key="colonyName">

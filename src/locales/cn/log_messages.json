@@ -84,6 +84,12 @@
     "${0} revealed and discarded ${1}":"${0} 展示并丢弃了 ${1}",
     "${0} is using their ${1} effect to draw a card by discarding a card.":"${0} 正在使用其 ${1} 效果来摸牌",
     "Drew and discarded ${0} (cost ${1}) to place a ${2}":"摸取并弃置 ${0} (费用 ${1}) 来放置 ${2}",
+    "${0} increased ${1} colony track ${2} step(s)": "${0} 提升 ${1} 殖民地贸易收入 ${2} 点",
+    "${0} kept ${1} project cards": "${0} 保留了 ${1} 张牌",
+    "Power Plant:SP": "发电厂",
+    "Asteroid:SP": "小行星",
+    "Industrial Center tile": "工业中心板块",
+    "Mining Rights tile": "采矿权板块",
 
     "placed":"放置",
     "greenery tile":"森林板块",

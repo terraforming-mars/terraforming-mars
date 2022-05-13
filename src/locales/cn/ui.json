@@ -156,8 +156,11 @@
     "Buffer Gas (16 M€)": "缓冲气体 (16 M€) - 提升1TR",
     
     "Pay 9 M€": "支付 9 M€",
+    "Pay 8 M€": "支付 8 M€",
     "Pay 3 Energy": "支付 3 个电力资源",
+    "Pay 2 Energy": "支付 2 个电力资源",
     "Pay 3 Titanium": "支付 3 个钛资源",
+    "Pay 2 Titanium": "支付 2 个钛资源",
     "Trade with a colony tile": "与殖民星球贸易",
     "(Enceladus - (Microbes)": "(Enceladus - (微生物)",
     "Select action for World Government Terraforming": "请你作为世界政府,选择一项改造(不获得奖励)",
@@ -260,7 +263,11 @@
     "Select space for special city tile": "为特殊城市板块选择一个位置",
     "Place any final greenery from plants": "终局森林放置",
     "Don't place a greenery": "不放置森林",
-
+    "Increase colony track 1 step(s)": "提升殖民地1级",
+    "Don't increase colony track": "不提升殖民地等级",    
+    "Increase Europa colony track before trade": "在 木卫二(产能) 贸易前提升等级",    
+    "Place your tile here?": "确定放在这里吗?",
+    
     "How to pay?":"如何支付？",
     
     "Select a card to keep and pass the rest to ${0}": "选择一张你需要留下的牌然后将其余传递给${0}",
@@ -299,6 +306,21 @@
     "End": "结束",
     "Sell": "卖出",
     "Undo": "反悔",
+    "undo": "反悔",
+    "12 Gens": "12个时代",
+    "GEN": "时代",
+    "Generation Marker": "时代标记",
+    "Player Color Cube": "玩家颜色方块",
+    "Jump to board": "跳转到大地图",
+    "Jump to cards": "跳转到手牌",
+    "Jump to actions": "跳转到可执行行动",
+    "Jump to colonies": "跳转到殖民地",
+    "Information panel": "信息面板",
+    "game setup details": "游戏设置详情",
+    "player aid": "玩家指南",
+    "Player Settings": "设置",
+    "Oxygen Level": "氧气等级",
+    "Venus scale": "金星改造度等级",
 
     "Standard projects" :"标准项目",
 

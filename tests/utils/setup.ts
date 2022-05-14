@@ -2,7 +2,7 @@ import {Database} from '../../src/database/Database';
 import {IDatabase} from '../../src/database/IDatabase';
 
 const FAKE_DATABASE: IDatabase = {
-  cleanSaves: () => {},
+  cleanGame: () => {},
   deleteGameNbrSaves: () => {},
   getClonableGames: () => {},
   getClonableGameByGameId: () => {},

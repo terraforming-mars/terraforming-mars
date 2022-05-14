@@ -81,7 +81,7 @@ describe('SQLite', () => {
     expect(allSaveIds).has.members([0, 1, 2, 3]);
   });
 
-  it('purge', async () => {
+  it('cleanGame', async () => {
     const player = TestPlayers.BLACK.newPlayer();
     const game = Game.newInstance('game-id-1212', [player], player);
     await db.saveGamePromise;
@@ -93,10 +93,10 @@ describe('SQLite', () => {
 
     expect(await db.getSaveIds(game.id)).has.members([0, 1, 2, 3]);
 
-    // TODO(kberg): make cleanSaves a promise, too. Beacuse right now
+    // TODO(kberg): make cleanGame a promise, too. Beacuse right now
     // this timeout doesn't participate in automated testing. But for now I can
     // verify this in the debugger. Next step.
-    db.cleanSaves(game.id);
+    db.cleanGame(game.id);
     setTimeout(async () => {
       const saveIds = await db.getSaveIds(game.id);
       expect(saveIds).has.members([0, 3]);

@@ -210,16 +210,16 @@ export class PostgreSQL implements IDatabase {
     }
   }
 
-  cleanSaves(game_id: GameId): void {
+  cleanGame(game_id: GameId): void {
     this.getMaxSaveId(game_id, ((err, save_id) => {
-      this.throwIf(err, 'cleanSaves0');
+      this.throwIf(err, 'cleanGame0');
       if (save_id === undefined) throw new Error('saveId is undefined for ' + game_id);
       // DELETE all saves except initial and last one
       this.client.query('DELETE FROM games WHERE game_id = $1 AND save_id < $2 AND save_id > 0', [game_id, save_id], (err) => {
-        this.throwIf(err, 'cleanSaves1');
+        this.throwIf(err, 'cleanGame1');
         // Flag game as finished
         this.client.query('UPDATE games SET status = \'finished\' WHERE game_id = $1', [game_id], (err2) => {
-          this.throwIf(err2, 'cleanSaves2');
+          this.throwIf(err2, 'cleanGame2');
           // Purge after setting the status as finished so it does not delete the game.
           this.purgeUnfinishedGames();
         });

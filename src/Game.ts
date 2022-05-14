@@ -1050,7 +1050,7 @@ export class Game {
       this.log('This game id was ' + this.id);
     }
 
-    Database.getInstance().cleanSaves(this.id);
+    Database.getInstance().cleanGame(this.id);
     const scores: Array<Score> = [];
     this.players.forEach((player) => {
       let corponame: string = '';

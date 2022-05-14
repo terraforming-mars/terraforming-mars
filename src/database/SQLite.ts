@@ -182,10 +182,10 @@ export class SQLite implements IDatabase {
     });
   }
 
-  cleanSaves(game_id: GameId): void {
+  cleanGame(game_id: GameId): void {
     this.getMaxSaveId(game_id, ((err, save_id) => {
       if (err) {
-        console.warn('SQLite: cleansaves0:', err.message);
+        console.warn('SQLite: cleanGame0:', err.message);
         return;
       }
       if (save_id === undefined) throw new Error('saveId is undefined for ' + game_id);
@@ -193,10 +193,10 @@ export class SQLite implements IDatabase {
       this.runQuietly('INSERT into purges (game_id, last_save_id) values (?, ?)', [game_id, save_id]);
       // DELETE all saves except initial and last one
       this.db.run('DELETE FROM games WHERE game_id = ? AND save_id < ? AND save_id > 0', [game_id, save_id], (err) => {
-        if (err) console.warn('SQLite: cleansaves1: ', err.message);
+        if (err) console.warn('SQLite: cleanGame1: ', err.message);
         // Flag game as finished
         this.db.run('UPDATE games SET status = \'finished\' WHERE game_id = ?', [game_id], (err) => {
-          if (err) console.warn('SQLite: cleansaves2: ', err.message);
+          if (err) console.warn('SQLite: cleanGame2: ', err.message);
           this.purgeUnfinishedGames();
         });
       });

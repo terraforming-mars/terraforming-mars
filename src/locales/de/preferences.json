@@ -21,7 +21,7 @@
     "Hide sidebar notification": "Verberge Benachrichtigungen in Seitenleiste",
     "Show sidebar notification": "Zeige Benachrichtigungen in Seitenleiste",
     "Learner Mode (req. refresh)": "Lernmodus (benötigt Neuladen)",
-    "Experimental UI": "Expermentelle Benutzeroberfläche",
+    "Experimental UI": "Experimentelle Benutzeroberfläche",
     "Tutorial Mode (req. refresh)": "Tutorial (benötigt Neuladen)",
     "Language": "Sprache",
     "refresh page": "Seite aktualisieren",
@@ -36,5 +36,6 @@
     "Italian": "Italienisch",
     "Spanish": "Spanisch",
     "한국어 (Korean)": "Koreanisch",
-    "Ok": "OK"
+    "Ok": "OK",
+    "Report a bug": "Melde einen Fehler"
 }

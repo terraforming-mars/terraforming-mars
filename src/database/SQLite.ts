@@ -204,11 +204,13 @@ export class SQLite implements IDatabase {
     }));
   }
 
-  purgeUnfinishedGames(maxGameDays: string | undefined = process.env.MAX_GAME_DAYS): void {
+  purgeUnfinishedGames(maxGameDays: string | undefined = process.env.MAX_GAME_DAYS): Promise<void> {
     // Purge unfinished games older than MAX_GAME_DAYS days. If this .env variable is not present, unfinished games will not be purged.
     if (maxGameDays) {
       const dateToSeconds = daysAgoToSeconds(maxGameDays, 0);
-      this.runQuietly(`DELETE FROM games WHERE created_time < ? and status = 'running'`, [dateToSeconds]);
+      return this.runQuietly(`DELETE FROM games WHERE created_time < ? and status = 'running'`, [dateToSeconds]);
+    } else {
+      return Promise.resolve();
     }
   }
 

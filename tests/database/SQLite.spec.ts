@@ -139,10 +139,10 @@ describe('SQLite', () => {
 
     expect(await db.getSaveIds(game.id)).has.members([0, 1, 2, 3]);
 
-    db.purgeUnfinishedGames('1');
+    await db.purgeUnfinishedGames('1');
     expect(await db.getSaveIds(game.id)).has.members([0, 1, 2, 3]);
     // Doesn't purge until the time has passed.
-    db.purgeUnfinishedGames('0');
+    await db.purgeUnfinishedGames('0');
     expect(await db.getSaveIds(game.id)).is.empty;
   });
 });

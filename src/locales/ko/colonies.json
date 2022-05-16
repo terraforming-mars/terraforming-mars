@@ -34,7 +34,7 @@
     "Party": "정당",
 
     "Select one option": "다음 중 하나를 선택",
-    "Callisto - (Energy)": "칼리스토 - (전기 에너지)",
+    "Callisto - (Energy)": "칼리스토 - (에너지)",
     "Ceres - (Steel)": "세레스 - (강철)",
     "Enceladus - (Microbes)": "엔셀라두스 - (미생물)",
     "Europa - (Production)": "유로파 - (생산량)",
@@ -51,5 +51,23 @@
     "Hygiea - (Attack)": "히기에이아 - (공격)",
     "Iapetus - (TR)": "이아페투스 - (TR)",
     "Mercury - (Production)": "수성 - (생산량)",
-    "Pallas - (Politics)": "팔라스 - (정책)"
+    "Pallas - (Politics)": "팔라스 - (정책)",
+    "Callisto (Energy)": "칼리스토 (에너지)",
+    "Ceres (Steel)": "세레스 (강철)",
+    "Enceladus (Microbes)": "엔셀라두스 (미생물)",
+    "Europa (Production)": "유로파 (생산량)",
+    "Ganymede (Plants)": "가니메데 (식물)",
+    "Io (Heat)": "이오 (열)",
+    "Luna (MegaCredits)": "달 (메가크레딧)",
+    "Miranda (Animals)": "미란다 (동물)",
+    "Pluto (Cards)": "플루토 (카드)",
+    "Titan (Floaters)": "타이탄 (부양체)",
+    "Triton (Titanium)": "트리톤 -티타늄)",
+    "Leavitt (Science)": "레빗 (과학)",
+    "Titania (VP)": "티타니아 (승점)",
+    "Venus (Venus)": "금성 (금성 태그)",
+    "Hygiea (Attack)": "히기에이아 (공격)",
+    "Iapetus (TR)": "이아페투스 (TR)",
+    "Mercury (Production)": "수성 (생산량)",
+    "Pallas (Politics)": "팔라스 (정책)"
 }

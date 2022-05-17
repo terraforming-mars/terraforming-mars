@@ -1,12 +1,18 @@
 {
+  "APHRODITE":"阿佛洛狄忒",
   "Aphrodite":"阿佛洛狄忒",
   "You start with 1 plant production and 47 M€.":"起始获得47 M€,提升植物产量1级",
   "Effect: Whenever Venus is terraformed 1 step, you gain 2 M€.":"效果：每当金星改造度提升1级,你都获得2 M€",
 
+  "CEL":"天",
+  "ES":"体",
+  "TIC":"公司",
   "Celestic":"天体公司",
   "You start with 42 M€. As your first action, reveal cards from the deck until you have revealed 2 cards with a floater icon on it. Take them into hand and discard the rest.":"起始获得42 M€。作为你的第一个行动,从牌库顶展示牌,直到展示出2张带有云图标的牌。将那2张牌加入手牌,并弃掉剩余的牌。",
   "Action: Add a floater to ANY card. 1 VP per 3 floaters on this card.":"行动：放置1个云资源到任意卡牌，本牌上每3个云资源获得1分",
 
+  "MA": "马",
+  "NUTECH": "努科技",
   "Manutech":"马努科技",
   "You start with 1 steel production, and 35 M€.":"你起始时拥有35 M€及1点钢铁产量。",
   "Effect: For each step you increase the production of a resource, including this, you also gain that resource.":"效果：包括本牌在内，每当你提升1点标准资源产量，获得1个对应资源。",

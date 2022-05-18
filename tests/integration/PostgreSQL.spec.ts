@@ -91,6 +91,51 @@ describe('PostgreSQL', () => {
     expect(allSaveIds).has.members([0, 1, 2, 3]);
   });
 
+  it('purge', async () => {
+    const player = TestPlayers.BLACK.newPlayer();
+    const game = Game.newInstance('game-id-1212', [player], player);
+    await db.saveGamePromise;
+    expect(game.lastSaveId).eq(1);
+
+    await db.saveGame(game);
+    await db.saveGame(game);
+    await db.saveGame(game);
+
+    expect(await db.getSaveIds(game.id)).has.members([0, 1, 2, 3]);
+
+    db.cleanSaves(game.id);
+
+    await sleep(1000);
+
+    const saveIds = await db.getSaveIds(game.id);
+    expect(saveIds).has.members([0, 3]);
+  });
+
+  it('gets cloneable game by id', async () => {
+    const player = TestPlayers.BLACK.newPlayer();
+    const game = Game.newInstance('game-id-1212', [player], player);
+    await db.saveGamePromise;
+    expect(game.lastSaveId).eq(1);
+
+    db.getClonableGameByGameId(game.id, (err, gameData) => {
+      expect(err).to.be.undefined;
+      expect(gameData?.gameId).to.eq(game.id);
+      expect(gameData?.playerCount).to.eq(1);
+    });
+  });
+
+  it('does not find cloneable game by id', async () => {
+    const player = TestPlayers.BLACK.newPlayer();
+    const game = Game.newInstance('game-id-1212', [player], player);
+    await db.saveGamePromise;
+    expect(game.lastSaveId).eq(1);
+
+    db.getClonableGameByGameId('notfound', (err, gameData) => {
+      expect(err).to.be.undefined;
+      expect(gameData).to.be.undefined;
+    });
+  });
+
   it('cleanSaves', async () => {
     const player = TestPlayers.BLACK.newPlayer();
     const game = Game.newInstance('game-id-1212', [player], player);

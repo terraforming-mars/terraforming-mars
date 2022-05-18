@@ -8,7 +8,7 @@
         v-on:dismiss="cancelPlacement"
         v-on:hide="hideDialog" />
     <div v-if="showtitle" class="wf-select-space">{{ $t(playerinput.title) }}</div>
-    <div v-if="warning" class="nes-container is-rounded"><span class="nes-text is-warning">{{ warning }}</span></div>
+    <div v-if="warning" class="nes-container is-rounded"><span class="nes-text is-warning" v-i18n>{{ warning }}</span></div>
   </div>
 </template>
 

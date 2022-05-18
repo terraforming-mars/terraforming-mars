@@ -91,7 +91,7 @@ describe('PostgreSQL', () => {
     expect(allSaveIds).has.members([0, 1, 2, 3]);
   });
 
-  it('purge', async () => {
+  it('cleanSaves', async () => {
     const player = TestPlayers.BLACK.newPlayer();
     const game = Game.newInstance('game-id-1212', [player], player);
     await db.saveGamePromise;

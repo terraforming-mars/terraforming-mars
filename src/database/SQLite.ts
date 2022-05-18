@@ -75,17 +75,14 @@ export class SQLite implements IDatabase {
     });
   }
 
-  getClonableGameByGameId(gameId: GameId, cb: (err: Error | undefined, gameData: IGameData | undefined) => void) {
+  getPlayerCount(gameId: GameId, cb: (err: Error | undefined, playerCount: number | undefined) => void) {
     const sql = 'SELECT players FROM games WHERE save_id = 0 AND game_id = ? LIMIT 1';
 
     this.db.get(sql, [gameId], (err, row) => {
       if (err) {
         cb(err, undefined);
       } else if (row) {
-        cb(undefined, {
-          gameId,
-          playerCount: row.players,
-        });
+        cb(undefined, row.players);
       } else {
         cb(undefined, undefined);
       }

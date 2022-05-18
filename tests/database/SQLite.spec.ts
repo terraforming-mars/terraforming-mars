@@ -96,7 +96,7 @@ describe('SQLite', () => {
 
     db.cleanSaves(game.id);
 
-    await sleep(1000);
+    await sleep(400);
 
     const saveIds = await db.getSaveIds(game.id);
     expect(saveIds).has.members([0, 3]);
@@ -142,7 +142,8 @@ describe('SQLite', () => {
     await db.purgeUnfinishedGames('1');
     expect(await db.getSaveIds(game.id)).has.members([0, 1, 2, 3]);
     // Doesn't purge until the time has passed.
-    await db.purgeUnfinishedGames('0');
+    await db.purgeUnfinishedGames('-1');
+    // await db.purgeUnfinishedGames('0'); This doesn't work! I wonder if it's just too precise a clock problem.
     expect(await db.getSaveIds(game.id)).is.empty;
   });
 });

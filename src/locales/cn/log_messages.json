@@ -92,6 +92,7 @@
     "raise temperature 1 step": "提升温度 1 级",
     "Completed!": "完成!",
     "City in space.": "太空城市",
+    "${0} gained 2 ${1} from ${2}": "${0} 从 ${2} 获得 2 个${1}",
 
     "Power Plant:SP": "发电厂",
     "Asteroid:SP": "小行星",

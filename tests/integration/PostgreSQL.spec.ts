@@ -32,7 +32,7 @@ class TestPostgreSQL extends PostgreSQL {
   }
 
   public async getSaveIds(gameId: GameId): Promise<Array<number>> {
-    return this.client.query('SELECT distinct save_id FROM games WHERE game_id = $1', [gameId]).then(
+    const res = await this.client.query('SELECT distinct save_id FROM games WHERE game_id = $1', [gameId]);
       (res) => {
         const allSaveIds: Array<number> = [];
         res.rows.forEach((row) => {

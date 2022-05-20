@@ -33,13 +33,11 @@ class TestPostgreSQL extends PostgreSQL {
 
   public async getSaveIds(gameId: GameId): Promise<Array<number>> {
     const res = await this.client.query('SELECT distinct save_id FROM games WHERE game_id = $1', [gameId]);
-      (res) => {
-        const allSaveIds: Array<number> = [];
-        res.rows.forEach((row) => {
-          allSaveIds.push(row.save_id);
-        });
-        return Promise.resolve(allSaveIds);
-      });
+    const allSaveIds: Array<number> = [];
+    res.rows.forEach((row) => {
+      allSaveIds.push(row.save_id);
+    });
+    return Promise.resolve(allSaveIds);
   }
 
   public async tearDown() {

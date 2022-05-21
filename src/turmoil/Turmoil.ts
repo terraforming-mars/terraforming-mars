@@ -161,7 +161,7 @@ export class Turmoil {
       }
     }
     party.sendDelegate(playerId, game);
-    this.checkDominantParty(party);
+    this.checkDominantParty();
   }
 
   // Use to remove a delegate from a specific party
@@ -169,7 +169,7 @@ export class Turmoil {
     const party = this.getPartyByName(partyName);
     this.delegateReserve.push(playerId);
     party.removeDelegate(playerId, game);
-    this.checkDominantParty(party);
+    this.checkDominantParty();
   }
 
   // Use to replace a delegate from a specific party with another delegate with NO DOMINANCE CHANGE
@@ -186,7 +186,7 @@ export class Turmoil {
   }
 
   // Check dominant party
-  public checkDominantParty(party:IParty): void {
+  public checkDominantParty(): void {
     // If there is a dominant party
     const sortParties = [...this.parties].sort(
       (p1, p2) => p2.delegates.length - p1.delegates.length,

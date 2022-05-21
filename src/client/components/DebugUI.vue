@@ -2,13 +2,13 @@
   <div class="debug-ui-container" :class="getLanguageCssClass()">
       <h1 v-i18n>Cards List</h1>
       <div class="legacy-anchor">
-        <a href="https://ssimeonoff.github.io/cards-list" target="_blank">legacy card UI</a>
+        <a href="https://ssimeonoff.github.io/cards-list" target="_blank"><span v-i18n>legacy card UI</span></a>
       </div>
 
       <!-- start filters -->
 
       <div class="form-group">
-        <input class="form-input form-input-line" placeholder="filter" v-model="filterText">
+        <input class="form-input form-input-line" :placeholder="$t('filter')" v-model="filterText">
       </div>
 
       <!-- expansions -->

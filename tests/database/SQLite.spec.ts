@@ -5,6 +5,7 @@ import {TestPlayers} from '../TestPlayers';
 import {IN_MEMORY_SQLITE_PATH, SQLite} from '../../src/database/SQLite';
 import {Database} from '../../src/database/Database';
 import {restoreTestDatabase} from '../utils/setup';
+import {sleep} from '../TestingUtils';
 
 class TestSQLite extends SQLite {
   public saveGamePromise: Promise<void> = Promise.resolve();
@@ -93,14 +94,12 @@ describe('SQLite', () => {
 
     expect(await db.getSaveIds(game.id)).has.members([0, 1, 2, 3]);
 
-    // TODO(kberg): make cleanSaves a promise, too. Beacuse right now
-    // this timeout doesn't participate in automated testing. But for now I can
-    // verify this in the debugger. Next step.
     db.cleanSaves(game.id);
-    setTimeout(async () => {
-      const saveIds = await db.getSaveIds(game.id);
-      expect(saveIds).has.members([0, 3]);
-    }, 1000);
+
+    await sleep(400);
+
+    const saveIds = await db.getSaveIds(game.id);
+    expect(saveIds).has.members([0, 3]);
   });
 
   it('gets cloneable game by id', async () => {
@@ -126,5 +125,25 @@ describe('SQLite', () => {
       expect(err).to.be.undefined;
       expect(gameData).to.be.undefined;
     });
+  });
+
+  it('purgeUnfinishedGames', async () => {
+    const player = TestPlayers.BLACK.newPlayer();
+    const game = Game.newInstance('game-id-1212', [player], player);
+    await db.saveGamePromise;
+    expect(game.lastSaveId).eq(1);
+
+    await db.saveGame(game);
+    await db.saveGame(game);
+    await db.saveGame(game);
+
+    expect(await db.getSaveIds(game.id)).has.members([0, 1, 2, 3]);
+
+    await db.purgeUnfinishedGames('1');
+    expect(await db.getSaveIds(game.id)).has.members([0, 1, 2, 3]);
+    // Doesn't purge until the time has passed.
+    await db.purgeUnfinishedGames('-1');
+    // await db.purgeUnfinishedGames('0'); This doesn't work! I wonder if it's just too precise a clock problem.
+    expect(await db.getSaveIds(game.id)).is.empty;
   });
 });

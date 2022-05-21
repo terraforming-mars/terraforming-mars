@@ -2,6 +2,7 @@ import * as http from 'http';
 import {Handler} from './Handler';
 import {IContext} from './IHandler';
 import {Database} from '../database/Database';
+import {IGameData} from '@/common/game/IGameData';
 
 export class ApiCloneableGame extends Handler {
   public static readonly INSTANCE = new ApiCloneableGame();
@@ -15,17 +16,21 @@ export class ApiCloneableGame extends Handler {
       ctx.route.badRequest(req, res, 'id parameter missing');
       return;
     }
-    Database.getInstance().getClonableGameByGameId(gameId, function(err, gameData) {
+    Database.getInstance().getPlayerCount(gameId, function(err, playerCount) {
       if (err) {
         console.warn('Could not load cloneable game: ', err);
         ctx.route.internalServerError(req, res, err);
         return;
       }
-      if (gameData === undefined) {
+      if (playerCount === undefined) {
         ctx.route.notFound(req, res);
         return;
       }
-      ctx.route.writeJson(res, gameData);
+      const response: IGameData = {
+        gameId,
+        playerCount,
+      };
+      ctx.route.writeJson(res, response);
     });
   }
 }

@@ -61,12 +61,12 @@ export class PostgreSQL implements IDatabase {
     });
   }
 
-  getClonableGameByGameId(game_id: GameId, cb: (err: Error | undefined, gameData: IGameData | undefined) => void) {
+  getPlayerCount(game_id: GameId, cb: (err: Error | undefined, playerCount: number | undefined) => void) {
     const sql = 'SELECT players FROM games WHERE save_id = 0 AND game_id = $1 LIMIT 1';
 
     this.client.query(sql, [game_id], (err, res) => {
       if (err) {
-        console.error('PostgreSQL:getClonableGameByGameId', err);
+        console.error('PostgreSQL:getPlayerCount', err);
         cb(err, undefined);
         return;
       }
@@ -74,10 +74,7 @@ export class PostgreSQL implements IDatabase {
         cb(undefined, undefined);
         return;
       }
-      cb(undefined, {
-        gameId: res.rows[0].game_id,
-        playerCount: res.rows[0].players,
-      });
+      cb(undefined, res.rows[0].players);
     });
   }
 

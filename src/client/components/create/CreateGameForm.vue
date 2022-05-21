@@ -12,7 +12,7 @@
                     <div v-if="isSoloModePage">
                       <div class="create-game-solo-player form-group" v-for="newPlayer in getPlayers()" v-bind:key="newPlayer.index">
                           <div>
-                              <input class="form-input form-inline create-game-player-name" placeholder="Your name" v-model="newPlayer.name" />
+                              <input class="form-input form-inline create-game-player-name" :placeholder="$t('Your name')" v-model="newPlayer.name" />
                           </div>
                           <div class="create-game-colors-wrapper">
                               <label class="form-label form-inline create-game-color-label" v-i18n>Color:</label>

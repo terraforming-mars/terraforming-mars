@@ -5,6 +5,7 @@ import {IGameData} from '../common/game/IGameData';
 import {SerializedGame} from '../SerializedGame';
 
 import sqlite3 = require('sqlite3');
+import {daysAgoToSeconds} from './utils.ts';
 const path = require('path');
 const fs = require('fs');
 const dbFolder = path.resolve(process.cwd(), './db');
@@ -203,10 +204,13 @@ export class SQLite implements IDatabase {
     }));
   }
 
-  purgeUnfinishedGames(): void {
+  purgeUnfinishedGames(maxGameDays: string | undefined = process.env.MAX_GAME_DAYS): Promise<void> {
     // Purge unfinished games older than MAX_GAME_DAYS days. If this .env variable is not present, unfinished games will not be purged.
-    if (process.env.MAX_GAME_DAYS) {
-      this.runQuietly(`DELETE FROM games WHERE created_time < strftime('%s',date('now', '-' || ? || ' day')) and status = 'running'`, [process.env.MAX_GAME_DAYS]);
+    if (maxGameDays) {
+      const dateToSeconds = daysAgoToSeconds(maxGameDays, 0);
+      return this.runQuietly(`DELETE FROM games WHERE created_time < ? and status = 'running'`, [dateToSeconds]);
+    } else {
+      return Promise.resolve();
     }
   }
 

@@ -368,5 +368,16 @@
     "How to pay?": "Bezahlung",
     "Select an ocean space for special tile": "Wähle ein Ozeanfeld für Spezialplättchen",
     "Must select a space": "Suche ein Feld aus",
-    "[ toggle cards filters ]": "[ Kartenfilter aktivieren/deaktivieren ]"
+    "[ toggle cards filters ]": "[ Kartenfilter aktivieren/deaktivieren ]",
+
+    "Cards List": "Kartenliste",
+    "legacy card UI": "Alte Kartenliste",
+    "Invert": "Invertieren",
+    "Colony Tiles": "Kolonien",
+    "Global Events": "Globale Ereignisse",
+
+    "14 Gens": "14 Gen.",
+    "TR all": "alle TW",
+    "63 TR": "63 TW",
+    "Ok": "OK"
 }

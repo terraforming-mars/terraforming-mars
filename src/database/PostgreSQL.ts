@@ -7,12 +7,12 @@ import {SerializedGame} from '../SerializedGame';
 import {Pool, ClientConfig, QueryResult} from 'pg';
 
 export class PostgreSQL implements IDatabase {
-  private client: Pool;
+  protected client: Pool;
 
-  constructor() {
-    const config: ClientConfig = {
+  constructor(
+    config: ClientConfig = {
       connectionString: process.env.POSTGRES_HOST,
-    };
+    }) {
     if (config.connectionString !== undefined && config.connectionString.startsWith('postgres')) {
       config.ssl = {
         // heroku uses self-signed certificates
@@ -20,31 +20,22 @@ export class PostgreSQL implements IDatabase {
       };
     }
     this.client = new Pool(config);
-    this.client.query('CREATE TABLE IF NOT EXISTS games(game_id varchar, players integer, save_id integer, game text, status text default \'running\', created_time timestamp default now(), PRIMARY KEY (game_id, save_id))', (err) => {
-      if (err) {
-        throw err;
-      }
-    });
-    this.client.query('CREATE TABLE IF NOT EXISTS game_results(game_id varchar not null, seed_game_id varchar, players integer, generations integer, game_options text, scores text, PRIMARY KEY (game_id))', (err) => {
-      if (err) {
-        throw err;
-      }
-    });
-
-    this.client.query('CREATE INDEX IF NOT EXISTS games_i1 on games(save_id)', (err) => {
-      if (err) {
-        throw err;
-      }
-    });
-    this.client.query('CREATE INDEX IF NOT EXISTS games_i2 on games(created_time )', (err) => {
-      if (err) {
-        throw err;
-      }
-    });
   }
 
-  async initialize(): Promise<void> {
-
+  public async initialize(): Promise<void> {
+    await this.client.query('CREATE TABLE IF NOT EXISTS games(game_id varchar, players integer, save_id integer, game text, status text default \'running\', created_time timestamp default now(), PRIMARY KEY (game_id, save_id))')
+      .then(() => {
+        this.client.query('CREATE TABLE IF NOT EXISTS game_results(game_id varchar not null, seed_game_id varchar, players integer, generations integer, game_options text, scores text, PRIMARY KEY (game_id))');
+      })
+      .then(() => {
+        this.client.query('CREATE INDEX IF NOT EXISTS games_i1 on games(save_id)');
+      })
+      .then(() => {
+        this.client.query('CREATE INDEX IF NOT EXISTS games_i2 on games(created_time )');
+      })
+      .catch((err) => {
+        throw err;
+      });
   }
 
   getClonableGames(cb: (err: Error | undefined, allGames: Array<IGameData>) => void) {
@@ -266,21 +257,17 @@ export class PostgreSQL implements IDatabase {
     });
   }
 
-  saveGame(game: Game): Promise<void> {
+  async saveGame(game: Game): Promise<void> {
     const gameJSON = game.toJSON();
-    this.client.query(
+    return this.client.query(
       'INSERT INTO games (game_id, save_id, game, players) VALUES ($1, $2, $3, $4) ON CONFLICT (game_id, save_id) DO UPDATE SET game = $3',
-      [game.id, game.lastSaveId, gameJSON, game.getPlayers().length], (err) => {
-        if (err) {
-          console.error('PostgreSQL:saveGame', err);
-          return;
-        }
-      },
-    );
-
-    // This must occur after the save.
-    game.lastSaveId++;
-    return Promise.resolve();
+      [game.id, game.lastSaveId, gameJSON, game.getPlayers().length])
+      .then((_ignored) => {
+        game.lastSaveId++;
+      })
+      .catch((err) => {
+        console.error('PostgreSQL:saveGame', err);
+      });
   }
 
   deleteGameNbrSaves(game_id: GameId, rollbackCount: number): void {

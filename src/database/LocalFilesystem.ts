@@ -79,7 +79,7 @@ export class Localfilesystem implements IDatabase {
     });
   }
 
-  getClonableGameByGameId(gameId: GameId, cb: (err: Error | undefined, gameData: IGameData | undefined) => void) {
+  getPlayerCount(gameId: GameId, cb: (err: Error | undefined, playerCount: number | undefined) => void) {
     this.getGames((err, gameIds) => {
       const found = gameIds.find((gId) => gId === gameId && fs.existsSync(this._historyFilename(gameId, 0)));
       if (found === undefined) {
@@ -88,7 +88,7 @@ export class Localfilesystem implements IDatabase {
       }
       const text = fs.readFileSync(this._historyFilename(gameId, 0));
       const serializedGame = JSON.parse(text) as SerializedGame;
-      cb(err, {gameId: gameId, playerCount: serializedGame.players.length});
+      cb(err, serializedGame.players.length);
     });
   }
 

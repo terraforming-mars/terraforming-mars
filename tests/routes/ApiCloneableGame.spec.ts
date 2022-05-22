@@ -7,7 +7,7 @@ import {RouteTestScaffolding} from './RouteTestScaffolding';
 describe('ApiCloneableGame', () => {
   let scaffolding: RouteTestScaffolding;
   let res: MockResponse;
-  const origGetClonableGameByGameId = Database.getInstance().getClonableGameByGameId;
+  const origgetPlayerCount = Database.getInstance().getPlayerCount;
 
   beforeEach(() => {
     scaffolding = new RouteTestScaffolding();
@@ -15,7 +15,7 @@ describe('ApiCloneableGame', () => {
   });
 
   afterEach(() => {
-    Database.getInstance().getClonableGameByGameId = origGetClonableGameByGameId;
+    Database.getInstance().getPlayerCount = origgetPlayerCount;
   });
 
   it('no parameter', () => {
@@ -26,7 +26,7 @@ describe('ApiCloneableGame', () => {
   });
 
   it('has error while loading', () => {
-    Database.getInstance().getClonableGameByGameId = (gameId, cb) => {
+    Database.getInstance().getPlayerCount = (gameId, cb) => {
       expect(gameId).eq('invalidId');
       cb(new Error('Segmentation fault'), undefined);
     };
@@ -37,7 +37,7 @@ describe('ApiCloneableGame', () => {
   });
 
   it('does not find game', () => {
-    Database.getInstance().getClonableGameByGameId = (gameId, cb) => {
+    Database.getInstance().getPlayerCount = (gameId, cb) => {
       expect(gameId).eq('notfound');
       cb(undefined, undefined);
     };
@@ -48,17 +48,15 @@ describe('ApiCloneableGame', () => {
   });
 
   it('finds game', () => {
-    const expected = {
-      gameId: 'found',
-      playerCount: 1,
+    Database.getInstance().getPlayerCount = (_gameId, cb) => {
+      cb(undefined, 2);
     };
-    Database.getInstance().getClonableGameByGameId = (gameId, cb) => {
-      expect(gameId).eq(expected.gameId);
-      cb(undefined, expected);
-    };
-    scaffolding.url = '/api/cloneablegames?id=' + expected.gameId;
+    scaffolding.url = '/api/cloneablegames?id=g456';
     scaffolding.get(ApiCloneableGame.INSTANCE, res);
     expect(res.statusCode).eq(200);
-    expect(res.content).eq(JSON.stringify(expected));
+    expect(res.content).eq(JSON.stringify({
+      gameId: 'g456',
+      playerCount: 2,
+    }));
   });
 });

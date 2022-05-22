@@ -3,13 +3,15 @@ import {getTestPlayer, newTestGame} from '../../TestGame';
 import {SurveyMission} from '../../../src/cards/pathfinders/SurveyMission';
 import {Game} from '../../../src/Game';
 import {TestPlayer} from '../../TestPlayer';
-// import {OrOptions} from '../../../src/inputs/OrOptions';
 import {TestingUtils} from '../../TestingUtils';
 import {EmptyBoard} from '../../ares/EmptyBoard';
 import {SpaceType} from '../../../src/common/boards/SpaceType';
 import {TileType} from '../../../src/common/TileType';
 import {ISpace} from '../../../src/boards/ISpace';
 import {SelectSpace} from '../../../src/inputs/SelectSpace';
+import {MiningGuild} from '../../../src/cards/corporation/MiningGuild';
+import {SpaceBonus} from '../../../src/common/boards/SpaceBonus';
+import {Units} from '../../../src/common/Units';
 
 function toSpaceIdDigit(space: ISpace) {
   return parseInt(space.id);
@@ -83,5 +85,35 @@ describe('SurveyMission', () => {
     expect(board.getSpace('05').player?.id).eq(player.id);
   });
 
+  it('Gaining bonuses', () => {
+    expect(player.heat).eq(0);
+    expect(player.plants).eq(0);
+
+    const selectSpace = card.play(player);
+    const space = board.getSpace('04');
+    space.bonus = [SpaceBonus.HEAT, SpaceBonus.PLANT];
+    selectSpace.cb(space);
+
+    expect(player.heat).eq(1);
+    expect(player.plants).eq(1);
+  });
+
+  it('Compatible with Mining Guild', () => {
+    player.corporationCard = new MiningGuild();
+    const selectSpace = card.play(player);
+
+    expect(player.steel).eq(5); // Comes from playing the Prelude
+    expect(player.plants).eq(0);
+    expect(player.getProductionForTest()).deep.eq(Units.EMPTY);
+
+    const space = board.getSpace('04');
+    space.bonus = [SpaceBonus.STEEL, SpaceBonus.PLANT];
+    selectSpace.cb(space);
+    TestingUtils.runAllActions(game);
+
+    expect(player.steel).eq(6);
+    expect(player.plants).eq(1);
+    expect(player.getProductionForTest()).deep.eq(Units.of({steel: 1}));
+  });
   // TODO Hazards are playable, but you won't get anything.
 });

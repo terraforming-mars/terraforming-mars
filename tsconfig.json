@@ -21,7 +21,7 @@
         "removeComments": true,
         "preserveConstEnums": true,
         "skipLibCheck": true,
-        "target": "es5",
+        "target": "es6",
         "types": ["node"],
         "moduleResolution": "node",
         "resolveJsonModule": true,

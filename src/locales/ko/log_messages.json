@@ -26,7 +26,6 @@
     "Card not found" : "카드를 찾을 수 없음",
     "Incorrect options provided" : "잘못 제공된 선택사항",
     "Input contains unauthorized keys": "입력에 승인되지 않은 키가 포함됨",
-    "Number not provided for amount": "수량 설정에 숫자가 입력되지 않음",
     "Amount provided too high (max ": "입력된 값이 너무 큼 (최대 ",
     "Amount provided too low (min ": "입력된 값이 너무 작음 (최소 ",
     "No colony selected": "선택된 개척기지가 없음",

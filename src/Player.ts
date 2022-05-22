@@ -1078,12 +1078,7 @@ export class Player {
     } else if (pi instanceof ShiftAresGlobalParameters) {
       this.deferInputCb(pi.process(input, this));
     } else if (pi instanceof SelectPartyToSendDelegate) {
-      this.checkInputLength(input, 1, 1);
-      const party: PartyName = (input[0][0]) as PartyName;
-      if (party === undefined) {
-        throw new Error('No party selected');
-      }
-      this.deferInputCb(pi.cb(party));
+      this.deferInputCb(pi.process(input, this));
     } else {
       throw new Error('Unsupported waitingFor');
     }

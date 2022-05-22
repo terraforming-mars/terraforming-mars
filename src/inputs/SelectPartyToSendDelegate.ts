@@ -2,7 +2,10 @@ import {Message} from '../common/logs/Message';
 import {PlayerInput} from '../PlayerInput';
 import {PlayerInputTypes} from '../common/input/PlayerInputTypes';
 import {PartyName} from '../common/turmoil/PartyName';
+import {InputResponse} from '../common/inputs/InputResponse';
+import {Player} from '../Player';
 
+// TODO(kberg): Rename to SelectParty
 export class SelectPartyToSendDelegate implements PlayerInput {
   public inputType: PlayerInputTypes = PlayerInputTypes.SELECT_PARTY_TO_SEND_DELEGATE;
   constructor(
@@ -11,4 +14,13 @@ export class SelectPartyToSendDelegate implements PlayerInput {
         public availableParties: PartyName[],
         public cb: (party: PartyName) => undefined,
   ) {}
+
+  public process(input: InputResponse, player: Player) {
+    player.checkInputLength(input, 1, 1);
+    const party: PartyName = (input[0][0]) as PartyName;
+    if (party === undefined) {
+      throw new Error('No party selected');
+    }
+    return this.cb(party);
+  }
 }

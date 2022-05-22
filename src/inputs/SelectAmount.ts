@@ -24,6 +24,12 @@ export class SelectAmount implements PlayerInput {
     if (isNaN(amount)) {
       throw new Error('Amount is not a number');
     }
+    if (amount > this.max) {
+      throw new Error('Amount provided too high (max ' + String(this.max) + ')');
+    }
+    if (amount < this.min) {
+      throw new Error('Amount provided too low (min ' + String(this.min) + ')');
+    }
     return this.cb(amount);
   }
 }

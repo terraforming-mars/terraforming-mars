@@ -95,7 +95,7 @@ describe('Player', function() {
     }).to.throw('Incorrect options provided');
     expect(function() {
       player.process([['foobar']]);
-    }).to.throw('Number not provided for amount');
+    }).to.throw('Amount is not a number');
     player.process([['1']]);
     expect(player.getProduction(Resources.HEAT)).to.eq(1);
     expect(player.getProduction(Resources.MEGACREDITS)).to.eq(1);

@@ -27,7 +27,6 @@
     "Card not found" : "Karte nicht gefunden",
     "Incorrect options provided" : "Ungültige Optionen angegeben",
     "Input contains unauthorized keys": "Eingabe enthält ungültige Zeichen",
-    "Number not provided for amount": "Keine gültige Anzahl angegeben",
     "Amount provided too high (max ": "Eingegebener Betrag zu hoch (max. ",
     "Amount provided too low (min ": "Eingegebener Betrag zu niedrig (min. ",
     "No colony selected": "Keine Kolonie ausgewählt",

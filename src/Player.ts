@@ -1062,15 +1062,7 @@ export class Player {
     } else if (pi instanceof SelectPlayer) {
       this.deferInputCb(pi.process(input, this));
     } else if (pi instanceof SelectDelegate) {
-      this.checkInputLength(input, 1, 1);
-      const foundPlayer = pi.players.find((player) =>
-        player === input[0][0] ||
-        (player instanceof Player && (player.id === input[0][0] || player.color === input[0][0])),
-      );
-      if (foundPlayer === undefined) {
-        throw new Error('Player not available');
-      }
-      this.deferInputCb(pi.cb(foundPlayer));
+      this.deferInputCb(pi.process(input, this));
     } else if (pi instanceof SelectHowToPay) {
       this.deferInputCb(pi.process(input, this));
     } else if (pi instanceof SelectProductionToLose) {

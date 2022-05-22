@@ -206,7 +206,7 @@ export const PATHFINDERS_CARD_MANIFEST = new CardManifest({
     // {cardName: CardName.MARS_FRONTIER_ALLIANCE, Factory: MarsFrontierAlliance},
     {cardName: CardName.MIND_SET_MARS, Factory: MindSetMars, compatibility: 'turmoil'},
     {cardName: CardName.HABITAT_MARTE, Factory: HabitatMarte, compatibility: 'pathfinders'},
-    {cardName: CardName.ADHAI_HIGH_ORBIT_CONSTRUCTIONS, Factory: AdhaiHighOrbitConstructions},
+    {cardName: CardName.ADHAI_HIGH_ORBIT_CONSTRUCTIONS, Factory: AdhaiHighOrbitConstructions, compatibility: 'colonies'},
   ],
   preludeCards: [
     {cardName: CardName.VENUS_FIRST_PATHFINDERS, Factory: VenusFirst, compatibility: 'venus'},

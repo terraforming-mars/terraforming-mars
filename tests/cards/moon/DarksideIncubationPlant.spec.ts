@@ -45,13 +45,13 @@ describe('DarksideIncubationPlant', () => {
     options = card.action(player);
     expect(options).instanceOf(OrOptions);
 
-    // First option is add a resource.
-    (options! as OrOptions).options[0].cb();
+    // Second option is add a resource.
+    (options! as OrOptions).options[1].cb();
     expect(card.resourceCount).eq(3);
 
-    // Second option removes 2 resources and raises the colony rate.
+    // First option removes 2 resources and raises the colony rate.
     expect(MoonExpansion.moonData(game).colonyRate).eq(0);
-    (options! as OrOptions).options[1].cb();
+    (options! as OrOptions).options[0].cb();
     expect(card.resourceCount).eq(1);
     expect(MoonExpansion.moonData(game).colonyRate).eq(1);
   });
